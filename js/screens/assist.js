@@ -1,0 +1,207 @@
+/* "Tell me what to do": one box, typed or dictated. Send a document to someone, ask Roy for an invoice,
+   or turn a supplier's quote into the client's quote with her fee. Nothing goes out until she taps. */
+import { t, lang, SPEECH, langName } from '../i18n.js';
+import { db, todayIso } from '../store.js';
+import { esc, field, empty, dialog, toast, openWhatsApp, copyText } from '../ui.js';
+import Office from '../logic/office.js';
+import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage } from '../logic/commands.js';
+import { QUOTE_STATUS } from '../logic/quotes.js';
+import { subjects } from '../notes.js';
+import { files, shareFile, downloadFile, pdfText } from '../files.js';
+import { speechSupported, listen } from '../voice.js';
+import { DEFAULTS } from '../data/defaults.js';
+import { hasArabic, waLink } from '../logic/core.js';
+import { COMPANY_PAPERS } from '../data/docsList.js';
+import { replaceNumbersInPdf } from '../pdfedit.js';
+let preSupplier = '';
+let lastPdf = null;
+
+/** A bundled paper as a file record (fetched from the app's own files). */
+async function bundledRec(p) {
+  const r = await fetch(p.file); const blob = await r.blob();
+  return { id: 'paper:' + p.key, name: p.file.split('/').pop(), type: blob.type || 'application/pdf', size: blob.size, blob, title: p.title };
+}
+function bundledDocs() { return COMPANY_PAPERS.filter(p => p.status === 'found' && p.file).map(p => ({ id: 'paper:' + p.key, title: p.title, aliases: p.aliases || [], rec: null, paper: p })); }
+
+export const noLive = true;
+let mode = 'command';
+let draft = '';
+
+const BACK = `<a class="icon" href="#/today" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
+
+export function render(ctx) {
+  const { root } = ctx;
+  if (ctx.id === 'supplier-quote') mode = 'supplierQuote';
+  if (ctx.id === 'from-today') { const v = sessionStorage.getItem('bakasun.ask') || ''; sessionStorage.removeItem('bakasun.ask'); mode = 'command'; draft = v; ctx.autoRun = !!v; ctx.autoMic = sessionStorage.getItem('bakasun.askMic') === '1'; sessionStorage.removeItem('bakasun.askMic'); }
+  const s = db.settings();
+  root.innerHTML = `<header class="top">${BACK}<h1>${esc(t('assist'))}</h1></header>
+    <div class="tabs">${[['command', 'cmdSend'], ['invoice', 'cmdInvoice'], ['supplierQuote', 'cmdSupplierQuote'], ['docs', 'docsLib']].map(x => `<button class="${mode === x[0] ? 'on' : ''}" data-m="${x[0]}">${esc(t(x[1]))}</button>`).join('')}</div>
+    <div class="stack sec" id="body"></div>`;
+  root.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { mode = b.dataset.m; render({ root }); });
+  const body = root.querySelector('#body');
+  ({ command: tabCommand, invoice: tabInvoice, supplierQuote: tabSupplierQuote, docs: tabDocs }[mode])(body, s, ctx);
+}
+
+function inputBox(body, hint, ph, onRead, readLabel) {
+  const s = db.settings(); const dictLang = s.dictLang || lang();
+  body.innerHTML = `<p class="hint">${esc(hint)}</p><textarea id="txt" rows="5" placeholder="${esc(ph)}">${esc(draft)}</textarea>
+    <div class="row"><button class="btn rec" id="rec" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>${esc(t('dictate'))}</span></button>
+      <select id="dl">${Object.keys(SPEECH).map(k => `<option value="${k}"${k === dictLang ? ' selected' : ''}>${esc(langName(k))}</option>`).join('')}</select>
+      <button class="btn primary grow" id="go" type="button">${esc(readLabel || t('read'))}</button></div><div id="out" class="stack"></div>`;
+  const ta = body.querySelector('#txt'), rec = body.querySelector('#rec'), dl = body.querySelector('#dl');
+  let stop = null;
+  ta.oninput = () => { draft = ta.value; };
+  dl.onchange = () => db.setting('dictLang', dl.value);
+  rec.onclick = () => {
+    if (stop) { stop(); return; }
+    if (!speechSupported()) { toast(t('noSpeech'), 3500); return; }
+    const base = ta.value ? ta.value.replace(/\s+$/, '') + '\n' : '';
+    rec.classList.add('on'); rec.querySelector('span').textContent = t('stop');
+    stop = listen(SPEECH[dl.value] || 'he-IL', text => { ta.value = base + text; draft = ta.value; }, () => { stop = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); });
+    if (!stop) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
+  };
+  body.querySelector('#go').onclick = () => { if (stop) stop(); onRead(ta.value, body.querySelector('#out')); };
+  return ta;
+}
+
+/* ---------------- 1. send a document to someone ---------------- */
+async function tabCommand(body, s, ctx) {
+  const lib = await files.all();
+  const docs = lib.map(f => ({ id: f.id, title: f.title || f.name, aliases: (f.aliases || '').split(/[,;]+/).map(x => x.trim()).filter(Boolean), rec: f })).concat(bundledDocs());
+  const people = subjects().map(p => { const c = p.about === 'client' ? db.get('clients', p.id) : p.about === 'supplier' ? db.get('suppliers', p.id) : db.get('cases', p.id); return { label: p.label, names: p.names, phone: c && c.phone, email: c && c.email, about: p.about, id: p.id }; })
+    .concat(db.list('staff').map(x => ({ label: x.name, names: [x.name], phone: x.phone })));
+  inputBox(body, t('cmdHint'), t('cmdPh'), (text, out) => {
+    const c = parseCommand(text, docs, people);
+    if (c.kind === 'invoice') { mode = 'invoice'; draft = text; render({ root: body.closest('#app') }); return; }
+    if (c.kind === 'supplierQuote') { mode = 'supplierQuote'; preSupplier = c.supplier && c.supplier.about === 'supplier' ? c.supplier.id : ''; draft = ''; render({ root: body.closest('#app') }); return; }
+    if (c.kind !== 'send' || (!c.doc && !c.to)) { out.innerHTML = `<p class="warnbox">${esc(t('cmdUnknown'))}</p>`; return; }
+    out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(t('document'))}</dt><dd>${c.doc ? esc(c.doc.title) : `<span class="badge warn">${esc(t('docNotFound'))}</span>`}</dd><dt>${esc(t('recipient'))}</dt><dd class="ltr">${c.to ? esc(c.to.name || c.to.phone || c.to.email) + (c.to.name && c.to.phone ? ' · ' + esc(c.to.phone) : '') : `<span class="badge warn">${esc(t('noRecipient'))}</span>`}</dd></div>
+      ${field('msg', t('note'), c.doc ? t('docMsg', { doc: c.doc.title }) : '', { type: 'textarea', rows: 2 })}
+      <div class="row">${c.doc ? `<button class="btn primary" id="share">${esc(t('shareFile'))}</button>` : ''}${c.to && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.to && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}</div>
+      <p class="hint">${esc(t('shareHint'))}</p></div>`;
+    const msg = () => out.querySelector('[name=msg]').value;
+    const sh = out.querySelector('#share'); if (sh) sh.onclick = async () => { const rec = c.doc.rec || await bundledRec(c.doc.paper); if (!(await shareFile(rec, msg()))) { downloadFile(rec); toast(t('shareFallback'), 4000); } };
+    const wa = out.querySelector('#wa'); if (wa) wa.onclick = () => openWhatsApp(c.to.phone, msg());
+    const ml = out.querySelector('#mail'); if (ml) { ml.href = 'mailto:' + encodeURIComponent(c.to.email) + '?subject=' + encodeURIComponent((c.doc ? c.doc.title : '') + ' · ' + (s.bizName || DEFAULTS.bizName)) + '&body=' + encodeURIComponent(msg()); ml.target = '_blank'; }
+  }, t('read'));
+  if (!lib.length && !bundledDocs().length) body.insertAdjacentHTML('afterbegin', `<p class="warnbox">${esc(t('noDocsYet'))}</p>`);
+  if (ctx && ctx.autoRun) { ctx.autoRun = false; body.querySelector('#go').click(); }
+  if (ctx && ctx.autoMic) { ctx.autoMic = false; body.querySelector('#rec').click(); }
+}
+
+/* ---------------- 2. ask Roy for an invoice ---------------- */
+function tabInvoice(body, s) {
+  inputBox(body, t('invHint'), t('invPh'), (text, out) => {
+    const r = parseInvoiceRequest(text);
+    const clients = db.list('clients');
+    const match = clients.find(c => r.taxId && c.taxId === r.taxId) || clients.find(c => r.client && Office.normHe(c.name) === Office.normHe(r.client)) || null;
+    const cases = db.list('cases', c => Office.ACTIVE.includes(c.status) && (!match || c.clientId === match.id));
+    out.innerHTML = `<form class="card stack" id="inv">
+      <div class="grid2">${field('client', t('fClient'), r.client || (match && match.legalName) || (match && match.name) || '')}${field('taxId', t('fTaxId'), r.taxId || (match && match.taxId) || '', { ltr: true })}${field('address', t('fAddress'), r.address || (match && match.address) || '')}${field('email', t('fEmail'), r.email || (match && match.email) || '', { ltr: true })}
+      ${field('kind', t('fType'), r.kind, { type: 'select', options: [['חשבונית', 'חשבונית מס'], ['חשבון עסקה', 'חשבון עסקה'], ['דרישת תשלום', 'דרישת תשלום']] })}${field('caseId', t('forCase'), '', { type: 'select', options: [['', t('none')]].concat(cases.map(c => [c.id, c.client + (c.date ? ' · ' + Office.fmt(c.date) : '')])) })}</div>
+      <div id="items" class="stack">${(r.items.length ? r.items : [{ desc: '', amount: '' }]).map(x => `<div class="row"><input name="desc" class="grow" value="${esc(x.desc)}" placeholder="${esc(t('note'))}"><input name="amount" type="number" inputmode="decimal" style="max-width:9em" value="${esc(x.amount)}" placeholder="${esc(t('amount'))}"></div>`).join('')}</div>
+      <div class="row"><button type="button" class="btn sm ghost" id="addItem">+ ${esc(t('addLine'))}</button><span class="hint">${esc(t('amountsBeforeVat'))}</span></div>
+      <textarea name="text" rows="10" id="invText"></textarea>
+      <div class="row"><button type="button" class="btn" id="rebuild">${esc(t('rebuild'))}</button><button type="submit" class="btn wa grow">${esc(t('askInvoice'))}</button><button type="button" class="btn ghost" id="copyInv">${esc(t('copy'))}</button></div>
+      ${!s.invoiceTo ? `<p class="warnbox">${esc(t('noInvoicePhone'))}</p>` : ''}</form>`;
+    const form = out.querySelector('#inv');
+    const build = () => {
+      const o = {}; new FormData(form).forEach((v, k) => { if (k !== 'desc' && k !== 'amount') o[k] = String(v).trim(); });
+      const descs = [...form.querySelectorAll('[name=desc]')].map(x => x.value), amts = [...form.querySelectorAll('[name=amount]')].map(x => Office.num(x.value));
+      const items = descs.map((d, i) => ({ desc: d, amount: amts[i] })).filter(x => !isNaN(x.amount) && x.amount);
+      const req = { client: o.client, taxId: o.taxId, address: o.address, email: o.email, kind: o.kind, items, total: items.reduce((a, x) => a + x.amount, 0) };
+      form.querySelector('#invText').value = invoiceRequestText(req, {}, s.signer || DEFAULTS.signer);
+      return Object.assign(req, { caseId: o.caseId });
+    };
+    build();
+    form.querySelector('#rebuild').onclick = build;
+    form.querySelector('#addItem').onclick = () => { form.querySelector('#items').insertAdjacentHTML('beforeend', `<div class="row"><input name="desc" class="grow" placeholder="${esc(t('note'))}"><input name="amount" type="number" inputmode="decimal" style="max-width:9em" placeholder="${esc(t('amount'))}"></div>`); };
+    form.querySelector('#copyInv').onclick = () => copyText(form.querySelector('#invText').value);
+    form.onsubmit = e => {
+      e.preventDefault();
+      const req = build(); const text = form.querySelector('#invText').value;
+      if (!s.invoiceTo) { toast(t('noInvoicePhone'), 3500); return; }
+      if (!openWhatsApp(s.invoiceTo, text)) return;
+      // remember: the client's invoice details, and a payment row per amount
+      if (match) db.put('clients', { id: match.id, legalName: req.client || match.legalName, taxId: req.taxId || match.taxId, address: req.address || match.address, email: req.email || match.email });
+      req.items.forEach(x => db.put('payments', { caseId: req.caseId || '', client: req.client, amount: x.amount, due: '', status: Office.PAY.invoiceAsked, note: x.desc, invoiceKind: req.kind }));
+      draft = ''; toast(t('saved')); location.hash = '#/money';
+    };
+  }, t('read'));
+}
+
+/* ---------------- 3. a supplier's quote → the client's quote, with her fee ---------------- */
+function tabSupplierQuote(body, s, ctx) {
+  const cases = db.list('cases', c => Office.ACTIVE.includes(c.status)).sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  const sups = db.list('suppliers').sort((a, b) => String(a.name).localeCompare(String(b.name), 'he'));
+  const preCase = ctx && ctx.query && ctx.query[0] ? ctx.query[0] : '';
+  const ta = inputBox(body, t('sqHint'), t('sqPh'), (text, out) => {
+    const q = parseSupplierQuote(text);
+    if (!q.items.length) { out.innerHTML = `<p class="warnbox">${esc(t('sqNothing'))}</p>`; return; }
+    out.innerHTML = `<form class="card stack" id="sq">
+      <div class="grid2">${field('caseId', t('forCase'), preCase, { type: 'select', options: cases.map(c => [c.id, c.client + (c.date ? ' · ' + Office.fmt(c.date) : '')]) })}${field('supplierId', t('supplier'), preSupplier, { type: 'select', options: [['', t('noSupplier')]].concat(sups.map(x => [x.id, x.name + ' · ' + x.type])) })}
+      ${field('pct', t('fee'), s.defaultMargin || 15, { type: 'number', inputmode: 'decimal' })}${field('lang', t('msgLang'), 'he', { type: 'select', options: [['he', langName('he')], ['fr', langName('fr')], ['en', langName('en')]] })}</div>
+      <div class="list">${q.items.map((x, i) => `<div class="row"><input name="item" class="grow" value="${esc(x.item)}"><input name="qty" type="number" style="max-width:5em" value="${esc(x.qty)}"><input name="cost" type="number" inputmode="decimal" style="max-width:8em" value="${esc(x.cost)}"></div>`).join('')}</div>
+      <div class="sub"><b>${esc(t('supplierTotal'))}:</b> <span class="ltr">${esc(Office.money(q.sum))}</span>${q.total && q.total !== q.sum ? ` · ${esc(t('statedTotal'))} <span class="ltr">${esc(Office.money(q.total))}</span>` : ''} · <b>${esc(t('clientTotal'))}:</b> <span class="ltr" id="ct"></span></div>
+      <div class="sub"><b>${esc(t('choose'))}</b></div><div class="row"><button type="submit" class="btn primary grow">${esc(t('newDoc'))}</button>${lastPdf ? `<button type="button" class="btn grow" id="sameDoc">${esc(t('sameDoc'))}</button>` : ''}</div>${lastPdf ? `<p class="hint">${esc(t('sameDocHint'))}</p>` : ''}</form>`;
+    const form = out.querySelector('#sq');
+    const sd = out.querySelector('#sameDoc'); if (sd) sd.onclick = async () => {
+      const pct = Office.num(form.pct.value) || 0;
+      const items = [...form.querySelectorAll('[name=item]')].map((x, i) => ({ item: x.value, cost: Office.num(form.querySelectorAll('[name=cost]')[i].value) || 0 })).filter(x => x.cost);
+      const reps = items.map(x => ({ from: x.cost, to: Math.round(x.cost * (1 + pct / 100)) }));
+      const sum = items.reduce((a, x) => a + x.cost, 0); if (q.total && q.total !== sum) reps.push({ from: q.total, to: Math.round(q.total * (1 + pct / 100)) }); else if (q.total) reps.push({ from: q.total, to: Math.round(sum * (1 + pct / 100)) });
+      toast(t('syncing'));
+      try {
+        const r = await replaceNumbersInPdf(lastPdf, reps);
+        if (r.missed.length) toast(t('missedNumbers', { list: r.missed.join(', ') }), 5000);
+        const cs = db.get('cases', form.caseId.value);
+        const rec = { name: (cs ? cs.client : 'quote').replace(/[\\/:*?"<>|]/g, '') + '-' + Office.iso(new Date()) + '.pdf', type: 'application/pdf', blob: r.blob, title: t('quote') };
+        if (!(await shareFile(rec, t('quote')))) { downloadFile(rec); toast(t('shareFallback'), 4000); }
+      } catch (err) { toast(t('sqPdfFail'), 4000); }
+    };
+    const totals = () => { const pct = Office.num(form.pct.value) || 0; const costs = [...form.querySelectorAll('[name=cost]')].map(x => Office.num(x.value) || 0); const sum = costs.reduce((a, b) => a + b, 0); form.querySelector('#ct').textContent = Office.money(Math.round(sum * (1 + pct / 100))); return { sum, pct, client: Math.round(sum * (1 + pct / 100)) }; };
+    totals(); form.oninput = totals;
+    form.onsubmit = e => {
+      e.preventDefault();
+      const cs = db.get('cases', form.caseId.value); if (!cs) return;
+      const sup = sups.find(x => x.id === form.supplierId.value) || null;
+      const items = [...form.querySelectorAll('[name=item]')].map((x, i) => ({ item: x.value, qty: Office.num(form.querySelectorAll('[name=qty]')[i].value) || 1, cost: Office.num(form.querySelectorAll('[name=cost]')[i].value) || 0 })).filter(x => x.item && x.cost);
+      const { pct, client } = totals();
+      const lines = markupLines(items, pct, sup);
+      // the client's quote: the open draft for this case, or a new one
+      let q = db.list('quotes', x => x.caseId === cs.id && x.status === QUOTE_STATUS.draft).sort((a, b) => String(b.created).localeCompare(String(a.created)))[0];
+      if (!q) { const no = Office.nextQuoteNo(db.list('quotes').map(x => x.no), new Date()); const id = db.put('quotes', { no, version: 1, caseId: cs.id, client: cs.client, date: todayIso(), lang: cs.lang || 'he', status: QUOTE_STATUS.draft, vatRate: s.vat || 18, defaultMargin: pct, validUntil: Office.iso(Office.addDays(new Date(), +(s.validDays || 14))), terms: s.terms || DEFAULTS.terms, cancel: s.cancelTerms || DEFAULTS.cancelTerms, includes: DEFAULTS.includes, notes: '', lines: [] }); q = db.get('quotes', id); db.put('cases', { id: cs.id, quoteNo: no }); }
+      db.put('quotes', { id: q.id, lines: (q.lines || []).concat(lines) });
+      if (sup) { const link = db.list('links', l => l.caseId === cs.id && l.supplierId === sup.id)[0]; db.put('links', Object.assign(link ? { id: link.id } : { caseId: cs.id, supplierId: sup.id, supplier: sup.name, what: items.map(x => x.item).join(', '), askedAt: todayIso() }, { status: 'הצעה התקבלה', cost: items.reduce((a, x) => a + x.cost, 0) })); }
+      toast(t('saved'));
+      if (sup && sup.phone) {
+        dialog(t('sqNotify', { name: sup.name }), `<textarea name="text" rows="8">${esc(supplierMarkupMessage(sup, cs, client, form.lang.value, s.signer || DEFAULTS.signer))}</textarea>`, { ok: t('whatsapp'), cancel: t('skip') })
+          .then(r => { if (r) openWhatsApp(sup.phone, r.text); location.hash = '#/quote/' + q.id; });
+      } else location.hash = '#/quote/' + q.id;
+    };
+  }, t('read'));
+  body.insertAdjacentHTML('afterbegin', `<div class="row"><label class="btn">${esc(t('sqPdf'))}<input type="file" accept="application/pdf,image/*" id="sqFile" class="sr"></label><span class="hint">${esc(t('sqPdfHint'))}</span></div>`);
+  body.querySelector('#sqFile').onchange = async e => {
+    const f = e.target.files[0]; if (!f) return;
+    if (!/pdf/i.test(f.type)) { toast(t('sqImageHint'), 5000); return; }
+    toast(t('syncing'));
+    try { const text = await pdfText(f); ta.value = text; draft = text; lastPdf = f; toast(t('read')); } catch (err) { toast(t('sqPdfFail'), 4000); }
+  };
+}
+
+/* ---------------- 4. the documents she keeps to send ---------------- */
+async function tabDocs(body) {
+  const lib = await files.all();
+  body.innerHTML = `<p class="hint">${esc(t('docsHint'))}</p>
+    <form class="card stack" id="up"><label class="btn">${esc(t('pickFile'))}<input type="file" id="f" class="sr"></label><span id="fname" class="sub"></span>${field('title', t('docTitle'), '')}${field('aliases', t('docAliases'), '', { placeholder: 'אישור חשבון, אישור בנק' })}<button class="btn primary" type="submit">${esc(t('save'))}</button></form>
+    <h2>${esc(t('companyPapers'))}</h2><div class="list">${COMPANY_PAPERS.map(p => `<div class="card" data-p="${esc(p.key)}"><div class="row between"><span class="title">${esc(p.title)}</span><span class="badge ${p.status === 'found' ? 'ok' : ''}">${esc(p.status === 'found' ? t('paperFound') + (p.date ? ' · ' + esc(Office.fmt(p.date)) : '') : t('paperMissing'))}</span></div>${p.note ? `<div class="sub">${esc(p.note)}</div>` : ''}${p.status === 'found' && p.file ? `<div class="row"><button class="btn sm primary" data-pshare>${esc(t('shareFile'))}</button><a class="btn sm ghost" href="${esc(p.file)}" target="_blank" rel="noopener">${esc(t('open'))}</a></div>` : ''}</div>`).join('')}</div>
+    <h2>${esc(t('docsLib'))}</h2><div class="list">${lib.length ? lib.map(f => `<div class="card" data-f="${esc(f.id)}"><div class="row between"><span class="title">${esc(f.title || f.name)}</span><span class="sub ltr">${esc(f.name)} · ${Math.round((f.size || 0) / 1024)} KB</span></div>${f.aliases ? `<div class="sub">${esc(f.aliases)}</div>` : ''}<div class="row"><button class="btn sm primary" data-share>${esc(t('shareFile'))}</button><button class="btn sm ghost" data-del>${esc(t('delete'))}</button></div></div>`).join('') : empty(t('noDocsYet'))}</div>
+    <p class="hint">${esc(t('docsSuggest'))}</p>`;
+  const inp = body.querySelector('#f'); inp.onchange = () => { body.querySelector('#fname').textContent = inp.files[0] ? inp.files[0].name : ''; if (inp.files[0] && !body.querySelector('[name=title]').value) body.querySelector('[name=title]').value = inp.files[0].name.replace(/\.[a-z0-9]+$/i, ''); };
+  body.querySelector('#up').onsubmit = async e => { e.preventDefault(); const f = inp.files[0]; if (!f) return; await files.put(f, { title: body.querySelector('[name=title]').value.trim(), aliases: body.querySelector('[name=aliases]').value.trim() }); toast(t('saved')); tabDocs(body); };
+  body.querySelectorAll('[data-p]').forEach(el => { const b = el.querySelector('[data-pshare]'); if (b) b.onclick = async () => { const p = COMPANY_PAPERS.find(x => x.key === el.dataset.p); const rec = await bundledRec(p); if (!(await shareFile(rec, p.title))) { downloadFile(rec); toast(t('shareFallback'), 4000); } }; });
+  body.querySelectorAll('[data-f]').forEach(el => {
+    el.querySelector('[data-del]').onclick = async () => { await files.remove(el.dataset.f); tabDocs(body); };
+    el.querySelector('[data-share]').onclick = async () => { const rec = await files.get(el.dataset.f); if (!(await shareFile(rec, rec.title || rec.name))) { downloadFile(rec); toast(t('shareFallback'), 4000); } };
+  });
+}

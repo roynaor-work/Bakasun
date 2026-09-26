@@ -1,0 +1,16 @@
+{
+  "name": "באקה סאן",
+  "short_name": "באקה סאן",
+  "description": "ניהול הפקות אירועים",
+  "start_url": "./index.html#/today",
+  "display": "standalone",
+  "dir": "rtl",
+  "lang": "he",
+  "background_color": "#EFE8DC",
+  "theme_color": "#D7352B",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

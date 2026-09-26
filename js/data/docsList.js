@@ -1,0 +1,15 @@
+/* The company papers that clients, municipalities and suppliers ask for. Files that exist ship with the app (docs/);
+   the rest are marked missing until Roy adds them. Status: found | missing | old. */
+export const COMPANY_PAPERS = [
+  { key: 'nesach', title: 'נסח חברה', aliases: ['נסח', 'נסח רשם החברות', 'company extract'], file: 'docs/nesach-hevra-2025-12.pdf', status: 'found', date: '2025-12-29', note: 'מרשם החברות. כדאי לחדש פעם בשנה.' },
+  { key: 'osek', title: 'תעודת עוסק מורשה', aliases: ['עוסק מורשה', 'תעודת עוסק', 'אישור מע״מ', 'VAT certificate'], file: 'docs/teudat-osek-murshe.pdf', status: 'found', date: '', note: 'באקה סאן בע״מ, 515000032, לבונה 8 אור עקיבא' },
+  { key: 'bank', title: 'אישור ניהול חשבון בנק', aliases: ['אישור ניהול חשבון', 'אישור בעלות חשבון', 'אישור חשבון', 'אישור בנק', 'bank confirmation', 'attestation bancaire'], file: 'docs/bank-account-confirmation-en-2026-01.pdf', status: 'found', date: '2026-01-19', note: 'בנק לאומי, סניף 954, חשבון 255500/34. באנגלית, עם IBAN. לגופים בארץ כדאי גם גרסה בעברית.' },
+  { key: 'status', title: 'אישור סטטוס חברה (רשם החברות, עברית ואנגלית)', aliases: ['אישור סטטוס', 'certificate of status', 'certificate of good standing', 'אישור רשם החברות'], file: 'docs/certificate-of-status-2025-12.pdf', status: 'found', date: '2025-12-29', note: 'מאשר שהחברה פעילה. גופים רבים מקבלים אותו במקום תעודת התאגדות.' },
+  { key: 'incorporation', title: 'תעודת התאגדות', aliases: ['תעודת רישום חברה', 'incorporation certificate'], file: '', status: 'missing', date: '', note: 'לא נמצאה במייל (יש רק של סיטונאות בנימינה). מזמינים מרשם החברות: העתק תעודת התאגדות.' },
+  { key: 'books', title: 'אישור ניהול ספרים', aliases: ['ניהול ספרים', 'bookkeeping certificate'], file: '', status: 'missing', date: '', note: 'נמצא רק לסיטונאות בנימינה. לבקש מרואה החשבון (עופר דוידוביץ).' },
+  { key: 'withholding', title: 'אישור ניכוי מס במקור', aliases: ['ניכוי מס במקור', 'ניכוי במקור', 'withholding tax'], file: '', status: 'missing', date: '', note: 'נמצא רק לסיטונאות בנימינה. לבקש מרואה החשבון.' },
+  { key: 'insurance', title: 'אישור ביטוח (צד ג׳ / חבות מעבידים)', aliases: ['ביטוח', 'אישור ביטוח', 'insurance'], file: '', status: 'missing', date: '', note: 'עיריות מבקשות. לבדוק אם קיים.' },
+  { key: 'protocol', title: 'פרוטוקול החברה ומורשי חתימה (ינואר 2026)', aliases: ['פרוטוקול', 'מורשי חתימה', 'זכויות חתימה', 'אישור זכויות חתימה', 'signatory protocol', 'signature rights'], file: 'docs/protocol-signatories-2026-01.pdf', status: 'found', date: '2026-01-20', note: 'מאומת על ידי עו״ד. שולחים רק כשמבקשים במפורש.' },
+  { key: 'signatories', title: 'הודעה לרשם על שינוי מורשי חתימה', aliases: ['הודעה על החלטת תאגיד', 'שינוי מורשים'], file: 'docs/change-of-signatories-notice-2026-01.pdf', status: 'found', date: '2026-01-20', note: 'מצורף לפרוטוקול כשגוף מבקש את המסמך הרשמי.' },
+  { key: 'logo', title: 'לוגו באקה סאן', aliases: ['לוגו', 'logo'], file: 'icons/brand/lockup-h-color.png', status: 'found', date: '2026-08-24', note: 'אופקי, צבעוני, רקע שקוף. יש גם SVG.' }
+];

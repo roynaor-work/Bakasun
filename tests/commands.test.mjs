@@ -1,0 +1,57 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage, unansweredSince, delegateCallMessage } from '../js/logic/commands.js';
+
+const docs = [{ id: 'd1', title: 'אישור ניהול חשבון בנק', aliases: ['אישור ניהול חשבון', 'אישור חשבון'] }, { id: 'd2', title: 'תעודת התאגדות' }, { id: 'd3', title: 'ערכת לוגו', aliases: ['לוגו', 'logo'] }];
+const people = [{ label: 'דנה לוי · טכנו-גליל', names: ['דנה לוי', 'טכנו-גליל'], phone: '052-1234567' }, { label: 'Marc Cohen', names: ['Marc Cohen', 'Famille Cohen'], email: 'marc@x.fr' }];
+
+test('send a document to a number, an e-mail, or a known person', () => {
+  let c = parseCommand('שלחי אישור ניהול חשבון ל-052-9998877', docs, people);
+  assert.equal(c.kind, 'send'); assert.equal(c.doc.id, 'd1'); assert.equal(c.to.phone, '052-9998877');
+  c = parseCommand('send the logo to marc@x.fr', docs, people);
+  assert.equal(c.doc.id, 'd3'); assert.equal(c.to.email, 'marc@x.fr');
+  c = parseCommand('תשלחי תעודת התאגדות לדנה לוי', docs, people);
+  assert.equal(c.doc.id, 'd2'); assert.equal(c.to.phone, '052-1234567');
+  c = parseCommand('envoie le logo à Marc Cohen', docs, people);
+  assert.equal(c.doc.id, 'd3'); assert.equal(c.to.email, 'marc@x.fr');
+  assert.equal(parseCommand('מה השעה', docs, people).kind, 'unknown');
+});
+
+test('an invoice request is read from her usual message', () => {
+  const r = parseInvoiceRequest('לקוח חדש\nעמותת קומיוניטי או\nע.ר 580777894\nעין ורד 1, תל אביב\nסכומים\nמקדמה עבור וירגיני הפקה 3,000 + מעמ\n20 כריות 1,595 + מעמ\nציוד משרדי 1,214 + מעמ');
+  assert.equal(r.client, 'עמותת קומיוניטי או'); assert.equal(r.taxId, '580777894');
+  assert.deepEqual(r.items.map(x => x.amount), [3000, 1595, 1214]); assert.equal(r.total, 5809);
+  assert.match(r.items[0].desc, /מקדמה/);
+  const r2 = parseInvoiceRequest('היי תוכל בבקשה לשלוח לי היום חשבון עסקה לפי הפרטים הבאים\nסכום 27,310+ מע"מ\nהפקה אירוע ועידת הנוער הצפוני 2026\nלכבוד : יעדים לצפון\n580421626');
+  assert.equal(r2.kind, 'חשבון עסקה'); assert.equal(r2.client, 'יעדים לצפון'); assert.equal(r2.taxId, '580421626'); assert.equal(r2.total, 27310);
+  const r3 = parseInvoiceRequest('תוציא לי חשבונית ל weRisrael מקדמה עם משלחת פוז 10000 פלוס מעמ');
+  assert.equal(r3.total, 10000);
+  const c = parseCommand('תבקש מרועי חשבונית: קומיוניטי או, 580777894, 3,000 + מע"מ הפקה', docs, people);
+  assert.equal(c.kind, 'invoice'); assert.equal(c.invoice.taxId, '580777894'); assert.equal(c.invoice.total, 3000);
+  const txt = invoiceRequestText(r, { email: 'a@b.co' }, 'וירג׳יני');
+  assert.match(txt, /^שלום רועי,\n\nצריך להוציא חשבונית:\n• לקוח: עמותת קומיוניטי או\n• ח\.פ\. \/ ע\.ר: 580777894\n• כתובת: עין ורד 1, תל אביב\n• לשלוח ל: a@b\.co\n• מקדמה עבור וירגיני הפקה: 3,000 ₪ \+ מע״מ/);
+  assert.match(txt, /סה״כ לפני מע״מ: 5,809 ₪/);
+});
+
+test('a supplier quote: lines with prices, a markup, and the note to the supplier', () => {
+  const q = parseSupplierQuote('הצעת מחיר - קייטרינג שקד\nארוחת בוקר 40 משתתפים 3,200 ₪\nארוחת צהריים בשרית 40 איש 6,000 + מע"מ\nשירות ומלצרים 1,500\nסה"כ 10,700 + מע"מ');
+  assert.deepEqual(q.items.map(x => [x.item, x.cost, x.qty]), [['ארוחת בוקר', 3200, 40], ['ארוחת צהריים בשרית', 6000, 40], ['שירות ומלצרים', 1500, 1]]);
+  assert.equal(q.total, 10700); assert.equal(q.sum, 10700);
+  const lines = markupLines(q.items, 15, { id: 's2', name: 'קייטרינג שקד', type: 'קייטרינג ושפים' });
+  assert.equal(lines[0].cost, 80); assert.equal(lines[0].qty, 40); assert.equal(lines[0].margin, 15); assert.equal(lines[2].cost, 1500); assert.equal(lines[0].supplier, 'קייטרינג שקד');
+  const m = supplierMarkupMessage({ name: 'קייטרינג שקד', contact: 'רותם כהן' }, { kind: 'יום גיבוש', date: '2026-10-05' }, 12305, 'he', 'וירג׳יני');
+  assert.match(m, /^היי רותם, תודה על ההצעה ליום גיבוש · 05\/10\/2026\./); assert.match(m, /12,305 ₪ לפני מע״מ/);
+});
+
+test('calls not answered yesterday, and handing a call to someone else', () => {
+  const calls = [{ id: 'a', name: 'יוסי', status: 'noanswer', lastTry: '2026-09-25T10:00:00Z', attempts: 2, why: 'מחיר' }, { id: 'b', name: 'דנה', status: 'noanswer', lastTry: '2026-09-20T10:00:00Z' }, { id: 'c', name: 'רון', status: 'answered', lastTry: '2026-09-25T10:00:00Z' }];
+  assert.deepEqual(unansweredSince(calls, '2026-09-25', '2026-09-26').map(c => c.id), ['a']);
+  assert.match(delegateCallMessage(calls[0], 'נועה כהן', { kind: 'כנס', date: '2026-10-10' }, 'he', 'וירג׳יני'), /^היי נועה, תוכל\/י להתקשר ליוסי \(\)\?\nמה צריך: מחיר\nלגבי: כנס · 10\/10\/2026\nניסיתי 2 פעמים/);
+});
+
+test('"I got a quote from X" opens the supplier-quote flow with the supplier picked', () => {
+  const people = [{ label: 'קייטרינג שקד', names: ['קייטרינג שקד', 'רותם'], about: 'supplier', id: 's2' }, { label: 'דנה לוי', names: ['דנה לוי'], about: 'client', id: 'c1' }];
+  const c = parseCommand('קיבלתי הצעה מקייטרינג שקד בטלפון, קח את ההצעה', [], people);
+  assert.equal(c.kind, 'supplierQuote'); assert.equal(c.supplier.id, 's2');
+  assert.equal(parseCommand('J’ai reçu un devis de Shaked', [], people).kind, 'supplierQuote');
+});
