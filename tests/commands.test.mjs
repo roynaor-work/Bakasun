@@ -55,3 +55,20 @@ test('"I got a quote from X" opens the supplier-quote flow with the supplier pic
   assert.equal(c.kind, 'supplierQuote'); assert.equal(c.supplier.id, 's2');
   assert.equal(parseCommand('J’ai reçu un devis de Shaked', [], people).kind, 'supplierQuote');
 });
+
+test('a free message to a person, and saving a phone by voice', () => {
+  const people = [{ label: 'רועי · מנהל', names: ['רועי'], phone: '052-1112233', email: 'roy@b.co', about: 'team', id: 't1' }, { label: 'Marc Cohen', names: ['Marc Cohen'], email: 'marc@x.fr', about: 'client', id: 'c2' }];
+  let c = parseCommand('שלחי הודעה לרועי: אני מגיעה ב-10', [], people);
+  assert.equal(c.kind, 'message'); assert.equal(c.via, 'whatsapp'); assert.equal(c.to.phone, '052-1112233'); assert.equal(c.body, 'אני מגיעה ב-10');
+  c = parseCommand('תגידי לרועי שאני מאחרת', [], people);
+  assert.equal(c.kind, 'message'); assert.equal(c.body, 'אני מאחרת');
+  c = parseCommand('envoie un mail à Marc Cohen : le devis est prêt', [], people);
+  assert.equal(c.kind, 'message'); assert.equal(c.via, 'email'); assert.equal(c.to.email, 'marc@x.fr'); assert.equal(c.body, 'le devis est prêt');
+  c = parseCommand('שלחי הודעה ל-052-5554444: מגיעה', [], people);
+  assert.equal(c.to.phone, '052-5554444');
+  c = parseCommand('שמרי את הטלפון של רועי 052-9998877', [], people);
+  assert.equal(c.kind, 'contact'); assert.equal(c.to.id, 't1'); assert.equal(c.contact.phone, '052-9998877');
+  c = parseCommand('המייל של דנה dana@x.co', [], people);
+  assert.equal(c.kind, 'contact'); assert.equal(c.to, null); assert.equal(c.contact.name, 'דנה'); assert.equal(c.contact.email, 'dana@x.co');
+  assert.equal(parseCommand('שלחי אישור ניהול חשבון לרועי', [{ id: 'd1', title: 'אישור ניהול חשבון בנק' }], people).kind, 'send');
+});

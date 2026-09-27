@@ -3,11 +3,21 @@
 import Office from './office.js';
 import { trim, str, phoneDigits } from './core.js';
 
-const SEND = /^(?:שלחי|שלח|תשלחי|תשלח|לשלוח|send|envoie|envoyer|envoyez)\b/i;
+const SEND = /^(?:שלחי|שלח|תשלחי|תשלח|לשלוח|send|envoie|envoyer|envoyez)(?=\s|$)/i;
 const INVOICE = /(חשבונית|חשבון עסקה|דרישת תשלום|invoice|facture)/i;
 const TO = /(?:\s(?:ל|אל|to|à)\s*|\s(?:למספר|לטלפון|למייל|to number|to phone|au numéro|par mail)\s*)/i;
 
-/** What a command asks for: {kind: 'send'|'invoice'|'unknown', doc, to: {phone|email|name}} */
+// "(save|add) (the) (phone|number|mail) of X 052..." in three languages, or "X's phone is 052..."
+const CONTACT = /(?:^(?:שמרי|תשמרי|שמור|הוסיפי|תוסיפי|הוסף|save|add|enregistre|ajoute)\s+(?:את\s+|the\s+|le\s+|la\s+|l['’]\s*)?(?:ה)?(?:טלפון|מספר|מייל|אימייל|phone|number|mail|e-mail|email|numéro|téléphone)\s+(?:של\s+|of\s+|de\s+|d['’]\s*)?([^:,\d@]+?)\s*[:,]?\s+(?=[+0\d]|[A-Za-z0-9._%+\-]+@))|(?:^(?:ה)?(?:טלפון|מספר|מייל|אימייל|phone|number|mail|e-mail|email|numéro|téléphone)\s+(?:של\s+|of\s+|de\s+|d['’]\s*)([^:,\d@]+?)\s*(?:הוא|זה|is|est|[:,])?\s+(?=[+0\d]|[A-Za-z0-9._%+\-]+@))/i;
+// "(send|write|tell) (a message|a whatsapp|an e-mail) to X[:,] body"
+const MESSAGE = /^(?:שלחי|שלח|תשלחי|תשלח|תכתבי|תכתוב|כתבי|תגידי|תאמרי|תגיד|send|write|tell|envoie|envoyer|écris|dis)\s+(?:(?:את\s+)?(?:ה)?(הודעה|הודעת וואטסאפ|וואטסאפ|ווצאפ|מייל|אימייל|a message|a whatsapp|message|whatsapp|an e-mail|an email|e-mail|email|mail|un message|un mail|un e-mail|un whatsapp|courriel)\s+)?(?:ל|אל\s+|to\s+|à\s+|a\s+)([^:,]+?)\s*(?:[:,]|\s(?=ש[א-ת]))\s*(.+)$/i;
+function findPerson(text, people) {
+  const hay = Office.normHe(text); let bp = null, bl = 0;
+  (people || []).forEach(p => (p.names || []).forEach(n => { const k = Office.normHe(n); if (k && k.length >= 3 && k.length > bl && hay.indexOf(k) >= 0) { bp = p; bl = k.length; } }));
+  return bp ? { name: bp.label, phone: bp.phone, email: bp.email, about: bp.about, id: bp.id } : null;
+}
+
+/** What a command asks for: {kind: 'send'|'message'|'contact'|'invoice'|'supplierQuote'|'unknown', doc, to: {phone|email|name}} */
 export function parseCommand(text, docs, people) {
   const t = trim(text);
   const out = { kind: 'unknown', text: t, doc: null, to: null };
@@ -20,6 +30,24 @@ export function parseCommand(text, docs, people) {
   }
   const email = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/.exec(t);
   const phone = /(?:\+972[\s\-]?|0)(5\d)[\s\-]?(\d{3})[\s\-]?(\d{4})\b/.exec(t) || /(?:\+|00)\d[\d\s\-]{7,16}\d/.exec(t);
+  // "save Roy's phone 052-1234567" / "הטלפון של רועי 052..." / "המייל של דנה dana@x.com"
+  const contact = CONTACT.exec(t);
+  if (contact && (phone || email)) {
+    const who = trim(contact[1] || contact[2] || '').replace(/^(?:של|of|de)\s+/i, '');
+    out.kind = 'contact'; out.contact = { name: who, phone: phone ? phone[0].replace(/\s/g, '') : '', email: email ? email[0] : '' };
+    out.to = findPerson(who, people); return out;
+  }
+  // a free message: "send a message to Roy: I'm late" / "תגידי לדנה ש..." / "mail à Marc : ..."
+  const msg = MESSAGE.exec(t);
+  if (msg) {
+    const via = /(מייל|אימייל|mail|e-mail|email|courriel)/i.test(msg[1] || '') ? 'email' : 'whatsapp';
+    const who = trim(msg[2]); let body = trim(msg[3] || '');
+    if (!/[:,]/.test(t.slice(0, t.length - body.length)) && /^ש[א-ת]/.test(body)) body = body.replace(/^ש/, '');
+    out.kind = 'message'; out.via = via; out.body = body;
+    out.to = email ? { email: email[0] } : phone ? { phone: phone[0].replace(/\s/g, '') } : findPerson(who, people);
+    if (!out.to) out.to = { name: who };
+    return out;
+  }
   if (email) out.to = { email: email[0] };
   else if (phone) out.to = { phone: phone[0].replace(/\s/g, '') };
   let body = t.replace(SEND, '').replace(email ? email[0] : '', '').replace(phone ? phone[0] : '', '');
@@ -30,12 +58,7 @@ export function parseCommand(text, docs, people) {
     names.forEach(n => { const k = Office.normHe(n); if (k && k.length > bestLen && Office.normHe(body).indexOf(k) >= 0) { best = d; bestLen = k.length; } });
   });
   out.doc = best;
-  if (!out.to) {
-    // a known person by name
-    let bp = null, bl = 0;
-    (people || []).forEach(p => (p.names || []).forEach(n => { const k = Office.normHe(n); if (k && k.length >= 3 && k.length > bl && Office.normHe(body).indexOf(k) >= 0) { bp = p; bl = k.length; } }));
-    if (bp) out.to = { name: bp.label, phone: bp.phone, email: bp.email, about: bp.about, id: bp.id };
-  }
+  if (!out.to) out.to = findPerson(body, people);
   if (SEND.test(t) || out.doc) out.kind = 'send';
   return out;
 }
