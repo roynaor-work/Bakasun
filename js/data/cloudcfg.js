@@ -1,2 +1,2 @@
-/* The cloud project the app talks to. Empty until the cloud step: then only e-mail and password are typed in Settings. */
-export const CLOUD = { url: '', key: '' };
+/* The cloud project the app talks to. Set once at the cloud step: in Settings only e-mail and password are typed. The anon key is public by design. */
+export const CLOUD = { url: 'https://ckfezrtrmfyqepozdzzp.supabase.co', key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNrZmV6cnRybWZ5cWVwb3pkenpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0NTI5MzYsImV4cCI6MjEwNjAyODkzNn0.6fXz9_jyN-8-CbmSOEnytAQb4iBrvPYWb45JanW0SHc' };
