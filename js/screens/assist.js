@@ -70,13 +70,14 @@ async function tabCommand(body, s, ctx) {
   const docs = lib.map(f => ({ id: f.id, title: f.title || f.name, aliases: (f.aliases || '').split(/[,;]+/).map(x => x.trim()).filter(Boolean), rec: f })).concat(bundledDocs());
   // built fresh on every command, so a phone saved a second ago is already known
   const peopleNow = () => subjects().map(p => { const c = p.about === 'client' ? db.get('clients', p.id) : p.about === 'supplier' ? db.get('suppliers', p.id) : p.about === 'team' ? db.get('team', p.id) : db.get('cases', p.id); return { label: p.label, names: p.names, phone: c && c.phone, email: c && c.email, about: p.about, id: p.id }; })
-    .concat(db.list('staff').map(x => ({ label: x.name, names: [x.name], phone: x.phone })));
+    .concat(db.list('staff').map(x => ({ label: x.name, names: [x.name], phone: x.phone })))
+    .concat(db.list('contacts').map(x => ({ label: x.name, names: [x.name], phone: x.phone, email: x.email, about: 'contact', id: x.id })));
   inputBox(body, t('cmdHint'), t('cmdPh'), (text, out) => {
     const c = parseCommand(text, docs, peopleNow());
     if (c.kind === 'invoice') { mode = 'invoice'; draft = text; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'supplierQuote') { mode = 'supplierQuote'; preSupplier = c.supplier && c.supplier.about === 'supplier' ? c.supplier.id : ''; draft = ''; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'contact') {
-      const col = c.to && c.to.about === 'client' ? 'clients' : c.to && c.to.about === 'supplier' ? 'suppliers' : c.to && c.to.about === 'team' ? 'team' : '';
+      const col = c.to && c.to.about === 'client' ? 'clients' : c.to && c.to.about === 'supplier' ? 'suppliers' : c.to && c.to.about === 'team' ? 'team' : c.to && c.to.about === 'contact' ? 'contacts' : '';
       const patch = { phone: c.contact.phone || undefined, email: c.contact.email || undefined };
       if (col && c.to.id) db.put(col, Object.assign({ id: c.to.id }, patch)); else db.put('team', Object.assign({ name: c.contact.name }, patch));
       if (/רועי|roy/i.test(c.contact.name) && c.contact.phone && !s.invoiceTo) db.setting('invoiceTo', c.contact.phone);

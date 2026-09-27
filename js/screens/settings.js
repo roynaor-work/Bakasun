@@ -1,7 +1,9 @@
 /* Settings: languages, signature, business, quote defaults, cloud login, backup, demo. */
 import { t, LANGS, langName } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, field, toast, confirmDialog, dialog } from '../ui.js';
+import { esc, field, toast, confirmDialog, dialog, pickContacts, contactsSupported } from '../ui.js';
+import { parseContactsFile } from '../logic/contacts.js';
+import { phoneDigits } from '../logic/core.js';
 import { loadDemo } from '../data/demo.js';
 import * as cloud from '../cloud.js';
 import { CLOUD } from '../data/cloudcfg.js';
@@ -59,6 +61,9 @@ export function render({ root }) {
       <div class="list">${COMPANY_DOCS.map(d => `<a class="card tap" href="${esc(d.url)}" target="_blank" rel="noopener"><span class="title">${esc(d.title)}</span></a>`).join('')}</div></section>
     <section class="sec"><h2>${esc(t('backup'))}</h2><p class="hint">${esc(cc && cc.on ? t('cloudOn') : t('dataLocal'))}</p>
       <div class="row"><button class="btn" id="exp">${esc(t('exportJson'))}</button><label class="btn">${esc(t('importJson'))}<input type="file" accept="application/json" id="imp" class="sr"></label></div></section>
+    <section class="sec"><h2>${esc(t('contacts'))}</h2><p class="hint">${esc(t('contactsHint'))}</p>
+      <p><b>${esc(t('contactsCount', { n: db.list('contacts').length }))}</b></p>
+      <div class="row"><button class="btn sm" id="pickMany">${esc(t('fromPhone'))}</button><label class="btn sm">${esc(t('importFile'))}<input type="file" id="contactsFile" accept=".csv,.vcf,text/csv,text/vcard,text/x-vcard" hidden></label>${db.list('contacts').length ? `<button class="btn sm ghost" id="clearContacts">${esc(t('clearContacts'))}</button>` : ''}</div></section>
     <section class="sec"><h2>${esc(t('team'))}</h2><p class="hint">${esc(t('teamHint'))}</p>
       <div class="list">${db.list('team').map(p => `<div class="card" data-team="${esc(p.id)}"><div class="row between"><span class="title">${esc(p.name)}${p.role ? ` <span class="sub">· ${esc(p.role)}</span>` : ''}</span><span class="row"><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button><button class="btn sm ghost" data-del>✕</button></span></div><div class="sub ltr">${esc([p.phone, p.email].filter(Boolean).join(' · ') || '—')}</div></div>`).join('')}</div>
       <div class="row"><button class="btn sm" id="addTeam">${esc(t('addPerson'))}</button></div></section>
@@ -97,6 +102,10 @@ export function render({ root }) {
     render({ root });
   };
   root.querySelector('#addTeam').onclick = () => editTeam(null);
+  const addContacts = list => { let n = 0; const have = new Set(db.list('contacts').map(c => phoneDigits(c.phone || ''))); list.forEach(c => { const d = phoneDigits(c.phone || ''); if (!c.name && !c.phone) return; if (d && have.has(d)) return; have.add(d); db.put('contacts', { name: c.name, phone: c.phone, email: c.email }); n++; }); toast(t('imported', { n })); render({ root }); };
+  root.querySelector('#pickMany').onclick = async () => { if (!contactsSupported()) { toast(t('noPicker'), 4000); return; } const list = await pickContacts(true); if (list && list.length) addContacts(list); };
+  root.querySelector('#contactsFile').onchange = async e => { const f = e.target.files[0]; if (!f) return; addContacts(parseContactsFile(f.name, await f.text())); };
+  const clr = root.querySelector('#clearContacts'); if (clr) clr.onclick = async () => { if (await confirmDialog(t('clearContacts') + '?')) { db.list('contacts').forEach(c => db.remove('contacts', c.id)); render({ root }); } };
   root.querySelectorAll('[data-team]').forEach(el => {
     el.querySelector('[data-edit]').onclick = () => editTeam(db.get('team', el.dataset.team));
     el.querySelector('[data-del]').onclick = async () => { if (await confirmDialog(t('delete') + '?')) { db.remove('team', el.dataset.team); render({ root }); } };

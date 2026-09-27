@@ -35,6 +35,7 @@ export function dialog(title, bodyHtml, opts) {
       <button type="submit" class="btn ${opts.danger ? 'danger' : 'primary'}">${esc(opts.ok || t('save'))}</button></div></form>`;
     document.body.appendChild(wrap);
     const form = wrap.querySelector('form');
+    addContactPicker(form);
     const done = v => { wrap.remove(); resolve(v); };
     wrap.addEventListener('click', e => { if (e.target === wrap || e.target.dataset.x === 'cancel') done(null); });
     form.addEventListener('submit', e => { e.preventDefault(); const o = {}; new FormData(form).forEach((v, k) => { o[k] = v; }); done(o); });
@@ -78,6 +79,26 @@ export function field(name, label, value, opts) {
     : type === 'select' ? `<select name="${name}">${opts.options.map(o => `<option value="${esc(o[0])}"${String(o[0]) === String(value) ? ' selected' : ''}>${esc(o[1])}</option>`).join('')}</select>`
     : `<input name="${name}" type="${type}" value="${esc(value)}"${cls}${opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : ''}${opts.inputmode ? ` inputmode="${opts.inputmode}"` : ''}>`;
   return `<label class="f"><span>${esc(label)}</span>${inp}</label>`;
+}
+/** On phones that have it (Android Chrome), a button next to the phone field that picks from the phone's contacts. */
+export function contactsSupported() { return !!(navigator.contacts && navigator.contacts.select); }
+export async function pickContacts(multiple) {
+  if (!contactsSupported()) return null;
+  try {
+    const res = await navigator.contacts.select(['name', 'tel', 'email'], { multiple: !!multiple });
+    return (res || []).map(c => ({ name: (c.name || [])[0] || '', phone: (c.tel || [])[0] || '', phones: c.tel || [], email: (c.email || [])[0] || '' }));
+  } catch (e) { return []; }
+}
+function addContactPicker(form) {
+  const tel = form.querySelector('input[name=phone]'); if (!tel || !contactsSupported()) return;
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'btn sm ghost pick'; b.textContent = t('fromPhone');
+  tel.parentNode.appendChild(b);
+  b.onclick = async () => {
+    const list = await pickContacts(false); const c = list && list[0]; if (!c) return;
+    const set = (n, v) => { const el = form.querySelector(`[name=${n}]`); if (el && v && !el.value) el.value = v; };
+    if (c.phone) tel.value = c.phone;
+    set('email', c.email); set('contact', c.name); set('name', c.name); set('who', c.name); if (!form.querySelector('[name=contact]')) set('client', c.name);
+  };
 }
 export function empty(msg) { return `<p class="empty">${esc(msg)}</p>`; }
 export function section(title, body, extra) { return `<section class="sec"><div class="sec-h"><h2>${esc(title)}</h2>${extra || ''}</div>${body}</section>`; }
