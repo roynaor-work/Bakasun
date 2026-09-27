@@ -68,7 +68,7 @@ function inputBox(body, hint, ph, onRead, readLabel) {
 async function tabCommand(body, s, ctx) {
   const lib = await files.all();
   const docs = lib.map(f => ({ id: f.id, title: f.title || f.name, aliases: (f.aliases || '').split(/[,;]+/).map(x => x.trim()).filter(Boolean), rec: f })).concat(bundledDocs());
-  const people = subjects().map(p => { const c = p.about === 'client' ? db.get('clients', p.id) : p.about === 'supplier' ? db.get('suppliers', p.id) : db.get('cases', p.id); return { label: p.label, names: p.names, phone: c && c.phone, email: c && c.email, about: p.about, id: p.id }; })
+  const people = subjects().map(p => { const c = p.about === 'client' ? db.get('clients', p.id) : p.about === 'supplier' ? db.get('suppliers', p.id) : p.about === 'team' ? db.get('team', p.id) : db.get('cases', p.id); return { label: p.label, names: p.names, phone: c && c.phone, email: c && c.email, about: p.about, id: p.id }; })
     .concat(db.list('staff').map(x => ({ label: x.name, names: [x.name], phone: x.phone })));
   inputBox(body, t('cmdHint'), t('cmdPh'), (text, out) => {
     const c = parseCommand(text, docs, people);
@@ -78,8 +78,16 @@ async function tabCommand(body, s, ctx) {
     out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(t('document'))}</dt><dd>${c.doc ? esc(c.doc.title) : `<span class="badge warn">${esc(t('docNotFound'))}</span>`}</dd><dt>${esc(t('recipient'))}</dt><dd class="ltr">${c.to ? esc(c.to.name || c.to.phone || c.to.email) + (c.to.name && c.to.phone ? ' · ' + esc(c.to.phone) : '') : `<span class="badge warn">${esc(t('noRecipient'))}</span>`}</dd></div>
       ${field('msg', t('note'), c.doc ? t('docMsg', { doc: c.doc.title }) : '', { type: 'textarea', rows: 2 })}
       <div class="row">${c.doc ? `<button class="btn primary" id="share">${esc(t('shareFile'))}</button>` : ''}${c.to && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.to && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}</div>
+      ${c.to && c.to.name && !c.to.phone && !c.to.email ? `<p class="warnbox">${esc(t('noContact'))} <button class="btn sm" id="addContact">${esc(t('addPhone'))}</button></p>` : ''}
       <p class="hint">${esc(t('shareHint'))}</p></div>`;
     const msg = () => out.querySelector('[name=msg]').value;
+    const ac = out.querySelector('#addContact'); if (ac) ac.onclick = async () => {
+      const r = await dialog(c.to.name, `<div class="grid2">${field('phone', t('fPhone'), '', { ltr: true, inputmode: 'tel' })}${field('email', t('fEmail'), '', { ltr: true, inputmode: 'email' })}</div>`, { ok: t('save') });
+      if (!r || (!r.phone && !r.email)) return;
+      const col = c.to.about === 'client' ? 'clients' : c.to.about === 'supplier' ? 'suppliers' : c.to.about === 'team' ? 'team' : '';
+      if (col && c.to.id) db.put(col, { id: c.to.id, phone: r.phone || undefined, email: r.email || undefined }); else db.put('team', { name: c.to.name, phone: r.phone, email: r.email });
+      toast(t('personSaved')); body.querySelector('#go').click();
+    };
     const sh = out.querySelector('#share'); if (sh) sh.onclick = async () => { const rec = c.doc.rec || await bundledRec(c.doc.paper); if (!(await shareFile(rec, msg()))) { downloadFile(rec); toast(t('shareFallback'), 4000); } };
     const wa = out.querySelector('#wa'); if (wa) wa.onclick = () => openWhatsApp(c.to.phone, msg());
     const ml = out.querySelector('#mail'); if (ml) { ml.href = 'mailto:' + encodeURIComponent(c.to.email) + '?subject=' + encodeURIComponent((c.doc ? c.doc.title : '') + ' · ' + (s.bizName || DEFAULTS.bizName)) + '&body=' + encodeURIComponent(msg()); ml.target = '_blank'; }

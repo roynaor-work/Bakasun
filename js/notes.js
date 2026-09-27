@@ -11,6 +11,7 @@ export function subjects() {
   const out = [];
   db.list('clients').forEach(c => out.push({ key: 'client:' + c.id, label: c.name + (c.contact ? ' · ' + c.contact : ''), about: 'client', id: c.id, names: [c.name, c.contact] }));
   db.list('suppliers').forEach(s => out.push({ key: 'supplier:' + s.id, label: s.name + (s.contact ? ' · ' + s.contact : ''), about: 'supplier', id: s.id, names: [s.name, s.contact] }));
+  db.list('team').forEach(p => out.push({ key: 'team:' + p.id, label: p.name + (p.role ? ' · ' + p.role : ''), about: 'team', id: p.id, names: [p.name] }));
   db.list('cases', c => Office.ACTIVE.includes(c.status)).forEach(c => out.push({ key: 'case:' + c.id, label: (c.client || '') + ' · ' + (c.kind || '') + (c.date ? ' · ' + Office.fmt(c.date) : ''), about: 'case', id: c.id, names: [] }));
   return out;
 }

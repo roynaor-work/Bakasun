@@ -1,7 +1,7 @@
 /* Settings: languages, signature, business, quote defaults, cloud login, backup, demo. */
 import { t, LANGS, langName } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, field, toast, confirmDialog } from '../ui.js';
+import { esc, field, toast, confirmDialog, dialog } from '../ui.js';
 import { loadDemo } from '../data/demo.js';
 import * as cloud from '../cloud.js';
 import { CLOUD } from '../data/cloudcfg.js';
@@ -59,6 +59,9 @@ export function render({ root }) {
       <div class="list">${COMPANY_DOCS.map(d => `<a class="card tap" href="${esc(d.url)}" target="_blank" rel="noopener"><span class="title">${esc(d.title)}</span></a>`).join('')}</div></section>
     <section class="sec"><h2>${esc(t('backup'))}</h2><p class="hint">${esc(cc && cc.on ? t('cloudOn') : t('dataLocal'))}</p>
       <div class="row"><button class="btn" id="exp">${esc(t('exportJson'))}</button><label class="btn">${esc(t('importJson'))}<input type="file" accept="application/json" id="imp" class="sr"></label></div></section>
+    <section class="sec"><h2>${esc(t('team'))}</h2><p class="hint">${esc(t('teamHint'))}</p>
+      <div class="list">${db.list('team').map(p => `<div class="card" data-team="${esc(p.id)}"><div class="row between"><span class="title">${esc(p.name)}${p.role ? ` <span class="sub">· ${esc(p.role)}</span>` : ''}</span><span class="row"><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button><button class="btn sm ghost" data-del>✕</button></span></div><div class="sub ltr">${esc([p.phone, p.email].filter(Boolean).join(' · ') || '—')}</div></div>`).join('')}</div>
+      <div class="row"><button class="btn sm" id="addTeam">${esc(t('addPerson'))}</button></div></section>
     <section class="sec"><h2>${esc(t('demo'))}</h2><div class="row"><button class="btn" id="demo">${esc(t('loadDemo'))}</button><button class="btn danger" id="clear">${esc(t('clearAll'))}</button></div></section>
     <p class="hint sec">${esc(t('install'))}</p>`;
 
@@ -86,5 +89,17 @@ export function render({ root }) {
     f.text().then(txt => { db.importJson(txt); toast(t('saved')); location.hash = '#/today'; }).catch(() => toast('?'));
   };
   root.querySelector('#demo').onclick = () => { loadDemo(); toast(t('saved')); location.hash = '#/today'; };
+  const editTeam = async p => {
+    const r = await dialog(p ? p.name : t('addPerson'), `${field('name', t('fName'), p ? p.name : '')}<div class="grid2">${field('role', t('role'), p ? p.role : '')}${field('phone', t('fPhone'), p ? p.phone : '', { ltr: true, inputmode: 'tel' })}</div>${field('email', t('fEmail'), p ? p.email : '', { ltr: true, inputmode: 'email' })}`, { ok: t('save') });
+    if (!r || !r.name) return;
+    db.put('team', Object.assign({}, p ? { id: p.id } : {}, { name: r.name.trim(), role: r.role, phone: r.phone, email: r.email }));
+    if (!db.setting('invoiceTo') && /רועי|roy/i.test(r.name) && r.phone) db.setting('invoiceTo', r.phone);
+    render({ root });
+  };
+  root.querySelector('#addTeam').onclick = () => editTeam(null);
+  root.querySelectorAll('[data-team]').forEach(el => {
+    el.querySelector('[data-edit]').onclick = () => editTeam(db.get('team', el.dataset.team));
+    el.querySelector('[data-del]').onclick = async () => { if (await confirmDialog(t('delete') + '?')) { db.remove('team', el.dataset.team); render({ root }); } };
+  });
   root.querySelector('#clear').onclick = async () => { if (await confirmDialog(t('confirmClear'))) { db.clear(); location.hash = '#/today'; } };
 }

@@ -52,6 +52,7 @@ export function loadDemo() {
   db.put('notes', { about: 'supplier', aboutId: s1, aboutLabel: 'הגברה יוסי', text: 'ספק מצוין, תמיד אפשר לסמוך עליו. מגיע מוקדם.' });
   db.put('notes', { about: 'supplier', aboutId: s3, aboutLabel: 'קייטרינג הגליל', text: 'איחרו פעם ב-40 דקות. לבקש אישור הגעה ביום לפני.' });
   db.put('approvals', { caseId: k1, kind: 'participants', title: '45 במקום 40', details: 'הקייטרינג צריך לדעת עד יום שלישי', amount: 750, status: 'sent', sentAt: d(-3) });
+  if (!db.list('team').length) db.put('team', { name: 'רועי', role: 'מנהל, חשבוניות', phone: '', email: 'roynaor@gmail.com' });
   if (!db.setting('signer')) db.setting('signer', 'וירג׳יני מנדל נאור\nבאקה סאן בע״מ');
   if (!db.setting('invoiceTo')) db.setting('invoiceTo', '050-0000000');
 }

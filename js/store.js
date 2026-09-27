@@ -2,7 +2,7 @@
    Screens never touch storage directly; they call db.* and subscribe to changes. */
 
 const KEY = 'bakasun.v1';
-const COLS = ['cases', 'clients', 'calls', 'tasks', 'quotes', 'suppliers', 'links', 'schedule', 'staff', 'payments', 'checks', 'groups', 'catalog', 'notes', 'approvals'];
+const COLS = ['cases', 'clients', 'calls', 'tasks', 'quotes', 'suppliers', 'links', 'schedule', 'staff', 'payments', 'checks', 'groups', 'catalog', 'notes', 'approvals', 'team'];
 let onChange = null; // the cloud hooks in here
 export function setChangeHook(fn) { onChange = fn; }
 

@@ -34,7 +34,7 @@ export function parseCommand(text, docs, people) {
     // a known person by name
     let bp = null, bl = 0;
     (people || []).forEach(p => (p.names || []).forEach(n => { const k = Office.normHe(n); if (k && k.length >= 3 && k.length > bl && Office.normHe(body).indexOf(k) >= 0) { bp = p; bl = k.length; } }));
-    if (bp) out.to = { name: bp.label, phone: bp.phone, email: bp.email };
+    if (bp) out.to = { name: bp.label, phone: bp.phone, email: bp.email, about: bp.about, id: bp.id };
   }
   if (SEND.test(t) || out.doc) out.kind = 'send';
   return out;
