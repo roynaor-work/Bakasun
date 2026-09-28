@@ -6,12 +6,13 @@ import { esc, field, empty, dialog, toast, openWhatsApp, copyText } from '../ui.
 import Office from '../logic/office.js';
 import { TASK } from '../logic/extra.js';
 import { isReceiptCommand } from '../logic/receipts.js';
+import { parseAgenda, agenda } from '../logic/agenda.js';
 import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage } from '../logic/commands.js';
 import { QUOTE_STATUS } from '../logic/quotes.js';
 import { subjects } from '../notes.js';
 import { files, shareFile, downloadFile, pdfText } from '../files.js';
 import { speechSupported, listen } from '../voice.js';
-import { wireDelete, isDeleteCommand } from '../recbox.js';
+import { wireDelete, isDeleteCommand, isDoneCommand } from '../recbox.js';
 import { DEFAULTS } from '../data/defaults.js';
 import { hasArabic, waLink } from '../logic/core.js';
 import { COMPANY_PAPERS } from '../data/docsList.js';
@@ -58,21 +59,49 @@ function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
   let stop = null;
   ta.oninput = () => { draft = ta.value; };
   dl.onchange = () => db.setting('dictLang', dl.value);
+  // The instruction runs only when she says "finished" or taps the "finished" button. Ten seconds of silence just stops
+  // the microphone; the text stays, and the next tap on "dictate" continues from there.
+  let manual = false; // "read" tapped while recording: the recording's own end must not run it a second time
   rec.onclick = () => {
     if (stop) { stop(); return; }
     if (!speechSupported()) { toast(t('noSpeech'), 3500); return; }
     const base = ta.value ? ta.value.replace(/\s+$/, '') + '\n' : '';
-    rec.classList.add('on'); rec.querySelector('span').textContent = t('stop');
+    rec.classList.add('on'); rec.querySelector('span').textContent = t('doneBtn'); manual = false;
     stop = listen(SPEECH[dl.value] || 'he-IL', text => { ta.value = base + text; draft = ta.value; }, (said, why, finals) => {
       stop = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate');
       const lastSaid = (finals || []).slice(-1)[0] || '';
-      if (isDeleteCommand(lastSaid)) { ta.value = (base + (finals || []).slice(0, -1).join(' ')).trim(); draft = ta.value; if (bin) bin.doDelete(); return; }
-      if (autoRun && said.trim() && ta.value.trim()) { toast(t('heardRunning'), 1500); onRead(ta.value, body.querySelector('#out')); }
-    }, { silence: autoRun ? 2500 : 0 });
+      const without = () => { ta.value = (base + (finals || []).slice(0, -1).join(' ')).trim(); draft = ta.value; };
+      if (isDeleteCommand(lastSaid)) { without(); if (bin) bin.doDelete(); return; }
+      if (manual) return;
+      const run = isDoneCommand(lastSaid) || why === 'stop';
+      if (isDoneCommand(lastSaid)) without();
+      if (!run) { toast(t('stoppedHint'), 4000); return; }
+      if (autoRun && ta.value.trim()) { toast(t('heardRunning'), 1500); onRead(ta.value, body.querySelector('#out')); }
+    }, { silence: 10000, stopOn: x => isDoneCommand(x) || isDeleteCommand(x) });
     if (!stop) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
   };
-  body.querySelector('#go').onclick = () => { if (stop) stop(); if (isDeleteCommand(ta.value)) { if (bin) bin.doDelete(); return; } onRead(ta.value, body.querySelector('#out')); };
+  body.querySelector('#go').onclick = () => { if (stop) { manual = true; stop(); } if (isDeleteCommand(ta.value)) { if (bin) bin.doDelete(); return; } onRead(ta.value, body.querySelector('#out')); };
   return ta;
+}
+
+/** "What do I have tomorrow?": tasks and reminders (with a done tick), events, calls. */
+function showAgenda(out, q) {
+  const draw = () => {
+    const a = agenda(db.snapshot(), q, new Date());
+    const when = q.key === 'today' ? t('agendaToday') : q.key === 'tomorrow' ? t('agendaTomorrow') : q.key === 'week' ? t('agendaWeek') : q.key === 'all' ? t('agendaAll') : Office.fmt(q.from);
+    const line = x => `<div class="row between" data-task="${esc(x.id)}"><span>${x.due && q.key !== 'today' && q.key !== 'tomorrow' && q.key !== 'day' ? esc(Office.fmt(x.due)) + ' · ' : ''}${x.time ? esc(x.time) + ' · ' : ''}${esc(x.title)}${x.who && x.who !== t('me') ? ' <span class="sub">' + esc(x.who) + '</span>' : ''}</span><button class="btn sm ok" data-done>✓</button></div>`;
+    const ev = c => `<div><a href="#/case/${esc(c.id)}">${esc(c.client)}</a> · ${esc(c.kind || '')}${c.date ? ' · ' + esc(Office.fmt(c.date)) : ''}${c.place ? ' · ' + esc(c.place) : ''}</div>`;
+    const cl = c => `<div><a href="#/calls">${esc(c.who || c.name || c.client || '')}</a>${c.about ? ' · ' + esc(c.about) : ''}</div>`;
+    const none = !a.tasks.length && !a.events.length && !a.calls.length;
+    out.innerHTML = `<div class="card stack"><div class="title">${esc(when)}</div>
+      ${none ? `<p class="hint">${esc(t('agendaNone', { when }))}</p>` : ''}
+      ${a.tasks.length ? `<div class="sub"><b>${esc(t('agendaTasks'))}</b></div>${a.tasks.map(line).join('')}` : ''}
+      ${a.events.length ? `<div class="sub"><b>${esc(t('agendaEvents'))}</b></div>${a.events.map(ev).join('')}` : ''}
+      ${a.calls.length ? `<div class="sub"><b>${esc(t('agendaCalls'))}</b></div>${a.calls.map(cl).join('')}` : ''}
+      <div class="row"><a class="btn sm" href="#/tasks">${esc(t('allTasks'))}</a><a class="btn sm ghost" href="#/today">${esc(t('today'))}</a></div></div>`;
+    out.querySelectorAll('[data-task]').forEach(el => { el.querySelector('[data-done]').onclick = () => { db.put('tasks', { id: el.dataset.task, status: TASK.done }); toast(t('taskDone')); draw(); }; });
+  };
+  draw();
 }
 
 /* ---------------- 1. send a document to someone ---------------- */
@@ -85,6 +114,8 @@ async function tabCommand(body, s, ctx) {
     .concat(db.list('contacts').map(x => ({ label: x.name, names: [x.name], phone: x.phone, email: x.email, about: 'contact', id: x.id })));
   inputBox(body, t('cmdHint'), t('cmdPh'), (text, out) => {
     if (isReceiptCommand(text)) { location.hash = '#/receipts/' + new Date().toISOString().slice(0, 7) + '/snap'; return; }
+    const q = parseAgenda(text, new Date());
+    if (q) { showAgenda(out, q); return; }
     const c = parseCommand(text, docs, peopleNow());
     if (c.kind === 'invoice') { mode = 'invoice'; draft = text; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'supplierQuote') { mode = 'supplierQuote'; preSupplier = c.supplier && c.supplier.about === 'supplier' ? c.supplier.id : ''; draft = ''; render({ root: body.closest('#app') }); return; }

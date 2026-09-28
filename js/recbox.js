@@ -2,8 +2,8 @@
    sits under the box. Saying only "delete" (מחקי / delete / efface) does the same as the tap. */
 import { t } from './i18n.js';
 import { esc, toast } from './ui.js';
-import { stash, peek, restore, minutesLeft, isDeleteCommand } from './logic/trash.js';
-export { isDeleteCommand };
+import { stash, peek, restore, minutesLeft, isDeleteCommand, isDoneCommand } from './logic/trash.js';
+export { isDeleteCommand, isDoneCommand };
 
 const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"/></svg>';
 

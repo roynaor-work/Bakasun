@@ -73,7 +73,7 @@ export function render({ root }) {
   const ib = root.querySelector('#installBtn'); if (ib) ib.onclick = async () => { const p = window.__installPrompt; if (!p) return; p.prompt(); try { await p.userChoice; } catch (e) { /* */ } window.__installPrompt = null; render({ root }); };
   const il = root.querySelector('#installLater'); if (il) il.onclick = () => { try { sessionStorage.setItem('bakasun.installLater', '1'); } catch (e) { /* */ } root.querySelector('#installCard').remove(); };
   document.addEventListener('bakasun:installable', () => { if (location.hash.replace(/^#\/?/, '').startsWith('today') || !location.hash) render({ root }); }, { once: true });
-  root.querySelectorAll('[data-task]').forEach(el => el.querySelector('[data-done]').onclick = () => { db.put('tasks', { id: el.dataset.task, status: 'בוצע' }); render({ root }); });
+  root.querySelectorAll('[data-task]').forEach(el => el.querySelector('[data-done]').onclick = () => { db.put('tasks', { id: el.dataset.task, status: 'done' }); render({ root }); });
   const ho = root.querySelector('#handover'); if (ho) ho.onclick = async () => {
     const open = {
       upcoming: up.map(x => { const c = db.get('cases', x.caseId) || {}; return [c.client, c.kind, c.date ? Office.fmt(c.date) : '', c.place].filter(Boolean).join(' · '); }),

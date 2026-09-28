@@ -32,6 +32,8 @@ export function listen(langCode, onText, onEnd, opts) {
       interim = gotFinal ? '' : last;
       if (gotFinal && finals[finals.length - 1] !== gotFinal) { finals.push(gotFinal); interim = ''; }
       emit();
+      // a closing word ("finished", "delete") ends the listening at once, no need to wait for silence
+      if (gotFinal && opts && typeof opts.stopOn === 'function' && opts.stopOn(gotFinal)) { why = 'word'; active = false; clearTimeout(timer); try { rec.stop(); } catch (e) { /* already stopped */ } }
     };
     rec.onerror = ev => {
       // "no-speech" and "aborted" are normal between sentences: keep listening; anything else ends the dictation

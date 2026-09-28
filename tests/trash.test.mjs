@@ -1,6 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeleteCommand, stash, peek, restore, minutesLeft, KEEP_MS } from '../js/logic/trash.js';
+import { isDoneCommand, isDeleteCommand, stash, peek, restore, minutesLeft, KEEP_MS } from '../js/logic/trash.js';
+
+test('"finished" alone ends the recording and runs; a sentence with the word does not', () => {
+  ['סיימתי', 'זהו', 'done', 'Finished.', "that's it", 'terminé', 'j’ai fini', 'c’est tout'].forEach(x => assert.ok(isDoneCommand(x), x));
+  ['סיימתי את ההצעה', 'done with the hotel', 'la visite est terminée'].forEach(x => assert.ok(!isDoneCommand(x), x));
+});
 
 const mem = () => { const m = {}; return { getItem: k => (k in m ? m[k] : null), setItem: (k, v) => { m[k] = String(v); }, removeItem: k => { delete m[k]; } }; };
 
