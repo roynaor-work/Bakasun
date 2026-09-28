@@ -1,8 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { scaleTarget, buildItems, summarize, streak, stats, earned, fmtTime } from '../workout/js/logic.js';
+import { scaleTarget, buildItems, summarize, streak, stats, earned, fmtTime, todayProgram, weekDays, suggestLevel } from '../workout/js/logic.js';
 import { EXERCISES, byId } from '../workout/js/exercises.js';
-import { PROGRAMS } from '../workout/js/programs.js';
+import { PROGRAMS, DEFAULT_PLAN, programById } from '../workout/js/programs.js';
 import { poseAt, cycleMs, lerpPose } from '../workout/js/figure.js';
 
 test('scaleTarget by level', () => {
@@ -14,17 +14,39 @@ test('scaleTarget by level', () => {
   assert.equal(scaleTarget(2, 'easy'), 3);
 });
 
-test('buildItems expands rounds and overrides', () => {
-  const jump = PROGRAMS.find(p => p.id === 'jump');
+test('buildItems expands blocks, rounds and overrides', () => {
+  const jump = programById['jump-a'];
   const items = buildItems(jump, byId, 'normal');
-  assert.equal(items.length, jump.items.length * 2);
-  assert.equal(items[0].round, 1); assert.equal(items.at(-1).round, 2);
-  const quick = PROGRAMS.find(p => p.id === 'quick');
+  const main = items.filter(i => i.block === 'האימון');
+  assert.equal(main.length, jump.blocks[1].items.length * 2);
+  assert.equal(items[0].block, 'חימום'); assert.equal(items.at(-1).block, 'מתיחות');
+  assert.equal(main[0].round, 1); assert.equal(main.at(-1).round, 2); assert.equal(main[0].rounds, 2);
+  const quick = programById['quick'];
   for (const i of buildItems(quick, byId)) { assert.equal(i.type, 'time'); assert.equal(i.target, 30); }
+  // תוכנית בלי בלוקים (אימון חופשי)
+  const free = buildItems({ items: ['plank', 'squats'] }, byId, 'easy');
+  assert.deepEqual(free.map(i => [i.block, i.target]), [['האימון', 20], ['האימון', 11]]);
+});
+
+test('weekly plan: today, week strip, level suggestion', () => {
+  const sun = new Date(2026, 8, 27, 9), sat = new Date(2026, 9, 3, 9);
+  assert.equal(todayProgram(DEFAULT_PLAN, sun), 'jump-a');
+  assert.equal(todayProgram(DEFAULT_PLAN, sat), '');
+  assert.equal(Object.values(DEFAULT_PLAN).filter(id => id.startsWith('jump')).length, 3);
+  for (const id of Object.values(DEFAULT_PLAN)) if (id) assert.ok(programById[id], id);
+  const tue = new Date(2026, 8, 29, 18);
+  const w = weekDays([{ date: new Date(2026, 8, 27, 10).toISOString() }], tue);
+  assert.equal(w.length, 7); assert.equal(w[0].done, true); assert.equal(w[2].today, true); assert.equal(w[1].past, true); assert.equal(w[3].past, false);
+  const perfect = () => ({ items: Array.from({ length: 6 }, () => ({ type: 'reps', target: 10, done: 10 })) });
+  assert.equal(suggestLevel([perfect(), perfect(), perfect()], 'normal'), 'hard');
+  assert.equal(suggestLevel([perfect(), perfect(), perfect()], 'hard'), null);
+  assert.equal(suggestLevel([perfect(), perfect()], 'easy'), null);
+  const partial = { items: [{ type: 'reps', target: 10, done: 5 }, ...perfect().items] };
+  assert.equal(suggestLevel([perfect(), partial, perfect()], 'easy'), null);
 });
 
 test('every program refers to real exercises; every exercise has a valid loop', () => {
-  for (const p of PROGRAMS) for (const id of p.items) assert.ok(byId[id], id);
+  for (const p of PROGRAMS) { assert.ok(p.blocks?.length, p.id); for (const b of p.blocks) for (const id of b.items) assert.ok(byId[id], p.id + ':' + id); }
   for (const ex of EXERCISES) {
     assert.ok(cycleMs(ex.frames) > 0, ex.id);
     const p = poseAt(ex.frames, 123);

@@ -1,6 +1,6 @@
 // אחסון מקומי בדפדפן. הנתונים נשארים במכשיר; מחיקה רק דרך ההגדרות ובאישור.
 const KEY = 'kidfit.v1';
-const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true }, sessions: [] };
+const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true, plan: null }, sessions: [] };
 
 function load() {
   try {

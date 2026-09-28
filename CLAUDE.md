@@ -46,4 +46,5 @@ https://claude.ai/artifact/WTbeA5XjmBfLvsW18wxPvR
 ## אפליקציה נפרדת: האימון שלי (`workout/`)
 - אפליקציית אימונים לבן של רועי (28/09/2026). עצמאית לגמרי, לא נוגעת בקוד של באקה סאן.
 - כתובת: https://roynaor-work.github.io/Bakasun/workout/ . נתונים ב-localStorage במכשיר בלבד.
-- `js/exercises.js` תרגילים ופוזות, `js/figure.js` מנוע אנימציה של דמות מקלות, `js/logic.js` היגיון טהור (נבדק ב-`tests/workout.test.mjs`), `js/app.js` המסכים.
+- 36 תרגילים בשש קטגוריות, 8 תוכניות עם חימום/אימון/מתיחות, תוכנית שבועית (3 ניתור, רגליים, עליון, בטן, מנוחה).
+- `js/exercises.js` תרגילים ופוזות, `js/programs.js` תוכניות ותוכנית שבועית, `js/figure.js` מנוע אנימציה של דמות מקלות, `js/logic.js` היגיון טהור (נבדק ב-`tests/workout.test.mjs`), `js/app.js` המסכים.

@@ -36,6 +36,8 @@ export class Figure {
     svg.innerHTML = '';
     this.g = el('g', { class: 'fig' });
     svg.appendChild(el('line', { x1: 10, y1: 182, x2: 190, y2: 182, class: 'ground' }));
+    this.prop = el('rect', { class: 'prop', x: 0, y: 0, width: 0, height: 0, rx: 4 });
+    svg.appendChild(this.prop);
     this.rope = el('path', { class: 'rope', d: '' });
     this.g.appendChild(this.rope);
     this.far = { arm: this.limb('far'), leg: this.limb('far') };
@@ -60,12 +62,21 @@ export class Figure {
     if (p.rope != null) this.rope.setAttribute('d', `M ${p.lh[0]} ${p.lh[1]} Q 100 ${p.rope} ${p.rh[0]} ${p.rh[1]}`);
     else this.rope.setAttribute('d', '');
   }
-  play(frames, speed = 1) {
+  setProp(prop) {
+    const r = this.prop;
+    if (!prop) { r.setAttribute('width', 0); return; }
+    if (prop.type === 'box') { r.setAttribute('x', prop.x); r.setAttribute('y', prop.y); r.setAttribute('width', prop.w); r.setAttribute('height', prop.h); }
+    else if (prop.type === 'wall') { r.setAttribute('x', prop.x - 4); r.setAttribute('y', 30); r.setAttribute('width', 5); r.setAttribute('height', 152); }
+  }
+  // ex: תרגיל שלם (frames + prop), או רק frames
+  play(ex, speed = 1) {
+    const frames = Array.isArray(ex) ? ex : ex.frames;
+    this.setProp(Array.isArray(ex) ? null : ex.prop);
     this.stop(); this.frames = frames; this.speed = speed;
     const start = performance.now();
     const tick = now => { this.draw(poseAt(frames, (now - start) * this.speed)); this.raf = requestAnimationFrame(tick); };
     this.raf = requestAnimationFrame(tick);
   }
-  still(frames) { this.stop(); this.draw(frames[0][0]); }
+  still(ex) { const frames = Array.isArray(ex) ? ex : ex.frames; this.setProp(Array.isArray(ex) ? null : ex.prop); this.stop(); this.draw(frames[0][0]); }
   stop() { if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0; }
 }

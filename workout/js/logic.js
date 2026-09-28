@@ -7,19 +7,44 @@ export function scaleTarget(base, level = 'normal', type = 'reps') {
   return Math.max(type === 'time' ? 10 : 3, v);
 }
 
-// בונה את רשימת הפריטים לאימון מתוך תוכנית (או רשימת תרגילים חופשית)
+// בונה את רשימת הפריטים לאימון מתוך תוכנית: בלוקים (חימום / האימון / מתיחות), כל בלוק אולי בכמה סבבים.
+// תוכנית בלי בלוקים (אימון חופשי, תרגיל בודד) היא בלוק אחד.
 export function buildItems(program, catalog, level = 'normal') {
   const out = [];
-  const rounds = program.rounds || 1;
-  for (let r = 1; r <= rounds; r++) {
-    for (const id of program.items) {
-      const ex = catalog[id]; if (!ex) continue;
-      const type = program.override?.type || ex.type;
-      const base = program.override?.base ?? ex.base;
-      out.push({ exId: id, name: ex.name, type, target: scaleTarget(base, level, type), round: r });
+  const blocks = program.blocks || [{ name: 'האימון', items: program.items, rounds: program.rounds }];
+  for (const b of blocks) {
+    const rounds = b.rounds || 1;
+    for (let r = 1; r <= rounds; r++) {
+      for (const id of b.items) {
+        const ex = catalog[id]; if (!ex) continue;
+        const main = b.name === 'האימון';
+        const type = main && program.override?.type ? program.override.type : ex.type;
+        const base = main && program.override?.base != null ? program.override.base : ex.base;
+        out.push({ exId: id, name: ex.name, type, target: scaleTarget(base, level, type), round: r, rounds, block: b.name });
+      }
     }
   }
   return out;
+}
+
+// מה האימון של היום לפי התוכנית השבועית. ריק = יום מנוחה.
+export const todayProgram = (plan, date = new Date()) => (plan && plan[new Date(date).getDay()]) || '';
+
+// השבוע הנוכחי (ראשון עד שבת): לכל יום, אם היה אימון
+export function weekDays(sessions, today = new Date()) {
+  const start = new Date(today); start.setDate(start.getDate() - start.getDay());
+  const trained = new Set(sessions.map(s => dayKey(s.date)));
+  return Array.from({ length: 7 }, (_, i) => { const d = addDays(start, i); return { day: i, date: d, key: dayKey(d), done: trained.has(dayKey(d)), today: dayKey(d) === dayKey(today), past: d < today && dayKey(d) !== dayKey(today) }; });
+}
+
+// אם שלושת האימונים האחרונים היו מושלמים (3 כוכבים), מציעים לעלות רמה
+export function suggestLevel(sessions, level) {
+  const order = ['easy', 'normal', 'hard'];
+  const i = order.indexOf(level);
+  if (i < 0 || i === order.length - 1) return null;
+  const last = sessions.slice(-3);
+  if (last.length < 3) return null;
+  return last.every(s => (s.items || []).length >= 5 && summarize(s).stars === 3) ? order[i + 1] : null;
 }
 
 export const dayKey = d => { const x = new Date(d); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`; };

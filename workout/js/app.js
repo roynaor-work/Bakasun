@@ -1,14 +1,15 @@
-// האפליקציה: ניתוב, מסכים, מהלך אימון (תרגיל -> מנוחה -> תרגיל -> סיכום), היסטוריה והגדרות.
+// האפליקציה: ניתוב, מסכים, מהלך אימון (חימום -> תרגילים -> מנוחות -> מתיחות -> סיכום), מעקב והגדרות.
 import { EXERCISES, CATS, byId } from './exercises.js';
-import { PROGRAMS, programById } from './programs.js';
-import { Figure } from './figure.js';
+import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js';
+import { Figure, cycleMs } from './figure.js';
 import { store } from './store.js';
-import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget } from './logic.js';
+import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel } from './logic.js';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const go = h => { location.hash = h; };
+const plan = () => store.profile.plan || DEFAULT_PLAN;
 
 let figures = [];
 function mount(html, full = false) {
@@ -18,9 +19,11 @@ function mount(html, full = false) {
   nav.classList.toggle('hidden', full);
   window.scrollTo(0, 0);
 }
-function fig(svg, ex, speed = 1) { const f = new Figure(svg); f.play(ex.frames, speed); figures.push(f); return f; }
-function figs(sel = 'svg[data-ex]') { app.querySelectorAll(sel).forEach(s => fig(s, byId[s.dataset.ex])); }
+function fig(svg, ex, speed = 1) { const f = new Figure(svg); f.play(ex, speed); figures.push(f); return f; }
+function figs(sel = 'svg[data-ex]') { return [...app.querySelectorAll(sel)].map(s => fig(s, byId[s.dataset.ex])); }
 const figSvg = (exId, cls = '') => `<svg class="figure ${cls}" data-ex="${exId}" aria-hidden="true"></svg>`;
+const catPill = cat => `<span class="pill ${cat}">${CATS[cat].emoji} ${CATS[cat].name}</span>`;
+const stepsHtml = ex => `<ol class="steps">${ex.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol>`;
 
 // ---- צליל ----
 let ac;
@@ -54,18 +57,24 @@ function route() {
   renderNav(path);
 }
 function renderNav(path) {
-  const tabs = [['home', '🏠', 'בית'], ['exercises', '🤸', 'תרגילים'], ['history', '📈', 'מעקב'], ['settings', '⚙️', 'הגדרות']];
+  const tabs = [['home', '🏠', 'היום'], ['exercises', '🤸', 'תרגילים'], ['history', '📈', 'מעקב'], ['settings', '⚙️', 'הגדרות']];
   nav.innerHTML = tabs.map(([k, i, n]) => `<a href="#/${k}" class="${(path || 'home') === k ? 'on' : ''}"><span class="i">${i}</span>${n}</a>`).join('');
 }
 window.addEventListener('hashchange', route);
 
 const name = () => store.profile.name.trim();
 const hi = () => name() ? `היי, ${esc(name())}!` : 'היי, אלוף!';
+const blocksText = p => (p.blocks || []).map(b => b.name === 'האימון' ? `${b.items.length} תרגילים${b.rounds > 1 ? ` × ${b.rounds} סבבים` : ''}` : b.name).join(' ← ');
 
-// ---- בית ----
+// ---- בית: האימון של היום ----
 function home() {
   const st = stats(store.sessions);
-  const today = st.week.at(-1).count;
+  const todayCount = st.week.at(-1).count;
+  const now = new Date();
+  const todayId = todayProgram(plan(), now);
+  const today = todayId ? programById[todayId] : null;
+  const week = weekDays(store.sessions, now);
+  const nextLevel = suggestLevel(store.sessions, store.profile.level);
   mount(`
   <div class="stack">
     <section class="hero">
@@ -73,26 +82,40 @@ function home() {
         <h1>${hi()}</h1>
         <span class="pill">🔥 ${st.streak} ימים ברצף</span>
       </div>
-      <p class="muted" style="margin-top:6px">${today ? `היום כבר עשית ${today === 1 ? 'אימון אחד' : today + ' אימונים'}. כל הכבוד! עוד אחד?` : 'עוד לא התאמנת היום. בוחרים אימון ויאללה!'}</p>
-      <div class="row wrap" style="margin-top:12px">
-        <span class="pill">🏋️ ${st.workouts} אימונים</span>
-        <span class="pill">⭐ ${st.stars} כוכבים</span>
-        <span class="pill">⏱️ ${Math.round(st.totalDuration / 60)} דקות</span>
-      </div>
+      <p class="muted" style="margin-top:6px">יום ${DAY_NAMES[now.getDay()]}. ${todayCount ? `היום כבר עשית ${todayCount === 1 ? 'אימון' : todayCount + ' אימונים'}. כל הכבוד!` : today ? 'היום זה יום ' + esc(today.name.split(':')[0]) + '. יאללה!' : 'היום יום מנוחה. מגיע לך.'}</p>
     </section>
-    <h2>בוחרים אימון</h2>
-    ${PROGRAMS.map(p => `
+
+    <div class="weekstrip">
+      ${week.map(d => { const pid = plan()[d.day]; const p = pid && programById[pid]; return `<div class="wd ${d.today ? 'today' : ''} ${d.done ? 'done' : ''} ${d.past && !d.done && p ? 'missed' : ''}"><span>${DAY_NAMES[d.day].slice(0, 2)}</span><span class="e">${d.done ? '✅' : p ? p.emoji : '😴'}</span></div>`; }).join('')}
+    </div>
+
+    <h2>${todayCount ? 'עוד אחד היום?' : 'האימון של היום'}</h2>
+    ${today ? `
+      <div class="card tap prog ${today.cat} today" data-go="#/start/${today.id}">
+        <div class="emoji">${today.emoji}</div>
+        <div><h3>${esc(today.name)}</h3><p class="muted small">${esc(blocksText(today))}</p></div>
+        <span class="pill solid">${today.minutes} דק'</span>
+      </div>
+      <button class="btn primary big" data-go="#/start/${today.id}">מתחילים את האימון של היום 🚀</button>`
+    : `<div class="card"><h3>😴 יום מנוחה</h3><p class="muted small">השרירים גדלים דווקא במנוחה. אם בכל זאת בא לך לזוז: מתיחות או אימון 7 דקות קל.</p></div>
+       <div class="card tap prog jump" data-go="#/start/quick"><div class="emoji">⏱️</div><div><h3>אימון 7 דקות</h3><p class="muted small">קצר וקל.</p></div><span class="pill solid">7 דק'</span></div>`}
+
+    ${nextLevel ? `<div class="card row" style="border:2px solid var(--star)"><span style="font-size:32px">🏅</span><div class="grow"><b>שלושה אימונים מושלמים ברצף!</b><p class="muted small">נראה שאתה מוכן לרמה "${LEVELS[nextLevel].name}".</p></div><button class="btn chip on" id="levelup">לעלות רמה</button></div>` : ''}
+
+    <h2>כל האימונים</h2>
+    ${PROGRAMS.filter(p => p !== today).map(p => `
       <div class="card tap prog ${p.cat}" data-go="#/start/${p.id}">
         <div class="emoji">${p.emoji}</div>
         <div><h3>${esc(p.name)}</h3><p class="muted small">${esc(p.desc)}</p></div>
         <span class="pill solid">${p.minutes} דק'</span>
       </div>`).join('')}
-    <div class="card tap prog strength" data-go="#/free">
+    <div class="card tap prog upper" data-go="#/free">
       <div class="emoji">🎯</div>
-      <div><h3>אימון חופשי</h3><p class="muted small">בוחר לבד את התרגילים ואת הכמות.</p></div>
+      <div><h3>אימון חופשי</h3><p class="muted small">בוחר לבד את התרגילים.</p></div>
       <span class="pill solid">אתה קובע</span>
     </div>
   </div>`);
+  const lu = $('#levelup'); if (lu) lu.onclick = () => { store.setProfile({ level: nextLevel }); home(); };
 }
 
 // ---- תצוגה מקדימה והתחלה ----
@@ -100,15 +123,21 @@ function start(id) {
   const program = programById[id]; if (!program) return go('#/home');
   const level = store.profile.level;
   const items = buildItems(program, byId, level);
+  let lastBlock = null;
   mount(`
   <div class="stack">
     <div class="row between"><button class="btn icon ghost" data-go="#/home" aria-label="חזרה">→</button><h1 class="grow">${program.emoji} ${esc(program.name)}</h1></div>
-    <p class="muted">${esc(program.desc)} בערך ${program.minutes} דקות, ${items.length} תרגילים.</p>
+    <p class="muted">${esc(program.desc)} בערך ${program.minutes} דקות.</p>
     <div class="card">
       <div class="row between wrap"><b>רמה</b><div class="row">${Object.entries(LEVELS).map(([k, v]) => `<button class="btn chip ${k === level ? 'on' : ''}" data-level="${k}">${v.name}</button>`).join('')}</div></div>
     </div>
-    <div class="card list">
-      ${items.map(i => `<div class="item">${figSvg(i.exId, 'mini')}<div class="grow"><b>${esc(i.name)}</b>${program.rounds > 1 ? `<span class="muted small"> · סבב ${i.round}</span>` : ''}</div><span class="pill solid">${targetText(i)}</span></div>`).join('')}
+    <div class="card">
+      ${items.map(i => {
+        const key = i.block + (i.rounds > 1 ? ' ' + i.round : '');
+        const head = key !== lastBlock ? `<div class="blockhead">${esc(i.block)}${i.rounds > 1 ? ` · סבב ${i.round} מתוך ${i.rounds}` : ''}</div>` : '';
+        lastBlock = key;
+        return head + `<div class="item">${figSvg(i.exId, 'mini')}<div class="grow"><b>${esc(i.name)}</b></div><span class="pill solid">${targetText(i)}</span></div>`;
+      }).join('')}
     </div>
     <button class="btn primary big" id="begin">יאללה, מתחילים! 🚀</button>
   </div>`);
@@ -125,7 +154,7 @@ function free() {
   mount(`
   <div class="stack">
     <div class="row between"><button class="btn icon ghost" data-go="#/home" aria-label="חזרה">→</button><h1 class="grow">אימון חופשי</h1></div>
-    <p class="muted">מסמנים את התרגילים שרוצים. אפשר לשנות את הכמות בזמן האימון.</p>
+    <p class="muted">מסמנים את התרגילים שרוצים, בסדר שרוצים. אפשר לשנות את הכמות בזמן האימון.</p>
     ${Object.entries(CATS).map(([cat, c]) => `
       <h2>${c.emoji} ${c.name}</h2>
       <div class="exgrid">
@@ -173,10 +202,10 @@ function exerciseDetail(id) {
   const target = scaleTarget(ex.base, store.profile.level, ex.type);
   mount(`
   <div class="stack">
-    <div class="row between"><button class="btn icon ghost" data-go="#/exercises" aria-label="חזרה">→</button><h1 class="grow">${esc(ex.name)}</h1><span class="pill ${ex.cat}">${CATS[ex.cat].name}</span></div>
+    <div class="row between"><button class="btn icon ghost" data-go="#/exercises" aria-label="חזרה">→</button><h1 class="grow">${esc(ex.name)}</h1>${catPill(ex.cat)}</div>
     <div class="stage">${figSvg(ex.id)}</div>
-    <div class="tip">💡 ${esc(ex.tip)}</div>
     <div class="row wrap"><button class="btn chip" data-speed="0.5">לאט</button><button class="btn chip on" data-speed="1">רגיל</button><button class="btn chip" data-speed="1.5">מהר</button></div>
+    <div class="card stack"><h3>איך עושים</h3>${stepsHtml(ex)}<div class="tip">👀 ${esc(ex.tip)}</div></div>
     <div class="tiles">
       <div class="tile"><b>${target}</b>${ex.type === 'time' ? 'שניות ברמה שלך' : 'חזרות ברמה שלך'}</div>
       <div class="tile hot"><b>${p ? p.best : '–'}</b>השיא שלך</div>
@@ -185,7 +214,7 @@ function exerciseDetail(id) {
     <button class="btn primary big" id="solo">לעשות עכשיו רק את זה 💥</button>
   </div>`);
   const f = fig(app.querySelector('svg[data-ex]'), ex);
-  app.querySelectorAll('[data-speed]').forEach(b => b.onclick = () => { app.querySelectorAll('[data-speed]').forEach(x => x.classList.remove('on')); b.classList.add('on'); f.play(ex.frames, +b.dataset.speed); });
+  app.querySelectorAll('[data-speed]').forEach(b => b.onclick = () => { app.querySelectorAll('[data-speed]').forEach(x => x.classList.remove('on')); b.classList.add('on'); f.play(ex, +b.dataset.speed); });
   $('#solo').onclick = () => {
     const program = { id: 'solo', name: ex.name, emoji: '💥', items: [ex.id], rounds: 1, minutes: 1 };
     beginWorkout(program, buildItems(program, byId, store.profile.level));
@@ -195,7 +224,7 @@ function exerciseDetail(id) {
 // ---- מהלך האימון ----
 let W = null, tick = 0;
 function beginWorkout(program, items) {
-  W = { program, items: items.map(i => ({ ...i, done: 0, skipped: false })), idx: 0, phase: 'exercise', startedAt: Date.now(), timer: null, saved: false };
+  W = { program, items: items.map(i => ({ ...i, done: 0, skipped: false })), idx: 0, phase: 'exercise', startedAt: Date.now(), saved: false };
   go('#/workout');
 }
 
@@ -208,8 +237,8 @@ function workoutScreen() {
 
 function exercisePhase() {
   const it = W.items[W.idx], ex = byId[it.exId];
-  const rounds = W.program.rounds || 1;
   const pct = Math.round(100 * W.idx / W.items.length);
+  const blockLabel = it.block === 'האימון' ? (it.rounds > 1 ? `סבב ${it.round} מתוך ${it.rounds}` : 'האימון') : it.block;
   mount(`
   <div class="stack">
     <div class="topbar">
@@ -217,31 +246,29 @@ function exercisePhase() {
       <div><div class="center small muted">${W.idx + 1} מתוך ${W.items.length} · ${esc(W.program.name)}</div><div class="bar"><i style="width:${pct}%"></i></div></div>
       <span></span>
     </div>
-    <div class="stage">
-      <span class="pill ${ex.cat} cat">${CATS[ex.cat].emoji} ${CATS[ex.cat].name}</span>
-      ${rounds > 1 ? `<span class="pill solid rounds">סבב ${it.round}/${rounds}</span>` : ''}
-      ${figSvg(ex.id)}
-    </div>
+    <div class="row between"><span class="pill block">${esc(blockLabel)}</span>${catPill(ex.cat)}</div>
+    <div class="stage">${figSvg(ex.id)}</div>
     <h1 class="center">${esc(ex.name)}</h1>
-    <div class="tip">💡 ${esc(ex.tip)}</div>
+    <div class="card stack" style="gap:8px">${stepsHtml(ex)}<div class="tip">👀 ${esc(ex.tip)}</div></div>
     ${it.type === 'time' ? timeBlock(it) : repsBlock(it)}
     <div class="row">
       <button class="btn ghost grow" id="skip">דילוג ⏭️</button>
       <button class="btn ghost" id="prev" ${W.idx ? '' : 'disabled'}>הקודם</button>
     </div>
   </div>`, true);
-  figs();
+  const [mainFig] = figs();
   $('#quit').onclick = quit;
   $('#skip').onclick = () => finishItem(0, true);
   $('#prev').onclick = () => { if (W.idx) { W.idx--; W.phase = 'exercise'; workoutScreen(); } };
-  if (it.type === 'time') wireTimer(it); else wireReps(it);
+  if (it.type === 'time') wireTimer(it); else wireReps(it, ex, mainFig);
 }
 
 function repsBlock(it) {
   return `
-  <div class="card center stack">
+  <div class="card center stack" id="repcard">
     <div class="target">${it.target} <span class="small muted" style="font-size:18px">חזרות</span></div>
-    <p class="muted small">כמה עשית בפועל? (אפשר לשנות)</p>
+    <button class="btn primary" id="countme">🔢 ספור איתי</button>
+    <p class="muted small" id="rephint">עושים יחד עם הדמות והמספר עולה לבד. או פשוט מסמנים כמה עשית:</p>
     <div class="stepper">
       <button class="btn icon" id="minus" aria-label="פחות">−</button>
       <div class="n" id="count">${it.done || it.target}</div>
@@ -250,12 +277,24 @@ function repsBlock(it) {
     <button class="btn ok big" id="did">עשיתי! ✅</button>
   </div>`;
 }
-function wireReps(it) {
-  let n = it.done || it.target;
+function wireReps(it, ex, mainFig) {
+  let n = it.done || it.target, counting = false;
   const show = () => { $('#count').textContent = n; };
-  $('#minus').onclick = () => { n = Math.max(0, n - 1); show(); };
-  $('#plus').onclick = () => { n++; show(); };
-  $('#did').onclick = () => finishItem(n, false);
+  const stopCount = () => { clearInterval(tick); tick = 0; counting = false; $('#repcard').classList.remove('counting'); $('#countme').textContent = '🔢 ספור איתי'; };
+  $('#countme').onclick = () => {
+    if (counting) return stopCount();
+    counting = true; n = 0; show();
+    mainFig.play(ex, 1); // מתחילים את הסרטון מההתחלה כדי שהספירה תתאים לתנועה
+    $('#repcard').classList.add('counting'); $('#countme').textContent = '⏹️ עצור ספירה';
+    tick = setInterval(() => {
+      n++; show();
+      if (n >= it.target) { stopCount(); fanfare(); $('#did').classList.add('pop'); }
+      else beep(780, 70);
+    }, cycleMs(ex.frames));
+  };
+  $('#minus').onclick = () => { if (counting) stopCount(); n = Math.max(0, n - 1); show(); };
+  $('#plus').onclick = () => { if (counting) stopCount(); n++; show(); };
+  $('#did').onclick = () => { stopCount(); finishItem(n, false); };
 }
 
 function timeBlock(it) {
@@ -272,7 +311,7 @@ function timeBlock(it) {
 }
 function wireTimer(it) {
   const c = 2 * Math.PI * 84;
-  const T = W.timer = { left: it.target, running: false, endAt: 0 };
+  const T = { left: it.target, running: false, endAt: 0 };
   const paint = () => {
     $('#clock').textContent = fmtTime(Math.ceil(T.left));
     $('#ringfill').style.strokeDashoffset = c * (1 - T.left / it.target);
@@ -298,7 +337,9 @@ function finishItem(done, skipped) {
   if (!skipped && done > 0) beep(990, 120);
   if (W.idx >= W.items.length - 1) { W.phase = 'done'; return workoutScreen(); }
   W.idx++;
-  W.phase = skipped || !store.profile.rest ? 'exercise' : 'rest';
+  const next = W.items[W.idx];
+  // מנוחה רק בתוך בלוק האימון עצמו; בחימום ובמתיחות ממשיכים ישר
+  W.phase = skipped || !store.profile.rest || it.block !== 'האימון' || next.block !== 'האימון' ? 'exercise' : 'rest';
   workoutScreen();
 }
 
@@ -328,7 +369,7 @@ function restPhase() {
 function saveSession() {
   if (W.saved) return null;
   const s = { id: uid(), date: new Date().toISOString(), programId: W.program.id, programName: W.program.name, emoji: W.program.emoji,
-    duration: Math.round((Date.now() - W.startedAt) / 1000), items: W.items.map(i => ({ exId: i.exId, name: i.name, type: i.type, target: i.target, done: i.done, round: i.round })) };
+    duration: Math.round((Date.now() - W.startedAt) / 1000), items: W.items.map(i => ({ exId: i.exId, name: i.name, type: i.type, target: i.target, done: i.done, round: i.round, block: i.block })) };
   const before = earned(stats(store.sessions));
   store.addSession(s); W.saved = true;
   const after = earned(stats(store.sessions));
@@ -343,6 +384,8 @@ function donePhase() {
   if (res && sum.stars) { fanfare(); confetti(); }
   const st = stats(store.sessions);
   const cheer = sum.stars === 3 ? 'מושלם! עשית את כל האימון עד הסוף!' : sum.stars === 2 ? 'כל הכבוד! רוב האימון בכיס.' : sum.stars === 1 ? 'התחלה טובה. בפעם הבאה עוד קצת!' : 'לא נורא, בפעם הבאה מנסים שוב.';
+  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+  const nextId = todayProgram(plan(), tomorrow), nextP = nextId && programById[nextId];
   mount(`
   <div class="stack">
     <section class="hero center pop">
@@ -356,12 +399,11 @@ function donePhase() {
       ${sum.reps ? `<div class="tile hot"><b>${sum.reps}</b>חזרות</div>` : ''}
       ${sum.seconds ? `<div class="tile hot"><b>${sum.seconds}</b>שניות עבודה</div>` : ''}
       <div class="tile"><b>🔥 ${st.streak}</b>ימים ברצף</div>
+      <div class="tile next"><b>${nextP ? nextP.emoji + ' ' + esc(nextP.name.split(':')[0]) : '😴 מנוחה'}</b>מחר</div>
     </div>
     ${newBadges.length ? `<h2>תג חדש! 🎉</h2><div class="badges">${newBadges.map(id => { const b = BADGES.find(x => x.id === id); return `<div class="badge pop"><span class="e">${b.emoji}</span><b>${b.name}</b><br>${b.desc}</div>`; }).join('')}</div>` : ''}
     <div class="card list">${itemsList(s)}</div>
-    <div class="row">
-      <button class="btn primary big" data-go="#/home">לדף הבית 🏠</button>
-    </div>
+    <button class="btn primary big" data-go="#/home">לדף הבית 🏠</button>
     <button class="btn ghost big" data-go="#/history">לראות את המעקב 📈</button>
   </div>`, false);
   W = null;
@@ -406,7 +448,7 @@ function history() {
     ${sessions.length ? sessions.map(s => { const sum = summarize(s); return `
       <div class="card" data-sess="${s.id}">
         <div class="row between tap" data-toggle="${s.id}">
-          <div><b>${s.emoji || '🏋️'} ${esc(s.programName)}</b><div class="muted small">${fmtDate(s.date)} · ${fmtTime(sum.duration)} · ${sum.doneCount}/${sum.total} תרגילים</div></div>
+          <div><b>${s.emoji || '🏋️'} ${esc(s.programName)}</b><div class="muted small">${fmtDate(s.date)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים</div></div>
           <span style="color:var(--star);font-size:22px">${'★'.repeat(sum.stars)}</span>
         </div>
         <div class="list" id="d-${s.id}" hidden style="margin-top:10px">${itemsList(s)}<div class="item"><button class="btn chip danger" data-del="${s.id}">מחיקת האימון</button></div></div>
@@ -418,7 +460,7 @@ function history() {
 
 // ---- הגדרות ----
 function settings() {
-  const p = store.profile;
+  const p = store.profile, pl = plan();
   mount(`
   <div class="stack">
     <h1>הגדרות ⚙️</h1>
@@ -427,6 +469,12 @@ function settings() {
       <label class="field">רמה<select id="level">${Object.entries(LEVELS).map(([k, v]) => `<option value="${k}" ${k === p.level ? 'selected' : ''}>${v.name} (${Math.round(v.mult * 100)}% מהכמות)</option>`).join('')}</select></label>
       <label class="field">מנוחה בין תרגילים (שניות)<select id="rest">${[0, 10, 15, 20, 30, 45].map(n => `<option value="${n}" ${n === p.rest ? 'selected' : ''}>${n ? n : 'בלי מנוחה'}</option>`).join('')}</select></label>
       <div class="toggle"><b>צלילים</b><input type="checkbox" id="sound" ${p.sound ? 'checked' : ''}></div>
+    </div>
+    <div class="card stack">
+      <h3>התוכנית השבועית</h3>
+      <p class="muted small">מה עושים בכל יום. ההמלצה: 3 אימוני ניתור, כוח רגליים, כוח עליון, בטן, ויום מנוחה.</p>
+      ${DAY_NAMES.map((d, i) => `<label class="field row between" style="grid-template-columns:none"><span style="min-width:64px">${d}</span><select data-day="${i}" class="grow"><option value="" ${!pl[i] ? 'selected' : ''}>😴 מנוחה</option>${PROGRAMS.map(pr => `<option value="${pr.id}" ${pl[i] === pr.id ? 'selected' : ''}>${pr.emoji} ${esc(pr.name)}</option>`).join('')}</select></label>`).join('')}
+      <button class="btn chip" id="resetplan">חזרה לתוכנית המומלצת</button>
     </div>
     <div class="card stack">
       <h3>הנתונים</h3>
@@ -440,6 +488,8 @@ function settings() {
   $('#level').onchange = e => store.setProfile({ level: e.target.value });
   $('#rest').onchange = e => store.setProfile({ rest: +e.target.value });
   $('#sound').onchange = e => store.setProfile({ sound: e.target.checked });
+  app.querySelectorAll('[data-day]').forEach(s => s.onchange = () => { const np = { ...plan() }; np[s.dataset.day] = s.value; store.setProfile({ plan: np }); });
+  $('#resetplan').onclick = () => { store.setProfile({ plan: null }); settings(); };
   $('#export').onclick = () => {
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([store.export()], { type: 'application/json' }));
     a.download = `workouts-${new Date().toISOString().slice(0, 10)}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);

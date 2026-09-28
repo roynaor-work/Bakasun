@@ -1,7 +1,7 @@
 :root {
   --bg: #F4F1FF; --card: #FFFFFF; --ink: #1E1B3A; --ink-2: #3E3A5E; --muted: #7B7797; --line: #E6E2F5;
   --accent: #6C4CF1; --accent-ink: #fff; --accent-soft: #EDE8FF;
-  --c-jump: #FF7A3D; --c-core: #FF4D8D; --c-strength: #1FB6C9;
+  --c-jump: #FF7A3D; --c-core: #FF4D8D; --c-strength: #1FB6C9; --c-legs: #1FB6C9; --c-upper: #3B82F6; --c-warm: #F5A524; --c-stretch: #22C55E;
   --ok: #22C55E; --ok-soft: #E4F8EC; --warn: #F5A524; --star: #FFB84D; --danger: #E5484D;
   --nav: #FFFFFFEE; --shadow: 0 8px 24px rgba(60, 40, 140, .10);
   --f-body: 'Rubik', 'Heebo', 'Noto Sans Hebrew', 'Segoe UI', Arial, sans-serif;
@@ -69,13 +69,31 @@ p { margin: 0; }
 .pill.solid { background: var(--accent-soft); color: var(--accent); }
 .pill.jump { background: var(--c-jump); color: #fff; }
 .pill.core { background: var(--c-core); color: #fff; }
-.pill.strength { background: var(--c-strength); color: #fff; }
+.pill.strength, .pill.legs { background: var(--c-legs); color: #fff; }
+.pill.upper { background: var(--c-upper); color: #fff; }
+.pill.warm { background: var(--c-warm); color: #fff; }
+.pill.stretch { background: var(--c-stretch); color: #fff; }
+.pill.block { background: var(--ink); color: var(--card); }
 
 .prog { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; }
 .prog .emoji { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; font-size: 34px; background: var(--accent-soft); }
 .prog.jump .emoji { background: color-mix(in srgb, var(--c-jump) 18%, transparent); }
 .prog.core .emoji { background: color-mix(in srgb, var(--c-core) 18%, transparent); }
-.prog.strength .emoji { background: color-mix(in srgb, var(--c-strength) 18%, transparent); }
+.prog.strength .emoji, .prog.legs .emoji { background: color-mix(in srgb, var(--c-legs) 18%, transparent); }
+.prog.upper .emoji { background: color-mix(in srgb, var(--c-upper) 18%, transparent); }
+.today { border: 3px solid var(--accent); }
+.weekstrip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.weekstrip .wd { display: grid; justify-items: center; gap: 2px; padding: 8px 2px; border-radius: 14px; background: var(--card); box-shadow: var(--shadow); font-size: 12px; color: var(--muted); }
+.weekstrip .wd .e { font-size: 20px; }
+.weekstrip .wd.today { outline: 3px solid var(--accent); color: var(--accent); font-weight: 700; }
+.weekstrip .wd.done { background: var(--ok-soft); }
+.weekstrip .wd.missed { opacity: .55; }
+.steps { margin: 0; padding: 0 22px 0 0; display: grid; gap: 4px; font-size: 17px; }
+.steps li::marker { color: var(--accent); font-weight: 900; }
+.blockhead { display: flex; align-items: center; gap: 8px; margin-top: 6px; color: var(--muted); font-weight: 700; font-size: 15px; }
+.blockhead::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.counting .n { color: var(--accent); }
+.tile.next b { font-size: 20px; }
 
 /* הדמות */
 svg.figure { width: 100%; height: auto; display: block; }
@@ -84,6 +102,7 @@ svg.figure .ground { stroke: var(--line); stroke-width: 3; stroke-linecap: round
 svg.figure .fig line, svg.figure .fig polyline { stroke: var(--ink); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; fill: none; }
 svg.figure .fig .far { stroke: color-mix(in srgb, var(--ink) 45%, var(--card)); }
 svg.figure .fig .head { fill: var(--star); stroke: var(--ink); stroke-width: 3; }
+svg.figure .prop { fill: color-mix(in srgb, var(--c-warm) 35%, var(--line)); }
 svg.figure .fig .rope { stroke: var(--c-jump); stroke-width: 3; fill: none; stroke-dasharray: 5 4; }
 svg.figure.mini { width: 72px; }
 svg.figure.mini .fig line, svg.figure.mini .fig polyline { stroke-width: 9; }
