@@ -12,7 +12,9 @@ G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים �
     const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
     let cur, t = 0, speed = 0.55, next = r.rint(0, 6), lines = 0, revealed = 0, picLines = 0, picIdx = r.rint(0, SCENE_IDS.length - 1), picDone = 0, custom = null;
     // תמונה שהמשתמש העלה בהגדרות (למשל הולאנד בועט) מחליפה את הפריימים המצוירים
+    // התמונות: מה שהועלה בהגדרות, ואם אין, התמונות המובנות (workout/img/tetris/1-5.jpg: רונאלדו והולאנד חוגגים)
     let pics = []; try { pics = JSON.parse(localStorage.getItem('kidfit.tetrisPics') || '[]'); const one = localStorage.getItem('kidfit.tetrisPic'); if (one && !pics.length) pics = [one]; } catch { pics = []; }
+    if (!pics.length && typeof Image !== 'undefined') pics = [1, 2, 3, 4, 5].map(i => new URL(`../../img/tetris/${i}.jpg`, import.meta.url).href);
     let picI = pics.length ? r.rint(0, pics.length - 1) : 0; const loadCustom = () => { if (!pics.length || typeof Image === 'undefined') return; custom = new Image(); custom.onload = paintPic; custom.src = pics[picI]; };
     // התמונה שמאחורי הלוח: פריים מהחגיגות, נחשפת שורה אחרי שורה
     const pic = typeof document !== 'undefined' ? document.createElement('canvas') : null; if (pic) { pic.width = 360; pic.height = 560; }
