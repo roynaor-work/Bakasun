@@ -73,7 +73,7 @@ export async function parentHome() {
       ${sessions.length ? sessions.map((s, i) => { const sum = summarize(s); return `
         <div class="card ${s.isNew ? 'today' : ''}">
           <div class="row between tap" data-toggle="${i}">
-            <div><b>${s.emoji || '🏋️'} ${esc(s.programName)}</b>${s.isNew ? ' <span class="pill hall" style="font-size:12px;padding:1px 8px">חדש</span>' : ''}<div class="muted small">${fmtDate(s.date)} ${new Date(s.date).toTimeString().slice(0, 5)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים${s.gamesPlayed ? ` · 🎮 ${s.gamesPlayed}` : ''}</div></div>
+            <div><b>${s.emoji || '🏋️'} ${esc(s.programName)}</b>${s.isNew ? ' <span class="pill hall" style="font-size:12px;padding:1px 8px">חדש</span>' : ''}<div class="muted small">${fmtDate(s.date)} ${new Date(s.date).toTimeString().slice(0, 5)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים${s.gamesPlayed ? ` · 🎮 ${s.gamesPlayed}` : ''}${s.feedback ? ` · ${{ easy: '😎 היה לו קל', ok: '👌 בדיוק', hard: '😮‍💨 היה לו קשה' }[s.feedback]}${s.change ? ({ boost: ', העלה 10%', swaps: ', עבר לתרגילים מתקדמים', down: ', הוריד קצת' }[s.change] || '') : ''}` : ''}</div></div>
             <span style="color:var(--star);font-size:22px">${'★'.repeat(sum.stars)}</span>
           </div>
           <div class="list" id="pd-${i}" hidden style="margin-top:10px">${(s.items || []).map(it => `<div class="item"><span class="grow">${esc(it.name)}</span>${it.done >= it.target ? `<span class="done">✓ ${it.done}${it.type === 'time' ? ' שנ׳' : ''}</span>` : it.done > 0 ? `<span class="part">${it.done} מתוך ${it.target}</span>` : '<span class="skip">דילוג</span>'}</div>`).join('')}</div>
