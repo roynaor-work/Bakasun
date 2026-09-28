@@ -59,6 +59,7 @@ G.push({ id: 'snake', name: 'הרעב הגדול', emoji: '🍔', how: 'מחלי
     const S = 44, COLS = Math.floor(r.W / S), ROWS = Math.floor((r.H - 44) / S), OX = (r.W - COLS * S) / 2, OY = 44; // משבצות גדולות: פחות שטח משחק, פרצוף שרואים
     let snake = [[2, 5], [1, 5], [0, 5]], dir = [1, 0], next = dir, t = 0, food = place(), speed = 0.3, tt = 0, eaten = 0, chew = 0;
     // הפרצוף: תמונה מההגדרות, ואם אין, התמונה המובנית (workout/img/face.jpg)
+    const REC = k => new URL(`../../snd/${k}.mp4`, import.meta.url).href; // ההקלטות של רועי: eat (אוכל), wall (נתקע בקיר)
     let face = null; try { if (typeof Image !== 'undefined') { const src = localStorage.getItem('kidfit.facePic'); face = new Image(); face.src = src || new URL('../../img/face.jpg', import.meta.url).href; } } catch { face = null; }
     function place() { let p; do { p = [r.rint(0, COLS - 1), r.rint(0, ROWS - 1)]; } while (snake.some(s => s[0] === p[0] && s[1] === p[1])); return p; }
     const cx = c => OX + c * S + S / 2, cy = c => OY + c * S + S / 2;
@@ -66,10 +67,10 @@ G.push({ id: 'snake', name: 'הרעב הגדול', emoji: '🍔', how: 'מחלי
       swipe(d) { const m = { left: [-1, 0], right: [1, 0], up: [0, -1], down: [0, 1] }[d]; if (m && !(m[0] === -dir[0] && m[1] === -dir[1])) next = m; },
       update(dt) { t += dt; tt += dt; chew = Math.max(0, chew - dt * 3); if (t < speed) return; t = 0; dir = next;
         const h = [snake[0][0] + dir[0], snake[0][1] + dir[1]];
-        if (h[0] < 0 || h[0] >= COLS || h[1] < 0 || h[1] >= ROWS) return r.over('בום! נכנסת בקיר');
-        if (snake.some(s => s[0] === h[0] && s[1] === h[1])) return r.over('אכלת את הזנב שלך!');
+        if (h[0] < 0 || h[0] >= COLS || h[1] < 0 || h[1] >= ROWS) { r.play(REC('wall')); return r.over('בום! נכנסת בקיר'); }
+        if (snake.some(s => s[0] === h[0] && s[1] === h[1])) { r.play(REC('wall')); return r.over('אכלת את הזנב שלך!'); }
         snake.unshift(h);
-        if (h[0] === food[0] && h[1] === food[1]) { eaten++; const pts = 10 + Math.min(eaten, 10) * 2; r.addScore(pts); r.pop('+' + pts + ' 🍔', cx(h[0]), cy(h[1]) - 20, r.C.gold, 22); r.burst(cx(h[0]), cy(h[1]), '#f97316', 10, 140); r.sfx('score'); chew = 1; food = place(); speed = Math.max(0.13, speed - 0.004); } else snake.pop(); },
+        if (h[0] === food[0] && h[1] === food[1]) { eaten++; const pts = 10 + Math.min(eaten, 10) * 2; r.addScore(pts); r.pop('+' + pts + ' 🍔', cx(h[0]), cy(h[1]) - 20, r.C.gold, 22); r.burst(cx(h[0]), cy(h[1]), '#f97316', 10, 140); r.play(REC('eat')); chew = 1; food = place(); speed = Math.max(0.13, speed - 0.004); } else snake.pop(); },
       draw() { r.clear('#0f3d2e'); for (let j = 0; j < ROWS; j++) for (let i = 0; i < COLS; i++) if ((i + j) % 2) r.rect(OX + i * S, OY + j * S, S, S, '#124a37');
         r.text(`אכלת ${eaten} 🍔`, r.W / 2, 20, { size: 16, color: '#bbf7d0' });
         SP.burger(r, cx(food[0]), cy(food[1]), 1.1, tt);
