@@ -233,3 +233,7 @@ input[type="checkbox"] { width: 26px; height: 26px; accent-color: var(--accent);
 .scene-svg .podium { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; } .scene-svg .pnum { font: 900 22px var(--f-head); fill: var(--accent); }
 .scene-svg .stitle { font: 900 22px var(--f-head); fill: var(--ink); } .scene-svg .medal { font-size: 34px; }
 .intro h1 { font-size: 26px; }
+
+.chant { background: #15803D; color: #fff; font-family: var(--f-head); font-weight: 900; font-size: 20px; padding: 10px 16px; border-radius: 14px; animation: chant 0.6s ease-in-out infinite alternate; }
+@keyframes chant { from { transform: scale(1) rotate(-2deg); } to { transform: scale(1.06) rotate(2deg); } }
+@media (prefers-reduced-motion: reduce) { .chant { animation: none; } }

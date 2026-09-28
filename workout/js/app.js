@@ -629,14 +629,14 @@ function arcade() {
     <div class="tiles"><div class="tile"><b>${gs.count}</b>משחקים ששיחקת</div><div class="tile"><b>${Object.keys(gs.played).length} <span class="muted" style="font-size:16px">מתוך</span> ${GAMES.length}</b>משחקים שגילית</div></div>
     ${Object.keys(gs.bests).length ? `<h2>🏆 לוח השיאים</h2><div class="card list">${Object.entries(gs.bests).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([id, best], i) => { const g = gameById[id]; return g ? `<div class="item"><span class="rank">${['🥇', '🥈', '🥉'][i] || (i + 1)}</span><span class="grow">${g.emoji} ${esc(g.name)}</span><b style="color:var(--accent)">${best}</b>${gs.bestAt?.[id] ? `<span class="muted small">${fmtDate(gs.bestAt[id])}</span>` : ''}</div>` : ''; }).join('')}</div>` : ''}
     ${unlockedList() ? `<div class="card"><b>🔓 ${unlockedList().length} מתוך ${GAMES.length} משחקים פתוחים.</b> ${credits() ? `<span style="color:var(--accent)">יש לך ${credits()} בחירות! לחץ על משחק נעול כדי לפתוח אותו.</span>` : `עוד ${nextUnlockIn(store.sessions.length, store.profile.unlockEvery)} אימונים ותפתח ${PICKS} משחקים לבחירתך.`}</div>` : ''}
-    ${GAME_GROUPS.map(gr => `
+    ${(() => { const ul = unlockedList(); const groups = ul ? [{ id: 'open', name: 'פתוחים לך עכשיו', emoji: '🔓', games: GAMES.filter(g => ul.includes(g.id)) }, ...GAME_GROUPS.map(gr => ({ ...gr, name: gr.name + ' (נעולים)', games: gr.games.filter(g => !ul.includes(g.id)) })).filter(gr => gr.games.length)] : GAME_GROUPS; return groups.map(gr => `
       <h2>${gr.emoji} ${gr.name}</h2>
-      ${gr.games.map(g => { const locked = unlockedList() && !unlockedList().includes(g.id); return `
+      ${gr.games.map(g => { const locked = ul && !ul.includes(g.id); return `
         <div class="card tap gcard ${store.tokens && !locked ? '' : 'pick'} ${locked ? 'locked' : ''}" data-game="${g.id}">
           <div class="e">${locked ? (credits() ? '🔓' : '🔒') : g.emoji}</div>
           <div><b>${esc(g.name)}</b>${gs.played[g.id] ? '' : ' <span class="pill solid" style="font-size:12px;padding:1px 8px">חדש</span>'}<div class="best">${gs.played[g.id] ? `שיא: ${gs.bests[g.id] || 0} · שיחקת ${gs.played[g.id]} ${gs.played[g.id] === 1 ? 'פעם' : 'פעמים'}` : esc(g.how)}</div></div>
           <span class="pill solid">${locked ? (credits() ? 'לפתוח' : 'נעול') : '▶️'}</span>
-        </div>`; }).join('')}`).join('')}
+        </div>`; }).join('')}`).join(''); })()}
   </div>`);
   app.querySelectorAll('[data-game]').forEach(c => c.onclick = () => {
     const id = c.dataset.game, ul = unlockedList();
