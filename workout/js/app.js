@@ -446,7 +446,7 @@ function giftPhase() {
 function playGame(g, onDone) {
   mount('', true);
   const secs = store.profile.gameSeconds || 90;
-  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
+  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, speak: t => speak(t), onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
 }
 
 function restPhase() {
