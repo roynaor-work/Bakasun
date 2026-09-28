@@ -62,6 +62,8 @@ export function render({ root }) {
     const inv = el.querySelector('[data-invoice]'); if (inv) inv.onclick = async () => {
       if (!s.invoiceTo) { toast(t('noInvoicePhone'), 3500); return; }
       const m = Office.invoiceRequest(p, cs, client, s.signer || DEFAULTS.signer);
+      const extra = [client.payer ? '• משלם דרך: ' + client.payer : '', client.invoiceEmail && client.invoiceEmail !== client.email ? '• לשלוח ל: ' + client.invoiceEmail : '', client.payTerms ? '• תנאי תשלום: ' + client.payTerms : '', client.attachments ? '• לצרף: ' + client.attachments : ''].filter(Boolean);
+      if (extra.length) m.text = m.text.replace(/\n\nתודה,/, '\n' + extra.join('\n') + '\n\nתודה,');
       const r = await dialog(t('askInvoice'), `<textarea name="text" rows="12">${esc(m.text)}</textarea>`, { ok: t('whatsapp') });
       if (r && openWhatsApp(s.invoiceTo, r.text)) db.put('payments', { id: p.id, status: Office.PAY.invoiceAsked });
     };

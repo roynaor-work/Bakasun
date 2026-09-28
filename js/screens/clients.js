@@ -34,6 +34,7 @@ function renderOne({ root, id }) {
         <div class="row"><button class="btn wa" id="wa">${esc(t('whatsapp'))}</button><button class="btn" id="dial">${esc(t('call'))}</button></div></div>
       <div class="stat"><div class="card"><b class="count">${h.count}</b><span>${esc(t('events'))}</span></div><div class="card"><b class="count">${h.won}</b><span>${esc(t('won'))}</span></div><div class="card"><b class="count">${h.lost}</b><span>${esc(t('lost'))}</span></div></div>
       ${h.totalNet ? `<div class="card"><span class="sub">${esc(t('totalNet'))}</span><span class="big ltr">${esc(Office.money(h.totalNet))}</span></div>` : ''}
+      ${c.approver || c.payer || c.payTerms || c.attachments || c.invoiceEmail ? `<div class="card"><div class="title">${esc(t('clientProcess'))}</div><div class="kv">${c.approver ? `<dt>${esc(t('approver'))}</dt><dd>${esc(c.approver)}</dd>` : ''}${c.payer ? `<dt>${esc(t('payer'))}</dt><dd>${esc(c.payer)}</dd>` : ''}${c.payTerms ? `<dt>${esc(t('payTermsClient'))}</dt><dd>${esc(c.payTerms)}</dd>` : ''}${c.invoiceEmail ? `<dt>${esc(t('invoiceEmail'))}</dt><dd class="ltr">${esc(c.invoiceEmail)}</dd>` : ''}${c.attachments ? `<dt>${esc(t('attachments'))}</dt><dd>${esc(c.attachments)}</dd>` : ''}</div></div>` : ''}
       ${c.notes ? `<div class="card"><p style="white-space:pre-wrap">${esc(c.notes)}</p></div>` : ''}
       ${notesHtml('client', id)}
       <section class="sec"><h2>${esc(t('history'))}</h2><div class="list">${h.cases.length ? h.cases.map(x => `<a class="card tap" href="#/case/${esc(x.id)}"><div class="row between"><span class="title">${esc(kindLabel(x.kind))}</span><span class="badge ${x.status === Office.STATUS.won || x.status === Office.STATUS.done ? 'ok' : 'muted'}">${esc(statusLabel(x.status))}</span></div>
@@ -51,7 +52,8 @@ async function edit(c) {
   c = c || {};
   const r = await dialog(c.id ? t('edit') : t('newClient'), `<div class="grid2">${field('name', t('fClient'), c.name || '')}${field('contact', t('fName'), c.contact || '')}${field('phone', t('fPhone'), c.phone || '', { ltr: true, inputmode: 'tel' })}${field('email', t('fEmail'), c.email || '', { ltr: true })}
     ${field('type', t('fType'), c.type || '', { type: 'select', options: [['', '']].concat(TYPES.map(x => [x, typeLabel(x)])) })}${field('lang', t('fLang'), c.lang || 'he', { type: 'select', options: [['he', langName('he')], ['en', langName('en')], ['fr', langName('fr')]] })}
-    ${field('legalName', t('fLegal'), c.legalName || '')}${field('taxId', t('fTaxId'), c.taxId || '', { ltr: true })}</div>${field('address', t('fAddress'), c.address || '')}${field('notes', t('fNotes'), c.notes || '', { type: 'textarea' })}`);
+    ${field('legalName', t('fLegal'), c.legalName || '')}${field('taxId', t('fTaxId'), c.taxId || '', { ltr: true })}</div>${field('address', t('fAddress'), c.address || '')}
+    <h3>${esc(t('clientProcess'))}</h3><div class="grid2">${field('approver', t('approver'), c.approver || '')}${field('payer', t('payer'), c.payer || '')}${field('payTerms', t('payTermsClient'), c.payTerms || '')}${field('invoiceEmail', t('invoiceEmail'), c.invoiceEmail || '', { ltr: true, inputmode: 'email' })}</div>${field('attachments', t('attachments'), c.attachments || '')}${field('notes', t('fNotes'), c.notes || '', { type: 'textarea' })}`);
   if (!r || !r.name) return;
   if (c.id) r.id = c.id;
   const id = db.put('clients', r);

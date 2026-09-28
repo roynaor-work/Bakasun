@@ -16,6 +16,8 @@ import { APPROVAL, APPROVAL_KINDS, kindLabel as approvalKindLabel, approvalMessa
 import { lang as uiLang } from '../i18n.js';
 import { DEFAULTS } from '../data/defaults.js';
 import { askFlow, resend, offerDialog, compareBlock, wireCompare, sendEach } from './rfq.js';
+import { printSeedFor, printOrderText, printOrderSubject, printSummary, PRINT_STATUS } from '../logic/print.js';
+import { printStatusLabel } from '../labels.js';
 
 let tab = 'open';
 let caseTab = 'details';
@@ -215,7 +217,7 @@ function tabPlan(body, c, s) {
   });
 }
 document.addEventListener('click', async e => {
-  const d = e.target && (e.target.dataset.delrow ? ['schedule', e.target.dataset.delrow] : e.target.dataset.delstaff ? ['staff', e.target.dataset.delstaff] : e.target.dataset.dellink ? ['links', e.target.dataset.dellink] : null);
+  const d = e.target && (e.target.dataset.delrow ? ['schedule', e.target.dataset.delrow] : e.target.dataset.delstaff ? ['staff', e.target.dataset.delstaff] : e.target.dataset.dellink ? ['links', e.target.dataset.dellink] : e.target.dataset.delprint ? ['print', e.target.dataset.delprint] : null);
   if (!d) return;
   if (await confirmDialog(t('confirmDelete'))) { db.remove(d[0], d[1]); const f = e.target.closest('form'); if (f) f.querySelector('[data-x=cancel]').click(); }
 });
@@ -229,6 +231,7 @@ function tabMoney(body, c, s) {
     ${section(t('quotes'), `<div class="row"><button class="btn primary sm" id="newQuote">+ ${esc(t('newQuote'))}</button></div><div class="list">${quotes.length ? quotes.map(q => quoteCard(q, c)).join('') : empty(t('noQuotes'))}</div>`)}
     ${section(t('approvals'), `<div class="row"><button class="btn sm" id="newAppr">+ ${esc(t('newApproval'))}</button></div><div class="list">${(() => { const list = db.list('approvals', a => a.caseId === id).sort((a, b) => String(b.created).localeCompare(String(a.created))); return list.length ? list.map(a => `<div class="card" data-a="${esc(a.id)}"><div class="row between"><span class="title">${esc(approvalKindLabel(a.kind, uiLang()))}${a.title ? ': ' + esc(a.title) : ''}</span><span class="badge ${a.status === APPROVAL.approved ? 'ok' : a.status === APPROVAL.declined ? 'muted' : 'warn'}">${esc(a.status === APPROVAL.approved ? t('approved') : a.status === APPROVAL.declined ? t('declined') : a.status === APPROVAL.sent ? t('taskSent') + (a.sentAt ? ' ' + Office.fmt(a.sentAt) : '') : t('qs_טיוטה'))}</span></div>${a.details ? `<div class="sub">${esc(a.details)}</div>` : ''}${Office.num(a.amount) ? `<div class="sub ltr">${esc(Office.money(a.amount))}</div>` : ''}
       ${a.status !== APPROVAL.approved && a.status !== APPROVAL.declined ? `<div class="row"><button class="btn wa sm" data-send>${esc(a.status === APPROVAL.sent ? t('remind') : t('approvalSend'))}</button><button class="btn sm ok" data-ok>${esc(t('approved'))}</button><button class="btn sm ghost" data-no>${esc(t('declined'))}</button></div>` : ''}</div>`).join('') : empty(t('noApprovals')); })()}</div>`)}
+    ${(() => { const cl = db.get('clients', c.clientId); return cl && (cl.approver || cl.payer || cl.attachments || cl.payTerms) ? `<div class="card"><div class="title">${esc(t('clientProcess'))} · ${esc(cl.name)}</div><div class="sub">${[cl.approver ? t('approver') + ': ' + cl.approver : '', cl.payer ? t('payer') + ': ' + cl.payer : '', cl.payTerms ? t('payTermsClient') + ': ' + cl.payTerms : '', cl.attachments ? t('attachments') + ': ' + cl.attachments : ''].filter(Boolean).map(esc).join(' · ')}</div></div>` : ''; })()}
     ${section(t('payments'), `<div class="row"><button class="btn sm" id="newPay">+ ${esc(t('newPayment'))}</button><a class="btn sm ghost" href="#/money">${esc(t('money'))}</a><a class="btn sm" href="#/portal/${esc(id)}">${esc(t('portal'))}</a></div><div class="list">${pays.length ? pays.map(p => `<div class="card"><div class="row between"><span class="title ltr">${esc(Office.money(p.amount))}</span><span class="badge ${p.status === Office.PAY.paid ? 'ok' : 'warn'}">${esc(payStatusLabel(p.status))}</span></div><div class="sub">${[p.due ? Office.fmt(p.due) : '', p.invoiceNo, p.note].filter(Boolean).map(esc).join(' · ')}</div></div>`).join('') : empty(t('noPayments'))}</div>`)}`;
   body.querySelector('#newQuote').onclick = () => newQuote(c);
   body.querySelector('#newPay').onclick = () => editPayment(null, id);
@@ -257,8 +260,37 @@ function tabLists(body, c, s) {
   const g = db.list('groups', x => x.caseId === id)[0];
   body.innerHTML = `
     <div class="card row between"><span class="title">${esc(t('groups'))}</span><a class="btn sm primary" href="#/groups/${esc(id)}">${g ? esc(g.people.length) + ' ' + esc(t('people')) : esc(t('open'))}</a></div>
+    ${(() => { const items = db.list('print', x => x.caseId === id).sort((a, b) => String(a.created).localeCompare(String(b.created))); const sm = printSummary(items); return section(t('printList'), `<div class="row"><button class="btn sm" id="printSeed">${esc(items.length ? t('printAddSeed') : t('printMake'))}</button><button class="btn sm" id="printAdd">+ ${esc(t('printItem'))}</button>${items.length ? `<button class="btn sm primary" id="printOrder">${esc(t('printOrder'))}</button>` : ''}</div>
+      ${items.length ? `<p class="hint"><span class="count">${sm.confirmed}/${sm.total}</span> ${esc(t('printConfirmed'))}${sm.cost ? ' · ' + esc(Office.money(sm.cost)) : ''}</p><div class="list">${items.map(i => `<div class="card" data-p="${esc(i.id)}"><div class="row between"><span class="title">${esc(i.item)}</span><span class="badge ${i.status === PRINT_STATUS.plan ? 'muted' : i.status === PRINT_STATUS.ordered ? 'warn' : 'ok'}">${esc(printStatusLabel(i.status))}</span></div><div class="sub">${[Office.num(i.qty) ? Office.num(i.qty) + ' ' + t('units') : '', i.size, i.notes, i.cost ? Office.money(i.cost) : '', i.orderedAt ? t('sentTo') + ' ' + Office.fmt(i.orderedAt) : ''].filter(Boolean).map(esc).join(' · ')}</div>
+        <div class="row">${i.status === PRINT_STATUS.ordered ? `<button class="btn sm ok" data-pconf>${esc(t('printConfirm'))}</button>` : ''}${i.status === PRINT_STATUS.confirmed ? `<button class="btn sm ok" data-pready>${esc(t('printReady'))}</button>` : ''}<button class="btn sm ghost" data-pedit>${esc(t('edit'))}</button></div></div>`).join('')}</div>` : ''}`); })()}
     ${section(t('checklist'), checks.length ? lists.map(l => `<div class="card"><h3>${esc(l)}</h3>${checks.filter(k => k.list === l).map(k => `<label class="chk"><input type="checkbox" data-k="${esc(k.id)}"${Office.yes(k.done) ? ' checked' : ''}> ${esc(k.item)}</label>`).join('')}</div>`).join('') : `<button class="btn" id="mk">${esc(t('makeChecklist'))}</button>`)}
     ${section(t('afterEvent'), `<div class="row"><button class="btn wa sm" id="thanks">${esc(t('thanks'))}</button><button class="btn wa sm" id="review">${esc(t('review'))}</button></div>`)}`;
+  const refreshLists = () => tabLists(body, db.get('cases', id) || c, s);
+  const editPrint = async i => {
+    const sups = db.list('suppliers', x => /דפוס/.test(x.type || ''));
+    const r = await dialog(i ? i.item : t('printItem'), `${field('item', t('printItem'), i ? i.item : '')}<div class="grid2">${field('qty', t('qty'), i ? i.qty : '', { type: 'number', inputmode: 'numeric' })}${field('size', t('size'), i ? i.size : '')}${field('cost', t('cost'), i ? i.cost || '' : '', { type: 'number', inputmode: 'decimal' })}${field('status', t('linkStatus'), i ? i.status : PRINT_STATUS.plan, { type: 'select', options: Object.values(PRINT_STATUS).map(v => [v, printStatusLabel(v)]) })}</div>${field('supplierId', t('supplier'), i ? i.supplierId || '' : '', { type: 'select', options: [['', '']].concat(sups.map(x => [x.id, x.name])) })}${field('notes', t('note'), i ? i.notes || '' : '')}${i ? `<div class="row end"><button type="button" class="btn danger sm" data-delprint="${esc(i.id)}">${esc(t('delete'))}</button></div>` : ''}`);
+    if (!r || !r.item) return;
+    db.put('print', Object.assign(i ? { id: i.id } : { caseId: id }, r)); refreshLists();
+  };
+  body.querySelector('#printSeed').onclick = () => { const have = new Set(db.list('print', x => x.caseId === id).map(x => x.item)); printSeedFor(c.kind, c.participants).forEach(x => { if (!have.has(x.item)) db.put('print', Object.assign({ caseId: id }, x)); }); refreshLists(); };
+  body.querySelector('#printAdd').onclick = () => editPrint(null);
+  const po = body.querySelector('#printOrder'); if (po) po.onclick = async () => {
+    const items = db.list('print', x => x.caseId === id && x.status === PRINT_STATUS.plan);
+    if (!items.length) { toast(t('printNothing')); return; }
+    const sups = db.list('suppliers', x => /דפוס/.test(x.type || '') && !/^(לא|no)$/i.test(String(x.active || '')));
+    if (!sups.length) { toast(t('noneOfType'), 3500); return; }
+    const r = await dialog(t('printOrder'), `${field('supplierId', t('supplier'), sups[0].id, { type: 'select', options: sups.map(x => [x.id, x.name]) })}<div class="grid2">${field('due', t('printDue'), c.date ? Office.iso(Office.addDays(c.date, -4)) : '', { type: 'date' })}${field('files', t('printFiles'), '')}</div><p class="hint">${esc(items.map(x => x.item).join(' · '))}</p>`, { ok: t('next') });
+    if (!r) return;
+    const sp = sups.find(x => x.id === r.supplierId); if (!sp) return;
+    sendEach([sp], () => printOrderText(c, sp, items, { due: r.due, files: r.files, asClient: c.asClient !== 'לא', name: (s.signer || DEFAULTS.signer).split('\n')[0].split(' ')[0] }), () => printOrderSubject(c), () => { items.forEach(x => db.put('print', { id: x.id, status: PRINT_STATUS.ordered, orderedAt: todayIso(), supplierId: sp.id, due: r.due })); });
+    setTimeout(refreshLists, 600);
+  };
+  body.querySelectorAll('.card[data-p]').forEach(el => {
+    const i = db.get('print', el.dataset.p);
+    el.querySelector('[data-pedit]').onclick = () => editPrint(i);
+    const pc = el.querySelector('[data-pconf]'); if (pc) pc.onclick = async () => { const r = await dialog(t('printConfirm'), field('cost', t('cost'), i.cost || '', { type: 'number', inputmode: 'decimal' }), { ok: t('save') }); if (r) { db.put('print', { id: i.id, status: PRINT_STATUS.confirmed, confirmedAt: todayIso(), cost: r.cost || i.cost }); refreshLists(); } };
+    const pr = el.querySelector('[data-pready]'); if (pr) pr.onclick = () => { db.put('print', { id: i.id, status: PRINT_STATUS.ready }); refreshLists(); };
+  });
   const mk = body.querySelector('#mk'); if (mk) mk.onclick = () => Office.checklistFor(Office.CHECK_SEED.map(r => ({ list: r[0], kind: r[1], item: r[2] })), c.kind).forEach(k => db.put('checks', Object.assign(k, { caseId: id, done: '' })));
   body.querySelectorAll('[data-k]').forEach(cb => cb.onchange = () => db.put('checks', { id: cb.dataset.k, done: cb.checked ? 'כן' : '' }));
   body.querySelector('#thanks').onclick = async () => { const r = await dialog(t('thanks'), `<textarea name="text" rows="5">${esc(Office.thanksMessage(c, c.contact) + (s.signer ? '\n' + s.signer : ''))}</textarea>`, { ok: t('whatsapp') }); if (r) openWhatsApp(c.phone, r.text); };
