@@ -65,6 +65,7 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
     dist(x1, y1, x2, y2) { return Math.hypot(x2 - x1, y2 - y1); },
     // ---- אפקטים ----
     sfx(kind) { (SFX[kind] || SFX.tick)(); },
+    play(url, vol = 1) { if (!sound) return; try { const a = new Audio(url); a.volume = vol; a.play().catch(() => {}); } catch { /* */ } }, // הקלטה (למשל snd/eat.mp4)
     pop(text, x, y, color = PAL.gold, size = 22) { pops.push({ text, x, y, color, size, t: 0.9 }); },
     burst(x, y, color = PAL.gold, n = 14, speed = 220) { for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, v = speed * (0.4 + Math.random() * 0.6); parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, color, t: 0.5 + Math.random() * 0.3, r: 3 + Math.random() * 4 }); } },
     shake(ms = 250) { shakeT = ms / 1000; },
