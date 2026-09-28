@@ -2,7 +2,7 @@
    or turn a supplier's quote into the client's quote with her fee. Nothing goes out until she taps. */
 import { t, lang, SPEECH, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, empty, dialog, toast, openWhatsApp, copyText } from '../ui.js';
+import { esc, field, empty, dialog, toast, openWhatsApp, openWhatsAppPick, copyText } from '../ui.js';
 import Office from '../logic/office.js';
 import { TASK } from '../logic/extra.js';
 import { isReceiptCommand } from '../logic/receipts.js';
@@ -18,7 +18,7 @@ import { QUOTE_STATUS } from '../logic/quotes.js';
 import { subjects } from '../notes.js';
 import { files, shareFile, downloadFile, pdfText } from '../files.js';
 import { speechSupported, listen } from '../voice.js';
-import { wireDelete, isDeleteCommand, stripDelete, stripDone } from '../recbox.js';
+import { wireDelete, isDeleteCommand, stripDelete, stripDone, isEmptyBinCommand, emptyBins } from '../recbox.js';
 import { DEFAULTS } from '../data/defaults.js';
 import { hasArabic, waLink } from '../logic/core.js';
 import { COMPANY_PAPERS } from '../data/docsList.js';
@@ -171,6 +171,7 @@ async function tabCommand(body, s, ctx) {
     .concat(db.list('contacts').map(x => ({ label: x.name, names: [x.name], phone: x.phone, email: x.email, about: 'contact', id: x.id })));
   inputBox(body, t('cmdHint'), t('cmdPh'), (text, out) => {
     if (isReceiptCommand(text)) { location.hash = '#/receipts/' + new Date().toISOString().slice(0, 7) + '/snap'; return; }
+    if (isEmptyBinCommand(text)) { emptyBins().then(ok => { if (ok) { draft = ''; body.querySelector('#txt').value = ''; const b = body.querySelector('#bin'); if (b) b.hidden = true; } }); return; }
     const go = parseGoto(text);
     if (go) { draft = ''; goTo(go); return; }
     const q = parseAgenda(text, new Date());
@@ -206,12 +207,14 @@ async function tabCommand(body, s, ctx) {
     }
     if (c.kind === 'message') {
       const has = c.via === 'email' ? c.to.email : c.to.phone;
-      out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(t('recipient'))}</dt><dd class="ltr">${esc(c.to.name || c.to.phone || c.to.email)}${c.to.name && has ? ' · ' + esc(has) : ''}</dd></div>
-        ${field('msg', t('note'), c.body, { type: 'textarea', rows: 4 })}
-        ${has ? `<div class="row">${c.via === 'email' ? `<a class="btn primary" id="mail">${esc(t('email'))}</a>` : `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>`}${c.via === 'email' && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.via !== 'email' && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}</div>`
+      out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(c.to.group ? t('groupTo') : t('recipient'))}</dt><dd class="ltr">${esc(c.to.name || c.to.phone || c.to.email)}${c.to.name && has ? ' · ' + esc(has) : ''}</dd></div>
+        ${field('msg', t('theMessage'), c.body, { type: 'textarea', rows: 4 })}
+        ${c.to.group ? `<div class="row"><button class="btn wa" id="waPick">${esc(t('waPickGroup'))}</button></div><p class="hint">${esc(t('groupHint'))}</p>`
+          : has ? `<div class="row">${c.via === 'email' ? `<a class="btn primary" id="mail">${esc(t('email'))}</a>` : `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>`}${c.via === 'email' && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.via !== 'email' && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}</div>`
           : `<p class="warnbox">${esc(t('noContact'))} <button class="btn sm" id="addContact">${esc(c.via === 'email' ? t('addEmail') : t('addPhone'))}</button></p>`}</div>`;
       const msg = () => out.querySelector('[name=msg]').value;
       const wa = out.querySelector('#wa'); if (wa) wa.onclick = () => openWhatsApp(c.to.phone, msg());
+      const wp = out.querySelector('#waPick'); if (wp) wp.onclick = () => openWhatsAppPick(msg());
       const ml = out.querySelector('#mail'); if (ml) { ml.href = 'mailto:' + encodeURIComponent(c.to.email) + '?subject=' + encodeURIComponent(s.bizName || DEFAULTS.bizName) + '&body=' + encodeURIComponent(msg()); ml.target = '_blank'; }
       const ac = out.querySelector('#addContact'); if (ac) ac.onclick = async () => {
         const r = await dialog(c.to.name || '', `<div class="grid2">${field('phone', t('fPhone'), c.to.phone || '', { ltr: true, inputmode: 'tel' })}${field('email', t('fEmail'), c.to.email || '', { ltr: true, inputmode: 'email' })}</div>`, { ok: t('save') });

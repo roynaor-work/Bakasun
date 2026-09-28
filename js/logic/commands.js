@@ -14,6 +14,8 @@ const CONTACT = /(?:^(?:שמרי|תשמרי|שמור|הוסיפי|תוסיפי|�
 // The body starts at ":" / "," or at a marker word: "ההודעה", "תכתבי", "תגידי לה", "שאלי" (a question), or a "ש..." clause.
 const MARK = '(?:ההודעה(?:\\s+היא)?|הודעה|תכתבי|כתבי|תגידי|תאמרי|שאלי|תשאלי|שאל|תשאל|saying|say|ask|asking|that|the message is|message|le message|dis|demande|que)';
 const MESSAGE = new RegExp('^(?:שלחי|שלח|תשלחי|תשלח|תכתבי|תכתוב|כתבי|תגידי|תאמרי|תגיד|send|write|tell|envoie|envoyer|écris|dis)\\s+(?:(?:את\\s+)?(?:ה)?(הודעה|הודעת וואטסאפ|הודעה בוואטסאפ|וואטסאפ|ווצאפ|מייל|אימייל|a message|a whatsapp|message|whatsapp|an e-mail|an email|e-mail|email|mail|un message|un mail|un e-mail|un whatsapp|courriel)\\s+)?(?:ל|אל\\s+|to\\s+|à\\s+|a\\s+)([^:,]+?)\\s*(?:[:,]|\\s(?=' + MARK + '(?:\\s|$)|ש[א-ת]))\\s*(.+)$', 'i');
+const MSG_VERB = /^(?:שלחי|שלח|תשלחי|תשלח|תכתבי|תכתוב|כתבי|תגידי|תאמרי|תגיד|send|write|tell|envoie|envoyer|écris|dis)\s+(?:(?:את\s+)?(?:ה)?(?:הודעה|הודעת וואטסאפ|הודעה בוואטסאפ|וואטסאפ|ווצאפ|מייל|אימייל|a message|a whatsapp|message|whatsapp|an e-mail|an email|e-mail|email|mail|un message|un mail|un e-mail|un whatsapp|courriel)\s+)?/i;
+const CHANNEL_TAIL = /^(?:בוואטסאפ|בווצאפ|במייל|באימייל|on whatsapp|by whatsapp|via whatsapp|by email|by mail|by e-mail|par whatsapp|par mail|par e-mail|sur whatsapp)\s*[:,]?\s*/i;
 const ASK_V = /^(?:שאלי|תשאלי|שאל|תשאל|ask(?: her| him| them)?|asking|demande(?:-lui)?)\s+/i;
 const SAY_V = /^(?:ההודעה(?:\s+היא)?|הודעה|תכתבי|כתבי|תגידי(?:\s+(?:לו|לה|להם))?|תאמרי|saying|say|that|the message is|message|le message(?:\s+est)?|dis(?:-lui)?|que)(?:\s*[:,]\s*|\s+)/i;
 function findPerson(text, people) {
@@ -66,22 +68,46 @@ export function parseCommand(text, docs, people) {
     out.to = findPerson(who, people); return out;
   }
   // a free message: "send a message to Roy: I'm late" / "תגידי לדנה ש..." / "mail à Marc : ..."
+  const cleanBody = (body, spoken) => {
+    body = trim(body).replace(CHANNEL_TAIL, '');
+    if (ASK_V.test(body)) { out.ask = true; return trim(body.replace(ASK_V, '')).replace(/[?.!]+$/, '').replace(/^אם\s/, 'האם ') + '?'; }
+    if (SAY_V.test(body)) body = trim(body.replace(SAY_V, ''));
+    // "תגידי לדנה שאני מאחרת": the ש is grammar, not part of the message. "שאל מתי" keeps its ש (it is the verb).
+    if (spoken && /^ש[א-ת]/.test(body) && !/^(?:שאל|שלום|שלח|שמר|שוב|שיר|שבוע|שעה|שני|שלוש|שיש|שבע|שמונ|שם\b)/.test(body)) body = body.replace(/^ש/, '');
+    return trim(body);
+  };
+  const isGroup = who => /^(?:ה)?קבוצ|^(?:the\s+)?group|^(?:le\s+|au\s+)?groupe/i.test(trim(who));
+  // spoken (no ":" or ","): whatever comes after the number or the name is the message
+  const positional = () => {
+    if (!MSG_VERB.test(t) || INVOICE.test(t)) return null;
+    const head = t.replace(MSG_VERB, '');
+    const via = /(מייל|אימייל|mail|e-mail|email|courriel)/i.test(t.slice(0, t.length - head.length)) ? 'email' : 'whatsapp';
+    const hit = email || phone;
+    if (hit && head.indexOf(hit[0]) >= 0) {
+      const body = cleanBody(head.slice(head.indexOf(hit[0]) + hit[0].length), true);
+      return body ? { via, body, to: email ? { email: email[0] } : { phone: phone[0].replace(/\s/g, '') } } : null;
+    }
+    let best = null;
+    (people || []).forEach(p => (p.names || []).forEach(n => {
+      const k = str(n).trim(); if (k.length < 3) return;
+      const i = head.toLowerCase().indexOf(k.toLowerCase()); if (i < 0) return;
+      if (!best || i < best.i || (i === best.i && k.length > best.k.length)) best = { p, i, k };
+    }));
+    if (!best) return null;
+    const body = cleanBody(head.slice(best.i + best.k.length), true);
+    return body ? { via, body, to: { name: best.p.label, phone: best.p.phone, email: best.p.email, about: best.p.about, id: best.p.id } } : null;
+  };
+  if (!/[:,]/.test(t)) { const p = positional(); if (p) { out.kind = 'message'; out.via = p.via; out.body = p.body; out.to = p.to; return out; } }
   const msg = MESSAGE.exec(t);
   if (msg) {
     const via = /(מייל|אימייל|mail|e-mail|email|courriel)/i.test(msg[1] || '') ? 'email' : 'whatsapp';
-    const who = trim(msg[2]); let body = trim(msg[3] || '');
-    const spoken = !/[:,]/.test(t.slice(0, t.length - body.length));
-    if (ASK_V.test(body)) { body = trim(body.replace(ASK_V, '')).replace(/[?.!]+$/, '').replace(/^אם\s/, 'האם ') + '?'; out.ask = true; }
-    else {
-      if (SAY_V.test(body)) body = trim(body.replace(SAY_V, ''));
-      // "תגידי לדנה שאני מאחרת": the ש is grammar, not part of the message. "שאל מתי" keeps its ש (it is the verb).
-      if (spoken && /^ש[א-ת]/.test(body) && !/^(?:שאל|שלום|שלח|שמר|שוב|שיר|שבוע|שעה|שני|שלוש|שיש|שבע|שמונ|שם\b)/.test(body)) body = body.replace(/^ש/, '');
-    }
+    const who = trim(msg[2]); const body = cleanBody(msg[3] || '', !/[:,]/.test(t.slice(0, t.length - trim(msg[3] || '').length)));
     out.kind = 'message'; out.via = via; out.body = body;
-    out.to = email ? { email: email[0] } : phone ? { phone: phone[0].replace(/\s/g, '') } : findPerson(who, people);
+    out.to = email ? { email: email[0] } : phone ? { phone: phone[0].replace(/\s/g, '') } : isGroup(who) ? { name: who.replace(/^(?:ה)?קבוצ(?:ה|ת)\s*(?:של\s+)?|^(?:the\s+)?group\s*(?:of\s+)?|^(?:le\s+|au\s+)?groupe\s*(?:de\s+|des\s+)?/i, '').trim() || who, group: true } : findPerson(who, people);
     if (!out.to) out.to = { name: who };
     return out;
   }
+  { const p = positional(); if (p) { out.kind = 'message'; out.via = p.via; out.body = p.body; out.to = p.to; return out; } }
   if (email) out.to = { email: email[0] };
   else if (phone) out.to = { phone: phone[0].replace(/\s/g, '') };
   let body = t.replace(SEND, '').replace(email ? email[0] : '', '').replace(phone ? phone[0] : '', '');

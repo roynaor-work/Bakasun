@@ -1,6 +1,16 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDoneCommand, isDeleteCommand, stripDelete, stripDone, stash, peek, restore, minutesLeft, KEEP_MS } from '../js/logic/trash.js';
+import { isDoneCommand, isDeleteCommand, stripDelete, stripDone, stash, peek, restore, minutesLeft, KEEP_MS, isEmptyBinCommand, emptyBin, emptyAllBins } from '../js/logic/trash.js';
+
+test('"empty the bin" is understood, and empties every bin for good', () => {
+  ['רוקני את הסל', 'מחקי את הסל', 'מחקי הכל לגמרי', 'empty the bin', 'delete everything completely', 'vide la corbeille', 'supprime tout définitivement'].forEach(x => assert.ok(isEmptyBinCommand(x), x));
+  ['מחקי', 'רוקני את הרשימה של דנה', 'delete the note'].forEach(x => assert.ok(!isEmptyBinCommand(x), x));
+  const s = mem(); const now = Date.now(); stash(s, 'cmd', 'a', now - 2000); stash(s, 'cmd', 'b', now - 1000); stash(s, 'lead', 'c', now);
+  assert.equal(emptyBin(s, 'cmd'), 2);
+  assert.deepEqual(peek(s, 'cmd'), []);
+  assert.equal(emptyAllBins(s, ['bakasun.bin.lead', 'other']), 1);
+  assert.deepEqual(peek(s, 'lead'), []);
+});
 
 test('"delete" or "finished" at the end of a sentence, without a pause, still counts', () => {
   assert.equal(stripDelete('תשלח הודעה למחיקה למחוק דליט'), 'תשלח הודעה');

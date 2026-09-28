@@ -61,5 +61,19 @@ export function restore(store, key, id, now) {
   return v.text;
 }
 
+const EMPTY = /^\s*(?:(?:רוקני|תרוקני|לרוקן|נקי|תנקי)\s+(?:את\s+)?ה?סל|(?:מחקי|תמחקי|למחוק)\s+(?:את\s+)?(?:ה?סל|הכל\s+לגמרי|לגמרי\s+הכל|לצמיתות)|empty\s+(?:the\s+)?(?:bin|trash|junk|recycle bin)|delete\s+(?:everything\s+)?(?:completely|permanently|for good)|clear\s+(?:the\s+)?(?:bin|trash)|vide\s+(?:la\s+)?corbeille|supprime\s+(?:tout\s+)?(?:définitivement|pour de bon))\s*[.!]?\s*$/i;
+/** True when she asks to empty the bin for good, in any of the three languages. */
+export function isEmptyBinCommand(text) { return EMPTY.test(str(text)); }
+
+/** Empties one bin. Returns how many entries were dropped. */
+export function emptyBin(store, key) { const n = peek(store, key).length; store.removeItem(K(key)); return n; }
+
+/** Empties every bin (all keys). `keys` lists the store's keys when it cannot enumerate itself. */
+export function emptyAllBins(store, keys) {
+  const ks = keys || (typeof store.length === 'number' ? Array.from({ length: store.length }, (_, i) => store.key(i)) : []);
+  let n = 0; ks.filter(k => k && k.startsWith('bakasun.bin.')).forEach(k => { n += emptyBin(store, k.slice('bakasun.bin.'.length)); });
+  return n;
+}
+
 /** Minutes left before an entry empties itself. */
 export function minutesLeft(v, now) { return v ? Math.max(0, Math.ceil((v.at + KEEP_MS - (now || Date.now())) / 60000)) : 0; }

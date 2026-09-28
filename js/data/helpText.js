@@ -5,7 +5,7 @@ export const HELP = {
       'לוחצים "הקלטה", מדברים חופשי. אפשר לעצור לחשוב: אחרי 10 שניות שקט המיקרופון נעצר, הטקסט נשאר, ו"הקלטה" ממשיכה מאותו מקום.',
       'בסוף אומרים "סיימתי" (או לוחצים על הכפתור "סיימתי"). רק אז הפקודה מתבצעת.',
       'אומרים "מחקי" בסוף (גם בלי הפסקה לפני, גם "למחוק" או "דליט"), וכל מה שהוקלט נמחק. גם הכפתור "מחיקה" עושה את זה.',
-      'מה שנמחק נשמר שעה ב"סל" (הכפתור ליד המחיקה). משם מחזירים כל הקלטה.',
+      'מה שנמחק נשמר שעה ב"סל" (הכפתור ליד המחיקה). משם מחזירים כל הקלטה. "רוקני את הסל" (או הכפתור בתוך הסל) מוחק הכל לצמיתות, אחרי אישור.',
       'אפשר גם לכתוב במקום להקליט, ואז ללחוץ "קריאה".'
     ] },
     { title: 'מעבר בין מסכים: "עברי ל..." ואז שם המסך', items: ['"עברי לספקים", "עברי למשימות", "עברי להיום"', 'שמות המסכים: היום, תיקים, ספקים, לקוחות, משימות, שיחות, הצעות מחיר, כספים, קבלות, הערות, קבוצות, חיפוש, הגדרות, פנייה חדשה, עזרה', 'עובד גם "לכי ל...", "תראי לי את ה...", "מסך ספקים". שם מסך בלבד, בלי "עברי ל", לא מעביר, כדי שמילה בתוך משפט לא תזיז אותך בטעות.'] },
@@ -34,6 +34,8 @@ export const HELP = {
     ] },
     { title: 'הודעות ושליחה (כלום לא נשלח בלי לחיצה שלך)', items: [
       'הנוסח הבטוח: "שלחי וואטסאפ ל<שם או מספר>" ואז אחת המילים "ההודעה", "תכתבי", "תגידי לה" או "שאלי", ואז ההודעה עצמה. למשל: "שלחי וואטסאפ לדנה, ההודעה: מגיעה ב-10", "שלחי וואטסאפ ל-0544974644 שאלי מתי את מגיעה הביתה" (הופך לשאלה עם סימן שאלה).',
+      'בלי מילת סימון, כל מה שאחרי המספר או השם הוא ההודעה: "שלחי וואטסאפ ל-0544974644 זו בדיקה".',
+      'לקבוצה: "שלחי וואטסאפ לקבוצת הצוות: הלו״ז נשלח". וואטסאפ נפתח עם ההודעה, ובוחרים את הקבוצה.',
       '"תגידי לדנה ש..." / "תשלחי מייל למארק: ..." עובדים גם. ההודעה נפתחת לבדיקה, ורק לחיצה על "וואטסאפ" שולחת.',
       '"תתקשרי לביסקוטי" / "תפתחי את דנה"',
       '"שלחי אישור ניהול חשבון ל-052-1234567" / "תשלחי את הלוגו לדנה לוי": מסמך מהספרייה',
@@ -52,7 +54,7 @@ export const HELP = {
       'Appuyez sur « Dicter », parlez librement. Vous pouvez réfléchir : après 10 secondes de silence le micro s’arrête, le texte reste, et « Dicter » reprend là où vous étiez.',
       'À la fin, dites « terminé » (ou appuyez sur le bouton « J’ai fini »). C’est seulement alors que l’instruction s’exécute.',
       'Dites « efface » à la fin, et tout l’enregistrement est supprimé. Le bouton « Effacer » fait pareil.',
-      'Ce qui est effacé reste une heure dans la « corbeille » (le bouton à côté). On peut tout récupérer de là.',
+      'Ce qui est effacé reste une heure dans la « corbeille » (le bouton à côté). On peut tout récupérer de là. « vide la corbeille » (ou le bouton dans la corbeille) supprime tout définitivement, après confirmation.',
       'On peut aussi écrire au lieu de dicter, puis appuyer sur « Lire ».'
     ] },
     { title: 'Changer d’écran : « va à ... » puis le nom de l’écran', items: ['« va aux fournisseurs », « va à tâches », « va à accueil »', 'Les écrans : accueil, dossiers, fournisseurs, clients, tâches, appels, devis, finances, reçus, notes, groupes, recherche, réglages, nouvelle demande, aide', '« montre-moi les ... » marche aussi. Le nom seul, sans « va à », ne change pas d’écran : un mot dans une phrase ne vous déplace jamais par erreur.'] },
@@ -81,6 +83,8 @@ export const HELP = {
     ] },
     { title: 'Messages et envois (rien ne part sans votre clic)', items: [
       'La forme sûre : « envoie un whatsapp à <nom ou numéro> » puis « le message », « dis-lui » ou « demande », puis le message. Par exemple : « envoie un whatsapp à Dana, le message : j’arrive à 10h », « envoie un message au 0544974644 demande quand tu arrives » (devient une question).',
+      'Sans mot-repère, tout ce qui suit le numéro ou le nom est le message : « envoie un whatsapp au 0544974644 ceci est un test ».',
+      'À un groupe : « envoie un whatsapp au groupe équipe : le programme est parti ». WhatsApp s’ouvre avec le message, vous choisissez le groupe.',
       '« envoie un mail à Marc : ... » marche aussi. Le message s’ouvre pour vérification, seul le clic sur « WhatsApp » envoie.',
       '« appelle Biscotti » / « ouvre Dana »',
       '« envoie l’attestation bancaire au 052-1234567 » / « envoie le logo à Dana Levy » : un document de la bibliothèque',
@@ -99,7 +103,7 @@ export const HELP = {
       'Tap “Dictate” and talk freely. You can stop to think: after 10 seconds of silence the microphone stops, the text stays, and “Dictate” continues from there.',
       'At the end say “done” (or tap the “Done” button). Only then does the instruction run.',
       'Say “delete” at the end and the whole recording is removed. The “Delete” button does the same.',
-      'What was deleted stays one hour in the “bin” (the button next to it). Anything can be brought back from there.',
+      'What was deleted stays one hour in the “bin” (the button next to it). Anything can be brought back from there. “empty the bin” (or the button inside the bin) deletes everything for good, after a confirmation.',
       'You can also type instead of dictating, then tap “Read”.'
     ] },
     { title: 'Moving between screens: “go to ...” then the screen name', items: ['“go to suppliers”, “go to tasks”, “go to today”', 'The screens: today, cases, suppliers, clients, tasks, calls, quotes, money, receipts, notes, groups, search, settings, new lead, help', '“show me the ...” works too. The name alone, without “go to”, does not move you: a word inside a sentence never moves you by mistake.'] },
@@ -128,6 +132,8 @@ export const HELP = {
     ] },
     { title: 'Messages and sending (nothing leaves without your tap)', items: [
       'The safe form: “send a whatsapp to <name or number>” then “saying”, “say”, “the message is” or “ask”, then the message. For example: “send a whatsapp to Dana saying arriving at 10”, “send a message to 0544974644 ask when you get home” (becomes a question).',
+      'Without a marker, everything after the number or the name is the message: “send a whatsapp to 0544974644 this is a test”.',
+      'To a group: “send a whatsapp to the group team: schedule sent”. WhatsApp opens with the message, you pick the group.',
       '“send an email to Marc: ...” works too. The message opens for a check, only the tap on “WhatsApp” sends it.',
       '“call Biscotti” / “open Dana”',
       '“send the bank confirmation to 052-1234567” / “send the logo to Dana Levy”: a document from the library',

@@ -101,3 +101,18 @@ test('the message body starts after the recipient at a marker: "ask" makes a que
   assert.equal(parseCommand('send a message to Dana ask when she arrives', [], people).body, 'when she arrives?');
   assert.equal(parseCommand('envoie un message à Dana demande quand elle arrive', [], people).body, 'quand elle arrive?');
 });
+
+test('without any marker, everything after the number or the name is the message; a group is a group', () => {
+  const people = [{ label: 'דנה לוי', names: ['דנה לוי', 'דנה'], phone: '0521111111', about: 'client' }];
+  let c = parseCommand('שלח הודעה לטלפון 0544974644 בוואטסאפ זו היא בדיקה', [], people);
+  assert.equal(c.kind, 'message'); assert.equal(c.to.phone, '0544974644'); assert.equal(c.body, 'זו היא בדיקה');
+  c = parseCommand('שלחי וואטסאפ לדנה זו בדיקה שנייה', [], people);
+  assert.equal(c.kind, 'message'); assert.equal(c.to.name, 'דנה לוי'); assert.equal(c.body, 'זו בדיקה שנייה');
+  c = parseCommand('send a whatsapp to 0544974644 this is a test', [], people);
+  assert.equal(c.body, 'this is a test');
+  c = parseCommand('שלחי וואטסאפ לקבוצת הצוות: הלו״ז נשלח במייל', [], people);
+  assert.equal(c.kind, 'message'); assert.ok(c.to.group); assert.equal(c.to.name, 'הצוות'); assert.equal(c.body, 'הלו״ז נשלח במייל');
+  c = parseCommand('send a whatsapp to the group of the team saying schedule sent', [], people);
+  assert.ok(c.to.group); assert.equal(c.body, 'schedule sent');
+  assert.equal(parseCommand('שלחי אישור ניהול חשבון ל-052-1234567', [{ id: 'd', title: 'אישור ניהול חשבון', aliases: [] }], people).kind, 'send');
+});

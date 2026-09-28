@@ -53,6 +53,13 @@ export function openWhatsApp(phone, text) {
   toast(t('openWa'), 2500);
   return true;
 }
+/** WhatsApp with the text ready and no recipient: she picks the chat or the group herself, then presses send. */
+export function openWhatsAppPick(text) {
+  if (hasArabic(text)) { toast(t('arabicBlocked'), 4000); return false; }
+  const a = document.createElement('a'); a.href = 'https://wa.me/?text=' + encodeURIComponent(text || ''); a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove();
+  toast(t('openWa'), 2500);
+  return true;
+}
 /** Opens the mail app with recipient, subject and body ready; she presses send. Same Arabic guard. */
 export function openMail(to, subject, body) {
   if (hasArabic(body) || hasArabic(subject)) { toast(t('arabicBlocked'), 4000); return false; }

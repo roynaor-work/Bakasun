@@ -4,8 +4,15 @@
 import { t } from './i18n.js';
 import { esc, toast, dialog } from './ui.js';
 import Office from './logic/office.js';
-import { stash, peek, restore, minutesLeft, isDeleteCommand, isDoneCommand, stripDelete, stripDone } from './logic/trash.js';
-export { isDeleteCommand, isDoneCommand, stripDelete, stripDone };
+import { stash, peek, restore, minutesLeft, isDeleteCommand, isDoneCommand, stripDelete, stripDone, isEmptyBinCommand, emptyBin, emptyAllBins } from './logic/trash.js';
+import { confirmDialog } from './ui.js';
+export { isDeleteCommand, isDoneCommand, stripDelete, stripDone, isEmptyBinCommand };
+
+/** "Empty the bin": asks once, then every deleted recording is gone for good. Returns true when emptied. */
+export async function emptyBins() {
+  if (!(await confirmDialog(t('emptyBinConfirm'), t('emptyBin')))) return false;
+  const n = emptyAllBins(localStorage); toast(t('binEmptied', { n })); return true;
+}
 
 const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"/></svg>';
 const BIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16l-1.5 13h-13zM9 7V4h6v3M9 12l6 4M15 12l-6 4"/></svg>';
@@ -29,8 +36,10 @@ export function wireDelete(box, ta, key, onChange) {
   };
   bin.onclick = async () => {
     const list = peek(localStorage, key); if (!list.length) { draw(); return; }
-    const html = `<p class="hint">${esc(t('binHint'))}</p>` + list.map((v, i) => `<label class="chk"><input type="radio" name="pick" value="${esc(v.id)}"${i === 0 ? ' checked' : ''}><span><span class="sub">${esc(Office.hhmm ? new Date(v.at).toTimeString().slice(0, 5) : '')} · ${esc(t('minutesLeft', { n: minutesLeft(v) }))}</span><br>${esc(v.text.length > 160 ? v.text.slice(0, 160) + '…' : v.text)}</span></label>`).join('');
+    const html = `<p class="hint">${esc(t('binHint'))}</p>` + list.map((v, i) => `<label class="chk"><input type="radio" name="pick" value="${esc(v.id)}"${i === 0 ? ' checked' : ''}><span><span class="sub">${esc(new Date(v.at).toTimeString().slice(0, 5))} · ${esc(t('minutesLeft', { n: minutesLeft(v) }))}</span><br>${esc(v.text.length > 160 ? v.text.slice(0, 160) + '…' : v.text)}</span></label>`).join('')
+      + `<div class="row end"><button type="button" class="btn danger sm" id="emptyBinBtn">${esc(t('emptyBin'))}</button></div>`;
     const r = await dialog(t('binTitle'), html, { ok: t('recoverRec') });
+    draw();
     if (!r || !r.pick) return;
     const back = restore(localStorage, key, r.pick); if (back) putBack(back); else draw();
   };
@@ -42,3 +51,11 @@ export function wireDelete(box, ta, key, onChange) {
   draw();
   return { doDelete, draw };
 }
+
+// the "empty the bin" button inside the bin dialog: one confirmation, then the dialog closes
+document.addEventListener('click', async e => {
+  if (e.target && e.target.id === 'emptyBinBtn') {
+    const form = e.target.closest('form');
+    if (await emptyBins()) { const c = form && form.querySelector('[data-x=cancel]'); if (c) c.click(); const b = document.querySelector('#bin'); if (b) { b.hidden = true; } }
+  }
+});
