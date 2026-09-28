@@ -7,6 +7,8 @@ import Office from '../logic/office.js';
 import { TASK } from '../logic/extra.js';
 import { isReceiptCommand } from '../logic/receipts.js';
 import { parseAgenda, agenda } from '../logic/agenda.js';
+import { parseGoto, screenWord } from '../logic/nav.js';
+import { parseMissing, openItems, focusSections } from '../logic/openItems.js';
 import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage } from '../logic/commands.js';
 import { QUOTE_STATUS } from '../logic/quotes.js';
 import { subjects } from '../notes.js';
@@ -73,15 +75,56 @@ function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
       const without = () => { ta.value = (base + (finals || []).slice(0, -1).join(' ')).trim(); draft = ta.value; };
       if (isDeleteCommand(lastSaid)) { without(); if (bin) bin.doDelete(); return; }
       if (manual) return;
+      // a screen name alone ("suppliers") moves there at once, no "finished" needed
+      if (autoRun && parseGoto(lastSaid) && !(finals || []).slice(0, -1).length) { ta.value = base.trim(); draft = ta.value; goTo(parseGoto(lastSaid)); return; }
       const run = isDoneCommand(lastSaid) || why === 'stop';
       if (isDoneCommand(lastSaid)) without();
       if (!run) { toast(t('stoppedHint'), 4000); return; }
       if (autoRun && ta.value.trim()) { toast(t('heardRunning'), 1500); onRead(ta.value, body.querySelector('#out')); }
-    }, { silence: 10000, stopOn: x => isDoneCommand(x) || isDeleteCommand(x) });
+    }, { silence: 10000, stopOn: x => isDoneCommand(x) || isDeleteCommand(x) || (autoRun && !!parseGoto(x)) });
     if (!stop) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
   };
   body.querySelector('#go').onclick = () => { if (stop) { manual = true; stop(); } if (isDeleteCommand(ta.value)) { if (bin) bin.doDelete(); return; } onRead(ta.value, body.querySelector('#out')); };
   return ta;
+}
+
+/** A spoken screen name moves there, no tap. */
+function goTo(route) {
+  toast(t('goingTo', { screen: screenWord(route, lang()) }), 1200);
+  location.hash = route === 'assist' ? '#/assist' : '#/' + route;
+}
+
+/** The case she means: by the client's name (or its id), tried as said and without a Hebrew one-letter prefix. */
+function caseByName(who, alt) {
+  const active = db.list('cases', x => Office.ACTIVE.includes(x.status)).sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
+  const clients = db.list('clients');
+  const aliasHit = hay => clients.find(c => String(c.aliases || '').split(/[,;]+/).map(a => Office.normHe(a)).some(a => a && (a.indexOf(hay) >= 0 || hay.indexOf(a) >= 0)));
+  const find = w => {
+    const hay = Office.normHe(w || ''); if (hay.length < 2) return null;
+    const direct = active.find(x => Office.normHe(x.client || '').indexOf(hay) >= 0 || (hay.length >= 3 && hay.indexOf(Office.normHe(x.client || '')) >= 0) || Office.normHe(x.contact || '').indexOf(hay) >= 0 || Office.normHe(x.purpose || '').indexOf(hay) >= 0);
+    if (direct) return direct;
+    const cl = aliasHit(hay); return cl ? active.find(x => x.clientId === cl.id) || null : null;
+  };
+  return find(who) || find(alt) || null;
+}
+
+/** "What is missing for Shoval?": everything open on that event, in sections with links. */
+function showMissing(out, mq) {
+  const active = db.list('cases', x => Office.ACTIVE.includes(x.status)).sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
+  let cs = caseByName(mq.who, mq.alt);
+  if (!cs && active.length === 1) cs = active[0];
+  if (!cs) {
+    out.innerHTML = `<div class="card stack"><div class="title">${esc(t('whichCase'))}</div>${active.length ? active.map(c => `<button type="button" class="btn" data-case="${esc(c.id)}">${esc(c.client)}${c.date ? ' · ' + esc(Office.fmt(c.date)) : ''}</button>`).join('') : `<p class="hint">${esc(t('noCases'))}</p>`}</div>`;
+    out.querySelectorAll('[data-case]').forEach(b => { b.onclick = () => showMissing(out, Object.assign({}, mq, { who: db.get('cases', b.dataset.case).client, alt: '' })); });
+    return;
+  }
+  const res = focusSections(openItems(cs, db.snapshot(), new Date(), lang()), mq.focus);
+  const head = [cs.client, cs.kind, cs.date ? Office.fmt(cs.date) : ''].filter(Boolean).join(' · ');
+  const days = res.daysLeft != null && res.daysLeft >= 0 ? `<span class="badge ${res.daysLeft <= 7 ? 'warn' : 'muted'}">${esc(t('daysLeft', { n: res.daysLeft }))}</span>` : '';
+  out.innerHTML = `<div class="card stack"><div class="row between"><a class="title" href="#/case/${esc(cs.id)}">${esc(head)}</a>${days}</div>
+    ${res.sections.length ? res.sections.map(s => `<div><div class="sub"><b>${esc(s.title)}</b> (${s.items.length})</div><ul class="open">${s.items.map(i => `<li><a href="${esc(i.href)}">${esc(i.text)}</a></li>`).join('')}</ul></div>`).join('') : `<p class="okbox">${esc(t('nothingOpen'))}</p>`}
+    <div class="row"><a class="btn sm" href="#/case/${esc(cs.id)}">${esc(t('open'))}</a><button type="button" class="btn sm ghost" id="copyOpen">${esc(t('copy'))}</button></div></div>`;
+  const b = out.querySelector('#copyOpen'); if (b) b.onclick = () => copyText(head + '\n' + res.sections.map(s => s.title + ':\n' + s.items.map(i => '• ' + i.text).join('\n')).join('\n\n'));
 }
 
 /** "What do I have tomorrow?": tasks and reminders (with a done tick), events, calls. */
@@ -114,8 +157,12 @@ async function tabCommand(body, s, ctx) {
     .concat(db.list('contacts').map(x => ({ label: x.name, names: [x.name], phone: x.phone, email: x.email, about: 'contact', id: x.id })));
   inputBox(body, t('cmdHint'), t('cmdPh'), (text, out) => {
     if (isReceiptCommand(text)) { location.hash = '#/receipts/' + new Date().toISOString().slice(0, 7) + '/snap'; return; }
+    const go = parseGoto(text);
+    if (go) { draft = ''; goTo(go); return; }
     const q = parseAgenda(text, new Date());
     if (q) { showAgenda(out, q); return; }
+    const mq = parseMissing(text);
+    if (mq) { showMissing(out, mq); return; }
     const c = parseCommand(text, docs, peopleNow());
     if (c.kind === 'invoice') { mode = 'invoice'; draft = text; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'supplierQuote') { mode = 'supplierQuote'; preSupplier = c.supplier && c.supplier.about === 'supplier' ? c.supplier.id : ''; draft = ''; render({ root: body.closest('#app') }); return; }

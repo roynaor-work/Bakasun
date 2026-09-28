@@ -156,3 +156,7 @@ details.examples .chip { font-weight: 500; text-align: start; min-height: 36px; 
 .btn.del svg { width: 20px; height: 20px; }
 .binbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .binbar[hidden] { display: none; }
+ul.help, ul.open { margin: 6px 0 0; padding-inline-start: 18px; }
+ul.help li, ul.open li { margin: 4px 0; line-height: 1.45; }
+ul.open a { color: var(--ink); text-decoration: underline dotted; }
+.btn[hidden] { display: none; }

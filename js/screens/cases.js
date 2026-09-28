@@ -68,7 +68,7 @@ function tabDetails(body, c, s) {
         <select id="status" class="grow" aria-label="${esc(t('fStatus'))}">${Object.values(Office.STATUS).map(v => `<option value="${esc(v)}"${v === c.status ? ' selected' : ''}>${esc(statusLabel(v))}</option>`).join('')}</select></div>
       <div class="card"><div class="row between"><div><div class="title">${esc(c.contact || '')}</div><div class="sub ltr">${esc(phonePretty(c.phone))}${c.email ? ' · ' + esc(c.email) : ''}</div></div>
         ${client ? `<a class="btn sm" href="#/client/${esc(client.id)}">${esc(t('history'))}</a>` : ''}</div>
-        <div class="row"><button class="btn wa" id="wa">${esc(t('whatsapp'))}</button><button class="btn" id="dial">${esc(t('call'))}</button><button class="btn" id="queue">${esc(t('addCall'))}</button><button class="btn" id="task">+ ${esc(t('addTask'))}</button></div></div>
+        <div class="row"><button class="btn wa" id="wa">${esc(t('whatsapp'))}</button><button class="btn" id="dial">${esc(t('call'))}</button><button class="btn" id="queue">${esc(t('addCall'))}</button><button class="btn" id="task">+ ${esc(t('addTask'))}</button><button class="btn" id="whatsOpen">${esc(t('whatsOpen'))}</button></div></div>
       <div class="card"><dl class="kv">${kv.map(x => `<dt>${esc(x[0])}</dt><dd>${esc(x[1])}</dd>`).join('')}</dl></div>
       <div class="card"><div class="row between"><span class="sub"><b>${esc(t('waitingSince'))}</b> ${c.waitingSince ? esc(Office.fmt(c.waitingSince)) : esc(t('none'))}</span>
         <div class="row">${c.waitingSince ? `<button class="btn sm ok" id="answered">${esc(t('gotAnswer'))}</button>` : `<button class="btn sm" id="waiting">${esc(t('markWaiting'))}</button>`}</div></div></div>
@@ -90,6 +90,7 @@ function tabDetails(body, c, s) {
     const r = await dialog(t('addCall'), field('why', t('why'), ''), { ok: t('add') });
     if (r) { db.put('calls', { caseId: id, clientId: c.clientId, name: c.contact || c.client, phone: c.phone, lang: c.lang, why: r.why, status: CALL.todo, attempts: 0 }); toast(t('saved')); }
   };
+  body.querySelector('#whatsOpen').onclick = () => { sessionStorage.setItem('bakasun.ask', t('askOpenFor', { who: c.client || '' })); location.hash = '#/assist/from-today'; };
   body.querySelector('#task').onclick = async () => {
     const r = await dialog(t('newTask'), field('title', t('taskTitle'), '') + field('details', t('taskDetails'), '', { type: 'textarea' }) +
       `<div class="grid2">${field('who', t('taskWho'), '')}${field('phone', t('fPhone'), '', { ltr: true, inputmode: 'tel' })}${field('due', t('taskDue'), c.date || '', { type: 'date' })}
