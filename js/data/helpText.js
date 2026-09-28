@@ -4,7 +4,7 @@ export const HELP = {
     { title: 'איך מקליטים', items: [
       'לוחצים "הקלטה", מדברים חופשי. אפשר לעצור לחשוב: אחרי 10 שניות שקט המיקרופון נעצר, הטקסט נשאר, ו"הקלטה" ממשיכה מאותו מקום.',
       'בסוף אומרים "סיימתי" (או לוחצים על הכפתור "סיימתי"). רק אז הפקודה מתבצעת.',
-      'אומרים "מחקי" בסוף, וכל מה שהוקלט נמחק. גם הכפתור "מחיקה" עושה את זה.',
+      'אומרים "מחקי" בסוף (גם בלי הפסקה לפני, גם "למחוק" או "דליט"), וכל מה שהוקלט נמחק. גם הכפתור "מחיקה" עושה את זה.',
       'מה שנמחק נשמר שעה ב"סל" (הכפתור ליד המחיקה). משם מחזירים כל הקלטה.',
       'אפשר גם לכתוב במקום להקליט, ואז ללחוץ "קריאה".'
     ] },
@@ -33,7 +33,8 @@ export const HELP = {
       'אחרי תזכורת, ובכל משימה עם תאריך, יש כפתור "ליומן": התזכורת נכנסת ליומן של הטלפון ומצלצלת בשעה. גם בתיק יש "ליומן" ליום האירוע.'
     ] },
     { title: 'הודעות ושליחה (כלום לא נשלח בלי לחיצה שלך)', items: [
-      '"שלחי הודעה לרועי: מגיעה ב-10" / "תגידי לדנה ש..." / "תשלחי מייל למארק: ..."',
+      'הנוסח הבטוח: "שלחי וואטסאפ ל<שם או מספר>" ואז אחת המילים "ההודעה", "תכתבי", "תגידי לה" או "שאלי", ואז ההודעה עצמה. למשל: "שלחי וואטסאפ לדנה, ההודעה: מגיעה ב-10", "שלחי וואטסאפ ל-0544974644 שאלי מתי את מגיעה הביתה" (הופך לשאלה עם סימן שאלה).',
+      '"תגידי לדנה ש..." / "תשלחי מייל למארק: ..." עובדים גם. ההודעה נפתחת לבדיקה, ורק לחיצה על "וואטסאפ" שולחת.',
       '"תתקשרי לביסקוטי" / "תפתחי את דנה"',
       '"שלחי אישור ניהול חשבון ל-052-1234567" / "תשלחי את הלוגו לדנה לוי": מסמך מהספרייה',
       '"תבקש מרועי חשבונית: קומיוניטי או, 580777894, 3,000 + מע״מ"',
@@ -79,7 +80,8 @@ export const HELP = {
       'Après un rappel, et sur chaque tâche datée, le bouton « Au calendrier » met le rappel dans l’agenda du téléphone, qui sonne à l’heure. Le dossier a aussi « Au calendrier » pour le jour de l’événement.'
     ] },
     { title: 'Messages et envois (rien ne part sans votre clic)', items: [
-      '« envoie un message à Roy : j’arrive à 10h » / « envoie un mail à Marc : ... »',
+      'La forme sûre : « envoie un whatsapp à <nom ou numéro> » puis « le message », « dis-lui » ou « demande », puis le message. Par exemple : « envoie un whatsapp à Dana, le message : j’arrive à 10h », « envoie un message au 0544974644 demande quand tu arrives » (devient une question).',
+      '« envoie un mail à Marc : ... » marche aussi. Le message s’ouvre pour vérification, seul le clic sur « WhatsApp » envoie.',
       '« appelle Biscotti » / « ouvre Dana »',
       '« envoie l’attestation bancaire au 052-1234567 » / « envoie le logo à Dana Levy » : un document de la bibliothèque',
       '« demande à Roy une facture : Community O, 580777894, 3 000 + TVA »',
@@ -125,7 +127,8 @@ export const HELP = {
       'After a reminder, and on every dated task, the “To calendar” button puts it in the phone’s calendar, which rings at the hour. The case has “To calendar” for the event day too.'
     ] },
     { title: 'Messages and sending (nothing leaves without your tap)', items: [
-      '“send a message to Roy: arriving at 10” / “send an email to Marc: ...”',
+      'The safe form: “send a whatsapp to <name or number>” then “saying”, “say”, “the message is” or “ask”, then the message. For example: “send a whatsapp to Dana saying arriving at 10”, “send a message to 0544974644 ask when you get home” (becomes a question).',
+      '“send an email to Marc: ...” works too. The message opens for a check, only the tap on “WhatsApp” sends it.',
       '“call Biscotti” / “open Dana”',
       '“send the bank confirmation to 052-1234567” / “send the logo to Dana Levy”: a document from the library',
       '“ask Roy for an invoice: Community O, 580777894, 3,000 + VAT”',

@@ -11,7 +11,11 @@ const TO = /(?:\s(?:ל|אל|to|à)\s*|\s(?:למספר|לטלפון|למייל|to
 // "(save|add) (the) (phone|number|mail) of X 052..." in three languages, or "X's phone is 052..."
 const CONTACT = /(?:^(?:שמרי|תשמרי|שמור|הוסיפי|תוסיפי|הוסף|save|add|enregistre|ajoute)\s+(?:את\s+|the\s+|le\s+|la\s+|l['’]\s*)?(?:ה)?(?:טלפון|מספר|מייל|אימייל|phone|number|mail|e-mail|email|numéro|téléphone)\s+(?:של\s+|of\s+|de\s+|d['’]\s*)?([^:,\d@]+?)\s*[:,]?\s+(?=[+0\d]|[A-Za-z0-9._%+\-]+@))|(?:^(?:ה)?(?:טלפון|מספר|מייל|אימייל|phone|number|mail|e-mail|email|numéro|téléphone)\s+(?:של\s+|of\s+|de\s+|d['’]\s*)([^:,\d@]+?)\s*(?:הוא|זה|is|est|[:,])?\s+(?=[+0\d]|[A-Za-z0-9._%+\-]+@))/i;
 // "(send|write|tell) (a message|a whatsapp|an e-mail) to X[:,] body"
-const MESSAGE = /^(?:שלחי|שלח|תשלחי|תשלח|תכתבי|תכתוב|כתבי|תגידי|תאמרי|תגיד|send|write|tell|envoie|envoyer|écris|dis)\s+(?:(?:את\s+)?(?:ה)?(הודעה|הודעת וואטסאפ|וואטסאפ|ווצאפ|מייל|אימייל|a message|a whatsapp|message|whatsapp|an e-mail|an email|e-mail|email|mail|un message|un mail|un e-mail|un whatsapp|courriel)\s+)?(?:ל|אל\s+|to\s+|à\s+|a\s+)([^:,]+?)\s*(?:[:,]|\s(?=ש[א-ת]))\s*(.+)$/i;
+// The body starts at ":" / "," or at a marker word: "ההודעה", "תכתבי", "תגידי לה", "שאלי" (a question), or a "ש..." clause.
+const MARK = '(?:ההודעה(?:\\s+היא)?|הודעה|תכתבי|כתבי|תגידי|תאמרי|שאלי|תשאלי|שאל|תשאל|saying|say|ask|asking|that|the message is|message|le message|dis|demande|que)';
+const MESSAGE = new RegExp('^(?:שלחי|שלח|תשלחי|תשלח|תכתבי|תכתוב|כתבי|תגידי|תאמרי|תגיד|send|write|tell|envoie|envoyer|écris|dis)\\s+(?:(?:את\\s+)?(?:ה)?(הודעה|הודעת וואטסאפ|הודעה בוואטסאפ|וואטסאפ|ווצאפ|מייל|אימייל|a message|a whatsapp|message|whatsapp|an e-mail|an email|e-mail|email|mail|un message|un mail|un e-mail|un whatsapp|courriel)\\s+)?(?:ל|אל\\s+|to\\s+|à\\s+|a\\s+)([^:,]+?)\\s*(?:[:,]|\\s(?=' + MARK + '(?:\\s|$)|ש[א-ת]))\\s*(.+)$', 'i');
+const ASK_V = /^(?:שאלי|תשאלי|שאל|תשאל|ask(?: her| him| them)?|asking|demande(?:-lui)?)\s+/i;
+const SAY_V = /^(?:ההודעה(?:\s+היא)?|הודעה|תכתבי|כתבי|תגידי(?:\s+(?:לו|לה|להם))?|תאמרי|saying|say|that|the message is|message|le message(?:\s+est)?|dis(?:-lui)?|que)(?:\s*[:,]\s*|\s+)/i;
 function findPerson(text, people) {
   const hay = Office.normHe(text); let bp = null, bl = 0;
   // the name inside the text ("send to Dana Levy the logo"), or the text inside the name ("Shoval" for "ארגון שוב״ל")
@@ -66,7 +70,13 @@ export function parseCommand(text, docs, people) {
   if (msg) {
     const via = /(מייל|אימייל|mail|e-mail|email|courriel)/i.test(msg[1] || '') ? 'email' : 'whatsapp';
     const who = trim(msg[2]); let body = trim(msg[3] || '');
-    if (!/[:,]/.test(t.slice(0, t.length - body.length)) && /^ש[א-ת]/.test(body)) body = body.replace(/^ש/, '');
+    const spoken = !/[:,]/.test(t.slice(0, t.length - body.length));
+    if (ASK_V.test(body)) { body = trim(body.replace(ASK_V, '')).replace(/[?.!]+$/, '').replace(/^אם\s/, 'האם ') + '?'; out.ask = true; }
+    else {
+      if (SAY_V.test(body)) body = trim(body.replace(SAY_V, ''));
+      // "תגידי לדנה שאני מאחרת": the ש is grammar, not part of the message. "שאל מתי" keeps its ש (it is the verb).
+      if (spoken && /^ש[א-ת]/.test(body) && !/^(?:שאל|שלום|שלח|שמר|שוב|שיר|שבוע|שעה|שני|שלוש|שיש|שבע|שמונ|שם\b)/.test(body)) body = body.replace(/^ש/, '');
+    }
     out.kind = 'message'; out.via = via; out.body = body;
     out.to = email ? { email: email[0] } : phone ? { phone: phone[0].replace(/\s/g, '') } : findPerson(who, people);
     if (!out.to) out.to = { name: who };

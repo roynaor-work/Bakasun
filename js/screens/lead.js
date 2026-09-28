@@ -9,7 +9,7 @@ import { PLACES } from '../data/places.js';
 import { matchClient } from '../logic/extra.js';
 import { speechSupported, listen } from '../voice.js';
 import { parseBrief } from '../logic/brief.js';
-import { wireDelete, isDeleteCommand, isDoneCommand } from '../recbox.js';
+import { wireDelete, isDeleteCommand, stripDelete, stripDone } from '../recbox.js';
 import { SUPPLIER_TYPES } from '../data/catalog.js';
 import { supplierTypeLabel } from '../labels.js';
 
@@ -51,14 +51,15 @@ export function render({ root }) {
     stopRec = listen(SPEECH[sel.value] || 'he-IL', text => { msg.value = base + text; draft.text = msg.value; }, (said, why, finals) => {
       stopRec = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate');
       const lastSaid = (finals || []).slice(-1)[0] || '';
-      const without = () => { msg.value = (base + (finals || []).slice(0, -1).join(' ')).trim(); draft.text = msg.value; };
-      if (isDeleteCommand(lastSaid)) { without(); if (bin) bin.doDelete(); return; }
+      const without = rest => { msg.value = (base + (finals || []).slice(0, -1).concat(rest ? [rest] : []).join(' ')).trim(); draft.text = msg.value; };
+      const delRest = stripDelete(lastSaid), doneRest = stripDone(lastSaid);
+      if (delRest !== null) { without(delRest); if (bin) bin.doDelete(); return; }
       if (manual) return;
-      const run = isDoneCommand(lastSaid) || why === 'stop';
-      if (isDoneCommand(lastSaid)) without();
+      const run = doneRest !== null || why === 'stop';
+      if (doneRest !== null) without(doneRest);
       if (!run) { toast(t('stoppedHint'), 4000); return; }
       if (msg.value.trim().length > 3) { toast(t('heardRunning'), 1500); root.querySelector('#read').click(); }
-    }, { silence: 10000, stopOn: x => isDoneCommand(x) || isDeleteCommand(x) });
+    }, { silence: 10000, stopOn: x => stripDone(x) !== null || stripDelete(x) !== null });
     if (!stopRec) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
   };
 

@@ -88,3 +88,16 @@ test('action commands: quote, ask, open, call, task, note, lead, today', () => {
   assert.equal(parseCommand('שלחי הודעה לשירית כהן: מגיעה', [], people).kind, 'message');
   assert.equal(parseCommand('תזכירי לי מחר ב-9 להתקשר לדנה', [], people).kind, 'reminder');
 });
+
+test('the message body starts after the recipient at a marker: "ask" makes a question, "say/write" strips the marker, a bare ש is grammar', () => {
+  const people = [{ label: 'דנה לוי', names: ['דנה לוי', 'דנה'], phone: '0521111111', about: 'client' }];
+  let c = parseCommand('שלח הודעת וואטסאפ לטלפון 0544974644 שאל מתי את מגיעה הביתה', [], people);
+  assert.equal(c.kind, 'message'); assert.equal(c.to.phone, '0544974644'); assert.equal(c.body, 'מתי את מגיעה הביתה?');
+  assert.equal(parseCommand('שלחי וואטסאפ לדנה, ההודעה: מגיעה ב-10', [], people).body, 'מגיעה ב-10');
+  assert.equal(parseCommand('שלחי וואטסאפ לדנה תכתבי אני מאחרת בעשר דקות', [], people).body, 'אני מאחרת בעשר דקות');
+  assert.equal(parseCommand('שלחי הודעה לדנה תגידי לה שהאוטובוס יוצא בשמונה', [], people).body, 'האוטובוס יוצא בשמונה');
+  assert.equal(parseCommand('שלחי הודעה לדנה שאלי אם היא בבית', [], people).body, 'האם היא בבית?');
+  assert.equal(parseCommand('שלחי וואטסאפ לדנה שלום דנה מה שלומך', [], people).body, 'שלום דנה מה שלומך');
+  assert.equal(parseCommand('send a message to Dana ask when she arrives', [], people).body, 'when she arrives?');
+  assert.equal(parseCommand('envoie un message à Dana demande quand elle arrive', [], people).body, 'quand elle arrive?');
+});

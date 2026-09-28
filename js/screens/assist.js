@@ -18,7 +18,7 @@ import { QUOTE_STATUS } from '../logic/quotes.js';
 import { subjects } from '../notes.js';
 import { files, shareFile, downloadFile, pdfText } from '../files.js';
 import { speechSupported, listen } from '../voice.js';
-import { wireDelete, isDeleteCommand, isDoneCommand } from '../recbox.js';
+import { wireDelete, isDeleteCommand, stripDelete, stripDone } from '../recbox.js';
 import { DEFAULTS } from '../data/defaults.js';
 import { hasArabic, waLink } from '../logic/core.js';
 import { COMPANY_PAPERS } from '../data/docsList.js';
@@ -76,16 +76,18 @@ function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
     stop = listen(SPEECH[dl.value] || 'he-IL', text => { ta.value = base + text; draft = ta.value; }, (said, why, finals) => {
       stop = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate');
       const lastSaid = (finals || []).slice(-1)[0] || '';
-      const without = () => { ta.value = (base + (finals || []).slice(0, -1).join(' ')).trim(); draft = ta.value; };
-      if (isDeleteCommand(lastSaid)) { without(); if (bin) bin.doDelete(); return; }
+      // the closing word may sit at the end of the last sentence, with no pause before it
+      const without = rest => { ta.value = (base + (finals || []).slice(0, -1).concat(rest ? [rest] : []).join(' ')).trim(); draft = ta.value; };
+      const delRest = stripDelete(lastSaid), doneRest = stripDone(lastSaid);
+      if (delRest !== null) { without(delRest); if (bin) bin.doDelete(); return; }
       if (manual) return;
-      // a screen name alone ("suppliers") moves there at once, no "finished" needed
+      // "go to suppliers" alone moves there at once, no "finished" needed
       if (autoRun && parseGoto(lastSaid) && !(finals || []).slice(0, -1).length) { ta.value = base.trim(); draft = ta.value; goTo(parseGoto(lastSaid)); return; }
-      const run = isDoneCommand(lastSaid) || why === 'stop';
-      if (isDoneCommand(lastSaid)) without();
+      const run = doneRest !== null || why === 'stop';
+      if (doneRest !== null) without(doneRest);
       if (!run) { toast(t('stoppedHint'), 4000); return; }
       if (autoRun && ta.value.trim()) { toast(t('heardRunning'), 1500); onRead(ta.value, body.querySelector('#out')); }
-    }, { silence: 10000, stopOn: x => isDoneCommand(x) || isDeleteCommand(x) || (autoRun && !!parseGoto(x)) });
+    }, { silence: 10000, stopOn: x => stripDone(x) !== null || stripDelete(x) !== null || (autoRun && !!parseGoto(x)) });
     if (!stop) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
   };
   body.querySelector('#go').onclick = () => { if (stop) { manual = true; stop(); } if (isDeleteCommand(ta.value)) { if (bin) bin.doDelete(); return; } onRead(ta.value, body.querySelector('#out')); };

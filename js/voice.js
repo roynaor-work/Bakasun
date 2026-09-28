@@ -12,7 +12,7 @@ export function listen(langCode, onText, onEnd, opts) {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) return null;
   const silence = opts && opts.silence > 0 ? opts.silence : 0;
-  let finals = [], interim = '', active = true, rec = null, restarts = 0, timer = null, why = 'stop';
+  let finals = [], interim = '', active = true, rec = null, restarts = 0, timer = null, why = 'stop', ended = false;
   const bump = () => {
     if (!silence) return;
     clearTimeout(timer);
@@ -44,6 +44,7 @@ export function listen(langCode, onText, onEnd, opts) {
       if (interim && finals[finals.length - 1] !== interim) { finals.push(interim); interim = ''; emit(); }
       if (active && restarts < 40) { restarts++; try { start(); return; } catch (e) { /* fall through */ } }
       clearTimeout(timer);
+      if (ended) return; ended = true;
       if (onEnd) onEnd(finals.join(' '), why, finals.slice());
     };
     rec.start();

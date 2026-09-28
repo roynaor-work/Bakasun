@@ -1,6 +1,20 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDoneCommand, isDeleteCommand, stash, peek, restore, minutesLeft, KEEP_MS } from '../js/logic/trash.js';
+import { isDoneCommand, isDeleteCommand, stripDelete, stripDone, stash, peek, restore, minutesLeft, KEEP_MS } from '../js/logic/trash.js';
+
+test('"delete" or "finished" at the end of a sentence, without a pause, still counts', () => {
+  assert.equal(stripDelete('תשלח הודעה למחיקה למחוק דליט'), 'תשלח הודעה');
+  assert.equal(stripDelete('שלחי הודעה לדנה מחקי'), 'שלחי הודעה לדנה');
+  assert.equal(stripDelete('send it to Dana delete'), 'send it to Dana');
+  assert.equal(stripDelete('מחקי'), '');
+  assert.equal(stripDelete('תמחקי את ההערה על ביסקוטי'), null);
+  assert.equal(stripDelete('שלחי הודעה לדנה'), null);
+  assert.equal(stripDone('תזכירי לי מחר ב-9 להתקשר לדנה סיימתי'), 'תזכירי לי מחר ב-9 להתקשר לדנה');
+  assert.equal(stripDone('remind me tomorrow done.'), 'remind me tomorrow');
+  assert.equal(stripDone('סיימתי'), '');
+  assert.equal(stripDone('תגידי לרועי שסיימתי'), null);
+  assert.equal(stripDone('תזכירי לי מחר'), null);
+});
 
 const mem = () => { const m = {}; return { getItem: k => (k in m ? m[k] : null), setItem: (k, v) => { m[k] = String(v); }, removeItem: k => { delete m[k]; } }; };
 
