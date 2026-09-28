@@ -7,7 +7,7 @@ import { PRINT_STATUS } from './print.js';
 import { APPROVAL } from './approvals.js';
 import { SUP_INVOICE } from './money.js';
 
-const ASK = /^(?:מה\s+(?:עוד\s+)?(?:חסר|פתוח|נשאר|לא סגור|צריך|אני צריכה|צריכה)|what(?:'s| is| do i(?: still)? need|(?: is)? still)\s*(?:missing|open|left|needed|need)?|qu['’]est-ce qu(?:i|e)\s+(?:manque|reste|il manque|il reste|je dois|j['’]ai)|que manque-t-il|que reste-t-il|qu['’]est-ce qui est ouvert)/i;
+const ASK = /^(?:מה\s+(?:עוד\s+)?(?:חסר|פתוח|נשאר|לא סגור|צריך|אני צריכה|צריכה|המצב של|המצב עם|המצב ב|קורה עם|עם|הסטטוס של|הסטטוס עם)|what(?:'s| is| do i(?: still)? need|(?: is)? still)\s*(?:missing|open|left|needed|need|the status of|up with|going on with|happening with)?|qu['’]est-ce qu(?:i|e)\s+(?:manque|reste|il manque|il reste|je dois|j['’]ai)|que manque-t-il|que reste-t-il|qu['’]est-ce qui est ouvert|où en est|ou en est|quoi de neuf avec)/i;
 const FOCUS_SUP = /(?:ספק|suppliers?|vendors?|fournisseurs?)/i;
 const FOCUS_CLIENT = /(?:לקוח|client|customer)/i;
 const STRIP = /(?:\s|^)(?:מ|ב|ל|עם\s+)?ה?ספקים?(?:\s+של)?(?=\s|$)|(?:\s|^)(?:from |with |for |of )?(?:the )?(?:suppliers?|vendors?)(?: of| for)?(?=\s|$)|(?:\s|^)(?:des |les |aux |du |de la |avec les |chez les )?fournisseurs?(?: de| pour)?(?=\s|$)|(?:\s|^)(?:מ|ל|עם\s+)?ה?לקוח(?:\s+של)?(?=\s|$)|(?:\s|^)(?:from |with |for )?(?:the )?(?:client|customer)(?: of| for)?(?=\s|$)|(?:\s|^)(?:du |le |avec le |chez le )?client(?: de| pour)?(?=\s|$)/gi;

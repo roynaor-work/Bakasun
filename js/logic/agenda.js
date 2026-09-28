@@ -11,8 +11,8 @@ const ASKS = /(?:משימות|משימה|רשימת|רשימות|תזכורות|
 export function parseAgenda(text, today) {
   const t = trim(text); if (!t || t.length > 90) return null;
   if (!ASKS.test(t)) return null;
-  // a question, not an instruction: no "remind me", no "task for X:", no colon body
-  if (/^(?:תזכירי|תזכיר|remind|rappelle|משימה\s*ל|task for|tâche pour)/i.test(t) || /:\s*\S/.test(t)) return null;
+  // a question, not an instruction: no "remind me", no "task for X:", no colon body, no "add / cancel / mark ... done"
+  if (/^(?:תזכירי|תזכיר|remind|rappelle|משימה\s*ל|task for|tâche pour|תוסיפי|הוסיפי|תבטלי|בטלי|סמני|תסמני|תרשמי|רשמי|תמחקי|מחקי|תורידי|add|cancel|remove|mark|tick|delete|log|schedule|ajoute|annule|supprime|marque|coche|note)\b/i.test(t) || /:\s*\S/.test(t) || /(?:^|\s)(?:בוצע|בוצעה|הושלמ|done|fait)(?:\s|$)/i.test(t)) return null;
   const base = Office.day(today) || Office.day(new Date());
   const iso = d => Office.iso(d);
   let m;

@@ -12,6 +12,16 @@ import { parseMissing, openItems, focusSections } from '../logic/openItems.js';
 import { parseHow, findHelp } from '../logic/howto.js';
 import { toCalendar } from '../calendar.js';
 import { speak, isReadAloudCommand, textOfEl } from '../speak.js';
+import { parseAction } from '../logic/questions.js';
+import { runAction, supplierStatus } from './actions.js';
+
+/** The person she named, from the live list (clients, suppliers, team, contacts). */
+function findPersonIn(who, people) {
+  const hay = Office.normHe(who || ''); if (hay.length < 2) return null;
+  let best = null, bl = 0;
+  (people || []).forEach(p => (p.names || []).forEach(n => { const k = Office.normHe(n); if (!k || k.length < 2) return; const hit = k === hay ? 99 : hay.indexOf(k) >= 0 ? k.length : k.indexOf(hay) >= 0 ? hay.length : 0; if (hit > bl) { best = p; bl = hit; } }));
+  return best ? { name: best.label, phone: best.phone, email: best.email, about: best.about, id: best.id } : null;
+}
 import { taskEvent } from '../logic/ics.js';
 import { HELP } from '../data/helpText.js';
 import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage } from '../logic/commands.js';
@@ -137,6 +147,8 @@ function showHow(out, hq) {
 function showMissing(out, mq) {
   const active = db.list('cases', x => Office.ACTIVE.includes(x.status)).sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
   let cs = caseByName(mq.who, mq.alt);
+  // "what about Daniel hotel?": a supplier, not an event
+  if (!cs && mq.who && (supplierStatus(out, mq.who) || supplierStatus(out, mq.alt))) return;
   if (!cs && active.length === 1) cs = active[0];
   if (!cs) {
     out.innerHTML = `<div class="card stack"><div class="title">${esc(t('whichCase'))}</div>${active.length ? active.map(c => `<button type="button" class="btn" data-case="${esc(c.id)}">${esc(c.client)}${c.date ? ' · ' + esc(Office.fmt(c.date)) : ''}</button>`).join('') : `<p class="hint">${esc(t('noCases'))}</p>`}</div>`;
@@ -187,6 +199,8 @@ async function tabCommand(body, s, ctx) {
     if (go) { draft = ''; goTo(go); return; }
     const q = parseAgenda(text, new Date());
     if (isReadAloudCommand(text)) { const last = out.querySelector('.card, .okbox, .warnbox'); if (last) speak(textOfEl(last), lang()); else toast(t('nothingToRead')); return; }
+    const act = parseAction(text, new Date());
+    if (act) { runAction(act, { out, s, caseByName, findPerson: w => findPersonIn(w, peopleNow()) }).then(() => afterAnswer(out, s)); return; }
     if (q) { showAgenda(out, q); afterAnswer(out, s); return; }
     const mq = parseMissing(text);
     if (mq) { showMissing(out, mq); afterAnswer(out, s); return; }

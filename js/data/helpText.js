@@ -17,6 +17,17 @@ export const HELP = {
       '"מה חסר לי מהספקים של שוב״ל": רק הספקים, הדפוס והכספים מולם',
       '"מה פתוח מול הלקוח שוב״ל": רק פרטי האירוע והלקוח'
     ] },
+    { title: 'מצב העבודה, במשפט אחד', items: [
+      '"מי לא ענה" / "כמה ספקים לא ענו": הרשימה, עם "תזכורת לכולם"',
+      '"תשלחי תזכורת לגרשון טורס" / "תזכירי לכל הספקים שלא ענו"',
+      '"מה עם מלון דניאל": מצב הספק בכל האירועים הפתוחים',
+      '"סגרי עם מלון דניאל" / "מלון דניאל נבחר": הספק מסומן כאושר',
+      '"העברתי תשלום לדף אור 500": נרשם ששולם, ונפתחת בקשת חשבונית מוכנה. "מה שילמנו לביסקוטי": כל התשלומים',
+      '"סמני שהסיור בוצע" / "תבטלי את המשימה של הסיור"',
+      '"תרשמי שיחה עם ארבל מחר ב-10": נכנס לתור השיחות (ו"ליומן")',
+      '"תוסיפי לרשימת הדפוס 20 תגי שם לשוב״ל"',
+      '"מה התקציב של שוב״ל" / "כמה משתתפים יש לברטלסמן" / "מתי האירוע של שוב״ל"'
+    ] },
     { title: 'תיק חדש', items: [
       '"פנייה חדשה: דנה לוי 052-1234567 יום גיבוש ל-40 בראש פינה ב-15/11"',
       'או במסך "פנייה חדשה": מספרים הכל בהקלטה אחת (לקוח, תאריך, משתתפים, לינה, אולם, הסעות, מה צריך לבדוק). האפליקציה מפרקת לתיק, לספקים שצריך ולמשימות.'
@@ -71,6 +82,17 @@ export const HELP = {
       '« qu’est-ce qui manque chez les fournisseurs de Shoval » : seulement les fournisseurs, l’impression et l’argent avec eux',
       '« qu’est-ce qui est ouvert avec le client Shoval » : seulement l’événement et le client'
     ] },
+    { title: 'L’état du travail, en une phrase', items: [
+      '« qui n’a pas répondu » : la liste, avec « rappel à tous »',
+      '« envoie un rappel à Gershon Tours » / « rappelle tous les fournisseurs »',
+      '« où en est l’hôtel Daniel » : l’état du fournisseur sur les événements ouverts',
+      '« on prend l’hôtel Daniel » : le fournisseur est marqué confirmé',
+      '« j’ai payé Daf Or 500 » : noté payé, et la demande de facture est prête. « combien on a payé à Biscotti »',
+      '« marque la visite comme faite » / « annule la tâche de la visite »',
+      '« note un appel avec Arbel demain à 10 »',
+      '« ajoute à l’impression 20 badges pour Shoval »',
+      '« quel est le budget de Shoval » / « combien de participants pour Bertelsmann » / « quand est l’événement de Shoval »'
+    ] },
     { title: 'Nouveau dossier', items: [
       '« nouveau client : Dana Levy 052-1234567 team building 40 pers. Rosh Pinna 15/11 »',
       'Ou dans « Nouvelle demande » : racontez tout en une dictée (client, date, participants, hôtel, salle, bus, ce qu’il faut vérifier). L’application en fait un dossier, les fournisseurs nécessaires et les tâches.'
@@ -124,6 +146,17 @@ export const HELP = {
       '“what’s missing for Shoval” / “what is open on the Bertelsmann event”: everything still open in the case, by topic',
       '“what do I need from the suppliers for Shoval”: only suppliers, print and money with them',
       '“what is open with the client Shoval”: only the event details and the client'
+    ] },
+    { title: 'The state of work, in one sentence', items: [
+      '“who hasn’t answered”: the list, with “remind everyone”',
+      '“send a reminder to Gershon Tours” / “remind all suppliers”',
+      '“what’s up with Daniel hotel”: the supplier across the open events',
+      '“go with Daniel hotel”: the supplier is marked confirmed',
+      '“I paid Daf Or 500”: noted as paid, and the invoice request is ready. “how much did we pay Biscotti”',
+      '“mark the tour as done” / “cancel the task tour”',
+      '“log a call with Arbel tomorrow at 10”',
+      '“add to the print list 20 name tags for Shoval”',
+      '“what is the budget of Shoval” / “how many participants for Bertelsmann” / “when is the event of Shoval”'
     ] },
     { title: 'New case', items: [
       '“new lead: Dana Levy 052-1234567 team building for 40 in Rosh Pinna on 15/11”',

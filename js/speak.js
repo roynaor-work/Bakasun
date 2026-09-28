@@ -28,5 +28,9 @@ export function isReadAloudCommand(text) { return /^\s*(?:תקריאי(?:\s+לי
 export function textOfEl(el) {
   if (!el) return '';
   const c = el.cloneNode(true); c.querySelectorAll('button, .btn, select, input, textarea').forEach(x => x.remove());
-  return (c.innerText || c.textContent || '').replace(/\s*\n\s*/g, '. ').replace(/\.\s*\./g, '.').trim();
+  // flex rows and inline badges do not break lines in innerText: add a pause after each block ourselves
+  c.querySelectorAll('div, li, p, dt, dd, h2, h3, .badge').forEach(x => x.appendChild(document.createTextNode('\n')));
+  document.body.appendChild(c); c.style.position = 'absolute'; c.style.left = '-9999px';
+  const raw = c.innerText || c.textContent || ''; c.remove();
+  return raw.split(/\n+/).map(s => s.trim()).filter(Boolean).join('. ').replace(/\.\s*\./g, '.').replace(/:\s*\./g, ':').trim();
 }
