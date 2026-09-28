@@ -1,6 +1,6 @@
 // אחסון מקומי בדפדפן. הנתונים נשארים במכשיר; מחיקה רק דרך ההגדרות ובאישור.
 const KEY = 'kidfit.v1';
-const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true, plan: null, giftEvery: 1, gameSeconds: 90, voice: true, familyCode: '', prog: {}, unlockEvery: 10 }, sessions: [], tokens: 0, games: { bests: {}, played: {}, recent: [], count: 0, unlocked: null },
+const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true, plan: null, giftEvery: 2, gameSeconds: 60, voice: true, familyCode: '', prog: {}, unlockEvery: 10, ratioV2: true }, sessions: [], tokens: 0, games: { bests: {}, played: {}, recent: [], count: 0, unlocked: null },
   parent: { pinHash: '', lastSeen: '', feed: [] }, basketball: [] };
 
 function load() {
@@ -8,7 +8,10 @@ function load() {
     const raw = localStorage.getItem(KEY);
     if (!raw) return structuredClone(DEFAULTS);
     const d = JSON.parse(raw);
-    return { profile: { ...DEFAULTS.profile, ...(d.profile || {}) }, sessions: Array.isArray(d.sessions) ? d.sessions : [], tokens: d.tokens | 0, games: { ...structuredClone(DEFAULTS.games), ...(d.games || {}) },
+    const prof = { ...DEFAULTS.profile, ...(d.profile || {}) };
+    // יחס משחק/אימון חדש (28/09): מי שעדיין על ברירות המחדל הישנות עובר לחדשות
+    if (!prof.ratioV2) { if (prof.giftEvery === 1) prof.giftEvery = 2; if (prof.gameSeconds === 90) prof.gameSeconds = 60; prof.ratioV2 = true; }
+    return { profile: prof, sessions: Array.isArray(d.sessions) ? d.sessions : [], tokens: d.tokens | 0, games: { ...structuredClone(DEFAULTS.games), ...(d.games || {}) },
       parent: { ...structuredClone(DEFAULTS.parent), ...(d.parent || {}) }, basketball: Array.isArray(d.basketball) ? d.basketball : [] };
   } catch { return structuredClone(DEFAULTS); }
 }
