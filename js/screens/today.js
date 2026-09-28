@@ -11,6 +11,7 @@ import { lang as uiLang, langName } from '../i18n.js';
 import { DEFAULTS } from '../data/defaults.js';
 import { dialog, field } from '../ui.js';
 import { pendingRequests } from '../logic/rfq.js';
+import { supplierInvoicesMissing } from '../logic/money.js';
 import { resend } from './rfq.js';
 
 export function render({ root }) {
@@ -22,7 +23,8 @@ export function render({ root }) {
   const pend = pendingApprovals(data.approvals || [], new Date(), s.approvalRemindDays || 2);
   const supPay = (s.supplierPayReminder || 'auto') === 'auto' ? Office.supplierDue((data.links || []).map(l => Object.assign({}, l, { row: l.id })), data.cases, data.suppliers || [], new Date()).filter(x => x.after >= (Office.num(s.supplierPayDays) || 1)) : [];
   const waitSup = pendingRequests(data.links || [], data.cases || [], data.suppliers || [], new Date(), Office.num(s.supplierRemindDays) || 1);
-  const nothing = !up.length && !fu.length && !calls.length && !tasks.length && !yday.length && !pend.length && !supPay.length && !waitSup.length;
+  const missInv = supplierInvoicesMissing(data.links || [], data.cases || [], data.suppliers || [], new Date(), Office.num(s.supInvoiceDays) || 3);
+  const nothing = !up.length && !fu.length && !calls.length && !tasks.length && !yday.length && !pend.length && !supPay.length && !waitSup.length && !missInv.length;
 
   root.innerHTML = `
     <header class="top"><h1>${esc(t('today'))}</h1>
@@ -45,6 +47,7 @@ export function render({ root }) {
     ${waitSup.length ? section(t('waitingSuppliers'), `<div class="list">${waitSup.map(l => `<div class="card" data-wsup="${esc(l.id)}"><div class="row between"><a class="title" href="#/case/${esc(l.caseId)}/suppliers">${esc(l.sup.name || '')}</a><span class="badge warn">${esc(t('waited', { n: l.waited }))}</span></div><div class="sub">${esc([l.cs.client, l.cs.kind, l.what].filter(Boolean).join(' · '))}</div><div class="row"><button class="btn wa sm" data-remind>${esc(t('remind'))}</button></div></div>`).join('')}</div>`) : ''}
     ${pend.length ? section(t('waitingApproval'), `<div class="list">${pend.map(a => { const c = db.get('cases', a.caseId) || {}; return `<div class="card" data-appr="${esc(a.id)}"><div class="row between"><a class="title" href="#/case/${esc(a.caseId)}/money">${esc(c.client || '')} · ${esc(approvalKindLabel(a.kind, uiLang()))}</a><span class="badge warn">${esc(t('waited', { n: a.waited }))}</span></div>${a.title ? `<div class="sub">${esc(a.title)}</div>` : ''}<div class="row"><button class="btn wa sm" data-remind>${esc(t('remind'))}</button></div></div>`; }).join('')}</div>`) : ''}
     ${supPay.length ? section(t('supplierPay'), `<div class="list">${supPay.map(x => `<div class="card" data-link="${esc(x.row)}"><div class="row between"><span class="title">${esc(x.supplier)}</span><span class="ltr big">${esc(Office.money(x.amount))}</span></div><div class="sub">${esc(x.client)} · ${esc(x.date)} · <span class="count">${x.after}</span> ${esc(t('afterEventDays'))}</div><div class="row"><button class="btn sm ok" data-paid>${esc(t('markPaid'))}</button><button class="btn wa sm" data-paidmsg>${esc(t('paidNote'))}</button></div></div>`).join('')}</div>`) : ''}
+    ${missInv.length ? section(t('supInvoicesMissing'), `<div class="list">${missInv.map(l => `<a class="card tap" href="#/money"><div class="row between"><span class="title">${esc(l.sup.name || '')}</span><span class="ltr big">${esc(Office.money(l.cost))}</span></div><div class="sub">${esc([l.cs.client, t('paid') + ' ' + Office.fmt(l.paidAt), t('waited', { n: l.waited })].filter(Boolean).join(' · '))}</div></a>`).join('')}</div>`) : ''}
     ${yday.length ? section(t('unansweredYesterday'), `<div class="list">${yday.map(c => `<a class="card tap" href="#/calls"><div class="row between"><span class="title">${esc(c.name)}</span><span class="badge warn"><span class="count">${c.attempts || 1}</span> ${esc(t('attempts'))}</span></div>${c.why ? `<div class="sub">${esc(c.why)}</div>` : ''}</a>`).join('')}</div>`) : ''}
     ${calls.length ? section(t('callsToday'), `<div class="list">${calls.slice(0, 5).map(c => `<a class="card tap" href="#/calls"><div class="row between"><span class="title">${esc(c.name)}</span><span class="ltr sub">${esc(phonePretty(c.phone))}</span></div>${c.why ? `<div class="sub">${esc(c.why)}</div>` : ''}</a>`).join('')}
       ${calls.length > 5 ? `<a class="btn ghost" href="#/calls">+${calls.length - 5}</a>` : ''}</div>`) : ''}
@@ -81,6 +84,7 @@ export function render({ root }) {
     if (calls.length) text += '\n\nשיחות להיום:\n' + calls.map(c => '• ' + c.name + (c.why ? ' · ' + c.why : '')).join('\n');
     if (tasks.length) text += '\n\nמשימות:\n' + tasks.map(x => '• ' + x.title + (x.who ? ' · ' + x.who : '')).join('\n');
     if (waitSup.length) text += '\n\nספקים שלא ענו:\n' + waitSup.map(l => '• ' + (l.sup.name || '') + ' · ' + (l.cs.client || '') + ' · ' + l.waited + ' ימים').join('\n');
+    if (missInv.length) text += '\n\nחשבוניות חסרות מספקים:\n' + missInv.map(l => '• ' + (l.sup.name || '') + ' · ' + Office.money(l.cost) + ' · שולם ' + Office.fmt(l.paidAt)).join('\n');
     if (pend.length) text += '\n\nמחכים לאישור לקוח:\n' + pend.map(a => { const c = db.get('cases', a.caseId) || {}; return '• ' + (c.client || '') + ' · ' + approvalKindLabel(a.kind, 'he') + ' · ' + a.waited + ' ימים'; }).join('\n');
     if (supPay.length) text += '\n\nתשלומים לספקים:\n' + supPay.map(x => '• ' + x.supplier + ' · ' + Office.money(x.amount) + ' · ' + x.client).join('\n');
     if (yday.length) text += '\n\nלא ענו אתמול:\n' + yday.map(c => '• ' + c.name + (c.why ? ' · ' + c.why : '')).join('\n');
