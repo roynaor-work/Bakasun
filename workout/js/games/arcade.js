@@ -10,7 +10,7 @@ G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים �
     const SHAPES = [[[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]], [[1, 0, 0], [1, 1, 1]], [[0, 0, 1], [1, 1, 1]], [[1, 1, 0], [0, 1, 1]], [[0, 1, 1], [1, 1, 0]]];
     const COLORS = [r.C.sky, r.C.gold, r.C.accent, r.C.hot, r.C.teal, r.C.ok, r.C.pink];
     const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-    let cur, t = 0, speed = 0.55, next = r.rint(0, 6), lines = 0, revealed = 0, picLines = 0, picIdx = r.rint(0, SCENE_IDS.length - 1), picDone = 0, custom = null;
+    let cur, t = 0, speed = 0.55, next = r.rint(0, 6), lines = 0, revealed = 0, picLines = 0, picFlash = 0, picIdx = r.rint(0, SCENE_IDS.length - 1), picDone = 0, custom = null;
     // תמונה שהמשתמש העלה בהגדרות (למשל הולאנד בועט) מחליפה את הפריימים המצוירים
     // התמונות: מה שהועלה בהגדרות, ואם אין, התמונות המובנות (workout/img/tetris/1-5.jpg: רונאלדו והולאנד חוגגים)
     let pics = []; try { pics = JSON.parse(localStorage.getItem('kidfit.tetrisPics') || '[]'); const one = localStorage.getItem('kidfit.tetrisPic'); if (one && !pics.length) pics = [one]; } catch { pics = []; }
@@ -31,16 +31,16 @@ G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים �
         r.sfx(n === 4 ? 'win' : 'goal');
         // כל שורה חושפת שורה מהתמונה
         // 4 שורות = תמונה שלמה: כל שורה חושפת רבע מהתמונה
-        picLines += n; revealed = Math.min(ROWS, Math.ceil(picLines * ROWS / LINES_PER_PIC)); if (picLines >= LINES_PER_PIC) { revealed = 0; picLines = 0; picDone++; r.addScore(300); r.pop('התמונה נחשפה! +300', r.W / 2, 280, r.C.gold, 26); r.burst(r.W / 2, 300, r.C.gold, 30, 300); if (pics.length) { picI = (picI + 1) % pics.length; loadCustom(); } else { picIdx = (picIdx + 1) % SCENE_IDS.length; paintPic(); } } } else r.sfx('tick'); spawn(); };
+        picLines += n; revealed = Math.min(ROWS, Math.ceil(picLines * ROWS / LINES_PER_PIC)); if (picLines >= LINES_PER_PIC) { picFlash = 1.8; picLines = 0; picDone++; r.addScore(300); r.pop('התמונה נחשפה! +300', r.W / 2, 280, r.C.gold, 26); r.burst(r.W / 2, 300, r.C.gold, 30, 300); if (pics.length) { picI = (picI + 1) % pics.length; loadCustom(); } else { picIdx = (picIdx + 1) % SCENE_IDS.length; paintPic(); } } } else r.sfx('tick'); spawn(); };
     const step = () => { if (!collides(cur.s, cur.x, cur.y + 1)) cur.y++; else lock(); };
     spawn();
     return {
-      update(dt) { t += dt; if (t > speed) { t = 0; step(); } },
+      update(dt) { if (picFlash > 0) { picFlash -= dt; if (picFlash <= 0) revealed = 0; return; } t += dt; if (t > speed) { t = 0; step(); } }, // בזמן הבזק התמונה השלמה המשחק עוצר לרגע
       swipe(d) { if (d === 'left' && !collides(cur.s, cur.x - 1, cur.y)) cur.x--; if (d === 'right' && !collides(cur.s, cur.x + 1, cur.y)) cur.x++; if (d === 'down') { while (!collides(cur.s, cur.x, cur.y + 1)) cur.y++; lock(); r.addScore(5); } if (d === 'up') this.tap(); },
       tap() { const rs = rotate(cur.s); for (const dx of [0, -1, 1, -2, 2]) if (!collides(rs, cur.x + dx, cur.y)) { cur.s = rs; cur.x += dx; break; } },
       draw() { r.clear(); r.rect(OX - 2, OY - 2, COLS * S + 4, ROWS * S + 4, '#2A2555', 6);
         // התמונה מאחור, חתוכה לגודל הלוח, ומכוסה בשורות שעוד לא נחשפו (מלמעלה למטה)
-        const BW = COLS * S, BH = ROWS * S; r.ctx.save(); r.ctx.beginPath(); r.ctx.roundRect(OX, OY, BW, BH, 4); r.ctx.clip(); const sc = Math.max(BW / 360, BH / 560), dw = 360 * sc, dh = 560 * sc; if (pic) r.ctx.drawImage(pic, OX + (BW - dw) / 2, OY + (BH - dh) / 2, dw, dh); r.ctx.restore();
+        const BW = COLS * S, BH = ROWS * S; r.ctx.save(); r.ctx.beginPath(); r.ctx.roundRect(OX, OY, BW, BH, 4); r.ctx.clip(); const sc = Math.max(BW / 360, BH / 560), dw = 360 * sc, dh = 560 * sc; if (pic) { r.ctx.globalAlpha = picFlash > 0 ? 1 : .38; r.ctx.drawImage(pic, OX + (BW - dw) / 2, OY + (BH - dh) / 2, dw, dh); r.ctx.globalAlpha = 1; if (picFlash <= 0) { r.ctx.fillStyle = 'rgba(30,27,58,.45)'; r.ctx.fillRect(OX, OY, BW, BH); } } r.ctx.restore(); /* התמונה כרקע עמום כדי לא להפריע למשחק; כשהיא נחשפת כולה היא מוצגת בהירה לרגע */
         for (let j = revealed; j < ROWS; j++) r.rect(OX, OY + j * S, BW, S + 0.5, '#1E1B3A');
         if (revealed > 0 && revealed < ROWS) r.line(OX, OY + revealed * S, OX + BW, OY + revealed * S, r.C.gold, 2);
         // למעלה: החתיכה הבאה, שורות, והתקדמות התמונה
