@@ -2,22 +2,34 @@
 import { POSE, S, KITS } from './sprites.js';
 const G = [];
 
-// ---- כסף כסף! (במקום חפרפרות): שטרות קופצים מחורים, נוגעים = תופסים. קקי = פלוץ ורעידה ----
-G.push({ id: 'moles', name: 'כסף כסף!', emoji: '💸', how: 'שטר קופץ מהחור? נוגעים בו מהר ותופסים את הכסף. שטר של 200 שווה הכי הרבה. זהירות: הקקי באותו צבע כמו השטרות!',
+// ---- כסף כסף! (במקום חפרפרות): שטרות קופצים מחורים, נוגעים = תופסים. אויבים באותו חום: קקי (-15, פלוץ), קקי ענק (-40, רעידה גדולה),
+// שטר מזויף עם X קטן (-25), ופצצת סירחון (-20 + ערפל ירוק 2 שניות שמסתיר את המסך) ----
+G.push({ id: 'moles', name: 'כסף כסף!', emoji: '💸', how: 'שטר קופץ מהחור? נוגעים בו מהר ותופסים את הכסף. זהירות: הקקי באותו צבע כמו השטרות, יש קקי ענק, שטרות מזויפים עם X קטן, ופצצות סירחון שמערפלות את המסך!',
   make(r) {
-    const holes = []; for (let j = 0; j < 4; j++) for (let i = 0; i < 3; i++) holes.push({ x: 70 + i * 110, y: 150 + j * 105, up: 0, poop: false, val: 20 });
-    const VALS = [20, 20, 20, 50, 50, 100, 200]; let t = 0, rate = 0.85, tt = 0, combo = 0, flying = [], cash = 0, chingT = 0;
+    const holes = []; for (let j = 0; j < 4; j++) for (let i = 0; i < 3; i++) holes.push({ x: 70 + i * 110, y: 150 + j * 105, up: 0, kind: 'note', val: 20 });
+    const VALS = [20, 20, 20, 50, 50, 100, 200]; let t = 0, rate = 0.85, tt = 0, combo = 0, flying = [], cash = 0, chingT = 0, fog = 0;
+    const pickKind = () => { const p = Math.random(); return p < .22 ? 'poop' : p < .27 ? 'giant' : p < .35 ? 'fake' : p < .40 ? 'stink' : 'note'; };
     return {
-      update(dt) { t += dt; tt += dt; chingT -= dt; if (t > rate) { t = 0; rate = Math.max(0.4, rate - 0.012); const h = r.pick(holes.filter(h => h.up <= 0)); if (h) { h.up = 1.15; h.poop = Math.random() < 0.34; h.val = r.pick(VALS); } } /* קשה יותר: יותר קקי, קצב מהיר, פחות זמן לכל שטר */ holes.forEach(h => { h.up -= dt; }); flying.forEach(f => { f.t += dt * 1.4; }); flying = flying.filter(f => f.t < 1); },
-      down(x, y) { const h = holes.find(h => r.dist(x, y, h.x, h.y - 20) < 44); if (h && h.up > 0) { h.up = 0; if (h.poop) { combo = 0; r.addScore(-15); r.pop('איכס! -15', h.x, h.y - 50, '#a3e635', 22); r.burst(h.x, h.y - 20, '#7c4a1e', 14, 200); r.shake(260); r.sfx('fart'); } else { combo++; const pts = Math.round((h.val / 10 + Math.min(combo, 5) * 2) * (1 + Math.floor(tt / 15) * .5)); /* כל 15 שניות המכפיל עולה */ r.addScore(pts); cash += h.val; r.pop(`₪${h.val}!`, h.x, h.y - 50, '#FDE047', 24); r.burst(h.x, h.y - 20, '#86efac', 8, 120); flying.push({ x: h.x, y: h.y - 20, t: 0, val: h.val }); r.sfx('ching'); chingT = .6; } } else if (h) { combo = 0; } },
+      update(dt) { t += dt; tt += dt; chingT -= dt; fog = Math.max(0, fog - dt); if (t > rate) { t = 0; rate = Math.max(0.4, rate - 0.012); const h = r.pick(holes.filter(h => h.up <= 0)); if (h) { h.up = 1.15; h.kind = pickKind(); h.val = r.pick(VALS); } } holes.forEach(h => { h.up -= dt; }); flying.forEach(f => { f.t += dt * 1.4; }); flying = flying.filter(f => f.t < 1); },
+      down(x, y) { const h = holes.find(h => r.dist(x, y, h.x, h.y - 20) < 44); if (!h || h.up <= 0) { if (h) combo = 0; return; } h.up = 0;
+        if (h.kind === 'poop') { combo = 0; r.addScore(-15); r.pop('איכס! -15', h.x, h.y - 50, '#a3e635', 22); r.burst(h.x, h.y - 20, '#7c4a1e', 14, 200); r.shake(260); r.sfx('fart'); }
+        else if (h.kind === 'giant') { combo = 0; r.addScore(-40); r.pop('קקי ענק!! -40', h.x, h.y - 60, '#a3e635', 26); r.burst(h.x, h.y - 20, '#7c4a1e', 30, 300); r.shake(600); r.sfx('fart'); setTimeout(() => r.sfx('fart'), 250); }
+        else if (h.kind === 'fake') { combo = 0; r.addScore(-25); r.pop('מזויף! -25', h.x, h.y - 50, '#f87171', 22); r.burst(h.x, h.y - 20, '#3f2a12', 12, 160); r.sfx('over'); }
+        else if (h.kind === 'stink') { combo = 0; r.addScore(-20); fog = 2; r.pop('פצצת סירחון! -20', h.x, h.y - 50, '#a3e635', 22); r.burst(h.x, h.y - 20, '#84cc16', 20, 220); r.sfx('fart'); r.sfx('ohh'); }
+        else { combo++; const pts = Math.round((h.val / 10 + Math.min(combo, 5) * 2) * (1 + Math.floor(tt / 15) * .5)); r.addScore(pts); cash += h.val; r.pop(`₪${h.val}!`, h.x, h.y - 50, '#FDE047', 24); r.burst(h.x, h.y - 20, '#86efac', 8, 120); flying.push({ x: h.x, y: h.y - 20, t: 0, val: h.val }); r.sfx('ching'); chingT = .6; } },
       draw() { const g = r.ctx.createLinearGradient(0, 0, 0, r.H); g.addColorStop(0, '#14532d'); g.addColorStop(1, '#052e16'); r.ctx.fillStyle = g; r.ctx.fillRect(0, 0, r.W, r.H);
-        // הכספת למעלה: סכום שנאסף
         r.rect(r.W / 2 - 110, 14, 220, 64, '#1f2937', 16); r.rect(r.W / 2 - 104, 20, 208, 52, '#111827', 12); r.text(`₪ ${cash}`, r.W / 2, 46, { size: 30, color: chingT > 0 ? '#FDE047' : '#86efac' }); r.text('הכספת שלך', r.W / 2, 86, { size: 12, color: '#86efac' });
         holes.forEach(h => { r.ctx.fillStyle = '#3f2a12'; r.ctx.beginPath(); r.ctx.ellipse(h.x, h.y + 10, 36, 16, 0, 0, Math.PI * 2); r.ctx.fill(); r.ctx.fillStyle = '#1c1007'; r.ctx.beginPath(); r.ctx.ellipse(h.x, h.y + 10, 28, 11, 0, 0, Math.PI * 2); r.ctx.fill();
-          if (h.up > 0) { const rise = Math.min(1, (1.15 - h.up) * 5, h.up * 5); r.ctx.save(); r.ctx.beginPath(); r.ctx.rect(h.x - 44, h.y - 64, 88, 74); r.ctx.clip(); if (h.poop) S.poop(r, h.x, h.y + 14 - rise * 34, tt); else S.banknote(r, h.x, h.y + 26 - rise * 46, h.val, Math.sin(tt * 3 + h.x) * .12); r.ctx.restore(); } });
-        // שטרות שעפים לכספת
+          if (h.up > 0) { const rise = Math.min(1, (1.15 - h.up) * 5, h.up * 5); r.ctx.save(); r.ctx.beginPath(); r.ctx.rect(h.x - 48, h.y - 76, 96, 86); r.ctx.clip();
+            if (h.kind === 'poop') S.poop(r, h.x, h.y + 14 - rise * 34, tt);
+            else if (h.kind === 'giant') { r.ctx.save(); r.ctx.translate(h.x, h.y + 18 - rise * 44); r.ctx.scale(1.5, 1.5); S.poop(r, 0, 0, tt); r.ctx.restore(); }
+            else if (h.kind === 'stink') { const y = h.y + 14 - rise * 30; for (const [dx, dy, rad] of [[-12, 0, 13], [10, -4, 15], [0, 8, 12], [-4, -12, 10]]) { r.circle(h.x + dx, y + dy + Math.sin(tt * 5 + dx) * 2, rad, 'rgba(101,163,13,.85)'); } r.circle(h.x - 6, y - 4, 3, '#1B1740'); r.circle(h.x + 6, y - 4, 3, '#1B1740'); r.emoji('☠️', h.x, y + 6, 12); }
+            else { S.banknote(r, h.x, h.y + 26 - rise * 46, h.val, Math.sin(tt * 3 + h.x) * .12); if (h.kind === 'fake') { const y = h.y + 26 - rise * 46; r.line(h.x + 22, y - 12, h.x + 30, y - 4, '#7f1d1d', 2); r.line(h.x + 30, y - 12, h.x + 22, y - 4, '#7f1d1d', 2); } }
+            r.ctx.restore(); } });
         flying.forEach(f => { const p = f.t, x = f.x + (r.W / 2 - f.x) * p, y = f.y + (46 - f.y) * p - Math.sin(p * Math.PI) * 60; S.banknote(r, x, y, f.val, p * 6, 1 - p * .5); });
-        if (chingT > 0) r.text('קא-צ׳ינג!', r.W / 2, 118, { size: 24, color: '#FDE047' }); if (combo > 2) r.text(`רצף ${combo} 🔥`, r.W / 2, 118 + (chingT > 0 ? 26 : 0), { size: 18, color: '#fff' }); },
+        if (chingT > 0) r.text('קא-צ׳ינג!', r.W / 2, 118, { size: 24, color: '#FDE047' }); if (combo > 2) r.text(`רצף ${combo} 🔥`, r.W / 2, 118 + (chingT > 0 ? 26 : 0), { size: 18, color: '#fff' });
+        // ערפל סירחון: עננים ירוקים חצי שקופים שמסתירים את המסך
+        if (fog > 0) { const a = Math.min(1, fog) * .75; r.ctx.fillStyle = `rgba(101,163,13,${a * .5})`; r.ctx.fillRect(0, 0, r.W, r.H); for (let i = 0; i < 9; i++) { r.circle(40 + (i * 97) % r.W + Math.sin(tt * 2 + i) * 20, 120 + (i * 151) % (r.H - 140) + Math.cos(tt * 1.5 + i) * 15, 60 + (i % 3) * 20, `rgba(132,204,22,${a * .55})`); } r.text('פיכסה! 🤢', r.W / 2, r.H / 2, { size: 30, color: '#1B1740' }); } },
     };
   } });
 
