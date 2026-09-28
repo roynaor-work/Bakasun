@@ -3,7 +3,8 @@ import { t, LANGS, langName } from '../i18n.js';
 import { db } from '../store.js';
 import { esc, field, toast, confirmDialog, dialog, pickContacts, contactsSupported } from '../ui.js';
 import { parseContactsFile } from '../logic/contacts.js';
-import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_PAYMENTS } from '../data/seedContacts.js';
+import { TASK } from '../logic/extra.js';
+import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_PAYMENTS, SEED_CASES } from '../data/seedContacts.js';
 import { travelLine } from '../logic/travel.js';
 import { phoneDigits } from '../logic/core.js';
 import { loadDemo } from '../data/demo.js';
@@ -108,11 +109,20 @@ export function render({ root }) {
     const haveS = new Set(db.list('suppliers').map(x => x.name)), haveC = new Set(db.list('clients').map(x => x.name)), haveT = new Set(db.list('team').map(x => x.name));
     let ns = 0, nc = 0, np = 0;
     SEED_SUPPLIERS.forEach(x => { if (haveS.has(x.name)) return; db.put('suppliers', { name: x.name, type: x.type, contact: x.contact, phone: x.phone, email: x.email, lang: x.lang, notes: [x.role, x.notes].filter(Boolean).join(' · '), rating: 3, active: 'כן', area: '' }); ns++; });
-    SEED_CLIENTS.forEach(x => { const ex = db.list('clients').find(c => c.name === x.name); const rec = { name: x.name, contact: x.contact, phone: x.phone, email: x.email, lang: x.lang, legalName: x.legalName, taxId: x.taxId, address: x.address, invoiceEmail: x.invoiceEmail, approver: x.approver, payer: x.payer, payTerms: x.payTerms, attachments: x.attachments, notes: [x.kind, x.role, x.notes].filter(Boolean).join(' · ') }; if (ex) { const patch = { id: ex.id }; Object.keys(rec).forEach(k => { if (rec[k] && !ex[k]) patch[k] = rec[k]; }); if (Object.keys(patch).length > 1) db.put('clients', patch); return; } db.put('clients', rec); nc++; });
+    SEED_CLIENTS.forEach(x => { const ex = db.list('clients').find(c => c.name === x.name); const rec = { name: x.name, aliases: x.aliases, contact: x.contact, phone: x.phone, email: x.email, lang: x.lang, legalName: x.legalName, taxId: x.taxId, address: x.address, invoiceEmail: x.invoiceEmail, approver: x.approver, payer: x.payer, payTerms: x.payTerms, attachments: x.attachments, notes: [x.kind, x.role, x.notes].filter(Boolean).join(' · ') }; if (ex) { const patch = { id: ex.id }; Object.keys(rec).forEach(k => { if (rec[k] && !ex[k]) patch[k] = rec[k]; }); if (Object.keys(patch).length > 1) db.put('clients', patch); return; } db.put('clients', rec); nc++; });
     const havePay = new Set(db.list('payments').map(p => (p.paidAt || p.invoicedAt || '') + '|' + p.amount));
     SEED_PAYMENTS.forEach(x => { const key = x.date + '|' + x.amount; if (havePay.has(key)) return; const cl = db.list('clients').find(c => c.name.includes(x.client)); db.put('payments', { client: cl ? cl.name : x.client, clientId: cl ? cl.id : '', amount: x.amount, note: x.note, status: x.status, invoicedAt: x.date, paidAt: x.status === 'שולם' ? x.date : '', due: x.date }); });
     SEED_TEAM.forEach(x => { if (haveT.has(x.name)) return; db.put('team', { name: x.name, role: x.role, phone: x.phone, email: x.email }); np++; });
-    toast(ns + nc + np ? t('seedLoaded', { s: ns, c: nc, p: np }) : t('seedDone'), 4000); render({ root });
+    let ne = 0;
+    SEED_CASES.forEach(x => {
+      if (db.list('cases').some(c => c.seedKey === x.key)) return;
+      const cl = db.list('clients').find(c => c.name === x.client) || {};
+      const id = db.put('cases', { seedKey: x.key, clientId: cl.id || '', client: x.client, contact: cl.contact || '', phone: cl.phone || '', email: cl.email || '', kind: x.kind, date: x.date, participants: x.participants, place: x.place, purpose: x.purpose, lang: x.lang, status: x.status, asClient: !!x.asClient, needs: x.needs, days: x.days || '', rooms: x.rooms || '', opened: '2026-09-27' });
+      (x.suppliers || []).forEach(([name, status, what]) => { const sp = db.list('suppliers').find(y => y.name === name); if (sp) db.put('links', { caseId: id, supplierId: sp.id, supplier: sp.name, status, what, askedAt: status === 'ביקשנו הצעה' ? '2026-09-25' : '', answeredAt: status === 'ביקשנו הצעה' ? '' : '2026-09-26' }); });
+      (x.tasks || []).forEach(([title, due]) => db.put('tasks', { caseId: id, title, who: t('me'), due, status: TASK.open, lang: x.lang }));
+      ne++;
+    });
+    toast(ns + nc + np + ne ? t('seedLoaded', { s: ns, c: nc, p: np, e: ne }) : t('seedDone'), 4000); render({ root });
   };
   const editTeam = async p => {
     const r = await dialog(p ? p.name : t('addPerson'), `${field('name', t('fName'), p ? p.name : '')}<div class="grid2">${field('role', t('role'), p ? p.role : '')}${field('phone', t('fPhone'), p ? p.phone : '', { ltr: true, inputmode: 'tel' })}</div>${field('email', t('fEmail'), p ? p.email : '', { ltr: true, inputmode: 'email' })}`, { ok: t('save') });

@@ -11,6 +11,7 @@ import { templateFor, TEMPLATES, rfqText, rfqSubject, rfqReminder, rfqDecline, p
 import { translateText, hasHebrew, translatorAvailable, prepareTranslator } from '../logic/translate.js';
 import { langName } from '../i18n.js';
 import { shareFile, downloadFile } from '../files.js';
+import { typesIn } from '../logic/brief.js';
 
 const L = () => uiLang();
 const herName = s => ((s.signer || DEFAULTS.signer || 'וירג׳יני').split('\n')[0].trim().split(' ')[0]) || 'וירג׳יני';
@@ -49,12 +50,15 @@ function specForm(kind, c, prev) {
 }
 
 /** Step 1: which suppliers. Step 2: one form per template. Step 3: one message per supplier. */
-export async function askFlow(c, s, links, sups, recTypes, refresh) {
+export async function askFlow(c, s, links, sups, recTypes, refresh, wantText) {
+  // said "ask hotels": those types come first and their best three are already ticked
+  const want = wantText && wantText !== '1' ? typesIn(wantText) : [];
   const all = Object.values(sups).filter(x => !/^(לא|no)$/i.test(String(x.active || '')));
   const linked = {}; links.forEach(l => { linked[l.supplierId] = 1; });
   const byType = {}; all.forEach(x => { (byType[x.type] = byType[x.type] || []).push(x); });
-  const types = recTypes.concat(SUPPLIER_TYPES.filter(x => recTypes.indexOf(x) < 0)).filter(ty => (byType[ty] || []).length || recTypes.includes(ty));
-  const listHtml = types.map(ty => `<div class="f"><span>${esc(supplierTypeLabel(ty))}${recTypes.includes(ty) ? ' ★' : ''}</span>${(byType[ty] || []).length ? Office.rankSuppliers(byType[ty], ty, db.list('links')).map(x => `<label class="chk"><input type="checkbox" name="sup" value="${esc(x.id)}"${linked[x.id] ? ' disabled' : ''}> ${esc(x.name)} <span class="sub">${esc(stars(x.rating))}${x.events ? ' · ' + x.events : ''}${x.email ? ' · ✉' : ''}${x.phone ? ' · ☏' : ''}</span></label>`).join('') : `<span class="sub">${esc(t('noneOfType'))}</span>`}</div>`).join('');
+  const types = want.concat(recTypes.filter(x => !want.includes(x))).concat(SUPPLIER_TYPES.filter(x => recTypes.indexOf(x) < 0 && !want.includes(x))).filter(ty => (byType[ty] || []).length || recTypes.includes(ty) || want.includes(ty));
+  const pre = {}; want.forEach(ty => Office.rankSuppliers(byType[ty] || [], ty, db.list('links')).filter(x => !linked[x.id]).slice(0, 3).forEach(x => { pre[x.id] = 1; }));
+  const listHtml = types.map(ty => `<div class="f"><span>${esc(supplierTypeLabel(ty))}${recTypes.includes(ty) ? ' ★' : ''}</span>${(byType[ty] || []).length ? Office.rankSuppliers(byType[ty], ty, db.list('links')).map(x => `<label class="chk"><input type="checkbox" name="sup" value="${esc(x.id)}"${linked[x.id] ? ' disabled' : ''}${pre[x.id] ? ' checked' : ''}> ${esc(x.name)} <span class="sub">${esc(stars(x.rating))}${x.events ? ' · ' + x.events : ''}${x.email ? ' · ✉' : ''}${x.phone ? ' · ☏' : ''}</span></label>`).join('') : `<span class="sub">${esc(t('noneOfType'))}</span>`}</div>`).join('');
   const r1 = await dialog(t('askSuppliers'), `<div class="grid2">${field('replyBy', t('replyBy'), Office.iso(Office.addDays(new Date(), 2)), { type: 'date' })}<label class="chk"><input type="checkbox" name="asClient"${c.asClient === 'לא' ? '' : ' checked'}> ${esc(t('asClient'))}</label></div><h3>${esc(t('pickSuppliers'))}</h3>${listHtml}`, { ok: t('next') });
   if (!r1) return;
   const ids = [].concat(r1.sup || []).filter(Boolean); if (!ids.length) { toast(t('pickSuppliers')); return; }

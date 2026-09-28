@@ -4,6 +4,7 @@ import { t, setLang, dir, lang } from './i18n.js';
 import { db } from './store.js';
 import { esc } from './ui.js';
 import * as today from './screens/today.js';
+import * as help from './screens/help.js';
 import * as lead from './screens/lead.js';
 import * as cases from './screens/cases.js';
 import * as clients from './screens/clients.js';
@@ -27,7 +28,7 @@ setChangeHook(enqueue);
 
 const ROUTES = {
   today, lead, cases, 'case': cases, clients, client: clients, calls, tasks, search, settings, more,
-  suppliers, supplier: suppliers, quotes, quote: quotes, groups, money, notes, assist, portal, receipts
+  suppliers, supplier: suppliers, quotes, quote: quotes, groups, money, notes, assist, portal, receipts, help
 };
 const NAV = [
   ['today', 'today', 'M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z'],
@@ -76,6 +77,10 @@ function route() {
   window.scrollTo(0, 0);
 }
 
+// "Add to home screen": the browser offers it once; we keep the offer and show our own button until she installs.
+window.__installPrompt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); window.__installPrompt = e; document.dispatchEvent(new Event('bakasun:installable')); });
+window.addEventListener('appinstalled', () => { window.__installPrompt = null; try { localStorage.setItem('bakasun.installed', '1'); } catch (x) { /* */ } document.dispatchEvent(new Event('bakasun:installable')); });
 window.addEventListener('hashchange', route);
 route();
 

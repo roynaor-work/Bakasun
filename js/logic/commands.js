@@ -14,15 +14,37 @@ const CONTACT = /(?:^(?:שמרי|תשמרי|שמור|הוסיפי|תוסיפי|�
 const MESSAGE = /^(?:שלחי|שלח|תשלחי|תשלח|תכתבי|תכתוב|כתבי|תגידי|תאמרי|תגיד|send|write|tell|envoie|envoyer|écris|dis)\s+(?:(?:את\s+)?(?:ה)?(הודעה|הודעת וואטסאפ|וואטסאפ|ווצאפ|מייל|אימייל|a message|a whatsapp|message|whatsapp|an e-mail|an email|e-mail|email|mail|un message|un mail|un e-mail|un whatsapp|courriel)\s+)?(?:ל|אל\s+|to\s+|à\s+|a\s+)([^:,]+?)\s*(?:[:,]|\s(?=ש[א-ת]))\s*(.+)$/i;
 function findPerson(text, people) {
   const hay = Office.normHe(text); let bp = null, bl = 0;
-  (people || []).forEach(p => (p.names || []).forEach(n => { const k = Office.normHe(n); if (k && k.length >= 3 && k.length > bl && hay.indexOf(k) >= 0) { bp = p; bl = k.length; } }));
+  // the name inside the text ("send to Dana Levy the logo"), or the text inside the name ("Shoval" for "ארגון שוב״ל")
+  (people || []).forEach(p => (p.names || []).forEach(n => { const k = Office.normHe(n); if (!k || k.length < 3) return; const hit = hay.indexOf(k) >= 0 ? k.length : (hay.length >= 3 && k.indexOf(hay) >= 0) ? hay.length : 0; if (hit > bl) { bp = p; bl = hit; } }));
   return bp ? { name: bp.label, phone: bp.phone, email: bp.email, about: bp.about, id: bp.id } : null;
 }
 
 /** What a command asks for: {kind: 'send'|'message'|'contact'|'invoice'|'supplierQuote'|'unknown', doc, to: {phone|email|name}} */
+// "build me a quote for X", "new lead: ...", "ask quotes from hotels for X", "open X", "call X", "task for X: ...", "note on X: ...", "what is today"
+const ACTIONS = [
+  ['today', /^(?:מה יש לי היום|מה יש היום|מה היום|what(?:'s| is) (?:on )?today|aujourd['’]hui|qu['’]est-ce qu['’]il y a aujourd['’]hui)\??$/i],
+  ['lead', /^(?:פנייה חדשה|פניה חדשה|לקוח חדש|ליד חדש|new lead|new client|new enquiry|nouveau client|nouvelle demande)\s*[:,]?\s*(.*)$/i],
+  ['quote', /^(?:תבני|תבנה|בני|הכיני|תכיני|תכין|צרי|build|make|prepare|create|prépare|fais|crée)\s+(?:לי\s+)?(?:את\s+)?(?:ה)?(?:הצעת מחיר|הצעה|a quote|quote|un devis|devis)(?:\s+(?:ל|for|pour)\s*(.+))?$/i],
+  ['ask', /^(?:תבקשי|בקשי|תבקש|תשלחי בקשה|ask for|request|demande)\s+(?:הצעות מחיר|הצעות|הצעת מחיר|הצעה|quotes|a quote|des devis|un devis)(?:\s+(?:מ|from|de|à|aux|au|auprès de|auprès des)\s*(.+?))?(?:\s+(?:ל|for|pour)\s*(.+))?$/i],
+  ['call', /^(?:תתקשרי|התקשרי|תתקשר|חייגי|תחייגי|call|appelle)\s+(?:ל|to\s+|à\s+)?(.+)$/i],
+  ['task', /^(?:משימה|תוסיפי משימה|הוסיפי משימה|תני משימה|add a task|new task|task|tâche|ajoute une tâche)\s*(?:ל|for|pour)?\s*([^:]+?)?\s*[:]\s*(.+)$/i],
+  ['note', /^(?:רשמי|תרשמי|כתבי|תכתבי|note|write down|écris|note que)\s+(?:הערה\s+|a note\s+|une note\s+)?(?:על|about|on|sur)\s+([^:]+?)\s*[:]\s*(.+)$/i],
+  ['open', /^(?:תפתחי|פתחי|תפתח|תראי לי|הראי לי|open|show me|ouvre|montre-moi)\s+(?:את\s+)?(?:ה)?(?:תיק|לקוח|ספק|case|client|supplier|dossier|fournisseur)?\s*(?:של\s+|of\s+|de\s+)?(.+)$/i]
+];
 export function parseCommand(text, docs, people) {
   const t = trim(text);
   const out = { kind: 'unknown', text: t, doc: null, to: null };
   if (!t) return out;
+  for (const [kind, re] of ACTIONS) {
+    const m = re.exec(t); if (!m) continue;
+    out.kind = kind;
+    if (kind === 'lead') out.body = trim(m[1] || '');
+    if (kind === 'quote' || kind === 'open' || kind === 'call') { out.who = trim(m[1] || ''); out.to = findPerson(out.who, people); }
+    if (kind === 'ask') { out.type = trim(m[1] || ''); out.who = trim(m[2] || ''); out.to = findPerson(out.who || out.type, people); if (!out.who && out.to) { out.who = out.type; out.type = ''; } }
+    if (kind === 'task') { out.who = trim(m[1] || ''); out.body = trim(m[2] || ''); out.to = out.who ? findPerson(out.who, people) : null; }
+    if (kind === 'note') { out.who = trim(m[1] || ''); out.body = trim(m[2] || ''); out.to = findPerson(out.who, people); }
+    return out;
+  }
   const rem = parseReminder(t, new Date()); if (rem) { out.kind = 'reminder'; out.reminder = rem; return out; }
   if (INVOICE.test(t) && /(רועי|roy|בקש|ask|demande)/i.test(t)) { out.kind = 'invoice'; out.invoice = parseInvoiceRequest(t); return out; }
   if (/(קיבלתי|יש לי|הגיעה|got|received|reçu|j'ai reçu)\s.*(הצעה|הצעת מחיר|quote|devis)/i.test(t) || /^(הצעה|הצעת מחיר|quote|devis)\s+(מ|from|de)\b/i.test(t)) {

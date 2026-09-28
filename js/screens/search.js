@@ -9,7 +9,8 @@ export const noLive = true;
 let q = '';
 const LINK = { case: id => '#/case/' + id, client: id => '#/client/' + id, call: () => '#/calls', task: () => '#/tasks', supplier: id => '#/supplier/' + id, note: (id, h) => h.about === 'client' ? '#/client/' + h.aboutId : h.about === 'supplier' ? '#/supplier/' + h.aboutId : h.about === 'case' ? '#/case/' + h.aboutId : '#/notes' };
 
-export function render({ root }) {
+export function render({ root, id }) {
+  if (id) { try { q = decodeURIComponent(id); } catch (e) { q = id; } }
   root.innerHTML = `<header class="top"><a class="icon" href="#/today" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
     <input id="q" type="search" placeholder="${esc(t('searchPh'))}" value="${esc(q)}" autofocus></header><div id="res" class="list"></div>`;
   const inp = root.querySelector('#q'), res = root.querySelector('#res');

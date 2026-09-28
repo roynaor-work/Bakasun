@@ -27,7 +27,7 @@ var Office = (function () {
   var KIND_WORDS = [
     ['בר או בת מצווה', /בר[ -]?מצו|בת[ -]?מצו|ba[rt][ -]?mit[sz]va/i],
     ['חתונה', /חתונ|wedding|mariage|חופה/i],
-    ['יום גיבוש', /גיבוש|team ?building|séminaire|seminaire/i],
+    ['יום גיבוש', /גיבוש|סמינר|יום עיון|team ?building|seminar|séminaire|seminaire|retreat|off-?site/i],
     ['כנס', /כנס|כינוס|conference|congrès|congres/i],
     ['משלחת או סיור', /משלחת|סיור|טיול|delegation|tour\b|voyage|groupe de/i],
     ['אירוע לעמותה', /עמות|nonprofit|association/i],
@@ -146,11 +146,19 @@ var Office = (function () {
 
     // place: the longest locality name that appears as a word
     if (places && places.length) {
-      var best = '';
+      // "in Herzliya" beats "a bus from Tel Aviv": a place after "from" only counts when nothing else matches
+      var best = '', bestScore = -1;
+      var esc = function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); };
+      var score = function (hn, found, fromRe, inRe) {
+        if (!found) return -1;
+        var sc = hn.length; if (inRe.test(t)) sc += 100; else if (fromRe.test(t)) sc -= 100; return sc;
+      };
       places.concat(REGIONS).forEach(function (p) {
         var hn = str(p[0]).replace(/\s*\(.*\)$/, '').split(' - ')[0], en = str(p[1]).split(' - ')[0];
-        if (hn.length >= 3 && hn.length > best.length && wordIn(t, hn)) best = hn;
-        if (en.length >= 4 && en.length > best.length && new RegExp('\\b' + en.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i').test(t)) best = hn;
+        var sc = -1;
+        if (hn.length >= 3) sc = score(hn, wordIn(t, hn), new RegExp('(^|\\s)מ' + esc(hn) + '(?=\\s|$|[,.!?])'), new RegExp('(^|\\s)ב' + esc(hn) + '(?=\\s|$|[,.!?])'));
+        if (en.length >= 4) sc = Math.max(sc, score(hn, new RegExp('\\b' + esc(en) + '\\b', 'i').test(t), new RegExp('\\bfrom\\s+' + esc(en) + '\\b', 'i'), new RegExp('\\b(?:in|at|à|au)\\s+' + esc(en) + '\\b', 'i')));
+        if (sc > bestScore) { bestScore = sc; best = hn; }
       });
       out.place = best;
     }
@@ -211,12 +219,12 @@ var Office = (function () {
     lang = lang || lead.lang || 'he';
     var miss = lead.missing || missingOf(lead);
     var name = firstName(lead.name);
-    var open = { he: (name ? 'היי ' + name + ', ' : 'היי, ') + 'תודה על הפנייה.', en: (name ? 'Hi ' + name + ', ' : 'Hi, ') + 'thank you for reaching out.', fr: (name ? 'Bonjour ' + name + ', ' : 'Bonjour, ') + 'merci pour votre message.' }[lang];
+    var open = { he: (name ? 'היי היי ' + name + ', מה שלומך? ' : 'היי היי, ') + 'תודה רבה על הפנייה :)', en: (name ? 'Hi ' + name + ', ' : 'Hi, ') + 'thank you for reaching out.', fr: (name ? 'Bonjour ' + name + ', ' : 'Bonjour, ') + 'merci pour votre message.' }[lang];
     if (!miss.length) {
-      var done = { he: 'יש לי את כל מה שצריך כדי להכין הצעה. אחזור אליך בהקדם.', en: 'I have everything I need to prepare a proposal and will get back to you shortly.', fr: 'J’ai tout ce qu’il me faut pour préparer une proposition. Je reviens vers vous très vite.' }[lang];
+      var done = { he: 'יש לי את כל מה שצריך כדי להכין הצעה, אחזור אליך בהקדם. תודה רבה!', en: 'I have everything I need to prepare a proposal and will get back to you shortly.', fr: 'J’ai tout ce qu’il me faut pour préparer une proposition. Je reviens vers vous très vite.' }[lang];
       return open + '\n' + done + (signer ? '\n' + signer : '');
     }
-    var lead_in = { he: 'כדי שאוכל להכין הצעה מדויקת, כמה פרטים:', en: 'To prepare an accurate proposal, a few details:', fr: 'Pour préparer une proposition précise, quelques précisions :' }[lang];
+    var lead_in = { he: 'כדי שאוכל להכין הצעה מדויקת, אשמח לכמה פרטים בבקשה:', en: 'To prepare an accurate proposal, a few details:', fr: 'Pour préparer une proposition précise, quelques précisions :' }[lang];
     var MON = { he: ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'] };
     var ask = function (k) {
       if (k === 'date' && lead.month && lang === 'he') return 'באיזה תאריך ב' + MON.he[lead.month - 1] + '?';
@@ -353,7 +361,7 @@ var Office = (function () {
     var tot = quoteTotals(q.lines, q.vatRate);
     if (q.lang === 'en') return 'Hi' + (n ? ' ' + n : '') + ',\nAttached is our quotation for ' + (cs.kind || 'the event') + (cs.date ? ' on ' + fmt(cs.date) : '') + '. Total before VAT: ' + money(tot.net) + '.\nHappy to go over it together or adjust anything.\n' + (signer || '');
     if (q.lang === 'fr') return 'Bonjour' + (n ? ' ' + n : '') + ',\nVous trouverez ci-joint notre devis pour ' + (cs.kind || 'l’événement') + (cs.date ? ' du ' + fmt(cs.date) : '') + '. Total HT : ' + money(tot.net) + '.\nJe reste disponible pour en parler ou l’ajuster.\n' + (signer || '');
-    return 'היי' + (n ? ' ' + n : '') + ',\nמצורפת הצעת המחיר ל' + (cs.kind || 'אירוע') + (cs.date ? ' ב-' + fmt(cs.date) : '') + '. סה״כ לפני מע״מ: ' + money(tot.net) + '.\nאשמח לעבור עליה יחד או להתאים מה שצריך.\n' + (signer || '');
+    return 'היי היי' + (n ? ' ' + n : '') + ', מה שלומך?\nמצורפת הצעת המחיר ל' + (cs.kind || 'אירוע') + (cs.date ? ' ב-' + fmt(cs.date) : '') + '. סה״כ לפני מע״מ: ' + money(tot.net) + '.\nאשמח לעבור עליה יחד או להתאים מה שצריך. תודה רבה!\n' + (signer || '');
   }
 
   /* ---------------- 4. follow-ups: clients who did not answer ---------------- */
@@ -370,8 +378,8 @@ var Office = (function () {
       var waited = daysBetween(c.waitingSince, today);
       return { caseId: c.id, client: c.client, contact: c.contact, phone: c.phone, status: c.status, waited: waited,
         text: c.status === STATUS.quoted
-          ? 'היי' + (firstName(c.contact || c.client) ? ' ' + firstName(c.contact || c.client) : '') + ', רציתי לבדוק אם יצא לך לעבור על ההצעה' + (c.date ? ' ל-' + fmt(c.date) : '') + '. אשמח לענות על שאלות או להתאים.'
-          : 'היי' + (firstName(c.contact || c.client) ? ' ' + firstName(c.contact || c.client) : '') + ', חוזרת אליך לגבי האירוע' + (c.date ? ' ב-' + fmt(c.date) : '') + '. יש עדכון?' };
+          ? 'היי היי' + (firstName(c.contact || c.client) ? ' ' + firstName(c.contact || c.client) : '') + ', מה שלומך? רציתי לבדוק אם יצא לך לעבור על ההצעה' + (c.date ? ' ל-' + fmt(c.date) : '') + '. אשמח לענות על שאלות או להתאים מה שצריך. תודה רבה!'
+          : 'היי היי' + (firstName(c.contact || c.client) ? ' ' + firstName(c.contact || c.client) : '') + ', מה שלומך? חוזרת אליך לגבי האירוע' + (c.date ? ' ב-' + fmt(c.date) : '') + '. יש עדכון? אשמח לדעת איך להתקדם :)' };
     }).sort(function (a, b) { return b.waited - a.waited; });
   }
 
@@ -384,17 +392,17 @@ var Office = (function () {
   /** Asking a supplier for a price and availability. what = what we need from this supplier. */
   function supplierRequest(cs, sup, what, signer, replyBy) {
     var n = firstName(sup.contact || sup.name);
-    return 'היי' + (n ? ' ' + n : '') + ', מדברת וירג׳יני מבאקה סאן.\n' +
+    return 'היי היי' + (n ? ' ' + n : '') + ', מה שלומך?\n' +
       'אני בונה הצעה לאירוע: ' + eventLine(cs) + '.\n' +
       (trim(what) ? 'מה צריך: ' + trim(what) + '.\n' : '') +
-      'אשמח לדעת אם התאריך פנוי אצלך, ומה המחיר' + (replyBy ? ', עד ' + fmt(replyBy) : '') + '.\nתודה' + (signer ? '\n' + signer : '');
+      'אשמח לדעת בבקשה אם התאריך פנוי אצלך ומה המחיר' + (replyBy ? ', עד ' + fmt(replyBy) : '') + '. זה די דחוף :)\nתודה רבה!' + (signer ? '\n' + signer : '');
   }
 
   /** One change, one message per supplier: only the suppliers of this event, each with their own name. */
   function changeMessage(cs, sup, change, signer) {
     var n = firstName(sup.contact || sup.name);
-    return 'היי' + (n ? ' ' + n : '') + ', עדכון לגבי ' + (cs.kind || 'האירוע') + (cs.date ? ' ב-' + fmt(cs.date) : '') + (cs.client ? ' (' + cs.client + ')' : '') + ':\n' +
-      trim(change) + '\nאשמח לאישור שקיבלת.' + (signer ? '\n' + signer : '');
+    return 'היי היי' + (n ? ' ' + n : '') + ', מה שלומך? עדכון לגבי ' + (cs.kind || 'האירוע') + (cs.date ? ' ב-' + fmt(cs.date) : '') + (cs.client ? ' (' + cs.client + ')' : '') + ':\n' +
+      trim(change) + '\nאשמח בבקשה לאישור שקיבלת. תודה רבה!' + (signer ? '\n' + signer : '');
   }
 
   /** Suppliers of one type, best first (rating, then how many events they did with us). */
@@ -531,8 +539,8 @@ var Office = (function () {
 
   function paymentReminder(pay, cs, contact) {
     var n = firstName(contact || cs.contact || cs.client);
-    return 'היי' + (n ? ' ' + n : '') + ', תזכורת לגבי התשלום על ' + (cs.kind || 'האירוע') + (cs.date ? ' מ-' + fmt(cs.date) : '') + ': ' + money(num(pay.amount)) +
-      (pay.invoiceNo ? ' (חשבונית ' + pay.invoiceNo + ')' : '') + '. אם כבר הועבר, אשמח לאסמכתא. תודה.';
+    return 'היי היי' + (n ? ' ' + n : '') + ', מה שלומך? תזכורת קטנה לגבי התשלום על ' + (cs.kind || 'האירוע') + (cs.date ? ' מ-' + fmt(cs.date) : '') + ': ' + money(num(pay.amount)) +
+      (pay.invoiceNo ? ' (חשבונית ' + pay.invoiceNo + ')' : '') + '. אם כבר הועבר, אשמח לאסמכתא בבקשה. תודה רבה!';
   }
 
   /* ---------------- 8. checklists, team, after the event ---------------- */
@@ -557,17 +565,17 @@ var Office = (function () {
 
   function staffMessage(cs, st, signer) {
     var n = firstName(st.name);
-    return 'היי' + (n ? ' ' + n : '') + ', לגבי ' + (cs.kind || 'האירוע') + (cs.date ? ' ב-' + fmt(cs.date) : '') + (cs.place ? ' ב' + cs.place : '') + ':\n' +
-      (st.role ? 'תפקיד: ' + st.role + '\n' : '') + (st.arrive ? 'הגעה: ' + hhmm(st.arrive) + '\n' : '') + 'אפשר לאשר שמגיע/ה?' + (signer ? '\n' + signer : '');
+    return 'היי היי' + (n ? ' ' + n : '') + ', מה שלומך? לגבי ' + (cs.kind || 'האירוע') + (cs.date ? ' ב-' + fmt(cs.date) : '') + (cs.place ? ' ב' + cs.place : '') + ':\n' +
+      (st.role ? 'תפקיד: ' + st.role + '\n' : '') + (st.arrive ? 'הגעה: ' + hhmm(st.arrive) + '\n' : '') + 'אשמח לאישור שאת/ה מגיע/ה בבקשה. תודה רבה!' + (signer ? '\n' + signer : '');
   }
 
   function thanksMessage(cs, contact) {
     var n = firstName(contact || cs.contact || cs.client);
-    return 'היי' + (n ? ' ' + n : '') + ', תודה רבה על ' + (cs.kind || 'האירוע') + '. היה לנו כיף גדול לעבוד איתכם.';
+    return 'היי היי' + (n ? ' ' + n : '') + ', מה שלומך? תודה רבה על ' + (cs.kind || 'האירוע') + '! היה לנו כיף גדול לעבוד איתכם, ומחכה כבר לפעם הבאה :)';
   }
   function reviewMessage(cs, contact, link) {
     var n = firstName(contact || cs.contact || cs.client);
-    return 'היי' + (n ? ' ' + n : '') + ', אם נהניתם, נשמח מאוד להמלצה קצרה' + (link ? ': ' + link : '') + '. זה עוזר לנו מאוד. תודה.';
+    return 'היי היי' + (n ? ' ' + n : '') + ', מה שלומך? אם נהניתם, אשמח מאוד להמלצה קצרה בבקשה' + (link ? ': ' + link : '') + '. זה עוזר לנו מאוד. תודה רבה!';
   }
 
   /* ---------------- 9. search ---------------- */

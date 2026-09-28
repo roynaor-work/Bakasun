@@ -4,12 +4,17 @@ import { t, lang, SPEECH, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
 import { esc, field, empty, dialog, toast, openWhatsApp, copyText } from '../ui.js';
 import Office from '../logic/office.js';
+import { TASK } from '../logic/extra.js';
 import { isReceiptCommand } from '../logic/receipts.js';
+import { parseAgenda, agenda } from '../logic/agenda.js';
+import { parseGoto, screenWord } from '../logic/nav.js';
+import { parseMissing, openItems, focusSections } from '../logic/openItems.js';
 import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage } from '../logic/commands.js';
 import { QUOTE_STATUS } from '../logic/quotes.js';
 import { subjects } from '../notes.js';
 import { files, shareFile, downloadFile, pdfText } from '../files.js';
 import { speechSupported, listen } from '../voice.js';
+import { wireDelete, isDeleteCommand, isDoneCommand } from '../recbox.js';
 import { DEFAULTS } from '../data/defaults.js';
 import { hasArabic, waLink } from '../logic/core.js';
 import { COMPANY_PAPERS } from '../data/docsList.js';
@@ -43,26 +48,103 @@ export function render(ctx) {
   ({ command: tabCommand, invoice: tabInvoice, supplierQuote: tabSupplierQuote, docs: tabDocs }[mode])(body, s, ctx);
 }
 
-function inputBox(body, hint, ph, onRead, readLabel) {
+function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
   const s = db.settings(); const dictLang = s.dictLang || lang();
-  body.innerHTML = `<p class="hint">${esc(hint)}</p><textarea id="txt" rows="5" placeholder="${esc(ph)}">${esc(draft)}</textarea>
+  const ex = Array.isArray(examples) && examples.length ? `<details class="examples"><summary>${esc(t('cmdEx'))}</summary><div class="chips">${examples.map(x => `<button type="button" class="chip" data-ex="${esc(x)}">${esc(x)}</button>`).join('')}</div></details>` : '';
+  body.innerHTML = `<p class="hint">${esc(hint)}</p>${ex}<textarea id="txt" rows="5" placeholder="${esc(ph)}">${esc(draft)}</textarea>
     <div class="row"><button class="btn rec" id="rec" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>${esc(t('dictate'))}</span></button>
       <select id="dl">${Object.keys(SPEECH).map(k => `<option value="${k}"${k === dictLang ? ' selected' : ''}>${esc(langName(k))}</option>`).join('')}</select>
       <button class="btn primary grow" id="go" type="button">${esc(readLabel || t('read'))}</button></div><div id="out" class="stack"></div>`;
   const ta = body.querySelector('#txt'), rec = body.querySelector('#rec'), dl = body.querySelector('#dl');
+  body.querySelectorAll('[data-ex]').forEach(b => { b.onclick = () => { ta.value = b.dataset.ex; draft = ta.value; ta.focus(); const d = body.querySelector('details.examples'); if (d) d.open = false; }; });
+  const bin = wireDelete(body, ta, 'cmd:' + mode, v => { draft = v; });
   let stop = null;
   ta.oninput = () => { draft = ta.value; };
   dl.onchange = () => db.setting('dictLang', dl.value);
+  // The instruction runs only when she says "finished" or taps the "finished" button. Ten seconds of silence just stops
+  // the microphone; the text stays, and the next tap on "dictate" continues from there.
+  let manual = false; // "read" tapped while recording: the recording's own end must not run it a second time
   rec.onclick = () => {
     if (stop) { stop(); return; }
     if (!speechSupported()) { toast(t('noSpeech'), 3500); return; }
     const base = ta.value ? ta.value.replace(/\s+$/, '') + '\n' : '';
-    rec.classList.add('on'); rec.querySelector('span').textContent = t('stop');
-    stop = listen(SPEECH[dl.value] || 'he-IL', text => { ta.value = base + text; draft = ta.value; }, () => { stop = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); });
+    rec.classList.add('on'); rec.querySelector('span').textContent = t('doneBtn'); manual = false;
+    stop = listen(SPEECH[dl.value] || 'he-IL', text => { ta.value = base + text; draft = ta.value; }, (said, why, finals) => {
+      stop = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate');
+      const lastSaid = (finals || []).slice(-1)[0] || '';
+      const without = () => { ta.value = (base + (finals || []).slice(0, -1).join(' ')).trim(); draft = ta.value; };
+      if (isDeleteCommand(lastSaid)) { without(); if (bin) bin.doDelete(); return; }
+      if (manual) return;
+      // a screen name alone ("suppliers") moves there at once, no "finished" needed
+      if (autoRun && parseGoto(lastSaid) && !(finals || []).slice(0, -1).length) { ta.value = base.trim(); draft = ta.value; goTo(parseGoto(lastSaid)); return; }
+      const run = isDoneCommand(lastSaid) || why === 'stop';
+      if (isDoneCommand(lastSaid)) without();
+      if (!run) { toast(t('stoppedHint'), 4000); return; }
+      if (autoRun && ta.value.trim()) { toast(t('heardRunning'), 1500); onRead(ta.value, body.querySelector('#out')); }
+    }, { silence: 10000, stopOn: x => isDoneCommand(x) || isDeleteCommand(x) || (autoRun && !!parseGoto(x)) });
     if (!stop) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
   };
-  body.querySelector('#go').onclick = () => { if (stop) stop(); onRead(ta.value, body.querySelector('#out')); };
+  body.querySelector('#go').onclick = () => { if (stop) { manual = true; stop(); } if (isDeleteCommand(ta.value)) { if (bin) bin.doDelete(); return; } onRead(ta.value, body.querySelector('#out')); };
   return ta;
+}
+
+/** A spoken screen name moves there, no tap. */
+function goTo(route) {
+  toast(t('goingTo', { screen: screenWord(route, lang()) }), 1200);
+  location.hash = route === 'assist' ? '#/assist' : '#/' + route;
+}
+
+/** The case she means: by the client's name (or its id), tried as said and without a Hebrew one-letter prefix. */
+function caseByName(who, alt) {
+  const active = db.list('cases', x => Office.ACTIVE.includes(x.status)).sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
+  const clients = db.list('clients');
+  const aliasHit = hay => clients.find(c => String(c.aliases || '').split(/[,;]+/).map(a => Office.normHe(a)).some(a => a && (a.indexOf(hay) >= 0 || hay.indexOf(a) >= 0)));
+  const find = w => {
+    const hay = Office.normHe(w || ''); if (hay.length < 2) return null;
+    const direct = active.find(x => Office.normHe(x.client || '').indexOf(hay) >= 0 || (hay.length >= 3 && hay.indexOf(Office.normHe(x.client || '')) >= 0) || Office.normHe(x.contact || '').indexOf(hay) >= 0 || Office.normHe(x.purpose || '').indexOf(hay) >= 0);
+    if (direct) return direct;
+    const cl = aliasHit(hay); return cl ? active.find(x => x.clientId === cl.id) || null : null;
+  };
+  return find(who) || find(alt) || null;
+}
+
+/** "What is missing for Shoval?": everything open on that event, in sections with links. */
+function showMissing(out, mq) {
+  const active = db.list('cases', x => Office.ACTIVE.includes(x.status)).sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
+  let cs = caseByName(mq.who, mq.alt);
+  if (!cs && active.length === 1) cs = active[0];
+  if (!cs) {
+    out.innerHTML = `<div class="card stack"><div class="title">${esc(t('whichCase'))}</div>${active.length ? active.map(c => `<button type="button" class="btn" data-case="${esc(c.id)}">${esc(c.client)}${c.date ? ' · ' + esc(Office.fmt(c.date)) : ''}</button>`).join('') : `<p class="hint">${esc(t('noCases'))}</p>`}</div>`;
+    out.querySelectorAll('[data-case]').forEach(b => { b.onclick = () => showMissing(out, Object.assign({}, mq, { who: db.get('cases', b.dataset.case).client, alt: '' })); });
+    return;
+  }
+  const res = focusSections(openItems(cs, db.snapshot(), new Date(), lang()), mq.focus);
+  const head = [cs.client, cs.kind, cs.date ? Office.fmt(cs.date) : ''].filter(Boolean).join(' · ');
+  const days = res.daysLeft != null && res.daysLeft >= 0 ? `<span class="badge ${res.daysLeft <= 7 ? 'warn' : 'muted'}">${esc(t('daysLeft', { n: res.daysLeft }))}</span>` : '';
+  out.innerHTML = `<div class="card stack"><div class="row between"><a class="title" href="#/case/${esc(cs.id)}">${esc(head)}</a>${days}</div>
+    ${res.sections.length ? res.sections.map(s => `<div><div class="sub"><b>${esc(s.title)}</b> (${s.items.length})</div><ul class="open">${s.items.map(i => `<li><a href="${esc(i.href)}">${esc(i.text)}</a></li>`).join('')}</ul></div>`).join('') : `<p class="okbox">${esc(t('nothingOpen'))}</p>`}
+    <div class="row"><a class="btn sm" href="#/case/${esc(cs.id)}">${esc(t('open'))}</a><button type="button" class="btn sm ghost" id="copyOpen">${esc(t('copy'))}</button></div></div>`;
+  const b = out.querySelector('#copyOpen'); if (b) b.onclick = () => copyText(head + '\n' + res.sections.map(s => s.title + ':\n' + s.items.map(i => '• ' + i.text).join('\n')).join('\n\n'));
+}
+
+/** "What do I have tomorrow?": tasks and reminders (with a done tick), events, calls. */
+function showAgenda(out, q) {
+  const draw = () => {
+    const a = agenda(db.snapshot(), q, new Date());
+    const when = q.key === 'today' ? t('agendaToday') : q.key === 'tomorrow' ? t('agendaTomorrow') : q.key === 'week' ? t('agendaWeek') : q.key === 'all' ? t('agendaAll') : Office.fmt(q.from);
+    const line = x => `<div class="row between" data-task="${esc(x.id)}"><span>${x.due && q.key !== 'today' && q.key !== 'tomorrow' && q.key !== 'day' ? esc(Office.fmt(x.due)) + ' · ' : ''}${x.time ? esc(x.time) + ' · ' : ''}${esc(x.title)}${x.who && x.who !== t('me') ? ' <span class="sub">' + esc(x.who) + '</span>' : ''}</span><button class="btn sm ok" data-done>✓</button></div>`;
+    const ev = c => `<div><a href="#/case/${esc(c.id)}">${esc(c.client)}</a> · ${esc(c.kind || '')}${c.date ? ' · ' + esc(Office.fmt(c.date)) : ''}${c.place ? ' · ' + esc(c.place) : ''}</div>`;
+    const cl = c => `<div><a href="#/calls">${esc(c.who || c.name || c.client || '')}</a>${c.about ? ' · ' + esc(c.about) : ''}</div>`;
+    const none = !a.tasks.length && !a.events.length && !a.calls.length;
+    out.innerHTML = `<div class="card stack"><div class="title">${esc(when)}</div>
+      ${none ? `<p class="hint">${esc(t('agendaNone', { when }))}</p>` : ''}
+      ${a.tasks.length ? `<div class="sub"><b>${esc(t('agendaTasks'))}</b></div>${a.tasks.map(line).join('')}` : ''}
+      ${a.events.length ? `<div class="sub"><b>${esc(t('agendaEvents'))}</b></div>${a.events.map(ev).join('')}` : ''}
+      ${a.calls.length ? `<div class="sub"><b>${esc(t('agendaCalls'))}</b></div>${a.calls.map(cl).join('')}` : ''}
+      <div class="row"><a class="btn sm" href="#/tasks">${esc(t('allTasks'))}</a><a class="btn sm ghost" href="#/today">${esc(t('today'))}</a></div></div>`;
+    out.querySelectorAll('[data-task]').forEach(el => { el.querySelector('[data-done]').onclick = () => { db.put('tasks', { id: el.dataset.task, status: TASK.done }); toast(t('taskDone')); draw(); }; });
+  };
+  draw();
 }
 
 /* ---------------- 1. send a document to someone ---------------- */
@@ -75,11 +157,26 @@ async function tabCommand(body, s, ctx) {
     .concat(db.list('contacts').map(x => ({ label: x.name, names: [x.name], phone: x.phone, email: x.email, about: 'contact', id: x.id })));
   inputBox(body, t('cmdHint'), t('cmdPh'), (text, out) => {
     if (isReceiptCommand(text)) { location.hash = '#/receipts/' + new Date().toISOString().slice(0, 7) + '/snap'; return; }
+    const go = parseGoto(text);
+    if (go) { draft = ''; goTo(go); return; }
+    const q = parseAgenda(text, new Date());
+    if (q) { showAgenda(out, q); return; }
+    const mq = parseMissing(text);
+    if (mq) { showMissing(out, mq); return; }
     const c = parseCommand(text, docs, peopleNow());
     if (c.kind === 'invoice') { mode = 'invoice'; draft = text; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'supplierQuote') { mode = 'supplierQuote'; preSupplier = c.supplier && c.supplier.about === 'supplier' ? c.supplier.id : ''; draft = ''; render({ root: body.closest('#app') }); return; }
+    if (c.kind === 'today') { location.hash = '#/today'; return; }
+    if (c.kind === 'lead') { sessionStorage.setItem('bakasun.leadText', c.body || ''); location.hash = '#/lead'; return; }
+    const caseOf = who => { const hay = Office.normHe(who || ''); if (!hay) return null; const cs = db.list('cases', x => Office.ACTIVE.includes(x.status)).sort((a, b) => String(b.date || '').localeCompare(String(a.date || ''))); return cs.find(x => c.to && c.to.about === 'client' && x.clientId === c.to.id) || cs.find(x => hay.length >= 3 && (Office.normHe(x.client || '').indexOf(hay) >= 0 || hay.indexOf(Office.normHe(x.client || '')) >= 0 || Office.normHe(x.contact || '').indexOf(hay) >= 0)) || null; };
+    if (c.kind === 'quote') { const cs = caseOf(c.who); if (cs) { location.hash = '#/case/' + cs.id + '/money'; setTimeout(() => import('./quotes.js').then(m => m.newQuote(db.get('cases', cs.id))), 400); } else { sessionStorage.setItem('bakasun.leadText', c.who ? 'לקוח: ' + c.who : ''); toast(t('noCaseFor', { who: c.who || '' }), 3500); location.hash = '#/lead'; } return; }
+    if (c.kind === 'ask') { const cs = caseOf(c.who); if (!cs) { out.innerHTML = `<p class="warnbox">${esc(t('noCaseFor', { who: c.who || c.type || '' }))}</p>`; return; } sessionStorage.setItem('bakasun.autoAsk', c.type || '1'); location.hash = '#/case/' + cs.id + '/suppliers'; return; }
+    if (c.kind === 'open') { if (c.to && c.to.about === 'client') { location.hash = '#/client/' + c.to.id; return; } if (c.to && c.to.about === 'supplier') { location.hash = '#/supplier/' + c.to.id; return; } const cs = caseOf(c.who); if (cs) { location.hash = '#/case/' + cs.id; return; } location.hash = '#/search/' + encodeURIComponent(c.who || ''); return; }
+    if (c.kind === 'call') { if (c.to && c.to.phone) { dial(c.to.phone); out.innerHTML = `<p class="okbox">${esc(t('calling', { who: c.to.name }))}</p>`; } else out.innerHTML = `<p class="warnbox">${esc(t('noContact'))}</p>`; return; }
+    if (c.kind === 'task') { const cs = c.who ? caseOf(c.who) : null; db.put('tasks', { title: c.body, who: c.to ? c.to.name.split(' · ')[0] : (c.who || t('me')), phone: c.to && c.to.phone || '', caseId: cs ? cs.id : '', due: Office.iso(Office.addDays(new Date(), 1)), status: TASK.open, lang: s.msgLang || 'he' }); out.innerHTML = `<p class="okbox">${esc(t('taskSaved', { what: c.body, who: c.to ? c.to.name.split(' · ')[0] : (c.who || t('me')) }))}</p>`; return; }
+    if (c.kind === 'note') { db.put('notes', { text: c.body, about: c.to ? c.to.about : '', aboutId: c.to ? c.to.id : '', aboutLabel: c.to ? c.to.name.split(' · ')[0] : c.who, lang: s.uiLang || 'he' }); out.innerHTML = `<p class="okbox">${esc(t('noteSaved', { who: c.to ? c.to.name.split(' · ')[0] : c.who }))}</p>`; return; }
     if (c.kind === 'reminder') {
-      db.put('tasks', { title: c.reminder.title, due: c.reminder.due, time: c.reminder.time, who: t('me'), status: 'פתוח', lang: s.uiLang || 'he' });
+      db.put('tasks', { title: c.reminder.title, due: c.reminder.due, time: c.reminder.time, who: t('me'), status: TASK.open, lang: s.uiLang || 'he' });
       out.innerHTML = `<p class="okbox">${esc(t('reminderSaved', { what: c.reminder.title, when: Office.fmt(c.reminder.due) + (c.reminder.time ? ' ' + c.reminder.time : '') }))}</p>`; return;
     }
     if (c.kind === 'contact') {
@@ -124,7 +221,7 @@ async function tabCommand(body, s, ctx) {
     const sh = out.querySelector('#share'); if (sh) sh.onclick = async () => { const rec = c.doc.rec || await bundledRec(c.doc.paper); if (!(await shareFile(rec, msg()))) { downloadFile(rec); toast(t('shareFallback'), 4000); } };
     const wa = out.querySelector('#wa'); if (wa) wa.onclick = () => openWhatsApp(c.to.phone, msg());
     const ml = out.querySelector('#mail'); if (ml) { ml.href = 'mailto:' + encodeURIComponent(c.to.email) + '?subject=' + encodeURIComponent((c.doc ? c.doc.title : '') + ' · ' + (s.bizName || DEFAULTS.bizName)) + '&body=' + encodeURIComponent(msg()); ml.target = '_blank'; }
-  }, t('read'));
+  }, t('read'), t('cmdExamples'), true);
   if (!lib.length && !bundledDocs().length) body.insertAdjacentHTML('afterbegin', `<p class="warnbox">${esc(t('noDocsYet'))}</p>`);
   if (ctx && ctx.autoRun) { ctx.autoRun = false; body.querySelector('#go').click(); }
   if (ctx && ctx.autoMic) { ctx.autoMic = false; body.querySelector('#rec').click(); }
