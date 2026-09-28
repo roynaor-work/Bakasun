@@ -160,3 +160,7 @@ ul.help, ul.open { margin: 6px 0 0; padding-inline-start: 18px; }
 ul.help li, ul.open li { margin: 4px 0; line-height: 1.45; }
 ul.open a { color: var(--ink); text-decoration: underline dotted; }
 .btn[hidden] { display: none; }
+.chip.st-none { border-color: #E0B4AA; background: #FBEDEA; }
+.chip.st-waiting { border-color: #E6C98A; background: #FBF3DF; }
+.chip.st-offers { border-color: #A9C9E8; background: #E9F2FB; }
+.chip.st-chosen { border-color: #A6D3B4; background: #E6F5EA; }

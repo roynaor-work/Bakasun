@@ -12,6 +12,7 @@ export const HELP = {
     { title: 'שאלות', items: [
       '"מה יש לי מחר" / "מה המשימות שלי להיום" / "מה יש השבוע" / "מה יש ביום שלישי" / "משימות ל-15/10"',
       '"מה המשימות הפתוחות שלי"',
+      'מתחת לכל תשובה יש "הקראה": הטלפון מקריא בקול. "תקריאי לי" מקריא את התשובה האחרונה. בהגדרות אפשר לבחור הקראה אוטומטית של כל תשובה (לנהיגה).',
       '"מה חסר לי לשוב״ל" / "מה פתוח באירוע של ברטלסמן": כל מה שעוד פתוח בתיק, לפי נושאים',
       '"מה חסר לי מהספקים של שוב״ל": רק הספקים, הדפוס והכספים מולם',
       '"מה פתוח מול הלקוח שוב״ל": רק פרטי האירוע והלקוח'
@@ -65,6 +66,7 @@ export const HELP = {
     { title: 'Questions', items: [
       '« qu’est-ce que j’ai demain » / « mes tâches pour aujourd’hui » / « qu’est-ce que j’ai cette semaine » / « mes tâches mardi »',
       '« mes tâches ouvertes »',
+      'Sous chaque réponse : « Lire à voix haute ». « lis-moi » lit la dernière réponse. Dans les réglages, la lecture automatique de chaque réponse (pour la route).',
       '« qu’est-ce qui manque pour Shoval » : tout ce qui est encore ouvert dans le dossier, par thème',
       '« qu’est-ce qui manque chez les fournisseurs de Shoval » : seulement les fournisseurs, l’impression et l’argent avec eux',
       '« qu’est-ce qui est ouvert avec le client Shoval » : seulement l’événement et le client'
@@ -118,6 +120,7 @@ export const HELP = {
     { title: 'Questions', items: [
       '“what do I have tomorrow” / “my tasks for today” / “what is on this week” / “tasks on tuesday” / “tasks for 15/10”',
       '“what are my open tasks”',
+      'Under every answer: “Read aloud”. “read it to me” reads the last answer. In settings, automatic reading of every answer (for driving).',
       '“what’s missing for Shoval” / “what is open on the Bertelsmann event”: everything still open in the case, by topic',
       '“what do I need from the suppliers for Shoval”: only suppliers, print and money with them',
       '“what is open with the client Shoval”: only the event details and the client'

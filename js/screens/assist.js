@@ -11,6 +11,7 @@ import { parseGoto, screenWord } from '../logic/nav.js';
 import { parseMissing, openItems, focusSections } from '../logic/openItems.js';
 import { parseHow, findHelp } from '../logic/howto.js';
 import { toCalendar } from '../calendar.js';
+import { speak, isReadAloudCommand, textOfEl } from '../speak.js';
 import { taskEvent } from '../logic/ics.js';
 import { HELP } from '../data/helpText.js';
 import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage } from '../logic/commands.js';
@@ -94,6 +95,16 @@ function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
   return ta;
 }
 
+/** Under every answer: a "read aloud" button; with the setting on, the answer is read at once (she is driving). */
+function afterAnswer(out, s) {
+  const card = out.querySelector('.card'); if (!card || card.querySelector('[data-read]')) return;
+  const row = document.createElement('div'); row.className = 'row';
+  row.innerHTML = `<button type="button" class="btn sm ghost" data-read>🔊 ${esc(t('readAloud'))}</button>`;
+  card.appendChild(row);
+  row.querySelector('[data-read]').onclick = () => speak(textOfEl(card), lang());
+  if (s && s.autoSpeak === 'on') speak(textOfEl(card), lang());
+}
+
 /** A spoken screen name moves there, no tap. */
 function goTo(route) {
   toast(t('goingTo', { screen: screenWord(route, lang()) }), 1200);
@@ -175,11 +186,12 @@ async function tabCommand(body, s, ctx) {
     const go = parseGoto(text);
     if (go) { draft = ''; goTo(go); return; }
     const q = parseAgenda(text, new Date());
-    if (q) { showAgenda(out, q); return; }
+    if (isReadAloudCommand(text)) { const last = out.querySelector('.card, .okbox, .warnbox'); if (last) speak(textOfEl(last), lang()); else toast(t('nothingToRead')); return; }
+    if (q) { showAgenda(out, q); afterAnswer(out, s); return; }
     const mq = parseMissing(text);
-    if (mq) { showMissing(out, mq); return; }
+    if (mq) { showMissing(out, mq); afterAnswer(out, s); return; }
     const hq = parseHow(text);
-    if (hq) { showHow(out, hq); return; }
+    if (hq) { showHow(out, hq); afterAnswer(out, s); return; }
     const c = parseCommand(text, docs, peopleNow());
     if (c.kind === 'invoice') { mode = 'invoice'; draft = text; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'supplierQuote') { mode = 'supplierQuote'; preSupplier = c.supplier && c.supplier.about === 'supplier' ? c.supplier.id : ''; draft = ''; render({ root: body.closest('#app') }); return; }
@@ -213,6 +225,7 @@ async function tabCommand(body, s, ctx) {
           : has ? `<div class="row">${c.via === 'email' ? `<a class="btn primary" id="mail">${esc(t('email'))}</a>` : `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>`}${c.via === 'email' && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.via !== 'email' && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}</div>`
           : `<p class="warnbox">${esc(t('noContact'))} <button class="btn sm" id="addContact">${esc(c.via === 'email' ? t('addEmail') : t('addPhone'))}</button></p>`}</div>`;
       const msg = () => out.querySelector('[name=msg]').value;
+      { const r = document.createElement('div'); r.className = 'row'; r.innerHTML = `<button type="button" class="btn sm ghost" id="readMsg">🔊 ${esc(t('readAloud'))}</button>`; out.querySelector('.card').appendChild(r); r.querySelector('#readMsg').onclick = () => speak(msg(), lang()); }
       const wa = out.querySelector('#wa'); if (wa) wa.onclick = () => openWhatsApp(c.to.phone, msg());
       const wp = out.querySelector('#waPick'); if (wp) wp.onclick = () => openWhatsAppPick(msg());
       const ml = out.querySelector('#mail'); if (ml) { ml.href = 'mailto:' + encodeURIComponent(c.to.email) + '?subject=' + encodeURIComponent(s.bizName || DEFAULTS.bizName) + '&body=' + encodeURIComponent(msg()); ml.target = '_blank'; }

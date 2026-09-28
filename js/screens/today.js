@@ -16,7 +16,8 @@ import { pendingPrint } from '../logic/print.js';
 import { handoverText } from '../logic/travel.js';
 import { monthsToSend, monthLabel } from '../logic/receipts.js';
 import { openMail } from '../ui.js';
-import { resend } from './rfq.js';
+import { resend, remindAll } from './rfq.js';
+import { openItems } from '../logic/openItems.js';
 
 function standalone() { try { return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true || localStorage.getItem('bakasun.installed') === '1' || sessionStorage.getItem('bakasun.installLater') === '1'; } catch (e) { return false; } }
 function isIOS() { return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
@@ -48,15 +49,18 @@ export function render({ root }) {
     ${nothing ? empty(t('nothingToday')) : ''}
     ${up.length ? section(t('upcoming'), `<div class="list">${up.map(x => {
       const c = db.get('cases', x.caseId) || {};
+      // a week out and closer: how much is still open on this event, with one tap to the list
+      const oc = x.inDays <= 7 ? openItems(c, data, new Date(), uiLang()).total : 0;
       return `<a class="card tap" href="#/case/${esc(x.caseId)}"><div class="row between"><span class="title">${esc(c.client || t('unknownClient'))} · ${esc(kindLabel(c.kind))}</span><span class="badge ${x.inDays <= 2 ? '' : 'muted'}">${esc(relDay(c.date))}</span></div>
         <div class="sub">${esc(x.when)}${c.place ? ' · ' + esc(c.place) : ''}${c.participants ? ' · ' + esc(c.participants) + ' ' + esc(t('people')) : ''}</div>
+        ${x.inDays <= 7 ? `<div class="row"><span class="badge ${oc ? 'warn' : 'ok'}">${esc(oc ? t('openCount', { n: oc }) : t('nothingOpen'))}</span>${oc ? `<button class="btn sm" data-open="${esc(c.client || '')}">${esc(t('whatsOpen'))}</button>` : ''}</div>` : ''}
         ${x.details.length ? `<div class="sub">${x.details.map(esc).join(' · ')}</div>` : ''}</a>`; }).join('')}</div>`) : ''}
     ${fu.length ? section(t('followups'), `<div class="list">${fu.map(x => {
       const c = db.get('cases', x.caseId) || {};
       return `<div class="card"><div class="row between"><a class="title" href="#/case/${esc(x.caseId)}">${esc(x.client || t('unknownClient'))}</a><span class="badge warn">${esc(t('waited', { n: x.waited }))}</span></div>
         <div class="sub">${esc(statusLabel(x.status))}${c.date ? ' · ' + esc(Office.fmt(c.date)) : ''}</div>
         <div class="row"><button class="btn wa sm" data-fu="${esc(x.caseId)}">${esc(t('whatsapp'))}</button><button class="btn sm" data-dial="${esc(x.phone)}">${esc(t('call'))}</button></div></div>`; }).join('')}</div>`) : ''}
-    ${waitSup.length ? section(t('waitingSuppliers'), `<div class="list">${waitSup.map(l => `<div class="card" data-wsup="${esc(l.id)}"><div class="row between"><a class="title" href="#/case/${esc(l.caseId)}/suppliers">${esc(l.sup.name || '')}</a><span class="badge warn">${esc(t('waited', { n: l.waited }))}</span></div><div class="sub">${esc([l.cs.client, l.cs.kind, l.what].filter(Boolean).join(' · '))}</div><div class="row"><button class="btn wa sm" data-remind>${esc(t('remind'))}</button></div></div>`).join('')}</div>`) : ''}
+    ${waitSup.length ? section(t('waitingSuppliers'), `${waitSup.length > 1 ? `<div class="row"><button class="btn wa sm" id="remindAll">${esc(t('remindAll', { n: waitSup.length }))}</button></div>` : ''}<div class="list">${waitSup.map(l => `<div class="card" data-wsup="${esc(l.id)}"><div class="row between"><a class="title" href="#/case/${esc(l.caseId)}/suppliers">${esc(l.sup.name || '')}</a><span class="badge warn">${esc(t('waited', { n: l.waited }))}</span></div><div class="sub">${esc([l.cs.client, l.cs.kind, l.what].filter(Boolean).join(' · '))}</div><div class="row"><button class="btn wa sm" data-remind>${esc(t('remind'))}</button></div></div>`).join('')}</div>`) : ''}
     ${pend.length ? section(t('waitingApproval'), `<div class="list">${pend.map(a => { const c = db.get('cases', a.caseId) || {}; return `<div class="card" data-appr="${esc(a.id)}"><div class="row between"><a class="title" href="#/case/${esc(a.caseId)}/money">${esc(c.client || '')} · ${esc(approvalKindLabel(a.kind, uiLang()))}</a><span class="badge warn">${esc(t('waited', { n: a.waited }))}</span></div>${a.title ? `<div class="sub">${esc(a.title)}</div>` : ''}<div class="row"><button class="btn wa sm" data-remind>${esc(t('remind'))}</button></div></div>`; }).join('')}</div>`) : ''}
     ${supPay.length ? section(t('supplierPay'), `<div class="list">${supPay.map(x => `<div class="card" data-link="${esc(x.row)}"><div class="row between"><span class="title">${esc(x.supplier)}</span><span class="ltr big">${esc(Office.money(x.amount))}</span></div><div class="sub">${esc(x.client)} · ${esc(x.date)} · <span class="count">${x.after}</span> ${esc(t('afterEventDays'))}</div><div class="row"><button class="btn sm ok" data-paid>${esc(t('markPaid'))}</button><button class="btn wa sm" data-paidmsg>${esc(t('paidNote'))}</button></div></div>`).join('')}</div>`) : ''}
     ${toSend.length ? `<a class="card tap warnbox" href="#/money"><b>${esc(t('monthsWaiting'))}</b><div class="sub">${esc(toSend.map(m => monthLabel(m, uiLang())).join(' · '))}</div></a>` : ''}
@@ -96,6 +100,8 @@ export function render({ root }) {
     openWhatsApp(f.phone, f.text + (s.signer ? '\n' + s.signer : ''));
   });
   root.querySelectorAll('[data-dial]').forEach(b => b.onclick = () => dial(b.dataset.dial));
+  const ra = root.querySelector('#remindAll'); if (ra) ra.onclick = () => remindAll(waitSup, s);
+  root.querySelectorAll('[data-open]').forEach(b => { b.onclick = e => { e.preventDefault(); e.stopPropagation(); sessionStorage.setItem('bakasun.ask', t('askOpenFor', { who: b.dataset.open })); location.hash = '#/assist/from-today'; }; });
   root.querySelectorAll('[data-wsup]').forEach(el => el.querySelector('[data-remind]').onclick = () => { const l = db.get('links', el.dataset.wsup); resend(db.get('cases', l.caseId) || {}, s, l, db.get('suppliers', l.supplierId) || { name: l.supplier }, true); });
   root.querySelectorAll('[data-appr]').forEach(el => el.querySelector('[data-remind]').onclick = async () => {
     const a = db.get('approvals', el.dataset.appr); const c = db.get('cases', a.caseId) || {};

@@ -114,6 +114,16 @@ async function editCase(c) {
   if (r) { r.id = c.id; db.put('cases', r); toast(t('saved')); }
 }
 
+/** One supplier type of this event at a glance: none / waiting / offers in / chosen. */
+function typeState(ty, links, sups) {
+  const mine = links.filter(l => !/בוטל/.test(String(l.status || '')) && (sups[l.supplierId] || {}).type === ty);
+  if (mine.some(l => /אושר/.test(String(l.status)))) return { key: 'chosen', label: t('stChosen') };
+  const offers = mine.filter(l => /התקבלה/.test(String(l.status))).length;
+  if (offers) return { key: 'offers', label: t('stOffers', { n: offers }) };
+  if (mine.length) return { key: 'waiting', label: t('stWaiting') };
+  return { key: 'none', label: t('stNone') };
+}
+
 /* ---------------- suppliers of this event ---------------- */
 function tabSuppliers(body, c, s) {
   const id = c.id;
@@ -122,7 +132,7 @@ function tabSuppliers(body, c, s) {
   const recTypes = (c.needs || []).concat(recommendedSupplierTypes(c.kind, s.recs, db.list('catalog')).filter(x => !(c.needs || []).includes(x)));
   body.innerHTML = `
     <div class="row"><button class="btn primary" id="ask">${esc(t('askSuppliers'))}</button><a class="btn" href="#/assist/supplier-quote/${esc(id)}">${esc(t('cmdSupplierQuote'))}</a>${links.length ? `<button class="btn" id="change">${esc(t('changeAll'))}</button>` : ''}</div>
-    ${recTypes.length ? `<p class="hint">${esc(t('recommended'))}: ${recTypes.map(x => esc(supplierTypeLabel(x))).join(' · ')}</p>` : ''}
+    ${recTypes.length ? `<div class="chips">${recTypes.map(ty => { const st = typeState(ty, links, sups); return `<span class="chip st-${st.key}">${esc(supplierTypeLabel(ty))} · ${esc(st.label)}</span>`; }).join('')}</div>` : ''}
     <div class="list">${links.length ? links.map(l => { const sp = sups[l.supplierId] || { name: l.supplier }; const waiting = /ביקשנו/.test(l.status) && l.askedAt && !l.answeredAt; return `<div class="card" data-l="${esc(l.id)}">
       <div class="row between"><a class="title" href="#/supplier/${esc(l.supplierId)}">${esc(sp.name || '')}${Office.yes(l.chosen) ? ' ★' : ''}</a><span class="badge ${/אושר/.test(l.status) ? 'ok' : /בוטל/.test(l.status) ? 'muted' : 'warn'}">${esc(linkStatusLabel(l.status))}</span></div>
       <div class="sub">${[supplierTypeLabel(sp.type), l.what, l.cost ? Office.money(l.cost) : '', l.arrive ? t('arrive') + ' ' + Office.hhmm(l.arrive) : '', l.askedAt ? t('sentTo') + ' ' + Office.fmt(l.askedAt) + (l.channel === 'email' ? ' ✉' : l.channel ? ' ☏' : '') : ''].filter(Boolean).map(esc).join(' · ')}${l.rating ? ' · ' + esc(stars(l.rating)) : ''}${Office.yes(l.paid) ? ` · <span class="badge ok">${esc(t('paid'))}</span>` : ''}</div>

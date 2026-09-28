@@ -35,6 +35,7 @@ export function render({ root }) {
         ${field('accountantEmail', t('accountantEmail'), s.accountantEmail || '', { ltr: true, inputmode: 'email' })}
         ${field('supplierPayReminder', t('supplierPayReminder'), s.supplierPayReminder || 'auto', { type: 'select', options: [['auto', t('autoRemind')], ['manual', t('manualRemind')]] })}
         ${field('supplierPayDays', t('supplierPay') + ': ' + t('afterEventDays'), s.supplierPayDays || 1, { type: 'number', inputmode: 'numeric' })}
+        ${field('autoSpeak', t('autoSpeak'), s.autoSpeak || 'off', { type: 'select', options: [['off', t('autoSpeakOff')], ['on', t('autoSpeakOn')]] })}
       </div>
       ${field('signer', t('signer'), s.signer || DEFAULTS.signer, { type: 'textarea', rows: 2 })}
       <h2>${esc(t('biz'))}</h2>

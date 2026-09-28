@@ -93,6 +93,16 @@ export function resend(c, s, l, sp, reminder) {
   sendEach([sp], () => text, () => (reminder ? 'Re: ' : '') + rfqSubject(c, kind, sp.lang), (x, channel) => db.put('links', { id: l.id, askedAt: l.askedAt || todayIso(), channel, remindedAt: reminder ? todayIso() : l.remindedAt }));
 }
 
+/** One tap for every supplier who has not answered: the reminders go out one after the other (each still needs her tap on WhatsApp or mail). */
+export function remindAll(pending, s) {
+  const items = pending.map(l => ({ l, sp: db.get('suppliers', l.supplierId) || { name: l.supplier, id: l.supplierId }, c: db.get('cases', l.caseId) || {} })).filter(x => x.sp);
+  const bySup = {}; items.forEach(x => { bySup[x.sp.id || x.sp.name] = x; });
+  const targets = items.map(x => Object.assign({}, x.sp, { _l: x.l, _c: x.c }));
+  sendEach(targets, sp => rfqReminder(sp._c, sp, Office.daysBetween(sp._l.askedAt || todayIso(), new Date()), { name: herName(s) }),
+    sp => 'Re: ' + rfqSubject(sp._c, sp._l.kind || templateFor(sp.type), sp.lang),
+    (sp, channel) => db.put('links', { id: sp._l.id, channel, remindedAt: todayIso() }));
+}
+
 /** The offer came back: paste it, the fields fill, she fixes and saves. */
 export async function offerDialog(c, l, sp) {
   const o = l.offer || {}; const S = LABELS[L()] || LABELS.he;
