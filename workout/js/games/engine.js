@@ -1,5 +1,6 @@
 // מנוע המשחקים הקטנים: קנבס בגודל לוגי קבוע, ניקוד, טיימר, מגע/מקלדת, מסכי פתיחה וסיום.
 // כל משחק הוא אובייקט { id, name, emoji, how, make(r) } כאשר make מחזיר { update(dt), draw(), tap(x,y), down, up, move, swipe(dir), key(code) }.
+import { poseAt } from '../figure.js';
 export const W = 360, H = 560;
 
 const PAL = { bg: '#1B1740', ink: '#F5F2FF', muted: '#9C96C4', accent: '#8B72FF', ok: '#22C55E', hot: '#FF7A3D', pink: '#FF4D8D', sky: '#38BDF8', gold: '#FFB84D', red: '#EF4444', teal: '#1FB6C9', lime: '#A3E635' };
@@ -9,7 +10,7 @@ const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 const shuffle = arr => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
-export function runGame(def, { seconds = 90, host, best = 0, onEnd }) {
+export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true }) {
   host.innerHTML = `
     <div class="gamewrap">
       <div class="gamehud">
@@ -25,6 +26,10 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd }) {
   const cv = host.querySelector('#gcv'), ctx = cv.getContext('2d');
   const scoreEl = host.querySelector('#gscore'), timeEl = host.querySelector('#gtime'), overlay = host.querySelector('#gover');
   let game = null, raf = 0, last = 0, running = false, ended = false, score = 0, timeLeft = seconds, pauseUntil = 0;
+  let pops = [], parts = [], shakeT = 0, ac = null;
+  // צלילים קצרים (WebAudio)
+  const tone = (f, ms, type = 'sine', vol = .18, at = 0) => { if (!sound) return; try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = f; o.connect(g); g.connect(ac.destination); const t = ac.currentTime + at; g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + ms / 1000); o.start(t); o.stop(t + ms / 1000 + .02); } catch { /* */ } };
+  const SFX = { score: () => { tone(880, 90); tone(1320, 120, 'sine', .14, .08); }, hit: () => tone(220, 120, 'square', .12), over: () => { tone(300, 160, 'sawtooth', .12); tone(200, 260, 'sawtooth', .12, .15); }, win: () => { tone(660, 120); tone(880, 120, 'sine', .18, .13); tone(1100, 260, 'sine', .18, .26); }, tick: () => tone(1000, 40, 'square', .06), bounce: () => tone(500, 50, 'triangle', .1) };
 
   const r = {
     W, H, ctx, C: PAL, rnd, rint, pick, shuffle, clamp,
@@ -32,8 +37,8 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd }) {
     get score() { return score; }, get timeLeft() { return timeLeft; },
     addScore(n = 1) { score = Math.max(0, Math.round(score + n)); scoreEl.textContent = score; },
     setScore(n) { score = Math.max(0, Math.round(n)); scoreEl.textContent = score; },
-    over(msg = 'אופס!') { if (!running) return; running = false; flash(msg, timeLeft > 6 ? 'עוד ניסיון...' : ''); if (timeLeft > 6) pauseUntil = performance.now() + 1100; else setTimeout(end, 900); },
-    win(msg = 'כל הכבוד!', bonus = 0) { if (!running) return; running = false; if (bonus) r.addScore(bonus); flash(msg, timeLeft > 6 ? 'סבב חדש!' : ''); if (timeLeft > 6) pauseUntil = performance.now() + 900; else setTimeout(end, 900); },
+    over(msg = 'אופס!') { if (!running) return; running = false; SFX.over(); shakeT = 0.3; flash(msg, timeLeft > 6 ? 'עוד ניסיון...' : ''); if (timeLeft > 6) pauseUntil = performance.now() + 1100; else setTimeout(end, 900); },
+    win(msg = 'כל הכבוד!', bonus = 0) { if (!running) return; running = false; SFX.win(); r.burst(W / 2, H / 2, PAL.gold, 30, 320); if (bonus) r.addScore(bonus); flash(msg, timeLeft > 6 ? 'סבב חדש!' : ''); if (timeLeft > 6) pauseUntil = performance.now() + 900; else setTimeout(end, 900); },
     // ציור
     clear(color = PAL.bg) { ctx.fillStyle = color; ctx.fillRect(0, 0, W, H); },
     rect(x, y, w, h, color, rad = 0) { ctx.fillStyle = color; if (rad) { ctx.beginPath(); ctx.roundRect(x, y, w, h, rad); ctx.fill(); } else ctx.fillRect(x, y, w, h); },
@@ -43,7 +48,26 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd }) {
     emoji(s, x, y, size = 28) { ctx.font = `${size}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#fff'; ctx.fillText(s, x, y); },
     hit(ax, ay, aw, ah, bx, by, bw, bh) { return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by; },
     dist(x1, y1, x2, y2) { return Math.hypot(x2 - x1, y2 - y1); },
+    // ---- אפקטים ----
+    sfx(kind) { (SFX[kind] || SFX.tick)(); },
+    pop(text, x, y, color = PAL.gold, size = 22) { pops.push({ text, x, y, color, size, t: 0.9 }); },
+    burst(x, y, color = PAL.gold, n = 14, speed = 220) { for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, v = speed * (0.4 + Math.random() * 0.6); parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, color, t: 0.5 + Math.random() * 0.3, r: 3 + Math.random() * 4 }); } },
+    shake(ms = 250) { shakeT = ms / 1000; },
+    // דמות מקלות בתוך משחק: pose במרחב 200x200 של הקטלוג (הרגליים ב-y=182), ממוקמת ב-(x,y) = מרכז הרגליים, בגודל scale
+    stick(pose, x, y, scale = 0.35, { color = PAL.ink, far = PAL.muted, head = PAL.gold, width = 5, flip = false } = {}) {
+      const px = ([a, b]) => [x + (flip ? -(a - 100) : (a - 100)) * scale, y + (b - 182) * scale];
+      const seg = (pts, c, w) => { ctx.strokeStyle = c; ctx.lineWidth = w * scale * 2.4; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.beginPath(); pts.map(px).forEach(([a, b], i) => i ? ctx.lineTo(a, b) : ctx.moveTo(a, b)); ctx.stroke(); };
+      seg([pose.neck, pose.le, pose.lh], far, width); seg([pose.hip, pose.lk, pose.lf], far, width);
+      seg([pose.neck, pose.hip], color, width); seg([pose.neck, pose.re, pose.rh], color, width); seg([pose.hip, pose.rk, pose.rf], color, width);
+      const [hx, hy] = px(pose.head); ctx.fillStyle = head; ctx.beginPath(); ctx.arc(hx, hy, 11 * scale, 0, Math.PI * 2); ctx.fill(); ctx.strokeStyle = color; ctx.lineWidth = 2 * scale; ctx.stroke();
+    },
+    // פוזה מתוך רצף פריימים של תרגיל בזמן נתון
+    anim(frames, ms) { return poseAt(frames, ms); },
   };
+  function drawFx(dt) {
+    pops.forEach(p => { p.t -= dt; p.y -= 40 * dt; ctx.globalAlpha = Math.max(0, p.t / 0.9); r.text(p.text, p.x, p.y, { size: p.size, color: p.color }); ctx.globalAlpha = 1; }); pops = pops.filter(p => p.t > 0);
+    parts.forEach(p => { p.t -= dt; p.vy += 500 * dt; p.x += p.vx * dt; p.y += p.vy * dt; ctx.globalAlpha = Math.max(0, p.t / 0.6); r.circle(p.x, p.y, p.r, p.color); ctx.globalAlpha = 1; }); parts = parts.filter(p => p.t > 0);
+  }
 
   function flash(big, small) { overlay.innerHTML = `<div class="gmsg pop"><b>${big}</b>${small ? `<span>${small}</span>` : ''}</div>`; overlay.classList.add('on'); }
   function hide() { overlay.classList.remove('on'); overlay.innerHTML = ''; }
@@ -57,7 +81,12 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd }) {
     timeLeft -= dt; timeEl.textContent = fmt(Math.max(0, timeLeft)); timeEl.classList.toggle('low', timeLeft < 10);
     if (timeLeft <= 0) return end();
     if (!running) { if (pauseUntil && now >= pauseUntil) { pauseUntil = 0; fresh(); } else return; }
-    try { game.update && game.update(dt); game.draw && game.draw(); } catch (e) { console.error(def.id, e); end(); }
+    try {
+      game.update && game.update(dt);
+      const shaking = shakeT > 0; if (shaking) { shakeT -= dt; ctx.save(); ctx.translate((Math.random() - .5) * 8, (Math.random() - .5) * 8); }
+      game.draw && game.draw(); drawFx(dt);
+      if (shaking) ctx.restore();
+    } catch (e) { console.error(def.id, e); end(); }
   }
   function end() {
     if (ended) return; ended = true; running = false; cancelAnimationFrame(raf);

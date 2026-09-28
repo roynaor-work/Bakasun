@@ -9,6 +9,8 @@ import { runGame } from './games/engine.js';
 import * as cloud from './cloud.js';
 import { initParent, parentGate, parentHome, basketball } from './parent.js';
 import { playIntro } from './intro.js';
+import { speak, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js';
+import { SAY } from './say.js';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
@@ -70,21 +72,7 @@ function beep(freq = 880, ms = 120, at = 0) {
 }
 const fanfare = () => { beep(660, 120); beep(880, 120, .14); beep(1100, 260, .28); };
 
-// ---- קול הדרכה בעברית (Web Speech API, הקול של המכשיר) ----
-const speech = window.speechSynthesis;
-const hebrewVoice = () => (speech?.getVoices() || []).find(v => /^he/i.test(v.lang)) || null;
-const canSpeak = () => !!speech;
-function speak(text) {
-  if (!speech || store.profile.voice === false) return false;
-  speech.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'he-IL'; u.rate = 0.95; u.pitch = 1.05;
-  const v = hebrewVoice(); if (v) u.voice = v;
-  speech.speak(u);
-  return true;
-}
-const stopSpeak = () => { try { speech && speech.cancel(); } catch { /* אין קול */ } };
-const sayText = ex => ex.say || `${ex.name}. ${ex.steps.join('. ')}. שימו לב: ${ex.tip}`;
+const sayText = ex => SAY[ex.id] || ex.say || `${ex.name}. ${ex.steps.join('. ')}. שימו לב: ${ex.tip}`;
 function confetti() {
   const c = document.createElement('div'); c.className = 'confetti';
   const colors = ['#FF7A3D', '#FF4D8D', '#1FB6C9', '#6C4CF1', '#FFB84D', '#22C55E'];
@@ -138,6 +126,8 @@ function home() {
       ${week.map(d => { const pid = plan()[d.day]; const p = pid && programById[pid]; return `<div class="wd ${d.today ? 'today' : ''} ${d.done ? 'done' : ''} ${d.past && !d.done && p ? 'missed' : ''}"><span>${DAY_NAMES[d.day].slice(0, 2)}</span><span class="e">${d.done ? '✅' : p ? p.emoji : '😴'}</span></div>`; }).join('')}
     </div>
 
+    ${pendingWorkout() ? `<div class="card" style="border:3px solid var(--hot)"><div class="row"><span style="font-size:32px">⏸️</span><div class="grow"><b>יש אימון באמצע: ${esc(pendingWorkout().program.name)}</b><p class="muted small">עצרת אחרי ${pendingWorkout().items.filter(i => i.done > 0 || i.skipped).length} מתוך ${pendingWorkout().items.length} תרגילים.</p></div></div>
+      <div class="row" style="margin-top:10px"><button class="btn primary grow" id="resume">להמשיך מאיפה שעצרת ▶️</button><button class="btn ghost" id="discard">לבטל</button></div></div>` : ''}
     <h2>${todayCount ? 'עוד אחד היום?' : 'האימון של היום'}</h2>
     ${today ? `
       <div class="card tap prog ${today.cat} today" data-go="#/start/${today.id}">
@@ -165,6 +155,8 @@ function home() {
     </div>
   </div>`);
   const lu = $('#levelup'); if (lu) lu.onclick = () => { store.setProfile({ level: nextLevel }); home(); };
+  const rs = $('#resume'); if (rs) rs.onclick = () => { W = loadW(); if (W) go('#/workout'); else home(); };
+  const dc = $('#discard'); if (dc) dc.onclick = () => { if (confirm('לבטל את האימון שבאמצע? מה שסימנת עד עכשיו לא יישמר.')) { discardW(); home(); } };
 }
 
 // ---- תצוגה מקדימה והתחלה ----
@@ -274,13 +266,20 @@ function exerciseDetail(id) {
 
 // ---- מהלך האימון ----
 let W = null, tick = 0;
+// האימון הפעיל נשמר במכשיר, כדי שאפשר יהיה להמשיך אחרי יציאה בטעות (עד 6 שעות)
+const W_KEY = 'kidfit.activeWorkout';
+function saveW() { try { if (!W) return; if (W.phase !== 'done') localStorage.setItem(W_KEY, JSON.stringify({ ...W, gift: W.gift ? W.gift.id : null, savedAt: Date.now() })); else localStorage.removeItem(W_KEY); } catch { /* מקום */ } }
+function loadW() { try { const w = JSON.parse(localStorage.getItem(W_KEY) || 'null'); if (!w || Date.now() - w.savedAt > 6 * 3600e3) { localStorage.removeItem(W_KEY); return null; } if (w.gift) w.gift = gameById[w.gift] || null; if (!w.gift && w.phase === 'gift') w.phase = w.afterGift || 'exercise'; if (w.phase === 'intro') w.phase = 'exercise'; return w; } catch { return null; } }
+const pendingWorkout = () => (W ? null : loadW());
+function discardW() { W = null; try { localStorage.removeItem(W_KEY); } catch { /* */ } }
 function beginWorkout(program, items) {
   W = { program, items: items.map(i => ({ ...i, done: 0, skipped: false })), idx: 0, phase: store.profile.intro === false ? 'exercise' : 'intro', startedAt: Date.now(), saved: false, mainDone: 0, gift: null, afterGift: null, gamesPlayed: 0 };
   go('#/workout');
 }
 
 function workoutScreen() {
-  if (!W) return go('#/home');
+  if (!W) { const w = loadW(); if (w) W = w; else return go('#/home'); }
+  saveW();
   if (W.phase === 'intro') introPhase();
   else if (W.phase === 'exercise') exercisePhase();
   else if (W.phase === 'rest') restPhase();
@@ -291,7 +290,7 @@ function workoutScreen() {
 // סרטון פתיחה קצר לפני האימון: הדמות שלו מנצחת
 function introPhase() {
   mount('', true);
-  const intro = playIntro(app, { voice: t => speak(t), onDone: () => { intro.stop(); W.startedAt = Date.now(); W.phase = 'exercise'; workoutScreen(); } });
+  const intro = playIntro(app, { voice: id => speak(SAY_UI.intro[id] || ''), onDone: () => { intro.stop(); W.startedAt = Date.now(); W.phase = 'exercise'; workoutScreen(); } });
   figures.push(intro); // נעצר אוטומטית במעבר מסך
 }
 
@@ -447,7 +446,7 @@ function giftPhase() {
 function playGame(g, onDone) {
   mount('', true);
   const secs = store.profile.gameSeconds || 90;
-  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
+  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
 }
 
 function restPhase() {
@@ -490,20 +489,21 @@ function adjustDifficulty(program, val) {
   if (!programById[program.id]) return null;
   const cur = store.progBoost(program.id);
   const order = ['easy', 'normal', 'hard', 'pro'], li = order.indexOf(store.profile.level);
+  const spokenName = SAY_UI.programs[program.id] || program.name, A = SAY_UI.adjust;
   if (val === 'easy') {
-    if (cur.boost < 2) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: `היה קל? מעכשיו "${program.name}" עם ${boostText(store.progBoost(program.id))}. 💪` }; }
-    if (cur.swaps < MAX_SWAPS) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps + 1 }); return { change: 'swaps', msg: `היה קל? ב"${program.name}" נכנסים תרגילים קשים יותר. 🔥` }; }
-    if (cur.boost < MAX_BOOST) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: `עוד קצת יותר: "${program.name}" עם ${boostText(store.progBoost(program.id))}. 💪` }; }
-    if (li < order.length - 1) { store.setProfile({ level: order[li + 1] }); return { change: 'level', msg: `וואו. עלית לרמה "${LEVELS[order[li + 1]].name}" בכל האימונים! 🏆` }; }
-    return { change: '', msg: 'אתה כבר ברמה הכי גבוהה. אלוף אמיתי! 👑' };
+    if (cur.boost < 2) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: `היה קל? מעכשיו "${program.name}" עם ${boostText(store.progBoost(program.id))}. 💪`, say: A.boost(spokenName) }; }
+    if (cur.swaps < MAX_SWAPS) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps + 1 }); return { change: 'swaps', msg: `היה קל? ב"${program.name}" נכנסים תרגילים קשים יותר. 🔥`, say: A.swaps(spokenName) }; }
+    if (cur.boost < MAX_BOOST) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: `עוד קצת יותר: "${program.name}" עם ${boostText(store.progBoost(program.id))}. 💪`, say: A.boost(spokenName) }; }
+    if (li < order.length - 1) { store.setProfile({ level: order[li + 1] }); return { change: 'level', msg: `וואו. עלית לרמה "${LEVELS[order[li + 1]].name}" בכל האימונים! 🏆`, say: A.level(SAY_UI.levels[order[li + 1]]) }; }
+    return { change: '', msg: 'אתה כבר ברמה הכי גבוהה. אלוף אמיתי! 👑', say: A.top };
   }
   if (val === 'hard') {
-    if (cur.swaps) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps - 1 }); return { change: 'down', msg: 'היה קשה? בפעם הבאה חוזרים לתרגילים הרגילים. 👍' }; }
-    if (cur.boost) { store.setProgBoost(program.id, { ...cur, boost: cur.boost - 1 }); return { change: 'down', msg: 'היה קשה? הורדתי קצת. בפעם הבאה יהיה נוח יותר. 👍' }; }
-    if (li > 0) { store.setProfile({ level: order[li - 1] }); return { change: 'down', msg: `הורדתי לרמה "${LEVELS[order[li - 1]].name}". לאט לאט בונים כוח. 👍` }; }
-    return { change: '', msg: 'כל הכבוד שסיימת! זו הרמה הכי קלה, בפעם הבאה יהיה יותר קל כי אתה מתחזק. 💙' };
+    if (cur.swaps) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps - 1 }); return { change: 'down', msg: 'היה קשה? בפעם הבאה חוזרים לתרגילים הרגילים. 👍', say: A.downSwaps }; }
+    if (cur.boost) { store.setProgBoost(program.id, { ...cur, boost: cur.boost - 1 }); return { change: 'down', msg: 'היה קשה? הורדתי קצת. בפעם הבאה יהיה נוח יותר. 👍', say: A.downBoost }; }
+    if (li > 0) { store.setProfile({ level: order[li - 1] }); return { change: 'down', msg: `הורדתי לרמה "${LEVELS[order[li - 1]].name}". לאט לאט בונים כוח. 👍`, say: A.downLevel(SAY_UI.levels[order[li - 1]]) }; }
+    return { change: '', msg: 'כל הכבוד שסיימת! זו הרמה הכי קלה, בפעם הבאה יהיה יותר קל כי אתה מתחזק. 💙', say: A.bottom };
   }
-  return { change: '', msg: 'מעולה, בדיוק ברמה שלך. 👌' };
+  return { change: '', msg: 'מעולה, בדיוק ברמה שלך. 👌', say: A.ok };
 }
 
 // בסוף האימון: קודם שאלה שחייבים לענות עליה, ורק אחר כך הסיכום
@@ -520,13 +520,13 @@ function askFeedback(s, program, gamesPlayed, then) {
       </div>
     </div>
   </div>`, true);
-  speak('סיימת! איך היה האימון? קל, בדיוק, או קשה?');
+  speak(SAY_UI.howWas);
   app.querySelectorAll('[data-fb]').forEach(b => b.onclick = () => {
     stopSpeak();
-    const val = b.dataset.fb, adj = adjustDifficulty(program, val) || { change: '', msg: 'תודה, רשמתי.' };
+    const val = b.dataset.fb, adj = adjustDifficulty(program, val) || { change: '', msg: 'תודה, רשמתי.', say: 'תּוֹדָה, רָשַׁמְתִּי.' };
     s.feedback = val; s.change = adj.change; store.save();
     if (store.profile.familyCode) cloud.push(store.profile.familyCode, 'workout', s.id, { ...s, name: store.profile.name, gamesPlayed, level: store.profile.level, games: gamesSummary() });
-    speak((adj.msg + ' ' + perseveranceLine(stats(store.sessions))).replace(/[^\p{L}\p{N}\s,.!?"%+]/gu, ''));
+    speak(adj.say + ' ' + SAY_UI.perseverance(stats(store.sessions)));
     then(adj.msg);
   });
 }
@@ -534,6 +534,7 @@ const gamesSummary = () => { const g = store.games; return { count: g.count, pla
 
 function donePhase() {
   const res = saveSession();
+  try { localStorage.removeItem(W_KEY); } catch { /* */ }
   const s = res ? res.session : store.sessions.at(-1);
   if (!s.feedback) return askFeedback(s, W.program, W.gamesPlayed, msg => { W.adjustMsg = msg; donePhase(); });
   const sum = summarize(s);
@@ -575,11 +576,9 @@ const itemsList = s => s.items.map(i => `<div class="item">
 </div>`).join('');
 
 function quit() {
-  const did = W.items.some(i => i.done > 0);
-  if (!confirm(did ? 'לצאת מהאימון? מה שכבר סימנת יישמר.' : 'לצאת מהאימון?')) return;
-  clearInterval(tick); tick = 0;
-  if (did) saveSession();
-  W = null; go('#/home');
+  if (!confirm('לצאת מהאימון? תוכל להמשיך אותו מדף הבית מאיפה שעצרת.')) return;
+  clearInterval(tick); tick = 0; stopSpeak();
+  saveW(); W = null; go('#/home');
 }
 
 // ---- מעקב ----
@@ -664,8 +663,10 @@ function settings() {
       <div class="toggle"><b>צלילים</b><input type="checkbox" id="sound" ${p.sound ? 'checked' : ''}></div>
       <div class="toggle"><b>הסבר בקול בעברית</b><input type="checkbox" id="voice" ${p.voice !== false ? 'checked' : ''}></div>
       <div class="toggle"><b>סרטון פתיחה לפני אימון</b><input type="checkbox" id="intro" ${p.intro !== false ? 'checked' : ''}></div>
+      <label class="field">הקול<select id="voiceName"><option value="">אוטומטי (הטוב ביותר במכשיר)</option>${hebrewVoices().map(v => `<option value="${esc(v.name)}" ${v.name === p.voiceName ? 'selected' : ''}>${esc(v.name)}${v.localService === false ? ' (רשת)' : ''}</option>`).join('')}</select></label>
+      <label class="field">קצב דיבור<select id="speechRate">${[[0.8, 'לאט'], [0.92, 'רגיל'], [1.05, 'מהיר']].map(([v, n]) => `<option value="${v}" ${Math.abs(v - (p.speechRate || 0.92)) < 0.01 ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <button class="btn chip" id="voicetest">🔊 בדיקת קול</button>
-      <p class="muted small">הקול הוא של המכשיר. ${canSpeak() ? (hebrewVoice() ? 'נמצא קול עברי במכשיר.' : 'לא נמצא קול עברי. באנדרואיד: הגדרות, שפה, המרת טקסט לדיבור, להוריד עברית. באייפון: הגדרות, נגישות, תוכן מדובר, קולות, עברית.') : 'המכשיר לא תומך בהקראה.'}</p>
+      <p class="muted small">הקול הוא של המכשיר. ${canSpeak() ? (hebrewVoices().length ? `נמצאו ${hebrewVoices().length} קולות בעברית. נבחר: ${esc(bestVoice()?.name || '')}. אם יש כמה, נסו כל אחד עם "בדיקת קול" ובחרו את הטבעי ביותר. באנדרואיד כדאי להוריד את הקול העברי המשופר: הגדרות, ניהול כללי, המרת טקסט לדיבור, מנוע גוגל, התקנת נתוני קול, עברית.` : 'לא נמצא קול עברי. באנדרואיד: הגדרות, שפה, המרת טקסט לדיבור, להוריד עברית. באייפון: הגדרות, נגישות, תוכן מדובר, קולות, עברית.') : 'המכשיר לא תומך בהקראה.'}</p>
     </div>
     <div class="card stack">
       <h3>מתנות ומשחקים 🎁</h3>
@@ -706,7 +707,10 @@ function settings() {
   $('#sound').onchange = e => store.setProfile({ sound: e.target.checked });
   $('#voice').onchange = e => store.setProfile({ voice: e.target.checked });
   $('#intro').onchange = e => store.setProfile({ intro: e.target.checked });
-  $('#voicetest').onclick = () => { if (!speak('היי! אני אסביר לך איך עושים כל תרגיל. לוחצים על הכפתור איך עושים את זה.')) alert('אין הקראה במכשיר הזה, או שהקול כבוי בהגדרות.'); };
+  $('#voicetest').onclick = () => { if (!speak(SAY_UI.test, { force: true })) alert('אין הקראה במכשיר הזה.'); };
+  $('#voiceName').onchange = e => store.setProfile({ voiceName: e.target.value });
+  $('#speechRate').onchange = e => store.setProfile({ speechRate: +e.target.value });
+  window.speechSynthesis?.addEventListener?.('voiceschanged', () => { if (location.hash.includes('settings') && $('#voiceName') && $('#voiceName').options.length <= 1) settings(); }, { once: true });
   $('#giftEvery').onchange = e => store.setProfile({ giftEvery: +e.target.value });
   $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); };
   $('#newfam').onclick = () => { if (p.familyCode && !confirm('ליצור קוד חדש? צריך להקליד אותו גם בטלפון של אבא.')) return; const c = cloud.newFamilyCode(); store.setProfile({ familyCode: c }); settings(); };
@@ -729,6 +733,6 @@ window.addEventListener('focus', () => { if (store.profile.familyCode) cloud.flu
 
 // ---- כללי: כל אלמנט עם data-go מנווט ----
 app.addEventListener('click', e => { const t = e.target.closest('[data-go]'); if (t && app.contains(t)) go(t.dataset.go); });
-window.addEventListener('beforeunload', e => { if (W && W.items.some(i => i.done > 0)) { e.preventDefault(); e.returnValue = ''; } });
+window.addEventListener('pagehide', () => saveW());
 
 route();

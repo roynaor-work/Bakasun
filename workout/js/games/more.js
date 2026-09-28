@@ -1,4 +1,5 @@
 // עוד משחקים: הוקי אוויר, יהלומים, לוליין, יורה בועות, חץ למטרה, ביליארד, כדורעף, דוחף קופסאות, ציור לפי מספרים, ניחוש מילה, צייר מהזיכרון, איפה הכדור
+import { POSE, S } from './sprites.js';
 export const arcade = [], sport = [], puzzle = [], quick = [];
 
 // ---- הוקי אוויר ----
@@ -13,8 +14,8 @@ arcade.push({ id: 'air-hockey', name: 'הוקי אוויר', emoji: '🏒', how:
         ai.x += r.clamp(puck.x - ai.x, -260 * dt, 260 * dt); ai.y = puck.y < r.H / 2 ? r.clamp(puck.y - 30, 40, r.H / 2 - 30) : 80;
         if (puck.x < 14) { puck.x = 14; puck.vx = Math.abs(puck.vx); } if (puck.x > r.W - 14) { puck.x = r.W - 14; puck.vx = -Math.abs(puck.vx); }
         const inGoal = Math.abs(puck.x - r.W / 2) < GOAL / 2;
-        if (puck.y < 14) { if (inGoal) { r.addScore(10); puck = reset(1); return; } puck.y = 14; puck.vy = Math.abs(puck.vy); }
-        if (puck.y > r.H - 14) { if (inGoal) { puck = reset(-1); return; } puck.y = r.H - 14; puck.vy = -Math.abs(puck.vy); }
+        if (puck.y < 14) { if (inGoal) { r.addScore(10); r.pop('גול! +10', r.W / 2, 60, '#EF4444', 28); r.burst(puck.x, 10, '#3B82F6', 18, 240); r.sfx('score'); puck = reset(1); return; } puck.y = 14; puck.vy = Math.abs(puck.vy); r.sfx('tick'); }
+        if (puck.y > r.H - 14) { if (inGoal) { r.pop('גול למחשב', r.W / 2, r.H - 60, '#9CA3AF', 22); r.sfx('hit'); puck = reset(-1); return; } puck.y = r.H - 14; puck.vy = -Math.abs(puck.vy); r.sfx('tick'); }
         for (const [m, mv] of [[me, pv], [ai, { x: 0, y: 0 }]]) { const d = r.dist(m.x, m.y, puck.x, puck.y); if (d < 36) { const nx = (puck.x - m.x) / d, ny = (puck.y - m.y) / d; const sp = Math.max(260, Math.hypot(puck.vx, puck.vy) * 0.9); puck.vx = nx * sp + mv.x * 8; puck.vy = ny * sp + mv.y * 8; puck.x = m.x + nx * 37; puck.y = m.y + ny * 37; } }
         pv = { x: pv.x * 0.5, y: pv.y * 0.5 }; },
       draw() { r.clear('#E0F2FE'); r.line(0, r.H / 2, r.W, r.H / 2, '#7DD3FC', 3); r.circle(r.W / 2, r.H / 2, 40, '#BAE6FD'); r.rect(r.W / 2 - GOAL / 2, 0, GOAL, 8, '#EF4444'); r.rect(r.W / 2 - GOAL / 2, r.H - 8, GOAL, 8, '#3B82F6'); r.circle(ai.x, ai.y, 24, '#EF4444'); r.circle(me.x, me.y, 24, '#3B82F6'); r.circle(puck.x, puck.y, 12, '#111827'); },
@@ -34,7 +35,7 @@ arcade.push({ id: 'gems', name: 'יהלומים', emoji: '💎', how: 'טור ש
         for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) { const c = grid[y][x]; if (!c) continue; for (const [dx, dy] of [[1, 0], [0, 1], [1, 1], [1, -1]]) { let n = 1; while (grid[y + dy * n]?.[x + dx * n] === c) n++; if (n >= 3) for (let k = 0; k < n; k++) kill.add((y + dy * k) * COLS + x + dx * k); } }
         if (kill.size) { any = true; total += kill.size; kill.forEach(i => { grid[Math.floor(i / COLS)][i % COLS] = 0; });
           for (let x = 0; x < COLS; x++) { let w = ROWS - 1; for (let y = ROWS - 1; y >= 0; y--) if (grid[y][x]) { const v = grid[y][x]; grid[y][x] = 0; grid[w--][x] = v; } } } }
-      if (total) { r.addScore(total * 10); speed = Math.max(0.15, speed - 0.01); } };
+      if (total) { r.addScore(total * 10); speed = Math.max(0.15, speed - 0.01); r.pop('+' + total * 10, r.W / 2, 240, r.C.gold, 26); r.burst(r.W / 2, 280, r.C.pink, 12); r.sfx(total >= 5 ? 'win' : 'score'); } else r.sfx('tick'); };
     spawn();
     return {
       update(dt) { t += dt; if (t > speed) { t = 0; if (canBe(cur.x, cur.y + 1)) cur.y++; else lock(); } },
@@ -54,8 +55,8 @@ arcade.push({ id: 'juggle', name: 'הלוליין', emoji: '🤹', how: 'נוג�
     return {
       update(dt) { t += dt; if (t > 8) { t = 0; balls.push({ x: r.rnd(60, r.W - 60), y: 100, vx: 0, vy: 0, e: E[balls.length % E.length] }); }
         for (const b of balls) { b.vy += 500 * dt; b.x += b.vx * dt; b.y += b.vy * dt; if (b.x < 20 || b.x > r.W - 20) { b.vx *= -1; b.x = r.clamp(b.x, 20, r.W - 20); } if (b.y > r.H - 30) return r.over('כדור נפל!'); } },
-      down(x, y) { const b = balls.find(b => r.dist(x, y, b.x, b.y) < 34); if (b) { b.vy = -560; b.vx = r.clamp((b.x - x) * 12 + r.rnd(-40, 40), -220, 220); r.addScore(1 + balls.length); } },
-      draw() { r.clear('#FEF3C7'); r.rect(0, r.H - 20, r.W, 20, '#92400E'); balls.forEach(b => r.emoji(b.e, b.x, b.y, 40)); r.text(`${balls.length} כדורים`, r.W / 2, 30, { size: 18, color: '#92400E' }); },
+      down(x, y) { const b = balls.find(b => r.dist(x, y, b.x, b.y) < 34); if (b) { b.vy = -560; b.vx = r.clamp((b.x - x) * 12 + r.rnd(-40, 40), -220, 220); r.addScore(1 + balls.length); r.burst(b.x, b.y + 10, '#fff', 5, 90); r.sfx('bounce'); } },
+      draw() { r.clear('#FEF3C7'); r.rect(0, r.H - 20, r.W, 20, '#92400E'); const jx = r.clamp(balls.reduce((s, b) => s + b.x, 0) / balls.length, 40, r.W - 40); r.stick(POSE.armsUp, jx, r.H - 20, 0.42, { color: '#B45309', far: '#92400E', width: 6 }); balls.forEach(b => r.emoji(b.e, b.x, b.y, 40)); r.text(`${balls.length} כדורים`, r.W / 2, 30, { size: 18, color: '#92400E' }); },
     };
   } });
 
@@ -69,7 +70,7 @@ arcade.push({ id: 'bubble-shooter', name: 'יורה בועות', emoji: '🔮', 
     const cx = x => x * S + S / 2, cy = y => y * S + S / 2 + 20;
     const neighbors = (x, y) => [[1, 0], [-1, 0], [0, 1], [0, -1]].map(([dx, dy]) => [x + dx, y + dy]).filter(([a, b]) => a >= 0 && a < COLS && b >= 0);
     const settle = (sx, sy) => { let x = r.clamp(Math.round((sx - S / 2) / S), 0, COLS - 1), y = Math.max(0, Math.round((sy - 20 - S / 2) / S)); while (grid[key(x, y)] != null && y < 30) y++; grid[key(x, y)] = cur; pop(x, y); if (y >= 12) return r.over('הבועות הגיעו למטה!'); shots++; if (shots % 6 === 0) { const ng = {}; for (const k in grid) { const kx = k % COLS, ky = Math.floor(k / COLS); ng[key(kx, ky + 1)] = grid[k]; } for (let x = 0; x < COLS; x++) ng[key(x, 0)] = r.rint(0, 3); grid = ng; } cur = r.rint(0, 3); };
-    const pop = (x, y) => { const c = grid[key(x, y)]; const seen = new Set([key(x, y)]), st = [[x, y]]; while (st.length) { const [a, b] = st.pop(); for (const [nx, ny] of neighbors(a, b)) { const k = key(nx, ny); if (!seen.has(k) && grid[k] === c) { seen.add(k); st.push([nx, ny]); } } } if (seen.size >= 3) { seen.forEach(k => delete grid[k]); r.addScore(seen.size * 10); } };
+    const pop = (x, y) => { const c = grid[key(x, y)]; const seen = new Set([key(x, y)]), st = [[x, y]]; while (st.length) { const [a, b] = st.pop(); for (const [nx, ny] of neighbors(a, b)) { const k = key(nx, ny); if (!seen.has(k) && grid[k] === c) { seen.add(k); st.push([nx, ny]); } } } if (seen.size >= 3) { seen.forEach(k => { const gx = k % COLS, gy = Math.floor(k / COLS); r.burst(cx(gx), cy(gy), COLORS[c], 4, 100); delete grid[k]; }); r.addScore(seen.size * 10); r.pop('+' + seen.size * 10, cx(x), cy(y) - 20, '#fff'); r.sfx('score'); } else r.sfx('tick'); };
     return {
       tap(x, y) { if (shot || y > r.H - 60) return; const dx = x - r.W / 2, dy = y - (r.H - 50), l = Math.hypot(dx, dy); shot = { x: r.W / 2, y: r.H - 50, vx: dx / l * 700, vy: dy / l * 700 }; },
       update(dt) { if (!shot) return; shot.x += shot.vx * dt; shot.y += shot.vy * dt; if (shot.x < 12 || shot.x > r.W - 12) shot.vx *= -1;
@@ -87,7 +88,7 @@ sport.push({ id: 'darts', name: 'חץ למטרה', emoji: '🎯', how: 'הכוו
     const pos = () => [r.W / 2 + Math.sin(t * 1.7 * sp) * 90, 210 + Math.cos(t * 2.3 * sp) * 90];
     return {
       update(dt) { t += dt; hits.forEach(h => h.t -= dt); hits = hits.filter(h => h.t > 0); },
-      tap() { const [x, y] = pos(); const d = r.dist(x, y, r.W / 2, 210); const pts = d < 10 ? 50 : d < 25 ? 25 : d < 50 ? 10 : d < 80 ? 5 : 0; r.addScore(pts); hits.push({ x, y, t: 1.2, pts }); if (pts >= 25) sp = Math.min(2.2, sp + 0.1); },
+      tap() { const [x, y] = pos(); const d = r.dist(x, y, r.W / 2, 210); const pts = d < 10 ? 50 : d < 25 ? 25 : d < 50 ? 10 : d < 80 ? 5 : 0; r.addScore(pts); hits.push({ x, y, t: 1.2, pts }); if (pts === 50) { r.pop('בול! +50', r.W / 2, 90, '#EF4444', 30); r.burst(x, y, '#EF4444', 20, 220); r.sfx('win'); } else if (pts) r.sfx('score'); else r.sfx('hit'); if (pts >= 25) sp = Math.min(2.2, sp + 0.1); },
       draw() { r.clear('#FEF9C3'); [[100, '#111'], [80, '#fff'], [50, '#EF4444'], [25, '#fff'], [10, '#EF4444']].forEach(([rad, c]) => r.circle(r.W / 2, 210, rad, c)); const [x, y] = pos(); r.line(x - 16, y, x + 16, y, '#2563EB', 3); r.line(x, y - 16, x, y + 16, '#2563EB', 3); r.circle(x, y, 8, '#2563EB44');
         hits.forEach(h => { r.emoji('🎯', h.x, h.y, 16); if (h.pts) r.text('+' + h.pts, h.x, h.y - 24, { size: 18, color: '#B91C1C' }); }); r.text('לחץ כשהכוונת במרכז', r.W / 2, r.H - 60, { size: 18, color: '#713F12' }); },
     };
@@ -108,8 +109,8 @@ sport.push({ id: 'pool', name: 'ביליארד', emoji: '🎱', how: 'גוררי
       up(x, y) { if (!drag) return; const w = white(); const dx = drag.x - x, dy = drag.y - y, l = Math.min(180, Math.hypot(dx, dy)); if (l > 8 && w) { w.vx = dx / Math.hypot(dx, dy) * l * 5; w.vy = dy / Math.hypot(dx, dy) * l * 5; } drag = null; },
       update(dt) { for (const b of balls) { b.x += b.vx * dt; b.y += b.vy * dt; b.vx *= 1 - 1.2 * dt; b.vy *= 1 - 1.2 * dt; if (Math.hypot(b.vx, b.vy) < 4) { b.vx = 0; b.vy = 0; }
           if (b.x < 24) { b.x = 24; b.vx = Math.abs(b.vx) * 0.8; } if (b.x > r.W - 24) { b.x = r.W - 24; b.vx = -Math.abs(b.vx) * 0.8; } if (b.y < 24) { b.y = 24; b.vy = Math.abs(b.vy) * 0.8; } if (b.y > r.H - 24) { b.y = r.H - 24; b.vy = -Math.abs(b.vy) * 0.8; } }
-        for (let i = 0; i < balls.length; i++) for (let j = i + 1; j < balls.length; j++) { const a = balls[i], b = balls[j], d = r.dist(a.x, a.y, b.x, b.y); if (d < 24 && d > 0) { const nx = (b.x - a.x) / d, ny = (b.y - a.y) / d; const p = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny; if (p > 0) { a.vx -= p * nx; a.vy -= p * ny; b.vx += p * nx; b.vy += p * ny; } const ov = (24 - d) / 2; a.x -= nx * ov; a.y -= ny * ov; b.x += nx * ov; b.y += ny * ov; } }
-        for (let i = balls.length - 1; i >= 0; i--) { const b = balls[i]; if (pockets.some(([px, py]) => r.dist(px, py, b.x, b.y) < 22)) { if (b.white) { r.addScore(-10); b.x = r.W / 2; b.y = r.H - 120; b.vx = b.vy = 0; } else { balls.splice(i, 1); r.addScore(20); } } }
+        for (let i = 0; i < balls.length; i++) for (let j = i + 1; j < balls.length; j++) { const a = balls[i], b = balls[j], d = r.dist(a.x, a.y, b.x, b.y); if (d < 24 && d > 0) { const nx = (b.x - a.x) / d, ny = (b.y - a.y) / d; const p = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny; if (p > 0) { a.vx -= p * nx; a.vy -= p * ny; b.vx += p * nx; b.vy += p * ny; if (p > 80) r.sfx('tick'); } const ov = (24 - d) / 2; a.x -= nx * ov; a.y -= ny * ov; b.x += nx * ov; b.y += ny * ov; } }
+        for (let i = balls.length - 1; i >= 0; i--) { const b = balls[i]; if (pockets.some(([px, py]) => r.dist(px, py, b.x, b.y) < 22)) { if (b.white) { r.addScore(-10); r.pop('-10', b.x, b.y, '#EF4444'); r.sfx('hit'); b.x = r.W / 2; b.y = r.H - 120; b.vx = b.vy = 0; } else { r.pop('+20', b.x, b.y - 20, '#fff'); r.burst(b.x, b.y, b.c, 8, 120); r.sfx('score'); balls.splice(i, 1); r.addScore(20); } } }
         if (balls.length === 1) { r.addScore(50); rack(); } },
       draw() { r.clear('#14532D'); r.rect(8, 8, r.W - 16, r.H - 16, '#166534', 12); pockets.forEach(([x, y]) => r.circle(x, y, 20, '#052E16')); balls.forEach(b => { r.circle(b.x, b.y, 12, b.c); r.circle(b.x - 4, b.y - 4, 3, '#ffffff88'); });
         if (drag && drag.cx != null) { const w = white(); r.line(w.x, w.y, w.x + (drag.x - drag.cx), w.y + (drag.y - drag.cy), '#ffffffaa', 3); } },
@@ -122,15 +123,16 @@ sport.push({ id: 'volley', name: 'כדורעף', emoji: '🏐', how: 'אתה ב�
     const GY = r.H - 60, NET = r.W / 2; let me = { x: 80, y: GY, vy: 0 }, ai = { x: r.W - 80, y: GY, vy: 0 }, ball = serve(1), msg = '', mt = 0;
     function serve(side) { return { x: side > 0 ? 80 : r.W - 80, y: 200, vx: 0, vy: 0 }; }
     return {
-      move(x) { me.x = r.clamp(x, 24, NET - 30); }, down(x) { this.move(x); }, tap() { if (me.y >= GY) me.vy = -520; },
+      move(x) { me.x = r.clamp(x, 24, NET - 30); }, down(x) { this.move(x); },
       update(dt) { mt -= dt; ball.vy += 520 * dt; ball.x += ball.vx * dt; ball.y += ball.vy * dt;
         for (const p of [me, ai]) { p.vy += 1200 * dt; p.y = Math.min(GY, p.y + p.vy * dt); if (p.y >= GY) p.vy = 0; }
         ai.x += r.clamp(ball.x > NET ? ball.x - ai.x : r.W - 80 - ai.x, -240 * dt, 240 * dt); ai.x = r.clamp(ai.x, NET + 30, r.W - 24); if (ball.x > NET && ball.y > 300 && ai.y >= GY && Math.random() < 0.05) ai.vy = -500;
         for (const p of [me, ai]) { const d = r.dist(p.x, p.y - 20, ball.x, ball.y); if (d < 44) { const nx = (ball.x - p.x) / d, ny = (ball.y - (p.y - 20)) / d; ball.vx = nx * 330 + (p === me ? 60 : -60); ball.vy = Math.min(-200, ny * 330 - 200); } }
         if (ball.x < 14) { ball.x = 14; ball.vx = Math.abs(ball.vx); } if (ball.x > r.W - 14) { ball.x = r.W - 14; ball.vx = -Math.abs(ball.vx); } if (ball.y < 14) { ball.vy = Math.abs(ball.vy); }
         if (Math.abs(ball.x - NET) < 16 && ball.y > GY - 110) { ball.vx = ball.x < NET ? -Math.abs(ball.vx) : Math.abs(ball.vx); }
-        if (ball.y > GY - 8) { if (ball.x > NET) { r.addScore(10); msg = 'נקודה! 🏐'; } else msg = 'נקודה למחשב'; mt = 1; ball = serve(ball.x > NET ? 1 : -1); } },
-      draw() { r.clear('#FDE68A'); r.rect(0, GY, r.W, r.H - GY, '#F59E0B'); r.rect(NET - 3, GY - 110, 6, 110, '#374151'); r.emoji('🧍', me.x, me.y - 24, 48); r.emoji('🤖', ai.x, ai.y - 24, 44); r.emoji('🏐', ball.x, ball.y, 28); if (mt > 0) r.text(msg, r.W / 2, 80, { size: 28, color: '#78350F' }); },
+        if (ball.y > GY - 8) { if (ball.x > NET) { r.addScore(10); msg = 'נקודה! 🏐'; r.burst(ball.x, GY, '#F59E0B', 14); r.sfx('score'); } else { msg = 'נקודה למחשב'; r.sfx('hit'); } mt = 1; ball = serve(ball.x > NET ? 1 : -1); } },
+      tap() { if (me.y >= GY) { me.vy = -520; r.sfx('bounce'); } },
+      draw() { r.clear('#FDE68A'); r.circle(300, 60, 28, '#FBBF24'); S.cloud(r, 90, 70); r.rect(0, GY, r.W, r.H - GY, '#F59E0B'); for (let i = 0; i < 12; i++) r.rect(i * 30, GY + 10, 18, 3, '#D97706'); r.rect(NET - 3, GY - 110, 6, 110, '#374151'); S.net(r, NET - 3, GY - 110, 6, 110); r.stick(me.y < GY - 2 ? POSE.jumpUp : POSE.shuffle, me.x, me.y, 0.5, { color: '#1D4ED8', far: '#1E40AF', width: 6 }); r.stick(ai.y < GY - 2 ? POSE.jumpUp : POSE.shuffle, ai.x, ai.y, 0.5, { color: '#9CA3AF', far: '#6B7280', head: '#E5E7EB', flip: true }); r.circle(ball.x, ball.y, 12, '#fff'); r.ctx.strokeStyle = '#1D4ED8'; r.ctx.lineWidth = 2; r.ctx.beginPath(); r.ctx.arc(ball.x, ball.y, 12, 0, Math.PI * 2); r.ctx.stroke(); r.ctx.beginPath(); r.ctx.arc(ball.x - 4, ball.y, 12, -0.8, 0.8); r.ctx.stroke(); if (mt > 0) r.text(msg, r.W / 2, 80, { size: 28, color: '#78350F' }); },
     };
   } });
 
@@ -151,7 +153,7 @@ puzzle.push({ id: 'sokoban', name: 'דוחף קופסאות', emoji: '📦', how
     return {
       swipe(d) { const [dx, dy] = { left: [-1, 0], right: [1, 0], up: [0, -1], down: [0, 1] }[d]; const nx = px + dx, ny = py + dy, c = map[ny]?.[nx]; if (!c || c === '#') return;
         if (c === '$' || c === '*') { const bx = nx + dx, by = ny + dy, b = map[by]?.[bx]; if (!b || b === '#' || b === '$' || b === '*') return; map[by][bx] = b === 'o' ? '*' : '$'; map[ny][nx] = c === '*' ? 'o' : '.'; }
-        px = nx; py = ny; moves++;
+        px = nx; py = ny; moves++; r.sfx('tick');
         if (!map.some(row => row.includes('$'))) { r.addScore(Math.max(20, 100 - moves * 2)); lvl++; load(); r.win('שלב הושלם!', 0); } },
       draw() { r.clear('#FFF7ED'); const S = Math.min(50, 320 / map[0].length), OX = (r.W - map[0].length * S) / 2, OY = 120;
         map.forEach((row, y) => row.forEach((c, x) => { const X = OX + x * S, Y = OY + y * S; if (c === '#') r.rect(X, Y, S, S, '#78350F', 4); else { r.rect(X + 1, Y + 1, S - 2, S - 2, '#FEF3C7', 4); if (c === 'o' || c === '*') r.circle(X + S / 2, Y + S / 2, S / 4, '#FBBF24'); if (c === '$' || c === '*') r.emoji('📦', X + S / 2, Y + S / 2, S * 0.7); } }));
@@ -203,8 +205,8 @@ puzzle.push({ id: 'pattern', name: 'צייר מהזיכרון', emoji: '🧠', h
     return {
       update(dt) { t += dt; if (phase === 'show' && t > 2 + n * 0.3) { phase = 'input'; } if (phase === 'result' && t > 1.2) { make(); } },
       tap(x, y) { if (phase !== 'input') return; const i = Math.floor((x - OX) / S), j = Math.floor((y - OY) / S); if (i < 0 || j < 0 || i >= N || j >= N) return; const k = j * N + i; if (picked.has(k)) return; picked.add(k);
-        if (!target.has(k)) { r.addScore(-5); phase = 'result'; t = 0; n = Math.max(3, n - 1); return; }
-        if (picked.size === target.size) { r.addScore(n * 10); phase = 'result'; t = 0; n = Math.min(10, n + 1); } },
+        if (!target.has(k)) { r.addScore(-5); r.sfx('hit'); phase = 'result'; t = 0; n = Math.max(3, n - 1); return; }
+        r.sfx('tick'); if (picked.size === target.size) { r.addScore(n * 10); r.pop('+' + n * 10, r.W / 2, 120, '#0891B2', 26); r.sfx('score'); phase = 'result'; t = 0; n = Math.min(10, n + 1); } },
       draw() { r.clear('#ECFEFF'); r.text(phase === 'show' ? 'תזכור את המשבצות...' : phase === 'input' ? 'עכשיו אתה!' : picked.size === target.size ? 'מדויק! 🎉' : 'אופס, לא זה', r.W / 2, 90, { size: 24, color: '#155E75' });
         for (let k = 0; k < N * N; k++) { const X = OX + (k % N) * S, Y = OY + Math.floor(k / N) * S; const lit = (phase === 'show' && target.has(k)) || (phase !== 'show' && picked.has(k)); const wrong = phase === 'result' && picked.has(k) && !target.has(k); const miss = phase === 'result' && target.has(k) && !picked.has(k); r.rect(X + 4, Y + 4, S - 8, S - 8, wrong ? '#EF4444' : miss ? '#FDE68A' : lit ? '#0891B2' : '#fff', 10); } },
     };
@@ -220,7 +222,7 @@ quick.push({ id: 'cups', name: 'איפה הכדור?', emoji: '🥤', how: 'הכ
         if (phase === 'show' && t > 1.2) { phase = 'mix'; t = 0; swaps = 0; }
         if (phase === 'mix' && t > 0.45 / speed) { t = 0; if (swaps >= total) { phase = 'guess'; return; } const a = r.rint(0, 2); let b = r.rint(0, 2); if (b === a) b = (a + 1) % 3; const ta = cups[a].tx; cups[a].tx = cups[b].tx; cups[b].tx = ta; swaps++; }
         if (phase === 'result' && t > 1.2) { phase = 'show'; t = 0; cups = [0, 1, 2].map(i => ({ x: posX(i), tx: posX(i) })); ball = r.rint(0, 2); } },
-      tap(x) { if (phase !== 'guess') return; const i = cups.reduce((best, c, k) => Math.abs(c.x - x) < Math.abs(cups[best].x - x) ? k : best, 0); phase = 'result'; t = 0; if (i === ball) { r.addScore(10 + total * 2); total = Math.min(12, total + 1); speed = Math.min(2.4, speed + 0.15); msg = 'נכון! 🎉'; } else { total = Math.max(3, total - 1); msg = 'לא... הכדור היה שם'; } },
+      tap(x) { if (phase !== 'guess') return; const i = cups.reduce((best, c, k) => Math.abs(c.x - x) < Math.abs(cups[best].x - x) ? k : best, 0); phase = 'result'; t = 0; if (i === ball) { r.addScore(10 + total * 2); total = Math.min(12, total + 1); speed = Math.min(2.4, speed + 0.15); msg = 'נכון! 🎉'; r.burst(cups[ball].x, 260, '#EF4444', 14); r.sfx('score'); } else { total = Math.max(3, total - 1); msg = 'לא... הכדור היה שם'; r.sfx('hit'); } },
       draw() { r.clear('#FDF2F8'); r.text(phase === 'show' ? 'תזכור איפה הכדור' : phase === 'mix' ? 'עוקבים...' : phase === 'guess' ? 'איפה הכדור?' : msg, r.W / 2, 100, { size: 24, color: '#9D174D' });
         cups.forEach((c, i) => { const up = (phase === 'show' || phase === 'result') && i === ball; if (up) r.circle(c.x, 300, 14, '#EF4444'); r.emoji('🥤', c.x, up ? 240 : 290, 64); }); },
     };

@@ -113,7 +113,7 @@ export function playIntro(host, { onDone, voice }) {
   const start = performance.now(); let raf = 0;
   const loop = now => { ctl.update(((now - start) / 1000) % 7); raf = requestAnimationFrame(loop); };
   raf = requestAnimationFrame(loop);
-  if (voice) voice(scene.say);
+  if (voice) voice(scene.id);
   const done = () => { cancelAnimationFrame(raf); onDone(); };
   host.querySelector('#introgo').onclick = done;
   return { stop: () => cancelAnimationFrame(raf) };
