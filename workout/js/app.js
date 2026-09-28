@@ -696,7 +696,7 @@ function settings() {
     </div>
     <div class="card stack">
       <h3>התמונות בטטריס 🖼️</h3>
-      <p class="muted small">התמונות שנחשפות שורה אחרי שורה. בלי תמונות: ציורים מהחגיגות. אפשר לבחור כמה תמונות מהטלפון (שחקנים אהובים), הן נשמרות רק במכשיר הזה.</p>
+      <p class="muted small">התמונות שנחשפות שורה אחרי שורה. בלי תמונות משלכם: 5 תמונות מובנות של רונאלדו והולאנד. אפשר לבחור תמונות מהטלפון במקומן, הן נשמרות רק במכשיר הזה.</p>
       <div class="row wrap"><label class="btn chip" for="tetrisPic">📷 הוספת תמונות</label><input type="file" id="tetrisPic" accept="image/*" multiple hidden>${tetrisPics().length ? '<button class="btn chip danger" id="tetrisPicClear">הסרת כל התמונות</button>' : ''}</div>
       <div class="row wrap">${tetrisPics().map(src => `<img src="${src}" alt="" style="width:72px;height:112px;object-fit:cover;border-radius:10px;box-shadow:var(--shadow)">`).join('')}</div>
     </div>
