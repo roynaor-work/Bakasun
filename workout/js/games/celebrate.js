@@ -274,8 +274,9 @@ export function celebrate(canvas, { oldBest = 0, newBest = 1, sound = true, onTe
   const id = SCENE_IDS.includes(scene) ? scene : SCENE_IDS[Math.floor(Math.random() * SCENE_IDS.length)];
   const sc = SCENES[id], S = makeAudio(sound), F = fx(ctx, W, H), s = { ...sc.setup(W, H), oldBest, newBest };
   let said = false; let shout = null; try { shout = localStorage.getItem('kidfit.goalShout'); } catch { shout = null; }
-  // קריין: אם הוקלטה צעקת גול בהגדרות, משמיעים אותה. אחרת "גוווול" בסגנון שדרן ברזילאי (קול פורטוגזי, איטי, גבוה).
-  const say = (txt, lang) => { if (said) return; said = true; if (shout && sound) { try { const a = new Audio(shout); a.play(); return; } catch { /* */ } } if (txt) onText && onText(txt, lang); };
+  // קריין: הקלטה מההגדרות אם יש, אחרת צעקת הגול המוקלטת של רועי (snd/goal.mp4, AAC). אם הניגון נכשל, "גוווול" בקול פורטוגזי.
+  const GOAL_REC = new URL('../../snd/goal.mp4', import.meta.url).href;
+  const say = (txt, lang) => { if (said) return; said = true; if (sound) { try { const a = new Audio(shout || GOAL_REC); a.volume = 1; a.onerror = () => { if (txt) onText && onText(txt, lang); }; a.play().catch(() => { if (txt) onText && onText(txt, lang); }); return; } catch { /* */ } } if (txt) onText && onText(txt, lang); };
   sc.sound(S);
   const started = performance.now(); let raf = 0, last = started;
   function frame(now) { const t = (now - started) / 1000, dt = Math.min(.05, (now - last) / 1000); last = now; sc.draw(ctx, W, H, t, dt, s, F, say); F.draw(dt); if (t < sc.dur) raf = requestAnimationFrame(frame); else onDone && onDone(); }
