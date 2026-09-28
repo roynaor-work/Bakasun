@@ -2,20 +2,22 @@
 import { POSE, S, KITS } from './sprites.js';
 const G = [];
 
-// ---- אולה! (במקום חפרפרות): כדורים קופצים מחורים במגרש, נוגעים = בעיטה + "אולה" של הקהל. קקי = פלוץ ורעידה ----
-G.push({ id: 'moles', name: 'אולה!', emoji: '⚽', how: 'כדור קופץ מהחור? נוגעים בו מהר, זה בעיטה והקהל צועק אולה! לא לגעת בקקי.',
+// ---- כסף כסף! (במקום חפרפרות): שטרות קופצים מחורים, נוגעים = תופסים. קקי = פלוץ ורעידה ----
+G.push({ id: 'moles', name: 'כסף כסף!', emoji: '💸', how: 'שטר קופץ מהחור? נוגעים בו מהר ותופסים את הכסף. שטר של 200 שווה הכי הרבה. לא לגעת בקקי!',
   make(r) {
-    const holes = []; for (let j = 0; j < 4; j++) for (let i = 0; i < 3; i++) holes.push({ x: 70 + i * 110, y: 150 + j * 105, up: 0, poop: false, rot: 0 });
-    let t = 0, rate = 1.15, tt = 0, combo = 0, kicks = [], oleT = 0;
-    const fans = r.crowdGen(14, r.W, 2, 12, 18);
+    const holes = []; for (let j = 0; j < 4; j++) for (let i = 0; i < 3; i++) holes.push({ x: 70 + i * 110, y: 150 + j * 105, up: 0, poop: false, val: 20 });
+    const VALS = [20, 20, 20, 50, 50, 100, 200]; let t = 0, rate = 1.15, tt = 0, combo = 0, flying = [], cash = 0, chingT = 0;
     return {
-      update(dt) { t += dt; tt += dt; oleT -= dt; if (t > rate) { t = 0; rate = Math.max(0.55, rate - 0.008); const h = r.pick(holes.filter(h => h.up <= 0)); if (h) { h.up = 1.4; h.poop = Math.random() < 0.18; h.rot = 0; } } holes.forEach(h => { h.up -= dt; h.rot += dt * 2; }); kicks.forEach(k => { k.t += dt * 1.6; }); kicks = kicks.filter(k => k.t < 1); },
-      down(x, y) { const h = holes.find(h => r.dist(x, y, h.x, h.y - 20) < 44); if (h && h.up > 0) { h.up = 0; if (h.poop) { combo = 0; r.addScore(-10); r.pop('איכס! -10', h.x, h.y - 50, '#a3e635', 22); r.burst(h.x, h.y - 20, '#7c4a1e', 14, 200); r.shake(260); r.sfx('fart'); } else { combo++; const pts = 10 + Math.min(combo, 5) * 2; r.addScore(pts); r.pop('אולה! +' + pts, h.x, h.y - 50, '#FDE047', 24); r.burst(h.x, h.y - 20, '#fff', 8, 120); kicks.push({ x: h.x, y: h.y - 20, t: 0, tx: r.rnd(60, r.W - 60) }); r.sfx('ole'); oleT = .9; } } else if (h) { combo = 0; } },
-      draw() { r.clear('#15803D'); r.rect(0, 0, r.W, 60, '#1F2937'); r.crowd(fans, tt, oleT > 0); for (let i = 0; i < 5; i++) r.rect(0, 100 + i * 100, r.W, 50, '#16A34A'); r.line(0, 62, r.W, 62, '#fff', 3);
+      update(dt) { t += dt; tt += dt; chingT -= dt; if (t > rate) { t = 0; rate = Math.max(0.55, rate - 0.008); const h = r.pick(holes.filter(h => h.up <= 0)); if (h) { h.up = 1.4; h.poop = Math.random() < 0.18; h.val = r.pick(VALS); } } holes.forEach(h => { h.up -= dt; }); flying.forEach(f => { f.t += dt * 1.4; }); flying = flying.filter(f => f.t < 1); },
+      down(x, y) { const h = holes.find(h => r.dist(x, y, h.x, h.y - 20) < 44); if (h && h.up > 0) { h.up = 0; if (h.poop) { combo = 0; r.addScore(-10); r.pop('איכס! -10', h.x, h.y - 50, '#a3e635', 22); r.burst(h.x, h.y - 20, '#7c4a1e', 14, 200); r.shake(260); r.sfx('fart'); } else { combo++; const pts = h.val / 10 + Math.min(combo, 5) * 2; r.addScore(pts); cash += h.val; r.pop(`₪${h.val}!`, h.x, h.y - 50, '#FDE047', 24); r.burst(h.x, h.y - 20, '#86efac', 8, 120); flying.push({ x: h.x, y: h.y - 20, t: 0, val: h.val }); r.sfx('ching'); chingT = .6; } } else if (h) { combo = 0; } },
+      draw() { const g = r.ctx.createLinearGradient(0, 0, 0, r.H); g.addColorStop(0, '#14532d'); g.addColorStop(1, '#052e16'); r.ctx.fillStyle = g; r.ctx.fillRect(0, 0, r.W, r.H);
+        // הכספת למעלה: סכום שנאסף
+        r.rect(r.W / 2 - 110, 14, 220, 64, '#1f2937', 16); r.rect(r.W / 2 - 104, 20, 208, 52, '#111827', 12); r.text(`₪ ${cash}`, r.W / 2, 46, { size: 30, color: chingT > 0 ? '#FDE047' : '#86efac' }); r.text('הכספת שלך', r.W / 2, 86, { size: 12, color: '#86efac' });
         holes.forEach(h => { r.ctx.fillStyle = '#3f2a12'; r.ctx.beginPath(); r.ctx.ellipse(h.x, h.y + 10, 36, 16, 0, 0, Math.PI * 2); r.ctx.fill(); r.ctx.fillStyle = '#1c1007'; r.ctx.beginPath(); r.ctx.ellipse(h.x, h.y + 10, 28, 11, 0, 0, Math.PI * 2); r.ctx.fill();
-          if (h.up > 0) { const rise = Math.min(1, (1.4 - h.up) * 5, h.up * 5); r.ctx.save(); r.ctx.beginPath(); r.ctx.rect(h.x - 44, h.y - 64, 88, 74); r.ctx.clip(); if (h.poop) S.poop(r, h.x, h.y + 14 - rise * 34, tt); else S.soccer(r, h.x, h.y + 24 - rise * 42, 20, h.rot); r.ctx.restore(); } });
-        kicks.forEach(k => { const p = k.t; S.soccer(r, k.x + (k.tx - k.x) * p, k.y - p * (k.y + 20) - Math.sin(p * Math.PI) * 60, 20 - p * 12, p * 10); });
-        if (oleT > 0) r.text('OLÉ!', r.W / 2, 90, { size: 34, color: '#FDE047' }); if (combo > 2) r.text(`רצף ${combo} 🔥`, r.W / 2, 125, { size: 18, color: '#fff' }); },
+          if (h.up > 0) { const rise = Math.min(1, (1.4 - h.up) * 5, h.up * 5); r.ctx.save(); r.ctx.beginPath(); r.ctx.rect(h.x - 44, h.y - 64, 88, 74); r.ctx.clip(); if (h.poop) S.poop(r, h.x, h.y + 14 - rise * 34, tt); else S.banknote(r, h.x, h.y + 26 - rise * 46, h.val, Math.sin(tt * 3 + h.x) * .12); r.ctx.restore(); } });
+        // שטרות שעפים לכספת
+        flying.forEach(f => { const p = f.t, x = f.x + (r.W / 2 - f.x) * p, y = f.y + (46 - f.y) * p - Math.sin(p * Math.PI) * 60; S.banknote(r, x, y, f.val, p * 6, 1 - p * .5); });
+        if (chingT > 0) r.text('קא-צ׳ינג!', r.W / 2, 118, { size: 24, color: '#FDE047' }); if (combo > 2) r.text(`רצף ${combo} 🔥`, r.W / 2, 118 + (chingT > 0 ? 26 : 0), { size: 18, color: '#fff' }); },
     };
   } });
 
