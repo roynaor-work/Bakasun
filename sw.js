@@ -1,5 +1,5 @@
 /* Offline shell: the app's own files are cached so it opens without a network. Data is not cached here. */
-const CACHE = 'bakasun-v21';
+const CACHE = 'bakasun-v22';
 const FILES = ['./', './index.html', './css/app.css', './manifest.json', './icons/icon.svg',
   './js/app.js', './js/i18n.js', './js/store.js', './js/ui.js', './js/voice.js', './js/logic/office.js', './js/logic/core.js', './js/logic/extra.js',
   './js/data/places.js', './js/data/demo.js', './js/screens/today.js', './js/screens/lead.js', './js/screens/cases.js', './js/screens/clients.js',

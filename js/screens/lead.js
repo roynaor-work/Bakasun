@@ -15,6 +15,7 @@ let stopRec = null;
 export function render({ root }) {
   const s = db.settings();
   const pre = sessionStorage.getItem('bakasun.leadText'); if (pre != null) { sessionStorage.removeItem('bakasun.leadText'); draft = { text: pre, lead: null }; }
+  const autoRead = pre != null && pre.trim().length > 3;
   const dictLang = s.dictLang || lang();
   root.innerHTML = `
     <header class="top"><a class="icon" href="#/today" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(t('newLead'))}</h1></header>
@@ -52,6 +53,7 @@ export function render({ root }) {
     draft.lead.source = msg.value;
     drawForm(root.querySelector('#form'), draft.lead, s);
   };
+  if (autoRead) setTimeout(() => root.querySelector('#read').click(), 60);
   if (draft.lead) drawForm(root.querySelector('#form'), draft.lead, s);
 }
 
