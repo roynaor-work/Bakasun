@@ -701,6 +701,12 @@ function settings() {
       <div class="row wrap">${tetrisPics().map(src => `<img src="${src}" alt="" style="width:72px;height:112px;object-fit:cover;border-radius:10px;box-shadow:var(--shadow)">`).join('')}</div>
     </div>
     <div class="card stack">
+      <h3>צעקת הגול 📣</h3>
+      <p class="muted small">כששיא נשבר, במקום הקריין אפשר להשמיע הקלטה שלכם (אבא צועק "גוווול!"). ההקלטה נשמרת רק במכשיר הזה.</p>
+      <div class="row wrap"><button class="btn chip" id="shoutRec">🎙️ הקלטה (3 שניות)</button>${localStorage.getItem('kidfit.goalShout') ? '<button class="btn chip" id="shoutPlay">▶️ השמעה</button><button class="btn chip danger" id="shoutClear">הסרה</button>' : ''}</div>
+      <div class="muted small" id="shoutStatus">${localStorage.getItem('kidfit.goalShout') ? 'יש הקלטה שמורה.' : 'אין הקלטה. הקריין אומר "גוווול" בסגנון ברזילאי.'}</div>
+    </div>
+    <div class="card stack">
       <h3>הפרצוף במשחק הרעב הגדול 🙂</h3>
       <p class="muted small">תמונת פנים של הילד (רק במכשיר הזה). בלי תמונה: פרצוף מצויר.</p>
       <div class="row wrap"><label class="btn chip" for="facePic">📷 בחירת תמונת פנים</label><input type="file" id="facePic" accept="image/*" hidden>${localStorage.getItem('kidfit.facePic') ? '<button class="btn chip danger" id="facePicClear">הסרה</button>' : ''}</div>
@@ -728,6 +734,9 @@ function settings() {
   const fitImage = (f, w, h, q = 0.82) => new Promise((res, rej) => { const i = new Image(); i.onload = () => { const c = document.createElement('canvas'); c.width = w; c.height = h; const k = Math.max(w / i.width, h / i.height); c.getContext('2d').drawImage(i, (w - i.width * k) / 2, (h - i.height * k) / 2, i.width * k, i.height * k); URL.revokeObjectURL(i.src); res(c.toDataURL('image/jpeg', q)); }; i.onerror = rej; i.src = URL.createObjectURL(f); });
   $('#tetrisPic').onchange = async e => { const files = [...e.target.files].slice(0, 12); if (!files.length) return; try { const pics = tetrisPics(); for (const f of files) pics.push(await fitImage(f, 360, 560)); localStorage.setItem('kidfit.tetrisPics', JSON.stringify(pics.slice(-12))); settings(); } catch { alert('לא הצלחתי לקרוא את התמונות (אולי אין מקום). נסו פחות תמונות.'); } };
   const tpc = $('#tetrisPicClear'); if (tpc) tpc.onclick = () => { if (confirm('להסיר את כל התמונות מהטטריס?')) { localStorage.removeItem('kidfit.tetrisPics'); localStorage.removeItem('kidfit.tetrisPic'); settings(); } };
+  $('#shoutRec').onclick = async () => { const st = $('#shoutStatus'); try { const stream = await navigator.mediaDevices.getUserMedia({ audio: true }); const rec = new MediaRecorder(stream); const chunks = []; rec.ondataavailable = e => chunks.push(e.data); rec.onstop = () => { stream.getTracks().forEach(tr => tr.stop()); const blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' }); const fr = new FileReader(); fr.onload = () => { try { localStorage.setItem('kidfit.goalShout', fr.result); settings(); } catch { st.textContent = 'ההקלטה גדולה מדי לשמירה.'; } }; fr.readAsDataURL(blob); }; rec.start(); st.textContent = 'מקליט... צעקו גוווול! 🔴'; setTimeout(() => rec.state !== 'inactive' && rec.stop(), 3000); } catch { st.textContent = 'אין גישה למיקרופון. צריך לאשר לדפדפן.'; } };
+  const sp = $('#shoutPlay'); if (sp) sp.onclick = () => { try { new Audio(localStorage.getItem('kidfit.goalShout')).play(); } catch { /* */ } };
+  const sc = $('#shoutClear'); if (sc) sc.onclick = () => { if (confirm('להסיר את ההקלטה?')) { localStorage.removeItem('kidfit.goalShout'); settings(); } };
   $('#facePic').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { localStorage.setItem('kidfit.facePic', await fitImage(f, 160, 160, 0.85)); settings(); } catch { alert('לא הצלחתי לקרוא את התמונה.'); } };
   const fpc = $('#facePicClear'); if (fpc) fpc.onclick = () => { if (confirm('להסיר את תמונת הפנים?')) { localStorage.removeItem('kidfit.facePic'); settings(); } };
   $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); };

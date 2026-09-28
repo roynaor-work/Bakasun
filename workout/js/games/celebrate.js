@@ -21,17 +21,17 @@ function makeAudio(enabled) {
     kick: at => { noise(at, .12, { vol: .45, lp: 500, hp: 80 }); osc(90, at, .15, { type: 'sine', vol: .3, slide: -50 }); },
     bounce: at => { noise(at, .07, { vol: .3, lp: 400, hp: 60 }); osc(110, at, .1, { type: 'sine', vol: .25, slide: -40 }); },
     swish: at => noise(at, .3, { vol: .3, lp: 3500, hp: 900 }),
-    rim: at => { osc(620, at, .35, { type: 'triangle', vol: .12, slide: -40, vib: 8 }); noise(at, .05, { vol: .2, lp: 2000, hp: 500 }); },
+    rim: at => { noise(at, .12, { vol: .35, lp: 900, hp: 200 }); noise(at + .05, .3, { vol: .2, lp: 2500, hp: 700 }); },
     tension: (at, dur) => noise(at, dur, { vol: .14, lp: 900, hp: 300, attack: dur * .9 }),
     murmur: (at, dur) => noise(at, dur, { vol: .1, lp: 800, hp: 250, attack: .3 }),
     roar: (at, dur) => { noise(at, dur, { vol: .55, lp: 1400, hp: 200, attack: .15 }); for (let i = 0; i < 18; i++) osc(250 + Math.random() * 600, at + Math.random() * dur * .7, .3, { type: 'sawtooth', vol: .02, slide: -120 }); },
     chant,
-    horn: (at, dur = 1.4, f = 196) => { for (const m of [1, 1.5, 2]) osc(f * m, at, dur, { type: 'sawtooth', vol: .035, vib: 3 }); },
-    drums: (at, n = 8) => { for (let i = 0; i < n; i++) { const t = at + i * .22; noise(t, .1, { vol: .28, lp: i % 2 ? 3000 : 200, hp: i % 2 ? 900 : 30 }); if (!(i % 2)) osc(110, t, .18, { type: 'sine', vol: .32, slide: -70 }); } },
-    boom: at => noise(at, 1, { vol: .5, lp: 500, hp: 40 }),
+    horn: () => {},
+    drums: (at, n = 8) => { for (let i = 0; i < n; i++) { const t = at + i * .22; noise(t, .1, { vol: .16, lp: i % 2 ? 2500 : 200, hp: i % 2 ? 800 : 30 }); if (!(i % 2)) osc(95, t, .16, { type: 'sine', vol: .22, slide: -60 }); } },
+    boom: () => {},
     gun: at => noise(at, .15, { vol: .6, lp: 900, hp: 100 }),
     steps: (at, n, gap) => { for (let i = 0; i < n; i++) noise(at + i * gap, .06, { vol: .12, lp: 600, hp: 150 }); },
-    camera: at => { for (let i = 0; i < 6; i++) noise(at + i * .09 + Math.random() * .05, .03, { vol: .12, lp: 5000, hp: 1500 }); },
+    camera: () => {},
   };
 }
 
@@ -45,6 +45,8 @@ function poseAt(frames, ms) { const total = frames.reduce((s, f) => s + f[1], 0)
 // זום מצלמה סביב נקודה
 const cam = (ctx, fx, fy, z, fn) => { ctx.save(); ctx.translate(fx, fy); ctx.scale(z, z); ctx.translate(-fx, -fy); fn(); ctx.restore(); };
 const HEADER = { head: [112, 62], neck: [104, 78], hip: [96, 120], le: [88, 100], lh: [76, 84], re: [116, 98], rh: [126, 80], lk: [96, 150], lf: [92, 176], rk: [106, 148], rf: [112, 174] };
+const JORDAN = { head: [104, 26], neck: [102, 42], hip: [100, 90], le: [86, 62], lh: [72, 84], re: [116, 30], rh: [124, -8], lk: [62, 112], lf: [28, 140], rk: [142, 104], rf: [180, 128] }; // הרגליים פתוחות באוויר, יד אחת למעלה
+const LAND = { head: [100, 72], neck: [100, 88], hip: [100, 126], le: [84, 106], lh: [66, 122], re: [116, 106], rh: [134, 122], lk: [84, 152], lf: [78, 182], rk: [116, 152], rf: [122, 182] }; // כריעה לפני הניתור ובנחיתה
 const DUNK = { head: [104, 30], neck: [102, 46], hip: [100, 92], le: [92, 62], lh: [86, 84], re: [112, 36], rh: [120, 14], lk: [90, 116], lf: [80, 136], rk: [112, 114], rf: [118, 136] };
 const SHOOT = { head: [100, 30], neck: [100, 46], hip: [100, 92], le: [88, 60], lh: [92, 40], re: [112, 40], rh: [116, 14], lk: [92, 118], lf: [86, 140], rk: [108, 116], rf: [112, 140] };
 const LEAN = { head: [124, 66], neck: [116, 80], hip: [100, 118], le: [100, 104], lh: [82, 118], re: [130, 100], rh: [146, 88], lk: [120, 146], lf: [130, 176], rk: [82, 150], rf: [66, 176] };
@@ -69,6 +71,10 @@ function pitch(ctx, W, H, goal, fans, t, excited, bulge) {
   const GL = goal.y + goal.h, VX = W / 2, VY = goal.y - 260;
   const sky = ctx.createLinearGradient(0, 0, 0, GL); sky.addColorStop(0, '#0b1026'); sky.addColorStop(1, '#1e293b'); ctx.fillStyle = sky; ctx.fillRect(0, 0, W, GL);
   ctx.fillStyle = '#111827'; ctx.fillRect(0, 0, W, goal.y + 8); crowd(ctx, fans, t, excited);
+  // זרקורים: הילה בהירה משני הצדדים
+  for (const lx of [30, W - 30]) { const g = ctx.createRadialGradient(lx, 6, 2, lx, 6, 120); g.addColorStop(0, 'rgba(255,255,230,.55)'); g.addColorStop(.3, 'rgba(255,255,230,.12)'); g.addColorStop(1, 'rgba(255,255,230,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, GL); }
+  // לוחות פרסום צבעוניים לאורך קו השער (בלי טקסט)
+  const boards = ['#1d4ed8', '#dc2626', '#059669', '#f59e0b', '#7c3aed', '#0ea5e9']; for (let i = 0; i < 6; i++) { const bx = -20 + i * (W + 40) / 6; ctx.fillStyle = boards[i]; ctx.fillRect(bx, goal.y + 4, (W + 40) / 6 - 3, goal.h - 10 + 4); ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fillRect(bx + 8, goal.y + goal.h / 2 - 4, (W + 40) / 6 - 19, 8); }
   // דשא: פסים שמתכנסים לנקודת המגוז
   const px = (x, y) => { const k = (y - VY) / (H + 40 - VY); return VX + (x - VX) * k; };
   for (let i = 0; i < 9; i++) { const y0 = GL + (i * (H - GL)) / 9, y1 = GL + ((i + 1) * (H - GL)) / 9; ctx.fillStyle = i % 2 ? '#15803d' : '#16a34a'; ctx.beginPath(); ctx.moveTo(px(-120, y0), y0); ctx.lineTo(px(W + 120, y0), y0); ctx.lineTo(px(W + 120, y1), y1); ctx.lineTo(px(-120, y1), y1); ctx.fill(); }
@@ -78,11 +84,12 @@ function pitch(ctx, W, H, goal, fans, t, excited, bulge) {
   ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(px(goal.x - 70, GL), GL); ctx.lineTo(px(goal.x - 70, GL + 120), GL + 120); ctx.lineTo(px(goal.x + goal.w + 70, GL + 120), GL + 120); ctx.lineTo(px(goal.x + goal.w + 70, GL), GL); ctx.stroke();
   ctx.beginPath(); ctx.ellipse(W / 2, GL + 120, 62, 20, 0, 0, Math.PI); ctx.stroke(); ctx.beginPath(); ctx.arc(W / 2, H - 95, 4, 0, 7); ctx.fillStyle = '#fff'; ctx.fill();
   // שער עם עומק: רשת אחורית, רשתות צד, קורות
-  const d = 22; ctx.fillStyle = 'rgba(15,23,42,.55)'; ctx.fillRect(goal.x, goal.y, goal.w, goal.h);
+  const d = 22; ctx.fillStyle = 'rgba(15,23,42,.88)'; ctx.fillRect(goal.x, goal.y, goal.w, goal.h);
   const net = (x0, y0, x1, y1, cols, rows) => { ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = 1; for (let i = 0; i <= cols; i++) { const k = i / cols; ctx.beginPath(); ctx.moveTo(x0 + (x1 - x0) * k, y0); const bx = bulge && bulge.t > 0 ? bulge : null; const xx = x0 + (x1 - x0) * k, yy = y1; if (bx) { const dd = Math.hypot(xx - bx.x, (yy + y0) / 2 - bx.y); const off = Math.max(0, 1 - dd / 70) * 14 * bx.t; ctx.quadraticCurveTo(xx + (xx > bx.x ? off : -off), (y0 + y1) / 2 + off, xx, yy); } else ctx.lineTo(xx, yy); ctx.stroke(); } for (let j = 0; j <= rows; j++) { const k = j / rows; ctx.beginPath(); ctx.moveTo(x0, y0 + (y1 - y0) * k); ctx.lineTo(x1, y0 + (y1 - y0) * k); ctx.stroke(); } };
   net(goal.x + d, goal.y + d * .6, goal.x + goal.w - d, goal.y + goal.h, 16, 7);
   ctx.strokeStyle = 'rgba(255,255,255,.35)'; for (let i = 0; i <= 6; i++) { const k = i / 6; ctx.beginPath(); ctx.moveTo(goal.x, goal.y + goal.h * k); ctx.lineTo(goal.x + d, goal.y + d * .6 + (goal.h - d * .6) * k); ctx.stroke(); ctx.beginPath(); ctx.moveTo(goal.x + goal.w, goal.y + goal.h * k); ctx.lineTo(goal.x + goal.w - d, goal.y + d * .6 + (goal.h - d * .6) * k); ctx.stroke(); }
   ctx.strokeStyle = '#fff'; ctx.lineWidth = 7; ctx.lineJoin = 'round'; ctx.beginPath(); ctx.moveTo(goal.x, GL); ctx.lineTo(goal.x, goal.y); ctx.lineTo(goal.x + goal.w, goal.y); ctx.lineTo(goal.x + goal.w, GL); ctx.stroke(); ctx.strokeStyle = 'rgba(0,0,0,.25)'; ctx.lineWidth = 2; ctx.stroke();
+  const vg = ctx.createRadialGradient(W / 2, H / 2, H * .35, W / 2, H / 2, H * .75); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.35)'); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
   return px;
 }
 function finale(ctx, W, t, t0, oldBest, newBest, F, label) {
@@ -108,8 +115,7 @@ const SCENES = {
       cam(ctx, W / 2, 200, zoom, () => {
         pitch(ctx, W, H, goal, s.fans, t, t > HIT, s.bulge);
         // שוער
-        const gkX = W / 2 + (t > 1.75 ? easeOut(clamp((t - 1.75) / .55, 0, 1)) * gkDir * 92 : 0);
-        player(ctx, t > 1.75 ? (gkDir > 0 ? GK.diveR : GK.diveL) : GK.ready, gkX, GL - 2, .66, KITS.keeper, { happy: t < HIT });
+        keeper(ctx, t, 1.75, HIT, gkDir, W / 2, GL);
         // שחקן: ריצה בקשת אל הכדור, בעיטה, חגיגה
         const bx0 = W / 2, by0 = H - 95; let px, py, ppose;
         if (t < 1.55) { const k = ease(clamp(t / 1.55, 0, 1)); px = -50 + (bx0 - 34 + 50) * k; py = H - 40 - 40 * k; ppose = poseAt(POSE.run, t * 1000); }
@@ -122,7 +128,7 @@ const SCENES = {
         if (t > HIT) { gx = tx; gy = GL + 6; h = GL + 6 - ty - Math.min(18, (t - HIT) * 30); r = 8; }
         flyingBall(ctx, 'soccer', gx, gy, h, r, rot, t >= 1.7 && t < HIT + .3 ? s.trail : null);
       });
-      if (t > HIT) { if (t < HIT + .05 && F.count < 30) F.burst(tx, ty, '#fff', 40, 200); bigText(ctx, 'GOAL!!!', W / 2, 300, 80 * ease(clamp((t - HIT) / .4, 0, 1)), '#FDE047', '#7C2D12', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('Goooooooal!', 'en-US'); }
+      if (t > HIT) { if (t < HIT + .05 && F.count < 30) F.burst(tx, ty, '#fff', 40, 200); bigText(ctx, 'GOAL!!!', W / 2, 300, 80 * ease(clamp((t - HIT) / .4, 0, 1)), '#FDE047', '#7C2D12', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('Gooooooooooool!', 'pt-BR'); }
       finale(ctx, W, t, 3.6, s.oldBest, s.newBest, F, 'חיפה חיפה את אלופה');
     } },
   // ---- שער בנגיחה ----
@@ -134,8 +140,7 @@ const SCENES = {
       const zoom = t > 1.6 && t < 3.6 ? 1 + .18 * Math.sin(clamp((t - 1.6) / 2, 0, 1) * Math.PI) : 1;
       cam(ctx, W / 2, 200, zoom, () => {
         pitch(ctx, W, H, goal, s.fans, t, t > HIT, s.bulge);
-        const gkX = W / 2 + (t > 1.9 ? easeOut(clamp((t - 1.9) / .5, 0, 1)) * gkDir * 92 : 0);
-        player(ctx, t > 1.9 ? (gkDir > 0 ? GK.diveR : GK.diveL) : GK.ready, gkX, GL - 2, .66, KITS.keeper, { happy: t < HIT });
+        keeper(ctx, t, 1.9, HIT, gkDir, W / 2, GL);
         // מוסר מהצד (עם בעיטה), נוגח באמצע
         player(ctx, t < .45 ? POSE.leap : POSE.stand, 44, H - 50, .6, KITS.green);
         const hx = W / 2 + 30, hgy = H - 130; const jump = t > 1.45 && t < 2.45 ? Math.sin(clamp((t - 1.45) / 1, 0, 1) * Math.PI) * 70 : 0;
@@ -149,7 +154,7 @@ const SCENES = {
         if (t > HIT) { gx = tx; gy = GL + 6; h = GL + 6 - ty - Math.min(18, (t - HIT) * 30); r = 8; }
         flyingBall(ctx, 'soccer', gx, gy, h, r, rot, t > 1.95 && t < HIT + .3 ? s.trail.slice(-5) : null);
       });
-      if (t > HIT) { if (t < HIT + .05 && F.count < 30) F.burst(tx, ty, '#fff', 40, 200); bigText(ctx, 'GOAL!!!', W / 2, 300, 80 * ease(clamp((t - HIT) / .4, 0, 1)), '#FDE047', '#7C2D12', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); bigText(ctx, 'בראש!', W / 2, 352, 30, '#fff', '#1B1740'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('Goooooooal! What a header!', 'en-US'); }
+      if (t > HIT) { if (t < HIT + .05 && F.count < 30) F.burst(tx, ty, '#fff', 40, 200); bigText(ctx, 'GOAL!!!', W / 2, 300, 80 * ease(clamp((t - HIT) / .4, 0, 1)), '#FDE047', '#7C2D12', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); bigText(ctx, 'בראש!', W / 2, 352, 30, '#fff', '#1B1740'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('Gooooooooooool!', 'pt-BR'); }
       finale(ctx, W, t, 3.7, s.oldBest, s.newBest, F, 'חיפה חיפה את אלופה');
     } },
   // ---- אולם כדורסל משותף ----
@@ -157,25 +162,28 @@ const SCENES = {
     sound(S) { S.murmur(0, 2); S.bounce(0.3); S.bounce(0.75); S.bounce(1.2); S.tension(1.3, 1); S.rim(2.35); S.boom(2.4); S.chant(2.5, 2.2); S.roar(2.45, 4.5); S.horn(2.7, 1.4, 220); S.drums(3.0, 6); S.camera(2.6); },
     draw(ctx, W, H, t, dt, s, F, say) {
       court(ctx, W, H, s, t, t > 2.35);
-      const hp = s.hoop, SC = .85, HIT = 2.35;
-      const zoom = t > 1.6 && t < 3.6 ? 1 + .35 * Math.sin(clamp((t - 1.6) / 2, 0, 1) * Math.PI) : 1;
-      cam(ctx, hp.x, hp.y + 30, zoom, () => {
+      const hp = s.hoop, SC = .85, HIT = 2.35; s.arcGlow = 0;
+      const zoom = t > 1.6 && t < 3.6 ? 1 + .16 * Math.sin(clamp((t - 1.6) / 2, 0, 1) * Math.PI) : 1;
+      cam(ctx, hp.x - 40, hp.y + 150, zoom, () => {
         hoopBack(ctx, hp, t > HIT ? Math.sin((t - HIT) * 30) * 3 * Math.max(0, 1 - (t - HIT)) : 0);
         // שחקן: כדרור, ניתור עד הטבעת, נוחת, חוגג
         let px, py, pose, bx, by, bh = 0;
-        const gy = H - 80;
-        const J0 = 1.75, JD = 1.2, startX = hp.x - 150, apexX = hp.x - 20 * SC, apexY = hp.y + (182 - 14) * SC + 2; // ביד על הטבעת
-        if (t < J0) { const k = ease(clamp(t / J0, 0, 1)); px = -40 + (startX + 40) * k; py = gy; pose = poseAt(POSE.run, t * 1000); bx = px + 26; bh = Math.abs(Math.sin(t * 7)) * 55; by = gy - 8 - bh; }
-        else if (t < J0 + JD) { const k = clamp((t - J0) / JD, 0, 1); const hang = Math.pow(Math.sin(k * Math.PI), .6); px = startX + (apexX - startX) * Math.min(1, k * 1.6); py = gy - (gy - apexY) * hang; pose = DUNK; bx = px + 20 * SC; by = py + (14 - 182) * SC + 12; if (k > .5) { bx = hp.x; by = hp.y + 8 + (k - .5) * 300; } }
-        else { px = apexX - 90 * ease(clamp((t - J0 - JD) / .6, 0, 1)); py = gy - Math.abs(Math.sin(t * 6)) * 24; pose = Math.sin(t * 6) > 0 ? POSE.armsUp : POSE.jumpUp; bx = hp.x; by = Math.min(gy - 14, hp.y + 60 + (t - J0 - JD) * 420); }
+        const gy = H - 40;
+        const J0 = 1.75, JD = 1.25, startX = hp.x - 170, apexX = hp.x - 22 * SC, apexY = hp.y + (182 - 14) * SC - 44; // היד 44 פיקסלים מעל הטבעת
+        const CR = .22; // כריעה לפני הניתור
+        if (t < J0 - CR) { const k = ease(clamp(t / (J0 - CR), 0, 1)); px = -40 + (startX + 40) * k; py = gy - Math.abs(Math.sin(t * 14)) * 4; pose = poseAt(POSE.run, t * 1000); const ph = (t * 3.5) % 1; bh = Math.abs(Math.sin(ph * Math.PI)) * 58; bx = px + 30 + Math.sin(ph * Math.PI) * 6; by = gy - 10 - bh; }
+        else if (t < J0) { px = startX; py = gy; pose = LAND; bx = px + 34 * SC; by = gy - 62; }
+        else if (t < J0 + JD) { const k = clamp((t - J0) / JD, 0, 1); const hang = Math.pow(Math.sin(k * Math.PI), .55); px = startX + (apexX - startX) * Math.min(1, k * 1.5); py = gy - (gy - apexY) * hang; pose = k < .25 ? DUNK : k < .8 ? JORDAN : LAND; bx = px + 24 * SC; by = py + (JORDAN.rh[1] - 182) * SC + 12; if (k > .48) { bx = hp.x; by = hp.y + 6 + (k - .48) * 320; } }
+        else { const k = t - J0 - JD; px = apexX - 90 * ease(clamp(k / .6, 0, 1)); py = k < .25 ? gy : gy - Math.abs(Math.sin(t * 6)) * 24; pose = k < .25 ? LAND : Math.sin(t * 6) > 0 ? POSE.armsUp : POSE.jumpUp; bx = hp.x; by = Math.min(gy - 14, hp.y + 60 + k * 420); }
         if (t < J0 + JD) groundShadow(ctx, px, gy + 2, 22, gy - py);
-        player(ctx, pose, px, py, SC, KITS.purple, { shadow: t >= J0 + JD });
-        // הרשת נמשכת למטה כשהכדור עובר
+        // סדר הציור: כדור בתוך הרשת, הרשת והטבעת, השחקן מלפנים, הכדור ביד
+        const inNet = t > HIT; if (inNet) { groundShadow(ctx, bx, gy + 2, 13, gy - by); basketBall(ctx, bx, by, 13, t * 5); }
         s.net = t > HIT && t < HIT + .6 ? Math.sin((t - HIT) / .6 * Math.PI) : 0;
         hoopFront(ctx, hp, s.net);
-        groundShadow(ctx, bx, gy + 2, 13, gy - by); basketBall(ctx, bx, by, 13, t * 5);
+        player(ctx, pose, px, py, SC, KITS.purple, { shadow: t >= J0 + JD });
+        if (!inNet) { groundShadow(ctx, bx, gy + 2, 13, gy - by); basketBall(ctx, bx, by, 13, t * 5); }
       });
-      if (t > HIT) { if (t < HIT + .05 && F.count < 30) F.burst(hp.x, hp.y, '#F97316', 40, 220); bigText(ctx, 'SLAM DUNK!', W / 2, 300, 60 * ease(clamp((t - HIT) / .4, 0, 1)), '#FDE047', '#4C1D95', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('Slam dunk! Unbelievable!', 'en-US'); }
+      if (t > HIT) { if (t < HIT + .05 && F.count < 30) F.burst(hp.x, hp.y, '#F97316', 40, 220); bigText(ctx, 'SLAM DUNK!', W / 2, 300, 60 * ease(clamp((t - HIT) / .4, 0, 1)), '#FDE047', '#4C1D95', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('', 'pt-BR'); }
       finale(ctx, W, t, 3.7, s.oldBest, s.newBest, F, 'אלוף האלופים');
     } },
   // ---- קליעת שלוש ----
@@ -183,12 +191,11 @@ const SCENES = {
     sound(S) { S.murmur(0, 2); S.bounce(0.3); S.bounce(0.7); S.bounce(1.1); S.tension(1.4, 1.2); S.swish(2.75); S.chant(2.85, 2.2); S.roar(2.8, 4.5); S.horn(3.0, 1.4, 262); S.drums(3.3, 6); S.camera(2.9); },
     draw(ctx, W, H, t, dt, s, F, say) {
       court(ctx, W, H, s, t, t > 2.75);
-      const hp = s.hoop, HIT = 2.75, gy = H - 80, sx = 70;
-      const zoom = t > 2.2 && t < 3.8 ? 1 + .3 * Math.sin(clamp((t - 2.2) / 1.6, 0, 1) * Math.PI) : 1;
-      cam(ctx, hp.x, hp.y, zoom, () => {
+      const hp = s.hoop, HIT = 2.75, gy = H - 40, sx = 62; s.arcGlow = t > 1.4 && t < HIT ? Math.min(1, (t - 1.4) * 2) : t >= HIT ? Math.max(0, 1 - (t - HIT)) : 0;
+      const zoom = t > 2.2 && t < 3.8 ? 1 + .14 * Math.sin(clamp((t - 2.2) / 1.6, 0, 1) * Math.PI) : 1;
+      cam(ctx, hp.x - 40, hp.y + 150, zoom, () => {
         hoopBack(ctx, hp, 0);
         // קשת השלוש
-        ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(hp.x, gy + 2, 210, 26, 0, Math.PI, Math.PI * 1.5); ctx.stroke(); // קשת השלוש על הרצפה
         let px = sx, py = gy, pose, bx, by;
         if (t < 1.4) { pose = POSE.stand; const bh = Math.abs(Math.sin(t * 8)) * 60; bx = sx + 22; by = gy - 8 - bh; }
         else if (t < 2.1) { const k = clamp((t - 1.4) / .7, 0, 1); py = gy - Math.sin(k * Math.PI) * 60; pose = SHOOT; bx = px + 16 * .8; by = py + (14 - 182) * .8 + 6; }
@@ -202,7 +209,7 @@ const SCENES = {
         else if (bx != null) { groundShadow(ctx, bx, gy + 2, 13, gy - by); basketBall(ctx, bx, by, 13, t * 6); }
         s.net = t > HIT && t < HIT + .6 ? Math.sin((t - HIT) / .6 * Math.PI) * .7 : 0; hoopFront(ctx, hp, s.net);
       });
-      if (t > HIT) { if (t < HIT + .05 && F.count < 30) F.burst(hp.x, hp.y, '#fff', 30, 180); bigText(ctx, 'THREE!!!', W / 2, 300, 70 * ease(clamp((t - HIT) / .4, 0, 1)), '#FDE047', '#4C1D95', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); bigText(ctx, 'סוויש!', W / 2, 352, 30, '#fff', '#1B1740'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('From downtown! Three points!', 'en-US'); }
+      if (t > HIT) { if (t < HIT + .05 && F.count < 30) F.burst(hp.x, hp.y, '#fff', 30, 180); bigText(ctx, 'THREE!!!', W / 2, 300, 70 * ease(clamp((t - HIT) / .4, 0, 1)), '#FDE047', '#4C1D95', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); bigText(ctx, 'סוויש!', W / 2, 352, 30, '#fff', '#1B1740'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('', 'pt-BR'); }
       finale(ctx, W, t, 4.0, s.oldBest, s.newBest, F, 'מלך השלשות');
     } },
   // ---- ריצת 100 מטר ----
@@ -220,16 +227,31 @@ const SCENES = {
         if (x < W + 60) player(ctx, pose, hero && crossed ? Math.min(x, FIN + 60) : x, yy, .5, l.kit); });
       if (t < .4) bigText(ctx, 'למקומות...', W / 2, 150, 34, '#fff', '#1B1740'); else if (t < 2.95) bigText(ctx, `${Math.min(9.58, (t - .4) * 3.75).toFixed(2)}`, W / 2, 150, 54, '#FDE047', '#1B1740', 1, 'Rubik, Arial, sans-serif');
       if (t > 2.9 && t < 3.0) { ctx.fillStyle = `rgba(255,255,255,${(3.0 - t) * 8})`; ctx.fillRect(0, 0, W, H); }
-      if (t > 2.95) { if (t < 3.0 && F.count < 30) F.burst(FIN, 480, '#fff', 40, 220); bigText(ctx, 'WINNER!', W / 2, 150, 66 * ease(clamp((t - 2.95) / .4, 0, 1)), '#FDE047', '#1B1740', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); bigText(ctx, '9.58 · מקום ראשון', W / 2, 200, 28, '#fff', '#1B1740'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('And the winner is... you! A new record!', 'en-US'); }
+      if (t > 2.95) { if (t < 3.0 && F.count < 30) F.burst(FIN, 480, '#fff', 40, 220); bigText(ctx, 'WINNER!', W / 2, 150, 66 * ease(clamp((t - 2.95) / .4, 0, 1)), '#FDE047', '#1B1740', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); bigText(ctx, '9.58 · מקום ראשון', W / 2, 200, 28, '#fff', '#1B1740'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('', 'pt-BR'); }
       finale(ctx, W, t, 4.1, s.oldBest, s.newBest, F, 'הכי מהיר בעולם');
     } },
 };
-// אולם כדורסל: רצפת פרקט בפרספקטיבה, קהל
+// השוער: עומד, קופץ לצד (באוויר, בקשת), נוחת ושוכב על הדשא, ואחרי שנייה קם עצוב
+function keeper(ctx, t, t0, hit, dir, cx, GL) {
+  const DIVE = .55; let pose = GK.ready, x = cx, y = GL - 2, happy = true;
+  if (t > t0 && t <= t0 + DIVE) { const k = clamp((t - t0) / DIVE, 0, 1); x = cx + easeOut(k) * dir * 92; y = GL - 2 - Math.sin(k * Math.PI) * 30; pose = dir > 0 ? GK.diveR : GK.diveL; }
+  else if (t > t0 + DIVE && t < hit + 1.1) { x = cx + dir * 92; pose = dir > 0 ? GK.lyingR : GK.lyingL; happy = false; }
+  else if (t >= hit + 1.1) { x = cx + dir * 92; pose = GK.ready; happy = false; }
+  if (t > t0 && t <= t0 + DIVE) groundShadow(ctx, x, GL, 26, GL - 2 - y);
+  player(ctx, pose, x, y, .66, KITS.keeper, { happy, shadow: !(t > t0 && t <= t0 + DIVE) });
+}
+// אולם כדורסל: רצפת פרקט בפרספקטיבה עם קווי מגרש (קו שלוש, הצבע, קו הסיום), קהל
 function court(ctx, W, H, s, t, excited) {
   const sky = ctx.createLinearGradient(0, 0, 0, H); sky.addColorStop(0, '#0b1026'); sky.addColorStop(1, '#1e1b4b'); ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#111827'; ctx.fillRect(0, 0, W, 70); crowd(ctx, s.fans, t, excited);
-  const fg = ctx.createLinearGradient(0, H - 80, 0, H); fg.addColorStop(0, '#d97706'); fg.addColorStop(1, '#92400e'); ctx.fillStyle = fg; ctx.fillRect(0, H - 80, W, 80);
-  ctx.strokeStyle = 'rgba(0,0,0,.18)'; ctx.lineWidth = 1; for (let i = 0; i < 18; i++) { ctx.beginPath(); ctx.moveTo(i * 22, H - 80); ctx.lineTo(i * 22 - 30, H); ctx.stroke(); } ctx.fillStyle = '#fbbf24'; ctx.fillRect(0, H - 80, W, 5);
-  const glow = ctx.createRadialGradient(W / 2, H - 80, 10, W / 2, H - 80, 300); glow.addColorStop(0, 'rgba(255,255,255,.08)'); glow.addColorStop(1, 'rgba(255,255,255,0)'); ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
+  const FY = H - 130, fg = ctx.createLinearGradient(0, FY, 0, H); fg.addColorStop(0, '#e0a04a'); fg.addColorStop(.5, '#c47f2c'); fg.addColorStop(1, '#8a4b12'); ctx.fillStyle = fg; ctx.fillRect(0, FY, W, H - FY);
+  // קרשי פרקט בפרספקטיבה
+  ctx.strokeStyle = 'rgba(60,30,0,.22)'; ctx.lineWidth = 1; for (let i = -6; i < 24; i++) { ctx.beginPath(); ctx.moveTo(i * 22 + 40, FY); ctx.lineTo(i * 22 - 30, H); ctx.stroke(); } for (let j = 1; j < 5; j++) { const yy = FY + (H - FY) * j / 5; ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(W, yy); ctx.stroke(); }
+  // הצבע (המלבן מתחת לסל) והקו של שלוש הנקודות: כשמסומן s.arcGlow הקו זוהר
+  const hx = s.hoop ? s.hoop.x : W - 100; ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,.85)'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(0, FY + 3); ctx.lineTo(W, FY + 3); ctx.stroke();
+  ctx.fillStyle = 'rgba(124,58,237,.35)'; ctx.beginPath(); ctx.moveTo(hx - 70, FY + 4); ctx.lineTo(hx + 70, FY + 4); ctx.lineTo(hx + 95, H - 40); ctx.lineTo(hx - 95, H - 40); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.beginPath(); ctx.ellipse(hx, H - 40, 55, 14, 0, 0, Math.PI * 2); ctx.stroke();
+  const glow = s.arcGlow || 0; ctx.strokeStyle = glow ? `rgba(253,224,71,${.6 + glow * .4})` : 'rgba(255,255,255,.9)'; ctx.lineWidth = glow ? 5 : 3.5; if (glow) { ctx.shadowColor = '#FDE047'; ctx.shadowBlur = 18 * glow; } ctx.beginPath(); ctx.rect(0, FY + 2, W, H - FY); ctx.clip(); ctx.beginPath(); ctx.ellipse(hx, FY + 2, 225, 118, 0, 0, Math.PI); ctx.stroke(); ctx.restore();
+  ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fillRect(0, FY, W, 24);
+  const spot = ctx.createRadialGradient(W / 2, H - 130, 10, W / 2, H - 130, 300); spot.addColorStop(0, 'rgba(255,255,255,.08)'); spot.addColorStop(1, 'rgba(255,255,255,0)'); ctx.fillStyle = spot; ctx.fillRect(0, 0, W, H);
 }
 function hoopBack(ctx, hp, shake) {
   ctx.fillStyle = '#374151'; ctx.fillRect(hp.x + 34, hp.y - 110, 9, 400); ctx.fillStyle = '#4b5563'; ctx.fillRect(hp.x + 34, hp.y - 110, 3, 400);
@@ -251,7 +273,9 @@ export function celebrate(canvas, { oldBest = 0, newBest = 1, sound = true, onTe
   const ctx = canvas.getContext('2d'), W = canvas.width, H = canvas.height;
   const id = SCENE_IDS.includes(scene) ? scene : SCENE_IDS[Math.floor(Math.random() * SCENE_IDS.length)];
   const sc = SCENES[id], S = makeAudio(sound), F = fx(ctx, W, H), s = { ...sc.setup(W, H), oldBest, newBest };
-  let said = false; const say = (txt, lang) => { if (said) return; said = true; onText && onText(txt, lang); };
+  let said = false; let shout = null; try { shout = localStorage.getItem('kidfit.goalShout'); } catch { shout = null; }
+  // קריין: אם הוקלטה צעקת גול בהגדרות, משמיעים אותה. אחרת "גוווול" בסגנון שדרן ברזילאי (קול פורטוגזי, איטי, גבוה).
+  const say = (txt, lang) => { if (said) return; said = true; if (shout && sound) { try { const a = new Audio(shout); a.play(); return; } catch { /* */ } } if (txt) onText && onText(txt, lang); };
   sc.sound(S);
   const started = performance.now(); let raf = 0, last = started;
   function frame(now) { const t = (now - started) / 1000, dt = Math.min(.05, (now - last) / 1000); last = now; sc.draw(ctx, W, H, t, dt, s, F, say); F.draw(dt); if (t < sc.dur) raf = requestAnimationFrame(frame); else onDone && onDone(); }

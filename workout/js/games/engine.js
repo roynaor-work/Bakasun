@@ -104,7 +104,7 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
     flash(newBest ? `שיא חדש! ${score}` : `ניקוד: ${score}`, `${best && !newBest ? `השיא שלך: ${best} · ` : ''}חזרה לאימון`);
     if (newBest) {
       // חגיגת שער: מסתירים את ההודעה בזמן הסימולציה, ומראים אותה בסופה
-      hide(); const stopFx = celebrateGoal(cv, { oldBest: best, newBest: score, sound, onText: t => speak && speak(t), onDone: () => { flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) }); } });
+      hide(); const stopFx = celebrateGoal(cv, { oldBest: best, newBest: score, sound, onText: (t, lang) => speak && speak(t, lang), onDone: () => { flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) }); } });
       cv.onclick = () => { stopFx(); cv.onclick = null; flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) }); };
       return;
     }
