@@ -29,7 +29,8 @@ export const HELP = {
     { title: 'תזכורות, משימות והערות', items: [
       '"תזכירי לי מחר ב-9 להתקשר לדנה" / "תזכירי לי ביום שלישי לאשר את האוטובוס"',
       '"משימה לשירית: לאסוף שלטים מהדפוס"',
-      '"רשמי הערה על דן פנורמה: יקרים אבל שווים"'
+      '"רשמי הערה על דן פנורמה: יקרים אבל שווים"',
+      'אחרי תזכורת, ובכל משימה עם תאריך, יש כפתור "ליומן": התזכורת נכנסת ליומן של הטלפון ומצלצלת בשעה. גם בתיק יש "ליומן" ליום האירוע.'
     ] },
     { title: 'הודעות ושליחה (כלום לא נשלח בלי לחיצה שלך)', items: [
       '"שלחי הודעה לרועי: מגיעה ב-10" / "תגידי לדנה ש..." / "תשלחי מייל למארק: ..."',
@@ -74,7 +75,8 @@ export const HELP = {
     { title: 'Rappels, tâches et notes', items: [
       '« rappelle-moi demain à 9 d’appeler Dana » / « rappelle-moi mardi de confirmer le bus »',
       '« tâche pour Shirit : récupérer les panneaux »',
-      '« note sur Dan Panorama : chers mais bien »'
+      '« note sur Dan Panorama : chers mais bien »',
+      'Après un rappel, et sur chaque tâche datée, le bouton « Au calendrier » met le rappel dans l’agenda du téléphone, qui sonne à l’heure. Le dossier a aussi « Au calendrier » pour le jour de l’événement.'
     ] },
     { title: 'Messages et envois (rien ne part sans votre clic)', items: [
       '« envoie un message à Roy : j’arrive à 10h » / « envoie un mail à Marc : ... »',
@@ -119,7 +121,8 @@ export const HELP = {
     { title: 'Reminders, tasks and notes', items: [
       '“remind me tomorrow at 9 to call Dana” / “remind me on tuesday to confirm the bus”',
       '“task for Shirit: collect the signs from the printer”',
-      '“note on Dan Panorama: pricey but worth it”'
+      '“note on Dan Panorama: pricey but worth it”',
+      'After a reminder, and on every dated task, the “To calendar” button puts it in the phone’s calendar, which rings at the hour. The case has “To calendar” for the event day too.'
     ] },
     { title: 'Messages and sending (nothing leaves without your tap)', items: [
       '“send a message to Roy: arriving at 10” / “send an email to Marc: ...”',

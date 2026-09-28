@@ -4,6 +4,8 @@ import { db } from '../store.js';
 import { esc, field, empty, dialog, toast, openWhatsApp, dial, confirmDialog } from '../ui.js';
 import Office from '../logic/office.js';
 import { TASK, openTasks, taskMessage } from '../logic/extra.js';
+import { toCalendar } from '../calendar.js';
+import { taskEvent } from '../logic/ics.js';
 
 let tab = 'open';
 
@@ -20,7 +22,7 @@ export function render(ctx) {
       <div class="row between"><span class="title">${esc(x.title)}</span><span class="row">${x.status === TASK.sent ? `<span class="badge ok">${esc(t('taskSent'))}</span>` : ''}${x.due ? `<span class="badge ${x.late > 0 ? '' : 'muted'}">${esc(Office.fmt(x.due))}${x.time ? ' ' + esc(x.time) : ''}</span>` : ''}</span></div>
       ${x.details ? `<div class="sub" style="white-space:pre-wrap">${esc(x.details)}</div>` : ''}
       <div class="sub">${x.who ? `<b>${esc(x.who)}</b>` : ''}${cs ? ` · <a href="#/case/${esc(cs.id)}">${esc(cs.client)}${cs.date ? ' · ' + esc(Office.fmt(cs.date)) : ''}</a>` : ''}</div>
-      ${tab === 'open' ? `<div class="row"><button class="btn wa" data-send>${esc(t('taskSend'))}</button>${x.phone ? `<button class="btn sm" data-dial>${esc(t('call'))}</button>` : ''}<button class="btn sm ok" data-done>${esc(t('taskDone'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div>`
+      ${tab === 'open' ? `<div class="row"><button class="btn wa" data-send>${esc(t('taskSend'))}</button>${x.phone ? `<button class="btn sm" data-dial>${esc(t('call'))}</button>` : ''}${x.due ? `<button class="btn sm" data-cal>${esc(t('toCalendar'))}</button>` : ''}<button class="btn sm ok" data-done>${esc(t('taskDone'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div>`
         : `<div class="row"><button class="btn sm ghost" data-reopen>${esc(t('reopen'))}</button></div>`}
     </div>`;
   };
@@ -35,6 +37,7 @@ export function render(ctx) {
     const cs = x.caseId ? db.get('cases', x.caseId) : null;
     const on = (sel, fn) => { const b = el.querySelector(sel); if (b) b.onclick = fn; };
     on('[data-dial]', () => dial(x.phone));
+    on('[data-cal]', () => toCalendar(taskEvent(x, cs)));
     on('[data-done]', () => db.put('tasks', { id: x.id, status: TASK.done }));
     on('[data-reopen]', () => db.put('tasks', { id: x.id, status: TASK.open }));
     on('[data-edit]', () => edit(x, s));
