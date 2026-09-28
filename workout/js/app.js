@@ -651,6 +651,7 @@ function arcade() {
 }
 
 // ---- הגדרות ----
+function tetrisPics() { try { const a = JSON.parse(localStorage.getItem('kidfit.tetrisPics') || '[]'); const one = localStorage.getItem('kidfit.tetrisPic'); return one && !a.length ? [one] : a; } catch { return []; } }
 function settings() {
   const p = store.profile, pl = plan();
   mount(`
@@ -694,6 +695,18 @@ function settings() {
       <button class="btn" data-go="#/parent">להיכנס למצב הורים</button>
     </div>
     <div class="card stack">
+      <h3>התמונות בטטריס 🖼️</h3>
+      <p class="muted small">התמונות שנחשפות שורה אחרי שורה. בלי תמונות: ציורים מהחגיגות. אפשר לבחור כמה תמונות מהטלפון (שחקנים אהובים), הן נשמרות רק במכשיר הזה.</p>
+      <div class="row wrap"><label class="btn chip" for="tetrisPic">📷 הוספת תמונות</label><input type="file" id="tetrisPic" accept="image/*" multiple hidden>${tetrisPics().length ? '<button class="btn chip danger" id="tetrisPicClear">הסרת כל התמונות</button>' : ''}</div>
+      <div class="row wrap">${tetrisPics().map(src => `<img src="${src}" alt="" style="width:72px;height:112px;object-fit:cover;border-radius:10px;box-shadow:var(--shadow)">`).join('')}</div>
+    </div>
+    <div class="card stack">
+      <h3>הפרצוף במשחק הרעב הגדול 🙂</h3>
+      <p class="muted small">תמונת פנים של הילד (רק במכשיר הזה). בלי תמונה: פרצוף מצויר.</p>
+      <div class="row wrap"><label class="btn chip" for="facePic">📷 בחירת תמונת פנים</label><input type="file" id="facePic" accept="image/*" hidden>${localStorage.getItem('kidfit.facePic') ? '<button class="btn chip danger" id="facePicClear">הסרה</button>' : ''}</div>
+      ${localStorage.getItem('kidfit.facePic') ? `<img src="${localStorage.getItem('kidfit.facePic')}" alt="" style="width:72px;height:72px;object-fit:cover;border-radius:50%;box-shadow:var(--shadow)">` : ''}
+    </div>
+    <div class="card stack">
       <h3>הנתונים</h3>
       <p class="muted small">הכול נשמר במכשיר הזה בלבד. ${store.sessions.length} אימונים שמורים.</p>
       <button class="btn" id="export">הורדת גיבוי 💾</button>
@@ -712,6 +725,11 @@ function settings() {
   $('#speechRate').onchange = e => store.setProfile({ speechRate: +e.target.value });
   window.speechSynthesis?.addEventListener?.('voiceschanged', () => { if (location.hash.includes('settings') && $('#voiceName') && $('#voiceName').options.length <= 1) settings(); }, { once: true });
   $('#giftEvery').onchange = e => store.setProfile({ giftEvery: +e.target.value });
+  const fitImage = (f, w, h, q = 0.82) => new Promise((res, rej) => { const i = new Image(); i.onload = () => { const c = document.createElement('canvas'); c.width = w; c.height = h; const k = Math.max(w / i.width, h / i.height); c.getContext('2d').drawImage(i, (w - i.width * k) / 2, (h - i.height * k) / 2, i.width * k, i.height * k); URL.revokeObjectURL(i.src); res(c.toDataURL('image/jpeg', q)); }; i.onerror = rej; i.src = URL.createObjectURL(f); });
+  $('#tetrisPic').onchange = async e => { const files = [...e.target.files].slice(0, 12); if (!files.length) return; try { const pics = tetrisPics(); for (const f of files) pics.push(await fitImage(f, 360, 560)); localStorage.setItem('kidfit.tetrisPics', JSON.stringify(pics.slice(-12))); settings(); } catch { alert('לא הצלחתי לקרוא את התמונות (אולי אין מקום). נסו פחות תמונות.'); } };
+  const tpc = $('#tetrisPicClear'); if (tpc) tpc.onclick = () => { if (confirm('להסיר את כל התמונות מהטטריס?')) { localStorage.removeItem('kidfit.tetrisPics'); localStorage.removeItem('kidfit.tetrisPic'); settings(); } };
+  $('#facePic').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { localStorage.setItem('kidfit.facePic', await fitImage(f, 160, 160, 0.85)); settings(); } catch { alert('לא הצלחתי לקרוא את התמונה.'); } };
+  const fpc = $('#facePicClear'); if (fpc) fpc.onclick = () => { if (confirm('להסיר את תמונת הפנים?')) { localStorage.removeItem('kidfit.facePic'); settings(); } };
   $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); };
   $('#newfam').onclick = () => { if (p.familyCode && !confirm('ליצור קוד חדש? צריך להקליד אותו גם בטלפון של אבא.')) return; const c = cloud.newFamilyCode(); store.setProfile({ familyCode: c }); settings(); };
   $('#copyfam').onclick = async () => { try { await navigator.clipboard.writeText(store.profile.familyCode); $('#cloudstate').textContent = 'הקוד הועתק'; } catch { $('#fam').select(); } };
