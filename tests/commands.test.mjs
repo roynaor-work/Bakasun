@@ -72,3 +72,19 @@ test('a free message to a person, and saving a phone by voice', () => {
   assert.equal(c.kind, 'contact'); assert.equal(c.to, null); assert.equal(c.contact.name, 'דנה'); assert.equal(c.contact.email, 'dana@x.co');
   assert.equal(parseCommand('שלחי אישור ניהול חשבון לרועי', [{ id: 'd1', title: 'אישור ניהול חשבון בנק' }], people).kind, 'send');
 });
+
+test('action commands: quote, ask, open, call, task, note, lead, today', () => {
+  const people = [{ label: 'ארגון שוב״ל · עידית', names: ['ארגון שוב״ל', 'עידית'], about: 'client', id: 'c1', phone: '050-1' }, { label: 'ביסקוטי · עינת', names: ['ביסקוטי', 'עינת'], about: 'supplier', id: 's1', phone: '050-2204686' }, { label: 'שירית כהן', names: ['שירית כהן'], about: 'team', id: 't1', phone: '050-3' }];
+  let c = parseCommand('תבני לי הצעת מחיר לשוב״ל', [], people); assert.equal(c.kind, 'quote'); assert.equal(c.to.id, 'c1');
+  c = parseCommand('build a quote for Shoval', [], people); assert.equal(c.kind, 'quote'); assert.equal(c.who, 'Shoval');
+  c = parseCommand('תבקשי הצעות ממלונות לשוב״ל', [], people); assert.equal(c.kind, 'ask'); assert.equal(c.type, 'מלונות'); assert.equal(c.to.id, 'c1');
+  c = parseCommand('תבקשי הצעות לשוב״ל', [], people); assert.equal(c.kind, 'ask'); assert.equal(c.to.id, 'c1'); assert.equal(c.type, '');
+  c = parseCommand('תפתחי את הספק ביסקוטי', [], people); assert.equal(c.kind, 'open'); assert.equal(c.to.about, 'supplier');
+  c = parseCommand('תתקשרי לביסקוטי', [], people); assert.equal(c.kind, 'call'); assert.equal(c.to.phone, '050-2204686');
+  c = parseCommand('משימה לשירית כהן: לאסוף שלטים מהדפוס', [], people); assert.equal(c.kind, 'task'); assert.equal(c.to.id, 't1'); assert.equal(c.body, 'לאסוף שלטים מהדפוס');
+  c = parseCommand('רשמי הערה על ביסקוטי: יקרים אבל שווים', [], people); assert.equal(c.kind, 'note'); assert.equal(c.to.id, 's1'); assert.equal(c.body, 'יקרים אבל שווים');
+  c = parseCommand('פנייה חדשה: דנה לוי 052-1234567 יום גיבוש ל-40 בראש פינה', [], people); assert.equal(c.kind, 'lead'); assert.match(c.body, /^דנה לוי/);
+  assert.equal(parseCommand('מה יש לי היום', [], people).kind, 'today');
+  assert.equal(parseCommand('שלחי הודעה לשירית כהן: מגיעה', [], people).kind, 'message');
+  assert.equal(parseCommand('תזכירי לי מחר ב-9 להתקשר לדנה', [], people).kind, 'reminder');
+});
