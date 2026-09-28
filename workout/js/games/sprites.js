@@ -84,39 +84,52 @@ export const KITS = {
   red: { shirt: '#DC2626', shirt2: '#991B1B', shorts: '#fff', socks: '#DC2626', number: '7' },
   keeper: { shirt: '#FACC15', shirt2: '#CA8A04', shorts: '#111827', socks: '#FACC15', number: '1', gloves: '#F97316' },
   grey: { shirt: '#9CA3AF', shirt2: '#6B7280', shorts: '#4B5563', socks: '#E5E7EB', number: '' },
+  rabbi: { shirt: '#111827', shirt2: '#000', shorts: '#111827', socks: '#111827', number: '' }, // חליפה שחורה (הרבי בפרה המעופפת)
   purple: { shirt: '#7C3AED', shirt2: '#5B21B6', shorts: '#fff', socks: '#7C3AED', number: '8' },
   orange: { shirt: '#F97316', shirt2: '#C2410C', shorts: '#111827', socks: '#F97316', number: '11' },
 };
 const SKINS = ['#F1C27D', '#E0AC69', '#C68642', '#8D5524', '#FFDBAC'];
 export function player(ctx, pose, x, y, scale, kit = KITS.blue, { flip = false, skin = SKINS[0], hair = '#3B2A1A', shoes = '#111827', happy = true, outline = '#1B1740', shadow = true } = {}) {
+  // דמות מלאה: גפיים כפוליגונים מתעבים (ירך רחבה מהשוק), מפרקים עגולים, גוף עם כתפיים, מכנסיים, גרביים, נעליים עם סוליה, ראש עם אוזן, שיער, גבות, אף
   const P = ([a, b]) => [x + (flip ? -(a - 100) : (a - 100)) * scale, y + (b - 182) * scale];
   const lerp = (a, b, k) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
-  const cap = (a, b, w, color) => { ctx.lineCap = 'round'; ctx.lineJoin = 'round'; if (outline) { ctx.strokeStyle = outline; ctx.lineWidth = w + 2.2 * scale; ctx.beginPath(); ctx.moveTo(...P(a)); ctx.lineTo(...P(b)); ctx.stroke(); } ctx.strokeStyle = color; ctx.lineWidth = w; ctx.beginPath(); ctx.moveTo(...P(a)); ctx.lineTo(...P(b)); ctx.stroke(); };
-  if (shadow) { ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.beginPath(); ctx.ellipse(x, y + 3 * scale, 26 * scale, 6 * scale, 0, 0, Math.PI * 2); ctx.fill(); }
-  const dot = (p, rad, color) => { const [px, py] = P(p); ctx.fillStyle = color; ctx.beginPath(); ctx.arc(px, py, rad, 0, Math.PI * 2); ctx.fill(); };
-  // מלפנים או מהצד? מלפנים הידיים סימטריות סביב הצוואר
   const front = Math.abs((pose.le[0] - pose.neck[0]) + (pose.re[0] - pose.neck[0])) < 10 && Math.abs(pose.le[0] - pose.re[0]) > 14;
-  const dir = flip ? -1 : 1, L = 8 * scale, A = 6.5 * scale, shW = (front ? 15 : 7) * scale, hipW = (front ? 11 : 6) * scale;
-  const leg = (k, f, near) => { const sk = near ? skin : shade(skin, -18); cap(pose.hip, k, L * 1.15, sk); cap(k, f, L, sk); cap(lerp(k, f, .55), f, L + 1, near ? kit.socks : shade(kit.socks, -25)); const [fx, fy] = P(f); ctx.fillStyle = shoes; ctx.beginPath(); ctx.ellipse(fx + (front ? 0 : dir * 5 * scale), fy + 2 * scale, 8 * scale, 4.5 * scale, 0, 0, Math.PI * 2); ctx.fill(); };
-  const arm = (e, h, near) => { const sk = near ? skin : shade(skin, -18); cap(pose.neck, e, A, sk); cap(e, h, A, sk); cap(pose.neck, lerp(pose.neck, e, .45), A + 4 * scale, near ? kit.shirt : kit.shirt2); if (kit.gloves) dot(h, 6.5 * scale, kit.gloves); else dot(h, 4 * scale, sk); };
-  // רגל וזרוע רחוקות
-  leg(pose.lk, pose.lf, false); arm(pose.le, pose.lh, false);
-  // מכנסיים
-  cap(pose.hip, lerp(pose.hip, pose.lk, .42), L * 1.6, shade(kit.shorts, -12)); cap(pose.hip, lerp(pose.hip, pose.rk, .42), L * 1.6, kit.shorts);
-  // גוף
+  const dir = flip ? -1 : 1, OW = 1.6 * scale;
+  ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+  // גפה מתעבת: מלבן שמצטמצם מ-w0 ל-w1, עם קו מתאר וקו צל בצד אחד
+  const limb = (a, b, w0, w1, color, dark) => { const [ax, ay] = P(a), [bx, by] = P(b); const ang = Math.atan2(by - ay, bx - ax), nx = -Math.sin(ang), ny = Math.cos(ang); ctx.beginPath(); ctx.moveTo(ax + nx * w0, ay + ny * w0); ctx.lineTo(bx + nx * w1, by + ny * w1); ctx.arc(bx, by, w1, ang + Math.PI / 2, ang - Math.PI / 2, true); ctx.lineTo(ax - nx * w0, ay - ny * w0); ctx.arc(ax, ay, w0, ang - Math.PI / 2, ang + Math.PI / 2, true); ctx.closePath(); ctx.fillStyle = color; ctx.fill(); if (outline) { ctx.strokeStyle = outline; ctx.lineWidth = OW; ctx.stroke(); } if (dark) { ctx.save(); ctx.clip(); ctx.strokeStyle = 'rgba(0,0,0,.14)'; ctx.lineWidth = w0 * .8; ctx.beginPath(); ctx.moveTo(ax + nx * w0 * .8, ay + ny * w0 * .8); ctx.lineTo(bx + nx * w1 * .8, by + ny * w1 * .8); ctx.stroke(); ctx.restore(); } };
+  const joint = (p, rad, color) => { const [px, py] = P(p); ctx.fillStyle = color; ctx.beginPath(); ctx.arc(px, py, rad, 0, Math.PI * 2); ctx.fill(); };
+  if (shadow) { ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.beginPath(); ctx.ellipse(x, y + 3 * scale, 26 * scale, 6 * scale, 0, 0, Math.PI * 2); ctx.fill(); }
+  const shoe = (f, k, near) => { const [fx, fy] = P(f), [kx] = P(k); const fwd = front ? 0 : (fx >= kx ? 1 : -1) * dir * dir; const col = near ? shoes : shade(shoes, 25); ctx.fillStyle = col; ctx.beginPath(); ctx.ellipse(fx + fwd * 5 * scale, fy + 1.5 * scale, 9 * scale, 4.5 * scale, 0, 0, Math.PI * 2); ctx.fill(); if (outline) { ctx.strokeStyle = outline; ctx.lineWidth = OW; ctx.stroke(); } ctx.fillStyle = 'rgba(255,255,255,.7)'; ctx.beginPath(); ctx.ellipse(fx + fwd * 5 * scale, fy + 4.5 * scale, 9 * scale, 1.6 * scale, 0, 0, Math.PI * 2); ctx.fill(); };
+  const leg = (k, f, near) => { const sk = near ? skin : shade(skin, -22), sock = near ? kit.socks : shade(kit.socks, -25); limb(pose.hip, k, 7.5 * scale, 5.5 * scale, sk, !near); limb(k, f, 5.5 * scale, 4 * scale, sk, !near); limb(lerp(k, f, .5), f, 4.6 * scale, 4.4 * scale, sock, false); joint(k, 4.6 * scale, sk); shoe(f, k, near); };
+  const arm = (e, h, near) => { const sk = near ? skin : shade(skin, -22); limb(pose.neck, e, 5.2 * scale, 4 * scale, sk, !near); limb(e, h, 4 * scale, 3.2 * scale, sk, !near); joint(e, 3.4 * scale, sk); limb(pose.neck, lerp(pose.neck, e, .42), 7 * scale, 5.5 * scale, near ? kit.shirt : kit.shirt2, false); if (kit.gloves) { joint(h, 6.5 * scale, kit.gloves); if (outline) { const [hx2, hy2] = P(h); ctx.strokeStyle = outline; ctx.lineWidth = OW; ctx.beginPath(); ctx.arc(hx2, hy2, 6.5 * scale, 0, 7); ctx.stroke(); } } else { joint(h, 4.2 * scale, sk); if (outline) { const [hx2, hy2] = P(h); ctx.strokeStyle = outline; ctx.lineWidth = OW; ctx.beginPath(); ctx.arc(hx2, hy2, 4.2 * scale, 0, 7); ctx.stroke(); } } };
+  const shW = (front ? 16 : 8) * scale, hipW = (front ? 12 : 7) * scale;
   const [nx, ny] = P(pose.neck), [hx, hy] = P(pose.hip); const ang = Math.atan2(hy - ny, hx - nx) + Math.PI / 2, cx = Math.cos(ang), cy = Math.sin(ang);
-  const torso = () => { ctx.beginPath(); ctx.moveTo(nx - cx * shW, ny - cy * shW); ctx.lineTo(nx + cx * shW, ny + cy * shW); ctx.lineTo(hx + cx * hipW, hy + cy * hipW + 4 * scale); ctx.lineTo(hx - cx * hipW, hy - cy * hipW + 4 * scale); ctx.closePath(); };
-  torso(); const tg = ctx.createLinearGradient(nx - shW, ny, nx + shW, ny); tg.addColorStop(0, kit.shirt2); tg.addColorStop(.45, kit.shirt); tg.addColorStop(1, kit.shirt2); ctx.fillStyle = tg; ctx.fill(); ctx.strokeStyle = outline || kit.shirt2; ctx.lineWidth = 1.8 * scale; ctx.lineJoin = 'round'; ctx.stroke();
-  if (front && kit.number) { ctx.fillStyle = '#fff'; ctx.font = `900 ${13 * scale}px Heebo, Arial, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(kit.number, (nx + hx) / 2, (ny + hy) / 2); }
-  // רגל וזרוע קרובות
+  // רחוק: רגל ויד
+  leg(pose.lk, pose.lf, false); arm(pose.le, pose.lh, false);
+  // מכנסיים: שני צינורות קצרים + חלק עליון
+  limb(pose.hip, lerp(pose.hip, pose.lk, .45), 8.5 * scale, 7.5 * scale, shade(kit.shorts, -14), false); limb(pose.hip, lerp(pose.hip, pose.rk, .45), 8.5 * scale, 7.5 * scale, kit.shorts, false);
+  // גוף: כתפיים רחבות, מותן צר, גרדיאנט ופס צד
+  ctx.beginPath(); ctx.moveTo(nx - cx * shW, ny - cy * shW); ctx.quadraticCurveTo((nx + hx) / 2 - cx * (shW + hipW) / 2 * 1.05, (ny + hy) / 2 - cy * (shW + hipW) / 2 * 1.05, hx - cx * hipW, hy - cy * hipW + 5 * scale); ctx.lineTo(hx + cx * hipW, hy + cy * hipW + 5 * scale); ctx.quadraticCurveTo((nx + hx) / 2 + cx * (shW + hipW) / 2 * 1.05, (ny + hy) / 2 + cy * (shW + hipW) / 2 * 1.05, nx + cx * shW, ny + cy * shW); ctx.closePath();
+  const tg = ctx.createLinearGradient(nx - cx * shW, ny - cy * shW, nx + cx * shW, ny + cy * shW); tg.addColorStop(0, kit.shirt2); tg.addColorStop(.4, kit.shirt); tg.addColorStop(1, kit.shirt2); ctx.fillStyle = tg; ctx.fill(); if (outline) { ctx.strokeStyle = outline; ctx.lineWidth = OW; ctx.stroke(); }
+  // צווארון
+  ctx.strokeStyle = 'rgba(255,255,255,.75)'; ctx.lineWidth = 2 * scale; ctx.beginPath(); ctx.arc(nx, ny + 2 * scale, 4.5 * scale, front ? .2 : .6, front ? Math.PI - .2 : Math.PI - .6); ctx.stroke();
+  if (front && kit.number) { ctx.fillStyle = '#fff'; ctx.font = `900 ${13 * scale}px Heebo, Arial, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(kit.number, (nx + hx) / 2, (ny + hy) / 2 + 2 * scale); }
+  // קרוב: רגל ויד
   leg(pose.rk, pose.rf, true); arm(pose.re, pose.rh, true);
-  // ראש
-  const [hdx, hdy] = P(pose.head), R = 12 * scale; const hg = ctx.createRadialGradient(hdx - R * .3, hdy - R * .3, R * .2, hdx, hdy, R); hg.addColorStop(0, shade(skin, 25)); hg.addColorStop(1, skin); ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(hdx, hdy, R, 0, Math.PI * 2); ctx.fill(); if (outline) { ctx.strokeStyle = outline; ctx.lineWidth = 1.6 * scale; ctx.stroke(); }
-  ctx.fillStyle = hair; ctx.beginPath(); ctx.arc(hdx, hdy - R * .15, R * 1.02, Math.PI * 1.05, Math.PI * 1.95); ctx.lineTo(hdx + R * (front ? .95 : dir * .3), hdy - R * .2); ctx.closePath(); ctx.fill();
-  ctx.fillStyle = '#1B1740';
-  if (front) { ctx.beginPath(); ctx.arc(hdx - R * .35, hdy, R * .12, 0, 7); ctx.arc(hdx + R * .35, hdy, R * .12, 0, 7); ctx.fill(); }
-  else { ctx.beginPath(); ctx.arc(hdx + dir * R * .45, hdy - R * .05, R * .13, 0, 7); ctx.fill(); }
-  ctx.strokeStyle = '#7C2D12'; ctx.lineWidth = Math.max(1, 1.4 * scale); ctx.beginPath(); if (happy) ctx.arc(hdx + (front ? 0 : dir * R * .4), hdy + R * .3, R * .4, front ? .25 : (dir > 0 ? .1 : Math.PI - .9), front ? Math.PI - .25 : (dir > 0 ? Math.PI * .9 : Math.PI + .1)); else { ctx.moveTo(hdx - R * .3, hdy + R * .5); ctx.lineTo(hdx + R * .3, hdy + R * .5); } ctx.stroke();
+  // צוואר וראש
+  const [hdx, hdy] = P(pose.head), R = 12 * scale; limb(pose.neck, lerp(pose.neck, pose.head, .5), 4 * scale, 4 * scale, shade(skin, -10), false);
+  const hg = ctx.createRadialGradient(hdx - R * .3, hdy - R * .3, R * .2, hdx, hdy, R * 1.05); hg.addColorStop(0, shade(skin, 25)); hg.addColorStop(1, shade(skin, -6)); ctx.fillStyle = hg; ctx.beginPath(); ctx.ellipse(hdx, hdy, R * .95, R, 0, 0, Math.PI * 2); ctx.fill(); if (outline) { ctx.strokeStyle = outline; ctx.lineWidth = OW; ctx.stroke(); }
+  // אוזן
+  ctx.fillStyle = skin; ctx.beginPath(); if (front) { ctx.ellipse(hdx - R * .95, hdy + R * .05, R * .18, R * .28, 0, 0, 7); ctx.ellipse(hdx + R * .95, hdy + R * .05, R * .18, R * .28, 0, 0, 7); } else ctx.ellipse(hdx - dir * R * .8, hdy + R * .05, R * .2, R * .28, 0, 0, 7); ctx.fill(); if (outline) { ctx.strokeStyle = outline; ctx.lineWidth = OW * .8; ctx.stroke(); }
+  // שיער: כיפה עם פוני
+  ctx.fillStyle = hair; ctx.beginPath(); ctx.ellipse(hdx, hdy - R * .25, R * 1.02, R * .85, 0, Math.PI * 1.02, Math.PI * 1.98); ctx.lineTo(hdx + R * 1.0, hdy - R * .1); ctx.quadraticCurveTo(hdx + R * .5, hdy - R * .55, hdx + R * .1, hdy - R * .3); ctx.quadraticCurveTo(hdx - R * .3, hdy - R * .6, hdx - R * .7, hdy - R * .25); ctx.lineTo(hdx - R * 1.0, hdy - R * .1); ctx.closePath(); ctx.fill(); if (outline) { ctx.strokeStyle = outline; ctx.lineWidth = OW * .8; ctx.stroke(); }
+  // פנים: עיניים עם לבן, גבות, אף, פה
+  ctx.lineWidth = Math.max(1, 1.3 * scale); ctx.strokeStyle = '#1B1740';
+  const eye = (ex, ey) => { ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.ellipse(ex, ey, R * .2, R * .22, 0, 0, 7); ctx.fill(); ctx.fillStyle = '#1B1740'; ctx.beginPath(); ctx.arc(ex + (front ? 0 : dir * R * .05), ey + R * .03, R * .11, 0, 7); ctx.fill(); ctx.beginPath(); ctx.moveTo(ex - R * .22, ey - R * .32); ctx.lineTo(ex + R * .22, ey - R * .36); ctx.stroke(); };
+  if (front) { eye(hdx - R * .38, hdy - R * .02); eye(hdx + R * .38, hdy - R * .02); ctx.strokeStyle = shade(skin, -35); ctx.beginPath(); ctx.moveTo(hdx, hdy + R * .05); ctx.lineTo(hdx - R * .08, hdy + R * .3); ctx.stroke(); }
+  else { eye(hdx + dir * R * .42, hdy - R * .02); ctx.strokeStyle = shade(skin, -35); ctx.beginPath(); ctx.moveTo(hdx + dir * R * .85, hdy + R * .1); ctx.lineTo(hdx + dir * R * 1.0, hdy + R * .28); ctx.stroke(); }
+  ctx.strokeStyle = '#7C2D12'; ctx.lineWidth = Math.max(1, 1.4 * scale); ctx.beginPath(); if (happy) ctx.arc(hdx + (front ? 0 : dir * R * .4), hdy + R * .32, R * .38, front ? .25 : (dir > 0 ? .1 : Math.PI - .9), front ? Math.PI - .25 : (dir > 0 ? Math.PI * .9 : Math.PI + .1)); else { ctx.moveTo(hdx - R * .3 + (front ? 0 : dir * R * .4), hdy + R * .55); ctx.lineTo(hdx + R * .3 + (front ? 0 : dir * R * .4), hdy + R * .55); } ctx.stroke();
 }
 function shade(hex, amt) { const n = parseInt(hex.replace('#', '').padEnd(6, hex.length === 4 ? hex.slice(1) : '0'), 16); const c = k => Math.max(0, Math.min(255, ((n >> k) & 255) + amt)); return `rgb(${c(16)},${c(8)},${c(0)})`; }
 S.player = (r, pose, x, y, scale, kit, opts) => player(r.ctx, pose, x, y, scale, kit, opts);
