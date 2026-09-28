@@ -33,6 +33,11 @@ export function speak(text, { force = false } = {}) {
   synth.speak(u);
   return true;
 }
+// קריין באנגלית (GOAL!!!) או בשפה אחרת, בלי לבטל הגדרת קול עברי
+export function speakLang(text, lang = 'en-US', { rate = 0.9, pitch = 1.1 } = {}) {
+  if (!synth || store.profile.voice === false) return false;
+  try { synth.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = lang; u.rate = rate; u.pitch = pitch; const v = (synth.getVoices() || []).find(v => v.lang.startsWith(lang.slice(0, 2)) && /natural|neural|online|google|samantha|daniel/i.test(v.name)) || (synth.getVoices() || []).find(v => v.lang.startsWith(lang.slice(0, 2))); if (v) u.voice = v; synth.speak(u); return true; } catch { return false; }
+}
 export const stopSpeak = () => { try { synth && synth.cancel(); } catch { /* */ } };
 
 // ---- טקסטים מנוקדים לממשק ----

@@ -1,5 +1,5 @@
 // משחקי ספורט וקפיצה, עם דמויות מקלות אמיתיות (שוער שקופץ, רץ, קופץ), אפקטים וצלילים.
-import { POSE, GK, S } from './sprites.js';
+import { POSE, GK, S, KITS } from './sprites.js';
 const G = [];
 
 // עזר: גרירה מהכדור לקביעת כיוון וכוח
@@ -19,6 +19,7 @@ G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'נוגעים �
   make(r) {
     const goal = { x: 40, y: 70, w: 280, h: 120 };
     let ball = { x: r.W / 2, y: r.H - 90, tx: 0, ty: 0, t: -1 }, gk = { x: r.W / 2, pose: 'ready', dive: 0 }, msg = '', mt = 0, streak = 0, kicker = 0, kickT = 0, crowd = 0;
+    const fans = r.crowdGen(16, r.W, 2, 14, 20);
     return {
       tap(x, y) { if (ball.t >= 0) return; ball.tx = r.clamp(x, 20, r.W - 20); ball.ty = r.clamp(y, 40, r.H - 200); ball.t = 0; kickT = 0.3;
         // השוער מנחש: 60% לצד הנכון, בפינות הוא מגיע רק ב-45%
@@ -32,12 +33,12 @@ G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'נוגעים �
           mt = 1; ball = { x: r.W / 2, y: r.H - 90, tx: 0, ty: 0, t: -1 }; gk.dive = 0; setTimeout(() => { gk.x = r.W / 2; gk.pose = 'ready'; }, 700); } },
       draw() { r.clear('#15803D'); for (let i = 0; i < 6; i++) r.rect(0, 200 + i * 60, r.W, 30, '#16A34A'); // דשא
         // קהל
-        for (let i = 0; i < 18; i++) r.circle(10 + i * 20, 30 + Math.sin(crowd * 6 + i) * (mt > 0 && msg.startsWith('גול') ? 6 : 1), 7, ['#F472B6', '#60A5FA', '#FBBF24', '#34D399'][i % 4]);
+        r.rect(0, 0, r.W, goal.y - 4, '#1F2937'); r.crowd(fans, crowd, mt > 0 && msg.startsWith('גול'));
         S.net(r, goal.x, goal.y, goal.w, goal.h); r.line(goal.x, goal.y, goal.x + goal.w, goal.y, '#fff', 6); r.line(goal.x, goal.y, goal.x, goal.y + goal.h, '#fff', 6); r.line(goal.x + goal.w, goal.y, goal.x + goal.w, goal.y + goal.h, '#fff', 6);
         r.rect(0, goal.y + goal.h, r.W, 4, '#fff'); r.circle(r.W / 2, r.H - 90, 4, '#fff');
-        r.stick(GK[gk.pose], gk.x, goal.y + goal.h - 2, 0.62, { color: '#FACC15', far: '#CA8A04', head: '#FDE68A', width: 6 });
+        r.player(GK[gk.pose], gk.x, goal.y + goal.h - 2, 0.62, KITS.keeper, { happy: gk.pose !== 'diveL' && gk.pose !== 'diveR' });
         // הבועט
-        r.stick(kickT > 0 ? POSE.leap : POSE.stand, r.W / 2 - 40, r.H - 60, 0.5, { color: '#2563EB', far: '#1E40AF', width: 6 });
+        r.player(kickT > 0 ? POSE.leap : POSE.stand, r.W / 2 - 40, r.H - 60, 0.5, KITS.blue);
         const p = ball.t < 0 ? 0 : ball.t; const bx = ball.x + (ball.tx - ball.x) * p, by = ball.y + (ball.ty - ball.y) * p - Math.sin(p * Math.PI) * 40; S.soccer(r, bx, by, 16 - p * 7);
         if (streak > 1 && ball.t < 0) r.text(`רצף: ${streak} 🔥`, r.W / 2, r.H - 30, { size: 18, color: '#FDE047' });
         if (mt > 0) r.text(msg, r.W / 2, r.H / 2 + 20, { size: 32, color: '#FDE047' }); },
@@ -58,7 +59,7 @@ G.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀', how: 'גוררי
         if (ball.vy > 0 && py < hoop.y && ball.y >= hoop.y && Math.abs(ball.x - hoop.x) < 22) { streak++; const pts = ball.rim ? 20 : 30; r.addScore(pts + Math.min(streak - 1, 3) * 5); r.pop(ball.rim ? '+20' : 'סוויש! +30', hoop.x, hoop.y - 40, '#FDE047', 26); r.burst(hoop.x, hoop.y + 10, '#F97316', 18); r.sfx('score'); hoop = { x: r.rnd(200, 320), y: r.rnd(160, 280) }; reset(); return; }
         if (ball.x > r.W + 30 || ball.y > r.H + 30 || ball.x < -30) { streak = 0; reset(); } },
       draw() { r.clear('#FDE68A'); r.rect(0, r.H - 40, r.W, 40, '#B45309'); r.line(0, r.H - 40, r.W, r.H - 40, '#fff', 2); S.hoop(r, hoop.x, hoop.y);
-        r.stick(shooterT > 0 ? POSE.jumpUp : POSE.stand, ball.fly ? 100 : ball.x, r.H - 40, 0.5, { color: '#7C3AED', far: '#5B21B6', width: 6 });
+        r.player(shooterT > 0 ? POSE.jumpUp : POSE.stand, ball.fly ? 100 : ball.x, r.H - 40, 0.5, KITS.purple);
         trail.forEach((t, i) => r.circle(t.x, t.y, 3 + i * 0.4, `rgba(249,115,22,${i / 24})`)); d.drawAim(); S.ball(r, ball.x, ball.y, 14);
         if (streak > 1) r.text(`רצף ${streak} 🔥`, r.W / 2, 40, { size: 20, color: '#92400E' }); },
     };
@@ -203,7 +204,7 @@ G.push({ id: 'fishing', name: 'דיג', emoji: '🎣', how: 'מחזיקים כד
         if (caught) { caught.x = r.W / 2; caught.y = hy + 10; if (hy <= 81) { const pts = caught.s * 10; r.addScore(pts); r.pop('+' + pts, r.W / 2, 60, '#FDE047'); r.sfx('score'); caught = null; } } },
       draw() { r.clear('#0EA5E9'); r.rect(0, 0, r.W, 80, '#7DD3FC'); S.cloud(r, 70, 30, 0.8); const c = r.ctx; c.fillStyle = '#0369A1'; c.beginPath(); c.moveTo(0, 130); for (let x = 0; x <= r.W; x += 10) c.lineTo(x, 130 + Math.sin(wave * 2 + x / 30) * 4); c.lineTo(r.W, r.H); c.lineTo(0, r.H); c.fill();
         // סירה ודייג
-        c.fillStyle = '#92400E'; c.beginPath(); c.moveTo(r.W / 2 - 60, 100); c.lineTo(r.W / 2 + 30, 100); c.lineTo(r.W / 2 + 18, 120); c.lineTo(r.W / 2 - 48, 120); c.fill(); r.stick(POSE.sit, r.W / 2 - 20, 104, 0.32, { color: '#1E3A8A', far: '#1E40AF' }); r.line(r.W / 2 - 12, 82, r.W / 2, 70, '#78350F', 3); r.line(r.W / 2, 70, r.W / 2, hy, '#fff', 1.5); r.line(r.W / 2, hy, r.W / 2 - 5, hy + 6, '#9CA3AF', 2);
+        c.fillStyle = '#92400E'; c.beginPath(); c.moveTo(r.W / 2 - 60, 100); c.lineTo(r.W / 2 + 30, 100); c.lineTo(r.W / 2 + 18, 120); c.lineTo(r.W / 2 - 48, 120); c.fill(); r.player(POSE.sit, r.W / 2 - 20, 104, 0.32, KITS.blue); r.line(r.W / 2 - 12, 82, r.W / 2, 70, '#78350F', 3); r.line(r.W / 2, 70, r.W / 2, hy, '#fff', 1.5); r.line(r.W / 2, hy, r.W / 2 - 5, hy + 6, '#9CA3AF', 2);
         const drawFish = f => { if (f.jelly) { r.circle(f.x, f.y, 12, '#F0ABFCAA'); for (let k = -1; k <= 1; k++) r.line(f.x + k * 6, f.y + 8, f.x + k * 8, f.y + 22 + Math.sin(wave * 6 + k) * 3, '#F0ABFC', 2); return; } const sz = 10 + f.s * 6; c.fillStyle = f.hue; c.beginPath(); c.ellipse(f.x, f.y, sz, sz * 0.55, 0, 0, Math.PI * 2); c.fill(); c.beginPath(); c.moveTo(f.x - f.dir * sz, f.y); c.lineTo(f.x - f.dir * sz * 1.6, f.y - sz * 0.5); c.lineTo(f.x - f.dir * sz * 1.6, f.y + sz * 0.5); c.fill(); r.circle(f.x + f.dir * sz * 0.5, f.y - 2, 2.5, '#111'); };
         fish.forEach(drawFish); if (caught) drawFish(caught); },
     };
@@ -221,7 +222,7 @@ G.push({ id: 'rope-timing', name: 'קפיצה בחבל בזמן', emoji: '🪢',
         else jumped = false; },
       draw() { r.clear('#FDF2F8'); r.rect(0, r.H - 60, r.W, 60, '#F9A8D4'); const cx = r.W / 2, cy = r.H - 200; const ry = 150 * Math.sin(ang), rx = 120;
         r.ctx.strokeStyle = '#7C3AED'; r.ctx.lineWidth = 4; r.ctx.beginPath(); r.ctx.ellipse(cx, cy, rx, Math.abs(ry), 0, ry > 0 ? 0 : Math.PI, ry > 0 ? Math.PI : Math.PI * 2); r.ctx.stroke();
-        r.stick(jy < -5 ? POSE.hop : POSE.front, cx, r.H - 60 + jy, 0.75, { color: '#BE185D', far: '#9D174D', width: 6 }); r.text(`רצף: ${combo}`, cx, 40, { size: 20, color: '#7C3AED' }); },
+        r.player(jy < -5 ? POSE.hop : POSE.front, cx, r.H - 60 + jy, 0.75, KITS.red); r.text(`רצף: ${combo}`, cx, 40, { size: 20, color: '#7C3AED' }); },
     };
   } });
 
@@ -239,7 +240,7 @@ G.push({ id: 'ski', name: 'סקי סלאלום', emoji: '⛷️', how: 'מזיז
           if (i.k === 'ramp' && !i.passed && Math.abs(i.y - 120) < 10 && Math.abs(x - i.x) < 30) { i.passed = true; air = 0.8; r.addScore(15); r.pop('קפיצה! +15', x, 80, '#F59E0B', 24); r.sfx('win'); }
           if (i.k === 'tree' && air <= 0 && r.dist(i.x, i.y, x, 120) < 24) return r.over('נכנסת בעץ!'); } },
       draw() { r.clear('#F8FAFC'); snow.forEach(s => r.circle(s.x, s.y, 1.5, '#CBD5E1')); items.forEach(i => { if (i.k === 'gate') { r.rect(i.x - 52, i.y - 20, 4, 40, '#EF4444'); r.rect(i.x - 52, i.y - 20, 16, 12, '#EF4444'); r.rect(i.x + 48, i.y - 20, 4, 40, '#1D4ED8'); r.rect(i.x + 48, i.y - 20, 16, 12, '#1D4ED8'); } else if (i.k === 'tree') S.tree(r, i.x, i.y); else r.rect(i.x - 30, i.y - 10, 60, 20, '#94A3B8', 6); });
-        const sc = 0.45 + air * 0.15; S.skis(r, x, 120 + (air > 0 ? -20 : 0)); r.stick(air > 0 ? POSE.leap : POSE.squat, x, 122 - (air > 0 ? 20 : 0), sc, { color: '#1D4ED8', far: '#1E40AF', width: 6 }); },
+        const sc = 0.45 + air * 0.15; S.skis(r, x, 120 + (air > 0 ? -20 : 0)); r.player(air > 0 ? POSE.leap : POSE.squat, x, 122 - (air > 0 ? 20 : 0), sc, KITS.blue); },
     };
   } });
 
@@ -255,8 +256,8 @@ G.push({ id: 'hurdles', name: 'ריצת משוכות', emoji: '🏃‍♂️', h
         for (const h of hs) { if (!h.hit && !h.passed && Math.abs(h.x - 70) < 16) { if (y > GY - 40) { h.hit = true; sp = 200; r.addScore(-5); r.pop('אאוץ׳', 70, GY - 70, '#EF4444'); r.shake(150); r.sfx('hit'); } } if (!h.passed && h.x < 50) { h.passed = true; if (!h.hit) { cleared++; r.addScore(10); r.pop('+10', 70, GY - 90, '#22C55E'); r.sfx('tick'); } } } },
       draw() { r.clear('#DBEAFE'); clouds.forEach(c => S.cloud(r, c.x, c.y)); r.rect(0, GY, r.W, r.H - GY, '#B45309'); for (let i = 0; i < 8; i++) r.rect(((i * 50 - run * 120) % (r.W + 50) + r.W + 50) % (r.W + 50) - 25, GY + 20, 40, 4, '#fff');
         hs.forEach(h => { r.rect(h.x - 3, GY - 44, 6, 44, h.hit ? '#9CA3AF' : '#fff'); r.rect(h.x - 22, GY - 44, 44, 6, h.hit ? '#9CA3AF' : '#EF4444'); r.rect(h.x - 22, GY - 22, 44, 4, h.hit ? '#9CA3AF' : '#fff'); });
-        r.stick(r.anim(POSE.run, run * 1000), rival, GY, 0.5, { color: '#9CA3AF', far: '#6B7280', head: '#E5E7EB' });
-        r.stick(y < GY - 2 ? POSE.leap : r.anim(POSE.run, run * 1000), 70, y, 0.55, { color: '#7C3AED', far: '#5B21B6', width: 6 }); r.text(`משוכות: ${cleared}`, r.W / 2, 40, { size: 18, color: '#1E3A8A' }); },
+        r.player(r.anim(POSE.run, run * 1000), rival, GY, 0.5, KITS.grey);
+        r.player(y < GY - 2 ? POSE.leap : r.anim(POSE.run, run * 1000), 70, y, 0.55, KITS.purple); r.text(`משוכות: ${cleared}`, r.W / 2, 40, { size: 18, color: '#1E3A8A' }); },
     };
   } });
 
@@ -271,7 +272,7 @@ G.push({ id: 'long-jump', name: 'קפיצה לרוחק', emoji: '🥇', how: 'נ
         if (phase === 'air') { vy += 700 * dt; jy += vy * dt; x += sp * dt; if (jy >= 0) { jy = 0; const m = Math.max(0, (x - LINE) / 40); res = `${m.toFixed(2)} מטר!`; r.addScore(Math.round(m * 10)); r.burst(x, r.H - 120, '#FBBF24', 16); r.sfx(m > best ? 'win' : 'score'); phase = 'done'; rt = 1.5; if (m > best) { best = m; if (best > 0.5) r.pop('שיא חדש!', x, r.H - 200, '#EF4444', 26); } } }
         if ((phase === 'done' || phase === 'foul') && rt <= 0) { phase = 'run'; x = 20; sp = 0; jy = 0; } },
       draw() { r.clear('#FCE7F3'); r.rect(0, r.H - 120, r.W, 120, '#DC2626'); for (let i = 0; i < 6; i++) r.rect(i * 60, r.H - 118, 40, 2, '#fff'); r.rect(LINE, r.H - 120, 4, 120, '#fff'); r.rect(LINE + 4, r.H - 120, r.W, 120, '#FBBF24'); for (let m = 1; m <= 3; m++) { r.line(LINE + m * 40, r.H - 120, LINE + m * 40, r.H - 100, '#fff', 2); r.text(m + 'מ', LINE + m * 40, r.H - 85, { size: 12, color: '#7C2D12' }); }
-        const pose = phase === 'air' ? POSE.leap : phase === 'done' ? POSE.squat : phase === 'foul' ? POSE.stand : sp > 5 ? r.anim(POSE.run, run * 1000) : POSE.ready; r.stick(pose, x, r.H - 120 + jy, 0.5, { color: '#BE185D', far: '#9D174D', width: 6 });
+        const pose = phase === 'air' ? POSE.leap : phase === 'done' ? POSE.squat : phase === 'foul' ? POSE.stand : sp > 5 ? r.anim(POSE.run, run * 1000) : POSE.ready; r.player(pose, x, r.H - 120 + jy, 0.5, KITS.red);
         r.rect(20, 30, r.W - 40, 14, '#00000022', 7); r.rect(20, 30, (r.W - 40) * sp / 320, 14, sp > 250 ? '#22C55E' : '#F59E0B', 7); r.text('מהירות', r.W / 2, 60, { size: 14, color: '#831843' });
         if (rt > 0) r.text(res, r.W / 2, r.H / 2 - 40, { size: 26, color: '#831843' }); if (best) r.text(`השיא: ${best.toFixed(2)} מ׳`, r.W / 2, 90, { size: 16, color: '#831843' }); },
     };

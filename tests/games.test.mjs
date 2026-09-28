@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { GAMES, GAME_GROUPS, pickGift, gameById } from '../workout/js/games/index.js';
-import { POSE, GK, S } from '../workout/js/games/sprites.js';
+import { POSE, GK, S, KITS, player, crowd, crowdGen } from '../workout/js/games/sprites.js';
 
 test('catalog: 50 or more games, unique ids, all fields', () => {
   assert.ok(GAMES.length >= 50, 'games: ' + GAMES.length);
@@ -31,7 +31,7 @@ test('every game runs headless: make, update, draw, input', () => {
       rnd: (a = 1, b) => b == null ? Math.random() * a : a + Math.random() * (b - a), rint: (a, b) => Math.floor(a + Math.random() * (b - a + 1)), pick: a => a[Math.floor(Math.random() * a.length)],
       shuffle: a => [...a].sort(() => Math.random() - .5), clamp: (v, a, b) => Math.max(a, Math.min(b, v)),
       get score() { return score; }, get timeLeft() { return 60; }, addScore: n => { score += n; }, setScore: n => { score = n; }, over: () => { overs++; }, win: () => {},
-      clear: noop, rect: noop, circle: noop, line: noop, text: noop, emoji: noop, sfx: noop, pop: noop, burst: noop, shake: noop, stick: noop, anim: (frames) => frames[0][0],
+      clear: noop, rect: noop, circle: noop, line: noop, text: noop, emoji: noop, sfx: noop, pop: noop, burst: noop, shake: noop, stick: noop, player: noop, crowd: noop, crowdGen: () => [], anim: (frames) => frames[0][0],
       hit: (ax, ay, aw, ah, bx, by, bw, bh) => ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by, dist: (x1, y1, x2, y2) => Math.hypot(x2 - x1, y2 - y1) };
     return r;
   };
@@ -54,5 +54,18 @@ test('sprites: every pose has all joints; every sprite draws on a fake context',
   const noop = () => {};
   const ctx = new Proxy({}, { get: (t, k) => (k in t ? t[k] : noop), set: (t, k, v) => { t[k] = v; return true; } });
   const r = { ctx, rect: noop, circle: noop, line: noop, text: noop, emoji: noop };
-  for (const [name, fn] of Object.entries(S)) { fn(r, 100, 100, 20, 20, '#000', 1); assert.ok(true, name); }
+  for (const [name, fn] of Object.entries(S)) { if (name === 'player' || name === 'crowd') continue; fn(r, 100, 100, 20, 20, '#000', 1); assert.ok(true, name); }
+});
+
+test('player renderer and crowd draw for every pose and kit on a fake context', () => {
+  const noop = () => {};
+  const ctx = new Proxy({}, { get: (t, k) => (k in t ? t[k] : noop), set: (t, k, v) => { t[k] = v; return true; } });
+  for (const pose of Object.values({ ...POSE, ...GK }).map(v => Array.isArray(v) ? v[0][0] : v)) for (const kit of Object.values(KITS)) { player(ctx, pose, 100, 100, 0.5, kit); player(ctx, pose, 100, 100, 0.5, kit, { flip: true, happy: false }); }
+  const fans = crowdGen(10, 360, 2); assert.equal(fans.length, 20); crowd(ctx, fans, 1, true); crowd(ctx, fans, 2, false);
+});
+
+test('celebration module: scenes exist and setup/draw run on a fake canvas', async () => {
+  const { SCENE_IDS, celebrate } = await import('../workout/js/games/celebrate.js');
+  assert.deepEqual(SCENE_IDS, ['goal', 'header', 'dunk', 'sprint']);
+  assert.equal(typeof celebrate, 'function');
 });

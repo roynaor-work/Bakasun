@@ -1,5 +1,5 @@
 // עוד משחקים: הוקי אוויר, יהלומים, לוליין, יורה בועות, חץ למטרה, ביליארד, כדורעף, דוחף קופסאות, ציור לפי מספרים, ניחוש מילה, צייר מהזיכרון, איפה הכדור
-import { POSE, S } from './sprites.js';
+import { POSE, S, KITS } from './sprites.js';
 export const arcade = [], sport = [], puzzle = [], quick = [];
 
 // ---- הוקי אוויר ----
@@ -56,7 +56,7 @@ arcade.push({ id: 'juggle', name: 'הלוליין', emoji: '🤹', how: 'נוג�
       update(dt) { t += dt; if (t > 8) { t = 0; balls.push({ x: r.rnd(60, r.W - 60), y: 100, vx: 0, vy: 0, e: E[balls.length % E.length] }); }
         for (const b of balls) { b.vy += 500 * dt; b.x += b.vx * dt; b.y += b.vy * dt; if (b.x < 20 || b.x > r.W - 20) { b.vx *= -1; b.x = r.clamp(b.x, 20, r.W - 20); } if (b.y > r.H - 30) return r.over('כדור נפל!'); } },
       down(x, y) { const b = balls.find(b => r.dist(x, y, b.x, b.y) < 34); if (b) { b.vy = -560; b.vx = r.clamp((b.x - x) * 12 + r.rnd(-40, 40), -220, 220); r.addScore(1 + balls.length); r.burst(b.x, b.y + 10, '#fff', 5, 90); r.sfx('bounce'); } },
-      draw() { r.clear('#FEF3C7'); r.rect(0, r.H - 20, r.W, 20, '#92400E'); const jx = r.clamp(balls.reduce((s, b) => s + b.x, 0) / balls.length, 40, r.W - 40); r.stick(POSE.armsUp, jx, r.H - 20, 0.42, { color: '#B45309', far: '#92400E', width: 6 }); balls.forEach(b => r.emoji(b.e, b.x, b.y, 40)); r.text(`${balls.length} כדורים`, r.W / 2, 30, { size: 18, color: '#92400E' }); },
+      draw() { r.clear('#FEF3C7'); r.rect(0, r.H - 20, r.W, 20, '#92400E'); const jx = r.clamp(balls.reduce((s, b) => s + b.x, 0) / balls.length, 40, r.W - 40); r.player(POSE.armsUp, jx, r.H - 20, 0.42, KITS.orange); balls.forEach(b => r.emoji(b.e, b.x, b.y, 40)); r.text(`${balls.length} כדורים`, r.W / 2, 30, { size: 18, color: '#92400E' }); },
     };
   } });
 
@@ -132,7 +132,7 @@ sport.push({ id: 'volley', name: 'כדורעף', emoji: '🏐', how: 'אתה ב�
         if (Math.abs(ball.x - NET) < 16 && ball.y > GY - 110) { ball.vx = ball.x < NET ? -Math.abs(ball.vx) : Math.abs(ball.vx); }
         if (ball.y > GY - 8) { if (ball.x > NET) { r.addScore(10); msg = 'נקודה! 🏐'; r.burst(ball.x, GY, '#F59E0B', 14); r.sfx('score'); } else { msg = 'נקודה למחשב'; r.sfx('hit'); } mt = 1; ball = serve(ball.x > NET ? 1 : -1); } },
       tap() { if (me.y >= GY) { me.vy = -520; r.sfx('bounce'); } },
-      draw() { r.clear('#FDE68A'); r.circle(300, 60, 28, '#FBBF24'); S.cloud(r, 90, 70); r.rect(0, GY, r.W, r.H - GY, '#F59E0B'); for (let i = 0; i < 12; i++) r.rect(i * 30, GY + 10, 18, 3, '#D97706'); r.rect(NET - 3, GY - 110, 6, 110, '#374151'); S.net(r, NET - 3, GY - 110, 6, 110); r.stick(me.y < GY - 2 ? POSE.jumpUp : POSE.shuffle, me.x, me.y, 0.5, { color: '#1D4ED8', far: '#1E40AF', width: 6 }); r.stick(ai.y < GY - 2 ? POSE.jumpUp : POSE.shuffle, ai.x, ai.y, 0.5, { color: '#9CA3AF', far: '#6B7280', head: '#E5E7EB', flip: true }); r.circle(ball.x, ball.y, 12, '#fff'); r.ctx.strokeStyle = '#1D4ED8'; r.ctx.lineWidth = 2; r.ctx.beginPath(); r.ctx.arc(ball.x, ball.y, 12, 0, Math.PI * 2); r.ctx.stroke(); r.ctx.beginPath(); r.ctx.arc(ball.x - 4, ball.y, 12, -0.8, 0.8); r.ctx.stroke(); if (mt > 0) r.text(msg, r.W / 2, 80, { size: 28, color: '#78350F' }); },
+      draw() { r.clear('#FDE68A'); r.circle(300, 60, 28, '#FBBF24'); S.cloud(r, 90, 70); r.rect(0, GY, r.W, r.H - GY, '#F59E0B'); for (let i = 0; i < 12; i++) r.rect(i * 30, GY + 10, 18, 3, '#D97706'); r.rect(NET - 3, GY - 110, 6, 110, '#374151'); S.net(r, NET - 3, GY - 110, 6, 110); r.player(me.y < GY - 2 ? POSE.jumpUp : POSE.shuffle, me.x, me.y, 0.5, KITS.blue); r.player(ai.y < GY - 2 ? POSE.jumpUp : POSE.shuffle, ai.x, ai.y, 0.5, KITS.grey, { flip: true }); r.circle(ball.x, ball.y, 12, '#fff'); r.ctx.strokeStyle = '#1D4ED8'; r.ctx.lineWidth = 2; r.ctx.beginPath(); r.ctx.arc(ball.x, ball.y, 12, 0, Math.PI * 2); r.ctx.stroke(); r.ctx.beginPath(); r.ctx.arc(ball.x - 4, ball.y, 12, -0.8, 0.8); r.ctx.stroke(); if (mt > 0) r.text(msg, r.W / 2, 80, { size: 28, color: '#78350F' }); },
     };
   } });
 
