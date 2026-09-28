@@ -143,14 +143,14 @@ const SCENES = {
         keeper(ctx, t, 1.9, HIT, gkDir, W / 2, GL);
         // מוסר מהצד (עם בעיטה), נוגח באמצע
         player(ctx, t < .45 ? POSE.leap : POSE.stand, 44, H - 50, .6, KITS.green);
-        const hx = W / 2 + 30, hgy = H - 130; const jump = t > 1.45 && t < 2.45 ? Math.sin(clamp((t - 1.45) / 1, 0, 1) * Math.PI) * 70 : 0;
+        const hx = W / 2 + 30, hgy = GL + 118; /* קרוב לשער, כמו בקרן */ const jump = t > 1.45 && t < 2.45 ? Math.sin(clamp((t - 1.45) / 1, 0, 1) * Math.PI) * 70 : 0;
         const ppose = t < 1.45 ? POSE.stand : t < 2.45 ? HEADER : (Math.sin(t * 6) > 0 ? POSE.armsUp : POSE.jumpUp);
         const px = hx + (t > 2.45 ? -70 * ease(clamp((t - 2.45) / .6, 0, 1)) : 0), py = hgy - jump - (t > 2.45 ? Math.abs(Math.sin(t * 6)) * 24 : 0);
         groundShadow(ctx, px, hgy + 2, 20, jump); player(ctx, ppose, px, py, .72, KITS.blue, { shadow: false });
         // הכדור: מסירה גבוהה מהצד לראש, ומהראש לרשת
-        const headY = hgy - 72 * .72 - 70; let gx, gy, h, r = 16, rot = t * 3;
-        if (t < 1.95) { const k = ease(clamp((t - .3) / 1.65, 0, 1)); gx = 44 + (hx + 6 - 44) * k; gy = H - 60 + (hgy - (H - 60)) * k; h = Math.sin(k * Math.PI) * 150 + (hgy - headY) * k; r = 18 - 3 * k; if (s.trail.length < 8 && k > .2 && k < 1) s.trail.push({ x: gx, y: gy - h, r, rot }); }
-        else { const k = easeOut(clamp((t - 1.95) / .45, 0, 1)); gx = hx + 6 + (tx - hx - 6) * k; gy = hgy + (GL + 6 - hgy) * k; h = (hgy - headY) + ((GL + 6 - ty) - (hgy - headY)) * k; r = 15 - 7 * k; rot = t * 3 + k * 10; }
+        const headY = hgy - 70 - (182 - 62) * .72; /* הראש בשיא הקפיצה (70) לפי פוזת הנגיחה */ let gx, gy, h, r = 16, rot = t * 3;
+        if (t < 1.95) { const k = ease(clamp((t - .3) / 1.65, 0, 1)); gx = 44 + (hx + 9 - 44) * k; gy = H - 60 + (hgy - (H - 60)) * k; h = Math.sin(k * Math.PI) * 150 + (hgy - headY) * k; r = 18 - 3 * k; if (s.trail.length < 8 && k > .2 && k < 1) s.trail.push({ x: gx, y: gy - h, r, rot }); }
+        else { const k = easeOut(clamp((t - 1.95) / .45, 0, 1)); gx = hx + 9 + (tx - hx - 9) * k; gy = hgy + (GL + 6 - hgy) * k; h = (hgy - headY) + ((GL + 6 - ty) - (hgy - headY)) * k; r = 15 - 7 * k; rot = t * 3 + k * 10; }
         if (t > HIT) { gx = tx; gy = GL + 6; h = GL + 6 - ty - Math.min(18, (t - HIT) * 30); r = 8; }
         flyingBall(ctx, 'soccer', gx, gy, h, r, rot, t > 1.95 && t < HIT + .3 ? s.trail.slice(-5) : null);
       });
@@ -289,6 +289,6 @@ export function renderStill(canvas, scene = 'goal', t = 2.6) {
   const sc = SCENES[SCENE_IDS.includes(scene) ? scene : 'goal'];
   const s = { ...sc.setup(W, H), oldBest: 0, newBest: 0 };
   const F = { burst() {}, confetti() {}, flash() {}, draw() {}, count: 999 };
-  for (let tt = 0; tt <= t; tt += .1) sc.draw(ctx, W, H, tt, .1, s, F, () => {}); // מריצים עד הרגע כדי שהשובל והרשת יהיו במקום
+  for (let tt = Math.max(0, t - 1); tt <= t; tt += .1) sc.draw(ctx, W, H, tt, .1, s, F, () => {}); // מריצים את השנייה האחרונה כדי שהשובל והרשת יהיו במקום (מהיר גם בטלפון)
 }
 export const STILL_T = { goal: 2.6, header: 2.7, dunk: 2.4, three: 2.85, sprint: 3.4 };

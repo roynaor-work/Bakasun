@@ -58,7 +58,7 @@ test('sprites: every pose has all joints; every sprite draws on a fake context',
   const ctx = fakeCtx();
   const r = { ctx, rect: noop, circle: noop, line: noop, text: noop, emoji: noop };
   for (const [name, fn] of Object.entries(S)) { if (name === 'player' || name === 'crowd') continue; fn(r, 100, 100, 20, 20, '#000', 1); assert.ok(true, name); }
-  S.face(r, 100, 100, 14, [1, 0], 1, null); S.face(r, 100, 100, 14, [0, 1], 0, null); S.cow(r, 80, 100, 1, 2); S.poop(r, 50, 50, 1); S.pouch(r, 50, 50, 1, 1); S.toilet(r, 10, 10, 56, 100); S.underpants(r, 10, 0, 56, 100); for (const v of [20, 50, 100, 200]) S.banknote(r, 50, 50, v, .1, 1);
+  S.face(r, 100, 100, 14, [1, 0], 1, null); S.face(r, 100, 100, 14, [0, 1], 0, null); S.cow(r, 80, 100, 1, 2); S.poop(r, 50, 50, 1); S.pouch(r, 50, 50, 1, 1); S.burger(r, 50, 50, 1, 1); S.toilet(r, 10, 10, 56, 100); S.underpants(r, 10, 0, 56, 100); for (const v of [20, 50, 100, 200]) S.banknote(r, 50, 50, v, .1, 1);
 });
 
 test('player renderer and crowd draw for every pose and kit on a fake context', () => {
