@@ -35,6 +35,7 @@ G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'נוגעים �
           if (k >= 1) { const inGoal = shot.tx > goal.x + 8 && shot.tx < goal.x + goal.w - 8 && shot.ty > goal.y + 6 && shot.ty < GL; const nearGk = Math.abs(gk.x - shot.tx) < 46 && shot.ty > goal.y + 8; const corner = Math.abs(shot.tx - BX) > 100 || shot.ty < goal.y + 40;
             if (inGoal && !nearGk) { streak++; goals++; const pts = 10 * Math.min(3, streak) + (corner ? 5 : 0); r.addScore(pts); r.pop('+' + pts, shot.tx, shot.ty - 20, '#FDE047', 28); r.burst(shot.tx, shot.ty, '#fff', 20, 260); r.sfx('goal'); msg = streak >= 3 ? `גול! רצף ${streak} 🔥` : 'גוווול! ⚽'; bulge = 1; }
             else { streak = 0; msg = inGoal ? 'השוער עצר! 🧤' : 'החוצה... 😂'; r.sfx(inGoal ? 'hit' : 'laugh'); if (!inGoal) setTimeout(() => r.sfx('laugh'), 350); gk.pose = inGoal ? 'up' : 'ready'; gk.laugh = 1.5; if (inGoal) r.shake(180); }
+            if (msg.startsWith('ג')) gk.pose = gk.dive < 0 ? 'lyingL' : 'lyingR'; // נוחת על הדשא אחרי שהכדור נכנס
             phase = 'after'; ph = 0; } return; }
         if (phase === 'after' && ph > 1.3) resetBall(); },
       draw() { r.clear('#15803D'); for (let i = 0; i < 6; i++) r.rect(0, 200 + i * 60, r.W, 30, '#16A34A');
@@ -44,7 +45,7 @@ G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'נוגעים �
         r.line(goal.x, goal.y, goal.x + goal.w, goal.y, '#fff', 6); r.line(goal.x, goal.y, goal.x, GL, '#fff', 6); r.line(goal.x + goal.w, goal.y, goal.x + goal.w, GL, '#fff', 6);
         r.rect(0, GL, r.W, 4, '#fff'); r.circle(BX, BY, 4, '#fff');
         // השוער: צוחק כשהבועט מחטיא (קופץ ומנענע), חוזר למרכז לפני כל בעיטה
-        const laughing = gk.laugh > 0 && msg.startsWith('החוצה'); const gy = GL - 2 - (laughing ? Math.abs(Math.sin(tt * 14)) * 10 : 0); r.player(GK[gk.pose], gk.x, gy, 0.62, KITS.keeper, { happy: gk.pose !== 'diveL' && gk.pose !== 'diveR' }); if (laughing) r.text('חה חה חה!', gk.x, GL - 100, { size: 18, color: '#fff' });
+        const laughing = gk.laugh > 0 && msg.startsWith('החוצה'); const air = phase === 'fly' ? Math.sin(Math.min(1, ph / .5) * Math.PI) * 26 : 0; const gy = GL - 2 - air - (laughing ? Math.abs(Math.sin(tt * 14)) * 10 : 0); r.player(GK[gk.pose], gk.x, gy, 0.62, KITS.keeper, { happy: gk.pose !== 'diveL' && gk.pose !== 'diveR' }); if (laughing) r.text('חה חה חה!', gk.x, GL - 100, { size: 18, color: '#fff' });
         if (phase === 'aim' && ready < 1) r.text('השוער מתמקם...', r.W / 2, GL + 40, { size: 14, color: '#bbf7d0' });
         // הבועט: רץ מהצד אל הכדור ובועט
         let px = BX - 110, py = BY + 30, pose = POSE.stand; if (phase === 'run') { const k = ph / .55; px = BX - 110 + 84 * k; py = BY + 30 - 8 * Math.sin(k * Math.PI); pose = POSE.run[Math.floor(k * 6) % POSE.run.length][0]; } else if (phase === 'fly' || (phase === 'after' && ph < .4)) { px = BX - 26; py = BY + 30; pose = POSE.leap; } else if (phase === 'after') { px = BX - 26; py = BY + 30 - (msg.startsWith('ג') ? Math.abs(Math.sin(tt * 8)) * 22 : 0); pose = msg.startsWith('ג') ? POSE.armsUp : POSE.stand; }
