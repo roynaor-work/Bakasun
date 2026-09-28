@@ -1,6 +1,6 @@
 // אחסון מקומי בדפדפן. הנתונים נשארים במכשיר; מחיקה רק דרך ההגדרות ובאישור.
 const KEY = 'kidfit.v1';
-const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true, plan: null, giftEvery: 1, gameSeconds: 90 }, sessions: [], tokens: 0, games: { bests: {}, played: {}, recent: [], count: 0 } };
+const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true, plan: null, giftEvery: 1, gameSeconds: 90, voice: true }, sessions: [], tokens: 0, games: { bests: {}, played: {}, recent: [], count: 0 } };
 
 function load() {
   try {

@@ -74,6 +74,9 @@ p { margin: 0; }
 .pill.warm { background: var(--c-warm); color: #fff; }
 .pill.stretch { background: var(--c-stretch); color: #fff; }
 .pill.block { background: var(--ink); color: var(--card); }
+.pill.hall { background: #7C3AED; color: #fff; }
+.btn.help { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.helpcard { border: 2px solid var(--accent); }
 
 .prog { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; }
 .prog .emoji { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; font-size: 34px; background: var(--accent-soft); }

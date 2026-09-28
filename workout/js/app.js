@@ -17,6 +17,7 @@ let figures = [], activeGame = null;
 function mount(html, full = false) {
   figures.forEach(f => f.stop()); figures = [];
   if (activeGame) { activeGame.stop(); activeGame = null; }
+  stopSpeak();
   clearInterval(tick); tick = 0;
   app.innerHTML = html; app.classList.toggle('full', full);
   nav.classList.toggle('hidden', full);
@@ -27,6 +28,27 @@ function figs(sel = 'svg[data-ex]') { return [...app.querySelectorAll(sel)].map(
 const figSvg = (exId, cls = '') => `<svg class="figure ${cls}" data-ex="${exId}" aria-hidden="true"></svg>`;
 const catPill = cat => `<span class="pill ${cat}">${CATS[cat].emoji} ${CATS[cat].name}</span>`;
 const stepsHtml = ex => `<ol class="steps">${ex.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol>`;
+const placePill = ex => ex.place === 'hall' ? '<span class="pill hall">🚪 במסדרון</span>' : '';
+// כפתור עזרה: רק כשלוחצים נפתח הסבר, האנימציה מואטת והטקסט מוקרא בעברית
+function helpButton() { return `<button class="btn big help" id="help">❓ איך עושים את זה?</button><div id="helpbox" hidden></div>`; }
+function wireHelp(ex, mainFig) {
+  const btn = $('#help'), box = $('#helpbox'); if (!btn) return;
+  let open = false;
+  btn.onclick = () => {
+    open = !open;
+    if (!open) { box.hidden = true; box.innerHTML = ''; btn.textContent = '❓ איך עושים את זה?'; stopSpeak(); mainFig && mainFig.play(ex, 1); return; }
+    btn.textContent = '✖ סגור את ההסבר';
+    box.hidden = false;
+    box.innerHTML = `<div class="card stack helpcard pop">
+      <div class="row between"><h3>איך עושים ${esc(ex.name)}</h3><button class="btn chip" id="sayagain">🔊 להשמיע שוב</button></div>
+      ${stepsHtml(ex)}<div class="tip">👀 ${esc(ex.tip)}</div>
+      <p class="muted small">האנימציה עכשיו לאט. ${canSpeak() && store.profile.voice !== false ? 'ההסבר מוקרא בקול.' : 'אין קול במכשיר הזה, קוראים.'}</p>
+    </div>`;
+    mainFig && mainFig.play(ex, 0.55);
+    speak(sayText(ex));
+    $('#sayagain').onclick = () => speak(sayText(ex));
+  };
+}
 
 // ---- צליל ----
 let ac;
@@ -41,6 +63,22 @@ function beep(freq = 880, ms = 120, at = 0) {
   } catch { /* בלי צליל */ }
 }
 const fanfare = () => { beep(660, 120); beep(880, 120, .14); beep(1100, 260, .28); };
+
+// ---- קול הדרכה בעברית (Web Speech API, הקול של המכשיר) ----
+const speech = window.speechSynthesis;
+const hebrewVoice = () => (speech?.getVoices() || []).find(v => /^he/i.test(v.lang)) || null;
+const canSpeak = () => !!speech;
+function speak(text) {
+  if (!speech || store.profile.voice === false) return false;
+  speech.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'he-IL'; u.rate = 0.95; u.pitch = 1.05;
+  const v = hebrewVoice(); if (v) u.voice = v;
+  speech.speak(u);
+  return true;
+}
+const stopSpeak = () => { try { speech && speech.cancel(); } catch { /* אין קול */ } };
+const sayText = ex => ex.say || `${ex.name}. ${ex.steps.join('. ')}. שימו לב: ${ex.tip}`;
 function confetti() {
   const c = document.createElement('div'); c.className = 'confetti';
   const colors = ['#FF7A3D', '#FF4D8D', '#1FB6C9', '#6C4CF1', '#FFB84D', '#22C55E'];
@@ -208,8 +246,8 @@ function exerciseDetail(id) {
   <div class="stack">
     <div class="row between"><button class="btn icon ghost" data-go="#/exercises" aria-label="חזרה">→</button><h1 class="grow">${esc(ex.name)}</h1>${catPill(ex.cat)}</div>
     <div class="stage">${figSvg(ex.id)}</div>
-    <div class="row wrap"><button class="btn chip" data-speed="0.5">לאט</button><button class="btn chip on" data-speed="1">רגיל</button><button class="btn chip" data-speed="1.5">מהר</button></div>
-    <div class="card stack"><h3>איך עושים</h3>${stepsHtml(ex)}<div class="tip">👀 ${esc(ex.tip)}</div></div>
+    <div class="row wrap"><button class="btn chip" data-speed="0.5">לאט</button><button class="btn chip on" data-speed="1">רגיל</button><button class="btn chip" data-speed="1.5">מהר</button>${placePill(ex)}</div>
+    ${helpButton()}
     <div class="tiles">
       <div class="tile"><b>${target}</b>${ex.type === 'time' ? 'שניות ברמה שלך' : 'חזרות ברמה שלך'}</div>
       <div class="tile hot"><b>${p ? p.best : '–'}</b>השיא שלך</div>
@@ -218,6 +256,7 @@ function exerciseDetail(id) {
     <button class="btn primary big" id="solo">לעשות עכשיו רק את זה 💥</button>
   </div>`);
   const f = fig(app.querySelector('svg[data-ex]'), ex);
+  wireHelp(ex, f);
   app.querySelectorAll('[data-speed]').forEach(b => b.onclick = () => { app.querySelectorAll('[data-speed]').forEach(x => x.classList.remove('on')); b.classList.add('on'); f.play(ex, +b.dataset.speed); });
   $('#solo').onclick = () => {
     const program = { id: 'solo', name: ex.name, emoji: '💥', items: [ex.id], rounds: 1, minutes: 1 };
@@ -251,10 +290,10 @@ function exercisePhase() {
       <div><div class="center small muted">${W.idx + 1} מתוך ${W.items.length} · ${esc(W.program.name)}</div><div class="bar"><i style="width:${pct}%"></i></div></div>
       <span></span>
     </div>
-    <div class="row between"><span class="pill block">${esc(blockLabel)}</span>${catPill(ex.cat)}</div>
+    <div class="row between"><span class="pill block">${esc(blockLabel)}</span><span class="row">${placePill(ex)}${catPill(ex.cat)}</span></div>
     <div class="stage">${figSvg(ex.id)}</div>
     <h1 class="center">${esc(ex.name)}</h1>
-    <div class="card stack" style="gap:8px">${stepsHtml(ex)}<div class="tip">👀 ${esc(ex.tip)}</div></div>
+    ${helpButton()}
     ${it.type === 'time' ? timeBlock(it) : repsBlock(it)}
     <div class="row">
       <button class="btn ghost grow" id="skip">דילוג ⏭️</button>
@@ -262,6 +301,7 @@ function exercisePhase() {
     </div>
   </div>`, true);
   const [mainFig] = figs();
+  wireHelp(ex, mainFig);
   $('#quit').onclick = quit;
   $('#skip').onclick = () => finishItem(0, true);
   $('#prev').onclick = () => { if (W.idx) { W.idx--; W.phase = 'exercise'; workoutScreen(); } };
@@ -538,6 +578,9 @@ function settings() {
       <label class="field">רמה<select id="level">${Object.entries(LEVELS).map(([k, v]) => `<option value="${k}" ${k === p.level ? 'selected' : ''}>${v.name} (${Math.round(v.mult * 100)}% מהכמות)</option>`).join('')}</select></label>
       <label class="field">מנוחה בין תרגילים (שניות)<select id="rest">${[0, 10, 15, 20, 30, 45].map(n => `<option value="${n}" ${n === p.rest ? 'selected' : ''}>${n ? n : 'בלי מנוחה'}</option>`).join('')}</select></label>
       <div class="toggle"><b>צלילים</b><input type="checkbox" id="sound" ${p.sound ? 'checked' : ''}></div>
+      <div class="toggle"><b>הסבר בקול בעברית</b><input type="checkbox" id="voice" ${p.voice !== false ? 'checked' : ''}></div>
+      <button class="btn chip" id="voicetest">🔊 בדיקת קול</button>
+      <p class="muted small">הקול הוא של המכשיר. ${canSpeak() ? (hebrewVoice() ? 'נמצא קול עברי במכשיר.' : 'לא נמצא קול עברי. באנדרואיד: הגדרות, שפה, המרת טקסט לדיבור, להוריד עברית. באייפון: הגדרות, נגישות, תוכן מדובר, קולות, עברית.') : 'המכשיר לא תומך בהקראה.'}</p>
     </div>
     <div class="card stack">
       <h3>מתנות ומשחקים 🎁</h3>
@@ -563,6 +606,8 @@ function settings() {
   $('#level').onchange = e => store.setProfile({ level: e.target.value });
   $('#rest').onchange = e => store.setProfile({ rest: +e.target.value });
   $('#sound').onchange = e => store.setProfile({ sound: e.target.checked });
+  $('#voice').onchange = e => store.setProfile({ voice: e.target.checked });
+  $('#voicetest').onclick = () => { if (!speak('היי! אני אסביר לך איך עושים כל תרגיל. לוחצים על הכפתור איך עושים את זה.')) alert('אין הקראה במכשיר הזה, או שהקול כבוי בהגדרות.'); };
   $('#giftEvery').onchange = e => store.setProfile({ giftEvery: +e.target.value });
   $('#gameSeconds').onchange = e => store.setProfile({ gameSeconds: +e.target.value });
   app.querySelectorAll('[data-day]').forEach(s => s.onchange = () => { const np = { ...plan() }; np[s.dataset.day] = s.value; store.setProfile({ plan: np }); });
