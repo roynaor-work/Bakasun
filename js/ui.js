@@ -86,7 +86,7 @@ export function field(name, label, value, opts) {
   const cls = opts.ltr ? ' class="ltr-input"' : '';
   const inp = type === 'textarea' ? `<textarea name="${name}" rows="${opts.rows || 3}"${cls}>${esc(value)}</textarea>`
     : type === 'select' ? `<select name="${name}">${opts.options.map(o => `<option value="${esc(o[0])}"${String(o[0]) === String(value) ? ' selected' : ''}>${esc(o[1])}</option>`).join('')}</select>`
-    : `<input name="${name}" type="${type}" value="${esc(value)}"${cls}${opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : ''}${opts.inputmode ? ` inputmode="${opts.inputmode}"` : ''}>`;
+    : `<input name="${name}" type="${type}" value="${esc(value)}"${cls}${type === 'number' ? ' step="any"' : ''}${opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : ''}${opts.inputmode ? ` inputmode="${opts.inputmode}"` : ''}>`;
   return `<label class="f"><span>${esc(label)}</span>${inp}</label>`;
 }
 /** On phones that have it (Android Chrome), a button next to the phone field that picks from the phone's contacts. */

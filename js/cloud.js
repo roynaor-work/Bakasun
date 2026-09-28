@@ -91,3 +91,24 @@ function start() {
 
 loadCfg();
 if (isOn()) { status.state = 'on'; pullAll().catch(e => { status.state = 'error'; status.error = String(e.message || e); emit(); }); flush(); start(); }
+
+/* ---- files in the cloud (Supabase Storage): receipts and invoices she photographs ---- */
+/** Uploads a blob to bucket/path (overwrites). Returns true when it is there. */
+export async function uploadFile(bucket, path, blob) {
+  if (!isOn()) return false;
+  const r = await fetch(cfg.url.replace(/\/$/, '') + '/storage/v1/object/' + bucket + '/' + path, { method: 'POST', headers: { apikey: cfg.key, Authorization: 'Bearer ' + cfg.token, 'Content-Type': blob.type || 'application/octet-stream', 'x-upsert': 'true' }, body: blob });
+  if (r.status === 401 && cfg.refresh) { await refresh(); return uploadFile(bucket, path, blob); }
+  return r.ok;
+}
+/** A link that opens the file for `seconds` (default 14 days), for the mail to the accountant. */
+export async function signedUrl(bucket, path, seconds) {
+  if (!isOn()) return '';
+  const r = await api('/storage/v1/object/sign/' + bucket + '/' + path, { method: 'POST', body: { expiresIn: seconds || 14 * 24 * 3600 } });
+  return r && r.signedURL ? cfg.url.replace(/\/$/, '') + '/storage/v1' + r.signedURL : '';
+}
+export async function downloadFileBlob(bucket, path) {
+  if (!isOn()) return null;
+  const r = await fetch(cfg.url.replace(/\/$/, '') + '/storage/v1/object/' + bucket + '/' + path, { headers: { apikey: cfg.key, Authorization: 'Bearer ' + cfg.token } });
+  return r.ok ? r.blob() : null;
+}
+export function orgId() { return cfg && cfg.orgId; }

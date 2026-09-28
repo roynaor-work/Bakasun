@@ -9,13 +9,16 @@ export function listen(langCode, onText, onEnd) {
   const rec = new SR();
   rec.lang = langCode; rec.continuous = true; rec.interimResults = true; rec.maxAlternatives = 1;
   let finalText = '';
+  // Android Chrome re-sends earlier results (resultIndex is not reliable), so the text is rebuilt from all results every time
+  // instead of appended: no more "build me a quote build me a quote build me a quote".
   rec.onresult = e => {
-    let interim = '';
-    for (let i = e.resultIndex; i < e.results.length; i++) {
-      const r = e.results[i];
-      if (r.isFinal) finalText += r[0].transcript + ' '; else interim += r[0].transcript;
+    let fin = '', interim = '';
+    for (let i = 0; i < e.results.length; i++) {
+      const r = e.results[i]; const tr = (r[0] && r[0].transcript) || '';
+      if (r.isFinal) fin += tr + ' '; else interim += tr;
     }
-    onText(finalText + interim, !interim);
+    finalText = fin.replace(/\s+/g, ' ').trim();
+    onText((finalText + (interim ? ' ' + interim : '')).trim(), !interim);
   };
   rec.onerror = () => { if (onEnd) onEnd(finalText); };
   rec.onend = () => { if (onEnd) onEnd(finalText); };

@@ -30,7 +30,7 @@ export function supplierInvoiceReminder(sup, cs, amount, lang, signer) {
 export function monthReport(payments, links, cases, sups, ym) {
   const inMonth = d => d && String(Office.iso(d) || '').slice(0, 7) === ym;
   const byId = {}; (cases || []).forEach(c => { byId[c.id] = c; }); const supById = {}; (sups || []).forEach(s => { supById[s.id] = s; });
-  const clientRows = (payments || []).filter(p => Office.num(p.amount) && (inMonth(p.invoicedAt) || inMonth(p.paidAt) || (p.status === Office.PAY.paid && inMonth(p.updated)) || (p.status === Office.PAY.invoiced && inMonth(p.updated))))
+  const clientRows = (payments || []).filter(p => Office.num(p.amount) && (inMonth(p.invoicedAt) || inMonth(p.paidAt) || (!p.invoicedAt && !p.paidAt && (p.status === Office.PAY.paid || p.status === Office.PAY.invoiced) && inMonth(p.updated))))
     .map(p => { const c = byId[p.caseId] || {}; return { date: Office.fmt(p.paidAt || p.invoicedAt || p.updated), client: c.client || p.client || '', event: [c.kind, c.date ? Office.fmt(c.date) : ''].filter(Boolean).join(' · '), amount: Office.num(p.amount), invoiceNo: str(p.invoiceNo), status: p.status, note: str(p.note) }; });
   const supplierRows = (links || []).filter(l => Office.yes(l.paid) && Office.num(l.cost) && inMonth(l.paidAt))
     .map(l => { const c = byId[l.caseId] || {}; const s = supById[l.supplierId] || { name: l.supplier }; return { date: Office.fmt(l.paidAt), supplier: s.name || '', client: c.client || '', event: [c.kind, c.date ? Office.fmt(c.date) : ''].filter(Boolean).join(' · '), amount: Office.num(l.cost), invoice: l.supInvoice === SUP_INVOICE.received ? (l.supInvoiceNo ? str(l.supInvoiceNo) : 'התקבלה') : 'חסרה', note: str(l.note) }; });

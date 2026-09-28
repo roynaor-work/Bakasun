@@ -14,6 +14,7 @@ import { pendingRequests } from '../logic/rfq.js';
 import { supplierInvoicesMissing } from '../logic/money.js';
 import { pendingPrint } from '../logic/print.js';
 import { handoverText } from '../logic/travel.js';
+import { monthsToSend, monthLabel } from '../logic/receipts.js';
 import { openMail } from '../ui.js';
 import { resend } from './rfq.js';
 
@@ -30,7 +31,8 @@ export function render({ root }) {
   const waitSup = pendingRequests(data.links || [], data.cases || [], data.suppliers || [], new Date(), Office.num(s.supplierRemindDays) || 1);
   const missInv = supplierInvoicesMissing(data.links || [], data.cases || [], data.suppliers || [], new Date(), Office.num(s.supInvoiceDays) || 3);
   const waitPrint = pendingPrint(data.print || [], data.cases || [], new Date(), Office.num(s.printRemindDays) || 2);
-  const nothing = !up.length && !fu.length && !calls.length && !tasks.length && !yday.length && !pend.length && !supPay.length && !waitSup.length && !missInv.length && !waitPrint.length;
+  const toSend = monthsToSend(data.receipts || [], data.payments || [], data.links || [], JSON.parse(s.monthsSent || '[]'), new Date());
+  const nothing = !up.length && !fu.length && !calls.length && !tasks.length && !yday.length && !pend.length && !supPay.length && !waitSup.length && !missInv.length && !waitPrint.length && !toSend.length;
 
   root.innerHTML = `
     <header class="top"><h1>${esc(t('today'))}</h1>
@@ -54,6 +56,7 @@ export function render({ root }) {
     ${waitSup.length ? section(t('waitingSuppliers'), `<div class="list">${waitSup.map(l => `<div class="card" data-wsup="${esc(l.id)}"><div class="row between"><a class="title" href="#/case/${esc(l.caseId)}/suppliers">${esc(l.sup.name || '')}</a><span class="badge warn">${esc(t('waited', { n: l.waited }))}</span></div><div class="sub">${esc([l.cs.client, l.cs.kind, l.what].filter(Boolean).join(' · '))}</div><div class="row"><button class="btn wa sm" data-remind>${esc(t('remind'))}</button></div></div>`).join('')}</div>`) : ''}
     ${pend.length ? section(t('waitingApproval'), `<div class="list">${pend.map(a => { const c = db.get('cases', a.caseId) || {}; return `<div class="card" data-appr="${esc(a.id)}"><div class="row between"><a class="title" href="#/case/${esc(a.caseId)}/money">${esc(c.client || '')} · ${esc(approvalKindLabel(a.kind, uiLang()))}</a><span class="badge warn">${esc(t('waited', { n: a.waited }))}</span></div>${a.title ? `<div class="sub">${esc(a.title)}</div>` : ''}<div class="row"><button class="btn wa sm" data-remind>${esc(t('remind'))}</button></div></div>`; }).join('')}</div>`) : ''}
     ${supPay.length ? section(t('supplierPay'), `<div class="list">${supPay.map(x => `<div class="card" data-link="${esc(x.row)}"><div class="row between"><span class="title">${esc(x.supplier)}</span><span class="ltr big">${esc(Office.money(x.amount))}</span></div><div class="sub">${esc(x.client)} · ${esc(x.date)} · <span class="count">${x.after}</span> ${esc(t('afterEventDays'))}</div><div class="row"><button class="btn sm ok" data-paid>${esc(t('markPaid'))}</button><button class="btn wa sm" data-paidmsg>${esc(t('paidNote'))}</button></div></div>`).join('')}</div>`) : ''}
+    ${toSend.length ? `<a class="card tap warnbox" href="#/money"><b>${esc(t('monthsWaiting'))}</b><div class="sub">${esc(toSend.map(m => monthLabel(m, uiLang())).join(' · '))}</div></a>` : ''}
     ${waitPrint.length ? section(t('printWaiting'), `<div class="list">${waitPrint.map(g => { const sp = db.get('suppliers', g.supplierId) || {}; return `<a class="card tap" href="#/case/${esc(g.caseId)}/lists"><div class="row between"><span class="title">${esc(sp.name || t('printList'))}</span><span class="badge warn">${esc(t('waited', { n: g.waited }))}</span></div><div class="sub">${esc([g.cs.client, g.items.map(i => i.item).join(', ')].filter(Boolean).join(' · '))}</div></a>`; }).join('')}</div>`) : ''}
     ${missInv.length ? section(t('supInvoicesMissing'), `<div class="list">${missInv.map(l => `<a class="card tap" href="#/money"><div class="row between"><span class="title">${esc(l.sup.name || '')}</span><span class="ltr big">${esc(Office.money(l.cost))}</span></div><div class="sub">${esc([l.cs.client, t('paid') + ' ' + Office.fmt(l.paidAt), t('waited', { n: l.waited })].filter(Boolean).join(' · '))}</div></a>`).join('')}</div>`) : ''}
     ${yday.length ? section(t('unansweredYesterday'), `<div class="list">${yday.map(c => `<a class="card tap" href="#/calls"><div class="row between"><span class="title">${esc(c.name)}</span><span class="badge warn"><span class="count">${c.attempts || 1}</span> ${esc(t('attempts'))}</span></div>${c.why ? `<div class="sub">${esc(c.why)}</div>` : ''}</a>`).join('')}</div>`) : ''}

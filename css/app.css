@@ -1,22 +1,23 @@
 :root {
-  --bg: #EFE8DC; --card: #FBF8F2; --ink: #12100F; --ink-2: #3E3630; --muted: #6E645A; --line: #DED3C2;
-  --accent: #D7352B; --accent-ink: #fff; --accent-soft: #F7E3DE; --ok: #2E6A4E; --ok-soft: #DCEBE2; --warn: #8A6A0E; --warn-soft: #F3E6BE; --gold: #C9A227;
-  --wa: #1F8A4C; --nav: #FFFDF8;
+  /* softer than the poster palette: warm cream, white cards, brown ink, coral for the one main action, soft greens and ambers */
+  --bg: #F7F2EA; --card: #FFFFFF; --ink: #2B2420; --ink-2: #4A403A; --muted: #7A6E66; --line: #E8DFD3;
+  --accent: #D9573F; --accent-ink: #fff; --accent-soft: #FBE9E4; --ok: #2F7D5B; --ok-soft: #E3F2EA; --warn: #8A6410; --warn-soft: #FBF0D2; --gold: #C9A227;
+  --wa: #25A05C; --nav: #FFFFFF;
   --f-body: 'Assistant', 'Noto Sans Hebrew', 'Segoe UI', Arial, sans-serif;
   --f-head: 'Heebo', 'Assistant', 'Noto Sans Hebrew', Arial, sans-serif;
-  --r: 14px; --tap: 44px;
+  --r: 16px; --tap: 44px;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #12100F; --card: #1E1A17; --ink: #EFE8DC; --ink-2: #D6CCBE; --muted: #A99E92; --line: #3B332C;
-    --accent: #E0624F; --accent-soft: #3A1E19; --ok: #7CC5A0; --ok-soft: #1C3328; --warn: #E2B04A; --warn-soft: #3A2F14; --wa: #3FBF74; --nav: #1F1B17;
+    --bg: #17141A; --card: #221E24; --ink: #F2ECE4; --ink-2: #D9D0C6; --muted: #A79C93; --line: #3A3339;
+    --accent: #E8735C; --accent-soft: #3D2622; --ok: #7FCFA4; --ok-soft: #1E3529; --warn: #E6B85A; --warn-soft: #3B3118; --wa: #43C47C; --nav: #1D191F;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #12100F; --card: #1E1A17; --ink: #EFE8DC; --ink-2: #D6CCBE; --muted: #A99E92; --line: #3B332C;
-  --accent: #E0624F; --accent-soft: #3A1E19; --ok: #7CC5A0; --ok-soft: #1C3328; --warn: #E2B04A; --warn-soft: #3A2F14; --wa: #3FBF74; --nav: #1F1B17;
+  --bg: #17141A; --card: #221E24; --ink: #F2ECE4; --ink-2: #D9D0C6; --muted: #A79C93; --line: #3A3339;
+  --accent: #E8735C; --accent-soft: #3D2622; --ok: #7FCFA4; --ok-soft: #1E3529; --warn: #E6B85A; --warn-soft: #3B3118; --wa: #43C47C; --nav: #1D191F;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -53,7 +54,7 @@ nav.bottom svg { width: 24px; height: 24px; }
 .sec { margin-top: 18px; display: flex; flex-direction: column; gap: 8px; }
 .sec-h { display: flex; align-items: center; gap: 10px; }
 .sec-h h2 { flex: 1; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 1px 2px rgba(43,36,32,0.04), 0 4px 14px rgba(43,36,32,0.05); }
 .card.tap { cursor: pointer; }
 .card .title { font-weight: 700; font-size: 17px; }
 .card .sub { color: var(--muted); font-size: 15px; }
@@ -73,7 +74,7 @@ nav.bottom svg { width: 24px; height: 24px; }
 .warnbox { border-inline-start: 3px solid var(--accent); background: var(--accent-soft); padding: 10px 12px; border-radius: 8px; }
 
 /* buttons */
-.btn { min-height: var(--tap); padding: 0 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-weight: 700; font-size: 16px;
+.btn { min-height: var(--tap); padding: 0 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-weight: 700; font-size: 16px;
   display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; text-decoration: none; }
 .btn:hover { border-color: var(--muted); }
 .btn:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

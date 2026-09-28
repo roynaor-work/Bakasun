@@ -4,6 +4,7 @@ import { t, lang, SPEECH, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
 import { esc, field, empty, dialog, toast, openWhatsApp, copyText } from '../ui.js';
 import Office from '../logic/office.js';
+import { isReceiptCommand } from '../logic/receipts.js';
 import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage } from '../logic/commands.js';
 import { QUOTE_STATUS } from '../logic/quotes.js';
 import { subjects } from '../notes.js';
@@ -73,6 +74,7 @@ async function tabCommand(body, s, ctx) {
     .concat(db.list('staff').map(x => ({ label: x.name, names: [x.name], phone: x.phone })))
     .concat(db.list('contacts').map(x => ({ label: x.name, names: [x.name], phone: x.phone, email: x.email, about: 'contact', id: x.id })));
   inputBox(body, t('cmdHint'), t('cmdPh'), (text, out) => {
+    if (isReceiptCommand(text)) { location.hash = '#/receipts/' + new Date().toISOString().slice(0, 7) + '/snap'; return; }
     const c = parseCommand(text, docs, peopleNow());
     if (c.kind === 'invoice') { mode = 'invoice'; draft = text; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'supplierQuote') { mode = 'supplierQuote'; preSupplier = c.supplier && c.supplier.about === 'supplier' ? c.supplier.id : ''; draft = ''; render({ root: body.closest('#app') }); return; }

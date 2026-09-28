@@ -8,6 +8,9 @@ import { DEFAULTS } from '../data/defaults.js';
 import { supplierInvoicesMissing, supplierInvoiceReminder, monthReport, monthCsv, monthText } from '../logic/money.js';
 import { openMail } from '../ui.js';
 import { shareFile, downloadFile } from '../files.js';
+import { sendMonth } from './receipts.js';
+import { receiptsOf, monthsToSend, monthLabel } from '../logic/receipts.js';
+import { lang as uiLang } from '../i18n.js';
 
 export function render({ root }) {
   const s = db.settings();
@@ -17,6 +20,7 @@ export function render({ root }) {
   const missing = supplierInvoicesMissing(db.list('links'), cases, db.list('suppliers'), new Date(), Office.num(s.supInvoiceDays) || 3);
   const ym = sessionStorage.getItem('bakasun.ym') || todayIso().slice(0, 7);
   const rep = monthReport(payments, db.list('links'), cases, db.list('suppliers'), ym);
+  const toSend = monthsToSend(db.list('receipts'), payments, db.list('links'), JSON.parse(s.monthsSent || '[]'), new Date());
   const payCard = p => {
     const pay = db.get('payments', p.row) || {};
     return `<div class="card" data-id="${esc(p.row)}"><div class="row between"><span class="title">${esc(p.client)}</span><span class="ltr big">${esc(Office.money(p.amount))}</span></div>
@@ -29,19 +33,18 @@ export function render({ root }) {
     ${section(t('payments'), `<div class="list">${col.open.length ? col.open.map(payCard).join('') : empty(t('noPayments'))}</div>`)}
     ${supDue.length ? section(t('supplierPayments'), `<div class="list">${supDue.map(x => `<a class="card tap" href="#/case/${esc(x.caseId)}"><div class="row between"><span class="title">${esc(x.supplier)}</span><span class="ltr big">${esc(Office.money(x.amount))}</span></div><div class="sub">${esc(x.client)} · ${esc(x.date)}</div></a>`).join('')}</div>`) : ''}
     ${missing.length ? section(t('supInvoicesMissing'), `<div class="list">${missing.map(l => `<div class="card" data-miss="${esc(l.id)}"><div class="row between"><a class="title" href="#/case/${esc(l.caseId)}/suppliers">${esc(l.sup.name || '')}</a><span class="ltr big">${esc(Office.money(l.cost))}</span></div><div class="sub">${esc([l.cs.client, t('paid') + ' ' + Office.fmt(l.paidAt), t('waited', { n: l.waited })].filter(Boolean).join(' · '))}</div><div class="row"><button class="btn wa sm" data-remind-inv>${esc(t('remind'))}</button><button class="btn sm ok" data-got-inv>${esc(t('invReceived'))}</button></div></div>`).join('')}</div>`) : ''}
-    ${section(t('monthForAccountant'), `<div class="row"><input type="month" id="ym" value="${esc(ym)}"><button class="btn sm" id="ymCsv">CSV</button><button class="btn sm" id="ymMail">${esc(t('email'))}</button></div>
+    ${toSend.length ? `<div class="card warnbox"><b>${esc(t('monthsWaiting'))}</b><div class="row">${toSend.map(m => `<button class="btn sm primary" data-sendym="${esc(m)}">${esc(monthLabel(m, uiLang()))}</button>`).join('')}</div></div>` : ''}
+    ${section(t('monthForAccountant'), `<div class="row"><input type="month" id="ym" value="${esc(ym)}"><button class="btn sm" id="ymCsv">CSV</button><button class="btn sm primary" id="ymMail">${esc(t('sendToAccountant'))}</button><a class="btn sm" href="#/receipts/${esc(ym)}">${esc(t('receipts'))} (<span class="count">${receiptsOf(db.list('receipts'), ym).length}</span>)</a></div>
       <div class="stat"><div class="card"><b class="ltr">${esc(Office.money(rep.totalIn))}</b><span>${esc(t('income'))}</span></div><div class="card"><b class="ltr">${esc(Office.money(rep.totalOut))}</b><span>${esc(t('expenses'))}</span></div><div class="card"><b class="count">${rep.missing}</b><span>${esc(t('invMissing'))}</span></div></div>
       ${rep.clientRows.length || rep.supplierRows.length ? `<div class="tablewrap"><table class="cmp"><thead><tr><th>${esc(t('date'))}</th><th>${esc(t('who'))}</th><th>${esc(t('amount'))}</th><th>${esc(t('invoiceNo'))}</th></tr></thead><tbody>${rep.clientRows.map(r => `<tr><td>${esc(r.date)}</td><td>↓ ${esc(r.client)}</td><td class="n">${esc(Office.money(r.amount))}</td><td>${esc(r.invoiceNo || r.status)}</td></tr>`).join('')}${rep.supplierRows.map(r => `<tr><td>${esc(r.date)}</td><td>↑ ${esc(r.supplier)}</td><td class="n">${esc(Office.money(r.amount))}</td><td>${esc(r.invoice)}</td></tr>`).join('')}</tbody></table></div>` : `<p class="hint">${esc(t('nothingThisMonth'))}</p>`}`)}`;
 
   root.querySelector('#new').onclick = () => editPayment(null);
   root.querySelector('#ym').onchange = e => { sessionStorage.setItem('bakasun.ym', e.target.value); render({ root }); };
   root.querySelector('#ymCsv').onclick = async () => { const rec = { blob: new Blob([monthCsv(rep)], { type: 'text/csv' }), name: 'bakasun-' + ym + '.csv', type: 'text/csv', title: t('monthForAccountant') }; if (!(await shareFile(rec, monthText(rep, s.signer || DEFAULTS.signer).subject))) { downloadFile(rec); toast(t('shareFallback'), 4000); } };
-  root.querySelector('#ymMail').onclick = async () => {
-    const acc = db.list('team').find(x => /רו["״]?ח|רואה חשבון|accountant|comptable/i.test(x.role || '') || /רו["״]?ח|רואה חשבון/.test(x.name || ''));
-    const m = monthText(rep, s.signer || DEFAULTS.signer);
-    const r = await dialog(t('monthForAccountant'), `${field('to', t('fEmail'), (acc && acc.email) || s.accountantEmail || '', { ltr: true, inputmode: 'email' })}<textarea name="text" rows="12">${esc(m.text)}</textarea><p class="hint">${esc(t('attachHint'))}</p>`, { ok: t('email') });
-    if (r) { if (r.to && !s.accountantEmail && !(acc && acc.email)) db.setting('accountantEmail', r.to); openMail(r.to, m.subject, r.text); }
-  };
+  const accountantMail = () => { const acc = db.list('team').find(x => /רו["״]?ח|רואה חשבון|accountant|comptable/i.test(x.role || '') || /רו["״]?ח|רואה חשבון/.test(x.name || '')); return s.accountantEmail || (acc && acc.email) || ''; };
+  const sendYm = async m => { const rp = m === ym ? rep : monthReport(payments, db.list('links'), cases, db.list('suppliers'), m); const mt = monthText(rp, s.signer || DEFAULTS.signer); if (await sendMonth(m, mt.text, mt.subject, accountantMail())) render({ root }); };
+  root.querySelector('#ymMail').onclick = () => sendYm(ym);
+  root.querySelectorAll('[data-sendym]').forEach(b => b.onclick = () => sendYm(b.dataset.sendym));
   root.querySelectorAll('[data-miss]').forEach(el => {
     const l = db.get('links', el.dataset.miss); const cs = db.get('cases', l.caseId) || {}; const sp = db.get('suppliers', l.supplierId) || { name: l.supplier };
     el.querySelector('[data-got-inv]').onclick = () => { db.put('links', { id: l.id, supInvoice: 'התקבלה', supInvoiceAt: todayIso() }); render({ root }); };
