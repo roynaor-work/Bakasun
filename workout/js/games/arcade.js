@@ -54,7 +54,8 @@ G.push({ id: 'snake', name: 'הרעב הגדול', emoji: '🧃', how: 'מחלי
   make(r) {
     const S = 24, COLS = Math.floor(r.W / S), ROWS = Math.floor((r.H - 30) / S), OX = (r.W - COLS * S) / 2, OY = 30;
     let snake = [[7, 11], [6, 11], [5, 11]], dir = [1, 0], next = dir, t = 0, food = place(), speed = 0.2, tt = 0, eaten = 0, chew = 0;
-    let face = null; try { const src = localStorage.getItem('kidfit.facePic'); if (src && typeof Image !== 'undefined') { face = new Image(); face.src = src; } } catch { face = null; }
+    // הפרצוף: תמונה מההגדרות, ואם אין, התמונה המובנית (workout/img/face.jpg)
+    let face = null; try { if (typeof Image !== 'undefined') { const src = localStorage.getItem('kidfit.facePic'); face = new Image(); face.src = src || new URL('../../img/face.jpg', import.meta.url).href; } } catch { face = null; }
     function place() { let p; do { p = [r.rint(0, COLS - 1), r.rint(0, ROWS - 1)]; } while (snake.some(s => s[0] === p[0] && s[1] === p[1])); return p; }
     const cx = c => OX + c * S + S / 2, cy = c => OY + c * S + S / 2;
     return {
@@ -178,20 +179,34 @@ G.push({ id: 'asteroids', name: 'שדה אסטרואידים', emoji: '☄️', 
     };
   } });
 
-// ---- הפרה המעופפת (במקום ציפור): עוברים בין תחתונים תלויים לאסלות ----
-G.push({ id: 'flappy', name: 'הפרה המעופפת', emoji: '🐄', how: 'נוגעים כדי שהפרה תעוף למעלה. עוברים בין התחתונים לאסלות בלי לגעת.',
+// ---- הפרה המעופפת (במקום ציפור): עוברים בין תחתונים תלויים לאסלות. חוואי עם רשת מנסה לתפוס אותה, ובונוסים מצחיקים בין המכשולים ----
+G.push({ id: 'flappy', name: 'הפרה המעופפת', emoji: '🐄', how: 'נוגעים כדי שהפרה תעוף למעלה. עוברים בין התחתונים לאסלות בלי לגעת. כשהחוואי רץ עם הרשת, עפים גבוה! אוספים בונוסים מצחיקים.',
   make(r) {
-    let y = r.H / 2, vy = 0, obs = [], t = 1.0, gap = 190, tt = 0, passed = 0, started = false;
+    const BON = [['🍕', 20, 'פיצה מעופפת!'], ['🦆', 15, 'ברווז גומי!'], ['🧻', 30, 'נייר טואלט מזהב!'], ['🍔', 20, 'המבורגר באוויר!'], ['🧦', 25, 'גרב מסריח!'], ['🍩', 20, 'דונאט!']];
+    let y = r.H / 2, vy = 0, obs = [], t = 1.0, gap = 190, tt = 0, passed = 0, started = false, farmer = null, farmerT = r.rnd(5, 8), items = [], warnT = 0;
+    const GY = r.H - 24;
     return {
       tap() { started = true; vy = -280; r.sfx('tick'); }, down() { started = true; vy = -280; },
-      update(dt) { tt += dt; if (!started) { y = r.H / 2 + Math.sin(tt * 3) * 12; return; } vy = Math.min(420, vy + 700 * dt); y += vy * dt; t += dt;
-        const spd = 120 + Math.min(60, passed * 4); if (t > 1.9) { t = 0; obs.push({ x: r.W + 30, h: r.rnd(70, r.H - gap - 110), passed: false, w: 56 }); }
-        obs.forEach(p => p.x -= spd * dt); obs = obs.filter(p => p.x > -80);
+      update(dt) { tt += dt; if (!started) { y = r.H / 2 + Math.sin(tt * 3) * 12; return; } vy = Math.min(420, vy + 700 * dt); y += vy * dt; t += dt; warnT -= dt;
+        const spd = 120 + Math.min(60, passed * 4); if (t > 1.9) { t = 0; const h = r.rnd(70, r.H - gap - 110); obs.push({ x: r.W + 30, h, passed: false, w: 56 });
+          // בונוס: בשליש העליון או התחתון של המרווח (לא באמצע הקל), לא בכל מכשול
+          if (Math.random() < .6) { const [e, val, txt] = r.pick(BON); items.push({ x: r.W + 30 + 28, y: h + (Math.random() < .5 ? gap * .2 : gap * .8), e, val, txt, got: false }); } }
+        obs.forEach(p => p.x -= spd * dt); obs = obs.filter(p => p.x > -80); items.forEach(i => i.x -= spd * dt); items = items.filter(i => i.x > -40 && !i.got);
+        for (const i of items) if (r.dist(80, y, i.x, i.y) < 26) { i.got = true; r.addScore(i.val); r.pop(`${i.txt} +${i.val}`, 80, y - 40, '#FDE047', 22); r.burst(i.x, i.y, '#FDE047', 12, 160); r.sfx('score'); }
+        // החוואי: מגיע מימין, רץ שמאלה על הקרקע, וקופץ עם הרשת מתחת לפרה. אם הפרה נמוכה, הוא תופס אותה
+        farmerT -= dt; if (!farmer && farmerT <= 0) { farmer = { x: r.W + 40, jump: 0, jumped: false }; warnT = 1.6; farmerT = r.rnd(7, 11); r.sfx('hit'); }
+        if (farmer) { farmer.x -= (spd + 90) * dt; if (!farmer.jumped && farmer.x < 80 + 60) { farmer.jumped = true; farmer.jump = 0.001; } if (farmer.jump > 0) { farmer.jump += dt * 1.6; if (farmer.jump >= 1) farmer.jump = 0; }
+          const fy = GY - (farmer.jump > 0 ? Math.sin(farmer.jump * Math.PI) * 150 : 0); if (farmer.jump > 0 && Math.abs(farmer.x - 80) < 30 && y > fy - 120) { r.burst(80, y, '#fff', 14, 180); return r.over('החוואי תפס את הפרה! 🧑‍🌾'); } if (farmer.x < -60) farmer = null; }
         for (const p of obs) { if (!p.passed && p.x + p.w / 2 < 80) { p.passed = true; passed++; r.addScore(10); r.pop('+10', 80, y - 36, '#fff'); r.sfx('score'); }
           if (80 + 18 > p.x && 80 - 18 < p.x + p.w && (y - 12 < p.h || y + 12 > p.h + gap)) { r.burst(80, y, '#fff', 12, 160); return r.over(y - 12 < p.h ? 'נתקעת בתחתונים! 🩲' : 'נפלת לאסלה! 🚽'); } }
         if (y > r.H - 30) return r.over('אופס, הפרה נחתה!'); if (y < -30) y = -30; },
-      draw() { const g = r.ctx.createLinearGradient(0, 0, 0, r.H); g.addColorStop(0, '#7DD3FC'); g.addColorStop(1, '#e0f2fe'); r.ctx.fillStyle = g; r.ctx.fillRect(0, 0, r.W, r.H); SP.cloud(r, 60 - (tt * 30) % 420 + 200, 80, 1); SP.cloud(r, 300 - (tt * 20) % 420, 140, 0.7); r.rect(0, r.H - 24, r.W, 24, '#84CC16'); r.rect(0, r.H - 24, r.W, 5, '#65a30d');
-        obs.forEach(p => { SP.underpants(r, p.x, 0, p.w, p.h); SP.toilet(r, p.x, p.h + gap, p.w, r.H - 24 - p.h - gap); });
+      draw() { const g = r.ctx.createLinearGradient(0, 0, 0, r.H); g.addColorStop(0, '#7DD3FC'); g.addColorStop(1, '#e0f2fe'); r.ctx.fillStyle = g; r.ctx.fillRect(0, 0, r.W, r.H); SP.cloud(r, 60 - (tt * 30) % 420 + 200, 80, 1); SP.cloud(r, 300 - (tt * 20) % 420, 140, 0.7); r.rect(0, GY, r.W, 24, '#84CC16'); r.rect(0, GY, r.W, 5, '#65a30d');
+        obs.forEach(p => { SP.underpants(r, p.x, 0, p.w, p.h); SP.toilet(r, p.x, p.h + gap, p.w, GY - p.h - gap); });
+        items.forEach(i => { r.circle(i.x, i.y, 18, 'rgba(255,255,255,.55)'); r.emoji(i.e, i.x, i.y + Math.sin(tt * 5 + i.x) * 3, 26); });
+        if (farmer) { const jy = farmer.jump > 0 ? Math.sin(farmer.jump * Math.PI) * 150 : 0; const fy = GY - jy; const pose = farmer.jump > 0 ? POSE.jumpUp : POSE.run[Math.floor(tt * 10) % POSE.run.length][0]; if (farmer.jump > 0) SP.groundShadow(r, farmer.x, GY, 18, jy); r.player(pose, farmer.x, fy, 0.5, KITS.green, { hair: '#7c2d12' });
+          // כובע קש ורשת ביד המורמת
+          r.rect(farmer.x - 16, fy - 86 * .5 - 60, 32, 6, '#facc15', 3); r.rect(farmer.x - 9, fy - 86 * .5 - 70, 18, 12, '#facc15', 3); const nx = farmer.x + (farmer.jump > 0 ? 6 : 22), ny = fy - (farmer.jump > 0 ? 112 : 60); r.line(farmer.x + (farmer.jump > 0 ? 8 : 16), fy - (farmer.jump > 0 ? 88 : 46), nx, ny, '#78350f', 3); r.ctx.strokeStyle = '#1B1740'; r.ctx.lineWidth = 2; r.ctx.beginPath(); r.ctx.ellipse(nx, ny - 14, 16, 16, 0, 0, Math.PI * 2); r.ctx.stroke(); r.ctx.strokeStyle = 'rgba(27,23,64,.5)'; r.ctx.lineWidth = 1; for (let k = -1; k <= 1; k++) { r.line(nx - 14, ny - 14 + k * 7, nx + 14, ny - 14 + k * 7, 'rgba(27,23,64,.5)', 1); r.line(nx + k * 7, ny - 28, nx + k * 7, ny, 'rgba(27,23,64,.5)', 1); } }
+        if (warnT > 0) r.text('החוואי בא! תעופי גבוה! 🧑‍🌾', r.W / 2, 60, { size: 20, color: '#7c2d12' });
         r.emoji('💨', 80 - 30, y + 8, 14); SP.cow(r, 80, y, vy < 0 ? 1 : 0, tt); if (!started) r.text('נוגעים כדי לעוף!', r.W / 2, r.H / 2 - 80, { size: 22, color: '#0c4a6e' }); },
     };
   } });

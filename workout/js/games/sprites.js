@@ -42,6 +42,8 @@ export const S = {
     c.fillStyle = '#F5C9A6'; c.beginPath(); c.arc(x, y, rad, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#1B1740'; c.lineWidth = 2; c.stroke(); c.fillStyle = '#3B2A1A'; c.beginPath(); c.arc(x, y - rad * .15, rad, Math.PI * 1.05, Math.PI * 1.95); c.fill(); for (let i = -2; i <= 2; i++) { c.beginPath(); c.arc(x + i * rad * .38, y - rad * .8, rad * .28, 0, 7); c.fill(); }
     const ex = dir[0] * rad * .18, ey = dir[1] * rad * .18; for (const sgn of [-1, 1]) { c.fillStyle = '#fff'; c.beginPath(); c.arc(x + sgn * rad * .38, y - rad * .1, rad * .22, 0, 7); c.fill(); c.fillStyle = '#1B1740'; c.beginPath(); c.arc(x + sgn * rad * .38 + ex, y - rad * .1 + ey, rad * .11, 0, 7); c.fill(); }
     c.fillStyle = '#7C2D12'; c.beginPath(); if (open > .1) { c.ellipse(x + dir[0] * rad * .2, y + rad * .42 + dir[1] * rad * .2, rad * .3, rad * .3 * open, 0, 0, Math.PI * 2); c.fill(); c.fillStyle = '#ef4444'; c.beginPath(); c.ellipse(x + dir[0] * rad * .2, y + rad * .5 + dir[1] * rad * .2, rad * .16, rad * .12 * open, 0, 0, Math.PI * 2); c.fill(); } else { c.strokeStyle = '#7C2D12'; c.lineWidth = 2; c.arc(x, y + rad * .25, rad * .35, .3, Math.PI - .3); c.stroke(); } c.restore(); },
+  // שטר כסף: צבע לפי הערך (20 ירוק, 50 סגול, 100 כתום, 200 כחול), פס מתכתי, מספר גדול
+  banknote(r, x, y, val = 20, rot = 0, s = 1) { const c = r.ctx; const col = { 20: ['#4ade80', '#166534'], 50: ['#c084fc', '#581c87'], 100: ['#fdba74', '#9a3412'], 200: ['#60a5fa', '#1e3a8a'] }[val] || ['#e5e7eb', '#374151']; c.save(); c.translate(x, y); c.rotate(rot); c.scale(s, s); c.shadowColor = 'rgba(0,0,0,.35)'; c.shadowBlur = 6; c.shadowOffsetY = 3; c.fillStyle = col[0]; c.beginPath(); c.roundRect ? c.roundRect(-34, -18, 68, 36, 4) : c.rect(-34, -18, 68, 36); c.fill(); c.shadowColor = 'transparent'; c.strokeStyle = col[1]; c.lineWidth = 2; c.stroke(); c.strokeStyle = 'rgba(255,255,255,.7)'; c.lineWidth = 1; c.strokeRect(-29, -13, 58, 26); c.fillStyle = 'rgba(255,255,255,.55)'; c.beginPath(); c.arc(-18, 0, 8, 0, 7); c.fill(); c.fillStyle = col[1]; c.fillRect(20, -18, 4, 36); c.font = '900 16px Heebo, Rubik, Arial, sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = col[1]; c.fillText(String(val), 4, 1); c.font = '700 8px Arial'; c.fillText('₪', -27, -9); c.fillText('₪', 14, 10); c.restore(); },
   // קקי מחייך (במקום פצצה)
   poop(r, x, y, t = 0) { const c = r.ctx; c.save(); c.translate(x, y); const wob = Math.sin(t * 6) * .05; c.rotate(wob); c.fillStyle = '#7c4a1e'; for (const [yy, w] of [[8, 20], [-2, 15], [-11, 10]]) { c.beginPath(); c.ellipse(0, yy, w, 8, 0, 0, Math.PI * 2); c.fill(); } c.beginPath(); c.moveTo(-3, -17); c.quadraticCurveTo(4, -26, 8, -16); c.lineTo(0, -12); c.fill(); c.strokeStyle = '#1B1740'; c.lineWidth = 1.5; c.beginPath(); c.ellipse(0, 8, 20, 8, 0, 0, Math.PI); c.stroke(); c.fillStyle = '#fff'; c.beginPath(); c.arc(-6, -2, 4, 0, 7); c.arc(6, -2, 4, 0, 7); c.fill(); c.fillStyle = '#1B1740'; c.beginPath(); c.arc(-5, -2, 2, 0, 7); c.arc(7, -2, 2, 0, 7); c.fill(); c.strokeStyle = '#1B1740'; c.lineWidth = 1.5; c.beginPath(); c.arc(0, 3, 6, .2, Math.PI - .2); c.stroke(); c.fillStyle = 'rgba(163,230,53,.7)'; for (let i = 0; i < 3; i++) { const k = ((t * .8 + i / 3) % 1); c.globalAlpha = 1 - k; c.beginPath(); c.arc(-12 + i * 12, -22 - k * 18, 3 + k * 3, 0, 7); c.fill(); } c.restore(); },
   // אסלה (מכשול תחתון בפרה המעופפת)
@@ -138,16 +140,24 @@ S.crowd = (r, fans, t, excited) => crowd(r.ctx, fans, t, excited);
 
 // ---- כדורים תלת-ממדיים: כדור עם הצללה, סיבוב אמיתי של הדוגמה, והבהוב ----
 export function soccerBall(ctx, x, y, r, rot = 0) {
-  const g = ctx.createRadialGradient(x - r * .35, y - r * .35, r * .1, x, y, r); g.addColorStop(0, '#ffffff'); g.addColorStop(.55, '#e5e7eb'); g.addColorStop(1, '#6b7280');
-  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-  ctx.save(); ctx.beginPath(); ctx.arc(x, y, r * .97, 0, Math.PI * 2); ctx.clip(); ctx.translate(x, y); ctx.rotate(rot);
-  const pent = (px, py, pr, a0) => { ctx.beginPath(); for (let k = 0; k < 5; k++) { const a = a0 + k * Math.PI * 2 / 5; ctx.lineTo(px + Math.cos(a) * pr, py + Math.sin(a) * pr); } ctx.closePath(); ctx.fill(); };
-  ctx.fillStyle = '#111827'; pent(0, 0, r * .3, -Math.PI / 2);
-  for (let k = 0; k < 5; k++) { const a = -Math.PI / 2 + k * Math.PI * 2 / 5; pent(Math.cos(a) * r * .78, Math.sin(a) * r * .78, r * .26, a); }
-  ctx.strokeStyle = '#374151'; ctx.lineWidth = Math.max(1, r * .06); for (let k = 0; k < 5; k++) { const a = -Math.PI / 2 + k * Math.PI * 2 / 5; ctx.beginPath(); ctx.moveTo(Math.cos(a) * r * .3, Math.sin(a) * r * .3); ctx.lineTo(Math.cos(a) * r * .55, Math.sin(a) * r * .55); ctx.stroke(); }
+  // כדור אמיתי יותר: כדור עם הצללה, מחומשים שחורים שמוקרנים על הכדור (קטנים ושטוחים לקראת הקצה), תפרים בין המחומשים, ברק והשתקפות
+  const base = ctx.createRadialGradient(x - r * .3, y - r * .32, r * .05, x, y, r * 1.05); base.addColorStop(0, '#ffffff'); base.addColorStop(.45, '#f3f4f6'); base.addColorStop(.8, '#c7cbd3'); base.addColorStop(1, '#6b7280');
+  ctx.fillStyle = base; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  ctx.save(); ctx.beginPath(); ctx.arc(x, y, r * .985, 0, Math.PI * 2); ctx.clip(); ctx.translate(x, y);
+  // המחומשים יושבים על כדור: כל אחד בזווית (lon,lat), מוקרן עם סיבוב סביב ציר אנכי ומעט סביב ציר עומק
+  const spots = [[0, 0]]; for (let k = 0; k < 5; k++) spots.push([k * Math.PI * 2 / 5, 1.1]); for (let k = 0; k < 5; k++) spots.push([k * Math.PI * 2 / 5 + Math.PI / 5, 2.05]);
+  const proj = (lon, lat) => { const sl = Math.sin(lat), cl = Math.cos(lat); const px = sl * Math.cos(lon), py = sl * Math.sin(lon), pz = cl; const c = Math.cos(rot), sn = Math.sin(rot); const rx = px * c + pz * sn, rz = -px * sn + pz * c; const c2 = Math.cos(rot * .37), s2 = Math.sin(rot * .37); const ry = py * c2 - rz * s2, rz2 = py * s2 + rz * c2; return [rx, ry, rz2]; };
+  const pts = spots.map(([lon, lat]) => proj(lon, lat)).filter(p => p[2] > -.05);
+  // תפרים: קווים בין מחומשים קרובים
+  ctx.strokeStyle = 'rgba(55,65,81,.55)'; ctx.lineWidth = Math.max(.8, r * .045);
+  for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) { const a = pts[i], b = pts[j]; const d = Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]); if (d < 1.25 && a[2] > .05 && b[2] > .05) { ctx.beginPath(); ctx.moveTo(a[0] * r, a[1] * r); ctx.lineTo(b[0] * r, b[1] * r); ctx.stroke(); } }
+  for (const [px, py, pz] of pts) { if (pz <= 0) continue; const sq = Math.max(.12, pz); const pr = r * .28 * (0.55 + 0.45 * pz); const ang = Math.atan2(py, px); ctx.save(); ctx.translate(px * r, py * r); ctx.rotate(ang); ctx.scale(sq, 1); ctx.rotate(-ang + rot * .5); ctx.fillStyle = `rgba(17,24,39,${.75 + .25 * pz})`; ctx.beginPath(); for (let k = 0; k < 5; k++) { const a = -Math.PI / 2 + k * Math.PI * 2 / 5; ctx.lineTo(Math.cos(a) * pr, Math.sin(a) * pr); } ctx.closePath(); ctx.fill(); ctx.restore(); }
   ctx.restore();
-  ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.beginPath(); ctx.ellipse(x - r * .38, y - r * .42, r * .22, r * .13, -.6, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = Math.max(1, r * .08); ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+  // הצללה בתחתית, ברק למעלה, קו מתאר עדין
+  const sh = ctx.createRadialGradient(x + r * .25, y + r * .3, r * .2, x, y, r); sh.addColorStop(0, 'rgba(0,0,0,0)'); sh.addColorStop(.7, 'rgba(0,0,0,.05)'); sh.addColorStop(1, 'rgba(0,0,0,.35)'); ctx.fillStyle = sh; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,.85)'; ctx.beginPath(); ctx.ellipse(x - r * .38, y - r * .45, r * .2, r * .11, -.6, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,.25)'; ctx.beginPath(); ctx.ellipse(x + r * .1, y + r * .72, r * .35, r * .08, .1, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = 'rgba(17,24,39,.4)'; ctx.lineWidth = Math.max(1, r * .06); ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
 }
 export function basketBall(ctx, x, y, r, rot = 0) {
   const g = ctx.createRadialGradient(x - r * .35, y - r * .35, r * .1, x, y, r); g.addColorStop(0, '#fdba74'); g.addColorStop(.5, '#f97316'); g.addColorStop(1, '#9a3412');
