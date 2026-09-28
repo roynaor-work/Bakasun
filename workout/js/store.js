@@ -1,6 +1,6 @@
 // אחסון מקומי בדפדפן. הנתונים נשארים במכשיר; מחיקה רק דרך ההגדרות ובאישור.
 const KEY = 'kidfit.v1';
-const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true, plan: null, giftEvery: 1, gameSeconds: 90, voice: true, familyCode: '' }, sessions: [], tokens: 0, games: { bests: {}, played: {}, recent: [], count: 0 },
+const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true, plan: null, giftEvery: 1, gameSeconds: 90, voice: true, familyCode: '', prog: {} }, sessions: [], tokens: 0, games: { bests: {}, played: {}, recent: [], count: 0 },
   parent: { pinHash: '', lastSeen: '', feed: [] }, basketball: [] };
 
 function load() {
@@ -21,6 +21,8 @@ export const store = {
   get games() { return this.data.games; },
   get parent() { return this.data.parent; },
   get basketball() { return this.data.basketball; },
+  progBoost(id) { return this.data.profile.prog?.[id] || { boost: 0, swaps: 0 }; },
+  setProgBoost(id, b) { const prog = { ...(this.data.profile.prog || {}) }; prog[id] = b; this.setProfile({ prog }); },
   setParent(patch) { Object.assign(this.data.parent, patch); this.save(); },
   upsertBasketball(sess) { const i = this.data.basketball.findIndex(x => x.id === sess.id); if (i >= 0) this.data.basketball[i] = sess; else this.data.basketball.push(sess); this.save(); },
   removeBasketball(id) { this.data.basketball = this.data.basketball.filter(x => x.id !== id); this.save(); },

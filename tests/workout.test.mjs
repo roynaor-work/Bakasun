@@ -111,3 +111,19 @@ test('basketball stats: totals, percent and trend', async () => {
   assert.equal(st.per.dribble.pct, null); assert.equal(st.per.dribble.times, 1);
   assert.ok(BB_DRILLS.length >= 8);
 });
+
+test('difficulty boost per program: +10% and harder exercises', async () => {
+  const { harderOf, boostText } = await import('../workout/js/logic.js');
+  const legs = programById['legs'];
+  const base = buildItems(legs, byId, 'normal');
+  const boosted = buildItems(legs, byId, 'normal', { boost: 2, swaps: 0 });
+  const sq = base.find(i => i.exId === 'squats'), sqB = boosted.find(i => i.exId === 'squats');
+  assert.equal(sq.target, 15); assert.equal(sqB.target, 18);
+  assert.equal(boosted.find(i => i.block === 'חימום').target, base.find(i => i.block === 'חימום').target, 'warm-up unchanged');
+  const swapped = buildItems(legs, byId, 'normal', { boost: 0, swaps: 1 });
+  assert.equal(swapped.find(i => i.block === 'האימון').exId, 'squat-jumps');
+  assert.ok(swapped.find(i => i.exId === 'squat-jumps').swapped);
+  assert.equal(harderOf('knee-push-ups', 2), 'pike-push-ups'); assert.equal(harderOf('burpees'), 'burpees');
+  assert.equal(boostText({ boost: 1, swaps: 1 }), '+10% · תרגילים מתקדמים'); assert.equal(boostText({}), '');
+  for (const [a, b] of Object.entries((await import('../workout/js/logic.js')).HARDER)) assert.ok(byId[a] && byId[b], a + '>' + b);
+});

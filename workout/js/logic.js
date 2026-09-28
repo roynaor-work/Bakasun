@@ -1,5 +1,17 @@
 // היגיון טהור בלי DOM: חישוב יעדים לפי רמה, סיכומים, רצף ימים, תגים. נבדק ב-tests/workout.test.mjs.
-export const LEVELS = { easy: { name: 'קל', mult: 0.7 }, normal: { name: 'רגיל', mult: 1 }, hard: { name: 'חזק', mult: 1.35 } };
+export const LEVELS = { easy: { name: 'קל', mult: 0.7 }, normal: { name: 'רגיל', mult: 1 }, hard: { name: 'חזק', mult: 1.35 }, pro: { name: 'אלוף', mult: 1.7 } };
+
+// העלאת קושי לכל תוכנית בנפרד (מהשאלה בסוף האימון): boost = +10% חזרות/זמן לכל דרגה, swaps = כמה פעמים החלפנו לתרגיל קשה יותר
+export const HARDER = {
+  'jumping-jacks': 'star-jumps', 'star-jumps': 'tuck-jumps', squats: 'squat-jumps', 'squat-jumps': 'tuck-jumps',
+  'knee-push-ups': 'push-ups', 'push-ups': 'pike-push-ups', crunches: 'bicycle', bicycle: 'v-ups', 'leg-raises': 'v-ups',
+  plank: 'mountain-climbers', 'high-knees': 'hall-sprint', 'ankle-hops': 'side-hops', 'side-hops': 'single-leg-hops',
+  lunges: 'single-leg-hops', 'calf-raises': 'ankle-hops', 'side-shuffle': 'carioca', 'broad-jump': 'run-jump', 'step-jumps': 'tuck-jumps',
+  'glute-bridge': 'superman', 'flutter-kicks': 'hollow-hold', 'russian-twists': 'v-ups',
+};
+export const harderOf = (id, times = 1) => { let cur = id; for (let i = 0; i < times; i++) { if (!HARDER[cur]) break; cur = HARDER[cur]; } return cur; };
+export const MAX_BOOST = 5, MAX_SWAPS = 2;
+export const boostText = (b = {}) => [b.boost ? `+${b.boost * 10}%` : '', b.swaps ? (b.swaps === 1 ? 'תרגילים מתקדמים' : 'תרגילים מתקדמים ×2') : ''].filter(Boolean).join(' · ');
 
 export function scaleTarget(base, level = 'normal', type = 'reps') {
   const m = (LEVELS[level] || LEVELS.normal).mult;
@@ -9,18 +21,20 @@ export function scaleTarget(base, level = 'normal', type = 'reps') {
 
 // בונה את רשימת הפריטים לאימון מתוך תוכנית: בלוקים (חימום / האימון / מתיחות), כל בלוק אולי בכמה סבבים.
 // תוכנית בלי בלוקים (אימון חופשי, תרגיל בודד) היא בלוק אחד.
-export function buildItems(program, catalog, level = 'normal') {
+export function buildItems(program, catalog, level = 'normal', boost = { boost: 0, swaps: 0 }) {
   const out = [];
   const blocks = program.blocks || [{ name: 'האימון', items: program.items, rounds: program.rounds }];
   for (const b of blocks) {
     const rounds = b.rounds || 1;
     for (let r = 1; r <= rounds; r++) {
-      for (const id of b.items) {
-        const ex = catalog[id]; if (!ex) continue;
+      for (const id0 of b.items) {
         const main = b.name === 'האימון';
+        const id = main && boost.swaps ? harderOf(id0, boost.swaps) : id0;
+        const ex = catalog[id] || catalog[id0]; if (!ex) continue;
         const type = main && program.override?.type ? program.override.type : ex.type;
         const base = main && program.override?.base != null ? program.override.base : ex.base;
-        out.push({ exId: id, name: ex.name, type, target: scaleTarget(base, level, type), round: r, rounds, block: b.name });
+        const target = main && boost.boost ? scaleTarget(base * (1 + 0.1 * boost.boost), level, type) : scaleTarget(base, level, type);
+        out.push({ exId: ex.id, name: ex.name, type, target, round: r, rounds, block: b.name, swapped: ex.id !== id0 });
       }
     }
   }
