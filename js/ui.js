@@ -38,7 +38,7 @@ export function dialog(title, bodyHtml, opts) {
     addContactPicker(form);
     const done = v => { wrap.remove(); resolve(v); };
     wrap.addEventListener('click', e => { if (e.target === wrap || e.target.dataset.x === 'cancel') done(null); });
-    form.addEventListener('submit', e => { e.preventDefault(); const o = {}; new FormData(form).forEach((v, k) => { o[k] = v; }); done(o); });
+    form.addEventListener('submit', e => { e.preventDefault(); const o = {}; new FormData(form).forEach((v, k) => { o[k] = k in o ? [].concat(o[k], v) : v; }); done(o); });
     const first = form.querySelector('input,textarea,select'); if (first) setTimeout(() => first.focus(), 50);
   });
 }
@@ -51,6 +51,15 @@ export function openWhatsApp(phone, text) {
   if (!url) { toast(t('noPhone')); return false; }
   const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove();
   toast(t('openWa'), 2500);
+  return true;
+}
+/** Opens the mail app with recipient, subject and body ready; she presses send. Same Arabic guard. */
+export function openMail(to, subject, body) {
+  if (hasArabic(body) || hasArabic(subject)) { toast(t('arabicBlocked'), 4000); return false; }
+  if (!to) { toast(t('noEmail')); return false; }
+  const a = document.createElement('a'); a.href = 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subject || '') + '&body=' + encodeURIComponent(body || ''); a.target = '_blank'; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); a.remove();
+  toast(t('openMail'), 2500);
   return true;
 }
 export function dial(phone) {

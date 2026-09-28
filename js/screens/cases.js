@@ -15,6 +15,7 @@ import { payStatusLabel } from '../labels.js';
 import { APPROVAL, APPROVAL_KINDS, kindLabel as approvalKindLabel, approvalMessage, approvalReminder } from '../logic/approvals.js';
 import { lang as uiLang } from '../i18n.js';
 import { DEFAULTS } from '../data/defaults.js';
+import { askFlow, resend, offerDialog, compareBlock, wireCompare, sendEach } from './rfq.js';
 
 let tab = 'open';
 let caseTab = 'details';
@@ -116,46 +117,27 @@ function tabSuppliers(body, c, s) {
   body.innerHTML = `
     <div class="row"><button class="btn primary" id="ask">${esc(t('askSuppliers'))}</button><a class="btn" href="#/assist/supplier-quote/${esc(id)}">${esc(t('cmdSupplierQuote'))}</a>${links.length ? `<button class="btn" id="change">${esc(t('changeAll'))}</button>` : ''}</div>
     ${recTypes.length ? `<p class="hint">${esc(t('recommended'))}: ${recTypes.map(x => esc(supplierTypeLabel(x))).join(' · ')}</p>` : ''}
-    <div class="list">${links.length ? links.map(l => { const sp = sups[l.supplierId] || { name: l.supplier }; return `<div class="card" data-l="${esc(l.id)}">
-      <div class="row between"><a class="title" href="#/supplier/${esc(l.supplierId)}">${esc(sp.name || '')}</a><span class="badge ${/אושר/.test(l.status) ? 'ok' : /בוטל/.test(l.status) ? 'muted' : 'warn'}">${esc(linkStatusLabel(l.status))}</span></div>
-      <div class="sub">${[supplierTypeLabel(sp.type), l.what, l.cost ? Office.money(l.cost) : '', l.arrive ? t('arrive') + ' ' + Office.hhmm(l.arrive) : '', l.askedAt ? t('sentTo') + ' ' + Office.fmt(l.askedAt) : ''].filter(Boolean).map(esc).join(' · ')}${l.rating ? ' · ' + esc(stars(l.rating)) : ''}${Office.yes(l.paid) ? ` · <span class="badge ok">${esc(t('paid'))}</span>` : ''}</div>
-      <div class="row"><button class="btn wa sm" data-wa>${esc(t('whatsapp'))}</button><button class="btn sm" data-dial>${esc(t('call'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div></div>`; }).join('') : empty(t('none'))}</div>`;
+    <div class="list">${links.length ? links.map(l => { const sp = sups[l.supplierId] || { name: l.supplier }; const waiting = /ביקשנו/.test(l.status) && l.askedAt && !l.answeredAt; return `<div class="card" data-l="${esc(l.id)}">
+      <div class="row between"><a class="title" href="#/supplier/${esc(l.supplierId)}">${esc(sp.name || '')}${Office.yes(l.chosen) ? ' ★' : ''}</a><span class="badge ${/אושר/.test(l.status) ? 'ok' : /בוטל/.test(l.status) ? 'muted' : 'warn'}">${esc(linkStatusLabel(l.status))}</span></div>
+      <div class="sub">${[supplierTypeLabel(sp.type), l.what, l.cost ? Office.money(l.cost) : '', l.arrive ? t('arrive') + ' ' + Office.hhmm(l.arrive) : '', l.askedAt ? t('sentTo') + ' ' + Office.fmt(l.askedAt) + (l.channel === 'email' ? ' ✉' : l.channel ? ' ☏' : '') : ''].filter(Boolean).map(esc).join(' · ')}${l.rating ? ' · ' + esc(stars(l.rating)) : ''}${Office.yes(l.paid) ? ` · <span class="badge ok">${esc(t('paid'))}</span>` : ''}</div>
+      <div class="row">${waiting ? `<button class="btn wa sm" data-remind>${esc(t('remind'))}</button>` : ''}${!/בוטל|אושר/.test(l.status) ? `<button class="btn sm ok" data-offer>${esc(t('offerReceived'))}</button>` : ''}<button class="btn sm" data-send>${esc(l.askedAt ? t('resend') : t('sendEach'))}</button><button class="btn sm" data-dial>${esc(t('call'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div></div>`; }).join('') : empty(t('none'))}</div>
+    ${compareBlock(c, links, sups)}`;
 
-  body.querySelector('#ask').onclick = async () => {
-    const all = db.list('suppliers').filter(x => !/^(לא|no)$/i.test(String(x.active || '')));
-    const linked = {}; links.forEach(l => { linked[l.supplierId] = 1; });
-    const byType = {}; all.forEach(x => { (byType[x.type] = byType[x.type] || []).push(x); });
-    const types = recTypes.concat(SUPPLIER_TYPES.filter(x => recTypes.indexOf(x) < 0));
-    const listHtml = types.map(ty => `<div class="f"><span>${esc(supplierTypeLabel(ty))}${recTypes.includes(ty) ? ' ★' : ''}</span>${(byType[ty] || []).length ? Office.rankSuppliers(byType[ty], ty, db.list('links')).map(x => `<label class="chk"><input type="checkbox" name="sup" value="${esc(x.id)}"${linked[x.id] ? ' disabled' : recTypes.includes(ty) ? ' checked' : ''}> ${esc(x.name)} <span class="sub">${esc(stars(x.rating))}${x.events ? ' · ' + x.events : ''}</span></label>`).join('') : `<span class="sub">${esc(t('noneOfType'))}</span>`}</div>`).join('');
-    const wrap = document.createElement('div'); wrap.className = 'modal';
-    wrap.innerHTML = `<form class="modal-card"><h2>${esc(t('askSuppliers'))}</h2><div class="modal-body">${field('what', t('whatNeeded'), Office.eventLine(c))}${field('replyBy', t('replyBy'), Office.iso(Office.addDays(new Date(), 3)), { type: 'date' })}<h3>${esc(t('pickSuppliers'))}</h3>${listHtml}</div>
-      <div class="row end"><button type="button" class="btn ghost" data-x="cancel">${esc(t('cancel'))}</button><button type="submit" class="btn primary">${esc(t('sendEach'))}</button></div></form>`;
-    document.body.appendChild(wrap);
-    wrap.addEventListener('click', e => { if (e.target === wrap || e.target.dataset.x === 'cancel') wrap.remove(); });
-    wrap.querySelector('form').onsubmit = e => {
-      e.preventDefault();
-      const fd = new FormData(e.target); const ids = fd.getAll('sup'); const what = fd.get('what'), replyBy = fd.get('replyBy');
-      wrap.remove();
-      if (!ids.length) return;
-      ids.forEach(sid => db.put('links', { caseId: id, supplierId: sid, supplier: (sups[sid] || {}).name, what, status: 'ביקשנו הצעה', askedAt: '' }));
-      sendOneByOne(ids.map(sid => sups[sid]).filter(Boolean), sp => Office.supplierRequest(c, sp, what, s.signer || '', replyBy), sp => {
-        const l = db.list('links', x => x.caseId === id && x.supplierId === sp.id)[0]; if (l) db.put('links', { id: l.id, askedAt: todayIso() });
-      });
-    };
-  };
+  const refresh = () => tabSuppliers(body, db.get('cases', id) || c, s);
+  wireCompare(body, c, s, links, sups, refresh);
+  body.querySelector('#ask').onclick = () => askFlow(c, s, links, sups, recTypes, refresh);
   const ch = body.querySelector('#change'); if (ch) ch.onclick = async () => {
     const r = await dialog(t('changeAll'), field('change', t('theChange'), '', { type: 'textarea' }), { ok: t('sendEach') });
     if (!r || !r.change) return;
     const targets = links.filter(l => !/בוטל/.test(l.status)).map(l => sups[l.supplierId]).filter(Boolean);
-    sendOneByOne(targets, sp => Office.changeMessage(c, sp, r.change, s.signer || ''));
+    sendEach(targets, sp => Office.changeMessage(c, sp, r.change, s.signer || ''), () => (c.kind || '') + (c.date ? ' · ' + Office.fmt(c.date) : '') + ' · ' + t('theChange'));
   };
   body.querySelectorAll('.card[data-l]').forEach(el => {
     const l = db.get('links', el.dataset.l); const sp = sups[l.supplierId] || {};
     el.querySelector('[data-dial]').onclick = () => dial(sp.phone);
-    el.querySelector('[data-wa]').onclick = async () => {
-      const r = await dialog(t('whatsapp'), `<textarea name="text" rows="7">${esc(Office.supplierRequest(c, sp, l.what, s.signer || ''))}</textarea>`, { ok: t('whatsapp') });
-      if (r && openWhatsApp(sp.phone, r.text) && !l.askedAt) db.put('links', { id: l.id, askedAt: todayIso() });
-    };
+    el.querySelector('[data-send]').onclick = () => { resend(c, s, l, sp, false); setTimeout(refresh, 500); };
+    const rm = el.querySelector('[data-remind]'); if (rm) rm.onclick = () => { resend(c, s, l, sp, true); setTimeout(refresh, 500); };
+    const of = el.querySelector('[data-offer]'); if (of) of.onclick = async () => { if (await offerDialog(c, l, sp)) refresh(); };
     el.querySelector('[data-edit]').onclick = async () => {
       const r = await dialog(sp.name || t('supplier'), `<div class="grid2">${field('status', t('linkStatus'), l.status, { type: 'select', options: ['ביקשנו הצעה', 'הצעה התקבלה', 'אושר', 'בוטל'].map(v => [v, linkStatusLabel(v)]) })}${field('cost', t('cost'), l.cost || '', { type: 'number', inputmode: 'decimal' })}
         ${field('arrive', t('arrive'), l.arrive || '', { type: 'time' })}${field('paid', t('paid'), Office.yes(l.paid) ? 'כן' : 'לא', { type: 'select', options: [['לא', '✗'], ['כן', '✓']] })}${field('rating', t('rateSupplier'), l.rating || '', { type: 'select', options: [['', '']].concat([5, 4, 3, 2, 1].map(n => [n, stars(n)])) })}</div>${field('what', t('whatNeeded'), l.what || '')}${field('note', t('note'), l.note || '')}` +

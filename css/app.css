@@ -138,3 +138,9 @@ a.card, a.card:visited { color: inherit; text-decoration: none; }
 .okbox{background:#DCEBE2;color:#2E6A4E;border-radius:10px;padding:10px 12px;font-weight:600}
 
 .f .pick{align-self:flex-start;margin-top:4px}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;min-width:100%;font-size:13px;background:var(--card,#FBF8F2)}
+table.cmp th,table.cmp td{border:1px solid var(--line,#DED3C2);padding:6px 8px;text-align:start;vertical-align:top;white-space:nowrap}
+table.cmp th{background:var(--ink,#12100F);color:#EFE8DC;font-weight:700}
+table.cmp tr.chosen td{background:#DCEBE2}
+table.cmp td.n{direction:ltr;unicode-bidi:isolate}

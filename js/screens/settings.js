@@ -3,6 +3,7 @@ import { t, LANGS, langName } from '../i18n.js';
 import { db } from '../store.js';
 import { esc, field, toast, confirmDialog, dialog, pickContacts, contactsSupported } from '../ui.js';
 import { parseContactsFile } from '../logic/contacts.js';
+import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM } from '../data/seedContacts.js';
 import { phoneDigits } from '../logic/core.js';
 import { loadDemo } from '../data/demo.js';
 import * as cloud from '../cloud.js';
@@ -25,6 +26,7 @@ export function render({ root }) {
         ${field('msgLang', t('msgLang'), s.msgLang || 'he', { type: 'select', options: L })}
         ${field('followupDays', t('followupDays'), s.followupDays || 1, { type: 'number', inputmode: 'numeric' })}
         ${field('approvalRemindDays', t('approvalRemindDays'), s.approvalRemindDays || 2, { type: 'number', inputmode: 'numeric' })}
+        ${field('supplierRemindDays', t('waitingSuppliers') + ': ' + t('afterDays'), s.supplierRemindDays || 1, { type: 'number', inputmode: 'numeric' })}
         ${field('supplierPayReminder', t('supplierPayReminder'), s.supplierPayReminder || 'auto', { type: 'select', options: [['auto', t('autoRemind')], ['manual', t('manualRemind')]] })}
         ${field('supplierPayDays', t('supplierPay') + ': ' + t('afterEventDays'), s.supplierPayDays || 1, { type: 'number', inputmode: 'numeric' })}
       </div>
@@ -67,7 +69,7 @@ export function render({ root }) {
     <section class="sec"><h2>${esc(t('team'))}</h2><p class="hint">${esc(t('teamHint'))}</p>
       <div class="list">${db.list('team').map(p => `<div class="card" data-team="${esc(p.id)}"><div class="row between"><span class="title">${esc(p.name)}${p.role ? ` <span class="sub">· ${esc(p.role)}</span>` : ''}</span><span class="row"><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button><button class="btn sm ghost" data-del>✕</button></span></div><div class="sub ltr">${esc([p.phone, p.email].filter(Boolean).join(' · ') || '—')}</div></div>`).join('')}</div>
       <div class="row"><button class="btn sm" id="addTeam">${esc(t('addPerson'))}</button></div></section>
-    <section class="sec"><h2>${esc(t('demo'))}</h2><div class="row"><button class="btn" id="demo">${esc(t('loadDemo'))}</button><button class="btn danger" id="clear">${esc(t('clearAll'))}</button></div></section>
+    <section class="sec"><h2>${esc(t('demo'))}</h2><div class="row"><button class="btn" id="seed">${esc(t('loadSeed'))}</button></div><div class="row"><button class="btn" id="demo">${esc(t('loadDemo'))}</button><button class="btn danger" id="clear">${esc(t('clearAll'))}</button></div></section>
     <p class="hint sec">${esc(t('install'))}</p>`;
 
   root.querySelector('#f').onsubmit = e => {
@@ -94,6 +96,14 @@ export function render({ root }) {
     f.text().then(txt => { db.importJson(txt); toast(t('saved')); location.hash = '#/today'; }).catch(() => toast('?'));
   };
   root.querySelector('#demo').onclick = () => { loadDemo(); toast(t('saved')); location.hash = '#/today'; };
+  root.querySelector('#seed').onclick = () => {
+    const haveS = new Set(db.list('suppliers').map(x => x.name)), haveC = new Set(db.list('clients').map(x => x.name)), haveT = new Set(db.list('team').map(x => x.name));
+    let ns = 0, nc = 0, np = 0;
+    SEED_SUPPLIERS.forEach(x => { if (haveS.has(x.name)) return; db.put('suppliers', { name: x.name, type: x.type, contact: x.contact, phone: x.phone, email: x.email, lang: x.lang, notes: [x.role, x.notes].filter(Boolean).join(' · '), rating: 3, active: 'כן', area: '' }); ns++; });
+    SEED_CLIENTS.forEach(x => { if (haveC.has(x.name)) return; db.put('clients', { name: x.name, contact: x.contact, phone: x.phone, email: x.email, lang: x.lang, notes: [x.kind, x.role, x.notes].filter(Boolean).join(' · ') }); nc++; });
+    SEED_TEAM.forEach(x => { if (haveT.has(x.name)) return; db.put('team', { name: x.name, role: x.role, phone: x.phone, email: x.email }); np++; });
+    toast(ns + nc + np ? t('seedLoaded', { s: ns, c: nc, p: np }) : t('seedDone'), 4000); render({ root });
+  };
   const editTeam = async p => {
     const r = await dialog(p ? p.name : t('addPerson'), `${field('name', t('fName'), p ? p.name : '')}<div class="grid2">${field('role', t('role'), p ? p.role : '')}${field('phone', t('fPhone'), p ? p.phone : '', { ltr: true, inputmode: 'tel' })}</div>${field('email', t('fEmail'), p ? p.email : '', { ltr: true, inputmode: 'email' })}`, { ok: t('save') });
     if (!r || !r.name) return;

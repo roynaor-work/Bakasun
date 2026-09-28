@@ -1,13 +1,13 @@
 /* The catalog: things that go into quotes, with names in three languages and NO prices (the price comes from the supplier each time).
    And the recommended list per kind of event: which supplier types and which catalog items usually belong. Virginie edits both in the app. */
 
-export const SUPPLIER_TYPES = ['קייטרינג ושפים', 'בר ומשקאות', 'תקליטנים ולהקות', 'צילום ווידאו', 'הגברה ותאורה', 'עיצוב ופרחים', 'הסעות', 'מלונות', 'מדריכי טיולים', 'השכרת ציוד', 'מקום לאירוע', 'אחר'];
+export const SUPPLIER_TYPES = ['קייטרינג ושפים', 'בר ומשקאות', 'תקליטנים ולהקות', 'צילום ווידאו', 'הגברה ותאורה', 'עיצוב ופרחים', 'הסעות', 'מלונות', 'מדריכי טיולים', 'השכרת ציוד', 'מקום לאירוע', 'דפוס ומיתוג', 'פעילות וסיורים', 'מסעדות', 'אחר'];
 export const SUPPLIER_TYPE_L = {
   'קייטרינג ושפים': { en: 'Catering and chefs', fr: 'Traiteur et chefs' }, 'בר ומשקאות': { en: 'Bar and drinks', fr: 'Bar et boissons' },
   'תקליטנים ולהקות': { en: 'DJs and bands', fr: 'DJ et groupes' }, 'צילום ווידאו': { en: 'Photo and video', fr: 'Photo et vidéo' },
   'הגברה ותאורה': { en: 'Sound and lighting', fr: 'Son et lumière' }, 'עיצוב ופרחים': { en: 'Decoration and flowers', fr: 'Décoration et fleurs' },
   'הסעות': { en: 'Transport', fr: 'Transport' }, 'מלונות': { en: 'Hotels', fr: 'Hôtels' }, 'מדריכי טיולים': { en: 'Tour guides', fr: 'Guides' },
-  'השכרת ציוד': { en: 'Equipment rental', fr: 'Location de matériel' }, 'מקום לאירוע': { en: 'Venue', fr: 'Lieu' }, 'אחר': { en: 'Other', fr: 'Autre' }
+  'השכרת ציוד': { en: 'Equipment rental', fr: 'Location de matériel' }, 'מקום לאירוע': { en: 'Venue', fr: 'Lieu' }, 'דפוס ומיתוג': { en: 'Print and branding', fr: 'Impression et marquage' }, 'פעילות וסיורים': { en: 'Activities and tours', fr: 'Activités et visites' }, 'מסעדות': { en: 'Restaurants', fr: 'Restaurants' }, 'אחר': { en: 'Other', fr: 'Autre' }
 };
 
 /* [category, item, unit, en, fr, supplier type] */
