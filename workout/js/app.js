@@ -4,6 +4,8 @@ import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js';
 import { Figure, cycleMs } from './figure.js';
 import { store } from './store.js';
 import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel } from './logic.js';
+import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js';
+import { runGame } from './games/engine.js';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
@@ -11,9 +13,10 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 const go = h => { location.hash = h; };
 const plan = () => store.profile.plan || DEFAULT_PLAN;
 
-let figures = [];
+let figures = [], activeGame = null;
 function mount(html, full = false) {
   figures.forEach(f => f.stop()); figures = [];
+  if (activeGame) { activeGame.stop(); activeGame = null; }
   clearInterval(tick); tick = 0;
   app.innerHTML = html; app.classList.toggle('full', full);
   nav.classList.toggle('hidden', full);
@@ -50,14 +53,14 @@ function confetti() {
 }
 
 // ---- ניתוב ----
-const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, history, settings, free, start, workout: workoutScreen };
+const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, history, settings, free, start, workout: workoutScreen, arcade };
 function route() {
   const [path, arg] = location.hash.replace(/^#\/?/, '').split('/');
   (routes[path] || home)(arg);
   renderNav(path);
 }
 function renderNav(path) {
-  const tabs = [['home', '🏠', 'היום'], ['exercises', '🤸', 'תרגילים'], ['history', '📈', 'מעקב'], ['settings', '⚙️', 'הגדרות']];
+  const tabs = [['home', '🏠', 'היום'], ['exercises', '🤸', 'תרגילים'], ['arcade', '🎮', 'משחקים'], ['history', '📈', 'מעקב'], ['settings', '⚙️', 'הגדרות']];
   nav.innerHTML = tabs.map(([k, i, n]) => `<a href="#/${k}" class="${(path || 'home') === k ? 'on' : ''}"><span class="i">${i}</span>${n}</a>`).join('');
 }
 window.addEventListener('hashchange', route);
@@ -82,6 +85,7 @@ function home() {
         <h1>${hi()}</h1>
         <span class="pill">🔥 ${st.streak} ימים ברצף</span>
       </div>
+      <div class="row wrap" style="margin-top:8px"><span class="tokens" data-go="#/arcade">🎁 ${store.tokens} ${store.tokens === 1 ? 'מתנה' : 'מתנות'} לשחק</span><span class="pill">🎮 ${GAMES.length} משחקים</span></div>
       <p class="muted" style="margin-top:6px">יום ${DAY_NAMES[now.getDay()]}. ${todayCount ? `היום כבר עשית ${todayCount === 1 ? 'אימון' : todayCount + ' אימונים'}. כל הכבוד!` : today ? 'היום זה יום ' + esc(today.name.split(':')[0]) + '. יאללה!' : 'היום יום מנוחה. מגיע לך.'}</p>
     </section>
 
@@ -224,7 +228,7 @@ function exerciseDetail(id) {
 // ---- מהלך האימון ----
 let W = null, tick = 0;
 function beginWorkout(program, items) {
-  W = { program, items: items.map(i => ({ ...i, done: 0, skipped: false })), idx: 0, phase: 'exercise', startedAt: Date.now(), saved: false };
+  W = { program, items: items.map(i => ({ ...i, done: 0, skipped: false })), idx: 0, phase: 'exercise', startedAt: Date.now(), saved: false, mainDone: 0, gift: null, afterGift: null, gamesPlayed: 0 };
   go('#/workout');
 }
 
@@ -232,6 +236,7 @@ function workoutScreen() {
   if (!W) return go('#/home');
   if (W.phase === 'exercise') exercisePhase();
   else if (W.phase === 'rest') restPhase();
+  else if (W.phase === 'gift') giftPhase();
   else donePhase();
 }
 
@@ -335,12 +340,51 @@ function finishItem(done, skipped) {
   it.done = done; it.skipped = skipped;
   clearInterval(tick); tick = 0;
   if (!skipped && done > 0) beep(990, 120);
-  if (W.idx >= W.items.length - 1) { W.phase = 'done'; return workoutScreen(); }
-  W.idx++;
-  const next = W.items[W.idx];
-  // מנוחה רק בתוך בלוק האימון עצמו; בחימום ובמתיחות ממשיכים ישר
-  W.phase = skipped || !store.profile.rest || it.block !== 'האימון' || next.block !== 'האימון' ? 'exercise' : 'rest';
+  const last = W.idx >= W.items.length - 1;
+  let nextPhase = 'done';
+  if (!last) {
+    const next = W.items[W.idx + 1];
+    // מנוחה רק בתוך בלוק האימון עצמו; בחימום ובמתיחות ממשיכים ישר
+    nextPhase = skipped || !store.profile.rest || it.block !== 'האימון' || next.block !== 'האימון' ? 'exercise' : 'rest';
+  }
+  // מתנה: משחק קצר על כל תרגיל שהושלם באימון (לפי ההגדרה: כל תרגיל, כל שני, כל שלישי)
+  const every = store.profile.giftEvery;
+  const gift = !skipped && done > 0 && it.block === 'האימון' && every && (++W.mainDone % every === 0);
+  if (!last) W.idx++;
+  if (gift) { store.addToken(); W.gift = pickGift(store.games.played, store.games.recent); W.afterGift = nextPhase; W.phase = 'gift'; }
+  else W.phase = nextPhase;
   workoutScreen();
+}
+
+function giftPhase() {
+  const g = W.gift, secs = store.profile.gameSeconds || 90;
+  fanfare();
+  mount(`
+  <div class="stack">
+    <section class="gift pop">
+      <div class="e">🎁</div>
+      <h1>מתנה!</h1>
+      <p>סיימת תרגיל. קיבלת משחק של ${fmtTime(secs)} דקות:</p>
+    </section>
+    <div class="card gcard">
+      <div class="e">${g.emoji}</div>
+      <div><h3>${esc(g.name)}</h3><p class="muted small">${esc(g.how)}</p></div>
+      <span class="pill solid">${GAME_GROUPS.find(x => x.id === g.group).name}</span>
+    </div>
+    <button class="btn primary big" id="playnow">לשחק עכשיו 🎮</button>
+    <button class="btn ghost big" id="later">לשמור לאחר כך וממשיכים ⏭️</button>
+    <p class="muted small center">יש לך ${store.tokens} ${store.tokens === 1 ? 'מתנה שמורה' : 'מתנות שמורות'}. משחקים מהחדר משחקים בכל זמן.</p>
+  </div>`, true);
+  const cont = () => { W.phase = W.afterGift; W.gift = null; workoutScreen(); };
+  $('#later').onclick = cont;
+  $('#playnow').onclick = () => { W.gamesPlayed++; playGame(g, cont); };
+}
+
+// מריץ משחק במסך מלא ומחזיר לפונקציית ההמשך
+function playGame(g, onDone) {
+  mount('', true);
+  const secs = store.profile.gameSeconds || 90;
+  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
 }
 
 function restPhase() {
@@ -400,6 +444,7 @@ function donePhase() {
       ${sum.seconds ? `<div class="tile hot"><b>${sum.seconds}</b>שניות עבודה</div>` : ''}
       <div class="tile"><b>🔥 ${st.streak}</b>ימים ברצף</div>
       <div class="tile next"><b>${nextP ? nextP.emoji + ' ' + esc(nextP.name.split(':')[0]) : '😴 מנוחה'}</b>מחר</div>
+      ${store.tokens ? `<div class="tile" data-go="#/arcade"><b>🎁 ${store.tokens}</b>מתנות לשחק</div>` : ''}
     </div>
     ${newBadges.length ? `<h2>תג חדש! 🎉</h2><div class="badges">${newBadges.map(id => { const b = BADGES.find(x => x.id === id); return `<div class="badge pop"><span class="e">${b.emoji}</span><b>${b.name}</b><br>${b.desc}</div>`; }).join('')}</div>` : ''}
     <div class="card list">${itemsList(s)}</div>
@@ -458,6 +503,30 @@ function history() {
   app.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { if (confirm('למחוק את האימון הזה מהמעקב? אי אפשר לשחזר.')) { store.removeSession(b.dataset.del); history(); } });
 }
 
+// ---- חדר משחקים ----
+function arcade() {
+  const gs = store.games;
+  mount(`
+  <div class="stack">
+    <div class="row between wrap"><h1>חדר משחקים 🎮</h1><span class="tokens">🎁 ${store.tokens} ${store.tokens === 1 ? 'מתנה' : 'מתנות'}</span></div>
+    <p class="muted">${store.tokens ? 'בוחרים משחק. כל משחק עולה מתנה אחת ונמשך ' + fmtTime(store.profile.gameSeconds || 90) + ' דקות.' : 'כדי לשחק צריך מתנה. כל תרגיל שמסיימים באימון נותן אחת!'}</p>
+    ${!store.tokens ? '<button class="btn primary big" data-go="#/home">לאימון של היום 🚀</button>' : ''}
+    <div class="tiles"><div class="tile"><b>${gs.count}</b>משחקים ששיחקת</div><div class="tile"><b>${Object.keys(gs.played).length} <span class="muted" style="font-size:16px">מתוך</span> ${GAMES.length}</b>משחקים שגילית</div></div>
+    ${GAME_GROUPS.map(gr => `
+      <h2>${gr.emoji} ${gr.name}</h2>
+      ${gr.games.map(g => `
+        <div class="card tap gcard ${store.tokens ? '' : 'pick'}" data-game="${g.id}">
+          <div class="e">${g.emoji}</div>
+          <div><b>${esc(g.name)}</b>${gs.played[g.id] ? '' : ' <span class="pill solid" style="font-size:12px;padding:1px 8px">חדש</span>'}<div class="best">${gs.played[g.id] ? `שיא: ${gs.bests[g.id] || 0} · שיחקת ${gs.played[g.id]} ${gs.played[g.id] === 1 ? 'פעם' : 'פעמים'}` : esc(g.how)}</div></div>
+          <span class="pill solid">▶️</span>
+        </div>`).join('')}`).join('')}
+  </div>`);
+  app.querySelectorAll('[data-game]').forEach(c => c.onclick = () => {
+    if (!store.tokens) { c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500); return; }
+    playGame(gameById[c.dataset.game], () => arcade());
+  });
+}
+
 // ---- הגדרות ----
 function settings() {
   const p = store.profile, pl = plan();
@@ -469,6 +538,12 @@ function settings() {
       <label class="field">רמה<select id="level">${Object.entries(LEVELS).map(([k, v]) => `<option value="${k}" ${k === p.level ? 'selected' : ''}>${v.name} (${Math.round(v.mult * 100)}% מהכמות)</option>`).join('')}</select></label>
       <label class="field">מנוחה בין תרגילים (שניות)<select id="rest">${[0, 10, 15, 20, 30, 45].map(n => `<option value="${n}" ${n === p.rest ? 'selected' : ''}>${n ? n : 'בלי מנוחה'}</option>`).join('')}</select></label>
       <div class="toggle"><b>צלילים</b><input type="checkbox" id="sound" ${p.sound ? 'checked' : ''}></div>
+    </div>
+    <div class="card stack">
+      <h3>מתנות ומשחקים 🎁</h3>
+      <label class="field">מתנה (משחק קצר) אחרי<select id="giftEvery">${[[1, 'כל תרגיל שמסיימים'], [2, 'כל שני תרגילים'], [3, 'כל שלושה תרגילים'], [0, 'בלי מתנות']].map(([v, n]) => `<option value="${v}" ${v === p.giftEvery ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+      <label class="field">אורך משחק<select id="gameSeconds">${[[60, 'דקה'], [90, 'דקה וחצי'], [120, 'שתי דקות']].map(([v, n]) => `<option value="${v}" ${v === p.gameSeconds ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+      <p class="muted small">${GAMES.length} משחקים שונים. מתנות שלא משחקים מיד נשמרות לחדר המשחקים (${store.tokens} שמורות).</p>
     </div>
     <div class="card stack">
       <h3>התוכנית השבועית</h3>
@@ -488,6 +563,8 @@ function settings() {
   $('#level').onchange = e => store.setProfile({ level: e.target.value });
   $('#rest').onchange = e => store.setProfile({ rest: +e.target.value });
   $('#sound').onchange = e => store.setProfile({ sound: e.target.checked });
+  $('#giftEvery').onchange = e => store.setProfile({ giftEvery: +e.target.value });
+  $('#gameSeconds').onchange = e => store.setProfile({ gameSeconds: +e.target.value });
   app.querySelectorAll('[data-day]').forEach(s => s.onchange = () => { const np = { ...plan() }; np[s.dataset.day] = s.value; store.setProfile({ plan: np }); });
   $('#resetplan').onclick = () => { store.setProfile({ plan: null }); settings(); };
   $('#export').onclick = () => {
