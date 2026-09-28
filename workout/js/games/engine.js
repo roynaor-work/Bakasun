@@ -1,6 +1,7 @@
 // מנוע המשחקים הקטנים: קנבס בגודל לוגי קבוע, ניקוד, טיימר, מגע/מקלדת, מסכי פתיחה וסיום.
 // כל משחק הוא אובייקט { id, name, emoji, how, make(r) } כאשר make מחזיר { update(dt), draw(), tap(x,y), down, up, move, swipe(dir), key(code) }.
 import { poseAt } from '../figure.js';
+import { celebrateGoal } from './celebrate.js';
 export const W = 360, H = 560;
 
 const PAL = { bg: '#1B1740', ink: '#F5F2FF', muted: '#9C96C4', accent: '#8B72FF', ok: '#22C55E', hot: '#FF7A3D', pink: '#FF4D8D', sky: '#38BDF8', gold: '#FFB84D', red: '#EF4444', teal: '#1FB6C9', lime: '#A3E635' };
@@ -10,7 +11,7 @@ const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 const shuffle = arr => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
-export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true }) {
+export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true, speak = null }) {
   host.innerHTML = `
     <div class="gamewrap">
       <div class="gamehud">
@@ -29,12 +30,8 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
   let pops = [], parts = [], shakeT = 0, ac = null;
   // צלילים קצרים (WebAudio)
   const tone = (f, ms, type = 'sine', vol = .18, at = 0) => { if (!sound) return; try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = f; o.connect(g); g.connect(ac.destination); const t = ac.currentTime + at; g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + ms / 1000); o.start(t); o.stop(t + ms / 1000 + .02); } catch { /* */ } };
-  // פזמון קצר לשיא חדש: "חיפה חיפה את אלופה, תודה לך מכבי" (מנגינה מסונתזת, לא הקלטה)
-  const JINGLE = [[523, .22], [523, .22], [659, .3], [784, .3], [659, .22], [587, .22], [523, .45], [0, .1], [587, .22], [587, .22], [659, .3], [523, .3], [587, .22], [659, .22], [784, .5]];
-  const jingle = () => { let at = 0; for (const [f, d] of JINGLE) { if (f) { tone(f, d * 900, 'triangle', .2, at); tone(f / 2, d * 900, 'sine', .08, at); } at += d; } return at; };
-  let fireworks = [];
-  const firework = (x, y, color) => { for (let i = 0; i < 40; i++) { const a = Math.random() * Math.PI * 2, v = 120 + Math.random() * 160; fireworks.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, color, t: 1 + Math.random() * 0.6, r: 2 + Math.random() * 2.5 }); } };
-  const SFX = { score: () => { tone(880, 90); tone(1320, 120, 'sine', .14, .08); }, hit: () => tone(220, 120, 'square', .12), over: () => { tone(300, 160, 'sawtooth', .12); tone(200, 260, 'sawtooth', .12, .15); }, win: () => { tone(660, 120); tone(880, 120, 'sine', .18, .13); tone(1100, 260, 'sine', .18, .26); }, tick: () => tone(1000, 40, 'square', .06), bounce: () => tone(500, 50, 'triangle', .1) };
+  const roar = (at = 0, dur = 1.6) => { if (!sound) return; try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const n = Math.floor(ac.sampleRate * dur), b = ac.createBuffer(1, n, ac.sampleRate), d = b.getChannelData(0); for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1; const src = ac.createBufferSource(); src.buffer = b; const f = ac.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 700; f.Q.value = .6; const g = ac.createGain(); src.connect(f); f.connect(g); g.connect(ac.destination); const t = ac.currentTime + at; g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(.45, t + .12); g.gain.exponentialRampToValueAtTime(.0001, t + dur); src.start(t); src.stop(t + dur + .05); for (let i = 0; i < 8; i++) tone(300 + Math.random() * 500, .3, 'sawtooth', .02, at + Math.random() * dur * .6); } catch { /* */ } };
+  const SFX = { roar: () => roar(), goal: () => { roar(0, 1.8); tone(196, 900, 'sawtooth', .06); tone(294, 900, 'sawtooth', .05, .02); tone(392, 900, 'sawtooth', .05, .04); }, score: () => { tone(880, 90); tone(1320, 120, 'sine', .14, .08); }, hit: () => tone(220, 120, 'square', .12), over: () => { tone(300, 160, 'sawtooth', .12); tone(200, 260, 'sawtooth', .12, .15); }, win: () => { tone(660, 120); tone(880, 120, 'sine', .18, .13); tone(1100, 260, 'sine', .18, .26); }, tick: () => tone(1000, 40, 'square', .06), bounce: () => tone(500, 50, 'triangle', .1) };
 
   const r = {
     W, H, ctx, C: PAL, rnd, rint, pick, shuffle, clamp,
@@ -98,14 +95,10 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
     const newBest = score > best && score > 0;
     flash(newBest ? `שיא חדש! ${score}` : `ניקוד: ${score}`, `${best && !newBest ? `השיא שלך: ${best} · ` : ''}חזרה לאימון`);
     if (newBest) {
-      overlay.querySelector('.gmsg').insertAdjacentHTML('afterbegin', `<div class="chant">🟢 חיפה חיפה את אלופה, תודה לך מכבי 🟢</div>`);
-      const dur = jingle();
-      // זיקוקים על הקנבס מאחורי ההודעה
-      const t0 = performance.now(); let lastFw = 0;
-      const fwLoop = now => { const el = (now - t0) / 1000; if (el > dur + 1.5) return; if (now - lastFw > 380) { lastFw = now; firework(60 + Math.random() * (W - 120), 80 + Math.random() * 220, ['#22C55E', '#FDE047', '#fff', '#4ADE80', '#F472B6'][Math.floor(Math.random() * 5)]); }
-        game && game.draw && game.draw(); fireworks.forEach(p => { p.t -= 1 / 60; p.vy += 220 / 60; p.x += p.vx / 60; p.y += p.vy / 60; ctx.globalAlpha = Math.max(0, p.t); r.circle(p.x, p.y, p.r, p.color); ctx.globalAlpha = 1; }); fireworks = fireworks.filter(p => p.t > 0);
-        requestAnimationFrame(fwLoop); };
-      requestAnimationFrame(fwLoop);
+      // חגיגת שער: מסתירים את ההודעה בזמן הסימולציה, ומראים אותה בסופה
+      hide(); const stopFx = celebrateGoal(cv, { oldBest: best, newBest: score, sound, onText: t => speak && speak(t), onDone: () => { flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) }); } });
+      cv.onclick = () => { stopFx(); cv.onclick = null; flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) }); };
+      return;
     }
     overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`);
     overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) });

@@ -1,32 +1,39 @@
 // משחקי ארקייד קלאסיים
-import { POSE, S as SP } from './sprites.js';
+import { POSE, GK, S as SP } from './sprites.js';
 const G = [];
 
 // ---- טטריס ----
 G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים ימינה ושמאלה כדי להזיז, נוגעים כדי לסובב, מחליקים למטה כדי להפיל.',
   make(r) {
-    const COLS = 10, ROWS = 18, S = 28, OX = (r.W - COLS * S) / 2, OY = 30;
+    const COLS = 10, ROWS = 17, S = 26, OX = 50, OY = 104; // מקום למעלה לשער ולחתיכה הבאה
     const SHAPES = [[[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]], [[1, 0, 0], [1, 1, 1]], [[0, 0, 1], [1, 1, 1]], [[1, 1, 0], [0, 1, 1]], [[0, 1, 1], [1, 1, 0]]];
     const COLORS = [r.C.sky, r.C.gold, r.C.accent, r.C.hot, r.C.teal, r.C.ok, r.C.pink];
     const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-    let cur, t = 0, speed = 0.55, next = r.rint(0, 6), lines = 0;
+    let cur, t = 0, speed = 0.55, next = r.rint(0, 6), lines = 0, goals = [], shot = null;
+    const GOAL = { x: 130, y: 12, w: 216, h: 70 };
     const spawn = () => { const i = next; next = r.rint(0, 6); cur = { s: SHAPES[i].map(x => [...x]), c: i + 1, x: 3, y: 0 }; if (collides(cur.s, cur.x, cur.y)) r.over('הלוח מלא!'); };
     const collides = (s, x, y) => s.some((row, j) => row.some((v, i) => v && (x + i < 0 || x + i >= COLS || y + j >= ROWS || (y + j >= 0 && grid[y + j][x + i]))));
     const rotate = s => s[0].map((_, i) => s.map(row => row[i]).reverse());
     const lock = () => { cur.s.forEach((row, j) => row.forEach((v, i) => { if (v && cur.y + j >= 0) grid[cur.y + j][cur.x + i] = cur.c; }));
       let n = 0; for (let j = ROWS - 1; j >= 0; j--) if (grid[j].every(Boolean)) { grid.splice(j, 1); grid.unshift(Array(COLS).fill(0)); n++; j++; }
-      if (n) { const pts = [0, 100, 300, 500, 800][n]; r.addScore(pts); lines += n; speed = Math.max(0.15, speed - 0.02 * n); r.pop(n === 4 ? 'טטריס! +800' : '+' + pts, r.W / 2, 200, r.C.gold, 26); r.burst(r.W / 2, 260, COLORS[cur.c - 1], 16); r.sfx(n === 4 ? 'win' : 'score'); } else r.sfx('tick'); spawn(); };
+      if (n) { const pts = [0, 100, 300, 500, 800][n]; r.addScore(pts); lines += n; speed = Math.max(0.15, speed - 0.02 * n); r.pop(n === 4 ? 'טטריס! +800' : '+' + pts, r.W / 2, 300, r.C.gold, 26); r.burst(r.W / 2, 330, COLORS[cur.c - 1], 16);
+        // כל שורה = שער במקום אחר ברשת, עם שאגת קהל
+        for (let k = 0; k < n; k++) { const gx = GOAL.x + 14 + Math.random() * (GOAL.w - 28), gy = GOAL.y + 12 + Math.random() * (GOAL.h - 24); goals.push({ x: gx, y: gy }); shot = { x: OX + COLS * S / 2, y: OY, tx: gx, ty: gy, t: 0, dir: gx < GOAL.x + GOAL.w / 2 ? 1 : -1 }; } r.sfx(n === 4 ? 'win' : 'goal'); r.pop('גול!', GOAL.x + GOAL.w / 2, GOAL.y + GOAL.h + 8, '#FDE047', 24); } else r.sfx('tick'); spawn(); };
     const step = () => { if (!collides(cur.s, cur.x, cur.y + 1)) cur.y++; else lock(); };
     spawn();
     return {
-      update(dt) { t += dt; if (t > speed) { t = 0; step(); } },
+      update(dt) { t += dt; if (t > speed) { t = 0; step(); } if (shot) { shot.t += dt * 2.2; if (shot.t >= 1.6) shot = null; } },
       swipe(d) { if (d === 'left' && !collides(cur.s, cur.x - 1, cur.y)) cur.x--; if (d === 'right' && !collides(cur.s, cur.x + 1, cur.y)) cur.x++; if (d === 'down') { while (!collides(cur.s, cur.x, cur.y + 1)) cur.y++; lock(); r.addScore(5); } if (d === 'up') this.tap(); },
       tap() { const rs = rotate(cur.s); for (const dx of [0, -1, 1, -2, 2]) if (!collides(rs, cur.x + dx, cur.y)) { cur.s = rs; cur.x += dx; break; } },
       draw() { r.clear(); r.rect(OX - 2, OY - 2, COLS * S + 4, ROWS * S + 4, '#2A2555', 6);
+        // למעלה: החתיכה הבאה (גדולה) והשער עם כל השערים שהבקעת
+        r.rect(8, 8, 108, 80, '#2A2555', 8); r.text('הבא', 62, 20, { size: 13, color: r.C.muted }); const ns = SHAPES[next], nw = ns[0].length * 18, nh = ns.length * 18; ns.forEach((row, j) => row.forEach((v, i) => { if (v) r.rect(62 - nw / 2 + i * 18 + 1, 52 - nh / 2 + j * 18 + 1, 16, 16, COLORS[next], 4); }));
+        r.rect(GOAL.x - 6, GOAL.y - 4, GOAL.w + 12, GOAL.h + 10, '#15803D', 6); r.ctx.strokeStyle = '#ffffff66'; r.ctx.lineWidth = 1; for (let i = 0; i <= GOAL.w; i += 12) r.line(GOAL.x + i, GOAL.y, GOAL.x + i, GOAL.y + GOAL.h, '#ffffff55', 1); for (let j = 0; j <= GOAL.h; j += 12) r.line(GOAL.x, GOAL.y + j, GOAL.x + GOAL.w, GOAL.y + j, '#ffffff55', 1); r.line(GOAL.x, GOAL.y + GOAL.h, GOAL.x, GOAL.y, '#fff', 4); r.line(GOAL.x, GOAL.y, GOAL.x + GOAL.w, GOAL.y, '#fff', 4); r.line(GOAL.x + GOAL.w, GOAL.y, GOAL.x + GOAL.w, GOAL.y + GOAL.h, '#fff', 4);
+        goals.forEach(g => { r.circle(g.x, g.y, 5, '#fff'); r.circle(g.x, g.y, 2, '#111'); }); r.text(`${goals.length} שערים`, GOAL.x + GOAL.w / 2, GOAL.y + GOAL.h + 16, { size: 12, color: r.C.muted });
+        const gkx = GOAL.x + GOAL.w / 2 + (shot ? shot.dir * Math.min(1, shot.t) * 70 : 0); r.stick(shot ? (shot.dir > 0 ? GK.diveR : GK.diveL) : GK.ready, gkx, GOAL.y + GOAL.h, 0.36, { color: '#FACC15', far: '#CA8A04', head: '#FDE68A', width: 6 });
+        if (shot) { const k = Math.min(1, shot.t); const bx = shot.x + (shot.tx - shot.x) * k, by = shot.y + (shot.ty - shot.y) * k - Math.sin(k * Math.PI) * 30; r.circle(bx, by, 7 - 3 * k, '#fff'); r.circle(bx, by, 2, '#111'); }
         // רוח: איפה החתיכה תנחת
         let gy = cur.y; while (!collides(cur.s, cur.x, gy + 1)) gy++; cur.s.forEach((row, j) => row.forEach((v, i) => { if (v && gy + j >= 0) r.rect(OX + (cur.x + i) * S + 3, OY + (gy + j) * S + 3, S - 6, S - 6, COLORS[cur.c - 1] + '33', 3); }));
-        // הבא בתור
-        r.text('הבא', OX + COLS * S - 20, 16, { size: 12, color: r.C.muted }); SHAPES[next].forEach((row, j) => row.forEach((v, i) => { if (v) r.rect(OX + 4 + i * 9, 6 + j * 9, 8, 8, COLORS[next], 2); })); r.text(`שורות: ${lines}`, OX + 40, 16, { size: 12, color: r.C.muted });
         grid.forEach((row, j) => row.forEach((v, i) => { if (v) { r.rect(OX + i * S + 1, OY + j * S + 1, S - 2, S - 2, COLORS[v - 1], 4); r.rect(OX + i * S + 4, OY + j * S + 4, S - 8, 5, '#ffffff33', 2); } }));
         cur.s.forEach((row, j) => row.forEach((v, i) => { if (v && cur.y + j >= 0) r.rect(OX + (cur.x + i) * S + 1, OY + (cur.y + j) * S + 1, S - 2, S - 2, COLORS[cur.c - 1], 4); })); },
     };
