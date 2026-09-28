@@ -121,3 +121,33 @@ export const BADGES = [
 export const earned = s => BADGES.filter(b => b.test(s)).map(b => b.id);
 
 export const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+// ---- יומן הכדורסל של אבא ----
+export const BB_DRILLS = [
+  { id: 'free-throws', name: 'זריקות עונשין', emoji: '🎯', shots: true },
+  { id: 'layups', name: 'ליי-אפ', emoji: '🏀', shots: true },
+  { id: 'mid-range', name: 'זריקות מטווח בינוני', emoji: '📍', shots: true },
+  { id: 'three', name: 'שלשות', emoji: '3️⃣', shots: true },
+  { id: 'dribble', name: 'כדרור', emoji: '🔄', shots: false },
+  { id: 'passing', name: 'מסירות', emoji: '🤝', shots: true },
+  { id: 'defense', name: 'הגנה ורגליים', emoji: '🛡️', shots: false },
+  { id: 'jump', name: 'ניתור לסל', emoji: '🦘', shots: false },
+  { id: 'game', name: 'משחק אחד על אחד', emoji: '🆚', shots: true },
+];
+export const bbDrillById = Object.fromEntries(BB_DRILLS.map(d => [d.id, d]));
+export const pct = (made, att) => att ? Math.round(100 * made / att) : null;
+
+// סיכום של יומן הכדורסל: לכל תרגיל סך ניסיונות, קליעות, אחוז, ומגמה של 6 האימונים האחרונים
+export function bbStats(sessions) {
+  const sorted = [...sessions].sort((a, b) => new Date(a.date) - new Date(b.date));
+  const per = {};
+  for (const s of sorted) for (const d of s.drills || []) {
+    const p = per[d.drillId] || (per[d.drillId] = { drillId: d.drillId, name: d.name, att: 0, made: 0, times: 0, best: null, trend: [] });
+    p.times++; p.att += d.att || 0; p.made += d.made || 0;
+    const r = pct(d.made, d.att);
+    if (r != null) { p.trend.push({ date: s.date, pct: r, made: d.made, att: d.att }); if (p.best == null || r > p.best) p.best = r; }
+  }
+  for (const p of Object.values(per)) { p.pct = pct(p.made, p.att); p.trend = p.trend.slice(-6); }
+  const minutes = sorted.reduce((s, x) => s + (x.minutes || 0), 0);
+  return { sessions: sorted.length, minutes, per, last: sorted.at(-1) || null };
+}

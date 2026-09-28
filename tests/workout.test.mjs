@@ -96,3 +96,18 @@ test('stats and badges', () => {
 });
 
 test('fmtTime', () => { assert.equal(fmtTime(0), '0:00'); assert.equal(fmtTime(65), '1:05'); assert.equal(fmtTime(600), '10:00'); });
+
+test('basketball stats: totals, percent and trend', async () => {
+  const { bbStats, pct, BB_DRILLS } = await import('../workout/js/logic.js');
+  assert.equal(pct(7, 10), 70); assert.equal(pct(0, 0), null);
+  const s = [
+    { id: 'a', date: '2026-09-20T17:00:00Z', minutes: 40, drills: [{ drillId: 'free-throws', name: 'עונשין', att: 20, made: 10 }, { drillId: 'dribble', name: 'כדרור', att: 0, made: 0 }] },
+    { id: 'b', date: '2026-09-27T17:00:00Z', minutes: 30, drills: [{ drillId: 'free-throws', name: 'עונשין', att: 20, made: 14 }] },
+  ];
+  const st = bbStats(s);
+  assert.equal(st.sessions, 2); assert.equal(st.minutes, 70); assert.equal(st.last.id, 'b');
+  assert.equal(st.per['free-throws'].att, 40); assert.equal(st.per['free-throws'].made, 24); assert.equal(st.per['free-throws'].pct, 60); assert.equal(st.per['free-throws'].best, 70);
+  assert.deepEqual(st.per['free-throws'].trend.map(t => t.pct), [50, 70]);
+  assert.equal(st.per.dribble.pct, null); assert.equal(st.per.dribble.times, 1);
+  assert.ok(BB_DRILLS.length >= 8);
+});

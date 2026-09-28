@@ -6,6 +6,8 @@ import { store } from './store.js';
 import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel } from './logic.js';
 import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js';
 import { runGame } from './games/engine.js';
+import * as cloud from './cloud.js';
+import { initParent, parentGate, parentHome, basketball } from './parent.js';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
@@ -91,7 +93,7 @@ function confetti() {
 }
 
 // ---- ניתוב ----
-const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, history, settings, free, start, workout: workoutScreen, arcade };
+const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, basketball };
 function route() {
   const [path, arg] = location.hash.replace(/^#\/?/, '').split('/');
   (routes[path] || home)(arg);
@@ -456,6 +458,8 @@ function saveSession() {
     duration: Math.round((Date.now() - W.startedAt) / 1000), items: W.items.map(i => ({ exId: i.exId, name: i.name, type: i.type, target: i.target, done: i.done, round: i.round, block: i.block })) };
   const before = earned(stats(store.sessions));
   store.addSession(s); W.saved = true;
+  // לטלפון של אבא: אם יש קוד משפחה, האימון עולה לענן (או מחכה בתור עד שיש רשת)
+  if (store.profile.familyCode) cloud.push(store.profile.familyCode, 'workout', s.id, { ...s, name: store.profile.name, gamesPlayed: W.gamesPlayed, level: store.profile.level });
   const after = earned(stats(store.sessions));
   return { session: s, newBadges: after.filter(b => !before.includes(b)) };
 }
@@ -595,6 +599,18 @@ function settings() {
       <button class="btn chip" id="resetplan">חזרה לתוכנית המומלצת</button>
     </div>
     <div class="card stack">
+      <h3>חיבור לטלפון של אבא 📡</h3>
+      <p class="muted small">כל אימון שנגמר בטלפון הזה עולה לענן, ואבא רואה אותו במצב הורים בטלפון שלו. צריך אותו קוד משפחה בשני הטלפונים.</p>
+      <label class="field">קוד משפחה<input type="text" id="fam" value="${esc(p.familyCode)}" class="ltr-input" maxlength="12" autocomplete="off" placeholder="8 תווים"></label>
+      <div class="row wrap"><button class="btn chip" id="newfam">🎲 ליצור קוד חדש</button><button class="btn chip" id="copyfam">📋 להעתיק</button><button class="btn chip" id="syncnow">🔄 לשלוח עכשיו</button></div>
+      <p class="muted small" id="cloudstate">${p.familyCode ? (cloud.status.pending() ? `${cloud.status.pending()} אימונים מחכים לשליחה` : 'מחובר') : 'לא מחובר'}${cloud.status.error ? ` · ⚠️ ${esc(cloud.status.error)}` : ''}</p>
+    </div>
+    <div class="card stack">
+      <h3>מצב הורים 🔒</h3>
+      <p class="muted small">לאבא בלבד, עם קוד סודי: מה הילד עשה ויומן הכדורסל.</p>
+      <button class="btn" data-go="#/parent">להיכנס למצב הורים</button>
+    </div>
+    <div class="card stack">
       <h3>הנתונים</h3>
       <p class="muted small">הכול נשמר במכשיר הזה בלבד. ${store.sessions.length} אימונים שמורים.</p>
       <button class="btn" id="export">הורדת גיבוי 💾</button>
@@ -609,6 +625,10 @@ function settings() {
   $('#voice').onchange = e => store.setProfile({ voice: e.target.checked });
   $('#voicetest').onclick = () => { if (!speak('היי! אני אסביר לך איך עושים כל תרגיל. לוחצים על הכפתור איך עושים את זה.')) alert('אין הקראה במכשיר הזה, או שהקול כבוי בהגדרות.'); };
   $('#giftEvery').onchange = e => store.setProfile({ giftEvery: +e.target.value });
+  $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); };
+  $('#newfam').onclick = () => { if (p.familyCode && !confirm('ליצור קוד חדש? צריך להקליד אותו גם בטלפון של אבא.')) return; const c = cloud.newFamilyCode(); store.setProfile({ familyCode: c }); settings(); };
+  $('#copyfam').onclick = async () => { try { await navigator.clipboard.writeText(store.profile.familyCode); $('#cloudstate').textContent = 'הקוד הועתק'; } catch { $('#fam').select(); } };
+  $('#syncnow').onclick = async () => { $('#cloudstate').textContent = 'שולח...'; const ok = await cloud.flush(); $('#cloudstate').textContent = ok || !cloud.status.pending() ? 'הכול בענן ✓' : '⚠️ ' + (cloud.status.error || 'אין רשת'); };
   $('#gameSeconds').onchange = e => store.setProfile({ gameSeconds: +e.target.value });
   app.querySelectorAll('[data-day]').forEach(s => s.onchange = () => { const np = { ...plan() }; np[s.dataset.day] = s.value; store.setProfile({ plan: np }); });
   $('#resetplan').onclick = () => { store.setProfile({ plan: null }); settings(); };
@@ -618,6 +638,10 @@ function settings() {
   };
   $('#wipe').onclick = () => { if (confirm('למחוק את כל האימונים וההגדרות? אי אפשר לשחזר.') && confirm('בטוח? זו מחיקה סופית.')) { store.wipe(); settings(); } };
 }
+
+initParent({ mount, esc, go, $ });
+if (store.profile.familyCode) cloud.flush();
+window.addEventListener('focus', () => { if (store.profile.familyCode) cloud.flush(); });
 
 // ---- כללי: כל אלמנט עם data-go מנווט ----
 app.addEventListener('click', e => { const t = e.target.closest('[data-go]'); if (t && app.contains(t)) go(t.dataset.go); });

@@ -199,3 +199,12 @@ input[type="checkbox"] { width: 26px; height: 26px; accent-color: var(--accent);
 .gcard { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; align-items: center; }
 .gcard .e { font-size: 34px; text-align: center; }
 .gcard .best { font-size: 14px; color: var(--muted); }
+
+/* מצב הורים וכדורסל */
+.ltr-input { direction: ltr; text-align: left; font-family: ui-monospace, Menlo, monospace; letter-spacing: 2px; }
+.trend { display: flex; align-items: flex-end; gap: 3px; height: 52px; }
+.trend i { display: block; width: 10px; background: var(--line); border-radius: 3px 3px 0 0; }
+.trend i.good { background: var(--ok); }
+.pct { min-width: 56px; text-align: center; font-family: var(--f-head); font-weight: 900; font-size: 22px; color: var(--accent); align-self: end; padding-bottom: 8px; }
+.star { font-size: 28px; color: var(--line); }
+.star.on { color: var(--star); }

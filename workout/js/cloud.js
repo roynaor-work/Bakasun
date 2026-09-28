@@ -1,0 +1,49 @@
+// ענן משפחתי: הטלפון של הילד מעלה כל אימון שנגמר, הטלפון של אבא רואה. אותו פרויקט Supabase של באקה סאן, טבלה family_events.
+// גישה עם המפתח הציבורי בלי התחברות, לפי קוד משפחה סודי. מקומי קודם: אם אין רשת, נשמר בתור ונשלח אחר כך.
+import { CLOUD } from '../../js/data/cloudcfg.js';
+
+const Q_KEY = 'kidfit.cloud.queue';
+let queue = []; try { queue = JSON.parse(localStorage.getItem(Q_KEY) || '[]'); } catch { queue = []; }
+const saveQ = () => { try { localStorage.setItem(Q_KEY, JSON.stringify(queue)); } catch { /* מקום */ } };
+export const status = { last: '', error: '', pending: () => queue.length };
+
+const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+export const newFamilyCode = () => Array.from(crypto.getRandomValues(new Uint8Array(8))).map(b => ALPHABET[b % ALPHABET.length]).join('');
+export const normCode = c => String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
+
+async function api(path, opts = {}) {
+  const r = await fetch(CLOUD.url + path, {
+    method: opts.method || 'GET',
+    headers: { apikey: CLOUD.key, Authorization: 'Bearer ' + CLOUD.key, 'Content-Type': 'application/json', Prefer: opts.prefer || 'return=minimal' },
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  if (!r.ok) { const t = await r.text(); const e = new Error(`${r.status} ${t.slice(0, 160)}`); e.status = r.status; throw e; }
+  const t = await r.text(); return t ? JSON.parse(t) : null;
+}
+
+// שולח אירוע (upsert לפי id). אם נכשל, נשאר בתור.
+export async function push(code, kind, id, payload) {
+  code = normCode(code); if (code.length < 8) return false;
+  queue = queue.filter(q => q.id !== id); queue.push({ code, kind, id, payload }); saveQ();
+  return flush();
+}
+export async function flush() {
+  if (!queue.length || !navigator.onLine) return false;
+  const batch = queue.slice(0, 20);
+  try {
+    await api('/rest/v1/family_events?on_conflict=id', { method: 'POST', prefer: 'resolution=merge-duplicates,return=minimal', body: batch.map(q => ({ id: q.id, family_code: q.code, kind: q.kind, payload: q.payload })) });
+    queue = queue.slice(batch.length); saveQ(); status.last = new Date().toISOString(); status.error = '';
+    return queue.length ? flush() : true;
+  } catch (e) { status.error = e.status === 404 ? 'הטבלה בענן עוד לא נוצרה (family.sql)' : e.message; return false; }
+}
+export async function remove(code, id) {
+  code = normCode(code);
+  try { await api(`/rest/v1/family_events?id=eq.${encodeURIComponent(id)}&family_code=eq.${code}`, { method: 'DELETE' }); return true; } catch (e) { status.error = e.message; return false; }
+}
+export async function list(code, kind, limit = 200) {
+  code = normCode(code); if (code.length < 8) return [];
+  const rows = await api(`/rest/v1/family_events?family_code=eq.${code}&kind=eq.${kind}&order=created.desc&limit=${limit}&select=id,payload,created,updated`, { prefer: 'return=representation' });
+  status.last = new Date().toISOString(); status.error = '';
+  return rows || [];
+}
+window.addEventListener('online', () => flush());
