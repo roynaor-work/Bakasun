@@ -4,6 +4,7 @@ import { t, lang, SPEECH, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
 import { esc, field, empty, dialog, toast, openWhatsApp, copyText } from '../ui.js';
 import Office from '../logic/office.js';
+import { TASK } from '../logic/extra.js';
 import { isReceiptCommand } from '../logic/receipts.js';
 import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage } from '../logic/commands.js';
 import { QUOTE_STATUS } from '../logic/quotes.js';
@@ -90,10 +91,10 @@ async function tabCommand(body, s, ctx) {
     if (c.kind === 'ask') { const cs = caseOf(c.who); if (!cs) { out.innerHTML = `<p class="warnbox">${esc(t('noCaseFor', { who: c.who || c.type || '' }))}</p>`; return; } sessionStorage.setItem('bakasun.autoAsk', c.type || '1'); location.hash = '#/case/' + cs.id + '/suppliers'; return; }
     if (c.kind === 'open') { if (c.to && c.to.about === 'client') { location.hash = '#/client/' + c.to.id; return; } if (c.to && c.to.about === 'supplier') { location.hash = '#/supplier/' + c.to.id; return; } const cs = caseOf(c.who); if (cs) { location.hash = '#/case/' + cs.id; return; } location.hash = '#/search/' + encodeURIComponent(c.who || ''); return; }
     if (c.kind === 'call') { if (c.to && c.to.phone) { dial(c.to.phone); out.innerHTML = `<p class="okbox">${esc(t('calling', { who: c.to.name }))}</p>`; } else out.innerHTML = `<p class="warnbox">${esc(t('noContact'))}</p>`; return; }
-    if (c.kind === 'task') { const cs = c.who ? caseOf(c.who) : null; db.put('tasks', { title: c.body, who: c.to ? c.to.name.split(' · ')[0] : (c.who || t('me')), phone: c.to && c.to.phone || '', caseId: cs ? cs.id : '', due: Office.iso(Office.addDays(new Date(), 1)), status: 'פתוח', lang: s.msgLang || 'he' }); out.innerHTML = `<p class="okbox">${esc(t('taskSaved', { what: c.body, who: c.to ? c.to.name.split(' · ')[0] : (c.who || t('me')) }))}</p>`; return; }
+    if (c.kind === 'task') { const cs = c.who ? caseOf(c.who) : null; db.put('tasks', { title: c.body, who: c.to ? c.to.name.split(' · ')[0] : (c.who || t('me')), phone: c.to && c.to.phone || '', caseId: cs ? cs.id : '', due: Office.iso(Office.addDays(new Date(), 1)), status: TASK.open, lang: s.msgLang || 'he' }); out.innerHTML = `<p class="okbox">${esc(t('taskSaved', { what: c.body, who: c.to ? c.to.name.split(' · ')[0] : (c.who || t('me')) }))}</p>`; return; }
     if (c.kind === 'note') { db.put('notes', { text: c.body, about: c.to ? c.to.about : '', aboutId: c.to ? c.to.id : '', aboutLabel: c.to ? c.to.name.split(' · ')[0] : c.who, lang: s.uiLang || 'he' }); out.innerHTML = `<p class="okbox">${esc(t('noteSaved', { who: c.to ? c.to.name.split(' · ')[0] : c.who }))}</p>`; return; }
     if (c.kind === 'reminder') {
-      db.put('tasks', { title: c.reminder.title, due: c.reminder.due, time: c.reminder.time, who: t('me'), status: 'פתוח', lang: s.uiLang || 'he' });
+      db.put('tasks', { title: c.reminder.title, due: c.reminder.due, time: c.reminder.time, who: t('me'), status: TASK.open, lang: s.uiLang || 'he' });
       out.innerHTML = `<p class="okbox">${esc(t('reminderSaved', { what: c.reminder.title, when: Office.fmt(c.reminder.due) + (c.reminder.time ? ' ' + c.reminder.time : '') }))}</p>`; return;
     }
     if (c.kind === 'contact') {

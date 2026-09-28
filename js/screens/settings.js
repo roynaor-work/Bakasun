@@ -3,7 +3,8 @@ import { t, LANGS, langName } from '../i18n.js';
 import { db } from '../store.js';
 import { esc, field, toast, confirmDialog, dialog, pickContacts, contactsSupported } from '../ui.js';
 import { parseContactsFile } from '../logic/contacts.js';
-import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_PAYMENTS } from '../data/seedContacts.js';
+import { TASK } from '../logic/extra.js';
+import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_PAYMENTS, SEED_CASES } from '../data/seedContacts.js';
 import { travelLine } from '../logic/travel.js';
 import { phoneDigits } from '../logic/core.js';
 import { loadDemo } from '../data/demo.js';
@@ -112,7 +113,16 @@ export function render({ root }) {
     const havePay = new Set(db.list('payments').map(p => (p.paidAt || p.invoicedAt || '') + '|' + p.amount));
     SEED_PAYMENTS.forEach(x => { const key = x.date + '|' + x.amount; if (havePay.has(key)) return; const cl = db.list('clients').find(c => c.name.includes(x.client)); db.put('payments', { client: cl ? cl.name : x.client, clientId: cl ? cl.id : '', amount: x.amount, note: x.note, status: x.status, invoicedAt: x.date, paidAt: x.status === 'שולם' ? x.date : '', due: x.date }); });
     SEED_TEAM.forEach(x => { if (haveT.has(x.name)) return; db.put('team', { name: x.name, role: x.role, phone: x.phone, email: x.email }); np++; });
-    toast(ns + nc + np ? t('seedLoaded', { s: ns, c: nc, p: np }) : t('seedDone'), 4000); render({ root });
+    let ne = 0;
+    SEED_CASES.forEach(x => {
+      if (db.list('cases').some(c => c.seedKey === x.key)) return;
+      const cl = db.list('clients').find(c => c.name === x.client) || {};
+      const id = db.put('cases', { seedKey: x.key, clientId: cl.id || '', client: x.client, contact: cl.contact || '', phone: cl.phone || '', email: cl.email || '', kind: x.kind, date: x.date, participants: x.participants, place: x.place, purpose: x.purpose, lang: x.lang, status: x.status, asClient: !!x.asClient, needs: x.needs, days: x.days || '', rooms: x.rooms || '', opened: '2026-09-27' });
+      (x.suppliers || []).forEach(([name, status, what]) => { const sp = db.list('suppliers').find(y => y.name === name); if (sp) db.put('links', { caseId: id, supplierId: sp.id, supplier: sp.name, status, what, askedAt: status === 'ביקשנו הצעה' ? '2026-09-25' : '', answeredAt: status === 'ביקשנו הצעה' ? '' : '2026-09-26' }); });
+      (x.tasks || []).forEach(([title, due]) => db.put('tasks', { caseId: id, title, who: t('me'), due, status: TASK.open, lang: x.lang }));
+      ne++;
+    });
+    toast(ns + nc + np + ne ? t('seedLoaded', { s: ns, c: nc, p: np, e: ne }) : t('seedDone'), 4000); render({ root });
   };
   const editTeam = async p => {
     const r = await dialog(p ? p.name : t('addPerson'), `${field('name', t('fName'), p ? p.name : '')}<div class="grid2">${field('role', t('role'), p ? p.role : '')}${field('phone', t('fPhone'), p ? p.phone : '', { ltr: true, inputmode: 'tel' })}</div>${field('email', t('fEmail'), p ? p.email : '', { ltr: true, inputmode: 'email' })}`, { ok: t('save') });

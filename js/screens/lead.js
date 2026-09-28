@@ -4,6 +4,7 @@ import { t, lang, LANGS, SPEECH, kindLabel, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
 import { esc, field, toast, openWhatsApp } from '../ui.js';
 import Office from '../logic/office.js';
+import { TASK } from '../logic/extra.js';
 import { PLACES } from '../data/places.js';
 import { matchClient } from '../logic/extra.js';
 import { speechSupported, listen } from '../voice.js';
@@ -101,7 +102,7 @@ function drawForm(box, lead, s) {
       kind: o.kind, date: o.date, participants: o.participants, budget: o.budget, place: o.place, purpose: o.purpose, lang: o.lang,
       status: Office.STATUS.lead, source: lead.source || '', opened: todayIso(), needs, days: lead.days || '', rooms: lead.rooms || '' };
     const id = db.put('cases', cs);
-    picked.forEach(i => { const tk = (lead.tasks || [])[i]; if (tk) db.put('tasks', { caseId: id, title: tk.title, who: t('me'), due: Office.iso(Office.addDays(new Date(), 1)), status: 'פתוח', lang: o.lang || 'he' }); });
+    picked.forEach(i => { const tk = (lead.tasks || [])[i]; if (tk) db.put('tasks', { caseId: id, title: tk.title, who: t('me'), due: Office.iso(Office.addDays(new Date(), 1)), status: TASK.open, lang: o.lang || 'he' }); });
     const stillMissing = Office.missingOf(cs);
     draft = { text: '', lead: null };
     toast(t('saved'));
