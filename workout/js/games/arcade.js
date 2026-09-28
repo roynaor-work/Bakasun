@@ -6,11 +6,11 @@ const G = [];
 // ---- טטריס ----
 G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים ימינה ושמאלה כדי להזיז, נוגעים כדי לסובב, מחליקים למטה כדי להפיל.',
   make(r) {
-    const COLS = 10, ROWS = 18, S = 27, OX = 45, OY = 62; // למעלה רק החתיכה הבאה והתקדמות התמונה
+    const COLS = 10, ROWS = 18, S = 27, OX = 45, OY = 62, LINES_PER_PIC = 4; // למעלה רק החתיכה הבאה והתקדמות התמונה
     const SHAPES = [[[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]], [[1, 0, 0], [1, 1, 1]], [[0, 0, 1], [1, 1, 1]], [[1, 1, 0], [0, 1, 1]], [[0, 1, 1], [1, 1, 0]]];
     const COLORS = [r.C.sky, r.C.gold, r.C.accent, r.C.hot, r.C.teal, r.C.ok, r.C.pink];
     const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-    let cur, t = 0, speed = 0.55, next = r.rint(0, 6), lines = 0, revealed = 0, picIdx = r.rint(0, SCENE_IDS.length - 1), picDone = 0, custom = null;
+    let cur, t = 0, speed = 0.55, next = r.rint(0, 6), lines = 0, revealed = 0, picLines = 0, picIdx = r.rint(0, SCENE_IDS.length - 1), picDone = 0, custom = null;
     // תמונה שהמשתמש העלה בהגדרות (למשל הולאנד בועט) מחליפה את הפריימים המצוירים
     let pics = []; try { pics = JSON.parse(localStorage.getItem('kidfit.tetrisPics') || '[]'); const one = localStorage.getItem('kidfit.tetrisPic'); if (one && !pics.length) pics = [one]; } catch { pics = []; }
     let picI = pics.length ? r.rint(0, pics.length - 1) : 0; const loadCustom = () => { if (!pics.length || typeof Image === 'undefined') return; custom = new Image(); custom.onload = paintPic; custom.src = pics[picI]; };
@@ -27,7 +27,8 @@ G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים �
       if (n) { const pts = [0, 100, 300, 500, 800][n]; r.addScore(pts); lines += n; speed = Math.max(0.15, speed - 0.02 * n); r.pop(n === 4 ? 'טטריס! +800' : '+' + pts, r.W / 2, 300, r.C.gold, 26); r.burst(r.W / 2, 330, COLORS[cur.c - 1], 16);
         r.sfx(n === 4 ? 'win' : 'goal');
         // כל שורה חושפת שורה מהתמונה
-        revealed += n; if (revealed >= ROWS) { revealed = 0; picDone++; r.addScore(300); r.pop('התמונה נחשפה! +300', r.W / 2, 280, r.C.gold, 26); r.burst(r.W / 2, 300, r.C.gold, 30, 300); if (pics.length) { picI = (picI + 1) % pics.length; loadCustom(); } else { picIdx = (picIdx + 1) % SCENE_IDS.length; paintPic(); } } } else r.sfx('tick'); spawn(); };
+        // 4 שורות = תמונה שלמה: כל שורה חושפת רבע מהתמונה
+        picLines += n; revealed = Math.min(ROWS, Math.ceil(picLines * ROWS / LINES_PER_PIC)); if (picLines >= LINES_PER_PIC) { revealed = 0; picLines = 0; picDone++; r.addScore(300); r.pop('התמונה נחשפה! +300', r.W / 2, 280, r.C.gold, 26); r.burst(r.W / 2, 300, r.C.gold, 30, 300); if (pics.length) { picI = (picI + 1) % pics.length; loadCustom(); } else { picIdx = (picIdx + 1) % SCENE_IDS.length; paintPic(); } } } else r.sfx('tick'); spawn(); };
     const step = () => { if (!collides(cur.s, cur.x, cur.y + 1)) cur.y++; else lock(); };
     spawn();
     return {
@@ -41,7 +42,7 @@ G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים �
         if (revealed > 0 && revealed < ROWS) r.line(OX, OY + revealed * S, OX + BW, OY + revealed * S, r.C.gold, 2);
         // למעלה: החתיכה הבאה, שורות, והתקדמות התמונה
         r.rect(OX, 6, 96, 50, '#2A2555', 8); r.text('הבא', OX + 16, 18, { size: 11, color: r.C.muted }); const ns = SHAPES[next], nw = ns[0].length * 12, nh = ns.length * 12; ns.forEach((row, j) => row.forEach((v, i) => { if (v) r.rect(OX + 58 - nw / 2 + i * 12 + 1, 31 - nh / 2 + j * 12 + 1, 10, 10, COLORS[next], 3); }));
-        r.text(`שורות: ${lines}`, OX + BW - 40, 18, { size: 12, color: r.C.muted }); r.rect(OX + BW - 130, 30, 130, 10, '#2A2555', 5); r.rect(OX + BW - 130, 30, 130 * revealed / ROWS, 10, r.C.gold, 5); r.text(`תמונה ${revealed}/${ROWS}${picDone ? ` · ${picDone} ✓` : ''}`, OX + BW - 65, 50, { size: 11, color: r.C.muted });
+        r.text(`שורות: ${lines}`, OX + BW - 40, 18, { size: 12, color: r.C.muted }); r.rect(OX + BW - 130, 30, 130, 10, '#2A2555', 5); r.rect(OX + BW - 130, 30, 130 * picLines / LINES_PER_PIC, 10, r.C.gold, 5); r.text(`עוד ${LINES_PER_PIC - picLines} שורות לתמונה${picDone ? ` · ${picDone} ✓` : ''}`, OX + BW - 65, 50, { size: 11, color: r.C.muted });
         // רוח: איפה החתיכה תנחת
         let gy = cur.y; while (!collides(cur.s, cur.x, gy + 1)) gy++; cur.s.forEach((row, j) => row.forEach((v, i) => { if (v && gy + j >= 0) r.rect(OX + (cur.x + i) * S + 3, OY + (gy + j) * S + 3, S - 6, S - 6, COLORS[cur.c - 1] + '33', 3); }));
         grid.forEach((row, j) => row.forEach((v, i) => { if (v) { r.rect(OX + i * S + 1, OY + j * S + 1, S - 2, S - 2, COLORS[v - 1], 4); r.rect(OX + i * S + 4, OY + j * S + 4, S - 8, 5, '#ffffff33', 2); } }));
@@ -50,10 +51,10 @@ G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים �
   } });
 
 // ---- הרעב הגדול (נחש): פרצוף הילד אוכל שקיות מיץ, הזנב = כל השקיות שאכל ----
-G.push({ id: 'snake', name: 'הרעב הגדול', emoji: '🧃', how: 'מחליקים לכיוון שרוצים. הפרצוף שלך אוכל שקיות מיץ, והזנב מתארך. לא נוגעים בקירות ולא בזנב.',
+G.push({ id: 'snake', name: 'הרעב הגדול', emoji: '🍔', how: 'מחליקים לכיוון שרוצים. הפרצוף אוכל המבורגרים, והזנב מתארך. לא נוגעים בקירות ולא בזנב.',
   make(r) {
-    const S = 24, COLS = Math.floor(r.W / S), ROWS = Math.floor((r.H - 30) / S), OX = (r.W - COLS * S) / 2, OY = 30;
-    let snake = [[7, 11], [6, 11], [5, 11]], dir = [1, 0], next = dir, t = 0, food = place(), speed = 0.2, tt = 0, eaten = 0, chew = 0;
+    const S = 44, COLS = Math.floor(r.W / S), ROWS = Math.floor((r.H - 44) / S), OX = (r.W - COLS * S) / 2, OY = 44; // משבצות גדולות: פחות שטח משחק, פרצוף שרואים
+    let snake = [[4, 5], [3, 5], [2, 5]], dir = [1, 0], next = dir, t = 0, food = place(), speed = 0.26, tt = 0, eaten = 0, chew = 0;
     // הפרצוף: תמונה מההגדרות, ואם אין, התמונה המובנית (workout/img/face.jpg)
     let face = null; try { if (typeof Image !== 'undefined') { const src = localStorage.getItem('kidfit.facePic'); face = new Image(); face.src = src || new URL('../../img/face.jpg', import.meta.url).href; } } catch { face = null; }
     function place() { let p; do { p = [r.rint(0, COLS - 1), r.rint(0, ROWS - 1)]; } while (snake.some(s => s[0] === p[0] && s[1] === p[1])); return p; }
@@ -65,14 +66,14 @@ G.push({ id: 'snake', name: 'הרעב הגדול', emoji: '🧃', how: 'מחלי
         if (h[0] < 0 || h[0] >= COLS || h[1] < 0 || h[1] >= ROWS) return r.over('בום! נכנסת בקיר');
         if (snake.some(s => s[0] === h[0] && s[1] === h[1])) return r.over('אכלת את הזנב שלך!');
         snake.unshift(h);
-        if (h[0] === food[0] && h[1] === food[1]) { eaten++; const pts = 10 + Math.min(eaten, 10); r.addScore(pts); r.pop('+' + pts + ' 🧃', cx(h[0]), cy(h[1]) - 20, r.C.gold, 22); r.burst(cx(h[0]), cy(h[1]), '#f97316', 10, 140); r.sfx('score'); chew = 1; food = place(); speed = Math.max(0.1, speed - 0.004); } else snake.pop(); },
+        if (h[0] === food[0] && h[1] === food[1]) { eaten++; const pts = 10 + Math.min(eaten, 10); r.addScore(pts); r.pop('+' + pts + ' 🍔', cx(h[0]), cy(h[1]) - 20, r.C.gold, 22); r.burst(cx(h[0]), cy(h[1]), '#f97316', 10, 140); r.sfx('score'); chew = 1; food = place(); speed = Math.max(0.13, speed - 0.004); } else snake.pop(); },
       draw() { r.clear('#0f3d2e'); for (let j = 0; j < ROWS; j++) for (let i = 0; i < COLS; i++) if ((i + j) % 2) r.rect(OX + i * S, OY + j * S, S, S, '#124a37');
-        r.text(`שתית ${eaten} 🧃`, r.W / 2, 15, { size: 14, color: '#bbf7d0' });
-        SP.pouch(r, cx(food[0]), cy(food[1]), 0.9, tt);
-        // הזנב: שקיות שנאכלו, קטנות יותר לקראת הסוף
-        for (let i = snake.length - 1; i >= 1; i--) { const k = 1 - i / snake.length; SP.pouch(r, cx(snake[i][0]), cy(snake[i][1]), 0.55 + k * .25, tt + i); }
+        r.text(`אכלת ${eaten} 🍔`, r.W / 2, 20, { size: 16, color: '#bbf7d0' });
+        SP.burger(r, cx(food[0]), cy(food[1]), 1.1, tt);
+        // הזנב: המבורגרים שנאכלו, קטנים יותר לקראת הסוף
+        for (let i = snake.length - 1; i >= 1; i--) { const k = 1 - i / snake.length; SP.burger(r, cx(snake[i][0]), cy(snake[i][1]), 0.6 + k * .3, tt + i); }
         // הראש: הפרצוף, פה נפתח כשהאוכל במרחק 2 משבצות
-        const near = Math.abs(snake[0][0] - food[0]) + Math.abs(snake[0][1] - food[1]) <= 2; SP.face(r, cx(snake[0][0]), cy(snake[0][1]), S * .62, dir, chew > 0 ? chew : near ? 1 : 0, face); },
+        const near = Math.abs(snake[0][0] - food[0]) + Math.abs(snake[0][1] - food[1]) <= 2; SP.face(r, cx(snake[0][0]), cy(snake[0][1]), S * .68, dir, chew > 0 ? chew : near ? 1 : 0, face); },
     };
   } });
 
