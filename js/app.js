@@ -76,6 +76,10 @@ function route() {
   window.scrollTo(0, 0);
 }
 
+// "Add to home screen": the browser offers it once; we keep the offer and show our own button until she installs.
+window.__installPrompt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); window.__installPrompt = e; document.dispatchEvent(new Event('bakasun:installable')); });
+window.addEventListener('appinstalled', () => { window.__installPrompt = null; try { localStorage.setItem('bakasun.installed', '1'); } catch (x) { /* */ } document.dispatchEvent(new Event('bakasun:installable')); });
 window.addEventListener('hashchange', route);
 route();
 

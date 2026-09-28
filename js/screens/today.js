@@ -18,6 +18,8 @@ import { monthsToSend, monthLabel } from '../logic/receipts.js';
 import { openMail } from '../ui.js';
 import { resend } from './rfq.js';
 
+function standalone() { try { return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true || localStorage.getItem('bakasun.installed') === '1' || sessionStorage.getItem('bakasun.installLater') === '1'; } catch (e) { return false; } }
+function isIOS() { return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
 export function render({ root }) {
   const s = db.settings();
   const data = db.snapshot();
@@ -41,6 +43,7 @@ export function render({ root }) {
       <a class="icon" href="#/search" aria-label="${esc(t('search'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
     </header>
     <form class="card row" id="askBox"><input name="q" class="grow" placeholder="${esc(t('askWhat'))}" autocomplete="off"><button type="button" class="icon" data-ask-mic aria-label="${esc(t('dictate'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><button type="submit" class="btn primary sm">${esc(t('read'))}</button></form>
+    ${!standalone() ? `<div class="card" id="installCard" style="${window.__installPrompt || !isIOS() ? '' : ''}"><div class="row between"><b>${esc(t('installTitle'))}</b><button class="btn sm ghost" id="installLater">✕</button></div><div class="sub">${esc(window.__installPrompt ? t('installHint') : isIOS() ? t('installIos') : t('installManual'))}</div>${window.__installPrompt ? `<div class="row"><button class="btn sm primary" id="installBtn">${esc(t('installBtn'))}</button></div>` : ''}</div>` : ''}
     ${travel.on ? `<div class="card warnbox"><div class="row between"><b>${esc(t('travelOn'))}${travel.to ? ' · ' + esc(t('until')) + ' ' + esc(Office.fmt(travel.to)) : ''}</b><a class="btn sm ghost" href="#/settings">${esc(t('edit'))}</a></div><div class="sub">${esc(travel.subName ? t('coveredBy') + ': ' + travel.subName : '')}</div><div class="row"><button class="btn sm primary" id="handover">${esc(t('handover'))}</button></div></div>` : ''}
     ${nothing ? empty(t('nothingToday')) : ''}
     ${up.length ? section(t('upcoming'), `<div class="list">${up.map(x => {
@@ -67,6 +70,9 @@ export function render({ root }) {
     <button class="fab" id="fab">+ ${esc(t('newLead'))}</button>`;
 
   root.querySelector('#fab').onclick = () => { location.hash = '#/lead'; };
+  const ib = root.querySelector('#installBtn'); if (ib) ib.onclick = async () => { const p = window.__installPrompt; if (!p) return; p.prompt(); try { await p.userChoice; } catch (e) { /* */ } window.__installPrompt = null; render({ root }); };
+  const il = root.querySelector('#installLater'); if (il) il.onclick = () => { try { sessionStorage.setItem('bakasun.installLater', '1'); } catch (e) { /* */ } root.querySelector('#installCard').remove(); };
+  document.addEventListener('bakasun:installable', () => { if (location.hash.replace(/^#\/?/, '').startsWith('today') || !location.hash) render({ root }); }, { once: true });
   root.querySelectorAll('[data-task]').forEach(el => el.querySelector('[data-done]').onclick = () => { db.put('tasks', { id: el.dataset.task, status: 'בוצע' }); render({ root }); });
   const ho = root.querySelector('#handover'); if (ho) ho.onclick = async () => {
     const open = {
