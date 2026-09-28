@@ -25,10 +25,10 @@ const ACTIONS = [
   ['today', /^(?:מה יש לי היום|מה יש היום|מה היום|what(?:'s| is) (?:on )?today|aujourd['’]hui|qu['’]est-ce qu['’]il y a aujourd['’]hui)\??$/i],
   ['lead', /^(?:פנייה חדשה|פניה חדשה|לקוח חדש|ליד חדש|new lead|new client|new enquiry|nouveau client|nouvelle demande)\s*[:,]?\s*(.*)$/i],
   ['quote', /^(?:תבני|תבנה|בני|הכיני|תכיני|תכין|צרי|build|make|prepare|create|prépare|fais|crée)\s+(?:לי\s+)?(?:את\s+)?(?:ה)?(?:הצעת מחיר|הצעה|a quote|quote|un devis|devis)(?:\s+(?:ל|for|pour)\s*(.+))?$/i],
-  ['ask', /^(?:תבקשי|בקשי|תבקש|תשלחי בקשה|ask for|request|demande)\s+(?:הצעות מחיר|הצעות|הצעת מחיר|הצעה|quotes|a quote|des devis|un devis)(?:\s+(?:מ|from|de|à|auprès de)\s*(.+?))?(?:\s+(?:ל|for|pour)\s*(.+))?$/i],
+  ['ask', /^(?:תבקשי|בקשי|תבקש|תשלחי בקשה|ask for|request|demande)\s+(?:הצעות מחיר|הצעות|הצעת מחיר|הצעה|quotes|a quote|des devis|un devis)(?:\s+(?:מ|from|de|à|aux|au|auprès de|auprès des)\s*(.+?))?(?:\s+(?:ל|for|pour)\s*(.+))?$/i],
   ['call', /^(?:תתקשרי|התקשרי|תתקשר|חייגי|תחייגי|call|appelle)\s+(?:ל|to\s+|à\s+)?(.+)$/i],
   ['task', /^(?:משימה|תוסיפי משימה|הוסיפי משימה|תני משימה|add a task|new task|task|tâche|ajoute une tâche)\s*(?:ל|for|pour)?\s*([^:]+?)?\s*[:]\s*(.+)$/i],
-  ['note', /^(?:רשמי|תרשמי|כתבי|תכתבי|note|write down|écris|note que)\s+(?:הערה\s+|a note\s+|une note\s+)?(?:על|about|sur)\s+([^:]+?)\s*[:]\s*(.+)$/i],
+  ['note', /^(?:רשמי|תרשמי|כתבי|תכתבי|note|write down|écris|note que)\s+(?:הערה\s+|a note\s+|une note\s+)?(?:על|about|on|sur)\s+([^:]+?)\s*[:]\s*(.+)$/i],
   ['open', /^(?:תפתחי|פתחי|תפתח|תראי לי|הראי לי|open|show me|ouvre|montre-moi)\s+(?:את\s+)?(?:ה)?(?:תיק|לקוח|ספק|case|client|supplier|dossier|fournisseur)?\s*(?:של\s+|of\s+|de\s+)?(.+)$/i]
 ];
 export function parseCommand(text, docs, people) {

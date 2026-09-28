@@ -128,7 +128,7 @@ function tabSuppliers(body, c, s) {
   const refresh = () => tabSuppliers(body, db.get('cases', id) || c, s);
   wireCompare(body, c, s, links, sups, refresh);
   body.querySelector('#ask').onclick = () => askFlow(c, s, links, sups, recTypes, refresh);
-  if (sessionStorage.getItem('bakasun.autoAsk')) { sessionStorage.removeItem('bakasun.autoAsk'); setTimeout(() => askFlow(c, s, links, sups, recTypes, refresh), 300); }
+  const auto = sessionStorage.getItem('bakasun.autoAsk'); if (auto) { sessionStorage.removeItem('bakasun.autoAsk'); setTimeout(() => askFlow(c, s, links, sups, recTypes, refresh, auto), 300); }
   const ch = body.querySelector('#change'); if (ch) ch.onclick = async () => {
     const r = await dialog(t('changeAll'), field('change', t('theChange'), '', { type: 'textarea' }), { ok: t('sendEach') });
     if (!r || !r.change) return;

@@ -31,6 +31,9 @@ export function sentences(text) {
     .map(trim).filter(Boolean);
 }
 
+/** Supplier types named in a short text, e.g. "hotels" or "ממלונות" → ['מלונות']. */
+export function typesIn(text) { const t = str(text); return NEEDS.filter(([, re]) => re.test(t)).map(([type]) => type); }
+
 /** The client, if one of the known names is said in the text (quotes and hyphens do not matter). */
 export function clientIn(text, clients) {
   const norm = v => str(v).toLowerCase().replace(/[״"'׳’`\-]/g, '').replace(/\s+/g, ' ').trim();
