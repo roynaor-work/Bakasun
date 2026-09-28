@@ -75,6 +75,10 @@ p { margin: 0; }
 .pill.stretch { background: var(--c-stretch); color: #fff; }
 .pill.block { background: var(--ink); color: var(--card); }
 .pill.hall { background: #7C3AED; color: #fff; }
+.pill.speed { background: #0EA5E9; color: #fff; }
+.prog.speed .emoji { background: color-mix(in srgb, #0EA5E9 18%, transparent); }
+.go { position: fixed; inset: 0; display: grid; place-items: center; background: #22C55EEE; color: #fff; font-family: var(--f-head); font-size: 96px; font-weight: 900; z-index: 20; }
+.go.wait { background: #DC2626EE; font-size: 40px; }
 .btn.help { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
 .helpcard { border: 2px solid var(--accent); }
 

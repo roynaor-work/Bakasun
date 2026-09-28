@@ -158,6 +158,21 @@ const BOUND_L = { head: [104, 40], neck: [102, 56], hip: [98, 100], le: [118, 76
 const BOUND_R = { head: [104, 40], neck: [102, 56], hip: [98, 100], re: [118, 76], rh: [132, 60], le: [86, 74], lh: [72, 88], rk: [124, 112], rf: [142, 140], lk: [78, 122], lf: [62, 146] };
 const BOUND_LAND = P(SIDE, { hip: [100, 120], lk: [110, 150], lf: [104, 182], rk: [94, 152], rf: [92, 182] });
 
+// מהירות וקואורדינציה במסדרון: קיר בשני הצדדים
+const FLIP = p => Object.fromEntries(Object.entries(p).map(([k, v]) => [k, Array.isArray(v) ? [200 - v[0], v[1]] : v]));
+const WALLS = { type: 'walls' };
+const TOUCH_WALL = { head: [150, 60], neck: [146, 76], hip: [128, 120], le: [166, 92], lh: [184, 110], re: [126, 98], rh: [112, 118], lk: [148, 150], lf: [156, 182], rk: [110, 152], rf: [98, 182] };
+const TOUCH_FLOOR = { head: [126, 104], neck: [116, 118], hip: [92, 140], le: [134, 146], lh: [150, 180], re: [130, 148], rh: [146, 180], lk: [124, 154], lf: [112, 182], rk: [126, 156], rf: [116, 182] };
+const READY = { head: [112, 96], neck: [104, 110], hip: [78, 136], le: [118, 130], lh: [126, 180], re: [116, 132], rh: [122, 180], lk: [112, 154], lf: [104, 182], rk: [84, 166], rf: [64, 182] };
+const SHUFFLE_WIDE = P(FRONT, { lk: [82, 146], lf: [72, 182], rk: [118, 146], rf: [128, 182], hip: [100, 120], neck: [100, 74], head: [100, 58], le: [84, 100], lh: [80, 124], re: [116, 100], rh: [120, 124] });
+const SHUFFLE_NARROW = P(SHUFFLE_WIDE, { lk: [96, 148], lf: [96, 182], rk: [104, 148], rf: [104, 182] });
+const CROSS_FRONT = P(FRONT, { lk: [104, 146], lf: [116, 182], rk: [98, 148], rf: [90, 182], le: [80, 90], lh: [70, 76], re: [120, 90], rh: [130, 76] });
+const CROSS_BACK = P(FRONT, { lk: [90, 148], lf: [82, 182], rk: [108, 146], rf: [120, 182], le: [80, 90], lh: [70, 76], re: [120, 90], rh: [130, 76] });
+const SKIP_L = P(shift(HK_L, 0, -10), { lf: [110, 150], re: [104, 50], rh: [110, 28] });
+const SKIP_R = P(shift(HK_R, 0, -10), { rf: [110, 150], le: [104, 50], lh: [110, 28] });
+const BACK_A = { head: [92, 54], neck: [96, 70], hip: [104, 116], le: [104, 92], lh: [110, 112], re: [94, 92], rh: [88, 110], lk: [90, 144], lf: [86, 178], rk: [112, 146], rf: [110, 182] };
+const BACK_B = { head: [92, 54], neck: [96, 70], hip: [104, 116], le: [94, 92], lh: [88, 110], re: [104, 92], rh: [110, 112], rk: [90, 144], rf: [86, 178], lk: [112, 146], lf: [110, 182] };
+
 // frames: [פוזה, משך במילישניות עד הפוזה הבאה]. הרצף חוזר על עצמו.
 // steps: איך עושים, בשלבים קצרים. tip: על מה לשים לב. prop: אביזר מצויר (קופסה או קיר).
 export const EXERCISES = [
@@ -236,6 +251,36 @@ export const EXERCISES = [
     steps: ['רצים לאורך המסדרון בצעדים ענקיים', 'כל צעד הוא קפיצה: נשארים באוויר כמה שיותר', 'הידיים גדולות כמו בריצה. הקצה ועוד פעם זו חזרה אחת'],
     tip: 'פחות צעדים לאורך המסדרון = ניתור טוב יותר. סופרים כמה צעדים לקח.',
     frames: [[BOUND_L, 320], [BOUND_LAND, 140], [BOUND_R, 320], [BOUND_LAND, 140]] },
+
+  // --- מהירות וקואורדינציה (המסדרון: קיר ליד השירותים, קיר ליד המרפסת, כ-7 מטר) ---
+  { id: 'shuttle-run', name: 'ריצת מעבורת: קיר לקיר', cat: 'speed', type: 'reps', base: 6, place: 'hall',
+    steps: ['מתחילים עם יד על הקיר ליד השירותים', 'רצים מהר, נוגעים בקיר ליד המרפסת ומסתובבים', 'רצים חזרה ונוגעים. כל קיר שנגעת בו זו חזרה אחת'],
+    tip: 'מאטים שני צעדים לפני הקיר ונוגעים ביד, לא בכל הגוף. הסיבוב הוא הסוד: נמוך ומהיר.',
+    frames: [[shift(SPRINT_L, -50, 0), 200], [shift(SPRINT_R, 10, 0), 200], [TOUCH_WALL, 260], [FLIP(shift(SPRINT_L, -50, 0)), 200], [FLIP(shift(SPRINT_R, 10, 0)), 200], [FLIP(TOUCH_WALL), 260]], prop: WALLS },
+  { id: 'reaction-sprint', name: 'ריצת תגובה: אות יציאה', cat: 'speed', type: 'reps', base: 5, place: 'hall', signal: true,
+    steps: ['עומדים מוכנים ליד קיר אחד, ברכיים כפופות', 'לוחצים "אות יציאה" ומחכים. לא יודעים מתי!', 'בצפצוף רצים הכי מהר לקיר השני ונוגעים. חוזרים בהליכה'],
+    tip: 'המטרה: לזוז ברגע הצפצוף, לא לפניו. יציאה מוקדמת = חוזרים.',
+    frames: [[READY, 900], [READY, 300], [shift(SPRINT_L, -20, 0), 180], [shift(SPRINT_R, 20, 0), 180], [shift(SPRINT_L, 50, 0), 180], [FLIP(TOUCH_WALL), 200], [TOUCH_WALL, 400]], prop: WALLS },
+  { id: 'side-shuffle', name: 'צעדי צד: קיר לקיר', cat: 'speed', type: 'reps', base: 4, place: 'hall',
+    steps: ['עומדים עם הפנים לקיר הארוך, ברכיים כפופות, נמוך', 'צעדי צד מהירים לאורך המסדרון, הרגליים לא מצטלבות', 'נוגעים בקיר וחוזרים צעדי צד לצד השני. הלוך ושוב זו חזרה'],
+    tip: 'נשארים נמוכים כמו שומר בכדורסל. הידיים פתוחות לצדדים.',
+    frames: [[shift(SHUFFLE_WIDE, -40, 0), 200], [shift(SHUFFLE_NARROW, -10, 0), 160], [shift(SHUFFLE_WIDE, 20, 0), 200], [shift(SHUFFLE_NARROW, 50, 0), 160], [shift(SHUFFLE_WIDE, 20, 0), 200], [shift(SHUFFLE_NARROW, -10, 0), 160]], prop: WALLS },
+  { id: 'carioca', name: 'הצלבות רגליים (קריוקה)', cat: 'speed', type: 'reps', base: 4, place: 'hall',
+    steps: ['זזים הצידה לאורך המסדרון', 'רגל אחת עוברת קדימה מול השנייה, ואז מאחור', 'הידיים פתוחות לשיווי משקל. הלוך ושוב זו חזרה'],
+    tip: 'קודם לאט עד שהרגליים מבינות, ואז מהר. המותן מסתובב, הראש ישר קדימה.',
+    frames: [[shift(CROSS_FRONT, -30, 0), 260], [shift(FRONT, 0, 0), 200], [shift(CROSS_BACK, 30, 0), 260], [shift(FRONT, 0, 0), 200]], prop: WALLS },
+  { id: 'skipping', name: 'סקיפינג: ברך גבוהה עם ניתור', cat: 'speed', type: 'reps', base: 4, place: 'hall',
+    steps: ['רצים לאט לאורך המסדרון', 'בכל צעד: ברך גבוה ויד נגדית למעלה, עם ניתור קטן', 'קצב קבוע: טה-דם, טה-דם. הלוך ושוב זו חזרה'],
+    tip: 'זה תרגיל של קואורדינציה, לא מהירות. יד ימין עולה עם ברך שמאל.',
+    frames: [[SKIP_L, 280], [shift(SIDE, 0, -2), 140], [SKIP_R, 280], [shift(SIDE, 0, -2), 140]] },
+  { id: 'floor-wall-run', name: 'ריצת נגיעות: רצפה וקיר', cat: 'speed', type: 'reps', base: 4, place: 'hall',
+    steps: ['ליד קיר אחד: יורדים ונוגעים ברצפה', 'ספרינט לקיר השני ונוגעים בו גבוה, כמה שאפשר', 'חזרה: רצפה, ספרינט, גבוה. הלוך ושוב זו חזרה'],
+    tip: 'למטה מהירים, למעלה קופצים. כל נגיעה בקיר גבוה יותר.',
+    frames: [[TOUCH_FLOOR, 300], [shift(SPRINT_L, -20, 0), 180], [shift(SPRINT_R, 20, 0), 180], [P(TOUCH_WALL, { lh: [186, 60], le: [162, 72], head: [148, 52], neck: [144, 68] }), 300], [FLIP(TOUCH_FLOOR), 300], [FLIP(shift(SPRINT_L, -20, 0)), 180], [FLIP(shift(SPRINT_R, 20, 0)), 180], [FLIP(P(TOUCH_WALL, { lh: [186, 60], le: [162, 72], head: [148, 52], neck: [144, 68] })), 300]], prop: WALLS },
+  { id: 'back-run', name: 'ריצה לאחור', cat: 'speed', type: 'reps', base: 4, place: 'hall',
+    steps: ['הגב לכיוון ההליכה, מסתכלים אחורה מעל הכתף', 'צעדים קצרים ומהירים על קצות האצבעות', 'עד הקיר ובחזרה בריצה רגילה. זו חזרה אחת'],
+    tip: 'לאט בהתחלה. יד אחת נשלחת אחורה כדי להרגיש את הקיר.',
+    frames: [[BACK_A, 220], [BACK_B, 220]] },
 
   // --- בטן ---
   { id: 'crunches', name: 'כפיפות בטן', cat: 'core', type: 'reps', base: 15,
@@ -337,6 +382,7 @@ export const EXERCISES = [
 export const CATS = {
   warm: { name: 'חימום', emoji: '🌤️' },
   jump: { name: 'ניתור', emoji: '🦘' },
+  speed: { name: 'מהירות וקואורדינציה', emoji: '⚡' },
   legs: { name: 'כוח רגליים', emoji: '🦵' },
   upper: { name: 'כוח עליון', emoji: '💪' },
   core: { name: 'בטן', emoji: '🔥' },

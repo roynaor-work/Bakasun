@@ -38,6 +38,8 @@ export class Figure {
     svg.appendChild(el('line', { x1: 10, y1: 182, x2: 190, y2: 182, class: 'ground' }));
     this.prop = el('rect', { class: 'prop', x: 0, y: 0, width: 0, height: 0, rx: 4 });
     svg.appendChild(this.prop);
+    this.prop2 = el('rect', { class: 'prop', x: 0, y: 0, width: 0, height: 0, rx: 4 });
+    svg.appendChild(this.prop2);
     this.rope = el('path', { class: 'rope', d: '' });
     this.g.appendChild(this.rope);
     this.far = { arm: this.limb('far'), leg: this.limb('far') };
@@ -63,8 +65,9 @@ export class Figure {
     else this.rope.setAttribute('d', '');
   }
   setProp(prop) {
-    const r = this.prop;
+    const r = this.prop; this.prop2.setAttribute('width', 0);
     if (!prop) { r.setAttribute('width', 0); return; }
+    if (prop.type === 'walls') { r.setAttribute('x', 4); r.setAttribute('y', 30); r.setAttribute('width', 5); r.setAttribute('height', 152); this.prop2.setAttribute('x', 191); this.prop2.setAttribute('y', 30); this.prop2.setAttribute('width', 5); this.prop2.setAttribute('height', 152); return; }
     if (prop.type === 'box') { r.setAttribute('x', prop.x); r.setAttribute('y', prop.y); r.setAttribute('width', prop.w); r.setAttribute('height', prop.h); }
     else if (prop.type === 'wall') { r.setAttribute('x', prop.x - 4); r.setAttribute('y', 30); r.setAttribute('width', 5); r.setAttribute('height', 152); }
   }

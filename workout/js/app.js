@@ -314,8 +314,8 @@ function repsBlock(it) {
   return `
   <div class="card center stack" id="repcard">
     <div class="target">${it.target} <span class="small muted" style="font-size:18px">חזרות</span></div>
-    <button class="btn primary" id="countme">🔢 ספור איתי</button>
-    <p class="muted small" id="rephint">עושים יחד עם הדמות והמספר עולה לבד. או פשוט מסמנים כמה עשית:</p>
+    ${byId[it.exId].signal ? '<button class="btn primary" id="signal">🚦 אות יציאה</button><p class="muted small">לוחצים, מתכוננים ליד הקיר, ומחכים לצפצוף.</p>' : '<button class="btn primary" id="countme">🔢 ספור איתי</button>'}
+    <p class="muted small" id="rephint">${byId[it.exId].signal ? 'אחרי כל ריצה מסמנים כמה עשית:' : 'עושים יחד עם הדמות והמספר עולה לבד. או פשוט מסמנים כמה עשית:'}</p>
     <div class="stepper">
       <button class="btn icon" id="minus" aria-label="פחות">−</button>
       <div class="n" id="count">${it.done || it.target}</div>
@@ -327,8 +327,15 @@ function repsBlock(it) {
 function wireReps(it, ex, mainFig) {
   let n = it.done || it.target, counting = false;
   const show = () => { $('#count').textContent = n; };
-  const stopCount = () => { clearInterval(tick); tick = 0; counting = false; $('#repcard').classList.remove('counting'); $('#countme').textContent = '🔢 ספור איתי'; };
-  $('#countme').onclick = () => {
+  const stopCount = () => { clearInterval(tick); tick = 0; counting = false; $('#repcard').classList.remove('counting'); if ($('#countme')) $('#countme').textContent = '🔢 ספור איתי'; };
+  const sig = $('#signal');
+  if (sig) sig.onclick = () => {
+    // אות יציאה: המסך אדום "מוכן...", ואחרי זמן אקראי צפצוף ו"צא!" ירוק
+    sig.disabled = true;
+    const o = document.createElement('div'); o.className = 'go wait'; o.textContent = 'מוכן...'; document.body.appendChild(o);
+    setTimeout(() => { o.className = 'go'; o.textContent = 'צא!'; beep(1200, 350); setTimeout(() => { o.remove(); sig.disabled = false; }, 900); }, 1200 + Math.random() * 2300);
+  };
+  if ($('#countme')) $('#countme').onclick = () => {
     if (counting) return stopCount();
     counting = true; n = 0; show();
     mainFig.play(ex, 1); // מתחילים את הסרטון מההתחלה כדי שהספירה תתאים לתנועה
