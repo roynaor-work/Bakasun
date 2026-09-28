@@ -1,5 +1,5 @@
 // משחקי מהירות, תגובה וקצב
-import { POSE, S } from './sprites.js';
+import { POSE, S, KITS } from './sprites.js';
 const G = [];
 
 // ---- חפרפרות ----
@@ -34,7 +34,7 @@ G.push({ id: 'dodge', name: 'התחמק מהסלעים', emoji: '🪨', how: 'מ
       move(x) { px = r.clamp(x, 16, r.W - 16); }, down(x) { this.move(x); },
       update(dt) { alive += dt; t += dt; if (t > Math.max(0.25, 0.7 - alive / 100)) { t = 0; rocks.push({ x: r.rnd(10, r.W - 10), y: -20, vy: r.rnd(200, 360), s: r.rnd(10, 22) }); }
         rocks.forEach(k => k.y += k.vy * dt); for (const k of rocks) if (k.y > r.H - 20 && !k.hit) { k.hit = true; r.burst(k.x, r.H - 20, '#78716C', 6, 100); } rocks = rocks.filter(k => k.y < r.H + 30); if (rocks.some(k => r.dist(k.x, k.y, px, r.H - 60) < k.s + 14)) return r.over('סלע נפל עליך!'); if (Math.floor(alive) !== Math.floor(alive - dt)) { r.addScore(2); if (Math.floor(alive) % 10 === 0) { r.pop(`${Math.floor(alive)} שניות!`, r.W / 2, 100, '#57534E', 24); r.sfx('score'); } } },
-      draw() { r.clear('#E7E5E4'); r.rect(0, r.H - 20, r.W, 20, '#A8A29E'); rocks.forEach((k, i) => S.rock(r, k.x, k.y, k.s, i)); r.stick(POSE.shuffle, px, r.H - 20, 0.42, { color: '#1C1917', far: '#57534E', width: 6 }); },
+      draw() { r.clear('#E7E5E4'); r.rect(0, r.H - 20, r.W, 20, '#A8A29E'); rocks.forEach((k, i) => S.rock(r, k.x, k.y, k.s, i)); r.player(POSE.shuffle, px, r.H - 20, 0.42, KITS.green); },
     };
   } });
 

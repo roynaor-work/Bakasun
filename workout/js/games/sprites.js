@@ -48,3 +48,64 @@ export const S = {
   frog(r, x, y) { r.circle(x, y, 14, '#22C55E'); r.circle(x - 7, y - 10, 6, '#22C55E'); r.circle(x + 7, y - 10, 6, '#22C55E'); r.circle(x - 7, y - 10, 3, '#fff'); r.circle(x + 7, y - 10, 3, '#fff'); r.circle(x - 7, y - 10, 1.5, '#111'); r.circle(x + 7, y - 10, 1.5, '#111'); r.line(x - 5, y + 4, x + 5, y + 4, '#14532D', 2); },
   skis(r, x, y) { r.line(x - 14, y + 2, x - 6, y + 6, '#EF4444', 4); r.line(x + 6, y + 6, x + 14, y + 2, '#EF4444', 4); r.line(x - 24, y + 6, x + 4, y + 6, '#1D4ED8', 3); r.line(x - 4, y + 6, x + 24, y + 6, '#1D4ED8', 3); },
 };
+
+// ---- דמות מלאה מאותו שלד: חולצה עם מספר, מכנסיים, גרביים, נעליים, עור, שיער, פנים. לשוער: כפפות ----
+export const KITS = {
+  blue: { shirt: '#2563EB', shirt2: '#1E40AF', shorts: '#1E3A8A', socks: '#fff', number: '10' },
+  green: { shirt: '#16A34A', shirt2: '#15803D', shorts: '#fff', socks: '#16A34A', number: '9' },
+  red: { shirt: '#DC2626', shirt2: '#991B1B', shorts: '#fff', socks: '#DC2626', number: '7' },
+  keeper: { shirt: '#FACC15', shirt2: '#CA8A04', shorts: '#111827', socks: '#FACC15', number: '1', gloves: '#F97316' },
+  grey: { shirt: '#9CA3AF', shirt2: '#6B7280', shorts: '#4B5563', socks: '#E5E7EB', number: '' },
+  purple: { shirt: '#7C3AED', shirt2: '#5B21B6', shorts: '#fff', socks: '#7C3AED', number: '8' },
+  orange: { shirt: '#F97316', shirt2: '#C2410C', shorts: '#111827', socks: '#F97316', number: '11' },
+};
+const SKINS = ['#F1C27D', '#E0AC69', '#C68642', '#8D5524', '#FFDBAC'];
+export function player(ctx, pose, x, y, scale, kit = KITS.blue, { flip = false, skin = SKINS[0], hair = '#3B2A1A', shoes = '#111827', happy = true } = {}) {
+  const P = ([a, b]) => [x + (flip ? -(a - 100) : (a - 100)) * scale, y + (b - 182) * scale];
+  const lerp = (a, b, k) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
+  const cap = (a, b, w, color) => { ctx.strokeStyle = color; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.beginPath(); ctx.moveTo(...P(a)); ctx.lineTo(...P(b)); ctx.stroke(); };
+  const dot = (p, rad, color) => { const [px, py] = P(p); ctx.fillStyle = color; ctx.beginPath(); ctx.arc(px, py, rad, 0, Math.PI * 2); ctx.fill(); };
+  // מלפנים או מהצד? מלפנים הידיים סימטריות סביב הצוואר
+  const front = Math.abs((pose.le[0] - pose.neck[0]) + (pose.re[0] - pose.neck[0])) < 10 && Math.abs(pose.le[0] - pose.re[0]) > 14;
+  const dir = flip ? -1 : 1, L = 8 * scale, A = 6.5 * scale, shW = (front ? 15 : 7) * scale, hipW = (front ? 11 : 6) * scale;
+  const leg = (k, f, near) => { const sk = near ? skin : shade(skin, -18); cap(pose.hip, k, L * 1.15, sk); cap(k, f, L, sk); cap(lerp(k, f, .55), f, L + 1, near ? kit.socks : shade(kit.socks, -25)); const [fx, fy] = P(f); ctx.fillStyle = shoes; ctx.beginPath(); ctx.ellipse(fx + (front ? 0 : dir * 5 * scale), fy + 2 * scale, 8 * scale, 4.5 * scale, 0, 0, Math.PI * 2); ctx.fill(); };
+  const arm = (e, h, near) => { const sk = near ? skin : shade(skin, -18); cap(pose.neck, e, A, sk); cap(e, h, A, sk); cap(pose.neck, lerp(pose.neck, e, .45), A + 4 * scale, near ? kit.shirt : kit.shirt2); if (kit.gloves) dot(h, 6.5 * scale, kit.gloves); else dot(h, 4 * scale, sk); };
+  // רגל וזרוע רחוקות
+  leg(pose.lk, pose.lf, false); arm(pose.le, pose.lh, false);
+  // מכנסיים
+  cap(pose.hip, lerp(pose.hip, pose.lk, .42), L * 1.6, shade(kit.shorts, -12)); cap(pose.hip, lerp(pose.hip, pose.rk, .42), L * 1.6, kit.shorts);
+  // גוף
+  const [nx, ny] = P(pose.neck), [hx, hy] = P(pose.hip); const ang = Math.atan2(hy - ny, hx - nx) + Math.PI / 2, cx = Math.cos(ang), cy = Math.sin(ang);
+  ctx.fillStyle = kit.shirt; ctx.beginPath(); ctx.moveTo(nx - cx * shW, ny - cy * shW); ctx.lineTo(nx + cx * shW, ny + cy * shW); ctx.lineTo(hx + cx * hipW, hy + cy * hipW + 4 * scale); ctx.lineTo(hx - cx * hipW, hy - cy * hipW + 4 * scale); ctx.closePath(); ctx.fill(); ctx.strokeStyle = kit.shirt2; ctx.lineWidth = 1.5 * scale; ctx.stroke();
+  if (front && kit.number) { ctx.fillStyle = '#fff'; ctx.font = `900 ${13 * scale}px Heebo, Arial, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(kit.number, (nx + hx) / 2, (ny + hy) / 2); }
+  // רגל וזרוע קרובות
+  leg(pose.rk, pose.rf, true); arm(pose.re, pose.rh, true);
+  // ראש
+  const [hdx, hdy] = P(pose.head), R = 12 * scale; ctx.fillStyle = skin; ctx.beginPath(); ctx.arc(hdx, hdy, R, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = hair; ctx.beginPath(); ctx.arc(hdx, hdy - R * .15, R * 1.02, Math.PI * 1.05, Math.PI * 1.95); ctx.lineTo(hdx + R * (front ? .95 : dir * .3), hdy - R * .2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#1B1740';
+  if (front) { ctx.beginPath(); ctx.arc(hdx - R * .35, hdy, R * .12, 0, 7); ctx.arc(hdx + R * .35, hdy, R * .12, 0, 7); ctx.fill(); }
+  else { ctx.beginPath(); ctx.arc(hdx + dir * R * .45, hdy - R * .05, R * .13, 0, 7); ctx.fill(); }
+  ctx.strokeStyle = '#7C2D12'; ctx.lineWidth = Math.max(1, 1.4 * scale); ctx.beginPath(); if (happy) ctx.arc(hdx + (front ? 0 : dir * R * .4), hdy + R * .3, R * .4, front ? .25 : (dir > 0 ? .1 : Math.PI - .9), front ? Math.PI - .25 : (dir > 0 ? Math.PI * .9 : Math.PI + .1)); else { ctx.moveTo(hdx - R * .3, hdy + R * .5); ctx.lineTo(hdx + R * .3, hdy + R * .5); } ctx.stroke();
+}
+function shade(hex, amt) { const n = parseInt(hex.replace('#', '').padEnd(6, hex.length === 4 ? hex.slice(1) : '0'), 16); const c = k => Math.max(0, Math.min(255, ((n >> k) & 255) + amt)); return `rgb(${c(16)},${c(8)},${c(0)})`; }
+S.player = (r, pose, x, y, scale, kit, opts) => player(r.ctx, pose, x, y, scale, kit, opts);
+
+// ---- קהל שנראה כמו אנשים: ראשים, כתפיים, צעיפים ודגלים, קופץ כשמתרגש ----
+export function crowdGen(count, W, rows, topY = 20, rowH = 22) {
+  const fans = []; const colors = ['#16A34A', '#fff', '#16A34A', '#FDE047', '#1E3A8A', '#EF4444', '#0EA5E9', '#F472B6'];
+  for (let r = 0; r < rows; r++) for (let i = 0; i < count; i++) fans.push({ x: (i + (r % 2) * .5) * (W / count) + W / count / 2, y: topY + r * rowH, color: colors[Math.floor(Math.random() * colors.length)], skin: SKINS[Math.floor(Math.random() * SKINS.length)], hair: ['#3B2A1A', '#111', '#8B5E3C', '#D1A054', '#444'][Math.floor(Math.random() * 5)], phase: Math.random() * 6, flag: Math.random() < .12, scarf: Math.random() < .25, size: 7 + Math.random() * 2, back: r });
+  return fans;
+}
+export function crowd(ctx, fans, t, excited = false) {
+  for (const f of fans) {
+    const jump = excited && Math.sin(t * 9 + f.phase) > 0 ? -7 : 0, y = f.y + jump, s = f.size;
+    ctx.fillStyle = f.color; ctx.beginPath(); ctx.roundRect(f.x - s * 1.4, y + s * .6, s * 2.8, s * 1.6, s * .6); ctx.fill();
+    if (excited) { ctx.strokeStyle = f.skin; ctx.lineWidth = 2.2; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(f.x - s * 1.2, y + s); ctx.lineTo(f.x - s * 1.9, y - s * .9 - Math.sin(t * 12 + f.phase) * 3); ctx.moveTo(f.x + s * 1.2, y + s); ctx.lineTo(f.x + s * 1.9, y - s * .9 + Math.sin(t * 12 + f.phase) * 3); ctx.stroke(); }
+    ctx.fillStyle = f.skin; ctx.beginPath(); ctx.arc(f.x, y, s, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = f.hair; ctx.beginPath(); ctx.arc(f.x, y - s * .2, s, Math.PI, Math.PI * 2); ctx.fill();
+    if (f.scarf) { ctx.fillStyle = '#16A34A'; ctx.fillRect(f.x - s * 1.4, y + s * .5, s * 2.8, s * .45); }
+    if (f.flag) { ctx.strokeStyle = '#eee'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(f.x + s * 1.6, y + s); ctx.lineTo(f.x + s * 1.6, y - s * 2.6); ctx.stroke(); ctx.fillStyle = '#16A34A'; ctx.fillRect(f.x + s * 1.6, y - s * 2.6 + Math.sin(t * 4 + f.phase), s * 1.8, s * 1.1); }
+  }
+}
+S.crowd = (r, fans, t, excited) => crowd(r.ctx, fans, t, excited);

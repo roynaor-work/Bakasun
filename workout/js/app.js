@@ -9,7 +9,7 @@ import { runGame } from './games/engine.js';
 import * as cloud from './cloud.js';
 import { initParent, parentGate, parentHome, basketball } from './parent.js';
 import { playIntro } from './intro.js';
-import { speak, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js';
+import { speak, speakLang, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js';
 import { SAY } from './say.js';
 
 const $ = s => document.querySelector(s);
@@ -446,7 +446,7 @@ function giftPhase() {
 function playGame(g, onDone) {
   mount('', true);
   const secs = store.profile.gameSeconds || 90;
-  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, speak: t => speak(t), onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
+  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t), onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
 }
 
 function restPhase() {

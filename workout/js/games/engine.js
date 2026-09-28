@@ -1,7 +1,8 @@
 // מנוע המשחקים הקטנים: קנבס בגודל לוגי קבוע, ניקוד, טיימר, מגע/מקלדת, מסכי פתיחה וסיום.
 // כל משחק הוא אובייקט { id, name, emoji, how, make(r) } כאשר make מחזיר { update(dt), draw(), tap(x,y), down, up, move, swipe(dir), key(code) }.
 import { poseAt } from '../figure.js';
-import { celebrateGoal } from './celebrate.js';
+import { celebrate as celebrateGoal } from './celebrate.js';
+import { player as drawPlayer, crowd as drawCrowd, crowdGen } from './sprites.js';
 export const W = 360, H = 560;
 
 const PAL = { bg: '#1B1740', ink: '#F5F2FF', muted: '#9C96C4', accent: '#8B72FF', ok: '#22C55E', hot: '#FF7A3D', pink: '#FF4D8D', sky: '#38BDF8', gold: '#FFB84D', red: '#EF4444', teal: '#1FB6C9', lime: '#A3E635' };
@@ -65,6 +66,9 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
     },
     // פוזה מתוך רצף פריימים של תרגיל בזמן נתון
     anim(frames, ms) { return poseAt(frames, ms); },
+    // דמות מלאה (חולצה, מכנסיים, פנים) מאותו שלד; kit מ-KITS ב-sprites.js
+    player(pose, x, y, scale, kit, opts) { return drawPlayer(ctx, pose, x, y, scale, kit, opts); },
+    crowd(fans, t, excited) { return drawCrowd(ctx, fans, t, excited); }, crowdGen,
   };
   function drawFx(dt) {
     pops.forEach(p => { p.t -= dt; p.y -= 40 * dt; ctx.globalAlpha = Math.max(0, p.t / 0.9); r.text(p.text, p.x, p.y, { size: p.size, color: p.color }); ctx.globalAlpha = 1; }); pops = pops.filter(p => p.t > 0);
