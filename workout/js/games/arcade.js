@@ -1,20 +1,23 @@
 // משחקי ארקייד קלאסיים
-import { POSE, GK, S as SP, KITS } from './sprites.js';
+import { POSE, S as SP, KITS } from './sprites.js';
 import { renderStill, SCENE_IDS, STILL_T } from './celebrate.js';
 const G = [];
 
 // ---- טטריס ----
 G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים ימינה ושמאלה כדי להזיז, נוגעים כדי לסובב, מחליקים למטה כדי להפיל.',
   make(r) {
-    const COLS = 10, ROWS = 17, S = 26, OX = 50, OY = 104; // מקום למעלה לשער ולחתיכה הבאה
+    const COLS = 10, ROWS = 18, S = 27, OX = 45, OY = 62; // למעלה רק החתיכה הבאה והתקדמות התמונה
     const SHAPES = [[[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]], [[1, 0, 0], [1, 1, 1]], [[0, 0, 1], [1, 1, 1]], [[1, 1, 0], [0, 1, 1]], [[0, 1, 1], [1, 1, 0]]];
     const COLORS = [r.C.sky, r.C.gold, r.C.accent, r.C.hot, r.C.teal, r.C.ok, r.C.pink];
     const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-    let cur, t = 0, speed = 0.55, next = r.rint(0, 6), lines = 0, goals = [], shot = null, revealed = 0, picIdx = r.rint(0, SCENE_IDS.length - 1), picDone = 0;
-    const GOAL = { x: 130, y: 12, w: 216, h: 70 };
+    let cur, t = 0, speed = 0.55, next = r.rint(0, 6), lines = 0, revealed = 0, picIdx = r.rint(0, SCENE_IDS.length - 1), picDone = 0, custom = null;
+    // תמונה שהמשתמש העלה בהגדרות (למשל הולאנד בועט) מחליפה את הפריימים המצוירים
+    let pics = []; try { pics = JSON.parse(localStorage.getItem('kidfit.tetrisPics') || '[]'); const one = localStorage.getItem('kidfit.tetrisPic'); if (one && !pics.length) pics = [one]; } catch { pics = []; }
+    let picI = pics.length ? r.rint(0, pics.length - 1) : 0; const loadCustom = () => { if (!pics.length || typeof Image === 'undefined') return; custom = new Image(); custom.onload = paintPic; custom.src = pics[picI]; };
     // התמונה שמאחורי הלוח: פריים מהחגיגות, נחשפת שורה אחרי שורה
     const pic = typeof document !== 'undefined' ? document.createElement('canvas') : null; if (pic) { pic.width = 360; pic.height = 560; }
-    const paintPic = () => { if (!pic) return; try { renderStill(pic, SCENE_IDS[picIdx], STILL_T[SCENE_IDS[picIdx]]); } catch { /* */ } };
+    const paintPic = () => { if (!pic) return; try { if (custom && custom.complete && custom.naturalWidth) { const c = pic.getContext('2d'); const k = Math.max(360 / custom.naturalWidth, 560 / custom.naturalHeight); c.fillStyle = '#000'; c.fillRect(0, 0, 360, 560); c.drawImage(custom, (360 - custom.naturalWidth * k) / 2, (560 - custom.naturalHeight * k) / 2, custom.naturalWidth * k, custom.naturalHeight * k); } else renderStill(pic, SCENE_IDS[picIdx], STILL_T[SCENE_IDS[picIdx]]); } catch { /* */ } };
+    loadCustom();
     paintPic();
     const spawn = () => { const i = next; next = r.rint(0, 6); cur = { s: SHAPES[i].map(x => [...x]), c: i + 1, x: 3, y: 0 }; if (collides(cur.s, cur.x, cur.y)) r.over('הלוח מלא!'); };
     const collides = (s, x, y) => s.some((row, j) => row.some((v, i) => v && (x + i < 0 || x + i >= COLS || y + j >= ROWS || (y + j >= 0 && grid[y + j][x + i]))));
@@ -22,14 +25,13 @@ G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים �
     const lock = () => { cur.s.forEach((row, j) => row.forEach((v, i) => { if (v && cur.y + j >= 0) grid[cur.y + j][cur.x + i] = cur.c; }));
       let n = 0; for (let j = ROWS - 1; j >= 0; j--) if (grid[j].every(Boolean)) { grid.splice(j, 1); grid.unshift(Array(COLS).fill(0)); n++; j++; }
       if (n) { const pts = [0, 100, 300, 500, 800][n]; r.addScore(pts); lines += n; speed = Math.max(0.15, speed - 0.02 * n); r.pop(n === 4 ? 'טטריס! +800' : '+' + pts, r.W / 2, 300, r.C.gold, 26); r.burst(r.W / 2, 330, COLORS[cur.c - 1], 16);
-        // כל שורה = שער במקום אחר ברשת, עם שאגת קהל
-        for (let k = 0; k < n; k++) { const gx = GOAL.x + 14 + Math.random() * (GOAL.w - 28), gy = GOAL.y + 12 + Math.random() * (GOAL.h - 24); goals.push({ x: gx, y: gy }); shot = { x: OX + COLS * S / 2, y: OY, tx: gx, ty: gy, t: 0, dir: gx < GOAL.x + GOAL.w / 2 ? 1 : -1 }; } r.sfx(n === 4 ? 'win' : 'goal'); r.pop('גול!', GOAL.x + GOAL.w / 2, GOAL.y + GOAL.h + 8, '#FDE047', 24);
+        r.sfx(n === 4 ? 'win' : 'goal');
         // כל שורה חושפת שורה מהתמונה
-        revealed += n; if (revealed >= ROWS) { revealed = 0; picDone++; r.addScore(300); r.pop('התמונה נחשפה! +300', r.W / 2, 280, r.C.gold, 26); r.burst(r.W / 2, 300, r.C.gold, 30, 300); picIdx = (picIdx + 1) % SCENE_IDS.length; paintPic(); } } else r.sfx('tick'); spawn(); };
+        revealed += n; if (revealed >= ROWS) { revealed = 0; picDone++; r.addScore(300); r.pop('התמונה נחשפה! +300', r.W / 2, 280, r.C.gold, 26); r.burst(r.W / 2, 300, r.C.gold, 30, 300); if (pics.length) { picI = (picI + 1) % pics.length; loadCustom(); } else { picIdx = (picIdx + 1) % SCENE_IDS.length; paintPic(); } } } else r.sfx('tick'); spawn(); };
     const step = () => { if (!collides(cur.s, cur.x, cur.y + 1)) cur.y++; else lock(); };
     spawn();
     return {
-      update(dt) { t += dt; if (t > speed) { t = 0; step(); } if (shot) { shot.t += dt * 2.2; if (shot.t >= 1.6) shot = null; } },
+      update(dt) { t += dt; if (t > speed) { t = 0; step(); } },
       swipe(d) { if (d === 'left' && !collides(cur.s, cur.x - 1, cur.y)) cur.x--; if (d === 'right' && !collides(cur.s, cur.x + 1, cur.y)) cur.x++; if (d === 'down') { while (!collides(cur.s, cur.x, cur.y + 1)) cur.y++; lock(); r.addScore(5); } if (d === 'up') this.tap(); },
       tap() { const rs = rotate(cur.s); for (const dx of [0, -1, 1, -2, 2]) if (!collides(rs, cur.x + dx, cur.y)) { cur.s = rs; cur.x += dx; break; } },
       draw() { r.clear(); r.rect(OX - 2, OY - 2, COLS * S + 4, ROWS * S + 4, '#2A2555', 6);
@@ -37,13 +39,9 @@ G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים �
         const BW = COLS * S, BH = ROWS * S; r.ctx.save(); r.ctx.beginPath(); r.ctx.roundRect(OX, OY, BW, BH, 4); r.ctx.clip(); const sc = Math.max(BW / 360, BH / 560), dw = 360 * sc, dh = 560 * sc; if (pic) r.ctx.drawImage(pic, OX + (BW - dw) / 2, OY + (BH - dh) / 2, dw, dh); r.ctx.restore();
         for (let j = revealed; j < ROWS; j++) r.rect(OX, OY + j * S, BW, S + 0.5, '#1E1B3A');
         if (revealed > 0 && revealed < ROWS) r.line(OX, OY + revealed * S, OX + BW, OY + revealed * S, r.C.gold, 2);
-        r.text(`${revealed} מתוך ${ROWS} שורות בתמונה`, OX + BW / 2, OY + BH + 12, { size: 12, color: r.C.muted });
-        // למעלה: החתיכה הבאה (גדולה) והשער עם כל השערים שהבקעת
-        r.rect(8, 8, 108, 80, '#2A2555', 8); r.text('הבא', 62, 20, { size: 13, color: r.C.muted }); const ns = SHAPES[next], nw = ns[0].length * 18, nh = ns.length * 18; ns.forEach((row, j) => row.forEach((v, i) => { if (v) r.rect(62 - nw / 2 + i * 18 + 1, 52 - nh / 2 + j * 18 + 1, 16, 16, COLORS[next], 4); }));
-        r.rect(GOAL.x - 6, GOAL.y - 4, GOAL.w + 12, GOAL.h + 10, '#15803D', 6); r.ctx.strokeStyle = '#ffffff66'; r.ctx.lineWidth = 1; for (let i = 0; i <= GOAL.w; i += 12) r.line(GOAL.x + i, GOAL.y, GOAL.x + i, GOAL.y + GOAL.h, '#ffffff55', 1); for (let j = 0; j <= GOAL.h; j += 12) r.line(GOAL.x, GOAL.y + j, GOAL.x + GOAL.w, GOAL.y + j, '#ffffff55', 1); r.line(GOAL.x, GOAL.y + GOAL.h, GOAL.x, GOAL.y, '#fff', 4); r.line(GOAL.x, GOAL.y, GOAL.x + GOAL.w, GOAL.y, '#fff', 4); r.line(GOAL.x + GOAL.w, GOAL.y, GOAL.x + GOAL.w, GOAL.y + GOAL.h, '#fff', 4);
-        goals.forEach(g => { r.circle(g.x, g.y, 5, '#fff'); r.circle(g.x, g.y, 2, '#111'); }); r.text(`${goals.length} שערים`, GOAL.x + GOAL.w / 2, GOAL.y + GOAL.h + 16, { size: 12, color: r.C.muted });
-        const gkx = GOAL.x + GOAL.w / 2 + (shot ? shot.dir * Math.min(1, shot.t) * 70 : 0); r.player(shot ? (shot.dir > 0 ? GK.diveR : GK.diveL) : GK.ready, gkx, GOAL.y + GOAL.h, 0.36, KITS.keeper);
-        if (shot) { const k = Math.min(1, shot.t); const bx = shot.x + (shot.tx - shot.x) * k, by = shot.y + (shot.ty - shot.y) * k - Math.sin(k * Math.PI) * 30; r.circle(bx, by, 7 - 3 * k, '#fff'); r.circle(bx, by, 2, '#111'); }
+        // למעלה: החתיכה הבאה, שורות, והתקדמות התמונה
+        r.rect(OX, 6, 96, 50, '#2A2555', 8); r.text('הבא', OX + 16, 18, { size: 11, color: r.C.muted }); const ns = SHAPES[next], nw = ns[0].length * 12, nh = ns.length * 12; ns.forEach((row, j) => row.forEach((v, i) => { if (v) r.rect(OX + 58 - nw / 2 + i * 12 + 1, 31 - nh / 2 + j * 12 + 1, 10, 10, COLORS[next], 3); }));
+        r.text(`שורות: ${lines}`, OX + BW - 40, 18, { size: 12, color: r.C.muted }); r.rect(OX + BW - 130, 30, 130, 10, '#2A2555', 5); r.rect(OX + BW - 130, 30, 130 * revealed / ROWS, 10, r.C.gold, 5); r.text(`תמונה ${revealed}/${ROWS}${picDone ? ` · ${picDone} ✓` : ''}`, OX + BW - 65, 50, { size: 11, color: r.C.muted });
         // רוח: איפה החתיכה תנחת
         let gy = cur.y; while (!collides(cur.s, cur.x, gy + 1)) gy++; cur.s.forEach((row, j) => row.forEach((v, i) => { if (v && gy + j >= 0) r.rect(OX + (cur.x + i) * S + 3, OY + (gy + j) * S + 3, S - 6, S - 6, COLORS[cur.c - 1] + '33', 3); }));
         grid.forEach((row, j) => row.forEach((v, i) => { if (v) { r.rect(OX + i * S + 1, OY + j * S + 1, S - 2, S - 2, COLORS[v - 1], 4); r.rect(OX + i * S + 4, OY + j * S + 4, S - 8, 5, '#ffffff33', 2); } }));
@@ -51,22 +49,29 @@ G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים �
     };
   } });
 
-// ---- נחש ----
-G.push({ id: 'snake', name: 'נחש', emoji: '🐍', how: 'מחליקים לכיוון שרוצים. אוכלים תפוחים, לא נוגעים בקירות ולא בזנב.',
+// ---- הרעב הגדול (נחש): פרצוף הילד אוכל שקיות מיץ, הזנב = כל השקיות שאכל ----
+G.push({ id: 'snake', name: 'הרעב הגדול', emoji: '🧃', how: 'מחליקים לכיוון שרוצים. הפרצוף שלך אוכל שקיות מיץ, והזנב מתארך. לא נוגעים בקירות ולא בזנב.',
   make(r) {
-    const S = 20, COLS = r.W / S, ROWS = Math.floor((r.H - 20) / S), OY = 20;
-    let snake = [[8, 14], [7, 14], [6, 14]], dir = [1, 0], next = dir, t = 0, food = place(), speed = 0.14;
+    const S = 24, COLS = Math.floor(r.W / S), ROWS = Math.floor((r.H - 30) / S), OX = (r.W - COLS * S) / 2, OY = 30;
+    let snake = [[7, 11], [6, 11], [5, 11]], dir = [1, 0], next = dir, t = 0, food = place(), speed = 0.2, tt = 0, eaten = 0, chew = 0;
+    let face = null; try { const src = localStorage.getItem('kidfit.facePic'); if (src && typeof Image !== 'undefined') { face = new Image(); face.src = src; } } catch { face = null; }
     function place() { let p; do { p = [r.rint(0, COLS - 1), r.rint(0, ROWS - 1)]; } while (snake.some(s => s[0] === p[0] && s[1] === p[1])); return p; }
+    const cx = c => OX + c * S + S / 2, cy = c => OY + c * S + S / 2;
     return {
       swipe(d) { const m = { left: [-1, 0], right: [1, 0], up: [0, -1], down: [0, 1] }[d]; if (m && !(m[0] === -dir[0] && m[1] === -dir[1])) next = m; },
-      update(dt) { t += dt; if (t < speed) return; t = 0; dir = next;
+      update(dt) { t += dt; tt += dt; chew = Math.max(0, chew - dt * 3); if (t < speed) return; t = 0; dir = next;
         const h = [snake[0][0] + dir[0], snake[0][1] + dir[1]];
-        if (h[0] < 0 || h[0] >= COLS || h[1] < 0 || h[1] >= ROWS || snake.some(s => s[0] === h[0] && s[1] === h[1])) return r.over('הנחש נפגע!');
+        if (h[0] < 0 || h[0] >= COLS || h[1] < 0 || h[1] >= ROWS) return r.over('בום! נכנסת בקיר');
+        if (snake.some(s => s[0] === h[0] && s[1] === h[1])) return r.over('אכלת את הזנב שלך!');
         snake.unshift(h);
-        if (h[0] === food[0] && h[1] === food[1]) { r.addScore(10); r.pop('+10', h[0] * S + S / 2, OY + h[1] * S, r.C.lime); r.burst(h[0] * S + S / 2, OY + h[1] * S + S / 2, '#EF4444', 8, 120); r.sfx('score'); food = place(); speed = Math.max(0.07, speed - 0.003); } else snake.pop(); },
-      draw() { r.clear('#173A27'); r.emoji('🍎', food[0] * S + S / 2, OY + food[1] * S + S / 2, 18);
-        snake.forEach((s, i) => r.rect(s[0] * S + 1, OY + s[1] * S + 1, S - 2, S - 2, i ? (i % 2 ? r.C.lime : '#86EFAC') : r.C.gold, 6));
-        const hx = snake[0][0] * S + S / 2, hy = OY + snake[0][1] * S + S / 2; [[-1, -1], [1, -1]].forEach(([a, b]) => { const ex = hx + (dir[0] ? dir[0] * 3 : a * 5), ey = hy + (dir[1] ? dir[1] * 3 : b * 5); r.circle(ex, ey, 3, '#fff'); r.circle(ex + dir[0], ey + dir[1], 1.5, '#111'); }); },
+        if (h[0] === food[0] && h[1] === food[1]) { eaten++; const pts = 10 + Math.min(eaten, 10); r.addScore(pts); r.pop('+' + pts + ' 🧃', cx(h[0]), cy(h[1]) - 20, r.C.gold, 22); r.burst(cx(h[0]), cy(h[1]), '#f97316', 10, 140); r.sfx('score'); chew = 1; food = place(); speed = Math.max(0.1, speed - 0.004); } else snake.pop(); },
+      draw() { r.clear('#0f3d2e'); for (let j = 0; j < ROWS; j++) for (let i = 0; i < COLS; i++) if ((i + j) % 2) r.rect(OX + i * S, OY + j * S, S, S, '#124a37');
+        r.text(`שתית ${eaten} 🧃`, r.W / 2, 15, { size: 14, color: '#bbf7d0' });
+        SP.pouch(r, cx(food[0]), cy(food[1]), 0.9, tt);
+        // הזנב: שקיות שנאכלו, קטנות יותר לקראת הסוף
+        for (let i = snake.length - 1; i >= 1; i--) { const k = 1 - i / snake.length; SP.pouch(r, cx(snake[i][0]), cy(snake[i][1]), 0.55 + k * .25, tt + i); }
+        // הראש: הפרצוף, פה נפתח כשהאוכל במרחק 2 משבצות
+        const near = Math.abs(snake[0][0] - food[0]) + Math.abs(snake[0][1] - food[1]) <= 2; SP.face(r, cx(snake[0][0]), cy(snake[0][1]), S * .62, dir, chew > 0 ? chew : near ? 1 : 0, face); },
     };
   } });
 
@@ -173,19 +178,21 @@ G.push({ id: 'asteroids', name: 'שדה אסטרואידים', emoji: '☄️', 
     };
   } });
 
-// ---- ציפור מעופפת ----
-G.push({ id: 'flappy', name: 'ציפור מעופפת', emoji: '🐤', how: 'נוגעים כדי לעוף למעלה. עוברים בין הצינורות בלי לגעת.',
+// ---- הפרה המעופפת (במקום ציפור): עוברים בין תחתונים תלויים לאסלות ----
+G.push({ id: 'flappy', name: 'הפרה המעופפת', emoji: '🐄', how: 'נוגעים כדי שהפרה תעוף למעלה. עוברים בין התחתונים לאסלות בלי לגעת.',
   make(r) {
-    let y = r.H / 2, vy = 0, pipes = [], t = 1.2, gap = 150;
+    let y = r.H / 2, vy = 0, obs = [], t = 1.0, gap = 190, tt = 0, passed = 0, started = false;
     return {
-      tap() { vy = -330; r.sfx('tick'); }, down() { vy = -330; },
-      update(dt) { vy += 900 * dt; y += vy * dt; t += dt;
-        if (t > 1.5) { t = 0; pipes.push({ x: r.W + 30, h: r.rnd(80, r.H - gap - 80), passed: false }); }
-        pipes.forEach(p => p.x -= 150 * dt); pipes = pipes.filter(p => p.x > -60);
-        for (const p of pipes) { if (!p.passed && p.x + 25 < 80) { p.passed = true; r.addScore(10); r.pop('+10', 80, y - 30, '#fff'); r.sfx('score'); }
-          if (80 + 14 > p.x && 80 - 14 < p.x + 50 && (y - 14 < p.h || y + 14 > p.h + gap)) return r.over('נגעת בצינור!'); }
-        if (y > r.H - 10 || y < -20) r.over('אופס!'); },
-      draw() { r.clear('#7DD3FC'); SP.cloud(r, 60 - (t * 30) % 60, 80, 1); SP.cloud(r, 260, 140, 0.7); r.rect(0, r.H - 24, r.W, 24, '#84CC16'); pipes.forEach(p => { r.rect(p.x, 0, 50, p.h, '#16A34A', 4); r.rect(p.x - 4, p.h - 18, 58, 18, '#15803D', 4); r.rect(p.x, p.h + gap, 50, r.H, '#16A34A', 4); r.rect(p.x - 4, p.h + gap, 58, 18, '#15803D', 4); }); SP.bird(r, 80, y, vy < 0 ? 1 : 0); },
+      tap() { started = true; vy = -280; r.sfx('tick'); }, down() { started = true; vy = -280; },
+      update(dt) { tt += dt; if (!started) { y = r.H / 2 + Math.sin(tt * 3) * 12; return; } vy = Math.min(420, vy + 700 * dt); y += vy * dt; t += dt;
+        const spd = 120 + Math.min(60, passed * 4); if (t > 1.9) { t = 0; obs.push({ x: r.W + 30, h: r.rnd(70, r.H - gap - 110), passed: false, w: 56 }); }
+        obs.forEach(p => p.x -= spd * dt); obs = obs.filter(p => p.x > -80);
+        for (const p of obs) { if (!p.passed && p.x + p.w / 2 < 80) { p.passed = true; passed++; r.addScore(10); r.pop('+10', 80, y - 36, '#fff'); r.sfx('score'); }
+          if (80 + 18 > p.x && 80 - 18 < p.x + p.w && (y - 12 < p.h || y + 12 > p.h + gap)) { r.burst(80, y, '#fff', 12, 160); return r.over(y - 12 < p.h ? 'נתקעת בתחתונים! 🩲' : 'נפלת לאסלה! 🚽'); } }
+        if (y > r.H - 30) return r.over('אופס, הפרה נחתה!'); if (y < -30) y = -30; },
+      draw() { const g = r.ctx.createLinearGradient(0, 0, 0, r.H); g.addColorStop(0, '#7DD3FC'); g.addColorStop(1, '#e0f2fe'); r.ctx.fillStyle = g; r.ctx.fillRect(0, 0, r.W, r.H); SP.cloud(r, 60 - (tt * 30) % 420 + 200, 80, 1); SP.cloud(r, 300 - (tt * 20) % 420, 140, 0.7); r.rect(0, r.H - 24, r.W, 24, '#84CC16'); r.rect(0, r.H - 24, r.W, 5, '#65a30d');
+        obs.forEach(p => { SP.underpants(r, p.x, 0, p.w, p.h); SP.toilet(r, p.x, p.h + gap, p.w, r.H - 24 - p.h - gap); });
+        r.emoji('💨', 80 - 30, y + 8, 14); SP.cow(r, 80, y, vy < 0 ? 1 : 0, tt); if (!started) r.text('נוגעים כדי לעוף!', r.W / 2, r.H / 2 - 80, { size: 22, color: '#0c4a6e' }); },
     };
   } });
 

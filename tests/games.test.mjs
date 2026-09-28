@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import { GAMES, GAME_GROUPS, pickGift, gameById } from '../workout/js/games/index.js';
 import { POSE, GK, S, KITS, player, crowd, crowdGen } from '../workout/js/games/sprites.js';
 
+// קונטקסט קנבס מדומה: כל פונקציה היא noop, גרדיאנטים מחזירים אובייקט עם addColorStop
+const fakeCtx = () => { const noop = () => {}; const grad = () => ({ addColorStop: noop }); return new Proxy({}, { get: (t, k) => k === 'measureText' ? () => ({ width: 10 }) : /Gradient$/.test(k) ? grad : (k in t ? t[k] : noop), set: (t, k, v) => { t[k] = v; return true; } }); };
+
 test('catalog: 50 or more games, unique ids, all fields', () => {
   assert.ok(GAMES.length >= 50, 'games: ' + GAMES.length);
   assert.equal(new Set(GAMES.map(g => g.id)).size, GAMES.length);
@@ -24,7 +27,7 @@ test('pickGift prefers unplayed games and avoids recent ones', () => {
 // מריצים כל משחק על "רנטיים" מדומה: יצירה, כמה עדכונים, ציור וקלט, בלי שגיאות
 test('every game runs headless: make, update, draw, input', () => {
   const noop = () => {};
-  const ctx = new Proxy({}, { get: (t, k) => k === 'measureText' ? () => ({ width: 10 }) : (k in t ? t[k] : noop), set: (t, k, v) => { t[k] = v; return true; } });
+  const ctx = fakeCtx();
   const mk = () => {
     let score = 0, overs = 0;
     const r = { W: 360, H: 560, ctx, C: new Proxy({}, { get: () => '#000' }), px: 100, py: 100, isDown: false,
@@ -52,20 +55,23 @@ test('sprites: every pose has all joints; every sprite draws on a fake context',
   const J = ['head', 'neck', 'hip', 'le', 'lh', 're', 'rh', 'lk', 'lf', 'rk', 'rf'];
   for (const [k, v] of Object.entries({ ...POSE, ...GK })) { const pose = Array.isArray(v) ? v[0][0] : v; for (const j of J) assert.ok(Array.isArray(pose[j]) && pose[j].length === 2, k + '.' + j); }
   const noop = () => {};
-  const ctx = new Proxy({}, { get: (t, k) => (k in t ? t[k] : noop), set: (t, k, v) => { t[k] = v; return true; } });
+  const ctx = fakeCtx();
   const r = { ctx, rect: noop, circle: noop, line: noop, text: noop, emoji: noop };
   for (const [name, fn] of Object.entries(S)) { if (name === 'player' || name === 'crowd') continue; fn(r, 100, 100, 20, 20, '#000', 1); assert.ok(true, name); }
+  S.face(r, 100, 100, 14, [1, 0], 1, null); S.face(r, 100, 100, 14, [0, 1], 0, null); S.cow(r, 80, 100, 1, 2); S.poop(r, 50, 50, 1); S.pouch(r, 50, 50, 1, 1); S.toilet(r, 10, 10, 56, 100); S.underpants(r, 10, 0, 56, 100);
 });
 
 test('player renderer and crowd draw for every pose and kit on a fake context', () => {
-  const noop = () => {};
-  const ctx = new Proxy({}, { get: (t, k) => (k in t ? t[k] : noop), set: (t, k, v) => { t[k] = v; return true; } });
+  const ctx = fakeCtx();
   for (const pose of Object.values({ ...POSE, ...GK }).map(v => Array.isArray(v) ? v[0][0] : v)) for (const kit of Object.values(KITS)) { player(ctx, pose, 100, 100, 0.5, kit); player(ctx, pose, 100, 100, 0.5, kit, { flip: true, happy: false }); }
   const fans = crowdGen(10, 360, 2); assert.equal(fans.length, 20); crowd(ctx, fans, 1, true); crowd(ctx, fans, 2, false);
 });
 
 test('celebration module: scenes exist and setup/draw run on a fake canvas', async () => {
-  const { SCENE_IDS, celebrate } = await import('../workout/js/games/celebrate.js');
-  assert.deepEqual(SCENE_IDS, ['goal', 'header', 'dunk', 'sprint']);
+  const { SCENE_IDS, celebrate, renderStill, STILL_T } = await import('../workout/js/games/celebrate.js');
+  assert.deepEqual(SCENE_IDS, ['goal', 'header', 'dunk', 'three', 'sprint']);
   assert.equal(typeof celebrate, 'function');
+  // כל סצנה מציירת פריים בודד על קנבס מדומה, בלי שגיאות
+  const canvas = { width: 360, height: 560, getContext: () => fakeCtx() };
+  for (const id of SCENE_IDS) { assert.ok(STILL_T[id] > 0, id); renderStill(canvas, id, STILL_T[id]); renderStill(canvas, id, 6); }
 });

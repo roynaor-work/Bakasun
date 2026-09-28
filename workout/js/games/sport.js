@@ -1,5 +1,6 @@
 // משחקי ספורט וקפיצה, עם דמויות מקלות אמיתיות (שוער שקופץ, רץ, קופץ), אפקטים וצלילים.
 import { POSE, GK, S, KITS } from './sprites.js';
+const SP = S;
 const G = [];
 
 // עזר: גרירה מהכדור לקביעת כיוון וכוח
@@ -14,34 +15,46 @@ const dragShot = (r, getOrigin, onShoot, maxLen = 150) => {
   };
 };
 
-// ---- פנדלים ----
-G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'נוגעים איפה בשער לבעוט. השוער קופץ לצד שהוא מנחש. פינות = קשה לו יותר. רצף שערים מכפיל נקודות.',
+// ---- פנדלים: הבועט רץ לכדור, כדור תלת-ממדי, שאגה אחרי כל שער, השוער צוחק על החטאה וחוזר למרכז לפני כל בעיטה ----
+G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'נוגעים איפה בשער לבעוט. הבועט רץ ובועט, השוער קופץ לצד שהוא מנחש. פינות = קשה לו יותר. רצף שערים מכפיל נקודות.',
   make(r) {
-    const goal = { x: 40, y: 70, w: 280, h: 120 };
-    let ball = { x: r.W / 2, y: r.H - 90, tx: 0, ty: 0, t: -1 }, gk = { x: r.W / 2, pose: 'ready', dive: 0 }, msg = '', mt = 0, streak = 0, kicker = 0, kickT = 0, crowd = 0;
+    const goal = { x: 40, y: 70, w: 280, h: 120 }, GL = goal.y + goal.h, BX = r.W / 2, BY = r.H - 90;
+    // phase: 'aim' (מחכים למגע), 'run' (הבועט רץ), 'fly' (הכדור בדרך), 'after' (תוצאה)
+    let phase = 'aim', ph = 0, shot = null, gk = { x: BX, pose: 'ready', dive: 0, reach: 1, laugh: 0 }, msg = '', streak = 0, tt = 0, goals = 0, rot = 0, bulge = 0, ready = 1;
     const fans = r.crowdGen(16, r.W, 2, 14, 20);
+    const resetBall = () => { phase = 'aim'; ph = 0; shot = null; gk.dive = 0; ready = 0; };
     return {
-      tap(x, y) { if (ball.t >= 0) return; ball.tx = r.clamp(x, 20, r.W - 20); ball.ty = r.clamp(y, 40, r.H - 200); ball.t = 0; kickT = 0.3;
+      tap(x, y) { if (phase !== 'aim' || ready < 1) return; shot = { tx: r.clamp(x, 20, r.W - 20), ty: r.clamp(y, 40, r.H - 220) }; phase = 'run'; ph = 0;
         // השוער מנחש: 60% לצד הנכון, בפינות הוא מגיע רק ב-45%
-        const side = ball.tx < r.W / 2 ? -1 : 1; const guessRight = Math.random() < 0.6; const dir = guessRight ? side : -side; gk.dive = dir; gk.pose = dir < 0 ? 'diveL' : 'diveR'; gk.reach = r.rnd(0.45, 1); r.sfx('bounce'); },
-      update(dt) { mt -= dt; kickT -= dt; crowd += dt; if (ball.t < 0) return; ball.t += dt * 1.7;
-        if (gk.dive) gk.x += gk.dive * 360 * dt * gk.reach; gk.x = r.clamp(gk.x, goal.x + 30, goal.x + goal.w - 30);
-        if (ball.t >= 1) { const inGoal = ball.tx > goal.x + 8 && ball.tx < goal.x + goal.w - 8 && ball.ty > goal.y + 6 && ball.ty < goal.y + goal.h;
-          const nearGk = Math.abs(gk.x - ball.tx) < 46 && ball.ty > goal.y + 8; const corner = Math.abs(ball.tx - r.W / 2) > 100 || ball.ty < goal.y + 40;
-          if (inGoal && !nearGk) { streak++; const pts = 10 * Math.min(3, streak) + (corner ? 5 : 0); r.addScore(pts); r.pop('+' + pts, ball.tx, ball.ty - 20, '#FDE047', 28); r.burst(ball.tx, ball.ty, '#fff', 20, 260); r.sfx('score'); msg = streak >= 3 ? `גול! רצף ${streak} 🔥` : 'גול! ⚽'; gk.pose = 'ready'; }
-          else { streak = 0; msg = inGoal ? 'השוער עצר! 🧤' : 'החוצה...'; r.sfx('hit'); if (inGoal) { gk.pose = 'up'; r.shake(180); } }
-          mt = 1; ball = { x: r.W / 2, y: r.H - 90, tx: 0, ty: 0, t: -1 }; gk.dive = 0; setTimeout(() => { gk.x = r.W / 2; gk.pose = 'ready'; }, 700); } },
-      draw() { r.clear('#15803D'); for (let i = 0; i < 6; i++) r.rect(0, 200 + i * 60, r.W, 30, '#16A34A'); // דשא
-        // קהל
-        r.rect(0, 0, r.W, goal.y - 4, '#1F2937'); r.crowd(fans, crowd, mt > 0 && msg.startsWith('גול'));
-        S.net(r, goal.x, goal.y, goal.w, goal.h); r.line(goal.x, goal.y, goal.x + goal.w, goal.y, '#fff', 6); r.line(goal.x, goal.y, goal.x, goal.y + goal.h, '#fff', 6); r.line(goal.x + goal.w, goal.y, goal.x + goal.w, goal.y + goal.h, '#fff', 6);
-        r.rect(0, goal.y + goal.h, r.W, 4, '#fff'); r.circle(r.W / 2, r.H - 90, 4, '#fff');
-        r.player(GK[gk.pose], gk.x, goal.y + goal.h - 2, 0.62, KITS.keeper, { happy: gk.pose !== 'diveL' && gk.pose !== 'diveR' });
-        // הבועט
-        r.player(kickT > 0 ? POSE.leap : POSE.stand, r.W / 2 - 40, r.H - 60, 0.5, KITS.blue);
-        const p = ball.t < 0 ? 0 : ball.t; const bx = ball.x + (ball.tx - ball.x) * p, by = ball.y + (ball.ty - ball.y) * p - Math.sin(p * Math.PI) * 40; S.soccer(r, bx, by, 16 - p * 7);
-        if (streak > 1 && ball.t < 0) r.text(`רצף: ${streak} 🔥`, r.W / 2, r.H - 30, { size: 18, color: '#FDE047' });
-        if (mt > 0) r.text(msg, r.W / 2, r.H / 2 + 20, { size: 32, color: '#FDE047' }); },
+        const side = shot.tx < BX ? -1 : 1; const dir = Math.random() < 0.6 ? side : -side; gk.dive = dir; gk.reach = r.rnd(0.45, 1); },
+      update(dt) { tt += dt; rot += dt * 2; bulge = Math.max(0, bulge - dt * 1.4); gk.laugh = Math.max(0, gk.laugh - dt);
+        if (phase === 'aim') { ready = Math.min(1, ready + dt * 1.6); gk.x += (BX - gk.x) * Math.min(1, dt * 6); if (Math.abs(gk.x - BX) < 2) gk.x = BX; if (gk.laugh <= 0) gk.pose = 'ready'; return; }
+        ph += dt;
+        if (phase === 'run') { if (ph >= .55) { phase = 'fly'; ph = 0; gk.pose = gk.dive < 0 ? 'diveL' : 'diveR'; r.sfx('bounce'); } return; }
+        if (phase === 'fly') { const k = Math.min(1, ph / .5); rot += dt * 14; if (gk.dive) gk.x = r.clamp(gk.x + gk.dive * 340 * dt * gk.reach, goal.x + 30, goal.x + goal.w - 30);
+          if (k >= 1) { const inGoal = shot.tx > goal.x + 8 && shot.tx < goal.x + goal.w - 8 && shot.ty > goal.y + 6 && shot.ty < GL; const nearGk = Math.abs(gk.x - shot.tx) < 46 && shot.ty > goal.y + 8; const corner = Math.abs(shot.tx - BX) > 100 || shot.ty < goal.y + 40;
+            if (inGoal && !nearGk) { streak++; goals++; const pts = 10 * Math.min(3, streak) + (corner ? 5 : 0); r.addScore(pts); r.pop('+' + pts, shot.tx, shot.ty - 20, '#FDE047', 28); r.burst(shot.tx, shot.ty, '#fff', 20, 260); r.sfx('goal'); msg = streak >= 3 ? `גול! רצף ${streak} 🔥` : 'גוווול! ⚽'; bulge = 1; }
+            else { streak = 0; msg = inGoal ? 'השוער עצר! 🧤' : 'החוצה... 😂'; r.sfx(inGoal ? 'hit' : 'laugh'); if (!inGoal) setTimeout(() => r.sfx('laugh'), 350); gk.pose = inGoal ? 'up' : 'ready'; gk.laugh = 1.5; if (inGoal) r.shake(180); }
+            phase = 'after'; ph = 0; } return; }
+        if (phase === 'after' && ph > 1.3) resetBall(); },
+      draw() { r.clear('#15803D'); for (let i = 0; i < 6; i++) r.rect(0, 200 + i * 60, r.W, 30, '#16A34A');
+        r.rect(0, 0, r.W, goal.y - 4, '#1F2937'); r.crowd(fans, tt, phase === 'after' && msg.startsWith('ג'));
+        // שער עם עומק: רשת אחורית מתנפחת בשער
+        const d = 18; r.rect(goal.x, goal.y, goal.w, goal.h, 'rgba(15,23,42,.45)'); const c = r.ctx; c.save(); c.strokeStyle = '#ffffffaa'; c.lineWidth = 1; for (let i = 0; i <= 16; i++) { const x0 = goal.x + d + (goal.w - 2 * d) * i / 16; c.beginPath(); c.moveTo(x0, goal.y + d * .6); if (bulge > 0 && shot) { const dd = Math.abs(x0 - shot.tx), off = Math.max(0, 1 - dd / 70) * 12 * bulge * Math.abs(Math.cos(tt * 14)); c.quadraticCurveTo(x0 + (x0 > shot.tx ? off : -off), (goal.y + GL) / 2 + off, x0, GL); } else c.lineTo(x0, GL); c.stroke(); } for (let j = 0; j <= 7; j++) { const yy = goal.y + d * .6 + (goal.h - d * .6) * j / 7; c.beginPath(); c.moveTo(goal.x + d, yy); c.lineTo(goal.x + goal.w - d, yy); c.stroke(); } c.strokeStyle = '#ffffff55'; for (let i = 0; i <= 6; i++) { const k = i / 6; c.beginPath(); c.moveTo(goal.x, goal.y + goal.h * k); c.lineTo(goal.x + d, goal.y + d * .6 + (goal.h - d * .6) * k); c.stroke(); c.beginPath(); c.moveTo(goal.x + goal.w, goal.y + goal.h * k); c.lineTo(goal.x + goal.w - d, goal.y + d * .6 + (goal.h - d * .6) * k); c.stroke(); } c.restore();
+        r.line(goal.x, goal.y, goal.x + goal.w, goal.y, '#fff', 6); r.line(goal.x, goal.y, goal.x, GL, '#fff', 6); r.line(goal.x + goal.w, goal.y, goal.x + goal.w, GL, '#fff', 6);
+        r.rect(0, GL, r.W, 4, '#fff'); r.circle(BX, BY, 4, '#fff');
+        // השוער: צוחק כשהבועט מחטיא (קופץ ומנענע), חוזר למרכז לפני כל בעיטה
+        const laughing = gk.laugh > 0 && msg.startsWith('החוצה'); const gy = GL - 2 - (laughing ? Math.abs(Math.sin(tt * 14)) * 10 : 0); r.player(GK[gk.pose], gk.x, gy, 0.62, KITS.keeper, { happy: gk.pose !== 'diveL' && gk.pose !== 'diveR' }); if (laughing) r.text('חה חה חה!', gk.x, GL - 100, { size: 18, color: '#fff' });
+        if (phase === 'aim' && ready < 1) r.text('השוער מתמקם...', r.W / 2, GL + 40, { size: 14, color: '#bbf7d0' });
+        // הבועט: רץ מהצד אל הכדור ובועט
+        let px = BX - 110, py = BY + 30, pose = POSE.stand; if (phase === 'run') { const k = ph / .55; px = BX - 110 + 84 * k; py = BY + 30 - 8 * Math.sin(k * Math.PI); pose = POSE.run[Math.floor(k * 6) % POSE.run.length][0]; } else if (phase === 'fly' || (phase === 'after' && ph < .4)) { px = BX - 26; py = BY + 30; pose = POSE.leap; } else if (phase === 'after') { px = BX - 26; py = BY + 30 - (msg.startsWith('ג') ? Math.abs(Math.sin(tt * 8)) * 22 : 0); pose = msg.startsWith('ג') ? POSE.armsUp : POSE.stand; }
+        r.player(pose, px, py, 0.55, KITS.blue);
+        // הכדור: על הנקודה, בטיסה (מתקטן, מסתובב, צל), או ברשת
+        if (phase === 'fly') { const k = Math.min(1, ph / .5); const bx = BX + (shot.tx - BX) * k, by = BY + (shot.ty - BY) * k - Math.sin(k * Math.PI) * 40; SP.groundShadow(r, bx, BY + (GL + 4 - BY) * k, 16 - k * 8, BY + (GL + 4 - BY) * k - by); SP.soccer(r, bx, by, 16 - k * 8, rot); }
+        else if (phase === 'after') { if (msg.startsWith('ג')) SP.soccer(r, shot.tx, shot.ty + Math.min(20, ph * 40), 8, rot); else if (msg.startsWith('השוער')) SP.soccer(r, gk.x, GL - 60, 8, rot); }
+        else { SP.groundShadow(r, BX, BY + 2, 16, 0); SP.soccer(r, BX, BY, 16, rot); }
+        if (streak > 1 && phase === 'aim') r.text(`רצף: ${streak} 🔥`, r.W / 2, r.H - 30, { size: 18, color: '#FDE047' });
+        if (phase === 'after') r.text(msg, r.W / 2, r.H / 2 + 20, { size: 32, color: '#FDE047' }); },
     };
   } });
 

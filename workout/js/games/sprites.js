@@ -26,6 +26,26 @@ export const GK = {
 };
 
 export const S = {
+  // פרה מעופפת (במקום ציפור): גוף לבן עם כתמים, ראש, אף ורוד, קרניים, כנפיים קטנות שמנפנפות
+  cow(r, x, y, flap, t = 0) { const c = r.ctx; c.save(); c.translate(x, y); c.rotate(flap ? -.25 : .15); const wing = Math.sin(t * 25) * .6; for (const sgn of [-1, 1]) { c.fillStyle = '#fef3c7'; c.beginPath(); c.ellipse(-4, -8 * sgn * 0 - 10, 16, 7, -.6 + wing * sgn, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#1B1740'; c.lineWidth = 1.5; c.stroke(); }
+    c.fillStyle = '#fff'; c.beginPath(); c.ellipse(0, 4, 22, 15, 0, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#1B1740'; c.lineWidth = 2; c.stroke(); c.fillStyle = '#1B1740'; c.beginPath(); c.ellipse(-8, 2, 7, 5, .4, 0, Math.PI * 2); c.fill(); c.beginPath(); c.ellipse(6, 9, 5, 4, -.5, 0, Math.PI * 2); c.fill();
+    for (const lx of [-10, -2, 6, 14]) { c.fillStyle = '#1B1740'; c.fillRect(lx - 2, 14, 4, 9 + (Math.sin(t * 12 + lx) * 2)); } c.fillStyle = '#fbcfe8'; c.beginPath(); c.ellipse(2, 16, 9, 4, 0, 0, Math.PI * 2); c.fill();
+    c.fillStyle = '#fff'; c.beginPath(); c.arc(20, -4, 12, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#1B1740'; c.lineWidth = 2; c.stroke(); c.fillStyle = '#fbcfe8'; c.beginPath(); c.ellipse(26, 1, 7, 5, 0, 0, Math.PI * 2); c.fill(); c.fillStyle = '#1B1740'; c.beginPath(); c.arc(24, 1, 1.3, 0, 7); c.arc(28, 1, 1.3, 0, 7); c.fill(); c.fillStyle = '#fff'; c.beginPath(); c.arc(17, -7, 3.5, 0, 7); c.fill(); c.fillStyle = '#1B1740'; c.beginPath(); c.arc(18, -7, 1.8, 0, 7); c.fill();
+    c.fillStyle = '#d6d3d1'; c.beginPath(); c.moveTo(12, -12); c.lineTo(8, -20); c.lineTo(16, -14); c.fill(); c.beginPath(); c.moveTo(26, -12); c.lineTo(30, -20); c.lineTo(22, -14); c.fill(); c.fillStyle = '#fef3c7'; c.beginPath(); c.ellipse(9, -6, 4, 6, .5, 0, Math.PI * 2); c.fill(); c.restore(); },
+  // שקית מיץ (סגנון קאפרי): כסופה עם תווית כתומה וקשית
+  pouch(r, x, y, s = 1, t = 0) { const c = r.ctx; c.save(); c.translate(x, y + Math.sin(t * 4) * 2); c.scale(s, s); const g = c.createLinearGradient(-9, -12, 9, 12); g.addColorStop(0, '#f8fafc'); g.addColorStop(.5, '#94a3b8'); g.addColorStop(1, '#e2e8f0'); c.fillStyle = g; c.beginPath(); c.moveTo(-8, -12); c.lineTo(8, -12); c.lineTo(10, 12); c.lineTo(-10, 12); c.closePath(); c.fill(); c.strokeStyle = '#1B1740'; c.lineWidth = 1.5; c.stroke(); c.fillStyle = '#f97316'; c.fillRect(-7, -6, 14, 13); c.fillStyle = '#fde047'; c.beginPath(); c.arc(0, 1, 3.5, 0, 7); c.fill(); c.strokeStyle = '#fde047'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(6, -13); c.lineTo(9, -22); c.stroke(); c.restore(); },
+  // פרצוף ילד (ראש הנחש): שיער, עיניים שמסתכלות לכיוון, פה שנפתח כשהאוכל קרוב. אפשר להעביר תמונה במקום.
+  face(r, x, y, rad, dir, open, img) { const c = r.ctx; c.save(); if (img && img.complete && img.naturalWidth) { c.beginPath(); c.arc(x, y, rad, 0, Math.PI * 2); c.clip(); c.drawImage(img, x - rad, y - rad, rad * 2, rad * 2); c.restore(); c.strokeStyle = '#1B1740'; c.lineWidth = 2; c.beginPath(); c.arc(x, y, rad, 0, Math.PI * 2); c.stroke(); return; }
+    c.fillStyle = '#F5C9A6'; c.beginPath(); c.arc(x, y, rad, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#1B1740'; c.lineWidth = 2; c.stroke(); c.fillStyle = '#3B2A1A'; c.beginPath(); c.arc(x, y - rad * .15, rad, Math.PI * 1.05, Math.PI * 1.95); c.fill(); for (let i = -2; i <= 2; i++) { c.beginPath(); c.arc(x + i * rad * .38, y - rad * .8, rad * .28, 0, 7); c.fill(); }
+    const ex = dir[0] * rad * .18, ey = dir[1] * rad * .18; for (const sgn of [-1, 1]) { c.fillStyle = '#fff'; c.beginPath(); c.arc(x + sgn * rad * .38, y - rad * .1, rad * .22, 0, 7); c.fill(); c.fillStyle = '#1B1740'; c.beginPath(); c.arc(x + sgn * rad * .38 + ex, y - rad * .1 + ey, rad * .11, 0, 7); c.fill(); }
+    c.fillStyle = '#7C2D12'; c.beginPath(); if (open > .1) { c.ellipse(x + dir[0] * rad * .2, y + rad * .42 + dir[1] * rad * .2, rad * .3, rad * .3 * open, 0, 0, Math.PI * 2); c.fill(); c.fillStyle = '#ef4444'; c.beginPath(); c.ellipse(x + dir[0] * rad * .2, y + rad * .5 + dir[1] * rad * .2, rad * .16, rad * .12 * open, 0, 0, Math.PI * 2); c.fill(); } else { c.strokeStyle = '#7C2D12'; c.lineWidth = 2; c.arc(x, y + rad * .25, rad * .35, .3, Math.PI - .3); c.stroke(); } c.restore(); },
+  // קקי מחייך (במקום פצצה)
+  poop(r, x, y, t = 0) { const c = r.ctx; c.save(); c.translate(x, y); const wob = Math.sin(t * 6) * .05; c.rotate(wob); c.fillStyle = '#7c4a1e'; for (const [yy, w] of [[8, 20], [-2, 15], [-11, 10]]) { c.beginPath(); c.ellipse(0, yy, w, 8, 0, 0, Math.PI * 2); c.fill(); } c.beginPath(); c.moveTo(-3, -17); c.quadraticCurveTo(4, -26, 8, -16); c.lineTo(0, -12); c.fill(); c.strokeStyle = '#1B1740'; c.lineWidth = 1.5; c.beginPath(); c.ellipse(0, 8, 20, 8, 0, 0, Math.PI); c.stroke(); c.fillStyle = '#fff'; c.beginPath(); c.arc(-6, -2, 4, 0, 7); c.arc(6, -2, 4, 0, 7); c.fill(); c.fillStyle = '#1B1740'; c.beginPath(); c.arc(-5, -2, 2, 0, 7); c.arc(7, -2, 2, 0, 7); c.fill(); c.strokeStyle = '#1B1740'; c.lineWidth = 1.5; c.beginPath(); c.arc(0, 3, 6, .2, Math.PI - .2); c.stroke(); c.fillStyle = 'rgba(163,230,53,.7)'; for (let i = 0; i < 3; i++) { const k = ((t * .8 + i / 3) % 1); c.globalAlpha = 1 - k; c.beginPath(); c.arc(-12 + i * 12, -22 - k * 18, 3 + k * 3, 0, 7); c.fill(); } c.restore(); },
+  // אסלה (מכשול תחתון בפרה המעופפת)
+  toilet(r, x, y, w, h) { const c = r.ctx; c.save(); c.fillStyle = '#e2e8f0'; c.strokeStyle = '#1B1740'; c.lineWidth = 2; c.fillRect(x + w * .55, y, w * .4, h); c.strokeRect(x + w * .55, y, w * .4, h); c.beginPath(); c.ellipse(x + w * .45, y + 22, w * .45, 14, 0, 0, Math.PI * 2); c.fill(); c.stroke(); c.fillStyle = '#60a5fa'; c.beginPath(); c.ellipse(x + w * .45, y + 22, w * .3, 8, 0, 0, Math.PI * 2); c.fill(); c.fillStyle = '#e2e8f0'; c.fillRect(x + w * .2, y + 30, w * .5, h - 30); c.strokeRect(x + w * .2, y + 30, w * .5, h - 30); c.fillStyle = '#cbd5e1'; c.fillRect(x + w * .6, y + 6, w * .3, 6); c.restore(); },
+  // תחתונים ענקיים תלויים על חבל (מכשול עליון)
+  underpants(r, x, y, w, h) { const c = r.ctx; c.save(); const ph = Math.min(76, h), top = y + h - ph; c.strokeStyle = '#78350f'; c.lineWidth = 3; c.beginPath(); c.moveTo(x + w / 2, y); c.lineTo(x + w / 2, top); c.stroke(); c.lineWidth = 2; c.beginPath(); c.moveTo(x - 10, top); c.lineTo(x + w + 10, top); c.stroke(); for (const px of [x + 6, x + w - 6]) { c.fillStyle = '#fbbf24'; c.fillRect(px - 3, top - 6, 6, 12); }
+    const g = c.createLinearGradient(x, 0, x + w, 0); g.addColorStop(0, '#fca5a5'); g.addColorStop(1, '#f87171'); c.fillStyle = g; c.strokeStyle = '#1B1740'; c.beginPath(); c.moveTo(x, top); c.lineTo(x + w, top); c.lineTo(x + w + 4, top + ph * .6); c.lineTo(x + w * .62, top + ph * .62); c.quadraticCurveTo(x + w / 2, top + ph * .3, x + w * .38, top + ph * .62); c.lineTo(x - 4, top + ph * .6); c.closePath(); c.fill(); c.stroke(); c.fillStyle = '#fff'; for (let i = 0; i < 5; i++) { c.beginPath(); c.arc(x + 8 + i * (w - 16) / 4, top + 18 + (i % 2) * 14, 3, 0, 7); c.fill(); } c.fillStyle = '#fde047'; c.fillRect(x, top, w, 7); c.restore(); },
   car(r, x, y, w, h, color, dir = 1) { const c = r.ctx; r.rect(x - w / 2, y - h / 2, w, h, color, 8); r.rect(x - w / 2 + 6, y - h / 2 + (dir > 0 ? 8 : h * 0.45), w - 12, h * 0.35, '#0F172ACC', 5); [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => r.rect(x + a * (w / 2 - 2) - 4, y + b * (h / 2 - 12) - 6, 8, 12, '#111', 3)); c.fillStyle = '#FDE68A'; c.fillRect(x - w / 2 + 3, y + (dir > 0 ? -h / 2 : h / 2 - 5), 8, 5); c.fillRect(x + w / 2 - 11, y + (dir > 0 ? -h / 2 : h / 2 - 5), 8, 5); },
   bird(r, x, y, flap, color = '#FACC15') { r.circle(x, y, 14, color); r.circle(x + 6, y - 4, 4, '#fff'); r.circle(x + 7, y - 4, 2, '#111'); const c = r.ctx; c.fillStyle = '#F97316'; c.beginPath(); c.moveTo(x + 12, y + 2); c.lineTo(x + 24, y + 5); c.lineTo(x + 12, y + 8); c.fill(); c.fillStyle = '#EAB308'; c.beginPath(); c.ellipse(x - 4, y + 4 + flap * 4, 9, 5, -0.4 + flap * 0.6, 0, Math.PI * 2); c.fill(); },
   alien(r, x, y, t, color = '#A3E635') { const c = r.ctx; c.fillStyle = color; c.beginPath(); c.ellipse(x, y, 14, 9, 0, 0, Math.PI * 2); c.fill(); r.circle(x, y - 8, 8, color); r.circle(x - 3, y - 9, 2.5, '#111'); r.circle(x + 3, y - 9, 2.5, '#111'); const k = Math.sin(t * 8) > 0 ? 3 : -3; [-10, -4, 4, 10].forEach(dx => r.line(x + dx, y + 6, x + dx + (dx < 0 ? -k : k), y + 14, color, 3)); },
@@ -42,7 +62,8 @@ export const S = {
   hoop(r, x, y) { r.rect(x + 24, y - 60, 6, 130, '#374151'); r.rect(x + 14, y - 50, 14, 46, '#F8FAFC', 2); r.ctx.strokeStyle = '#374151'; r.ctx.lineWidth = 1.5; r.ctx.strokeRect(x + 14, y - 50, 14, 46); r.line(x - 26, y, x + 26, y, '#EF4444', 5); for (let i = -20; i <= 20; i += 10) r.line(x + i, y, x + i * 0.6, y + 28, '#ffffffAA', 1.5); r.line(x - 14, y + 14, x + 14, y + 14, '#ffffffAA', 1.5); },
   net(r, x, y, w, h) { const c = r.ctx; c.strokeStyle = '#ffffff99'; c.lineWidth = 1; for (let i = 0; i <= w; i += 14) { c.beginPath(); c.moveTo(x + i, y); c.lineTo(x + i, y + h); c.stroke(); } for (let j = 0; j <= h; j += 14) { c.beginPath(); c.moveTo(x, y + j); c.lineTo(x + w, y + j); c.stroke(); } },
   ball(r, x, y, rad, color = '#F97316', line = '#7C2D12') { r.circle(x, y, rad, color); const c = r.ctx; c.strokeStyle = line; c.lineWidth = 1.5; c.beginPath(); c.arc(x, y, rad, 0, Math.PI * 2); c.stroke(); c.beginPath(); c.moveTo(x - rad, y); c.lineTo(x + rad, y); c.moveTo(x, y - rad); c.lineTo(x, y + rad); c.stroke(); c.beginPath(); c.arc(x - rad * 0.9, y, rad * 0.8, -0.9, 0.9); c.stroke(); c.beginPath(); c.arc(x + rad * 0.9, y, rad * 0.8, Math.PI - 0.9, Math.PI + 0.9); c.stroke(); },
-  soccer(r, x, y, rad) { r.circle(x, y, rad, '#fff'); const c = r.ctx; c.fillStyle = '#111'; for (let k = 0; k < 5; k++) { const a = k * Math.PI * 2 / 5; c.beginPath(); c.arc(x + Math.cos(a) * rad * 0.55, y + Math.sin(a) * rad * 0.55, rad * 0.22, 0, Math.PI * 2); c.fill(); } c.beginPath(); c.arc(x, y, rad * 0.2, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#111'; c.lineWidth = 1.5; c.beginPath(); c.arc(x, y, rad, 0, Math.PI * 2); c.stroke(); },
+  soccer(r, x, y, rad, rot = 0) { soccerBall(r.ctx, x, y, rad, rot); },
+  soccerOld(r, x, y, rad) { r.circle(x, y, rad, '#fff'); const c = r.ctx; c.fillStyle = '#111'; for (let k = 0; k < 5; k++) { const a = k * Math.PI * 2 / 5; c.beginPath(); c.arc(x + Math.cos(a) * rad * 0.55, y + Math.sin(a) * rad * 0.55, rad * 0.22, 0, Math.PI * 2); c.fill(); } c.beginPath(); c.arc(x, y, rad * 0.2, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#111'; c.lineWidth = 1.5; c.beginPath(); c.arc(x, y, rad, 0, Math.PI * 2); c.stroke(); },
   cannon(r, x, y, ang) { r.rect(x - 24, y - 8, 48, 26, '#374151', 8); r.circle(x - 12, y + 18, 9, '#111'); r.circle(x + 12, y + 18, 9, '#111'); const c = r.ctx; c.save(); c.translate(x, y); c.rotate(ang); r.rect(0, -8, 44, 16, '#1F2937', 6); c.restore(); },
   rock(r, x, y, rad, seed) { const c = r.ctx; c.fillStyle = '#78716C'; c.beginPath(); for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4, rr = rad * (0.75 + ((Math.sin(seed * 7 + k * 3) + 1) / 2) * 0.35); c.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); } c.closePath(); c.fill(); c.fillStyle = '#A8A29E'; c.beginPath(); c.arc(x - rad * 0.3, y - rad * 0.3, rad * 0.25, 0, Math.PI * 2); c.fill(); },
   frog(r, x, y) { r.circle(x, y, 14, '#22C55E'); r.circle(x - 7, y - 10, 6, '#22C55E'); r.circle(x + 7, y - 10, 6, '#22C55E'); r.circle(x - 7, y - 10, 3, '#fff'); r.circle(x + 7, y - 10, 3, '#fff'); r.circle(x - 7, y - 10, 1.5, '#111'); r.circle(x + 7, y - 10, 1.5, '#111'); r.line(x - 5, y + 4, x + 5, y + 4, '#14532D', 2); },
@@ -60,10 +81,11 @@ export const KITS = {
   orange: { shirt: '#F97316', shirt2: '#C2410C', shorts: '#111827', socks: '#F97316', number: '11' },
 };
 const SKINS = ['#F1C27D', '#E0AC69', '#C68642', '#8D5524', '#FFDBAC'];
-export function player(ctx, pose, x, y, scale, kit = KITS.blue, { flip = false, skin = SKINS[0], hair = '#3B2A1A', shoes = '#111827', happy = true } = {}) {
+export function player(ctx, pose, x, y, scale, kit = KITS.blue, { flip = false, skin = SKINS[0], hair = '#3B2A1A', shoes = '#111827', happy = true, outline = '#1B1740', shadow = true } = {}) {
   const P = ([a, b]) => [x + (flip ? -(a - 100) : (a - 100)) * scale, y + (b - 182) * scale];
   const lerp = (a, b, k) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
-  const cap = (a, b, w, color) => { ctx.strokeStyle = color; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.beginPath(); ctx.moveTo(...P(a)); ctx.lineTo(...P(b)); ctx.stroke(); };
+  const cap = (a, b, w, color) => { ctx.lineCap = 'round'; ctx.lineJoin = 'round'; if (outline) { ctx.strokeStyle = outline; ctx.lineWidth = w + 2.2 * scale; ctx.beginPath(); ctx.moveTo(...P(a)); ctx.lineTo(...P(b)); ctx.stroke(); } ctx.strokeStyle = color; ctx.lineWidth = w; ctx.beginPath(); ctx.moveTo(...P(a)); ctx.lineTo(...P(b)); ctx.stroke(); };
+  if (shadow) { ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.beginPath(); ctx.ellipse(x, y + 3 * scale, 26 * scale, 6 * scale, 0, 0, Math.PI * 2); ctx.fill(); }
   const dot = (p, rad, color) => { const [px, py] = P(p); ctx.fillStyle = color; ctx.beginPath(); ctx.arc(px, py, rad, 0, Math.PI * 2); ctx.fill(); };
   // מלפנים או מהצד? מלפנים הידיים סימטריות סביב הצוואר
   const front = Math.abs((pose.le[0] - pose.neck[0]) + (pose.re[0] - pose.neck[0])) < 10 && Math.abs(pose.le[0] - pose.re[0]) > 14;
@@ -76,12 +98,13 @@ export function player(ctx, pose, x, y, scale, kit = KITS.blue, { flip = false, 
   cap(pose.hip, lerp(pose.hip, pose.lk, .42), L * 1.6, shade(kit.shorts, -12)); cap(pose.hip, lerp(pose.hip, pose.rk, .42), L * 1.6, kit.shorts);
   // גוף
   const [nx, ny] = P(pose.neck), [hx, hy] = P(pose.hip); const ang = Math.atan2(hy - ny, hx - nx) + Math.PI / 2, cx = Math.cos(ang), cy = Math.sin(ang);
-  ctx.fillStyle = kit.shirt; ctx.beginPath(); ctx.moveTo(nx - cx * shW, ny - cy * shW); ctx.lineTo(nx + cx * shW, ny + cy * shW); ctx.lineTo(hx + cx * hipW, hy + cy * hipW + 4 * scale); ctx.lineTo(hx - cx * hipW, hy - cy * hipW + 4 * scale); ctx.closePath(); ctx.fill(); ctx.strokeStyle = kit.shirt2; ctx.lineWidth = 1.5 * scale; ctx.stroke();
+  const torso = () => { ctx.beginPath(); ctx.moveTo(nx - cx * shW, ny - cy * shW); ctx.lineTo(nx + cx * shW, ny + cy * shW); ctx.lineTo(hx + cx * hipW, hy + cy * hipW + 4 * scale); ctx.lineTo(hx - cx * hipW, hy - cy * hipW + 4 * scale); ctx.closePath(); };
+  torso(); const tg = ctx.createLinearGradient(nx - shW, ny, nx + shW, ny); tg.addColorStop(0, kit.shirt2); tg.addColorStop(.45, kit.shirt); tg.addColorStop(1, kit.shirt2); ctx.fillStyle = tg; ctx.fill(); ctx.strokeStyle = outline || kit.shirt2; ctx.lineWidth = 1.8 * scale; ctx.lineJoin = 'round'; ctx.stroke();
   if (front && kit.number) { ctx.fillStyle = '#fff'; ctx.font = `900 ${13 * scale}px Heebo, Arial, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(kit.number, (nx + hx) / 2, (ny + hy) / 2); }
   // רגל וזרוע קרובות
   leg(pose.rk, pose.rf, true); arm(pose.re, pose.rh, true);
   // ראש
-  const [hdx, hdy] = P(pose.head), R = 12 * scale; ctx.fillStyle = skin; ctx.beginPath(); ctx.arc(hdx, hdy, R, 0, Math.PI * 2); ctx.fill();
+  const [hdx, hdy] = P(pose.head), R = 12 * scale; const hg = ctx.createRadialGradient(hdx - R * .3, hdy - R * .3, R * .2, hdx, hdy, R); hg.addColorStop(0, shade(skin, 25)); hg.addColorStop(1, skin); ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(hdx, hdy, R, 0, Math.PI * 2); ctx.fill(); if (outline) { ctx.strokeStyle = outline; ctx.lineWidth = 1.6 * scale; ctx.stroke(); }
   ctx.fillStyle = hair; ctx.beginPath(); ctx.arc(hdx, hdy - R * .15, R * 1.02, Math.PI * 1.05, Math.PI * 1.95); ctx.lineTo(hdx + R * (front ? .95 : dir * .3), hdy - R * .2); ctx.closePath(); ctx.fill();
   ctx.fillStyle = '#1B1740';
   if (front) { ctx.beginPath(); ctx.arc(hdx - R * .35, hdy, R * .12, 0, 7); ctx.arc(hdx + R * .35, hdy, R * .12, 0, 7); ctx.fill(); }
@@ -109,3 +132,31 @@ export function crowd(ctx, fans, t, excited = false) {
   }
 }
 S.crowd = (r, fans, t, excited) => crowd(r.ctx, fans, t, excited);
+
+// ---- כדורים תלת-ממדיים: כדור עם הצללה, סיבוב אמיתי של הדוגמה, והבהוב ----
+export function soccerBall(ctx, x, y, r, rot = 0) {
+  const g = ctx.createRadialGradient(x - r * .35, y - r * .35, r * .1, x, y, r); g.addColorStop(0, '#ffffff'); g.addColorStop(.55, '#e5e7eb'); g.addColorStop(1, '#6b7280');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  ctx.save(); ctx.beginPath(); ctx.arc(x, y, r * .97, 0, Math.PI * 2); ctx.clip(); ctx.translate(x, y); ctx.rotate(rot);
+  const pent = (px, py, pr, a0) => { ctx.beginPath(); for (let k = 0; k < 5; k++) { const a = a0 + k * Math.PI * 2 / 5; ctx.lineTo(px + Math.cos(a) * pr, py + Math.sin(a) * pr); } ctx.closePath(); ctx.fill(); };
+  ctx.fillStyle = '#111827'; pent(0, 0, r * .3, -Math.PI / 2);
+  for (let k = 0; k < 5; k++) { const a = -Math.PI / 2 + k * Math.PI * 2 / 5; pent(Math.cos(a) * r * .78, Math.sin(a) * r * .78, r * .26, a); }
+  ctx.strokeStyle = '#374151'; ctx.lineWidth = Math.max(1, r * .06); for (let k = 0; k < 5; k++) { const a = -Math.PI / 2 + k * Math.PI * 2 / 5; ctx.beginPath(); ctx.moveTo(Math.cos(a) * r * .3, Math.sin(a) * r * .3); ctx.lineTo(Math.cos(a) * r * .55, Math.sin(a) * r * .55); ctx.stroke(); }
+  ctx.restore();
+  ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.beginPath(); ctx.ellipse(x - r * .38, y - r * .42, r * .22, r * .13, -.6, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = Math.max(1, r * .08); ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+}
+export function basketBall(ctx, x, y, r, rot = 0) {
+  const g = ctx.createRadialGradient(x - r * .35, y - r * .35, r * .1, x, y, r); g.addColorStop(0, '#fdba74'); g.addColorStop(.5, '#f97316'); g.addColorStop(1, '#9a3412');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  ctx.save(); ctx.beginPath(); ctx.arc(x, y, r * .97, 0, Math.PI * 2); ctx.clip(); ctx.translate(x, y); ctx.rotate(rot); ctx.strokeStyle = '#3f1d0b'; ctx.lineWidth = Math.max(1.2, r * .09);
+  ctx.beginPath(); ctx.moveTo(-r, 0); ctx.lineTo(r, 0); ctx.moveTo(0, -r); ctx.lineTo(0, r); ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(-r * .75, 0, r * .5, r * 1.1, 0, -Math.PI / 2, Math.PI / 2); ctx.stroke(); ctx.beginPath(); ctx.ellipse(r * .75, 0, r * .5, r * 1.1, 0, Math.PI / 2, Math.PI * 1.5); ctx.stroke();
+  ctx.restore();
+  ctx.fillStyle = 'rgba(255,255,255,.55)'; ctx.beginPath(); ctx.ellipse(x - r * .38, y - r * .42, r * .22, r * .13, -.6, 0, Math.PI * 2); ctx.fill();
+}
+// צל על הרצפה מתחת לעצם שבאוויר: ככל שגבוה יותר, הצל קטן ובהיר יותר
+export function groundShadow(ctx, x, groundY, r, height = 0) { const k = Math.max(.35, 1 - height / 260); ctx.fillStyle = `rgba(0,0,0,${.32 * k})`; ctx.beginPath(); ctx.ellipse(x, groundY, r * 1.1 * k, r * .38 * k, 0, 0, Math.PI * 2); ctx.fill(); }
+S.soccerBall = (r, x, y, rad, rot) => soccerBall(r.ctx, x, y, rad, rot);
+S.basketBall = (r, x, y, rad, rot) => basketBall(r.ctx, x, y, rad, rot);
+S.groundShadow = (r, x, gy, rad, h) => groundShadow(r.ctx, x, gy, rad, h);
