@@ -1,0 +1,227 @@
+// עוד משחקים: הוקי אוויר, יהלומים, לוליין, יורה בועות, חץ למטרה, ביליארד, כדורעף, דוחף קופסאות, ציור לפי מספרים, ניחוש מילה, צייר מהזיכרון, איפה הכדור
+export const arcade = [], sport = [], puzzle = [], quick = [];
+
+// ---- הוקי אוויר ----
+arcade.push({ id: 'air-hockey', name: 'הוקי אוויר', emoji: '🏒', how: 'המחבט שלך בחצי התחתון, עוקב אחרי האצבע. מכניסים את הדיסקית לשער העליון.',
+  make(r) {
+    let me = { x: r.W / 2, y: r.H - 80 }, ai = { x: r.W / 2, y: 80 }, puck = reset(), pv = { x: 0, y: 0 };
+    function reset(dir = 1) { return { x: r.W / 2, y: r.H / 2, vx: r.rnd(-80, 80), vy: 200 * dir }; }
+    const GOAL = 110;
+    return {
+      move(x, y) { const nx = r.clamp(x, 24, r.W - 24), ny = r.clamp(y, r.H / 2 + 24, r.H - 24); pv = { x: nx - me.x, y: ny - me.y }; me.x = nx; me.y = ny; }, down(x, y) { this.move(x, y); },
+      update(dt) { puck.x += puck.vx * dt; puck.y += puck.vy * dt; puck.vx *= 0.995; puck.vy *= 0.995;
+        ai.x += r.clamp(puck.x - ai.x, -260 * dt, 260 * dt); ai.y = puck.y < r.H / 2 ? r.clamp(puck.y - 30, 40, r.H / 2 - 30) : 80;
+        if (puck.x < 14) { puck.x = 14; puck.vx = Math.abs(puck.vx); } if (puck.x > r.W - 14) { puck.x = r.W - 14; puck.vx = -Math.abs(puck.vx); }
+        const inGoal = Math.abs(puck.x - r.W / 2) < GOAL / 2;
+        if (puck.y < 14) { if (inGoal) { r.addScore(10); puck = reset(1); return; } puck.y = 14; puck.vy = Math.abs(puck.vy); }
+        if (puck.y > r.H - 14) { if (inGoal) { puck = reset(-1); return; } puck.y = r.H - 14; puck.vy = -Math.abs(puck.vy); }
+        for (const [m, mv] of [[me, pv], [ai, { x: 0, y: 0 }]]) { const d = r.dist(m.x, m.y, puck.x, puck.y); if (d < 36) { const nx = (puck.x - m.x) / d, ny = (puck.y - m.y) / d; const sp = Math.max(260, Math.hypot(puck.vx, puck.vy) * 0.9); puck.vx = nx * sp + mv.x * 8; puck.vy = ny * sp + mv.y * 8; puck.x = m.x + nx * 37; puck.y = m.y + ny * 37; } }
+        pv = { x: pv.x * 0.5, y: pv.y * 0.5 }; },
+      draw() { r.clear('#E0F2FE'); r.line(0, r.H / 2, r.W, r.H / 2, '#7DD3FC', 3); r.circle(r.W / 2, r.H / 2, 40, '#BAE6FD'); r.rect(r.W / 2 - GOAL / 2, 0, GOAL, 8, '#EF4444'); r.rect(r.W / 2 - GOAL / 2, r.H - 8, GOAL, 8, '#3B82F6'); r.circle(ai.x, ai.y, 24, '#EF4444'); r.circle(me.x, me.y, 24, '#3B82F6'); r.circle(puck.x, puck.y, 12, '#111827'); },
+    };
+  } });
+
+// ---- יהלומים (טורים) ----
+arcade.push({ id: 'gems', name: 'יהלומים', emoji: '💎', how: 'טור של שלושה יהלומים נופל. מחליקים להזיז, נוגעים להחליף סדר, מחליקים למטה להפיל. שלושה זהים בשורה נעלמים.',
+  make(r) {
+    const COLS = 6, ROWS = 13, S = 36, OX = (r.W - COLS * S) / 2, OY = 40, COLORS = [r.C.pink, r.C.gold, r.C.sky, r.C.lime, r.C.accent];
+    const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(0)); let cur, t = 0, speed = 0.5;
+    const spawn = () => { cur = { x: 2, y: -2, c: [1, 2, 3].map(() => r.rint(1, 5)) }; if (grid[0][2]) r.over('הלוח מלא!'); };
+    const free = (x, y) => x >= 0 && x < COLS && y < ROWS && (y < 0 || !grid[y][x]);
+    const canBe = (x, y) => [0, 1, 2].every(k => free(x, y + k) || y + k < 0);
+    const lock = () => { cur.c.forEach((c, k) => { const y = cur.y + k; if (y >= 0 && y < ROWS) grid[y][cur.x] = c; }); clear(); spawn(); };
+    const clear = () => { let any = true, total = 0; while (any) { any = false; const kill = new Set();
+        for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) { const c = grid[y][x]; if (!c) continue; for (const [dx, dy] of [[1, 0], [0, 1], [1, 1], [1, -1]]) { let n = 1; while (grid[y + dy * n]?.[x + dx * n] === c) n++; if (n >= 3) for (let k = 0; k < n; k++) kill.add((y + dy * k) * COLS + x + dx * k); } }
+        if (kill.size) { any = true; total += kill.size; kill.forEach(i => { grid[Math.floor(i / COLS)][i % COLS] = 0; });
+          for (let x = 0; x < COLS; x++) { let w = ROWS - 1; for (let y = ROWS - 1; y >= 0; y--) if (grid[y][x]) { const v = grid[y][x]; grid[y][x] = 0; grid[w--][x] = v; } } } }
+      if (total) { r.addScore(total * 10); speed = Math.max(0.15, speed - 0.01); } };
+    spawn();
+    return {
+      update(dt) { t += dt; if (t > speed) { t = 0; if (canBe(cur.x, cur.y + 1)) cur.y++; else lock(); } },
+      swipe(d) { if (d === 'left' && canBe(cur.x - 1, cur.y)) cur.x--; if (d === 'right' && canBe(cur.x + 1, cur.y)) cur.x++; if (d === 'down') { while (canBe(cur.x, cur.y + 1)) cur.y++; lock(); } if (d === 'up') this.tap(); },
+      tap() { cur.c.unshift(cur.c.pop()); },
+      draw() { r.clear('#1E1B4B'); r.rect(OX - 3, OY - 3, COLS * S + 6, ROWS * S + 6, '#312E81', 6);
+        grid.forEach((row, y) => row.forEach((c, x) => { if (c) r.rect(OX + x * S + 2, OY + y * S + 2, S - 4, S - 4, COLORS[c - 1], 8); }));
+        cur.c.forEach((c, k) => { const y = cur.y + k; if (y >= 0) r.rect(OX + cur.x * S + 2, OY + y * S + 2, S - 4, S - 4, COLORS[c - 1], 8); }); },
+    };
+  } });
+
+// ---- לוליין ----
+arcade.push({ id: 'juggle', name: 'הלוליין', emoji: '🤹', how: 'נוגעים בכדור כדי להקפיץ אותו למעלה. אסור שכדור ייפול לרצפה. כל 8 שניות מתווסף כדור.',
+  make(r) {
+    let balls = [{ x: r.W / 2, y: 200, vx: 0, vy: 0, e: '🔴' }], t = 0;
+    const E = ['🔴', '🟠', '🟡', '🟢', '🔵', '🟣'];
+    return {
+      update(dt) { t += dt; if (t > 8) { t = 0; balls.push({ x: r.rnd(60, r.W - 60), y: 100, vx: 0, vy: 0, e: E[balls.length % E.length] }); }
+        for (const b of balls) { b.vy += 500 * dt; b.x += b.vx * dt; b.y += b.vy * dt; if (b.x < 20 || b.x > r.W - 20) { b.vx *= -1; b.x = r.clamp(b.x, 20, r.W - 20); } if (b.y > r.H - 30) return r.over('כדור נפל!'); } },
+      down(x, y) { const b = balls.find(b => r.dist(x, y, b.x, b.y) < 34); if (b) { b.vy = -560; b.vx = r.clamp((b.x - x) * 12 + r.rnd(-40, 40), -220, 220); r.addScore(1 + balls.length); } },
+      draw() { r.clear('#FEF3C7'); r.rect(0, r.H - 20, r.W, 20, '#92400E'); balls.forEach(b => r.emoji(b.e, b.x, b.y, 40)); r.text(`${balls.length} כדורים`, r.W / 2, 30, { size: 18, color: '#92400E' }); },
+    };
+  } });
+
+// ---- יורה בועות ----
+arcade.push({ id: 'bubble-shooter', name: 'יורה בועות', emoji: '🔮', how: 'נוגעים איפה לירות. שלוש בועות באותו צבע נוגעות זו בזו נעלמות. אל תיתן להן להגיע למטה.',
+  make(r) {
+    const COLS = 8, S = r.W / COLS, COLORS = [r.C.pink, r.C.gold, r.C.sky, r.C.lime];
+    let grid = {}, shot = null, cur = r.rint(0, 3), shots = 0;
+    const key = (x, y) => y * COLS + x;
+    for (let y = 0; y < 5; y++) for (let x = 0; x < COLS; x++) grid[key(x, y)] = r.rint(0, 3);
+    const cx = x => x * S + S / 2, cy = y => y * S + S / 2 + 20;
+    const neighbors = (x, y) => [[1, 0], [-1, 0], [0, 1], [0, -1]].map(([dx, dy]) => [x + dx, y + dy]).filter(([a, b]) => a >= 0 && a < COLS && b >= 0);
+    const settle = (sx, sy) => { let x = r.clamp(Math.round((sx - S / 2) / S), 0, COLS - 1), y = Math.max(0, Math.round((sy - 20 - S / 2) / S)); while (grid[key(x, y)] != null && y < 30) y++; grid[key(x, y)] = cur; pop(x, y); if (y >= 12) return r.over('הבועות הגיעו למטה!'); shots++; if (shots % 6 === 0) { const ng = {}; for (const k in grid) { const kx = k % COLS, ky = Math.floor(k / COLS); ng[key(kx, ky + 1)] = grid[k]; } for (let x = 0; x < COLS; x++) ng[key(x, 0)] = r.rint(0, 3); grid = ng; } cur = r.rint(0, 3); };
+    const pop = (x, y) => { const c = grid[key(x, y)]; const seen = new Set([key(x, y)]), st = [[x, y]]; while (st.length) { const [a, b] = st.pop(); for (const [nx, ny] of neighbors(a, b)) { const k = key(nx, ny); if (!seen.has(k) && grid[k] === c) { seen.add(k); st.push([nx, ny]); } } } if (seen.size >= 3) { seen.forEach(k => delete grid[k]); r.addScore(seen.size * 10); } };
+    return {
+      tap(x, y) { if (shot || y > r.H - 60) return; const dx = x - r.W / 2, dy = y - (r.H - 50), l = Math.hypot(dx, dy); shot = { x: r.W / 2, y: r.H - 50, vx: dx / l * 700, vy: dy / l * 700 }; },
+      update(dt) { if (!shot) return; shot.x += shot.vx * dt; shot.y += shot.vy * dt; if (shot.x < 12 || shot.x > r.W - 12) shot.vx *= -1;
+        if (shot.y < 20 + S / 2) { settle(shot.x, shot.y); shot = null; return; }
+        for (const k in grid) { const gx = k % COLS, gy = Math.floor(k / COLS); if (r.dist(shot.x, shot.y, cx(gx), cy(gy)) < S - 4) { settle(shot.x - shot.vx * 0.02, shot.y - shot.vy * 0.02); shot = null; return; } } },
+      draw() { r.clear('#0F172A'); for (const k in grid) { const gx = k % COLS, gy = Math.floor(k / COLS); r.circle(cx(gx), cy(gy), S / 2 - 3, COLORS[grid[k]]); r.circle(cx(gx) - 5, cy(gy) - 6, 5, '#ffffff66'); } r.line(0, 12 * S + 20, r.W, 12 * S + 20, '#EF444488', 2);
+        if (shot) r.circle(shot.x, shot.y, S / 2 - 3, COLORS[cur]); else r.circle(r.W / 2, r.H - 50, S / 2 - 3, COLORS[cur]); },
+    };
+  } });
+
+// ---- חץ למטרה ----
+sport.push({ id: 'darts', name: 'חץ למטרה', emoji: '🎯', how: 'הכוונת נעה כל הזמן. נוגעים כדי לזרוק את החץ בדיוק כשהיא על המרכז.',
+  make(r) {
+    let t = 0, hits = [], sp = 1;
+    const pos = () => [r.W / 2 + Math.sin(t * 1.7 * sp) * 90, 210 + Math.cos(t * 2.3 * sp) * 90];
+    return {
+      update(dt) { t += dt; hits.forEach(h => h.t -= dt); hits = hits.filter(h => h.t > 0); },
+      tap() { const [x, y] = pos(); const d = r.dist(x, y, r.W / 2, 210); const pts = d < 10 ? 50 : d < 25 ? 25 : d < 50 ? 10 : d < 80 ? 5 : 0; r.addScore(pts); hits.push({ x, y, t: 1.2, pts }); if (pts >= 25) sp = Math.min(2.2, sp + 0.1); },
+      draw() { r.clear('#FEF9C3'); [[100, '#111'], [80, '#fff'], [50, '#EF4444'], [25, '#fff'], [10, '#EF4444']].forEach(([rad, c]) => r.circle(r.W / 2, 210, rad, c)); const [x, y] = pos(); r.line(x - 16, y, x + 16, y, '#2563EB', 3); r.line(x, y - 16, x, y + 16, '#2563EB', 3); r.circle(x, y, 8, '#2563EB44');
+        hits.forEach(h => { r.emoji('🎯', h.x, h.y, 16); if (h.pts) r.text('+' + h.pts, h.x, h.y - 24, { size: 18, color: '#B91C1C' }); }); r.text('לחץ כשהכוונת במרכז', r.W / 2, r.H - 60, { size: 18, color: '#713F12' }); },
+    };
+  } });
+
+// ---- ביליארד ----
+sport.push({ id: 'pool', name: 'ביליארד', emoji: '🎱', how: 'גוררים מהכדור הלבן אחורה ומשחררים. מכניסים את הכדורים הצבעוניים לחורים.',
+  make(r) {
+    let balls; const pockets = [[16, 16], [r.W - 16, 16], [16, r.H / 2], [r.W - 16, r.H / 2], [16, r.H - 16], [r.W - 16, r.H - 16]];
+    const rack = () => { balls = [{ x: r.W / 2, y: r.H - 120, vx: 0, vy: 0, c: '#fff', white: true }]; const cols = [r.C.gold, r.C.sky, r.C.red, r.C.accent, r.C.hot, r.C.lime]; let i = 0; for (let row = 0; row < 3; row++) for (let k = 0; k <= row; k++) balls.push({ x: r.W / 2 + (k - row / 2) * 26, y: 150 - row * 23, vx: 0, vy: 0, c: cols[i++ % 6] }); };
+    rack();
+    const white = () => balls.find(b => b.white);
+    const moving = () => balls.some(b => Math.hypot(b.vx, b.vy) > 4);
+    let drag = null;
+    return {
+      down(x, y) { const w = white(); if (w && !moving() && r.dist(x, y, w.x, w.y) < 60) drag = { x, y }; },
+      move(x, y) { if (drag) { drag.cx = x; drag.cy = y; } },
+      up(x, y) { if (!drag) return; const w = white(); const dx = drag.x - x, dy = drag.y - y, l = Math.min(180, Math.hypot(dx, dy)); if (l > 8 && w) { w.vx = dx / Math.hypot(dx, dy) * l * 5; w.vy = dy / Math.hypot(dx, dy) * l * 5; } drag = null; },
+      update(dt) { for (const b of balls) { b.x += b.vx * dt; b.y += b.vy * dt; b.vx *= 1 - 1.2 * dt; b.vy *= 1 - 1.2 * dt; if (Math.hypot(b.vx, b.vy) < 4) { b.vx = 0; b.vy = 0; }
+          if (b.x < 24) { b.x = 24; b.vx = Math.abs(b.vx) * 0.8; } if (b.x > r.W - 24) { b.x = r.W - 24; b.vx = -Math.abs(b.vx) * 0.8; } if (b.y < 24) { b.y = 24; b.vy = Math.abs(b.vy) * 0.8; } if (b.y > r.H - 24) { b.y = r.H - 24; b.vy = -Math.abs(b.vy) * 0.8; } }
+        for (let i = 0; i < balls.length; i++) for (let j = i + 1; j < balls.length; j++) { const a = balls[i], b = balls[j], d = r.dist(a.x, a.y, b.x, b.y); if (d < 24 && d > 0) { const nx = (b.x - a.x) / d, ny = (b.y - a.y) / d; const p = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny; if (p > 0) { a.vx -= p * nx; a.vy -= p * ny; b.vx += p * nx; b.vy += p * ny; } const ov = (24 - d) / 2; a.x -= nx * ov; a.y -= ny * ov; b.x += nx * ov; b.y += ny * ov; } }
+        for (let i = balls.length - 1; i >= 0; i--) { const b = balls[i]; if (pockets.some(([px, py]) => r.dist(px, py, b.x, b.y) < 22)) { if (b.white) { r.addScore(-10); b.x = r.W / 2; b.y = r.H - 120; b.vx = b.vy = 0; } else { balls.splice(i, 1); r.addScore(20); } } }
+        if (balls.length === 1) { r.addScore(50); rack(); } },
+      draw() { r.clear('#14532D'); r.rect(8, 8, r.W - 16, r.H - 16, '#166534', 12); pockets.forEach(([x, y]) => r.circle(x, y, 20, '#052E16')); balls.forEach(b => { r.circle(b.x, b.y, 12, b.c); r.circle(b.x - 4, b.y - 4, 3, '#ffffff88'); });
+        if (drag && drag.cx != null) { const w = white(); r.line(w.x, w.y, w.x + (drag.x - drag.cx), w.y + (drag.y - drag.cy), '#ffffffaa', 3); } },
+    };
+  } });
+
+// ---- כדורעף ----
+sport.push({ id: 'volley', name: 'כדורעף', emoji: '🏐', how: 'אתה בצד שמאל. מזיזים עם האצבע, נוגעים כדי לקפוץ. הכדור נופל בצד של המחשב = נקודה לך.',
+  make(r) {
+    const GY = r.H - 60, NET = r.W / 2; let me = { x: 80, y: GY, vy: 0 }, ai = { x: r.W - 80, y: GY, vy: 0 }, ball = serve(1), msg = '', mt = 0;
+    function serve(side) { return { x: side > 0 ? 80 : r.W - 80, y: 200, vx: 0, vy: 0 }; }
+    return {
+      move(x) { me.x = r.clamp(x, 24, NET - 30); }, down(x) { this.move(x); }, tap() { if (me.y >= GY) me.vy = -520; },
+      update(dt) { mt -= dt; ball.vy += 520 * dt; ball.x += ball.vx * dt; ball.y += ball.vy * dt;
+        for (const p of [me, ai]) { p.vy += 1200 * dt; p.y = Math.min(GY, p.y + p.vy * dt); if (p.y >= GY) p.vy = 0; }
+        ai.x += r.clamp(ball.x > NET ? ball.x - ai.x : r.W - 80 - ai.x, -240 * dt, 240 * dt); ai.x = r.clamp(ai.x, NET + 30, r.W - 24); if (ball.x > NET && ball.y > 300 && ai.y >= GY && Math.random() < 0.05) ai.vy = -500;
+        for (const p of [me, ai]) { const d = r.dist(p.x, p.y - 20, ball.x, ball.y); if (d < 44) { const nx = (ball.x - p.x) / d, ny = (ball.y - (p.y - 20)) / d; ball.vx = nx * 330 + (p === me ? 60 : -60); ball.vy = Math.min(-200, ny * 330 - 200); } }
+        if (ball.x < 14) { ball.x = 14; ball.vx = Math.abs(ball.vx); } if (ball.x > r.W - 14) { ball.x = r.W - 14; ball.vx = -Math.abs(ball.vx); } if (ball.y < 14) { ball.vy = Math.abs(ball.vy); }
+        if (Math.abs(ball.x - NET) < 16 && ball.y > GY - 110) { ball.vx = ball.x < NET ? -Math.abs(ball.vx) : Math.abs(ball.vx); }
+        if (ball.y > GY - 8) { if (ball.x > NET) { r.addScore(10); msg = 'נקודה! 🏐'; } else msg = 'נקודה למחשב'; mt = 1; ball = serve(ball.x > NET ? 1 : -1); } },
+      draw() { r.clear('#FDE68A'); r.rect(0, GY, r.W, r.H - GY, '#F59E0B'); r.rect(NET - 3, GY - 110, 6, 110, '#374151'); r.emoji('🧍', me.x, me.y - 24, 48); r.emoji('🤖', ai.x, ai.y - 24, 44); r.emoji('🏐', ball.x, ball.y, 28); if (mt > 0) r.text(msg, r.W / 2, 80, { size: 28, color: '#78350F' }); },
+    };
+  } });
+
+// ---- דוחף קופסאות ----
+puzzle.push({ id: 'sokoban', name: 'דוחף קופסאות', emoji: '📦', how: 'מחליקים כדי ללכת. דוחפים את הקופסאות אל הנקודות. אי אפשר למשוך!',
+  make(r) {
+    const LV = [
+      ['#####', '#.@.#', '#.$.#', '#...#', '#.o.#', '#####'],
+      ['######', '#....#', '#.$@.#', '#.$..#', '#oo..#', '######'],
+      ['#######', '#..o..#', '#.$.$.#', '#..@..#', '#.o...#', '#######'],
+      ['#######', '#.....#', '#o$@$o#', '#.....#', '#..$..#', '#..o..#', '#######'],
+      ['########', '#..o...#', '#.$.$..#', '#..@.o.#', '#.$....#', '#..o...#', '########'],
+    ];
+    let lvl = 0, map, px, py, moves = 0;
+    const load = () => { map = LV[lvl % LV.length].map(row => [...row]); map.forEach((row, y) => row.forEach((c, x) => { if (c === '@') { px = x; py = y; row[x] = '.'; } })); moves = 0; };
+    load();
+    const boxes = () => map.flatMap((row, y) => row.map((c, x) => c === '$' || c === '*' ? [x, y] : null).filter(Boolean));
+    return {
+      swipe(d) { const [dx, dy] = { left: [-1, 0], right: [1, 0], up: [0, -1], down: [0, 1] }[d]; const nx = px + dx, ny = py + dy, c = map[ny]?.[nx]; if (!c || c === '#') return;
+        if (c === '$' || c === '*') { const bx = nx + dx, by = ny + dy, b = map[by]?.[bx]; if (!b || b === '#' || b === '$' || b === '*') return; map[by][bx] = b === 'o' ? '*' : '$'; map[ny][nx] = c === '*' ? 'o' : '.'; }
+        px = nx; py = ny; moves++;
+        if (!map.some(row => row.includes('$'))) { r.addScore(Math.max(20, 100 - moves * 2)); lvl++; load(); r.win('שלב הושלם!', 0); } },
+      draw() { r.clear('#FFF7ED'); const S = Math.min(50, 320 / map[0].length), OX = (r.W - map[0].length * S) / 2, OY = 120;
+        map.forEach((row, y) => row.forEach((c, x) => { const X = OX + x * S, Y = OY + y * S; if (c === '#') r.rect(X, Y, S, S, '#78350F', 4); else { r.rect(X + 1, Y + 1, S - 2, S - 2, '#FEF3C7', 4); if (c === 'o' || c === '*') r.circle(X + S / 2, Y + S / 2, S / 4, '#FBBF24'); if (c === '$' || c === '*') r.emoji('📦', X + S / 2, Y + S / 2, S * 0.7); } }));
+        r.emoji('🧒', OX + px * S + S / 2, OY + py * S + S / 2, S * 0.7); r.text(`שלב ${lvl + 1} · מהלכים: ${moves}`, r.W / 2, 80, { size: 18, color: '#7C2D12' }); },
+    };
+  } });
+
+// ---- ציור לפי מספרים ----
+puzzle.push({ id: 'nonogram', name: 'ציור לפי מספרים', emoji: '🖼️', how: 'המספרים אומרים כמה משבצות מלאות יש בכל שורה ועמודה (ברצף). נוגעים כדי למלא, שוב כדי לסמן איקס.',
+  make(r) {
+    const N = 5, S = 48, OX = 80, OY = 150; let sol, b;
+    const clues = line => { const o = []; let n = 0; for (const v of line) { if (v) n++; else if (n) { o.push(n); n = 0; } } if (n) o.push(n); return o.length ? o : [0]; };
+    const make = () => { sol = Array.from({ length: N * N }, () => Math.random() < 0.55 ? 1 : 0); b = Array(N * N).fill(0); };
+    make();
+    const row = (a, y) => a.slice(y * N, y * N + N), col = (a, x) => [0, 1, 2, 3, 4].map(y => a[y * N + x]);
+    return {
+      tap(x, y) { const i = Math.floor((x - OX) / S), j = Math.floor((y - OY) / S); if (i < 0 || j < 0 || i >= N || j >= N) return; const k = j * N + i; b[k] = (b[k] + 1) % 3;
+        if (b.every((v, k) => (v === 1) === !!sol[k])) { r.addScore(80); make(); r.win('הציור נכון!', 0); } },
+      draw() { r.clear('#F5F3FF'); for (let k = 0; k < N * N; k++) { const X = OX + (k % N) * S, Y = OY + Math.floor(k / N) * S; r.rect(X + 1, Y + 1, S - 2, S - 2, b[k] === 1 ? '#6D28D9' : '#fff', 4); if (b[k] === 2) r.text('✕', X + S / 2, Y + S / 2, { size: 22, color: '#A78BFA' }); }
+        for (let y = 0; y < N; y++) { const ok = clues(row(b.map(v => v === 1 ? 1 : 0), y)).join() === clues(row(sol, y)).join(); r.text(clues(row(sol, y)).join(' '), OX - 30, OY + y * S + S / 2, { size: 18, color: ok ? '#16A34A' : '#4C1D95' }); }
+        for (let x = 0; x < N; x++) { const ok = clues(col(b.map(v => v === 1 ? 1 : 0), x)).join() === clues(col(sol, x)).join(); r.text(clues(col(sol, x)).join(' '), OX + x * S + S / 2, OY - 26, { size: 18, color: ok ? '#16A34A' : '#4C1D95' }); } },
+    };
+  } });
+
+// ---- ניחוש מילה ----
+puzzle.push({ id: 'wordle', name: 'ניחוש מילה', emoji: '🟩', how: 'מנחשים מילה של 4 אותיות. ירוק = אות במקום הנכון, צהוב = במילה אבל במקום אחר. שישה ניסיונות.',
+  make(r) {
+    const WORDS = ['כדור', 'שחקן', 'מגרש', 'שוער', 'אלוף', 'מאמן', 'קפיץ', 'ריצה', 'שריר', 'ספסל', 'מדליה'.slice(0, 4), 'נצחון'.slice(0, 4), 'מסלול'.slice(0, 4), 'טניס', 'סקווט'.slice(0, 4), 'משחק', 'חבל!'.slice(0, 3) + 'ם', 'ילדה', 'שולחן'.slice(0, 4), 'תפוח', 'בננה', 'גזר!'.slice(0, 3) + 'ה', 'חתול', 'כלבה', 'דינו', 'ספרה', 'מספר', 'מטרה', 'זריז', 'חזקה'].filter(w => w.length === 4);
+    const AB = [...'אבגדהוזחטיכלמנסעפצקרשת']; let word, rows, cur, done = false;
+    const make = () => { word = r.pick(WORDS); rows = []; cur = ''; done = false; };
+    make();
+    const norm = c => ({ 'ך': 'כ', 'ם': 'מ', 'ן': 'נ', 'ף': 'פ', 'ץ': 'צ' }[c] || c);
+    const color = (g, i) => norm(g[i]) === norm(word[i]) ? '#16A34A' : [...word].map(norm).includes(norm(g[i])) ? '#CA8A04' : '#9CA3AF';
+    return {
+      tap(x, y) { if (done) return; if (y > 330 && y < 490) { const col = Math.floor((r.W - x) / 45), row = Math.floor((y - 330) / 52); const l = AB[row * 8 + col]; if (l && cur.length < 4) cur += l; }
+        else if (y > 495) { if (x > r.W / 2) { cur = cur.slice(0, -1); } else if (cur.length === 4) { rows.push(cur); if ([...cur].map(norm).join('') === [...word].map(norm).join('')) { r.addScore(Math.max(10, 70 - rows.length * 10)); done = true; setTimeout(make, 900); r.win('מצאת!', 0); } else if (rows.length >= 6) { done = true; r.over(`המילה: ${word}`); } cur = ''; } } },
+      draw() { r.clear('#FAFAF9'); for (let i = 0; i < 6; i++) { const g = rows[i] ?? (i === rows.length ? cur : ''); for (let k = 0; k < 4; k++) { const X = r.W / 2 + (1.5 - k) * 58, Y = 40 + i * 48; r.rect(X - 26, Y - 20, 52, 42, rows[i] ? color(g, k) : '#E7E5E4', 6); if (g[k]) r.text(g[k], X, Y, { size: 26, color: rows[i] ? '#fff' : '#111' }); } }
+        AB.forEach((l, i) => { const x = r.W - (i % 8) * 45 - 22, y = 330 + Math.floor(i / 8) * 52 + 24; const used = rows.some(g => g.includes(l)); r.rect(x - 20, y - 22, 40, 44, used ? '#D6D3D1' : '#F59E0B', 8); r.text(l, x, y, { size: 22, color: used ? '#78716C' : '#fff' }); });
+        r.rect(20, 500, r.W / 2 - 30, 44, '#16A34A', 10); r.text('בדיקה ✓', 20 + r.W / 4 - 15, 522, { size: 20 }); r.rect(r.W / 2 + 10, 500, r.W / 2 - 30, 44, '#78716C', 10); r.text('מחיקה ⌫', r.W / 2 + 10 + r.W / 4 - 15, 522, { size: 20 }); },
+    };
+  } });
+
+// ---- צייר מהזיכרון ----
+puzzle.push({ id: 'pattern', name: 'צייר מהזיכרון', emoji: '🧠', how: 'משבצות נדלקות לכמה שניות ונעלמות. נוגעים באותן משבצות מהזיכרון.',
+  make(r) {
+    const N = 4, S = 76, OX = (r.W - N * S) / 2, OY = 140; let n = 3, target, picked, phase = 'show', t = 0;
+    const make = () => { target = new Set(r.shuffle([...Array(N * N).keys()]).slice(0, n)); picked = new Set(); phase = 'show'; t = 0; };
+    make();
+    return {
+      update(dt) { t += dt; if (phase === 'show' && t > 2 + n * 0.3) { phase = 'input'; } if (phase === 'result' && t > 1.2) { make(); } },
+      tap(x, y) { if (phase !== 'input') return; const i = Math.floor((x - OX) / S), j = Math.floor((y - OY) / S); if (i < 0 || j < 0 || i >= N || j >= N) return; const k = j * N + i; if (picked.has(k)) return; picked.add(k);
+        if (!target.has(k)) { r.addScore(-5); phase = 'result'; t = 0; n = Math.max(3, n - 1); return; }
+        if (picked.size === target.size) { r.addScore(n * 10); phase = 'result'; t = 0; n = Math.min(10, n + 1); } },
+      draw() { r.clear('#ECFEFF'); r.text(phase === 'show' ? 'תזכור את המשבצות...' : phase === 'input' ? 'עכשיו אתה!' : picked.size === target.size ? 'מדויק! 🎉' : 'אופס, לא זה', r.W / 2, 90, { size: 24, color: '#155E75' });
+        for (let k = 0; k < N * N; k++) { const X = OX + (k % N) * S, Y = OY + Math.floor(k / N) * S; const lit = (phase === 'show' && target.has(k)) || (phase !== 'show' && picked.has(k)); const wrong = phase === 'result' && picked.has(k) && !target.has(k); const miss = phase === 'result' && target.has(k) && !picked.has(k); r.rect(X + 4, Y + 4, S - 8, S - 8, wrong ? '#EF4444' : miss ? '#FDE68A' : lit ? '#0891B2' : '#fff', 10); } },
+    };
+  } });
+
+// ---- איפה הכדור ----
+quick.push({ id: 'cups', name: 'איפה הכדור?', emoji: '🥤', how: 'הכדור מתחת לאחת הכוסות. הכוסות מתערבבות. עוקבים בעיניים ונוגעים בכוס הנכונה.',
+  make(r) {
+    let cups = [0, 1, 2].map(i => ({ x: 60 + i * 120, tx: 60 + i * 120 })), ball = 1, phase = 'show', t = 0, swaps = 0, total = 4, speed = 1, msg = '';
+    const posX = i => 60 + i * 120;
+    return {
+      update(dt) { t += dt; cups.forEach(c => c.x += (c.tx - c.x) * Math.min(1, dt * 8 * speed));
+        if (phase === 'show' && t > 1.2) { phase = 'mix'; t = 0; swaps = 0; }
+        if (phase === 'mix' && t > 0.45 / speed) { t = 0; if (swaps >= total) { phase = 'guess'; return; } const a = r.rint(0, 2); let b = r.rint(0, 2); if (b === a) b = (a + 1) % 3; const ta = cups[a].tx; cups[a].tx = cups[b].tx; cups[b].tx = ta; swaps++; }
+        if (phase === 'result' && t > 1.2) { phase = 'show'; t = 0; cups = [0, 1, 2].map(i => ({ x: posX(i), tx: posX(i) })); ball = r.rint(0, 2); } },
+      tap(x) { if (phase !== 'guess') return; const i = cups.reduce((best, c, k) => Math.abs(c.x - x) < Math.abs(cups[best].x - x) ? k : best, 0); phase = 'result'; t = 0; if (i === ball) { r.addScore(10 + total * 2); total = Math.min(12, total + 1); speed = Math.min(2.4, speed + 0.15); msg = 'נכון! 🎉'; } else { total = Math.max(3, total - 1); msg = 'לא... הכדור היה שם'; } },
+      draw() { r.clear('#FDF2F8'); r.text(phase === 'show' ? 'תזכור איפה הכדור' : phase === 'mix' ? 'עוקבים...' : phase === 'guess' ? 'איפה הכדור?' : msg, r.W / 2, 100, { size: 24, color: '#9D174D' });
+        cups.forEach((c, i) => { const up = (phase === 'show' || phase === 'result') && i === ball; if (up) r.circle(c.x, 300, 14, '#EF4444'); r.emoji('🥤', c.x, up ? 240 : 290, 64); }); },
+    };
+  } });

@@ -1,6 +1,6 @@
 // אחסון מקומי בדפדפן. הנתונים נשארים במכשיר; מחיקה רק דרך ההגדרות ובאישור.
 const KEY = 'kidfit.v1';
-const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true, plan: null, giftEvery: 1, gameSeconds: 90, voice: true, familyCode: '', prog: {} }, sessions: [], tokens: 0, games: { bests: {}, played: {}, recent: [], count: 0 },
+const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true, plan: null, giftEvery: 1, gameSeconds: 90, voice: true, familyCode: '', prog: {}, unlockEvery: 10 }, sessions: [], tokens: 0, games: { bests: {}, played: {}, recent: [], count: 0, unlocked: null },
   parent: { pinHash: '', lastSeen: '', feed: [] }, basketball: [] };
 
 function load() {
@@ -26,9 +26,11 @@ export const store = {
   setParent(patch) { Object.assign(this.data.parent, patch); this.save(); },
   upsertBasketball(sess) { const i = this.data.basketball.findIndex(x => x.id === sess.id); if (i >= 0) this.data.basketball[i] = sess; else this.data.basketball.push(sess); this.save(); },
   removeBasketball(id) { this.data.basketball = this.data.basketball.filter(x => x.id !== id); this.save(); },
+  get unlocked() { return this.data.games.unlocked; },
+  setUnlocked(list) { this.data.games.unlocked = list; this.save(); },
   addToken(n = 1) { this.data.tokens += n; this.save(); },
   // רושם משחק ששוחק: מוריד מטבע, שומר שיא וסופר
-  recordGame(id, score) { const g = this.data.games; this.data.tokens = Math.max(0, this.data.tokens - 1); g.played[id] = (g.played[id] || 0) + 1; g.bests[id] = Math.max(g.bests[id] || 0, score); g.recent = [id, ...g.recent.filter(x => x !== id)].slice(0, 6); g.count++; this.save(); },
+  recordGame(id, score) { const g = this.data.games; this.data.tokens = Math.max(0, this.data.tokens - 1); g.played[id] = (g.played[id] || 0) + 1; if (score > (g.bests[id] || 0)) { g.bests[id] = score; g.bestAt = g.bestAt || {}; g.bestAt[id] = new Date().toISOString(); } g.recent = [id, ...g.recent.filter(x => x !== id)].slice(0, 6); g.count++; this.save(); },
   save() { try { localStorage.setItem(KEY, JSON.stringify(this.data)); } catch { /* אין מקום או מצב פרטי: ממשיכים בלי לשמור */ } },
   setProfile(patch) { Object.assign(this.data.profile, patch); this.save(); },
   addSession(s) { this.data.sessions.push(s); this.save(); },

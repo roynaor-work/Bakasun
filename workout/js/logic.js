@@ -165,3 +165,32 @@ export function bbStats(sessions) {
   const minutes = sorted.reduce((s, x) => s + (x.minutes || 0), 0);
   return { sessions: sorted.length, minutes, per, last: sorted.at(-1) || null };
 }
+
+// בלוקים שנחשבים "עבודה" (מתנה ומנוחה): כל מה שלא חימום ומתיחות
+export const isWorkBlock = name => name !== 'חימום' && name !== 'מתיחות';
+
+// פתיחת משחקים בהדרגה: מתחילים עם START_GAMES, ועל כל unlockEvery אימונים בוחרים עוד PICKS
+export const START_GAMES = ['tetris', 'snake', 'penalty', 'moles', 'flappy'];
+export const PICKS = 5;
+export function unlockCredits(workouts, unlockedCount, unlockEvery = 10) {
+  if (!unlockEvery) return 0;
+  return Math.max(0, START_GAMES.length + PICKS * Math.floor(workouts / unlockEvery) - unlockedCount);
+}
+export const nextUnlockIn = (workouts, unlockEvery = 10) => unlockEvery ? unlockEvery - (workouts % unlockEvery) : 0;
+
+// דירוג התמדה לפי מספר אימונים ורצף
+export const RANKS = [
+  { min: 0, name: 'מתחיל', emoji: '🌱' }, { min: 3, name: 'מתאמן', emoji: '🏃' }, { min: 8, name: 'רציני', emoji: '💪' },
+  { min: 15, name: 'לוחם', emoji: '🥊' }, { min: 25, name: 'אלוף', emoji: '🏆' }, { min: 40, name: 'אגדה', emoji: '👑' },
+];
+export function rankOf(workouts) { let r = RANKS[0]; for (const x of RANKS) if (workouts >= x.min) r = x; const next = RANKS.find(x => x.min > workouts); return { ...r, next, toNext: next ? next.min - workouts : 0 }; }
+
+// המשפט של ההתמדה בסוף אימון
+export function perseveranceLine(st) {
+  const n = st.thisWeek, ord = ['', 'הראשון', 'השני', 'השלישי', 'הרביעי', 'החמישי', 'השישי', 'השביעי'][n] || `ה-${n}`;
+  const parts = [`כל הכבוד! זה האימון ${ord} שלך השבוע.`];
+  if (st.streak >= 2) parts.push(`${st.streak} ימים ברצף!`);
+  if (st.workouts === 1) parts.push('האימון הראשון בכלל. התחלה מעולה!');
+  else if ([5, 10, 20, 30, 50, 100].includes(st.workouts)) parts.push(`וזה האימון מספר ${st.workouts} שלך. וואו!`);
+  return parts.join(' ');
+}

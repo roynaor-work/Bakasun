@@ -3,17 +3,21 @@ import { EXERCISES, CATS, byId } from './exercises.js';
 import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js';
 import { Figure, cycleMs } from './figure.js';
 import { store } from './store.js';
-import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS } from './logic.js';
+import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, rankOf, perseveranceLine } from './logic.js';
 import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js';
 import { runGame } from './games/engine.js';
 import * as cloud from './cloud.js';
 import { initParent, parentGate, parentHome, basketball } from './parent.js';
+import { playIntro } from './intro.js';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const go = h => { location.hash = h; };
 const plan = () => store.profile.plan || DEFAULT_PLAN;
+// משחקים פתוחים: null = הכול פתוח (הגדרה 'הכול פתוח'); אחרת רשימה שמתחילה בחמישה
+const unlockedList = () => { if (!store.profile.unlockEvery) return null; if (!store.unlocked) store.setUnlocked([...START_GAMES]); return store.unlocked; };
+const credits = () => unlockCredits(store.sessions.length, (unlockedList() || GAMES.map(g => g.id)).length, store.profile.unlockEvery);
 
 let figures = [], activeGame = null;
 function mount(html, full = false) {
@@ -125,7 +129,8 @@ function home() {
         <h1>${hi()}</h1>
         <span class="pill">🔥 ${st.streak} ימים ברצף</span>
       </div>
-      <div class="row wrap" style="margin-top:8px"><span class="tokens" data-go="#/arcade">🎁 ${store.tokens} ${store.tokens === 1 ? 'מתנה' : 'מתנות'} לשחק</span><span class="pill">🎮 ${GAMES.length} משחקים</span></div>
+      <div class="row wrap" style="margin-top:8px"><span class="pill">${rankOf(st.workouts).emoji} דרגה: ${rankOf(st.workouts).name}${rankOf(st.workouts).next ? ` · עוד ${rankOf(st.workouts).toNext} ל"${rankOf(st.workouts).next.name}"` : ''}</span><span class="tokens" data-go="#/arcade">🎁 ${store.tokens} ${store.tokens === 1 ? 'מתנה' : 'מתנות'}</span></div>
+      ${credits() ? `<div class="card row" style="margin-top:10px;border:2px solid var(--star)" data-go="#/arcade"><span style="font-size:30px">🔓</span><div class="grow"><b>פתחת ${credits()} משחקים חדשים!</b><p class="muted small">לחץ כדי לבחור אותם בחדר המשחקים.</p></div></div>` : ''}
       <p class="muted" style="margin-top:6px">יום ${DAY_NAMES[now.getDay()]}. ${todayCount ? `היום כבר עשית ${todayCount === 1 ? 'אימון' : todayCount + ' אימונים'}. כל הכבוד!` : today ? 'היום זה יום ' + esc(today.name.split(':')[0]) + '. יאללה!' : 'היום יום מנוחה. מגיע לך.'}</p>
     </section>
 
@@ -270,16 +275,24 @@ function exerciseDetail(id) {
 // ---- מהלך האימון ----
 let W = null, tick = 0;
 function beginWorkout(program, items) {
-  W = { program, items: items.map(i => ({ ...i, done: 0, skipped: false })), idx: 0, phase: 'exercise', startedAt: Date.now(), saved: false, mainDone: 0, gift: null, afterGift: null, gamesPlayed: 0 };
+  W = { program, items: items.map(i => ({ ...i, done: 0, skipped: false })), idx: 0, phase: store.profile.intro === false ? 'exercise' : 'intro', startedAt: Date.now(), saved: false, mainDone: 0, gift: null, afterGift: null, gamesPlayed: 0 };
   go('#/workout');
 }
 
 function workoutScreen() {
   if (!W) return go('#/home');
-  if (W.phase === 'exercise') exercisePhase();
+  if (W.phase === 'intro') introPhase();
+  else if (W.phase === 'exercise') exercisePhase();
   else if (W.phase === 'rest') restPhase();
   else if (W.phase === 'gift') giftPhase();
   else donePhase();
+}
+
+// סרטון פתיחה קצר לפני האימון: הדמות שלו מנצחת
+function introPhase() {
+  mount('', true);
+  const intro = playIntro(app, { voice: t => speak(t), onDone: () => { intro.stop(); W.startedAt = Date.now(); W.phase = 'exercise'; workoutScreen(); } });
+  figures.push(intro); // נעצר אוטומטית במעבר מסך
 }
 
 function exercisePhase() {
@@ -395,13 +408,13 @@ function finishItem(done, skipped) {
   if (!last) {
     const next = W.items[W.idx + 1];
     // מנוחה רק בתוך בלוק האימון עצמו; בחימום ובמתיחות ממשיכים ישר
-    nextPhase = skipped || !store.profile.rest || it.block !== 'האימון' || next.block !== 'האימון' ? 'exercise' : 'rest';
+    nextPhase = skipped || !store.profile.rest || !isWorkBlock(it.block) || !isWorkBlock(next.block) ? 'exercise' : 'rest';
   }
   // מתנה: משחק קצר על כל תרגיל שהושלם באימון (לפי ההגדרה: כל תרגיל, כל שני, כל שלישי)
   const every = store.profile.giftEvery;
-  const gift = !skipped && done > 0 && it.block === 'האימון' && every && (++W.mainDone % every === 0);
+  const gift = !skipped && done > 0 && isWorkBlock(it.block) && every && (++W.mainDone % every === 0);
   if (!last) W.idx++;
-  if (gift) { store.addToken(); W.gift = pickGift(store.games.played, store.games.recent); W.afterGift = nextPhase; W.phase = 'gift'; }
+  if (gift) { store.addToken(); W.gift = pickGift(store.games.played, store.games.recent, unlockedList()); W.afterGift = nextPhase; W.phase = 'gift'; }
   else W.phase = nextPhase;
   workoutScreen();
 }
@@ -467,14 +480,62 @@ function saveSession() {
   const before = earned(stats(store.sessions));
   store.addSession(s); W.saved = true;
   // לטלפון של אבא: אם יש קוד משפחה, האימון עולה לענן (או מחכה בתור עד שיש רשת)
-  if (store.profile.familyCode) cloud.push(store.profile.familyCode, 'workout', s.id, { ...s, name: store.profile.name, gamesPlayed: W.gamesPlayed, level: store.profile.level });
+  if (store.profile.familyCode) cloud.push(store.profile.familyCode, 'workout', s.id, { ...s, name: store.profile.name, gamesPlayed: W.gamesPlayed, level: store.profile.level, games: gamesSummary() });
   const after = earned(stats(store.sessions));
   return { session: s, newBadges: after.filter(b => !before.includes(b)) };
 }
 
+// שינוי קושי אוטומטי לפי התשובה. קל: קודם +10% (פעמיים), אחר כך תרגילים מתקדמים, ובסוף עוד אחוזים. קשה: צעד אחד אחורה.
+function adjustDifficulty(program, val) {
+  if (!programById[program.id]) return null;
+  const cur = store.progBoost(program.id);
+  const order = ['easy', 'normal', 'hard', 'pro'], li = order.indexOf(store.profile.level);
+  if (val === 'easy') {
+    if (cur.boost < 2) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: `היה קל? מעכשיו "${program.name}" עם ${boostText(store.progBoost(program.id))}. 💪` }; }
+    if (cur.swaps < MAX_SWAPS) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps + 1 }); return { change: 'swaps', msg: `היה קל? ב"${program.name}" נכנסים תרגילים קשים יותר. 🔥` }; }
+    if (cur.boost < MAX_BOOST) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: `עוד קצת יותר: "${program.name}" עם ${boostText(store.progBoost(program.id))}. 💪` }; }
+    if (li < order.length - 1) { store.setProfile({ level: order[li + 1] }); return { change: 'level', msg: `וואו. עלית לרמה "${LEVELS[order[li + 1]].name}" בכל האימונים! 🏆` }; }
+    return { change: '', msg: 'אתה כבר ברמה הכי גבוהה. אלוף אמיתי! 👑' };
+  }
+  if (val === 'hard') {
+    if (cur.swaps) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps - 1 }); return { change: 'down', msg: 'היה קשה? בפעם הבאה חוזרים לתרגילים הרגילים. 👍' }; }
+    if (cur.boost) { store.setProgBoost(program.id, { ...cur, boost: cur.boost - 1 }); return { change: 'down', msg: 'היה קשה? הורדתי קצת. בפעם הבאה יהיה נוח יותר. 👍' }; }
+    if (li > 0) { store.setProfile({ level: order[li - 1] }); return { change: 'down', msg: `הורדתי לרמה "${LEVELS[order[li - 1]].name}". לאט לאט בונים כוח. 👍` }; }
+    return { change: '', msg: 'כל הכבוד שסיימת! זו הרמה הכי קלה, בפעם הבאה יהיה יותר קל כי אתה מתחזק. 💙' };
+  }
+  return { change: '', msg: 'מעולה, בדיוק ברמה שלך. 👌' };
+}
+
+// בסוף האימון: קודם שאלה שחייבים לענות עליה, ורק אחר כך הסיכום
+function askFeedback(s, program, gamesPlayed, then) {
+  mount(`
+  <div class="stack">
+    <section class="hero center pop"><h1>סיימת! ${program.emoji}</h1><p class="muted">שאלה אחת לפני הסיכום:</p></section>
+    <div class="card stack center" id="feedback">
+      <h2>איך היה האימון?</h2>
+      <div class="row" style="gap:10px">
+        <button class="btn grow fb" data-fb="easy">😎<br>קל</button>
+        <button class="btn grow fb" data-fb="ok">👌<br>בדיוק</button>
+        <button class="btn grow fb" data-fb="hard">😮‍💨<br>קשה</button>
+      </div>
+    </div>
+  </div>`, true);
+  speak('סיימת! איך היה האימון? קל, בדיוק, או קשה?');
+  app.querySelectorAll('[data-fb]').forEach(b => b.onclick = () => {
+    stopSpeak();
+    const val = b.dataset.fb, adj = adjustDifficulty(program, val) || { change: '', msg: 'תודה, רשמתי.' };
+    s.feedback = val; s.change = adj.change; store.save();
+    if (store.profile.familyCode) cloud.push(store.profile.familyCode, 'workout', s.id, { ...s, name: store.profile.name, gamesPlayed, level: store.profile.level, games: gamesSummary() });
+    speak((adj.msg + ' ' + perseveranceLine(stats(store.sessions))).replace(/[^\p{L}\p{N}\s,.!?"%+]/gu, ''));
+    then(adj.msg);
+  });
+}
+const gamesSummary = () => { const g = store.games; return { count: g.count, played: Object.keys(g.played).length, top: Object.entries(g.bests).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([id, best]) => ({ id, name: gameById[id]?.name || id, emoji: gameById[id]?.emoji || '🎮', best })) }; };
+
 function donePhase() {
   const res = saveSession();
   const s = res ? res.session : store.sessions.at(-1);
+  if (!s.feedback) return askFeedback(s, W.program, W.gamesPlayed, msg => { W.adjustMsg = msg; donePhase(); });
   const sum = summarize(s);
   const newBadges = res ? res.newBadges : [];
   if (res && sum.stars) { fanfare(); confetti(); }
@@ -489,6 +550,9 @@ function donePhase() {
       <h1>סיימת! ${W.program.emoji}</h1>
       <p class="muted">${cheer}</p>
     </section>
+    <div class="card center" style="border:2px solid var(--accent)"><b>${esc(perseveranceLine(st))}</b><div class="muted small" style="margin-top:4px">${rankOf(st.workouts).emoji} דרגה: ${rankOf(st.workouts).name}${rankOf(st.workouts).next ? ` · עוד ${rankOf(st.workouts).toNext} אימונים ל"${rankOf(st.workouts).next.name}"` : ''}</div></div>
+    ${W.adjustMsg ? `<div class="card" style="border:2px solid var(--star)"><b>${esc(W.adjustMsg)}</b></div>` : ''}
+    ${credits() ? `<div class="card row" style="border:2px solid var(--star)" data-go="#/arcade"><span style="font-size:30px">🔓</span><div class="grow"><b>פתחת ${credits()} משחקים חדשים לבחירה!</b></div></div>` : ''}
     <div class="tiles">
       <div class="tile"><b>${fmtTime(sum.duration)}</b>זמן אימון</div>
       <div class="tile"><b>${sum.doneCount} <span class="muted" style="font-size:16px">מתוך</span> ${sum.total}</b>תרגילים</div>
@@ -498,45 +562,12 @@ function donePhase() {
       <div class="tile next"><b>${nextP ? nextP.emoji + ' ' + esc(nextP.name.split(':')[0]) : '😴 מנוחה'}</b>מחר</div>
       ${store.tokens ? `<div class="tile" data-go="#/arcade"><b>🎁 ${store.tokens}</b>מתנות לשחק</div>` : ''}
     </div>
-    <div class="card stack" id="feedback">
-      <h3>איך היה האימון?</h3>
-      <div class="row" style="gap:8px">
-        <button class="btn grow" data-fb="easy" style="min-height:64px">😎<br>קל</button>
-        <button class="btn grow" data-fb="ok" style="min-height:64px">👌<br>בדיוק</button>
-        <button class="btn grow" data-fb="hard" style="min-height:64px">😮‍💨<br>קשה</button>
-      </div>
-    </div>
     ${newBadges.length ? `<h2>תג חדש! 🎉</h2><div class="badges">${newBadges.map(id => { const b = BADGES.find(x => x.id === id); return `<div class="badge pop"><span class="e">${b.emoji}</span><b>${b.name}</b><br>${b.desc}</div>`; }).join('')}</div>` : ''}
     <div class="card list">${itemsList(s)}</div>
     <button class="btn primary big" data-go="#/home">לדף הבית 🏠</button>
     <button class="btn ghost big" data-go="#/history">לראות את המעקב 📈</button>
   </div>`, false);
-  const program = W.program, gamesPlayed = W.gamesPlayed;
   W = null;
-  // המשוב: נשמר על האימון (גם לענן, כדי שאבא יראה), ומציע לעלות או לרדת בקושי
-  const fb = $('#feedback');
-  const saveFb = (val, change) => { s.feedback = val; if (change) s.change = change; store.save(); if (store.profile.familyCode) cloud.push(store.profile.familyCode, 'workout', s.id, { ...s, name: store.profile.name, gamesPlayed, level: store.profile.level }); };
-  fb.querySelectorAll('[data-fb]').forEach(b => b.onclick = () => {
-    const val = b.dataset.fb; saveFb(val);
-    const cur = store.progBoost(program.id), real = !!programById[program.id];
-    if (val === 'easy' && real) {
-      fb.innerHTML = `<h3>וואו, קל? 💪 רוצה שהאימון הבא של "${esc(program.name)}" יהיה קשה יותר?</h3>
-        <button class="btn primary big" data-up="boost" ${cur.boost >= MAX_BOOST ? 'disabled' : ''}>⏱️ יותר חזרות ויותר זמן (+10%)</button>
-        <button class="btn primary big" data-up="swaps" ${cur.swaps >= MAX_SWAPS ? 'disabled' : ''}>🔥 תרגילים קשים יותר</button>
-        <button class="btn ghost" data-up="none">לא עכשיו, ככה טוב</button>`;
-    } else if (val === 'hard' && real) {
-      fb.innerHTML = `<h3>כל הכבוד שסיימת דבר קשה! 🏅 להוריד קצת בפעם הבאה?</h3>
-        <button class="btn primary big" data-up="down">⬇️ קצת פחות בפעם הבאה</button>
-        <button class="btn ghost" data-up="none">לא, אני אתאמץ!</button>`;
-    } else { fb.innerHTML = `<h3>${val === 'ok' ? 'מעולה, בדיוק ברמה שלך 👌' : 'תודה! רשמתי.'}</h3>`; return; }
-    fb.querySelectorAll('[data-up]').forEach(u => u.onclick = () => {
-      const k = u.dataset.up; let msg = 'סבבה, נשאר ככה.';
-      if (k === 'boost') { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); msg = `מעכשיו "${esc(program.name)}" עם ${boostText(store.progBoost(program.id))}. 💪`; saveFb(val, 'boost'); }
-      if (k === 'swaps') { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps + 1 }); msg = `מעכשיו ב"${esc(program.name)}" יש תרגילים מתקדמים יותר. 🔥`; saveFb(val, 'swaps'); }
-      if (k === 'down') { if (cur.swaps) store.setProgBoost(program.id, { ...cur, swaps: cur.swaps - 1 }); else if (cur.boost) store.setProgBoost(program.id, { ...cur, boost: cur.boost - 1 }); else { const order = ['easy', 'normal', 'hard', 'pro'], i = order.indexOf(store.profile.level); if (i > 0) store.setProfile({ level: order[i - 1] }); } msg = 'הורדתי קצת. בפעם הבאה יהיה נוח יותר. 👍'; saveFb(val, 'down'); }
-      fb.innerHTML = `<h3>${msg}</h3>`;
-    });
-  });
 }
 const itemsList = s => s.items.map(i => `<div class="item">
   <span class="grow">${esc(i.name)}${i.round > 1 ? ` <span class="muted small">(סבב ${i.round})</span>` : ''}</span>
@@ -597,18 +628,26 @@ function arcade() {
     <p class="muted">${store.tokens ? 'בוחרים משחק. כל משחק עולה מתנה אחת ונמשך ' + fmtTime(store.profile.gameSeconds || 90) + ' דקות.' : 'כדי לשחק צריך מתנה. כל תרגיל שמסיימים באימון נותן אחת!'}</p>
     ${!store.tokens ? '<button class="btn primary big" data-go="#/home">לאימון של היום 🚀</button>' : ''}
     <div class="tiles"><div class="tile"><b>${gs.count}</b>משחקים ששיחקת</div><div class="tile"><b>${Object.keys(gs.played).length} <span class="muted" style="font-size:16px">מתוך</span> ${GAMES.length}</b>משחקים שגילית</div></div>
+    ${Object.keys(gs.bests).length ? `<h2>🏆 לוח השיאים</h2><div class="card list">${Object.entries(gs.bests).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([id, best], i) => { const g = gameById[id]; return g ? `<div class="item"><span class="rank">${['🥇', '🥈', '🥉'][i] || (i + 1)}</span><span class="grow">${g.emoji} ${esc(g.name)}</span><b style="color:var(--accent)">${best}</b>${gs.bestAt?.[id] ? `<span class="muted small">${fmtDate(gs.bestAt[id])}</span>` : ''}</div>` : ''; }).join('')}</div>` : ''}
+    ${unlockedList() ? `<div class="card"><b>🔓 ${unlockedList().length} מתוך ${GAMES.length} משחקים פתוחים.</b> ${credits() ? `<span style="color:var(--accent)">יש לך ${credits()} בחירות! לחץ על משחק נעול כדי לפתוח אותו.</span>` : `עוד ${nextUnlockIn(store.sessions.length, store.profile.unlockEvery)} אימונים ותפתח ${PICKS} משחקים לבחירתך.`}</div>` : ''}
     ${GAME_GROUPS.map(gr => `
       <h2>${gr.emoji} ${gr.name}</h2>
-      ${gr.games.map(g => `
-        <div class="card tap gcard ${store.tokens ? '' : 'pick'}" data-game="${g.id}">
-          <div class="e">${g.emoji}</div>
+      ${gr.games.map(g => { const locked = unlockedList() && !unlockedList().includes(g.id); return `
+        <div class="card tap gcard ${store.tokens && !locked ? '' : 'pick'} ${locked ? 'locked' : ''}" data-game="${g.id}">
+          <div class="e">${locked ? (credits() ? '🔓' : '🔒') : g.emoji}</div>
           <div><b>${esc(g.name)}</b>${gs.played[g.id] ? '' : ' <span class="pill solid" style="font-size:12px;padding:1px 8px">חדש</span>'}<div class="best">${gs.played[g.id] ? `שיא: ${gs.bests[g.id] || 0} · שיחקת ${gs.played[g.id]} ${gs.played[g.id] === 1 ? 'פעם' : 'פעמים'}` : esc(g.how)}</div></div>
-          <span class="pill solid">▶️</span>
-        </div>`).join('')}`).join('')}
+          <span class="pill solid">${locked ? (credits() ? 'לפתוח' : 'נעול') : '▶️'}</span>
+        </div>`; }).join('')}`).join('')}
   </div>`);
   app.querySelectorAll('[data-game]').forEach(c => c.onclick = () => {
+    const id = c.dataset.game, ul = unlockedList();
+    if (ul && !ul.includes(id)) {
+      if (credits() > 0) { if (confirm(`לפתוח את "${gameById[id].name}"? נשארו לך ${credits()} בחירות.`)) { store.setUnlocked([...ul, id]); arcade(); } }
+      else { c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500); }
+      return;
+    }
     if (!store.tokens) { c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500); return; }
-    playGame(gameById[c.dataset.game], () => arcade());
+    playGame(gameById[id], () => arcade());
   });
 }
 
@@ -624,12 +663,14 @@ function settings() {
       <label class="field">מנוחה בין תרגילים (שניות)<select id="rest">${[0, 10, 15, 20, 30, 45].map(n => `<option value="${n}" ${n === p.rest ? 'selected' : ''}>${n ? n : 'בלי מנוחה'}</option>`).join('')}</select></label>
       <div class="toggle"><b>צלילים</b><input type="checkbox" id="sound" ${p.sound ? 'checked' : ''}></div>
       <div class="toggle"><b>הסבר בקול בעברית</b><input type="checkbox" id="voice" ${p.voice !== false ? 'checked' : ''}></div>
+      <div class="toggle"><b>סרטון פתיחה לפני אימון</b><input type="checkbox" id="intro" ${p.intro !== false ? 'checked' : ''}></div>
       <button class="btn chip" id="voicetest">🔊 בדיקת קול</button>
       <p class="muted small">הקול הוא של המכשיר. ${canSpeak() ? (hebrewVoice() ? 'נמצא קול עברי במכשיר.' : 'לא נמצא קול עברי. באנדרואיד: הגדרות, שפה, המרת טקסט לדיבור, להוריד עברית. באייפון: הגדרות, נגישות, תוכן מדובר, קולות, עברית.') : 'המכשיר לא תומך בהקראה.'}</p>
     </div>
     <div class="card stack">
       <h3>מתנות ומשחקים 🎁</h3>
       <label class="field">מתנה (משחק קצר) אחרי<select id="giftEvery">${[[1, 'כל תרגיל שמסיימים'], [2, 'כל שני תרגילים'], [3, 'כל שלושה תרגילים'], [0, 'בלי מתנות']].map(([v, n]) => `<option value="${v}" ${v === p.giftEvery ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+      <label class="field">פתיחת משחקים חדשים<select id="unlockEvery">${[[10, 'כל 10 אימונים: 5 משחקים לבחירה'], [5, 'כל 5 אימונים: 5 משחקים לבחירה'], [3, 'כל 3 אימונים: 5 משחקים לבחירה'], [0, 'הכול פתוח מההתחלה']].map(([v, n]) => `<option value="${v}" ${v === p.unlockEvery ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <label class="field">אורך משחק<select id="gameSeconds">${[[60, 'דקה'], [90, 'דקה וחצי'], [120, 'שתי דקות']].map(([v, n]) => `<option value="${v}" ${v === p.gameSeconds ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <p class="muted small">${GAMES.length} משחקים שונים. מתנות שלא משחקים מיד נשמרות לחדר המשחקים (${store.tokens} שמורות).</p>
     </div>
@@ -664,6 +705,7 @@ function settings() {
   $('#rest').onchange = e => store.setProfile({ rest: +e.target.value });
   $('#sound').onchange = e => store.setProfile({ sound: e.target.checked });
   $('#voice').onchange = e => store.setProfile({ voice: e.target.checked });
+  $('#intro').onchange = e => store.setProfile({ intro: e.target.checked });
   $('#voicetest').onclick = () => { if (!speak('היי! אני אסביר לך איך עושים כל תרגיל. לוחצים על הכפתור איך עושים את זה.')) alert('אין הקראה במכשיר הזה, או שהקול כבוי בהגדרות.'); };
   $('#giftEvery').onchange = e => store.setProfile({ giftEvery: +e.target.value });
   $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); };
@@ -671,6 +713,7 @@ function settings() {
   $('#copyfam').onclick = async () => { try { await navigator.clipboard.writeText(store.profile.familyCode); $('#cloudstate').textContent = 'הקוד הועתק'; } catch { $('#fam').select(); } };
   $('#syncnow').onclick = async () => { $('#cloudstate').textContent = 'שולח...'; const ok = await cloud.flush(); $('#cloudstate').textContent = ok || !cloud.status.pending() ? 'הכול בענן ✓' : '⚠️ ' + (cloud.status.error || 'אין רשת'); };
   $('#gameSeconds').onchange = e => store.setProfile({ gameSeconds: +e.target.value });
+  $('#unlockEvery').onchange = e => store.setProfile({ unlockEvery: +e.target.value });
   app.querySelectorAll('[data-day]').forEach(s => s.onchange = () => { const np = { ...plan() }; np[s.dataset.day] = s.value; store.setProfile({ plan: np }); });
   $('#resetplan').onclick = () => { store.setProfile({ plan: null }); settings(); };
   $('#export').onclick = () => {
