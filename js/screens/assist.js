@@ -11,6 +11,7 @@ import { QUOTE_STATUS } from '../logic/quotes.js';
 import { subjects } from '../notes.js';
 import { files, shareFile, downloadFile, pdfText } from '../files.js';
 import { speechSupported, listen } from '../voice.js';
+import { wireDelete, isDeleteCommand } from '../recbox.js';
 import { DEFAULTS } from '../data/defaults.js';
 import { hasArabic, waLink } from '../logic/core.js';
 import { COMPANY_PAPERS } from '../data/docsList.js';
@@ -53,6 +54,7 @@ function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
       <button class="btn primary grow" id="go" type="button">${esc(readLabel || t('read'))}</button></div><div id="out" class="stack"></div>`;
   const ta = body.querySelector('#txt'), rec = body.querySelector('#rec'), dl = body.querySelector('#dl');
   body.querySelectorAll('[data-ex]').forEach(b => { b.onclick = () => { ta.value = b.dataset.ex; draft = ta.value; ta.focus(); const d = body.querySelector('details.examples'); if (d) d.open = false; }; });
+  const bin = wireDelete(body, ta, 'cmd:' + mode, v => { draft = v; });
   let stop = null;
   ta.oninput = () => { draft = ta.value; };
   dl.onchange = () => db.setting('dictLang', dl.value);
@@ -61,13 +63,15 @@ function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
     if (!speechSupported()) { toast(t('noSpeech'), 3500); return; }
     const base = ta.value ? ta.value.replace(/\s+$/, '') + '\n' : '';
     rec.classList.add('on'); rec.querySelector('span').textContent = t('stop');
-    stop = listen(SPEECH[dl.value] || 'he-IL', text => { ta.value = base + text; draft = ta.value; }, (said, why) => {
+    stop = listen(SPEECH[dl.value] || 'he-IL', text => { ta.value = base + text; draft = ta.value; }, (said, why, finals) => {
       stop = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate');
+      const lastSaid = (finals || []).slice(-1)[0] || '';
+      if (isDeleteCommand(lastSaid)) { ta.value = (base + (finals || []).slice(0, -1).join(' ')).trim(); draft = ta.value; if (bin) bin.doDelete(); return; }
       if (autoRun && said.trim() && ta.value.trim()) { toast(t('heardRunning'), 1500); onRead(ta.value, body.querySelector('#out')); }
     }, { silence: autoRun ? 2500 : 0 });
     if (!stop) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
   };
-  body.querySelector('#go').onclick = () => { if (stop) stop(); onRead(ta.value, body.querySelector('#out')); };
+  body.querySelector('#go').onclick = () => { if (stop) stop(); if (isDeleteCommand(ta.value)) { if (bin) bin.doDelete(); return; } onRead(ta.value, body.querySelector('#out')); };
   return ta;
 }
 

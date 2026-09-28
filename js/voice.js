@@ -42,7 +42,7 @@ export function listen(langCode, onText, onEnd, opts) {
       if (interim && finals[finals.length - 1] !== interim) { finals.push(interim); interim = ''; emit(); }
       if (active && restarts < 40) { restarts++; try { start(); return; } catch (e) { /* fall through */ } }
       clearTimeout(timer);
-      if (onEnd) onEnd(finals.join(' '), why);
+      if (onEnd) onEnd(finals.join(' '), why, finals.slice());
     };
     rec.start();
   };

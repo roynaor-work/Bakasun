@@ -9,6 +9,7 @@ import { PLACES } from '../data/places.js';
 import { matchClient } from '../logic/extra.js';
 import { speechSupported, listen } from '../voice.js';
 import { parseBrief } from '../logic/brief.js';
+import { wireDelete, isDeleteCommand } from '../recbox.js';
 import { SUPPLIER_TYPES } from '../data/catalog.js';
 import { supplierTypeLabel } from '../labels.js';
 
@@ -39,14 +40,17 @@ export function render({ root }) {
   const sel = root.querySelector('#dictLang');
   sel.onchange = () => db.setting('dictLang', sel.value);
   msg.oninput = () => { draft.text = msg.value; };
+  const bin = wireDelete(root, msg, 'lead', v => { draft.text = v; });
 
   rec.onclick = () => {
     if (stopRec) { stopRec(); return; }
     if (!speechSupported()) { toast(t('noSpeech'), 3500); return; }
     const base = msg.value ? msg.value.replace(/\s+$/, '') + '\n' : '';
     rec.classList.add('on'); rec.querySelector('span').textContent = t('stop');
-    stopRec = listen(SPEECH[sel.value] || 'he-IL', text => { msg.value = base + text; draft.text = msg.value; }, (said, why) => {
+    stopRec = listen(SPEECH[sel.value] || 'he-IL', text => { msg.value = base + text; draft.text = msg.value; }, (said, why, finals) => {
       stopRec = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate');
+      const lastSaid = (finals || []).slice(-1)[0] || '';
+      if (isDeleteCommand(lastSaid)) { msg.value = (base + (finals || []).slice(0, -1).join(' ')).trim(); draft.text = msg.value; if (bin) bin.doDelete(); return; }
       if (said.trim() && msg.value.trim().length > 3) { toast(t('heardRunning'), 1500); root.querySelector('#read').click(); }
     }, { silence: 6000 });
     if (!stopRec) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
@@ -54,6 +58,7 @@ export function render({ root }) {
 
   root.querySelector('#read').onclick = () => {
     if (stopRec) stopRec();
+    if (isDeleteCommand(msg.value)) { if (bin) bin.doDelete(); return; }
     const b = parseBrief(msg.value, PLACES, new Date(), db.list('clients'));
     draft.lead = b.lead; draft.lead.source = msg.value; draft.lead.needs = b.needs; draft.lead.tasks = b.tasks; draft.lead.days = b.days; draft.lead.rooms = b.rooms;
     drawForm(root.querySelector('#form'), draft.lead, s);
