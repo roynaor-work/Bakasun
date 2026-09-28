@@ -42,3 +42,8 @@ https://claude.ai/artifact/WTbeA5XjmBfLvsW18wxPvR
 
 ## לא לשמור
 מספרי חשבון בנק, תעודות זהות, או מידע אישי ובריאותי מהתיבה הפרטית של וירג'יני.
+
+## אפליקציה נפרדת: האימון שלי (`workout/`)
+- אפליקציית אימונים לבן של רועי (28/09/2026). עצמאית לגמרי, לא נוגעת בקוד של באקה סאן.
+- כתובת: https://roynaor-work.github.io/Bakasun/workout/ . נתונים ב-localStorage במכשיר בלבד.
+- `js/exercises.js` תרגילים ופוזות, `js/figure.js` מנוע אנימציה של דמות מקלות, `js/logic.js` היגיון טהור (נבדק ב-`tests/workout.test.mjs`), `js/app.js` המסכים.

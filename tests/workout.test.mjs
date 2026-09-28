@@ -1,0 +1,76 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { scaleTarget, buildItems, summarize, streak, stats, earned, fmtTime } from '../workout/js/logic.js';
+import { EXERCISES, byId } from '../workout/js/exercises.js';
+import { PROGRAMS } from '../workout/js/programs.js';
+import { poseAt, cycleMs, lerpPose } from '../workout/js/figure.js';
+
+test('scaleTarget by level', () => {
+  assert.equal(scaleTarget(20, 'normal'), 20);
+  assert.equal(scaleTarget(20, 'easy'), 14);
+  assert.equal(scaleTarget(20, 'hard'), 27);
+  assert.equal(scaleTarget(30, 'easy', 'time'), 20);
+  assert.equal(scaleTarget(30, 'hard', 'time'), 40);
+  assert.equal(scaleTarget(2, 'easy'), 3);
+});
+
+test('buildItems expands rounds and overrides', () => {
+  const jump = PROGRAMS.find(p => p.id === 'jump');
+  const items = buildItems(jump, byId, 'normal');
+  assert.equal(items.length, jump.items.length * 2);
+  assert.equal(items[0].round, 1); assert.equal(items.at(-1).round, 2);
+  const quick = PROGRAMS.find(p => p.id === 'quick');
+  for (const i of buildItems(quick, byId)) { assert.equal(i.type, 'time'); assert.equal(i.target, 30); }
+});
+
+test('every program refers to real exercises; every exercise has a valid loop', () => {
+  for (const p of PROGRAMS) for (const id of p.items) assert.ok(byId[id], id);
+  for (const ex of EXERCISES) {
+    assert.ok(cycleMs(ex.frames) > 0, ex.id);
+    const p = poseAt(ex.frames, 123);
+    for (const j of ['head', 'neck', 'hip', 'lh', 'rh', 'lf', 'rf']) assert.ok(Array.isArray(p[j]) && p[j].length === 2, ex.id + ' ' + j);
+    assert.ok(ex.name && !/[؀-ۿ]/.test(ex.name + ex.tip));
+  }
+});
+
+test('lerpPose midpoint and rope', () => {
+  const a = { head: [0, 0], neck: [0, 0], hip: [0, 0], le: [0, 0], lh: [0, 0], re: [0, 0], rh: [0, 0], lk: [0, 0], lf: [0, 0], rk: [0, 0], rf: [0, 0], rope: 100 };
+  const b = { ...a, head: [10, 20], rope: 200 };
+  const m = lerpPose(a, b, 0.5);
+  assert.deepEqual(m.head, [5, 10]); assert.equal(m.rope, 150);
+});
+
+test('summarize stars', () => {
+  const s = { duration: 600, items: [
+    { exId: 'a', type: 'reps', target: 10, done: 10 }, { exId: 'b', type: 'time', target: 30, done: 30 }, { exId: 'c', type: 'reps', target: 10, done: 10 }] };
+  const sum = summarize(s);
+  assert.equal(sum.stars, 3); assert.equal(sum.reps, 20); assert.equal(sum.seconds, 30); assert.equal(sum.pct, 100);
+  s.items[2].done = 0;
+  assert.equal(summarize(s).stars, 1);
+  s.items[2].done = 5;
+  assert.equal(summarize(s).stars, 2);
+});
+
+test('streak counts back from today or yesterday', () => {
+  const d = n => { const x = new Date(2026, 8, 28, 12); x.setDate(x.getDate() - n); return x.toISOString(); };
+  const today = new Date(2026, 8, 28, 18);
+  assert.equal(streak([], today), 0);
+  assert.equal(streak([{ date: d(0) }, { date: d(1) }, { date: d(2) }], today), 3);
+  assert.equal(streak([{ date: d(1) }, { date: d(2) }], today), 2);
+  assert.equal(streak([{ date: d(2) }], today), 0);
+  assert.equal(streak([{ date: d(0) }, { date: d(0) }, { date: d(3) }], today), 1);
+});
+
+test('stats and badges', () => {
+  const today = new Date(2026, 8, 28, 18);
+  const mk = (n, reps) => ({ date: new Date(2026, 8, 28 - n, 10).toISOString(), duration: 700, items: [{ exId: 'crunches', name: 'x', type: 'reps', target: reps, done: reps }] });
+  const st = stats([mk(0, 200), mk(1, 200), mk(2, 200)], today);
+  assert.equal(st.workouts, 3); assert.equal(st.streak, 3); assert.equal(st.thisWeek, 3); assert.equal(st.totalReps, 600);
+  assert.equal(st.week.length, 7); assert.equal(st.week.at(-1).count, 1);
+  assert.equal(st.perExercise.crunches.total, 600); assert.equal(st.perExercise.crunches.best, 200);
+  const b = earned(st);
+  assert.ok(b.includes('first') && b.includes('three') && b.includes('reps500'));
+  assert.ok(!b.includes('week'));
+});
+
+test('fmtTime', () => { assert.equal(fmtTime(0), '0:00'); assert.equal(fmtTime(65), '1:05'); assert.equal(fmtTime(600), '10:00'); });
