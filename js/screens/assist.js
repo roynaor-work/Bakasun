@@ -76,6 +76,10 @@ async function tabCommand(body, s, ctx) {
     const c = parseCommand(text, docs, peopleNow());
     if (c.kind === 'invoice') { mode = 'invoice'; draft = text; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'supplierQuote') { mode = 'supplierQuote'; preSupplier = c.supplier && c.supplier.about === 'supplier' ? c.supplier.id : ''; draft = ''; render({ root: body.closest('#app') }); return; }
+    if (c.kind === 'reminder') {
+      db.put('tasks', { title: c.reminder.title, due: c.reminder.due, time: c.reminder.time, who: t('me'), status: 'פתוח', lang: s.uiLang || 'he' });
+      out.innerHTML = `<p class="okbox">${esc(t('reminderSaved', { what: c.reminder.title, when: Office.fmt(c.reminder.due) + (c.reminder.time ? ' ' + c.reminder.time : '') }))}</p>`; return;
+    }
     if (c.kind === 'contact') {
       const col = c.to && c.to.about === 'client' ? 'clients' : c.to && c.to.about === 'supplier' ? 'suppliers' : c.to && c.to.about === 'team' ? 'team' : c.to && c.to.about === 'contact' ? 'contacts' : '';
       const patch = { phone: c.contact.phone || undefined, email: c.contact.email || undefined };

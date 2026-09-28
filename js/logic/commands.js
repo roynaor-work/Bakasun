@@ -2,6 +2,7 @@
    "call Yossi back". Pure parsing, tested; the screens decide what to open. */
 import Office from './office.js';
 import { trim, str, phoneDigits } from './core.js';
+import { parseReminder } from './travel.js';
 
 const SEND = /^(?:שלחי|שלח|תשלחי|תשלח|לשלוח|send|envoie|envoyer|envoyez)(?=\s|$)/i;
 const INVOICE = /(חשבונית|חשבון עסקה|דרישת תשלום|invoice|facture)/i;
@@ -22,6 +23,7 @@ export function parseCommand(text, docs, people) {
   const t = trim(text);
   const out = { kind: 'unknown', text: t, doc: null, to: null };
   if (!t) return out;
+  const rem = parseReminder(t, new Date()); if (rem) { out.kind = 'reminder'; out.reminder = rem; return out; }
   if (INVOICE.test(t) && /(רועי|roy|בקש|ask|demande)/i.test(t)) { out.kind = 'invoice'; out.invoice = parseInvoiceRequest(t); return out; }
   if (/(קיבלתי|יש לי|הגיעה|got|received|reçu|j'ai reçu)\s.*(הצעה|הצעת מחיר|quote|devis)/i.test(t) || /^(הצעה|הצעת מחיר|quote|devis)\s+(מ|from|de)\b/i.test(t)) {
     let bp = null, bl = 0;

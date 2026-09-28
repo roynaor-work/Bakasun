@@ -17,7 +17,7 @@ export function render(ctx) {
   const card = x => {
     const cs = x.caseId ? db.get('cases', x.caseId) : null;
     return `<div class="card" data-id="${esc(x.id)}">
-      <div class="row between"><span class="title">${esc(x.title)}</span><span class="row">${x.status === TASK.sent ? `<span class="badge ok">${esc(t('taskSent'))}</span>` : ''}${x.due ? `<span class="badge ${x.late > 0 ? '' : 'muted'}">${esc(Office.fmt(x.due))}</span>` : ''}</span></div>
+      <div class="row between"><span class="title">${esc(x.title)}</span><span class="row">${x.status === TASK.sent ? `<span class="badge ok">${esc(t('taskSent'))}</span>` : ''}${x.due ? `<span class="badge ${x.late > 0 ? '' : 'muted'}">${esc(Office.fmt(x.due))}${x.time ? ' ' + esc(x.time) : ''}</span>` : ''}</span></div>
       ${x.details ? `<div class="sub" style="white-space:pre-wrap">${esc(x.details)}</div>` : ''}
       <div class="sub">${x.who ? `<b>${esc(x.who)}</b>` : ''}${cs ? ` · <a href="#/case/${esc(cs.id)}">${esc(cs.client)}${cs.date ? ' · ' + esc(Office.fmt(cs.date)) : ''}</a>` : ''}</div>
       ${tab === 'open' ? `<div class="row"><button class="btn wa" data-send>${esc(t('taskSend'))}</button>${x.phone ? `<button class="btn sm" data-dial>${esc(t('call'))}</button>` : ''}<button class="btn sm ok" data-done>${esc(t('taskDone'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div>`

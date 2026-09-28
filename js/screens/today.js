@@ -13,11 +13,15 @@ import { dialog, field } from '../ui.js';
 import { pendingRequests } from '../logic/rfq.js';
 import { supplierInvoicesMissing } from '../logic/money.js';
 import { pendingPrint } from '../logic/print.js';
+import { handoverText } from '../logic/travel.js';
+import { openMail } from '../ui.js';
 import { resend } from './rfq.js';
 
 export function render({ root }) {
   const s = db.settings();
   const data = db.snapshot();
+  const travel = (() => { try { return JSON.parse(s.travel || '{}'); } catch (e) { return {}; } })();
+  if (travel.on && travel.to && Office.daysBetween(travel.to, new Date()) > 0) { travel.on = false; db.setting('travel', JSON.stringify(travel)); if (s.signerBackup) { db.setting('signer', s.signerBackup); db.setting('signerBackup', ''); } }
   const { items, calls, tasks } = todayList(data, new Date(), { followupDays: s.followupDays || 1 });
   const up = items.filter(x => x.type === 'upcoming'), fu = items.filter(x => x.type === 'followup');
   const yday = unansweredSince(data.calls || [], Office.addDays(new Date(), -1), new Date());
@@ -35,6 +39,7 @@ export function render({ root }) {
       <a class="icon" href="#/search" aria-label="${esc(t('search'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
     </header>
     <form class="card row" id="askBox"><input name="q" class="grow" placeholder="${esc(t('askWhat'))}" autocomplete="off"><button type="button" class="icon" data-ask-mic aria-label="${esc(t('dictate'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><button type="submit" class="btn primary sm">${esc(t('read'))}</button></form>
+    ${travel.on ? `<div class="card warnbox"><div class="row between"><b>${esc(t('travelOn'))}${travel.to ? ' · ' + esc(t('until')) + ' ' + esc(Office.fmt(travel.to)) : ''}</b><a class="btn sm ghost" href="#/settings">${esc(t('edit'))}</a></div><div class="sub">${esc(travel.subName ? t('coveredBy') + ': ' + travel.subName : '')}</div><div class="row"><button class="btn sm primary" id="handover">${esc(t('handover'))}</button></div></div>` : ''}
     ${nothing ? empty(t('nothingToday')) : ''}
     ${up.length ? section(t('upcoming'), `<div class="list">${up.map(x => {
       const c = db.get('cases', x.caseId) || {};
@@ -54,11 +59,26 @@ export function render({ root }) {
     ${yday.length ? section(t('unansweredYesterday'), `<div class="list">${yday.map(c => `<a class="card tap" href="#/calls"><div class="row between"><span class="title">${esc(c.name)}</span><span class="badge warn"><span class="count">${c.attempts || 1}</span> ${esc(t('attempts'))}</span></div>${c.why ? `<div class="sub">${esc(c.why)}</div>` : ''}</a>`).join('')}</div>`) : ''}
     ${calls.length ? section(t('callsToday'), `<div class="list">${calls.slice(0, 5).map(c => `<a class="card tap" href="#/calls"><div class="row between"><span class="title">${esc(c.name)}</span><span class="ltr sub">${esc(phonePretty(c.phone))}</span></div>${c.why ? `<div class="sub">${esc(c.why)}</div>` : ''}</a>`).join('')}
       ${calls.length > 5 ? `<a class="btn ghost" href="#/calls">+${calls.length - 5}</a>` : ''}</div>`) : ''}
-    ${tasks.length ? section(t('tasksOpen'), `<div class="list">${tasks.slice(0, 5).map(x => `<a class="card tap" href="#/tasks"><div class="row between"><span class="title">${esc(x.title)}</span>${x.late > 0 ? `<span class="badge">${esc(Office.fmt(x.due))}</span>` : `<span class="badge muted">${esc(Office.fmt(x.due))}</span>`}</div><div class="sub">${esc(x.who || '')}</div></a>`).join('')}</div>`) : ''}
+    ${tasks.length ? section(t('tasksOpen'), `<div class="list">${tasks.slice().sort((a, b) => (b.late - a.late) || String(a.time || '99').localeCompare(String(b.time || '99'))).slice(0, 6).map(x => `<div class="card" data-task="${esc(x.id)}"><div class="row between"><a class="title" href="#/tasks">${esc(x.title)}</a><span class="badge ${x.late > 0 ? '' : 'muted'}">${esc(x.late > 0 ? Office.fmt(x.due) : (x.time || t('todayIs')))}</span></div><div class="row between"><span class="sub">${esc(x.who || '')}</span><button class="btn sm ok" data-done>✓</button></div></div>`).join('')}</div>`) : ''}
     ${!nothing ? `<div class="sec"><button class="btn ghost" id="copyMorning">${esc(t('morningCopy'))}</button></div>` : ''}
     <button class="fab" id="fab">+ ${esc(t('newLead'))}</button>`;
 
   root.querySelector('#fab').onclick = () => { location.hash = '#/lead'; };
+  root.querySelectorAll('[data-task]').forEach(el => el.querySelector('[data-done]').onclick = () => { db.put('tasks', { id: el.dataset.task, status: 'בוצע' }); render({ root }); });
+  const ho = root.querySelector('#handover'); if (ho) ho.onclick = async () => {
+    const open = {
+      upcoming: up.map(x => { const c = db.get('cases', x.caseId) || {}; return [c.client, c.kind, c.date ? Office.fmt(c.date) : '', c.place].filter(Boolean).join(' · '); }),
+      suppliers: waitSup.map(l => (l.sup.name || '') + (l.sup.phone ? ' ' + l.sup.phone : '') + ' · ' + (l.cs.client || '') + (l.what ? ' · ' + l.what : '')),
+      print: waitPrint.map(g => ((db.get('suppliers', g.supplierId) || {}).name || '') + ' · ' + (g.cs.client || '') + ' · ' + g.items.map(i => i.item).join(', ')),
+      calls: calls.map(c => c.name + (c.phone ? ' ' + c.phone : '') + (c.why ? ' · ' + c.why : '')),
+      tasks: tasks.map(x => x.title + (x.due ? ' · ' + Office.fmt(x.due) : '')),
+      followups: fu.map(x => (x.client || '') + (x.phone ? ' ' + x.phone : ''))
+    };
+    const sub = db.list('team').find(x => x.name === travel.subName) || {};
+    const r = await dialog(t('handover'), `<textarea name="text" rows="14">${esc(handoverText(travel, open, (s.signer || DEFAULTS.signer).split('\n')[0]))}</textarea>`, { ok: sub.phone || travel.subPhone ? t('whatsapp') : t('email') });
+    if (!r) return;
+    if (sub.phone || travel.subPhone) openWhatsApp(sub.phone || travel.subPhone, r.text); else openMail(sub.email || '', t('handover'), r.text);
+  };
   const ab = root.querySelector('#askBox');
   ab.onsubmit = e => { e.preventDefault(); const v = ab.q.value.trim(); if (!v) { location.hash = '#/assist'; return; } sessionStorage.setItem('bakasun.ask', v); location.hash = '#/assist/from-today'; };
   ab.querySelector('[data-ask-mic]').onclick = () => { sessionStorage.setItem('bakasun.ask', ''); sessionStorage.setItem('bakasun.askMic', '1'); location.hash = '#/assist/from-today'; };

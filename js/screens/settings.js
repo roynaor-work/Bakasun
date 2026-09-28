@@ -4,6 +4,7 @@ import { db } from '../store.js';
 import { esc, field, toast, confirmDialog, dialog, pickContacts, contactsSupported } from '../ui.js';
 import { parseContactsFile } from '../logic/contacts.js';
 import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM } from '../data/seedContacts.js';
+import { travelLine } from '../logic/travel.js';
 import { phoneDigits } from '../logic/core.js';
 import { loadDemo } from '../data/demo.js';
 import * as cloud from '../cloud.js';
@@ -18,6 +19,7 @@ export function render({ root }) {
   const s = db.settings();
   const L = [['he', langName('he')], ['fr', langName('fr')], ['en', langName('en')]];
   const cc = cloud.config();
+  const travel = (() => { try { return JSON.parse(s.travel || '{}'); } catch (e) { return {}; } })();
   root.innerHTML = `<header class="top"><a class="icon" href="#/more" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(t('settings'))}</h1></header>
     <form class="stack" id="f">
       <div class="grid2">
@@ -65,6 +67,10 @@ export function render({ root }) {
       <div class="list">${COMPANY_DOCS.map(d => `<a class="card tap" href="${esc(d.url)}" target="_blank" rel="noopener"><span class="title">${esc(d.title)}</span></a>`).join('')}</div></section>
     <section class="sec"><h2>${esc(t('backup'))}</h2><p class="hint">${esc(cc && cc.on ? t('cloudOn') : t('dataLocal'))}</p>
       <div class="row"><button class="btn" id="exp">${esc(t('exportJson'))}</button><label class="btn">${esc(t('importJson'))}<input type="file" accept="application/json" id="imp" class="sr"></label></div></section>
+    <section class="sec"><h2>${esc(t('travelMode'))}</h2><p class="hint">${esc(t('travelHint'))}</p>
+      <form class="stack" id="travelForm"><label class="chk"><input type="checkbox" name="on"${travel.on ? ' checked' : ''}> ${esc(t('travelOn'))}</label>
+      <div class="grid2">${field('from', t('fromDate'), travel.from || '', { type: 'date' })}${field('to', t('until'), travel.to || '', { type: 'date' })}${field('subName', t('coveredBy'), travel.subName || '', { type: 'select', options: [['', '']].concat(db.list('team').map(x => [x.name, x.name + (x.role ? ' · ' + x.role : '')])) })}${field('subPhone', t('fPhone'), travel.subPhone || '', { ltr: true, inputmode: 'tel' })}</div>
+      ${field('notes', t('travelNotes'), travel.notes || '', { type: 'textarea', rows: 3 })}<button class="btn primary" type="submit">${esc(t('save'))}</button></form></section>
     <section class="sec"><h2>${esc(t('contacts'))}</h2><p class="hint">${esc(t('contactsHint'))}</p>
       <p><b>${esc(t('contactsCount', { n: db.list('contacts').length }))}</b></p>
       <div class="row"><button class="btn sm" id="pickMany">${esc(t('fromPhone'))}</button><label class="btn sm">${esc(t('importFile'))}<input type="file" id="contactsFile" accept=".csv,.vcf,text/csv,text/vcard,text/x-vcard" hidden></label>${db.list('contacts').length ? `<button class="btn sm ghost" id="clearContacts">${esc(t('clearContacts'))}</button>` : ''}</div></section>
@@ -114,6 +120,14 @@ export function render({ root }) {
     render({ root });
   };
   root.querySelector('#addTeam').onclick = () => editTeam(null);
+  root.querySelector('#travelForm').onsubmit = e => {
+    e.preventDefault(); const fd = new FormData(e.target); const tr = { on: !!fd.get('on'), from: fd.get('from'), to: fd.get('to'), subName: fd.get('subName'), subPhone: fd.get('subPhone') || ((db.list('team').find(x => x.name === fd.get('subName')) || {}).phone || ''), notes: fd.get('notes') };
+    const was = travel.on; db.setting('travel', JSON.stringify(tr));
+    const base = s.signerBackup || s.signer || DEFAULTS.signer;
+    if (tr.on) { db.setting('signerBackup', base); db.setting('signer', base + '\n' + travelLine(tr, s.msgLang || 'he')); }
+    else if (was) { db.setting('signer', base); db.setting('signerBackup', ''); }
+    toast(t('saved')); render({ root });
+  };
   const addContacts = list => { let n = 0; const have = new Set(db.list('contacts').map(c => phoneDigits(c.phone || ''))); list.forEach(c => { const d = phoneDigits(c.phone || ''); if (!c.name && !c.phone) return; if (d && have.has(d)) return; have.add(d); db.put('contacts', { name: c.name, phone: c.phone, email: c.email }); n++; }); toast(t('imported', { n })); render({ root }); };
   root.querySelector('#pickMany').onclick = async () => { if (!contactsSupported()) { toast(t('noPicker'), 4000); return; } const list = await pickContacts(true); if (list && list.length) addContacts(list); };
   root.querySelector('#contactsFile').onchange = async e => { const f = e.target.files[0]; if (!f) return; addContacts(parseContactsFile(f.name, await f.text())); };
