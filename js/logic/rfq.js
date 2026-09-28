@@ -188,3 +188,33 @@ table{border-collapse:collapse;background:#FBF8F2;width:100%}th,td{border:1px so
 <table><thead><tr>${cols.map(c => `<th>${e(S[c])}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr${r.chosen ? ' class="chosen"' : ''}>${cols.map(c => `<td${/total|per|venue|food|av/.test(c) ? ' class="n"' : ''}>${cell(r, c)}</td>`).join('')}</tr>`).join('')}</tbody></table>
 <p class="sub">${e(rtl ? 'המחירים לפני מע״מ, לפי הצעות הספקים. ' : 'Prices before VAT, as quoted by the suppliers. ')}${e(Office.fmt(new Date()))}</p></body></html>`;
 }
+
+/**
+ * The summary she sends the client after the offers came in (need number two). rows: compareRows() whose free-text
+ * fields are already in the target language (the screen translates them first). opts: {openPoints: [], names, name}.
+ */
+export function offerSummary(cs, rows, lang, opts) {
+  opts = opts || {}; const L = LABELS[lang] ? lang : 'he'; const S = LABELS[L];
+  const who = opts.name || (L === 'he' ? 'וירג׳יני' : 'Virginie');
+  const hi = opts.names ? (L === 'he' ? 'היי ' + opts.names + ',' : L === 'fr' ? 'Bonjour ' + opts.names + ',' : 'Hi ' + opts.names + ', hope you are doing well!') : (L === 'he' ? 'היי,' : L === 'fr' ? 'Bonjour,' : 'Hi, hope you are doing well!');
+  const ev = cs ? [cs.kind, cs.date ? Office.fmt(cs.date) : '', cs.participants ? cs.participants + (L === 'he' ? ' משתתפים' : L === 'fr' ? ' participants' : ' participants') : ''].filter(Boolean).join(' · ') : '';
+  const intro = L === 'he' ? 'מצרפת סיכום של ההצעות שקיבלנו' + (ev ? ' ל' + ev : '') + ':' : L === 'fr' ? 'Voici le résumé des offres reçues' + (ev ? ' pour ' + ev : '') + ' :' : 'Here is a summary of the offers we received' + (ev ? ' for ' + ev : '') + ':';
+  const m = v => v ? Office.money(v) : '';
+  const blocks = rows.filter(r => r.hasOffer).map(r => {
+    const lines = ['* ' + r.supplier + (r.chosen ? ' ★' : '')];
+    if (r.total) lines.push('  - ' + S.total + ': ' + m(r.total) + (r.perPerson ? ' (' + m(r.perPerson) + ' ' + S.per.toLowerCase() + ')' : ''));
+    const parts = [r.venue ? S.venue + ' ' + m(r.venue) : '', r.food ? S.food + ' ' + m(r.food) : '', r.av ? S.av + ' ' + m(r.av) : ''].filter(Boolean);
+    if (parts.length) lines.push('  - ' + parts.join(', '));
+    if (r.included) lines.push('  - ' + S.included + ': ' + r.included);
+    if (r.cancellation) lines.push('  - ' + S.cancellation + ': ' + r.cancellation);
+    if (r.deposit) lines.push('  - ' + S.deposit + ': ' + r.deposit);
+    if (r.terms) lines.push('  - ' + S.terms + ': ' + r.terms);
+    return lines.join('\n');
+  });
+  const open = (opts.openPoints || []).map(trim).filter(Boolean);
+  const openTitle = L === 'he' ? 'נקודות פתוחות:' : L === 'fr' ? 'Points ouverts :' : 'Open points:';
+  const ask = rows.some(r => r.chosen) ? (L === 'he' ? 'המומלצת שלי מסומנת בכוכב. אשמח לאישור שלכם כדי לסגור.' : L === 'fr' ? 'Mon choix recommandé est marqué d’une étoile. J’attends votre accord pour confirmer.' : 'My recommendation is marked with a star. Please let me know if I can go ahead and confirm.')
+    : (L === 'he' ? 'אשמח לדעת לאיזה כיוון ללכת.' : L === 'fr' ? 'Dites-moi quelle option vous préférez.' : 'Let me know which option you prefer.');
+  const bye = L === 'he' ? 'תודה רבה,\n' + who : L === 'fr' ? 'Je reste à votre disposition.\n' + who : 'As always, I am available for any question.\nBest,\n' + who;
+  return [hi, intro, '', blocks.join('\n\n'), '', open.length ? openTitle + '\n' + open.map(x => '* ' + x).join('\n') + '\n' : '', ask, '', bye].filter((x, i, a) => !(x === '' && a[i - 1] === '')).join('\n').replace(/\n{3,}/g, '\n\n').trim();
+}

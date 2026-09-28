@@ -7,7 +7,9 @@ import Office from '../logic/office.js';
 import { supplierTypeLabel, stars } from '../labels.js';
 import { SUPPLIER_TYPES } from '../data/catalog.js';
 import { DEFAULTS } from '../data/defaults.js';
-import { templateFor, TEMPLATES, rfqText, rfqSubject, rfqReminder, rfqDecline, parseOffer, compareRows, compareHtml, LABELS } from '../logic/rfq.js';
+import { templateFor, TEMPLATES, rfqText, rfqSubject, rfqReminder, rfqDecline, parseOffer, compareRows, compareHtml, LABELS, offerSummary } from '../logic/rfq.js';
+import { translateText, hasHebrew, translatorAvailable, prepareTranslator } from '../logic/translate.js';
+import { langName } from '../i18n.js';
 import { shareFile, downloadFile } from '../files.js';
 
 const L = () => uiLang();
@@ -113,7 +115,7 @@ export function compareBlock(c, links, sups) {
   return `<section class="sec"><div class="sec-h"><h2>${esc(t('compare'))}</h2></div>
     <div class="tablewrap"><table class="cmp"><thead><tr><th>${esc(S.supplier)}</th><th>${esc(S.total)}</th><th>${esc(S.per)}</th><th>${esc(S.cancellation)}</th><th>${esc(S.deposit)}</th><th>${esc(S.terms)}</th><th>${esc(S.note)}</th><th></th></tr></thead>
     <tbody>${rows.map(r => `<tr${r.chosen ? ' class="chosen"' : ''}><td>${esc(r.supplier)}${r.chosen ? ' ★' : ''}</td><td class="n">${r.hasOffer ? esc(Office.money(r.total)) : `<i>${esc(S.none)}</i>`}</td><td class="n">${r.perPerson ? esc(Office.money(r.perPerson)) : ''}</td><td>${esc(r.cancellation)}</td><td>${esc(r.deposit)}</td><td>${esc(r.terms)}</td><td>${esc([r.verdict, r.note].filter(Boolean).join(' · '))}</td><td>${r.hasOffer && !r.chosen ? `<button class="btn sm ok" data-choose="${esc(r.id)}">${esc(t('chooseSup'))}</button>` : ''}</td></tr>`).join('')}</tbody></table></div>
-    <div class="row"><button class="btn sm" data-share-cmp="he">${esc(t('shareCompare'))} · עברית</button><button class="btn sm" data-share-cmp="en">${esc(t('shareCompare'))} · English</button>${rows.some(r => r.chosen) && rows.some(r => !r.chosen && /ביקשנו|התקבלה/.test(r.status)) ? `<button class="btn sm ghost" data-decline>${esc(t('declineOthers'))}</button>` : ''}</div></section>`;
+    <div class="row"><button class="btn sm primary" data-summary>${esc(t('clientSummary'))}</button><button class="btn sm" data-share-cmp="he">${esc(t('shareCompare'))} · עברית</button><button class="btn sm" data-share-cmp="en">${esc(t('shareCompare'))} · English</button>${rows.some(r => r.chosen) && rows.some(r => !r.chosen && /ביקשנו|התקבלה/.test(r.status)) ? `<button class="btn sm ghost" data-decline>${esc(t('declineOthers'))}</button>` : ''}</div></section>`;
 }
 export function wireCompare(body, c, s, links, sups, refresh) {
   body.querySelectorAll('[data-share-cmp]').forEach(b => b.onclick = async () => {
@@ -122,10 +124,39 @@ export function wireCompare(body, c, s, links, sups, refresh) {
     const rec = { blob: new Blob([html], { type: 'text/html' }), name: 'comparison-' + (c.client || 'event').replace(/[^\w֐-׿]+/g, '-') + '.html', type: 'text/html', title: t('compare') };
     if (!(await shareFile(rec, t('compare') + ' · ' + (c.client || '')))) { downloadFile(rec); toast(t('shareFallback'), 4000); }
   });
+  const sm = body.querySelector('[data-summary]'); if (sm) sm.onclick = () => clientSummary(c, s, links, sups);
   body.querySelectorAll('[data-choose]').forEach(b => b.onclick = () => { db.put('links', { id: b.dataset.choose, chosen: 'כן', status: 'אושר' }); refresh(); });
   const d = body.querySelector('[data-decline]'); if (d) d.onclick = () => {
     const others = links.filter(l => !Office.yes(l.chosen) && /ביקשנו|התקבלה/.test(String(l.status))).map(l => sups[l.supplierId]).filter(Boolean);
     sendEach(others, sp => rfqDecline(c, sp, { name: herName(s) }), sp => 'Re: ' + rfqSubject(c, templateFor(sp.type), sp.lang), sp => { const l = links.find(x => x.supplierId === sp.id); if (l) db.put('links', { id: l.id, status: 'בוטל' }); });
     setTimeout(refresh, 500);
   };
+}
+
+/** Need number two: the offers, translated and summed up for the client, with her open points. Mail or WhatsApp. */
+export async function clientSummary(c, s, links, sups) {
+  const client = c.clientId ? db.get('clients', c.clientId) : null;
+  const lang = (client && client.lang) || c.lang || 'he';
+  const r1 = await dialog(t('clientSummary'), `<div class="grid2">${field('lang', t('msgLang'), lang, { type: 'select', options: [['he', langName('he')], ['en', langName('en')], ['fr', langName('fr')]] })}${field('which', t('whichOffers'), 'all', { type: 'select', options: [['all', t('allOffers')], ['chosen', t('chosenOnly')]] })}</div>
+    ${field('names', t('greetNames'), (client && client.contact) || c.contact || '')}${field('open', t('openPoints'), '', { type: 'textarea', rows: 3, placeholder: t('openPointsPh') })}
+    ${translatorAvailable() ? '' : `<p class="hint">${esc(t('glossaryOnly'))}</p>`}`, { ok: t('next') });
+  if (!r1) return;
+  if (r1.lang !== 'he') prepareTranslator('he', r1.lang);
+  let rows = compareRows(links, Object.values(sups), c.participants).filter(r => r.hasOffer);
+  if (r1.which === 'chosen' && rows.some(r => r.chosen)) rows = rows.filter(r => r.chosen);
+  toast(t('translating'), 2000);
+  const to = r1.lang;
+  rows = await Promise.all(rows.map(async r => { const o = Object.assign({}, r); for (const k of ['included', 'cancellation', 'deposit', 'terms']) o[k] = to === 'he' ? r[k] : await translateText(r[k], 'he', to); return o; }));
+  const open = await Promise.all(String(r1.open || '').split('\n').map(x => x.trim()).filter(Boolean).map(x => to === 'he' ? x : translateText(x, 'he', to)));
+  const text = offerSummary(c, rows, to, { names: r1.names, openPoints: open, name: to === 'he' ? herName(s) : 'Virginie' });
+  const leftover = to !== 'he' && hasHebrew(text.replace(/\* [^\n]+/g, m => (rows.some(r => m.includes(r.supplier)) ? '' : m)));
+  const subject = (to === 'he' ? 'הצעות ל' : to === 'fr' ? 'Offres pour ' : 'Offers for ') + [c.kind, c.date ? Office.fmt(c.date) : ''].filter(Boolean).join(' · ');
+  const r2 = await dialog(t('clientSummary'), `${leftover ? `<p class="warnbox">${esc(t('checkHebrew'))}</p>` : ''}<textarea name="text" rows="14" ${to === 'he' ? '' : 'dir="ltr" style="direction:ltr;text-align:left"'}>${esc(text)}</textarea><div class="row">${c.email || (client && client.email) ? `<button type="button" class="btn primary" data-x="mail">${esc(t('email'))}</button>` : ''}${c.phone ? `<button type="button" class="btn wa" data-x="wa">${esc(t('whatsapp'))}</button>` : ''}<button type="button" class="btn ghost" data-x="copy">${esc(t('copy'))}</button></div>`, { ok: t('close') });
+  // the buttons live inside the dialog body: wire them while it is open
+  const form = document.querySelector('.modal form'); if (!form) return;
+  const ta = form.querySelector('textarea[name=text]');
+  const mailBtn = form.querySelector('[data-x=mail]'); if (mailBtn) mailBtn.onclick = () => openMail(c.email || (client && client.email), subject, ta.value);
+  const waBtn = form.querySelector('[data-x=wa]'); if (waBtn) waBtn.onclick = () => openWhatsApp(c.phone, ta.value);
+  const cp = form.querySelector('[data-x=copy]'); if (cp) cp.onclick = () => navigator.clipboard && navigator.clipboard.writeText(ta.value).then(() => toast(t('copied')));
+  await r2;
 }
