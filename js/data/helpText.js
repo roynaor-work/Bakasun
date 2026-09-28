@@ -8,7 +8,7 @@ export const HELP = {
       'מה שנמחק נשמר שעה ב"סל" (הכפתור ליד המחיקה). משם מחזירים כל הקלטה.',
       'אפשר גם לכתוב במקום להקליט, ואז ללחוץ "קריאה".'
     ] },
-    { title: 'מעבר בין מסכים (מילה אחת מספיקה)', items: ['היום', 'תיקים', 'ספקים', 'לקוחות', 'משימות', 'שיחות', 'הצעות מחיר', 'כספים', 'קבלות', 'הערות', 'קבוצות', 'חיפוש', 'הגדרות', 'פנייה חדשה', 'עזרה', 'אפשר גם "עברי לספקים" או "תפתחי את המשימות".'] },
+    { title: 'מעבר בין מסכים: "עברי ל..." ואז שם המסך', items: ['"עברי לספקים", "עברי למשימות", "עברי להיום"', 'שמות המסכים: היום, תיקים, ספקים, לקוחות, משימות, שיחות, הצעות מחיר, כספים, קבלות, הערות, קבוצות, חיפוש, הגדרות, פנייה חדשה, עזרה', 'עובד גם "לכי ל...", "תראי לי את ה...", "מסך ספקים". שם מסך בלבד, בלי "עברי ל", לא מעביר, כדי שמילה בתוך משפט לא תזיז אותך בטעות.'] },
     { title: 'שאלות', items: [
       '"מה יש לי מחר" / "מה המשימות שלי להיום" / "מה יש השבוע" / "מה יש ביום שלישי" / "משימות ל-15/10"',
       '"מה המשימות הפתוחות שלי"',
@@ -53,7 +53,7 @@ export const HELP = {
       'Ce qui est effacé reste une heure dans la « corbeille » (le bouton à côté). On peut tout récupérer de là.',
       'On peut aussi écrire au lieu de dicter, puis appuyer sur « Lire ».'
     ] },
-    { title: 'Changer d’écran (un mot suffit)', items: ['accueil', 'dossiers', 'fournisseurs', 'clients', 'tâches', 'appels', 'devis', 'finances', 'reçus', 'notes', 'groupes', 'recherche', 'réglages', 'nouvelle demande', 'aide', 'Ou « va aux fournisseurs », « ouvre les tâches ».'] },
+    { title: 'Changer d’écran : « va à ... » puis le nom de l’écran', items: ['« va aux fournisseurs », « va à tâches », « va à accueil »', 'Les écrans : accueil, dossiers, fournisseurs, clients, tâches, appels, devis, finances, reçus, notes, groupes, recherche, réglages, nouvelle demande, aide', '« montre-moi les ... » marche aussi. Le nom seul, sans « va à », ne change pas d’écran : un mot dans une phrase ne vous déplace jamais par erreur.'] },
     { title: 'Questions', items: [
       '« qu’est-ce que j’ai demain » / « mes tâches pour aujourd’hui » / « qu’est-ce que j’ai cette semaine » / « mes tâches mardi »',
       '« mes tâches ouvertes »',
@@ -98,7 +98,7 @@ export const HELP = {
       'What was deleted stays one hour in the “bin” (the button next to it). Anything can be brought back from there.',
       'You can also type instead of dictating, then tap “Read”.'
     ] },
-    { title: 'Moving between screens (one word is enough)', items: ['today', 'cases', 'suppliers', 'clients', 'tasks', 'calls', 'quotes', 'money', 'receipts', 'notes', 'groups', 'search', 'settings', 'new lead', 'help', 'Or “go to suppliers”, “open the tasks”.'] },
+    { title: 'Moving between screens: “go to ...” then the screen name', items: ['“go to suppliers”, “go to tasks”, “go to today”', 'The screens: today, cases, suppliers, clients, tasks, calls, quotes, money, receipts, notes, groups, search, settings, new lead, help', '“show me the ...” works too. The name alone, without “go to”, does not move you: a word inside a sentence never moves you by mistake.'] },
     { title: 'Questions', items: [
       '“what do I have tomorrow” / “my tasks for today” / “what is on this week” / “tasks on tuesday” / “tasks for 15/10”',
       '“what are my open tasks”',

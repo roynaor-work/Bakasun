@@ -9,6 +9,8 @@ import { isReceiptCommand } from '../logic/receipts.js';
 import { parseAgenda, agenda } from '../logic/agenda.js';
 import { parseGoto, screenWord } from '../logic/nav.js';
 import { parseMissing, openItems, focusSections } from '../logic/openItems.js';
+import { parseHow, findHelp } from '../logic/howto.js';
+import { HELP } from '../data/helpText.js';
 import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage } from '../logic/commands.js';
 import { QUOTE_STATUS } from '../logic/quotes.js';
 import { subjects } from '../notes.js';
@@ -108,6 +110,14 @@ function caseByName(who, alt) {
   return find(who) || find(alt) || null;
 }
 
+/** "How do I delete a recording?": the closest lines from the help, with a link to all of it. */
+function showHow(out, hq) {
+  const hits = findHelp(hq.words, HELP[lang()] || HELP.he);
+  out.innerHTML = `<div class="card stack"><div class="title">${esc(t('howAnswer'))}</div>
+    ${hits.length ? `<ul class="open">${hits.map(h => `<li><span class="sub">${esc(h.section)}:</span> ${esc(h.text)}</li>`).join('')}</ul>` : `<p class="hint">${esc(t('noHow'))}</p>`}
+    <div class="row"><a class="btn sm" href="#/help">${esc(t('fullHelp'))}</a></div></div>`;
+}
+
 /** "What is missing for Shoval?": everything open on that event, in sections with links. */
 function showMissing(out, mq) {
   const active = db.list('cases', x => Office.ACTIVE.includes(x.status)).sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
@@ -163,6 +173,8 @@ async function tabCommand(body, s, ctx) {
     if (q) { showAgenda(out, q); return; }
     const mq = parseMissing(text);
     if (mq) { showMissing(out, mq); return; }
+    const hq = parseHow(text);
+    if (hq) { showHow(out, hq); return; }
     const c = parseCommand(text, docs, peopleNow());
     if (c.kind === 'invoice') { mode = 'invoice'; draft = text; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'supplierQuote') { mode = 'supplierQuote'; preSupplier = c.supplier && c.supplier.about === 'supplier' ? c.supplier.id : ''; draft = ''; render({ root: body.closest('#app') }); return; }

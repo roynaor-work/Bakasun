@@ -22,19 +22,29 @@ export const SCREENS = [
   ['assist', ['פקודה', 'תגידי לי מה לעשות', 'command', 'assistant', 'commande']],
   ['help', ['עזרה', 'מה אפשר להגיד', 'help', 'what can i say', 'aide', 'que puis-je dire']]
 ];
-const LEAD = /^(?:עברי ל|תעברי ל|לכי ל|תלכי ל|קחי אותי ל|תראי לי את ה|תראי לי|הראי לי|תפתחי את ה|תפתחי|פתחי את ה|פתחי|ל|go to the|go to|take me to the|take me to|open the|open|show me the|show me|show|va aux|va au|va à la|va à|ouvre les|ouvre la|ouvre le|ouvre|montre-moi les|montre-moi la|montre-moi le|montre-moi|aller aux|aller au|aller à)\s*/i;
+// A move needs an explicit "go to" in front, so a screen word said inside a sentence ("the cases folder...") never moves her by mistake.
+const LEAD = /^(?:עברי ל|תעברי ל|עבור ל|לעבור ל|לכי ל|תלכי ל|קחי אותי ל|תראי לי את ה|תראי לי|הראי לי|תפתחי את מסך ה|תפתחי מסך|פתחי מסך|מסך|go to the|go to|take me to the|take me to|switch to the|switch to|open the .* screen|show me the|show me|va aux|va au|va à la|va à|aller aux|aller au|aller à|montre-moi les|montre-moi la|montre-moi le|montre-moi|ouvre l['’]écran|écran|ecran)\s*/i;
 const TAIL = /\s*(?:מסך|חלון|דף|screen|window|page|écran|ecran|fenêtre|fenetre)?\s*[.!?]*$/i;
 
-/** The route she asked for ('suppliers', 'tasks'...), or null when the text is not a move between screens. */
+/** The route she asked for ('suppliers', 'tasks'...), or null when the text is not "go to <screen>". */
 export function parseGoto(text) {
   const t = trim(str(text)).toLowerCase().replace(/[״"`]/g, '');
   if (!t || t.length > 40) return null;
-  const art = /^(?:ה|the |les |le |la |l')/;
   const bare = t.replace(TAIL, '').trim();
+  if (!LEAD.test(bare)) return null;
   const core = bare.replace(LEAD, '').replace(TAIL, '').trim();
-  const cands = [bare, bare.replace(art, ''), core, core.replace(art, '')].map(x => x.trim()).filter(Boolean);
+  const art = /^(?:ה|the |les |le |la |l')/;
+  const cands = [core, core.replace(art, '')].map(x => x.trim()).filter(Boolean);
   for (const [route, words] of SCREENS) if (words.some(w => cands.includes(w))) return route;
   return null;
+}
+
+/** The recommended way to say it, per language: "עברי ל" + screen word. */
+export function gotoPhrase(route, lang) {
+  const w = screenWord(route, lang);
+  if (lang === 'fr') return 'va à ' + w;
+  if (lang === 'en') return 'go to ' + w;
+  return 'עברי ל' + w;
 }
 
 /** The recommended word for each screen in this language (for the help screen and the examples). */
