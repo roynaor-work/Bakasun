@@ -52,7 +52,8 @@ export const HELP = {
       '"תתקשרי לביסקוטי" / "תפתחי את דנה"',
       '"שלחי אישור ניהול חשבון ל-052-1234567" / "תשלחי את הלוגו לדנה לוי": מסמך מהספרייה',
       '"תבקש מרועי חשבונית: קומיוניטי או, 580777894, 3,000 + מע״מ"',
-      '"שמרי את הטלפון של רועי 052..."'
+      '"שמרי את הטלפון של רועי 052..."',
+      'כשהודעה פתוחה על המסך: "תשלחי" לבד לוחץ על וואטסאפ. "שמרי כתבנית סיור" שומר אותה, ובפעם הבאה "שלחי לדנה את תבנית הסיור" ({שם} מתחלף בשם הפרטי).'
     ] },
     { title: 'כספים וקבלות', items: [
       '"צלם חשבונית": צילום, סכום, ושמירה לפי חודש בענן',
@@ -117,7 +118,8 @@ export const HELP = {
       '« appelle Biscotti » / « ouvre Dana »',
       '« envoie l’attestation bancaire au 052-1234567 » / « envoie le logo à Dana Levy » : un document de la bibliothèque',
       '« demande à Roy une facture : Community O, 580777894, 3 000 + TVA »',
-      '« enregistre le téléphone de Roy 052... »'
+      '« enregistre le téléphone de Roy 052... »',
+      'Quand un message est ouvert : « envoie » seul appuie sur WhatsApp. « enregistre comme modèle visite » le garde, et ensuite « envoie à Dana le modèle visite » ({nom} devient le prénom).'
     ] },
     { title: 'Argent et reçus', items: [
       '« photographie une facture » : photo, montant, classement par mois dans le cloud',
@@ -182,7 +184,8 @@ export const HELP = {
       '“call Biscotti” / “open Dana”',
       '“send the bank confirmation to 052-1234567” / “send the logo to Dana Levy”: a document from the library',
       '“ask Roy for an invoice: Community O, 580777894, 3,000 + VAT”',
-      '“save the phone of Roy 052...”'
+      '“save the phone of Roy 052...”',
+      'When a message is on screen: “send” alone taps WhatsApp. “save as template tour” keeps it, and next time “send Dana the template tour” ({name} becomes the first name).'
     ] },
     { title: 'Money and receipts', items: [
       '“snap a receipt”: photo, amount, filed by month in the cloud',

@@ -24,7 +24,8 @@ function findPersonIn(who, people) {
 }
 import { taskEvent } from '../logic/ics.js';
 import { HELP } from '../data/helpText.js';
-import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage } from '../logic/commands.js';
+import { parseCommand, parseInvoiceRequest, invoiceRequestText, parseSupplierQuote, markupLines, supplierMarkupMessage, guessSupplier } from '../logic/commands.js';
+import { templates, saveTemplate, findTemplate, fillTemplate, isSaveTemplateCommand, templateRef, isSendCommand } from '../logic/templates.js';
 import { QUOTE_STATUS } from '../logic/quotes.js';
 import { subjects } from '../notes.js';
 import { files, shareFile, downloadFile, pdfText } from '../files.js';
@@ -194,6 +195,10 @@ async function tabCommand(body, s, ctx) {
     .concat(db.list('contacts').map(x => ({ label: x.name, names: [x.name], phone: x.phone, email: x.email, about: 'contact', id: x.id })));
   inputBox(body, t('cmdHint'), t('cmdPh'), (text, out) => {
     if (isReceiptCommand(text)) { location.hash = '#/receipts/' + new Date().toISOString().slice(0, 7) + '/snap'; return; }
+    // "send" alone: the tap on WhatsApp or mail for the message already on screen
+    if (isSendCommand(text)) { const b = out.querySelector('#wa, #waPick, #mail, #paidWa'); if (b) { b.click(); } else toast(t('nothingToSend')); return; }
+    // "save as template tour": the message on screen becomes a template
+    { const tn = isSaveTemplateCommand(text); if (tn) { const ta2 = out.querySelector('[name=msg], textarea'); if (ta2 && ta2.value.trim()) { saveTemplate(db, tn, ta2.value); toast(t('templateSaved', { name: tn }), 3000); } else toast(t('nothingToSave')); return; } }
     if (isEmptyBinCommand(text)) { emptyBins().then(ok => { if (ok) { draft = ''; body.querySelector('#txt').value = ''; const b = body.querySelector('#bin'); if (b) b.hidden = true; } }); return; }
     const go = parseGoto(text);
     if (go) { draft = ''; goTo(go); return; }
@@ -233,13 +238,17 @@ async function tabCommand(body, s, ctx) {
     }
     if (c.kind === 'message') {
       const has = c.via === 'email' ? c.to.email : c.to.phone;
+      // "send Dana the template tour": the body is one of her templates, with the first name filled in
+      const ref = templateRef(c.body);
+      if (ref) { const tp = findTemplate(templates(db), ref); if (tp) c.body = fillTemplate(tp.text, { name: c.to.name || '' }); else { out.innerHTML = `<p class="warnbox">${esc(t('noTemplateNamed', { name: ref }))}</p>`; return; } }
       out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(c.to.group ? t('groupTo') : t('recipient'))}</dt><dd class="ltr">${esc(c.to.name || c.to.phone || c.to.email)}${c.to.name && has ? ' · ' + esc(has) : ''}</dd></div>
         ${field('msg', t('theMessage'), c.body, { type: 'textarea', rows: 4 })}
         ${c.to.group ? `<div class="row"><button class="btn wa" id="waPick">${esc(t('waPickGroup'))}</button></div><p class="hint">${esc(t('groupHint'))}</p>`
           : has ? `<div class="row">${c.via === 'email' ? `<a class="btn primary" id="mail">${esc(t('email'))}</a>` : `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>`}${c.via === 'email' && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.via !== 'email' && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}</div>`
           : `<p class="warnbox">${esc(t('noContact'))} <button class="btn sm" id="addContact">${esc(c.via === 'email' ? t('addEmail') : t('addPhone'))}</button></p>`}</div>`;
       const msg = () => out.querySelector('[name=msg]').value;
-      { const r = document.createElement('div'); r.className = 'row'; r.innerHTML = `<button type="button" class="btn sm ghost" id="readMsg">🔊 ${esc(t('readAloud'))}</button>`; out.querySelector('.card').appendChild(r); r.querySelector('#readMsg').onclick = () => speak(msg(), lang()); }
+      { const r = document.createElement('div'); r.className = 'row'; r.innerHTML = `<button type="button" class="btn sm ghost" id="readMsg">🔊 ${esc(t('readAloud'))}</button><button type="button" class="btn sm ghost" id="saveTpl">${esc(t('saveAsTemplate'))}</button>`; out.querySelector('.card').appendChild(r); r.querySelector('#readMsg').onclick = () => speak(msg(), lang());
+        r.querySelector('#saveTpl').onclick = async () => { const rr = await dialog(t('saveAsTemplate'), field('name', t('templateName'), '') + `<p class="hint">${esc(t('templateHint'))}</p>`, { ok: t('save') }); if (rr && rr.name) { saveTemplate(db, rr.name, msg()); toast(t('templateSaved', { name: rr.name })); } }; }
       const wa = out.querySelector('#wa'); if (wa) wa.onclick = () => openWhatsApp(c.to.phone, msg());
       const wp = out.querySelector('#waPick'); if (wp) wp.onclick = () => openWhatsAppPick(msg());
       const ml = out.querySelector('#mail'); if (ml) { ml.href = 'mailto:' + encodeURIComponent(c.to.email) + '?subject=' + encodeURIComponent(s.bizName || DEFAULTS.bizName) + '&body=' + encodeURIComponent(msg()); ml.target = '_blank'; }
@@ -324,8 +333,15 @@ function tabSupplierQuote(body, s, ctx) {
   const ta = inputBox(body, t('sqHint'), t('sqPh'), (text, out) => {
     const q = parseSupplierQuote(text);
     if (!q.items.length) { out.innerHTML = `<p class="warnbox">${esc(t('sqNothing'))}</p>`; return; }
+    // the supplier: the one she named, or the one the text itself points to (a phone, a mail domain, a name)
+    const guessed = preSupplier ? null : guessSupplier(text, sups);
+    const supPre = preSupplier || (guessed ? guessed.id : '');
+    // the case: the one whose suppliers include this one, when only one does
+    const withSup = guessed ? cases.filter(c => db.list('links', l => l.caseId === c.id && l.supplierId === guessed.id).length) : [];
+    const casePre = preCase || (withSup.length === 1 ? withSup[0].id : '');
     out.innerHTML = `<form class="card stack" id="sq">
-      <div class="grid2">${field('caseId', t('forCase'), preCase, { type: 'select', options: cases.map(c => [c.id, c.client + (c.date ? ' · ' + Office.fmt(c.date) : '')]) })}${field('supplierId', t('supplier'), preSupplier, { type: 'select', options: [['', t('noSupplier')]].concat(sups.map(x => [x.id, x.name + ' · ' + x.type])) })}
+      ${guessed ? `<p class="hint">${esc(t('supplierGuessed', { who: guessed.name }))}</p>` : ''}
+      <div class="grid2">${field('caseId', t('forCase'), casePre, { type: 'select', options: cases.map(c => [c.id, c.client + (c.date ? ' · ' + Office.fmt(c.date) : '')]) })}${field('supplierId', t('supplier'), supPre, { type: 'select', options: [['', t('noSupplier')]].concat(sups.map(x => [x.id, x.name + ' · ' + x.type])) })}
       ${field('pct', t('fee'), s.defaultMargin || 15, { type: 'number', inputmode: 'decimal' })}${field('lang', t('msgLang'), 'he', { type: 'select', options: [['he', langName('he')], ['fr', langName('fr')], ['en', langName('en')]] })}</div>
       <div class="list">${q.items.map((x, i) => `<div class="row"><input name="item" class="grow" value="${esc(x.item)}"><input name="qty" type="number" style="max-width:5em" value="${esc(x.qty)}"><input name="cost" type="number" inputmode="decimal" style="max-width:8em" value="${esc(x.cost)}"></div>`).join('')}</div>
       <div class="sub"><b>${esc(t('supplierTotal'))}:</b> <span class="ltr">${esc(Office.money(q.sum))}</span>${q.total && q.total !== q.sum ? ` · ${esc(t('statedTotal'))} <span class="ltr">${esc(Office.money(q.total))}</span>` : ''} · <b>${esc(t('clientTotal'))}:</b> <span class="ltr" id="ct"></span></div>

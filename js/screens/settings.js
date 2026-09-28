@@ -4,6 +4,7 @@ import { db } from '../store.js';
 import { esc, field, toast, confirmDialog, dialog, pickContacts, contactsSupported } from '../ui.js';
 import { parseContactsFile } from '../logic/contacts.js';
 import { importContacts } from '../contactsImport.js';
+import { templates, removeTemplate } from '../logic/templates.js';
 import { TASK } from '../logic/extra.js';
 import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_PAYMENTS, SEED_CASES } from '../data/seedContacts.js';
 import { travelLine } from '../logic/travel.js';
@@ -38,6 +39,9 @@ export function render({ root }) {
         ${field('autoSpeak', t('autoSpeak'), s.autoSpeak || 'off', { type: 'select', options: [['off', t('autoSpeakOff')], ['on', t('autoSpeakOn')]] })}
       </div>
       ${field('signer', t('signer'), s.signer || DEFAULTS.signer, { type: 'textarea', rows: 2 })}
+      <h2>${esc(t('templatesTitle'))}</h2>
+      <p class="hint">${esc(t('templatesHint'))}</p>
+      <div class="list">${templates(db).map(tp => `<div class="card" data-tpl="${esc(tp.name)}"><div class="row between"><span class="title">${esc(tp.name)}</span><button type="button" class="btn sm ghost" data-del>${esc(t('delete'))}</button></div><div class="sub" style="white-space:pre-wrap">${esc(tp.text)}</div></div>`).join('') || `<p class="hint">${esc(t('noTemplates'))}</p>`}</div>
       <h2>${esc(t('biz'))}</h2>
       <div class="grid2">
         ${field('bizName', t('name'), s.bizName || DEFAULTS.bizName)}
@@ -83,6 +87,7 @@ export function render({ root }) {
     <section class="sec"><h2>${esc(t('demo'))}</h2><div class="row"><button class="btn" id="seed">${esc(t('loadSeed'))}</button></div><div class="row"><button class="btn" id="demo">${esc(t('loadDemo'))}</button><button class="btn danger" id="clear">${esc(t('clearAll'))}</button></div></section>
     <p class="hint sec">${esc(t('install'))}</p>`;
 
+  root.querySelectorAll('[data-tpl]').forEach(el => { el.querySelector('[data-del]').onclick = async () => { if (await confirmDialog(t('delete') + ' "' + el.dataset.tpl + '"?')) { removeTemplate(db, el.dataset.tpl); render({ root }); } }; });
   root.querySelector('#f').onsubmit = e => {
     e.preventDefault();
     const o = {}; new FormData(e.target).forEach((v, k) => { o[k] = String(v).trim(); });

@@ -116,3 +116,13 @@ test('without any marker, everything after the number or the name is the message
   assert.ok(c.to.group); assert.equal(c.body, 'schedule sent');
   assert.equal(parseCommand('שלחי אישור ניהול חשבון ל-052-1234567', [{ id: 'd', title: 'אישור ניהול חשבון', aliases: [] }], people).kind, 'send');
 });
+
+test('the supplier behind a shared offer is guessed from a phone, a mail domain, or a name in the text', async () => {
+  const { guessSupplier } = await import('../js/logic/commands.js');
+  const sups = [{ id: 'a', name: 'מלון דניאל הרצליה (תמרס)', contact: 'ארבל גבילי', email: 'Arbel.Gvili@tamareshotels.co.il', phone: '' }, { id: 'b', name: 'ביסקוטי', contact: 'עינת', phone: '050-2204686' }, { id: 'c', name: 'גרשון טורס', contact: 'אורית', email: 'acc@gershon-tours.co.il' }];
+  assert.equal(guessSupplier('היי, מצורפת הצעה. עינת 0502204686', sups).id, 'b');
+  assert.equal(guessSupplier('From: Maggie.Levy@tamareshotels.co.il\n16 rooms 450 per night', sups).id, 'a');
+  assert.equal(guessSupplier('שלום וירג׳יני, מדברת ארבל ממלון דניאל. הצעה ל-16 חדרים', sups).id, 'a');
+  assert.equal(guessSupplier('הצעה לאוטובוס 19-24/11: 3,200 ליום, גרשון טורס', sups).id, 'c');
+  assert.equal(guessSupplier('הצעה למלון 16 חדרים 450 שח', sups), null);
+});

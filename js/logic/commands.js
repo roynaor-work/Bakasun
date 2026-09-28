@@ -25,6 +25,27 @@ function findPerson(text, people) {
   return bp ? { name: bp.label, phone: bp.phone, email: bp.email, about: bp.about, id: bp.id } : null;
 }
 
+/** The supplier an offer came from, guessed from the text: a phone number, an e-mail domain, or the supplier's or contact's name. */
+export function guessSupplier(text, suppliers) {
+  const t = str(text); const list = suppliers || [];
+  const phones = [...t.matchAll(/(?:\+972[\s\-]?|0)5\d[\s\-]?\d{3}[\s\-]?\d{4}/g)].map(m => phoneDigits(m[0]));
+  for (const p of phones) { const hit = list.find(s => s.phone && phoneDigits(s.phone) === p); if (hit) return hit; }
+  const mails = [...t.matchAll(/[A-Za-z0-9._%+\-]+@([A-Za-z0-9.\-]+\.[A-Za-z]{2,})/g)];
+  for (const m of mails) { const dom = m[1].toLowerCase(); const hit = list.find(s => s.email && s.email.toLowerCase().indexOf('@' + dom) >= 0 && !/gmail|walla|hotmail|outlook|yahoo/.test(dom)); if (hit) return hit; }
+  const hay = Office.normHe(t); let best = null, bl = 0;
+  list.forEach(s => {
+    const name = Office.normHe(s.name || ''), contact = Office.normHe(s.contact || '');
+    // the full name, its first two words ("מלון דניאל"), the contact's full and first name, and any alias
+    const cands = [name, name.split(' ').slice(0, 2).join(' '), contact, contact.split(' ')[0]].concat(String(s.aliases || '').split(/[,;]+/).map(x => Office.normHe(x || '')));
+    cands.filter(k => k && k.length >= 3).forEach(k => {
+      const core = k.replace(/^(?:מלון|הוטל|hotel|hôtel|מסעדת|מסעדה)\s+/, '');
+      if (hay.indexOf(k) >= 0 && k.length > bl) { best = s; bl = k.length; }
+      else if (core.length >= 4 && hay.indexOf(core) >= 0 && core.length > bl) { best = s; bl = core.length; }
+    });
+  });
+  return best;
+}
+
 /** What a command asks for: {kind: 'send'|'message'|'contact'|'invoice'|'supplierQuote'|'unknown', doc, to: {phone|email|name}} */
 // "build me a quote for X", "new lead: ...", "ask quotes from hotels for X", "open X", "call X", "task for X: ...", "note on X: ...", "what is today"
 const ACTIONS = [
