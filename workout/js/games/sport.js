@@ -15,53 +15,80 @@ const dragShot = (r, getOrigin, onShoot, maxLen = 150) => {
   };
 };
 
-// ---- פנדלים: הבועט רץ לכדור, כדור תלת-ממדי, שאגה אחרי כל שער, השוער צוחק על החטאה וחוזר למרכז לפני כל בעיטה ----
-G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'נוגעים איפה בשער לבעוט. הבועט רץ ובועט, השוער קופץ לצד שהוא מנחש. פינות = קשה לו יותר. רצף שערים מכפיל נקודות.',
-  make(r) {
+// ---- פנדלים: 9 אזורים בשער (שמאל/אמצע/ימין × למעלה/אמצע/למטה). השוער בוחר צד וגובה, ועוצר רק אם שניהם נכונים.
+// אותו מנוע משמש גם את "אני השוער": שם הילד בוחר לאן לקפוץ והבועט הוא המחשב. ----
+function penaltyGame(role) {
+  return function make(r) {
     const goal = { x: 40, y: 70, w: 280, h: 120 }, GL = goal.y + goal.h, BX = r.W / 2, BY = r.H - 90;
-    // phase: 'aim' (מחכים למגע), 'run' (הבועט רץ), 'fly' (הכדור בדרך), 'after' (תוצאה)
-    let phase = 'aim', ph = 0, shot = null, gk = { x: BX, pose: 'ready', dive: 0, reach: 1, laugh: 0 }, msg = '', streak = 0, tt = 0, goals = 0, rot = 0, bulge = 0, ready = 1;
+    const colOf = x => x < goal.x + goal.w / 3 ? -1 : x > goal.x + goal.w * 2 / 3 ? 1 : 0, rowOf = y => y < goal.y + goal.h / 3 ? 0 : y > goal.y + goal.h * 2 / 3 ? 2 : 1;
+    const zoneCenter = (c, rw) => [goal.x + goal.w / 2 + c * goal.w / 3, goal.y + goal.h / 6 + rw * goal.h / 3];
+    // phase: 'aim' (מחכים לבחירה), 'run' (הבועט רץ), 'fly' (הכדור בדרך), 'after' (תוצאה)
+    let phase = 'aim', ph = 0, shot = null, gk = { x: BX, dy: 0, col: 0, row: 1, dive: false, laugh: 0, reach: 1 }, msg = '', streak = 0, tt = 0, goals = 0, saves = 0, rot = 0, bulge = 0, ready = 1, pick = null, kicks = 0;
     const fans = r.crowdGen(16, r.W, 2, 14, 20);
-    const resetBall = () => { phase = 'aim'; ph = 0; shot = null; gk.dive = 0; ready = 0; };
+    const resetBall = () => { phase = 'aim'; ph = 0; shot = null; pick = null; gk.dive = false; gk.dy = 0; ready = 0; };
+    // השוער בוחר צד וגובה. ככל שיש יותר שערים הוא חכם יותר
+    const keeperGuess = (col, row) => { const smart = Math.min(0.85, 0.6 + goals * 0.04); const c = Math.random() < smart ? col : r.pick([-1, 0, 1].filter(v => v !== col)); const rw = Math.random() < 0.55 ? row : r.pick([0, 1, 2].filter(v => v !== row)); return { col: c, row: rw, reach: r.rnd(0.5 + Math.min(0.3, goals * 0.03), 1) }; };
+    const startKick = (tx, ty) => { shot = { tx, ty, col: colOf(tx), row: rowOf(ty) }; phase = 'run'; ph = 0; kicks++; };
+    // תוצאה: השוער עוצר אם הצד והגובה נכונים (בשורה סמוכה יש לו 35% להגיע)
+    const keeperStops = () => { if (gk.col !== shot.col) return false; if (gk.row === shot.row) return gk.reach > .5 || Math.abs(shot.tx - BX) < 100; return Math.abs(gk.row - shot.row) === 1 && Math.random() < .35; };
     return {
-      tap(x, y) { if (phase !== 'aim' || ready < 1) return; let tx = r.clamp(x, 20, r.W - 20), ty = r.clamp(y, 40, r.H - 220);
-        // קרוב לפינה = מסוכן: פיזור אקראי גדל ככל שמתקרבים לקורה, אז לפעמים פוגעים בקורה או מחטיאים
-        const edge = Math.min(Math.abs(tx - goal.x), Math.abs(tx - goal.x - goal.w), Math.abs(ty - goal.y)); const wobble = edge < 40 ? (40 - edge) * .55 : 0; tx += r.rnd(-wobble, wobble); ty += r.rnd(-wobble, wobble);
-        shot = { tx, ty }; phase = 'run'; ph = 0;
-        // השוער מנחש: 60% לצד הנכון, בפינות הוא מגיע רק ב-45%
-        const side = shot.tx < BX ? -1 : 1; const smart = Math.min(0.85, 0.6 + goals * 0.04); const dir = Math.random() < smart ? side : -side; gk.dive = dir; gk.reach = r.rnd(0.45 + Math.min(0.3, goals * 0.03), 1); }, /* השוער לומד: כל שער הוא מנחש טוב יותר ומגיע רחוק יותר */
+      tap(x, y) { if (phase !== 'aim' || ready < 1) return;
+        if (role === 'kicker') { let tx = r.clamp(x, 20, r.W - 20), ty = r.clamp(y, 40, r.H - 220); const edge = Math.min(Math.abs(tx - goal.x), Math.abs(tx - goal.x - goal.w), Math.abs(ty - goal.y)); const wobble = edge < 40 ? (40 - edge) * .55 : 0; tx += r.rnd(-wobble, wobble); ty += r.rnd(-wobble, wobble); startKick(tx, ty); const g = keeperGuess(shot.col, shot.row); gk.col = g.col; gk.row = g.row; gk.reach = g.reach; }
+        else { // אני השוער: הבועט כבר רץ, לוחצים על אזור בשער כדי לקפוץ אליו
+          if (y > GL + 10 || y < goal.y - 30) return; pick = { col: colOf(r.clamp(x, goal.x, goal.x + goal.w)), row: rowOf(r.clamp(y, goal.y, GL)) }; gk.col = pick.col; gk.row = pick.row; gk.reach = 1; } },
+      down(x, y) { if (role === 'keeper' && (phase === 'run' || (phase === 'fly' && ph < .22)) && !pick && y < GL + 10 && y > goal.y - 30) { /* אפשר לבחור גם רגע אחרי הבעיטה (תגובה מאוחרת) */ pick = { col: colOf(r.clamp(x, goal.x, goal.x + goal.w)), row: rowOf(r.clamp(y, goal.y, GL)) }; gk.col = pick.col; gk.row = pick.row; gk.reach = 1; } },
       update(dt) { tt += dt; bulge = Math.max(0, bulge - dt * 1.4); gk.laugh = Math.max(0, gk.laugh - dt);
-        if (phase === 'aim') { ready = Math.min(1, ready + dt * 1.6); gk.x += (BX - gk.x) * Math.min(1, dt * 6); if (Math.abs(gk.x - BX) < 2) gk.x = BX; if (gk.laugh <= 0) gk.pose = 'ready'; return; }
+        if (phase === 'aim') { ready = Math.min(1, ready + dt * 1.6); gk.x += (BX - gk.x) * Math.min(1, dt * 6); if (Math.abs(gk.x - BX) < 2) gk.x = BX;
+          // אני השוער: כשהשוער חזר למרכז, המחשב בועט. פינות שכיחות יותר
+          if (role === 'keeper' && ready >= 1) { const col = r.pick([-1, -1, 1, 1, 0]), row = r.pick([0, 1, 2, 2, 0]); const [zx, zy] = zoneCenter(col, row); startKick(zx + r.rnd(-25, 25), zy + r.rnd(-12, 12)); gk.col = 0; gk.row = 1; gk.reach = 1; pick = null; }
+          return; }
         ph += dt;
-        if (phase === 'run') { if (ph >= .55) { phase = 'fly'; ph = 0; gk.pose = gk.dive < 0 ? 'diveL' : 'diveR'; r.sfx('bounce'); } return; }
-        if (phase === 'fly') { const k = Math.min(1, ph / .5); rot += dt * 14; if (gk.dive) gk.x = r.clamp(gk.x + gk.dive * 340 * dt * gk.reach, goal.x + 30, goal.x + goal.w - 30);
-          if (k >= 1) { const post = (Math.abs(shot.tx - goal.x) < 9 || Math.abs(shot.tx - goal.x - goal.w) < 9) && shot.ty > goal.y - 6 && shot.ty < GL || (Math.abs(shot.ty - goal.y) < 8 && shot.tx > goal.x - 6 && shot.tx < goal.x + goal.w + 6); const inGoal = !post && shot.tx > goal.x + 8 && shot.tx < goal.x + goal.w - 8 && shot.ty > goal.y + 6 && shot.ty < GL; const nearGk = Math.abs(gk.x - shot.tx) < 46 && shot.ty > goal.y + 8; const corner = Math.abs(shot.tx - BX) > 100 || shot.ty < goal.y + 40;
-            if (inGoal && !nearGk) { streak++; goals++; const pts = 10 * Math.min(3, streak) + (corner ? 5 : 0) + Math.floor(goals / 3) * 5; r.addScore(pts); r.pop('+' + pts, shot.tx, shot.ty - 20, '#FDE047', 28); r.burst(shot.tx, shot.ty, '#fff', 20, 260); r.sfx('goal'); msg = streak >= 3 ? `גול! רצף ${streak} 🔥` : 'גוווול! ⚽'; bulge = 1; }
-            else { streak = 0; msg = post ? 'קורה! 😱' : inGoal ? 'השוער עצר! 🧤' : 'החוצה... 😂'; if (post) { r.sfx('post'); r.shake(220); r.burst(shot.tx, shot.ty, '#fff', 14, 220); shot.bounce = { x: shot.tx, y: shot.ty, vx: (shot.tx < BX ? -1 : 1) * r.rnd(120, 220), vy: r.rnd(-60, 160), stuck: Math.random() < .25 }; } else if (inGoal) { r.sfx('hit'); shot.bounce = { x: gk.x + (shot.tx < gk.x ? -20 : 20), y: shot.ty, vx: (shot.tx < gk.x ? -1 : 1) * r.rnd(140, 260), vy: r.rnd(-80, 40), stuck: false }; } else r.sfx('laugh'); if (!inGoal) { r.sfx('ohh'); setTimeout(() => r.sfx('laugh'), 450); setTimeout(() => r.sfx('laugh'), 1000); } gk.pose = inGoal && !post ? 'up' : 'ready'; gk.laugh = 1.5; if (inGoal) r.shake(180); }
-            if (msg.startsWith('ג')) gk.pose = gk.dive < 0 ? 'lyingL' : 'lyingR'; // נוחת על הדשא אחרי שהכדור נכנס
+        if (phase === 'run') { if (ph >= (role === 'keeper' ? 1.0 : .55)) { phase = 'fly'; ph = 0; gk.dive = true; r.sfx('bounce'); } return; }
+        if (phase === 'fly') { const k = Math.min(1, ph / .5); rot += dt * 14;
+          if (gk.dive) { const targetX = BX + gk.col * 92 * gk.reach, targetDy = gk.col === 0 ? [-40, 0, 12][gk.row] : [-34, -6, 14][gk.row]; gk.x += (targetX - gk.x) * Math.min(1, dt * 7); gk.dy += (targetDy - gk.dy) * Math.min(1, dt * 7); }
+          if (k >= 1) { const post = (Math.abs(shot.tx - goal.x) < 9 || Math.abs(shot.tx - goal.x - goal.w) < 9) && shot.ty > goal.y - 6 && shot.ty < GL || (Math.abs(shot.ty - goal.y) < 8 && shot.tx > goal.x - 6 && shot.tx < goal.x + goal.w + 6); const inGoal = !post && shot.tx > goal.x + 8 && shot.tx < goal.x + goal.w - 8 && shot.ty > goal.y + 6 && shot.ty < GL; const stopped = inGoal && keeperStops(); const corner = shot.col !== 0 && shot.row !== 1;
+            if (role === 'kicker') {
+              if (inGoal && !stopped) { streak++; goals++; const pts = 10 * Math.min(3, streak) + (corner ? 5 : 0) + Math.floor(goals / 3) * 5; r.addScore(pts); r.pop('+' + pts, shot.tx, shot.ty - 20, '#FDE047', 28); r.burst(shot.tx, shot.ty, '#fff', 20, 260); r.sfx('goal'); msg = streak >= 3 ? `גול! רצף ${streak} 🔥` : 'גוווול! ⚽'; bulge = 1; }
+              else { streak = 0; msg = post ? 'קורה! 😱' : inGoal ? 'השוער עצר! 🧤' : 'החוצה... 😂'; if (post) { r.sfx('post'); r.shake(220); r.burst(shot.tx, shot.ty, '#fff', 14, 220); shot.bounce = { x: shot.tx, y: shot.ty, vx: (shot.tx < BX ? -1 : 1) * r.rnd(120, 220), vy: r.rnd(-60, 160), stuck: Math.random() < .25 }; } else if (inGoal) { r.sfx('hit'); shot.bounce = { x: gk.x + (shot.tx < gk.x ? -20 : 20), y: shot.ty, vx: (shot.tx < gk.x ? -1 : 1) * r.rnd(140, 260), vy: r.rnd(-80, 40), stuck: false }; } else r.sfx('laugh'); if (!inGoal) { r.sfx('ohh'); setTimeout(() => r.sfx('laugh'), 450); } gk.laugh = 1.5; if (inGoal) r.shake(180); }
+            } else { // אני השוער: עצירה = נקודות
+              if (inGoal && !stopped) { streak = 0; goals++; msg = 'גול נגדך... 😬'; bulge = 1; r.sfx('ohh'); }
+              else if (stopped) { streak++; saves++; const pts = 10 * Math.min(3, streak) + (corner ? 5 : 0) + Math.floor(saves / 3) * 5; r.addScore(pts); r.pop('עצירה! +' + pts, gk.x, GL - 90, '#FDE047', 28); r.burst(gk.x, GL - 60, '#fff', 20, 260); r.sfx('roar'); msg = streak >= 3 ? `עצירה! רצף ${streak} 🧤🔥` : 'עצירה! 🧤'; r.shake(160); shot.bounce = { x: gk.x + (shot.tx < gk.x ? -20 : 20), y: shot.ty, vx: (shot.tx < gk.x ? -1 : 1) * r.rnd(140, 260), vy: r.rnd(-80, 40), stuck: false }; }
+              else { const pts = 5; r.addScore(pts); msg = post ? 'קורה! מזל 😅 +5' : 'החוצה! +5'; if (post) { r.sfx('post'); shot.bounce = { x: shot.tx, y: shot.ty, vx: (shot.tx < BX ? -1 : 1) * r.rnd(120, 220), vy: r.rnd(-60, 160), stuck: false }; } else r.sfx('score'); }
+            }
             phase = 'after'; ph = 0; } return; }
         if (phase === 'after' && shot.bounce && !shot.bounce.stuck) { const b = shot.bounce; b.vy += 520 * dt; b.x += b.vx * dt; b.y += b.vy * dt; if (b.y > GL + 30 && b.vy > 0) { b.y = GL + 30; b.vy = -b.vy * .45; b.vx *= .8; if (Math.abs(b.vy) > 40) r.sfx('bounce'); } }
         if (phase === 'after' && ph > 1.5) resetBall(); },
       draw() { r.clear('#15803D'); for (let i = 0; i < 6; i++) r.rect(0, 200 + i * 60, r.W, 30, '#16A34A');
-        r.rect(0, 0, r.W, goal.y - 4, '#1F2937'); r.crowd(fans, tt, phase === 'after' && msg.startsWith('ג'));
+        r.rect(0, 0, r.W, goal.y - 4, '#1F2937'); r.crowd(fans, tt, phase === 'after' && (role === 'kicker' ? msg.startsWith('ג') : msg.startsWith('עצירה')));
         // שער עם עומק: רשת אחורית מתנפחת בשער
         const d = 18; r.rect(goal.x, goal.y, goal.w, goal.h, 'rgba(15,23,42,.45)'); const c = r.ctx; c.save(); c.strokeStyle = '#ffffffaa'; c.lineWidth = 1; for (let i = 0; i <= 16; i++) { const x0 = goal.x + d + (goal.w - 2 * d) * i / 16; c.beginPath(); c.moveTo(x0, goal.y + d * .6); if (bulge > 0 && shot) { const dd = Math.abs(x0 - shot.tx), off = Math.max(0, 1 - dd / 70) * 12 * bulge * Math.abs(Math.cos(tt * 14)); c.quadraticCurveTo(x0 + (x0 > shot.tx ? off : -off), (goal.y + GL) / 2 + off, x0, GL); } else c.lineTo(x0, GL); c.stroke(); } for (let j = 0; j <= 7; j++) { const yy = goal.y + d * .6 + (goal.h - d * .6) * j / 7; c.beginPath(); c.moveTo(goal.x + d, yy); c.lineTo(goal.x + goal.w - d, yy); c.stroke(); } c.strokeStyle = '#ffffff55'; for (let i = 0; i <= 6; i++) { const k = i / 6; c.beginPath(); c.moveTo(goal.x, goal.y + goal.h * k); c.lineTo(goal.x + d, goal.y + d * .6 + (goal.h - d * .6) * k); c.stroke(); c.beginPath(); c.moveTo(goal.x + goal.w, goal.y + goal.h * k); c.lineTo(goal.x + goal.w - d, goal.y + d * .6 + (goal.h - d * .6) * k); c.stroke(); } c.restore();
+        // אני השוער: 9 האזורים מסומנים בעדינות בזמן הריצה, והבחירה מודגשת
+        if (role === 'keeper' && (phase === 'run' || phase === 'fly')) { for (let ci = -1; ci <= 1; ci++) for (let ri = 0; ri < 3; ri++) { const [zx, zy] = zoneCenter(ci, ri); const mine = pick && pick.col === ci && pick.row === ri; r.rect(zx - goal.w / 6 + 3, zy - goal.h / 6 + 3, goal.w / 3 - 6, goal.h / 3 - 6, mine ? 'rgba(253,224,71,.5)' : 'rgba(255,255,255,.16)', 6); r.ctx.strokeStyle = mine ? '#FDE047' : 'rgba(255,255,255,.5)'; r.ctx.lineWidth = mine ? 3 : 1.5; r.ctx.strokeRect(zx - goal.w / 6 + 3, zy - goal.h / 6 + 3, goal.w / 3 - 6, goal.h / 3 - 6); } if (!pick && phase === 'run') r.text('לאן לקפוץ? לוחצים בשער!', r.W / 2, GL + 40, { size: 18, color: '#FDE047' }); }
         r.line(goal.x, goal.y, goal.x + goal.w, goal.y, '#fff', 6); r.line(goal.x, goal.y, goal.x, GL, '#fff', 6); r.line(goal.x + goal.w, goal.y, goal.x + goal.w, GL, '#fff', 6);
-        r.rect(0, GL, r.W, 4, '#fff'); r.ctx.fillStyle = 'rgba(255,255,255,.35)'; r.ctx.beginPath(); r.ctx.ellipse(BX, BY + 6, 9, 3, 0, 0, Math.PI * 2); r.ctx.fill(); // נקודת הפנדל: סימון עדין
-        // השוער: צוחק כשהבועט מחטיא (קופץ ומנענע), חוזר למרכז לפני כל בעיטה
-        const laughing = gk.laugh > 0 && (msg.startsWith('החוצה') || msg.startsWith('קורה')); const air = phase === 'fly' ? Math.sin(Math.min(1, ph / .5) * Math.PI) * 26 : 0; const gy = GL - 2 - air - (laughing ? Math.abs(Math.sin(tt * 14)) * 10 : 0); r.player(GK[gk.pose], gk.x, gy, 0.62, KITS.keeper, { happy: gk.pose !== 'diveL' && gk.pose !== 'diveR' }); if (laughing) r.text('חה חה חה!', gk.x, GL - 100, { size: 18, color: '#fff' });
-        if (phase === 'aim' && ready < 1) r.text('השוער מתמקם...', r.W / 2, GL + 40, { size: 14, color: '#bbf7d0' });
+        r.rect(0, GL, r.W, 4, '#fff'); r.ctx.fillStyle = 'rgba(255,255,255,.35)'; r.ctx.beginPath(); r.ctx.ellipse(BX, BY + 6, 9, 3, 0, 0, Math.PI * 2); r.ctx.fill();
+        // השוער: פוזה לפי צד וגובה. צוחק כשהבועט מחטיא (רק כשאני הבועט), שוכב אחרי שער
+        const laughing = role === 'kicker' && gk.laugh > 0 && (msg.startsWith('החוצה') || msg.startsWith('קורה'));
+        let pose = GK.ready; if (gk.dive || phase === 'after') { const dl = gk.col < 0, side = gk.col === 0 ? null : (dl ? 'L' : 'R'); if (phase === 'after' && msg.startsWith('ג') && side) pose = dl ? GK.lyingL : GK.lyingR; else if (side) pose = GK[`dive${side}${['H', '', 'L'][gk.row]}`] || GK[`dive${side}`]; else pose = gk.row === 0 ? GK.up : gk.row === 2 ? GK.crouch : GK.ready; }
+        if (phase === 'aim') pose = laughing ? GK.ready : GK.ready;
+        const air = phase === 'fly' && gk.col !== 0 ? Math.sin(Math.min(1, ph / .5) * Math.PI) * 26 : 0; const gy = GL - 2 - air + (phase === 'fly' || phase === 'after' ? gk.dy : 0) - (laughing ? Math.abs(Math.sin(tt * 14)) * 10 : 0);
+        r.player(pose, gk.x, gy, 0.62, KITS.keeper, { happy: role === 'keeper' ? !(phase === 'after' && msg.startsWith('גול')) : !gk.dive }); if (laughing) r.text('חה חה חה!', gk.x, GL - 100, { size: 18, color: '#fff' });
+        if (phase === 'aim' && ready < 1) r.text(role === 'keeper' ? 'הבועט מתכונן...' : 'השוער מתמקם...', r.W / 2, GL + 40, { size: 14, color: '#bbf7d0' });
         // הבועט: רץ מהצד אל הכדור ובועט
-        let px = BX - 110, py = BY + 30, pose = POSE.stand; if (phase === 'run') { const k = ph / .55; px = BX - 110 + 84 * k; py = BY + 30 - 8 * Math.sin(k * Math.PI); pose = POSE.run[Math.floor(k * 6) % POSE.run.length][0]; } else if (phase === 'fly' || (phase === 'after' && ph < .4)) { px = BX - 26; py = BY + 30; pose = POSE.leap; } else if (phase === 'after') { px = BX - 26; py = BY + 30 - (msg.startsWith('ג') ? Math.abs(Math.sin(tt * 8)) * 22 : 0); pose = msg.startsWith('ג') ? POSE.armsUp : POSE.stand; }
-        r.player(pose, px, py, 0.55, KITS.blue);
-        // הכדור: על הנקודה, בטיסה (מתקטן, מסתובב, צל), או ברשת
+        let px = BX - 110, py = BY + 30, kpose = POSE.stand; const runDur = role === 'keeper' ? 1.0 : .55;
+        if (phase === 'run') { const k = ph / runDur; px = BX - 110 + 84 * k; py = BY + 30 - 8 * Math.sin(k * Math.PI); kpose = POSE.run[Math.floor(k * 6) % POSE.run.length][0]; } else if (phase === 'fly' || (phase === 'after' && ph < .4)) { px = BX - 26; py = BY + 30; kpose = POSE.leap; } else if (phase === 'after') { const scored = role === 'kicker' ? msg.startsWith('ג') : msg.startsWith('גול'); px = BX - 26; py = BY + 30 - (scored ? Math.abs(Math.sin(tt * 8)) * 22 : 0); kpose = scored ? POSE.armsUp : POSE.stand; }
+        r.player(kpose, px, py, 0.55, role === 'keeper' ? KITS.red : KITS.blue);
+        // הכדור: על הנקודה, בטיסה (מתקטן, מסתובב, צל), ברשת, או נהדף
         if (phase === 'fly') { const k = Math.min(1, ph / .5); const bx = BX + (shot.tx - BX) * k, by = BY + (shot.ty - BY) * k - Math.sin(k * Math.PI) * 40; SP.groundShadow(r, bx, BY + (GL + 4 - BY) * k, 16 - k * 8, BY + (GL + 4 - BY) * k - by); SP.soccer(r, bx, by, 16 - k * 8, rot); }
         else if (phase === 'after') { if (msg.startsWith('ג')) SP.soccer(r, shot.tx, shot.ty + Math.min(20, ph * 40), 8, rot); else if (shot.bounce) { const b = shot.bounce; if (!b.stuck) rot += .12; SP.groundShadow(r, b.x, GL + 32, 9, Math.max(0, GL + 30 - b.y)); SP.soccer(r, b.x, b.y, b.stuck ? 8 : 9, rot); } }
         else { SP.groundShadow(r, BX, BY + 2, 16, 0); SP.soccer(r, BX, BY, 16, rot); }
         if (streak > 1 && phase === 'aim') r.text(`רצף: ${streak} 🔥`, r.W / 2, r.H - 30, { size: 18, color: '#FDE047' });
+        if (role === 'keeper') r.text(`עצירות ${saves} · שערים ${goals}`, r.W / 2, r.H - 12, { size: 13, color: '#bbf7d0' });
         if (phase === 'after') r.text(msg, r.W / 2, r.H / 2 + 20, { size: 32, color: '#FDE047' }); },
     };
-  } });
+  };
+}
+G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'נוגעים איפה בשער לבעוט: שמאל, אמצע או ימין, ולמעלה, אמצע או למטה. השוער מנחש צד וגובה, ועוצר רק אם ניחש את שניהם. פינות = בונוס, אבל אפשר לפגוע בקורה. רצף שערים מכפיל נקודות.', make: penaltyGame('kicker') });
+G.push({ id: 'keeper', name: 'אני השוער', emoji: '🧤', how: 'הבועט רץ לכדור. לוחצים על אחד מתשעת האזורים בשער כדי לקפוץ אליו לפני הבעיטה. עצירה = נקודות, רצף עצירות מכפיל. לא לחצת? השוער נשאר באמצע.', make: penaltyGame('keeper') });
 
 // ---- כדורסל ----
 G.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀', how: 'גוררים מהכדור אחורה ומשחררים כדי לזרוק. הסל זז אחרי כל קליעה. סוויש (בלי לגעת בברזל) = בונוס.',

@@ -136,7 +136,7 @@ test('every program has push-ups and a core exercise; unlock credits; ranks', as
     assert.ok(ids.includes('push-ups') || ids.includes('knee-push-ups'), p.id + ' push-ups');
     assert.ok(ids.some(id => CORE.has(id)), p.id + ' core');
   }
-  assert.equal(L.unlockCredits(0, 5, 10), 0); assert.equal(L.unlockCredits(10, 5, 10), 5); assert.equal(L.unlockCredits(23, 8, 10), 7); assert.equal(L.unlockCredits(50, 5, 0), 0);
+  const S0 = L.START_GAMES.length; assert.equal(S0, 6); assert.equal(L.unlockCredits(0, S0, 10), 0); assert.equal(L.unlockCredits(10, S0, 10), 5); assert.equal(L.unlockCredits(23, S0 + 3, 10), 7); assert.equal(L.unlockCredits(50, S0, 0), 0);
   assert.equal(L.nextUnlockIn(7, 10), 3);
   assert.equal(L.rankOf(0).name, 'מתחיל'); assert.equal(L.rankOf(26).name, 'אלוף'); assert.equal(L.rankOf(26).toNext, 14); assert.equal(L.rankOf(100).next, undefined);
   assert.ok(L.perseveranceLine({ thisWeek: 3, streak: 3, workouts: 10 }).includes('השלישי'));

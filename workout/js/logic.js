@@ -170,7 +170,7 @@ export function bbStats(sessions) {
 export const isWorkBlock = name => name !== 'חימום' && name !== 'מתיחות';
 
 // פתיחת משחקים בהדרגה: מתחילים עם START_GAMES, ועל כל unlockEvery אימונים בוחרים עוד PICKS
-export const START_GAMES = ['tetris', 'snake', 'penalty', 'moles', 'flappy'];
+export const START_GAMES = ['tetris', 'snake', 'penalty', 'keeper', 'moles', 'flappy'];
 export const PICKS = 5;
 export function unlockCredits(workouts, unlockedCount, unlockEvery = 10) {
   if (!unlockEvery) return 0;

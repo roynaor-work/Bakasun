@@ -11,6 +11,8 @@ function load() {
     const prof = { ...DEFAULTS.profile, ...(d.profile || {}) };
     // יחס משחק/אימון חדש (28/09): מי שעדיין על ברירות המחדל הישנות עובר לחדשות
     if (!prof.ratioV2) { if (prof.giftEvery === 1) prof.giftEvery = 2; if (prof.gameSeconds === 90) prof.gameSeconds = 60; prof.ratioV2 = true; }
+    // משחק "אני השוער" (29/09) פתוח מההתחלה גם למי שכבר פתח משחקים
+    if (d.games && Array.isArray(d.games.unlocked) && !d.games.unlocked.includes('keeper')) d.games.unlocked.push('keeper');
     return { profile: prof, sessions: Array.isArray(d.sessions) ? d.sessions : [], tokens: d.tokens | 0, games: { ...structuredClone(DEFAULTS.games), ...(d.games || {}) },
       parent: { ...structuredClone(DEFAULTS.parent), ...(d.parent || {}) }, basketball: Array.isArray(d.basketball) ? d.basketball : [] };
   } catch { return structuredClone(DEFAULTS); }
