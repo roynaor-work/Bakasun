@@ -44,9 +44,10 @@ export function render({ root }) {
     if (!speechSupported()) { toast(t('noSpeech'), 3500); return; }
     const base = msg.value ? msg.value.replace(/\s+$/, '') + '\n' : '';
     rec.classList.add('on'); rec.querySelector('span').textContent = t('stop');
-    stopRec = listen(SPEECH[sel.value] || 'he-IL', text => { msg.value = base + text; draft.text = msg.value; }, () => {
+    stopRec = listen(SPEECH[sel.value] || 'he-IL', text => { msg.value = base + text; draft.text = msg.value; }, (said, why) => {
       stopRec = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate');
-    });
+      if (said.trim() && msg.value.trim().length > 3) { toast(t('heardRunning'), 1500); root.querySelector('#read').click(); }
+    }, { silence: 6000 });
     if (!stopRec) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
   };
 

@@ -43,13 +43,15 @@ export function render(ctx) {
   ({ command: tabCommand, invoice: tabInvoice, supplierQuote: tabSupplierQuote, docs: tabDocs }[mode])(body, s, ctx);
 }
 
-function inputBox(body, hint, ph, onRead, readLabel) {
+function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
   const s = db.settings(); const dictLang = s.dictLang || lang();
-  body.innerHTML = `<p class="hint">${esc(hint)}</p><textarea id="txt" rows="5" placeholder="${esc(ph)}">${esc(draft)}</textarea>
+  const ex = Array.isArray(examples) && examples.length ? `<details class="examples"><summary>${esc(t('cmdEx'))}</summary><div class="chips">${examples.map(x => `<button type="button" class="chip" data-ex="${esc(x)}">${esc(x)}</button>`).join('')}</div></details>` : '';
+  body.innerHTML = `<p class="hint">${esc(hint)}</p>${ex}<textarea id="txt" rows="5" placeholder="${esc(ph)}">${esc(draft)}</textarea>
     <div class="row"><button class="btn rec" id="rec" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>${esc(t('dictate'))}</span></button>
       <select id="dl">${Object.keys(SPEECH).map(k => `<option value="${k}"${k === dictLang ? ' selected' : ''}>${esc(langName(k))}</option>`).join('')}</select>
       <button class="btn primary grow" id="go" type="button">${esc(readLabel || t('read'))}</button></div><div id="out" class="stack"></div>`;
   const ta = body.querySelector('#txt'), rec = body.querySelector('#rec'), dl = body.querySelector('#dl');
+  body.querySelectorAll('[data-ex]').forEach(b => { b.onclick = () => { ta.value = b.dataset.ex; draft = ta.value; ta.focus(); const d = body.querySelector('details.examples'); if (d) d.open = false; }; });
   let stop = null;
   ta.oninput = () => { draft = ta.value; };
   dl.onchange = () => db.setting('dictLang', dl.value);
@@ -58,7 +60,10 @@ function inputBox(body, hint, ph, onRead, readLabel) {
     if (!speechSupported()) { toast(t('noSpeech'), 3500); return; }
     const base = ta.value ? ta.value.replace(/\s+$/, '') + '\n' : '';
     rec.classList.add('on'); rec.querySelector('span').textContent = t('stop');
-    stop = listen(SPEECH[dl.value] || 'he-IL', text => { ta.value = base + text; draft = ta.value; }, () => { stop = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); });
+    stop = listen(SPEECH[dl.value] || 'he-IL', text => { ta.value = base + text; draft = ta.value; }, (said, why) => {
+      stop = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate');
+      if (autoRun && said.trim() && ta.value.trim()) { toast(t('heardRunning'), 1500); onRead(ta.value, body.querySelector('#out')); }
+    }, { silence: autoRun ? 2500 : 0 });
     if (!stop) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
   };
   body.querySelector('#go').onclick = () => { if (stop) stop(); onRead(ta.value, body.querySelector('#out')); };
@@ -133,7 +138,7 @@ async function tabCommand(body, s, ctx) {
     const sh = out.querySelector('#share'); if (sh) sh.onclick = async () => { const rec = c.doc.rec || await bundledRec(c.doc.paper); if (!(await shareFile(rec, msg()))) { downloadFile(rec); toast(t('shareFallback'), 4000); } };
     const wa = out.querySelector('#wa'); if (wa) wa.onclick = () => openWhatsApp(c.to.phone, msg());
     const ml = out.querySelector('#mail'); if (ml) { ml.href = 'mailto:' + encodeURIComponent(c.to.email) + '?subject=' + encodeURIComponent((c.doc ? c.doc.title : '') + ' · ' + (s.bizName || DEFAULTS.bizName)) + '&body=' + encodeURIComponent(msg()); ml.target = '_blank'; }
-  }, t('read'));
+  }, t('read'), t('cmdExamples'), true);
   if (!lib.length && !bundledDocs().length) body.insertAdjacentHTML('afterbegin', `<p class="warnbox">${esc(t('noDocsYet'))}</p>`);
   if (ctx && ctx.autoRun) { ctx.autoRun = false; body.querySelector('#go').click(); }
   if (ctx && ctx.autoMic) { ctx.autoMic = false; body.querySelector('#rec').click(); }

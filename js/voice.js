@@ -5,12 +5,20 @@
    keep only the final result of each session, show only the latest interim, and restart until she taps stop. */
 export function speechSupported() { return !!(window.SpeechRecognition || window.webkitSpeechRecognition); }
 
-/** Starts listening in `langCode` (he-IL / fr-FR / en-US). onText(text, isFinal) is called as words arrive. Returns stop(). */
-export function listen(langCode, onText, onEnd) {
+/** Starts listening in `langCode` (he-IL / fr-FR / en-US). onText(text, isFinal) is called as words arrive.
+    opts.silence (ms): once she said something and then stayed quiet this long, listening stops by itself and
+    onEnd(text, 'silence') fires, so a command runs without another tap. Returns stop(). */
+export function listen(langCode, onText, onEnd, opts) {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) return null;
-  let finals = [], interim = '', active = true, rec = null, restarts = 0;
-  const emit = () => onText((finals.join(' ') + (interim ? ' ' + interim : '')).replace(/\s+/g, ' ').trim(), !interim);
+  const silence = opts && opts.silence > 0 ? opts.silence : 0;
+  let finals = [], interim = '', active = true, rec = null, restarts = 0, timer = null, why = 'stop';
+  const bump = () => {
+    if (!silence) return;
+    clearTimeout(timer);
+    if (finals.length) timer = setTimeout(() => { why = 'silence'; active = false; try { rec && rec.stop(); } catch (e) { /* already stopped */ } }, silence);
+  };
+  const emit = () => { onText((finals.join(' ') + (interim ? ' ' + interim : '')).replace(/\s+/g, ' ').trim(), !interim); bump(); };
   const start = () => {
     rec = new SR();
     rec.lang = langCode; rec.continuous = false; rec.interimResults = true; rec.maxAlternatives = 1;
@@ -33,10 +41,11 @@ export function listen(langCode, onText, onEnd) {
     rec.onend = () => {
       if (interim && finals[finals.length - 1] !== interim) { finals.push(interim); interim = ''; emit(); }
       if (active && restarts < 40) { restarts++; try { start(); return; } catch (e) { /* fall through */ } }
-      if (onEnd) onEnd(finals.join(' '));
+      clearTimeout(timer);
+      if (onEnd) onEnd(finals.join(' '), why);
     };
     rec.start();
   };
   try { start(); } catch (e) { return null; }
-  return () => { active = false; try { rec && rec.stop(); } catch (e) { /* already stopped */ } };
+  return () => { active = false; clearTimeout(timer); try { rec && rec.stop(); } catch (e) { /* already stopped */ } };
 }
