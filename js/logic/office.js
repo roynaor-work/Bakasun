@@ -27,7 +27,7 @@ var Office = (function () {
   var KIND_WORDS = [
     ['בר או בת מצווה', /בר[ -]?מצו|בת[ -]?מצו|ba[rt][ -]?mit[sz]va/i],
     ['חתונה', /חתונ|wedding|mariage|חופה/i],
-    ['יום גיבוש', /גיבוש|team ?building|séminaire|seminaire/i],
+    ['יום גיבוש', /גיבוש|סמינר|יום עיון|team ?building|seminar|séminaire|seminaire|retreat|off-?site/i],
     ['כנס', /כנס|כינוס|conference|congrès|congres/i],
     ['משלחת או סיור', /משלחת|סיור|טיול|delegation|tour\b|voyage|groupe de/i],
     ['אירוע לעמותה', /עמות|nonprofit|association/i],
@@ -146,11 +146,19 @@ var Office = (function () {
 
     // place: the longest locality name that appears as a word
     if (places && places.length) {
-      var best = '';
+      // "in Herzliya" beats "a bus from Tel Aviv": a place after "from" only counts when nothing else matches
+      var best = '', bestScore = -1;
+      var esc = function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); };
+      var score = function (hn, found, fromRe, inRe) {
+        if (!found) return -1;
+        var sc = hn.length; if (inRe.test(t)) sc += 100; else if (fromRe.test(t)) sc -= 100; return sc;
+      };
       places.concat(REGIONS).forEach(function (p) {
         var hn = str(p[0]).replace(/\s*\(.*\)$/, '').split(' - ')[0], en = str(p[1]).split(' - ')[0];
-        if (hn.length >= 3 && hn.length > best.length && wordIn(t, hn)) best = hn;
-        if (en.length >= 4 && en.length > best.length && new RegExp('\\b' + en.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i').test(t)) best = hn;
+        var sc = -1;
+        if (hn.length >= 3) sc = score(hn, wordIn(t, hn), new RegExp('(^|\\s)מ' + esc(hn) + '(?=\\s|$|[,.!?])'), new RegExp('(^|\\s)ב' + esc(hn) + '(?=\\s|$|[,.!?])'));
+        if (en.length >= 4) sc = Math.max(sc, score(hn, new RegExp('\\b' + esc(en) + '\\b', 'i').test(t), new RegExp('\\bfrom\\s+' + esc(en) + '\\b', 'i'), new RegExp('\\b(?:in|at|à|au)\\s+' + esc(en) + '\\b', 'i')));
+        if (sc > bestScore) { bestScore = sc; best = hn; }
       });
       out.place = best;
     }

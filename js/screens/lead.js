@@ -7,6 +7,9 @@ import Office from '../logic/office.js';
 import { PLACES } from '../data/places.js';
 import { matchClient } from '../logic/extra.js';
 import { speechSupported, listen } from '../voice.js';
+import { parseBrief } from '../logic/brief.js';
+import { SUPPLIER_TYPES } from '../data/catalog.js';
+import { supplierTypeLabel } from '../labels.js';
 
 export const noLive = true;
 let draft = { text: '', lead: null };
@@ -49,8 +52,8 @@ export function render({ root }) {
 
   root.querySelector('#read').onclick = () => {
     if (stopRec) stopRec();
-    draft.lead = Office.parseLead(msg.value, PLACES, new Date());
-    draft.lead.source = msg.value;
+    const b = parseBrief(msg.value, PLACES, new Date(), db.list('clients'));
+    draft.lead = b.lead; draft.lead.source = msg.value; draft.lead.needs = b.needs; draft.lead.tasks = b.tasks; draft.lead.days = b.days; draft.lead.rooms = b.rooms;
     drawForm(root.querySelector('#form'), draft.lead, s);
   };
   if (autoRead) setTimeout(() => root.querySelector('#read').click(), 60);
@@ -77,11 +80,14 @@ function drawForm(box, lead, s) {
       <div class="f"><span>${esc(t('fLang'))}</span><select name="lang">${langs.map(o => `<option value="${o[0]}"${o[0] === lead.lang ? ' selected' : ''}>${esc(o[1])}</option>`).join('')}</select></div>
     </div>
     <div class="f${isMissing('purpose')}"><span>${esc(t('fPurpose'))}</span><input name="purpose" value="${esc(lead.purpose)}"></div>
+    <div class="f"><span>${esc(t('needsFound'))}</span><p class="hint">${esc((lead.needs || []).length ? t('needsHint') : t('noNeeds'))}</p>
+      <div class="pick">${SUPPLIER_TYPES.map(x => `<label class="chk"><input type="checkbox" name="needs" value="${esc(x)}"${(lead.needs || []).includes(x) ? ' checked' : ''}> ${esc(supplierTypeLabel(x))}</label>`).join('')}</div></div>
+    ${(lead.tasks || []).length ? `<div class="f"><span>${esc(t('tasksFound'))}</span><div class="pick">${lead.tasks.map((x, i) => `<label class="chk"><input type="checkbox" name="tasks" value="${i}" checked> ${esc(x.title)}</label>`).join('')}</div></div>` : ''}
     <div class="row"><button class="btn primary grow" type="submit">${esc(t('saveCase'))}</button></div>
   </form>`;
   box.querySelector('#leadForm').onsubmit = e => {
     e.preventDefault();
-    const o = {}; new FormData(e.target).forEach((v, k) => { o[k] = String(v).trim(); });
+    const o = {}, needs = [], picked = []; new FormData(e.target).forEach((v, k) => { if (k === 'needs') needs.push(String(v)); else if (k === 'tasks') picked.push(+v); else o[k] = String(v).trim(); });
     const existing = matchClient({ phone: o.phone, email: o.email, client: o.client }, db.list('clients'));
     let clientId;
     if (existing) {
@@ -92,8 +98,9 @@ function drawForm(box, lead, s) {
     }
     const cs = { clientId, client: o.client || (existing && existing.name) || o.name || t('unknownClient'), contact: o.name, phone: o.phone, email: o.email,
       kind: o.kind, date: o.date, participants: o.participants, budget: o.budget, place: o.place, purpose: o.purpose, lang: o.lang,
-      status: Office.STATUS.lead, source: lead.source || '', opened: todayIso() };
+      status: Office.STATUS.lead, source: lead.source || '', opened: todayIso(), needs, days: lead.days || '', rooms: lead.rooms || '' };
     const id = db.put('cases', cs);
+    picked.forEach(i => { const tk = (lead.tasks || [])[i]; if (tk) db.put('tasks', { caseId: id, title: tk.title, who: t('me'), due: Office.iso(Office.addDays(new Date(), 1)), status: 'פתוח', lang: o.lang || 'he' }); });
     const stillMissing = Office.missingOf(cs);
     draft = { text: '', lead: null };
     toast(t('saved'));

@@ -115,7 +115,7 @@ function tabSuppliers(body, c, s) {
   const id = c.id;
   const links = db.list('links', l => l.caseId === id);
   const sups = {}; db.list('suppliers').forEach(x => { sups[x.id] = x; });
-  const recTypes = recommendedSupplierTypes(c.kind, s.recs, db.list('catalog'));
+  const recTypes = (c.needs || []).concat(recommendedSupplierTypes(c.kind, s.recs, db.list('catalog')).filter(x => !(c.needs || []).includes(x)));
   body.innerHTML = `
     <div class="row"><button class="btn primary" id="ask">${esc(t('askSuppliers'))}</button><a class="btn" href="#/assist/supplier-quote/${esc(id)}">${esc(t('cmdSupplierQuote'))}</a>${links.length ? `<button class="btn" id="change">${esc(t('changeAll'))}</button>` : ''}</div>
     ${recTypes.length ? `<p class="hint">${esc(t('recommended'))}: ${recTypes.map(x => esc(supplierTypeLabel(x))).join(' · ')}</p>` : ''}
