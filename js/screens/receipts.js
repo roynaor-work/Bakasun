@@ -60,7 +60,9 @@ async function shrink(file) {
   } catch (e) { return file; }
 }
 
-async function addFiles(list, ctx) {
+/** Photos or PDFs → receipts: shrunk, saved on the device, details asked, uploaded. Returns the ids saved. Also used for files shared from other apps. */
+export async function saveReceiptFiles(list, onUploaded) {
+  const ids = [];
   for (const f of list) {
     const small = await shrink(f);
     const r = { date: todayIso(), month: monthOf(new Date()), supplier: '', amount: '', note: '', ext: /pdf/.test(small.type) ? '.pdf' : '.jpg', size: small.size };
@@ -70,8 +72,13 @@ async function addFiles(list, ctx) {
     r.localId = localId;
     const ok = await editReceipt(db.get('receipts', id), true);
     if (ok === false) { files.remove(localId).catch(() => {}); db.remove('receipts', id); continue; }
-    upload(db.get('receipts', id)).then(() => render(ctx));
+    ids.push(id);
+    upload(db.get('receipts', id)).then(() => { if (onUploaded) onUploaded(); });
   }
+  return ids;
+}
+async function addFiles(list, ctx) {
+  await saveReceiptFiles(list, () => render(ctx));
   render(ctx);
 }
 

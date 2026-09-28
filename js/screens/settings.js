@@ -3,6 +3,7 @@ import { t, LANGS, langName } from '../i18n.js';
 import { db } from '../store.js';
 import { esc, field, toast, confirmDialog, dialog, pickContacts, contactsSupported } from '../ui.js';
 import { parseContactsFile } from '../logic/contacts.js';
+import { importContacts } from '../contactsImport.js';
 import { TASK } from '../logic/extra.js';
 import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_PAYMENTS, SEED_CASES } from '../data/seedContacts.js';
 import { travelLine } from '../logic/travel.js';
@@ -140,7 +141,7 @@ export function render({ root }) {
     else if (was) { db.setting('signer', base); db.setting('signerBackup', ''); }
     toast(t('saved')); render({ root });
   };
-  const addContacts = list => { let n = 0; const have = new Set(db.list('contacts').map(c => phoneDigits(c.phone || ''))); list.forEach(c => { const d = phoneDigits(c.phone || ''); if (!c.name && !c.phone) return; if (d && have.has(d)) return; have.add(d); db.put('contacts', { name: c.name, phone: c.phone, email: c.email }); n++; }); toast(t('imported', { n })); render({ root }); };
+  const addContacts = list => { const n = importContacts(list); toast(t('imported', { n })); render({ root }); };
   root.querySelector('#pickMany').onclick = async () => { if (!contactsSupported()) { toast(t('noPicker'), 4000); return; } const list = await pickContacts(true); if (list && list.length) addContacts(list); };
   root.querySelector('#contactsFile').onchange = async e => { const f = e.target.files[0]; if (!f) return; addContacts(parseContactsFile(f.name, await f.text())); };
   const clr = root.querySelector('#clearContacts'); if (clr) clr.onclick = async () => { if (await confirmDialog(t('clearContacts') + '?')) { db.list('contacts').forEach(c => db.remove('contacts', c.id)); render({ root }); } };

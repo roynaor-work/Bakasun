@@ -41,7 +41,7 @@ const BACK = `<a class="icon" href="#/today" aria-label="${esc(t('back'))}"><svg
 
 export function render(ctx) {
   const { root } = ctx;
-  if (ctx.id === 'supplier-quote') mode = 'supplierQuote';
+  if (ctx.id === 'supplier-quote') { mode = 'supplierQuote'; const sq = sessionStorage.getItem('bakasun.sqText'); if (sq != null) { sessionStorage.removeItem('bakasun.sqText'); draft = sq; } }
   if (ctx.id === 'from-today') { const v = sessionStorage.getItem('bakasun.ask') || ''; sessionStorage.removeItem('bakasun.ask'); mode = 'command'; draft = v; ctx.autoRun = !!v; ctx.autoMic = sessionStorage.getItem('bakasun.askMic') === '1'; sessionStorage.removeItem('bakasun.askMic'); }
   const s = db.settings();
   root.innerHTML = `<header class="top">${BACK}<h1>${esc(t('assist'))}</h1></header>

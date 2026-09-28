@@ -47,6 +47,10 @@ export const HELP = {
       'בסוף חודש: מסך "כספים" → "לשלוח לעופר" פותח מייל מוכן עם הסיכום והקישורים',
       'ספק ששולם ולא שלח חשבונית מופיע במסך היום עם תזכורת מוכנה'
     ] },
+    { title: 'שיתוף מאפליקציות אחרות', items: [
+      'בכל אפליקציה בטלפון: "שיתוף" → "באקה סאן". איש קשר מוואטסאפ נכנס לאנשי הקשר, צילום מהגלריה לקבלות, PDF לספריית המסמכים.',
+      'הודעה של ספק בוואטסאפ: לוחצים עליה, "שיתוף" → "באקה סאן" → "הצעה מספק", וההצעה נכנסת לטבלת ההשוואה בלי הקלדה.'
+    ] },
     { title: 'מצב נסיעה', items: ['הגדרות → "מצב נסיעה": מי מחליף ועד מתי. החתימה מקבלת שורה על זה, ובמסך היום יש "חפיפה למחליפה".'] }
   ],
   fr: [
@@ -96,6 +100,10 @@ export const HELP = {
       'En fin de mois : écran « Finances » → « Envoyer à Ofer » ouvre un mail prêt avec le résumé et les liens',
       'Un fournisseur payé qui n’a pas envoyé sa facture apparaît sur l’accueil avec un rappel prêt'
     ] },
+    { title: 'Partager depuis d’autres applications', items: [
+      'Dans n’importe quelle application : « Partager » → « Baka Sun ». Un contact WhatsApp va dans les contacts, une photo dans les reçus, un PDF dans les documents.',
+      'Le message d’un fournisseur sur WhatsApp : appui long, « Partager » → « Baka Sun » → « Devis fournisseur », et le devis entre dans le tableau comparatif sans rien taper.'
+    ] },
     { title: 'Mode voyage', items: ['Réglages → « Mode voyage » : qui vous remplace et jusqu’à quand. La signature le mentionne, et l’accueil a un bouton « passation ».'] }
   ],
   en: [
@@ -144,6 +152,10 @@ export const HELP = {
       '“snap a receipt”: photo, amount, filed by month in the cloud',
       'At month end: “Money” screen → “Send to Ofer” opens a ready mail with the summary and links',
       'A supplier who was paid and sent no invoice shows on Today with a ready reminder'
+    ] },
+    { title: 'Sharing from other apps', items: [
+      'In any app on the phone: “Share” → “Baka Sun”. A WhatsApp contact goes to contacts, a photo from the gallery to receipts, a PDF to the documents.',
+      'A supplier’s WhatsApp message: long press, “Share” → “Baka Sun” → “Supplier offer”, and the offer enters the comparison table with no typing.'
     ] },
     { title: 'Travel mode', items: ['Settings → “Travel mode”: who covers and until when. The signature gets a line about it, and Today has a “handover” button.'] }
   ]
