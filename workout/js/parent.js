@@ -69,6 +69,7 @@ export async function parentHome() {
         <div class="tile"><b>${st.minutes}</b>דקות</div>
       </div>
       <button class="btn primary big" data-go="#/basketball">🏀 יומן הכדורסל שלנו</button>
+      ${sessions[0]?.games?.top?.length ? `<div class="card"><h3>🏆 השיאים שלו במשחקים <span class="muted small">(${sessions[0].games.count} משחקים)</span></h3><div class="list">${sessions[0].games.top.map((t, i) => `<div class="item"><span>${['🥇', '🥈', '🥉'][i] || (i + 1)}</span><span class="grow">${t.emoji} ${esc(t.name)}</span><b>${t.best}</b></div>`).join('')}</div></div>` : ''}
       <h2>האימונים של ${esc(sessions[0]?.name || 'הילד')}</h2>
       ${sessions.length ? sessions.map((s, i) => { const sum = summarize(s); return `
         <div class="card ${s.isNew ? 'today' : ''}">

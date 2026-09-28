@@ -22,7 +22,7 @@ test('buildItems expands blocks, rounds and overrides', () => {
   assert.equal(items[0].block, 'חימום'); assert.equal(items.at(-1).block, 'מתיחות');
   assert.equal(main[0].round, 1); assert.equal(main.at(-1).round, 2); assert.equal(main[0].rounds, 2);
   const quick = programById['quick'];
-  for (const i of buildItems(quick, byId)) { assert.equal(i.type, 'time'); assert.equal(i.target, 30); }
+  for (const i of buildItems(quick, byId).filter(i => i.block === 'האימון')) { assert.equal(i.type, 'time'); assert.equal(i.target, 30); }
   // תוכנית בלי בלוקים (אימון חופשי)
   const free = buildItems({ items: ['plank', 'squats'] }, byId, 'easy');
   assert.deepEqual(free.map(i => [i.block, i.target]), [['האימון', 20], ['האימון', 11]]);
@@ -126,4 +126,19 @@ test('difficulty boost per program: +10% and harder exercises', async () => {
   assert.equal(harderOf('knee-push-ups', 2), 'pike-push-ups'); assert.equal(harderOf('burpees'), 'burpees');
   assert.equal(boostText({ boost: 1, swaps: 1 }), '+10% · תרגילים מתקדמים'); assert.equal(boostText({}), '');
   for (const [a, b] of Object.entries((await import('../workout/js/logic.js')).HARDER)) assert.ok(byId[a] && byId[b], a + '>' + b);
+});
+
+test('every program has push-ups and a core exercise; unlock credits; ranks', async () => {
+  const L = await import('../workout/js/logic.js');
+  const CORE = new Set(EXERCISES.filter(e => e.cat === 'core').map(e => e.id));
+  for (const p of PROGRAMS) {
+    const ids = p.blocks.flatMap(b => b.items);
+    assert.ok(ids.includes('push-ups') || ids.includes('knee-push-ups'), p.id + ' push-ups');
+    assert.ok(ids.some(id => CORE.has(id)), p.id + ' core');
+  }
+  assert.equal(L.unlockCredits(0, 5, 10), 0); assert.equal(L.unlockCredits(10, 5, 10), 5); assert.equal(L.unlockCredits(23, 8, 10), 7); assert.equal(L.unlockCredits(50, 5, 0), 0);
+  assert.equal(L.nextUnlockIn(7, 10), 3);
+  assert.equal(L.rankOf(0).name, 'מתחיל'); assert.equal(L.rankOf(26).name, 'אלוף'); assert.equal(L.rankOf(26).toNext, 14); assert.equal(L.rankOf(100).next, undefined);
+  assert.ok(L.perseveranceLine({ thisWeek: 3, streak: 3, workouts: 10 }).includes('השלישי'));
+  assert.ok(L.isWorkBlock('בטן וידיים') && !L.isWorkBlock('חימום'));
 });

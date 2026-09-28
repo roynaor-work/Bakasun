@@ -3,38 +3,40 @@
 const WARM = { name: 'חימום', items: ['jog', 'arm-circles', 'ankle-hops'] };
 const WARM_SHORT = { name: 'חימום', items: ['jog', 'arm-circles'] };
 const STRETCH = { name: 'מתיחות', items: ['quad-stretch', 'hamstring-stretch', 'calf-stretch'] };
+// בכל אימון יש בטן ושכיבות סמיכה (בקשה של רועי). התרגיל הבטן מתחלף בין התוכניות.
+const CORE_PUSH = core => ({ name: 'בטן וידיים', items: ['push-ups', core] });
 
 export const PROGRAMS = [
   { id: 'jump-a', name: 'ניתור א׳: הבסיס', emoji: '🦘', cat: 'jump', minutes: 13,
     desc: 'הקפיצות הבסיסיות. לומדים לנחות רך ולקפוץ גבוה.',
-    blocks: [WARM, { name: 'האימון', rounds: 2, items: ['jumping-jacks', 'squat-jumps', 'side-hops', 'tuck-jumps', 'jump-rope'] }, STRETCH] },
+    blocks: [WARM, { name: 'האימון', rounds: 2, items: ['jumping-jacks', 'squat-jumps', 'side-hops', 'tuck-jumps', 'jump-rope'] }, CORE_PUSH('crunches'), STRETCH] },
   { id: 'jump-b', name: 'ניתור ב׳: כוח מתפרץ', emoji: '💥', cat: 'jump', minutes: 15,
     desc: 'קפיצות חזקות: לרוחק, על מדרגה, ריצה וקפיצה במסדרון.',
-    blocks: [WARM, { name: 'האימון', rounds: 2, items: ['broad-jump', 'run-jump', 'single-leg-hops', 'step-jumps', 'bounding', 'burpees'] }, STRETCH] },
+    blocks: [WARM, { name: 'האימון', rounds: 2, items: ['broad-jump', 'run-jump', 'single-leg-hops', 'step-jumps', 'bounding', 'burpees'] }, CORE_PUSH('leg-raises'), STRETCH] },
   { id: 'jump-c', name: 'ניתור ג׳: רגליים מהירות', emoji: '⚡', cat: 'jump', minutes: 12,
     desc: 'קצב ומהירות: ספרינטים במסדרון, חבל, ברכיים גבוהות וקפיצה לגובה.',
-    blocks: [WARM_SHORT, { name: 'האימון', rounds: 2, items: ['high-knees', 'hall-sprint', 'jump-rope', 'run-vertical', 'side-hops', 'ankle-hops'] }, STRETCH] },
+    blocks: [WARM_SHORT, { name: 'האימון', rounds: 2, items: ['high-knees', 'hall-sprint', 'jump-rope', 'run-vertical', 'side-hops', 'ankle-hops'] }, CORE_PUSH('bicycle'), STRETCH] },
   { id: 'hall', name: 'ניתור במסדרון', emoji: '🚪', cat: 'jump', minutes: 12,
     desc: 'ריצה וקפיצה: כל התרגילים שצריכים 5 עד 6 מטר.',
-    blocks: [WARM, { name: 'האימון', rounds: 2, items: ['hall-sprint', 'run-jump', 'bounding', 'run-vertical', 'broad-jump'] }, STRETCH] },
+    blocks: [WARM, { name: 'האימון', rounds: 2, items: ['hall-sprint', 'run-jump', 'bounding', 'run-vertical', 'broad-jump'] }, CORE_PUSH('v-ups'), STRETCH] },
   { id: 'speed', name: 'מהירות וקואורדינציה', emoji: '⚡', cat: 'speed', minutes: 13,
     desc: 'המסדרון, קיר לקיר: מעבורת, אות יציאה, צעדי צד, קריוקה.',
-    blocks: [WARM, { name: 'האימון', rounds: 2, items: ['shuttle-run', 'reaction-sprint', 'side-shuffle', 'carioca', 'skipping', 'floor-wall-run'] }, STRETCH] },
+    blocks: [WARM, { name: 'האימון', rounds: 2, items: ['shuttle-run', 'reaction-sprint', 'side-shuffle', 'carioca', 'skipping', 'floor-wall-run'] }, CORE_PUSH('plank'), STRETCH] },
   { id: 'legs', name: 'כוח רגליים לניתור', emoji: '🦵', cat: 'legs', minutes: 14,
     desc: 'רגליים חזקות קופצות גבוה יותר. סקוואט, מכרעים, עקבים.',
-    blocks: [WARM_SHORT, { name: 'האימון', rounds: 2, items: ['squats', 'lunges', 'calf-raises', 'glute-bridge', 'wall-sit'] }, STRETCH] },
+    blocks: [WARM_SHORT, { name: 'האימון', rounds: 2, items: ['squats', 'lunges', 'calf-raises', 'glute-bridge', 'wall-sit'] }, CORE_PUSH('crunches'), STRETCH] },
   { id: 'upper', name: 'כוח עליון ובטן', emoji: '💪', cat: 'upper', minutes: 13,
     desc: 'שכיבות סמיכה, כתפיים ובטן חזקה.',
     blocks: [WARM_SHORT, { name: 'האימון', rounds: 2, items: ['push-ups', 'pike-push-ups', 'plank', 'crunches', 'superman', 'knee-push-ups'] }, { name: 'מתיחות', items: ['hamstring-stretch'] }] },
   { id: 'core', name: 'אימון בטן', emoji: '🔥', cat: 'core', minutes: 11,
     desc: 'שרירי הבטן והגב, סבב אחד רציני.',
-    blocks: [WARM_SHORT, { name: 'האימון', items: ['crunches', 'bicycle', 'leg-raises', 'v-ups', 'plank', 'side-plank', 'flutter-kicks', 'russian-twists', 'hollow-hold'] }, { name: 'מתיחות', items: ['hamstring-stretch'] }] },
+    blocks: [WARM_SHORT, { name: 'האימון', items: ['crunches', 'bicycle', 'leg-raises', 'v-ups', 'plank', 'side-plank', 'flutter-kicks', 'russian-twists', 'hollow-hold'] }, { name: 'בטן וידיים', items: ['push-ups', 'knee-push-ups'] }, { name: 'מתיחות', items: ['hamstring-stretch'] }] },
   { id: 'full', name: 'גוף מלא', emoji: '🌟', cat: 'jump', minutes: 15,
     desc: 'קצת מהכול: ניתור, רגליים, בטן וכוח עליון.',
-    blocks: [WARM, { name: 'האימון', items: ['jumping-jacks', 'squats', 'push-ups', 'high-knees', 'crunches', 'squat-jumps', 'lunges', 'bicycle', 'plank', 'burpees'] }, STRETCH] },
+    blocks: [WARM, { name: 'האימון', items: ['jumping-jacks', 'squats', 'push-ups', 'high-knees', 'crunches', 'squat-jumps', 'lunges', 'bicycle', 'plank', 'burpees'] }, CORE_PUSH('superman'), STRETCH] },
   { id: 'quick', name: 'אימון 7 דקות', emoji: '⏱️', cat: 'jump', minutes: 7,
     desc: 'קצר וחזק, בלי חימום ארוך. כל תרגיל 30 שניות.',
-    blocks: [{ name: 'האימון', items: ['jumping-jacks', 'squats', 'crunches', 'high-knees', 'plank', 'side-hops', 'push-ups', 'bicycle', 'squat-jumps', 'mountain-climbers'] }],
+    blocks: [{ name: 'האימון', items: ['jumping-jacks', 'squats', 'crunches', 'high-knees', 'plank', 'side-hops', 'push-ups', 'bicycle', 'squat-jumps', 'mountain-climbers'] }, CORE_PUSH('leg-raises')],
     override: { type: 'time', base: 30 } },
 ];
 export const programById = Object.fromEntries(PROGRAMS.map(p => [p.id, p]));

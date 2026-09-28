@@ -212,3 +212,24 @@ input[type="checkbox"] { width: 26px; height: 26px; accent-color: var(--accent);
 .pct { min-width: 56px; text-align: center; font-family: var(--f-head); font-weight: 900; font-size: 22px; color: var(--accent); align-self: end; padding-bottom: 8px; }
 .star { font-size: 28px; color: var(--line); }
 .star.on { color: var(--star); }
+
+.btn.fb { min-height: 96px; font-size: 22px; line-height: 1.3; }
+.rank { min-width: 28px; text-align: center; font-weight: 900; }
+.gcard.locked { opacity: .6; filter: grayscale(.6); }
+
+/* סרטון פתיחה */
+.stage.scene { padding: 6px; }
+.scene-svg { width: 100%; max-height: 300px; }
+.scene-svg .fig line, .scene-svg .fig polyline { stroke-width: 6; }
+.scene-svg .fig.rival line, .scene-svg .fig.rival polyline { stroke: color-mix(in srgb, var(--ink) 40%, var(--card)); }
+.scene-svg .fig.rival .far { stroke: color-mix(in srgb, var(--ink) 25%, var(--card)); }
+.scene-svg .fig.rival .head { fill: color-mix(in srgb, var(--star) 50%, var(--card)); stroke: color-mix(in srgb, var(--ink) 40%, var(--card)); }
+.scene-svg .fig.hero line, .scene-svg .fig.hero polyline { stroke: var(--accent); }
+.scene-svg .fig.hero .far { stroke: color-mix(in srgb, var(--accent) 55%, var(--card)); }
+.scene-svg .track { fill: #F59E0B; } .scene-svg .lane { stroke: #FDE68A; stroke-width: 1.5; stroke-dasharray: 8 6; } .scene-svg .finish { fill: var(--ink); }
+.scene-svg .hurdle { fill: #374151; } .scene-svg .hurdle-top { fill: #EF4444; }
+.scene-svg .court { fill: #D97706; } .scene-svg .pole { fill: #374151; } .scene-svg .board { fill: #F1F5F9; stroke: #374151; stroke-width: 1.5; } .scene-svg .rim { stroke: #EF4444; stroke-width: 3; }
+.scene-svg .ball { fill: #F97316; stroke: #7C2D12; stroke-width: 1.5; }
+.scene-svg .podium { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; } .scene-svg .pnum { font: 900 22px var(--f-head); fill: var(--accent); }
+.scene-svg .stitle { font: 900 22px var(--f-head); fill: var(--ink); } .scene-svg .medal { font-size: 34px; }
+.intro h1 { font-size: 26px; }

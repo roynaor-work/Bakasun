@@ -30,12 +30,12 @@ export function poseAt(frames, ms) {
 export const cycleMs = frames => frames.reduce((s, f) => s + f[1], 0);
 
 export class Figure {
-  constructor(svg) {
+  // keep=true: הדמות מתווספת ל-SVG קיים (סצנה עם כמה דמויות) בלי לנקות אותו ובלי רצפה ו-viewBox
+  constructor(svg, keep = false) {
     this.svg = svg;
-    svg.setAttribute('viewBox', '0 8 200 182');
-    svg.innerHTML = '';
+    if (!keep) { svg.setAttribute('viewBox', '0 8 200 182'); svg.innerHTML = ''; }
     this.g = el('g', { class: 'fig' });
-    svg.appendChild(el('line', { x1: 10, y1: 182, x2: 190, y2: 182, class: 'ground' }));
+    if (!keep) svg.appendChild(el('line', { x1: 10, y1: 182, x2: 190, y2: 182, class: 'ground' }));
     this.prop = el('rect', { class: 'prop', x: 0, y: 0, width: 0, height: 0, rx: 4 });
     svg.appendChild(this.prop);
     this.prop2 = el('rect', { class: 'prop', x: 0, y: 0, width: 0, height: 0, rx: 4 });
@@ -81,5 +81,7 @@ export class Figure {
     this.raf = requestAnimationFrame(tick);
   }
   still(ex) { const frames = Array.isArray(ex) ? ex : ex.frames; this.setProp(Array.isArray(ex) ? null : ex.prop); this.stop(); this.draw(frames[0][0]); }
+  // מיקום הדמות בסצנה (הזזה ומידה)
+  place(x, y, scale = 1) { this.g.setAttribute('transform', `translate(${x} ${y}) scale(${scale})`); }
   stop() { if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0; }
 }
