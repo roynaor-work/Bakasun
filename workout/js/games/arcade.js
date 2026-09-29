@@ -120,88 +120,130 @@ G.push({ id: 'breakout', name: 'שובר לבנים', emoji: '🧊', how: 'מז�
     };
   } });
 
-// ---- פונג ----
-G.push({ id: 'pong', name: 'פונג', emoji: '🏓', how: 'המחבט שלך למטה. מזיזים עם האצבע. כל פעם שהמחשב מפספס, נקודה לך.',
+// ---- פונג: יריב עם פרצוף שמתעצבן כשהוא מפספס, הכדור מתגבר עם כל חבטה ברצף, רמות: היריב מהיר יותר, ניקוד לפי הרמה ואורך הרצף ----
+G.push({ id: 'pong', name: 'פונג', emoji: '🏓', how: 'המחבט שלך למטה. מזיזים עם האצבע. כל פעם שהיריב מפספס, נקודות. רצף חבטות ארוך = הכדור מהיר יותר ויותר נקודות. היריב מתעצבן כשהוא מפספס!',
   make(r) {
-    let px = r.W / 2, ax = r.W / 2, PW = 80, ball = reset();
-    function reset() { return { x: r.W / 2, y: r.H / 2, vx: r.pick([-1, 1]) * 180, vy: 260 }; }
+    let px = r.W / 2, ax = r.W / 2, PW = 84, rally = 0, level = 1, mood = 0, moodT = 0, tt = 0, myPts = 0, hisPts = 0, trail = []; let ball = reset();
+    function reset() { rally = 0; return { x: r.W / 2, y: r.H / 2, vx: r.pick([-1, 1]) * 170, vy: 240 + level * 20 }; }
+    const face = (x, y) => { const c = r.ctx; r.circle(x, y, 22, '#FBBF24'); c.strokeStyle = '#1B1740'; c.lineWidth = 2; c.beginPath(); c.arc(x, y, 22, 0, Math.PI * 2); c.stroke();
+      const angry = moodT > 0 && mood < 0, happy = moodT > 0 && mood > 0; r.circle(x - 8, y - 5, 3.5, '#1B1740'); r.circle(x + 8, y - 5, 3.5, '#1B1740');
+      c.beginPath(); if (angry) { c.moveTo(x - 14, y - 15); c.lineTo(x - 3, y - 10); c.moveTo(x + 14, y - 15); c.lineTo(x + 3, y - 10); } else { c.moveTo(x - 13, y - 13); c.lineTo(x - 4, y - 12); c.moveTo(x + 13, y - 13); c.lineTo(x + 4, y - 12); } c.stroke();
+      c.beginPath(); if (angry) { c.arc(x, y + 14, 8, Math.PI + .3, -.3); } else if (happy) { c.arc(x, y + 4, 10, .2, Math.PI - .2); } else { c.moveTo(x - 7, y + 8); c.lineTo(x + 7, y + 8); } c.stroke();
+      if (angry) { r.emoji('💢', x + 26, y - 20, 18); if (Math.sin(tt * 30) > 0) r.text('!!!', x - 30, y - 18, { size: 14, color: '#ef4444' }); } };
     return {
       move(x) { px = r.clamp(x, PW / 2, r.W - PW / 2); }, down(x) { this.move(x); },
-      update(dt) { ball.x += ball.vx * dt; ball.y += ball.vy * dt;
-        ax += r.clamp(ball.x - ax, -220 * dt, 220 * dt);
-        if (ball.x < 8 || ball.x > r.W - 8) ball.vx *= -1;
-        if (ball.vy > 0 && ball.y > r.H - 40 && ball.y < r.H - 26 && Math.abs(ball.x - px) < PW / 2 + 8) { ball.vy = -Math.abs(ball.vy) * 1.04; ball.vx += (ball.x - px) * 4; r.sfx('bounce'); }
-        if (ball.vy < 0 && ball.y < 40 && ball.y > 26 && Math.abs(ball.x - ax) < PW / 2 + 8) { ball.vy = Math.abs(ball.vy); ball.vx += (ball.x - ax) * 2; r.sfx('tick'); }
-        if (ball.y < 0) { r.addScore(1); r.pop('+1', ball.x, 60, r.C.gold, 26); r.burst(ball.x, 10, r.C.pink, 12); r.sfx('score'); ball = reset(); } if (ball.y > r.H) r.over('פספסת!'); },
-      draw() { r.clear('#0F2A3A'); r.line(0, r.H / 2, r.W, r.H / 2, '#ffffff22', 2); r.rect(ax - PW / 2, 20, PW, 10, r.C.pink, 5); r.rect(px - PW / 2, r.H - 32, PW, 10, r.C.sky, 5); r.circle(ball.x, ball.y, 8, r.C.gold); },
+      update(dt) { tt += dt; moodT -= dt; ball.x += ball.vx * dt; ball.y += ball.vy * dt; trail.push([ball.x, ball.y]); if (trail.length > 8) trail.shift();
+        // היריב: עוקב אחרי הכדור, מהיר יותר ברמות גבוהות, אבל טועה קצת כשהכדור מהיר
+        const aiSpeed = 170 + level * 35; const target = ball.vy < 0 ? ball.x + Math.sin(tt * 2.3) * (rally > 6 ? 30 : 10) : r.W / 2; ax += r.clamp(target - ax, -aiSpeed * dt, aiSpeed * dt);
+        if (ball.x < 8) { ball.x = 8; ball.vx = Math.abs(ball.vx); } if (ball.x > r.W - 8) { ball.x = r.W - 8; ball.vx = -Math.abs(ball.vx); }
+        if (ball.vy > 0 && ball.y > r.H - 40 && ball.y < r.H - 26 && Math.abs(ball.x - px) < PW / 2 + 8) { rally++; ball.vy = -Math.abs(ball.vy) * 1.05; ball.vx += (ball.x - px) * 4; r.sfx('bounce'); if (rally && rally % 5 === 0) r.pop(`רצף ${rally}! 🔥`, ball.x, ball.y - 30, r.C.gold, 20); }
+        if (ball.vy < 0 && ball.y < 46 && ball.y > 32 && Math.abs(ball.x - ax) < PW / 2 + 8) { ball.vy = Math.abs(ball.vy); ball.vx += (ball.x - ax) * 2; r.sfx('tick'); }
+        if (ball.y < 0) { myPts++; const pts = (5 + Math.min(rally, 10)) * level; r.addScore(pts); r.pop('+' + pts, ball.x, 70, r.C.gold, 26); r.burst(ball.x, 10, r.C.pink, 12); r.sfx('score'); mood = -1; moodT = 1.4; r.sfx('ohh'); if (myPts % 3 === 0) { level++; r.pop(`רמה ${level}! היריב מהיר יותר`, r.W / 2, r.H / 2, r.C.gold, 22); } ball = reset(); trail = []; }
+        if (ball.y > r.H) { hisPts++; mood = 1; moodT = 1.4; r.sfx('laugh'); return r.over('פספסת!'); } },
+      draw() { r.clear('#0F2A3A'); r.line(0, r.H / 2, r.W, r.H / 2, '#ffffff22', 2); r.circle(r.W / 2, r.H / 2, 40, 'transparent'); r.ctx.strokeStyle = '#ffffff22'; r.ctx.lineWidth = 2; r.ctx.beginPath(); r.ctx.arc(r.W / 2, r.H / 2, 40, 0, Math.PI * 2); r.ctx.stroke();
+        r.text(`${myPts} : ${hisPts}`, r.W / 2, r.H / 2 - 22, { size: 28, color: '#ffffff44' }); r.text(`רמה ${level}${rally > 2 ? ` · רצף ${rally}` : ''}`, r.W / 2, r.H / 2 + 22, { size: 14, color: '#ffffff55' });
+        face(ax, 18 + (moodT > 0 && mood < 0 ? Math.sin(tt * 40) * 3 : 0)); r.rect(ax - PW / 2, 36, PW, 10, moodT > 0 && mood < 0 ? '#ef4444' : r.C.pink, 5);
+        r.rect(px - PW / 2, r.H - 32, PW, 10, r.C.sky, 5);
+        trail.forEach(([x, y], i) => r.circle(x, y, 8 * (i + 1) / trail.length, `rgba(253,224,71,${(i + 1) / trail.length * .35})`)); r.circle(ball.x, ball.y, 8, r.C.gold); r.circle(ball.x - 2, ball.y - 3, 2.5, '#fff8'); },
     };
   } });
 
-// ---- פינבול ----
-G.push({ id: 'pinball', name: 'פינבול', emoji: '🎯', how: 'נוגעים בצד שמאל או ימין כדי להפעיל את הפליפרים. פוגעים בבמפרים לנקודות.',
+// ---- פינבול: שולחן מלא: במפרים עם ניקוד עולה, מטרות שנופלות (כולן = בונוס גדול), רמפה צדדית עם מכפיל, פליפרים, שלושה כדורים ----
+G.push({ id: 'pinball', name: 'פינבול', emoji: '🎯', how: 'נוגעים בצד שמאל או ימין כדי להפעיל את הפליפרים. במפרים = נקודות, מפילים את כל המטרות הצהובות לבונוס גדול, הרמפה בצד מכפילה. יש שלושה כדורים.',
   make(r) {
-    let ball = { x: r.W - 30, y: 120, vx: 0, vy: 0 }, fl = { l: 0, r: 0 };
-    const bumpers = [[100, 150, 22], [260, 150, 22], [180, 240, 26], [80, 300, 18], [280, 300, 18]];
+    let ball = { x: r.W - 24, y: r.H - 120, vx: 0, vy: -900, r: 9 }, fl = { l: 0, r: 0 }, balls = 3, mult = 1, multT = 0, tt = 0, hitsRound = 0, launched = false;
+    const bumpers = [{ x: 100, y: 150, r: 22, c: r.C.pink }, { x: 240, y: 150, r: 22, c: r.C.hot }, { x: 170, y: 230, r: 26, c: r.C.gold }, { x: 80, y: 310, r: 16, c: r.C.sky }, { x: 260, y: 310, r: 16, c: r.C.lime }];
+    const targets = [70, 120, 170, 220, 270].map(x => ({ x, y: 70, up: true })); const flash = {};
+    const newBall = () => { ball = { x: r.W - 24, y: r.H - 120, vx: 0, vy: -900 - r.rnd(0, 150), r: 9 }; launched = true; };
     return {
       down(x) { if (x < r.W / 2) fl.l = 0.18; else fl.r = 0.18; },
-      update(dt) { fl.l = Math.max(0, fl.l - dt); fl.r = Math.max(0, fl.r - dt);
+      update(dt) { tt += dt; fl.l = Math.max(0, fl.l - dt); fl.r = Math.max(0, fl.r - dt); multT -= dt; if (multT <= 0) mult = 1; for (const k in flash) flash[k] -= dt;
         ball.vy += 700 * dt; ball.x += ball.vx * dt; ball.y += ball.vy * dt;
-        if (ball.x < 12) { ball.x = 12; ball.vx = Math.abs(ball.vx) * 0.8; } if (ball.x > r.W - 12) { ball.x = r.W - 12; ball.vx = -Math.abs(ball.vx) * 0.8; }
+        // מסלול השיגור בצד ימין: תעלה עד למעלה, ואז הכדור יוצא לשולחן
+        const inLane = ball.x > r.W - 40 && ball.y > 60; if (inLane) { ball.x = r.clamp(ball.x, r.W - 32, r.W - 16); ball.vx = 0; } if (ball.y < 60 && ball.x > r.W - 40) { ball.vx = -r.rnd(150, 260); }
+        if (ball.x < 12) { ball.x = 12; ball.vx = Math.abs(ball.vx) * 0.8; } if (!inLane && ball.x > r.W - 52) { ball.x = r.W - 52; ball.vx = -Math.abs(ball.vx) * 0.8; } if (ball.x > r.W - 12) { ball.x = r.W - 12; ball.vx = -Math.abs(ball.vx) * .8; }
         if (ball.y < 12) { ball.y = 12; ball.vy = Math.abs(ball.vy) * 0.8; }
-        for (const [bx, by, br] of bumpers) { const d = r.dist(ball.x, ball.y, bx, by); if (d < br + 10) { const nx = (ball.x - bx) / d, ny = (ball.y - by) / d; ball.vx = nx * 380; ball.vy = ny * 380; ball.x = bx + nx * (br + 11); ball.y = by + ny * (br + 11); r.addScore(25); r.pop('+25', bx, by - br - 8, '#fff', 16); r.burst(bx, by, '#fff', 6, 100); r.sfx('tick'); } }
-        // פליפרים: אזורים בתחתית
+        // במפרים: ניקוד עולה עם כל פגיעה בסבב, כפול המכפיל
+        for (const b of bumpers) { const d = r.dist(ball.x, ball.y, b.x, b.y); if (d < b.r + ball.r) { const nx = (ball.x - b.x) / d, ny = (ball.y - b.y) / d; ball.vx = nx * 380; ball.vy = ny * 380; ball.x = b.x + nx * (b.r + ball.r + 1); ball.y = b.y + ny * (b.r + ball.r + 1); hitsRound++; const pts = (25 + Math.min(hitsRound, 20) * 5) * mult; r.addScore(pts); r.pop('+' + pts, b.x, b.y - b.r - 8, '#fff', 16); r.burst(b.x, b.y, b.c, 6, 100); flash[b.x] = .15; r.sfx('tick'); } }
+        // מטרות שנופלות למעלה: כולן למטה = +300 והן חוזרות
+        for (const tg of targets) { if (tg.up && Math.abs(ball.x - tg.x) < 20 && Math.abs(ball.y - tg.y) < 12) { tg.up = false; ball.vy = Math.abs(ball.vy); r.addScore(50 * mult); r.pop('+' + 50 * mult, tg.x, tg.y - 14, r.C.gold, 16); r.sfx('score'); if (targets.every(t => !t.up)) { r.addScore(300); r.pop('כל המטרות! +300', r.W / 2, 110, r.C.gold, 24); r.burst(r.W / 2, 90, r.C.gold, 30, 260); r.sfx('win'); setTimeout(() => targets.forEach(t => t.up = true), 800); } } }
+        // רמפה שמאלית: כדור שעולה בצד שמאל למעלה = מכפיל x2 ל-8 שניות
+        if (ball.x < 40 && ball.y < 120 && ball.vy < 0 && multT <= 0) { mult = 2; multT = 8; r.pop('מכפיל ×2!', 60, 140, r.C.gold, 22); r.sfx('ching'); }
+        // פליפרים
         const fy = r.H - 70;
         if (ball.y > fy - 10 && ball.y < fy + 30 && ball.vy > 0) {
-          if (ball.x > 30 && ball.x < r.W / 2 - 20 && fl.l > 0) { ball.vy = -620; ball.vx = 200 + r.rnd(-60, 60); r.addScore(5); r.sfx('bounce'); }
-          else if (ball.x > r.W / 2 + 20 && ball.x < r.W - 30 && fl.r > 0) { ball.vy = -620; ball.vx = -200 + r.rnd(-60, 60); r.addScore(5); r.sfx('bounce'); }
+          if (ball.x > 30 && ball.x < r.W / 2 - 20 && fl.l > 0) { ball.vy = -640; ball.vx = 200 + r.rnd(-60, 60); r.addScore(5); r.sfx('bounce'); }
+          else if (ball.x > r.W / 2 + 20 && ball.x < r.W - 52 && fl.r > 0) { ball.vy = -640; ball.vx = -200 + r.rnd(-60, 60); r.addScore(5); r.sfx('bounce'); }
         }
-        // קירות משופעים מכוונים למרכז
-        if (ball.y > fy - 40 && ball.x < 30) { ball.vx = Math.abs(ball.vx) + 60; } if (ball.y > fy - 40 && ball.x > r.W - 30) { ball.vx = -Math.abs(ball.vx) - 60; }
-        if (ball.y > r.H + 20) r.over('הכדור ירד!'); },
-      draw() { r.clear('#2B1B4D'); bumpers.forEach(([x, y, br], i) => { r.circle(x, y, br, [r.C.pink, r.C.hot, r.C.gold, r.C.sky, r.C.lime][i]); r.circle(x, y, br - 8, '#ffffff55'); });
-        const fy = r.H - 70; r.line(30, fy + 10, r.W / 2 - 25, fy + (fl.l ? -14 : 28), fl.l ? r.C.gold : r.C.ink, 10); r.line(r.W - 30, fy + 10, r.W / 2 + 25, fy + (fl.r ? -14 : 28), fl.r ? r.C.gold : r.C.ink, 10);
-        r.line(0, fy - 40, 30, fy + 10, r.C.muted, 6); r.line(r.W, fy - 40, r.W - 30, fy + 10, r.C.muted, 6);
-        r.circle(ball.x, ball.y, 10, '#E5E7EB'); },
+        if (ball.y > fy - 40 && ball.x < 30 && !inLane) { ball.vx = Math.abs(ball.vx) + 60; } if (ball.y > fy - 40 && ball.x > r.W - 82 && ball.x < r.W - 52) { ball.vx = -Math.abs(ball.vx) - 60; }
+        if (ball.y > r.H + 20) { balls--; hitsRound = 0; if (balls <= 0) return r.over('נגמרו הכדורים!'); r.pop(`כדור ירד. נשארו ${balls}`, r.W / 2, r.H / 2, '#fff', 20); r.sfx('over'); newBall(); } },
+      draw() { r.clear('#2B1B4D'); const c = r.ctx; const bg = c.createLinearGradient(0, 0, 0, r.H); bg.addColorStop(0, '#3b2a6b'); bg.addColorStop(1, '#1e1140'); c.fillStyle = bg; c.fillRect(0, 0, r.W, r.H);
+        // מסלול שיגור מימין ורמפה משמאל
+        r.rect(r.W - 52, 60, 4, r.H - 60, '#8b7bd1'); r.rect(r.W - 40, 60, 28, r.H - 130, 'rgba(255,255,255,.06)'); c.strokeStyle = multT > 0 ? r.C.gold : '#8b7bd1'; c.lineWidth = 4; c.beginPath(); c.moveTo(12, 200); c.quadraticCurveTo(12, 60, 90, 40); c.stroke(); r.text('×2', 40, 100, { size: 14, color: multT > 0 ? r.C.gold : '#8b7bd1' });
+        targets.forEach(tg => { if (tg.up) { r.rect(tg.x - 16, tg.y - 8, 32, 16, r.C.gold, 4); r.rect(tg.x - 12, tg.y - 5, 24, 4, '#ffffff66', 2); } else r.rect(tg.x - 16, tg.y - 2, 32, 4, '#5b4a8b', 2); });
+        bumpers.forEach(b => { const f = (flash[b.x] || 0) > 0; r.circle(b.x, b.y, b.r + (f ? 4 : 0), b.c); r.circle(b.x, b.y, b.r - 8, f ? '#fff' : '#ffffff55'); });
+        const fy = r.H - 70; r.line(30, fy + 10, r.W / 2 - 25, fy + (fl.l ? -14 : 28), fl.l ? r.C.gold : '#c4b5fd', 10); r.line(r.W - 82, fy + 10, r.W / 2 + 25, fy + (fl.r ? -14 : 28), fl.r ? r.C.gold : '#c4b5fd', 10);
+        r.line(0, fy - 40, 30, fy + 10, r.C.muted, 6); r.line(r.W - 52, fy - 40, r.W - 82, fy + 10, r.C.muted, 6);
+        const g = c.createRadialGradient(ball.x - 3, ball.y - 3, 1, ball.x, ball.y, ball.r); g.addColorStop(0, '#fff'); g.addColorStop(1, '#9ca3af'); c.fillStyle = g; c.beginPath(); c.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2); c.fill();
+        r.text(`${'●'.repeat(Math.max(0, balls - 1))}${mult > 1 ? ` · ×${mult} ${Math.ceil(multT)}` : ''}`, r.W / 2, r.H - 14, { size: 14, color: '#c4b5fd' }); },
     };
   } });
 
-// ---- חלליות ----
-G.push({ id: 'invaders', name: 'פולשים מהחלל', emoji: '👾', how: 'החללית עוקבת אחרי האצבע ויורה לבד. פוגעים בכל הפולשים לפני שהם מגיעים למטה.',
+// ---- חלליות: גלים עם בוס בסוף כל גל, חייזרים שיורים יותר עם הגלים, שדרוגים שנופלים (ירייה כפולה, מגן), ניקוד לפי גל ----
+G.push({ id: 'invaders', name: 'פולשים מהחלל', emoji: '👾', how: 'החללית עוקבת אחרי האצבע ויורה לבד. פוגעים בכל הפולשים לפני שהם מגיעים למטה. בסוף כל גל מגיע בוס גדול! תופסים שדרוגים: ⚡ ירייה כפולה, 🛡️ מגן.',
   make(r) {
-    let px = r.W / 2, shots = [], enemies = [], eshots = [], t = 0, dir = 1, et = 0, wave = 1;
-    const spawn = () => { enemies = []; for (let j = 0; j < 4; j++) for (let i = 0; i < 6; i++) enemies.push({ x: 40 + i * 50, y: 70 + j * 40 }); };
+    let px = r.W / 2, shots = [], enemies = [], eshots = [], t = 0, dir = 1, et = 0, wave = 1, boss = null, drops = [], twin = 0, shield = 0, tt = 0;
+    const spawn = () => { enemies = []; const rows = Math.min(5, 3 + Math.floor(wave / 2)); for (let j = 0; j < rows; j++) for (let i = 0; i < 6; i++) enemies.push({ x: 40 + i * 50, y: 70 + j * 40, hp: wave >= 3 && j === 0 ? 2 : 1 }); boss = null; };
     spawn();
     return {
       move(x) { px = r.clamp(x, 20, r.W - 20); }, down(x) { this.move(x); },
-      update(dt) { t += dt; if (t > 0.35) { t = 0; shots.push({ x: px, y: r.H - 60 }); }
+      update(dt) { tt += dt; t += dt; twin = Math.max(0, twin - dt); shield = Math.max(0, shield - dt);
+        if (t > (twin > 0 ? .22 : .35)) { t = 0; if (twin > 0) shots.push({ x: px - 8, y: r.H - 60 }, { x: px + 8, y: r.H - 60 }); else shots.push({ x: px, y: r.H - 60 }); }
         shots.forEach(s => s.y -= 420 * dt); shots = shots.filter(s => s.y > 0);
-        et += dt; const sp = 30 + wave * 10; let edge = false;
+        et += dt; const sp = 30 + wave * 12; let edge = false;
         enemies.forEach(e => { e.x += dir * sp * dt; if (e.x < 20 || e.x > r.W - 20) edge = true; });
         if (edge) { dir *= -1; enemies.forEach(e => { e.y += 14; e.x = r.clamp(e.x, 20, r.W - 20); }); }
-        if (et > 1.2 && enemies.length) { et = 0; const e = r.pick(enemies); eshots.push({ x: e.x, y: e.y }); }
-        eshots.forEach(s => s.y += 220 * dt); eshots = eshots.filter(s => s.y < r.H);
-        for (const s of shots) { const i = enemies.findIndex(e => r.dist(e.x, e.y, s.x, s.y) < 18); if (i >= 0) { r.burst(enemies[i].x, enemies[i].y, r.C.lime, 10, 160); enemies.splice(i, 1); s.y = -1; r.addScore(20); r.sfx('tick'); } }
-        if (eshots.some(s => r.dist(s.x, s.y, px, r.H - 45) < 18) || enemies.some(e => e.y > r.H - 70)) return r.over('החללית נפגעה!');
-        if (!enemies.length) { wave++; spawn(); r.win('גל הובס!', 100); } },
-      draw() { r.clear('#0B1026'); for (let i = 0; i < 30; i++) r.circle((i * 89) % r.W, (i * 131 + et * 20) % r.H, 1, '#ffffff55'); enemies.forEach((e, i) => SP.alien(r, e.x, e.y, et + i, [r.C.lime, r.C.pink, r.C.sky, r.C.gold][Math.floor(i / 6) % 4])); shots.forEach(s => r.rect(s.x - 2, s.y, 4, 12, r.C.lime)); eshots.forEach(s => r.rect(s.x - 2, s.y, 4, 12, r.C.red)); SP.ship(r, px, r.H - 45); },
+        if (et > Math.max(.5, 1.2 - wave * .1) && enemies.length) { et = 0; const e = r.pick(enemies); eshots.push({ x: e.x, y: e.y, vy: 200 + wave * 15 }); }
+        // הבוס: מגיע כשהגל נוקה, זז מצד לצד ויורה שלוש יריות
+        if (boss) { boss.x += boss.dir * (70 + wave * 10) * dt; if (boss.x < 60 || boss.x > r.W - 60) boss.dir *= -1; boss.t += dt; if (boss.t > 1.1) { boss.t = 0; for (const dx of [-30, 0, 30]) eshots.push({ x: boss.x + dx, y: boss.y + 20, vy: 220 }); } }
+        eshots.forEach(s => s.y += (s.vy || 220) * dt); eshots = eshots.filter(s => s.y < r.H);
+        for (const s of shots) { const i = enemies.findIndex(e => r.dist(e.x, e.y, s.x, s.y) < 18); if (i >= 0) { const e = enemies[i]; e.hp--; s.y = -1; if (e.hp <= 0) { r.burst(e.x, e.y, r.C.lime, 10, 160); enemies.splice(i, 1); const pts = 20 * wave; r.addScore(pts); r.sfx('tick'); if (Math.random() < .12) drops.push({ x: e.x, y: e.y, kind: Math.random() < .5 ? 'twin' : 'shield' }); } else r.sfx('hit'); }
+          if (boss && s.y > 0 && r.dist(boss.x, boss.y, s.x, s.y) < 40) { boss.hp--; s.y = -1; r.burst(s.x, s.y, r.C.hot, 6, 120); r.sfx('hit'); if (boss.hp <= 0) { r.burst(boss.x, boss.y, r.C.gold, 40, 320); r.addScore(200 * wave); r.pop(`הבוס הובס! +${200 * wave}`, r.W / 2, 200, r.C.gold, 26); boss = null; wave++; spawn(); r.win(`גל ${wave}!`, 0); return; } } }
+        drops.forEach(d => d.y += 120 * dt); for (const d of drops) if (Math.abs(d.x - px) < 24 && d.y > r.H - 70 && d.y < r.H - 30) { d.got = true; if (d.kind === 'twin') { twin = 8; r.pop('ירייה כפולה! ⚡', px, r.H - 90, r.C.gold, 20); } else { shield = 8; r.pop('מגן! 🛡️', px, r.H - 90, r.C.sky, 20); } r.sfx('score'); } drops = drops.filter(d => !d.got && d.y < r.H);
+        const hitMe = eshots.find(s => r.dist(s.x, s.y, px, r.H - 45) < 18); if (hitMe) { if (shield > 0) { hitMe.y = r.H + 10; r.burst(px, r.H - 45, r.C.sky, 10, 150); r.sfx('bounce'); } else return r.over('החללית נפגעה!'); }
+        if (enemies.some(e => e.y > r.H - 70) || (boss && boss.y > r.H - 120)) return r.over('הפולשים הגיעו!');
+        if (!enemies.length && !boss) { boss = { x: r.W / 2, y: 90, hp: 6 + wave * 3, maxHp: 6 + wave * 3, dir: 1, t: 0 }; r.pop('הבוס מגיע! 👾', r.W / 2, 200, r.C.hot, 26); r.sfx('roar'); } },
+      draw() { r.clear('#0B1026'); for (let i = 0; i < 30; i++) r.circle((i * 89) % r.W, (i * 131 + et * 20) % r.H, 1, '#ffffff55');
+        enemies.forEach((e, i) => { SP.alien(r, e.x, e.y, et + i, e.hp > 1 ? '#f97316' : [r.C.lime, r.C.pink, r.C.sky, r.C.gold][Math.floor(i / 6) % 4]); });
+        if (boss) { r.ctx.save(); r.ctx.translate(boss.x, boss.y); r.ctx.scale(2.6, 2.6); SP.alien(r, 0, 0, tt, '#ef4444'); r.ctx.restore(); r.rect(boss.x - 40, boss.y - 46, 80, 6, '#00000066', 3); r.rect(boss.x - 40, boss.y - 46, 80 * boss.hp / boss.maxHp, 6, r.C.hot, 3); }
+        shots.forEach(s => r.rect(s.x - 2, s.y, 4, 12, r.C.lime)); eshots.forEach(s => r.rect(s.x - 2, s.y, 4, 12, r.C.hot));
+        drops.forEach(d => { r.circle(d.x, d.y, 14, 'rgba(255,255,255,.2)'); r.emoji(d.kind === 'twin' ? '⚡' : '🛡️', d.x, d.y, 20); });
+        if (shield > 0) r.circle(px, r.H - 45, 30, `rgba(56,189,248,${.15 + Math.sin(tt * 8) * .08})`); SP.ship(r, px, r.H - 45, twin > 0 ? r.C.gold : r.C.sky);
+        r.text(`גל ${wave}${twin > 0 ? ' · ⚡' : ''}${shield > 0 ? ' · 🛡️' : ''}`, r.W / 2, r.H - 12, { size: 13, color: r.C.muted }); },
     };
   } });
 
-// ---- אסטרואידים ----
-G.push({ id: 'asteroids', name: 'שדה אסטרואידים', emoji: '☄️', how: 'החללית עוקבת אחרי האצבע. נוגעים כדי לירות. מתחמקים או מפוצצים.',
+// ---- אסטרואידים: כוכבי בונוס, מגן, החללית משתפרת (ירייה כפולה מ-10 פגיעות), רמה כל 15 שניות: יותר סלעים ויותר נקודות ----
+G.push({ id: 'asteroids', name: 'שדה אסטרואידים', emoji: '☄️', how: 'החללית עוקבת אחרי האצבע. נוגעים כדי לירות. מפוצצים סלעים, אוספים 🌟 לבונוס ו-🛡️ למגן. אחרי 10 פגיעות הירייה הופכת כפולה. כל 15 שניות רמה.',
   make(r) {
-    let px = r.W / 2, py = r.H - 80, rocks = [], shots = [], t = 0, alive = 0;
+    let px = r.W / 2, py = r.H - 80, rocks = [], shots = [], t = 0, alive = 0, hits = 0, shield = 0, stars = [], st = 0, levelT = 0;
+    const level = () => 1 + Math.floor(alive / 15);
     return {
       move(x, y) { px = r.clamp(x, 16, r.W - 16); py = r.clamp(y, 200, r.H - 30); }, down(x, y) { this.move(x, y); },
-      tap() { shots.push({ x: px, y: py - 20 }); },
-      update(dt) { alive += dt; t += dt; if (t > Math.max(0.35, 1 - alive / 60)) { t = 0; rocks.push({ x: r.rnd(20, r.W - 20), y: -30, s: r.rnd(14, 30), vy: r.rnd(90, 190), vx: r.rnd(-40, 40) }); }
-        rocks.forEach(k => { k.y += k.vy * dt; k.x += k.vx * dt; }); rocks = rocks.filter(k => k.y < r.H + 40);
+      tap() { if (hits >= 10) shots.push({ x: px - 7, y: py - 20 }, { x: px + 7, y: py - 20 }); else shots.push({ x: px, y: py - 20 }); r.sfx('tick'); },
+      update(dt) { alive += dt; t += dt; st += dt; shield = Math.max(0, shield - dt); levelT -= dt; const L = level(); if (Math.floor(alive / 15) !== Math.floor((alive - dt) / 15)) { levelT = 1.5; r.pop(`רמה ${L}! ☄️`, r.W / 2, 150, r.C.gold, 24); }
+        if (t > Math.max(0.3, 1 - L * .12)) { t = 0; rocks.push({ x: r.rnd(20, r.W - 20), y: -30, s: r.rnd(14, 30), vy: r.rnd(90, 190) + L * 15, vx: r.rnd(-40, 40), rot: 0 }); }
+        if (st > 4) { st = 0; stars.push({ x: r.rnd(30, r.W - 30), y: -20, kind: Math.random() < .75 ? 'star' : 'shield', vy: 80 }); }
+        rocks.forEach(k => { k.y += k.vy * dt; k.x += k.vx * dt; k.rot += dt; }); rocks = rocks.filter(k => k.y < r.H + 40); stars.forEach(s => { s.y += s.vy * dt; }); stars = stars.filter(s => s.y < r.H + 20 && !s.got);
         shots.forEach(s => s.y -= 500 * dt); shots = shots.filter(s => s.y > -10);
-        for (const s of shots) { const i = rocks.findIndex(k => r.dist(k.x, k.y, s.x, s.y) < k.s + 4); if (i >= 0) { const k = rocks[i]; r.addScore(Math.round(k.s)); r.burst(k.x, k.y, '#A8A29E', 10, 160); r.sfx('tick'); if (k.s > 22) { rocks.push({ x: k.x - 10, y: k.y, s: k.s / 2, vy: k.vy, vx: k.vx - 60 }, { x: k.x + 10, y: k.y, s: k.s / 2, vy: k.vy, vx: k.vx + 60 }); } rocks.splice(i, 1); s.y = -20; } }
-        if (rocks.some(k => r.dist(k.x, k.y, px, py) < k.s + 10)) return r.over('בום!');
-        if (Math.floor(alive * 2) !== Math.floor((alive - dt) * 2)) r.addScore(1); },
+        for (const s of shots) { const i = rocks.findIndex(k => r.dist(k.x, k.y, s.x, s.y) < k.s + 4); if (i >= 0) { const k = rocks[i]; hits++; const pts = Math.round(k.s) * L; r.addScore(pts); r.pop('+' + pts, k.x, k.y - k.s - 6, '#fff', 14); r.burst(k.x, k.y, '#A8A29E', 10, 160); r.sfx('hit'); if (k.s > 22) { rocks.push({ x: k.x - 10, y: k.y, s: k.s / 2, vy: k.vy, vx: k.vx - 60, rot: 0 }, { x: k.x + 10, y: k.y, s: k.s / 2, vy: k.vy, vx: k.vx + 60, rot: 0 }); } rocks.splice(i, 1); s.y = -20; if (hits === 10) { r.pop('ירייה כפולה נפתחה! ⚡', r.W / 2, 200, r.C.gold, 22); r.sfx('win'); } } }
+        for (const s of stars) if (r.dist(s.x, s.y, px, py) < 26) { s.got = true; if (s.kind === 'star') { r.addScore(30 * L); r.pop(`🌟 +${30 * L}`, px, py - 40, r.C.gold, 22); r.sfx('ching'); } else { shield = 6; r.pop('מגן! 🛡️', px, py - 40, r.C.sky, 22); r.sfx('score'); } }
+        const hitRock = rocks.find(k => r.dist(k.x, k.y, px, py) < k.s + 10); if (hitRock) { if (shield > 0) { rocks = rocks.filter(k => k !== hitRock); r.burst(hitRock.x, hitRock.y, r.C.sky, 14, 200); r.sfx('bounce'); } else return r.over('בום!'); }
+        if (Math.floor(alive * 2) !== Math.floor((alive - dt) * 2)) r.addScore(L); },
       draw() { r.clear('#0B1026'); for (let i = 0; i < 20; i++) r.circle((i * 97) % r.W, (i * 173 + alive * 40) % r.H, 1.5, '#ffffff66');
-        rocks.forEach((k, i) => SP.rock(r, k.x, k.y, k.s, i)); shots.forEach(s => r.rect(s.x - 2, s.y, 4, 14, r.C.lime)); SP.ship(r, px, py, r.C.pink); },
+        rocks.forEach((k, i) => SP.rock(r, k.x, k.y, k.s, i)); stars.forEach(s => r.emoji(s.kind === 'star' ? '🌟' : '🛡️', s.x, s.y, 24)); shots.forEach(s => r.rect(s.x - 2, s.y, 4, 14, r.C.lime));
+        if (shield > 0) r.circle(px, py, 28, `rgba(56,189,248,${.15 + Math.sin(alive * 8) * .08})`); SP.ship(r, px, py, hits >= 10 ? r.C.gold : r.C.pink);
+        r.text(`רמה ${level()}${hits >= 10 ? ' · ⚡' : ` · עוד ${10 - hits} לירייה כפולה`}`, r.W / 2, r.H - 12, { size: 13, color: r.C.muted }); if (levelT > 0) r.text(`רמה ${level()}`, r.W / 2, 100, { size: 30, color: r.C.gold }); },
     };
   } });
 
