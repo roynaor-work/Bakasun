@@ -3,7 +3,7 @@ import { EXERCISES, CATS, byId } from './exercises.js';
 import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js';
 import { Figure, cycleMs } from './figure.js';
 import { store } from './store.js';
-import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, rankOf, perseveranceLine } from './logic.js';
+import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, rankOf, perseveranceLine, honestTime, tokensFor } from './logic.js';
 import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js';
 import { runGame } from './games/engine.js';
 import * as cloud from './cloud.js';
@@ -295,7 +295,7 @@ function introPhase() {
 }
 
 function exercisePhase() {
-  const it = W.items[W.idx], ex = byId[it.exId];
+  const it = W.items[W.idx], ex = byId[it.exId]; it.startAt = Date.now(); // למדידת זמן אמיתי (נגד דילוגים)
   const pct = Math.round(100 * W.idx / W.items.length);
   const blockLabel = it.block === 'האימון' ? (it.rounds > 1 ? `סבב ${it.round} מתוך ${it.rounds}` : 'האימון') : it.block;
   mount(`
@@ -399,7 +399,7 @@ function wireTimer(it) {
 
 function finishItem(done, skipped) {
   const it = W.items[W.idx];
-  it.done = done; it.skipped = skipped;
+  it.done = done; it.skipped = skipped; it.secs = it.startAt ? Math.round((Date.now() - it.startAt) / 1000) : 0;
   clearInterval(tick); tick = 0;
   if (!skipped && done > 0) beep(990, 120);
   const last = W.idx >= W.items.length - 1;
@@ -409,17 +409,15 @@ function finishItem(done, skipped) {
     // מנוחה רק בתוך בלוק האימון עצמו; בחימום ובמתיחות ממשיכים ישר
     nextPhase = skipped || !store.profile.rest || !isWorkBlock(it.block) || !isWorkBlock(next.block) ? 'exercise' : 'rest';
   }
-  // מתנה: משחק קצר על כל תרגיל שהושלם באימון (לפי ההגדרה: כל תרגיל, כל שני, כל שלישי)
-  const every = store.profile.giftEvery;
-  const gift = !skipped && done > 0 && isWorkBlock(it.block) && every && (++W.mainDone % every === 0);
+  // מתנות רק בסוף האימון (רועי, 29/09), לפי זמן אימון אמיתי. אין משחק באמצע
+  if (!skipped && done > 0 && isWorkBlock(it.block)) W.mainDone++;
   if (!last) W.idx++;
-  if (gift) { store.addToken(); W.gift = pickGift(store.games.played, store.games.recent, unlockedList()); W.afterGift = nextPhase; W.phase = 'gift'; }
-  else W.phase = nextPhase;
+  W.phase = nextPhase;
   workoutScreen();
 }
 
 function giftPhase() {
-  const g = W.gift, secs = store.profile.gameSeconds || 0;
+  const g = W.gift, secs = store.profile.gameSeconds || 0; // (מסך המתנה באמצע אימון לא בשימוש מ-29/09; נשאר לתאימות)
   fanfare();
   mount(`
   <div class="stack">
@@ -480,7 +478,11 @@ function restPhase() {
 function saveSession() {
   if (W.saved) return null;
   const s = { id: uid(), date: new Date().toISOString(), programId: W.program.id, programName: W.program.name, emoji: W.program.emoji,
-    duration: Math.round((Date.now() - W.startedAt) / 1000), items: W.items.map(i => ({ exId: i.exId, name: i.name, type: i.type, target: i.target, done: i.done, round: i.round, block: i.block })) };
+    duration: Math.round((Date.now() - W.startedAt) / 1000), items: W.items.map(i => ({ exId: i.exId, name: i.name, type: i.type, target: i.target, done: i.done, round: i.round, block: i.block, secs: i.secs || 0 })) };
+  // זמן אמיתי: תרגיל שסומן מהר מדי (פחות מ-45% מהזמן הצפוי) לא נספר. המתנות לפי דקות אמיתיות
+  const h = honestTime(s.items, store.profile.rest || 0); s.honestSeconds = h.seconds; s.fastItems = h.fast;
+  s.tokensEarned = tokensFor(h.seconds, store.profile.tokenMinutes || 3);
+  if (s.tokensEarned) store.addToken(s.tokensEarned);
   const before = earned(stats(store.sessions));
   store.addSession(s); W.saved = true;
   // לטלפון של אבא: אם יש קוד משפחה, האימון עולה לענן (או מחכה בתור עד שיש רשת)
@@ -568,6 +570,7 @@ function donePhase() {
       <div class="tile next"><b>${nextP ? nextP.emoji + ' ' + esc(nextP.name.split(':')[0]) : '😴 מנוחה'}</b>מחר</div>
       ${store.tokens ? `<div class="tile" data-go="#/arcade"><b>🎁 ${store.tokens}</b>מתנות לשחק</div>` : ''}
     </div>
+    <div class="card" style="border:2px solid var(--accent)"><b>🎁 קיבלת ${s.tokensEarned || 0} ${s.tokensEarned === 1 ? 'מתנה' : 'מתנות'}</b> על ${Math.round((s.honestSeconds || 0) / 60)} דקות אימון אמיתי (מתנה על כל ${store.profile.tokenMinutes || 3} דקות).${s.fastItems ? ` <span class="muted">${s.fastItems} ${s.fastItems === 1 ? 'תרגיל סומן' : 'תרגילים סומנו'} מהר מדי ולא נספרו.</span>` : ''}</div>
     ${newBadges.length ? `<h2>תג חדש! 🎉</h2><div class="badges">${newBadges.map(id => { const b = BADGES.find(x => x.id === id); return `<div class="badge pop"><span class="e">${b.emoji}</span><b>${b.name}</b><br>${b.desc}</div>`; }).join('')}</div>` : ''}
     <div class="card list">${itemsList(s)}</div>
     <button class="btn primary big" data-go="#/home">לדף הבית 🏠</button>
@@ -678,7 +681,7 @@ function settings() {
     </div>
     <div class="card stack">
       <h3>מתנות ומשחקים 🎁</h3>
-      <label class="field">מתנה (משחק קצר) אחרי<select id="giftEvery">${[[1, 'כל תרגיל שמסיימים'], [2, 'כל שני תרגילים'], [3, 'כל שלושה תרגילים'], [0, 'בלי מתנות']].map(([v, n]) => `<option value="${v}" ${v === p.giftEvery ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+      <label class="field">מתנה (משחק) על כל<select id="tokenMinutes">${[[2, '2 דקות אימון אמיתי'], [3, '3 דקות אימון אמיתי (15 דקות = 5 משחקים)'], [4, '4 דקות אימון אמיתי'], [5, '5 דקות אימון אמיתי']].map(([v, n]) => `<option value="${v}" ${v === (p.tokenMinutes || 3) ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <label class="field">פתיחת משחקים חדשים<select id="unlockEvery">${[[10, 'כל 10 אימונים: 5 משחקים לבחירה'], [5, 'כל 5 אימונים: 5 משחקים לבחירה'], [3, 'כל 3 אימונים: 5 משחקים לבחירה'], [0, 'הכול פתוח מההתחלה']].map(([v, n]) => `<option value="${v}" ${v === p.unlockEvery ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <label class="field">אורך משחק<select id="gameSeconds">${[[0, 'בלי הגבלה, עד שנפסלים'], [60, 'דקה'], [90, 'דקה וחצי'], [120, 'שתי דקות']].map(([v, n]) => `<option value="${v}" ${v === p.gameSeconds ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <p class="muted small">${GAMES.length} משחקים שונים. מתנות שלא משחקים מיד נשמרות לחדר המשחקים (${store.tokens} שמורות).</p>
@@ -740,7 +743,7 @@ function settings() {
   $('#voiceName').onchange = e => store.setProfile({ voiceName: e.target.value });
   $('#speechRate').onchange = e => store.setProfile({ speechRate: +e.target.value });
   window.speechSynthesis?.addEventListener?.('voiceschanged', () => { if (location.hash.includes('settings') && $('#voiceName') && $('#voiceName').options.length <= 1) settings(); }, { once: true });
-  $('#giftEvery').onchange = e => store.setProfile({ giftEvery: +e.target.value });
+  $('#tokenMinutes').onchange = e => store.setProfile({ tokenMinutes: +e.target.value });
   const fitImage = (f, w, h, q = 0.82) => new Promise((res, rej) => { const i = new Image(); i.onload = () => { const c = document.createElement('canvas'); c.width = w; c.height = h; const k = Math.max(w / i.width, h / i.height); c.getContext('2d').drawImage(i, (w - i.width * k) / 2, (h - i.height * k) / 2, i.width * k, i.height * k); URL.revokeObjectURL(i.src); res(c.toDataURL('image/jpeg', q)); }; i.onerror = rej; i.src = URL.createObjectURL(f); });
   $('#tetrisPic').onchange = async e => { const files = [...e.target.files].slice(0, 12); if (!files.length) return; try { const pics = tetrisPics(); for (const f of files) pics.push(await fitImage(f, 360, 560)); localStorage.setItem('kidfit.tetrisPics', JSON.stringify(pics.slice(-12))); settings(); } catch { alert('לא הצלחתי לקרוא את התמונות (אולי אין מקום). נסו פחות תמונות.'); } };
   const tpc = $('#tetrisPicClear'); if (tpc) tpc.onclick = () => { if (confirm('להסיר את כל התמונות מהטטריס?')) { localStorage.removeItem('kidfit.tetrisPics'); localStorage.removeItem('kidfit.tetrisPic'); settings(); } };

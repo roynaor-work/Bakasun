@@ -194,3 +194,13 @@ export function perseveranceLine(st) {
   else if ([5, 10, 20, 30, 50, 100].includes(st.workouts)) parts.push(`וזה האימון מספר ${st.workouts} שלך. וואו!`);
   return parts.join(' ');
 }
+
+// זמן אימון אמיתי (29/09, רועי): תרגיל שסומן מהר מדי (פחות מ-45% מהזמן הצפוי) לא נספר. זמן צפוי: זמן = היעד; חזרות = 2.2 שניות לחזרה (לפחות 10).
+// נספר לכל היותר 160% מהצפוי לתרגיל. מנוחות בין תרגילי האימון נספרות. המתנות: אחת על כל tokenMinutes דקות, עד 8
+export function honestTime(items, rest = 0) {
+  let seconds = 0, fast = 0, honestWork = 0;
+  for (const i of items) { if (!i.done || i.skipped) continue; const exp = i.type === 'time' ? i.target : Math.max(10, i.target * 2.2); const secs = i.secs || 0; if (secs < exp * .45) { fast++; continue; } seconds += Math.min(secs, exp * 1.6); if (isWorkBlock(i.block)) honestWork++; }
+  seconds += Math.max(0, honestWork - 1) * rest;
+  return { seconds: Math.round(seconds), fast };
+}
+export function tokensFor(honestSeconds, tokenMinutes = 3) { return Math.min(8, Math.floor(honestSeconds / (Math.max(1, tokenMinutes) * 60))); }

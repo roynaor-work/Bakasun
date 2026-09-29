@@ -29,7 +29,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     </div>`;
   const cv = host.querySelector('#gcv'), ctx = cv.getContext('2d');
   const scoreEl = host.querySelector('#gscore'), timeEl = host.querySelector('#gtime'), overlay = host.querySelector('#gover');
-  const unlimited = !(seconds > 0); let game = null, raf = 0, last = 0, running = false, ended = false, score = 0, timeLeft = unlimited ? 0 : seconds, elapsed = 0, pauseUntil = 0;
+  const unlimited = !(seconds > 0); if (unlimited) host.querySelector('#gtime').style.display = 'none'; let game = null, raf = 0, last = 0, running = false, ended = false, score = 0, timeLeft = unlimited ? 0 : seconds, elapsed = 0, pauseUntil = 0;
   // הדגמה: אצבע מדומה שמשחקת לפי תסריט (def.demo), עם כתוביות. בסוף חוזרים למסך הפתיחה או יוצאים
   let inDemo = false, demoT = 0, resumeOnPause = false; const saveProgress = () => { try { if (onProgress && game && typeof game.save === 'function') onProgress(game.save()); } catch { /* */ } }; const finger = { x: W / 2, y: H * .7, tx: W / 2, ty: H * .7, press: 0, hold: false, caption: '', swipe: null };
   let pops = [], parts = [], shakeT = 0, ac = null;
@@ -52,7 +52,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
 
   const r = {
     W, H, ctx, C: PAL, rnd, rint, pick, shuffle, clamp,
-    px: W / 2, py: H / 2, isDown: false,
+    px: W / 2, py: H / 2, isDown: false, pointers: {}, // כל האצבעות שעל המסך (למשחקי שני שחקנים): id -> {x, y}
     get score() { return score; }, get timeLeft() { return timeLeft; },
     addScore(n = 1) { score = Math.max(0, Math.round(score + n)); scoreEl.textContent = score; },
     setScore(n) { score = Math.max(0, Math.round(n)); scoreEl.textContent = score; },
@@ -172,9 +172,10 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   const pos = e => { const b = cv.getBoundingClientRect(); return [clamp((e.clientX - b.left) * W / b.width, 0, W), clamp((e.clientY - b.top) * H / b.height, 0, H)]; };
   let sx = 0, sy = 0, st = 0;
   const on = (name, fn) => cv.addEventListener(name, fn, { passive: false });
-  on('pointerdown', e => { e.preventDefault(); if (!running || inDemo) return; cv.setPointerCapture?.(e.pointerId); [r.px, r.py] = pos(e); r.isDown = true; sx = r.px; sy = r.py; st = performance.now(); game.down && game.down(r.px, r.py); });
-  on('pointermove', e => { if (!running || inDemo) return; [r.px, r.py] = pos(e); if (r.isDown) game.move && game.move(r.px, r.py); });
-  on('pointerup', e => { if (!running || inDemo || !r.isDown) return; r.isDown = false; [r.px, r.py] = pos(e); const dx = r.px - sx, dy = r.py - sy;
+  on('pointerdown', e => { e.preventDefault(); if (!running || inDemo) return; cv.setPointerCapture?.(e.pointerId); { const [x, y] = pos(e); r.pointers[e.pointerId] = { x, y }; } [r.px, r.py] = pos(e); r.isDown = true; sx = r.px; sy = r.py; st = performance.now(); game.down && game.down(r.px, r.py); });
+  on('pointermove', e => { if (!running || inDemo) return; if (r.pointers[e.pointerId]) { const [x, y] = pos(e); r.pointers[e.pointerId] = { x, y }; } [r.px, r.py] = pos(e); if (r.isDown) game.move && game.move(r.px, r.py); });
+  on('pointercancel', e => { delete r.pointers[e.pointerId]; });
+  on('pointerup', e => { delete r.pointers[e.pointerId]; if (!running || inDemo || !r.isDown) return; r.isDown = false; [r.px, r.py] = pos(e); const dx = r.px - sx, dy = r.py - sy;
     game.up && game.up(r.px, r.py);
     if (Math.hypot(dx, dy) < 18 && performance.now() - st < 400) game.tap && game.tap(r.px, r.py);
     else if (Math.hypot(dx, dy) >= 24 && game.swipe) game.swipe(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'), dx, dy); });
