@@ -155,3 +155,17 @@ test('honest time: fast-marked items are not counted, rests count, tokens per mi
   assert.equal(h.fast, 1); assert.equal(h.seconds, Math.round(31 + 44 + 15));
   assert.equal(L2.tokensFor(15 * 60, 3), 5); assert.equal(L2.tokensFor(100, 3), 0); assert.equal(L2.tokensFor(60 * 60, 3), 12);
 });
+
+// סימולציית התרגיל (js/sim.js): מבט קבוע לכל הסרטון, והדמות המלאה מקבלת קיבוע מבט
+import { viewOf } from '../workout/js/sim.js';
+import { player, isFront, KITS } from '../workout/js/games/sprites.js';
+test('exercise simulation: fixed view per exercise and front override on the full character', () => {
+  assert.equal(viewOf(byId['jumping-jacks'].frames), true);
+  assert.equal(viewOf(byId['push-ups'].frames), false);
+  assert.equal(viewOf(byId['russian-twists'].frames), false); // ישיבה מלפנים + סיבובים מהצד: לא מתהפך באמצע
+  for (const ex of EXERCISES) assert.equal(typeof viewOf(ex.frames), 'boolean');
+  assert.equal(isFront(byId['jumping-jacks'].frames[0][0]), true);
+  const noop = () => {}; const grad = () => ({ addColorStop: noop });
+  const ctx = new Proxy({}, { get: (t, k) => k === 'measureText' ? () => ({ width: 10 }) : /Gradient$/.test(k) ? grad : (k in t ? t[k] : noop), set: (t, k, v) => { t[k] = v; return true; } });
+  for (const ex of EXERCISES) for (const [pose] of ex.frames) { player(ctx, pose, 180, 268, 1.3, KITS.kid, { shadow: false, front: viewOf(ex.frames) }); }
+});
