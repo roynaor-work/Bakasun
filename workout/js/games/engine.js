@@ -14,6 +14,12 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 // seconds = 0: בלי הגבלת זמן, משחקים עד שנפסלים (הכלל של כל משחק). tokens(): כמה מתנות זמינות להמשך אחרי פסילה; onContinue() מחייב מתנה ומחזיר true.
 // progress: מה שנשמר מהפעם הקודמת (def.make(r, progress)); onProgress(game.save()) נקרא בסיום ובפסילה כדי לשמור.
+const IMGS = new Map();
+export function getImg(key) { if (typeof Image === 'undefined') return null; let im = IMGS.get(key); if (!im) { im = new Image(); im.src = new URL(`../../img/kit/${key}.png`, import.meta.url).href; IMGS.set(key, im); } return im; }
+export function preload(keys) { keys.forEach(getImg); }
+// צביעה: חבילת הרקעים של Kenney היא צלליות בהירות שמיועדות לצביעה. מציירים פעם אחת לקנבס צדדי עם source-in ושומרים במטמון לפי (תמונה, צבע)
+const TINTED = new Map();
+function tinted(key, color) { const im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return null; const k = key + '|' + color; let cv = TINTED.get(k); if (cv) return cv; cv = document.createElement('canvas'); cv.width = im.naturalWidth; cv.height = im.naturalHeight; const x = cv.getContext('2d'); x.drawImage(im, 0, 0); x.globalCompositeOperation = 'source-in'; x.fillStyle = color; x.fillRect(0, 0, cv.width, cv.height); TINTED.set(k, cv); return cv; }
 export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null }) {
   host.innerHTML = `
     <div class="gamewrap">
@@ -48,10 +54,20 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   const post = () => { tone(180, 160, 'triangle', .3); tone(240, 300, 'sine', .12, .02); roar(.1, .5); };
   // קא-צ'ינג של קופה: קליק מתכתי + שני מטבעות קצרים
   const ching = () => { if (!sound) return; try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const t = ac.currentTime; const n = ac.createBufferSource(), nb = ac.createBuffer(1, ac.sampleRate * .05, ac.sampleRate), d = nb.getChannelData(0); for (let j = 0; j < d.length; j++) d[j] = (Math.random() * 2 - 1) * (1 - j / d.length); n.buffer = nb; const hp = ac.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 2500; const g = ac.createGain(); g.gain.value = .35; n.connect(hp); hp.connect(g); g.connect(ac.destination); n.start(t); for (const [f, at] of [[2350, .05], [3150, .11]]) { const o = ac.createOscillator(), og = ac.createGain(); o.type = 'sine'; o.frequency.value = f; o.connect(og); og.connect(ac.destination); og.gain.setValueAtTime(.0001, t + at); og.gain.linearRampToValueAtTime(.12, t + at + .005); og.gain.exponentialRampToValueAtTime(.0001, t + at + .25); o.start(t + at); o.stop(t + at + .3); } } catch { /* */ } };
-  const SFX = { fart, ole: () => ole(), laugh, ohh, post, ching, roar: () => roar(), goal: () => { roar(0, 1.8); tone(196, 900, 'sawtooth', .06); tone(294, 900, 'sawtooth', .05, .02); tone(392, 900, 'sawtooth', .05, .04); }, score: () => { tone(880, 90); tone(1320, 120, 'sine', .14, .08); }, hit: () => tone(220, 120, 'square', .12), over: () => { tone(300, 160, 'sawtooth', .12); tone(200, 260, 'sawtooth', .12, .15); }, win: () => { tone(660, 120); tone(880, 120, 'sine', .18, .13); tone(1100, 260, 'sine', .18, .26); }, tick: () => tone(1000, 40, 'square', .06), bounce: () => tone(500, 50, 'triangle', .1) };
+  // פקמן (רועי 29/09): "ואקה" באכילה (סוויפ מרובע מתחלף), ג'ינגל פתיחה מקורי בסגנון צ'יפטיון (לא המנגינה של נאמקו), מוות = גלישה יורדת עם ויברטו, אכילת רוח = שני טונים עולים
+  const sweep = (f1, f2, ms, type = 'square', vol = .09, at = 0) => { if (!sound) return; try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.connect(g); g.connect(ac.destination); const t = ac.currentTime + at; o.frequency.setValueAtTime(f1, t); o.frequency.exponentialRampToValueAtTime(f2, t + ms / 1000); g.gain.setValueAtTime(vol, t); g.gain.setValueAtTime(vol, t + ms / 1000 - .01); g.gain.exponentialRampToValueAtTime(.001, t + ms / 1000); o.start(t); o.stop(t + ms / 1000 + .02); } catch { /* */ } };
+  let wakaFlip = false; const waka = () => { wakaFlip = !wakaFlip; if (wakaFlip) sweep(520, 260, 85); else sweep(260, 520, 85); };
+  const pacIntro = () => { const mel = [[523, 0], [659, .12], [784, .24], [659, .36], [880, .5], [784, .62], [1047, .76], [1319, .92]]; mel.forEach(([f, at]) => { tone(f, 110, 'square', .07, at); tone(f / 2, 110, 'triangle', .06, at); }); [[131, 0], [131, .24], [165, .5], [196, .76]].forEach(([f, at]) => tone(f, 200, 'sawtooth', .05, at)); };
+  const pacDeath = () => { for (let i = 0; i < 10; i++) sweep(600 - i * 45, 520 - i * 45, 70, 'square', .08, i * .07); sweep(200, 80, 220, 'square', .08, .75); sweep(120, 60, 120, 'square', .06, 1.0); };
+  const ghostEat = () => { sweep(300, 900, 140, 'square', .1); sweep(600, 1400, 120, 'square', .08, .12); };
+  const SFX = { waka, pacIntro, pacDeath, ghostEat, fart, ole: () => ole(), laugh, ohh, post, ching, roar: () => roar(), goal: () => { roar(0, 1.8); tone(196, 900, 'sawtooth', .06); tone(294, 900, 'sawtooth', .05, .02); tone(392, 900, 'sawtooth', .05, .04); }, score: () => { tone(880, 90); tone(1320, 120, 'sine', .14, .08); }, hit: () => tone(220, 120, 'square', .12), over: () => { tone(300, 160, 'sawtooth', .12); tone(200, 260, 'sawtooth', .12, .15); }, win: () => { tone(660, 120); tone(880, 120, 'sine', .18, .13); tone(1100, 260, 'sine', .18, .26); }, tick: () => tone(1000, 40, 'square', .06), bounce: () => tone(500, 50, 'triangle', .1) };
 
+  // תמונות (ספרייטים של Kenney, CC0, ב-img/kit/<חבילה>/<שם>.png): נטענות פעם אחת ונשמרות במטמון. r.img מצייר לפי מרכז (או עוגן), עם סיבוב/שיקוף/שקיפות; לפני שהתמונה נטענה לא מצייר כלום
   const r = {
     W, H, ctx, C: PAL, rnd, rint, pick, shuffle, clamp,
+    img(key, x, y, w, h, o = {}) { let im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return false; if (o.tint) { im = tinted(key, o.tint) || im; } const iw = im.naturalWidth || im.width, ih = im.naturalHeight || im.height; if (h == null) h = w * ih / iw; if (w == null) w = h * iw / ih; const ax = o.ax ?? .5, ay = o.ay ?? .5; ctx.save(); ctx.translate(x, y); if (o.rot) ctx.rotate(o.rot); if (o.flip) ctx.scale(-1, 1); if (o.sx || o.sy) ctx.scale(o.sx ?? 1, o.sy ?? 1); if (o.alpha != null) ctx.globalAlpha = o.alpha; ctx.drawImage(im, -w * ax, -h * ay, w, h); ctx.restore(); return true; },
+    imgSize(key) { const im = getImg(key); return im && im.naturalWidth ? [im.naturalWidth, im.naturalHeight] : null; },
+    imgPattern(key, x, y, w, h, scale = 1, offX = 0, offY = 0) { const im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return false; const pat = ctx.createPattern(im, 'repeat'); if (!pat) return false; ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip(); ctx.translate(x + offX, y + offY); ctx.scale(scale, scale); ctx.fillStyle = pat; ctx.fillRect(-offX / scale, -offY / scale, w / scale + Math.abs(offX / scale) + im.naturalWidth, h / scale + Math.abs(offY / scale) + im.naturalHeight); ctx.restore(); return true; },
     px: W / 2, py: H / 2, isDown: false, pointers: {}, // כל האצבעות שעל המסך (למשחקי שני שחקנים): id -> {x, y}
     net, // חיבור למשחק מול טלפון אחר (js/net.js): {role:'host'|'guest', send, alive, onMsg דרך r.netMsg} או null
     netMsg: null, // המשחק מציב פונקציה (t, p) => {} כדי לקבל הודעות מהטלפון השני
@@ -107,6 +123,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   function hide() { overlay.classList.remove('on'); overlay.innerHTML = ''; }
   const fmt = s => `${Math.floor(s / 60)}:${String(Math.ceil(s) % 60).padStart(2, '0')}`;
 
+  if (def.assets) preload(def.assets); /* ספרייטים של המשחק נטענים כבר במסך הפתיחה */
   function fresh() { game = def.make(r, progress || null); running = true; hide(); if (net && net.route) net.route((t, p) => { if (r.netMsg && !ended) r.netMsg(t, p); }); }
   function loop(now) {
     raf = requestAnimationFrame(loop);
