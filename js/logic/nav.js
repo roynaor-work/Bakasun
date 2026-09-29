@@ -20,7 +20,9 @@ export const SCREENS = [
   ['more', ['עוד', 'תפריט', 'more', 'menu', 'plus']],
   ['lead', ['פנייה חדשה', 'פניה חדשה', 'new lead', 'new inquiry', 'nouvelle demande']],
   ['assist', ['פקודה', 'תגידי לי מה לעשות', 'command', 'assistant', 'commande']],
-  ['help', ['עזרה', 'מה אפשר להגיד', 'help', 'what can i say', 'aide', 'que puis-je dire']]
+  ['help', ['עזרה', 'מה אפשר להגיד', 'help', 'what can i say', 'aide', 'que puis-je dire']],
+  ['dashboard', ['לוח בקרה', 'לוח הבקרה', 'דשבורד', 'dashboard', 'tableau de bord']],
+  ['calendar', ['יומן', 'לוח שנה', 'calendar', 'agenda', 'calendrier']]
 ];
 // A move needs an explicit "go to" in front, so a screen word said inside a sentence ("the cases folder...") never moves her by mistake.
 const LEAD = /^(?:עברי ל|תעברי ל|עבור ל|לעבור ל|לכי ל|תלכי ל|קחי אותי ל|תראי לי את ה|תראי לי|הראי לי|תפתחי את מסך ה|תפתחי מסך|פתחי מסך|מסך|go to the|go to|take me to the|take me to|switch to the|switch to|open the .* screen|show me the|show me|va aux|va au|va à la|va à|aller aux|aller au|aller à|montre-moi les|montre-moi la|montre-moi le|montre-moi|ouvre l['’]écran|écran|ecran)\s*/i;
@@ -53,6 +55,6 @@ export function screenWord(route, lang) {
   const w = row[1]; const isHe = x => /[֐-׿]/.test(x);
   if (lang === 'he') return w.find(isHe) || w[0];
   const latin = w.filter(x => !isHe(x));
-  if (lang === 'fr') { const fr = { today: 'accueil', cases: 'dossiers', suppliers: 'fournisseurs', clients: 'clients', tasks: 'tâches', calls: 'appels', quotes: 'devis', money: 'finances', receipts: 'reçus', notes: 'notes', groups: 'groupes', search: 'recherche', settings: 'réglages', more: 'menu', lead: 'nouvelle demande', assist: 'commande', help: 'aide' }; return fr[route] || latin[0]; }
+  if (lang === 'fr') { const fr = { today: 'accueil', cases: 'dossiers', suppliers: 'fournisseurs', clients: 'clients', tasks: 'tâches', calls: 'appels', quotes: 'devis', money: 'finances', receipts: 'reçus', notes: 'notes', groups: 'groupes', search: 'recherche', settings: 'réglages', more: 'menu', lead: 'nouvelle demande', assist: 'commande', help: 'aide', dashboard: 'tableau de bord', calendar: 'agenda' }; return fr[route] || latin[0]; }
   return latin[0] || w[0];
 }

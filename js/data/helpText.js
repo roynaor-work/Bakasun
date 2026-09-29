@@ -12,6 +12,12 @@ export const HELP = {
       '"פקודות אחרונות" מעל התיבה: לחיצה על אחת מהן ממלאת אותה מחדש.',
       'לחיצה ארוכה על סמל האפליקציה במסך הבית: "הקלטה" (פותח את המיקרופון מיד), "צלם חשבונית", "מה יש לי היום".'
     ] },
+    { title: 'מהמחשב', items: [
+      'במסך רחב (מחשב, טאבלט לרוחב) התפריט עובר לצד והכרטיסים מסתדרים בעמודות. אותם נתונים, אותו ענן.',
+      '"עוד" ← "לוח בקרה": מבט אחד על אירועים קרובים, משימות באיחור, שיחות, כסף שלא שולם, ספקים שלא ענו.',
+      '"עוד" ← "יומן": חודש / שבוע / רשימה עם אירועים, משימות, שיחות ותשלומים. לחיצה על יום פותחת אותו.',
+      'בכרטיס האירוע נוספו לשוניות: משתתפים (רשימה למלון, תזונה, אישורי הגעה), חוזה (הסכם עם חתימה על המסך), רשימת תיוג (לפי סוג האירוע), היסטוריה (מי שינה מה ומתי).'
+    ] },
     { title: 'מעבר בין מסכים: "עברי ל..." ואז שם המסך', items: ['"עברי לספקים", "עברי למשימות", "עברי להיום"', 'שמות המסכים: היום, תיקים, ספקים, לקוחות, משימות, שיחות, הצעות מחיר, כספים, קבלות, הערות, קבוצות, חיפוש, הגדרות, פנייה חדשה, עזרה', 'עובד גם "לכי ל...", "תראי לי את ה...", "מסך ספקים". שם מסך בלבד, בלי "עברי ל", לא מעביר, כדי שמילה בתוך משפט לא תזיז אותך בטעות.'] },
     { title: 'שאלות', items: [
       '"מה יש לי מחר" / "מה המשימות שלי להיום" / "מה יש השבוע" / "מה יש ביום שלישי" / "משימות ל-15/10"',
@@ -81,6 +87,12 @@ export const HELP = {
       'On peut aussi écrire au lieu de dicter, puis appuyer sur « Lire ».',
       'Demande de facture à Roy : « facture pour B.D. de 10 000 HT pour la production de Haïm et Moshe ». Un client de la liste est reconnu (même épelé à la voix), son n° d’entreprise et son adresse se remplissent seuls. « envoie par mail à Roy » ouvre le mail au lieu de WhatsApp.'
     ] },
+    { title: 'Depuis l’ordinateur', items: [
+      'Sur un écran large, le menu passe sur le côté et les cartes s’alignent en colonnes. Mêmes données, même nuage.',
+      '« Plus » → « Tableau de bord » : événements proches, tâches en retard, appels, argent non payé, fournisseurs sans réponse.',
+      '« Plus » → « Agenda » : mois / semaine / liste avec événements, tâches, appels et paiements.',
+      'Sur la fiche événement : participants (liste pour l’hôtel, régimes, confirmations), contrat (signature à l’écran), liste de contrôle, historique.'
+    ] },
     { title: 'Changer d’écran : « va à ... » puis le nom de l’écran', items: ['« va aux fournisseurs », « va à tâches », « va à accueil »', 'Les écrans : accueil, dossiers, fournisseurs, clients, tâches, appels, devis, finances, reçus, notes, groupes, recherche, réglages, nouvelle demande, aide', '« montre-moi les ... » marche aussi. Le nom seul, sans « va à », ne change pas d’écran : un mot dans une phrase ne vous déplace jamais par erreur.'] },
     { title: 'Questions', items: [
       '« qu’est-ce que j’ai demain » / « mes tâches pour aujourd’hui » / « qu’est-ce que j’ai cette semaine » / « mes tâches mardi »',
@@ -149,6 +161,12 @@ export const HELP = {
       'What was deleted stays one hour in the “bin” (the button next to it). Anything can be brought back from there. “empty the bin” (or the button inside the bin) deletes everything for good, after a confirmation.',
       'You can also type instead of dictating, then tap “Read”.',
       'Invoice request to Roy: “invoice for B.D. of 10,000 before VAT for the production of Haim and Moshe”. A client from the list is recognised (even spelled out by voice), its company number and address fill in by themselves. “send by mail to Roy” opens the mail instead of WhatsApp.'
+    ] },
+    { title: 'From the computer', items: [
+      'On a wide screen the menu moves to the side and cards line up in columns. Same data, same cloud.',
+      '“More” → “Dashboard”: upcoming events, overdue tasks, calls, unpaid money, suppliers who have not answered.',
+      '“More” → “Calendar”: month / week / list with events, tasks, calls and payments.',
+      'On the event card: participants (rooming list, dietary needs, confirmations), contract (sign on screen), checklist, history.'
     ] },
     { title: 'Moving between screens: “go to ...” then the screen name', items: ['“go to suppliers”, “go to tasks”, “go to today”', 'The screens: today, cases, suppliers, clients, tasks, calls, quotes, money, receipts, notes, groups, search, settings, new lead, help', '“show me the ...” works too. The name alone, without “go to”, does not move you: a word inside a sentence never moves you by mistake.'] },
     { title: 'Questions', items: [
