@@ -1,4 +1,4 @@
-// עוד משחקים: הוקי אוויר, יהלומים, לוליין, יורה בועות, חץ למטרה, ביליארד, כדורעף, דוחף קופסאות, ציור לפי מספרים, ניחוש מילה, צייר מהזיכרון, איפה הכדור
+// עוד משחקים: הוקי אוויר, לוליין, יורה בועות, חץ למטרה, ביליארד, כדורעף, דוחף קופסאות, ציור לפי מספרים, ניחוש מילה, צייר מהזיכרון, איפה הכדור
 import { POSE, S, KITS } from './sprites.js';
 export const arcade = [], sport = [], puzzle = [], quick = [];
 
@@ -19,31 +19,6 @@ arcade.push({ id: 'air-hockey', name: 'הוקי אוויר', emoji: '🏒', how:
         for (const [m, mv] of [[me, pv], [ai, { x: 0, y: 0 }]]) { const d = r.dist(m.x, m.y, puck.x, puck.y); if (d < 36) { const nx = (puck.x - m.x) / d, ny = (puck.y - m.y) / d; const sp = Math.max(260, Math.hypot(puck.vx, puck.vy) * 0.9); puck.vx = nx * sp + mv.x * 8; puck.vy = ny * sp + mv.y * 8; puck.x = m.x + nx * 37; puck.y = m.y + ny * 37; } }
         pv = { x: pv.x * 0.5, y: pv.y * 0.5 }; },
       draw() { r.clear('#E0F2FE'); r.line(0, r.H / 2, r.W, r.H / 2, '#7DD3FC', 3); r.circle(r.W / 2, r.H / 2, 40, '#BAE6FD'); r.rect(r.W / 2 - GOAL / 2, 0, GOAL, 8, '#EF4444'); r.rect(r.W / 2 - GOAL / 2, r.H - 8, GOAL, 8, '#3B82F6'); r.circle(ai.x, ai.y, 24, '#EF4444'); r.circle(me.x, me.y, 24, '#3B82F6'); r.circle(puck.x, puck.y, 12, '#111827'); },
-    };
-  } });
-
-// ---- יהלומים (טורים) ----
-arcade.push({ id: 'gems', name: 'יהלומים', emoji: '💎', how: 'טור של שלושה יהלומים נופל. מחליקים להזיז, נוגעים להחליף סדר, מחליקים למטה להפיל. שלושה זהים בשורה נעלמים.',
-  make(r) {
-    const COLS = 6, ROWS = 13, S = 36, OX = (r.W - COLS * S) / 2, OY = 40, COLORS = [r.C.pink, r.C.gold, r.C.sky, r.C.lime, r.C.accent];
-    const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(0)); let cur, t = 0, speed = 0.5;
-    const spawn = () => { cur = { x: 2, y: -2, c: [1, 2, 3].map(() => r.rint(1, 5)) }; if (grid[0][2]) r.over('הלוח מלא!'); };
-    const free = (x, y) => x >= 0 && x < COLS && y < ROWS && (y < 0 || !grid[y][x]);
-    const canBe = (x, y) => [0, 1, 2].every(k => free(x, y + k) || y + k < 0);
-    const lock = () => { cur.c.forEach((c, k) => { const y = cur.y + k; if (y >= 0 && y < ROWS) grid[y][cur.x] = c; }); clear(); spawn(); };
-    const clear = () => { let any = true, total = 0; while (any) { any = false; const kill = new Set();
-        for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) { const c = grid[y][x]; if (!c) continue; for (const [dx, dy] of [[1, 0], [0, 1], [1, 1], [1, -1]]) { let n = 1; while (grid[y + dy * n]?.[x + dx * n] === c) n++; if (n >= 3) for (let k = 0; k < n; k++) kill.add((y + dy * k) * COLS + x + dx * k); } }
-        if (kill.size) { any = true; total += kill.size; kill.forEach(i => { grid[Math.floor(i / COLS)][i % COLS] = 0; });
-          for (let x = 0; x < COLS; x++) { let w = ROWS - 1; for (let y = ROWS - 1; y >= 0; y--) if (grid[y][x]) { const v = grid[y][x]; grid[y][x] = 0; grid[w--][x] = v; } } } }
-      if (total) { r.addScore(total * 10); speed = Math.max(0.15, speed - 0.01); r.pop('+' + total * 10, r.W / 2, 240, r.C.gold, 26); r.burst(r.W / 2, 280, r.C.pink, 12); r.sfx(total >= 5 ? 'win' : 'score'); } else r.sfx('tick'); };
-    spawn();
-    return {
-      update(dt) { t += dt; if (t > speed) { t = 0; if (canBe(cur.x, cur.y + 1)) cur.y++; else lock(); } },
-      swipe(d) { if (d === 'left' && canBe(cur.x - 1, cur.y)) cur.x--; if (d === 'right' && canBe(cur.x + 1, cur.y)) cur.x++; if (d === 'down') { while (canBe(cur.x, cur.y + 1)) cur.y++; lock(); } if (d === 'up') this.tap(); },
-      tap() { cur.c.unshift(cur.c.pop()); },
-      draw() { r.clear('#1E1B4B'); r.rect(OX - 3, OY - 3, COLS * S + 6, ROWS * S + 6, '#312E81', 6);
-        grid.forEach((row, y) => row.forEach((c, x) => { if (c) r.rect(OX + x * S + 2, OY + y * S + 2, S - 4, S - 4, COLORS[c - 1], 8); }));
-        cur.c.forEach((c, k) => { const y = cur.y + k; if (y >= 0) r.rect(OX + cur.x * S + 2, OY + y * S + 2, S - 4, S - 4, COLORS[c - 1], 8); }); },
     };
   } });
 

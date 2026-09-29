@@ -13,6 +13,7 @@ function load() {
     if (!prof.ratioV2) { if (prof.giftEvery === 1) prof.giftEvery = 2; if (prof.gameSeconds === 90) prof.gameSeconds = 60; prof.ratioV2 = true; }
     // איפוס שיאים אחרי סיום מקבץ 1 (29/09, בקשת רועי): השיאים של ששת המשחקים הראשונים מתאפסים פעם אחת
     if (d.games && d.games.bests && (d.games.resetV || 0) < 1) { for (const id of ['tetris', 'snake', 'penalty', 'keeper', 'moles', 'flappy']) delete d.games.bests[id]; if (d.games.bestAt) for (const id of ['tetris', 'snake', 'penalty', 'keeper', 'moles', 'flappy']) delete d.games.bestAt[id]; d.games.resetV = 1; }
+    if (d.games && d.games.bests && (d.games.resetV || 0) < 2) { for (const id of ['breakout', 'pong', 'pinball', 'invaders', 'asteroids']) { delete d.games.bests[id]; if (d.games.bestAt) delete d.games.bestAt[id]; } d.games.resetV = 2; } /* מקבץ 2 הושלם (29/09) */
     // בלי הגבלת זמן במשחקים (29/09, רועי): משחקים עד שנפסלים. מי שהיה על ברירת המחדל הישנה עובר ל-0
     if (!prof.noTimerV1) { if (prof.gameSeconds === 60 || prof.gameSeconds === 90) prof.gameSeconds = 0; prof.noTimerV1 = true; }
     // משחק "אני השוער" (29/09) פתוח מההתחלה גם למי שכבר פתח משחקים
