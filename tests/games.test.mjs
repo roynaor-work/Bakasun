@@ -110,3 +110,13 @@ test('online hockey: host simulates, guest mirrors, goals and end propagate', ()
   for (let goal = 0; goal < 3; goal++) { let n = 0; while (n++ < 4000) { h.update(1 / 60); g.update(1 / 60); if (guestGoals > goal || G.ev.win) break; } }
   assert.ok(G.ev.win === 1 && H.ev.over === 1 && G.score > 0, `guest goals ${guestGoals}, host over ${H.ev.over}, guest win ${G.ev.win}`);
 });
+
+// הוקי נגד המחשב: הדיסקית לא נתקעת (רועי, 29/09: המחשב הלך אחורה ונתקע, הכדור נתקע מאחוריו): בסימולציה ארוכה עם שחקן שעומד בפינה, הדיסקית לא עומדת יותר מ-2.5 שניות
+test('hockey vs computer: puck never stays stuck, computer mallet stays on the table', () => {
+  const noop = () => {}; const ctx = fakeCtx(); let score = 0;
+  const r = { W: 360, H: 560, ctx, C: new Proxy({}, { get: () => '#000' }), px: 100, py: 100, isDown: false, pointers: { 1: { x: 20, y: 540 } }, net: null, rnd: (a = 1, b) => b == null ? Math.random() * a : a + Math.random() * (b - a), rint: (a, b) => Math.floor(a + Math.random() * (b - a + 1)), pick: a => a[0], shuffle: a => a, clamp: (v, a, b) => Math.max(a, Math.min(b, v)), get score() { return score; }, get timeLeft() { return 0; }, addScore: n => { score += n; }, setScore: n => { score = n; }, over: noop, win: noop, clear: noop, rect: noop, circle: noop, line: noop, text: noop, emoji: noop, sfx: noop, play: noop, pop: noop, burst: noop, shake: noop, stick: noop, player: noop, crowd: noop, crowdGen: () => [], anim: f => f[0][0], hit: () => false, dist: (x1, y1, x2, y2) => Math.hypot(x2 - x1, y2 - y1) };
+  const g = gameById.pong.make(r, null); g.down(180, 420); /* נגד המחשב */
+  let still = 0, maxStill = 0, offTable = 0;
+  for (let i = 0; i < 60 * 120; i++) { g.update(1 / 60); const P = g.peek(); const sp = Math.hypot(P.puck.vx, P.puck.vy); if (sp < 25 && P.puck.y > 0 && P.puck.y < 560) still += 1 / 60; else still = 0; maxStill = Math.max(maxStill, still); if (P.ai.x < 26 - 1 || P.ai.x > 360 - 26 + 1) offTable++; if (i % 600 === 0) r.pointers = { 1: { x: [20, 340, 180][(i / 600) % 3], y: 540 } }; }
+  assert.ok(maxStill < 2.6, `puck stood still ${maxStill.toFixed(1)}s`); assert.equal(offTable, 0);
+});
