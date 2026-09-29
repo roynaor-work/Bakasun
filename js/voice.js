@@ -13,6 +13,7 @@ export function listen(langCode, onText, onEnd, opts) {
   if (!SR) return null;
   const silence = opts && opts.silence > 0 ? opts.silence : 0;
   let finals = [], interim = '', active = true, rec = null, restarts = 0, timer = null, why = 'stop', ended = false;
+  let wordPending = false, wordTimer = null; const WORD_WAIT = 2500; // ms of silence after "finished" before it counts
   const bump = () => {
     if (!silence) return;
     clearTimeout(timer);
@@ -30,13 +31,17 @@ export function listen(langCode, onText, onEnd, opts) {
         if (r.isFinal) gotFinal = tr; else last = tr;
       }
       interim = gotFinal ? '' : last;
-      // a closing word ("finished", "delete") ends the listening at once, no need to wait for silence.
-      // On Android the word often arrives only as an interim result and is never marked final: it counts all the same.
-      const stopOn = opts && typeof opts.stopOn === 'function' ? opts.stopOn : null;
-      if (!gotFinal && last && stopOn && stopOn(last)) { gotFinal = last; interim = ''; }
       if (gotFinal && finals[finals.length - 1] !== gotFinal) { finals.push(gotFinal); interim = ''; }
       emit();
-      if (gotFinal && stopOn && stopOn(gotFinal)) { why = 'word'; active = false; clearTimeout(timer); try { rec.stop(); } catch (e) { /* already stopped */ } }
+      // A closing word ("finished", "delete") at the end of what she said ends the listening, but only if she then
+      // stops talking: "finished" followed by more words is part of the recording. On Android the word often arrives
+      // only as an interim result and is never marked final, so the interim text counts too. The recognizer itself
+      // closes the session after a short silence (onend); a word still pending then is the real end.
+      const stopOn = opts && typeof opts.stopOn === 'function' ? opts.stopOn : null;
+      const current = gotFinal || last;
+      wordPending = !!(stopOn && current && stopOn(current));
+      clearTimeout(wordTimer);
+      if (wordPending) wordTimer = setTimeout(() => { if (!wordPending) return; why = 'word'; active = false; clearTimeout(timer); try { rec.stop(); } catch (e) { /* already stopped */ } }, WORD_WAIT);
     };
     rec.onerror = ev => {
       // "no-speech" and "aborted" are normal between sentences: keep listening; anything else ends the dictation
@@ -44,7 +49,9 @@ export function listen(langCode, onText, onEnd, opts) {
       active = false;
     };
     rec.onend = () => {
-      if (interim && finals[finals.length - 1] !== interim) { finals.push(interim); interim = ''; emit(); if (opts && typeof opts.stopOn === 'function' && opts.stopOn(finals[finals.length - 1])) { why = 'word'; active = false; } }
+      if (interim && finals[finals.length - 1] !== interim) { finals.push(interim); interim = ''; emit(); }
+      clearTimeout(wordTimer);
+      if (wordPending || (finals.length && opts && typeof opts.stopOn === 'function' && opts.stopOn(finals[finals.length - 1]))) { why = 'word'; active = false; }
       if (active && restarts < 40) { restarts++; try { start(); return; } catch (e) { /* fall through */ } }
       clearTimeout(timer);
       if (ended) return; ended = true;
@@ -53,5 +60,5 @@ export function listen(langCode, onText, onEnd, opts) {
     rec.start();
   };
   try { start(); } catch (e) { return null; }
-  return () => { active = false; clearTimeout(timer); try { rec && rec.stop(); } catch (e) { /* already stopped */ } };
+  return () => { active = false; clearTimeout(timer); clearTimeout(wordTimer); try { rec && rec.stop(); } catch (e) { /* already stopped */ } };
 }
