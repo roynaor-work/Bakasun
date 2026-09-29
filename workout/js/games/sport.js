@@ -23,7 +23,7 @@ function penaltyGame(role) {
     const colOf = x => x < goal.x + goal.w / 3 ? -1 : x > goal.x + goal.w * 2 / 3 ? 1 : 0, rowOf = y => y < goal.y + goal.h / 3 ? 0 : y > goal.y + goal.h * 2 / 3 ? 2 : 1;
     const zoneCenter = (c, rw) => [goal.x + goal.w / 2 + c * goal.w / 3, goal.y + goal.h / 6 + rw * goal.h / 3];
     // phase: 'aim' (מחכים לבחירה), 'run' (הבועט רץ), 'fly' (הכדור בדרך), 'after' (תוצאה)
-    let phase = 'aim', ph = 0, shot = null, gk = { x: BX, dy: 0, col: 0, row: 1, dive: false, laugh: 0, reach: 1 }, msg = '', streak = 0, tt = 0, goals = 0, saves = 0, rot = 0, bulge = 0, ready = 1, pick = null, kicks = 0;
+    let phase = 'aim', ph = 0, shot = null, gk = { x: BX, dy: 0, col: 0, row: 1, dive: false, laugh: 0, reach: 1 }, msg = '', streak = 0, tt = 0, goals = 0, saves = 0, rot = 0, bulge = 0, ready = 1, pick = null, kicks = 0, fails = 0; const MAXF = 3; // 3 פספוסים (בועט) או 3 שערים נגד (שוער) = נפסלים
     const fans = r.crowdGen(16, r.W, 2, 14, 20);
     const resetBall = () => { phase = 'aim'; ph = 0; shot = null; pick = null; gk.dive = false; gk.dy = 0; ready = 0; };
     // השוער בוחר צד וגובה. ככל שיש יותר שערים הוא חכם יותר
@@ -50,15 +50,16 @@ function penaltyGame(role) {
           if (k >= 1) { const post = (Math.abs(shot.tx - goal.x) < 9 || Math.abs(shot.tx - goal.x - goal.w) < 9) && shot.ty > goal.y - 6 && shot.ty < GL || (Math.abs(shot.ty - goal.y) < 8 && shot.tx > goal.x - 6 && shot.tx < goal.x + goal.w + 6); const inGoal = !post && shot.tx > goal.x + 8 && shot.tx < goal.x + goal.w - 8 && shot.ty > goal.y + 6 && shot.ty < GL; const stopped = inGoal && keeperStops(); const corner = shot.col !== 0 && shot.row !== 1;
             if (role === 'kicker') {
               if (inGoal && !stopped) { streak++; goals++; const pts = 10 * Math.min(3, streak) + (corner ? 5 : 0) + Math.floor(goals / 3) * 5; r.addScore(pts); r.pop('+' + pts, shot.tx, shot.ty - 20, '#FDE047', 28); r.burst(shot.tx, shot.ty, '#fff', 20, 260); r.sfx('goal'); msg = streak >= 3 ? `גול! רצף ${streak} 🔥` : 'גוווול! ⚽'; bulge = 1; }
-              else { streak = 0; msg = post ? 'קורה! 😱' : inGoal ? 'השוער עצר! 🧤' : 'החוצה... 😂'; if (post) { r.sfx('post'); r.shake(220); r.burst(shot.tx, shot.ty, '#fff', 14, 220); shot.bounce = { x: shot.tx, y: shot.ty, vx: (shot.tx < BX ? -1 : 1) * r.rnd(120, 220), vy: r.rnd(-60, 160), stuck: Math.random() < .25 }; } else if (inGoal) { r.sfx('hit'); shot.bounce = { x: gk.x + (shot.tx < gk.x ? -20 : 20), y: shot.ty, vx: (shot.tx < gk.x ? -1 : 1) * r.rnd(140, 260), vy: r.rnd(-80, 40), stuck: false }; } else r.sfx('laugh'); if (!inGoal) { r.sfx('ohh'); setTimeout(() => r.sfx('laugh'), 450); } gk.laugh = 1.5; if (inGoal) r.shake(180); }
+              else { streak = 0; fails++; msg = (post ? 'קורה! 😱' : inGoal ? 'השוער עצר! 🧤' : 'החוצה... 😂') + ` (${fails}/${MAXF})`; if (post) { r.sfx('post'); r.shake(220); r.burst(shot.tx, shot.ty, '#fff', 14, 220); shot.bounce = { x: shot.tx, y: shot.ty, vx: (shot.tx < BX ? -1 : 1) * r.rnd(120, 220), vy: r.rnd(-60, 160), stuck: Math.random() < .25 }; } else if (inGoal) { r.sfx('hit'); shot.bounce = { x: gk.x + (shot.tx < gk.x ? -20 : 20), y: shot.ty, vx: (shot.tx < gk.x ? -1 : 1) * r.rnd(140, 260), vy: r.rnd(-80, 40), stuck: false }; } else r.sfx('laugh'); if (!inGoal) { r.sfx('ohh'); setTimeout(() => r.sfx('laugh'), 450); } gk.laugh = 1.5; if (inGoal) r.shake(180); }
             } else { // אני השוער: עצירה = נקודות
-              if (inGoal && !stopped) { streak = 0; goals++; msg = 'גול נגדך... 😬'; bulge = 1; r.sfx('ohh'); }
+              if (inGoal && !stopped) { streak = 0; goals++; fails++; msg = `גול נגדך... 😬 (${fails}/${MAXF})`; bulge = 1; r.sfx('ohh'); }
               else if (stopped) { streak++; saves++; const pts = 10 * Math.min(3, streak) + (corner ? 5 : 0) + Math.floor(saves / 3) * 5; r.addScore(pts); r.pop('עצירה! +' + pts, gk.x, GL - 90, '#FDE047', 28); r.burst(gk.x, GL - 60, '#fff', 20, 260); r.sfx('roar'); msg = streak >= 3 ? `עצירה! רצף ${streak} 🧤🔥` : 'עצירה! 🧤'; r.shake(160); shot.bounce = { x: gk.x + (shot.tx < gk.x ? -20 : 20), y: shot.ty, vx: (shot.tx < gk.x ? -1 : 1) * r.rnd(140, 260), vy: r.rnd(-80, 40), stuck: false }; }
               else { const pts = 5; r.addScore(pts); msg = post ? 'קורה! מזל 😅 +5' : 'החוצה! +5'; if (post) { r.sfx('post'); shot.bounce = { x: shot.tx, y: shot.ty, vx: (shot.tx < BX ? -1 : 1) * r.rnd(120, 220), vy: r.rnd(-60, 160), stuck: false }; } else r.sfx('score'); }
             }
             phase = 'after'; ph = 0; } return; }
         if (phase === 'after' && shot.bounce && !shot.bounce.stuck) { const b = shot.bounce; b.vy += 520 * dt; b.x += b.vx * dt; b.y += b.vy * dt; if (b.y > GL + 30 && b.vy > 0) { b.y = GL + 30; b.vy = -b.vy * .45; b.vx *= .8; if (Math.abs(b.vy) > 40) r.sfx('bounce'); } }
-        if (phase === 'after' && ph > 1.5) resetBall(); },
+        if (phase === 'after' && ph > 1.5) { if (fails >= MAXF) return r.over(role === 'kicker' ? 'שלושה פספוסים!' : 'שלושה שערים נגדך!'); resetBall(); } },
+      revive() { fails = 0; resetBall(); },
       draw() { r.clear('#15803D'); for (let i = 0; i < 6; i++) r.rect(0, 200 + i * 60, r.W, 30, '#16A34A');
         r.rect(0, 0, r.W, goal.y - 4, '#1F2937'); r.crowd(fans, tt, phase === 'after' && (role === 'kicker' ? msg.startsWith('ג') : msg.startsWith('עצירה')));
         // שער עם עומק: רשת אחורית מתנפחת בשער
@@ -88,8 +89,8 @@ function penaltyGame(role) {
     };
   };
 }
-G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'נוגעים איפה בשער לבעוט: שמאל, אמצע או ימין, ולמעלה, אמצע או למטה. השוער מנחש צד וגובה, ועוצר רק אם ניחש את שניהם. פינות = בונוס, אבל אפשר לפגוע בקורה. רצף שערים מכפיל נקודות.', make: penaltyGame('kicker') });
-G.push({ id: 'keeper', name: 'אני השוער', emoji: '🧤', how: 'הבועט רץ לכדור. לוחצים על אחד מתשעת האזורים בשער כדי לקפוץ אליו לפני הבעיטה. עצירה = נקודות, רצף עצירות מכפיל. לא לחצת? השוער נשאר באמצע.', make: penaltyGame('keeper') });
+G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'שלושה פספוסים = נפסלת. נוגעים איפה בשער לבעוט: שמאל, אמצע או ימין, ולמעלה, אמצע או למטה. השוער מנחש צד וגובה, ועוצר רק אם ניחש את שניהם. פינות = בונוס, אבל אפשר לפגוע בקורה. רצף שערים מכפיל נקודות.', make: penaltyGame('kicker') });
+G.push({ id: 'keeper', name: 'אני השוער', emoji: '🧤', how: 'שלושה שערים נגדך = נפסלת. הבועט רץ לכדור. לוחצים על אחד מתשעת האזורים בשער כדי לקפוץ אליו לפני הבעיטה. עצירה = נקודות, רצף עצירות מכפיל. לא לחצת? השוער נשאר באמצע.', make: penaltyGame('keeper') });
 
 // ---- כדורסל ----
 G.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀', how: 'גוררים מהכדור אחורה ומשחררים כדי לזרוק. הסל זז אחרי כל קליעה. סוויש (בלי לגעת בברזל) = בונוס.',

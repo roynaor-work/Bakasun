@@ -40,7 +40,9 @@ test('every game runs headless: make, update, draw, input', () => {
   };
   for (const g of GAMES) {
     const r = mk();
-    const game = g.make(r);
+    const game = g.make(r, { level: 3, wave: 3 }); // גם עם התקדמות שמורה
+    if (game.save) assert.ok(typeof game.save() === 'object', g.id + ' save');
+    if (game.revive) game.revive();
     for (let i = 0; i < 400; i++) {
       game.update && game.update(1 / 60);
       game.draw && game.draw();
@@ -69,7 +71,8 @@ test('sprites: every pose has all joints; every sprite draws on a fake context',
   const noop = () => {};
   const ctx = fakeCtx();
   const r = { ctx, rect: noop, circle: noop, line: noop, text: noop, emoji: noop };
-  for (const [name, fn] of Object.entries(S)) { if (name === 'player' || name === 'crowd') continue; fn(r, 100, 100, 20, 20, '#000', 1); assert.ok(true, name); }
+  for (const [name, fn] of Object.entries(S)) { if (['player', 'crowd', 'fighter', 'ufo'].includes(name)) continue; fn(r, 100, 100, 20, 20, '#000', 1); assert.ok(true, name); }
+  S.fighter(r, 100, 100, 1, '#38BDF8', 1); S.ufo(r, 100, 100, 1, 1.2, .1); S.rock(r, 100, 100, 20, 3, .5);
   S.face(r, 100, 100, 14, [1, 0], 1, null); S.face(r, 100, 100, 14, [0, 1], 0, null); S.cow(r, 80, 100, 1, 2); S.poop(r, 50, 50, 1); S.pouch(r, 50, 50, 1, 1); S.burger(r, 50, 50, 1, 1); S.toilet(r, 10, 10, 56, 100); S.underpants(r, 10, 0, 56, 100); for (const v of [20, 50, 100, 200]) S.banknote(r, 50, 50, v, .1, 1);
 });
 
