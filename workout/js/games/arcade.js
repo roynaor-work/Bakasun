@@ -201,9 +201,9 @@ G.push({ id: 'pinball', name: 'פינבול', emoji: '🎯', how: '3 כדורי�
     const walls = [{ x1: 0, y1: FY - 96, x2: PIV_L.x, y2: FY }, { x1: TW, y1: FY - 96, x2: PIV_R.x, y2: FY }, { x1: 0, y1: 44, x2: 44, y2: 6 }, { x1: TW, y1: 44, x2: TW - 44, y2: 6 }];
     // סלינגשוטים: משולשים משני הצדדים שבועטים את הכדור פנימה
     const slings = [{ pts: [[26, FY - 150], [26, FY - 100], [70, FY - 108]], c: r.C.lime }, { pts: [[TW - 26, FY - 150], [TW - 26, FY - 100], [TW - 70, FY - 108]], c: r.C.sky }]; const slingSegs = s => [[s.pts[0], s.pts[1]], [s.pts[1], s.pts[2]], [s.pts[2], s.pts[0]]].map(([a, b]) => ({ x1: a[0], y1: a[1], x2: b[0], y2: b[1] }));
-    const SPIN = { x: 158, y: 150 }, HOLE = { x: 30, y: 66, r: 13 }, RAIL_IN = { x: TW - 28, y: 250 }; // ספינר, מנהרה, כניסה לגשר
+    const SPIN = { x: 158, y: 150 }, HOLE = { x: 30, y: 66, r: 13 }, RAIL_IN = { x: TW - 56, y: 262 }; // ספינר, מנהרה, כניסה לגשר
     // הגשר: מסלול בזייה מהצד הימני למעלה ושמאלה, יורד בצד שמאל
-    const railPt = k => { const p0 = { x: TW - 22, y: 250 }, p1 = { x: TW - 10, y: 20 }, p2 = { x: 60, y: 10 }, p3 = { x: 52, y: 130 }; const u = 1 - k; return { x: u * u * u * p0.x + 3 * u * u * k * p1.x + 3 * u * k * k * p2.x + k * k * k * p3.x, y: u * u * u * p0.y + 3 * u * u * k * p1.y + 3 * u * k * k * p2.y + k * k * k * p3.y }; };
+    const railPt = k => { const p0 = { x: TW - 56, y: 262 }, p1 = { x: TW - 10, y: 20 }, p2 = { x: 60, y: 10 }, p3 = { x: 52, y: 130 }; const u = 1 - k; return { x: u * u * u * p0.x + 3 * u * u * k * p1.x + 3 * u * k * k * p2.x + k * k * k * p3.x, y: u * u * u * p0.y + 3 * u * u * k * p1.y + 3 * u * k * k * p2.y + k * k * k * p3.y }; };
     const newBall = () => { ball = { x: r.W - LANE / 2, y: r.H - 60, vx: 0, vy: 0 }; launched = false; launchT = .6; rail = null; tunnel = 0; };
     newBall();
     return {
@@ -223,7 +223,7 @@ G.push({ id: 'pinball', name: 'פינבול', emoji: '🎯', how: '3 כדורי�
         if (ball.y < PR) { ball.y = PR; ball.vy = Math.abs(ball.vy) * .8; }
         for (const w of walls) bounceSeg(w, 3, .7);
         // כניסה לגשר: כדור שעולה בצד ימין ליד הכניסה
-        if (!inLane && ball.vy < -250 && r.dist(ball.x, ball.y, RAIL_IN.x, RAIL_IN.y) < 22) { rail = { k: 0, sp: Math.min(1.4, Math.abs(ball.vy) / 700) }; r.sfx('score'); return; }
+        if (!inLane && ball.x < TW - 36 && ball.vy < -250 && r.dist(ball.x, ball.y, RAIL_IN.x, RAIL_IN.y) < 20) { /* רק כדור שעולה מהשולחן, לא מהשיגור */ rail = { k: 0, sp: Math.min(1.4, Math.abs(ball.vy) / 700) }; r.sfx('score'); return; }
         // מנהרה
         if (r.dist(ball.x, ball.y, HOLE.x, HOLE.y) < HOLE.r + 2) { tunnel = .8; r.addScore(150 * mult); r.pop(`מנהרה! +${150 * mult}`, 90, 90, r.C.gold, 22); r.sfx('win'); return; }
         // ספינר: מוט שמסתובב כשהכדור עובר, נקודות לכל סיבוב
