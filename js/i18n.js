@@ -40,7 +40,7 @@ const D = {
     searchPh: 'שם, טלפון, מקום, מילה מההודעה...', noResults: 'לא נמצא כלום.',
     // settings
     uiLang: 'שפת האפליקציה', signer: 'חתימה בהודעות', biz: 'העסק', vat: 'מע"מ %', followupDays: 'ימים עד תזכורת ללקוח', backup: 'גיבוי',
-    exportJson: 'הורדת קובץ גיבוי', importJson: 'שחזור מקובץ', dataLocal: 'המידע שמור כרגע במכשיר הזה בלבד. בשלב הבא הוא עובר לענן.',
+    exportJson: 'הורדת קובץ גיבוי', importJson: 'השלמה מקובץ גיבוי', startData: 'נתוני התחלה', noWipeHint: 'אין באפליקציה מחיקה של כל המידע, בכוונה. מוחקים רק פריט אחד בכל פעם, ותמיד עם אישור. קובץ גיבוי רק משלים מה שחסר, לא דורס.', mergedBackup: 'הגיבוי שולב: {n} רשומות נוספו או עודכנו. כלום לא נמחק.', badBackup: 'הקובץ לא נראה כקובץ גיבוי של האפליקציה.', dataLocal: 'המידע שמור כרגע במכשיר הזה בלבד. בשלב הבא הוא עובר לענן.',
     invoiceTo: 'טלפון לבקשת חשבונית (רועי)', msgLang: 'שפת ברירת מחדל להודעות',
     demo: 'דוגמה', loadDemo: 'לטעון נתוני דוגמה', clearAll: 'למחוק את כל המידע', confirmClear: 'למחוק הכל? אין דרך חזרה.',
     // misc
@@ -75,7 +75,7 @@ const D = {
     noTasks: 'Aucune tâche ouverte.', newTask: 'Nouvelle tâche', forCase: 'Dossier', doneTasks: 'Faites', reopen: 'Rouvrir',
     searchPh: 'Nom, téléphone, lieu, un mot du message...', noResults: 'Rien trouvé.',
     uiLang: 'Langue de l’application', signer: 'Signature des messages', biz: 'L’entreprise', vat: 'TVA %', followupDays: 'Jours avant relance', backup: 'Sauvegarde',
-    exportJson: 'Télécharger une sauvegarde', importJson: 'Restaurer depuis un fichier', dataLocal: 'Les données sont pour l’instant sur cet appareil seulement. À l’étape suivante, elles passent dans le cloud.',
+    exportJson: 'Télécharger une sauvegarde', importJson: 'Compléter depuis une sauvegarde', startData: 'Données de départ', noWipeHint: 'Il n’y a pas de « tout effacer » dans l’application, volontairement. On ne supprime qu’un élément à la fois, toujours avec confirmation. Une sauvegarde complète ce qui manque, elle n’écrase rien.', mergedBackup: 'Sauvegarde intégrée : {n} enregistrements ajoutés ou mis à jour. Rien n’a été effacé.', badBackup: 'Ce fichier ne ressemble pas à une sauvegarde de l’application.', dataLocal: 'Les données sont pour l’instant sur cet appareil seulement. À l’étape suivante, elles passent dans le cloud.',
     invoiceTo: 'Téléphone pour demande de facture (Roy)', msgLang: 'Langue par défaut des messages',
     demo: 'Démo', loadDemo: 'Charger des données de démo', clearAll: 'Tout effacer', confirmClear: 'Tout effacer ? Sans retour possible.',
     arabicBlocked: 'Le message contient des lettres arabes et ne s’ouvre donc pas. Corrigez le texte.', none: 'Aucun', back: 'Retour', add: 'Ajouter', close: 'Fermer',
@@ -109,7 +109,7 @@ const D = {
     noTasks: 'No open tasks.', newTask: 'New task', forCase: 'Case', doneTasks: 'Done', reopen: 'Reopen',
     searchPh: 'Name, phone, place, a word from the message...', noResults: 'Nothing found.',
     uiLang: 'App language', signer: 'Signature in messages', biz: 'Business', vat: 'VAT %', followupDays: 'Days until client reminder', backup: 'Backup',
-    exportJson: 'Download a backup file', importJson: 'Restore from a file', dataLocal: 'Data is currently stored on this device only. In the next stage it moves to the cloud.',
+    exportJson: 'Download a backup file', importJson: 'Complete from a backup file', startData: 'Starting data', noWipeHint: 'There is no “delete everything” in this app, on purpose. Only one item at a time is deleted, always with a confirmation. A backup file only fills in what is missing; it never overwrites.', mergedBackup: 'Backup merged: {n} records added or updated. Nothing was deleted.', badBackup: 'This file does not look like a backup of the app.', dataLocal: 'Data is currently stored on this device only. In the next stage it moves to the cloud.',
     invoiceTo: 'Phone for invoice requests (Roy)', msgLang: 'Default language for messages',
     demo: 'Demo', loadDemo: 'Load demo data', clearAll: 'Delete all data', confirmClear: 'Delete everything? There is no way back.',
     arabicBlocked: 'The message contains Arabic letters, so it will not open. Fix the text.', none: 'None', back: 'Back', add: 'Add', close: 'Close',

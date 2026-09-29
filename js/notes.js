@@ -2,7 +2,7 @@
    The note stays on the person's card forever, and search finds it. If a known name is in the text, it is picked automatically. */
 import { t, lang, SPEECH } from './i18n.js';
 import { db } from './store.js';
-import { esc, toast } from './ui.js';
+import { esc, toast, confirmDialog } from './ui.js';
 import Office from './logic/office.js';
 import { speechSupported, listen } from './voice.js';
 
@@ -84,5 +84,5 @@ export function notesHtml(about, id) {
 }
 export function wireNotes(root, about, id) {
   const b = root.querySelector('#addNote'); if (b) b.onclick = () => quickNote({ about, id });
-  root.querySelectorAll('[data-note]').forEach(el => { el.querySelector('[data-delnote]').onclick = () => db.remove('notes', el.dataset.note); });
+  root.querySelectorAll('[data-note]').forEach(el => { el.querySelector('[data-delnote]').onclick = async () => { if (await confirmDialog(t('confirmDelete'))) db.remove('notes', el.dataset.note); }; });
 }

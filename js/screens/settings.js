@@ -9,7 +9,6 @@ import { TASK } from '../logic/extra.js';
 import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_PAYMENTS, SEED_CASES } from '../data/seedContacts.js';
 import { travelLine } from '../logic/travel.js';
 import { phoneDigits } from '../logic/core.js';
-import { loadDemo } from '../data/demo.js';
 import * as cloud from '../cloud.js';
 import { CLOUD } from '../data/cloudcfg.js';
 import { DEFAULTS, COMPANY_DOCS } from '../data/defaults.js';
@@ -80,11 +79,11 @@ export function render({ root }) {
       ${field('notes', t('travelNotes'), travel.notes || '', { type: 'textarea', rows: 3 })}<button class="btn primary" type="submit">${esc(t('save'))}</button></form></section>
     <section class="sec"><h2>${esc(t('contacts'))}</h2><p class="hint">${esc(t('contactsHint'))}</p>
       <p><b>${esc(t('contactsCount', { n: db.list('contacts').length }))}</b></p>
-      <div class="row"><button class="btn sm" id="pickMany">${esc(t('fromPhone'))}</button><label class="btn sm">${esc(t('importFile'))}<input type="file" id="contactsFile" accept=".csv,.vcf,text/csv,text/vcard,text/x-vcard" hidden></label>${db.list('contacts').length ? `<button class="btn sm ghost" id="clearContacts">${esc(t('clearContacts'))}</button>` : ''}</div></section>
+      <div class="row"><button class="btn sm" id="pickMany">${esc(t('fromPhone'))}</button><label class="btn sm">${esc(t('importFile'))}<input type="file" id="contactsFile" accept=".csv,.vcf,text/csv,text/vcard,text/x-vcard" hidden></label></div></section>
     <section class="sec"><h2>${esc(t('team'))}</h2><p class="hint">${esc(t('teamHint'))}</p>
       <div class="list">${db.list('team').map(p => `<div class="card" data-team="${esc(p.id)}"><div class="row between"><span class="title">${esc(p.name)}${p.role ? ` <span class="sub">· ${esc(p.role)}</span>` : ''}</span><span class="row"><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button><button class="btn sm ghost" data-del>✕</button></span></div><div class="sub ltr">${esc([p.phone, p.email].filter(Boolean).join(' · ') || '—')}</div></div>`).join('')}</div>
       <div class="row"><button class="btn sm" id="addTeam">${esc(t('addPerson'))}</button></div></section>
-    <section class="sec"><h2>${esc(t('demo'))}</h2><div class="row"><button class="btn" id="seed">${esc(t('loadSeed'))}</button></div><div class="row"><button class="btn" id="demo">${esc(t('loadDemo'))}</button><button class="btn danger" id="clear">${esc(t('clearAll'))}</button></div></section>
+    <section class="sec"><h2>${esc(t('startData'))}</h2><div class="row"><button class="btn" id="seed">${esc(t('loadSeed'))}</button></div><p class="hint">${esc(t('noWipeHint'))}</p></section>
     <p class="hint sec">${esc(t('install'))}</p>`;
 
   root.querySelectorAll('[data-tpl]').forEach(el => { el.querySelector('[data-del]').onclick = async () => { if (await confirmDialog(t('delete') + ' "' + el.dataset.tpl + '"?')) { removeTemplate(db, el.dataset.tpl); render({ root }); } }; });
@@ -109,9 +108,9 @@ export function render({ root }) {
   };
   root.querySelector('#imp').onchange = e => {
     const f = e.target.files[0]; if (!f) return;
-    f.text().then(txt => { db.importJson(txt); toast(t('saved')); location.hash = '#/today'; }).catch(() => toast('?'));
+    // a backup file only adds what is missing or newer; it never wipes what is here
+    f.text().then(txt => { const n = db.importJson(txt); toast(t('mergedBackup', { n }), 4000); location.hash = '#/today'; }).catch(() => toast(t('badBackup'), 4000));
   };
-  root.querySelector('#demo').onclick = () => { loadDemo(); toast(t('saved')); location.hash = '#/today'; };
   root.querySelector('#seed').onclick = () => {
     const haveS = new Set(db.list('suppliers').map(x => x.name)), haveC = new Set(db.list('clients').map(x => x.name)), haveT = new Set(db.list('team').map(x => x.name));
     let ns = 0, nc = 0, np = 0;
@@ -150,10 +149,8 @@ export function render({ root }) {
   const addContacts = list => { const n = importContacts(list); toast(t('imported', { n })); render({ root }); };
   root.querySelector('#pickMany').onclick = async () => { if (!contactsSupported()) { toast(t('noPicker'), 4000); return; } const list = await pickContacts(true); if (list && list.length) addContacts(list); };
   root.querySelector('#contactsFile').onchange = async e => { const f = e.target.files[0]; if (!f) return; addContacts(parseContactsFile(f.name, await f.text())); };
-  const clr = root.querySelector('#clearContacts'); if (clr) clr.onclick = async () => { if (await confirmDialog(t('clearContacts') + '?')) { db.list('contacts').forEach(c => db.remove('contacts', c.id)); render({ root }); } };
   root.querySelectorAll('[data-team]').forEach(el => {
     el.querySelector('[data-edit]').onclick = () => editTeam(db.get('team', el.dataset.team));
     el.querySelector('[data-del]').onclick = async () => { if (await confirmDialog(t('delete') + '?')) { db.remove('team', el.dataset.team); render({ root }); } };
   });
-  root.querySelector('#clear').onclick = async () => { if (await confirmDialog(t('confirmClear'))) { db.clear(); location.hash = '#/today'; } };
 }

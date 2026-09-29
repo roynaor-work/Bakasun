@@ -1,7 +1,7 @@
 /* All notes, newest first, with a filter by who they are about. */
 import { t } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, empty } from '../ui.js';
+import { esc, empty, confirmDialog } from '../ui.js';
 import Office from '../logic/office.js';
 import { quickNote } from '../notes.js';
 
@@ -18,5 +18,5 @@ export function render(ctx) {
       <div class="row between"><span class="sub">${n.about && LINK[n.about] ? `<a href="${LINK[n.about](n.aboutId)}"><b>${esc(n.aboutLabel)}</b></a> · ` : ''}${esc(Office.fmt(n.created))}</span><button class="btn sm ghost" data-delnote>${esc(t('delete'))}</button></div></div>`).join('') : empty(t('noNotes'))}</div>`;
   ctx.root.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { filter = b.dataset.f; render(ctx); });
   ctx.root.querySelector('#new').onclick = () => quickNote();
-  ctx.root.querySelectorAll('[data-note]').forEach(el => { el.querySelector('[data-delnote]').onclick = () => db.remove('notes', el.dataset.note); });
+  ctx.root.querySelectorAll('[data-note]').forEach(el => { el.querySelector('[data-delnote]').onclick = async () => { if (await confirmDialog(t('confirmDelete'))) db.remove('notes', el.dataset.note); }; });
 }

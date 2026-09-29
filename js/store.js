@@ -72,13 +72,23 @@ export const db = {
   settings() { return Object.assign({}, state.settings); },
   subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); },
   exportJson() { return JSON.stringify(state, null, 1); },
+  /** A backup file is merged, never swapped in: records that are missing are added, newer ones replace older ones,
+      and nothing that exists here is removed. There is no "delete everything" in this app, by design. Returns how many records changed. */
   importJson(text) {
-    const data = JSON.parse(text);
-    COLS.forEach(c => { if (Array.isArray(data[c])) state[c] = data[c]; });
-    if (data.settings) state.settings = data.settings;
-    persist(); emit();
+    const data = JSON.parse(text); let n = 0;
+    COLS.forEach(c => {
+      if (!Array.isArray(data[c])) return;
+      const a = state[c];
+      data[c].forEach(r => {
+        if (!r || !r.id) return;
+        const i = a.findIndex(x => x.id === r.id);
+        if (i < 0) { a.push(r); n++; }
+        else if (String(r.updated || '') > String(a[i].updated || '')) { a[i] = r; n++; }
+      });
+    });
+    if (data.settings && typeof data.settings === 'object') Object.keys(data.settings).forEach(k => { if (state.settings[k] === undefined || state.settings[k] === '') state.settings[k] = data.settings[k]; });
+    persist(); emit(); return n;
   },
-  clear() { COLS.forEach(c => { state[c] = []; }); const lang = state.settings.lang; state.settings = { lang }; persist(); emit(); },
   snapshot() { return state; }
 };
 
