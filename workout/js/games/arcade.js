@@ -154,10 +154,14 @@ G.push({ id: 'breakout', name: 'שובר לבנים', emoji: '🧊', how: 'יש 
   } });
 
 // ---- הוקי שולחן: משחק עד 3 (ניצחת = רמה הבאה, היריב ניצח = נפסלת), נגד המחשב או שני שחקנים באותו טלפון (אצבע למעלה ואצבע למטה), מגע חלק עם מהירות אמיתית של המחבט ----
-G.push({ id: 'pong', name: 'הוקי שולחן', emoji: '🏒', how: 'משחק עד 3 שערים. המחבט שלך בחצי התחתון וזז עם האצבע לכל כיוון. חבטה מהירה ובזווית מעיפה את הדיסקית. אפשר גם שני שחקנים באותו טלפון: אחד למעלה ואחד למטה! הרמה נשמרת.',
+G.push({ id: 'pong', name: 'הוקי שולחן', emoji: '🏒', how: 'משחק עד 3 שערים. המחבט שלך בחצי התחתון וזז עם האצבע לכל כיוון. חבטה מהירה ובזווית מעיפה את הדיסקית. אפשר גם שני שחקנים באותו טלפון: אחד למעלה ואחד למטה, או מול טלפון אחר מחדר המשחקים! הרמה נשמרת.',
   make(r, progress) {
     const GW = 150, MR = 26, PR = 11, TO = 3; let me = { x: r.W / 2, y: r.H - 90, vx: 0, vy: 0 }, ai = { x: r.W / 2, y: 90, vx: 0, vy: 0 }, level = Math.max(1, (progress && progress.level) || 1), mood = 0, moodT = 0, tt = 0, myPts = 0, hisPts = 0, trail = [], hitT = 0, mode = null, msgT = 0, msg = '';
     let puck = reset(true);
+    /* מול טלפון אחר (r.net): המארח מחשב ומשדר, האורח שולח אצבע ומצייר במראה (הוא תמיד למטה אצל עצמו) */
+    const net = r.net || null, isHost = !net || net.role === 'host'; let netT = 0, gotState = false, lostT = 0, sendT = 0, guestScore = 0, ended = false;
+    if (net) { mode = 'net'; msg = isHost ? 'מול טלפון אחר! אתה למטה' : 'מול טלפון אחר! אתה למטה'; msgT = 2; }
+    const mirror = (x, y) => [r.W - x, r.H - y];
     function reset(toMe = true) { return { x: r.W / 2, y: toMe ? r.H / 2 + 60 : r.H / 2 - 60, vx: r.rnd(-60, 60), vy: toMe ? 140 : -140 }; }
     const face = (x, y) => { const c = r.ctx; r.circle(x, y, 20, '#FBBF24'); c.strokeStyle = '#1B1740'; c.lineWidth = 2; c.beginPath(); c.arc(x, y, 20, 0, Math.PI * 2); c.stroke(); const angry = moodT > 0 && mood < 0, happy = moodT > 0 && mood > 0; r.circle(x - 7, y - 4, 3, '#1B1740'); r.circle(x + 7, y - 4, 3, '#1B1740'); c.beginPath(); if (angry) { c.moveTo(x - 12, y - 13); c.lineTo(x - 3, y - 9); c.moveTo(x + 12, y - 13); c.lineTo(x + 3, y - 9); } else { c.moveTo(x - 11, y - 11); c.lineTo(x - 3, y - 10); c.moveTo(x + 11, y - 11); c.lineTo(x + 3, y - 10); } c.stroke(); c.beginPath(); if (angry) c.arc(x, y + 12, 7, Math.PI + .3, -.3); else if (happy) c.arc(x, y + 3, 9, .2, Math.PI - .2); else { c.moveTo(x - 6, y + 7); c.lineTo(x + 6, y + 7); } c.stroke(); if (angry) r.emoji('💢', x + 24, y - 18, 16); };
     // התנגשות מחבט-דיסקית עם מהירות אמיתית של המחבט (כמו הוקי אוויר): הדיסקית מקבלת את רכיב המהירות של המחבט
@@ -165,15 +169,30 @@ G.push({ id: 'pong', name: 'הוקי שולחן', emoji: '🏒', how: 'משחק 
     // מחבט עוקב אחרי אצבע: תנועה חלקה (לא קפיצה), והמהירות נמדדת מהתנועה האמיתית
     const follow = (m, tx, ty, dt, top) => { const nx = r.clamp(tx, MR, r.W - MR), ny = top ? r.clamp(ty, MR, r.H / 2 - MR) : r.clamp(ty, r.H / 2 + MR, r.H - MR); const k = Math.min(1, dt * 22); const ox = m.x, oy = m.y; m.x += (nx - m.x) * k; m.y += (ny - m.y) * k; const ivx = (m.x - ox) / Math.max(dt, 1e-3), ivy = (m.y - oy) / Math.max(dt, 1e-3); m.vx = m.vx * .5 + ivx * .5; m.vy = m.vy * .5 + ivy * .5; };
     let target = { x: me.x, y: me.y }, target2 = { x: ai.x, y: ai.y };
+    if (net) r.netMsg = (t, p) => {
+      if (isHost) { if (t === 'in') { const [mx, my] = mirror(p.x, p.y); target2 = { x: mx, y: my }; } if (t === 'bye') { lostT = 99; } return; }
+      if (t === 'st') { gotState = true; const [px, py] = mirror(p.p[0], p.p[1]); puck.x = px; puck.y = py; puck.vx = -p.p[2]; puck.vy = -p.p[3]; const [ax, ay] = mirror(p.h[0], p.h[1]); ai.x = ax; ai.y = ay;
+        if (p.s[1] > myPts) { r.pop('שער! 🎉', r.W / 2, 90, r.C.gold, 28); r.burst(r.W / 2, 10, r.C.pink, 16); r.sfx('goal'); trail = []; } if (p.s[0] > hisPts) { r.pop(`שער נגדך ${p.s[0]}:${p.s[1]}`, r.W / 2, r.H - 120, '#ef4444', 22); r.sfx('ohh'); trail = []; }
+        myPts = p.s[1]; hisPts = p.s[0]; if (p.sc[1] !== guestScore) { guestScore = p.sc[1]; r.setScore(guestScore); } if (p.hit) hitT = .3; }
+      if (t === 'end') { if (p.w === 'guest') { const won = `ניצחת ${myPts}:${hisPts}!`; myPts = 0; hisPts = 0; r.win(won, 0); } else r.over(`היריב ניצח ${hisPts}:${myPts}`); }
+      if (t === 'bye') lostT = 99; };
+    const netTick = dt => { /* מארח: משדר מצב 15 פעמים בשנייה; אורח: שולח אצבע 15 פעמים בשנייה */
+      sendT -= dt; if (sendT > 0) return; sendT = 1 / 15;
+      if (isHost) net.send('st', { p: [Math.round(puck.x), Math.round(puck.y), Math.round(puck.vx), Math.round(puck.vy)], h: [Math.round(me.x), Math.round(me.y)], s: [myPts, hisPts], sc: [r.score, guestScore], hit: hitT > 0 ? 1 : 0 });
+      else net.send('in', { x: Math.round(me.x), y: Math.round(me.y) }); };
     return {
-      save() { return { level }; }, revive() { hisPts = 0; myPts = 0; puck = reset(true); trail = []; },
+      save() { return net ? null : { level }; }, revive() { hisPts = 0; myPts = 0; puck = reset(true); trail = []; },
       down(x, y) { if (mode == null) { mode = y < r.H / 2 ? '2p' : 'ai'; msg = mode === '2p' ? 'שני שחקנים! למעלה ולמטה' : 'נגד המחשב!'; msgT = 1.5; return; } if (y >= r.H / 2) target = { x, y }; else if (mode === '2p') target2 = { x, y }; },
       move(x, y) { if (mode == null) return; if (y >= r.H / 2 && !Object.values(r.pointers).some(p => p.y < r.H / 2 && Math.abs(p.x - x) < 1 && Math.abs(p.y - y) < 1)) target = { x, y }; },
       update(dt) { tt += dt; moodT -= dt; hitT -= dt; msgT -= dt; if (mode == null) return;
+        if (net) { netT += dt; if (netT > 3 && !net.alive(4000)) lostT += dt; else lostT = 0; if (lostT > 10) return r.over('החיבור לטלפון השני נפל'); netTick(dt);
+          if (!isHost) { /* אורח: המחבט שלי עוקב אחרי האצבע, הדיסקית ממשיכה לפי המהירות האחרונה עד העדכון הבא */
+            const ps = Object.values(r.pointers); for (const p of ps) if (p.y >= r.H / 2) target = { x: p.x, y: p.y }; follow(me, target.x, target.y, dt, false);
+            if (gotState) { puck.x += puck.vx * dt; puck.y += puck.vy * dt; trail.push([puck.x, puck.y]); if (trail.length > 10) trail.shift(); } return; } }
         // כל האצבעות: למטה שלי, למעלה של השחקן השני
         const ps = Object.values(r.pointers); for (const p of ps) { if (p.y >= r.H / 2) target = { x: p.x, y: p.y }; else if (mode === '2p') target2 = { x: p.x, y: p.y }; }
         follow(me, target.x, target.y, dt, false);
-        if (mode === '2p') follow(ai, target2.x, target2.y, dt, true);
+        if (mode === '2p' || mode === 'net') follow(ai, target2.x, target2.y, dt, true);
         else { const aiSp = 150 + level * 40; const tx = puck.y < r.H / 2 ? puck.x : r.W / 2, ty = puck.y < r.H / 2 ? Math.max(MR + 20, puck.y - 10) : 70; const dx = tx - ai.x, dy = ty - ai.y, dl = Math.hypot(dx, dy) || 1; const step = Math.min(dl, aiSp * dt); ai.vx = dx / dl * step / dt; ai.vy = dy / dl * step / dt; ai.x += dx / dl * step; ai.y = r.clamp(ai.y + dy / dl * step, MR, r.H / 2 - MR); }
         // הדיסקית: 3 תת-צעדים כדי שחבטה מהירה לא תעבור דרכה
         for (let k = 0; k < 3; k++) { const sdt = dt / 3; puck.vx *= (1 - .18 * sdt); puck.vy *= (1 - .18 * sdt); puck.x += puck.vx * sdt; puck.y += puck.vy * sdt;
@@ -182,13 +201,14 @@ G.push({ id: 'pong', name: 'הוקי שולחן', emoji: '🏒', how: 'משחק 
           collide(me, true); collide(ai, false); }
         trail.push([puck.x, puck.y]); if (trail.length > 10) trail.shift();
         if (puck.y < -PR) { myPts++; const sp = Math.hypot(puck.vx, puck.vy); const pts = (10 + Math.floor(sp / 80)) * level; r.addScore(pts); r.pop(`שער! +${pts}`, r.W / 2, 90, r.C.gold, 28); r.burst(r.W / 2, 10, r.C.pink, 16); r.sfx('goal'); mood = -1; moodT = 1.5; puck = reset(false); trail = [];
-          if (myPts >= TO) { level++; r.addScore(50 * level); const won = `ניצחת ${myPts}:${hisPts}! ${mode === '2p' ? 'למטה ניצח' : `רמה ${level}`}`; myPts = 0; hisPts = 0; puck = reset(true); r.win(won, 0); return; } }
-        if (puck.y > r.H + PR) { hisPts++; mood = 1; moodT = 1.5; r.sfx(mode === '2p' ? 'goal' : 'laugh'); puck = reset(true); trail = []; if (hisPts >= TO) { if (mode === '2p') { const won = `למעלה ניצח ${hisPts}:${myPts}!`; myPts = 0; hisPts = 0; r.win(won, 0); return; } return r.over(`היריב ניצח ${hisPts}:${myPts}`); } r.pop(`שער נגדך ${hisPts}:${myPts}`, r.W / 2, r.H - 120, '#ef4444', 22); } },
+          if (myPts >= TO) { if (mode === 'net') { net.send('st', { p: [puck.x, puck.y, 0, 0], h: [me.x, me.y], s: [myPts, hisPts], sc: [r.score, guestScore], hit: 0 }); net.send('end', { w: 'host' }); const won = `ניצחת ${myPts}:${hisPts}!`; myPts = 0; hisPts = 0; puck = reset(true); r.win(won, 0); return; } level++; r.addScore(50 * level); const won = `ניצחת ${myPts}:${hisPts}! ${mode === '2p' ? 'למטה ניצח' : `רמה ${level}`}`; myPts = 0; hisPts = 0; puck = reset(true); r.win(won, 0); return; } }
+        if (puck.y > r.H + PR) { hisPts++; mood = 1; moodT = 1.5; r.sfx(mode === 'ai' ? 'laugh' : 'goal'); if (mode === 'net') guestScore += 10 + Math.floor(Math.hypot(puck.vx, puck.vy) / 80); puck = reset(true); trail = []; if (hisPts >= TO) { if (mode === '2p') { const won = `למעלה ניצח ${hisPts}:${myPts}!`; myPts = 0; hisPts = 0; r.win(won, 0); return; } if (mode === 'net') { net.send('end', { w: 'guest' }); net.send('st', { p: [0, 0, 0, 0], h: [me.x, me.y], s: [myPts, hisPts], sc: [r.score, guestScore], hit: 0 }); } return r.over(`היריב ניצח ${hisPts}:${myPts}`); } r.pop(`שער נגדך ${hisPts}:${myPts}`, r.W / 2, r.H - 120, '#ef4444', 22); } },
       draw() { const c = r.ctx; const bg = c.createLinearGradient(0, 0, 0, r.H); bg.addColorStop(0, '#e0f2fe'); bg.addColorStop(1, '#bae6fd'); c.fillStyle = bg; c.fillRect(0, 0, r.W, r.H);
         r.line(0, r.H / 2, r.W, r.H / 2, '#ef444488', 3); c.strokeStyle = '#ef444488'; c.lineWidth = 3; c.beginPath(); c.arc(r.W / 2, r.H / 2, 46, 0, Math.PI * 2); c.stroke();
         r.rect(r.W / 2 - GW / 2, 0, GW, 8, '#1B1740', 3); r.rect(r.W / 2 - GW / 2, r.H - 8, GW, 8, '#1B1740', 3); c.strokeStyle = '#1B1740'; c.lineWidth = 2; c.beginPath(); c.arc(r.W / 2, 4, GW / 2, 0, Math.PI); c.stroke(); c.beginPath(); c.arc(r.W / 2, r.H - 4, GW / 2, Math.PI, 0); c.stroke();
         if (mode == null) { r.rect(20, 30, r.W - 40, r.H / 2 - 60, 'rgba(255,255,255,.7)', 20); r.text('👆👆 שני שחקנים', r.W / 2, r.H / 4 - 20, { size: 26, color: '#1B1740' }); r.text('נוגעים כאן: אחד למעלה, אחד למטה', r.W / 2, r.H / 4 + 20, { size: 15, color: '#475569' }); r.rect(20, r.H / 2 + 30, r.W - 40, r.H / 2 - 60, 'rgba(255,255,255,.7)', 20); r.text('🤖 נגד המחשב', r.W / 2, r.H * 3 / 4 - 20, { size: 26, color: '#1B1740' }); r.text('נוגעים כאן. משחק עד 3', r.W / 2, r.H * 3 / 4 + 20, { size: 15, color: '#475569' }); return; }
-        r.text(`${myPts} : ${hisPts}`, r.W / 2, r.H / 2 - 20, { size: 26, color: '#1B174066' }); r.text(mode === '2p' ? 'עד 3' : `רמה ${level} · עד 3`, r.W / 2, r.H / 2 + 20, { size: 13, color: '#1B174066' });
+        r.text(`${myPts} : ${hisPts}`, r.W / 2, r.H / 2 - 20, { size: 26, color: '#1B174066' }); r.text(mode === '2p' ? 'עד 3' : mode === 'net' ? 'מול טלפון אחר · עד 3' : `רמה ${level} · עד 3`, r.W / 2, r.H / 2 + 20, { size: 13, color: '#1B174066' });
+        if (net && !isHost && !gotState) r.text('מחכים למארח… ⏳', r.W / 2, r.H / 2 - 60, { size: 20, color: '#1B1740' }); if (net && lostT > 2) r.text(`החיבור לטלפון השני נעלם… ${Math.ceil(10 - lostT)}`, r.W / 2, r.H / 2 + 60, { size: 16, color: '#ef4444' });
         trail.forEach(([x, y], i) => r.circle(x, y, PR * (i + 1) / trail.length, `rgba(27,23,64,${(i + 1) / trail.length * .25})`));
         const mallet = (m, col, faceIt) => { r.circle(m.x, m.y + 3, MR, 'rgba(0,0,0,.2)'); r.circle(m.x, m.y, MR, col); r.circle(m.x, m.y, MR - 6, 'rgba(255,255,255,.35)'); r.circle(m.x, m.y, 9, col); c.strokeStyle = '#1B1740'; c.lineWidth = 2; c.beginPath(); c.arc(m.x, m.y, MR, 0, Math.PI * 2); c.stroke(); if (faceIt) face(m.x, m.y - MR - 22); };
         mallet(ai, moodT > 0 && mood < 0 ? '#ef4444' : r.C.pink, mode === 'ai'); mallet(me, hitT > 0 ? r.C.gold : r.C.sky, false);

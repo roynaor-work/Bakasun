@@ -7,6 +7,7 @@ import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate,
 import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js';
 import { runGame } from './games/engine.js';
 import * as cloud from './cloud.js';
+import { showLobby } from './games/lobby.js';
 import { initParent, parentGate, parentHome, basketball } from './parent.js';
 import { playIntro } from './intro.js';
 import { speak, speakLang, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js';
@@ -452,6 +453,13 @@ function playGame(g, onDone) {
     onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
 }
 
+// הוקי מול טלפון אחר: חדר עם קוד דרך הענן המשפחתי. בלי מתנה (פעילות משפחתית), הניקוד נרשם כרגיל
+function onlineHockey() {
+  mount('', true);
+  showLobby(app, { familyCode: store.profile.familyCode || '', setFamilyCode: v => store.setProfile({ familyCode: v }), onCancel: () => arcade(),
+    onReady(conn) { mount('', true); activeGame = runGame(gameById.pong, { seconds: 0, host: app, best: store.games.bests.pong || 0, sound: store.profile.sound !== false, net: conn, tokens: () => 0, onEnd({ score }) { store.recordGame('pong', score, true); activeGame = null; arcade(); } }); } });
+}
+
 function restPhase() {
   const next = W.items[W.idx], ex = byId[next.exId];
   let left = store.profile.rest || 15;
@@ -637,6 +645,7 @@ function arcade() {
     <div class="tiles"><div class="tile"><b>${gs.count}</b>משחקים ששיחקת</div><div class="tile"><b>${Object.keys(gs.played).length} <span class="muted" style="font-size:16px">מתוך</span> ${GAMES.length}</b>משחקים שגילית</div></div>
     ${Object.keys(gs.bests).length ? `<h2>🏆 לוח השיאים</h2><div class="card list">${Object.entries(gs.bests).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([id, best], i) => { const g = gameById[id]; return g ? `<div class="item"><span class="rank">${['🥇', '🥈', '🥉'][i] || (i + 1)}</span><span class="grow">${g.emoji} ${esc(g.name)}</span><b style="color:var(--accent)">${best}</b>${gs.bestAt?.[id] ? `<span class="muted small">${fmtDate(gs.bestAt[id])}</span>` : ''}</div>` : ''; }).join('')}</div>` : ''}
     ${unlockedList() ? `<div class="card"><b>🔓 ${unlockedList().length} מתוך ${GAMES.length} משחקים פתוחים.</b> ${credits() ? `<span style="color:var(--accent)">יש לך ${credits()} בחירות! לחץ על משחק נעול כדי לפתוח אותו.</span>` : `עוד ${nextUnlockIn(store.sessions.length, store.profile.unlockEvery)} אימונים ותפתח ${PICKS} משחקים לבחירתך.`}</div>` : ''}
+    <div class="card tap gcard" data-online style="border:2px solid var(--accent)"><div class="e">🌐</div><div><b>הוקי מול טלפון אחר</b><div class="best">כל אחד מהטלפון שלו: אחד יוצר חדר ומקבל קוד, השני מקליד. בלי מתנה. צריך אותו קוד משפחה בשני הטלפונים.</div></div><span class="pill solid">▶️</span></div>
     ${(() => { const ul = unlockedList(); const groups = ul ? [{ id: 'open', name: 'פתוחים לך עכשיו', emoji: '🔓', games: GAMES.filter(g => ul.includes(g.id)) }, ...GAME_GROUPS.map(gr => ({ ...gr, name: gr.name + ' (נעולים)', games: gr.games.filter(g => !ul.includes(g.id)) })).filter(gr => gr.games.length)] : GAME_GROUPS; return groups.map(gr => `
       <h2>${gr.emoji} ${gr.name}</h2>
       ${gr.games.map(g => { const locked = ul && !ul.includes(g.id); return `
@@ -648,6 +657,7 @@ function arcade() {
         </div>`; }).join('')}`).join(''); })()}
   </div>`);
   app.querySelectorAll('[data-demo]').forEach(b => b.onclick = e => { e.stopPropagation(); playDemo(gameById[b.dataset.demo], () => arcade()); });
+  const on = app.querySelector('[data-online]'); if (on) on.onclick = () => onlineHockey();
   app.querySelectorAll('[data-game]').forEach(c => c.onclick = () => {
     const id = c.dataset.game, ul = unlockedList();
     if (ul && !ul.includes(id)) {
