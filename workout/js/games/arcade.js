@@ -81,21 +81,42 @@ G.push({ id: 'snake', name: 'הרעב הגדול', emoji: '🍔', how: 'מחלי
     };
   } });
 
-// ---- שובר לבנים ----
-G.push({ id: 'breakout', name: 'שובר לבנים', emoji: '🧊', how: 'מזיזים את המחבט עם האצבע ומפילים את כל הלבנים.',
+// ---- שובר לבנים: מהלבנים נופלים בונוסים (מחבט רחב, כדור נוסף, כדור אש, ניקוד כפול, מטבע) ודברים רעים (מחבט קטן, קקי שמלכלך את המסך, כדור מהיר). רמה = יותר שורות, מהיר יותר, ניקוד גבוה יותר ----
+G.push({ id: 'breakout', name: 'שובר לבנים', emoji: '🧊', how: 'מזיזים את המחבט עם האצבע ומפילים את כל הלבנים. מהלבנים נופלים דברים: תופסים בונוסים (🟢 מחבט רחב, ⚪ כדור נוסף, 🔥 כדור אש, ✖️2 ניקוד כפול, 💰 מטבע) ומתחמקים מהרעים (🟥 מחבט קטן, 💩 קקי, ⚡ כדור מהיר).',
   make(r) {
-    let px = r.W / 2, PW = 80, ball = { x: r.W / 2, y: r.H - 80, vx: 160, vy: -260 }, bricks = [], level = 1;
-    const build = () => { bricks = []; for (let j = 0; j < 5 + level; j++) for (let i = 0; i < 8; i++) bricks.push({ x: 8 + i * 43, y: 60 + j * 22, c: [r.C.pink, r.C.hot, r.C.gold, r.C.ok, r.C.sky, r.C.accent, r.C.teal][j % 7] }); };
-    build();
+    let px = r.W / 2, PW = 80, balls = [], bricks = [], level = 1, drops = [], fx = { wide: 0, fire: 0, x2: 0, small: 0, poop: 0, fast: 0 }, tt = 0;
+    const newBall = (x = r.W / 2, y = r.H - 80, vx = 160) => ({ x, y, vx, vy: -260 });
+    const build = () => { bricks = []; for (let j = 0; j < 4 + level; j++) for (let i = 0; i < 8; i++) bricks.push({ x: 8 + i * 43, y: 60 + j * 22, c: [r.C.pink, r.C.hot, r.C.gold, r.C.ok, r.C.sky, r.C.accent, r.C.teal][j % 7], hp: level >= 3 && j < 2 ? 2 : 1 }); };
+    build(); balls = [newBall()];
+    // מה נופל: 22% מהלבנים מפילות משהו. טוב: 70%, רע: 30%
+    const DROPS = [['wide', '🟢', 'מחבט רחב!', true], ['multi', '⚪', 'כדור נוסף!', true], ['fire', '🔥', 'כדור אש!', true], ['x2', '✖️2', 'ניקוד כפול!', true], ['coin', '💰', '+50', true], ['small', '🟥', 'מחבט קטן...', false], ['poop', '💩', 'קקי! לא רואים...', false], ['fast', '⚡', 'כדור מהיר!', false]];
+    const dropFrom = b => { if (Math.random() > .22) return; const good = Math.random() < .7; const opts = DROPS.filter(d => d[3] === good); const [kind, e, txt] = r.pick(opts); drops.push({ x: b.x + 20, y: b.y + 9, kind, e, txt, good, vy: 90 + level * 8, ph: Math.random() * 6 }); };
+    const paddleW = () => fx.wide > 0 ? 130 : fx.small > 0 ? 50 : PW;
     return {
-      move(x) { px = r.clamp(x, PW / 2, r.W - PW / 2); }, down(x) { this.move(x); },
-      update(dt) { ball.x += ball.vx * dt; ball.y += ball.vy * dt;
-        if (ball.x < 8 || ball.x > r.W - 8) ball.vx *= -1; if (ball.y < 8) ball.vy *= -1;
-        if (ball.y > r.H) return r.over('הכדור נפל!');
-        if (ball.vy > 0 && ball.y > r.H - 40 && ball.y < r.H - 24 && Math.abs(ball.x - px) < PW / 2 + 8) { ball.vy = -Math.abs(ball.vy) * 1.02; ball.vx = (ball.x - px) * 6; r.sfx('bounce'); }
-        for (let i = bricks.length - 1; i >= 0; i--) { const b = bricks[i]; if (r.hit(ball.x - 8, ball.y - 8, 16, 16, b.x, b.y, 40, 18)) { r.burst(b.x + 20, b.y + 9, b.c, 8, 140); bricks.splice(i, 1); ball.vy *= -1; r.addScore(10); r.sfx('tick'); break; } }
-        if (!bricks.length) { level++; ball = { x: r.W / 2, y: r.H - 80, vx: 160, vy: -260 }; build(); r.win('ניקית את הלוח!', 100); } },
-      draw() { r.clear(); bricks.forEach(b => { r.rect(b.x, b.y, 40, 18, b.c, 4); r.rect(b.x + 3, b.y + 3, 34, 4, '#ffffff44', 2); }); r.rect(px - PW / 2, r.H - 32, PW, 12, r.C.ink, 6); r.rect(px - PW / 2 + 6, r.H - 30, PW - 12, 3, r.C.sky, 2); r.circle(ball.x, ball.y, 8, r.C.gold); r.circle(ball.x - 2, ball.y - 3, 2.5, '#fff8'); },
+      move(x) { px = r.clamp(x, paddleW() / 2, r.W - paddleW() / 2); }, down(x) { this.move(x); },
+      update(dt) { tt += dt; for (const k in fx) fx[k] = Math.max(0, fx[k] - dt); const spd = fx.fast > 0 ? 1.45 : 1; const W2 = paddleW();
+        // הכדורים
+        for (const ball of balls) { ball.x += ball.vx * dt * spd; ball.y += ball.vy * dt * spd;
+          if (ball.x < 8) { ball.x = 8; ball.vx = Math.abs(ball.vx); } if (ball.x > r.W - 8) { ball.x = r.W - 8; ball.vx = -Math.abs(ball.vx); } if (ball.y < 8) { ball.y = 8; ball.vy = Math.abs(ball.vy); }
+          if (ball.vy > 0 && ball.y > r.H - 40 && ball.y < r.H - 24 && Math.abs(ball.x - px) < W2 / 2 + 8) { ball.vy = -Math.abs(ball.vy) * 1.02; ball.vx = (ball.x - px) * (W2 > 100 ? 4 : 6); r.sfx('bounce'); }
+          for (let i = bricks.length - 1; i >= 0; i--) { const b = bricks[i]; if (r.hit(ball.x - 8, ball.y - 8, 16, 16, b.x, b.y, 40, 18)) { b.hp--; if (b.hp <= 0 || fx.fire > 0) { r.burst(b.x + 20, b.y + 9, b.c, 8, 140); bricks.splice(i, 1); dropFrom(b); const pts = 10 * level * (fx.x2 > 0 ? 2 : 1); r.addScore(pts); if (fx.x2 > 0 || level > 1) r.pop('+' + pts, b.x + 20, b.y - 6, '#fff', 14); } else { r.sfx('hit'); } if (fx.fire <= 0) ball.vy *= -1; r.sfx('tick'); break; } } }
+        const before = balls.length; balls = balls.filter(b => b.y < r.H + 10); if (balls.length < before && balls.length) r.pop('כדור אחד נפל', r.W / 2, r.H - 120, r.C.muted, 16);
+        if (!balls.length) return r.over('הכדור נפל!');
+        // הדברים שנופלים: תופסים עם המחבט
+        drops.forEach(d => { d.y += d.vy * dt; d.x += Math.sin(tt * 3 + d.ph) * 20 * dt; });
+        for (const d of drops) { if (d.y > r.H - 44 && d.y < r.H - 20 && Math.abs(d.x - px) < W2 / 2 + 12) { d.got = true; r.pop(d.txt, px, r.H - 70, d.good ? r.C.gold : '#f87171', 20);
+            if (d.kind === 'wide') { fx.wide = 8; fx.small = 0; r.sfx('score'); } else if (d.kind === 'multi') { const src = balls[0]; balls.push(newBall(src.x, src.y, -src.vx), newBall(src.x, src.y, src.vx * .6)); r.sfx('score'); } else if (d.kind === 'fire') { fx.fire = 6; r.sfx('win'); } else if (d.kind === 'x2') { fx.x2 = 8; r.sfx('score'); } else if (d.kind === 'coin') { r.addScore(50); r.sfx('ching'); }
+            else if (d.kind === 'small') { fx.small = 7; fx.wide = 0; r.sfx('over'); } else if (d.kind === 'poop') { fx.poop = 3; r.sfx('fart'); r.shake(200); } else if (d.kind === 'fast') { fx.fast = 6; r.sfx('hit'); } } }
+        drops = drops.filter(d => !d.got && d.y < r.H + 20);
+        if (!bricks.length) { level++; balls = [newBall()]; drops = []; build(); r.win(`ניקית את הלוח! רמה ${level}`, 100 * level); } },
+      draw() { r.clear(); bricks.forEach(b => { r.rect(b.x, b.y, 40, 18, b.c, 4); r.rect(b.x + 3, b.y + 3, 34, 4, '#ffffff44', 2); if (b.hp > 1) r.rect(b.x + 14, b.y + 7, 12, 4, '#ffffff99', 2); });
+        drops.forEach(d => { r.circle(d.x, d.y, 14, d.good ? 'rgba(134,239,172,.25)' : 'rgba(248,113,113,.25)'); r.emoji(d.e, d.x, d.y, d.kind === 'x2' ? 14 : 20); });
+        const W2 = paddleW(); r.rect(px - W2 / 2, r.H - 32, W2, 12, fx.wide > 0 ? r.C.ok : fx.small > 0 ? '#ef4444' : r.C.ink, 6); r.rect(px - W2 / 2 + 6, r.H - 30, W2 - 12, 3, r.C.sky, 2);
+        balls.forEach(ball => { if (fx.fire > 0) { r.circle(ball.x, ball.y, 12, 'rgba(249,115,22,.35)'); r.circle(ball.x, ball.y, 8, '#f97316'); } else r.circle(ball.x, ball.y, 8, r.C.gold); r.circle(ball.x - 2, ball.y - 3, 2.5, '#fff8'); });
+        // מצב הבונוסים למעלה
+        const act = [fx.wide > 0 && '🟢', fx.fire > 0 && '🔥', fx.x2 > 0 && '✖️2', fx.small > 0 && '🟥', fx.fast > 0 && '⚡'].filter(Boolean).join(' '); r.text(`רמה ${level}${act ? ' · ' + act : ''}`, r.W / 2, 30, { size: 14, color: r.C.muted });
+        // קקי על המסך: כתמים חומים שמסתירים חלק מהמסך
+        if (fx.poop > 0) { const a = Math.min(1, fx.poop) * .85; for (let i = 0; i < 7; i++) r.circle(40 + (i * 53) % (r.W - 60), 120 + (i * 97) % (r.H - 220), 45 + (i % 3) * 15, `rgba(124,74,30,${a})`); r.emoji('💩', r.W / 2, r.H / 2, 60); } },
     };
   } });
 
