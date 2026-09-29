@@ -1,1 +1,48 @@
-/* Desktop layout: side navigation and wider grids from 900px. Loaded after css/app.css. */
+/* Desktop layout: side navigation and wider grids from 900px. Loaded after css/app.css.
+   Below 900px nothing here applies, except hiding the rail-only parts of the nav. Logical properties only: the rail
+   sits on the inline-start side (right in Hebrew, left in French and English). */
+nav.bottom .brand, nav.bottom .side-more { display: none; }
+
+@media (min-width: 900px) {
+  :root { --rail: 200px; --content: 1100px; }
+
+  /* the bottom bar becomes a rail */
+  nav.bottom { inset-inline: auto; inset-inline-start: 0; inset-block: 0; width: var(--rail); border-top: 0; border-inline-end: 1px solid var(--line);
+    padding: 12px 0 16px; overflow-y: auto; display: flex; flex-direction: column; }
+  nav.bottom .brand { display: block; font-family: var(--f-head); font-weight: 900; font-size: 20px; color: var(--ink); padding: 10px 20px 14px; }
+  nav.bottom ul { max-width: none; display: flex; flex-direction: column; gap: 2px; padding: 0 10px; }
+  nav.bottom a { flex-direction: row; justify-content: flex-start; gap: 12px; padding: 10px 12px; min-height: 44px; border-radius: 12px; font-size: 16px; }
+  nav.bottom a:hover { background: var(--bg); color: var(--ink); }
+  nav.bottom a.on { background: var(--accent-soft); }
+  nav.bottom .side-more { display: flex; margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--line); }
+  nav.bottom .side-more a { min-height: 38px; padding: 6px 12px; font-size: 15px; font-weight: 600; }
+  nav.bottom .side-more svg { width: 20px; height: 20px; }
+
+  /* the content next to the rail, centred in what is left of the window */
+  #app { max-width: var(--content); margin: 0; margin-inline-start: max(var(--rail), calc((100vw - var(--content)) / 2 + var(--rail) / 2)); padding: 0 32px 48px; min-height: 100vh; }
+  .top { padding-top: 20px; padding-bottom: 14px; }
+  .top h1 { font-size: 28px; }
+  .fab { inset-inline-end: 32px; bottom: 32px; }
+  #toast { bottom: 32px; inset-inline: auto; inset-inline-start: max(var(--rail), calc((100vw - var(--content)) / 2 + var(--rail) / 2)); margin-inline-start: 32px; }
+
+  /* card lists become a grid; headings, empty states and buttons inside a list keep the full width; cards keep their own height */
+  .list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; align-items: start; }
+  .list > .grp, .list > .empty, .list > .btn, .list > .sec, .list > .warnbox, .list > .okbox, .list > p, .list > h2, .list > h3 { grid-column: 1 / -1; }
+  .list > .card { min-width: 0; }
+  .sec { margin-top: 24px; gap: 10px; }
+  .stat { gap: 12px; }
+
+  /* forms and dialogs */
+  .grid2 { grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+  .modal { align-items: center; padding: 24px; }
+  .modal-card { max-width: 640px; border-radius: 18px; padding: 24px 24px 20px; max-height: 88vh; }
+  .kv { gap: 8px 24px; font-size: 16px; }
+  table.cmp { font-size: 14px; }
+  table.cmp th, table.cmp td { padding: 8px 12px; }
+  .tabs { flex-wrap: wrap; overflow: visible; }
+
+  /* keyboard: a clear ring on everything that can take focus */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, .card.tap:focus-visible, .chip:focus-visible, .tabs button:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 10px; }
+  nav.bottom a:focus-visible { outline-offset: -3px; }
+}

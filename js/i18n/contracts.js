@@ -1,2 +1,63 @@
-/* Texts of the contracts module: he / fr / en. No Arabic letters anywhere. */
-export const CONTRACTS = { he: {}, fr: {}, en: {} };
+/* Texts of the contracts and checklists module: he / fr / en. No Arabic letters anywhere. */
+export const CONTRACTS = {
+  he: {
+    tContract: 'חוזה', tChecklist: 'רשימת תיוג', ctContracts: 'חוזים', ctNew: 'חוזה חדש', ctNone: 'אין עדיין חוזה לאירוע הזה. "חוזה חדש" בונה אותו מהתיק, מכרטיס הלקוח ומהצעת המחיר.',
+    ctNoneAll: 'אין עדיין חוזים. פותחים אירוע ← לשונית "חוזה".', ctStatus_draft: 'טיוטה', ctStatus_sent: 'נשלח ללקוח', ctStatus_signed: 'חתום',
+    ctMissing: 'חסר לחוזה', ctMiss_clientLegalName: 'שם משפטי של הלקוח', ctMiss_clientTaxId: 'ח.פ. / ע.מ. של הלקוח', ctMiss_clientAddress: 'כתובת הלקוח', ctMiss_date: 'תאריך האירוע', ctMiss_price: 'מחיר',
+    ctPrint: 'PDF / הדפסה', ctClientSign: 'לחתימה של הלקוח', ctMySign: 'חתימה שלי', ctSend: 'שליחה', ctOpen: 'פתיחה',
+    ctProducerSig: 'חתימת המפיקה', ctClientSig: 'חתימת הלקוח', ctNotSigned: 'טרם נחתם', ctSignedBy: 'נחתם על ידי', ctSigned: 'החוזה נחתם', ctSigRemove: 'הסרת חתימה',
+    ctLang: 'שפת החוזה', ctTitle: 'כותרת', ctDate: 'תאריך החוזה', ctClientName: 'שם הלקוח', ctClientLegal: 'שם משפטי (לחוזה ולחשבונית)', ctClientTaxId: 'ח.פ. / ע.מ.', ctClientAddress: 'כתובת', ctClientContact: 'איש קשר אצל הלקוח', ctClientEmail: 'מייל', ctClientPhone: 'טלפון',
+    ctEventKind: 'סוג האירוע', ctEventDate: 'מועד האירוע', ctEventHours: 'שעות', ctEventPlace: 'מקום', ctEventParticipants: 'משתתפים',
+    ctPrice: 'התמורה לפני מע״מ (₪)', ctVat: 'מע״מ %', ctScope: 'השירות כולל', ctPayment: 'תנאי תשלום', ctCancel: 'תנאי ביטול', ctExtras: 'תנאים נוספים',
+    ctNet: 'לפני מע״מ', ctGross: 'כולל מע״מ', ctFromQuote: 'לפי הצעת מחיר', ctNoPrice: 'עדיין אין מחיר',
+    ctChannel: 'איך לשלוח', ctChWa: 'וואטסאפ (טקסט, הקובץ בנפרד)', ctChMail: 'מייל (טקסט, הקובץ בנפרד)', ctChFile: 'שיתוף הקובץ (PDF)', ctCover: 'ההודעה המצורפת',
+    ctShareHint: 'שיתוף קובץ לא נתמך בדפדפן הזה. "PDF / הדפסה" ← לשמור כ-PDF ← לצרף בהודעה.', ctSendHint: 'שום דבר לא נשלח לבד: ההודעה נפתחת מוכנה ואת לוחצת שליחה.',
+    ctSigHint: 'לחתום עם האצבע או העכבר בתוך המסגרת', ctSigTitleClient: 'חתימת הלקוח', ctSigTitleMine: 'החתימה שלי', ctHandDevice: 'מוסרים את המכשיר ללקוח לחתימה.',
+    sigClear: 'ניקוי', sigUndo: 'ביטול קו', sigOk: 'אישור חתימה', sigName: 'שם החותם', sigUseSaved: 'החתימה השמורה שלי', sigSaveMine: 'לשמור כחתימה שלי לפעם הבאה', sigEmpty: 'עדיין אין חתימה',
+    clNew: 'יצירת רשימה מהתבנית', clNone: 'אין עדיין רשימת תיוג לאירוע הזה. הרשימה נבנית לפי סוג האירוע עם תאריכי יעד מתאריך האירוע.',
+    clAdd: '+ פריט', clRefresh: 'רשימה מחדש מהתבנית', clRefreshHint: 'מוסיף רק מה שחסר. סימונים ופריטים שלך נשארים.', clAdded: 'נוספו {n} פריטים', clNothingAdded: 'הכול כבר ברשימה',
+    clToTask: 'למשימה', clTaskMade: 'נוצרה משימה', clIsTask: 'משימה', clProgress: '{done} מתוך {total} בוצעו', clDueSoon: '{n} לשבוע הקרוב', clOverdue: '{n} באיחור', clAllDone: 'הכול בוצע',
+    clPhase_before: 'שבועות לפני', clPhase_week: 'השבוע שלפני', clPhase_day: 'יום האירוע', clPhase_after: 'אחרי האירוע',
+    clItem: 'מה לעשות', clPhase: 'שלב', clDue: 'עד מתי', clDeleteItem: 'מחיקת הפריט', clNoDate: 'אין תאריך לאירוע, לכן אין תאריכי יעד.'
+  },
+  fr: {
+    tContract: 'Contrat', tChecklist: 'Check-list', ctContracts: 'Contrats', ctNew: 'Nouveau contrat', ctNone: 'Pas encore de contrat pour cet événement. « Nouveau contrat » le construit à partir du dossier, de la fiche client et du devis.',
+    ctNoneAll: 'Pas encore de contrats. Ouvrir un événement → onglet « Contrat ».', ctStatus_draft: 'Brouillon', ctStatus_sent: 'Envoyé au client', ctStatus_signed: 'Signé',
+    ctMissing: 'Manque au contrat', ctMiss_clientLegalName: 'Raison sociale du client', ctMiss_clientTaxId: 'N° société du client', ctMiss_clientAddress: 'Adresse du client', ctMiss_date: 'Date de l’événement', ctMiss_price: 'Prix',
+    ctPrint: 'PDF / Imprimer', ctClientSign: 'Signature du client', ctMySign: 'Ma signature', ctSend: 'Envoyer', ctOpen: 'Ouvrir',
+    ctProducerSig: 'Signature du producteur', ctClientSig: 'Signature du client', ctNotSigned: 'Non signé', ctSignedBy: 'Signé par', ctSigned: 'Contrat signé', ctSigRemove: 'Retirer la signature',
+    ctLang: 'Langue du contrat', ctTitle: 'Titre', ctDate: 'Date du contrat', ctClientName: 'Nom du client', ctClientLegal: 'Raison sociale', ctClientTaxId: 'N° société', ctClientAddress: 'Adresse', ctClientContact: 'Contact chez le client', ctClientEmail: 'E-mail', ctClientPhone: 'Téléphone',
+    ctEventKind: 'Type d’événement', ctEventDate: 'Date de l’événement', ctEventHours: 'Horaires', ctEventPlace: 'Lieu', ctEventParticipants: 'Participants',
+    ctPrice: 'Prix HT (₪)', ctVat: 'TVA %', ctScope: 'La prestation comprend', ctPayment: 'Conditions de paiement', ctCancel: 'Conditions d’annulation', ctExtras: 'Conditions supplémentaires',
+    ctNet: 'HT', ctGross: 'TTC', ctFromQuote: 'Selon devis', ctNoPrice: 'Pas encore de prix',
+    ctChannel: 'Comment envoyer', ctChWa: 'WhatsApp (texte, fichier à part)', ctChMail: 'E-mail (texte, fichier à part)', ctChFile: 'Partager le fichier (PDF)', ctCover: 'Message joint',
+    ctShareHint: 'Le partage de fichier n’est pas pris en charge ici. « PDF / Imprimer » → enregistrer en PDF → joindre au message.', ctSendHint: 'Rien ne part tout seul : le message s’ouvre prêt et vous appuyez sur envoyer.',
+    ctSigHint: 'Signer au doigt ou à la souris dans le cadre', ctSigTitleClient: 'Signature du client', ctSigTitleMine: 'Ma signature', ctHandDevice: 'Passez l’appareil au client pour signer.',
+    sigClear: 'Effacer', sigUndo: 'Annuler le trait', sigOk: 'Valider la signature', sigName: 'Nom du signataire', sigUseSaved: 'Ma signature enregistrée', sigSaveMine: 'Enregistrer comme ma signature', sigEmpty: 'Pas encore de signature',
+    clNew: 'Créer la liste depuis le modèle', clNone: 'Pas encore de check-list pour cet événement. Elle se construit selon le type d’événement, avec des échéances calculées depuis la date.',
+    clAdd: '+ Élément', clRefresh: 'Compléter depuis le modèle', clRefreshHint: 'Ajoute seulement ce qui manque. Vos coches et vos éléments restent.', clAdded: '{n} éléments ajoutés', clNothingAdded: 'Tout est déjà dans la liste',
+    clToTask: 'En tâche', clTaskMade: 'Tâche créée', clIsTask: 'Tâche', clProgress: '{done} sur {total} faits', clDueSoon: '{n} pour la semaine', clOverdue: '{n} en retard', clAllDone: 'Tout est fait',
+    clPhase_before: 'Semaines avant', clPhase_week: 'La semaine d’avant', clPhase_day: 'Le jour J', clPhase_after: 'Après l’événement',
+    clItem: 'Quoi faire', clPhase: 'Phase', clDue: 'Pour quand', clDeleteItem: 'Supprimer l’élément', clNoDate: 'Pas de date d’événement, donc pas d’échéances.'
+  },
+  en: {
+    tContract: 'Contract', tChecklist: 'Checklist', ctContracts: 'Contracts', ctNew: 'New contract', ctNone: 'No contract for this event yet. “New contract” builds it from the case, the client card and the quote.',
+    ctNoneAll: 'No contracts yet. Open an event → “Contract” tab.', ctStatus_draft: 'Draft', ctStatus_sent: 'Sent to client', ctStatus_signed: 'Signed',
+    ctMissing: 'Missing for the contract', ctMiss_clientLegalName: 'Client legal name', ctMiss_clientTaxId: 'Client registration no.', ctMiss_clientAddress: 'Client address', ctMiss_date: 'Event date', ctMiss_price: 'Price',
+    ctPrint: 'PDF / Print', ctClientSign: 'Client signature', ctMySign: 'My signature', ctSend: 'Send', ctOpen: 'Open',
+    ctProducerSig: 'Producer signature', ctClientSig: 'Client signature', ctNotSigned: 'Not signed yet', ctSignedBy: 'Signed by', ctSigned: 'Contract signed', ctSigRemove: 'Remove signature',
+    ctLang: 'Contract language', ctTitle: 'Title', ctDate: 'Contract date', ctClientName: 'Client name', ctClientLegal: 'Legal name', ctClientTaxId: 'Registration no.', ctClientAddress: 'Address', ctClientContact: 'Contact at the client', ctClientEmail: 'E-mail', ctClientPhone: 'Phone',
+    ctEventKind: 'Type of event', ctEventDate: 'Event date', ctEventHours: 'Hours', ctEventPlace: 'Venue', ctEventParticipants: 'Participants',
+    ctPrice: 'Fee before VAT (₪)', ctVat: 'VAT %', ctScope: 'The service includes', ctPayment: 'Payment terms', ctCancel: 'Cancellation terms', ctExtras: 'Additional terms',
+    ctNet: 'before VAT', ctGross: 'incl. VAT', ctFromQuote: 'Per quotation', ctNoPrice: 'No price yet',
+    ctChannel: 'How to send', ctChWa: 'WhatsApp (text, file separately)', ctChMail: 'E-mail (text, file separately)', ctChFile: 'Share the file (PDF)', ctCover: 'Cover message',
+    ctShareHint: 'File sharing is not supported in this browser. “PDF / Print” → save as PDF → attach to the message.', ctSendHint: 'Nothing is sent by itself: the message opens ready and you press send.',
+    ctSigHint: 'Sign with a finger or the mouse inside the frame', ctSigTitleClient: 'Client signature', ctSigTitleMine: 'My signature', ctHandDevice: 'Hand the device to the client to sign.',
+    sigClear: 'Clear', sigUndo: 'Undo stroke', sigOk: 'Confirm signature', sigName: 'Name of signatory', sigUseSaved: 'My saved signature', sigSaveMine: 'Save as my signature for next time', sigEmpty: 'No signature yet',
+    clNew: 'Create the list from the template', clNone: 'No checklist for this event yet. It is built by the kind of event, with due dates from the event date.',
+    clAdd: '+ Item', clRefresh: 'Refresh from template', clRefreshHint: 'Adds only what is missing. Your ticks and your items stay.', clAdded: '{n} items added', clNothingAdded: 'Everything is already on the list',
+    clToTask: 'Make a task', clTaskMade: 'Task created', clIsTask: 'Task', clProgress: '{done} of {total} done', clDueSoon: '{n} due this week', clOverdue: '{n} overdue', clAllDone: 'All done',
+    clPhase_before: 'Weeks before', clPhase_week: 'The week before', clPhase_day: 'Event day', clPhase_after: 'After the event',
+    clItem: 'What to do', clPhase: 'Phase', clDue: 'Due', clDeleteItem: 'Delete item', clNoDate: 'No event date, so no due dates.'
+  }
+};

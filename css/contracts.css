@@ -1,1 +1,39 @@
-/* Styles of the contracts module. Loaded after css/app.css. */
+/* Styles of the contracts and checklists module. Loaded after css/app.css. Logical properties only (RTL and LTR). */
+
+/* ---- signature pad ---- */
+.sig-modal { align-items: center; padding: 12px; }
+.sig-card { border-radius: 18px; max-width: 560px; }
+.sig-frame { position: relative; border: 2px dashed var(--line); border-radius: 12px; background: #fff; height: 220px; overflow: hidden; }
+.sig-canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: crosshair; direction: ltr; }
+.sig-line { position: absolute; inset-inline: 24px; bottom: 44px; border-bottom: 1px solid #C9BFB3; pointer-events: none; }
+.sig-hint { position: absolute; inset-inline: 0; bottom: 12px; text-align: center; color: #A79C93; font-size: 14px; pointer-events: none; }
+.has-ink .sig-hint { display: none; }
+.sig-frame.shake { animation: sigShake .4s; border-color: var(--accent); }
+@keyframes sigShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+/* ---- contract card ---- */
+.ct-sigs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ct-sig { border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; background: var(--bg); display: flex; flex-direction: column; gap: 4px; min-height: 96px; }
+.ct-sig .lbl { font-size: 14px; font-weight: 700; color: var(--ink-2); }
+.ct-sig img { max-height: 56px; max-width: 100%; align-self: center; background: #fff; border-radius: 6px; padding: 2px; }
+.ct-sig .none { color: var(--muted); font-size: 14px; }
+.ct-price b { font-family: var(--f-head); font-size: 22px; }
+.ct-pv iframe { width: 100%; height: 78vh; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+@media (max-width: 460px) { .ct-sigs { grid-template-columns: 1fr; } }
+
+/* ---- checklist ---- */
+.cl-bar { height: 10px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.cl-bar > span { display: block; height: 100%; background: var(--ok); border-radius: 999px; transition: width .3s; }
+.cl-phase { display: flex; flex-direction: column; gap: 4px; }
+.cl-phase h3 { margin: 0; font-size: 16px; display: flex; justify-content: space-between; align-items: center; }
+.cl-phase h3 .badge { font-weight: 600; }
+.cl-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.cl-item:last-child { border-bottom: 0; }
+.cl-item input[type=checkbox] { width: 24px; height: 24px; min-height: 0; margin: 2px 0 0; accent-color: var(--ok); flex: none; cursor: pointer; }
+.cl-item .txt { flex: 1; min-width: 0; cursor: pointer; unicode-bidi: plaintext; text-align: start; }
+.cl-item.done .txt { color: var(--muted); text-decoration: line-through; }
+.cl-item .meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+.cl-item .meta .late { color: var(--accent); font-weight: 700; }
+.cl-item .meta .soon { color: var(--warn); font-weight: 700; }
+.cl-item .acts { display: flex; gap: 4px; flex: none; }
+.cl-item .acts .btn { min-height: 32px; padding: 0 10px; font-size: 14px; }

@@ -30,6 +30,7 @@ import { quickNote } from './notes.js';
 import { setChangeHook } from './store.js';
 import { enqueue } from './cloud.js';
 setChangeHook(enqueue);
+import { startHistory } from './logic/history.js'; startHistory();
 
 const ROUTES = {
   today, lead, cases, 'case': cases, clients, client: clients, calls, tasks, search, settings, more,
@@ -59,9 +60,27 @@ export function applyLang() {
 }
 
 function drawNav(active) {
-  nav.innerHTML = '<ul>' + NAV.map(([key, label, d]) =>
-    `<li><a href="#/${key}" class="${active === key || (key === 'cases' && active === 'case') || (key === 'more' && ['clients', 'client', 'search', 'settings', 'suppliers', 'supplier', 'quotes', 'quote', 'money', 'notes', 'assist'].includes(active)) ? 'on' : ''}">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>${esc(t(label))}</a></li>`).join('') + '</ul>';
+  // On a computer (css/desktop.css, from 900px) the bar becomes a side rail with the app name and the "more" screens listed
+  // under the five main ones. On the phone the brand and the second list are hidden and the bar is unchanged.
+  const SIDE = [
+    ['dashboard', 'dashboard', 'M4 4h7v7H4zM13 4h7v4h-7zM13 11h7v9h-7zM4 14h7v6H4z'],
+    ['calendar', 'calendar', 'M4 5h16v15H4zM4 9h16M8 3v4M16 3v4'],
+    ['clients', 'clients', 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8'],
+    ['suppliers', 'suppliers', 'M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6'],
+    ['quotes', 'quotes', 'M6 3h9l5 5v13H6zM14 3v6h6M9 13h6M9 17h6'],
+    ['money', 'money', 'M3 7h18v10H3zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM6 12h.01M18 12h.01'],
+    ['notes', 'notes', 'M4 4h13l3 3v13H4zM8 9h8M8 13h8M8 17h5'],
+    ['assist', 'assist', 'M12 3a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V8a5 5 0 0 1 5-5zM5 11a7 7 0 0 0 14 0M12 18v3M8 21h8'],
+    ['search', 'search', 'M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM20 20l-3.5-3.5'],
+    ['settings', 'settings', 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM4 12h2M18 12h2M12 4v2M12 18v2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M6.3 17.7l1.4-1.4M16.3 7.7l1.4-1.4']
+  ];
+  const SINGULAR = { client: 'clients', supplier: 'suppliers', quote: 'quotes', 'case': 'cases', contract: 'contracts' };
+  const cur = SINGULAR[active] || active;
+  const icon = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+  const item = ([key, label, d], on) => `<li><a href="#/${key}" class="${on ? 'on' : ''}">${icon(d)}${esc(t(label) === label && label === 'calendar' ? 'יומן' : t(label))}</a></li>`;
+  nav.innerHTML = `<div class="brand" aria-hidden="true">${esc(t('app'))}</div><ul>` + NAV.map(x =>
+    item(x, cur === x[0] || (x[0] === 'more' && ['clients', 'search', 'settings', 'suppliers', 'quotes', 'money', 'notes', 'assist'].includes(cur)))).join('') + '</ul>'
+    + '<ul class="side-more">' + SIDE.map(x => item(x, cur === x[0])).join('') + '</ul>';
 }
 
 export function go(hash) { location.hash = hash; }

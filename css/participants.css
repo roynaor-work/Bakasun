@@ -1,1 +1,40 @@
-/* Styles of the participants module. Loaded after css/app.css. */
+/* Styles of the participants module. Loaded after css/app.css. Logical properties only (RTL for Hebrew, LTR for fr/en). */
+.pt-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.pt-stats .card { align-items: center; text-align: center; padding: 8px 6px; }
+.pt-stats b { font-size: 22px; font-family: var(--f-head); }
+.pt-stats span { font-size: 13px; color: var(--muted); }
+.pt-search { width: 100%; }
+.pt-filters .chip { min-height: 32px; font-size: 14px; }
+.pt-row { cursor: pointer; }
+.pt-row .pt-main { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.pt-row .pt-acts { display: flex; gap: 6px; flex-wrap: wrap; margin-block-start: 6px; }
+.pt-row .pt-acts .btn.sm { min-height: 30px; padding: 0 10px; font-size: 13px; }
+.pt-row .badge.rsvp-yes { background: var(--ok-soft); color: var(--ok); }
+.pt-row .badge.rsvp-no { background: var(--line); color: var(--ink-2); }
+.pt-row .badge.rsvp-maybe { background: var(--warn-soft); color: var(--warn); }
+.pt-chips .chip { min-height: 30px; font-size: 13px; padding: 0 9px; }
+.pt-diet { display: flex; flex-wrap: wrap; gap: 6px; margin-block: 4px; }
+.pt-diet label { display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.pt-diet input { margin: 0; }
+.pt-preview { max-height: 45vh; overflow: auto; }
+.pt-preview .card { padding: 6px 10px; }
+.pt-msg textarea { width: 100%; }
+.pt-msg .row { margin-block-start: 8px; }
+.pt-count { font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; }
+
+/* The full screen: on wide screens the rows line up as a table; on the phone (and in the tab) they stay cards. */
+.pt-head, .pt-row .pt-desk { display: none; }
+@media (min-width: 900px) {
+  .pt-wide .list.pt-rows { display: flex; flex-direction: column; gap: 6px; }
+  .pt-wide .pt-head { display: grid; }
+  .pt-wide .pt-row .pt-desk { display: block; }
+  .pt-wide .pt-head { grid-template-columns: 2fr 1.2fr 1.3fr 1fr 1.1fr 1.3fr auto; gap: 10px; padding: 4px 14px; font-size: 13px; font-weight: 700; color: var(--muted); }
+  .pt-wide .pt-row { display: grid; grid-template-columns: 2fr 1.2fr 1.3fr 1fr 1.1fr 1.3fr auto; gap: 10px; align-items: center; padding: 8px 14px; }
+  .pt-wide .pt-row .pt-main { display: contents; }
+  .pt-wide .pt-row .pt-sub-mobile { display: none; }
+  .pt-wide .pt-row .pt-acts { margin: 0; justify-content: flex-end; flex-wrap: nowrap; gap: 4px; }
+  .pt-wide .pt-row .pt-acts .btn.sm, .pt-wide .pt-row .pt-acts .chip { min-height: 30px; padding: 0 8px; font-size: 13px; white-space: nowrap; }
+  .pt-wide .pt-row .pt-cell { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pt-wide .pt-row .pt-cell .title { font-size: 16px; }
+  .pt-stats { grid-template-columns: repeat(6, 1fr); }
+}
