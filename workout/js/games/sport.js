@@ -92,64 +92,6 @@ function penaltyGame(role) {
 G.push({ id: 'penalty', name: 'פנדלים', emoji: '⚽', how: 'שלושה פספוסים = נפסלת. נוגעים איפה בשער לבעוט: שמאל, אמצע או ימין, ולמעלה, אמצע או למטה. השוער מנחש צד וגובה, ועוצר רק אם ניחש את שניהם. פינות = בונוס, אבל אפשר לפגוע בקורה. רצף שערים מכפיל נקודות.', make: penaltyGame('kicker') });
 G.push({ id: 'keeper', name: 'אני השוער', emoji: '🧤', how: 'שלושה שערים נגדך = נפסלת. הבועט רץ לכדור. לוחצים על אחד מתשעת האזורים בשער כדי לקפוץ אליו לפני הבעיטה. עצירה = נקודות, רצף עצירות מכפיל. לא לחצת? השוער נשאר באמצע.', make: penaltyGame('keeper') });
 
-// ---- כדורסל ----
-G.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀', how: 'גוררים מהכדור אחורה ומשחררים כדי לזרוק. הסל זז אחרי כל קליעה. סוויש (בלי לגעת בברזל) = בונוס.',
-  make(r) {
-    let ball = { x: 80, y: r.H - 110, vx: 0, vy: 0, fly: false, rim: false, t: 0 }, hoop = { x: 260, y: 220 }, streak = 0, shooterT = 0, trail = [];
-    const reset = () => { ball = { x: r.rnd(60, 130), y: r.H - 110, vx: 0, vy: 0, fly: false, rim: false, t: 0 }; trail = []; };
-    const d = dragShot(r, () => [ball.x, ball.y], (dx, dy) => { ball.vx = dx * 5; ball.vy = dy * 5; ball.fly = true; shooterT = 0.5; r.sfx('bounce'); }, 140);
-    return {
-      down: d.down, move: d.move, up: d.up,
-      update(dt) { shooterT -= dt; if (!ball.fly) return; ball.vy += 800 * dt; const py = ball.y; ball.x += ball.vx * dt; ball.y += ball.vy * dt; ball.t += dt; if (ball.t % 0.05 < dt) trail.push({ x: ball.x, y: ball.y }); if (trail.length > 12) trail.shift();
-        // ברזל
-        for (const rx of [hoop.x - 26, hoop.x + 26]) if (r.dist(ball.x, ball.y, rx, hoop.y) < 16) { ball.vy = -Math.abs(ball.vy) * 0.5; ball.vx += (ball.x - rx) * 4; ball.rim = true; r.sfx('hit'); }
-        if (ball.vy > 0 && py < hoop.y && ball.y >= hoop.y && Math.abs(ball.x - hoop.x) < 22) { streak++; const pts = ball.rim ? 20 : 30; r.addScore(pts + Math.min(streak - 1, 3) * 5); r.pop(ball.rim ? '+20' : 'סוויש! +30', hoop.x, hoop.y - 40, '#FDE047', 26); r.burst(hoop.x, hoop.y + 10, '#F97316', 18); r.sfx('score'); hoop = { x: r.rnd(200, 320), y: r.rnd(160, 280) }; reset(); return; }
-        if (ball.x > r.W + 30 || ball.y > r.H + 30 || ball.x < -30) { streak = 0; reset(); } },
-      draw() { r.clear('#FDE68A'); r.rect(0, r.H - 40, r.W, 40, '#B45309'); r.line(0, r.H - 40, r.W, r.H - 40, '#fff', 2); S.hoop(r, hoop.x, hoop.y);
-        r.player(shooterT > 0 ? POSE.jumpUp : POSE.stand, ball.fly ? 100 : ball.x, r.H - 40, 0.5, KITS.purple);
-        trail.forEach((t, i) => r.circle(t.x, t.y, 3 + i * 0.4, `rgba(249,115,22,${i / 24})`)); d.drawAim(); S.ball(r, ball.x, ball.y, 14);
-        if (streak > 1) r.text(`רצף ${streak} 🔥`, r.W / 2, 40, { size: 20, color: '#92400E' }); },
-    };
-  } });
-
-// ---- מיני גולף ----
-G.push({ id: 'golf', name: 'מיני גולף', emoji: '⛳', how: 'גוררים מהכדור ומשחררים. קירות, חול שמאט, וגומה. פחות חבטות = יותר נקודות.',
-  make(r) {
-    let ball = { x: 80, y: r.H - 80, vx: 0, vy: 0 }, hole = { x: 280, y: 120 }, walls = [], sand = null, strokes = 0, holes = 0, msgT = 0, msg = '';
-    const layout = () => { walls = [{ x: r.rnd(60, 200), y: r.rnd(200, 380), w: r.rnd(80, 160), h: 14 }, { x: r.rnd(100, 300), y: r.rnd(150, 300), w: 14, h: r.rnd(60, 140) }]; hole = { x: r.rnd(40, r.W - 40), y: r.rnd(60, 160) }; sand = Math.random() < 0.7 ? { x: r.rnd(40, r.W - 40), y: r.rnd(200, 400), rad: r.rnd(30, 50) } : null; };
-    layout();
-    const d = dragShot(r, () => [ball.x, ball.y], (dx, dy) => { if (Math.hypot(ball.vx, ball.vy) < 5) { ball.vx = dx * 4; ball.vy = dy * 4; strokes++; r.sfx('bounce'); } }, 150);
-    return {
-      down: d.down, move: d.move, up: d.up,
-      update(dt) { msgT -= dt; const inSand = sand && r.dist(ball.x, ball.y, sand.x, sand.y) < sand.rad; const fr = inSand ? 4 : 1.4; ball.x += ball.vx * dt; ball.y += ball.vy * dt; ball.vx *= 1 - fr * dt; ball.vy *= 1 - fr * dt;
-        if (ball.x < 10) { ball.x = 10; ball.vx *= -0.8; } if (ball.x > r.W - 10) { ball.x = r.W - 10; ball.vx *= -0.8; } if (ball.y < 10) { ball.y = 10; ball.vy *= -0.8; } if (ball.y > r.H - 10) { ball.y = r.H - 10; ball.vy *= -0.8; }
-        for (const w of walls) if (r.hit(ball.x - 8, ball.y - 8, 16, 16, w.x, w.y, w.w, w.h)) { if (w.w > w.h) { ball.vy *= -0.8; ball.y += ball.vy > 0 ? 6 : -6; } else { ball.vx *= -0.8; ball.x += ball.vx > 0 ? 6 : -6; } r.sfx('tick'); }
-        if (r.dist(ball.x, ball.y, hole.x, hole.y) < 14 && Math.hypot(ball.vx, ball.vy) < 260) { const pts = Math.max(10, 60 - strokes * 10); r.addScore(pts); holes++; msg = strokes === 1 ? 'הול אין וואן! 🤩' : `בגומה ב-${strokes}`; msgT = 1.2; r.pop('+' + pts, hole.x, hole.y - 30, '#fff', 26); r.burst(hole.x, hole.y, '#FDE047', 16); r.sfx('score'); strokes = 0; ball = { x: r.rnd(40, r.W - 40), y: r.H - 80, vx: 0, vy: 0 }; layout(); } },
-      draw() { r.clear('#16A34A'); for (let i = 0; i < 10; i++) r.rect(0, i * 60, r.W, 30, '#15803D22'); if (sand) r.circle(sand.x, sand.y, sand.rad, '#FDE68A'); walls.forEach(w => r.rect(w.x, w.y, w.w, w.h, '#78350F', 4)); r.circle(hole.x, hole.y, 14, '#052E16'); S.flag(r, hole.x + 10, hole.y); d.drawAim(); r.circle(ball.x, ball.y, 8, '#fff'); r.circle(ball.x - 2, ball.y - 2, 2.5, '#00000022');
-        r.text(`חבטות: ${strokes} · גומות: ${holes}`, r.W / 2, r.H - 20, { size: 16, color: '#ffffffcc' }); if (msgT > 0) r.text(msg, r.W / 2, r.H / 2, { size: 28 }); },
-    };
-  } });
-
-// ---- באולינג ----
-G.push({ id: 'bowling', name: 'באולינג', emoji: '🎳', how: 'מחליקים את הכדור למעלה לכיוון הפינים. סטרייק (כל העשרה) = 50 בונוס.',
-  make(r) {
-    let pins = [], ball = null, cooldown = 0, msg = '', frames = 0;
-    const setPins = () => { pins = []; [[0], [-1, 1], [-2, 0, 2], [-3, -1, 1, 3]].forEach((row, j) => row.forEach(i => pins.push({ x: r.W / 2 + i * 20, y: 130 - j * 24, up: true, vx: 0, vy: 0 }))); };
-    setPins();
-    return {
-      swipe(d, dx, dy) { if (ball || cooldown > 0 || dy >= 0) return; const len = Math.hypot(dx, dy); ball = { x: r.W / 2 + r.clamp(dx, -60, 60), y: r.H - 60, vx: dx / len * 200, vy: -Math.max(450, Math.min(800, len * 4)), spin: r.rnd(-1, 1) }; r.sfx('bounce'); },
-      update(dt) { pins.forEach(p => { if (!p.up) { p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= 0.9; p.vy *= 0.9; } });
-        if (cooldown > 0) { cooldown -= dt; if (cooldown <= 0) { const down = pins.filter(p => !p.up).length; if (down === 10) { r.addScore(50); msg = 'סטרייק! 🎳'; r.burst(r.W / 2, 110, '#FDE047', 30, 300); r.sfx('win'); } else msg = `${down} פינים`; frames++; setPins(); } return; }
-        if (!ball) return; ball.x += ball.vx * dt; ball.y += ball.vy * dt; ball.vx += ball.spin * 40 * dt; if (ball.x < 60 || ball.x > r.W - 60) ball.vx *= -1;
-        for (const p of pins) if (p.up && r.dist(ball.x, ball.y, p.x, p.y) < 22) { p.up = false; p.vx = (p.x - ball.x) * 8 + ball.vx * 0.3; p.vy = -200; r.addScore(10); r.sfx('hit'); for (const q of pins) if (q.up && q !== p && r.dist(p.x, p.y, q.x, q.y) < 30 && Math.random() < 0.6) { q.up = false; q.vx = (q.x - p.x) * 8; q.vy = -180; r.addScore(10); } }
-        if (ball.y < -20) { ball = null; cooldown = 1.1; } },
-      draw() { r.clear('#7C2D12'); r.rect(40, 0, r.W - 80, r.H, '#D6A66B'); for (let i = 0; i < 8; i++) r.rect(40 + i * 35, 0, 2, r.H, '#B8895A'); r.line(40, 0, 40, r.H, '#1F2937', 8); r.line(r.W - 40, 0, r.W - 40, r.H, '#1F2937', 8); r.rect(60, r.H - 30, r.W - 120, 4, '#fff');
-        pins.forEach(p => { if (p.up) S.pin(r, p.x, p.y); else if (p.y > -30) { r.ctx.save(); r.ctx.translate(p.x, p.y); r.ctx.rotate(1.3); S.pin(r, 0, 0); r.ctx.restore(); } });
-        const bx = ball ? ball.x : r.W / 2, by = ball ? ball.y : r.H - 60; r.circle(bx, by, 14, '#1D4ED8'); r.circle(bx - 4, by - 4, 2, '#93C5FD'); r.circle(bx + 3, by - 5, 2, '#93C5FD'); r.circle(bx, by + 2, 2, '#93C5FD');
-        r.text(msg || 'החלק למעלה ↑', r.W / 2, r.H - 45, { size: 16, color: '#fff' }); },
-    };
-  } });
-
 // ---- חץ וקשת ----
 G.push({ id: 'archery', name: 'חץ וקשת', emoji: '🏹', how: 'המטרה זזה. מחזיקים כדי לדרוך את הקשת (חץ מהיר יותר), ומשחררים לירות. מרכז = 10.',
   make(r) {
