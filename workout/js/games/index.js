@@ -4,7 +4,7 @@ import sport from './sport.js';
 import puzzle from './puzzle.js';
 import quick from './quick.js';
 import * as more from './more.js';
-import { DEMOS, DEMO_DUR } from './demos.js';
+import { DEMOS, DEMO_DUR, DEMO_TOP } from './demos.js';
 
 export const GAME_GROUPS = [
   { id: 'arcade', name: 'ארקייד', emoji: '🕹️', games: [...arcade, ...more.arcade] },
@@ -13,7 +13,7 @@ export const GAME_GROUPS = [
   { id: 'quick', name: 'מהירות', emoji: '⚡', games: [...quick, ...more.quick] },
 ];
 // הדגמות: משחק שיש לו תסריט מקבל demo (ראו demos.js) וכפתור "איך משחקים?"
-export const GAMES = GAME_GROUPS.flatMap(g => g.games.map(x => ({ ...x, group: g.id, demo: DEMOS[x.id] || null, demoDur: DEMO_DUR[x.id] || 12 })));
+export const GAMES = GAME_GROUPS.flatMap(g => g.games.map(x => ({ ...x, group: g.id, demo: DEMOS[x.id] || null, demoDur: DEMO_DUR[x.id] || 12, demoTop: DEMO_TOP.has(x.id) })));
 export const gameById = Object.fromEntries(GAMES.map(g => [g.id, g]));
 
 // בחירת מתנה: מעדיפים משחקים שעוד לא שיחקו בהם, ולא חוזרים על האחרונים

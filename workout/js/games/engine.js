@@ -154,7 +154,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     if (finger.hold) { if (!wasHold) { game.down && game.down(finger.x, finger.y); r.isDown = true; } game.move && game.move(finger.x, finger.y); r.px = finger.x; r.py = finger.y; } else if (wasHold) r.isDown = false; wasHold = finger.hold; }
   function drawFinger() {
     // כתובית למטה
-    if (finger.caption) { ctx.fillStyle = 'rgba(27,23,64,.82)'; const w = Math.min(W - 24, 40 + finger.caption.length * 10.5); ctx.beginPath(); ctx.roundRect(W / 2 - w / 2, H - 64, w, 44, 14); ctx.fill(); r.text(finger.caption, W / 2, H - 42, { size: 17, color: '#FDE047' }); }
+    if (finger.caption) { const cy = def.demoTop ? 48 : H - 64; /* demoTop: כתוביות למעלה במשחקים שהפעולה בהם למטה (מחבת, מחבט, פליפרים) */ ctx.fillStyle = 'rgba(27,23,64,.82)'; const w = Math.min(W - 24, 40 + finger.caption.length * 10.5); ctx.beginPath(); ctx.roundRect(W / 2 - w / 2, cy, w, 44, 14); ctx.fill(); r.text(finger.caption, W / 2, cy + 22, { size: 17, color: '#FDE047' }); }
     ctx.fillStyle = 'rgba(27,23,64,.7)'; ctx.beginPath(); ctx.roundRect(8, 8, 72, 26, 13); ctx.fill(); r.text('▶️ הדגמה', 44, 21, { size: 13, color: '#fff' });
     // האצבע: עיגול לחיצה ואמוג'י יד, הקצה בנקודה
     const pr = finger.press > 0 ? 22 + (1 - finger.press / .3) * 18 : 0; if (pr) { ctx.strokeStyle = `rgba(253,224,71,${finger.press * 3})`; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(finger.x, finger.y, pr, 0, Math.PI * 2); ctx.stroke(); }
