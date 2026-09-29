@@ -378,7 +378,7 @@ G.push({ id: 'invaders', name: 'כיפת ברזל', emoji: '🛡️', how: 'המ
 
 // ---- שדה אסטרואידים: החללית המשותפת, אבנים מציאותיות שמסתובבות, 🌟 בונוס, 🛡️ מגן, 💣 פצצה שמתמלאת כל 30 שניות (מנקה את המסך), ירייה כפולה מ-10 פגיעות, רמות, 3 חיים, הרמה נשמרת.
 // גיוון (רועי 29/09): שביטים מהירים באלכסון עם זנב (מרמה 2), מוקשים שמתפוצצים לרסיסים (מרמה 2), ביצי חלל שנסדקות והופכות לכוכב או לחרק שרודף (מרמה 3), עב"ם שנשאר למעלה ויורה פלזמה (מרמה 2, כל ~20 שניות), חור שחור שמושך את החללית (מרמה 4) ----
-G.push({ id: 'asteroids', name: 'שדה אסטרואידים', emoji: '☄️', how: 'החללית עוקבת אחרי האצבע. נוגעים כדי לירות. הפצצה 💣 בפינה מתמלאת כל חצי דקה: נוגעים בה ומפוצצים את כל האבנים במסך! אוספים 🌟 ו-🛡️. מרמה 2: שביטים, מוקשים שמתפוצצים לרסיסים ועב"ם שיורה. מרמה 3: ביצי חלל שנסדקות והופכות למשהו... מרמה 4: חור שחור! 3 חיים. הרמה נשמרת.',
+G.push({ id: 'asteroids', name: 'שדה אסטרואידים', emoji: '☄️', assets: ['space/spaceMeteors_001', 'space/spaceMeteors_002', 'space/spaceMeteors_003', 'space/spaceMeteors_004'], how: 'החללית עוקבת אחרי האצבע. נוגעים כדי לירות. הפצצה 💣 בפינה מתמלאת כל חצי דקה: נוגעים בה ומפוצצים את כל האבנים במסך! אוספים 🌟 ו-🛡️. מרמה 2: שביטים, מוקשים שמתפוצצים לרסיסים ועב"ם שיורה. מרמה 3: ביצי חלל שנסדקות והופכות למשהו... מרמה 4: חור שחור! 3 חיים. הרמה נשמרת.',
   make(r, progress) {
     let px = r.W / 2, py = r.H - 80, lastPx = r.W / 2, bank = 0, rocks = [], shots = [], t = 0, alive = (progress && progress.level ? (progress.level - 1) * 15 : 0), hits = 0, shield = 0, stars = [], st = 0, levelT = 0, lives = 3, inv = 0, bomb = 30, booms = [], tt = 0, ufo = null, ufoT = 12, eshots = [], hole = null, holeT = 20;
     const level = () => 1 + Math.floor(alive / 15); const BOMB = { x: r.W - 34, y: 34, r: 24 };
@@ -425,7 +425,7 @@ G.push({ id: 'asteroids', name: 'שדה אסטרואידים', emoji: '☄️', 
           else if (k.kind === 'mine') { r.circle(k.x, k.y, k.s, '#1f2937'); c.strokeStyle = '#6b7280'; c.lineWidth = 2; c.beginPath(); c.arc(k.x, k.y, k.s, 0, Math.PI * 2); c.stroke(); for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4 + k.rot; r.circle(k.x + Math.cos(a) * (k.s + 3), k.y + Math.sin(a) * (k.s + 3), 2.5, '#9ca3af'); } r.circle(k.x, k.y, 5, Math.sin(k.blink * 8) > 0 ? '#ef4444' : '#7f1d1d'); }
           else if (k.kind === 'egg') { SP.rock(r, k.x, k.y, k.s, k.seed, k.rot); c.strokeStyle = k.hatch < 1 ? '#fde047' : '#57534e'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(k.x - 8, k.y - 4); c.lineTo(k.x - 2, k.y + 2); c.lineTo(k.x + 3, k.y - 5); c.lineTo(k.x + 8, k.y + 3); c.stroke(); if (k.hatch < 1) r.text('?', k.x, k.y - k.s - 8, { size: 16, color: '#fde047' }); }
           else if (k.kind === 'bug') { SP.alien(r, k.x, k.y, tt, r.C.lime); r.circle(k.x - 3, k.y - 9, 2, '#ef4444'); r.circle(k.x + 3, k.y - 9, 2, '#ef4444'); }
-          else SP.rock(r, k.x, k.y, k.s, k.seed, k.rot); });
+          else if (!r.img('space/spaceMeteors_00' + (1 + Math.floor(k.seed) % 4), k.x, k.y, k.s * 2.3, null, { rot: k.rot })) SP.rock(r, k.x, k.y, k.s, k.seed, k.rot); });
         if (ufo) { SP.ufo(r, ufo.x, ufo.y, tt, .8, ufo.hurt); r.rect(ufo.x - 30, ufo.y - 42, 60, 5, '#00000066', 2); r.rect(ufo.x - 30, ufo.y - 42, 60 * Math.max(0, ufo.hp) / ufo.maxHp, 5, r.C.lime, 2); }
         eshots.forEach(e => { r.circle(e.x, e.y, 7, 'rgba(163,230,53,.35)'); r.circle(e.x, e.y, 4, '#a3e635'); });
         stars.forEach(s => r.emoji(s.kind === 'star' ? '🌟' : '🛡️', s.x, s.y, 24)); shots.forEach(s => { r.rect(s.x - 2, s.y, 4, 14, r.C.lime); r.circle(s.x, s.y, 3, '#fff'); });

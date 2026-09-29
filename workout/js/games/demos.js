@@ -53,7 +53,7 @@ export const DEMOS = {
     if (t > 9.6 && P.bomb >= 30 && P.rocks.length >= 3 && !ctl.mem.bombed) { ctl.mem.bombed = true; ctl.tap(P.BOMB.x, P.BOMB.y); return; }
     ctl.moveTo(tx, ty); },
   // ---- מקבץ 3 ----
-  runner(t, game, ctl, r) { captions(ctl, t, [[0, 'נוגעים כדי לקפוץ מעל מכשולים'], [3, 'באוויר? נוגעים שוב: קפיצה כפולה'], [6, 'ציפור או ענף? מחליקים למטה כדי להחליק מתחת'], [9.5, 'אוספים מטבעות. הנוף מתחלף כל 500 מטר']]);
+  runner(t, game, ctl, r) { captions(ctl, t, [[0, 'הקנגורו רץ. נוגעים = קפיצה מעל מכשול'], [3, 'באוויר? נוגעים שוב: קפיצה כפולה'], [6, 'ציפור או ענף? מחליקים למטה כדי להתכופף'], [9.5, 'אוספים מטבעות. הנוף מתחלף כל 500 מטר']]);
     const P = game.peek(); const nxt = P.obs.filter(o => o.x + o.w > P.PX - 10).sort((a, b) => a.x - b.x)[0]; if (!nxt) return; const high = nxt.kind === 'bird' || nxt.kind === 'branch'; const dist = nxt.x - P.PX;
     if (high) { if (dist < P.speed * .45 && !P.duck && every(ctl, 'duck', .8, t)) ctl.swipe('down', P.PX, P.GY - 30); }
     else if (dist < P.speed * .42 + nxt.w * .3 && P.y >= P.GY - 1 && every(ctl, 'jump', .5, t)) ctl.tap(P.PX + 60, P.GY - 80); },
@@ -76,7 +76,7 @@ export const DEMOS = {
     if (!goal) { const opts = [['left', -1, 0], ['right', 1, 0], ['up', 0, -1], ['down', 0, 1]].filter(([, dx, dy]) => P.free(px + dx, py + dy) && !danger(px + dx, py + dy)); if (opts.length) ctl.swipe(opts[0][0], P.OX + (px + .5) * P.S, P.OY + (py + .5) * P.S); return; }
     let k = goal; while (prev.get(k) !== start) k = prev.get(k); const [gx, gy] = k.split(',').map(Number); let dx = gx - px, dy = gy - py; if (Math.abs(dx) > 1) dx = -Math.sign(dx);
     const dir = dx > 0 ? 'right' : dx < 0 ? 'left' : dy > 0 ? 'down' : 'up'; ctl.swipe(dir, P.OX + (px + .5) * P.S, P.OY + (py + .5) * P.S); },
-  doodle(t, game, ctl, r) { captions(ctl, t, [[0, 'הקופץ קופץ לבד, האצבע מזיזה ימינה ושמאלה'], [3, 'ירוקה רגילה, כחולה זזה, חומה מתפרקת, ענן נעלם'], [6.5, 'קפיץ וטרמפולינה מעיפים גבוה. 🚀 = טיסה'], [9.5, 'מפלצת? קופצים עליה מלמעלה!']]);
+  doodle(t, game, ctl, r) { captions(ctl, t, [[0, 'הקנגורו קופץ לבד, האצבע מזיזה ימינה ושמאלה'], [3, 'דשא רגיל, עץ זז, עוגה נשברת, ענן נעלם'], [6.5, 'קפיץ וטרמפולינה מעיפים גבוה. 🚀 = טיסה'], [9.5, 'מפלצת? קופצים עליה מלמעלה!']]);
     const P = game.peek(); let tx = P.x; if (P.vy > 0 || true) { const cands = P.plats.filter(p => p.y > P.y - 20 && p.y < P.y + 260 && p.kind !== 'break' && !(p.gone > 0)).sort((a, b) => Math.abs(a.y - (P.y + 120)) - Math.abs(b.y - (P.y + 120))); const best = cands.find(p => Math.abs(p.x - P.x) < 150) || cands[0]; if (best) tx = best.x; }
     const m = P.monsters.find(m => Math.abs(m.y - P.y) < 120 && m.y < P.y); if (m && P.vy > -100) { if (Math.abs(m.x - tx) < 40) tx = m.x < r.W / 2 ? Math.min(r.W - 30, m.x + 80) : Math.max(30, m.x - 80); }
     ctl.moveTo(tx, r.H - 80); },
