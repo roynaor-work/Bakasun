@@ -1,7 +1,8 @@
 // האפליקציה: ניתוב, מסכים, מהלך אימון (חימום -> תרגילים -> מנוחות -> מתיחות -> סיכום), מעקב והגדרות.
 import { EXERCISES, CATS, byId } from './exercises.js';
 import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js';
-import { ExerciseSim } from './sim.js';
+import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js';
+import { refreshVideos, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl } from './vids.js';
 import { Figure, cycleMs } from './figure.js';
 import { store } from './store.js';
 import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, rankOf, perseveranceLine, honestTime, tokensFor } from './logic.js';
@@ -11,7 +12,7 @@ import * as cloud from './cloud.js';
 import { showLobby } from './games/lobby.js';
 import { initParent, parentGate, parentHome, basketball } from './parent.js';
 import { playIntro } from './intro.js';
-import { speak, speakLang, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js';
+import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js';
 import { SAY } from './say.js';
 
 const $ = s => document.querySelector(s);
@@ -36,9 +37,16 @@ function mount(html, full = false) {
 function fig(svg, ex, speed = 1) { const f = new Figure(svg); f.play(ex, speed); figures.push(f); return f; }
 function figs(sel = 'svg[data-ex]') { return [...app.querySelectorAll(sel)].map(s => fig(s, byId[s.dataset.ex])); }
 const figSvg = (exId, cls = '') => `<svg class="figure ${cls}" data-ex="${exId}" aria-hidden="true"></svg>`;
-// הסימולציה הגדולה במסך התרגיל: הדמות המלאה על קנבס (js/sim.js). אותו ממשק כמו Figure: play(ex, speed), still, stop
-const simCanvas = exId => `<canvas class="sim" data-sim="${exId}" aria-hidden="true"></canvas>`;
-function sims() { return [...app.querySelectorAll('canvas[data-sim]')].map(cv => { const s = new ExerciseSim(cv); s.play(byId[cv.dataset.sim], 1); figures.push(s); return s; }); }
+// הבמה במסך התרגיל: סרטון אמיתי אם יש לתרגיל (vids.js), אחרת דמות המקלות. wireStage מחזיר אובייקט עם אותו ממשק: play(ex, speed), stop, onRep
+const stageHtml = ex => hasVideo(ex.id) ? `<video class="exvid" data-vid="${ex.id}" autoplay muted loop playsinline></video>` : figSvg(ex.id);
+function wireStage() {
+  const v = app.querySelector('video[data-vid]');
+  if (!v) return figs()[0];
+  videoUrl(v.dataset.vid).then(u => { if (u) v.src = u; });
+  // בסרטון אין "סיבוב" של הדמות, אז הספירה לפי אורך המחזור מהקטלוג (cycleMs) בקצב הניגון
+  const f = { onRep: null, tick: 0, cyc: 0, play(ex, speed = 1) { v.playbackRate = speed; this.stop(); if (this.onRep) { this.cyc = 0; this.tick = setInterval(() => { this.cyc++; this.onRep && this.onRep(this.cyc); }, cycleMs(ex.frames) / speed); } }, still() { this.stop(); }, stop() { clearInterval(this.tick); this.tick = 0; } };
+  figures.push(f); return f;
+}
 const catPill = cat => `<span class="pill ${cat}">${CATS[cat].emoji} ${CATS[cat].name}</span>`;
 const stepsHtml = ex => `<ol class="steps">${ex.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol>`;
 const placePill = ex => ex.place === 'hall' ? '<span class="pill hall">🚪 במסדרון</span>' : '';
@@ -250,8 +258,8 @@ function exerciseDetail(id) {
   mount(`
   <div class="stack">
     <div class="row between"><button class="btn icon ghost" data-go="#/exercises" aria-label="חזרה">→</button><h1 class="grow">${esc(ex.name)}</h1>${catPill(ex.cat)}</div>
-    <div class="stage">${simCanvas(ex.id)}</div>
-    <div class="row wrap"><button class="btn chip" data-speed="0.5">לאט</button><button class="btn chip on" data-speed="1">רגיל</button><button class="btn chip" data-speed="1.5">מהר</button>${placePill(ex)}</div>
+    <div class="stage">${stageHtml(ex)}</div>
+    ${ex.place === 'hall' ? `<div class="row wrap">${placePill(ex)}</div>` : ''}
     ${helpButton()}
     <div class="tiles">
       <div class="tile"><b>${target}</b>${ex.type === 'time' ? 'שניות ברמה שלך' : 'חזרות ברמה שלך'}</div>
@@ -260,9 +268,8 @@ function exerciseDetail(id) {
     </div>
     <button class="btn primary big" id="solo">לעשות עכשיו רק את זה 💥</button>
   </div>`);
-  const [f] = sims();
+  const f = wireStage();
   wireHelp(ex, f);
-  app.querySelectorAll('[data-speed]').forEach(b => b.onclick = () => { app.querySelectorAll('[data-speed]').forEach(x => x.classList.remove('on')); b.classList.add('on'); f.setSpeed(+b.dataset.speed); });
   $('#solo').onclick = () => {
     const program = { id: 'solo', name: ex.name, emoji: '💥', items: [ex.id], rounds: 1, minutes: 1 };
     beginWorkout(program, buildItems(program, byId, store.profile.level));
@@ -311,7 +318,7 @@ function exercisePhase() {
       <span></span>
     </div>
     <div class="row between"><span class="pill block">${esc(blockLabel)}</span><span class="row">${placePill(ex)}${catPill(ex.cat)}</span></div>
-    <div class="stage">${simCanvas(ex.id)}</div>
+    <div class="stage">${stageHtml(ex)}</div>
     <h1 class="center">${esc(ex.name)}</h1>
     ${helpButton()}
     ${it.type === 'time' ? timeBlock(it) : repsBlock(it)}
@@ -320,7 +327,7 @@ function exercisePhase() {
       <button class="btn ghost" id="prev" ${W.idx ? '' : 'disabled'}>הקודם</button>
     </div>
   </div>`, true);
-  const [mainFig] = sims(); figs();
+  const mainFig = wireStage();
   wireHelp(ex, mainFig);
   $('#quit').onclick = quit;
   $('#skip').onclick = () => finishItem(0, true);
@@ -345,7 +352,9 @@ function repsBlock(it) {
 function wireReps(it, ex, mainFig) {
   let n = it.done || it.target, counting = false;
   const show = () => { $('#count').textContent = n; };
-  const stopCount = () => { clearInterval(tick); tick = 0; counting = false; mainFig.onRep = null; mainFig.count = null; if (!mainFig.raf) mainFig.play(ex, 1); $('#repcard').classList.remove('counting'); if ($('#countme')) $('#countme').textContent = '🔢 ספור איתי'; };
+  let stopListen = null;
+  const stopCount = () => { clearInterval(tick); tick = 0; counting = false; mainFig.onRep = null; if (stopListen) { stopListen(); stopListen = null; } mainFig.play(ex, 1); $('#repcard').classList.remove('counting'); if ($('#countme')) $('#countme').textContent = '🔢 ספור איתי'; };
+  figures.push({ stop: () => { if (stopListen) stopListen(); stopListen = null; } }); // יציאה מהמסך עוצרת את המיקרופון
   const sig = $('#signal');
   if (sig) sig.onclick = () => {
     // אות יציאה: המסך אדום "מוכן...", ואחרי זמן אקראי צפצוף ו"צא!" ירוק
@@ -357,10 +366,23 @@ function wireReps(it, ex, mainFig) {
     if (counting) return stopCount();
     counting = true; n = 0; show();
     $('#repcard').classList.add('counting'); $('#countme').textContent = '⏹️ עצור ספירה';
-    const step = () => { n++; show(); if (n >= it.target) { stopCount(); fanfare(); $('#did').classList.add('pop'); } else beep(780, 70); };
-    // ספירה לאחור 3, 2, 1 על הקנבס (הדמות עומדת), ואז הסרטון מתחיל מההתחלה והמספר עולה בכל סיבוב של הדמות
-    mainFig.still(ex); mainFig.countdown(3); let k = 3; beep(520, 90);
-    tick = setInterval(() => { k--; if (k > 0) return beep(520, 90); clearInterval(tick); beep(880, 160); mainFig.onRep = step; mainFig.play(ex, 1); tick = 0; }, 1000);
+    const voiceOn = canSpeak() && store.profile.voice !== false;
+    // כל חזרה: המספר עולה ונאמר בקול (סופרים יחד). fromChild: הילד אמר את המספר קודם, אז לא חוזרים אחריו, רק מסנכרנים את הדמות
+    const step = (fromChild = false) => {
+      n++; show();
+      if (n >= it.target) { stopCount(); fanfare(); if (voiceOn) sayQuick(`${numWord(n)}! כָּל הַכָּבוֹד!`); $('#did').classList.add('pop'); return; }
+      if (fromChild) { mainFig.onRep = null; mainFig.play(ex, 1); mainFig.onRep = () => step(); } // הדמות מתחילה סיבוב חדש יחד איתו
+      else if (voiceOn) sayQuick(numWord(n)); else beep(780, 70);
+    };
+    // 3, 2, 1 בקול ובצפצוף, ואז הדמות מתחילה מההתחלה והמספר עולה בכל סיבוב שלה
+    mainFig.stop(); let k = 3; const say3 = () => { if (voiceOn) sayQuick(numWord(k)); beep(520, 90); };
+    say3();
+    tick = setInterval(() => {
+      k--; if (k > 0) return say3();
+      clearInterval(tick); tick = 0; beep(880, 160); mainFig.onRep = () => step(); mainFig.play(ex, 1);
+      // מקשיבים לילד: אם הוא אומר את המספר הבא לפני הדמות, מתקדמים איתו (מתעלמים ממה שנשמע מיד אחרי שהאפליקציה דיברה, כדי לא לספור את עצמה)
+      if (store.profile.listen !== false && canListen()) stopListen = listenCount(m => { if (!counting || spokeRecently(700)) return; if (m === n + 1 || m === n + 2) { if (m === n + 2) { n++; show(); } step(true); } });
+    }, 1000);
   };
   $('#minus').onclick = () => { if (counting) stopCount(); n = Math.max(0, n - 1); show(); };
   $('#plus').onclick = () => { if (counting) stopCount(); n++; show(); };
@@ -387,12 +409,16 @@ function wireTimer(it) {
     $('#ringfill').style.strokeDashoffset = c * (1 - T.left / it.target);
   };
   const stop = () => { clearInterval(tick); tick = 0; T.running = false; $('#startstop').textContent = '▶️ המשך'; };
+  const voiceOn = canSpeak() && store.profile.voice !== false;
   const run = () => {
     T.running = true; T.endAt = Date.now() + T.left * 1000; $('#startstop').textContent = '⏸️ עצור';
+    if (voiceOn && T.left >= it.target) sayQuick('מַתְחִילִים!');
     tick = setInterval(() => {
       const prev = T.left; T.left = Math.max(0, (T.endAt - Date.now()) / 1000); paint();
-      if (Math.ceil(T.left) <= 3 && Math.ceil(prev) > Math.ceil(T.left) && T.left > 0) beep(660, 90);
-      if (T.left <= 0) { stop(); fanfare(); finishItem(it.target, false); }
+      const sec = Math.ceil(T.left), changed = Math.ceil(prev) > sec;
+      // בקול: "עוד 20 שניות" כל 10 שניות, וב-10 האחרונות סופרים לאחור יחד; בלי קול: צפצוף ב-3 האחרונות
+      if (changed && T.left > 0) { const cue = voiceOn && sec < it.target ? timeCue(sec, it.target) : null; if (cue) sayQuick(cue); else if (sec <= 3) beep(660, 90); }
+      if (T.left <= 0) { stop(); fanfare(); if (voiceOn) sayQuick('סִיַּמְתָּ! כָּל הַכָּבוֹד!'); finishItem(it.target, false); }
     }, 200);
   };
   $('#startstop').onclick = () => T.running ? stop() : run();
@@ -686,6 +712,8 @@ function settings() {
       <div class="toggle"><b>צלילים</b><input type="checkbox" id="sound" ${p.sound ? 'checked' : ''}></div>
       <div class="toggle"><b>הסבר בקול בעברית</b><input type="checkbox" id="voice" ${p.voice !== false ? 'checked' : ''}></div>
       <div class="toggle"><b>סרטון פתיחה לפני אימון</b><input type="checkbox" id="intro" ${p.intro !== false ? 'checked' : ''}></div>
+      <div class="toggle"><b>לשמוע אותו סופר (מיקרופון)</b><input type="checkbox" id="listen" ${p.listen !== false ? 'checked' : ''} ${canListen() ? '' : 'disabled'}></div>
+      <p class="muted small">${canListen() ? 'ב"ספור איתי": האפליקציה סופרת בקול, ואם הוא אומר את המספר הבא לפניה, היא מתקדמת איתו. בפעם הראשונה הטלפון יבקש אישור למיקרופון.' : 'הדפדפן הזה לא מזהה דיבור. בכרום באנדרואיד זה עובד.'}</p>
       <label class="field">הקול<select id="voiceName"><option value="">אוטומטי (הטוב ביותר במכשיר)</option>${hebrewVoices().map(v => `<option value="${esc(v.name)}" ${v.name === p.voiceName ? 'selected' : ''}>${esc(v.name)}${v.localService === false ? ' (רשת)' : ''}</option>`).join('')}</select></label>
       <label class="field">קצב דיבור<select id="speechRate">${[[0.8, 'לאט'], [0.92, 'רגיל'], [1.05, 'מהיר']].map(([v, n]) => `<option value="${v}" ${Math.abs(v - (p.speechRate || 0.92)) < 0.01 ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <button class="btn chip" id="voicetest">🔊 בדיקת קול</button>
@@ -698,6 +726,11 @@ function settings() {
       <label class="field row between"><span>מוזיקת רקע במשחקים</span><input type="checkbox" id="musicOn" ${p.music !== false ? 'checked' : ''}></label>
       <label class="field">אורך משחק<select id="gameSeconds">${[[0, 'בלי הגבלה, עד שנפסלים'], [60, 'דקה'], [90, 'דקה וחצי'], [120, 'שתי דקות']].map(([v, n]) => `<option value="${v}" ${v === p.gameSeconds ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <p class="muted small">${GAMES.length} משחקים שונים. מתנות שלא משחקים מיד נשמרות לחדר המשחקים (${store.tokens} שמורות).</p>
+    </div>
+    <div class="card stack">
+      <h3>סרטונים לתרגילים 🎥</h3>
+      <p class="muted small">במקום הדמות המצוירת: סרטון קצר אמיתי (5 עד 8 שניות, בלופ) לכל תרגיל. מצלמים ישר מהטלפון או בוחרים מהגלריה. נשמר במכשיר הזה בלבד. ${localVideos().size ? `יש ${localVideos().size} סרטונים.` : 'עדיין אין סרטונים.'}</p>
+      <details><summary class="small" style="cursor:pointer">כל התרגילים (${EXERCISES.length})</summary><div class="stack" style="margin-top:8px">${Object.entries(CATS).map(([cat, c]) => `<b class="small muted">${c.emoji} ${c.name}</b>` + EXERCISES.filter(e => e.cat === cat).map(e => `<div class="row between"><span>${hasVideo(e.id) ? '✅' : '▫️'} ${esc(e.name)}</span><span class="row"><label class="btn chip">📹 ${hasVideo(e.id) ? 'להחליף' : 'לצלם / לבחור'}<input type="file" accept="video/*" data-vid="${e.id}" hidden></label>${localVideos().has(e.id) ? `<button class="btn chip" data-delvid="${e.id}" aria-label="למחוק">🗑️</button>` : ''}</span></div>`).join('')).join('')}</div></details>
     </div>
     <div class="card stack">
       <h3>התוכנית השבועית</h3>
@@ -751,6 +784,9 @@ function settings() {
   $('#rest').onchange = e => store.setProfile({ rest: +e.target.value });
   $('#sound').onchange = e => store.setProfile({ sound: e.target.checked });
   $('#voice').onchange = e => store.setProfile({ voice: e.target.checked });
+  $('#listen').onchange = e => store.setProfile({ listen: e.target.checked });
+  app.querySelectorAll('input[data-vid]').forEach(inp => inp.onchange = async e => { const f = e.target.files[0]; if (!f) return; if (f.size > 60e6) return alert('הסרטון גדול מדי (מעל 60MB). מצלמים קצר יותר.'); try { await saveVideo(inp.dataset.vid, f); settings(); } catch { alert('לא הצלחתי לשמור את הסרטון במכשיר.'); } });
+  app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { if (!confirm(`למחוק את הסרטון של "${byId[b.dataset.delvid].name}"?`)) return; await deleteVideo(b.dataset.delvid); settings(); });
   $('#intro').onchange = e => store.setProfile({ intro: e.target.checked });
   $('#voicetest').onclick = () => { if (!speak(SAY_UI.test, { force: true })) alert('אין הקראה במכשיר הזה.'); };
   $('#voiceName').onchange = e => store.setProfile({ voiceName: e.target.value });
@@ -781,6 +817,7 @@ function settings() {
 }
 
 initParent({ mount, esc, go, $ });
+refreshVideos().then(() => { if (location.hash.includes('settings')) route(); });
 if (store.profile.familyCode) cloud.flush();
 window.addEventListener('focus', () => { if (store.profile.familyCode) cloud.flush(); });
 
