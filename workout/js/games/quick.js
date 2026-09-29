@@ -11,6 +11,7 @@ G.push({ id: 'moles', name: 'כסף כסף!', emoji: '💸', how: 'שטר קופ
     const pickKind = () => { const p = Math.random(); return p < .22 ? 'poop' : p < .27 ? 'giant' : p < .35 ? 'fake' : p < .40 ? 'stink' : 'note'; };
     return {
       update(dt) { t += dt; tt += dt; chingT -= dt; fog = Math.max(0, fog - dt); if (t > rate) { t = 0; rate = Math.max(0.4, rate - 0.012); const h = r.pick(holes.filter(h => h.up <= 0)); if (h) { h.up = 1.15; h.kind = pickKind(); h.val = r.pick(VALS); } } holes.forEach(h => { h.up -= dt; }); flying.forEach(f => { f.t += dt * 1.4; }); flying = flying.filter(f => f.t < 1); },
+      peek() { return { holes: holes.map(h => ({ x: h.x, y: h.y - 20, up: h.up, kind: h.kind })), fog }; },
       down(x, y) { const h = holes.find(h => r.dist(x, y, h.x, h.y - 20) < 44); if (!h || h.up <= 0) { if (h) combo = 0; return; } h.up = 0;
         if (h.kind === 'poop') { combo = 0; r.addScore(-15); r.pop('איכס! -15', h.x, h.y - 50, '#a3e635', 22); r.burst(h.x, h.y - 20, '#7c4a1e', 14, 200); r.shake(260); r.sfx('fart'); }
         else if (h.kind === 'giant') { combo = 0; r.addScore(-40); r.pop('קקי ענק!! -40', h.x, h.y - 60, '#a3e635', 26); r.burst(h.x, h.y - 20, '#7c4a1e', 30, 300); r.shake(600); r.sfx('fart'); setTimeout(() => r.sfx('fart'), 250); }

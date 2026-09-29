@@ -51,6 +51,18 @@ test('every game runs headless: make, update, draw, input', () => {
   }
 });
 
+test('demos: every scripted demo drives its game headless without errors', async () => {
+  const { DEMOS } = await import('../workout/js/games/demos.js');
+  const noop = () => {}; const ctx = fakeCtx();
+  for (const id of Object.keys(DEMOS)) {
+    const g = gameById[id]; assert.ok(g && g.demo, id);
+    let score = 0; const r = { W: 360, H: 560, ctx, C: new Proxy({}, { get: () => '#000' }), px: 100, py: 100, isDown: false, rnd: (a = 1, b) => b == null ? Math.random() * a : a + Math.random() * (b - a), rint: (a, b) => Math.floor(a + Math.random() * (b - a + 1)), pick: a => a[Math.floor(Math.random() * a.length)], shuffle: a => a, clamp: (v, a, b) => Math.max(a, Math.min(b, v)), get score() { return score; }, get timeLeft() { return 60; }, addScore: n => { score += n; }, setScore: n => { score = n; }, over: noop, win: noop, clear: noop, rect: noop, circle: noop, line: noop, text: noop, emoji: noop, sfx: noop, play: noop, pop: noop, burst: noop, shake: noop, stick: noop, player: noop, crowd: noop, crowdGen: () => [], anim: f => f[0][0], hit: (ax, ay, aw, ah, bx, by, bw, bh) => ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by, dist: (x1, y1, x2, y2) => Math.hypot(x2 - x1, y2 - y1) };
+    const game = g.make(r); assert.equal(typeof game.peek, 'function', id + ' peek');
+    const ctl = { mem: {}, say: noop, tap: (x, y) => { game.down && game.down(x, y); game.up && game.up(x, y); game.tap && game.tap(x, y); }, swipe: d => game.swipe && game.swipe(d, 0, 0), moveTo: (x, y) => game.move && game.move(x, y), release: noop };
+    for (let i = 0; i < 600; i++) { const t = i / 50; g.demo(t, game, ctl, r); game.update(1 / 50); game.draw(); }
+  }
+});
+
 test('sprites: every pose has all joints; every sprite draws on a fake context', () => {
   const J = ['head', 'neck', 'hip', 'le', 'lh', 're', 'rh', 'lk', 'lf', 'rk', 'rf'];
   for (const [k, v] of Object.entries({ ...POSE, ...GK })) { const pose = Array.isArray(v) ? v[0][0] : v; for (const j of J) assert.ok(Array.isArray(pose[j]) && pose[j].length === 2, k + '.' + j); }

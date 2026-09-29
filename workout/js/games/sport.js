@@ -36,6 +36,7 @@ function penaltyGame(role) {
         if (role === 'kicker') { let tx = r.clamp(x, 20, r.W - 20), ty = r.clamp(y, 40, r.H - 220); const edge = Math.min(Math.abs(tx - goal.x), Math.abs(tx - goal.x - goal.w), Math.abs(ty - goal.y)); const wobble = edge < 40 ? (40 - edge) * .55 : 0; tx += r.rnd(-wobble, wobble); ty += r.rnd(-wobble, wobble); startKick(tx, ty); const g = keeperGuess(shot.col, shot.row); gk.col = g.col; gk.row = g.row; gk.reach = g.reach; }
         else { // אני השוער: הבועט כבר רץ, לוחצים על אזור בשער כדי לקפוץ אליו
           if (y > GL + 10 || y < goal.y - 30) return; pick = { col: colOf(r.clamp(x, goal.x, goal.x + goal.w)), row: rowOf(r.clamp(y, goal.y, GL)) }; gk.col = pick.col; gk.row = pick.row; gk.reach = 1; } },
+      peek() { return { phase, ready, shot: shot ? { col: shot.col, row: shot.row, tx: shot.tx, ty: shot.ty } : null, zoneCenter, goal, GL }; },
       down(x, y) { if (role === 'keeper' && (phase === 'run' || (phase === 'fly' && ph < .22)) && !pick && y < GL + 10 && y > goal.y - 30) { /* אפשר לבחור גם רגע אחרי הבעיטה (תגובה מאוחרת) */ pick = { col: colOf(r.clamp(x, goal.x, goal.x + goal.w)), row: rowOf(r.clamp(y, goal.y, GL)) }; gk.col = pick.col; gk.row = pick.row; gk.reach = 1; } },
       update(dt) { tt += dt; bulge = Math.max(0, bulge - dt * 1.4); gk.laugh = Math.max(0, gk.laugh - dt);
         if (phase === 'aim') { ready = Math.min(1, ready + dt * 1.6); gk.x += (BX - gk.x) * Math.min(1, dt * 6); if (Math.abs(gk.x - BX) < 2) gk.x = BX;

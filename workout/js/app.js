@@ -442,6 +442,8 @@ function giftPhase() {
   $('#playnow').onclick = () => { W.gamesPlayed++; playGame(g, cont); };
 }
 
+// הדגמה בלבד (בלי אסימון): אצבע מדומה משחקת ומסבירה, ואז חזרה
+function playDemo(g, onDone) { mount('', true); activeGame = runGame(g, { seconds: 60, host: app, best: 0, sound: store.profile.sound !== false, demo: true, demoOnly: true, onEnd() { activeGame = null; onDone(); } }); }
 // מריץ משחק במסך מלא ומחזיר לפונקציית ההמשך
 function playGame(g, onDone) {
   mount('', true);
@@ -636,8 +638,10 @@ function arcade() {
           <div class="e">${locked ? (credits() ? '🔓' : '🔒') : g.emoji}</div>
           <div><b>${esc(g.name)}</b>${gs.played[g.id] ? '' : ' <span class="pill solid" style="font-size:12px;padding:1px 8px">חדש</span>'}<div class="best">${gs.played[g.id] ? `שיא: ${gs.bests[g.id] || 0} · שיחקת ${gs.played[g.id]} ${gs.played[g.id] === 1 ? 'פעם' : 'פעמים'}` : esc(g.how)}</div></div>
           <span class="pill solid">${locked ? (credits() ? 'לפתוח' : 'נעול') : '▶️'}</span>
+          ${g.demo && !locked ? `<button class="btn chip" data-demo="${g.id}" style="grid-column:1/-1;justify-self:start;font-size:13px">🎬 איך משחקים?</button>` : ''}
         </div>`; }).join('')}`).join(''); })()}
   </div>`);
+  app.querySelectorAll('[data-demo]').forEach(b => b.onclick = e => { e.stopPropagation(); playDemo(gameById[b.dataset.demo], () => arcade()); });
   app.querySelectorAll('[data-game]').forEach(c => c.onclick = () => {
     const id = c.dataset.game, ul = unlockedList();
     if (ul && !ul.includes(id)) {
