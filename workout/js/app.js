@@ -1,6 +1,7 @@
 // האפליקציה: ניתוב, מסכים, מהלך אימון (חימום -> תרגילים -> מנוחות -> מתיחות -> סיכום), מעקב והגדרות.
 import { EXERCISES, CATS, byId } from './exercises.js';
 import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js';
+import { ExerciseSim } from './sim.js';
 import { Figure, cycleMs } from './figure.js';
 import { store } from './store.js';
 import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, rankOf, perseveranceLine, honestTime, tokensFor } from './logic.js';
@@ -35,6 +36,9 @@ function mount(html, full = false) {
 function fig(svg, ex, speed = 1) { const f = new Figure(svg); f.play(ex, speed); figures.push(f); return f; }
 function figs(sel = 'svg[data-ex]') { return [...app.querySelectorAll(sel)].map(s => fig(s, byId[s.dataset.ex])); }
 const figSvg = (exId, cls = '') => `<svg class="figure ${cls}" data-ex="${exId}" aria-hidden="true"></svg>`;
+// הסימולציה הגדולה במסך התרגיל: הדמות המלאה על קנבס (js/sim.js). אותו ממשק כמו Figure: play(ex, speed), still, stop
+const simCanvas = exId => `<canvas class="sim" data-sim="${exId}" aria-hidden="true"></canvas>`;
+function sims() { return [...app.querySelectorAll('canvas[data-sim]')].map(cv => { const s = new ExerciseSim(cv); s.play(byId[cv.dataset.sim], 1); figures.push(s); return s; }); }
 const catPill = cat => `<span class="pill ${cat}">${CATS[cat].emoji} ${CATS[cat].name}</span>`;
 const stepsHtml = ex => `<ol class="steps">${ex.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol>`;
 const placePill = ex => ex.place === 'hall' ? '<span class="pill hall">🚪 במסדרון</span>' : '';
@@ -246,7 +250,7 @@ function exerciseDetail(id) {
   mount(`
   <div class="stack">
     <div class="row between"><button class="btn icon ghost" data-go="#/exercises" aria-label="חזרה">→</button><h1 class="grow">${esc(ex.name)}</h1>${catPill(ex.cat)}</div>
-    <div class="stage">${figSvg(ex.id)}</div>
+    <div class="stage">${simCanvas(ex.id)}</div>
     <div class="row wrap"><button class="btn chip" data-speed="0.5">לאט</button><button class="btn chip on" data-speed="1">רגיל</button><button class="btn chip" data-speed="1.5">מהר</button>${placePill(ex)}</div>
     ${helpButton()}
     <div class="tiles">
@@ -256,9 +260,9 @@ function exerciseDetail(id) {
     </div>
     <button class="btn primary big" id="solo">לעשות עכשיו רק את זה 💥</button>
   </div>`);
-  const f = fig(app.querySelector('svg[data-ex]'), ex);
+  const [f] = sims();
   wireHelp(ex, f);
-  app.querySelectorAll('[data-speed]').forEach(b => b.onclick = () => { app.querySelectorAll('[data-speed]').forEach(x => x.classList.remove('on')); b.classList.add('on'); f.play(ex, +b.dataset.speed); });
+  app.querySelectorAll('[data-speed]').forEach(b => b.onclick = () => { app.querySelectorAll('[data-speed]').forEach(x => x.classList.remove('on')); b.classList.add('on'); f.setSpeed(+b.dataset.speed); });
   $('#solo').onclick = () => {
     const program = { id: 'solo', name: ex.name, emoji: '💥', items: [ex.id], rounds: 1, minutes: 1 };
     beginWorkout(program, buildItems(program, byId, store.profile.level));
@@ -307,7 +311,7 @@ function exercisePhase() {
       <span></span>
     </div>
     <div class="row between"><span class="pill block">${esc(blockLabel)}</span><span class="row">${placePill(ex)}${catPill(ex.cat)}</span></div>
-    <div class="stage">${figSvg(ex.id)}</div>
+    <div class="stage">${simCanvas(ex.id)}</div>
     <h1 class="center">${esc(ex.name)}</h1>
     ${helpButton()}
     ${it.type === 'time' ? timeBlock(it) : repsBlock(it)}
@@ -316,7 +320,7 @@ function exercisePhase() {
       <button class="btn ghost" id="prev" ${W.idx ? '' : 'disabled'}>הקודם</button>
     </div>
   </div>`, true);
-  const [mainFig] = figs();
+  const [mainFig] = sims(); figs();
   wireHelp(ex, mainFig);
   $('#quit').onclick = quit;
   $('#skip').onclick = () => finishItem(0, true);
@@ -341,7 +345,7 @@ function repsBlock(it) {
 function wireReps(it, ex, mainFig) {
   let n = it.done || it.target, counting = false;
   const show = () => { $('#count').textContent = n; };
-  const stopCount = () => { clearInterval(tick); tick = 0; counting = false; $('#repcard').classList.remove('counting'); if ($('#countme')) $('#countme').textContent = '🔢 ספור איתי'; };
+  const stopCount = () => { clearInterval(tick); tick = 0; counting = false; mainFig.onRep = null; mainFig.count = null; if (!mainFig.raf) mainFig.play(ex, 1); $('#repcard').classList.remove('counting'); if ($('#countme')) $('#countme').textContent = '🔢 ספור איתי'; };
   const sig = $('#signal');
   if (sig) sig.onclick = () => {
     // אות יציאה: המסך אדום "מוכן...", ואחרי זמן אקראי צפצוף ו"צא!" ירוק
@@ -352,13 +356,11 @@ function wireReps(it, ex, mainFig) {
   if ($('#countme')) $('#countme').onclick = () => {
     if (counting) return stopCount();
     counting = true; n = 0; show();
-    mainFig.play(ex, 1); // מתחילים את הסרטון מההתחלה כדי שהספירה תתאים לתנועה
     $('#repcard').classList.add('counting'); $('#countme').textContent = '⏹️ עצור ספירה';
-    tick = setInterval(() => {
-      n++; show();
-      if (n >= it.target) { stopCount(); fanfare(); $('#did').classList.add('pop'); }
-      else beep(780, 70);
-    }, cycleMs(ex.frames));
+    const step = () => { n++; show(); if (n >= it.target) { stopCount(); fanfare(); $('#did').classList.add('pop'); } else beep(780, 70); };
+    // ספירה לאחור 3, 2, 1 על הקנבס (הדמות עומדת), ואז הסרטון מתחיל מההתחלה והמספר עולה בכל סיבוב של הדמות
+    mainFig.still(ex); mainFig.countdown(3); let k = 3; beep(520, 90);
+    tick = setInterval(() => { k--; if (k > 0) return beep(520, 90); clearInterval(tick); beep(880, 160); mainFig.onRep = step; mainFig.play(ex, 1); tick = 0; }, 1000);
   };
   $('#minus').onclick = () => { if (counting) stopCount(); n = Math.max(0, n - 1); show(); };
   $('#plus').onclick = () => { if (counting) stopCount(); n++; show(); };

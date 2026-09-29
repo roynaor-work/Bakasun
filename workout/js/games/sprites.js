@@ -161,13 +161,16 @@ export const KITS = {
   rabbi: { shirt: '#111827', shirt2: '#000', shorts: '#111827', socks: '#111827', number: '' }, // חליפה שחורה (הרבי בפרה המעופפת)
   purple: { shirt: '#7C3AED', shirt2: '#5B21B6', shorts: '#fff', socks: '#7C3AED', number: '8' },
   orange: { shirt: '#F97316', shirt2: '#C2410C', shorts: '#111827', socks: '#F97316', number: '11' },
+  kid: { shirt: '#8B5CF6', shirt2: '#6D28D9', shorts: '#1E1B3A', socks: '#fff', number: '7' }, // הדמות באימון: סגול של האפליקציה, מספר 7 (הגיל)
 };
 const SKINS = ['#F1C27D', '#E0AC69', '#C68642', '#8D5524', '#FFDBAC'];
-export function player(ctx, pose, x, y, scale, kit = KITS.blue, { flip = false, skin = SKINS[0], hair = '#3B2A1A', shoes = '#111827', happy = true, outline = '#1B1740', shadow = true } = {}) {
+// מבט מלפנים לפי הפוזה: שתי הידיים סימטריות סביב הצוואר ורחוקות זו מזו
+export const isFront = pose => Math.abs((pose.le[0] - pose.neck[0]) + (pose.re[0] - pose.neck[0])) < 10 && Math.abs(pose.le[0] - pose.re[0]) > 14;
+export function player(ctx, pose, x, y, scale, kit = KITS.blue, { flip = false, skin = SKINS[0], hair = '#3B2A1A', shoes = '#111827', happy = true, outline = '#1B1740', shadow = true, front: frontOpt = null } = {}) {
   // דמות מלאה: גפיים כפוליגונים מתעבים (ירך רחבה מהשוק), מפרקים עגולים, גוף עם כתפיים, מכנסיים, גרביים, נעליים עם סוליה, ראש עם אוזן, שיער, גבות, אף
   const P = ([a, b]) => [x + (flip ? -(a - 100) : (a - 100)) * scale, y + (b - 182) * scale];
   const lerp = (a, b, k) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
-  const front = Math.abs((pose.le[0] - pose.neck[0]) + (pose.re[0] - pose.neck[0])) < 10 && Math.abs(pose.le[0] - pose.re[0]) > 14;
+  const front = frontOpt ?? isFront(pose); // front: קיבוע המבט לכל הסרטון (בסימולציית תרגיל), אחרת לפי הפוזה
   const dir = flip ? -1 : 1, OW = 1.6 * scale;
   ctx.lineJoin = 'round'; ctx.lineCap = 'round';
   // גפה מתעבת: מלבן שמצטמצם מ-w0 ל-w1, עם קו מתאר וקו צל בצד אחד
