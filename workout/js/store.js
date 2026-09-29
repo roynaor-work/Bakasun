@@ -11,6 +11,8 @@ function load() {
     const prof = { ...DEFAULTS.profile, ...(d.profile || {}) };
     // יחס משחק/אימון חדש (28/09): מי שעדיין על ברירות המחדל הישנות עובר לחדשות
     if (!prof.ratioV2) { if (prof.giftEvery === 1) prof.giftEvery = 2; if (prof.gameSeconds === 90) prof.gameSeconds = 60; prof.ratioV2 = true; }
+    // איפוס שיאים אחרי סיום מקבץ 1 (29/09, בקשת רועי): השיאים של ששת המשחקים הראשונים מתאפסים פעם אחת
+    if (d.games && d.games.bests && (d.games.resetV || 0) < 1) { for (const id of ['tetris', 'snake', 'penalty', 'keeper', 'moles', 'flappy']) delete d.games.bests[id]; if (d.games.bestAt) for (const id of ['tetris', 'snake', 'penalty', 'keeper', 'moles', 'flappy']) delete d.games.bestAt[id]; d.games.resetV = 1; }
     // משחק "אני השוער" (29/09) פתוח מההתחלה גם למי שכבר פתח משחקים
     if (d.games && Array.isArray(d.games.unlocked) && !d.games.unlocked.includes('keeper')) d.games.unlocked.push('keeper');
     return { profile: prof, sessions: Array.isArray(d.sessions) ? d.sessions : [], tokens: d.tokens | 0, games: { ...structuredClone(DEFAULTS.games), ...(d.games || {}) },
