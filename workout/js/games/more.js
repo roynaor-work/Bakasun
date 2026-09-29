@@ -1,26 +1,6 @@
-// עוד משחקים: הוקי אוויר, לוליין, יורה בועות, חץ למטרה, ביליארד, כדורעף, דוחף קופסאות, ציור לפי מספרים, ניחוש מילה, צייר מהזיכרון, איפה הכדור
+// עוד משחקים: לוליין, יורה בועות, חץ למטרה, ביליארד, כדורעף, דוחף קופסאות, ציור לפי מספרים, ניחוש מילה, צייר מהזיכרון, איפה הכדור
 import { POSE, S, KITS } from './sprites.js';
 export const arcade = [], sport = [], puzzle = [], quick = [];
-
-// ---- הוקי אוויר ----
-arcade.push({ id: 'air-hockey', name: 'הוקי אוויר', emoji: '🏒', how: 'המחבט שלך בחצי התחתון, עוקב אחרי האצבע. מכניסים את הדיסקית לשער העליון.',
-  make(r) {
-    let me = { x: r.W / 2, y: r.H - 80 }, ai = { x: r.W / 2, y: 80 }, puck = reset(), pv = { x: 0, y: 0 };
-    function reset(dir = 1) { return { x: r.W / 2, y: r.H / 2, vx: r.rnd(-80, 80), vy: 200 * dir }; }
-    const GOAL = 110;
-    return {
-      move(x, y) { const nx = r.clamp(x, 24, r.W - 24), ny = r.clamp(y, r.H / 2 + 24, r.H - 24); pv = { x: nx - me.x, y: ny - me.y }; me.x = nx; me.y = ny; }, down(x, y) { this.move(x, y); },
-      update(dt) { puck.x += puck.vx * dt; puck.y += puck.vy * dt; puck.vx *= 0.995; puck.vy *= 0.995;
-        ai.x += r.clamp(puck.x - ai.x, -260 * dt, 260 * dt); ai.y = puck.y < r.H / 2 ? r.clamp(puck.y - 30, 40, r.H / 2 - 30) : 80;
-        if (puck.x < 14) { puck.x = 14; puck.vx = Math.abs(puck.vx); } if (puck.x > r.W - 14) { puck.x = r.W - 14; puck.vx = -Math.abs(puck.vx); }
-        const inGoal = Math.abs(puck.x - r.W / 2) < GOAL / 2;
-        if (puck.y < 14) { if (inGoal) { r.addScore(10); r.pop('גול! +10', r.W / 2, 60, '#EF4444', 28); r.burst(puck.x, 10, '#3B82F6', 18, 240); r.sfx('score'); puck = reset(1); return; } puck.y = 14; puck.vy = Math.abs(puck.vy); r.sfx('tick'); }
-        if (puck.y > r.H - 14) { if (inGoal) { r.pop('גול למחשב', r.W / 2, r.H - 60, '#9CA3AF', 22); r.sfx('hit'); puck = reset(-1); return; } puck.y = r.H - 14; puck.vy = -Math.abs(puck.vy); r.sfx('tick'); }
-        for (const [m, mv] of [[me, pv], [ai, { x: 0, y: 0 }]]) { const d = r.dist(m.x, m.y, puck.x, puck.y); if (d < 36) { const nx = (puck.x - m.x) / d, ny = (puck.y - m.y) / d; const sp = Math.max(260, Math.hypot(puck.vx, puck.vy) * 0.9); puck.vx = nx * sp + mv.x * 8; puck.vy = ny * sp + mv.y * 8; puck.x = m.x + nx * 37; puck.y = m.y + ny * 37; } }
-        pv = { x: pv.x * 0.5, y: pv.y * 0.5 }; },
-      draw() { r.clear('#E0F2FE'); r.line(0, r.H / 2, r.W, r.H / 2, '#7DD3FC', 3); r.circle(r.W / 2, r.H / 2, 40, '#BAE6FD'); r.rect(r.W / 2 - GOAL / 2, 0, GOAL, 8, '#EF4444'); r.rect(r.W / 2 - GOAL / 2, r.H - 8, GOAL, 8, '#3B82F6'); r.circle(ai.x, ai.y, 24, '#EF4444'); r.circle(me.x, me.y, 24, '#3B82F6'); r.circle(puck.x, puck.y, 12, '#111827'); },
-    };
-  } });
 
 // ---- לוליין ----
 arcade.push({ id: 'juggle', name: 'הלוליין', emoji: '🤹', how: 'נוגעים בכדור כדי להקפיץ אותו למעלה. אסור שכדור ייפול לרצפה. כל 8 שניות מתווסף כדור.',
