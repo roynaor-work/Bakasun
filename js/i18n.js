@@ -130,6 +130,8 @@ export const KIND_LABELS = {
 
 import { MORE } from './i18n-more.js';
 Object.keys(MORE).forEach(k => Object.assign(D[k], MORE[k]));
+import { EXTRA } from './i18n-extra.js';
+Object.keys(EXTRA).forEach(k => Object.assign(D[k], EXTRA[k]));
 
 let current = 'he';
 export function lang() { return current; }

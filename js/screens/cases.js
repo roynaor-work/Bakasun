@@ -19,6 +19,7 @@ import { askFlow, resend, offerDialog, compareBlock, wireCompare, sendEach } fro
 import { printSeedFor, printOrderText, printOrderSubject, printSummary, PRINT_STATUS } from '../logic/print.js';
 import { printStatusLabel } from '../labels.js';
 import { toCalendar } from '../calendar.js';
+import { CASE_TABS } from '../caseTabs.js';
 import { caseEvent } from '../logic/ics.js';
 
 let tab = 'open';
@@ -50,11 +51,13 @@ function renderOne({ root, id, query }) {
   root.innerHTML = `
     <header class="top">${BACK('#/cases', t('back'))}<h1>${esc(c.client || t('unknownClient'))}</h1><button class="icon" id="edit" aria-label="${esc(t('edit'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10-10-4-4L4 16zM13 7l4 4"/></svg></button></header>
     <div class="sub">${[kindLabel(c.kind), c.date ? Office.fmt(c.date) + ' · ' + relDay(c.date) : '', c.place].filter(Boolean).map(esc).join(' · ')}</div>
-    <div class="tabs" style="margin-top:12px">${TABS.map(x => `<button class="${caseTab === x[0] ? 'on' : ''}" data-ctab="${x[0]}">${esc(t(x[1]))}</button>`).join('')}</div>
+    <div class="tabs" style="margin-top:12px">${TABS.map(x => `<button class="${caseTab === x[0] ? 'on' : ''}" data-ctab="${x[0]}">${esc(t(x[1]))}</button>`).join('')}${CASE_TABS.map(x => `<button class="${caseTab === x.key ? 'on' : ''}" data-ctab="${esc(x.key)}">${esc(x.label())}</button>`).join('')}</div>
     <div class="stack sec" id="body"></div>`;
   root.querySelectorAll('[data-ctab]').forEach(b => b.onclick = () => { caseTab = b.dataset.ctab; renderOne({ root, id }); });
   root.querySelector('#edit').onclick = () => editCase(c);
   const body = root.querySelector('#body');
+  const ext = CASE_TABS.find(x => x.key === caseTab);
+  if (ext) { ext.render(body, c, s); return; }
   ({ details: tabDetails, suppliers: tabSuppliers, plan: tabPlan, money: tabMoney, lists: tabLists }[caseTab] || tabDetails)(body, c, s);
 }
 

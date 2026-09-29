@@ -2,9 +2,12 @@
    Screens never touch storage directly; they call db.* and subscribe to changes. */
 
 const KEY = 'bakasun.v1';
-const COLS = ['cases', 'clients', 'calls', 'tasks', 'quotes', 'suppliers', 'links', 'schedule', 'staff', 'payments', 'checks', 'groups', 'catalog', 'notes', 'approvals', 'team', 'contacts', 'print', 'receipts'];
+const COLS = ['cases', 'clients', 'calls', 'tasks', 'quotes', 'suppliers', 'links', 'schedule', 'staff', 'payments', 'checks', 'groups', 'catalog', 'notes', 'approvals', 'team', 'contacts', 'print', 'receipts', 'participants', 'history', 'contracts', 'checklists'];
 let onChange = null; // the cloud hooks in here
 export function setChangeHook(fn) { onChange = fn; }
+/* The activity history hooks in here: fn({col, id, before, after, deleted}) after every put/remove (never for 'history' itself). */
+let onHistory = null;
+export function setHistoryHook(fn) { onHistory = fn; }
 
 const state = { settings: {}, meta: { backend: 'local' } };
 COLS.forEach(c => { state[c] = []; });
@@ -45,15 +48,18 @@ export const db = {
     if (!obj.created) obj.created = obj.updated;
     const a = state[col];
     const i = a.findIndex(x => x.id === obj.id);
+    const before = i >= 0 ? a[i] : null;
     if (i >= 0) a[i] = Object.assign({}, a[i], obj); else a.push(obj);
     persist(); emit();
     if (onChange) onChange({ col, id: obj.id, data: i >= 0 ? a[i] : obj });
+    if (onHistory && col !== 'history') { try { onHistory({ col, id: obj.id, before, after: i >= 0 ? a[i] : obj }); } catch (e) { /* history must never break a save */ } }
     return obj.id;
   },
   remove(col, id) {
     const gone = (state[col] || []).find(x => x.id === id);
     state[col] = state[col].filter(x => x.id !== id); persist(); emit();
     if (onChange && gone) onChange({ col, id, data: Object.assign({}, gone, { updated: nowIso() }), deleted: true });
+    if (onHistory && gone && col !== 'history') { try { onHistory({ col, id, before: gone, after: null, deleted: true }); } catch (e) { /* see put */ } }
   },
   setting(k, v) { if (v === undefined) return state.settings[k]; state.settings[k] = v; persist(); emit(); if (onChange) onChange({ setting: k, value: v }); },
   /** Rows from the cloud: newer 'updated' wins; deleted rows are removed. Settings from the cloud fill in. */
