@@ -23,5 +23,33 @@ export const DEMOS = {
   flappy(t, game, ctl) { captions(ctl, t, [[0, 'נוגעים כדי שהפרה תעוף למעלה'], [3, 'עוברים בין התחתונים לאסלות'], [7, 'אוספים בונוסים מצחיקים'], [10, 'כשהרבי בא עם הרשת, עפים גבוה!']]);
     const P = game.peek(); if (!P.started) { if (every(ctl, 'tap', .5, t)) ctl.tap(180, 300); return; }
     const targetY = P.next ? P.next.gapY + 10 : 280; if (P.y > targetY - 6 && every(ctl, 'tap', .27, t)) ctl.tap(180, 420); },
+  // ---- מקבץ 2 ----
+  breakout(t, game, ctl, r) { captions(ctl, t, [[0, 'מזיזים את המחבת עם האצבע'], [3, 'הכדור קופץ מהפיצה ומפיל לבנים'], [6, 'תופסים דברים טובים שנופלים: 🍔 🍕 🎾'], [9.5, 'לא תופסים 💩 🌶️ ⚡ (לתפוס = צרות)']]);
+    const P = game.peek(); const W = r.W, H = r.H; let target = W / 2;
+    const falling = P.balls.filter(b => b.vy > 0).sort((a, b) => b.y - a.y)[0];
+    if (falling) { const dtHit = Math.max(0, (H - 40 - falling.y) / Math.max(1, falling.vy)); let x = falling.x + falling.vx * dtHit; while (x < 8 || x > W - 8) x = x < 8 ? 16 - x : 2 * (W - 8) - x; target = x; }
+    const good = P.drops.find(d => d.good && d.y > H - 220 && (!falling || falling.y < H / 2 || Math.abs(d.x - target) < 70)); if (good) target = good.x;
+    for (const d of P.drops) if (!d.good && d.y > H - 150 && Math.abs(d.x - target) < P.paddleW / 2 + 14) target += d.x < target ? 55 : -55;
+    target = Math.max(30, Math.min(W - 30, target)); ctl.moveTo(P.zap ? W - target : target, H - 60); },
+  pong(t, game, ctl, r) { captions(ctl, t, [[0, 'נוגעים למטה: נגד המחשב. למעלה: שני שחקנים'], [2.5, 'המחבט עוקב אחרי האצבע, לכל כיוון'], [5.5, 'חבטה מהירה קדימה מעיפה את הדיסקית!'], [9, 'משחק עד 3 שערים']]);
+    const P = game.peek(); const W = r.W, H = r.H; if (P.mode == null) { if (t > .4 && every(ctl, 'pick', 1, t)) ctl.tap(W / 2, H * 3 / 4); return; }
+    const pk = P.puck; if (pk.y > H / 2 - 40 && pk.vy > -50) { const near = pk.y > H / 2 + 60 && Math.abs(pk.x - P.me.x) < 90 && pk.y < P.me.y + 10; ctl.moveTo(pk.x, near ? Math.max(H / 2 + 40, pk.y - 26) : Math.min(H - 40, pk.y + 70)); } else ctl.moveTo(W / 2, H - 90); },
+  pinball(t, game, ctl, r) { captions(ctl, t, [[0, 'הכדור יוצא לבד מהמסלול הימני'], [2.5, 'נוגעים בצד שמאל או ימין כדי להרים פליפר'], [6, 'מכים כשהכדור מגיע לפליפר, לא לפני'], [9.5, 'מנהרה, ספינר, גשר ומטרות = בונוסים']]);
+    const P = game.peek(); const H = r.H; if (!P.launched || P.rail || P.tunnel) { ctl.moveTo(P.TW / 2, H - 40); return; }
+    const b = P.ball; if (b.y > P.FY - 80 && b.vy > 0 && every(ctl, 'flip', .38, t)) { if (b.x < P.TW / 2) ctl.tap(50, H - 50); else ctl.tap(P.TW - 50, H - 50); } },
+  invaders(t, game, ctl, r) { captions(ctl, t, [[0, 'החללית עוקבת אחרי האצבע ויורה לבד'], [3, 'מתחמקים מהיריות של הפולשים'], [6.5, 'תופסים נשקים: ⚡ 🚀 🔫 🛡️'], [9.5, 'בסוף כל גל מגיע בוס!']]);
+    const P = game.peek(); const W = r.W, H = r.H; let target = P.px;
+    const low = [...P.enemies, ...(P.divers || [])].sort((a, b) => b.y - a.y)[0]; if (low) target = low.x; if (P.boss) target = P.boss.x;
+    const drop = P.drops.find(d => d.y > 200); if (drop) target = drop.x;
+    const threat = P.eshots.find(e => e.y > H - 280 && Math.abs(e.x - P.px) < 36); if (threat) target = threat.x < W / 2 ? threat.x + 70 : threat.x - 70;
+    ctl.moveTo(Math.max(24, Math.min(W - 24, target)), H - 45); },
+  asteroids(t, game, ctl, r) { captions(ctl, t, [[0, 'מזיזים את המטוס לכל מקום, הוא יורה לבד'], [3, 'מתחמקים מהאבנים'], [6.5, 'אוספים 🌟 ו-🛡️'], [9.5, '💣 מוכנה? לוחצים בפינה ומנקים את המסך']]);
+    const P = game.peek(); const W = r.W, H = r.H; let tx = P.px, ty = H - 80;
+    const star = P.stars.find(s => s.y > 150 && s.y < P.py); if (star) tx = star.x;
+    let danger = null; for (const k of P.rocks) if (k.y < P.py && k.y > P.py - 240 && Math.abs(k.x + k.vx * .6 - tx) < k.s + 30) danger = danger && danger.y > k.y ? danger : k;
+    if (danger) tx = danger.x < W / 2 ? Math.min(W - 30, danger.x + danger.s + 60) : Math.max(30, danger.x - danger.s - 60);
+    if (t > 9.6 && P.bomb >= 30 && P.rocks.length >= 3 && !ctl.mem.bombed) { ctl.mem.bombed = true; ctl.tap(P.BOMB.x, P.BOMB.y); return; }
+    ctl.moveTo(tx, ty); },
 };
-export const DEMO_DUR = { tetris: 13, snake: 11, penalty: 12, keeper: 12, moles: 12, flappy: 12 };
+export const DEMO_TOP = new Set(['breakout', 'pong', 'pinball']); /* כתוביות למעלה */
+export const DEMO_DUR = { tetris: 13, snake: 11, penalty: 12, keeper: 12, moles: 12, flappy: 12, breakout: 13, pong: 12, pinball: 12, invaders: 12, asteroids: 12 };

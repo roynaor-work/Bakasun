@@ -125,6 +125,7 @@ G.push({ id: 'breakout', name: 'שובר לבנים', emoji: '🧊', how: 'יש 
     return {
       move(x) { const target = fx.zap > 0 ? r.W - x : x; px = r.clamp(target, paddleW() / 2, r.W - paddleW() / 2); }, down(x) { this.move(x); }, /* חשמל: הכיוונים הפוכים */
       save() { return { level }; }, revive() { lives = 3; balls = [newBall()]; drops = []; },
+      peek() { return { px, balls, drops, paddleW: paddleW(), zap: fx.zap > 0 }; },
       update(dt) { tt += dt; for (const k in fx) fx[k] = Math.max(0, fx[k] - dt); const spd = fx.fast > 0 ? 1.45 : fx.slow > 0 ? .65 : 1; const W2 = paddleW();
         // הכדורים
         for (const ball of balls) { ball.x += ball.vx * dt * spd; ball.y += ball.vy * dt * spd;
@@ -182,6 +183,7 @@ G.push({ id: 'pong', name: 'הוקי שולחן', emoji: '🏒', how: 'משחק 
       else net.send('in', { x: Math.round(me.x), y: Math.round(me.y) }); };
     return {
       save() { return net ? null : { level }; }, revive() { hisPts = 0; myPts = 0; puck = reset(true); trail = []; },
+      peek() { return { mode, puck, me, ai, myPts, hisPts }; },
       down(x, y) { if (mode == null) { mode = y < r.H / 2 ? '2p' : 'ai'; msg = mode === '2p' ? 'שני שחקנים! למעלה ולמטה' : 'נגד המחשב!'; msgT = 1.5; return; } if (y >= r.H / 2) target = { x, y }; else if (mode === '2p') target2 = { x, y }; },
       move(x, y) { if (mode == null) return; if (y >= r.H / 2 && !Object.values(r.pointers).some(p => p.y < r.H / 2 && Math.abs(p.x - x) < 1 && Math.abs(p.y - y) < 1)) target = { x, y }; },
       update(dt) { tt += dt; moodT -= dt; hitT -= dt; msgT -= dt; if (mode == null) return;
@@ -241,6 +243,7 @@ G.push({ id: 'pinball', name: 'פינבול', emoji: '🎯', how: '3 כדורי�
     return {
       down(x) { if (x < r.W / 2) fl.l = 0.16; else fl.r = 0.16; },
       revive() { balls = 3; hits = 0; newBall(); },
+      peek() { return { ball, launched, FY, TW, rail: !!rail, tunnel: tunnel > 0 }; },
       update(dt) { tt += dt; fl.l = Math.max(0, fl.l - dt); fl.r = Math.max(0, fl.r - dt); multT -= dt; if (multT <= 0) mult = 1; for (const k in flash) flash[k] -= dt; spin += spinV * dt; spinV *= (1 - 1.8 * dt);
         const goal = side => (side === 'l' ? fl.l : fl.r) > 0 ? UP : REST; fl.la += (goal('l') - fl.la) * Math.min(1, dt * (fl.l > 0 ? 28 : 14)); fl.ra += (goal('r') - fl.ra) * Math.min(1, dt * (fl.r > 0 ? 28 : 14));
         if (!launched) { launchT -= dt; if (launchT <= 0) { launched = true; ball.vy = -(980 + r.rnd(0, 140)); r.sfx('bounce'); } return; }
@@ -307,7 +310,7 @@ G.push({ id: 'invaders', name: 'פולשים מהחלל', emoji: '👾', how: '�
     const hitMe = () => { if (shield > 0 || inv > 0) { r.burst(px, r.H - 45, r.C.sky, 10, 150); r.sfx('bounce'); return; } lives--; inv = 2; r.shake(300); r.burst(px, r.H - 45, r.C.hot, 30, 300); r.sfx('over'); eshots = []; if (lives <= 0) return r.over('החללית הושמדה!'); r.pop(`נפגעת! נשארו ${lives} ❤️`, r.W / 2, r.H / 2, '#fff', 22); };
     return {
       move(x) { px = r.clamp(x, 24, r.W - 24); }, down(x) { this.move(x); },
-      save() { return { wave }; },
+      save() { return { wave }; }, peek() { return { px, enemies, eshots, drops, boss, divers }; },
       revive() { lives = 3; inv = 2.5; eshots = []; divers = []; enemies.forEach(e => { if (e.y > r.H - 200) e.y -= 120; }); if (boss) boss.hp = Math.min(boss.maxHp, boss.hp + 2); },
       update(dt) { tt += dt; t += dt; bank += (r.clamp((px - lastPx) / Math.max(dt, 1e-3) / 600, -1, 1) - bank) * Math.min(1, dt * 8); lastPx = px; weaponT = Math.max(0, weaponT - dt); if (weaponT <= 0) weapon = 'basic'; shield = Math.max(0, shield - dt); inv = Math.max(0, inv - dt); booms.forEach(b => b.t -= dt); booms = booms.filter(b => b.t > 0);
         if (t > shotGap()) { t = 0; fire(); }
@@ -355,7 +358,7 @@ G.push({ id: 'asteroids', name: 'שדה אסטרואידים', emoji: '☄️', 
     return {
       move(x, y) { px = r.clamp(x, 16, r.W - 16); py = r.clamp(y, 200, r.H - 30); }, down(x, y) { if (bomb >= 30 && r.dist(x, y, BOMB.x, BOMB.y) < BOMB.r + 10) { detonate(); return; } this.move(x, y); },
       tap(x, y) { if (bomb >= 30 && r.dist(x, y, BOMB.x, BOMB.y) < BOMB.r + 10) return; if (hits >= 10) shots.push({ x: px - 7, y: py - 20 }, { x: px + 7, y: py - 20 }); else shots.push({ x: px, y: py - 20 }); r.sfx('tick'); },
-      save() { return { level: level() }; },
+      save() { return { level: level() }; }, peek() { return { px, py, rocks, stars, bomb, BOMB }; },
       revive() { lives = 3; inv = 3; rocks = []; shield = 3; },
       update(dt) { alive += dt; tt += dt; t += dt; st += dt; bank += (r.clamp((px - lastPx) / Math.max(dt, 1e-3) / 600, -1, 1) - bank) * Math.min(1, dt * 8); lastPx = px; shield = Math.max(0, shield - dt); inv = Math.max(0, inv - dt); levelT -= dt; bomb = Math.min(30, bomb + dt); booms.forEach(b => { b.t -= dt; }); booms = booms.filter(b => b.t > 0); const L = level(); if (Math.floor(alive / 15) !== Math.floor((alive - dt) / 15)) { levelT = 1.5; r.pop(`רמה ${L}! ☄️`, r.W / 2, 150, r.C.gold, 24); }
         if (t > Math.max(0.28, 1 - L * .12)) { t = 0; rocks.push({ x: r.rnd(20, r.W - 20), y: -30, s: r.rnd(14, 32), vy: r.rnd(90, 190) + L * 15, vx: r.rnd(-40, 40), rot: r.rnd(0, 6), vr: r.rnd(-2, 2), seed: r.rnd(0, 100) }); }
