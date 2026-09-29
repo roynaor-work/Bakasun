@@ -107,14 +107,26 @@ export function parseCommand(text, docs, people) {
     const via = /(מייל|אימייל|mail|e-mail|email|courriel)/i.test(t.slice(0, t.length - head.length)) ? 'email' : 'whatsapp';
     const hit = email || phone;
     if (hit && head.indexOf(hit[0]) >= 0) {
-      const body = cleanBody(head.slice(head.indexOf(hit[0]) + hit[0].length), true);
-      return body ? { via, body, to: email ? { email: email[0] } : { phone: phonePretty(phone[0]) } } : null;
+      const at = head.indexOf(hit[0]);
+      const body = cleanBody(head.slice(at + hit[0].length), true);
+      if (!body) return null;
+      const to = email ? { email: email[0] } : { phone: phonePretty(phone[0]) };
+      // "send Dana 052-... hello": the number she read is used as is, and it can be kept on Dana's card afterwards
+      const named = findPerson(head.slice(0, at).replace(/^(?:ל|אל\s+|to\s+|à\s+)/, ''), people);
+      if (named && named.name) { to.name = named.name; to.about = named.about; to.id = named.id; if (!named.phone && to.phone) to.newPhone = true; else if (named.email && !to.email) to.email = named.email; }
+      return { via, body, to };
     }
     let best = null;
+    // the full name, or just the first name ("ארבל" for "ארבל גבילי"), wherever it sits in the sentence
+    const low = head.toLowerCase();
     (people || []).forEach(p => (p.names || []).forEach(n => {
-      const k = str(n).trim(); if (k.length < 3) return;
-      const i = head.toLowerCase().indexOf(k.toLowerCase()); if (i < 0) return;
-      if (!best || i < best.i || (i === best.i && k.length > best.k.length)) best = { p, i, k };
+      const full = str(n).trim(); const first = full.split(/\s+/)[0];
+      [full, first].forEach(k => {
+        if (k.length < 3) return;
+        const i = low.indexOf(k.toLowerCase()); if (i < 0) return;
+        const after = low.charAt(i + k.length); if (after && !/[\s,.:;!?]/.test(after)) return;
+        if (!best || i < best.i || (i === best.i && k.length > best.k.length)) best = { p, i, k };
+      });
     }));
     if (!best) return null;
     const body = cleanBody(head.slice(best.i + best.k.length), true);
@@ -128,6 +140,13 @@ export function parseCommand(text, docs, people) {
     const who = trim(msg[2]).replace(/\s+(?:ב?וואטסאפ|ב?ווצאפ|ב?מייל|באימייל|הודעה|on whatsapp|by whatsapp|via whatsapp|a whatsapp|by e?-?mail|par whatsapp|par mail|un whatsapp)$/i, '').trim();
     const body = cleanBody(msg[3] || '', !/[:,]/.test(t.slice(0, t.length - trim(msg[3] || '').length)));
     out.kind = 'message'; out.via = via; out.body = body;
+    // "send Dana 052-... : hello" through the marker path too: the number she read, kept on Dana's card when it has none
+    if (phone && !email) {
+      const to = { phone: phonePretty(phone[0]) };
+      const at = who.indexOf(phone[0]); const named = at > 0 ? findPerson(who.slice(0, at), people) : null;
+      if (named && named.name) { to.name = named.name; to.about = named.about; to.id = named.id; if (!named.phone) to.newPhone = true; }
+      out.to = to; return out;
+    }
     out.to = email ? { email: email[0] } : phone ? { phone: phonePretty(phone[0]) } : isGroup(who) ? { name: who.replace(/^(?:ה)?קבוצ(?:ה|ת)\s*(?:של\s+)?|^(?:the\s+)?group\s*(?:of\s+)?|^(?:le\s+|au\s+)?groupe\s*(?:de\s+|des\s+)?/i, '').trim() || who, group: true } : findPerson(who, people);
     if (!out.to) out.to = { name: who };
     return out;

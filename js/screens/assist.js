@@ -249,6 +249,11 @@ async function tabCommand(body, s, ctx) {
           : has ? `<div class="row">${c.via === 'email' ? `<a class="btn primary" id="mail">${esc(t('email'))}</a>` : `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>`}${c.via === 'email' && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.via !== 'email' && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}</div>`
           : `<p class="warnbox">${esc(t('noContact'))} <button class="btn sm" id="addContact">${esc(c.via === 'email' ? t('addEmail') : t('addPhone'))}</button></p>`}</div>`;
       const msg = () => out.querySelector('[name=msg]').value;
+      // she read a number for someone who has none on the card: one tap keeps it there
+      if (c.to.newPhone && c.to.id && c.to.phone) {
+        const col = c.to.about === 'client' ? 'clients' : c.to.about === 'supplier' ? 'suppliers' : c.to.about === 'team' ? 'team' : c.to.about === 'contact' ? 'contacts' : '';
+        if (col) { const r0 = document.createElement('div'); r0.className = 'row'; r0.innerHTML = `<button type="button" class="btn sm" id="keepPhone">${esc(t('keepPhoneFor', { who: c.to.name, phone: c.to.phone }))}</button>`; out.querySelector('.card').appendChild(r0); r0.querySelector('#keepPhone').onclick = () => { db.put(col, { id: c.to.id, phone: c.to.phone }); toast(t('personSaved')); r0.remove(); }; }
+      }
       { const r = document.createElement('div'); r.className = 'row'; r.innerHTML = `<button type="button" class="btn sm ghost" id="readMsg">🔊 ${esc(t('readAloud'))}</button><button type="button" class="btn sm ghost" id="saveTpl">${esc(t('saveAsTemplate'))}</button>`; out.querySelector('.card').appendChild(r); r.querySelector('#readMsg').onclick = () => speak(msg(), lang());
         r.querySelector('#saveTpl').onclick = async () => { const rr = await dialog(t('saveAsTemplate'), field('name', t('templateName'), '') + `<p class="hint">${esc(t('templateHint'))}</p>`, { ok: t('save') }); if (rr && rr.name) { saveTemplate(db, rr.name, msg()); toast(t('templateSaved', { name: rr.name })); } }; }
       const wa = out.querySelector('#wa'); if (wa) wa.onclick = () => openWhatsApp(c.to.phone, msg());

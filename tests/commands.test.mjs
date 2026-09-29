@@ -136,3 +136,13 @@ test('a phone in any grouping the speech engine produces is found, prettified, a
   assert.equal(c.to.phone, '052-5870838'); assert.equal(c.body, 'hello there');
   assert.equal(parseCommand('תגידי לדנה שאני מאחרת', [], [{ label: 'דנה', names: ['דנה'], about: 'client' }]).phoneFound, '');
 });
+
+test('a name plus a number she read: the number is used as is, and remembered for that person', () => {
+  const people = [{ label: 'דנה לוי', names: ['דנה לוי', 'דנה'], phone: '', about: 'client', id: 'k1' }, { label: 'רועי נאור', names: ['רועי'], phone: '052-1111111', about: 'team', id: 't1' }];
+  let c = parseCommand('שלחי וואטסאפ לדנה 052-58708-38 שלום דנה', [], people);
+  assert.equal(c.kind, 'message'); assert.equal(c.to.phone, '052-5870838'); assert.equal(c.to.name, 'דנה לוי'); assert.equal(c.to.newPhone, true); assert.equal(c.body, 'שלום דנה');
+  c = parseCommand('שלחי וואטסאפ לרועי 052-58708-38 שלום', [], people);
+  assert.equal(c.to.phone, '052-5870838'); assert.equal(c.to.name, 'רועי נאור'); assert.ok(!c.to.newPhone);
+  c = parseCommand('שלחי וואטסאפ למוטי 052-58708-38 שלום מוטי', [], people);
+  assert.equal(c.to.phone, '052-5870838'); assert.ok(!c.to.name);
+});
