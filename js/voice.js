@@ -30,10 +30,13 @@ export function listen(langCode, onText, onEnd, opts) {
         if (r.isFinal) gotFinal = tr; else last = tr;
       }
       interim = gotFinal ? '' : last;
+      // a closing word ("finished", "delete") ends the listening at once, no need to wait for silence.
+      // On Android the word often arrives only as an interim result and is never marked final: it counts all the same.
+      const stopOn = opts && typeof opts.stopOn === 'function' ? opts.stopOn : null;
+      if (!gotFinal && last && stopOn && stopOn(last)) { gotFinal = last; interim = ''; }
       if (gotFinal && finals[finals.length - 1] !== gotFinal) { finals.push(gotFinal); interim = ''; }
       emit();
-      // a closing word ("finished", "delete") ends the listening at once, no need to wait for silence
-      if (gotFinal && opts && typeof opts.stopOn === 'function' && opts.stopOn(gotFinal)) { why = 'word'; active = false; clearTimeout(timer); try { rec.stop(); } catch (e) { /* already stopped */ } }
+      if (gotFinal && stopOn && stopOn(gotFinal)) { why = 'word'; active = false; clearTimeout(timer); try { rec.stop(); } catch (e) { /* already stopped */ } }
     };
     rec.onerror = ev => {
       // "no-speech" and "aborted" are normal between sentences: keep listening; anything else ends the dictation
@@ -41,7 +44,7 @@ export function listen(langCode, onText, onEnd, opts) {
       active = false;
     };
     rec.onend = () => {
-      if (interim && finals[finals.length - 1] !== interim) { finals.push(interim); interim = ''; emit(); }
+      if (interim && finals[finals.length - 1] !== interim) { finals.push(interim); interim = ''; emit(); if (opts && typeof opts.stopOn === 'function' && opts.stopOn(finals[finals.length - 1])) { why = 'word'; active = false; } }
       if (active && restarts < 40) { restarts++; try { start(); return; } catch (e) { /* fall through */ } }
       clearTimeout(timer);
       if (ended) return; ended = true;

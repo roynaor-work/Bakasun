@@ -146,3 +146,20 @@ test('a name plus a number she read: the number is used as is, and remembered fo
   c = parseCommand('שלחי וואטסאפ למוטי 052-58708-38 שלום מוטי', [], people);
   assert.equal(c.to.phone, '052-5870838'); assert.ok(!c.to.name);
 });
+
+test('an invoice request names a known client in any spelling, and reads the purpose, the channel and an extra request', async () => {
+  const { parseInvoiceRequest, spelledLetters, findClientIn } = await import('../js/logic/commands.js');
+  const clients = [{ id: 'c1', name: 'ב.ד. גרייבר', aliases: 'ב.ד, ב. ד., בי די, גרייבר', legalName: 'ב.ד. גרייבר בע״מ', taxId: '', address: '' },
+    { id: 'c2', name: 'WeRIsrael', aliases: 'וי אר ישראל', taxId: '510202757', address: 'פארק תעשיות קיסריה', email: 'tamar@werisrael.com' }];
+  assert.equal(spelledLetters("חשבונית לבית. ד' על 10000"), 'חשבונית לב.ד. על 10000');
+  assert.equal(spelledLetters('לבית נקודה דלת על 10000'), 'לב.ד. על 10000');
+  assert.equal(spelledLetters('סכום 27,310+ מע"מ ש"ח'), 'סכום 27,310+ מע"מ ש"ח');
+  const r = parseInvoiceRequest("שלח במייל לרועי תשאיר את זה בטיוטה חשבונית בבקשה לבית. ד' על 10000 לפני מעמ הפקה של חיים ומשה בנוסף אבקש ממנו לבדוק האם שולם חודש קודם", clients);
+  assert.equal(r.clientId, 'c1'); assert.equal(r.client, 'ב.ד. גרייבר בע״מ'); assert.equal(r.channel, 'mail');
+  assert.deepEqual(r.items, [{ desc: 'הפקה של חיים ומשה', amount: 10000, incl: false }]);
+  assert.equal(r.note, 'לבדוק האם שולם חודש קודם');
+  const r2 = parseInvoiceRequest('תוציא לי חשבונית בבקשה ל weRisrael מקדמה עם משלחת פוז 10000 פלוס מעמ', clients);
+  assert.equal(r2.clientId, 'c2'); assert.equal(r2.taxId, '510202757'); assert.equal(r2.address, 'פארק תעשיות קיסריה'); assert.equal(r2.items[0].desc, 'מקדמה עם משלחת פוז');
+  assert.equal(parseInvoiceRequest('לבדוק חשבונית 3000 פלוס מעמ', clients).clientId, undefined);
+  assert.equal(findClientIn('חשבונית לגרייבר עבור משכורת', clients).id, 'c1');
+});

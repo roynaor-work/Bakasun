@@ -318,24 +318,27 @@ async function tabCommand(body, s, ctx) {
 /* ---------------- 2. ask Roy for an invoice ---------------- */
 function tabInvoice(body, s) {
   inputBox(body, t('invHint'), t('invPh'), (text, out) => {
-    const r = parseInvoiceRequest(text);
     const clients = db.list('clients');
-    const match = clients.find(c => r.taxId && c.taxId === r.taxId) || clients.find(c => r.client && Office.normHe(c.name) === Office.normHe(r.client)) || null;
+    const r = parseInvoiceRequest(text, clients);
+    const match = (r.clientId && db.get('clients', r.clientId)) || clients.find(c => r.taxId && c.taxId === r.taxId) || clients.find(c => r.client && Office.normHe(c.name) === Office.normHe(r.client)) || null;
+    const mailTo = s.invoiceEmail || DEFAULTS.invoiceEmail;
     const cases = db.list('cases', c => Office.ACTIVE.includes(c.status) && (!match || c.clientId === match.id));
     out.innerHTML = `<form class="card stack" id="inv">
       <div class="grid2">${field('client', t('fClient'), r.client || (match && match.legalName) || (match && match.name) || '')}${field('taxId', t('fTaxId'), r.taxId || (match && match.taxId) || '', { ltr: true })}${field('address', t('fAddress'), r.address || (match && match.address) || '')}${field('email', t('fEmail'), r.email || (match && match.email) || '', { ltr: true })}
       ${field('kind', t('fType'), r.kind, { type: 'select', options: [['חשבונית', 'חשבונית מס'], ['חשבון עסקה', 'חשבון עסקה'], ['דרישת תשלום', 'דרישת תשלום']] })}${field('caseId', t('forCase'), '', { type: 'select', options: [['', t('none')]].concat(cases.map(c => [c.id, c.client + (c.date ? ' · ' + Office.fmt(c.date) : '')])) })}</div>
       <div id="items" class="stack">${(r.items.length ? r.items : [{ desc: '', amount: '' }]).map(x => `<div class="row"><input name="desc" class="grow" value="${esc(x.desc)}" placeholder="${esc(t('note'))}"><input name="amount" type="number" inputmode="decimal" style="max-width:9em" value="${esc(x.amount)}" placeholder="${esc(t('amount'))}"></div>`).join('')}</div>
       <div class="row"><button type="button" class="btn sm ghost" id="addItem">+ ${esc(t('addLine'))}</button><span class="hint">${esc(t('amountsBeforeVat'))}</span></div>
+      ${field('note', t('invExtra'), r.note || '')}
       <textarea name="text" rows="10" id="invText"></textarea>
-      <div class="row"><button type="button" class="btn" id="rebuild">${esc(t('rebuild'))}</button><button type="submit" class="btn wa grow">${esc(t('askInvoice'))}</button><button type="button" class="btn ghost" id="copyInv">${esc(t('copy'))}</button></div>
-      ${!s.invoiceTo ? `<p class="warnbox">${esc(t('noInvoicePhone'))}</p>` : ''}</form>`;
+      <div class="row"><button type="button" class="btn" id="rebuild">${esc(t('rebuild'))}</button><button type="submit" class="btn ${r.channel === 'mail' ? '' : 'wa'} grow" id="sendWa">${esc(t('askInvoice'))}</button><button type="button" class="btn ${r.channel === 'mail' ? 'primary' : ''} grow" id="sendMail">${esc(t('askInvoiceMail'))}</button><button type="button" class="btn ghost" id="copyInv">${esc(t('copy'))}</button></div>
+      ${match && (!match.taxId || !match.address) ? `<p class="warnbox">${esc(t('clientDetailsMissing', { who: match.name }))}</p>` : ''}
+      ${!s.invoiceTo ? `<p class="hint">${esc(t('noInvoicePhone'))}</p>` : ''}</form>`;
     const form = out.querySelector('#inv');
     const build = () => {
       const o = {}; new FormData(form).forEach((v, k) => { if (k !== 'desc' && k !== 'amount') o[k] = String(v).trim(); });
       const descs = [...form.querySelectorAll('[name=desc]')].map(x => x.value), amts = [...form.querySelectorAll('[name=amount]')].map(x => Office.num(x.value));
       const items = descs.map((d, i) => ({ desc: d, amount: amts[i] })).filter(x => !isNaN(x.amount) && x.amount);
-      const req = { client: o.client, taxId: o.taxId, address: o.address, email: o.email, kind: o.kind, items, total: items.reduce((a, x) => a + x.amount, 0) };
+      const req = { client: o.client, taxId: o.taxId, address: o.address, email: o.email, kind: o.kind, note: o.note, items, total: items.reduce((a, x) => a + x.amount, 0) };
       form.querySelector('#invText').value = invoiceRequestText(req, {}, s.signer || DEFAULTS.signer);
       return Object.assign(req, { caseId: o.caseId });
     };
@@ -343,15 +346,25 @@ function tabInvoice(body, s) {
     form.querySelector('#rebuild').onclick = build;
     form.querySelector('#addItem').onclick = () => { form.querySelector('#items').insertAdjacentHTML('beforeend', `<div class="row"><input name="desc" class="grow" placeholder="${esc(t('note'))}"><input name="amount" type="number" inputmode="decimal" style="max-width:9em" placeholder="${esc(t('amount'))}"></div>`); };
     form.querySelector('#copyInv').onclick = () => copyText(form.querySelector('#invText').value);
+    // remember: the client's invoice details, and a payment row per amount
+    const done = req => {
+      if (match) db.put('clients', { id: match.id, legalName: req.client || match.legalName, taxId: req.taxId || match.taxId, address: req.address || match.address, email: req.email || match.email });
+      req.items.forEach(x => db.put('payments', { caseId: req.caseId || '', client: req.client, amount: x.amount, due: '', status: Office.PAY.invoiceAsked, note: x.desc, invoiceKind: req.kind }));
+      draft = ''; toast(t('saved')); location.hash = '#/money';
+    };
     form.onsubmit = e => {
       e.preventDefault();
       const req = build(); const text = form.querySelector('#invText').value;
       if (!s.invoiceTo) { toast(t('noInvoicePhone'), 3500); return; }
       if (!openWhatsApp(s.invoiceTo, text)) return;
-      // remember: the client's invoice details, and a payment row per amount
-      if (match) db.put('clients', { id: match.id, legalName: req.client || match.legalName, taxId: req.taxId || match.taxId, address: req.address || match.address, email: req.email || match.email });
-      req.items.forEach(x => db.put('payments', { caseId: req.caseId || '', client: req.client, amount: x.amount, due: '', status: Office.PAY.invoiceAsked, note: x.desc, invoiceKind: req.kind }));
-      draft = ''; toast(t('saved')); location.hash = '#/money';
+      done(req);
+    };
+    // by mail to Roy: the mail app opens with the text; she taps send there
+    form.querySelector('#sendMail').onclick = () => {
+      const req = build(); const text = form.querySelector('#invText').value;
+      const subject = (req.kind || 'חשבונית') + (req.client ? ' · ' + req.client : '') + ' · ' + (s.bizName || DEFAULTS.bizName);
+      window.open('mailto:' + encodeURIComponent(mailTo) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text), '_blank');
+      done(req);
     };
   }, t('read'));
 }

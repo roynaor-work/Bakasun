@@ -7,6 +7,7 @@ export const HELP = {
       'אומרים "מחקי" בסוף (גם בלי הפסקה לפני, גם "למחוק" או "דליט"), וכל מה שהוקלט נמחק. גם הכפתור "מחיקה" עושה את זה.',
       'מה שנמחק נשמר שעה ב"סל" (הכפתור ליד המחיקה). משם מחזירים כל הקלטה. "רוקני את הסל" (או הכפתור בתוך הסל) מוחק הכל לצמיתות, אחרי אישור.',
       'אפשר גם לכתוב במקום להקליט, ואז ללחוץ "קריאה".',
+      'בקשת חשבונית מרועי: "חשבונית לב.ד. על 10,000 לפני מע״מ עבור הפקה של חיים ומשה". לקוח שמופיע ברשימה (גם באיות של הדיבור, "בית. ד") מזוהה, וח.פ. וכתובת מהכרטיס נכנסים לבד. "שלחי במייל לרועי" פותח את המייל במקום וואטסאפ. "בנוסף אבקש ממנו…" נכנס כשורה נוספת.',
       'בזמן הקלטה הכפתור מראה שעון רץ, הטלפון רוטט קצר בהתחלה ובסוף, והמסך לא נכבה.',
       '"פקודות אחרונות" מעל התיבה: לחיצה על אחת מהן ממלאת אותה מחדש.',
       'לחיצה ארוכה על סמל האפליקציה במסך הבית: "הקלטה" (פותח את המיקרופון מיד), "צלם חשבונית", "מה יש לי היום".'
@@ -77,7 +78,8 @@ export const HELP = {
       'À la fin, dites « terminé » (ou appuyez sur le bouton « J’ai fini »). C’est seulement alors que l’instruction s’exécute.',
       'Dites « efface » à la fin, et tout l’enregistrement est supprimé. Le bouton « Effacer » fait pareil.',
       'Ce qui est effacé reste une heure dans la « corbeille » (le bouton à côté). On peut tout récupérer de là. « vide la corbeille » (ou le bouton dans la corbeille) supprime tout définitivement, après confirmation.',
-      'On peut aussi écrire au lieu de dicter, puis appuyer sur « Lire ».'
+      'On peut aussi écrire au lieu de dicter, puis appuyer sur « Lire ».',
+      'Demande de facture à Roy : « facture pour B.D. de 10 000 HT pour la production de Haïm et Moshe ». Un client de la liste est reconnu (même épelé à la voix), son n° d’entreprise et son adresse se remplissent seuls. « envoie par mail à Roy » ouvre le mail au lieu de WhatsApp.'
     ] },
     { title: 'Changer d’écran : « va à ... » puis le nom de l’écran', items: ['« va aux fournisseurs », « va à tâches », « va à accueil »', 'Les écrans : accueil, dossiers, fournisseurs, clients, tâches, appels, devis, finances, reçus, notes, groupes, recherche, réglages, nouvelle demande, aide', '« montre-moi les ... » marche aussi. Le nom seul, sans « va à », ne change pas d’écran : un mot dans une phrase ne vous déplace jamais par erreur.'] },
     { title: 'Questions', items: [
@@ -145,7 +147,8 @@ export const HELP = {
       'At the end say “done” (or tap the “Done” button). Only then does the instruction run.',
       'Say “delete” at the end and the whole recording is removed. The “Delete” button does the same.',
       'What was deleted stays one hour in the “bin” (the button next to it). Anything can be brought back from there. “empty the bin” (or the button inside the bin) deletes everything for good, after a confirmation.',
-      'You can also type instead of dictating, then tap “Read”.'
+      'You can also type instead of dictating, then tap “Read”.',
+      'Invoice request to Roy: “invoice for B.D. of 10,000 before VAT for the production of Haim and Moshe”. A client from the list is recognised (even spelled out by voice), its company number and address fill in by themselves. “send by mail to Roy” opens the mail instead of WhatsApp.'
     ] },
     { title: 'Moving between screens: “go to ...” then the screen name', items: ['“go to suppliers”, “go to tasks”, “go to today”', 'The screens: today, cases, suppliers, clients, tasks, calls, quotes, money, receipts, notes, groups, search, settings, new lead, help', '“show me the ...” works too. The name alone, without “go to”, does not move you: a word inside a sentence never moves you by mistake.'] },
     { title: 'Questions', items: [

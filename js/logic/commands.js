@@ -169,29 +169,78 @@ export function parseCommand(text, docs, people) {
 
 /** "לקוח: קומיוניטי או (ע״ר) 580777894, עין ורד 1 תל אביב. מקדמה 3,000 + מע״מ הפקה, 20 כריות 1,595 + מע״מ"
     → {client, taxId, address, email, items:[{desc, amount}], total} */
-export function parseInvoiceRequest(text) {
-  const t = str(text).replace(/[‎‏]/g, '');
-  const out = { client: '', taxId: '', address: '', email: '', items: [], total: 0, kind: /חשבון עסקה|דרישת תשלום|proforma/i.test(t) ? 'חשבון עסקה' : 'חשבונית' };
+/* Spelled letters: she says "ב' נקודה ד'" and the recognizer writes "בית. ד'" or "בית נקודה דלת".
+   Letter names next to a dot, a geresh or the word "נקודה" become the letters themselves: "ב.ד". */
+const LETTER_NAMES = { 'אלף': 'א', 'בית': 'ב', 'גימל': 'ג', 'דלת': 'ד', 'הא': 'ה', 'וו': 'ו', 'זין': 'ז', 'חית': 'ח', 'טית': 'ט', 'יוד': 'י', 'כף': 'כ', 'למד': 'ל', 'מם': 'מ', 'נון': 'נ', 'סמך': 'ס', 'עין': 'ע', 'פא': 'פ', 'פה': 'פ', 'צדי': 'צ', 'קוף': 'ק', 'ריש': 'ר', 'שין': 'ש', 'תו': 'ת' };
+export function spelledLetters(text) {
+  let t = str(text).replace(/\s+נקודה\s+/g, '. ').replace(/\s+נקודה(?=\s|$)/g, '.');
+  const NAME = '(?:' + Object.keys(LETTER_NAMES).join('|') + ')';
+  // "בית. ד'" / "ב. דלת" / "בית נקודה דלת": a name (or a single letter) followed by a mark, then another
+  // gershayim ("מע״מ", "ש״ח") are left alone: only a dot or a geresh, or a spelled name, marks a spelled abbreviation
+  const re = new RegExp('(?:^|(?<=[\\s(]))(ל|ב|מ|ו)?(' + NAME + '|[א-ת])\\s*([.׳\'])\\s*(' + NAME + '|[א-ת])(?=[.׳\'"״\\s,]|$)([.׳\'])?', 'g');
+  return t.replace(re, (m, pre, a, mark, b, end) => (pre || '') + (LETTER_NAMES[a] || a) + '.' + (LETTER_NAMES[b] || b) + '.');
+}
+
+/** The client she named, from the app's list: name, legal name or an alias, written with or without dots and spaces. */
+export function findClientIn(text, clients) {
+  const key = x => Office.normHe(str(x)).replace(/[.׳'"״\-]/g, '').replace(/\s+/g, '');
+  const hay = ' ' + key(spelledLetters(text)) + ' ';
+  const hayWords = key(spelledLetters(text).replace(/[.׳'"״]/g, ' ')).length;
+  let best = null, bl = 0;
+  (clients || []).forEach(c => {
+    const names = [c.name, c.legalName].concat(str(c.aliases).split(/[,;]+/)).map(key).filter(n => n.length >= 2);
+    names.forEach(n => {
+      if (n.length > bl && hay.indexOf(n) >= 0) {
+        // two letters ("בד") must stand as their own word (with dots/spaces around), not inside another word
+        if (n.length <= 3) { const re = new RegExp('(?:^|[\\s,:(])(?:ל|ב|מ|של|עבור)?' + n.split('').join('[.׳\'"״\\s]*') + '[.׳\'"״]*(?=[\\s,.;:)]|$)'); if (!re.test(spelledLetters(text))) return; }
+        best = c; bl = n.length;
+      }
+    });
+  });
+  return best;
+}
+
+export function parseInvoiceRequest(text, clients) {
+  const t = spelledLetters(str(text).replace(/[‎‏]/g, ''));
+  const out = { client: '', taxId: '', address: '', email: '', items: [], total: 0, kind: /חשבון עסקה|דרישת תשלום|proforma/i.test(t) ? 'חשבון עסקה' : 'חשבונית', channel: /(?:^|\s)(?:במייל|באימייל|מייל|by e?-?mail|par (?:e-?)?mail|courriel)(?=\s|$)/i.test(t) ? 'mail' : /וואטסאפ|whatsapp/i.test(t) ? 'wa' : '' };
   const em = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/.exec(t); if (em) out.email = em[0];
   const id = /(?:ח\.?פ\.?|ע\.?ר\.?|ע\.?מ\.?|ת\.?ז\.?|מס'? ?חברה|company no\.?|reg\.?)\s*:?\s*(\d{8,9})/i.exec(t) || /\b(5\d{8})\b/.exec(t);
   if (id) out.taxId = id[1];
-  const cl = /(?:לכבוד|לקוח(?: חדש)?|client|customer|à l'attention de|pour)\s*:?\s*([^\n,.]{2,60})/i.exec(t);
+  const cl = /(?:לכבוד|לקוח(?: חדש)?|client|customer|à l'attention de|pour le client)\s*:?\s*([^\n,.]{2,60}?)(?=\s*(?:ח\.?פ|ע\.?ר|ע\.?מ|\d{8,9}|[\n,.]|$))/i.exec(t);
   if (cl) out.client = trim(cl[1]).replace(/\s*(ח\.?פ\.?|ע\.?ר\.?|ע\.?מ\.?)\s*\d*$/, '').replace(/\d{8,9}/, '').trim();
+  // a client the app knows, named anywhere in the sentence ("חשבונית לב.ד. על 10000")
+  const known = findClientIn(t, clients);
+  if (known) { out.client = known.legalName || known.name; out.clientId = known.id; out.taxId = out.taxId || known.taxId || ''; out.address = known.address || ''; out.email = out.email || known.invoiceEmail || known.email || ''; }
   const addr = /(?:כתובת|address|adresse)\s*:?\s*([^\n]{3,80})/i.exec(t) || /((?:רח(?:וב|')?|שד(?:רות|')?)\s?[^\n,]{2,40}(?:,?\s*[^\n,]{2,30})?)/.exec(t)
     || /^((?![^\n]*(?:₪|ש"?ח|מע["״]?מ|vat|\d{8,}))[^\n\d]{2,30}\s\d{1,4}\s*,\s*[^\n\d]{2,30})$/m.exec(t);
   if (addr) out.address = trim(addr[1]);
-  // amounts: "3,000 + מע"מ", "1595 פלוס מעמ", "10.500 plus VAT", "27,310+ מע״מ"
-  const re = /([^\n.;]{0,60}?)(\d{1,3}(?:[,.]\d{3})+|\d+(?:\.\d+)?)\s*(?:₪|ש"?ח|nis)?\s*(\+|פלוס|plus|כולל|incl\.?|TTC|HT)?\s*(מע["״]?מ|vat|tva)?/gi;
+  // "עבור הפקה של חיים ומשה" / "for the J50 delegation": what the invoice is for
+  const forM = /(?:^|\s)(?:עבור|בעבור|בגין|for|pour)\s+([^\n.;]{2,80}?)(?=\s+(?:בנוסף|וגם|ותשלח|תשלח|שלח|ואבקש|אבקש|and also|also|et aussi)(?=\s|$)|[.;]|$)/i.exec(t);
+  const purpose = forM ? trim(forM[1]).replace(/\s+(?:על|of|de)\s+\d[\d,.]*.*$/, '').trim() : '';
+  // amounts: "3,000 + מע"מ", "1595 פלוס מעמ", "10.500 plus VAT", "27,310+ מע״מ", "10000 לפני מע"מ", "5000 שקל"
+  const re = /([^\n.;]{0,60}?)(\d{1,3}(?:[,.]\d{3})+|\d+(?:\.\d+)?)\s*(?:₪|ש"?ח|שקל(?:ים)?|nis)?\s*(\+|פלוס|plus|כולל|incl\.?|TTC|HT|לפני|before|לא כולל|hors)?\s*(מע["״]?מ|vat|tva|taxe)?/gi;
   let m;
   while ((m = re.exec(t))) {
-    if (!m[4] && !/₪|ש"?ח/.test(m[0])) continue;
+    if (!m[4] && !/₪|ש"?ח|שקל/.test(m[0])) continue;
     const num = Office.num(m[2].replace(/\.(\d{3})\b/g, ',$1'));
     if (isNaN(num) || num < 50 || String(num) === out.taxId) continue;
-    const desc = trim(m[1]).replace(/^(?:סכומים?|סכום|amount|montant)\s*:?\s*/i, '').replace(/[:\-–]+$/, '').trim();
+    let desc = trim(m[1]).replace(/^(?:סכומים?|סכום|amount|montant)\s*:?\s*/i, '').replace(/[:\-–]+$/, '').trim();
+    // the words before the number often carry the request itself ("תוציא לי חשבונית בבקשה ל weRisrael מקדמה"): keep what follows
+    desc = desc.replace(/^.*?(?:חשבונית(?: מס)?|חשבון עסקה|דרישת תשלום|invoice|facture)\s*(?:בבקשה|please|s'il te plaît)?\s*/i, '');
+    if (known) [known.name, known.legalName].concat(str(known.aliases).split(/[,;]+/)).map(trim).filter(Boolean).sort((a, b) => b.length - a.length).forEach(n => {
+      const re = new RegExp('^(?:ל|for|to|pour|à)?\\s*' + n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\./g, '[.׳\'"״]?').replace(/\s+/g, '\\s*') + '[.׳\'"״]*\\s*(?:על|of|sur|de)?\\s*', 'i');
+      desc = desc.replace(re, '');
+    });
+    desc = desc.replace(/^(?:על|of|sur|de|בבקשה|please)\s+/i, '').replace(/^(?:עבור|בעבור|בגין|for|pour)\s+/i, '').replace(/^ו(?=[א-ת]{3,})/, '').replace(/\s+(?:על|of|sur|de)$/i, '').trim();
+    if (!desc || /^(?:חשבונית|חשבון|invoice|facture|בבקשה|please|על|of|sur)$/i.test(desc)) desc = purpose;
+    if (!desc) { const after = /^[^\n.;]{2,80}?(?=\s+(?:בנוסף|וגם|ותשלח|תשלח|שלח|ואבקש|אבקש|and also|also|et aussi)(?=\s|$)|[.;\n]|$)/.exec(t.slice(re.lastIndex).replace(/^\s*(?:מע["״]?מ|vat|tva)?\s*/i, '')); if (after) desc = trim(after[0]).replace(/\s*(?:סיימתי|תודה)\s*$/, ''); }
     const incl = m[3] && /כולל|incl|TTC/i.test(m[3]);
     out.items.push({ desc, amount: incl ? Math.round(num / 1.18) : num, incl: !!incl });
   }
   out.total = out.items.reduce((a, x) => a + x.amount, 0);
+  // what she asked Roy on top ("בנוסף אבקש ממנו לבדוק האם שולם חודש קודם")
+  const extra = /(?:בנוסף|וגם|and also|also|en plus|aussi)\s*[,:]?\s*(?:אבקש ממנו|אבקש|תבקש ממנו|ask him to|ask him|demande-lui de|demande)?\s*([^\n]{3,160})$/i.exec(t);
+  if (extra) out.note = trim(extra[1]).replace(/\s*(?:סיימתי|תודה|merci|thanks)\s*[.!]?$/i, '');
   return out;
 }
 
@@ -205,6 +254,7 @@ export function invoiceRequestText(req, extra, signer) {
     (req.email || extra.email) ? '• לשלוח ל: ' + (req.email || extra.email) : ''];
   (req.items || []).forEach(x => lines.push('• ' + (x.desc ? x.desc + ': ' : '') + Office.money(x.amount) + ' + מע״מ'));
   if ((req.items || []).length > 1) lines.push('• סה״כ לפני מע״מ: ' + Office.money(req.total));
+  if (req.note || extra.note) lines.push('', 'ועוד: ' + (req.note || extra.note));
   lines.push('', 'תודה,', signer || 'וירג׳יני');
   return lines.filter((x, i, a) => x !== '' || (a[i - 1] !== '' && i > 0)).join('\n');
 }
