@@ -14,7 +14,7 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 // seconds = 0: בלי הגבלת זמן, משחקים עד שנפסלים (הכלל של כל משחק). tokens(): כמה מתנות זמינות להמשך אחרי פסילה; onContinue() מחייב מתנה ומחזיר true.
 // progress: מה שנשמר מהפעם הקודמת (def.make(r, progress)); onProgress(game.save()) נקרא בסיום ובפסילה כדי לשמור.
-export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null }) {
+export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null }) {
   host.innerHTML = `
     <div class="gamewrap">
       <div class="gamehud">
@@ -53,6 +53,8 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   const r = {
     W, H, ctx, C: PAL, rnd, rint, pick, shuffle, clamp,
     px: W / 2, py: H / 2, isDown: false, pointers: {}, // כל האצבעות שעל המסך (למשחקי שני שחקנים): id -> {x, y}
+    net, // חיבור למשחק מול טלפון אחר (js/net.js): {role:'host'|'guest', send, alive, onMsg דרך r.netMsg} או null
+    netMsg: null, // המשחק מציב פונקציה (t, p) => {} כדי לקבל הודעות מהטלפון השני
     get score() { return score; }, get timeLeft() { return timeLeft; },
     addScore(n = 1) { score = Math.max(0, Math.round(score + n)); scoreEl.textContent = score; },
     setScore(n) { score = Math.max(0, Math.round(n)); scoreEl.textContent = score; },
@@ -105,7 +107,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   function hide() { overlay.classList.remove('on'); overlay.innerHTML = ''; }
   const fmt = s => `${Math.floor(s / 60)}:${String(Math.ceil(s) % 60).padStart(2, '0')}`;
 
-  function fresh() { game = def.make(r, progress || null); running = true; hide(); }
+  function fresh() { game = def.make(r, progress || null); running = true; hide(); if (net && net.route) net.route((t, p) => { if (r.netMsg && !ended) r.netMsg(t, p); }); }
   function loop(now) {
     raf = requestAnimationFrame(loop);
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
@@ -123,7 +125,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     } catch (e) { console.error(def.id, e); end(); }
   }
   function end() {
-    if (ended) return; ended = true; running = false; cancelAnimationFrame(raf); saveProgress();
+    if (ended) return; ended = true; running = false; cancelAnimationFrame(raf); saveProgress(); if (net) net.close();
     const newBest = score > best && score > 0;
     flash(newBest ? `שיא חדש! ${score}` : `ניקוד: ${score}`, `${best && !newBest ? `השיא שלך: ${best} · ` : ''}חזרה לאימון`);
     if (newBest) {
@@ -185,5 +187,5 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     if ((e.key === ' ' || e.key === 'Enter') && game.tap) { e.preventDefault(); game.tap(W / 2, H / 2); }
     game.key && game.key(e.key); };
   window.addEventListener('keydown', keys);
-  return { stop() { ended = true; cancelAnimationFrame(raf); window.removeEventListener('keydown', keys); }, isEnded: () => ended };
+  return { stop() { ended = true; cancelAnimationFrame(raf); window.removeEventListener('keydown', keys); if (net) net.close(); }, isEnded: () => ended };
 }

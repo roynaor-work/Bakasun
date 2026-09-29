@@ -90,3 +90,23 @@ test('celebration module: scenes exist and setup/draw run on a fake canvas', asy
   const canvas = { width: 360, height: 560, getContext: () => fakeCtx() };
   for (const id of SCENE_IDS) { assert.ok(STILL_T[id] > 0, id); renderStill(canvas, id, STILL_T[id]); renderStill(canvas, id, 6); }
 });
+
+// הוקי מול טלפון אחר: מארח ואורח מדומים מחליפים הודעות דרך "רשת" בזיכרון; האורח רואה את הדיסקית במראה, שער של האורח מעלה לו ניקוד
+test('online hockey: host simulates, guest mirrors, goals and end propagate', () => {
+  const noop = () => {}; const ctx = fakeCtx();
+  const mkR = (net) => { let score = 0; const ev = { over: 0, win: 0 }; const r = { W: 360, H: 560, ctx, C: new Proxy({}, { get: () => '#000' }), px: 100, py: 100, isDown: false, pointers: {}, net, netMsg: null, rnd: (a = 1, b) => b == null ? a / 2 : (a + b) / 2, /* דטרמיניסטי: הדיסקית יורדת ישר */ rint: (a, b) => Math.floor(a + Math.random() * (b - a + 1)), pick: a => a[0], shuffle: a => a, clamp: (v, a, b) => Math.max(a, Math.min(b, v)), get score() { return score; }, get timeLeft() { return 0; }, addScore: n => { score += n; }, setScore: n => { score = n; }, over: () => { ev.over++; }, win: () => { ev.win++; }, clear: noop, rect: noop, circle: noop, line: noop, text: noop, emoji: noop, sfx: noop, play: noop, pop: noop, burst: noop, shake: noop, stick: noop, player: noop, crowd: noop, crowdGen: () => [], anim: f => f[0][0], hit: () => false, dist: (x1, y1, x2, y2) => Math.hypot(x2 - x1, y2 - y1) }; r.ev = ev; return r; };
+  const wire = { host: null, guest: null }; const mkNet = role => ({ role, alive: () => true, send(t, p) { const other = role === 'host' ? wire.guest : wire.host; if (other && other.netMsg) other.netMsg(t, JSON.parse(JSON.stringify(p))); }, close: noop });
+  const H = mkR(mkNet('host')), G = mkR(mkNet('guest')); wire.host = H; wire.guest = G;
+  const pong = gameById.pong; const h = pong.make(H, null), g = pong.make(G, null);
+  assert.equal(h.save(), null, 'no level saved online');
+  // האורח מזיז אצבע לימין למטה; המארח צריך לראות את המחבט שלו למעלה משמאל (מראה)
+  G.pointers = { 1: { x: 300, y: 500 } };
+  for (let i = 0; i < 40; i++) { h.update(1 / 30); g.update(1 / 30); }
+  h.draw(); g.draw();
+  assert.ok(H.score >= 0 && G.score >= 0);
+  // מזרימים דיסקית לשער העליון של המארח (= שער לאורח) שלוש פעמים דרך העדכונים
+  H.pointers = { 1: { x: 30, y: 540 } }; /* המארח מזיז את המחבט לפינה, הדיסקית נכנסת לשער שלו */
+  let guestGoals = 0; const origMsg = G.netMsg; G.netMsg = (t, p) => { if (t === 'st') guestGoals = p.s[1]; origMsg(t, p); };
+  for (let goal = 0; goal < 3; goal++) { let n = 0; while (n++ < 4000) { h.update(1 / 60); g.update(1 / 60); if (guestGoals > goal || G.ev.win) break; } }
+  assert.ok(G.ev.win === 1 && H.ev.over === 1 && G.score > 0, `guest goals ${guestGoals}, host over ${H.ev.over}, guest win ${G.ev.win}`);
+});

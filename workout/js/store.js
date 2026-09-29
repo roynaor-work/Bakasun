@@ -41,7 +41,7 @@ export const store = {
   // רושם משחק ששוחק: מוריד מטבע, שומר שיא וסופר
   get progress() { return this.data.games.progress || (this.data.games.progress = {}); },
   setProgress(id, p) { this.progress[id] = p; this.save(); },
-  recordGame(id, score) { const g = this.data.games; this.data.tokens = Math.max(0, this.data.tokens - 1); g.played[id] = (g.played[id] || 0) + 1; if (score > (g.bests[id] || 0)) { g.bests[id] = score; g.bestAt = g.bestAt || {}; g.bestAt[id] = new Date().toISOString(); } g.recent = [id, ...g.recent.filter(x => x !== id)].slice(0, 6); g.count++; this.save(); },
+  recordGame(id, score, free = false) { const g = this.data.games; if (!free) this.data.tokens = Math.max(0, this.data.tokens - 1); /* free: משחק מול טלפון אחר, בלי מתנה */ g.played[id] = (g.played[id] || 0) + 1; if (score > (g.bests[id] || 0)) { g.bests[id] = score; g.bestAt = g.bestAt || {}; g.bestAt[id] = new Date().toISOString(); } g.recent = [id, ...g.recent.filter(x => x !== id)].slice(0, 6); g.count++; this.save(); },
   save() { try { localStorage.setItem(KEY, JSON.stringify(this.data)); } catch { /* אין מקום או מצב פרטי: ממשיכים בלי לשמור */ } },
   setProfile(patch) { Object.assign(this.data.profile, patch); this.save(); },
   addSession(s) { this.data.sessions.push(s); this.save(); },
