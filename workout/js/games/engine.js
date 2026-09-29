@@ -14,6 +14,13 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 // seconds = 0: בלי הגבלת זמן, משחקים עד שנפסלים (הכלל של כל משחק). tokens(): כמה מתנות זמינות להמשך אחרי פסילה; onContinue() מחייב מתנה ומחזיר true.
 // progress: מה שנשמר מהפעם הקודמת (def.make(r, progress)); onProgress(game.save()) נקרא בסיום ובפסילה כדי לשמור.
+// צלילים אמיתיים (Kenney, CC0) ב-snd/kit/<שם>.ogg. דפדפן שלא מנגן OGG (ספארי ישן) נופל לצלילים המסונתזים
+const KIT_SND = ['tick', 'score', 'over', 'win', 'levelup', 'ching', 'roar', 'laser', 'boom', 'powerup', 'jump', 'hit', 'pop', 'shield', 'bounce', 'wood', 'glass', 'metal', 'bell', 'lose', 'zap'];
+const OGG_OK = (() => { try { return typeof Audio !== 'undefined' && !!new Audio().canPlayType('audio/ogg; codecs="vorbis"'); } catch { return false; } })();
+const KIT_URL = name => new URL(`../../snd/kit/${name}.ogg`, import.meta.url).href;
+const KIT_POOL = new Map();
+function playKit(name, vol = .7) { if (!OGG_OK || !KIT_SND.includes(name)) return false; try { let pool = KIT_POOL.get(name); if (!pool) { pool = []; KIT_POOL.set(name, pool); } let a = pool.find(x => x.paused || x.ended); if (!a) { if (pool.length >= 4) a = pool[0]; else { a = new Audio(KIT_URL(name)); pool.push(a); } } a.volume = vol; a.currentTime = 0; a.play().catch(() => {}); return true; } catch { return false; } }
+export function preloadSounds() { if (!OGG_OK) return; KIT_SND.forEach(n => { if (!KIT_POOL.has(n)) { const a = new Audio(KIT_URL(n)); a.preload = 'auto'; KIT_POOL.set(n, [a]); } }); }
 const IMGS = new Map();
 export function getImg(key) { if (typeof Image === 'undefined') return null; let im = IMGS.get(key); if (!im) { im = new Image(); im.src = new URL(`../../img/kit/${key}.png`, import.meta.url).href; IMGS.set(key, im); } return im; }
 export function preload(keys) { keys.forEach(getImg); }
@@ -63,9 +70,13 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   const SFX = { waka, pacIntro, pacDeath, ghostEat, fart, ole: () => ole(), laugh, ohh, post, ching, roar: () => roar(), goal: () => { roar(0, 1.8); tone(196, 900, 'sawtooth', .06); tone(294, 900, 'sawtooth', .05, .02); tone(392, 900, 'sawtooth', .05, .04); }, score: () => { tone(880, 90); tone(1320, 120, 'sine', .14, .08); }, hit: () => tone(220, 120, 'square', .12), over: () => { tone(300, 160, 'sawtooth', .12); tone(200, 260, 'sawtooth', .12, .15); }, win: () => { tone(660, 120); tone(880, 120, 'sine', .18, .13); tone(1100, 260, 'sine', .18, .26); }, tick: () => tone(1000, 40, 'square', .06), bounce: () => tone(500, 50, 'triangle', .1) };
 
   // תמונות (ספרייטים של Kenney, CC0, ב-img/kit/<חבילה>/<שם>.png): נטענות פעם אחת ונשמרות במטמון. r.img מצייר לפי מרכז (או עוגן), עם סיבוב/שיקוף/שקיפות; לפני שהתמונה נטענה לא מצייר כלום
+  let FX = []; /* חלקיקי ספרייטים (r.explode/r.sparkle/r.puff), מצוירים מעל המשחק ב-drawFx */
   const r = {
     W, H, ctx, C: PAL, rnd, rint, pick, shuffle, clamp,
     img(key, x, y, w, h, o = {}) { let im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return false; if (o.tint) { im = tinted(key, o.tint) || im; } const iw = im.naturalWidth || im.width, ih = im.naturalHeight || im.height; if (h == null) h = w * ih / iw; if (w == null) w = h * iw / ih; const ax = o.ax ?? .5, ay = o.ay ?? .5; ctx.save(); ctx.translate(x, y); if (o.rot) ctx.rotate(o.rot); if (o.flip) ctx.scale(-1, 1); if (o.sx || o.sy) ctx.scale(o.sx ?? 1, o.sy ?? 1); if (o.alpha != null) ctx.globalAlpha = o.alpha; ctx.drawImage(im, -w * ax, -h * ay, w, h); ctx.restore(); return true; },
+    explode(x, y, size = 60, n = 6) { for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, sp = size * (0.6 + Math.random()); FX.push({ key: i % 2 ? 'fx/flame_01' : 'fx/flame_03', x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - size * .4, s: size * (0.7 + Math.random() * .6), t: 0, life: .35 + Math.random() * .25, rot: Math.random() * 6, vr: (Math.random() - .5) * 6, grow: 1.6 }); } for (let i = 0; i < 3; i++) FX.push({ key: 'fx/smoke_01', x: x + (Math.random() - .5) * size * .4, y, vx: (Math.random() - .5) * 30, vy: -20 - Math.random() * 30, s: size * .9, t: 0, life: .7 + Math.random() * .3, rot: Math.random() * 6, vr: (Math.random() - .5) * 2, grow: 1.8, alpha: .55 }); FX.push({ key: 'fx/light_01', x, y, vx: 0, vy: 0, s: size * 2.2, t: 0, life: .18, rot: 0, vr: 0, grow: 1.3, alpha: .9 }); },
+    sparkle(x, y, size = 30, n = 5, key = 'fx/star_06') { for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, sp = size * (1 + Math.random() * 2); FX.push({ key, x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, s: size * (.4 + Math.random() * .5), t: 0, life: .4 + Math.random() * .3, rot: Math.random() * 6, vr: (Math.random() - .5) * 8, grow: .6 }); } },
+    puff(x, y, size = 30, n = 4) { for (let i = 0; i < n; i++) FX.push({ key: 'fx/smoke_04', x: x + (Math.random() - .5) * size, y, vx: (Math.random() - .5) * 60, vy: -10 - Math.random() * 30, s: size * (.6 + Math.random() * .5), t: 0, life: .4 + Math.random() * .3, rot: Math.random() * 6, vr: (Math.random() - .5) * 3, grow: 1.7, alpha: .7 }); },
     imgSize(key) { const im = getImg(key); return im && im.naturalWidth ? [im.naturalWidth, im.naturalHeight] : null; },
     imgPattern(key, x, y, w, h, scale = 1, offX = 0, offY = 0) { const im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return false; const pat = ctx.createPattern(im, 'repeat'); if (!pat) return false; ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip(); ctx.translate(x + offX, y + offY); ctx.scale(scale, scale); ctx.fillStyle = pat; ctx.fillRect(-offX / scale, -offY / scale, w / scale + Math.abs(offX / scale) + im.naturalWidth, h / scale + Math.abs(offY / scale) + im.naturalHeight); ctx.restore(); return true; },
     px: W / 2, py: H / 2, isDown: false, pointers: {}, // כל האצבעות שעל המסך (למשחקי שני שחקנים): id -> {x, y}
@@ -95,7 +106,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     hit(ax, ay, aw, ah, bx, by, bw, bh) { return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by; },
     dist(x1, y1, x2, y2) { return Math.hypot(x2 - x1, y2 - y1); },
     // ---- אפקטים ----
-    sfx(kind) { (SFX[kind] || SFX.tick)(); },
+    sfx(kind) { if (!sound) return; const vol = kind === 'tick' ? .35 : kind === 'laser' ? .3 : kind === 'bounce' ? .5 : .7; if (KIT_SND.includes(kind) && playKit(kind, vol)) return; (SFX[kind] || SFX.tick)(); },
     play(url, vol = 1) { if (!sound) return; try { const a = new Audio(url); a.volume = vol; a.play().catch(() => {}); } catch { /* */ } }, // הקלטה (למשל snd/eat.mp4)
     pop(text, x, y, color = PAL.gold, size = 22) { pops.push({ text, x, y, color, size, t: 0.9 }); },
     burst(x, y, color = PAL.gold, n = 14, speed = 220) { for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, v = speed * (0.4 + Math.random() * 0.6); parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, color, t: 0.5 + Math.random() * 0.3, r: 3 + Math.random() * 4 }); } },
@@ -117,13 +128,14 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   function drawFx(dt) {
     pops.forEach(p => { p.t -= dt; p.y -= 40 * dt; ctx.globalAlpha = Math.max(0, p.t / 0.9); r.text(p.text, p.x, p.y, { size: p.size, color: p.color }); ctx.globalAlpha = 1; }); pops = pops.filter(p => p.t > 0);
     parts.forEach(p => { p.t -= dt; p.vy += 500 * dt; p.x += p.vx * dt; p.y += p.vy * dt; ctx.globalAlpha = Math.max(0, p.t / 0.6); r.circle(p.x, p.y, p.r, p.color); ctx.globalAlpha = 1; }); parts = parts.filter(p => p.t > 0);
+    FX.forEach(f => { f.t += dt; f.x += f.vx * dt; f.y += f.vy * dt; f.vx *= (1 - 2 * dt); f.vy *= (1 - 2 * dt); f.rot += f.vr * dt; const k = f.t / f.life; const sz = f.s * (1 + (f.grow - 1) * k); if (!r.img(f.key, f.x, f.y, sz, sz, { rot: f.rot, alpha: Math.max(0, (f.alpha ?? 1) * (1 - k)) })) r.circle(f.x, f.y, sz * .3, `rgba(251,146,60,${Math.max(0, 1 - k)})`); }); FX = FX.filter(f => f.t < f.life);
   }
 
   function flash(big, small) { overlay.innerHTML = `<div class="gmsg pop"><b>${big}</b>${small ? `<span>${small}</span>` : ''}</div>`; overlay.classList.add('on'); }
   function hide() { overlay.classList.remove('on'); overlay.innerHTML = ''; }
   const fmt = s => `${Math.floor(s / 60)}:${String(Math.ceil(s) % 60).padStart(2, '0')}`;
 
-  if (def.assets) preload(def.assets); /* ספרייטים של המשחק נטענים כבר במסך הפתיחה */
+  if (def.assets) preload(def.assets); preload(['fx/flame_01', 'fx/flame_03', 'fx/smoke_01', 'fx/smoke_04', 'fx/light_01', 'fx/star_06']); preloadSounds(); /* ספרייטים של המשחק נטענים כבר במסך הפתיחה */
   function fresh() { game = def.make(r, progress || null); running = true; hide(); if (net && net.route) net.route((t, p) => { if (r.netMsg && !ended) r.netMsg(t, p); }); }
   function loop(now) {
     raf = requestAnimationFrame(loop);
