@@ -5,11 +5,12 @@ import sport from './sport.js';
 import puzzle from './puzzle.js';
 import quick from './quick.js';
 import * as more from './more.js';
+import * as b4 from './batch4.js'; /* מקבץ 4: הלוליין, יורה בועות, כדורסל, מיני גולף, באולינג */
 import { DEMOS, DEMO_DUR, DEMO_TOP } from './demos.js';
 
 export const GAME_GROUPS = [
-  { id: 'arcade', name: 'ארקייד', emoji: '🕹️', games: [...arcade, ...arcade2, ...more.arcade] },
-  { id: 'sport', name: 'ספורט', emoji: '🏅', games: [...sport, ...more.sport] },
+  { id: 'arcade', name: 'ארקייד', emoji: '🕹️', games: [...arcade, ...arcade2, ...b4.arcade, ...more.arcade] },
+  { id: 'sport', name: 'ספורט', emoji: '🏅', games: [...sport.slice(0, 2), ...b4.sport, ...sport.slice(2), ...more.sport] },
   { id: 'puzzle', name: 'חשיבה', emoji: '🧠', games: [...puzzle, ...more.puzzle] },
   { id: 'quick', name: 'מהירות', emoji: '⚡', games: [...quick, ...more.quick] },
 ];

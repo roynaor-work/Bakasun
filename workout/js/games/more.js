@@ -1,40 +1,6 @@
-// עוד משחקים: לוליין, יורה בועות, חץ למטרה, ביליארד, כדורעף, דוחף קופסאות, ציור לפי מספרים, ניחוש מילה, צייר מהזיכרון, איפה הכדור
+// עוד משחקים: חץ למטרה, ביליארד, כדורעף, דוחף קופסאות, ציור לפי מספרים, ניחוש מילה, צייר מהזיכרון, איפה הכדור
 import { POSE, S, KITS } from './sprites.js';
 export const arcade = [], sport = [], puzzle = [], quick = [];
-
-// ---- לוליין ----
-arcade.push({ id: 'juggle', name: 'הלוליין', emoji: '🤹', how: 'נוגעים בכדור כדי להקפיץ אותו למעלה. אסור שכדור ייפול לרצפה. כל 8 שניות מתווסף כדור.',
-  make(r) {
-    let balls = [{ x: r.W / 2, y: 200, vx: 0, vy: 0, e: '🔴' }], t = 0;
-    const E = ['🔴', '🟠', '🟡', '🟢', '🔵', '🟣'];
-    return {
-      update(dt) { t += dt; if (t > 8) { t = 0; balls.push({ x: r.rnd(60, r.W - 60), y: 100, vx: 0, vy: 0, e: E[balls.length % E.length] }); }
-        for (const b of balls) { b.vy += 500 * dt; b.x += b.vx * dt; b.y += b.vy * dt; if (b.x < 20 || b.x > r.W - 20) { b.vx *= -1; b.x = r.clamp(b.x, 20, r.W - 20); } if (b.y > r.H - 30) return r.over('כדור נפל!'); } },
-      down(x, y) { const b = balls.find(b => r.dist(x, y, b.x, b.y) < 34); if (b) { b.vy = -560; b.vx = r.clamp((b.x - x) * 12 + r.rnd(-40, 40), -220, 220); r.addScore(1 + balls.length); r.burst(b.x, b.y + 10, '#fff', 5, 90); r.sfx('bounce'); } },
-      draw() { r.clear('#FEF3C7'); r.rect(0, r.H - 20, r.W, 20, '#92400E'); const jx = r.clamp(balls.reduce((s, b) => s + b.x, 0) / balls.length, 40, r.W - 40); r.player(POSE.armsUp, jx, r.H - 20, 0.42, KITS.orange); balls.forEach(b => r.emoji(b.e, b.x, b.y, 40)); r.text(`${balls.length} כדורים`, r.W / 2, 30, { size: 18, color: '#92400E' }); },
-    };
-  } });
-
-// ---- יורה בועות ----
-arcade.push({ id: 'bubble-shooter', name: 'יורה בועות', emoji: '🔮', how: 'נוגעים איפה לירות. שלוש בועות באותו צבע נוגעות זו בזו נעלמות. אל תיתן להן להגיע למטה.',
-  make(r) {
-    const COLS = 8, S = r.W / COLS, COLORS = [r.C.pink, r.C.gold, r.C.sky, r.C.lime];
-    let grid = {}, shot = null, cur = r.rint(0, 3), shots = 0;
-    const key = (x, y) => y * COLS + x;
-    for (let y = 0; y < 5; y++) for (let x = 0; x < COLS; x++) grid[key(x, y)] = r.rint(0, 3);
-    const cx = x => x * S + S / 2, cy = y => y * S + S / 2 + 20;
-    const neighbors = (x, y) => [[1, 0], [-1, 0], [0, 1], [0, -1]].map(([dx, dy]) => [x + dx, y + dy]).filter(([a, b]) => a >= 0 && a < COLS && b >= 0);
-    const settle = (sx, sy) => { let x = r.clamp(Math.round((sx - S / 2) / S), 0, COLS - 1), y = Math.max(0, Math.round((sy - 20 - S / 2) / S)); while (grid[key(x, y)] != null && y < 30) y++; grid[key(x, y)] = cur; pop(x, y); if (y >= 12) return r.over('הבועות הגיעו למטה!'); shots++; if (shots % 6 === 0) { const ng = {}; for (const k in grid) { const kx = k % COLS, ky = Math.floor(k / COLS); ng[key(kx, ky + 1)] = grid[k]; } for (let x = 0; x < COLS; x++) ng[key(x, 0)] = r.rint(0, 3); grid = ng; } cur = r.rint(0, 3); };
-    const pop = (x, y) => { const c = grid[key(x, y)]; const seen = new Set([key(x, y)]), st = [[x, y]]; while (st.length) { const [a, b] = st.pop(); for (const [nx, ny] of neighbors(a, b)) { const k = key(nx, ny); if (!seen.has(k) && grid[k] === c) { seen.add(k); st.push([nx, ny]); } } } if (seen.size >= 3) { seen.forEach(k => { const gx = k % COLS, gy = Math.floor(k / COLS); r.burst(cx(gx), cy(gy), COLORS[c], 4, 100); delete grid[k]; }); r.addScore(seen.size * 10); r.pop('+' + seen.size * 10, cx(x), cy(y) - 20, '#fff'); r.sfx('score'); } else r.sfx('tick'); };
-    return {
-      tap(x, y) { if (shot || y > r.H - 60) return; const dx = x - r.W / 2, dy = y - (r.H - 50), l = Math.hypot(dx, dy); shot = { x: r.W / 2, y: r.H - 50, vx: dx / l * 700, vy: dy / l * 700 }; },
-      update(dt) { if (!shot) return; shot.x += shot.vx * dt; shot.y += shot.vy * dt; if (shot.x < 12 || shot.x > r.W - 12) shot.vx *= -1;
-        if (shot.y < 20 + S / 2) { settle(shot.x, shot.y); shot = null; return; }
-        for (const k in grid) { const gx = k % COLS, gy = Math.floor(k / COLS); if (r.dist(shot.x, shot.y, cx(gx), cy(gy)) < S - 4) { settle(shot.x - shot.vx * 0.02, shot.y - shot.vy * 0.02); shot = null; return; } } },
-      draw() { r.clear('#0F172A'); for (const k in grid) { const gx = k % COLS, gy = Math.floor(k / COLS); r.circle(cx(gx), cy(gy), S / 2 - 3, COLORS[grid[k]]); r.circle(cx(gx) - 5, cy(gy) - 6, 5, '#ffffff66'); } r.line(0, 12 * S + 20, r.W, 12 * S + 20, '#EF444488', 2);
-        if (shot) r.circle(shot.x, shot.y, S / 2 - 3, COLORS[cur]); else r.circle(r.W / 2, r.H - 50, S / 2 - 3, COLORS[cur]); },
-    };
-  } });
 
 // ---- חץ למטרה ----
 sport.push({ id: 'darts', name: 'חץ למטרה', emoji: '🎯', how: 'הכוונת נעה כל הזמן. נוגעים כדי לזרוק את החץ בדיוק כשהיא על המרכז.',
