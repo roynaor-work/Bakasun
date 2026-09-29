@@ -49,6 +49,16 @@ const JORDAN = { head: [104, 26], neck: [102, 42], hip: [100, 90], le: [86, 62],
 const LAND = { head: [100, 72], neck: [100, 88], hip: [100, 126], le: [84, 106], lh: [66, 122], re: [116, 106], rh: [134, 122], lk: [84, 152], lf: [78, 182], rk: [116, 152], rf: [122, 182] }; // כריעה לפני הניתור ובנחיתה
 const DUNK = { head: [104, 30], neck: [102, 46], hip: [100, 92], le: [92, 62], lh: [86, 84], re: [112, 36], rh: [120, 14], lk: [90, 116], lf: [80, 136], rk: [112, 114], rf: [118, 136] };
 const SHOOT = { head: [100, 30], neck: [100, 46], hip: [100, 92], le: [88, 60], lh: [92, 40], re: [112, 40], rh: [116, 14], lk: [92, 118], lf: [86, 140], rk: [108, 116], rf: [112, 140] };
+/* ריצת ספרינט אמיתית (רועי 29/09): מחזור צעד של 8 פריימים שמחושב מגאומטריה: ירכיים מתנדנדות בהיפוך, ברך מתכופפת בתנופה קדימה ובעיטת עקב מאחור, ידיים בהיפוך לרגליים, גוף נטוי קדימה, קפיצת גוף קטנה בכל צעד. ph = שלב 0..1 */
+function sprintPose(ph, lean = .35) {
+  const a = ph * Math.PI * 2, hipX = 100, hipY = 118 - Math.abs(Math.sin(a)) * 5, TH = 32, SH = 32, UA = 22, FA = 22;
+  const leg = (phase) => { const sw = Math.sin(phase); /* +1 קדימה, -1 אחורה */ const thigh = -sw * 1.05 + lean * .3; const bend = sw > 0 ? 1.6 - sw * .5 : .5 + (-sw) * 1.3; /* ברך מתכופפת בתנופה ובבעיטת העקב */ const kx = hipX + Math.sin(thigh) * TH, ky = hipY + Math.cos(thigh) * TH; const shin = thigh + bend * (sw > 0 ? 1 : 1) - (sw > 0 ? 1.1 : .4); const fx = kx + Math.sin(shin) * SH, fy = ky + Math.cos(shin) * SH; return [[kx, ky], [fx, Math.min(182, fy)]]; };
+  const arm = (phase, shX, shY) => { const sw = Math.sin(phase); const upper = -sw * .9 + .5; const ex = shX + Math.sin(upper) * UA, ey = shY + Math.cos(upper) * UA; const fore = upper - 1.6; const hx = ex + Math.sin(fore) * FA, hy = ey + Math.cos(fore) * FA; return [[ex, ey], [hx, hy]]; };
+  const neck = [hipX + lean * 34, hipY - 44], head = [neck[0] + lean * 20, neck[1] - 16];
+  const [lk, lf] = leg(a), [rk, rf] = leg(a + Math.PI); const [le, lh] = arm(a + Math.PI, neck[0] - 2, neck[1] + 6), [re, rh] = arm(a, neck[0] + 2, neck[1] + 6);
+  return { hip: [hipX, hipY], neck, head, lk, lf, rk, rf, le, lh, re, rh };
+}
+const SPRINT = Array.from({ length: 8 }, (_, i) => [sprintPose(i / 8), 1]);
 const LEAN = { head: [124, 66], neck: [116, 80], hip: [100, 118], le: [100, 104], lh: [82, 118], re: [130, 100], rh: [146, 88], lk: [120, 146], lf: [130, 176], rk: [82, 150], rf: [66, 176] };
 
 function fx(ctx, W, H) {
@@ -222,9 +232,11 @@ const SCENES = {
       const FIN = 250; for (let j = 0; j < 15; j++) { ctx.fillStyle = j % 2 ? '#111' : '#fff'; ctx.fillRect(FIN, 240 + j * 20, 14, 20); }
       const run = t > .4; const START = .4, DUR = 2.5;
       s.lanes.forEach((l, i) => { const k = run ? (t - START) / DUR * l.speed : 0; const x = 20 + 230 * Math.pow(clamp(k, 0, 1), .85) + Math.max(0, k - 1) * 200; const crossed = x >= FIN; const hero = i === 2;
-        const pose = !run ? POSE.ready : crossed && hero ? (Math.sin(t * 6) > 0 ? POSE.armsUp : POSE.jumpUp) : k > .85 && !crossed ? LEAN : poseAt(POSE.run, t * 1150 * l.speed);
+        const strideHz = run ? Math.min(4.2, 1.2 + (t - START) * 2.2) * l.speed : 0; l.ph = (l.ph || 0) + strideHz * dt; const pose = !run ? (t > .2 ? POSE.ready : POSE.ready) : crossed && hero ? (Math.sin(t * 6) > 0 ? POSE.armsUp : POSE.jumpUp) : k > .85 && !crossed ? LEAN : poseAt(SPRINT, (l.ph % 1) * 8); /* קצב הצעדים עולה בזינוק */
+        if (run && !crossed && Math.floor(l.ph * 2) !== Math.floor((l.ph - strideHz * dt) * 2) && F.count < 60) F.burst(x - 6, l.y + 92, 'rgba(254,202,202,.8)', 3, 60); /* אבק בכל נחיתת רגל */
         const yy = l.y + 92 - (crossed && hero ? Math.abs(Math.sin(t * 6)) * 20 : 0);
-        if (x < W + 60) player(ctx, pose, hero && crossed ? Math.min(x, FIN + 60) : x, yy, .5, l.kit); });
+        if (run && !crossed && k > .15) { ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 2; for (let q = 0; q < 4; q++) { const ly = yy - 70 + q * 18 + ((t * 300 + q * 37) % 12); ctx.beginPath(); ctx.moveTo(x - 30 - q * 6, ly); ctx.lineTo(x - 62 - q * 10 - Math.min(40, k * 60), ly); ctx.stroke(); } } /* קווי מהירות מאחורי הרץ */
+        if (x < W + 60) player(ctx, pose, hero && crossed ? Math.min(x, FIN + 60) : x, yy, .62, l.kit); });
       if (t < .4) bigText(ctx, 'למקומות...', W / 2, 150, 34, '#fff', '#1B1740'); else if (t < 2.95) bigText(ctx, `${Math.min(9.58, (t - .4) * 3.75).toFixed(2)}`, W / 2, 150, 54, '#FDE047', '#1B1740', 1, 'Rubik, Arial, sans-serif');
       if (t > 2.9 && t < 3.0) { ctx.fillStyle = `rgba(255,255,255,${(3.0 - t) * 8})`; ctx.fillRect(0, 0, W, H); }
       if (t > 2.95) { if (t < 3.0 && F.count < 30) F.burst(FIN, 480, '#fff', 40, 220); bigText(ctx, 'WINNER!', W / 2, 150, 66 * ease(clamp((t - 2.95) / .4, 0, 1)), '#FDE047', '#1B1740', 1 + Math.sin(t * 10) * .05, 'Heebo, Arial Black, sans-serif'); bigText(ctx, '9.58 · מקום ראשון', W / 2, 200, 28, '#fff', '#1B1740'); if (Math.random() < .6) F.confetti(3); if (Math.random() < .08) F.flash(); say('', 'pt-BR'); }

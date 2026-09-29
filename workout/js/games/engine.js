@@ -27,7 +27,10 @@ export function preload(keys) { keys.forEach(getImg); }
 // צביעה: חבילת הרקעים של Kenney היא צלליות בהירות שמיועדות לצביעה. מציירים פעם אחת לקנבס צדדי עם source-in ושומרים במטמון לפי (תמונה, צבע)
 const TINTED = new Map();
 function tinted(key, color) { const im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return null; const k = key + '|' + color; let cv = TINTED.get(k); if (cv) return cv; cv = document.createElement('canvas'); cv.width = im.naturalWidth; cv.height = im.naturalHeight; const x = cv.getContext('2d'); x.drawImage(im, 0, 0); x.globalCompositeOperation = 'source-in'; x.fillStyle = color; x.fillRect(0, 0, cv.width, cv.height); TINTED.set(k, cv); return cv; }
-export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null }) {
+// מוזיקת רקע: לופים CC0 מ-OpenGameArt ב-snd/music (battle, crazy, cunning, booxbep). לפי קבוצת המשחק, או def.music; המשחק יכול להחליף באמצע (r.music('crazy') בפקמן במצב כוח)
+const MUSIC_URL = name => new URL(`../../snd/music/${name}.ogg`, import.meta.url).href;
+const GROUP_MUSIC = { arcade: 'booxbep', sport: 'battle', puzzle: 'cunning', quick: 'crazy' };
+export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null, music = true }) {
   host.innerHTML = `
     <div class="gamewrap">
       <div class="gamehud">
@@ -71,12 +74,16 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
 
   // תמונות (ספרייטים של Kenney, CC0, ב-img/kit/<חבילה>/<שם>.png): נטענות פעם אחת ונשמרות במטמון. r.img מצייר לפי מרכז (או עוגן), עם סיבוב/שיקוף/שקיפות; לפני שהתמונה נטענה לא מצייר כלום
   let FX = []; /* חלקיקי ספרייטים (r.explode/r.sparkle/r.puff), מצוירים מעל המשחק ב-drawFx */
+  let musicEl = null, musicName = null, musicFade = 0; const defaultMusic = def.music || GROUP_MUSIC[def.group] || 'booxbep';
+  function setMusic(name, vol = .28) { if (!music || !sound || !OGG_OK) return; if (name === musicName) return; const old = musicEl; if (old) { clearInterval(musicFade); let v = old.volume; musicFade = setInterval(() => { v -= .04; if (v <= 0) { old.pause(); clearInterval(musicFade); } else old.volume = v; }, 40); } musicEl = null; musicName = name; if (!name) return; try { const a = new Audio(MUSIC_URL(name)); a.loop = true; a.volume = vol; a.play().catch(() => {}); musicEl = a; } catch { musicEl = null; } }
+  function stopMusic() { if (musicEl) { try { musicEl.pause(); } catch { /* */ } } musicEl = null; musicName = null; clearInterval(musicFade); }
   const r = {
     W, H, ctx, C: PAL, rnd, rint, pick, shuffle, clamp,
     img(key, x, y, w, h, o = {}) { let im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return false; if (o.tint) { im = tinted(key, o.tint) || im; } const iw = im.naturalWidth || im.width, ih = im.naturalHeight || im.height; if (h == null) h = w * ih / iw; if (w == null) w = h * iw / ih; const ax = o.ax ?? .5, ay = o.ay ?? .5; ctx.save(); ctx.translate(x, y); if (o.rot) ctx.rotate(o.rot); if (o.flip) ctx.scale(-1, 1); if (o.sx || o.sy) ctx.scale(o.sx ?? 1, o.sy ?? 1); if (o.alpha != null) ctx.globalAlpha = o.alpha; ctx.drawImage(im, -w * ax, -h * ay, w, h); ctx.restore(); return true; },
     explode(x, y, size = 60, n = 6) { for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, sp = size * (0.6 + Math.random()); FX.push({ key: i % 2 ? 'fx/flame_01' : 'fx/flame_03', x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - size * .4, s: size * (0.7 + Math.random() * .6), t: 0, life: .35 + Math.random() * .25, rot: Math.random() * 6, vr: (Math.random() - .5) * 6, grow: 1.6 }); } for (let i = 0; i < 3; i++) FX.push({ key: 'fx/smoke_01', x: x + (Math.random() - .5) * size * .4, y, vx: (Math.random() - .5) * 30, vy: -20 - Math.random() * 30, s: size * .9, t: 0, life: .7 + Math.random() * .3, rot: Math.random() * 6, vr: (Math.random() - .5) * 2, grow: 1.8, alpha: .55 }); FX.push({ key: 'fx/light_01', x, y, vx: 0, vy: 0, s: size * 2.2, t: 0, life: .18, rot: 0, vr: 0, grow: 1.3, alpha: .9 }); },
     sparkle(x, y, size = 30, n = 5, key = 'fx/star_06') { for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, sp = size * (1 + Math.random() * 2); FX.push({ key, x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, s: size * (.4 + Math.random() * .5), t: 0, life: .4 + Math.random() * .3, rot: Math.random() * 6, vr: (Math.random() - .5) * 8, grow: .6 }); } },
     puff(x, y, size = 30, n = 4) { for (let i = 0; i < n; i++) FX.push({ key: 'fx/smoke_04', x: x + (Math.random() - .5) * size, y, vx: (Math.random() - .5) * 60, vy: -10 - Math.random() * 30, s: size * (.6 + Math.random() * .5), t: 0, life: .4 + Math.random() * .3, rot: Math.random() * 6, vr: (Math.random() - .5) * 3, grow: 1.7, alpha: .7 }); },
+    music(name, vol) { setMusic(name === undefined ? defaultMusic : name, vol); }, get defaultMusic() { return defaultMusic; },
     imgSize(key) { const im = getImg(key); return im && im.naturalWidth ? [im.naturalWidth, im.naturalHeight] : null; },
     imgPattern(key, x, y, w, h, scale = 1, offX = 0, offY = 0) { const im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return false; const pat = ctx.createPattern(im, 'repeat'); if (!pat) return false; ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip(); ctx.translate(x + offX, y + offY); ctx.scale(scale, scale); ctx.fillStyle = pat; ctx.fillRect(-offX / scale, -offY / scale, w / scale + Math.abs(offX / scale) + im.naturalWidth, h / scale + Math.abs(offY / scale) + im.naturalHeight); ctx.restore(); return true; },
     px: W / 2, py: H / 2, isDown: false, pointers: {}, // כל האצבעות שעל המסך (למשחקי שני שחקנים): id -> {x, y}
@@ -89,10 +96,10 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
       if (inDemo) { flash(msg, 'עוד ניסיון...'); pauseUntil = performance.now() + 1100; return; }
       if (!unlimited) { flash(msg, timeLeft > 6 ? 'עוד ניסיון...' : ''); if (timeLeft > 6) pauseUntil = performance.now() + 1100; else setTimeout(end, 900); return; }
       // בלי הגבלת זמן: נפסלת. אפשר להמשיך מאותו מקום תמורת מתנה (אם יש), או לסיים
-      saveProgress(); const canGo = typeof game.revive === 'function' && (typeof tokens === 'function' ? tokens() : tokens) > 0;
+      saveProgress(); setMusic(null); const canGo = typeof game.revive === 'function' && (typeof tokens === 'function' ? tokens() : tokens) > 0;
       flash(`נפסלת! ${msg}`, `ניקוד: ${score}${canGo ? ' · יש לך מתנות, אפשר להמשיך מאותו מקום' : ''}`);
       overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<div class="row" style="gap:8px;justify-content:center;flex-wrap:wrap">${canGo ? '<button class="btn primary big" id="gcont" style="width:auto">להמשיך 🎁 (מתנה אחת)</button>' : ''}<button class="btn big" id="gfinish" style="width:auto">סיום</button></div>`);
-      const gc = overlay.querySelector('#gcont'); if (gc) gc.onclick = () => { if (onContinue && !onContinue()) return; game.revive(); hide(); running = true; last = performance.now(); };
+      const gc = overlay.querySelector('#gcont'); if (gc) gc.onclick = () => { if (onContinue && !onContinue()) return; game.revive(); hide(); running = true; last = performance.now(); setMusic(defaultMusic); };
       overlay.querySelector('#gfinish').onclick = () => end(); },
     // שלב הושלם: הודעה קצרה וממשיכים עם אותו משחק (הרמה נשמרת). במשחק עם זמן שנגמר: סיום
     win(msg = 'כל הכבוד!', bonus = 0) { if (!running) return; running = false; SFX.win(); r.burst(W / 2, H / 2, PAL.gold, 30, 320); if (bonus) r.addScore(bonus); flash(msg, unlimited || timeLeft > 6 ? 'ממשיכים!' : ''); if (unlimited || timeLeft > 6) { pauseUntil = performance.now() + 900; resumeOnPause = true; } else setTimeout(end, 900); saveProgress(); },
@@ -110,7 +117,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     play(url, vol = 1) { if (!sound) return; try { const a = new Audio(url); a.volume = vol; a.play().catch(() => {}); } catch { /* */ } }, // הקלטה (למשל snd/eat.mp4)
     pop(text, x, y, color = PAL.gold, size = 22) { pops.push({ text, x, y, color, size, t: 0.9 }); },
     burst(x, y, color = PAL.gold, n = 14, speed = 220) { for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, v = speed * (0.4 + Math.random() * 0.6); parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, color, t: 0.5 + Math.random() * 0.3, r: 3 + Math.random() * 4 }); } },
-    shake(ms = 250) { shakeT = ms / 1000; },
+    shake(ms = 250) { shakeT = ms / 1000; try { if (navigator.vibrate) navigator.vibrate(Math.min(200, Math.round(ms * .5))); } catch { /* */ } }, /* ריטוט באנדרואיד */
     // דמות מקלות בתוך משחק: pose במרחב 200x200 של הקטלוג (הרגליים ב-y=182), ממוקמת ב-(x,y) = מרכז הרגליים, בגודל scale
     stick(pose, x, y, scale = 0.35, { color = PAL.ink, far = PAL.muted, head = PAL.gold, width = 5, flip = false } = {}) {
       const px = ([a, b]) => [x + (flip ? -(a - 100) : (a - 100)) * scale, y + (b - 182) * scale];
@@ -136,7 +143,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   const fmt = s => `${Math.floor(s / 60)}:${String(Math.ceil(s) % 60).padStart(2, '0')}`;
 
   if (def.assets) preload(def.assets); preload(['fx/flame_01', 'fx/flame_03', 'fx/smoke_01', 'fx/smoke_04', 'fx/light_01', 'fx/star_06']); preloadSounds(); /* ספרייטים של המשחק נטענים כבר במסך הפתיחה */
-  function fresh() { game = def.make(r, progress || null); running = true; hide(); if (net && net.route) net.route((t, p) => { if (r.netMsg && !ended) r.netMsg(t, p); }); }
+  function fresh() { game = def.make(r, progress || null); running = true; hide(); if (!inDemo) setMusic(defaultMusic); if (net && net.route) net.route((t, p) => { if (r.netMsg && !ended) r.netMsg(t, p); }); }
   function loop(now) {
     raf = requestAnimationFrame(loop);
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
@@ -154,9 +161,10 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     } catch (e) { console.error(def.id, e); end(); }
   }
   function end() {
-    if (ended) return; ended = true; running = false; cancelAnimationFrame(raf); saveProgress(); if (net) net.close();
+    if (ended) return; ended = true; running = false; cancelAnimationFrame(raf); saveProgress(); if (net) net.close(); stopMusic();
     const newBest = score > best && score > 0;
-    flash(newBest ? `שיא חדש! ${score}` : `ניקוד: ${score}`, `${best && !newBest ? `השיא שלך: ${best} · ` : ''}חזרה לאימון`);
+    const stars = newBest || (best && score >= best * .9) ? 3 : best && score >= best * .5 ? 2 : 1; const starHtml = `<div class="gstars">${[1, 2, 3].map(i => `<span class="${i <= stars ? 'on' : ''}" style="animation-delay:${i * .18}s">★</span>`).join('')}</div>`;
+    flash(newBest ? `שיא חדש! ${score}` : `ניקוד: ${score}`, `${best && !newBest ? `השיא שלך: ${best} · ` : ''}חזרה לאימון`); if (score > 0) overlay.querySelector('.gmsg b').insertAdjacentHTML('beforebegin', starHtml);
     if (newBest) {
       // חגיגת שער: מסתירים את ההודעה בזמן הסימולציה, ומראים אותה בסופה
       hide(); const stopFx = celebrateGoal(cv, { oldBest: best, newBest: score, sound, onText: (t, lang) => speak && speak(t, lang), onDone: () => { flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) }); } });
@@ -216,5 +224,5 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     if ((e.key === ' ' || e.key === 'Enter') && game.tap) { e.preventDefault(); game.tap(W / 2, H / 2); }
     game.key && game.key(e.key); };
   window.addEventListener('keydown', keys);
-  return { stop() { ended = true; cancelAnimationFrame(raf); window.removeEventListener('keydown', keys); if (net) net.close(); }, isEnded: () => ended };
+  return { stop() { ended = true; cancelAnimationFrame(raf); window.removeEventListener('keydown', keys); if (net) net.close(); stopMusic(); }, isEnded: () => ended };
 }
