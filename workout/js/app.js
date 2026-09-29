@@ -447,7 +447,7 @@ function playDemo(g, onDone) { mount('', true); activeGame = runGame(g, { second
 function playGame(g, onDone) {
   mount('', true);
   const secs = store.profile.gameSeconds || 0; // 0 = בלי הגבלה: משחקים עד שנפסלים
-  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t),
+  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, music: store.profile.music !== false, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t),
     tokens: () => store.tokens - 1, onContinue: () => { if (store.tokens <= 1) return false; store.addToken(-1); return true; }, // המשחק הזה עולה מתנה אחת בסוף; המשך עולה עוד אחת
     progress: store.progress[g.id] || null, onProgress: p => { if (p) store.setProgress(g.id, p); },
     onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
@@ -457,7 +457,7 @@ function playGame(g, onDone) {
 function onlineHockey() {
   mount('', true);
   showLobby(app, { familyCode: store.profile.familyCode || '', setFamilyCode: v => store.setProfile({ familyCode: v }), onCancel: () => arcade(),
-    onReady(conn) { mount('', true); activeGame = runGame(gameById.pong, { seconds: 0, host: app, best: store.games.bests.pong || 0, sound: store.profile.sound !== false, net: conn, tokens: () => 0, onEnd({ score }) { store.recordGame('pong', score, true); activeGame = null; arcade(); } }); } });
+    onReady(conn) { mount('', true); activeGame = runGame(gameById.pong, { seconds: 0, host: app, best: store.games.bests.pong || 0, sound: store.profile.sound !== false, music: store.profile.music !== false, net: conn, tokens: () => 0, onEnd({ score }) { store.recordGame('pong', score, true); activeGame = null; arcade(); } }); } });
 }
 
 function restPhase() {
@@ -693,6 +693,7 @@ function settings() {
       <h3>מתנות ומשחקים 🎁</h3>
       <label class="field">מתנה (משחק) על כל<select id="tokenMinutes">${[[2, '2 דקות אימון אמיתי'], [3, '3 דקות אימון אמיתי (15 דקות = 5 משחקים)'], [4, '4 דקות אימון אמיתי'], [5, '5 דקות אימון אמיתי']].map(([v, n]) => `<option value="${v}" ${v === (p.tokenMinutes || 3) ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <label class="field">פתיחת משחקים חדשים<select id="unlockEvery">${[[10, 'כל 10 אימונים: 5 משחקים לבחירה'], [5, 'כל 5 אימונים: 5 משחקים לבחירה'], [3, 'כל 3 אימונים: 5 משחקים לבחירה'], [0, 'הכול פתוח מההתחלה']].map(([v, n]) => `<option value="${v}" ${v === p.unlockEvery ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+      <label class="field row between"><span>מוזיקת רקע במשחקים</span><input type="checkbox" id="musicOn" ${p.music !== false ? 'checked' : ''}></label>
       <label class="field">אורך משחק<select id="gameSeconds">${[[0, 'בלי הגבלה, עד שנפסלים'], [60, 'דקה'], [90, 'דקה וחצי'], [120, 'שתי דקות']].map(([v, n]) => `<option value="${v}" ${v === p.gameSeconds ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <p class="muted small">${GAMES.length} משחקים שונים. מתנות שלא משחקים מיד נשמרות לחדר המשחקים (${store.tokens} שמורות).</p>
     </div>
@@ -766,7 +767,7 @@ function settings() {
   $('#newfam').onclick = () => { if (p.familyCode && !confirm('ליצור קוד חדש? צריך להקליד אותו גם בטלפון של אבא.')) return; const c = cloud.newFamilyCode(); store.setProfile({ familyCode: c }); settings(); };
   $('#copyfam').onclick = async () => { try { await navigator.clipboard.writeText(store.profile.familyCode); $('#cloudstate').textContent = 'הקוד הועתק'; } catch { $('#fam').select(); } };
   $('#syncnow').onclick = async () => { $('#cloudstate').textContent = 'שולח...'; const ok = await cloud.flush(); $('#cloudstate').textContent = ok || !cloud.status.pending() ? 'הכול בענן ✓' : '⚠️ ' + (cloud.status.error || 'אין רשת'); };
-  $('#gameSeconds').onchange = e => store.setProfile({ gameSeconds: +e.target.value });
+  $('#gameSeconds').onchange = e => store.setProfile({ gameSeconds: +e.target.value }); $('#musicOn').onchange = e => store.setProfile({ music: e.target.checked });
   $('#unlockEvery').onchange = e => store.setProfile({ unlockEvery: +e.target.value });
   app.querySelectorAll('[data-day]').forEach(s => s.onchange = () => { const np = { ...plan() }; np[s.dataset.day] = s.value; store.setProfile({ plan: np }); });
   $('#resetplan').onclick = () => { store.setProfile({ plan: null }); settings(); };

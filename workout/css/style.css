@@ -195,6 +195,13 @@ input[type="checkbox"] { width: 26px; height: 26px; accent-color: var(--accent);
 .gmsg { display: grid; gap: 12px; justify-items: center; text-align: center; color: #fff; padding: 24px; }
 .gmsg b { font-family: var(--f-head); font-size: 32px; font-weight: 900; line-height: 1.2; }
 .gmsg span { font-size: 17px; color: #E0DAFF; max-width: 300px; }
+/* מסכי המשחק: כרטיס עם מסגרת זוהרת, כוכבים בסוף */
+.goverlay .gmsg { background: linear-gradient(160deg, #2a2555, #1b1740); border: 3px solid #a78bfa; border-radius: 26px; box-shadow: 0 18px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.15); padding: 26px 28px; max-width: 320px; }
+.gstars { display: flex; gap: 6px; font-size: 44px; line-height: 1; }
+.gstars span { color: #4b4574; transform: scale(.4); opacity: 0; animation: starpop .5s cubic-bezier(.2,1.5,.4,1) forwards; }
+.gstars span.on { color: #FDE047; text-shadow: 0 0 18px rgba(253,224,71,.8); }
+@keyframes starpop { to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .gstars span { animation: none; transform: none; opacity: 1; } }
 .gmsg .btn { margin-top: 8px; }
 .gift { background: linear-gradient(135deg, #FF7A3D, #FF4D8D); color: #fff; border-radius: 28px; padding: 24px 18px; text-align: center; }
 .gift .e { font-size: 64px; line-height: 1; }
