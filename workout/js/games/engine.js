@@ -12,7 +12,7 @@ const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 const shuffle = arr => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
-export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true, speak = null }) {
+export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true, speak = null, demo = false, demoOnly = false }) {
   host.innerHTML = `
     <div class="gamewrap">
       <div class="gamehud">
@@ -28,6 +28,8 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
   const cv = host.querySelector('#gcv'), ctx = cv.getContext('2d');
   const scoreEl = host.querySelector('#gscore'), timeEl = host.querySelector('#gtime'), overlay = host.querySelector('#gover');
   let game = null, raf = 0, last = 0, running = false, ended = false, score = 0, timeLeft = seconds, pauseUntil = 0;
+  // הדגמה: אצבע מדומה שמשחקת לפי תסריט (def.demo), עם כתוביות. בסוף חוזרים למסך הפתיחה או יוצאים
+  let inDemo = false, demoT = 0; const finger = { x: W / 2, y: H * .7, tx: W / 2, ty: H * .7, press: 0, hold: false, caption: '', swipe: null };
   let pops = [], parts = [], shakeT = 0, ac = null;
   // צלילים קצרים (WebAudio)
   const tone = (f, ms, type = 'sine', vol = .18, at = 0) => { if (!sound) return; try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = f; o.connect(g); g.connect(ac.destination); const t = ac.currentTime + at; g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + ms / 1000); o.start(t); o.stop(t + ms / 1000 + .02); } catch { /* */ } };
@@ -97,13 +99,15 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
     raf = requestAnimationFrame(loop);
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
     if (ended) return;
-    timeLeft -= dt; timeEl.textContent = fmt(Math.max(0, timeLeft)); timeEl.classList.toggle('low', timeLeft < 10);
+    if (!inDemo) timeLeft -= dt; timeEl.textContent = inDemo ? 'הדגמה' : fmt(Math.max(0, timeLeft)); timeEl.classList.toggle('low', timeLeft < 10);
     if (timeLeft <= 0) return end();
     if (!running) { if (pauseUntil && now >= pauseUntil) { pauseUntil = 0; fresh(); } else return; }
     try {
+      if (inDemo) { demoT += dt; if (demoT >= (def.demoDur || 12)) return endDemo(); def.demo(demoT, game, ctl, r); demoTick(dt); }
       game.update && game.update(dt);
       const shaking = shakeT > 0; if (shaking) { shakeT -= dt; ctx.save(); ctx.translate((Math.random() - .5) * 8, (Math.random() - .5) * 8); }
       game.draw && game.draw(); drawFx(dt);
+      if (inDemo) drawFinger();
       if (shaking) ctx.restore();
     } catch (e) { console.error(def.id, e); end(); }
   }
@@ -120,21 +124,46 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
     overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`);
     overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) });
   }
-  function start() { if (game) return; fresh(); last = performance.now(); raf = requestAnimationFrame(loop); }
+  function start() { if (game) return; fresh(); if (!raf) { last = performance.now(); raf = requestAnimationFrame(loop); } }
 
-  // פתיחה: איך משחקים
-  flash(`${def.emoji} ${def.name}`, def.how);
-  overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gstart">יאללה! ▶️</button>`);
-  overlay.querySelector('#gstart').onclick = start;
-  host.querySelector('#gexit').onclick = () => { if (ended) return; if (!game || confirm('לצאת מהמשחק? הניקוד עד עכשיו נשמר.')) end(); };
+  // ---- הדגמה ----
+  const ctl = {
+    mem: {}, get t() { return demoT; },
+    say(text) { finger.caption = text; },
+    moveTo(x, y) { finger.tx = x; finger.ty = y; finger.hold = true; },
+    release() { if (finger.hold) { finger.hold = false; game.up && game.up(finger.x, finger.y); } },
+    tap(x, y) { finger.x = finger.tx = x; finger.y = finger.ty = y; finger.press = .25; game.down && game.down(x, y); game.up && game.up(x, y); game.tap && game.tap(x, y); },
+    swipe(dir, x = finger.x, y = finger.y) { const d = { left: [-1, 0], right: [1, 0], up: [0, -1], down: [0, 1] }[dir]; finger.x = x; finger.y = y; finger.swipe = { dx: d[0], dy: d[1], t: .3 }; finger.press = .3; game.swipe && game.swipe(dir, d[0] * 60, d[1] * 60); },
+  };
+  let wasHold = false;
+  function demoTick(dt) { finger.press = Math.max(0, finger.press - dt); if (finger.swipe) { finger.swipe.t -= dt; finger.x += finger.swipe.dx * 260 * dt; finger.y += finger.swipe.dy * 260 * dt; if (finger.swipe.t <= 0) finger.swipe = null; }
+    else { const k = Math.min(1, dt * 9); finger.x += (finger.tx - finger.x) * k; finger.y += (finger.ty - finger.y) * k; }
+    if (finger.hold) { if (!wasHold) { game.down && game.down(finger.x, finger.y); r.isDown = true; } game.move && game.move(finger.x, finger.y); r.px = finger.x; r.py = finger.y; } else if (wasHold) r.isDown = false; wasHold = finger.hold; }
+  function drawFinger() {
+    // כתובית למטה
+    if (finger.caption) { ctx.fillStyle = 'rgba(27,23,64,.82)'; const w = Math.min(W - 24, 40 + finger.caption.length * 10.5); ctx.beginPath(); ctx.roundRect(W / 2 - w / 2, H - 64, w, 44, 14); ctx.fill(); r.text(finger.caption, W / 2, H - 42, { size: 17, color: '#FDE047' }); }
+    ctx.fillStyle = 'rgba(27,23,64,.7)'; ctx.beginPath(); ctx.roundRect(8, 8, 72, 26, 13); ctx.fill(); r.text('▶️ הדגמה', 44, 21, { size: 13, color: '#fff' });
+    // האצבע: עיגול לחיצה ואמוג'י יד, הקצה בנקודה
+    const pr = finger.press > 0 ? 22 + (1 - finger.press / .3) * 18 : 0; if (pr) { ctx.strokeStyle = `rgba(253,224,71,${finger.press * 3})`; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(finger.x, finger.y, pr, 0, Math.PI * 2); ctx.stroke(); }
+    if (finger.hold) { ctx.fillStyle = 'rgba(253,224,71,.35)'; ctx.beginPath(); ctx.arc(finger.x, finger.y, 16, 0, Math.PI * 2); ctx.fill(); }
+    ctx.save(); ctx.translate(finger.x + 14, finger.y + 30); ctx.font = '44px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.shadowColor = 'rgba(0,0,0,.4)'; ctx.shadowBlur = 8; ctx.fillText('👆', 0, 0); ctx.restore();
+  }
+  function startDemo() { if (!def.demo) return start(); inDemo = true; demoT = 0; ctl.mem = {}; finger.caption = ''; finger.hold = false; score = 0; scoreEl.textContent = '0'; fresh(); if (!raf) { last = performance.now(); raf = requestAnimationFrame(loop); } }
+  function endDemo() { inDemo = false; running = false; ctl.release(); score = 0; scoreEl.textContent = '0'; game = null; timeEl.textContent = fmt(timeLeft);
+    if (demoOnly) { flash('הבנת? 👍', def.how); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<div class="row" style="gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn primary big" id="gagain" style="width:auto">עוד פעם ▶️</button><button class="btn big" id="gback" style="width:auto">חזרה</button></div>`); overlay.querySelector('#gagain').onclick = startDemo; overlay.querySelector('#gback').onclick = () => { ended = true; cancelAnimationFrame(raf); onEnd({ score: 0, best, demo: true }); }; }
+    else intro(); }
+  // פתיחה: איך משחקים (+ הדגמה כשיש תסריט)
+  function intro() { flash(`${def.emoji} ${def.name}`, def.how); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<div class="row" style="gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn primary big" id="gstart" style="width:auto">יאללה! ▶️</button>${def.demo ? '<button class="btn big" id="gdemo" style="width:auto">איך משחקים? 🎬</button>' : ''}</div>`); overlay.querySelector('#gstart').onclick = start; const gd = overlay.querySelector('#gdemo'); if (gd) gd.onclick = startDemo; }
+  if (demo && def.demo) startDemo(); else intro();
+  host.querySelector('#gexit').onclick = () => { if (ended) return; if (inDemo) { ended = true; inDemo = false; cancelAnimationFrame(raf); return onEnd({ score: 0, best, demo: true }); } if (!game || confirm('לצאת מהמשחק? הניקוד עד עכשיו נשמר.')) end(); };
 
   // קלט: מגע/עכבר -> קואורדינטות לוגיות, זיהוי טאפ וסווייפ
   const pos = e => { const b = cv.getBoundingClientRect(); return [clamp((e.clientX - b.left) * W / b.width, 0, W), clamp((e.clientY - b.top) * H / b.height, 0, H)]; };
   let sx = 0, sy = 0, st = 0;
   const on = (name, fn) => cv.addEventListener(name, fn, { passive: false });
-  on('pointerdown', e => { e.preventDefault(); if (!running) return; cv.setPointerCapture?.(e.pointerId); [r.px, r.py] = pos(e); r.isDown = true; sx = r.px; sy = r.py; st = performance.now(); game.down && game.down(r.px, r.py); });
-  on('pointermove', e => { if (!running) return; [r.px, r.py] = pos(e); if (r.isDown) game.move && game.move(r.px, r.py); });
-  on('pointerup', e => { if (!running || !r.isDown) return; r.isDown = false; [r.px, r.py] = pos(e); const dx = r.px - sx, dy = r.py - sy;
+  on('pointerdown', e => { e.preventDefault(); if (!running || inDemo) return; cv.setPointerCapture?.(e.pointerId); [r.px, r.py] = pos(e); r.isDown = true; sx = r.px; sy = r.py; st = performance.now(); game.down && game.down(r.px, r.py); });
+  on('pointermove', e => { if (!running || inDemo) return; [r.px, r.py] = pos(e); if (r.isDown) game.move && game.move(r.px, r.py); });
+  on('pointerup', e => { if (!running || inDemo || !r.isDown) return; r.isDown = false; [r.px, r.py] = pos(e); const dx = r.px - sx, dy = r.py - sy;
     game.up && game.up(r.px, r.py);
     if (Math.hypot(dx, dy) < 18 && performance.now() - st < 400) game.tap && game.tap(r.px, r.py);
     else if (Math.hypot(dx, dy) >= 24 && game.swipe) game.swipe(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'), dx, dy); });

@@ -35,7 +35,8 @@ G.push({ id: 'tetris', name: 'טטריס', emoji: '🧱', how: 'מחליקים �
     const step = () => { if (!collides(cur.s, cur.x, cur.y + 1)) cur.y++; else lock(); };
     spawn();
     return {
-      update(dt) { if (picFlash > 0) { picFlash -= dt; if (picFlash <= 0) revealed = 0; return; } t += dt; if (t > speed) { t = 0; step(); } }, // בזמן הבזק התמונה השלמה המשחק עוצר לרגע
+      update(dt) { if (picFlash > 0) { picFlash -= dt; if (picFlash <= 0) revealed = 0; return; } t += dt; if (t > speed) { t = 0; step(); } },
+      peek() { const heights = []; for (let i = 0; i < COLS; i++) { let h = 0; for (let j = 0; j < ROWS; j++) if (grid[j][i]) { h = ROWS - j; break; } heights.push(h); } return { cur: { x: cur.x, y: cur.y, w: cur.s[0].length, h: cur.s.length }, cols: COLS, rows: ROWS, OX, OY, S, heights }; }, // בזמן הבזק התמונה השלמה המשחק עוצר לרגע
       swipe(d) { if (d === 'left' && !collides(cur.s, cur.x - 1, cur.y)) cur.x--; if (d === 'right' && !collides(cur.s, cur.x + 1, cur.y)) cur.x++; if (d === 'down') { while (!collides(cur.s, cur.x, cur.y + 1)) cur.y++; lock(); r.addScore(5); } if (d === 'up') this.tap(); },
       tap() { const rs = rotate(cur.s); for (const dx of [0, -1, 1, -2, 2]) if (!collides(rs, cur.x + dx, cur.y)) { cur.s = rs; cur.x += dx; break; } },
       draw() { r.clear(); r.rect(OX - 2, OY - 2, COLS * S + 4, ROWS * S + 4, '#2A2555', 6);
@@ -65,6 +66,7 @@ G.push({ id: 'snake', name: 'הרעב הגדול', emoji: '🍔', how: 'מחלי
     const cx = c => OX + c * S + S / 2, cy = c => OY + c * S + S / 2;
     return {
       swipe(d) { const m = { left: [-1, 0], right: [1, 0], up: [0, -1], down: [0, 1] }[d]; if (m && !(m[0] === -dir[0] && m[1] === -dir[1])) next = m; },
+      peek() { return { head: snake[0], body: snake, food, dir: next, cols: COLS, rows: ROWS, cx, cy }; },
       update(dt) { t += dt; tt += dt; chew = Math.max(0, chew - dt * 3); if (t < speed) return; t = 0; dir = next;
         const h = [snake[0][0] + dir[0], snake[0][1] + dir[1]];
         if (h[0] < 0 || h[0] >= COLS || h[1] < 0 || h[1] >= ROWS) { r.play(REC('wall')); return r.over('בום! נכנסת בקיר'); }
@@ -256,6 +258,7 @@ G.push({ id: 'flappy', name: 'הפרה המעופפת', emoji: '🐄', how: 'נ�
     const GY = r.H - 24;
     return {
       tap() { started = true; vy = -280; r.sfx('tick'); }, down() { started = true; vy = -280; },
+      peek() { const nxt = obs.find(p => p.x + p.w > 62); return { y, started, next: nxt ? { x: nxt.x, gapY: nxt.h + gap / 2 } : null, items, farmer, shots }; },
       update(dt) { tt += dt; if (!started) { y = r.H / 2 + Math.sin(tt * 3) * 12; return; } vy = Math.min(420, vy + 700 * dt); y += vy * dt; t += dt; warnT -= dt;
         const spd = 120 + Math.min(90, level() * 14); gap = Math.max(150, 190 - level() * 8); levelT -= dt; if (t > Math.max(1.4, 1.9 - level() * .08)) { t = 0; const h = r.rnd(70, r.H - gap - 110); obs.push({ x: r.W + 30, h, passed: false, w: 56 });
           // בונוס: בשליש העליון או התחתון של המרווח (לא באמצע הקל), לא בכל מכשול
