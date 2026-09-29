@@ -15,11 +15,11 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 // seconds = 0: בלי הגבלת זמן, משחקים עד שנפסלים (הכלל של כל משחק). tokens(): כמה מתנות זמינות להמשך אחרי פסילה; onContinue() מחייב מתנה ומחזיר true.
 // progress: מה שנשמר מהפעם הקודמת (def.make(r, progress)); onProgress(game.save()) נקרא בסיום ובפסילה כדי לשמור.
 // צלילים אמיתיים (Kenney, CC0) ב-snd/kit/<שם>.ogg. דפדפן שלא מנגן OGG (ספארי ישן) נופל לצלילים המסונתזים
-const KIT_SND = ['tick', 'score', 'over', 'win', 'levelup', 'ching', 'roar', 'laser', 'boom', 'powerup', 'jump', 'hit', 'pop', 'shield', 'bounce', 'wood', 'glass', 'metal', 'bell', 'lose', 'zap'];
+const KIT_FILES = { tick: 'tick.ogg', score: 'score.ogg', over: 'over.ogg', win: 'win.ogg', levelup: 'levelup.ogg', ching: 'ching.ogg', roar: 'roar.ogg', laser: 'laser.ogg', boom: 'boom.ogg', powerup: 'powerup.ogg', jump: 'jump.ogg', hit: 'hit.ogg', pop: 'pop.ogg', shield: 'shield.ogg', bounce: 'bounce.ogg', wood: 'wood.ogg', glass: 'glass.ogg', metal: 'metal.ogg', bell: 'bell.ogg', lose: 'lose.ogg', zap: 'zap.ogg', squish: 'squish.mp3' }; const KIT_SND = Object.keys(KIT_FILES);
 const OGG_OK = (() => { try { return typeof Audio !== 'undefined' && !!new Audio().canPlayType('audio/ogg; codecs="vorbis"'); } catch { return false; } })();
-const KIT_URL = name => new URL(`../../snd/kit/${name}.ogg`, import.meta.url).href;
+const KIT_URL = name => new URL(`../../snd/kit/${KIT_FILES[name]}`, import.meta.url).href;
 const KIT_POOL = new Map();
-function playKit(name, vol = .7) { if (!OGG_OK || !KIT_SND.includes(name)) return false; try { let pool = KIT_POOL.get(name); if (!pool) { pool = []; KIT_POOL.set(name, pool); } let a = pool.find(x => x.paused || x.ended); if (!a) { if (pool.length >= 4) a = pool[0]; else { a = new Audio(KIT_URL(name)); pool.push(a); } } a.volume = vol; a.currentTime = 0; a.play().catch(() => {}); return true; } catch { return false; } }
+function playKit(name, vol = .7) { if (!KIT_SND.includes(name) || (!OGG_OK && KIT_FILES[name].endsWith('.ogg'))) return false; try { let pool = KIT_POOL.get(name); if (!pool) { pool = []; KIT_POOL.set(name, pool); } let a = pool.find(x => x.paused || x.ended); if (!a) { if (pool.length >= 4) a = pool[0]; else { a = new Audio(KIT_URL(name)); pool.push(a); } } a.volume = vol; a.currentTime = 0; a.play().catch(() => {}); return true; } catch { return false; } }
 export function preloadSounds() { if (!OGG_OK) return; KIT_SND.forEach(n => { if (!KIT_POOL.has(n)) { const a = new Audio(KIT_URL(n)); a.preload = 'auto'; KIT_POOL.set(n, [a]); } }); }
 const IMGS = new Map();
 export function getImg(key) { if (typeof Image === 'undefined') return null; let im = IMGS.get(key); if (!im) { im = new Image(); im.src = new URL(`../../img/kit/${key}.png`, import.meta.url).href; IMGS.set(key, im); } return im; }
@@ -29,7 +29,7 @@ const TINTED = new Map();
 function tinted(key, color) { const im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return null; const k = key + '|' + color; let cv = TINTED.get(k); if (cv) return cv; cv = document.createElement('canvas'); cv.width = im.naturalWidth; cv.height = im.naturalHeight; const x = cv.getContext('2d'); x.drawImage(im, 0, 0); x.globalCompositeOperation = 'source-in'; x.fillStyle = color; x.fillRect(0, 0, cv.width, cv.height); TINTED.set(k, cv); return cv; }
 // מוזיקת רקע: לופים CC0 מ-OpenGameArt ב-snd/music (battle, crazy, cunning, booxbep). לפי קבוצת המשחק, או def.music; המשחק יכול להחליף באמצע (r.music('crazy') בפקמן במצב כוח)
 const MUSIC_URL = name => new URL(`../../snd/music/${name}.ogg`, import.meta.url).href;
-const GROUP_MUSIC = { arcade: 'booxbep', sport: 'battle', puzzle: 'cunning', quick: 'crazy' };
+const ALL_MUSIC = ['booxbep', 'battle', 'cunning', 'crazy']; let lastMusic = null; const pickMusic = () => { const opts = ALL_MUSIC.filter(m => m !== lastMusic); lastMusic = opts[Math.floor(Math.random() * opts.length)]; return lastMusic; };
 export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null, music = true }) {
   host.innerHTML = `
     <div class="gamewrap">
@@ -74,7 +74,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
 
   // תמונות (ספרייטים של Kenney, CC0, ב-img/kit/<חבילה>/<שם>.png): נטענות פעם אחת ונשמרות במטמון. r.img מצייר לפי מרכז (או עוגן), עם סיבוב/שיקוף/שקיפות; לפני שהתמונה נטענה לא מצייר כלום
   let FX = []; /* חלקיקי ספרייטים (r.explode/r.sparkle/r.puff), מצוירים מעל המשחק ב-drawFx */
-  let musicEl = null, musicName = null, musicFade = 0; const defaultMusic = def.music || GROUP_MUSIC[def.group] || 'booxbep';
+  let musicEl = null, musicName = null, musicFade = 0; const defaultMusic = def.music || pickMusic(); /* טראק שונה בכל משחק */
   function setMusic(name, vol = .28) { if (!music || !sound || !OGG_OK) return; if (name === musicName) return; const old = musicEl; if (old) { clearInterval(musicFade); let v = old.volume; musicFade = setInterval(() => { v -= .04; if (v <= 0) { old.pause(); clearInterval(musicFade); } else old.volume = v; }, 40); } musicEl = null; musicName = name; if (!name) return; try { const a = new Audio(MUSIC_URL(name)); a.loop = true; a.volume = vol; a.play().catch(() => {}); musicEl = a; } catch { musicEl = null; } }
   function stopMusic() { if (musicEl) { try { musicEl.pause(); } catch { /* */ } } musicEl = null; musicName = null; clearInterval(musicFade); }
   const r = {
