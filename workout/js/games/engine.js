@@ -12,7 +12,9 @@ const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 const shuffle = arr => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
-export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true, speak = null, demo = false, demoOnly = false }) {
+// seconds = 0: בלי הגבלת זמן, משחקים עד שנפסלים (הכלל של כל משחק). tokens(): כמה מתנות זמינות להמשך אחרי פסילה; onContinue() מחייב מתנה ומחזיר true.
+// progress: מה שנשמר מהפעם הקודמת (def.make(r, progress)); onProgress(game.save()) נקרא בסיום ובפסילה כדי לשמור.
+export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null }) {
   host.innerHTML = `
     <div class="gamewrap">
       <div class="gamehud">
@@ -27,9 +29,9 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
     </div>`;
   const cv = host.querySelector('#gcv'), ctx = cv.getContext('2d');
   const scoreEl = host.querySelector('#gscore'), timeEl = host.querySelector('#gtime'), overlay = host.querySelector('#gover');
-  let game = null, raf = 0, last = 0, running = false, ended = false, score = 0, timeLeft = seconds, pauseUntil = 0;
+  const unlimited = !(seconds > 0); let game = null, raf = 0, last = 0, running = false, ended = false, score = 0, timeLeft = unlimited ? 0 : seconds, elapsed = 0, pauseUntil = 0;
   // הדגמה: אצבע מדומה שמשחקת לפי תסריט (def.demo), עם כתוביות. בסוף חוזרים למסך הפתיחה או יוצאים
-  let inDemo = false, demoT = 0; const finger = { x: W / 2, y: H * .7, tx: W / 2, ty: H * .7, press: 0, hold: false, caption: '', swipe: null };
+  let inDemo = false, demoT = 0, resumeOnPause = false; const saveProgress = () => { try { if (onProgress && game && typeof game.save === 'function') onProgress(game.save()); } catch { /* */ } }; const finger = { x: W / 2, y: H * .7, tx: W / 2, ty: H * .7, press: 0, hold: false, caption: '', swipe: null };
   let pops = [], parts = [], shakeT = 0, ac = null;
   // צלילים קצרים (WebAudio)
   const tone = (f, ms, type = 'sine', vol = .18, at = 0) => { if (!sound) return; try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = f; o.connect(g); g.connect(ac.destination); const t = ac.currentTime + at; g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + ms / 1000); o.start(t); o.stop(t + ms / 1000 + .02); } catch { /* */ } };
@@ -54,8 +56,17 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
     get score() { return score; }, get timeLeft() { return timeLeft; },
     addScore(n = 1) { score = Math.max(0, Math.round(score + n)); scoreEl.textContent = score; },
     setScore(n) { score = Math.max(0, Math.round(n)); scoreEl.textContent = score; },
-    over(msg = 'אופס!') { if (!running) return; running = false; SFX.over(); shakeT = 0.3; flash(msg, timeLeft > 6 ? 'עוד ניסיון...' : ''); if (timeLeft > 6) pauseUntil = performance.now() + 1100; else setTimeout(end, 900); },
-    win(msg = 'כל הכבוד!', bonus = 0) { if (!running) return; running = false; SFX.win(); r.burst(W / 2, H / 2, PAL.gold, 30, 320); if (bonus) r.addScore(bonus); flash(msg, timeLeft > 6 ? 'סבב חדש!' : ''); if (timeLeft > 6) pauseUntil = performance.now() + 900; else setTimeout(end, 900); },
+    over(msg = 'אופס!') { if (!running) return; running = false; SFX.over(); shakeT = 0.3;
+      if (inDemo) { flash(msg, 'עוד ניסיון...'); pauseUntil = performance.now() + 1100; return; }
+      if (!unlimited) { flash(msg, timeLeft > 6 ? 'עוד ניסיון...' : ''); if (timeLeft > 6) pauseUntil = performance.now() + 1100; else setTimeout(end, 900); return; }
+      // בלי הגבלת זמן: נפסלת. אפשר להמשיך מאותו מקום תמורת מתנה (אם יש), או לסיים
+      saveProgress(); const canGo = typeof game.revive === 'function' && (typeof tokens === 'function' ? tokens() : tokens) > 0;
+      flash(`נפסלת! ${msg}`, `ניקוד: ${score}${canGo ? ' · יש לך מתנות, אפשר להמשיך מאותו מקום' : ''}`);
+      overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<div class="row" style="gap:8px;justify-content:center;flex-wrap:wrap">${canGo ? '<button class="btn primary big" id="gcont" style="width:auto">להמשיך 🎁 (מתנה אחת)</button>' : ''}<button class="btn big" id="gfinish" style="width:auto">סיום</button></div>`);
+      const gc = overlay.querySelector('#gcont'); if (gc) gc.onclick = () => { if (onContinue && !onContinue()) return; game.revive(); hide(); running = true; last = performance.now(); };
+      overlay.querySelector('#gfinish').onclick = () => end(); },
+    // שלב הושלם: הודעה קצרה וממשיכים עם אותו משחק (הרמה נשמרת). במשחק עם זמן שנגמר: סיום
+    win(msg = 'כל הכבוד!', bonus = 0) { if (!running) return; running = false; SFX.win(); r.burst(W / 2, H / 2, PAL.gold, 30, 320); if (bonus) r.addScore(bonus); flash(msg, unlimited || timeLeft > 6 ? 'ממשיכים!' : ''); if (unlimited || timeLeft > 6) { pauseUntil = performance.now() + 900; resumeOnPause = true; } else setTimeout(end, 900); saveProgress(); },
     // ציור
     clear(color = PAL.bg) { ctx.fillStyle = color; ctx.fillRect(0, 0, W, H); },
     rect(x, y, w, h, color, rad = 0) { ctx.fillStyle = color; if (rad) { ctx.beginPath(); ctx.roundRect(x, y, w, h, rad); ctx.fill(); } else ctx.fillRect(x, y, w, h); },
@@ -94,14 +105,14 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
   function hide() { overlay.classList.remove('on'); overlay.innerHTML = ''; }
   const fmt = s => `${Math.floor(s / 60)}:${String(Math.ceil(s) % 60).padStart(2, '0')}`;
 
-  function fresh() { game = def.make(r); running = true; hide(); }
+  function fresh() { game = def.make(r, progress || null); running = true; hide(); }
   function loop(now) {
     raf = requestAnimationFrame(loop);
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
     if (ended) return;
-    if (!inDemo) timeLeft -= dt; timeEl.textContent = inDemo ? 'הדגמה' : fmt(Math.max(0, timeLeft)); timeEl.classList.toggle('low', timeLeft < 10);
-    if (timeLeft <= 0) return end();
-    if (!running) { if (pauseUntil && now >= pauseUntil) { pauseUntil = 0; fresh(); } else return; }
+    if (!inDemo) { if (unlimited) elapsed += dt; else timeLeft -= dt; } timeEl.textContent = inDemo ? 'הדגמה' : unlimited ? fmt(elapsed) : fmt(Math.max(0, timeLeft)); timeEl.classList.toggle('low', !unlimited && timeLeft < 10);
+    if (!unlimited && timeLeft <= 0) return end();
+    if (!running) { if (pauseUntil && now >= pauseUntil) { pauseUntil = 0; if (resumeOnPause && game) { resumeOnPause = false; hide(); running = true; } else fresh(); } else return; }
     try {
       if (inDemo) { demoT += dt; if (demoT >= (def.demoDur || 12)) return endDemo(); def.demo(demoT, game, ctl, r); demoTick(dt); }
       game.update && game.update(dt);
@@ -112,7 +123,7 @@ export function runGame(def, { seconds = 90, host, best = 0, onEnd, sound = true
     } catch (e) { console.error(def.id, e); end(); }
   }
   function end() {
-    if (ended) return; ended = true; running = false; cancelAnimationFrame(raf);
+    if (ended) return; ended = true; running = false; cancelAnimationFrame(raf); saveProgress();
     const newBest = score > best && score > 0;
     flash(newBest ? `שיא חדש! ${score}` : `ניקוד: ${score}`, `${best && !newBest ? `השיא שלך: ${best} · ` : ''}חזרה לאימון`);
     if (newBest) {

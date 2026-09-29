@@ -11,7 +11,7 @@ export const DEMOS = {
     const P = game.peek(); if (!every(ctl, 'act', .22, t)) return; const [hx, hy] = P.head, [fx, fy] = P.food, [dx, dy] = P.dir;
     const opts = []; if (fx > hx) opts.push('right'); if (fx < hx) opts.push('left'); if (fy > hy) opts.push('down'); if (fy < hy) opts.push('up');
     const vec = { left: [-1, 0], right: [1, 0], up: [0, -1], down: [0, 1] };
-    const safe = d => { const [vx, vy] = vec[d]; if (vx === -dx && vy === -dy) return false; const nx = hx + vx, ny = hy + vy; if (nx < 0 || ny < 0 || nx >= P.cols || ny >= P.rows) return false; return !P.body.some(s => s[0] === nx && s[1] === ny); };
+    const safe = d => { const [vx, vy] = vec[d]; if (vx === -dx && vy === -dy) return false; const nx = hx + vx, ny = hy + vy; if (nx < 0 || ny < 0 || nx >= P.cols || ny >= P.rows) return false; if ((P.walls || []).some(w => w[0] === nx && w[1] === ny)) return false; return !P.body.some(s => s[0] === nx && s[1] === ny); };
     const pick = opts.find(safe) || ['up', 'down', 'left', 'right'].find(safe); if (pick && (vec[pick][0] !== dx || vec[pick][1] !== dy)) ctl.swipe(pick, P.cx(hx), P.cy(hy)); },
   penalty(t, game, ctl) { captions(ctl, t, [[0, 'נוגעים איפה בשער לבעוט'], [3, 'השוער מנחש צד וגובה. פינות = בונוס!'], [7, 'רצף שערים מכפיל נקודות'], [10, 'זהירות: קרוב מדי לקורה, אפשר להחטיא']]);
     const P = game.peek(); if (P.phase === 'aim' && P.ready >= 1 && every(ctl, 'kick', 2.2, t)) { const zones = [[-1, 0], [1, 2], [0, 0], [1, 0], [-1, 2]]; const [c, rw] = zones[(ctl.mem.k = (ctl.mem.k || 0) + 1) % zones.length]; const [zx, zy] = P.zoneCenter(c, rw); ctl.tap(zx, zy); } },

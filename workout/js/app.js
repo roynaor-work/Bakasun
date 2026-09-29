@@ -419,7 +419,7 @@ function finishItem(done, skipped) {
 }
 
 function giftPhase() {
-  const g = W.gift, secs = store.profile.gameSeconds || 90;
+  const g = W.gift, secs = store.profile.gameSeconds || 0;
   fanfare();
   mount(`
   <div class="stack">
@@ -447,8 +447,11 @@ function playDemo(g, onDone) { mount('', true); activeGame = runGame(g, { second
 // מריץ משחק במסך מלא ומחזיר לפונקציית ההמשך
 function playGame(g, onDone) {
   mount('', true);
-  const secs = store.profile.gameSeconds || 90;
-  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t), onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
+  const secs = store.profile.gameSeconds || 0; // 0 = בלי הגבלה: משחקים עד שנפסלים
+  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t),
+    tokens: () => store.tokens - 1, onContinue: () => { if (store.tokens <= 1) return false; store.addToken(-1); return true; }, // המשחק הזה עולה מתנה אחת בסוף; המשך עולה עוד אחת
+    progress: store.progress[g.id] || null, onProgress: p => { if (p) store.setProgress(g.id, p); },
+    onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
 }
 
 function restPhase() {
@@ -626,7 +629,7 @@ function arcade() {
   mount(`
   <div class="stack">
     <div class="row between wrap"><h1>חדר משחקים 🎮</h1><span class="tokens">🎁 ${store.tokens} ${store.tokens === 1 ? 'מתנה' : 'מתנות'}</span></div>
-    <p class="muted">${store.tokens ? 'בוחרים משחק. כל משחק עולה מתנה אחת ונמשך ' + fmtTime(store.profile.gameSeconds || 90) + ' דקות.' : 'כדי לשחק צריך מתנה. כל תרגיל שמסיימים באימון נותן אחת!'}</p>
+    <p class="muted">${store.tokens ? 'בוחרים משחק. כל משחק עולה מתנה אחת, ומשחקים עד שנפסלים. נפסלת ויש לך עוד מתנה? אפשר להמשיך מאותו מקום.' : 'כדי לשחק צריך מתנה. כל תרגיל שמסיימים באימון נותן אחת!'}</p>
     ${!store.tokens ? '<button class="btn primary big" data-go="#/home">לאימון של היום 🚀</button>' : ''}
     <div class="tiles"><div class="tile"><b>${gs.count}</b>משחקים ששיחקת</div><div class="tile"><b>${Object.keys(gs.played).length} <span class="muted" style="font-size:16px">מתוך</span> ${GAMES.length}</b>משחקים שגילית</div></div>
     ${Object.keys(gs.bests).length ? `<h2>🏆 לוח השיאים</h2><div class="card list">${Object.entries(gs.bests).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([id, best], i) => { const g = gameById[id]; return g ? `<div class="item"><span class="rank">${['🥇', '🥈', '🥉'][i] || (i + 1)}</span><span class="grow">${g.emoji} ${esc(g.name)}</span><b style="color:var(--accent)">${best}</b>${gs.bestAt?.[id] ? `<span class="muted small">${fmtDate(gs.bestAt[id])}</span>` : ''}</div>` : ''; }).join('')}</div>` : ''}
@@ -677,7 +680,7 @@ function settings() {
       <h3>מתנות ומשחקים 🎁</h3>
       <label class="field">מתנה (משחק קצר) אחרי<select id="giftEvery">${[[1, 'כל תרגיל שמסיימים'], [2, 'כל שני תרגילים'], [3, 'כל שלושה תרגילים'], [0, 'בלי מתנות']].map(([v, n]) => `<option value="${v}" ${v === p.giftEvery ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <label class="field">פתיחת משחקים חדשים<select id="unlockEvery">${[[10, 'כל 10 אימונים: 5 משחקים לבחירה'], [5, 'כל 5 אימונים: 5 משחקים לבחירה'], [3, 'כל 3 אימונים: 5 משחקים לבחירה'], [0, 'הכול פתוח מההתחלה']].map(([v, n]) => `<option value="${v}" ${v === p.unlockEvery ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
-      <label class="field">אורך משחק<select id="gameSeconds">${[[60, 'דקה'], [90, 'דקה וחצי'], [120, 'שתי דקות']].map(([v, n]) => `<option value="${v}" ${v === p.gameSeconds ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+      <label class="field">אורך משחק<select id="gameSeconds">${[[0, 'בלי הגבלה, עד שנפסלים'], [60, 'דקה'], [90, 'דקה וחצי'], [120, 'שתי דקות']].map(([v, n]) => `<option value="${v}" ${v === p.gameSeconds ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <p class="muted small">${GAMES.length} משחקים שונים. מתנות שלא משחקים מיד נשמרות לחדר המשחקים (${store.tokens} שמורות).</p>
     </div>
     <div class="card stack">
