@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { scaleTarget, buildItems, summarize, streak, stats, earned, fmtTime, todayProgram, weekDays, suggestLevel } from '../workout/js/logic.js';
+import * as L2 from '../workout/js/logic.js';
 import { EXERCISES, byId } from '../workout/js/exercises.js';
 import { PROGRAMS, DEFAULT_PLAN, programById } from '../workout/js/programs.js';
 import { poseAt, cycleMs, lerpPose } from '../workout/js/figure.js';
@@ -141,4 +142,16 @@ test('every program has push-ups and a core exercise; unlock credits; ranks', as
   assert.equal(L.rankOf(0).name, 'מתחיל'); assert.equal(L.rankOf(26).name, 'אלוף'); assert.equal(L.rankOf(26).toNext, 14); assert.equal(L.rankOf(100).next, undefined);
   assert.ok(L.perseveranceLine({ thisWeek: 3, streak: 3, workouts: 10 }).includes('השלישי'));
   assert.ok(L.isWorkBlock('בטן וידיים') && !L.isWorkBlock('חימום'));
+});
+
+test('honest time: fast-marked items are not counted, rests count, tokens per minutes', () => {
+  const items = [
+    { type: 'time', target: 30, done: 30, block: 'האימון', secs: 31 },      // כן
+    { type: 'reps', target: 10, done: 10, block: 'האימון', secs: 3 },       // מהר מדי: צפוי 22 שניות
+    { type: 'reps', target: 10, done: 10, block: 'האימון', secs: 60 },      // כן, נספר עד 35 (160%)
+    { type: 'time', target: 20, done: 0, skipped: true, block: 'האימון', secs: 20 }, // דילוג
+  ];
+  const h = L2.honestTime(items, 15);
+  assert.equal(h.fast, 1); assert.equal(h.seconds, Math.round(31 + 35.2 + 15));
+  assert.equal(L2.tokensFor(15 * 60, 3), 5); assert.equal(L2.tokensFor(100, 3), 0); assert.equal(L2.tokensFor(60 * 60, 3), 8);
 });
