@@ -6,7 +6,7 @@ import { parseContactsFile } from '../logic/contacts.js';
 import { importContacts } from '../contactsImport.js';
 import { templates, removeTemplate } from '../logic/templates.js';
 import { TASK } from '../logic/extra.js';
-import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_PAYMENTS, SEED_CASES } from '../data/seedContacts.js';
+import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_STAFF, SEED_PAYMENTS, SEED_CASES } from '../data/seedContacts.js';
 import { travelLine } from '../logic/travel.js';
 import { phoneDigits } from '../logic/core.js';
 import * as cloud from '../cloud.js';
@@ -114,11 +114,22 @@ export function render({ root }) {
   root.querySelector('#seed').onclick = () => {
     const haveS = new Set(db.list('suppliers').map(x => x.name)), haveC = new Set(db.list('clients').map(x => x.name)), haveT = new Set(db.list('team').map(x => x.name));
     let ns = 0, nc = 0, np = 0;
-    SEED_SUPPLIERS.forEach(x => { if (haveS.has(x.name)) return; db.put('suppliers', { name: x.name, type: x.type, contact: x.contact, phone: x.phone, email: x.email, lang: x.lang, notes: [x.role, x.notes].filter(Boolean).join(' · '), rating: 3, active: 'כן', area: '' }); ns++; });
+    SEED_SUPPLIERS.forEach(x => {
+      // a supplier already there only gets the fields it lacks (a mail, a phone); nothing is overwritten
+      const ex = db.list('suppliers').find(c => c.name === x.name);
+      if (ex) { const patch = {}; ['email', 'phone', 'contact'].forEach(k => { if (x[k] && !ex[k]) patch[k] = x[k]; }); if (Object.keys(patch).length) db.put('suppliers', Object.assign({ id: ex.id }, patch)); return; }
+      db.put('suppliers', { name: x.name, type: x.type, contact: x.contact, phone: x.phone, email: x.email, lang: x.lang, notes: [x.role, x.notes].filter(Boolean).join(' · '), rating: 3, active: 'כן', area: '' }); ns++;
+    });
     SEED_CLIENTS.forEach(x => { const ex = db.list('clients').find(c => c.name === x.name); const rec = { name: x.name, aliases: x.aliases, contact: x.contact, phone: x.phone, email: x.email, lang: x.lang, legalName: x.legalName, taxId: x.taxId, address: x.address, invoiceEmail: x.invoiceEmail, approver: x.approver, payer: x.payer, payTerms: x.payTerms, attachments: x.attachments, notes: [x.kind, x.role, x.notes].filter(Boolean).join(' · ') }; if (ex) { const patch = { id: ex.id }; Object.keys(rec).forEach(k => { if (rec[k] && !ex[k]) patch[k] = rec[k]; }); if (Object.keys(patch).length > 1) db.put('clients', patch); return; } db.put('clients', rec); nc++; });
     const havePay = new Set(db.list('payments').map(p => (p.paidAt || p.invoicedAt || '') + '|' + p.amount));
     SEED_PAYMENTS.forEach(x => { const key = x.date + '|' + x.amount; if (havePay.has(key)) return; const cl = db.list('clients').find(c => c.name.includes(x.client)); db.put('payments', { client: cl ? cl.name : x.client, clientId: cl ? cl.id : '', amount: x.amount, note: x.note, status: x.status, invoicedAt: x.date, paidAt: x.status === 'שולם' ? x.date : '', due: x.date }); });
-    SEED_TEAM.forEach(x => { if (haveT.has(x.name)) return; db.put('team', { name: x.name, role: x.role, phone: x.phone, email: x.email }); np++; });
+    SEED_TEAM.forEach(x => {
+      const ex = db.list('team').find(c => c.name === x.name);
+      if (ex) { const patch = {}; ['role', 'phone', 'email', 'note'].forEach(k => { if (x[k] && !ex[k]) patch[k] = x[k]; }); if (Object.keys(patch).length) db.put('team', Object.assign({ id: ex.id }, patch)); return; }
+      db.put('team', { name: x.name, role: x.role, phone: x.phone, email: x.email, note: x.note || '' }); np++;
+    });
+    const haveStaff = new Set(db.list('staff').map(x => x.name));
+    SEED_STAFF.forEach(x => { if (haveStaff.has(x.name)) return; db.put('staff', { name: x.name, role: x.role, phone: x.phone, email: x.email, note: x.note || '' }); np++; });
     let ne = 0;
     SEED_CASES.forEach(x => {
       if (db.list('cases').some(c => c.seedKey === x.key)) return;

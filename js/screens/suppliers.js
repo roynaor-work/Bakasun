@@ -33,6 +33,7 @@ function renderOne({ root, id }) {
     <div class="stack">
       <div class="card"><div class="row between"><span class="title">${esc(supplierTypeLabel(s.type))}</span><span class="badge ok">${esc(stars(s.rating))}</span></div>
         <div class="sub">${esc(s.contact || '')} <span class="ltr">${esc(phonePretty(s.phone))}</span>${s.email ? ' · ' + esc(s.email) : ''}${s.area ? ' · ' + esc(s.area) : ''}${s.lang ? ' · ' + esc(langName(s.lang)) : ''}</div>
+        ${s.bank ? `<p class="sub" style="white-space:pre-wrap"><b>${esc(t('fBank'))}:</b> ${esc(s.bank)}</p>` : ''}
         ${s.notes ? `<p class="sub" style="white-space:pre-wrap">${esc(s.notes)}</p>` : ''}
         <div class="row"><button class="btn wa" id="wa">${esc(t('whatsapp'))}</button><button class="btn" id="dial">${esc(t('call'))}</button></div></div>
       ${notesHtml('supplier', id)}
@@ -51,7 +52,7 @@ export async function edit(s, preset) {
     ${field('contact', t('fName'), s.contact || '')}${field('phone', t('fPhone'), s.phone || '', { ltr: true, inputmode: 'tel' })}${field('email', t('fEmail'), s.email || '', { ltr: true })}${field('area', t('area'), s.area || '')}
     ${field('lang', t('fLang'), s.lang || 'he', { type: 'select', options: [['he', langName('he')], ['en', langName('en')], ['fr', langName('fr')]] })}
     ${field('rating', t('rating'), s.rating || 3, { type: 'select', options: [5, 4, 3, 2, 1].map(n => [n, stars(n)]) })}
-    ${field('active', t('active'), s.active || 'כן', { type: 'select', options: [['כן', '✓'], ['לא', '✗']] })}</div>${field('notes', t('fNotes'), s.notes || '', { type: 'textarea' })}`);
+    ${field('active', t('active'), s.active || 'כן', { type: 'select', options: [['כן', '✓'], ['לא', '✗']] })}</div>${field('bank', t('fBank'), s.bank || '', { type: 'textarea' })}${field('notes', t('fNotes'), s.notes || '', { type: 'textarea' })}`);
   if (!r || !r.name) return null;
   if (s.id) r.id = s.id;
   const id = db.put('suppliers', r); toast(t('saved'));

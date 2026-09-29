@@ -18,7 +18,7 @@ const D = {
     missing: 'חסר', allThere: 'יש הכל', saveCase: 'שמירת התיק', askMissing: 'לשאול מה שחסר', saved: 'נשמר',
     // fields
     fDate: 'תאריך', fParticipants: 'משתתפים', fBudget: 'תקציב', fPlace: 'מקום', fKind: 'סוג אירוע', fPurpose: 'מטרה',
-    fName: 'איש קשר', fClient: 'לקוח / חברה', fPhone: 'טלפון', fEmail: 'מייל', fLang: 'שפת הלקוח', fHours: 'שעות', fNotes: 'הערות',
+    fName: 'איש קשר', fClient: 'לקוח / חברה', fPhone: 'טלפון', fEmail: 'מייל', fLang: 'שפת הלקוח', fHours: 'שעות', fNotes: 'הערות', fBank: 'פרטי בנק לתשלום',
     fStatus: 'סטטוס', fSource: 'ההודעה המקורית', fAudience: 'קהל', fType: 'סוג', fAddress: 'כתובת', fLegal: 'שם לחשבונית', fTaxId: 'ח.פ. / ע.מ.',
     // statuses (stored in Hebrew, shown translated)
     's_פנייה': 'פנייה', 's_הצעה נשלחה': 'הצעה נשלחה', 's_נסגר': 'נסגר', 's_בוצע': 'בוצע', 's_ירד': 'ירד',
@@ -60,7 +60,7 @@ const D = {
     dictateLang: 'Langue de dictée', noSpeech: 'Ce navigateur ne permet pas la dictée. Sur Chrome Android, ça marche.',
     missing: 'Manque', allThere: 'Tout y est', saveCase: 'Enregistrer le dossier', askMissing: 'Demander ce qui manque', saved: 'Enregistré',
     fDate: 'Date', fParticipants: 'Participants', fBudget: 'Budget', fPlace: 'Lieu', fKind: 'Type d’événement', fPurpose: 'Objectif',
-    fName: 'Contact', fClient: 'Client / société', fPhone: 'Téléphone', fEmail: 'E-mail', fLang: 'Langue du client', fHours: 'Horaires', fNotes: 'Notes',
+    fName: 'Contact', fClient: 'Client / société', fPhone: 'Téléphone', fEmail: 'E-mail', fLang: 'Langue du client', fHours: 'Horaires', fNotes: 'Notes', fBank: 'Coordonnées bancaires',
     fStatus: 'Statut', fSource: 'Message d’origine', fAudience: 'Public', fType: 'Type', fAddress: 'Adresse', fLegal: 'Nom pour facture', fTaxId: 'N° d’entreprise',
     's_פנייה': 'Demande', 's_הצעה נשלחה': 'Devis envoyé', 's_נסגר': 'Confirmé', 's_בוצע': 'Réalisé', 's_ירד': 'Annulé',
     caseOf: 'Dossier', openCases: 'Ouverts', allCases: 'Tous', noCases: 'Pas encore de dossier. Commencez par une nouvelle demande.',
@@ -94,7 +94,7 @@ const D = {
     dictateLang: 'Dictation language', noSpeech: 'This browser cannot dictate. On Chrome for Android it works.',
     missing: 'Missing', allThere: 'All there', saveCase: 'Save the case', askMissing: 'Ask what is missing', saved: 'Saved',
     fDate: 'Date', fParticipants: 'Guests', fBudget: 'Budget', fPlace: 'Venue', fKind: 'Event type', fPurpose: 'Purpose',
-    fName: 'Contact', fClient: 'Client / company', fPhone: 'Phone', fEmail: 'E-mail', fLang: 'Client language', fHours: 'Hours', fNotes: 'Notes',
+    fName: 'Contact', fClient: 'Client / company', fPhone: 'Phone', fEmail: 'E-mail', fLang: 'Client language', fHours: 'Hours', fNotes: 'Notes', fBank: 'Bank details for payment',
     fStatus: 'Status', fSource: 'Original message', fAudience: 'Audience', fType: 'Type', fAddress: 'Address', fLegal: 'Invoice name', fTaxId: 'Company no.',
     's_פנייה': 'Inquiry', 's_הצעה נשלחה': 'Quote sent', 's_נסגר': 'Confirmed', 's_בוצע': 'Done', 's_ירד': 'Dropped',
     caseOf: 'Case', openCases: 'Open', allCases: 'All', noCases: 'No cases yet. Start with a new inquiry.',
