@@ -38,13 +38,14 @@ function fig(svg, ex, speed = 1) { const f = new Figure(svg); f.play(ex, speed);
 function figs(sel = 'svg[data-ex]') { return [...app.querySelectorAll(sel)].map(s => fig(s, byId[s.dataset.ex])); }
 const figSvg = (exId, cls = '') => `<svg class="figure ${cls}" data-ex="${exId}" aria-hidden="true"></svg>`;
 // הבמה במסך התרגיל: סרטון אמיתי אם יש לתרגיל (vids.js), אחרת דמות המקלות. wireStage מחזיר אובייקט עם אותו ממשק: play(ex, speed), stop, onRep
-const stageHtml = ex => hasVideo(ex.id) ? `<video class="exvid" data-vid="${ex.id}" autoplay muted loop playsinline></video>` : figSvg(ex.id);
+const stageHtml = ex => hasVideo(ex.id) ? `<div class="exmedia" data-vid="${ex.id}"></div>` : figSvg(ex.id);
 function wireStage() {
-  const v = app.querySelector('video[data-vid]');
-  if (!v) return figs()[0];
-  videoUrl(v.dataset.vid).then(u => { if (u) v.src = u; });
+  const box = app.querySelector('.exmedia[data-vid]');
+  if (!box) return figs()[0];
+  let v = null;
+  videoUrl(box.dataset.vid).then(m => { if (!m) return; if (m.kind === 'image') { box.innerHTML = `<img class="exvid" src="${m.url}" alt="">`; return; } v = document.createElement('video'); v.className = 'exvid'; v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true; v.src = m.url; box.appendChild(v); v.playbackRate = f.rate; });
   // בסרטון אין "סיבוב" של הדמות, אז הספירה לפי אורך המחזור מהקטלוג (cycleMs) בקצב הניגון
-  const f = { onRep: null, tick: 0, cyc: 0, play(ex, speed = 1) { v.playbackRate = speed; this.stop(); if (this.onRep) { this.cyc = 0; this.tick = setInterval(() => { this.cyc++; this.onRep && this.onRep(this.cyc); }, cycleMs(ex.frames) / speed); } }, still() { this.stop(); }, stop() { clearInterval(this.tick); this.tick = 0; } };
+  const f = { onRep: null, tick: 0, cyc: 0, rate: 1, play(ex, speed = 1) { this.rate = speed; if (v) v.playbackRate = speed; this.stop(); if (this.onRep) { this.cyc = 0; this.tick = setInterval(() => { this.cyc++; this.onRep && this.onRep(this.cyc); }, cycleMs(ex.frames) / speed); } }, still() { this.stop(); }, stop() { clearInterval(this.tick); this.tick = 0; } };
   figures.push(f); return f;
 }
 const catPill = cat => `<span class="pill ${cat}">${CATS[cat].emoji} ${CATS[cat].name}</span>`;
@@ -729,8 +730,9 @@ function settings() {
     </div>
     <div class="card stack">
       <h3>סרטונים לתרגילים 🎥</h3>
-      <p class="muted small">במקום הדמות המצוירת: סרטון קצר אמיתי (5 עד 8 שניות, בלופ) לכל תרגיל. מצלמים ישר מהטלפון או בוחרים מהגלריה. נשמר במכשיר הזה בלבד. ${localVideos().size ? `יש ${localVideos().size} סרטונים.` : 'עדיין אין סרטונים.'}</p>
-      <details><summary class="small" style="cursor:pointer">כל התרגילים (${EXERCISES.length})</summary><div class="stack" style="margin-top:8px">${Object.entries(CATS).map(([cat, c]) => `<b class="small muted">${c.emoji} ${c.name}</b>` + EXERCISES.filter(e => e.cat === cat).map(e => `<div class="row between"><span>${hasVideo(e.id) ? '✅' : '▫️'} ${esc(e.name)}</span><span class="row"><label class="btn chip">📹 ${hasVideo(e.id) ? 'להחליף' : 'לצלם / לבחור'}<input type="file" accept="video/*" data-vid="${e.id}" hidden></label>${localVideos().has(e.id) ? `<button class="btn chip" data-delvid="${e.id}" aria-label="למחוק">🗑️</button>` : ''}</span></div>`).join('')).join('')}</div></details>
+      <p class="muted small">במקום הדמות המצוירת: סרטון קצר אמיתי (או תמונה) לכל תרגיל, בלופ. מצלמים ישר מהטלפון או בוחרים מהגלריה. נשמר במכשיר הזה בלבד. ${localVideos().size ? `יש ${localVideos().size} מתוך ${EXERCISES.length}.` : 'עדיין אין סרטונים.'}</p>
+      <div class="tip">🎬 איך לצלם: הטלפון לרוחב, בגובה החזה, כל הגוף בפריים עם קצת אוויר מעל הראש ומתחת לרגליים. רקע פשוט (קיר). 5 עד 8 שניות: שתיים-שלוש חזרות בקצב רגיל, בלי לדבר (הסרטון מוצג בלי קול). תרגילי רצפה מצלמים מהצד.</div>
+      <details><summary class="small" style="cursor:pointer">כל התרגילים (${EXERCISES.length})</summary><div class="stack" style="margin-top:8px">${Object.entries(CATS).map(([cat, c]) => `<b class="small muted">${c.emoji} ${c.name}</b>` + EXERCISES.filter(e => e.cat === cat).map(e => `<div class="row between"><span>${hasVideo(e.id) ? '✅' : '▫️'} ${esc(e.name)}</span><span class="row">${hasVideo(e.id) ? `<button class="btn chip" data-playvid="${e.id}">▶️</button>` : ''}<label class="btn chip">📹 ${hasVideo(e.id) ? 'להחליף' : 'לצלם / לבחור'}<input type="file" accept="video/*,image/*" data-vid="${e.id}" hidden></label>${localVideos().has(e.id) ? `<button class="btn chip" data-delvid="${e.id}" aria-label="למחוק">🗑️</button>` : ''}</span></div><div class="vidprev" data-prev="${e.id}" hidden></div>`).join('')).join('')}</div></details>
     </div>
     <div class="card stack">
       <h3>התוכנית השבועית</h3>
@@ -786,6 +788,7 @@ function settings() {
   $('#voice').onchange = e => store.setProfile({ voice: e.target.checked });
   $('#listen').onchange = e => store.setProfile({ listen: e.target.checked });
   app.querySelectorAll('input[data-vid]').forEach(inp => inp.onchange = async e => { const f = e.target.files[0]; if (!f) return; if (f.size > 60e6) return alert('הסרטון גדול מדי (מעל 60MB). מצלמים קצר יותר.'); try { await saveVideo(inp.dataset.vid, f); settings(); } catch { alert('לא הצלחתי לשמור את הסרטון במכשיר.'); } });
+  app.querySelectorAll('[data-playvid]').forEach(b => b.onclick = async () => { const box = app.querySelector(`.vidprev[data-prev="${b.dataset.playvid}"]`); if (!box.hidden) { box.hidden = true; box.innerHTML = ''; return; } const m = await videoUrl(b.dataset.playvid); if (!m) return; box.innerHTML = m.kind === 'image' ? `<img class="exvid" src="${m.url}" alt="">` : `<video class="exvid" src="${m.url}" autoplay muted loop playsinline controls></video>`; box.hidden = false; });
   app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { if (!confirm(`למחוק את הסרטון של "${byId[b.dataset.delvid].name}"?`)) return; await deleteVideo(b.dataset.delvid); settings(); });
   $('#intro').onchange = e => store.setProfile({ intro: e.target.checked });
   $('#voicetest').onclick = () => { if (!speak(SAY_UI.test, { force: true })) alert('אין הקראה במכשיר הזה.'); };
