@@ -9,26 +9,34 @@ const DAYS = { he: ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמי�
  * "תזכירי לי מחר ב-9 להתקשר לדנה" / "remind me on tuesday at 14:30 to call the hotel" / "rappelle-moi demain de ..."
  * → {title, due: 'YYYY-MM-DD', time: 'HH:MM'} or null when it is not a reminder.
  */
-export function parseReminder(text, today) {
-  const t = trim(text); if (!t) return null;
-  const m = /^(?:תזכירי לי|תזכיר לי|תזכורת|remind me|reminder|rappelle-moi|rappel)\s*[:,]?\s*(.+)$/i.exec(t); if (!m) return null;
-  let rest = m[1]; const base = Office.day(today) || Office.day(new Date());
+/** Pulls a date and a time out of free text: "מחר", "ביום חמישי", "בעוד 3 ימים", "15/10", "ב-10:30".
+ *  Returns {rest, due (iso or ''), time}. Used by reminders, tasks ("משימה לדנה: להתקשר עד יום חמישי") and "postpone". */
+export function takeWhen(text, today) {
+  let rest = trim(text); const base = Office.day(today) || Office.day(new Date());
   let due = null, time = '';
   const take = (re, fn) => { const x = re.exec(rest); if (x) { fn(x); rest = trim(rest.replace(x[0], ' ')); } };
   take(/(?:^|\s)(היום|today|aujourd'hui)(?=\s|$)/i, () => { due = base; });
   take(/(?:^|\s)(מחרתיים|the day after tomorrow|après-demain)(?=\s|$)/i, () => { due = Office.addDays(base, 2); });
-  take(/(?:^|\s)(מחר|tomorrow|demain)(?=\s|$)/i, () => { due = Office.addDays(base, 1); });
-  take(/(?:^|\s)(?:ביום|on|le)?\s*(ראשון|שני|שלישי|רביעי|חמישי|שישי|שבת|sunday|monday|tuesday|wednesday|thursday|friday|saturday|dimanche|lundi|mardi|mercredi|jeudi|vendredi|samedi)(?=\s|$)/i, x => {
+  take(/(?:^|\s)(?:ל|עד\s+)?(מחר|tomorrow|demain)(?=\s|$)/i, () => { due = Office.addDays(base, 1); });
+  take(/(?:^|\s)(?:ל|עד\s+)?(?:שבוע הבא|לשבוע הבא|next week|la semaine prochaine)(?=\s|$)/i, () => { due = Office.addDays(base, 7); });
+  take(/(?:^|\s)(?:עד\s+)?(?:ביום|ליום|יום|on|by|le|pour)?\s*(ראשון|שני|שלישי|רביעי|חמישי|שישי|שבת|sunday|monday|tuesday|wednesday|thursday|friday|saturday|dimanche|lundi|mardi|mercredi|jeudi|vendredi|samedi)(?=\s|$)/i, x => {
     const w = x[1].toLowerCase(); let idx = -1; Object.values(DAYS).forEach(list => { const i = list.indexOf(w); if (i >= 0) idx = i; });
     if (idx >= 0) { const d = new Date(base); let diff = (idx - d.getDay() + 7) % 7; if (diff === 0) diff = 7; due = Office.addDays(base, diff); }
   });
   take(/(?:^|\s)(?:בעוד|in|dans)\s+(\d+)\s*(ימים|יום|days?|jours?)(?=\s|$)/i, x => { due = Office.addDays(base, +x[1]); });
   take(/(?:^|\s)(?:ב-?|בשעה|at|à)\s*(\d{1,2})(?:[:.](\d{2}))?(?=\s|$)/i, x => { let h = +x[1]; const mm = x[2] || '00'; if (h < 7 && !x[2]) h += 12; time = String(h).padStart(2, '0') + ':' + mm; });
-  take(/(?:^|\s)(\d{1,2})[./](\d{1,2})(?:[./](\d{2,4}))?(?=\s|$)/, x => { const y = x[3] ? (x[3].length === 2 ? '20' + x[3] : x[3]) : String(new Date(base).getFullYear()); due = Office.iso(y + '-' + x[2].padStart(2, '0') + '-' + x[1].padStart(2, '0')); });
-  if (!due) due = time ? base : Office.addDays(base, 1);
+  take(/(?:^|\s)(?:עד\s+|ב-?)?(\d{1,2})[./](\d{1,2})(?:[./](\d{2,4}))?(?=\s|$)/, x => { const y = x[3] ? (x[3].length === 2 ? '20' + x[3] : x[3]) : String(new Date(base).getFullYear()); due = Office.iso(y + '-' + x[2].padStart(2, '0') + '-' + x[1].padStart(2, '0')); });
+  return { rest, due: due ? Office.iso(due) : '', time, base };
+}
+
+export function parseReminder(text, today) {
+  const t = trim(text); if (!t) return null;
+  const m = /^(?:תזכירי לי|תזכיר לי|תזכורת|remind me|reminder|rappelle-moi|rappel)\s*[:,]?\s*(.+)$/i.exec(t); if (!m) return null;
+  const w = takeWhen(m[1], today); let rest = w.rest;
+  const due = w.due || Office.iso(w.time ? w.base : Office.addDays(w.base, 1));
   const title = trim(rest.replace(/^(?:ל|to |de |d')/i, m0 => (/^ל/.test(m0) ? 'ל' : ''))).replace(/^\s*(?:that|que|ש)\s*/i, '');
   if (!title) return null;
-  return { title, due: Office.iso(due), time };
+  return { title, due, time: w.time };
 }
 
 /** The line added to her signature while she is away. */

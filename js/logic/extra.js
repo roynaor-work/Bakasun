@@ -71,6 +71,16 @@ export function openTasks(tasks, today) {
     .sort((a, b) => (b.late == null ? -999 : b.late) - (a.late == null ? -999 : a.late) || str(a.created).localeCompare(str(b.created)));
 }
 
+/** Open tasks in the order a to-do app shows them: overdue, today, tomorrow, this week, later, no date.
+ *  Returns [{key, items}] with empty groups left out; items keep their "late" count. */
+export function groupTasks(open, today) {
+  today = day(today) || day(new Date());
+  const keyOf = t => { if (t.late == null) return 'nodate'; if (t.late > 0) return 'late'; if (t.late === 0) return 'today'; if (t.late === -1) return 'tomorrow'; if (t.late >= -6) return 'week'; return 'later'; };
+  const order = ['late', 'today', 'tomorrow', 'week', 'later', 'nodate'];
+  const g = {}; (open || []).forEach(t => { const k = keyOf(t); (g[k] = g[k] || []).push(t); });
+  return order.filter(k => g[k]).map(k => ({ key: k, items: k === 'late' ? g[k] : g[k].slice().sort((a, b) => str(a.due).localeCompare(str(b.due)) || str(a.time).localeCompare(str(b.time))) }));
+}
+
 /* ---------------- clients ---------------- */
 
 /** The existing client for a parsed lead (same phone, or same e-mail, or same company name), or null. */

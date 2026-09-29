@@ -13,7 +13,9 @@ import { parseHow, findHelp } from '../logic/howto.js';
 import { toCalendar } from '../calendar.js';
 import { speak, isReadAloudCommand, textOfEl } from '../speak.js';
 import { parseAction } from '../logic/questions.js';
-import { runAction, supplierStatus } from './actions.js';
+import { runAction, supplierStatus, undoBtn, wireUndo } from './actions.js';
+import { remember, undoLast, isUndoCommand } from '../logic/undo.js';
+import { pushRecent, recentList } from '../logic/recent.js';
 
 /** The person she named, from the live list (clients, suppliers, team, contacts). */
 function findPersonIn(who, people) {
@@ -54,6 +56,7 @@ const BACK = `<a class="icon" href="#/today" aria-label="${esc(t('back'))}"><svg
 export function render(ctx) {
   const { root } = ctx;
   if (ctx.id === 'supplier-quote') { mode = 'supplierQuote'; const sq = sessionStorage.getItem('bakasun.sqText'); if (sq != null) { sessionStorage.removeItem('bakasun.sqText'); draft = sq; } }
+  if (ctx.id === 'listen') { mode = 'command'; ctx.autoMic = true; }
   if (ctx.id === 'from-today') { const v = sessionStorage.getItem('bakasun.ask') || ''; sessionStorage.removeItem('bakasun.ask'); mode = 'command'; draft = v; ctx.autoRun = !!v; ctx.autoMic = sessionStorage.getItem('bakasun.askMic') === '1'; sessionStorage.removeItem('bakasun.askMic'); }
   const s = db.settings();
   root.innerHTML = `<header class="top">${BACK}<h1>${esc(t('assist'))}</h1></header>
@@ -64,15 +67,21 @@ export function render(ctx) {
   ({ command: tabCommand, invoice: tabInvoice, supplierQuote: tabSupplierQuote, docs: tabDocs }[mode])(body, s, ctx);
 }
 
+/** A short vibration where the phone allows it (Android). */
+function buzz(pattern) { try { if (navigator.vibrate) navigator.vibrate(pattern); } catch (e) { /* not allowed */ } }
+
 function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
   const s = db.settings(); const dictLang = s.dictLang || lang();
   const ex = Array.isArray(examples) && examples.length ? `<details class="examples"><summary>${esc(t('cmdEx'))}</summary><div class="chips">${examples.map(x => `<button type="button" class="chip" data-ex="${esc(x)}">${esc(x)}</button>`).join('')}</div></details>` : '';
-  body.innerHTML = `<p class="hint">${esc(hint)}</p>${ex}<textarea id="txt" rows="5" placeholder="${esc(ph)}">${esc(draft)}</textarea>
+  const recent = autoRun ? recentList(localStorage) : [];
+  const rc = recent.length ? `<details class="examples" id="recent"><summary>${esc(t('recentCmds'))}</summary><div class="chips">${recent.map(x => `<button type="button" class="chip" data-ex="${esc(x)}">${esc(x)}</button>`).join('')}</div></details>` : '';
+  body.innerHTML = `<p class="hint">${esc(hint)}</p>${ex}${rc}<textarea id="txt" rows="5" placeholder="${esc(ph)}">${esc(draft)}</textarea>
     <div class="row"><button class="btn rec" id="rec" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>${esc(t('dictate'))}</span></button>
       <select id="dl">${Object.keys(SPEECH).map(k => `<option value="${k}"${k === dictLang ? ' selected' : ''}>${esc(langName(k))}</option>`).join('')}</select>
       <button class="btn primary grow" id="go" type="button">${esc(readLabel || t('read'))}</button></div><div id="out" class="stack"></div>`;
   const ta = body.querySelector('#txt'), rec = body.querySelector('#rec'), dl = body.querySelector('#dl');
-  body.querySelectorAll('[data-ex]').forEach(b => { b.onclick = () => { ta.value = b.dataset.ex; draft = ta.value; ta.focus(); const d = body.querySelector('details.examples'); if (d) d.open = false; }; });
+  body.querySelectorAll('[data-ex]').forEach(b => { b.onclick = () => { ta.value = b.dataset.ex; draft = ta.value; ta.focus(); body.querySelectorAll('details.examples').forEach(d => { d.open = false; }); }; });
+  const onReadRaw = onRead; onRead = (text, out) => { if (autoRun && !isUndoCommand(text) && !isSendCommand(text) && !isDeleteCommand(text)) pushRecent(localStorage, text); return onReadRaw(text, out); };
   const bin = wireDelete(body, ta, 'cmd:' + mode, v => { draft = v; });
   let stop = null;
   ta.oninput = () => { draft = ta.value; };
@@ -85,8 +94,11 @@ function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
     if (!speechSupported()) { toast(t('noSpeech'), 3500); return; }
     const base = ta.value ? ta.value.replace(/\s+$/, '') + '\n' : '';
     rec.classList.add('on'); rec.querySelector('span').textContent = t('doneBtn'); manual = false;
+    // like a voice recorder: a running clock on the button, a short buzz at start and end, the screen stays awake
+    const t0 = Date.now(); const clock = setInterval(() => { const n = Math.round((Date.now() - t0) / 1000); rec.querySelector('span').textContent = t('doneBtn') + ' ' + Math.floor(n / 60) + ':' + String(n % 60).padStart(2, '0'); }, 1000);
+    buzz(30); let lock = null; try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(l => { lock = l; }).catch(() => {}); } catch (e) { /* no wake lock */ }
     stop = listen(SPEECH[dl.value] || 'he-IL', text => { ta.value = base + text; draft = ta.value; }, (said, why, finals) => {
-      stop = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate');
+      stop = null; rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); clearInterval(clock); buzz([20, 40, 20]); if (lock) { try { lock.release(); } catch (e) { /* gone */ } lock = null; }
       const lastSaid = (finals || []).slice(-1)[0] || '';
       // the closing word may sit at the end of the last sentence, with no pause before it
       const without = rest => { ta.value = (base + (finals || []).slice(0, -1).concat(rest ? [rest] : []).join(' ')).trim(); draft = ta.value; };
@@ -100,9 +112,9 @@ function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
       if (!run) { toast(t('stoppedHint'), 4000); return; }
       if (autoRun && ta.value.trim()) { toast(t('heardRunning'), 1500); onRead(ta.value, body.querySelector('#out')); }
     }, { silence: 10000, stopOn: x => stripDone(x) !== null || stripDelete(x) !== null || (autoRun && !!parseGoto(x)) });
-    if (!stop) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); }
+    if (!stop) { rec.classList.remove('on'); rec.querySelector('span').textContent = t('dictate'); toast(t('noSpeech'), 3500); clearInterval(clock); }
   };
-  body.querySelector('#go').onclick = () => { if (stop) { manual = true; stop(); } if (isDeleteCommand(ta.value)) { if (bin) bin.doDelete(); return; } onRead(ta.value, body.querySelector('#out')); };
+  body.querySelector('#go').onclick = () => { if (stop) { manual = true; stop(); } if (!isUndoCommand(ta.value) && isDeleteCommand(ta.value)) { if (bin) bin.doDelete(); return; } onRead(ta.value, body.querySelector('#out')); };
   return ta;
 }
 
@@ -195,6 +207,8 @@ async function tabCommand(body, s, ctx) {
     .concat(db.list('contacts').map(x => ({ label: x.name, names: [x.name], phone: x.phone, email: x.email, about: 'contact', id: x.id })));
   inputBox(body, t('cmdHint'), t('cmdPh'), (text, out) => {
     if (isReceiptCommand(text)) { location.hash = '#/receipts/' + new Date().toISOString().slice(0, 7) + '/snap'; return; }
+    // "undo": the last saved thing (task, note, reminder, mark done...) is taken back
+    if (isUndoCommand(text)) { const l = undoLast(); out.innerHTML = `<p class="${l ? 'okbox' : 'warnbox'}">${esc(l ? t('undone', { what: l }) : t('nothingToUndo'))}</p>`; draft = ''; body.querySelector('#txt').value = ''; return; }
     // "send" alone: the tap on WhatsApp or mail for the message already on screen
     if (isSendCommand(text)) { const b = out.querySelector('#wa, #waPick, #mail, #paidWa'); if (b) { b.click(); } else toast(t('nothingToSend')); return; }
     // "save as template tour": the message on screen becomes a template
@@ -221,12 +235,20 @@ async function tabCommand(body, s, ctx) {
     if (c.kind === 'ask') { const cs = caseOf(c.who); if (!cs) { out.innerHTML = `<p class="warnbox">${esc(t('noCaseFor', { who: c.who || c.type || '' }))}</p>`; return; } sessionStorage.setItem('bakasun.autoAsk', c.type || '1'); location.hash = '#/case/' + cs.id + '/suppliers'; return; }
     if (c.kind === 'open') { if (c.to && c.to.about === 'client') { location.hash = '#/client/' + c.to.id; return; } if (c.to && c.to.about === 'supplier') { location.hash = '#/supplier/' + c.to.id; return; } const cs = caseOf(c.who); if (cs) { location.hash = '#/case/' + cs.id; return; } location.hash = '#/search/' + encodeURIComponent(c.who || ''); return; }
     if (c.kind === 'call') { if (c.to && c.to.phone) { dial(c.to.phone); out.innerHTML = `<p class="okbox">${esc(t('calling', { who: c.to.name }))}</p>`; } else out.innerHTML = `<p class="warnbox">${esc(t('noContact'))}</p>`; return; }
-    if (c.kind === 'task') { const cs = c.who ? caseOf(c.who) : null; db.put('tasks', { title: c.body, who: c.to ? c.to.name.split(' · ')[0] : (c.who || t('me')), phone: c.to && c.to.phone || '', caseId: cs ? cs.id : '', due: Office.iso(Office.addDays(new Date(), 1)), status: TASK.open, lang: s.msgLang || 'he' }); out.innerHTML = `<p class="okbox">${esc(t('taskSaved', { what: c.body, who: c.to ? c.to.name.split(' · ')[0] : (c.who || t('me')) }))}</p>`; return; }
-    if (c.kind === 'note') { db.put('notes', { text: c.body, about: c.to ? c.to.about : '', aboutId: c.to ? c.to.id : '', aboutLabel: c.to ? c.to.name.split(' · ')[0] : c.who, lang: s.uiLang || 'he' }); out.innerHTML = `<p class="okbox">${esc(t('noteSaved', { who: c.to ? c.to.name.split(' · ')[0] : c.who }))}</p>`; return; }
+    if (c.kind === 'task') {
+      const cs = c.who ? caseOf(c.who) : null; const who = c.to ? c.to.name.split(' · ')[0] : (c.who || t('me'));
+      const due = c.due || Office.iso(Office.addDays(new Date(), 1));
+      const tid = db.put('tasks', { title: c.body, who, phone: c.to && c.to.phone || '', caseId: cs ? cs.id : '', due, time: c.time || '', status: TASK.open, lang: s.msgLang || 'he' });
+      remember(t('taskSaved', { what: c.body, who }), () => db.remove('tasks', tid));
+      out.innerHTML = `<div class="okbox stack"><p>${esc(t('taskSaved', { what: c.body, who }))} · ${esc(Office.fmt(due))}${c.time ? ' ' + esc(c.time) : ''}</p><div class="row"><button type="button" class="btn sm" id="toCal">${esc(t('toCalendar'))}</button>${undoBtn()}</div></div>`;
+      out.querySelector('#toCal').onclick = () => toCalendar(taskEvent(db.get('tasks', tid))); wireUndo(out); return;
+    }
+    if (c.kind === 'note') { const nid = db.put('notes', { text: c.body, about: c.to ? c.to.about : '', aboutId: c.to ? c.to.id : '', aboutLabel: c.to ? c.to.name.split(' · ')[0] : c.who, lang: s.uiLang || 'he' }); remember(t('noteSaved', { who: c.to ? c.to.name.split(' · ')[0] : c.who }), () => db.remove('notes', nid)); out.innerHTML = `<div class="okbox stack"><p>${esc(t('noteSaved', { who: c.to ? c.to.name.split(' · ')[0] : c.who }))}</p><div class="row">${undoBtn()}</div></div>`; wireUndo(out); return; }
     if (c.kind === 'reminder') {
       const tid = db.put('tasks', { title: c.reminder.title, due: c.reminder.due, time: c.reminder.time, who: t('me'), status: TASK.open, lang: s.uiLang || 'he' });
-      out.innerHTML = `<div class="okbox stack"><p>${esc(t('reminderSaved', { what: c.reminder.title, when: Office.fmt(c.reminder.due) + (c.reminder.time ? ' ' + c.reminder.time : '') }))}</p><div class="row"><button type="button" class="btn sm" id="toCal">${esc(t('toCalendar'))}</button><span class="sub">${esc(t('calWhy'))}</span></div></div>`;
-      out.querySelector('#toCal').onclick = () => toCalendar(taskEvent(db.get('tasks', tid)));
+      remember(t('reminderSaved', { what: c.reminder.title, when: Office.fmt(c.reminder.due) }), () => db.remove('tasks', tid));
+      out.innerHTML = `<div class="okbox stack"><p>${esc(t('reminderSaved', { what: c.reminder.title, when: Office.fmt(c.reminder.due) + (c.reminder.time ? ' ' + c.reminder.time : '') }))}</p><div class="row"><button type="button" class="btn sm" id="toCal">${esc(t('toCalendar'))}</button>${undoBtn()}<span class="sub">${esc(t('calWhy'))}</span></div></div>`;
+      out.querySelector('#toCal').onclick = () => toCalendar(taskEvent(db.get('tasks', tid))); wireUndo(out);
       return;
     }
     if (c.kind === 'contact') {

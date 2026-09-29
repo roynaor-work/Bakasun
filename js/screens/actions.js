@@ -14,6 +14,11 @@ import { DEFAULTS } from '../data/defaults.js';
 import { resend, remindAll } from './rfq.js';
 import { toCalendar } from '../calendar.js';
 import { taskEvent } from '../logic/ics.js';
+import { remember, undoLast, lastAction } from '../logic/undo.js';
+
+/** The "undo" button under a saved action; the click takes the last action back. */
+export function undoBtn() { return `<button type="button" class="btn sm ghost" data-undo>↩ ${esc(t('undoBtn'))}</button>`; }
+export function wireUndo(out) { out.querySelectorAll('[data-undo]').forEach(b => { b.onclick = () => { const l = undoLast(); b.closest('.okbox, .card, .stack').innerHTML = `<p class="okbox">${esc(l ? t('undone', { what: l }) : t('nothingToUndo'))}</p>`; toast(l ? t('undone', { what: l }) : t('nothingToUndo')); }; }); }
 
 const active = () => db.list('cases', x => Office.ACTIVE.includes(x.status)).sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
 const supByName = who => {
@@ -22,7 +27,7 @@ const supByName = who => {
   return list.find(x => Office.normHe(x.name) === hay) || list.find(x => Office.normHe(x.name).indexOf(hay) >= 0) || list.find(x => hay.indexOf(Office.normHe(x.name)) >= 0 && Office.normHe(x.name).length >= 3) || list.find(x => Office.normHe(x.contact || '').indexOf(hay) >= 0) || null;
 };
 const caseLine = c => [c.client, c.kind, c.date ? Office.fmt(c.date) : ''].filter(Boolean).join(' · ');
-const okbox = (out, html) => { out.innerHTML = `<div class="card stack">${html}</div>`; };
+const okbox = (out, html) => { out.innerHTML = `<div class="card stack">${html}</div>`; wireUndo(out); };
 const pickCase = async (cases, title) => {
   if (cases.length === 1) return cases[0];
   const r = await dialog(title || t('whichCase'), cases.map((c, i) => `<label class="chk"><input type="radio" name="pick" value="${esc(c.id)}"${i === 0 ? ' checked' : ''}> ${esc(caseLine(c))}</label>`).join(''), { ok: t('pickOne') });
@@ -95,10 +100,16 @@ export async function runAction(a, ctx) {
     return true;
   }
 
-  if (a.kind === 'taskDone' || a.kind === 'taskCancel') {
+  if (a.kind === 'taskDone' || a.kind === 'taskCancel' || a.kind === 'snooze') {
     const open = db.list('tasks', x => x.status !== TASK.done);
     const hits = matchTitles(a.who, open, x => x.title);
-    const apply = x => { db.put('tasks', Object.assign({ id: x.id, status: TASK.done }, a.kind === 'taskCancel' ? { note: (x.note ? x.note + ' · ' : '') + t('cancelled') } : {})); okbox(out, `<p class="okbox">${esc(t(a.kind === 'taskCancel' ? 'taskCancelled' : 'taskMarkedDone', { what: x.title }))}</p><div class="row"><a class="btn sm" href="#/tasks">${esc(t('tasks'))}</a></div>`); };
+    const apply = x => {
+      const before = { id: x.id, status: x.status, note: x.note || '', due: x.due || '', time: x.time || '' };
+      if (a.kind === 'snooze') { db.put('tasks', { id: x.id, due: a.when.due, time: a.when.time || x.time || '' }); remember(t('snoozed', { what: x.title, when: Office.fmt(a.when.due) }), () => db.put('tasks', before)); okbox(out, `<p class="okbox">${esc(t('snoozed', { what: x.title, when: Office.fmt(a.when.due) + (a.when.time ? ' ' + a.when.time : '') }))}</p><div class="row"><a class="btn sm" href="#/tasks">${esc(t('tasks'))}</a>${undoBtn()}</div>`); return; }
+      db.put('tasks', Object.assign({ id: x.id, status: TASK.done }, a.kind === 'taskCancel' ? { note: (x.note ? x.note + ' · ' : '') + t('cancelled') } : {}));
+      remember(t(a.kind === 'taskCancel' ? 'taskCancelled' : 'taskMarkedDone', { what: x.title }), () => db.put('tasks', before));
+      okbox(out, `<p class="okbox">${esc(t(a.kind === 'taskCancel' ? 'taskCancelled' : 'taskMarkedDone', { what: x.title }))}</p><div class="row"><a class="btn sm" href="#/tasks">${esc(t('tasks'))}</a>${undoBtn()}</div>`);
+    };
     if (!hits.length) { okbox(out, `<p class="warnbox">${esc(t('noTaskNamed', { what: a.who }))}</p><div class="row"><a class="btn sm" href="#/tasks">${esc(t('tasks'))}</a></div>`); return true; }
     if (hits.length === 1 || hits[0].score > hits[1].score) { apply(hits[0].item); return true; }
     okbox(out, `<div class="title">${esc(t('whichTask'))}</div>${hits.slice(0, 5).map(h => `<button type="button" class="btn" data-task="${esc(h.item.id)}">${esc(h.item.title)}${h.item.due ? ' · ' + esc(Office.fmt(h.item.due)) : ''}</button>`).join('')}`);
@@ -112,7 +123,9 @@ export async function runAction(a, ctx) {
     if (!links.length) { okbox(out, `<p class="warnbox">${esc(t('noOpenRequest', { who: sp.name }))}</p>`); return true; }
     let l = links[0];
     if (links.length > 1) { const c = await pickCase(links.map(x => db.get('cases', x.caseId)).filter(Boolean)); if (!c) return true; l = links.find(x => x.caseId === c.id) || l; }
+    const beforeLink = { id: l.id, status: l.status || '', chosen: l.chosen || '', answeredAt: l.answeredAt || '' };
     db.put('links', { id: l.id, status: 'אושר', chosen: 'כן', answeredAt: l.answeredAt || todayIso() });
+    remember(t('supplierChosen', { who: sp.name, event: '' }), () => db.put('links', beforeLink));
     const cs = db.get('cases', l.caseId) || {};
     const others = db.list('links', x => x.caseId === l.caseId && x.id !== l.id && (db.get('suppliers', x.supplierId) || {}).type === sp.type && !/בוטל|אושר/.test(String(x.status)));
     okbox(out, `<p class="okbox">${esc(t('supplierChosen', { who: sp.name, event: caseLine(cs) }))}</p><div class="row"><a class="btn sm" href="#/case/${esc(cs.id)}/suppliers">${esc(t('open'))}</a>${others.length ? `<span class="hint">${esc(t('othersStillOpen', { n: others.length }))}</span>` : ''}</div>`);
@@ -122,7 +135,8 @@ export async function runAction(a, ctx) {
   if (a.kind === 'printAdd') {
     let cs = a.who ? ctx.caseByName(a.who, a.who.replace(/^[לב](?=[֐-׿])/, '')) : null;
     if (!cs) { const list = active(); if (!list.length) { okbox(out, `<p class="warnbox">${esc(t('noCases'))}</p>`); return true; } cs = await pickCase(list); if (!cs) return true; }
-    db.put('print', { caseId: cs.id, item: a.item, qty: a.qty || '', size: '', status: PRINT_STATUS.plan });
+    const pid = db.put('print', { caseId: cs.id, item: a.item, qty: a.qty || '', size: '', status: PRINT_STATUS.plan });
+    remember(t('printAdded', { item: a.item, event: '' }), () => db.remove('print', pid));
     okbox(out, `<p class="okbox">${esc(t('printAdded', { item: (a.qty ? a.qty + ' ' : '') + a.item, event: caseLine(cs) }))}</p><div class="row"><a class="btn sm" href="#/case/${esc(cs.id)}/lists">${esc(t('open'))}</a></div>`);
     return true;
   }

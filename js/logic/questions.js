@@ -2,7 +2,8 @@
    what is the budget of Shoval, add name tags to the print list, log a call with Arbel tomorrow at 10. Pure parsing, tested.
    The screens act on the result; nothing is sent and nothing is deleted. */
 import { trim, str } from './core.js';
-import { parseReminder } from './travel.js';
+import { parseReminder, takeWhen } from './travel.js';
+import Office from './office.js';
 
 const AMOUNT = /(\d[\d,.]*)\s*(?:ש["״]?ח|שקל(?:ים)?|₪|ils|nis|shekels?)?\s*$/i;
 const R = [
@@ -13,6 +14,7 @@ const R = [
   ['paid', /^(?:העברתי|שילמתי|שלמתי|העברנו|שילמנו|שלמנו)\s+(?:תשלום\s+|את התשלום\s+|כסף\s+)?ל(.+)$|^(?:i )?(?:paid|transferred|sent (?:the )?payment to)\s+(.+)$|^(?:j['’]ai payé|on a payé|payé)\s+(?:à\s+)?(.+)$/i],
   ['callLog', /^(?:תרשמי|רשמי|תוסיפי|הוסיפי|תזכירי לי)\s+(?:לי\s+)?(?:שיחה|טלפון|להתקשר)\s+(?:עם|ל|אל)\s*(.+)$|^(?:log|add|schedule)\s+a call\s+(?:with|to)\s+(.+)$|^(?:note|ajoute)\s+un appel\s+(?:avec|à)\s+(.+)$/i],
   ['taskDone', /^(?:סמני|תסמני|סימני|תסמן)\s+(?:ש|את\s+)?(?:ה?משימה\s+)?(?:של\s+)?(.+?)\s+(?:בוצע|בוצעה|נעשה|נעשתה|הושלם|הושלמה|סגור|סגורה)\s*[.!]?$|^(?:ה?משימה\s+)?(.+?)\s+(?:בוצע|בוצעה|הושלמה|הושלם)\s*[.!]?$|^(?:בוצע|done|fait)\s*[:]\s*(.+)$|^(?:mark|tick)\s+(?:the task\s+)?(.+?)\s+(?:as\s+)?(?:done|complete)$|^(?:marque|coche)\s+(?:la tâche\s+)?(.+?)\s+(?:comme\s+)?(?:faite|terminée)$/i],
+  ['snooze', /^(?:דחי|תדחי|העבירי|תעבירי)\s+(?:את\s+)?(?:ה?משימה|ה?תזכורת)\s+(?:של\s+)?(.+)$|^(?:postpone|snooze|move|push)\s+(?:the\s+)?(?:task|reminder)\s+(?:of\s+)?(.+)$|^(?:reporte|décale|decale)\s+la\s+(?:tâche|tache)\s+(?:de\s+)?(.+)$/i],
   ['taskCancel', /^(?:תבטלי|בטלי|תמחקי|מחקי|תורידי)\s+(?:את\s+)?(?:ה?משימה|ה?תזכורת)\s+(?:של\s+|ל)?(.+)$|^(?:cancel|remove|delete)\s+the (?:task|reminder)\s+(?:of\s+|to\s+)?(.+)$|^(?:annule|supprime)\s+la (?:tâche|tache)\s+(?:de\s+)?(.+)$/i],
   ['chosen', /^(?:סגרי עם|סוגרים עם|נסגר עם|סגרנו עם|בחרי את|תבחרי את|בחרנו את|בחרנו ב|הלכנו על|נלך על)\s*(.+)$|^(.+?)\s+(?:נבחר|נבחרה|אושר|אושרה|סגור|נסגר)\s*[.!]?$|^(?:choose|go with|we chose|confirm)\s+(.+)$|^(.+?)\s+(?:is chosen|is confirmed)$|^(?:on prend|on choisit|on a choisi)\s+(.+)$/i],
   ['printAdd', /^(?:תוסיפי|הוסיפי|תרשמי|רשמי)\s+(?:ל|את\s+)?(?:רשימת\s+ה?דפוס|ה?דפוס|לדפוס)\s*[:]?\s*(.+)$|^add\s+(?:to (?:the )?print(?: list)?)\s*[:]?\s*(.+)$|^ajoute\s+(?:à l['’]impression|à la liste d['’]impression)\s*[:]?\s*(.+)$/i],
@@ -37,6 +39,12 @@ export function parseAction(text, today) {
       const q = /^(\d+)\s+(.+)$|^(.+?)\s+(?:x|×|\*)\s*(\d+)$|^(.+?)\s+(\d+)$/.exec(rest);
       if (q) { out.qty = Number(q[1] || q[4] || q[6]); out.item = trim(q[2] || q[3] || q[5]); } else { out.item = rest; }
       out.who = who; return out;
+    }
+    if (kind === 'snooze') {
+      const w = takeWhen(trim(g[0] || ''), today);
+      out.when = { due: w.due || Office.iso(Office.addDays(w.base, 1)), time: w.time };
+      out.who = trim(w.rest).replace(/^(?:ל|to\s+|à\s+)/, '').replace(/\s+(?:to|à|ל|עד|pour|by)$/i, '');
+      return out;
     }
     if (kind === 'callLog') {
       const rest = trim(g[0] || '');

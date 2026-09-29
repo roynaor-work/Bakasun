@@ -6,7 +6,10 @@ export const HELP = {
       'בסוף אומרים "סיימתי" (או לוחצים על הכפתור "סיימתי"). רק אז הפקודה מתבצעת.',
       'אומרים "מחקי" בסוף (גם בלי הפסקה לפני, גם "למחוק" או "דליט"), וכל מה שהוקלט נמחק. גם הכפתור "מחיקה" עושה את זה.',
       'מה שנמחק נשמר שעה ב"סל" (הכפתור ליד המחיקה). משם מחזירים כל הקלטה. "רוקני את הסל" (או הכפתור בתוך הסל) מוחק הכל לצמיתות, אחרי אישור.',
-      'אפשר גם לכתוב במקום להקליט, ואז ללחוץ "קריאה".'
+      'אפשר גם לכתוב במקום להקליט, ואז ללחוץ "קריאה".',
+      'בזמן הקלטה הכפתור מראה שעון רץ, הטלפון רוטט קצר בהתחלה ובסוף, והמסך לא נכבה.',
+      '"פקודות אחרונות" מעל התיבה: לחיצה על אחת מהן ממלאת אותה מחדש.',
+      'לחיצה ארוכה על סמל האפליקציה במסך הבית: "הקלטה" (פותח את המיקרופון מיד), "צלם חשבונית", "מה יש לי היום".'
     ] },
     { title: 'מעבר בין מסכים: "עברי ל..." ואז שם המסך', items: ['"עברי לספקים", "עברי למשימות", "עברי להיום"', 'שמות המסכים: היום, תיקים, ספקים, לקוחות, משימות, שיחות, הצעות מחיר, כספים, קבלות, הערות, קבוצות, חיפוש, הגדרות, פנייה חדשה, עזרה', 'עובד גם "לכי ל...", "תראי לי את ה...", "מסך ספקים". שם מסך בלבד, בלי "עברי ל", לא מעביר, כדי שמילה בתוך משפט לא תזיז אותך בטעות.'] },
     { title: 'שאלות', items: [
@@ -23,7 +26,9 @@ export const HELP = {
       '"מה עם מלון דניאל": מצב הספק בכל האירועים הפתוחים',
       '"סגרי עם מלון דניאל" / "מלון דניאל נבחר": הספק מסומן כאושר',
       '"העברתי תשלום לדף אור 500": נרשם ששולם, ונפתחת בקשת חשבונית מוכנה. "מה שילמנו לביסקוטי": כל התשלומים',
-      '"סמני שהסיור בוצע" / "תבטלי את המשימה של הסיור"',
+      '"סמני שהסיור בוצע" / "תבטלי את המשימה של הסיור" / "דחי את המשימה של הסיור ליום חמישי"',
+      '"תחזירי" / "בטלי את הפעולה האחרונה" (או הכפתור "בטלי" מתחת לתשובה): הפעולה האחרונה שנשמרה חוזרת אחורה: משימה, הערה, תזכורת, סימון בוצע, דחייה, בחירת ספק, שורת דפוס',
+      '"משימה לדנה: להתקשר לאולם עד יום חמישי" / "משימה: לשלוח הצעה מחר ב-10": התאריך והשעה נלקחים מהמשפט. בלי תאריך: מחר',
       '"תרשמי שיחה עם ארבל מחר ב-10": נכנס לתור השיחות (ו"ליומן")',
       '"תוסיפי לרשימת הדפוס 20 תגי שם לשוב״ל"',
       '"מה התקציב של שוב״ל" / "כמה משתתפים יש לברטלסמן" / "מתי האירוע של שוב״ל"'
@@ -89,7 +94,9 @@ export const HELP = {
       '« où en est l’hôtel Daniel » : l’état du fournisseur sur les événements ouverts',
       '« on prend l’hôtel Daniel » : le fournisseur est marqué confirmé',
       '« j’ai payé Daf Or 500 » : noté payé, et la demande de facture est prête. « combien on a payé à Biscotti »',
-      '« marque la visite comme faite » / « annule la tâche de la visite »',
+      '« marque la visite comme faite » / « annule la tâche de la visite » / « reporte la tâche visite à jeudi »',
+      '« annule la dernière action » / « reviens en arrière » (ou le bouton « Annuler » sous la réponse) : la dernière chose enregistrée est reprise : tâche, note, rappel, marquage fait, report, fournisseur choisi, ligne d’impression',
+      '« tâche pour Dana : appeler la salle jeudi » / « tâche : envoyer le devis demain à 10 » : la date et l’heure viennent de la phrase. Sans date : demain',
       '« note un appel avec Arbel demain à 10 »',
       '« ajoute à l’impression 20 badges pour Shoval »',
       '« quel est le budget de Shoval » / « combien de participants pour Bertelsmann » / « quand est l’événement de Shoval »'
@@ -155,7 +162,9 @@ export const HELP = {
       '“what’s up with Daniel hotel”: the supplier across the open events',
       '“go with Daniel hotel”: the supplier is marked confirmed',
       '“I paid Daf Or 500”: noted as paid, and the invoice request is ready. “how much did we pay Biscotti”',
-      '“mark the tour as done” / “cancel the task tour”',
+      '“mark the tour as done” / “cancel the task tour” / “postpone the task tour to Thursday”',
+      '“undo” / “go back” (or the “Undo” button under the answer): the last saved thing is taken back: task, note, reminder, mark done, postpone, chosen supplier, print line',
+      '“task for Dana: call the venue by Thursday” / “task: send the quote tomorrow at 10”: the date and time come from the sentence. No date: tomorrow',
       '“log a call with Arbel tomorrow at 10”',
       '“add to the print list 20 name tags for Shoval”',
       '“what is the budget of Shoval” / “how many participants for Bertelsmann” / “when is the event of Shoval”'

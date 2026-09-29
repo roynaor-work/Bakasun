@@ -3,7 +3,7 @@ import { t, langName } from '../i18n.js';
 import { db } from '../store.js';
 import { esc, field, empty, dialog, toast, openWhatsApp, dial, confirmDialog } from '../ui.js';
 import Office from '../logic/office.js';
-import { TASK, openTasks, taskMessage } from '../logic/extra.js';
+import { TASK, openTasks, groupTasks, taskMessage } from '../logic/extra.js';
 import { toCalendar } from '../calendar.js';
 import { taskEvent } from '../logic/ics.js';
 
@@ -19,7 +19,7 @@ export function render(ctx) {
   const card = x => {
     const cs = x.caseId ? db.get('cases', x.caseId) : null;
     return `<div class="card" data-id="${esc(x.id)}">
-      <div class="row between"><span class="title">${esc(x.title)}</span><span class="row">${x.status === TASK.sent ? `<span class="badge ok">${esc(t('taskSent'))}</span>` : ''}${x.due ? `<span class="badge ${x.late > 0 ? '' : 'muted'}">${esc(Office.fmt(x.due))}${x.time ? ' ' + esc(x.time) : ''}</span>` : ''}</span></div>
+      <div class="row between"><span class="title">${esc(x.title)}</span><span class="row">${x.status === TASK.sent ? `<span class="badge ok">${esc(t('taskSent'))}</span>` : ''}${x.due ? `<span class="badge ${x.late > 0 ? 'late' : 'muted'}">${esc(Office.fmt(x.due))}${x.time ? ' ' + esc(x.time) : ''}</span>` : ''}</span></div>
       ${x.details ? `<div class="sub" style="white-space:pre-wrap">${esc(x.details)}</div>` : ''}
       <div class="sub">${x.who ? `<b>${esc(x.who)}</b>` : ''}${cs ? ` · <a href="#/case/${esc(cs.id)}">${esc(cs.client)}${cs.date ? ' · ' + esc(Office.fmt(cs.date)) : ''}</a>` : ''}</div>
       ${tab === 'open' ? `<div class="row"><button class="btn wa" data-send>${esc(t('taskSend'))}</button>${x.phone ? `<button class="btn sm" data-dial>${esc(t('call'))}</button>` : ''}${x.due ? `<button class="btn sm" data-cal>${esc(t('toCalendar'))}</button>` : ''}<button class="btn sm ok" data-done>${esc(t('taskDone'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div>`
@@ -28,7 +28,7 @@ export function render(ctx) {
   };
   root.innerHTML = `<header class="top"><h1>${esc(t('tasks'))}</h1><button class="btn sm" id="new">+ ${esc(t('newTask'))}</button></header>
     <div class="tabs"><button class="${tab === 'open' ? 'on' : ''}" data-tab="open">${esc(t('taskOpen'))} (<span class="count">${open.length}</span>)</button><button class="${tab === 'done' ? 'on' : ''}" data-tab="done">${esc(t('doneTasks'))}</button></div>
-    <div class="list sec">${list.length ? list.map(card).join('') : empty(t('noTasks'))}</div>`;
+    <div class="list sec">${!list.length ? empty(t('noTasks')) : tab === 'open' ? groupTasks(list, new Date()).map(g => `<div class="sub grp ${g.key === 'late' ? 'late' : ''}"><b>${esc(t('grp' + g.key[0].toUpperCase() + g.key.slice(1)))}</b> · ${g.items.length}</div>${g.items.map(card).join('')}`).join('') : list.map(card).join('')}</div>`;
 
   root.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; render(ctx); });
   root.querySelector('#new').onclick = () => edit(null, s);

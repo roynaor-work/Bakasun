@@ -51,5 +51,41 @@
         }
       ]
     }
-  }
+  },
+  "shortcuts": [
+    {
+      "name": "הקלטה",
+      "short_name": "הקלטה",
+      "description": "לומר מה לעשות",
+      "url": "./index.html#/assist/listen",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "צלם חשבונית",
+      "short_name": "חשבונית",
+      "url": "./index.html#/receipts/now/snap",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "מה יש לי היום",
+      "short_name": "היום",
+      "url": "./index.html#/today",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
 }

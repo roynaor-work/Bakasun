@@ -2,7 +2,7 @@
    "call Yossi back". Pure parsing, tested; the screens decide what to open. */
 import Office from './office.js';
 import { trim, str, phoneDigits, phonePretty } from './core.js';
-import { parseReminder } from './travel.js';
+import { parseReminder, takeWhen } from './travel.js';
 
 const SEND = /^(?:שלחי|שלח|תשלחי|תשלח|לשלוח|send|envoie|envoyer|envoyez)(?=\s|$)/i;
 const INVOICE = /(חשבונית|חשבון עסקה|דרישת תשלום|invoice|facture)/i;
@@ -68,7 +68,7 @@ export function parseCommand(text, docs, people) {
     if (kind === 'lead') out.body = trim(m[1] || '');
     if (kind === 'quote' || kind === 'open' || kind === 'call') { out.who = trim(m[1] || ''); out.to = findPerson(out.who, people); }
     if (kind === 'ask') { out.type = trim(m[1] || ''); out.who = trim(m[2] || ''); out.to = findPerson(out.who || out.type, people); if (!out.who && out.to) { out.who = out.type; out.type = ''; } }
-    if (kind === 'task') { out.who = trim(m[1] || ''); out.body = trim(m[2] || ''); out.to = out.who ? findPerson(out.who, people) : null; }
+    if (kind === 'task') { out.who = trim(m[1] || ''); const w = takeWhen(trim(m[2] || ''), new Date()); out.body = w.rest || trim(m[2] || ''); out.due = w.due; out.time = w.time; out.to = out.who ? findPerson(out.who, people) : null; }
     if (kind === 'note') { out.who = trim(m[1] || ''); out.body = trim(m[2] || ''); out.to = findPerson(out.who, people); }
     return out;
   }
