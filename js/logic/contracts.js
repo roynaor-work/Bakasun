@@ -146,6 +146,7 @@ export function contractHtml(contract, opts) {
     '.sigs{display:flex;gap:18px;margin-top:10px;page-break-inside:avoid}.sig{flex:1;border:1px solid #E2D8C8;border-radius:8px;padding:8px 10px}.slabel{font-weight:bold;margin-bottom:4px}.pad{height:80px;border-bottom:1px solid #17120F;display:flex;align-items:flex-end;justify-content:center}.pad img{max-height:76px;max-width:100%}.sline{font-size:11.5px;margin-top:4px}' +
     '.foot{border-top:1px solid #E2D8C8;color:#6E6359;font-size:10.5px;padding-top:6px;margin-top:24px;text-align:center}' +
     '.ltr{direction:ltr;display:inline-block;unicode-bidi:isolate}.cl{page-break-inside:avoid}' +
+    '@media screen and (max-width:600px){.parties,.sigs{flex-direction:column}body{padding:16px 14px 40px}}' +
     '</style></head><body>' +
     '<div class="top">' + (opts.logo ? '<img src="' + e(opts.logo) + '" alt="">' : '') + '<div><div class="biz">' + e(p.name) + '</div><div class="small">' + e([p.legal, p.id ? T.regNo + ' ' + p.id : '', p.address].filter(Boolean).join(' · ')) +
     (p.phone || p.email ? ' · ' + ltr([p.phone, p.email].filter(Boolean).join(' · ')) : '') + '</div></div></div>' +
