@@ -105,7 +105,7 @@ p { margin: 0; }
 /* הדמות */
 svg.figure { width: 100%; height: auto; display: block; }
 .stage svg.figure { max-height: 250px; width: auto; }
-.stage canvas.sim { width: 100%; max-width: 360px; aspect-ratio: 360 / 300; border-radius: 18px; display: block; }
+.stage video.exvid { width: 100%; max-width: 360px; max-height: 300px; border-radius: 18px; display: block; object-fit: cover; background: #000; }
 svg.figure .ground { stroke: var(--line); stroke-width: 3; stroke-linecap: round; }
 svg.figure .fig line, svg.figure .fig polyline { stroke: var(--ink); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; fill: none; }
 svg.figure .fig .far { stroke: color-mix(in srgb, var(--ink) 45%, var(--card)); }

@@ -38,6 +38,16 @@ export function speakLang(text, lang = 'en-US', { rate = 0.9, pitch = 1.1 } = {}
   if (!synth || store.profile.voice === false) return false;
   try { synth.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = lang; u.rate = rate; u.pitch = pitch; const v = (synth.getVoices() || []).find(v => v.lang.startsWith(lang.slice(0, 2)) && /natural|neural|online|google|samantha|daniel/i.test(v.name)) || (synth.getVoices() || []).find(v => v.lang.startsWith(lang.slice(0, 2))); if (v) u.voice = v; synth.speak(u); return true; } catch { return false; }
 }
+// אמירה קצרה בלי לבטל את הקודמת (ספירה, רמזי זמן): התור מוגבל כדי לא לצבור פיגור
+export function sayQuick(text, { rate = 1.05 } = {}) {
+  if (!synth || store.profile.voice === false) return false;
+  const t = clean(text); if (!t) return false;
+  if (synth.pending) synth.cancel();
+  const u = new SpeechSynthesisUtterance(t); u.lang = 'he-IL'; u.rate = rate; u.pitch = 1.05; const v = bestVoice(); if (v) u.voice = v;
+  lastSpokeAt = Date.now(); u.onend = () => { lastSpokeAt = Date.now(); };
+  synth.speak(u); return true;
+}
+let lastSpokeAt = 0; export const spokeRecently = (ms = 900) => Date.now() - lastSpokeAt < ms;
 export const stopSpeak = () => { try { synth && synth.cancel(); } catch { /* */ } };
 
 // ---- טקסטים מנוקדים לממשק ----

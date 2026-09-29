@@ -75,9 +75,10 @@ export class Figure {
   play(ex, speed = 1) {
     const frames = Array.isArray(ex) ? ex : ex.frames;
     this.setProp(Array.isArray(ex) ? null : ex.prop);
-    this.stop(); this.frames = frames; this.speed = speed;
-    const start = performance.now();
-    const tick = now => { this.draw(poseAt(frames, (now - start) * this.speed)); this.raf = requestAnimationFrame(tick); };
+    this.stop(); this.frames = frames; this.speed = speed; this.cyc = 0;
+    const start = performance.now(), total = cycleMs(frames);
+    // onRep: נקרא בכל סיבוב שלם של הסרטון (ספירת חזרות יחד עם הדמות)
+    const tick = now => { const ms = (now - start) * this.speed; const c = Math.floor(ms / total); if (c > this.cyc) { this.cyc = c; if (this.onRep) this.onRep(c); } this.draw(poseAt(frames, ms)); this.raf = requestAnimationFrame(tick); };
     this.raf = requestAnimationFrame(tick);
   }
   still(ex) { const frames = Array.isArray(ex) ? ex : ex.frames; this.setProp(Array.isArray(ex) ? null : ex.prop); this.stop(); this.draw(frames[0][0]); }
