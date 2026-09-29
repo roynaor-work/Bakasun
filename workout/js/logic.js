@@ -199,8 +199,8 @@ export function perseveranceLine(st) {
 // נספר לכל היותר 160% מהצפוי לתרגיל. מנוחות בין תרגילי האימון נספרות. המתנות: אחת על כל tokenMinutes דקות, עד 8
 export function honestTime(items, rest = 0) {
   let seconds = 0, fast = 0, honestWork = 0;
-  for (const i of items) { if (!i.done || i.skipped) continue; const exp = i.type === 'time' ? i.target : Math.max(10, i.target * 2.2); const secs = i.secs || 0; if (secs < exp * .45) { fast++; continue; } seconds += Math.min(secs, exp * 1.6); if (isWorkBlock(i.block)) honestWork++; }
+  for (const i of items) { if (!i.done || i.skipped) continue; const exp = i.type === 'time' ? i.target : Math.max(10, i.target * 2.2); const secs = i.secs || 0; if (secs < exp * .45) { fast++; continue; } seconds += Math.min(secs, exp * 2); if (isWorkBlock(i.block)) honestWork++; }
   seconds += Math.max(0, honestWork - 1) * rest;
   return { seconds: Math.round(seconds), fast };
 }
-export function tokensFor(honestSeconds, tokenMinutes = 3) { return Math.min(8, Math.floor(honestSeconds / (Math.max(1, tokenMinutes) * 60))); }
+export function tokensFor(honestSeconds, tokenMinutes = 3) { return Math.min(12, Math.floor(honestSeconds / (Math.max(1, tokenMinutes) * 60))); }

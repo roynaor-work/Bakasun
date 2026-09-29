@@ -148,10 +148,10 @@ test('honest time: fast-marked items are not counted, rests count, tokens per mi
   const items = [
     { type: 'time', target: 30, done: 30, block: 'האימון', secs: 31 },      // כן
     { type: 'reps', target: 10, done: 10, block: 'האימון', secs: 3 },       // מהר מדי: צפוי 22 שניות
-    { type: 'reps', target: 10, done: 10, block: 'האימון', secs: 60 },      // כן, נספר עד 35 (160%)
+    { type: 'reps', target: 10, done: 10, block: 'האימון', secs: 60 },      // כן, נספר עד 44 (200%)
     { type: 'time', target: 20, done: 0, skipped: true, block: 'האימון', secs: 20 }, // דילוג
   ];
   const h = L2.honestTime(items, 15);
-  assert.equal(h.fast, 1); assert.equal(h.seconds, Math.round(31 + 35.2 + 15));
-  assert.equal(L2.tokensFor(15 * 60, 3), 5); assert.equal(L2.tokensFor(100, 3), 0); assert.equal(L2.tokensFor(60 * 60, 3), 8);
+  assert.equal(h.fast, 1); assert.equal(h.seconds, Math.round(31 + 44 + 15));
+  assert.equal(L2.tokensFor(15 * 60, 3), 5); assert.equal(L2.tokensFor(100, 3), 0); assert.equal(L2.tokensFor(60 * 60, 3), 12);
 });
