@@ -92,7 +92,7 @@ test('action commands: quote, ask, open, call, task, note, lead, today', () => {
 test('the message body starts after the recipient at a marker: "ask" makes a question, "say/write" strips the marker, a bare ש is grammar', () => {
   const people = [{ label: 'דנה לוי', names: ['דנה לוי', 'דנה'], phone: '0521111111', about: 'client' }];
   let c = parseCommand('שלח הודעת וואטסאפ לטלפון 0544974644 שאל מתי את מגיעה הביתה', [], people);
-  assert.equal(c.kind, 'message'); assert.equal(c.to.phone, '0544974644'); assert.equal(c.body, 'מתי את מגיעה הביתה?');
+  assert.equal(c.kind, 'message'); assert.equal(c.to.phone, '054-4974644'); assert.equal(c.body, 'מתי את מגיעה הביתה?');
   assert.equal(parseCommand('שלחי וואטסאפ לדנה, ההודעה: מגיעה ב-10', [], people).body, 'מגיעה ב-10');
   assert.equal(parseCommand('שלחי וואטסאפ לדנה תכתבי אני מאחרת בעשר דקות', [], people).body, 'אני מאחרת בעשר דקות');
   assert.equal(parseCommand('שלחי הודעה לדנה תגידי לה שהאוטובוס יוצא בשמונה', [], people).body, 'האוטובוס יוצא בשמונה');
@@ -105,7 +105,7 @@ test('the message body starts after the recipient at a marker: "ask" makes a que
 test('without any marker, everything after the number or the name is the message; a group is a group', () => {
   const people = [{ label: 'דנה לוי', names: ['דנה לוי', 'דנה'], phone: '0521111111', about: 'client' }];
   let c = parseCommand('שלח הודעה לטלפון 0544974644 בוואטסאפ זו היא בדיקה', [], people);
-  assert.equal(c.kind, 'message'); assert.equal(c.to.phone, '0544974644'); assert.equal(c.body, 'זו היא בדיקה');
+  assert.equal(c.kind, 'message'); assert.equal(c.to.phone, '054-4974644'); assert.equal(c.body, 'זו היא בדיקה');
   c = parseCommand('שלחי וואטסאפ לדנה זו בדיקה שנייה', [], people);
   assert.equal(c.kind, 'message'); assert.equal(c.to.name, 'דנה לוי'); assert.equal(c.body, 'זו בדיקה שנייה');
   c = parseCommand('send a whatsapp to 0544974644 this is a test', [], people);
@@ -125,4 +125,14 @@ test('the supplier behind a shared offer is guessed from a phone, a mail domain,
   assert.equal(guessSupplier('שלום וירג׳יני, מדברת ארבל ממלון דניאל. הצעה ל-16 חדרים', sups).id, 'a');
   assert.equal(guessSupplier('הצעה לאוטובוס 19-24/11: 3,200 ליום, גרשון טורס', sups).id, 'c');
   assert.equal(guessSupplier('הצעה למלון 16 חדרים 450 שח', sups), null);
+});
+
+test('a phone in any grouping the speech engine produces is found, prettified, and the message follows it', () => {
+  let c = parseCommand('שלחי לעצמי בוואטסאפ בטלפון 052-58708-38 תשאל האם הבדיקה עובדת', [], []);
+  assert.equal(c.kind, 'message'); assert.equal(c.to.phone, '052-5870838'); assert.equal(c.body, 'האם הבדיקה עובדת?');
+  c = parseCommand('שלחי הודעה ל-052 587 0838 מגיעה ב-10', [], []);
+  assert.equal(c.to.phone, '052-5870838'); assert.equal(c.body, 'מגיעה ב-10');
+  c = parseCommand('send a whatsapp to +972-52-587-0838 hello there', [], []);
+  assert.equal(c.to.phone, '052-5870838'); assert.equal(c.body, 'hello there');
+  assert.equal(parseCommand('תגידי לדנה שאני מאחרת', [], [{ label: 'דנה', names: ['דנה'], about: 'client' }]).phoneFound, '');
 });

@@ -1,7 +1,7 @@
 /* Spoken or typed commands: "send the bank confirmation to 052-1234567", "ask Roy for an invoice: Community O, 580777894, 3,000 + VAT",
    "call Yossi back". Pure parsing, tested; the screens decide what to open. */
 import Office from './office.js';
-import { trim, str, phoneDigits } from './core.js';
+import { trim, str, phoneDigits, phonePretty } from './core.js';
 import { parseReminder } from './travel.js';
 
 const SEND = /^(?:שלחי|שלח|תשלחי|תשלח|לשלוח|send|envoie|envoyer|envoyez)(?=\s|$)/i;
@@ -80,12 +80,14 @@ export function parseCommand(text, docs, people) {
     out.kind = 'supplierQuote'; out.supplier = bp; return out;
   }
   const email = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/.exec(t);
-  const phone = /(?:\+972[\s\-]?|0)(5\d)[\s\-]?(\d{3})[\s\-]?(\d{4})\b/.exec(t) || /(?:\+|00)\d[\d\s\-]{7,16}\d/.exec(t);
+  // an Israeli mobile in any grouping the speech engine produces ("052-58708-38", "052 587 0838", "0525870838"), or an international number
+  const phone = /(?:\+972[\s\-]?|0)5\d(?:[\s\-]?\d){7}(?!\d)/.exec(t) || /(?:\+|00)\d[\d\s\-]{7,16}\d/.exec(t);
+  out.phoneFound = phone ? phonePretty(phone[0]) : '';
   // "save Roy's phone 052-1234567" / "הטלפון של רועי 052..." / "המייל של דנה dana@x.com"
   const contact = CONTACT.exec(t);
   if (contact && (phone || email)) {
     const who = trim(contact[1] || contact[2] || '').replace(/^(?:של|of|de)\s+/i, '');
-    out.kind = 'contact'; out.contact = { name: who, phone: phone ? phone[0].replace(/\s/g, '') : '', email: email ? email[0] : '' };
+    out.kind = 'contact'; out.contact = { name: who, phone: phone ? phonePretty(phone[0]) : '', email: email ? email[0] : '' };
     out.to = findPerson(who, people); return out;
   }
   // a free message: "send a message to Roy: I'm late" / "תגידי לדנה ש..." / "mail à Marc : ..."
@@ -106,7 +108,7 @@ export function parseCommand(text, docs, people) {
     const hit = email || phone;
     if (hit && head.indexOf(hit[0]) >= 0) {
       const body = cleanBody(head.slice(head.indexOf(hit[0]) + hit[0].length), true);
-      return body ? { via, body, to: email ? { email: email[0] } : { phone: phone[0].replace(/\s/g, '') } } : null;
+      return body ? { via, body, to: email ? { email: email[0] } : { phone: phonePretty(phone[0]) } } : null;
     }
     let best = null;
     (people || []).forEach(p => (p.names || []).forEach(n => {
@@ -122,15 +124,17 @@ export function parseCommand(text, docs, people) {
   const msg = MESSAGE.exec(t);
   if (msg) {
     const via = /(מייל|אימייל|mail|e-mail|email|courriel)/i.test(msg[1] || '') ? 'email' : 'whatsapp';
-    const who = trim(msg[2]); const body = cleanBody(msg[3] || '', !/[:,]/.test(t.slice(0, t.length - trim(msg[3] || '').length)));
+    // "send myself whatsapp ask..." : the channel word after the name is not part of the name
+    const who = trim(msg[2]).replace(/\s+(?:ב?וואטסאפ|ב?ווצאפ|ב?מייל|באימייל|הודעה|on whatsapp|by whatsapp|via whatsapp|a whatsapp|by e?-?mail|par whatsapp|par mail|un whatsapp)$/i, '').trim();
+    const body = cleanBody(msg[3] || '', !/[:,]/.test(t.slice(0, t.length - trim(msg[3] || '').length)));
     out.kind = 'message'; out.via = via; out.body = body;
-    out.to = email ? { email: email[0] } : phone ? { phone: phone[0].replace(/\s/g, '') } : isGroup(who) ? { name: who.replace(/^(?:ה)?קבוצ(?:ה|ת)\s*(?:של\s+)?|^(?:the\s+)?group\s*(?:of\s+)?|^(?:le\s+|au\s+)?groupe\s*(?:de\s+|des\s+)?/i, '').trim() || who, group: true } : findPerson(who, people);
+    out.to = email ? { email: email[0] } : phone ? { phone: phonePretty(phone[0]) } : isGroup(who) ? { name: who.replace(/^(?:ה)?קבוצ(?:ה|ת)\s*(?:של\s+)?|^(?:the\s+)?group\s*(?:of\s+)?|^(?:le\s+|au\s+)?groupe\s*(?:de\s+|des\s+)?/i, '').trim() || who, group: true } : findPerson(who, people);
     if (!out.to) out.to = { name: who };
     return out;
   }
   { const p = positional(); if (p) { out.kind = 'message'; out.via = p.via; out.body = p.body; out.to = p.to; return out; } }
   if (email) out.to = { email: email[0] };
-  else if (phone) out.to = { phone: phone[0].replace(/\s/g, '') };
+  else if (phone) out.to = { phone: phonePretty(phone[0]) };
   let body = t.replace(SEND, '').replace(email ? email[0] : '', '').replace(phone ? phone[0] : '', '');
   // the document: the library entry whose title words appear in the text (longest match)
   let best = null, bestLen = 0;

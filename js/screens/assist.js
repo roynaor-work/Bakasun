@@ -237,6 +237,8 @@ async function tabCommand(body, s, ctx) {
       out.innerHTML = `<p class="okbox">${esc(t('contactSaved', { name: c.to ? c.to.name : c.contact.name, value: c.contact.phone || c.contact.email }))}</p>`; return;
     }
     if (c.kind === 'message') {
+      // "send myself..." : her own number from the settings
+      if (c.to && !c.to.phone && !c.to.email && /^(?:ל?עצמי|אליי|אלי|לי|myself|me|to me|moi|à moi|moi-même)$/i.test(String(c.to.name || '').trim())) c.to = { name: t('me'), phone: s.bizPhone || DEFAULTS.bizPhone, about: 'me' };
       const has = c.via === 'email' ? c.to.email : c.to.phone;
       // "send Dana the template tour": the body is one of her templates, with the first name filled in
       const ref = templateRef(c.body);
@@ -253,10 +255,12 @@ async function tabCommand(body, s, ctx) {
       const wp = out.querySelector('#waPick'); if (wp) wp.onclick = () => openWhatsAppPick(msg());
       const ml = out.querySelector('#mail'); if (ml) { ml.href = 'mailto:' + encodeURIComponent(c.to.email) + '?subject=' + encodeURIComponent(s.bizName || DEFAULTS.bizName) + '&body=' + encodeURIComponent(msg()); ml.target = '_blank'; }
       const ac = out.querySelector('#addContact'); if (ac) ac.onclick = async () => {
-        const r = await dialog(c.to.name || '', `<div class="grid2">${field('phone', t('fPhone'), c.to.phone || '', { ltr: true, inputmode: 'tel' })}${field('email', t('fEmail'), c.to.email || '', { ltr: true, inputmode: 'email' })}</div>`, { ok: t('save') });
+        // the number she just said is already filled in; only what is still missing is asked
+        const pre = c.to.phone || c.phoneFound || '';
+        const r = await dialog(c.to.name || t('newContact'), (c.to.name ? '' : field('name', t('fName'), '')) + `<div class="grid2">${field('phone', t('fPhone'), pre, { ltr: true, inputmode: 'tel' })}${field('email', t('fEmail'), c.to.email || '', { ltr: true, inputmode: 'email' })}</div>`, { ok: t('save') });
         if (!r || (!r.phone && !r.email)) return;
         const col = c.to.about === 'client' ? 'clients' : c.to.about === 'supplier' ? 'suppliers' : c.to.about === 'team' ? 'team' : '';
-        if (col && c.to.id) db.put(col, { id: c.to.id, phone: r.phone || undefined, email: r.email || undefined }); else db.put('team', { name: c.to.name, phone: r.phone, email: r.email });
+        if (col && c.to.id) db.put(col, { id: c.to.id, phone: r.phone || undefined, email: r.email || undefined }); else db.put('team', { name: c.to.name || r.name || r.phone, phone: r.phone, email: r.email });
         toast(t('personSaved')); body.querySelector('#go').click();
       };
       return;
@@ -269,7 +273,7 @@ async function tabCommand(body, s, ctx) {
       <p class="hint">${esc(t('shareHint'))}</p></div>`;
     const msg = () => out.querySelector('[name=msg]').value;
     const ac = out.querySelector('#addContact'); if (ac) ac.onclick = async () => {
-      const r = await dialog(c.to.name, `<div class="grid2">${field('phone', t('fPhone'), '', { ltr: true, inputmode: 'tel' })}${field('email', t('fEmail'), '', { ltr: true, inputmode: 'email' })}</div>`, { ok: t('save') });
+      const r = await dialog(c.to.name, `<div class="grid2">${field('phone', t('fPhone'), c.phoneFound || '', { ltr: true, inputmode: 'tel' })}${field('email', t('fEmail'), '', { ltr: true, inputmode: 'email' })}</div>`, { ok: t('save') });
       if (!r || (!r.phone && !r.email)) return;
       const col = c.to.about === 'client' ? 'clients' : c.to.about === 'supplier' ? 'suppliers' : c.to.about === 'team' ? 'team' : '';
       if (col && c.to.id) db.put(col, { id: c.to.id, phone: r.phone || undefined, email: r.email || undefined }); else db.put('team', { name: c.to.name, phone: r.phone, email: r.email });
