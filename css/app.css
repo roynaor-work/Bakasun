@@ -12,12 +12,14 @@
   :root:not([data-theme="light"]) {
     --bg: #17141A; --card: #221E24; --ink: #F2ECE4; --ink-2: #D9D0C6; --muted: #A79C93; --line: #3A3339;
     --accent: #E8735C; --accent-soft: #3D2622; --ok: #7FCFA4; --ok-soft: #1E3529; --warn: #E6B85A; --warn-soft: #3B3118; --wa: #43C47C; --nav: #1D191F;
+    --ok-ink: #BFE8D0; --late: #FF8A73; --st-none-line: #6E3F38; --st-none-bg: #3A2623; --st-wait-line: #6E5A2E; --st-wait-bg: #3A3118; --st-offer-line: #365472; --st-offer-bg: #1F2E3E; --st-chosen-line: #2F5A3E; --st-chosen-bg: #1E3529;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #17141A; --card: #221E24; --ink: #F2ECE4; --ink-2: #D9D0C6; --muted: #A79C93; --line: #3A3339;
   --accent: #E8735C; --accent-soft: #3D2622; --ok: #7FCFA4; --ok-soft: #1E3529; --warn: #E6B85A; --warn-soft: #3B3118; --wa: #43C47C; --nav: #1D191F;
+  --ok-ink: #BFE8D0; --late: #FF8A73; --st-none-line: #6E3F38; --st-none-bg: #3A2623; --st-wait-line: #6E5A2E; --st-wait-bg: #3A3118; --st-offer-line: #365472; --st-offer-bg: #1F2E3E; --st-chosen-line: #2F5A3E; --st-chosen-bg: #1E3529;
   color-scheme: dark;
 }
 /* she may pick the theme herself (settings → "אישי"): html[data-theme="dark"] above forces dark; html[data-theme="light"] keeps the
@@ -144,7 +146,7 @@ a.card, a.card:visited { color: inherit; text-decoration: none; }
 .modal-body h3 { font-size: 16px; margin-top: 8px; }
 .card.row { flex-direction: row; align-items: center; gap: 10px; }
 
-.okbox{background:#DCEBE2;color:#2E6A4E;border-radius:10px;padding:10px 12px;font-weight:600}
+.okbox{background:var(--ok-soft, #DCEBE2);color:var(--ok-ink, #2E6A4E);border-radius:10px;padding:10px 12px;font-weight:600}
 
 .f .pick{align-self:flex-start;margin-top:4px}
 .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -168,17 +170,23 @@ ul.help, ul.open { margin: 6px 0 0; padding-inline-start: 18px; }
 ul.help li, ul.open li { margin: 4px 0; line-height: 1.45; }
 ul.open a { color: var(--ink); text-decoration: underline dotted; }
 .btn[hidden] { display: none; }
-.chip.st-none { border-color: #E0B4AA; background: #FBEDEA; }
-.chip.st-waiting { border-color: #E6C98A; background: #FBF3DF; }
-.chip.st-offers { border-color: #A9C9E8; background: #E9F2FB; }
-.chip.st-chosen { border-color: #A6D3B4; background: #E6F5EA; }
+.chip.st-none { border-color: var(--st-none-line, #E0B4AA); background: var(--st-none-bg, #FBEDEA); }
+.chip.st-waiting { border-color: var(--st-wait-line, #E6C98A); background: var(--st-wait-bg, #FBF3DF); }
+.chip.st-offers { border-color: var(--st-offer-line, #A9C9E8); background: var(--st-offer-bg, #E9F2FB); }
+.chip.st-chosen { border-color: var(--st-chosen-line, #A6D3B4); background: var(--st-chosen-bg, #E6F5EA); }
 
 /* tasks grouped by day; an overdue badge is red */
 .grp{margin-top:.6rem;padding:.15rem .2rem;border-bottom:1px solid var(--line,#e5e5e5)}
-.grp.late,.badge.late{color:#b00020}
-.badge.late{border-color:#b00020}
+.grp.late,.badge.late{color:var(--late, #b00020)}
+.badge.late{border-color:var(--late, #b00020)}
 
 /* the tiny copy button next to a phone number or an e-mail (Roy's rule: everything that can be copied has a copy button) */
 .copyq { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; margin: 0 4px; padding: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--muted); vertical-align: middle; cursor: pointer; flex: none; }
 .copyq:active { background: var(--line); }
 .copyq svg { width: 15px; height: 15px; }
+
+/* phones and touch: every tappable thing at least 40px (Roy's rule for the new modules, applied everywhere) */
+@media (max-width: 899px), (pointer: coarse) {
+  .btn.sm, .chip, .tabs button { min-height: 40px; }
+  .copyq { min-width: 40px; min-height: 40px; }
+}

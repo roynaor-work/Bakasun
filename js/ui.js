@@ -113,7 +113,7 @@ if (typeof document !== 'undefined' && !document.__bakasunCopy) {
   document.__bakasunCopy = true;
   document.addEventListener('click', e => {
     const b = e.target && e.target.closest ? e.target.closest('[data-copy],[data-copy-of]') : null; if (!b) return;
-    // a bare data-copy with no value belongs to a screen that wires it itself (rules.js): not ours
+    // a bare data-copy with no value is not ours (a screen may wire its own)
     if (!b.dataset.copyOf && !b.getAttribute('data-copy')) return;
     e.preventDefault();
     copyText(String(copyTarget(b)).trim());
