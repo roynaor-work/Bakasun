@@ -179,6 +179,9 @@ test('invoice request: a new client with a dictated company number, without "ל�
   assert.equal(r.client, 'חברת אלפא בע״מ'); assert.equal(r.taxId, '514572312'); assert.equal(r.items[0].amount, 5000); assert.equal(r.channel, 'mail');
   const r2 = parseInvoiceRequest('חשבונית למועצה אזורית גליל עליון חפ 500226221, 12,000 + מע"מ', []);
   assert.equal(r2.client, 'מועצה אזורית גליל עליון'); assert.equal(r2.taxId, '500226221'); assert.equal(r2.total, 12000);
+  // the recognizer dropped the letters "ח.פ.", and said "לי": the name is still the words before the number
+  const r4 = parseInvoiceRequest('תוציא לי חשבונית לחברת אלפא בע"מ 514572312 על 5000 שקל עבור יום גיבוש', []);
+  assert.equal(r4.client, 'חברת אלפא בע"מ'); assert.equal(r4.taxId, '514572312'); assert.equal(r4.items[0].amount, 5000);
   const r3 = parseInvoiceRequest('invoice for Alpha Events Ltd, company no. 51-234-5678, 3000 plus VAT', []);
   assert.equal(r3.client, 'Alpha Events Ltd'); assert.equal(r3.taxId, '512345678');
 });

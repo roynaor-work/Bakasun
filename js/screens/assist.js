@@ -231,8 +231,10 @@ async function tabCommand(body, s, ctx) {
     { const tn = isSaveTemplateCommand(text); if (tn) { const ta2 = out.querySelector('[name=msg], textarea'); if (ta2 && ta2.value.trim()) { saveTemplate(db, tn, ta2.value); toast(t('templateSaved', { name: tn }), 3000); } else toast(t('nothingToSave')); return; } }
     if (isEmptyBinCommand(text)) { emptyBins().then(ok => { if (ok) { draft = ''; body.querySelector('#txt').value = ''; const b = body.querySelector('#bin'); if (b) b.hidden = true; } }); return; }
     // "open a working group with Eran and Moshe": the group card, then her answer to "how?" by voice
-    if (answerWorkGroup(out, text)) return;
-    { const wg = parseWorkGroup(text); if (wg) { showWorkGroup(out, wg, { s, people: peopleNow, caseByName }); afterAnswer(out, s); return; } }
+    // each step of the group is its own recording: the box is emptied so the next answer does not ride on the last sentence
+    const clearBox = () => { draft = ''; const ta0 = body.querySelector('#txt'); if (ta0) ta0.value = ''; };
+    if (answerWorkGroup(out, text)) { clearBox(); return; }
+    { const wg = parseWorkGroup(text); if (wg) { showWorkGroup(out, wg, { s, people: peopleNow, caseByName }); afterAnswer(out, s); clearBox(); return; } }
     // participants, budget, run of show, files, contract, checklist, reminders, board, history: before "go to", so that
     // "go to day-of mode" is not read as a screen name
     const act2 = parseAction2(text);

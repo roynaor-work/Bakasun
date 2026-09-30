@@ -4,7 +4,9 @@ import { parseWorkGroup, splitNames, resolveNames, groupOption, briefText } from
 
 test('"open a working group with five people Eran Moshe Haim David and Eran": the names, without the count, no duplicates', () => {
   const r = parseWorkGroup('פתח לי בבקשה קבוצת עבודה עם חמש אנשים ערן משה חיים דוד וערן');
-  assert.deepEqual(r, { names: ['ערן משה חיים דוד', 'ערן'], caseName: '' });
+  assert.deepEqual(r, { names: ['ערן משה חיים דוד', 'ערן'], caseName: '', opt: null });
+  assert.deepEqual(parseWorkGroup('פתחי קבוצת עבודה לשובל עם מרינה רותם ועידית וואטסאפ'), { names: ['מרינה רותם', 'עידית'], caseName: 'שובל', opt: 'wa' });
+  assert.deepEqual(parseWorkGroup('פתחי קבוצת עבודה לשובל עם מרינה, רותם ועידית, במייל'), { names: ['מרינה', 'רותם', 'עידית'], caseName: 'שובל', opt: 'mail' });
   const people = [{ label: 'ערן לוי', names: ['ערן לוי'], phone: '050-1', about: 'team', id: 'a' }, { label: 'משה חיים', names: ['משה חיים'], email: 'm@x', about: 'contact', id: 'b' }, { label: 'יד ושם · מרינה ביקלניצקי', names: ['יד ושם', 'מרינה ביקלניצקי'], email: 'm@y', about: 'client', id: 'c' }];
   const m = resolveNames(r.names.concat(['מרינה']), people);
   assert.deepEqual(m.map(x => [x.name, x.known]), [['ערן לוי', true], ['משה חיים', true], ['דוד', false], ['מרינה ביקלניצקי', true]]);
@@ -12,8 +14,8 @@ test('"open a working group with five people Eran Moshe Haim David and Eran": th
 });
 
 test('the event and the separators: "for Shoval with Dana, Rotem and Marina"; English and French too', () => {
-  assert.deepEqual(parseWorkGroup('פתחי קבוצת עבודה לשובל עם דנה, רותם ומרינה'), { names: ['דנה', 'רותם', 'מרינה'], caseName: 'שובל' });
-  assert.deepEqual(parseWorkGroup('open a working group for the Bertelsmann event with Dana and Rotem'), { names: ['Dana', 'Rotem'], caseName: 'Bertelsmann' });
+  assert.deepEqual(parseWorkGroup('פתחי קבוצת עבודה לשובל עם דנה, רותם ומרינה'), { names: ['דנה', 'רותם', 'מרינה'], caseName: 'שובל', opt: null });
+  assert.deepEqual(parseWorkGroup('open a working group for the Bertelsmann event with Dana and Rotem'), { names: ['Dana', 'Rotem'], caseName: 'Bertelsmann', opt: null });
   assert.deepEqual(parseWorkGroup('crée un groupe de travail avec Dana et Rotem').names, ['Dana', 'Rotem']);
   assert.equal(parseWorkGroup('מה חסר לשובל'), null);
   assert.deepEqual(splitNames('ערן, משה חיים דוד וערן'), ['ערן', 'משה חיים דוד']);

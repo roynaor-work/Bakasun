@@ -20,7 +20,11 @@ export function parseWorkGroup(text) {
   if (cm) { caseName = trim(cm[1]).replace(/\s+(?:event|événement|אירוע)$/i, ''); rest = trim(cm[2]); }
   else { const wm = /^(?:עם|with|avec)\s+(.+)$/i.exec(rest); if (wm) rest = trim(wm[1]); else if (/^(?:ל|של\s+|עבור\s+|for\s+|pour\s+|de\s+)/i.test(rest)) { caseName = rest.replace(/^(?:ל|של\s+|עבור\s+|for\s+|pour\s+|de\s+)/i, '').trim(); rest = ''; } }
   rest = rest.replace(COUNT, ' ').replace(/\s+/g, ' ').trim();
-  return { names: splitNames(rest), caseName };
+  // "... with Marina, Rotem and Idit, whatsapp": the way she wants, said in the same breath, is not a person
+  let opt = null;
+  const tail = /\s*,?\s*(?:ב?וואטסאפ|ב?ווצאפ|ב?ואטסאפ|whats\s?app|ב?מייל|ב?אימייל|e?-?mail|תדריך|brief|משימות|משימה לכולם|tasks)\s*$/i.exec(rest);
+  if (tail) { opt = groupOption(trim(tail[0]).replace(/^,\s*/, '').replace(/^ו(?=[א-ת])/, '')); if (typeof opt !== 'string') opt = null; rest = rest.slice(0, tail.index).trim(); }
+  return { names: splitNames(rest), caseName, opt };
 }
 
 /** "ערן, משה חיים דוד וערן" → words; the screen groups them into known full names. Duplicates are dropped. */
@@ -63,7 +67,7 @@ export function resolveNames(names, people) {
 }
 
 const OPTION = [
-  ['wa', /^(?:ב?וואטסאפ|ב?ווצאפ|whats\s?app|on whatsapp|par whatsapp|sur whatsapp)\s*[.!]?$/i],
+  ['wa', /^(?:ב?וואטסאפ|ב?ווצאפ|ב?ואטסאפ|whats\s?app|on whatsapp|par whatsapp|sur whatsapp)\s*[.!]?$/i],
   ['mail', /^(?:ב?מייל|ב?אימייל|ב?דוא"?ל|e?-?mail|by e?-?mail|par mail|par e-?mail|courriel)\s*[.!]?$/i],
   ['brief', /^(?:תדריך|ה?תדריך|סיכום|דף פרויקט|brief|briefing|summary|le brief|résumé)\s*[.!]?$/i],
   ['tasks', /^(?:משימות|משימה לכולם|משימות לכולם|tasks|a task for everyone|tâches|des tâches)\s*[.!]?$/i],

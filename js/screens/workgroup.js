@@ -22,7 +22,7 @@ export function showWorkGroup(out, req, ctx) {
   // a group already saved on this event: her new names join it
   const prev = cs ? db.list('workgroups', x => x.caseId === cs.id)[0] : null;
   if (prev) { g.id = prev.id; (prev.members || []).forEach(m => { if (!g.members.some(x => Office.normHe(x.name) === Office.normHe(m.name))) g.members.push(m); }); }
-  draw(out, g, ctx);
+  draw(out, g, ctx, req.opt || null);
 }
 
 /** She answered the question by voice ("whatsapp", "mail", "add Dana"): the matching button on the card on screen. */
