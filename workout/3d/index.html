@@ -1,0 +1,105 @@
+<!doctype html><html dir="rtl" lang="he"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>הדמות בתלת־ממד</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&family=Heebo:wght@700;900&display=swap">
+<script type="importmap">{"imports":{"three":"./lib/three.module.min.js"}}</script>
+<style>
+:root{--bg:#F4F1FF;--card:#fff;--ink:#1E1B3A;--muted:#7B7797;--line:#E6E2F5;--accent:#6C4CF1;--accent-soft:#EDE8FF;--shadow:0 8px 24px rgba(60,40,140,.10);--f-head:Heebo,Rubik,Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14122A;--card:#1F1C38;--ink:#F1EEFF;--muted:#9D98BF;--line:#34305A;--accent:#8B72FF;--accent-soft:#2B2553;--shadow:0 8px 24px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14122A;--card:#1F1C38;--ink:#F1EEFF;--muted:#9D98BF;--line:#34305A;--accent:#8B72FF;--accent-soft:#2B2553;--shadow:0 8px 24px rgba(0,0,0,.35);color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:Rubik,Heebo,'Noto Sans Hebrew',Arial,sans-serif;font-size:17px;line-height:1.5;direction:rtl;text-align:right;unicode-bidi:embed;padding-inline:16px;padding-block:20px 40px}
+h1,h2,h3{font-family:var(--f-head);margin:0;line-height:1.2;text-wrap:balance}
+.wrap{max-width:820px;margin:0 auto;display:grid;gap:14px}
+.muted{color:var(--muted)}.small{font-size:14px}
+select{font:inherit;font-size:18px;font-weight:700;padding:10px 14px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);width:100%;max-width:420px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-weight:700;cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.stage{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:10px;display:grid;gap:8px}
+.view{position:relative;width:100%;aspect-ratio:6/5;border-radius:16px;overflow:hidden;background:#E9E3FF}
+.view canvas{width:100%!important;height:100%!important;display:block}
+.tag{position:absolute;top:10px;inset-inline-start:12px;background:rgba(30,27,58,.7);color:#fff;border-radius:999px;padding:3px 12px;font-size:14px;font-weight:800}
+.note{background:var(--accent-soft);border-radius:16px;padding:12px 14px;font-size:15px}
+</style>
+<div class="wrap">
+  <div><h1>הדמות בתלת־ממד: בסיס</h1><p class="muted">דמות תלת־ממדית עם שלד מלא (Kenney, חינם), שמונעת מאותן פוזות של הקטלוג. זה הבסיס של "אופציה 4": מכאן משפרים דמות, תאורה ופוזות.</p></div>
+  <div class="chips"><select id="sel"></select><button class="chip" id="rot">🔄 סיבוב מצלמה</button><button class="chip" id="skin">👕 בגדים</button></div>
+  <div class="chips" id="quick"></div>
+  <div class="stage"><div class="view" id="view"><span class="tag" id="tag">טוען דמות...</span></div></div>
+  <div class="note">מה שעובד כבר: כל 47 התרגילים מונעים אוטומטית מהפוזות הקיימות, כפות רגליים על הרצפה, צל, סיבוב מצלמה. מה שעוד לא: הבעות פנים, אצבעות, פוזות מותאמות לתלת־ממד (למשל ידיים לפנים בסקוואט), ודמות של ילד.</div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { FBXLoader } from './lib/loaders/FBXLoader.js';
+import { EXERCISES, byId } from '../js/exercises.js';
+import { poseAt } from '../js/figure.js';
+import { PoseRig } from './rig.js';
+const CATS = { warm: 'חימום', jump: 'ניתור', speed: 'מהירות', core: 'בטן', legs: 'רגליים', upper: 'כוח עליון', stretch: 'מתיחות' };
+const isFront = p => Math.abs((p.le[0] - p.neck[0]) + (p.re[0] - p.neck[0])) < 10 && Math.abs(p.le[0] - p.re[0]) > 14;
+const viewOf = frames => frames.filter(f => isFront(f[0])).length * 2 > frames.length;
+const sel = document.getElementById('sel');
+for (const cat in CATS) { const og = document.createElement('optgroup'); og.label = CATS[cat]; EXERCISES.filter(e => e.cat === cat).forEach(e => { const o = document.createElement('option'); o.value = e.id; o.textContent = e.name; og.appendChild(o); }); sel.appendChild(og); }
+const QUICK = ['jumping-jacks', 'squats', 'push-ups', 'jog', 'lunges', 'crunches', 'plank', 'burpees'];
+const quick = document.getElementById('quick'); QUICK.forEach(id => { const b = document.createElement('button'); b.className = 'chip'; b.dataset.id = id; b.textContent = byId[id].name; b.onclick = () => { sel.value = id; show(id); }; quick.appendChild(b); });
+
+// ---- סצנה ----
+const view = document.getElementById('view'), W = 720, H = 600;
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setSize(W, H, false); renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.outputColorSpace = THREE.SRGBColorSpace;
+view.appendChild(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#E9E3FF'); scene.fog = new THREE.Fog('#E9E3FF', 500, 900);
+const camera = new THREE.PerspectiveCamera(32, W / H, 1, 2000);
+let camAngle = 0.35, camDist = 430; const camTarget = new THREE.Vector3(0, 105, 0);
+function placeCam() { camera.position.set(camTarget.x + Math.sin(camAngle) * camDist, camTarget.y + camDist * .28, Math.cos(camAngle) * camDist); camera.lookAt(camTarget); }
+placeCam();
+scene.add(new THREE.HemisphereLight('#ffffff', '#b9a7ff', 1.1));
+const sun = new THREE.DirectionalLight('#fff7e6', 2.2); sun.position.set(120, 260, 180); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.camera.left = -200; sun.shadow.camera.right = 200; sun.shadow.camera.top = 260; sun.shadow.camera.bottom = -60; sun.shadow.camera.near = 50; sun.shadow.camera.far = 800; sun.shadow.bias = -0.0005; scene.add(sun);
+// רצפה: פרקט בהיר + צל רך, וקיר אחורי
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(1400, 1400), new THREE.MeshStandardMaterial({ color: '#E7D6BC', roughness: .95 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+const lines = new THREE.Group(); for (let x = -700; x < 700; x += 46) { const m = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1400), new THREE.MeshBasicMaterial({ color: '#CDB79A' })); m.rotation.x = -Math.PI / 2; m.position.set(x, .2, 0); lines.add(m); } scene.add(lines);
+const wall = new THREE.Mesh(new THREE.PlaneGeometry(1400, 600), new THREE.MeshStandardMaterial({ color: '#F1ECFF', roughness: 1 })); wall.position.set(0, 300, -260); scene.add(wall);
+const base = new THREE.Mesh(new THREE.BoxGeometry(1400, 8, 6), new THREE.MeshStandardMaterial({ color: '#D9D2F2' })); base.position.set(0, 4, -258); scene.add(base);
+
+// ---- דמות ----
+const SKINS = ['skaterMaleA', 'skaterFemaleA', 'criminalMaleA']; let skinIdx = 0;
+const tl = new THREE.TextureLoader();
+const skins = SKINS.map(n => { const t = tl.load(`./model/${n}.png`); t.colorSpace = THREE.SRGBColorSpace; t.flipY = true; return t; });
+let rig = null, model = null, mesh = null;
+const S = 68 / 111; // רגל תלת-ממד (111) = רגל דו-ממד (68)
+import('./model/character.js').then(({ FBX_B64 }) => { const bin = atob(FBX_B64), buf = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i); return new FBXLoader().parse(buf.buffer, './model/'); }).then(obj => {
+  model = obj; obj.scale.setScalar(S);
+  obj.traverse(o => { if (o.isMesh) { mesh = o; o.castShadow = true; o.frustumCulled = false; o.material = new THREE.MeshStandardMaterial({ map: skins[0], roughness: .8, metalness: 0 }); } });
+  scene.add(obj);
+  rig = new PoseRig(obj, S);
+  document.getElementById('tag').textContent = byId[cur].name;
+  show(cur);
+}).catch(e => { document.getElementById('tag').textContent = 'שגיאה בטעינה'; console.log(e); });
+
+let cur = 'jumping-jacks', frames = null, front = false, t0 = performance.now();
+function show(id) {
+  cur = id; const ex = byId[id]; frames = ex.frames; front = viewOf(frames); t0 = performance.now();
+  quick.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c.dataset.id === id));
+  document.getElementById('tag').textContent = ex.name;
+  if (model) model.rotation.y = front ? 0 : Math.PI / 2; // מהצד: הדמות פונה ימינה על המסך
+  frameCamera();
+  try { localStorage.setItem('k3d.ex', id); } catch {}
+}
+// מצלמה שמתאימה לתרגיל: עוברים על כל הפוזות, מודדים איפה הדמות (ראש, ידיים, רגליים) ומכוונים גובה ומרחק
+const KEY = ['Head_end', 'LeftHand', 'RightHand', 'LeftToes', 'RightToes', 'Hips', 'LeftLeg', 'RightLeg'];
+function frameCamera() {
+  if (!rig || !frames) return;
+  const box = new THREE.Box3(), v = new THREE.Vector3();
+  for (const [pose] of frames) { rig.apply(pose, front); for (const n of KEY) { const b = rig.b[n]; if (b) { b.getWorldPosition(v); box.expandByPoint(v); } } }
+  box.expandByScalar(14); box.min.y = Math.min(box.min.y, 0);
+  const c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
+  camTarget.set(c.x * .6, c.y, 0);
+  const need = Math.max(size.y, size.x / camera.aspect, size.z / camera.aspect) * 1.12;
+  camDist = need / 2 / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) + 40;
+  placeCam();
+}
+sel.onchange = () => show(sel.value);
+document.getElementById('rot').onclick = () => { camAngle += Math.PI / 6; placeCam(); };
+document.getElementById('skin').onclick = () => { skinIdx = (skinIdx + 1) % skins.length; if (mesh) mesh.material.map = skins[skinIdx]; };
+try { const s = localStorage.getItem('k3d.ex'); if (s && byId[s]) cur = s; } catch {}
+sel.value = cur;
+function loop() { if (rig && frames) { rig.apply(poseAt(frames, performance.now() - t0), front); } renderer.render(scene, camera); requestAnimationFrame(loop); }
+loop();
+window.__k3d = { show: id => show(id), ready: () => !!rig };
+</script>
