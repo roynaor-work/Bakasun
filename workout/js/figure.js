@@ -8,6 +8,7 @@ const ease = t => t * t * (3 - 2 * t); // smoothstep: יוצא ונכנס לאט
 export function lerpPose(a, b, t) {
   const out = {};
   for (const j of JOINTS) { out[j] = [a[j][0] + (b[j][0] - a[j][0]) * t, a[j][1] + (b[j][1] - a[j][1]) * t]; const za = a[j][2] || 0, zb = b[j][2] || 0; if (za || zb) out[j][2] = za + (zb - za) * t; } // z אופציונלי: עומק לתלת-ממד
+  if (a.lat != null || b.lat != null) { const la = a.lat ?? .32, lb = b.lat ?? .32; out.lat = la + (lb - la) * t; }
   if (a.rope != null || b.rope != null) {
     const ra = a.rope ?? b.rope, rb = b.rope ?? a.rope;
     out.rope = ra + (rb - ra) * t;
