@@ -5,6 +5,9 @@ import { FBXLoader } from '../3d/lib/loaders/FBXLoader.js';
 
 export { THREE };
 export const SCALE = 68 / 111; // רגל תלת-ממד (111 יחידות) = רגל דו-ממד (68), כך שהדמות בקנה מידה של פוזות הקטלוג
+// מבט לתלת-ממד: ex.view3d ('front'/'side') גובר; אחרת לפי רוב הפריימים (ידיים סימטריות סביב הצוואר = מלפנים)
+export const isFrontPose = p => Math.abs((p.le[0] - p.neck[0]) + (p.re[0] - p.neck[0])) < 10 && Math.abs(p.le[0] - p.re[0]) > 14;
+export const viewFront = ex => ex.view3d ? ex.view3d === 'front' : ex.frames.filter(f => isFrontPose(f[0])).length * 2 > ex.frames.length;
 export const hasWebGL = () => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; } };
 
 // ---- ערכות: צובעים את אזורי החולצה והמכנסיים בטקסטורה של Kenney (1024x1024: חולצה משמאל למטה, מכנסיים מימין למטה) ----
@@ -64,7 +67,7 @@ export function outlineMaterial(width = 1.9, color = '#1B1740') {
 
 // ---- מניע השלד מפוזות דו-ממד ----
 const _q = new THREE.Quaternion(), _pq = new THREE.Quaternion(), _v = new THREE.Vector3(), _w = new THREE.Vector3();
-const PAIRS = [['Hips', 'Spine'], ['Spine', 'Chest'], ['Chest', 'UpperChest'], ['UpperChest', 'Neck'], ['Neck', 'Head'], ['LeftUpLeg', 'LeftLeg'], ['LeftLeg', 'LeftFoot'], ['RightUpLeg', 'RightLeg'], ['RightLeg', 'RightFoot'], ['LeftArm', 'LeftForeArm'], ['LeftForeArm', 'LeftHand'], ['RightArm', 'RightForeArm'], ['RightForeArm', 'RightHand'], ['LeftFoot', 'LeftToes'], ['RightFoot', 'RightToes']];
+const PAIRS = [['Hips', 'Spine'], ['Spine', 'Chest'], ['Chest', 'UpperChest'], ['UpperChest', 'Neck'], ['Neck', 'Head'], ['LeftUpLeg', 'LeftLeg'], ['LeftLeg', 'LeftFoot'], ['RightUpLeg', 'RightLeg'], ['RightLeg', 'RightFoot'], ['LeftArm', 'LeftForeArm'], ['LeftForeArm', 'LeftHand'], ['RightArm', 'RightForeArm'], ['RightForeArm', 'RightHand'], ['LeftFoot', 'LeftToes'], ['RightFoot', 'RightToes'], ['LeftHand', 'LeftHandIndex1'], ['RightHand', 'RightHandIndex1']]; // כף היד עם ילד, כדי שאפשר יהיה לכוון אותה (שטוחה על הרצפה)
 export class PoseRig {
   constructor(model) {
     this.model = model; this.b = {}; model.traverse(o => { if (o.isBone) this.b[o.name] = o; });
@@ -82,7 +85,7 @@ export class PoseRig {
   // pose: פוזה מהקטלוג (200x200, רצפה 182). front: מבט מלפנים (u,v,0), אחרת מהצד (0,v,u). at: מיקום כפות הרגליים בעולם (ברירת מחדל: לפי הפוזה)
   apply(pose, front, at = null) {
     this.model.updateWorldMatrix(true, false); this.model.getWorldQuaternion(this.qmInv).invert();
-    const P = ([x, y]) => front ? new THREE.Vector3(x - 100, 182 - y, 0) : new THREE.Vector3(0, 182 - y, x - 100);
+    const P = ([x, y, z = 0]) => front ? new THREE.Vector3(x - 100, 182 - y, z) : new THREE.Vector3(-z, 182 - y, x - 100); /* z אופציונלי: עומק */
     const d = (a, b) => P(b).sub(P(a));
     const L = front ? 'Right' : 'Left', R = front ? 'Left' : 'Right';
     const hipW = P(pose.hip).applyQuaternion(this.model.quaternion), off = this.hipsRest.clone().applyQuaternion(this.model.quaternion);
@@ -98,12 +101,51 @@ export class PoseRig {
     const armDir = (a, b, who) => { const v = d(a, b); if (lat) v.x += side(who) * lat * v.length(); return v; };
     this.aim(L + 'Arm', armDir(pose.neck, pose.le, L)); this.aim(L + 'ForeArm', armDir(pose.le, pose.lh, L).multiplyScalar(1));
     this.aim(R + 'Arm', armDir(pose.neck, pose.re, R)); this.aim(R + 'ForeArm', armDir(pose.re, pose.rh, R));
-    const flat = new THREE.Vector3(0, -0.2, 1); this.aim('LeftFoot', flat); this.aim('RightFoot', flat);
-    // תיקון רצפה: כשיש כף רגל או יד על הרצפה בפוזה, הנקודה הנמוכה נוגעת בגובה הבסיס
+    for (const [hand, h] of [[L + 'Hand', pose.lh], [R + 'Hand', pose.rh]]) if (h[1] >= 178) { this.aim(hand, new THREE.Vector3(0, -0.08, 1)); /* כף יד על הרצפה: אצבעות קדימה */ if (this.handTwist && this.rest[hand]) { const bn = this.b[hand]; bn.rotateOnAxis(this.rest[hand].dir.clone().applyQuaternion(this.rest[hand].q.clone().invert()).normalize(), this.handTwist * (hand.startsWith('Left') ? 1 : -1)); } }
+    // כף רגל: שטוחה (בעמידה) או בהמשך השוק כשהיא באוויר / על קצות האצבעות (שכיבות סמיכה, פלאנק)
+    const flat = new THREE.Vector3(0, -0.05, 1);
+    for (const [foot, k, f] of [['LeftFoot', pose[L === 'Left' ? 'lk' : 'rk'], pose[L === 'Left' ? 'lf' : 'rf']], ['RightFoot', pose[R === 'Right' ? 'rk' : 'lk'], pose[R === 'Right' ? 'rf' : 'lf']]]) {
+      const shin = d(k, f); const tiptoe = (f[1] >= 170 && f[1] < 178) || (f[1] >= 178 && shin.y < -0.35 * shin.length() && Math.abs(shin.z) > 0.6 * shin.length()); /* עקב מורם, או שוק נוטה (שכיבות סמיכה) = על קצות האצבעות */
+      this.aim(foot, f[1] < 170 ? new THREE.Vector3(shin.x, shin.y * .3 - .3 * shin.length(), shin.z + .6 * shin.length()) : tiptoe ? new THREE.Vector3(0, -0.9, 0.45) : flat);
+    }
+    this.ropeUpdate(pose, front, base);
+    // תיקון רצפה: הנקודה הנמוכה של כפות הרגליים (עד קצה האצבעות), הידיים (עד קצה האצבעות) והראש נוגעת בגובה הבסיס, עם שוליים קטנים כדי שהסוליה לא תיבלע
     this.model.updateMatrixWorld(true);
-    const onFloor = Math.max(pose.lf[1], pose.rf[1]) >= 178 || Math.max(pose.lh[1], pose.rh[1]) >= 178;
-    if (onFloor) { let minY = Infinity; for (const n of ['LeftToes', 'RightToes', 'LeftFoot', 'RightFoot', 'LeftHand', 'RightHand']) { const b = this.b[n]; if (!b) continue; b.getWorldPosition(_v); if (_v.y < minY) minY = _v.y; } this.model.position.y -= minY - base.y; this.model.updateMatrixWorld(true); }
+    const onFloor = Math.max(pose.lf[1], pose.rf[1]) >= 178 || Math.max(pose.lh[1], pose.rh[1]) >= 178 || pose.head[1] >= 160;
+    if (onFloor) { let minY = Infinity; for (const n of ['LeftToes_end', 'RightToes_end', 'LeftToes', 'RightToes', 'LeftFoot', 'RightFoot', 'LeftHand', 'RightHand', 'LeftHandIndex3_end', 'RightHandIndex3_end', 'LeftHandThumb2_end', 'RightHandThumb2_end', 'LeftForeArm', 'RightForeArm', 'Head']) { const b = this.b[n]; if (!b) continue; b.getWorldPosition(_v); const r = n === 'Head' ? 14 * SCALE * 1.6 : n.includes('Hand') ? 3 : 4; if (_v.y - r < minY) minY = _v.y - r; } this.model.position.y -= minY - base.y; this.model.updateMatrixWorld(true); }
   }
+}
+
+// חבל קפיצה: כשלפוזה יש rope (קטלוג: 300 = מתחת לרגליים, -80 = מעל הראש), מציירים צינור מכף יד לכף יד דרך נקודת שליטה מתחת/מעל
+PoseRig.prototype.ropeUpdate = function (pose, front, base) {
+  const has = pose.rope != null && this.model.parent;
+  if (!has) { if (this.rope) this.rope.visible = false; return; }
+  if (!this.rope) { this.rope = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshStandardMaterial({ color: '#F97316', roughness: .6 })); this.rope.castShadow = true; this.model.parent.add(this.rope); }
+  this.model.updateMatrixWorld(true);
+  const a = new THREE.Vector3(), b = new THREE.Vector3(); this.b.LeftHand.getWorldPosition(a); this.b.RightHand.getWorldPosition(b);
+  const mid = a.clone().add(b).multiplyScalar(.5); const below = pose.rope > 100;
+  // נקודת השליטה: מתחת לרצפה מעט (החבל עובר מתחת לנעליים) או גבוה מעל הראש; במבט מלפנים החבל עובר לפני הגוף, מהצד לצד הרחוק
+  // בעקומת בזייה ריבועית אמצע הקשת = 0.5*ידיים + 0.5*שליטה, לכן השליטה = 2*יעד - גובה הידיים. יעד: מתחת לסוליות או 30 מעל הראש
+  let headY = 0; this.b.Head_end.getWorldPosition(_v); headY = _v.y;
+  const targetY = below ? base.y - 4 : headY + 30;
+  const ctrl = new THREE.Vector3(mid.x, 2 * targetY - mid.y, mid.z + (front ? 44 : 0));
+  const curve = new THREE.QuadraticBezierCurve3(a, ctrl, b);
+  this.rope.geometry.dispose(); this.rope.geometry = new THREE.TubeGeometry(curve, 24, 1.3, 6, false); this.rope.visible = true;
+};
+
+// אביזרים מהקטלוג (ex.prop): הדום/מדרגה מעץ, קיר אחד, או שני קירות (מסדרון). בתרגילי צד: x דו-ממדי -100 = X בעולם
+export function propMesh(prop) {
+  if (!prop) return null;
+  const g = new THREE.Group();
+  const wood = new THREE.MeshStandardMaterial({ color: '#C89B6D', roughness: .8 }), wallMat = new THREE.MeshStandardMaterial({ color: '#CFC6F3', roughness: 1 });
+  if (prop.type === 'box') { const m = new THREE.Mesh(new THREE.BoxGeometry(prop.w, prop.h, 80), wood); m.position.set(prop.x + prop.w / 2 - 100, prop.h / 2, 0); m.castShadow = m.receiveShadow = true; g.add(m); const top = new THREE.Mesh(new THREE.BoxGeometry(prop.w + 4, 3, 84), new THREE.MeshStandardMaterial({ color: '#E2B98A' })); top.position.set(prop.x + prop.w / 2 - 100, prop.h + 1, 0); g.add(top); }
+  else if (prop.type === 'wall') { const x = prop.x - 100 + (prop.x < 100 ? -8 : 8); /* הקיר מעט מאחורי נקודת המגע כדי שהידיים/הגב לא יעברו דרכו */ const near = x > 0; /* קיר בצד המצלמה (+X) מסתיר את הדמות, לכן שקוף למחצה */ const m = new THREE.Mesh(new THREE.BoxGeometry(8, 240, 420), near ? new THREE.MeshStandardMaterial({ color: '#CFC6F3', roughness: 1, transparent: true, opacity: .4 }) : wallMat); m.position.set(x, 120, 0); m.receiveShadow = !near; g.add(m); }
+  else if (prop.type === 'walls') {
+    // מסדרון: הקיר הרחוק מהמצלמה מלא, הקיר הקרוב (צד +X, שם המצלמה) נמוך ושקוף למחצה כדי לא להסתיר את הדמות
+    const far = new THREE.Mesh(new THREE.BoxGeometry(8, 240, 420), wallMat); far.position.set(-98, 120, 0); far.receiveShadow = true; g.add(far);
+    const near = new THREE.Mesh(new THREE.BoxGeometry(8, 70, 420), new THREE.MeshStandardMaterial({ color: '#CFC6F3', roughness: 1, transparent: true, opacity: .45 })); near.position.set(98, 35, 0); g.add(near);
+  }
+  return g;
 }
 
 // ---- תאורה וסצנות ----

@@ -1,0 +1,42 @@
+<!doctype html><html dir="rtl" lang="he"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>גיליון פוזות</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;800&display=swap">
+<style>body{margin:0;background:#1E1B3A;color:#fff;font-family:Rubik,Arial,sans-serif;direction:rtl}#sheet{display:block;width:100%;max-width:760px;margin:0 auto}#tag{position:fixed;top:8px;inset-inline-start:8px;background:#6C4CF1;padding:4px 10px;border-radius:999px;font-size:13px}</style></head><body>
+<span id="tag">מרנדר...</span>
+<canvas id="sheet"></canvas>
+<!-- גיליון ביקורת: לכל תרגיל שתי פוזות מפתח (ההתחלה והשיא של התנועה) זו לצד זו, כדי שרועי יעבור על הפוזות ויעיר. ?page=0..3&per=12 -->
+<script type="module">
+import { THREE, loadCharacter, KITS3D, lights, room, propMesh, viewFront } from '../js/char3d.js';
+import { EXERCISES } from '../js/exercises.js';
+const u = new URL(location.href), PAGE = +(u.searchParams.get('page') || 0), PER = +(u.searchParams.get('per') || 12);
+const list = EXERCISES.slice(PAGE * PER, PAGE * PER + PER);
+const CW = 340, CH = 260, COLS = 2, ROW_H = CH + 44;
+const sheet = document.getElementById('sheet'); sheet.width = CW * COLS + 30; sheet.height = list.length * ROW_H + 20; const g2 = sheet.getContext('2d');
+g2.fillStyle = '#1E1B3A'; g2.fillRect(0, 0, sheet.width, sheet.height);
+const off = document.createElement('canvas'); off.width = CW; off.height = CH;
+const renderer = new THREE.WebGLRenderer({ canvas: off, antialias: true, preserveDrawingBuffer: true }); renderer.setSize(CW, CH, false); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(32, CW / CH, 1, 3000); room(scene, false); lights(scene);
+const ch = await loadCharacter(KITS3D.maccabi); scene.add(ch.model);
+const KEY = ['Head_end', 'LeftHand', 'RightHand', 'LeftToes', 'RightToes', 'Hips', 'LeftLeg', 'RightLeg'];
+function frame(frames, front) {
+  const box = new THREE.Box3(), v = new THREE.Vector3();
+  for (const [pose] of frames) { ch.rig.apply(pose, front); for (const n of KEY) { const b = ch.rig.b[n]; if (b) { b.getWorldPosition(v); box.expandByPoint(v); } } }
+  box.expandByScalar(14); box.min.y = Math.min(box.min.y, 0);
+  const c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
+  const need = Math.max(size.y, size.x / camera.aspect, size.z / camera.aspect) * 1.15, dist = need / 2 / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) + 40;
+  const target = new THREE.Vector3(c.x * .6, c.y, 0); camera.position.set(target.x + Math.sin(.4) * dist, target.y + dist * .28, Math.cos(.4) * dist); camera.lookAt(target);
+}
+// שתי הפוזות שהכי שונות זו מזו (התחלה ושיא התנועה)
+function keyPoses(frames) { if (frames.length < 2) return [frames[0][0], frames[0][0]]; let best = [0, 1], bd = -1; for (let i = 0; i < frames.length; i++) for (let j = i + 1; j < frames.length; j++) { let d = 0; for (const k of ['head', 'hip', 'lh', 'rh', 'lf', 'rf', 'lk', 'rk']) d += Math.hypot(frames[i][0][k][0] - frames[j][0][k][0], frames[i][0][k][1] - frames[j][0][k][1]); if (d > bd) { bd = d; best = [i, j]; } } return [frames[best[0]][0], frames[best[1]][0]]; }
+let row = 0, propObj = null;
+for (const ex of list) {
+  const front = viewFront(ex); ch.model.rotation.y = front ? 0 : Math.PI / 2; if (propObj) scene.remove(propObj); propObj = propMesh(ex.prop); if (propObj) scene.add(propObj); frame(ex.frames, front);
+  const poses = keyPoses(ex.frames);
+  poses.forEach((pose, i) => { ch.rig.apply(pose, front); renderer.render(scene, camera); const x = (COLS - 1 - i) * (CW + 10) + 10, y = row * ROW_H + 40; g2.drawImage(off, x, y); g2.strokeStyle = '#6C4CF1'; g2.lineWidth = 2; g2.strokeRect(x, y, CW, CH); });
+  g2.fillStyle = '#fff'; g2.font = '800 22px Rubik, Arial'; g2.textAlign = 'right'; g2.textBaseline = 'middle'; g2.fillText(`${PAGE * PER + row + 1}. ${ex.name}`, sheet.width - 14, row * ROW_H + 22);
+  g2.fillStyle = '#B9B4D9'; g2.font = '500 14px Rubik, Arial'; g2.textAlign = 'left'; g2.fillText(ex.type === 'time' ? `${ex.base} שניות` : `${ex.base} חזרות`, 14, row * ROW_H + 22);
+  row++;
+}
+document.getElementById('tag').textContent = `עמוד ${PAGE + 1}: תרגילים ${PAGE * PER + 1} עד ${PAGE * PER + list.length}`;
+window.__sheetDone = true;
+</script></body></html>

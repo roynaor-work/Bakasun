@@ -26,12 +26,10 @@ select{font:inherit;font-size:18px;font-weight:700;padding:10px 14px;border-radi
   <div class="note">מה שעובד כבר: כל 47 התרגילים מונעים אוטומטית מהפוזות הקיימות, כפות רגליים על הרצפה, צל, סיבוב מצלמה. מה שעוד לא: הבעות פנים, אצבעות, פוזות מותאמות לתלת־ממד (למשל ידיים לפנים בסקוואט), ודמות של ילד.</div>
 </div>
 <script type="module">
-import { THREE, loadCharacter, KITS3D, lights, room } from '../js/char3d.js';
+import { THREE, loadCharacter, KITS3D, lights, room, propMesh, viewFront } from '../js/char3d.js';
 import { EXERCISES, byId } from '../js/exercises.js';
 import { poseAt } from '../js/figure.js';
 const CATS = { warm: 'חימום', jump: 'ניתור', speed: 'מהירות', core: 'בטן', legs: 'רגליים', upper: 'כוח עליון', stretch: 'מתיחות' };
-const isFront = p => Math.abs((p.le[0] - p.neck[0]) + (p.re[0] - p.neck[0])) < 10 && Math.abs(p.le[0] - p.re[0]) > 14;
-const viewOf = frames => frames.filter(f => isFront(f[0])).length * 2 > frames.length;
 const sel = document.getElementById('sel');
 for (const cat in CATS) { const og = document.createElement('optgroup'); og.label = CATS[cat]; EXERCISES.filter(e => e.cat === cat).forEach(e => { const o = document.createElement('option'); o.value = e.id; o.textContent = e.name; og.appendChild(o); }); sel.appendChild(og); }
 const QUICK = ['jumping-jacks', 'squats', 'push-ups', 'jog', 'lunges', 'crunches', 'plank', 'burpees'];
@@ -44,14 +42,14 @@ room(scene, matchMedia('(prefers-color-scheme: dark)').matches); lights(scene);
 let camAngle = 0.35, camDist = 430; const camTarget = new THREE.Vector3(0, 105, 0);
 function placeCam() { camera.position.set(camTarget.x + Math.sin(camAngle) * camDist, camTarget.y + camDist * .28, Math.cos(camAngle) * camDist); camera.lookAt(camTarget); }
 placeCam();
-let ch = null, cur = 'jumping-jacks', frames = null, front = false, t0 = performance.now();
+let propObj = null, ch = null, cur = 'jumping-jacks', frames = null, front = false, t0 = performance.now();
 const KIT_ORDER = ['maccabi', 'israel', 'red', 'orange']; let kitIdx = 0;
 loadCharacter(KITS3D.maccabi).then(c => { ch = c; scene.add(c.model); show(cur); }).catch(e => { document.getElementById('tag').textContent = 'שגיאה בטעינה'; console.log(e); });
 function show(id) {
-  cur = id; const ex = byId[id]; frames = ex.frames; front = viewOf(frames); t0 = performance.now();
+  cur = id; const ex = byId[id]; frames = ex.frames; front = viewFront(ex); t0 = performance.now();
   quick.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c.dataset.id === id));
   document.getElementById('tag').textContent = ex.name;
-  if (ch) { ch.model.rotation.y = front ? 0 : Math.PI / 2; frameCamera(); }
+  if (ch) { ch.model.rotation.y = front ? 0 : Math.PI / 2; if (propObj) scene.remove(propObj); propObj = propMesh(ex.prop); if (propObj) scene.add(propObj); frameCamera(); }
   try { localStorage.setItem('k3d.ex', id); } catch {}
 }
 const KEY = ['Head_end', 'LeftHand', 'RightHand', 'LeftToes', 'RightToes', 'Hips', 'LeftLeg', 'RightLeg'];
@@ -70,7 +68,8 @@ document.getElementById('rot').onclick = () => { camAngle += Math.PI / 6; placeC
 document.getElementById('skin').onclick = () => { kitIdx = (kitIdx + 1) % KIT_ORDER.length; const k = KITS3D[KIT_ORDER[kitIdx]]; if (ch) ch.setKit(k); document.getElementById('skin').textContent = '👕 ' + k.name; };
 try { const s = localStorage.getItem('k3d.ex'); if (s && byId[s]) cur = s; } catch {}
 sel.value = cur;
-function loop() { if (ch && frames) ch.rig.apply(poseAt(frames, performance.now() - t0), front); renderer.render(scene, camera); requestAnimationFrame(loop); }
+const SPEED = 0.6; // קצב ההדגמה: איטי וברור (רועי, 30/09)
+function loop() { if (ch && frames) ch.rig.apply(poseAt(frames, (performance.now() - t0) * SPEED), front); renderer.render(scene, camera); requestAnimationFrame(loop); }
 loop();
-window.__k3d = { show: id => show(id), ready: () => !!ch };
+window.__k3d = { show: id => show(id), ready: () => !!ch, get ch() { return ch; }, THREE };
 </script>
