@@ -479,7 +479,7 @@ function playGame(g, onDone) {
   activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, music: store.profile.music !== false, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t),
     tokens: () => store.tokens - 1, onContinue: () => { if (store.tokens <= 1) return false; store.addToken(-1); return true; }, // המשחק הזה עולה מתנה אחת בסוף; המשך עולה עוד אחת
     progress: store.progress[g.id] || null, onProgress: p => { if (p) store.setProgress(g.id, p); },
-    onEnd({ score }) { store.recordGame(g.id, score); activeGame = null; onDone(score); } });
+    onEnd({ score }) { store.recordGame(g.id, score, false, g.cost || 1); activeGame = null; onDone(score); } });
 }
 
 // הוקי מול טלפון אחר: חדר עם קוד דרך הענן המשפחתי. בלי מתנה (פעילות משפחתית), הניקוד נרשם כרגיל
@@ -678,10 +678,10 @@ function arcade() {
     ${(() => { const ul = unlockedList(); const groups = ul ? [{ id: 'open', name: 'פתוחים לך עכשיו', emoji: '🔓', games: GAMES.filter(g => ul.includes(g.id)) }, ...GAME_GROUPS.map(gr => ({ ...gr, name: gr.name + ' (נעולים)', games: gr.games.filter(g => !ul.includes(g.id)) })).filter(gr => gr.games.length)] : GAME_GROUPS; return groups.map(gr => `
       <h2>${gr.emoji} ${gr.name}</h2>
       ${gr.games.map(g => { const locked = ul && !ul.includes(g.id); return `
-        <div class="card tap gcard ${store.tokens && !locked ? '' : 'pick'} ${locked ? 'locked' : ''}" data-game="${g.id}">
+        <div class="card tap gcard ${store.tokens >= (g.cost || 1) && !locked ? '' : 'pick'} ${locked ? 'locked' : ''}" data-game="${g.id}">
           <div class="e">${locked ? (credits() ? '🔓' : '🔒') : g.emoji}</div>
           <div><b>${esc(g.name)}</b>${gs.played[g.id] ? '' : ' <span class="pill solid" style="font-size:12px;padding:1px 8px">חדש</span>'}<div class="best">${gs.played[g.id] ? `שיא: ${gs.bests[g.id] || 0} · שיחקת ${gs.played[g.id]} ${gs.played[g.id] === 1 ? 'פעם' : 'פעמים'}` : esc(g.how)}</div></div>
-          <span class="pill solid">${locked ? (credits() ? 'לפתוח' : 'נעול') : '▶️'}</span>
+          <span class="pill solid">${locked ? (credits() ? 'לפתוח' : 'נעול') : (g.cost > 1 ? `🎁×${g.cost} ▶️` : '▶️')}</span>
           ${g.demo && !locked ? `<button class="btn chip" data-demo="${g.id}" style="grid-column:1/-1;justify-self:start;font-size:13px">🎬 איך משחקים?</button>` : ''}
         </div>`; }).join('')}`).join(''); })()}
   </div>`);
@@ -694,7 +694,9 @@ function arcade() {
       else { c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500); }
       return;
     }
-    if (!store.tokens) { c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500); return; }
+    const cost = gameById[id].cost || 1;
+    if (store.tokens < cost) { c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500); if (cost > 1 && store.tokens) speak(SAY_UI.costTwo || 'שִׂים לֵב, הַמִּשְׂחָק הַזֶּה עוֹלֶה שְׁתֵּי מַתָּנוֹת.'); return; }
+    if (cost > 1) speak(SAY_UI.costTwo || 'שִׂים לֵב, הַמִּשְׂחָק הַזֶּה עוֹלֶה שְׁתֵּי מַתָּנוֹת.'); /* רועי: להגיד גם בקול */
     playGame(gameById[id], () => arcade());
   });
 }
