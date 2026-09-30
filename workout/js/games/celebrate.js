@@ -50,15 +50,16 @@ const LAND = { head: [100, 72], neck: [100, 88], hip: [100, 126], le: [84, 106],
 const DUNK = { head: [104, 30], neck: [102, 46], hip: [100, 92], le: [92, 62], lh: [86, 84], re: [112, 36], rh: [120, 14], lk: [90, 116], lf: [80, 136], rk: [112, 114], rf: [118, 136] };
 const SHOOT = { head: [100, 30], neck: [100, 46], hip: [100, 92], le: [88, 60], lh: [92, 40], re: [112, 40], rh: [116, 14], lk: [92, 118], lf: [86, 140], rk: [108, 116], rf: [112, 140] };
 /* ריצת ספרינט אמיתית (רועי 29/09): מחזור צעד של 8 פריימים שמחושב מגאומטריה: ירכיים מתנדנדות בהיפוך, ברך מתכופפת בתנופה קדימה ובעיטת עקב מאחור, ידיים בהיפוך לרגליים, גוף נטוי קדימה, קפיצת גוף קטנה בכל צעד. ph = שלב 0..1 */
-function sprintPose(ph, lean = .35) {
-  const a = ph * Math.PI * 2, hipX = 100, hipY = 118 - Math.abs(Math.sin(a)) * 5, TH = 32, SH = 32, UA = 22, FA = 22;
-  const leg = (phase) => { const sw = Math.sin(phase); /* +1 קדימה, -1 אחורה */ const thigh = -sw * 1.05 + lean * .3; /* ברך: כיפוף תמיד מביא את כף הרגל אחורה (shin = thigh - bend), הכי כפוף בבעיטת העקב מאחור (חצי ההחזרה, cos<0), ישר בדחיפה ובנחיתה; רועי 30/09: "הרגל עקומה" */ const bend = .35 + 1.5 * Math.max(0, -Math.cos(phase)) + .5 * Math.max(0, -Math.sin(phase)); const kx = hipX + Math.sin(thigh) * TH, ky = hipY + Math.cos(thigh) * TH; const shin = thigh - bend; const fx = kx + Math.sin(shin) * SH, fy = ky + Math.cos(shin) * SH; return [[kx, ky], [fx, Math.min(182, fy)]]; };
-  const arm = (phase, shX, shY) => { const sw = Math.sin(phase); const upper = -sw * .9; /* +קדימה */ const ex = shX + Math.sin(upper) * UA, ey = shY + Math.cos(upper) * UA; const fore = upper + 1.5; /* מרפק כפוף 90°: היד קדימה-למעלה כשהזרוע קדימה, ליד המותן כשהיא אחורה */ const hx = ex + Math.sin(fore) * FA, hy = ey + Math.cos(fore) * FA; return [[ex, ey], [hx, hy]]; };
+function sprintPose(ph, lean = .35, amp = 1) {
+  const a = ph * Math.PI * 2, hipX = 100, hipY = 118 - Math.abs(Math.sin(a)) * 5 * amp, TH = 32, SH = 32, UA = 22, FA = 22;
+  const leg = (phase) => { const sw = Math.sin(phase); /* +1 קדימה, -1 אחורה */ const thigh = -sw * 1.05 * amp + lean * .3; /* ברך: כיפוף תמיד מביא את כף הרגל אחורה (shin = thigh - bend), הכי כפוף בבעיטת העקב מאחור (חצי ההחזרה, cos<0), ישר בדחיפה ובנחיתה; רועי 30/09: "הרגל עקומה" */ const bend = .35 + (1.5 * Math.max(0, -Math.cos(phase)) + .5 * Math.max(0, -Math.sin(phase))) * amp; const kx = hipX + Math.sin(thigh) * TH, ky = hipY + Math.cos(thigh) * TH; const shin = thigh - bend; const fx = kx + Math.sin(shin) * SH, fy = ky + Math.cos(shin) * SH; return [[kx, ky], [fx, Math.min(182, fy)]]; };
+  const arm = (phase, shX, shY) => { const sw = Math.sin(phase); const upper = -sw * .6 * amp; /* +קדימה; תנופה מתונה ליד הגוף (רועי: "הידיים בצדדים", "תנועה טבעית") */ const ex = shX + Math.sin(upper) * UA, ey = shY + Math.cos(upper) * UA; const fore = upper + 1.35 * (amp < .7 ? .4 : 1); /* מרפק 90° בריצה, כמעט ישר בהליכה */ /* מרפק כפוף 90°: היד קדימה-למעלה כשהזרוע קדימה, ליד המותן כשהיא אחורה */ const hx = ex + Math.sin(fore) * FA, hy = ey + Math.cos(fore) * FA; return [[ex, ey], [hx, hy]]; };
   const neck = [hipX + lean * 34, hipY - 44], head = [neck[0] + lean * 20, neck[1] - 16];
   const [lk, lf] = leg(a), [rk, rf] = leg(a + Math.PI); const [le, lh] = arm(a + Math.PI, neck[0] - 2, neck[1] + 6), [re, rh] = arm(a, neck[0] + 2, neck[1] + 6);
   return { hip: [hipX, hipY], neck, head, lk, lf, rk, rf, le, lh, re, rh };
 }
 export const SPRINT = Array.from({ length: 8 }, (_, i) => [sprintPose(i / 8, .5), 1]); /* נטייה קדימה חזקה יותר (רועי: "הגוף הפוך") */
+export const WALK = Array.from({ length: 8 }, (_, i) => [sprintPose(i / 8, .05, .45), 1]); /* הליכה: תנופה קטנה, בלי נטייה */
 export const LEAN = { head: [124, 66], neck: [116, 80], hip: [100, 118], le: [100, 104], lh: [82, 118], re: [130, 100], rh: [146, 88], lk: [120, 146], lf: [130, 176], rk: [82, 150], rf: [66, 176] };
 
 function fx(ctx, W, H) {

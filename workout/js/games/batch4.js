@@ -1,5 +1,8 @@
 // מקבץ 4 (29/09): הקפצת כדור (היה הלוליין), יורה בועות, כדורסל, מיני גולף, באולינג. שופרו מראש: מראה (ספרייטים של Kenney), רעיונות ממשחקים דומים, חוקי פסילה, רמות, שמירת התקדמות, peek להדגמה.
 import { POSE, S as SP, KITS } from './sprites.js';
+import { layer3d } from './layer3d.js';
+import { loadCharacter, KITS3D, lights } from '../char3d.js';
+import { sky, court, basketBallMesh, ballShadow, SHOT, pose } from './celebrate3d.js';
 export const arcade = [], sport = [];
 const BALLS = ['puzzle/tileBlue_11', 'puzzle/tileRed_11', 'puzzle/tileGreen_11', 'puzzle/tileYellow_11', 'puzzle/tilePink_11', 'puzzle/tileOrange_11'], BALL_COL = ['#38bdf8', '#f87171', '#4ade80', '#facc15', '#f472b6', '#fb923c'];
 // גרירה מהכדור: כיוון וכוח (כמו בספורט)
@@ -85,59 +88,80 @@ arcade.push({ id: 'bubble-shooter', name: 'יורה בועות', emoji: '🔮', 
         for (const [k, ci] of grid) { const [row, col] = parse(k); const x = px(row, col), y = py(row); if (!r.img(BALLS[ci], x, y, S - 3, S - 3)) r.circle(x, y, S / 2 - 2, BALL_COL[ci]); }
         falling.forEach(f => { if (!r.img(BALLS[f.c], f.x, f.y, S - 3, S - 3, { rot: f.vy * .01 })) r.circle(f.x, f.y, S / 2 - 2, BALL_COL[f.c]); });
         /* קו כיוון עם קפיצה מהקיר */ if (aim && !shot) { let dx = aim.x - SHOOT.x, dy = aim.y - SHOOT.y; const L = Math.hypot(dx, dy) || 1; if (dy < -8) { let x = SHOOT.x, y = SHOOT.y, vx = dx / L, vy = dy / L; for (let i = 0; i < 26; i++) { x += vx * 18; y += vy * 18; if (x < S / 2 || x > r.W - S / 2) vx *= -1; if (y < TOP + S / 2) break; let hit = false; for (const [kk] of grid) { const [row, col] = parse(kk); if (r.dist(x, y, px(row, col), py(row)) < S - 6) { hit = true; break; } } if (hit) break; r.circle(x, y, 3, `rgba(255,255,255,${.9 - i * .03})`); } } }
-        /* מכונת ירייה: ילד יושב בתוך צריח מתכת, קנה שמסתובב לכיוון הכיוון, רתע בירייה */ r.player(POSE.stand, SHOOT.x - 36, r.H - 28, .5, KITS.kid); /* הילד יושב בצריח, הראש והכתפיים מעל הבסיס */ c.save(); c.translate(SHOOT.x + 6, SHOOT.y + 6); c.rotate(barrel); const rc2 = 10 * recoil; r.rect(14 - rc2, -13, 46, 26, '#334155', 8); r.rect(52 - rc2, -16, 14, 32, '#0f172a', 4); r.rect(20 - rc2, -6, 30, 5, '#94a3b8', 2); c.restore(); c.fillStyle = '#475569'; c.beginPath(); c.arc(SHOOT.x, r.H, 58, Math.PI, 0); c.fill(); c.fillStyle = '#1e293b'; c.beginPath(); c.arc(SHOOT.x, r.H, 58, Math.PI, 0); c.lineWidth = 5; c.strokeStyle = '#fde047'; c.stroke(); r.rect(SHOOT.x - 34, r.H - 14, 68, 14, '#0f172a', 4); for (let i = 0; i < 3; i++) r.circle(SHOOT.x - 20 + i * 20, r.H - 7, 3.5, ['#22c55e', '#facc15', '#ef4444'][i]); if (shot) { if (!r.img(BALLS[cur], shot.x, shot.y, S - 3, S - 3)) r.circle(shot.x, shot.y, S / 2 - 2, BALL_COL[cur]); } else if (!r.img(BALLS[cur], SHOOT.x, SHOOT.y, S - 3, S - 3)) r.circle(SHOOT.x, SHOOT.y, S / 2 - 2, BALL_COL[cur]);
+        /* משגר (רועי: "תוריד את האיש, תשפר את מראה התותח"): קנה מתכתי מחודד עם גרדיאנט וטבעת לוע, מסתובב לכיוון, רתע; טבעת כרום זוהרת שבה יושבת הבועה; בסיס עם פס ניאון */
+        { const bx = SHOOT.x, by = SHOOT.y; c.save(); c.translate(bx, by); c.rotate(barrel); const rc2 = 12 * recoil;
+          const bg2 = c.createLinearGradient(0, -14, 0, 14); bg2.addColorStop(0, '#94a3b8'); bg2.addColorStop(.5, '#e2e8f0'); bg2.addColorStop(1, '#475569'); c.fillStyle = bg2; c.beginPath(); c.moveTo(18 - rc2, -11); c.lineTo(62 - rc2, -15); c.lineTo(62 - rc2, 15); c.lineTo(18 - rc2, 11); c.closePath(); c.fill();
+          c.fillStyle = '#1e293b'; c.beginPath(); c.roundRect(58 - rc2, -18, 10, 36, 4); c.fill(); c.fillStyle = BALL_COL[cur]; c.globalAlpha = .6; c.beginPath(); c.roundRect(60 - rc2, -13, 4, 26, 2); c.fill(); c.globalAlpha = 1; c.restore();
+          const ring = c.createRadialGradient(bx - 8, by - 8, 6, bx, by, 34); ring.addColorStop(0, '#f8fafc'); ring.addColorStop(.6, '#94a3b8'); ring.addColorStop(1, '#334155'); c.save(); c.shadowColor = BALL_COL[cur]; c.shadowBlur = 18; c.fillStyle = ring; c.beginPath(); c.arc(bx, by, 32, 0, Math.PI * 2); c.fill(); c.restore();
+          c.fillStyle = '#0f172a'; c.beginPath(); c.arc(bx, by, 24, 0, Math.PI * 2); c.fill();
+          const base = c.createLinearGradient(0, r.H - 30, 0, r.H); base.addColorStop(0, '#334155'); base.addColorStop(1, '#0f172a'); c.fillStyle = base; c.beginPath(); c.roundRect(bx - 70, r.H - 30, 140, 30, [14, 14, 0, 0]); c.fill(); c.fillStyle = BALL_COL[cur]; c.globalAlpha = .8; c.beginPath(); c.roundRect(bx - 56, r.H - 27, 112, 3, 2); c.fill(); c.globalAlpha = 1; }
+        if (shot) { if (!r.img(BALLS[cur], shot.x, shot.y, S - 3, S - 3)) r.circle(shot.x, shot.y, S / 2 - 2, BALL_COL[cur]); } else if (!r.img(BALLS[cur], SHOOT.x, SHOOT.y, S - 3, S - 3)) r.circle(SHOOT.x, SHOOT.y, S / 2 - 2, BALL_COL[cur]);
         r.circle(NEXT.x, NEXT.y, 22, 'rgba(255,255,255,.12)'); if (!r.img(BALLS[next], NEXT.x, NEXT.y, 24, 24)) r.circle(NEXT.x, NEXT.y, 11, BALL_COL[next]); r.text('הבא', NEXT.x, NEXT.y - 28, { size: 11, color: '#c4b5fd' });
         r.text(`רמה ${level} · ${'❤️'.repeat(Math.max(0, lives))} · עוד ${6 - shots % 6} לירידת התקרה`, 90, r.H - 14, { size: 12, color: '#c4b5fd' }); },
     };
   } });
 
 // ---- כדורסל: מגרש עם פרקט, לוח וסל עם רשת שרוקדת, כדור תלת-ממדי מסתובב, סוויש, רצף = כדור בוער, סל שזז מרמה 2, 5 החטאות = נפסלת, הרמה נשמרת ----
-sport.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀', assets: ['bg/cloud1', 'bg/cloud2'],
-  how: 'הקשת הלבנה זזה עם מד הכוח: נוגעים בדיוק כשהיא עוברת דרך הסל, והכדור עף לשם. סוויש = 30, עם ברזל = 20, מושלם = בונוס. 3 ברצף = הכדור בוער 🔥. מרמה 2 הסל זז ורחוק יותר, המד מהיר יותר. 5 החטאות = נפסלת. הרמה נשמרת.',
-  /* לפי Basketball Orbit (רועי 30/09, crazygames): זריקה בלחיצה אחת עם מד כוח שמתנדנד (אדום→צהוב→ירוק); כאן המד מזיז קשת תצוגה מקדימה, כך שרואים לאן הכדור יעוף ולוחצים כשהקשת בסל. הכדור בידיים (לא על הראש), קופץ על הרצפה, מהלוח ומהברזל */
+sport.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀',
+  how: 'הקשת זזה עם מד הכוח: נוגעים כשהיא עוברת בסל. ירוק = קולעים בטוח, קרוב לירוק = לפעמים, רחוק = פספוס. סוויש = 30, עם ברזל = 20, מושלם = בונוס. 3 ברצף = הכדור בוער 🔥. מרמה 2 זורקים מרחוק יותר ומזוויות אחרות, והמד מהיר יותר. 5 החטאות = נפסלת. הרמה נשמרת.',
+  /* תלת-ממד (רועי 30/09: "שזה יהיה בתלת-ממד המשחק", "אם אתה בירוק קולעים, קרוב = הגרלה"): אותו מגרש, דמות וכדור כמו בחגיגות (celebrate3d/char3d) על שכבת WebGL מאחורי הקנבס (layer3d),
+     הפיזיקה בעולם (94 יח' = מטר, כבידה 920), הממשק (מד, קשת, טקסט) דו-ממדי מעל. המכניקה לפי Basketball Orbit: לחיצה אחת כשהקשת בסל */
   make(r, progress) {
-    const GY = r.H - 44, G = 900, ANG = 62 * Math.PI / 180, V0 = 380, V1 = 560; /* מהירות = V0 + p*V1 */
-    let level = Math.max(1, (progress && progress.level) || 1), ball, hoop = { x: 262, y: GY - 190, vx: 0 }, streak = 0, misses = 0, baskets = 0, shooterT = 0, trail = [], tt = 0, netT = 0, fire = false, shotFrom = 70, ph = 0, dir = 1, waitT = 0, lastPerfect = false;
-    const SC = .72; /* גודל הזורק */ const HAND = () => [shotFrom + 22, GY - 96 * SC]; /* הכדור בידיים לפני החזה (חזה ≈ 52 מעל הרגליים בקנה מידה .5) */
-    const reset = () => { const [hx, hy] = HAND(); ball = { x: hx, y: hy, vx: 0, vy: 0, fly: false, rim: false, t: 0, rot: 0, scored: false, bounces: 0 }; trail = []; shooterT = 0; };
-    reset();
-    const newHoop = () => { const far = Math.min(1, (level - 1) / 4); hoop = { x: r.rnd(200 + far * 40, 300 + far * 30), y: r.rnd(GY - 235, GY - 150), vx: level >= 2 ? r.pick([-1, 1]) * (24 + level * 10) : 0 }; };
-    const meterSpeed = () => .55 + Math.min(.6, (level - 1) * .12); /* מחזורים לשנייה */
+    const L = layer3d(r); const { sc, cam, THREE } = L; const HZ = -420, RIM_R = 22, BALL_R = 14, G = 920, ANG = 55 * Math.PI / 180, V0 = 520, V1 = 700;
+    let level = Math.max(1, (progress && progress.level) || 1), streak = 0, misses = 0, baskets = 0, tt = 0, fire = false, ph = 0, dir = 1, waitT = 0, perfect = false, shotT = -1;
+    let w = null, hero = null, ballM = null, shadow = null, ready = false;
+    try { sky(sc, '#111827', '#1f2937', false); w = court(sc, HZ); ballM = basketBallMesh(BALL_R); sc.add(ballM); shadow = ballShadow(sc); ready = true; } catch (e) { console.warn('bball3d court', e); }
+    if (ready) loadCharacter(KITS3D.maccabi).then(ch => { hero = ch; sc.add(ch.model); }).catch(e => console.warn('bball3d char', e));
+    const rim = new THREE.Vector3(0, 290, HZ + 14);
+    /* עמדת הזורק: מרחק וזווית לפי הרמה (רמה 1 = 4.8 מ' מול הסל; מרמה 2 רחוק יותר ובאלכסון) */
+    let SX = 0, SZ = 0; const place = () => { const dist = Math.min(640, 450 + (level - 1) * 60), a = level >= 2 ? r.pick([-1, 1]) * r.rnd(.25, .8) : 0; SX = Math.sin(a) * dist; SZ = rim.z + Math.cos(a) * dist; };
+    place();
+    const faceRim = () => Math.atan2(rim.x - SX, rim.z - SZ);
+    const hand = new THREE.Vector3(), hl = new THREE.Vector3(), hr = new THREE.Vector3();
+    const handPos = () => { if (hero && shotT < 0) { hero.rig.b.LeftHand.getWorldPosition(hl); hero.rig.b.RightHand.getWorldPosition(hr); hand.lerpVectors(hl, hr, .5); hand.y += 8; } else hand.set(SX, 150, SZ); return hand; };
+    const ball = { p: new THREE.Vector3(), v: new THREE.Vector3(), fly: false, rimHit: false, scored: false, bounces: 0, rot: 0 };
     const speedFor = p => V0 + p * V1;
-    const idealP = () => { const [bx, by] = HAND(); const dx = hoop.x - bx, up = by - hoop.y, den = 2 * Math.cos(ANG) ** 2 * (dx * Math.tan(ANG) - up); if (den <= 0) return 1; return r.clamp((Math.sqrt(G * dx * dx / den) - V0) / V1, 0, 1); };
-    const arc = p => { const pts = []; const [bx, by] = HAND(); const v = speedFor(p); let x = bx, y = by, vx = v * Math.cos(ANG), vy = -v * Math.sin(ANG); for (let i = 0; i < 40; i++) { vy += G * .03; x += vx * .03; y += vy * .03; pts.push([x, y]); if (y > GY || x > r.W + 20) break; } return pts; };
-    const shoot = () => { if (ball.fly || waitT > 0) return; const p = ph, v = speedFor(p); ball.vx = v * Math.cos(ANG); ball.vy = -v * Math.sin(ANG); ball.fly = true; shooterT = .6; lastPerfect = Math.abs(p - idealP()) < .035; r.sfx('jump'); if (lastPerfect) r.pop('מושלם!', ball.x, ball.y - 40, r.C.gold, 20); };
-    const miss = () => { misses++; streak = 0; fire = false; r.sfx('ohh'); if (misses >= 5) return r.over('5 החטאות'); r.pop(`החטאה ${misses}/5`, r.W / 2, 120, '#f87171', 18); waitT = .6; };
+    const idealP = () => { const h = handPos(); const dx = Math.hypot(rim.x - h.x, rim.z - h.z), up = rim.y - h.y, den = 2 * Math.cos(ANG) ** 2 * (dx * Math.tan(ANG) - up); if (den <= 0) return 1; return r.clamp((Math.sqrt(G * dx * dx / den) - V0) / V1, 0, 1); };
+    const launch = (p, out) => { const h = handPos(); const dx = rim.x - h.x, dz = rim.z - h.z, d = Math.hypot(dx, dz) || 1, v = speedFor(p); out.p.copy(h); out.v.set(dx / d * v * Math.cos(ANG), v * Math.sin(ANG), dz / d * v * Math.cos(ANG)); };
+    const arc = p => { const o = { p: new THREE.Vector3(), v: new THREE.Vector3() }; launch(p, o); const pts = []; for (let i = 0; i < 44; i++) { o.v.y -= G * .04; o.p.addScaledVector(o.v, .04); pts.push(L.project(o.p.x, o.p.y, o.p.z)); if (o.p.y < 0) break; } return pts; };
+    const shoot = () => { if (ball.fly || waitT > 0) return; const ideal = idealP(), diff = Math.abs(ph - ideal); let p = ph; perfect = diff < .05;
+      if (perfect) p = ideal; /* ירוק = קולעים */ else if (diff < .11 && Math.random() < .5) p = ideal; /* קרוב לירוק = הגרלה */
+      launch(p, ball); ball.fly = true; ball.rimHit = false; ball.scored = false; ball.bounces = 0; shotT = 0; r.sfx('jump'); if (perfect) { const [px, py] = L.project(SX, 190, SZ); r.pop('מושלם!', px, py - 30, r.C.gold, 20); } };
+    const miss = () => { misses++; streak = 0; fire = false; r.sfx('ohh'); if (misses >= 5) return r.over('5 החטאות'); r.pop(`החטאה ${misses}/5`, r.W / 2, 120, '#f87171', 18); waitT = .8; };
+    const meterSpeed = () => .55 + Math.min(.6, (level - 1) * .12);
+    const rimProj = () => L.project(rim.x, rim.y, rim.z);
     return {
       tap: shoot, down() {}, up() {},
-      save() { return { level }; }, revive() { misses = 0; reset(); },
-      peek() { return { ball, hoop, canShoot: !ball.fly && waitT <= 0, GY, p: ph, ideal: idealP() }; },
-      update(dt) { tt += dt; shooterT -= dt; netT = Math.max(0, netT - dt); if (hoop.vx) { hoop.x += hoop.vx * dt; if (hoop.x < 190 || hoop.x > 330) hoop.vx *= -1; }
-        if (waitT > 0) { waitT -= dt; if (waitT <= 0) { newHoop(); reset(); } return; }
-        if (!ball.fly) { ph += dir * meterSpeed() * 2 * dt; if (ph > 1) { ph = 1; dir = -1; } if (ph < 0) { ph = 0; dir = 1; } return; }
-        ball.vy += G * dt; const py = ball.y; ball.x += ball.vx * dt; ball.y += ball.vy * dt; ball.rot += ball.vx * dt * .02; ball.t += dt; if (ball.t % .04 < dt) trail.push({ x: ball.x, y: ball.y }); if (trail.length > 14) trail.shift(); if (fire && Math.random() < .5) r.explode(ball.x, ball.y + 6, 12, 1);
-        /* לוח */ if (ball.x + 14 > hoop.x + 30 && ball.x < hoop.x + 44 && ball.y > hoop.y - 70 && ball.y < hoop.y + 10 && ball.vx > 0) { ball.x = hoop.x + 16; ball.vx = -Math.abs(ball.vx) * .55; ball.rim = true; r.sfx('wood'); }
-        /* ברזל */ for (const rx of [hoop.x - 24, hoop.x + 24]) { const dd = r.dist(ball.x, ball.y, rx, hoop.y); if (dd < 17) { const nx = (ball.x - rx) / dd, ny = (ball.y - hoop.y) / dd; const vn = ball.vx * nx + ball.vy * ny; if (vn < 0) { ball.vx -= 1.5 * vn * nx; ball.vy -= 1.5 * vn * ny; } ball.x = rx + nx * 17; ball.y = hoop.y + ny * 17; ball.rim = true; r.sfx('metal'); } }
-        if (!ball.scored && ball.vy > 0 && py < hoop.y && ball.y >= hoop.y && Math.abs(ball.x - hoop.x) < 20) { ball.scored = true; streak++; baskets++; netT = .6; const swish = !ball.rim; let pts = (swish ? 30 : 20) + Math.min(streak - 1, 3) * 5 + (fire ? 10 : 0) + (lastPerfect ? 10 : 0); r.addScore(pts); r.pop(swish ? `סוויש! +${pts}` : `+${pts}`, hoop.x, hoop.y - 50, '#FDE047', 26); r.burst(hoop.x, hoop.y + 10, '#F97316', 18); r.sparkle(hoop.x, hoop.y, 30, swish ? 10 : 4); r.sfx(swish ? 'score' : 'bounce'); if (streak >= 3 && !fire) { fire = true; r.pop('הכדור בוער! 🔥', r.W / 2, 100, '#f97316', 24); r.sfx('roar'); }
-          if (baskets % 5 === 0) { level++; r.pop(`רמה ${level}! הסל זז והמד מהיר יותר`, r.W / 2, 160, r.C.gold, 22); r.sfx('levelup'); } waitT = .7; return; }
-        /* רצפה: הכדור קופץ ונרגע (כמו ב-Orbit), ואז החטאה */ if (ball.y > GY - 14 && ball.vy > 0) { ball.y = GY - 14; ball.vy = -ball.vy * .55; ball.vx *= .8; ball.bounces++; r.puff(ball.x, GY, 16, 2); r.sfx('bounce'); if (ball.bounces >= 3 || Math.abs(ball.vy) < 60) { if (!ball.scored) { const res = miss(); if (res !== undefined) return res; } else waitT = .3; } }
-        if (ball.x > r.W + 30 || ball.x < -30) { if (ball.scored) { waitT = .3; return; } const res = miss(); if (res !== undefined) return res; } },
-      draw() { const c = r.ctx; /* אולם: קיר בגרדיאנט, קהל בשתי שורות, דגלים, פרקט */ const bg = c.createLinearGradient(0, 0, 0, GY); bg.addColorStop(0, '#1e1b4b'); bg.addColorStop(1, '#4c1d95'); c.fillStyle = bg; c.fillRect(0, 0, r.W, GY);
-        r.rect(0, GY - 150, r.W, 150, '#312e81'); for (let row = 0; row < 2; row++) for (let i = 0; i < 13; i++) { const x = 14 + i * 28 + row * 14, y = GY - 128 + row * 30 + (Math.sin(tt * 6 + i) > 0 && netT > 0 ? -5 : 0); r.rect(x - 8, y - 4, 16, 22, ['#f472b6', '#38bdf8', '#a3e635', '#facc15', '#fb923c', '#fff'][(i + row) % 6], 4); r.circle(x, y - 12, 7, ['#F1C27D', '#E0AC69', '#C68642', '#8D5524'][(i * 7 + row) % 4]); }
-        r.rect(0, GY - 62, r.W, 62, 'rgba(15,23,42,.55)'); for (let i = 0; i < 6; i++) r.rect(20 + i * 60, 10, 28, 18, ['#0B7A3B', '#fff', '#FDE047', '#1E3A8A', '#EF4444', '#0EA5E9'][i], 2);
-        const fl = c.createLinearGradient(0, GY, 0, r.H); fl.addColorStop(0, '#d97706'); fl.addColorStop(1, '#92400e'); c.fillStyle = fl; c.fillRect(0, GY, r.W, r.H - GY); for (let x = 0; x < r.W; x += 28) r.rect(x, GY, 1, r.H - GY, 'rgba(0,0,0,.15)'); r.line(0, GY, r.W, GY, '#fde68a', 3); c.strokeStyle = '#fde68a'; c.lineWidth = 2; c.beginPath(); c.arc(hoop.x, GY, 150, Math.PI, 0); c.stroke();
-        /* לוח, סל ורשת */ r.rect(hoop.x + 30, hoop.y - 70, 8, 80, '#334155', 3); r.rect(hoop.x + 30, GY - 200, 6, 200, '#475569'); r.rect(hoop.x + 18, hoop.y - 60, 16, 56, '#f8fafc', 3); r.rect(hoop.x + 22, hoop.y - 40, 8, 26, '#ef4444', 2); c.strokeStyle = '#f97316'; c.lineWidth = 5; c.beginPath(); c.ellipse(hoop.x, hoop.y, 24, 6, 0, 0, Math.PI * 2); c.stroke(); const wob = Math.sin(tt * 18) * netT * 6; c.strokeStyle = '#f8fafc'; c.lineWidth = 1.5; for (let i = 0; i <= 6; i++) { const x0 = hoop.x - 24 + i * 8; c.beginPath(); c.moveTo(x0, hoop.y); c.quadraticCurveTo(hoop.x + (x0 - hoop.x) * .6 + wob, hoop.y + 22, hoop.x + (x0 - hoop.x) * .55 + wob, hoop.y + 34); c.stroke(); } for (let j = 1; j <= 3; j++) { c.beginPath(); c.ellipse(hoop.x + wob * j / 3, hoop.y + j * 11, 24 - j * 3.5, 4, 0, 0, Math.PI * 2); c.stroke(); }
-        /* הזורק: עומד עם הכדור בידיים, קופץ בזריקה */ r.player(shooterT > 0 ? POSE.jumpUp : POSE.stand, shotFrom, GY - (shooterT > 0 ? 14 : 0), SC, KITS.purple);
-        /* קשת תצוגה מקדימה + מד כוח (Basketball Orbit): נוגעים כשהקשת בסל */ if (!ball.fly && waitT <= 0) { const pts = arc(ph), good = Math.abs(ph - idealP()) < .05; pts.forEach(([x, y], i) => { if (i % 2) r.circle(x, y, good ? 4 : 3, good ? `rgba(74,222,128,${.95 - i * .02})` : `rgba(255,255,255,${.85 - i * .02})`); });
-          const MX = 22, MY = GY - 300, MH = 150; r.rect(MX - 9, MY, 18, MH, 'rgba(0,0,0,.45)', 9); const ip = idealP(); r.rect(MX - 9, MY + MH * (1 - Math.min(1, ip + .05)), 18, MH * .1, 'rgba(74,222,128,.7)', 4); r.rect(MX - 12, MY + MH * (1 - ph) - 4, 24, 8, good ? '#4ade80' : ph > .66 ? '#ef4444' : ph > .33 ? '#facc15' : '#38bdf8', 3); r.text('כוח', MX, MY - 12, { size: 12, color: '#fff' }); }
-        trail.forEach((t, i) => r.circle(t.x, t.y, 2 + i * .5, fire ? `rgba(249,115,22,${i / 20})` : `rgba(255,255,255,${i / 40})`)); r.circle(ball.x, GY - 2, 12 * Math.max(.3, 1 - (GY - ball.y) / 500), 'rgba(0,0,0,.2)'); SP.basketBall(r, ball.x, ball.y, 14, ball.rot);
+      save() { return { level }; }, revive() { misses = 0; waitT = .3; },
+      dispose() { L.dispose(); },
+      peek() { return { canShoot: !ball.fly && waitT <= 0, p: ph, ideal: idealP() }; },
+      update(dt) { tt += dt;
+        /* מצלמה מעל הכתף מאחור-מהצד של הזורק, רואים גם את הסל */ const fr = faceRim(); /* מעל הכתף: מאחור (400) ומהצד (260) כדי שהכדור בידיים ייראה */ cam.position.set(SX - Math.sin(fr) * 400 + Math.cos(fr) * 260, 280, SZ - Math.cos(fr) * 400 - Math.sin(fr) * 260); cam.lookAt(rim.x * .55 + SX * .45, 200, rim.z * .55 + SZ * .45);
+        if (w) w.fans.update(tt, streak > 0 && tt % 1 < .5 && ball.scored);
+        if (waitT > 0) { waitT -= dt; if (waitT <= 0) { place(); ball.fly = false; shotT = -1; } }
+        else if (!ball.fly) { ph += dir * meterSpeed() * 2 * dt; if (ph > 1) { ph = 1; dir = -1; } if (ph < 0) { ph = 0; dir = 1; } }
+        if (ball.fly) { shotT += dt; ball.v.y -= G * dt; const py = ball.p.y; ball.p.addScaledVector(ball.v, dt); ball.rot += dt * 6;
+          /* לוח */ if (ball.p.z - BALL_R < HZ - 17 && ball.v.z < 0 && Math.abs(ball.p.x - rim.x) < 85 && ball.p.y > rim.y - 20 && ball.p.y < rim.y + 85) { ball.p.z = HZ - 17 + BALL_R; ball.v.z = -ball.v.z * .6; ball.rimHit = true; r.sfx('wood'); }
+          /* טבעת */ if (ball.v.y < 0 && py >= rim.y && ball.p.y < rim.y) { const d = Math.hypot(ball.p.x - rim.x, ball.p.z - rim.z); if (d < RIM_R - 6 && !ball.scored) { ball.scored = true; streak++; baskets++; if (w) w.shake(1); const swish = !ball.rimHit; const pts = (swish ? 30 : 20) + Math.min(streak - 1, 3) * 5 + (fire ? 10 : 0) + (perfect ? 10 : 0); r.addScore(pts); const [px, py2] = rimProj(); r.pop(swish ? `סוויש! +${pts}` : `+${pts}`, px, py2 - 50, '#FDE047', 26); r.burst(px, py2, '#F97316', 18); r.sparkle(px, py2, 30, swish ? 10 : 4); r.sfx(swish ? 'score' : 'bounce'); if (streak >= 3 && !fire) { fire = true; r.pop('הכדור בוער! 🔥', r.W / 2, 100, '#f97316', 24); r.sfx('roar'); } if (baskets % 5 === 0) { level++; r.pop(`רמה ${level}! רחוק יותר, מד מהיר יותר`, r.W / 2, 160, r.C.gold, 22); r.sfx('levelup'); } ball.v.multiplyScalar(.25); waitT = 1.1; }
+            else if (d < RIM_R + BALL_R && d >= RIM_R - 6) { const nx = (ball.p.x - rim.x) / (d || 1), nz = (ball.p.z - rim.z) / (d || 1); ball.p.y = rim.y + 1; ball.v.y = -ball.v.y * .45; ball.v.x += nx * 180; ball.v.z += nz * 180; ball.rimHit = true; r.sfx('metal'); } }
+          /* רצפה */ if (ball.p.y < BALL_R && ball.v.y < 0) { ball.p.y = BALL_R; ball.v.y = -ball.v.y * .55; ball.v.x *= .8; ball.v.z *= .8; ball.bounces++; const [px, py2] = L.project(ball.p.x, 0, ball.p.z); r.puff(px, py2, 14, 2); r.sfx('bounce'); if (!ball.scored && (ball.bounces >= 3 || Math.abs(ball.v.y) < 60)) { const res = miss(); if (res !== undefined) return res; } }
+          if (ball.p.z > SZ + 400 || Math.abs(ball.p.x) > 1200 || ball.p.z < HZ - 600) { if (!ball.scored) { const res = miss(); if (res !== undefined) return res; } else waitT = .3; }
+          if (fire && Math.random() < .5) { const [px, py2] = L.project(ball.p.x, ball.p.y, ball.p.z); r.explode(px, py2 + 6, 12, 1); } }
+        /* הדמות: אחיזה נמוכה בזמן הכיוון; בזריקה ירידה → שחרור → מעקב → נחיתה */
+        if (hero) { hero.model.rotation.y = fr; const pos = new THREE.Vector3(SX, 0, SZ); let tp = SHOT.hold, sp = 6; if (shotT >= 0) { if (shotT < .25) tp = SHOT.dip; else if (shotT < .55) { tp = SHOT.release; pos.y = Math.sin((shotT - .25) / .3 * Math.PI) * 24; sp = 14; } else if (shotT < 1.0) tp = SHOT.follow; else tp = SHOT.land; } pose(hero, tp, false, pos, dt, sp); }
+        if (ballM) { if (!ball.fly) { const h = handPos(); ballM.position.copy(h); ballM.position.x += Math.sin(fr) * 12; ballM.position.z += Math.cos(fr) * 12; } else { ballM.position.copy(ball.p); ballM.rotation.x = ball.rot; } if (shadow) shadow(ballM); }
+        L.render(); },
+      draw() { const c = r.ctx; c.clearRect(0, 0, r.W, r.H);
+        if (!L.ok) { /* בלי WebGL: רקע פשוט וצורות במקום הסצנה */ const bg = c.createLinearGradient(0, 0, 0, r.H); bg.addColorStop(0, '#1e1b4b'); bg.addColorStop(1, '#4c1d95'); c.fillStyle = bg; c.fillRect(0, 0, r.W, r.H); const [rx, ry] = rimProj(); c.strokeStyle = '#f97316'; c.lineWidth = 5; c.beginPath(); c.ellipse(rx, ry, 24, 7, 0, 0, Math.PI * 2); c.stroke(); const bp = ball.fly ? ball.p : handPos(); const [bx, by] = L.project(bp.x, bp.y, bp.z); SP.basketBall(r, bx, by, 14, ball.rot); }
+        /* קשת תצוגה מקדימה + מד כוח */ if (!ball.fly && waitT <= 0) { const ideal = idealP(), diff = Math.abs(ph - ideal), good = diff < .05, near = diff < .11; const col = good ? '74,222,128' : near ? '250,204,21' : '255,255,255'; arc(ph).forEach(([x, y, z], i) => { if (i % 2 && z < 1) r.circle(x, y, (good ? 4.5 : 3.5) * (1.2 - i * .012), `rgba(${col},${.95 - i * .018})`); });
+          const MX = 22, MY = r.H - 330, MH = 170; r.rect(MX - 9, MY, 18, MH, 'rgba(0,0,0,.45)', 9); r.rect(MX - 9, MY + MH * (1 - Math.min(1, ideal + .11)), 18, MH * .22, 'rgba(250,204,21,.45)', 4); r.rect(MX - 9, MY + MH * (1 - Math.min(1, ideal + .05)), 18, MH * .1, 'rgba(74,222,128,.85)', 4); r.rect(MX - 12, MY + MH * (1 - ph) - 4, 24, 8, good ? '#4ade80' : near ? '#facc15' : '#f8fafc', 3); r.text('כוח', MX, MY - 12, { size: 12, color: '#fff' }); }
         r.text(`רמה ${level} · סלים ${baskets} · החטאות ${misses}/5${streak > 1 ? ` · רצף ${streak}${fire ? ' 🔥' : ''}` : ''}`, r.W / 2, 22, { size: 14, color: '#fff' }); },
     };
   } });
 
 // ---- מיני גולף: 9 גומות מתוכננות (קירות, חול, מים, טחנת רוח מסתובבת, במפרים), פאר לכל גומה, מגבלת חבטות = חיים, 3 חיים, הגומה נשמרת ----
 sport.push({ id: 'golf', name: 'מיני גולף', emoji: '⛳',
-  how: 'גוררים מהכדור אחורה ומשחררים. 9 גומות: קירות, חול שמאט, מים שמחזירים, טחנת רוח שמסתובבת, במפרים. לכל גומה פאר. פחות חבטות = יותר נקודות. עברת את הפאר ב-3 = חיים אחד. 3 חיים, הגומה נשמרת.',
+  how: 'גוררים מהכדור אחורה ומשחררים. 9 גומות: קירות, חול שמאט, מים שמחזירים (+חבטה), טחנת רוח, במפרים (+5). לכל גומה פאר ומכסה חבטות (פאר+3): נגמרו החבטות = ❤️ אחד ועוברים לגומה הבאה. 3 ❤️ = נפסלת. סיימת 9 גומות = סבב חדש, מהיר יותר. הגומה נשמרת.',
   make(r, progress) {
     const W = r.W, H = r.H;
     const HOLES = [
@@ -151,19 +175,19 @@ sport.push({ id: 'golf', name: 'מיני גולף', emoji: '⛳',
       { par: 4, start: [60, 470], hole: [300, 90], walls: [[130, 100, 14, 180], [130, 340, 14, 160]], mill: [240, 250, 60], water: [[200, 400, 100, 50]] },
       { par: 4, start: [180, 490], hole: [180, 60], walls: [[60, 420, 240, 14], [40, 300, 100, 14], [220, 300, 100, 14], [110, 180, 140, 14]], mill: [180, 120, 55], bumpers: [[70, 240], [290, 240]] },
     ];
-    let level = Math.max(1, (progress && progress.level) || 1), lives = 3, strokes = 0, ball, last, msg = '', msgT = 0, tt = 0, millA = 0, sinkT = 0;
+    let level = Math.max(1, (progress && progress.level) || 1), lives = 3, strokes = 0, ball, last, msg = '', msgT = 2, tt = 0, millA = 0, sinkT = 0;
     const L = () => HOLES[(level - 1) % HOLES.length];
     const setup = () => { const h = L(); ball = { x: h.start[0], y: h.start[1], vx: 0, vy: 0 }; last = { x: ball.x, y: ball.y }; strokes = 0; };
     setup();
     const moving = () => Math.hypot(ball.vx, ball.vy) > 6;
     const d = dragShot(r, () => [ball.x, ball.y], (dx, dy) => { if (moving() || sinkT > 0) return; ball.vx = dx * 4.2; ball.vy = dy * 4.2; strokes++; last = { x: ball.x, y: ball.y }; r.sfx('wood'); r.puff(ball.x, ball.y, 14, 2); }, 150, 60);
     const inRect = (x, y, [rx, ry, rw, rh]) => x > rx && x < rx + rw && y > ry && y < ry + rh;
-    const fail = why => { lives--; r.shake(250); r.sfx('over'); if (lives <= 0) return r.over(why); r.pop(`${why} נשארו ${lives} ❤️`, W / 2, H / 2, '#fff', 20); level++; setup(); };
+    const fail = why => { lives--; r.shake(250); r.sfx('over'); if (lives <= 0) return r.over(why + ' נגמרו הלבבות'); r.pop(`${why} נשארו ${lives} ❤️`, W / 2, H / 2, '#fff', 20); level++; setup(); msg = `גומה ${(level - 1) % 9 + 1} · פאר ${L().par}`; msgT = 2; };
     return {
       down: d.down, move: d.move, up: d.up,
       save() { return { level }; }, revive() { lives = 3; setup(); },
       peek() { return { ball, hole: L().hole, moving: moving(), par: L().par, strokes }; },
-      update(dt) { tt += dt; msgT -= dt; millA += dt * 1.6; const h = L(); if (sinkT > 0) { sinkT -= dt; if (sinkT <= 0) { level++; setup(); r.win(`גומה ${(level - 1) % 9 + 1}!`, 0); } return; }
+      update(dt) { tt += dt; msgT -= dt; millA += dt * (1.6 + Math.floor((level - 1) / 9) * .6); const h = L(); if (sinkT > 0) { sinkT -= dt; if (sinkT <= 0) { level++; setup(); if ((level - 1) % 9 === 0) { r.pop(`סיימת סבב! רמה ${Math.floor((level - 1) / 9) + 1}: הטחנה מהירה יותר`, W / 2, H / 2, r.C.gold, 22); r.sfx('levelup'); } r.win(`גומה ${(level - 1) % 9 + 1}!`, 0); msg = `גומה ${(level - 1) % 9 + 1} · פאר ${L().par}`; msgT = 2; } return; }
         const inSand = (h.sand || []).some(([sx, sy, sr]) => r.dist(ball.x, ball.y, sx, sy) < sr); const fr = inSand ? 4.5 : 1.3; ball.x += ball.vx * dt; ball.y += ball.vy * dt; ball.vx *= 1 - fr * dt; ball.vy *= 1 - fr * dt;
         if (ball.x < 14) { ball.x = 14; ball.vx = Math.abs(ball.vx) * .8; r.sfx('tick'); } if (ball.x > W - 14) { ball.x = W - 14; ball.vx = -Math.abs(ball.vx) * .8; r.sfx('tick'); } if (ball.y < 14) { ball.y = 14; ball.vy = Math.abs(ball.vy) * .8; r.sfx('tick'); } if (ball.y > H - 14) { ball.y = H - 14; ball.vy = -Math.abs(ball.vy) * .8; r.sfx('tick'); }
         for (const w of (h.walls || [])) if (r.hit(ball.x - 8, ball.y - 8, 16, 16, ...w)) { const [wx, wy, ww, wh] = w; const cx = Math.max(wx, Math.min(ball.x, wx + ww)), cy = Math.max(wy, Math.min(ball.y, wy + wh)); const dx = ball.x - cx, dy = ball.y - cy; if (Math.abs(dx) > Math.abs(dy)) { ball.vx = Math.sign(dx || 1) * Math.abs(ball.vx) * .8; ball.x = cx + Math.sign(dx || 1) * 9; } else { ball.vy = Math.sign(dy || 1) * Math.abs(ball.vy) * .8; ball.y = cy + Math.sign(dy || 1) * 9; } r.sfx('tick'); }
@@ -172,8 +196,8 @@ sport.push({ id: 'golf', name: 'מיני גולף', emoji: '⛳',
         for (const wtr of (h.water || [])) if (inRect(ball.x, ball.y, wtr)) { r.burst(ball.x, ball.y, '#38bdf8', 14, 160); r.pop('פלופ! למים 💦', ball.x, ball.y - 30, '#fff', 20); r.sfx('pop'); strokes++; ball = { x: last.x, y: last.y, vx: 0, vy: 0 }; }
         if (!moving() && strokes >= h.par + 3) { const res = fail('יותר מדי חבטות.'); if (res !== undefined) return res; return; }
         if (r.dist(ball.x, ball.y, h.hole[0], h.hole[1]) < 13 && Math.hypot(ball.vx, ball.vy) < 300) { const pts = Math.max(10, (h.par + 2 - strokes) * 25); r.addScore(pts); msg = strokes === 1 ? 'הול אין וואן! 🤩' : strokes <= h.par - 1 ? 'בירדי! 🐦' : strokes === h.par ? 'פאר 👌' : `בגומה ב-${strokes}`; msgT = 1.5; r.pop('+' + pts, h.hole[0], h.hole[1] - 30, '#fff', 26); r.burst(h.hole[0], h.hole[1], '#FDE047', 16); r.sparkle(h.hole[0], h.hole[1], 30, 8); r.sfx(strokes === 1 ? 'win' : 'score'); ball.vx = ball.vy = 0; ball.x = h.hole[0]; ball.y = h.hole[1]; sinkT = 1; } },
-      draw() { const c = r.ctx, h = L(); r.clear('#15803d'); for (let i = 0; i < 12; i++) r.rect(0, i * 48, W, 24, 'rgba(255,255,255,.05)'); for (let i = 0; i < 60; i++) { const gx = (i * 61) % W, gy = (i * 37) % H; c.strokeStyle = 'rgba(0,0,0,.12)'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(gx, gy + 5); c.lineTo(gx + 2, gy); c.stroke(); }
-        r.rect(0, 0, W, 8, '#78350f'); r.rect(0, H - 8, W, 8, '#78350f'); r.rect(0, 0, 8, H, '#78350f'); r.rect(W - 8, 0, 8, H, '#78350f');
+      draw() { const c = r.ctx, h = L(); /* דשא: גרדיאנט ופסי כיסוח אלכסוניים, צללית עדינה בשוליים, גדר עץ */ const gg = c.createLinearGradient(0, 0, 0, H); gg.addColorStop(0, '#22c55e'); gg.addColorStop(1, '#15803d'); c.fillStyle = gg; c.fillRect(0, 0, W, H); c.save(); c.translate(W / 2, H / 2); c.rotate(-.35); for (let i = -14; i < 14; i++) if (i % 2) { c.fillStyle = 'rgba(255,255,255,.07)'; c.fillRect(i * 44, -H, 44, H * 2); } c.restore(); const vg = c.createRadialGradient(W / 2, H / 2, H * .3, W / 2, H / 2, H * .75); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.25)'); c.fillStyle = vg; c.fillRect(0, 0, W, H);
+        [[0, 0, W, 10], [0, H - 10, W, 10], [0, 0, 10, H], [W - 10, 0, 10, H]].forEach(([x, y, w2, h2]) => { r.rect(x, y, w2, h2, '#92400e'); r.rect(x + (w2 > h2 ? 0 : 2), y + (w2 > h2 ? 2 : 0), w2 > h2 ? w2 : 3, w2 > h2 ? 3 : h2, '#b45309'); });
         (h.sand || []).forEach(([sx, sy, sr]) => { r.circle(sx, sy, sr, '#fde68a'); r.circle(sx - sr * .3, sy - sr * .3, sr * .4, '#fef3c7'); }); (h.water || []).forEach(([wx, wy, ww, wh]) => { r.rect(wx, wy, ww, wh, '#0ea5e9', 10); c.strokeStyle = 'rgba(255,255,255,.5)'; c.lineWidth = 2; for (let j = 0; j < 2; j++) { c.beginPath(); for (let x = wx + 6; x < wx + ww - 6; x += 6) c.lineTo(x, wy + wh * (.35 + j * .3) + Math.sin((x + tt * 40) / 12 + j) * 3); c.stroke(); } });
         (h.walls || []).forEach(([wx, wy, ww, wh]) => { r.rect(wx + 2, wy + 3, ww, wh, 'rgba(0,0,0,.3)', 4); r.rect(wx, wy, ww, wh, '#92400e', 4); r.rect(wx + 2, wy + 2, ww - 4, 3, '#b45309', 1); });
         (h.bumpers || []).forEach(([bx, by]) => { r.circle(bx, by + 3, 20, 'rgba(0,0,0,.3)'); r.circle(bx, by, 20, '#ef4444'); r.circle(bx, by, 13, '#f87171'); r.circle(bx - 5, by - 6, 4, '#fff'); });
@@ -185,36 +209,75 @@ sport.push({ id: 'golf', name: 'מיני גולף', emoji: '⛳',
   } });
 
 // ---- באולינג: מסלול בפרספקטיבה עם מרזבים, כדור עם עיקול (החלקה עקומה), פינים שמפילים זה את זה, 10 פריימים עם סטרייק/ספייר, 3 מרזבים = נפסלת, המשחקים נשמרים ----
-sport.push({ id: 'bowling', name: 'באולינג', emoji: '🎳',
-  how: 'מחליקים את הכדור למעלה לעבר הפינים. חזק = מהיר, החלקה בזווית = הכדור מתעקל. כדור במרזב = 0. 10 פריימים, 2 גלגולים בכל אחד: סטרייק = +10, ספייר = +5. 3 מרזבים = נפסלת. משחק שלם = רמה הבאה (המסלול מהיר יותר).',
+sport.push({ id: 'bowling', name: 'באולינג', emoji: '🎳', cost: 2, /* עולה 2 מתנות: משחק ארוך (10 פריימים; רועי 30/09) */
+  how: 'שלוש נגיעות לכל גלגול: 1) איפה לעמוד: הסמן זז על המסלול, נוגעים לעצור. 2) כוח: המד עולה ויורד, נוגעים. 3) זווית: החץ מתנדנד, נוגעים. הכדור מתגלגל בתלת-ממד ומפיל פינים. 10 פריימים, 2 גלגולים בכל אחד: סטרייק = +10, ספייר = +5. 3 מרזבים = נפסלת. משחק שלם = רמה הבאה. המשחק הזה עולה 2 מתנות כי הוא ארוך.',
+  /* תלת-ממד (רועי: "באולינג חובה תלת-ממד; קודם איפה לעמוד, אז עוצמה, אז זווית"): מסלול 18 מ' (1720 יח'), מרזבים, 10 פינים כגלילים, כדור, דמות שמגלגלת; מצלמה מאחורי הכדור שעוקבת אחריו */
   make(r, progress) {
-    const W = r.W, H = r.H, TOP = 90, BOT = H - 70; const laneW = y => 150 + (BOT - y) / (BOT - TOP) * 110; /* רחב למטה, צר למעלה */ const laneL = y => W / 2 - laneW(y) / 2, laneR = y => W / 2 + laneW(y) / 2;
-    let level = Math.max(1, (progress && progress.level) || 1), pins = [], ball = null, cool = 0, frame = 1, roll = 1, frameHits = 0, gutters = 0, msg = '', msgT = 0, games = 0, tt = 0, lastStrike = false, lastSpare = false, results = [];
-    const setPins = (keep = false) => { if (keep) return; pins = []; [[0], [-1, 1], [-2, 0, 2], [-3, -1, 1, 3]].forEach((row, j) => row.forEach(i => pins.push({ x: W / 2 + i * 15, y: TOP + 48 - j * 16, up: true, vx: 0, vy: 0, rot: 0 }))); };
+    const L = layer3d(r); const { sc, cam, THREE } = L; const LANE_W = 100, PINZ = -1720, BALL_R = 11, PIN_R = 5.5;
+    let level = Math.max(1, (progress && progress.level) || 1), frame = 1, roll = 1, frameHits = 0, gutters = 0, games = 0, tt = 0, step = 'pos', sweep = 0, dir = 1, posX = 0, power = .7, angle = 0, ball = null, settle = 0, msg = '', msgT = 0, cool = 0, lastStrike = false, lastSpare = false, swingT = -1;
+    let pins = [], pinM = [], ballM = null, hero = null, ready = false, laneG = null;
+    const PIN_POS = []; [[0], [-1, 1], [-2, 0, 2], [-3, -1, 1, 3]].forEach((row, j) => row.forEach(i => PIN_POS.push([i * 14, PINZ - j * 25])));
+    try {
+      sc.background = new THREE.Color('#0b0f1a'); sc.fog = new THREE.Fog('#0b0f1a', 1600, 3200); lights(sc, { sun: 1.6, sky: '#dbeafe', ground: '#3b2a12' });
+      /* מסלול עץ: טקסטורת פסים */ const c = document.createElement('canvas'); c.width = 128; c.height = 512; const g = c.getContext('2d'); g.fillStyle = '#d6a15c'; g.fillRect(0, 0, 128, 512); for (let i = 0; i < 16; i++) { g.fillStyle = i % 2 ? 'rgba(0,0,0,.08)' : 'rgba(255,255,255,.07)'; g.fillRect(i * 8, 0, 8, 512); } g.fillStyle = 'rgba(0,0,0,.25)'; for (let k = 0; k < 7; k++) { g.beginPath(); g.moveTo(20 + k * 14, 300); g.lineTo(24 + k * 14, 300); g.lineTo(22 + k * 14, 330); g.fill(); } /* חיצים */
+      const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(1, 4);
+      laneG = new THREE.Group(); sc.add(laneG);
+      const lane = new THREE.Mesh(new THREE.BoxGeometry(LANE_W, 6, 2100), new THREE.MeshStandardMaterial({ map: tex, roughness: .35, metalness: .05 })); lane.position.set(0, -3, PINZ / 2 + 60); lane.receiveShadow = true; laneG.add(lane);
+      for (const sx of [-1, 1]) { const gut = new THREE.Mesh(new THREE.BoxGeometry(22, 6, 2100), new THREE.MeshStandardMaterial({ color: '#1f2937', roughness: .8 })); gut.position.set(sx * (LANE_W / 2 + 11), -6, PINZ / 2 + 60); laneG.add(gut); const rail = new THREE.Mesh(new THREE.BoxGeometry(10, 26, 2100), new THREE.MeshStandardMaterial({ color: '#334155' })); rail.position.set(sx * (LANE_W / 2 + 27), 7, PINZ / 2 + 60); laneG.add(rail); for (const dx of [80, 190]) { const other = new THREE.Mesh(new THREE.BoxGeometry(LANE_W, 6, 2100), new THREE.MeshStandardMaterial({ color: '#8b5e3c', roughness: .6 })); other.position.set(sx * (LANE_W / 2 + 27 + dx), -3, PINZ / 2 + 60); laneG.add(other); } }
+      const floor = new THREE.Mesh(new THREE.PlaneGeometry(3000, 800), new THREE.MeshStandardMaterial({ color: '#1e1b4b' })); floor.rotation.x = -Math.PI / 2; floor.position.set(0, -1, 300); laneG.add(floor);
+      const back = new THREE.Mesh(new THREE.BoxGeometry(3000, 500, 20), new THREE.MeshStandardMaterial({ color: '#111827' })); back.position.set(0, 250, PINZ - 200); laneG.add(back);
+      const glow = new THREE.Mesh(new THREE.PlaneGeometry(LANE_W + 60, 90), new THREE.MeshBasicMaterial({ color: '#38bdf8' })); glow.position.set(0, 110, PINZ - 150); laneG.add(glow);
+      const foul = new THREE.Mesh(new THREE.BoxGeometry(LANE_W, .5, 3), new THREE.MeshBasicMaterial({ color: '#111' })); foul.position.set(0, .3, 0); laneG.add(foul);
+      /* פינים */ const pinGeo = new THREE.CylinderGeometry(3.6, PIN_R, 30, 12), headGeo = new THREE.SphereGeometry(4.2, 12, 10), ringGeo = new THREE.TorusGeometry(3.9, .8, 8, 16), white = new THREE.MeshStandardMaterial({ color: '#f8fafc', roughness: .3 }), red = new THREE.MeshStandardMaterial({ color: '#dc2626' });
+      const mkPin = () => { const gp = new THREE.Group(); const body = new THREE.Mesh(pinGeo, white); body.position.y = 15; body.castShadow = true; gp.add(body); const head = new THREE.Mesh(headGeo, white); head.position.y = 32; gp.add(head); const ring = new THREE.Mesh(ringGeo, red); ring.rotation.x = Math.PI / 2; ring.position.y = 22; gp.add(ring); return gp; };
+      for (let i = 0; i < 10; i++) { const m = mkPin(); sc.add(m); pinM.push(m); }
+      ballM = new THREE.Mesh(new THREE.SphereGeometry(BALL_R, 24, 18), new THREE.MeshStandardMaterial({ color: '#7c3aed', roughness: .15, metalness: .3 })); ballM.castShadow = true; sc.add(ballM);
+      ready = true;
+      loadCharacter(KITS3D.maccabi).then(ch => { hero = ch; sc.add(ch.model); }).catch(e => console.warn('bowling char', e));
+    } catch (e) { console.warn('bowling3d', e); }
+    const BOWL = { hold: { head: [102, 52], neck: [101, 68], hip: [100, 116], le: [106, 98], lh: [114, 116], re: [104, 100], rh: [110, 118], lk: [100, 150], lf: [97, 182], rk: [102, 150], rf: [104, 182] },
+      back: { head: [106, 58], neck: [104, 74], hip: [100, 118], le: [108, 96], lh: [116, 112], re: [84, 96], rh: [70, 82], lk: [110, 150], lf: [116, 182], rk: [92, 150], rf: [86, 182] },
+      release: { head: [118, 78], neck: [112, 92], hip: [104, 132], le: [118, 108], lh: [130, 100], re: [112, 122], rh: [130, 156], lk: [124, 158], lf: [126, 182], rk: [78, 150], rf: [62, 178] } };
+    const setPins = (keepStanding = false) => { if (!keepStanding) pins = PIN_POS.map(([x, z]) => ({ x, z, up: true, vx: 0, vz: 0, rot: 0, ax: 0, counted: false })); else pins = pins.filter(p => p.up).map(p => ({ ...p, vx: 0, vz: 0 })); };
     setPins();
+    const speedFor = p => 620 + p * 560, angFor = a => a * 9 * Math.PI / 180;
+    const startRoll = () => { const v = speedFor(power), a = angFor(angle); ball = { x: posX, z: 10, y: BALL_R, vx: Math.sin(a) * v, vz: -Math.cos(a) * v, gutter: false, done: false, rot: 0 }; swingT = 0; r.sfx('wood'); };
+    const camV = new THREE.Vector3(), lookV = new THREE.Vector3(0, 20, PINZ + 200), hv = new THREE.Vector3();
+    const prompt = () => step === 'pos' ? 'איפה לעמוד? נוגעים כדי לעצור' : step === 'power' ? 'כוח! נוגעים באמצע הירוק' : step === 'angle' ? 'זווית! נוגעים כשהחץ ישר' : '';
+    const nextStep = () => { if (ball || cool > 0 || settle > 0) return; if (step === 'pos') { posX = sweep * 44; step = 'power'; sweep = 0; dir = 1; r.sfx('tick'); } else if (step === 'power') { power = (sweep + 1) / 2; step = 'angle'; sweep = 0; dir = 1; r.sfx('tick'); } else if (step === 'angle') { angle = sweep; step = 'roll'; startRoll(); } };
+    const endRoll = () => { const down = pins.filter(p => !p.up).length; const hitsNow = down - frameHits; frameHits = down; let bonus = 0;
+      if (ball.gutter && hitsNow === 0) { gutters++; r.pop(`מרזב! ${gutters}/3`, r.W / 2, r.H / 2, '#f87171', 24); r.sfx('over'); if (gutters >= 3) return r.over('3 מרזבים'); }
+      if (roll === 1 && down === 10) { bonus = 10; lastStrike = true; msg = 'סטרייק! ✖️ +10'; r.sfx('win'); } else if (roll === 2 && down === 10) { bonus = 5; lastSpare = true; msg = 'ספייר! / +5'; r.sfx('score'); } else if (hitsNow > 0) { msg = `${hitsNow} פינים`; r.sfx('bounce'); } else if (!ball.gutter) msg = 'פספוס';
+      r.addScore(hitsNow + bonus); if (hitsNow + bonus) { const [px, py] = L.project(0, 60, PINZ); r.pop('+' + (hitsNow + bonus), px, py, r.C.gold, 24); } msgT = 1.6;
+      const frameOver = roll === 2 || down === 10;
+      if (frameOver) { frame++; roll = 1; frameHits = 0; if (frame > 10) { games++; level++; frame = 1; r.pop(`משחק שלם! רמה ${level}`, r.W / 2, r.H / 2 - 40, r.C.gold, 24); r.sfx('levelup'); } setPins(); } else { roll = 2; setPins(true); }
+      ball = null; step = 'pos'; sweep = 0; dir = 1; cool = .8; };
     return {
-      save() { return { level }; }, revive() { gutters = 0; msg = ''; },
-      peek() { return { pins, ball, frame, roll, canRoll: !ball && cool <= 0, W, BOT }; },
-      swipe(d, dx, dy) { if (ball || cool > 0 || dy >= 0) return; const len = Math.hypot(dx, dy); ball = { x: W / 2 + r.clamp(dx * 1.5, -110, 110), y: BOT, vx: dx / len * 140, vy: -Math.max(420, Math.min(760, len * 4)), curve: r.clamp(dx / 40, -1, 1) * (1 + level * .15), t: 0 }; r.sfx('wood'); },
-      update(dt) { tt += dt; msgT -= dt; pins.forEach(p => { if (!p.up) { p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= .92; p.vy *= .92; p.rot += p.vx * dt * .05; } });
-        if (cool > 0) { cool -= dt; if (cool <= 0) { const down = pins.filter(p => !p.up).length; const gained = down - frameHits; frameHits = down;
-            if (roll === 1 && down === 10) { r.addScore(10); msg = 'סטרייק! 🎳'; r.burst(W / 2, TOP + 30, '#FDE047', 30, 300); r.sparkle(W / 2, TOP + 30, 60, 14); r.sfx('win'); results.push('X'); frame++; roll = 1; frameHits = 0; setPins(); }
-            else if (roll === 2 && down === 10) { r.addScore(5); msg = 'ספייר! ✨'; r.sparkle(W / 2, TOP + 30, 40, 8); r.sfx('score'); results.push('/'); frame++; roll = 1; frameHits = 0; setPins(); }
-            else if (roll === 1) { msg = gained ? `${gained} פינים` : 'אף פין...'; roll = 2; }
-            else { msg = `${down} מ-10`; results.push(String(down)); frame++; roll = 1; frameHits = 0; setPins(); }
-            if (frame > 10) { games++; level++; frame = 1; results = []; r.win(`סיימת משחק! רמה ${level}`, 30); } } return; }
-        if (!ball) return; ball.t += dt; ball.x += ball.vx * dt; ball.y += ball.vy * dt; ball.vx += ball.curve * 90 * dt; /* עיקול */
-        if (ball.x < laneL(ball.y) + 8 || ball.x > laneR(ball.y) - 8) { if (!ball.gutter) { ball.gutter = true; ball.vx = 0; ball.x = ball.x < W / 2 ? laneL(ball.y) - 4 : laneR(ball.y) + 4; gutters++; r.pop('מרזב! 😬', W / 2, H / 2, '#f87171', 24); r.sfx('over'); if (gutters >= 3) return r.over('3 כדורים במרזב'); } else ball.x = ball.x < W / 2 ? laneL(ball.y) - 4 : laneR(ball.y) + 4; }
-        if (!ball.gutter) for (const p of pins) if (p.up && r.dist(ball.x, ball.y, p.x, p.y) < 17) { p.up = false; p.vx = (p.x - ball.x) * 10 + ball.vx * .4 + r.rnd(-30, 30); p.vy = -160 + ball.vy * .25; r.addScore(2); r.sfx('hit'); r.puff(p.x, p.y, 12, 2); }
-        for (const p of pins) if (!p.up && (Math.abs(p.vx) + Math.abs(p.vy) > 40)) for (const q of pins) if (q.up && r.dist(p.x, p.y, q.x, q.y) < 18) { q.up = false; q.vx = (q.x - p.x) * 8 + p.vx * .5; q.vy = p.vy * .6 - 60; r.addScore(2); r.sfx('wood'); }
-        if (ball.y < TOP - 30) { ball = null; cool = 1.2; } },
-      draw() { const c = r.ctx; r.clear('#3b1d0e'); /* מסלול בפרספקטיבה */ c.fillStyle = '#1f2937'; c.beginPath(); c.moveTo(laneL(BOT) - 24, BOT + 40); c.lineTo(laneL(TOP) - 12, TOP - 40); c.lineTo(laneR(TOP) + 12, TOP - 40); c.lineTo(laneR(BOT) + 24, BOT + 40); c.closePath(); c.fill();
-        const lg = c.createLinearGradient(0, TOP, 0, BOT); lg.addColorStop(0, '#c9975b'); lg.addColorStop(1, '#e7c08a'); c.fillStyle = lg; c.beginPath(); c.moveTo(laneL(BOT), BOT + 40); c.lineTo(laneL(TOP), TOP - 40); c.lineTo(laneR(TOP), TOP - 40); c.lineTo(laneR(BOT), BOT + 40); c.closePath(); c.fill();
-        c.strokeStyle = 'rgba(120,53,15,.35)'; c.lineWidth = 1; for (let i = 1; i < 8; i++) { c.beginPath(); c.moveTo(laneL(BOT) + laneW(BOT) * i / 8, BOT + 40); c.lineTo(laneL(TOP) + laneW(TOP) * i / 8, TOP - 40); c.stroke(); } for (let i = 0; i < 7; i++) { const ay = BOT - 60 - i * 6, ax = W / 2 + (i - 3) * 14; c.fillStyle = '#7c2d12'; c.beginPath(); c.moveTo(ax, ay - 6); c.lineTo(ax + 4, ay); c.lineTo(ax - 4, ay); c.fill(); } /* חיצי כיוון */
-        r.rect(0, TOP - 40, W, 24, '#0f172a'); r.rect(0, TOP - 40, W, 3, '#facc15');
-        pins.forEach(p => { if (p.up) SP.pin(r, p.x, p.y); else if (p.y > TOP - 60) { c.save(); c.translate(p.x, p.y); c.rotate(1.3 + p.rot); SP.pin(r, 0, 0); c.restore(); } });
-        if (ball) { const sc = .55 + (ball.y - TOP) / (BOT - TOP) * .45; r.circle(ball.x, ball.y + 4, 15 * sc, 'rgba(0,0,0,.25)'); if (!r.img('puzzle/ballBlue_01', ball.x, ball.y, 30 * sc, 30 * sc, { rot: ball.t * 6 })) r.circle(ball.x, ball.y, 14 * sc, '#1D4ED8'); } else if (cool <= 0) { r.circle(W / 2, BOT + 4, 15, 'rgba(0,0,0,.25)'); if (!r.img('puzzle/ballBlue_01', W / 2, BOT, 30, 30)) r.circle(W / 2, BOT, 14, '#1D4ED8'); }
-        /* לוח פריימים */ for (let i = 0; i < 10; i++) { const fx = 12 + i * 33.6, on = i + 1 === frame; r.rect(fx, 8, 30, 24, on ? '#facc15' : 'rgba(255,255,255,.12)', 4); r.text(results[i] || String(i + 1), fx + 15, 21, { size: 12, color: on ? '#1B1740' : '#fde68a' }); }
-        r.text(msgT > 0 || msg ? msg : `פריים ${frame} · גלגול ${roll} · רמה ${level} · מרזבים ${gutters}/3`, W / 2, H - 20, { size: 15, color: '#fff' }); if (!ball && cool <= 0) r.text('החלק למעלה ↑', W / 2, H - 42, { size: 13, color: '#fde68a' }); },
+      tap: nextStep, down() {}, up() {},
+      save() { return { level }; }, revive() { gutters = 0; ball = null; step = 'pos'; cool = .5; },
+      dispose() { L.dispose(); },
+      peek() { const good = step === 'pos' ? Math.abs(sweep) < .15 : step === 'power' ? Math.abs((sweep + 1) / 2 - .72) < .08 : step === 'angle' ? Math.abs(sweep) < .12 : false; return { step, sweep, good, canRoll: !ball && cool <= 0 && settle <= 0 }; },
+      update(dt) { tt += dt; msgT -= dt; if (cool > 0) cool -= dt; if (swingT >= 0) swingT += dt;
+        if (!ball && cool <= 0 && step !== 'roll') { const spd = step === 'pos' ? 1.3 : step === 'power' ? 1.8 + (level - 1) * .25 : 1.6; sweep += dir * spd * dt; if (sweep > 1) { sweep = 1; dir = -1; } if (sweep < -1) { sweep = -1; dir = 1; } }
+        if (ball && !ball.done) { ball.x += ball.vx * dt; ball.z += ball.vz * dt; ball.rot += ball.vz * dt / BALL_R; ball.vz *= 1 - .04 * dt;
+          if (!ball.gutter && Math.abs(ball.x) > LANE_W / 2 - 4) { ball.gutter = true; ball.x = Math.sign(ball.x) * (LANE_W / 2 + 11); ball.vx = 0; ball.y = BALL_R - 5; r.sfx('tick'); }
+          if (!ball.gutter) for (const p of pins) if (p.up) { const d = Math.hypot(ball.x - p.x, ball.z - p.z); if (d < BALL_R + PIN_R) { p.up = false; const nx = (p.x - ball.x) / (d || 1), nz = (p.z - ball.z) / (d || 1); const sp = Math.hypot(ball.vx, ball.vz); p.vx = nx * sp * .55 + r.rnd(-60, 60); p.vz = nz * sp * .55 - 80; p.ax = Math.atan2(nx, -nz); ball.vx = ball.vx * .9 + nx * -40; r.sfx('hit'); const [px, py] = L.project(p.x, 30, p.z); r.burst(px, py, '#f8fafc', 6, 90); } }
+          if (ball.z < PINZ - 140 || Math.hypot(ball.vx, ball.vz) < 30) { ball.done = true; settle = 1.4; } }
+        for (const p of pins) if (!p.up) { p.x += p.vx * dt; p.z += p.vz * dt; p.vx *= 1 - 2.2 * dt; p.vz *= 1 - 2.2 * dt; p.rot = Math.min(Math.PI / 2, p.rot + dt * 5); const moving = Math.hypot(p.vx, p.vz) > 40; if (moving) for (const q of pins) if (q.up && q !== p) { const d = Math.hypot(p.x - q.x, p.z - q.z); if (d < PIN_R * 2 + 4) { q.up = false; const nx = (q.x - p.x) / (d || 1), nz = (q.z - p.z) / (d || 1); q.vx = nx * 160 + p.vx * .5; q.vz = nz * 160 + p.vz * .5; q.ax = Math.atan2(nx, -nz); r.sfx('hit'); } } if (Math.abs(p.x) > LANE_W / 2 + 40) { p.vx = 0; p.vz = 0; } }
+        if (settle > 0) { settle -= dt; if (settle <= 0) { const res = endRoll(); if (res !== undefined) return res; } }
+        /* דמות: מחזיקה את הכדור, ובגלגול: תנופה אחורה → שחרור בכריעה → חוזרת לעמידה */
+        const heroX = ball ? ball.x0 ?? posX : (step === 'pos' ? sweep * 44 : posX); if (ball && ball.x0 == null) ball.x0 = posX;
+        if (hero) { const hp = new THREE.Vector3(heroX, 0, 46); hero.model.rotation.y = Math.PI; const tp = swingT < 0 ? BOWL.hold : swingT < .25 ? BOWL.back : swingT < .8 ? BOWL.release : BOWL.hold; pose(hero, tp, false, hp, dt, swingT >= 0 && swingT < .8 ? 18 : 6); if (swingT > 1.4) swingT = -1; }
+        /* כדור */ if (ballM) { if (ball) { ballM.position.set(ball.x, ball.y, ball.z); ballM.rotation.x = ball.rot; } else if (hero && hero.rig.b.RightHand) { hero.rig.b.RightHand.getWorldPosition(hv); ballM.position.set(hv.x, Math.max(BALL_R, hv.y - 6), hv.z + 6); } else ballM.position.set(heroX, BALL_R, 20); }
+        /* פינים */ pins.forEach((p, i) => { const m = pinM[i]; if (!m) return; m.visible = true; m.position.set(p.x, 0, p.z); m.rotation.set(0, 0, 0); if (!p.up) { m.rotateY(p.ax); m.rotateX(-p.rot); } }); for (let i = pins.length; i < pinM.length; i++) pinM[i].visible = false;
+        /* מצלמה: מאחורי הכדור, עוקבת; בסיום מסתכלת על הפינים */ const bz = ball ? Math.max(PINZ + 380, ball.z) : 60, bx = ball ? ball.x : heroX; if (ball) camV.set(bx * .5 + 40, 150, bz + 300); else camV.set(bx * .4 + 110, 210, bz + 440); /* בהכנה: גבוה ומימין, כדי שהדמות לא תסתיר את המסלול */ cam.position.lerp(camV, 1 - Math.exp(-6 * dt)); lookV.set(bx * .3, 20, ball ? Math.min(bz - 400, PINZ + 100) : PINZ + 600); cam.lookAt(lookV);
+        L.render(); },
+      draw() { const c = r.ctx; c.clearRect(0, 0, r.W, r.H);
+        if (!L.ok) { const bg = c.createLinearGradient(0, 0, 0, r.H); bg.addColorStop(0, '#0b0f1a'); bg.addColorStop(1, '#312e81'); c.fillStyle = bg; c.fillRect(0, 0, r.W, r.H); pins.forEach(p => { const [x, y] = L.project(p.x, 15, p.z); r.rect(x - 3, y - 12, 6, 24, p.up ? '#f8fafc' : '#64748b', 3); }); if (ball) { const [x, y] = L.project(ball.x, ball.y, ball.z); r.circle(x, y, 8, '#7c3aed'); } }
+        /* שלב 1: סמן מיקום על קו העבירה */ if (!ball && cool <= 0 && step === 'pos') { const [x, y] = L.project(sweep * 44, 2, -60); const col = Math.abs(sweep) < .15 ? '#4ade80' : '#fde047'; c.fillStyle = col; c.beginPath(); c.moveTo(x, y); c.lineTo(x - 13, y - 26); c.lineTo(x + 13, y - 26); c.closePath(); c.fill(); r.circle(x, y + 2, 5, col); }
+        /* שלב 2: מד כוח */ if (!ball && cool <= 0 && step === 'power') { const MX = 24, MY = r.H - 330, MH = 170, p = (sweep + 1) / 2; r.rect(MX - 9, MY, 18, MH, 'rgba(0,0,0,.5)', 9); r.rect(MX - 9, MY + MH * (1 - .8), 18, MH * .16, 'rgba(74,222,128,.8)', 4); r.rect(MX - 12, MY + MH * (1 - p) - 4, 24, 8, Math.abs(p - .72) < .08 ? '#4ade80' : p > .85 ? '#ef4444' : '#f8fafc', 3); r.text('כוח', MX, MY - 12, { size: 12, color: '#fff' }); }
+        /* שלב 3: חץ זווית מהכדור */ if (!ball && cool <= 0 && step === 'angle') { const a = angFor(sweep); for (let i = 1; i <= 10; i++) { const [x, y, z] = L.project(posX + Math.sin(a) * i * 90, 2, -Math.cos(a) * i * 90); if (z < 1) r.circle(x, y, 4 - i * .25, Math.abs(sweep) < .12 ? `rgba(74,222,128,${1 - i * .08})` : `rgba(255,255,255,${.9 - i * .08})`); } }
+        if (!ball && cool <= 0 && step !== 'roll') r.text(prompt(), r.W / 2, r.H - 46, { size: 16, color: '#fff' });
+        r.text(msgT > 0 && msg ? msg : `פריים ${frame}/10 · גלגול ${roll} · רמה ${level} · מרזבים ${gutters}/3`, r.W / 2, 22, { size: 15, color: '#fff' }); },
     };
   } });
