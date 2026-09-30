@@ -175,16 +175,18 @@ export function soccerBallMesh(r = 12) {
   const m = new THREE.Mesh(new THREE.SphereGeometry(r, 24, 16), new THREE.MeshStandardMaterial({ map: t, roughness: .6 })); m.castShadow = true; return m;
 }
 // קהל: גופים וראשים כמופעים (instanced), קופץ כשמתרגש
-export function crowd(scene, { count = 120, x0 = -600, x1 = 600, z = -760, y = 40, rows = 3, rowDz = 40, rowDy = 34, seed = 1 } = {}) {
-  const body = new THREE.InstancedMesh(new THREE.BoxGeometry(22, 34, 16), new THREE.MeshStandardMaterial({ roughness: .9 }), count);
-  const head = new THREE.InstancedMesh(new THREE.SphereGeometry(9, 10, 8), new THREE.MeshStandardMaterial({ roughness: .8 }), count);
+// קהל: אנשים בגודל אמיתי ביחס לדמות (scale 2.8 = גוף כ-95 + ראש, כגובה הדמות; רועי 30/09: "הקהל קטן")
+export function crowd(scene, { count = 120, x0 = -600, x1 = 600, z = -760, y = 40, rows = 3, rowDz = 40, rowDy = 34, seed = 1, scale = 2.8 } = {}) {
+  const S = scale;
+  const body = new THREE.InstancedMesh(new THREE.BoxGeometry(22 * S, 34 * S, 16 * S), new THREE.MeshStandardMaterial({ roughness: .9 }), count);
+  const head = new THREE.InstancedMesh(new THREE.SphereGeometry(9 * S, 10, 8), new THREE.MeshStandardMaterial({ roughness: .8 }), count);
   const fans = []; const colors = ['#0B7A3B', '#ffffff', '#0B7A3B', '#FDE047', '#1E3A8A', '#EF4444', '#0EA5E9', '#F472B6']; const skins = ['#F1C27D', '#E0AC69', '#C68642', '#8D5524'];
   let s = seed; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
   const per = Math.ceil(count / rows);
   for (let i = 0; i < count; i++) { const r = Math.floor(i / per), j = i % per; fans.push({ x: x0 + (j + (r % 2) * .5 + rnd() * .3) * ((x1 - x0) / per), y: y + r * rowDy, z: z - r * rowDz, ph: rnd() * 6.28, c: new THREE.Color(colors[Math.floor(rnd() * colors.length)]), sk: new THREE.Color(skins[Math.floor(rnd() * skins.length)]) }); body.setColorAt(i, fans[i].c); head.setColorAt(i, fans[i].sk); }
   scene.add(body); scene.add(head);
   const M = new THREE.Matrix4();
-  const update = (t, excited) => { fans.forEach((f, i) => { const jump = excited && Math.sin(t * 9 + f.ph) > 0 ? 12 : 0; M.makeTranslation(f.x, f.y + jump + 17, f.z); body.setMatrixAt(i, M); M.makeTranslation(f.x, f.y + jump + 44, f.z); head.setMatrixAt(i, M); }); body.instanceMatrix.needsUpdate = true; head.instanceMatrix.needsUpdate = true; };
+  const update = (t, excited) => { fans.forEach((f, i) => { const jump = excited && Math.sin(t * 9 + f.ph) > 0 ? 12 * S : 0; M.makeTranslation(f.x, f.y + jump + 17 * S, f.z); body.setMatrixAt(i, M); M.makeTranslation(f.x, f.y + jump + 44 * S, f.z); head.setMatrixAt(i, M); }); body.instanceMatrix.needsUpdate = true; head.instanceMatrix.needsUpdate = true; };
   update(0, false); return { update, body, head };
 }
 // קונפטי: נקודות צבעוניות שנופלות

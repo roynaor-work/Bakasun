@@ -45,7 +45,7 @@ export function celebrate3d(canvas, { oldBest = 0, newBest = 1, sound = true, on
   const cleanup = () => { cancelAnimationFrame(raf); if (renderer) renderer.dispose(); gl.remove(); text.remove(); };
   const run = async () => {
     renderer = makeRenderer(gl, W, H);
-    const sc = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(38, W / H, 1, 5000);
+    const sc = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(48, W / H, 1, 6000);
     const build = { goal: goalScene, header: headerScene, dunk: dunkScene, three: threeScene, sprint: sprintScene }[id];
     const world = await build(sc, cam, S, say, text, { oldBest, newBest });
     if (stopped) return;
@@ -67,9 +67,10 @@ function pitch(sc) {
   const m = new THREE.Mesh(new THREE.PlaneGeometry(3000, 3000), new THREE.MeshStandardMaterial({ map: t, roughness: 1 })); m.rotation.x = -Math.PI / 2; m.receiveShadow = true; sc.add(m);
 }
 const line = (sc, x, z, lw, ld, y = .6) => { const l = new THREE.Mesh(new THREE.PlaneGeometry(lw, ld), new THREE.MeshBasicMaterial({ color: '#f8fafc' })); l.rotation.x = -Math.PI / 2; l.position.set(x, y, z); sc.add(l); return l; };
+// קנה מידה: הדמות כ-165 יח' = 1.75 מ', כלומר 94 יח' למטר. שער 7.32×2.44 מ' = 690×230, טבעת 3.05 מ' = 290, קהל בגובה הדמות
 function stands(sc, z, y = 60) {
-  const st = new THREE.Mesh(new THREE.BoxGeometry(2400, 260, 400), new THREE.MeshStandardMaterial({ color: '#334155', roughness: 1 })); st.position.set(0, y + 60, z - 200); sc.add(st);
-  return crowd(sc, { count: 150, x0: -900, x1: 900, z: z + 10, y: y + 190, rows: 3, rowDz: -60, rowDy: 36 });
+  const st = new THREE.Mesh(new THREE.BoxGeometry(4200, 560, 900), new THREE.MeshStandardMaterial({ color: '#334155', roughness: 1 })); st.position.set(0, y + 140, z - 450); sc.add(st);
+  return crowd(sc, { count: 150, x0: -1800, x1: 1800, z: z + 10, y: y + 420, rows: 3, rowDz: -150, rowDy: 95 });
 }
 function sky(sc, top = '#0b1026', bottom = '#1e293b', lamps = true) {
   sc.background = new THREE.Color(bottom); sc.fog = new THREE.Fog(bottom, 1500, 3500);
@@ -78,35 +79,45 @@ function sky(sc, top = '#0b1026', bottom = '#1e293b', lamps = true) {
   sc.add(new THREE.Mesh(new THREE.SphereGeometry(3200, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshBasicMaterial({ map: t, side: THREE.BackSide, fog: false })));
   if (lamps) for (const x of [-700, 700]) { const pole = new THREE.Mesh(new THREE.CylinderGeometry(6, 8, 700, 8), new THREE.MeshStandardMaterial({ color: '#94a3b8' })); pole.position.set(x, 350, -900); sc.add(pole); const lamp = new THREE.Mesh(new THREE.BoxGeometry(120, 40, 20), new THREE.MeshBasicMaterial({ color: '#fef9c3' })); lamp.position.set(x, 700, -900); sc.add(lamp); }
 }
-function goalFrame(sc, z, w = 300, h = 120) {
+function goalFrame(sc, z, w = 690, h = 230, d = 200) {
   const mat = new THREE.MeshStandardMaterial({ color: '#f8fafc', roughness: .5 });
-  for (const x of [-w / 2, w / 2]) { const p = new THREE.Mesh(new THREE.CylinderGeometry(4, 4, h, 10), mat); p.position.set(x, h / 2, z); p.castShadow = true; sc.add(p); }
-  const bar = new THREE.Mesh(new THREE.CylinderGeometry(4, 4, w, 10), mat); bar.rotation.z = Math.PI / 2; bar.position.set(0, h, z); sc.add(bar);
+  for (const x of [-w / 2, w / 2]) { const p = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, h, 10), mat); p.position.set(x, h / 2, z); p.castShadow = true; sc.add(p); }
+  const bar = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, w, 10), mat); bar.rotation.z = Math.PI / 2; bar.position.set(0, h, z); sc.add(bar);
   const netMat = new THREE.MeshBasicMaterial({ color: '#e2e8f0', wireframe: true, transparent: true, opacity: .55 });
-  const back = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 16, 7), netMat); back.position.set(0, h / 2, z - 70); sc.add(back);
-  const top = new THREE.Mesh(new THREE.PlaneGeometry(w, 70, 16, 4), netMat); top.rotation.x = -Math.PI / 2; top.position.set(0, h, z - 35); sc.add(top);
-  for (const x of [-w / 2, w / 2]) { const side = new THREE.Mesh(new THREE.PlaneGeometry(70, h, 4, 7), netMat); side.rotation.y = Math.PI / 2; side.position.set(x, h / 2, z - 35); sc.add(side); }
-  return { bulge(k) { back.position.z = z - 70 - 40 * k; } };
+  const back = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 24, 8), netMat); back.position.set(0, h / 2, z - d); sc.add(back);
+  const top = new THREE.Mesh(new THREE.PlaneGeometry(w, d, 24, 6), netMat); top.rotation.x = -Math.PI / 2; top.position.set(0, h, z - d / 2); sc.add(top);
+  for (const x of [-w / 2, w / 2]) { const side = new THREE.Mesh(new THREE.PlaneGeometry(d, h, 6, 8), netMat); side.rotation.y = Math.PI / 2; side.position.set(x, h / 2, z - d / 2); sc.add(side); }
+  return { bulge(k) { back.position.z = z - d - 60 * k; } };
 }
 function ballShadow(sc) { const m = new THREE.Mesh(new THREE.CircleGeometry(12, 16), new THREE.MeshBasicMaterial({ color: '#000', transparent: true, opacity: .3 })); m.rotation.x = -Math.PI / 2; sc.add(m); return (b) => { m.position.set(b.position.x, .8, b.position.z); m.scale.setScalar(Math.max(.4, 1 - b.position.y / 200)); }; }
-function stadium(sc, GZ) { sky(sc); lights(sc, { sun: 1.8, ground: '#1e3a2f' }); pitch(sc); const g = goalFrame(sc, GZ); const fans = stands(sc, GZ - 220, 40); line(sc, 0, GZ, 1200, 5); line(sc, 0, GZ + 240, 640, 5); line(sc, -320, GZ + 120, 5, 240); line(sc, 320, GZ + 120, 5, 240); return { g, fans }; }
+function stadium(sc, GZ) { sky(sc); lights(sc, { sun: 1.8, ground: '#1e3a2f' }); pitch(sc); const g = goalFrame(sc, GZ); const fans = stands(sc, GZ - 380, 40); line(sc, 0, GZ, 3400, 6); line(sc, 0, GZ + 520, 1700, 6); line(sc, -850, GZ + 260, 6, 520); line(sc, 850, GZ + 260, 6, 520); return { g, fans }; }
 // חגיגה משותפת: קפיצות עם ידיים למעלה, פונה למצלמה, מתקדם לאט אליה
 // סיבוב רך של הדמות לזווית יעד (הקשת הקצרה), במקום קפיצה
 function face(ch, ang, dt, speed = 5) { let d = ang - ch.model.rotation.y; d = Math.atan2(Math.sin(d), Math.cos(d)); ch.model.rotation.y += d * (1 - Math.exp(-speed * dt)); }
 // רגליים מפוזה אחת וידיים מאחרת (ריצה עם ידיים באוויר)
 const ARMS = ['le', 'lh', 're', 'rh'];
+// כדרור: היד השמאלית (במבט צד = LeftHand) יורדת קדימה-למטה אל הכדור, השאר מהפוזת הריצה
+function dribblePose(p) { const o = { ...p }; const [hx, hy] = p.hip; o.le = [hx + 10, hy + 18]; o.lh = [hx + 24, hy + 42]; return o; }
 function mixParts(legs, arms) { const out = { ...legs }; for (const j of ARMS) out[j] = arms[j]; return out; }
 // כוריאוגרפיית חגיגה (u = שניות מתחילת החגיגה): מסתובב למצלמה עם ידיים למעלה, רץ לעברה, קופץ כמה פעמים, ואז עומד ומנופף
-function celebrateStep(ch, u, from, dt, dir = 1) {
-  const RUN0 = .8, RUN1 = 2.6, JUMP1 = 5.4, DIST = 130;
+function celebrateStep(ch, u, from, dt, dir = 1, { base = 0, dx = 24 * dir, dz = 130 } = {}) {
+  const RUN0 = .8, RUN1 = 2.6, JUMP1 = 5.4; /* base = הזווית שפונה למצלמה, (dx, dz) = לאן רצים */
   const pos = new THREE.Vector3(from.x, 0, from.z);
-  let target, faceAng = 0;
-  if (u < RUN0) { target = POSE.armsUp; faceAng = Math.PI - .3 * dir; /* מתחיל להסתובב */ }
-  else if (u < RUN1) { const k = ease(clamp((u - RUN0) / (RUN1 - RUN0), 0, 1)); pos.x += 24 * k * dir; pos.z += DIST * k; target = mixParts(poseAt(POSE.jog, (u - RUN0) * 700), POSE.armsUp); pos.y = Math.abs(Math.sin((u - RUN0) * 7)) * 3; }
-  else if (u < JUMP1) { const v = (u - RUN1) * BOUNCE; pos.x += 24 * dir; pos.z += DIST; const mix = (1 - Math.cos(v)) / 2; target = lerpPose(POSE.armsUp, POSE.jumpUp, mix); pos.y = Math.max(0, Math.sin(v - Math.PI / 2)) * 24; faceAng = Math.sin(u * 1.3) * .2; }
-  else { pos.x += 24 * dir; pos.z += DIST; const w = Math.sin((u - JUMP1) * 2.2); target = lerpPose(POSE.armsUp, POSE.jumpUp, .25 + .2 * w); faceAng = w * .12; }
+  let target, faceAng = base;
+  if (u < RUN0) { target = POSE.armsUp; faceAng = base + Math.PI - .3 * dir; /* מתחיל להסתובב */ }
+  else if (u < RUN1) { const k = ease(clamp((u - RUN0) / (RUN1 - RUN0), 0, 1)); pos.x += dx * k; pos.z += dz * k; target = mixParts(poseAt(POSE.jog, (u - RUN0) * 700), POSE.armsUp); pos.y = Math.abs(Math.sin((u - RUN0) * 7)) * 3; }
+  else if (u < JUMP1) { const v = (u - RUN1) * BOUNCE; pos.x += dx; pos.z += dz; const mix = (1 - Math.cos(v)) / 2; target = lerpPose(POSE.armsUp, POSE.jumpUp, mix); pos.y = Math.max(0, Math.sin(v - Math.PI / 2)) * 24; faceAng = base + Math.sin(u * 1.3) * .2; }
+  else { pos.x += dx; pos.z += dz; const w = Math.sin((u - JUMP1) * 2.2); target = lerpPose(POSE.armsUp, POSE.jumpUp, .25 + .2 * w); faceAng = base + w * .12; }
   face(ch, faceAng, dt, u < RUN0 ? 4 : 5); pose(ch, target, true, pos, dt, u < RUN1 ? 14 : 9);
 }
+// פוזות זריקה לשלוש במבט מהצד (+x = לכיוון הסל): אחיזה בחזה, ירידה, זינוק ושחרור מעל הראש, מעקב שורש כף היד, נחיתה
+const SHOT = {
+  hold: { head: [102, 52], neck: [101, 68], hip: [100, 116], le: [108, 100], lh: [117, 90], re: [110, 102], rh: [119, 92], lk: [100, 150], lf: [97, 182], rk: [102, 150], rf: [104, 182] },
+  dip: { head: [106, 66], neck: [104, 82], hip: [98, 130], le: [110, 112], lh: [118, 104], re: [112, 114], rh: [120, 106], lk: [106, 158], lf: [97, 182], rk: [108, 158], rf: [105, 182] },
+  release: { head: [104, 40], neck: [102, 56], hip: [100, 104], le: [110, 38], lh: [116, 14], re: [108, 44], rh: [114, 22], lk: [100, 140], lf: [98, 174], rk: [103, 140], rf: [105, 174] },
+  follow: { head: [104, 40], neck: [102, 56], hip: [100, 104], le: [110, 36], lh: [124, 22], re: [108, 42], rh: [118, 26], lk: [102, 138], lf: [104, 168], rk: [104, 140], rf: [108, 170] },
+  land: { head: [102, 54], neck: [101, 70], hip: [100, 120], le: [106, 74], lh: [112, 52], re: [108, 78], rh: [114, 56], lk: [102, 152], lf: [98, 182], rk: [104, 152], rf: [105, 182] },
+};
 const finaleText = (text, t, at, newBest, oldBest) => { if (t > at && t < at + .06) text.show(`שיא חדש: ${newBest}`, oldBest ? `השיא הקודם: ${oldBest}` : 'הפעם הראשונה!', 'gold'); };
 
 // ---- 1. שער מבעיטה ----
@@ -114,7 +125,7 @@ async function goalScene(sc, cam, S, say, text, { oldBest, newBest }) {
   const GZ = -620; const { g, fans } = stadium(sc, GZ); const conf = confetti(sc, 320);
   const [hero, keeper] = await Promise.all([loadCharacter(KITS3D.maccabi), loadCharacter(KITS3D.keeper)]); sc.add(hero.model); sc.add(keeper.model);
   const ball = soccerBallMesh(12); sc.add(ball); const shadow = ballShadow(sc);
-  const tx = (Math.random() < .5 ? -1 : 1) * rnd(60, 120), ty = rnd(30, 95); const gkDir = tx < 0 ? -1 : 1;
+  const tx = (Math.random() < .5 ? -1 : 1) * rnd(150, 290), ty = rnd(40, 190); const gkDir = tx < 0 ? -1 : 1;
   const RUN = 2.2, KICK = 2.6, HIT = 3.5, DUR = 10;
   S.murmur(0, 2.4); S.tension(0.8, 1.8); S.kick(KICK); S.chant(HIT + .05, 2.4); S.roar(HIT, 4.6); S.drums(HIT + .6);
   const ballStart = new THREE.Vector3(0, 12, -60), ballEnd = new THREE.Vector3(tx, ty, GZ - 60);
@@ -128,7 +139,7 @@ async function goalScene(sc, cam, S, say, text, { oldBest, newBest }) {
     else if (t < KICK + .5) { heroPos.set(-30, 0, -40); face(hero, Math.PI, dt, 9); pose(hero, POSE.leap, false, heroPos, dt); } /* פונה לשער */
     else celebrateStep(hero, t - KICK - .5, { x: -30, z: -40 }, dt);
     // שוער: עומד מוכן, צולל לאט לכיוון הכדור, נוחת ושוכב
-    let gp = GK.ready; const gkBase = new THREE.Vector3(gkDir * clamp((t - KICK) / .9, 0, 1) * 90, 0, GZ + 40);
+    let gp = GK.ready; const gkBase = new THREE.Vector3(gkDir * clamp((t - KICK) / .9, 0, 1) * 170, 0, GZ + 40);
     if (t > KICK + .1 && t < HIT + .4) gp = gkDir > 0 ? GK.diveRH : GK.diveLH; else if (t >= HIT + .4) gp = gkDir > 0 ? GK.lyingR : GK.lyingL;
     keeper.model.rotation.y = 0; pose(keeper, gp, true, gkBase, dt, 7);
     if (t < KICK) ball.position.copy(ballStart);
@@ -145,7 +156,7 @@ async function headerScene(sc, cam, S, say, text, { oldBest, newBest }) {
   const GZ = -620; const { g, fans } = stadium(sc, GZ); const conf = confetti(sc, 320);
   const [hero, keeper] = await Promise.all([loadCharacter(KITS3D.maccabi), loadCharacter(KITS3D.keeper)]); sc.add(hero.model); sc.add(keeper.model);
   const ball = soccerBallMesh(12); sc.add(ball); const shadow = ballShadow(sc);
-  const side = Math.random() < .5 ? -1 : 1; const tx = -side * rnd(60, 110), ty = rnd(30, 90); const gkDir = tx < 0 ? -1 : 1;
+  const side = Math.random() < .5 ? -1 : 1; const tx = -side * rnd(150, 270), ty = rnd(40, 180); const gkDir = tx < 0 ? -1 : 1;
   const CROSS = 1.2, HEAD = 3.0, HIT = 3.9, DUR = 10;
   S.murmur(0, 2.6); S.kick(CROSS); S.tension(1.4, 1.6); S.kick(HEAD); S.chant(HIT + .05, 2.4); S.roar(HIT, 4.6); S.drums(HIT + .6);
   const from = new THREE.Vector3(side * 700, 12, GZ + 120), headPt = new THREE.Vector3(0, 165, GZ + 300), ballEnd = new THREE.Vector3(tx, ty, GZ - 60);
@@ -158,7 +169,7 @@ async function headerScene(sc, cam, S, say, text, { oldBest, newBest }) {
     if (t < HEAD - .6) { const k = ease(clamp(t / (HEAD - .6), 0, 1)); heroPos.set(-60 + 60 * k, 0, GZ + 420 - 120 * k); hero.model.rotation.y = Math.PI; pose(hero, poseAt(POSE.jog, t * 650), false, heroPos, dt, 14); }
     else if (t < HEAD + .5) { const k = clamp((t - (HEAD - .6)) / 1.1, 0, 1); heroPos.set(0, Math.sin(k * Math.PI) * 70, GZ + 300); hero.model.rotation.y = Math.PI; pose(hero, k < .25 ? POSE.squat : POSE.jumpUp, false, heroPos, dt, 11); }
     else celebrateStep(hero, t - HEAD - .5, { x: 0, z: GZ + 300 }, dt);
-    let gp = GK.ready; const gkBase = new THREE.Vector3(gkDir * clamp((t - HEAD) / .9, 0, 1) * 90, 0, GZ + 40);
+    let gp = GK.ready; const gkBase = new THREE.Vector3(gkDir * clamp((t - HEAD) / .9, 0, 1) * 170, 0, GZ + 40);
     if (t > HEAD + .1 && t < HIT + .4) gp = gkDir > 0 ? GK.diveRH : GK.diveLH; else if (t >= HIT + .4) gp = gkDir > 0 ? GK.lyingR : GK.lyingL;
     keeper.model.rotation.y = 0; pose(keeper, gp, true, gkBase, dt, 7);
     if (t < CROSS) ball.position.copy(from);
@@ -178,17 +189,18 @@ function court(sc, HZ) {
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(4, 4);
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(3000, 3000), new THREE.MeshStandardMaterial({ map: t, roughness: .6 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; sc.add(floor);
   // קווים: צבע, קו שלוש (קשת), קו סיום
-  const paint = new THREE.Mesh(new THREE.PlaneGeometry(200, 240), new THREE.MeshBasicMaterial({ color: '#0B7A3B' })); paint.rotation.x = -Math.PI / 2; paint.position.set(0, .4, HZ + 130); sc.add(paint);
-  const arc = new THREE.Mesh(new THREE.RingGeometry(300, 306, 48, 1, 0, Math.PI), new THREE.MeshBasicMaterial({ color: '#f8fafc' })); arc.rotation.x = -Math.PI / 2; arc.rotation.z = Math.PI; arc.position.set(0, .6, HZ + 60); sc.add(arc);
-  line(sc, 0, HZ - 20, 800, 5); line(sc, -400, HZ + 400, 5, 840); line(sc, 400, HZ + 400, 5, 840);
+  const paint = new THREE.Mesh(new THREE.PlaneGeometry(460, 545), new THREE.MeshBasicMaterial({ color: '#0B7A3B' })); paint.rotation.x = -Math.PI / 2; paint.position.set(0, .4, HZ + 272); sc.add(paint);
+  const arc = new THREE.Mesh(new THREE.RingGeometry(635, 641, 64, 1, 0, Math.PI), new THREE.MeshBasicMaterial({ color: '#f8fafc' })); arc.rotation.x = -Math.PI / 2; arc.rotation.z = Math.PI; arc.position.set(0, .6, HZ + 60); sc.add(arc);
+  line(sc, 0, HZ - 20, 1500, 6); line(sc, -750, HZ + 700, 6, 1440); line(sc, 750, HZ + 700, 6, 1440);
   // סל: עמוד, לוח, טבעת, רשת
-  const pole = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, 300, 10), new THREE.MeshStandardMaterial({ color: '#475569' })); pole.position.set(0, 150, HZ - 60); sc.add(pole);
-  const board = new THREE.Mesh(new THREE.BoxGeometry(180, 110, 6), new THREE.MeshStandardMaterial({ color: '#f8fafc', roughness: .3 })); board.position.set(0, 300, HZ - 20); sc.add(board);
-  const sq = new THREE.Mesh(new THREE.BoxGeometry(60, 45, 2), new THREE.MeshBasicMaterial({ color: '#ef4444' })); sq.position.set(0, 280, HZ - 16); sc.add(sq);
-  const RIM_Y = 240; const rim = new THREE.Mesh(new THREE.TorusGeometry(24, 2.5, 8, 32), new THREE.MeshStandardMaterial({ color: '#f97316' })); rim.rotation.x = Math.PI / 2; rim.position.set(0, RIM_Y, HZ + 14); sc.add(rim);
-  const net = new THREE.Mesh(new THREE.CylinderGeometry(24, 15, 40, 12, 4, true), new THREE.MeshBasicMaterial({ color: '#f1f5f9', wireframe: true, transparent: true, opacity: .8 })); net.position.set(0, RIM_Y - 20, HZ + 14); sc.add(net);
-  const fans = crowd(sc, { count: 120, x0: -700, x1: 700, z: HZ - 300, y: 60, rows: 3, rowDz: -50, rowDy: 34 });
-  const st = new THREE.Mesh(new THREE.BoxGeometry(1800, 200, 300), new THREE.MeshStandardMaterial({ color: '#1e293b' })); st.position.set(0, 100, HZ - 480); sc.add(st);
+  const RIM_Y = 290; /* 3.05 מ' */
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(7, 7, 380, 10), new THREE.MeshStandardMaterial({ color: '#475569' })); pole.position.set(0, 190, HZ - 80); sc.add(pole);
+  const arm = new THREE.Mesh(new THREE.BoxGeometry(10, 10, 70), new THREE.MeshStandardMaterial({ color: '#475569' })); arm.position.set(0, 372, HZ - 50); sc.add(arm);
+  const board = new THREE.Mesh(new THREE.BoxGeometry(170, 100, 6), new THREE.MeshStandardMaterial({ color: '#f8fafc', roughness: .3 })); board.position.set(0, RIM_Y + 32, HZ - 20); sc.add(board);
+  const sq = new THREE.Mesh(new THREE.BoxGeometry(56, 42, 2), new THREE.MeshBasicMaterial({ color: '#ef4444' })); sq.position.set(0, RIM_Y + 18, HZ - 16); sc.add(sq); const rim = new THREE.Mesh(new THREE.TorusGeometry(22, 2.5, 8, 32), new THREE.MeshStandardMaterial({ color: '#f97316' })); rim.rotation.x = Math.PI / 2; rim.position.set(0, RIM_Y, HZ + 14); sc.add(rim);
+  const net = new THREE.Mesh(new THREE.CylinderGeometry(22, 14, 42, 12, 4, true), new THREE.MeshBasicMaterial({ color: '#f1f5f9', wireframe: true, transparent: true, opacity: .8 })); net.position.set(0, RIM_Y - 20, HZ + 14); sc.add(net);
+  const fans = crowd(sc, { count: 120, x0: -1500, x1: 1500, z: HZ - 360, y: 60, rows: 3, rowDz: -130, rowDy: 90 });
+  const st = new THREE.Mesh(new THREE.BoxGeometry(3400, 480, 700), new THREE.MeshStandardMaterial({ color: '#1e293b' })); st.position.set(0, 240, HZ - 780); sc.add(st);
   return { fans, rim, net, RIM_Y, rimPos: new THREE.Vector3(0, RIM_Y, HZ + 14), shake(k) { rim.position.y = RIM_Y - 6 * k; net.scale.set(1 + .3 * k, 1 + .5 * k, 1 + .3 * k); } };
 }
 function basketBallMesh(r = 14) {
@@ -203,13 +215,13 @@ async function dunkScene(sc, cam, S, say, text, { oldBest, newBest }) {
   const ball = basketBallMesh(14); sc.add(ball); const shadow = ballShadow(sc);
   const RUN = 2.4, JUMP = 3.6, DUNK = 3.5, DUR = 10;
   S.murmur(0, 2.4); S.steps(.4, 10, .22); S.tension(1.6, 1.8); S.rim(DUNK); S.roar(DUNK, 4.2); S.drums(DUNK + .5);
-  const pos = new THREE.Vector3(), look = new THREE.Vector3(), want = new THREE.Vector3();
+  const pos = new THREE.Vector3(), look = new THREE.Vector3(), want = new THREE.Vector3(), handV = new THREE.Vector3();
   const camera = camRig(cam, new THREE.Vector3(820, 440, HZ + 1550), new THREE.Vector3(0, 120, HZ + 250));
   return { dur: DUR, update(t, dt) {
     const back = clamp((t - DUNK - .2) / 1.0, 0, 1);
     want.set(320 - 180 * back, 300 - 20 * back, HZ + 1050 + 250 * back); look.set(0, 210 - 100 * back, HZ + 150 + 150 * back); camera(t, dt, want, look);
     let handY = 0;
-    if (t < RUN) { const k = ease(clamp(t / RUN, 0, 1)); pos.set(0, 0, HZ + 560 - 380 * k); hero.model.rotation.y = Math.PI; pose(hero, poseAt(POSE.run, t * 650), false, pos, dt, 14); ball.position.set(pos.x + 22, 40 + Math.abs(Math.sin(t * 5)) * 30, pos.z); }
+    if (t < RUN) { const k = ease(clamp(t / RUN, 0, 1)); pos.set(0, 0, HZ + 860 - 680 * k); hero.model.rotation.y = Math.PI; pose(hero, dribblePose(poseAt(POSE.run, t * 650)), false, pos, dt, 14); const hp = hero.rig.b.LeftHand.getWorldPosition(handV); const bounce = Math.abs(Math.sin(t * Math.PI * 2.2)); ball.position.set(hp.x, 14 + Math.max(0, hp.y - 14 - 14) * bounce, hp.z); }
     else if (t < JUMP) { const k = clamp((t - RUN) / (JUMP - RUN), 0, 1); const air = Math.sin(k * Math.PI); pos.set(0, air * 150, HZ + 180 - 140 * k); hero.model.rotation.y = Math.PI; pose(hero, k < .2 ? POSE.squat : POSE.jumpUp, false, pos, dt); handY = pos.y + 250; if (t < DUNK) ball.position.set(0, handY, pos.z - 30); else ball.position.set(0, w.RIM_Y - 30 - (t - DUNK) * 250, HZ + 14); }
     else { celebrateStep(hero, t - JUMP, { x: 40, z: HZ + 40 }, dt); const fall = w.RIM_Y - 30 - (t - DUNK) * 250; ball.position.set(0, Math.max(14, fall), HZ + 14); if (fall < 14) ball.position.y = 14 + Math.abs(Math.sin((t - JUMP) * 4)) * 20 * Math.max(0, 1 - (t - JUMP) / 2); }
     w.shake(Math.max(0, 1 - (t - DUNK) / 1.2) * (t > DUNK ? Math.abs(Math.cos((t - DUNK) * 9)) : 0));
@@ -221,22 +233,30 @@ async function dunkScene(sc, cam, S, say, text, { oldBest, newBest }) {
 
 // ---- 4. קליעת שלוש ----
 async function threeScene(sc, cam, S, say, text, { oldBest, newBest }) {
+  /* רועי 30/09: "עדיף שזה יראה כמו זריקה מהצד וזה יהיה זורם": מצלמה מהצד, הזורק מימין והסל משמאל, קשת הכדור חוצה את המסך; תנועת זריקה רציפה: אחיזה → ירידה → זינוק ושחרור → מעקב → נחיתה */
   const HZ = -420; const w = court(sc, HZ); const conf = confetti(sc, 320);
   const hero = await loadCharacter(KITS3D.maccabi); sc.add(hero.model);
   const ball = basketBallMesh(14); sc.add(ball); const shadow = ballShadow(sc);
-  const SHOOT = 2.2, SWISH = 3.9, DUR = 10;
+  const DIP = 1.1, RISE = 1.9, SHOOT = 2.3, LAND = 3.0, SWISH = 3.9, DUR = 10.5;
   S.murmur(0, 2.2); S.tension(1.2, 2.6); S.swish(SWISH); S.roar(SWISH, 4.2); S.drums(SWISH + .5);
-  const from = new THREE.Vector3(0, 250, HZ + 330), rimP = w.rimPos.clone();
-  const pos = new THREE.Vector3(0, 0, HZ + 360), look = new THREE.Vector3(), want = new THREE.Vector3();
-  const camera = camRig(cam, new THREE.Vector3(-760, 460, HZ + 1650), new THREE.Vector3(0, 120, HZ + 200));
+  const SZ = HZ + 420; /* עומק הזורק: 4.5 מ' מהסל */ const rimP = w.rimPos.clone(); const from = new THREE.Vector3();
+  const pos = new THREE.Vector3(0, 0, SZ), look = new THREE.Vector3(), want = new THREE.Vector3(), hl = new THREE.Vector3(), hr = new THREE.Vector3();
+  const camera = camRig(cam, new THREE.Vector3(-1150, 440, SZ - 80), new THREE.Vector3(0, 150, SZ - 200));
+  let released = false;
   return { dur: DUR, update(t, dt) {
     const back = clamp((t - SWISH) / 1.0, 0, 1);
-    want.set(-260 + 200 * back, 260 + 40 * back, HZ + 1200 + 320 * back); look.set(0, 140 - 30 * back, HZ + 120 + 200 * back); camera(t, dt, want, look); /* רואים גם את הקולע (z+360) וגם את הסל */
-    if (t < SHOOT - .5) { hero.model.rotation.y = Math.PI; pose(hero, POSE.squat, false, pos, dt); ball.position.set(pos.x, 150, pos.z - 30); }
-    else if (t < SHOOT + .6) { const k = clamp((t - (SHOOT - .5)) / 1.1, 0, 1); pos.y = Math.sin(k * Math.PI) * 50; hero.model.rotation.y = Math.PI; pose(hero, POSE.jumpUp, false, pos, dt); if (t < SHOOT) ball.position.set(0, 150 + k * 200, pos.z - 30); }
-    else celebrateStep(hero, t - SHOOT - .6, { x: 0, z: HZ + 360 }, dt);
-    if (t >= SHOOT && t < SWISH) { const k = (t - SHOOT) / (SWISH - SHOOT); ball.position.lerpVectors(from, rimP, k); ball.position.y += Math.sin(k * Math.PI) * 130; ball.rotation.x -= dt * 6; }
-    else if (t >= SWISH) { const fall = rimP.y - (t - SWISH) * 220; ball.position.set(0, Math.max(14, fall), rimP.z); if (fall < 14) ball.position.y = 14 + Math.abs(Math.sin((t - SWISH) * 4)) * 24 * Math.max(0, 1 - (t - SWISH) / 2.5); }
+    want.set(-880 - 100 * back, 260 + 40 * back, SZ - 215 + 140 * back); look.set(0, 210 - 60 * back, SZ - 215 + 60 * back); camera(t, dt, want, look);
+    if (t < SWISH + .5) hero.model.rotation.y = Math.PI; /* פונה לסל (-Z); אחר כך face() מסובב למצלמה */
+    if (t < DIP) { pose(hero, SHOT.hold, false, pos, dt, 6); }
+    else if (t < RISE) { pose(hero, SHOT.dip, false, pos, dt, 5); }
+    else if (t < SHOOT) { const k = clamp((t - RISE) / (SHOOT - RISE), 0, 1); pos.y = ease(k) * 26; pose(hero, SHOT.release, false, pos, dt, 10); }
+    else if (t < LAND) { const k = clamp((t - SHOOT) / (LAND - SHOOT), 0, 1); pos.y = Math.max(0, 26 + 60 * Math.sin(k * Math.PI) - 26 * k); pose(hero, k < .6 ? SHOT.follow : SHOT.land, false, pos, dt, 8); }
+    else if (t < SWISH + .5) { pos.y = 0; pose(hero, SHOT.land, false, pos, dt, 6); }
+    else celebrateStep(hero, t - SWISH - .5, { x: 0, z: SZ }, dt, 1, { base: -Math.PI / 2, dx: -150, dz: -40 }); /* פונה למצלמה שבצד -X ורץ אליה */
+    /* הכדור: בידיים עד השחרור, ואז קשת אל הטבעת */
+    if (t < SHOOT) { hero.rig.b.LeftHand.getWorldPosition(hl); hero.rig.b.RightHand.getWorldPosition(hr); ball.position.lerpVectors(hl, hr, .5); ball.position.z -= 10; ball.position.y += 6; from.copy(ball.position); }
+    else if (t < SWISH) { const k = (t - SHOOT) / (SWISH - SHOOT); ball.position.lerpVectors(from, rimP, k); ball.position.y += Math.sin(k * Math.PI) * 110; ball.rotation.x -= dt * 5; if (!released) { released = true; } }
+    else { const fall = rimP.y - (t - SWISH) * 220; ball.position.set(0, Math.max(14, fall), rimP.z); if (fall < 14) ball.position.y = 14 + Math.abs(Math.sin((t - SWISH) * 4)) * 24 * Math.max(0, 1 - (t - SWISH) / 2.5); }
     w.shake(t > SWISH ? Math.max(0, 1 - (t - SWISH) / .8) * .6 : 0);
     shadow(ball); w.fans.update(t, t > SWISH);
     if (t > SWISH && t < SWISH + .06) { conf.start(0, 320, HZ + 100, 400); say('', 'pt-BR'); text.show('שלוש!', 'סוויש', 'big'); }
@@ -264,7 +284,7 @@ async function sprintScene(sc, cam, S, say, text, { oldBest, newBest }) {
     lanes.forEach((l, i) => {
       const k = run ? (t - START) / DUR_RUN * l.speed : 0; l.x = -520 + 760 * Math.pow(clamp(k, 0, 1), .85) + Math.max(0, k - 1) * 400; const crossed = l.x >= FIN; const hero = i === 2;
       const hz = run ? Math.min(2.8, .8 + (t - START) * 1.4) * l.speed : 0; l.ph += hz * dt; /* צעדים איטיים וברורים */
-      const stopX = hero ? FIN + 120 : FIN + 40 + i * 30; const stopped = crossed && l.x >= stopX;
+      const stopX = hero ? FIN + 120 : Infinity; const stopped = false; /* האחרים ממשיכים לרוץ החוצה מהפריים */
       const target = !run ? POSE.ready : (crossed && hero) ? lerpPose(POSE.armsUp, POSE.jumpUp, (Math.sin(t * BOUNCE * .5) + 1) / 2) : stopped ? POSE.stand : (k > .85 && !crossed) ? LEAN : poseAt(SPRINT, (l.ph % 1) * 8);
       const front = crossed && hero; pos.set(crossed ? Math.min(l.x, stopX) : l.x, front ? Math.max(0, Math.sin(t * BOUNCE)) * 18 : 0, l.z);
       if (front) face(l.r, Math.sin(t * 1.3) * .2, dt, 5); else l.r.model.rotation.y = Math.PI / 2; pose(l.r, target, front, pos, dt, run && !crossed ? 16 : 9);
