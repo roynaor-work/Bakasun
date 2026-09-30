@@ -22,10 +22,13 @@
 
 /* the payment schedule */
 .bg-sched { display: flex; flex-direction: column; gap: 6px; }
-.bg-srow { flex-direction: row; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 14px; }
+/* phone: date, amount and state on the first line, who and what on the second */
+.bg-srow { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: 'date amt st' 'who who who'; align-items: center; gap: 4px 10px; padding: 10px 14px; }
 .bg-srow[data-l] { cursor: pointer; }
-.bg-srow .bg-date { flex: none; min-width: 6em; font-weight: 700; }
-.bg-srow .bg-who { flex: 1; min-width: 0; }
+.bg-srow .bg-date { grid-area: date; font-weight: 700; }
+.bg-srow .bg-amt { grid-area: amt; }
+.bg-srow .bg-st { grid-area: st; }
+.bg-srow .bg-who { grid-area: who; min-width: 0; }
 .bg-srow .bg-who .title { font-size: 15px; }
 .bg-srow .bg-amt { font-weight: 800; font-family: var(--f-head); }
 .bg-srow.late .bg-date, .bg-srow.late .bg-amt { color: #b00020; }
@@ -50,6 +53,8 @@
   .bg-desk { display: block; }
   .bg-sub-mobile { display: none; }
   .bg-row .bg-cell { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-  .bg-srow { flex-wrap: nowrap; }
-  .bg-srow .bg-st { flex: none; }
+  .bg-srow { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 10px; }
+  .bg-srow .bg-date { flex: none; min-width: 6em; }
+  .bg-srow .bg-who { flex: 1; }
+  .bg-srow .bg-st, .bg-srow .bg-bal { flex: none; }
 }

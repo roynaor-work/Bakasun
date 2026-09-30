@@ -2,7 +2,7 @@
    or turn a supplier's quote into the client's quote with her fee. Nothing goes out until she taps. */
 import { t, lang, SPEECH, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, empty, dialog, toast, openWhatsApp, openWhatsAppPick, copyText } from '../ui.js';
+import { esc, field, empty, dialog, toast, openWhatsApp, openWhatsAppPick, copyText, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { TASK } from '../logic/extra.js';
 import { isReceiptCommand } from '../logic/receipts.js';
@@ -191,7 +191,7 @@ function showAgenda(out, q) {
       ${a.tasks.length ? `<div class="sub"><b>${esc(t('agendaTasks'))}</b></div>${a.tasks.map(line).join('')}` : ''}
       ${a.events.length ? `<div class="sub"><b>${esc(t('agendaEvents'))}</b></div>${a.events.map(ev).join('')}` : ''}
       ${a.calls.length ? `<div class="sub"><b>${esc(t('agendaCalls'))}</b></div>${a.calls.map(cl).join('')}` : ''}
-      <div class="row"><a class="btn sm" href="#/tasks">${esc(t('allTasks'))}</a><a class="btn sm ghost" href="#/today">${esc(t('today'))}</a></div></div>`;
+      <div class="row"><a class="btn sm" href="#/tasks">${esc(t('allTasks'))}</a><a class="btn sm ghost" href="#/today">${esc(t('today'))}</a>${none ? '' : copyBtn(when + '\n' + [a.tasks.length ? t('agendaTasks') + ':\n' + a.tasks.map(x => '• ' + [x.time, x.title, x.who && x.who !== t('me') ? x.who : ''].filter(Boolean).join(' · ')).join('\n') : '', a.events.length ? t('agendaEvents') + ':\n' + a.events.map(c => '• ' + [c.client, c.kind, c.date ? Office.fmt(c.date) : '', c.place].filter(Boolean).join(' · ')).join('\n') : '', a.calls.length ? t('agendaCalls') + ':\n' + a.calls.map(c => '• ' + [c.who || c.name || c.client || '', c.about].filter(Boolean).join(' · ')).join('\n') : ''].filter(Boolean).join('\n\n'))}</div></div>`;
     out.querySelectorAll('[data-task]').forEach(el => { el.querySelector('[data-done]').onclick = () => { db.put('tasks', { id: el.dataset.task, status: TASK.done }); toast(t('taskDone')); draw(); }; });
   };
   draw();
@@ -256,7 +256,7 @@ async function tabCommand(body, s, ctx) {
       const patch = { phone: c.contact.phone || undefined, email: c.contact.email || undefined };
       if (col && c.to.id) db.put(col, Object.assign({ id: c.to.id }, patch)); else db.put('team', Object.assign({ name: c.contact.name }, patch));
       if (/רועי|roy/i.test(c.contact.name) && c.contact.phone && !s.invoiceTo) db.setting('invoiceTo', c.contact.phone);
-      out.innerHTML = `<p class="okbox">${esc(t('contactSaved', { name: c.to ? c.to.name : c.contact.name, value: c.contact.phone || c.contact.email }))}</p>`; return;
+      out.innerHTML = `<p class="okbox">${esc(t('contactSaved', { name: c.to ? c.to.name : c.contact.name, value: c.contact.phone || c.contact.email }))} ${copyBtn(c.contact.phone || c.contact.email, { icon: true })}</p>`; return;
     }
     if (c.kind === 'message') {
       // "send myself..." : her own number from the settings
@@ -265,7 +265,7 @@ async function tabCommand(body, s, ctx) {
       // "send Dana the template tour": the body is one of her templates, with the first name filled in
       const ref = templateRef(c.body);
       if (ref) { const tp = findTemplate(templates(db), ref); if (tp) c.body = fillTemplate(tp.text, { name: c.to.name || '' }); else { out.innerHTML = `<p class="warnbox">${esc(t('noTemplateNamed', { name: ref }))}</p>`; return; } }
-      out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(c.to.group ? t('groupTo') : t('recipient'))}</dt><dd class="ltr">${esc(c.to.name || c.to.phone || c.to.email)}${c.to.name && has ? ' · ' + esc(has) : ''}</dd></div>
+      out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(c.to.group ? t('groupTo') : t('recipient'))}</dt><dd class="ltr">${esc(c.to.name || c.to.phone || c.to.email)}${c.to.name && has ? ' · ' + esc(has) : ''}${has ? copyBtn(has, { icon: true }) : ''}</dd></div>
         ${field('msg', t('theMessage'), c.body, { type: 'textarea', rows: 4 })}
         ${c.to.group ? `<div class="row"><button class="btn wa" id="waPick">${esc(t('waPickGroup'))}</button></div><p class="hint">${esc(t('groupHint'))}</p>`
           : has ? `<div class="row">${c.via === 'email' ? `<a class="btn primary" id="mail">${esc(t('email'))}</a>` : `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>`}${c.via === 'email' && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.via !== 'email' && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}</div>`
@@ -276,7 +276,7 @@ async function tabCommand(body, s, ctx) {
         const col = c.to.about === 'client' ? 'clients' : c.to.about === 'supplier' ? 'suppliers' : c.to.about === 'team' ? 'team' : c.to.about === 'contact' ? 'contacts' : '';
         if (col) { const r0 = document.createElement('div'); r0.className = 'row'; r0.innerHTML = `<button type="button" class="btn sm" id="keepPhone">${esc(t('keepPhoneFor', { who: c.to.name, phone: c.to.phone }))}</button>`; out.querySelector('.card').appendChild(r0); r0.querySelector('#keepPhone').onclick = () => { db.put(col, { id: c.to.id, phone: c.to.phone }); toast(t('personSaved')); r0.remove(); }; }
       }
-      { const r = document.createElement('div'); r.className = 'row'; r.innerHTML = `<button type="button" class="btn sm ghost" id="readMsg">🔊 ${esc(t('readAloud'))}</button><button type="button" class="btn sm ghost" id="saveTpl">${esc(t('saveAsTemplate'))}</button>`; out.querySelector('.card').appendChild(r); r.querySelector('#readMsg').onclick = () => speak(msg(), lang());
+      { const r = document.createElement('div'); r.className = 'row'; r.innerHTML = `${copyOf('[name=msg]')}<button type="button" class="btn sm ghost" id="readMsg">🔊 ${esc(t('readAloud'))}</button><button type="button" class="btn sm ghost" id="saveTpl">${esc(t('saveAsTemplate'))}</button>`; out.querySelector('.card').appendChild(r); r.querySelector('#readMsg').onclick = () => speak(msg(), lang());
         r.querySelector('#saveTpl').onclick = async () => { const rr = await dialog(t('saveAsTemplate'), field('name', t('templateName'), '') + `<p class="hint">${esc(t('templateHint'))}</p>`, { ok: t('save') }); if (rr && rr.name) { saveTemplate(db, rr.name, msg()); toast(t('templateSaved', { name: rr.name })); } }; }
       const wa = out.querySelector('#wa'); if (wa) wa.onclick = () => openWhatsApp(c.to.phone, msg());
       const wp = out.querySelector('#waPick'); if (wp) wp.onclick = () => openWhatsAppPick(msg());
@@ -293,9 +293,9 @@ async function tabCommand(body, s, ctx) {
       return;
     }
     if (c.kind !== 'send' || (!c.doc && !c.to)) { out.innerHTML = `<p class="warnbox">${esc(t('cmdUnknown'))}</p>`; return; }
-    out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(t('document'))}</dt><dd>${c.doc ? esc(c.doc.title) : `<span class="badge warn">${esc(t('docNotFound'))}</span>`}</dd><dt>${esc(t('recipient'))}</dt><dd class="ltr">${c.to ? esc(c.to.name || c.to.phone || c.to.email) + (c.to.name && c.to.phone ? ' · ' + esc(c.to.phone) : '') : `<span class="badge warn">${esc(t('noRecipient'))}</span>`}</dd></div>
+    out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(t('document'))}</dt><dd>${c.doc ? esc(c.doc.title) : `<span class="badge warn">${esc(t('docNotFound'))}</span>`}</dd><dt>${esc(t('recipient'))}</dt><dd class="ltr">${c.to ? esc(c.to.name || c.to.phone || c.to.email) + (c.to.name && c.to.phone ? ' · ' + esc(c.to.phone) : '') + (c.to.phone || c.to.email ? copyBtn(c.to.phone || c.to.email, { icon: true }) : '') : `<span class="badge warn">${esc(t('noRecipient'))}</span>`}</dd></div>
       ${field('msg', t('note'), c.doc ? t('docMsg', { doc: c.doc.title }) : '', { type: 'textarea', rows: 2 })}
-      <div class="row">${c.doc ? `<button class="btn primary" id="share">${esc(t('shareFile'))}</button>` : ''}${c.to && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.to && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}</div>
+      <div class="row">${c.doc ? `<button class="btn primary" id="share">${esc(t('shareFile'))}</button>` : ''}${c.to && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.to && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}${copyOf('[name=msg]')}</div>
       ${c.to && c.to.name && !c.to.phone && !c.to.email ? `<p class="warnbox">${esc(t('noContact'))} <button class="btn sm" id="addContact">${esc(t('addPhone'))}</button></p>` : ''}
       <p class="hint">${esc(t('shareHint'))}</p></div>`;
     const msg = () => out.querySelector('[name=msg]').value;
@@ -421,7 +421,7 @@ function tabSupplierQuote(body, s, ctx) {
       if (sup) { const link = db.list('links', l => l.caseId === cs.id && l.supplierId === sup.id)[0]; db.put('links', Object.assign(link ? { id: link.id } : { caseId: cs.id, supplierId: sup.id, supplier: sup.name, what: items.map(x => x.item).join(', '), askedAt: todayIso() }, { status: 'הצעה התקבלה', cost: items.reduce((a, x) => a + x.cost, 0) })); }
       toast(t('saved'));
       if (sup && sup.phone) {
-        dialog(t('sqNotify', { name: sup.name }), `<textarea name="text" rows="8">${esc(supplierMarkupMessage(sup, cs, client, form.lang.value, s.signer || DEFAULTS.signer))}</textarea>`, { ok: t('whatsapp'), cancel: t('skip') })
+        dialog(t('sqNotify', { name: sup.name }), `<textarea name="text" rows="8">${esc(supplierMarkupMessage(sup, cs, client, form.lang.value, s.signer || DEFAULTS.signer))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp'), cancel: t('skip') })
           .then(r => { if (r) openWhatsApp(sup.phone, r.text); location.hash = '#/quote/' + q.id; });
       } else location.hash = '#/quote/' + q.id;
     };
@@ -440,8 +440,8 @@ async function tabDocs(body) {
   const lib = await files.all();
   body.innerHTML = `<p class="hint">${esc(t('docsHint'))}</p>
     <form class="card stack" id="up"><label class="btn">${esc(t('pickFile'))}<input type="file" id="f" class="sr"></label><span id="fname" class="sub"></span>${field('title', t('docTitle'), '')}${field('aliases', t('docAliases'), '', { placeholder: 'אישור חשבון, אישור בנק' })}<button class="btn primary" type="submit">${esc(t('save'))}</button></form>
-    <h2>${esc(t('companyPapers'))}</h2><div class="list">${COMPANY_PAPERS.map(p => `<div class="card" data-p="${esc(p.key)}"><div class="row between"><span class="title">${esc(p.title)}</span><span class="badge ${p.status === 'found' ? 'ok' : ''}">${esc(p.status === 'found' ? t('paperFound') + (p.date ? ' · ' + esc(Office.fmt(p.date)) : '') : t('paperMissing'))}</span></div>${p.note ? `<div class="sub">${esc(p.note)}</div>` : ''}${p.status === 'found' && p.file ? `<div class="row"><button class="btn sm primary" data-pshare>${esc(t('shareFile'))}</button><a class="btn sm ghost" href="${esc(p.file)}" target="_blank" rel="noopener">${esc(t('open'))}</a></div>` : ''}</div>`).join('')}</div>
-    <h2>${esc(t('docsLib'))}</h2><div class="list">${lib.length ? lib.map(f => `<div class="card" data-f="${esc(f.id)}"><div class="row between"><span class="title">${esc(f.title || f.name)}</span><span class="sub ltr">${esc(f.name)} · ${Math.round((f.size || 0) / 1024)} KB</span></div>${f.aliases ? `<div class="sub">${esc(f.aliases)}</div>` : ''}<div class="row"><button class="btn sm primary" data-share>${esc(t('shareFile'))}</button><button class="btn sm ghost" data-del>${esc(t('delete'))}</button></div></div>`).join('') : empty(t('noDocsYet'))}</div>
+    <h2>${esc(t('companyPapers'))}</h2><div class="list">${COMPANY_PAPERS.map(p => `<div class="card" data-p="${esc(p.key)}"><div class="row between"><span class="title">${esc(p.title)}</span><span class="badge ${p.status === 'found' ? 'ok' : ''}">${esc(p.status === 'found' ? t('paperFound') + (p.date ? ' · ' + esc(Office.fmt(p.date)) : '') : t('paperMissing'))}</span></div>${p.note ? `<div class="sub">${esc(p.note)}</div>` : ''}${p.status === 'found' && p.file ? `<div class="row"><button class="btn sm primary" data-pshare>${esc(t('shareFile'))}</button><a class="btn sm ghost" href="${esc(p.file)}" target="_blank" rel="noopener">${esc(t('open'))}</a>${copyBtn(new URL(p.file, location.href).href)}</div>` : ''}</div>`).join('')}</div>
+    <h2>${esc(t('docsLib'))}</h2><div class="list">${lib.length ? lib.map(f => `<div class="card" data-f="${esc(f.id)}"><div class="row between"><span class="title">${esc(f.title || f.name)}</span><span class="sub ltr">${esc(f.name)} · ${Math.round((f.size || 0) / 1024)} KB</span></div>${f.aliases ? `<div class="sub">${esc(f.aliases)}</div>` : ''}<div class="row"><button class="btn sm primary" data-share>${esc(t('shareFile'))}</button>${copyBtn(t('docMsg', { doc: f.title || f.name }))}<button class="btn sm ghost" data-del>${esc(t('delete'))}</button></div></div>`).join('') : empty(t('noDocsYet'))}</div>
     <p class="hint">${esc(t('docsSuggest'))}</p>`;
   const inp = body.querySelector('#f'); inp.onchange = () => { body.querySelector('#fname').textContent = inp.files[0] ? inp.files[0].name : ''; if (inp.files[0] && !body.querySelector('[name=title]').value) body.querySelector('[name=title]').value = inp.files[0].name.replace(/\.[a-z0-9]+$/i, ''); };
   body.querySelector('#up').onsubmit = async e => { e.preventDefault(); const f = inp.files[0]; if (!f) return; await files.put(f, { title: body.querySelector('[name=title]').value.trim(), aliases: body.querySelector('[name=aliases]').value.trim() }); toast(t('saved')); tabDocs(body); };

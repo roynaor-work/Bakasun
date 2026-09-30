@@ -2,7 +2,7 @@
    Totals from Office.quoteTotals. Preview and PDF from Office.quoteHtml. The message to the client from Office.quoteMessage. */
 import { t, lang, kindLabel, langName, KIND_LABELS } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, empty, dialog, confirmDialog, toast, openWhatsApp } from '../ui.js';
+import { esc, field, empty, dialog, confirmDialog, toast, openWhatsApp, copyText, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { QUOTE_STATUS, priceFromCost, marginOf, recommendedLines, catalogAll, lastCost, resolveLines, translator } from '../logic/quotes.js';
 import { quoteStatusLabel, unitLabel, categoryLabel } from '../labels.js';
@@ -88,7 +88,7 @@ function renderOne({ root, id }) {
   root.querySelector('#pdf').onclick = () => makePdf(pageHtml(), q.no + '.pdf');
   root.querySelector('#send').onclick = async () => {
     const text = Office.quoteMessage(Object.assign({}, q, { lines }), cs, s.signer || '');
-    const r = await dialog(t('sendQuote'), `<textarea name="text" rows="7">${esc(text)}</textarea>`, { ok: t('whatsapp') });
+    const r = await dialog(t('sendQuote'), `<textarea name="text" rows="7">${esc(text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
     if (r && openWhatsApp(cs.phone, r.text)) { db.put('quotes', { id, status: QUOTE_STATUS.sent, sentAt: todayIso() }); if (cs.id) db.put('cases', { id: cs.id, status: Office.STATUS.quoted, waitingSince: todayIso(), quoteNo: q.no }); }
   };
   root.querySelector('#clone').onclick = () => {
@@ -126,10 +126,12 @@ async function editLine(q, i, sups) {
 
 function showPreview(html) {
   const wrap = document.createElement('div'); wrap.className = 'modal';
-  wrap.innerHTML = `<div class="modal-card" style="max-height:95vh;padding:8px"><div class="row between"><button class="btn sm" id="pvClose">${esc(t('close'))}</button></div><iframe id="pv" style="width:100%;height:80vh;border:1px solid var(--line);border-radius:8px;background:#fff"></iframe></div>`;
+  wrap.innerHTML = `<div class="modal-card" style="max-height:95vh;padding:8px"><div class="row between"><button class="btn sm" id="pvClose">${esc(t('close'))}</button><button type="button" class="btn sm ghost" id="pvCopy">${esc(t('copy'))}</button></div><iframe id="pv" style="width:100%;height:80vh;border:1px solid var(--line);border-radius:8px;background:#fff"></iframe></div>`;
   document.body.appendChild(wrap);
   wrap.querySelector('#pv').srcdoc = html;
   wrap.querySelector('#pvClose').onclick = () => wrap.remove();
+  // the quote as plain text (what the page shows), for pasting into a mail or a chat
+  wrap.querySelector('#pvCopy').onclick = () => { const d = wrap.querySelector('#pv').contentDocument; copyText(d && d.body ? d.body.innerText.trim() : ''); };
   wrap.addEventListener('click', e => { if (e.target === wrap) wrap.remove(); });
 }
 

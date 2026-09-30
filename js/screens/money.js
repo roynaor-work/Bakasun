@@ -1,7 +1,7 @@
 /* Money: what to collect from clients (overdue, soon, invoice to ask from Roy), and suppliers not yet paid. */
 import { t } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, section, empty, dialog, toast, openWhatsApp } from '../ui.js';
+import { esc, field, section, empty, dialog, toast, openWhatsApp, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { payStatusLabel } from '../labels.js';
 import { DEFAULTS } from '../data/defaults.js';
@@ -49,7 +49,7 @@ export function render({ root }) {
     const l = db.get('links', el.dataset.miss); const cs = db.get('cases', l.caseId) || {}; const sp = db.get('suppliers', l.supplierId) || { name: l.supplier };
     el.querySelector('[data-got-inv]').onclick = () => { db.put('links', { id: l.id, supInvoice: 'התקבלה', supInvoiceAt: todayIso() }); render({ root }); };
     el.querySelector('[data-remind-inv]').onclick = async () => {
-      const r = await dialog(t('remind'), `<textarea name="text" rows="7">${esc(supplierInvoiceReminder(sp, cs, Office.num(l.cost), sp.lang || 'he', s.signer || DEFAULTS.signer))}</textarea>`, { ok: sp.email ? t('email') : t('whatsapp'), cancel: sp.email && sp.phone ? t('whatsapp') : undefined });
+      const r = await dialog(t('remind'), `<textarea name="text" rows="7">${esc(supplierInvoiceReminder(sp, cs, Office.num(l.cost), sp.lang || 'he', s.signer || DEFAULTS.signer))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: sp.email ? t('email') : t('whatsapp'), cancel: sp.email && sp.phone ? t('whatsapp') : undefined });
       if (r === null) return;
       if (sp.email) openMail(sp.email, t('supInvoice') + ' · ' + (cs.kind || '') + (cs.date ? ' · ' + Office.fmt(cs.date) : ''), r.text); else openWhatsApp(sp.phone, r.text);
     };
@@ -59,7 +59,7 @@ export function render({ root }) {
     el.querySelector('[data-status]').onchange = e => db.put('payments', { id: p.id, status: e.target.value, paidAt: e.target.value === Office.PAY.paid ? todayIso() : p.paidAt, invoicedAt: e.target.value === Office.PAY.invoiced && !p.invoicedAt ? todayIso() : p.invoicedAt });
     el.querySelector('[data-edit]').onclick = () => editPayment(p);
     el.querySelector('[data-remind]').onclick = async () => {
-      const r = await dialog(t('remind'), `<textarea name="text" rows="6">${esc(Office.paymentReminder(p, cs, cs.contact) + (s.signer ? '\n' + s.signer : ''))}</textarea>`, { ok: t('whatsapp') });
+      const r = await dialog(t('remind'), `<textarea name="text" rows="6">${esc(Office.paymentReminder(p, cs, cs.contact) + (s.signer ? '\n' + s.signer : ''))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
       if (r) openWhatsApp(cs.phone, r.text);
     };
     const inv = el.querySelector('[data-invoice]'); if (inv) inv.onclick = async () => {
@@ -67,7 +67,7 @@ export function render({ root }) {
       const m = Office.invoiceRequest(p, cs, client, s.signer || DEFAULTS.signer);
       const extra = [client.payer ? '• משלם דרך: ' + client.payer : '', client.invoiceEmail && client.invoiceEmail !== client.email ? '• לשלוח ל: ' + client.invoiceEmail : '', client.payTerms ? '• תנאי תשלום: ' + client.payTerms : '', client.attachments ? '• לצרף: ' + client.attachments : ''].filter(Boolean);
       if (extra.length) m.text = m.text.replace(/\n\nתודה,/, '\n' + extra.join('\n') + '\n\nתודה,');
-      const r = await dialog(t('askInvoice'), `<textarea name="text" rows="12">${esc(m.text)}</textarea>`, { ok: t('whatsapp') });
+      const r = await dialog(t('askInvoice'), `<textarea name="text" rows="12">${esc(m.text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
       if (r && openWhatsApp(s.invoiceTo, r.text)) db.put('payments', { id: p.id, status: Office.PAY.invoiceAsked });
     };
   });

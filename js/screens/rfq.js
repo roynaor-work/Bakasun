@@ -2,7 +2,7 @@
    compare them, pick one and tell the others. Used by the case's suppliers tab and by Today. */
 import { t, lang as uiLang } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, dialog, toast, openWhatsApp, openMail } from '../ui.js';
+import { esc, field, dialog, toast, openWhatsApp, openMail, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { supplierTypeLabel, stars } from '../labels.js';
 import { SUPPLIER_TYPES } from '../data/catalog.js';
@@ -24,8 +24,8 @@ export function sendEach(targets, textOf, subjectOf, after) {
     if (i >= targets.length) { toast(t('saved')); return; }
     const sp = targets[i]; const text = textOf(sp);
     const wrap = document.createElement('div'); wrap.className = 'modal';
-    wrap.innerHTML = `<form class="modal-card"><h2>${esc(sp.name)} (<span class="count">${i + 1}/${targets.length}</span>)</h2><div class="modal-body">${sp.email ? `<div class="sub ltr">${esc(sp.email)}</div>` : ''}<textarea name="text" rows="10">${esc(text)}</textarea></div>
-      <div class="row end"><button type="button" class="btn ghost" data-x="skip">${esc(t('skip'))}</button>${sp.phone ? `<button type="button" class="btn wa" data-x="wa">${esc(t('whatsapp'))}</button>` : ''}${sp.email ? `<button type="button" class="btn primary" data-x="mail">${esc(t('email'))}</button>` : ''}${!sp.phone && !sp.email ? `<span class="badge warn">${esc(t('noContact'))}</span>` : ''}</div></form>`;
+    wrap.innerHTML = `<form class="modal-card"><h2>${esc(sp.name)} (<span class="count">${i + 1}/${targets.length}</span>)</h2><div class="modal-body">${sp.email ? `<div class="sub ltr">${esc(sp.email)}${copyBtn(sp.email, { icon: true })}</div>` : ''}<textarea name="text" rows="10">${esc(text)}</textarea></div>
+      <div class="row end"><button type="button" class="btn ghost" data-x="skip">${esc(t('skip'))}</button>${copyOf('[name=text]', { sm: false })}${sp.phone ? `<button type="button" class="btn wa" data-x="wa">${esc(t('whatsapp'))}</button>` : ''}${sp.email ? `<button type="button" class="btn primary" data-x="mail">${esc(t('email'))}</button>` : ''}${!sp.phone && !sp.email ? `<span class="badge warn">${esc(t('noContact'))}</span>` : ''}</div></form>`;
     document.body.appendChild(wrap);
     const next = () => { wrap.remove(); i++; setTimeout(step, 300); };
     wrap.querySelector('[data-x=skip]').onclick = next;
@@ -106,7 +106,7 @@ export function remindAll(pending, s) {
 /** The offer came back: paste it, the fields fill, she fixes and saves. */
 export async function offerDialog(c, l, sp) {
   const o = l.offer || {}; const S = LABELS[L()] || LABELS.he;
-  const body = `<label class="f"><span>${esc(t('pasteOffer'))}</span><textarea name="text" rows="4">${esc(o.text || '')}</textarea></label><div class="row"><button type="button" class="btn sm" id="readOffer">${esc(t('readOffer'))}</button></div>
+  const body = `<label class="f"><span>${esc(t('pasteOffer'))}</span><textarea name="text" rows="4">${esc(o.text || '')}</textarea></label><div class="row"><button type="button" class="btn sm" id="readOffer">${esc(t('readOffer'))}</button>${copyOf('[name=text]')}</div>
     <div class="grid2">${field('total', S.total, o.total || l.cost || '', { type: 'number', inputmode: 'decimal' })}${field('perPerson', S.per, o.perPerson || '', { type: 'number', inputmode: 'decimal' })}${field('venue', S.venue, o.venue || '', { type: 'number', inputmode: 'decimal' })}${field('food', S.food, o.food || '', { type: 'number', inputmode: 'decimal' })}${field('av', S.av, o.av || '', { type: 'number', inputmode: 'decimal' })}${field('deposit', S.deposit, o.deposit || '')}</div>
     ${field('included', S.included, o.included || '')}${field('cancellation', S.cancellation, o.cancellation || '')}${field('terms', S.terms, o.terms || '')}
     <div class="grid2">${field('verdict', t('verdict'), o.verdict || '', { type: 'select', options: [['', ''], ['שווה', t('vWorth')], ['סביר', t('vOk')], ['יקר', t('vPricey')]] })}${field('note', t('note'), o.note || '')}</div>`;
@@ -129,7 +129,7 @@ export function compareBlock(c, links, sups) {
   return `<section class="sec"><div class="sec-h"><h2>${esc(t('compare'))}</h2></div>
     <div class="tablewrap"><table class="cmp"><thead><tr><th>${esc(S.supplier)}</th><th>${esc(S.total)}</th><th>${esc(S.per)}</th><th>${esc(S.cancellation)}</th><th>${esc(S.deposit)}</th><th>${esc(S.terms)}</th><th>${esc(S.note)}</th><th></th></tr></thead>
     <tbody>${rows.map(r => `<tr${r.chosen ? ' class="chosen"' : ''}><td>${esc(r.supplier)}${r.chosen ? ' ★' : ''}</td><td class="n">${r.hasOffer ? esc(Office.money(r.total)) : `<i>${esc(S.none)}</i>`}</td><td class="n">${r.perPerson ? esc(Office.money(r.perPerson)) : ''}</td><td>${esc(r.cancellation)}</td><td>${esc(r.deposit)}</td><td>${esc(r.terms)}</td><td>${esc([r.verdict, r.note].filter(Boolean).join(' · '))}</td><td>${r.hasOffer && !r.chosen ? `<button class="btn sm ok" data-choose="${esc(r.id)}">${esc(t('chooseSup'))}</button>` : ''}</td></tr>`).join('')}</tbody></table></div>
-    <div class="row"><button class="btn sm primary" data-summary>${esc(t('clientSummary'))}</button><button class="btn sm" data-share-cmp="he">${esc(t('shareCompare'))} · עברית</button><button class="btn sm" data-share-cmp="en">${esc(t('shareCompare'))} · English</button>${rows.some(r => r.chosen) && rows.some(r => !r.chosen && /ביקשנו|התקבלה/.test(r.status)) ? `<button class="btn sm ghost" data-decline>${esc(t('declineOthers'))}</button>` : ''}</div></section>`;
+    <div class="row"><button class="btn sm primary" data-summary>${esc(t('clientSummary'))}</button>${copyBtn([S.supplier + ' · ' + S.total + ' · ' + S.per + ' · ' + S.cancellation + ' · ' + S.deposit + ' · ' + S.terms].concat(rows.map(r => [r.supplier + (r.chosen ? ' ★' : ''), r.hasOffer ? Office.money(r.total) : S.none, r.perPerson ? Office.money(r.perPerson) : '', r.cancellation, r.deposit, r.terms, [r.verdict, r.note].filter(Boolean).join(' · ')].filter(Boolean).join(' · '))).join('\n'))}<button class="btn sm" data-share-cmp="he">${esc(t('shareCompare'))} · עברית</button><button class="btn sm" data-share-cmp="en">${esc(t('shareCompare'))} · English</button>${rows.some(r => r.chosen) && rows.some(r => !r.chosen && /ביקשנו|התקבלה/.test(r.status)) ? `<button class="btn sm ghost" data-decline>${esc(t('declineOthers'))}</button>` : ''}</div></section>`;
 }
 export function wireCompare(body, c, s, links, sups, refresh) {
   body.querySelectorAll('[data-share-cmp]').forEach(b => b.onclick = async () => {
@@ -165,12 +165,11 @@ export async function clientSummary(c, s, links, sups) {
   const text = offerSummary(c, rows, to, { names: r1.names, openPoints: open, name: to === 'he' ? herName(s) : 'Virginie' });
   const leftover = to !== 'he' && hasHebrew(text.replace(/\* [^\n]+/g, m => (rows.some(r => m.includes(r.supplier)) ? '' : m)));
   const subject = (to === 'he' ? 'הצעות ל' : to === 'fr' ? 'Offres pour ' : 'Offers for ') + [c.kind, c.date ? Office.fmt(c.date) : ''].filter(Boolean).join(' · ');
-  const r2 = await dialog(t('clientSummary'), `${leftover ? `<p class="warnbox">${esc(t('checkHebrew'))}</p>` : ''}<textarea name="text" rows="14" ${to === 'he' ? '' : 'dir="ltr" style="direction:ltr;text-align:left"'}>${esc(text)}</textarea><div class="row">${c.email || (client && client.email) ? `<button type="button" class="btn primary" data-x="mail">${esc(t('email'))}</button>` : ''}${c.phone ? `<button type="button" class="btn wa" data-x="wa">${esc(t('whatsapp'))}</button>` : ''}<button type="button" class="btn ghost" data-x="copy">${esc(t('copy'))}</button></div>`, { ok: t('close') });
+  const r2 = await dialog(t('clientSummary'), `${leftover ? `<p class="warnbox">${esc(t('checkHebrew'))}</p>` : ''}<textarea name="text" rows="14" ${to === 'he' ? '' : 'dir="ltr" style="direction:ltr;text-align:left"'}>${esc(text)}</textarea><div class="row">${c.email || (client && client.email) ? `<button type="button" class="btn primary" data-x="mail">${esc(t('email'))}</button>` : ''}${c.phone ? `<button type="button" class="btn wa" data-x="wa">${esc(t('whatsapp'))}</button>` : ''}${copyOf('[name=text]', { sm: false })}</div>`, { ok: t('close') });
   // the buttons live inside the dialog body: wire them while it is open
   const form = document.querySelector('.modal form'); if (!form) return;
   const ta = form.querySelector('textarea[name=text]');
   const mailBtn = form.querySelector('[data-x=mail]'); if (mailBtn) mailBtn.onclick = () => openMail(c.email || (client && client.email), subject, ta.value);
   const waBtn = form.querySelector('[data-x=wa]'); if (waBtn) waBtn.onclick = () => openWhatsApp(c.phone, ta.value);
-  const cp = form.querySelector('[data-x=copy]'); if (cp) cp.onclick = () => navigator.clipboard && navigator.clipboard.writeText(ta.value).then(() => toast(t('copied')));
   await r2;
 }
