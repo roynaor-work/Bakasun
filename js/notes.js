@@ -2,7 +2,7 @@
    The note stays on the person's card forever, and search finds it. If a known name is in the text, it is picked automatically. */
 import { t, lang, SPEECH } from './i18n.js';
 import { db } from './store.js';
-import { esc, toast, confirmDialog } from './ui.js';
+import { esc, toast, confirmDialog, copyBtn } from './ui.js';
 import Office from './logic/office.js';
 import { speechSupported, listen } from './voice.js';
 
@@ -80,7 +80,7 @@ export function notesAbout(about, id) {
 export function notesHtml(about, id) {
   const list = notesAbout(about, id);
   return `<section class="sec"><div class="sec-h"><h2>${esc(t('notes'))}</h2><button class="btn sm" id="addNote">🎙 ${esc(t('quickNote'))}</button></div>
-    <div class="list">${list.length ? list.map(n => `<div class="card" data-note="${esc(n.id)}"><p style="white-space:pre-wrap">${esc(n.text)}</p><div class="row between"><span class="sub">${esc(Office.fmt(n.created))}</span><button class="btn sm ghost" data-delnote>${esc(t('delete'))}</button></div></div>`).join('') : `<p class="empty">${esc(t('noNotes'))}</p>`}</div></section>`;
+    <div class="list">${list.length ? list.map(n => `<div class="card" data-note="${esc(n.id)}"><p style="white-space:pre-wrap">${esc(n.text)}</p><div class="row between"><span class="sub">${esc(Office.fmt(n.created))}</span><span class="row">${copyBtn(n.text)}<button class="btn sm ghost" data-delnote>${esc(t('delete'))}</button></span></div></div>`).join('') : `<p class="empty">${esc(t('noNotes'))}</p>`}</div></section>`;
 }
 export function wireNotes(root, about, id) {
   const b = root.querySelector('#addNote'); if (b) b.onclick = () => quickNote({ about, id });

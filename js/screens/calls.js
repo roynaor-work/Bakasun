@@ -2,7 +2,7 @@
    no answer (stays in the queue, a "could not reach you" message is ready), answered (with a note), call back (on a date). */
 import { t, langName } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, field, section, empty, dialog, toast, openWhatsApp, dial } from '../ui.js';
+import { esc, field, section, empty, dialog, toast, openWhatsApp, dial, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { phonePretty } from '../logic/core.js';
 import { CALL, callQueue, callOutcome, noAnswerMessage } from '../logic/extra.js';
@@ -23,7 +23,7 @@ export function render(ctx) {
     return `<div class="card" data-id="${esc(c.id)}">
       <div class="row between"><span class="title">${esc(c.name)}</span><span class="row">${c.status === CALL.callback && c.callbackAt ? `<span class="badge warn">${esc(Office.fmt(c.callbackAt))}</span>` : ''}${c.attempts ? `<span class="badge muted"><span class="count">${c.attempts}</span> ${esc(t('attempts'))}</span>` : ''}</span></div>
       ${c.why ? `<div class="sub"><b>${esc(t('why'))}:</b> ${esc(c.why)}</div>` : ''}
-      <div class="sub">${cs ? `<a href="#/case/${esc(cs.id)}">${esc(cs.client)}${cs.date ? ' · ' + esc(Office.fmt(cs.date)) : ''}</a> · ` : ''}<span class="ltr">${esc(phonePretty(c.phone))}</span>${c.note ? ' · ' + esc(c.note) : ''}</div>
+      <div class="sub">${cs ? `<a href="#/case/${esc(cs.id)}">${esc(cs.client)}${cs.date ? ' · ' + esc(Office.fmt(cs.date)) : ''}</a> · ` : ''}<span class="ltr">${esc(phonePretty(c.phone))}</span>${c.phone ? copyBtn(c.phone, { icon: true }) : ''}${c.note ? ' · ' + esc(c.note) : ''}</div>
       ${tab !== 'done' ? `<div class="row"><button class="btn primary" data-dial>${esc(t('call'))}</button><button class="btn wa sm" data-msg>${esc(t('sendMsg'))}</button></div>
       <div class="row"><button class="btn sm" data-out="noanswer">${esc(t('noAnswer'))}</button><button class="btn sm ok" data-out="answered">${esc(t('answered'))}</button><button class="btn sm" data-out="callback">${esc(t('callBack'))}</button><button class="btn sm ghost" data-delegate>${esc(t('delegate'))}</button></div>` : ''}
     </div>`;
@@ -43,7 +43,7 @@ export function render(ctx) {
     const d = el.querySelector('[data-dial]'); if (d) d.onclick = () => dial(c.phone);
     const m = el.querySelector('[data-msg]'); if (m) m.onclick = async () => {
       const text = noAnswerMessage(c, c.lang || s.msgLang || 'he', s.signer || '');
-      const r = await dialog(t('sendMsg'), `<textarea name="text" rows="7">${esc(text)}</textarea>`, { ok: t('whatsapp') });
+      const r = await dialog(t('sendMsg'), `<textarea name="text" rows="7">${esc(text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
       if (r) openWhatsApp(c.phone, r.text);
     };
     const dg = el.querySelector('[data-delegate]'); if (dg) dg.onclick = async () => {
@@ -52,7 +52,7 @@ export function render(ctx) {
       if (!r || !r.who) return;
       const st = staff.find(x => x.name === r.who); const phone = r.phone || (st && st.phone) || '';
       const cs = c.caseId ? db.get('cases', c.caseId) : null;
-      const r2 = await dialog(r.who, `<textarea name="text" rows="8">${esc(delegateCallMessage(c, r.who, cs, r.lang, s.signer || DEFAULTS.signer))}</textarea>`, { ok: t('whatsapp') });
+      const r2 = await dialog(r.who, `<textarea name="text" rows="8">${esc(delegateCallMessage(c, r.who, cs, r.lang, s.signer || DEFAULTS.signer))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
       if (r2 && openWhatsApp(phone, r2.text)) db.put('calls', { id: c.id, note: (c.note ? c.note + ' · ' : '') + t('delegate') + ': ' + r.who });
     };
     el.querySelectorAll('[data-out]').forEach(b => b.onclick = async () => {

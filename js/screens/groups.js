@@ -1,7 +1,7 @@
 /* Seating and grouping for one case: tables, rooms, buses. Tap a name, then tap a container. */
 import { t, lang } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, field, empty, dialog, toast, copyText, openWhatsApp } from '../ui.js';
+import { esc, field, empty, dialog, toast, copyText, openWhatsApp, copyBtn, copyOf } from '../ui.js';
 import { GROUP_KINDS, parsePeople, makeContainers, summary, autoFill, containerText, allText } from '../logic/groups.js';
 import { groupKindLabel } from '../labels.js';
 
@@ -30,21 +30,21 @@ export function render({ root, id }) {
         <button class="btn sm" id="auto">${esc(t('autoFill'))}</button><button class="btn sm ghost" id="addPeople">+ ${esc(t('people'))}</button><button class="btn sm ghost" id="addC">+ ${esc(groupKindLabel(g.kind))}</button></div>
       <p class="hint">${esc(t('tapToPlace'))}</p>
       <section class="card"><h2>${esc(t('unassigned'))} (<span class="count">${sm.unassigned.length}</span>)</h2><div class="chips">${sm.unassigned.map(person).join('') || `<span class="sub">${esc(t('none'))}</span>`}</div></section>
-      ${sm.containers.map(c => `<section class="card cont ${c.over ? 'overc' : ''}" data-c="${esc(c.id)}"><div class="row between"><h2>${esc(c.name)}</h2><span class="badge ${c.over ? '' : 'muted'}"><span class="count">${c.count}${c.capacity ? '/' + c.capacity : ''}</span></span><button class="btn sm ghost" data-send="${esc(c.id)}">${esc(t('sendList'))}</button></div>
+      ${sm.containers.map(c => `<section class="card cont ${c.over ? 'overc' : ''}" data-c="${esc(c.id)}"><div class="row between"><h2>${esc(c.name)}</h2><span class="badge ${c.over ? '' : 'muted'}"><span class="count">${c.count}${c.capacity ? '/' + c.capacity : ''}</span></span><button class="btn sm ghost" data-send="${esc(c.id)}">${esc(t('sendList'))}</button>${copyBtn(containerText(c, g.people, cs))}</div>
         <div class="chips">${g.people.filter(p => p.group === c.id).map(person).join('')}</div></section>`).join('')}
       <div class="row"><button class="btn" id="copyAll">${esc(t('copyList'))}</button><button class="btn ghost" id="clear">${esc(t('clearGroups'))}</button></div>
     </div>`;
   const save = people => db.put('groups', { id: g.id, people });
   root.querySelectorAll('[data-p]').forEach(b => b.onclick = e => { e.stopPropagation(); selected = selected === b.dataset.p ? null : b.dataset.p; render({ root, id }); });
   root.querySelectorAll('.cont').forEach(sec => sec.onclick = e => {
-    if (e.target.closest('[data-send]')) return;
+    if (e.target.closest('[data-send],[data-copy]')) return;
     if (!selected) return;
     const people = g.people.map(p => p.name === selected ? Object.assign({}, p, { group: sec.dataset.c }) : p);
     selected = null; save(people);
   });
   root.querySelectorAll('[data-send]').forEach(b => b.onclick = async () => {
     const c = g.containers.find(x => x.id === b.dataset.send);
-    const r = await dialog(t('sendList'), field('phone', t('fPhone'), '', { ltr: true, inputmode: 'tel' }) + `<textarea name="text" rows="10">${esc(containerText(c, g.people, cs))}</textarea>`, { ok: t('whatsapp') });
+    const r = await dialog(t('sendList'), field('phone', t('fPhone'), '', { ltr: true, inputmode: 'tel' }) + `<textarea name="text" rows="10">${esc(containerText(c, g.people, cs))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
     if (r) openWhatsApp(r.phone, r.text);
   });
   root.querySelector('#auto').onclick = () => save(autoFill(g.people, g.containers));

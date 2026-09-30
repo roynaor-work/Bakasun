@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 
 const load = () => import('../js/logic/rules.js');
 const today = '2026-09-30';
-const ARABIC = /[؀-ۿ]/;
+const ARABIC = new RegExp('[' + String.fromCharCode(0x600) + '-' + String.fromCharCode(0x6ff) + ']'); // the Arabic block, built without writing its letters
 
 const cases = [
   { id: 'c1', client: 'שוב״ל', contact: 'עידית', phone: '0501111111', kind: 'כנס', date: '2026-10-07', place: 'שפיים', status: 'נסגר', lang: 'he', needs: ['מלונות'] },

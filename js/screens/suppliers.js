@@ -1,7 +1,7 @@
 /* Suppliers: the pool with rating and type; one supplier with contact buttons and the events done with us. */
 import { t, langName } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, field, empty, dialog, confirmDialog, toast, dial, openWhatsApp } from '../ui.js';
+import { esc, field, empty, dialog, confirmDialog, toast, dial, openWhatsApp, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { phonePretty } from '../logic/core.js';
 import { SUPPLIER_TYPES } from '../data/catalog.js';
@@ -32,8 +32,8 @@ function renderOne({ root, id }) {
       <button class="icon" id="edit" aria-label="${esc(t('edit'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10-10-4-4L4 16zM13 7l4 4"/></svg></button></header>
     <div class="stack">
       <div class="card"><div class="row between"><span class="title">${esc(supplierTypeLabel(s.type))}</span><span class="badge ok">${esc(stars(s.rating))}</span></div>
-        <div class="sub">${esc(s.contact || '')} <span class="ltr">${esc(phonePretty(s.phone))}</span>${s.email ? ' · ' + esc(s.email) : ''}${s.area ? ' · ' + esc(s.area) : ''}${s.lang ? ' · ' + esc(langName(s.lang)) : ''}</div>
-        ${s.bank ? `<p class="sub" style="white-space:pre-wrap"><b>${esc(t('fBank'))}:</b> ${esc(s.bank)}</p>` : ''}
+        <div class="sub">${esc(s.contact || '')} <span class="ltr">${esc(phonePretty(s.phone))}</span>${s.phone ? copyBtn(s.phone, { icon: true }) : ''}${s.email ? ' · <span class="ltr">' + esc(s.email) + '</span>' + copyBtn(s.email, { icon: true }) : ''}${s.area ? ' · ' + esc(s.area) : ''}${s.lang ? ' · ' + esc(langName(s.lang)) : ''}</div>
+        ${s.bank ? `<p class="sub" style="white-space:pre-wrap"><b>${esc(t('fBank'))}:</b> ${esc(s.bank)} ${copyBtn(s.bank, { icon: true })}</p>` : ''}
         ${s.notes ? `<p class="sub" style="white-space:pre-wrap">${esc(s.notes)}</p>` : ''}
         <div class="row"><button class="btn wa" id="wa">${esc(t('whatsapp'))}</button><button class="btn" id="dial">${esc(t('call'))}</button></div></div>
       ${notesHtml('supplier', id)}
@@ -42,7 +42,7 @@ function renderOne({ root, id }) {
   wireNotes(root, 'supplier', id);
   root.querySelector('#edit').onclick = () => edit(s);
   root.querySelector('#dial').onclick = () => dial(s.phone);
-  root.querySelector('#wa').onclick = async () => { const r = await dialog(t('whatsapp'), `<textarea name="text" rows="6"></textarea>`, { ok: t('whatsapp') }); if (r) openWhatsApp(s.phone, r.text); };
+  root.querySelector('#wa').onclick = async () => { const r = await dialog(t('whatsapp'), `<textarea name="text" rows="6"></textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') }); if (r) openWhatsApp(s.phone, r.text); };
   root.querySelector('#del').onclick = async () => { if (await confirmDialog(t('confirmDelete'))) { db.remove('suppliers', id); location.hash = '#/suppliers'; } };
 }
 

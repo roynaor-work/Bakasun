@@ -1,7 +1,7 @@
 /* "What is waiting today": events in the next two weeks, clients waiting for an answer, calls to make, tasks due. */
 import { t, kindLabel, statusLabel } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, section, empty, relDay, copyText, openWhatsApp, dial } from '../ui.js';
+import { esc, section, empty, relDay, copyText, openWhatsApp, dial, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { todayList } from '../logic/extra.js';
 import { phonePretty } from '../logic/core.js';
@@ -67,7 +67,7 @@ export function render({ root }) {
     ${waitPrint.length ? section(t('printWaiting'), `<div class="list">${waitPrint.map(g => { const sp = db.get('suppliers', g.supplierId) || {}; return `<a class="card tap" href="#/case/${esc(g.caseId)}/lists"><div class="row between"><span class="title">${esc(sp.name || t('printList'))}</span><span class="badge warn">${esc(t('waited', { n: g.waited }))}</span></div><div class="sub">${esc([g.cs.client, g.items.map(i => i.item).join(', ')].filter(Boolean).join(' · '))}</div></a>`; }).join('')}</div>`) : ''}
     ${missInv.length ? section(t('supInvoicesMissing'), `<div class="list">${missInv.map(l => `<a class="card tap" href="#/money"><div class="row between"><span class="title">${esc(l.sup.name || '')}</span><span class="ltr big">${esc(Office.money(l.cost))}</span></div><div class="sub">${esc([l.cs.client, t('paid') + ' ' + Office.fmt(l.paidAt), t('waited', { n: l.waited })].filter(Boolean).join(' · '))}</div></a>`).join('')}</div>`) : ''}
     ${yday.length ? section(t('unansweredYesterday'), `<div class="list">${yday.map(c => `<a class="card tap" href="#/calls"><div class="row between"><span class="title">${esc(c.name)}</span><span class="badge warn"><span class="count">${c.attempts || 1}</span> ${esc(t('attempts'))}</span></div>${c.why ? `<div class="sub">${esc(c.why)}</div>` : ''}</a>`).join('')}</div>`) : ''}
-    ${calls.length ? section(t('callsToday'), `<div class="list">${calls.slice(0, 5).map(c => `<a class="card tap" href="#/calls"><div class="row between"><span class="title">${esc(c.name)}</span><span class="ltr sub">${esc(phonePretty(c.phone))}</span></div>${c.why ? `<div class="sub">${esc(c.why)}</div>` : ''}</a>`).join('')}
+    ${calls.length ? section(t('callsToday'), `<div class="list">${calls.slice(0, 5).map(c => `<a class="card tap" href="#/calls"><div class="row between"><span class="title">${esc(c.name)}</span><span class="ltr sub">${esc(phonePretty(c.phone))}${c.phone ? copyBtn(c.phone, { icon: true }) : ''}</span></div>${c.why ? `<div class="sub">${esc(c.why)}</div>` : ''}</a>`).join('')}
       ${calls.length > 5 ? `<a class="btn ghost" href="#/calls">+${calls.length - 5}</a>` : ''}</div>`) : ''}
     ${tasks.length ? section(t('tasksOpen'), `<div class="list">${tasks.slice().sort((a, b) => (b.late - a.late) || String(a.time || '99').localeCompare(String(b.time || '99'))).slice(0, 6).map(x => `<div class="card" data-task="${esc(x.id)}"><div class="row between"><a class="title" href="#/tasks">${esc(x.title)}</a><span class="badge ${x.late > 0 ? '' : 'muted'}">${esc(x.late > 0 ? Office.fmt(x.due) : (x.time || t('todayIs')))}</span></div><div class="row between"><span class="sub">${esc(x.who || '')}</span><button class="btn sm ok" data-done>✓</button></div></div>`).join('')}</div>`) : ''}
     ${!nothing ? `<div class="sec"><button class="btn ghost" id="copyMorning">${esc(t('morningCopy'))}</button></div>` : ''}
@@ -88,7 +88,7 @@ export function render({ root }) {
       followups: fu.map(x => (x.client || '') + (x.phone ? ' ' + x.phone : ''))
     };
     const sub = db.list('team').find(x => x.name === travel.subName) || {};
-    const r = await dialog(t('handover'), `<textarea name="text" rows="14">${esc(handoverText(travel, open, (s.signer || DEFAULTS.signer).split('\n')[0]))}</textarea>`, { ok: sub.phone || travel.subPhone ? t('whatsapp') : t('email') });
+    const r = await dialog(t('handover'), `<textarea name="text" rows="14">${esc(handoverText(travel, open, (s.signer || DEFAULTS.signer).split('\n')[0]))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: sub.phone || travel.subPhone ? t('whatsapp') : t('email') });
     if (!r) return;
     if (sub.phone || travel.subPhone) openWhatsApp(sub.phone || travel.subPhone, r.text); else openMail(sub.email || '', t('handover'), r.text);
   };
@@ -105,14 +105,14 @@ export function render({ root }) {
   root.querySelectorAll('[data-wsup]').forEach(el => el.querySelector('[data-remind]').onclick = () => { const l = db.get('links', el.dataset.wsup); resend(db.get('cases', l.caseId) || {}, s, l, db.get('suppliers', l.supplierId) || { name: l.supplier }, true); });
   root.querySelectorAll('[data-appr]').forEach(el => el.querySelector('[data-remind]').onclick = async () => {
     const a = db.get('approvals', el.dataset.appr); const c = db.get('cases', a.caseId) || {};
-    const r = await dialog(t('remind'), `<textarea name="text" rows="7">${esc(approvalReminder(a, c, c.lang, s.signer || DEFAULTS.signer, Office.daysBetween(a.sentAt, new Date())))}</textarea>`, { ok: t('whatsapp') });
+    const r = await dialog(t('remind'), `<textarea name="text" rows="7">${esc(approvalReminder(a, c, c.lang, s.signer || DEFAULTS.signer, Office.daysBetween(a.sentAt, new Date())))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
     if (r && openWhatsApp(c.phone, r.text)) db.put('approvals', { id: a.id, lastRemind: Office.iso(new Date()) });
   });
   root.querySelectorAll('[data-link]').forEach(el => {
     const l = db.get('links', el.dataset.link); if (!l) return; const c = db.get('cases', l.caseId) || {}; const sp = db.get('suppliers', l.supplierId) || { name: l.supplier };
     el.querySelector('[data-paid]').onclick = () => db.put('links', { id: l.id, paid: 'כן', paidAt: Office.iso(new Date()) });
     el.querySelector('[data-paidmsg]').onclick = async () => {
-      const r = await dialog(t('paidNote'), `<textarea name="text" rows="6">${esc(supplierPaidMessage(sp, c, Office.num(l.cost), sp.lang || 'he', s.signer || DEFAULTS.signer))}</textarea>`, { ok: t('whatsapp') });
+      const r = await dialog(t('paidNote'), `<textarea name="text" rows="6">${esc(supplierPaidMessage(sp, c, Office.num(l.cost), sp.lang || 'he', s.signer || DEFAULTS.signer))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
       if (r && openWhatsApp(sp.phone, r.text)) db.put('links', { id: l.id, paid: 'כן', paidAt: Office.iso(new Date()) });
     };
   });

@@ -1,7 +1,7 @@
 /* Tasks handed to helpers: what, exactly what, who, by when. One tap sends it on WhatsApp (she presses send); one tap marks it done. */
 import { t, langName } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, field, empty, dialog, toast, openWhatsApp, dial, confirmDialog } from '../ui.js';
+import { esc, field, empty, dialog, toast, openWhatsApp, dial, confirmDialog, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { TASK, openTasks, groupTasks, taskMessage } from '../logic/extra.js';
 import { toCalendar } from '../calendar.js';
@@ -22,7 +22,7 @@ export function render(ctx) {
       <div class="row between"><span class="title">${esc(x.title)}</span><span class="row">${x.status === TASK.sent ? `<span class="badge ok">${esc(t('taskSent'))}</span>` : ''}${x.due ? `<span class="badge ${x.late > 0 ? 'late' : 'muted'}">${esc(Office.fmt(x.due))}${x.time ? ' ' + esc(x.time) : ''}</span>` : ''}</span></div>
       ${x.details ? `<div class="sub" style="white-space:pre-wrap">${esc(x.details)}</div>` : ''}
       <div class="sub">${x.who ? `<b>${esc(x.who)}</b>` : ''}${cs ? ` · <a href="#/case/${esc(cs.id)}">${esc(cs.client)}${cs.date ? ' · ' + esc(Office.fmt(cs.date)) : ''}</a>` : ''}</div>
-      ${tab === 'open' ? `<div class="row"><button class="btn wa" data-send>${esc(t('taskSend'))}</button>${x.phone ? `<button class="btn sm" data-dial>${esc(t('call'))}</button>` : ''}${x.due ? `<button class="btn sm" data-cal>${esc(t('toCalendar'))}</button>` : ''}<button class="btn sm ok" data-done>${esc(t('taskDone'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div>`
+      ${tab === 'open' ? `<div class="row"><button class="btn wa" data-send>${esc(t('taskSend'))}</button>${x.phone ? `<button class="btn sm" data-dial>${esc(t('call'))}</button>` : ''}${x.due ? `<button class="btn sm" data-cal>${esc(t('toCalendar'))}</button>` : ''}<button class="btn sm ok" data-done>${esc(t('taskDone'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button>${copyBtn(taskMessage(x, cs, x.lang || s.msgLang || 'he', s.signer || ''))}</div>`
         : `<div class="row"><button class="btn sm ghost" data-reopen>${esc(t('reopen'))}</button></div>`}
     </div>`;
   };
@@ -43,7 +43,7 @@ export function render(ctx) {
     on('[data-edit]', () => edit(x, s));
     on('[data-send]', async () => {
       const text = taskMessage(x, cs, x.lang || s.msgLang || 'he', s.signer || '');
-      const r = await dialog(t('taskSend'), (x.phone ? '' : field('phone', t('fPhone'), '', { ltr: true, inputmode: 'tel' })) + `<textarea name="text" rows="9">${esc(text)}</textarea>`, { ok: t('whatsapp') });
+      const r = await dialog(t('taskSend'), (x.phone ? '' : field('phone', t('fPhone'), '', { ltr: true, inputmode: 'tel' })) + `<textarea name="text" rows="9">${esc(text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
       if (!r) return;
       const phone = x.phone || r.phone;
       if (openWhatsApp(phone, r.text)) db.put('tasks', { id: x.id, status: TASK.sent, phone });

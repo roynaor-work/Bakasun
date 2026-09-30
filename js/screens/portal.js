@@ -2,7 +2,7 @@
    Today it is a page she previews and shares as a file; in the cloud stage it becomes a live link with the same content. */
 import { t, kindLabel, statusLabel, KIND_LABELS } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, empty, toast } from '../ui.js';
+import { esc, empty, toast, copyText } from '../ui.js';
 import Office from '../logic/office.js';
 import { resolveLines, translator, QUOTE_STATUS } from '../logic/quotes.js';
 import { LOGO_H } from '../data/brand.js';
@@ -69,11 +69,13 @@ export function render({ root, id }) {
   let lang = cs.lang || 'he';
   const draw = () => {
     root.innerHTML = `<header class="top"><a class="icon" href="#/case/${esc(id)}/money" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(t('portal'))}</h1></header>
-      <div class="row"><select id="pl">${['he', 'en', 'fr'].map(k => `<option value="${k}"${k === lang ? ' selected' : ''}>${esc({ he: 'עברית', en: 'English', fr: 'Français' }[k])}</option>`).join('')}</select><button class="btn primary" id="share">${esc(t('sharePortal'))}</button></div>
+      <div class="row"><select id="pl">${['he', 'en', 'fr'].map(k => `<option value="${k}"${k === lang ? ' selected' : ''}>${esc({ he: 'עברית', en: 'English', fr: 'Français' }[k])}</option>`).join('')}</select><button class="btn primary" id="share">${esc(t('sharePortal'))}</button><button type="button" class="btn ghost" id="copyPage">${esc(t('copy'))}</button></div>
       <p class="hint">${esc(t('portalHint'))}</p>
       <iframe id="pv" style="width:100%;height:70vh;border:1px solid var(--line);border-radius:12px;background:#fff"></iframe>`;
     root.querySelector('#pv').srcdoc = portalHtml(cs, lang);
     root.querySelector('#pl').onchange = e => { lang = e.target.value; draw(); };
+    // the page as plain text, in the language shown, for pasting into a mail or a chat
+    root.querySelector('#copyPage').onclick = () => { const d = root.querySelector('#pv').contentDocument; const w = d && d.querySelector('.w.on'); copyText(w ? w.innerText.trim() : ''); };
     root.querySelector('#share').onclick = async () => {
       const html = portalHtml(cs, lang);
       const rec = { name: (cs.client || 'event').replace(/[\\/:*?"<>|]/g, '') + '-' + Office.iso(new Date()) + '.html', type: 'text/html', blob: new Blob([html], { type: 'text/html' }), title: t('portal') };

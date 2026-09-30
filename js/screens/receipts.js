@@ -2,7 +2,7 @@
    At month end everything goes to the accountant in one mail (links) or through the share sheet (files). */
 import { t, lang as uiLang } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, section, empty, dialog, toast, openMail, confirmDialog } from '../ui.js';
+import { esc, field, section, empty, dialog, toast, openMail, confirmDialog, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { files, shareFile } from '../files.js';
 import * as cloud from '../cloud.js';
@@ -131,7 +131,7 @@ export async function sendMonth(ym, reportText, subject, to) {
   const { receiptsMailText } = await import('../logic/receipts.js');
   const text = receiptsMailText(ym, list, links, reportText);
   const r = await dialog(t('monthForAccountant') + ' · ' + monthLabel(ym, uiLang()), `${field('to', t('fEmail'), to || '', { ltr: true, inputmode: 'email' })}<textarea name="text" rows="12">${esc(text)}</textarea>
-    <p class="hint">${esc(cloud.isOn() ? t('monthLinksHint') : t('monthFilesHint'))}</p>${list.length ? `<div class="row"><button type="button" class="btn sm" id="shareFiles">${esc(t('shareFiles', { n: list.length }))}</button></div>` : ''}`, { ok: t('email') });
+    <p class="hint">${esc(cloud.isOn() ? t('monthLinksHint') : t('monthFilesHint'))}</p><div class="row">${list.length ? `<button type="button" class="btn sm" id="shareFiles">${esc(t('shareFiles', { n: list.length }))}</button>` : ''}${copyOf('[name=text]')}</div>`, { ok: t('email') });
   const sf = document.querySelector('.modal #shareFiles'); if (sf) sf.onclick = async () => {
     const fs = []; for (const x of list) { const rec = x.localId ? await files.get(x.localId) : null; const blob = rec ? rec.blob : (x.cloudPath ? await cloud.downloadFileBlob(BUCKET, x.cloudPath) : null); if (blob) fs.push(new File([blob], (x.date || '') + '-' + (x.supplier || 'receipt').replace(/[^\w֐-׿]+/g, '-') + (x.ext || '.jpg'), { type: blob.type })); }
     try { if (navigator.canShare && navigator.canShare({ files: fs })) await navigator.share({ files: fs, title: subject, text: subject }); else toast(t('shareFallback'), 4000); } catch (e) { /* closed */ }

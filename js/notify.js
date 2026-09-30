@@ -93,10 +93,12 @@ function browserNotify(st, s) {
 }
 
 /* ---------------- the digest, aloud, once a day ---------------- */
+let digestTried = '';
 function readDigest(st, s) {
   const R = ruleSettings(s); if (!R.readDigest) return;
   const day = todayIso(); const meta = st._digest || {};
-  if (meta.spoken === day) return;
+  if (meta.spoken === day || digestTried === day) return;
+  digestTried = day; // one attempt a day, even when the phone has no voice
   if (inQuietHours(hhmmNow(), R.quietFrom, R.quietTo)) return;
   if (document.visibilityState && document.visibilityState !== 'visible') return;
   const ok = speak(digestText(shown, lang()), lang());

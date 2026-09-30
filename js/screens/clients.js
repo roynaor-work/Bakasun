@@ -1,7 +1,7 @@
 /* Clients: the list, and one client with the history of their cases (from Office.clientHistory). */
 import { t, kindLabel, statusLabel, langName } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, field, empty, dialog, confirmDialog, toast, dial, openWhatsApp } from '../ui.js';
+import { esc, field, empty, dialog, confirmDialog, toast, dial, openWhatsApp, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { phonePretty } from '../logic/core.js';
 import { notesHtml, wireNotes } from '../notes.js';
@@ -17,7 +17,7 @@ export function render(ctx) {
   if (ctx.name === 'client' && ctx.id) return renderOne(ctx);
   const list = db.list('clients').sort((a, b) => String(a.name).localeCompare(String(b.name), 'he'));
   ctx.root.innerHTML = `<header class="top"><a class="icon" href="#/more" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(t('clients'))}</h1><button class="btn sm" id="new">+ ${esc(t('newClient'))}</button></header>
-    <div class="list">${list.length ? list.map(c => `<a class="card tap" href="#/client/${esc(c.id)}"><div class="row between"><span class="title">${esc(c.name)}</span><span class="row">${missingForInvoice(c).length ? `<span class="badge warn">${esc(t('missingInvoice'))}</span>` : ''}${c.type ? `<span class="badge muted">${esc(typeLabel(c.type))}</span>` : ''}</span></div><div class="sub">${esc(c.contact || '')} <span class="ltr">${esc(phonePretty(c.phone))}</span></div></a>`).join('') : empty(t('noClients'))}</div>`;
+    <div class="list">${list.length ? list.map(c => `<a class="card tap" href="#/client/${esc(c.id)}"><div class="row between"><span class="title">${esc(c.name)}</span><span class="row">${missingForInvoice(c).length ? `<span class="badge warn">${esc(t('missingInvoice'))}</span>` : ''}${c.type ? `<span class="badge muted">${esc(typeLabel(c.type))}</span>` : ''}</span></div><div class="sub">${esc(c.contact || '')} <span class="ltr">${esc(phonePretty(c.phone))}</span>${c.phone ? copyBtn(c.phone, { icon: true }) : ''}</div></a>`).join('') : empty(t('noClients'))}</div>`;
   ctx.root.querySelector('#new').onclick = () => edit(null);
 }
 
@@ -28,13 +28,13 @@ function renderOne({ root, id }) {
   root.innerHTML = `<header class="top"><a class="icon" href="#/clients" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(c.name)}</h1>
       <button class="icon" id="edit" aria-label="${esc(t('edit'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10-10-4-4L4 16zM13 7l4 4"/></svg></button></header>
     <div class="stack">
-      <div class="card"><div class="title">${esc(c.contact || '')}</div><div class="sub ltr">${esc(phonePretty(c.phone))}${c.email ? ' · ' + esc(c.email) : ''}</div>
-        <div class="sub">${[typeLabel(c.type), langName(c.lang), c.legalName, c.taxId, c.address].filter(Boolean).map(esc).join(' · ')}</div>
+      <div class="card"><div class="title">${esc(c.contact || '')}</div><div class="sub ltr">${esc(phonePretty(c.phone))}${c.phone ? copyBtn(c.phone, { icon: true }) : ''}${c.email ? ' · ' + esc(c.email) + copyBtn(c.email, { icon: true }) : ''}</div>
+        <div class="sub">${[typeLabel(c.type), langName(c.lang), c.legalName, c.taxId, c.address].filter(Boolean).map(esc).join(' · ')}${c.legalName || c.taxId || c.address ? copyBtn([c.legalName || c.name, c.taxId ? t('fTaxId') + ' ' + c.taxId : '', c.address].filter(Boolean).join('\n'), { icon: true }) : ''}</div>
         ${missingForInvoice(c).length ? `<div class="warnbox">${esc(t('missingInvoice'))}: ${missingForInvoice(c).map(k => esc(t(k === 'legalName' ? 'fLegal' : k === 'taxId' ? 'fTaxId' : 'fAddress'))).join(', ')}</div>` : ''}
         <div class="row"><button class="btn wa" id="wa">${esc(t('whatsapp'))}</button><button class="btn" id="dial">${esc(t('call'))}</button></div></div>
       <div class="stat"><div class="card"><b class="count">${h.count}</b><span>${esc(t('events'))}</span></div><div class="card"><b class="count">${h.won}</b><span>${esc(t('won'))}</span></div><div class="card"><b class="count">${h.lost}</b><span>${esc(t('lost'))}</span></div></div>
       ${h.totalNet ? `<div class="card"><span class="sub">${esc(t('totalNet'))}</span><span class="big ltr">${esc(Office.money(h.totalNet))}</span></div>` : ''}
-      ${c.approver || c.payer || c.payTerms || c.attachments || c.invoiceEmail ? `<div class="card"><div class="title">${esc(t('clientProcess'))}</div><div class="kv">${c.approver ? `<dt>${esc(t('approver'))}</dt><dd>${esc(c.approver)}</dd>` : ''}${c.payer ? `<dt>${esc(t('payer'))}</dt><dd>${esc(c.payer)}</dd>` : ''}${c.payTerms ? `<dt>${esc(t('payTermsClient'))}</dt><dd>${esc(c.payTerms)}</dd>` : ''}${c.invoiceEmail ? `<dt>${esc(t('invoiceEmail'))}</dt><dd class="ltr">${esc(c.invoiceEmail)}</dd>` : ''}${c.attachments ? `<dt>${esc(t('attachments'))}</dt><dd>${esc(c.attachments)}</dd>` : ''}</div></div>` : ''}
+      ${c.approver || c.payer || c.payTerms || c.attachments || c.invoiceEmail ? `<div class="card"><div class="title">${esc(t('clientProcess'))}</div><div class="kv">${c.approver ? `<dt>${esc(t('approver'))}</dt><dd>${esc(c.approver)}</dd>` : ''}${c.payer ? `<dt>${esc(t('payer'))}</dt><dd>${esc(c.payer)}</dd>` : ''}${c.payTerms ? `<dt>${esc(t('payTermsClient'))}</dt><dd>${esc(c.payTerms)}</dd>` : ''}${c.invoiceEmail ? `<dt>${esc(t('invoiceEmail'))}</dt><dd class="ltr">${esc(c.invoiceEmail)}${copyBtn(c.invoiceEmail, { icon: true })}</dd>` : ''}${c.attachments ? `<dt>${esc(t('attachments'))}</dt><dd>${esc(c.attachments)}</dd>` : ''}</div></div>` : ''}
       ${c.notes ? `<div class="card"><p style="white-space:pre-wrap">${esc(c.notes)}</p></div>` : ''}
       ${notesHtml('client', id)}
       <section class="sec"><h2>${esc(t('history'))}</h2><div class="list">${h.cases.length ? h.cases.map(x => `<a class="card tap" href="#/case/${esc(x.id)}"><div class="row between"><span class="title">${esc(kindLabel(x.kind))}</span><span class="badge ${x.status === Office.STATUS.won || x.status === Office.STATUS.done ? 'ok' : 'muted'}">${esc(statusLabel(x.status))}</span></div>
@@ -44,7 +44,7 @@ function renderOne({ root, id }) {
   wireNotes(root, 'client', id);
   root.querySelector('#edit').onclick = () => edit(c);
   root.querySelector('#dial').onclick = () => dial(c.phone);
-  root.querySelector('#wa').onclick = async () => { const r = await dialog(t('whatsapp'), `<textarea name="text" rows="6"></textarea>`, { ok: t('whatsapp') }); if (r) openWhatsApp(c.phone, r.text); };
+  root.querySelector('#wa').onclick = async () => { const r = await dialog(t('whatsapp'), `<textarea name="text" rows="6"></textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') }); if (r) openWhatsApp(c.phone, r.text); };
   root.querySelector('#del').onclick = async () => { if (await confirmDialog(t('confirmDelete'))) { db.remove('clients', id); location.hash = '#/clients'; } };
 }
 

@@ -2,7 +2,7 @@
    she fixes what it missed, saves, and (only if she taps) WhatsApp opens with the questions that are still missing. */
 import { t, lang, LANGS, SPEECH, kindLabel, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, toast, openWhatsApp } from '../ui.js';
+import { esc, field, toast, openWhatsApp, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { TASK } from '../logic/extra.js';
 import { PLACES } from '../data/places.js';
@@ -122,7 +122,7 @@ function drawForm(box, lead, s) {
       const text = Office.followupQuestions(Object.assign({}, cs, { name: o.name, missing: stillMissing }), o.lang, s.signer || '');
       box.innerHTML = `<div class="stack"><p class="warnbox">${esc(t('missing'))}: ${stillMissing.map(k => esc(t('f' + k[0].toUpperCase() + k.slice(1)))).join(', ')}</p>
         <textarea id="q" rows="7">${esc(text)}</textarea>
-        <div class="row"><button class="btn wa grow" id="ask">${esc(t('askMissing'))}</button><a class="btn" href="#/case/${esc(id)}">${esc(t('open'))}</a></div></div>`;
+        <div class="row"><button class="btn wa grow" id="ask">${esc(t('askMissing'))}</button><a class="btn" href="#/case/${esc(id)}">${esc(t('open'))}</a>${copyOf('#q', { sm: false })}</div></div>`;
       box.querySelector('#ask').onclick = () => {
         if (openWhatsApp(o.phone, box.querySelector('#q').value)) { db.put('cases', { id, waitingSince: todayIso() }); location.hash = '#/case/' + id; }
       };
