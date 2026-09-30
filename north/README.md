@@ -13,11 +13,30 @@ https://roynaor-work.github.io/Bakasun/north/
 | `js/app.js` | המסכים: בית, מוצר `#/p/<id>`, קופה `#/checkout`, תודה `#/thanks/<no>` |
 | `../supabase/north.sql` | טבלת ההזמנות `north_orders` (anon מוסיף בלבד) |
 
-## חיבור תשלומים
-1. פותחים חשבון סליקה (Grow/Meshulam, Cardcom, PayPlus או Tranzila) ומייצרים "עמוד תשלום".
-2. מדביקים את הקישור ב-`PAY.card.url`. אפשר `{sum}` ו-`{ref}` בתוך הקישור, והם מוחלפים בסכום ובמספר ההזמנה.
-3. ביט לעסקים: קישור בקשת תשלום ב-`PAY.bit.url`, או המספר ב-`PAY.bit.phone`.
-4. עד שהקישורים ריקים, ההזמנה נשמרת ומוצג ללקוח: "נתקשר לגבייה / ביט / באיסוף".
+## חיבור תשלומים: Grow (משולם)
+לרועי ולמתן כבר יש חשבון Grow. החיבור המלא (סכום ומספר הזמנה מדויקים, סימון "שולם" אוטומטי) עובד דרך שתי פונקציות ענן ב-Supabase, כי Grow חוסם קריאות מהדפדפן:
+
+| פונקציה | מה עושה |
+|---|---|
+| `supabase/functions/grow-pay` | מקבלת הזמנה מהאתר, קוראת ל-`createPaymentProcess` ומחזירה קישור לעמוד תשלום (תקף 10 דקות). הלקוח מופנה אליו |
+| `supabase/functions/grow-notify` | ה-`notifyUrl`: Grow מודיע אחרי תשלום, הפונקציה מסמנת `status='paid'` על ההזמנה ומאשרת ל-Grow (`approveTransaction`) |
+| `supabase/functions/_shared/grow.mjs` | ההיגיון הטהור (בניית שדות, קריאת הקריאה החוזרת), נבדק ב-`tests/north.test.mjs` |
+
+### הפעלה (פעם אחת)
+1. ב-Grow: לוחצים על שם העסק ← "הגדרות" ← "API / מפתחות" ומעתיקים את `userId`. יוצרים "דף תשלום" חדש (סכום פתוח, שם "מארזים · הרוח הצפונית") ומעתיקים את `pageCode` שלו. אם לא רואים API בממשק, מבקשים מהתמיכה של Grow לפתוח "API light" לחשבון.
+2. במחשב עם Supabase CLI מחוברת לפרויקט `ckfezrtrmfyqepozdzzp`:
+   ```
+   supabase secrets set GROW_USER_ID=<userId> GROW_PAGE_CODE=<pageCode> GROW_SANDBOX=0
+   supabase functions deploy grow-pay
+   supabase functions deploy grow-notify --no-verify-jwt
+   ```
+3. מריצים את `supabase/north.sql` (מוסיף גם את עמודות Grow לטבלה).
+4. בודקים: הזמנה באתר עם "כרטיס אשראי" צריכה להפנות לעמוד Grow עם הסכום הנכון. אחרי תשלום חוזרים לדף התודה עם "התשלום התקבל", ובטבלה `north_orders` ההזמנה ב-`status='paid'` עם `pay_details`.
+
+### בלי הפונקציות
+`PAY.card.grow` נשאר `true`, אבל אם הפונקציה לא פרוסה הלקוח מגיע לדף התודה עם כפתור "לעמוד התשלום" שמנסה שוב, ואם גם זה נכשל: "נתקשר אליכם לגבייה". אפשר גם להדביק קישור קבוע ב-`PAY.card.url` (דף Grow עם סכום פתוח) כגיבוי, עם `{sum}` ו-`{ref}`.
+
+ביט: `PAY.bit.url` (בקשת תשלום של ביט לעסקים) או `PAY.bit.phone` (המספר שמעבירים אליו; מוצג עם מספר ההזמנה).
 
 ## הזמנות
 - `supabase/north.sql` רץ פעם אחת ב-SQL Editor. אחרי זה כל הזמנה נכנסת לטבלה `north_orders`.

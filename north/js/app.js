@@ -264,7 +264,23 @@ async function submitOrder() {
   await saveOrder(order);
   lastOrder = order; try { sessionStorage.setItem('north.last', JSON.stringify(order)); } catch { /* */ }
   cart = []; saveCart();
+  if (order.pay === 'card' && PAY.card.grow) {
+    btn.textContent = 'עוברים לעמוד התשלום…';
+    const url = await growUrl(order);
+    if (url) { order.growUrl = url; try { sessionStorage.setItem('north.last', JSON.stringify(order)); } catch { /* */ } location.href = url; return; }
+  }
   location.hash = `#/thanks/${order.no}`;
+}
+/* עמוד תשלום ב-Grow: פונקציית הענן grow-pay יוצרת אותו עם הסכום ומספר ההזמנה. מחזיר קישור או ריק. */
+async function growUrl(order) {
+  if (!CLOUD.url || !CLOUD.key) return '';
+  const returnBase = location.origin + location.pathname;
+  if (!/^https:/.test(returnBase)) return '';
+  try {
+    const r = await fetch(`${CLOUD.url}/functions/v1/grow-pay`, { method: 'POST', headers: { apikey: CLOUD.key, Authorization: `Bearer ${CLOUD.key}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ order: { no: order.no, store: order.store, total: order.total, shipping: order.shipping, items: order.items.map(i => ({ id: i.id, name: i.name + (i.variant ? ' · ' + i.variant : ''), qty: i.qty, price: i.price })), customer: order.customer }, returnBase }) });
+    const j = await r.json().catch(() => ({}));
+    return r.ok && j.url ? j.url : '';
+  } catch { return ''; }
 }
 async function saveOrder(order) {
   if (!CLOUD.url || !CLOUD.key) return false;
@@ -285,9 +301,12 @@ function thanksHtml(no) {
   let o = lastOrder; if (!o || o.no !== no) { try { o = JSON.parse(sessionStorage.getItem('north.last')); } catch { /* */ } }
   if (!o || o.no !== no) return `<section class="thanks"><div class="box"><span class="i">✅</span><h1>ההזמנה נקלטה</h1><p class="no">${esc(no)}</p><a class="btn gold" href="#/">לחנות</a></div></section>`;
   const url = payUrl(o); const text = C.orderText(o);
+  const paid = new URLSearchParams(location.search).get('paid');
   let payBlock = '';
-  if (o.pay === 'card') payBlock = url ? `<a class="btn gold" href="${url}" target="_blank" rel="noopener">לעמוד התשלום המאובטח · ${money(o.total)}</a><p>העמוד נפתח בחלון חדש. אחרי התשלום נשלח אישור למייל.</p>`
-    : `<p>עמוד הסליקה עוד לא מחובר. נתקשר אליכם לגבייה טלפונית מאובטחת, או שתשלמו בביט/באיסוף.</p>`;
+  if (o.pay === 'card' && paid === '1') payBlock = `<p style="color:var(--ok);font-weight:700">התשלום התקבל. אישור נשלח למייל, ואנחנו מתחילים לארוז.</p>`;
+  else if (o.pay === 'card' && paid === '0') payBlock = `<p>התשלום לא הושלם.</p>${o.growUrl ? `<a class="btn gold" href="${o.growUrl}">לנסות שוב לשלם · ${money(o.total)}</a>` : ''}<button class="btn line sm" id="growretry">עמוד תשלום חדש</button><p>או שתשלמו בביט / באיסוף, ההזמנה שמורה.</p>`;
+  else if (o.pay === 'card') payBlock = url ? `<a class="btn gold" href="${url}" target="_blank" rel="noopener">לעמוד התשלום המאובטח · ${money(o.total)}</a><p>העמוד נפתח בחלון חדש. אחרי התשלום נשלח אישור למייל.</p>`
+    : (PAY.card.grow ? `<button class="btn gold" id="growretry">לעמוד התשלום המאובטח · ${money(o.total)}</button><p>אם העמוד לא נפתח, נתקשר אליכם לגבייה טלפונית מאובטחת.</p>` : `<p>עמוד הסליקה עוד לא מחובר. נתקשר אליכם לגבייה טלפונית מאובטחת, או שתשלמו בביט/באיסוף.</p>`);
   else if (o.pay === 'bit') payBlock = (url ? `<a class="btn gold" href="${url}" target="_blank" rel="noopener">לתשלום בביט · ${money(o.total)}</a>` : '') + (PAY.bit.phone ? `<p>מעבירים בביט <b>${money(o.total)}</b> למספר <b class="ltr">${esc(PAY.bit.phone)}</b> וכותבים בהערה <b class="ltr">${esc(o.no)}</b>.</p>` : (url ? '' : `<p>מספר הביט של החנות יישלח אליכם בהודעה יחד עם האישור.</p>`));
   else payBlock = `<p>משלמים בחנות כשבאים לאסוף. נודיע בהודעה כשהמארז מוכן.</p>`;
   const wa = waLink(text);
@@ -351,7 +370,7 @@ function route() {
 
 /* ---------- אירועים ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-add],[data-cat],[data-occ],[data-bopt],#baddbtn,[data-var],[data-q],#paddbtn,[data-img],[data-cq],[data-rm],[data-close],#cartbtn,#burger,#copyord');
+  const t = e.target.closest('[data-add],[data-cat],[data-occ],[data-bopt],#baddbtn,[data-var],[data-q],#paddbtn,[data-img],[data-cq],[data-rm],[data-close],#cartbtn,#burger,#copyord,#growretry');
   if (!t) return;
   if (t.id === 'cartbtn') return openDrawer();
   if (t.id === 'burger') return $('#mnav').classList.toggle('open');
@@ -383,6 +402,7 @@ document.addEventListener('click', e => {
   if (t.id === 'paddbtn') { const p = byId(route.pid); const en = $('#pengrave'); if (p.personalize && en && !en.value.trim()) { toast('כותבים את הטקסט לחריטה'); en.focus(); return; } addProduct(p, pstate.variant, pstate.qty, $('#pnote').value.trim(), en ? en.value.trim() : ''); openDrawer(); return; }
   if (t.dataset.cq) { const it = cart.find(i => i.key === t.dataset.key); if (it) { cart = C.setQty(cart, it.key, it.qty + +t.dataset.cq); saveCart(); renderCart(); } return; }
   if (t.dataset.rm) { cart = C.removeItem(cart, t.dataset.rm); saveCart(); renderCart(); return; }
+  if (t.id === 'growretry') { const o = lastOrder || JSON.parse(sessionStorage.getItem('north.last') || 'null'); if (!o) return; t.disabled = true; t.textContent = 'פותחים עמוד תשלום…'; growUrl(o).then(u => { if (u) location.href = u; else { t.disabled = false; t.textContent = 'לא הצלחנו לפתוח עמוד תשלום. נתקשר אליכם.'; } }); return; }
   if (t.id === 'copyord') { navigator.clipboard?.writeText($('.thanks pre').textContent).then(() => toast('הועתק')); return; }
 });
 document.addEventListener('change', e => {
