@@ -26,6 +26,11 @@ import * as dashboard from './screens/dashboard.js';
 import * as calendar from './screens/calendar.js';
 import * as participants from './screens/participants.js';
 import * as contracts from './screens/contracts.js';
+import * as budget from './screens/budget.js';
+import * as runsheet from './screens/runsheet.js';
+import * as casefiles from './screens/casefiles.js';
+import * as rules from './screens/rules.js';
+import * as board from './screens/board.js';
 import { quickNote } from './notes.js';
 import { setChangeHook } from './store.js';
 import { enqueue } from './cloud.js';
@@ -35,7 +40,8 @@ import { startHistory } from './logic/history.js'; startHistory();
 const ROUTES = {
   today, lead, cases, 'case': cases, clients, client: clients, calls, tasks, search, settings, more,
   suppliers, supplier: suppliers, quotes, quote: quotes, groups, money, notes, assist, portal, receipts, help, share,
-  dashboard, calendar, participants, contracts, contract: contracts
+  dashboard, calendar, participants, contracts, contract: contracts,
+  budget, runsheet, files: casefiles, notifications: rules, board
 };
 const NAV = [
   ['today', 'today', 'M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z'],

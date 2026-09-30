@@ -8,6 +8,8 @@ export function render({ root }) {
   root.innerHTML = `<header class="top"><h1>${esc(t('more'))}</h1></header><div class="list">
     ${item('#/dashboard', t('dashboard') === 'dashboard' ? 'לוח בקרה' : t('dashboard'), 'M4 4h7v7H4zM13 4h7v4h-7zM13 11h7v9h-7zM4 14h7v6H4z')}
     ${item('#/calendar', t('calendar') === 'calendar' ? 'יומן' : t('calendar'), 'M4 5h16v15H4zM4 9h16M8 3v4M16 3v4')}
+    ${item('#/board', t('board') === 'board' ? 'לוח אירועים' : t('board'), 'M4 4h5v16H4zM10 4h5v10h-5zM16 4h4v7h-4z')}
+    ${item('#/notifications', t('notifications') === 'notifications' ? 'תזכורות' : t('notifications'), 'M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0')}
     ${item('#/clients', t('clients'), 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8')}
     ${item('#/search', t('search'), 'M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM20 20l-3.5-3.5')}
     ${item('#/quotes', t('quotes'), 'M6 3h9l5 5v13H6zM14 3v6h6M9 13h6M9 17h6')}

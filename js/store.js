@@ -2,7 +2,7 @@
    Screens never touch storage directly; they call db.* and subscribe to changes. */
 
 const KEY = 'bakasun.v1';
-const COLS = ['cases', 'clients', 'calls', 'tasks', 'quotes', 'suppliers', 'links', 'schedule', 'staff', 'payments', 'checks', 'groups', 'catalog', 'notes', 'approvals', 'team', 'contacts', 'print', 'receipts', 'participants', 'history', 'contracts', 'checklists'];
+const COLS = ['cases', 'clients', 'calls', 'tasks', 'quotes', 'suppliers', 'links', 'schedule', 'staff', 'payments', 'checks', 'groups', 'catalog', 'notes', 'approvals', 'team', 'contacts', 'print', 'receipts', 'participants', 'history', 'contracts', 'checklists', 'budget', 'runsheet', 'casefiles', 'notifications'];
 let onChange = null; // the cloud hooks in here
 export function setChangeHook(fn) { onChange = fn; }
 /* The activity history hooks in here: fn({col, id, before, after, deleted}) after every put/remove (never for 'history' itself). */
