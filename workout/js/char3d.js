@@ -98,13 +98,36 @@ export class PoseRig {
     const armDir = (a, b, who) => { const v = d(a, b); if (lat) v.x += side(who) * lat * v.length(); return v; };
     this.aim(L + 'Arm', armDir(pose.neck, pose.le, L)); this.aim(L + 'ForeArm', armDir(pose.le, pose.lh, L).multiplyScalar(1));
     this.aim(R + 'Arm', armDir(pose.neck, pose.re, R)); this.aim(R + 'ForeArm', armDir(pose.re, pose.rh, R));
-    const flat = new THREE.Vector3(0, -0.2, 1); this.aim('LeftFoot', flat); this.aim('RightFoot', flat);
-    // תיקון רצפה: כשיש כף רגל או יד על הרצפה בפוזה, הנקודה הנמוכה נוגעת בגובה הבסיס
+    // כף רגל: שטוחה (בעמידה) או בהמשך השוק כשהיא באוויר / על קצות האצבעות (שכיבות סמיכה, פלאנק)
+    const flat = new THREE.Vector3(0, -0.05, 1);
+    for (const [foot, k, f] of [['LeftFoot', pose[L === 'Left' ? 'lk' : 'rk'], pose[L === 'Left' ? 'lf' : 'rf']], ['RightFoot', pose[R === 'Right' ? 'rk' : 'lk'], pose[R === 'Right' ? 'rf' : 'lf']]]) {
+      const shin = d(k, f); const tiptoe = f[1] >= 178 && shin.y < -0.35 * shin.length() && Math.abs(shin.z) > 0.6 * shin.length(); /* השוק נוטה: על קצות האצבעות */
+      this.aim(foot, f[1] < 176 ? new THREE.Vector3(shin.x, shin.y * .3 - .3 * shin.length(), shin.z + .6 * shin.length()) : tiptoe ? new THREE.Vector3(0, -0.9, 0.45) : flat);
+    }
+    this.ropeUpdate(pose, front, base);
+    // תיקון רצפה: הנקודה הנמוכה של כפות הרגליים (עד קצה האצבעות), הידיים (עד קצה האצבעות) והראש נוגעת בגובה הבסיס, עם שוליים קטנים כדי שהסוליה לא תיבלע
     this.model.updateMatrixWorld(true);
-    const onFloor = Math.max(pose.lf[1], pose.rf[1]) >= 178 || Math.max(pose.lh[1], pose.rh[1]) >= 178;
-    if (onFloor) { let minY = Infinity; for (const n of ['LeftToes', 'RightToes', 'LeftFoot', 'RightFoot', 'LeftHand', 'RightHand']) { const b = this.b[n]; if (!b) continue; b.getWorldPosition(_v); if (_v.y < minY) minY = _v.y; } this.model.position.y -= minY - base.y; this.model.updateMatrixWorld(true); }
+    const onFloor = Math.max(pose.lf[1], pose.rf[1]) >= 178 || Math.max(pose.lh[1], pose.rh[1]) >= 178 || pose.head[1] >= 160;
+    if (onFloor) { let minY = Infinity; for (const n of ['LeftToes_end', 'RightToes_end', 'LeftToes', 'RightToes', 'LeftFoot', 'RightFoot', 'LeftHand', 'RightHand', 'LeftHandIndex3_end', 'RightHandIndex3_end', 'LeftHandThumb2_end', 'RightHandThumb2_end', 'LeftForeArm', 'RightForeArm', 'Head']) { const b = this.b[n]; if (!b) continue; b.getWorldPosition(_v); const r = n === 'Head' ? 14 * SCALE * 1.6 : n.includes('Hand') ? 3 : 4; if (_v.y - r < minY) minY = _v.y - r; } this.model.position.y -= minY - base.y; this.model.updateMatrixWorld(true); }
   }
 }
+
+// חבל קפיצה: כשלפוזה יש rope (קטלוג: 300 = מתחת לרגליים, -80 = מעל הראש), מציירים צינור מכף יד לכף יד דרך נקודת שליטה מתחת/מעל
+PoseRig.prototype.ropeUpdate = function (pose, front, base) {
+  const has = pose.rope != null && this.model.parent;
+  if (!has) { if (this.rope) this.rope.visible = false; return; }
+  if (!this.rope) { this.rope = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshStandardMaterial({ color: '#F97316', roughness: .6 })); this.rope.castShadow = true; this.model.parent.add(this.rope); }
+  this.model.updateMatrixWorld(true);
+  const a = new THREE.Vector3(), b = new THREE.Vector3(); this.b.LeftHand.getWorldPosition(a); this.b.RightHand.getWorldPosition(b);
+  const mid = a.clone().add(b).multiplyScalar(.5); const below = pose.rope > 100;
+  // נקודת השליטה: מתחת לרצפה מעט (החבל עובר מתחת לנעליים) או גבוה מעל הראש; במבט מלפנים החבל עובר לפני הגוף, מהצד לצד הרחוק
+  // בעקומת בזייה ריבועית אמצע הקשת = 0.5*ידיים + 0.5*שליטה, לכן השליטה = 2*יעד - גובה הידיים. יעד: מתחת לסוליות או 30 מעל הראש
+  let headY = 0; this.b.Head_end.getWorldPosition(_v); headY = _v.y;
+  const targetY = below ? base.y - 4 : headY + 30;
+  const ctrl = new THREE.Vector3(mid.x, 2 * targetY - mid.y, mid.z + (front ? 44 : 0));
+  const curve = new THREE.QuadraticBezierCurve3(a, ctrl, b);
+  this.rope.geometry.dispose(); this.rope.geometry = new THREE.TubeGeometry(curve, 24, 1.3, 6, false); this.rope.visible = true;
+};
 
 // ---- תאורה וסצנות ----
 export function lights(scene, { sun = 2.2, sky = '#ffffff', ground = '#b9a7ff' } = {}) {
