@@ -1,10 +1,21 @@
 /* What happens after "who has not answered", "I paid Biscotti 500", "mark the tour done", "close with Daniel",
    "what is the budget of Shoval", "add 20 name tags to the print list", "log a call with Arbel tomorrow at 10".
    Every change is a small, visible one; sending still needs her tap. */
-import { t, lang } from '../i18n.js';
+import { t, lang, statusLabel } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, toast, dialog, openWhatsApp } from '../ui.js';
+import { esc, toast, dialog, openWhatsApp, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
+import { addFromText, rsvpSummary, hotelListText, label as rsvpLabel } from '../logic/participants.js';
+import { summary as budgetSummary, paymentSchedule } from '../logic/budget.js';
+import * as RS from '../logic/runsheet.js';
+import { missingKinds, filterFiles, guessKind } from '../logic/caseFiles.js';
+import { missingForContract, contractFromCase, pickQuote, CONTRACT_STATUS } from '../logic/contracts.js';
+import { dueSoon, progress } from '../logic/checklists.js';
+import { current as notifications, state as notifyState, setState as setNotifyState } from '../notify.js';
+import { markSeen } from '../logic/rules.js';
+import { move as moveCase } from '../logic/pipeline.js';
+import { historyFor, describe as describeChange, newestFirst } from '../logic/history.js';
+import { files, downloadFile } from '../files.js';
 import { TASK, CALL } from '../logic/extra.js';
 import { PRINT_STATUS } from '../logic/print.js';
 import { pendingRequests } from '../logic/rfq.js';
@@ -40,7 +51,7 @@ export function supplierStatus(out, who) {
   const links = db.list('links', l => l.supplierId === sp.id).map(l => ({ l, c: db.get('cases', l.caseId) || {} })).filter(x => Office.ACTIVE.includes(x.c.status));
   const notes = db.list('notes', n => n.aboutId === sp.id).slice(-3);
   const line = x => { const l = x.l; const st = /אושר/.test(String(l.status)) ? t('stChosen') : /התקבלה/.test(String(l.status)) ? t('offerReceived') + (l.cost ? ' · ' + Office.money(Office.num(l.cost)) : '') : /ביקשנו/.test(String(l.status)) ? (l.askedAt ? t('waited', { n: Office.daysBetween(l.askedAt, new Date()) }) : t('stWaiting')) : String(l.status || ''); return `<li><a href="#/case/${esc(x.c.id)}/suppliers">${esc(caseLine(x.c))}</a> · ${esc(st)}${l.what ? ' · ' + esc(l.what) : ''}${Office.yes(l.paid) ? ' · ' + esc(t('paid')) : ''}</li>`; };
-  okbox(out, `<div class="title"><a href="#/supplier/${esc(sp.id)}">${esc(sp.name)}</a></div><div class="sub">${esc([sp.type, sp.contact, sp.phone, sp.email].filter(Boolean).join(' · '))}</div>
+  okbox(out, `<div class="title"><a href="#/supplier/${esc(sp.id)}">${esc(sp.name)}</a></div><div class="sub">${esc([sp.type, sp.contact, sp.phone, sp.email].filter(Boolean).join(' · '))}${sp.phone ? copyBtn(sp.phone, { icon: true }) : ''}${sp.email ? copyBtn(sp.email, { icon: true }) : ''}</div>
     ${links.length ? `<ul class="open">${links.map(line).join('')}</ul>` : `<p class="hint">${esc(t('noOpenRequest', { who: sp.name }))}</p>`}
     ${notes.length ? `<div class="sub"><b>${esc(t('notes'))}</b></div><ul class="open">${notes.map(n => `<li>${esc(n.text)}</li>`).join('')}</ul>` : ''}
     <div class="row">${sp.phone ? `<button type="button" class="btn sm" id="supDial">${esc(t('call'))}</button>` : ''}<a class="btn sm ghost" href="#/supplier/${esc(sp.id)}">${esc(t('open'))}</a></div>`);
@@ -56,7 +67,8 @@ export async function runAction(a, ctx) {
   if (a.kind === 'waiting' || a.kind === 'remindAll') {
     const pend = pendingRequests(db.list('links'), db.list('cases'), db.list('suppliers'), new Date(), 0);
     if (a.kind === 'remindAll') { if (!pend.length) { okbox(out, `<p class="okbox">${esc(t('nobodyWaiting'))}</p>`); return true; } remindAll(pend, s); return true; }
-    okbox(out, `<div class="title">${esc(t('waitingSuppliers'))} (${pend.length})</div>${pend.length ? `<ul class="open">${pend.map(l => `<li><a href="#/case/${esc(l.caseId)}/suppliers">${esc(l.sup.name || '')}</a> · ${esc(l.cs.client || '')}${l.what ? ' · ' + esc(l.what) : ''} · ${esc(t('waited', { n: l.waited }))}</li>`).join('')}</ul><div class="row"><button type="button" class="btn wa sm" id="remindAllBtn">${esc(t('remindAll', { n: pend.length }))}</button></div>` : `<p class="okbox">${esc(t('nobodyWaiting'))}</p>`}`);
+    const waitLine = l => [l.sup.name || '', l.cs.client || '', l.what || '', t('waited', { n: l.waited })].filter(Boolean).join(' · ');
+    okbox(out, `<div class="title">${esc(t('waitingSuppliers'))} (${pend.length})</div>${pend.length ? `<ul class="open">${pend.map(l => `<li><a href="#/case/${esc(l.caseId)}/suppliers">${esc(l.sup.name || '')}</a> · ${esc(l.cs.client || '')}${l.what ? ' · ' + esc(l.what) : ''} · ${esc(t('waited', { n: l.waited }))}</li>`).join('')}</ul><div class="row"><button type="button" class="btn wa sm" id="remindAllBtn">${esc(t('remindAll', { n: pend.length }))}</button>${copyBtn(t('waitingSuppliers') + '\n' + pend.map(l => '• ' + waitLine(l)).join('\n'))}</div>` : `<p class="okbox">${esc(t('nobodyWaiting'))}</p>`}`);
     const b = out.querySelector('#remindAllBtn'); if (b) b.onclick = () => remindAll(pend, s);
     return true;
   }
@@ -72,7 +84,8 @@ export async function runAction(a, ctx) {
     const sp = supByName(a.who); if (!sp) { okbox(out, `<p class="warnbox">${esc(t('noSupplierNamed', { who: a.who }))}</p>`); return true; }
     const links = db.list('links', l => l.supplierId === sp.id && Office.yes(l.paid) && Office.num(l.cost));
     const total = links.reduce((x, l) => x + Office.num(l.cost), 0);
-    okbox(out, `<div class="title">${esc(sp.name)}</div>${links.length ? `<ul class="open">${links.map(l => { const c = db.get('cases', l.caseId) || {}; return `<li><a href="#/case/${esc(l.caseId)}/money">${esc(caseLine(c))}</a> · ${esc(Office.money(Office.num(l.cost)))}${l.paidAt ? ' · ' + esc(Office.fmt(l.paidAt)) : ''}${l.supInvoice === 'התקבלה' ? '' : ' · ' + esc(t('invMissing'))}</li>`; }).join('')}</ul><p><b>${esc(t('total'))}: ${esc(Office.money(total))}</b> (${esc(t('amountsBeforeVat'))})</p>` : `<p class="hint">${esc(t('nothingPaidTo', { who: sp.name }))}</p>`}`);
+    const paidLine = l => { const c = db.get('cases', l.caseId) || {}; return [caseLine(c), Office.money(Office.num(l.cost)), l.paidAt ? Office.fmt(l.paidAt) : '', l.supInvoice === 'התקבלה' ? '' : t('invMissing')].filter(Boolean).join(' · '); };
+    okbox(out, `<div class="title">${esc(sp.name)}</div>${links.length ? `<ul class="open">${links.map(l => { const c = db.get('cases', l.caseId) || {}; return `<li><a href="#/case/${esc(l.caseId)}/money">${esc(caseLine(c))}</a> · ${esc(Office.money(Office.num(l.cost)))}${l.paidAt ? ' · ' + esc(Office.fmt(l.paidAt)) : ''}${l.supInvoice === 'התקבלה' ? '' : ' · ' + esc(t('invMissing'))}</li>`; }).join('')}</ul><p><b>${esc(t('total'))}: ${esc(Office.money(total))}</b> (${esc(t('amountsBeforeVat'))}) ${copyBtn(sp.name + '\n' + links.map(l => '• ' + paidLine(l)).join('\n') + '\n' + t('total') + ': ' + Office.money(total) + ' (' + t('amountsBeforeVat') + ')', { icon: true })}</p>` : `<p class="hint">${esc(t('nothingPaidTo', { who: sp.name }))}</p>`}`);
     return true;
   }
 
@@ -86,7 +99,7 @@ export async function runAction(a, ctx) {
     const patch = { id: l.id, paid: 'כן', paidAt: todayIso() }; if (a.amount) patch.cost = a.amount; if (!/אושר/.test(String(l.status))) patch.status = 'אושר';
     db.put('links', patch);
     const text = supplierPaidMessage(sp, cs, a.amount || Office.num(l.cost), sp.lang || 'he', s.signer || DEFAULTS.signer);
-    okbox(out, `<p class="okbox">${esc(t('paidNoted', { who: sp.name, amount: Office.money(a.amount || Office.num(l.cost)), event: caseLine(cs) }))}</p><div class="sub"><b>${esc(t('paidNote'))}</b></div><textarea id="paidText" rows="5">${esc(text)}</textarea><div class="row">${sp.phone ? `<button type="button" class="btn wa" id="paidWa">${esc(t('whatsapp'))}</button>` : `<span class="badge warn">${esc(t('noContact'))}</span>`}<a class="btn sm ghost" href="#/case/${esc(cs.id)}/money">${esc(t('open'))}</a></div>`);
+    okbox(out, `<p class="okbox">${esc(t('paidNoted', { who: sp.name, amount: Office.money(a.amount || Office.num(l.cost)), event: caseLine(cs) }))}</p><div class="sub"><b>${esc(t('paidNote'))}</b></div><textarea id="paidText" rows="5">${esc(text)}</textarea><div class="row">${sp.phone ? `<button type="button" class="btn wa" id="paidWa">${esc(t('whatsapp'))}</button>` : `<span class="badge warn">${esc(t('noContact'))}</span>`}${copyOf('#paidText')}<a class="btn sm ghost" href="#/case/${esc(cs.id)}/money">${esc(t('open'))}</a></div>`);
     const w = out.querySelector('#paidWa'); if (w) w.onclick = () => openWhatsApp(sp.phone, out.querySelector('#paidText').value);
     return true;
   }

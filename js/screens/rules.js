@@ -3,7 +3,7 @@
    draft she sends herself, a screen to open, "done", snooze, remove. Nothing goes out on its own. */
 import { t, lang } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, dialog, toast, empty, copyText, openWhatsApp } from '../ui.js';
+import { esc, field, dialog, toast, empty, openWhatsApp, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { TASK } from '../logic/extra.js';
 import { RULE_KEYS, ruleSettings, groupByWhen, counts, snooze, dismiss, markSeen, snoozeDate } from '../logic/rules.js';
@@ -35,8 +35,8 @@ function renderList({ root }) {
       </div></div>`;
   };
   const group = (key, items) => items.length ? `<div class="sub grp"><b>${esc(t(key))}</b> · ${items.length}</div>${items.map(card).join('')}` : '';
-  root.innerHTML = `<header class="top"><div><h1>${esc(t('notifications'))}</h1><div class="sub">${esc(t('nfSub'))}</div></div>
-      <div class="row"><button class="btn sm ghost" id="allRead" ${list.length ? '' : 'disabled'}>${esc(t('nfAllRead'))}</button><a class="btn sm" href="#/notifications/settings">${esc(t('settings'))}</a></div></header>
+  root.innerHTML = `<header class="top"><h1>${esc(t('notifications'))}</h1><a class="btn sm" href="#/notifications/settings">${esc(t('settings'))}</a></header>
+    <div class="row between nf-sub"><span class="sub">${esc(t('nfSub'))}</span><button class="btn sm ghost" id="allRead" ${list.length ? '' : 'disabled'}>${esc(t('nfAllRead'))}</button></div>
     <div class="list sec nf-list">${list.length ? group('nfToday', g.today) + group('nfSoon', g.soon) + group('nfLater', g.later)
       : `<div class="card nf-empty"><span class="title">${esc(t('nfEmptyTitle'))}</span><div class="sub">${esc(t('nfEmpty'))}</div></div>`}</div>
     ${list.length ? `<p class="hint">${esc(t('nfTestResult', { n: c.total, u: c.urgent, w: c.warn, i: c.info }))}</p>` : ''}`;
@@ -67,7 +67,7 @@ async function act(n, a, cs) {
   }
   if (a.type === 'whatsapp') {
     const r = await dialog(t('nfWaTitle'), (p.phone ? '' : `<p class="hint">${esc(t('nfPhoneAsk'))}</p>` + field('phone', t('fPhone'), '', { ltr: true, inputmode: 'tel' }))
-      + `<textarea name="text" rows="8">${esc(p.text)}</textarea><div class="row"><button type="button" class="btn sm ghost" data-copy>${esc(t('copy'))}</button></div>`, { ok: t('whatsapp') });
+      + `<textarea name="text" rows="8">${esc(p.text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
     if (!r) return;
     if (openWhatsApp(p.phone || r.phone, r.text)) setState(markSeen(state(), [n.key]));
     return;
@@ -77,12 +77,6 @@ async function act(n, a, cs) {
     else { setState(dismiss(state(), n.key)); toast(t('nfDoneOk')); }
   }
 }
-// the copy button inside the WhatsApp dialog (the dialog is built by ui.js, so the handler is global)
-document.addEventListener('click', e => {
-  const b = e.target && e.target.closest && e.target.closest('[data-copy]'); if (!b) return;
-  const ta = b.closest('form') && b.closest('form').querySelector('textarea[name=text]'); if (ta) copyText(ta.value);
-});
-
 /* ---------------- the settings ---------------- */
 
 function renderSettings({ root }) {
@@ -90,7 +84,7 @@ function renderSettings({ root }) {
   const perm = permission();
   const numField = (k, f) => `<label class="nf-num"><input type="number" min="0" max="365" name="${k}.${f}" value="${esc(R[k][f])}" inputmode="numeric"> <span>${esc(t(f === 'pct' ? 'nfPct' : 'nfDays'))}</span></label>`;
   const rule = ([k, nums]) => `<div class="card nf-rule"><label class="chk grow"><input type="checkbox" name="${k}.on"${R[k].on ? ' checked' : ''}> <span>${esc(t('nfR_' + k))}</span></label>${nums.length ? `<div class="row nf-nums">${nums.map(f => numField(k, f)).join('')}</div>` : ''}</div>`;
-  root.innerHTML = `<header class="top"><div><h1>${esc(t('nfSettings'))}</h1></div><a class="btn sm ghost" href="#/notifications">${esc(t('nfBackToList'))}</a></header>
+  root.innerHTML = `<header class="top"><a class="icon" href="#/notifications" aria-label="${esc(t('nfBackToList'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(t('nfSettings'))}</h1></header>
     <form id="rulesForm" class="stack">
       <section class="sec"><div class="sec-h"><h2>${esc(t('nfRules'))}</h2></div><p class="hint">${esc(t('nfRulesHint'))}</p><div class="list">${RULE_KEYS.map(rule).join('')}</div></section>
       <section class="sec"><div class="sec-h"><h2>${esc(t('nfBrowser'))}</h2></div><p class="hint">${esc(t('nfBrowserHint'))}</p>

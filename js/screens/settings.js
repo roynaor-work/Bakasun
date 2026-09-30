@@ -15,8 +15,33 @@ import { parseMailLink, parseUrlHash, pickEmail } from '../logic/cloudLink.js';
 import { DEFAULTS, COMPANY_DOCS } from '../data/defaults.js';
 import { COMPANY_PAPERS } from '../data/docsList.js';
 import { copyText, copyBtn, copyOf } from '../ui.js';
+import { DASH_WIDGETS, widgetsOn, widgetsSetting } from '../logic/dashboard.js';
 
 export const noLive = true;
+
+/* Her look (settings → "אישי"): the theme attribute on <html> (app.js sets it on every route too) and the text-size class.
+   Runs at start (app.js imports this module) and whenever a setting changes, also when the cloud brings one. */
+const LANDINGS = ['today', 'dashboard', 'calendar', 'board', 'tasks'];
+const WIDGET_LABEL = { now: 'dbNow', events: 'dbOpenEvents', tasksOverdue: 'dbTasksOverdue', tasksToday: 'dbTasksToday', tasksWeek: 'dbTasksWeek', calls: 'dbCalls', money: 'dbUnpaid', quotes: 'dbQuotes', suppliers: 'dbSuppliers', leads: 'dbLeads', next14: 'dbNext14', moneyByEvent: 'dbMoneyByEvent' };
+export function applyPersonal() {
+  const s = db.settings(); const h = document.documentElement;
+  if (s.theme === 'light' || s.theme === 'dark') h.dataset.theme = s.theme; else delete h.dataset.theme;
+  h.classList.toggle('text-large', s.textSize === 'large');
+}
+applyPersonal(); db.subscribe(applyPersonal);
+
+function personalSection(s) {
+  const on = widgetsOn(s.dashWidgets);
+  return `<section class="sec"><h2>${esc(t('personal'))}</h2><p class="hint">${esc(t('personalHint'))}</p>
+    <form class="stack card" id="personalForm"><div class="grid2">
+      ${field('landing', t('landing'), LANDINGS.includes(s.landing) ? s.landing : 'today', { type: 'select', options: LANDINGS.map(k => [k, t(k)]) })}
+      ${field('theme', t('theme'), s.theme === 'light' || s.theme === 'dark' ? s.theme : 'auto', { type: 'select', options: [['auto', t('themeAuto')], ['light', t('themeLight')], ['dark', t('themeDark')]] })}
+      ${field('textSize', t('textSize'), s.textSize === 'large' ? 'large' : 'normal', { type: 'select', options: [['normal', t('textNormal')], ['large', t('textLarge')]] })}
+    </div>
+    <h3>${esc(t('dashWidgets'))}</h3><p class="hint">${esc(t('dashWidgetsHint'))}</p>
+    <div class="grid2">${DASH_WIDGETS.map(k => `<label class="chk"><input type="checkbox" name="w" value="${k}"${on[k] ? ' checked' : ''}> ${esc(t(WIDGET_LABEL[k]))}</label>`).join('')}</div>
+    <div class="row"><button class="btn primary" type="submit">${esc(t('save'))}</button></div></form></section>`;
+}
 
 export function render({ root }) {
   const s = db.settings();
@@ -64,6 +89,7 @@ export function render({ root }) {
       ${field('cancelTerms', t('cancelTerms'), s.cancelTerms || DEFAULTS.cancelTerms, { type: 'textarea', rows: 4 })}
       <div class="row"><button class="btn primary grow" type="submit">${esc(t('save'))}</button></div>
     </form>
+    ${personalSection(s)}
     <section class="sec"><h2>${esc(t('cloud'))}</h2>
       ${cc && cc.on ? `<p class="hint">${esc(t('cloudOn'))} <span class="ltr">${esc(cc.email)}</span>${copyBtn(cc.email, { icon: true })} · <span id="cs"></span></p><div class="row"><button class="btn" id="logout">${esc(t('logout'))}</button></div>`
       : `<p class="hint">${esc(t('cloudOff'))} ${esc(t('cloudHelp'))}</p>
@@ -98,6 +124,14 @@ export function render({ root }) {
     Object.keys(o).forEach(k => db.setting(k, o[k]));
     toast(t('saved'));
     location.hash = '#/today';
+  };
+  root.querySelector('#personalForm').onsubmit = e => {
+    e.preventDefault(); const fd = new FormData(e.target);
+    db.setting('landing', String(fd.get('landing') || 'today'));
+    db.setting('theme', String(fd.get('theme') || 'auto'));
+    db.setting('textSize', String(fd.get('textSize') || 'normal'));
+    db.setting('dashWidgets', widgetsSetting(fd.getAll('w').map(String)));
+    applyPersonal(); toast(t('saved')); render({ root });
   };
   const cf = root.querySelector('#cf'); if (cf) cf.onsubmit = async e => {
     e.preventDefault(); const o = {}; new FormData(e.target).forEach((v, k) => { o[k] = String(v).trim(); });

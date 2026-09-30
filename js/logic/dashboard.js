@@ -165,3 +165,23 @@ export function dashboardData(data, today) {
     now: whatNow(data, today, 3)
   };
 }
+
+/* ---------------- which widgets she wants (settings → "אישי") ---------------- */
+
+/** Every tile and section of the dashboard, in the order they are drawn. All are on until she unticks some. */
+export const DASH_WIDGETS = ['now', 'events', 'tasksOverdue', 'tasksToday', 'tasksWeek', 'calls', 'money', 'quotes', 'suppliers', 'leads', 'next14', 'moneyByEvent'];
+/** The saved setting 'dashWidgets' (a JSON map key → true/false, or empty) → {key: on} with every widget present. */
+export function widgetsOn(setting) {
+  let saved = {};
+  try { const o = JSON.parse(setting || '{}'); if (o && typeof o === 'object' && !Array.isArray(o)) saved = o; } catch (e) { saved = {}; }
+  const out = {};
+  DASH_WIDGETS.forEach(k => { out[k] = saved[k] !== false; });
+  return out;
+}
+/** The value to save for a list of the ticked widgets: '' when all are on (the default), otherwise the JSON map. */
+export function widgetsSetting(ticked) {
+  const on = new Set(ticked || []);
+  if (DASH_WIDGETS.every(k => on.has(k))) return '';
+  const o = {}; DASH_WIDGETS.forEach(k => { o[k] = on.has(k); });
+  return JSON.stringify(o);
+}

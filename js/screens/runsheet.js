@@ -2,9 +2,10 @@
    Blocks on a timeline, call sheets per supplier / staff member, the whole day as text / PDF / calendar. Nothing is sent by the app. */
 import { t, lang } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, dialog, confirmDialog, toast, empty, openWhatsApp, openWhatsAppPick, openMail, copyText, dial } from '../ui.js';
+import { esc, field, dialog, confirmDialog, toast, empty, openWhatsApp, openWhatsAppPick, openMail, copyText, dial, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { phonePretty } from '../logic/core.js';
+import { rsvpSummary } from '../logic/participants.js';
 import { registerCaseTab } from '../caseTabs.js';
 import { DEFAULTS } from '../data/defaults.js';
 import { downloadFile, shareFile } from '../files.js';
@@ -77,6 +78,7 @@ function draw(body, c, s, full) {
   const blocks = day ? RS.sortBlocks(day.blocks) : [];
   const ov = day ? RS.overlaps(day.blocks) : [];
   const total = rec.days.reduce((n, d) => n + (d.blocks || []).length, 0);
+  const plist = db.list('participants', p => p.caseId === c.id); const ppl = { total: plist.length, attending: rsvpSummary(plist).attending };
   body.innerHTML = `
     <div class="row rs-tools">
       <button class="btn primary sm" id="rsAdd">+ ${esc(t('rsAdd'))}</button>
@@ -85,10 +87,11 @@ function draw(body, c, s, full) {
       <button class="btn sm ghost" id="rsAddDay">+ ${esc(t('rsAddDay'))}</button>
       ${total ? `<button class="btn sm wa" id="rsCall">${esc(t('rsCallSheet'))}</button><button class="btn sm" id="rsWhole">${esc(t('rsWhole'))}</button><button class="btn sm ghost" id="rsCal">${esc(t('rsToCal'))}</button>` : ''}
       <a class="btn sm ok" id="rsLive" href="#/runsheet/${esc(c.id)}/live">${esc(t('rsLive'))}</a>
+      <a class="btn sm ghost" href="#/participants/${esc(c.id)}">${esc(t('rsToParticipants', { n: ppl.attending, m: ppl.total }))}</a>
     </div>
     ${rec.days.length > 1 ? `<div class="tabs rs-days">${rec.days.map(d => `<button class="${d.date === date ? 'on' : ''}" data-day="${esc(d.date)}">${esc(Office.fmt(d.date))} <span class="count">(${(d.blocks || []).length})</span></button>`).join('')}</div>` : ''}
     ${!total ? `<p class="hint">${esc(t('rsEmpty'))}</p>` : ''}
-    ${day ? `<div class="card rs-daynotes" id="rsNotes"><span class="sub"><b>${esc(t('rsDayNotes'))}</b> ${day.notes ? esc(day.notes) : '<span class="rs-muted">…</span>'}</span>${rec.days.length > 1 ? `<button type="button" class="btn sm ghost" id="rsDelDay">${esc(t('delete'))}</button>` : ''}</div>` : ''}
+    ${day ? `<div class="card rs-daynotes" id="rsNotes"><span class="sub"><b>${esc(t('rsDayNotes'))}</b> ${day.notes ? esc(day.notes) : '<span class="rs-muted">…</span>'}</span>${day.notes ? copyBtn(day.notes, { icon: true }) : ''}${rec.days.length > 1 ? `<button type="button" class="btn sm ghost" id="rsDelDay">${esc(t('delete'))}</button>` : ''}</div>` : ''}
     ${blocks.length ? `<div class="${ov.length ? 'warnbox' : 'hint'}">${ov.length ? ov.map(x => esc(t(x.why === 'owner' ? 'rsOverlapOwner' : 'rsOverlapPlace', { who: x.who, a: x.a.title, b: x.b.title, ta: Office.hhmm(x.a.start), tb: Office.hhmm(x.b.start) }))).join('<br>') : esc(t('rsNoOverlap'))}</div>` : ''}
     <div class="rs-tl" id="rsTl">${blocks.map(b => blockHtml(b, c)).join('')}</div>`;
 
@@ -129,7 +132,7 @@ function blockHtml(b, c) {
       <div class="row between"><span class="title">${esc(b.title)}</span><span class="badge ${b.status === 'done' ? 'ok' : b.status === 'late' ? 'late' : 'muted'}">${esc(b.status === 'planned' ? kindT(b.kind) : statusT(b.status))}</span></div>
       <div class="chips rs-chips">${b.owner ? `<span class="chip rs-owner">${esc(b.owner)}</span>` : ''}${b.place ? `<span class="chip">${esc(b.place)}</span>` : ''}</div>
       ${b.cue ? `<div class="sub rs-cue"><b>${esc(t('rsCue'))}:</b> ${esc(b.cue)}</div>` : ''}${b.notes ? `<div class="sub">${esc(b.notes)}</div>` : ''}
-      <div class="row rs-acts"><button type="button" class="btn sm ghost" data-shift>${esc(t('rsDelay15'))}</button><button type="button" class="btn sm ghost" data-done>${esc(b.status === 'done' ? t('rsPlanned') : t('rsMarkDone'))}</button>${phone ? `<button type="button" class="btn sm ghost" data-dial>${esc(t('call'))}</button>` : ''}</div>
+      <div class="row rs-acts"><button type="button" class="btn sm ghost" data-shift>${esc(t('rsDelay15'))}</button><button type="button" class="btn sm ghost" data-done>${esc(b.status === 'done' ? t('rsPlanned') : t('rsMarkDone'))}</button>${phone ? `<button type="button" class="btn sm ghost" data-dial>${esc(t('call'))}</button><span class="sub ltr rs-phone">${esc(phonePretty(phone))}</span>${copyBtn(phone, { icon: true })}` : ''}</div>
     </div></div>`;
 }
 
@@ -188,13 +191,12 @@ function textModal(title, makeText, opts) {
   wrap.innerHTML = `<div class="modal-card rs-msg"><h2>${esc(title)}</h2>
     <div class="chips">${langs.map(x => `<button type="button" class="chip ${x[0] === L ? 'on' : ''}" data-lang="${x[0]}">${esc(x[1])}</button>`).join('')}</div>
     <textarea rows="12" id="rsText"></textarea>
-    <div class="row"><button type="button" class="btn sm" id="rsCopy">${esc(t('rsCopy'))}</button><button type="button" class="btn sm wa" id="rsWa">${esc(opts.phone ? t('rsWaTo', { who: opts.who }) : t('rsWaPick'))}</button><button type="button" class="btn sm" id="rsMailB">${esc(t('rsMail'))}</button>${(opts.extra || []).map((x, i) => `<button type="button" class="btn sm" data-extra="${i}">${esc(x[0])}</button>`).join('')}<span class="grow"></span><button type="button" class="btn sm ghost" data-x="cancel">${esc(t('close'))}</button></div></div>`;
+    <div class="row">${copyOf('#rsText', { label: t('rsCopy') })}<button type="button" class="btn sm wa" id="rsWa">${esc(opts.phone ? t('rsWaTo', { who: opts.who }) : t('rsWaPick'))}</button><button type="button" class="btn sm" id="rsMailB">${esc(t('rsMail'))}</button>${(opts.extra || []).map((x, i) => `<button type="button" class="btn sm" data-extra="${i}">${esc(x[0])}</button>`).join('')}<span class="grow"></span><button type="button" class="btn sm ghost" data-x="cancel">${esc(t('close'))}</button></div></div>`;
   document.body.appendChild(wrap);
   const ta = wrap.querySelector('#rsText');
   const refresh = () => { ta.value = makeText(L); ta.dir = L === 'he' ? 'rtl' : 'ltr'; wrap.querySelectorAll('[data-lang]').forEach(b => b.classList.toggle('on', b.dataset.lang === L)); };
   refresh();
   wrap.querySelectorAll('[data-lang]').forEach(b => b.onclick = () => { L = b.dataset.lang; refresh(); });
-  wrap.querySelector('#rsCopy').onclick = () => copyText(ta.value);
   wrap.querySelector('#rsWa').onclick = () => { if (opts.phone) openWhatsApp(opts.phone, ta.value); else { if (opts.who) toast(t('rsNoPhoneFor', { who: opts.who })); openWhatsAppPick(ta.value); } };
   wrap.querySelector('#rsMailB').onclick = () => { if (opts.email) openMail(opts.email, opts.subject ? opts.subject(L) : title, ta.value); else { copyText(ta.value); toast(t('rsNoEmailFor')); } };
   wrap.querySelectorAll('[data-extra]').forEach(b => b.onclick = () => opts.extra[+b.dataset.extra][1](L, ta.value));
@@ -270,7 +272,7 @@ function renderLive(root, c) {
       ${nn.next && nn.next.owner ? `<button type="button" class="btn ${nextPhone ? 'primary' : 'ghost'}" id="lvCall">${esc(t('rsCall', { who: nn.next.owner }))}</button>` : ''}
     </div>` : ''}
     ${blocks.length ? `<section class="rs-list">${blocks.map(b => `<div class="rs-row k-${esc(b.kind)} st-${esc(b.status)} ${nn.now && nn.now.id === b.id ? 'is-now' : ''}"><span class="count">${esc(timeOf(b))}</span><span class="grow">${esc(b.title)}${b.owner ? ` <small>· ${esc(b.owner)}</small>` : ''}</span><button type="button" class="btn sm ${b.status === 'done' ? 'ghost' : ''}" data-toggle="${esc(b.id)}">${esc(b.status === 'done' ? '✓' : t('rsMarkDone'))}</button></div>`).join('')}</section>` : ''}
-    ${ppl.length ? `<section class="rs-phones"><div class="rs-label">${esc(t('rsPhones'))}</div>${ppl.map(p => `<div class="rs-row"><span class="grow">${esc(p.name)}</span><span class="count">${esc(phonePretty(p.phone))}</span>${p.phone ? `<button type="button" class="btn sm wa" data-call="${esc(p.phone)}">${esc(t('call'))}</button>` : ''}</div>`).join('')}</section>` : ''}
+    ${ppl.length ? `<section class="rs-phones"><div class="rs-label rs-label-row"><span>${esc(t('rsPhones'))}</span>${copyBtn(ppl.map(p => p.name + (p.phone ? ': ' + phonePretty(p.phone) : '')).join('\n'), { icon: true })}</div>${ppl.map(p => `<div class="rs-row"><span class="grow">${esc(p.name)}</span><span class="count">${esc(phonePretty(p.phone))}</span>${p.phone ? copyBtn(p.phone, { icon: true }) + `<button type="button" class="btn sm wa" data-call="${esc(p.phone)}">${esc(t('call'))}</button>` : ''}</div>`).join('')}</section>` : ''}
     <p class="rs-hint">${esc(t('rsLiveHint'))}</p></div>`;
 
   const commit = () => save(rec);

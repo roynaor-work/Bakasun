@@ -20,6 +20,14 @@
   --accent: #E8735C; --accent-soft: #3D2622; --ok: #7FCFA4; --ok-soft: #1E3529; --warn: #E6B85A; --warn-soft: #3B3118; --wa: #43C47C; --nav: #1D191F;
   color-scheme: dark;
 }
+/* she may pick the theme herself (settings → "אישי"): html[data-theme="dark"] above forces dark; html[data-theme="light"] keeps the
+   light tokens of :root and the media query above skips it. Text size "large" (setting 'textSize'): a class on <html>, everything 12% bigger. */
+:root[data-theme="light"] { color-scheme: light; }
+html.text-large { font-size: 112%; }
+html.text-large body, html.text-large input, html.text-large textarea, html.text-large select, html.text-large .btn, html.text-large .card .title { font-size: 19px; }
+html.text-large .card .sub, html.text-large .hint, html.text-large .btn.sm, html.text-large .chip, html.text-large .tabs button, html.text-large .f > span, html.text-large .kv { font-size: 17px; }
+html.text-large .badge, html.text-large nav.bottom a { font-size: 14px; }
+html.text-large h1 { font-size: 27px; } html.text-large h2 { font-size: 20px; } html.text-large .top h1 { font-size: 27px; }
 * { box-sizing: border-box; }
 html { direction: rtl; }
 html[dir="ltr"] { direction: ltr; }

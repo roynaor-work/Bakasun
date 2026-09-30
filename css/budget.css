@@ -58,3 +58,16 @@
   .bg-srow .bg-who { flex: 1; }
   .bg-srow .bg-st, .bg-srow .bg-bal { flex: none; }
 }
+
+/* dark mode: the "late" red on a dark card */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .bg-late, :root:not([data-theme="light"]) .badge.late, :root:not([data-theme="light"]) .bg-srow.late .bg-date, :root:not([data-theme="light"]) .bg-srow.late .bg-amt { color: #FF8A73; }
+}
+:root[data-theme="dark"] .bg-late, :root[data-theme="dark"] .badge.late, :root[data-theme="dark"] .bg-srow.late .bg-date, :root[data-theme="dark"] .bg-srow.late .bg-amt { color: #FF8A73; }
+/* long item names and client names wrap */
+.bg-row .bg-item .title, .bg-srow .bg-who .title, .bg-cards .title { overflow-wrap: anywhere; }
+.bg-cards .card.tap .row.between > .title { min-width: 0; }
+@media (pointer: coarse) {
+  .bg-stats + .hint + .row .btn.sm, .chips [data-sort] { min-height: 40px; }
+}
+[data-sort]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

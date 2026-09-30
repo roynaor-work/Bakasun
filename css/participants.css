@@ -38,3 +38,14 @@
   .pt-wide .pt-row .pt-cell .title { font-size: 16px; }
   .pt-stats { grid-template-columns: repeat(6, 1fr); }
 }
+
+/* copy icons next to a phone / e-mail; the links to the runsheet and the files */
+.pt-row .copyq { width: 26px; height: 26px; margin: 0 3px; }
+.pt-links { gap: 6px; }
+.pt-row .pt-cell .title { overflow-wrap: anywhere; }
+/* phone: every button she taps is at least 40px high; focus is visible on the chips too */
+@media (pointer: coarse) {
+  .pt-row .pt-acts .btn.sm, .pt-row .pt-acts .chip, .pt-filters .chip, .pt-chips .chip { min-height: 40px; }
+  .pt-row .copyq { width: 40px; height: 40px; }
+}
+.pt-filters .chip:focus-visible, .pt-acts .chip:focus-visible, .pt-diet label:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }

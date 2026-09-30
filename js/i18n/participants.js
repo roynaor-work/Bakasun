@@ -11,7 +11,8 @@ export const PARTICIPANTS = {
     pPasteHint: 'שורה לכל אדם: שם, טלפון, ארגון. אפשר גם "שם - טלפון", טאבים, או שורות עם מייל. מילים כמו צמחוני / כשר / סינגל נקלטות לבד.', pPreview: 'זה מה שזוהה', pNothingParsed: 'לא זיהיתי שמות בטקסט.', pAddN: 'להוסיף {n}', pAdded: 'נוספו {n} משתתפים', pSkipped: '{n} כבר היו ברשימה', pDupes: 'כבר ברשימה: {n}',
     pSingles: 'חדרי סינגל', pDoubles: 'חדרים זוגיים', pUnpaired: 'עוד בלי שותף/ה לחדר', pNoRoom: 'בלי לינה', pRoomsTotal: 'סה״כ {r} חדרים ל-{p} אורחים',
     pTo: 'מייל של הנמען', pWaPick: 'וואטסאפ (לבחור צ׳אט)', pMailBtn: 'מייל', pLang: 'שפת ההודעה', pAskRsvp: 'בקשת אישור הגעה', pNameTagsHint: 'שורה לכל תג: שם, ארגון, תפקיד, מופרדים בטאב. מדביקים ישר לאקסל או לקובץ הדפוס.',
-    pHotelSubject: 'רשימת חדרים', pCateringSubject: 'צרכי תזונה', pNoPeople: 'אין עדיין מי שמגיע. סמני אישורי הגעה או הוסיפי משתתפים.', pDeleted: 'נמחק', pPersonDelete: 'למחוק את {who} מהרשימה?'
+    pHotelSubject: 'רשימת חדרים', pCateringSubject: 'צרכי תזונה', pNoPeople: 'אין עדיין מי שמגיע. סמני אישורי הגעה או הוסיפי משתתפים.', pDeleted: 'נמחק', pPersonDelete: 'למחוק את {who} מהרשימה?',
+    pCopyList: 'העתקת הרשימה', pRunsheetLink: 'דף קריאה ולו״ז היום'
   },
   fr: {
     tParticipants: 'Participants', pTitle: 'Participants', pFull: 'Plein écran', pAdd: 'Ajouter', pPaste: 'Coller une liste', pHotel: 'Liste pour l’hôtel', pCatering: 'Pour le traiteur', pNameTags: 'Badges', pCsv: 'CSV',
@@ -24,7 +25,8 @@ export const PARTICIPANTS = {
     pPasteHint: 'Une ligne par personne : nom, téléphone, organisation. Aussi « nom - téléphone », tabulations, ou lignes avec e-mail. Les mots végétarien / casher / single sont reconnus.', pPreview: 'Voici ce qui a été reconnu', pNothingParsed: 'Aucun nom reconnu dans le texte.', pAddN: 'Ajouter {n}', pAdded: '{n} participants ajoutés', pSkipped: '{n} étaient déjà sur la liste', pDupes: 'Déjà sur la liste : {n}',
     pSingles: 'Chambres single', pDoubles: 'Chambres doubles', pUnpaired: 'Sans partenaire de chambre', pNoRoom: 'Sans nuitée', pRoomsTotal: 'Total : {r} chambres pour {p} personnes',
     pTo: 'E-mail du destinataire', pWaPick: 'WhatsApp (choisir la discussion)', pMailBtn: 'E-mail', pLang: 'Langue du message', pAskRsvp: 'Demander une confirmation', pNameTagsHint: 'Une ligne par badge : nom, organisation, fonction, séparés par une tabulation. À coller dans Excel ou le fichier d’impression.',
-    pHotelSubject: 'Rooming list', pCateringSubject: 'Régimes alimentaires', pNoPeople: 'Personne ne vient encore. Marquez les confirmations ou ajoutez des participants.', pDeleted: 'Supprimé', pPersonDelete: 'Retirer {who} de la liste ?'
+    pHotelSubject: 'Rooming list', pCateringSubject: 'Régimes alimentaires', pNoPeople: 'Personne ne vient encore. Marquez les confirmations ou ajoutez des participants.', pDeleted: 'Supprimé', pPersonDelete: 'Retirer {who} de la liste ?',
+    pCopyList: 'Copier la liste', pRunsheetLink: 'Feuille de route et déroulé'
   },
   en: {
     tParticipants: 'Participants', pTitle: 'Participants', pFull: 'Full screen', pAdd: 'Add', pPaste: 'Paste a list', pHotel: 'List for the hotel', pCatering: 'For the caterer', pNameTags: 'Name tags', pCsv: 'CSV',
@@ -37,6 +39,7 @@ export const PARTICIPANTS = {
     pPasteHint: 'One line per person: name, phone, organization. Also “name - phone”, tabs, or lines with an e-mail. Words like vegetarian / kosher / single are picked up.', pPreview: 'This is what was recognized', pNothingParsed: 'No names found in the text.', pAddN: 'Add {n}', pAdded: '{n} participants added', pSkipped: '{n} were already on the list', pDupes: 'Already on the list: {n}',
     pSingles: 'Single rooms', pDoubles: 'Double rooms', pUnpaired: 'Still without a roommate', pNoRoom: 'No room', pRoomsTotal: 'Total: {r} rooms for {p} guests',
     pTo: 'Recipient e-mail', pWaPick: 'WhatsApp (pick the chat)', pMailBtn: 'E-mail', pLang: 'Message language', pAskRsvp: 'Ask to confirm', pNameTagsHint: 'One line per tag: name, organization, role, tab separated. Paste straight into Excel or the print file.',
-    pHotelSubject: 'Rooming list', pCateringSubject: 'Dietary needs', pNoPeople: 'Nobody is coming yet. Mark RSVPs or add participants.', pDeleted: 'Deleted', pPersonDelete: 'Remove {who} from the list?'
+    pHotelSubject: 'Rooming list', pCateringSubject: 'Dietary needs', pNoPeople: 'Nobody is coming yet. Mark RSVPs or add participants.', pDeleted: 'Deleted', pPersonDelete: 'Remove {who} from the list?',
+    pCopyList: 'Copy the list', pRunsheetLink: 'Call sheet and run of show'
   }
 };

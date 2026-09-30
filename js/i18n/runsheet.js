@@ -14,7 +14,7 @@ export const RUNSHEET = {
     rsNow: 'עכשיו', rsNext: 'הבא', rsNothingNow: 'אין בלוק פעיל כרגע', rsAllDone: 'כל הלו״ז בוצע. כל הכבוד!', rsElapsed: 'עברו {n} דק׳', rsRemaining: 'נשארו {n} דק׳', rsInMin: 'בעוד {n} דק׳', rsLateBy: 'באיחור של {n} דק׳', rsRunningLate: 'באיחור',
     rsMarkDone: 'בוצע', rsDelay10: 'איחור +10', rsDelay15s: 'איחור +15', rsCall: 'התקשרי ל{who}', rsPhones: 'טלפונים', rsExit: 'יציאה', rsLiveHint: 'המסך נשאר דולק. מתעדכן כל 30 שניות.', rsWake: 'המסך יישאר דולק', rsNoDay: 'אין לו״ז ליום הזה', rsPickDay: 'יום',
     rsTplSeminar: 'סמינר / יום עיון', rsTplConference: 'כנס', rsTplDelegation: 'משלחת', rsTplDinner: 'ארוחת ערב / אירוע ערב',
-    rsPrintTitle: 'לו״ז יום האירוע', rsPrintClient: 'לקוח', rsPrintEvent: 'אירוע', rsPrintDate: 'תאריך', rsPrintPlace: 'מקום', rsPrintTime: 'שעה', rsPrintWhat: 'מה', rsPrintWhere: 'איפה', rsPrintWho: 'אחראי', rsPrintCue: 'מה צריך להיות מוכן', rsPrintNotes: 'הערות', rsPrintProducer: 'הפקה', rsPrintHint: 'נפתח חלון הדפסה: בוחרים "שמירה כ-PDF".'
+    rsPrintTitle: 'לו״ז יום האירוע', rsPrintClient: 'לקוח', rsPrintEvent: 'אירוע', rsPrintDate: 'תאריך', rsPrintPlace: 'מקום', rsPrintTime: 'שעה', rsPrintWhat: 'מה', rsPrintWhere: 'איפה', rsPrintWho: 'אחראי', rsPrintCue: 'מה צריך להיות מוכן', rsPrintNotes: 'הערות', rsPrintProducer: 'הפקה', rsPrintHint: 'נפתח חלון הדפסה: בוחרים "שמירה כ-PDF".', rsToParticipants: 'משתתפים: {n} מגיעים מתוך {m}'
   },
   fr: {
     tRunsheet: 'Déroulé du jour J', rsTitle: 'Déroulé du jour J', rsEmpty: 'Pas encore de déroulé. Partez d’un modèle, importez le planning existant ou ajoutez un bloc.',
@@ -30,7 +30,7 @@ export const RUNSHEET = {
     rsNow: 'Maintenant', rsNext: 'Ensuite', rsNothingNow: 'Aucun bloc en cours', rsAllDone: 'Tout le déroulé est fait. Bravo !', rsElapsed: '{n} min écoulées', rsRemaining: '{n} min restantes', rsInMin: 'dans {n} min', rsLateBy: 'en retard de {n} min', rsRunningLate: 'En retard',
     rsMarkDone: 'Fait', rsDelay10: 'Retard +10', rsDelay15s: 'Retard +15', rsCall: 'Appeler {who}', rsPhones: 'Téléphones', rsExit: 'Quitter', rsLiveHint: 'L’écran reste allumé. Mise à jour toutes les 30 secondes.', rsWake: 'L’écran restera allumé', rsNoDay: 'Pas de déroulé pour ce jour', rsPickDay: 'Jour',
     rsTplSeminar: 'Séminaire', rsTplConference: 'Conférence', rsTplDelegation: 'Délégation', rsTplDinner: 'Dîner / soirée',
-    rsPrintTitle: 'Déroulé du jour J', rsPrintClient: 'Client', rsPrintEvent: 'Événement', rsPrintDate: 'Date', rsPrintPlace: 'Lieu', rsPrintTime: 'Heure', rsPrintWhat: 'Quoi', rsPrintWhere: 'Où', rsPrintWho: 'Responsable', rsPrintCue: 'Ce qui doit être prêt', rsPrintNotes: 'Notes', rsPrintProducer: 'Production', rsPrintHint: 'La fenêtre d’impression s’ouvre : choisissez « Enregistrer en PDF ».'
+    rsPrintTitle: 'Déroulé du jour J', rsPrintClient: 'Client', rsPrintEvent: 'Événement', rsPrintDate: 'Date', rsPrintPlace: 'Lieu', rsPrintTime: 'Heure', rsPrintWhat: 'Quoi', rsPrintWhere: 'Où', rsPrintWho: 'Responsable', rsPrintCue: 'Ce qui doit être prêt', rsPrintNotes: 'Notes', rsPrintProducer: 'Production', rsPrintHint: 'La fenêtre d’impression s’ouvre : choisissez « Enregistrer en PDF ».', rsToParticipants: 'Participants : {n} viennent sur {m}'
   },
   en: {
     tRunsheet: 'Run of show', rsTitle: 'Run of show', rsEmpty: 'No run of show yet. Start from a template, import the existing schedule or add a block.',
@@ -46,6 +46,6 @@ export const RUNSHEET = {
     rsNow: 'Now', rsNext: 'Next', rsNothingNow: 'No block running right now', rsAllDone: 'The whole run of show is done. Well done!', rsElapsed: '{n} min elapsed', rsRemaining: '{n} min left', rsInMin: 'in {n} min', rsLateBy: '{n} min late', rsRunningLate: 'Running late',
     rsMarkDone: 'Done', rsDelay10: 'Delay +10', rsDelay15s: 'Delay +15', rsCall: 'Call {who}', rsPhones: 'Phones', rsExit: 'Exit', rsLiveHint: 'The screen stays awake. Updates every 30 seconds.', rsWake: 'The screen will stay awake', rsNoDay: 'No run of show for this day', rsPickDay: 'Day',
     rsTplSeminar: 'Seminar', rsTplConference: 'Conference', rsTplDelegation: 'Delegation', rsTplDinner: 'Dinner / evening event',
-    rsPrintTitle: 'Run of show', rsPrintClient: 'Client', rsPrintEvent: 'Event', rsPrintDate: 'Date', rsPrintPlace: 'Place', rsPrintTime: 'Time', rsPrintWhat: 'What', rsPrintWhere: 'Where', rsPrintWho: 'Owner', rsPrintCue: 'What must be ready', rsPrintNotes: 'Notes', rsPrintProducer: 'Production', rsPrintHint: 'The print dialog opens: choose “Save as PDF”.'
+    rsPrintTitle: 'Run of show', rsPrintClient: 'Client', rsPrintEvent: 'Event', rsPrintDate: 'Date', rsPrintPlace: 'Place', rsPrintTime: 'Time', rsPrintWhat: 'What', rsPrintWhere: 'Where', rsPrintWho: 'Owner', rsPrintCue: 'What must be ready', rsPrintNotes: 'Notes', rsPrintProducer: 'Production', rsPrintHint: 'The print dialog opens: choose “Save as PDF”.', rsToParticipants: 'Participants: {n} coming of {m}'
   }
 };

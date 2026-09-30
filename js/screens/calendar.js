@@ -3,7 +3,7 @@
    This module also registers the "history" tab of the event card (read-only activity log). */
 import { t, lang, statusLabel, kindLabel } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, dialog, toast, empty, section } from '../ui.js';
+import { esc, field, dialog, toast, empty, section, copyBtn } from '../ui.js';
 import Office from '../logic/office.js';
 import { TASK } from '../logic/extra.js';
 import { monthGrid, weekDays, weekStart, itemsByDay, agenda, shiftMonth, shiftDay, monthOf, dayIso } from '../logic/calendarGrid.js';
@@ -26,6 +26,10 @@ function itemHtml(x) {
     <span class="cal-t"><b>${esc(x.title)}</b>${sub ? `<span class="sub">${esc(sub)}</span>` : ''}</span>${x.time ? `<span class="cal-time count">${esc(x.time)}</span>` : ''}</a>`;
 }
 const plusBtn = iso => `<button type="button" class="btn sm ghost" data-plus="${esc(iso)}" aria-label="${esc(t('add'))}">+</button>`;
+/** A day's items as lines of text: "10:00 title · sub". */
+const itemLine = x => '• ' + [x.time, x.title, [x.kind === 'case' ? statusLabel(x.status) : kindName(x), x.sub].filter(Boolean).join(' · ')].filter(Boolean).join(' ');
+const dayText = (iso, items) => dayTitle(iso) + '\n' + items.map(itemLine).join('\n');
+const daysText = (title, days) => title + '\n\n' + days.map(d => dayText(d.iso, d.items)).join('\n\n');
 const legend = () => `<div class="cal-legend">${[['k-case st-lead', t('s_' + Office.STATUS.lead)], ['k-case st-quoted', t('s_' + Office.STATUS.quoted)], ['k-case st-won', t('s_' + Office.STATUS.won)], ['k-task', t('calKindTask')], ['k-call', t('calKindCall')], ['k-pay', t('calKindPay')]]
   .map(([c, l]) => `<span><i class="cal-dot ${c}"></i>${esc(l)}</span>`).join('')}</div>`;
 
@@ -57,17 +61,19 @@ export function render(ctx) {
       <div class="cal-grid">${names('calDays').map(n => `<div class="cal-dn">${esc(n)}</div>`).join('')}${g.weeks.map(w => w.map(cell).join('')).join('')}</div>
       ${legend()}
       ${section(dayTitle(selected), `<div class="list">${dayItems.length ? dayItems.map(itemHtml).join('') : empty(t('calEmptyDay'))}</div>`,
-        `<button class="btn sm" data-task="${esc(selected)}">+ ${esc(t('calAddTask'))}</button><button class="btn sm" data-event="${esc(selected)}">+ ${esc(t('calAddEvent'))}</button>`)}`;
+        `<button class="btn sm" data-task="${esc(selected)}">+ ${esc(t('calAddTask'))}</button><button class="btn sm" data-event="${esc(selected)}">+ ${esc(t('calAddEvent'))}</button>${dayItems.length ? copyBtn(dayText(selected, dayItems), { icon: true }) : ''}`)}`;
   } else if (view === 'week') {
     const days = weekDays(week, today);
     const by = itemsByDay(data, days[0].iso, days[6].iso);
-    body = `<div class="cal-nav"><button class="btn sm" data-nav="-1" aria-label="${esc(t('calPrev'))}">‹</button><h2><span class="count">${esc(Office.fmt(days[0].iso).slice(0, 5))} – ${esc(Office.fmt(days[6].iso))}</span></h2><button class="btn sm" data-nav="1" aria-label="${esc(t('calNext'))}">›</button></div>
-      <div class="cal-week">${days.map(d => { const items = by[d.iso] || []; return `<div class="cal-wday ${d.today ? 'today' : ''}"><h3><span>${esc(shortDay(d.iso))}</span>${plusBtn(d.iso)}</h3>${items.length ? items.map(itemHtml).join('') : `<p class="empty">·</p>`}</div>`; }).join('')}</div>
+    const weekTitle = Office.fmt(days[0].iso).slice(0, 5) + ' – ' + Office.fmt(days[6].iso);
+    const weekFull = days.filter(d => (by[d.iso] || []).length).map(d => ({ iso: d.iso, items: by[d.iso] }));
+    body = `<div class="cal-nav"><button class="btn sm" data-nav="-1" aria-label="${esc(t('calPrev'))}">‹</button><h2><span class="count">${esc(weekTitle)}</span></h2>${weekFull.length ? copyBtn(daysText(t('calWeek') + ' ' + weekTitle, weekFull), { icon: true }) : ''}<button class="btn sm" data-nav="1" aria-label="${esc(t('calNext'))}">›</button></div>
+      <div class="cal-week">${days.map(d => { const items = by[d.iso] || []; return `<div class="cal-wday ${d.today ? 'today' : ''}"><h3><span>${esc(shortDay(d.iso))}</span>${plusBtn(d.iso)}${items.length ? copyBtn(dayText(d.iso, items), { icon: true }) : ''}</h3>${items.length ? items.map(itemHtml).join('') : `<p class="empty">·</p>`}</div>`; }).join('')}</div>
       ${legend()}`;
   } else {
     const days = agenda(data, today, shiftDay(today, 30));
-    body = `<div class="cal-nav"><h2>${esc(t('calNext30'))}</h2></div>
-      <div class="cal-agenda">${days.length ? days.map(d => `<div class="cal-day-h ${d.iso === today ? 'today' : ''}"><span>${esc(dayTitle(d.iso))}</span>${plusBtn(d.iso)}</div><div class="list">${d.items.map(itemHtml).join('')}</div>`).join('') : empty(t('calEmptyAgenda'))}</div>`;
+    body = `<div class="cal-nav"><h2>${esc(t('calNext30'))}</h2>${days.length ? copyBtn(daysText(t('calNext30'), days)) : ''}</div>
+      <div class="cal-agenda">${days.length ? days.map(d => `<div class="cal-day-h ${d.iso === today ? 'today' : ''}"><span>${esc(dayTitle(d.iso))}</span>${plusBtn(d.iso)}${copyBtn(dayText(d.iso, d.items), { icon: true })}</div><div class="list">${d.items.map(itemHtml).join('')}</div>`).join('') : empty(t('calEmptyAgenda'))}</div>`;
   }
 
   root.innerHTML = `<header class="top"><h1>${esc(t('calendar'))}</h1><button class="btn sm" id="calToday">${esc(t('calToday'))}</button></header>

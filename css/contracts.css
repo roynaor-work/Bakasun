@@ -37,3 +37,12 @@
 .cl-item .meta .soon { color: var(--warn); font-weight: 700; }
 .cl-item .acts { display: flex; gap: 4px; flex: none; }
 .cl-item .acts .btn { min-height: 32px; padding: 0 10px; font-size: 14px; }
+
+/* the client block: a long legal name wraps instead of pushing the copy icon out */
+.ct-pv .row .btn.sm { flex: none; }
+.card .row.between > .title { min-width: 0; overflow-wrap: anywhere; }
+@media (pointer: coarse) {
+  .cl-item .acts .btn, .ct-pv .btn.sm { min-height: 40px; }
+  .cl-item .acts .btn[data-del] { min-width: 40px; }
+}
+.cl-item input[type=checkbox]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

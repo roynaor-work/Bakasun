@@ -18,7 +18,8 @@ export const BUDGET = {
     bgAttached: '{n} תשלומים שויכו לאירועים', bgLineDelete: 'למחוק את השורה "{item}"?', bgDeleted: 'השורה נמחקה',
     bgClient: 'לקוח', bgSupplierRow: 'ספק', bgTotal: 'סה״כ', bgEvent: 'אירוע', bgSortDate: 'לפי תאריך', bgSortMargin: 'לפי רווח', bgBalance: 'יתרה',
     bgNothingOpen: 'אין סכום פתוח מול הלקוח. אין מה לבקש מרועי.', bgNoSupplierLines: 'אין שורה עם ספק ועלות. הוסיפי שורה או רענני מהספקים.', bgMarkPaid: 'לסמן את השורה כשולמה', bgAmount: 'סכום ששולם (לפני מע״מ)', bgNoPhone: 'לספק הזה אין טלפון בכרטיס.',
-    bgOverdue: 'באיחור', bgSubtotal: 'סה״כ {cat}', bgNoDate: 'בלי תאריך', bgWarnings: 'שימי לב', bgPaidShort: 'שולם', bgYes: 'כן', bgNo: 'לא', bgOpenVsClient: 'פתוח מול הלקוח', bgOpenVsSuppliers: 'פתוח מול ספקים'
+    bgOverdue: 'באיחור', bgSubtotal: 'סה״כ {cat}', bgNoDate: 'בלי תאריך', bgWarnings: 'שימי לב', bgPaidShort: 'שולם', bgYes: 'כן', bgNo: 'לא', bgOpenVsClient: 'פתוח מול הלקוח', bgOpenVsSuppliers: 'פתוח מול ספקים',
+    bgContract: 'סכום החוזה', bgCopyAsk: 'העתקת הבקשה'
   },
   fr: {
     tBudget: 'Budget', bgTitle: 'Budget et rentabilité', bgOverview: 'Budget des événements', bgFull: 'Plein écran', bgBackToCase: 'Au dossier',
@@ -38,7 +39,8 @@ export const BUDGET = {
     bgAttached: '{n} paiements rattachés aux événements', bgLineDelete: 'Supprimer la ligne « {item} » ?', bgDeleted: 'Ligne supprimée',
     bgClient: 'Client', bgSupplierRow: 'Fournisseur', bgTotal: 'Total', bgEvent: 'Événement', bgSortDate: 'Par date', bgSortMargin: 'Par marge', bgBalance: 'Solde',
     bgNothingOpen: 'Rien d’ouvert côté client. Rien à demander à Roy.', bgNoSupplierLines: 'Aucune ligne avec fournisseur et coût. Ajoutez une ligne ou actualisez.', bgMarkPaid: 'Marquer la ligne comme payée', bgAmount: 'Montant payé (HT)', bgNoPhone: 'Ce fournisseur n’a pas de téléphone.',
-    bgOverdue: 'En retard', bgSubtotal: 'Total {cat}', bgNoDate: 'Sans date', bgWarnings: 'Attention', bgPaidShort: 'Payé', bgYes: 'Oui', bgNo: 'Non', bgOpenVsClient: 'Ouvert côté client', bgOpenVsSuppliers: 'Ouvert côté fournisseurs'
+    bgOverdue: 'En retard', bgSubtotal: 'Total {cat}', bgNoDate: 'Sans date', bgWarnings: 'Attention', bgPaidShort: 'Payé', bgYes: 'Oui', bgNo: 'Non', bgOpenVsClient: 'Ouvert côté client', bgOpenVsSuppliers: 'Ouvert côté fournisseurs',
+    bgContract: 'Montant du contrat', bgCopyAsk: 'Copier la demande'
   },
   en: {
     tBudget: 'Budget', bgTitle: 'Budget and profit', bgOverview: 'Events budget', bgFull: 'Full screen', bgBackToCase: 'To the case',
@@ -58,6 +60,7 @@ export const BUDGET = {
     bgAttached: '{n} payments were attached to events', bgLineDelete: 'Delete the line “{item}”?', bgDeleted: 'Line deleted',
     bgClient: 'Client', bgSupplierRow: 'Supplier', bgTotal: 'Total', bgEvent: 'Event', bgSortDate: 'By date', bgSortMargin: 'By margin', bgBalance: 'Balance',
     bgNothingOpen: 'Nothing open with the client. Nothing to ask Roy for.', bgNoSupplierLines: 'No line with a supplier and a cost. Add a line or refresh from the suppliers.', bgMarkPaid: 'Mark the line as paid', bgAmount: 'Amount paid (before VAT)', bgNoPhone: 'This supplier has no phone on the card.',
-    bgOverdue: 'Overdue', bgSubtotal: 'Total {cat}', bgNoDate: 'No date', bgWarnings: 'Watch out', bgPaidShort: 'Paid', bgYes: 'Yes', bgNo: 'No', bgOpenVsClient: 'Open with the client', bgOpenVsSuppliers: 'Open with suppliers'
+    bgOverdue: 'Overdue', bgSubtotal: 'Total {cat}', bgNoDate: 'No date', bgWarnings: 'Watch out', bgPaidShort: 'Paid', bgYes: 'Yes', bgNo: 'No', bgOpenVsClient: 'Open with the client', bgOpenVsSuppliers: 'Open with suppliers',
+    bgContract: 'Contract amount', bgCopyAsk: 'Copy the request'
   }
 };

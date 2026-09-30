@@ -2,8 +2,9 @@
    active events (#/budget). Every amount is before VAT; the VAT total is shown once. Nothing is sent by the app. */
 import { t } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, section, empty, dialog, confirmDialog, toast, openWhatsApp } from '../ui.js';
+import { esc, field, section, empty, dialog, confirmDialog, toast, openWhatsApp, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
+import { contractTotals } from '../logic/contracts.js';
 import { registerCaseTab } from '../caseTabs.js';
 import { DEFAULTS } from '../data/defaults.js';
 import { supplierPaidMessage } from '../logic/approvals.js';
@@ -77,6 +78,13 @@ function draw(body, c, s, full) {
   const supName = l => (sups[l.supplierId] || {}).name || '';
   const warnText = w => t('bgW_' + w.code, { item: w.item || '', cost: M(w.cost), price: M(w.price), date: w.date ? Office.fmt(w.date) : '', amount: M(w.amount), pct: w.pct, budget: M(w.budget) });
   const stat = (key, val, cls, extra) => `<div class="card ${cls || ''}"><b>${esc(M(val))}</b><span>${esc(t(key))}${extra ? ' · <span class="bg-n">' + esc(extra) + '</span>' : ''}</span></div>`;
+  const contract = db.list('contracts', x => x.caseId === c.id).sort((a, b) => String(b.created || '').localeCompare(String(a.created || '')))[0];
+  const ctTot = contract ? contractTotals(contract) : null;
+  const head = [c.client, c.kind, c.date ? Office.fmt(c.date) : ''].filter(Boolean).join(' · ');
+  // the lines and the schedule as plain text, for a message or a spreadsheet
+  const linesText = t('bgLines') + ' · ' + head + '\n' + lines.map(l => '• ' + [l.item || catLabel(l.category), supName(l), t('bgCost') + ' ' + M(costOf(l)), t('bgPrice') + ' ' + M(priceOf(l)), stLabel(l.status), l.dueDate && l.status !== LINE_STATUS.paid ? t('bgDue') + ' ' + Office.fmt(l.dueDate) : ''].filter(Boolean).join(' · ')).join('\n')
+    + '\n' + t('bgTotal') + ': ' + t('bgCost') + ' ' + M(sm.totalCost) + ' · ' + t('bgPrice') + ' ' + M(sm.clientPrice) + ' · ' + t('bgMargin') + ' ' + M(sm.margin) + ' (' + sm.marginPct + '%)';
+  const schedText = t('bgSchedule') + ' · ' + head + '\n' + sched.map(r => '• ' + [r.date ? Office.fmt(r.date) : t('bgNoDate'), r.kind === 'client' ? t('bgClient') : t('bgSupplierRow'), r.label, r.kind === 'supplier' && r.supplierId && sups[r.supplierId] ? sups[r.supplierId].name : '', (r.kind === 'client' ? '+' : '−') + M(r.amount), r.kind === 'client' ? payStatusLabel(r.status) : r.paid ? t('bgPaidShort') : stLabel(r.status), r.overdue ? t('bgOverdue') : '', t('bgBalance') + ' ' + M(r.balance)].filter(Boolean).join(' · ')).join('\n');
   const catRows = sm.byCategory.map(cat => {
     const mine = lines.filter(l => (l.category || 'אחר') === cat.category);
     return `<div class="bg-cat"><span class="title">${esc(catLabel(cat.category))}</span><span class="sub">${esc(t('bgCost'))} ${N(cat.cost)} · ${esc(t('bgPrice'))} ${N(cat.price)} · ${esc(t('bgMargin'))} <span class="${cat.margin < 0 ? 'bg-late' : ''}">${N(cat.margin)}</span></span></div>
@@ -94,15 +102,16 @@ function draw(body, c, s, full) {
     <div class="bg-stats">${stat('bgCost', sm.totalCost)}${stat('bgPrice', sm.clientPrice)}${stat('bgMargin', sm.margin, sm.margin < 0 ? 'neg' : 'pos', sm.marginPct + '%')}${stat('bgReceived', sm.received)}${stat('bgOpen', sm.open, sm.open > 0 ? 'neg' : '')}</div>
     <p class="hint">${esc(t('bgVatLine', { rate: sm.vatRate, vat: M(sm.vat), gross: M(sm.gross) }))}${sm.supplierDue ? ' · ' + esc(t('bgOpenVsSuppliers')) + ' ' : ''}${sm.supplierDue ? N(sm.supplierDue) : ''}</p>
     ${sm.warnings.length ? `<div class="warnbox"><b>${esc(t('bgWarnings'))}</b><ul class="open">${sm.warnings.map(w => `<li>${esc(warnText(w))}</li>`).join('')}</ul></div>` : ''}
-    <div class="row"><button class="btn primary sm" id="bgAdd">+ ${esc(t('bgAddLine'))}</button><button class="btn sm" id="bgRefresh">${esc(t('bgRefresh'))}</button><button class="btn sm wa" id="bgAsk">${esc(t('bgAskRoy'))}</button><button class="btn sm" id="bgPay">${esc(t('bgPaySupplier'))}</button>${full ? `<a class="btn sm ghost" href="#/budget">${esc(t('bgOverview'))}</a>` : `<a class="btn sm ghost" href="#/budget/${esc(c.id)}">${esc(t('bgFull'))}</a>`}</div>
+    <div class="row"><button class="btn primary sm" id="bgAdd">+ ${esc(t('bgAddLine'))}</button><button class="btn sm" id="bgRefresh">${esc(t('bgRefresh'))}</button><button class="btn sm wa" id="bgAsk">${esc(t('bgAskRoy'))}</button>${sm.open > 0 ? copyBtn(invoiceAskText(c, sm.open), { label: t('bgCopyAsk') }) : ''}<button class="btn sm" id="bgPay">${esc(t('bgPaySupplier'))}</button>${full ? `<a class="btn sm ghost" href="#/budget">${esc(t('bgOverview'))}</a>` : `<a class="btn sm ghost" href="#/budget/${esc(c.id)}">${esc(t('bgFull'))}</a>`}
+      ${contract ? `<a class="btn sm ghost" href="#/contract/${esc(contract.id)}">${esc(t('bgContract'))}${ctTot.hasPrice ? ' · ' : ''}${ctTot.hasPrice ? N(ctTot.net) : ''}</a>` : ''}</div>
     ${section(t('bgLines'), lines.length ? `<div class="bg-lines"><div class="bg-head"><span>${esc(t('bgItem'))}</span><span>${esc(t('bgStatus'))}</span><span>${esc(t('bgPlanned'))}</span><span>${esc(t('bgCost'))}</span><span>${esc(t('bgPrice'))}</span><span>${esc(t('bgMargin'))}</span><span>${esc(t('bgDue'))}</span></div>${catRows}
-      <div class="bg-cat bg-total"><span class="title">${esc(t('bgTotal'))}</span><span class="sub">${esc(t('bgCost'))} ${N(sm.totalCost)} · ${esc(t('bgPrice'))} ${N(sm.clientPrice)} · ${esc(t('bgMargin'))} <span class="${sm.margin < 0 ? 'bg-late' : ''}">${N(sm.margin)}</span> (<span class="bg-n">${esc(sm.marginPct)}%</span>)</span></div></div>` : `<p class="hint">${esc(t('bgNoLines'))}</p>`)}
+      <div class="bg-cat bg-total"><span class="title">${esc(t('bgTotal'))}</span><span class="sub">${esc(t('bgCost'))} ${N(sm.totalCost)} · ${esc(t('bgPrice'))} ${N(sm.clientPrice)} · ${esc(t('bgMargin'))} <span class="${sm.margin < 0 ? 'bg-late' : ''}">${N(sm.margin)}</span> (<span class="bg-n">${esc(sm.marginPct)}%</span>)</span></div></div>` : `<p class="hint">${esc(t('bgNoLines'))}</p>`, lines.length ? copyBtn(linesText, { icon: true }) : '')}
     ${section(t('bgSchedule'), sched.length ? `<div class="bg-sched">${sched.map(r => `<div class="card bg-srow${r.overdue ? ' late' : ''}${r.paid ? ' paid' : ''}" ${r.kind === 'supplier' ? `data-l="${esc(r.id)}"` : ''}>
         <span class="bg-n bg-date">${esc(r.date ? Office.fmt(r.date) : t('bgNoDate'))}</span>
         <span class="bg-who"><span class="badge ${r.kind === 'client' ? '' : 'muted'}">${esc(r.kind === 'client' ? t('bgClient') : t('bgSupplierRow'))}</span> <span class="title">${esc(r.label)}</span>${r.kind === 'supplier' && r.supplierId && sups[r.supplierId] ? ` <span class="sub">· ${esc(sups[r.supplierId].name)}</span>` : ''}</span>
         <span class="bg-n bg-amt">${esc((r.kind === 'client' ? '+' : '−') + M(r.amount))}</span>
         <span class="bg-st"><span class="badge ${r.paid ? 'ok' : r.overdue ? 'late' : 'warn'}">${esc(r.kind === 'client' ? payStatusLabel(r.status) : r.paid ? t('bgPaidShort') : stLabel(r.status))}${r.overdue ? ' · ' + esc(t('bgOverdue')) : ''}</span></span>
-        <span class="bg-n bg-bal bg-desk">${esc(t('bgBalance'))} ${esc(M(r.balance))}</span></div>`).join('')}</div>` : `<p class="hint">${esc(t('bgNoSchedule'))}</p>`)}`;
+        <span class="bg-n bg-bal bg-desk">${esc(t('bgBalance'))} ${esc(M(r.balance))}</span></div>`).join('')}</div>` : `<p class="hint">${esc(t('bgNoSchedule'))}</p>`, sched.length ? copyBtn(schedText, { icon: true }) : '')}`;
 
   body.querySelector('#bgAdd').onclick = () => editLine(c, null, sups);
   body.querySelectorAll('.bg-row[data-l], .bg-srow[data-l]').forEach(el => { el.onclick = e => { if (e.target.closest('a,button')) return; const l = db.get('budget', el.dataset.l); if (l) editLine(c, l, sups); }; });
@@ -169,7 +178,7 @@ async function paySupplier(c, s, lines, sups) {
   const sp = sups[l.supplierId]; const amount = Office.num(r.amount);
   if (!sp.phone) { toast(t('bgNoPhone'), 3500); return; }
   const text = supplierPaidMessage(sp, c, isNaN(amount) ? 0 : amount, sp.lang || 'he', signerOf(s));
-  const r2 = await dialog(sp.name, `<textarea name="text" rows="7">${esc(text)}</textarea>`, { ok: t('whatsapp') });
+  const r2 = await dialog(sp.name, `<textarea name="text" rows="7">${esc(text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
   if (!r2 || !openWhatsApp(sp.phone, r2.text)) return;
   if (Office.yes(r.markPaid)) {
     const paidNow = (paidOf(l) || 0) + (isNaN(amount) ? 0 : amount);

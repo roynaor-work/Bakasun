@@ -63,7 +63,13 @@ export function applyLang() {
   const rtl = dir(l) === 'rtl';
   [document.body, document.getElementById('root-shell')].forEach(el => { if (el) { el.style.direction = rtl ? 'rtl' : 'ltr'; el.style.textAlign = rtl ? 'right' : 'left'; } });
   document.title = t('app');
+  // her theme (settings → "אישי"): 'light' / 'dark' pin the colours, anything else follows the device (css/app.css)
+  const theme = db.setting('theme');
+  if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; else delete document.documentElement.dataset.theme;
 }
+/* The screen she lands on when the app opens with no address (setting 'landing'); 'today' unless she chose another. */
+const LANDINGS = ['today', 'dashboard', 'calendar', 'board', 'tasks'];
+function landing() { const l = db.setting('landing'); return LANDINGS.includes(l) ? l : 'today'; }
 
 function drawNav(active) {
   // On a computer (css/desktop.css, from 900px) the bar becomes a side rail with the app name and the "more" screens listed
@@ -97,7 +103,7 @@ function route() {
   applyLang();
   document.querySelectorAll('.modal').forEach(m => m.remove());
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
-  const name = parts[0] || 'today';
+  const name = parts[0] || landing();
   const screen = ROUTES[name] || today;
   if (unsub) { unsub(); unsub = null; }
   drawNav(name);

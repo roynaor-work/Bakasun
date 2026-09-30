@@ -18,7 +18,8 @@ export const CONTRACTS = {
     clAdd: '+ פריט', clRefresh: 'רשימה מחדש מהתבנית', clRefreshHint: 'מוסיף רק מה שחסר. סימונים ופריטים שלך נשארים.', clAdded: 'נוספו {n} פריטים', clNothingAdded: 'הכול כבר ברשימה',
     clToTask: 'למשימה', clTaskMade: 'נוצרה משימה', clIsTask: 'משימה', clProgress: '{done} מתוך {total} בוצעו', clDueSoon: '{n} לשבוע הקרוב', clOverdue: '{n} באיחור', clAllDone: 'הכול בוצע',
     clPhase_before: 'שבועות לפני', clPhase_week: 'השבוע שלפני', clPhase_day: 'יום האירוע', clPhase_after: 'אחרי האירוע',
-    clItem: 'מה לעשות', clPhase: 'שלב', clDue: 'עד מתי', clDeleteItem: 'מחיקת הפריט', clNoDate: 'אין תאריך לאירוע, לכן אין תאריכי יעד.'
+    clItem: 'מה לעשות', clPhase: 'שלב', clDue: 'עד מתי', clDeleteItem: 'מחיקת הפריט', clNoDate: 'אין תאריך לאירוע, לכן אין תאריכי יעד.',
+    ctCopyText: 'העתקת טקסט החוזה', ctCopyFailed: 'הטקסט עוד לא מוכן, נסי שוב'
   },
   fr: {
     tContract: 'Contrat', tChecklist: 'Check-list', ctContracts: 'Contrats', ctNew: 'Nouveau contrat', ctNone: 'Pas encore de contrat pour cet événement. « Nouveau contrat » le construit à partir du dossier, de la fiche client et du devis.',
@@ -38,7 +39,8 @@ export const CONTRACTS = {
     clAdd: '+ Élément', clRefresh: 'Compléter depuis le modèle', clRefreshHint: 'Ajoute seulement ce qui manque. Vos coches et vos éléments restent.', clAdded: '{n} éléments ajoutés', clNothingAdded: 'Tout est déjà dans la liste',
     clToTask: 'En tâche', clTaskMade: 'Tâche créée', clIsTask: 'Tâche', clProgress: '{done} sur {total} faits', clDueSoon: '{n} pour la semaine', clOverdue: '{n} en retard', clAllDone: 'Tout est fait',
     clPhase_before: 'Semaines avant', clPhase_week: 'La semaine d’avant', clPhase_day: 'Le jour J', clPhase_after: 'Après l’événement',
-    clItem: 'Quoi faire', clPhase: 'Phase', clDue: 'Pour quand', clDeleteItem: 'Supprimer l’élément', clNoDate: 'Pas de date d’événement, donc pas d’échéances.'
+    clItem: 'Quoi faire', clPhase: 'Phase', clDue: 'Pour quand', clDeleteItem: 'Supprimer l’élément', clNoDate: 'Pas de date d’événement, donc pas d’échéances.',
+    ctCopyText: 'Copier le texte du contrat', ctCopyFailed: 'Le texte n’est pas encore prêt, réessayez'
   },
   en: {
     tContract: 'Contract', tChecklist: 'Checklist', ctContracts: 'Contracts', ctNew: 'New contract', ctNone: 'No contract for this event yet. “New contract” builds it from the case, the client card and the quote.',
@@ -58,6 +60,7 @@ export const CONTRACTS = {
     clAdd: '+ Item', clRefresh: 'Refresh from template', clRefreshHint: 'Adds only what is missing. Your ticks and your items stay.', clAdded: '{n} items added', clNothingAdded: 'Everything is already on the list',
     clToTask: 'Make a task', clTaskMade: 'Task created', clIsTask: 'Task', clProgress: '{done} of {total} done', clDueSoon: '{n} due this week', clOverdue: '{n} overdue', clAllDone: 'All done',
     clPhase_before: 'Weeks before', clPhase_week: 'The week before', clPhase_day: 'Event day', clPhase_after: 'After the event',
-    clItem: 'What to do', clPhase: 'Phase', clDue: 'Due', clDeleteItem: 'Delete item', clNoDate: 'No event date, so no due dates.'
+    clItem: 'What to do', clPhase: 'Phase', clDue: 'Due', clDeleteItem: 'Delete item', clNoDate: 'No event date, so no due dates.',
+    ctCopyText: 'Copy the contract text', ctCopyFailed: 'The text is not ready yet, try again'
   }
 };

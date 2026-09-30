@@ -88,3 +88,17 @@ body.rs-live-on nav, body.rs-live-on .nav, body.rs-live-on #nav { display: none 
   :root:not([data-theme="light"]) .badge.late { background: #3D2622; color: #FF8A73; }
 }
 :root[data-theme="dark"] .badge.late { background: #3D2622; color: #FF8A73; }
+
+/* the phone on a block and in the day-of phone list, with its copy icon */
+.rs-block .rs-acts .rs-phone { font-size: 14px; }
+.rs-block .title { overflow-wrap: anywhere; }
+.rs-daynotes .copyq { flex: none; }
+.rs-live .rs-label-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.rs-live .copyq { background: #2A2530; color: #D9D0C6; border-color: #3A3339; }
+.rs-msg .row .btn.sm { flex: none; }
+@media (pointer: coarse) {
+  .rs-block .rs-acts .btn.sm, .rs-msg .chips .chip, .rs-live .rs-row .btn.sm, .rs-daynotes .btn.sm { min-height: 40px; }
+  .rs-block .copyq, .rs-live .copyq, .rs-daynotes .copyq { width: 40px; height: 40px; }
+}
+.rs-msg .chip:focus-visible, .rs-days button:focus-visible, .rs-live .tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.rs-live .btn:focus-visible, .rs-live a:focus-visible { outline: 2px solid #F2ECE4; outline-offset: 2px; }

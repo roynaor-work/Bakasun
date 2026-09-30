@@ -5,7 +5,7 @@
    Nothing is sent by the app: WhatsApp / mail open prefilled, she presses send. Deleting asks per item. */
 import { t, lang, kindLabel, langName, KIND_LABELS } from '../i18n.js';
 import { db, todayIso, nowIso } from '../store.js';
-import { esc, field, dialog, confirmDialog, toast, empty, section, openWhatsApp, openMail } from '../ui.js';
+import { esc, field, dialog, confirmDialog, toast, empty, section, openWhatsApp, openMail, copyText, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { TASK } from '../logic/extra.js';
 import { registerCaseTab } from '../caseTabs.js';
@@ -17,6 +17,8 @@ import { buildChecklist, progress, dueSoon, addMissing, byPhase, toggle, customI
 const BACK = (href) => `<a class="icon" href="${esc(href)}" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
 const statusBadge = c => `<span class="badge ${c.status === CONTRACT_STATUS.signed ? 'ok' : c.status === CONTRACT_STATUS.sent ? 'warn' : 'muted'}">${esc(t('ctStatus_' + (c.status || 'draft')))}</span>`;
 const kindIn = (kind, L) => { if (!kind || L === 'he') return kind || ''; const k = KIND_LABELS[kind]; return (k && k[L]) || kind; };
+/** The client's details as lines, for pasting into an invoice or a mail. */
+const clientBlockText = cl => [cl.legalName || cl.name, cl.name && cl.name !== cl.legalName ? cl.name : '', cl.taxId ? t('ctClientTaxId') + ' ' + cl.taxId : '', cl.address, cl.contact, cl.phone, cl.email].filter(Boolean).join('\n');
 
 /* ================= routes ================= */
 export function render(ctx) {
@@ -64,8 +66,9 @@ function renderOne(root, c) {
       <div class="row">${statusBadge(c)}<select id="status" class="grow" aria-label="${esc(t('fStatus'))}">${Object.values(CONTRACT_STATUS).map(v => `<option value="${v}"${v === c.status ? ' selected' : ''}>${esc(t('ctStatus_' + v))}</option>`).join('')}</select>
         <span class="badge muted">${esc(langName(c.lang))}</span><span class="badge muted"><span class="ltr">${esc(Office.fmt(c.date))}</span></span></div>
       ${miss.length ? `<div class="warnbox">${esc(t('ctMissing'))}: ${miss.map(k => esc(t('ctMiss_' + k))).join(' · ')}</div>` : ''}
-      <div class="card"><div class="title">${esc(cl.legalName || cl.name || t('unknownClient'))}</div>
+      <div class="card"><div class="row between"><span class="title">${esc(cl.legalName || cl.name || t('unknownClient'))}</span>${copyBtn(clientBlockText(cl), { icon: true })}</div>
         <div class="sub">${[cl.name && cl.name !== cl.legalName ? cl.name : '', cl.taxId, cl.address, cl.contact].filter(Boolean).map(esc).join(' · ')}</div>
+        ${cl.phone || cl.email ? `<div class="sub ltr">${esc(cl.phone || '')}${cl.phone ? copyBtn(cl.phone, { icon: true }) : ''}${cl.phone && cl.email ? ' · ' : ''}${esc(cl.email || '')}${cl.email ? copyBtn(cl.email, { icon: true }) : ''}</div>` : ''}
         <div class="sub">${[kindIn(ev.kind, L), ev.date ? Office.fmt(ev.date) : '', ev.hours, ev.place, ev.participants ? ev.participants + ' ' + t('people') : ''].filter(Boolean).map(esc).join(' · ')}</div></div>
       <div class="card ct-price">${tot.hasPrice ? `<div class="row between"><span><b class="ltr">${esc(Office.money(tot.net))}</b> ${esc(t('ctNet'))}</span><span class="sub">+ ${esc(t('vat')).replace('%', '')} <span class="count">${tot.vatRate}%</span> = <b class="ltr">${esc(Office.money(tot.gross))}</b> ${esc(t('ctGross'))}</span></div>` : `<span class="sub">${esc(t('ctNoPrice'))}</span>`}
         ${c.quoteNo ? `<div class="sub">${esc(t('ctFromQuote'))} <a class="ltr" href="#/quote/${esc(c.quoteId)}">${esc(c.quoteNo)}</a></div>` : ''}</div>
@@ -130,11 +133,13 @@ async function editContract(c) {
 /* ---- preview / print / share: same approach as the quotes (a printable HTML page in an iframe) ---- */
 function showPreview(html) {
   const wrap = document.createElement('div'); wrap.className = 'modal';
-  wrap.innerHTML = `<div class="modal-card ct-pv" style="max-height:95vh;padding:8px"><div class="row between"><button class="btn sm" id="pvClose">${esc(t('close'))}</button><button class="btn sm" id="pvPrint">${esc(t('ctPrint'))}</button></div><iframe id="pv" title="${esc(t('preview'))}"></iframe></div>`;
+  wrap.innerHTML = `<div class="modal-card ct-pv" style="max-height:95vh;padding:8px"><div class="row between"><button class="btn sm" id="pvClose">${esc(t('close'))}</button><span class="row"><button class="btn sm ghost" id="pvCopy">${esc(t('ctCopyText'))}</button><button class="btn sm" id="pvPrint">${esc(t('ctPrint'))}</button></span></div><iframe id="pv" title="${esc(t('preview'))}"></iframe></div>`;
   document.body.appendChild(wrap);
-  wrap.querySelector('#pv').srcdoc = html;
+  const pv = wrap.querySelector('#pv'); pv.srcdoc = html;
   wrap.querySelector('#pvClose').onclick = () => wrap.remove();
   wrap.querySelector('#pvPrint').onclick = () => printHtml(html);
+  // the contract as plain text: what the rendered page reads, line breaks kept (the frame is same-origin: srcdoc)
+  wrap.querySelector('#pvCopy').onclick = () => { try { copyText(pv.contentDocument.body.innerText.replace(/\n{3,}/g, '\n\n').trim()); } catch (e) { toast(t('ctCopyFailed')); } };
   wrap.addEventListener('click', e => { if (e.target === wrap) wrap.remove(); });
 }
 /** Opens the printable page in a hidden frame and calls print: she prints, or saves as PDF from the print dialog. */
@@ -165,7 +170,7 @@ async function sendContract(c, cs, s, pageHtml) {
   const text = contractMessage(c, cs, s.signer || '');
   const canFile = !!(navigator.share && navigator.canShare);
   const r = await dialog(t('ctSend'), `${field('channel', t('ctChannel'), 'wa', { type: 'select', options: [['wa', t('ctChWa')], ['mail', t('ctChMail')], ['file', t('ctChFile')]] })}
-    <label class="f"><span>${esc(t('ctCover'))}</span><textarea name="text" rows="7">${esc(text)}</textarea></label><p class="hint">${esc(canFile ? t('ctSendHint') : t('ctShareHint'))}</p>`, { ok: t('ctSend') });
+    <label class="f"><span>${esc(t('ctCover'))}</span><textarea name="text" rows="7">${esc(text)}</textarea></label><div class="row">${copyOf('[name=text]')}</div><p class="hint">${esc(canFile ? t('ctSendHint') : t('ctShareHint'))}</p>`, { ok: t('ctSend') });
   if (!r) return;
   const markSent = () => { if (c.status === CONTRACT_STATUS.draft) db.put('contracts', { id: c.id, status: CONTRACT_STATUS.sent, sentAt: todayIso() }); else db.put('contracts', { id: c.id, sentAt: todayIso() }); };
   if (r.channel === 'wa') { if (openWhatsApp(cl.phone || cs.phone, r.text)) markSent(); return; }

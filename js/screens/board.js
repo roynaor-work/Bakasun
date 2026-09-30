@@ -4,7 +4,7 @@
    Logic in js/logic/pipeline.js; a move is an ordinary db.put (the history records it). Nothing is deleted here. */
 import { t, lang, kindLabel, statusLabel } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, dialog, toast, empty, section, dial, relDay } from '../ui.js';
+import { esc, field, dialog, toast, empty, section, dial, relDay, copyBtn } from '../ui.js';
 import Office from '../logic/office.js';
 import { phonePretty } from '../logic/core.js';
 import { matchClient } from '../logic/extra.js';
@@ -111,7 +111,7 @@ function cardHtml(c) {
       ${src ? `<span class="badge muted">${esc(src)}</span>` : ''}
       ${c.overdueTasks ? `<span class="badge warn">${esc(t('bOverdue', { n: c.overdueTasks }))}</span>` : ''}
       ${c.silentSuppliers ? `<span class="badge">${esc(t('bSilent', { n: c.silentSuppliers }))}</span>` : ''}
-      ${c.phone ? `<button class="btn sm bd-dial" data-dial="${esc(c.phone)}">${ICON.phone}<span class="ltr">${esc(phonePretty(c.phone))}</span></button>` : ''}
+      ${c.phone ? `<button class="btn sm bd-dial" data-dial="${esc(c.phone)}">${ICON.phone}<span class="ltr">${esc(phonePretty(c.phone))}</span></button>${copyBtn(c.phone, { icon: true })}` : ''}
     </div></article>`;
 }
 
@@ -193,6 +193,7 @@ function menu(id) {
       <h3>${esc(t('bSource'))}</h3>
       <div class="chips" data-source>${known.map(s => `<button type="button" class="chip${c[SOURCE_FIELD] === s ? ' on' : ''}" data-v="${esc(s)}">${esc(srcLabel(s))}</button>`).join('')}</div>
     </div>
+    <div class="row bd-links"><a class="btn sm ghost" href="#/case/${esc(c.id)}/budget">${esc(t('tBudget'))}</a><a class="btn sm ghost" href="#/runsheet/${esc(c.id)}">${esc(t('tRunsheet'))}</a></div>
     <div class="row end"><a class="btn" href="#/case/${esc(c.id)}">${esc(t('bOpenCase'))}</a><button type="button" class="btn ghost" data-x="cancel">${esc(t('cancel'))}</button></div></div>`;
   document.body.appendChild(wrap);
   const close = () => wrap.remove();

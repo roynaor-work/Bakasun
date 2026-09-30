@@ -4,7 +4,7 @@ import { t, kindLabel } from '../i18n.js';
 import { db } from '../store.js';
 import { esc, section, empty, relDay } from '../ui.js';
 import Office from '../logic/office.js';
-import { dashboardData } from '../logic/dashboard.js';
+import { dashboardData, widgetsOn } from '../logic/dashboard.js';
 
 const ICONS = {
   events: 'M4 6h16v13H4zM4 10h16M8 6V4h8v2',
@@ -57,6 +57,9 @@ function moneyTable(rows) {
     </tbody><tfoot><tr><th>${esc(t('dbTotal'))}</th>${['planned', 'invoiced', 'paid', 'open'].map(k => `<th class="n">${esc(Office.money(sum(k)))}</th>`).join('')}</tr></tfoot></table></div>`;
 }
 
+/* Two sections sit side by side on a wide screen (css/dashboard.css); a lone one keeps the full width. */
+const cols = parts => { const p = parts.filter(Boolean); return p.length > 1 ? `<div class="dash-cols">${p.join('')}</div>` : p.join(''); };
+
 export function render({ root }) {
   const data = db.snapshot();
   const d = dashboardData({ cases: data.cases, tasks: data.tasks, calls: data.calls, payments: data.payments, quotes: data.quotes, links: data.links }, new Date());
@@ -65,24 +68,25 @@ export function render({ root }) {
   const silentCases = Array.from(new Set(d.suppliers.list.map(l => l.caseId).filter(Boolean)));
   const silentHref = silentCases.length === 1 ? '#/case/' + silentCases[0] + '/suppliers' : d.suppliers.count ? '#/today' : '#/suppliers';
 
+  // settings → "אישי" says which tiles and sections she wants; all of them unless she unticked some
+  const on = widgetsOn(db.setting('dashWidgets'));
+  const tiles = [
+    on.events && tile('#/cases', 'events', d.events.count, t('dbOpenEvents'), nextSub, 'accent'),
+    on.tasksOverdue && tile('#/tasks', 'late', d.tasks.overdue, t('dbTasksOverdue'), '', d.tasks.overdue ? 'warn' : 'ok'),
+    on.tasksToday && tile('#/tasks', 'today', d.tasks.today, t('dbTasksToday'), ''),
+    on.tasksWeek && tile('#/tasks', 'week', d.tasks.week, t('dbTasksWeek'), ''),
+    on.calls && tile('#/calls', 'calls', d.calls.count, t('dbCalls'), d.calls.scheduled ? t('dbCallsLater', { n: d.calls.scheduled }) : ''),
+    on.money && tile('#/money', 'money', Office.money(d.money.total), t('dbUnpaid'), t('dbUnpaidCount', { n: d.money.count }), d.money.count ? 'warn' : 'ok'),
+    on.quotes && tile('#/quotes', 'quotes', d.quotes.count, t('dbQuotes'), d.quotes.count && d.quotes.list[0].waited != null ? t('dbWaitedDays', { n: d.quotes.list[0].waited }) : ''),
+    on.suppliers && tile(silentHref, 'suppliers', d.suppliers.count, t('dbSuppliers'), t('dbSuppliersHint'), d.suppliers.count ? 'warn' : 'ok'),
+    on.leads && tile('#/cases', 'leads', d.leads.count, t('dbLeads'), t('dbLeadsHint'))
+  ].filter(Boolean);
+
   root.innerHTML = `
     <header class="top"><h1>${esc(t('dashboard'))}</h1><span class="hint dash-date">${esc(Office.fmt(new Date()))}</span>
       <a class="icon" href="#/today" aria-label="${esc(t('today'))}" title="${esc(t('today'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z"/></svg></a></header>
     <p class="hint">${esc(t('dbSubtitle'))}</p>
-    ${section(t('dbNow'), d.now.length ? `<div class="dash-now">${d.now.map(nowItem).join('')}</div>` : `<div class="okbox">${esc(t('dbNowEmpty'))}</div>`)}
-    <section class="sec"><div class="dash-tiles">
-      ${tile('#/cases', 'events', d.events.count, t('dbOpenEvents'), nextSub, 'accent')}
-      ${tile('#/tasks', 'late', d.tasks.overdue, t('dbTasksOverdue'), '', d.tasks.overdue ? 'warn' : 'ok')}
-      ${tile('#/tasks', 'today', d.tasks.today, t('dbTasksToday'), '')}
-      ${tile('#/tasks', 'week', d.tasks.week, t('dbTasksWeek'), '')}
-      ${tile('#/calls', 'calls', d.calls.count, t('dbCalls'), d.calls.scheduled ? t('dbCallsLater', { n: d.calls.scheduled }) : '')}
-      ${tile('#/money', 'money', Office.money(d.money.total), t('dbUnpaid'), t('dbUnpaidCount', { n: d.money.count }), d.money.count ? 'warn' : 'ok')}
-      ${tile('#/quotes', 'quotes', d.quotes.count, t('dbQuotes'), d.quotes.count && d.quotes.list[0].waited != null ? t('dbWaitedDays', { n: d.quotes.list[0].waited }) : '')}
-      ${tile(silentHref, 'suppliers', d.suppliers.count, t('dbSuppliers'), t('dbSuppliersHint'), d.suppliers.count ? 'warn' : 'ok')}
-      ${tile('#/cases', 'leads', d.leads.count, t('dbLeads'), t('dbLeadsHint'))}
-    </div><p class="hint">${esc(t('dbAllTiles'))}</p></section>
-    <div class="dash-cols">
-      ${section(t('dbNext14'), agenda(d.next))}
-      ${section(t('dbMoneyByEvent'), `<p class="hint">${esc(t('dbMoneyHint'))}</p>${moneyTable(d.moneyByEvent)}`)}
-    </div>`;
+    ${on.now ? section(t('dbNow'), d.now.length ? `<div class="dash-now">${d.now.map(nowItem).join('')}</div>` : `<div class="okbox">${esc(t('dbNowEmpty'))}</div>`) : ''}
+    ${tiles.length ? `<section class="sec"><div class="dash-tiles">${tiles.join('')}</div><p class="hint">${esc(t('dbAllTiles'))}</p></section>` : ''}
+    ${cols([on.next14 && section(t('dbNext14'), agenda(d.next)), on.moneyByEvent && section(t('dbMoneyByEvent'), `<p class="hint">${esc(t('dbMoneyHint'))}</p>${moneyTable(d.moneyByEvent)}`)])}`;
 }

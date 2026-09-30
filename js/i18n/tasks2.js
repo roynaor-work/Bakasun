@@ -1,2 +1,60 @@
 /* Texts of the tasks2 module: he / fr / en. No Arabic letters anywhere. */
-export const TASKS2 = { he: {}, fr: {}, en: {} };
+export const TASKS2 = {
+  he: {
+    tkRecurring: 'חוזרות', tkSearchPh: 'חיפוש: #מספר, מה לעשות, מי מבצע...', tkAllEvents: 'כל האירועים', tkNoMatch: 'אין משימה שמתאימה לחיפוש.',
+    tkOpenCount: '{n} פתוחות', tkDoneCount: '{n} בוצעו', tkSpentTotal: 'סה"כ {n} דקות הושקעו', tkSpent: '{n} דקות הושקעו', tkRunning: 'רץ',
+    tkTimerStart: 'התחלת זמן', tkTimerStop: 'עצירת זמן',
+    tkCritical: 'נתיב קריטי', tkCriticalHint: 'השרשרת הארוכה ביותר של משימות שתלויות זו בזו. עיכוב באחת דוחה את כל ההמשך.', tkCriticalNone: 'אין תלויות בין המשימות של האירוע, אז אין נתיב קריטי.',
+    tkSubtask: '+ תת-משימה', tkSubtasks: 'תת-משימות', tkSubtaskOf: 'תת-משימה של', tkNoParent: 'משימה ראשית', tkCloseChildrenFirst: 'סגרי קודם את תת-המשימות', tkForceCloseQ: 'יש תת-משימות פתוחות. לסגור את המשימה בכל זאת?', tkCloseAnyway: 'לסגור בכל זאת',
+    tkTodos: 'פריטים לסימון בתוך המשימה', tkTodosHint: 'פריט בכל שורה. [x] בהתחלה = בוצע.', tkAddTodo: 'פריט חדש...', tkAdd: 'הוספה',
+    tkWaitingFor: 'ממתינה ל: {what}', tkDeps: 'תלויה במשימות', tkDepsHint: 'המשימה פתוחה לביצוע רק אחרי שאלה ייסגרו.', tkNowReady: '"{what}" מוכנה לביצוע', tkNoDeps: 'אין משימות אחרות לתלות בהן.',
+    tkPriority: 'עדיפות', tkPrioUrgent: 'דחוף', tkPrioHigh: 'גבוהה', tkPrioNormal: 'רגילה', tkPrioLow: 'נמוכה',
+    tkWhoPick: 'מהצוות (לחיצה מוסיפה):',
+    tkStart: 'תאריך התחלה', tkDuration: 'משך', tkUnit: 'יחידת משך', tkDays: 'ימים', tkWorkdays: 'ימי עבודה (א׳-ה׳)', tkWeeks: 'שבועות', tkHolidays: 'לדלג על חגים בימי עבודה', tkDueAuto: 'תאריך היעד חושב מההתחלה והמשך: {d}', tkClosedOn: 'חג בדרך: {what}',
+    holPesach1: 'פסח (יום ראשון)', holPesach7: 'שביעי של פסח', holAtzmaut: 'יום העצמאות', holShavuot: 'שבועות', holRosh1: 'ראש השנה א׳', holRosh2: 'ראש השנה ב׳', holKippur: 'יום כיפור', holSukkot1: 'סוכות (יום ראשון)', holSimchat: 'שמחת תורה',
+    tkRepeat: 'חזרה', tkRepeatNone: 'לא חוזרת', tkEveryDay: 'כל יום', tkEveryWeek: 'כל שבוע', tkEveryMonth: 'כל חודש', tkEvery2months: 'כל חודשיים', tkEvery3months: 'כל 3 חודשים', tkEvery6months: 'כל חצי שנה', tkEveryYear: 'כל שנה',
+    tkOnWeekday: 'ביום', tkOnDay: 'ביום בחודש', tkFrom: 'החל מ', tkUntil: 'עד (לא חובה)', tkCount: 'מספר פעמים (ריק = בלי הגבלה)', tkNextOn: 'הבאה: {d}', tkMade: '{n} נוצרו', tkEnded: 'הסתיימה',
+    tkNewRecurring: '+ משימה חוזרת', tkNoRecurring: 'אין משימות חוזרות. למשל: בקשת חשבונית חודשית ב-1 לחודש, מעקב ספקים שבועי.', tkTemplateHint: 'זו תבנית. המשימה הבאה נוצרת לבד כשהקודמת בוצעה, ותמיד יש רק אחת פתוחה.', tkRecurringMade: 'נוצרה משימה חוזרת: {what}', tkFromTemplate: 'חוזרת',
+    tkWd0: 'ראשון', tkWd1: 'שני', tkWd2: 'שלישי', tkWd3: 'רביעי', tkWd4: 'חמישי', tkWd5: 'שישי', tkWd6: 'שבת',
+    tkComments: 'הערות למשימה', tkNewComment: 'הערה חדשה (נשמרת עם המשימה)', tkNoComments: 'אין הערות עדיין.',
+    tkOnDomShort: 'ב-{n} לחודש', tkUntilShort: 'עד {d}', tkMore: 'עוד שדות', tkTimerStopped: 'נעצר: {n} דקות', tkNumber: 'מספר'
+  },
+  fr: {
+    tkRecurring: 'Récurrentes', tkSearchPh: 'Recherche : #numéro, quoi, qui...', tkAllEvents: 'Tous les événements', tkNoMatch: 'Aucune tâche ne correspond.',
+    tkOpenCount: '{n} ouvertes', tkDoneCount: '{n} faites', tkSpentTotal: '{n} minutes passées au total', tkSpent: '{n} minutes passées', tkRunning: 'en cours',
+    tkTimerStart: 'Démarrer le temps', tkTimerStop: 'Arrêter le temps',
+    tkCritical: 'Chemin critique', tkCriticalHint: 'La plus longue chaîne de tâches qui dépendent les unes des autres. Un retard sur l’une décale toute la suite.', tkCriticalNone: 'Aucune dépendance entre les tâches de cet événement, donc pas de chemin critique.',
+    tkSubtask: '+ Sous-tâche', tkSubtasks: 'Sous-tâches', tkSubtaskOf: 'Sous-tâche de', tkNoParent: 'Tâche principale', tkCloseChildrenFirst: 'Fermez d’abord les sous-tâches', tkForceCloseQ: 'Il reste des sous-tâches ouvertes. Fermer quand même ?', tkCloseAnyway: 'Fermer quand même',
+    tkTodos: 'Points à cocher dans la tâche', tkTodosHint: 'Un point par ligne. [x] au début = fait.', tkAddTodo: 'Nouveau point...', tkAdd: 'Ajouter',
+    tkWaitingFor: 'Attend : {what}', tkDeps: 'Dépend des tâches', tkDepsHint: 'La tâche s’ouvre seulement quand celles-ci sont fermées.', tkNowReady: '« {what} » est prête', tkNoDeps: 'Aucune autre tâche dont dépendre.',
+    tkPriority: 'Priorité', tkPrioUrgent: 'Urgent', tkPrioHigh: 'Haute', tkPrioNormal: 'Normale', tkPrioLow: 'Basse',
+    tkWhoPick: 'De l’équipe (un clic ajoute) :',
+    tkStart: 'Date de début', tkDuration: 'Durée', tkUnit: 'Unité', tkDays: 'jours', tkWorkdays: 'jours ouvrés (dim.-jeu.)', tkWeeks: 'semaines', tkHolidays: 'Sauter les fêtes (jours ouvrés)', tkDueAuto: 'Échéance calculée du début et de la durée : {d}', tkClosedOn: 'Fête sur le chemin : {what}',
+    holPesach1: 'Pessah (1er jour)', holPesach7: '7e jour de Pessah', holAtzmaut: 'Yom HaAtsmaout', holShavuot: 'Chavouot', holRosh1: 'Roch Hachana 1', holRosh2: 'Roch Hachana 2', holKippur: 'Yom Kippour', holSukkot1: 'Souccot (1er jour)', holSimchat: 'Simhat Torah',
+    tkRepeat: 'Répétition', tkRepeatNone: 'Ne se répète pas', tkEveryDay: 'Chaque jour', tkEveryWeek: 'Chaque semaine', tkEveryMonth: 'Chaque mois', tkEvery2months: 'Tous les 2 mois', tkEvery3months: 'Tous les 3 mois', tkEvery6months: 'Tous les 6 mois', tkEveryYear: 'Chaque année',
+    tkOnWeekday: 'Le', tkOnDay: 'Le jour du mois', tkFrom: 'À partir du', tkUntil: 'Jusqu’au (facultatif)', tkCount: 'Nombre de fois (vide = sans limite)', tkNextOn: 'Prochaine : {d}', tkMade: '{n} créées', tkEnded: 'Terminée',
+    tkNewRecurring: '+ Tâche récurrente', tkNoRecurring: 'Aucune tâche récurrente. Par exemple : demande de facture mensuelle le 1er, suivi hebdomadaire des fournisseurs.', tkTemplateHint: 'Ceci est un modèle. La tâche suivante se crée seule quand la précédente est faite ; une seule est ouverte à la fois.', tkRecurringMade: 'Tâche récurrente créée : {what}', tkFromTemplate: 'récurrente',
+    tkWd0: 'dimanche', tkWd1: 'lundi', tkWd2: 'mardi', tkWd3: 'mercredi', tkWd4: 'jeudi', tkWd5: 'vendredi', tkWd6: 'samedi',
+    tkComments: 'Commentaires', tkNewComment: 'Nouveau commentaire (enregistré avec la tâche)', tkNoComments: 'Pas encore de commentaire.',
+    tkOnDomShort: 'le {n} du mois', tkUntilShort: 'jusqu’au {d}', tkMore: 'Plus de champs', tkTimerStopped: 'Arrêté : {n} minutes', tkNumber: 'Numéro'
+  },
+  en: {
+    tkRecurring: 'Recurring', tkSearchPh: 'Search: #number, what, who...', tkAllEvents: 'All events', tkNoMatch: 'No task matches the search.',
+    tkOpenCount: '{n} open', tkDoneCount: '{n} done', tkSpentTotal: '{n} minutes spent in total', tkSpent: '{n} minutes spent', tkRunning: 'running',
+    tkTimerStart: 'Start timer', tkTimerStop: 'Stop timer',
+    tkCritical: 'Critical path', tkCriticalHint: 'The longest chain of tasks that depend on each other. A delay in one pushes everything after it.', tkCriticalNone: 'No dependencies between this event’s tasks, so no critical path.',
+    tkSubtask: '+ Subtask', tkSubtasks: 'Subtasks', tkSubtaskOf: 'Subtask of', tkNoParent: 'Main task', tkCloseChildrenFirst: 'Close the subtasks first', tkForceCloseQ: 'There are open subtasks. Close the task anyway?', tkCloseAnyway: 'Close anyway',
+    tkTodos: 'Checklist inside the task', tkTodosHint: 'One item per line. [x] at the start = done.', tkAddTodo: 'New item...', tkAdd: 'Add',
+    tkWaitingFor: 'Waiting for: {what}', tkDeps: 'Depends on tasks', tkDepsHint: 'The task opens for work only after these are closed.', tkNowReady: '“{what}” is ready', tkNoDeps: 'No other tasks to depend on.',
+    tkPriority: 'Priority', tkPrioUrgent: 'Urgent', tkPrioHigh: 'High', tkPrioNormal: 'Normal', tkPrioLow: 'Low',
+    tkWhoPick: 'From the team (tap to add):',
+    tkStart: 'Start date', tkDuration: 'Duration', tkUnit: 'Unit', tkDays: 'days', tkWorkdays: 'workdays (Sun-Thu)', tkWeeks: 'weeks', tkHolidays: 'Skip holidays (workdays)', tkDueAuto: 'Due date computed from start and duration: {d}', tkClosedOn: 'Holiday on the way: {what}',
+    holPesach1: 'Pesach (first day)', holPesach7: 'Pesach (seventh day)', holAtzmaut: 'Independence Day', holShavuot: 'Shavuot', holRosh1: 'Rosh Hashana 1', holRosh2: 'Rosh Hashana 2', holKippur: 'Yom Kippur', holSukkot1: 'Sukkot (first day)', holSimchat: 'Simchat Torah',
+    tkRepeat: 'Repeat', tkRepeatNone: 'Does not repeat', tkEveryDay: 'Every day', tkEveryWeek: 'Every week', tkEveryMonth: 'Every month', tkEvery2months: 'Every 2 months', tkEvery3months: 'Every 3 months', tkEvery6months: 'Every 6 months', tkEveryYear: 'Every year',
+    tkOnWeekday: 'On', tkOnDay: 'On day of month', tkFrom: 'From', tkUntil: 'Until (optional)', tkCount: 'Times (empty = no limit)', tkNextOn: 'Next: {d}', tkMade: '{n} created', tkEnded: 'Ended',
+    tkNewRecurring: '+ Recurring task', tkNoRecurring: 'No recurring tasks. For example: a monthly invoice request on the 1st, a weekly supplier follow-up.', tkTemplateHint: 'This is a template. The next task is created by itself when the previous one is done; only one is open at a time.', tkRecurringMade: 'Recurring task created: {what}', tkFromTemplate: 'recurring',
+    tkWd0: 'Sunday', tkWd1: 'Monday', tkWd2: 'Tuesday', tkWd3: 'Wednesday', tkWd4: 'Thursday', tkWd5: 'Friday', tkWd6: 'Saturday',
+    tkComments: 'Comments', tkNewComment: 'New comment (saved with the task)', tkNoComments: 'No comments yet.',
+    tkOnDomShort: 'on the {n} of the month', tkUntilShort: 'until {d}', tkMore: 'More fields', tkTimerStopped: 'Stopped: {n} minutes', tkNumber: 'Number'
+  }
+};

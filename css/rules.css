@@ -36,3 +36,19 @@ nav.bottom .nbadge { position: absolute; inset-block-start: 4px; inset-inline-en
   .nf-rule { flex-direction: row; align-items: center; flex-wrap: wrap; }
   .nf-rule .nf-nums { padding-inline-start: 0; margin-inline-start: auto; }
 }
+
+/* the line under the title (what the centre is, "all read") */
+.nf-sub { margin-block-start: 2px; }
+.nf-sub .sub { min-width: 0; }
+.card.nf .title { overflow-wrap: anywhere; }
+/* dark mode: the urgent red on a dark card */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .card.nf.urgent { border-inline-start-color: #FF8A73; }
+  :root:not([data-theme="light"]) .nf-dismiss { color: #FF8A73; }
+}
+:root[data-theme="dark"] .card.nf.urgent { border-inline-start-color: #FF8A73; }
+:root[data-theme="dark"] .nf-dismiss { color: #FF8A73; }
+@media (pointer: coarse) {
+  .card.nf .nf-actions .btn.sm, .nf-more > .row .btn.sm, .nf-rule .chk, .nf-num input { min-height: 40px; }
+}
+.nf-more summary:focus-visible, .nf-rule .chk input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

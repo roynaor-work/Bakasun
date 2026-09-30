@@ -2,7 +2,7 @@
    name tags and CSV. Lives as a tab on the event card and as a full screen (#/participants/<caseId>). Nothing is sent by the app. */
 import { t, lang, langName } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, field, dialog, confirmDialog, toast, empty, openWhatsApp, openWhatsAppPick, openMail, dial, copyText } from '../ui.js';
+import { esc, field, dialog, confirmDialog, toast, empty, openWhatsApp, openWhatsAppPick, openMail, dial, copyText, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { phonePretty } from '../logic/core.js';
 import { registerCaseTab } from '../caseTabs.js';
@@ -32,6 +32,11 @@ export function render({ root, id }) {
 registerCaseTab({ key: 'participants', label: () => t('tParticipants'), render(body, c, s) { draw(body, c, s, false); } });
 
 function listOf(c) { return sortByName(db.list('participants', p => p.caseId === c.id)); }
+/** The list as plain text (name · phone · organisation · RSVP), one line per person: for a message or a spreadsheet. */
+function listText(c, list) {
+  const head = t('pTitle') + ' · ' + [c.client, c.date ? Office.fmt(c.date) : '', c.place].filter(Boolean).join(' · ');
+  return head + '\n' + list.map(p => '• ' + [p.name, phonePretty(p.phone), p.email, p.org, rsvpLabel(p.rsvp || 'invited')].filter(Boolean).join(' · ')).join('\n');
+}
 
 function draw(body, c, s, full) {
   const list = listOf(c);
@@ -43,7 +48,8 @@ function draw(body, c, s, full) {
       ${full ? '' : `<a class="btn sm ghost" href="#/participants/${esc(c.id)}">${esc(t('pFull'))}</a>`}</div>
     ${missing ? `<p class="hint">${esc(t('pMissing', { n: missing }))}</p>` : ''}
     <div class="pt-stats">${[['pInvited', rs.invited], ['pYes', rs.yes], ['pNo', rs.no], ['pMaybe', rs.maybe], ['pRooms', rm.total + (rm.unpaired.length ? '+' : '')], ['pSpecial', ds.special]].map(x => `<div class="card"><b class="pt-count">${esc(x[1])}</b><span>${esc(t(x[0]))}</span></div>`).join('')}</div>
-    <div class="row"><button class="btn primary sm" id="pAdd">+ ${esc(t('pAdd'))}</button><button class="btn sm" id="pPaste">${esc(t('pPaste'))}</button><button class="btn sm" id="pHotel">${esc(t('pHotel'))}</button><button class="btn sm" id="pCater">${esc(t('pCatering'))}</button><button class="btn sm" id="pTags">${esc(t('pNameTags'))}</button><button class="btn sm ghost" id="pCsv">${esc(t('pCsv'))}</button></div>
+    <div class="row"><button class="btn primary sm" id="pAdd">+ ${esc(t('pAdd'))}</button><button class="btn sm" id="pPaste">${esc(t('pPaste'))}</button><button class="btn sm" id="pHotel">${esc(t('pHotel'))}</button><button class="btn sm" id="pCater">${esc(t('pCatering'))}</button><button class="btn sm" id="pTags">${esc(t('pNameTags'))}</button><button class="btn sm ghost" id="pCsv">${esc(t('pCsv'))}</button>${list.length ? copyBtn(listText(c, list), { label: t('pCopyList') }) : ''}</div>
+    <div class="row pt-links"><a class="btn sm ghost" href="#/runsheet/${esc(c.id)}">${esc(t('pRunsheetLink'))}</a><a class="btn sm ghost" href="#/case/${esc(c.id)}/files">${esc(t('tFiles'))}</a></div>
     ${list.length ? `<input class="pt-search" id="pSearch" type="search" value="${esc(ui.q)}" placeholder="${esc(t('pSearchPh'))}" aria-label="${esc(t('search'))}">
     <div class="chips pt-filters">${chip('rsvp', '', t('all'))}${RSVP.map(k => chip('rsvp', k, rsvpLabel(k))).join('')}<span class="grow"></span>${chip('room', 'single', roomLabel('single'))}${chip('room', 'double', roomLabel('double'))}${chip('room', 'none', roomLabel('none'))}</div>
     <div class="pt-head"><span>${esc(t('name'))}</span><span>${esc(t('phone'))}</span><span>${esc(t('pOrg'))}</span><span>${esc(t('pRsvp'))}</span><span>${esc(t('pRoom'))}</span><span>${esc(t('pDietary'))}</span><span></span></div>
@@ -76,11 +82,12 @@ function rows(body, c, s, list) {
   box.innerHTML = shown.length ? shown.map(p => {
     const diet = (p.dietTags || []).map(dietLabel).concat(p.dietary ? [p.dietary] : []).join(', ');
     const room = p.room && p.room !== 'none' ? roomLabel(p.room) + (p.roommate ? ' + ' + p.roommate : '') : '';
-    const sub = [phonePretty(p.phone), p.org, p.role, room, diet, p.arrival ? t('pArrival') + ' ' + p.arrival : ''].filter(Boolean);
+    const sub = [phonePretty(p.phone), p.email, p.org, p.role, room, diet, p.arrival ? t('pArrival') + ' ' + p.arrival : ''].filter(Boolean);
+    const icons = (p.phone ? copyBtn(p.phone, { icon: true }) : '') + (p.email ? copyBtn(p.email, { icon: true }) : '');
     return `<div class="card pt-row" data-p="${esc(p.id)}">
       <div class="pt-main">
-        <div class="pt-cell"><span class="title">${esc(p.name)}</span>${sub.length ? `<div class="sub pt-sub-mobile">${sub.map(esc).join(' · ')}</div>` : ''}</div>
-        <div class="pt-cell pt-desk ltr">${esc(phonePretty(p.phone))}</div>
+        <div class="pt-cell"><span class="title">${esc(p.name)}</span>${sub.length ? `<div class="sub pt-sub-mobile">${sub.map(esc).join(' · ')}${icons}</div>` : ''}</div>
+        <div class="pt-cell pt-desk"><span class="ltr">${esc(phonePretty(p.phone))}</span>${icons}</div>
         <div class="pt-cell pt-desk">${esc([p.org, p.role].filter(Boolean).join(' · '))}</div>
         <div class="pt-cell"><span class="badge rsvp-${esc(p.rsvp || 'invited')}">${esc(rsvpLabel(p.rsvp || 'invited'))}</span></div>
         <div class="pt-cell pt-desk">${esc(room)}</div>
@@ -155,7 +162,7 @@ function supplierEmail(c, re) {
 async function messageDialog(title, subject, textOf, defaultTo, c, s) {
   const l0 = c.lang || s.msgLang || lang();
   const pr = dialog(title, `${field('lang', t('pLang'), l0, { type: 'select', options: ['he', 'fr', 'en'].map(k => [k, langName(k)]) })}<div class="pt-msg"><textarea name="text" rows="14">${esc(textOf(l0))}</textarea></div>
-    ${field('to', t('pTo'), defaultTo || '', { ltr: true, type: 'email' })}<div class="row"><button type="button" class="btn wa" data-x="wa">${esc(t('pWaPick'))}</button><button type="button" class="btn" data-x="mail">${esc(t('pMailBtn'))}</button></div>`, { ok: t('copy') });
+    ${field('to', t('pTo'), defaultTo || '', { ltr: true, type: 'email' })}<div class="row"><button type="button" class="btn wa" data-x="wa">${esc(t('pWaPick'))}</button><button type="button" class="btn" data-x="mail">${esc(t('pMailBtn'))}</button>${copyOf('[name=text]')}</div>`, { ok: t('copy') });
   const form = document.querySelector('.modal:last-of-type form');
   if (form) {
     const ta = form.querySelector('textarea[name=text]');
@@ -176,7 +183,7 @@ function cateringDialog(c, s, list) {
 }
 async function tagsDialog(list) {
   if (!attending(list).length) { toast(t('pNoPeople'), 3000); return; }
-  const r = await dialog(t('pNameTags'), `<p class="hint">${esc(t('pNameTagsHint'))}</p><textarea name="text" rows="12">${esc(nameTagsText(list))}</textarea>`, { ok: t('copy') });
+  const r = await dialog(t('pNameTags'), `<p class="hint">${esc(t('pNameTagsHint'))}</p><textarea name="text" rows="12">${esc(nameTagsText(list))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('copy') });
   if (r) copyText(r.text);
 }
 function downloadCsv(c, list) {
@@ -189,7 +196,7 @@ function downloadCsv(c, list) {
 /* ---------------- RSVP request to one person ---------------- */
 async function askRsvp(c, s, p) {
   const l0 = c.lang || s.msgLang || lang();
-  const pr = dialog(t('pAskRsvp') + ' · ' + p.name, `${field('lang', t('pLang'), l0, { type: 'select', options: ['he', 'fr', 'en'].map(k => [k, langName(k)]) })}<textarea name="text" rows="8">${esc(rsvpAskText(p, c, l0, signerOf(s)))}</textarea>`, { ok: t('whatsapp') });
+  const pr = dialog(t('pAskRsvp') + ' · ' + p.name, `${field('lang', t('pLang'), l0, { type: 'select', options: ['he', 'fr', 'en'].map(k => [k, langName(k)]) })}<textarea name="text" rows="8">${esc(rsvpAskText(p, c, l0, signerOf(s)))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
   const form = document.querySelector('.modal:last-of-type form');
   if (form) form.querySelector('select[name=lang]').onchange = e => { form.querySelector('textarea[name=text]').value = rsvpAskText(p, c, e.target.value, signerOf(s)); };
   const r = await pr;

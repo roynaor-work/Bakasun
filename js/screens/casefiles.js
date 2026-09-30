@@ -5,7 +5,7 @@
    Nothing is sent by the app: the share sheet, WhatsApp and the mail open and she taps send. Deleting asks, one file at a time. */
 import { t, lang } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, dialog, confirmDialog, toast, empty, section, openWhatsAppPick, openMail } from '../ui.js';
+import { esc, field, dialog, confirmDialog, toast, empty, section, openWhatsAppPick, openMail, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { files, shareFile, downloadFile, pdfText } from '../files.js';
 import * as cloud from '../cloud.js';
@@ -90,14 +90,15 @@ function draw(body, c, s, full) {
 }
 
 function row(f, withEvent) {
-  const c = withEvent ? db.get('cases', f.caseId) : null;
+  const c = db.get('cases', f.caseId);
+  const shareText = [f.name, c ? caseLine(c) : ''].filter(Boolean).join(' · ');
   const sub = [humanSize(f.size), f.addedAt ? Office.fmt(f.addedAt.slice(0, 10)) : '', supName(f.supplierId), f.note, (f.tags || []).join(', ')].filter(Boolean);
   const cloudBadge = f.cloudOk ? `<span class="badge ok cf-cloud">${esc(t('cfSynced'))}</span>` : `<span class="badge muted cf-cloud" title="${esc(cloudEligible(f) ? t('cfLocal') : t('cfLocalType'))}">${esc(t('cfLocal'))}</span>`;
   return `<div class="card cf-row" data-f="${esc(f.id)}"><span class="cf-icon" data-thumb="${/^image\//.test(f.type || '') ? '1' : ''}">${icon(f.kind)}</span>
     <div class="cf-main"><div class="row between"><span class="title">${esc(f.name)}</span>${cloudBadge}</div>
       ${withEvent && c ? `<a class="cf-event" href="#/case/${esc(c.id)}/files">${esc(caseLine(c))}</a>` : ''}
       <div class="sub">${withEvent ? esc(kindLabel(f.kind)) + (sub.length ? ' · ' : '') : ''}${sub.map(esc).join(' · ')}</div>
-      <div class="cf-acts"><button type="button" class="btn sm" data-share>${esc(t('cfShare'))}</button><button type="button" class="btn sm wa" data-wa>${esc(t('whatsapp'))}</button><button type="button" class="btn sm" data-mail>${esc(t('email'))}</button><button type="button" class="btn sm ghost" data-edit>${esc(t('cfEdit'))}</button></div></div></div>`;
+      <div class="cf-acts"><button type="button" class="btn sm" data-share>${esc(t('cfShare'))}</button><button type="button" class="btn sm wa" data-wa>${esc(t('whatsapp'))}</button><button type="button" class="btn sm" data-mail>${esc(t('email'))}</button><button type="button" class="btn sm ghost" data-edit>${esc(t('cfEdit'))}</button>${copyBtn(shareText, { icon: true })}</div></div></div>`;
 }
 function wireRows(box, c) {
   box.querySelectorAll('.cf-row').forEach(el => {
@@ -204,7 +205,7 @@ async function mail(f, c) {
   const subject = [f.name, caseLine(c)].filter(Boolean).join(' · ');
   const body = t('cfMailBody', { file: f.name, event: caseLine(c) }) + '\n' + (db.setting('signer') || '');
   const r = await dialog(t('email'), `${field('to', t('cfMailTo'), to, { ltr: true, inputmode: 'email' })}${field('subject', t('cfMailSubject'), subject)}${field('text', t('cfMailText'), body, { type: 'textarea', rows: 6 })}
-    <p class="hint">${esc(t('cfMailHint'))}</p><div class="row"><button type="button" class="btn sm" id="cfMailDl">${esc(t('cfDownload'))}</button></div>`, { ok: t('email') });
+    <p class="hint">${esc(t('cfMailHint'))}</p><div class="row"><button type="button" class="btn sm" id="cfMailDl">${esc(t('cfDownload'))}</button>${copyOf('[name=text]')}</div>`, { ok: t('email') });
   const dl = document.querySelector('.modal #cfMailDl'); if (dl) dl.onclick = async () => { const rec = await recOf(f); if (rec) downloadFile(rec); else toast(t('cfOnDevice'), 3500); };
   const res = await r; if (!res) return;
   openMail(res.to, res.subject, res.text);
