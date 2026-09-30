@@ -2,7 +2,7 @@
 import { EXERCISES, CATS, byId } from './exercises.js';
 import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js';
 import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js';
-import { refreshVideos, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl } from './vids.js';
+import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js';
 import { Figure, cycleMs } from './figure.js';
 import { store } from './store.js';
 import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, rankOf, perseveranceLine, honestTime, tokensFor } from './logic.js';
@@ -43,7 +43,7 @@ function wireStage() {
   const box = app.querySelector('.exmedia[data-vid]');
   if (!box) return figs()[0];
   let v = null;
-  videoUrl(box.dataset.vid).then(m => { if (!m) return; if (m.kind === 'image') { box.innerHTML = `<img class="exvid" src="${m.url}" alt="">`; return; } v = document.createElement('video'); v.className = 'exvid'; v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true; v.src = m.url; box.appendChild(v); v.playbackRate = f.rate; });
+  videoUrl(box.dataset.vid, store.profile.familyCode).then(m => { if (!m) return; if (m.kind === 'image') { box.innerHTML = `<img class="exvid" src="${m.url}" alt="">`; return; } v = document.createElement('video'); v.className = 'exvid'; v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true; v.src = m.url; box.appendChild(v); v.playbackRate = f.rate; });
   // בסרטון אין "סיבוב" של הדמות, אז הספירה לפי אורך המחזור מהקטלוג (cycleMs) בקצב הניגון
   const f = { onRep: null, tick: 0, cyc: 0, rate: 1, play(ex, speed = 1) { this.rate = speed; if (v) v.playbackRate = speed; this.stop(); if (this.onRep) { this.cyc = 0; this.tick = setInterval(() => { this.cyc++; this.onRep && this.onRep(this.cyc); }, cycleMs(ex.frames) / speed); } }, still() { this.stop(); }, stop() { clearInterval(this.tick); this.tick = 0; } };
   figures.push(f); return f;
@@ -730,9 +730,11 @@ function settings() {
     </div>
     <div class="card stack">
       <h3>סרטונים לתרגילים 🎥</h3>
-      <p class="muted small">במקום הדמות המצוירת: סרטון קצר אמיתי (או תמונה) לכל תרגיל, בלופ. מצלמים ישר מהטלפון או בוחרים מהגלריה. נשמר במכשיר הזה בלבד. ${localVideos().size ? `יש ${localVideos().size} מתוך ${EXERCISES.length}.` : 'עדיין אין סרטונים.'}</p>
+      <p class="muted small">במקום הדמות המצוירת: סרטון קצר אמיתי (או תמונה) לכל תרגיל, בלופ. מצלמים ישר מהטלפון או בוחרים מהגלריה. ${EXERCISES.filter(e => hasVideo(e.id)).length} מתוך ${EXERCISES.length} יש.</p>
+      <p class="muted small" id="vidcloud">${p.familyCode ? `☁️ ענן משפחתי: כל סרטון שמצלמים כאן עולה לענן ומגיע לטלפון של הילד (אותו קוד משפחה). בענן ${Object.keys(cloudVideos()).length} סרטונים.${vidStatus.error ? ` ⚠️ ${esc(vidStatus.error)}` : ''}` : 'כדי שהסרטונים יגיעו גם לטלפון שלו: קוד משפחה בכרטיס "חיבור לטלפון של אבא" למטה, אותו קוד בשני הטלפונים.'}</p>
+      ${p.familyCode ? '<button class="btn chip" id="vidrefresh">🔄 לרענן מהענן</button>' : ''}
       <div class="tip">🎬 איך לצלם: הטלפון לרוחב, בגובה החזה, כל הגוף בפריים עם קצת אוויר מעל הראש ומתחת לרגליים. רקע פשוט (קיר). 5 עד 8 שניות: שתיים-שלוש חזרות בקצב רגיל, בלי לדבר (הסרטון מוצג בלי קול). תרגילי רצפה מצלמים מהצד.</div>
-      <details><summary class="small" style="cursor:pointer">כל התרגילים (${EXERCISES.length})</summary><div class="stack" style="margin-top:8px">${Object.entries(CATS).map(([cat, c]) => `<b class="small muted">${c.emoji} ${c.name}</b>` + EXERCISES.filter(e => e.cat === cat).map(e => `<div class="row between"><span>${hasVideo(e.id) ? '✅' : '▫️'} ${esc(e.name)}</span><span class="row">${hasVideo(e.id) ? `<button class="btn chip" data-playvid="${e.id}">▶️</button>` : ''}<label class="btn chip">📹 ${hasVideo(e.id) ? 'להחליף' : 'לצלם / לבחור'}<input type="file" accept="video/*,image/*" data-vid="${e.id}" hidden></label>${localVideos().has(e.id) ? `<button class="btn chip" data-delvid="${e.id}" aria-label="למחוק">🗑️</button>` : ''}</span></div><div class="vidprev" data-prev="${e.id}" hidden></div>`).join('')).join('')}</div></details>
+      <details><summary class="small" style="cursor:pointer">כל התרגילים (${EXERCISES.length})</summary><div class="stack" style="margin-top:8px">${Object.entries(CATS).map(([cat, c]) => `<b class="small muted">${c.emoji} ${c.name}</b>` + EXERCISES.filter(e => e.cat === cat).map(e => `<div class="row between"><span>${{ local: '✅', cloud: '☁️', repo: '📦' }[sourceOf(e.id)] || '▫️'} ${esc(e.name)}</span><span class="row">${hasVideo(e.id) ? `<button class="btn chip" data-playvid="${e.id}">▶️</button>` : ''}<label class="btn chip">📹 ${hasVideo(e.id) ? 'להחליף' : 'לצלם / לבחור'}<input type="file" accept="video/*,image/*" data-vid="${e.id}" hidden></label>${localVideos().has(e.id) || cloudVideos()[e.id] ? `<button class="btn chip" data-delvid="${e.id}" aria-label="למחוק">🗑️</button>` : ''}</span></div><div class="vidprev" data-prev="${e.id}" hidden></div>`).join('')).join('')}</div></details>
     </div>
     <div class="card stack">
       <h3>התוכנית השבועית</h3>
@@ -787,9 +789,16 @@ function settings() {
   $('#sound').onchange = e => store.setProfile({ sound: e.target.checked });
   $('#voice').onchange = e => store.setProfile({ voice: e.target.checked });
   $('#listen').onchange = e => store.setProfile({ listen: e.target.checked });
-  app.querySelectorAll('input[data-vid]').forEach(inp => inp.onchange = async e => { const f = e.target.files[0]; if (!f) return; if (f.size > 60e6) return alert('הסרטון גדול מדי (מעל 60MB). מצלמים קצר יותר.'); try { await saveVideo(inp.dataset.vid, f); settings(); } catch { alert('לא הצלחתי לשמור את הסרטון במכשיר.'); } });
-  app.querySelectorAll('[data-playvid]').forEach(b => b.onclick = async () => { const box = app.querySelector(`.vidprev[data-prev="${b.dataset.playvid}"]`); if (!box.hidden) { box.hidden = true; box.innerHTML = ''; return; } const m = await videoUrl(b.dataset.playvid); if (!m) return; box.innerHTML = m.kind === 'image' ? `<img class="exvid" src="${m.url}" alt="">` : `<video class="exvid" src="${m.url}" autoplay muted loop playsinline controls></video>`; box.hidden = false; });
-  app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { if (!confirm(`למחוק את הסרטון של "${byId[b.dataset.delvid].name}"?`)) return; await deleteVideo(b.dataset.delvid); settings(); });
+  app.querySelectorAll('input[data-vid]').forEach(inp => inp.onchange = async e => {
+    const f = e.target.files[0]; if (!f) return; if (f.size > 60e6) return alert('הסרטון גדול מדי (מעל 60MB). מצלמים קצר יותר.');
+    try { await saveVideo(inp.dataset.vid, f); } catch { return alert('לא הצלחתי לשמור את הסרטון במכשיר.'); }
+    // עם קוד משפחה: עולה גם לענן, כדי שיגיע לטלפון של הילד
+    if (store.profile.familyCode) { const st = $('#vidcloud'); if (st) st.textContent = `☁️ מעלה לענן: ${byId[inp.dataset.vid].name}...`; const ok = await cloudUpload(store.profile.familyCode, inp.dataset.vid, f); if (!ok) alert('נשמר בטלפון, אבל ההעלאה לענן נכשלה: ' + vidStatus.error); }
+    settings();
+  });
+  if ($('#vidrefresh')) $('#vidrefresh').onclick = async () => { $('#vidrefresh').textContent = '⏳'; await refreshCloud(store.profile.familyCode); settings(); };
+  app.querySelectorAll('[data-playvid]').forEach(b => b.onclick = async () => { const box = app.querySelector(`.vidprev[data-prev="${b.dataset.playvid}"]`); if (!box.hidden) { box.hidden = true; box.innerHTML = ''; return; } const m = await videoUrl(b.dataset.playvid, store.profile.familyCode); if (!m) return; box.innerHTML = m.kind === 'image' ? `<img class="exvid" src="${m.url}" alt="">` : `<video class="exvid" src="${m.url}" autoplay muted loop playsinline controls></video>`; box.hidden = false; });
+  app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { const id = b.dataset.delvid, inCloud = !!cloudVideos()[id]; if (!confirm(`למחוק את הסרטון של "${byId[id].name}"${inCloud ? ' מהטלפון הזה ומהענן (גם מהטלפון של הילד)' : ''}?`)) return; await deleteVideo(id); if (inCloud && store.profile.familyCode) await cloudDelete(store.profile.familyCode, id); settings(); });
   $('#intro').onchange = e => store.setProfile({ intro: e.target.checked });
   $('#voicetest').onclick = () => { if (!speak(SAY_UI.test, { force: true })) alert('אין הקראה במכשיר הזה.'); };
   $('#voiceName').onchange = e => store.setProfile({ voiceName: e.target.value });
@@ -804,7 +813,7 @@ function settings() {
   document.querySelectorAll('[data-clear]').forEach(btn => btn.onclick = () => { if (confirm('להסיר את ההקלטה?')) { localStorage.removeItem(btn.dataset.clear); settings(); } });
   $('#facePic').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { localStorage.setItem('kidfit.facePic', await fitImage(f, 160, 160, 0.85)); settings(); } catch { alert('לא הצלחתי לקרוא את התמונה.'); } };
   const fpc = $('#facePicClear'); if (fpc) fpc.onclick = () => { if (confirm('להסיר את תמונת הפנים?')) { localStorage.removeItem('kidfit.facePic'); settings(); } };
-  $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); };
+  $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); if (v.length >= 8) refreshCloud(v); }; // עם קוד מלא: מביאים גם את רשימת הסרטונים של המשפחה
   $('#newfam').onclick = () => { if (p.familyCode && !confirm('ליצור קוד חדש? צריך להקליד אותו גם בטלפון של אבא.')) return; const c = cloud.newFamilyCode(); store.setProfile({ familyCode: c }); settings(); };
   $('#copyfam').onclick = async () => { try { await navigator.clipboard.writeText(store.profile.familyCode); $('#cloudstate').textContent = 'הקוד הועתק'; } catch { $('#fam').select(); } };
   $('#syncnow').onclick = async () => { $('#cloudstate').textContent = 'שולח...'; const ok = await cloud.flush(); $('#cloudstate').textContent = ok || !cloud.status.pending() ? 'הכול בענן ✓' : '⚠️ ' + (cloud.status.error || 'אין רשת'); };
@@ -820,7 +829,9 @@ function settings() {
 }
 
 initParent({ mount, esc, go, $ });
-refreshVideos().then(() => { if (location.hash.includes('settings')) route(); });
+// סרטונים: קודם המקומיים, ואז הרשימה מהענן המשפחתי (אם יש קוד). מסך פרטי תרגיל או הגדרות מתרעננים; אימון פעיל לא נקטע
+const softRoute = () => { if (/#\/(settings|exercise\/)/.test(location.hash)) route(); };
+refreshVideos().then(softRoute).then(() => store.profile.familyCode && refreshCloud(store.profile.familyCode).then(softRoute));
 if (store.profile.familyCode) cloud.flush();
 window.addEventListener('focus', () => { if (store.profile.familyCode) cloud.flush(); });
 
