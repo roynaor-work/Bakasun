@@ -7,7 +7,7 @@ const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, ease
 export const SCENE_IDS = ['goal', 'header', 'dunk', 'three', 'sprint'];
 
 // ---- סאונד ----
-function makeAudio(enabled) {
+export function makeAudio(enabled) {
   let ac = null; const A = () => (ac = ac || new (window.AudioContext || window.webkitAudioContext)());
   const osc = (f, at, dur, { type = 'triangle', vol = .12, slide = 0, vib = 0 } = {}) => { if (!enabled) return; try { const c = A(), o = c.createOscillator(), g = c.createGain(); o.type = type; o.frequency.setValueAtTime(f, c.currentTime + at); if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(30, f + slide), c.currentTime + at + dur); if (vib) { const l = c.createOscillator(), lg = c.createGain(); l.frequency.value = 5.5; lg.gain.value = vib; l.connect(lg); lg.connect(o.frequency); l.start(c.currentTime + at); l.stop(c.currentTime + at + dur); } o.connect(g); g.connect(c.destination); const t = c.currentTime + at; g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .04); g.gain.exponentialRampToValueAtTime(.0001, t + dur); o.start(t); o.stop(t + dur + .05); } catch { /* */ } };
   const noise = (at, dur, { vol = .3, lp = 1000, hp = 100, attack = .02 } = {}) => { if (!enabled) return; try { const c = A(), n = Math.floor(c.sampleRate * dur), b = c.createBuffer(1, n, c.sampleRate), d = b.getChannelData(0); for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1; const s = c.createBufferSource(); s.buffer = b; const f = c.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = lp; const h = c.createBiquadFilter(); h.type = 'highpass'; h.frequency.value = hp; const g = c.createGain(); s.connect(f); f.connect(h); h.connect(g); g.connect(c.destination); const t = c.currentTime + at; g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(vol, t + attack); g.gain.exponentialRampToValueAtTime(.0001, t + dur); s.start(t); s.stop(t + dur + .05); } catch { /* */ } };
@@ -41,7 +41,7 @@ function bigText(ctx, txt, x, y, size, fill, stroke = '#1B1740', scale = 1, font
   ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = size / 6; ctx.shadowOffsetY = size / 14; ctx.strokeStyle = stroke; ctx.lineWidth = size / 7; ctx.strokeText(txt, 0, 0); ctx.shadowColor = 'transparent';
   const g = ctx.createLinearGradient(0, -size / 2, 0, size / 2); g.addColorStop(0, '#fff'); g.addColorStop(.35, fill); g.addColorStop(1, fill); ctx.fillStyle = g; ctx.fillText(txt, 0, 0); ctx.restore();
 }
-function poseAt(frames, ms) { const total = frames.reduce((s, f) => s + f[1], 0); let t = ms % total; for (let i = 0; i < frames.length; i++) { const [p, d] = frames[i]; if (t < d) { const q = frames[(i + 1) % frames.length][0], k = t / d, e = k * k * (3 - 2 * k), o = {}; for (const j in p) if (Array.isArray(p[j])) o[j] = [p[j][0] + (q[j][0] - p[j][0]) * e, p[j][1] + (q[j][1] - p[j][1]) * e]; return o; } t -= d; } return frames[0][0]; }
+export function poseAt(frames, ms) { const total = frames.reduce((s, f) => s + f[1], 0); let t = ms % total; for (let i = 0; i < frames.length; i++) { const [p, d] = frames[i]; if (t < d) { const q = frames[(i + 1) % frames.length][0], k = t / d, e = k * k * (3 - 2 * k), o = {}; for (const j in p) if (Array.isArray(p[j])) o[j] = [p[j][0] + (q[j][0] - p[j][0]) * e, p[j][1] + (q[j][1] - p[j][1]) * e]; return o; } t -= d; } return frames[0][0]; }
 // זום מצלמה סביב נקודה
 const cam = (ctx, fx, fy, z, fn) => { ctx.save(); ctx.translate(fx, fy); ctx.scale(z, z); ctx.translate(-fx, -fy); fn(); ctx.restore(); };
 const HEADER = { head: [112, 62], neck: [104, 78], hip: [96, 120], le: [88, 100], lh: [76, 84], re: [116, 98], rh: [126, 80], lk: [96, 150], lf: [92, 176], rk: [106, 148], rf: [112, 174] };
@@ -58,8 +58,8 @@ function sprintPose(ph, lean = .35) {
   const [lk, lf] = leg(a), [rk, rf] = leg(a + Math.PI); const [le, lh] = arm(a + Math.PI, neck[0] - 2, neck[1] + 6), [re, rh] = arm(a, neck[0] + 2, neck[1] + 6);
   return { hip: [hipX, hipY], neck, head, lk, lf, rk, rf, le, lh, re, rh };
 }
-const SPRINT = Array.from({ length: 8 }, (_, i) => [sprintPose(i / 8), 1]);
-const LEAN = { head: [124, 66], neck: [116, 80], hip: [100, 118], le: [100, 104], lh: [82, 118], re: [130, 100], rh: [146, 88], lk: [120, 146], lf: [130, 176], rk: [82, 150], rf: [66, 176] };
+export const SPRINT = Array.from({ length: 8 }, (_, i) => [sprintPose(i / 8), 1]);
+export const LEAN = { head: [124, 66], neck: [116, 80], hip: [100, 118], le: [100, 104], lh: [82, 118], re: [130, 100], rh: [146, 88], lk: [120, 146], lf: [130, 176], rk: [82, 150], rf: [66, 176] };
 
 function fx(ctx, W, H) {
   let parts = [], confetti = [], flashes = []; const colors = ['#22C55E', '#FDE047', '#fff', '#F472B6', '#60A5FA'];
