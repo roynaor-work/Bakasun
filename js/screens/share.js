@@ -52,6 +52,11 @@ export async function render({ root }) {
       const f = await fileOf(it); if (!f) { toast(t('fileMissing')); return; }
       await files.put(f, { title: f.name.replace(/\.[a-z0-9]+$/i, '') }); toast(t('saved')); await drop(it); render({ root });
     });
+    // a file shared from another app can go straight into an event (quote, menu, contract...)
+    on('[data-event]', async () => {
+      const f = await fileOf(it); if (!f) { toast(t('fileMissing')); return; }
+      const m = await import('./casefiles.js'); const ok = await m.pickCaseAndAttach(f); if (ok !== false) { await drop(it); render({ root }); }
+    });
     on('[data-lead]', async () => { sessionStorage.setItem('bakasun.leadText', it.text || ''); await drop(it); location.hash = '#/lead'; });
     on('[data-offer]', async () => { sessionStorage.setItem('bakasun.sqText', it.text || ''); await drop(it); location.hash = '#/assist/supplier-quote'; });
     on('[data-cmd]', async () => { sessionStorage.setItem('bakasun.ask', it.text || ''); await drop(it); location.hash = '#/assist/from-today'; });
@@ -65,7 +70,7 @@ function card(it, i) {
   let btns = '';
   if (it.text) btns = `<button class="btn primary" data-lead>${esc(t('asLead'))}</button><button class="btn" data-offer>${esc(t('asOffer'))}</button><button class="btn" data-cmd>${esc(t('asCommand'))}</button><button class="btn ghost" data-note>${esc(t('asNote'))}</button>`;
   else if (isContacts(it)) btns = `<button class="btn primary" data-contacts>${esc(t('toContacts'))}</button>`;
-  else if (isImage(it)) btns = `<button class="btn primary" data-receipt>${esc(t('toReceipts'))}</button><button class="btn" data-library>${esc(t('toLibrary'))}</button>`;
-  else btns = `<button class="btn primary" data-library>${esc(t('toLibrary'))}</button>`;
+  else if (isImage(it)) btns = `<button class="btn primary" data-receipt>${esc(t('toReceipts'))}</button><button class="btn" data-library>${esc(t('toLibrary'))}</button><button class="btn" data-event>${esc(t('toEvent'))}</button>`;
+  else btns = `<button class="btn primary" data-library>${esc(t('toLibrary'))}</button><button class="btn" data-event>${esc(t('toEvent'))}</button>`;
   return `<div class="card stack" data-i="${i}">${head}<div class="row">${btns}<button class="btn sm ghost" data-drop>${esc(t('discard'))}</button></div></div>`;
 }

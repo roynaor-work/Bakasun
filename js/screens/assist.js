@@ -199,7 +199,7 @@ function showAgenda(out, q) {
 
 /* ---------------- 1. send a document to someone ---------------- */
 async function tabCommand(body, s, ctx) {
-  const lib = await files.all();
+  const lib = (await files.all()).filter(f => !f.caseId); // event files live on their event, not in the company library
   const docs = lib.map(f => ({ id: f.id, title: f.title || f.name, aliases: (f.aliases || '').split(/[,;]+/).map(x => x.trim()).filter(Boolean), rec: f })).concat(bundledDocs());
   // built fresh on every command, so a phone saved a second ago is already known
   const peopleNow = () => subjects().map(p => { const c = p.about === 'client' ? db.get('clients', p.id) : p.about === 'supplier' ? db.get('suppliers', p.id) : p.about === 'team' ? db.get('team', p.id) : db.get('cases', p.id); return { label: p.label, names: p.names, phone: c && c.phone, email: c && c.email, about: p.about, id: p.id }; })
@@ -437,7 +437,7 @@ function tabSupplierQuote(body, s, ctx) {
 
 /* ---------------- 4. the documents she keeps to send ---------------- */
 async function tabDocs(body) {
-  const lib = await files.all();
+  const lib = (await files.all()).filter(f => !f.caseId);
   body.innerHTML = `<p class="hint">${esc(t('docsHint'))}</p>
     <form class="card stack" id="up"><label class="btn">${esc(t('pickFile'))}<input type="file" id="f" class="sr"></label><span id="fname" class="sub"></span>${field('title', t('docTitle'), '')}${field('aliases', t('docAliases'), '', { placeholder: 'אישור חשבון, אישור בנק' })}<button class="btn primary" type="submit">${esc(t('save'))}</button></form>
     <h2>${esc(t('companyPapers'))}</h2><div class="list">${COMPANY_PAPERS.map(p => `<div class="card" data-p="${esc(p.key)}"><div class="row between"><span class="title">${esc(p.title)}</span><span class="badge ${p.status === 'found' ? 'ok' : ''}">${esc(p.status === 'found' ? t('paperFound') + (p.date ? ' · ' + esc(Office.fmt(p.date)) : '') : t('paperMissing'))}</span></div>${p.note ? `<div class="sub">${esc(p.note)}</div>` : ''}${p.status === 'found' && p.file ? `<div class="row"><button class="btn sm primary" data-pshare>${esc(t('shareFile'))}</button><a class="btn sm ghost" href="${esc(p.file)}" target="_blank" rel="noopener">${esc(t('open'))}</a>${copyBtn(new URL(p.file, location.href).href)}</div>` : ''}</div>`).join('')}</div>

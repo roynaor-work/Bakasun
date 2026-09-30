@@ -16,7 +16,10 @@ export const HELP = {
       'במסך רחב (מחשב, טאבלט לרוחב) התפריט עובר לצד והכרטיסים מסתדרים בעמודות. אותם נתונים, אותו ענן.',
       '"עוד" ← "לוח בקרה": מבט אחד על אירועים קרובים, משימות באיחור, שיחות, כסף שלא שולם, ספקים שלא ענו.',
       '"עוד" ← "יומן": חודש / שבוע / רשימה עם אירועים, משימות, שיחות ותשלומים. לחיצה על יום פותחת אותו.',
-      'בכרטיס האירוע נוספו לשוניות: משתתפים (רשימה למלון, תזונה, אישורי הגעה), חוזה (הסכם עם חתימה על המסך), רשימת תיוג (לפי סוג האירוע), היסטוריה (מי שינה מה ומתי).'
+      'בכרטיס האירוע נוספו לשוניות: משתתפים (רשימה למלון, תזונה, אישורי הגעה), חוזה (הסכם עם חתימה על המסך), רשימת תיוג (לפי סוג האירוע), היסטוריה (מי שינה מה ומתי), תקציב (עלות ספקים מול מחיר ללקוח, רווח, לוח תשלומים), לו״ז יום האירוע (ציר זמן, דפי קריאה לספקים ולצוות, מצב יום האירוע עם "עכשיו" ו"הבא"), קבצים (הצעות, תפריטים, אישורים, צילומים; מה חסר במסמכים).',
+      '"עוד" ← "לוח אירועים": קנבן לפי סטטוס. גוררים כרטיס בין עמודות (בטלפון: לחיצה ארוכה), "⋯" על כרטיס לשינוי סטטוס ומקור הפנייה. "סטטיסטיקה": המרה לפי חודש, סוג ומקור.',
+      '"עוד" ← "תזכורות": המערכת בודקת לבד: ספק שלא ענה, הצעה בלי תשובה, חשבונית באיחור, אירוע בעוד 14/7/1 ימים עם פריטים פתוחים, אישורי הגעה חסרים, חוזה לא חתום. לכל תזכורת: משימה, טיוטת וואטסאפ, בוצע, דחייה. בהגדרות התזכורות: הפעלה/כיבוי לכל כלל, התראות דפדפן, הקראת תקציר בוקר, שעות שקט.',
+      'ליד כל טקסט, טלפון, מייל וכתובת יש כפתור "העתק".'
     ] },
     { title: 'מעבר בין מסכים: "עברי ל..." ואז שם המסך', items: ['"עברי לספקים", "עברי למשימות", "עברי להיום"', 'שמות המסכים: היום, תיקים, ספקים, לקוחות, משימות, שיחות, הצעות מחיר, כספים, קבלות, הערות, קבוצות, חיפוש, הגדרות, פנייה חדשה, עזרה', 'עובד גם "לכי ל...", "תראי לי את ה...", "מסך ספקים". שם מסך בלבד, בלי "עברי ל", לא מעביר, כדי שמילה בתוך משפט לא תזיז אותך בטעות.'] },
     { title: 'שאלות', items: [
@@ -91,7 +94,10 @@ export const HELP = {
       'Sur un écran large, le menu passe sur le côté et les cartes s’alignent en colonnes. Mêmes données, même nuage.',
       '« Plus » → « Tableau de bord » : événements proches, tâches en retard, appels, argent non payé, fournisseurs sans réponse.',
       '« Plus » → « Agenda » : mois / semaine / liste avec événements, tâches, appels et paiements.',
-      'Sur la fiche événement : participants (liste pour l’hôtel, régimes, confirmations), contrat (signature à l’écran), liste de contrôle, historique.'
+      'Sur la fiche événement : participants (liste pour l’hôtel, régimes, confirmations), contrat (signature à l’écran), liste de contrôle, historique, budget (coût fournisseurs vs prix client, marge, échéancier), déroulé du jour J (feuilles d’appel, mode jour J), fichiers (devis, menus, attestations, photos).',
+      '« Plus » → « Tableau des événements » : kanban par statut, glisser entre colonnes, statistiques de conversion.',
+      '« Plus » → « Rappels » : fournisseur sans réponse, devis en attente, facture en retard, événement dans 14/7/1 jours, confirmations manquantes, contrat non signé. Réglages par règle, notifications du navigateur, heures calmes.',
+      'Un bouton « Copier » à côté de chaque texte, téléphone, e-mail et adresse.'
     ] },
     { title: 'Changer d’écran : « va à ... » puis le nom de l’écran', items: ['« va aux fournisseurs », « va à tâches », « va à accueil »', 'Les écrans : accueil, dossiers, fournisseurs, clients, tâches, appels, devis, finances, reçus, notes, groupes, recherche, réglages, nouvelle demande, aide', '« montre-moi les ... » marche aussi. Le nom seul, sans « va à », ne change pas d’écran : un mot dans une phrase ne vous déplace jamais par erreur.'] },
     { title: 'Questions', items: [
@@ -166,7 +172,10 @@ export const HELP = {
       'On a wide screen the menu moves to the side and cards line up in columns. Same data, same cloud.',
       '“More” → “Dashboard”: upcoming events, overdue tasks, calls, unpaid money, suppliers who have not answered.',
       '“More” → “Calendar”: month / week / list with events, tasks, calls and payments.',
-      'On the event card: participants (rooming list, dietary needs, confirmations), contract (sign on screen), checklist, history.'
+      'On the event card: participants (rooming list, dietary needs, confirmations), contract (sign on screen), checklist, history, budget (supplier cost vs client price, margin, payment schedule), run of show (call sheets, day-of mode), files (quotes, menus, certificates, photos).',
+      '“More” → “Event board”: kanban by status, drag between columns, conversion statistics.',
+      '“More” → “Reminders”: silent supplier, quote waiting, late invoice, event in 14/7/1 days, missing confirmations, unsigned contract. Per-rule settings, browser notifications, quiet hours.',
+      'A “Copy” button next to every text, phone, e-mail and address.'
     ] },
     { title: 'Moving between screens: “go to ...” then the screen name', items: ['“go to suppliers”, “go to tasks”, “go to today”', 'The screens: today, cases, suppliers, clients, tasks, calls, quotes, money, receipts, notes, groups, search, settings, new lead, help', '“show me the ...” works too. The name alone, without “go to”, does not move you: a word inside a sentence never moves you by mistake.'] },
     { title: 'Questions', items: [

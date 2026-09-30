@@ -2,7 +2,7 @@
    Totals from Office.quoteTotals. Preview and PDF from Office.quoteHtml. The message to the client from Office.quoteMessage. */
 import { t, lang, kindLabel, langName, KIND_LABELS } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, empty, dialog, confirmDialog, toast, openWhatsApp, copyText, copyOf } from '../ui.js';
+import { esc, field, empty, dialog, confirmDialog, toast, openWhatsApp, copyText, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { QUOTE_STATUS, priceFromCost, marginOf, recommendedLines, catalogAll, lastCost, resolveLines, translator } from '../logic/quotes.js';
 import { quoteStatusLabel, unitLabel, categoryLabel } from '../labels.js';
@@ -59,7 +59,7 @@ function renderOne({ root, id }) {
       <div class="stat"><div class="card"><b class="ltr">${esc(Office.money(tot.net))}</b><span>${esc(t('net'))}</span></div><div class="card"><b class="ltr">${esc(Office.money(tot.gross))}</b><span>${esc(t('gross'))}</span></div><div class="card"><b class="count">${tot.margin}%</b><span>${esc(t('marginTotal'))} · <span class="ltr">${esc(Office.money(tot.net - tot.cost))}</span></span></div></div>
       <div class="row"><button class="btn primary" id="addLine">+ ${esc(t('addLine'))}</button><button class="btn" id="fromRec">${esc(t('fromRecommended'))}</button></div>
       <div class="list">${lines.length ? lines.map(lineCard).join('') : empty(t('none'))}</div>
-      <div class="row"><button class="btn" id="preview">${esc(t('preview'))}</button><button class="btn" id="pdf">${esc(t('pdf'))}</button><button class="btn wa" id="send">${esc(t('sendQuote'))}</button><button class="btn ghost" id="clone">${esc(t('copyQuote'))}</button></div>
+      <div class="row"><button class="btn" id="preview">${esc(t('preview'))}</button><button class="btn" id="pdf">${esc(t('pdf'))}</button><button class="btn wa" id="send">${esc(t('sendQuote'))}</button><button class="btn ghost" id="clone">${esc(t('copyQuote'))}</button>${copyBtn(Office.quoteMessage(Object.assign({}, q, { lines }), cs, s.signer || ''), { sm: false })}</div>
       <p class="hint">${esc(t('pdfHint'))}</p>
       <div class="row end"><button class="btn danger sm" id="del">${esc(t('delete'))}</button></div>
     </div>`;
