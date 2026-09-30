@@ -129,7 +129,7 @@ function blockHtml(b, c) {
       <div class="row between"><span class="title">${esc(b.title)}</span><span class="badge ${b.status === 'done' ? 'ok' : b.status === 'late' ? 'late' : 'muted'}">${esc(b.status === 'planned' ? kindT(b.kind) : statusT(b.status))}</span></div>
       <div class="chips rs-chips">${b.owner ? `<span class="chip rs-owner">${esc(b.owner)}</span>` : ''}${b.place ? `<span class="chip">${esc(b.place)}</span>` : ''}</div>
       ${b.cue ? `<div class="sub rs-cue"><b>${esc(t('rsCue'))}:</b> ${esc(b.cue)}</div>` : ''}${b.notes ? `<div class="sub">${esc(b.notes)}</div>` : ''}
-      <div class="row rs-acts"><button type="button" class="btn sm ghost" data-shift>${esc(t('rsDelay15'))}</button><button type="button" class="btn sm ${b.status === 'done' ? 'ghost' : 'ok'}" data-done>${esc(b.status === 'done' ? t('rsPlanned') : t('rsMarkDone'))}</button>${phone ? `<button type="button" class="btn sm ghost" data-dial>${esc(t('call'))}</button>` : ''}</div>
+      <div class="row rs-acts"><button type="button" class="btn sm ghost" data-shift>${esc(t('rsDelay15'))}</button><button type="button" class="btn sm ghost" data-done>${esc(b.status === 'done' ? t('rsPlanned') : t('rsMarkDone'))}</button>${phone ? `<button type="button" class="btn sm ghost" data-dial>${esc(t('call'))}</button>` : ''}</div>
     </div></div>`;
 }
 
@@ -254,7 +254,7 @@ function renderLive(root, c) {
   const target = nn.now || nn.next; // what the big buttons act on
   const nextPhone = nn.next ? phoneFor(c, nn.next.owner, nn.next) : '';
   const card = (label, b, cls, meta) => `<section class="rs-card ${cls}"><div class="rs-label">${esc(label)}</div><div class="rs-big">${esc(b.title)}</div>
-      <div class="rs-meta">${[timeOf(b), b.place, b.owner].filter(Boolean).map(esc).join(' · ')}</div>${meta || ''}${b.cue ? `<div class="rs-cue">${esc(t('rsCue'))}: ${esc(b.cue)}</div>` : ''}</section>`;
+      <div class="rs-meta"><span class="count">${esc(timeOf(b))}</span>${[b.place, b.owner].filter(Boolean).map(x => ' · ' + esc(x)).join('')}</div>${meta || ''}${b.cue ? `<div class="rs-cue">${esc(t('rsCue'))}: ${esc(b.cue)}</div>` : ''}</section>`;
   document.body.classList.add('rs-live-on');
   root.innerHTML = `<div class="rs-live" dir="${lang() === 'he' ? 'rtl' : 'ltr'}">
     <header class="rs-head"><a class="btn sm ghost rs-exit" href="#/case/${esc(c.id)}">${esc(t('rsExit'))}</a><div class="rs-ev"><b>${esc(c.client || '')}</b><span>${[c.kind, date ? Office.fmt(date) : '', c.place].filter(Boolean).map(esc).join(' · ')}</span></div><div class="rs-clock count">${esc(now)}</div></header>

@@ -1,7 +1,7 @@
 /* Cases: the list (open / all) and one case in five tabs: details, suppliers, schedule and team, money, lists. */
 import { t, kindLabel, statusLabel, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, section, empty, dialog, confirmDialog, toast, openWhatsApp, dial, relDay, copyText } from '../ui.js';
+import { esc, field, section, empty, dialog, confirmDialog, toast, openWhatsApp, dial, relDay, copyText, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { phonePretty } from '../logic/core.js';
 import { CALL, TASK, taskMessage } from '../logic/extra.js';
@@ -71,10 +71,10 @@ function tabDetails(body, c, s) {
   body.innerHTML = `
       <div class="row"><span class="badge ${c.status === Office.STATUS.won ? 'ok' : ''}">${esc(statusLabel(c.status))}</span>
         <select id="status" class="grow" aria-label="${esc(t('fStatus'))}">${Object.values(Office.STATUS).map(v => `<option value="${esc(v)}"${v === c.status ? ' selected' : ''}>${esc(statusLabel(v))}</option>`).join('')}</select></div>
-      <div class="card"><div class="row between"><div><div class="title">${esc(c.contact || '')}</div><div class="sub ltr">${esc(phonePretty(c.phone))}${c.email ? ' · ' + esc(c.email) : ''}</div></div>
+      <div class="card"><div class="row between"><div><div class="title">${esc(c.contact || '')}</div><div class="sub ltr">${esc(phonePretty(c.phone))}${c.phone ? copyBtn(c.phone, { icon: true }) : ''}${c.email ? ' · ' + esc(c.email) + copyBtn(c.email, { icon: true }) : ''}</div></div>
         ${client ? `<a class="btn sm" href="#/client/${esc(client.id)}">${esc(t('history'))}</a>` : ''}</div>
         <div class="row"><button class="btn wa" id="wa">${esc(t('whatsapp'))}</button><button class="btn" id="dial">${esc(t('call'))}</button><button class="btn" id="queue">${esc(t('addCall'))}</button><button class="btn" id="task">+ ${esc(t('addTask'))}</button><button class="btn" id="whatsOpen">${esc(t('whatsOpen'))}</button>${c.date ? `<button class="btn" id="toCal">${esc(t('toCalendar'))}</button>` : ''}</div></div>
-      <div class="card"><dl class="kv">${kv.map(x => `<dt>${esc(x[0])}</dt><dd>${esc(x[1])}</dd>`).join('')}</dl></div>
+      <div class="card"><dl class="kv">${kv.map(x => `<dt>${esc(x[0])}</dt><dd>${esc(x[1])}${x[0] === t('fPlace') ? copyBtn(x[1], { icon: true }) : ''}</dd>`).join('')}</dl>${kv.length ? `<div class="row">${copyBtn([c.client, c.contact].filter(Boolean).join(' · ') + '\n' + kv.map(x => x[0] + ': ' + x[1]).join('\n'))}</div>` : ''}</div>
       <div class="card"><div class="row between"><span class="sub"><b>${esc(t('waitingSince'))}</b> ${c.waitingSince ? esc(Office.fmt(c.waitingSince)) : esc(t('none'))}</span>
         <div class="row">${c.waitingSince ? `<button class="btn sm ok" id="answered">${esc(t('gotAnswer'))}</button>` : `<button class="btn sm" id="waiting">${esc(t('markWaiting'))}</button>`}</div></div></div>
       ${calls.length ? section(t('callQueue'), `<div class="list">${calls.map(x => `<a class="card tap" href="#/calls"><div class="title">${esc(x.name)}</div><div class="sub">${esc(x.why || '')}</div></a>`).join('')}</div>`) : ''}
@@ -88,7 +88,7 @@ function tabDetails(body, c, s) {
     const miss = Office.missingOf(c);
     const q = miss.length ? Office.followupQuestions(Object.assign({}, c, { name: c.contact, missing: miss }), c.lang, s.signer || '')
       : (Office.followups([Object.assign({}, c, { status: Office.OPEN.includes(c.status) ? c.status : Office.STATUS.lead, waitingSince: Office.iso(Office.addDays(new Date(), -30)) })], new Date(), 1)[0] || {}).text + (s.signer ? '\n' + s.signer : '');
-    const r = await dialog(t('followupMsg'), `<textarea name="text" rows="8">${esc(q || '')}</textarea>`, { ok: t('whatsapp') });
+    const r = await dialog(t('followupMsg'), `<textarea name="text" rows="8">${esc(q || '')}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
     if (r && openWhatsApp(c.phone, r.text)) db.put('cases', { id, waitingSince: todayIso() });
   };
   body.querySelector('#queue').onclick = async () => {
@@ -175,7 +175,7 @@ function sendOneByOne(targets, textOf, after) {
     const sp = targets[i]; const text = textOf(sp);
     const wrap = document.createElement('div'); wrap.className = 'modal';
     wrap.innerHTML = `<form class="modal-card"><h2>${esc(sp.name)} (<span class="count">${i + 1}/${targets.length}</span>)</h2><div class="modal-body"><textarea name="text" rows="8">${esc(text)}</textarea></div>
-      <div class="row end"><button type="button" class="btn ghost" data-x="skip">${esc(t('cancel'))}</button><button type="submit" class="btn wa">${esc(t('whatsapp'))}</button></div></form>`;
+      <div class="row end"><button type="button" class="btn ghost" data-x="skip">${esc(t('cancel'))}</button>${copyOf('[name=text]', { sm: false })}<button type="submit" class="btn wa">${esc(t('whatsapp'))}</button></div></form>`;
     document.body.appendChild(wrap);
     wrap.querySelector('[data-x=skip]').onclick = () => { wrap.remove(); i++; step(); };
     wrap.querySelector('form').onsubmit = e => { e.preventDefault(); const ok = openWhatsApp(sp.phone, e.target.text.value); if (ok && after) after(sp); wrap.remove(); i++; setTimeout(step, 400); };
@@ -192,12 +192,12 @@ function tabPlan(body, c, s) {
   const issues = Office.scheduleCheck(rows, arrivals);
   const who = []; rows.forEach(r => String(r.who || '').split(/[,;]+/).map(x => x.trim()).forEach(w => { if (w && !/^(כולם|all)$/i.test(w) && who.indexOf(w) < 0) who.push(w); }));
   body.innerHTML = `
-    ${section(t('schedule'), `<div class="row"><button class="btn sm" id="addRow">+ ${esc(t('addRow'))}</button>${rows.length ? '' : `<button class="btn sm" id="tpl">${esc(t('fromTemplate'))}</button>`}${who.length ? `<button class="btn sm wa" id="sendSched">${esc(t('sendSchedule'))}</button>` : ''}</div>
+    ${section(t('schedule'), `<div class="row"><button class="btn sm" id="addRow">+ ${esc(t('addRow'))}</button>${rows.length ? '' : `<button class="btn sm" id="tpl">${esc(t('fromTemplate'))}</button>`}${who.length ? `<button class="btn sm wa" id="sendSched">${esc(t('sendSchedule'))}</button>` : ''}${rows.length ? copyBtn(Office.scheduleText(c, rows, '', s.signer || '')) : ''}</div>
       ${rows.length ? `<div class="${issues.length ? 'warnbox' : 'hint'}">${issues.length ? issues.map(x => esc(x.text)).join('<br>') : esc(t('noIssues'))}</div>` : `<p class="hint">${esc(t('scheduleEmpty'))}</p>`}
       <div class="list">${rows.map(r => `<div class="card row" data-r="${esc(r.id)}"><span class="ltr count" style="min-width:5.5em"><b>${esc(Office.hhmm(r.start))}</b>${r.end ? '–' + esc(Office.hhmm(r.end)) : ''}</span><span class="grow"><span class="title">${esc(r.what)}</span><span class="sub"> ${[r.where, r.who].filter(Boolean).map(esc).join(' · ')}${rows.some(x => x.date !== r.date) && r.date ? ' · ' + esc(Office.fmt(r.date)) : ''}</span></span><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div>`).join('')}</div>`)}
     ${section(t('staff'), `<div class="row"><button class="btn sm" id="addStaff">+ ${esc(t('newStaff'))}</button></div>
       <div class="list">${staff.length ? staff.map(x => `<div class="card" data-s="${esc(x.id)}"><div class="row between"><span class="title">${esc(x.name)}</span>${Office.yes(x.confirmed) ? `<span class="badge ok">${esc(t('confirmed'))}</span>` : `<span class="badge warn">?</span>`}</div>
-        <div class="sub">${[x.role, x.arrive ? t('arrive') + ' ' + Office.hhmm(x.arrive) : '', phonePretty(x.phone)].filter(Boolean).map(esc).join(' · ')}</div>
+        <div class="sub">${[x.role, x.arrive ? t('arrive') + ' ' + Office.hhmm(x.arrive) : '', phonePretty(x.phone)].filter(Boolean).map(esc).join(' · ')}${x.phone ? copyBtn(x.phone, { icon: true }) : ''}</div>
         <div class="row"><button class="btn wa sm" data-ask>${esc(t('askConfirm'))}</button><button class="btn sm" data-dial>${esc(t('call'))}</button><button class="btn sm ok" data-ok>${esc(t('confirmed'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div></div>`).join('') : empty(t('noStaff'))}</div>`)}`;
 
   const editRow = async r => {
@@ -216,7 +216,7 @@ function tabPlan(body, c, s) {
     if (!r) return;
     const st = staff.find(x => x.name === r.who); const sp = db.list('suppliers', x => x.name === r.who)[0];
     const phone = r.phone || (st && st.phone) || (sp && sp.phone) || '';
-    const r2 = await dialog(r.who, `<textarea name="text" rows="9">${esc(Office.scheduleText(c, rows, r.who, s.signer || ''))}</textarea>`, { ok: t('whatsapp') });
+    const r2 = await dialog(r.who, `<textarea name="text" rows="9">${esc(Office.scheduleText(c, rows, r.who, s.signer || ''))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
     if (r2) openWhatsApp(phone, r2.text);
   };
   const editStaff = async x => {
@@ -231,7 +231,7 @@ function tabPlan(body, c, s) {
     el.querySelector('[data-edit]').onclick = () => editStaff(x);
     el.querySelector('[data-dial]').onclick = () => dial(x.phone);
     el.querySelector('[data-ok]').onclick = () => db.put('staff', { id: x.id, confirmed: 'כן' });
-    el.querySelector('[data-ask]').onclick = async () => { const r = await dialog(t('askConfirm'), `<textarea name="text" rows="7">${esc(Office.staffMessage(c, x, s.signer || ''))}</textarea>`, { ok: t('whatsapp') }); if (r) openWhatsApp(x.phone, r.text); };
+    el.querySelector('[data-ask]').onclick = async () => { const r = await dialog(t('askConfirm'), `<textarea name="text" rows="7">${esc(Office.staffMessage(c, x, s.signer || ''))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') }); if (r) openWhatsApp(x.phone, r.text); };
   });
 }
 document.addEventListener('click', async e => {
@@ -264,7 +264,7 @@ function tabMoney(body, c, s) {
     on('[data-no]', () => db.put('approvals', { id: a.id, status: APPROVAL.declined }));
     on('[data-send]', async () => {
       const text = a.status === APPROVAL.sent ? approvalReminder(a, c, c.lang, s.signer || DEFAULTS.signer, Office.daysBetween(a.sentAt, new Date())) : approvalMessage(a, c, c.lang, s.signer || DEFAULTS.signer);
-      const r = await dialog(t('approvalSend'), `<textarea name="text" rows="9">${esc(text)}</textarea>`, { ok: t('whatsapp') });
+      const r = await dialog(t('approvalSend'), `<textarea name="text" rows="9">${esc(text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
       if (r && openWhatsApp(c.phone, r.text)) db.put('approvals', { id: a.id, status: APPROVAL.sent, sentAt: a.sentAt || todayIso(), lastRemind: todayIso() });
     });
   });
@@ -278,7 +278,7 @@ function tabLists(body, c, s) {
   const g = db.list('groups', x => x.caseId === id)[0];
   body.innerHTML = `
     <div class="card row between"><span class="title">${esc(t('groups'))}</span><a class="btn sm primary" href="#/groups/${esc(id)}">${g ? esc(g.people.length) + ' ' + esc(t('people')) : esc(t('open'))}</a></div>
-    ${(() => { const items = db.list('print', x => x.caseId === id).sort((a, b) => String(a.created).localeCompare(String(b.created))); const sm = printSummary(items); return section(t('printList'), `<div class="row"><button class="btn sm" id="printSeed">${esc(items.length ? t('printAddSeed') : t('printMake'))}</button><button class="btn sm" id="printAdd">+ ${esc(t('printItem'))}</button>${items.length ? `<button class="btn sm primary" id="printOrder">${esc(t('printOrder'))}</button>` : ''}</div>
+    ${(() => { const items = db.list('print', x => x.caseId === id).sort((a, b) => String(a.created).localeCompare(String(b.created))); const sm = printSummary(items); return section(t('printList'), `<div class="row"><button class="btn sm" id="printSeed">${esc(items.length ? t('printAddSeed') : t('printMake'))}</button><button class="btn sm" id="printAdd">+ ${esc(t('printItem'))}</button>${items.length ? `<button class="btn sm primary" id="printOrder">${esc(t('printOrder'))}</button>${copyBtn(t('printList') + ' · ' + (c.client || '') + '\n' + items.map(i => '• ' + [i.item, Office.num(i.qty) ? Office.num(i.qty) + ' ' + t('units') : '', i.size, i.notes].filter(Boolean).join(' · ')).join('\n'))}` : ''}</div>
       ${items.length ? `<p class="hint"><span class="count">${sm.confirmed}/${sm.total}</span> ${esc(t('printConfirmed'))}${sm.cost ? ' · ' + esc(Office.money(sm.cost)) : ''}</p><div class="list">${items.map(i => `<div class="card" data-p="${esc(i.id)}"><div class="row between"><span class="title">${esc(i.item)}</span><span class="badge ${i.status === PRINT_STATUS.plan ? 'muted' : i.status === PRINT_STATUS.ordered ? 'warn' : 'ok'}">${esc(printStatusLabel(i.status))}</span></div><div class="sub">${[Office.num(i.qty) ? Office.num(i.qty) + ' ' + t('units') : '', i.size, i.notes, i.cost ? Office.money(i.cost) : '', i.orderedAt ? t('sentTo') + ' ' + Office.fmt(i.orderedAt) : ''].filter(Boolean).map(esc).join(' · ')}</div>
         <div class="row">${i.status === PRINT_STATUS.ordered ? `<button class="btn sm ok" data-pconf>${esc(t('printConfirm'))}</button>` : ''}${i.status === PRINT_STATUS.confirmed ? `<button class="btn sm ok" data-pready>${esc(t('printReady'))}</button>` : ''}<button class="btn sm ghost" data-pedit>${esc(t('edit'))}</button></div></div>`).join('')}</div>` : ''}`); })()}
     ${section(t('checklist'), checks.length ? lists.map(l => `<div class="card"><h3>${esc(l)}</h3>${checks.filter(k => k.list === l).map(k => `<label class="chk"><input type="checkbox" data-k="${esc(k.id)}"${Office.yes(k.done) ? ' checked' : ''}> ${esc(k.item)}</label>`).join('')}</div>`).join('') : `<button class="btn" id="mk">${esc(t('makeChecklist'))}</button>`)}
@@ -311,6 +311,6 @@ function tabLists(body, c, s) {
   });
   const mk = body.querySelector('#mk'); if (mk) mk.onclick = () => Office.checklistFor(Office.CHECK_SEED.map(r => ({ list: r[0], kind: r[1], item: r[2] })), c.kind).forEach(k => db.put('checks', Object.assign(k, { caseId: id, done: '' })));
   body.querySelectorAll('[data-k]').forEach(cb => cb.onchange = () => db.put('checks', { id: cb.dataset.k, done: cb.checked ? 'כן' : '' }));
-  body.querySelector('#thanks').onclick = async () => { const r = await dialog(t('thanks'), `<textarea name="text" rows="5">${esc(Office.thanksMessage(c, c.contact) + (s.signer ? '\n' + s.signer : ''))}</textarea>`, { ok: t('whatsapp') }); if (r) openWhatsApp(c.phone, r.text); };
-  body.querySelector('#review').onclick = async () => { const r = await dialog(t('review'), `<textarea name="text" rows="5">${esc(Office.reviewMessage(c, c.contact, s.reviewUrl || ''))}</textarea>`, { ok: t('whatsapp') }); if (r) openWhatsApp(c.phone, r.text); };
+  body.querySelector('#thanks').onclick = async () => { const r = await dialog(t('thanks'), `<textarea name="text" rows="5">${esc(Office.thanksMessage(c, c.contact) + (s.signer ? '\n' + s.signer : ''))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') }); if (r) openWhatsApp(c.phone, r.text); };
+  body.querySelector('#review').onclick = async () => { const r = await dialog(t('review'), `<textarea name="text" rows="5">${esc(Office.reviewMessage(c, c.contact, s.reviewUrl || ''))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') }); if (r) openWhatsApp(c.phone, r.text); };
 }
