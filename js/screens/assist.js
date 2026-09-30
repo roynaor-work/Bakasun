@@ -13,6 +13,7 @@ import { parseHow, findHelp } from '../logic/howto.js';
 import { toCalendar } from '../calendar.js';
 import { speak, isReadAloudCommand, textOfEl } from '../speak.js';
 import { parseAction } from '../logic/questions.js';
+import { parseAction2 } from '../logic/questions2.js';
 import { runAction, supplierStatus, undoBtn, wireUndo } from './actions.js';
 import { remember, undoLast, isUndoCommand } from '../logic/undo.js';
 import { pushRecent, recentList } from '../logic/recent.js';
@@ -214,6 +215,10 @@ async function tabCommand(body, s, ctx) {
     // "save as template tour": the message on screen becomes a template
     { const tn = isSaveTemplateCommand(text); if (tn) { const ta2 = out.querySelector('[name=msg], textarea'); if (ta2 && ta2.value.trim()) { saveTemplate(db, tn, ta2.value); toast(t('templateSaved', { name: tn }), 3000); } else toast(t('nothingToSave')); return; } }
     if (isEmptyBinCommand(text)) { emptyBins().then(ok => { if (ok) { draft = ''; body.querySelector('#txt').value = ''; const b = body.querySelector('#bin'); if (b) b.hidden = true; } }); return; }
+    // participants, budget, run of show, files, contract, checklist, reminders, board, history: before "go to", so that
+    // "go to day-of mode" is not read as a screen name
+    const act2 = parseAction2(text);
+    if (act2) { runAction(act2, { out, s, caseByName, findPerson: w => findPersonIn(w, peopleNow()) }).then(() => afterAnswer(out, s)); return; }
     const go = parseGoto(text);
     if (go) { draft = ''; goTo(go); return; }
     const q = parseAgenda(text, new Date());

@@ -269,10 +269,11 @@ async function edit(x, s) {
   };
   if (rec.start && rec.duration) rec.due = dueFrom(rec.start, rec.duration, rec.durationUnit, { holidays: rec.holidays }) || rec.due;
   if (r.every && r.every !== 'none') {
-    rec.isTemplate = true; rec.parentId = '';
+    // a template is stored as done + isTemplate, so every existing "open tasks" list (dashboard, case tab, agenda, reminders) ignores it
+    rec.isTemplate = true; rec.parentId = ''; rec.status = TASK.done; rec.timer = null;
     rec.repeat = { every: r.every, on: r.every === 'week' ? +r.onWd : /month/.test(r.every) ? Math.min(31, Math.max(1, +r.onDom || 1)) : null, from: r.from || todayIso(), until: r.until || '', count: +r.count || 0 };
   }
-  if (x.id) rec.id = x.id; else { rec.status = TASK.open; if (!rec.isTemplate) { const seq = (+db.setting('taskSeq') || 0) + 1; rec.no = seq; db.setting('taskSeq', seq); } }
+  if (x.id) rec.id = x.id; else { if (!rec.isTemplate) rec.status = TASK.open; if (!rec.isTemplate) { const seq = (+db.setting('taskSeq') || 0) + 1; rec.no = seq; db.setting('taskSeq', seq); } }
   const id = db.put('tasks', rec);
   if (r.comment && r.comment.trim()) db.put('notes', { text: r.comment.trim(), about: 'task', aboutId: id, aboutLabel: rec.title, lang: r.lang || 'he' });
   toast(t('saved'));
