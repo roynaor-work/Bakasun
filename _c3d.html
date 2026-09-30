@@ -1,0 +1,8 @@
+<!doctype html><html dir="rtl" lang="he"><head><meta charset="utf-8"><link rel="stylesheet" href="css/style.css"><style>body{margin:0;background:#222}.gcanvas{width:360px;height:560px;margin:10px}</style></head><body>
+<div class="gcanvas"><canvas id="cv" width="360" height="560"></canvas></div>
+<script type="module">
+import { celebrate3d } from './js/games/celebrate3d.js';
+const u = new URL(location.href); const scene = u.searchParams.get('scene') || 'goal';
+window.__done = false;
+celebrate3d(document.getElementById('cv'), { oldBest: 12, newBest: 20, sound: false, scene, onDone: () => { window.__done = true; } });
+</script></body></html>
