@@ -115,6 +115,9 @@ const JOG_R = P(shift(SIDE, 0, -4), { rk: [118, 122], rf: [108, 150], lk: [96, 1
 const ARMS_UP = P(FRONT, { le: [90, 44], lh: [86, 20], re: [110, 44], rh: [114, 20] });
 const ARMS_OUT = P(FRONT, { le: [72, 68], lh: [46, 68], re: [128, 68], rh: [154, 68] });
 const ARMS_DOWN = P(FRONT, { le: [84, 94], lh: [80, 118], re: [116, 94], rh: [120, 118] });
+// סיבובי ידיים: עיגול במישור הצד. המספר השלישי = עומק (קדימה חיובי), רק לתלת-ממד; בדו-ממד הידיים נראות מקוצרות
+const ARMS_FWD = P(FRONT, { le: [90, 70, 22], lh: [86, 68, 48], re: [110, 70, 22], rh: [114, 68, 48] });
+const ARMS_BACK = P(FRONT, { le: [88, 72, -20], lh: [84, 76, -44], re: [112, 72, -20], rh: [116, 76, -44] });
 const POGO_DOWN = P(FRONT, { le: [86, 94], lh: [90, 114], re: [114, 94], rh: [110, 114], lk: [93, 150], rk: [107, 150] });
 const POGO_UP = P(shift(POGO_DOWN, 0, -16), { lf: [92, 160], rf: [108, 160], lk: [94, 140], rk: [106, 140] }); // באוויר, כפות הרגליים מנותקות
 const STAR_SQUAT = P(FRONT, { head: [100, 82], neck: [100, 98], hip: [100, 136], lk: [82, 156], lf: [86, 182], rk: [118, 156], rf: [114, 182], le: [88, 120], lh: [92, 142], re: [112, 120], rh: [108, 142] });
@@ -133,7 +136,7 @@ const STEP_ON = { head: [146, 24], neck: [146, 40], hip: [146, 86], le: [144, 64
 const CALF_DOWN = SIDE;
 const CALF_UP = P(shift(SIDE, 0, -8), { lf: [101, 176], rf: [107, 176] });
 const BRIDGE_DOWN = P(FLAT, { lk: [124, 144], lf: [148, 182], rk: [126, 146], rf: [150, 182] });
-const BRIDGE_UP = P(BRIDGE_DOWN, { hip: [100, 146], neck: [52, 170] });
+const BRIDGE_UP = P(BRIDGE_DOWN, { hip: [100, 134], neck: [54, 168] }); // הירכיים גבוה, קו ישר מהכתפיים לברכיים
 const WALL = { type: 'wall', x: 56 };
 const WALL_SIT = { head: [66, 74], neck: [66, 90], hip: [66, 136], le: [74, 112], lh: [92, 134], re: [72, 114], rh: [90, 136], lk: [100, 136], lf: [100, 182], rk: [102, 138], rf: [102, 182] };
 const WALL_SIT_B = P(WALL_SIT, { head: [66, 75], neck: [66, 91] });
@@ -186,7 +189,7 @@ export const EXERCISES = [
   { id: 'arm-circles', name: 'סיבובי ידיים', cat: 'warm', type: 'time', base: 20,
     steps: ['ידיים ישרות לצדדים', 'מסובבים עיגולים גדולים קדימה', 'באמצע הזמן מחליפים כיוון'],
     tip: 'הכתפיים רפויות, לא מרימים אותן לאוזניים.',
-    frames: [[ARMS_UP, 260], [ARMS_OUT, 260], [ARMS_DOWN, 260], [ARMS_OUT, 260]] },
+    frames: [[ARMS_UP, 300], [ARMS_FWD, 300], [ARMS_DOWN, 300], [ARMS_BACK, 300]] },
   { id: 'ankle-hops', name: 'קפיצות קרסול', cat: 'warm', type: 'time', base: 30,
     steps: ['רגליים צמודות, ברכיים כמעט ישרות', 'קופצים קטן ומהר מהקרסוליים', 'נוחתים על קצות האצבעות'],
     tip: 'הקפיצה נמוכה, כמו קפיץ. זה מחמם את השוקיים לפני הניתור.',
