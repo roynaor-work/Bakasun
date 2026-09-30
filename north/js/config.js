@@ -4,12 +4,12 @@ export const STORE = {
   tagline: 'מארזי אלכוהול ופינוק מהצפון',
   legalName: 'ראמן מזואי בע"מ',
   companyId: '517204327',
-  address: 'צומת הגומא, הגליל העליון',
+  address: 'צומת הגומא, מתחם דור אלון, הגליל העליון',
   hours: 'א׳-ה׳ 10:00-22:00 · ו׳ 9:00-15:00',
-  phone: '04-6930340',            // לאימות מול רועי
-  whatsapp: '',                    // 9725XXXXXXXX בלי פלוס. ריק = הכפתור מוסתר
+  phone: '050-334-0875',          // מדף "צור קשר" ב-drink2.co.il
+  whatsapp: '972503340875',        // אותו מספר, בלי פלוס. ריק = הכפתור מוסתר
   email: 'roynaor@gmail.com',      // לאן מגיעה הודעת ההזמנה
-  instagram: '',
+  instagram: 'https://www.instagram.com/haruah_hatzfonit_wine/',
   facebook: '',
   siteUrl: 'https://roynaor-work.github.io/Bakasun/north/',
 };
@@ -22,7 +22,8 @@ export const SHIPPING = {
 };
 
 /* תשלום. כשהקישור ריק, השיטה מוצגת אבל ההזמנה נסגרת בטלפון/הודעה.
-   card.url: עמוד תשלום של ספק הסליקה (Grow / Cardcom / PayPlus / Tranzila). אפשר להשתמש ב-{sum} ו-{ref}
+   card.url: עמוד תשלום של ספק הסליקה. לרועי כבר יש חשבון Grow (pay.grow.link, שימש לכרטיסי "מסע וויסקי"):
+   ב-Grow יוצרים "דף תשלום" עם סכום פתוח ומדביקים את הקישור כאן. אפשר להשתמש ב-{sum} ו-{ref}
    בתוך הקישור, והם יוחלפו בסכום ובמספר ההזמנה.
    bit.url: קישור "בקשת תשלום" של ביט לעסקים. bit.phone: המספר שמשלמים אליו בביט. */
 export const PAY = {

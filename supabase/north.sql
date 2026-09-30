@@ -21,3 +21,16 @@ create policy "north read auth" on public.north_orders for select to authenticat
 drop policy if exists "north update auth" on public.north_orders;
 create policy "north update auth" on public.north_orders for update to authenticated using (true);
 create index if not exists north_orders_created on public.north_orders (created_at desc);
+
+-- שאלון הספק (north/survey.html): מה יש למתן קבוע ומה הוא יכול להחזיק. anon מוסיף בלבד.
+create table if not exists public.north_survey (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  who text,
+  answers jsonb not null
+);
+alter table public.north_survey enable row level security;
+drop policy if exists "survey insert" on public.north_survey;
+create policy "survey insert" on public.north_survey for insert to anon with check (true);
+drop policy if exists "survey read auth" on public.north_survey;
+create policy "survey read auth" on public.north_survey for select to authenticated using (true);
