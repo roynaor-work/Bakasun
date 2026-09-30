@@ -94,7 +94,12 @@
 .cal-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .cal-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .cal-item .cal-t b { overflow-wrap: anywhere; }
-@media (pointer: coarse) {
+@media (max-width: 899px), (pointer: coarse) {
   .cal-nav .btn.sm, .cal-wday h3 .btn.sm, .cal-day-h .btn.sm, .tabs button, .sec-h .btn.sm { min-height: 40px; }
   .cal-nav .copyq, .cal-wday h3 .copyq, .cal-day-h .copyq, .sec-h .copyq { width: 40px; height: 40px; }
+}
+@media (max-width: 899px), (pointer: coarse) {
+  .cal-head .btn.sm, .cal-tabs button, .cal-nav .btn.sm, .cal-wday .btn.sm, .cal-day-h .btn.sm, .cal-body .btn.sm, .cal-body .tabs button, .cal-nav + .cal-grid + .cal-legend + .sec .btn.sm, .sec-h .btn.sm { min-height: 40px; }
+  .cal-nav .btn.sm { min-width: 40px; }
+  .cal-nav .copyq, .cal-wday .copyq, .cal-day-h .copyq, .sec-h .copyq, .cal-body .copyq { min-width: 40px; min-height: 40px; }
 }

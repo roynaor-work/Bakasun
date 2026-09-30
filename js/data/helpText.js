@@ -43,6 +43,18 @@ export const HELP = {
       '"תוסיפי לרשימת הדפוס 20 תגי שם לשוב״ל"',
       '"מה התקציב של שוב״ל" / "כמה משתתפים יש לברטלסמן" / "מתי האירוע של שוב״ל"'
     ] },
+    { title: 'משתתפים, תקציב, לו״ז, קבצים, חוזה, רשימת תיוג, תזכורות, לוח והיסטוריה', items: [
+      '"הוסיפי משתתף לשוב״ל: דנה כהן 052-1234567 צמחונית" (אפשר כמה שורות, אחת לכל אדם). "כמה אישרו הגעה לשוב״ל" / "מי עוד לא אישר הגעה לשוב״ל" / "רשימה למלון של שוב״ל": הרשימה לפי חדרים, עם "העתקה"',
+      '"מה הרווח באירוע שוב״ל" / "כמה עולים לנו הספקים בברטלסמן" / "מה לוח התשלומים של שוב״ל" / "כמה פתוח לתשלום בשוב״ל": מהלשונית "תקציב", עם האזהרות שלה',
+      '"מה עכשיו בלו״ז" / "מה הבא בלו״ז": האירוע של היום (או הקרוב), מה רץ, מה הבא ומה באיחור. "עברי למצב יום האירוע" פותח את מצב יום האירוע',
+      '"דף קריאה לגרשון טורס לשוב״ל": הטקסט מוכן, עם "העתקה" ו"וואטסאפ"',
+      '"מה חסר במסמכים של שוב״ל" / "איפה התפריט של שוב״ל" (גם חוזה, הצעה, ביטוח, חשבונית, תמונות): הקבצים שנמצאו, עם "פתיחה"',
+      '"מה חסר לחוזה של שוב״ל" / "האם החוזה של שוב״ל חתום"',
+      '"מה נשאר ברשימת התיוג של שוב״ל" / "מה לשבוע הקרוב ברשימה של ברטלסמן"',
+      '"מה התזכורות שלי" / "מה דחוף": התזכורות עם קישור לכל אחת. "סמני את התזכורות כנקראו"',
+      '"העבירי את שוב״ל לנסגר" / "הפנייה של שוב״ל נסגרה" / "הפנייה של X ירדה": התיק זז בלוח האירועים (עם "בטלי")',
+      '"מה השתנה היום בשוב״ל" / "מה השתנה לאחרונה" / "מה השתנה השבוע": ההיסטוריה, עם קישור לתיק'
+    ] },
     { title: 'תיק חדש', items: [
       '"פנייה חדשה: דנה לוי 052-1234567 יום גיבוש ל-40 בראש פינה ב-15/11"',
       'או במסך "פנייה חדשה": מספרים הכל בהקלטה אחת (לקוח, תאריך, משתתפים, לינה, אולם, הסעות, מה צריך לבדוק). האפליקציה מפרקת לתיק, לספקים שצריך ולמשימות.'
@@ -121,6 +133,18 @@ export const HELP = {
       '« ajoute à l’impression 20 badges pour Shoval »',
       '« quel est le budget de Shoval » / « combien de participants pour Bertelsmann » / « quand est l’événement de Shoval »'
     ] },
+    { title: 'Participants, budget, déroulé, fichiers, contrat, check-list, rappels, tableau et historique', items: [
+      '« ajoute un participant à Shoval : Dana Cohen 052-1234567 végétarienne » (plusieurs lignes possibles, une par personne). « combien ont confirmé pour Shoval » / « qui n’a pas encore confirmé pour Shoval » / « liste pour l’hôtel de Shoval » : la liste par chambres, avec « Copier »',
+      '« quelle est la marge de Shoval » / « combien coûtent les fournisseurs pour Bertelsmann » / « quel est l’échéancier de Shoval » / « combien reste à payer pour Shoval » : depuis l’onglet « Budget », avec ses alertes',
+      '« qu’est-ce qu’il y a maintenant au programme » / « et après » : l’événement du jour (ou le prochain), ce qui est en cours, la suite et les retards. « passe en mode jour J » ouvre le mode jour J',
+      '« feuille de route pour Gershon Tours pour Shoval » : le texte prêt, avec « Copier » et « WhatsApp »',
+      '« quels documents manquent pour Shoval » / « où est le menu de Shoval » (aussi contrat, devis, assurance, facture, photos) : les fichiers trouvés, avec « Ouvrir »',
+      '« que manque-t-il au contrat de Shoval » / « le contrat de Shoval est-il signé »',
+      '« que reste-t-il sur la check-list de Shoval » / « qu’est-ce qu’il y a cette semaine sur la liste de Bertelsmann »',
+      '« quels sont mes rappels » / « qu’est-ce qui est urgent » : les rappels, chacun avec son lien. « marque les rappels comme lus »',
+      '« passe Shoval en gagné » / « le dossier de Shoval est perdu » : le dossier change de colonne sur le tableau (avec « Annuler »)',
+      '« qu’est-ce qui a changé aujourd’hui dans Shoval » / « quoi de neuf récemment » : l’historique, avec le lien vers le dossier'
+    ] },
     { title: 'Nouveau dossier', items: [
       '« nouveau client : Dana Levy 052-1234567 team building 40 pers. Rosh Pinna 15/11 »',
       'Ou dans « Nouvelle demande » : racontez tout en une dictée (client, date, participants, hôtel, salle, bus, ce qu’il faut vérifier). L’application en fait un dossier, les fournisseurs nécessaires et les tâches.'
@@ -198,6 +222,18 @@ export const HELP = {
       '“log a call with Arbel tomorrow at 10”',
       '“add to the print list 20 name tags for Shoval”',
       '“what is the budget of Shoval” / “how many participants for Bertelsmann” / “when is the event of Shoval”'
+    ] },
+    { title: 'Participants, budget, run of show, files, contract, checklist, reminders, board and history', items: [
+      '“add a participant to Shoval: Dana Cohen 052-1234567 vegetarian” (several lines work, one per person). “how many confirmed for Shoval” / “who hasn’t confirmed for Shoval” / “rooming list for Shoval”: the list by rooms, with “Copy”',
+      '“what is the margin of Shoval” / “how much do the suppliers cost for Bertelsmann” / “what is the payment schedule for Shoval” / “how much is still open for Shoval”: from the “Budget” tab, with its warnings',
+      '“what’s on now” / “what’s next on the run sheet”: today’s event (or the next one), what is running, what comes next and what is late. “go to day-of mode” opens the day-of mode',
+      '“call sheet for Gershon Tours for Shoval”: the text ready, with “Copy” and “WhatsApp”',
+      '“which documents are missing for Shoval” / “where is the menu of Shoval” (also contract, quote, insurance, invoice, photos): the files found, with “Open”',
+      '“what’s missing for the contract of Shoval” / “is the contract of Shoval signed”',
+      '“what’s left on the checklist of Shoval” / “what’s due this week on the checklist of Bertelsmann”',
+      '“what are my reminders” / “what’s urgent”: the reminders, each with its link. “mark the reminders as read”',
+      '“move Shoval to won” / “the lead of Shoval is lost”: the case moves on the event board (with “Undo”)',
+      '“what changed today in Shoval” / “what changed recently”: the history, with a link to the case'
     ] },
     { title: 'New case', items: [
       '“new lead: Dana Levy 052-1234567 team building for 40 in Rosh Pinna on 15/11”',

@@ -41,8 +41,13 @@
 /* the client block: a long legal name wraps instead of pushing the copy icon out */
 .ct-pv .row .btn.sm { flex: none; }
 .card .row.between > .title { min-width: 0; overflow-wrap: anywhere; }
-@media (pointer: coarse) {
+@media (max-width: 899px), (pointer: coarse) {
   .cl-item .acts .btn, .ct-pv .btn.sm { min-height: 40px; }
   .cl-item .acts .btn[data-del] { min-width: 40px; }
 }
 .cl-item input[type=checkbox]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 899px), (pointer: coarse) {
+  .ct-body .btn.sm, .ct-body .btn, .ct-body .chip, .ct-pv .btn.sm { min-height: 40px; }
+  .ct-body .copyq, .ct-body .icon { min-width: 40px; min-height: 40px; }
+  .cl-item input[type=checkbox] { width: 28px; height: 28px; }
+}

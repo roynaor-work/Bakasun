@@ -96,9 +96,15 @@ body.rs-live-on nav, body.rs-live-on .nav, body.rs-live-on #nav { display: none 
 .rs-live .rs-label-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .rs-live .copyq { background: #2A2530; color: #D9D0C6; border-color: #3A3339; }
 .rs-msg .row .btn.sm { flex: none; }
-@media (pointer: coarse) {
+@media (max-width: 899px), (pointer: coarse) {
   .rs-block .rs-acts .btn.sm, .rs-msg .chips .chip, .rs-live .rs-row .btn.sm, .rs-daynotes .btn.sm { min-height: 40px; }
   .rs-block .copyq, .rs-live .copyq, .rs-daynotes .copyq { width: 40px; height: 40px; }
 }
 .rs-msg .chip:focus-visible, .rs-days button:focus-visible, .rs-live .tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .rs-live .btn:focus-visible, .rs-live a:focus-visible { outline: 2px solid #F2ECE4; outline-offset: 2px; }
+@media (max-width: 899px), (pointer: coarse) {
+  .rs-body .btn.sm, .rs-body .chip, .rs-body .tabs button, .rs-live .btn.sm, .rs-live .tabs button, .rs-msg .btn.sm, .rs-msg .chip { min-height: 40px; }
+  .rs-body .copyq, .rs-live .copyq, .rs-msg .copyq { min-width: 40px; min-height: 40px; }
+  .rs-block .rs-chips .chip { min-height: 28px; }
+}
+.rs-live .rs-row .btn.sm { min-width: 40px; }

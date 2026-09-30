@@ -70,6 +70,7 @@ export function render({ root, id, query }) {
 registerCaseTab({ key: 'runsheet', label: () => t('tRunsheet'), render(body, c, s) { draw(body, c, s, false); } });
 
 function draw(body, c, s, full) {
+  body.classList.add('rs-body');
   const rec = withDays(c);
   const schedRows = db.list('schedule', r => r.caseId === c.id);
   const notImported = schedRows.filter(r => !(rec.importedIds || []).includes(r.id || ('row:' + [r.date, r.start, r.what].join('|'))));

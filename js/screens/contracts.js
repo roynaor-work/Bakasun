@@ -31,7 +31,7 @@ export function render(ctx) {
   }
   const list = db.list('contracts').sort((a, b) => String(b.created).localeCompare(String(a.created)));
   ctx.root.innerHTML = `<header class="top">${BACK('#/more')}<h1>${esc(t('ctContracts'))}</h1></header>
-    <div class="list">${list.length ? list.map(card).join('') : empty(t('ctNoneAll'))}</div>`;
+    <div class="list ct-body">${list.length ? list.map(card).join('') : empty(t('ctNoneAll'))}</div>`;
 }
 
 function card(c) {
@@ -62,7 +62,7 @@ function renderOne(root, c) {
     ${png && (name || when) ? `<span class="sub">${name ? esc(name) : ''}${when ? ' · <span class="ltr">' + esc(Office.fmt(when) + ' ' + String(when).slice(11, 16)) + '</span>' : ''}</span>` : ''}</div>`;
   root.innerHTML = `<header class="top">${BACK(c.caseId ? '#/case/' + c.caseId + '/contract' : '#/contracts')}<h1>${esc(c.title || t('tContract'))}</h1>
       <button class="icon" id="edit" aria-label="${esc(t('edit'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10-10-4-4L4 16zM13 7l4 4"/></svg></button></header>
-    <div class="stack">
+    <div class="stack ct-body">
       <div class="row">${statusBadge(c)}<select id="status" class="grow" aria-label="${esc(t('fStatus'))}">${Object.values(CONTRACT_STATUS).map(v => `<option value="${v}"${v === c.status ? ' selected' : ''}>${esc(t('ctStatus_' + v))}</option>`).join('')}</select>
         <span class="badge muted">${esc(langName(c.lang))}</span><span class="badge muted"><span class="ltr">${esc(Office.fmt(c.date))}</span></span></div>
       ${miss.length ? `<div class="warnbox">${esc(t('ctMissing'))}: ${miss.map(k => esc(t('ctMiss_' + k))).join(' · ')}</div>` : ''}
@@ -190,6 +190,7 @@ async function sendContract(c, cs, s, pageHtml) {
 
 /* ================= case tab: contract ================= */
 function tabContract(body, cs) {
+  body.classList.add('ct-body');
   const list = db.list('contracts', x => x.caseId === cs.id).sort((a, b) => String(b.created).localeCompare(String(a.created)));
   body.innerHTML = `<div class="row"><button class="btn primary" id="ctNew">+ ${esc(t('ctNew'))}</button></div>
     <div class="list">${list.length ? list.map(card).join('') : empty(t('ctNone'))}</div>`;
@@ -198,6 +199,7 @@ function tabContract(body, cs) {
 
 /* ================= case tab: checklist ================= */
 function tabChecklist(body, cs, s) {
+  body.classList.add('ct-body');
   const cl = db.list('checklists', x => x.caseId === cs.id).sort((a, b) => String(a.created).localeCompare(String(b.created)))[0];
   if (!cl) {
     body.innerHTML = `<p class="hint">${esc(t('clNone'))}</p><div class="row"><button class="btn primary" id="clNew">${esc(t('clNew'))}</button></div>`;

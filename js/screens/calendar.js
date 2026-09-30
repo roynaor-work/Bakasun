@@ -76,8 +76,8 @@ export function render(ctx) {
       <div class="cal-agenda">${days.length ? days.map(d => `<div class="cal-day-h ${d.iso === today ? 'today' : ''}"><span>${esc(dayTitle(d.iso))}</span>${plusBtn(d.iso)}${copyBtn(dayText(d.iso, d.items), { icon: true })}</div><div class="list">${d.items.map(itemHtml).join('')}</div>`).join('') : empty(t('calEmptyAgenda'))}</div>`;
   }
 
-  root.innerHTML = `<header class="top"><h1>${esc(t('calendar'))}</h1><button class="btn sm" id="calToday">${esc(t('calToday'))}</button></header>
-    <div class="tabs">${[['month', 'calMonth'], ['week', 'calWeek'], ['agenda', 'calAgenda']].map(([k, l]) => `<button class="${view === k ? 'on' : ''}" data-view="${k}">${esc(t(l))}</button>`).join('')}</div>
+  root.innerHTML = `<header class="top cal-head"><h1>${esc(t('calendar'))}</h1><button class="btn sm" id="calToday">${esc(t('calToday'))}</button></header>
+    <div class="tabs cal-tabs">${[['month', 'calMonth'], ['week', 'calWeek'], ['agenda', 'calAgenda']].map(([k, l]) => `<button class="${view === k ? 'on' : ''}" data-view="${k}">${esc(t(l))}</button>`).join('')}</div>
     ${body}`;
 
   root.querySelectorAll('[data-view]').forEach(b => b.onclick = () => { view = b.dataset.view; render(ctx); });
@@ -147,6 +147,7 @@ registerCaseTab({
   render(body, c) {
     const all = historyFor(c.id);
     const list = showAll ? all : all.slice(0, RECENT);
+    body.classList.add('cal-body');
     body.innerHTML = `<p class="hint">${esc(t('histHint'))}</p>
       ${all.length > RECENT ? `<div class="tabs"><button class="${showAll ? '' : 'on'}" data-hist="recent">${esc(t('histRecent'))} (<span class="count">${RECENT}</span>)</button><button class="${showAll ? 'on' : ''}" data-hist="all">${esc(t('histAll'))} (<span class="count">${all.length}</span>)</button></div>` : ''}
       ${list.length ? groupByDay(list).map(g => `<div class="hist-day">${esc(Office.fmt(g.day))}</div><div class="card stack">${g.items.map(entryHtml).join('')}</div>`).join('') : empty(t('histEmpty'))}`;

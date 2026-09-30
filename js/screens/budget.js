@@ -44,8 +44,8 @@ export function render({ root, id }) {
   const { rows, totals } = overviewRows(db.list('cases'), db.list('budget'), db.list('payments'), s.vat, sort, todayIso());
   const chip = (key, label) => `<button type="button" class="chip ${sort.replace('-', '') === key ? 'on' : ''}" data-sort="${key}">${esc(label)}${sort === '-' + key ? ' ↓' : sort === key ? ' ↑' : ''}</button>`;
   const pctBadge = r => `<span class="badge ${r.margin < 0 ? 'late' : r.marginPct >= 10 ? 'ok' : 'warn'}"><span class="bg-n">${esc(r.marginPct)}%</span></span>`;
-  root.innerHTML = `<header class="top">${BACK('#/more', t('back'))}<h1>${esc(t('bgOverview'))}</h1></header>
-    <div class="chips">${chip('date', t('bgSortDate'))}${chip('margin', t('bgSortMargin'))}</div>
+  root.innerHTML = `<header class="top">${BACK('#/more', t('back'))}<h1>${esc(t('bgOverview'))}</h1></header><div class="bg-body">
+    <div class="chips bg-sort">${chip('date', t('bgSortDate'))}${chip('margin', t('bgSortMargin'))}</div>
     <div class="bg-stats sec">${[['bgCost', totals.cost], ['bgPrice', totals.price], ['bgMargin', totals.margin, totals.margin < 0 ? 'neg' : 'pos', totals.marginPct + '%'], ['bgReceived', totals.received], ['bgOpen', totals.open]].map(x => `<div class="card ${x[2] || ''}"><b>${esc(M(x[1]))}</b><span>${esc(t(x[0]))}${x[3] ? ' · <span class="bg-n">' + esc(x[3]) + '</span>' : ''}</span></div>`).join('')}</div>
     ${rows.length ? `
     <div class="tablewrap bg-desk-only sec"><table class="cmp bg-table"><thead><tr><th>${esc(t('bgEvent'))}</th><th>${esc(t('date'))}</th><th>${esc(t('bgCost'))}</th><th>${esc(t('bgPrice'))}</th><th>${esc(t('bgMargin'))}</th><th>${esc(t('bgReceived'))}</th><th>${esc(t('bgOpen'))}</th></tr></thead>
@@ -54,7 +54,7 @@ export function render({ root, id }) {
     <div class="list sec bg-cards">${rows.map(r => `<a class="card tap" href="#/case/${esc(r.id)}/budget"><div class="row between"><span class="title">${esc(r.client)}</span>${pctBadge(r)}</div>
       <div class="sub">${[r.kind, r.date ? Office.fmt(r.date) : ''].filter(Boolean).map(esc).join(' · ')}${r.warnings ? ` · <span class="badge warn" title="${esc(t('bgWarnings'))}">${r.warnings}</span>` : ''}</div>
       <div class="sub">${esc(t('bgCost'))} ${N(r.cost)} · ${esc(t('bgPrice'))} ${N(r.price)} · ${esc(t('bgMargin'))} ${N(r.margin)}</div>
-      <div class="sub">${esc(t('bgReceived'))} ${N(r.received)} · ${esc(t('bgOpen'))} <span class="${r.open > 0 ? 'bg-late' : ''}">${N(r.open)}</span></div></a>`).join('')}</div>` : empty(t('bgNoActive'))}`;
+      <div class="sub">${esc(t('bgReceived'))} ${N(r.received)} · ${esc(t('bgOpen'))} <span class="${r.open > 0 ? 'bg-late' : ''}">${N(r.open)}</span></div></a>`).join('')}</div>` : empty(t('bgNoActive'))}</div>`;
   root.querySelectorAll('[data-sort]').forEach(b => b.onclick = () => { const k = b.dataset.sort; sort = sort === k ? '-' + k : k; render({ root, id }); });
   root.querySelectorAll('tr.bg-link').forEach(tr => { tr.onclick = e => { if (e.target.closest('a')) return; location.hash = tr.dataset.href; }; });
 }
@@ -69,6 +69,7 @@ function linesOf(c) {
 }
 
 function draw(body, c, s, full) {
+  body.classList.add('bg-body');
   const lines = linesOf(c);
   const pays = db.list('payments', p => p.caseId === c.id);
   const today = todayIso();

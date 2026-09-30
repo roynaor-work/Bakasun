@@ -279,10 +279,13 @@ async function runAction2(a, ctx) {
     let who = a.event && !cs ? a.raw : a.who;
     let recs = db.list('runsheet').map(r => ({ r, c: db.get('cases', r.caseId) })).filter(x => x.c && Office.ACTIVE.includes(x.c.status));
     if (cs) recs = recs.filter(x => x.c.id === cs.id);
-    const hit = recs.map(x => ({ x, p: RS.people(x.r).find(p => nameHit(p.name, who)) })).find(y => y.p);
+    // the name as she said it, or as the supplier card knows it ("Gershon Tours" on the card, "גרשון טורס" on the sheet)
+    const known = supByName(who) || db.list('suppliers').find(x => String(x.aliases || '').split(/[,;]+/).some(al => nameHit(al, who))) || null;
+    const names = [who].concat(known ? [known.name, known.contact].concat(String(known.aliases || '').split(/[,;]+/)) : []).map(x => String(x || '').trim()).filter(Boolean);
+    const hit = recs.map(x => ({ x, p: RS.people(x.r).find(p => (known && p.supplierId && p.supplierId === known.id) || names.some(n => nameHit(p.name, n))) })).find(y => y.p);
     if (!hit) {
       if (cs) card(ev(cs), '#/runsheet/' + cs.id, `<p class="warnbox">${esc(t('v2NoPersonOnSheet', { who, event: ev(cs) }))}</p>`);
-      else if (!recs.length) warn(a.event ? t('noCaseFor', { who: a.event }) : t('v2NoRunsheet', { event: '' }));
+      else if (!recs.length) { const c0 = todaysCase(todayIso()); warn(a.event ? t('noCaseFor', { who: a.event }) : c0 ? t('v2NoRunsheet', { event: ev(c0) }) : t('v2NoEventToday')); }
       else warn(t('v2NoPersonOnSheet', { who, event: recs.map(x => x.c.client).join(', ') }));
       return true;
     }

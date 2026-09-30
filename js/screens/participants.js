@@ -39,6 +39,7 @@ function listText(c, list) {
 }
 
 function draw(body, c, s, full) {
+  body.classList.add('pt-body');
   const list = listOf(c);
   const rs = rsvpSummary(list), rm = roomingList(list), ds = dietarySummary(list), planned = plannedCount(c);
   const missing = planned && list.length < planned.min ? planned.min - list.length : 0;

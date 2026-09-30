@@ -34,8 +34,12 @@
 
 /* the copy icon of the share text sits with the other actions of the row */
 .cf-row .cf-acts .copyq { align-self: center; }
-@media (pointer: coarse) {
+@media (max-width: 899px), (pointer: coarse) {
   .cf-row .cf-acts .btn.sm, .cf-filters .chip { min-height: 40px; }
   .cf-row .cf-acts .copyq { width: 40px; height: 40px; }
 }
 .cf-filters .chip:focus-visible, .cf-drop:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 899px), (pointer: coarse) {
+  .cf-body .btn.sm, .cf-body .chip, .cf-body .btn { min-height: 40px; }
+  .cf-body .copyq, .cf-body .icon { min-width: 40px; min-height: 40px; }
+}

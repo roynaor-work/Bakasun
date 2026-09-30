@@ -55,7 +55,7 @@ function renderBoard(ctx) {
   const chip = (on, data, label) => `<button class="${on ? 'on' : ''}" ${data}>${esc(label)}</button>`;
   const extra = [f.source ? ['source', t('src_' + f.source) === 'src_' + f.source ? f.source : t('src_' + f.source)] : null, f.status ? ['status', statusLabel(f.status)] : null].filter(Boolean);
   root.innerHTML = `
-    <header class="top"><h1>${esc(t('board'))}</h1><a class="btn sm" href="#/board/stats">${esc(t('bStats'))}</a></header>
+    <header class="top bd-head"><h1>${esc(t('board'))}</h1><a class="btn sm" href="#/board/stats">${esc(t('bStats'))}</a></header>
     <div class="bd-tools">
       <input id="bq" type="search" class="bd-search" placeholder="${esc(t('bSearch'))}" value="${esc(search)}" aria-label="${esc(t('bSearch'))}">
       ${kinds.length > 1 ? `<div class="tabs bd-chips" data-f="kind">${chip(!f.kind, 'data-v=""', t('bAllKinds'))}${kinds.map(k => chip(f.kind === k, `data-v="${esc(k)}"`, kindLabel(k))).join('')}</div>` : ''}
@@ -258,7 +258,7 @@ function renderStats({ root }) {
   const breakdown = (rows, key, label, hrefOf) => rows.length ? `<div class="tablewrap"><table class="bd-table">${head([[label], [t('bLeads'), 1], [t('bWon'), 1], [t('bLost'), 1], [t('bConv'), 1, t('bConvHint')], [t('bRevenue'), 1, t('bRevenueHint')]])}
     <tbody>${rows.map(r => `<tr><td>${link(hrefOf(r), esc(key(r)))}</td><td class="n">${link(hrefOf(r), n(r.leads))}</td><td class="n">${n(r.won)}</td><td class="n">${n(r.lost)}</td><td class="n">${pct(r.conversion)}</td><td class="n">${r.revenue ? n(money(r.revenue)) : ''}</td></tr>`).join('')}</tbody></table></div>` : empty(t('bNoStats'));
   root.innerHTML = `
-    <header class="top"><a class="icon" href="#/board" aria-label="${esc(t('bBack'))}">${ICON.back}</a><h1>${esc(t('bStats'))}</h1></header>
+    <header class="top bd-head"><a class="icon" href="#/board" aria-label="${esc(t('bBack'))}">${ICON.back}</a><h1>${esc(t('bStats'))}</h1></header>
     <p class="hint">${esc(t('bStatsIntro'))}</p>
     ${cases.length ? `<div class="bd-stats">
       <div class="bd-stats-a">

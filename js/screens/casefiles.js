@@ -43,7 +43,7 @@ function renderAll(root) {
   const shown = filterFiles(all, { q: ui.q, kind: ui.kind }, lookup);
   const counts = {}; all.forEach(f => { counts[f.kind || 'other'] = (counts[f.kind || 'other'] || 0) + 1; });
   root.innerHTML = `<header class="top">${BACK('#/cases')}<h1>${esc(t('cfAll'))}</h1><span class="badge muted"><span class="count">${all.length}</span></span></header>
-    <div class="stack sec cf-wide">
+    <div class="stack sec cf-wide cf-body">
       <input class="cf-search" id="cfq" type="search" value="${esc(ui.q)}" placeholder="${esc(t('cfSearchPh'))}" aria-label="${esc(t('search'))}">
       <div class="chips cf-filters"><button type="button" class="chip ${!ui.kind ? 'on' : ''}" data-k="">${esc(t('all'))}</button>${KINDS.filter(k => counts[k]).map(k => `<button type="button" class="chip ${ui.kind === k ? 'on' : ''}" data-k="${k}">${esc(kindLabel(k))} <span class="count">${counts[k]}</span></button>`).join('')}</div>
       <div class="list" id="cfrows">${all.length ? (shown.length ? shown.map(f => row(f, true)).join('') : empty(t('cfNoMatch'))) : empty(t('cfNone'))}</div>
@@ -58,6 +58,7 @@ function renderAll(root) {
 registerCaseTab({ key: 'files', label: () => t('tFiles'), render(body, c, s) { draw(body, c, s, false); } });
 
 function draw(body, c, s, full) {
+  body.classList.add('cf-body');
   const list = sortFiles(db.list('casefiles', f => f.caseId === c.id));
   const links = db.list('links', l => l.caseId === c.id);
   const missing = missingKinds(c, list, links, { suppliers: db.list('suppliers'), contracts: db.list('contracts', x => x.caseId === c.id) });

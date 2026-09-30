@@ -35,7 +35,7 @@ function renderList({ root }) {
       </div></div>`;
   };
   const group = (key, items) => items.length ? `<div class="sub grp"><b>${esc(t(key))}</b> · ${items.length}</div>${items.map(card).join('')}` : '';
-  root.innerHTML = `<header class="top"><h1>${esc(t('notifications'))}</h1><a class="btn sm" href="#/notifications/settings">${esc(t('settings'))}</a></header>
+  root.innerHTML = `<header class="top nf-head"><h1>${esc(t('notifications'))}</h1><a class="btn sm" href="#/notifications/settings">${esc(t('settings'))}</a></header>
     <div class="row between nf-sub"><span class="sub">${esc(t('nfSub'))}</span><button class="btn sm ghost" id="allRead" ${list.length ? '' : 'disabled'}>${esc(t('nfAllRead'))}</button></div>
     <div class="list sec nf-list">${list.length ? group('nfToday', g.today) + group('nfSoon', g.soon) + group('nfLater', g.later)
       : `<div class="card nf-empty"><span class="title">${esc(t('nfEmptyTitle'))}</span><div class="sub">${esc(t('nfEmpty'))}</div></div>`}</div>
@@ -85,7 +85,7 @@ function renderSettings({ root }) {
   const numField = (k, f) => `<label class="nf-num"><input type="number" min="0" max="365" name="${k}.${f}" value="${esc(R[k][f])}" inputmode="numeric"> <span>${esc(t(f === 'pct' ? 'nfPct' : 'nfDays'))}</span></label>`;
   const rule = ([k, nums]) => `<div class="card nf-rule"><label class="chk grow"><input type="checkbox" name="${k}.on"${R[k].on ? ' checked' : ''}> <span>${esc(t('nfR_' + k))}</span></label>${nums.length ? `<div class="row nf-nums">${nums.map(f => numField(k, f)).join('')}</div>` : ''}</div>`;
   root.innerHTML = `<header class="top"><a class="icon" href="#/notifications" aria-label="${esc(t('nfBackToList'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(t('nfSettings'))}</h1></header>
-    <form id="rulesForm" class="stack">
+    <form id="rulesForm" class="stack nf-body">
       <section class="sec"><div class="sec-h"><h2>${esc(t('nfRules'))}</h2></div><p class="hint">${esc(t('nfRulesHint'))}</p><div class="list">${RULE_KEYS.map(rule).join('')}</div></section>
       <section class="sec"><div class="sec-h"><h2>${esc(t('nfBrowser'))}</h2></div><p class="hint">${esc(t('nfBrowserHint'))}</p>
         <div class="row">${!canNotify() ? `<span class="badge muted">${esc(t('nfBrowserNo'))}</span>` : perm === 'granted' ? `<span class="badge ok">${esc(t('nfBrowserGranted'))}</span>` : perm === 'denied' ? `<span class="warnbox">${esc(t('nfBrowserDenied'))}</span>` : `<button type="button" class="btn" id="askPerm">${esc(t('nfBrowserAsk'))}</button>`}</div>

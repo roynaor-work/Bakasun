@@ -20,8 +20,7 @@ export const VOICE2 = {
     v2ChecklistWeek: 'לשבוע הקרוב ({n}):', v2ChecklistWeekNone: 'אין פריטים לשבוע הקרוב.', v2LateBy: 'באיחור {n} ימים',
     v2Reminders: 'תזכורות ({n})', v2Urgent: 'דחוף ({n})', v2NoReminders: 'שקט. אין תזכורות.', v2NoUrgent: 'אין שום דבר דחוף.', v2MarkedRead: '{n} תזכורות סומנו כנקראו.', v2AllReminders: 'כל התזכורות',
     v2Moved: '{event} עבר ל"{status}".', v2MoveNo: 'אי אפשר להעביר את {event} מ"{from}" ל"{to}".', v2Board: 'לוח אירועים', v2SameStatus: '{event} כבר ב"{status}".',
-    v2Changes: 'שינויים {when} ({n}):', v2NoChanges: 'לא היו שינויים {when}.', v2wToday: 'היום', v2wYesterday: 'אתמול', v2wWeek: 'השבוע', v2wRecent: 'לאחרונה', v2More: 'ועוד {n}', v2History: 'היסטוריה',
-    v2CmdHelp: 'שאלות על משתתפים, תקציב, לו״ז, קבצים, חוזה, רשימת תיוג, תזכורות ולוח האירועים'
+    v2Changes: 'שינויים {when} ({n}):', v2NoChanges: 'לא היו שינויים {when}.', v2wToday: 'היום', v2wYesterday: 'אתמול', v2wWeek: 'השבוע', v2wRecent: 'לאחרונה', v2More: 'ועוד {n}', v2History: 'היסטוריה'
   },
   fr: {
     v2Added: '{n} ajouté(s) à {event} : {names}', v2AddedNone: 'Aucun nom reconnu. Écrivez : nom, téléphone, végétarien.', v2Skipped: '{n} déjà sur la liste', v2Participants: 'Participants',
@@ -42,8 +41,7 @@ export const VOICE2 = {
     v2ChecklistWeek: 'Pour la semaine ({n}) :', v2ChecklistWeekNone: 'Rien pour la semaine à venir.', v2LateBy: 'en retard de {n} jours',
     v2Reminders: 'Rappels ({n})', v2Urgent: 'Urgent ({n})', v2NoReminders: 'Rien en attente. Pas de rappel.', v2NoUrgent: 'Rien d’urgent.', v2MarkedRead: '{n} rappels marqués comme lus.', v2AllReminders: 'Tous les rappels',
     v2Moved: '{event} est passé en « {status} ».', v2MoveNo: 'Impossible de passer {event} de « {from} » à « {to} ».', v2Board: 'Tableau des événements', v2SameStatus: '{event} est déjà en « {status} ».',
-    v2Changes: 'Changements {when} ({n}) :', v2NoChanges: 'Aucun changement {when}.', v2wToday: 'aujourd’hui', v2wYesterday: 'hier', v2wWeek: 'cette semaine', v2wRecent: 'récemment', v2More: 'et {n} de plus', v2History: 'Historique',
-    v2CmdHelp: 'Questions sur les participants, le budget, le déroulé, les fichiers, le contrat, la check-list, les rappels et le tableau'
+    v2Changes: 'Changements {when} ({n}) :', v2NoChanges: 'Aucun changement {when}.', v2wToday: 'aujourd’hui', v2wYesterday: 'hier', v2wWeek: 'cette semaine', v2wRecent: 'récemment', v2More: 'et {n} de plus', v2History: 'Historique'
   },
   en: {
     v2Added: '{n} added to {event}: {names}', v2AddedNone: 'No names recognised. Write: name, phone, vegetarian.', v2Skipped: '{n} already on the list', v2Participants: 'Participants',
@@ -64,7 +62,6 @@ export const VOICE2 = {
     v2ChecklistWeek: 'For the coming week ({n}):', v2ChecklistWeekNone: 'Nothing due in the coming week.', v2LateBy: '{n} days late',
     v2Reminders: 'Reminders ({n})', v2Urgent: 'Urgent ({n})', v2NoReminders: 'Quiet. No reminders.', v2NoUrgent: 'Nothing urgent.', v2MarkedRead: '{n} reminders marked as read.', v2AllReminders: 'All reminders',
     v2Moved: '{event} moved to "{status}".', v2MoveNo: 'Cannot move {event} from "{from}" to "{to}".', v2Board: 'Event board', v2SameStatus: '{event} is already in "{status}".',
-    v2Changes: 'Changes {when} ({n}):', v2NoChanges: 'No changes {when}.', v2wToday: 'today', v2wYesterday: 'yesterday', v2wWeek: 'this week', v2wRecent: 'recently', v2More: 'and {n} more', v2History: 'History',
-    v2CmdHelp: 'Questions about participants, budget, run of show, files, contract, checklist, reminders and the board'
+    v2Changes: 'Changes {when} ({n}):', v2NoChanges: 'No changes {when}.', v2wToday: 'today', v2wYesterday: 'yesterday', v2wWeek: 'this week', v2wRecent: 'recently', v2More: 'and {n} more', v2History: 'History'
   }
 };

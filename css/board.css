@@ -82,9 +82,13 @@
 /* the copy icon next to the phone on a card; the links in the card menu */
 .bd-meta .copyq { margin: 0; }
 .bd-links { gap: 6px; }
-@media (pointer: coarse) {
+@media (max-width: 899px), (pointer: coarse) {
   .bd-dial, .bd-menu, .bd-add, .bd-col-h .btn.sm, .bd-chips button { min-height: 40px; }
   .bd-menu, .bd-add { width: 40px; height: 40px; }
   .bd-meta .copyq { width: 40px; height: 40px; }
 }
 .bd-chips button:focus-visible, .bd-card:focus-visible, .bd-num:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 899px), (pointer: coarse) {
+  .bd-head .btn.sm, .bd-tools .btn.sm, .bd-board .btn.sm, .bd-chips button, .bd-stats .btn.sm { min-height: 40px; }
+  .bd-board .copyq, .bd-board .icon { min-width: 40px; min-height: 40px; }
+}
