@@ -33,7 +33,7 @@ import { QUOTE_STATUS } from '../logic/quotes.js';
 import { subjects } from '../notes.js';
 import { files, shareFile, downloadFile, pdfText } from '../files.js';
 import { speechSupported, listen } from '../voice.js';
-import { wireDelete, isDeleteCommand, stripDelete, stripDone, isEmptyBinCommand, emptyBins } from '../recbox.js';
+import { wireDelete, isDeleteCommand, stripDelete, stripDone, splitDone, isEmptyBinCommand, emptyBins } from '../recbox.js';
 import { DEFAULTS } from '../data/defaults.js';
 import { hasArabic, waLink } from '../logic/core.js';
 import { COMPANY_PAPERS } from '../data/docsList.js';
@@ -82,7 +82,13 @@ function inputBox(body, hint, ph, onRead, readLabel, examples, autoRun) {
       <button class="btn primary grow" id="go" type="button">${esc(readLabel || t('read'))}</button></div><div id="out" class="stack"></div>`;
   const ta = body.querySelector('#txt'), rec = body.querySelector('#rec'), dl = body.querySelector('#dl');
   body.querySelectorAll('[data-ex]').forEach(b => { b.onclick = () => { ta.value = b.dataset.ex; draft = ta.value; ta.focus(); body.querySelectorAll('details.examples').forEach(d => { d.open = false; }); }; });
-  const onReadRaw = onRead; onRead = (text, out) => { if (autoRun && !isUndoCommand(text) && !isSendCommand(text) && !isDeleteCommand(text)) pushRecent(localStorage, text); return onReadRaw(text, out); };
+  const onReadRaw = onRead; onRead = (text, out) => {
+    // "what is the profit of Shoval, finished, what is missing for Shoval": two instructions, each with its own answer
+    const parts = splitDone(text);
+    if (parts.length > 1) { out.innerHTML = ''; parts.forEach(part => { const d = document.createElement('div'); d.className = 'stack'; out.appendChild(d); onRead(part, d); }); return; }
+    if (autoRun && !isUndoCommand(text) && !isSendCommand(text) && !isDeleteCommand(text)) pushRecent(localStorage, text);
+    return onReadRaw(text, out);
+  };
   const bin = wireDelete(body, ta, 'cmd:' + mode, v => { draft = v; });
   let stop = null;
   ta.oninput = () => { draft = ta.value; };
@@ -144,7 +150,11 @@ function caseByName(who, alt) {
     const hay = Office.normHe(w || ''); if (hay.length < 2) return null;
     const direct = active.find(x => Office.normHe(x.client || '').indexOf(hay) >= 0 || (hay.length >= 3 && hay.indexOf(Office.normHe(x.client || '')) >= 0) || Office.normHe(x.contact || '').indexOf(hay) >= 0 || Office.normHe(x.purpose || '').indexOf(hay) >= 0);
     if (direct) return direct;
-    const cl = aliasHit(hay); return cl ? active.find(x => x.clientId === cl.id) || null : null;
+    const cl = aliasHit(hay); if (cl) { const byClient = active.find(x => x.clientId === cl.id || Office.normHe(x.client || '') === Office.normHe(cl.name || '')); if (byClient) return byClient; }
+    // a long sentence: the event name is one of its words ("what is missing in the documents of Shoval, and also...")
+    const ws = hay.split(/\s+/).filter(x => x.length >= 3);
+    if (ws.length > 1) for (const w0 of ws) { for (const w of [w0, /^[הלבמו]/.test(w0) ? w0.slice(1) : w0]) { if (w.length < 3) continue; const hit = active.find(x => Office.normHe(x.client || '').split(/\s+/).some(cw => cw.length >= 3 && cw === w)) || (() => { const c2 = aliasHit(w); return c2 ? active.find(x => x.clientId === c2.id || Office.normHe(x.client || '') === Office.normHe(c2.name || '')) : null; })(); if (hit) return hit; } }
+    return null;
   };
   return find(who) || find(alt) || null;
 }

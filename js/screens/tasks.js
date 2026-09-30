@@ -228,7 +228,8 @@ async function edit(x, s) {
   x = x || {};
   const all = db.list('tasks');
   const cases = db.list('cases', c => Office.ACTIVE.includes(c.status) || c.id === x.caseId).sort((a, b) => String(a.date).localeCompare(String(b.date)));
-  const names = Array.from(new Set(db.list('staff').concat(db.list('team')).map(p => p.name).filter(Boolean)));
+  // only the people she defines under settings > staff; the advisers list (accountant, insurance, Roy) does not get tasks
+  const names = Array.from(new Set(db.list('staff').map(p => p.name).filter(Boolean)));
   const banned = new Set([x.id].concat(x.id ? TT.descendants(all, x.id).map(d => d.id) : []));
   const others = all.filter(o => !o.isTemplate && !isDone(o) && !banned.has(o.id)).sort((a, b) => (a.caseId === x.caseId ? 0 : 1) - (b.caseId === x.caseId ? 0 : 1) || String(a.due).localeCompare(String(b.due)));
   const label = o => (o.no ? '#' + o.no + ' ' : '') + o.title + (o.due ? ' · ' + Office.fmt(o.due) : '');

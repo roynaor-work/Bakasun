@@ -32,6 +32,11 @@ export function stripDone(text) {
   return t;
 }
 
+/* "finished" said in the middle, and she kept talking: two instructions in one recording, not one long one. Only the explicit
+   words split (not "end"/"done", which appear inside ordinary sentences). */
+const DONE_MID = /\s+(?:סיימתי|סימתי|finished|i[\'’]?m done|j[\'’]?ai fini|terminé)\s*[.!,]?\s+/i;
+export function splitDone(text) { return str(text).split(DONE_MID).map(x => x.trim()).filter(Boolean); }
+
 const K = key => 'bakasun.bin.' + key;
 const load = (store, key) => { try { const v = JSON.parse(store.getItem(K(key)) || '[]'); return Array.isArray(v) ? v : (v && v.text ? [v] : []); } catch (e) { return []; } };
 const save = (store, key, list) => { if (list.length) store.setItem(K(key), JSON.stringify(list)); else store.removeItem(K(key)); };

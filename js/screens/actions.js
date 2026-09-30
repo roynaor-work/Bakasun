@@ -193,7 +193,7 @@ async function runAction2(a, ctx) {
   const warn = msg => okbox(out, `<p class="warnbox">${esc(msg)}</p>`);
   // the event she named; without a name, the only active one, or a pick
   const resolveCase = async () => {
-    if (a.who) return ctx.caseByName(a.who, a.alt || a.who) || null;
+    if (a.who) { const hit = ctx.caseByName(a.who, a.alt || a.who); if (hit) return hit; const list = active(); if (!list.length) return null; toast(t('noCaseFor', { who: a.who }), 3000); return pickCase(list, t('noCaseFor', { who: a.who })); }
     const list = active(); if (list.length === 1) return list[0];
     return list.length ? pickCase(list) : null;
   };

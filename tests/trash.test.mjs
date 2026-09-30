@@ -53,3 +53,11 @@ test('the bin keeps several recordings for one hour, newest first, and gives eac
   stash(s, 'cmd', 'old', t0);
   assert.deepEqual(peek(s, 'cmd', t0 + KEEP_MS + 1), []);
 });
+
+test('"finished" in the middle of the recording splits it into two instructions', async () => {
+  const { splitDone } = await import('../js/logic/trash.js');
+  assert.deepEqual(splitDone('מה הרווח באירוע של שובל סיימתי מה חסר במסמכים של השובל'), ['מה הרווח באירוע של שובל', 'מה חסר במסמכים של השובל']);
+  assert.deepEqual(splitDone('מה הרווח של שובל'), ['מה הרווח של שובל']);
+  assert.deepEqual(splitDone('send the end of the schedule to the hotel'), ['send the end of the schedule to the hotel']);
+  assert.deepEqual(splitDone('what is the margin of Shoval, finished, what is missing for Shoval?'), ['what is the margin of Shoval,', 'what is missing for Shoval?']);
+});

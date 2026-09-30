@@ -4,9 +4,9 @@
 import { t } from './i18n.js';
 import { esc, toast, dialog } from './ui.js';
 import Office from './logic/office.js';
-import { stash, peek, restore, minutesLeft, isDeleteCommand, isDoneCommand, stripDelete, stripDone, isEmptyBinCommand, emptyBin, emptyAllBins } from './logic/trash.js';
+import { stash, peek, restore, minutesLeft, isDeleteCommand, isDoneCommand, stripDelete, stripDone, splitDone, isEmptyBinCommand, emptyBin, emptyAllBins } from './logic/trash.js';
 import { confirmDialog } from './ui.js';
-export { isDeleteCommand, isDoneCommand, stripDelete, stripDone, isEmptyBinCommand };
+export { isDeleteCommand, isDoneCommand, stripDelete, stripDone, splitDone, isEmptyBinCommand };
 
 /** "Empty the bin": asks once, then every deleted recording is gone for good. Returns true when emptied. */
 export async function emptyBins() {
