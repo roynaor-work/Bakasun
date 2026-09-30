@@ -1,0 +1,145 @@
+// הדמות התלת-ממדית המשותפת: טעינת המודל (Kenney, CC0), הנעת השלד מפוזות הקטלוג (PoseRig), ערכות בגדים (צביעת הטקסטורה),
+// וסצנות מוכנות (חדר, אצטדיון, מסלול). משמש את מסך התרגיל (3d/), את חגיגת השיא (games/celebrate3d.js) ובעתיד את משחקי הספורט.
+import * as THREE from '../3d/lib/three.module.min.js';
+import { FBXLoader } from '../3d/lib/loaders/FBXLoader.js';
+
+export { THREE };
+export const SCALE = 68 / 111; // רגל תלת-ממד (111 יחידות) = רגל דו-ממד (68), כך שהדמות בקנה מידה של פוזות הקטלוג
+export const hasWebGL = () => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; } };
+
+// ---- ערכות: צובעים את אזורי החולצה והמכנסיים בטקסטורה של Kenney (1024x1024: חולצה משמאל למטה, מכנסיים מימין למטה) ----
+export const KITS3D = {
+  maccabi: { name: 'מכבי חיפה', shirt: '#0B7A3B', shirt2: '#0A6A34', shorts: '#F4F4F4', number: '7', numberColor: '#FFFFFF', stripe: null },
+  israel: { name: 'ישראל', shirt: '#1D4ED8', shirt2: '#1E40AF', shorts: '#F4F4F4', number: '10', numberColor: '#FFFFFF' },
+  keeper: { name: 'שוער', shirt: '#F59E0B', shirt2: '#D97706', shorts: '#111827', number: '1', numberColor: '#111827' },
+  grey: { name: 'אפור', shirt: '#9CA3AF', shirt2: '#6B7280', shorts: '#374151', number: '', numberColor: '#fff' },
+  red: { name: 'אדום', shirt: '#DC2626', shirt2: '#B91C1C', shorts: '#F4F4F4', number: '9', numberColor: '#fff' },
+  orange: { name: 'כתום', shirt: '#F97316', shirt2: '#EA580C', shorts: '#111827', number: '11', numberColor: '#fff' },
+};
+let baseSkin = null;
+const skinUrl = new URL('../3d/model/skaterMaleA.png', import.meta.url).href;
+export function loadBaseSkin() { return baseSkin || (baseSkin = new Promise((res, rej) => { const im = new Image(); im.crossOrigin = 'anonymous'; im.onload = () => res(im); im.onerror = rej; im.src = skinUrl; })); }
+export async function kitTexture(kit = KITS3D.maccabi) {
+  const im = await loadBaseSkin(); const c = document.createElement('canvas'); c.width = c.height = 1024; const g = c.getContext('2d');
+  g.drawImage(im, 0, 0, 1024, 1024);
+  // חולצה: הבד המרכזי 155..485 x 490..1024, פסי צד לבנים 45..155 ו-485..600 נשארים (שרוולים), הגלגולת מתכסה
+  g.fillStyle = kit.shirt; g.fillRect(150, 488, 340, 536);
+  g.fillStyle = kit.shirt2; g.fillRect(150, 488, 340, 26); // צווארון כהה
+  if (kit.stripe) { g.fillStyle = kit.stripe; for (let x = 170; x < 480; x += 64) g.fillRect(x, 514, 22, 510); }
+  // המספר על הגב (האזור הזה ממופה לגב, במראה, לכן מציירים הפוך כדי שייקרא נכון)
+  if (kit.number) { g.save(); g.translate(320, 720); g.scale(-1, 1); g.fillStyle = kit.numberColor; g.font = '900 150px Heebo, Arial Black, Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(kit.number, 0, 0); g.restore(); }
+  // מכנסיים: 612..1024 x 762..1024
+  g.fillStyle = kit.shorts; g.fillRect(612, 762, 412, 262);
+  g.fillStyle = 'rgba(0,0,0,.18)'; g.fillRect(612, 890, 412, 14); // חגורה
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.flipY = true; return t;
+}
+
+// ---- המודל ----
+let fbxText = null;
+async function fbxBuffer() {
+  if (!fbxText) fbxText = import('../3d/model/character.js').then(m => { const bin = atob(m.FBX_B64), buf = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i); return buf.buffer; });
+  return fbxText;
+}
+// דמות חדשה (כל קריאה = עותק עצמאי עם שלד משלו). מחזיר { model, rig, mesh, setKit }
+export async function loadCharacter(kit = KITS3D.maccabi) {
+  const [buf, tex] = await Promise.all([fbxBuffer(), kitTexture(kit)]);
+  const model = new FBXLoader().parse(buf, ''); model.scale.setScalar(SCALE);
+  let mesh = null;
+  model.traverse(o => { if (o.isMesh) { mesh = o; o.castShadow = true; o.frustumCulled = false; o.material = new THREE.MeshStandardMaterial({ map: tex, roughness: .85, metalness: 0 }); } });
+  const rig = new PoseRig(model);
+  return { model, rig, mesh, async setKit(k) { mesh.material.map = await kitTexture(k); mesh.material.needsUpdate = true; } };
+}
+
+// ---- מניע השלד מפוזות דו-ממד ----
+const _q = new THREE.Quaternion(), _pq = new THREE.Quaternion(), _v = new THREE.Vector3(), _w = new THREE.Vector3();
+const PAIRS = [['Hips', 'Spine'], ['Spine', 'Chest'], ['Chest', 'UpperChest'], ['UpperChest', 'Neck'], ['Neck', 'Head'], ['LeftUpLeg', 'LeftLeg'], ['LeftLeg', 'LeftFoot'], ['RightUpLeg', 'RightLeg'], ['RightLeg', 'RightFoot'], ['LeftArm', 'LeftForeArm'], ['LeftForeArm', 'LeftHand'], ['RightArm', 'RightForeArm'], ['RightForeArm', 'RightHand'], ['LeftFoot', 'LeftToes'], ['RightFoot', 'RightToes']];
+export class PoseRig {
+  constructor(model) {
+    this.model = model; this.b = {}; model.traverse(o => { if (o.isBone) this.b[o.name] = o; });
+    model.updateMatrixWorld(true); this.rest = {};
+    for (const [a, c] of PAIRS) { const A = this.b[a], C = this.b[c]; if (!A || !C) continue; A.getWorldPosition(_v); C.getWorldPosition(_w); this.rest[a] = { dir: _w.sub(_v).normalize().clone(), q: A.getWorldQuaternion(new THREE.Quaternion()) }; }
+    this.b.Hips.getWorldPosition(_v); this.hipsRest = _v.clone(); this.qmInv = new THREE.Quaternion();
+  }
+  // מסובב עצם כך שהכיוון אל הילד שלו יהיה dir במערכת המודל (הדמות פונה +Z), בסיבוב המינימלי מכיוון המנוחה
+  aim(name, dir) {
+    const bone = this.b[name], r = this.rest[name]; if (!bone || !r || dir.lengthSq() < 1e-6) return;
+    _q.setFromUnitVectors(r.dir, _v.copy(dir).normalize()); _q.multiply(r.q);
+    bone.parent.updateWorldMatrix(true, false); bone.parent.getWorldQuaternion(_pq); _pq.premultiply(this.qmInv).invert();
+    bone.quaternion.copy(_pq.multiply(_q));
+  }
+  // pose: פוזה מהקטלוג (200x200, רצפה 182). front: מבט מלפנים (u,v,0), אחרת מהצד (0,v,u). at: מיקום כפות הרגליים בעולם (ברירת מחדל: לפי הפוזה)
+  apply(pose, front, at = null) {
+    this.model.updateWorldMatrix(true, false); this.model.getWorldQuaternion(this.qmInv).invert();
+    const P = ([x, y]) => front ? new THREE.Vector3(x - 100, 182 - y, 0) : new THREE.Vector3(0, 182 - y, x - 100);
+    const d = (a, b) => P(b).sub(P(a));
+    const L = front ? 'Right' : 'Left', R = front ? 'Left' : 'Right';
+    const hipW = P(pose.hip).applyQuaternion(this.model.quaternion), off = this.hipsRest.clone().applyQuaternion(this.model.quaternion);
+    const base = at || new THREE.Vector3();
+    this.model.position.set(base.x + hipW.x - off.x, base.y + hipW.y - off.y, base.z + hipW.z - off.z);
+    const torso = d(pose.hip, pose.neck);
+    this.aim('Hips', torso); this.aim('Spine', torso); this.aim('Chest', torso); this.aim('UpperChest', torso);
+    this.aim('Neck', d(pose.neck, pose.head));
+    this.aim(L + 'UpLeg', d(pose.hip, pose.lk)); this.aim(L + 'Leg', d(pose.lk, pose.lf));
+    this.aim(R + 'UpLeg', d(pose.hip, pose.rk)); this.aim(R + 'Leg', d(pose.rk, pose.rf));
+    this.aim(L + 'Arm', d(pose.neck, pose.le)); this.aim(L + 'ForeArm', d(pose.le, pose.lh));
+    this.aim(R + 'Arm', d(pose.neck, pose.re)); this.aim(R + 'ForeArm', d(pose.re, pose.rh));
+    const flat = new THREE.Vector3(0, -0.2, 1); this.aim('LeftFoot', flat); this.aim('RightFoot', flat);
+    // תיקון רצפה: כשיש כף רגל או יד על הרצפה בפוזה, הנקודה הנמוכה נוגעת בגובה הבסיס
+    this.model.updateMatrixWorld(true);
+    const onFloor = Math.max(pose.lf[1], pose.rf[1]) >= 178 || Math.max(pose.lh[1], pose.rh[1]) >= 178;
+    if (onFloor) { let minY = Infinity; for (const n of ['LeftToes', 'RightToes', 'LeftFoot', 'RightFoot', 'LeftHand', 'RightHand']) { const b = this.b[n]; if (!b) continue; b.getWorldPosition(_v); if (_v.y < minY) minY = _v.y; } this.model.position.y -= minY - base.y; this.model.updateMatrixWorld(true); }
+  }
+}
+
+// ---- תאורה וסצנות ----
+export function lights(scene, { sun = 2.2, sky = '#ffffff', ground = '#b9a7ff' } = {}) {
+  scene.add(new THREE.HemisphereLight(sky, ground, 1.1));
+  const s = new THREE.DirectionalLight('#fff7e6', sun); s.position.set(160, 320, 220); s.castShadow = true; s.shadow.mapSize.set(2048, 2048);
+  Object.assign(s.shadow.camera, { left: -500, right: 500, top: 500, bottom: -200, near: 50, far: 1400 }); s.shadow.bias = -0.0005; scene.add(s); return s;
+}
+// חדר: קיר, פנל, פרקט
+export function room(scene, dark = false) {
+  scene.background = new THREE.Color(dark ? '#1F1C38' : '#E9E3FF'); scene.fog = new THREE.Fog(scene.background, 600, 1100);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(1600, 1600), new THREE.MeshStandardMaterial({ color: dark ? '#6B5340' : '#E7D6BC', roughness: .95 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+  for (let x = -800; x < 800; x += 46) { const m = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1600), new THREE.MeshBasicMaterial({ color: dark ? '#4B3A2C' : '#CDB79A' })); m.rotation.x = -Math.PI / 2; m.position.set(x, .2, 0); scene.add(m); }
+  const wall = new THREE.Mesh(new THREE.PlaneGeometry(1600, 700), new THREE.MeshStandardMaterial({ color: dark ? '#2B2553' : '#F1ECFF', roughness: 1 })); wall.position.set(0, 350, -280); scene.add(wall);
+  const base = new THREE.Mesh(new THREE.BoxGeometry(1600, 8, 6), new THREE.MeshStandardMaterial({ color: '#D9D2F2' })); base.position.set(0, 4, -278); scene.add(base);
+}
+// כדורגל: כדור עם מחומשים (טקסטורה מצוירת)
+export function soccerBallMesh(r = 12) {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 128; const g = c.getContext('2d');
+  g.fillStyle = '#f8fafc'; g.fillRect(0, 0, 256, 128); g.fillStyle = '#111827';
+  const pent = (x, y, s) => { g.beginPath(); for (let k = 0; k < 5; k++) { const a = -Math.PI / 2 + k * Math.PI * 2 / 5; g.lineTo(x + Math.cos(a) * s, y + Math.sin(a) * s); } g.closePath(); g.fill(); };
+  for (let i = 0; i < 4; i++) { pent(32 + i * 64, 40, 14); pent(64 + i * 64, 96, 14); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  const m = new THREE.Mesh(new THREE.SphereGeometry(r, 24, 16), new THREE.MeshStandardMaterial({ map: t, roughness: .6 })); m.castShadow = true; return m;
+}
+// קהל: גופים וראשים כמופעים (instanced), קופץ כשמתרגש
+export function crowd(scene, { count = 120, x0 = -600, x1 = 600, z = -760, y = 40, rows = 3, rowDz = 40, rowDy = 34, seed = 1 } = {}) {
+  const body = new THREE.InstancedMesh(new THREE.BoxGeometry(22, 34, 16), new THREE.MeshStandardMaterial({ roughness: .9 }), count);
+  const head = new THREE.InstancedMesh(new THREE.SphereGeometry(9, 10, 8), new THREE.MeshStandardMaterial({ roughness: .8 }), count);
+  const fans = []; const colors = ['#0B7A3B', '#ffffff', '#0B7A3B', '#FDE047', '#1E3A8A', '#EF4444', '#0EA5E9', '#F472B6']; const skins = ['#F1C27D', '#E0AC69', '#C68642', '#8D5524'];
+  let s = seed; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+  const per = Math.ceil(count / rows);
+  for (let i = 0; i < count; i++) { const r = Math.floor(i / per), j = i % per; fans.push({ x: x0 + (j + (r % 2) * .5 + rnd() * .3) * ((x1 - x0) / per), y: y + r * rowDy, z: z - r * rowDz, ph: rnd() * 6.28, c: new THREE.Color(colors[Math.floor(rnd() * colors.length)]), sk: new THREE.Color(skins[Math.floor(rnd() * skins.length)]) }); body.setColorAt(i, fans[i].c); head.setColorAt(i, fans[i].sk); }
+  scene.add(body); scene.add(head);
+  const M = new THREE.Matrix4();
+  const update = (t, excited) => { fans.forEach((f, i) => { const jump = excited && Math.sin(t * 9 + f.ph) > 0 ? 12 : 0; M.makeTranslation(f.x, f.y + jump + 17, f.z); body.setMatrixAt(i, M); M.makeTranslation(f.x, f.y + jump + 44, f.z); head.setMatrixAt(i, M); }); body.instanceMatrix.needsUpdate = true; head.instanceMatrix.needsUpdate = true; };
+  update(0, false); return { update, body, head };
+}
+// קונפטי: נקודות צבעוניות שנופלות
+export function confetti(scene, n = 300) {
+  const g = new THREE.BufferGeometry(), pos = new Float32Array(n * 3), col = new Float32Array(n * 3), vel = [];
+  const cs = [[.96, .32, .38], [.99, .87, .28], [.13, .73, .45], [.24, .5, .95], [.98, .98, .98]];
+  for (let i = 0; i < n; i++) { const c = cs[i % cs.length]; col.set(c, i * 3); pos.set([0, -1000, 0], i * 3); vel.push([0, 0, 0]); }
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  const pts = new THREE.Points(g, new THREE.PointsMaterial({ size: 9, vertexColors: true, sizeAttenuation: true })); scene.add(pts);
+  let on = false;
+  return { start(x, y, z, spread = 300) { on = true; for (let i = 0; i < n; i++) { pos.set([x + (Math.random() - .5) * spread, y + Math.random() * 200, z + (Math.random() - .5) * spread * .5], i * 3); vel[i] = [(Math.random() - .5) * 60, -60 - Math.random() * 90, (Math.random() - .5) * 40]; } g.attributes.position.needsUpdate = true; },
+    update(dt) { if (!on) return; for (let i = 0; i < n; i++) { const k = i * 3; if (pos[k + 1] < 0) continue; pos[k] += vel[i][0] * dt; pos[k + 1] += vel[i][1] * dt; pos[k + 2] += vel[i][2] * dt; pos[k] += Math.sin(pos[k + 1] * .05 + i) * 30 * dt; } g.attributes.position.needsUpdate = true; } };
+}
+// מנוע רינדור על קנבס נתון
+export function makeRenderer(canvas, w, h) {
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false }); renderer.setSize(w, h, false); renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.outputColorSpace = THREE.SRGBColorSpace; return renderer;
+}
