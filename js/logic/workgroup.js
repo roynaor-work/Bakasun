@@ -59,11 +59,21 @@ export function resolveNames(names, people) {
         if (n <= words.length - i && k.key.every((w, j) => w === words[i + j]) && n > len) { best = k; len = n; }
         else if (!best && k.key[0].length >= 3 && k.key[0] === words[i]) { best = k; len = 1; }
       });
+      // the recognizer garbles foreign names ("ירז'ני" for "וירג'יני"): the closest known first name, when it is close enough
+      if (!best) { let d0 = 99; known.forEach(k => { const f = k.key[0]; if (f.length < 4) return; const d = editDistance(f, words[i]); if (d < d0 && d <= allowedDistance(f, words[i])) { d0 = d; best = k; len = 1; } }); }
       if (best) { push(raw.slice(i, i + len).join(' '), best); i += len; }
       else { push(raw[i], null); i += 1; }
     }
   });
   return members;
+}
+
+const allowedDistance = (a, b) => { const n = Math.max(a.length, b.length); return n >= 7 ? 3 : n >= 5 ? 2 : n >= 4 ? 1 : 0; };
+export function editDistance(a, b) {
+  const m = a.length, n = b.length; if (!m) return n; if (!n) return m;
+  let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  for (let i = 1; i <= m; i++) { const cur = [i]; for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); prev = cur; }
+  return prev[n];
 }
 
 const OPTION = [

@@ -21,6 +21,13 @@ test('the event and the separators: "for Shoval with Dana, Rotem and Marina"; En
   assert.deepEqual(splitNames('ערן, משה חיים דוד וערן'), ['ערן', 'משה חיים דוד']);
 });
 
+test('a garbled foreign name still finds the person: "ירז\'ני" is Virginie', () => {
+  const people = [{ label: 'וירג׳יני מנדל', names: ['וירג׳יני מנדל'], phone: '054-4974644', about: 'team', id: 'v' }, { label: 'רותם', names: ['רותם'], about: 'staff', id: 'r' }];
+  const m = resolveNames(["ירז'ני"], people);
+  assert.equal(m[0].name, 'וירג׳יני מנדל'); assert.equal(m[0].phone, '054-4974644');
+  assert.equal(resolveNames(['דוד'], people)[0].known, false);
+});
+
 test('her answer to "how?": whatsapp, mail, brief, tasks, or add someone', () => {
   assert.equal(groupOption('וואטסאפ'), 'wa'); assert.equal(groupOption('במייל'), 'mail'); assert.equal(groupOption('תדריך'), 'brief'); assert.equal(groupOption('משימות לכולם'), 'tasks');
   assert.deepEqual(groupOption('תוסיפי את דנה לקבוצה'), { add: 'דנה' }); assert.equal(groupOption('מה חסר לשובל'), null);
