@@ -117,9 +117,10 @@ sport.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀',
     let SX = 0, SZ = 0; const place = () => { const dist = Math.min(640, 450 + (level - 1) * 60), a = level >= 2 ? r.pick([-1, 1]) * r.rnd(.25, .8) : 0; SX = Math.sin(a) * dist; SZ = rim.z + Math.cos(a) * dist; };
     place();
     const faceRim = () => Math.atan2(rim.x - SX, rim.z - SZ);
-    const hand = new THREE.Vector3(), hl = new THREE.Vector3(), hr = new THREE.Vector3();
+    const hand = new THREE.Vector3(), hl = new THREE.Vector3(), hr = new THREE.Vector3(); let holdLat = .5; /* פתיחת הידיים לצדדים: מתכווננת כל פריים כך שהמרחק בין כפות הידיים = קוטר הכדור (הידיים מחזיקות את הכדור משני צדדיו) */
     const handPos = () => { if (hero && !ball.fly) { (hero.rig.b.LeftHandIndex1 || hero.rig.b.LeftHand).getWorldPosition(hl); (hero.rig.b.RightHandIndex1 || hero.rig.b.RightHand).getWorldPosition(hr); hand.lerpVectors(hl, hr, .5); hand.y += 3; } else hand.set(SX, 150, SZ); return hand; }; /* הכדור בין כפות הידיים (עצמות האצבעות), לא צף לפניהן */
     const rel = new THREE.Vector3(); const relPt = () => { const fr = faceRim(); return rel.set(SX + Math.sin(fr) * 22, 206, SZ + Math.cos(fr) * 22); }; /* נקודת השחרור: מעל הראש, מעט קדימה */
+    const HOLD = { ...SHOT.hold, le: [108, 98], lh: [122, 94], re: [110, 100], rh: [124, 96] }; /* אחיזה מול החזה, קדימה (ולא במותן כמו בחגיגה): מהמצלמה הצדדית רואים את הכדור בין הידיים */
     const REL_T = .62; let pending = null; /* הכוח שנבחר בנגיעה; השיגור קורה בשיא תנועת הזריקה */
     const ball = { p: new THREE.Vector3(), v: new THREE.Vector3(), fly: false, rimHit: false, scored: false, bounces: 0, rot: 0 };
     const speedFor = p => V0 + p * V1;
@@ -129,7 +130,7 @@ sport.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀',
     const shoot = () => { if (ball.fly || waitT > 0 || pending) return; const ideal = idealP(), diff = Math.abs(ph - ideal); let p = ph; perfect = diff < .05;
       if (perfect) p = ideal; /* ירוק = קולעים */ else if (diff < .11 && Math.random() < .5) p = ideal; /* קרוב לירוק = הגרלה */
       pending = { p }; shotT = 0; /* הדמות יורדת, עולה, ומשחררת בשיא (REL_T) */ if (perfect) { const [px, py] = L.project(SX, 190, SZ); r.pop('מושלם!', px, py - 30, r.C.gold, 20); } };
-    const miss = () => { misses++; streak = 0; fire = false; r.sfx('ohh'); if (misses >= 5) return r.over('5 החטאות'); r.pop(`החטאה ${misses}/5`, r.W / 2, 120, '#f87171', 18); waitT = .8; };
+    const miss = () => { if (ball.judged) return; ball.judged = true; /* החטאה אחת לזריקה (רועי: "אחרי זריקה אחת פוסל 5 מיד": כל קפיצה על הרצפה נספרה) */ misses++; streak = 0; fire = false; r.sfx('ohh'); if (misses >= 5) return r.over('5 החטאות'); r.pop(`החטאה ${misses}/5`, r.W / 2, 120, '#f87171', 18); waitT = .8; };
     const meterSpeed = () => .55 + Math.min(.6, (level - 1) * .12);
     const rimProj = () => L.project(rim.x, rim.y, rim.z);
     return {
@@ -138,9 +139,9 @@ sport.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀',
       dispose() { L.dispose(); },
       peek() { return { canShoot: !ball.fly && waitT <= 0 && !pending, p: ph, ideal: idealP() }; },
       update(dt) { tt += dt;
-        /* מצלמה מעל הכתף מאחור-מהצד של הזורק, רואים גם את הסל */ const fr = faceRim(); /* מעל הכתף: מאחור (400) ומהצד (260) כדי שהכדור בידיים ייראה */ cam.position.set(SX - Math.sin(fr) * 400 + Math.cos(fr) * 260, 280, SZ - Math.cos(fr) * 400 - Math.sin(fr) * 260); cam.lookAt(rim.x * .55 + SX * .45, 200, rim.z * .55 + SZ * .45);
+        /* מצלמה מעל הכתף מאחור-מהצד של הזורק, רואים גם את הסל */ const fr = faceRim(); /* מעל הכתף: מאחור (400) ומהצד (260) כדי שהכדור בידיים ייראה */ cam.position.set(SX - Math.sin(fr) * 300 + Math.cos(fr) * 360, 250, SZ - Math.cos(fr) * 300 - Math.sin(fr) * 360); cam.lookAt(rim.x * .4 + SX * .6, 180, rim.z * .4 + SZ * .6); /* יותר מהצד (360) ופחות מאחור (300): הכדור במותן נראה בפרופיל ולא מוסתר על ידי הגב (רועי: "לא נראה כאילו הוא מחזיק את הכדור") */
         if (w) w.fans.update(tt, streak > 0 && tt % 1 < .5 && ball.scored);
-        if (pending && shotT >= REL_T) { launch(pending.p, ball); pending = null; ball.fly = true; ball.rimHit = false; ball.scored = false; ball.bounces = 0; r.sfx('jump'); }
+        if (pending && shotT >= REL_T) { launch(pending.p, ball); pending = null; ball.fly = true; ball.rimHit = false; ball.scored = false; ball.judged = false; ball.bounces = 0; r.sfx('jump'); }
         if (waitT > 0) { waitT -= dt; if (waitT <= 0) { place(); ball.fly = false; shotT = -1; pending = null; } }
         else if (!ball.fly && !pending) { ph += dir * meterSpeed() * 2 * dt; if (ph > 1) { ph = 1; dir = -1; } if (ph < 0) { ph = 0; dir = 1; } }
         if (shotT >= 0) shotT += dt;
@@ -148,14 +149,15 @@ sport.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀',
           /* לוח */ if (ball.p.z - BALL_R < HZ - 17 && ball.v.z < 0 && Math.abs(ball.p.x - rim.x) < 85 && ball.p.y > rim.y - 20 && ball.p.y < rim.y + 85) { ball.p.z = HZ - 17 + BALL_R; ball.v.z = -ball.v.z * .6; ball.rimHit = true; r.sfx('wood'); }
           /* טבעת */ if (ball.v.y < 0 && py >= rim.y && ball.p.y < rim.y) { const d = Math.hypot(ball.p.x - rim.x, ball.p.z - rim.z); if (d < RIM_R - 6 && !ball.scored) { ball.scored = true; streak++; baskets++; if (w) w.shake(1); const swish = !ball.rimHit; const pts = (swish ? 30 : 20) + Math.min(streak - 1, 3) * 5 + (fire ? 10 : 0) + (perfect ? 10 : 0); r.addScore(pts); const [px, py2] = rimProj(); r.pop(swish ? `סוויש! +${pts}` : `+${pts}`, px, py2 - 50, '#FDE047', 26); r.burst(px, py2, '#F97316', 18); r.sparkle(px, py2, 30, swish ? 10 : 4); r.sfx(swish ? 'score' : 'bounce'); if (streak >= 3 && !fire) { fire = true; r.pop('הכדור בוער! 🔥', r.W / 2, 100, '#f97316', 24); r.sfx('roar'); } if (baskets % 5 === 0) { level++; r.pop(`רמה ${level}! רחוק יותר, מד מהיר יותר`, r.W / 2, 160, r.C.gold, 22); r.sfx('levelup'); } ball.v.multiplyScalar(.25); waitT = 1.1; }
             else if (d < RIM_R + BALL_R && d >= RIM_R - 6) { const nx = (ball.p.x - rim.x) / (d || 1), nz = (ball.p.z - rim.z) / (d || 1); ball.p.y = rim.y + 1; ball.v.y = Math.max(60, -ball.v.y * .45); ball.v.x += nx * 220; ball.v.z += nz * 220; ball.rimHit = true; r.sfx('metal'); } }
-          if (shotT > 7) { if (!ball.scored) { const res = miss(); if (res !== undefined) return res; } else waitT = .3; } /* בטיחות: זריקה שלא הסתיימה */
+          if (shotT > 7 && !ball.judged) { if (!ball.scored) { const res = miss(); if (res !== undefined) return res; } else waitT = .3; } /* בטיחות: זריקה שלא הסתיימה */
           /* רצפה */ if (ball.p.y < BALL_R && ball.v.y < 0) { ball.p.y = BALL_R; ball.v.y = -ball.v.y * .55; ball.v.x *= .8; ball.v.z *= .8; ball.bounces++; const [px, py2] = L.project(ball.p.x, 0, ball.p.z); r.puff(px, py2, 14, 2); r.sfx('bounce'); if (!ball.scored && (ball.bounces >= 3 || Math.abs(ball.v.y) < 60)) { const res = miss(); if (res !== undefined) return res; } }
-          if (ball.p.z > SZ + 400 || Math.abs(ball.p.x) > 1200 || ball.p.z < HZ - 600) { if (!ball.scored) { const res = miss(); if (res !== undefined) return res; } else waitT = .3; }
+          if (!ball.judged && (ball.p.z > SZ + 400 || Math.abs(ball.p.x) > 1200 || ball.p.z < HZ - 600)) { if (!ball.scored) { const res = miss(); if (res !== undefined) return res; } else waitT = .3; }
           if (fire && Math.random() < .5) { const [px, py2] = L.project(ball.p.x, ball.p.y, ball.p.z); r.explode(px, py2 + 6, 12, 1); } }
         /* הדמות: אחיזה נמוכה בזמן הכיוון; בזריקה ירידה → שחרור → מעקב → נחיתה */
         /* כמו בחגיגת השלוש: אחיזה במותן → ירידה → עלייה ושחרור מעל הראש → מעקב → נחיתה */
-        if (hero) { hero.model.rotation.y = fr; const pos = new THREE.Vector3(SX, 0, SZ); let tp = SHOT.hold, sp = 6; if (shotT >= 0) { if (shotT < .3) { tp = SHOT.dip; sp = 12; } else if (shotT < REL_T + .12) { tp = SHOT.release; pos.y = Math.max(0, Math.sin((shotT - .3) / .5 * Math.PI)) * 26; sp = 16; } else if (shotT < 1.15) { tp = SHOT.follow; pos.y = Math.max(0, Math.sin((shotT - .3) / .5 * Math.PI)) * 26; } else tp = SHOT.land; } pose(hero, tp, false, pos, dt, sp); }
-        if (ballM) { if (!ball.fly) { const h = handPos(); ballM.position.copy(h); ballM.position.x += Math.sin(fr) * 5; ballM.position.z += Math.cos(fr) * 5; } else { ballM.position.copy(ball.p); ballM.rotation.x = ball.rot; } if (shadow) shadow(ballM); }
+        if (hero) { hero.model.rotation.y = fr; const pos = new THREE.Vector3(SX, 0, SZ); let tp = HOLD, sp = 6; if (shotT >= 0) { if (shotT < .3) { tp = SHOT.dip; sp = 12; } else if (shotT < REL_T + .12) { tp = SHOT.release; pos.y = Math.max(0, Math.sin((shotT - .3) / .5 * Math.PI)) * 26; sp = 16; } else if (shotT < 1.15) { tp = SHOT.follow; pos.y = Math.max(0, Math.sin((shotT - .3) / .5 * Math.PI)) * 26; } else tp = SHOT.land; } pose(hero, { ...tp, lat: holdLat }, false, pos, dt, sp);
+          if (!ball.fly && hero.rig.b.LeftHandIndex1 && hero.rig.b.RightHandIndex1) { hero.rig.b.LeftHandIndex1.getWorldPosition(hl); hero.rig.b.RightHandIndex1.getWorldPosition(hr); const sep = hl.distanceTo(hr); if (sep > 1) holdLat = r.clamp(holdLat * r.clamp((2 * BALL_R + 6) / sep, .85, 1.15), .1, 1.2); } }
+        if (ballM) { if (!ball.fly) { const h = handPos(); ballM.position.copy(h); } else { ballM.position.copy(ball.p); ballM.rotation.x = ball.rot; } if (shadow) shadow(ballM); }
         L.render(); },
       draw() { const c = r.ctx; c.clearRect(0, 0, r.W, r.H);
         if (!L.ok) { /* בלי WebGL: רקע פשוט וצורות במקום הסצנה */ const bg = c.createLinearGradient(0, 0, 0, r.H); bg.addColorStop(0, '#1e1b4b'); bg.addColorStop(1, '#4c1d95'); c.fillStyle = bg; c.fillRect(0, 0, r.W, r.H); const [rx, ry] = rimProj(); c.strokeStyle = '#f97316'; c.lineWidth = 5; c.beginPath(); c.ellipse(rx, ry, 24, 7, 0, 0, Math.PI * 2); c.stroke(); const bp = ball.fly ? ball.p : handPos(); const [bx, by] = L.project(bp.x, bp.y, bp.z); SP.basketBall(r, bx, by, 14, ball.rot); }
