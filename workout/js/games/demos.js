@@ -100,7 +100,7 @@ export const DEMOS = {
     else if (m.phase === 1 && t >= m.at) { const dx = P.hole[0] - P.ball.x, dy = P.hole[1] - P.ball.y, L = Math.hypot(dx, dy); const pull = Math.min(140, L * .55); ctl.moveTo(P.ball.x - dx / L * pull, P.ball.y - dy / L * pull); m.phase = 2; m.at = t + .5; }
     else if (m.phase === 2 && t >= m.at) { ctl.release(); m.phase = 0; } },
   bowling(t, game, ctl, r) { captions(ctl, t, [[0, 'נגיעה 1: הסמן זז, עוצרים באמצע'], [3, 'נגיעה 2: כוח, באמצע הירוק'], [6, 'נגיעה 3: זווית, כשהחץ ישר'], [9.5, 'סטרייק = כל העשרה בגלגול אחד!']]);
-    const P = game.peek(); if (P.step === 'mode') { if (every(ctl, 'mode', 1, t)) ctl.tap(r.W / 2, P.modeY); return; } if (P.canRoll && P.good && every(ctl, 'tap', .6, t)) ctl.tap(r.W / 2, r.H * .7); },
+    const P = game.peek(); if (P.canRoll && P.good && every(ctl, 'tap', .6, t)) ctl.tap(r.W / 2, r.H * .7); },
 };
 export const DEMO_TOP = new Set(['breakout', 'pong', 'pinball', 'runner', 'frogger', 'juggle', 'bowling']); /* כתוביות למעלה */
 export const DEMO_DUR = { tetris: 13, snake: 11, penalty: 12, keeper: 12, moles: 12, flappy: 12, breakout: 13, pong: 12, pinball: 12, invaders: 12, asteroids: 12, runner: 12, frogger: 13, 'dots-maze': 12, doodle: 12, gems: 13, juggle: 12, 'bubble-shooter': 13, basketball: 13, golf: 13, bowling: 13 };
