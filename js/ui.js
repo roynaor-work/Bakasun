@@ -81,6 +81,43 @@ export async function copyText(text) {
   }
 }
 
+/* Roy's rule (30/09/2026): everything that can be copied has a copy button.
+   copyBtn(text)            a small "copy" button with the text baked in.
+   copyBtn(text, {icon:1})  the tiny icon next to a phone number or an e-mail on a card.
+   copyOf(selector)         copies what is in a textarea / input (its current value) or the text of any element,
+                            looked up from the button outwards, so the same selector works inside a dialog.
+   One click handler on the document serves every [data-copy] / [data-copy-of], including dialogs built later. */
+const COPY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+function copyMarkup(attr, val, opts) {
+  opts = opts || {};
+  const label = opts.label || t('copy');
+  if (opts.icon) return `<button type="button" class="copyq" ${attr}="${esc(val)}" aria-label="${esc(label)}" title="${esc(label)}">${COPY_ICON}</button>`;
+  return `<button type="button" class="btn ${opts.sm === false ? '' : 'sm '}ghost" ${attr}="${esc(val)}">${esc(label)}</button>`;
+}
+export function copyBtn(text, opts) { return copyMarkup('data-copy', text == null ? '' : String(text), opts); }
+export function copyOf(selector, opts) { return copyMarkup('data-copy-of', selector, opts); }
+/** The text a [data-copy] / [data-copy-of] button stands for. */
+export function copyTarget(btn) {
+  if (btn.dataset.copyOf) {
+    const sel = btn.dataset.copyOf; let el = null;
+    for (let p = btn.parentElement; p && !el; p = p.parentElement) { try { el = p.querySelector(sel); } catch (e) { return ''; } }
+    if (!el) el = document.querySelector(sel);
+    if (!el) return '';
+    return 'value' in el && /^(TEXTAREA|INPUT|SELECT)$/.test(el.tagName) ? el.value : (el.innerText || el.textContent || '');
+  }
+  return btn.dataset.copy || '';
+}
+/** Kept for screens that want to be explicit; the document-level handler below already covers everything. */
+export function wireCopy(root) { (root || document).querySelectorAll('[data-copy],[data-copy-of]').forEach(b => { b.type = 'button'; }); }
+if (typeof document !== 'undefined' && !document.__bakasunCopy) {
+  document.__bakasunCopy = true;
+  document.addEventListener('click', e => {
+    const b = e.target && e.target.closest ? e.target.closest('[data-copy],[data-copy-of]') : null; if (!b) return;
+    e.preventDefault();
+    copyText(String(copyTarget(b)).trim());
+  });
+}
+
 export function fmtDate(d) { return Office.fmt(d); }
 export function relDay(d) {
   const n = Office.daysBetween(new Date(), d);

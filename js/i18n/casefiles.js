@@ -1,2 +1,57 @@
 /* Texts of the casefiles module: he / fr / en. No Arabic letters anywhere. */
-export const CASEFILES = { he: {}, fr: {}, en: {} };
+export const CASEFILES = {
+  he: {
+    tFiles: 'קבצים', cfTitle: 'קבצי האירוע', cfAll: 'כל הקבצים', cfAdd: '+ קובץ', cfSnap: 'צילום', cfDrop: 'אפשר גם לגרור קבצים לכאן.',
+    cfEmpty: 'אין עדיין קבצים לאירוע הזה. הצעות מחיר, חוזים, תפריטים, אישורים ותמונות נשמרים כאן.', cfNone: 'אין קבצים.', cfNoMatch: 'אין קבצים שמתאימים לחיפוש.',
+    cfSearchPh: 'חיפוש: שם, הערה, לקוח, ספק', cfSynced: 'מסונכרן', cfLocal: 'מקומי בלבד', cfLocalType: 'במכשיר בלבד (הענן מקבל רק תמונות ו-PDF עד 15MB)',
+    cfCloudOff: 'לא מחוברת לענן: הקבצים נשמרים במכשיר הזה ויעלו כשתתחברי.', cfCloudPending: '{n} קבצים עדיין לא עלו לענן.',
+    cfNoPreview: 'אין תצוגה לסוג הקובץ הזה, הקובץ יורד.', cfDownload: 'הורדה', cfShare: 'שיתוף', cfEdit: 'עריכה', cfOpen: 'פתיחה',
+    cfName: 'שם הקובץ', cfKind: 'סוג המסמך', cfNote: 'הערה', cfTags: 'תגיות (מופרדות בפסיק)', cfNoSupplier: 'בלי ספק',
+    cfSaved: 'הקובץ נשמר', cfSavedN: '{n} קבצים נשמרו', cfReading: 'קוראת את הקובץ...', cfDeleted: 'הקובץ נמחק מהמכשיר',
+    cfDeleteQ: 'למחוק את "{name}"? העותק במכשיר יימחק. עותק שכבר עלה לענן נשאר שם.',
+    cfMailTo: 'למי', cfMailSubject: 'נושא', cfMailText: 'טקסט', cfMailHint: 'הקובץ לא מצורף למייל לבד: אחרי שהמייל נפתח מצרפים אותו מהטלפון, או משתפים דרך "שיתוף" ובוחרים ג׳ימייל.',
+    cfMailBody: 'היי,\nמצורף {file} עבור {event}.\nתודה,',
+    cfWaHint: 'הטלפון לא פתח את חלון השיתוף עם הקובץ. הקובץ הורד: לצרף אותו בצ׳אט בוואטסאפ.',
+    cfMissing: 'מה חסר במסמכים', cfMissingOk: 'כל המסמכים הצפויים נמצאים.', cfAddMissing: 'להוסיף',
+    mkVenueContract: 'חוזה עם המקום: {who}', mkInsurance: 'אישור ביטוח למקום: {who}', mkMenu: 'תפריט מ{who}', mkQuote: 'הצעת מחיר מ{who}', mkClientContract: 'הסכם חתום עם הלקוח ({who})',
+    cfPickCase: 'לאיזה אירוע לצרף את הקובץ?', cfNoCases: 'אין אירועים פעילים. פותחים תיק קודם.', cfAttach: 'לצרף', cfAttached: 'הקובץ צורף לאירוע', cfEvent: 'אירוע', cfFull: 'מסך מלא',
+    cfOnDevice: 'הקובץ לא נמצא במכשיר הזה ולא בענן.',
+    k_quote: 'הצעת מחיר', k_contract: 'חוזה / הסכם', k_menu: 'תפריט', k_permit: 'אישור / היתר', k_insurance: 'ביטוח', k_invoice: 'חשבונית', k_receipt: 'קבלה', k_photo: 'תמונה', k_plan: 'תוכנית / לו״ז', k_other: 'אחר'
+  },
+  fr: {
+    tFiles: 'Fichiers', cfTitle: 'Fichiers de l’événement', cfAll: 'Tous les fichiers', cfAdd: '+ Fichier', cfSnap: 'Photo', cfDrop: 'On peut aussi glisser des fichiers ici.',
+    cfEmpty: 'Pas encore de fichier pour cet événement. Devis, contrats, menus, autorisations et photos se rangent ici.', cfNone: 'Aucun fichier.', cfNoMatch: 'Aucun fichier ne correspond.',
+    cfSearchPh: 'Recherche : nom, note, client, fournisseur', cfSynced: 'Synchronisé', cfLocal: 'Sur l’appareil seulement', cfLocalType: 'Sur l’appareil seulement (le cloud n’accepte que images et PDF jusqu’à 15 Mo)',
+    cfCloudOff: 'Pas connectée au cloud : les fichiers restent sur cet appareil et monteront à la connexion.', cfCloudPending: '{n} fichiers pas encore dans le cloud.',
+    cfNoPreview: 'Pas d’aperçu pour ce type de fichier ; il se télécharge.', cfDownload: 'Télécharger', cfShare: 'Partager', cfEdit: 'Modifier', cfOpen: 'Ouvrir',
+    cfName: 'Nom du fichier', cfKind: 'Type de document', cfNote: 'Note', cfTags: 'Étiquettes (séparées par des virgules)', cfNoSupplier: 'Sans fournisseur',
+    cfSaved: 'Fichier enregistré', cfSavedN: '{n} fichiers enregistrés', cfReading: 'Lecture du fichier...', cfDeleted: 'Fichier supprimé de l’appareil',
+    cfDeleteQ: 'Supprimer « {name} » ? La copie sur l’appareil sera effacée. Une copie déjà dans le cloud y reste.',
+    cfMailTo: 'À', cfMailSubject: 'Objet', cfMailText: 'Texte', cfMailHint: 'Le fichier ne se joint pas tout seul : une fois le mail ouvert, joignez-le depuis le téléphone, ou partagez-le via « Partager » vers Gmail.',
+    cfMailBody: 'Bonjour,\nCi-joint {file} pour {event}.\nMerci,',
+    cfWaHint: 'Le téléphone n’a pas ouvert le partage avec le fichier. Il a été téléchargé : joignez-le dans la discussion WhatsApp.',
+    cfMissing: 'Documents manquants', cfMissingOk: 'Tous les documents attendus sont là.', cfAddMissing: 'Ajouter',
+    mkVenueContract: 'Contrat avec le lieu : {who}', mkInsurance: 'Attestation d’assurance pour le lieu : {who}', mkMenu: 'Menu de {who}', mkQuote: 'Devis de {who}', mkClientContract: 'Contrat signé avec le client ({who})',
+    cfPickCase: 'À quel événement joindre le fichier ?', cfNoCases: 'Aucun événement actif. Ouvrez d’abord un dossier.', cfAttach: 'Joindre', cfAttached: 'Fichier joint à l’événement', cfEvent: 'Événement', cfFull: 'Plein écran',
+    cfOnDevice: 'Fichier introuvable sur cet appareil et dans le cloud.',
+    k_quote: 'Devis', k_contract: 'Contrat', k_menu: 'Menu', k_permit: 'Autorisation', k_insurance: 'Assurance', k_invoice: 'Facture', k_receipt: 'Reçu', k_photo: 'Photo', k_plan: 'Plan / programme', k_other: 'Autre'
+  },
+  en: {
+    tFiles: 'Files', cfTitle: 'Event files', cfAll: 'All files', cfAdd: '+ File', cfSnap: 'Photo', cfDrop: 'You can also drop files here.',
+    cfEmpty: 'No files for this event yet. Quotes, contracts, menus, permits and photos go here.', cfNone: 'No files.', cfNoMatch: 'No files match.',
+    cfSearchPh: 'Search: name, note, client, supplier', cfSynced: 'Synced', cfLocal: 'On this device only', cfLocalType: 'On this device only (the cloud takes images and PDFs up to 15 MB)',
+    cfCloudOff: 'Not connected to the cloud: files stay on this device and go up when you log in.', cfCloudPending: '{n} files are not in the cloud yet.',
+    cfNoPreview: 'No preview for this file type; it downloads.', cfDownload: 'Download', cfShare: 'Share', cfEdit: 'Edit', cfOpen: 'Open',
+    cfName: 'File name', cfKind: 'Document type', cfNote: 'Note', cfTags: 'Tags (comma separated)', cfNoSupplier: 'No supplier',
+    cfSaved: 'File saved', cfSavedN: '{n} files saved', cfReading: 'Reading the file...', cfDeleted: 'File removed from this device',
+    cfDeleteQ: 'Delete "{name}"? The copy on this device is removed. A copy already in the cloud stays there.',
+    cfMailTo: 'To', cfMailSubject: 'Subject', cfMailText: 'Text', cfMailHint: 'The file is not attached by itself: once the mail opens, attach it from the phone, or share it through "Share" and pick Gmail.',
+    cfMailBody: 'Hi,\nAttached is {file} for {event}.\nThanks,',
+    cfWaHint: 'The phone did not open the share sheet with the file. It was downloaded: attach it in the WhatsApp chat.',
+    cfMissing: 'Missing documents', cfMissingOk: 'Every expected document is here.', cfAddMissing: 'Add',
+    mkVenueContract: 'Contract with the venue: {who}', mkInsurance: 'Insurance certificate for the venue: {who}', mkMenu: 'Menu from {who}', mkQuote: 'Quote from {who}', mkClientContract: 'Signed contract with the client ({who})',
+    cfPickCase: 'Which event should the file go to?', cfNoCases: 'No active events. Open a case first.', cfAttach: 'Attach', cfAttached: 'File attached to the event', cfEvent: 'Event', cfFull: 'Full screen',
+    cfOnDevice: 'The file is not on this device and not in the cloud.',
+    k_quote: 'Quote', k_contract: 'Contract', k_menu: 'Menu', k_permit: 'Permit', k_insurance: 'Insurance', k_invoice: 'Invoice', k_receipt: 'Receipt', k_photo: 'Photo', k_plan: 'Plan / schedule', k_other: 'Other'
+  }
+};

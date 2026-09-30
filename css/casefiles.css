@@ -1,1 +1,33 @@
-/* Styles of the casefiles module. Loaded after css/app.css. */
+/* Styles of the casefiles module. Loaded after css/app.css. Logical properties only (RTL for Hebrew, LTR for fr/en). */
+.cf-drop { border: 2px dashed var(--line); border-radius: var(--r); padding: 10px 14px; color: var(--muted); font-size: 14px; text-align: center; transition: border-color .15s, background .15s; }
+.cf-drop.over { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+.cf-kind { display: flex; flex-direction: column; gap: 6px; }
+.cf-kind h3 { font-size: 15px; color: var(--muted); margin: 6px 0 0; display: flex; align-items: center; gap: 6px; }
+.cf-kind h3 .count { font-weight: 600; }
+.cf-kind h3 svg, .cf-missing svg { width: 18px; height: 18px; flex: none; vertical-align: -4px; }
+.cf-missing .row > span { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+.cf-row { flex-direction: row; align-items: flex-start; gap: 10px; cursor: pointer; }
+.cf-row .cf-icon { flex: none; width: 40px; height: 40px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: inline-flex; align-items: center; justify-content: center; overflow: hidden; }
+.cf-row .cf-icon svg { width: 22px; height: 22px; }
+.cf-row .cf-icon img { width: 100%; height: 100%; object-fit: cover; }
+.cf-row .cf-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.cf-row .title { font-size: 16px; overflow-wrap: anywhere; }
+.cf-row .sub { font-size: 14px; }
+.cf-row .cf-acts { display: flex; flex-wrap: wrap; gap: 6px; margin-block-start: 2px; }
+.cf-row .cf-acts .btn.sm { min-height: 32px; padding: 0 10px; font-size: 13px; }
+.cf-row .badge.cf-cloud { font-size: 12px; align-self: flex-start; flex: none; }
+.cf-missing .card { padding: 8px 12px; }
+.cf-missing .row { justify-content: space-between; }
+.cf-filters .chip { min-height: 32px; font-size: 14px; }
+.cf-search { width: 100%; }
+.cf-preview { padding: 8px; }
+.cf-preview img { width: 100%; max-height: 72vh; object-fit: contain; border-radius: 10px; background: var(--bg); }
+.cf-preview iframe { width: 100%; height: 70vh; border: 0; border-radius: 10px; background: #fff; }
+.cf-preview .cf-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.cf-preview .cf-head b { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cf-event { font-size: 13px; }
+@media (min-width: 900px) {
+  .cf-wide .cf-kind .list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .cf-wide .cf-row { align-self: start; }
+  .cf-preview img { max-height: 78vh; }
+}

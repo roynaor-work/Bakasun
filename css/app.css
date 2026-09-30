@@ -169,3 +169,8 @@ ul.open a { color: var(--ink); text-decoration: underline dotted; }
 .grp{margin-top:.6rem;padding:.15rem .2rem;border-bottom:1px solid var(--line,#e5e5e5)}
 .grp.late,.badge.late{color:#b00020}
 .badge.late{border-color:#b00020}
+
+/* the tiny copy button next to a phone number or an e-mail (Roy's rule: everything that can be copied has a copy button) */
+.copyq { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; margin: 0 4px; padding: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--muted); vertical-align: middle; cursor: pointer; flex: none; }
+.copyq:active { background: var(--line); }
+.copyq svg { width: 15px; height: 15px; }

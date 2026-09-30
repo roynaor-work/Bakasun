@@ -1,1 +1,55 @@
-/* Styles of the budget module. Loaded after css/app.css. */
+/* Styles of the budget module. Loaded after css/app.css. Logical properties only (RTL for Hebrew, LTR for fr/en).
+   Phone: stat cards in a grid, budget lines as cards, the overview as cards. Desktop (from 900px): lines and overview as tables. */
+.bg-n { direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; white-space: nowrap; display: inline-block; }
+.bg-late, .badge.late { color: #b00020; }
+.bg-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); gap: 8px; }
+.bg-stats .card { align-items: center; text-align: center; padding: 8px 6px; gap: 2px; }
+.bg-stats b { font-size: 19px; font-family: var(--f-head); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bg-stats span { font-size: 12.5px; color: var(--muted); }
+.bg-stats .card.neg b { color: var(--accent); }
+.bg-stats .card.pos b { color: var(--ok); }
+
+/* budget lines grouped by category */
+.bg-lines { display: flex; flex-direction: column; gap: 6px; }
+.bg-cat { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; padding: 8px 4px 4px; border-bottom: 1px solid var(--line); margin-block-start: 6px; }
+.bg-cat .title { font-weight: 800; font-family: var(--f-head); font-size: 16px; }
+.bg-cat .sub { color: var(--muted); font-size: 14px; }
+.bg-cat.bg-total { border-top: 2px solid var(--ink); border-bottom: 0; margin-block-start: 10px; padding-block-start: 10px; }
+.bg-row { cursor: pointer; padding: 10px 14px; }
+.bg-row:hover { border-color: var(--muted); }
+.bg-row .bg-item .title { font-size: 16px; }
+.bg-head, .bg-desk { display: none; }
+
+/* the payment schedule */
+.bg-sched { display: flex; flex-direction: column; gap: 6px; }
+.bg-srow { flex-direction: row; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 14px; }
+.bg-srow[data-l] { cursor: pointer; }
+.bg-srow .bg-date { flex: none; min-width: 6em; font-weight: 700; }
+.bg-srow .bg-who { flex: 1; min-width: 0; }
+.bg-srow .bg-who .title { font-size: 15px; }
+.bg-srow .bg-amt { font-weight: 800; font-family: var(--f-head); }
+.bg-srow.late .bg-date, .bg-srow.late .bg-amt { color: #b00020; }
+.bg-srow.paid .bg-amt { color: var(--ok); }
+.bg-srow .bg-bal { color: var(--muted); font-size: 13px; }
+
+/* the overview: cards on the phone, a table on a computer */
+.bg-desk-only { display: none; }
+.bg-table td a { color: inherit; font-weight: 700; text-decoration: none; }
+.bg-table tr.bg-link { cursor: pointer; }
+.bg-table tr.bg-link:hover td { background: var(--bg); }
+.bg-table tr.bg-total td { font-weight: 800; border-top: 2px solid var(--ink); }
+.bg-table td .sub { color: var(--muted); font-size: 12px; }
+
+@media (min-width: 900px) {
+  .bg-desk-only { display: block; }
+  .bg-cards { display: none; }
+  .bg-stats { grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .bg-stats b { font-size: 22px; }
+  .bg-head { display: grid; grid-template-columns: 2.4fr 1.1fr 1fr 1fr 1fr 1fr 1.1fr; gap: 10px; padding: 4px 14px; font-size: 13px; font-weight: 700; color: var(--muted); }
+  .bg-row { display: grid; grid-template-columns: 2.4fr 1.1fr 1fr 1fr 1fr 1fr 1.1fr; gap: 10px; align-items: center; }
+  .bg-desk { display: block; }
+  .bg-sub-mobile { display: none; }
+  .bg-row .bg-cell { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .bg-srow { flex-wrap: nowrap; }
+  .bg-srow .bg-st { flex: none; }
+}

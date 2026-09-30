@@ -128,3 +128,5 @@ route();
 if ('serviceWorker' in navigator && location.protocol === 'https:' && !/claude\.ai$/.test(location.hostname)) {
   navigator.serviceWorker.register('sw.js').catch(() => { /* offline shell is optional */ });
 }
+
+import { startNotify } from './notify.js'; startNotify();

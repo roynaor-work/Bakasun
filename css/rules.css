@@ -1,1 +1,38 @@
-/* Styles of the rules module. Loaded after css/app.css. */
+/* Styles of the rules module (reminders). Loaded after css/app.css. Logical properties only. */
+
+/* the badge on the nav: bottom bar (a count on the "more" icon) and desktop rail (a count at the end of the row) */
+nav.bottom li { position: relative; }
+nav.bottom .nbadge { position: absolute; inset-block-start: 4px; inset-inline-end: calc(50% - 22px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px;
+  background: var(--accent); color: var(--accent-ink); font-size: 11.5px; font-weight: 800; line-height: 18px; text-align: center; pointer-events: none; box-shadow: 0 0 0 2px var(--nav); }
+@media (min-width: 900px) {
+  nav.bottom .nbadge { position: static; margin-inline-start: auto; box-shadow: none; }
+}
+
+/* the centre */
+.card.nf { border-inline-start: 4px solid var(--line); }
+.card.nf.urgent { border-inline-start-color: #b00020; }
+.card.nf.warn { border-inline-start-color: var(--warn); }
+.card.nf.info { border-inline-start-color: var(--ok); }
+.card.nf .nf-body { white-space: pre-wrap; }
+.card.nf .nf-tags { gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.card.nf .nf-actions { flex-wrap: wrap; gap: 6px; align-items: center; }
+.nf-more { display: inline-block; }
+.nf-more summary { list-style: none; cursor: pointer; display: inline-flex; }
+.nf-more summary::-webkit-details-marker { display: none; }
+.nf-more > .row { margin-top: 6px; flex-wrap: wrap; gap: 6px; }
+.nf-dismiss { color: #b00020; }
+.nf-empty .sub { line-height: 1.6; }
+.nf-list .grp { margin-top: 6px; }
+
+/* the settings */
+.nf-rule { gap: 8px; }
+.nf-rule .chk { min-height: 36px; }
+.nf-rule .nf-nums { flex-wrap: wrap; gap: 8px 14px; padding-inline-start: 32px; }
+.nf-num { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; color: var(--muted); }
+.nf-num input { width: 72px; min-height: 36px; text-align: center; }
+.nf-quiet { flex-wrap: wrap; gap: 8px 16px; }
+.nf-quiet .f { flex: 1 1 140px; }
+@media (min-width: 900px) {
+  .nf-rule { flex-direction: row; align-items: center; flex-wrap: wrap; }
+  .nf-rule .nf-nums { padding-inline-start: 0; margin-inline-start: auto; }
+}
