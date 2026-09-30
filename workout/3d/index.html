@@ -67,6 +67,7 @@ sel.onchange = () => show(sel.value);
 document.getElementById('rot').onclick = () => { camAngle += Math.PI / 6; placeCam(); };
 document.getElementById('skin').onclick = () => { kitIdx = (kitIdx + 1) % KIT_ORDER.length; const k = KITS3D[KIT_ORDER[kitIdx]]; if (ch) ch.setKit(k); document.getElementById('skin').textContent = '👕 ' + k.name; };
 try { const s = localStorage.getItem('k3d.ex'); if (s && byId[s]) cur = s; } catch {}
+const qex = new URLSearchParams(location.search).get('ex'); if (qex && byId[qex]) cur = qex; /* ?ex=squats = קישור ישיר לתרגיל (רועי רוצה לראות תרגיל אחד קודם) */
 sel.value = cur;
 const SPEED = 0.6; // קצב ההדגמה: איטי וברור (רועי, 30/09)
 function loop() { if (ch && frames) ch.rig.apply(poseAt(frames, (performance.now() - t0) * SPEED), front); renderer.render(scene, camera); requestAnimationFrame(loop); }
