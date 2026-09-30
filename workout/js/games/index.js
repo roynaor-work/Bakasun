@@ -5,7 +5,7 @@ import sport from './sport.js';
 import puzzle from './puzzle.js';
 import quick from './quick.js';
 import * as more from './more.js';
-import * as b4 from './batch4.js'; /* מקבץ 4: הלוליין, יורה בועות, כדורסל, מיני גולף, באולינג */
+import * as b4 from './batch4.js'; /* מקבץ 4: הקפצת כדור, יורה בועות, כדורסל, מיני גולף, באולינג */
 import { DEMOS, DEMO_DUR, DEMO_TOP } from './demos.js';
 
 export const GAME_GROUPS = [

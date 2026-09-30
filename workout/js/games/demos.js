@@ -85,18 +85,14 @@ export const DEMOS = {
     if (m.target == null) { let best = 0; for (let i = 1; i < P.COLS; i++) if (P.heights[i] < P.heights[best]) best = i; m.target = best; m.rot = Math.random() < .6 ? 1 + Math.floor(Math.random() * 2) : 0; }
     if (!every(ctl, 'act', .3, t)) return; if (m.rot > 0 && t > 3.5) { ctl.tap(fx, fy); m.rot--; } else if (P.cur.x < m.target) ctl.swipe('right', fx, fy); else if (P.cur.x > m.target) ctl.swipe('left', fx, fy); else if (t > 6.5) { ctl.swipe('down', fx, fy); m.target = null; } },
   // ---- מקבץ 4 ----
-  juggle(t, game, ctl, r) { captions(ctl, t, [[0, 'נוגעים בכדור כדי להקפיץ אותו'], [3, 'נוגעים מהצד: הכדור עף הצידה'], [6, 'כל 10 הקפצות עוד כדור. לא להפיל!'], [9.5, 'קומבו: מחליפים בין הכדורים']]);
+  juggle(t, game, ctl, r) { captions(ctl, t, [[0, 'נוגעים בכדור כדי להקפיץ אותו למעלה'], [3, 'נוגעים מהצד: הכדור עף הצידה'], [6, 'כל 10 הקפצות עוד כדור. לא להפיל!'], [9.5, 'קומבו: מחליפים בין הכדורים']]);
     const P = game.peek(); const low = P.balls.filter(b => b.vy > 0 && b.y > 250).sort((a, b) => b.y - a.y)[0]; if (low && every(ctl, 'tap', .25, t)) ctl.tap(low.x + (low.x < r.W / 2 ? -8 : 8), low.y + 6); },
   'bubble-shooter'(t, game, ctl, r) { captions(ctl, t, [[0, 'גוררים כדי לכוון, הקו מראה לאן'], [3.5, 'משחררים: 3 באותו צבע נעלמות'], [6.5, 'בועות שנשארו באוויר נופלות: בונוס!'], [9.5, 'נוגעים בבועה הקטנה כדי להחליף']]);
     const P = game.peek(); if (P.shot) return; const m = ctl.mem; if (m.phase == null) { m.phase = 0; }
     if (m.phase === 0 && every(ctl, 'aim', 2.2, t)) { const same = P.cells.filter(c => c.c === P.cur); let target = same.sort((a, b) => b.y - a.y)[0] || P.cells.sort((a, b) => b.y - a.y)[0]; if (!target) return; m.tx = target.x + (target.x < r.W / 2 ? 12 : -12); m.ty = target.y + P.S * .6; ctl.moveTo(P.shooter.x + (m.tx - P.shooter.x) * .5, P.shooter.y + (m.ty - P.shooter.y) * .5); m.phase = 1; m.at = t + .7; }
     else if (m.phase === 1 && t >= m.at) { ctl.release(); m.phase = 0; } },
-  basketball(t, game, ctl, r) { captions(ctl, t, [[0, 'גוררים מהכדור אחורה ולמטה'], [3, 'משחררים: רחוק יותר = חזק יותר'], [6, 'סוויש בלי ברזל = 30 נקודות'], [9.5, '3 ברצף = הכדור בוער 🔥']]);
-    const P = game.peek(); const m = ctl.mem; if (!P.canShoot) { m.phase = 0; return; } if (m.phase == null) m.phase = 0; const dist = P.hoop.x - P.ball.x;
-    if (m.phase === 0 && every(ctl, 'shot', 1.8, t)) { const pow = (m.pow ?? .62); ctl.tap(P.ball.x, P.ball.y); /* האצבע קופצת לכדור */ m.phase = .5; m.at = t + .15; m.vec = [-(dist * .42) * pow / .62, (120 + dist * .22) * pow / .62]; }
-    else if (m.phase === .5 && t >= m.at) { ctl.moveTo(P.ball.x, P.ball.y); /* לוחצים על הכדור */ m.phase = 1; m.at = t + .3; }
-    else if (m.phase === 1 && t >= m.at) { ctl.moveTo(P.ball.x + m.vec[0], P.ball.y + m.vec[1]); m.phase = 2; m.at = t + .5; }
-    else if (m.phase === 2 && t >= m.at) { ctl.release(); m.phase = 3; } },
+  basketball(t, game, ctl, r) { captions(ctl, t, [[0, 'הקשת הלבנה זזה עם מד הכוח'], [3, 'נוגעים כשהקשת עוברת בסל'], [6.5, 'סוויש בלי ברזל = 30 נקודות'], [9.5, '3 ברצף = הכדור בוער 🔥']]);
+    const P = game.peek(); if (!P.canShoot) return; if (Math.abs(P.p - P.ideal) < .03 && every(ctl, 'shot', 1.2, t)) ctl.tap(r.W / 2, r.H * .6); },
   golf(t, game, ctl, r) { captions(ctl, t, [[0, 'גוררים מהכדור אחורה, משחררים'], [3, 'חול מאט, מים מחזירים'], [6, 'טחנת הרוח מסתובבת: מחכים לרגע הנכון'], [9.5, 'פחות חבטות מהפאר = יותר נקודות']]);
     const P = game.peek(); const m = ctl.mem; if (P.moving) { m.phase = 0; return; } if (m.phase == null) m.phase = 0;
     if (m.phase === 0 && every(ctl, 'shot', 1.6, t)) { ctl.tap(P.ball.x, P.ball.y); m.phase = .5; m.at = t + .15; }
