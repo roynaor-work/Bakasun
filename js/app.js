@@ -106,6 +106,16 @@ function route() {
 window.__installPrompt = null;
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); window.__installPrompt = e; document.dispatchEvent(new Event('bakasun:installable')); });
 window.addEventListener('appinstalled', () => { window.__installPrompt = null; try { localStorage.setItem('bakasun.installed', '1'); } catch (x) { /* */ } document.dispatchEvent(new Event('bakasun:installable')); });
+// The cloud sign-in link lands here with the session in the hash (once the project's site URL points to the app):
+// the session is stored, the hash is cleaned, and she is in. No password.
+import { parseUrlHash } from './logic/cloudLink.js';
+import { loginWithLink } from './cloud.js';
+import { CLOUD } from './data/cloudcfg.js';
+const linkSession = parseUrlHash(location.hash);
+if (linkSession && CLOUD.url) {
+  history.replaceState(null, '', location.pathname + '#/settings');
+  loginWithLink(CLOUD.url, CLOUD.key, linkSession).then(() => route()).catch(e => { console.error(e); alert(t('cloudLinkFailed') + ' ' + (e.message || e)); route(); });
+}
 window.addEventListener('hashchange', route);
 route();
 

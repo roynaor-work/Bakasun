@@ -11,6 +11,7 @@ import { travelLine } from '../logic/travel.js';
 import { phoneDigits } from '../logic/core.js';
 import * as cloud from '../cloud.js';
 import { CLOUD } from '../data/cloudcfg.js';
+import { parseMailLink, parseUrlHash, pickEmail } from '../logic/cloudLink.js';
 import { DEFAULTS, COMPANY_DOCS } from '../data/defaults.js';
 import { COMPANY_PAPERS } from '../data/docsList.js';
 import { copyText } from '../ui.js';
@@ -65,7 +66,11 @@ export function render({ root }) {
     </form>
     <section class="sec"><h2>${esc(t('cloud'))}</h2>
       ${cc && cc.on ? `<p class="hint">${esc(t('cloudOn'))} <span class="ltr">${esc(cc.email)}</span> · <span id="cs"></span></p><div class="row"><button class="btn" id="logout">${esc(t('logout'))}</button></div>`
-      : `<p class="hint">${esc(t('cloudOff'))} ${esc(t('cloudHelp'))}</p><form class="stack" id="cf"><div class="grid2">${CLOUD.url ? `<input type="hidden" name="url" value="${esc(CLOUD.url)}"><input type="hidden" name="key" value="${esc(CLOUD.key)}">` : field('url', t('cloudUrl'), (cc && cc.url) || '', { ltr: true, placeholder: 'https://xxxx.supabase.co' }) + field('key', t('cloudKey'), '', { ltr: true })}${field('email', t('email'), (cc && cc.email) || '', { ltr: true, inputmode: 'email' })}${field('password', t('password'), '', { type: 'password', ltr: true })}</div><button class="btn primary" type="submit">${esc(t('login'))}</button></form>`}
+      : `<p class="hint">${esc(t('cloudOff'))} ${esc(t('cloudHelp'))}</p>
+        <form class="stack card" id="cl"><div class="grid2">${field('email', t('email'), s.bizEmail || DEFAULTS.bizEmail, { ltr: true })}</div>
+          <div class="row"><button class="btn primary" type="submit">${esc(t('sendLink'))}</button><span class="hint">${esc(t('sendLinkHint'))}</span></div>
+          <details><summary>${esc(t('pasteLinkTitle'))}</summary>${field('link', t('pasteLink'), '', { type: 'textarea', rows: 3, ltr: true })}<div class="row"><button class="btn" type="button" id="useLink">${esc(t('useLink'))}</button></div></details></form>
+        <details><summary>${esc(t('withPassword'))}</summary><form class="stack" id="cf"><div class="grid2">${CLOUD.url ? `<input type="hidden" name="url" value="${esc(CLOUD.url)}"><input type="hidden" name="key" value="${esc(CLOUD.key)}">` : field('url', t('cloudUrl'), (cc && cc.url) || '', { ltr: true, placeholder: 'https://xxxx.supabase.co' }) + field('key', t('cloudKey'), '', { ltr: true })}${field('email', t('email'), (cc && cc.email) || '', { ltr: true, inputmode: 'email' })}${field('password', t('password'), '', { type: 'password', ltr: true })}</div><button class="btn primary" type="submit">${esc(t('login'))}</button></form></details>`}
     </section>
     <section class="sec"><h2>${esc(t('companyDocs'))}</h2><div class="card"><div class="kv"><dt>${esc(t('fLegal'))}</dt><dd>${esc(s.bizLegal || DEFAULTS.bizLegal)}</dd><dt>${esc(t('fTaxId'))}</dt><dd class="ltr">${esc(s.bizId || DEFAULTS.bizId)}</dd><dt>${esc(t('bizAddress'))}</dt><dd>${esc(s.bizAddress || DEFAULTS.bizAddress)}</dd><dt>${esc(t('fEmail'))}</dt><dd class="ltr">${esc(s.bizEmail || DEFAULTS.bizEmail)}</dd></div><div class="row"><button class="btn sm" id="copyBiz">${esc(t('copyDetails'))}</button></div></div>
       <div class="list">${COMPANY_PAPERS.map(p => `<div class="card row between"><span class="title grow">${esc(p.title)}</span><span class="badge ${p.status === 'found' ? 'ok' : ''}">${esc(p.status === 'found' ? t('paperFound') : t('paperMissing'))}</span></div>`).join('')}</div>
@@ -99,6 +104,18 @@ export function render({ root }) {
     toast(t('syncing'));
     try { await cloud.login(o.url, o.key, o.email, o.password); toast(t('synced')); render({ root }); } catch (err) { toast(t('syncError') + ' ' + (err.message || ''), 5000); }
   };
+  const cl = root.querySelector('#cl'); if (cl) {
+    cl.onsubmit = async e => {
+      e.preventDefault(); const email = pickEmail(cl.querySelector('[name=email]').value, s.bizEmail || DEFAULTS.bizEmail);
+      try { await cloud.sendLink(CLOUD.url, CLOUD.key, email); toast(t('linkSent', { email }), 6000); } catch (err) { toast(t('syncError') + ' ' + (err.message || ''), 5000); }
+    };
+    cl.querySelector('#useLink').onclick = async () => {
+      const link = parseMailLink(cl.querySelector('[name=link]').value) || parseUrlHash(cl.querySelector('[name=link]').value.trim());
+      if (!link) { toast(t('noLinkFound'), 4000); return; }
+      toast(t('syncing'));
+      try { await cloud.loginWithLink(CLOUD.url, CLOUD.key, link); toast(t('synced')); render({ root }); } catch (err) { toast((err.message === 'no-org' ? t('noOrg') : t('cloudLinkFailed')) + ' ' + (err.message || ''), 6000); }
+    };
+  }
   const lo = root.querySelector('#logout'); if (lo) lo.onclick = () => { cloud.logout(); render({ root }); };
   const cs = root.querySelector('#cs'); if (cs) { const draw = st => { cs.textContent = st.state === 'error' ? t('syncError') : st.state === 'syncing' ? t('syncing') : t('synced'); }; draw(cloud.status); cloud.onStatus(draw); }
   root.querySelector('#copyBiz').onclick = () => copyText([s.bizLegal || DEFAULTS.bizLegal, 'ח.פ. ' + (s.bizId || DEFAULTS.bizId), s.bizAddress || DEFAULTS.bizAddress, s.bizPhone || DEFAULTS.bizPhone, s.bizEmail || DEFAULTS.bizEmail].join('\n'));

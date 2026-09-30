@@ -46,6 +46,27 @@ export async function login(url, key, email, password) {
   status.state = 'on'; emit();
   await pullAll(); pushLocal(); start();
 }
+/** Sends her the one-tap sign-in mail (Supabase magic link). Nothing else changes until she taps it. */
+export async function sendLink(url, key, email) {
+  const r = await fetch(url.replace(/\/$/, '') + '/auth/v1/otp', { method: 'POST', headers: { apikey: key, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email.trim(), create_user: false, options: { email_redirect_to: location.origin + location.pathname } }) });
+  if (!r.ok) throw new Error('otp ' + r.status + ' ' + (await r.text()).slice(0, 200));
+  return true;
+}
+/** A session that arrived without a password: from the pasted mail link (token hash) or from the URL hash after the redirect. */
+export async function loginWithLink(url, key, link) {
+  cfg = { url: url.trim(), key: key.trim(), email: '' };
+  let r;
+  if (link.tokenHash) r = await api('/auth/v1/verify', { method: 'POST', body: { type: link.type || 'magiclink', token_hash: link.tokenHash }, token: cfg.key, retried: true });
+  else if (link.accessToken) { r = { access_token: link.accessToken, refresh_token: link.refreshToken }; r.user = await api('/auth/v1/user', { token: link.accessToken, retried: true }); }
+  else throw new Error('no-link');
+  cfg.token = r.access_token; cfg.refresh = r.refresh_token; cfg.userId = r.user && r.user.id; cfg.email = (r.user && r.user.email) || '';
+  const m = await api('/rest/v1/members?select=org_id&limit=1');
+  if (!m || !m.length) { cfg = null; throw new Error('no-org'); }
+  cfg.orgId = m[0].org_id; saveCfg();
+  status.state = 'on'; emit();
+  await pullAll(); pushLocal(); start();
+  return cfg.email;
+}
 export function logout() { cfg = null; queue = []; try { localStorage.removeItem(CFG_KEY); localStorage.removeItem(Q_KEY); } catch (e) { /* */ } clearInterval(timer); status.state = 'off'; emit(); }
 
 /** Everything on the device that the cloud may not have (first login on a phone that already has data). */
