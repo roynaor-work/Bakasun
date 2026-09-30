@@ -62,3 +62,26 @@ test('הקטלוג תקין: מזהים ייחודיים, תמונות, בלי �
   const all = JSON.stringify(PRODUCTS) + JSON.stringify(BUILD);
   assert.ok(!/[؀-ۿ]/.test(all));
 });
+
+import { createParams, parseCreate, parseNotify, approveParams, fullName, phoneDigits, GROW_BASE } from '../supabase/functions/_shared/grow.mjs';
+
+test('Grow: שדות createPaymentProcess', () => {
+  const order = { no: 'RC-260930-ABC', store: 'הרוח הצפונית', total: 384, shipping: 35, items: [{ id: 'flask', name: 'הפלאסק', qty: 1, price: 189 }, { id: 'choc-wine', name: 'שוקולד ויין', qty: 1, price: 160 }], customer: { name: 'דנה', phone: '+972 50-123 4567', email: 'd@x.co' } };
+  const p = createParams(order, { successUrl: 'https://s/?paid=1', cancelUrl: 'https://s/?paid=0', notifyUrl: 'https://n' }, { userId: 'U1', pageCode: 'P1' });
+  assert.equal(p.pageCode, 'P1'); assert.equal(p.userId, 'U1'); assert.equal(p.sum, '384.00');
+  assert.equal(p['pageField[fullName]'], 'דנה לקוח'); assert.equal(p['pageField[phone]'], '0501234567');
+  assert.equal(p['pageField[email]'], 'd@x.co'); assert.equal(p.cField1, 'RC-260930-ABC'); assert.equal(p.notifyUrl, 'https://n');
+  assert.equal(p['productData[2][itemDescription]'], 'משלוח'); assert.equal(p['productData[2][price]'], '35.00');
+  assert.equal(fullName('דנה לוי כהן'), 'דנה לוי כהן'); assert.equal(phoneDigits('050-1234567'), '0501234567');
+  assert.equal(GROW_BASE(false), 'https://secure.meshulam.co.il'); assert.equal(GROW_BASE(true), 'https://sandbox.meshulam.co.il');
+});
+
+test('Grow: תשובה וקריאה חוזרת', () => {
+  assert.deepEqual(parseCreate({ status: 1, data: { url: 'https://pay', processId: 7, processToken: 't' } }), { ok: true, url: 'https://pay', processId: '7', processToken: 't' });
+  assert.equal(parseCreate({ status: 0, err: { message: 'bad' } }).ok, false);
+  const cb = parseNotify(Object.entries({ 'data[status]': '1', 'data[transactionId]': '55', 'data[asmachta]': '123', 'data[customFields][cField1]': 'RC-1', 'data[processId]': '7' }));
+  assert.equal(cb.orderNo, 'RC-1'); assert.equal(cb.paid, true); assert.equal(cb.transactionId, '55');
+  const flat = parseNotify(Object.entries({ status: '0', statusCode: '3', transactionId: '9', cField1: 'RC-2' }));
+  assert.equal(flat.orderNo, 'RC-2'); assert.equal(flat.paid, false);
+  const ap = approveParams(cb, 'P1'); assert.equal(ap.pageCode, 'P1'); assert.equal(ap.transactionId, '55'); assert.equal(ap.processId, '7'); assert.ok(!('orderNo' in ap));
+});

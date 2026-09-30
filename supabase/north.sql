@@ -34,3 +34,11 @@ drop policy if exists "survey insert" on public.north_survey;
 create policy "survey insert" on public.north_survey for insert to anon with check (true);
 drop policy if exists "survey read auth" on public.north_survey;
 create policy "survey read auth" on public.north_survey for select to authenticated using (true);
+
+-- Grow: מזהי תהליך התשלום ופרטי העסקה (supabase/functions/grow-pay, grow-notify).
+alter table public.north_orders add column if not exists grow_process_id text;
+alter table public.north_orders add column if not exists grow_process_token text;
+alter table public.north_orders add column if not exists grow_transaction_id text;
+alter table public.north_orders add column if not exists paid_at timestamptz;
+alter table public.north_orders add column if not exists pay_details jsonb;
+create index if not exists north_orders_grow_process on public.north_orders (grow_process_id);
