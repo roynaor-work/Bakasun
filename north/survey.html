@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>שאלון מארזים · הרוח הצפונית</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a09">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .sv{max-width:760px;margin:0 auto;padding:28px 16px 90px}
+    .sv h1{font-size:clamp(30px,6vw,44px);color:#fff;margin:10px 0 6px}
+    .sv .lead{color:var(--muted);margin:0 0 22px;font-size:17px}
+    .sv .panel{margin-bottom:16px}
+    .sv .panel h3 .hint{margin-inline-start:auto;font-weight:400;font-size:13px;font-family:var(--b);color:var(--dim)}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    @media (max-width:560px){.row3{grid-template-columns:1fr 1fr}}
+    .tri{display:grid;grid-template-columns:1.3fr repeat(3,auto);gap:6px 10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg2)}
+    .tri b{color:#fff;font-weight:600;font-size:15px}
+    .tri label{display:flex;gap:5px;align-items:center;font-size:13px;color:var(--muted);cursor:pointer;white-space:nowrap}
+    .tri input{accent-color:var(--gold);margin:0}
+    .tri .more{grid-column:1/-1;display:none;gap:8px}
+    .tri.open .more{display:grid;grid-template-columns:1fr 1fr 1fr}
+    @media (max-width:560px){.tri{grid-template-columns:1fr auto auto auto;gap:6px}.tri.open .more{grid-template-columns:1fr 1fr}}
+    .tri .more input{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:38px;font-size:14px;width:100%}
+    .list{display:grid;gap:8px}
+    .prog{position:sticky;top:0;z-index:5;background:rgba(12,10,9,.9);backdrop-filter:blur(8px);padding:10px 0;margin:-10px 0 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px}
+    .prog .bar{flex:1;height:4px;background:var(--line);border-radius:2px;margin:0 14px;overflow:hidden}
+    .prog .bar i{display:block;height:100%;background:var(--gold);width:0;transition:.3s}
+    .done{display:none}
+    .done.show{display:grid}
+    .checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .checks label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg2);font-size:15px;cursor:pointer}
+    .checks input{accent-color:var(--gold);margin:0}
+    .saved{font-size:12.5px;color:var(--dim);text-align:center}
+  </style>
+</head>
+<body style="direction:rtl; text-align:right; unicode-bidi:embed">
+  <header class="top"><div class="wrap"><a class="logo" href="index.html"><span class="mark">ר</span><span>הרוח הצפונית</span></a><span style="margin-inline-start:auto;color:var(--dim);font-size:14px">שאלון פנימי</span></div></header>
+  <main class="sv">
+    <span class="kicker">מארזים · שאלון ספק</span>
+    <h1>מתן, מה יש לנו ומה אפשר להחזיק?</h1>
+    <p class="lead">עשר דקות. התשובות בונות את הקטלוג של חנות המארזים. מה שלא יודעים, משאירים ריק. הטיוטה נשמרת בטלפון, אפשר לעצור ולהמשיך.</p>
+    <div class="prog"><span id="pcount">0 מתוך 0</span><span class="bar"><i id="pbar"></i></span><span>מולא</span></div>
+
+    <form id="f" novalidate>
+      <section class="panel"><h3><span class="no">1</span>מי ממלא</h3>
+        <div class="row2"><div class="field"><label>שם</label><input name="who" value="מתן הררי"></div><div class="field"><label>טלפון</label><input name="who_phone" type="tel" inputmode="tel"></div></div>
+      </section>
+
+      <section class="panel"><h3><span class="no">2</span>אלכוהול: מה קבוע על המדף<span class="hint">לכל קטגוריה</span></h3>
+        <div class="list" id="alc"></div>
+      </section>
+
+      <section class="panel"><h3><span class="no">3</span>מוצרים למארזים: מה יש, מה אפשר להחזיק<span class="hint">קבוע = תמיד במלאי</span></h3>
+        <div class="list" id="goods"></div>
+      </section>
+
+      <section class="panel"><h3><span class="no">4</span>אריזה וחריטה</h3>
+        <div class="list" id="pack"></div>
+        <div class="field"><label>חריטה על פלאסק/כוס: יש מכשיר, ספק חיצוני, או אין?</label><input name="engrave" placeholder="למשל: ספק בקריית שמונה, 24 שעות, 25 ₪ לפריט"></div>
+      </section>
+
+      <section class="panel"><h3><span class="no">5</span>ספקים</h3>
+        <div class="field"><label>מוצרי הטיפוח (נרות, סבונים, שמפו, מפיצי ריח): מאיזה יצרן, ומה מחיר הקנייה?</label><textarea name="sup_care" placeholder="שם היצרן, טלפון, מחיר קנייה לפריט, מינימום הזמנה"></textarea></div>
+        <div class="field"><label>דבש, חטיפים, שוקולד: מי הספק?</label><textarea name="sup_food"></textarea></div>
+        <div class="field"><label>מאגתד וניצן: מה אתה לוקח היום, ומה היית רוצה לקחת למארזים?</label><textarea name="sup_import" placeholder="אגתד: ריבות, קוויאר, שוקולד... ניצן: טבסקו, וויסקי..."></textarea></div>
+        <div class="field"><label>עוד ספק שכדאי להכניס?</label><input name="sup_other"></div>
+      </section>
+
+      <section class="panel"><h3><span class="no">6</span>תפעול</h3>
+        <div class="row2">
+          <div class="field"><label>מי אורז את המארזים?</label><input name="op_who" placeholder="אני / עובד / שנינו"></div>
+          <div class="field"><label>זמן הכנה למארז מהזמנה</label><input name="op_time" placeholder="למשל: אותו יום עד 16:00"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>משלוחים: מי מוביל ולאן?</label><input name="op_ship" placeholder="שליח / אנחנו / חברת משלוחים, אזור"></div>
+          <div class="field"><label>עלות משלוח שאתה משלם</label><input name="op_shipcost" inputmode="numeric"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>שעות פתיחה נכונות להיום</label><input name="op_hours" placeholder="א׳-ה׳ 10:00-22:00 · ו׳ 9:00-15:00"></div>
+          <div class="field"><label>מקום אחסון למארזים מוכנים (כמה?)</label><input name="op_storage"></div>
+        </div>
+        <div class="field"><label>תשלום: יש ביט לעסקים על החנות? מסוף אשראי? מה עוד?</label><input name="op_pay" placeholder="ביט לעסקים כן/לא, מספר, Grow, מסוף"></div>
+      </section>
+
+      <section class="panel"><h3><span class="no">7</span>מה מבקשים ממך בחנות</h3>
+        <div class="field"><label>3 המתנות שאנשים הכי מבקשים (וכמה הם מוכנים לשלם)</label><textarea name="ask_top"></textarea></div>
+        <div class="field"><label>מארז שמכרת בעבר ועבד טוב</label><textarea name="ask_worked"></textarea></div>
+        <div class="field"><label>לקוחות עסקיים באזור שמתאימים למתנות לעובדים</label><textarea name="ask_biz" placeholder="שמות, איש קשר, כמה עובדים"></textarea></div>
+        <div class="field"><label>הערות, רעיונות, מה שלא שאלנו</label><textarea name="notes"></textarea></div>
+      </section>
+
+      <section class="panel">
+        <div class="field"><label>תמונות של המוצרים והמדפים</label><p style="margin:0;color:var(--muted);font-size:14.5px">שולחים בוואטסאפ לרועי אחרי השליחה. 3-4 תמונות ממדף הוויסקי, מדף הטיפוח והאריזות מספיקות.</p></div>
+        <button class="btn gold wide" type="submit" id="send">שליחת השאלון</button>
+        <div class="saved" id="saved"></div>
+      </section>
+    </form>
+
+    <section class="panel done" id="done">
+      <h3>תודה! השאלון נשלח</h3>
+      <p style="margin:0;color:var(--muted)" id="donemsg"></p>
+      <div class="copyrow"><a class="btn line sm" id="mailbtn" href="#">שליחה גם במייל לרועי</a><button class="btn line sm" id="copybtn">העתקת התשובות</button></div>
+      <pre id="out" style="text-align:right;white-space:pre-wrap;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:14px;line-height:1.5;font-family:var(--b);color:var(--muted)"></pre>
+    </section>
+  </main>
+
+  <script type="module">
+    import { CLOUD, STORE } from './js/config.js';
+    const $ = (s, r = document) => r.querySelector(s);
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const KEY = 'north.survey.v1';
+
+    const ALC = ['וויסקי סקוטי (סינגל מאלט)', 'וויסקי סקוטי (בלנדד)', 'וויסקי אירי', 'בורבון / אמריקאי', 'וויסקי יפני / הודי / אחר', 'ג׳ין', 'וודקה', 'רום', 'טקילה / מסקל', 'קוניאק / ברנדי', 'ליקרים', 'ערק / אניס', 'יין אדום ישראלי', 'יין לבן / רוזה', 'יין מיובא', 'מבעבע / פרוסקו', 'שמפניה', 'בירות בוטיק', 'יין קינוח / פורט'];
+    const GOODS = ['נרות ריחניים', 'סבונים טבעיים', 'שמפו / מוצרי רחצה', 'מפיצי ריח', 'דבש', 'חטיפים (אגוזים, פירות יבשים)', 'שוקולד / פרלינים', 'ריבות / ממרחים', 'זיתים / שמן זית', 'קרקרים / מאפים', 'קפה / תה', 'טוניק ומיקסרים', 'ביטרס / סירופים לקוקטייל', 'כוסות וויסקי', 'כוסות קוקטייל / קופה', 'פלאסקים', 'שייקרים / ג׳יגרים / כלי בר', 'אבני קרח / תבניות קרח', 'ספרי קוקטיילים', 'פותחנים / אביזרי יין'];
+    const PACK = ['קופסאות עץ', 'קופסאות מתנה קשיחות', 'שקיות מתנה', 'סלסלות', 'מילוי קש / נייר', 'סרטים', 'כרטיסי ברכה', 'מדבקות / לוגו'];
+
+    function tri(prefix, name, i) {
+      const k = `${prefix}${i}`;
+      return `<div class="tri" data-k="${k}"><b>${esc(name)}</b>
+        <label><input type="radio" name="${k}" value="קבוע"> קבוע</label>
+        <label><input type="radio" name="${k}" value="אפשר"> אפשר להחזיק</label>
+        <label><input type="radio" name="${k}" value="לא"> לא</label>
+        <div class="more"><input name="${k}_n" placeholder="${prefix === 'a' ? 'כמה מותגים' : 'ספק / מותג'}"><input name="${k}_p" placeholder="טווח מחיר מדף" inputmode="numeric"><input name="${k}_x" placeholder="דוגמאות / הערה"></div></div>`;
+    }
+    $('#alc').innerHTML = ALC.map((n, i) => tri('a', n, i)).join('');
+    $('#goods').innerHTML = GOODS.map((n, i) => tri('g', n, i)).join('');
+    $('#pack').innerHTML = PACK.map((n, i) => tri('p', n, i)).join('');
+    const NAMES = {}; ALC.forEach((n, i) => NAMES['a' + i] = n); GOODS.forEach((n, i) => NAMES['g' + i] = n); PACK.forEach((n, i) => NAMES['p' + i] = n);
+
+    const f = $('#f');
+    function data() { const o = {}; for (const [k, v] of new FormData(f).entries()) if (String(v).trim()) o[k] = String(v).trim(); return o; }
+    function progress() {
+      const d = data(); const total = f.querySelectorAll('.tri').length + f.querySelectorAll('input:not([type=radio]),textarea').length - f.querySelectorAll('.more input').length;
+      const filled = Object.keys(d).filter(k => !/_[npx]$/.test(k)).length;
+      $('#pcount').textContent = `${filled} מתוך ${total}`; $('#pbar').style.width = Math.min(100, filled / total * 100) + '%';
+    }
+    function save() { try { localStorage.setItem(KEY, JSON.stringify(data())); $('#saved').textContent = 'הטיוטה נשמרה בטלפון'; } catch { /* */ } }
+    function restore() {
+      let d = {}; try { d = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { /* */ }
+      for (const [k, v] of Object.entries(d)) { const el = f.elements[k]; if (!el) continue; if (el instanceof RadioNodeList) el.value = v; else el.value = v; }
+      f.querySelectorAll('.tri').forEach(t => { const v = f.elements[t.dataset.k].value; t.classList.toggle('open', v === 'קבוע' || v === 'אפשר'); });
+    }
+    f.addEventListener('change', e => {
+      const t = e.target.closest('.tri'); if (t && e.target.type === 'radio') t.classList.toggle('open', e.target.value !== 'לא');
+      save(); progress();
+    });
+    f.addEventListener('input', () => { clearTimeout(save.h); save.h = setTimeout(() => { save(); progress(); }, 400); });
+
+    function text(d) {
+      const L = [`שאלון מארזים · ${d.who || ''} ${d.who_phone || ''}`.trim(), ''];
+      const block = (title, prefix) => {
+        const rows = Object.keys(NAMES).filter(k => k.startsWith(prefix) && d[k]).map(k => `• ${NAMES[k]}: ${d[k]}${d[k + '_n'] ? ' · ' + d[k + '_n'] : ''}${d[k + '_p'] ? ' · ' + d[k + '_p'] : ''}${d[k + '_x'] ? ' · ' + d[k + '_x'] : ''}`);
+        if (rows.length) L.push(title, ...rows, '');
+      };
+      block('אלכוהול קבוע:', 'a'); block('מוצרים למארזים:', 'g'); block('אריזה:', 'p');
+      const Q = { engrave: 'חריטה', sup_care: 'ספק טיפוח', sup_food: 'ספק דבש/חטיפים/שוקולד', sup_import: 'אגתד וניצן', sup_other: 'ספק נוסף', op_who: 'מי אורז', op_time: 'זמן הכנה', op_ship: 'משלוחים', op_shipcost: 'עלות משלוח', op_hours: 'שעות', op_storage: 'אחסון', op_pay: 'תשלום', ask_top: 'מבקשים הכי הרבה', ask_worked: 'מארז שעבד', ask_biz: 'לקוחות עסקיים', notes: 'הערות' };
+      for (const [k, t] of Object.entries(Q)) if (d[k]) L.push(`${t}: ${d[k]}`);
+      return L.join('\n');
+    }
+    async function cloud(d) {
+      if (!CLOUD.url) return false;
+      try { const r = await fetch(`${CLOUD.url}/rest/v1/north_survey`, { method: 'POST', headers: { apikey: CLOUD.key, Authorization: `Bearer ${CLOUD.key}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify({ who: d.who || '', answers: d }) }); return r.ok; } catch { return false; }
+    }
+    f.addEventListener('submit', async e => {
+      e.preventDefault(); const d = data(); const t = text(d);
+      $('#send').disabled = true; $('#send').textContent = 'שולחים…';
+      const ok = await cloud(d);
+      $('#donemsg').textContent = ok ? 'התשובות נשמרו אצל רועי. אפשר לשלוח גם במייל ליתר ביטחון.' : 'הענן לא זמין כרגע, אז שולחים במייל או מעתיקים ושולחים בוואטסאפ לרועי.';
+      $('#out').textContent = t;
+      $('#mailbtn').href = `mailto:${STORE.email}?subject=${encodeURIComponent('שאלון מארזים: ' + (d.who || ''))}&body=${encodeURIComponent(t)}`;
+      $('#done').classList.add('show'); f.classList.add('hide'); window.scrollTo({ top: 0, behavior: 'smooth' });
+      $('#send').disabled = false; $('#send').textContent = 'שליחת השאלון';
+    });
+    $('#copybtn').onclick = () => navigator.clipboard?.writeText($('#out').textContent).then(() => { $('#copybtn').textContent = 'הועתק ✓'; });
+    restore(); progress();
+  </script>
+</body>
+</html>
