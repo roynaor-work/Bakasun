@@ -14,7 +14,7 @@ import { CLOUD } from '../data/cloudcfg.js';
 import { parseMailLink, parseUrlHash, pickEmail } from '../logic/cloudLink.js';
 import { DEFAULTS, COMPANY_DOCS } from '../data/defaults.js';
 import { COMPANY_PAPERS } from '../data/docsList.js';
-import { copyText } from '../ui.js';
+import { copyText, copyBtn, copyOf } from '../ui.js';
 
 export const noLive = true;
 
@@ -41,7 +41,7 @@ export function render({ root }) {
       ${field('signer', t('signer'), s.signer || DEFAULTS.signer, { type: 'textarea', rows: 2 })}
       <h2>${esc(t('templatesTitle'))}</h2>
       <p class="hint">${esc(t('templatesHint'))}</p>
-      <div class="list">${templates(db).map(tp => `<div class="card" data-tpl="${esc(tp.name)}"><div class="row between"><span class="title">${esc(tp.name)}</span><button type="button" class="btn sm ghost" data-del>${esc(t('delete'))}</button></div><div class="sub" style="white-space:pre-wrap">${esc(tp.text)}</div></div>`).join('') || `<p class="hint">${esc(t('noTemplates'))}</p>`}</div>
+      <div class="list">${templates(db).map(tp => `<div class="card" data-tpl="${esc(tp.name)}"><div class="row between"><span class="title">${esc(tp.name)}</span><span class="row">${copyBtn(tp.text)}<button type="button" class="btn sm ghost" data-del>${esc(t('delete'))}</button></span></div><div class="sub" style="white-space:pre-wrap">${esc(tp.text)}</div></div>`).join('') || `<p class="hint">${esc(t('noTemplates'))}</p>`}</div>
       <h2>${esc(t('biz'))}</h2>
       <div class="grid2">
         ${field('bizName', t('name'), s.bizName || DEFAULTS.bizName)}
@@ -59,20 +59,20 @@ export function render({ root }) {
         ${field('validDays', t('validUntil') + ' (' + t('days') + ')', s.validDays || 14, { type: 'number', inputmode: 'numeric' })}
         ${field('reviewUrl', t('review'), s.reviewUrl || '', { ltr: true })}
       </div>
-      ${field('bankDetails', t('bankDetails'), s.bankDetails || DEFAULTS.bankDetails, { type: 'textarea', rows: 3 })}
+      ${field('bankDetails', t('bankDetails'), s.bankDetails || DEFAULTS.bankDetails, { type: 'textarea', rows: 3 })}<div class="row">${copyOf('[name=bankDetails]')}</div>
       ${field('terms', t('terms'), s.terms || DEFAULTS.terms, { type: 'textarea', rows: 3 })}
       ${field('cancelTerms', t('cancelTerms'), s.cancelTerms || DEFAULTS.cancelTerms, { type: 'textarea', rows: 4 })}
       <div class="row"><button class="btn primary grow" type="submit">${esc(t('save'))}</button></div>
     </form>
     <section class="sec"><h2>${esc(t('cloud'))}</h2>
-      ${cc && cc.on ? `<p class="hint">${esc(t('cloudOn'))} <span class="ltr">${esc(cc.email)}</span> · <span id="cs"></span></p><div class="row"><button class="btn" id="logout">${esc(t('logout'))}</button></div>`
+      ${cc && cc.on ? `<p class="hint">${esc(t('cloudOn'))} <span class="ltr">${esc(cc.email)}</span>${copyBtn(cc.email, { icon: true })} · <span id="cs"></span></p><div class="row"><button class="btn" id="logout">${esc(t('logout'))}</button></div>`
       : `<p class="hint">${esc(t('cloudOff'))} ${esc(t('cloudHelp'))}</p>
         <form class="stack card" id="cl"><div class="grid2">${field('email', t('email'), s.bizEmail || DEFAULTS.bizEmail, { ltr: true })}</div>
-          <div class="row"><button class="btn primary" type="submit">${esc(t('sendLink'))}</button><span class="hint">${esc(t('sendLinkHint'))}</span></div>
-          <details><summary>${esc(t('pasteLinkTitle'))}</summary>${field('link', t('pasteLink'), '', { type: 'textarea', rows: 3, ltr: true })}<div class="row"><button class="btn" type="button" id="useLink">${esc(t('useLink'))}</button></div></details></form>
+          <div class="row"><button class="btn primary" type="submit">${esc(t('sendLink'))}</button>${copyOf('[name=email]')}<span class="hint">${esc(t('sendLinkHint'))}</span></div>
+          <details><summary>${esc(t('pasteLinkTitle'))}</summary>${field('link', t('pasteLink'), '', { type: 'textarea', rows: 3, ltr: true })}<div class="row"><button class="btn" type="button" id="useLink">${esc(t('useLink'))}</button>${copyOf('[name=link]')}</div></details></form>
         <details><summary>${esc(t('withPassword'))}</summary><form class="stack" id="cf"><div class="grid2">${CLOUD.url ? `<input type="hidden" name="url" value="${esc(CLOUD.url)}"><input type="hidden" name="key" value="${esc(CLOUD.key)}">` : field('url', t('cloudUrl'), (cc && cc.url) || '', { ltr: true, placeholder: 'https://xxxx.supabase.co' }) + field('key', t('cloudKey'), '', { ltr: true })}${field('email', t('email'), (cc && cc.email) || '', { ltr: true, inputmode: 'email' })}${field('password', t('password'), '', { type: 'password', ltr: true })}</div><button class="btn primary" type="submit">${esc(t('login'))}</button></form></details>`}
     </section>
-    <section class="sec"><h2>${esc(t('companyDocs'))}</h2><div class="card"><div class="kv"><dt>${esc(t('fLegal'))}</dt><dd>${esc(s.bizLegal || DEFAULTS.bizLegal)}</dd><dt>${esc(t('fTaxId'))}</dt><dd class="ltr">${esc(s.bizId || DEFAULTS.bizId)}</dd><dt>${esc(t('bizAddress'))}</dt><dd>${esc(s.bizAddress || DEFAULTS.bizAddress)}</dd><dt>${esc(t('fEmail'))}</dt><dd class="ltr">${esc(s.bizEmail || DEFAULTS.bizEmail)}</dd></div><div class="row"><button class="btn sm" id="copyBiz">${esc(t('copyDetails'))}</button></div></div>
+    <section class="sec"><h2>${esc(t('companyDocs'))}</h2><div class="card"><div class="kv"><dt>${esc(t('fLegal'))}</dt><dd>${esc(s.bizLegal || DEFAULTS.bizLegal)}</dd><dt>${esc(t('fTaxId'))}</dt><dd class="ltr">${esc(s.bizId || DEFAULTS.bizId)}${copyBtn(s.bizId || DEFAULTS.bizId, { icon: true })}</dd><dt>${esc(t('bizAddress'))}</dt><dd>${esc(s.bizAddress || DEFAULTS.bizAddress)}${copyBtn(s.bizAddress || DEFAULTS.bizAddress, { icon: true })}</dd><dt>${esc(t('phone'))}</dt><dd class="ltr">${esc(s.bizPhone || DEFAULTS.bizPhone)}${copyBtn(s.bizPhone || DEFAULTS.bizPhone, { icon: true })}</dd><dt>${esc(t('fEmail'))}</dt><dd class="ltr">${esc(s.bizEmail || DEFAULTS.bizEmail)}${copyBtn(s.bizEmail || DEFAULTS.bizEmail, { icon: true })}</dd></div><div class="row"><button class="btn sm" id="copyBiz">${esc(t('copyDetails'))}</button></div></div>
       <div class="list">${COMPANY_PAPERS.map(p => `<div class="card row between"><span class="title grow">${esc(p.title)}</span><span class="badge ${p.status === 'found' ? 'ok' : ''}">${esc(p.status === 'found' ? t('paperFound') : t('paperMissing'))}</span></div>`).join('')}</div>
       <p class="hint">${esc(t('docsHint'))} <a href="#/assist">${esc(t('assist'))}</a></p>
       <div class="list">${COMPANY_DOCS.map(d => `<a class="card tap" href="${esc(d.url)}" target="_blank" rel="noopener"><span class="title">${esc(d.title)}</span></a>`).join('')}</div></section>
@@ -86,7 +86,7 @@ export function render({ root }) {
       <p><b>${esc(t('contactsCount', { n: db.list('contacts').length }))}</b></p>
       <div class="row"><button class="btn sm" id="pickMany">${esc(t('fromPhone'))}</button><label class="btn sm">${esc(t('importFile'))}<input type="file" id="contactsFile" accept=".csv,.vcf,text/csv,text/vcard,text/x-vcard" hidden></label></div></section>
     <section class="sec"><h2>${esc(t('team'))}</h2><p class="hint">${esc(t('teamHint'))}</p>
-      <div class="list">${db.list('team').map(p => `<div class="card" data-team="${esc(p.id)}"><div class="row between"><span class="title">${esc(p.name)}${p.role ? ` <span class="sub">· ${esc(p.role)}</span>` : ''}</span><span class="row"><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button><button class="btn sm ghost" data-del>✕</button></span></div><div class="sub ltr">${esc([p.phone, p.email].filter(Boolean).join(' · ') || '—')}</div></div>`).join('')}</div>
+      <div class="list">${db.list('team').map(p => `<div class="card" data-team="${esc(p.id)}"><div class="row between"><span class="title">${esc(p.name)}${p.role ? ` <span class="sub">· ${esc(p.role)}</span>` : ''}</span><span class="row"><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button><button class="btn sm ghost" data-del>✕</button></span></div><div class="sub ltr">${p.phone || p.email ? [p.phone, p.email].filter(Boolean).map(v => esc(v) + copyBtn(v, { icon: true })).join(' · ') : '—'}</div></div>`).join('')}</div>
       <div class="row"><button class="btn sm" id="addTeam">${esc(t('addPerson'))}</button></div></section>
     <section class="sec"><h2>${esc(t('startData'))}</h2><div class="row"><button class="btn" id="seed">${esc(t('loadSeed'))}</button></div><p class="hint">${esc(t('noWipeHint'))}</p></section>
     <p class="hint sec">${esc(t('install'))}</p>`;
