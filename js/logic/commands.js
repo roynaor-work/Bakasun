@@ -208,10 +208,20 @@ export function parseInvoiceRequest(text, clients) {
   const t = spelledLetters(str(text).replace(/[‎‏]/g, ''));
   const out = { client: '', taxId: '', address: '', email: '', items: [], total: 0, kind: /חשבון עסקה|דרישת תשלום|proforma/i.test(t) ? 'חשבון עסקה' : 'חשבונית', channel: /(?:^|\s)(?:במייל|באימייל|מייל|by e?-?mail|par (?:e-?)?mail|courriel)(?=\s|$)/i.test(t) ? 'mail' : /וואטסאפ|whatsapp/i.test(t) ? 'wa' : '' };
   const em = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/.exec(t); if (em) out.email = em[0];
-  const id = /(?:ח\.?פ\.?|ע\.?ר\.?|ע\.?מ\.?|ת\.?ז\.?|מס'? ?חברה|company no\.?|reg\.?)\s*:?\s*(\d{8,9})/i.exec(t) || /\b(5\d{8})\b/.exec(t);
-  if (id) out.taxId = id[1];
-  const cl = /(?:לכבוד|לקוח(?: חדש)?|client|customer|à l'attention de|pour le client)\s*:?\s*([^\n,.]{2,60}?)(?=\s*(?:ח\.?פ|ע\.?ר|ע\.?מ|\d{8,9}|[\n,.]|$))/i.exec(t);
-  if (cl) out.client = trim(cl[1]).replace(/\s*(ח\.?פ\.?|ע\.?ר\.?|ע\.?מ\.?)\s*\d*$/, '').replace(/\d{8,9}/, '').trim();
+  // the company number, also as she dictates it: "ח.פ. 514 572 312", "חפ 51-457-2312"
+  const ID_WORD = "(?:ח\\.?\\s?פ\\.?|ע\\.?\\s?ר\\.?|ע\\.?\\s?מ\\.?|ת\\.?\\s?ז\\.?|מס'? ?חברה|מספר חברה|company no\\.?|company number|reg\\.?|siret|siren)";
+  const id = new RegExp(ID_WORD + "\\s*:?\\s*(\\d(?:[\\d\\s\\-]{6,14})\\d)", 'i').exec(t) || /\b(5\d{8})\b/.exec(t);
+  if (id) { const digits = id[1].replace(/\D/g, ''); if (digits.length >= 8 && digits.length <= 9) out.taxId = digits; }
+  const cl = /(?:לכבוד|לקוח(?: חדש)?|client|customer|à l'attention de|pour le client)\s*:?\s*([^\n,.]{2,60}?)(?=\s*(?:ח\.?פ|ע\.?ר|ע\.?מ|\d{8,9}|[\n,.]|$))/i.exec(t)
+    // "חשבונית לחברת אלפא ח.פ. 514..." / "invoice for Alpha Ltd, company no. ...": the name sits between the request and the number
+    || new RegExp("(?:חשבונית(?:\\s+מס)?|חשבון\\s+עסקה|דרישת\\s+תשלום|invoice|facture)\\s+(?:בבקשה\\s+|please\\s+)?(?:ל|for\\s+|to\\s+|pour\\s+|à\\s+)([^\\n,.]{2,60}?)\\s*,?\\s*(?=" + ID_WORD + "\\s*:?\\s*\\d)", 'i').exec(t)
+    // the words right before the number ("... מועצה אזורית גליל עליון ח.פ. 500...")
+    || new RegExp("((?:[^\\s\\d,.]+\\s+){1,5}?[^\\s\\d,.]+)\\s*,?\\s*(?=" + ID_WORD + "\\s*:?\\s*\\d)", 'i').exec(t);
+  if (cl) {
+    out.client = trim(cl[1]).replace(/\s*(ח\.?פ\.?|ע\.?ר\.?|ע\.?מ\.?)\s*\d*$/, '').replace(/\d{8,9}/, '').trim();
+    // only the guessed forms carry the request words and the ל prefix; "לקוח: לקוח חדש" keeps its name whole
+    if (!/^(?:לכבוד|לקוח|client|customer|à l'attention|pour le client)/i.test(cl[0])) out.client = out.client.replace(/^(?:תוציא|תוציאי|הוציאי|בבקשה|לי|את|ה?חשבונית|חשבון|עסקה|invoice|facture|please|issue|make)\s+/i, '').replace(/^(?:ל|for\s+|to\s+|pour\s+)(?=\S)/, '').trim();
+  }
   // a client the app knows, named anywhere in the sentence ("חשבונית לב.ד. על 10000")
   const known = findClientIn(t, clients);
   if (known) { out.client = known.legalName || known.name; out.clientId = known.id; out.taxId = out.taxId || known.taxId || ''; out.address = known.address || ''; out.email = out.email || known.invoiceEmail || known.email || ''; }

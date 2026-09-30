@@ -2,6 +2,7 @@
    checklists, reminders, the board and the history): he / fr / en. No Arabic letters anywhere. */
 export const VOICE2 = {
   he: {
+    newClientQ: 'לקוח חדש: {who}. להוסיף לרשימת הלקוחות?', addToClients: 'כן, להוסיף לרשימת הלקוחות (עם הח.פ. והכתובת)', oneTimeClient: 'לא, חד-פעמי. לא לשמור', clientAdded: 'הלקוח {who} נוסף לרשימה',
     v2Added: 'נוספו {n} ל{event}: {names}', v2AddedNone: 'לא זוהו שמות. כתבי: שם, טלפון, צמחוני.', v2Skipped: '{n} כבר ברשימה', v2Participants: 'משתתפים',
     v2Rsvp: '{yes} אישרו הגעה מתוך {total}. {no} לא מגיעים, {maybe} אולי, {invited} עוד לא ענו.', v2NoParticipants: 'אין עדיין רשימת משתתפים ל{event}.',
     v2NotConfirmed: 'עוד לא אישרו ({n}):', v2AllConfirmed: 'כולם ענו. אין מי שעוד לא אישר.', v2HotelList: 'רשימה למלון', v2NoRooms: 'אף אחד ברשימה עוד לא מסומן עם חדר.',
@@ -23,6 +24,7 @@ export const VOICE2 = {
     v2Changes: 'שינויים {when} ({n}):', v2NoChanges: 'לא היו שינויים {when}.', v2wToday: 'היום', v2wYesterday: 'אתמול', v2wWeek: 'השבוע', v2wRecent: 'לאחרונה', v2More: 'ועוד {n}', v2History: 'היסטוריה'
   },
   fr: {
+    newClientQ: 'Nouveau client : {who}. L’ajouter à la liste des clients ?', addToClients: 'Oui, l’ajouter à la liste (avec n° d’entreprise et adresse)', oneTimeClient: 'Non, ponctuel. Ne pas enregistrer', clientAdded: 'Le client {who} a été ajouté',
     v2Added: '{n} ajouté(s) à {event} : {names}', v2AddedNone: 'Aucun nom reconnu. Écrivez : nom, téléphone, végétarien.', v2Skipped: '{n} déjà sur la liste', v2Participants: 'Participants',
     v2Rsvp: '{yes} confirmés sur {total}. {no} ne viennent pas, {maybe} peut-être, {invited} sans réponse.', v2NoParticipants: 'Pas encore de liste de participants pour {event}.',
     v2NotConfirmed: 'Pas encore confirmé ({n}) :', v2AllConfirmed: 'Tout le monde a répondu.', v2HotelList: 'Liste pour l’hôtel', v2NoRooms: 'Personne sur la liste n’a encore de chambre.',
@@ -44,6 +46,7 @@ export const VOICE2 = {
     v2Changes: 'Changements {when} ({n}) :', v2NoChanges: 'Aucun changement {when}.', v2wToday: 'aujourd’hui', v2wYesterday: 'hier', v2wWeek: 'cette semaine', v2wRecent: 'récemment', v2More: 'et {n} de plus', v2History: 'Historique'
   },
   en: {
+    newClientQ: 'New client: {who}. Add it to the client list?', addToClients: 'Yes, add to the client list (with company number and address)', oneTimeClient: 'No, one-time. Do not save', clientAdded: 'Client {who} added to the list',
     v2Added: '{n} added to {event}: {names}', v2AddedNone: 'No names recognised. Write: name, phone, vegetarian.', v2Skipped: '{n} already on the list', v2Participants: 'Participants',
     v2Rsvp: '{yes} confirmed out of {total}. {no} not coming, {maybe} maybe, {invited} no answer yet.', v2NoParticipants: 'No participant list yet for {event}.',
     v2NotConfirmed: 'Not confirmed yet ({n}):', v2AllConfirmed: 'Everyone has answered.', v2HotelList: 'Rooming list', v2NoRooms: 'Nobody on the list has a room yet.',

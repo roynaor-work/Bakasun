@@ -14,6 +14,8 @@ import { toCalendar } from '../calendar.js';
 import { speak, isReadAloudCommand, textOfEl } from '../speak.js';
 import { parseAction } from '../logic/questions.js';
 import { parseAction2 } from '../logic/questions2.js';
+import { parseWorkGroup } from '../logic/workgroup.js';
+import { showWorkGroup, answerWorkGroup } from './workgroup.js';
 import { runAction, supplierStatus, undoBtn, wireUndo } from './actions.js';
 import { remember, undoLast, isUndoCommand } from '../logic/undo.js';
 import { pushRecent, recentList } from '../logic/recent.js';
@@ -53,6 +55,7 @@ function missingDocs() { return COMPANY_PAPERS.filter(p => !(p.status === 'found
 export const noLive = true;
 let mode = 'command';
 let draft = '';
+let runOnce = false; // the sentence that moved us to the invoice tab runs there at once, no second tap
 
 const BACK = `<a class="icon" href="#/today" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
 
@@ -227,6 +230,9 @@ async function tabCommand(body, s, ctx) {
     // "save as template tour": the message on screen becomes a template
     { const tn = isSaveTemplateCommand(text); if (tn) { const ta2 = out.querySelector('[name=msg], textarea'); if (ta2 && ta2.value.trim()) { saveTemplate(db, tn, ta2.value); toast(t('templateSaved', { name: tn }), 3000); } else toast(t('nothingToSave')); return; } }
     if (isEmptyBinCommand(text)) { emptyBins().then(ok => { if (ok) { draft = ''; body.querySelector('#txt').value = ''; const b = body.querySelector('#bin'); if (b) b.hidden = true; } }); return; }
+    // "open a working group with Eran and Moshe": the group card, then her answer to "how?" by voice
+    if (answerWorkGroup(out, text)) return;
+    { const wg = parseWorkGroup(text); if (wg) { showWorkGroup(out, wg, { s, people: peopleNow, caseByName }); afterAnswer(out, s); return; } }
     // participants, budget, run of show, files, contract, checklist, reminders, board, history: before "go to", so that
     // "go to day-of mode" is not read as a screen name
     const act2 = parseAction2(text);
@@ -243,7 +249,7 @@ async function tabCommand(body, s, ctx) {
     const hq = parseHow(text);
     if (hq) { showHow(out, hq); afterAnswer(out, s); return; }
     const c = parseCommand(text, docs, peopleNow());
-    if (c.kind === 'invoice') { mode = 'invoice'; draft = text; render({ root: body.closest('#app') }); return; }
+    if (c.kind === 'invoice') { mode = 'invoice'; draft = text; runOnce = true; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'supplierQuote') { mode = 'supplierQuote'; preSupplier = c.supplier && c.supplier.about === 'supplier' ? c.supplier.id : ''; draft = ''; render({ root: body.closest('#app') }); return; }
     if (c.kind === 'today') { location.hash = '#/today'; return; }
     if (c.kind === 'lead') { sessionStorage.setItem('bakasun.leadText', c.body || ''); location.hash = '#/lead'; return; }
@@ -370,8 +376,13 @@ function tabInvoice(body, s) {
     form.querySelector('#addItem').onclick = () => { form.querySelector('#items').insertAdjacentHTML('beforeend', `<div class="row"><input name="desc" class="grow" placeholder="${esc(t('note'))}"><input name="amount" type="number" inputmode="decimal" style="max-width:9em" placeholder="${esc(t('amount'))}"></div>`); };
     form.querySelector('#copyInv').onclick = () => copyText(form.querySelector('#invText').value);
     // remember: the client's invoice details, and a payment row per amount
-    const done = req => {
+    const done = async req => {
       if (match) db.put('clients', { id: match.id, legalName: req.client || match.legalName, taxId: req.taxId || match.taxId, address: req.address || match.address, email: req.email || match.email });
+      // a client the app does not know yet: she decides whether it joins the client list or stays a one-time name
+      else if (req.client) {
+        const r = await dialog(t('newClientQ', { who: req.client }), `<label class="chk"><input type="radio" name="keep" value="add" checked> ${esc(t('addToClients'))}</label><label class="chk"><input type="radio" name="keep" value="once"> ${esc(t('oneTimeClient'))}</label>`, { ok: t('okBtn') });
+        if (r && r.keep === 'add') { const cid = db.put('clients', { name: req.client, legalName: req.client, taxId: req.taxId || '', address: req.address || '', invoiceEmail: req.email || '', kind: '' }); remember(t('clientAdded', { who: req.client }), () => db.remove('clients', cid)); toast(t('clientAdded', { who: req.client }), 2500); }
+      }
       req.items.forEach(x => db.put('payments', { caseId: req.caseId || '', client: req.client, amount: x.amount, due: '', status: Office.PAY.invoiceAsked, note: x.desc, invoiceKind: req.kind }));
       draft = ''; toast(t('saved')); location.hash = '#/money';
     };
@@ -390,6 +401,7 @@ function tabInvoice(body, s) {
       done(req);
     };
   }, t('read'));
+  if (runOnce) { runOnce = false; const g = body.querySelector('#go'); if (g && draft) g.click(); }
 }
 
 /* ---------------- 3. a supplier's quote → the client's quote, with her fee ---------------- */

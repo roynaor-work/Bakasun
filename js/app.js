@@ -29,6 +29,7 @@ import * as contracts from './screens/contracts.js';
 import * as budget from './screens/budget.js';
 import * as runsheet from './screens/runsheet.js';
 import * as casefiles from './screens/casefiles.js';
+import './screens/workgroup.js';
 import * as rules from './screens/rules.js';
 import * as board from './screens/board.js';
 import { quickNote } from './notes.js';

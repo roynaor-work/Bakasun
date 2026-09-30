@@ -173,3 +173,12 @@ test('"send the insurance to Roy\'s mail": the first name alone finds the person
   assert.equal(parseCommand('שלחי את תעודת ההתאגדות למייל של רועי', [{ id: 'inc', title: 'תעודת התאגדות', aliases: [] }], people).doc.id, 'inc');
   assert.equal(parseCommand('send the logo to Roy', [{ id: 'logo', title: 'logo', aliases: [] }], [{ label: 'Roy Naor', names: ['Roy Naor'], email: 'r@x' }]).to.email, 'r@x');
 });
+
+test('invoice request: a new client with a dictated company number, without "לקוח:"', () => {
+  const r = parseInvoiceRequest('תוציא חשבונית לחברת אלפא בע״מ ח.פ. 514 572 312 על 5000 שקל עבור יום גיבוש. שלח במייל לרועי', []);
+  assert.equal(r.client, 'חברת אלפא בע״מ'); assert.equal(r.taxId, '514572312'); assert.equal(r.items[0].amount, 5000); assert.equal(r.channel, 'mail');
+  const r2 = parseInvoiceRequest('חשבונית למועצה אזורית גליל עליון חפ 500226221, 12,000 + מע"מ', []);
+  assert.equal(r2.client, 'מועצה אזורית גליל עליון'); assert.equal(r2.taxId, '500226221'); assert.equal(r2.total, 12000);
+  const r3 = parseInvoiceRequest('invoice for Alpha Events Ltd, company no. 51-234-5678, 3000 plus VAT', []);
+  assert.equal(r3.client, 'Alpha Events Ltd'); assert.equal(r3.taxId, '512345678');
+});
