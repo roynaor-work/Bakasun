@@ -11,7 +11,7 @@ export const hasWebGL = () => { try { const c = document.createElement('canvas')
 export const KITS3D = {
   maccabi: { name: 'מכבי חיפה', shirt: '#0B7A3B', shirt2: '#0A6A34', shorts: '#F4F4F4', number: '7', numberColor: '#FFFFFF', stripe: null },
   israel: { name: 'ישראל', shirt: '#1D4ED8', shirt2: '#1E40AF', shorts: '#F4F4F4', number: '10', numberColor: '#FFFFFF' },
-  keeper: { name: 'שוער', shirt: '#F59E0B', shirt2: '#D97706', shorts: '#111827', number: '1', numberColor: '#111827' },
+  keeper: { name: 'שוער', shirt: '#FACC15', shirt2: '#EAB308', shorts: '#111827', number: '1', numberColor: '#111827' },
   grey: { name: 'אפור', shirt: '#9CA3AF', shirt2: '#6B7280', shorts: '#374151', number: '', numberColor: '#fff' },
   red: { name: 'אדום', shirt: '#DC2626', shirt2: '#B91C1C', shorts: '#F4F4F4', number: '9', numberColor: '#fff' },
   orange: { name: 'כתום', shirt: '#F97316', shirt2: '#EA580C', shorts: '#111827', number: '11', numberColor: '#fff' },
@@ -44,10 +44,22 @@ async function fbxBuffer() {
 export async function loadCharacter(kit = KITS3D.maccabi) {
   const [buf, tex] = await Promise.all([fbxBuffer(), kitTexture(kit)]);
   const model = new FBXLoader().parse(buf, ''); model.scale.setScalar(SCALE);
-  let mesh = null;
-  model.traverse(o => { if (o.isMesh) { mesh = o; o.castShadow = true; o.frustumCulled = false; o.material = new THREE.MeshStandardMaterial({ map: tex, roughness: .85, metalness: 0 }); } });
+  let mesh = null, outline = null;
+  model.traverse(o => { if (o.isMesh) { mesh = o; o.castShadow = true; o.frustumCulled = false; o.material = toonMaterial(tex); } });
+  // קו מתאר: עותק של הרשת המעורה (אותו שלד), פנים הפוכות, מוזז החוצה לאורך הנורמל; נותן מראה של סרט מצויר
+  if (mesh) { model.updateMatrixWorld(true); const ws = new THREE.Vector3(); mesh.getWorldScale(ws); /* הגאומטריה של ה-FBX בקנה מידה פנימי, לכן רוחב הקו מתורגם ליחידות הרשת */ outline = mesh.clone(); outline.material = outlineMaterial(1.5 / (ws.x || 1)); outline.castShadow = false; outline.renderOrder = -1; mesh.parent.add(outline); }
   const rig = new PoseRig(model);
-  return { model, rig, mesh, async setKit(k) { mesh.material.map = await kitTexture(k); mesh.material.needsUpdate = true; } };
+  return { model, rig, mesh, outline, async setKit(k) { mesh.material.map = await kitTexture(k); mesh.material.needsUpdate = true; } };
+}
+
+// חומר "טון": הצללה בדרגות (כמו אנימציה), עם ברק קטן. gradientMap של 4 דרגות
+let gradTex = null;
+function gradientMap() { if (gradTex) return gradTex; const c = document.createElement('canvas'); c.width = 4; c.height = 1; const g = c.getContext('2d'); [['#6b6b6b', 0], ['#a8a8a8', 1], ['#e6e6e6', 2], ['#ffffff', 3]].forEach(([col, i]) => { g.fillStyle = col; g.fillRect(i, 0, 1, 1); }); gradTex = new THREE.CanvasTexture(c); gradTex.minFilter = gradTex.magFilter = THREE.NearestFilter; gradTex.colorSpace = THREE.NoColorSpace; return gradTex; }
+export function toonMaterial(map) { return new THREE.MeshToonMaterial({ map, gradientMap: gradientMap() }); }
+export function outlineMaterial(width = 1.9, color = '#1B1740') {
+  const m = new THREE.MeshBasicMaterial({ color, side: THREE.BackSide });
+  m.onBeforeCompile = sh => { sh.vertexShader = sh.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>\n transformed += normalize(objectNormal) * ${width.toFixed(5)};`); };
+  return m;
 }
 
 // ---- מניע השלד מפוזות דו-ממד ----
@@ -81,8 +93,11 @@ export class PoseRig {
     this.aim('Neck', d(pose.neck, pose.head));
     this.aim(L + 'UpLeg', d(pose.hip, pose.lk)); this.aim(L + 'Leg', d(pose.lk, pose.lf));
     this.aim(R + 'UpLeg', d(pose.hip, pose.rk)); this.aim(R + 'Leg', d(pose.rk, pose.rf));
-    this.aim(L + 'Arm', d(pose.neck, pose.le)); this.aim(L + 'ForeArm', d(pose.le, pose.lh));
-    this.aim(R + 'Arm', d(pose.neck, pose.re)); this.aim(R + 'ForeArm', d(pose.re, pose.rh));
+    // ידיים: במבט מהצד המרפקים נפתחים מעט הצידה (X של המודל), אחרת שתי הידיים נבלעות בגוף באותו מישור
+    const lat = front ? 0 : .32, side = name => name === 'Left' ? 1 : -1;
+    const armDir = (a, b, who) => { const v = d(a, b); if (lat) v.x += side(who) * lat * v.length(); return v; };
+    this.aim(L + 'Arm', armDir(pose.neck, pose.le, L)); this.aim(L + 'ForeArm', armDir(pose.le, pose.lh, L).multiplyScalar(1));
+    this.aim(R + 'Arm', armDir(pose.neck, pose.re, R)); this.aim(R + 'ForeArm', armDir(pose.re, pose.rh, R));
     const flat = new THREE.Vector3(0, -0.2, 1); this.aim('LeftFoot', flat); this.aim('RightFoot', flat);
     // תיקון רצפה: כשיש כף רגל או יד על הרצפה בפוזה, הנקודה הנמוכה נוגעת בגובה הבסיס
     this.model.updateMatrixWorld(true);
@@ -93,9 +108,12 @@ export class PoseRig {
 
 // ---- תאורה וסצנות ----
 export function lights(scene, { sun = 2.2, sky = '#ffffff', ground = '#b9a7ff' } = {}) {
-  scene.add(new THREE.HemisphereLight(sky, ground, 1.1));
+  scene.add(new THREE.HemisphereLight(sky, ground, .9));
   const s = new THREE.DirectionalLight('#fff7e6', sun); s.position.set(160, 320, 220); s.castShadow = true; s.shadow.mapSize.set(2048, 2048);
-  Object.assign(s.shadow.camera, { left: -500, right: 500, top: 500, bottom: -200, near: 50, far: 1400 }); s.shadow.bias = -0.0005; scene.add(s); return s;
+  Object.assign(s.shadow.camera, { left: -500, right: 500, top: 500, bottom: -200, near: 50, far: 1400 }); s.shadow.bias = -0.0005; scene.add(s);
+  const fill = new THREE.DirectionalLight('#bfd7ff', sun * .35); fill.position.set(-260, 160, 120); scene.add(fill); // מילוי קר מהצד השני
+  const rim = new THREE.DirectionalLight('#ffffff', sun * .5); rim.position.set(-80, 240, -320); scene.add(rim); // אור אחורי שמפריד את הדמות מהרקע
+  return s;
 }
 // חדר: קיר, פנל, פרקט
 export function room(scene, dark = false) {
