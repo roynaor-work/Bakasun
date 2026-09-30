@@ -5,6 +5,9 @@ import { FBXLoader } from '../3d/lib/loaders/FBXLoader.js';
 
 export { THREE };
 export const SCALE = 68 / 111; // רגל תלת-ממד (111 יחידות) = רגל דו-ממד (68), כך שהדמות בקנה מידה של פוזות הקטלוג
+// מבט לתלת-ממד: ex.view3d ('front'/'side') גובר; אחרת לפי רוב הפריימים (ידיים סימטריות סביב הצוואר = מלפנים)
+export const isFrontPose = p => Math.abs((p.le[0] - p.neck[0]) + (p.re[0] - p.neck[0])) < 10 && Math.abs(p.le[0] - p.re[0]) > 14;
+export const viewFront = ex => ex.view3d ? ex.view3d === 'front' : ex.frames.filter(f => isFrontPose(f[0])).length * 2 > ex.frames.length;
 export const hasWebGL = () => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; } };
 
 // ---- ערכות: צובעים את אזורי החולצה והמכנסיים בטקסטורה של Kenney (1024x1024: חולצה משמאל למטה, מכנסיים מימין למטה) ----
@@ -136,7 +139,7 @@ export function propMesh(prop) {
   const g = new THREE.Group();
   const wood = new THREE.MeshStandardMaterial({ color: '#C89B6D', roughness: .8 }), wallMat = new THREE.MeshStandardMaterial({ color: '#CFC6F3', roughness: 1 });
   if (prop.type === 'box') { const m = new THREE.Mesh(new THREE.BoxGeometry(prop.w, prop.h, 80), wood); m.position.set(prop.x + prop.w / 2 - 100, prop.h / 2, 0); m.castShadow = m.receiveShadow = true; g.add(m); const top = new THREE.Mesh(new THREE.BoxGeometry(prop.w + 4, 3, 84), new THREE.MeshStandardMaterial({ color: '#E2B98A' })); top.position.set(prop.x + prop.w / 2 - 100, prop.h + 1, 0); g.add(top); }
-  else if (prop.type === 'wall') { const m = new THREE.Mesh(new THREE.BoxGeometry(8, 240, 420), wallMat); m.position.set(prop.x - 4 - 100 - (prop.x < 100 ? 4 : -4), 120, 0); m.receiveShadow = true; g.add(m); }
+  else if (prop.type === 'wall') { const x = prop.x - 100 + (prop.x < 100 ? -8 : 8); /* הקיר מעט מאחורי נקודת המגע כדי שהידיים/הגב לא יעברו דרכו */ const near = x > 0; /* קיר בצד המצלמה (+X) מסתיר את הדמות, לכן שקוף למחצה */ const m = new THREE.Mesh(new THREE.BoxGeometry(8, 240, 420), near ? new THREE.MeshStandardMaterial({ color: '#CFC6F3', roughness: 1, transparent: true, opacity: .4 }) : wallMat); m.position.set(x, 120, 0); m.receiveShadow = !near; g.add(m); }
   else if (prop.type === 'walls') {
     // מסדרון: הקיר הרחוק מהמצלמה מלא, הקיר הקרוב (צד +X, שם המצלמה) נמוך ושקוף למחצה כדי לא להסתיר את הדמות
     const far = new THREE.Mesh(new THREE.BoxGeometry(8, 240, 420), wallMat); far.position.set(-98, 120, 0); far.receiveShadow = true; g.add(far);
