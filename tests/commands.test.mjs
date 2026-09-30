@@ -163,3 +163,13 @@ test('an invoice request names a known client in any spelling, and reads the pur
   assert.equal(parseInvoiceRequest('לבדוק חשבונית 3000 פלוס מעמ', clients).clientId, undefined);
   assert.equal(findClientIn('חשבונית לגרייבר עבור משכורת', clients).id, 'c1');
 });
+
+test('"send the insurance to Roy\'s mail": the first name alone finds the person', () => {
+  const people = [{ label: 'רועי נאור', names: ['רועי נאור'], email: 'roynaor@gmail.com', about: 'team', id: 't1' }, { label: 'רותם', names: ['רותם'], phone: '050' }];
+  const docs = [{ id: 'paper:insurance', title: 'אישור קיום ביטוחים', aliases: ['ביטוח', 'אישור ביטוח'] }];
+  const c = parseCommand('שלח בבקשה את מסמכי הביטוח למייל של רועי', docs, people);
+  assert.equal(c.kind, 'send'); assert.equal(c.doc.id, 'paper:insurance'); assert.equal(c.to.email, 'roynaor@gmail.com');
+  assert.equal(parseCommand('שלחי את הלוגו לרועי', [{ id: 'logo', title: 'לוגו', aliases: [] }], people).to.name, 'רועי נאור');
+  assert.equal(parseCommand('שלחי את תעודת ההתאגדות למייל של רועי', [{ id: 'inc', title: 'תעודת התאגדות', aliases: [] }], people).doc.id, 'inc');
+  assert.equal(parseCommand('send the logo to Roy', [{ id: 'logo', title: 'logo', aliases: [] }], [{ label: 'Roy Naor', names: ['Roy Naor'], email: 'r@x' }]).to.email, 'r@x');
+});

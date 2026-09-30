@@ -47,6 +47,8 @@ async function bundledRec(p) {
   return { id: 'paper:' + p.key, name: p.file.split('/').pop(), type: blob.type || 'application/pdf', size: blob.size, blob, title: p.title };
 }
 function bundledDocs() { return COMPANY_PAPERS.filter(p => p.status === 'found' && p.file).map(p => ({ id: 'paper:' + p.key, title: p.title, aliases: p.aliases || [], rec: null, paper: p })); }
+/** The company papers not in the library yet: known by name, so "send the insurance" gets a clear answer. */
+function missingDocs() { return COMPANY_PAPERS.filter(p => !(p.status === 'found' && p.file)).map(p => ({ id: 'paper:' + p.key, title: p.title, aliases: p.aliases || [], rec: null, paper: p, missing: true })); }
 
 export const noLive = true;
 let mode = 'command';
@@ -211,7 +213,7 @@ function showAgenda(out, q) {
 /* ---------------- 1. send a document to someone ---------------- */
 async function tabCommand(body, s, ctx) {
   const lib = (await files.all()).filter(f => !f.caseId); // event files live on their event, not in the company library
-  const docs = lib.map(f => ({ id: f.id, title: f.title || f.name, aliases: (f.aliases || '').split(/[,;]+/).map(x => x.trim()).filter(Boolean), rec: f })).concat(bundledDocs());
+  const docs = lib.map(f => ({ id: f.id, title: f.title || f.name, aliases: (f.aliases || '').split(/[,;]+/).map(x => x.trim()).filter(Boolean), rec: f })).concat(bundledDocs()).concat(missingDocs());
   // built fresh on every command, so a phone saved a second ago is already known
   const peopleNow = () => subjects().map(p => { const c = p.about === 'client' ? db.get('clients', p.id) : p.about === 'supplier' ? db.get('suppliers', p.id) : p.about === 'team' ? db.get('team', p.id) : db.get('cases', p.id); return { label: p.label, names: p.names, phone: c && c.phone, email: c && c.email, about: p.about, id: p.id }; })
     .concat(db.list('staff').map(x => ({ label: x.name, names: [x.name], phone: x.phone })))
@@ -307,7 +309,13 @@ async function tabCommand(body, s, ctx) {
       };
       return;
     }
+    // "to Roy" with no card for him: the invoice mailbox from the settings
+    if (c.kind === 'send' && !c.to && /(?:^|\s)(?:ל|של\s+|עבור\s+)?(?:רועי|roy)(?=\s|$)/i.test(text)) c.to = { name: s.invoiceName || DEFAULTS.invoiceName, email: s.invoiceEmail || DEFAULTS.invoiceEmail, about: 'team' };
     if (c.kind !== 'send' || (!c.doc && !c.to)) { out.innerHTML = `<p class="warnbox">${esc(t('cmdUnknown'))}</p>`; return; }
+    if (c.doc && c.doc.missing) {
+      out.innerHTML = `<div class="card stack"><div class="title">${esc(c.doc.title)} <span class="badge warn">${esc(t('paperMissing'))}</span></div><p>${esc(t('docMissingYet'))}</p>${c.doc.paper.note ? `<p class="hint">${esc(c.doc.paper.note)}</p>` : ''}${c.to ? `<p class="sub">${esc(t('recipient'))}: ${esc(c.to.name || c.to.email || c.to.phone || '')}</p>` : ''}<div class="row"><a class="btn sm" href="#/settings">${esc(t('docMissingWhere'))}</a><a class="btn sm ghost" href="#/files">${esc(t('files'))}</a></div></div>`;
+      return;
+    }
     out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(t('document'))}</dt><dd>${c.doc ? esc(c.doc.title) : `<span class="badge warn">${esc(t('docNotFound'))}</span>`}</dd><dt>${esc(t('recipient'))}</dt><dd class="ltr">${c.to ? esc(c.to.name || c.to.phone || c.to.email) + (c.to.name && c.to.phone ? ' · ' + esc(c.to.phone) : '') + (c.to.phone || c.to.email ? copyBtn(c.to.phone || c.to.email, { icon: true }) : '') : `<span class="badge warn">${esc(t('noRecipient'))}</span>`}</dd></div>
       ${field('msg', t('note'), c.doc ? t('docMsg', { doc: c.doc.title }) : '', { type: 'textarea', rows: 2 })}
       <div class="row">${c.doc ? `<button class="btn primary" id="share">${esc(t('shareFile'))}</button>` : ''}${c.to && c.to.phone ? `<button class="btn wa" id="wa">${esc(t('whatsapp'))}</button>` : ''}${c.to && c.to.email ? `<a class="btn" id="mail">${esc(t('email'))}</a>` : ''}${copyOf('[name=msg]')}</div>

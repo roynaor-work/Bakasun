@@ -22,6 +22,8 @@ function findPerson(text, people) {
   const hay = Office.normHe(text); let bp = null, bl = 0;
   // the name inside the text ("send to Dana Levy the logo"), or the text inside the name ("Shoval" for "ארגון שוב״ל")
   (people || []).forEach(p => (p.names || []).forEach(n => { const k = Office.normHe(n); if (!k || k.length < 3) return; const hit = hay.indexOf(k) >= 0 ? k.length : (hay.length >= 3 && k.indexOf(hay) >= 0) ? hay.length : 0; if (hit > bl) { bp = p; bl = hit; } }));
+  // the first name alone ("to Roy" for "Roy Naor"), as a whole word, with or without a Hebrew prefix letter
+  if (!bp) (people || []).forEach(p => (p.names || []).forEach(n => { const first = Office.normHe(n).split(/\s+/)[0]; if (!first || first.length < 3) return; const re = new RegExp('(?:^|\\s)(?:ל|ב|מ|של\\s+|עבור\\s+|את\\s+)?' + first.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?=\\s|$)'); if (re.test(hay) && first.length > bl) { bp = p; bl = first.length; } }));
   return bp ? { name: bp.label, phone: bp.phone, email: bp.email, about: bp.about, id: bp.id } : null;
 }
 
@@ -159,7 +161,9 @@ export function parseCommand(text, docs, people) {
   let best = null, bestLen = 0;
   (docs || []).forEach(d => {
     const names = [d.title].concat(d.aliases || []);
-    names.forEach(n => { const k = Office.normHe(n); if (k && k.length > bestLen && Office.normHe(body).indexOf(k) >= 0) { best = d; bestLen = k.length; } });
+    // "the incorporation certificate" for "incorporation certificate": every word of the name may carry a leading ה in the text
+    const hay = Office.normHe(body);
+    names.forEach(n => { const k = Office.normHe(n); if (!k || k.length <= bestLen) return; const re = new RegExp(k.split(/\s+/).map(w => 'ה?' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+')); if (re.test(hay)) { best = d; bestLen = k.length; } });
   });
   out.doc = best;
   if (!out.to) out.to = findPerson(body, people);
