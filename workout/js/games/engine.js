@@ -92,7 +92,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     px: W / 2, py: H / 2, isDown: false, pointers: {}, // כל האצבעות שעל המסך (למשחקי שני שחקנים): id -> {x, y}
     net, // חיבור למשחק מול טלפון אחר (js/net.js): {role:'host'|'guest', send, alive, onMsg דרך r.netMsg} או null
     netMsg: null, // המשחק מציב פונקציה (t, p) => {} כדי לקבל הודעות מהטלפון השני
-    get score() { return score; }, get timeLeft() { return timeLeft; },
+    get score() { return score; }, get timeLeft() { return timeLeft; }, get best() { return best; }, /* השיא הקודם: משחקים שעולים רמה רק כשנשבר שיא (באולינג) */
     addScore(n = 1) { score = Math.max(0, Math.round(score + n)); scoreEl.textContent = score; },
     setScore(n) { score = Math.max(0, Math.round(n)); scoreEl.textContent = score; },
     over(msg = 'אופס!') { if (!running) return; running = false; SFX.over(); shakeT = 0.3;
