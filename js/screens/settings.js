@@ -115,7 +115,9 @@ export function render({ root }) {
       <div class="list">${db.list('team').map(p => `<div class="card" data-team="${esc(p.id)}"><div class="row between"><span class="title">${esc(p.name)}${p.role ? ` <span class="sub">· ${esc(p.role)}</span>` : ''}</span><span class="row"><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button><button class="btn sm ghost" data-del>✕</button></span></div><div class="sub ltr">${p.phone || p.email ? [p.phone, p.email].filter(Boolean).map(v => esc(v) + copyBtn(v, { icon: true })).join(' · ') : '—'}</div></div>`).join('')}</div>
       <div class="row"><button class="btn sm" id="addTeam">${esc(t('addPerson'))}</button></div></section>
     <section class="sec"><h2>${esc(t('startData'))}</h2><div class="row"><button class="btn" id="seed">${esc(t('loadSeed'))}</button></div><p class="hint">${esc(t('noWipeHint'))}</p></section>
-    <p class="hint sec">${esc(t('install'))}</p>`;
+    <p class="hint sec">${esc(t('install'))}</p>
+    <p class="hint sec" id="ver">${esc(t('version'))}: <span class="ltr">…</span> <button type="button" class="btn sm ghost" id="verChk">${esc(t('checkUpdate'))}</button></p>`;
+  showVersion(root);
 
   root.querySelectorAll('[data-tpl]').forEach(el => { el.querySelector('[data-del]').onclick = async () => { if (await confirmDialog(t('delete') + ' "' + el.dataset.tpl + '"?')) { removeTemplate(db, el.dataset.tpl); render({ root }); } }; });
   root.querySelector('#f').onsubmit = e => {
@@ -215,4 +217,16 @@ export function render({ root }) {
     el.querySelector('[data-edit]').onclick = () => editTeam(db.get('team', el.dataset.team));
     el.querySelector('[data-del]').onclick = async () => { if (await confirmDialog(t('delete') + '?')) { db.remove('team', el.dataset.team); render({ root }); } };
   });
+}
+
+/** The version she runs (the service-worker cache name), and a button that fetches a newer one when there is one. */
+async function showVersion(root) {
+  const el = root.querySelector('#ver'); if (!el) return;
+  let v = '';
+  try { if (window.caches) { const ks = await caches.keys(); v = (ks.map(k => (/^bakasun-v(\d+)$/.exec(k) || [])[1]).filter(Boolean).sort((a, b) => Number(b) - Number(a))[0]) || ''; } } catch (e) { /* no cache api */ }
+  el.querySelector('span').textContent = v ? 'v' + v : t('versionUnknown');
+  el.querySelector('#verChk').onclick = async () => {
+    try { const reg = navigator.serviceWorker && await navigator.serviceWorker.getRegistration(); if (reg) { await reg.update(); toast(t('updateChecked')); setTimeout(() => showVersion(root), 3000); return; } } catch (e) { /* fall through */ }
+    location.reload();
+  };
 }

@@ -132,7 +132,11 @@ window.addEventListener('hashchange', route);
 route();
 
 if ('serviceWorker' in navigator && location.protocol === 'https:' && !/claude\.ai$/.test(location.hostname)) {
-  navigator.serviceWorker.register('sw.js').catch(() => { /* offline shell is optional */ });
+  navigator.serviceWorker.register('sw.js').then(reg => {
+    // a new version was published: it installs in the background, then the app reloads itself once (no stale screens)
+    reg.addEventListener('updatefound', () => { const nw = reg.installing; if (!nw) return; nw.addEventListener('statechange', () => { if (nw.state === 'installed' && navigator.serviceWorker.controller) { import('./ui.js').then(m => m.toast(t('newVersion'), 2500)); setTimeout(() => location.reload(), 2600); } }); });
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') reg.update().catch(() => {}); });
+  }).catch(() => { /* offline shell is optional */ });
 }
 
 import { startNotify } from './notify.js'; startNotify();
