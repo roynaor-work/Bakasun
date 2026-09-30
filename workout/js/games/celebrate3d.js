@@ -95,20 +95,22 @@ function stadium(sc, GZ) { sky(sc); lights(sc, { sun: 1.8, ground: '#1e3a2f' });
 // סיבוב רך של הדמות לזווית יעד (הקשת הקצרה), במקום קפיצה
 export function face(ch, ang, dt, speed = 5) { let d = ang - ch.model.rotation.y; d = Math.atan2(Math.sin(d), Math.cos(d)); ch.model.rotation.y += d * (1 - Math.exp(-speed * dt)); }
 // מחזור ריצה לפי מרחק שעברנו: צעד כל ~90 יח' (SPRINT = 8 פריימים גאומטריים עם ברכיים נכונות)
-const runPose = (dist, stride = 90) => poseAt(SPRINT, ((dist / stride) % 1) * 8);
+const runPose = (dist, stride = 90) => { const p = poseAt(SPRINT, ((dist / stride) % 1) * 8); p.lat = .1; return p; };
 // רגליים מפוזה אחת וידיים מאחרת (ריצה עם ידיים באוויר)
 const ARMS = ['le', 'lh', 're', 'rh'];
 // כדרור: היד השמאלית (במבט צד = LeftHand) יורדת קדימה-למטה אל הכדור, השאר מהפוזת הריצה
-function dribblePose(p) { const o = { ...p }; const [hx, hy] = p.hip; o.le = [hx + 10, hy + 18]; o.lh = [hx + 24, hy + 42]; return o; }
+function dribblePose(p, s = 0) { const o = { ...p }; const [hx, hy] = p.hip; o.le = [hx + 6, hy + 16 + 3 * s]; o.lh = [hx + 16, hy + 38 + 12 * s]; return o; } /* s = 0..1: היד דוחפת למטה כשהכדור למטה (רועי: "היד סטטית") */
 function mixParts(legs, arms) { const out = { ...legs }; for (const j of ARMS) out[j] = arms[j]; return out; }
 // כוריאוגרפיית חגיגה (u = שניות מתחילת החגיגה): מסתובב למצלמה עם ידיים למעלה, רץ לעברה, קופץ כמה פעמים, ואז עומד ומנופף
-function celebrateStep(ch, u, from, dt, dir = 1, { base = 0 } = {}) {
-  /* רועי 30/09: "הידיים למטה בתחילת החגיגה, לא לעשות סיבוב; רק אחרי שהוא מסתכל הוא קופץ, מרים ידיים, עושה סיבוב ומוריד את הידיים אחרי שנוחת עם הפנים למסך" */
-  const LOOK = 1.0, J1 = LOOK + 1.05;
+function celebrateStep(ch, u, from, dt, dir = 1, { base = 0, short = false } = {}) {
+  /* רועי 30/09: "הידיים למטה בתחילת החגיגה, לא לעשות סיבוב; רק אחרי שהוא מסתכל הוא קופץ, מרים ידיים, עושה סיבוב ומוריד את הידיים אחרי שנוחת עם הפנים למסך"; "שהוא מרים בדיוק כשהוא קופץ"; short (כדורסל): בלי קפיצה, רק יד אחת למעלה */
+  const LOOK = 1.0, CR = LOOK + .28, J1 = CR + 1.0;
   const pos = new THREE.Vector3(from.x, 0, from.z);
   let target;
   if (u < LOOK) { target = POSE.front; face(ch, base, dt, 4); } /* מסתובב למצלמה, ידיים למטה, מסתכל */
-  else if (u < J1) { const k = (u - LOOK) / (J1 - LOOK); pos.y = Math.sin(k * Math.PI) * 72; target = k < .45 ? lerpPose(POSE.front, POSE.armsUp, k / .45) : lerpPose(POSE.armsUp, SIU, (k - .45) / .55); ch.model.rotation.y = base + ease(k) * Math.PI * 2; pose(ch, target, true, pos, dt, 14); return; }
+  else if (short) { target = FIST; face(ch, base, dt, 5); pose(ch, target, true, pos, dt, 8); return; }
+  else if (u < CR) { target = CROUCH_F; face(ch, base, dt, 6); pose(ch, target, true, pos, dt, 14); return; } /* כריעה קצרה */
+  else if (u < J1) { const k = (u - CR) / (J1 - CR); pos.y = Math.sin(k * Math.PI) * 72; target = k < .22 ? lerpPose(CROUCH_F, POSE.armsUp, k / .22) : k < .55 ? POSE.armsUp : lerpPose(POSE.armsUp, SIU, (k - .55) / .45); /* הידיים עולות עם הניתור */ ch.model.rotation.y = base + ease(k) * Math.PI * 2; pose(ch, target, true, pos, dt, 16); return; }
   else { const w = Math.sin((u - J1) * 3); pos.y = Math.abs(w) * 1.2; target = SIU; face(ch, base + w * .04, dt, 5); }
   pose(ch, target, true, pos, dt, 9);
 }
@@ -126,11 +128,13 @@ const HEADER = {
 // שוער דרוך (מלפנים): ברכיים כפופות ופתוחות, גוף וידיים קדימה-למטה, על קצות האצבעות (רועי: "עומד ומחכה לזינוק")
 const GK_SET = { head: [100, 70, 18], neck: [100, 86, 10], hip: [100, 124], le: [78, 106, 8], lh: [72, 128, 18], re: [122, 106, 8], rh: [128, 128, 18], lk: [80, 150], lf: [74, 178], rk: [120, 150], rf: [126, 178] };
 // נחיתת "סיו" (מלפנים): רגליים פתוחות, ידיים למטה-הצידה-אחורה, חזה קדימה, ראש למעלה
+// כריעה לפני ניתור (מלפנים)
+const CROUCH_F = { head: [100, 64], neck: [100, 80], hip: [100, 128], le: [90, 104], lh: [86, 124], re: [110, 104], rh: [114, 124], lk: [88, 154], lf: [86, 182], rk: [112, 154], rf: [114, 182] };
 const SIU = { head: [100, 48, 6], neck: [100, 66, 6], hip: [100, 114], le: [76, 98], lh: [64, 122, -16], re: [124, 98], rh: [136, 122, -16], lk: [78, 150], lf: [66, 182], rk: [122, 150], rf: [134, 182] };
 // דאנק באוויר (מהצד, +x = לסל): יד שמאל (הרחוקה) למעלה-קדימה עם הכדור, יד ימין למטה-אחורה, ברך קדמית מורמת, רגל אחורית נגררת (רועי: "שלא ייראה סימטרי")
 const DUNK_AIR = { head: [106, 40], neck: [103, 56], hip: [100, 102], le: [112, 36], lh: [120, 8], re: [90, 78], rh: [82, 100], lk: [118, 126], lf: [114, 148], rk: [92, 134], rf: [82, 160] };
 // "ג'ורדן": באוויר הרגליים נפתחות (קדמית ישרה קדימה, אחורית כפופה מאחור), יד עם הכדור למעלה, יד שנייה אחורה
-const JORDAN = { head: [106, 38], neck: [103, 54], hip: [100, 100], le: [112, 34], lh: [120, 6], re: [88, 70], rh: [78, 88], lk: [124, 118], lf: [142, 126], rk: [88, 126], rf: [76, 148] };
+const JORDAN = { head: [106, 38], neck: [103, 54], hip: [100, 100], le: [112, 34], lh: [120, 6], re: [86, 70], rh: [74, 86], lk: [130, 108], lf: [152, 114], rk: [82, 122], rf: [66, 146] }; /* פתיחת רגליים גדולה */
 // תלוי על הטבעת: יד אחת ישרה למעלה אוחזת, הגוף מאונך, רגליים משתלשלות
 const HANG = { head: [102, 42], neck: [101, 58], hip: [100, 110], le: [104, 30], lh: [106, 4], re: [106, 96], rh: [110, 120], lk: [100, 144], lf: [98, 170], rk: [104, 142], rf: [106, 168] };
 // אגרוף למעלה (מלפנים): יד אחת למעלה, השנייה למטה
@@ -188,9 +192,9 @@ async function headerScene(sc, cam, S, say, text, { oldBest, newBest }) {
   S.murmur(0, 2.6); S.kick(CROSS); S.tension(1.8, 1.6); S.kick(HEAD); S.chant(HIT + .05, 2.4); S.roar(HIT, 4.6); S.drums(HIT + .6);
   /* המגביה עומד בצד (רועי: "לא רואים את השחקן שמגביה", צילום הפתיחה רחב ומראה אותו), הכדור לרגליו; הנוגח מתחיל רחוק, רץ וקופץ קדימה אל הכדור (רועי: "לנגוח מרחוק ולהגיע בתנועה") */
   const CX = side * 1500, CZ = GZ + 900, HX = -side * 30, HZ0 = GZ + 620, HZ1 = GZ + 330, LEAP = .9; /* המגביה בקצה הרחבה (רועי) */ /* קפיצה קדימה: מתחילה HEAD-.5, הכדור בראש ב-HEAD */
-  const from = new THREE.Vector3(CX - side * 14, 12, CZ - 12), headPt = new THREE.Vector3(HX, 204, HZ1 - 22), ballEnd = new THREE.Vector3(tx, ty, GZ - 60);
+  const from = new THREE.Vector3(CX - side * 14, 12, CZ - 12), headPt = new THREE.Vector3(HX, 222, HZ1 - 26), ballEnd = new THREE.Vector3(tx, ty, GZ - 60);
   const heroPos = new THREE.Vector3(), crossPos = new THREE.Vector3(CX, 0, CZ), look = new THREE.Vector3(), want = new THREE.Vector3();
-  const camera = camRig(cam, new THREE.Vector3(-side * 500, 700, GZ + 2500), new THREE.Vector3(side * 500, 60, GZ + 450), CROSS + .3);
+  const camera = camRig(cam, new THREE.Vector3(side * 1750, 380, GZ + 1450), new THREE.Vector3(side * 200, 90, GZ + 350), CROSS + .4); /* מתחילים מאחורי המגביה (רועי: "לא רואים מי מגביה") */
   return { dur: DUR, update(t, dt) {
     const back = clamp((t - HIT) / 1.0, 0, 1);
     want.set(-side * 260 + side * 160 * back, 270 + 30 * back, GZ + 1200 + 220 * back); look.set(0, 130 - 50 * back, GZ + 200 + 150 * back); camera(t, dt, want, look);
@@ -201,7 +205,7 @@ async function headerScene(sc, cam, S, say, text, { oldBest, newBest }) {
     /* הנוגח: רץ מרחוק, קופץ קדימה, קשת אחורה ונגיחה, נוחת, חוגג */
     const J0 = HEAD - LEAP * .55, J1 = J0 + LEAP;
     if (t < J0) { const k = ease(clamp((t - .4) / (J0 - .4), 0, 1)); heroPos.set(HX, 0, HZ0 - (HZ0 - (HZ1 + 70)) * k); hero.model.rotation.y = Math.PI; pose(hero, k <= 0 ? POSE.stand : runPose(k * (HZ0 - HZ1 - 70)), false, heroPos, dt, 16); }
-    else if (t < J1 + .1) { const k = clamp((t - J0) / LEAP, 0, 1); heroPos.set(HX, Math.sin(k * Math.PI) * 74, HZ1 + 70 - 140 * k); hero.model.rotation.y = Math.PI; pose(hero, t < HEAD - .05 ? HEADER.back : HEADER.snap, false, heroPos, dt, 16); }
+    else if (t < J1 + .1) { const k = clamp((t - J0) / LEAP, 0, 1); heroPos.set(HX, Math.sin(k * Math.PI) * 92, HZ1 + 70 - 140 * k); hero.model.rotation.y = Math.PI; pose(hero, t < HEAD - .1 ? HEADER.back : HEADER.snap, false, heroPos, dt, 18); }
     else celebrateStep(hero, t - J1 - .1, { x: HX, z: HZ1 - 70 }, dt);
     let gp = GK_SET; const gkBase = new THREE.Vector3(gkDir * clamp((t - HEAD) / .9, 0, 1) * 170, 0, GZ + 40);
     if (t > HEAD + .1 && t < HIT + .4) gp = gkDir > 0 ? GK.diveRH : GK.diveLH; else if (t >= HIT + .4) gp = gkDir > 0 ? GK.lyingR : GK.lyingL;
@@ -247,7 +251,7 @@ async function dunkScene(sc, cam, S, say, text, { oldBest, newBest }) {
   const HZ = -420; const w = court(sc, HZ); const conf = confetti(sc, 320);
   const hero = await loadCharacter(KITS3D.maccabi); sc.add(hero.model);
   const ball = basketBallMesh(14); sc.add(ball); const shadow = ballShadow(sc);
-  const RUN = 2.4, LEAP = .95, DUNK = RUN + LEAP, HANGT = .7, DROP = .4, JUMP = DUNK + HANGT + DROP, DUR = JUMP + 3.4, JH = 122; /* קפיצה עד הטבעת, תלוי עליה, יורד, אגרוף למעלה, וחותכים */
+  const RUN = 2.4, LEAP = .95, DUNK = RUN + LEAP, HANGT = .7, DROP = .4, JUMP = DUNK + HANGT + DROP, DUR = JUMP + 2.9, JH = 122; /* קפיצה עד הטבעת, תלוי עליה, יורד, אגרוף למעלה, וחותכים */
   S.murmur(0, 2.4); S.steps(.4, 10, .22); S.tension(1.6, 1.8); S.rim(DUNK); S.roar(DUNK, 3.2); S.drums(DUNK + .5);
   const pos = new THREE.Vector3(), look = new THREE.Vector3(), want = new THREE.Vector3(), handV = new THREE.Vector3();
   const camera = camRig(cam, new THREE.Vector3(820, 440, HZ + 1550), new THREE.Vector3(0, 120, HZ + 250));
@@ -256,11 +260,11 @@ async function dunkScene(sc, cam, S, say, text, { oldBest, newBest }) {
     const back = clamp((t - DUNK - .2) / 1.0, 0, 1);
     want.set(320 - 180 * back, 300 - 20 * back, HZ + 1050 + 250 * back); look.set(0, 210 - 100 * back, HZ + 150 + 150 * back); camera(t, dt, want, look);
     const inHand = () => { const hp = hero.rig.b.LeftHand.getWorldPosition(handV); ball.position.set(hp.x, hp.y + 12, hp.z - 8); };
-    if (t < RUN) { const k = ease(clamp(t / RUN, 0, 1)); pos.set(0, 0, HZ + 860 - (HZ + 860 - Z0) * k); hero.model.rotation.y = Math.PI; pose(hero, dribblePose(runPose(k * (HZ + 860 - Z0))), false, pos, dt, 16); const hp = hero.rig.b.LeftHand.getWorldPosition(handV); const bounce = Math.abs(Math.sin(t * Math.PI * 2.2)); ball.position.set(hp.x, 14 + Math.max(0, hp.y - 14 - 14) * bounce, hp.z); }
-    else if (t < DUNK) { const k = clamp((t - RUN) / LEAP, 0, 1); pos.set(0, Math.sin(k * Math.PI / 2) * JH, Z0 - (Z0 - Z1) * k); hero.model.rotation.y = Math.PI; pose(hero, k < .12 ? SHOT.dip : k < .55 ? DUNK_AIR : JORDAN, false, pos, dt, 14); inHand(); } /* איסוף → ברך למעלה → רגליים נפתחות (ג'ורדן) */
+    if (t < RUN) { const k = ease(clamp(t / RUN, 0, 1)); pos.set(0, 0, HZ + 860 - (HZ + 860 - Z0) * k); hero.model.rotation.y = Math.PI; const bounce = Math.abs(Math.sin(t * Math.PI * 2.2)); pose(hero, dribblePose(runPose(k * (HZ + 860 - Z0)), 1 - bounce), false, pos, dt, 16); const hp = hero.rig.b.LeftHand.getWorldPosition(handV); ball.position.set(hp.x, 14 + Math.max(0, hp.y - 14 - 14) * bounce, hp.z); }
+    else if (t < DUNK) { const k = clamp((t - RUN) / LEAP, 0, 1); pos.set(0, Math.sin(k * Math.PI / 2) * JH, Z0 - (Z0 - Z1) * k); hero.model.rotation.y = Math.PI; pose(hero, k < .12 ? SHOT.dip : k < .32 ? DUNK_AIR : JORDAN, false, pos, dt, 14); inHand(); } /* איסוף → ברך למעלה → רגליים נפתחות (ג'ורדן) */
     else if (t < DUNK + HANGT) { pos.set(0, JH, Z1); hero.model.rotation.y = Math.PI; pose(hero, HANG, false, pos, dt, 12); ball.position.set(0, Math.max(14, w.RIM_Y - 30 - (t - DUNK) * 250), HZ + 14); } /* תלוי על הטבעת */
     else if (t < JUMP) { const k = clamp((t - DUNK - HANGT) / DROP, 0, 1); pos.set(0, JH * (1 - k * k), Z1 + 30 * k); pose(hero, k < .8 ? HANG : SHOT.land, false, pos, dt, 14); ball.position.set(0, Math.max(14, w.RIM_Y - 30 - (t - DUNK) * 250), HZ + 14); }
-    else { const u = t - JUMP; pos.set(30, 0, Z1 + 60); /* נחיתה, סיבוב למצלמה, קפיצה אחת עם אגרוף למעלה, ועומדים */ const jk = clamp((u - .6) / .9, 0, 1); pos.y = Math.sin(jk * Math.PI) * 45; face(hero, 0, dt, 6); pose(hero, u < .4 ? SHOT.land : jk < 1 ? FIST : POSE.front, true, pos, dt, 10);
+    else { const u = t - JUMP; /* נחיתה, סיבוב למצלמה, יד אחת למעלה (בלי קפיצה; רועי) */ if (u < .35) { pos.set(30, 0, Z1 + 60); pose(hero, SHOT.land, false, pos, dt, 10); } else celebrateStep(hero, u - .35, { x: 30, z: Z1 + 60 }, dt, 1, { short: true });
       const fall = w.RIM_Y - 30 - (t - DUNK) * 250; ball.position.set(0, Math.max(14, fall), HZ + 14); if (fall < 14) ball.position.y = 14 + Math.abs(Math.sin(u * 4)) * 20 * Math.max(0, 1 - u / 2); }
     w.shake(Math.max(0, 1 - (t - DUNK) / 1.2) * (t > DUNK ? Math.abs(Math.cos((t - DUNK) * 9)) : 0));
     shadow(ball); w.fans.update(t, t > DUNK);
@@ -275,10 +279,10 @@ async function threeScene(sc, cam, S, say, text, { oldBest, newBest }) {
   const HZ = -420; const w = court(sc, HZ); const conf = confetti(sc, 320);
   const hero = await loadCharacter(KITS3D.maccabi); sc.add(hero.model);
   const ball = basketBallMesh(14); sc.add(ball); const shadow = ballShadow(sc);
-  const DIP = 1.1, RISE = 1.9, SHOOT = 2.3, LAND = 3.0, SWISH = 3.9, DUR = 10.5;
+  const DIP = 1.1, RISE = 1.9, SHOOT = 2.3, LAND = 3.0, SWISH = 3.9, DUR = 8.2;
   S.murmur(0, 2.2); S.tension(1.2, 2.6); S.swish(SWISH); S.roar(SWISH, 4.2); S.drums(SWISH + .5);
   /* רועי: "לזרוק מ-3, באלכסון, שייראה תלת-ממד": הזורק על קשת השלוש (635 מהטבעת) ב-45°, פונה לטבעת; המצלמה מעל הכתף מאחור-מהצד */
-  const rimP = w.rimPos.clone(); const A = Math.PI / 4, SX = Math.sin(A) * 635, SZ = rimP.z + Math.cos(A) * 635; const from = new THREE.Vector3();
+  const rimP = w.rimPos.clone(); const A = Math.PI / 4, SX = Math.sin(A) * 705, SZ = rimP.z + Math.cos(A) * 705; /* מאחורי קשת השלוש (635) */ const from = new THREE.Vector3();
   const pos = new THREE.Vector3(SX, 0, SZ), look = new THREE.Vector3(), want = new THREE.Vector3(), hl = new THREE.Vector3(), hr = new THREE.Vector3();
   const faceRim = Math.atan2(rimP.x - SX, rimP.z - SZ); /* המודל פונה +Z בסיבוב 0 */
   /* רועי: "מהצד השני שיראו את הפנים": מצלמה A מלפנים-מהצד של הזורק (בין הזורק לסל, הצידה), רואים את הפנים והאחיזה; אחרי הזריקה מצלמה B מאחור-מהצד שרואה את הכדור נכנס לסל */
@@ -295,7 +299,7 @@ async function threeScene(sc, cam, S, say, text, { oldBest, newBest }) {
     else if (t < SHOOT) { const k = clamp((t - RISE) / (SHOOT - RISE), 0, 1); pos.y = ease(k) * 26; pose(hero, SHOT.release, false, pos, dt, 10); }
     else if (t < LAND) { const k = clamp((t - SHOOT) / (LAND - SHOOT), 0, 1); pos.y = Math.max(0, 26 + 60 * Math.sin(k * Math.PI) - 26 * k); pose(hero, k < .6 ? SHOT.follow : SHOT.land, false, pos, dt, 8); }
     else if (t < SWISH + .5) { pos.y = 0; pose(hero, SHOT.land, false, pos, dt, 6); }
-    else celebrateStep(hero, t - SWISH - .5, { x: SX, z: SZ }, dt, 1, { base: toCam, dx: Math.sin(toCam) * 120, dz: Math.cos(toCam) * 120 }); /* פונה למצלמה ורץ אליה */
+    else celebrateStep(hero, t - SWISH - .5, { x: SX, z: SZ }, dt, 1, { base: toCam, short: true }); /* פונה למצלמה, יד אחת למעלה, בלי קפיצה (רועי) */
     /* הכדור: בידיים עד השחרור, ואז קשת אל הטבעת */
     if (t < SHOOT) { hero.rig.b.LeftHand.getWorldPosition(hl); hero.rig.b.RightHand.getWorldPosition(hr); ball.position.lerpVectors(hl, hr, .5); ball.position.x += Math.sin(faceRim) * 10; ball.position.z += Math.cos(faceRim) * 10; ball.position.y += 8; from.copy(ball.position); }
     else if (t < SWISH) { const k = (t - SHOOT) / (SWISH - SHOOT); ball.position.lerpVectors(from, rimP, k); ball.position.y += Math.sin(k * Math.PI) * 160; ball.rotation.x -= dt * 5; if (!released) { released = true; } }

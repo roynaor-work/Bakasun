@@ -97,7 +97,7 @@ export class PoseRig {
     this.aim(L + 'UpLeg', d(pose.hip, pose.lk)); this.aim(L + 'Leg', d(pose.lk, pose.lf));
     this.aim(R + 'UpLeg', d(pose.hip, pose.rk)); this.aim(R + 'Leg', d(pose.rk, pose.rf));
     // ידיים: במבט מהצד המרפקים נפתחים מעט הצידה (X של המודל), אחרת שתי הידיים נבלעות בגוף באותו מישור
-    const lat = front ? 0 : .32, side = name => name === 'Left' ? 1 : -1;
+    const lat = front ? 0 : (pose.lat ?? .32), side = name => name === 'Left' ? 1 : -1; /* pose.lat: ריצה = .1, צמוד לגוף (רועי: הידיים בריצה) */
     const armDir = (a, b, who) => { const v = d(a, b); if (lat) v.x += side(who) * lat * v.length(); return v; };
     this.aim(L + 'Arm', armDir(pose.neck, pose.le, L)); this.aim(L + 'ForeArm', armDir(pose.le, pose.lh, L).multiplyScalar(1));
     this.aim(R + 'Arm', armDir(pose.neck, pose.re, R)); this.aim(R + 'ForeArm', armDir(pose.re, pose.rh, R));
