@@ -51,7 +51,7 @@ test('every program refers to real exercises; every exercise has a valid loop', 
   for (const ex of EXERCISES) {
     assert.ok(cycleMs(ex.frames) > 0, ex.id);
     const p = poseAt(ex.frames, 123);
-    for (const j of ['head', 'neck', 'hip', 'lh', 'rh', 'lf', 'rf']) assert.ok(Array.isArray(p[j]) && p[j].length === 2, ex.id + ' ' + j);
+    for (const j of ['head', 'neck', 'hip', 'lh', 'rh', 'lf', 'rf']) assert.ok(Array.isArray(p[j]) && (p[j].length === 2 || p[j].length === 3), ex.id + ' ' + j); // z אופציונלי: עומק לתלת-ממד
     assert.ok(ex.name && !/[؀-ۿ]/.test(ex.name + ex.tip));
   }
 });
