@@ -81,7 +81,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   function setMusic(name, vol = .28) { if (!music || !sound || !OGG_OK) return; if (name === musicName) return; const old = musicEl; if (old) { clearInterval(musicFade); let v = old.volume; musicFade = setInterval(() => { v -= .04; if (v <= 0) { old.pause(); clearInterval(musicFade); } else old.volume = v; }, 40); } musicEl = null; musicName = name; if (!name) return; try { const a = new Audio(MUSIC_URL(name)); a.loop = true; a.volume = vol; a.play().catch(() => {}); musicEl = a; } catch { musicEl = null; } }
   function stopMusic() { if (musicEl) { try { musicEl.pause(); } catch { /* */ } } musicEl = null; musicName = null; clearInterval(musicFade); }
   const r = {
-    W, H, ctx, C: PAL, rnd, rint, pick, shuffle, clamp,
+    W, H, ctx, cv, C: PAL, rnd, rint, pick, shuffle, clamp, /* cv: קנבס המשחק (לשכבת תלת-ממד מאחוריו, layer3d.js) */
     img(key, x, y, w, h, o = {}) { let im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return false; if (o.tint) { im = tinted(key, o.tint) || im; } const iw = im.naturalWidth || im.width, ih = im.naturalHeight || im.height; if (h == null) h = w * ih / iw; if (w == null) w = h * iw / ih; const ax = o.ax ?? .5, ay = o.ay ?? .5; ctx.save(); ctx.translate(x, y); if (o.rot) ctx.rotate(o.rot); if (o.flip) ctx.scale(-1, 1); if (o.sx || o.sy) ctx.scale(o.sx ?? 1, o.sy ?? 1); if (o.alpha != null) ctx.globalAlpha = o.alpha; ctx.drawImage(im, -w * ax, -h * ay, w, h); ctx.restore(); return true; },
     explode(x, y, size = 60, n = 6) { for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, sp = size * (0.6 + Math.random()); FX.push({ key: i % 2 ? 'fx/flame_01' : 'fx/flame_03', x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - size * .4, s: size * (0.7 + Math.random() * .6), t: 0, life: .35 + Math.random() * .25, rot: Math.random() * 6, vr: (Math.random() - .5) * 6, grow: 1.6 }); } for (let i = 0; i < 3; i++) FX.push({ key: 'fx/smoke_01', x: x + (Math.random() - .5) * size * .4, y, vx: (Math.random() - .5) * 30, vy: -20 - Math.random() * 30, s: size * .9, t: 0, life: .7 + Math.random() * .3, rot: Math.random() * 6, vr: (Math.random() - .5) * 2, grow: 1.8, alpha: .55 }); FX.push({ key: 'fx/light_01', x, y, vx: 0, vy: 0, s: size * 2.2, t: 0, life: .18, rot: 0, vr: 0, grow: 1.3, alpha: .9 }); },
     sparkle(x, y, size = 30, n = 5, key = 'fx/star_06') { for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, sp = size * (1 + Math.random() * 2); FX.push({ key, x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, s: size * (.4 + Math.random() * .5), t: 0, life: .4 + Math.random() * .3, rot: Math.random() * 6, vr: (Math.random() - .5) * 8, grow: .6 }); } },
@@ -92,7 +92,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     px: W / 2, py: H / 2, isDown: false, pointers: {}, // כל האצבעות שעל המסך (למשחקי שני שחקנים): id -> {x, y}
     net, // חיבור למשחק מול טלפון אחר (js/net.js): {role:'host'|'guest', send, alive, onMsg דרך r.netMsg} או null
     netMsg: null, // המשחק מציב פונקציה (t, p) => {} כדי לקבל הודעות מהטלפון השני
-    get score() { return score; }, get timeLeft() { return timeLeft; },
+    get score() { return score; }, get timeLeft() { return timeLeft; }, get best() { return best; }, /* השיא הקודם: משחקים שעולים רמה רק כשנשבר שיא (באולינג) */
     addScore(n = 1) { score = Math.max(0, Math.round(score + n)); scoreEl.textContent = score; },
     setScore(n) { score = Math.max(0, Math.round(n)); scoreEl.textContent = score; },
     over(msg = 'אופס!') { if (!running) return; running = false; SFX.over(); shakeT = 0.3;
@@ -146,7 +146,9 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   const fmt = s => `${Math.floor(s / 60)}:${String(Math.ceil(s) % 60).padStart(2, '0')}`;
 
   if (def.assets) preload(def.assets); preload(['fx/flame_01', 'fx/flame_03', 'fx/smoke_01', 'fx/smoke_04', 'fx/light_01', 'fx/star_06']); preloadSounds(); /* ספרייטים של המשחק נטענים כבר במסך הפתיחה */
-  function fresh() { game = def.make(r, progress || null); running = true; hide(); if (!inDemo) setMusic(defaultMusic); if (net && net.route) net.route((t, p) => { if (r.netMsg && !ended) r.netMsg(t, p); }); }
+  const finish = res => { disposeGame(); game = null; onEnd(res); };
+  const disposeGame = () => { if (game && game.dispose) { try { game.dispose(); } catch (e) { console.warn('dispose', e); } } };
+  function fresh() { disposeGame(); game = def.make(r, progress || null); running = true; hide(); if (!inDemo) setMusic(defaultMusic); if (net && net.route) net.route((t, p) => { if (r.netMsg && !ended) r.netMsg(t, p); }); }
   function loop(now) {
     raf = requestAnimationFrame(loop);
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
@@ -170,12 +172,12 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     flash(newBest ? `שיא חדש! ${score}` : `ניקוד: ${score}`, `${best && !newBest ? `השיא שלך: ${best} · ` : ''}חזרה לאימון`); if (score > 0) overlay.querySelector('.gmsg b').insertAdjacentHTML('beforebegin', starHtml);
     if (newBest) {
       // חגיגת שער: מסתירים את ההודעה בזמן הסימולציה, ומראים אותה בסופה
-      hide(); const stopFx = celebrateGoal(cv, { oldBest: best, newBest: score, sound, onText: (t, lang) => speak && speak(t, lang), onDone: () => { flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) }); } });
-      cv.onclick = () => { stopFx(); cv.onclick = null; flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) }); };
+      hide(); const stopFx = celebrateGoal(cv, { oldBest: best, newBest: score, sound, onText: (t, lang) => speak && speak(t, lang), onDone: () => { flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => finish({ score, best: Math.max(best, score) }); } });
+      cv.onclick = () => { stopFx(); cv.onclick = null; flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => finish({ score, best: Math.max(best, score) }); };
       return;
     }
     overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`);
-    overlay.querySelector('#gback').onclick = () => onEnd({ score, best: Math.max(best, score) });
+    overlay.querySelector('#gback').onclick = () => finish({ score, best: Math.max(best, score) });
   }
   function start() { if (game) return; fresh(); if (!raf) { last = performance.now(); raf = requestAnimationFrame(loop); } }
 
@@ -202,13 +204,13 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     ctx.save(); ctx.translate(finger.x + 14, finger.y + 30); ctx.font = '44px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.shadowColor = 'rgba(0,0,0,.4)'; ctx.shadowBlur = 8; ctx.fillText('👆', 0, 0); ctx.restore();
   }
   function startDemo() { if (!def.demo) return start(); inDemo = true; demoT = 0; ctl.mem = {}; finger.caption = ''; finger.hold = false; score = 0; scoreEl.textContent = '0'; fresh(); if (!raf) { last = performance.now(); raf = requestAnimationFrame(loop); } }
-  function endDemo() { inDemo = false; running = false; ctl.release(); score = 0; scoreEl.textContent = '0'; game = null; timeEl.textContent = fmt(timeLeft);
-    if (demoOnly) { flash('הבנת? 👍', def.how); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<div class="row" style="gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn primary big" id="gagain" style="width:auto">עוד פעם ▶️</button><button class="btn big" id="gback" style="width:auto">חזרה</button></div>`); overlay.querySelector('#gagain').onclick = startDemo; overlay.querySelector('#gback').onclick = () => { ended = true; cancelAnimationFrame(raf); onEnd({ score: 0, best, demo: true }); }; }
+  function endDemo() { inDemo = false; running = false; ctl.release(); score = 0; scoreEl.textContent = '0'; disposeGame(); game = null; timeEl.textContent = fmt(timeLeft);
+    if (demoOnly) { flash('הבנת? 👍', def.how); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<div class="row" style="gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn primary big" id="gagain" style="width:auto">עוד פעם ▶️</button><button class="btn big" id="gback" style="width:auto">חזרה</button></div>`); overlay.querySelector('#gagain').onclick = startDemo; overlay.querySelector('#gback').onclick = () => { ended = true; cancelAnimationFrame(raf); finish({ score: 0, best, demo: true }); }; }
     else intro(); }
   // פתיחה: איך משחקים (+ הדגמה כשיש תסריט)
   function intro() { flash(`${def.emoji} ${def.name}`, def.how); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<div class="row" style="gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn primary big" id="gstart" style="width:auto">יאללה! ▶️</button>${def.demo ? '<button class="btn big" id="gdemo" style="width:auto">איך משחקים? 🎬</button>' : ''}</div>`); overlay.querySelector('#gstart').onclick = start; const gd = overlay.querySelector('#gdemo'); if (gd) gd.onclick = startDemo; }
   if (demo && def.demo) startDemo(); else intro();
-  host.querySelector('#gexit').onclick = () => { if (ended) return; if (inDemo) { ended = true; inDemo = false; cancelAnimationFrame(raf); return onEnd({ score: 0, best, demo: true }); } if (!game || confirm('לצאת מהמשחק? הניקוד עד עכשיו נשמר.')) end(); };
+  host.querySelector('#gexit').onclick = () => { if (ended) return; if (inDemo) { ended = true; inDemo = false; cancelAnimationFrame(raf); return finish({ score: 0, best, demo: true }); } if (!game || confirm('לצאת מהמשחק? הניקוד עד עכשיו נשמר.')) end(); };
 
   // קלט: מגע/עכבר -> קואורדינטות לוגיות, זיהוי טאפ וסווייפ
   const pos = e => { const b = cv.getBoundingClientRect(); return [clamp((e.clientX - b.left) * W / b.width, 0, W), clamp((e.clientY - b.top) * H / b.height, 0, H)]; };
@@ -227,5 +229,5 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     if ((e.key === ' ' || e.key === 'Enter') && game.tap) { e.preventDefault(); game.tap(W / 2, H / 2); }
     game.key && game.key(e.key); };
   window.addEventListener('keydown', keys);
-  return { stop() { ended = true; cancelAnimationFrame(raf); window.removeEventListener('keydown', keys); if (net) net.close(); stopMusic(); }, isEnded: () => ended };
+  return { stop() { ended = true; cancelAnimationFrame(raf); disposeGame(); game = null; window.removeEventListener('keydown', keys); if (net) net.close(); stopMusic(); }, isEnded: () => ended };
 }

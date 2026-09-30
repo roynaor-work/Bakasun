@@ -93,14 +93,10 @@ export const DEMOS = {
     else if (m.phase === 1 && t >= m.at) { ctl.release(); m.phase = 0; } },
   basketball(t, game, ctl, r) { captions(ctl, t, [[0, 'הקשת הלבנה זזה עם מד הכוח'], [3, 'נוגעים כשהקשת עוברת בסל'], [6.5, 'סוויש בלי ברזל = 30 נקודות'], [9.5, '3 ברצף = הכדור בוער 🔥']]);
     const P = game.peek(); if (!P.canShoot) return; if (Math.abs(P.p - P.ideal) < .03 && every(ctl, 'shot', 1.2, t)) ctl.tap(r.W / 2, r.H * .6); },
-  golf(t, game, ctl, r) { captions(ctl, t, [[0, 'גוררים מהכדור אחורה, משחררים'], [3, 'חול מאט, מים מחזירים'], [6, 'טחנת הרוח מסתובבת: מחכים לרגע הנכון'], [9.5, 'פחות חבטות מהפאר = יותר נקודות']]);
-    const P = game.peek(); const m = ctl.mem; if (P.moving) { m.phase = 0; return; } if (m.phase == null) m.phase = 0;
-    if (m.phase === 0 && every(ctl, 'shot', 1.6, t)) { ctl.tap(P.ball.x, P.ball.y); m.phase = .5; m.at = t + .15; }
-    else if (m.phase === .5 && t >= m.at) { ctl.moveTo(P.ball.x, P.ball.y); m.phase = 1; m.at = t + .3; }
-    else if (m.phase === 1 && t >= m.at) { const dx = P.hole[0] - P.ball.x, dy = P.hole[1] - P.ball.y, L = Math.hypot(dx, dy); const pull = Math.min(140, L * .55); ctl.moveTo(P.ball.x - dx / L * pull, P.ball.y - dy / L * pull); m.phase = 2; m.at = t + .5; }
-    else if (m.phase === 2 && t >= m.at) { ctl.release(); m.phase = 0; } },
-  bowling(t, game, ctl, r) { captions(ctl, t, [[0, 'מחליקים את הכדור למעלה'], [3, 'החלקה בזווית = הכדור מתעקל'], [6, 'לא לצדדים: מרזב = 0'], [9.5, 'סטרייק = כל העשרה בגלגול אחד!']]);
-    const P = game.peek(); if (P.canRoll && every(ctl, 'roll', 2.6, t)) { const dx = (Math.random() - .5) * 40; ctl.swipe('up', P.W / 2 + dx, P.BOT); game.swipe('up', dx * .3, -170); } },
+  golf(t, game, ctl, r) { captions(ctl, t, [[0, 'החץ מסתובב: נוגעים כשהוא מכוון לגומה'], [3, 'מד הכוח: נוגעים כשהוא בירוק'], [6.5, 'חול מאט, מים מחזירים, טחנה מסתובבת'], [9.5, 'פחות חבטות מהפאר = יותר נקודות']]);
+    const P = game.peek(); if (P.moving) return; if (P.step === 'aim' && P.aimGood && every(ctl, 'aim', .8, t)) ctl.tap(P.ball.x, P.ball.y - 60); else if (P.step === 'power' && P.pwGood && every(ctl, 'pw', .8, t)) ctl.tap(P.ball.x, P.ball.y - 60); },
+  bowling(t, game, ctl, r) { captions(ctl, t, [[0, 'נגיעה 1: הסמן זז, עוצרים באמצע'], [3, 'נגיעה 2: כוח, באמצע הירוק'], [6, 'נגיעה 3: זווית, כשהחץ ישר'], [9.5, 'סטרייק = כל העשרה בגלגול אחד!']]);
+    const P = game.peek(); if (P.canRoll && P.good && every(ctl, 'tap', .6, t)) ctl.tap(r.W / 2, r.H * .7); },
 };
 export const DEMO_TOP = new Set(['breakout', 'pong', 'pinball', 'runner', 'frogger', 'juggle', 'bowling']); /* כתוביות למעלה */
 export const DEMO_DUR = { tetris: 13, snake: 11, penalty: 12, keeper: 12, moles: 12, flappy: 12, breakout: 13, pong: 12, pinball: 12, invaders: 12, asteroids: 12, runner: 12, frogger: 13, 'dots-maze': 12, doodle: 12, gems: 13, juggle: 12, 'bubble-shooter': 13, basketball: 13, golf: 13, bowling: 13 };
