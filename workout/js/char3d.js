@@ -22,6 +22,21 @@ export const KITS3D = {
 let baseSkin = null;
 const skinUrl = new URL('../3d/model/skaterMaleA.png', import.meta.url).href;
 export function loadBaseSkin() { return baseSkin || (baseSkin = new Promise((res, rej) => { const im = new Image(); im.crossOrigin = 'anonymous'; im.onload = () => res(im); im.onerror = rej; im.src = skinUrl; })); }
+// הפנים בטקסטורה של Kenney: עיניים ב-(289,214) ו-(353,214), אף (322,245), פה (322,268). מציירים מעליהן פרצוף של סרט מצויר
+function toonFace(g) {
+  const LINE = '#241B3A', skin = '#F4967B';
+  g.fillStyle = skin; g.fillRect(250, 176, 144, 110); /* מנקים עיניים/גבות/פה ישנים */
+  g.fillStyle = 'rgba(255,255,255,.85)'; g.fillRect(250, 176, 144, 0);
+  for (const [ex, dir] of [[288, 1], [354, -1]]) {
+    g.fillStyle = '#ffffff'; g.strokeStyle = LINE; g.lineWidth = 4; g.beginPath(); g.ellipse(ex, 218, 21, 24, 0, 0, Math.PI * 2); g.fill(); g.stroke();
+    g.fillStyle = '#2A1A16'; g.beginPath(); g.arc(ex + 3 * dir, 222, 11, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#ffffff'; g.beginPath(); g.arc(ex + 7 * dir, 215, 4, 0, Math.PI * 2); g.fill();
+    g.strokeStyle = '#3B2112'; g.lineWidth = 8; g.lineCap = 'round'; g.beginPath(); g.moveTo(ex - 22 * dir, 192); g.quadraticCurveTo(ex, 178, ex + 20 * dir, 186); g.stroke(); /* גבה */
+    g.fillStyle = 'rgba(255,120,120,.35)'; g.beginPath(); g.ellipse(ex + 30 * dir, 250, 14, 9, 0, 0, Math.PI * 2); g.fill(); /* סומק */
+  }
+  g.strokeStyle = LINE; g.lineWidth = 6; g.lineCap = 'round'; g.beginPath(); g.arc(321, 256, 20, Math.PI * .15, Math.PI * .85); g.stroke(); /* חיוך */
+  g.fillStyle = '#E26B5A'; g.beginPath(); g.arc(321, 248, 5, 0, Math.PI * 2); g.fill(); /* אף */
+}
 export async function kitTexture(kit = KITS3D.maccabi) {
   const im = await loadBaseSkin(); const c = document.createElement('canvas'); c.width = c.height = 1024; const g = c.getContext('2d');
   g.drawImage(im, 0, 0, 1024, 1024);
@@ -31,6 +46,7 @@ export async function kitTexture(kit = KITS3D.maccabi) {
   if (kit.stripe) { g.fillStyle = kit.stripe; for (let x = 170; x < 480; x += 64) g.fillRect(x, 514, 22, 510); }
   // המספר על הגב (האזור הזה ממופה לגב, במראה, לכן מציירים הפוך כדי שייקרא נכון)
   if (kit.number) { g.save(); g.translate(320, 720); g.scale(-1, 1); g.fillStyle = kit.numberColor; g.font = '900 150px Heebo, Arial Black, Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(kit.number, 0, 0); g.restore(); }
+  if (kit.face !== false) toonFace(g); /* פרצוף מצויר: עיניים גדולות, גבות, חיוך, סומק (רועי 01/10: "לשפר את הדמות") */
   // מכנסיים: 612..1024 x 762..1024
   g.fillStyle = kit.shorts; g.fillRect(612, 762, 412, 262);
   g.fillStyle = 'rgba(0,0,0,.18)'; g.fillRect(612, 890, 412, 14); // חגורה
@@ -50,15 +66,16 @@ export async function loadCharacter(kit = KITS3D.maccabi) {
   let mesh = null, outline = null;
   model.traverse(o => { if (o.isMesh) { mesh = o; o.castShadow = true; o.frustumCulled = false; o.material = toonMaterial(tex); } });
   // קו מתאר: עותק של הרשת המעורה (אותו שלד), פנים הפוכות, מוזז החוצה לאורך הנורמל; נותן מראה של סרט מצויר
-  if (mesh) { model.updateMatrixWorld(true); const ws = new THREE.Vector3(); mesh.getWorldScale(ws); /* הגאומטריה של ה-FBX בקנה מידה פנימי, לכן רוחב הקו מתורגם ליחידות הרשת */ outline = mesh.clone(); outline.material = outlineMaterial(1.5 / (ws.x || 1)); outline.castShadow = false; outline.renderOrder = -1; mesh.parent.add(outline); }
+  if (mesh) { model.updateMatrixWorld(true); const ws = new THREE.Vector3(); mesh.getWorldScale(ws); /* הגאומטריה של ה-FBX בקנה מידה פנימי, לכן רוחב הקו מתורגם ליחידות הרשת */ outline = mesh.clone(); outline.material = outlineMaterial(CARTOON.outline / (ws.x || 1), CARTOON.line); outline.castShadow = false; /* קו עבה: סגנון 3 שרועי בחר (01/10) */ outline.renderOrder = -1; mesh.parent.add(outline); }
   const rig = new PoseRig(model);
   return { model, rig, mesh, outline, async setKit(k) { mesh.material.map = await kitTexture(k); mesh.material.needsUpdate = true; } };
 }
 
 // חומר "טון": הצללה בדרגות (כמו אנימציה), עם ברק קטן. gradientMap של 4 דרגות
+export const CARTOON = { outline: 4.2, line: '#241B3A', steps: ['#8a8a8a', '#ffffff'], boost: 1.12 }; /* סרט מצויר: שתי דרגות צבע, קו מתאר עבה, צבע רווי (רועי 01/10: "מספר 3 מעולה") */
 let gradTex = null;
-function gradientMap() { if (gradTex) return gradTex; const c = document.createElement('canvas'); c.width = 4; c.height = 1; const g = c.getContext('2d'); [['#6b6b6b', 0], ['#a8a8a8', 1], ['#e6e6e6', 2], ['#ffffff', 3]].forEach(([col, i]) => { g.fillStyle = col; g.fillRect(i, 0, 1, 1); }); gradTex = new THREE.CanvasTexture(c); gradTex.minFilter = gradTex.magFilter = THREE.NearestFilter; gradTex.colorSpace = THREE.NoColorSpace; return gradTex; }
-export function toonMaterial(map) { return new THREE.MeshToonMaterial({ map, gradientMap: gradientMap() }); }
+function gradientMap() { if (gradTex) return gradTex; const c = document.createElement('canvas'); c.width = CARTOON.steps.length; c.height = 1; const g = c.getContext('2d'); CARTOON.steps.forEach((col, i) => { g.fillStyle = col; g.fillRect(i, 0, 1, 1); }); gradTex = new THREE.CanvasTexture(c); gradTex.minFilter = gradTex.magFilter = THREE.NearestFilter; gradTex.colorSpace = THREE.NoColorSpace; return gradTex; }
+export function toonMaterial(map) { return new THREE.MeshToonMaterial({ map, gradientMap: gradientMap(), color: new THREE.Color(CARTOON.boost, CARTOON.boost, CARTOON.boost) }); }
 export function outlineMaterial(width = 1.9, color = '#1B1740') {
   const m = new THREE.MeshBasicMaterial({ color, side: THREE.BackSide });
   m.onBeforeCompile = sh => { sh.vertexShader = sh.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>\n transformed += normalize(objectNormal) * ${width.toFixed(5)};`); };
