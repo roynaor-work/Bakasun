@@ -1,6 +1,7 @@
 /* Texts for the second stage: suppliers, quotes, schedule, staff, groups, money, checklists, cloud. Merged into the main dictionary. */
 export const MORE = {
   he: {
+    paperNeedsCloud: 'המסמך שמור בענן הפרטי. צריך כניסה לענן (הגדרות) כדי לשלוח אותו.', paperInCloud: 'בענן, צריך כניסה', seedNeedsCloud: 'נתוני ההתחלה שמורים בענן הפרטי. קודם כניסה לענן בהגדרות.', seedLoadFailed: 'לא הצלחתי להביא את נתוני ההתחלה מהענן.', 
     agendaNextWeek: 'שבוע הבא', clDone: 'בוצע', 
     sessionExpired: 'הכניסה לענן פגה. לשלוח קישור כניסה חדש למייל.', cloudQueued: '{n} ממתינים לשליחה', cloudConflicts: '{n} התנגשויות נפתרו (החדש ניצח)', cloudSkipped: 'לא עלה לענן: {what}', cloudFileError: 'קבצים:', cloudQueuedWarn: '{n} שינויים עוד לא עלו לענן. להתנתק בכל זאת? הם יעלו שוב בכניסה הבאה.', 
     // contacts import preview
@@ -70,6 +71,7 @@ export const MORE = {
     supplierPay: 'תשלומים לספקים', markPaid: 'שולם', paidNote: 'הודעה לספק: שולם', supplierPayReminder: 'תזכורת תשלום לספקים', autoRemind: 'אוטומטית במסך היום', manualRemind: 'רק כשאני פותחת "כספים"', afterEventDays: 'ימים אחרי האירוע', chooseLang: 'שפה'
   },
   fr: {
+    paperNeedsCloud: 'Le document est dans le cloud privé. Connecte-toi au cloud (Réglages) pour l’envoyer.', paperInCloud: 'Dans le cloud, connexion requise', seedNeedsCloud: 'Les données de départ sont dans le cloud privé. Connecte-toi d’abord au cloud dans les réglages.', seedLoadFailed: 'Impossible de récupérer les données de départ du cloud.', 
     agendaNextWeek: 'La semaine prochaine', clDone: 'Fait', 
     sessionExpired: 'La connexion au cloud a expiré. Envoie-toi un nouveau lien.', cloudQueued: '{n} en attente d’envoi', cloudConflicts: '{n} conflits résolus (le plus récent gagne)', cloudSkipped: 'Pas envoyé au cloud : {what}', cloudFileError: 'Fichiers :', cloudQueuedWarn: '{n} changements ne sont pas encore dans le cloud. Se déconnecter quand même ? Ils remonteront à la prochaine connexion.', 
     // contacts import preview
@@ -132,6 +134,7 @@ export const MORE = {
     supplierPay: 'Paiements fournisseurs', markPaid: 'Payé', paidNote: 'Message au fournisseur : payé', supplierPayReminder: 'Rappel des paiements fournisseurs', autoRemind: 'Automatique sur l’écran du jour', manualRemind: 'Seulement quand j’ouvre « Finances »', afterEventDays: 'jours après l’événement', chooseLang: 'Langue'
   },
   en: {
+    paperNeedsCloud: 'The paper is kept in the private cloud. Sign in to the cloud (Settings) to send it.', paperInCloud: 'In the cloud, sign in', seedNeedsCloud: 'The starting data is kept in the private cloud. Sign in to the cloud in the settings first.', seedLoadFailed: 'Could not fetch the starting data from the cloud.', 
     agendaNextWeek: 'Next week', clDone: 'Done', 
     sessionExpired: 'The cloud sign-in expired. Send a new sign-in link to the mail.', cloudQueued: '{n} waiting to send', cloudConflicts: '{n} conflicts resolved (newest won)', cloudSkipped: 'Not sent to the cloud: {what}', cloudFileError: 'Files:', cloudQueuedWarn: '{n} changes are not in the cloud yet. Sign out anyway? They go up again at the next sign-in.', 
     // contacts import preview

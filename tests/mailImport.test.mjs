@@ -4,16 +4,16 @@ import { parseMail, cleanMail, parseAddress, takeDates, takeHours, takeOrg, take
 
 const PLACES = [['הרצליה', 'Herzliya'], ['ראש פינה', 'Rosh Pinna'], ['תל אביב', 'Tel Aviv'], ['ירושלים', 'Jerusalem'], ['מצפה רמון', 'Mitzpe Ramon'], ['חריש', 'Harish'], ['קיסריה', 'Caesarea'], ['בנימינה', 'Binyamina']];
 const CLIENTS = [
-  { id: 'c1', name: 'ארגון שוב״ל', aliases: 'שובל, שוב״ל, Shoval', contact: 'עידית פודולר ראובני', email: 'idit@shoval-net.org', notes: 'אנשי קשר נוספים: צופיה אורן; tzofia@shoval-net.org', lang: 'he' },
-  { id: 'c2', name: 'Bertelsmann Stiftung', aliases: 'ברטלסמן, GIYLE', contact: 'Claudia Baum-Jaumann', email: 'claudia.baum-jaumann@bertelsmann-stiftung.de', lang: 'en' },
-  { id: 'c3', name: 'עיריית חריש', contact: 'אורלי רמות', email: 'orlyramot15@gmail.com', lang: 'he' },
-  { id: 'c4', name: 'WeRIsrael', aliases: 'וי אר ישראל', contact: 'Tamar Adler-Furman', email: 'tamar@werisrael.com', phone: '050-885-5015', lang: 'he' }
+  { id: 'c1', name: 'ארגון שוב״ל', aliases: 'שובל, שוב״ל, Shoval', contact: 'ענת כהן-לוי', email: 'anat@example.org', notes: 'אנשי קשר נוספים: צופיה אורן; tzofia@example.org', lang: 'he' },
+  { id: 'c2', name: 'Bertelsmann Stiftung', aliases: 'ברטלסמן, GIYLE', contact: 'Claudia Baum-Jaumann', email: '[email-removed]', lang: 'en' },
+  { id: 'c3', name: 'עיריית חריש', contact: 'אורלי רמות', email: '[email-removed]', lang: 'he' },
+  { id: 'c4', name: 'WeRIsrael', aliases: 'וי אר ישראל', contact: 'Tamar Adler-Furman', email: '[email-removed]', phone: '[phone-removed]', lang: 'he' }
 ];
 const today = '2026-10-01';
 const opts = { clients: CLIENTS, places: PLACES, today };
 
 test('Hebrew Gmail reply with headers, signature and a quoted thread: client matched by the e-mail in her card notes', () => {
-  const p = parseMail(`מאת: צופיה אורן <tzofia@shoval-net.org>
+  const p = parseMail(`מאת: צופיה אורן <tzofia@example.org>
 נושא: Re: סמינר צוות אוקטובר
 תאריך: 28 בספטמבר 2026
 
@@ -28,7 +28,7 @@ test('Hebrew Gmail reply with headers, signature and a quoted thread: client mat
 בתאריך יום ב׳, 21 בספט׳ 2026 ב-10:15 מאת וירג'יני <info.virpro@gmail.com> כתב/ה:
 > היי צופיה, מה עם התאריכים? יש תקציב של 100,000 ש"ח?
 > וירג'יני`, opts);
-  assert.equal(p.name, 'צופיה אורן'); assert.equal(p.email, 'tzofia@shoval-net.org'); assert.equal(p.phone, '050-1234567');
+  assert.equal(p.name, 'צופיה אורן'); assert.equal(p.email, 'tzofia@example.org'); assert.equal(p.phone, '050-1234567');
   assert.equal(p.clientId, 'c1'); assert.equal(p.client, 'ארגון שוב״ל'); assert.equal(p.clientBy, 'email');
   assert.equal(p.subject, 'סמינר צוות אוקטובר'); assert.equal(p.mailDate, '2026-09-28');
   assert.equal(p.kind, 'יום גיבוש'); assert.equal(p.date, '2026-10-19'); assert.equal(p.dateEnd, '2026-10-20'); assert.equal(p.days, '2');
@@ -90,7 +90,7 @@ Le lun. 28 sept. 2026 à 11:02, Virginie <info.virpro@gmail.com> a écrit :
 
 test('English forwarded Gmail thread: client by e-mail domain, "November 19 and leaving November 24", "at 7pm", € budget', () => {
   const p = parseMail(`---------- Forwarded message ---------
-From: Stefanie Schulz <stefanie.schulz@bertelsmann-stiftung.de>
+From: Stefanie Schulz <[email-removed]>
 Date: Tue, Sep 29, 2026 at 4:05 PM
 Subject: Re: GIYLE Israel module November
 To: Virginie <info.virpro@gmail.com>
@@ -147,7 +147,7 @@ Sent: Sunday, September 27, 2026 9:00 AM
 To: Tamar Adler-Furman
 Subject: J50 delegation
 Hi Tamar, sure. 300 people?`, opts);
-  assert.equal(p.clientId, 'c4'); assert.equal(p.clientBy, 'contact'); assert.equal(p.email, 'tamar@werisrael.com'); assert.equal(p.phone, '050-885-5015');
+  assert.equal(p.clientId, 'c4'); assert.equal(p.clientBy, 'contact'); assert.equal(p.email, '[email-removed]'); assert.equal(p.phone, '[phone-removed]');
   assert.equal(p.date, '2026-11-02'); assert.equal(p.dateEnd, '2026-11-06'); assert.equal(p.participants, '');
   assert.deepEqual(p.needs, ['דפוס ומיתוג']); assert.equal(p.hadQuote, true);
   assert.ok(!p.body.includes('300 people'));
@@ -233,8 +233,8 @@ test('takeKind and takeBudget', () => {
 });
 
 test('matchMailClient: e-mail, domain, alias in the text, contact name; generic domains never match by domain', () => {
-  assert.equal(matchMailClient({ email: 'idit@shoval-net.org' }, CLIENTS).by, 'email');
-  assert.equal(matchMailClient({ email: 'someone@shoval-net.org' }, CLIENTS).client.id, 'c1');
+  assert.equal(matchMailClient({ email: 'anat@example.org' }, CLIENTS).by, 'email');
+  assert.equal(matchMailClient({ email: 'someone@example.org' }, CLIENTS).client.id, 'c1');
   assert.equal(matchMailClient({ email: 'new@gmail.com', text: 'מברטלסמן' }, CLIENTS).client.id, 'c2');
   assert.equal(matchMailClient({ email: 'x@gmail.com', name: 'אורלי רמות' }, CLIENTS).by, 'contact');
   assert.equal(matchMailClient({ email: 'x@gmail.com', text: 'hello', name: 'Nobody' }, CLIENTS), null);

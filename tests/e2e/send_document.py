@@ -1,5 +1,7 @@
 import asyncio
 from playwright.async_api import async_playwright
+import sys, os; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'tests', 'e2e') if 'scratchpad' in os.path.abspath(__file__) else os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, '/home/user/bakasun/tests/e2e')
+from fixture import seed
 async def main():
     async with async_playwright() as p:
         b = await p.chromium.launch(executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
@@ -7,9 +9,7 @@ async def main():
         pg = await b.new_page(viewport={'width':400,'height':900})
         pg.on('pageerror', lambda e: errs.append(str(e)))
         await pg.goto('http://localhost:8765/#/settings'); await pg.wait_for_timeout(700)
-        try:
-            await pg.locator('#seed').click(timeout=1500); await pg.wait_for_timeout(500); await pg.keyboard.press('Enter'); await pg.wait_for_timeout(500)
-        except Exception as e: print('seed', str(e)[:50])
+        await seed(pg)
         for txt in ['שלח בבקשה את מסמכי הביטוח למייל של רועי', 'שלחי את הלוגו לרועי', 'שלחי את תעודת ההתאגדות למייל של רועי']:
             await pg.goto('http://localhost:8765/#/assist'); await pg.wait_for_timeout(600)
             await pg.locator('#txt').first.fill(txt); await pg.locator('#go').click(); await pg.wait_for_timeout(900)

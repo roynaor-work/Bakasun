@@ -72,9 +72,9 @@ test('dedupe: same phone, same e-mail or same normalised name become one contact
 
 test('classification: labels, organisation words, names, e-mail domains and existing cards', () => {
   const lists = {
-    clients: [{ id: 'c1', name: 'ארגון שוב״ל', aliases: 'שובל, Shoval', contact: 'עידית פודולר', email: 'idit@shoval-net.org', phone: '' }],
+    clients: [{ id: 'c1', name: 'ארגון שוב״ל', aliases: 'שובל, Shoval', contact: 'ענת כהן', email: 'anat@example.org', phone: '' }],
     suppliers: [{ id: 's1', name: 'מלון שפיים', type: 'מלונות', phone: '09-9595555', email: 'events@shefayim.co.il' }],
-    staff: [{ id: 't1', name: 'מרינה גולדמן', phone: '054-7777777' }]
+    staff: [{ id: 't1', name: 'מיכל גולד', phone: '054-0000001' }]
   };
   const at = (c, exp) => { const r = classify(c, lists); assert.equal(r.cls, exp.cls, JSON.stringify([c, r])); if (exp.reason) assert.equal(r.reason, exp.reason); if (exp.type) assert.equal(r.type, exp.type); return r; };
   at({ name: 'יוסי', org: '', labels: ['ספקים'] }, { cls: 'supplier', reason: 'label' });
@@ -96,13 +96,13 @@ test('classification: labels, organisation words, names, e-mail domains and exis
   at({ name: 'עמותת הגליל', org: '' }, { cls: 'client', reason: 'name' });
   at({ name: 'בר אילן', org: '' }, { cls: 'contact' }, 'a first name is not a drinks supplier');
   at({ name: 'רועי נאור', org: '', email: 'roy@gmail.com' }, { cls: 'contact', reason: 'none' });
-  at({ name: 'עדי', org: '', email: 'adi@shoval-net.org' }, { cls: 'client', reason: 'domain' });
+  at({ name: 'עדי', org: '', email: 'adi@example.org' }, { cls: 'client', reason: 'domain' });
   at({ name: 'מאיה', org: '', email: 'maya@shefayim.co.il' }, { cls: 'supplier', reason: 'domain', type: 'מלונות' });
   const ex = at({ name: 'שפיים', org: '', phone: '+972 9 959 5555' }, { cls: 'supplier', reason: 'existing' });
   assert.equal(ex.existing.card.id, 's1'); assert.equal(ex.existing.how, 'phone');
-  assert.equal(at({ name: 'עידית פודולר', org: '' }, { cls: 'client', reason: 'existing' }).existing.how, 'name');
+  assert.equal(at({ name: 'ענת כהן', org: '' }, { cls: 'client', reason: 'existing' }).existing.how, 'name');
   assert.equal(at({ name: 'Shoval', org: '' }, { cls: 'client', reason: 'existing' }).existing.card.id, 'c1');
-  assert.equal(at({ name: 'מרינה', phone: '0547777777' }, { cls: 'staff', reason: 'existing' }).existing.card.id, 't1');
+  assert.equal(at({ name: 'מיכל', phone: '0540000001' }, { cls: 'staff', reason: 'existing' }).existing.card.id, 't1');
   assert.equal(guessSupplierType('קייטרינג שקד'), 'קייטרינג ושפים'); assert.equal(guessSupplierType('Sound & Light Pro'), 'הגברה ותאורה'); assert.equal(guessSupplierType('רונית כהן'), '');
   const all = classifyAll([{ name: 'DJ Avi' }, { name: 'עיריית חיפה' }, { name: 'רועי' }, { name: 'שפיים', phone: '09-9595555' }], lists);
   assert.deepEqual(all.counts, { client: 1, supplier: 2, staff: 0, contact: 1, existing: 1 });
@@ -118,7 +118,7 @@ test('import: preview writes nothing; import adds new cards, completes existing 
     { name: 'אורי שפיים', org: 'מלון שפיים', phone: '09-9595555', email: 'events@shefayim.co.il', phones: ['09-9595555'], emails: ['events@shefayim.co.il'], labels: [] },
     { name: 'רונית כהן', org: 'עיריית חיפה', phone: '04-8356000', email: 'ronit@haifa.muni.il', phones: ['04-8356000'], emails: ['ronit@haifa.muni.il'], labels: [] },
     { name: 'DJ Avi', org: '', phone: '052-1111111', email: '', phones: ['052-1111111'], emails: [], labels: [] },
-    { name: 'מרינה גולדמן', org: '', phone: '054-7777777', email: '', phones: ['054-7777777'], emails: [], labels: ['צוות'] },
+    { name: 'מיכל גולד', org: '', phone: '054-0000001', email: '', phones: ['054-0000001'], emails: [], labels: ['צוות'] },
     { name: 'רועי נאור', org: '', phone: '050-1234567', email: 'roy@gmail.com', phones: ['050-1234567'], emails: ['roy@gmail.com'], labels: [] },
     { name: 'ספאם', org: '', phone: '050-9999999', email: '', phones: ['050-9999999'], emails: [], labels: [] }
   ];
@@ -136,7 +136,7 @@ test('import: preview writes nothing; import adds new cards, completes existing 
   assert.deepEqual([cl.phone, cl.contact, cl.email], ['04-8356000', 'רונית כהן', 'ronit@haifa.muni.il'], 'existing contact name kept, missing e-mail filled');
   const dj = db.list('suppliers').find(x => x.name === 'DJ Avi');
   assert.equal(dj.type, 'תקליטנים ולהקות');
-  assert.equal(db.list('staff').filter(x => x.name === 'מרינה גולדמן').length, 1);
+  assert.equal(db.list('staff').filter(x => x.name === 'מיכל גולד').length, 1);
   assert.equal(db.list('contacts').filter(x => x.name === 'רועי נאור').length, 1);
   assert.equal(db.list('contacts').filter(x => x.name === 'ספאם').length, 0, 'skipped rows are not written anywhere');
   assert.ok(db.list('contacts').some(x => x.phone === '052-1111111'), 'new supplier also reachable from the phone book');

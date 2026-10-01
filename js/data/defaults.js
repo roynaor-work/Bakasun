@@ -6,7 +6,7 @@ export const DEFAULTS = {
   terms: 'חשבונית מס תסופק כנגד תשלום.\nמקדמה במעמד חתימת ההסכם או תחילת הבריף הראשון.\nיתרת התשלום עד שבוע אחרי תאריך האירוע.',
   cancelTerms: 'ביטול ההתקשרות יתאפשר אך ורק בהודעה בכתב.\nביטול שלא בשל כוח עליון, עד 60 יום לפני האירוע: 50% ממחיר ההזמנה + מע״מ.\nביטול בשל כוח עליון או מצב ביטחוני בלבד: עד 60 יום לפני האירוע, שעות הפקה 4,000 ₪ + מע״מ. פחות מ-60 יום לפני האירוע, 6,000 ₪ + מע״מ.',
   invoiceTo: '', invoiceEmail: 'roynaor@gmail.com', invoiceName: 'רועי',
-  bankDetails: 'בנק לאומי (10), סניף 954, חשבון 255500/34\nעל שם: באקה סאן בע״מ\nIBAN IL760109540000025550034 · SWIFT LUMIILITXXX',
+  bankDetails: '',
   /* What she always needs from a client before Roy can issue an invoice */
   invoiceFields: ['legalName', 'taxId', 'address']
 };

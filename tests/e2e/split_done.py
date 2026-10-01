@@ -1,5 +1,7 @@
 import asyncio, json
 from playwright.async_api import async_playwright
+import sys, os; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'tests', 'e2e') if 'scratchpad' in os.path.abspath(__file__) else os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, '/home/user/bakasun/tests/e2e')
+from fixture import seed
 S='/tmp'
 BASE='http://localhost:8765/'
 async def main():
@@ -11,11 +13,7 @@ async def main():
             pg.on('pageerror', lambda e: errs.append(str(e)))
             await pg.goto(BASE+'#/settings'); await pg.wait_for_timeout(800)
             # load the seed (button exists in settings) so Shoval exists
-            btn = pg.locator('button:has-text("טעני"), button:has-text("דוגמה"), #seed').first
-            try:
-                await btn.click(timeout=1500); await pg.wait_for_timeout(600)
-                await pg.keyboard.press('Enter'); await pg.wait_for_timeout(600)
-            except Exception as e: print('no seed btn', str(e)[:60])
+            await seed(pg)
             await pg.goto(BASE+'#/tasks'); await pg.wait_for_timeout(700)
             tabs = await pg.locator('.tabs button').all_inner_texts(); print(w, 'tabs:', tabs)
             await pg.screenshot(path=f'{S}/tasks_{w}.png', full_page=False)

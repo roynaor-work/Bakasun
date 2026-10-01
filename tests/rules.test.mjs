@@ -6,7 +6,7 @@ const today = '2026-09-30';
 const ARABIC = new RegExp('[' + String.fromCharCode(0x600) + '-' + String.fromCharCode(0x6ff) + ']'); // the Arabic block, built without writing its letters
 
 const cases = [
-  { id: 'c1', client: 'שוב״ל', contact: 'עידית', phone: '0501111111', kind: 'כנס', date: '2026-10-07', place: 'שפיים', status: 'נסגר', lang: 'he', needs: ['מלונות'] },
+  { id: 'c1', client: 'שוב״ל', contact: 'ענת', phone: '0501111111', kind: 'כנס', date: '2026-10-07', place: 'שפיים', status: 'נסגר', lang: 'he', needs: ['מלונות'] },
   { id: 'c2', client: 'Bertelsmann', contact: 'Claudia', phone: '0502222222', kind: 'משלחת', date: '2026-11-19', status: 'הצעה נשלחה', lang: 'en' },
   { id: 'c3', client: 'ירד', kind: 'כנס', date: '2026-10-02', status: 'ירד' },
   { id: 'c4', client: 'מחר', kind: 'סיור', date: '2026-10-01', status: 'נסגר' },
@@ -164,7 +164,7 @@ test('contracts: not signed with the event within 10 days fires; signed does not
   const list = evaluate(data, today, S);
   const n = one(list, 'contract:c1');
   assert.ok(n); assert.equal(n.href, '#/contract/x1'); assert.match(n.body, /נשלח ללקוח/);
-  assert.match(n.actions.find(a => a.type === 'whatsapp').payload.text, /היי עידית/);
+  assert.match(n.actions.find(a => a.type === 'whatsapp').payload.text, /היי ענת/);
   assert.equal(one(list, 'contract:c5'), undefined, 'signed');
   assert.equal(one(evaluate(data, today, { rules: { contract: { days: 3 } } }), 'contract:c1'), undefined);
   assert.equal(evaluate(data, today, { rules: { contract: { on: false } } }).filter(n => n.kind === 'contract').length, 0);

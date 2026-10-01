@@ -1,6 +1,7 @@
+-- גם מסמכי החברה (<org>/papers/*) ונתוני ההתחלה (<org>/seed/seed.json) יושבים כאן, פרטיים, רק לחברי הארגון.
 -- הצילומים של החשבוניות והקבלות: דלי פרטי "receipts". כל עסק רואה רק את התיקייה שלו (org_id/חודש/קובץ).
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values ('receipts', 'receipts', false, 15728640, array['image/jpeg','image/png','image/webp','application/pdf'])
+values ('receipts', 'receipts', false, 15728640, array['image/jpeg','image/png','image/webp','application/pdf','application/json','text/csv','text/plain','text/markdown','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'])
 on conflict (id) do nothing;
 
 drop policy if exists receipts_read on storage.objects;

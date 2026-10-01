@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import { templateFor, rfqText, rfqSubject, rfqReminder, rfqDecline, pendingRequests, parseOffer, compareRows, compareHtml, specLines } from '../js/logic/rfq.js';
 
 const cs = { id: 'k1', client: 'ארגון שוב״ל', kind: 'סמינר צוות', date: '2026-10-19', participants: 18, status: 'הצעה נשלחה' };
-const hotel = { id: 's1', name: 'מלון דניאל הרצליה', contact: 'ארבל גבילי', type: 'מלונות', email: 'a@b.co', lang: 'he' };
+const hotel = { id: 's1', name: 'מלון דניאל הרצליה', contact: 'אורי שגב', type: 'מלונות', email: 'a@b.co', lang: 'he' };
 
 test('a hotel request in her voice, in the client name, with nights counted', () => {
   const spec = { checkIn: '2026-10-19', checkOut: '2026-10-20', singles: 16, board: 'חצי פנסיון', meeting: 'אולם ל-20 בישיבת U', av: 'on', splits: 'חלק מגיעים בערב' };
   const txt = rfqText(cs, hotel, 'hotel', spec, { firstContact: true, replyBy: '2026-10-01' });
-  assert.match(txt, /^היי היי ארבל, מה שלומך\?\nנעים מאוד, שמי וירג׳יני מארגון שוב״ל\.\nאנחנו מארגנים סמינר צוות ל-18 משתתפים:\n• כניסה: 19\/10\/2026\n• יציאה: 20\/10\/2026\n• לילות: 1\n• חדרי סינגל: 16\n• בסיס אירוח: חצי פנסיון/);
+  assert.match(txt, /^היי היי אורי, מה שלומך\?\nנעים מאוד, שמי וירג׳יני מארגון שוב״ל\.\nאנחנו מארגנים סמינר צוות ל-18 משתתפים:\n• כניסה: 19\/10\/2026\n• יציאה: 20\/10\/2026\n• לילות: 1\n• חדרי סינגל: 16\n• בסיס אירוח: חצי פנסיון/);
   assert.match(txt, /• מסך ומקרן: כן\n• פיצולים \(חלק מגיעים אחר כך\): חלק מגיעים בערב\nאשמח לבדוק זמינות ולקבל הצעת מחיר עד 01\/10\/2026\./);
   assert.match(txt, /וירג׳יני 054-4974644$/);
   assert.equal(templateFor('מלונות'), 'hotel'); assert.equal(templateFor('דפוס ומיתוג'), 'print'); assert.equal(templateFor('הסעות'), 'transport');
@@ -20,8 +20,8 @@ test('a hotel request in her voice, in the client name, with nights counted', ()
 });
 
 test('the reminder, the polite no, and who is still waiting', () => {
-  assert.equal(rfqReminder(cs, hotel, 1), 'היי ארבל, מזכירה לגבי הבקשה ששלחתי על סמינר צוות · 19/10/2026 לפני יום. זה די דחוף, אשמח שתחזרו אליי היום. תודה רבה!\nוירג׳יני');
-  assert.match(rfqDecline(cs, hotel), /^היי ארבל, תודה רבה על ההצעה\. הפעם סגרנו במקום אחר/);
+  assert.equal(rfqReminder(cs, hotel, 1), 'היי אורי, מזכירה לגבי הבקשה ששלחתי על סמינר צוות · 19/10/2026 לפני יום. זה די דחוף, אשמח שתחזרו אליי היום. תודה רבה!\nוירג׳יני');
+  assert.match(rfqDecline(cs, hotel), /^היי אורי, תודה רבה על ההצעה\. הפעם סגרנו במקום אחר/);
   const links = [{ id: 'l1', caseId: 'k1', supplierId: 's1', status: 'ביקשנו הצעה', askedAt: '2026-09-26' }, { id: 'l2', caseId: 'k1', supplierId: 's2', status: 'ביקשנו הצעה', askedAt: '2026-09-28' }, { id: 'l3', caseId: 'k1', supplierId: 's3', status: 'ביקשנו הצעה', askedAt: '2026-09-20', answeredAt: '2026-09-21' }];
   const p = pendingRequests(links, [cs], [hotel], '2026-09-28', 1);
   assert.deepEqual(p.map(x => [x.id, x.waited, x.sup.name]), [['l1', 2, 'מלון דניאל הרצליה']]);

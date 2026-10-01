@@ -2,22 +2,14 @@
    {placeholders} are filled by js/logic/msgTemplates.js from the case, the client card, the supplier card, the links,
    the payments and the settings. Whatever stays unknown is shown as 【label】 so she sees what to fill by hand.
    Nothing is sent by the app: the screen only copies, or opens WhatsApp / mail with the text; she presses send. */
-import { COMPANY_PAPERS } from './docsList.js';
-
-/* The liability policy of Baka San itself (docsList key 'insurance'): the numbers are read from that entry so there is one source. */
-const insPaper = COMPANY_PAPERS.find(p => p.key === 'insurance') || {};
-const insNote = String(insPaper.note || '');
-const policyNo = (insNote.match(/\d{13}/) || ['1820200089326'])[0];
-const period = insNote.match(/(\d{2}\/\d{2}\/\d{4})\s+עד\s+(\d{2}\/\d{2}\/\d{4})/) || [null, '01/05/2026', '30/04/2027'];
+/* The liability policy of Baka San: the policy number, period and limits are org settings (insurancePolicy, insurancePeriod,
+   insuranceLimits), kept in the cloud and never in the code. Only the agency's public contact is here. */
 export const INSURANCE = {
   agency: { he: 'קופר נינוה סוכנות לביטוח', fr: 'Cooper Ninve (agence d’assurance)', en: 'Cooper Ninve insurance agency' },
   email: 'info@cooper-ninve.com',
   insurer: { he: 'חתמי לוידס', fr: 'Lloyd’s', en: 'Lloyd’s' },
-  policyNo: policyNo,
-  from: period[1], to: period[2],
-  period: { he: period[1] + ' עד ' + period[2], fr: 'du ' + period[1] + ' au ' + period[2], en: period[1] + ' to ' + period[2] },
-  limits: { he: 'צד ג׳ 1,000,000$ · אחריות מקצועית 1,000,000$ · חבות מעבידים 5,000,000$', fr: 'RC tiers 1 000 000 $ · RC professionnelle 1 000 000 $ · RC employeur 5 000 000 $', en: 'Third party 1,000,000$ · Professional liability 1,000,000$ · Employers liability 5,000,000$' },
-  file: insPaper.file || 'docs/policy-bakasun-liability-2026-27.pdf'
+  /** The values from the settings, or '' so the placeholder stays visible as 【label】. */
+  of(settings) { const st = settings || {}; return { policyNo: st.insurancePolicy || '', period: st.insurancePeriod || '', limits: st.insuranceLimits || '' }; }
 };
 
 /* The labels shown inside 【】 when a placeholder could not be filled, in the language of the message. */

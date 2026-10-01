@@ -1,5 +1,7 @@
 import asyncio
 from playwright.async_api import async_playwright
+import sys, os; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'tests', 'e2e') if 'scratchpad' in os.path.abspath(__file__) else os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, '/home/user/bakasun/tests/e2e')
+from fixture import seed
 S='/tmp'
 async def main():
     async with async_playwright() as p:
@@ -9,11 +11,9 @@ async def main():
         pg.on('pageerror', lambda e: errs.append(str(e)))
         pg.on('dialog', lambda d: d.accept())
         await pg.goto('http://localhost:8765/#/settings'); await pg.wait_for_timeout(700)
-        try:
-            await pg.locator('#seed').click(timeout=1500); await pg.wait_for_timeout(500); await pg.keyboard.press('Enter'); await pg.wait_for_timeout(500)
-        except Exception as e: print('seed', str(e)[:50])
+        await seed(pg)
         await pg.goto('http://localhost:8765/#/assist'); await pg.wait_for_timeout(600)
-        await pg.locator('#txt').first.fill('פתח לי בבקשה קבוצת עבודה לשובל עם חמש אנשים מרינה רותם עידית דוד ומרינה'); await pg.locator('#go').click(); await pg.wait_for_timeout(900)
+        await pg.locator('#txt').first.fill('פתח לי בבקשה קבוצת עבודה לשובל עם חמש אנשים מרינה רותם ענת דוד ומרינה'); await pg.locator('#go').click(); await pg.wait_for_timeout(900)
         print('CARD:', (await pg.locator('#out').inner_text())[:600].replace('\n',' | '))
         await pg.screenshot(path=S+'/wg1.png', full_page=True)
         # voice answer

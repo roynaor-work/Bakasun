@@ -18,11 +18,20 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Only the app files are published (never docs, tests, SQL or notes)
+        run: |
+          mkdir -p _site
+          cp index.html manifest.json sw.js _site/
+          cp -r css js icons _site/
+          [ -d workout ] && cp -r workout _site/workout || true
+          rm -rf _site/workout/docs _site/workout/tests 2>/dev/null || true
+          find _site -name '*.md' -o -name '*.csv' -o -name '*.xlsx' -o -name '*.sql' -o -name '*.bundle' | xargs -r rm -f
+          ls _site
       - uses: actions/configure-pages@v5
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deploy
         uses: actions/deploy-pages@v4

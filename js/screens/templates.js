@@ -151,7 +151,7 @@ function recipientOf(tp, rid, cs) {
 }
 function recipientBlock(tp, rec, who) {
   const uiL = lang();
-  if (tp.to === 'agency') return `<div class="card mt-fixed"><div class="row between"><span class="title">${esc(INSURANCE.agency[uiL])}</span>${copyBtn(INSURANCE.email, { icon: true })}</div><div class="sub ltr">${esc(INSURANCE.email)}</div><div class="sub">${esc(t('mtAgencyCard'))} · ${esc(t('mtPolicy'))} <span class="ltr">${esc(INSURANCE.policyNo)}</span> · ${esc(INSURANCE.period[uiL])}</div></div>`;
+  if (tp.to === 'agency') return `<div class="card mt-fixed"><div class="row between"><span class="title">${esc(INSURANCE.agency[uiL])}</span>${copyBtn(INSURANCE.email, { icon: true })}</div><div class="sub ltr">${esc(INSURANCE.email)}</div><div class="sub">${esc(t('mtAgencyCard'))} · ${esc(t('mtPolicy'))} <span class="ltr">${esc(INSURANCE.of(db.settings()).policyNo || '…')}</span> · ${esc(INSURANCE.of(db.settings()).period || '')}</div></div>`;
   if (tp.to === 'participants') return `<p class="hint">${esc(t('mtPickInWa'))}</p>`;
   const line = who.phone || who.email ? `<div class="sub ltr mt-who">${esc(who.phone)}${who.phone ? copyBtn(who.phone, { icon: true }) : ''}${who.phone && who.email ? ' · ' : ''}${esc(who.email)}${who.email ? copyBtn(who.email, { icon: true }) : ''}</div>` : '';
   return field('rid', t('mtRecipient'), who.supplier ? who.supplier.id : who.client && tp.to !== 'custom' ? who.client.id : (tp.to === 'custom' && who.client ? 'c:' + who.client.id : ''), { type: 'select', options: rec.options }) + line;

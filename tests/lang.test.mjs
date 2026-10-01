@@ -136,7 +136,7 @@ test('"how do I" questions are stripped to the words that matter', () => {
 });
 
 test('a working group and her answer about how to work with it', () => {
-  same(parseWorkGroup, ['פתחי קבוצת עבודה לשובל עם דנה, רותם ועידית, במייל', 'open a working group for שובל with דנה, רותם and עידית by email', 'set up a whatsapp group for the שובל event with דנה, רותם and עידית, by e-mail', 'crée un groupe de travail pour שובל avec דנה, רותם et עידית, par mail', 'ouvre-moi un groupe pour l’événement שובל avec דנה, רותם et עידית par e-mail', 'crée s’il te plaît un groupe pour שובל avec דנה, רותם et עידית, mail'], { names: ['דנה', 'רותם', 'עידית'], caseName: 'שובל', opt: 'mail' });
+  same(parseWorkGroup, ['פתחי קבוצת עבודה לשובל עם דנה, רותם וענת, במייל', 'open a working group for שובל with דנה, רותם and ענת by email', 'set up a whatsapp group for the שובל event with דנה, רותם and ענת, by e-mail', 'crée un groupe de travail pour שובל avec דנה, רותם et ענת, par mail', 'ouvre-moi un groupe pour l’événement שובל avec דנה, רותם et ענת par e-mail', 'crée s’il te plaît un groupe pour שובל avec דנה, רותם et ענת, mail'], { names: ['דנה', 'רותם', 'ענת'], caseName: 'שובל', opt: 'mail' });
   same(groupOption, ['וואטסאפ', 'whatsapp', 'whats app', 'by whatsapp', 'par whatsapp', 'sur whatsapp'], 'wa');
   same(groupOption, ['במייל', 'mail', 'by email', 'par mail', 'par e-mail', 'courriel'], 'mail');
   same(groupOption, ['תדריך', 'brief', 'a brief', 'le brief', 'un résumé', 'summary'], 'brief');

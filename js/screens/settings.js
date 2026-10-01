@@ -7,7 +7,7 @@ import { importContacts, planImport, CLASSES } from '../contactsImport.js';
 import { undoLast } from '../logic/undo.js';
 import { templates, removeTemplate } from '../logic/templates.js';
 import { TASK } from '../logic/extra.js';
-import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_STAFF, SEED_PAYMENTS, SEED_CASES } from '../data/seedContacts.js';
+import { PAPERS_BUCKET, paperAvailable, paperNeedsCloud } from '../papers.js';
 import { travelLine } from '../logic/travel.js';
 import { phoneDigits } from '../logic/core.js';
 import * as cloud from '../cloud.js';
@@ -100,7 +100,7 @@ export function render({ root }) {
         <details><summary>${esc(t('withPassword'))}</summary><form class="stack" id="cf"><div class="grid2">${CLOUD.url ? `<input type="hidden" name="url" value="${esc(CLOUD.url)}"><input type="hidden" name="key" value="${esc(CLOUD.key)}">` : field('url', t('cloudUrl'), (cc && cc.url) || '', { ltr: true, placeholder: 'https://xxxx.supabase.co' }) + field('key', t('cloudKey'), '', { ltr: true })}${field('email', t('email'), (cc && cc.email) || '', { ltr: true, inputmode: 'email' })}${field('password', t('password'), '', { type: 'password', ltr: true })}</div><button class="btn primary" type="submit">${esc(t('login'))}</button></form></details>`}
     </section>
     <section class="sec"><h2>${esc(t('companyDocs'))}</h2><div class="card"><div class="kv"><dt>${esc(t('fLegal'))}</dt><dd>${esc(s.bizLegal || DEFAULTS.bizLegal)}</dd><dt>${esc(t('fTaxId'))}</dt><dd class="ltr">${esc(s.bizId || DEFAULTS.bizId)}${copyBtn(s.bizId || DEFAULTS.bizId, { icon: true })}</dd><dt>${esc(t('bizAddress'))}</dt><dd>${esc(s.bizAddress || DEFAULTS.bizAddress)}${copyBtn(s.bizAddress || DEFAULTS.bizAddress, { icon: true })}</dd><dt>${esc(t('phone'))}</dt><dd class="ltr">${esc(s.bizPhone || DEFAULTS.bizPhone)}${copyBtn(s.bizPhone || DEFAULTS.bizPhone, { icon: true })}</dd><dt>${esc(t('fEmail'))}</dt><dd class="ltr">${esc(s.bizEmail || DEFAULTS.bizEmail)}${copyBtn(s.bizEmail || DEFAULTS.bizEmail, { icon: true })}</dd></div><div class="row"><button class="btn sm" id="copyBiz">${esc(t('copyDetails'))}</button></div></div>
-      <div class="list">${COMPANY_PAPERS.map(p => `<div class="card row between"><span class="title grow">${esc(p.title)}</span><span class="badge ${p.status === 'found' ? 'ok' : ''}">${esc(p.status === 'found' ? t('paperFound') : t('paperMissing'))}</span></div>`).join('')}</div>
+      <div class="list">${COMPANY_PAPERS.map(p => `<div class="card row between"><span class="title grow">${esc(p.title)}</span><span class="badge ${paperAvailable(p) ? 'ok' : p.status === 'found' ? 'warn' : ''}">${esc(paperNeedsCloud(p) ? t('paperInCloud') : p.status === 'found' ? t('paperFound') : t('paperMissing'))}</span></div>`).join('')}</div>
       <p class="hint">${esc(t('docsHint'))} <a href="#/assist">${esc(t('assist'))}</a></p>
       <div class="list">${COMPANY_DOCS.map(d => `<a class="card tap" href="${esc(d.url)}" target="_blank" rel="noopener"><span class="title">${esc(d.title)}</span></a>`).join('')}</div></section>
     <section class="sec"><h2>${esc(t('backup'))}</h2><p class="hint">${esc(cc && cc.on ? t('cloudOn') : t('dataLocal'))}</p>
@@ -175,7 +175,13 @@ export function render({ root }) {
     // a backup file only adds what is missing or newer; it never wipes what is here
     f.text().then(txt => { const n = db.importJson(txt); toast(t('mergedBackup', { n }), 4000); location.hash = '#/today'; }).catch(() => toast(t('badBackup'), 4000));
   };
-  root.querySelector('#seed').onclick = () => {
+  // the starting data (suppliers, clients, team, open events) is not in the app: it is fetched from the private cloud bucket
+  root.querySelector('#seed').onclick = async () => {
+    if (!cloud.isOn() || cloud.status.expired) { toast(t('seedNeedsCloud'), 5000); return; }
+    const blob = await cloud.downloadFileBlob(PAPERS_BUCKET, cloud.orgId() + '/seed/seed.json');
+    let seed = null; try { seed = blob ? JSON.parse(await blob.text()) : null; } catch (e) { seed = null; }
+    if (!seed) { toast(t('seedLoadFailed') + (cloud.status.fileError ? ' ' + cloud.status.fileError : ''), 6000); return; }
+    const SEED_SUPPLIERS = seed.SEED_SUPPLIERS || [], SEED_CLIENTS = seed.SEED_CLIENTS || [], SEED_TEAM = seed.SEED_TEAM || [], SEED_STAFF = seed.SEED_STAFF || [], SEED_PAYMENTS = seed.SEED_PAYMENTS || [], SEED_CASES = seed.SEED_CASES || [];
     const haveS = new Set(db.list('suppliers').map(x => x.name)), haveC = new Set(db.list('clients').map(x => x.name)), haveT = new Set(db.list('team').map(x => x.name));
     let ns = 0, nc = 0, np = 0;
     SEED_SUPPLIERS.forEach(x => {

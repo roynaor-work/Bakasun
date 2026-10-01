@@ -39,7 +39,7 @@ const quotes = [
 ];
 const links = [
   { id: 'l1', caseId: 'c2', supplier: 'גרשון טורס', status: 'ביקשנו הצעה', askedAt: '2026-09-25' },
-  { id: 'l2', caseId: 'c2', supplier: 'יד ושם', status: 'ביקשנו הצעה', askedAt: '2026-09-28' },
+  { id: 'l2', caseId: 'c2', supplier: 'מוזיאון הדוגמה', status: 'ביקשנו הצעה', askedAt: '2026-09-28' },
   { id: 'l3', caseId: 'c2', supplier: 'ענה', status: 'ביקשנו הצעה', askedAt: '2026-09-20', answeredAt: '2026-09-22' },
   { id: 'l4', caseId: 'c4', supplier: 'אירוע ישן', status: 'ביקשנו הצעה', askedAt: '2026-07-01' },
   { id: 'l5', caseId: 'c1', supplier: 'אושר', status: 'אושר' }

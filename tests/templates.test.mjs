@@ -12,7 +12,7 @@ test('templates are saved, found loosely, filled with the name, and removed', ()
   assert.equal(templates(s).length, 1);
   assert.equal(findTemplate(templates(s), 'הסיור').name, 'סיור');
   assert.equal(findTemplate(templates(s), 'תזכורת'), null);
-  assert.equal(fillTemplate(findTemplate(templates(s), 'סיור').text, { name: 'ארבל גבילי' }), 'היי היי ארבל, נתאם סיור? תודה רבה!');
+  assert.equal(fillTemplate(findTemplate(templates(s), 'סיור').text, { name: 'אורי שגב' }), 'היי היי אורי, נתאם סיור? תודה רבה!');
   assert.equal(fillTemplate('{event} ב{date} ב{place}', { event: 'סמינר', date: '19/10/2026', place: 'הרצליה' }), 'סמינר ב19/10/2026 בהרצליה');
   removeTemplate(s, 'סיור'); assert.deepEqual(templates(s), []);
 });

@@ -1,5 +1,7 @@
 import asyncio, json
 from playwright.async_api import async_playwright
+import sys, os; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'tests', 'e2e') if 'scratchpad' in os.path.abspath(__file__) else os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, '/home/user/bakasun/tests/e2e')
+from fixture import seed
 ROUTES = ['#/today', '#/dashboard', '#/calendar', '#/board', '#/board/stats', '#/notifications', '#/notifications/settings', '#/budget', '#/files', '#/contracts', '#/cases', '#/tasks', '#/calls', '#/suppliers', '#/clients', '#/quotes', '#/money', '#/assist', '#/settings', '#/more', '#/help', '#/notes', '#/receipts', '#/search', '#/lead', '#/groups']
 TABS = ['participants', 'contract', 'checklist', 'history', 'budget', 'runsheet', 'files']
 async def main():
@@ -7,7 +9,7 @@ async def main():
         b = await p.chromium.launch(executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
         for W, H, label in [(400, 860, 'phone'), (1280, 800, 'desktop')]:
             ctx = await b.new_context(viewport={'width': W, 'height': H}); pg = await ctx.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)[:140]))
-            await pg.goto('http://localhost:8765/#/settings'); await pg.wait_for_timeout(600); await pg.click('#seed'); await pg.wait_for_timeout(900)
+            await seed(pg)
             st = json.loads(await pg.evaluate("localStorage['bakasun.v1']")); cid = st['cases'][0]['id']
             for lang in ['he', 'fr', 'en']:
                 await pg.evaluate(f"(()=>{{const s=JSON.parse(localStorage['bakasun.v1']); s.settings.uiLang='{lang}'; localStorage['bakasun.v1']=JSON.stringify(s);}})()")

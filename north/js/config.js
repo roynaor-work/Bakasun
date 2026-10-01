@@ -6,7 +6,7 @@ export const STORE = {
   companyId: '517204327',
   address: 'צומת הגומא, מתחם דור אלון, הגליל העליון',
   hours: 'א׳-ה׳ 10:00-22:00 · ו׳ 9:00-15:00',
-  phone: '050-334-0875',          // מדף "צור קשר" ב-drink2.co.il
+  phone: '[phone-removed]',          // מדף "צור קשר" ב-drink2.co.il
   whatsapp: '972503340875',        // אותו מספר, בלי פלוס. ריק = הכפתור מוסתר
   email: 'roynaor@gmail.com',      // לאן מגיעה הודעת ההזמנה
   instagram: 'https://www.instagram.com/haruah_hatzfonit_wine/',

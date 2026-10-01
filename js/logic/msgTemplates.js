@@ -50,7 +50,7 @@ export function valuesFrom(data, lang, to) {
     supplier: trim(sp.name) || trim(lk.supplier), what: trim(lk.what), arrival: trim(lk.arrive), parking: '',
     onsite: [firstLine(signer), trim(s.bizPhone)].filter(Boolean).join(' '), rsvpBy: '',
     signer, me: firstName(firstLine(signer)),
-    policyNo: INSURANCE.policyNo, policyPeriod: INSURANCE.period[lang], limits: INSURANCE.limits[lang], agency: INSURANCE.agency[lang], insurer: INSURANCE.insurer[lang]
+    policyNo: INSURANCE.of(s).policyNo, policyPeriod: INSURANCE.of(s).period, limits: INSURANCE.of(s).limits, agency: INSURANCE.agency[lang], insurer: INSURANCE.insurer[lang]
   };
   Object.keys(x).forEach(k => {
     const val = x[k]; if (val == null || !String(val).trim()) return;

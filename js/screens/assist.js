@@ -42,18 +42,16 @@ import { wireDelete, isDeleteCommand, stripDelete, stripDone, splitDone, isEmpty
 import { DEFAULTS } from '../data/defaults.js';
 import { hasArabic, waLink } from '../logic/core.js';
 import { COMPANY_PAPERS } from '../data/docsList.js';
+import { paperAvailable, paperNeedsCloud, paperRec } from '../papers.js';
 import { replaceNumbersInPdf } from '../pdfedit.js';
 let preSupplier = '';
 let lastPdf = null;
 
 /** A bundled paper as a file record (fetched from the app's own files). */
-async function bundledRec(p) {
-  const r = await fetch(p.file); const blob = await r.blob();
-  return { id: 'paper:' + p.key, name: p.file.split('/').pop(), type: blob.type || 'application/pdf', size: blob.size, blob, title: p.title };
-}
-function bundledDocs() { return COMPANY_PAPERS.filter(p => p.status === 'found' && p.file).map(p => ({ id: 'paper:' + p.key, title: p.title, aliases: p.aliases || [], rec: null, paper: p })); }
-/** The company papers not in the library yet: known by name, so "send the insurance" gets a clear answer. */
-function missingDocs() { return COMPANY_PAPERS.filter(p => !(p.status === 'found' && p.file)).map(p => ({ id: 'paper:' + p.key, title: p.title, aliases: p.aliases || [], rec: null, paper: p, missing: true })); }
+async function bundledRec(p) { const rec = await paperRec(p); if (!rec) toast(t('paperNeedsCloud'), 4000); return rec; }
+function bundledDocs() { return COMPANY_PAPERS.filter(p => paperAvailable(p)).map(p => ({ id: 'paper:' + p.key, title: p.title, aliases: p.aliases || [], rec: null, paper: p })); }
+/** The company papers not reachable now: missing, or in the cloud without a sign-in; known by name, so "send the insurance" gets a clear answer. */
+function missingDocs() { return COMPANY_PAPERS.filter(p => !paperAvailable(p)).map(p => ({ id: 'paper:' + p.key, title: p.title, aliases: p.aliases || [], rec: null, paper: p, missing: true, needsCloud: paperNeedsCloud(p) })); }
 
 export const noLive = true;
 let mode = 'command';
@@ -330,7 +328,7 @@ async function tabCommand(body, s, ctx) {
     if (c.kind === 'send' && !c.to && /(?:^|\s)(?:ל|של\s+|עבור\s+)?(?:רועי|roy)(?=\s|$)/i.test(text)) c.to = { name: s.invoiceName || DEFAULTS.invoiceName, email: s.invoiceEmail || DEFAULTS.invoiceEmail, about: 'team' };
     if (c.kind !== 'send' || (!c.doc && !c.to)) { out.innerHTML = `<p class="warnbox">${esc(t('cmdUnknown'))}</p>`; return; }
     if (c.doc && c.doc.missing) {
-      out.innerHTML = `<div class="card stack"><div class="title">${esc(c.doc.title)} <span class="badge warn">${esc(t('paperMissing'))}</span></div><p>${esc(t('docMissingYet'))}</p>${c.doc.paper.note ? `<p class="hint">${esc(c.doc.paper.note)}</p>` : ''}${c.to ? `<p class="sub">${esc(t('recipient'))}: ${esc(c.to.name || c.to.email || c.to.phone || '')}</p>` : ''}<div class="row"><a class="btn sm" href="#/settings">${esc(t('docMissingWhere'))}</a><a class="btn sm ghost" href="#/files">${esc(t('cfTitle') || t('tFiles'))}</a></div></div>`;
+      out.innerHTML = `<div class="card stack"><div class="title">${esc(c.doc.title)} <span class="badge warn">${esc(t('paperMissing'))}</span></div><p>${esc(c.doc.needsCloud ? t('paperNeedsCloud') : t('docMissingYet'))}</p>${c.doc.paper.note ? `<p class="hint">${esc(c.doc.paper.note)}</p>` : ''}${c.to ? `<p class="sub">${esc(t('recipient'))}: ${esc(c.to.name || c.to.email || c.to.phone || '')}</p>` : ''}<div class="row"><a class="btn sm" href="#/settings">${esc(t('docMissingWhere'))}</a><a class="btn sm ghost" href="#/files">${esc(t('cfTitle') || t('tFiles'))}</a></div></div>`;
       return;
     }
     out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(t('document'))}</dt><dd>${c.doc ? esc(c.doc.title) : `<span class="badge warn">${esc(t('docNotFound'))}</span>`}</dd><dt>${esc(t('recipient'))}</dt><dd class="ltr">${c.to ? esc(c.to.name || c.to.phone || c.to.email) + (c.to.name && c.to.phone ? ' · ' + esc(c.to.phone) : '') + (c.to.phone || c.to.email ? copyBtn(c.to.phone || c.to.email, { icon: true }) : '') : `<span class="badge warn">${esc(t('noRecipient'))}</span>`}</dd></div>
@@ -346,7 +344,7 @@ async function tabCommand(body, s, ctx) {
       if (col && c.to.id) db.put(col, { id: c.to.id, phone: r.phone || undefined, email: r.email || undefined }); else db.put('team', { name: c.to.name, phone: r.phone, email: r.email });
       toast(t('personSaved')); body.querySelector('#go').click();
     };
-    const sh = out.querySelector('#share'); if (sh) sh.onclick = async () => { const rec = c.doc.rec || await bundledRec(c.doc.paper); if (!(await shareFile(rec, msg()))) { downloadFile(rec); toast(t('shareFallback'), 4000); } };
+    const sh = out.querySelector('#share'); if (sh) sh.onclick = async () => { const rec = c.doc.rec || await bundledRec(c.doc.paper); if (!rec) return; if (!(await shareFile(rec, msg()))) { downloadFile(rec); toast(t('shareFallback'), 4000); } };
     const wa = out.querySelector('#wa'); if (wa) wa.onclick = () => openWhatsApp(c.to.phone, msg());
     const ml = out.querySelector('#mail'); if (ml) { ml.href = 'mailto:' + encodeURIComponent(c.to.email) + '?subject=' + encodeURIComponent((c.doc ? c.doc.title : '') + ' · ' + (s.bizName || DEFAULTS.bizName)) + '&body=' + encodeURIComponent(msg()); ml.target = '_blank'; }
   }, t('read'), t('cmdExamples'), true);
@@ -486,12 +484,12 @@ async function tabDocs(body) {
   const lib = (await files.all()).filter(f => !f.caseId);
   body.innerHTML = `<p class="hint">${esc(t('docsHint'))}</p>
     <form class="card stack" id="up"><label class="btn">${esc(t('pickFile'))}<input type="file" id="f" class="sr"></label><span id="fname" class="sub"></span>${field('title', t('docTitle'), '')}${field('aliases', t('docAliases'), '', { placeholder: 'אישור חשבון, אישור בנק' })}<button class="btn primary" type="submit">${esc(t('save'))}</button></form>
-    <h2>${esc(t('companyPapers'))}</h2><div class="list">${COMPANY_PAPERS.map(p => `<div class="card" data-p="${esc(p.key)}"><div class="row between"><span class="title">${esc(p.title)}</span><span class="badge ${p.status === 'found' ? 'ok' : ''}">${esc(p.status === 'found' ? t('paperFound') + (p.date ? ' · ' + esc(Office.fmt(p.date)) : '') : t('paperMissing'))}</span></div>${p.note ? `<div class="sub">${esc(p.note)}</div>` : ''}${p.status === 'found' && p.file ? `<div class="row"><button class="btn sm primary" data-pshare>${esc(t('shareFile'))}</button><a class="btn sm ghost" href="${esc(p.file)}" target="_blank" rel="noopener">${esc(t('open'))}</a>${copyBtn(new URL(p.file, location.href).href)}</div>` : ''}</div>`).join('')}</div>
+    <h2>${esc(t('companyPapers'))}</h2><div class="list">${COMPANY_PAPERS.map(p => `<div class="card" data-p="${esc(p.key)}"><div class="row between"><span class="title">${esc(p.title)}</span><span class="badge ${paperAvailable(p) ? 'ok' : p.status === 'found' ? 'warn' : ''}">${esc(paperNeedsCloud(p) ? t('paperInCloud') : p.status === 'found' ? t('paperFound') + (p.date ? ' · ' + esc(Office.fmt(p.date)) : '') : t('paperMissing'))}</span></div>${p.note ? `<div class="sub">${esc(p.note)}</div>` : ''}${p.status === 'found' && p.file ? `<div class="row"><button class="btn sm primary" data-pshare>${esc(t('shareFile'))}</button><a class="btn sm ghost" href="${esc(p.file)}" target="_blank" rel="noopener">${esc(t('open'))}</a>${copyBtn(new URL(p.file, location.href).href)}</div>` : ''}</div>`).join('')}</div>
     <h2>${esc(t('docsLib'))}</h2><div class="list">${lib.length ? lib.map(f => `<div class="card" data-f="${esc(f.id)}"><div class="row between"><span class="title">${esc(f.title || f.name)}</span><span class="sub ltr">${esc(f.name)} · ${Math.round((f.size || 0) / 1024)} KB</span></div>${f.aliases ? `<div class="sub">${esc(f.aliases)}</div>` : ''}<div class="row"><button class="btn sm primary" data-share>${esc(t('shareFile'))}</button>${copyBtn(t('docMsg', { doc: f.title || f.name }))}<button class="btn sm ghost" data-del>${esc(t('delete'))}</button></div></div>`).join('') : empty(t('noDocsYet'))}</div>
     <p class="hint">${esc(t('docsSuggest'))}</p>`;
   const inp = body.querySelector('#f'); inp.onchange = () => { body.querySelector('#fname').textContent = inp.files[0] ? inp.files[0].name : ''; if (inp.files[0] && !body.querySelector('[name=title]').value) body.querySelector('[name=title]').value = inp.files[0].name.replace(/\.[a-z0-9]+$/i, ''); };
   body.querySelector('#up').onsubmit = async e => { e.preventDefault(); const f = inp.files[0]; if (!f) return; await files.put(f, { title: body.querySelector('[name=title]').value.trim(), aliases: body.querySelector('[name=aliases]').value.trim() }); toast(t('saved')); tabDocs(body); };
-  body.querySelectorAll('[data-p]').forEach(el => { const b = el.querySelector('[data-pshare]'); if (b) b.onclick = async () => { const p = COMPANY_PAPERS.find(x => x.key === el.dataset.p); const rec = await bundledRec(p); if (!(await shareFile(rec, p.title))) { downloadFile(rec); toast(t('shareFallback'), 4000); } }; });
+  body.querySelectorAll('[data-p]').forEach(el => { const b = el.querySelector('[data-pshare]'); if (b) b.onclick = async () => { const p = COMPANY_PAPERS.find(x => x.key === el.dataset.p); const rec = await bundledRec(p); if (!rec) return; if (!(await shareFile(rec, p.title))) { downloadFile(rec); toast(t('shareFallback'), 4000); } }; });
   body.querySelectorAll('[data-f]').forEach(el => {
     el.querySelector('[data-del]').onclick = async () => { await files.remove(el.dataset.f); tabDocs(body); };
     el.querySelector('[data-share]').onclick = async () => { const rec = await files.get(el.dataset.f); if (!(await shareFile(rec, rec.title || rec.name))) { downloadFile(rec); toast(t('shareFallback'), 4000); } };
