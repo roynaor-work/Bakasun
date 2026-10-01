@@ -1,17 +1,18 @@
 /* One search over everything: cases, people (clients, suppliers, phone contacts, crew, team), tasks, calls, notes, quotes,
-   participants, files, contracts, budget lines, run-of-show blocks, history and the help texts. The matching and ranking live in
+   participants, files, contracts, budget lines, run-of-show blocks, working groups, company papers, history and the help texts. The matching and ranking live in
    js/logic/search.js; this file draws: grouped results with counts, a link per row, recent searches (this device only), and the
    keyboard: Enter opens the first result, Escape clears, and "/" from any screen (outside a field) opens this screen. */
 import { t, lang } from '../i18n.js';
 import { db } from '../store.js';
 import { esc, empty } from '../ui.js';
 import { HELP } from '../data/helpText.js';
+import { COMPANY_PAPERS } from '../data/docsList.js';
 import { buildIndex, search, addRecent, removeRecent, RECENT_MAX } from '../logic/search.js';
 
 export const noLive = true;
 const RECENT_KEY = 'bakasun.recentSearch';
 const LIMIT = 6;
-const GROUP_LABEL = { case: 'cases', client: 'clients', supplier: 'suppliers', contact: 'contacts', staff: 'srStaff', team: 'team', task: 'tasks', call: 'calls', note: 'notes', quote: 'quotes', participant: 'tParticipants', file: 'tFiles', contract: 'tContract', budget: 'tBudget', runsheet: 'tRunsheet', history: 'tHistory', help: 'srHelp' };
+const GROUP_LABEL = { case: 'cases', client: 'clients', supplier: 'suppliers', contact: 'contacts', staff: 'srStaff', team: 'team', task: 'tasks', call: 'calls', note: 'notes', quote: 'quotes', participant: 'tParticipants', file: 'tFiles', contract: 'tContract', budget: 'tBudget', runsheet: 'tRunsheet', history: 'tHistory', help: 'srHelp', workgroup: 'wgTitle', paper: 'companyPapers' };
 let q = '';
 
 const recents = () => { try { const a = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]'); return Array.isArray(a) ? a.slice(0, RECENT_MAX) : []; } catch (e) { return []; } };
@@ -34,7 +35,7 @@ export function render({ root, id }) {
     <div id="recent" class="sec"></div><p class="hint" id="srHint">${esc(t('srHint'))}</p><div id="res" class="stack"></div>`;
   const inp = root.querySelector('#q'), res = root.querySelector('#res'), rec = root.querySelector('#recent'), hint = root.querySelector('#srHint');
   // the index is built once per visit; every keystroke only runs the query over it
-  const index = buildIndex(db.snapshot(), { help: HELP[lang()] || HELP.he });
+  const index = buildIndex(db.snapshot(), { help: HELP[lang()] || HELP.he, papers: COMPANY_PAPERS });
   const expanded = new Set();
   let first = null, timer = null;
 

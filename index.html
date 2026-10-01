@@ -6,6 +6,15 @@
   <title>באקה סאן</title>
   <meta name="description" content="ניהול הפקות אירועים: פניות, לקוחות, שיחות, משימות ומה מחכה היום.">
   <meta name="theme-color" content="#D7352B">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    /* Her theme (settings → "אישי") before the stylesheet paints, so a dark screen does not flash light. app.js sets it again on every route. */
+    try {
+      var st = JSON.parse(localStorage.getItem('bakasun.v1') || '{}');
+      var th = st && st.settings && st.settings.theme;
+      if (th === 'light' || th === 'dark') document.documentElement.dataset.theme = th;
+    } catch (e) { /* no storage, no theme: the device decides */ }
+  </script>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="manifest" href="manifest.json">

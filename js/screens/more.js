@@ -1,4 +1,4 @@
-/* The "more" menu: clients, search, settings, and what comes in the next stages. */
+/* The "more" menu: clients, search, message templates, mail import, settings, and what comes in the next stages. */
 import { t } from '../i18n.js';
 import { esc } from '../ui.js';
 
@@ -16,6 +16,8 @@ export function render({ root }) {
     ${item('#/suppliers', t('suppliers'), 'M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6')}
     ${item('#/assist', t('assist'), 'M12 3a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V8a5 5 0 0 1 5-5zM5 11a7 7 0 0 0 14 0M12 18v3M8 21h8')}
     ${item('#/notes', t('notes'), 'M4 4h13l3 3v13H4zM8 9h8M8 13h8M8 17h5')}
+    ${item('#/templates', t('mTemplates'), 'M4 5h16v11H4zM8 21l4-5 4 5M8 9h8M8 12h5')}
+    ${item('#/import', t('mImportMail'), 'M3 6h18v12H3zM3 7l9 6 9-6M12 10v8M9 15l3 3 3-3')}
     ${item('#/receipts', t('receipts'), 'M4 8h3l2-3h6l2 3h3v11H4zM12 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6z')}
     ${item('#/money', t('money'), 'M3 7h18v10H3zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM6 12h.01M18 12h.01')}
     ${item('#/help', t('help'), 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7M12 17h.01')}

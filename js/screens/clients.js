@@ -3,6 +3,7 @@ import { t, kindLabel, statusLabel, langName } from '../i18n.js';
 import { db } from '../store.js';
 import { esc, field, empty, dialog, confirmDialog, toast, dial, openWhatsApp, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
+import { TASK } from '../logic/extra.js';
 import { phonePretty } from '../logic/core.js';
 import { notesHtml, wireNotes } from '../notes.js';
 import { DEFAULTS } from '../data/defaults.js';
@@ -16,9 +17,25 @@ const typeLabel = v => (lang() === 'he' || !TYPE_L[v]) ? v : TYPE_L[v][lang()] |
 export function render(ctx) {
   if (ctx.name === 'client' && ctx.id) return renderOne(ctx);
   const list = db.list('clients').sort((a, b) => String(a.name).localeCompare(String(b.name), 'he'));
+  // per client: the active events and whether any of them still has open tasks (the "tasks" link opens them)
+  const activeOf = cid => db.list('cases', x => x.clientId === cid && Office.ACTIVE.includes(x.status));
+  const taskLink = active => {
+    const ids = active.map(x => x.id);
+    const open = db.list('tasks', x => ids.includes(x.caseId) && x.status !== TASK.done && !x.isTemplate);
+    if (!open.length) return '';
+    const cid = ids.length === 1 ? ids[0] : (open.every(x => x.caseId === open[0].caseId) ? open[0].caseId : '');
+    return `<button type="button" class="btn sm ghost" data-go="${cid ? '#/tasks/case/' + esc(cid) : '#/tasks'}">${esc(t('tasks'))} (${open.length})</button>`;
+  };
+  const extra = c => {
+    const active = activeOf(c.id);
+    if (!active.length) return '';
+    return `<div class="row between"><span class="badge">${esc(active.length === 1 ? t('clOneActive') : t('clActiveEvents', { n: active.length }))}</span>${taskLink(active)}</div>`;
+  };
   ctx.root.innerHTML = `<header class="top"><a class="icon" href="#/more" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(t('clients'))}</h1><button class="btn sm" id="new">+ ${esc(t('newClient'))}</button></header>
-    <div class="list">${list.length ? list.map(c => `<a class="card tap" href="#/client/${esc(c.id)}"><div class="row between"><span class="title">${esc(c.name)}</span><span class="row">${missingForInvoice(c).length ? `<span class="badge warn">${esc(t('missingInvoice'))}</span>` : ''}${c.type ? `<span class="badge muted">${esc(typeLabel(c.type))}</span>` : ''}</span></div><div class="sub">${esc(c.contact || '')} <span class="ltr">${esc(phonePretty(c.phone))}</span>${c.phone ? copyBtn(c.phone, { icon: true }) : ''}</div></a>`).join('') : empty(t('noClients'))}</div>`;
+    <div class="list">${list.length ? list.map(c => `<a class="card tap" href="#/client/${esc(c.id)}"><div class="row between"><span class="title">${esc(c.name)}</span><span class="row">${missingForInvoice(c).length ? `<span class="badge warn">${esc(t('missingInvoice'))}</span>` : ''}${c.type ? `<span class="badge muted">${esc(typeLabel(c.type))}</span>` : ''}</span></div><div class="sub">${esc(c.contact || '')} <span class="ltr">${esc(phonePretty(c.phone))}</span>${c.phone ? copyBtn(c.phone, { icon: true }) : ''}${c.email ? ` · <span class="ltr">${esc(c.email)}</span>${copyBtn(c.email, { icon: true })}` : ''}</div>${extra(c)}</a>`).join('') : empty(t('noClients'))}</div>`;
   ctx.root.querySelector('#new').onclick = () => edit(null);
+  // the tasks link sits inside the card's anchor: it goes to the tasks, not to the client
+  ctx.root.querySelectorAll('[data-go]').forEach(b => b.onclick = e => { e.preventDefault(); e.stopPropagation(); location.hash = b.dataset.go; });
 }
 
 function renderOne({ root, id }) {

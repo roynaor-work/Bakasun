@@ -190,3 +190,7 @@ ul.open a { color: var(--ink); text-decoration: underline dotted; }
   .btn.sm, .chip, .tabs button { min-height: 40px; }
   .copyq { min-width: 40px; min-height: 40px; }
 }
+
+/* quick links under an event's name (round 11): anchors drawn as chips */
+.quick { margin-top: 8px; }
+.quick a.chip, .quick a.chip:visited { display: inline-flex; align-items: center; min-height: 36px; color: inherit; text-decoration: none; }

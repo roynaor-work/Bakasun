@@ -6,6 +6,8 @@ import Office from './office.js';
 import { str, trim, phoneDigits } from './core.js';
 
 export const GROUPS = ['case', 'client', 'supplier', 'contact', 'staff', 'team', 'task', 'call', 'note', 'quote', 'participant', 'file', 'contract', 'budget', 'runsheet', 'history', 'help'];
+/* Round 11: working groups (the members' names, opening the event's group tab) and the company papers (opts.papers, from js/data/docsList.js; settings). */
+export const ALL_GROUPS = GROUPS.concat(['workgroup', 'paper']);
 
 const PREFIX1 = 'לבהומשכ';
 const SEP = /[\s,;:/()|·"“”'’`«»\[\]{}!?]+/;
@@ -48,15 +50,23 @@ function doc(group, id, o) {
 }
 const dt = x => x && (x.updated || x.created || x.addedAt || x.at || '');
 const fmt = d => (d ? Office.fmt(d) : '');
-const noteHref = n => n.about === 'client' ? '#/client/' + n.aboutId : n.about === 'supplier' ? '#/supplier/' + n.aboutId : n.about === 'case' ? '#/case/' + n.aboutId : '#/notes';
+const noteHref = (n, tasks) => n.about === 'client' ? '#/client/' + n.aboutId : n.about === 'supplier' ? '#/supplier/' + n.aboutId : n.about === 'case' ? '#/case/' + n.aboutId
+  : n.about === 'task' ? (tasks && tasks[n.aboutId] && tasks[n.aboutId].caseId ? '#/tasks/case/' + tasks[n.aboutId].caseId : '#/tasks') : n.about === 'team' || n.about === 'contact' ? '#/settings' : '#/notes';
 const COL_HREF = { cases: id => '#/case/' + id, clients: id => '#/client/' + id, suppliers: id => '#/supplier/' + id, quotes: id => '#/quote/' + id, contracts: id => '#/contract/' + id, tasks: () => '#/tasks', calls: () => '#/calls', notes: () => '#/notes', payments: () => '#/money', team: () => '#/settings', staff: () => '#/cases' };
 
-/** data: the store snapshot (or any subset of it); opts.help: the help sections of the current language [{title, items}]. */
+/** data: the store snapshot (or any subset of it); opts.help: the help sections of the current language [{title, items}];
+    opts.papers: the company papers (COMPANY_PAPERS) so "אישור ניהול חשבון" lands on settings. */
 export function buildIndex(data, opts) {
   data = data || {}; opts = opts || {};
   const cases = {}; (data.cases || []).forEach(c => { cases[c.id] = c; });
   const sups = {}; (data.suppliers || []).forEach(s => { sups[s.id] = s; });
+  const tasksById = {}; (data.tasks || []).forEach(x => { tasksById[x.id] = x; });
   const caseName = id => { const c = cases[id]; return c ? [c.client, c.kind].filter(Boolean).join(' · ') : ''; };
+  // a phone contact who is also a client or a supplier opens that card; the rest live in settings
+  const byPhone = {};
+  (data.clients || []).forEach(c => phoneKeys([c.phone]).forEach(k => { byPhone[k] = byPhone[k] || '#/client/' + c.id; }));
+  (data.suppliers || []).forEach(x => phoneKeys([x.phone]).forEach(k => { byPhone[k] = byPhone[k] || '#/supplier/' + x.id; }));
+  const contactHref = c => phoneKeys([c.phone]).map(k => byPhone[k]).find(Boolean) || '#/settings';
   const docs = [];
   (data.cases || []).forEach(c => docs.push(doc('case', c.id, {
     title: [c.client, c.contact].filter(Boolean).join(' · '), sub: [c.kind, fmt(c.date), c.place, c.status].filter(Boolean).join(' · '),
@@ -69,7 +79,7 @@ export function buildIndex(data, opts) {
     title: s.name, sub: [s.type, s.area].filter(Boolean).join(' · '), strong: [s.name, s.contact, s.type],
     text: [s.email, s.notes, s.area, s.bank], phones: [s.phone], href: '#/supplier/' + s.id, when: dt(s) })));
   (data.contacts || []).forEach(c => docs.push(doc('contact', c.id, {
-    title: c.name, sub: [c.phone, c.email].filter(Boolean).join(' · '), strong: [c.name], text: [c.email], phones: [c.phone], href: '#/settings', when: dt(c) })));
+    title: c.name, sub: [c.phone, c.email].filter(Boolean).join(' · '), strong: [c.name], text: [c.email], phones: [c.phone], href: contactHref(c), when: dt(c) })));
   (data.staff || []).forEach(x => docs.push(doc('staff', x.id, {
     title: x.name, sub: [x.role, caseName(x.caseId)].filter(Boolean).join(' · '), strong: [x.name, x.role], text: [x.email, x.note],
     phones: [x.phone], href: x.caseId && cases[x.caseId] ? '#/case/' + x.caseId + '/plan' : '#/cases', when: dt(x), caseId: x.caseId })));
@@ -84,7 +94,7 @@ export function buildIndex(data, opts) {
   (data.calls || []).forEach(c => docs.push(doc('call', c.id, {
     title: c.name, sub: c.why || '', strong: [c.name], text: [c.why, c.note], phones: [c.phone], href: '#/calls', when: dt(c) })));
   (data.notes || []).forEach(n => docs.push(doc('note', n.id, {
-    title: n.aboutLabel || '', sub: n.text || '', strong: [n.aboutLabel], text: [n.text], href: noteHref(n), when: dt(n), caseId: n.about === 'case' ? n.aboutId : '' })));
+    title: n.aboutLabel || '', sub: n.text || '', strong: [n.aboutLabel], text: [n.text], href: noteHref(n, tasksById), when: dt(n), caseId: n.about === 'case' ? n.aboutId : (n.about === 'task' && tasksById[n.aboutId] ? tasksById[n.aboutId].caseId : '') })));
   (data.quotes || []).forEach(q => docs.push(doc('quote', q.id, {
     title: [q.no, q.client || caseName(q.caseId)].filter(Boolean).join(' · '), sub: [fmt(q.date), q.status].filter(Boolean).join(' · '),
     strong: [q.client, q.no, caseName(q.caseId)], text: (q.lines || []).map(l => [l.item, l.en, l.fr, l.section, l.notes, l.supplier].filter(Boolean).join(' ')).concat([q.terms, q.status]),
@@ -114,6 +124,15 @@ export function buildIndex(data, opts) {
     href: h.caseId && cases[h.caseId] ? '#/case/' + h.caseId + '/history' : (COL_HREF[h.col] ? COL_HREF[h.col](h.refId) : '#/cases'), when: h.at || dt(h), caseId: h.caseId })));
   (opts.help || []).forEach((sec, i) => (sec.items || []).forEach((it, j) => docs.push(doc('help', 'h' + i + '_' + j, {
     title: sec.title, sub: it, strong: [sec.title], text: [it], href: '#/help', when: '' }))));
+  (data.workgroups || []).forEach(g => {
+    const names = (g.members || []).map(m => m && m.name).filter(Boolean);
+    if (!g.caseId || !cases[g.caseId]) return;
+    docs.push(doc('workgroup', g.id, {
+      title: caseName(g.caseId), sub: names.join(', '), strong: names, text: (g.members || []).map(m => [m.role, m.email].filter(Boolean).join(' ')),
+      phones: (g.members || []).map(m => m && m.phone), href: '#/case/' + g.caseId + '/workgroup', when: g.updatedAt || dt(g), caseId: g.caseId }));
+  });
+  (opts.papers || []).forEach(pp => docs.push(doc('paper', pp.key, {
+    title: pp.title, sub: pp.note || '', strong: [pp.title].concat(pp.aliases || []), text: [pp.note, pp.status], href: '#/settings', when: pp.date || '' })));
   return docs;
 }
 
@@ -154,7 +173,7 @@ function scoreDoc(d, words, qn) {
   return { score: score + (GROUP_BONUS[d.group] || 0), exact };
 }
 /* On an equal match a record she works on (a case, a person) comes before a line about it (history, help). */
-const GROUP_BONUS = { case: 2, client: 2, supplier: 2, contact: 1, staff: 1, team: 1, task: 1, quote: 1, contract: 1, participant: 1, history: -2, help: -2 };
+const GROUP_BONUS = { case: 2, client: 2, supplier: 2, contact: 1, staff: 1, team: 1, task: 1, quote: 1, contract: 1, participant: 1, workgroup: 1, paper: 1, history: -2, help: -2 };
 const byRank = (a, b) => b.score - a.score || (b.when > a.when ? 1 : b.when < a.when ? -1 : 0) || a.title.localeCompare(b.title);
 
 /** Every doc matching every word of q, grouped and ranked: { total, groups: [{key, count, exact, items}], first }.
@@ -170,7 +189,7 @@ export function search(docs, q, opts) {
   (docs || []).forEach(d => { const r = scoreDoc(d, words, qn); if (r) hits.push(Object.assign({ score: r.score, exact: r.exact }, d)); });
   hits.sort(byRank);
   const by = {}; hits.forEach(h => { (by[h.group] = by[h.group] || []).push(h); });
-  const order = opts.order || GROUPS;
+  const order = opts.order || ALL_GROUPS;
   const groups = order.filter(k => by[k]).map(k => ({ key: k, count: by[k].length, best: by[k][0].score, exact: !!by[k][0].exact, items: by[k].slice(0, opts.limit || 12) }));
   // a group whose best hit is an exact name comes first; otherwise the fixed order holds. Enter opens the first row she sees.
   groups.sort((a, b) => (b.exact ? 1 : 0) - (a.exact ? 1 : 0));

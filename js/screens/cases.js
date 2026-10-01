@@ -51,6 +51,7 @@ function renderOne({ root, id, query }) {
   root.innerHTML = `
     <header class="top">${BACK('#/cases', t('back'))}<h1>${esc(c.client || t('unknownClient'))}</h1><button class="icon" id="edit" aria-label="${esc(t('edit'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10-10-4-4L4 16zM13 7l4 4"/></svg></button></header>
     <div class="sub">${[kindLabel(c.kind), c.date ? Office.fmt(c.date) + ' · ' + relDay(c.date) : '', c.place].filter(Boolean).map(esc).join(' · ')}</div>
+    <nav class="chips quick" aria-label="${esc(t('quickLinks'))}">${[['#/tasks/case/' + id, t('tasks')], ['#/budget/' + id, t('tBudget')], ['#/runsheet/' + id, t('tRunsheet')], ['#/files/' + id, t('tFiles')], ['#/participants/' + id, t('tParticipants')], ['#/case/' + id + '/workgroup', t('wgTitle')]].map(x => `<a class="chip" href="${esc(x[0])}">${esc(x[1])}</a>`).join('')}</nav>
     <div class="tabs" style="margin-top:12px">${TABS.map(x => `<button class="${caseTab === x[0] ? 'on' : ''}" data-ctab="${x[0]}">${esc(t(x[1]))}</button>`).join('')}${CASE_TABS.map(x => `<button class="${caseTab === x.key ? 'on' : ''}" data-ctab="${esc(x.key)}">${esc(x.label())}</button>`).join('')}</div>
     <div class="stack sec" id="body"></div>`;
   root.querySelectorAll('[data-ctab]').forEach(b => b.onclick = () => { caseTab = b.dataset.ctab; renderOne({ root, id }); });
@@ -78,7 +79,7 @@ function tabDetails(body, c, s) {
       <div class="card"><div class="row between"><span class="sub"><b>${esc(t('waitingSince'))}</b> ${c.waitingSince ? esc(Office.fmt(c.waitingSince)) : esc(t('none'))}</span>
         <div class="row">${c.waitingSince ? `<button class="btn sm ok" id="answered">${esc(t('gotAnswer'))}</button>` : `<button class="btn sm" id="waiting">${esc(t('markWaiting'))}</button>`}</div></div></div>
       ${calls.length ? section(t('callQueue'), `<div class="list">${calls.map(x => `<a class="card tap" href="#/calls"><div class="title">${esc(x.name)}</div><div class="sub">${esc(x.why || '')}</div></a>`).join('')}</div>`) : ''}
-      ${tasks.length ? section(t('tasks'), `<div class="list">${tasks.map(x => `<a class="card tap" href="#/tasks"><div class="row between"><span class="title">${esc(x.title)}</span><span class="badge muted">${esc(x.who || '')}</span></div>${x.due ? `<div class="sub">${esc(Office.fmt(x.due))}</div>` : ''}</a>`).join('')}</div>`) : ''}
+      ${tasks.length ? section(t('tasks'), `<div class="list">${tasks.map(x => `<a class="card tap" href="#/tasks/case/${esc(id)}"><div class="row between"><span class="title">${x.no ? `<span class="ltr">#${esc(x.no)}</span> ` : ''}${esc(x.title)}</span><span class="badge muted">${esc(x.who || '')}</span></div>${x.due ? `<div class="sub">${esc(Office.fmt(x.due))}</div>` : ''}</a>`).join('')}</div><div class="row"><a class="btn sm" href="#/tasks/case/${esc(id)}">${esc(t('caseAllTasks'))}</a></div>`) : `<div class="row"><a class="btn sm ghost" href="#/tasks/case/${esc(id)}">${esc(t('caseAllTasks'))}</a></div>`}
       ${c.source ? `<details class="card"><summary class="title">${esc(t('fSource'))}</summary><p style="white-space:pre-wrap">${esc(c.source)}</p></details>` : ''}
       <div class="row end"><button class="btn danger sm" id="del">${esc(t('delete'))}</button></div>`;
 

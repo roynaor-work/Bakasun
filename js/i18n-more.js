@@ -1,6 +1,13 @@
 /* Texts for the second stage: suppliers, quotes, schedule, staff, groups, money, checklists, cloud. Merged into the main dictionary. */
 export const MORE = {
   he: {
+    // contacts import preview
+    ci_client: 'לקוח', ci_supplier: 'ספק', ci_staff: 'צוות', ci_contact: 'איש קשר', ci_skip: 'לדלג', ciNothing: 'לא נמצאו אנשי קשר בקובץ.',
+    ciPreviewTitle: 'לפני הייבוא: {n} אנשי קשר', ciCounts: 'לקוחות {client} · ספקים {supplier} · צוות {staff} · אנשי קשר {contact} · כבר קיימים {existing}', ciSetAll: 'לסמן את כולם כ:', ciMore: 'ועוד {n} שלא מוצגים (ייובאו לפי הסיווג)',
+    ciImportBtn: 'ייבוא', ciExisting: 'קיים: {who}', ciWhy_existing: 'כרטיס קיים', ciWhy_label: 'תווית "{what}"', ciWhy_org: 'לפי הארגון: "{what}"', ciWhy_name: 'לפי השם: "{what}"', ciWhy_domain: 'אותו דומיין מייל כמו {what}',
+    ciDone: 'יובאו {added} חדשים, הושלמו {updated} קיימים, דולגו {skipped}. לקוחות {client} · ספקים {supplier} · צוות {staff} · אנשי קשר {contact}', ciUndoLabel: 'ייבוא אנשי קשר',
+    // round 11: links between screens
+    caseAllTasks: 'כל המשימות של האירוע', quickLinks: 'קישורים מהירים', mTemplates: 'תבניות הודעות', mImportMail: 'ייבוא מייל לפנייה', clActiveEvents: '{n} אירועים פעילים', clOneActive: 'אירוע פעיל אחד', wgMembersOf: 'קבוצת עבודה',
     suppliers: 'ספקים', supplier: 'ספק', newSupplier: 'ספק חדש', noSuppliers: 'אין ספקים עדיין.', rating: 'דירוג', active: 'פעיל', area: 'אזור', eventsWith: 'אירועים איתנו',
     askSuppliers: 'לבקש הצעות מכמה ספקים', pickSuppliers: 'מאילו ספקים?', whatNeeded: 'מה צריך מהם', replyBy: 'תשובה עד', sendEach: 'שליחה אחד-אחד', sentTo: 'נשלח ל',
     changeAll: 'שינוי אחד לכל הספקים', theChange: 'מה השתנה', eventSuppliers: 'ספקי האירוע', linkStatus: 'סטטוס', cost: 'עלות', paid: 'שולם', rateSupplier: 'דירוג אחרי האירוע',
@@ -61,6 +68,13 @@ export const MORE = {
     supplierPay: 'תשלומים לספקים', markPaid: 'שולם', paidNote: 'הודעה לספק: שולם', supplierPayReminder: 'תזכורת תשלום לספקים', autoRemind: 'אוטומטית במסך היום', manualRemind: 'רק כשאני פותחת "כספים"', afterEventDays: 'ימים אחרי האירוע', chooseLang: 'שפה'
   },
   fr: {
+    // contacts import preview
+    ci_client: 'Client', ci_supplier: 'Fournisseur', ci_staff: 'Équipe', ci_contact: 'Contact', ci_skip: 'Passer', ciNothing: 'Aucun contact trouvé dans le fichier.',
+    ciPreviewTitle: 'Avant l’import : {n} contacts', ciCounts: 'Clients {client} · Fournisseurs {supplier} · Équipe {staff} · Contacts {contact} · Déjà présents {existing}', ciSetAll: 'Tout marquer comme :', ciMore: 'et {n} de plus non affichés (importés selon le classement)',
+    ciImportBtn: 'Importer', ciExisting: 'Existe : {who}', ciWhy_existing: 'fiche existante', ciWhy_label: 'libellé « {what} »', ciWhy_org: 'd’après l’organisation : « {what} »', ciWhy_name: 'd’après le nom : « {what} »', ciWhy_domain: 'même domaine e-mail que {what}',
+    ciDone: '{added} ajoutés, {updated} fiches complétées, {skipped} passés. Clients {client} · Fournisseurs {supplier} · Équipe {staff} · Contacts {contact}', ciUndoLabel: 'Import des contacts',
+    // round 11: links between screens
+    caseAllTasks: 'Toutes les tâches de l’événement', quickLinks: 'Liens rapides', mTemplates: 'Modèles de messages', mImportMail: 'Importer un mail', clActiveEvents: '{n} événements actifs', clOneActive: 'Un événement actif', wgMembersOf: 'Groupe de travail',
     suppliers: 'Fournisseurs', supplier: 'Fournisseur', newSupplier: 'Nouveau fournisseur', noSuppliers: 'Pas encore de fournisseur.', rating: 'Note', active: 'Actif', area: 'Zone', eventsWith: 'événements avec nous',
     askSuppliers: 'Demander des devis à plusieurs', pickSuppliers: 'À quels fournisseurs ?', whatNeeded: 'Ce qu’il faut', replyBy: 'Réponse avant le', sendEach: 'Envoyer un par un', sentTo: 'Envoyé à',
     changeAll: 'Un changement pour tous', theChange: 'Ce qui change', eventSuppliers: 'Fournisseurs de l’événement', linkStatus: 'Statut', cost: 'Coût', paid: 'Payé', rateSupplier: 'Note après l’événement',
@@ -114,6 +128,13 @@ export const MORE = {
     supplierPay: 'Paiements fournisseurs', markPaid: 'Payé', paidNote: 'Message au fournisseur : payé', supplierPayReminder: 'Rappel des paiements fournisseurs', autoRemind: 'Automatique sur l’écran du jour', manualRemind: 'Seulement quand j’ouvre « Finances »', afterEventDays: 'jours après l’événement', chooseLang: 'Langue'
   },
   en: {
+    // contacts import preview
+    ci_client: 'Client', ci_supplier: 'Supplier', ci_staff: 'Staff', ci_contact: 'Contact', ci_skip: 'Skip', ciNothing: 'No contacts found in the file.',
+    ciPreviewTitle: 'Before importing: {n} contacts', ciCounts: 'Clients {client} · Suppliers {supplier} · Staff {staff} · Contacts {contact} · Already here {existing}', ciSetAll: 'Mark all as:', ciMore: 'and {n} more not shown (imported as classified)',
+    ciImportBtn: 'Import', ciExisting: 'Exists: {who}', ciWhy_existing: 'existing card', ciWhy_label: 'label “{what}”', ciWhy_org: 'from the organisation: “{what}”', ciWhy_name: 'from the name: “{what}”', ciWhy_domain: 'same e-mail domain as {what}',
+    ciDone: '{added} added, {updated} existing cards completed, {skipped} skipped. Clients {client} · Suppliers {supplier} · Staff {staff} · Contacts {contact}', ciUndoLabel: 'Contacts import',
+    // round 11: links between screens
+    caseAllTasks: 'All the event’s tasks', quickLinks: 'Quick links', mTemplates: 'Message templates', mImportMail: 'Import a mail', clActiveEvents: '{n} active events', clOneActive: 'One active event', wgMembersOf: 'Working group',
     suppliers: 'Suppliers', supplier: 'Supplier', newSupplier: 'New supplier', noSuppliers: 'No suppliers yet.', rating: 'Rating', active: 'Active', area: 'Area', eventsWith: 'events with us',
     askSuppliers: 'Ask several suppliers for quotes', pickSuppliers: 'Which suppliers?', whatNeeded: 'What we need', replyBy: 'Reply by', sendEach: 'Send one by one', sentTo: 'Sent to',
     changeAll: 'One change to all suppliers', theChange: 'What changed', eventSuppliers: 'Event suppliers', linkStatus: 'Status', cost: 'Cost', paid: 'Paid', rateSupplier: 'Rating after the event',
