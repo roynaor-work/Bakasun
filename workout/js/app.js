@@ -2,7 +2,7 @@
 import { EXERCISES, CATS, byId } from './exercises.js';
 import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js';
 import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js';
-import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js';
+import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus, YT_VIDEOS } from './vids.js';
 import { Figure, cycleMs } from './figure.js';
 import { store } from './store.js';
 import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, rankOf, perseveranceLine, honestTime, tokensFor } from './logic.js';
@@ -42,10 +42,13 @@ const stageHtml = ex => hasVideo(ex.id) ? `<div class="exmedia" data-vid="${ex.i
 function wireStage() {
   const box = app.querySelector('.exmedia[data-vid]');
   if (!box) return figs()[0];
-  let v = null;
-  videoUrl(box.dataset.vid, store.profile.familyCode).then(m => { if (!m) return; if (m.kind === 'image') { box.innerHTML = `<img class="exvid" src="${m.url}" alt="">`; return; } v = document.createElement('video'); v.className = 'exvid'; v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true; v.src = m.url; box.appendChild(v); v.playbackRate = f.rate; });
+  let v = null, yt = null, ytReady = false;
+  const ytRate = rate => { if (!yt || !ytReady) return; const r = rate < 1 ? 0.5 : 1; try { yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setPlaybackRate', args: [r] }), '*'); yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*'); } catch { /* */ } };
+  videoUrl(box.dataset.vid, store.profile.familyCode).then(m => { if (!m) return; if (m.kind === 'image') { box.innerHTML = `<img class="exvid" src="${m.url}" alt="">`; return; }
+    if (m.kind === 'youtube') { /* הדגמת רועיקי: נגן מושתק בלופ, בלי לחיצות (pointer-events none ב-CSS) */ yt = document.createElement('iframe'); yt.className = 'exvid yt'; yt.src = m.url; yt.allow = 'autoplay; encrypted-media'; yt.setAttribute('title', 'רועיקי מדגים'); yt.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin'); yt.onload = () => { ytReady = true; ytRate(f.rate); }; box.appendChild(yt); return; }
+    v = document.createElement('video'); v.className = 'exvid'; v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true; v.src = m.url; box.appendChild(v); v.playbackRate = f.rate; });
   // בסרטון אין "סיבוב" של הדמות, אז הספירה לפי אורך המחזור מהקטלוג (cycleMs) בקצב הניגון
-  const f = { onRep: null, tick: 0, cyc: 0, rate: 1, play(ex, speed = 1) { this.rate = speed; if (v) v.playbackRate = speed; this.stop(); if (this.onRep) { this.cyc = 0; this.tick = setInterval(() => { this.cyc++; this.onRep && this.onRep(this.cyc); }, cycleMs(ex.frames) / speed); } }, still() { this.stop(); }, stop() { clearInterval(this.tick); this.tick = 0; } };
+  const f = { onRep: null, tick: 0, cyc: 0, rate: 1, play(ex, speed = 1) { this.rate = speed; if (v) v.playbackRate = speed; ytRate(speed); this.stop(); if (this.onRep) { this.cyc = 0; this.tick = setInterval(() => { this.cyc++; this.onRep && this.onRep(this.cyc); }, cycleMs(ex.frames) / speed); } }, still() { this.stop(); }, stop() { clearInterval(this.tick); this.tick = 0; } };
   figures.push(f); return f;
 }
 const catPill = cat => `<span class="pill ${cat}">${CATS[cat].emoji} ${CATS[cat].name}</span>`;
@@ -732,11 +735,11 @@ function settings() {
     </div>
     <div class="card stack">
       <h3>סרטונים לתרגילים 🎥</h3>
-      <p class="muted small">במקום הדמות המצוירת: סרטון קצר אמיתי (או תמונה) לכל תרגיל, בלופ. מצלמים ישר מהטלפון או בוחרים מהגלריה. ${EXERCISES.filter(e => hasVideo(e.id)).length} מתוך ${EXERCISES.length} יש.</p>
+      <p class="muted small">במקום הדמות המצוירת: סרטון קצר אמיתי (או תמונה) לכל תרגיל, בלופ. מצלמים ישר מהטלפון או בוחרים מהגלריה. ${EXERCISES.filter(e => hasVideo(e.id)).length} מתוך ${EXERCISES.length} יש. 🎬 = הדגמה של רועיקי באנימציה מהערוץ ביוטיוב (${Object.keys(YT_VIDEOS).length} תרגילים; צריך אינטרנט). סרטון שמצלמים כאן גובר עליה.</p>
       <p class="muted small" id="vidcloud">${p.familyCode ? `☁️ ענן משפחתי: כל סרטון שמצלמים כאן עולה לענן ומגיע לטלפון של הילד (אותו קוד משפחה). בענן ${Object.keys(cloudVideos()).length} סרטונים.${vidStatus.error ? ` ⚠️ ${esc(vidStatus.error)}` : ''}` : 'כדי שהסרטונים יגיעו גם לטלפון שלו: קוד משפחה בכרטיס "חיבור לטלפון של אבא" למטה, אותו קוד בשני הטלפונים.'}</p>
       ${p.familyCode ? '<button class="btn chip" id="vidrefresh">🔄 לרענן מהענן</button>' : ''}
       <div class="tip">🎬 איך לצלם: הטלפון לרוחב, בגובה החזה, כל הגוף בפריים עם קצת אוויר מעל הראש ומתחת לרגליים. רקע פשוט (קיר). 5 עד 8 שניות: שתיים-שלוש חזרות בקצב רגיל, בלי לדבר (הסרטון מוצג בלי קול). תרגילי רצפה מצלמים מהצד.</div>
-      <details><summary class="small" style="cursor:pointer">כל התרגילים (${EXERCISES.length})</summary><div class="stack" style="margin-top:8px">${Object.entries(CATS).map(([cat, c]) => `<b class="small muted">${c.emoji} ${c.name}</b>` + EXERCISES.filter(e => e.cat === cat).map(e => `<div class="row between"><span>${{ local: '✅', cloud: '☁️', repo: '📦' }[sourceOf(e.id)] || '▫️'} ${esc(e.name)}</span><span class="row">${hasVideo(e.id) ? `<button class="btn chip" data-playvid="${e.id}">▶️</button>` : ''}<label class="btn chip">📹 ${hasVideo(e.id) ? 'להחליף' : 'לצלם / לבחור'}<input type="file" accept="video/*,image/*" data-vid="${e.id}" hidden></label>${localVideos().has(e.id) || cloudVideos()[e.id] ? `<button class="btn chip" data-delvid="${e.id}" aria-label="למחוק">🗑️</button>` : ''}</span></div><div class="vidprev" data-prev="${e.id}" hidden></div>`).join('')).join('')}</div></details>
+      <details><summary class="small" style="cursor:pointer">כל התרגילים (${EXERCISES.length})</summary><div class="stack" style="margin-top:8px">${Object.entries(CATS).map(([cat, c]) => `<b class="small muted">${c.emoji} ${c.name}</b>` + EXERCISES.filter(e => e.cat === cat).map(e => `<div class="row between"><span>${{ local: '✅', cloud: '☁️', repo: '📦', yt: '🎬' }[sourceOf(e.id)] || '▫️'} ${esc(e.name)}</span><span class="row">${hasVideo(e.id) ? `<button class="btn chip" data-playvid="${e.id}">▶️</button>` : ''}<label class="btn chip">📹 ${hasVideo(e.id) ? 'להחליף' : 'לצלם / לבחור'}<input type="file" accept="video/*,image/*" data-vid="${e.id}" hidden></label>${localVideos().has(e.id) || cloudVideos()[e.id] ? `<button class="btn chip" data-delvid="${e.id}" aria-label="למחוק">🗑️</button>` : ''}</span></div><div class="vidprev" data-prev="${e.id}" hidden></div>`).join('')).join('')}</div></details>
     </div>
     <div class="card stack">
       <h3>התוכנית השבועית</h3>
