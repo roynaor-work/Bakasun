@@ -76,6 +76,9 @@ begin
 end $$;
 grant execute on function family_register(text), family_known(text), family_push(text, jsonb), family_list(text, text, integer), family_remove(text, text) to anon, authenticated;
 
+-- עצמאי: הפונקציה שמעדכנת את updated (קיימת גם ב-schema.sql של באקה סאן, כאן למקרה שהפרויקט נפרד)
+create or replace function touch_updated() returns trigger language plpgsql as $$
+begin new.updated = now(); return new; end $$;
 drop trigger if exists family_touch on family_events;
 create trigger family_touch before update on family_events for each row execute function touch_updated();
 select 'family ok' as status;
