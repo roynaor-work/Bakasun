@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>כל התרגילים בתנועה</title>
+<style>
+:root{--bg:#f6f1fb;--ink:#1f1a2e;--muted:#6b6480;--card:#fff;--line:#e4dcef;--accent:#d63fa6}
+@media (prefers-color-scheme:dark){:root{--bg:#171322;--ink:#f3eefa;--muted:#a79fbb;--card:#221c33;--line:#352c4c}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Heebo,Assistant,Arial,sans-serif;direction:rtl;text-align:right;unicode-bidi:embed}
+.wrap{max-width:1100px;margin:0 auto;padding:16px;display:grid;gap:14px}
+h1{margin:0;font-size:22px}p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:2}
+.chip{font:inherit;font-size:14px;font-weight:700;padding:8px 13px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;min-height:40px}
+.chip.on{border-color:var(--accent);color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:grid}
+.cell .head{display:flex;justify-content:space-between;align-items:baseline;padding:8px 12px;font-weight:700;font-size:15px}
+.cell .head small{color:var(--muted);font-weight:400;font-size:12px}
+.view{position:relative;width:100%;aspect-ratio:4/5;background:#F2A9E3}
+.view canvas{width:100%!important;height:100%!important;display:block}
+.view .wait{position:absolute;inset:0;display:grid;place-items:center;color:#7a2a63;font-size:13px}
+</style>
+<div class="wrap">
+  <div><h1>כל התרגילים בתנועה</h1><p>כל כרטיס זז כמו במסך התרגיל באפליקציה. כדי לא להעמיס, זזים רק הכרטיסים שעל המסך: גוללים, והבאים מתחילים לבד. מספר התרגיל ליד השם, כדי שתוכל להעיר לפי מספר.</p></div>
+  <div class="chips" id="chips"><button class="chip on" data-cat="all">הכול</button><button class="chip" id="slow">🐢 איטי (הסבר)</button><button class="chip" id="rot">🔄 מצלמה</button></div>
+  <div class="grid" id="grid"></div>
+</div>
+<script type="module">
+import { Stage3D } from '../js/stage3d.js';
+import { EXERCISES } from '../js/exercises.js';
+const CATS = { warm: 'חימום', jump: 'ניתור', speed: 'מהירות', core: 'בטן', legs: 'רגליים', upper: 'כוח עליון', stretch: 'מתיחות' };
+const chips = document.getElementById('chips'), grid = document.getElementById('grid');
+for (const cat in CATS) { const b = document.createElement('button'); b.className = 'chip'; b.dataset.cat = cat; b.textContent = CATS[cat]; chips.insertBefore(b, document.getElementById('slow')); }
+let speed = 1, camAngle = 0.3, cat = 'all'; const stages = new Map(); /* view → Stage3D */
+const cells = EXERCISES.map((ex, i) => { const c = document.createElement('div'); c.className = 'cell'; c.dataset.cat = ex.cat; c.innerHTML = `<div class="head"><span>${i + 1}. ${ex.name}</span><small>${CATS[ex.cat] || ''}</small></div><div class="view"><span class="wait">גלול לכאן כדי להפעיל</span></div>`; c.ex = ex; grid.appendChild(c); return c; });
+const start = c => { const v = c.querySelector('.view'); if (stages.has(v)) return; const w = v.querySelector('.wait'); if (w) w.textContent = 'טוען...'; const st = new Stage3D(v, c.ex, { onReady: () => { st.camAngle = camAngle; st.placeCam(); st.play(c.ex, speed); if (w) w.remove(); window.__motionReady = (window.__motionReady || 0) + 1; }, onFail: () => { if (w) w.textContent = 'אין WebGL'; } }); stages.set(v, st); };
+const stop = c => { const v = c.querySelector('.view'); const st = stages.get(v); if (!st) return; st.dispose(); stages.delete(v); if (!v.querySelector('.wait')) { const w = document.createElement('span'); w.className = 'wait'; w.textContent = 'גלול לכאן כדי להפעיל'; v.appendChild(w); } };
+const io = new IntersectionObserver(es => { for (const e of es) { if (e.isIntersecting) start(e.target); else stop(e.target); } }, { rootMargin: '120px 0px' });
+cells.forEach(c => io.observe(c));
+chips.addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (!b) return; cat = b.dataset.cat; chips.querySelectorAll('[data-cat]').forEach(x => x.classList.toggle('on', x === b)); cells.forEach(c => { c.style.display = cat === 'all' || c.dataset.cat === cat ? '' : 'none'; }); });
+document.getElementById('slow').onclick = e => { speed = speed === 1 ? .55 : 1; e.target.classList.toggle('on', speed !== 1); stages.forEach((st, v) => { const c = v.closest('.cell'); if (st.ch) st.play(c.ex, speed); }); };
+document.getElementById('rot').onclick = () => { camAngle += Math.PI / 6; stages.forEach(st => { st.camAngle = camAngle; st.placeCam(); }); };
+</script>
+</html>
