@@ -183,8 +183,8 @@ export class PoseRig {
       for (const s of ['Left', 'Right']) { if (footOn(s)) names.push(s + 'Toes_end', s + 'Toes', s + 'Foot'); if (handOn(s)) names.push(s + 'Hand', s + 'HandIndex3_end', s + 'HandThumb2_end', s + 'ForeArm'); }
       if (lying) names.push('Head', 'LeftForeArm', 'RightForeArm');
       let minY = Infinity; for (const n of names) { const b = this.b[n]; if (!b) continue; b.getWorldPosition(_v); const r = n === 'Head' ? 14 * SCALE * 1.6 : n.includes('Hand') ? 3 : 1; /* קצה אצבעות הרגל כמעט על הרצפה (במנוחה העצם 0.3 מעל הרצפה), לא 4: עם 4 כל הדמות ריחפה 4 ס"מ */ if (_v.y - r < minY) minY = _v.y - r; }
-      if (minY < Infinity) { this.model.position.y -= minY - base.y; this.model.updateMatrixWorld(true); }
-    }
+      if (minY < Infinity) { this.model.position.y -= minY - base.y; this._lift = -(minY - base.y); this.model.updateMatrixWorld(true); } /* זוכרים כמה הרמנו את הגוף על הרצפה */
+    } else if (this._lift) { this.model.position.y += this._lift; this.model.updateMatrixWorld(true); } /* באוויר: אותה הרמה כמו על הרצפה, אחרת גובה הקפיצה "נאכל" (הרגליים התלת-ממדיות קצרות מהציור, על הרצפה הגוף מורם ~14-20 ובאוויר לא, אז קפיצה של 24 בציור נראתה כמו 4; רועי: "קפיצות קרסול נראה כמו תקלה") */
     if (this.trace) this.trace('align');
     /* רגל נטועה (182) שמרחפת כי אורכי הרגליים בציור הדו-ממדי לא תואמים לעצמות התלת-ממד (עמדת זינוק, ריצת מעבורת): מכופפים את הברך (IK של שתי עצמות) עד שכף הרגל יורדת לרצפה */
     for (const ft of this._feet || []) { if (ft.f[1] < 178 || ft.ang >= 50) continue; const te = this.b[ft.foot.replace('Foot', 'Toes_end')]; if (!te) continue; te.getWorldPosition(_v); const h = _v.y - 1 - base.y; if (h > 2) { for (let pass = 0; pass < 3; pass++) { te.getWorldPosition(_v); const hh = _v.y - 1 - base.y; if (hh <= 1) break; this.legIK(ft.foot, hh); if (this.rest[ft.foot]) this.aim(ft.foot, footDir(ft.foot, ft.ang)); this.model.updateMatrixWorld(true); }
