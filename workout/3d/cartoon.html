@@ -29,7 +29,7 @@ for (const cat in CATS) { const og = document.createElement('optgroup'); og.labe
 const q = new URLSearchParams(location.search); let cur = byId[q.get('ex')] ? q.get('ex') : 'jumping-jacks'; sel.value = cur;
 const view = document.getElementById('view'), tag = document.getElementById('tag');
 let speed = 1;
-const st = new Stage3D(view, byId[cur], { onReady: () => { tag.textContent = byId[cur].name; window.__cartoon = { ready: true }; }, onFail: () => { tag.textContent = 'אין WebGL במכשיר הזה'; } });
+const st = new Stage3D(view, byId[cur], { onReady: () => { tag.textContent = byId[cur].name; window.__cartoon = { ready: true, st }; }, onFail: () => { tag.textContent = 'אין WebGL במכשיר הזה'; } });
 view.appendChild(tag);
 sel.onchange = () => { cur = sel.value; st.play(byId[cur], speed); tag.textContent = byId[cur].name; history.replaceState(null, '', `?ex=${cur}`); };
 document.getElementById('slow').onclick = e => { speed = speed === 1 ? .55 : 1; st.play(byId[cur], speed); e.target.classList.toggle('on', speed !== 1); };

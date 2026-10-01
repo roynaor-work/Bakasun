@@ -152,8 +152,8 @@ const WALL_SIT = { head: [66, 74], neck: [66, 90], hip: [66, 136], le: [74, 112]
 const WALL_SIT_B = P(WALL_SIT, { head: [66, 75], neck: [66, 91] });
 const KNEE_PLANK = { head: [156, 128], neck: [140, 140], hip: [102, 158], le: [141, 162], lh: [142, 182], re: [139, 162], rh: [138, 182], lk: [80, 182], lf: [56, 172], rk: [78, 182], rf: [54, 170] };
 const KNEE_DOWN = P(KNEE_PLANK, { head: [154, 158], neck: [136, 166], hip: [100, 170], le: [122, 178], re: [120, 178] });
-const PIKE_UP = { head: [150, 152], neck: [136, 146], hip: [96, 108], le: [138, 164], lh: [140, 182], re: [136, 164], rh: [138, 182], lk: [72, 146], lf: [50, 182], rk: [70, 146], rf: [48, 182] };
-const PIKE_DOWN = P(PIKE_UP, { head: [154, 174], neck: [138, 164], hip: [98, 118], le: [120, 176], re: [118, 176] });
+const PIKE_UP = { head: [123, 160], neck: [115, 146], hip: [98, 132], le: [140, 166], lh: [159, 182], re: [138, 166], rh: [157, 182], lk: [95, 157], lf: [91, 182], rk: [93, 157], rf: [89, 182] }; /* V הפוך: הגו והידיים בקו אחד אל הרצפה, הרגליים מתחת לאגן. נבחר במדידה בתלת-ממד (scratchpad/dbg5): רק כך גם הידיים וגם כפות הרגליים נוגעות ברצפה (הזרועות של הדמות קצרות מהציור) */
+const PIKE_DOWN = P(PIKE_UP, { head: [128, 174], neck: [117, 156], hip: [100, 140], le: [127, 176], re: [125, 176] });
 const SIDE_PLANK = { head: [40, 108], neck: [54, 120], hip: [100, 142], le: [52, 152], lh: [50, 182], re: [64, 100], rh: [70, 74], lk: [126, 156], lf: [152, 172], rk: [128, 152], rf: [154, 168] };
 const SIDE_PLANK_B = P(SIDE_PLANK, { hip: [100, 144], neck: [54, 122], head: [40, 110] });
 const V_DOWN = P(FLAT, { le: [30, 172], lh: [14, 170], re: [32, 174], rh: [16, 172] });
@@ -175,10 +175,11 @@ const BOUND_LAND = P(SIDE, { hip: [100, 120], lk: [110, 150], lf: [104, 182], rk
 
 // מהירות וקואורדינציה במסדרון: קיר בשני הצדדים
 const FLIP = p => Object.fromEntries(Object.entries(p).map(([k, v]) => [k, Array.isArray(v) ? [200 - v[0], v[1]] : v]));
+const TURN = p => ({ ...FLIP(p), face: -1 }); /* כמו FLIP, אבל בתלת-ממד (מבט צד) הדמות באמת מסתובבת ופונה שמאלה, במקום לרוץ אחורה (ריצת מעבורת: קיר לקיר) */
 const WALLS = { type: 'walls' };
 const TOUCH_WALL = { head: [150, 60], neck: [146, 76], hip: [128, 120], le: [166, 92], lh: [184, 110], re: [126, 98], rh: [112, 118], lk: [148, 150], lf: [156, 182], rk: [110, 152], rf: [98, 182] };
-const TOUCH_FLOOR = { head: [126, 104], neck: [116, 118], hip: [92, 140], le: [134, 146], lh: [150, 180], re: [130, 148], rh: [146, 180], lk: [124, 154], lf: [112, 182], rk: [126, 156], rf: [116, 182] };
-const READY = { head: [112, 96], neck: [104, 110], hip: [78, 136], le: [118, 130], lh: [126, 180], re: [116, 132], rh: [122, 180], lk: [112, 154], lf: [104, 182], rk: [84, 166], rf: [64, 182] };
+const TOUCH_FLOOR = { head: [138, 134], neck: [124, 146], hip: [92, 142], le: [138, 164], lh: [150, 180], re: [134, 166], rh: [146, 180], lk: [124, 154], lf: [112, 182], rk: [126, 156], rf: [116, 182] }; /* סקוואט עמוק עם גו כפוף: רק כך הזרוע התלת-ממדית מגיעה לרצפה */
+const READY = { head: [126, 118], neck: [114, 134], hip: [78, 134], le: [122, 158], lh: [128, 180], re: [118, 160], rh: [122, 180], lk: [112, 154], lf: [104, 182], rk: [84, 166], rf: [64, 176] }; /* הרגל האחורית על האצבעות (176), כמו בעמדת זינוק אמיתית */ /* עמדת 'היכון': האגן מעל הכתפיים, הכתפיים מעל הידיים שעל הרצפה */
 const SHUFFLE_WIDE = P(FRONT, { lk: [82, 146], lf: [72, 182], rk: [118, 146], rf: [128, 182], hip: [100, 120], neck: [100, 74], head: [100, 58], le: [84, 100], lh: [80, 124], re: [116, 100], rh: [120, 124] });
 const SHUFFLE_NARROW = P(SHUFFLE_WIDE, { lk: [96, 148], lf: [96, 182], rk: [104, 148], rf: [104, 182] });
 const CROSS_FRONT = P(FRONT, { lk: [104, 146], lf: [116, 182], rk: [98, 148], rf: [90, 182], le: [80, 90], lh: [70, 76], re: [120, 90], rh: [130, 76] });
@@ -261,7 +262,7 @@ export const EXERCISES = [
   { id: 'run-vertical', name: 'ריצה וקפיצה לגובה', cat: 'jump', type: 'reps', base: 6, place: 'hall',
     steps: ['שלוש צעדי ריצה במסדרון', 'קופצים גבוה ומותחים יד אחת למעלה, כמו לנגוע בתקרה', 'נוחתים רך על שתי הרגליים'],
     tip: 'בוחרים נקודה על הקיר שרואים ומנסים לנגוע גבוה יותר בכל פעם. זה הניתור של כדורסל וכדורעף.',
-    frames: [[SPRINT_L, 200], [SPRINT_R, 200], [TAKEOFF, 240], [REACH, 380], [SIDE, 260]] },
+    frames: [[SPRINT_L, 200], [SPRINT_R, 200], [TAKEOFF, 240], [REACH, 380], [SIDE, 260]], view3d: 'side' },
   { id: 'bounding', name: 'ניתורי צעד במסדרון', cat: 'jump', type: 'reps', base: 4, place: 'hall',
     steps: ['רצים לאורך המסדרון בצעדים ענקיים', 'כל צעד הוא קפיצה: נשארים באוויר כמה שיותר', 'הידיים גדולות כמו בריצה. הקצה ועוד פעם זו חזרה אחת'],
     tip: 'פחות צעדים לאורך המסדרון = ניתור טוב יותר. סופרים כמה צעדים לקח.',
@@ -271,11 +272,11 @@ export const EXERCISES = [
   { id: 'shuttle-run', name: 'ריצת מעבורת: קיר לקיר', cat: 'speed', type: 'reps', base: 6, place: 'hall',
     steps: ['מתחילים עם יד על הקיר ליד השירותים', 'רצים מהר, נוגעים בקיר ליד המרפסת ומסתובבים', 'רצים חזרה ונוגעים. כל קיר שנגעת בו זו חזרה אחת'],
     tip: 'מאטים שני צעדים לפני הקיר ונוגעים ביד, לא בכל הגוף. הסיבוב הוא הסוד: נמוך ומהיר.',
-    frames: [[shift(SPRINT_L, -50, 0), 200], [shift(SPRINT_R, 10, 0), 200], [TOUCH_WALL, 260], [FLIP(shift(SPRINT_L, -50, 0)), 200], [FLIP(shift(SPRINT_R, 10, 0)), 200], [FLIP(TOUCH_WALL), 260]], prop: WALLS },
+    frames: [[shift(SPRINT_L, -50, 0), 200], [shift(SPRINT_R, 10, 0), 200], [TOUCH_WALL, 260], [TURN(shift(SPRINT_L, -50, 0)), 200], [TURN(shift(SPRINT_R, 10, 0)), 200], [TURN(TOUCH_WALL), 260]], prop: WALLS, view3d: 'side' },
   { id: 'reaction-sprint', name: 'ריצת תגובה: אות יציאה', cat: 'speed', type: 'reps', base: 5, place: 'hall', signal: true,
     steps: ['עומדים מוכנים ליד קיר אחד, ברכיים כפופות', 'לוחצים "אות יציאה" ומחכים. לא יודעים מתי!', 'בצפצוף רצים הכי מהר לקיר השני ונוגעים. חוזרים בהליכה'],
     tip: 'המטרה: לזוז ברגע הצפצוף, לא לפניו. יציאה מוקדמת = חוזרים.',
-    frames: [[READY, 900], [READY, 300], [shift(SPRINT_L, -20, 0), 180], [shift(SPRINT_R, 20, 0), 180], [shift(SPRINT_L, 50, 0), 180], [FLIP(TOUCH_WALL), 200], [TOUCH_WALL, 400]], prop: WALLS },
+    frames: [[READY, 900], [READY, 300], [shift(SPRINT_L, -20, 0), 180], [shift(SPRINT_R, 20, 0), 180], [shift(SPRINT_L, 50, 0), 180], [TOUCH_WALL, 200], [TOUCH_WALL, 400]], prop: WALLS, view3d: 'side' },
   { id: 'side-shuffle', name: 'צעדי צד: קיר לקיר', cat: 'speed', type: 'reps', base: 4, place: 'hall',
     steps: ['עומדים עם הפנים לקיר הארוך, ברכיים כפופות, נמוך', 'צעדי צד מהירים לאורך המסדרון, הרגליים לא מצטלבות', 'נוגעים בקיר וחוזרים צעדי צד לצד השני. הלוך ושוב זו חזרה'],
     tip: 'נשארים נמוכים כמו שומר בכדורסל. הידיים פתוחות לצדדים.',
@@ -291,7 +292,7 @@ export const EXERCISES = [
   { id: 'floor-wall-run', name: 'ריצת נגיעות: רצפה וקיר', cat: 'speed', type: 'reps', base: 4, place: 'hall',
     steps: ['ליד קיר אחד: יורדים ונוגעים ברצפה', 'ספרינט לקיר השני ונוגעים בו גבוה, כמה שאפשר', 'חזרה: רצפה, ספרינט, גבוה. הלוך ושוב זו חזרה'],
     tip: 'למטה מהירים, למעלה קופצים. כל נגיעה בקיר גבוה יותר.',
-    frames: [[TOUCH_FLOOR, 300], [shift(SPRINT_L, -20, 0), 180], [shift(SPRINT_R, 20, 0), 180], [P(TOUCH_WALL, { lh: [186, 60], le: [162, 72], head: [148, 52], neck: [144, 68] }), 300], [FLIP(TOUCH_FLOOR), 300], [FLIP(shift(SPRINT_L, -20, 0)), 180], [FLIP(shift(SPRINT_R, 20, 0)), 180], [FLIP(P(TOUCH_WALL, { lh: [186, 60], le: [162, 72], head: [148, 52], neck: [144, 68] })), 300]], prop: WALLS },
+    frames: [[TOUCH_FLOOR, 300], [shift(SPRINT_L, -20, 0), 180], [shift(SPRINT_R, 20, 0), 180], [P(TOUCH_WALL, { lh: [186, 60], le: [162, 72], head: [148, 52], neck: [144, 68] }), 300], [TURN(TOUCH_FLOOR), 300], [TURN(shift(SPRINT_L, -20, 0)), 180], [TURN(shift(SPRINT_R, 20, 0)), 180], [TURN(P(TOUCH_WALL, { lh: [186, 60], le: [162, 72], head: [148, 52], neck: [144, 68] })), 300]], prop: WALLS, view3d: 'side' },
   { id: 'back-run', name: 'ריצה לאחור', cat: 'speed', type: 'reps', base: 4, place: 'hall',
     steps: ['הגב לכיוון ההליכה, מסתכלים אחורה מעל הכתף', 'צעדים קצרים ומהירים על קצות האצבעות', 'עד הקיר ובחזרה בריצה רגילה. זו חזרה אחת'],
     tip: 'לאט בהתחלה. יד אחת נשלחת אחורה כדי להרגיש את הקיר.',
