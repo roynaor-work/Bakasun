@@ -87,12 +87,13 @@ export const db = {
       const a = state[c];
       data[c].forEach(r => {
         if (!r || !r.id) return;
+        if (!r.updated) r.updated = nowIso(); // a backup row without a stamp would lose to any cloud copy forever
         const i = a.findIndex(x => x.id === r.id);
-        if (i < 0) { a.push(r); n++; }
-        else if (String(r.updated || '') > String(a[i].updated || '')) { a[i] = r; n++; }
+        if (i < 0) { a.push(r); n++; if (onChange) onChange({ col: c, id: r.id, data: r }); }
+        else if (String(r.updated || '') > String(a[i].updated || '')) { a[i] = r; n++; if (onChange) onChange({ col: c, id: r.id, data: r }); }
       });
     });
-    if (data.settings && typeof data.settings === 'object') Object.keys(data.settings).forEach(k => { if (state.settings[k] === undefined || state.settings[k] === '') state.settings[k] = data.settings[k]; });
+    if (data.settings && typeof data.settings === 'object') Object.keys(data.settings).forEach(k => { if (state.settings[k] === undefined || state.settings[k] === '') state.settings[k] = data.settings[k]; if (onChange) onChange({ setting: k, value: data.settings[k] }); });
     persist(); emit(); return n;
   },
   snapshot() { return state; }

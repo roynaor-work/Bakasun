@@ -69,7 +69,7 @@ function draw(body, c, s, full) {
       <label class="btn sm">${esc(t('cfSnap'))}<input type="file" id="cfSnap" accept="image/*" capture="environment" hidden></label>
       ${full ? '' : `<a class="btn sm ghost" href="#/files/${esc(c.id)}">${esc(t('cfFull'))}</a>`}<a class="btn sm ghost" href="#/files">${esc(t('cfAll'))}</a></div>
     <div class="cf-drop" id="cfDrop">${esc(t('cfDrop'))}</div>
-    ${!cloud.isOn() ? `<p class="hint">${esc(t('cfCloudOff'))}</p>` : pending.length ? `<p class="warnbox">${esc(t('cfCloudPending', { n: pending.length }))} <button type="button" class="btn sm" id="cfRetry">${esc(t('retry'))}</button></p>` : ''}
+    ${!cloud.isOn() ? `<p class="hint">${esc(t('cfCloudOff'))}</p>` : pending.length ? `<p class="warnbox">${esc(t('cfCloudPending', { n: pending.length }))}${cloud.status.fileError ? ' · ' + esc(cloud.status.fileError) : ''} <button type="button" class="btn sm" id="cfRetry">${esc(t('retry'))}</button></p>` : ''}
     ${links.some(l => /אושר|הוזמן/.test(String(l.status || ''))) || /נסגר|בוצע/.test(String(c.status || '')) ? section(t('cfMissing'), `<div class="list cf-missing">${missing.length ? missing.map((m, i) => `<div class="card"><div class="row"><span>${icon(m.kind)} ${esc(t(m.why, { who: m.who }))}</span><button type="button" class="btn sm" data-miss="${i}">${esc(t('cfAddMissing'))}</button></div></div>`).join('') : `<p class="okbox">${esc(t('cfMissingOk'))}</p>`}</div>`) : ''}
     ${groups.length ? groups.map(([k, fs]) => `<div class="cf-kind"><h3>${icon(k)} ${esc(kindLabel(k))} <span class="count">${fs.length}</span></h3><div class="list">${fs.map(f => row(f, false)).join('')}</div></div>`).join('') : empty(t('cfEmpty'))}`;
 

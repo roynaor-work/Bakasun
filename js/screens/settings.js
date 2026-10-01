@@ -92,7 +92,7 @@ export function render({ root }) {
     </form>
     ${personalSection(s)}
     <section class="sec"><h2>${esc(t('cloud'))}</h2>
-      ${cc && cc.on ? `<p class="hint">${esc(t('cloudOn'))} <span class="ltr">${esc(cc.email)}</span>${copyBtn(cc.email, { icon: true })} · <span id="cs"></span></p><div class="row"><button class="btn" id="logout">${esc(t('logout'))}</button></div>`
+      ${cc && cc.on ? `<p class="hint">${esc(t('cloudOn'))} <span class="ltr">${esc(cc.email)}</span>${copyBtn(cc.email, { icon: true })} · <span id="cs"></span></p><div class="row"><button class="btn" id="logout">${esc(t('logout'))}</button><button class="btn primary" id="relink" hidden>${esc(t('sendLink'))}</button></div>`
       : `<p class="hint">${esc(t('cloudOff'))} ${esc(t('cloudHelp'))}</p>
         <form class="stack card" id="cl"><div class="grid2">${field('email', t('email'), s.bizEmail || DEFAULTS.bizEmail, { ltr: true })}</div>
           <div class="row"><button class="btn primary" type="submit">${esc(t('sendLink'))}</button>${copyOf('[name=email]')}<span class="hint">${esc(t('sendLinkHint'))}</span></div>
@@ -154,8 +154,17 @@ export function render({ root }) {
       try { await cloud.loginWithLink(CLOUD.url, CLOUD.key, link); toast(t('synced')); render({ root }); } catch (err) { toast((err.message === 'no-org' ? t('noOrg') : t('cloudLinkFailed')) + ' ' + (err.message || ''), 6000); }
     };
   }
-  const lo = root.querySelector('#logout'); if (lo) lo.onclick = () => { cloud.logout(); render({ root }); };
-  const cs = root.querySelector('#cs'); if (cs) { const draw = st => { cs.textContent = st.state === 'error' ? t('syncError') : st.state === 'syncing' ? t('syncing') : t('synced'); }; draw(cloud.status); cloud.onStatus(draw); }
+  const lo = root.querySelector('#logout'); if (lo) lo.onclick = () => { if (cloud.status.queued && !confirm(t('cloudQueuedWarn', { n: cloud.status.queued }))) return; cloud.logout(); render({ root }); };
+  const rl = root.querySelector('#relink'); if (rl) rl.onclick = async () => { try { await cloud.sendLink(CLOUD.url, CLOUD.key, cc.email); toast(t('linkSent', { email: cc.email }), 6000); } catch (err) { toast(t('cloudLinkFailed') + ' ' + (err.message || ''), 6000); } };
+  const cs = root.querySelector('#cs'); if (cs) {
+    const draw = st => {
+      const extra = [st.queued ? t('cloudQueued', { n: st.queued }) : '', st.conflicts && st.conflicts.length ? t('cloudConflicts', { n: st.conflicts.length }) : '', st.skipped && st.skipped.length ? t('cloudSkipped', { what: st.skipped.join(', ') }) : '', st.fileError ? t('cloudFileError') + ' ' + st.fileError : ''].filter(Boolean).join(' · ');
+      cs.textContent = st.expired ? t('sessionExpired') : st.state === 'error' ? t('syncError') + (st.error ? ' (' + st.error + ')' : '') : st.state === 'syncing' ? t('syncing') : t('synced') + (st.last ? ' · ' + st.last.slice(11, 16) : '');
+      if (extra) cs.textContent += ' · ' + extra;
+      const relink = root.querySelector('#relink'); if (relink) relink.hidden = !st.expired;
+    };
+    draw(cloud.status); cloud.onStatus(draw);
+  }
   root.querySelector('#copyBiz').onclick = () => copyText([s.bizLegal || DEFAULTS.bizLegal, 'ח.פ. ' + (s.bizId || DEFAULTS.bizId), s.bizAddress || DEFAULTS.bizAddress, s.bizPhone || DEFAULTS.bizPhone, s.bizEmail || DEFAULTS.bizEmail].join('\n'));
   root.querySelector('#exp').onclick = () => {
     const blob = new Blob([db.exportJson()], { type: 'application/json' });

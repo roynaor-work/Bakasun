@@ -159,7 +159,8 @@ function add(item) {
     if (encodeSetting(item.value).length > SETTING_MAX) { if (!status.skipped.includes(item.setting)) status.skipped.push(item.setting); return false; }
   } else {
     if (!item.col || !item.id) return false;
-    if (item.col === 'history' && (item.deleted || isStaleHistory(item.data))) return false;
+    if (item.col === 'history' && item.deleted) { queue = queue.filter(q => !same(q, item)); return false; } // trimmed before it went up: forget it
+    if (item.col === 'history' && isStaleHistory(item.data)) return false;
   }
   const old = queue.find(q => same(q, item));
   queue = queue.filter(q => !same(q, item));
@@ -170,7 +171,8 @@ function add(item) {
 /** The store's change hook: {col, id, data, deleted} or {setting, value}. Saved on the device first, pushed shortly after. */
 export function enqueue(item) {
   if (!isOn()) return;
-  if (!add(item)) return;
+  const n = queue.length;
+  if (!add(item)) { if (queue.length !== n) saveQueue(); return; }
   saveQueue(); emit(); scheduleFlush(400);
 }
 /** Everything on the device that the cloud may not have (first login on a phone that already has data). */
@@ -264,7 +266,7 @@ function reconcile(rows) {
     const local = hooks.db.get(r.col, r.id);
     const rUpd = String((data && data.updated) || r.updated || '');
     const remember = () => after.push(() => { if (r.deleted) shadow.delete(key); else shadow.set(key, JSON.stringify(data)); });
-    if (!q) { out.push(r); if (r.deleted || !local || rUpd > String(local.updated || '')) remember(); return; }
+    if (!q) { out.push(r); if (r.deleted || !local || rUpd >= String(local.updated || '')) remember(); return; }
     const qUpd = String((q.data && q.data.updated) || '');
     if (r.deleted) { // deleted there, edited here: the newer action wins
       if (rUpd > qUpd) { out.push(r); drop(q); remember(); note({ col: r.col, id: r.id, kind: 'deleted-elsewhere', at: nowIso() }, 'conflicts'); }

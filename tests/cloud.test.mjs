@@ -13,7 +13,7 @@ globalThis.fetch = async (url, init) => {
   const body = init && init.body && typeof init.body === 'string' && /^[[{]/.test(init.body) ? JSON.parse(init.body) : init && init.body;
   const call = { method: (init && init.method) || 'GET', path, body, headers: (init && init.headers) || {} };
   calls.push(call);
-  for (const r of routes) if (r.method === call.method && path.startsWith(r.path)) { const out = r.reply(call); if (r.once) routes = routes.filter(x => x !== r); return out; }
+  for (const r of routes) if (r.method === call.method && path.startsWith(r.path)) { if (r.once) routes = routes.filter(x => x !== r); return r.reply(call); }
   if (path.startsWith('/rest/v1/docs') && call.method === 'GET') return res(200, []);
   if (path.startsWith('/rest/v1/settings') && call.method === 'GET') return res(200, []);
   if (call.method === 'POST' && /^\/rest\/v1\/(docs|settings)/.test(path)) return res(201, '');
@@ -224,6 +224,7 @@ test('429 and no network: the queue waits with backoff (Retry-After honoured) an
   assert.ok(/network/.test(status.error));
   clock += 5000;
   await cloud.flush();
+  assert.equal(status.error, '');
   assert.equal(status.state, 'on'); assert.equal(status.attempt, 0); assert.equal(status.retryAt, 0); assert.equal(status.queued, 1 - 1);
   assert.equal(backoffMs(1), 2000); assert.equal(backoffMs(5), 32000); assert.equal(backoffMs(20), 300000); assert.equal(backoffMs(3, 60), 60000);
 });
@@ -245,9 +246,9 @@ test('the queue survives a reload: a fresh module instance pushes what was queue
   assert.equal(JSON.parse(mem['bakasun.cloud.queue'])[0].col, 'clients');
   calls.length = 0;
   const again = await import('../js/cloud.js?reload=1'); // the same file, a fresh instance: like the app opening again
-  assert.equal(again.isOn(), true); assert.equal(again.status.queued, 1);
+  assert.equal(again.isOn(), true);
   again.hooks.now = () => clock;
-  await until(() => again.status.queued === 0);
+  await until(() => again.status.queued === 0 && again.status.state === 'on');
   assert.equal(sent('clients')[0].id, 'k1');
   assert.equal(JSON.parse(mem['bakasun.cloud.queue']).length, 0);
   again.logout();

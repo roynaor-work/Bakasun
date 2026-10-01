@@ -1,6 +1,7 @@
 /* Texts for the second stage: suppliers, quotes, schedule, staff, groups, money, checklists, cloud. Merged into the main dictionary. */
 export const MORE = {
   he: {
+    sessionExpired: 'הכניסה לענן פגה. לשלוח קישור כניסה חדש למייל.', cloudQueued: '{n} ממתינים לשליחה', cloudConflicts: '{n} התנגשויות נפתרו (החדש ניצח)', cloudSkipped: 'לא עלה לענן: {what}', cloudFileError: 'קבצים:', cloudQueuedWarn: '{n} שינויים עוד לא עלו לענן. להתנתק בכל זאת? הם יעלו שוב בכניסה הבאה.', 
     // contacts import preview
     ci_client: 'לקוח', ci_supplier: 'ספק', ci_staff: 'צוות', ci_contact: 'איש קשר', ci_skip: 'לדלג', ciNothing: 'לא נמצאו אנשי קשר בקובץ.',
     ciPreviewTitle: 'לפני הייבוא: {n} אנשי קשר', ciCounts: 'לקוחות {client} · ספקים {supplier} · צוות {staff} · אנשי קשר {contact} · כבר קיימים {existing}', ciSetAll: 'לסמן את כולם כ:', ciMore: 'ועוד {n} שלא מוצגים (ייובאו לפי הסיווג)',
@@ -68,6 +69,7 @@ export const MORE = {
     supplierPay: 'תשלומים לספקים', markPaid: 'שולם', paidNote: 'הודעה לספק: שולם', supplierPayReminder: 'תזכורת תשלום לספקים', autoRemind: 'אוטומטית במסך היום', manualRemind: 'רק כשאני פותחת "כספים"', afterEventDays: 'ימים אחרי האירוע', chooseLang: 'שפה'
   },
   fr: {
+    sessionExpired: 'La connexion au cloud a expiré. Envoie-toi un nouveau lien.', cloudQueued: '{n} en attente d’envoi', cloudConflicts: '{n} conflits résolus (le plus récent gagne)', cloudSkipped: 'Pas envoyé au cloud : {what}', cloudFileError: 'Fichiers :', cloudQueuedWarn: '{n} changements ne sont pas encore dans le cloud. Se déconnecter quand même ? Ils remonteront à la prochaine connexion.', 
     // contacts import preview
     ci_client: 'Client', ci_supplier: 'Fournisseur', ci_staff: 'Équipe', ci_contact: 'Contact', ci_skip: 'Passer', ciNothing: 'Aucun contact trouvé dans le fichier.',
     ciPreviewTitle: 'Avant l’import : {n} contacts', ciCounts: 'Clients {client} · Fournisseurs {supplier} · Équipe {staff} · Contacts {contact} · Déjà présents {existing}', ciSetAll: 'Tout marquer comme :', ciMore: 'et {n} de plus non affichés (importés selon le classement)',
@@ -128,6 +130,7 @@ export const MORE = {
     supplierPay: 'Paiements fournisseurs', markPaid: 'Payé', paidNote: 'Message au fournisseur : payé', supplierPayReminder: 'Rappel des paiements fournisseurs', autoRemind: 'Automatique sur l’écran du jour', manualRemind: 'Seulement quand j’ouvre « Finances »', afterEventDays: 'jours après l’événement', chooseLang: 'Langue'
   },
   en: {
+    sessionExpired: 'The cloud sign-in expired. Send a new sign-in link to the mail.', cloudQueued: '{n} waiting to send', cloudConflicts: '{n} conflicts resolved (newest won)', cloudSkipped: 'Not sent to the cloud: {what}', cloudFileError: 'Files:', cloudQueuedWarn: '{n} changes are not in the cloud yet. Sign out anyway? They go up again at the next sign-in.', 
     // contacts import preview
     ci_client: 'Client', ci_supplier: 'Supplier', ci_staff: 'Staff', ci_contact: 'Contact', ci_skip: 'Skip', ciNothing: 'No contacts found in the file.',
     ciPreviewTitle: 'Before importing: {n} contacts', ciCounts: 'Clients {client} · Suppliers {supplier} · Staff {staff} · Contacts {contact} · Already here {existing}', ciSetAll: 'Mark all as:', ciMore: 'and {n} more not shown (imported as classified)',
