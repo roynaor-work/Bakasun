@@ -148,7 +148,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   if (def.assets) preload(def.assets); preload(['fx/flame_01', 'fx/flame_03', 'fx/smoke_01', 'fx/smoke_04', 'fx/light_01', 'fx/star_06']); preloadSounds(); /* ספרייטים של המשחק נטענים כבר במסך הפתיחה */
   const finish = res => { disposeGame(); game = null; onEnd(res); };
   const disposeGame = () => { if (game && game.dispose) { try { game.dispose(); } catch (e) { console.warn('dispose', e); } } };
-  function fresh() { disposeGame(); game = def.make(r, progress || null); running = true; hide(); if (!inDemo) setMusic(defaultMusic); if (net && net.route) net.route((t, p) => { if (r.netMsg && !ended) r.netMsg(t, p); }); }
+  function fresh() { disposeGame(); game = def.make(r, progress || null); running = true; try { if (localStorage.getItem('kidfit.debug')) window.__game = game; } catch {} /* מצב בדיקה: המשחק הרץ נחשף לסקריפטים */ hide(); if (!inDemo) setMusic(defaultMusic); if (net && net.route) net.route((t, p) => { if (r.netMsg && !ended) r.netMsg(t, p); }); }
   function loop(now) {
     raf = requestAnimationFrame(loop);
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;

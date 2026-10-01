@@ -234,12 +234,24 @@ export function court(sc, HZ) {
   const RIM_Y = 290; /* 3.05 מ' */
   const pole = new THREE.Mesh(new THREE.CylinderGeometry(7, 7, 380, 10), new THREE.MeshStandardMaterial({ color: '#475569' })); pole.position.set(0, 190, HZ - 80); sc.add(pole);
   const arm = new THREE.Mesh(new THREE.BoxGeometry(10, 10, 70), new THREE.MeshStandardMaterial({ color: '#475569' })); arm.position.set(0, 372, HZ - 50); sc.add(arm);
-  const board = new THREE.Mesh(new THREE.BoxGeometry(170, 100, 6), new THREE.MeshStandardMaterial({ color: '#f8fafc', roughness: .3 })); board.position.set(0, RIM_Y + 32, HZ - 20); sc.add(board);
-  const sq = new THREE.Mesh(new THREE.BoxGeometry(56, 42, 2), new THREE.MeshBasicMaterial({ color: '#ef4444' })); sq.position.set(0, RIM_Y + 18, HZ - 16); sc.add(sq); const rim = new THREE.Mesh(new THREE.TorusGeometry(22, 2.5, 8, 32), new THREE.MeshStandardMaterial({ color: '#f97316' })); rim.rotation.x = Math.PI / 2; rim.position.set(0, RIM_Y, HZ + 14); sc.add(rim);
-  const net = new THREE.Mesh(new THREE.CylinderGeometry(22, 14, 42, 12, 4, true), new THREE.MeshBasicMaterial({ color: '#f1f5f9', wireframe: true, transparent: true, opacity: .8 })); net.position.set(0, RIM_Y - 20, HZ + 14); sc.add(net);
+  /* הסל כקבוצה אחת (לוח, מסגרת, ריבוע, טבעת, רשת) כדי שאפשר להזיז אותו ברמות הגבוהות (רועי 01/10: "הסל זז קצת") */
+  const goal = new THREE.Group(); sc.add(goal);
+  const board = new THREE.Mesh(new THREE.BoxGeometry(170, 100, 6), new THREE.MeshStandardMaterial({ color: '#f8fafc', roughness: .3, transparent: true, opacity: .92 })); board.position.set(0, RIM_Y + 32, HZ - 20); goal.add(board);
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(178, 108, 4), new THREE.MeshStandardMaterial({ color: '#334155' })); frame.position.set(0, RIM_Y + 32, HZ - 23); goal.add(frame); /* מסגרת כהה סביב הלוח */
+  const sqMat = new THREE.MeshBasicMaterial({ color: '#ef4444' }); for (const [w, h, dx, dy] of [[56, 4, 0, 19], [56, 4, 0, -19], [4, 42, -26, 0], [4, 42, 26, 0]]) { const e = new THREE.Mesh(new THREE.BoxGeometry(w, h, 2), sqMat); e.position.set(dx, RIM_Y + 18 + dy, HZ - 16); goal.add(e); } /* הריבוע האדום כמסגרת, לא מלבן מלא */
+  const bracket = new THREE.Mesh(new THREE.BoxGeometry(30, 8, 36), new THREE.MeshStandardMaterial({ color: '#ea580c' })); bracket.position.set(0, RIM_Y - 2, HZ - 2); goal.add(bracket);
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(22, 3.2, 10, 40), new THREE.MeshStandardMaterial({ color: '#f97316', roughness: .4 })); rim.rotation.x = Math.PI / 2; rim.position.set(0, RIM_Y, HZ + 14); goal.add(rim);
+  /* רשת אמיתית: 12 חוטים שמתכנסים + 4 טבעות, קווים לבנים (לא wireframe של משולשים) */
+  const netPts = []; const N = 12, RT = 21, RB = 12, NH = 44; for (let i = 0; i < N; i++) { const a0 = i / N * Math.PI * 2, a1 = (i + .5) / N * Math.PI * 2; netPts.push(Math.cos(a0) * RT, 0, Math.sin(a0) * RT, Math.cos(a1) * (RT * .75 + RB * .25), -NH * .33, Math.sin(a1) * (RT * .75 + RB * .25)); netPts.push(Math.cos(a1) * (RT * .75 + RB * .25), -NH * .33, Math.sin(a1) * (RT * .75 + RB * .25), Math.cos(a0) * (RT * .45 + RB * .55), -NH * .66, Math.sin(a0) * (RT * .45 + RB * .55)); netPts.push(Math.cos(a0) * (RT * .45 + RB * .55), -NH * .66, Math.sin(a0) * (RT * .45 + RB * .55), Math.cos(a1) * RB, -NH, Math.sin(a1) * RB); }
+  for (const [rr, yy] of [[RT * .75 + RB * .25, -NH * .33], [RT * .45 + RB * .55, -NH * .66], [RB, -NH]]) for (let i = 0; i < N; i++) { const a0 = i / N * Math.PI * 2, a1 = (i + 1) / N * Math.PI * 2; netPts.push(Math.cos(a0) * rr, yy, Math.sin(a0) * rr, Math.cos(a1) * rr, yy, Math.sin(a1) * rr); }
+  const netGeo = new THREE.BufferGeometry(); netGeo.setAttribute('position', new THREE.Float32BufferAttribute(netPts, 3));
+  const net = new THREE.LineSegments(netGeo, new THREE.LineBasicMaterial({ color: '#f8fafc', transparent: true, opacity: .95 })); net.position.set(0, RIM_Y, HZ + 14); goal.add(net);
+  /* יציע מדורג: 3 מדרגות בהירות יותר שעליהן האוהדים יושבים, ומעקה */
+  for (let i = 0; i < 3; i++) { const step = new THREE.Mesh(new THREE.BoxGeometry(3400, 90, 150), new THREE.MeshStandardMaterial({ color: i % 2 ? '#334155' : '#3b4a63' })); step.position.set(0, 60 + i * 90 - 45 + 45, HZ - 360 - i * 130 - 10); sc.add(step); }
+  const rail = new THREE.Mesh(new THREE.BoxGeometry(3400, 6, 6), new THREE.MeshStandardMaterial({ color: '#94a3b8' })); rail.position.set(0, 60 + 42, HZ - 300); sc.add(rail);
   const fans = crowd(sc, { count: 120, x0: -1500, x1: 1500, z: HZ - 360, y: 60, rows: 3, rowDz: -130, rowDy: 90 });
-  const st = new THREE.Mesh(new THREE.BoxGeometry(3400, 480, 700), new THREE.MeshStandardMaterial({ color: '#1e293b' })); st.position.set(0, 240, HZ - 780); sc.add(st);
-  return { fans, rim, net, RIM_Y, rimPos: new THREE.Vector3(0, RIM_Y, HZ + 14), shake(k) { rim.position.y = RIM_Y - 6 * k; net.scale.set(1 + .3 * k, 1 + .5 * k, 1 + .3 * k); } };
+  const st = new THREE.Mesh(new THREE.BoxGeometry(3400, 480, 700), new THREE.MeshStandardMaterial({ color: '#1e293b' })); st.position.set(0, 240, HZ - 820); sc.add(st);
+  return { fans, rim, net, goal, RIM_Y, rimPos: new THREE.Vector3(0, RIM_Y, HZ + 14), shake(k) { rim.position.y = RIM_Y - 6 * k; net.scale.set(1 + .3 * k, 1 + .5 * k, 1 + .3 * k); } };
 }
 export function basketBallMesh(r = 14) {
   const c = document.createElement('canvas'); c.width = 256; c.height = 128; const g = c.getContext('2d'); g.fillStyle = '#f97316'; g.fillRect(0, 0, 256, 128); g.strokeStyle = '#111827'; g.lineWidth = 4; g.beginPath(); g.moveTo(0, 64); g.lineTo(256, 64); g.moveTo(64, 0); g.lineTo(64, 128); g.moveTo(192, 0); g.lineTo(192, 128); g.stroke(); g.beginPath(); g.ellipse(128, 64, 60, 64, 0, 0, 7); g.stroke();
