@@ -231,6 +231,7 @@ function checkoutHtml(errs = []) {
           <div class="radio">${pays.map(([k, p]) => `<label class="${co.pay === k ? 'on' : ''}"><input type="radio" name="pay" value="${k}" ${co.pay === k ? 'checked' : ''}><span><b>${esc(p.label)}</b><small>${esc(p.note)}</small></span><span class="rp">${k === 'card' ? '💳' : k === 'bit' ? '📱' : '🏬'}</span></label>`).join('')}</div>
           <div class="paylogos"><span>Visa</span><span>Mastercard</span><span>American Express</span><span>Bit</span><span>Apple Pay</span><span>Google Pay</span></div>
           <label class="check"><input type="checkbox" name="adult" ${f.adult ? 'checked' : ''}><span>אני מאשר/ת שאני בן/בת 18 ומעלה, וכך גם מקבל/ת המשלוח. <span style="color:var(--dim)">מכירת משקאות משכרים לקטינים אסורה על פי חוק.</span></span></label>
+          <label class="check"><input type="checkbox" name="terms" ${f.terms ? 'checked' : ''}><span>קראתי ואני מאשר/ת את <a href="legal.html#terms" target="_blank" rel="noopener" style="color:var(--gold2);text-decoration:underline">התקנון</a>, את <a href="legal.html#cancel" target="_blank" rel="noopener" style="color:var(--gold2);text-decoration:underline">מדיניות הביטולים</a> ואת <a href="legal.html#privacy" target="_blank" rel="noopener" style="color:var(--gold2);text-decoration:underline">מדיניות הפרטיות</a>.</span></label>
           <button class="btn gold wide" type="submit" id="paybtn">${co.pay === 'card' ? 'לתשלום מאובטח' : co.pay === 'bit' ? 'לסיום ולתשלום בביט' : 'לסיום ההזמנה'} · ${money(tot)}</button>
         </div>
       </form>
@@ -248,7 +249,7 @@ function checkoutHtml(errs = []) {
 function readForm() {
   const fd = new FormData($('#coform')); const f = {};
   for (const [k, v] of fd.entries()) f[k] = typeof v === 'string' ? v.trim() : v;
-  f.adult = !!fd.get('adult'); co.f = { ...co.f, ...f }; co.method = f.method || co.method; co.pay = f.pay || co.pay; return f;
+  f.adult = !!fd.get('adult'); f.terms = !!fd.get('terms'); co.f = { ...co.f, ...f }; co.method = f.method || co.method; co.pay = f.pay || co.pay; return f;
 }
 async function submitOrder() {
   const f = readForm();
@@ -326,13 +327,13 @@ function footerHtml() {
   return `<div class="wrap"><div class="cols">
     <div><div class="logo" style="margin-bottom:10px"><span class="mark">ר</span><span>הרוח הצפונית</span></div><p style="margin:0">${esc(STORE.tagline)}. ${esc(STORE.address)}.<br>${esc(STORE.hours)}</p></div>
     <div><h4>החנות</h4><a href="#/#catalog">המארזים</a><a href="#/#build">מארז בהרכבה</a><a href="#/#biz">לעסקים</a><a href="#/#faq">שאלות ותשובות</a></div>
-    <div><h4>מידע</h4><a href="#/#faq">משלוחים ואיסוף</a><a href="#/#faq">ביטולים והחזרות</a><a href="#/#about">מי אנחנו</a></div>
+    <div><h4>מידע</h4><a href="legal.html#terms">תקנון ותנאי שימוש</a><a href="legal.html#shipping">משלוחים ואיסוף</a><a href="legal.html#cancel">ביטול עסקה והחזרות</a><a href="legal.html#privacy">מדיניות פרטיות</a><a href="legal.html#access">הצהרת נגישות</a></div>
     <div><h4>דברו איתנו</h4>${STORE.phone ? `<a href="tel:${STORE.phone.replace(/-/g, '')}"><span class="ltr">${esc(STORE.phone)}</span></a>` : ''}${STORE.whatsapp ? `<a href="${waLink('שלום, אני מתעניין במארז')}" target="_blank" rel="noopener">וואטסאפ</a>` : ''}<a href="mailto:${STORE.email}"><span class="ltr">${esc(STORE.email)}</span></a>${STORE.instagram ? `<a href="${STORE.instagram}" target="_blank" rel="noopener">אינסטגרם</a>` : ''}</div>
   </div>
   <div class="legal">
     <div class="warn">אזהרה: צריכה מופרזת של אלכוהול מסכנת חיים ומזיקה לבריאות.</div>
     <div>מכירת משקאות משכרים לבני 18 ומעלה בלבד. המשלוח נמסר ידנית למקבל בוגר בלבד.</div>
-    <div>${esc(STORE.legalName)} · ח.פ. <span class="ltr">${esc(STORE.companyId)}</span> · המחירים כוללים מע"מ · ביטול עסקה בהתאם לחוק הגנת הצרכן, מוצר סגור ובלי חריטה.</div>
+    <div>${esc(STORE.legalName)} · ח.פ. <span class="ltr">${esc(STORE.companyId)}</span> · המחירים כוללים מע"מ · <a href="legal.html#cancel" style="display:inline;padding:0;text-decoration:underline">ביטול עסקה</a> בהתאם לחוק הגנת הצרכן, מוצר סגור ובלי חריטה.</div>
   </div></div>`;
 }
 function gate() {
