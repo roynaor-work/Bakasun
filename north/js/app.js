@@ -1,5 +1,5 @@
 /* הרוח הצפונית · מארזים. ניתוב לפי hash: #/ , #/p/<id> , #/checkout , #/thanks/<no> */
-import { STORE, SHIPPING, PAY, CLOUD, IMG } from './config.js';
+import { STORE, SHIPPING, OUT_OF_AREA, PAY, CLOUD, IMG } from './config.js';
 import { CATS, OCCASIONS, PRODUCTS, BUILD, FAQ, byId } from './products.js';
 import * as C from './cart.js';
 
@@ -27,7 +27,7 @@ function card(p) {
   return `<article class="card reveal">
     <a class="ph" href="#/p/${p.id}">${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ''}
       <img src="${p.img}" alt="${esc(p.name)}" loading="lazy" width="600" height="750">
-      <span class="price">${money(p.price)}</span></a>
+      ${p.kosher === false ? '<span class="nk">לא כשר</span>' : ''}<span class="price">${money(p.price)}</span></a>
     <div class="body">
       <h3><a href="#/p/${p.id}">${esc(p.name)}</a></h3>
       <div class="sub">${esc(p.sub)}</div>
@@ -54,7 +54,7 @@ function homeHtml() {
     </div>
   </section>
   <div class="trust"><div class="wrap">
-    <div><span class="i">🚚</span><span><b>משלוח בצפון</b>ולכל הארץ, מסירה ידנית</span></div>
+    <div><span class="i">🚚</span><span><b>משלוח באזור</b>עד 40 דקות מצומת הגומא</span></div>
     <div><span class="i">🎀</span><span><b>אריזת מתנה</b>וכרטיס ברכה בכתב יד</span></div>
     <div><span class="i">✒️</span><span><b>חריטה אישית</b>על פלאסקים וכוסות</span></div>
     <div><span class="i">🔒</span><span><b>תשלום מאובטח</b>אשראי, ביט או באיסוף</span></div>
@@ -115,7 +115,7 @@ function homeHtml() {
 }
 
 /* ---------- בונה מארז ---------- */
-function opt(o, on) { return `<button class="opt ${on ? 'on' : ''}" data-bopt="${o.id}"><span class="i">${o.icon}</span><b>${esc(o.name)}</b><span class="p">${o.price ? money(o.price) : 'כלול'}</span></button>`; }
+function opt(o, on) { return `<button class="opt ${on ? 'on' : ''}" data-bopt="${o.id}"><span class="i">${o.icon}</span><b>${esc(o.name)}${o.kosher === false ? ' <span class="nk sm">לא כשר</span>' : ''}</b><span class="p">${o.price ? money(o.price) : 'כלול'}</span></button>`; }
 function buildStepsHtml() {
   const b = state.build;
   return `
@@ -164,13 +164,14 @@ function productHtml(p) {
         <p class="desc">${esc(p.desc)}</p>
         ${p.variants ? `<div class="field"><label>גרסה</label><div class="vars">${p.variants.map(x => `<button class="${x.id === v.id ? 'on' : ''}" data-var="${x.id}">${esc(x.name)}<span class="num">${C.fmt(x.price)}</span></button>`).join('')}</div></div>` : ''}
         ${p.personalize ? `<div class="field"><label>${esc(p.personalize.label)} (עד ${p.personalize.max} תווים)</label><input id="pengrave" maxlength="${p.personalize.max}" value="${esc(pstate.engrave)}" placeholder="למשל: לאבא, 2026"></div>` : ''}
+        ${p.kosher === false ? `<div class="nkbox"><b>לא כשר.</b> ${esc(p.kosherNote || 'המארז כולל מוצר ללא הכשר.')} אפשר לבקש החלפה בהערות להזמנה.</div>` : ''}
         <div class="contents"><h3>מה במארז</h3><ul>${p.contents.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>
         <div class="field"><label>ברכה לכרטיס (לא חובה)</label><textarea id="pnote" maxlength="140" placeholder="אנחנו כותבים אותה ביד על הכרטיס">${esc(pstate.note)}</textarea></div>
         <div class="buyrow">
           <div class="qty"><button data-q="-1" aria-label="פחות">−</button><b id="pqty" class="num">${pstate.qty}</b><button data-q="1" aria-label="יותר">+</button></div>
           <button class="btn gold" id="paddbtn">הוספה לסל · ${money(price * pstate.qty)}</button>
         </div>
-        <div class="perks"><div>איסוף מהחנות בחינם</div><div>משלוח בצפון ${money(SHIPPING.north.price)}, חינם מ-${money(SHIPPING.north.freeFrom)}</div><div>מסירה לבני 18 ומעלה</div><div>הרכב לפי מלאי, אפשר להחליף</div></div>
+        <div class="perks"><div>איסוף מהחנות בחינם</div><div>משלוח באזור (עד 40 דק׳ מצומת הגומא) ${money(SHIPPING.north.price)}, חינם מ-${money(SHIPPING.north.freeFrom)}</div><div>מסירה לבני 18 ומעלה</div><div>הרכב לפי מלאי, אפשר להחליף</div></div>
       </div>
     </div>
     ${related.length ? `<div class="sechead" style="margin-top:70px"><div><h2>עוד בכיוון הזה</h2></div></div><div class="grid">${related.map(card).join('')}</div>` : ''}
@@ -184,7 +185,7 @@ function renderCart() {
   const sub = C.subtotal(cart);
   el.innerHTML = `<div class="lines">${cart.map(i => `<div class="crow">
       <img src="${i.img}" alt="">
-      <div><b>${esc(i.name)}</b>${i.variant ? `<div class="v">${esc(i.variant)}</div>` : ''}${i.parts?.length ? `<div class="parts">${i.parts.map(p => esc(p.name)).join(' · ')}</div>` : ''}${i.engrave ? `<div class="v">חריטה: ${esc(i.engrave)}</div>` : ''}${i.note ? `<div class="v">ברכה: ${esc(i.note)}</div>` : ''}
+      <div><b>${esc(i.name)}</b>${i.variant ? `<div class="v">${esc(i.variant)}</div>` : ''}${i.parts?.length ? `<div class="parts">${i.parts.map(p => esc(p.name)).join(' · ')}</div>` : ''}${i.kosher === false ? `<div class="v" style="color:var(--danger)">כולל מוצר לא כשר</div>` : ''}${i.engrave ? `<div class="v">חריטה: ${esc(i.engrave)}</div>` : ''}${i.note ? `<div class="v">ברכה: ${esc(i.note)}</div>` : ''}
         <div class="qty" style="margin-top:8px"><button data-cq="-1" data-key="${esc(i.key)}">−</button><b class="num">${i.qty}</b><button data-cq="1" data-key="${esc(i.key)}">+</button></div></div>
       <div class="col"><span class="lp">${money(i.price * i.qty)}</span><button class="rm" data-rm="${esc(i.key)}">הסרה</button></div>
     </div>`).join('')}</div>
@@ -198,7 +199,7 @@ function renderCart() {
 }
 function addProduct(p, variantId, qty = 1, note = '', engrave = '') {
   const v = p.variants ? (p.variants.find(x => x.id === variantId) || p.variants[0]) : null;
-  const item = { id: p.id, name: p.name, price: v ? v.price : p.price, variant: v ? v.name : '', img: p.img.replace('w=900', 'w=300'), note, engrave };
+  const item = { id: p.id, name: p.name, price: v ? v.price : p.price, variant: v ? v.name : '', img: p.img.replace('w=900', 'w=300'), note, engrave, kosher: p.kosher === false ? false : true };
   item.key = C.lineKey(p.id, (v ? v.id : '') + (note ? '#' + note : '') + (engrave ? '#' + engrave : ''));
   cart = C.addItem(cart, item, qty); saveCart(); toast(`${p.name} נוסף לסל`);
 }
@@ -217,6 +218,7 @@ function checkoutHtml(errs = []) {
       <form id="coform" class="steps" novalidate>
         ${errs.length ? `<div class="errs">חסר או לא תקין: ${errs.map(esc).join(', ')}</div>` : ''}
         <div class="panel"><h3><span class="no">1</span>איך מקבלים את המארז?</h3>
+          <p style="margin:0;color:var(--dim);font-size:14px">${esc(OUT_OF_AREA)}</p>
           <div class="radio">${Object.values(SHIPPING).map(s => `<label class="${co.method === s.id ? 'on' : ''}"><input type="radio" name="method" value="${s.id}" ${co.method === s.id ? 'checked' : ''}><span><b>${esc(s.label)}</b><small>${esc(s.note)}${s.freeFrom ? ` חינם מ-${C.fmt(s.freeFrom)}.` : ''}</small></span><span class="rp">${C.shippingPrice(s.id, sub) ? `<span class="num">${C.fmt(C.shippingPrice(s.id, sub))}</span>` : (s.price ? `<s style="color:var(--dim);font-weight:400;margin-inline-end:6px" class="num">${C.fmt(s.price)}</s>חינם` : 'חינם')}</span></label>`).join('')}</div>
         </div>
         <div class="panel"><h3><span class="no">2</span>הפרטים</h3>
@@ -231,13 +233,14 @@ function checkoutHtml(errs = []) {
           <div class="radio">${pays.map(([k, p]) => `<label class="${co.pay === k ? 'on' : ''}"><input type="radio" name="pay" value="${k}" ${co.pay === k ? 'checked' : ''}><span><b>${esc(p.label)}</b><small>${esc(p.note)}</small></span><span class="rp">${k === 'card' ? '💳' : k === 'bit' ? '📱' : '🏬'}</span></label>`).join('')}</div>
           <div class="paylogos"><span>Visa</span><span>Mastercard</span><span>American Express</span><span>Bit</span><span>Apple Pay</span><span>Google Pay</span></div>
           <label class="check"><input type="checkbox" name="adult" ${f.adult ? 'checked' : ''}><span>אני מאשר/ת שאני בן/בת 18 ומעלה, וכך גם מקבל/ת המשלוח. <span style="color:var(--dim)">מכירת משקאות משכרים לקטינים אסורה על פי חוק.</span></span></label>
+          ${C.hasNonKosher(cart) ? `<label class="check" style="border:1px solid rgba(224,122,106,.45);border-radius:12px;padding:10px 12px"><input type="checkbox" name="kosherOk" ${f.kosherOk ? 'checked' : ''}><span><b style="color:#f3b7ad">שימו לב: ההזמנה כוללת מוצר ללא הכשר.</b> אני מאשר/ת שאני יודע/ת שהמארז אינו כשר. רוצים להחליף את הפריט? כותבים בהערות.</span></label>` : ''}
           <label class="check"><input type="checkbox" name="terms" ${f.terms ? 'checked' : ''}><span>קראתי ואני מאשר/ת את <a href="legal.html#terms" target="_blank" rel="noopener" style="color:var(--gold2);text-decoration:underline">התקנון</a>, את <a href="legal.html#cancel" target="_blank" rel="noopener" style="color:var(--gold2);text-decoration:underline">מדיניות הביטולים</a> ואת <a href="legal.html#privacy" target="_blank" rel="noopener" style="color:var(--gold2);text-decoration:underline">מדיניות הפרטיות</a>.</span></label>
           <button class="btn gold wide" type="submit" id="paybtn">${co.pay === 'card' ? 'לתשלום מאובטח' : co.pay === 'bit' ? 'לסיום ולתשלום בביט' : 'לסיום ההזמנה'} · ${money(tot)}</button>
         </div>
       </form>
       <aside class="panel osum">
         <h3>ההזמנה</h3>
-        ${cart.map(i => `<div class="it"><span><b>${esc(i.name)}</b>${i.variant ? ` · ${esc(i.variant)}` : ''} <span class="num">×${i.qty}</span></span>${money(i.price * i.qty)}</div>`).join('')}
+        ${cart.map(i => `<div class="it"><span><b>${esc(i.name)}</b>${i.variant ? ` · ${esc(i.variant)}` : ''}${i.kosher === false ? ' <span class="nk sm">לא כשר</span>' : ''} <span class="num">×${i.qty}</span></span>${money(i.price * i.qty)}</div>`).join('')}
         <div class="row"><span>ביניים</span>${money(sub)}</div>
         <div class="row"><span>משלוח</span><span>${ship ? money(ship) : 'חינם'}</span></div>
         <div class="row t"><span>לתשלום</span>${money(tot)}</div>
@@ -249,11 +252,11 @@ function checkoutHtml(errs = []) {
 function readForm() {
   const fd = new FormData($('#coform')); const f = {};
   for (const [k, v] of fd.entries()) f[k] = typeof v === 'string' ? v.trim() : v;
-  f.adult = !!fd.get('adult'); f.terms = !!fd.get('terms'); co.f = { ...co.f, ...f }; co.method = f.method || co.method; co.pay = f.pay || co.pay; return f;
+  f.adult = !!fd.get('adult'); f.terms = !!fd.get('terms'); f.kosherOk = !!fd.get('kosherOk'); co.f = { ...co.f, ...f }; co.method = f.method || co.method; co.pay = f.pay || co.pay; return f;
 }
 async function submitOrder() {
   const f = readForm();
-  const errs = C.validateOrder(f, co.method);
+  const errs = C.validateOrder(f, co.method, { nonKosher: C.hasNonKosher(cart) });
   if (errs.length) { $('#view').innerHTML = checkoutHtml(errs); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
   const sub = C.subtotal(cart), ship = C.shippingPrice(co.method, sub);
   const order = {
@@ -392,7 +395,7 @@ document.addEventListener('click', e => {
     const { base, addons, pack, price } = buildParts(); if (!base) return;
     state.build.note = $('#bnote').value.trim();
     const parts = [base, ...addons, pack];
-    const item = { id: 'custom', name: 'מארז בהרכבה אישית', price, variant: base.name, parts: parts.map(p => ({ id: p.id, name: p.name })), img: IMG('1688851472616-7ad0980dab23', 300), note: state.build.note };
+    const item = { id: 'custom', name: 'מארז בהרכבה אישית', price, variant: base.name, parts: parts.map(p => ({ id: p.id, name: p.name })), img: IMG('1688851472616-7ad0980dab23', 300), note: state.build.note, kosher: parts.some(p => p.kosher === false) ? false : true };
     item.key = C.lineKey('custom', state.build.note, parts);
     cart = C.addItem(cart, item); saveCart(); toast('המארז שלכם נוסף לסל');
     state.build = { base: null, addons: [], pack: BUILD.packs[0].id, note: '' }; refreshBuild(); openDrawer(); return;

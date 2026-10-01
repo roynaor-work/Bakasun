@@ -27,10 +27,10 @@ test('משלוח: חינם מסכום, איסוף חינם, סל ריק בלי �
   assert.equal(C.shippingPrice('pickup', 100), 0);
   assert.equal(C.shippingPrice('north', 100), SHIPPING.north.price);
   assert.equal(C.shippingPrice('north', SHIPPING.north.freeFrom), 0);
-  assert.equal(C.shippingPrice('national', 100), SHIPPING.national.price);
-  assert.equal(C.total([], 'national'), 0);
+  assert.equal(C.total([], 'north'), 0);
   const c = C.addItem([], { ...item, price: 100 });
-  assert.equal(C.total(c, 'national'), 100 + SHIPPING.national.price);
+  assert.equal(C.total(c, 'north'), 100 + SHIPPING.north.price);
+  assert.equal(Object.keys(SHIPPING).length, 2, 'רק איסוף ומשלוח באזור');
 });
 
 test('מארז בהרכבה: בסיס + תוספות + אריזה', () => {
@@ -46,6 +46,10 @@ test('בדיקת טופס: איסוף לא דורש כתובת, משלוח כן'
   assert.ok(C.validateOrder({ ...f, phone: '123' }, 'pickup').includes('טלפון תקין'));
   assert.ok(C.validateOrder({ ...f, adult: false }, 'pickup').includes('אישור גיל 18 ומעלה'));
   assert.ok(C.validateOrder({ ...f, terms: false }, 'pickup').includes('אישור התקנון'));
+  assert.ok(C.validateOrder(f, 'pickup', { nonKosher: true }).includes('אישור שהמארז כולל מוצר לא כשר'));
+  assert.deepEqual(C.validateOrder({ ...f, kosherOk: true }, 'pickup', { nonKosher: true }), []);
+  assert.equal(C.hasNonKosher([{ kosher: true }, { kosher: false }]), true);
+  assert.equal(C.hasNonKosher([{ kosher: true }, {}]), false);
   assert.ok(C.validateOrder({ ...f, email: 'x' }, 'pickup').includes('כתובת מייל תקינה'));
 });
 
@@ -59,7 +63,7 @@ test('מספר הזמנה ותקציר', () => {
 
 test('הקטלוג תקין: מזהים ייחודיים, תמונות, בלי ערבית', () => {
   const ids = new Set(PRODUCTS.map(p => p.id)); assert.equal(ids.size, PRODUCTS.length);
-  for (const p of PRODUCTS) { assert.ok(p.img.startsWith('https://')); assert.ok(p.contents.length >= 3); assert.ok(p.price > 0); }
+  for (const p of PRODUCTS) { assert.ok(p.img.startsWith('https://')); assert.ok(p.contents.length >= 3); assert.ok(p.price > 0); if (p.kosher === false) assert.ok(p.kosherNote, p.id + ' לא כשר בלי פירוט'); }
   const all = JSON.stringify(PRODUCTS) + JSON.stringify(BUILD);
   assert.ok(!/[؀-ۿ]/.test(all));
 });
