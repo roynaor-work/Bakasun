@@ -158,3 +158,11 @@ function addContactPicker(form) {
 export function empty(msg) { return `<p class="empty">${esc(msg)}</p>`; }
 export function section(title, body, extra) { return `<section class="sec"><div class="sec-h"><h2>${esc(title)}</h2>${extra || ''}</div>${body}</section>`; }
 export function isRtl() { return lang() === 'he'; }
+
+/** Opens WhatsApp with the text and, when she comes back, asks whether it was actually sent. Resolves true only on "yes":
+   the callers mark "sent" / "waiting" only then, never on the mere opening of WhatsApp. */
+export async function openWhatsAppAsk(phone, text) {
+  if (!openWhatsApp(phone, text)) return false;
+  await new Promise(r => setTimeout(r, 1200)); // let the app switch happen before the question appears
+  return dialog(t('askSent'), '', { ok: t('askSentYes'), cancel: t('askSentNo') }).then(r => r !== null);
+}

@@ -144,3 +144,6 @@ if ('serviceWorker' in navigator && location.protocol === 'https:' && !/claude\.
 }
 
 import { startNotify } from './notify.js'; startNotify();
+// a save that failed on the device is shown in red at once (and again at most once a minute), never swallowed
+import { setSaveErrorHook } from './store.js';
+{ let lastWarn = 0; setSaveErrorHook(msg => { if (Date.now() - lastWarn < 60000) return; lastWarn = Date.now(); import('./ui.js').then(m => m.toast(t('saveFailed') + ' ' + msg, 8000)); let bar = document.getElementById('savebar'); if (!bar) { bar = document.createElement('div'); bar.id = 'savebar'; bar.className = 'warnbox savebar'; document.body.prepend(bar); } bar.textContent = t('saveFailed') + ' ' + msg; }); }

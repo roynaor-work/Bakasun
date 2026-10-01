@@ -2,7 +2,7 @@
    no answer (stays in the queue, a "could not reach you" message is ready), answered (with a note), call back (on a date). */
 import { t, langName } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, field, section, empty, dialog, toast, openWhatsApp, dial, copyBtn, copyOf } from '../ui.js';
+import { esc, field, section, empty, dialog, toast, openWhatsApp, dial, copyBtn, copyOf, openWhatsAppAsk } from '../ui.js';
 import Office from '../logic/office.js';
 import { phonePretty } from '../logic/core.js';
 import { CALL, callQueue, callOutcome, noAnswerMessage } from '../logic/extra.js';
@@ -53,7 +53,7 @@ export function render(ctx) {
       const st = staff.find(x => x.name === r.who); const phone = r.phone || (st && st.phone) || '';
       const cs = c.caseId ? db.get('cases', c.caseId) : null;
       const r2 = await dialog(r.who, `<textarea name="text" rows="8">${esc(delegateCallMessage(c, r.who, cs, r.lang, s.signer || DEFAULTS.signer))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
-      if (r2 && openWhatsApp(phone, r2.text)) db.put('calls', { id: c.id, note: (c.note ? c.note + ' · ' : '') + t('delegate') + ': ' + r.who });
+      if (r2 && await openWhatsAppAsk(phone, r2.text)) db.put('calls', { id: c.id, note: (c.note ? c.note + ' · ' : '') + t('delegate') + ': ' + r.who });
     };
     el.querySelectorAll('[data-out]').forEach(b => b.onclick = async () => {
       const out = b.dataset.out;

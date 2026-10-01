@@ -31,19 +31,26 @@ export async function flush() {
   if (!queue.length || !navigator.onLine) return false;
   const batch = queue.slice(0, 20);
   try {
-    await api('/rest/v1/family_events?on_conflict=id', { method: 'POST', prefer: 'resolution=merge-duplicates,return=minimal', body: batch.map(q => ({ id: q.id, family_code: q.code, kind: q.kind, payload: q.payload })) });
-    queue = queue.slice(batch.length); saveQ(); status.last = new Date().toISOString(); status.error = '';
+    const code = batch[0].code; const rows = batch.filter(q => q.code === code);
+    await api('/rest/v1/rpc/family_push', { method: 'POST', body: { code, rows: rows.map(q => ({ id: q.id, kind: q.kind, payload: q.payload })) } });
+    queue = queue.filter(q => !rows.includes(q)); saveQ(); status.last = new Date().toISOString(); status.error = '';
     return queue.length ? flush() : true;
-  } catch (e) { status.error = e.status === 404 ? 'הטבלה בענן עוד לא נוצרה (family.sql)' : e.message; return false; }
+  } catch (e) { status.error = e.status === 404 ? 'הפונקציות בענן עוד לא נוצרו (family.sql)' : /unknown family code/.test(e.message) ? 'קוד המשפחה לא רשום בענן. בטלפון של הילד: הגדרות ← קוד משפחה ← "רישום"' : e.message; return false; }
 }
 export async function remove(code, id) {
   code = normCode(code);
-  try { await api(`/rest/v1/family_events?id=eq.${encodeURIComponent(id)}&family_code=eq.${code}`, { method: 'DELETE' }); return true; } catch (e) { status.error = e.message; return false; }
+  try { await api('/rest/v1/rpc/family_remove', { method: 'POST', body: { code, id } }); return true; } catch (e) { status.error = e.message; return false; }
 }
 export async function list(code, kind, limit = 200) {
   code = normCode(code); if (code.length < 8) return [];
-  const rows = await api(`/rest/v1/family_events?family_code=eq.${code}&kind=eq.${kind}&order=created.desc&limit=${limit}&select=id,payload,created,updated`, { prefer: 'return=representation' });
+  const rows = await api('/rest/v1/rpc/family_list', { method: 'POST', body: { code, kind, lim: limit }, prefer: 'return=representation' });
   status.last = new Date().toISOString(); status.error = '';
   return rows || [];
+}
+// רישום הקוד בענן (פעם אחת, מהטלפון שיצר אותו). בלי זה הענן דוחה כתיבה וקריאה.
+export async function register(code) {
+  code = normCode(code); if (code.length < 8) return false;
+  try { const ok = await api('/rest/v1/rpc/family_register', { method: 'POST', body: { code }, prefer: 'return=representation' }); status.error = ''; return ok === true; }
+  catch (e) { status.error = e.status === 404 ? 'הפונקציות בענן עוד לא נוצרו (family.sql)' : e.message; return false; }
 }
 window.addEventListener('online', () => flush());

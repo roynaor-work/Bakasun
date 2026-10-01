@@ -4,7 +4,7 @@
    js/logic/taskTree.js, recurring.js, workdays.js; texts in js/i18n/tasks2.js; styles in css/tasks2.css. */
 import { t, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, empty, dialog, toast, openWhatsApp, dial, confirmDialog, copyBtn, copyOf } from '../ui.js';
+import { esc, field, empty, dialog, toast, openWhatsApp, dial, confirmDialog, copyBtn, copyOf, openWhatsAppAsk } from '../ui.js';
 import Office from '../logic/office.js';
 import { TASK, openTasks, groupTasks, taskMessage } from '../logic/extra.js';
 import { toCalendar } from '../calendar.js';
@@ -155,7 +155,7 @@ export function render(ctx) {
       const r = await dialog(t('taskSend'), (x.phone ? '' : field('phone', t('fPhone'), '', { ltr: true, inputmode: 'tel' })) + `<textarea name="text" rows="9">${esc(text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
       if (!r) return;
       const phone = x.phone || r.phone;
-      if (openWhatsApp(phone, r.text)) db.put('tasks', { id: x.id, status: TASK.sent, phone });
+      if (await openWhatsAppAsk(phone, r.text)) db.put('tasks', { id: x.id, status: TASK.sent, phone });
     });
   });
 }

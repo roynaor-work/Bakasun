@@ -1,7 +1,7 @@
 /* Money: what to collect from clients (overdue, soon, invoice to ask from Roy), and suppliers not yet paid. */
 import { t } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, section, empty, dialog, toast, openWhatsApp, copyOf } from '../ui.js';
+import { esc, field, section, empty, dialog, toast, openWhatsApp, copyOf, openWhatsAppAsk } from '../ui.js';
 import Office from '../logic/office.js';
 import { payStatusLabel } from '../labels.js';
 import { DEFAULTS } from '../data/defaults.js';
@@ -68,7 +68,7 @@ export function render({ root }) {
       const extra = [client.payer ? '• משלם דרך: ' + client.payer : '', client.invoiceEmail && client.invoiceEmail !== client.email ? '• לשלוח ל: ' + client.invoiceEmail : '', client.payTerms ? '• תנאי תשלום: ' + client.payTerms : '', client.attachments ? '• לצרף: ' + client.attachments : ''].filter(Boolean);
       if (extra.length) m.text = m.text.replace(/\n\nתודה,/, '\n' + extra.join('\n') + '\n\nתודה,');
       const r = await dialog(t('askInvoice'), `<textarea name="text" rows="12">${esc(m.text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
-      if (r && openWhatsApp(s.invoiceTo, r.text)) db.put('payments', { id: p.id, status: Office.PAY.invoiceAsked });
+      if (r && await openWhatsAppAsk(s.invoiceTo, r.text)) db.put('payments', { id: p.id, status: Office.PAY.invoiceAsked });
     };
   });
 }

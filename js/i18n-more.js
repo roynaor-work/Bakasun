@@ -1,6 +1,9 @@
 /* Texts for the second stage: suppliers, quotes, schedule, staff, groups, money, checklists, cloud. Merged into the main dictionary. */
 export const MORE = {
   he: {
+    yesBtn: 'כן', 
+    askMarkPaid: 'לסמן שהתשלום ל{who} בוצע? (רק אם הכסף באמת הועבר)', 
+    saveFailed: 'השמירה במכשיר נכשלה! האחסון מלא או חסום. השינוי האחרון לא נשמר.', askSent: 'ההודעה נשלחה בוואטסאפ?', askSentYes: 'כן, נשלחה', askSentNo: 'לא', 
     paperNeedsCloud: 'המסמך שמור בענן הפרטי. צריך כניסה לענן (הגדרות) כדי לשלוח אותו.', paperInCloud: 'בענן, צריך כניסה', seedNeedsCloud: 'נתוני ההתחלה שמורים בענן הפרטי. קודם כניסה לענן בהגדרות.', seedLoadFailed: 'לא הצלחתי להביא את נתוני ההתחלה מהענן.', 
     agendaNextWeek: 'שבוע הבא', clDone: 'בוצע', 
     sessionExpired: 'הכניסה לענן פגה. לשלוח קישור כניסה חדש למייל.', cloudQueued: '{n} ממתינים לשליחה', cloudConflicts: '{n} התנגשויות נפתרו (החדש ניצח)', cloudSkipped: 'לא עלה לענן: {what}', cloudFileError: 'קבצים:', cloudQueuedWarn: '{n} שינויים עוד לא עלו לענן. להתנתק בכל זאת? הם יעלו שוב בכניסה הבאה.', 
@@ -71,6 +74,9 @@ export const MORE = {
     supplierPay: 'תשלומים לספקים', markPaid: 'שולם', paidNote: 'הודעה לספק: שולם', supplierPayReminder: 'תזכורת תשלום לספקים', autoRemind: 'אוטומטית במסך היום', manualRemind: 'רק כשאני פותחת "כספים"', afterEventDays: 'ימים אחרי האירוע', chooseLang: 'שפה'
   },
   fr: {
+    yesBtn: 'Oui', 
+    askMarkPaid: 'Marquer le paiement à {who} comme effectué ? (seulement si l’argent est vraiment parti)', 
+    saveFailed: 'L’enregistrement sur l’appareil a échoué ! Stockage plein ou bloqué. Le dernier changement n’est pas enregistré.', askSent: 'Le message est parti sur WhatsApp ?', askSentYes: 'Oui, envoyé', askSentNo: 'Non', 
     paperNeedsCloud: 'Le document est dans le cloud privé. Connecte-toi au cloud (Réglages) pour l’envoyer.', paperInCloud: 'Dans le cloud, connexion requise', seedNeedsCloud: 'Les données de départ sont dans le cloud privé. Connecte-toi d’abord au cloud dans les réglages.', seedLoadFailed: 'Impossible de récupérer les données de départ du cloud.', 
     agendaNextWeek: 'La semaine prochaine', clDone: 'Fait', 
     sessionExpired: 'La connexion au cloud a expiré. Envoie-toi un nouveau lien.', cloudQueued: '{n} en attente d’envoi', cloudConflicts: '{n} conflits résolus (le plus récent gagne)', cloudSkipped: 'Pas envoyé au cloud : {what}', cloudFileError: 'Fichiers :', cloudQueuedWarn: '{n} changements ne sont pas encore dans le cloud. Se déconnecter quand même ? Ils remonteront à la prochaine connexion.', 
@@ -134,6 +140,9 @@ export const MORE = {
     supplierPay: 'Paiements fournisseurs', markPaid: 'Payé', paidNote: 'Message au fournisseur : payé', supplierPayReminder: 'Rappel des paiements fournisseurs', autoRemind: 'Automatique sur l’écran du jour', manualRemind: 'Seulement quand j’ouvre « Finances »', afterEventDays: 'jours après l’événement', chooseLang: 'Langue'
   },
   en: {
+    yesBtn: 'Yes', 
+    askMarkPaid: 'Mark the payment to {who} as made? (only if the money really went out)', 
+    saveFailed: 'Saving on the device failed! Storage full or blocked. The last change was not saved.', askSent: 'Was the message sent on WhatsApp?', askSentYes: 'Yes, sent', askSentNo: 'No', 
     paperNeedsCloud: 'The paper is kept in the private cloud. Sign in to the cloud (Settings) to send it.', paperInCloud: 'In the cloud, sign in', seedNeedsCloud: 'The starting data is kept in the private cloud. Sign in to the cloud in the settings first.', seedLoadFailed: 'Could not fetch the starting data from the cloud.', 
     agendaNextWeek: 'Next week', clDone: 'Done', 
     sessionExpired: 'The cloud sign-in expired. Send a new sign-in link to the mail.', cloudQueued: '{n} waiting to send', cloudConflicts: '{n} conflicts resolved (newest won)', cloudSkipped: 'Not sent to the cloud: {what}', cloudFileError: 'Files:', cloudQueuedWarn: '{n} changes are not in the cloud yet. Sign out anyway? They go up again at the next sign-in.', 

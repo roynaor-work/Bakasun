@@ -2,7 +2,7 @@
    Totals from Office.quoteTotals. Preview and PDF from Office.quoteHtml. The message to the client from Office.quoteMessage. */
 import { t, lang, kindLabel, langName, KIND_LABELS } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, empty, dialog, confirmDialog, toast, openWhatsApp, copyText, copyBtn, copyOf } from '../ui.js';
+import { esc, field, empty, dialog, confirmDialog, toast, openWhatsApp, copyText, copyBtn, copyOf, openWhatsAppAsk } from '../ui.js';
 import Office from '../logic/office.js';
 import { QUOTE_STATUS, priceFromCost, marginOf, recommendedLines, catalogAll, lastCost, resolveLines, translator } from '../logic/quotes.js';
 import { quoteStatusLabel, unitLabel, categoryLabel } from '../labels.js';
@@ -89,7 +89,7 @@ function renderOne({ root, id }) {
   root.querySelector('#send').onclick = async () => {
     const text = Office.quoteMessage(Object.assign({}, q, { lines }), cs, s.signer || '');
     const r = await dialog(t('sendQuote'), `<textarea name="text" rows="7">${esc(text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
-    if (r && openWhatsApp(cs.phone, r.text)) { db.put('quotes', { id, status: QUOTE_STATUS.sent, sentAt: todayIso() }); if (cs.id) db.put('cases', { id: cs.id, status: Office.STATUS.quoted, waitingSince: todayIso(), quoteNo: q.no }); }
+    if (r && await openWhatsAppAsk(cs.phone, r.text)) { db.put('quotes', { id, status: QUOTE_STATUS.sent, sentAt: todayIso() }); if (cs.id) db.put('cases', { id: cs.id, status: Office.STATUS.quoted, waitingSince: todayIso(), quoteNo: q.no }); }
   };
   root.querySelector('#clone').onclick = () => {
     const c = Office.cloneQuote(q, { caseId: q.caseId });

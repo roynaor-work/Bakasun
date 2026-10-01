@@ -152,26 +152,33 @@ export function parseOffer(text) {
   o.terms = line(/(?:שוטף\s*\+?\s*\d+|תנאי תשלום|payment terms|net\s*\d+)[^\n]{0,80}/i);
   o.included = line(/(?:כולל|כלול|includes?|included)[^\n]{0,120}/i);
   if (!o.total) { const parts = [o.venue, o.food, o.av].map(Office.num).filter(Boolean); if (parts.length > 1) o.total = parts.reduce((a, b) => a + b, 0); }
+  // "including VAT" / TTC / incl. VAT: the amounts are gross; "+ VAT" / HT / before VAT: net. Unknown = net (the market habit in B2B).
+  o.incl = /(?:כולל\s+מע["״]?מ|מע["״]?מ\s+כלול|incl(?:\.|uding|usive)?\s*(?:of\s+)?vat|vat\s+incl|\bTTC\b|toutes?\s+taxes?\s+comprises?|tva\s+(?:incluse|comprise))/i.test(t) && !/(?:\+\s*מע["״]?מ|לפני\s+מע["״]?מ|לא\s+כולל\s+מע["״]?מ|plus\s+vat|\+\s*vat|before\s+vat|excl(?:\.|uding)?\s+vat|\bHT\b|hors\s+taxes?)/i.test(t);
+  o.currency = /€|\beur(?:os?)?\b/i.test(t) ? 'EUR' : /\$|\busd\b|dollars?/i.test(t) ? 'USD' : 'ILS';
   return o;
 }
+/** The net amount for the comparison: a gross ("including VAT") offer is divided by 1 + vat%. */
+export function netOf(amount, incl, vatPct) { const n = Office.num(amount) || 0; return incl && n ? Math.round(n / (1 + (Office.num(vatPct) || 18) / 100)) : n; }
+export const CURRENCY = { ILS: '₪', EUR: '€', USD: '$' };
 
 /** The comparison rows, cheapest first; suppliers without an offer at the end. */
-export function compareRows(links, sups, participants) {
+export function compareRows(links, sups, participants, vatPct) {
   const supById = {}; (sups || []).forEach(s => { supById[s.id] = s; });
   const p = Office.num(participants) || 0;
   return (links || []).filter(l => !/בוטל/.test(str(l.status))).map(l => {
     const o = l.offer || {}; const sp = supById[l.supplierId] || { name: l.supplier };
-    const total = Office.num(o.total) || Office.num(l.cost) || 0;
-    const per = Office.num(o.perPerson) || (total && p ? Math.round(total / p) : 0);
-    return { id: l.id, supplier: sp.name || '', type: sp.type || '', status: l.status, chosen: Office.yes(l.chosen), total, perPerson: per, venue: Office.num(o.venue) || 0, food: Office.num(o.food) || 0, av: Office.num(o.av) || 0,
+    const incl = !!o.incl, cur = o.currency || 'ILS';
+    const total = netOf(Office.num(o.total) || Office.num(l.cost) || 0, incl, vatPct);
+    const per = netOf(Office.num(o.perPerson), incl, vatPct) || (total && p ? Math.round(total / p) : 0);
+    return { id: l.id, supplier: sp.name || '', type: sp.type || '', status: l.status, chosen: Office.yes(l.chosen), total, perPerson: per, venue: netOf(o.venue, incl, vatPct), food: netOf(o.food, incl, vatPct), av: netOf(o.av, incl, vatPct), incl, currency: cur,
       included: str(o.included), cancellation: str(o.cancellation), deposit: str(o.deposit), terms: str(o.terms), note: str(o.note || l.note), verdict: str(o.verdict), hasOffer: !!(total || o.text) };
   }).sort((a, b) => (b.hasOffer - a.hasOffer) || (a.total || Infinity) - (b.total || Infinity) || a.supplier.localeCompare(b.supplier, 'he'));
 }
 
 export const LABELS = {
-  he: { title: 'השוואת הצעות', supplier: 'ספק', total: 'סה״כ לפני מע״מ', per: 'למשתתף', venue: 'מקום', food: 'אוכל', av: 'ציוד', included: 'כלול', cancellation: 'ביטול', deposit: 'מקדמה', terms: 'תשלום', note: 'הערה', none: 'טרם התקבלה הצעה', chosen: 'נבחר' },
-  en: { title: 'Offers comparison', supplier: 'Supplier', total: 'Total before VAT', per: 'Per person', venue: 'Venue', food: 'Food', av: 'Equipment', included: 'Included', cancellation: 'Cancellation', deposit: 'Deposit', terms: 'Payment', note: 'Note', none: 'No offer yet', chosen: 'Chosen' },
-  fr: { title: 'Comparatif des offres', supplier: 'Fournisseur', total: 'Total HT', per: 'Par personne', venue: 'Lieu', food: 'Repas', av: 'Matériel', included: 'Inclus', cancellation: 'Annulation', deposit: 'Acompte', terms: 'Paiement', note: 'Note', none: 'Pas encore d’offre', chosen: 'Retenu' }
+  he: { title: 'השוואת הצעות', fromGross: '(הומר מכולל מע״מ)', supplier: 'ספק', total: 'סה״כ לפני מע״מ', per: 'למשתתף', venue: 'מקום', food: 'אוכל', av: 'ציוד', included: 'כלול', cancellation: 'ביטול', deposit: 'מקדמה', terms: 'תשלום', note: 'הערה', none: 'טרם התקבלה הצעה', chosen: 'נבחר' },
+  en: { title: 'Offers comparison', fromGross: '(converted from incl. VAT)', supplier: 'Supplier', total: 'Total before VAT', per: 'Per person', venue: 'Venue', food: 'Food', av: 'Equipment', included: 'Included', cancellation: 'Cancellation', deposit: 'Deposit', terms: 'Payment', note: 'Note', none: 'No offer yet', chosen: 'Chosen' },
+  fr: { title: 'Comparatif des offres', fromGross: '(converti du TTC)', supplier: 'Fournisseur', total: 'Total HT', per: 'Par personne', venue: 'Lieu', food: 'Repas', av: 'Matériel', included: 'Inclus', cancellation: 'Annulation', deposit: 'Acompte', terms: 'Paiement', note: 'Note', none: 'Pas encore d’offre', chosen: 'Retenu' }
 };
 /** A standalone page with the table, to share with the client. Verdicts and internal notes stay out unless `internal`. */
 export function compareHtml(cs, rows, lang, internal) {
@@ -179,7 +186,8 @@ export function compareHtml(cs, rows, lang, internal) {
   const e = x => String(x == null ? '' : x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const m = v => v ? Office.money(v) : '';
   const cols = ['supplier', 'total', 'per', 'venue', 'food', 'av', 'included', 'cancellation', 'deposit', 'terms'].concat(internal ? ['note'] : []);
-  const cell = (r, c) => c === 'supplier' ? e(r.supplier) + (r.chosen ? ' ★' : '') : c === 'total' ? (r.hasOffer ? m(r.total) : '<i>' + e(S.none) + '</i>') : c === 'per' ? m(r.perPerson) : c === 'venue' ? m(r.venue) : c === 'food' ? m(r.food) : c === 'av' ? m(r.av) : c === 'note' ? e([r.verdict, r.note].filter(Boolean).join(' · ')) : e(r[c]);
+  const money = (r, n) => (r.currency && r.currency !== 'ILS' ? (n ? Number(n).toLocaleString('en-US') + ' ' + (CURRENCY[r.currency] || r.currency) : '') : m(n));
+  const cell = (r, c) => c === 'supplier' ? e(r.supplier) + (r.chosen ? ' ★' : '') + (r.incl ? ' <small>' + e(S.fromGross) + '</small>' : '') + (r.currency && r.currency !== 'ILS' ? ' <small>' + e(r.currency) + '</small>' : '') : c === 'total' ? (r.hasOffer ? money(r, r.total) : '<i>' + e(S.none) + '</i>') : c === 'per' ? m(r.perPerson) : c === 'venue' ? m(r.venue) : c === 'food' ? m(r.food) : c === 'av' ? m(r.av) : c === 'note' ? e([r.verdict, r.note].filter(Boolean).join(' · ')) : e(r[c]);
   const ev = cs ? [cs.client, cs.kind, cs.date ? Office.fmt(cs.date) : '', cs.participants ? cs.participants + (rtl ? ' משתתפים' : ' pax') : ''].filter(Boolean).join(' · ') : '';
   return `<!DOCTYPE html><html dir="${rtl ? 'rtl' : 'ltr'}" lang="${L}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${e(S.title)} · ${e(cs && cs.client)}</title>
 <style>body{margin:0;padding:16px;background:#EFE8DC;color:#12100F;font-family:Assistant,'Noto Sans Hebrew','Segoe UI',Arial,sans-serif;font-size:14px;direction:${rtl ? 'rtl' : 'ltr'};text-align:${rtl ? 'right' : 'left'};unicode-bidi:embed}h1{font-size:20px;margin:0 0 4px}.sub{color:#6E645A;margin:0 0 12px}

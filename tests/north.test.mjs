@@ -90,3 +90,18 @@ test('Grow: תשובה וקריאה חוזרת', () => {
   assert.equal(flat.orderNo, 'RC-2'); assert.equal(flat.paid, false);
   const ap = approveParams(cb, 'P1'); assert.equal(ap.pageCode, 'P1'); assert.equal(ap.transactionId, '55'); assert.equal(ap.processId, '7'); assert.ok(!('orderNo' in ap));
 });
+
+import { infoParams, parseInfo, matchesOrder } from '../supabase/functions/_shared/grow.mjs';
+test('Grow: התשלום מסומן רק אחרי אימות מול Grow, על אותה עסקה ואותו סכום', () => {
+  const order = { total: 250, grow_process_id: 'p1', grow_process_token: 't1' };
+  assert.deepEqual(infoParams(order, { userId: 'u', pageCode: 'pc' }), { pageCode: 'pc', userId: 'u', processId: 'p1', processToken: 't1' });
+  assert.equal(parseInfo(null).paid, false); assert.equal(parseInfo({ status: 0, err: { message: 'x' } }).reason, 'x');
+  const ok = parseInfo({ status: 1, data: { transactionId: '77', statusCode: '2', sum: '250.00', asmachta: 'A1' } });
+  assert.equal(ok.paid, true); assert.equal(ok.transactionId, '77'); assert.equal(ok.sum, 250);
+  assert.equal(parseInfo({ status: 1, data: { transactionId: '', statusCode: '2' } }).paid, false, 'no transaction = not paid');
+  assert.equal(parseInfo({ status: 1, data: { transactionId: '77', statusCode: '3' } }).paid, false, 'failed code');
+  assert.equal(matchesOrder(ok, order, { transactionId: '77' }), true);
+  assert.equal(matchesOrder(ok, order, { transactionId: '99' }), false, 'callback names another transaction');
+  assert.equal(matchesOrder(ok, { total: 300 }, { transactionId: '77' }), false, 'sum differs from the order');
+  assert.equal(matchesOrder({ ok: true, paid: false }, order, {}), false);
+});

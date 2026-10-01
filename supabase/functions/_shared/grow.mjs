@@ -77,3 +77,26 @@ export function approveParams(cb, pageCode) {
 }
 
 export function toForm(params) { const fd = new FormData(); for (const [k, v] of Object.entries(params)) fd.append(k, v); return fd; }
+
+/* getPaymentProcessInfo: the server asks Grow itself whether the process was paid, instead of trusting the callback.
+   Params: pageCode, userId and the processId + processToken we stored when the process was created. */
+export function infoParams(order, cfg) {
+  return { pageCode: cfg.pageCode, userId: cfg.userId, processId: String(order.grow_process_id || ''), processToken: String(order.grow_process_token || '') };
+}
+/* The answer of getPaymentProcessInfo: {status:1, data:{transactionId, statusCode/status, sum, asmachta, ...}}.
+   Paid only when Grow says so explicitly (status 1 and a transaction with a success code); anything else is "not confirmed". */
+export function parseInfo(json) {
+  if (!json || Number(json.status) !== 1 || !json.data || typeof json.data !== 'object') return { ok: false, paid: false, reason: json?.err?.message || 'Grow: no answer' };
+  const d = json.data;
+  const tx = String(d.transactionId || d.transactionID || '');
+  const code = String(d.statusCode ?? d.transactionStatusCode ?? d.status ?? '');
+  const paid = !!tx && (code === '2' || code === '1' || /שולם|paid|success|approved/i.test(code));
+  return { ok: true, paid, transactionId: tx, sum: d.sum != null ? Number(d.sum) : null, asmachta: String(d.asmachta || ''), raw: d };
+}
+/* The callback and the verified info must speak about the same transaction and the same sum as the order. */
+export function matchesOrder(info, order, cb) {
+  if (!info || !info.paid) return false;
+  if (cb && cb.transactionId && info.transactionId && String(cb.transactionId) !== String(info.transactionId)) return false;
+  if (info.sum != null && order && order.total != null && Math.abs(Number(info.sum) - Number(order.total)) > 0.5) return false;
+  return true;
+}

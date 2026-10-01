@@ -1,7 +1,7 @@
 /* "What is waiting today": events in the next two weeks, clients waiting for an answer, calls to make, tasks due. */
 import { t, kindLabel, statusLabel } from '../i18n.js';
 import { db } from '../store.js';
-import { esc, section, empty, relDay, copyText, openWhatsApp, dial, copyBtn, copyOf } from '../ui.js';
+import { esc, section, empty, relDay, copyText, openWhatsApp, dial, copyBtn, copyOf, openWhatsAppAsk, confirmDialog } from '../ui.js';
 import Office from '../logic/office.js';
 import { todayList } from '../logic/extra.js';
 import { phonePretty } from '../logic/core.js';
@@ -106,14 +106,14 @@ export function render({ root }) {
   root.querySelectorAll('[data-appr]').forEach(el => el.querySelector('[data-remind]').onclick = async () => {
     const a = db.get('approvals', el.dataset.appr); const c = db.get('cases', a.caseId) || {};
     const r = await dialog(t('remind'), `<textarea name="text" rows="7">${esc(approvalReminder(a, c, c.lang, s.signer || DEFAULTS.signer, Office.daysBetween(a.sentAt, new Date())))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
-    if (r && openWhatsApp(c.phone, r.text)) db.put('approvals', { id: a.id, lastRemind: Office.iso(new Date()) });
+    if (r && await openWhatsAppAsk(c.phone, r.text)) db.put('approvals', { id: a.id, lastRemind: Office.iso(new Date()) });
   });
   root.querySelectorAll('[data-link]').forEach(el => {
     const l = db.get('links', el.dataset.link); if (!l) return; const c = db.get('cases', l.caseId) || {}; const sp = db.get('suppliers', l.supplierId) || { name: l.supplier };
     el.querySelector('[data-paid]').onclick = () => db.put('links', { id: l.id, paid: 'כן', paidAt: Office.iso(new Date()) });
     el.querySelector('[data-paidmsg]').onclick = async () => {
       const r = await dialog(t('paidNote'), `<textarea name="text" rows="6">${esc(supplierPaidMessage(sp, c, Office.num(l.cost), sp.lang || 'he', s.signer || DEFAULTS.signer))}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
-      if (r && openWhatsApp(sp.phone, r.text)) db.put('links', { id: l.id, paid: 'כן', paidAt: Office.iso(new Date()) });
+      if (r && await openWhatsAppAsk(sp.phone, r.text) && await confirmDialog(t('askMarkPaid', { who: sp.name || '' }), t('yesBtn'))) db.put('links', { id: l.id, paid: 'כן', paidAt: Office.iso(new Date()) });
     };
   });
   const cm = root.querySelector('#copyMorning');

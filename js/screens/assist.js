@@ -2,7 +2,7 @@
    or turn a supplier's quote into the client's quote with her fee. Nothing goes out until she taps. */
 import { t, lang, SPEECH, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, empty, dialog, toast, openWhatsApp, openWhatsAppPick, copyText, copyBtn, copyOf } from '../ui.js';
+import { esc, field, empty, dialog, confirmDialog, toast, openWhatsApp, openWhatsAppPick, copyText, copyBtn, copyOf } from '../ui.js';
 import Office from '../logic/office.js';
 import { TASK } from '../logic/extra.js';
 import { isReceiptCommand } from '../logic/receipts.js';
@@ -491,7 +491,7 @@ async function tabDocs(body) {
   body.querySelector('#up').onsubmit = async e => { e.preventDefault(); const f = inp.files[0]; if (!f) return; await files.put(f, { title: body.querySelector('[name=title]').value.trim(), aliases: body.querySelector('[name=aliases]').value.trim() }); toast(t('saved')); tabDocs(body); };
   body.querySelectorAll('[data-p]').forEach(el => { const b = el.querySelector('[data-pshare]'); if (b) b.onclick = async () => { const p = COMPANY_PAPERS.find(x => x.key === el.dataset.p); const rec = await bundledRec(p); if (!rec) return; if (!(await shareFile(rec, p.title))) { downloadFile(rec); toast(t('shareFallback'), 4000); } }; });
   body.querySelectorAll('[data-f]').forEach(el => {
-    el.querySelector('[data-del]').onclick = async () => { await files.remove(el.dataset.f); tabDocs(body); };
+    el.querySelector('[data-del]').onclick = async () => { const f = await files.get(el.dataset.f); if (!(await confirmDialog(t('confirmDelete') + (f ? ' "' + (f.title || f.name) + '"' : '')))) return; await files.remove(el.dataset.f); tabDocs(body); };
     el.querySelector('[data-share]').onclick = async () => { const rec = await files.get(el.dataset.f); if (!(await shareFile(rec, rec.title || rec.name))) { downloadFile(rec); toast(t('shareFallback'), 4000); } };
   });
 }

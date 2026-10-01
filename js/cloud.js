@@ -136,6 +136,9 @@ export function logout() {
 
 /* ---------------- the queue ---------------- */
 const keyOf = it => it.col + ':' + it.id;
+/** The server's own 'updated' stamp of each record as we last saw it: a write is accepted only against that stamp. */
+const seenOf = key => (cfg && cfg.seen && cfg.seen[key]) || '';
+const markSeen = (key, upd) => { if (!cfg) return; cfg.seen = cfg.seen || {}; if (upd) cfg.seen[key] = upd; else delete cfg.seen[key]; };
 const same = (a, b) => a.col === b.col && a.id === b.id && a.setting === b.setting;
 /** True for a history entry too old to travel. */
 export function isStaleHistory(h) { const at = h && h.at ? Date.parse(h.at) : NaN; return !isNaN(at) && at < now() - HISTORY_DAYS * 864e5; }
@@ -183,16 +186,36 @@ function pushLocal() {
   saveQueue(); emit(); flush();
 }
 const toRow = q => ({ id: q.id, org_id: cfg.orgId, col: q.col, data: q.data || {}, deleted: !!q.deleted });
+/** Writes the items. A record the cloud already holds is written only if its server stamp is still the one we saw
+   (PATCH ... &updated=eq.<seen>); a new record only if nobody created it meanwhile. Whatever the server refused for
+   that reason is returned as conflicts: the caller pulls (merging against the base) and pushes again. */
 async function pushItems(items) {
-  const docs = items.filter(q => q.col).map(toRow);
-  for (let i = 0; i < docs.length; i += CHUNK) await api('/rest/v1/docs?on_conflict=org_id,col,id', { method: 'POST', body: docs.slice(i, i + CHUNK), headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+  const conflicts = [];
+  const docs = items.filter(q => q.col);
+  const fresh = docs.filter(q => !seenOf(keyOf(q))), known = docs.filter(q => seenOf(keyOf(q)));
+  for (let i = 0; i < fresh.length; i += CHUNK) {
+    const chunk = fresh.slice(i, i + CHUNK);
+    const got = await api('/rest/v1/docs?on_conflict=org_id,col,id', { method: 'POST', body: chunk.map(toRow), headers: { Prefer: 'resolution=ignore-duplicates,return=representation' } });
+    const back = new Map((Array.isArray(got) ? got : []).map(r => [r.col + ':' + r.id, r.updated]));
+    chunk.forEach(q => { const u = back.get(keyOf(q)); if (u) { markSeen(keyOf(q), u); q.ok = true; } else conflicts.push(q); });
+  }
+  for (const q of known) {
+    const key = keyOf(q);
+    const got = await api('/rest/v1/docs?org_id=eq.' + cfg.orgId + '&col=eq.' + encodeURIComponent(q.col) + '&id=eq.' + encodeURIComponent(q.id) + '&updated=eq.' + encodeURIComponent(seenOf(key)),
+      { method: 'PATCH', body: { data: q.data || {}, deleted: !!q.deleted }, headers: { Prefer: 'return=representation' } });
+    const row = Array.isArray(got) && got[0];
+    if (row && row.updated) { markSeen(key, row.updated); q.ok = true; } else conflicts.push(q);
+  }
   const sets = items.filter(q => q.setting !== undefined).map(q => ({ org_id: cfg.orgId, key: q.setting, value: encodeSetting(q.value) }));
   if (sets.length) await api('/rest/v1/settings?on_conflict=org_id,key', { method: 'POST', body: sets, headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+  items.forEach(q => { if (q.setting !== undefined) q.ok = true; });
+  return conflicts;
 }
 /** Items that reached the cloud leave the queue (not the ones re-queued meanwhile) and become the base of the next edit. */
 function done(items) {
-  queue = queue.filter(q => !items.includes(q));
-  items.forEach(q => { if (!q.col) return; if (q.deleted) shadow.delete(keyOf(q)); else shadow.set(keyOf(q), JSON.stringify(q.data)); });
+  const ok = items.filter(q => q.ok);
+  queue = queue.filter(q => !ok.includes(q));
+  ok.forEach(q => { delete q.ok; if (!q.col) return; if (q.deleted) { shadow.delete(keyOf(q)); markSeen(keyOf(q), seenOf(keyOf(q))); } else shadow.set(keyOf(q), JSON.stringify(q.data)); });
 }
 function note(entry, key) {
   const cap = key === 'failed' ? 50 : MAX_NOTES;
@@ -207,9 +230,18 @@ export async function flush(opts) {
   if (!isOn() || busy || !queue.length || status.expired) return false;
   if (status.retryAt && now() < status.retryAt && !opts.force) { scheduleFlush(status.retryAt - now()); return false; }
   busy = true; status.state = 'syncing'; emit();
-  const batch = queue.slice();
   let err = null;
-  try { await pushItems(batch); done(batch); } catch (e) { err = e; }
+  // what the other device wrote comes in first and is merged (field by field, against the base), then we write
+  if (!opts.noPull) { try { await pullAll({ settings: false, inFlush: true }); } catch (e) { err = e; } }
+  let batch = err ? [] : queue.slice();
+  for (let round = 0; !err && batch.length && round < 3; round++) {
+    let conflicts = [];
+    try { conflicts = await pushItems(batch); done(batch); } catch (e) { err = e; break; }
+    if (!conflicts.length) break;
+    // the server stamp moved under us: take the newer copy, merge, and write the merged record
+    try { await pullAll({ settings: false, inFlush: true }); } catch (e) { err = e; break; }
+    batch = queue.filter(q => conflicts.some(c => same(c, q)) || !q.col);
+  }
   if (err && isBad(err)) { // find the item the server refuses, keep the rest moving
     const bad = err; err = null;
     const refuse = (q, e) => { note({ col: q.col, id: q.id, setting: q.setting, error: String(e.message || e), at: nowIso() }, 'failed'); queue = queue.filter(x => x !== q); };
@@ -231,12 +263,13 @@ export async function flush(opts) {
 }
 
 /* ---------------- pull and merge ---------------- */
-/** Three-way merge of one record: a field changed on one side only takes that side; changed on both, the newer record
-   wins the field and the field is listed in conflicts. 'updated' is the newer of the two. */
+/** Three-way merge of one record: a field changed on one side only takes that side; changed on both, the side that is
+   writing now (local) wins the field, since the other write already reached the server earlier, and the field is listed
+   in conflicts. Device clocks play no part: the server's stamps order the writes. */
 export function merge3(baseRec, local, remote) {
   baseRec = baseRec || {}; local = local || {}; remote = remote || {};
   const keys = new Set(Object.keys(baseRec).concat(Object.keys(local), Object.keys(remote)));
-  const localNewer = String(local.updated || '') >= String(remote.updated || '');
+  const localNewer = true;
   const out = {}; const conflicts = [];
   keys.forEach(k => {
     if (k === 'updated') return;
@@ -264,9 +297,14 @@ function reconcile(rows) {
     const key = r.col + ':' + r.id;
     const q = queue.find(x => x.col === r.col && x.id === r.id) || null;
     const local = hooks.db.get(r.col, r.id);
-    const rUpd = String((data && data.updated) || r.updated || '');
+    let rUpd = String((data && data.updated) || r.updated || '');
     const remember = () => after.push(() => { if (r.deleted) shadow.delete(key); else shadow.set(key, JSON.stringify(data)); });
-    if (!q) { out.push(r); if (r.deleted || !local || rUpd >= String(local.updated || '')) remember(); return; }
+    if (!q) {
+      // written there after the version we synced, by a device whose clock is behind ours: the server's order wins, so the store must take it
+      const seen = seenOf(key);
+      if (!r.deleted && local && seen && Date.parse(r.updated) > Date.parse(seen) && rUpd < String(local.updated || '')) { data.updated = bump(local.updated); rUpd = data.updated; }
+      out.push(r); if (r.deleted || !local || rUpd >= String(local.updated || '')) remember(); return;
+    }
     const qUpd = String((q.data && q.data.updated) || '');
     if (r.deleted) { // deleted there, edited here: the newer action wins
       if (rUpd > qUpd) { out.push(r); drop(q); remember(); note({ col: r.col, id: r.id, kind: 'deleted-elsewhere', at: nowIso() }, 'conflicts'); }
@@ -301,6 +339,7 @@ function pickSettings(sets) {
 export async function pullAll(opts) {
   if (!isOn() || status.expired) return;
   opts = opts || {};
+  if (busy && !opts.inFlush) return; // a flush is pulling already
   try {
     const sinceT = cfg.since ? Date.parse(cfg.since) : NaN;
     const since = isNaN(sinceT) ? '' : '&updated=gt.' + encodeURIComponent(new Date(sinceT - OVERLAP_MS).toISOString());
@@ -314,6 +353,7 @@ export async function pullAll(opts) {
     const plan = reconcile(rows);
     hooks.db.mergeRemote(plan.rows, pickSettings(sets));
     plan.after();
+    rows.forEach(r => { if (r && r.col && r.id && r.updated) markSeen(r.col + ':' + r.id, r.updated); });
     if (plan.qChanged) saveQueue();
     let last = cfg.since || '', lastT = isNaN(sinceT) ? -1 : sinceT;
     rows.forEach(r => { const t = Date.parse(r.updated); if (!isNaN(t) && t > lastT) { lastT = t; last = r.updated; } });
@@ -321,10 +361,10 @@ export async function pullAll(opts) {
     if (status.state !== 'syncing') status.state = 'on';
     status.last = nowIso(); if (!status.expired) status.error = '';
     emit();
-    if (plan.pushes) scheduleFlush(50);
+    if (plan.pushes && !opts.inFlush) scheduleFlush(50);
   } catch (e) {
     status.state = 'error'; status.error = String(e.message || e);
-    if (e.retryable && !status.retryAt) { status.attempt++; status.retryAt = now() + backoffMs(status.attempt, e.retryAfter); }
+    if (e.retryable && !status.retryAt && !opts.inFlush) { status.attempt++; status.retryAt = now() + backoffMs(status.attempt, e.retryAfter); } // inside a flush the flush counts the attempt
     emit(); throw e;
   }
 }

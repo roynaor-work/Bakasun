@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { templateFor, rfqText, rfqSubject, rfqReminder, rfqDecline, pendingRequests, parseOffer, compareRows, compareHtml, specLines } from '../js/logic/rfq.js';
+import { netOf, templateFor, rfqText, rfqSubject, rfqReminder, rfqDecline, pendingRequests, parseOffer, compareRows, compareHtml, specLines } from '../js/logic/rfq.js';
 
 const cs = { id: 'k1', client: 'ארגון שוב״ל', kind: 'סמינר צוות', date: '2026-10-19', participants: 18, status: 'הצעה נשלחה' };
 const hotel = { id: 's1', name: 'מלון דניאל הרצליה', contact: 'אורי שגב', type: 'מלונות', email: 'a@b.co', lang: 'he' };
@@ -48,4 +48,15 @@ test('comparison rows cheapest first, suppliers without an offer last, and the p
   const html = compareHtml(cs, rows, 'en');
   assert.match(html, /<html dir="ltr" lang="en">/); assert.match(html, /Offers comparison/); assert.match(html, /מלון השרון ★/); assert.doesNotMatch(html, /שווה/);
   assert.match(compareHtml(cs, rows, 'he', true), /שווה/);
+});
+
+test('offers: "including VAT" is recognised and compared net; the currency is read; "+ VAT" stays net', () => {
+  const gross = parseOffer('סה"כ 11,800 ש"ח כולל מע"מ, מקדמה 30%');
+  assert.equal(gross.incl, true); assert.equal(gross.currency, 'ILS'); assert.equal(netOf(gross.total, gross.incl, 18), 10000);
+  const net = parseOffer('Total 12,500 NIS + VAT'); assert.equal(net.incl, false);
+  const eur = parseOffer('Total 4 200 € TTC per group'); assert.equal(eur.currency, 'EUR'); assert.equal(eur.incl, true);
+  const ht = parseOffer('Total 4 200 € HT'); assert.equal(ht.incl, false);
+  const usd = parseOffer('Total $3,000 incl. VAT'); assert.equal(usd.currency, 'USD'); assert.equal(usd.incl, true);
+  const rows = compareRows([{ id: 'a', supplierId: 's1', offer: { total: 11800, incl: true } }, { id: 'b', supplierId: 's2', offer: { total: 10500 } }], [{ id: 's1', name: 'A' }, { id: 's2', name: 'B' }], 10, 18);
+  assert.deepEqual(rows.map(r => [r.supplier, r.total, r.incl]), [['A', 10000, true], ['B', 10500, false]], 'the gross offer is cheaper once compared net');
 });

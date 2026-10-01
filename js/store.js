@@ -4,6 +4,9 @@
 const KEY = 'bakasun.v1';
 const COLS = ['cases', 'clients', 'calls', 'tasks', 'quotes', 'suppliers', 'links', 'schedule', 'staff', 'payments', 'checks', 'groups', 'catalog', 'notes', 'approvals', 'team', 'contacts', 'print', 'receipts', 'participants', 'history', 'contracts', 'checklists', 'budget', 'runsheet', 'casefiles', 'workgroups', 'notifications'];
 let onChange = null; // the cloud hooks in here
+let onSaveError = null, saveError = ''; // the device refused to save (storage full / private mode): the screen must say so in red
+export function setSaveErrorHook(fn) { onSaveError = fn; }
+export function lastSaveError() { return saveError; }
 export function setChangeHook(fn) { onChange = fn; }
 /* The activity history hooks in here: fn({col, id, before, after, deleted}) after every put/remove (never for 'history' itself). */
 let onHistory = null;
@@ -26,7 +29,7 @@ function load() {
 function persist() {
   clearTimeout(timer);
   timer = setTimeout(() => {
-    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* storage full or blocked */ }
+    try { localStorage.setItem(KEY, JSON.stringify(state)); saveError = ''; } catch (e) { saveError = String(e && e.message || e); if (onSaveError) onSaveError(saveError); }
   }, 150);
 }
 function emit() { listeners.forEach(fn => { try { fn(); } catch (e) { console.error(e); } }); }

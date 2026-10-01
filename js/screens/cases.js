@@ -1,7 +1,7 @@
 /* Cases: the list (open / all) and one case in five tabs: details, suppliers, schedule and team, money, lists. */
 import { t, kindLabel, statusLabel, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
-import { esc, field, section, empty, dialog, confirmDialog, toast, openWhatsApp, dial, relDay, copyText, copyBtn, copyOf } from '../ui.js';
+import { esc, field, section, empty, dialog, confirmDialog, toast, openWhatsApp, dial, relDay, copyText, copyBtn, copyOf, openWhatsAppAsk } from '../ui.js';
 import Office from '../logic/office.js';
 import { phonePretty } from '../logic/core.js';
 import { CALL, TASK, taskMessage } from '../logic/extra.js';
@@ -90,7 +90,7 @@ function tabDetails(body, c, s) {
     const q = miss.length ? Office.followupQuestions(Object.assign({}, c, { name: c.contact, missing: miss }), c.lang, s.signer || '')
       : (Office.followups([Object.assign({}, c, { status: Office.OPEN.includes(c.status) ? c.status : Office.STATUS.lead, waitingSince: Office.iso(Office.addDays(new Date(), -30)) })], new Date(), 1)[0] || {}).text + (s.signer ? '\n' + s.signer : '');
     const r = await dialog(t('followupMsg'), `<textarea name="text" rows="8">${esc(q || '')}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
-    if (r && openWhatsApp(c.phone, r.text)) db.put('cases', { id, waitingSince: todayIso() });
+    if (r && await openWhatsAppAsk(c.phone, r.text)) db.put('cases', { id, waitingSince: todayIso() });
   };
   body.querySelector('#queue').onclick = async () => {
     const r = await dialog(t('addCall'), field('why', t('why'), ''), { ok: t('add') });
@@ -266,7 +266,7 @@ function tabMoney(body, c, s) {
     on('[data-send]', async () => {
       const text = a.status === APPROVAL.sent ? approvalReminder(a, c, c.lang, s.signer || DEFAULTS.signer, Office.daysBetween(a.sentAt, new Date())) : approvalMessage(a, c, c.lang, s.signer || DEFAULTS.signer);
       const r = await dialog(t('approvalSend'), `<textarea name="text" rows="9">${esc(text)}</textarea><div class="row">${copyOf('[name=text]')}</div>`, { ok: t('whatsapp') });
-      if (r && openWhatsApp(c.phone, r.text)) db.put('approvals', { id: a.id, status: APPROVAL.sent, sentAt: a.sentAt || todayIso(), lastRemind: todayIso() });
+      if (r && await openWhatsAppAsk(c.phone, r.text)) db.put('approvals', { id: a.id, status: APPROVAL.sent, sentAt: a.sentAt || todayIso(), lastRemind: todayIso() });
     });
   });
 }
