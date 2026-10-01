@@ -2,22 +2,29 @@
    "call Yossi back". Pure parsing, tested; the screens decide what to open. */
 import Office from './office.js';
 import { trim, str, phoneDigits, phonePretty } from './core.js';
-import { parseReminder, takeWhen } from './travel.js';
+import { parseReminder, takeWhen, loose, polite, amountNum } from './travel.js';
 
-const SEND = /^(?:שלחי|שלח|תשלחי|תשלח|לשלוח|send|envoie|envoyer|envoyez)(?=\s|$)/i;
-const INVOICE = /(חשבונית|חשבון עסקה|דרישת תשלום|invoice|facture)/i;
-const TO = /(?:\s(?:ל|אל|to|à)\s*|\s(?:למספר|לטלפון|למייל|to number|to phone|au numéro|par mail)\s*)/i;
+const SEND = loose(/^(?:שלחי|שלח|תשלחי|תשלח|לשלוח|send|forward|envoie|envoyer|envoyez|envoie-moi|transmets|transmettre|fais suivre)(?=\s|$)/i);
+const INVOICE = loose(/(חשבונית|חשבון עסקה|דרישת תשלום|invoice|proforma|facture)/i);
+const TO = loose(/(?:\s(?:ל|אל|to|à)\s*|\s(?:למספר|לטלפון|למייל|to number|to phone|au numéro|par mail)\s*)/i);
 
-// "(save|add) (the) (phone|number|mail) of X 052..." in three languages, or "X's phone is 052..."
-const CONTACT = /(?:^(?:שמרי|תשמרי|שמור|הוסיפי|תוסיפי|הוסף|save|add|enregistre|ajoute)\s+(?:את\s+|the\s+|le\s+|la\s+|l['’]\s*)?(?:ה)?(?:טלפון|מספר|מייל|אימייל|phone|number|mail|e-mail|email|numéro|téléphone)\s+(?:של\s+|of\s+|de\s+|d['’]\s*)?([^:,\d@]+?)\s*[:,]?\s+(?=[+0\d]|[A-Za-z0-9._%+\-]+@))|(?:^(?:ה)?(?:טלפון|מספר|מייל|אימייל|phone|number|mail|e-mail|email|numéro|téléphone)\s+(?:של\s+|of\s+|de\s+|d['’]\s*)([^:,\d@]+?)\s*(?:הוא|זה|is|est|[:,])?\s+(?=[+0\d]|[A-Za-z0-9._%+\-]+@))/i;
+// "(save|add) (the) (phone|number|mail) of X 052..." in three languages, "the number of X is 052...", "X's phone is 052..."
+const CT_NOUN = "(?:טלפון|מספר|מייל|אימייל|נייד|phone number|phone|number|mobile number|mobile|cell|cellphone|mail|e-mail address|e-mail|email address|email|numéro de téléphone|numéro de portable|numéro|téléphone|portable|adresse mail|adresse e-mail|adresse email|courriel)";
+const CONTACT = loose(new RegExp("(?:^(?:שמרי|תשמרי|שמור|הוסיפי|תוסיפי|הוסף|save|add|note|keep|enregistre|enregistrer|ajoute|ajouter|garde|note)\\s+(?:את\\s+|the\\s+|le\\s+|la\\s+|l')?(?:ה)?" + CT_NOUN + "\\s+(?:של\\s+|of\\s+|de\\s+|d')?([^:,\\d@]+?)\\s*[:,]?\\s*(?:הוא|זה|is|est|c'est(?:\\s+le)?)?\\s+(?=[+0\\d]|[A-Za-z0-9._%+\\-]+@))|(?:^(?:ה)?(?:the\\s+|le\\s+|la\\s+|l')?" + CT_NOUN + "\\s+(?:של\\s+|of\\s+|de\\s+|d')([^:,\\d@]+?)\\s*(?:הוא|זה|is|est|c'est(?:\\s+le)?|[:,])?\\s+(?=[+0\\d]|[A-Za-z0-9._%+\\-]+@))|(?:^(?:save|add|note|keep)?\\s*(?:the\\s+)?([^:,\\d@]+?)'s\\s+" + CT_NOUN + "\\s*(?:is|:|,)?\\s+(?=[+0\\d]|[A-Za-z0-9._%+\\-]+@))", 'i'));
 // "(send|write|tell) (a message|a whatsapp|an e-mail) to X[:,] body"
 // The body starts at ":" / "," or at a marker word: "ההודעה", "תכתבי", "תגידי לה", "שאלי" (a question), or a "ש..." clause.
-const MARK = '(?:ההודעה(?:\\s+היא)?|הודעה|תכתבי|כתבי|תגידי|תאמרי|שאלי|תשאלי|שאל|תשאל|saying|say|ask|asking|that|the message is|message|le message|dis|demande|que)';
-const MESSAGE = new RegExp('^(?:שלחי|שלח|תשלחי|תשלח|תכתבי|תכתוב|כתבי|תגידי|תאמרי|תגיד|send|write|tell|envoie|envoyer|écris|dis)\\s+(?:(?:את\\s+)?(?:ה)?(הודעה|הודעת וואטסאפ|הודעה בוואטסאפ|וואטסאפ|ווצאפ|מייל|אימייל|a message|a whatsapp|message|whatsapp|an e-mail|an email|e-mail|email|mail|un message|un mail|un e-mail|un whatsapp|courriel)\\s+)?(?:ל|אל\\s+|to\\s+|à\\s+|a\\s+)([^:,]+?)\\s*(?:[:,]|\\s(?=' + MARK + '(?:\\s|$)|ש[א-ת]))\\s*(.+)$', 'i');
-const MSG_VERB = /^(?:שלחי|שלח|תשלחי|תשלח|תכתבי|תכתוב|כתבי|תגידי|תאמרי|תגיד|send|write|tell|envoie|envoyer|écris|dis)\s+(?:(?:את\s+)?(?:ה)?(?:הודעה|הודעת וואטסאפ|הודעה בוואטסאפ|וואטסאפ|ווצאפ|מייל|אימייל|a message|a whatsapp|message|whatsapp|an e-mail|an email|e-mail|email|mail|un message|un mail|un e-mail|un whatsapp|courriel)\s+)?/i;
-const CHANNEL_TAIL = /^(?:בוואטסאפ|בווצאפ|במייל|באימייל|on whatsapp|by whatsapp|via whatsapp|by email|by mail|by e-mail|par whatsapp|par mail|par e-mail|sur whatsapp)\s*[:,]?\s*/i;
-const ASK_V = /^(?:שאלי|תשאלי|שאל|תשאל|ask(?: her| him| them)?|asking|demande(?:-lui)?)\s+/i;
-const SAY_V = /^(?:ההודעה(?:\s+היא)?|הודעה|תכתבי|כתבי|תגידי(?:\s+(?:לו|לה|להם))?|תאמרי|saying|say|that|the message is|message|le message(?:\s+est)?|dis(?:-lui)?|que)(?:\s*[:,]\s*|\s+)/i;
+const MARK = '(?:ההודעה(?:\\s+היא)?|הודעה|תכתבי|כתבי|תגידי|תאמרי|שאלי|תשאלי|שאל|תשאל|saying|say|ask|asking|that|the message is|message|telling|to say|le message|dis|demande|que|en disant|disant|qui dit|pour dire|pour lui dire)';
+const CHAN = '(?:הודעה|הודעת וואטסאפ|הודעה בוואטסאפ|וואטסאפ|ווצאפ|מייל|אימייל|a message|a whatsapp|a whats app|a text|a note|message|whatsapp|whats app|an e-mail|an email|e-mail|email|mail|un message|un mail|un e-mail|un email|un whatsapp|un whats app|un texto|un sms|courriel)';
+const MSG_VERBS = '(?:שלחי|שלח|תשלחי|תשלח|תכתבי|תכתוב|כתבי|תגידי|תאמרי|תגיד|send|write|tell|text|message|envoie|envoyer|envoyez|écris|écrire|dis|dis-lui|envoie-lui|écris-lui)';
+const MESSAGE = loose(new RegExp('^' + MSG_VERBS + '\\s+(?:(?:את\\s+)?(?:ה)?(' + CHAN + ')\\s+)?(?:ל|אל\\s+|to\\s+|à\\s+|a\\s+|au\\s+|aux\\s+|pour\\s+)([^:,]+?)\\s*(?:[:,]|\\s(?=' + MARK + '(?:\\s|$)|ש[א-ת]))\\s*(.+)$', 'i'));
+// "send Dana a message: hello" / "écris à Dana un mail : ..." (the person before the channel word)
+const MESSAGE2 = loose(new RegExp('^' + MSG_VERBS + '\\s+(?:ל|אל\\s+|to\\s+|à\\s+|a\\s+|au\\s+|pour\\s+)?([^:,]+?)\\s+(' + CHAN + ')\\s*(?:[:,]|\\s(?=' + MARK + '(?:\\s|$)))\\s*(.+)$', 'i'));
+const MSG_VERB = loose(new RegExp('^' + MSG_VERBS + '\\s+(?:(?:את\\s+)?(?:ה)?' + CHAN + '\\s+)?', 'i'));
+const CHANNEL_TAIL = loose(/^(?:בוואטסאפ|בווצאפ|במייל|באימייל|on whatsapp|by whatsapp|via whatsapp|on whats app|by text|by email|by mail|by e-mail|par whatsapp|par whats app|par mail|par e-mail|par email|par courriel|sur whatsapp|en whatsapp)\s*[:,]?\s*/i);
+const CHANNEL_HEAD = loose(new RegExp('^(?:a message|a whatsapp|a whats app|a text|an e-mail|an email|a mail|un message|un whatsapp|un whats app|un mail|un e-mail|un email|un texto|un sms)\\s*[:,]?\\s*', 'i'));
+const ASK_V = loose(/^(?:שאלי|תשאלי|שאל|תשאל|ask(?: her| him| them)?|asking|demande(?:-lui| lui)?|demande-leur)\s+/i);
+const SAY_V = loose(/^(?:ההודעה(?:\s+היא)?|הודעה|תכתבי|כתבי|תגידי(?:\s+(?:לו|לה|להם))?|תאמרי|saying|say|that|the message is|message|telling (?:her|him|them)|tell (?:her|him|them)|to say|le message(?:\s+est)?|dis(?:-lui| lui|-leur)?|que|qu'|en disant|disant|qui dit|pour dire|pour lui dire)(?:\s*[:,]\s*|\s+)/i);
+const IS_MAIL = loose(/(מייל|אימייל|mail|e-mail|email|courriel)/i);
 function findPerson(text, people) {
   const hay = Office.normHe(text); let bp = null, bl = 0;
   // the name inside the text ("send to Dana Levy the logo"), or the text inside the name ("Shoval" for "ארגון שוב״ל")
@@ -51,32 +58,37 @@ export function guessSupplier(text, suppliers) {
 /** What a command asks for: {kind: 'send'|'message'|'contact'|'invoice'|'supplierQuote'|'unknown', doc, to: {phone|email|name}} */
 // "build me a quote for X", "new lead: ...", "ask quotes from hotels for X", "open X", "call X", "task for X: ...", "note on X: ...", "what is today"
 const ACTIONS = [
-  ['today', /^(?:מה יש לי היום|מה יש היום|מה היום|what(?:'s| is) (?:on )?today|aujourd['’]hui|qu['’]est-ce qu['’]il y a aujourd['’]hui)\??$/i],
-  ['lead', /^(?:פנייה חדשה|פניה חדשה|לקוח חדש|ליד חדש|new lead|new client|new enquiry|nouveau client|nouvelle demande)\s*[:,]?\s*(.*)$/i],
-  ['quote', /^(?:תבני|תבנה|בני|הכיני|תכיני|תכין|צרי|build|make|prepare|create|prépare|fais|crée)\s+(?:לי\s+)?(?:את\s+)?(?:ה)?(?:הצעת מחיר|הצעה|a quote|quote|un devis|devis)(?:\s+(?:ל|for|pour)\s*(.+))?$/i],
-  ['ask', /^(?:תבקשי|בקשי|תבקש|תשלחי בקשה|ask for|request|demande)\s+(?:הצעות מחיר|הצעות|הצעת מחיר|הצעה|quotes|a quote|des devis|un devis)(?:\s+(?:מ|from|de|à|aux|au|auprès de|auprès des)\s*(.+?))?(?:\s+(?:ל|for|pour)\s*(.+))?$/i],
-  ['call', /^(?:תתקשרי|התקשרי|תתקשר|חייגי|תחייגי|call|appelle)\s+(?:ל|to\s+|à\s+)?(.+)$/i],
-  ['task', /^(?:משימה|תוסיפי משימה|הוסיפי משימה|תני משימה|add a task|new task|task|tâche|ajoute une tâche)\s*(?:ל|for|pour)?\s*([^:]+?)?\s*[:]\s*(.+)$/i],
-  ['note', /^(?:רשמי|תרשמי|כתבי|תכתבי|note|write down|écris|note que)\s+(?:הערה\s+|a note\s+|une note\s+)?(?:על|about|on|sur)\s+([^:]+?)\s*[:]\s*(.+)$/i],
-  ['open', /^(?:תפתחי|פתחי|תפתח|תראי לי|הראי לי|open|show me|ouvre|montre-moi)\s+(?:את\s+)?(?:ה)?(?:תיק|לקוח|ספק|case|client|supplier|dossier|fournisseur)?\s*(?:של\s+|of\s+|de\s+)?(.+)$/i]
-];
+  ['today', /^(?:מה יש לי היום|מה יש היום|מה היום|what(?:'s| is) (?:on )?(?:for )?today|what do i have today|today's (?:agenda|schedule|plan|programme)|aujourd'hui|qu'est-ce qu'il y a aujourd'hui|qu'est-ce que j'ai aujourd'hui|c'est quoi aujourd'hui|programme du jour|mon programme aujourd'hui|le programme d'aujourd'hui)\??$/i],
+  ['lead', /^(?:פנייה חדשה|פניה חדשה|לקוח חדש|ליד חדש|new lead|new client|new customer|new enquiry|new inquiry|new request|new prospect|nouveau client|nouvelle demande|nouveau lead|nouveau prospect|nouvelle piste|nouvelle requête|nouveau dossier)\s*[:,]?\s*(.*)$/i],
+  ['quote', /^(?:תבני|תבנה|בני|הכיני|תכיני|תכין|צרי|build|make|prepare|create|draft|write|do|prépare|fais|crée|monte|rédige|génère|établis|prépare-moi|fais-moi|crée-moi|monte-moi)\s+(?:לי\s+|me\s+|moi\s+|up\s+)?(?:את\s+)?(?:ה)?(?:הצעת מחיר|הצעה|a quote|quote|a quotation|quotation|a proposal|proposal|a price quote|un devis|devis|une proposition|proposition|une offre|offre)(?:\s+(?:ל|for|pour|to)\s*(.+))?$/i],
+  ['ask', /^(?:תבקשי|בקשי|תבקש|תשלחי בקשה|ask for|ask|request|get|collect|demande|demander|demandez|envoie une demande de|lance une demande de|send a request for)\s+(?:הצעות מחיר|הצעות|הצעת מחיר|הצעה|quotes|a quote|quotations|prices|offers|des devis|un devis|des prix|des offres|devis|prix)(?:\s+(?:מ|from the|from|auprès des|auprès de|aux|au|des|du|de la|de l'|de|à|to the|to)\s*(.+?))?(?:\s+(?:ל|for|pour)\s*(.+))?$/i],
+  ['ask', /^(?:ask|demande|demander)\s+(?:the\s+|aux\s+|les\s+|à\s+|au\s+|des\s+)?(.+?)\s+(?:for\s+)?(?:quotes|a quote|quotations|prices|offers|des devis|un devis|des prix|leurs prix|leur devis|un prix)(?:\s+(?:for|pour)\s*(.+))?$/i],
+  ['call', /^(?:תתקשרי|התקשרי|תתקשר|חייגי|תחייגי|call|phone|ring|dial|give a call to|appelle|appeler|appelez|téléphone|téléphoner|passe un coup de fil|donne un coup de fil|rappelle(?!\s*-?\s*moi))\s+(?:back\s+)?(?:ל|to\s+|à\s+|au\s+)?(.+?)(?:\s+back)?$/i],
+  ['task', /^(?:משימה|תוסיפי משימה|הוסיפי משימה|תני משימה|(?:add|create|new|make|put|note|log|set)\s+(?:a\s+|an\s+)?(?:task|to-?do)|(?:a\s+)?(?:task|to-?do)|(?:ajoute|crée|mets|note|ajouter|créer|nouvelle|une)\s+(?:une\s+)?(?:tâche|todo)|tâche)\s*(?:ל|for|pour|to|à)?\s*([^:]+?)?\s*[:]\s*(.+)$/i],
+  ['note', /^(?:רשמי|תרשמי|כתבי|תכתבי|note|write down|write|add|put|jot down|écris|note que|ajoute|mets|prends|notez)\s+(?:הערה\s+|a note\s+|une note\s+|a comment\s+|un commentaire\s+)?(?:על|about|on|regarding|sur|à propos de|concernant|pour)\s+([^:]+?)\s*[:]\s*(.+)$/i],
+  ['open', /^(?:תפתחי|פתחי|תפתח|תראי לי|הראי לי|open|show me|show|pull up|bring up|ouvre|ouvrir|ouvrez|montre-moi|montre|affiche)\s+(?:את\s+)?(?:ה)?(?:the\s+|le\s+|la\s+|l')?(?:תיק|לקוח|ספק|כרטיס|case|client|customer|supplier|vendor|card|file|dossier|fournisseur|fiche client|fiche fournisseur|fiche)?\s*(?:של\s+|of\s+|de\s+|du\s+|d')?(.+)$/i]
+].map(([k, re]) => [k, loose(re)]);
+const GOT_QUOTE = loose(/(קיבלתי|יש לי|הגיעה|got|received|i received|i got|reçu|j'ai reçu|on a reçu|j'ai eu)\s.*(הצעה|הצעת מחיר|quote|quotation|offer|proposal|devis|offre|proposition)/i);
+const QUOTE_FROM = loose(/^(הצעה|הצעת מחיר|quote|quotation|offer|devis|offre|proposition)\s+(מ|from|de|du|d')/i);
+const WANTS_ROY = loose(/(רועי|roy|בקש|ask|demande)/i);
 export function parseCommand(text, docs, people) {
   const t = trim(text);
   const out = { kind: 'unknown', text: t, doc: null, to: null };
   if (!t) return out;
+  const tp = polite(t); // "please" / "s'il te plaît" / "בבקשה" do not change an instruction (a message body keeps its words)
   for (const [kind, re] of ACTIONS) {
-    const m = re.exec(t); if (!m) continue;
+    const m = re.exec(tp); if (!m) continue;
     out.kind = kind;
     if (kind === 'lead') out.body = trim(m[1] || '');
     if (kind === 'quote' || kind === 'open' || kind === 'call') { out.who = trim(m[1] || ''); out.to = findPerson(out.who, people); }
-    if (kind === 'ask') { out.type = trim(m[1] || ''); out.who = trim(m[2] || ''); out.to = findPerson(out.who || out.type, people); if (!out.who && out.to) { out.who = out.type; out.type = ''; } }
+    if (kind === 'ask') { out.type = trim(m[1] || '').replace(loose(/^(?:the|les|des|aux|au|à|a|some)\s+/i), ''); out.who = trim(m[2] || ''); out.to = findPerson(out.who || out.type, people); if (!out.who && out.to) { out.who = out.type; out.type = ''; } }
     if (kind === 'task') { out.who = trim(m[1] || ''); const w = takeWhen(trim(m[2] || ''), new Date()); out.body = w.rest || trim(m[2] || ''); out.due = w.due; out.time = w.time; out.to = out.who ? findPerson(out.who, people) : null; }
     if (kind === 'note') { out.who = trim(m[1] || ''); out.body = trim(m[2] || ''); out.to = findPerson(out.who, people); }
     return out;
   }
   const rem = parseReminder(t, new Date()); if (rem) { out.kind = 'reminder'; out.reminder = rem; return out; }
-  if (INVOICE.test(t) && /(רועי|roy|בקש|ask|demande)/i.test(t)) { out.kind = 'invoice'; out.invoice = parseInvoiceRequest(t); return out; }
-  if (/(קיבלתי|יש לי|הגיעה|got|received|reçu|j'ai reçu)\s.*(הצעה|הצעת מחיר|quote|devis)/i.test(t) || /^(הצעה|הצעת מחיר|quote|devis)\s+(מ|from|de)\b/i.test(t)) {
+  if (INVOICE.test(t) && WANTS_ROY.test(t)) { out.kind = 'invoice'; out.invoice = parseInvoiceRequest(t); return out; }
+  if (GOT_QUOTE.test(tp) || QUOTE_FROM.test(tp)) {
     let bp = null, bl = 0;
     (people || []).filter(p => p.about === 'supplier' || !p.about).forEach(p => (p.names || []).forEach(n => { const k = Office.normHe(n); if (k && k.length >= 3 && k.length > bl && Office.normHe(t).indexOf(k) >= 0) { bp = p; bl = k.length; } }));
     out.kind = 'supplierQuote'; out.supplier = bp; return out;
@@ -86,15 +98,17 @@ export function parseCommand(text, docs, people) {
   const phone = /(?:\+972[\s\-]?|0)5\d(?:[\s\-]?\d){7}(?!\d)/.exec(t) || /(?:\+|00)\d[\d\s\-]{7,16}\d/.exec(t);
   out.phoneFound = phone ? phonePretty(phone[0]) : '';
   // "save Roy's phone 052-1234567" / "הטלפון של רועי 052..." / "המייל של דנה dana@x.com"
-  const contact = CONTACT.exec(t);
+  const contact = CONTACT.exec(tp);
   if (contact && (phone || email)) {
-    const who = trim(contact[1] || contact[2] || '').replace(/^(?:של|of|de)\s+/i, '');
+    const who = trim(contact[1] || contact[2] || contact[3] || '').replace(/^(?:של|of|de)\s+/i, '').replace(/^(?:the\s+|le\s+|la\s+)/i, '');
     out.kind = 'contact'; out.contact = { name: who, phone: phone ? phonePretty(phone[0]) : '', email: email ? email[0] : '' };
     out.to = findPerson(who, people); return out;
   }
   // a free message: "send a message to Roy: I'm late" / "תגידי לדנה ש..." / "mail à Marc : ..."
+  let viaHint = '';
   const cleanBody = (body, spoken) => {
     body = trim(body).replace(CHANNEL_TAIL, '');
+    const ch = CHANNEL_HEAD.exec(body); if (ch) { viaHint = IS_MAIL.test(ch[0]) ? 'email' : 'whatsapp'; body = trim(body.slice(ch[0].length)); }
     if (ASK_V.test(body)) { out.ask = true; return trim(body.replace(ASK_V, '')).replace(/[?.!]+$/, '').replace(/^אם\s/, 'האם ') + '?'; }
     if (SAY_V.test(body)) body = trim(body.replace(SAY_V, ''));
     // "תגידי לדנה שאני מאחרת": the ש is grammar, not part of the message. "שאל מתי" keeps its ש (it is the verb).
@@ -102,11 +116,12 @@ export function parseCommand(text, docs, people) {
     return trim(body);
   };
   const isGroup = who => /^(?:ה)?קבוצ|^(?:the\s+)?group|^(?:le\s+|au\s+)?groupe/i.test(trim(who));
+  const groupName = who => who.replace(loose(/^(?:ה)?קבוצ(?:ה|ת)\s*(?:של\s+)?|^(?:le\s+|au\s+)?groupe\s*(?:de\s+l'|de\s+la\s+|des\s+|du\s+|de\s+)?|^(?:the\s+)?group\s*(?:of\s+)?/i), '').trim() || who;
   // spoken (no ":" or ","): whatever comes after the number or the name is the message
   const positional = () => {
     if (!MSG_VERB.test(t) || INVOICE.test(t)) return null;
     const head = t.replace(MSG_VERB, '');
-    const via = /(מייל|אימייל|mail|e-mail|email|courriel)/i.test(t.slice(0, t.length - head.length)) ? 'email' : 'whatsapp';
+    const via = IS_MAIL.test(t.slice(0, t.length - head.length)) ? 'email' : 'whatsapp';
     const hit = email || phone;
     if (hit && head.indexOf(hit[0]) >= 0) {
       const at = head.indexOf(hit[0]);
@@ -114,9 +129,9 @@ export function parseCommand(text, docs, people) {
       if (!body) return null;
       const to = email ? { email: email[0] } : { phone: phonePretty(phone[0]) };
       // "send Dana 052-... hello": the number she read is used as is, and it can be kept on Dana's card afterwards
-      const named = findPerson(head.slice(0, at).replace(/^(?:ל|אל\s+|to\s+|à\s+)/, ''), people);
+      const named = findPerson(head.slice(0, at).replace(loose(/^(?:ל|אל\s+|to\s+|à\s+|au\s+)/i), ''), people);
       if (named && named.name) { to.name = named.name; to.about = named.about; to.id = named.id; if (!named.phone && to.phone) to.newPhone = true; else if (named.email && !to.email) to.email = named.email; }
-      return { via, body, to };
+      return { via: viaHint || via, body, to };
     }
     let best = null;
     // the full name, or just the first name ("ארבל" for "ארבל גבילי"), wherever it sits in the sentence
@@ -132,14 +147,15 @@ export function parseCommand(text, docs, people) {
     }));
     if (!best) return null;
     const body = cleanBody(head.slice(best.i + best.k.length), true);
-    return body ? { via, body, to: { name: best.p.label, phone: best.p.phone, email: best.p.email, about: best.p.about, id: best.p.id } } : null;
+    return body ? { via: viaHint || via, body, to: { name: best.p.label, phone: best.p.phone, email: best.p.email, about: best.p.about, id: best.p.id } } : null;
   };
   if (!/[:,]/.test(t)) { const p = positional(); if (p) { out.kind = 'message'; out.via = p.via; out.body = p.body; out.to = p.to; return out; } }
-  const msg = MESSAGE.exec(t);
+  let msg = MESSAGE.exec(t);
+  if (!msg) { const m2 = MESSAGE2.exec(t); if (m2) msg = [m2[0], m2[2], m2[1], m2[3]]; }
   if (msg) {
-    const via = /(מייל|אימייל|mail|e-mail|email|courriel)/i.test(msg[1] || '') ? 'email' : 'whatsapp';
+    const via = IS_MAIL.test(msg[1] || '') ? 'email' : 'whatsapp';
     // "send myself whatsapp ask..." : the channel word after the name is not part of the name
-    const who = trim(msg[2]).replace(/\s+(?:ב?וואטסאפ|ב?ווצאפ|ב?מייל|באימייל|הודעה|on whatsapp|by whatsapp|via whatsapp|a whatsapp|by e?-?mail|par whatsapp|par mail|un whatsapp)$/i, '').trim();
+    const who = trim(msg[2]).replace(loose(/\s+(?:ב?וואטסאפ|ב?ווצאפ|ב?מייל|באימייל|הודעה|on whatsapp|by whatsapp|via whatsapp|a whatsapp|a whats app|by e?-?mail|by text|par whatsapp|par whats app|par mail|par e-?mail|un whatsapp|un whats app)$/i), '').trim();
     const body = cleanBody(msg[3] || '', !/[:,]/.test(t.slice(0, t.length - trim(msg[3] || '').length)));
     out.kind = 'message'; out.via = via; out.body = body;
     // "send Dana 052-... : hello" through the marker path too: the number she read, kept on Dana's card when it has none
@@ -149,7 +165,7 @@ export function parseCommand(text, docs, people) {
       if (named && named.name) { to.name = named.name; to.about = named.about; to.id = named.id; if (!named.phone) to.newPhone = true; }
       out.to = to; return out;
     }
-    out.to = email ? { email: email[0] } : phone ? { phone: phonePretty(phone[0]) } : isGroup(who) ? { name: who.replace(/^(?:ה)?קבוצ(?:ה|ת)\s*(?:של\s+)?|^(?:the\s+)?group\s*(?:of\s+)?|^(?:le\s+|au\s+)?groupe\s*(?:de\s+|des\s+)?/i, '').trim() || who, group: true } : findPerson(who, people);
+    out.to = email ? { email: email[0] } : phone ? { phone: phonePretty(phone[0]) } : isGroup(who) ? { name: groupName(who), group: true } : findPerson(who, people);
     if (!out.to) out.to = { name: who };
     return out;
   }
@@ -209,7 +225,7 @@ export function parseInvoiceRequest(text, clients) {
   const out = { client: '', taxId: '', address: '', email: '', items: [], total: 0, kind: /חשבון עסקה|דרישת תשלום|proforma/i.test(t) ? 'חשבון עסקה' : 'חשבונית', channel: /(?:^|\s)(?:במייל|באימייל|מייל|by e?-?mail|par (?:e-?)?mail|courriel)(?=\s|$)/i.test(t) ? 'mail' : /וואטסאפ|whatsapp/i.test(t) ? 'wa' : '' };
   const em = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/.exec(t); if (em) out.email = em[0];
   // the company number, also as she dictates it: "ח.פ. 514 572 312", "חפ 51-457-2312"
-  const ID_WORD = "(?:ח\\.?\\s?פ\\.?|ע\\.?\\s?ר\\.?|ע\\.?\\s?מ\\.?|ת\\.?\\s?ז\\.?|מס'? ?חברה|מספר חברה|company no\\.?|company number|reg\\.?|siret|siren)";
+  const ID_WORD = "(?:ח\\.?\\s?פ\\.?|ע\\.?\\s?ר\\.?|ע\\.?\\s?מ\\.?|ת\\.?\\s?ז\\.?|מס'? ?חברה|מספר חברה|company no\\.?|company number|registration number|reg\\.? no\\.?|reg\\.?|vat (?:no\\.?|number)|siret|siren|numéro de (?:société|siret|tva)|n° ?(?:siret|tva)?)";
   const ID_AHEAD = "(?:" + ID_WORD + "\\s*:?\\s*)?(?:\\d{8,9}|\\d{2,3}[\\s\\-]\\d{3}[\\s\\-]\\d{3,4})(?!\\d)";
   const id = new RegExp(ID_WORD + "\\s*:?\\s*(\\d(?:[\\d\\s\\-]{6,14})\\d)", 'i').exec(t) || /(?:^|\s)(5\d{2}[\s\-]?\d{3}[\s\-]?\d{3})(?=\s|$|[,.])/.exec(t);
   if (id) { const digits = id[1].replace(/\D/g, ''); if (digits.length >= 8 && digits.length <= 9) out.taxId = digits; }
@@ -218,7 +234,9 @@ export function parseInvoiceRequest(text, clients) {
     // the number itself, with or without "ח.פ." before it (the recognizer sometimes drops the letters)
     || new RegExp("(?:חשבונית(?:\\s+מס)?|חשבון\\s+עסקה|דרישת\\s+תשלום|invoice|facture)\\s+(?:לי\\s+)?(?:בבקשה\\s+|please\\s+)?(?:ל|for\\s+|to\\s+|pour\\s+|à\\s+)([^\\n,.]{2,60}?)\\s*,?\\s*(?=" + ID_AHEAD + ")", 'i').exec(t)
     // the words right before the number ("... מועצה אזורית גליל עליון ח.פ. 500...")
-    || new RegExp("((?:[^\\s\\d,.]+\\s+){1,6}?[^\\s\\d,.]+)\\s*,?\\s*(?=" + ID_AHEAD + ")", 'i').exec(t);
+    || new RegExp("((?:[^\\s\\d,.]+\\s+){1,6}?[^\\s\\d,.]+)\\s*,?\\s*(?=" + ID_AHEAD + ")", 'i').exec(t)
+    // no company number at all: "invoice for Alpha Ltd 3000 plus VAT" / "facture pour Alpha : 10 000 € HT" / "חשבונית לחברת אלפא על 5000"
+    || loose(/(?:חשבונית(?:\s+מס)?|חשבון\s+עסקה|דרישת\s+תשלום|invoice|facture)\s+(?:לי\s+)?(?:בבקשה\s+|please\s+)?(?:(?:à|to|for|ל)\s*(?:roy|רועי)\s+)?(?:ל|for\s+|to\s+|pour\s+|à\s+)(?!(?:roy|רועי)(?:\s|$))([^\n,.:\d]{2,60}?)\s*(?=[:,]?\s*(?:על\s|of\s|sur\s|de\s|pour\s|d'un montant|\d))/i).exec(t);
   if (cl) {
     out.client = trim(cl[1]).replace(/\s*(ח\.?פ\.?|ע\.?ר\.?|ע\.?מ\.?)\s*\d*$/, '').replace(/\d{8,9}/, '').trim();
     // only the guessed forms carry the request words and the ל prefix; "לקוח: לקוח חדש" keeps its name whole
@@ -235,26 +253,29 @@ export function parseInvoiceRequest(text, clients) {
     || /^((?![^\n]*(?:₪|ש"?ח|מע["״]?מ|vat|\d{8,}))[^\n\d]{2,30}\s\d{1,4}\s*,\s*[^\n\d]{2,30})$/m.exec(t);
   if (addr) out.address = trim(addr[1]);
   // "עבור הפקה של חיים ומשה" / "for the J50 delegation": what the invoice is for
-  const forM = /(?:^|\s)(?:עבור|בעבור|בגין|for|pour)\s+([^\n.;]{2,80}?)(?=\s+(?:בנוסף|וגם|ותשלח|תשלח|שלח|ואבקש|אבקש|and also|also|et aussi)(?=\s|$)|[.;]|$)/i.exec(t);
-  const purpose = forM ? trim(forM[1]).replace(/\s+(?:על|of|de)\s+\d[\d,.]*.*$/, '').trim() : '';
+  // "for" / "pour" also introduce the client and Roy: the purpose is the first "for X" with no number and no request word in it
+  const forAll = [...t.matchAll(loose(/(?:^|\s)(?:עבור|בעבור|בגין|for|pour)\s+([^\n.;,]{2,80}?)(?=\s+(?:בנוסף|וגם|ותשלח|תשלח|שלח|ואבקש|אבקש|and also|also|et aussi)(?=\s|$)|[.;,]|$)/gi))].map(x => trim(x[1]));
+  const forM = forAll.find(x => !/(?:^|\s)\d{3,}|\d{1,3}[,.]\d{3}|חשבונית|חשבון|invoice|facture|roy|רועי|mail|מייל/i.test(x) && (!out.client || Office.normHe(x).indexOf(Office.normHe(out.client)) < 0));
+  const purpose = forM ? forM.replace(/\s+(?:על|of|de)\s+\d[\d,.]*.*$/, '').replace(/^(?:the\s+|la\s+|le\s+|l')?(?:client|customer)\s+/i, '').trim() : '';
   // amounts: "3,000 + מע"מ", "1595 פלוס מעמ", "10.500 plus VAT", "27,310+ מע״מ", "10000 לפני מע"מ", "5000 שקל"
-  const re = /([^\n.;]{0,60}?)(\d{1,3}(?:[,.]\d{3})+|\d+(?:\.\d+)?)\s*(?:₪|ש"?ח|שקל(?:ים)?|nis)?\s*(\+|פלוס|plus|כולל|incl\.?|TTC|HT|לפני|before|לא כולל|hors)?\s*(מע["״]?מ|vat|tva|taxe)?/gi;
+  const re = /([^\n.;]{0,60}?)(\d{1,3}(?:[ \u00a0\u202f]\d{3})+(?:[.,]\d{1,2})?|\d{1,3}(?:[,.]\d{3})+|\d+(?:[.,]\d{1,2})?)\s*(?:₪|ש"?ח|שקל(?:ים)?|nis|ils|€|euros?|eur|shekels?)?\s*(\+|פלוס|plus|כולל|incl\.?|including|TTC|HT|hors taxes?|לפני|before|excl\.?|excluding|לא כולל|hors)?\s*(מע["״]?מ|vat|tva|taxes?)?/gi;
   let m;
   while ((m = re.exec(t))) {
-    if (!m[4] && !/₪|ש"?ח|שקל/.test(m[0])) continue;
-    const num = Office.num(m[2].replace(/\.(\d{3})\b/g, ',$1'));
+    if (!m[4] && !/^(?:ttc|ht|hors|incl|excl)/i.test(m[3] || '') && !/₪|ש"?ח|שקל|€|euro|nis|ils|shekel/i.test(m[0])) continue;
+    const num = amountNum(m[2]);
     if (isNaN(num) || num < 50 || String(num) === out.taxId) continue;
     let desc = trim(m[1]).replace(/^(?:סכומים?|סכום|amount|montant)\s*:?\s*/i, '').replace(/[:\-–]+$/, '').trim();
     // the words before the number often carry the request itself ("תוציא לי חשבונית בבקשה ל weRisrael מקדמה"): keep what follows
     desc = desc.replace(/^.*?(?:חשבונית(?: מס)?|חשבון עסקה|דרישת תשלום|invoice|facture)\s*(?:בבקשה|please|s'il te plaît)?\s*/i, '');
-    if (known) [known.name, known.legalName].concat(str(known.aliases).split(/[,;]+/)).map(trim).filter(Boolean).sort((a, b) => b.length - a.length).forEach(n => {
+    (known ? [known.name, known.legalName].concat(str(known.aliases).split(/[,;]+/)) : [out.client]).map(trim).filter(Boolean).sort((a, b) => b.length - a.length).forEach(n => {
       const re = new RegExp('^(?:ל|for|to|pour|à)?\\s*' + n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\./g, '[.׳\'"״]?').replace(/\s+/g, '\\s*') + '[.׳\'"״]*\\s*(?:על|of|sur|de)?\\s*', 'i');
       desc = desc.replace(re, '');
     });
-    desc = desc.replace(/^(?:על|of|sur|de|בבקשה|please)\s+/i, '').replace(/^(?:עבור|בעבור|בגין|for|pour)\s+/i, '').replace(/^ו(?=[א-ת]{3,})/, '').replace(/\s+(?:על|of|sur|de)$/i, '').trim();
+    desc = desc.replace(/^(?:על|of|sur|de|בבקשה|please)\s+/i, '').replace(/^(?:עבור|בעבור|בגין|for|pour)\s+/i, '').replace(/^ו(?=[א-ת]{3,})/, '').replace(/\s+(?:על|of|sur|de)$/i, '').replace(/^[\s,:;\-–]+|[\s,:;\-–]+$/g, '').trim();
     if (!desc || /^(?:חשבונית|חשבון|invoice|facture|בבקשה|please|על|of|sur)$/i.test(desc)) desc = purpose;
     if (!desc) { const after = /^[^\n.;]{2,80}?(?=\s+(?:בנוסף|וגם|ותשלח|תשלח|שלח|ואבקש|אבקש|and also|also|et aussi)(?=\s|$)|[.;\n]|$)/.exec(t.slice(re.lastIndex).replace(/^\s*(?:מע["״]?מ|vat|tva)?\s*/i, '')); if (after) desc = trim(after[0]).replace(/\s*(?:סיימתי|תודה)\s*$/, ''); }
     const incl = m[3] && /כולל|incl|TTC/i.test(m[3]);
+    if (!desc && !out.items.length) desc = purpose;
     out.items.push({ desc, amount: incl ? Math.round(num / 1.18) : num, incl: !!incl });
   }
   out.total = out.items.reduce((a, x) => a + x.amount, 0);

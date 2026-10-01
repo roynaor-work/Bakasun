@@ -17,7 +17,7 @@ const WHO = loose(/(?:^|\s)(?:של|מול|עם|אצל|לאירוע של|לאיר
 /** {who, alt, focus: 'all'|'suppliers'|'client'} or null when the text is not this question.
     `alt` is `who` without a Hebrew one-letter prefix (ל/ב): "לשוב״ל" → "שוב״ל"; the caller tries who first, then alt. */
 export function parseMissing(text) {
-  const t = polite(trim(str(text)).replace(/’/g, "'")).replace(/[?؟!.]+$/, '');
+  const t = polite(trim(str(text)).replace(/’/g, "'")).replace(/[?!.]+$/, '');
   if (!t || t.length > 120 || !ASK.test(t)) return null;
   const focus = FOCUS_SUP.test(t) ? 'suppliers' : FOCUS_CLIENT.test(t) ? 'client' : 'all';
   let rest = t.replace(ASK, '').replace(/^\s*(?:לי|me|moi)\b/i, '').replace(STRIP, ' ').replace(/\s+/g, ' ').trim();

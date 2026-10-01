@@ -23,9 +23,9 @@ export function loose(re) {
   }
   return new RegExp(out, re.flags);
 }
-const POLITE = loose(/(?:^|\s)(?:please|pls|s'il te plaît|s'il vous plaît|stp|svp|בבקשה)(?=\s|$|[.!,?])[,]?/gi);
+const POLITE = loose(/,?(?:^|\s)(?:please|pls|s'il te plaît|s'il vous plaît|stp|svp|בבקשה)(?=\s|$|[.!,?])[,]?/gi);
 /** The sentence without "please" / "s'il te plaît" / "בבקשה", wherever she put it. */
-export function polite(text) { return trim(str(text).replace(POLITE, ' ')).replace(/^[,:;]\s*/, ''); }
+export function polite(text, keepLines) { const x = str(text).replace(POLITE, ' '); return (keepLines ? x.replace(/[ \t]+/g, ' ').replace(/^\s+|\s+$/g, '') : trim(x)).replace(/^[,:;]\s*/, ''); }
 /** "1,500" → 1500, "1 500" → 1500, "1 561,86" → 1561.86, "10.500" → 10500, "3000" → 3000. NaN when it is not a number. */
 export function amountNum(s) {
   let x = str(s).replace(/[\s  ₪$€]/g, '').replace(/(?:ש"?ח|שקל(?:ים)?|ils|nis|shekels?|euros?|eur|dollars?|usd)$/i, '');

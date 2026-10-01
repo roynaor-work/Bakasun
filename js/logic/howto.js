@@ -8,7 +8,7 @@ const HE = /^[֐-׿]+$/;
 
 /** The words she is asking about, or null when it is not a "how do I" question. */
 export function parseHow(text) {
-  const t = polite(trim(str(text)).replace(/[?؟!.]+$/, '').replace(/’/g, "'"));
+  const t = polite(trim(str(text)).replace(/[?!.]+$/, '').replace(/’/g, "'"));
   if (!t || t.length > 120 || !ASK.test(t)) return null;
   const rest = t.replace(ASK, '').trim();
   return { words: terms(rest), text: rest };

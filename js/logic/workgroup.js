@@ -3,26 +3,30 @@
    (WhatsApp, mail, a brief, tasks) and saves the group on the event. Nothing is sent by itself. */
 import { str, trim } from './core.js';
 import Office from './office.js';
+import { loose, polite } from './travel.js';
 
-const VERB = '(?:פתחי|פתח|תפתחי|תפתח|צרי|תצרי|צור|הקימי|תקימי|open|create|make|set\\s+up|start|ouvre|ouvrir|crée|créer|monte)';
-const GROUP = '(?:groupe\\s+de\\s+travail|groupe\\s+whatsapp|groupe|équipe|קבוצת\\s+(?:ה)?עבודה|קבוצת\\s+(?:ה)?וואטסאפ|קבוצת\\s+(?:ה)?ווצאפ|קבוצת\\s+(?:ה)?פרויקט|קבוצה|צוות\\s+עבודה|working\\s+group|work\\s+group|project\\s+group|whatsapp\\s+group|group|whatsapp\\s+group)';
-const HEAD = new RegExp('^' + VERB + '\\s+(?:לי\\s+)?(?:בבקשה\\s+)?(?:please\\s+)?(?:me\\s+)?(?:moi\\s+)?(?:a\\s+|an\\s+|un\\s+|une\\s+)?(?:את\\s+)?(?:ה)?' + GROUP + '(?=\\s|$)\\s*(.*)$', 'i');
+const VERB = '(?:פתחי|פתח|תפתחי|תפתח|צרי|תצרי|צור|הקימי|תקימי|open|create|make|set\\s+up|start|form|build|new|ouvre|ouvrir|ouvrez|crée|créer|créez|monte|monter|fais|faire|lance|lancer|mets\\s+en\\s+place|forme|constitue|nouveau|nouvelle)';
+const GROUP = '(?:groupe\\s+de\\s+travail|groupe\\s+de\\s+projet|groupe\\s+d\'équipe|groupe\\s+whatsapp|groupe\\s+whats\\s?app|groupe\\s+wa|groupe\\s+mail|groupe|équipe\\s+projet|équipe|קבוצת\\s+(?:ה)?עבודה|קבוצת\\s+(?:ה)?וואטסאפ|קבוצת\\s+(?:ה)?ווצאפ|קבוצת\\s+(?:ה)?פרויקט|קבוצה|צוות\\s+עבודה|working\\s+group|work\\s+group|project\\s+group|whatsapp\\s+group|whats\\s?app\\s+group|wa\\s+group|team\\s+group|group\\s+chat|chat\\s+group|group|team)';
+const HEAD = loose(new RegExp('^' + VERB + '(?:-moi|-nous)?\\s+(?:לי\\s+)?(?:me\\s+|moi\\s+|us\\s+)?(?:a\\s+|an\\s+|un\\s+|une\\s+|le\\s+|la\\s+|the\\s+)?(?:את\\s+)?(?:ה)?(?:new\\s+|nouveau\\s+|nouvelle\\s+|petit\\s+|petite\\s+|small\\s+)?' + GROUP + '(?=\\s|$)\\s*(.*)$', 'i'));
 const COUNT = /(?:של\s+|of\s+|de\s+)?(?:\d+|שני|שתי|שלושה|שלוש|ארבעה|ארבע|חמישה|חמש|שישה|שש|שבעה|שבע|שמונה|תשעה|תשע|עשרה|עשר|two|three|four|five|six|seven|eight|nine|ten|deux|trois|quatre|cinq|six|sept|huit|neuf|dix)\s+(?:אנשים|משתתפים|חברים|people|persons|members|personnes|membres)\s*/i;
+const CASE_WITH = loose(/^(?:ל|של\s+|עבור\s+|לאירוע\s+(?:של\s+)?|לתיק\s+(?:של\s+)?|for\s+(?:the\s+)?(?:event\s+(?:of\s+)?|project\s+(?:of\s+)?)?|of\s+|on\s+|pour\s+(?:l'événement\s+(?:de\s+)?|le\s+projet\s+(?:de\s+)?|le\s+dossier\s+(?:de\s+)?)?|de\s+|du\s+|sur\s+)(.+?)\s+(?:עם|with|avec)\s+(.+)$/i);
+const CASE_ONLY = loose(/^(?:ל|של\s+|עבור\s+|for\s+(?:the\s+)?|pour\s+(?:le\s+)?|de\s+|du\s+)/i);
+const TAIL_OPT = loose(/\s*,?\s*(?:(?:par|by|via|on|sur|en|avec|with|and|et)\s+)?(?:a\s+|an\s+|un\s+|une\s+|des\s+|le\s+|la\s+|the\s+)?(?:ב?וואטסאפ|ב?ווצאפ|ב?ואטסאפ|whats\s?app|whats-app|what's\s?app|ב?מייל|ב?אימייל|e?-?mail|courriel|תדריך|brief|briefing|résumé|summary|משימות|משימה לכולם|tasks|tâches|taches)\s*$/i);
 
 /** {names: [...], caseName: ''} or null when the sentence is not a group request. */
 export function parseWorkGroup(text) {
-  const t = trim(str(text)).replace(/[.!?]+$/, '');
+  const t = polite(trim(str(text)).replace(/’/g, "'")).replace(/[.!?]+$/, '');
   const m = HEAD.exec(t); if (!m) return null;
   let rest = trim(m[1] || '').replace(COUNT, ' ').replace(/\s+/g, ' ').trim();
   let caseName = '';
   // "for the Shoval event with ..." / "של שובל עם ..."
-  const cm = /^(?:ל|של\s+|עבור\s+|לאירוע\s+(?:של\s+)?|לתיק\s+(?:של\s+)?|for\s+(?:the\s+)?(?:event\s+(?:of\s+)?)?|of\s+|pour\s+(?:l['’]événement\s+(?:de\s+)?)?|de\s+)(.+?)\s+(?:עם|with|avec)\s+(.+)$/i.exec(rest);
-  if (cm) { caseName = trim(cm[1]).replace(/\s+(?:event|événement|אירוע)$/i, ''); rest = trim(cm[2]); }
-  else { const wm = /^(?:עם|with|avec)\s+(.+)$/i.exec(rest); if (wm) rest = trim(wm[1]); else if (/^(?:ל|של\s+|עבור\s+|for\s+|pour\s+|de\s+)/i.test(rest)) { caseName = rest.replace(/^(?:ל|של\s+|עבור\s+|for\s+|pour\s+|de\s+)/i, '').trim(); rest = ''; } }
+  const cm = CASE_WITH.exec(rest);
+  if (cm) { caseName = trim(cm[1]).replace(loose(/\s+(?:event|project|événement|projet|אירוע)$/i), ''); rest = trim(cm[2]); }
+  else { const wm = /^(?:עם|with|avec)\s+(.+)$/i.exec(rest); if (wm) rest = trim(wm[1]); else if (CASE_ONLY.test(rest)) { caseName = rest.replace(CASE_ONLY, '').trim(); rest = ''; } }
   rest = rest.replace(COUNT, ' ').replace(/\s+/g, ' ').trim();
   // "... with Marina, Rotem and Idit, whatsapp": the way she wants, said in the same breath, is not a person
   let opt = null;
-  const tail = /\s*,?\s*(?:ב?וואטסאפ|ב?ווצאפ|ב?ואטסאפ|whats\s?app|ב?מייל|ב?אימייל|e?-?mail|תדריך|brief|משימות|משימה לכולם|tasks)\s*$/i.exec(rest);
+  const tail = TAIL_OPT.exec(rest);
   if (tail) { opt = groupOption(trim(tail[0]).replace(/^,\s*/, '').replace(/^ו(?=[א-ת])/, '')); if (typeof opt !== 'string') opt = null; rest = rest.slice(0, tail.index).trim(); }
   return { names: splitNames(rest), caseName, opt };
 }
@@ -76,18 +80,20 @@ export function editDistance(a, b) {
   return prev[n];
 }
 
+const PRE = "(?:(?:par|by|via|on|sur|en|avec|with|and|et)\\s+)?(?:a\\s+|an\\s+|un\\s+|une\\s+|des\\s+|le\\s+|la\\s+|the\\s+)?";
 const OPTION = [
-  ['wa', /^(?:ב?וואטסאפ|ב?ווצאפ|ב?ואטסאפ|whats\s?app|on whatsapp|par whatsapp|sur whatsapp)\s*[.!]?$/i],
-  ['mail', /^(?:ב?מייל|ב?אימייל|ב?דוא"?ל|e?-?mail|by e?-?mail|par mail|par e-?mail|courriel)\s*[.!]?$/i],
-  ['brief', /^(?:תדריך|ה?תדריך|סיכום|דף פרויקט|brief|briefing|summary|le brief|résumé)\s*[.!]?$/i],
-  ['tasks', /^(?:משימות|משימה לכולם|משימות לכולם|tasks|a task for everyone|tâches|des tâches)\s*[.!]?$/i],
-  ['save', /^(?:שמרי|תשמרי|שמור|רק לשמור|save|just save|enregistre|sauvegarde)\s*[.!]?$/i]
-];
+  ['wa', '^' + PRE + "(?:ב?וואטסאפ|ב?ווצאפ|ב?ואטסאפ|whats\\s?app|whats-app|what's\\s?app|wa)\\s*[.!]?$"],
+  ['mail', '^' + PRE + '(?:ב?מייל|ב?אימייל|ב?דוא"?ל|e?-?mail|courriel|mél)\\s*[.!]?$'],
+  ['brief', '^' + PRE + '(?:תדריך|ה?תדריך|סיכום|דף פרויקט|brief|briefing|summary|project sheet|le brief|résumé|fiche projet)\\s*[.!]?$'],
+  ['tasks', '^' + PRE + '(?:משימות|משימה לכולם|משימות לכולם|tasks|a task for everyone|a task for each|a task each|tâches|des tâches|une tâche pour tous|une tâche pour chacun|une tâche à tous)\\s*[.!]?$'],
+  ['save', "^(?:(?:just|only|juste|seulement|rien,?)\\s+)?(?:שמרי|תשמרי|שמור|רק לשמור|save|save it|save the group|just save|keep it|enregistre|enregistrer|sauvegarde|sauvegarder|garde|garder|enregistre-le|rien)(?:\\s+(?:seulement|juste|only|for now|pour l'instant|pour le moment))?\\s*[.!]?$"]
+].map(([k, src]) => [k, loose(new RegExp(src, 'i'))]);
+const ADD_ONE = loose(/^(?:תוסיפי|הוסיפי|תוסיף|הוסף|add|ajoute|ajoutes|rajoute|mets|include)\s+(?:את\s+|גם\s+את\s+|גם\s+|also\s+|aussi\s+)?(.+?)\s*(?:לקבוצה|to the group|in the group|au groupe|dans le groupe|too|also|aussi)?\s*[.!]?$/i);
 /** What she answered to "how do you want to work with the group?": 'wa' | 'mail' | 'brief' | 'tasks' | 'save' | {add: name} | null. */
 export function groupOption(text) {
-  const t = trim(str(text));
+  const t = polite(trim(str(text)).replace(/’/g, "'"));
   for (const [k, re] of OPTION) if (re.test(t)) return k;
-  const add = /^(?:תוסיפי|הוסיפי|תוסיף|הוסף|add|ajoute)\s+(?:את\s+|גם\s+את\s+|גם\s+)?(.+?)\s*(?:לקבוצה|to the group|au groupe)?\s*[.!]?$/i.exec(t);
+  const add = ADD_ONE.exec(t);
   if (add) return { add: trim(add[1]) };
   return null;
 }

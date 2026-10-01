@@ -200,7 +200,7 @@ function showMissing(out, mq) {
 function showAgenda(out, q) {
   const draw = () => {
     const a = agenda(db.snapshot(), q, new Date());
-    const when = q.key === 'today' ? t('agendaToday') : q.key === 'tomorrow' ? t('agendaTomorrow') : q.key === 'week' ? t('agendaWeek') : q.key === 'all' ? t('agendaAll') : Office.fmt(q.from);
+    const when = q.key === 'today' ? t('agendaToday') : q.key === 'tomorrow' ? t('agendaTomorrow') : q.key === 'week' ? t('agendaWeek') : q.key === 'nextweek' ? t('agendaNextWeek') : q.key === 'all' ? t('agendaAll') : Office.fmt(q.from);
     const line = x => `<div class="row between" data-task="${esc(x.id)}"><span>${x.due && q.key !== 'today' && q.key !== 'tomorrow' && q.key !== 'day' ? esc(Office.fmt(x.due)) + ' · ' : ''}${x.time ? esc(x.time) + ' · ' : ''}${esc(x.title)}${x.who && x.who !== t('me') ? ' <span class="sub">' + esc(x.who) + '</span>' : ''}</span><button class="btn sm ok" data-done>✓</button></div>`;
     const ev = c => `<div><a href="#/case/${esc(c.id)}">${esc(c.client)}</a> · ${esc(c.kind || '')}${c.date ? ' · ' + esc(Office.fmt(c.date)) : ''}${c.place ? ' · ' + esc(c.place) : ''}</div>`;
     const cl = c => `<div><a href="#/calls">${esc(c.who || c.name || c.client || '')}</a>${c.about ? ' · ' + esc(c.about) : ''}</div>`;
@@ -330,7 +330,7 @@ async function tabCommand(body, s, ctx) {
     if (c.kind === 'send' && !c.to && /(?:^|\s)(?:ל|של\s+|עבור\s+)?(?:רועי|roy)(?=\s|$)/i.test(text)) c.to = { name: s.invoiceName || DEFAULTS.invoiceName, email: s.invoiceEmail || DEFAULTS.invoiceEmail, about: 'team' };
     if (c.kind !== 'send' || (!c.doc && !c.to)) { out.innerHTML = `<p class="warnbox">${esc(t('cmdUnknown'))}</p>`; return; }
     if (c.doc && c.doc.missing) {
-      out.innerHTML = `<div class="card stack"><div class="title">${esc(c.doc.title)} <span class="badge warn">${esc(t('paperMissing'))}</span></div><p>${esc(t('docMissingYet'))}</p>${c.doc.paper.note ? `<p class="hint">${esc(c.doc.paper.note)}</p>` : ''}${c.to ? `<p class="sub">${esc(t('recipient'))}: ${esc(c.to.name || c.to.email || c.to.phone || '')}</p>` : ''}<div class="row"><a class="btn sm" href="#/settings">${esc(t('docMissingWhere'))}</a><a class="btn sm ghost" href="#/files">${esc(t('files'))}</a></div></div>`;
+      out.innerHTML = `<div class="card stack"><div class="title">${esc(c.doc.title)} <span class="badge warn">${esc(t('paperMissing'))}</span></div><p>${esc(t('docMissingYet'))}</p>${c.doc.paper.note ? `<p class="hint">${esc(c.doc.paper.note)}</p>` : ''}${c.to ? `<p class="sub">${esc(t('recipient'))}: ${esc(c.to.name || c.to.email || c.to.phone || '')}</p>` : ''}<div class="row"><a class="btn sm" href="#/settings">${esc(t('docMissingWhere'))}</a><a class="btn sm ghost" href="#/files">${esc(t('cfTitle') || t('tFiles'))}</a></div></div>`;
       return;
     }
     out.innerHTML = `<div class="card"><div class="kv"><dt>${esc(t('document'))}</dt><dd>${c.doc ? esc(c.doc.title) : `<span class="badge warn">${esc(t('docNotFound'))}</span>`}</dd><dt>${esc(t('recipient'))}</dt><dd class="ltr">${c.to ? esc(c.to.name || c.to.phone || c.to.email) + (c.to.name && c.to.phone ? ' · ' + esc(c.to.phone) : '') + (c.to.phone || c.to.email ? copyBtn(c.to.phone || c.to.email, { icon: true }) : '') : `<span class="badge warn">${esc(t('noRecipient'))}</span>`}</dd></div>
