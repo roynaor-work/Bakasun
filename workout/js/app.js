@@ -26,7 +26,7 @@ const credits = () => unlockCredits(store.sessions.length, (unlockedList() || GA
 
 let figures = [], activeGame = null;
 function mount(html, full = false) {
-  figures.forEach(f => f.stop()); figures = [];
+  figures.forEach(f => { f.stop(); if (f.dispose) f.dispose(); }); figures = []; /* dispose: הבמה התלת-ממדית משחררת את ה-WebGL */
   if (activeGame) { activeGame.stop(); activeGame = null; }
   stopSpeak();
   clearInterval(tick); tick = 0;
@@ -38,8 +38,22 @@ function fig(svg, ex, speed = 1) { const f = new Figure(svg); f.play(ex, speed);
 function figs(sel = 'svg[data-ex]') { return [...app.querySelectorAll(sel)].map(s => fig(s, byId[s.dataset.ex])); }
 const figSvg = (exId, cls = '') => `<svg class="figure ${cls}" data-ex="${exId}" aria-hidden="true"></svg>`;
 // הבמה במסך התרגיל: סרטון אמיתי אם יש לתרגיל (vids.js), אחרת דמות המקלות. wireStage מחזיר אובייקט עם אותו ממשק: play(ex, speed), stop, onRep
-const stageHtml = ex => hasVideo(ex.id) ? `<div class="exmedia" data-vid="${ex.id}"></div>` : figSvg(ex.id);
+const webgl = () => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; } };
+const use3d = () => store.profile.stage3d !== false && webgl();
+const stageHtml = ex => hasVideo(ex.id) ? `<div class="exmedia" data-vid="${ex.id}"></div>` : use3d() ? `<div class="exmedia stage3d" data-ex3d="${ex.id}"></div>` : figSvg(ex.id);
+// הדמות המצוירת בתלת-ממד (js/stage3d.js, נטען רק כשצריך כי הוא מביא את three.js). עד שהמודול נטען הפקודות נשמרות; אם נכשל, דמות המקלות
+function wireStage3d(box) {
+  const ex = byId[box.dataset.ex3d];
+  const f = { _s: null, _rep: null, _last: null, get onRep() { return this._rep; }, set onRep(fn) { this._rep = fn; if (this._s) this._s.onRep = fn; },
+    play(e, speed = 1) { this._last = ['play', e, speed]; if (this._s) this._s.play(e, speed); }, still(e) { this._last = ['still', e]; if (this._s) this._s.still(e); },
+    stop() { if (this._s) this._s.stop(); }, dispose() { if (this._s && this._s.dispose) this._s.dispose(); this._s = null; },
+    _attach(s) { this._s = s; s.onRep = this._rep; if (this._last) { const [k, e, sp] = this._last; k === 'play' ? s.play(e, sp) : s.still(e); } } };
+  const fallback = () => { if (!box.isConnected) return; box.outerHTML = figSvg(ex.id); const svg = app.querySelector(`svg[data-ex="${ex.id}"]`); if (svg) f._attach(new Figure(svg)); };
+  import('./stage3d.js').then(m => { if (!box.isConnected) return; new m.Stage3D(box, null, { onReady: s => f._attach(s), onFail: fallback }); }).catch(fallback);
+  f.play(ex, 1); figures.push(f); return f;
+}
 function wireStage() {
+  const box3 = app.querySelector('.exmedia[data-ex3d]'); if (box3) return wireStage3d(box3);
   const box = app.querySelector('.exmedia[data-vid]');
   if (!box) return figs()[0];
   let v = null;
@@ -715,6 +729,7 @@ function settings() {
       <div class="toggle"><b>צלילים</b><input type="checkbox" id="sound" ${p.sound ? 'checked' : ''}></div>
       <div class="toggle"><b>הסבר בקול בעברית</b><input type="checkbox" id="voice" ${p.voice !== false ? 'checked' : ''}></div>
       <div class="toggle"><b>סרטון פתיחה לפני אימון</b><input type="checkbox" id="intro" ${p.intro !== false ? 'checked' : ''}></div>
+      <div class="toggle"><b>דמות מצוירת בתלת-ממד בתרגילים</b><input type="checkbox" id="stage3d" ${p.stage3d !== false ? 'checked' : ''}></div>
       <div class="toggle"><b>לשמוע אותו סופר (מיקרופון)</b><input type="checkbox" id="listen" ${p.listen !== false ? 'checked' : ''} ${canListen() ? '' : 'disabled'}></div>
       <p class="muted small">${canListen() ? 'ב"ספור איתי": האפליקציה סופרת בקול, ואם הוא אומר את המספר הבא לפניה, היא מתקדמת איתו. בפעם הראשונה הטלפון יבקש אישור למיקרופון.' : 'הדפדפן הזה לא מזהה דיבור. בכרום באנדרואיד זה עובד.'}</p>
       <label class="field">הקול<select id="voiceName"><option value="">אוטומטי (הטוב ביותר במכשיר)</option>${hebrewVoices().map(v => `<option value="${esc(v.name)}" ${v.name === p.voiceName ? 'selected' : ''}>${esc(v.name)}${v.localService === false ? ' (רשת)' : ''}</option>`).join('')}</select></label>
@@ -802,6 +817,7 @@ function settings() {
   app.querySelectorAll('[data-playvid]').forEach(b => b.onclick = async () => { const box = app.querySelector(`.vidprev[data-prev="${b.dataset.playvid}"]`); if (!box.hidden) { box.hidden = true; box.innerHTML = ''; return; } const m = await videoUrl(b.dataset.playvid, store.profile.familyCode); if (!m) return; box.innerHTML = m.kind === 'image' ? `<img class="exvid" src="${m.url}" alt="">` : `<video class="exvid" src="${m.url}" autoplay muted loop playsinline controls></video>`; box.hidden = false; });
   app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { const id = b.dataset.delvid, inCloud = !!cloudVideos()[id]; if (!confirm(`למחוק את הסרטון של "${byId[id].name}"${inCloud ? ' מהטלפון הזה ומהענן (גם מהטלפון של הילד)' : ''}?`)) return; await deleteVideo(id); if (inCloud && store.profile.familyCode) await cloudDelete(store.profile.familyCode, id); settings(); });
   $('#intro').onchange = e => store.setProfile({ intro: e.target.checked });
+  $('#stage3d').onchange = e => store.setProfile({ stage3d: e.target.checked }); /* כיבוי = דמות המקלות (טלפון איטי / בלי WebGL) */
   $('#voicetest').onclick = () => { if (!speak(SAY_UI.test, { force: true })) alert('אין הקראה במכשיר הזה.'); };
   $('#voiceName').onchange = e => store.setProfile({ voiceName: e.target.value });
   $('#speechRate').onchange = e => store.setProfile({ speechRate: +e.target.value });

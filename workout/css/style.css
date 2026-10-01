@@ -107,6 +107,8 @@ svg.figure { width: 100%; height: auto; display: block; }
 .stage svg.figure { max-height: 250px; width: auto; }
 .exvid { width: 100%; max-width: 360px; max-height: 300px; border-radius: 18px; display: block; object-fit: cover; background: #000; }
 .stage .exmedia { width: 100%; max-width: 360px; min-height: 200px; display: grid; }
+.stage .exmedia.stage3d { aspect-ratio: 4 / 5; min-height: 0; max-height: 440px; border-radius: 18px; overflow: hidden; background: #F2A9E3; display: block; } /* הדמות המצוירת בתלת-ממד (stage3d.js) */
+.stage3d-canvas { width: 100% !important; height: 100% !important; display: block; }
 .vidprev { margin-top: 6px; }
 svg.figure .ground { stroke: var(--line); stroke-width: 3; stroke-linecap: round; }
 svg.figure .fig line, svg.figure .fig polyline { stroke: var(--ink); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; fill: none; }
