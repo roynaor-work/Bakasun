@@ -74,13 +74,13 @@ test('a free message to a person, and saving a phone by voice', () => {
 });
 
 test('action commands: quote, ask, open, call, task, note, lead, today', () => {
-  const people = [{ label: 'ארגון שוב״ל · ענת', names: ['ארגון שוב״ל', 'ענת'], about: 'client', id: 'c1', phone: '050-1' }, { label: 'ביסקוטי · עינת', names: ['ביסקוטי', 'עינת'], about: 'supplier', id: 's1', phone: '[phone-removed]' }, { label: 'שירית כהן', names: ['שירית כהן'], about: 'team', id: 't1', phone: '050-3' }];
+  const people = [{ label: 'ארגון שוב״ל · ענת', names: ['ארגון שוב״ל', 'ענת'], about: 'client', id: 'c1', phone: '050-1' }, { label: 'ביסקוטי · עינת', names: ['ביסקוטי', 'עינת'], about: 'supplier', id: 's1', phone: '050-0000012' }, { label: 'שירית כהן', names: ['שירית כהן'], about: 'team', id: 't1', phone: '050-3' }];
   let c = parseCommand('תבני לי הצעת מחיר לשוב״ל', [], people); assert.equal(c.kind, 'quote'); assert.equal(c.to.id, 'c1');
   c = parseCommand('build a quote for Shoval', [], people); assert.equal(c.kind, 'quote'); assert.equal(c.who, 'Shoval');
   c = parseCommand('תבקשי הצעות ממלונות לשוב״ל', [], people); assert.equal(c.kind, 'ask'); assert.equal(c.type, 'מלונות'); assert.equal(c.to.id, 'c1');
   c = parseCommand('תבקשי הצעות לשוב״ל', [], people); assert.equal(c.kind, 'ask'); assert.equal(c.to.id, 'c1'); assert.equal(c.type, '');
   c = parseCommand('תפתחי את הספק ביסקוטי', [], people); assert.equal(c.kind, 'open'); assert.equal(c.to.about, 'supplier');
-  c = parseCommand('תתקשרי לביסקוטי', [], people); assert.equal(c.kind, 'call'); assert.equal(c.to.phone, '[phone-removed]');
+  c = parseCommand('תתקשרי לביסקוטי', [], people); assert.equal(c.kind, 'call'); assert.equal(c.to.phone, '050-0000012');
   c = parseCommand('משימה לשירית כהן: לאסוף שלטים מהדפוס', [], people); assert.equal(c.kind, 'task'); assert.equal(c.to.id, 't1'); assert.equal(c.body, 'לאסוף שלטים מהדפוס');
   c = parseCommand('רשמי הערה על ביסקוטי: יקרים אבל שווים', [], people); assert.equal(c.kind, 'note'); assert.equal(c.to.id, 's1'); assert.equal(c.body, 'יקרים אבל שווים');
   c = parseCommand('פנייה חדשה: דנה לוי 052-1234567 יום גיבוש ל-40 בראש פינה', [], people); assert.equal(c.kind, 'lead'); assert.match(c.body, /^דנה לוי/);
@@ -150,7 +150,7 @@ test('a name plus a number she read: the number is used as is, and remembered fo
 test('an invoice request names a known client in any spelling, and reads the purpose, the channel and an extra request', async () => {
   const { parseInvoiceRequest, spelledLetters, findClientIn } = await import('../js/logic/commands.js');
   const clients = [{ id: 'c1', name: 'ב.ד. גרייבר', aliases: 'ב.ד, ב. ד., בי די, גרייבר', legalName: 'ב.ד. גרייבר בע״מ', taxId: '', address: '' },
-    { id: 'c2', name: 'WeRIsrael', aliases: 'וי אר ישראל', taxId: '510202757', address: 'פארק תעשיות קיסריה', email: '[email-removed]' }];
+    { id: 'c2', name: 'WeRIsrael', aliases: 'וי אר ישראל', taxId: '519999999', address: 'פארק תעשיות דוגמה', email: 'office@werisrael-demo.co' }];
   assert.equal(spelledLetters("חשבונית לבית. ד' על 10000"), 'חשבונית לב.ד. על 10000');
   assert.equal(spelledLetters('לבית נקודה דלת על 10000'), 'לב.ד. על 10000');
   assert.equal(spelledLetters('סכום 27,310+ מע"מ ש"ח'), 'סכום 27,310+ מע"מ ש"ח');
@@ -159,7 +159,7 @@ test('an invoice request names a known client in any spelling, and reads the pur
   assert.deepEqual(r.items, [{ desc: 'הפקה של חיים ומשה', amount: 10000, incl: false }]);
   assert.equal(r.note, 'לבדוק האם שולם חודש קודם');
   const r2 = parseInvoiceRequest('תוציא לי חשבונית בבקשה ל weRisrael מקדמה עם משלחת פוז 10000 פלוס מעמ', clients);
-  assert.equal(r2.clientId, 'c2'); assert.equal(r2.taxId, '510202757'); assert.equal(r2.address, 'פארק תעשיות קיסריה'); assert.equal(r2.items[0].desc, 'מקדמה עם משלחת פוז');
+  assert.equal(r2.clientId, 'c2'); assert.equal(r2.taxId, '519999999'); assert.equal(r2.address, 'פארק תעשיות דוגמה'); assert.equal(r2.items[0].desc, 'מקדמה עם משלחת פוז');
   assert.equal(parseInvoiceRequest('לבדוק חשבונית 3000 פלוס מעמ', clients).clientId, undefined);
   assert.equal(findClientIn('חשבונית לגרייבר עבור משכורת', clients).id, 'c1');
 });

@@ -130,7 +130,7 @@ export function takeOrg(body, signature, email) {
   for (let k = 0; k < sig.length - 1; k++) if (TITLE_WORDS.test(sig[k]) && !/@|\d{6,}|https?:/.test(sig[k + 1]) && !TITLE_WORDS.test(sig[k + 1]) && sig[k + 1].length <= 50 && !/^[\d\s+\-()]+$/.test(sig[k + 1])) return clean(sig[k + 1]);
   // "HR manager, Alpha Ltd" on one line
   for (const l of sig) if (TITLE_WORDS.test(l) && /,\s*\S/.test(l)) { const tail = trim(l.split(',').slice(-1)[0]); if (tail && !TITLE_WORDS.test(tail) && !/@/.test(tail)) return clean(tail); }
-  // the e-mail domain, when it is not a public provider: shoval-net.org → "shoval-net"
+  // the e-mail domain, when it is not a public provider: shuvl-demo.org → "shuvl-demo"
   const d = emailDomain(email);
   if (!isGenericDomain(d)) { const label = d.replace(/\.(?:co|org|ac|gov|muni|net|com)?\.?[a-z]{2,3}$/i, '').split('.').slice(-1)[0]; return label && label.length >= 3 ? label.charAt(0).toUpperCase() + label.slice(1) : ''; }
   return '';
