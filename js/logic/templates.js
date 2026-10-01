@@ -2,6 +2,7 @@
    (so they travel with the cloud), with {name} filled in from the recipient. Pure parsing, tested. */
 import Office from './office.js';
 import { str, trim } from './core.js';
+import { loose, polite } from './travel.js';
 
 const KEY = 'templates';
 const parse = raw => { try { const v = JSON.parse(raw || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } };
@@ -37,16 +38,19 @@ export function fillTemplate(text, vars) {
 }
 
 /** "save as template tour" → 'tour'; null otherwise. */
+const SAVE_TPL = loose(/^(?:שמרי|תשמרי|שמור)\s+(?:את\s+)?(?:ההודעה\s+|את ההודעה\s+|זה\s+)?(?:כתבנית|בתור תבנית|כתבנית בשם)\s*[:]?\s*(.+)$|^(?:save|keep|store)\s+(?:this\s+|the message\s+|this message\s+|that\s+|it\s+)?as\s+(?:a\s+|the\s+)?template\s*(?:called|named)?\s*[:]?\s*(.+)$|^(?:enregistre|enregistrer|sauvegarde|sauvegarder|garde|garder|mets|mettre)\s+(?:ça\s+|ce message\s+|le message\s+|cela\s+|ceci\s+)?(?:comme|en|en tant que|comme un|comme une)\s+(?:modèle|template)\s*(?:appelé|nommé|qui s'appelle)?\s*[:]?\s*(.+)$/i);
 export function isSaveTemplateCommand(text) {
-  const m = /^(?:שמרי|תשמרי|שמור)\s+(?:את\s+)?(?:ההודעה\s+|את ההודעה\s+|זה\s+)?(?:כתבנית|בתור תבנית|כתבנית בשם)\s*[:]?\s*(.+)$|^save\s+(?:this\s+|the message\s+|it\s+)?as\s+(?:a\s+)?template\s*[:]?\s*(.+)$|^(?:enregistre|sauvegarde)\s+(?:ça\s+|le message\s+)?(?:comme|en)\s+modèle\s*[:]?\s*(.+)$/i.exec(trim(str(text)));
+  const m = SAVE_TPL.exec(polite(text));
   return m ? trim(m[1] || m[2] || m[3]) : null;
 }
 
 /** In a message body, "the template tour" → 'tour'; null when the body is a real message. */
+const TPL_REF = loose(/^(?:את\s+)?(?:ה)?תבנית\s+(?:של\s+)?(.+)$|^(?:the\s+|my\s+)?template\s+(?:of\s+|for\s+|called\s+|named\s+)?(.+)$|^(?:le\s+|mon\s+)?(?:modèle|template)\s+(?:de\s+|pour\s+|du\s+|appelé\s+)?(.+)$/i);
 export function templateRef(body) {
-  const m = /^(?:את\s+)?(?:ה)?תבנית\s+(?:של\s+)?(.+)$|^(?:the\s+)?template\s+(?:of\s+|for\s+)?(.+)$|^(?:le\s+)?(?:modèle|modele)\s+(?:de\s+|pour\s+)?(.+)$/i.exec(trim(str(body)));
+  const m = TPL_REF.exec(trim(str(body)));
   return m ? trim(m[1] || m[2] || m[3]).replace(/[.!]+$/, '') : null;
 }
 
 /** "send" alone, said after a message is on screen: the tap on WhatsApp / mail. */
-export function isSendCommand(text) { return /^\s*(?:תשלחי|שלחי|שלח|לשלוח|אפשר לשלוח|send|send it|go ahead|envoie|envoyer|envoie-le)\s*[.!]?\s*$/i.test(str(text)); }
+const SEND_ALONE = loose(/^\s*(?:(?:ok|okay|yes|oui|כן|bon|c'est bon|allez|vas-y|alors|good)[,\s]+)?(?:תשלחי|שלחי|שלח|לשלוח|אפשר לשלוח|send|send it|send that|send this|send now|go ahead|go ahead and send|send away|you can send|envoie|envoyer|envoie-le|envoie-la|envoie ça|envoyez|tu peux envoyer|vas-y|c'est bon tu peux envoyer|c'est bon envoie)\s*[.!]?\s*$/i);
+export function isSendCommand(text) { return SEND_ALONE.test(polite(text)); }

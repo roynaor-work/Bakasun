@@ -1,16 +1,17 @@
 /* Deleting a recording by mistake should cost nothing: the text goes to a bin for one hour and can be brought back.
    Also the spoken "delete" and "finished" in Hebrew, French or English. Pure, tested. */
 import { str } from './core.js';
+import { loose } from './travel.js';
 
 export const KEEP_MS = 60 * 60 * 1000;
 const MAX = 20;
-const DEL_WORD = '(?:(?:תמחקי|תמחק|מחקי|מחק|למחוק|למחיקה|מחיקה|דליט|בטלי|תבטלי|נקי|תנקי)(?:\\s+(?:את\\s+)?(?:הכל|ההקלטה|הטקסט|זה))?|(?:delete|erase|clear|cancel|scrap)(?:\\s+(?:it|that|this|all|everything|the recording|the text))?|(?:efface|supprime|annule|effacer|supprimer)(?:\\s+(?:tout|ça|ca|cela|l’enregistrement|l\'enregistrement|le texte))?)';
-const DONE_WORD = '(?:סיימתי|סימתי|זהו|סיום|סוף|finished|done|that[\'’]?s it|i[\'’]?m done|end|terminé|termine|j[\'’]?ai fini|fini|c[\'’]?est tout|voilà)';
-const DELETE = new RegExp('^\\s*' + DEL_WORD + '\\s*[.!]?\\s*$', 'i');
-const DONE = new RegExp('^\\s*' + DONE_WORD + '\\s*[.!]?\\s*$', 'i');
+const DEL_WORD = "(?:(?:תמחקי|תמחק|מחקי|מחק|למחוק|למחיקה|מחיקה|דליט|בטלי|תבטלי|נקי|תנקי)(?:\\s+(?:את\\s+)?(?:הכל|ההקלטה|הטקסט|זה))?|(?:delete|erase|clear|cancel|scrap|scratch that|never mind|nevermind|forget it|forget that|drop it|drop that)(?:\\s+(?:it|that|this|all|everything|the recording|the text|the message|all of it))?|(?:efface|effacez|supprime|supprimez|annule|annulez|effacer|supprimer|annuler|oublie|laisse tomber|laissez tomber)(?:\\s+(?:tout|ça|ca|cela|tout ça|tout ca|l'enregistrement|le texte|le message))?)";
+const DONE_WORD = "(?:(?:(?:ok|okay|bon|allez|voilà|alors|good)[,\\s]+)?(?:סיימתי|סימתי|זהו|סיום|סוף|finished|done|that's it|that is it|that's all|that is all|all done|i'm done|i am done|i have finished|i've finished|end|terminé|termine|j'ai fini|j'ai terminé|fini|c'est tout|c'est fini|c'est bon|ça y est|voilà))";
+const DELETE = loose(new RegExp('^\\s*' + DEL_WORD + '\\s*[.!]?\\s*$', 'i'));
+const DONE = loose(new RegExp('^\\s*' + DONE_WORD + '\\s*[.!]?\\s*$', 'i'));
 // the same words at the END of a sentence: she said "...send it to Dana delete" without a pause
-const DEL_TAIL = new RegExp('(?:^|\\s)' + DEL_WORD + '\\s*[.!]?\\s*$', 'i');
-const DONE_TAIL = new RegExp('(?:^|\\s)' + DONE_WORD + '\\s*[.!]?\\s*$', 'i');
+const DEL_TAIL = loose(new RegExp('(?:^|\\s)' + DEL_WORD + '\\s*[.!]?\\s*$', 'i'));
+const DONE_TAIL = loose(new RegExp('(?:^|\\s)' + DONE_WORD + '\\s*[.!]?\\s*$', 'i'));
 
 /** True when what she said is only "finished" (סיימתי / done / terminé): the recording ends and the instruction runs. */
 export function isDoneCommand(text) { return DONE.test(str(text)); }
@@ -34,7 +35,7 @@ export function stripDone(text) {
 
 /* "finished" said in the middle, and she kept talking: two instructions in one recording, not one long one. Only the explicit
    words split (not "end"/"done", which appear inside ordinary sentences). */
-const DONE_MID = /\s+(?:סיימתי|סימתי|finished|i[\'’]?m done|j[\'’]?ai fini|terminé)\s*[.!,]?\s+/i;
+const DONE_MID = loose(/\s+(?:סיימתי|סימתי|finished|i'm done|i have finished|j'ai fini|j'ai terminé|terminé)\s*[.!,]?\s+/i);
 export function splitDone(text) { return str(text).split(DONE_MID).map(x => x.trim()).filter(Boolean); }
 
 const K = key => 'bakasun.bin.' + key;
@@ -66,7 +67,7 @@ export function restore(store, key, id, now) {
   return v.text;
 }
 
-const EMPTY = /^\s*(?:(?:רוקני|תרוקני|לרוקן|נקי|תנקי)\s+(?:את\s+)?ה?סל|(?:מחקי|תמחקי|למחוק)\s+(?:את\s+)?(?:ה?סל|הכל\s+לגמרי|לגמרי\s+הכל|לצמיתות)|empty\s+(?:the\s+)?(?:bin|trash|junk|recycle bin)|delete\s+(?:everything\s+)?(?:completely|permanently|for good)|clear\s+(?:the\s+)?(?:bin|trash)|vide\s+(?:la\s+)?corbeille|supprime\s+(?:tout\s+)?(?:définitivement|pour de bon))\s*[.!]?\s*$/i;
+const EMPTY = loose(/^\s*(?:(?:רוקני|תרוקני|לרוקן|נקי|תנקי)\s+(?:את\s+)?ה?סל|(?:מחקי|תמחקי|למחוק)\s+(?:את\s+)?(?:ה?סל|הכל\s+לגמרי|לגמרי\s+הכל|לצמיתות)|(?:empty|clear|purge|delete)\s+(?:the\s+)?(?:bin|trash|junk|recycle bin|recycling bin|rubbish|deleted recordings)|delete\s+(?:everything\s+|it all\s+|all\s+)?(?:completely|permanently|for good|forever)|(?:vide|vider|videz|efface|effacer|supprime|supprimer|nettoie|nettoyer)\s+(?:la\s+)?(?:corbeille|poubelle)|(?:supprime|supprimer|efface|effacer)\s+(?:tout\s+)?(?:définitivement|pour de bon|complètement|à jamais))\s*[.!]?\s*$/i);
 /** True when she asks to empty the bin for good, in any of the three languages. */
 export function isEmptyBinCommand(text) { return EMPTY.test(str(text)); }
 

@@ -1,13 +1,14 @@
 /* "How do I send a quote?": the question is matched against the help text, and the closest lines come back. Pure, tested. */
 import { str, trim } from './core.js';
+import { loose, polite } from './travel.js';
 
-const ASK = /^(?:איך\s+(?:אני\s+)?|מה עושים (?:כש|אם)\s*|how (?:do|can|should) (?:i|you|we)\s+|how to\s+|comment (?:est-ce que )?(?:je |on )?)/i;
-const STOP = new Set(['את', 'של', 'עם', 'לי', 'אני', 'אפשר', 'עושה', 'עושים', 'the', 'a', 'an', 'to', 'i', 'my', 'do', 'it', 'can', 'le', 'la', 'les', 'un', 'une', 'de', 'des', 'je', 'mon', 'ma', 'mes', 'fais', 'faire', 'peut', 'peux', 'puis']);
+const ASK = loose(/^(?:איך\s+(?:אני\s+)?|מה עושים (?:כש|אם)\s*|how (?:do|can|should|would|could) (?:i|you|we|one)\s+|how to\s+|how does (?:the |a |an )?|how do (?:the |a )?|what (?:do|should|can) (?:i|we|you) do (?:when|if|to|with|about)\s+|what to do (?:when|if|with|about)\s+|comment (?:est-ce que |est-ce qu')?(?:je |j'|on |tu )?(?:fais|fait|faire|peux|peut|dois|doit|puis)?\s*(?:pour )?|que faire (?:si|quand|lorsque|pour|avec)\s+|qu'est-ce que je fais (?:si|quand|avec|pour)\s+|qu'est-ce qu'on fait (?:si|quand|avec|pour)\s+|c'est quoi la façon de\s+|comment (?:ça |ca )?(?:marche|fonctionne)\s+)/i);
+const STOP = new Set(['את', 'של', 'עם', 'לי', 'אני', 'אפשר', 'עושה', 'עושים', 'the', 'a', 'an', 'to', 'i', 'my', 'do', 'it', 'can', 'work', 'works', 'when', 'if', 'should', 'we', 'you', 'on', 'for', 'with', 'le', 'la', 'les', 'un', 'une', 'de', 'des', 'je', 'mon', 'ma', 'mes', 'fais', 'faire', 'peut', 'peux', 'puis', 'pour', 'si', 'quand', 'ça', 'ca', 'marche', 'fonctionne', 'on', 'moi', 'me', 'du', 'au', 'aux', 'en']);
 const HE = /^[֐-׿]+$/;
 
 /** The words she is asking about, or null when it is not a "how do I" question. */
 export function parseHow(text) {
-  const t = trim(str(text)).replace(/[?؟!.]+$/, '');
+  const t = polite(trim(str(text)).replace(/[?؟!.]+$/, '').replace(/’/g, "'"));
   if (!t || t.length > 120 || !ASK.test(t)) return null;
   const rest = t.replace(ASK, '').trim();
   return { words: terms(rest), text: rest };
@@ -15,7 +16,7 @@ export function parseHow(text) {
 
 const FINALS = { 'ך': 'כ', 'ם': 'מ', 'ן': 'נ', 'ף': 'פ', 'ץ': 'צ' };
 function norm(w) { return str(w).toLowerCase().replace(/[״"'’«»“”().,:;!?→]/g, '').replace(/[ךםןףץ]/g, c => FINALS[c]); }
-function terms(s) { return str(s).split(/\s+/).map(norm).filter(w => w.length >= 2 && !STOP.has(w)); }
+function terms(s) { return str(s).replace(/(?:^|\s)(?:[jlcdsmnt]|qu)['’](?=\S)/gi, ' ').split(/\s+/).map(norm).filter(w => w.length >= 2 && !STOP.has(w)); }
 
 /** Rough Hebrew stems: without a leading ה/ל/ב/מ/ו/ש, without ים/ות/ה/ת/י endings, without inner ו/י. Several variants, so "הקלטה", "להקליט" and "מקליטה" meet. */
 function stems(w) {

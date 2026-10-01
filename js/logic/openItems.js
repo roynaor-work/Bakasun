@@ -6,24 +6,25 @@ import { TASK } from './extra.js';
 import { PRINT_STATUS } from './print.js';
 import { APPROVAL } from './approvals.js';
 import { SUP_INVOICE } from './money.js';
+import { loose, polite } from './travel.js';
 
-const ASK = /^(?:מה\s+(?:עוד\s+)?(?:חסר|פתוח|נשאר|לא סגור|צריך|אני צריכה|צריכה|המצב של|המצב עם|המצב ב|קורה עם|עם|הסטטוס של|הסטטוס עם)|what(?:'s| is| do i(?: still)? need|(?: is)? still)\s*(?:missing|open|left|needed|need|the status of|up with|going on with|happening with)?|qu['’]est-ce qu(?:i|e)\s+(?:manque|reste|il manque|il reste|je dois|j['’]ai)|que manque-t-il|que reste-t-il|qu['’]est-ce qui est ouvert|où en est|ou en est|quoi de neuf avec)/i;
+const ASK = loose(/^(?:מה\s+(?:עוד\s+)?(?:חסר|פתוח|נשאר|לא סגור|צריך|אני צריכה|צריכה|המצב של|המצב עם|המצב ב|קורה עם|עם|הסטטוס של|הסטטוס עם)|what(?:'s| is| do i(?: still)? need| do we(?: still)? need|(?: is)? still| remains| is left| else)\s*(?:missing|open|left|needed|need|outstanding|pending|the status of|the status with|the status on|the situation with|up with|going on with|happening with|to do for|to do on|to do with)?|where (?:are we|do we stand|do things stand|things stand)(?: at)?|how (?:are we doing|is it going|are things|is it looking)|status of|qu'est-ce qu(?:i|e)\s+(?:manque|reste|il manque|il reste|je dois|j'ai|il faut encore|il reste à faire|il y a encore|il y a d'ouvert|est encore ouvert)|que manque-t-il|que reste-t-il|qu'est-ce qui est (?:ouvert|encore ouvert|en attente|en suspens)|où en est(?:-on)?|ou en est|on en est où|où ça en est|quel est le statut|c'est quoi le statut|quoi de neuf avec|le point sur|fais(?:-moi)? le point sur|où on en est)/i);
 const FOCUS_SUP = /(?:ספק|suppliers?|vendors?|fournisseurs?)/i;
 const FOCUS_CLIENT = /(?:לקוח|client|customer)/i;
-const STRIP = /(?:\s|^)(?:מ|ב|ל|עם\s+)?ה?ספקים?(?:\s+של)?(?=\s|$)|(?:\s|^)(?:from |with |for |of )?(?:the )?(?:suppliers?|vendors?)(?: of| for)?(?=\s|$)|(?:\s|^)(?:des |les |aux |du |de la |avec les |chez les )?fournisseurs?(?: de| pour)?(?=\s|$)|(?:\s|^)(?:מ|ל|עם\s+)?ה?לקוח(?:\s+של)?(?=\s|$)|(?:\s|^)(?:from |with |for )?(?:the )?(?:client|customer)(?: of| for)?(?=\s|$)|(?:\s|^)(?:du |le |avec le |chez le )?client(?: de| pour)?(?=\s|$)/gi;
-const WHO = /(?:^|\s)(?:של|מול|עם|אצל|לאירוע של|לאירוע|בתיק של|בתיק|for the event of|for the event|for|with|from|of|on|pour l['’]événement de|pour l['’]événement|pour|de|chez|avec|sur)\s+(.+)$/i;
+const STRIP = /(?:\s|^)(?:מ|ב|ל|עם\s+)?ה?ספקים?(?:\s+של)?(?=\s|$)|(?:\s|^)(?:from |with |for |of )?(?:the )?(?:suppliers?|vendors?)(?: of| for)?(?=\s|$)|(?:\s|^)(?:des |les |aux |du |de la |avec les |chez les |côté |cote )?fournisseurs?(?: de| pour)?(?=\s|$)|(?:\s|^)(?:מ|ל|עם\s+)?ה?לקוח(?:\s+של)?(?=\s|$)|(?:\s|^)(?:from |with |for )?(?:the )?(?:client|customer)(?: of| for)?(?=\s|$)|(?:\s|^)(?:du |le |avec le |chez le |côté |cote )?client(?: de| pour)?(?=\s|$)/gi;
+const WHO = loose(/(?:^|\s)(?:של|מול|עם|אצל|לאירוע של|לאירוע|בתיק של|בתיק|for the event of|for the event|for|with|from|of|on|at|pour l'événement de|pour l'événement|pour|de|du|chez|avec|sur|dans)\s+(.+)$/i);
 
 /** {who, alt, focus: 'all'|'suppliers'|'client'} or null when the text is not this question.
     `alt` is `who` without a Hebrew one-letter prefix (ל/ב): "לשוב״ל" → "שוב״ל"; the caller tries who first, then alt. */
 export function parseMissing(text) {
-  const t = trim(str(text)).replace(/[?؟!.]+$/, '');
+  const t = polite(trim(str(text)).replace(/’/g, "'")).replace(/[?؟!.]+$/, '');
   if (!t || t.length > 120 || !ASK.test(t)) return null;
   const focus = FOCUS_SUP.test(t) ? 'suppliers' : FOCUS_CLIENT.test(t) ? 'client' : 'all';
   let rest = t.replace(ASK, '').replace(/^\s*(?:לי|me|moi)\b/i, '').replace(STRIP, ' ').replace(/\s+/g, ' ').trim();
-  rest = rest.replace(/^(?:עוד|still|encore)\s+/i, '').replace(/^(?:לי|me|moi)\s+/i, '');
+  rest = rest.replace(/^(?:עוד|still|encore)\s+/i, '').replace(/^(?:לי|me|moi)\s+/i, '').replace(/^(?:à faire|to do|to be done)\s+/i, '');
   const m = WHO.exec(' ' + rest);
   let who = m ? trim(m[1]) : rest;
-  who = who.replace(/^(?:the |l['’]|le |la )/, '').replace(/^(?:ה?אירוע|ה?תיק|event|case|dossier|événement)\s+(?:של|of|de)?\s*/i, '').replace(/^(?:הזה|הזאת|this|ce|cette)$/i, '').trim();
+  who = who.replace(/^(?:the |l['’]|le |la )/, '').replace(loose(/^(?:ה?אירוע|ה?תיק|event|case|dossier|événement|evenement|projet|project)\s+(?:של|of|de|du)?\s*/i), '').replace(/^(?:הזה|הזאת|this|ce|cette)$/i, '').trim();
   const alt = /^[לב][֐-׿]/.test(who) ? who.slice(1) : who;
   return { who, alt, focus };
 }

@@ -242,7 +242,7 @@ test('matchMailClient: e-mail, domain, alias in the text, contact name; generic 
 });
 
 test('missingOf and summaryText', () => {
-  const p = parseMail('From: a@b.com\n\nhi', opts);
+  const p = parseMail('From: a@gmail.com\n\nhi', opts);
   assert.deepEqual(p.missing, ['client', 'date', 'participants', 'budget', 'place', 'kind', 'purpose']);
   const s = summaryText({ client: 'Globex', name: 'John', phone: '052-1111111', email: 'j@globex.com', kind: 'כנס', date: '2026-12-12', dateEnd: '2026-12-13', participants: '80', place: 'קיסריה', budget: '50,000 ₪', hours: '09:00-17:00', purpose: 'סוף שנה', needs: ['קייטרינג ושפים'], days: '2' });
   assert.equal(s, 'לקוח: Globex\nאיש קשר: John · 052-1111111 · j@globex.com\nסוג: כנס\nתאריך: 12/12/2026 - 13/12/2026\nשעות: 09:00-17:00\nמשתתפים: 80\nמקום: קיסריה\nתקציב: 50,000 ₪\nימים: 2\nמטרה: סוף שנה\nספקים נדרשים: קייטרינג ושפים');

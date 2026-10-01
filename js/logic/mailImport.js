@@ -48,6 +48,8 @@ export function cleanMail(text) {
   // a forwarded mail: what is after the marker is the client's mail
   const fw = lines.findIndex(l => FORWARD_RE.test(l));
   if (fw >= 0) lines = lines.slice(fw + 1);
+  const firstLine = lines.findIndex(l => trim(l));
+  if (firstLine >= 0 && QUOTE_START[0].test(lines[firstLine])) lines = lines.slice(firstLine + 1);
   // headers at the top (blank lines between them are allowed, a non-header line ends them)
   const headers = {};
   let i = 0, seen = false;
@@ -130,7 +132,7 @@ export function takeOrg(body, signature, email) {
   for (const l of sig) if (TITLE_WORDS.test(l) && /,\s*\S/.test(l)) { const tail = trim(l.split(',').slice(-1)[0]); if (tail && !TITLE_WORDS.test(tail) && !/@/.test(tail)) return clean(tail); }
   // the e-mail domain, when it is not a public provider: shoval-net.org → "shoval-net"
   const d = emailDomain(email);
-  if (!isGenericDomain(d)) { const label = d.replace(/\.(?:co|org|ac|gov|muni|net|com)?\.?[a-z]{2,3}$/i, '').split('.').slice(-1)[0]; return label ? label.charAt(0).toUpperCase() + label.slice(1) : ''; }
+  if (!isGenericDomain(d)) { const label = d.replace(/\.(?:co|org|ac|gov|muni|net|com)?\.?[a-z]{2,3}$/i, '').split('.').slice(-1)[0]; return label && label.length >= 3 ? label.charAt(0).toUpperCase() + label.slice(1) : ''; }
   return '';
 }
 
@@ -252,7 +254,7 @@ export function takeBudget(text, lead) {
 export function takeVenue(text) {
   const t = str(text);
   let m;
-  if ((m = /(?:^|[\s,])(?:ב|ל)?((?:מלון|גן האירועים|גן אירועים|גן|אולם|אולמי|מתחם|קיבוץ|מרכז הכנסים|מרכז|בית|חוות|יקב|מוזיאון)\s+[^\s,.;:!?\n()]{2,}(?:\s+[^\s,.;:!?\n()]{2,})?)(?=[\s,.;:!?\n()]|$)/.exec(t)) && !/^(?:מלון|גן|אולם|מרכז|בית)\s+(?:ש|ו|כל|אחר|טוב|קטן|גדול|יפה|באזור|בצפון|בדרום|במרכז|עם|או|ל)/.test(m[1])) return trim(m[1]).replace(/\s+(?:או|עם|ש|כי|אבל|ו)$/, '');
+  if ((m = /(?:^|[\s,])(?:ב|ל)?((?:מלון|גן האירועים|גן אירועים|גן|אולם|אולמי|מתחם|קיבוץ|מרכז הכנסים|מרכז|בית|חוות|יקב|מוזיאון)\s+(?!(?:של|שלנו|שלכם|שלהם|או|עם|כל|אחר|טוב|קטן|גדול|יפה|באזור|בצפון|בדרום|במרכז|מתאים|כלשהו|שיש|שאפשר|ש|ו|ל)(?:[\s,.;:!?]|$))[^\s,.;:!?\n()\d]{2,}(?:\s+(?!(?:עם|או|ל|לכ|של|שלנו|ב|כ|עד|בערך|בתאריך|ליד|עבור)(?:[\s\-]|$))[^\s,.;:!?\n()\d]{2,})?)(?=[\s,.;:!?\n()]|$)/.exec(t))) return trim(m[1]).replace(/\s+(?:או|עם|ש|כי|אבל|ו)$/, '');
   if ((m = /\b(?:at|in|chez|au|à l'|à la)\s+(?:the\s+)?((?:hotel|hôtel|kibbutz|domaine|château|chateau|salle|centre|center|museum|musée|winery|villa|palais|espace|resort)\s+[A-Z][^\s,.;:!?\n()]*(?:\s+[A-Z][^\s,.;:!?\n()]*){0,2})/i.exec(t))) return trim(m[1]);
   if ((m = /\b(?:at|in|chez|au)\s+(?:the\s+)?([A-Z][\w'\-]+(?:\s+[A-Z][\w'\-]+){0,2}\s+(?:hotel|hôtel|resort|center|centre|hall|museum|winery|convention center))/i.exec(t))) return trim(m[1]);
   return '';
@@ -421,7 +423,7 @@ export function summaryText(p, L) {
   push('date', p.date ? Office.fmt(p.date) + (p.dateEnd ? ' - ' + Office.fmt(p.dateEnd) : '') : p.dateText);
   push('hours', p.hours);
   push('participants', p.participants);
-  push('place', p.place + (p.venue && p.venue !== p.place ? ' (' + p.venue + ')' : ''));
+  push('place', str(p.place) + (p.venue && p.venue !== p.place ? ' (' + p.venue + ')' : ''));
   push('budget', p.budget);
   push('days', p.days && p.days !== '1' ? p.days : '');
   push('rooms', p.rooms);
