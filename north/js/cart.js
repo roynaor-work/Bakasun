@@ -56,7 +56,9 @@ export function orderNo(now = new Date(), rnd = Math.random) {
 }
 
 /* בדיקת טופס. מחזירה רשימת שגיאות (ריקה = תקין). */
-export function validateOrder(f, method) {
+export function hasNonKosher(items) { return items.some(i => i.kosher === false); }
+
+export function validateOrder(f, method, opts = {}) {
   const errs = [];
   if (!f.name || f.name.trim().length < 2) errs.push('שם מלא');
   if (!/^0\d{1,2}-?\d{7}$/.test((f.phone || '').replace(/\s/g, ''))) errs.push('טלפון תקין');
@@ -67,6 +69,7 @@ export function validateOrder(f, method) {
   }
   if (!f.adult) errs.push('אישור גיל 18 ומעלה');
   if (!f.terms) errs.push('אישור התקנון');
+  if (opts.nonKosher && !f.kosherOk) errs.push('אישור שהמארז כולל מוצר לא כשר');
   return errs;
 }
 
@@ -74,7 +77,7 @@ export function validateOrder(f, method) {
 export function orderText(order) {
   const lines = [`הזמנה ${order.no} · ${order.store}`, ''];
   for (const i of order.items) {
-    lines.push(`• ${i.name}${i.variant ? ' (' + i.variant + ')' : ''} × ${i.qty} = ${fmt(i.price * i.qty)}`);
+    lines.push(`• ${i.name}${i.variant ? ' (' + i.variant + ')' : ''} × ${i.qty} = ${fmt(i.price * i.qty)}${i.kosher === false ? ' · לא כשר' : ''}`);
     if (i.parts && i.parts.length) lines.push('   ' + i.parts.map(p => p.name).join(', '));
     if (i.note) lines.push('   ברכה: ' + i.note);
   }

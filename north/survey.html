@@ -62,6 +62,7 @@
 
       <section class="panel"><h3><span class="no">4</span>אריזה וחריטה</h3>
         <div class="list" id="pack"></div>
+        <div class="field"><label>כשרות: אילו מוצרים (אלכוהול, ממתקים, גבינות, ריבות) בלי הכשר? ואיזה הכשר יש לשאר?</label><textarea name="kosher" placeholder="למשל: פרלינים בלגיים בלי הכשר; הדבש והחטיפים בד"ץ; רוב הוויסקי בלי הכשר"></textarea></div>
         <div class="field"><label>חריטה על פלאסק/כוס: יש מכשיר, ספק חיצוני, או אין?</label><input name="engrave" placeholder="למשל: ספק בקריית שמונה, 24 שעות, 25 ₪ לפריט"></div>
       </section>
 
@@ -159,7 +160,7 @@
         if (rows.length) L.push(title, ...rows, '');
       };
       block('אלכוהול קבוע:', 'a'); block('מוצרים למארזים:', 'g'); block('אריזה:', 'p');
-      const Q = { engrave: 'חריטה', sup_care: 'ספק טיפוח', sup_food: 'ספק דבש/חטיפים/שוקולד', sup_import: 'אגתד וניצן', sup_other: 'ספק נוסף', op_who: 'מי אורז', op_time: 'זמן הכנה', op_ship: 'משלוחים', op_shipcost: 'עלות משלוח', op_hours: 'שעות', op_storage: 'אחסון', op_pay: 'תשלום', ask_top: 'מבקשים הכי הרבה', ask_worked: 'מארז שעבד', ask_biz: 'לקוחות עסקיים', notes: 'הערות' };
+      const Q = { kosher: 'כשרות', engrave: 'חריטה', sup_care: 'ספק טיפוח', sup_food: 'ספק דבש/חטיפים/שוקולד', sup_import: 'אגתד וניצן', sup_other: 'ספק נוסף', op_who: 'מי אורז', op_time: 'זמן הכנה', op_ship: 'משלוחים', op_shipcost: 'עלות משלוח', op_hours: 'שעות', op_storage: 'אחסון', op_pay: 'תשלום', ask_top: 'מבקשים הכי הרבה', ask_worked: 'מארז שעבד', ask_biz: 'לקוחות עסקיים', notes: 'הערות' };
       for (const [k, t] of Object.entries(Q)) if (d[k]) L.push(`${t}: ${d[k]}`);
       return L.join('\n');
     }
