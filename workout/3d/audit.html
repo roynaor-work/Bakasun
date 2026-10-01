@@ -1,0 +1,29 @@
+<!doctype html><html><meta charset="utf-8"><body style="background:#fff;margin:0">
+<!-- כלי בדיקה (01/10/2026): עובר על כל התרגילים × 16 דגימות + פריימי מפתח ומודד גובה עולמי של כפות רגליים/ידיים/ראש. מריצים עם scratchpad/audit.mjs (Playwright) נגד python3 -m http.server 8765; התוצאה ב-window.__audit -->
+<script type="module">
+import { THREE, loadCharacter, KITS3D, viewFront } from '../js/char3d.js';
+import { EXERCISES } from '../js/exercises.js';
+import { poseAt, cycleMs } from '../js/figure.js';
+const ch = await loadCharacter(KITS3D.maccabi);
+const v = new THREE.Vector3(); const P = n => { const b = ch.rig.b[n]; if (!b) return null; b.getWorldPosition(v); return { x: +v.x.toFixed(1), y: +v.y.toFixed(1), z: +v.z.toFixed(1) }; }; const Y = n => { const p = P(n); return p ? p.y : null; };
+ch.model.position.set(0, 0, 0); ch.model.rotation.set(0, 0, 0); ch.model.updateMatrixWorld(true);
+const rest = { heelToe: Y('LeftFoot') - Y('LeftToes_end'), footY: Y('LeftFoot'), toeY: Y('LeftToes_end'), handY: Y('LeftHand'), handTipY: Y('LeftHandIndex3_end') };
+const out = { rest, ex: [] };
+for (const ex of EXERCISES) {
+  const front = viewFront(ex); const total = cycleMs(ex.frames); const rows = []; const Lm = front ? 'Right' : 'Left';
+  const keys = []; { let acc = 0; for (const f of ex.frames) { acc += f[1]; keys.push(acc - 0.01); } }
+  const times = [...Array.from({ length: 16 }, (_, i) => ({ t: total * i / 16, key: false })), ...keys.map(t => ({ t, key: true }))];
+  for (let i = 0; i < times.length; i++) {
+    const pose = poseAt(ex.frames, times[i].t); ch.model.rotation.y = front ? 0 : Math.PI / 2; ch.rig.apply(pose, front); ch.model.updateMatrixWorld(true);
+    const feet = {}, hands = {};
+    for (const s of ['Left', 'Right']) { const f = s === Lm ? pose.lf : pose.rf, h = s === Lm ? pose.lh : pose.rh;
+      const hip = P(s + 'UpLeg'), kn = P(s + 'Leg'), ft = P(s + 'Foot'); const l1 = Math.hypot(kn.x - hip.x, kn.y - hip.y, kn.z - hip.z), l2 = Math.hypot(ft.x - kn.x, ft.y - kn.y, ft.z - kn.z), d = Math.hypot(ft.x - hip.x, ft.y - hip.y, ft.z - hip.z);
+      feet[s] = { pf: f[1], foot: ft.y, toe: Y(s + 'Toes_end'), ball: Y(s + 'Toes'), reach: +(l1 + l2 - d).toFixed(1), scale: +ch.rig.b[s + 'Leg'].scale.length().toFixed(2) };
+      hands[s] = { ph: h[1], hand: Y(s + 'Hand'), tip: Y(s + 'HandIndex3_end'), thumb: Y(s + 'HandThumb2_end') }; }
+    const minAll = Math.min(...['LeftToes_end', 'RightToes_end', 'LeftFoot', 'RightFoot', 'LeftHand', 'RightHand', 'LeftHandIndex3_end', 'RightHandIndex3_end'].map(Y).filter(x => x != null));
+    rows.push({ i, key: times[i].key, hip: Y('Hips'), hip2d: pose.hip[1], head: Y('Head'), head2d: pose.head[1], minAll, feet, hands });
+  }
+  out.ex.push({ id: ex.id, name: ex.name, front, rows });
+}
+window.__audit = out;
+</script></body></html>

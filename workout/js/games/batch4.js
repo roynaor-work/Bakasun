@@ -113,7 +113,7 @@ sport.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀',
     try { sky(sc, '#111827', '#1f2937', false); w = court(sc, HZ); ballM = basketBallMesh(BALL_R); sc.add(ballM); shadow = ballShadow(sc); ready = true; } catch (e) { console.warn('bball3d court', e); }
     if (ready) loadCharacter(KITS3D.maccabi).then(ch => { hero = ch; sc.add(ch.model); }).catch(e => console.warn('bball3d char', e));
     /* מגן (רועי 01/10): מופיע אחרי 5 קליעות ברצף, עומד בין הזורק לסל מעט הצידה, קופץ כשזורקים; חוסם רק זריקה שטוחה שעוברת בגובה ידיו */
-    const DEF_READY = { head: [100, 56], neck: [100, 72], hip: [100, 122], le: [78, 84], lh: [60, 78], re: [122, 84], rh: [140, 78], lk: [92, 152], lf: [86, 182], rk: [108, 152], rf: [114, 182] };
+    const DEF_READY = { head: [100, 56], neck: [100, 72], hip: [100, 122], le: [76, 92], lh: [66, 60], re: [124, 92], rh: [134, 60], lk: [92, 152], lf: [86, 182], rk: [108, 152], rf: [114, 182] }; /* עמידת הגנה: מרפקים כפופים, כפות הידיים למעלה בגובה הראש (לא T) */
     const DEF_JUMP = { head: [100, 50], neck: [100, 66], hip: [100, 112], le: [84, 44], lh: [82, 18], re: [116, 44], rh: [118, 18], lk: [94, 142], lf: [90, 168], rk: [106, 142], rf: [110, 168] };
     const defHand = new THREE.Vector3();
     const rim = new THREE.Vector3(0, 290, HZ + 14);
@@ -142,6 +142,7 @@ sport.push({ id: 'basketball', name: 'כדורסל', emoji: '🏀',
     const rimProj = () => L.project(rim.x, rim.y, rim.z);
     return {
       tap: shoot, down() {}, up() {},
+      dbg(o) { if (o.streak != null) streak = o.streak; if (o.baskets != null) baskets = o.baskets; if (o.level != null) level = o.level; if (o.fire != null) fire = o.fire; }, /* לבדיקות (Playwright): לכפות רצף/רמה כדי לראות מגן וסל נע */
       save() { return { level }; }, revive() { misses = 0; waitT = .3; },
       dispose() { L.dispose(); },
       peek() { return { canShoot: !ball.fly && waitT <= 0 && !pending, p: ph, ideal: idealP() }; },

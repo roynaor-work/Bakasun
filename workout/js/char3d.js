@@ -105,6 +105,17 @@ export class PoseRig {
     this.aim(side + 'UpLeg', kn.clone().sub(h).applyQuaternion(this.qmInv)); this.model.updateMatrixWorld(true); K.getWorldPosition(k);
     this.aim(side + 'Leg', tgt.sub(k).applyQuaternion(this.qmInv)); this.model.updateMatrixWorld(true);
   }
+  // סיבוב רגל שלמה (ישרה) סביב הירך כך שקצה האצבעות יעלה ב-lift, בלי לשנות את אורכה: לפלאנק/שכיבות סמיכה כשמורידים את האגן כדי שהידיים יגיעו לרצפה
+  legPivot(footName, lift) {
+    const side = footName.startsWith('Left') ? 'Left' : 'Right'; const H = this.b[side + 'UpLeg'], K = this.b[side + 'Leg'], F = this.b[footName], T = this.b[footName.replace('Foot', 'Toes_end')] || F; if (!H || !K || !F || !T) return;
+    const h = new THREE.Vector3(), k = new THREE.Vector3(), f = new THREE.Vector3(), t = new THREE.Vector3(); H.getWorldPosition(h); K.getWorldPosition(k); F.getWorldPosition(f); T.getWorldPosition(t);
+    const v = t.clone().sub(h), r = v.length(); if (r < 1e-3) return; const tgt = v.clone(); tgt.y = Math.min(r * .98, tgt.y + lift);
+    const horiz = Math.hypot(tgt.x, tgt.z), need = Math.sqrt(Math.max(0, r * r - tgt.y * tgt.y)); if (horiz < 1e-3) return; const sc = need / horiz; tgt.x *= sc; tgt.z *= sc;
+    const q = new THREE.Quaternion().setFromUnitVectors(v.clone().normalize(), tgt.clone().normalize());
+    const kd = k.clone().sub(h).applyQuaternion(q), fd = f.clone().sub(k).applyQuaternion(q);
+    this.aim(side + 'UpLeg', kd.applyQuaternion(this.qmInv)); this.model.updateMatrixWorld(true);
+    this.aim(side + 'Leg', fd.applyQuaternion(this.qmInv)); this.model.updateMatrixWorld(true);
+  }
   // מסובב עצם כך שהכיוון אל הילד שלו יהיה dir במערכת המודל (הדמות פונה +Z), בסיבוב המינימלי מכיוון המנוחה
   aim(name, dir) {
     const bone = this.b[name], r = this.rest[name]; if (!bone || !r || dir.lengthSq() < 1e-6) return;
@@ -114,8 +125,13 @@ export class PoseRig {
   }
   // pose: פוזה מהקטלוג (200x200, רצפה 182). front: מבט מלפנים (u,v,0), אחרת מהצד (0,v,u). at: מיקום כפות הרגליים בעולם (ברירת מחדל: לפי הפוזה)
   apply(pose, front, at = null) {
+    /* pose.face (מבט צד בלבד): 1 = פונה ימינה (+X בעולם), -1 = פונה שמאלה. הדמות מסתובבת סביב עצמה והפוזה המשוקפת (TURN) מתהפכת חזרה, כך שבריצת מעבורת היא באמת רצה חזרה ולא "אחורה" */
+    const face = (!front && pose.face != null) ? Math.max(-1, Math.min(1, pose.face)) : 1;
+    if (!front && pose.face != null) { this.model.rotation.y = Math.PI / 2 - Math.acos(face); this._faced = true; } /* מינוס: הסיבוב עובר דרך +Z, כלומר הפנים אל המצלמה ולא הגב */
+    else if (this._faced && !front) { this.model.rotation.y = Math.PI / 2; this._faced = false; } /* פוזה בלי face אחרי פוזות עם face: חזרה לפנייה ימינה (frameCamera עובר על כל הפריימים ומשאיר את הסיבוב האחרון) */
+    const ms = face < 0 ? -1 : 1;
     this.model.updateWorldMatrix(true, false); this.model.getWorldQuaternion(this.qmInv).invert();
-    const P = ([x, y, z = 0]) => front ? new THREE.Vector3(x - 100, 182 - y, z) : new THREE.Vector3(-z, 182 - y, x - 100); /* z אופציונלי: עומק */
+    const P = ([x, y, z = 0]) => front ? new THREE.Vector3(x - 100, 182 - y, z) : new THREE.Vector3(-z, 182 - y, ms * (x - 100)); /* z אופציונלי: עומק */
     const d = (a, b) => P(b).sub(P(a));
     const L = front ? 'Right' : 'Left', R = front ? 'Left' : 'Right';
     const hipW = P(pose.hip).applyQuaternion(this.model.quaternion), off = this.hipsRest.clone().applyQuaternion(this.model.quaternion);
@@ -144,6 +160,8 @@ export class PoseRig {
     this.ropeUpdate(pose, front, base);
     // תיקון רצפה: הנקודה הנמוכה של כפות הרגליים (עד קצה האצבעות), הידיים (עד קצה האצבעות) והראש נוגעת בגובה הבסיס, עם שוליים קטנים כדי שהסוליה לא תיבלע
     this.model.updateMatrixWorld(true);
+    const footY2 = s => (s === 'Left' ? pose[L === 'Left' ? 'lf' : 'rf'] : pose[R === 'Right' ? 'rf' : 'lf'])[1];
+    const anyPlanted = footY2('Left') >= 178 || footY2('Right') >= 178, lyingPose = pose.head[1] >= 160;
     const onFloor = Math.max(pose.lf[1], pose.rf[1]) >= 170 || Math.max(pose.lh[1], pose.rh[1]) >= 178 || pose.head[1] >= 160; /* גם על קצות האצבעות (170..178) מיישרים לרצפה, אחרת הרגליים שוקעות (קפיצות קרסול) */
     if (onFloor) {
       /* רק האיברים שהפוזה אומרת שהם על הרצפה קובעים את הגובה. רגל מורמת (ריצה קלה) לא נספרת, אחרת האצבעות שלה מרימות את כל הגוף והרגל העומדת מרחפת (רועי: "עולה ויורד על העקבים") */
@@ -158,12 +176,34 @@ export class PoseRig {
       let minY = Infinity; for (const n of names) { const b = this.b[n]; if (!b) continue; b.getWorldPosition(_v); const r = n === 'Head' ? 14 * SCALE * 1.6 : n.includes('Hand') ? 3 : 1; /* קצה אצבעות הרגל כמעט על הרצפה (במנוחה העצם 0.3 מעל הרצפה), לא 4: עם 4 כל הדמות ריחפה 4 ס"מ */ if (_v.y - r < minY) minY = _v.y - r; }
       if (minY < Infinity) { this.model.position.y -= minY - base.y; this.model.updateMatrixWorld(true); }
     }
+    if (this.trace) this.trace('align');
     /* רגל נטועה (182) שמרחפת כי אורכי הרגליים בציור הדו-ממדי לא תואמים לעצמות התלת-ממד (עמדת זינוק, ריצת מעבורת): מכופפים את הברך (IK של שתי עצמות) עד שכף הרגל יורדת לרצפה */
     for (const ft of this._feet || []) { if (ft.f[1] < 178 || ft.ang >= 50) continue; const te = this.b[ft.foot.replace('Foot', 'Toes_end')]; if (!te) continue; te.getWorldPosition(_v); const h = _v.y - 1 - base.y; if (h > 2) { for (let pass = 0; pass < 3; pass++) { te.getWorldPosition(_v); const hh = _v.y - 1 - base.y; if (hh <= 1) break; this.legIK(ft.foot, hh); if (this.rest[ft.foot]) this.aim(ft.foot, footDir(ft.foot, ft.ang)); this.model.updateMatrixWorld(true); }
         /* הרגל ישרה ועדיין לא מגיעה (הציור הדו-ממדי ארוך מהעצם): מאריכים את השוק עד 12% לאורך העצם */
         te.getWorldPosition(_v); const left = _v.y - 1 - base.y; if (left > 2) { const K = this.b[ft.foot.replace('Foot', 'Leg')], F = this.b[ft.foot]; if (K && F) { const ax = ['x', 'y', 'z'].reduce((m, c) => Math.abs(F.position[c]) > Math.abs(F.position[m]) ? c : m, 'x'); const l2 = F.position.length(); K.scale[ax] = Math.min(1.12, 1 + left / Math.max(1, l2)); this.model.updateMatrixWorld(true); } } } } /* עד 3 מעברים: אחרי כיוון כף הרגל מחדש הגובה משתנה מעט */
-    /* רגל מורמת שאצבעותיה חודרות את הרצפה (למשל רגע אחרי ההתרוממות בריצה קלה): מיישרים אותה במקום להרים את כל הגוף, אחרת הרגל העומדת מרחפת */
-    for (const ft of this._feet || []) { const te = this.b[ft.foot.replace('Foot', 'Toes_end')]; if (!te || ft.ang <= 0) continue; te.getWorldPosition(_v); if (_v.y - 1 < base.y - .01) { for (const a of [ft.ang * .5, 0]) { this.aim(ft.foot, footDir(ft.foot, a)); this.model.updateMatrixWorld(true); te.getWorldPosition(_v); if (_v.y - 1 >= base.y - .01) break; } } }
+    if (this.trace) this.trace('plantedIK');
+    /* ידיים על הרצפה שמרחפות (פלאנק, שכיבות סמיכה, עמדת זינוק, נגיעה ברצפה): הזרוע התלת-ממדית קצרה מהציור הדו-ממדי. מורידים את האגן עד 24 יחידות, ואת הרגליים שעל הרצפה מתקנים: רגל ישרה מסתובבת סביב הירך (פלאנק: הרגליים נעשות אופקיות יותר), רגל כפופה מתכופפת עוד בברך (סקוואט עמוק יותר) */
+    if (!lyingPose) { const hands = []; for (const [hand, h] of [[L + 'Hand', pose.lh], [R + 'Hand', pose.rh]]) if (h[1] >= 178) hands.push(hand);
+      const feet = (this._feet || []).filter(ft => ft.f[1] >= 170);
+      if (hands.length && feet.length) { let lowest = Infinity; for (const hn of hands) for (const n of [hn, hn + 'Index3_end', hn + 'Thumb2_end']) { const b = this.b[n]; if (!b) continue; b.getWorldPosition(_v); if (_v.y - 3 < lowest) lowest = _v.y - 3; }
+        const dropH = Math.min(24, lowest - base.y);
+        if (this.trace) this.trace('hands lowest=' + lowest.toFixed(1) + ' drop=' + dropH.toFixed(1));
+        if (dropH > 2) { this.model.position.y -= dropH; this.model.updateMatrixWorld(true);
+          for (const ft of feet) { const te = this.b[ft.foot.replace('Foot', 'Toes_end')]; if (!te) continue; const side = ft.foot.startsWith('Left') ? 'Left' : 'Right'; const H = this.b[side + 'UpLeg'], K = this.b[side + 'Leg'], F = this.b[ft.foot]; if (!H || !K || !F) continue;
+            H.getWorldPosition(_v); K.getWorldPosition(_w); const l1 = _v.distanceTo(_w); F.getWorldPosition(_v); const l2 = _w.distanceTo(_v); H.getWorldPosition(_w); const reach = l1 + l2 - _w.distanceTo(_v); /* רגל ישרה = reach קטן */
+            for (let pass = 0; pass < 3; pass++) { te.getWorldPosition(_v); const pen = base.y + 1 - _v.y; if (pen <= .5) break; if (reach < 8) this.legPivot(ft.foot, pen); else this.legIK(ft.foot, -pen); if (this.rest[ft.foot]) this.aim(ft.foot, footDir(ft.foot, ft.ang)); this.model.updateMatrixWorld(true); } } } } }
+    /* שוכב (ראש על הרצפה) וידיים 'על הרצפה' (178+) שמרחפות לצד הגוף (הרמות רגליים, גשר ישבן): מיישרים את הזרוע כולה אל נקודת המגע הנמוכה יותר (עד 3 מעברים) */
+    if (lyingPose) for (const [hand, h] of [[L + 'Hand', pose.lh], [R + 'Hand', pose.rh]]) { if (h[1] < 178) continue; const side = hand.startsWith('Left') ? 'Left' : 'Right'; const A = this.b[side + 'Arm'], tip = this.b[hand + 'Index3_end'] || this.b[hand]; if (!A || !tip) continue;
+      for (let pass = 0; pass < 3; pass++) { tip.getWorldPosition(_v); const fl = _v.y - 3 - base.y; if (fl <= 1.5) break; A.getWorldPosition(_w); const tgt = _v.clone(); tgt.y -= fl; const dir = tgt.sub(_w).applyQuaternion(this.qmInv); this.aim(side + 'Arm', dir); this.aim(side + 'ForeArm', dir); this.model.updateMatrixWorld(true); } }
+    if (this.trace) this.trace('handsDone');
+    /* רגל מורמת שאצבעותיה חודרות את הרצפה (למשל רגע אחרי ההתרוממות בריצה קלה): מיישרים אותה במקום להרים את כל הגוף, אחרת הרגל העומדת מרחפת; אם זה לא מספיק ויש רגל נטועה, מכופפים את הברך של הרגל המורמת (IK) במקום להרים את כל הגוף (ריצת מעבורת: הרגל הנטועה ריחפה 9 יחידות) */
+    for (const ft of this._feet || []) { const te = this.b[ft.foot.replace('Foot', 'Toes_end')]; if (!te || ft.ang <= 0) continue; te.getWorldPosition(_v); if (_v.y - 1 < base.y - .01) { for (const a of [ft.ang * .5, 0]) { this.aim(ft.foot, footDir(ft.foot, a)); this.model.updateMatrixWorld(true); te.getWorldPosition(_v); if (_v.y - 1 >= base.y - .01) break; }
+        if (anyPlanted && ft.f[1] < 178) { for (let pass = 0; pass < 3; pass++) { te.getWorldPosition(_v); const pen = base.y + 1 - _v.y; if (pen <= .3) break; this.legIK(ft.foot, -pen); this.aim(ft.foot, footDir(ft.foot, 0)); this.model.updateMatrixWorld(true); } } } }
+    /* יד שחודרת את הרצפה כשיש רגל נטועה (מתיחת ירך אחורית: הידיים מגיעות לכפות הרגליים): זרוע ישרה מתקצרת בכיוון (מכוונים אותה אל נקודת המגע), במקום להרים את כל הגוף ואז כפות הרגליים מרחפות */
+    if (anyPlanted) for (const side of ['Left', 'Right']) { const A = this.b[side + 'Arm'], F = this.b[side + 'ForeArm'], Hd = this.b[side + 'Hand'], tip = this.b[side + 'HandIndex3_end']; if (!A || !F || !Hd || !tip) continue;
+      let low = Infinity; for (const b of [Hd, tip, this.b[side + 'HandThumb2_end']]) { if (!b) continue; b.getWorldPosition(_v); if (_v.y < low) low = _v.y; } const pen = base.y + 3 - low; if (pen <= .01) continue;
+      A.getWorldPosition(_v); F.getWorldPosition(_w); const l1 = _v.distanceTo(_w); Hd.getWorldPosition(_w); const l2 = F.position.length() * 0 + _w.distanceTo(F.getWorldPosition(new THREE.Vector3())); const straight = l1 + l2 - _v.distanceTo(_w) < 8; if (!straight) continue;
+      tip.getWorldPosition(_w); const tgt = _w.clone(); tgt.y += pen; const dir = tgt.sub(_v).applyQuaternion(this.qmInv); this.aim(side + 'Arm', dir); this.aim(side + 'ForeArm', dir); if (pose[(side === L ? 'lh' : 'rh')][1] >= 178) this.aim(side + 'Hand', new THREE.Vector3(0, -0.08, 1)); this.model.updateMatrixWorld(true); }
     /* תמיד: שום איבר לא חודר את הרצפה. באוויר (קפיצות, ריצה) הירכיים לפי הפוזה, אבל אם קצה רגל יורד מתחת לרצפה מרימים את כל הגוף (רועי: "טובע בתוך הרצפה, הכפות רגליים נעלמות") */
     { let low = Infinity; for (const n of ['LeftToes_end', 'RightToes_end', 'LeftFoot', 'RightFoot', 'LeftHand', 'RightHand', 'LeftHandIndex3_end', 'RightHandIndex3_end']) { const b = this.b[n]; if (!b) continue; b.getWorldPosition(_v); const r = n.includes('Hand') ? 3 : 1; if (_v.y - r < low) low = _v.y - r; } if (low < base.y - .01) { this.model.position.y += base.y - low; this.model.updateMatrixWorld(true); } }
   }
