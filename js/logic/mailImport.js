@@ -358,8 +358,13 @@ export function parseMail(text, opts) {
   const forLead = [subject, body].filter(Boolean).join('\n');
   const b = parseBrief(forLead, places, today, clients);
   const lead = b.lead;
-  // "à Jérusalem" / "Césarée": the official list has the plain spelling
-  if (!lead.place && /[À-ÿ]/.test(forLead)) lead.place = Office.parseLead(fold(forLead), places, today).place || '';
+  // "באזור הרצליה" must give Herzliya, not the town called אזור; "à Jérusalem": the official list has the plain spelling
+  if (/באי?זור\s|[À-ÿ]/.test(forLead)) {
+    const base = fold(forLead);
+    let pl = Office.parseLead(base.replace(/באי?זור\s+/g, 'ב'), places, today).place;
+    if (!pl || pl === 'אזור') pl = Office.parseLead(base.replace(/באי?זור\s+ה/g, 'ב'), places, today).place;
+    lead.place = pl && pl !== 'אזור' ? pl : (lead.place === 'אזור' ? '' : lead.place);
+  }
   NEEDS_EXTRA.forEach(([type, re]) => { if (re.test(forLead) && !b.needs.includes(type)) b.needs.push(type); });
   const email = from.email || (emailsIn(sig)[0] || '') || lead.email || '';
   const phone = takePhone(sig) || takePhone(body) || lead.phone || '';

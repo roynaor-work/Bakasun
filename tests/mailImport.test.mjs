@@ -250,6 +250,13 @@ test('missingOf and summaryText', () => {
   assert.deepEqual(missingOf({ client: 'X', email: 'a@b.c', date: '2026-01-01', participants: '5', budget: '1', place: 'p', kind: 'k', purpose: 'q' }), []);
 });
 
+test('with the official places list: "באזור הרצליה" is Herzliya, not the town called אזור; "à Jérusalem" and "in the Negev"', async () => {
+  const { PLACES: ALL } = await import('../js/data/places.js');
+  assert.equal(parseMail('רוצים יום גיבוש באזור הרצליה ל-50 איש', { places: ALL, today }).place, 'הרצליה');
+  assert.equal(parseMail('un séminaire à Jérusalem pour 30 personnes', { places: ALL, today }).place, 'ירושלים');
+  assert.equal(parseMail('a retreat in the Negev for 30 people', { places: ALL, today }).place, 'נגב');
+});
+
 test('nothing in the module holds Arabic letters', async () => {
   const fs = await import('node:fs');
   for (const f of ['js/logic/mailImport.js', 'js/screens/importMail.js', 'js/i18n/importmail.js', 'css/importmail.css']) {
