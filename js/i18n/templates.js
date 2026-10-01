@@ -14,7 +14,7 @@ export const TEMPLATES = {
     mtF_price: 'מחיר לפני מע״מ', mtF_terms: 'תנאי תשלום', mtF_amount: 'סכום', mtF_invoiceNo: 'מספר חשבונית', mtF_dueDate: 'לתשלום עד', mtF_arrival: 'שעת הגעה', mtF_address: 'כתובת',
     mtF_parking: 'חניה', mtF_onsite: 'איש קשר בשטח', mtF_rsvpBy: 'לענות עד', mtF_what: 'מה ביקשנו',
     mtYes: 'כן', mtNo: 'לא', mtHalfBoard: 'חצי פנסיון', mtBB: 'לינה וארוחת בוקר', mtFullBoard: 'פנסיון מלא', mtBoardChoose: 'לבחור',
-    mtOpenPayment: 'תשלום פתוח', mtNoTemplate: 'התבנית לא נמצאה.'
+    mtOpenPayment: 'תשלום פתוח', mtNoTemplate: 'התבנית לא נמצאה.', mtSaveFilled: 'הטקסט כמו שהוא עכשיו', mtSaveBlank: 'התבנית הריקה, עם השדות {…}'
   },
   fr: {
     mtTitle: 'Modèles de message', mtSearch: 'Chercher un modèle', mtLang: 'Langue du message', mtNone: 'Aucun modèle trouvé. Essayez un autre mot.',
@@ -30,7 +30,7 @@ export const TEMPLATES = {
     mtF_price: 'Prix HT', mtF_terms: 'Conditions de paiement', mtF_amount: 'Montant', mtF_invoiceNo: 'N° de facture', mtF_dueDate: 'À régler avant le', mtF_arrival: 'Heure d’arrivée', mtF_address: 'Adresse',
     mtF_parking: 'Parking', mtF_onsite: 'Contact sur place', mtF_rsvpBy: 'Répondre avant le', mtF_what: 'Ce que nous avons demandé',
     mtYes: 'Oui', mtNo: 'Non', mtHalfBoard: 'Demi-pension', mtBB: 'Nuit et petit-déjeuner', mtFullBoard: 'Pension complète', mtBoardChoose: 'Choisir',
-    mtOpenPayment: 'Paiement en attente', mtNoTemplate: 'Modèle introuvable.'
+    mtOpenPayment: 'Paiement en attente', mtNoTemplate: 'Modèle introuvable.', mtSaveFilled: 'Le texte tel qu’il est maintenant', mtSaveBlank: 'Le modèle vide, avec les champs {…}'
   },
   en: {
     mtTitle: 'Message templates', mtSearch: 'Search a template', mtLang: 'Message language', mtNone: 'No template found. Try another word.',
@@ -46,6 +46,6 @@ export const TEMPLATES = {
     mtF_price: 'Price before VAT', mtF_terms: 'Payment terms', mtF_amount: 'Amount', mtF_invoiceNo: 'Invoice number', mtF_dueDate: 'Due by', mtF_arrival: 'Arrival time', mtF_address: 'Address',
     mtF_parking: 'Parking', mtF_onsite: 'Contact on site', mtF_rsvpBy: 'Reply by', mtF_what: 'What we asked for',
     mtYes: 'Yes', mtNo: 'No', mtHalfBoard: 'Half board', mtBB: 'Bed and breakfast', mtFullBoard: 'Full board', mtBoardChoose: 'Choose',
-    mtOpenPayment: 'Open payment', mtNoTemplate: 'Template not found.'
+    mtOpenPayment: 'Open payment', mtNoTemplate: 'Template not found.', mtSaveFilled: 'The text as it is now', mtSaveBlank: 'The blank template, with the {…} fields'
   }
 };

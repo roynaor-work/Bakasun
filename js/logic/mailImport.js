@@ -115,8 +115,9 @@ export function takeOrg(body, signature, email) {
   if ((m = new RegExp('(?:^|\\s)(' + ORG_WORDS_HE + ')\\s+([^\\n,.;:!?()]{2,45}?)(?=[\\n,.;:!?()]|\\s+(?:ו|אנחנו|אנו|רוצים|רוצה|מעוניינים|מעוניינת|מעוניין|מחפשים|מחפשת|מחפש|מבקשים|מבקשת|מבקש|ואנחנו|ואנו|עם|ל|ב|שרוצים|מתכננת|מתכנן|מתכננים|מארגנת|מארגן|מארגנים|חוגגת|חוגג|חוגגים)(?:\\s|$)|$)').exec(b))) return clean(m[1] + ' ' + m[2]);
   // "I'm Dana from Alpha Ltd" / "writing on behalf of X" / "we at X"
   if ((m = /(?:\b(?:i(?:'m| am)|this is|my name is)\s+[A-Z][\w'\-]+(?:\s+[A-Z][\w'\-]+)?\s*,?\s*|\b(?:on behalf of|we at|here at|writing from)\s+)(?:the\s+)?(?:from|at|of|with)?\s*([A-Z][^\n,.;:!?()]{1,50}?)(?=[\n,.;:!?()]|\s+(?:and|we|our|in|for|to|which|where)\b|$)/.exec(b)) && !/^(?:from|at|of|with)$/i.test(m[1])) return clean(m[1].replace(/^(?:from|at|of|with)\s+/i, ''));
-  // "de la société X" / "de l'association X" / "chez X" / "pour le compte de X"
-  if ((m = /(?:de la (?:société|part de la société|mairie|fondation|commune)|de l'(?:entreprise|association|université|école|institut)|du (?:groupe|cabinet|lycée|conseil)|pour le compte de|au nom de|chez)\s+([^\n,.;:!?()]{2,50}?)(?=[\n,.;:!?()]|\s+(?:et|nous|qui|pour|dans|avec|souhaite|souhaitons|organise|organisons)\b|$)/i.exec(b))) return clean(m[1]);
+  // "de la part de la Fondation X" / "de la société X" / "chez X" / "pour le compte de X"
+  if ((m = /(?:de la part de |pour le compte de |au nom de |de |chez |pour )?(?:la |l'|le |du |des )?((?:société|entreprise|association|université|école|institut|groupe|cabinet|lycée|collège|conseil|mairie|fondation|commune|fédération|agence|ministère|ambassade|fonds|banque|communauté|centre)\s+[^\n,.;:!?()]{2,50}?)(?=[\n,.;:!?()]|\s+(?:et|nous|qui|pour|dans|avec|souhaite|souhaitons|organise|organisons|est|sommes)\b|$)/i.exec(b)) && /[A-ZÀ-Ý]/.test(m[1].slice(1))) return clean(m[1]);
+  if ((m = /(?:chez|pour le compte de|au nom de|de la part de)\s+([A-ZÀ-Ý][^\n,.;:!?()]{1,50}?)(?=[\n,.;:!?()]|\s+(?:et|nous|qui|pour|dans|avec|souhaite|souhaitons|organise|organisons)\b|$)/.exec(b))) return clean(m[1]);
   // the signature: a line with a company suffix or an organisation word, or the line after the name/title
   const sig = str(signature).split('\n').map(trim).filter(Boolean);
   for (const l of sig) if (ORG_SUFFIX.test(l) && !/@|https?:|www\./i.test(l) && l.length <= 60) return clean(l.replace(/^(?:[^|•·]*[|•·]\s*)?/, m2 => (/\b(?:ltd|inc|gmbh|sa|sas|sarl|בע|ע״ר|ע"ר)/i.test(m2) ? m2 : '')).replace(/\s*[|•·].*$/, '') || l);
@@ -188,6 +189,10 @@ export function takeDates(text, today) {
   if ((m = new RegExp('\\b' + MN + '\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?' + SEP + '(\\d{1,2})(?:st|nd|rd|th)?(?:,?\\s+(\\d{4}))?(?![/.\\d])', 'i').exec(t)) && monthNo(m[1])) {
     const a = mk(+m[2], monthNo(m[1]), m[4]), b = mk(+m[3], monthNo(m[1]), m[4]); if (a && b) return out(a, b, m[0]);
   }
+  // November 19 and leaving November 24, 2026 / from November 19 until November 24
+  if ((m = new RegExp('\\b' + MN + '\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?(?:,?\\s+(\\d{4}))?\\s*(?:-|to|until|till|through|and(?:\\s+(?:leaving|departing|ending|returning|back))?(?:\\s+on)?|עד|ועד|au|jusqu\'au)\\s*(?:on\\s+|the\\s+)?' + MN + '\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?(?:,?\\s+(\\d{4}))?', 'i').exec(t)) && monthNo(m[1]) && monthNo(m[4])) {
+    const a = mk(+m[2], monthNo(m[1]), m[3] || m[6]), b = mk(+m[5], monthNo(m[4]), m[6] || m[3]); if (a && b) return out(a, b, m[0]);
+  }
   // 19 October - 24 November (two month names)
   if ((m = new RegExp('(?<![\\d/.:])(\\d{1,2})(?:er|st|nd|rd|th)?\\s*(?:ב|ל|de |d\'|of )?\\s*' + MN + '\\.?(?:\\s+(\\d{4}))?' + SEP + '(\\d{1,2})(?:er|st|nd|rd|th)?\\s*(?:ב|ל|de |d\'|of )?\\s*' + MN + '\\.?(?:\\s+(\\d{4}))?', 'i').exec(t)) && monthNo(m[2]) && monthNo(m[5])) {
     const a = mk(+m[1], monthNo(m[2]), m[3] || m[6]), b = mk(+m[4], monthNo(m[5]), m[6] || m[3]); if (a && b) return out(a, b, m[0]);
@@ -204,13 +209,13 @@ export function takeDates(text, today) {
 export function takeHours(text) {
   const t = str(text).replace(/[\u2013\u2014]/g, '-');
   const hh = (h, mi, ap) => { h = +h; mi = mi ? +mi : 0; if (ap && /pm/i.test(ap) && h < 12) h += 12; if (ap && /am/i.test(ap) && h === 12) h = 0; if (h > 23 || mi > 59) return ''; return String(h).padStart(2, '0') + ':' + String(mi).padStart(2, '0'); };
-  const NOT_DATE = '(?![/.\\d])';
+  const NOT_DATE = '(?![/\\d]|\\.\\d)';
   let m;
   if ((m = /(\d{1,2})[:.h](\d{2})\s*(am|pm)?\s*(?:-|עד|to|à|jusqu'à|et|ועד|until|till)\s*(?:השעה\s*)?(\d{1,2})[:.h](\d{2})?\s*(am|pm)?(?![\d])/i.exec(t))) { const a = hh(m[1], m[2], m[3]), b = hh(m[4], m[5], m[6]); if (a && b) return a + '-' + b; }
   if ((m = /(\d{1,2})\s*h(\d{2})?\s*(?:-|à|jusqu'à|et)\s*(\d{1,2})\s*h(\d{2})?(?![\d])/i.exec(t))) { const a = hh(m[1], m[2]), b = hh(m[3], m[4]); if (a && b) return a + '-' + b; }
   if ((m = /(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\s*(?:-|to|until|till|and)\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)(?![\d])/i.exec(t))) { const a = hh(m[1], m[2], m[3] || m[6]), b = hh(m[4], m[5], m[6]); if (a && b) return a + '-' + b; }
   if ((m = new RegExp('(?:בשעות|משעה|בין השעות|from|between|entre|de|dès)\\s*(\\d{1,2})(?::(\\d{2}))?\\s*(?:h|:00)?\\s*(?:-|עד|ועד|to|and|à|et|ל-?)\\s*(?:השעה\\s*)?(\\d{1,2})(?::(\\d{2}))?\\s*h?' + NOT_DATE + '(?!\\s*(?:' + MONTH_NAMES + ')\\b)(?!\\s*(?:k\\b|אלף|₪|€|\\$|%|people|personnes|pax|איש|משתתפים|חדרים|חדרי|rooms|chambres|participants))', 'i').exec(t))) { const a = hh(m[1], m[2]), b = hh(m[3], m[4]); if (a && b && +m[3] <= 23) return a + '-' + b; }
-  if ((m = /(?:בשעה|at|à|vers|ab|starting at|début à)\s*(\d{1,2})(?:[:h.](\d{2}))?\s*(am|pm|h)?(?![\d/.])/i.exec(t)) && (m[2] || m[3] || /^בשעה/.test(m[0]))) { const a = hh(m[1], m[2], m[3]); if (a) return a; }
+  if ((m = /(?:בשעה|at|à|vers|ab|starting at|début à)\s*(\d{1,2})(?:[:h.](\d{2}))?\s*(am|pm|h)?(?![\d/]|\.\d)/i.exec(t)) && (m[2] || m[3] || /^בשעה/.test(m[0]))) { const a = hh(m[1], m[2], m[3]); if (a) return a; }
   if ((m = /(?<![\d:])(\d{1,2}):(\d{2})(?![\d])/.exec(t))) { const a = hh(m[1], m[2]); if (a) return a; }
   return '';
 }
@@ -258,7 +263,7 @@ export function takePurpose(text, lead) {
   if (lead && lead.purpose) return lead.purpose;
   const t = str(text);
   let m;
-  if ((m = /(?:לרגל|לכבוד|לציון|במסגרת|לסיכום|לקראת|מטרת האירוע היא|המטרה היא|מטרה:|at the occasion of|on the occasion of|to celebrate|to mark|as part of|for our|for the|purpose:|the goal is|the idea is|à l'occasion de|dans le cadre de|pour fêter|pour célébrer|pour marquer|pour notre|l'objectif est|le but est)\s*:?\s+([^\n.!?;]{3,90})/i.exec(t))) return trim(m[1]).replace(/[,:]$/, '');
+  if ((m = /(?:לרגל|לכבוד|לציון|במסגרת|לסיכום|לקראת|מטרת האירוע היא|המטרה היא|מטרה:|at the occasion of|on the occasion of|to celebrate|to mark|as part of|for our|purpose:|the goal is|the idea is|à l'occasion de|dans le cadre de|pour fêter|pour célébrer|pour marquer|pour notre|l'objectif est|le but est)\s*:?\s+([^\n.!?;]{3,90})/i.exec(t))) return trim(m[1]).replace(/[,:]$/, '');
   return '';
 }
 
@@ -279,6 +284,29 @@ export function takePhone(text) {
   if ((m = /(?:\+972[\s\-]?|0)(5\d)[\s\-]?(\d{3})[\s\-]?(\d{4})(?!\d)/.exec(t))) return '0' + m[1] + '-' + m[2] + m[3];
   if ((m = /(?:\+972[\s\-]?|0)([2-9])[\s\-]?(\d{3})[\s\-]?(\d{4})(?!\d)/.exec(t)) && !/^0?5/.test(m[1])) return '0' + m[1] + '-' + m[2] + m[3];
   if ((m = /(?:\+|00)\d[\d\s\-.]{7,16}\d(?!\d)/.exec(t))) return m[0].replace(/[\s\-.]/g, '');
+  return '';
+}
+
+/** "Jérusalem" → "Jerusalem": accents dropped for the place list. */
+export function fold(s) { return str(s).normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+
+/** Supplier words parseBrief does not know: French meals and lodging, transfers. */
+const NEEDS_EXTRA = [
+  ['קייטרינג ושפים', /dîner|diner\b|déjeuner|dejeuner|petit[- ]déjeuner|cocktail|apéritif|pause[- ]café|coffee break|הפסקת קפה|ארוחת/i],
+  ['מלונות', /hébergement|hebergement|nuitée|nuitees|accommodation|lodging|חדרי אירוח|לינה/i],
+  ['הסעות', /transfert|autocar|navettes?|\bcar\b|coach|transfers?|הסעות|אוטובוסים/i],
+  ['מקום לאירוע', /salle de (?:réunion|conférence)|meeting room|conference room|חדר ישיבות|אולם כנסים/i]
+];
+
+/** The writer's name when there are no headers: "זאת אורלי", "אני דנה מחברת…", "ici Marie", "it's John". */
+export function takeName(text) {
+  const t = str(text);
+  let m;
+  if ((m = /(?:^|[\s,])(?:זאת|זה|אני|כאן|מדברת|מדבר|שמי|קוראים לי)\s+([\u0590-\u05FF'׳]{2,}(?:\s+[\u0590-\u05FF'׳]{2,})?)/.exec(t))) {
+    const w = m[1].split(/\s+/).filter((x, i) => !(i === 1 && /^(?:מה|מחברת|מעמותת|מעיריית|מארגון|מקרן|מטעם|ואנחנו|ואני|רוצה|רוצים|מעוניינת|מעוניין|מבקשת|מבקש|מחפשת|מחפש)/.test(x)));
+    if (w.length && !/^(?:מ|ה|ב|ל|אני|מחפש|מחפשת|רוצה|רוצים|לא|כן|פה|שם)$/.test(w[0])) return w.join(' ');
+  }
+  if ((m = /(?:^|[\s,])(?:ici|c'est|je suis|je m'appelle|it's|it is|this is|i am|i'm|my name is)\s+([A-ZÀ-Ý][\w'\-À-ÿ]+(?:\s+[A-ZÀ-Ý][\w'\-À-ÿ]+)?)/i.exec(t)) && /^[A-ZÀ-Ý]/.test(m[1]) && !/^(?:the|a|an|un|une|le|la|from|de|writing|looking|interested|happy|glad|sorry)$/i.test(m[1].split(' ')[0])) return m[1];
   return '';
 }
 
@@ -328,13 +356,17 @@ export function parseMail(text, opts) {
   const forLead = [subject, body].filter(Boolean).join('\n');
   const b = parseBrief(forLead, places, today, clients);
   const lead = b.lead;
+  // "à Jérusalem" / "Césarée": the official list has the plain spelling
+  if (!lead.place && /[À-ÿ]/.test(forLead)) lead.place = Office.parseLead(fold(forLead), places, today).place || '';
+  NEEDS_EXTRA.forEach(([type, re]) => { if (re.test(forLead) && !b.needs.includes(type)) b.needs.push(type); });
   const email = from.email || (emailsIn(sig)[0] || '') || lead.email || '';
   const phone = takePhone(sig) || takePhone(body) || lead.phone || '';
   let name = from.name || parts.signName || '';
   if (!name) { const first = str(sig).split('\n').map(trim).filter(Boolean)[0] || ''; if (/^[\u0590-\u05FFA-Za-zÀ-ÿ'׳\-. ]{2,40}$/.test(first) && first.split(/\s+/).length <= 4 && !TITLE_WORDS.test(first) && !ORG_SUFFIX.test(first)) name = first; }
-  if (!name) name = lead.name || '';
+  if (!name) name = takeName(body) || lead.name || '';
   name = trim(name).replace(/[,.]$/, '');
-  const org = takeOrg(body, sig, email);
+  let org = takeOrg(body, sig, email);
+  const orgFromDomain = !!org && !isGenericDomain(emailDomain(email)) && norm(org) === norm(emailDomain(email).replace(/\.(?:co|org|ac|gov|muni|net|com)?\.?[a-z]{2,3}$/i, '').split('.').slice(-1)[0]);
   const dates = takeDates(forLead, today);
   const kind = takeKind(forLead);
   const out = {
@@ -348,8 +380,12 @@ export function parseMail(text, opts) {
   };
   if (!out.place && out.venue) out.place = out.venue;
   const hit = matchMailClient({ email, phone, org, subject, text: body + '\n' + sig, name }, clients);
-  if (hit) { out.client = hit.client.name; out.clientId = hit.client.id || ''; out.clientBy = hit.by; if (!out.lang && hit.client.lang) out.lang = hit.client.lang; }
-  else out.client = org || '';
+  if (hit) {
+    const c = hit.client;
+    out.client = c.name; out.clientId = c.id || ''; out.clientBy = hit.by;
+    if (orgFromDomain || !org) out.org = c.name;
+    if (!out.email) out.email = str(c.email); if (!out.phone) out.phone = str(c.phone); if (!out.name) out.name = str(c.contact);
+  } else out.client = org || '';
   out.missing = missingOf(out);
   return out;
 }

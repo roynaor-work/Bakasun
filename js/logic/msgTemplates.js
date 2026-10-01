@@ -134,8 +134,8 @@ function whoAfter(rest) {
   let m = /(?:^|\s)(?:pour|à|a|for|to)\s+(?:la\s+|le\s+|les\s+|l['’]\s*|the\s+)?(.+)$/i.exec(rest);
   if (!m) m = /(?:^|\s)ל(?:חברת\s+|ארגון\s+|עבור\s+)?(\S.*)$/.exec(rest);
   if (!m) m = /(?:^|\s)(?:עבור|של)\s+(.+)$/.exec(rest);
-  if (!m) m = /^(?:request|demande)?\s*(\S.*)$/i.exec(rest); /* a bare name right after the template words */
-  return m ? trim(m[1]).replace(/^(?:ה|את\s+)/, '').replace(/[.!?,]+$/, '') : '';
+  if (!m) m = /^(\S.*)$/.exec(rest.replace(/^\s*(?:request|reminder|message|demande|rappel|modèle|template|הודעה|תבנית)\b\s*/i, '')); /* a bare name right after the template words */
+  return m ? trim(m[1]).replace(/^את\s+/, '').replace(/[.!?,]+$/, '') : '';
 }
 /** {key, who} for a spoken request, or null when no template is named. who = '' when no name follows. */
 export function parseTemplateRequest(text) {
