@@ -31,7 +31,8 @@ drop policy if exists family_anon_delete on family_events;
 revoke all on family_events from anon, authenticated;
 revoke all on families from anon, authenticated;
 
-create or replace function family_hash(code text) returns text language sql immutable as $$
+-- pgcrypto ב-Supabase יושב בסכימה extensions, לכן search_path כולל אותה
+create or replace function family_hash(code text) returns text language sql immutable set search_path = public, extensions as $$
   select encode(digest(upper(regexp_replace(coalesce(code, ''), '[^A-Za-z0-9]', '', 'g')), 'sha256'), 'hex');
 $$;
 create or replace function family_norm(code text) returns text language sql immutable as $$
