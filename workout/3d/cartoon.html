@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>הדמות בסגנון מצויר</title>
+<style>
+:root{--bg:#f6f1fb;--ink:#1f1a2e;--muted:#6b6480;--card:#fff;--line:#e4dcef;--accent:#d63fa6}
+@media (prefers-color-scheme:dark){:root{--bg:#171322;--ink:#f3eefa;--muted:#a79fbb;--card:#221c33;--line:#352c4c}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Heebo,Assistant,Arial,sans-serif;direction:rtl;text-align:right;unicode-bidi:embed}
+.wrap{max-width:980px;margin:0 auto;padding:16px;display:grid;gap:12px}
+h1{margin:0;font-size:22px}p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip,select{font:inherit;font-size:15px;font-weight:700;padding:9px 14px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;min-height:40px}
+.chip.on{border-color:var(--accent);color:var(--accent)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:10px;display:grid;gap:8px;min-width:0}
+.card h2{margin:0;font-size:15px}
+.view{position:relative;width:100%;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:#ddd}
+.view canvas{width:100%!important;height:100%!important;display:block}
+.tag{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.55);color:#fff;padding:4px 10px;border-radius:999px;font-size:13px}
+</style>
+<div class="wrap">
+  <div><h1>הדמות שלנו בסגנון מצויר: השוואה</h1><p>אותה דמות, אותן פוזות. מימין: המראה של היום. משמאל: סגנון "סרט מצויר": קו מתאר עבה, שתי דרגות צבע בלבד, בלי חדר, רקע שטוח וצל עגול. בחר תרגיל, ואמור איזה מספר.</p></div>
+  <div class="chips"><select id="sel"></select><button class="chip" id="slow">🐢 איטי</button><button class="chip" id="rot">🔄 מצלמה</button></div>
+  <div class="grid">
+    <div class="card"><h2>1. היום (תלת-ממד בחדר)</h2><div class="view" id="v1"><span class="tag">טוען...</span></div></div>
+    <div class="card"><h2>2. מצויר (קו עבה, צבעים שטוחים)</h2><div class="view" id="v2"><span class="tag">טוען...</span></div></div>
+    <div class="card"><h2>3. מצויר, גרסה בולטת (קו עבה יותר, צבע מלא)</h2><div class="view" id="v3"><span class="tag">טוען...</span></div></div>
+    <div class="card"><h2>4. מצויר עם רקע תרגיל (רצפה ומסדרון בשטוח)</h2><div class="view" id="v4"><span class="tag">טוען...</span></div></div>
+  </div>
+</div>
+<script type="module">
+import { THREE, loadCharacter, KITS3D, lights, room, propMesh, viewFront, outlineMaterial } from '../js/char3d.js';
+import { EXERCISES, byId } from '../js/exercises.js';
+import { poseAt } from '../js/figure.js';
+const CATS = { warm: 'חימום', jump: 'ניתור', speed: 'מהירות', core: 'בטן', legs: 'רגליים', upper: 'כוח עליון', stretch: 'מתיחות' };
+const sel = document.getElementById('sel');
+for (const cat in CATS) { const og = document.createElement('optgroup'); og.label = CATS[cat]; EXERCISES.filter(e => e.cat === cat).forEach(e => { const o = document.createElement('option'); o.value = e.id; o.textContent = e.name; og.appendChild(o); }); sel.appendChild(og); }
+const q = new URLSearchParams(location.search); let cur = byId[q.get('ex')] ? q.get('ex') : 'jumping-jacks'; sel.value = cur;
+let speed = 0.6, camAngle = 0.35, t0 = performance.now();
+const W = 480, H = 600;
+// שתי דרגות צבע בלבד (אור/צל) = מראה של סרט מצויר שטוח
+function flatGradient(dark = '#7a7a7a', light = '#ffffff') { const c = document.createElement('canvas'); c.width = 2; c.height = 1; const g = c.getContext('2d'); g.fillStyle = dark; g.fillRect(0, 0, 1, 1); g.fillStyle = light; g.fillRect(1, 0, 1, 1); const t = new THREE.CanvasTexture(c); t.minFilter = t.magFilter = THREE.NearestFilter; t.colorSpace = THREE.NoColorSpace; return t; }
+// צל עגול רך מתחת לדמות (במקום צל אמיתי): כמו באנימציה דו-ממדית
+function blobShadow(scene) { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'); const rg = g.createRadialGradient(64, 64, 10, 64, 64, 64); rg.addColorStop(0, 'rgba(40,10,50,.45)'); rg.addColorStop(1, 'rgba(40,10,50,0)'); g.fillStyle = rg; g.fillRect(0, 0, 128, 128); const t = new THREE.CanvasTexture(c); const m = new THREE.Mesh(new THREE.PlaneGeometry(130, 60), new THREE.MeshBasicMaterial({ map: t, transparent: true, depthWrite: false })); m.rotation.x = -Math.PI / 2; m.position.y = .5; scene.add(m); return m; }
+async function makeView(id, style) {
+  const view = document.getElementById(id);
+  const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setSize(W, H, false); renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.outputColorSpace = THREE.SRGBColorSpace;
+  const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(style === 'room' ? 32 : 24, W / H, 1, 3000);
+  let shadow = null;
+  if (style === 'room') { renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; room(scene, matchMedia('(prefers-color-scheme: dark)').matches); lights(scene); }
+  else {
+    scene.background = new THREE.Color(style === 'stage' ? '#DFF1FF' : '#F2A9E3');
+    scene.add(new THREE.HemisphereLight('#ffffff', '#ffffff', style === 'bold' ? 2.6 : 2.2)); /* תאורה שטוחה: כמעט בלי צל על הגוף */
+    const key = new THREE.DirectionalLight('#ffffff', style === 'bold' ? .9 : 1.3); key.position.set(120, 300, 260); scene.add(key);
+    shadow = blobShadow(scene);
+    if (style === 'stage') { const floor = new THREE.Mesh(new THREE.PlaneGeometry(1600, 1600), new THREE.MeshBasicMaterial({ color: '#F7E6C8' })); floor.rotation.x = -Math.PI / 2; floor.position.y = -.5; scene.add(floor); const wall = new THREE.Mesh(new THREE.PlaneGeometry(1600, 900), new THREE.MeshBasicMaterial({ color: '#DFF1FF' })); wall.position.set(0, 450, -300); scene.add(wall); const skirt = new THREE.Mesh(new THREE.PlaneGeometry(1600, 10), new THREE.MeshBasicMaterial({ color: '#C9B99A' })); skirt.position.set(0, 5, -299); scene.add(skirt); }
+  }
+  view.appendChild(renderer.domElement);
+  const ch = await loadCharacter(KITS3D.maccabi); scene.add(ch.model);
+  if (style !== 'room') {
+    const ws = new THREE.Vector3(); ch.mesh.getWorldScale(ws);
+    ch.outline.material = outlineMaterial((style === 'bold' ? 4.2 : 3) / (ws.x || 1), '#241B3A'); /* קו מתאר עבה כמו באיור */
+    ch.mesh.material.gradientMap = flatGradient(style === 'bold' ? '#8a8a8a' : '#7c7c7c', '#ffffff'); ch.mesh.material.needsUpdate = true;
+    if (style === 'bold') { ch.mesh.material.color = new THREE.Color(1.12, 1.12, 1.12); } /* צבעים רוויים יותר */
+  }
+  view.querySelector('.tag').textContent = byId[cur].name;
+  let propObj = null, front = false, frames = null; const camTarget = new THREE.Vector3(0, 100, 0); let camDist = 430;
+  const KEY = ['Head_end', 'LeftHand', 'RightHand', 'LeftToes', 'RightToes', 'Hips', 'LeftLeg', 'RightLeg'];
+  function frameCamera() { const box = new THREE.Box3(), v = new THREE.Vector3(); for (const [pose] of frames) { ch.rig.apply(pose, front); for (const n of KEY) { const b = ch.rig.b[n]; if (b) { b.getWorldPosition(v); box.expandByPoint(v); } } } box.expandByScalar(14); box.min.y = Math.min(box.min.y, 0); const c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3()); camTarget.set(c.x * .6, c.y, 0); const need = Math.max(size.y, size.x / camera.aspect, size.z / camera.aspect) * 1.12; camDist = need / 2 / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) + 40; }
+  function placeCam() { camera.position.set(camTarget.x + Math.sin(camAngle) * camDist, camTarget.y + camDist * (style === 'room' ? .28 : .18), Math.cos(camAngle) * camDist); camera.lookAt(camTarget); }
+  function show(id) { const ex = byId[id]; frames = ex.frames; front = viewFront(ex); ch.model.rotation.y = front ? 0 : Math.PI / 2; if (propObj) scene.remove(propObj); propObj = (style === 'room' || style === 'stage') ? propMesh(ex.prop) : null; if (propObj) scene.add(propObj); frameCamera(); placeCam(); view.querySelector('.tag').textContent = ex.name; }
+  show(cur);
+  return { tick(ms) { if (frames) ch.rig.apply(poseAt(frames, ms), front); if (shadow) { const hips = ch.rig.b.Hips; if (hips) { const p = new THREE.Vector3(); hips.getWorldPosition(p); shadow.position.x = p.x; shadow.position.z = p.z; const s = Math.max(.5, 1 - Math.max(0, p.y - 95) / 220); shadow.scale.set(s, s, 1); } } placeCam(); renderer.render(scene, camera); }, show };
+}
+const views = await Promise.all([makeView('v1', 'room'), makeView('v2', 'flat'), makeView('v3', 'bold'), makeView('v4', 'stage')]);
+function loop() { const ms = (performance.now() - t0) * speed; for (const v of views) v.tick(ms); requestAnimationFrame(loop); } loop();
+sel.onchange = () => { cur = sel.value; t0 = performance.now(); views.forEach(v => v.show(cur)); history.replaceState(null, '', `?ex=${cur}`); };
+document.getElementById('slow').onclick = e => { speed = speed === 0.6 ? 0.35 : 0.6; e.target.classList.toggle('on', speed !== 0.6); };
+document.getElementById('rot').onclick = () => { camAngle += Math.PI / 6; };
+window.__cartoon = { ready: true };
+</script>
+</html>
