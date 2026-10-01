@@ -30,6 +30,8 @@ import * as budget from './screens/budget.js';
 import * as runsheet from './screens/runsheet.js';
 import * as casefiles from './screens/casefiles.js';
 import './screens/workgroup.js';
+import * as templatesScreen from './screens/templates.js';
+import * as importMail from './screens/importMail.js';
 import * as rules from './screens/rules.js';
 import * as board from './screens/board.js';
 import { quickNote } from './notes.js';
@@ -42,7 +44,8 @@ const ROUTES = {
   today, lead, cases, 'case': cases, clients, client: clients, calls, tasks, search, settings, more,
   suppliers, supplier: suppliers, quotes, quote: quotes, groups, money, notes, assist, portal, receipts, help, share,
   dashboard, calendar, participants, contracts, contract: contracts,
-  budget, runsheet, files: casefiles, notifications: rules, board
+  budget, runsheet, files: casefiles, notifications: rules, board,
+  templates: templatesScreen, 'import': importMail
 };
 const NAV = [
   ['today', 'today', 'M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z'],

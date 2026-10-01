@@ -12,5 +12,7 @@ import { TASKS2 } from './i18n/tasks2.js';
 import { PERSONAL } from './i18n/personal.js';
 import { VOICE2 } from './i18n/voice2.js';
 import { WORKGROUP } from './i18n/workgroup.js';
+import { TEMPLATES } from './i18n/templates.js';
+import { IMPORTMAIL } from './i18n/importmail.js';
 export const EXTRA = { he: {}, fr: {}, en: {} };
-[DASHBOARD, CALENDAR, PARTICIPANTS, CONTRACTS, BUDGET, RUNSHEET, CASEFILES, RULES, BOARD, TASKS2, PERSONAL, VOICE2, WORKGROUP].forEach(d => Object.keys(EXTRA).forEach(k => Object.assign(EXTRA[k], (d && d[k]) || {})));
+[DASHBOARD, CALENDAR, PARTICIPANTS, CONTRACTS, BUDGET, RUNSHEET, CASEFILES, RULES, BOARD, TASKS2, PERSONAL, VOICE2, WORKGROUP, TEMPLATES, IMPORTMAIL].forEach(d => Object.keys(EXTRA).forEach(k => Object.assign(EXTRA[k], (d && d[k]) || {})));
