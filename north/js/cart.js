@@ -66,6 +66,7 @@ export function validateOrder(f, method) {
     if (!f.street || f.street.trim().length < 2) errs.push('רחוב ומספר');
   }
   if (!f.adult) errs.push('אישור גיל 18 ומעלה');
+  if (!f.terms) errs.push('אישור התקנון');
   return errs;
 }
 

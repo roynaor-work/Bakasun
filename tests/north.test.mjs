@@ -40,11 +40,12 @@ test('מארז בהרכבה: בסיס + תוספות + אריזה', () => {
 });
 
 test('בדיקת טופס: איסוף לא דורש כתובת, משלוח כן', () => {
-  const f = { name: 'דנה לוי', phone: '050-1234567', adult: true };
+  const f = { name: 'דנה לוי', phone: '050-1234567', adult: true, terms: true };
   assert.deepEqual(C.validateOrder(f, 'pickup'), []);
   assert.ok(C.validateOrder(f, 'north').includes('יישוב'));
   assert.ok(C.validateOrder({ ...f, phone: '123' }, 'pickup').includes('טלפון תקין'));
   assert.ok(C.validateOrder({ ...f, adult: false }, 'pickup').includes('אישור גיל 18 ומעלה'));
+  assert.ok(C.validateOrder({ ...f, terms: false }, 'pickup').includes('אישור התקנון'));
   assert.ok(C.validateOrder({ ...f, email: 'x' }, 'pickup').includes('כתובת מייל תקינה'));
 });
 
