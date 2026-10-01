@@ -80,7 +80,7 @@ function wireHelp(ex, mainFig) {
       ${stepsHtml(ex)}<div class="tip">👀 ${esc(ex.tip)}</div>
       <p class="muted small">האנימציה עכשיו לאט. ${canSpeak() && store.profile.voice !== false ? 'ההסבר מוקרא בקול.' : 'אין קול במכשיר הזה, קוראים.'}</p>
     </div>`;
-    mainFig && mainFig.play(ex, 0.55);
+    mainFig && mainFig.play(ex, 0.75); /* הסבר: לאט אבל לא זוחל (רועי 01/10: "החלק האיטי נראה ממש איטי"; הדמות המצוירת כבר ב-.7) */
     speak(sayText(ex));
     $('#sayagain').onclick = () => speak(sayText(ex));
   };

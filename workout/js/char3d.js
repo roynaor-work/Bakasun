@@ -119,7 +119,13 @@ export class PoseRig {
   // מסובב עצם כך שהכיוון אל הילד שלו יהיה dir במערכת המודל (הדמות פונה +Z), בסיבוב המינימלי מכיוון המנוחה
   aim(name, dir) {
     const bone = this.b[name], r = this.rest[name]; if (!bone || !r || dir.lengthSq() < 1e-6) return;
-    _q.setFromUnitVectors(r.dir, _v.copy(dir).normalize()); _q.multiply(r.q);
+    _v.copy(dir).normalize();
+    if (r.dir.dot(_v) < -0.9) { /* כיוון כמעט הפוך למנוחה (רגליים למעלה בשכיבה): הסיבוב המינימלי בוחר ציר שרירותי והברך/כף הרגל יוצאות הפוכות (רועי: "הרגליים הפוכות"). מסובבים קודם 180° סביב ציר הרוחב (X) ואז סיבוב קטן אל היעד */
+      const ax = new THREE.Vector3(1, 0, 0); ax.addScaledVector(r.dir, -ax.dot(r.dir)); if (ax.lengthSq() < 1e-4) ax.set(0, 0, 1); ax.normalize();
+      const flip = new THREE.Quaternion().setFromAxisAngle(ax, Math.PI); const mid = r.dir.clone().applyQuaternion(flip);
+      _q.setFromUnitVectors(mid, _v).multiply(flip);
+    } else _q.setFromUnitVectors(r.dir, _v);
+    _q.multiply(r.q);
     bone.parent.updateWorldMatrix(true, false); bone.parent.getWorldQuaternion(_pq); _pq.premultiply(this.qmInv).invert();
     bone.quaternion.copy(_pq.multiply(_q));
   }
@@ -131,10 +137,13 @@ export class PoseRig {
     else if (this._faced && !front) { this.model.rotation.y = Math.PI / 2; this._faced = false; } /* פוזה בלי face אחרי פוזות עם face: חזרה לפנייה ימינה (frameCamera עובר על כל הפריימים ומשאיר את הסיבוב האחרון) */
     const ms = face < 0 ? -1 : 1;
     this.model.updateWorldMatrix(true, false); this.model.getWorldQuaternion(this.qmInv).invert();
-    const P = ([x, y, z = 0]) => front ? new THREE.Vector3(x - 100, 182 - y, z) : new THREE.Vector3(-z, 182 - y, ms * (x - 100)); /* z אופציונלי: עומק */
+    const P = ([x, y, z = 0]) => front ? new THREE.Vector3(x - 100, 182 - y, z) : new THREE.Vector3(-z, 182 - y, ms * (x - 100)); /* z אופציונלי: עומק; ms משקף רק כיוונים (TURN) */
     const d = (a, b) => P(b).sub(P(a));
     const L = front ? 'Right' : 'Left', R = front ? 'Left' : 'Right';
-    const hipW = P(pose.hip).applyQuaternion(this.model.quaternion), off = this.hipsRest.clone().applyQuaternion(this.model.quaternion);
+    /* מיקום האגן: לפי הציור כמו שהוא (בלי השיקוף של ms): כשהדמות פונה שמאלה היא צריכה להיות בצד שאליו הציור המשוקף שם אותה. עם השיקוף גם על המיקום היא חזרה לצד הימני ו"עברה דרך הקיר" (רועי 01/10) */
+    const hipLocal = front ? new THREE.Vector3(pose.hip[0] - 100, 182 - pose.hip[1], pose.hip[2] || 0) : new THREE.Vector3(-(pose.hip[2] || 0), 182 - pose.hip[1], pose.hip[0] - 100);
+    const baseQ = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), front ? 0 : Math.PI / 2); /* המיקום במערכת של הדמות הלא-מסובבת (לפני הסיבוב של face) */
+    const hipW = hipLocal.applyQuaternion(baseQ), off = this.hipsRest.clone().applyQuaternion(this.model.quaternion);
     const base = at || new THREE.Vector3();
     this.model.position.set(base.x + hipW.x - off.x, base.y + hipW.y - off.y, base.z + hipW.z - off.z);
     const torso = d(pose.hip, pose.neck);
@@ -233,6 +242,11 @@ export function propMesh(prop) {
   const wood = new THREE.MeshStandardMaterial({ color: '#C89B6D', roughness: .8 }), wallMat = new THREE.MeshStandardMaterial({ color: '#CFC6F3', roughness: 1 });
   if (prop.type === 'box') { const m = new THREE.Mesh(new THREE.BoxGeometry(prop.w, prop.h, 80), wood); m.position.set(prop.x + prop.w / 2 - 100, prop.h / 2, 0); m.castShadow = m.receiveShadow = true; g.add(m); const top = new THREE.Mesh(new THREE.BoxGeometry(prop.w + 4, 3, 84), new THREE.MeshStandardMaterial({ color: '#E2B98A' })); top.position.set(prop.x + prop.w / 2 - 100, prop.h + 1, 0); g.add(top); }
   else if (prop.type === 'wall') { const x = prop.x - 100 + (prop.x < 100 ? -8 : 8); /* הקיר מעט מאחורי נקודת המגע כדי שהידיים/הגב לא יעברו דרכו */ const near = x > 0; /* קיר בצד המצלמה (+X) מסתיר את הדמות, לכן שקוף למחצה */ const m = new THREE.Mesh(new THREE.BoxGeometry(8, 240, 420), near ? new THREE.MeshStandardMaterial({ color: '#CFC6F3', roughness: 1, transparent: true, opacity: .4 }) : wallMat); m.position.set(x, 120, 0); m.receiveShadow = !near; g.add(m); }
+  else if (prop.type === 'marks') { /* קו זינוק וקו נחיתה על הרצפה (קפיצה לרוחק) + חיצים ביניהם */
+    const tape = c => new THREE.MeshBasicMaterial({ color: c }); const mk = (x, c) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(6, 120), tape(c)); m.rotation.x = -Math.PI / 2; m.position.set(x, .3, 0); g.add(m); };
+    mk(prop.from, '#ffffff'); mk(prop.to, '#FFD54A');
+    const n = 4; for (let i = 1; i < n; i++) { const x = prop.from + (prop.to - prop.from) * i / n; const a = new THREE.Mesh(new THREE.PlaneGeometry(14, 14), tape('rgba(255,255,255)')); a.material.transparent = true; a.material.opacity = .55; a.rotation.x = -Math.PI / 2; a.rotation.z = -Math.PI / 4; a.position.set(x, .2, 0); g.add(a); }
+  }
   else if (prop.type === 'walls') {
     // מסדרון: הקיר הרחוק מהמצלמה מלא, הקיר הקרוב (צד +X, שם המצלמה) נמוך ושקוף למחצה כדי לא להסתיר את הדמות
     const far = new THREE.Mesh(new THREE.BoxGeometry(8, 240, 420), wallMat); far.position.set(-98, 120, 0); far.receiveShadow = true; g.add(far);

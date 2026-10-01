@@ -21,12 +21,25 @@ export function lerpPose(a, b, t) {
 export function poseAt(frames, ms) {
   const total = frames.reduce((s, f) => s + f[1], 0);
   let t = ((ms % total) + total) % total;
-  for (let i = 0; i < frames.length; i++) {
+  const n = frames.length;
+  for (let i = 0; i < n; i++) {
     const [pose, dur] = frames[i];
-    if (t < dur) return lerpPose(pose, frames[(i + 1) % frames.length][0], ease(t / dur));
+    if (t < dur) {
+      if (frames.smooth && n >= 2) return splinePose(frames[(i - 1 + n) % n][0], pose, frames[(i + 1) % n][0], frames[(i + 2) % n][0], t / dur); /* תנועה מחזורית (ריצה, חבל, ניתורים): עקומה דרך כל הפוזות בלי עצירה בכל פוזה */
+      return lerpPose(pose, frames[(i + 1) % n][0], ease(t / dur));
+    }
     t -= dur;
   }
   return frames[0][0];
+}
+
+// Catmull-Rom בין p1 ל-p2 (p0 ו-p3 שכנים): מהירות רציפה בכל נקודת מפתח, בלי "שלבים" (רועי: "קפיצה בחבל נראה בשלבים ולא זורם")
+export function splinePose(p0, p1, p2, p3, u) {
+  const out = {}; const u2 = u * u, u3 = u2 * u;
+  const cr = (a, b, c, d) => .5 * (2 * b + (-a + c) * u + (2 * a - 5 * b + 4 * c - d) * u2 + (-a + 3 * b - 3 * c + d) * u3);
+  for (const j of JOINTS) { out[j] = [cr(p0[j][0], p1[j][0], p2[j][0], p3[j][0]), cr(p0[j][1], p1[j][1], p2[j][1], p3[j][1])]; const z = [p0, p1, p2, p3].map(p => p[j][2] || 0); if (z.some(v => v)) out[j][2] = cr(...z); }
+  const lin = lerpPose(p1, p2, u); for (const k of ['lat', 'rope', 'face']) if (lin[k] != null) out[k] = lin[k];
+  return out;
 }
 
 export const cycleMs = frames => frames.reduce((s, f) => s + f[1], 0);

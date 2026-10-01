@@ -11,6 +11,7 @@ const FRONT = {
   le: [86, 92], lh: [84, 116], re: [114, 92], rh: [116, 116],
   lk: [93, 148], lf: [92, 182], rk: [107, 148], rf: [108, 182],
 };
+const smooth = f => { f.smooth = true; return f; }; /* רצף מחזורי שעובר דרך הפוזות בעקומה חלקה (Catmull-Rom ב-poseAt) במקום להאט בכל פוזה */
 const shift = (p, dx, dy) => Object.fromEntries(Object.entries(p).map(([k, v]) => [k, Array.isArray(v) ? [v[0] + dx, v[1] + dy] : v]));
 
 const JJ_MID = P(shift(FRONT, 0, -6), { le: [80, 66], lh: [62, 62], re: [120, 66], rh: [138, 62], lk: [86, 142], lf: [80, 182], rk: [114, 142], rf: [120, 182] }); // כפות הרגליים על הרצפה (182) עם ברכיים כפופות = נחיתה/זינוק; ב-176 הדמות התלת-ממדית עמדה על קצות האצבעות ונראתה מרחפת (רועי 01/10)
@@ -131,13 +132,15 @@ const ARM_CIRC = a => P(FRONT, { le: [88, 68 - Math.cos(a) * 26, Math.sin(a) * 2
 const ARM_CIRCLE_FRAMES = Array.from({ length: 8 }, (_, i) => [ARM_CIRC(i / 8 * Math.PI * 2), 150]);
 const POGO_UP = P(shift(POGO_DOWN, 0, -16), { lf: [92, 160], rf: [108, 160], lk: [94, 140], rk: [106, 140] }); // באוויר, כפות הרגליים מנותקות
 const STAR_SQUAT = P(FRONT, { head: [100, 82], neck: [100, 98], hip: [100, 136], lk: [82, 156], lf: [86, 182], rk: [118, 156], rf: [114, 182], le: [88, 120], lh: [92, 142], re: [112, 120], rh: [108, 142] });
-const BROAD_SET = shift(SQUAT, -32, 0);
-const BROAD_AIR = { head: [100, 40], neck: [100, 56], hip: [96, 100], le: [112, 42], lh: [128, 30], re: [110, 44], rh: [126, 32], lk: [116, 116], lf: [126, 140], rk: [118, 118], rf: [128, 142] };
-const BROAD_LAND = shift(P(SQUAT, { le: [120, 96], lh: [140, 84], re: [122, 98], rh: [142, 86] }), 34, 0); // נחיתה בסקוואט, ידיים קדימה לאיזון
-const BROAD_STAND = shift(SIDE, 36, 0);
-const BROAD_BACK = shift(SIDE, -32, 0);
+const BROAD_FROM = -48, BROAD_TO = 58; /* קו זינוק וקו נחיתה (רועי: "סמן קו שיראה שהוא קופץ למרחק"); המרחק 106 = כמטר */
+const BROAD_SET = shift(SQUAT, BROAD_FROM + 16, 0);
+const BROAD_AIR = shift({ head: [100, 40], neck: [100, 56], hip: [96, 100], le: [112, 42], lh: [128, 30], re: [110, 44], rh: [126, 32], lk: [116, 116], lf: [126, 140], rk: [118, 118], rf: [128, 142] }, 6, -6);
+const BROAD_LAND = shift(P(SQUAT, { le: [120, 96], lh: [140, 84], re: [122, 98], rh: [142, 86] }), BROAD_TO - 2, 0); // נחיתה בסקוואט, ידיים קדימה לאיזון
+const BROAD_STAND = shift(SIDE, BROAD_TO, 0);
+const BROAD_BACK = shift(SIDE, BROAD_FROM + 16, 0);
+const BROAD_MARKS = { type: 'marks', from: BROAD_FROM, to: BROAD_TO };
 const ONE_LEG = P(SIDE, { rk: [92, 142], rf: [82, 156], re: [106, 92], rh: [112, 112], le: [94, 92], lh: [90, 112] });
-const ONE_LEG_UP = shift(P(ONE_LEG, { lk: [98, 144], lf: [96, 170] }), 0, -12);
+const ONE_LEG_UP = shift(P(ONE_LEG, { lk: [98, 144], lf: [96, 170], rk: [88, 134], rf: [74, 142] }), 0, -34); /* רועי 01/10: קופץ גבוה יותר (26) והרגל החופשית מתקפלת */
 const STEP_BOX = { type: 'box', x: 118, y: 148, w: 60, h: 34 };
 const STEP_START = shift(SIDE, -24, 0);
 const STEP_SQUAT = shift(SQUAT, -22, 0);
@@ -167,6 +170,9 @@ const CALF_STRETCH = { head: [120, 58], neck: [116, 74], hip: [100, 118], le: [1
 
 const SPRINT_L = P(HK_L, { head: [108, 48], neck: [104, 64], lk: [124, 118], lf: [118, 150] });
 const SPRINT_R = P(HK_R, { head: [108, 48], neck: [104, 64], rk: [124, 118], rf: [118, 150] });
+/* ריחוף בריצה: שתי הרגליים באוויר, הרגל הקדמית נפתחת קדימה-למטה והאחורית נגררת, ידיים הפוכות לרגליים */
+const FLY_A = { head: [110, 42], neck: [106, 58], hip: [100, 104], le: [118, 82], lh: [132, 70], re: [88, 86], rh: [78, 104], lk: [122, 128], lf: [132, 156], rk: [84, 126], rf: [72, 150] };
+const FLY_B = { ...FLY_A, re: FLY_A.le, rh: FLY_A.lh, le: FLY_A.re, lh: FLY_A.rh, rk: FLY_A.lk, rf: FLY_A.lf, lk: FLY_A.rk, lf: FLY_A.rf };
 const TAKEOFF = { head: [104, 66], neck: [102, 82], hip: [94, 126], le: [84, 104], lh: [70, 118], re: [118, 92], rh: [136, 74], lk: [110, 152], lf: [100, 182], rk: [118, 146], rf: [126, 176] };
 const REACH = P(JUMP, { le: [104, 50], lh: [108, 22], re: [98, 60], rh: [94, 84] });
 const BOUND_L = { head: [104, 40], neck: [102, 56], hip: [98, 100], le: [118, 76], lh: [132, 60], re: [86, 74], rh: [72, 88], lk: [124, 112], lf: [142, 140], rk: [78, 122], rf: [62, 146] };
@@ -196,7 +202,7 @@ export const EXERCISES = [
   { id: 'jog', name: 'ריצה קלה במקום', cat: 'warm', type: 'time', base: 40,
     steps: ['רצים במקום בקצב נעים', 'הידיים זזות כמו בריצה', 'נושמים רגוע'],
     tip: 'זה חימום, לא תחרות. אפשר גם הלוך ושוב במסדרון.',
-    frames: [[JOG_L, 220], [shift(SIDE, 0, -1), 100], [JOG_R, 220], [shift(SIDE, 0, -1), 100]] },
+    frames: smooth([[JOG_L, 220], [shift(SIDE, 0, -4), 100], [JOG_R, 220], [shift(SIDE, 0, -4), 100]]) },
   { id: 'arm-circles', name: 'סיבובי ידיים', cat: 'warm', type: 'time', base: 20, view3d: 'front', /* הידיים קרובות לגוף במישור הצד, הזיהוי האוטומטי חושב שזה מבט צד */
     steps: ['ידיים ישרות לצדדים', 'מסובבים עיגולים גדולים קדימה', 'באמצע הזמן מחליפים כיוון'],
     tip: 'הכתפיים רפויות, לא מרימים אותן לאוזניים.',
@@ -218,7 +224,7 @@ export const EXERCISES = [
   { id: 'high-knees', name: 'ברכיים גבוהות', cat: 'jump', type: 'time', base: 30,
     steps: ['רצים במקום', 'הברכיים עולות לגובה המותן', 'הידיים דוחפות חזק כמו בריצה'],
     tip: 'הגוף ישר, לא נשענים אחורה.',
-    frames: [[HK_L, 260], [shift(SIDE, 0, -2), 120], [HK_R, 260], [shift(SIDE, 0, -2), 120]] },
+    frames: smooth([[HK_L, 260], [shift(SIDE, 0, -4), 120], [HK_R, 260], [shift(SIDE, 0, -4), 120]]) },
   { id: 'tuck-jumps', name: 'קפיצות ברכיים לחזה', cat: 'jump', type: 'reps', base: 8,
     steps: ['עומדים, ידיים מוכנות', 'קופצים גבוה ומקרבים ברכיים לחזה', 'נוחתים רך עם ברכיים מעט כפופות'],
     tip: 'בין קפיצה לקפיצה מותר לעצור שנייה ולאסוף כוח.',
@@ -230,7 +236,7 @@ export const EXERCISES = [
   { id: 'jump-rope', name: 'קפיצה בחבל דמיוני', cat: 'jump', type: 'time', base: 45,
     steps: ['מרפקים צמודים לגוף', 'קפיצות קטנות ומהירות', 'החבל מסתובב מפרקי כף היד'],
     tip: 'בסלון עושים את זה בלי חבל: מסובבים את הידיים כאילו יש. עובד אותו דבר, ולא שוברים כלום.',
-    frames: [[ROPE_DOWN, 240], [ROPE_UP, 240]] },
+    frames: smooth([[P(ROPE_DOWN, { rope: -80 }), 120], [P(ROPE_UP, { rope: 20 }), 120], [P(shift(ROPE_UP, 0, -14), { rope: 300 }), 120], [P(shift(ROPE_DOWN, 0, -8), { rope: 20, lk: [94, 142], rk: [106, 142], lf: [92, 176], rf: [108, 176] }), 120]]) }, /* ארבע פאזות כמו בקפיצה אמיתית: על הרצפה החבל מעל הראש, עולה (החבל באמצע), בשיא החבל עובר מתחת לרגליים, יורד (החבל באמצע) */
   { id: 'burpees', name: 'ברפי', cat: 'jump', type: 'reps', base: 6,
     steps: ['סקוואט וידיים לרצפה', 'רגליים אחורה לפלאנק', 'רגליים חזרה, וקפיצה למעלה עם ידיים'],
     tip: 'זה תרגיל קשה. עדיף 6 טובים מ-10 עקומים.',
@@ -242,11 +248,11 @@ export const EXERCISES = [
   { id: 'broad-jump', name: 'קפיצה לרוחק', cat: 'jump', type: 'reps', base: 6,
     steps: ['עומדים בקצה השטיח, סקוואט, ידיים אחורה', 'מתפוצצים קדימה ולמעלה, ידיים מובילות', 'נוחתים על שתי הרגליים לסקוואט ועוצרים'],
     tip: 'צריך 2 עד 3 מטר פנויים בסלון, בלי שולחן בדרך. הולכים חזרה ברוגע ומתחילים שוב.',
-    frames: [[BROAD_SET, 460], [BROAD_AIR, 340], [BROAD_LAND, 360], [BROAD_STAND, 300], [BROAD_BACK, 500]] },
+    frames: [[BROAD_SET, 460], [BROAD_AIR, 340], [BROAD_LAND, 360], [BROAD_STAND, 300], [BROAD_BACK, 500]], prop: BROAD_MARKS },
   { id: 'single-leg-hops', name: 'ניתור על רגל אחת (כל רגל)', cat: 'jump', type: 'reps', base: 8,
     steps: ['עומדים על רגל אחת, השנייה כפופה מאחור', 'קופצים במקום על הרגל האחת', 'מחליפים רגל ועושים אותו מספר'],
     tip: 'הברך מעל האצבעות בכל נחיתה. אם מתנדנדים, קופצים נמוך יותר.',
-    frames: [[ONE_LEG, 260], [ONE_LEG_UP, 240]] },
+    frames: smooth([[ONE_LEG, 200], [shift(ONE_LEG, 0, -8), 80], [ONE_LEG_UP, 130], [shift(ONE_LEG_UP, 0, 6), 110], [shift(ONE_LEG, 0, -10), 80]]) }, /* שתי פוזות באוויר כדי שהניתור ייראה */
   { id: 'step-jumps', name: 'קפיצה על מדרגה או הדום', cat: 'jump', type: 'reps', base: 8, prop: STEP_BOX,
     steps: ['עומדים מול מדרגה, הדום יציב או שרפרף נמוך שלא מחליק', 'סקוואט קטן וקופצים למעלה עם שתי הרגליים', 'נוחתים רך על המדרגה, ויורדים בהליכה'],
     tip: 'לא על הספה ולא על כיסא עם גלגלים. יורדים תמיד בהליכה, לא בקפיצה. גובה בטוח: עד גובה הברך.',
@@ -254,7 +260,7 @@ export const EXERCISES = [
   { id: 'hall-sprint', name: 'ספרינט במסדרון', cat: 'jump', type: 'reps', base: 6, place: 'hall',
     steps: ['עומדים בקצה המסדרון', 'רצים הכי מהר שאפשר עד הקצה השני', 'הולכים חזרה ברוגע, וזו חזרה אחת'],
     tip: 'להאט לפני הקיר, לא לעצור עליו. גרביים מחליקות? עדיף יחפים או נעליים.',
-    frames: [[SPRINT_L, 170], [shift(SIDE, 0, -2), 80], [SPRINT_R, 170], [shift(SIDE, 0, -2), 80]] },
+    frames: smooth([[SPRINT_L, 150], [FLY_A, 110], [SPRINT_R, 150], [FLY_B, 110]]), view3d: 'side' }, /* בלי פוזות SIDE ביניהן הזיהוי האוטומטי חשב שזה מבט מלפנים */ /* מחזור ריצה אמיתי: מגע שמאל, ריחוף (רגליים במספריים), מגע ימין, ריחוף (רועי: "שיראה שהוא רץ") */
   { id: 'run-jump', name: 'ריצה וקפיצה לרוחק', cat: 'jump', type: 'reps', base: 5, place: 'hall',
     steps: ['מתחילים בקצה המסדרון, שלוש או ארבע צעדי ריצה', 'קופצים מרגל אחת קדימה ולמעלה, הידיים מובילות', 'נוחתים על שתי הרגליים לסקוואט ועוצרים בשקט'],
     tip: 'קופצים לתוך הסלון, לא לכיוון קיר. נחיתה רכה ויציבה שווה יותר מקפיצה ארוכה.',
@@ -288,7 +294,7 @@ export const EXERCISES = [
   { id: 'skipping', name: 'סקיפינג: ברך גבוהה עם ניתור', cat: 'speed', type: 'reps', base: 4, place: 'hall',
     steps: ['רצים לאט לאורך המסדרון', 'בכל צעד: ברך גבוה ויד נגדית למעלה, עם ניתור קטן', 'קצב קבוע: טה-דם, טה-דם. הלוך ושוב זו חזרה'],
     tip: 'זה תרגיל של קואורדינציה, לא מהירות. יד ימין עולה עם ברך שמאל.',
-    frames: [[SKIP_L, 280], [shift(SIDE, 0, -2), 140], [SKIP_R, 280], [shift(SIDE, 0, -2), 140]] },
+    frames: smooth([[SKIP_L, 280], [shift(SIDE, 0, -4), 140], [SKIP_R, 280], [shift(SIDE, 0, -4), 140]]) },
   { id: 'floor-wall-run', name: 'ריצת נגיעות: רצפה וקיר', cat: 'speed', type: 'reps', base: 4, place: 'hall',
     steps: ['ליד קיר אחד: יורדים ונוגעים ברצפה', 'ספרינט לקיר השני ונוגעים בו גבוה, כמה שאפשר', 'חזרה: רצפה, ספרינט, גבוה. הלוך ושוב זו חזרה'],
     tip: 'למטה מהירים, למעלה קופצים. כל נגיעה בקיר גבוה יותר.',

@@ -32,7 +32,7 @@ let speed = 1;
 const st = new Stage3D(view, byId[cur], { onReady: () => { tag.textContent = byId[cur].name; window.__cartoon = { ready: true, st }; }, onFail: () => { tag.textContent = 'אין WebGL במכשיר הזה'; } });
 view.appendChild(tag);
 sel.onchange = () => { cur = sel.value; st.play(byId[cur], speed); tag.textContent = byId[cur].name; history.replaceState(null, '', `?ex=${cur}`); };
-document.getElementById('slow').onclick = e => { speed = speed === 1 ? .55 : 1; st.play(byId[cur], speed); e.target.classList.toggle('on', speed !== 1); };
+document.getElementById('slow').onclick = e => { speed = speed === 1 ? .75 : 1; st.play(byId[cur], speed); e.target.classList.toggle('on', speed !== 1); };
 document.getElementById('rot').onclick = () => { st.camAngle += Math.PI / 6; st.placeCam(); };
 </script>
 </html>
