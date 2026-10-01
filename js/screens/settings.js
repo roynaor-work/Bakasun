@@ -3,7 +3,8 @@ import { t, LANGS, langName } from '../i18n.js';
 import { db } from '../store.js';
 import { esc, field, toast, confirmDialog, dialog, pickContacts, contactsSupported } from '../ui.js';
 import { parseContactsFile } from '../logic/contacts.js';
-import { importContacts } from '../contactsImport.js';
+import { importContacts, planImport, CLASSES } from '../contactsImport.js';
+import { undoLast } from '../logic/undo.js';
 import { templates, removeTemplate } from '../logic/templates.js';
 import { TASK } from '../logic/extra.js';
 import { SEED_SUPPLIERS, SEED_CLIENTS, SEED_TEAM, SEED_STAFF, SEED_PAYMENTS, SEED_CASES } from '../data/seedContacts.js';
@@ -110,7 +111,8 @@ export function render({ root }) {
       ${field('notes', t('travelNotes'), travel.notes || '', { type: 'textarea', rows: 3 })}<button class="btn primary" type="submit">${esc(t('save'))}</button></form></section>
     <section class="sec"><h2>${esc(t('contacts'))}</h2><p class="hint">${esc(t('contactsHint'))}</p>
       <p><b>${esc(t('contactsCount', { n: db.list('contacts').length }))}</b></p>
-      <div class="row"><button class="btn sm" id="pickMany">${esc(t('fromPhone'))}</button><label class="btn sm">${esc(t('importFile'))}<input type="file" id="contactsFile" accept=".csv,.vcf,text/csv,text/vcard,text/x-vcard" hidden></label></div></section>
+      <div class="row"><button class="btn sm" id="pickMany">${esc(t('fromPhone'))}</button><label class="btn sm">${esc(t('importFile'))}<input type="file" id="contactsFile" accept=".csv,.vcf,text/csv,text/vcard,text/x-vcard,text/plain" hidden></label></div>
+      <div id="ciPreview" class="stack"></div></section>
     <section class="sec"><h2>${esc(t('team'))}</h2><p class="hint">${esc(t('teamHint'))}</p>
       <div class="list">${db.list('team').map(p => `<div class="card" data-team="${esc(p.id)}"><div class="row between"><span class="title">${esc(p.name)}${p.role ? ` <span class="sub">· ${esc(p.role)}</span>` : ''}</span><span class="row"><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button><button class="btn sm ghost" data-del>✕</button></span></div><div class="sub ltr">${p.phone || p.email ? [p.phone, p.email].filter(Boolean).map(v => esc(v) + copyBtn(v, { icon: true })).join(' · ') : '—'}</div></div>`).join('')}</div>
       <div class="row"><button class="btn sm" id="addTeam">${esc(t('addPerson'))}</button></div></section>
@@ -210,9 +212,39 @@ export function render({ root }) {
     else if (was) { db.setting('signer', base); db.setting('signerBackup', ''); }
     toast(t('saved')); render({ root });
   };
-  const addContacts = list => { const n = importContacts(list); toast(t('imported', { n })); render({ root }); };
-  root.querySelector('#pickMany').onclick = async () => { if (!contactsSupported()) { toast(t('noPicker'), 4000); return; } const list = await pickContacts(true); if (list && list.length) addContacts(list); };
-  root.querySelector('#contactsFile').onchange = async e => { const f = e.target.files[0]; if (!f) return; addContacts(parseContactsFile(f.name, await f.text())); };
+  // contacts import: parse → preview (counts per class, one class selector per row) → import → summary with undo. Nothing is saved before "import".
+  const ciBox = root.querySelector('#ciPreview');
+  const ciLabel = cls => t('ci_' + cls);
+  const ciReason = r => r.reason === 'none' ? '' : t('ciWhy_' + r.reason, { what: r.word });
+  const previewContacts = list => {
+    if (!list || !list.length) { toast(t('ciNothing'), 3000); return; }
+    const plan = planImport(list);
+    const counts = plan.counts, limit = 400;
+    const rowHtml = (r, i) => `<div class="card row between ci-row" data-ci="${i}"><div style="min-width:0;flex:1"><div class="title">${esc(r.contact.name)}${r.contact.org && r.contact.org !== r.contact.name ? ` <span class="hint">· ${esc(r.contact.org)}</span>` : ''}</div>
+        <div class="sub"><span class="ltr">${esc(r.contact.phone || '')}</span>${r.contact.email ? ` · <span class="ltr">${esc(r.contact.email)}</span>` : ''}${r.existing ? ` · <span class="badge muted">${esc(t('ciExisting', { who: r.existing.card.name }))}</span>` : ''}${ciReason(r) ? ` <span class="hint">${esc(ciReason(r))}</span>` : ''}</div></div>
+        <select name="cls" data-ci-sel="${i}">${CLASSES.map(c => `<option value="${c}"${c === r.cls ? ' selected' : ''}>${esc(ciLabel(c))}</option>`).join('')}</select></div>`;
+    ciBox.innerHTML = `<div class="card stack"><h3>${esc(t('ciPreviewTitle', { n: plan.rows.length }))}</h3>
+      <p class="hint">${esc(t('ciCounts', { client: counts.client, supplier: counts.supplier, staff: counts.staff, contact: counts.contact, existing: counts.existing }))}</p>
+      <div class="row"><label class="hint">${esc(t('ciSetAll'))} <select id="ciAll"><option value=""></option>${CLASSES.map(c => `<option value="${c}">${esc(ciLabel(c))}</option>`).join('')}</select></label></div>
+      <div class="list" id="ciRows">${plan.rows.slice(0, limit).map(rowHtml).join('')}${plan.rows.length > limit ? `<p class="hint">${esc(t('ciMore', { n: plan.rows.length - limit }))}</p>` : ''}</div>
+      <div class="row"><button class="btn primary" id="ciGo">${esc(t('ciImportBtn'))}</button><button class="btn ghost" id="ciCancel">${esc(t('cancel'))}</button></div></div>`;
+    ciBox.querySelector('#ciAll').onchange = e => { if (!e.target.value) return; ciBox.querySelectorAll('[data-ci-sel]').forEach(sel => { sel.value = e.target.value; }); };
+    ciBox.querySelector('#ciCancel').onclick = () => { ciBox.innerHTML = ''; };
+    ciBox.querySelector('#ciGo').onclick = () => {
+      const choices = plan.rows.map((r, i) => { const sel = ciBox.querySelector(`[data-ci-sel="${i}"]`); return sel ? sel.value : r.cls; });
+      const res = importContacts(list, choices, t('ciUndoLabel'));
+      const a = res.added, u = res.updated;
+      const msg = t('ciDone', { added: a.client + a.supplier + a.staff + a.contact, updated: u.client + u.supplier + u.staff + u.contact, skipped: res.skipped, client: a.client + u.client, supplier: a.supplier + u.supplier, staff: a.staff + u.staff, contact: a.contact + u.contact });
+      toast(msg, 5000);
+      render({ root });
+      const box = root.querySelector('#ciPreview'); if (!box) return;
+      box.innerHTML = `<div class="okbox row between"><span>${esc(msg)}</span>${res.total ? `<button class="btn sm ghost" id="ciUndo">${esc(t('undoBtn'))}</button>` : ''}</div>`;
+      const ub = box.querySelector('#ciUndo'); if (ub) ub.onclick = () => { const l = undoLast(); toast(l ? t('undone', { what: l }) : t('nothingToUndo')); render({ root }); };
+    };
+    ciBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  root.querySelector('#pickMany').onclick = async () => { if (!contactsSupported()) { toast(t('noPicker'), 4000); return; } const list = await pickContacts(true); if (list && list.length) previewContacts(list); };
+  root.querySelector('#contactsFile').onchange = async e => { const f = e.target.files[0]; if (!f) return; const text = await f.text(); e.target.value = ''; previewContacts(parseContactsFile(f.name, text)); };
   root.querySelectorAll('[data-team]').forEach(el => {
     el.querySelector('[data-edit]').onclick = () => editTeam(db.get('team', el.dataset.team));
     el.querySelector('[data-del]').onclick = async () => { if (await confirmDialog(t('delete') + '?')) { db.remove('team', el.dataset.team); render({ root }); } };
