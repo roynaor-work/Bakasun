@@ -16,6 +16,8 @@ import { parseAction } from '../logic/questions.js';
 import { parseAction2 } from '../logic/questions2.js';
 import { parseWorkGroup } from '../logic/workgroup.js';
 import { showWorkGroup, answerWorkGroup } from './workgroup.js';
+import { parseTemplateRequest } from '../logic/msgTemplates.js';
+import { templateHash } from './templates.js';
 import { runAction, supplierStatus, undoBtn, wireUndo } from './actions.js';
 import { remember, undoLast, isUndoCommand } from '../logic/undo.js';
 import { pushRecent, recentList } from '../logic/recent.js';
@@ -235,6 +237,8 @@ async function tabCommand(body, s, ctx) {
     const clearBox = () => { draft = ''; const ta0 = body.querySelector('#txt'); if (ta0) ta0.value = ''; };
     if (answerWorkGroup(out, text)) { clearBox(); return; }
     { const wg = parseWorkGroup(text); if (wg) { showWorkGroup(out, wg, { s, people: peopleNow, caseByName }); afterAnswer(out, s); clearBox(); return; } }
+    // "prepare the insurance certificate request for Harish": the template screen with the event preselected
+    { const tr = parseTemplateRequest(text); if (tr) { const cs = tr.who ? caseByName(tr.who, tr.who) : null; clearBox(); location.hash = templateHash(tr.key, cs ? cs.id : ''); return; } }
     // participants, budget, run of show, files, contract, checklist, reminders, board, history: before "go to", so that
     // "go to day-of mode" is not read as a screen name
     const act2 = parseAction2(text);
