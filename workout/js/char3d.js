@@ -27,15 +27,16 @@ function toonFace(g) {
   const LINE = '#241B3A', skin = '#F4967B';
   g.fillStyle = skin; g.fillRect(250, 176, 144, 110); /* מנקים עיניים/גבות/פה ישנים */
   g.fillStyle = 'rgba(255,255,255,.85)'; g.fillRect(250, 176, 144, 0);
-  for (const [ex, dir] of [[288, 1], [354, -1]]) {
-    g.fillStyle = '#ffffff'; g.strokeStyle = LINE; g.lineWidth = 4; g.beginPath(); g.ellipse(ex, 218, 21, 24, 0, 0, Math.PI * 2); g.fill(); g.stroke();
-    g.fillStyle = '#2A1A16'; g.beginPath(); g.arc(ex + 3 * dir, 222, 11, 0, Math.PI * 2); g.fill();
-    g.fillStyle = '#ffffff'; g.beginPath(); g.arc(ex + 7 * dir, 215, 4, 0, Math.PI * 2); g.fill();
-    g.strokeStyle = '#3B2112'; g.lineWidth = 8; g.lineCap = 'round'; g.beginPath(); g.moveTo(ex - 22 * dir, 192); g.quadraticCurveTo(ex, 178, ex + 20 * dir, 186); g.stroke(); /* גבה */
-    g.fillStyle = 'rgba(255,120,120,.35)'; g.beginPath(); g.ellipse(ex + 30 * dir, 250, 14, 9, 0, 0, Math.PI * 2); g.fill(); /* סומק */
+  for (const [ex, dir] of [[289, 1], [353, -1]]) { /* רועי 01/10: "קצת מפחיד, יותר אנושי": עיניים קטנות יותר, קשתית חומה, גבות דקות ורגועות */
+    g.fillStyle = '#ffffff'; g.strokeStyle = LINE; g.lineWidth = 3; g.beginPath(); g.ellipse(ex, 216, 15, 17, 0, 0, Math.PI * 2); g.fill(); g.stroke();
+    g.fillStyle = '#5B3A1E'; g.beginPath(); g.arc(ex + 2 * dir, 219, 8.5, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#1b1210'; g.beginPath(); g.arc(ex + 2 * dir, 219, 4.5, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#ffffff'; g.beginPath(); g.arc(ex + 5 * dir, 214, 3, 0, Math.PI * 2); g.fill();
+    g.strokeStyle = '#3B2112'; g.lineWidth = 5; g.lineCap = 'round'; g.beginPath(); g.moveTo(ex - 17 * dir, 193); g.quadraticCurveTo(ex, 186, ex + 15 * dir, 190); g.stroke(); /* גבה דקה, קשת רגועה */
+    g.fillStyle = 'rgba(255,120,120,.25)'; g.beginPath(); g.ellipse(ex + 26 * dir, 248, 12, 8, 0, 0, Math.PI * 2); g.fill(); /* סומק עדין */
   }
-  g.strokeStyle = LINE; g.lineWidth = 6; g.lineCap = 'round'; g.beginPath(); g.arc(321, 256, 20, Math.PI * .15, Math.PI * .85); g.stroke(); /* חיוך */
-  g.fillStyle = '#E26B5A'; g.beginPath(); g.arc(321, 248, 5, 0, Math.PI * 2); g.fill(); /* אף */
+  g.strokeStyle = LINE; g.lineWidth = 5; g.lineCap = 'round'; g.beginPath(); g.arc(321, 254, 16, Math.PI * .2, Math.PI * .8); g.stroke(); /* חיוך עדין */
+  g.strokeStyle = '#D9735F'; g.lineWidth = 4; g.beginPath(); g.moveTo(319, 236); g.quadraticCurveTo(316, 246, 323, 247); g.stroke(); /* אף: קו קטן */
 }
 export async function kitTexture(kit = KITS3D.maccabi) {
   const im = await loadBaseSkin(); const c = document.createElement('canvas'); c.width = c.height = 1024; const g = c.getContext('2d');
@@ -120,10 +121,10 @@ export class PoseRig {
     this.aim(R + 'Arm', armDir(pose.neck, pose.re, R)); this.aim(R + 'ForeArm', armDir(pose.re, pose.rh, R));
     for (const [hand, h] of [[L + 'Hand', pose.lh], [R + 'Hand', pose.rh]]) if (h[1] >= 178) { this.aim(hand, new THREE.Vector3(0, -0.08, 1)); /* כף יד על הרצפה: אצבעות קדימה */ if (this.handTwist && this.rest[hand]) { const bn = this.b[hand]; bn.rotateOnAxis(this.rest[hand].dir.clone().applyQuaternion(this.rest[hand].q.clone().invert()).normalize(), this.handTwist * (hand.startsWith('Left') ? 1 : -1)); } }
     // כף רגל: שטוחה (בעמידה) או בהמשך השוק כשהיא באוויר / על קצות האצבעות (שכיבות סמיכה, פלאנק)
-    const flat = new THREE.Vector3(0, -0.05, 1);
+    const flat = new THREE.Vector3(0, -0.3, 1); /* הסוליה שטוחה על הרצפה: עצם כף הרגל של Kenney יורדת קדימה, לכן -0.3 ולא -0.05 (רועי 01/10: "נראה כאילו עומד על העקבים") */
     for (const [foot, k, f] of [['LeftFoot', pose[L === 'Left' ? 'lk' : 'rk'], pose[L === 'Left' ? 'lf' : 'rf']], ['RightFoot', pose[R === 'Right' ? 'rk' : 'lk'], pose[R === 'Right' ? 'rf' : 'lf']]]) {
       const shin = d(k, f); const tiptoe = (f[1] >= 170 && f[1] < 178) || (f[1] >= 178 && shin.y < -0.35 * shin.length() && Math.abs(shin.z) > 0.6 * shin.length()); /* עקב מורם, או שוק נוטה (שכיבות סמיכה) = על קצות האצבעות */
-      this.aim(foot, f[1] < 170 ? new THREE.Vector3(shin.x, shin.y * .3 - .3 * shin.length(), shin.z + .6 * shin.length()) : tiptoe ? new THREE.Vector3(0, -0.9, 0.45) : flat);
+      this.aim(foot, f[1] < 170 ? new THREE.Vector3(shin.x, shin.y * .35 - .55 * shin.length(), shin.z + .45 * shin.length()) : tiptoe ? new THREE.Vector3(0, -0.9, 0.45) : flat); /* באוויר: אצבעות למטה (כמו בקפיצה אמיתית) */
     }
     this.ropeUpdate(pose, front, base);
     // תיקון רצפה: הנקודה הנמוכה של כפות הרגליים (עד קצה האצבעות), הידיים (עד קצה האצבעות) והראש נוגעת בגובה הבסיס, עם שוליים קטנים כדי שהסוליה לא תיבלע
@@ -193,18 +194,45 @@ export function soccerBallMesh(r = 12) {
 }
 // קהל: גופים וראשים כמופעים (instanced), קופץ כשמתרגש
 // קהל: אנשים בגודל אמיתי ביחס לדמות (scale 2.8 = גוף כ-95 + ראש, כגובה הדמות; רועי 30/09: "הקהל קטן")
+// קהל: אוהדים מצוירים (לוחות עם ציור קנבס: ראש, שיער, חולצה, ידיים למעלה/למטה, קו מתאר) במקום קופסאות וכדורים (רועי 01/10: "המראה של הקהל נראה רע").
+// 6 וריאציות, כל אחת InstancedMesh; update(t, excited) מקפיץ אותם ומנענע. אותו API כמו קודם.
+const FAN_VARIANTS = 6; let fanTex = null;
+function fanTextures() {
+  if (fanTex) return fanTex; fanTex = [];
+  const shirts = ['#0B7A3B', '#FDE047', '#1E3A8A', '#EF4444', '#0EA5E9', '#F472B6'], skins = ['#F1C27D', '#C68642', '#E0AC69', '#8D5524', '#F1C27D', '#C68642'], hairs = ['#2b1d12', '#111', '#8a5a2b', '#111', '#d9a441', '#3a2415'];
+  for (let v = 0; v < FAN_VARIANTS; v++) {
+    const c = document.createElement('canvas'); c.width = 128; c.height = 256; const g = c.getContext('2d'); const LINE = '#241B3A'; const up = v % 2 === 0;
+    g.lineWidth = 6; g.strokeStyle = LINE; g.lineCap = 'round'; g.lineJoin = 'round';
+    // רגליים
+    g.fillStyle = '#1f2937'; g.beginPath(); g.roundRect(38, 190, 22, 58, 8); g.roundRect(68, 190, 22, 58, 8); g.fill(); g.stroke();
+    // גוף
+    g.fillStyle = shirts[v]; g.beginPath(); g.roundRect(30, 100, 68, 100, 18); g.fill(); g.stroke();
+    // ידיים
+    g.strokeStyle = LINE; g.lineWidth = 20; g.beginPath(); if (up) { g.moveTo(38, 112); g.lineTo(14, 40); g.moveTo(90, 112); g.lineTo(114, 40); } else { g.moveTo(36, 112); g.lineTo(26, 185); g.moveTo(92, 112); g.lineTo(102, 185); } g.stroke();
+    g.strokeStyle = skins[v]; g.lineWidth = 11; g.stroke();
+    // ראש
+    g.lineWidth = 6; g.strokeStyle = LINE; g.fillStyle = skins[v]; g.beginPath(); g.arc(64, 66, 30, 0, Math.PI * 2); g.fill(); g.stroke();
+    g.fillStyle = hairs[v]; g.beginPath(); g.arc(64, 60, 31, Math.PI * 1.05, Math.PI * 1.95); g.lineTo(93, 56); g.quadraticCurveTo(64, 30, 35, 56); g.closePath(); g.fill(); g.stroke();
+    g.fillStyle = LINE; g.beginPath(); g.arc(53, 68, 3.5, 0, 7); g.arc(75, 68, 3.5, 0, 7); g.fill();
+    g.lineWidth = 4; g.beginPath(); g.arc(64, 74, 11, Math.PI * .15, Math.PI * .85); g.stroke();
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.minFilter = THREE.LinearMipmapLinearFilter; fanTex.push(t);
+  }
+  return fanTex;
+}
 export function crowd(scene, { count = 120, x0 = -600, x1 = 600, z = -760, y = 40, rows = 3, rowDz = 40, rowDy = 34, seed = 1, scale = 2.8 } = {}) {
-  const S = scale;
-  const body = new THREE.InstancedMesh(new THREE.BoxGeometry(22 * S, 34 * S, 16 * S), new THREE.MeshStandardMaterial({ roughness: .9 }), count);
-  const head = new THREE.InstancedMesh(new THREE.SphereGeometry(9 * S, 10, 8), new THREE.MeshStandardMaterial({ roughness: .8 }), count);
-  const fans = []; const colors = ['#0B7A3B', '#ffffff', '#0B7A3B', '#FDE047', '#1E3A8A', '#EF4444', '#0EA5E9', '#F472B6']; const skins = ['#F1C27D', '#E0AC69', '#C68642', '#8D5524'];
+  const S = scale, FW = 26 * S, FH = 52 * S;
   let s = seed; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
-  const per = Math.ceil(count / rows);
-  for (let i = 0; i < count; i++) { const r = Math.floor(i / per), j = i % per; fans.push({ x: x0 + (j + (r % 2) * .5 + rnd() * .3) * ((x1 - x0) / per), y: y + r * rowDy, z: z - r * rowDz, ph: rnd() * 6.28, c: new THREE.Color(colors[Math.floor(rnd() * colors.length)]), sk: new THREE.Color(skins[Math.floor(rnd() * skins.length)]) }); body.setColorAt(i, fans[i].c); head.setColorAt(i, fans[i].sk); }
-  scene.add(body); scene.add(head);
-  const M = new THREE.Matrix4();
-  const update = (t, excited) => { fans.forEach((f, i) => { const jump = excited && Math.sin(t * 9 + f.ph) > 0 ? 12 * S : 0; M.makeTranslation(f.x, f.y + jump + 17 * S, f.z); body.setMatrixAt(i, M); M.makeTranslation(f.x, f.y + jump + 44 * S, f.z); head.setMatrixAt(i, M); }); body.instanceMatrix.needsUpdate = true; head.instanceMatrix.needsUpdate = true; };
-  update(0, false); return { update, body, head };
+  const per = Math.ceil(count / rows), fans = [];
+  for (let i = 0; i < count; i++) { const r = Math.floor(i / per), j = i % per; fans.push({ x: x0 + (j + (r % 2) * .5 + rnd() * .3) * ((x1 - x0) / per), y: y + r * rowDy, z: z - r * rowDz, ph: rnd() * 6.28, v: Math.floor(rnd() * FAN_VARIANTS), sc: .9 + rnd() * .2 }); }
+  const texs = fanTextures(); const meshes = [];
+  for (let v = 0; v < FAN_VARIANTS; v++) { const n = fans.filter(f => f.v === v).length || 1; const m = new THREE.InstancedMesh(new THREE.PlaneGeometry(FW, FH), new THREE.MeshBasicMaterial({ map: texs[v], transparent: true, alphaTest: .5, side: THREE.DoubleSide }), n); m.frustumCulled = false; scene.add(m); meshes.push(m); }
+  const M = new THREE.Matrix4(), Q = new THREE.Quaternion(), P = new THREE.Vector3(), SC = new THREE.Vector3();
+  const update = (t, excited) => {
+    const idx = new Array(FAN_VARIANTS).fill(0);
+    for (const f of fans) { const jump = excited ? Math.max(0, Math.sin(t * 9 + f.ph)) * 14 * S : Math.sin(t * 1.3 + f.ph) * 1.5; const m = meshes[f.v]; P.set(f.x, f.y + jump + FH / 2 * f.sc, f.z); SC.set(f.sc, f.sc, 1); Q.identity(); M.compose(P, Q, SC); m.setMatrixAt(idx[f.v]++, M); }
+    meshes.forEach(m => { m.instanceMatrix.needsUpdate = true; });
+  };
+  update(0, false); return { update, meshes, body: meshes[0], head: meshes[1] };
 }
 // קונפטי: נקודות צבעוניות שנופלות
 export function confetti(scene, n = 300) {

@@ -12,6 +12,7 @@ export function blobShadow(scene, w = 130, h = 60) { const c = document.createEl
 export function flatLights(scene) { scene.add(new THREE.HemisphereLight('#ffffff', '#ffffff', 2.6)); const key = new THREE.DirectionalLight('#ffffff', .9); key.position.set(120, 300, 260); scene.add(key); }
 
 const KEY = ['Head_end', 'LeftHand', 'RightHand', 'LeftToes', 'RightToes', 'Hips', 'LeftLeg', 'RightLeg', 'LeftHandIndex3_end', 'RightHandIndex3_end'];
+export const STAGE_SPEED = 0.7; /* רועי 01/10: "מהירות הגדרנו יותר לאט שיהיה ברור"; ההסבר (×.55) איטי עוד יותר */
 export class Stage3D {
   constructor(el, ex, { onReady = null, onFail = null, bg = BG, floor = FLOOR } = {}) {
     this.el = el; this.onRep = null; this.speed = 1; this.frames = null; this.front = false; this.raf = 0; this.start = 0; this.cyc = 0; this.ch = null; this.prop = null; this.dead = false;
@@ -61,7 +62,7 @@ export class Stage3D {
   ms() { return this.raf ? (performance.now() - this.start) * this.speed : 0; }
   play(ex, speed = 1) {
     if (!this.ch) { this.pending = [ex, speed, false]; return; }
-    this.stop(); this.setExercise(ex); this.speed = speed; this.cyc = 0; this.start = performance.now();
+    this.stop(); this.setExercise(ex); this.speed = speed * STAGE_SPEED; this.cyc = 0; this.start = performance.now();
     const total = cycleMs(this.frames);
     const tick = now => { if (this.dead) return; const ms = (now - this.start) * this.speed; const c = Math.floor(ms / total); if (c > this.cyc) { this.cyc = c; if (this.onRep) this.onRep(c); } this.render(); this.raf = requestAnimationFrame(tick); };
     this.raf = requestAnimationFrame(tick);
