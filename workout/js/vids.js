@@ -5,13 +5,6 @@ import { CLOUD } from '../../js/data/cloudcfg.js';
 import { normCode } from './cloud.js';
 
 export const VIDEO_IDS = new Set([]);
-// 4. הדגמות "רועיקי מצחיקי" באנימציה מהערוץ של רועי ביוטיוב (@royikids1), מוטמעות בנגן מושתק בלופ. נסרקו 01/10/2026: 12 הדגמות מתוך 218 סרטונים בערוץ.
-export const YT_VIDEOS = {
-  'push-ups': '-IPnANyBW7U', squats: 'Vpg6d2FyhxQ', crunches: 'pmgMIqCi5IY', 'star-jumps': 'xpD2RExpOJc', 'glute-bridge': '5gf664sYJbc',
-  burpees: '-49l_7rAd-0', 'mountain-climbers': 'aZ3gUCA1jPo', 'squat-jumps': '_9JnTAA0xbQ', jog: 'cDHsCx8PxJk',
-  'plank-jacks': 'XppSUMOP9vE', 'crab-kicks': 'o_AAVtFtyFI', 'chair-dips': 'mCtZrE87qA4',
-};
-export const ytEmbed = (id, speed = 1) => `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1`;
 const DB = 'kidfit-vids', STORE = 'v', BUCKET = 'kidfit-vids', C_KEY = 'kidfit.cloudVids';
 const local = new Set(); const urls = {}, kinds = {};
 let cloud = {}; try { cloud = JSON.parse(localStorage.getItem(C_KEY) || '{}'); } catch { cloud = {}; }
@@ -23,10 +16,10 @@ const kindOf = mime => (mime || '').startsWith('image/') ? 'image' : 'video';
 const dropUrl = id => { if (urls[id]) { URL.revokeObjectURL(urls[id]); delete urls[id]; delete kinds[id]; } };
 
 export async function refreshVideos() { try { const keys = await tx('readonly', s => s.getAllKeys()); local.clear(); keys.filter(k => !String(k).startsWith('c:')).forEach(k => local.add(k)); } catch { /* אין IndexedDB */ } return local; }
-export const hasVideo = id => local.has(id) || !!cloud[id] || VIDEO_IDS.has(id) || !!YT_VIDEOS[id];
+export const hasVideo = id => local.has(id) || !!cloud[id] || VIDEO_IDS.has(id);
 export const localVideos = () => local;
 export const cloudVideos = () => cloud;
-export const sourceOf = id => local.has(id) ? 'local' : cloud[id] ? 'cloud' : VIDEO_IDS.has(id) ? 'repo' : YT_VIDEOS[id] ? 'yt' : null;
+export const sourceOf = id => local.has(id) ? 'local' : cloud[id] ? 'cloud' : VIDEO_IDS.has(id) ? 'repo' : null;
 
 export async function saveVideo(id, blob) { await tx('readwrite', s => s.put(blob, id)); local.add(id); dropUrl(id); }
 export async function deleteVideo(id) { await tx('readwrite', s => s.delete(id)); local.delete(id); dropUrl(id); }
@@ -83,6 +76,5 @@ export async function videoUrl(id, code = '') {
     if (code) fetch(url).then(r => r.ok ? r.blob() : null).then(b => { if (b) tx('readwrite', s => s.put({ blob: b, updated: c.updated }, 'c:' + id)).catch(() => {}); }).catch(() => {});
     return { url, kind };
   }
-  if (VIDEO_IDS.has(id)) return { url: `vid/${id}.mp4`, kind: 'video' };
-  return YT_VIDEOS[id] ? { url: ytEmbed(YT_VIDEOS[id]), kind: 'youtube', yt: YT_VIDEOS[id] } : null;
+  return VIDEO_IDS.has(id) ? { url: `vid/${id}.mp4`, kind: 'video' } : null;
 }
