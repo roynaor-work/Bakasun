@@ -9,7 +9,11 @@ export const CATS = [
   { id: 'spa',      name: 'פינוק וספא' },
   { id: 'sweet',    name: 'מתוק וגורמה' },
   { id: 'gift',     name: 'ימי הולדת' },
+  { id: 'engrave',  name: 'עם חריטה' },
 ];
+
+/* מה מקבלים בכל מארז, שורה אחת קבועה (לפי המובילים: boxfox). */
+export const INCLUDED = ['ברכה בכתב יד', 'בלי מחיר בתוך החבילה', 'מוכן תוך יום עסקים'];
 
 export const OCCASIONS = [
   { id: 'birthday', name: 'יום הולדת', icon: 'cake' },

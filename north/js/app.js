@@ -1,6 +1,6 @@
 /* הרוח הצפונית · מארזים. ניתוב לפי hash: #/ , #/p/<id> , #/checkout , #/thanks/<no> */
 import { STORE, SHIPPING, OUT_OF_AREA, PAY, CLOUD, IMG } from './config.js';
-import { CATS, OCCASIONS, PRODUCTS, BUILD, FAQ, byId } from './products.js';
+import { CATS, OCCASIONS, PRODUCTS, BUILD, FAQ, INCLUDED, byId } from './products.js';
 import * as C from './cart.js';
 import { icon, logo } from './icons.js';
 
@@ -9,7 +9,10 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 const money = n => `<span class="num">${C.fmt(n)}</span>`;
 
 let cart = C.load();
-const state = { cat: 'all', occ: null, build: { base: null, addons: [], pack: BUILD.packs[0].id, note: '' } };
+const BUILD_KEY = 'north.build.v1';
+function loadBuild() { try { const b = JSON.parse(localStorage.getItem(BUILD_KEY) || 'null'); if (b && Array.isArray(b.addons)) return b; } catch { /* */ } return { base: null, addons: [], pack: BUILD.packs[0].id, note: '' }; }
+function saveBuild() { try { localStorage.setItem(BUILD_KEY, JSON.stringify(state.build)); } catch { /* */ } }
+const state = { cat: 'all', occ: null, kosherOnly: false, build: loadBuild() };
 let lastOrder = null;
 
 /* ---------- כלים ---------- */
@@ -32,13 +35,18 @@ function card(p) {
     <div class="body">
       <h3><a href="#/p/${p.id}">${esc(p.name)}</a></h3>
       <div class="sub">${esc(p.sub)}</div>
+      <div class="incl">${INCLUDED.map(x => `<span>${icon('check', 'sm')}${x}</span>`).join('')}</div>
       <div class="act"><button class="btn gold sm" data-add="${p.id}">הוספה לסל</button><a class="btn line sm" href="#/p/${p.id}">פרטים</a></div>
     </div></article>`;
 }
 
+function chipsHtml() {
+  return CATS.map(c => `<button class="chip ${state.cat === c.id ? 'on' : ''}" data-cat="${c.id}">${c.name}</button>`).join('') + `<button class="chip k ${state.kosherOnly ? 'on' : ''}" id="kosherchip" aria-pressed="${state.kosherOnly}">${icon('check', 'sm')} רק כשר</button>`;
+}
 function catalogHtml() {
-  let list = PRODUCTS.filter(p => state.cat === 'all' || p.cat === state.cat);
+  let list = PRODUCTS.filter(p => state.cat === 'all' || (state.cat === 'engrave' ? !!p.personalize : p.cat === state.cat));
   if (state.occ) list = list.filter(p => p.occ.includes(state.occ));
+  if (state.kosherOnly) list = list.filter(p => p.kosher !== false);
   return list.length ? list.map(card).join('') : `<p class="sub" style="grid-column:1/-1;color:var(--muted)">אין עדיין מארז לשילוב הזה. בונים אחד למטה, או כותבים לנו.</p>`;
 }
 
@@ -69,7 +77,8 @@ function homeHtml() {
   <section class="blk" id="catalog" style="padding-top:0"><div class="wrap">
     <div class="sechead reveal"><div><h2>המארזים${occName ? ` · ${esc(occName)}` : ''}</h2><p>כל מארז נארז אצלנו בחנות. הבקבוקים מהמדף, התוספות מיצרנים שאנחנו עובדים איתם.</p></div>
       <a class="more" href="#/#build">רוצים משהו אחר? בונים לבד ←</a></div>
-    <div class="chips" id="chips">${CATS.map(c => `<button class="chip ${state.cat === c.id ? 'on' : ''}" data-cat="${c.id}">${c.name}</button>`).join('')}</div>
+    <div class="promise reveal"><span>${icon('clock')} מזמינים היום, המארז מוכן לאיסוף תוך יום עסקים. משלוח באזור תוך יומיים.</span><span>${icon('shield')} לא מרוצים ממשהו במארז? מחליפים. בלי שאלות.</span></div>
+    <div class="chips" id="chips">${chipsHtml()}</div>
     <div class="grid" id="grid">${catalogHtml()}</div>
   </div></section>
 
@@ -158,7 +167,8 @@ function productHtml(p) {
   const v = p.variants ? (p.variants.find(x => x.id === pstate.variant) || p.variants[0]) : null;
   const price = v ? v.price : p.price;
   const imgs = [p.img, p.img2].filter(Boolean);
-  const related = PRODUCTS.filter(x => x.id !== p.id && (x.cat === p.cat || x.occ.some(o => p.occ.includes(o)))).slice(0, 4);
+  const band = PRODUCTS.filter(x => x.id !== p.id && Math.abs(x.price - p.price) <= p.price * 0.35);
+  const related = [...band, ...PRODUCTS.filter(x => x.id !== p.id && !band.includes(x) && (x.cat === p.cat || x.occ.some(o => p.occ.includes(o))))].slice(0, 4);
   return `<section class="pp"><div class="wrap">
     <div class="crumbs"><a href="#/">הבית</a><span>›</span><a href="#/#catalog">המארזים</a><span>›</span><span>${esc(p.name)}</span></div>
     <div class="lay">
@@ -173,10 +183,13 @@ function productHtml(p) {
         <div class="price">${money(price)}<small>כולל מע"מ ואריזת מתנה</small></div>
         <p class="desc">${esc(p.desc)}</p>
         ${p.variants ? `<div class="field"><label>גרסה</label><div class="vars">${p.variants.map(x => `<button class="${x.id === v.id ? 'on' : ''}" data-var="${x.id}">${esc(x.name)}<span class="num">${C.fmt(x.price)}</span></button>`).join('')}</div></div>` : ''}
-        ${p.personalize ? `<div class="field"><label>${esc(p.personalize.label)} (עד ${p.personalize.max} תווים)</label><input id="pengrave" maxlength="${p.personalize.max}" value="${esc(pstate.engrave)}" placeholder="למשל: לאבא, 2026"></div>` : ''}
+        ${p.personalize ? `<div class="field"><label>${esc(p.personalize.label)} <span class="cnt" id="engcnt">${pstate.engrave.length} / ${p.personalize.max}</span></label><input id="pengrave" maxlength="${p.personalize.max}" value="${esc(pstate.engrave)}" placeholder="למשל: לאבא, 2026" autocomplete="off">
+          <div class="engprev" aria-live="polite"><svg viewBox="0 0 220 120" aria-hidden="true"><defs><linearGradient id="fl" x1="0" x2="1"><stop offset="0" stop-color="#6b6b70"/><stop offset=".45" stop-color="#d9d9de"/><stop offset="1" stop-color="#7a7a80"/></linearGradient></defs><rect x="92" y="4" width="36" height="12" rx="3" fill="#9a9aa0"/><rect x="30" y="14" width="160" height="100" rx="18" fill="url(#fl)"/><rect x="38" y="22" width="144" height="84" rx="14" fill="none" stroke="rgba(255,255,255,.25)"/></svg><div class="engtxt" id="engtxt">${esc(pstate.engrave) || 'הטקסט שלכם'}</div><small>העיצוב הסופי של החריטה עשוי להשתנות מעט</small></div></div>` : ''}
         ${p.kosher === false ? `<div class="nkbox"><b>לא כשר.</b> ${esc(p.kosherNote || 'המארז כולל מוצר ללא הכשר.')} אפשר לבקש החלפה בהערות להזמנה.</div>` : ''}
         <div class="contents"><h3>מה במארז</h3><ul>${p.contents.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>
-        <div class="field"><label>ברכה לכרטיס (לא חובה)</label><textarea id="pnote" maxlength="140" placeholder="אנחנו כותבים אותה ביד על הכרטיס">${esc(pstate.note)}</textarea></div>
+        <div class="field"><label>ברכה לכרטיס (לא חובה) <span class="cnt" id="notecnt">${pstate.note.length} / 140</span></label><textarea id="pnote" maxlength="140" placeholder="אנחנו כותבים אותה ביד על הכרטיס">${esc(pstate.note)}</textarea>
+          <div class="cardprev ${pstate.note ? '' : 'hide'}" id="cardprev"><div class="cardtxt" id="cardtxt">${esc(pstate.note)}</div><span>הרוח הצפונית · צומת הגומא</span></div></div>
+        <div class="incl big">${INCLUDED.map(x => `<span>${icon('check', 'sm')}${x}</span>`).join('')}</div>
         <div class="buyrow">
           <div class="qty"><button data-q="-1" aria-label="פחות">−</button><b id="pqty" class="num">${pstate.qty}</b><button data-q="1" aria-label="יותר">+</button></div>
           <button class="btn gold" id="paddbtn">הוספה לסל · ${money(price * pstate.qty)}</button>
@@ -184,7 +197,7 @@ function productHtml(p) {
         <div class="perks"><div>איסוף מהחנות בחינם</div><div>משלוח באזור (עד 40 דק׳ מצומת הגומא) ${money(SHIPPING.north.price)}, חינם מ-${money(SHIPPING.north.freeFrom)}</div><div>מסירה לבני 18 ומעלה</div><div>הרכב לפי מלאי, אפשר להחליף</div></div>
       </div>
     </div>
-    ${related.length ? `<div class="sechead" style="margin-top:70px"><div><h2>עוד בכיוון הזה</h2></div></div><div class="grid">${related.map(card).join('')}</div>` : ''}
+    ${related.length ? `<div class="sechead" style="margin-top:70px"><div><h2>לא בדיוק זה? יש עוד</h2><p>מארזים באותו טווח מחיר ובאותו כיוון.</p></div></div><div class="grid">${related.map(card).join('')}</div>` : ''}
   </div>
   <div class="buybar"><div><b>${esc(p.name)}</b><span class="num">${C.fmt(price * pstate.qty)}</span></div><button class="btn gold" data-buybar>הוספה לסל</button></div>
   </section>`;
@@ -387,13 +400,14 @@ function route() {
 
 /* ---------- אירועים ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-add],[data-cat],[data-occ],[data-bopt],#baddbtn,[data-var],[data-q],#paddbtn,[data-buybar],[data-img],[data-cq],[data-rm],[data-close],#cartbtn,#burger,#copyord,#growretry');
+  const t = e.target.closest('[data-add],#kosherchip,[data-cat],[data-occ],[data-bopt],#baddbtn,[data-var],[data-q],#paddbtn,[data-buybar],[data-img],[data-cq],[data-rm],[data-close],#cartbtn,#burger,#copyord,#growretry');
   if (!t) return;
   if (t.id === 'cartbtn') return openDrawer();
   if (t.id === 'burger') return $('#mnav').classList.toggle('open');
   if (t.hasAttribute('data-close')) return closeDrawer();
   if (t.dataset.add) { addProduct(byId(t.dataset.add)); return; }
-  if (t.dataset.cat) { state.cat = t.dataset.cat; $('#chips').innerHTML = CATS.map(c => `<button class="chip ${state.cat === c.id ? 'on' : ''}" data-cat="${c.id}">${c.name}</button>`).join(''); $('#grid').innerHTML = catalogHtml(); reveal(); return; }
+  if (t.dataset.cat) { state.cat = t.dataset.cat; $('#chips').innerHTML = chipsHtml(); $('#grid').innerHTML = catalogHtml(); reveal(); return; }
+  if (t.id === 'kosherchip') { state.kosherOnly = !state.kosherOnly; $('#chips').innerHTML = chipsHtml(); $('#grid').innerHTML = catalogHtml(); reveal(); return; }
   if (t.dataset.occ) { state.occ = state.occ === t.dataset.occ ? null : t.dataset.occ; document.querySelectorAll('[data-occ]').forEach(b => b.classList.toggle('on', b.dataset.occ === state.occ)); $('#grid').innerHTML = catalogHtml(); $('#catalog h2').textContent = 'המארזים' + (state.occ ? ' · ' + OCCASIONS.find(o => o.id === state.occ).name : ''); reveal(); $('#catalog').scrollIntoView({ behavior: 'smooth' }); return; }
   if (t.dataset.bopt) {
     const id = t.dataset.bopt, b = state.build;
@@ -402,7 +416,7 @@ document.addEventListener('click', e => {
     else if (b.addons.includes(id)) b.addons = b.addons.filter(x => x !== id);
     else if (b.addons.length < BUILD.maxAddons) b.addons.push(id);
     else toast(`עד ${BUILD.maxAddons} תוספות במארז`);
-    refreshBuild(); return;
+    saveBuild(); refreshBuild(); return;
   }
   if (t.id === 'baddbtn') {
     const { base, addons, pack, price } = buildParts(); if (!base) return;
@@ -411,7 +425,7 @@ document.addEventListener('click', e => {
     const item = { id: 'custom', name: 'מארז בהרכבה אישית', price, variant: base.name, parts: parts.map(p => ({ id: p.id, name: p.name })), img: IMG('1688851472616-7ad0980dab23', 300), note: state.build.note, kosher: parts.some(p => p.kosher === false) ? false : true };
     item.key = C.lineKey('custom', state.build.note, parts);
     cart = C.addItem(cart, item); saveCart(); toast('המארז שלכם נוסף לסל');
-    state.build = { base: null, addons: [], pack: BUILD.packs[0].id, note: '' }; refreshBuild(); openDrawer(); return;
+    state.build = { base: null, addons: [], pack: BUILD.packs[0].id, note: '' }; saveBuild(); refreshBuild(); openDrawer(); return;
   }
   if (t.dataset.var !== undefined) { pstate.variant = t.dataset.var; pstate.note = $('#pnote').value; const en = $('#pengrave'); pstate.engrave = en ? en.value : ''; $('#view').innerHTML = productHtml(byId(route.pid)); return; }
   if (t.dataset.q) { pstate.qty = Math.max(1, Math.min(20, pstate.qty + +t.dataset.q)); pstate.note = $('#pnote').value; const en = $('#pengrave'); pstate.engrave = en ? en.value : ''; $('#view').innerHTML = productHtml(byId(route.pid)); return; }
@@ -421,6 +435,11 @@ document.addEventListener('click', e => {
   if (t.dataset.rm) { cart = C.removeItem(cart, t.dataset.rm); saveCart(); renderCart(); return; }
   if (t.id === 'growretry') { const o = lastOrder || JSON.parse(sessionStorage.getItem('north.last') || 'null'); if (!o) return; t.disabled = true; t.textContent = 'פותחים עמוד תשלום…'; growUrl(o).then(u => { if (u) location.href = u; else { t.disabled = false; t.textContent = 'לא הצלחנו לפתוח עמוד תשלום. נתקשר אליכם.'; } }); return; }
   if (t.id === 'copyord') { navigator.clipboard?.writeText($('.thanks pre').textContent).then(() => toast('הועתק')); return; }
+});
+document.addEventListener('input', e => {
+  if (e.target.id === 'pengrave') { const v = e.target.value; pstate.engrave = v; const t = $('#engtxt'), c = $('#engcnt'); if (t) t.textContent = v || 'הטקסט שלכם'; if (c) c.textContent = `${v.length} / ${e.target.maxLength}`; }
+  if (e.target.id === 'pnote') { const v = e.target.value; pstate.note = v; const t = $('#cardtxt'), c = $('#notecnt'), b = $('#cardprev'); if (t) t.textContent = v; if (c) c.textContent = `${v.length} / 140`; if (b) b.classList.toggle('hide', !v.trim()); }
+  if (e.target.id === 'bnote') { state.build.note = e.target.value; saveBuild(); }
 });
 document.addEventListener('change', e => {
   if (e.target.name === 'method' || e.target.name === 'pay') { readForm(); $('#view').innerHTML = checkoutHtml(); }

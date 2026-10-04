@@ -115,6 +115,27 @@ section.blk{padding:72px 0}
 .chip{padding:8px 16px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-weight:600;font-size:15px;background:var(--card)}
 .chip.on{background:var(--gold);color:#1a1409;border-color:var(--gold)}
 
+/* הבטחה ושורת "מה מקבלים" */
+.promise{display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between;margin:0 0 18px;padding:12px 16px;border:1px solid var(--line);border-radius:var(--r2);background:var(--card);color:var(--muted);font-size:14.5px}
+.promise span{display:flex;align-items:center;gap:8px}
+.promise .ico{color:var(--gold2);width:20px;height:20px}
+.incl{display:flex;flex-wrap:wrap;gap:4px 12px;color:var(--dim);font-size:12.5px}
+.incl span{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.incl .ico.sm{width:.9em;height:.9em}
+.incl.big{font-size:14px;color:var(--muted);gap:6px 16px}
+.chip.k{display:inline-flex;align-items:center;gap:6px;border-color:rgba(127,197,154,.45);color:var(--ok)}
+.chip.k.on{background:var(--ok);color:#0c1a12;border-color:var(--ok)}
+.chip.k .ico{width:1em;height:1em;color:inherit}
+
+/* תצוגה מקדימה: חריטה וברכה */
+.engprev{position:relative;margin-top:10px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r2);padding:12px;display:grid;justify-items:center;gap:6px}
+.engprev svg{width:220px;max-width:100%;height:auto}
+.engtxt{position:absolute;top:calc(50% - 14px);inset-inline:0;text-align:center;font-family:var(--h);font-size:18px;color:#2b2b2e;letter-spacing:.04em;text-shadow:0 1px 0 rgba(255,255,255,.5);padding:0 40px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.engprev small{color:var(--dim);font-size:12px}
+.cardprev{margin-top:10px;background:#f4efe4;color:#2b2622;border-radius:10px;padding:18px 20px 12px;box-shadow:0 10px 30px rgba(0,0,0,.35);display:grid;gap:10px;transform:rotate(-1deg)}
+.cardtxt{font-family:var(--h);font-size:20px;line-height:1.4;white-space:pre-wrap;word-break:break-word}
+.cardprev span{font-size:11px;letter-spacing:.14em;color:#8f7132;text-align:left}
+
 /* כרטיסי מוצר */
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:.25s;position:relative}
@@ -349,6 +370,8 @@ footer a:hover{color:var(--gold2)}
   .card .price{font-size:20px}
   .card .act{flex-direction:column}
   .card .sub{min-height:0}
+  .incl{display:none}
+  .promise{font-size:13.5px;gap:8px}
   .opts{grid-template-columns:repeat(2,1fr)}
   .occ{grid-template-columns:repeat(3,1fr);gap:8px}
   .occ button{padding:12px 6px;font-size:14px}
