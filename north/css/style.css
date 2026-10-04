@@ -24,6 +24,35 @@ h1,h2,h3,h4{font-family:var(--h);font-weight:700;line-height:1.15;margin:0;lette
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .hide{display:none!important}
 
+/* אייקונים ולוגו */
+.ico{width:1.25em;height:1.25em;display:inline-block;vertical-align:-0.25em;flex:none}
+.ico.sm{width:1em;height:1em;vertical-align:-0.15em;color:var(--gold)}
+.logo-mark{flex:none}
+.trust span.i .ico,.occ .i .ico,.opt .i .ico{color:var(--gold2)}
+.trust span.i .ico{width:26px;height:26px}
+.occ .i .ico{width:30px;height:30px}
+.opt .i .ico{width:26px;height:26px}
+.drawer .empty .i .ico,.thanks .i .ico{width:52px;height:52px;color:var(--gold)}
+.radio .rp .ico{width:24px;height:24px;color:var(--gold2)}
+.cartbtn .ico{width:20px;height:20px;color:var(--gold2)}
+.burger .ico{width:22px;height:22px}
+.wa .ico{width:28px;height:28px}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:2px;border-radius:6px}
+a,button,.chip,.opt,.radio label,summary{cursor:pointer}
+a,button{transition:color .2s,background-color .2s,border-color .2s,transform .2s,box-shadow .2s}
+
+/* איך זה עובד */
+.how{background:var(--bg2);border-block:1px solid var(--line)}
+.steps3{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:st}
+.steps3 li{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 20px;display:grid;gap:8px;counter-increment:st}
+.steps3 li::before{content:counter(st);position:absolute;top:14px;inset-inline-end:16px;font-family:var(--h);font-size:34px;color:rgba(232,207,148,.22);line-height:1}
+.steps3 .i .ico{width:34px;height:34px;color:var(--gold2)}
+.steps3 b{font-size:20px;color:#fff;font-family:var(--h)}
+.steps3 span:last-child{color:var(--muted);font-size:15.5px}
+
+/* פס קנייה דביק בנייד */
+.buybar{display:none}
+
 /* כותרת עליונה */
 .top{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(12,10,9,.72);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:18px;min-height:66px}
@@ -303,6 +332,14 @@ footer a:hover{color:var(--gold2)}
 }
 @media (max-width:700px){
   body{font-size:16px}
+  .steps3{grid-template-columns:1fr}
+  .buybar{display:flex;position:fixed;bottom:0;inset-inline:0;z-index:45;background:rgba(12,10,9,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));gap:12px;align-items:center}
+  .buybar>div{display:grid;flex:1;min-width:0}
+  .buybar b{color:#fff;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .buybar .num{color:var(--gold2);font-weight:700}
+  .buybar .btn{padding:11px 18px;min-height:44px}
+  .pp{padding-bottom:110px}
+  body.has-buybar .wa{bottom:88px !important}
   .menu{display:none}
   .burger{display:grid;place-items:center}
   .hero .wrap{padding:90px 0 40px}

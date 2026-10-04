@@ -2,6 +2,7 @@
 import { STORE, SHIPPING, OUT_OF_AREA, PAY, CLOUD, IMG } from './config.js';
 import { CATS, OCCASIONS, PRODUCTS, BUILD, FAQ, byId } from './products.js';
 import * as C from './cart.js';
+import { icon, logo } from './icons.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -54,15 +55,15 @@ function homeHtml() {
     </div>
   </section>
   <div class="trust"><div class="wrap">
-    <div><span class="i">🚚</span><span><b>משלוח באזור</b>עד 40 דקות מצומת הגומא</span></div>
-    <div><span class="i">🎀</span><span><b>אריזת מתנה</b>וכרטיס ברכה בכתב יד</span></div>
-    <div><span class="i">✒️</span><span><b>חריטה אישית</b>על פלאסקים וכוסות</span></div>
-    <div><span class="i">🔒</span><span><b>תשלום מאובטח</b>אשראי, ביט או באיסוף</span></div>
+    <div><span class="i">${icon('truck')}</span><span><b>משלוח באזור</b>עד 40 דקות מצומת הגומא</span></div>
+    <div><span class="i">${icon('gift')}</span><span><b>אריזת מתנה</b>וכרטיס ברכה בכתב יד</span></div>
+    <div><span class="i">${icon('pen')}</span><span><b>חריטה אישית</b>על פלאסקים וכוסות</span></div>
+    <div><span class="i">${icon('lock')}</span><span><b>תשלום מאובטח</b>אשראי, ביט או באיסוף</span></div>
   </div></div>
 
   <section class="blk" id="occasions"><div class="wrap">
     <div class="sechead reveal"><div><h2>למי המתנה?</h2><p>בוחרים אירוע, ואנחנו מסננים את המארזים שמתאימים.</p></div></div>
-    <div class="occ reveal">${OCCASIONS.map(o => `<button data-occ="${o.id}" class="${state.occ === o.id ? 'on' : ''}"><span class="i">${o.icon}</span>${o.name}</button>`).join('')}</div>
+    <div class="occ reveal">${OCCASIONS.map(o => `<button data-occ="${o.id}" class="${state.occ === o.id ? 'on' : ''}"><span class="i">${icon(o.icon)}</span>${o.name}</button>`).join('')}</div>
   </div></section>
 
   <section class="blk" id="catalog" style="padding-top:0"><div class="wrap">
@@ -70,6 +71,15 @@ function homeHtml() {
       <a class="more" href="#/#build">רוצים משהו אחר? בונים לבד ←</a></div>
     <div class="chips" id="chips">${CATS.map(c => `<button class="chip ${state.cat === c.id ? 'on' : ''}" data-cat="${c.id}">${c.name}</button>`).join('')}</div>
     <div class="grid" id="grid">${catalogHtml()}</div>
+  </div></section>
+
+  <section class="blk how" id="how"><div class="wrap">
+    <div class="sechead reveal"><div><h2>איך זה עובד</h2></div></div>
+    <ol class="steps3 reveal">
+      <li><span class="i">${icon('gift')}</span><b>בוחרים</b><span>מארז מוכן מהרשימה, או בונים אחד לבד: בקבוק, תוספות, אריזה.</span></li>
+      <li><span class="i">${icon('hands')}</span><b>אנחנו אורזים</b><span>בחנות, ביד. כותבים את הברכה על הכרטיס ואורזים בקופסה או בשקית שבחרתם.</span></li>
+      <li><span class="i">${icon('pin')}</span><b>אוספים או מקבלים</b><span>איסוף מהחנות בצומת הגומא תוך יום עסקים, או משלוח באזור תוך יומיים.</span></li>
+    </ol>
   </div></section>
 
   <section class="blk build" id="build"><div class="wrap">
@@ -115,7 +125,7 @@ function homeHtml() {
 }
 
 /* ---------- בונה מארז ---------- */
-function opt(o, on) { return `<button class="opt ${on ? 'on' : ''}" data-bopt="${o.id}"><span class="i">${o.icon}</span><b>${esc(o.name)}${o.kosher === false ? ' <span class="nk sm">לא כשר</span>' : ''}</b><span class="p">${o.price ? money(o.price) : 'כלול'}</span></button>`; }
+function opt(o, on) { return `<button class="opt ${on ? 'on' : ''}" data-bopt="${o.id}"><span class="i">${icon(o.icon)}</span><b>${esc(o.name)}${o.kosher === false ? ' <span class="nk sm">לא כשר</span>' : ''}</b><span class="p">${o.price ? money(o.price) : 'כלול'}</span></button>`; }
 function buildStepsHtml() {
   const b = state.build;
   return `
@@ -134,7 +144,7 @@ function buildSumHtml() {
   const { base, addons, pack, price } = buildParts();
   const rows = [base, ...addons, pack].filter(Boolean);
   return `<h3>המארז שלכם</h3>
-    ${rows.length ? `<ul>${rows.map(r => `<li><span>${r.icon} ${esc(r.name)}</span><span class="num">${r.price ? C.fmt(r.price) : 'כלול'}</span></li>`).join('')}</ul>` : `<p class="empty">עוד לא בחרתם. מתחילים מהבקבוק.</p>`}
+    ${rows.length ? `<ul>${rows.map(r => `<li><span class="row-ic">${icon(r.icon, 'sm')} ${esc(r.name)}</span><span class="num">${r.price ? C.fmt(r.price) : 'כלול'}</span></li>`).join('')}</ul>` : `<p class="empty">עוד לא בחרתם. מתחילים מהבקבוק.</p>`}
     <div class="field"><label>ברכה לכרטיס (אנחנו כותבים ביד)</label><textarea id="bnote" maxlength="140" placeholder="למשל: לאבא, שיהיה טעים. אוהבים.">${esc(state.build.note)}</textarea></div>
     <div class="tot"><span>סה"כ</span>${money(price)}</div>
     <button class="btn gold wide" id="baddbtn" ${base ? '' : 'disabled'}>הוספה לסל</button>
@@ -175,13 +185,15 @@ function productHtml(p) {
       </div>
     </div>
     ${related.length ? `<div class="sechead" style="margin-top:70px"><div><h2>עוד בכיוון הזה</h2></div></div><div class="grid">${related.map(card).join('')}</div>` : ''}
-  </div></section>`;
+  </div>
+  <div class="buybar"><div><b>${esc(p.name)}</b><span class="num">${C.fmt(price * pstate.qty)}</span></div><button class="btn gold" data-buybar>הוספה לסל</button></div>
+  </section>`;
 }
 
 /* ---------- סל ---------- */
 function renderCart() {
   const el = $('#cartbody');
-  if (!cart.length) { el.innerHTML = `<div class="empty"><span class="i">🛍️</span><p>הסל עוד ריק.</p><a class="btn gold sm" href="#/#catalog" data-close>לכל המארזים</a></div>`; return; }
+  if (!cart.length) { el.innerHTML = `<div class="empty"><span class="i">${icon('bag')}</span><p>הסל עוד ריק.</p><a class="btn gold sm" href="#/#catalog" data-close>לכל המארזים</a></div>`; return; }
   const sub = C.subtotal(cart);
   el.innerHTML = `<div class="lines">${cart.map(i => `<div class="crow">
       <img src="${i.img}" alt="">
@@ -207,7 +219,7 @@ function addProduct(p, variantId, qty = 1, note = '', engrave = '') {
 /* ---------- קופה ---------- */
 const co = { method: 'pickup', pay: 'card', f: {} };
 function checkoutHtml(errs = []) {
-  if (!cart.length) return `<section class="thanks"><div class="box"><span class="i">🛍️</span><h1>הסל ריק</h1><p>בוחרים מארז ונחזור לכאן.</p><a class="btn gold" href="#/#catalog">לכל המארזים</a></div></section>`;
+  if (!cart.length) return `<section class="thanks"><div class="box"><span class="i">${icon('bag')}</span><h1>הסל ריק</h1><p>בוחרים מארז ונחזור לכאן.</p><a class="btn gold" href="#/#catalog">לכל המארזים</a></div></section>`;
   const sub = C.subtotal(cart), ship = C.shippingPrice(co.method, sub), tot = sub + ship;
   const f = co.f;
   const pays = Object.entries(PAY).filter(([, p]) => p.enabled).filter(([k]) => k !== 'cash' || co.method === 'pickup');
@@ -230,7 +242,7 @@ function checkoutHtml(errs = []) {
           </div>
         </div>
         <div class="panel"><h3><span class="no">3</span>תשלום</h3>
-          <div class="radio">${pays.map(([k, p]) => `<label class="${co.pay === k ? 'on' : ''}"><input type="radio" name="pay" value="${k}" ${co.pay === k ? 'checked' : ''}><span><b>${esc(p.label)}</b><small>${esc(p.note)}</small></span><span class="rp">${k === 'card' ? '💳' : k === 'bit' ? '📱' : '🏬'}</span></label>`).join('')}</div>
+          <div class="radio">${pays.map(([k, p]) => `<label class="${co.pay === k ? 'on' : ''}"><input type="radio" name="pay" value="${k}" ${co.pay === k ? 'checked' : ''}><span><b>${esc(p.label)}</b><small>${esc(p.note)}</small></span><span class="rp">${icon(k === 'card' ? 'card' : k === 'bit' ? 'phone' : 'store')}</span></label>`).join('')}</div>
           <div class="paylogos"><span>Visa</span><span>Mastercard</span><span>American Express</span><span>Bit</span><span>Apple Pay</span><span>Google Pay</span></div>
           <label class="check"><input type="checkbox" name="adult" ${f.adult ? 'checked' : ''}><span>אני מאשר/ת שאני בן/בת 18 ומעלה, וכך גם מקבל/ת המשלוח. <span style="color:var(--dim)">מכירת משקאות משכרים לקטינים אסורה על פי חוק.</span></span></label>
           ${C.hasNonKosher(cart) ? `<label class="check" style="border:1px solid rgba(224,122,106,.45);border-radius:12px;padding:10px 12px"><input type="checkbox" name="kosherOk" ${f.kosherOk ? 'checked' : ''}><span><b style="color:#f3b7ad">שימו לב: ההזמנה כוללת מוצר ללא הכשר.</b> אני מאשר/ת שאני יודע/ת שהמארז אינו כשר. רוצים להחליף את הפריט? כותבים בהערות.</span></label>` : ''}
@@ -303,7 +315,7 @@ function payUrl(order) {
 }
 function thanksHtml(no) {
   let o = lastOrder; if (!o || o.no !== no) { try { o = JSON.parse(sessionStorage.getItem('north.last')); } catch { /* */ } }
-  if (!o || o.no !== no) return `<section class="thanks"><div class="box"><span class="i">✅</span><h1>ההזמנה נקלטה</h1><p class="no">${esc(no)}</p><a class="btn gold" href="#/">לחנות</a></div></section>`;
+  if (!o || o.no !== no) return `<section class="thanks"><div class="box"><span class="i">${icon('check')}</span><h1>ההזמנה נקלטה</h1><p class="no">${esc(no)}</p><a class="btn gold" href="#/">לחנות</a></div></section>`;
   const url = payUrl(o); const text = C.orderText(o);
   const paid = new URLSearchParams(location.search).get('paid');
   let payBlock = '';
@@ -315,7 +327,7 @@ function thanksHtml(no) {
   else payBlock = `<p>משלמים בחנות כשבאים לאסוף. נודיע בהודעה כשהמארז מוכן.</p>`;
   const wa = waLink(text);
   return `<section class="thanks"><div class="wrap"><div class="box">
-    <span class="i">🎁</span><h1>תודה, ${esc(o.customer.name.split(' ')[0])}!</h1>
+    <span class="i">${icon('gift')}</span><h1>תודה, ${esc(o.customer.name.split(' ')[0])}.</h1>
     <p>מספר ההזמנה</p><div class="no ltr">${esc(o.no)}</div>
     ${payBlock}
     <p>${o.saved ? 'ההזמנה נשמרה אצלנו.' : 'כדי שלא נפספס, שולחים לנו גם את הסיכום:'}</p>
@@ -328,7 +340,7 @@ function thanksHtml(no) {
 /* ---------- תחתית ושער גיל ---------- */
 function footerHtml() {
   return `<div class="wrap"><div class="cols">
-    <div><div class="logo" style="margin-bottom:10px"><span class="mark">ר</span><span>הרוח הצפונית</span></div><p style="margin:0">${esc(STORE.tagline)}. ${esc(STORE.address)}.<br>${esc(STORE.hours)}</p></div>
+    <div><div class="logo" style="margin-bottom:10px">${logo(34)}<span>הרוח הצפונית</span></div><p style="margin:0">${esc(STORE.tagline)}. ${esc(STORE.address)}.<br>${esc(STORE.hours)}</p></div>
     <div><h4>החנות</h4><a href="#/#catalog">המארזים</a><a href="#/#build">מארז בהרכבה</a><a href="#/#biz">לעסקים</a><a href="#/#faq">שאלות ותשובות</a></div>
     <div><h4>מידע</h4><a href="legal.html#terms">תקנון ותנאי שימוש</a><a href="legal.html#shipping">משלוחים ואיסוף</a><a href="legal.html#cancel">ביטול עסקה והחזרות</a><a href="legal.html#privacy">מדיניות פרטיות</a><a href="legal.html#access">הצהרת נגישות</a></div>
     <div><h4>דברו איתנו</h4>${STORE.phone ? `<a href="tel:${STORE.phone.replace(/-/g, '')}"><span class="ltr">${esc(STORE.phone)}</span></a>` : ''}${STORE.whatsapp ? `<a href="${waLink('שלום, אני מתעניין במארז')}" target="_blank" rel="noopener">וואטסאפ</a>` : ''}<a href="mailto:${STORE.email}"><span class="ltr">${esc(STORE.email)}</span></a>${STORE.instagram ? `<a href="${STORE.instagram}" target="_blank" rel="noopener">אינסטגרם</a>` : ''}</div>
@@ -336,13 +348,13 @@ function footerHtml() {
   <div class="legal">
     <div class="warn">אזהרה: צריכה מופרזת של אלכוהול מסכנת חיים ומזיקה לבריאות.</div>
     <div>מכירת משקאות משכרים לבני 18 ומעלה בלבד. המשלוח נמסר ידנית למקבל בוגר בלבד.</div>
-    <div>${esc(STORE.legalName)} · ח.פ. <span class="ltr">${esc(STORE.companyId)}</span> · המחירים כוללים מע"מ · <a href="legal.html#cancel" style="display:inline;padding:0;text-decoration:underline">ביטול עסקה</a> בהתאם לחוק הגנת הצרכן, מוצר סגור ובלי חריטה.</div>
+    <div>${esc(STORE.legalName)} · ח.פ. <span class="ltr">${esc(STORE.companyId)}</span> · המחירים כוללים מע"מ · <a href="legal.html#cancel" style="display:inline;padding:0;text-decoration:underline">ביטול עסקה</a> לפי חוק הגנת הצרכן, מוצר סגור ובלי חריטה.</div>
   </div></div>`;
 }
 function gate() {
   let ok = false; try { ok = localStorage.getItem('north.adult') === '1'; } catch { /* */ }
   if (ok) return;
-  $('#gate').innerHTML = `<div class="gate"><div class="box"><span class="mark">ר</span><h2>בני 18 ומעלה?</h2><p>החנות מוכרת משקאות משכרים. הכניסה לבוגרים בלבד.</p>
+  $('#gate').innerHTML = `<div class="gate"><div class="box">${logo(60)}<h2>בני 18 ומעלה?</h2><p>החנות מוכרת משקאות משכרים. הכניסה לבוגרים בלבד.</p>
     <div class="row"><button class="btn gold" id="g-yes">כן, אני מעל 18</button><a class="btn line" href="https://www.google.com">עוד לא</a></div>
     <small>אזהרה: צריכה מופרזת של אלכוהול מסכנת חיים ומזיקה לבריאות.</small></div></div>`;
   $('#g-yes').onclick = () => { try { localStorage.setItem('north.adult', '1'); } catch { /* */ } $('#gate').innerHTML = ''; };
@@ -355,6 +367,7 @@ function route() {
   const view = $('#view');
   const parts = path.split('/').filter(Boolean);
   document.querySelectorAll('.menu a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === h));
+  document.body.classList.toggle('has-buybar', parts[0] === 'p');
   $('#mnav').classList.remove('open');
   if (parts[0] === 'p' && byId(parts[1])) {
     const p = byId(parts[1]);
@@ -374,7 +387,7 @@ function route() {
 
 /* ---------- אירועים ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-add],[data-cat],[data-occ],[data-bopt],#baddbtn,[data-var],[data-q],#paddbtn,[data-img],[data-cq],[data-rm],[data-close],#cartbtn,#burger,#copyord,#growretry');
+  const t = e.target.closest('[data-add],[data-cat],[data-occ],[data-bopt],#baddbtn,[data-var],[data-q],#paddbtn,[data-buybar],[data-img],[data-cq],[data-rm],[data-close],#cartbtn,#burger,#copyord,#growretry');
   if (!t) return;
   if (t.id === 'cartbtn') return openDrawer();
   if (t.id === 'burger') return $('#mnav').classList.toggle('open');
@@ -403,7 +416,7 @@ document.addEventListener('click', e => {
   if (t.dataset.var !== undefined) { pstate.variant = t.dataset.var; pstate.note = $('#pnote').value; const en = $('#pengrave'); pstate.engrave = en ? en.value : ''; $('#view').innerHTML = productHtml(byId(route.pid)); return; }
   if (t.dataset.q) { pstate.qty = Math.max(1, Math.min(20, pstate.qty + +t.dataset.q)); pstate.note = $('#pnote').value; const en = $('#pengrave'); pstate.engrave = en ? en.value : ''; $('#view').innerHTML = productHtml(byId(route.pid)); return; }
   if (t.dataset.img !== undefined) { pstate.img = +t.dataset.img; const p = byId(route.pid); $('#pmain').src = [p.img, p.img2][pstate.img]; document.querySelectorAll('[data-img]').forEach(b => b.classList.toggle('on', b === t)); return; }
-  if (t.id === 'paddbtn') { const p = byId(route.pid); const en = $('#pengrave'); if (p.personalize && en && !en.value.trim()) { toast('כותבים את הטקסט לחריטה'); en.focus(); return; } addProduct(p, pstate.variant, pstate.qty, $('#pnote').value.trim(), en ? en.value.trim() : ''); openDrawer(); return; }
+  if (t.id === 'paddbtn' || t.hasAttribute('data-buybar')) { const p = byId(route.pid); const en = $('#pengrave'); if (p.personalize && en && !en.value.trim()) { toast('כותבים את הטקסט לחריטה'); en.focus(); return; } addProduct(p, pstate.variant, pstate.qty, $('#pnote').value.trim(), en ? en.value.trim() : ''); openDrawer(); return; }
   if (t.dataset.cq) { const it = cart.find(i => i.key === t.dataset.key); if (it) { cart = C.setQty(cart, it.key, it.qty + +t.dataset.cq); saveCart(); renderCart(); } return; }
   if (t.dataset.rm) { cart = C.removeItem(cart, t.dataset.rm); saveCart(); renderCart(); return; }
   if (t.id === 'growretry') { const o = lastOrder || JSON.parse(sessionStorage.getItem('north.last') || 'null'); if (!o) return; t.disabled = true; t.textContent = 'פותחים עמוד תשלום…'; growUrl(o).then(u => { if (u) location.href = u; else { t.disabled = false; t.textContent = 'לא הצלחנו לפתוח עמוד תשלום. נתקשר אליכם.'; } }); return; }
@@ -419,7 +432,7 @@ document.addEventListener('submit', e => {
     const text = `פנייה למארזים לעסקים\nשם: ${o.name}\nטלפון: ${o.phone}\nחברה: ${o.company || '-'}\nכמות: ${o.qty}\n${o.notes || ''}`;
     const wa = waLink(text);
     if (wa) window.open(wa, '_blank'); else location.href = `mailto:${STORE.email}?subject=${encodeURIComponent('מארזים לעסקים: ' + (o.company || o.name))}&body=${encodeURIComponent(text)}`;
-    toast('תודה! נחזור אליכם היום'); e.target.reset();
+    toast('תודה. נחזור אליכם היום'); e.target.reset();
   }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
@@ -427,6 +440,9 @@ window.addEventListener('hashchange', route);
 
 /* ---------- התחלה ---------- */
 $('#footer').innerHTML = footerHtml();
+document.querySelectorAll('.logo .mark').forEach(m => m.outerHTML = logo(34));
+$('#cartbtn').insertAdjacentHTML('afterbegin', icon('bag')); $('#cartbtn').querySelector('span:not(.t):not(.n)')?.remove();
+$('#burger').innerHTML = icon('menu'); $('#wa').innerHTML = icon('chat');
 $('#cartn').textContent = C.count(cart);
 if (STORE.whatsapp) { const w = $('#wa'); w.href = waLink('שלום, אני מתעניין במארז'); w.classList.remove('hide'); }
 route.first = true; route(); gate();
