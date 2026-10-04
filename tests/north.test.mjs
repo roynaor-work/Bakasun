@@ -63,7 +63,15 @@ test('מספר הזמנה ותקציר', () => {
 
 test('הקטלוג תקין: מזהים ייחודיים, תמונות, בלי ערבית', () => {
   const ids = new Set(PRODUCTS.map(p => p.id)); assert.equal(ids.size, PRODUCTS.length);
-  for (const p of PRODUCTS) { assert.ok(p.img.startsWith('https://')); assert.ok(p.contents.length >= 3); assert.ok(p.price > 0); if (p.kosher === false) assert.ok(p.kosherNote, p.id + ' לא כשר בלי פירוט'); }
+  for (const p of PRODUCTS) {
+    assert.ok(p.img.startsWith('https://')); assert.ok(p.contents.length >= 3); assert.ok(p.price > 0);
+    if (p.kosher === false) {
+      assert.ok(p.kosherNote, p.id + ' לא כשר בלי פירוט');
+      // הפריט שבגללו המארז לא כשר חייב להופיע בתכולה (שורש של 4 אותיות משותף)
+      const stems = p.kosherNote.split(/\s+/).map(w => w.replace(/^ה/, '').slice(0, 4)).filter(w => w.length === 4 && !['ללא', 'הכשר'].includes(w));
+      assert.ok(p.contents.some(c => stems.some(st => c.includes(st))), `${p.id}: הערת הכשרות "${p.kosherNote}" לא תואמת לתכולה`);
+    }
+  }
   const all = JSON.stringify(PRODUCTS) + JSON.stringify(BUILD);
   assert.ok(!/[؀-ۿ]/.test(all));
 });
@@ -84,10 +92,11 @@ test('Grow: שדות createPaymentProcess', () => {
 test('Grow: תשובה וקריאה חוזרת', () => {
   assert.deepEqual(parseCreate({ status: 1, data: { url: 'https://pay', processId: 7, processToken: 't' } }), { ok: true, url: 'https://pay', processId: '7', processToken: 't' });
   assert.equal(parseCreate({ status: 0, err: { message: 'bad' } }).ok, false);
-  const cb = parseNotify(Object.entries({ 'data[status]': '1', 'data[transactionId]': '55', 'data[asmachta]': '123', 'data[customFields][cField1]': 'RC-1', 'data[processId]': '7' }));
+  const cb = parseNotify(Object.entries({ 'data[status]': 'שולם', 'data[statusCode]': '2', 'data[transactionId]': '55', 'data[asmachta]': '123', 'data[customFields][cField1]': 'RC-1', 'data[processId]': '7' }));
   assert.equal(cb.orderNo, 'RC-1'); assert.equal(cb.paid, true); assert.equal(cb.transactionId, '55');
   const flat = parseNotify(Object.entries({ status: '0', statusCode: '3', transactionId: '9', cField1: 'RC-2' }));
   assert.equal(flat.orderNo, 'RC-2'); assert.equal(flat.paid, false);
+  assert.equal(parseNotify(Object.entries({ status: '1', transactionId: '5' })).paid, false, 'status 1 בלי statusCode 2 אינו תשלום');
   const ap = approveParams(cb, 'P1'); assert.equal(ap.pageCode, 'P1'); assert.equal(ap.transactionId, '55'); assert.equal(ap.processId, '7'); assert.ok(!('orderNo' in ap));
 });
 
@@ -104,4 +113,30 @@ test('Grow: התשלום מסומן רק אחרי אימות מול Grow, על �
   assert.equal(matchesOrder(ok, order, { transactionId: '99' }), false, 'callback names another transaction');
   assert.equal(matchesOrder(ok, { total: 300 }, { transactionId: '77' }), false, 'sum differs from the order');
   assert.equal(matchesOrder({ ok: true, paid: false }, order, {}), false);
+});
+
+import { computeTotal } from '../supabase/functions/_shared/pricing.mjs';
+test('הסכום לתשלום מחושב בשרת מהקטלוג, לא מהדפדפן', () => {
+  const cat = { PRODUCTS, BUILD, SHIPPING };
+  const flask = byId('flask'), malt = byId('single-malt');
+  let r = computeTotal([{ id: 'flask', qty: 2, price: 1 }], 'pickup', cat);
+  assert.equal(r.total, flask.price * 2); assert.equal(r.shipping, 0);
+  r = computeTotal([{ id: 'single-malt', variantId: 'up', qty: 1 }], 'north', cat);
+  assert.equal(r.subtotal, 549); assert.equal(r.shipping, 0, 'חינם מעל הסף');
+  r = computeTotal([{ id: 'single-malt', qty: 1 }], 'north', cat);
+  assert.equal(r.total, malt.price + SHIPPING.north.price);
+  r = computeTotal([{ id: 'custom', qty: 1, parts: ['b-gin', 'a-shaker', 'p-wood'] }], 'pickup', cat);
+  assert.equal(r.total, 140 + 70 + 60);
+  r = computeTotal([{ id: 'nope', qty: 1 }], 'pickup', cat);
+  assert.deepEqual(r.unknown, ['nope']);
+});
+
+import { CITIES } from '../north/js/config.js';
+test('אזור המשלוח נאכף בקופה: יישוב מהרשימה בלבד', () => {
+  const f = { name: 'דנה לוי', phone: '050-1234567', adult: true, terms: true, street: 'הרצל 1' };
+  assert.deepEqual(C.validateOrder({ ...f, city: 'קרית שמונה' }, 'north', { cities: CITIES }), []);
+  assert.deepEqual(C.validateOrder({ ...f, city: 'מג\'דל שמס' }, 'north', { cities: CITIES }), []);
+  assert.ok(C.validateOrder({ ...f, city: 'תל אביב' }, 'north', { cities: CITIES }).some(e => e.includes('אזור המשלוחים')));
+  assert.deepEqual(C.validateOrder({ ...f, city: 'תל אביב' }, 'pickup', { cities: CITIES }), [], 'באיסוף לא בודקים יישוב');
+  assert.equal(C.cityInArea('צפת', CITIES), true); assert.equal(C.cityInArea('חיפה', CITIES), false);
 });

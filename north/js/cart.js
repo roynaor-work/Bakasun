@@ -56,6 +56,12 @@ export function orderNo(now = new Date(), rnd = Math.random) {
 }
 
 /* בדיקת טופס. מחזירה רשימת שגיאות (ריקה = תקין). */
+/* השוואת יישובים: בלי גרשיים, מקפים ורווחים כפולים; "קרית" = "קריית". */
+export function normCity(c) { return String(c || '').replace(/["'׳״`]/g, '').replace(/[-–]/g, ' ').replace(/\s+/g, ' ').replace(/^קרית /, 'קריית ').trim(); }
+export function cityInArea(city, cities) {
+  const c = normCity(city); if (!c) return false;
+  return cities.some(x => { const n = normCity(x); return n === c || c.startsWith(n) || n.startsWith(c) && c.length >= 3; });
+}
 export function hasNonKosher(items) { return items.some(i => i.kosher === false); }
 
 export function validateOrder(f, method, opts = {}) {
@@ -65,6 +71,7 @@ export function validateOrder(f, method, opts = {}) {
   if (f.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)) errs.push('כתובת מייל תקינה');
   if (method !== 'pickup') {
     if (!f.city || f.city.trim().length < 2) errs.push('יישוב');
+    else if (opts.cities && !cityInArea(f.city, opts.cities)) errs.push('יישוב בתוך אזור המשלוחים (או איסוף מהחנות)');
     if (!f.street || f.street.trim().length < 2) errs.push('רחוב ומספר');
   }
   if (!f.adult) errs.push('אישור גיל 18 ומעלה');

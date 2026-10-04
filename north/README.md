@@ -40,6 +40,9 @@ https://roynaor-work.github.io/Bakasun/north/
 
 ביט: `PAY.bit.url` (בקשת תשלום של ביט לעסקים) או `PAY.bit.phone` (המספר שמעבירים אליו; מוצג עם מספר ההזמנה).
 
+## מצב הרצה
+`STORE.preview = true` ב-config מציג פס "האתר בהרצה" ו-`index.html` מסומן noindex. כשמתן מאשר מחירים והרכבים: להעביר ל-false ולהסיר את תגית ה-robots.
+
 ## הזמנות
 - `supabase/north.sql` רץ פעם אחת ב-SQL Editor. אחרי זה כל הזמנה נכנסת לטבלה `north_orders`.
 - דף התודה מציע ללקוח גם לשלוח את הסיכום בוואטסאפ/מייל, למקרה שהענן לא זמין.
