@@ -9,15 +9,19 @@ export const CATS = [
   { id: 'spa',      name: 'פינוק וספא' },
   { id: 'sweet',    name: 'מתוק וגורמה' },
   { id: 'gift',     name: 'ימי הולדת' },
+  { id: 'engrave',  name: 'עם חריטה' },
 ];
 
+/* מה מקבלים בכל מארז, שורה אחת קבועה (לפי המובילים: boxfox). */
+export const INCLUDED = ['ברכה בכתב יד', 'בלי מחיר בתוך החבילה', 'מוכן תוך יום עסקים'];
+
 export const OCCASIONS = [
-  { id: 'birthday', name: 'יום הולדת', icon: '🎂' },
-  { id: 'thanks',   name: 'תודה',        icon: '🙏' },
-  { id: 'holiday',  name: 'חג',          icon: '🍾' },
-  { id: 'couple',   name: 'לזוג',        icon: '🥂' },
-  { id: 'host',     name: 'למארחים',     icon: '🏠' },
-  { id: 'work',     name: 'לעבודה',      icon: '💼' },
+  { id: 'birthday', name: 'יום הולדת', icon: 'cake' },
+  { id: 'thanks',   name: 'תודה',        icon: 'heart' },
+  { id: 'holiday',  name: 'חג',          icon: 'sparkling' },
+  { id: 'couple',   name: 'לזוג',        icon: 'cheers' },
+  { id: 'host',     name: 'למארחים',     icon: 'home' },
+  { id: 'work',     name: 'לעבודה',      icon: 'briefcase' },
 ];
 
 export const PRODUCTS = [
@@ -134,34 +138,34 @@ export const byId = id => PRODUCTS.find(p => p.id === id);
 /* מארז בהרכבה: בסיס, תוספות, אריזה. */
 export const BUILD = {
   bases: [
-    { id: 'b-malt',   name: 'סינגל מאלט',      price: 220, icon: '🥃' },
-    { id: 'b-bourb',  name: 'בורבון',           price: 150, icon: '🥃' },
-    { id: 'b-gin',    name: 'ג׳ין פרימיום',      price: 140, icon: '🍸' },
-    { id: 'b-vodka',  name: 'וודקה פרימיום',     price: 130, icon: '🍸' },
-    { id: 'b-red',    name: 'יין אדום גלילי',    price: 90,  icon: '🍷' },
-    { id: 'b-white',  name: 'יין לבן',          price: 85,  icon: '🍷' },
-    { id: 'b-bubbly', name: 'מבעבע',            price: 80,  icon: '🍾' },
-    { id: 'b-liq',    name: 'ליקר',             price: 110, icon: '🍶' },
+    { id: 'b-malt',   name: 'סינגל מאלט',      price: 220, icon: 'rocks' },
+    { id: 'b-bourb',  name: 'בורבון',           price: 150, icon: 'rocks' },
+    { id: 'b-gin',    name: 'ג׳ין פרימיום',      price: 140, icon: 'bottle' },
+    { id: 'b-vodka',  name: 'וודקה פרימיום',     price: 130, icon: 'bottle' },
+    { id: 'b-red',    name: 'יין אדום גלילי',    price: 90,  icon: 'wine' },
+    { id: 'b-white',  name: 'יין לבן',          price: 85,  icon: 'wine' },
+    { id: 'b-bubbly', name: 'מבעבע',            price: 80,  icon: 'sparkling' },
+    { id: 'b-liq',    name: 'ליקר',             price: 110, icon: 'liqueur' },
   ],
   addons: [
-    { id: 'a-rocks',   name: 'זוג כוסות רוקס',       price: 60, icon: '🥃' },
-    { id: 'a-flask',   name: 'פלאסק נירוסטה חרוט',   price: 90, icon: '⚗️' },
-    { id: 'a-shaker',  name: 'שייקר בוסטון',          price: 70, icon: '🍹' },
-    { id: 'a-jigger',  name: 'ג׳יגר וכפית בר',       price: 45, icon: '🥄' },
-    { id: 'a-bitters', name: 'ביטרס תפוז',            price: 55, icon: '🍊' },
-    { id: 'a-tonic',   name: '4 טוניק פרימיום',       price: 40, icon: '🫧' },
-    { id: 'a-choc',    name: 'פרלינים 12 יח׳',        price: 45, icon: '🍫', kosher: false },
-    { id: 'a-honey',   name: 'דבש גלילי',             price: 38, icon: '🍯' },
-    { id: 'a-snacks',  name: 'חטיפי אגוזים',          price: 30, icon: '🥜' },
-    { id: 'a-candle',  name: 'נר סויה ריחני',         price: 40, icon: '🕯️' },
-    { id: 'a-soap',    name: 'סבון טבעי',             price: 25, icon: '🧼' },
-    { id: 'a-diff',    name: 'מפיץ ריח',              price: 55, icon: '🌿' },
-    { id: 'a-book',    name: 'ספר קוקטיילים',         price: 80, icon: '📖' },
+    { id: 'a-rocks',   name: 'זוג כוסות רוקס',       price: 60, icon: 'rocks' },
+    { id: 'a-flask',   name: 'פלאסק נירוסטה חרוט',   price: 90, icon: 'flask' },
+    { id: 'a-shaker',  name: 'שייקר בוסטון',          price: 70, icon: 'shaker' },
+    { id: 'a-jigger',  name: 'ג׳יגר וכפית בר',       price: 45, icon: 'jigger' },
+    { id: 'a-bitters', name: 'ביטרס תפוז',            price: 55, icon: 'citrus' },
+    { id: 'a-tonic',   name: '4 טוניק פרימיום',       price: 40, icon: 'bubbles' },
+    { id: 'a-choc',    name: 'פרלינים 12 יח׳',        price: 45, icon: 'chocolate', kosher: false },
+    { id: 'a-honey',   name: 'דבש גלילי',             price: 38, icon: 'honey' },
+    { id: 'a-snacks',  name: 'חטיפי אגוזים',          price: 30, icon: 'nuts' },
+    { id: 'a-candle',  name: 'נר סויה ריחני',         price: 40, icon: 'candle' },
+    { id: 'a-soap',    name: 'סבון טבעי',             price: 25, icon: 'soap' },
+    { id: 'a-diff',    name: 'מפיץ ריח',              price: 55, icon: 'leaf' },
+    { id: 'a-book',    name: 'ספר קוקטיילים',         price: 80, icon: 'book' },
   ],
   packs: [
-    { id: 'p-bag',   name: 'שקית מתנה וסרט',    price: 0,  icon: '🎀' },
-    { id: 'p-black', name: 'קופסת מתנה שחורה',  price: 30, icon: '⬛' },
-    { id: 'p-wood',  name: 'קופסת עץ עם קש',    price: 60, icon: '🪵' },
+    { id: 'p-bag',   name: 'שקית מתנה וסרט',    price: 0,  icon: 'bag' },
+    { id: 'p-black', name: 'קופסת מתנה שחורה',  price: 30, icon: 'box' },
+    { id: 'p-wood',  name: 'קופסת עץ עם קש',    price: 60, icon: 'crate' },
   ],
   maxAddons: 5,
 };

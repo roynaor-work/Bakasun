@@ -1,14 +1,18 @@
 /* הרוח הצפונית · מארזים. ניתוב לפי hash: #/ , #/p/<id> , #/checkout , #/thanks/<no> */
 import { STORE, SHIPPING, OUT_OF_AREA, PAY, CLOUD, IMG } from './config.js';
-import { CATS, OCCASIONS, PRODUCTS, BUILD, FAQ, byId } from './products.js';
+import { CATS, OCCASIONS, PRODUCTS, BUILD, FAQ, INCLUDED, byId } from './products.js';
 import * as C from './cart.js';
+import { icon, logo } from './icons.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const money = n => `<span class="num">${C.fmt(n)}</span>`;
 
 let cart = C.load();
-const state = { cat: 'all', occ: null, build: { base: null, addons: [], pack: BUILD.packs[0].id, note: '' } };
+const BUILD_KEY = 'north.build.v1';
+function loadBuild() { try { const b = JSON.parse(localStorage.getItem(BUILD_KEY) || 'null'); if (b && Array.isArray(b.addons)) return b; } catch { /* */ } return { base: null, addons: [], pack: BUILD.packs[0].id, note: '' }; }
+function saveBuild() { try { localStorage.setItem(BUILD_KEY, JSON.stringify(state.build)); } catch { /* */ } }
+const state = { cat: 'all', occ: null, kosherOnly: false, build: loadBuild() };
 let lastOrder = null;
 
 /* ---------- כלים ---------- */
@@ -31,13 +35,18 @@ function card(p) {
     <div class="body">
       <h3><a href="#/p/${p.id}">${esc(p.name)}</a></h3>
       <div class="sub">${esc(p.sub)}</div>
+      <div class="incl">${INCLUDED.map(x => `<span>${icon('check', 'sm')}${x}</span>`).join('')}</div>
       <div class="act"><button class="btn gold sm" data-add="${p.id}">הוספה לסל</button><a class="btn line sm" href="#/p/${p.id}">פרטים</a></div>
     </div></article>`;
 }
 
+function chipsHtml() {
+  return CATS.map(c => `<button class="chip ${state.cat === c.id ? 'on' : ''}" data-cat="${c.id}">${c.name}</button>`).join('') + `<button class="chip k ${state.kosherOnly ? 'on' : ''}" id="kosherchip" aria-pressed="${state.kosherOnly}">${icon('check', 'sm')} רק כשר</button>`;
+}
 function catalogHtml() {
-  let list = PRODUCTS.filter(p => state.cat === 'all' || p.cat === state.cat);
+  let list = PRODUCTS.filter(p => state.cat === 'all' || (state.cat === 'engrave' ? !!p.personalize : p.cat === state.cat));
   if (state.occ) list = list.filter(p => p.occ.includes(state.occ));
+  if (state.kosherOnly) list = list.filter(p => p.kosher !== false);
   return list.length ? list.map(card).join('') : `<p class="sub" style="grid-column:1/-1;color:var(--muted)">אין עדיין מארז לשילוב הזה. בונים אחד למטה, או כותבים לנו.</p>`;
 }
 
@@ -54,22 +63,32 @@ function homeHtml() {
     </div>
   </section>
   <div class="trust"><div class="wrap">
-    <div><span class="i">🚚</span><span><b>משלוח באזור</b>עד 40 דקות מצומת הגומא</span></div>
-    <div><span class="i">🎀</span><span><b>אריזת מתנה</b>וכרטיס ברכה בכתב יד</span></div>
-    <div><span class="i">✒️</span><span><b>חריטה אישית</b>על פלאסקים וכוסות</span></div>
-    <div><span class="i">🔒</span><span><b>תשלום מאובטח</b>אשראי, ביט או באיסוף</span></div>
+    <div><span class="i">${icon('truck')}</span><span><b>משלוח באזור</b>עד 40 דקות מצומת הגומא</span></div>
+    <div><span class="i">${icon('gift')}</span><span><b>אריזת מתנה</b>וכרטיס ברכה בכתב יד</span></div>
+    <div><span class="i">${icon('pen')}</span><span><b>חריטה אישית</b>על פלאסקים וכוסות</span></div>
+    <div><span class="i">${icon('lock')}</span><span><b>תשלום מאובטח</b>אשראי, ביט או באיסוף</span></div>
   </div></div>
 
   <section class="blk" id="occasions"><div class="wrap">
     <div class="sechead reveal"><div><h2>למי המתנה?</h2><p>בוחרים אירוע, ואנחנו מסננים את המארזים שמתאימים.</p></div></div>
-    <div class="occ reveal">${OCCASIONS.map(o => `<button data-occ="${o.id}" class="${state.occ === o.id ? 'on' : ''}"><span class="i">${o.icon}</span>${o.name}</button>`).join('')}</div>
+    <div class="occ reveal">${OCCASIONS.map(o => `<button data-occ="${o.id}" class="${state.occ === o.id ? 'on' : ''}"><span class="i">${icon(o.icon)}</span>${o.name}</button>`).join('')}</div>
   </div></section>
 
   <section class="blk" id="catalog" style="padding-top:0"><div class="wrap">
     <div class="sechead reveal"><div><h2>המארזים${occName ? ` · ${esc(occName)}` : ''}</h2><p>כל מארז נארז אצלנו בחנות. הבקבוקים מהמדף, התוספות מיצרנים שאנחנו עובדים איתם.</p></div>
       <a class="more" href="#/#build">רוצים משהו אחר? בונים לבד ←</a></div>
-    <div class="chips" id="chips">${CATS.map(c => `<button class="chip ${state.cat === c.id ? 'on' : ''}" data-cat="${c.id}">${c.name}</button>`).join('')}</div>
+    <div class="promise reveal"><span>${icon('clock')} מזמינים היום, המארז מוכן לאיסוף תוך יום עסקים. משלוח באזור תוך יומיים.</span><span>${icon('shield')} לא מרוצים ממשהו במארז? מחליפים. בלי שאלות.</span></div>
+    <div class="chips" id="chips">${chipsHtml()}</div>
     <div class="grid" id="grid">${catalogHtml()}</div>
+  </div></section>
+
+  <section class="blk how" id="how"><div class="wrap">
+    <div class="sechead reveal"><div><h2>איך זה עובד</h2></div></div>
+    <ol class="steps3 reveal">
+      <li><span class="i">${icon('gift')}</span><b>בוחרים</b><span>מארז מוכן מהרשימה, או בונים אחד לבד: בקבוק, תוספות, אריזה.</span></li>
+      <li><span class="i">${icon('hands')}</span><b>אנחנו אורזים</b><span>בחנות, ביד. כותבים את הברכה על הכרטיס ואורזים בקופסה או בשקית שבחרתם.</span></li>
+      <li><span class="i">${icon('pin')}</span><b>אוספים או מקבלים</b><span>איסוף מהחנות בצומת הגומא תוך יום עסקים, או משלוח באזור תוך יומיים.</span></li>
+    </ol>
   </div></section>
 
   <section class="blk build" id="build"><div class="wrap">
@@ -115,7 +134,7 @@ function homeHtml() {
 }
 
 /* ---------- בונה מארז ---------- */
-function opt(o, on) { return `<button class="opt ${on ? 'on' : ''}" data-bopt="${o.id}"><span class="i">${o.icon}</span><b>${esc(o.name)}${o.kosher === false ? ' <span class="nk sm">לא כשר</span>' : ''}</b><span class="p">${o.price ? money(o.price) : 'כלול'}</span></button>`; }
+function opt(o, on) { return `<button class="opt ${on ? 'on' : ''}" data-bopt="${o.id}"><span class="i">${icon(o.icon)}</span><b>${esc(o.name)}${o.kosher === false ? ' <span class="nk sm">לא כשר</span>' : ''}</b><span class="p">${o.price ? money(o.price) : 'כלול'}</span></button>`; }
 function buildStepsHtml() {
   const b = state.build;
   return `
@@ -134,7 +153,7 @@ function buildSumHtml() {
   const { base, addons, pack, price } = buildParts();
   const rows = [base, ...addons, pack].filter(Boolean);
   return `<h3>המארז שלכם</h3>
-    ${rows.length ? `<ul>${rows.map(r => `<li><span>${r.icon} ${esc(r.name)}</span><span class="num">${r.price ? C.fmt(r.price) : 'כלול'}</span></li>`).join('')}</ul>` : `<p class="empty">עוד לא בחרתם. מתחילים מהבקבוק.</p>`}
+    ${rows.length ? `<ul>${rows.map(r => `<li><span class="row-ic">${icon(r.icon, 'sm')} ${esc(r.name)}</span><span class="num">${r.price ? C.fmt(r.price) : 'כלול'}</span></li>`).join('')}</ul>` : `<p class="empty">עוד לא בחרתם. מתחילים מהבקבוק.</p>`}
     <div class="field"><label>ברכה לכרטיס (אנחנו כותבים ביד)</label><textarea id="bnote" maxlength="140" placeholder="למשל: לאבא, שיהיה טעים. אוהבים.">${esc(state.build.note)}</textarea></div>
     <div class="tot"><span>סה"כ</span>${money(price)}</div>
     <button class="btn gold wide" id="baddbtn" ${base ? '' : 'disabled'}>הוספה לסל</button>
@@ -148,7 +167,8 @@ function productHtml(p) {
   const v = p.variants ? (p.variants.find(x => x.id === pstate.variant) || p.variants[0]) : null;
   const price = v ? v.price : p.price;
   const imgs = [p.img, p.img2].filter(Boolean);
-  const related = PRODUCTS.filter(x => x.id !== p.id && (x.cat === p.cat || x.occ.some(o => p.occ.includes(o)))).slice(0, 4);
+  const band = PRODUCTS.filter(x => x.id !== p.id && Math.abs(x.price - p.price) <= p.price * 0.35);
+  const related = [...band, ...PRODUCTS.filter(x => x.id !== p.id && !band.includes(x) && (x.cat === p.cat || x.occ.some(o => p.occ.includes(o))))].slice(0, 4);
   return `<section class="pp"><div class="wrap">
     <div class="crumbs"><a href="#/">הבית</a><span>›</span><a href="#/#catalog">המארזים</a><span>›</span><span>${esc(p.name)}</span></div>
     <div class="lay">
@@ -163,10 +183,13 @@ function productHtml(p) {
         <div class="price">${money(price)}<small>כולל מע"מ ואריזת מתנה</small></div>
         <p class="desc">${esc(p.desc)}</p>
         ${p.variants ? `<div class="field"><label>גרסה</label><div class="vars">${p.variants.map(x => `<button class="${x.id === v.id ? 'on' : ''}" data-var="${x.id}">${esc(x.name)}<span class="num">${C.fmt(x.price)}</span></button>`).join('')}</div></div>` : ''}
-        ${p.personalize ? `<div class="field"><label>${esc(p.personalize.label)} (עד ${p.personalize.max} תווים)</label><input id="pengrave" maxlength="${p.personalize.max}" value="${esc(pstate.engrave)}" placeholder="למשל: לאבא, 2026"></div>` : ''}
+        ${p.personalize ? `<div class="field"><label>${esc(p.personalize.label)} <span class="cnt" id="engcnt">${pstate.engrave.length} / ${p.personalize.max}</span></label><input id="pengrave" maxlength="${p.personalize.max}" value="${esc(pstate.engrave)}" placeholder="למשל: לאבא, 2026" autocomplete="off">
+          <div class="engprev" aria-live="polite"><svg viewBox="0 0 220 120" aria-hidden="true"><defs><linearGradient id="fl" x1="0" x2="1"><stop offset="0" stop-color="#6b6b70"/><stop offset=".45" stop-color="#d9d9de"/><stop offset="1" stop-color="#7a7a80"/></linearGradient></defs><rect x="92" y="4" width="36" height="12" rx="3" fill="#9a9aa0"/><rect x="30" y="14" width="160" height="100" rx="18" fill="url(#fl)"/><rect x="38" y="22" width="144" height="84" rx="14" fill="none" stroke="rgba(255,255,255,.25)"/></svg><div class="engtxt" id="engtxt">${esc(pstate.engrave) || 'הטקסט שלכם'}</div><small>העיצוב הסופי של החריטה עשוי להשתנות מעט</small></div></div>` : ''}
         ${p.kosher === false ? `<div class="nkbox"><b>לא כשר.</b> ${esc(p.kosherNote || 'המארז כולל מוצר ללא הכשר.')} אפשר לבקש החלפה בהערות להזמנה.</div>` : ''}
         <div class="contents"><h3>מה במארז</h3><ul>${p.contents.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>
-        <div class="field"><label>ברכה לכרטיס (לא חובה)</label><textarea id="pnote" maxlength="140" placeholder="אנחנו כותבים אותה ביד על הכרטיס">${esc(pstate.note)}</textarea></div>
+        <div class="field"><label>ברכה לכרטיס (לא חובה) <span class="cnt" id="notecnt">${pstate.note.length} / 140</span></label><textarea id="pnote" maxlength="140" placeholder="אנחנו כותבים אותה ביד על הכרטיס">${esc(pstate.note)}</textarea>
+          <div class="cardprev ${pstate.note ? '' : 'hide'}" id="cardprev"><div class="cardtxt" id="cardtxt">${esc(pstate.note)}</div><span>הרוח הצפונית · צומת הגומא</span></div></div>
+        <div class="incl big">${INCLUDED.map(x => `<span>${icon('check', 'sm')}${x}</span>`).join('')}</div>
         <div class="buyrow">
           <div class="qty"><button data-q="-1" aria-label="פחות">−</button><b id="pqty" class="num">${pstate.qty}</b><button data-q="1" aria-label="יותר">+</button></div>
           <button class="btn gold" id="paddbtn">הוספה לסל · ${money(price * pstate.qty)}</button>
@@ -174,14 +197,16 @@ function productHtml(p) {
         <div class="perks"><div>איסוף מהחנות בחינם</div><div>משלוח באזור (עד 40 דק׳ מצומת הגומא) ${money(SHIPPING.north.price)}, חינם מ-${money(SHIPPING.north.freeFrom)}</div><div>מסירה לבני 18 ומעלה</div><div>הרכב לפי מלאי, אפשר להחליף</div></div>
       </div>
     </div>
-    ${related.length ? `<div class="sechead" style="margin-top:70px"><div><h2>עוד בכיוון הזה</h2></div></div><div class="grid">${related.map(card).join('')}</div>` : ''}
-  </div></section>`;
+    ${related.length ? `<div class="sechead" style="margin-top:70px"><div><h2>לא בדיוק זה? יש עוד</h2><p>מארזים באותו טווח מחיר ובאותו כיוון.</p></div></div><div class="grid">${related.map(card).join('')}</div>` : ''}
+  </div>
+  <div class="buybar"><div><b>${esc(p.name)}</b><span class="num">${C.fmt(price * pstate.qty)}</span></div><button class="btn gold" data-buybar>הוספה לסל</button></div>
+  </section>`;
 }
 
 /* ---------- סל ---------- */
 function renderCart() {
   const el = $('#cartbody');
-  if (!cart.length) { el.innerHTML = `<div class="empty"><span class="i">🛍️</span><p>הסל עוד ריק.</p><a class="btn gold sm" href="#/#catalog" data-close>לכל המארזים</a></div>`; return; }
+  if (!cart.length) { el.innerHTML = `<div class="empty"><span class="i">${icon('bag')}</span><p>הסל עוד ריק.</p><a class="btn gold sm" href="#/#catalog" data-close>לכל המארזים</a></div>`; return; }
   const sub = C.subtotal(cart);
   el.innerHTML = `<div class="lines">${cart.map(i => `<div class="crow">
       <img src="${i.img}" alt="">
@@ -207,7 +232,7 @@ function addProduct(p, variantId, qty = 1, note = '', engrave = '') {
 /* ---------- קופה ---------- */
 const co = { method: 'pickup', pay: 'card', f: {} };
 function checkoutHtml(errs = []) {
-  if (!cart.length) return `<section class="thanks"><div class="box"><span class="i">🛍️</span><h1>הסל ריק</h1><p>בוחרים מארז ונחזור לכאן.</p><a class="btn gold" href="#/#catalog">לכל המארזים</a></div></section>`;
+  if (!cart.length) return `<section class="thanks"><div class="box"><span class="i">${icon('bag')}</span><h1>הסל ריק</h1><p>בוחרים מארז ונחזור לכאן.</p><a class="btn gold" href="#/#catalog">לכל המארזים</a></div></section>`;
   const sub = C.subtotal(cart), ship = C.shippingPrice(co.method, sub), tot = sub + ship;
   const f = co.f;
   const pays = Object.entries(PAY).filter(([, p]) => p.enabled).filter(([k]) => k !== 'cash' || co.method === 'pickup');
@@ -230,7 +255,7 @@ function checkoutHtml(errs = []) {
           </div>
         </div>
         <div class="panel"><h3><span class="no">3</span>תשלום</h3>
-          <div class="radio">${pays.map(([k, p]) => `<label class="${co.pay === k ? 'on' : ''}"><input type="radio" name="pay" value="${k}" ${co.pay === k ? 'checked' : ''}><span><b>${esc(p.label)}</b><small>${esc(p.note)}</small></span><span class="rp">${k === 'card' ? '💳' : k === 'bit' ? '📱' : '🏬'}</span></label>`).join('')}</div>
+          <div class="radio">${pays.map(([k, p]) => `<label class="${co.pay === k ? 'on' : ''}"><input type="radio" name="pay" value="${k}" ${co.pay === k ? 'checked' : ''}><span><b>${esc(p.label)}</b><small>${esc(p.note)}</small></span><span class="rp">${icon(k === 'card' ? 'card' : k === 'bit' ? 'phone' : 'store')}</span></label>`).join('')}</div>
           <div class="paylogos"><span>Visa</span><span>Mastercard</span><span>American Express</span><span>Bit</span><span>Apple Pay</span><span>Google Pay</span></div>
           <label class="check"><input type="checkbox" name="adult" ${f.adult ? 'checked' : ''}><span>אני מאשר/ת שאני בן/בת 18 ומעלה, וכך גם מקבל/ת המשלוח. <span style="color:var(--dim)">מכירת משקאות משכרים לקטינים אסורה על פי חוק.</span></span></label>
           ${C.hasNonKosher(cart) ? `<label class="check" style="border:1px solid rgba(224,122,106,.45);border-radius:12px;padding:10px 12px"><input type="checkbox" name="kosherOk" ${f.kosherOk ? 'checked' : ''}><span><b style="color:#f3b7ad">שימו לב: ההזמנה כוללת מוצר ללא הכשר.</b> אני מאשר/ת שאני יודע/ת שהמארז אינו כשר. רוצים להחליף את הפריט? כותבים בהערות.</span></label>` : ''}
@@ -303,7 +328,7 @@ function payUrl(order) {
 }
 function thanksHtml(no) {
   let o = lastOrder; if (!o || o.no !== no) { try { o = JSON.parse(sessionStorage.getItem('north.last')); } catch { /* */ } }
-  if (!o || o.no !== no) return `<section class="thanks"><div class="box"><span class="i">✅</span><h1>ההזמנה נקלטה</h1><p class="no">${esc(no)}</p><a class="btn gold" href="#/">לחנות</a></div></section>`;
+  if (!o || o.no !== no) return `<section class="thanks"><div class="box"><span class="i">${icon('check')}</span><h1>ההזמנה נקלטה</h1><p class="no">${esc(no)}</p><a class="btn gold" href="#/">לחנות</a></div></section>`;
   const url = payUrl(o); const text = C.orderText(o);
   const paid = new URLSearchParams(location.search).get('paid');
   let payBlock = '';
@@ -315,7 +340,7 @@ function thanksHtml(no) {
   else payBlock = `<p>משלמים בחנות כשבאים לאסוף. נודיע בהודעה כשהמארז מוכן.</p>`;
   const wa = waLink(text);
   return `<section class="thanks"><div class="wrap"><div class="box">
-    <span class="i">🎁</span><h1>תודה, ${esc(o.customer.name.split(' ')[0])}!</h1>
+    <span class="i">${icon('gift')}</span><h1>תודה, ${esc(o.customer.name.split(' ')[0])}.</h1>
     <p>מספר ההזמנה</p><div class="no ltr">${esc(o.no)}</div>
     ${payBlock}
     <p>${o.saved ? 'ההזמנה נשמרה אצלנו.' : 'כדי שלא נפספס, שולחים לנו גם את הסיכום:'}</p>
@@ -328,7 +353,7 @@ function thanksHtml(no) {
 /* ---------- תחתית ושער גיל ---------- */
 function footerHtml() {
   return `<div class="wrap"><div class="cols">
-    <div><div class="logo" style="margin-bottom:10px"><span class="mark">ר</span><span>הרוח הצפונית</span></div><p style="margin:0">${esc(STORE.tagline)}. ${esc(STORE.address)}.<br>${esc(STORE.hours)}</p></div>
+    <div><div class="logo" style="margin-bottom:10px">${logo(34)}<span>הרוח הצפונית</span></div><p style="margin:0">${esc(STORE.tagline)}. ${esc(STORE.address)}.<br>${esc(STORE.hours)}</p></div>
     <div><h4>החנות</h4><a href="#/#catalog">המארזים</a><a href="#/#build">מארז בהרכבה</a><a href="#/#biz">לעסקים</a><a href="#/#faq">שאלות ותשובות</a></div>
     <div><h4>מידע</h4><a href="legal.html#terms">תקנון ותנאי שימוש</a><a href="legal.html#shipping">משלוחים ואיסוף</a><a href="legal.html#cancel">ביטול עסקה והחזרות</a><a href="legal.html#privacy">מדיניות פרטיות</a><a href="legal.html#access">הצהרת נגישות</a></div>
     <div><h4>דברו איתנו</h4>${STORE.phone ? `<a href="tel:${STORE.phone.replace(/-/g, '')}"><span class="ltr">${esc(STORE.phone)}</span></a>` : ''}${STORE.whatsapp ? `<a href="${waLink('שלום, אני מתעניין במארז')}" target="_blank" rel="noopener">וואטסאפ</a>` : ''}<a href="mailto:${STORE.email}"><span class="ltr">${esc(STORE.email)}</span></a>${STORE.instagram ? `<a href="${STORE.instagram}" target="_blank" rel="noopener">אינסטגרם</a>` : ''}</div>
@@ -336,13 +361,13 @@ function footerHtml() {
   <div class="legal">
     <div class="warn">אזהרה: צריכה מופרזת של אלכוהול מסכנת חיים ומזיקה לבריאות.</div>
     <div>מכירת משקאות משכרים לבני 18 ומעלה בלבד. המשלוח נמסר ידנית למקבל בוגר בלבד.</div>
-    <div>${esc(STORE.legalName)} · ח.פ. <span class="ltr">${esc(STORE.companyId)}</span> · המחירים כוללים מע"מ · <a href="legal.html#cancel" style="display:inline;padding:0;text-decoration:underline">ביטול עסקה</a> בהתאם לחוק הגנת הצרכן, מוצר סגור ובלי חריטה.</div>
+    <div>${esc(STORE.legalName)} · ח.פ. <span class="ltr">${esc(STORE.companyId)}</span> · המחירים כוללים מע"מ · <a href="legal.html#cancel" style="display:inline;padding:0;text-decoration:underline">ביטול עסקה</a> לפי חוק הגנת הצרכן, מוצר סגור ובלי חריטה.</div>
   </div></div>`;
 }
 function gate() {
   let ok = false; try { ok = localStorage.getItem('north.adult') === '1'; } catch { /* */ }
   if (ok) return;
-  $('#gate').innerHTML = `<div class="gate"><div class="box"><span class="mark">ר</span><h2>בני 18 ומעלה?</h2><p>החנות מוכרת משקאות משכרים. הכניסה לבוגרים בלבד.</p>
+  $('#gate').innerHTML = `<div class="gate"><div class="box">${logo(60)}<h2>בני 18 ומעלה?</h2><p>החנות מוכרת משקאות משכרים. הכניסה לבוגרים בלבד.</p>
     <div class="row"><button class="btn gold" id="g-yes">כן, אני מעל 18</button><a class="btn line" href="https://www.google.com">עוד לא</a></div>
     <small>אזהרה: צריכה מופרזת של אלכוהול מסכנת חיים ומזיקה לבריאות.</small></div></div>`;
   $('#g-yes').onclick = () => { try { localStorage.setItem('north.adult', '1'); } catch { /* */ } $('#gate').innerHTML = ''; };
@@ -355,6 +380,7 @@ function route() {
   const view = $('#view');
   const parts = path.split('/').filter(Boolean);
   document.querySelectorAll('.menu a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === h));
+  document.body.classList.toggle('has-buybar', parts[0] === 'p');
   $('#mnav').classList.remove('open');
   if (parts[0] === 'p' && byId(parts[1])) {
     const p = byId(parts[1]);
@@ -374,13 +400,14 @@ function route() {
 
 /* ---------- אירועים ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-add],[data-cat],[data-occ],[data-bopt],#baddbtn,[data-var],[data-q],#paddbtn,[data-img],[data-cq],[data-rm],[data-close],#cartbtn,#burger,#copyord,#growretry');
+  const t = e.target.closest('[data-add],#kosherchip,[data-cat],[data-occ],[data-bopt],#baddbtn,[data-var],[data-q],#paddbtn,[data-buybar],[data-img],[data-cq],[data-rm],[data-close],#cartbtn,#burger,#copyord,#growretry');
   if (!t) return;
   if (t.id === 'cartbtn') return openDrawer();
   if (t.id === 'burger') return $('#mnav').classList.toggle('open');
   if (t.hasAttribute('data-close')) return closeDrawer();
   if (t.dataset.add) { addProduct(byId(t.dataset.add)); return; }
-  if (t.dataset.cat) { state.cat = t.dataset.cat; $('#chips').innerHTML = CATS.map(c => `<button class="chip ${state.cat === c.id ? 'on' : ''}" data-cat="${c.id}">${c.name}</button>`).join(''); $('#grid').innerHTML = catalogHtml(); reveal(); return; }
+  if (t.dataset.cat) { state.cat = t.dataset.cat; $('#chips').innerHTML = chipsHtml(); $('#grid').innerHTML = catalogHtml(); reveal(); return; }
+  if (t.id === 'kosherchip') { state.kosherOnly = !state.kosherOnly; $('#chips').innerHTML = chipsHtml(); $('#grid').innerHTML = catalogHtml(); reveal(); return; }
   if (t.dataset.occ) { state.occ = state.occ === t.dataset.occ ? null : t.dataset.occ; document.querySelectorAll('[data-occ]').forEach(b => b.classList.toggle('on', b.dataset.occ === state.occ)); $('#grid').innerHTML = catalogHtml(); $('#catalog h2').textContent = 'המארזים' + (state.occ ? ' · ' + OCCASIONS.find(o => o.id === state.occ).name : ''); reveal(); $('#catalog').scrollIntoView({ behavior: 'smooth' }); return; }
   if (t.dataset.bopt) {
     const id = t.dataset.bopt, b = state.build;
@@ -389,7 +416,7 @@ document.addEventListener('click', e => {
     else if (b.addons.includes(id)) b.addons = b.addons.filter(x => x !== id);
     else if (b.addons.length < BUILD.maxAddons) b.addons.push(id);
     else toast(`עד ${BUILD.maxAddons} תוספות במארז`);
-    refreshBuild(); return;
+    saveBuild(); refreshBuild(); return;
   }
   if (t.id === 'baddbtn') {
     const { base, addons, pack, price } = buildParts(); if (!base) return;
@@ -398,16 +425,21 @@ document.addEventListener('click', e => {
     const item = { id: 'custom', name: 'מארז בהרכבה אישית', price, variant: base.name, parts: parts.map(p => ({ id: p.id, name: p.name })), img: IMG('1688851472616-7ad0980dab23', 300), note: state.build.note, kosher: parts.some(p => p.kosher === false) ? false : true };
     item.key = C.lineKey('custom', state.build.note, parts);
     cart = C.addItem(cart, item); saveCart(); toast('המארז שלכם נוסף לסל');
-    state.build = { base: null, addons: [], pack: BUILD.packs[0].id, note: '' }; refreshBuild(); openDrawer(); return;
+    state.build = { base: null, addons: [], pack: BUILD.packs[0].id, note: '' }; saveBuild(); refreshBuild(); openDrawer(); return;
   }
   if (t.dataset.var !== undefined) { pstate.variant = t.dataset.var; pstate.note = $('#pnote').value; const en = $('#pengrave'); pstate.engrave = en ? en.value : ''; $('#view').innerHTML = productHtml(byId(route.pid)); return; }
   if (t.dataset.q) { pstate.qty = Math.max(1, Math.min(20, pstate.qty + +t.dataset.q)); pstate.note = $('#pnote').value; const en = $('#pengrave'); pstate.engrave = en ? en.value : ''; $('#view').innerHTML = productHtml(byId(route.pid)); return; }
   if (t.dataset.img !== undefined) { pstate.img = +t.dataset.img; const p = byId(route.pid); $('#pmain').src = [p.img, p.img2][pstate.img]; document.querySelectorAll('[data-img]').forEach(b => b.classList.toggle('on', b === t)); return; }
-  if (t.id === 'paddbtn') { const p = byId(route.pid); const en = $('#pengrave'); if (p.personalize && en && !en.value.trim()) { toast('כותבים את הטקסט לחריטה'); en.focus(); return; } addProduct(p, pstate.variant, pstate.qty, $('#pnote').value.trim(), en ? en.value.trim() : ''); openDrawer(); return; }
+  if (t.id === 'paddbtn' || t.hasAttribute('data-buybar')) { const p = byId(route.pid); const en = $('#pengrave'); if (p.personalize && en && !en.value.trim()) { toast('כותבים את הטקסט לחריטה'); en.focus(); return; } addProduct(p, pstate.variant, pstate.qty, $('#pnote').value.trim(), en ? en.value.trim() : ''); openDrawer(); return; }
   if (t.dataset.cq) { const it = cart.find(i => i.key === t.dataset.key); if (it) { cart = C.setQty(cart, it.key, it.qty + +t.dataset.cq); saveCart(); renderCart(); } return; }
   if (t.dataset.rm) { cart = C.removeItem(cart, t.dataset.rm); saveCart(); renderCart(); return; }
   if (t.id === 'growretry') { const o = lastOrder || JSON.parse(sessionStorage.getItem('north.last') || 'null'); if (!o) return; t.disabled = true; t.textContent = 'פותחים עמוד תשלום…'; growUrl(o).then(u => { if (u) location.href = u; else { t.disabled = false; t.textContent = 'לא הצלחנו לפתוח עמוד תשלום. נתקשר אליכם.'; } }); return; }
   if (t.id === 'copyord') { navigator.clipboard?.writeText($('.thanks pre').textContent).then(() => toast('הועתק')); return; }
+});
+document.addEventListener('input', e => {
+  if (e.target.id === 'pengrave') { const v = e.target.value; pstate.engrave = v; const t = $('#engtxt'), c = $('#engcnt'); if (t) t.textContent = v || 'הטקסט שלכם'; if (c) c.textContent = `${v.length} / ${e.target.maxLength}`; }
+  if (e.target.id === 'pnote') { const v = e.target.value; pstate.note = v; const t = $('#cardtxt'), c = $('#notecnt'), b = $('#cardprev'); if (t) t.textContent = v; if (c) c.textContent = `${v.length} / 140`; if (b) b.classList.toggle('hide', !v.trim()); }
+  if (e.target.id === 'bnote') { state.build.note = e.target.value; saveBuild(); }
 });
 document.addEventListener('change', e => {
   if (e.target.name === 'method' || e.target.name === 'pay') { readForm(); $('#view').innerHTML = checkoutHtml(); }
@@ -419,7 +451,7 @@ document.addEventListener('submit', e => {
     const text = `פנייה למארזים לעסקים\nשם: ${o.name}\nטלפון: ${o.phone}\nחברה: ${o.company || '-'}\nכמות: ${o.qty}\n${o.notes || ''}`;
     const wa = waLink(text);
     if (wa) window.open(wa, '_blank'); else location.href = `mailto:${STORE.email}?subject=${encodeURIComponent('מארזים לעסקים: ' + (o.company || o.name))}&body=${encodeURIComponent(text)}`;
-    toast('תודה! נחזור אליכם היום'); e.target.reset();
+    toast('תודה. נחזור אליכם היום'); e.target.reset();
   }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
@@ -427,6 +459,9 @@ window.addEventListener('hashchange', route);
 
 /* ---------- התחלה ---------- */
 $('#footer').innerHTML = footerHtml();
+document.querySelectorAll('.logo .mark').forEach(m => m.outerHTML = logo(34));
+$('#cartbtn').insertAdjacentHTML('afterbegin', icon('bag')); $('#cartbtn').querySelector('span:not(.t):not(.n)')?.remove();
+$('#burger').innerHTML = icon('menu'); $('#wa').innerHTML = icon('chat');
 $('#cartn').textContent = C.count(cart);
 if (STORE.whatsapp) { const w = $('#wa'); w.href = waLink('שלום, אני מתעניין במארז'); w.classList.remove('hide'); }
 route.first = true; route(); gate();
