@@ -1,5 +1,5 @@
 /* הרוח הצפונית · מארזים. ניתוב לפי hash: #/ , #/p/<id> , #/checkout , #/thanks/<no> */
-import { STORE, SHIPPING, OUT_OF_AREA, PAY, CLOUD, IMG } from './config.js';
+import { STORE, SHIPPING, CITIES, OUT_OF_AREA, PAY, CLOUD, IMG } from './config.js';
 import { CATS, OCCASIONS, PRODUCTS, BUILD, FAQ, INCLUDED, byId } from './products.js';
 import * as C from './cart.js';
 import { icon, logo } from './icons.js';
@@ -54,7 +54,7 @@ function homeHtml() {
   const occName = state.occ ? OCCASIONS.find(o => o.id === state.occ).name : '';
   return `
   <section class="hero">
-    <img src="${IMG('1741120162449-e0e73f831b0d', 1800)}" alt="" fetchpriority="high">
+    <img src="${IMG('1726758004519-7ccecda8b076', 1800)}" alt="" fetchpriority="high">
     <div class="wrap">
       <span class="kicker">צומת הגומא · הגליל העליון</span>
       <h1>מארז שמרגישים<br>עוד לפני <em>שפותחים</em></h1>
@@ -77,7 +77,7 @@ function homeHtml() {
   <section class="blk" id="catalog" style="padding-top:0"><div class="wrap">
     <div class="sechead reveal"><div><h2>המארזים${occName ? ` · ${esc(occName)}` : ''}</h2><p>כל מארז נארז אצלנו בחנות. הבקבוקים מהמדף, התוספות מיצרנים שאנחנו עובדים איתם.</p></div>
       <a class="more" href="#/#build">רוצים משהו אחר? בונים לבד ←</a></div>
-    <div class="promise reveal"><span>${icon('clock')} מזמינים היום, המארז מוכן לאיסוף תוך יום עסקים. משלוח באזור תוך יומיים.</span><span>${icon('shield')} לא מרוצים ממשהו במארז? מחליפים. בלי שאלות.</span></div>
+    <div class="promise reveal"><span>${icon('clock')} מזמינים היום, המארז מוכן לאיסוף תוך יום עסקים. משלוח באזור תוך יומיים.</span><span>${icon('shield')} פגם או טעות במארז? מחליפים או מחזירים את הכסף, ואוספים על חשבוננו.</span></div>
     <div class="chips" id="chips">${chipsHtml()}</div>
     <div class="grid" id="grid">${catalogHtml()}</div>
   </div></section>
@@ -216,7 +216,7 @@ function renderCart() {
     </div>`).join('')}</div>
     <div class="foot">
       <div class="row"><span>ביניים</span>${money(sub)}</div>
-      <div class="row"><span>משלוח</span><span>${sub >= SHIPPING.north.freeFrom ? 'חינם בצפון' : 'נקבע בקופה'}</span></div>
+      <div class="row"><span>משלוח</span><span>${sub >= SHIPPING.north.freeFrom ? 'חינם באזור' : 'נקבע בקופה'}</span></div>
       <div class="row t"><span>סה"כ</span>${money(sub)}</div>
       <a class="btn gold wide" href="#/checkout" data-close>לתשלום</a>
       <a class="btn line wide sm" href="#/#catalog" data-close>להמשיך לבחור</a>
@@ -224,7 +224,7 @@ function renderCart() {
 }
 function addProduct(p, variantId, qty = 1, note = '', engrave = '') {
   const v = p.variants ? (p.variants.find(x => x.id === variantId) || p.variants[0]) : null;
-  const item = { id: p.id, name: p.name, price: v ? v.price : p.price, variant: v ? v.name : '', img: p.img.replace('w=900', 'w=300'), note, engrave, kosher: p.kosher === false ? false : true };
+  const item = { id: p.id, name: p.name, price: v ? v.price : p.price, variant: v ? v.name : '', variantId: v ? v.id : '', img: p.img.replace('w=900', 'w=300'), note, engrave, kosher: p.kosher === false ? false : true };
   item.key = C.lineKey(p.id, (v ? v.id : '') + (note ? '#' + note : '') + (engrave ? '#' + engrave : ''));
   cart = C.addItem(cart, item, qty); saveCart(); toast(`${p.name} נוסף לסל`);
 }
@@ -250,7 +250,7 @@ function checkoutHtml(errs = []) {
           <div class="form" style="padding:0;border:0;background:none">
             <div class="row"><div class="field"><label>שם מלא</label><input name="name" value="${esc(f.name)}" autocomplete="name" required></div><div class="field"><label>טלפון</label><input name="phone" type="tel" inputmode="tel" value="${esc(f.phone)}" autocomplete="tel" required></div></div>
             <div class="field"><label>מייל (לאישור ההזמנה)</label><input name="email" type="email" inputmode="email" value="${esc(f.email)}" autocomplete="email"></div>
-            ${co.method !== 'pickup' ? `<div class="row"><div class="field"><label>יישוב</label><input name="city" value="${esc(f.city)}" autocomplete="address-level2"></div><div class="field"><label>רחוב ומספר</label><input name="street" value="${esc(f.street)}" autocomplete="street-address"></div></div>` : ''}
+            ${co.method !== 'pickup' ? `<div class="row"><div class="field"><label>יישוב</label><input name="city" list="cities" value="${esc(f.city)}" autocomplete="address-level2" placeholder="מתחילים להקליד ובוחרים"><datalist id="cities">${CITIES.map(c => `<option value="${esc(c)}">`).join('')}</datalist><small style="color:var(--dim)">משלוחים רק ליישובים ברשימה. לא מצאתם? איסוף מהחנות, או כתבו לנו.</small></div><div class="field"><label>רחוב ומספר</label><input name="street" value="${esc(f.street)}" autocomplete="street-address"></div></div>` : ''}
             <div class="row"><div class="field"><label>${co.method === 'pickup' ? 'מתי תבואו לאסוף?' : 'מתי נוח לקבל?'}</label><input name="when" value="${esc(f.when)}" placeholder="למשל: יום חמישי אחר הצהריים"></div><div class="field"><label>הערות</label><input name="notes" value="${esc(f.notes)}" placeholder="החלפת בקבוק, אלרגיות, קוד לבניין"></div></div>
           </div>
         </div>
@@ -269,7 +269,7 @@ function checkoutHtml(errs = []) {
         <div class="row"><span>ביניים</span>${money(sub)}</div>
         <div class="row"><span>משלוח</span><span>${ship ? money(ship) : 'חינם'}</span></div>
         <div class="row t"><span>לתשלום</span>${money(tot)}</div>
-        <small style="color:var(--dim)">המחירים כוללים מע"מ. חשבונית נשלחת למייל.</small>
+        <small style="color:var(--dim)">המחירים כוללים מע"מ. חשבונית מס נשלחת במייל אחרי אישור ההזמנה.</small>
         <a class="btn line sm" href="#/#catalog">חזרה לחנות</a>
       </aside>
     </div></div></section>`;
@@ -281,7 +281,7 @@ function readForm() {
 }
 async function submitOrder() {
   const f = readForm();
-  const errs = C.validateOrder(f, co.method, { nonKosher: C.hasNonKosher(cart) });
+  const errs = C.validateOrder(f, co.method, { nonKosher: C.hasNonKosher(cart), cities: CITIES });
   if (errs.length) { $('#view').innerHTML = checkoutHtml(errs); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
   const sub = C.subtotal(cart), ship = C.shippingPrice(co.method, sub);
   const order = {
@@ -306,7 +306,7 @@ async function growUrl(order) {
   const returnBase = location.origin + location.pathname;
   if (!/^https:/.test(returnBase)) return '';
   try {
-    const r = await fetch(`${CLOUD.url}/functions/v1/grow-pay`, { method: 'POST', headers: { apikey: CLOUD.key, Authorization: `Bearer ${CLOUD.key}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ order: { no: order.no, store: order.store, total: order.total, shipping: order.shipping, items: order.items.map(i => ({ id: i.id, name: i.name + (i.variant ? ' · ' + i.variant : ''), qty: i.qty, price: i.price })), customer: order.customer }, returnBase }) });
+    const r = await fetch(`${CLOUD.url}/functions/v1/grow-pay`, { method: 'POST', headers: { apikey: CLOUD.key, Authorization: `Bearer ${CLOUD.key}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ order: { no: order.no, store: order.store, total: order.total, shipping: order.shipping, items: order.items.map(i => ({ id: i.id, variantId: i.variantId || '', name: i.name + (i.variant ? ' ' + i.variant : ''), qty: i.qty, price: i.price, parts: (i.parts || []).map(p => p.id) })), method: order.method, customer: order.customer }, returnBase }) });
     const j = await r.json().catch(() => ({}));
     return r.ok && j.url ? j.url : '';
   } catch { return ''; }
@@ -332,7 +332,7 @@ function thanksHtml(no) {
   const url = payUrl(o); const text = C.orderText(o);
   const paid = new URLSearchParams(location.search).get('paid');
   let payBlock = '';
-  if (o.pay === 'card' && paid === '1') payBlock = `<p style="color:var(--ok);font-weight:700">התשלום התקבל. אישור נשלח למייל, ואנחנו מתחילים לארוז.</p>`;
+  if (o.pay === 'card' && paid === '1') payBlock = `<p style="color:var(--ok);font-weight:700">חזרתם מעמוד התשלום.</p><p>ברגע שחברת הסליקה מאשרת את התשלום אנחנו שולחים אישור בהודעה ומתחילים לארוז. בדרך כלל זה דקות.</p>`;
   else if (o.pay === 'card' && paid === '0') payBlock = `<p>התשלום לא הושלם.</p>${o.growUrl ? `<a class="btn gold" href="${o.growUrl}">לנסות שוב לשלם · ${money(o.total)}</a>` : ''}<button class="btn line sm" id="growretry">עמוד תשלום חדש</button><p>או שתשלמו בביט / באיסוף, ההזמנה שמורה.</p>`;
   else if (o.pay === 'card') payBlock = url ? `<a class="btn gold" href="${url}" target="_blank" rel="noopener">לעמוד התשלום המאובטח · ${money(o.total)}</a><p>העמוד נפתח בחלון חדש. אחרי התשלום נשלח אישור למייל.</p>`
     : (PAY.card.grow ? `<button class="btn gold" id="growretry">לעמוד התשלום המאובטח · ${money(o.total)}</button><p>אם העמוד לא נפתח, נתקשר אליכם לגבייה טלפונית מאובטחת.</p>` : `<p>עמוד הסליקה עוד לא מחובר. נתקשר אליכם לגבייה טלפונית מאובטחת, או שתשלמו בביט/באיסוף.</p>`);
@@ -387,7 +387,7 @@ function route() {
     if (route.pid !== p.id) { Object.assign(pstate, { variant: null, qty: 1, img: 0, note: '', engrave: '' }); route.pid = p.id; }
     view.innerHTML = productHtml(p); window.scrollTo(0, 0);
   } else if (parts[0] === 'checkout') { view.innerHTML = checkoutHtml(); window.scrollTo(0, 0); }
-  else if (parts[0] === 'thanks') { view.innerHTML = thanksHtml(parts[1] || ''); window.scrollTo(0, 0); }
+  else if (parts[0] === 'thanks') { const q = new URLSearchParams(location.search); const no = (parts[1] || q.get('no') || '').split('&')[0]; view.innerHTML = thanksHtml(no); window.scrollTo(0, 0); }
   else {
     if (route.home !== true) { view.innerHTML = homeHtml(); route.home = true; }
     if (anchor) { const el = document.getElementById(anchor); if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30); }
@@ -464,4 +464,7 @@ $('#cartbtn').insertAdjacentHTML('afterbegin', icon('bag')); $('#cartbtn').query
 $('#burger').innerHTML = icon('menu'); $('#wa').innerHTML = icon('chat');
 $('#cartn').textContent = C.count(cart);
 if (STORE.whatsapp) { const w = $('#wa'); w.href = waLink('שלום, אני מתעניין במארז'); w.classList.remove('hide'); }
+{ const q = new URLSearchParams(location.search); if (q.get('no') && !location.hash.includes('/thanks/')) location.hash = `#/thanks/${q.get('no')}`; }
+if (STORE.preview) document.body.insertAdjacentHTML('afterbegin', `<div class="previewbar">האתר בהרצה. כל הזמנה מאושרת איתכם בהודעה לפני החיוב, והמחירים סופיים רק באישור.</div>`);
+document.documentElement.classList.add('js');
 route.first = true; route(); gate();

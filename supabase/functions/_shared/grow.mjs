@@ -20,7 +20,7 @@ export function phoneDigits(p) {
 
 /* שדות createPaymentProcess. order = ההזמנה מהאתר (no, total, items, customer), urls = success/cancel/notify, cfg = userId/pageCode. */
 export function createParams(order, urls, cfg, opts = {}) {
-  const desc = `הזמנה ${order.no} · ${order.store || 'הרוח הצפונית'}`;
+  const desc = `הזמנה ${order.no} ${order.store || 'הרוח הצפונית'}`;
   const p = {
     pageCode: cfg.pageCode,
     userId: cfg.userId,
@@ -64,7 +64,7 @@ export function parseNotify(entries) {
     out[key] = String(v);
   }
   out.orderNo = out.customFields?.cField1 || out.cField1 || '';
-  out.paid = Number(out.status) === 1 || String(out.statusCode) === '2' || /שולם|paid|success/i.test(out.status || '');
+  out.paid = String(out.statusCode) === '2' || /^שולם$/.test(String(out.status || ''));
   return out;
 }
 
@@ -90,7 +90,7 @@ export function parseInfo(json) {
   const d = json.data;
   const tx = String(d.transactionId || d.transactionID || '');
   const code = String(d.statusCode ?? d.transactionStatusCode ?? d.status ?? '');
-  const paid = !!tx && (code === '2' || code === '1' || /שולם|paid|success|approved/i.test(code));
+  const paid = !!tx && (code === '2' || /^שולם$/.test(code));
   return { ok: true, paid, transactionId: tx, sum: d.sum != null ? Number(d.sum) : null, asmachta: String(d.asmachta || ''), raw: d };
 }
 /* The callback and the verified info must speak about the same transaction and the same sum as the order. */

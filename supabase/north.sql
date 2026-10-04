@@ -5,7 +5,7 @@ create table if not exists public.north_orders (
   order_no text not null unique,
   status text not null default 'new',          -- new / paid / ready / delivered / cancelled
   pay text not null,                            -- card / bit / cash
-  method text not null,                         -- pickup / north / national
+  method text not null,                         -- pickup / north
   total numeric(10,2) not null,
   customer jsonb not null,                      -- שם, טלפון, מייל, כתובת, הערות
   items jsonb not null,                         -- שורות ההזמנה
