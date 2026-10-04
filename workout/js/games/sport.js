@@ -17,7 +17,7 @@ const dragShot = (r, getOrigin, onShoot, maxLen = 150) => {
 
 // ---- פנדלים: 9 אזורים בשער (שמאל/אמצע/ימין × למעלה/אמצע/למטה). השוער בוחר צד וגובה, ועוצר רק אם שניהם נכונים.
 // אותו מנוע משמש גם את "אני השוער": שם הילד בוחר לאן לקפוץ והבועט הוא המחשב. ----
-function penaltyGame(role) {
+export function penaltyGame(role) {
   return function make(r) {
     const goal = { x: 40, y: 70, w: 280, h: 120 }, GL = goal.y + goal.h, BX = r.W / 2, BY = r.H - 90;
     const colOf = x => x < goal.x + goal.w / 3 ? -1 : x > goal.x + goal.w * 2 / 3 ? 1 : 0, rowOf = y => y < goal.y + goal.h / 3 ? 0 : y > goal.y + goal.h * 2 / 3 ? 2 : 1;

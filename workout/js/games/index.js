@@ -1,7 +1,9 @@
 // קטלוג המשחקים הקטנים: ארבע קבוצות, כל משחק דקה עד שתי דקות.
 import arcade from './arcade.js';
 import arcade2 from './arcade2.js'; /* מקבץ 3: הרץ הקופץ, צפרדע, מבוך הנקודות, קפיצות לשמיים, יהלומים */
-import sport from './sport.js';
+import sport0 from './sport.js';
+import { UPGRADE3D } from './sport3d.js'; /* פנדלים ואני השוער בתלת-ממד (01/10); נופל לגרסה הדו-ממדית בלי WebGL */
+const sport = sport0.map(g => UPGRADE3D[g.id] ? { ...g, make: UPGRADE3D[g.id] } : g);
 import puzzle from './puzzle.js';
 import quick from './quick.js';
 import * as more from './more.js';
