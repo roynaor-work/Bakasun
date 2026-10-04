@@ -142,8 +142,9 @@ export class PoseRig {
     const L = front ? 'Right' : 'Left', R = front ? 'Left' : 'Right';
     /* מיקום האגן: לפי הציור כמו שהוא (בלי השיקוף של ms): כשהדמות פונה שמאלה היא צריכה להיות בצד שאליו הציור המשוקף שם אותה. עם השיקוף גם על המיקום היא חזרה לצד הימני ו"עברה דרך הקיר" (רועי 01/10) */
     const hipLocal = front ? new THREE.Vector3(pose.hip[0] - 100, 182 - pose.hip[1], pose.hip[2] || 0) : new THREE.Vector3(-(pose.hip[2] || 0), 182 - pose.hip[1], pose.hip[0] - 100);
-    const baseQ = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), front ? 0 : Math.PI / 2); /* המיקום במערכת של הדמות הלא-מסובבת (לפני הסיבוב של face) */
-    const hipW = hipLocal.applyQuaternion(baseQ), off = this.hipsRest.clone().applyQuaternion(this.model.quaternion);
+    /* המיקום לפי הסיבוב האמיתי של המודל (חגיגות ומשחקים מסובבים את הדמות לכל כיוון), מינוס סיבוב ה-TURN בלבד */
+    const hipW = hipLocal.applyQuaternion(this.model.quaternion); if (!front && pose.face != null) hipW.applyQuaternion(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.acos(face)));
+    const off = this.hipsRest.clone().applyQuaternion(this.model.quaternion);
     const base = at || new THREE.Vector3();
     this.model.position.set(base.x + hipW.x - off.x, base.y + hipW.y - off.y, base.z + hipW.z - off.z);
     const torso = d(pose.hip, pose.neck);
