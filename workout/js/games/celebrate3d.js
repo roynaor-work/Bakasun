@@ -79,15 +79,34 @@ export function sky(sc, top = '#0b1026', bottom = '#1e293b', lamps = true) {
   sc.add(new THREE.Mesh(new THREE.SphereGeometry(3200, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshBasicMaterial({ map: t, side: THREE.BackSide, fog: false })));
   if (lamps) for (const x of [-700, 700]) { const pole = new THREE.Mesh(new THREE.CylinderGeometry(6, 8, 700, 8), new THREE.MeshStandardMaterial({ color: '#94a3b8' })); pole.position.set(x, 350, -900); sc.add(pole); const lamp = new THREE.Mesh(new THREE.BoxGeometry(120, 40, 20), new THREE.MeshBasicMaterial({ color: '#fef9c3' })); lamp.position.set(x, 700, -900); sc.add(lamp); }
 }
+// רשת אמיתית: טקסטורת קנבס של משבצות דקות (לא wireframe: המשולשים נראו כמו "קוביות"; רועי 05/10), שקופה, משני הצדדים
+function netTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'); g.clearRect(0, 0, 128, 128);
+  g.strokeStyle = 'rgba(248,250,252,.92)'; g.lineWidth = 2.2; g.beginPath(); for (let i = 0; i <= 4; i++) { const v = i * 32 + .5; g.moveTo(v, 0); g.lineTo(v, 128); g.moveTo(0, v); g.lineTo(128, v); } g.stroke();
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; return t;
+}
+const CELL = 12; /* עין רשת כ-12 ס"מ */
+function netPlane(w, h, tex) { const t = tex.clone(); t.needsUpdate = true; t.repeat.set(w / (CELL * 4), h / (CELL * 4)); return new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: t, transparent: true, side: THREE.DoubleSide, depthWrite: false, alphaTest: .05 })); }
 function goalFrame(sc, z, w = 690, h = 230, d = 200) {
   const mat = new THREE.MeshStandardMaterial({ color: '#f8fafc', roughness: .5 });
-  for (const x of [-w / 2, w / 2]) { const p = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, h, 10), mat); p.position.set(x, h / 2, z); p.castShadow = true; sc.add(p); }
-  const bar = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, w, 10), mat); bar.rotation.z = Math.PI / 2; bar.position.set(0, h, z); sc.add(bar);
-  const netMat = new THREE.MeshBasicMaterial({ color: '#e2e8f0', wireframe: true, transparent: true, opacity: .55 });
-  const back = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 24, 8), netMat); back.position.set(0, h / 2, z - d); sc.add(back);
-  const top = new THREE.Mesh(new THREE.PlaneGeometry(w, d, 24, 6), netMat); top.rotation.x = -Math.PI / 2; top.position.set(0, h, z - d / 2); sc.add(top);
-  for (const x of [-w / 2, w / 2]) { const side = new THREE.Mesh(new THREE.PlaneGeometry(d, h, 6, 8), netMat); side.rotation.y = Math.PI / 2; side.position.set(x, h / 2, z - d / 2); sc.add(side); }
-  return { bulge(k) { back.position.z = z - d - 60 * k; } };
+  for (const x of [-w / 2, w / 2]) { const p = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, h, 12), mat); p.position.set(x, h / 2, z); p.castShadow = true; sc.add(p); }
+  const bar = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, w + 12, 12), mat); bar.rotation.z = Math.PI / 2; bar.position.set(0, h, z); sc.add(bar);
+  // מסגרת אחורית דקה שמחזיקה את הרשת (עמודים אחוריים נמוכים, מוט אחורי על הרצפה, מוטות אלכסוניים מהקורה)
+  const thin = new THREE.MeshStandardMaterial({ color: '#cbd5e1', roughness: .6 }); const BH = h * .55;
+  for (const x of [-w / 2, w / 2]) {
+    const bp = new THREE.Mesh(new THREE.CylinderGeometry(3, 3, BH, 8), thin); bp.position.set(x, BH / 2, z - d); sc.add(bp);
+    const diag = new THREE.Mesh(new THREE.CylinderGeometry(3, 3, Math.hypot(d, h - BH), 8), thin); diag.position.set(x, (h + BH) / 2, z - d / 2); diag.rotation.x = Math.atan2(d, h - BH); sc.add(diag);
+  }
+  const bb = new THREE.Mesh(new THREE.CylinderGeometry(3, 3, w, 8), thin); bb.rotation.z = Math.PI / 2; bb.position.set(0, 3, z - d); sc.add(bb);
+  const tex = netTexture();
+  const back = netPlane(w, BH, tex); back.position.set(0, BH / 2, z - d); sc.add(back);
+  const slope = netPlane(w, Math.hypot(d, h - BH), tex); slope.position.set(0, (h + BH) / 2, z - d / 2); slope.rotation.x = Math.PI / 2 - Math.atan2(h - BH, d); sc.add(slope);
+  for (const x of [-w / 2, w / 2]) { /* צד: מלבן נמוך + משולש עליון */
+    const lo = netPlane(d, BH, tex); lo.rotation.y = Math.PI / 2; lo.position.set(x, BH / 2, z - d / 2); sc.add(lo);
+    const tri = new THREE.BufferGeometry(); tri.setAttribute('position', new THREE.Float32BufferAttribute([0, BH, 0, 0, h, d, 0, BH, d], 3)); tri.setAttribute('uv', new THREE.Float32BufferAttribute([0, 0, 1, (h - BH) / (CELL * 4) / (d / (CELL * 4)), 1, 0], 2)); tri.computeVertexNormals();
+    const tt = tex.clone(); tt.needsUpdate = true; tt.repeat.set(d / (CELL * 4), 1); const tm = new THREE.Mesh(tri, new THREE.MeshBasicMaterial({ map: tt, transparent: true, side: THREE.DoubleSide, depthWrite: false, alphaTest: .05 })); tm.position.set(x, 0, z - d); sc.add(tm);
+  }
+  return { bulge(k) { back.position.z = z - d - 60 * k; bb.position.z = z - d - 60 * k; } };
 }
 export function ballShadow(sc) { const m = new THREE.Mesh(new THREE.CircleGeometry(12, 16), new THREE.MeshBasicMaterial({ color: '#000', transparent: true, opacity: .3 })); m.rotation.x = -Math.PI / 2; sc.add(m); return (b) => { m.position.set(b.position.x, .8, b.position.z); m.scale.setScalar(Math.max(.4, 1 - b.position.y / 200)); }; }
 export function stadium(sc, GZ) { sky(sc); lights(sc, { sun: 1.8, ground: '#1e3a2f' }); pitch(sc); const g = goalFrame(sc, GZ); const fans = stands(sc, GZ - 380, 40); line(sc, 0, GZ, 3400, 6); line(sc, 0, GZ + 520, 1700, 6); line(sc, -850, GZ + 260, 6, 520); line(sc, 850, GZ + 260, 6, 520); return { g, fans }; }

@@ -97,7 +97,10 @@ function penalty3d(role) {
       draw() { const c = r.ctx; c.clearRect(0, 0, r.W, r.H); L.render();
         // 9 האזורים: בכיוון (קל יותר לילד), ובזמן הריצה כשאני השוער
         const showGrid = (role === 'kicker' && phase === 'aim' && ready >= 1) || (role === 'keeper' && (phase === 'run' || phase === 'kick' || phase === 'fly'));
-        if (showGrid) for (let ci = -1; ci <= 1; ci++) for (let ri = 0; ri < 3; ri++) { const q = zoneRect(ci, ri); const mine = pick && pick.col === ci && pick.row === ri; c.beginPath(); c.moveTo(q[0][0], q[0][1]); for (let i = 1; i < 4; i++) c.lineTo(q[i][0], q[i][1]); c.closePath(); c.fillStyle = mine ? 'rgba(253,224,71,.5)' : 'rgba(255,255,255,.2)'; c.fill(); c.strokeStyle = mine ? '#FDE047' : 'rgba(255,255,255,.85)'; c.lineWidth = mine ? 3 : 2; c.stroke(); }
+        // סימוני כיוון עדינים במקום 9 מלבנים (רועי 05/10: "רואים קוביות של השער, צריך לראות שער רגיל לגמרי"): נקודה קטנה במרכז כל אזור, והאזור שנבחר = טבעת מטרה צהובה
+        if (showGrid) for (let ci = -1; ci <= 1; ci++) for (let ri = 0; ri < 3; ri++) { const [zx, zy] = zoneWorld(ci, ri); const [px, py] = proj(zx, zy, GZ); const mine = pick && pick.col === ci && pick.row === ri;
+          if (mine) { c.beginPath(); c.arc(px, py, 16, 0, Math.PI * 2); c.strokeStyle = '#FDE047'; c.lineWidth = 3; c.stroke(); c.beginPath(); c.arc(px, py, 5, 0, Math.PI * 2); c.fillStyle = '#FDE047'; c.fill(); }
+          else { c.beginPath(); c.arc(px, py, 4, 0, Math.PI * 2); c.fillStyle = 'rgba(255,255,255,.55)'; c.fill(); } }
         if (role === 'keeper' && !pick && (phase === 'run' || phase === 'kick')) { const [gx, gy] = proj(0, GH + 40, GZ); r.text('לאן לקפוץ? לחץ בשער', gx, gy, { size: 16, color: '#FDE047' }); }
         if (phase === 'aim' && ready < 1) r.text(role === 'keeper' ? 'הבועט מתכונן...' : 'השוער מתמקם...', r.W / 2, r.H - 60, { size: 14, color: '#bbf7d0' });
         if (gk.laugh > 0) { const [hx, hy] = proj(keep.x, 200, GZ + 44); r.text('חה חה חה!', hx, hy - 30, { size: 18, color: '#fff' }); }
