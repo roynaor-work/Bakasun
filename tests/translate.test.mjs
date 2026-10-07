@@ -13,14 +13,14 @@ test('the trade glossary turns her terms into English and French, numbers kept',
 });
 
 test('the client summary in English, with open points and the recommended one starred', () => {
-  const cs = { client: 'Bertelsmann Stiftung', kind: 'Dinner', date: '2026-11-19', participants: 24 };
+  const cs = { client: 'Client Test', kind: 'Dinner', date: '2026-11-19', participants: 24 };
   const links = [{ id: 'l1', supplierId: 's1', status: 'הצעה התקבלה', chosen: 'כן', offer: { total: 9000, perPerson: 375, included: 'wine and coffee', cancellation: 'free cancellation up to 14 days before', deposit: '30% deposit on booking', terms: 'net 30 days' } },
     { id: 'l2', supplierId: 's2', status: 'הצעה התקבלה', offer: { total: 11000, venue: 3000, food: 8000 } }, { id: 'l3', supplierId: 's3', status: 'ביקשנו הצעה' }];
-  const sups = [{ id: 's1', name: 'Gan Sipur' }, { id: 's2', name: 'TLV Show' }, { id: 's3', name: 'Austrian Hospice' }];
-  const txt = offerSummary(cs, compareRows(links, sups, 24), 'en', { names: 'Claudia and Stefanie', openPoints: ['final number of guests', 'vegetarian options'] });
-  assert.match(txt, /^Hi Claudia and Stefanie, hope you are doing well!\nHere is a summary of the offers we received for Dinner · 19\/11\/2026 · 24 participants:\n\n\* Gan Sipur ★\n  - Total before VAT: 9,000 ₪ \(375 ₪ per person\)\n  - Included: wine and coffee\n  - Cancellation: free cancellation up to 14 days before/);
-  assert.match(txt, /\* TLV Show\n  - Total before VAT: 11,000 ₪ \(458 ₪ per person\)\n  - Venue 3,000 ₪, Food 8,000 ₪/);
+  const sups = [{ id: 's1', name: 'Supplier A' }, { id: 's2', name: 'Supplier B' }, { id: 's3', name: 'Supplier C' }];
+  const txt = offerSummary(cs, compareRows(links, sups, 24), 'en', { names: 'TestContactA and TestContactB', openPoints: ['final number of guests', 'vegetarian options'] });
+  assert.match(txt, /^Hi TestContactA and TestContactB, hope you are doing well!\nHere is a summary of the offers we received for Dinner · 19\/11\/2026 · 24 participants:\n\n\* Supplier A ★\n  - Total before VAT: 9,000 ₪ \(375 ₪ per person\)\n  - Included: wine and coffee\n  - Cancellation: free cancellation up to 14 days before/);
+  assert.match(txt, /\* Supplier B\n  - Total before VAT: 11,000 ₪ \(458\.33 ₪ per person\)\n  - Venue 3,000 ₪, Food 8,000 ₪/);
   assert.match(txt, /Open points:\n\* final number of guests\n\* vegetarian options\n\nMy recommendation is marked with a star/);
   assert.match(txt, /As always, I am available for any question\.\nBest,\nVirginie$/);
-  assert.doesNotMatch(txt, /Austrian Hospice/);
+  assert.doesNotMatch(txt, /Supplier C/);
 });
