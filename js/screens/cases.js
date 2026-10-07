@@ -3,6 +3,8 @@ import { t, kindLabel, statusLabel, langName } from '../i18n.js';
 import { db, todayIso } from '../store.js';
 import { esc, field, section, empty, dialog, confirmDialog, toast, openWhatsApp, dial, relDay, copyText, copyBtn, copyOf, openWhatsAppAsk } from '../ui.js';
 import Office from '../logic/office.js';
+import { RFQ_DRAFT } from '../logic/rfqFlow.js';
+import { offerMoney } from '../logic/rfq.js';
 import { phonePretty } from '../logic/core.js';
 import { CALL, TASK, taskMessage } from '../logic/extra.js';
 import { recommendedSupplierTypes } from '../logic/quotes.js';
@@ -124,7 +126,8 @@ function typeState(ty, links, sups) {
   if (mine.some(l => /אושר/.test(String(l.status)))) return { key: 'chosen', label: t('stChosen') };
   const offers = mine.filter(l => /התקבלה/.test(String(l.status))).length;
   if (offers) return { key: 'offers', label: t('stOffers', { n: offers }) };
-  if (mine.length) return { key: 'waiting', label: t('stWaiting') };
+  if (mine.some(l => l.askedAt)) return { key: 'waiting', label: t('stWaiting') };
+  if (mine.length) return { key: 'none', label: t('rfqDraft') };
   return { key: 'none', label: t('stNone') };
 }
 
@@ -136,11 +139,12 @@ function tabSuppliers(body, c, s) {
   const recTypes = (c.needs || []).concat(recommendedSupplierTypes(c.kind, s.recs, db.list('catalog')).filter(x => !(c.needs || []).includes(x)));
   body.innerHTML = `
     <div class="row"><button class="btn primary" id="ask">${esc(t('askSuppliers'))}</button><a class="btn" href="#/assist/supplier-quote/${esc(id)}">${esc(t('cmdSupplierQuote'))}</a>${links.length ? `<button class="btn" id="change">${esc(t('changeAll'))}</button>` : ''}</div>
+    <p class="hint">${esc(t('rfqDraftCount'))}: ${links.filter(l => l.status === RFQ_DRAFT || (!l.askedAt && !l.offer && /ביקשנו/.test(l.status))).length} · ${esc(t('rfqWaiting'))}: ${links.filter(l => /ביקשנו/.test(l.status) && l.askedAt && !l.answeredAt).length} · ${esc(t('rfqAnswered'))}: ${links.filter(l => l.offer || /התקבלה|אושר/.test(l.status)).length}</p>
     ${recTypes.length ? `<div class="chips">${recTypes.map(ty => { const st = typeState(ty, links, sups); return `<span class="chip st-${st.key}">${esc(supplierTypeLabel(ty))} · ${esc(st.label)}</span>`; }).join('')}</div>` : ''}
     <div class="list">${links.length ? links.map(l => { const sp = sups[l.supplierId] || { name: l.supplier }; const waiting = /ביקשנו/.test(l.status) && l.askedAt && !l.answeredAt; return `<div class="card" data-l="${esc(l.id)}">
-      <div class="row between"><a class="title" href="#/supplier/${esc(l.supplierId)}">${esc(sp.name || '')}${Office.yes(l.chosen) ? ' ★' : ''}</a><span class="badge ${/אושר/.test(l.status) ? 'ok' : /בוטל/.test(l.status) ? 'muted' : 'warn'}">${esc(linkStatusLabel(l.status))}</span></div>
-      <div class="sub">${[supplierTypeLabel(sp.type), l.what, l.cost ? Office.money(l.cost) : '', l.arrive ? t('arrive') + ' ' + Office.hhmm(l.arrive) : '', l.askedAt ? t('sentTo') + ' ' + Office.fmt(l.askedAt) + (l.channel === 'email' ? ' ✉' : l.channel ? ' ☏' : '') : ''].filter(Boolean).map(esc).join(' · ')}${l.rating ? ' · ' + esc(stars(l.rating)) : ''}${Office.yes(l.paid) ? ` · <span class="badge ok">${esc(t('paid'))}</span>` : ''}</div>
-      <div class="row">${waiting ? `<button class="btn wa sm" data-remind>${esc(t('remind'))}</button>` : ''}${!/בוטל|אושר/.test(l.status) ? `<button class="btn sm ok" data-offer>${esc(t('offerReceived'))}</button>` : ''}<button class="btn sm" data-send>${esc(l.askedAt ? t('resend') : t('sendEach'))}</button><button class="btn sm" data-dial>${esc(t('call'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div></div>`; }).join('') : empty(t('none'))}</div>
+      <div class="row between"><a class="title" href="#/supplier/${esc(l.supplierId)}">${esc(sp.name || '')}${Office.yes(l.chosen) ? ' ★' : ''}</a><span class="badge ${/אושר/.test(l.status) ? 'ok' : /בוטל/.test(l.status) ? 'muted' : 'warn'}">${esc(!l.askedAt && !l.offer && /ביקשנו/.test(l.status) ? t('rfqDraft') : linkStatusLabel(l.status))}</span></div>
+      <div class="sub">${[supplierTypeLabel(sp.type), l.what, l.cost ? offerMoney(l.cost, l.offer?.currency) + ' · ' + t('rfqNet') : '', l.arrive ? t('arrive') + ' ' + Office.hhmm(l.arrive) : '', l.remindedAt ? t('rfqReminderDate') + ' ' + Office.fmt(l.remindedAt) : '', l.askedAt ? t('sentTo') + ' ' + Office.fmt(l.askedAt) + (l.channel === 'email' ? ' ✉' : l.channel ? ' ☏' : '') : ''].filter(Boolean).map(esc).join(' · ')}${l.rating ? ' · ' + esc(stars(l.rating)) : ''}${Office.yes(l.paid) ? ` · <span class="badge ok">${esc(t('paid'))}</span>` : ''}</div>
+      <div class="row">${waiting ? `<button class="btn wa sm" data-remind>${esc(t('remind'))}</button>` : ''}${!/בוטל/.test(l.status) ? `<button class="btn sm ok" data-offer>${esc(t('offerReceived'))}</button>` : ''}<button class="btn sm" data-send>${esc(l.askedAt ? t('resend') : t('sendEach'))}</button><button class="btn sm" data-dial>${esc(t('call'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div></div>`; }).join('') : empty(t('none'))}</div>
     ${compareBlock(c, links, sups)}`;
 
   const refresh = () => tabSuppliers(body, db.get('cases', id) || c, s);
@@ -156,14 +160,20 @@ function tabSuppliers(body, c, s) {
   body.querySelectorAll('.card[data-l]').forEach(el => {
     const l = db.get('links', el.dataset.l); const sp = sups[l.supplierId] || {};
     el.querySelector('[data-dial]').onclick = () => dial(sp.phone);
-    el.querySelector('[data-send]').onclick = () => { resend(c, s, l, sp, false); setTimeout(refresh, 500); };
-    const rm = el.querySelector('[data-remind]'); if (rm) rm.onclick = () => { resend(c, s, l, sp, true); setTimeout(refresh, 500); };
+    el.querySelector('[data-send]').onclick = () => { resend(c, s, l, sp, false, refresh); };
+    const rm = el.querySelector('[data-remind]'); if (rm) rm.onclick = () => { resend(c, s, l, sp, true, refresh); };
     const of = el.querySelector('[data-offer]'); if (of) of.onclick = async () => { if (await offerDialog(c, l, sp)) refresh(); };
     el.querySelector('[data-edit]').onclick = async () => {
-      const r = await dialog(sp.name || t('supplier'), `<div class="grid2">${field('status', t('linkStatus'), l.status, { type: 'select', options: ['ביקשנו הצעה', 'הצעה התקבלה', 'אושר', 'בוטל'].map(v => [v, linkStatusLabel(v)]) })}${field('cost', t('cost'), l.cost || '', { type: 'number', inputmode: 'decimal' })}
+      const r = await dialog(sp.name || t('supplier'), `<div class="grid2">${field('status', t('linkStatus'), l.status, { type: 'select', options: [RFQ_DRAFT, 'ביקשנו הצעה', 'הצעה התקבלה', 'אושר', 'בוטל'].map(v => [v, linkStatusLabel(v)]) })}${field('cost', t('cost'), l.cost || '', { type: 'number', inputmode: 'decimal' })}
         ${field('arrive', t('arrive'), l.arrive || '', { type: 'time' })}${field('paid', t('paid'), Office.yes(l.paid) ? 'כן' : 'לא', { type: 'select', options: [['לא', '✗'], ['כן', '✓']] })}${field('supInvoice', t('supInvoice'), l.supInvoice || 'חסרה', { type: 'select', options: [['חסרה', t('invMissing')], ['התקבלה', t('invReceived')]] })}${field('supInvoiceNo', t('invoiceNo'), l.supInvoiceNo || '', { ltr: true })}${field('rating', t('rateSupplier'), l.rating || '', { type: 'select', options: [['', '']].concat([5, 4, 3, 2, 1].map(n => [n, stars(n)])) })}</div>${field('what', t('whatNeeded'), l.what || '')}${field('note', t('note'), l.note || '')}` +
         `<input type="hidden" name="id" value="${esc(l.id)}"><div class="row end"><button type="button" class="btn danger sm" data-dellink="${esc(l.id)}">${esc(t('delete'))}</button></div>`);
-      if (r) { r.id = l.id; if (Office.yes(r.paid) && !l.paidAt) r.paidAt = todayIso(); if (r.supInvoice === 'התקבלה' && !l.supInvoiceAt) r.supInvoiceAt = todayIso(); db.put('links', r); if (r.rating && sp.id) { const rs = db.list('links', x => x.supplierId === sp.id && x.rating).map(x => +x.rating); db.put('suppliers', { id: sp.id, rating: Math.round(rs.reduce((a, b) => a + b, 0) / rs.length) }); } }
+      if (r) { r.id = l.id;
+        if (r.status === 'ביקשנו הצעה' && !l.askedAt) {
+          const sent = await dialog(t('rfqConfirmSent'), '', { ok: t('askSentYes'), cancel: t('askSentNo') });
+          if (sent) { r.askedAt = todayIso(); r.channel = 'manual'; } else r.status = RFQ_DRAFT;
+        }
+        if (/התקבלה|אושר/.test(r.status) && !l.answeredAt) r.answeredAt = todayIso();
+        if (Office.yes(r.paid) && !l.paidAt) r.paidAt = todayIso(); if (r.supInvoice === 'התקבלה' && !l.supInvoiceAt) r.supInvoiceAt = todayIso(); db.put('links', r); if (r.rating && sp.id) { const rs = db.list('links', x => x.supplierId === sp.id && x.rating).map(x => +x.rating); db.put('suppliers', { id: sp.id, rating: Math.round(rs.reduce((a, b) => a + b, 0) / rs.length) }); } }
     };
   });
 }
