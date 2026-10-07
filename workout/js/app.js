@@ -5,12 +5,12 @@ import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js
 import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js';
 import { Figure, cycleMs } from './figure.js';
 import { store } from './store.js';
-import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, rankOf, perseveranceLine, honestTime, tokensFor } from './logic.js';
+import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, rankOf, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261007-stars-1';
 import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js';
-import { runGame } from './games/engine.js';
+import { runGame } from './games/engine.js?v=20261007-stars-1';
 import * as cloud from './cloud.js';
 import { showLobby } from './games/lobby.js';
-import { initParent, parentGate, parentHome, basketball } from './parent.js';
+import { initParent, parentGate, parentHome, basketball } from './parent.js?v=20261007-stars-1';
 import { playIntro } from './intro.js';
 import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js';
 import { SAY } from './say.js';
@@ -167,7 +167,7 @@ function home() {
     : `<div class="card"><h3>😴 יום מנוחה</h3><p class="muted small">השרירים גדלים דווקא במנוחה. אם בכל זאת בא לך לזוז: מתיחות או אימון 7 דקות קל.</p></div>
        <div class="card tap prog jump" data-go="#/start/quick"><div class="emoji">⏱️</div><div><h3>אימון 7 דקות</h3><p class="muted small">קצר וקל.</p></div><span class="pill solid">7 דק'</span></div>`}
 
-    ${nextLevel ? `<div class="card row" style="border:2px solid var(--star)"><span style="font-size:32px">🏅</span><div class="grow"><b>שלושה אימונים מושלמים ברצף!</b><p class="muted small">נראה שאתה מוכן לרמה "${LEVELS[nextLevel].name}".</p></div><button class="btn chip on" id="levelup">לעלות רמה</button></div>` : ''}
+    ${nextLevel ? `<div class="card row" style="border:2px solid var(--star)"><span style="font-size:32px">🏅</span><div class="grow"><b>סיימת שלושה אימונים!</b><p class="muted small">אם מתאים לך, אפשר לנסות את הרמה "${LEVELS[nextLevel].name}".</p></div><button class="btn chip on" id="levelup">לעלות רמה</button></div>` : ''}
 
     <h2>כל האימונים</h2>
     ${PROGRAMS.filter(p => p !== today).map(p => `
@@ -529,7 +529,7 @@ function restPhase() {
 function saveSession() {
   if (W.saved) return null;
   const s = { id: uid(), date: new Date().toISOString(), programId: W.program.id, programName: W.program.name, emoji: W.program.emoji,
-    duration: Math.round((Date.now() - W.startedAt) / 1000), items: W.items.map(i => ({ exId: i.exId, name: i.name, type: i.type, target: i.target, done: i.done, round: i.round, block: i.block, secs: i.secs || 0 })) };
+    duration: Math.round((Date.now() - W.startedAt) / 1000), items: W.items.map(i => ({ exId: i.exId, name: i.name, type: i.type, target: i.target, done: i.done, skipped: i.skipped, round: i.round, block: i.block, secs: i.secs || 0 })) };
   // זמן אמיתי: תרגיל שסומן מהר מדי (פחות מ-45% מהזמן הצפוי) לא נספר. המתנות לפי דקות אמיתיות
   const h = honestTime(s.items, store.profile.rest || 0); s.honestSeconds = h.seconds; s.fastItems = h.fast;
   s.tokensEarned = tokensFor(h.seconds, store.profile.tokenMinutes || 3);
@@ -597,17 +597,18 @@ function donePhase() {
   if (!s.feedback) return askFeedback(s, W.program, W.gamesPlayed, msg => { W.adjustMsg = msg; donePhase(); });
   const sum = summarize(s);
   const newBadges = res ? res.newBadges : [];
-  if (res && sum.stars) { fanfare(); confetti(); }
+  if (sum.stars) { fanfare(); confetti(); }
   const st = stats(store.sessions);
-  const cheer = sum.stars === 3 ? 'מושלם! עשית את כל האימון עד הסוף!' : sum.stars === 2 ? 'כל הכבוד! רוב האימון בכיס.' : sum.stars === 1 ? 'התחלה טובה. בפעם הבאה עוד קצת!' : 'לא נורא, בפעם הבאה מנסים שוב.';
+  const cheer = sum.rewardMessage;
   const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
   const nextId = todayProgram(plan(), tomorrow), nextP = nextId && programById[nextId];
   mount(`
   <div class="stack">
     <section class="hero center pop">
-      <div class="stars">${'★'.repeat(sum.stars)}<span class="off">${'★'.repeat(3 - sum.stars)}</span></div>
+      <div class="stars" role="img" aria-label="${sum.stars} כוכבים על מאמץ והשלמה">${'★'.repeat(sum.stars)}<span class="off">${'★'.repeat(3 - sum.stars)}</span></div>
       <h1>סיימת! ${W.program.emoji}</h1>
       <p class="muted">${cheer}</p>
+      ${sum.starReasons.map(reason => `<p class="small">⭐ ${esc(reason)}</p>`).join('')}
     </section>
     <div class="card center" style="border:2px solid var(--accent)"><b>${esc(perseveranceLine(st))}</b><div class="muted small" style="margin-top:4px">${rankOf(st.workouts).emoji} דרגה: ${rankOf(st.workouts).name}${rankOf(st.workouts).next ? ` · עוד ${rankOf(st.workouts).toNext} אימונים ל"${rankOf(st.workouts).next.name}"` : ''}</div></div>
     ${W.adjustMsg ? `<div class="card" style="border:2px solid var(--star)"><b>${esc(W.adjustMsg)}</b></div>` : ''}
@@ -668,9 +669,9 @@ function history() {
       <div class="card" data-sess="${s.id}">
         <div class="row between tap" data-toggle="${s.id}">
           <div><b>${s.emoji || '🏋️'} ${esc(s.programName)}</b><div class="muted small">${fmtDate(s.date)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים</div></div>
-          <span style="color:var(--star);font-size:22px">${'★'.repeat(sum.stars)}</span>
+          <span style="color:var(--star);font-size:22px" aria-label="${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}">${'★'.repeat(sum.stars)}</span>
         </div>
-        <div class="list" id="d-${s.id}" hidden style="margin-top:10px">${itemsList(s)}<div class="item"><button class="btn chip danger" data-del="${s.id}">מחיקת האימון</button></div></div>
+        <div class="list" id="d-${s.id}" hidden style="margin-top:10px"><p class="small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>${itemsList(s)}<div class="item"><button class="btn chip danger" data-del="${s.id}">מחיקת האימון</button></div></div>
       </div>`; }).join('') : '<div class="card center muted">עוד אין אימונים. הראשון מחכה לך בדף הבית!</div>'}
   </div>`);
   app.querySelectorAll('[data-toggle]').forEach(r => r.onclick = () => { const d = $('#d-' + r.dataset.toggle); d.hidden = !d.hidden; });

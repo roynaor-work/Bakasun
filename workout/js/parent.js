@@ -1,7 +1,7 @@
 // מצב הורים: רק אבא פותח, עם קוד סודי. רואה את האימונים של הילד מהענן ומנהל את יומן הכדורסל.
 import { store } from './store.js';
 import * as cloud from './cloud.js';
-import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid } from './logic.js';
+import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid } from './logic.js?v=20261007-stars-1';
 
 let ctx = null; // { mount, esc, go, $ } מהאפליקציה
 export function initParent(c) { ctx = c; }
@@ -75,9 +75,9 @@ export async function parentHome() {
         <div class="card ${s.isNew ? 'today' : ''}">
           <div class="row between tap" data-toggle="${i}">
             <div><b>${s.emoji || '🏋️'} ${esc(s.programName)}</b>${s.isNew ? ' <span class="pill hall" style="font-size:12px;padding:1px 8px">חדש</span>' : ''}<div class="muted small">${fmtDate(s.date)} ${new Date(s.date).toTimeString().slice(0, 5)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים${s.gamesPlayed ? ` · 🎮 ${s.gamesPlayed}` : ''}${s.feedback ? ` · ${{ easy: '😎 היה לו קל', ok: '👌 בדיוק', hard: '😮‍💨 היה לו קשה' }[s.feedback]}${s.change ? ({ boost: ', העלה 10%', swaps: ', עבר לתרגילים מתקדמים', down: ', הוריד קצת' }[s.change] || '') : ''}` : ''}</div></div>
-            <span style="color:var(--star);font-size:22px">${'★'.repeat(sum.stars)}</span>
+            <span style="color:var(--star);font-size:22px" aria-label="${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}">${'★'.repeat(sum.stars)}</span>
           </div>
-          <div class="list" id="pd-${i}" hidden style="margin-top:10px">${(s.items || []).map(it => `<div class="item"><span class="grow">${esc(it.name)}</span>${it.done >= it.target ? `<span class="done">✓ ${it.done}${it.type === 'time' ? ' שנ׳' : ''}</span>` : it.done > 0 ? `<span class="part">${it.done} מתוך ${it.target}</span>` : '<span class="skip">דילוג</span>'}</div>`).join('')}</div>
+          <div class="list" id="pd-${i}" hidden style="margin-top:10px"><p class="small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>${(s.items || []).map(it => `<div class="item"><span class="grow">${esc(it.name)}</span>${it.done >= it.target ? `<span class="done">✓ ${it.done}${it.type === 'time' ? ' שנ׳' : ''}</span>` : it.done > 0 ? `<span class="part">${it.done} מתוך ${it.target}</span>` : '<span class="skip">דילוג</span>'}</div>`).join('')}</div>
         </div>`; }).join('') : `<div class="card center muted">${loading ? 'רגע...' : 'עוד אין אימונים בענן. כשהילד יסיים אימון בטלפון שלו (עם אותו קוד משפחה), זה יופיע כאן.'}</div>`}
       <button class="btn ghost" id="lock">🔒 יציאה ממצב הורים</button>
     </div>`);
