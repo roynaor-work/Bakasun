@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>מעבדת מצלמה · האימון שלי</title>
+  <link rel="stylesheet" href="lab.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+<main>
+  <header><span class="badge">מעבדה נפרדת</span><h1>זזים מול המצלמה</h1><p>סקוואט · קפיצות פיסוק · ברכיים גבוהות</p></header>
+  <p class="privacy">🔒 עיבוד במכשיר בלבד. אין הקלטה, שמירת תמונות או העלאה לענן. ההגדרות והתוצאות נשארות בזיכרון עד סגירת הדף.</p>
+  <section id="setup" aria-labelledby="setup-title">
+    <h2 id="setup-title">1. מכינים מקום</h2>
+    <form id="settings">
+      <div class="fields"><label>גיל <input id="age" type="number" min="5" max="12" value="7" required inputmode="numeric"></label><label>גובה בס״מ <input id="height" type="number" min="90" max="180" value="120" required inputmode="numeric"></label></div>
+      <label>התרגיל <select id="exercise"><option value="squats">סקוואט</option><option value="jumping-jacks">קפיצות פיסוק</option><option value="high-knees">ברכיים גבוהות — הרמה והורדה של רגל אחת = חזרה</option></select></label>
+      <p class="small">הגיל והגובה מכוונים ספים ניסיוניים. הם אינם הערכה רפואית או מדידה מדויקת של הגוף.</p>
+      <label class="check"><input id="voice" type="checkbox" checked> הדרכה בקול עברי מקומי, אם זמין במכשיר</label>
+      <p id="voice-status" class="small"></p>
+      <figure class="placement">
+        <svg viewBox="0 0 440 150" role="img" aria-label="מכשיר נשען ביציבות בגובה האגן, מול ילד שכל הגוף שלו בתוך מסגרת המצלמה">
+          <path d="M20 133H420" stroke="#a6c4db" stroke-width="3"/>
+          <rect x="30" y="60" width="34" height="50" rx="5" fill="#23364e" stroke="#85dcfc" stroke-width="3"/>
+          <circle cx="48" cy="69" r="3" fill="#85dcfc"/>
+          <path d="M66 85L288 20M66 85L288 132" stroke="#85dcfc" stroke-dasharray="5 5" fill="none"/>
+          <rect x="286" y="10" width="112" height="125" rx="12" fill="none" stroke="#70e2b5" stroke-width="3"/>
+          <circle cx="343" cy="32" r="11" fill="#ffd685"/>
+          <path d="M343 44V84M343 51L315 70M343 51L371 70M343 84L326 120M343 84L360 120" stroke="#ffd685" stroke-width="8" stroke-linecap="round"/>
+          <path d="M114 128H253M114 123V133M253 123V133" stroke="#a6c4db" stroke-width="2"/>
+        </svg>
+        <figcaption>המכשיר יציב בגובה האגן, לא ביד. מתחילים במרחק כ־2–3 מטר, מול המצלמה. משאירים מקום גם לידיים מעל הראש ולרגליים בצדדים.</figcaption>
+      </figure>
+      <p>אור מול הגוף, רצפה פנויה ומבוגר לידך. עומדים ישר עד שהמסגרת ירוקה. לא צריך לקנות ציוד.</p>
+      <button type="submit" id="camera">הפעלת מצלמה והדרכה</button>
+    </form>
+  </section>
+  <section id="session" hidden aria-labelledby="session-title">
+    <h2 id="session-title">2. עומדים בתוך התמונה</h2>
+    <p id="instructions"></p>
+    <div id="view"><video id="video" autoplay playsinline muted></video><canvas id="overlay" aria-hidden="true"></canvas><div id="frame-guide"></div></div>
+    <p id="status" role="status">טוענים את מודל הזיהוי המקומי…</p>
+    <div class="score"><output id="count" aria-label="חזרות שנספרו" aria-live="polite">0</output><span>חזרות שנספרו</span></div>
+    <p id="feedback" role="status"></p>
+    <p id="metrics" class="small" dir="ltr">FPS — · processing —</p>
+    <div class="buttons"><button id="start" disabled>מתחילים לספור</button><button id="finish" hidden>סיום ותוצאה</button><button id="stop" class="secondary">עצירת המצלמה</button></div>
+  </section>
+  <section id="result" hidden aria-labelledby="result-title">
+    <h2 id="result-title">3. מה המצלמה הצליחה לראות?</h2>
+    <p id="result-count" class="result-count"></p>
+    <p id="result-rejected"></p><ul id="reasons"></ul>
+    <p>תנועה שלא נספרה אינה אומרת שעשית משהו לא טוב. המצלמה יכולה לפספס. אם לא ברור מה לשנות, שואלים מבוגר.</p>
+    <p id="result-metrics" class="small"></p>
+    <details><summary>לוג ביצועים מקומי</summary><p>עד 900 הפריימים האחרונים: FPS, זמן זיהוי וזמן עיבוד כולל. ללא תמונות, נקודות גוף או פרטים אישיים. ייצוא רק בלחיצה שלך.</p><button id="export" class="secondary">הורדת לוג ביצועים (JSON)</button></details>
+    <button id="again">תרגיל נוסף</button>
+  </section>
+  <p id="error" role="alert" hidden></p>
+  <noscript>המעבדה צריכה JavaScript כדי לעבוד במכשיר.</noscript>
+</main>
+</body>
+</html>
