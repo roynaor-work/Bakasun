@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; img-src 'self'; media-src 'self' blob:; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>מעבדת המצלמה — האימון שלי</title><link rel="stylesheet" href="lab.css"></head>
+<body><main><header><h1>מעבדת המצלמה</h1><p>ניסוי נפרד · הווידאו נשאר במכשיר · בלי הקלטה ובלי העלאה</p></header>
+<section id="settings"><h2>לפני שמתחילים</h2><p>ננסה יחד עם מבוגר. בוחרים מקום פנוי ומואר. אם לא נעים — עוצרים.</p>
+<form id="profile"><label>גיל <input id="age" type="number" min="5" max="12" value="7" required></label><label>גובה בס״מ <input id="height" type="number" min="90" max="170" value="120" required></label>
+<label>תרגיל <select id="exercise"><option value="squats">סקוואט</option><option value="jumping-jacks">קפיצות פישוק</option><option value="high-knees">ברכיים גבוהות — כל ברך היא חזרה</option></select></label>
+<p>הגיל והגובה משמשים לספים ניסיוניים, ונשארים בזיכרון עד שסוגרים את הדף.</p>
+<label><input id="voice" type="checkbox" checked> הדרכה בקול עברי מקומי (אם מותקן במכשיר)</label>
+<button type="submit">פתיחת המצלמה והצבה</button></form></section>
+<section id="camera" hidden><h2 id="stage-title">מציבים את המכשיר</h2>
+<div class="placement"><img src="placement.svg" alt="מכשיר מונח יציב בגובה המותניים, מול ילד שעומד במרחק שניים עד שלושה מטרים; הראש והרגליים בתוך המסגרת"><p id="placement-text">מניחים את המכשיר יציב בגובה המותניים, במרחק כ־2–3 מטרים. עומדים מולו כך שרואים ראש, ידיים וקרסוליים. משאירים מקום מעל הראש לקפיצות.</p></div>
+<p id="instruction"></p><div class="view"><video id="video" autoplay muted playsinline></video><canvas id="overlay"></canvas><div class="frame-guide"></div><output id="count" aria-label="חזרות שנספרו">0</output></div>
+<p id="status" role="status" aria-live="polite">טוענים את המודל המקומי…</p><p id="feedback" role="status" aria-live="polite"></p>
+<div class="actions"><button id="start" disabled>מתחילים</button><button id="finish" hidden>סיום ותוצאה</button><button id="cancel">סגירת המצלמה</button></div>
+<details><summary>מדידת ביצועים (ללא תמונות או נקודות גוף)</summary><p id="metrics">ממתינים לפריים</p><p>הלוג מכיל FPS, זמן עיבוד וזמן סבב לכל פריים. נשמרים עד 600 פריימים בזיכרון בלבד.</p><button id="copy-log">העתקת לוג ביצועים</button><pre id="perf-log"></pre></details></section>
+<section id="results" hidden><h2>סיימנו את הניסוי</h2><p id="result-count"></p><ul id="result-reasons"></ul><p>זו ספירה ניסיונית, וייתכן שהמצלמה טעתה. אם לא ברור מה קרה, כדאי לשאול מבוגר.</p><button id="again">בחירת תרגיל נוסף</button></section>
+<p id="error" role="alert"></p><footer>אין שמירה ב־localStorage, אין חיבור לענן ואין מיקרופון. הקול משתמש רק בקול עברי שמסומן כמקומי בדפדפן. אם אינו זמין, ההסברים מופיעים בכתב.</footer></main><script type="module" src="app.js"></script></body></html>
