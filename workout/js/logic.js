@@ -76,16 +76,39 @@ export function fmtDate(d) {
   return `יום ${days[x.getDay()]}, ${x.getDate()}.${x.getMonth() + 1}`;
 }
 
-// סיכום של אימון אחד
+// כוכבים על מאמץ, התמדה והשלמה בלבד. גם חזרה אחת או חלק מתרגיל זמן נחשבים ניסיון.
+const triedItem = i => !i.skipped && Number.isFinite(i.done) && i.done > 0;
+const completedItem = i => triedItem(i) && Number.isFinite(i.target) && i.target > 0 && i.done >= i.target;
+export function workoutReward(items = []) {
+  const tried = items.filter(triedItem).length;
+  const reasons = [];
+  if (tried) reasons.push('על שניסית וזזת');
+  if (items.length && Math.round(100 * tried / items.length) >= 70) reasons.push('על שהתמדת באימון');
+  if (items.length && items.every(completedItem)) reasons.push('על שסיימת את כל התרגילים');
+  return { stars: reasons.length, reasons, message: tried ? 'כל הכבוד על המאמץ שלך! כל תנועה נחשבת.' : 'אפשר לנוח. האימון יחכה לך כשתרצה.' };
+}
+
+// ניסיון = פעולה של הילד במשחק; שלוש פעולות = התמדה. סיום סבב מעניק כוכב גם כשאין נקודות.
+// ההדגמה האוטומטית וצפייה בלי לשחק אינן מאמץ של הילד. ניקוד, שיא וניצחון אינם קלט לחישוב.
+export function gameReward({ attempts = 0, completed = false, demo = false } = {}) {
+  const tried = !demo && Number.isFinite(attempts) && attempts > 0;
+  const reasons = [];
+  if (tried) reasons.push('על שניסית לשחק');
+  if (tried && attempts >= 3) reasons.push('על שהמשכת לנסות');
+  if (tried && completed) reasons.push('על שסיימת את הסבב');
+  return { stars: reasons.length, reasons, message: tried ? 'כל הכבוד על המאמץ שלך!' : 'אפשר לשחק כשתרצה.' };
+}
+
+// סיכום של אימון אחד; גם המעקב ומסך ההורה מקבלים את אותן סיבות לכוכבים.
 export function summarize(session) {
   const items = session.items || [];
-  const done = items.filter(i => i.done > 0);
+  const done = items.filter(triedItem);
   const reps = done.filter(i => i.type === 'reps').reduce((s, i) => s + i.done, 0);
   const seconds = done.filter(i => i.type === 'time').reduce((s, i) => s + i.done, 0);
-  const full = items.filter(i => i.done >= i.target).length;
+  const full = items.filter(completedItem).length;
   const pct = items.length ? Math.round(100 * done.length / items.length) : 0;
-  const stars = pct >= 100 && full === items.length ? 3 : pct >= 70 ? 2 : done.length ? 1 : 0;
-  return { total: items.length, doneCount: done.length, full, reps, seconds, pct, stars, duration: session.duration || 0 };
+  const reward = workoutReward(items);
+  return { total: items.length, doneCount: done.length, full, reps, seconds, pct, stars: reward.stars, starReasons: reward.reasons, rewardMessage: reward.message, duration: session.duration || 0 };
 }
 
 // רצף ימים: כמה ימים ברצף היה אימון, נספר אחורה מהיום (או מאתמול אם היום עוד לא התאמן)

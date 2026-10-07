@@ -1,6 +1,7 @@
 // מנוע המשחקים הקטנים: קנבס בגודל לוגי קבוע, ניקוד, טיימר, מגע/מקלדת, מסכי פתיחה וסיום.
 // כל משחק הוא אובייקט { id, name, emoji, how, make(r) } כאשר make מחזיר { update(dt), draw(), tap(x,y), down, up, move, swipe(dir), key(code) }.
 import { poseAt } from '../figure.js';
+import { gameReward } from '../logic.js?v=20261007-stars-1';
 import { celebrate as celebrate2d } from './celebrate.js';
 import { celebrate3d } from './celebrate3d.js';
 // חגיגת שיא: בתלת-ממד (הדמות של Kenney, אצטדיון) כשיש WebGL, אחרת הגרסה הדו-ממדית
@@ -49,6 +50,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   const cv = host.querySelector('#gcv'), ctx = cv.getContext('2d');
   const scoreEl = host.querySelector('#gscore'), timeEl = host.querySelector('#gtime'), overlay = host.querySelector('#gover');
   const unlimited = !(seconds > 0); if (unlimited) host.querySelector('#gtime').style.display = 'none'; let game = null, raf = 0, last = 0, running = false, ended = false, score = 0, timeLeft = unlimited ? 0 : seconds, elapsed = 0, pauseUntil = 0;
+  let attempts = 0, roundComplete = false; // רק קלט אמיתי של הילד, בלי פעולות ההדגמה
   // הדגמה: אצבע מדומה שמשחקת לפי תסריט (def.demo), עם כתוביות. בסוף חוזרים למסך הפתיחה או יוצאים
   let inDemo = false, demoT = 0, resumeOnPause = false; const saveProgress = () => { try { if (onProgress && game && typeof game.save === 'function') onProgress(game.save()); } catch { /* */ } }; const finger = { x: W / 2, y: H * .7, tx: W / 2, ty: H * .7, press: 0, hold: false, caption: '', swipe: null };
   let pops = [], parts = [], shakeT = 0, ac = null;
@@ -97,15 +99,16 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     setScore(n) { score = Math.max(0, Math.round(n)); scoreEl.textContent = score; },
     over(msg = 'אופס!') { if (!running) return; running = false; SFX.over(); shakeT = 0.3;
       if (inDemo) { flash(msg, 'עוד ניסיון...'); pauseUntil = performance.now() + 1100; return; }
-      if (!unlimited) { flash(msg, timeLeft > 6 ? 'עוד ניסיון...' : ''); if (timeLeft > 6) pauseUntil = performance.now() + 1100; else setTimeout(end, 900); return; }
+      if (!unlimited) { flash(msg, timeLeft > 6 ? 'עוד ניסיון...' : ''); if (timeLeft > 6) pauseUntil = performance.now() + 1100; else setTimeout(() => end(true), 900); return; }
       // בלי הגבלת זמן: נפסלת. אפשר להמשיך מאותו מקום תמורת מתנה (אם יש), או לסיים
       saveProgress(); setMusic(null); const canGo = typeof game.revive === 'function' && (typeof tokens === 'function' ? tokens() : tokens) > 0;
-      flash(`נפסלת! ${msg}`, `ניקוד: ${score}${canGo ? ' · יש לך מתנות, אפשר להמשיך מאותו מקום' : ''}`);
+      roundComplete = true;
+      flash('הסבב הסתיים. תודה שניסית! 💛', `ניקוד: ${score}${canGo ? ' · יש לך מתנות, אפשר להמשיך מאותו מקום' : ''}`);
       overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<div class="row" style="gap:8px;justify-content:center;flex-wrap:wrap">${canGo ? '<button class="btn primary big" id="gcont" style="width:auto">להמשיך 🎁 (מתנה אחת)</button>' : ''}<button class="btn big" id="gfinish" style="width:auto">סיום</button></div>`);
-      const gc = overlay.querySelector('#gcont'); if (gc) gc.onclick = () => { if (onContinue && !onContinue()) return; game.revive(); hide(); running = true; last = performance.now(); setMusic(defaultMusic); };
+      const gc = overlay.querySelector('#gcont'); if (gc) gc.onclick = () => { if (onContinue && !onContinue()) return; game.revive(); roundComplete = false; hide(); running = true; last = performance.now(); setMusic(defaultMusic); };
       overlay.querySelector('#gfinish').onclick = () => end(); },
     // שלב הושלם: הודעה קצרה וממשיכים עם אותו משחק (הרמה נשמרת). במשחק עם זמן שנגמר: סיום
-    win(msg = 'כל הכבוד!', bonus = 0) { if (!running) return; running = false; SFX.win(); r.burst(W / 2, H / 2, PAL.gold, 30, 320); if (bonus) r.addScore(bonus); flash(msg, unlimited || timeLeft > 6 ? 'ממשיכים!' : ''); if (unlimited || timeLeft > 6) { pauseUntil = performance.now() + 900; resumeOnPause = true; } else setTimeout(end, 900); saveProgress(); },
+    win(msg = 'כל הכבוד!', bonus = 0) { if (!running) return; running = false; SFX.win(); r.burst(W / 2, H / 2, PAL.gold, 30, 320); if (bonus) r.addScore(bonus); flash(msg, unlimited || timeLeft > 6 ? 'ממשיכים!' : ''); if (unlimited || timeLeft > 6) { pauseUntil = performance.now() + 900; resumeOnPause = true; } else setTimeout(() => end(true), 900); saveProgress(); },
     // ציור
     clear(color = PAL.bg) { ctx.fillStyle = color; ctx.fillRect(0, 0, W, H); },
     rect(x, y, w, h, color, rad = 0) { ctx.fillStyle = color; if (rad) { ctx.beginPath(); ctx.roundRect(x, y, w, h, rad); ctx.fill(); } else ctx.fillRect(x, y, w, h); },
@@ -154,7 +157,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
     if (ended) return;
     if (!inDemo) { if (unlimited) elapsed += dt; else timeLeft -= dt; } timeEl.textContent = inDemo ? 'הדגמה' : unlimited ? fmt(elapsed) : fmt(Math.max(0, timeLeft)); timeEl.classList.toggle('low', !unlimited && timeLeft < 10);
-    if (!unlimited && timeLeft <= 0) return end();
+    if (!unlimited && timeLeft <= 0) return end(true);
     if (!running) { if (pauseUntil && now >= pauseUntil) { pauseUntil = 0; if (resumeOnPause && game) { resumeOnPause = false; hide(); running = true; } else fresh(); } else return; }
     try {
       if (inDemo) { demoT += dt; if (demoT >= (def.demoDur || 12)) return endDemo(); def.demo(demoT, game, ctl, r); demoTick(dt); }
@@ -165,19 +168,25 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
       if (shaking) ctx.restore();
     } catch (e) { console.error(def.id, e); end(); }
   }
-  function end() {
+  function end(completed = roundComplete) {
     if (ended) return; ended = true; running = false; cancelAnimationFrame(raf); saveProgress(); if (net) net.close(); stopMusic();
     const newBest = score > best && score > 0;
-    const stars = newBest || (best && score >= best * .9) ? 3 : best && score >= best * .5 ? 2 : 1; const starHtml = `<div class="gstars">${[1, 2, 3].map(i => `<span class="${i <= stars ? 'on' : ''}" style="animation-delay:${i * .18}s">★</span>`).join('')}</div>`;
-    flash(newBest ? `שיא חדש! ${score}` : `ניקוד: ${score}`, `${best && !newBest ? `השיא שלך: ${best} · ` : ''}חזרה לאימון`); if (score > 0) overlay.querySelector('.gmsg b').insertAdjacentHTML('beforebegin', starHtml);
+    const reward = gameReward({ attempts, completed, demo: inDemo });
+    const starHtml = `<div class="gstars" role="img" aria-label="${reward.stars} כוכבים על מאמץ והשלמה">${[1, 2, 3].map(i => `<span class="${i <= reward.stars ? 'on' : ''}" style="animation-delay:${i * .18}s">★</span>`).join('')}</div>`;
+    // אותו משוב בסיום רגיל, אחרי חגיגת שיא וגם כשהילד מדלג על החגיגה.
+    const showResult = () => {
+      flash(reward.message, `${newBest ? 'שיא חדש! ' : 'ניקוד: '}${score}${best && !newBest ? ` · השיא שלך: ${best}` : ''}`);
+      if (reward.stars) overlay.querySelector('.gmsg b').insertAdjacentHTML('beforebegin', starHtml);
+      overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `${reward.reasons.map(reason => `<p class="small">⭐ ${reason}</p>`).join('')}<button class="btn primary big" id="gback">ממשיכים 💪</button>`);
+      overlay.querySelector('#gback').onclick = () => finish({ score, best: Math.max(best, score), stars: reward.stars, starReasons: reward.reasons });
+    };
     if (newBest) {
       // חגיגת שער: מסתירים את ההודעה בזמן הסימולציה, ומראים אותה בסופה
-      hide(); const stopFx = celebrateGoal(cv, { oldBest: best, newBest: score, sound, onText: (t, lang) => speak && speak(t, lang), onDone: () => { flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => finish({ score, best: Math.max(best, score) }); } });
-      cv.onclick = () => { stopFx(); cv.onclick = null; flash(`שיא חדש! ${score}`, 'חזרה לאימון'); overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`); overlay.querySelector('#gback').onclick = () => finish({ score, best: Math.max(best, score) }); };
+      hide(); const stopFx = celebrateGoal(cv, { oldBest: best, newBest: score, sound, onText: (t, lang) => speak && speak(t, lang), onDone: () => { cv.onclick = null; showResult(); } });
+      cv.onclick = () => { stopFx(); cv.onclick = null; showResult(); };
       return;
     }
-    overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `<button class="btn primary big" id="gback">ממשיכים 💪</button>`);
-    overlay.querySelector('#gback').onclick = () => finish({ score, best: Math.max(best, score) });
+    showResult();
   }
   function start() { if (game) return; fresh(); if (!raf) { last = performance.now(); raf = requestAnimationFrame(loop); } }
 
@@ -216,7 +225,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   const pos = e => { const b = cv.getBoundingClientRect(); return [clamp((e.clientX - b.left) * W / b.width, 0, W), clamp((e.clientY - b.top) * H / b.height, 0, H)]; };
   let sx = 0, sy = 0, st = 0;
   const on = (name, fn) => cv.addEventListener(name, fn, { passive: false });
-  on('pointerdown', e => { e.preventDefault(); if (!running || inDemo) return; cv.setPointerCapture?.(e.pointerId); { const [x, y] = pos(e); r.pointers[e.pointerId] = { x, y }; } [r.px, r.py] = pos(e); r.isDown = true; sx = r.px; sy = r.py; st = performance.now(); game.down && game.down(r.px, r.py); });
+  on('pointerdown', e => { e.preventDefault(); if (!running || inDemo) return; attempts++; cv.setPointerCapture?.(e.pointerId); { const [x, y] = pos(e); r.pointers[e.pointerId] = { x, y }; } [r.px, r.py] = pos(e); r.isDown = true; sx = r.px; sy = r.py; st = performance.now(); game.down && game.down(r.px, r.py); });
   on('pointermove', e => { if (!running || inDemo) return; if (r.pointers[e.pointerId]) { const [x, y] = pos(e); r.pointers[e.pointerId] = { x, y }; } [r.px, r.py] = pos(e); if (r.isDown) game.move && game.move(r.px, r.py); });
   on('pointercancel', e => { delete r.pointers[e.pointerId]; });
   on('pointerup', e => { delete r.pointers[e.pointerId]; if (!running || inDemo || !r.isDown) return; r.isDown = false; [r.px, r.py] = pos(e); const dx = r.px - sx, dy = r.py - sy;
@@ -224,7 +233,8 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     if (Math.hypot(dx, dy) < 18 && performance.now() - st < 400) game.tap && game.tap(r.px, r.py);
     else if (Math.hypot(dx, dy) >= 24 && game.swipe) game.swipe(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'), dx, dy); });
   on('pointercancel', () => { r.isDown = false; });
-  const keys = e => { if (!running) return; const map = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up', ArrowDown: 'down' };
+  const keys = e => { if (!running || inDemo) return; const map = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up', ArrowDown: 'down' };
+    if ((map[e.key] && game.swipe) || ((e.key === ' ' || e.key === 'Enter') && game.tap) || game.key) attempts++;
     if (map[e.key] && game.swipe) { e.preventDefault(); game.swipe(map[e.key], 0, 0); }
     if ((e.key === ' ' || e.key === 'Enter') && game.tap) { e.preventDefault(); game.tap(W / 2, H / 2); }
     game.key && game.key(e.key); };
