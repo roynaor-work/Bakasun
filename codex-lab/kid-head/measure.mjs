@@ -1,20 +1,21 @@
-// PNG only; explicit head-only target ROIs avoid including torsos in silhouette IoU.
 import {PNG} from 'pngjs';
 import {pathToFileURL} from 'node:url';
 import path from 'node:path';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
-const base=new URL('.',import.meta.url),views=['front','threeQuarter','side','back'];
+import {segment,polygon,normalize,pngMask,iou} from './silhouette.mjs';
+const base=new URL('.',import.meta.url),views=['front','side','back','frontRepeat'];
 const configURL=process.argv[2]?pathToFileURL(path.resolve(process.argv[2])):new URL('target.json',base);
 const output=process.argv[3]?pathToFileURL(path.resolve(process.argv[3])+'/'):new URL('shots/',base);
 await mkdir(output,{recursive:true});
-const size=512;
-function mask(png,roi,threshold=35){const [x0,y0,w,h]=roi;let bg=[0,0,0],corners=[[x0,y0],[x0+w-1,y0],[x0,y0+h-1],[x0+w-1,y0+h-1]];for(const [x,y] of corners){const k=(y*png.width+x)*4;for(let c=0;c<3;c++)bg[c]+=png.data[k+c]/4;}const bits=new Uint8Array(w*h);for(let y=0;y<h;y++)for(let x=0;x<w;x++){let k=((y+y0)*png.width+x+x0)*4;let d=Math.hypot(...bg.map((v,c)=>png.data[k+c]-v));bits[y*w+x]=+(png.data[k+3]>128&&d>threshold);}
-// Keep the largest connected foreground component to remove labels and speckles.
-let best=[];const seen=new Uint8Array(bits.length);for(let start=0;start<bits.length;start++){if(!bits[start]||seen[start])continue;const q=[start];seen[start]=1;for(let j=0;j<q.length;j++){let k=q[j],x=k%w;for(const n of [x>0?k-1:-1,x<w-1?k+1:-1,k-w,k+w])if(n>=0&&n<bits.length&&bits[n]&&!seen[n]){seen[n]=1;q.push(n);}}if(q.length>best.length)best=q;}
-if(best.length<100)throw Error('No meaningful silhouette in ROI');let minX=w,maxX=0,minY=h,maxY=0;for(const k of best){minX=Math.min(minX,k%w);maxX=Math.max(maxX,k%w);minY=Math.min(minY,Math.floor(k/w));maxY=Math.max(maxY,Math.floor(k/w));}const source=new Uint8Array(bits.length);best.forEach(k=>source[k]=1);const scale=440/(maxY-minY+1),center=(minX+maxX)/2;const out=new Uint8Array(size*size);for(let y=0;y<size;y++)for(let x=0;x<size;x++){const sx=Math.round((x-size/2)/scale+center),sy=Math.floor((y-36)/scale+minY);if(sx>=0&&sx<w&&sy>=0&&sy<h)out[y*size+x]=source[sy*w+sx];}return out;}
-async function saveMask(name,m){const p=new PNG({width:size,height:size});for(let i=0;i<m.length;i++){p.data[i*4]=p.data[i*4+1]=p.data[i*4+2]=m[i]?0:255;p.data[i*4+3]=255;}await writeFile(name,PNG.sync.write(p));}
-let config;try{config=JSON.parse(await readFile(configURL));}catch(e){if(e.code!=='ENOENT')throw e;await writeFile(new URL('metrics.json',output),JSON.stringify({status:'blocked',reason:'Missing reference image and target.json head ROIs',rounds:Array.from({length:6},(_,i)=>({round:i+1,front:null,threeQuarter:null,side:null,back:null}))},null,2)+'\n');console.error('אין תמונת יעד: נוצר דוח עם null, ללא ציוני IoU מומצאים. ראו target.example.json.');process.exitCode=2;}
-if(config){const target=PNG.sync.read(await readFile(new URL(config.image,configURL)));const targets={};await mkdir(new URL('target/',output),{recursive:true});for(const v of views){const roi=config.views[v];if(!roi||roi.some(n=>!Number.isInteger(n))||roi[0]<0||roi[1]<0||roi[2]<=0||roi[3]<=0||roi[0]+roi[2]>target.width||roi[1]+roi[3]>target.height)throw Error(`Invalid head ROI: ${v}`);targets[v]=mask(target,roi,config.threshold||35);await saveMask(new URL(`target/${v}.png`,output),targets[v]);}
-const results=[];for(let r=1;r<=6;r++){let row={round:r};for(const v of views){const png=PNG.sync.read(await readFile(new URL(`shots/r${r}/${v}-head.png`,base))); // Dedicated head-only render excludes the body without guessing the chin height.
-const m=mask(png,[0,0,1024,1024],35);await mkdir(new URL(`r${r}/`,output),{recursive:true});await saveMask(new URL(`r${r}/${v}-mask.png`,output),m);let intersection=0,union=0;for(let i=0;i<m.length;i++){intersection+=m[i]&&targets[v][i]?1:0;union+=m[i]||targets[v][i]?1:0;}row[v]=intersection/union;}row.mean=views.reduce((s,v)=>s+row[v],0)/4;results.push(row);}
-const best=results.reduce((a,b)=>a.mean>b.mean?a:b);await writeFile(new URL('metrics.json',output),JSON.stringify({status:'measured',method:'head ROI, largest component, isotropic height normalization, bbox horizontal center; no rotation or width fitting',results,bestRound:best.round},null,2)+'\n');console.table(results);console.log('Best:',best.round);}
+const config=JSON.parse(await readFile(configURL));
+let target,status='measured';
+try{target=PNG.sync.read(await readFile(new URL(config.image,configURL)));}catch(e){if(e.code!=='ENOENT'||!config.manualTraceFile)throw e;status='manual-trace';}
+const trace=status==='manual-trace'?JSON.parse(await readFile(new URL(config.manualTraceFile,configURL))):null;
+const targets={},targetDir=new URL(status==='manual-trace'?'target-trace/':'target/',output);await mkdir(targetDir,{recursive:true});
+for(const v of views){targets[v]=normalize(trace?polygon(trace.views[v]):segment(target,config.views[v],config.threshold||30));await writeFile(new URL(`${v}.png`,targetDir),pngMask(targets[v]));}
+const rounds=JSON.parse(await readFile(new URL('rounds.json',base))),results=[];
+for(const p of rounds){let row={round:p.round};for(const v of views){const file=v==='frontRepeat'&&!p.version?'front':v;const png=PNG.sync.read(await readFile(new URL(`shots/r${p.round}/${file}-head.png`,base)));const raw=segment(png,[0,0,png.width,png.height],30,true),m=normalize(raw);row[`${v}DisconnectedPixels`]=raw.disconnectedPixels;await mkdir(new URL(`r${p.round}/`,output),{recursive:true});await writeFile(new URL(`r${p.round}/${v}-mask.png`,output),pngMask(m));row[v]=iou(m,targets[v]);row[`${v}Aspect`]=m.aspect;}
+row.mean=((row.front+row.frontRepeat)/2+row.side+row.back)/3;results.push(row);}
+const best=results.reduce((a,b)=>a.mean>=b.mean?a:b);
+const report={status,source:status==='manual-trace'?'User-visible image contours marked manually; not original image pixel IoU':config.image,method:'head-only; filled silhouette; height-only isotropic normalization; average duplicate fronts then equal weight front/side/back',targetAspect:Object.fromEntries(views.map(v=>[v,targets[v].aspect])),results,bestRound:best.round};
+await writeFile(new URL('metrics.json',output),JSON.stringify(report,null,2)+'\n');console.table(results.map(r=>Object.fromEntries(Object.entries(r).filter(([k])=>!k.endsWith('Aspect')&&!k.endsWith('Pixels')))));console.log(`${status}; best=${best.round}`);

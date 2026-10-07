@@ -1,0 +1,5 @@
+import {chromium} from 'playwright-core';
+import {mkdir} from 'node:fs/promises';
+import {serve} from './serve.mjs';
+const server=await serve(0),out=new URL('shots/comparison/',import.meta.url);await mkdir(out,{recursive:true});let browser;
+try{browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});const page=await browser.newPage({viewport:{width:1400,height:1100},deviceScaleFactor:1});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(`http://127.0.0.1:${server.address().port}/compare.html`);await page.waitForFunction(()=>document.querySelectorAll('.card').length===4&&[...document.querySelectorAll('.card .empty')].every(e=>e.hidden));await page.screenshot({path:new URL('all-views.png',out).pathname,fullPage:true});let i=0;for(const card of await page.locator('.card').all())await card.screenshot({path:new URL(`${['front','side','back','frontRepeat'][i++]}.png`,out).pathname});if(errors.length)throw Error(errors.join('\n'));console.log('Comparison screenshots: 4 cards + overview');}finally{await browser?.close();await new Promise(r=>server.close(r));}

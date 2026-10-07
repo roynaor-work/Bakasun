@@ -1,4 +1,5 @@
 import * as T from './three.module.js';
+import {targetModel,targetDefaults} from './model.mjs';
 const rounds=await (await fetch('./rounds.json')).json();
 const query=new URLSearchParams(location.search);
 const scene=new T.Scene(); scene.background=new T.Color('#f1eee7');
@@ -15,7 +16,7 @@ let root; let body=[]; let azimuth=0,elevation=0.08,zoom=1;
 function mesh(g,m,parent=root,outline=true){const o=new T.Mesh(g,m);parent.add(o);if(outline){const shell=new T.Mesh(g,new T.MeshBasicMaterial({color:0x302630,side:T.BackSide}));shell.scale.setScalar(1.018);o.add(shell);}return o;}
 function ellipsoid(pos,scale,m,parent=root){const o=mesh(new T.SphereGeometry(1,48,32),m,parent);o.position.set(...pos);o.scale.set(...scale);return o;}
 function curve(points,r,m){return mesh(new T.TubeGeometry(new T.CatmullRomCurve3(points.map(p=>new T.Vector3(...p))),36,r,8,false),m);}
-function build(p){if(root){scene.remove(root);root.traverse(o=>{if(o.geometry)o.geometry.dispose();});}root=new T.Group();scene.add(root);body=[];
+function build(p){if(root){scene.remove(root);root.traverse(o=>{if(o.geometry)o.geometry.dispose();});}if(p.version==='target-v1'){const model=targetModel(p);root=model.root;body=model.body;scene.add(root);return;}root=new T.Group();scene.add(root);body=[];
  // Continuous ring loft: chin -> jaw -> cheek -> temple -> cranium.
  const rings=[[-1.05*p.jaw,.16,.23,.18],[-.91*p.jaw,.39,.35,.11],[-.65*p.jaw,.58,.48,.02],[-.30,.74,.61,0],[.05,.79,.68,0],[.40,.76,.69,-.015],[.75,.68,.62,-.02],[.99,.49,.48,-.02],[1.13,.07,.09,-.02]];
  const positions=[],indices=[],N=96;
@@ -49,9 +50,9 @@ function build(p){if(root){scene.remove(root);root.traverse(o=>{if(o.geometry)o.
  root.position.y=.25;
 }
 function render(){camera.position.set(Math.sin(azimuth)*8,elevation*8,Math.cos(azimuth)*8);camera.lookAt(0,.13,0);let aspect=innerWidth/innerHeight;camera.left=-2.25*aspect/zoom;camera.right=2.25*aspect/zoom;camera.top=2.25/zoom;camera.bottom=-2.25/zoom;camera.updateProjectionMatrix();renderer.render(scene,camera);}
-const views={front:0,threeQuarter:Math.PI/4,side:Math.PI/2,back:Math.PI};
-window.lab={headOnly(value){body.forEach(o=>o.visible=!value);render();},setRound(n){build(rounds[n-1]);render();},setView(v){azimuth=views[v];elevation=.08;zoom=1;render();},ready:true};
-const select=document.querySelector('#round');rounds.forEach(p=>select.add(new Option(`סבב ${p.round} · ${p.hair}`,p.round)));let preferred=6;try{const metrics=await (await fetch('./shots/metrics.json')).json();if(metrics.status==='measured')preferred=metrics.bestRound;}catch{}select.value=query.get('round')||String(preferred);select.onchange=()=>window.lab.setRound(+select.value);window.lab.setRound(+select.value);
+const views={front:0,frontRepeat:0,threeQuarter:Math.PI/4,side:Math.PI/2,back:Math.PI};
+window.lab={defaults:targetDefaults,headOnly(value){body.forEach(o=>o.visible=!value);render();},setParameters(p){build({...targetDefaults,version:'target-v1',...p});render();},setRound(n){const p=rounds.find(p=>p.round===n);if(!p)throw new Error('Unknown round '+n);build(p);render();},setView(v){if(!(v in views))throw new Error('Unknown view '+v);azimuth=views[v];elevation=.08;zoom=1;render();},ready:true};
+const select=document.querySelector('#round');rounds.forEach(p=>select.add(new Option(`סבב ${p.round} · ${p.hair}`,p.round)));let preferred=6;try{const metrics=await (await fetch('./shots/metrics.json')).json();if(['measured','manual-trace'].includes(metrics.status))preferred=metrics.bestRound;}catch{}select.value=query.get('round')||String(preferred);select.onchange=()=>window.lab.setRound(+select.value);window.lab.setRound(+select.value);
 for(const [v,label] of Object.entries({front:'חזית',threeQuarter:'¾',side:'צד',back:'גב'})){const b=document.createElement('button');b.textContent=label;b.onclick=()=>window.lab.setView(v);document.querySelector('#views').append(b);}
 if(query.has('capture'))document.querySelector('aside').style.display='none';window.lab.setView(query.get('view')||'threeQuarter');
 let down=false,last;renderer.domElement.onpointerdown=e=>{down=true;last=[e.clientX,e.clientY];renderer.domElement.setPointerCapture(e.pointerId);};renderer.domElement.onpointerup=()=>down=false;renderer.domElement.onpointermove=e=>{if(!down)return;azimuth-=(e.clientX-last[0])*.008;elevation=T.MathUtils.clamp(elevation+(e.clientY-last[1])*.004,-.35,.45);last=[e.clientX,e.clientY];render();};renderer.domElement.onwheel=e=>{e.preventDefault();zoom=T.MathUtils.clamp(zoom-e.deltaY*.001,.65,1.7);render();};onresize=()=>{renderer.setSize(innerWidth,innerHeight);render();};
