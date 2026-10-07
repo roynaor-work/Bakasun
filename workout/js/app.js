@@ -5,7 +5,8 @@ import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js
 import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js';
 import { Figure, cycleMs } from './figure.js';
 import { store } from './store.js';
-import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, rankOf, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261007-stars-1';
+import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261007-belts-1';
+import { beltCard } from './belts.js?v=20261007-belts-1';
 import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js';
 import { runGame } from './games/engine.js?v=20261007-stars-1';
 import * as cloud from './cloud.js';
@@ -145,10 +146,12 @@ function home() {
         <h1>${hi()}</h1>
         <span class="pill">🔥 ${st.streak} ימים ברצף</span>
       </div>
-      <div class="row wrap" style="margin-top:8px"><span class="pill">${rankOf(st.workouts).emoji} דרגה: ${rankOf(st.workouts).name}${rankOf(st.workouts).next ? ` · עוד ${rankOf(st.workouts).toNext} ל"${rankOf(st.workouts).next.name}"` : ''}</span><span class="tokens" data-go="#/arcade">🎁 ${store.tokens} ${store.tokens === 1 ? 'מתנה' : 'מתנות'}</span></div>
+      <div class="row wrap" style="margin-top:8px"><span class="tokens" data-go="#/arcade">🎁 ${store.tokens} ${store.tokens === 1 ? 'מתנה' : 'מתנות'}</span></div>
       ${credits() ? `<div class="card row" style="margin-top:10px;border:2px solid var(--star)" data-go="#/arcade"><span style="font-size:30px">🔓</span><div class="grow"><b>פתחת ${credits()} משחקים חדשים!</b><p class="muted small">לחץ כדי לבחור אותם בחדר המשחקים.</p></div></div>` : ''}
       <p class="muted" style="margin-top:6px">יום ${DAY_NAMES[now.getDay()]}. ${todayCount ? `היום כבר עשית ${todayCount === 1 ? 'אימון' : todayCount + ' אימונים'}. כל הכבוד!` : today ? 'היום זה יום ' + esc(today.name.split(':')[0]) + '. יאללה!' : 'היום יום מנוחה. מגיע לך.'}</p>
     </section>
+
+    ${beltCard(st.workouts)}
 
     <div class="weekstrip">
       ${week.map(d => { const pid = plan()[d.day]; const p = pid && programById[pid]; return `<div class="wd ${d.today ? 'today' : ''} ${d.done ? 'done' : ''} ${d.past && !d.done && p ? 'missed' : ''}"><span>${DAY_NAMES[d.day].slice(0, 2)}</span><span class="e">${d.done ? '✅' : p ? p.emoji : '😴'}</span></div>`; }).join('')}
@@ -610,7 +613,8 @@ function donePhase() {
       <p class="muted">${cheer}</p>
       ${sum.starReasons.map(reason => `<p class="small">⭐ ${esc(reason)}</p>`).join('')}
     </section>
-    <div class="card center" style="border:2px solid var(--accent)"><b>${esc(perseveranceLine(st))}</b><div class="muted small" style="margin-top:4px">${rankOf(st.workouts).emoji} דרגה: ${rankOf(st.workouts).name}${rankOf(st.workouts).next ? ` · עוד ${rankOf(st.workouts).toNext} אימונים ל"${rankOf(st.workouts).next.name}"` : ''}</div></div>
+    <div class="card center" style="border:2px solid var(--accent)"><b>${esc(perseveranceLine(st))}</b></div>
+    ${beltCard(st.workouts, { previousWorkouts: st.workouts - 1 })}
     ${W.adjustMsg ? `<div class="card" style="border:2px solid var(--star)"><b>${esc(W.adjustMsg)}</b></div>` : ''}
     ${credits() ? `<div class="card row" style="border:2px solid var(--star)" data-go="#/arcade"><span style="font-size:30px">🔓</span><div class="grow"><b>פתחת ${credits()} משחקים חדשים לבחירה!</b></div></div>` : ''}
     <div class="tiles">
@@ -651,6 +655,7 @@ function history() {
   mount(`
   <div class="stack">
     <h1>המעקב שלי 📈</h1>
+    ${beltCard(st.workouts)}
     <div class="tiles">
       <div class="tile hot"><b>🔥 ${st.streak}</b>ימים ברצף</div>
       <div class="tile"><b>${st.thisWeek}</b>אימונים השבוע</div>
