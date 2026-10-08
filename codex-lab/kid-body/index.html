@@ -78,8 +78,12 @@
         <button data-stage="shaped" aria-pressed="false"><span class="step">02</span>צללית ובגד</button>
         <button data-stage="final" aria-pressed="true"><span class="step">03</span>קפלים וגימור</button>
       </div>
+      <h2>צפיפות הרשת להשוואה</h2>
+      <div class="controls" aria-label="בחירת צפיפות רשת">
+        <button data-detail="balanced" aria-pressed="true">מאוזנת</button><button data-detail="dense" aria-pressed="false">צפופה</button>
+      </div>
       <div class="rule"></div>
-      <dl><dt>משולשים בגוף ובבגד</dt><dd id="triangles">—</dd><dt>בניית המודל</dt><dd id="build">—</dd><dt>קצב רינדור חי</dt><dd id="fps">—</dd></dl>
+      <dl><dt>משולשים בגוף ובבגד</dt><dd id="triangles">—</dd><dt>קריאות ציור בפריים</dt><dd id="draw-calls">—</dd><dt>בניית המודל</dt><dd id="build">—</dd><dt>קצב רינדור חי</dt><dd id="fps">—</dd></dl>
       <p class="muted" style="margin-top:12px">המדידות המלאות בגודל טלפון נמצאות בתיעוד. הזמן כאן הוא לבנייה הנוכחית.</p>
       <div class="rule"></div>
       <h2>תחום הניסוי</h2>
@@ -97,7 +101,7 @@
       <div class="explanation" aria-live="polite"><h2 id="lesson-title">הפרטים עובדים בתוך הנפח</h2><p id="lesson-text">שקעים רחבים ורדודים מחליפים קווי קפל חדים. הבגד נשאר עבה ועגול, והמספר יושב על הקימור של החולצה.</p></div>
       <details class="reference" open>
         <summary>התוצאה מול תמונות היעד</summary>
-        <div class="content"><p class="muted">חזית, צד, גב וחזית חוזרת. ברפרנס אין מבט של שלושה רבעים. כפות הידיים מופיעות ביעד בלבד; הצבעים חופשיים.</p><a href="shots/comparison.png"><img src="shots/comparison.png" alt="ארבעה זוגות להשוואה בין חיתוכי הגוף מתמונת היעד לבין מודל המעבדה" loading="lazy" id="comparison"></a><p class="muted" style="margin:12px 0 0"><a href="../ref/מבטים - ילד מדף התלבושות.png (1).png">גיליון היעד המקורי</a> · <a href="shots/before-after.png">שלבי הבנייה זה לצד זה</a></p></div>
+        <div class="content"><p class="muted">חזית, צד, גב וחזית חוזרת. ברפרנס אין מבט של שלושה רבעים. כפות הידיים מופיעות ביעד בלבד; הצבעים חופשיים.</p><a href="shots/comparison.png"><img src="shots/comparison.png" alt="ארבעה זוגות להשוואה בין חיתוכי הגוף מתמונת היעד לבין מודל המעבדה" loading="lazy" id="comparison"></a><p class="muted" style="margin:12px 0 0"><a href="../ref/מבטים - ילד מדף התלבושות.png (1).png">גיליון היעד המקורי</a> · <a href="shots/before-after.png">שלבי הבנייה זה לצד זה</a> · <a href="shots/optimization.png">לפני ואחרי השיפור והפחתת המשולשים</a></p></div>
       </details>
     </section>
   </main>
