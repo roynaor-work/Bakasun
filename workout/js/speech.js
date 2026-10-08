@@ -1,6 +1,6 @@
 // דיבור בעברית: הקול של המכשיר (Web Speech API), עם בחירת הקול הטוב ביותר, קצב מכוון, וטקסטים מנוקדים.
 // למה ניקוד: מנועי הדיבור (גוגל באנדרואיד, "כרמית" באייפון) מנחשים הגייה של מילים בלי ניקוד וטועים. עם ניקוד הם קוראים נכון.
-import { store } from './store.js';
+import { store } from './store.js?v=20261008-together-1';
 
 const synth = window.speechSynthesis;
 let voices = [];
