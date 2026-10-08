@@ -1,0 +1,78 @@
+{
+  "round": 9,
+  "status": "manual-trace",
+  "reference": {
+    "present": false,
+    "image": "reference.png",
+    "dimensions": null,
+    "annotatedDimensions": [
+      1254,
+      1254
+    ],
+    "validatedROIs": {},
+    "error": null
+  },
+  "source": "Fresh preserved-r9 captures; same frozen contours as rounds 1–13",
+  "method": "Filled head silhouette; keep all model components; isotropic height normalization to 440 within 512 square, top aligned and bounding-box centered. Duplicate front views average before equal front/side/back weights.",
+  "threshold": 30,
+  "table": [
+    {
+      "view": "front",
+      "previousManualIoU": 0.898493455174117,
+      "freshManualIoU": 0.898493455174117,
+      "manualRecaptureDelta": 0,
+      "pixelIoU": null,
+      "pixelMinusManual": null,
+      "modelAspect": 1.0135922330097087,
+      "manualTargetAspect": 1.0476190476190477,
+      "pixelTargetAspect": null,
+      "disconnectedPixels": 0
+    },
+    {
+      "view": "side",
+      "previousManualIoU": 0.8790688933387769,
+      "freshManualIoU": 0.8790688933387769,
+      "manualRecaptureDelta": 0,
+      "pixelIoU": null,
+      "pixelMinusManual": null,
+      "modelAspect": 1.021868787276342,
+      "manualTargetAspect": 1.0275590551181102,
+      "pixelTargetAspect": null,
+      "disconnectedPixels": 140
+    },
+    {
+      "view": "back",
+      "previousManualIoU": 0.9025357964599098,
+      "freshManualIoU": 0.9025357964599098,
+      "manualRecaptureDelta": 0,
+      "pixelIoU": null,
+      "pixelMinusManual": null,
+      "modelAspect": 1.0357142857142858,
+      "manualTargetAspect": 1.0857142857142856,
+      "pixelTargetAspect": null,
+      "disconnectedPixels": 0
+    },
+    {
+      "view": "frontRepeat",
+      "previousManualIoU": 0.9043332544260743,
+      "freshManualIoU": 0.9043332544260743,
+      "manualRecaptureDelta": 0,
+      "pixelIoU": null,
+      "pixelMinusManual": null,
+      "modelAspect": 1.0135922330097087,
+      "manualTargetAspect": 1.0515873015873016,
+      "pixelTargetAspect": null,
+      "disconnectedPixels": 0
+    },
+    {
+      "view": "weightedMean",
+      "previousManualIoU": 0.8943393481995942,
+      "freshManualIoU": 0.8943393481995942,
+      "manualRecaptureDelta": 0,
+      "pixelIoU": null,
+      "pixelMinusManual": null
+    }
+  ],
+  "limitation": "אין reference.png בתיקייה ואין קובץ תמונה מצורף נגיש בהודעה הנוכחית. ההשוואה החזותית היא לבסיס r9; ציוני IoU הם מול הסימון הידני הקבוע של גיליון הראש הקודם בלבד. אין כאן מדידה מפיקסלי גיליון ההבעות.",
+  "pixelDeltaMeaning": "pixelMinusManual = fresh-r9 pixel-derived target IoU minus fresh-r9 frozen-manual-target IoU; null when no valid reference pixels are available."
+}

@@ -1,0 +1,184 @@
+{
+  "round": 9,
+  "status": "preserved-baseline",
+  "viewport": [
+    1024,
+    1024
+  ],
+  "camera": "Original orthographic ±2.25, elevation 0.08; fixed world lighting",
+  "views": [
+    "front",
+    "side",
+    "back",
+    "frontRepeat",
+    "threeQuarter"
+  ],
+  "parameters": {
+    "round": 9,
+    "version": "target-v1",
+    "hair": "ribbons",
+    "faceWidth": 0.99,
+    "faceHeight": 1,
+    "jawDepth": 1,
+    "hairWidth": 1.07,
+    "hairDepth": 1.1,
+    "crownHeight": 0.98,
+    "fringeSweep": 1,
+    "lockWidth": 1,
+    "spikeHeight": 0.9,
+    "decision": "r8 ירד: הרחבת הפנים פגעה בחזית ובגב. חוזרים לפנים צרות יותר ומרחיבים שיער ועורף בנפרד"
+  },
+  "triangleCounts": {
+    "full": {
+      "uniqueSurfaceTriangles": 194316,
+      "submittedMeshTriangles": 303080,
+      "meshCount": 155,
+      "uniqueGeometryCount": 89
+    },
+    "headOnly": {
+      "uniqueSurfaceTriangles": 184940,
+      "submittedMeshTriangles": 284968,
+      "meshCount": 150,
+      "uniqueGeometryCount": 86
+    },
+    "meaning": "uniqueSurfaceTriangles counts each shared geometry once; submittedMeshTriangles includes the inverted outline shell. Counts are scene geometry submissions, not fragment work or measured FPS."
+  },
+  "featureDimensions": {
+    "units": "model local units; ellipsoid full diameters before eye/ear group rotation",
+    "eyeOutline": [
+      0.452,
+      0.498,
+      0.156
+    ],
+    "eyeWhite": [
+      0.416,
+      0.456,
+      0.15
+    ],
+    "iris": [
+      0.244,
+      0.328,
+      0.058
+    ],
+    "pupil": [
+      0.142,
+      0.232,
+      0.036
+    ],
+    "earOuter": [
+      0.41,
+      0.46,
+      0.27
+    ],
+    "earInner": [
+      0.23,
+      0.29,
+      0.068
+    ],
+    "headProfileWidth": 1.5246,
+    "headProfileHeight": 1.95,
+    "eyeCenter": [
+      0.33165,
+      -0.23,
+      0.575
+    ],
+    "earGroupCenter": [
+      0.7722,
+      -0.45,
+      -0.025
+    ],
+    "eyeYRotationRadians": 0.21,
+    "earZRotationRadians": 0.17
+  },
+  "browserVersion": "151.0.7922.173",
+  "executablePath": "/usr/bin/chromium",
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 1,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "warmupMs": 700,
+    "sampleMs": 4107.599999999977,
+    "frames": 12,
+    "fps": 2.921413964358766,
+    "medianFrameMs": 360.5,
+    "p95FrameMs": 779.0999999999767,
+    "gpuFinish": true,
+    "method": "requestAnimationFrame, one original full-r9 front render per frame plus gl.finish(); 700ms warmup and >=3000ms / >=12 measured intervals; software browser result, not physical-phone FPS"
+  },
+  "errors": [],
+  "captures": {
+    "front.png": {
+      "sha256": "cf1b9a1ccf9d7b79bec692ed1399127024cc5266ce9b209542285a462ca7a79e",
+      "width": 1024,
+      "height": 1024,
+      "changedPixelsFromOriginal": 0,
+      "maxChannelDifference": 0
+    },
+    "front-head.png": {
+      "sha256": "000a31e4e89af1f8d84e51b418cf8ef6002879ba4b00d3031229c2bb855a03d6",
+      "width": 1024,
+      "height": 1024,
+      "changedPixelsFromOriginal": 0,
+      "maxChannelDifference": 0
+    },
+    "side.png": {
+      "sha256": "b4949da6bb77112d42bfd945edf923fffb906aa935d0fc05171365a1275901cc",
+      "width": 1024,
+      "height": 1024,
+      "changedPixelsFromOriginal": 0,
+      "maxChannelDifference": 0
+    },
+    "side-head.png": {
+      "sha256": "9aa11a0b1ce2f6d3077a86d7e8b6b048528ed51f79e9d8a33351669deb3cb811",
+      "width": 1024,
+      "height": 1024,
+      "changedPixelsFromOriginal": 0,
+      "maxChannelDifference": 0
+    },
+    "back.png": {
+      "sha256": "09916e5605e8fc0fd29e3f52b4c7f6dbd0dea558aaa06458d0bb737843ab54b8",
+      "width": 1024,
+      "height": 1024,
+      "changedPixelsFromOriginal": 0,
+      "maxChannelDifference": 0
+    },
+    "back-head.png": {
+      "sha256": "a0aff8e93a1dc1ef393315d63749a076182668fad2be16835134ea3a19d5b598",
+      "width": 1024,
+      "height": 1024,
+      "changedPixelsFromOriginal": 0,
+      "maxChannelDifference": 0
+    },
+    "frontRepeat.png": {
+      "sha256": "cf1b9a1ccf9d7b79bec692ed1399127024cc5266ce9b209542285a462ca7a79e",
+      "width": 1024,
+      "height": 1024,
+      "changedPixelsFromOriginal": 0,
+      "maxChannelDifference": 0
+    },
+    "frontRepeat-head.png": {
+      "sha256": "000a31e4e89af1f8d84e51b418cf8ef6002879ba4b00d3031229c2bb855a03d6",
+      "width": 1024,
+      "height": 1024,
+      "changedPixelsFromOriginal": 0,
+      "maxChannelDifference": 0
+    },
+    "threeQuarter.png": {
+      "sha256": "33be4647198443ee78615faa660f675229255a7a2161fbd30dd103884166fed7",
+      "width": 1024,
+      "height": 1024,
+      "changedPixelsFromOriginal": 0,
+      "maxChannelDifference": 0
+    },
+    "threeQuarter-head.png": {
+      "sha256": "d687527e728d4a906ce2cb943f1b703824cc1b0dd749ea28f7c456e8c8ee2796",
+      "width": 1024,
+      "height": 1024,
+      "changedPixelsFromOriginal": 0,
+      "maxChannelDifference": 0
+    }
+  }
+}

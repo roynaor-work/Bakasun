@@ -1,0 +1,611 @@
+{
+  "viewport": [
+    1024,
+    1024
+  ],
+  "camera": "Orthographic vertical span 4.5; elevation 0.08; target (0,.13,0); model translation y=.25",
+  "lighting": "Hemisphere 2; key 3 at (-3,6,5); fill 1 at (4,2,-3), fixed in world",
+  "comparison": "Visual review against preserved round 9. Silhouette IoU below is against round 9, NOT against the unavailable expression reference.",
+  "views": [
+    "front",
+    "side",
+    "back",
+    "threeQuarter"
+  ],
+  "expressions": [
+    {
+      "id": "happy",
+      "label": "שמח",
+      "parameters": {
+        "eyeOpen": 0.95,
+        "wink": 0,
+        "gazeX": 0,
+        "gazeY": 0,
+        "browRaise": 0.25,
+        "browTilt": 0,
+        "browAsym": 0,
+        "cheekPuff": 0.38,
+        "cheekLift": 0.8,
+        "jawOpen": 0.46,
+        "chinTight": 0,
+        "mouthOpen": 0.21,
+        "mouthWidth": 0.31,
+        "smile": 0.95,
+        "mouthShift": 0,
+        "clench": 0,
+        "tongue": 0.72
+      },
+      "silhouetteVsR9": {
+        "front": {
+          "iou": 0.9431065941798843,
+          "aspect": 1.01364522417154,
+          "disconnectedPixels": 0
+        },
+        "side": {
+          "iou": 0.9455752940208899,
+          "aspect": 1,
+          "disconnectedPixels": 0
+        },
+        "back": {
+          "iou": 0.9541418758693374,
+          "aspect": 1.0176125244618395,
+          "disconnectedPixels": 0
+        },
+        "threeQuarter": {
+          "iou": 0.9350505668432493,
+          "aspect": 1.017509727626459,
+          "disconnectedPixels": 0
+        }
+      },
+      "render": {
+        "triangles": 134680,
+        "calls": 53,
+        "geometries": 48,
+        "textures": 2,
+        "fps": 0,
+        "width": 1024,
+        "height": 1024,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 4.5,
+          "vertical": 4.5
+        },
+        "expression": "happy",
+        "view": "threeQuarter",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false
+      }
+    },
+    {
+      "id": "effort",
+      "label": "מאמץ",
+      "parameters": {
+        "eyeOpen": 0.48,
+        "wink": 0,
+        "gazeX": 0,
+        "gazeY": 0,
+        "browRaise": -0.38,
+        "browTilt": 0.96,
+        "browAsym": 0,
+        "cheekPuff": 1,
+        "cheekLift": 0.32,
+        "jawOpen": 0.12,
+        "chinTight": 1,
+        "mouthOpen": 0.105,
+        "mouthWidth": 0.245,
+        "smile": -0.28,
+        "mouthShift": 0,
+        "clench": 1,
+        "tongue": 0
+      },
+      "silhouetteVsR9": {
+        "front": {
+          "iou": 0.9425514302357666,
+          "aspect": 1.0358565737051793,
+          "disconnectedPixels": 0
+        },
+        "side": {
+          "iou": 0.965307963585664,
+          "aspect": 1.0178571428571428,
+          "disconnectedPixels": 0
+        },
+        "back": {
+          "iou": 0.9689432273895342,
+          "aspect": 1.0358565737051793,
+          "disconnectedPixels": 0
+        },
+        "threeQuarter": {
+          "iou": 0.947288109402766,
+          "aspect": 1.0397614314115309,
+          "disconnectedPixels": 0
+        }
+      },
+      "render": {
+        "triangles": 134296,
+        "calls": 51,
+        "geometries": 49,
+        "textures": 2,
+        "fps": 0,
+        "width": 1024,
+        "height": 1024,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 4.5,
+          "vertical": 4.5
+        },
+        "expression": "effort",
+        "view": "threeQuarter",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false
+      }
+    },
+    {
+      "id": "surprised",
+      "label": "מופתע",
+      "parameters": {
+        "eyeOpen": 1.19,
+        "wink": 0,
+        "gazeX": 0,
+        "gazeY": 0,
+        "browRaise": 0.94,
+        "browTilt": -0.05,
+        "browAsym": 0,
+        "cheekPuff": 0.04,
+        "cheekLift": 0,
+        "jawOpen": 1,
+        "chinTight": 0,
+        "mouthOpen": 0.32,
+        "mouthWidth": 0.15,
+        "smile": 0,
+        "mouthShift": 0,
+        "clench": 0,
+        "tongue": 0.12
+      },
+      "silhouetteVsR9": {
+        "front": {
+          "iou": 0.9230783699059562,
+          "aspect": 0.9867172675521821,
+          "disconnectedPixels": 0
+        },
+        "side": {
+          "iou": 0.9103219878774581,
+          "aspect": 0.9734345351043643,
+          "disconnectedPixels": 0
+        },
+        "back": {
+          "iou": 0.9231948866110917,
+          "aspect": 0.9904761904761905,
+          "disconnectedPixels": 0
+        },
+        "threeQuarter": {
+          "iou": 0.9059177008491183,
+          "aspect": 0.990530303030303,
+          "disconnectedPixels": 0
+        }
+      },
+      "render": {
+        "triangles": 134392,
+        "calls": 51,
+        "geometries": 49,
+        "textures": 2,
+        "fps": 0,
+        "width": 1024,
+        "height": 1024,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 4.5,
+          "vertical": 4.5
+        },
+        "expression": "surprised",
+        "view": "threeQuarter",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false
+      }
+    },
+    {
+      "id": "victory",
+      "label": "ניצחון",
+      "parameters": {
+        "eyeOpen": 0.94,
+        "wink": 0.91,
+        "gazeX": 0,
+        "gazeY": 0,
+        "browRaise": 0.42,
+        "browTilt": 0,
+        "browAsym": 0.65,
+        "cheekPuff": 0.45,
+        "cheekLift": 1,
+        "jawOpen": 0.45,
+        "chinTight": 0,
+        "mouthOpen": 0.19,
+        "mouthWidth": 0.34,
+        "smile": 1,
+        "mouthShift": 0.015,
+        "clench": 0,
+        "tongue": 0.52
+      },
+      "silhouetteVsR9": {
+        "front": {
+          "iou": 0.9429432608655037,
+          "aspect": 1.01364522417154,
+          "disconnectedPixels": 0
+        },
+        "side": {
+          "iou": 0.9452790876192565,
+          "aspect": 1,
+          "disconnectedPixels": 5
+        },
+        "back": {
+          "iou": 0.9538597286731455,
+          "aspect": 1.0176125244618395,
+          "disconnectedPixels": 0
+        },
+        "threeQuarter": {
+          "iou": 0.9377761006616657,
+          "aspect": 1.0194931773879143,
+          "disconnectedPixels": 0
+        }
+      },
+      "render": {
+        "triangles": 133240,
+        "calls": 51,
+        "geometries": 49,
+        "textures": 2,
+        "fps": 0,
+        "width": 1024,
+        "height": 1024,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 4.5,
+          "vertical": 4.5
+        },
+        "expression": "victory",
+        "view": "threeQuarter",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false
+      }
+    },
+    {
+      "id": "tired",
+      "label": "עייף ומרוצה",
+      "parameters": {
+        "eyeOpen": 0.5,
+        "wink": 0,
+        "gazeX": 0,
+        "gazeY": -0.3,
+        "browRaise": -0.28,
+        "browTilt": -0.25,
+        "browAsym": 0,
+        "cheekPuff": 0.18,
+        "cheekLift": 0.3,
+        "jawOpen": 0,
+        "chinTight": 0,
+        "mouthOpen": 0.008,
+        "mouthWidth": 0.205,
+        "smile": 0.69,
+        "mouthShift": 0,
+        "clench": 0,
+        "tongue": 0
+      },
+      "silhouetteVsR9": {
+        "front": {
+          "iou": 0.9428420800971022,
+          "aspect": 1.0379241516966067,
+          "disconnectedPixels": 0
+        },
+        "side": {
+          "iou": 0.9674339300937767,
+          "aspect": 1.0239520958083832,
+          "disconnectedPixels": 0
+        },
+        "back": {
+          "iou": 0.9686622500455844,
+          "aspect": 1.0420841683366733,
+          "disconnectedPixels": 0
+        },
+        "threeQuarter": {
+          "iou": 0.9471510402907273,
+          "aspect": 1.0418326693227091,
+          "disconnectedPixels": 0
+        }
+      },
+      "render": {
+        "triangles": 134200,
+        "calls": 52,
+        "geometries": 49,
+        "textures": 2,
+        "fps": 0,
+        "width": 1024,
+        "height": 1024,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 4.5,
+          "vertical": 4.5
+        },
+        "expression": "tired",
+        "view": "threeQuarter",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false
+      }
+    },
+    {
+      "id": "thinking",
+      "label": "מחשבה",
+      "parameters": {
+        "eyeOpen": 0.78,
+        "wink": 0,
+        "gazeX": -0.65,
+        "gazeY": 0.48,
+        "browRaise": 0.12,
+        "browTilt": -0.27,
+        "browAsym": 1,
+        "cheekPuff": 0.34,
+        "cheekLift": 0.08,
+        "jawOpen": 0,
+        "chinTight": 0.34,
+        "mouthOpen": 0.008,
+        "mouthWidth": 0.15,
+        "smile": -0.35,
+        "mouthShift": 0.048,
+        "clench": 0,
+        "tongue": 0
+      },
+      "silhouetteVsR9": {
+        "front": {
+          "iou": 0.9428497860392119,
+          "aspect": 1.0379241516966067,
+          "disconnectedPixels": 0
+        },
+        "side": {
+          "iou": 0.9677731711308712,
+          "aspect": 1.0239520958083832,
+          "disconnectedPixels": 0
+        },
+        "back": {
+          "iou": 0.9686622500455844,
+          "aspect": 1.0420841683366733,
+          "disconnectedPixels": 0
+        },
+        "threeQuarter": {
+          "iou": 0.945603198375102,
+          "aspect": 1.0439121756487026,
+          "disconnectedPixels": 0
+        }
+      },
+      "render": {
+        "triangles": 133912,
+        "calls": 50,
+        "geometries": 49,
+        "textures": 2,
+        "fps": 0,
+        "width": 1024,
+        "height": 1024,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 4.5,
+          "vertical": 4.5
+        },
+        "expression": "thinking",
+        "view": "threeQuarter",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false
+      }
+    }
+  ],
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 1,
+    "browser": "151.0.7922.173",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    "method": "requestAnimationFrame intervals after 700ms warm-up, at least 3000ms and 12 measured intervals; gl.finish after render; local headless Chromium SwiftShader, phone-sized viewport, NOT physical-phone FPS",
+    "expressions": [
+      {
+        "id": "happy",
+        "triangles": 134680,
+        "calls": 53,
+        "geometries": 48,
+        "textures": 2,
+        "fps": 6.195988912440893,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 2.8,
+          "vertical": 6.059487179487179
+        },
+        "expression": "happy",
+        "view": "front",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false,
+        "frames": 19,
+        "durationMs": 3066.5,
+        "medianFrameMs": 150.10000000000036,
+        "p95FrameMs": 400,
+        "meanSubmitMs": 2.925000001117587,
+        "transition": false
+      },
+      {
+        "id": "effort",
+        "triangles": 134296,
+        "calls": 51,
+        "geometries": 49,
+        "textures": 2,
+        "fps": 6.417455478902615,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 2.8,
+          "vertical": 6.059487179487179
+        },
+        "expression": "effort",
+        "view": "front",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false,
+        "frames": 20,
+        "durationMs": 3116.5,
+        "medianFrameMs": 166.60000000000036,
+        "p95FrameMs": 300,
+        "meanSubmitMs": 1.276190477112929,
+        "transition": false
+      },
+      {
+        "id": "surprised",
+        "triangles": 134392,
+        "calls": 51,
+        "geometries": 49,
+        "textures": 2,
+        "fps": 6.811105345096006,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 2.8,
+          "vertical": 6.059487179487179
+        },
+        "expression": "surprised",
+        "view": "front",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false,
+        "frames": 21,
+        "durationMs": 3083.199999999999,
+        "medianFrameMs": 133.3000000000011,
+        "p95FrameMs": 300,
+        "meanSubmitMs": 3.0227272730659354,
+        "transition": false
+      },
+      {
+        "id": "victory",
+        "triangles": 133240,
+        "calls": 51,
+        "geometries": 49,
+        "textures": 2,
+        "fps": 6.129229975160486,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 2.8,
+          "vertical": 6.059487179487179
+        },
+        "expression": "victory",
+        "view": "front",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false,
+        "frames": 19,
+        "durationMs": 3099.9000000000015,
+        "medianFrameMs": 166.60000000000036,
+        "p95FrameMs": 333.2999999999993,
+        "meanSubmitMs": 1.3599999997764827,
+        "transition": false
+      },
+      {
+        "id": "tired",
+        "triangles": 134200,
+        "calls": 52,
+        "geometries": 49,
+        "textures": 2,
+        "fps": 6.162228780851686,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 2.8,
+          "vertical": 6.059487179487179
+        },
+        "expression": "tired",
+        "view": "front",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false,
+        "frames": 19,
+        "durationMs": 3083.2999999999993,
+        "medianFrameMs": 166.59999999999854,
+        "p95FrameMs": 449.90000000000146,
+        "meanSubmitMs": 1.730000000819564,
+        "transition": false
+      },
+      {
+        "id": "thinking",
+        "triangles": 133912,
+        "calls": 50,
+        "geometries": 49,
+        "textures": 2,
+        "fps": 5.869692819409121,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "cameraSpan": {
+          "horizontal": 2.8,
+          "vertical": 6.059487179487179
+        },
+        "expression": "thinking",
+        "view": "front",
+        "blend": 0,
+        "headOnly": false,
+        "playing": false,
+        "frames": 18,
+        "durationMs": 3066.5999999999985,
+        "medianFrameMs": 166.70000000000073,
+        "p95FrameMs": 366.7000000000007,
+        "meanSubmitMs": 3.1631578948152694,
+        "transition": false
+      }
+    ],
+    "transition": {
+      "triangles": 134680,
+      "calls": 53,
+      "geometries": 49,
+      "textures": 2,
+      "fps": 5.966982695750185,
+      "width": 390,
+      "height": 844,
+      "pixelRatio": 1,
+      "cameraSpan": {
+        "horizontal": 2.8,
+        "vertical": 6.059487179487179
+      },
+      "expression": "happy",
+      "view": "front",
+      "blend": 0.07910323212558373,
+      "headOnly": false,
+      "playing": false,
+      "frames": 18,
+      "durationMs": 3016.5999999999985,
+      "medianFrameMs": 150,
+      "p95FrameMs": 483.3999999999978,
+      "meanSubmitMs": 4.178947368734761,
+      "transition": true
+    },
+    "layout": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "canvases": 1
+    },
+    "controls": {
+      "expressionSelection": true,
+      "viewSelection": true,
+      "keyboardBlend": true,
+      "playPause": true,
+      "reducedMotionStopsPlayback": true
+    }
+  },
+  "errors": [],
+  "externalRequests": []
+}

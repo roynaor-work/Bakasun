@@ -1,0 +1,42 @@
+{
+  "algorithm": "sha256",
+  "description": "Exact pre-change round 9 source and existing captures; immutable comparison basis",
+  "hashes": {
+    "source": {
+      "model.mjs": "097d8ed72384a87f216d367bb0fddf649febcce85e2603cdde484d2f7cf08fee",
+      "scene.mjs": "f4a0f806b12022ed74a4770ecc4e00cd4fb906250081d902db0bb3f57203910b",
+      "three.module.js": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+      "index.html": "4b74dea8108a1faef69e433909fe6d76ad8fe38a7c254ed09fb22994865ac77b",
+      "rounds.json": "40306f17fe07f0ce56e6401aa5c1984b98ecb011c249b85129639fbea8925612",
+      "target.json": "92b67562452945a6e05e3396e96c7dd7ba3af5a2c911087cd73f128338eb652d",
+      "contours.json": "9318312fc74d6c26e22a923b1586d631ddbcd3a35856aebe689b23a744df5d1b",
+      "capture.mjs": "b204b017a88bc9ddf1faa5c1087e88bd9fd925840314b24117e37856b0d68483",
+      "silhouette.mjs": "bf434623e91349d456d31dbccf187119f5bdb63aa32a2317f0ebfa967f911010",
+      "measure.mjs": "a3c8fedab64db17150cdea29d9e138d53735dbfd517055ccc038d9a3c478a8b2"
+    },
+    "original": {
+      "back-head.png": "a0aff8e93a1dc1ef393315d63749a076182668fad2be16835134ea3a19d5b598",
+      "back-mask.png": "c6252eaed87368befa27da73fcb4d321db28efd0851cc0d4708e2c5e612babb9",
+      "back.png": "09916e5605e8fc0fd29e3f52b4c7f6dbd0dea558aaa06458d0bb737843ab54b8",
+      "capture.json": "0d7dd7c345376de56379bde676324811d7a2bf34c24dc5d46a54b7e8c026a09a",
+      "front-head.png": "000a31e4e89af1f8d84e51b418cf8ef6002879ba4b00d3031229c2bb855a03d6",
+      "front-mask.png": "a8e938bc76b5c9d21071be12b16eced1542d89f903cdbf45f40ecf3119d02f8c",
+      "front.png": "cf1b9a1ccf9d7b79bec692ed1399127024cc5266ce9b209542285a462ca7a79e",
+      "frontRepeat-head.png": "000a31e4e89af1f8d84e51b418cf8ef6002879ba4b00d3031229c2bb855a03d6",
+      "frontRepeat-mask.png": "a8e938bc76b5c9d21071be12b16eced1542d89f903cdbf45f40ecf3119d02f8c",
+      "frontRepeat.png": "cf1b9a1ccf9d7b79bec692ed1399127024cc5266ce9b209542285a462ca7a79e",
+      "parameters.json": "d1854ebc1dab929776fa718433581509e735d5772a8b58d47c7cb9f71cef5b9d",
+      "side-head.png": "9aa11a0b1ce2f6d3077a86d7e8b6b048528ed51f79e9d8a33351669deb3cb811",
+      "side-mask.png": "eaf068639a6453e1b14ec0316ca7e3b467bb33044738417a41a9ff26df45ca25",
+      "side.png": "b4949da6bb77112d42bfd945edf923fffb906aa935d0fc05171365a1275901cc",
+      "threeQuarter-head.png": "d687527e728d4a906ce2cb943f1b703824cc1b0dd749ea28f7c456e8c8ee2796",
+      "threeQuarter.png": "33be4647198443ee78615faa660f675229255a7a2161fbd30dd103884166fed7",
+      "metrics.json": "153eb2fbd33ace8693d30ac87a36d4d62820159b435990023bc425986e0445bb"
+    }
+  },
+  "sourceStorage": {
+    "archivedDirectory": "source/",
+    "canonicalVendor": "../../../three.module.js relative to baseline-r9; baseline.mjs validates its saved SHA256 before replay",
+    "note": "The vendor hash is preserved without storing a duplicate three.module.js. Pre-change source digests include metric utilities for provenance."
+  }
+}
