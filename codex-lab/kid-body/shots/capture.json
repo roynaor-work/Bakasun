@@ -1,0 +1,3153 @@
+{
+  "capturedAt": "2026-10-08T10:04:42.164Z",
+  "screenshotContext": {
+    "viewport": {
+      "width": 420,
+      "height": 600
+    },
+    "deviceScaleFactor": 1
+  },
+  "browser": {
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "devicePixelRatio": 2
+    },
+    "deviceScaleFactor": 2,
+    "browser": "151.0.7922.173",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+    "hardwareConcurrency": 3,
+    "drawingBuffer": {
+      "width": 780,
+      "height": 1688
+    },
+    "gpu": {
+      "vendor": "Google Inc. (Google)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "executablePath": "/usr/bin/chromium",
+    "launchFlags": [
+      "--use-gl=angle",
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--no-sandbox"
+    ],
+    "softwareRendering": true,
+    "physicalPhone": false
+  },
+  "source": {
+    "file": "../ref/מבטים - ילד מדף התלבושות.png (1).png",
+    "sha256": "c25850f5f3cbc53d2309e7779485868e710b12511b725787a44ca5463d4821b6",
+    "pixelAccess": true,
+    "size": {
+      "width": 1254,
+      "height": 1254
+    },
+    "crop": {
+      "top": 518,
+      "bottom": 884
+    },
+    "views": [
+      {
+        "name": "front",
+        "label": "חזית",
+        "left": 15,
+        "right": 310
+      },
+      {
+        "name": "side",
+        "label": "צד",
+        "left": 330,
+        "right": 610
+      },
+      {
+        "name": "back",
+        "label": "גב",
+        "left": 620,
+        "right": 915
+      },
+      {
+        "name": "frontRepeat",
+        "label": "חזית חוזרת בגיליון — אין יעד לשלושה רבעים",
+        "left": 935,
+        "right": 1240
+      }
+    ]
+  },
+  "artifacts": [
+    "front.png",
+    "side.png",
+    "back.png",
+    "three-quarter.png",
+    "coral.png",
+    "stages/blockout-front.png",
+    "stages/shaped-front.png",
+    "stages/final-front.png",
+    "phone-front.png",
+    "phone.png",
+    "comparison.png",
+    "before-after.png"
+  ],
+  "viewMetrics": {
+    "front": {
+      "stage": "final",
+      "palette": "blue",
+      "view": "front",
+      "experiment": null,
+      "modelTriangles": 59920,
+      "sceneTriangles": 59922,
+      "buildTimeMs": 73.30000000074506,
+      "modelStats": {
+        "triangles": 59920,
+        "meshes": 31,
+        "vertices": 31954,
+        "buildMs": 73.30000000074506,
+        "stage": "final",
+        "palette": "blue"
+      },
+      "parts": [
+        "torso",
+        "neck",
+        "jersey",
+        "collar",
+        "hem",
+        "arm",
+        "wrist-port",
+        "sleeve",
+        "cuff",
+        "shorts",
+        "stripe",
+        "leg",
+        "sock",
+        "ankle-port",
+        "number"
+      ],
+      "parameters": {
+        "headUnit": 1,
+        "ankleY": 0.1,
+        "neckTopY": 1.6,
+        "bodyHeight": 1.5,
+        "virtualHeadHeight": 1,
+        "virtualShoeClearance": 0.15,
+        "virtualTotalHeadUnits": 2.65,
+        "bodyLandmarks": [
+          {
+            "y": 0.08,
+            "finalY": 0.1
+          },
+          {
+            "y": 0.49,
+            "finalY": 0.46
+          },
+          {
+            "y": 0.641,
+            "finalY": 0.57
+          },
+          {
+            "y": 0.918,
+            "finalY": 0.856
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          },
+          {
+            "y": 1.67,
+            "finalY": 1.6
+          }
+        ],
+        "armLandmarks": [
+          {
+            "y": 0.7,
+            "finalY": 0.72
+          },
+          {
+            "y": 0.79,
+            "finalY": 0.8
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          }
+        ],
+        "shirtRows": [
+          {
+            "y": 0.918,
+            "rx": 0.32,
+            "rz": 0.197
+          },
+          {
+            "y": 0.948,
+            "rx": 0.331,
+            "rz": 0.203
+          },
+          {
+            "y": 1.04,
+            "rx": 0.316,
+            "rz": 0.196
+          },
+          {
+            "y": 1.19,
+            "rx": 0.304,
+            "rz": 0.195
+          },
+          {
+            "y": 1.34,
+            "rx": 0.308,
+            "rz": 0.203
+          },
+          {
+            "y": 1.44,
+            "rx": 0.319,
+            "rz": 0.195
+          },
+          {
+            "y": 1.49,
+            "rx": 0.281,
+            "rz": 0.16
+          }
+        ],
+        "armRows": [
+          {
+            "y": 0.79,
+            "x": 0.496,
+            "z": 0.01,
+            "rx": 0.065,
+            "rz": 0.068
+          },
+          {
+            "y": 0.842,
+            "x": 0.494,
+            "z": 0.01,
+            "rx": 0.073,
+            "rz": 0.074
+          },
+          {
+            "y": 0.96,
+            "x": 0.465,
+            "z": 0.003,
+            "rx": 0.085,
+            "rz": 0.083
+          },
+          {
+            "y": 1.065,
+            "x": 0.441,
+            "z": -0.003,
+            "rx": 0.092,
+            "rz": 0.094
+          },
+          {
+            "y": 1.19,
+            "x": 0.387,
+            "z": 0,
+            "rx": 0.1,
+            "rz": 0.105
+          },
+          {
+            "y": 1.33,
+            "x": 0.335,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.119
+          },
+          {
+            "y": 1.445,
+            "x": 0.263,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.128
+          }
+        ],
+        "sleeveRows": [
+          {
+            "y": 1.206,
+            "x": 0.382,
+            "z": 0,
+            "rx": 0.124,
+            "rz": 0.136
+          },
+          {
+            "y": 1.231,
+            "x": 0.375,
+            "z": 0,
+            "rx": 0.128,
+            "rz": 0.139
+          },
+          {
+            "y": 1.31,
+            "x": 0.343,
+            "z": 0,
+            "rx": 0.141,
+            "rz": 0.151
+          },
+          {
+            "y": 1.39,
+            "x": 0.304,
+            "z": 0,
+            "rx": 0.146,
+            "rz": 0.156
+          },
+          {
+            "y": 1.446,
+            "x": 0.254,
+            "z": 0,
+            "rx": 0.135,
+            "rz": 0.147
+          },
+          {
+            "y": 1.469,
+            "x": 0.221,
+            "z": 0,
+            "rx": 0.08,
+            "rz": 0.091
+          },
+          {
+            "y": 1.486,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.001,
+            "rz": 0.001
+          }
+        ],
+        "legRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.092,
+            "rz": 0.09
+          },
+          {
+            "y": 0.2,
+            "x": 0.197,
+            "z": 0.001,
+            "rx": 0.099,
+            "rz": 0.102
+          },
+          {
+            "y": 0.37,
+            "x": 0.19,
+            "z": 0,
+            "rx": 0.122,
+            "rz": 0.114
+          },
+          {
+            "y": 0.48,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.109,
+            "rz": 0.108
+          },
+          {
+            "y": 0.56,
+            "x": 0.18,
+            "z": 0.002,
+            "rx": 0.117,
+            "rz": 0.117
+          },
+          {
+            "y": 0.68,
+            "x": 0.169,
+            "z": 0,
+            "rx": 0.136,
+            "rz": 0.138
+          },
+          {
+            "y": 0.84,
+            "x": 0.163,
+            "z": -0.001,
+            "rx": 0.126,
+            "rz": 0.121
+          }
+        ],
+        "sockRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.096,
+            "rz": 0.096
+          },
+          {
+            "y": 0.115,
+            "x": 0.198,
+            "z": -0.005,
+            "rx": 0.098,
+            "rz": 0.099
+          },
+          {
+            "y": 0.27,
+            "x": 0.194,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.115
+          },
+          {
+            "y": 0.35,
+            "x": 0.191,
+            "z": 0,
+            "rx": 0.13,
+            "rz": 0.122
+          },
+          {
+            "y": 0.43,
+            "x": 0.187,
+            "z": 0,
+            "rx": 0.118,
+            "rz": 0.115
+          },
+          {
+            "y": 0.484,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.113
+          },
+          {
+            "y": 0.49,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.112,
+            "rz": 0.11
+          }
+        ],
+        "shirtRadialSegments": 64,
+        "shirtHeightSegments": 58,
+        "limbRadialSegments": 48,
+        "shortsRadialSegments": 64,
+        "clothClearance": {
+          "radial": 0.031,
+          "depth": 0.022
+        },
+        "foldAmplitude": {
+          "underarm": 0.012,
+          "waist": 0.009,
+          "knee": 0.006
+        },
+        "foldWidths": {
+          "underarm": 0.044,
+          "waist": 0.035,
+          "knee": 0.05
+        },
+        "collarAuthoringSpan": 0.043,
+        "collarSurfaceOffset": 0.0015,
+        "cuffHeight": 0.035,
+        "bumpScale": 0.00045,
+        "coordinateSystem": "+Y up, +Z front; body stops at flat wrist and ankle ports"
+      },
+      "camera": {
+        "position": [
+          0,
+          0.875,
+          6
+        ],
+        "target": [
+          0,
+          0.875,
+          0
+        ],
+        "height": 2.12,
+        "minimumWidth": 1.34,
+        "near": 0.1,
+        "far": 30,
+        "frustum": {
+          "left": -0.742,
+          "right": 0.742,
+          "top": 1.06,
+          "bottom": -1.06
+        }
+      },
+      "lights": {
+        "key": {
+          "position": [
+            -3,
+            4.5,
+            5
+          ],
+          "color": 16773857,
+          "intensity": 3.1
+        },
+        "fill": {
+          "position": [
+            3,
+            2,
+            3
+          ],
+          "color": 14937599,
+          "intensity": 1.35
+        },
+        "rim": {
+          "position": [
+            1,
+            3,
+            -4
+          ],
+          "color": 16774629,
+          "intensity": 2
+        },
+        "hemisphere": {
+          "sky": 16774635,
+          "ground": 10332350,
+          "intensity": 1
+        }
+      },
+      "pixelRatio": 1,
+      "canvas": {
+        "width": 420,
+        "height": 600,
+        "drawingWidth": 420,
+        "drawingHeight": 600
+      },
+      "projection": {
+        "neckY": 94.81132075471697,
+        "ankleY": 519.3396226415093,
+        "centerX": 210
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "threeRevision": "160"
+    },
+    "side": {
+      "stage": "final",
+      "palette": "blue",
+      "view": "side",
+      "experiment": null,
+      "modelTriangles": 59920,
+      "sceneTriangles": 59922,
+      "buildTimeMs": 89.60000000149012,
+      "modelStats": {
+        "triangles": 59920,
+        "meshes": 31,
+        "vertices": 31954,
+        "buildMs": 89.60000000149012,
+        "stage": "final",
+        "palette": "blue"
+      },
+      "parts": [
+        "torso",
+        "neck",
+        "jersey",
+        "collar",
+        "hem",
+        "arm",
+        "wrist-port",
+        "sleeve",
+        "cuff",
+        "shorts",
+        "stripe",
+        "leg",
+        "sock",
+        "ankle-port",
+        "number"
+      ],
+      "parameters": {
+        "headUnit": 1,
+        "ankleY": 0.1,
+        "neckTopY": 1.6,
+        "bodyHeight": 1.5,
+        "virtualHeadHeight": 1,
+        "virtualShoeClearance": 0.15,
+        "virtualTotalHeadUnits": 2.65,
+        "bodyLandmarks": [
+          {
+            "y": 0.08,
+            "finalY": 0.1
+          },
+          {
+            "y": 0.49,
+            "finalY": 0.46
+          },
+          {
+            "y": 0.641,
+            "finalY": 0.57
+          },
+          {
+            "y": 0.918,
+            "finalY": 0.856
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          },
+          {
+            "y": 1.67,
+            "finalY": 1.6
+          }
+        ],
+        "armLandmarks": [
+          {
+            "y": 0.7,
+            "finalY": 0.72
+          },
+          {
+            "y": 0.79,
+            "finalY": 0.8
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          }
+        ],
+        "shirtRows": [
+          {
+            "y": 0.918,
+            "rx": 0.32,
+            "rz": 0.197
+          },
+          {
+            "y": 0.948,
+            "rx": 0.331,
+            "rz": 0.203
+          },
+          {
+            "y": 1.04,
+            "rx": 0.316,
+            "rz": 0.196
+          },
+          {
+            "y": 1.19,
+            "rx": 0.304,
+            "rz": 0.195
+          },
+          {
+            "y": 1.34,
+            "rx": 0.308,
+            "rz": 0.203
+          },
+          {
+            "y": 1.44,
+            "rx": 0.319,
+            "rz": 0.195
+          },
+          {
+            "y": 1.49,
+            "rx": 0.281,
+            "rz": 0.16
+          }
+        ],
+        "armRows": [
+          {
+            "y": 0.79,
+            "x": 0.496,
+            "z": 0.01,
+            "rx": 0.065,
+            "rz": 0.068
+          },
+          {
+            "y": 0.842,
+            "x": 0.494,
+            "z": 0.01,
+            "rx": 0.073,
+            "rz": 0.074
+          },
+          {
+            "y": 0.96,
+            "x": 0.465,
+            "z": 0.003,
+            "rx": 0.085,
+            "rz": 0.083
+          },
+          {
+            "y": 1.065,
+            "x": 0.441,
+            "z": -0.003,
+            "rx": 0.092,
+            "rz": 0.094
+          },
+          {
+            "y": 1.19,
+            "x": 0.387,
+            "z": 0,
+            "rx": 0.1,
+            "rz": 0.105
+          },
+          {
+            "y": 1.33,
+            "x": 0.335,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.119
+          },
+          {
+            "y": 1.445,
+            "x": 0.263,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.128
+          }
+        ],
+        "sleeveRows": [
+          {
+            "y": 1.206,
+            "x": 0.382,
+            "z": 0,
+            "rx": 0.124,
+            "rz": 0.136
+          },
+          {
+            "y": 1.231,
+            "x": 0.375,
+            "z": 0,
+            "rx": 0.128,
+            "rz": 0.139
+          },
+          {
+            "y": 1.31,
+            "x": 0.343,
+            "z": 0,
+            "rx": 0.141,
+            "rz": 0.151
+          },
+          {
+            "y": 1.39,
+            "x": 0.304,
+            "z": 0,
+            "rx": 0.146,
+            "rz": 0.156
+          },
+          {
+            "y": 1.446,
+            "x": 0.254,
+            "z": 0,
+            "rx": 0.135,
+            "rz": 0.147
+          },
+          {
+            "y": 1.469,
+            "x": 0.221,
+            "z": 0,
+            "rx": 0.08,
+            "rz": 0.091
+          },
+          {
+            "y": 1.486,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.001,
+            "rz": 0.001
+          }
+        ],
+        "legRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.092,
+            "rz": 0.09
+          },
+          {
+            "y": 0.2,
+            "x": 0.197,
+            "z": 0.001,
+            "rx": 0.099,
+            "rz": 0.102
+          },
+          {
+            "y": 0.37,
+            "x": 0.19,
+            "z": 0,
+            "rx": 0.122,
+            "rz": 0.114
+          },
+          {
+            "y": 0.48,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.109,
+            "rz": 0.108
+          },
+          {
+            "y": 0.56,
+            "x": 0.18,
+            "z": 0.002,
+            "rx": 0.117,
+            "rz": 0.117
+          },
+          {
+            "y": 0.68,
+            "x": 0.169,
+            "z": 0,
+            "rx": 0.136,
+            "rz": 0.138
+          },
+          {
+            "y": 0.84,
+            "x": 0.163,
+            "z": -0.001,
+            "rx": 0.126,
+            "rz": 0.121
+          }
+        ],
+        "sockRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.096,
+            "rz": 0.096
+          },
+          {
+            "y": 0.115,
+            "x": 0.198,
+            "z": -0.005,
+            "rx": 0.098,
+            "rz": 0.099
+          },
+          {
+            "y": 0.27,
+            "x": 0.194,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.115
+          },
+          {
+            "y": 0.35,
+            "x": 0.191,
+            "z": 0,
+            "rx": 0.13,
+            "rz": 0.122
+          },
+          {
+            "y": 0.43,
+            "x": 0.187,
+            "z": 0,
+            "rx": 0.118,
+            "rz": 0.115
+          },
+          {
+            "y": 0.484,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.113
+          },
+          {
+            "y": 0.49,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.112,
+            "rz": 0.11
+          }
+        ],
+        "shirtRadialSegments": 64,
+        "shirtHeightSegments": 58,
+        "limbRadialSegments": 48,
+        "shortsRadialSegments": 64,
+        "clothClearance": {
+          "radial": 0.031,
+          "depth": 0.022
+        },
+        "foldAmplitude": {
+          "underarm": 0.012,
+          "waist": 0.009,
+          "knee": 0.006
+        },
+        "foldWidths": {
+          "underarm": 0.044,
+          "waist": 0.035,
+          "knee": 0.05
+        },
+        "collarAuthoringSpan": 0.043,
+        "collarSurfaceOffset": 0.0015,
+        "cuffHeight": 0.035,
+        "bumpScale": 0.00045,
+        "coordinateSystem": "+Y up, +Z front; body stops at flat wrist and ankle ports"
+      },
+      "camera": {
+        "position": [
+          0,
+          0.875,
+          6
+        ],
+        "target": [
+          0,
+          0.875,
+          0
+        ],
+        "height": 2.12,
+        "minimumWidth": 1.34,
+        "near": 0.1,
+        "far": 30,
+        "frustum": {
+          "left": -0.742,
+          "right": 0.742,
+          "top": 1.06,
+          "bottom": -1.06
+        }
+      },
+      "lights": {
+        "key": {
+          "position": [
+            -3,
+            4.5,
+            5
+          ],
+          "color": 16773857,
+          "intensity": 3.1
+        },
+        "fill": {
+          "position": [
+            3,
+            2,
+            3
+          ],
+          "color": 14937599,
+          "intensity": 1.35
+        },
+        "rim": {
+          "position": [
+            1,
+            3,
+            -4
+          ],
+          "color": 16774629,
+          "intensity": 2
+        },
+        "hemisphere": {
+          "sky": 16774635,
+          "ground": 10332350,
+          "intensity": 1
+        }
+      },
+      "pixelRatio": 1,
+      "canvas": {
+        "width": 420,
+        "height": 600,
+        "drawingWidth": 420,
+        "drawingHeight": 600
+      },
+      "projection": {
+        "neckY": 94.81132075471697,
+        "ankleY": 519.3396226415093,
+        "centerX": 210
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "threeRevision": "160"
+    },
+    "back": {
+      "stage": "final",
+      "palette": "blue",
+      "view": "back",
+      "experiment": null,
+      "modelTriangles": 59920,
+      "sceneTriangles": 59922,
+      "buildTimeMs": 84.69999999925494,
+      "modelStats": {
+        "triangles": 59920,
+        "meshes": 31,
+        "vertices": 31954,
+        "buildMs": 84.69999999925494,
+        "stage": "final",
+        "palette": "blue"
+      },
+      "parts": [
+        "torso",
+        "neck",
+        "jersey",
+        "collar",
+        "hem",
+        "arm",
+        "wrist-port",
+        "sleeve",
+        "cuff",
+        "shorts",
+        "stripe",
+        "leg",
+        "sock",
+        "ankle-port",
+        "number"
+      ],
+      "parameters": {
+        "headUnit": 1,
+        "ankleY": 0.1,
+        "neckTopY": 1.6,
+        "bodyHeight": 1.5,
+        "virtualHeadHeight": 1,
+        "virtualShoeClearance": 0.15,
+        "virtualTotalHeadUnits": 2.65,
+        "bodyLandmarks": [
+          {
+            "y": 0.08,
+            "finalY": 0.1
+          },
+          {
+            "y": 0.49,
+            "finalY": 0.46
+          },
+          {
+            "y": 0.641,
+            "finalY": 0.57
+          },
+          {
+            "y": 0.918,
+            "finalY": 0.856
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          },
+          {
+            "y": 1.67,
+            "finalY": 1.6
+          }
+        ],
+        "armLandmarks": [
+          {
+            "y": 0.7,
+            "finalY": 0.72
+          },
+          {
+            "y": 0.79,
+            "finalY": 0.8
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          }
+        ],
+        "shirtRows": [
+          {
+            "y": 0.918,
+            "rx": 0.32,
+            "rz": 0.197
+          },
+          {
+            "y": 0.948,
+            "rx": 0.331,
+            "rz": 0.203
+          },
+          {
+            "y": 1.04,
+            "rx": 0.316,
+            "rz": 0.196
+          },
+          {
+            "y": 1.19,
+            "rx": 0.304,
+            "rz": 0.195
+          },
+          {
+            "y": 1.34,
+            "rx": 0.308,
+            "rz": 0.203
+          },
+          {
+            "y": 1.44,
+            "rx": 0.319,
+            "rz": 0.195
+          },
+          {
+            "y": 1.49,
+            "rx": 0.281,
+            "rz": 0.16
+          }
+        ],
+        "armRows": [
+          {
+            "y": 0.79,
+            "x": 0.496,
+            "z": 0.01,
+            "rx": 0.065,
+            "rz": 0.068
+          },
+          {
+            "y": 0.842,
+            "x": 0.494,
+            "z": 0.01,
+            "rx": 0.073,
+            "rz": 0.074
+          },
+          {
+            "y": 0.96,
+            "x": 0.465,
+            "z": 0.003,
+            "rx": 0.085,
+            "rz": 0.083
+          },
+          {
+            "y": 1.065,
+            "x": 0.441,
+            "z": -0.003,
+            "rx": 0.092,
+            "rz": 0.094
+          },
+          {
+            "y": 1.19,
+            "x": 0.387,
+            "z": 0,
+            "rx": 0.1,
+            "rz": 0.105
+          },
+          {
+            "y": 1.33,
+            "x": 0.335,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.119
+          },
+          {
+            "y": 1.445,
+            "x": 0.263,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.128
+          }
+        ],
+        "sleeveRows": [
+          {
+            "y": 1.206,
+            "x": 0.382,
+            "z": 0,
+            "rx": 0.124,
+            "rz": 0.136
+          },
+          {
+            "y": 1.231,
+            "x": 0.375,
+            "z": 0,
+            "rx": 0.128,
+            "rz": 0.139
+          },
+          {
+            "y": 1.31,
+            "x": 0.343,
+            "z": 0,
+            "rx": 0.141,
+            "rz": 0.151
+          },
+          {
+            "y": 1.39,
+            "x": 0.304,
+            "z": 0,
+            "rx": 0.146,
+            "rz": 0.156
+          },
+          {
+            "y": 1.446,
+            "x": 0.254,
+            "z": 0,
+            "rx": 0.135,
+            "rz": 0.147
+          },
+          {
+            "y": 1.469,
+            "x": 0.221,
+            "z": 0,
+            "rx": 0.08,
+            "rz": 0.091
+          },
+          {
+            "y": 1.486,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.001,
+            "rz": 0.001
+          }
+        ],
+        "legRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.092,
+            "rz": 0.09
+          },
+          {
+            "y": 0.2,
+            "x": 0.197,
+            "z": 0.001,
+            "rx": 0.099,
+            "rz": 0.102
+          },
+          {
+            "y": 0.37,
+            "x": 0.19,
+            "z": 0,
+            "rx": 0.122,
+            "rz": 0.114
+          },
+          {
+            "y": 0.48,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.109,
+            "rz": 0.108
+          },
+          {
+            "y": 0.56,
+            "x": 0.18,
+            "z": 0.002,
+            "rx": 0.117,
+            "rz": 0.117
+          },
+          {
+            "y": 0.68,
+            "x": 0.169,
+            "z": 0,
+            "rx": 0.136,
+            "rz": 0.138
+          },
+          {
+            "y": 0.84,
+            "x": 0.163,
+            "z": -0.001,
+            "rx": 0.126,
+            "rz": 0.121
+          }
+        ],
+        "sockRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.096,
+            "rz": 0.096
+          },
+          {
+            "y": 0.115,
+            "x": 0.198,
+            "z": -0.005,
+            "rx": 0.098,
+            "rz": 0.099
+          },
+          {
+            "y": 0.27,
+            "x": 0.194,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.115
+          },
+          {
+            "y": 0.35,
+            "x": 0.191,
+            "z": 0,
+            "rx": 0.13,
+            "rz": 0.122
+          },
+          {
+            "y": 0.43,
+            "x": 0.187,
+            "z": 0,
+            "rx": 0.118,
+            "rz": 0.115
+          },
+          {
+            "y": 0.484,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.113
+          },
+          {
+            "y": 0.49,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.112,
+            "rz": 0.11
+          }
+        ],
+        "shirtRadialSegments": 64,
+        "shirtHeightSegments": 58,
+        "limbRadialSegments": 48,
+        "shortsRadialSegments": 64,
+        "clothClearance": {
+          "radial": 0.031,
+          "depth": 0.022
+        },
+        "foldAmplitude": {
+          "underarm": 0.012,
+          "waist": 0.009,
+          "knee": 0.006
+        },
+        "foldWidths": {
+          "underarm": 0.044,
+          "waist": 0.035,
+          "knee": 0.05
+        },
+        "collarAuthoringSpan": 0.043,
+        "collarSurfaceOffset": 0.0015,
+        "cuffHeight": 0.035,
+        "bumpScale": 0.00045,
+        "coordinateSystem": "+Y up, +Z front; body stops at flat wrist and ankle ports"
+      },
+      "camera": {
+        "position": [
+          0,
+          0.875,
+          6
+        ],
+        "target": [
+          0,
+          0.875,
+          0
+        ],
+        "height": 2.12,
+        "minimumWidth": 1.34,
+        "near": 0.1,
+        "far": 30,
+        "frustum": {
+          "left": -0.742,
+          "right": 0.742,
+          "top": 1.06,
+          "bottom": -1.06
+        }
+      },
+      "lights": {
+        "key": {
+          "position": [
+            -3,
+            4.5,
+            5
+          ],
+          "color": 16773857,
+          "intensity": 3.1
+        },
+        "fill": {
+          "position": [
+            3,
+            2,
+            3
+          ],
+          "color": 14937599,
+          "intensity": 1.35
+        },
+        "rim": {
+          "position": [
+            1,
+            3,
+            -4
+          ],
+          "color": 16774629,
+          "intensity": 2
+        },
+        "hemisphere": {
+          "sky": 16774635,
+          "ground": 10332350,
+          "intensity": 1
+        }
+      },
+      "pixelRatio": 1,
+      "canvas": {
+        "width": 420,
+        "height": 600,
+        "drawingWidth": 420,
+        "drawingHeight": 600
+      },
+      "projection": {
+        "neckY": 94.81132075471697,
+        "ankleY": 519.3396226415093,
+        "centerX": 210
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "threeRevision": "160"
+    },
+    "threeQuarter": {
+      "stage": "final",
+      "palette": "blue",
+      "view": "threeQuarter",
+      "experiment": null,
+      "modelTriangles": 59920,
+      "sceneTriangles": 59922,
+      "buildTimeMs": 36.400000002235174,
+      "modelStats": {
+        "triangles": 59920,
+        "meshes": 31,
+        "vertices": 31954,
+        "buildMs": 36.400000002235174,
+        "stage": "final",
+        "palette": "blue"
+      },
+      "parts": [
+        "torso",
+        "neck",
+        "jersey",
+        "collar",
+        "hem",
+        "arm",
+        "wrist-port",
+        "sleeve",
+        "cuff",
+        "shorts",
+        "stripe",
+        "leg",
+        "sock",
+        "ankle-port",
+        "number"
+      ],
+      "parameters": {
+        "headUnit": 1,
+        "ankleY": 0.1,
+        "neckTopY": 1.6,
+        "bodyHeight": 1.5,
+        "virtualHeadHeight": 1,
+        "virtualShoeClearance": 0.15,
+        "virtualTotalHeadUnits": 2.65,
+        "bodyLandmarks": [
+          {
+            "y": 0.08,
+            "finalY": 0.1
+          },
+          {
+            "y": 0.49,
+            "finalY": 0.46
+          },
+          {
+            "y": 0.641,
+            "finalY": 0.57
+          },
+          {
+            "y": 0.918,
+            "finalY": 0.856
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          },
+          {
+            "y": 1.67,
+            "finalY": 1.6
+          }
+        ],
+        "armLandmarks": [
+          {
+            "y": 0.7,
+            "finalY": 0.72
+          },
+          {
+            "y": 0.79,
+            "finalY": 0.8
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          }
+        ],
+        "shirtRows": [
+          {
+            "y": 0.918,
+            "rx": 0.32,
+            "rz": 0.197
+          },
+          {
+            "y": 0.948,
+            "rx": 0.331,
+            "rz": 0.203
+          },
+          {
+            "y": 1.04,
+            "rx": 0.316,
+            "rz": 0.196
+          },
+          {
+            "y": 1.19,
+            "rx": 0.304,
+            "rz": 0.195
+          },
+          {
+            "y": 1.34,
+            "rx": 0.308,
+            "rz": 0.203
+          },
+          {
+            "y": 1.44,
+            "rx": 0.319,
+            "rz": 0.195
+          },
+          {
+            "y": 1.49,
+            "rx": 0.281,
+            "rz": 0.16
+          }
+        ],
+        "armRows": [
+          {
+            "y": 0.79,
+            "x": 0.496,
+            "z": 0.01,
+            "rx": 0.065,
+            "rz": 0.068
+          },
+          {
+            "y": 0.842,
+            "x": 0.494,
+            "z": 0.01,
+            "rx": 0.073,
+            "rz": 0.074
+          },
+          {
+            "y": 0.96,
+            "x": 0.465,
+            "z": 0.003,
+            "rx": 0.085,
+            "rz": 0.083
+          },
+          {
+            "y": 1.065,
+            "x": 0.441,
+            "z": -0.003,
+            "rx": 0.092,
+            "rz": 0.094
+          },
+          {
+            "y": 1.19,
+            "x": 0.387,
+            "z": 0,
+            "rx": 0.1,
+            "rz": 0.105
+          },
+          {
+            "y": 1.33,
+            "x": 0.335,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.119
+          },
+          {
+            "y": 1.445,
+            "x": 0.263,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.128
+          }
+        ],
+        "sleeveRows": [
+          {
+            "y": 1.206,
+            "x": 0.382,
+            "z": 0,
+            "rx": 0.124,
+            "rz": 0.136
+          },
+          {
+            "y": 1.231,
+            "x": 0.375,
+            "z": 0,
+            "rx": 0.128,
+            "rz": 0.139
+          },
+          {
+            "y": 1.31,
+            "x": 0.343,
+            "z": 0,
+            "rx": 0.141,
+            "rz": 0.151
+          },
+          {
+            "y": 1.39,
+            "x": 0.304,
+            "z": 0,
+            "rx": 0.146,
+            "rz": 0.156
+          },
+          {
+            "y": 1.446,
+            "x": 0.254,
+            "z": 0,
+            "rx": 0.135,
+            "rz": 0.147
+          },
+          {
+            "y": 1.469,
+            "x": 0.221,
+            "z": 0,
+            "rx": 0.08,
+            "rz": 0.091
+          },
+          {
+            "y": 1.486,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.001,
+            "rz": 0.001
+          }
+        ],
+        "legRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.092,
+            "rz": 0.09
+          },
+          {
+            "y": 0.2,
+            "x": 0.197,
+            "z": 0.001,
+            "rx": 0.099,
+            "rz": 0.102
+          },
+          {
+            "y": 0.37,
+            "x": 0.19,
+            "z": 0,
+            "rx": 0.122,
+            "rz": 0.114
+          },
+          {
+            "y": 0.48,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.109,
+            "rz": 0.108
+          },
+          {
+            "y": 0.56,
+            "x": 0.18,
+            "z": 0.002,
+            "rx": 0.117,
+            "rz": 0.117
+          },
+          {
+            "y": 0.68,
+            "x": 0.169,
+            "z": 0,
+            "rx": 0.136,
+            "rz": 0.138
+          },
+          {
+            "y": 0.84,
+            "x": 0.163,
+            "z": -0.001,
+            "rx": 0.126,
+            "rz": 0.121
+          }
+        ],
+        "sockRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.096,
+            "rz": 0.096
+          },
+          {
+            "y": 0.115,
+            "x": 0.198,
+            "z": -0.005,
+            "rx": 0.098,
+            "rz": 0.099
+          },
+          {
+            "y": 0.27,
+            "x": 0.194,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.115
+          },
+          {
+            "y": 0.35,
+            "x": 0.191,
+            "z": 0,
+            "rx": 0.13,
+            "rz": 0.122
+          },
+          {
+            "y": 0.43,
+            "x": 0.187,
+            "z": 0,
+            "rx": 0.118,
+            "rz": 0.115
+          },
+          {
+            "y": 0.484,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.113
+          },
+          {
+            "y": 0.49,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.112,
+            "rz": 0.11
+          }
+        ],
+        "shirtRadialSegments": 64,
+        "shirtHeightSegments": 58,
+        "limbRadialSegments": 48,
+        "shortsRadialSegments": 64,
+        "clothClearance": {
+          "radial": 0.031,
+          "depth": 0.022
+        },
+        "foldAmplitude": {
+          "underarm": 0.012,
+          "waist": 0.009,
+          "knee": 0.006
+        },
+        "foldWidths": {
+          "underarm": 0.044,
+          "waist": 0.035,
+          "knee": 0.05
+        },
+        "collarAuthoringSpan": 0.043,
+        "collarSurfaceOffset": 0.0015,
+        "cuffHeight": 0.035,
+        "bumpScale": 0.00045,
+        "coordinateSystem": "+Y up, +Z front; body stops at flat wrist and ankle ports"
+      },
+      "camera": {
+        "position": [
+          0,
+          0.875,
+          6
+        ],
+        "target": [
+          0,
+          0.875,
+          0
+        ],
+        "height": 2.12,
+        "minimumWidth": 1.34,
+        "near": 0.1,
+        "far": 30,
+        "frustum": {
+          "left": -0.742,
+          "right": 0.742,
+          "top": 1.06,
+          "bottom": -1.06
+        }
+      },
+      "lights": {
+        "key": {
+          "position": [
+            -3,
+            4.5,
+            5
+          ],
+          "color": 16773857,
+          "intensity": 3.1
+        },
+        "fill": {
+          "position": [
+            3,
+            2,
+            3
+          ],
+          "color": 14937599,
+          "intensity": 1.35
+        },
+        "rim": {
+          "position": [
+            1,
+            3,
+            -4
+          ],
+          "color": 16774629,
+          "intensity": 2
+        },
+        "hemisphere": {
+          "sky": 16774635,
+          "ground": 10332350,
+          "intensity": 1
+        }
+      },
+      "pixelRatio": 1,
+      "canvas": {
+        "width": 420,
+        "height": 600,
+        "drawingWidth": 420,
+        "drawingHeight": 600
+      },
+      "projection": {
+        "neckY": 94.81132075471697,
+        "ankleY": 519.3396226415093,
+        "centerX": 210
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "threeRevision": "160"
+    }
+  },
+  "stageShots": {
+    "blockout": {
+      "stage": "blockout",
+      "palette": "blue",
+      "view": "front",
+      "experiment": null,
+      "modelTriangles": 6864,
+      "sceneTriangles": 6866,
+      "buildTimeMs": 11.400000002235174,
+      "modelStats": {
+        "triangles": 6864,
+        "meshes": 13,
+        "vertices": 4417,
+        "buildMs": 11.400000002235174,
+        "stage": "blockout",
+        "palette": "blue"
+      },
+      "parts": [
+        "shirt-block",
+        "neck-block",
+        "pelvis-block",
+        "arm-block",
+        "sleeve-block",
+        "short-leg-block",
+        "leg-block",
+        "sock-block"
+      ],
+      "parameters": {
+        "headUnit": 1,
+        "ankleY": 0.1,
+        "neckTopY": 1.6,
+        "bodyHeight": 1.5,
+        "virtualHeadHeight": 1,
+        "virtualShoeClearance": 0.15,
+        "virtualTotalHeadUnits": 2.65,
+        "bodyLandmarks": [
+          {
+            "y": 0.08,
+            "finalY": 0.1
+          },
+          {
+            "y": 0.49,
+            "finalY": 0.46
+          },
+          {
+            "y": 0.641,
+            "finalY": 0.57
+          },
+          {
+            "y": 0.918,
+            "finalY": 0.856
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          },
+          {
+            "y": 1.67,
+            "finalY": 1.6
+          }
+        ],
+        "armLandmarks": [
+          {
+            "y": 0.7,
+            "finalY": 0.72
+          },
+          {
+            "y": 0.79,
+            "finalY": 0.8
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          }
+        ],
+        "shirtRows": [
+          {
+            "y": 0.918,
+            "rx": 0.32,
+            "rz": 0.197
+          },
+          {
+            "y": 0.948,
+            "rx": 0.331,
+            "rz": 0.203
+          },
+          {
+            "y": 1.04,
+            "rx": 0.316,
+            "rz": 0.196
+          },
+          {
+            "y": 1.19,
+            "rx": 0.304,
+            "rz": 0.195
+          },
+          {
+            "y": 1.34,
+            "rx": 0.308,
+            "rz": 0.203
+          },
+          {
+            "y": 1.44,
+            "rx": 0.319,
+            "rz": 0.195
+          },
+          {
+            "y": 1.49,
+            "rx": 0.281,
+            "rz": 0.16
+          }
+        ],
+        "armRows": [
+          {
+            "y": 0.79,
+            "x": 0.496,
+            "z": 0.01,
+            "rx": 0.065,
+            "rz": 0.068
+          },
+          {
+            "y": 0.842,
+            "x": 0.494,
+            "z": 0.01,
+            "rx": 0.073,
+            "rz": 0.074
+          },
+          {
+            "y": 0.96,
+            "x": 0.465,
+            "z": 0.003,
+            "rx": 0.085,
+            "rz": 0.083
+          },
+          {
+            "y": 1.065,
+            "x": 0.441,
+            "z": -0.003,
+            "rx": 0.092,
+            "rz": 0.094
+          },
+          {
+            "y": 1.19,
+            "x": 0.387,
+            "z": 0,
+            "rx": 0.1,
+            "rz": 0.105
+          },
+          {
+            "y": 1.33,
+            "x": 0.335,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.119
+          },
+          {
+            "y": 1.445,
+            "x": 0.263,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.128
+          }
+        ],
+        "sleeveRows": [
+          {
+            "y": 1.206,
+            "x": 0.382,
+            "z": 0,
+            "rx": 0.124,
+            "rz": 0.136
+          },
+          {
+            "y": 1.231,
+            "x": 0.375,
+            "z": 0,
+            "rx": 0.128,
+            "rz": 0.139
+          },
+          {
+            "y": 1.31,
+            "x": 0.343,
+            "z": 0,
+            "rx": 0.141,
+            "rz": 0.151
+          },
+          {
+            "y": 1.39,
+            "x": 0.304,
+            "z": 0,
+            "rx": 0.146,
+            "rz": 0.156
+          },
+          {
+            "y": 1.446,
+            "x": 0.254,
+            "z": 0,
+            "rx": 0.135,
+            "rz": 0.147
+          },
+          {
+            "y": 1.469,
+            "x": 0.221,
+            "z": 0,
+            "rx": 0.08,
+            "rz": 0.091
+          },
+          {
+            "y": 1.486,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.001,
+            "rz": 0.001
+          }
+        ],
+        "legRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.092,
+            "rz": 0.09
+          },
+          {
+            "y": 0.2,
+            "x": 0.197,
+            "z": 0.001,
+            "rx": 0.099,
+            "rz": 0.102
+          },
+          {
+            "y": 0.37,
+            "x": 0.19,
+            "z": 0,
+            "rx": 0.122,
+            "rz": 0.114
+          },
+          {
+            "y": 0.48,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.109,
+            "rz": 0.108
+          },
+          {
+            "y": 0.56,
+            "x": 0.18,
+            "z": 0.002,
+            "rx": 0.117,
+            "rz": 0.117
+          },
+          {
+            "y": 0.68,
+            "x": 0.169,
+            "z": 0,
+            "rx": 0.136,
+            "rz": 0.138
+          },
+          {
+            "y": 0.84,
+            "x": 0.163,
+            "z": -0.001,
+            "rx": 0.126,
+            "rz": 0.121
+          }
+        ],
+        "sockRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.096,
+            "rz": 0.096
+          },
+          {
+            "y": 0.115,
+            "x": 0.198,
+            "z": -0.005,
+            "rx": 0.098,
+            "rz": 0.099
+          },
+          {
+            "y": 0.27,
+            "x": 0.194,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.115
+          },
+          {
+            "y": 0.35,
+            "x": 0.191,
+            "z": 0,
+            "rx": 0.13,
+            "rz": 0.122
+          },
+          {
+            "y": 0.43,
+            "x": 0.187,
+            "z": 0,
+            "rx": 0.118,
+            "rz": 0.115
+          },
+          {
+            "y": 0.484,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.113
+          },
+          {
+            "y": 0.49,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.112,
+            "rz": 0.11
+          }
+        ],
+        "shirtRadialSegments": 64,
+        "shirtHeightSegments": 58,
+        "limbRadialSegments": 48,
+        "shortsRadialSegments": 64,
+        "clothClearance": {
+          "radial": 0.031,
+          "depth": 0.022
+        },
+        "foldAmplitude": {
+          "underarm": 0.012,
+          "waist": 0.009,
+          "knee": 0.006
+        },
+        "foldWidths": {
+          "underarm": 0.044,
+          "waist": 0.035,
+          "knee": 0.05
+        },
+        "collarAuthoringSpan": 0.043,
+        "collarSurfaceOffset": 0.0015,
+        "cuffHeight": 0.035,
+        "bumpScale": 0.00045,
+        "coordinateSystem": "+Y up, +Z front; body stops at flat wrist and ankle ports"
+      },
+      "camera": {
+        "position": [
+          0,
+          0.875,
+          6
+        ],
+        "target": [
+          0,
+          0.875,
+          0
+        ],
+        "height": 2.12,
+        "minimumWidth": 1.34,
+        "near": 0.1,
+        "far": 30,
+        "frustum": {
+          "left": -0.742,
+          "right": 0.742,
+          "top": 1.06,
+          "bottom": -1.06
+        }
+      },
+      "lights": {
+        "key": {
+          "position": [
+            -3,
+            4.5,
+            5
+          ],
+          "color": 16773857,
+          "intensity": 3.1
+        },
+        "fill": {
+          "position": [
+            3,
+            2,
+            3
+          ],
+          "color": 14937599,
+          "intensity": 1.35
+        },
+        "rim": {
+          "position": [
+            1,
+            3,
+            -4
+          ],
+          "color": 16774629,
+          "intensity": 2
+        },
+        "hemisphere": {
+          "sky": 16774635,
+          "ground": 10332350,
+          "intensity": 1
+        }
+      },
+      "pixelRatio": 1,
+      "canvas": {
+        "width": 420,
+        "height": 600,
+        "drawingWidth": 420,
+        "drawingHeight": 600
+      },
+      "projection": {
+        "neckY": 94.81132075471697,
+        "ankleY": 519.3396226415093,
+        "centerX": 210
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "threeRevision": "160"
+    },
+    "shaped": {
+      "stage": "shaped",
+      "palette": "blue",
+      "view": "front",
+      "experiment": null,
+      "modelTriangles": 59920,
+      "sceneTriangles": 59922,
+      "buildTimeMs": 46.100000001490116,
+      "modelStats": {
+        "triangles": 59920,
+        "meshes": 31,
+        "vertices": 31954,
+        "buildMs": 46.100000001490116,
+        "stage": "shaped",
+        "palette": "blue"
+      },
+      "parts": [
+        "torso",
+        "neck",
+        "jersey",
+        "collar",
+        "hem",
+        "arm",
+        "wrist-port",
+        "sleeve",
+        "cuff",
+        "shorts",
+        "stripe",
+        "leg",
+        "sock",
+        "ankle-port",
+        "number"
+      ],
+      "parameters": {
+        "headUnit": 1,
+        "ankleY": 0.1,
+        "neckTopY": 1.6,
+        "bodyHeight": 1.5,
+        "virtualHeadHeight": 1,
+        "virtualShoeClearance": 0.15,
+        "virtualTotalHeadUnits": 2.65,
+        "bodyLandmarks": [
+          {
+            "y": 0.08,
+            "finalY": 0.1
+          },
+          {
+            "y": 0.49,
+            "finalY": 0.46
+          },
+          {
+            "y": 0.641,
+            "finalY": 0.57
+          },
+          {
+            "y": 0.918,
+            "finalY": 0.856
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          },
+          {
+            "y": 1.67,
+            "finalY": 1.6
+          }
+        ],
+        "armLandmarks": [
+          {
+            "y": 0.7,
+            "finalY": 0.72
+          },
+          {
+            "y": 0.79,
+            "finalY": 0.8
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          }
+        ],
+        "shirtRows": [
+          {
+            "y": 0.918,
+            "rx": 0.32,
+            "rz": 0.197
+          },
+          {
+            "y": 0.948,
+            "rx": 0.331,
+            "rz": 0.203
+          },
+          {
+            "y": 1.04,
+            "rx": 0.316,
+            "rz": 0.196
+          },
+          {
+            "y": 1.19,
+            "rx": 0.304,
+            "rz": 0.195
+          },
+          {
+            "y": 1.34,
+            "rx": 0.308,
+            "rz": 0.203
+          },
+          {
+            "y": 1.44,
+            "rx": 0.319,
+            "rz": 0.195
+          },
+          {
+            "y": 1.49,
+            "rx": 0.281,
+            "rz": 0.16
+          }
+        ],
+        "armRows": [
+          {
+            "y": 0.79,
+            "x": 0.496,
+            "z": 0.01,
+            "rx": 0.065,
+            "rz": 0.068
+          },
+          {
+            "y": 0.842,
+            "x": 0.494,
+            "z": 0.01,
+            "rx": 0.073,
+            "rz": 0.074
+          },
+          {
+            "y": 0.96,
+            "x": 0.465,
+            "z": 0.003,
+            "rx": 0.085,
+            "rz": 0.083
+          },
+          {
+            "y": 1.065,
+            "x": 0.441,
+            "z": -0.003,
+            "rx": 0.092,
+            "rz": 0.094
+          },
+          {
+            "y": 1.19,
+            "x": 0.387,
+            "z": 0,
+            "rx": 0.1,
+            "rz": 0.105
+          },
+          {
+            "y": 1.33,
+            "x": 0.335,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.119
+          },
+          {
+            "y": 1.445,
+            "x": 0.263,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.128
+          }
+        ],
+        "sleeveRows": [
+          {
+            "y": 1.206,
+            "x": 0.382,
+            "z": 0,
+            "rx": 0.124,
+            "rz": 0.136
+          },
+          {
+            "y": 1.231,
+            "x": 0.375,
+            "z": 0,
+            "rx": 0.128,
+            "rz": 0.139
+          },
+          {
+            "y": 1.31,
+            "x": 0.343,
+            "z": 0,
+            "rx": 0.141,
+            "rz": 0.151
+          },
+          {
+            "y": 1.39,
+            "x": 0.304,
+            "z": 0,
+            "rx": 0.146,
+            "rz": 0.156
+          },
+          {
+            "y": 1.446,
+            "x": 0.254,
+            "z": 0,
+            "rx": 0.135,
+            "rz": 0.147
+          },
+          {
+            "y": 1.469,
+            "x": 0.221,
+            "z": 0,
+            "rx": 0.08,
+            "rz": 0.091
+          },
+          {
+            "y": 1.486,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.001,
+            "rz": 0.001
+          }
+        ],
+        "legRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.092,
+            "rz": 0.09
+          },
+          {
+            "y": 0.2,
+            "x": 0.197,
+            "z": 0.001,
+            "rx": 0.099,
+            "rz": 0.102
+          },
+          {
+            "y": 0.37,
+            "x": 0.19,
+            "z": 0,
+            "rx": 0.122,
+            "rz": 0.114
+          },
+          {
+            "y": 0.48,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.109,
+            "rz": 0.108
+          },
+          {
+            "y": 0.56,
+            "x": 0.18,
+            "z": 0.002,
+            "rx": 0.117,
+            "rz": 0.117
+          },
+          {
+            "y": 0.68,
+            "x": 0.169,
+            "z": 0,
+            "rx": 0.136,
+            "rz": 0.138
+          },
+          {
+            "y": 0.84,
+            "x": 0.163,
+            "z": -0.001,
+            "rx": 0.126,
+            "rz": 0.121
+          }
+        ],
+        "sockRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.096,
+            "rz": 0.096
+          },
+          {
+            "y": 0.115,
+            "x": 0.198,
+            "z": -0.005,
+            "rx": 0.098,
+            "rz": 0.099
+          },
+          {
+            "y": 0.27,
+            "x": 0.194,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.115
+          },
+          {
+            "y": 0.35,
+            "x": 0.191,
+            "z": 0,
+            "rx": 0.13,
+            "rz": 0.122
+          },
+          {
+            "y": 0.43,
+            "x": 0.187,
+            "z": 0,
+            "rx": 0.118,
+            "rz": 0.115
+          },
+          {
+            "y": 0.484,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.113
+          },
+          {
+            "y": 0.49,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.112,
+            "rz": 0.11
+          }
+        ],
+        "shirtRadialSegments": 64,
+        "shirtHeightSegments": 58,
+        "limbRadialSegments": 48,
+        "shortsRadialSegments": 64,
+        "clothClearance": {
+          "radial": 0.031,
+          "depth": 0.022
+        },
+        "foldAmplitude": {
+          "underarm": 0.012,
+          "waist": 0.009,
+          "knee": 0.006
+        },
+        "foldWidths": {
+          "underarm": 0.044,
+          "waist": 0.035,
+          "knee": 0.05
+        },
+        "collarAuthoringSpan": 0.043,
+        "collarSurfaceOffset": 0.0015,
+        "cuffHeight": 0.035,
+        "bumpScale": 0.00045,
+        "coordinateSystem": "+Y up, +Z front; body stops at flat wrist and ankle ports"
+      },
+      "camera": {
+        "position": [
+          0,
+          0.875,
+          6
+        ],
+        "target": [
+          0,
+          0.875,
+          0
+        ],
+        "height": 2.12,
+        "minimumWidth": 1.34,
+        "near": 0.1,
+        "far": 30,
+        "frustum": {
+          "left": -0.742,
+          "right": 0.742,
+          "top": 1.06,
+          "bottom": -1.06
+        }
+      },
+      "lights": {
+        "key": {
+          "position": [
+            -3,
+            4.5,
+            5
+          ],
+          "color": 16773857,
+          "intensity": 3.1
+        },
+        "fill": {
+          "position": [
+            3,
+            2,
+            3
+          ],
+          "color": 14937599,
+          "intensity": 1.35
+        },
+        "rim": {
+          "position": [
+            1,
+            3,
+            -4
+          ],
+          "color": 16774629,
+          "intensity": 2
+        },
+        "hemisphere": {
+          "sky": 16774635,
+          "ground": 10332350,
+          "intensity": 1
+        }
+      },
+      "pixelRatio": 1,
+      "canvas": {
+        "width": 420,
+        "height": 600,
+        "drawingWidth": 420,
+        "drawingHeight": 600
+      },
+      "projection": {
+        "neckY": 94.81132075471697,
+        "ankleY": 519.3396226415093,
+        "centerX": 210
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "threeRevision": "160"
+    },
+    "final": {
+      "stage": "final",
+      "palette": "blue",
+      "view": "front",
+      "experiment": null,
+      "modelTriangles": 59920,
+      "sceneTriangles": 59922,
+      "buildTimeMs": 70.69999999925494,
+      "modelStats": {
+        "triangles": 59920,
+        "meshes": 31,
+        "vertices": 31954,
+        "buildMs": 70.69999999925494,
+        "stage": "final",
+        "palette": "blue"
+      },
+      "parts": [
+        "torso",
+        "neck",
+        "jersey",
+        "collar",
+        "hem",
+        "arm",
+        "wrist-port",
+        "sleeve",
+        "cuff",
+        "shorts",
+        "stripe",
+        "leg",
+        "sock",
+        "ankle-port",
+        "number"
+      ],
+      "parameters": {
+        "headUnit": 1,
+        "ankleY": 0.1,
+        "neckTopY": 1.6,
+        "bodyHeight": 1.5,
+        "virtualHeadHeight": 1,
+        "virtualShoeClearance": 0.15,
+        "virtualTotalHeadUnits": 2.65,
+        "bodyLandmarks": [
+          {
+            "y": 0.08,
+            "finalY": 0.1
+          },
+          {
+            "y": 0.49,
+            "finalY": 0.46
+          },
+          {
+            "y": 0.641,
+            "finalY": 0.57
+          },
+          {
+            "y": 0.918,
+            "finalY": 0.856
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          },
+          {
+            "y": 1.67,
+            "finalY": 1.6
+          }
+        ],
+        "armLandmarks": [
+          {
+            "y": 0.7,
+            "finalY": 0.72
+          },
+          {
+            "y": 0.79,
+            "finalY": 0.8
+          },
+          {
+            "y": 1.206,
+            "finalY": 1.19
+          },
+          {
+            "y": 1.446,
+            "finalY": 1.49
+          },
+          {
+            "y": 1.58,
+            "finalY": 1.57
+          }
+        ],
+        "shirtRows": [
+          {
+            "y": 0.918,
+            "rx": 0.32,
+            "rz": 0.197
+          },
+          {
+            "y": 0.948,
+            "rx": 0.331,
+            "rz": 0.203
+          },
+          {
+            "y": 1.04,
+            "rx": 0.316,
+            "rz": 0.196
+          },
+          {
+            "y": 1.19,
+            "rx": 0.304,
+            "rz": 0.195
+          },
+          {
+            "y": 1.34,
+            "rx": 0.308,
+            "rz": 0.203
+          },
+          {
+            "y": 1.44,
+            "rx": 0.319,
+            "rz": 0.195
+          },
+          {
+            "y": 1.49,
+            "rx": 0.281,
+            "rz": 0.16
+          }
+        ],
+        "armRows": [
+          {
+            "y": 0.79,
+            "x": 0.496,
+            "z": 0.01,
+            "rx": 0.065,
+            "rz": 0.068
+          },
+          {
+            "y": 0.842,
+            "x": 0.494,
+            "z": 0.01,
+            "rx": 0.073,
+            "rz": 0.074
+          },
+          {
+            "y": 0.96,
+            "x": 0.465,
+            "z": 0.003,
+            "rx": 0.085,
+            "rz": 0.083
+          },
+          {
+            "y": 1.065,
+            "x": 0.441,
+            "z": -0.003,
+            "rx": 0.092,
+            "rz": 0.094
+          },
+          {
+            "y": 1.19,
+            "x": 0.387,
+            "z": 0,
+            "rx": 0.1,
+            "rz": 0.105
+          },
+          {
+            "y": 1.33,
+            "x": 0.335,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.119
+          },
+          {
+            "y": 1.445,
+            "x": 0.263,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.128
+          }
+        ],
+        "sleeveRows": [
+          {
+            "y": 1.206,
+            "x": 0.382,
+            "z": 0,
+            "rx": 0.124,
+            "rz": 0.136
+          },
+          {
+            "y": 1.231,
+            "x": 0.375,
+            "z": 0,
+            "rx": 0.128,
+            "rz": 0.139
+          },
+          {
+            "y": 1.31,
+            "x": 0.343,
+            "z": 0,
+            "rx": 0.141,
+            "rz": 0.151
+          },
+          {
+            "y": 1.39,
+            "x": 0.304,
+            "z": 0,
+            "rx": 0.146,
+            "rz": 0.156
+          },
+          {
+            "y": 1.446,
+            "x": 0.254,
+            "z": 0,
+            "rx": 0.135,
+            "rz": 0.147
+          },
+          {
+            "y": 1.469,
+            "x": 0.221,
+            "z": 0,
+            "rx": 0.08,
+            "rz": 0.091
+          },
+          {
+            "y": 1.486,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.001,
+            "rz": 0.001
+          }
+        ],
+        "legRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.092,
+            "rz": 0.09
+          },
+          {
+            "y": 0.2,
+            "x": 0.197,
+            "z": 0.001,
+            "rx": 0.099,
+            "rz": 0.102
+          },
+          {
+            "y": 0.37,
+            "x": 0.19,
+            "z": 0,
+            "rx": 0.122,
+            "rz": 0.114
+          },
+          {
+            "y": 0.48,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.109,
+            "rz": 0.108
+          },
+          {
+            "y": 0.56,
+            "x": 0.18,
+            "z": 0.002,
+            "rx": 0.117,
+            "rz": 0.117
+          },
+          {
+            "y": 0.68,
+            "x": 0.169,
+            "z": 0,
+            "rx": 0.136,
+            "rz": 0.138
+          },
+          {
+            "y": 0.84,
+            "x": 0.163,
+            "z": -0.001,
+            "rx": 0.126,
+            "rz": 0.121
+          }
+        ],
+        "sockRows": [
+          {
+            "y": 0.08,
+            "x": 0.198,
+            "z": -0.008,
+            "rx": 0.096,
+            "rz": 0.096
+          },
+          {
+            "y": 0.115,
+            "x": 0.198,
+            "z": -0.005,
+            "rx": 0.098,
+            "rz": 0.099
+          },
+          {
+            "y": 0.27,
+            "x": 0.194,
+            "z": 0,
+            "rx": 0.121,
+            "rz": 0.115
+          },
+          {
+            "y": 0.35,
+            "x": 0.191,
+            "z": 0,
+            "rx": 0.13,
+            "rz": 0.122
+          },
+          {
+            "y": 0.43,
+            "x": 0.187,
+            "z": 0,
+            "rx": 0.118,
+            "rz": 0.115
+          },
+          {
+            "y": 0.484,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.116,
+            "rz": 0.113
+          },
+          {
+            "y": 0.49,
+            "x": 0.184,
+            "z": 0,
+            "rx": 0.112,
+            "rz": 0.11
+          }
+        ],
+        "shirtRadialSegments": 64,
+        "shirtHeightSegments": 58,
+        "limbRadialSegments": 48,
+        "shortsRadialSegments": 64,
+        "clothClearance": {
+          "radial": 0.031,
+          "depth": 0.022
+        },
+        "foldAmplitude": {
+          "underarm": 0.012,
+          "waist": 0.009,
+          "knee": 0.006
+        },
+        "foldWidths": {
+          "underarm": 0.044,
+          "waist": 0.035,
+          "knee": 0.05
+        },
+        "collarAuthoringSpan": 0.043,
+        "collarSurfaceOffset": 0.0015,
+        "cuffHeight": 0.035,
+        "bumpScale": 0.00045,
+        "coordinateSystem": "+Y up, +Z front; body stops at flat wrist and ankle ports"
+      },
+      "camera": {
+        "position": [
+          0,
+          0.875,
+          6
+        ],
+        "target": [
+          0,
+          0.875,
+          0
+        ],
+        "height": 2.12,
+        "minimumWidth": 1.34,
+        "near": 0.1,
+        "far": 30,
+        "frustum": {
+          "left": -0.742,
+          "right": 0.742,
+          "top": 1.06,
+          "bottom": -1.06
+        }
+      },
+      "lights": {
+        "key": {
+          "position": [
+            -3,
+            4.5,
+            5
+          ],
+          "color": 16773857,
+          "intensity": 3.1
+        },
+        "fill": {
+          "position": [
+            3,
+            2,
+            3
+          ],
+          "color": 14937599,
+          "intensity": 1.35
+        },
+        "rim": {
+          "position": [
+            1,
+            3,
+            -4
+          ],
+          "color": 16774629,
+          "intensity": 2
+        },
+        "hemisphere": {
+          "sky": 16774635,
+          "ground": 10332350,
+          "intensity": 1
+        }
+      },
+      "pixelRatio": 1,
+      "canvas": {
+        "width": 420,
+        "height": 600,
+        "drawingWidth": 420,
+        "drawingHeight": 600
+      },
+      "projection": {
+        "neckY": 94.81132075471697,
+        "ankleY": 519.3396226415093,
+        "centerX": 210
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "threeRevision": "160"
+    }
+  },
+  "verification": {
+    "requiredParts": [
+      "torso",
+      "neck",
+      "jersey",
+      "collar",
+      "arm",
+      "sleeve",
+      "shorts",
+      "leg",
+      "sock",
+      "number"
+    ],
+    "missingParts": [],
+    "excludedPartsFound": [],
+    "consoleErrors": [],
+    "consoleWarnings": [],
+    "externalRequests": [],
+    "localRequestPaths": [
+      "/",
+      "/model.mjs",
+      "/ref/%D7%9E%D7%91%D7%98%D7%99%D7%9D%20-%20%D7%99%D7%9C%D7%93%20%D7%9E%D7%93%D7%A3%20%D7%94%D7%AA%D7%9C%D7%91%D7%95%D7%A9%D7%95%D7%AA.png%20(1).png",
+      "/reference.json",
+      "/scene.mjs",
+      "/shots/back.png",
+      "/shots/front.png",
+      "/shots/side.png",
+      "/shots/stages/blockout-front.png",
+      "/shots/stages/final-front.png",
+      "/shots/stages/shaped-front.png",
+      "/vendor/three.module.js"
+    ]
+  }
+}

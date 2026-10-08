@@ -1,0 +1,14 @@
+{
+  "name": "kid-body-three-learning-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node serve.mjs",
+    "capture": "node capture.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.56.1",
+    "pngjs": "7.0.0"
+  }
+}
