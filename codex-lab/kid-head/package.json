@@ -5,7 +5,10 @@
   "scripts": {
     "serve": "node serve.mjs",
     "measure": "node capture.mjs && node measure.mjs && node compare-shot.mjs",
-    "verify": "node verify-metric.mjs"
+    "verify": "node verify-metric.mjs",
+    "faces": "node baseline.mjs && node reference-measure.mjs && node verify-expressions.mjs && node capture-expressions.mjs",
+    "faces:capture": "node capture-expressions.mjs",
+    "faces:verify": "node verify-expressions.mjs"
   },
   "devDependencies": {
     "playwright-core": "1.56.1",
