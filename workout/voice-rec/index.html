@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#6c4cf1">
+  <title>הקול שלכם · האימון שלי</title>
+  <link rel="stylesheet" href="style.css?v=20261008-voice-1">
+</head>
+<body>
+  <main>
+    <header><span class="badge">האימון שלי</span><h1>מקליטים את הקול שלכם</h1>
+      <p>קראו בחום, כאילו אתם ליד הילד. ההקלטות נשמרות רק במכשיר הזה, גם אחרי רענון.</p></header>
+    <details><summary>איך מקליטים בטלפון?</summary>
+      <ol><li>פותחים ב־Chrome באנדרואיד או Safari באייפון דרך HTTPS ומאשרים מיקרופון.</li>
+        <li>לוחצים ״הקלטה״, קוראים רק את המשפט, ולוחצים ״עצירה״.</li>
+        <li>מאזינים, מקליטים שוב אם צריך, וממשיכים. אפשר לדלג ולחזור.</li>
+        <li>בסיום מורידים ZIP. שומרים אותו לפני ניקוי נתוני הדפדפן.</li></ol>
+      <p>כ־25–40 דקות לכל האוסף. לא קוראים את שם הקובץ; בלי שתיקה ארוכה בקצוות.</p>
+    </details>
+    <p id="progress">טוען את המשפטים…</p><progress id="bar" value="0" max="1" aria-label="התקדמות ההקלטות"></progress>
+    <section class="card" aria-labelledby="line">
+      <p id="category" class="muted"></p><p id="line" class="line"></p>
+      <p class="filename"><bdi id="filename"></bdi></p>
+      <button id="record" class="primary" disabled>● הקלטה</button>
+      <p id="status" role="status" aria-live="polite">טוען…</p>
+      <audio id="preview" controls hidden aria-label="האזנה להקלטה"></audio>
+      <div class="navigation"><button id="previous" disabled>הקודם</button><button id="next" disabled>הבא / דילוג</button></div>
+    </section>
+    <button id="missing" disabled>למשפט הראשון שעוד לא הוקלט</button>
+    <button id="download" class="download" disabled>הורדת כל ההקלטות ב־ZIP</button>
+    <p id="export-status" role="status" aria-live="polite"></p>
+    <p class="muted">ה־ZIP מכיל את ההקלטות שביצעתם, בשמות הנכונים. אין העלאה לשרת ואין צורך בחשבון.</p>
+    <noscript>יש להפעיל JavaScript כדי להקליט.</noscript>
+  </main>
+  <script type="module" src="app.js?v=20261008-voice-1"></script>
+</body>
+</html>

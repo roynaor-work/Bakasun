@@ -2,7 +2,7 @@
 // חמש סצנות: שער מבעיטה, שער בנגיחה, סלאם דאנק, קליעת שלוש, ריצת 100 מטר. הקצב איטי וברור (רועי, 30/09).
 // הצלילים והקריין מהגרסה הדו-ממדית (makeAudio, ההקלטות של רועי). בלי WebGL, או אם הטעינה נכשלה, המנוע חוזר לגרסה הדו-ממדית.
 import { THREE, hasWebGL, loadCharacter, KITS3D, lights, crowd, confetti, soccerBallMesh, makeRenderer } from '../char3d.js';
-import { makeAudio, SPRINT, WALK, LEAN, poseAt, celebrate as celebrate2d } from './celebrate.js';
+import { makeAudio, SPRINT, WALK, LEAN, poseAt, celebrate as celebrate2d } from './celebrate.js?v=20261008-voice-1';
 import { lerpPose } from '../figure.js';
 import { POSE, GK } from './sprites.js';
 
@@ -28,7 +28,7 @@ function textLayer(host) {
   return { show(txt, sub = '', cls = '') { el.innerHTML = `<b class="${cls}">${txt}</b>${sub ? `<span>${sub}</span>` : ''}`; el.classList.add('on'); }, hide() { el.classList.remove('on'); }, remove() { el.remove(); } };
 }
 
-export function celebrate3d(canvas, { oldBest = 0, newBest = 1, sound = true, onText = null, onDone = null, scene = null } = {}) {
+export function celebrate3d(canvas, { oldBest = 0, newBest = 1, sound = true, onText = null, onRecording = null, onDone = null, scene = null } = {}) {
   if (!hasWebGL()) throw new Error('no webgl');
   const W = canvas.width, H = canvas.height; // 360x560
   const host = canvas.parentElement;
@@ -39,7 +39,7 @@ export function celebrate3d(canvas, { oldBest = 0, newBest = 1, sound = true, on
   let shout = null; try { shout = localStorage.getItem('kidfit.goalShout'); } catch { shout = null; }
   const REC = Object.fromEntries(['goal', 'dunk', 'three', 'sprint'].map(k => [k, new URL(`../../snd/${k}.mp4`, import.meta.url).href]));
   const recFor = id === 'goal' || id === 'header' ? (shout || REC.goal) : REC[id];
-  let said = false; const say = (txt, lang) => { if (said) return; said = true; if (sound && recFor) { try { const a = new Audio(recFor); a.onerror = () => { if (txt) onText && onText(txt, lang); }; a.play().catch(() => { if (txt) onText && onText(txt, lang); }); return; } catch { /* */ } } if (txt) onText && onText(txt, lang); };
+  let said = false; const say = (txt, lang) => { if (said) return; said = true; if (sound && onRecording?.(`celebration-${id === 'header' ? 'goal' : id}`)) return; if (sound && recFor) { try { const a = new Audio(recFor); a.onerror = () => { if (txt) onText && onText(txt, lang); }; a.play().catch(() => { if (txt) onText && onText(txt, lang); }); return; } catch { /* */ } } if (txt) onText && onText(txt, lang); };
 
   let stopped = false, raf = 0, renderer = null;
   const cleanup = () => { cancelAnimationFrame(raf); if (renderer) renderer.dispose(); gl.remove(); text.remove(); };
@@ -55,7 +55,7 @@ export function celebrate3d(canvas, { oldBest = 0, newBest = 1, sound = true, on
     raf = requestAnimationFrame(frame);
   };
   let fallbackStop = null;
-  run().catch(e => { console.warn('celebrate3d', e); window.__c3dError = String(e && e.message || e); cleanup(); if (!stopped) { stopped = true; try { fallbackStop = celebrate2d(canvas, { oldBest, newBest, sound, onText, onDone, scene: null }); } catch (e2) { onDone && onDone(); } } });
+  run().catch(e => { console.warn('celebrate3d', e); window.__c3dError = String(e && e.message || e); cleanup(); if (!stopped) { stopped = true; try { fallbackStop = celebrate2d(canvas, { oldBest, newBest, sound, onText, onRecording, onDone, scene: null }); } catch (e2) { onDone && onDone(); } } });
   return () => { stopped = true; cleanup(); if (fallbackStop) fallbackStop(); };
 }
 
