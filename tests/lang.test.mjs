@@ -145,7 +145,9 @@ test('a working group and her answer about how to work with it', () => {
   same(groupOption, ['תוסיפי את דנה לקבוצה', 'add דנה to the group', 'add דנה too', 'ajoute דנה au groupe', 'ajoute aussi דנה'], { add: 'דנה' });
 });
 
-test('commands in three languages', () => {
+test('commands in three languages', t => {
+  // parseCommand uses today's date internally; keep this fixture on Monday.
+  t.mock.timers.enable({ apis: ['Date'], now: new Date(`${T}T12:00:00Z`).getTime() });
   same(cmd, ['שלחי הודעה לרועי: אני מגיעה', 'send a message to Roy: אני מגיעה', 'send Roy a message: אני מגיעה', 'envoie un message à Roy : אני מגיעה', 'écris à Roy : אני מגיעה', 'envoie un whats app à Roy : אני מגיעה', 'send a whats app to Roy saying אני מגיעה', 'envoie un whatsapp à Roy en disant אני מגיעה'], { kind: 'message', to: 't1', body: 'אני מגיעה', via: 'whatsapp', who: undefined, type: undefined, due: undefined });
   same(cmd, ['שלחי מייל לרועי: ההצעה מוכנה', 'send an email to Roy: ההצעה מוכנה', 'send Roy an e-mail: ההצעה מוכנה', 'envoie un mail à Roy : ההצעה מוכנה', 'envoie un e-mail à Roy, ההצעה מוכנה'], { kind: 'message', to: 't1', body: 'ההצעה מוכנה', via: 'email', who: undefined, type: undefined, due: undefined });
   same(s => cmd(s).body, ['תגידי לדנה שאני מאחרת', 'tell Dana that אני מאחרת', 'dis à Dana que אני מאחרת'], 'אני מאחרת');
@@ -153,7 +155,7 @@ test('commands in three languages', () => {
   same(s => [cmd(s).kind, cmd(s).who], ['תבני לי הצעת מחיר לשוב״ל', 'build a quote for שוב״ל', 'prepare me a quote for שוב״ל', 'make a quote for שוב״ל please', 'prépare un devis pour שוב״ל', 'fais-moi un devis pour שוב״ל', 'crée un devis pour שוב״ל s’il te plaît'], ['quote', 'שוב״ל']);
   same(s => [cmd(s).kind, cmd(s).type, cmd(s).who], ['תבקשי הצעות ממלונות לשוב״ל', 'ask for quotes from מלונות for שוב״ל', 'request quotes from the מלונות for שוב״ל', 'ask the מלונות for quotes for שוב״ל', 'demande des devis aux מלונות pour שוב״ל', 'demande des devis à des מלונות pour שוב״ל'], ['ask', 'מלונות', 'שוב״ל']);
   same(s => [cmd(s).kind, cmd(s).to], ['תתקשרי לדנה', 'call Dana', 'call Dana back', 'phone Dana', 'appelle Dana', 'appeler Dana', 'téléphone à Dana', 'rappelle Dana'], ['call', 'c1']);
-  same(s => [cmd(s).kind, cmd(s).to, cmd(s).body, cmd(s).due], ['משימה לרועי: לאסוף שלטים ביום חמישי', 'task for Roy: לאסוף שלטים by thursday', 'add a task for Roy: לאסוף שלטים on thursday', 'new task for Roy: לאסוף שלטים next thursday', 'tâche pour Roy : לאסוף שלטים jeudi', 'ajoute une tâche pour Roy : לאסוף שלטים jeudi prochain', 'nouvelle tâche pour Roy : לאסוף שלטים ce jeudi'], ['task', 't1', 'לאסוף שלטים', '2026-10-08']);
+  same(s => [cmd(s).kind, cmd(s).to, cmd(s).body, cmd(s).due], ['משימה לרועי: לאסוף שלטים ביום חמישי', 'task for Roy: לאסוף שלטים by thursday', 'add a task for Roy: לאסוף שלטים on thursday', 'new task for Roy: לאסוף שלטים next thursday', 'tâche pour Roy : לאסוף שלטים jeudi', 'ajoute une tâche pour Roy : לאסוף שלטים jeudi prochain', 'nouvelle tâche pour Roy : לאסוף שלטים ce jeudi'], ['task', 't1', 'לאסוף שלטים', '2026-10-01']);
   same(s => [cmd(s).kind, cmd(s).to, cmd(s).body], ['רשמי הערה על דנה: יקרים אבל שווים', 'note on Dana: יקרים אבל שווים', 'write a note about Dana: יקרים אבל שווים', 'note sur Dana : יקרים אבל שווים', 'écris une note sur Dana : יקרים אבל שווים'], ['note', 'c1', 'יקרים אבל שווים']);
   same(s => [cmd(s).kind, cmd(s).to], ['תפתחי את הספק מלון דניאל', 'open the supplier Hotel Daniel', 'show me Hotel Daniel', 'ouvre le fournisseur Hôtel Daniel', 'ouvre la fiche de Hotel Daniel', 'montre-moi Hotel Daniel'], ['open', 's1']);
   same(s => [cmd(s).kind, cmd(s).body], ['פנייה חדשה: דנה לוי 052', 'new lead: דנה לוי 052', 'new inquiry: דנה לוי 052', 'new enquiry: דנה לוי 052', 'nouvelle demande : דנה לוי 052', 'nouveau lead : דנה לוי 052', 'nouveau client : דנה לוי 052'], ['lead', 'דנה לוי 052']);
