@@ -1,0 +1,14 @@
+{
+  "name": "kid-hands-shoes-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node capture.mjs --serve",
+    "capture": "node capture.mjs",
+    "test": "node capture.mjs --test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.57.0"
+  }
+}

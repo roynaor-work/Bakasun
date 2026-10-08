@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ידיים ונעלי כדורגל · מעבדת צורה</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow"><span class="mark">k.</span> מעבדת צורה <span class="separator">/</span> מחקר 02</div>
+      <div class="heading-row"><div><h1>פרטים קטנים.<br><span>אופי גדול.</span></h1><p class="intro">ידיים רכות ונעלי כדורגל לילד צעצוע.<br>שלוש תנוחות, שש זוויות, ומבט אל תהליך הבנייה.</p></div><div class="spec"><span class="dot"></span> THREE.JS · LOCAL<br><b>אור קבוע. מצלמה קבועה.</b><small>כל שינוי בצורה נשאר גלוי.</small></div></div>
+    </header>
+    <nav class="controls" aria-label="מבטים וגרסאות">
+      <div class="views"><span class="control-label">מבט נבחר</span><button data-view="front">חזית</button><button data-view="side">צד</button><button data-view="back">גב</button><button data-view="threeQuarter" aria-pressed="true">¾</button><button data-view="top">מעל</button><button data-view="bottom">מתחת</button></div>
+      <div class="revisions"><button data-revision="baseline">לפני</button><button data-revision="final" aria-pressed="true">אחרי</button><button id="wireframe" aria-pressed="false">רשת</button></div>
+    </nav>
+    <section aria-labelledby="hands-title">
+      <div class="section-heading"><h2 id="hands-title"><span>01</span> כף יד, שלושה מצבים</h2><p>ארבע אצבעות ואגודל · מעטפת אחת רציפה</p></div>
+      <div id="hands-viewport" class="viewport hand-grid">
+        <article class="model-card"><div class="model-window" data-hand="open" role="img" aria-label="כף יד פתוחה בתלת ממד"></div><div class="card-label"><h3>פתוחה</h3><span>OPEN</span></div></article>
+        <article class="model-card"><div class="model-window" data-hand="fist" role="img" aria-label="כף יד באגרוף בתלת ממד"></div><div class="card-label"><h3>אגרוף</h3><span>FIST</span></div></article>
+        <article class="model-card"><div class="model-window" data-hand="wave" role="img" aria-label="כף יד בתנוחת נפנוף בתלת ממד"></div><div class="card-label"><h3>נפנוף</h3><span>WAVE</span></div></article>
+      </div>
+      <p class="annotation"><span class="line"></span> החיבור לכף היד מפוסל בשדה מרחק. האצבעות צומחות מתוכה.</p>
+    </section>
+    <section aria-labelledby="shoe-title">
+      <div class="section-heading"><h2 id="shoe-title"><span>02</span> נעל קטנה, מבנה שלם</h2><p>סוליה · פקקים · שלושה פסים · שרוכים</p></div>
+      <div id="shoe-viewport" class="viewport shoe-grid">
+        <article class="model-card"><div class="model-window" data-shoe="primary" role="img" aria-label="נעל כדורגל במבט הנבחר"></div><div class="card-label"><h3 id="shoe-primary-label">שלושה רבעים</h3><span>SELECTED VIEW</span></div></article>
+        <article class="model-card"><div class="model-window" data-shoe="top" role="img" aria-label="נעל כדורגל מלמעלה"></div><div class="card-label"><h3>מלמעלה</h3><span>TOP</span></div></article>
+        <article class="model-card"><div class="model-window" data-shoe="bottom" role="img" aria-label="נעל כדורגל מלמטה"></div><div class="card-label"><h3>מלמטה</h3><span>SOLE</span></div></article>
+        <article class="model-card"><div class="model-window" data-shoe="side" role="img" aria-label="נעל כדורגל מהצד"></div><div class="card-label"><h3>צד</h3><span>PROFILE</span></div></article>
+      </div>
+    </section>
+    <footer><div><span class="foot-label">מבט אל הבנייה</span><p>הגרסה הראשונה והגרסה הסופית באותה תאורה.<br><a href="NOTES.md">הפרמטרים, הניסיונות והלקחים ←</a></p></div><div class="metrics" id="live-metrics" aria-live="polite">בונה את הגאומטריה…</div><p class="reference-status">תמונות היעד לא התקבלו.<br>הדגמים מבוססים בינתיים על התיאור; התאמה לתמונה טרם נבדקה.</p></footer>
+    <p id="error" role="alert" hidden></p>
+  </main>
+  <script type="module" src="lab.js"></script>
+</body>
+</html>
