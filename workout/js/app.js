@@ -15,6 +15,7 @@ import { initParent, parentGate, parentHome, basketball } from './parent.js?v=20
 import { playIntro } from './intro.js';
 import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js';
 import { SAY } from './say.js';
+import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261008-minute-1';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
@@ -114,7 +115,7 @@ function confetti() {
 }
 
 // ---- ניתוב ----
-const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, basketball };
+const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, minute: minuteScreen, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, basketball };
 function route() {
   const [path, arg] = location.hash.replace(/^#\/?/, '').split('/');
   (routes[path] || home)(arg);
@@ -155,6 +156,12 @@ function home() {
 
     <div class="weekstrip">
       ${week.map(d => { const pid = plan()[d.day]; const p = pid && programById[pid]; return `<div class="wd ${d.today ? 'today' : ''} ${d.done ? 'done' : ''} ${d.past && !d.done && p ? 'missed' : ''}"><span>${DAY_NAMES[d.day].slice(0, 2)}</span><span class="e">${d.done ? '✅' : p ? p.emoji : '😴'}</span></div>`; }).join('')}
+    </div>
+
+    <div class="card stack">
+      <h2>⏱️ הדקה שלי</h2>
+      <p class="muted small">בוחרים תרגיל, סופרים בלחיצה במשך דקה ורואים את השיא האישי שלך. בקצב שלך.</p>
+      <button class="btn primary big" data-go="#/minute">למבחן הדקה שלי</button>
     </div>
 
     ${pendingWorkout() ? `<div class="card" style="border:3px solid var(--hot)"><div class="row"><span style="font-size:32px">⏸️</span><div class="grow"><b>יש אימון באמצע: ${esc(pendingWorkout().program.name)}</b><p class="muted small">עצרת אחרי ${pendingWorkout().items.filter(i => i.done > 0 || i.skipped).length} מתוך ${pendingWorkout().items.length} תרגילים.</p></div></div>
@@ -285,6 +292,7 @@ function exerciseDetail(id) {
       <div class="tile"><b>${p ? p.times : 0}</b>פעמים שעשית</div>
     </div>
     <button class="btn primary big" id="solo">לעשות עכשיו רק את זה 💥</button>
+    ${ex.type === 'reps' ? `<button class="btn big" data-go="#/minute/${ex.id}">⏱️ מבחן דקה בתרגיל הזה</button>` : ''}
   </div>`);
   const f = wireStage();
   wireHelp(ex, f);
@@ -292,6 +300,90 @@ function exerciseDetail(id) {
     const program = { id: 'solo', name: ex.name, emoji: '💥', items: [ex.id], rounds: 1, minutes: 1 };
     beginWorkout(program, buildItems(program, byId, store.profile.level));
   };
+}
+
+// ---- הדקה שלי: מונה לחיץ, ורק מבחן מלא שומר שיא ----
+const minuteRecords = () => { try { return loadMinuteRecords(localStorage); } catch { return {}; } };
+function minuteScreen(id) {
+  const records = minuteRecords();
+  const ex = byId[id];
+  if (!ex || ex.type !== 'reps') {
+    mount(`<div class="stack">
+      <div class="row"><button class="btn icon ghost" data-go="#/home" aria-label="חזרה">→</button><h1>הדקה שלי ⏱️</h1></div>
+      <p>איזה תרגיל בא לך? אחרי כל חזרה לוחצים על המספר הגדול. אפשר גם שאבא יספור איתך.</p>
+      ${EXERCISES.filter(e => e.type === 'reps').map(e => `<button class="btn big minute-choice" data-go="#/minute/${e.id}"><span>${esc(e.name)}</span><span class="muted small">${records[e.id] ? `השיא שלי בדקה: ${records[e.id].best}` : 'הדקה הראשונה שלי'}</span></button>`).join('')}
+    </div>`);
+    return;
+  }
+  const previous = records[ex.id];
+  mount(`<div class="stack minute-screen">
+    <div class="row"><button class="btn icon ghost" data-go="#/minute" aria-label="חזרה">→</button><h1 class="grow">הדקה שלי ⏱️</h1></div>
+    <h2 class="center">${esc(ex.name)}</h2>
+    <div class="stage">${stageHtml(ex)}</div>
+    <div id="minute-help">${helpButton()}</div>
+    <div class="card center stack">
+      <p id="minute-best">${previous ? `השיא האישי שלי בדקה: ${previous.best} חזרות` : 'עוד אין שיא בדקה בתרגיל הזה. זו התחלה חדשה.'}</p>
+      <div class="minute-clock ltr" id="minute-clock" role="timer" aria-label="הזמן שנותר">1:00</div>
+      <p id="minute-status" role="status">אחרי כל חזרה לוחצים על המספר. כל תנועה נחשבת.</p>
+      <button class="btn rep-counter" id="minute-count" aria-label="0 חזרות. לחיצה מוסיפה חזרה" disabled>0</button>
+      <button class="btn" id="minute-minus" disabled>− תיקון חזרה</button>
+      <button class="btn primary big" id="minute-start">מתחילים דקה</button>
+      <button class="btn ghost" id="minute-stop" hidden>לעצור ולנוח</button>
+    </div>
+  </div>`, true);
+  const mainFig = wireStage();
+  wireHelp(ex, mainFig);
+  let state = null, lastCue = null, finished = false;
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    const result = minuteResult(state, records);
+    let saved = false;
+    if (result) { try { saved = saveMinuteRecords(localStorage, recordMinuteTest(records, state)); } catch { /* אחסון חסום */ } }
+    mount(`<div class="stack">
+      <section class="hero center"><h1>${result ? 'סיימת דקה! 💛' : 'זמן לנוח 💛'}</h1><p>${result ? esc(result.message) : 'אפשר לחזור כשתרצה. השיא שלך מחכה לך.'}</p></section>
+      ${result ? `<div class="card center stack"><div class="minute-clock">${result.count}</div><p>חזרות בדקה</p><p>${esc(result.comparisonText)}</p>
+        ${result.previousBest != null ? `<p class="muted small">השיא לפני הדקה: ${result.previousBest}</p>` : ''}
+        <b>השיא האישי שלי בדקה: ${result.best}</b>
+        <p class="small" role="status">${saved ? 'הדקה נשמרה בטלפון.' : 'הדקה מוצגת כאן, אבל לא הצלחנו לשמור אותה בטלפון.'}</p></div>`
+        : '<div class="card center">עצרנו לפני סוף הדקה, אז השיא הקודם נשאר כמו שהיה.</div>'}
+      <button class="btn primary big" id="minute-again">עוד דקה, כשמתאים לי</button>
+      <button class="btn big" data-go="#/minute">לבחור תרגיל אחר</button>
+      <button class="btn ghost big" data-go="#/home">לדף הבית 🏠</button>
+    </div>`);
+    $('#minute-again').onclick = () => minuteScreen(ex.id);
+    if (result) sayQuick('הַדַּקָּה הִסְתַּיְּמָה. כָּל תְּנוּעָה נֶחְשֶׁבֶת.');
+  };
+  const paint = () => {
+    if (!state || finished) return;
+    state = advanceMinuteTest(state, performance.now());
+    if (state.status === 'completed' || state.status === 'cancelled') return finish();
+    const running = state.status === 'running';
+    $('#minute-count').disabled = $('#minute-minus').disabled = !running;
+    $('#minute-count').textContent = state.count;
+    $('#minute-count').setAttribute('aria-label', `${state.count} חזרות. לחיצה מוסיפה חזרה`);
+    const sec = Math.ceil(((running ? state.endAt : state.readyAt) - performance.now()) / 1000);
+    $('#minute-clock').textContent = running ? fmtTime(sec) : sec;
+    $('#minute-status').textContent = running ? 'אחרי כל חזרה לוחצים על המספר. בקצב שלך.' : 'מתכוננים יחד…';
+    if (running && lastCue !== 'running') { lastCue = 'running'; mainFig.play(ex, 1); beep(880, 160); sayQuick('מַתְחִילִים. בַּקֶּצֶב שֶׁלְּךָ.'); }
+    else if (!running && lastCue !== sec) { lastCue = sec; sayQuick(numWord(sec)); beep(520, 90); }
+  };
+  $('#minute-start').onclick = () => {
+    if (state) return;
+    state = startMinuteTest(ex.id, performance.now());
+    stopSpeak(); mainFig.stop(); $('#minute-help').hidden = true;
+    $('#minute-start').hidden = true; $('#minute-stop').hidden = false;
+    tick = setInterval(paint, 100); paint();
+  };
+  $('#minute-count').onclick = () => { if (state) { state = changeMinuteCount(state, 1, performance.now()); paint(); } };
+  $('#minute-minus').onclick = () => { if (state) { state = changeMinuteCount(state, -1, performance.now()); paint(); } };
+  const stop = () => { if (state && !finished) { state = cancelMinuteTest(state, performance.now()); finish(); } };
+  $('#minute-stop').onclick = stop;
+  const visibility = () => { if (document.hidden) stop(); };
+  const pagehide = () => stop();
+  document.addEventListener('visibilitychange', visibility);
+  window.addEventListener('pagehide', pagehide);
+  figures.push({ stop: () => { document.removeEventListener('visibilitychange', visibility); window.removeEventListener('pagehide', pagehide); } });
 }
 
 // ---- מהלך האימון ----
@@ -358,18 +450,18 @@ function repsBlock(it) {
   <div class="card center stack" id="repcard">
     <div class="target">${it.target} <span class="small muted" style="font-size:18px">חזרות</span></div>
     ${byId[it.exId].signal ? '<button class="btn primary" id="signal">🚦 אות יציאה</button><p class="muted small">לוחצים, מתכוננים ליד הקיר, ומחכים לצפצוף.</p>' : '<button class="btn primary" id="countme">🔢 ספור איתי</button>'}
-    <p class="muted small" id="rephint">${byId[it.exId].signal ? 'אחרי כל ריצה מסמנים כמה עשית:' : 'עושים יחד עם הדמות והמספר עולה לבד. או פשוט מסמנים כמה עשית:'}</p>
+    <p class="muted small" id="rephint">${byId[it.exId].signal ? 'אחרי כל ריצה לוחצים על המספר הגדול:' : 'אחרי כל חזרה לוחצים על המספר הגדול. אפשר גם לספור יחד עם הדמות.'}</p>
     <div class="stepper">
       <button class="btn icon" id="minus" aria-label="פחות">−</button>
-      <div class="n" id="count">${it.done || it.target}</div>
+      <button class="btn n rep-counter" id="count" aria-label="${it.done || 0} חזרות. לחיצה מוסיפה חזרה">${it.done || 0}</button>
       <button class="btn icon" id="plus" aria-label="יותר">+</button>
     </div>
     <button class="btn ok big" id="did">עשיתי! ✅</button>
   </div>`;
 }
 function wireReps(it, ex, mainFig) {
-  let n = it.done || it.target, counting = false;
-  const show = () => { $('#count').textContent = n; };
+  let n = it.done || 0, counting = false;
+  const show = () => { $('#count').textContent = n; $('#count').setAttribute('aria-label', `${n} חזרות. לחיצה מוסיפה חזרה`); };
   let stopListen = null;
   const stopCount = () => { clearInterval(tick); tick = 0; counting = false; mainFig.onRep = null; if (stopListen) { stopListen(); stopListen = null; } mainFig.play(ex, 1); $('#repcard').classList.remove('counting'); if ($('#countme')) $('#countme').textContent = '🔢 ספור איתי'; };
   figures.push({ stop: () => { if (stopListen) stopListen(); stopListen = null; } }); // יציאה מהמסך עוצרת את המיקרופון
@@ -404,6 +496,7 @@ function wireReps(it, ex, mainFig) {
   };
   $('#minus').onclick = () => { if (counting) stopCount(); n = Math.max(0, n - 1); show(); };
   $('#plus').onclick = () => { if (counting) stopCount(); n++; show(); };
+  $('#count').onclick = $('#plus').onclick;
   $('#did').onclick = () => { stopCount(); finishItem(n, false); };
 }
 
