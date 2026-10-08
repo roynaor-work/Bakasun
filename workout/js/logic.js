@@ -201,12 +201,30 @@ export function unlockCredits(workouts, unlockedCount, unlockEvery = 10) {
 }
 export const nextUnlockIn = (workouts, unlockEvery = 10) => unlockEvery ? unlockEvery - (workouts % unlockEvery) : 0;
 
-// דירוג התמדה לפי מספר אימונים ורצף
+// חגורות צבע לפי מספר האימונים שנשמרו בלבד. הספים והשמות הישנים נשמרים לתאימות.
 export const RANKS = [
-  { min: 0, name: 'מתחיל', emoji: '🌱' }, { min: 3, name: 'מתאמן', emoji: '🏃' }, { min: 8, name: 'רציני', emoji: '💪' },
-  { min: 15, name: 'לוחם', emoji: '🥊' }, { min: 25, name: 'אלוף', emoji: '🏆' }, { min: 40, name: 'אגדה', emoji: '👑' },
+  { min: 0, name: 'מתחיל', emoji: '🌱', belt: 'חגורה לבנה', color: '#F8FAFC' },
+  { min: 3, name: 'מתאמן', emoji: '🏃', belt: 'חגורה צהובה', color: '#FACC15' },
+  { min: 8, name: 'רציני', emoji: '💪', belt: 'חגורה כתומה', color: '#FB923C' },
+  { min: 15, name: 'לוחם', emoji: '🥊', belt: 'חגורה ירוקה', color: '#22C55E' },
+  { min: 25, name: 'אלוף', emoji: '🏆', belt: 'חגורה כחולה', color: '#3B82F6' },
+  { min: 40, name: 'אגדה', emoji: '👑', belt: 'חגורה שחורה', color: '#1F2937' },
 ];
-export function rankOf(workouts) { let r = RANKS[0]; for (const x of RANKS) if (workouts >= x.min) r = x; const next = RANKS.find(x => x.min > workouts); return { ...r, next, toNext: next ? next.min - workouts : 0 }; }
+export function rankOf(workouts = 0) {
+  const count = Number.isFinite(workouts) ? Math.max(0, Math.floor(workouts)) : 0;
+  let r = RANKS[0];
+  for (const x of RANKS) if (count >= x.min) r = x;
+  const next = RANKS.find(x => x.min > count);
+  const progress = count - r.min, span = next ? next.min - r.min : 0;
+  return { ...r, workouts: count, next, toNext: next ? next.min - count : 0,
+    progress, span, progressPct: next ? Math.round(100 * progress / span) : 100 };
+}
+
+// חגורה חדשה רק כשאימון נוסף חוצה סף. טעינה חוזרת או יום מנוחה אינם עליית דרגה.
+export function rankUp(before, after) {
+  const previous = rankOf(before), current = rankOf(after);
+  return current.min > previous.min ? current : null;
+}
 
 // המשפט של ההתמדה בסוף אימון
 export function perseveranceLine(st) {

@@ -102,6 +102,17 @@ p { margin: 0; }
 .counting .n { color: var(--accent); }
 .tile.next b { font-size: 20px; }
 
+/* החגורה מוצגת גם בשם וגם בצבע, ונשארת קריאה במצב כהה. */
+.belt-card { border: 2px solid var(--line); }
+.belt-card h2 { font-size: 21px; }
+.belt-mark { position: relative; display: inline-block; flex: 0 0 64px; height: 18px; margin-block: 6px;
+  border: 1px solid #64748B; border-radius: 5px; background: var(--belt-color); }
+.belt-mark::after { content: ''; position: absolute; width: 16px; height: 26px; top: -5px; left: 23px;
+  border: 1px solid #64748B; border-radius: 3px; background: var(--belt-color); transform: rotate(-12deg); }
+.belt-new { font-weight: 700; color: var(--accent); }
+.belt-progress { height: 12px; border-radius: 999px; overflow: hidden; background: var(--line); }
+.belt-progress span { display: block; height: 100%; border-radius: inherit; background: var(--belt-color); border: 1px solid #64748B; }
+
 /* הדמות */
 svg.figure { width: 100%; height: auto; display: block; }
 .stage svg.figure { max-height: 250px; width: auto; }
