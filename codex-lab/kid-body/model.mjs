@@ -9,6 +9,23 @@ export const PALETTES = {
 
 const TAU = Math.PI * 2;
 const clamp = THREE.MathUtils.clamp;
+// Keep radial resolution independent from height: broad toy silhouettes need
+// fewer slices, while the exposed knee still needs closely spaced fold samples.
+// The dense preset preserves the original 59,920-triangle teaching specimen.
+const TESSELLATION = {
+  dense: { torsoRadial:48, torsoHeight:34, neckRadial:48, neckHeight:20,
+    shirtRadial:64, shirtHeight:58, collarRadial:80, collarHeight:6, hemHeight:5,
+    limbRadial:48, armHeight:38, sleeveHeight:36, cuffHeight:7, cuffLipHeight:5,
+    shortsRadial:64, shortsHeight:36, shortsHemHeight:4, stripeHeight:24, stripeWidth:3,
+    legHeight:42, sockHeight:42, numberSegments:18 },
+  balanced: { torsoRadial:24, torsoHeight:16, neckRadial:32, neckHeight:12,
+    shirtRadial:32, shirtHeight:32, collarRadial:48, collarHeight:6, hemHeight:3,
+    limbRadial:32, armHeight:30, sleeveHeight:26, cuffHeight:4, cuffLipHeight:3,
+    armExposedHeight:24, armCoveredHeight:6,
+    shortsRadial:32, shortsHeight:28, shortsHemHeight:2, stripeHeight:16, stripeWidth:2,
+    legHeight:30, legCoveredLowHeight:8, legExposedHeight:16, legCoveredHighHeight:6,
+    sockHeight:28, numberSegments:12 },
+};
 const gauss = (n, center, width) => Math.exp(-(((n - center) / width) ** 2));
 const smooth = (a, b, v) => {
   const t = clamp((v - a) / (b - a), 0, 1);
@@ -50,11 +67,18 @@ function shirtFold(x, y, theta, enabled) {
   return underarm + waist + flank;
 }
 
-function jerseyPoint(y, theta, folded, extra = 0) {
+function jerseyRadii(y) {
   let rx = profile(shirtRows, y, 'rx'), rz = profile(shirtRows, y, 'rz');
   const topBlend = smooth(1.36, 1.58, y);
   rx = THREE.MathUtils.lerp(rx, .132, topBlend);
   rz = THREE.MathUtils.lerp(rz, .112, topBlend);
+  // Narrow the hem and torso, while keeping the opening clear of the neck.
+  rx *= THREE.MathUtils.lerp(.90, 1, smooth(1.49, 1.58, y));
+  return {rx,rz};
+}
+
+function jerseyPoint(y, theta, folded, extra = 0) {
+  const {rx,rz} = jerseyRadii(y);
   const x = rx * Math.cos(theta);
   const delta = shirtFold(x, y, theta, folded);
   // The ring closes at a V opening, not a plugged cone at the neck.
@@ -81,11 +105,19 @@ function ringGeometry(ys, sides, point, materialForRow) {
       const a = i * (sides + 1) + j, b = a + 1, c = a + sides + 1, d = c + 1;
       indices.push(a, c, b, b, c, d);
     }
-    if (materialForRow) geometry.addGroup(start, indices.length - start, materialForRow((ys[i] + ys[i + 1]) / 2));
+    if (materialForRow) {
+      const materialIndex = materialForRow((ys[i] + ys[i + 1]) / 2);
+      const previous = geometry.groups.at(-1), count = indices.length - start;
+      // Five sock colour bands need five draws, rather than one draw per row.
+      if (previous && previous.materialIndex === materialIndex && previous.start + previous.count === start) previous.count += count;
+      else geometry.addGroup(start, count, materialIndex);
+    }
   }
   geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
   geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
   geometry.setIndex(indices);
+  geometry.userData.radialSegments = sides;
+  geometry.userData.ringRows = ys.length;
   geometry.computeVertexNormals();
   // Identical seam vertices must also have identical normals.
   const n = geometry.attributes.normal;
@@ -106,13 +138,13 @@ function tubePoint(rows, side, folded = false, type = '') {
     const epsilon = .003;
     const slopeLow = Math.max(rows[0].y, y - epsilon), slopeHigh = Math.min(rows.at(-1).y, y + epsilon);
     let slope = (profile(rows, slopeHigh, 'x') - profile(rows, slopeLow, 'x')) / Math.max(.0001, slopeHigh-slopeLow) * side;
-    if (type === 'sleeve') slope *= 1 - smooth(1.35, 1.446, y);
+    // Keep the section tilted through the roof; flattening it late made a ridge.
     const normal = new THREE.Vector3(1, -slope, 0).normalize();
     let puff = 0;
     if (folded && type === 'leg') {
       // A broad kneecap, then a shallow compression at the back of the knee.
-      puff = .006 * gauss(y, .545, .05) * Math.max(0, Math.sin(theta))
-        - .0035 * gauss(y, .57, .026) * Math.max(0, -Math.sin(theta));
+      puff = .003 * gauss(y, .545, .07) * Math.max(0, Math.sin(theta))
+        - .0018 * gauss(y, .57, .045) * Math.max(0, -Math.sin(theta));
     }
     if (folded && type === 'arm') puff = -.003 * gauss(y, 1.057, .03) * Math.max(0, -Math.sin(theta));
     if (folded && type === 'sleeve') {
@@ -120,7 +152,8 @@ function tubePoint(rows, side, folded = false, type = '') {
         - .003 * gauss(y, 1.35, .03) * Math.cos(theta * 2);
     }
     rx += puff; rz += puff;
-    return new THREE.Vector3(cx + normal.x * rx * Math.cos(theta), y + normal.y * rx * Math.cos(theta), z + rz * Math.sin(theta));
+    const widthScale = type === 'arm' || type === 'sleeve' ? .95 : 1;
+    return new THREE.Vector3((cx + normal.x * rx * Math.cos(theta)) * widthScale, y + normal.y * rx * Math.cos(theta), z + rz * Math.sin(theta));
   };
 }
 
@@ -136,11 +169,12 @@ const armRows = [
 const sleeveRows = [
   { y: 1.206, x: .382, z: 0, rx: .124, rz: .136 },
   { y: 1.231, x: .375, z: 0, rx: .128, rz: .139 },
-  { y: 1.31, x: .343, z: 0, rx: .141, rz: .151 },
-  { y: 1.39, x: .304, z: 0, rx: .146, rz: .156 },
-  { y: 1.446, x: .254, z: 0, rx: .135, rz: .147 },
-  { y: 1.469, x: .221, z: 0, rx: .080, rz: .091 },
-  { y: 1.486, x: .184, z: 0, rx: .001, rz: .001 },
+  { y: 1.31, x: .343, z: 0, rx: .137, rz: .145 },
+  { y: 1.36, x: .318, z: 0, rx: .134, rz: .144 },
+  { y: 1.405, x: .296, z: 0, rx: .121, rz: .136 },
+  { y: 1.446, x: .276, z: 0, rx: .094, rz: .112 },
+  { y: 1.469, x: .265, z: 0, rx: .064, rz: .081 },
+  { y: 1.486, x: .257, z: 0, rx: .001, rz: .001 },
 ];
 const legRows = [
   { y: .080, x: .198, z: -.008, rx: .092, rz: .090 },
@@ -149,7 +183,7 @@ const legRows = [
   { y: .48, x: .184, z: .0, rx: .109, rz: .108 },
   { y: .56, x: .180, z: .002, rx: .117, rz: .117 },
   { y: .68, x: .169, z: .0, rx: .136, rz: .138 },
-  { y: .84, x: .163, z: -.001, rx: .126, rz: .121 },
+  { y: .84, x: .163, z: -.001, rx: .105, rz: .119 },
 ];
 const sockRows = [
   { y: .080, x: .198, z: -.008, rx: .096, rz: .096 },
@@ -165,9 +199,12 @@ function shortsPoint(side, folded) {
   return (y, theta) => {
     // Elliptical leg openings morph into matching halves of a common pelvis.
     // Only the internal D walls coincide; the visible front/back join smoothly.
-    const blend = smooth(.735, .837, y);
+    const blend = smooth(.705, .86, y);
     const bottomX = .181 + .155 * Math.cos(theta);
-    const topX = .334 * Math.max(0, Math.cos(theta));
+    // The waist fits below the narrower shirt; thighs keep the wider openings.
+    // An everywhere-positive rounded cosine left a slit at x=0, so the two
+    // internal D walls must still meet exactly at the center plane.
+    const topX = .282 * Math.max(0, Math.cos(theta));
     let x = THREE.MathUtils.lerp(bottomX, topX, blend);
     const depth = THREE.MathUtils.lerp(.179, .197, smooth(.64, .92, y));
     let z = depth * Math.sin(theta);
@@ -196,13 +233,13 @@ function canvasNumber(color) {
   return texture;
 }
 
-function numberGeometry(back, folded) {
-  const p = [], uv = [], indices = [], nx = 18, ny = 18;
+function numberGeometry(back, folded, segments) {
+  const p = [], uv = [], indices = [], nx = segments, ny = segments;
   const width = back ? .268 : .251, height = back ? .283 : .255;
   const cy = back ? 1.288 : 1.258;
   for (let j = 0; j <= ny; j++) for (let i = 0; i <= nx; i++) {
     const x = (i / nx - .5) * width, y = cy + (j / ny - .5) * height;
-    const rx = profile(shirtRows, y, 'rx');
+    const {rx} = jerseyRadii(y);
     const theta = (back ? -1 : 1) * Math.acos(clamp(x / rx, -1, 1));
     const v = jerseyPoint(y, theta, folded, .0011);
     p.push(v.x, v.y, v.z);
@@ -236,26 +273,26 @@ function finishTexture() {
   return texture;
 }
 
-function neckGeometry() {
+function neckGeometry(tessellation) {
   const rows = [
     { y: 1.456, rx: .131, rz: .111 },
     { y: 1.552, rx: .128, rz: .108 },
     { y: 1.633, rx: .119, rz: .106 },
     { y: 1.670, rx: .128, rz: .111 },
   ];
-  return ringGeometry(range(1.456, 1.67, 20), 48, (y, t) => new THREE.Vector3(
+  return ringGeometry(range(1.456, 1.67, tessellation.neckHeight), tessellation.neckRadial, (y, t) => new THREE.Vector3(
     profile(rows, y, 'rx') * Math.cos(t), y, profile(rows, y, 'rz') * Math.sin(t)));
 }
 
-function collarGeometry() {
+function collarGeometry(tessellation) {
   // An annular ribbon follows the actual V-neck opening. No torus or dark line.
-  return ringGeometry(range(0, 1, 6), 80, (v, theta) => {
+  return ringGeometry(range(0, 1, tessellation.collarHeight), tessellation.collarRadial, (v, theta) => {
     return jerseyPoint(1.58-v*.043,theta,false,.0015+.0008*Math.sin(v*Math.PI));
   });
 }
 
-function capGeometry(point, y, down) {
-  const sides = 48, positions = [], indices = [];
+function capGeometry(point, y, down, sides) {
+  const positions = [], indices = [];
   const ring = Array.from({ length: sides }, (_, i) => point(y, i * TAU / sides));
   const center = ring.reduce((a, b) => a.add(b), new THREE.Vector3()).multiplyScalar(1 / sides);
   positions.push(center.x, center.y, center.z);
@@ -270,8 +307,10 @@ function capGeometry(point, y, down) {
   return g;
 }
 
-export function buildKidBody({ palette = 'blue', stage = 'final' } = {}) {
+export function buildKidBody({ palette = 'blue', stage = 'final', detail = 'balanced' } = {}) {
   const started = performance.now(), folded = stage === 'final';
+  if (!Object.hasOwn(TESSELLATION, detail)) throw new Error('Unknown detail: ' + detail);
+  const tessellation = TESSELLATION[detail];
   const p = PALETTES[palette] || PALETTES.blue;
   const group = new THREE.Group(); group.name = 'kid-body';
   const fabricFinish = folded ? finishTexture() : null;
@@ -310,29 +349,32 @@ export function buildKidBody({ palette = 'blue', stage = 'final' } = {}) {
     }
   } else {
     // Hidden torso remains useful for explaining garment clearance and sockets.
-    add('torso', ringGeometry(range(.933, 1.56, 34), 48, (y, t) => {
+    add('torso', ringGeometry(range(.933, 1.56, tessellation.torsoHeight), tessellation.torsoRadial, (y, t) => {
       const v = jerseyPoint(y, t, false); v.x *= .89;v.z *= .88;v.y -= .01;return v;
     }), skin).castShadow = false;
-    add('neck', neckGeometry(), skin);
-    add('jersey', ringGeometry(range(.918, 1.58, 58), 64, (y, t) => jerseyPoint(y, t, folded)), shirt);
-    add('collar-v', collarGeometry(), trim, 'collar');
+    add('neck', neckGeometry(tessellation), skin);
+    add('jersey', ringGeometry(range(.918, 1.58, tessellation.shirtHeight), tessellation.shirtRadial, (y, t) => jerseyPoint(y, t, folded)), shirt);
+    add('collar-v', collarGeometry(tessellation), trim, 'collar');
     // Narrow rolled hem uses the same surface equations, including the folds.
-    add('shirt-hem', ringGeometry(range(.922, .943, 5), 64, (y, t) => jerseyPoint(y, t, folded, .0017)), shirt, 'hem');
+    add('shirt-hem', ringGeometry(range(.922, .943, tessellation.hemHeight), tessellation.shirtRadial, (y, t) => jerseyPoint(y, t, folded, .0017)), shirt, 'hem');
     for (const side of [-1, 1]) {
       const suffix = side < 0 ? 'left' : 'right';
       const arm = tubePoint(armRows, side, folded, 'arm');
       const sleeve = tubePoint(sleeveRows, side, folded, 'sleeve');
       // Keep the hidden upper end below the closed shoulder roof.
-      add(`arm-${suffix}`, ringGeometry(range(.79, 1.38, 38), 48, arm), skin, 'arm');
-      add(`wrist-port-${suffix}`, capGeometry(arm, .79, true), skin, 'wrist-port');
-      add(`sleeve-${suffix}`, ringGeometry(range(1.206, 1.486, 36), 48, sleeve), shirt, 'sleeve');
+      const armYs = detail === 'dense' ? range(.79, 1.38, tessellation.armHeight)
+        : [...range(.79, 1.206, tessellation.armExposedHeight),
+          ...range(1.206, 1.38, tessellation.armCoveredHeight).slice(1)];
+      add(`arm-${suffix}`, ringGeometry(armYs, tessellation.limbRadial, arm), skin, 'arm');
+      add(`wrist-port-${suffix}`, capGeometry(arm, .79, true, tessellation.limbRadial), skin, 'wrist-port');
+      add(`sleeve-${suffix}`, ringGeometry(range(1.206, 1.486, tessellation.sleeveHeight), tessellation.limbRadial, sleeve), shirt, 'sleeve');
       const cuffPoint = (y, t) => {
-        const v = sleeve(y, t), c = new THREE.Vector3(profile(sleeveRows, y, 'x') * side, y, 0);
+        const v = sleeve(y, t), c = new THREE.Vector3(profile(sleeveRows, y, 'x') * side * .95, y, 0);
         const roll = .002 + .001 * Math.sin((y - 1.206) / .035 * Math.PI);
         return v.add(v.clone().sub(c).normalize().multiplyScalar(roll));
       };
-      add(`sleeve-cuff-${suffix}`, ringGeometry(range(1.206, 1.241, 7), 48, cuffPoint), trim, 'cuff');
-      add(`sleeve-cuff-lip-${suffix}`, ringGeometry(range(0, 1, 5), 48, (v, t) => {
+      add(`sleeve-cuff-${suffix}`, ringGeometry(range(1.206, 1.241, tessellation.cuffHeight), tessellation.limbRadial, cuffPoint), trim, 'cuff');
+      add(`sleeve-cuff-lip-${suffix}`, ringGeometry(range(0, 1, tessellation.cuffLipHeight), tessellation.limbRadial, (v, t) => {
         const outer = cuffPoint(1.206, t), inner = arm(1.206, t);
         return outer.lerp(inner, v).add(new THREE.Vector3(0, -.0015*Math.sin(v*Math.PI), 0));
       }), trim, 'cuff');
@@ -345,13 +387,13 @@ export function buildKidBody({ palette = 'blue', stage = 'final' } = {}) {
         }
         return geometry;
       };
-      add(`shorts-${suffix}`, mirrorWinding(ringGeometry(range(.641, .959, 36), 64, pants)), shorts, 'shorts');
-      add(`shorts-hem-${suffix}`, mirrorWinding(ringGeometry(range(.644, .658, 4), 64, (y, t) => {
+      add(`shorts-${suffix}`, mirrorWinding(ringGeometry(range(.641, .959, tessellation.shortsHeight), tessellation.shortsRadial, pants)), shorts, 'shorts');
+      add(`shorts-hem-${suffix}`, mirrorWinding(ringGeometry(range(.644, .658, tessellation.shortsHemHeight), tessellation.shortsRadial, (y, t) => {
         const v = pants(y, t); v.x += side * .0013 * Math.cos(t); v.z += .0013 * Math.sin(t); return v;
       })), shorts, 'hem');
       // Two fine vertical stripes lie on each curved outer side of the shorts.
       for (const offset of [-.11, .11]) {
-        const pos = [], uv = [], idx = [], rows = 24, cols = 3;
+        const pos = [], uv = [], idx = [], rows = tessellation.stripeHeight, cols = tessellation.stripeWidth;
         for (let j = 0; j <= rows; j++) for (let i = 0; i <= cols; i++) {
           const y = .657 + (.944 - .657) * j / rows;
           const theta = offset + (i / cols - .5) * .055;
@@ -366,21 +408,26 @@ export function buildKidBody({ palette = 'blue', stage = 'final' } = {}) {
         add(`shorts-stripe-${suffix}-${offset}`, mirrorWinding(g), trim, 'stripe');
       }
       const leg = tubePoint(legRows, side, folded, 'leg');
-      add(`leg-${suffix}`, ringGeometry(range(.08, .84, 42), 48, leg), skin, 'leg');
+      const legYs = detail === 'dense' ? range(.08, .84, tessellation.legHeight)
+        : [...range(.08, .49, tessellation.legCoveredLowHeight),
+          ...range(.49, .641, tessellation.legExposedHeight).slice(1),
+          ...range(.641, .84, tessellation.legCoveredHighHeight).slice(1)];
+      add(`leg-${suffix}`, ringGeometry(legYs, tessellation.limbRadial, leg), skin, 'leg');
       const sock = tubePoint(sockRows, side);
-      const sockYs = [...new Set([...range(.08, .49, 42), .438, .450, .469, .481])].sort((a, b) => a - b);
-      add(`sock-${suffix}`, ringGeometry(sockYs, 48, sock,
+      const sockYs = [...new Set([...range(.08, .49, tessellation.sockHeight), .438, .450, .469, .481,
+        ...(detail === 'balanced' ? [.484] : [])])].sort((a, b) => a - b);
+      add(`sock-${suffix}`, ringGeometry(sockYs, tessellation.limbRadial, sock,
         y => (y > .438 && y < .450) || (y > .469 && y < .481) ? 1 : 0), [trim, stripe], 'sock');
-      add(`ankle-port-${suffix}`, capGeometry(sock, .08, true), trim, 'ankle-port');
+      add(`ankle-port-${suffix}`, capGeometry(sock, .08, true, tessellation.limbRadial), trim, 'ankle-port');
     }
     const numberTexture = canvasNumber(p.trim);
     const numberMat = new THREE.MeshStandardMaterial({ map: numberTexture, transparent: true,
       alphaTest: .01, roughness: .71, metalness: 0, depthWrite: false,
       polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1, side: THREE.DoubleSide });
-    add('number-10-front', numberGeometry(false, folded), numberMat, 'number').castShadow = false;
-    add('number-10-back', numberGeometry(true, folded), numberMat, 'number').castShadow = false;
+    add('number-10-front', numberGeometry(false, folded, tessellation.numberSegments), numberMat, 'number').castShadow = false;
+    add('number-10-back', numberGeometry(true, folded, tessellation.numberSegments), numberMat, 'number').castShadow = false;
   }
-  const stats = { triangles: 0, meshes: 0, vertices: 0, buildMs: 0, stage, palette };
+  const stats = { triangles: 0, meshes: 0, vertices: 0, buildMs: 0, stage, palette, detail };
   // Match measured vertical landmarks in the reference, after authoring in a
   // regular working coordinate system. Hands are separate, so wrist height has
   // its own map; shortening the legs must not accidentally shorten the arms.
@@ -391,7 +438,7 @@ export function buildKidBody({ palette = 'blue', stage = 'final' } = {}) {
     { y: 1.58, finalY: 1.57 }, { y: 1.67, finalY: 1.60 },
   ];
   const armLandmarks = [
-    { y: .70, finalY: .72 }, { y: .79, finalY: .80 },
+    { y: .70, finalY: .77 }, { y: .79, finalY: .84 },
     { y: 1.206, finalY: 1.19 }, { y: 1.446, finalY: 1.49 },
     { y: 1.58, finalY: 1.57 },
   ];
@@ -411,11 +458,8 @@ export function buildKidBody({ palette = 'blue', stage = 'final' } = {}) {
     positions.needsUpdate = true; mesh.geometry.computeVertexNormals();
     // A ring seam is duplicated for UVs. Restore normal continuity after baking
     // the vertical landmark map, which otherwise exposes a long lighting line.
-    const radial = /jersey|hem/.test(mesh.userData.part) ? 64
-      : /shorts/.test(mesh.userData.part) ? 64
-      : mesh.userData.part === 'collar' ? 80
-      : /torso|neck|arm|sleeve|cuff|leg|sock/.test(mesh.userData.part) ? 48 : null;
-    if (radial && positions.count % (radial + 1) === 0) {
+    const radial = mesh.geometry.userData.radialSegments;
+    if (radial && positions.count === mesh.geometry.userData.ringRows * (radial + 1)) {
       const n = mesh.geometry.attributes.normal;
       for (let i = 0; i < positions.count / (radial + 1); i++) {
         const a = i * (radial + 1), b = a + radial;
@@ -433,11 +477,14 @@ export function buildKidBody({ palette = 'blue', stage = 'final' } = {}) {
     virtualHeadHeight: 1, virtualShoeClearance: .15, virtualTotalHeadUnits: 2.65,
     bodyLandmarks, armLandmarks,
     shirtRows, armRows, sleeveRows, legRows, sockRows,
-    shirtRadialSegments: 64, shirtHeightSegments: 58,
-    limbRadialSegments: 48, shortsRadialSegments: 64,
+    detail, tessellation: { ...tessellation },
+    shirtRadialSegments: tessellation.shirtRadial, shirtHeightSegments: tessellation.shirtHeight,
+    limbRadialSegments: tessellation.limbRadial, shortsRadialSegments: tessellation.shortsRadial,
     clothClearance: { radial: .031, depth: .022 },
-    foldAmplitude: { underarm: .012, waist: .009, knee: .006 },
-    foldWidths: { underarm: .044, waist: .035, knee: .05 },
+    shirtWidthScale: .90, shirtWidthScaleNeckFade: [1.49,1.58], limbWidthScale: .95,
+    shortsWaistRadius: .282, shortsPelvisBlend: [.705,.86],
+    foldAmplitude: { underarm: .012, waist: .009, knee: .003, kneeBack: .0018 },
+    foldWidths: { underarm: .044, waist: .035, knee: .07, kneeBack: .045 },
     collarAuthoringSpan: .043, collarSurfaceOffset: .0015, cuffHeight: .035, bumpScale: .00045,
     coordinateSystem: '+Y up, +Z front; body stops at flat wrist and ankle ports',
   };

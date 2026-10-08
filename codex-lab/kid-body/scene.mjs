@@ -16,6 +16,7 @@ const query=new URLSearchParams(location.search);
 // Named rejected alternatives, retained so the learning notes can be reproduced.
 const experiment=['glossy','flat-numbers'].includes(query.get('experiment'))?query.get('experiment'):null;
 let stage=query.get('stage')||'final', palette=query.get('palette')||'blue', view=query.get('view')||'front';
+let detail=query.get('detail')==='dense'?'dense':'balanced';
 if(!LESSONS[stage])stage='final';
 if(!['blue','coral'].includes(palette))palette='blue';
 if(!(view in ANGLES))view='front';
@@ -65,7 +66,7 @@ function disposeKid() {
 }
 function build({deferRender=false}={}) {
   disposeKid();
-  const start=performance.now(); kid=buildKidBody({stage,palette});
+  const start=performance.now(); kid=buildKidBody({stage,palette,detail});
   if(experiment==='glossy')kid.group.traverse(mesh=>{
     for(const material of [].concat(mesh.material||[])){material.roughness=.08;material.clearcoat=.7;material.clearcoatRoughness=.08;material.bumpScale=0;}
   });
@@ -99,14 +100,17 @@ function updateLabels() {
   document.querySelector('#view-label').textContent=LABELS[view];
   document.querySelector('#triangles').textContent=Math.round(triangleCount(kid.group)).toLocaleString('he-IL');
   document.querySelector('#build').textContent=buildTimeMs.toFixed(1)+' ms';
-  for(const [attr,value] of [['view',view],['palette',palette],['stage',stage]])document.querySelectorAll(`[data-${attr}]`).forEach(b=>b.setAttribute('aria-pressed',b.dataset[attr]===value?'true':'false'));
+  document.querySelector('#draw-calls').textContent=renderer.info.render.calls;
+  for(const [attr,value] of [['view',view],['palette',palette],['stage',stage],['detail',detail]])document.querySelectorAll(`[data-${attr}]`).forEach(b=>b.setAttribute('aria-pressed',b.dataset[attr]===value?'true':'false'));
 }
 function setView(value){if(!(value in ANGLES))throw new Error('Unknown view: '+value);view=value;kid.group.rotation.y=-ANGLES[view];renderer.shadowMap.needsUpdate=true;render();updateLabels();}
 function setPalette(value){if(!['blue','coral'].includes(value))throw new Error('Unknown palette: '+value);palette=value;build();}
 function setStage(value,{deferRender=false}={}){if(!LESSONS[value])throw new Error('Unknown stage: '+value);stage=value;build({deferRender});}
+function setDetail(value,{deferRender=false}={}){if(!['balanced','dense'].includes(value))throw new Error('Unknown detail: '+value);detail=value;build({deferRender});}
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 document.querySelectorAll('[data-palette]').forEach(b=>b.addEventListener('click',()=>setPalette(b.dataset.palette)));
 document.querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',()=>setStage(b.dataset.stage)));
+document.querySelectorAll('[data-detail]').forEach(b=>b.addEventListener('click',()=>setDetail(b.dataset.detail)));
 resize();build();
 new ResizeObserver(resize).observe(viewport);
 let fpsStart=performance.now(), fpsFrames=0;
@@ -120,7 +124,7 @@ function projectY(y) {const point=new THREE.Vector3(0,y,0).project(camera);retur
 function getMetrics() {
   const parts=new Set(); kid.group.traverse(o=>{if(o.userData.part)parts.add(o.userData.part);});
   const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');
-  return {stage,palette,view,experiment,modelTriangles:triangleCount(kid.group),sceneTriangles:triangleCount(scene),buildTimeMs,modelStats:kid.stats,parts:[...parts],parameters:kid.parameters,
+  return {stage,palette,view,detail,experiment,modelTriangles:triangleCount(kid.group),sceneTriangles:triangleCount(scene),drawCalls:renderer.info.render.calls,renderedTriangles:renderer.info.render.triangles,buildTimeMs,modelStats:kid.stats,parts:[...parts],parameters:kid.parameters,
     camera:{...CAMERA,frustum:{left:camera.left,right:camera.right,top:camera.top,bottom:camera.bottom}},lights:LIGHTS,pixelRatio:renderer.getPixelRatio(),canvas:{width:viewport.clientWidth,height:viewport.clientHeight,drawingWidth:renderer.domElement.width,drawingHeight:renderer.domElement.height},
     projection:{neckY:projectY(kid.parameters.neckTopY),ankleY:projectY(kid.parameters.ankleY),centerX:viewport.clientWidth/2},renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),threeRevision:THREE.REVISION};
 }
@@ -136,5 +140,5 @@ async function measure({durationMs=5000,warmupMs=1000}={}) {
   const sorted=intervals.slice().sort((a,b)=>a-b);
   return {...measured,warmupMs,requestedDurationMs:durationMs,frameMs:{median:sorted[Math.floor(sorted.length/2)],p95:sorted[Math.floor(sorted.length*.95)]},renderer:getMetrics().renderer,renderMode:'continuous requestAnimationFrame; camera and lights fixed; shadow updates only on rebuild/view change'};
 }
-window.kidLab={ready:true,setView,setPalette,setStage,render,getMetrics,measure};
+window.kidLab={ready:true,setView,setPalette,setStage,setDetail,render,getMetrics,measure};
 window.addEventListener('pagehide',event=>{if(event.persisted)return;cancelAnimationFrame(renderFrame);disposeKid();renderer.dispose();});
