@@ -1,7 +1,10 @@
 // מצב הורים: רק אבא פותח, עם קוד סודי. רואה את האימונים של הילד מהענן ומנהל את יומן הכדורסל.
-import { store } from './store.js';
+import { store } from './store.js?v=20261008-together-1';
 import * as cloud from './cloud.js';
-import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid } from './logic.js?v=20261007-stars-1';
+import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid, scaleTarget } from './logic.js?v=20261008-together-1';
+import { EXERCISES, byId } from './exercises.js';
+import { PROGRAMS, programById } from './programs.js';
+import { togetherChoice, togetherLabel } from './together.js?v=20261008-together-1';
 
 let ctx = null; // { mount, esc, go, $ } מהאפליקציה
 export function initParent(c) { ctx = c; }
@@ -27,7 +30,7 @@ export function parentGate(next = parentHome) {
       ${first ? `<p>פעם ראשונה בטלפון הזה. קובעים קוד סודי של 4 עד 6 ספרות. רק מי שיודע אותו יראה את המסכים של אבא.</p>
         <label class="field">קוד סודי<input type="password" inputmode="numeric" id="pin1" maxlength="6" class="ltr-input" autocomplete="off"></label>
         <label class="field">עוד פעם<input type="password" inputmode="numeric" id="pin2" maxlength="6" class="ltr-input" autocomplete="off"></label>
-        <label class="field">קוד המשפחה (אותו קוד שבטלפון של הילד)<input type="text" id="fam" value="${esc(store.profile.familyCode)}" class="ltr-input" maxlength="12" autocomplete="off" placeholder="8 תווים"></label>`
+        <label class="field">קוד המשפחה (לא חובה; לחיבור טלפון נוסף)<input type="text" id="fam" value="${esc(store.profile.familyCode)}" class="ltr-input" maxlength="12" autocomplete="off" placeholder="8 תווים"></label>`
       : `<p>מקלידים את הקוד הסודי.</p><label class="field">קוד סודי<input type="password" inputmode="numeric" id="pin1" maxlength="6" class="ltr-input" autocomplete="off"></label>`}
       <p class="muted small" id="err"></p>
       <button class="btn primary big" id="enter">${first ? 'להגדיר ולהיכנס' : 'להיכנס'}</button>
@@ -39,7 +42,7 @@ export function parentGate(next = parentHome) {
     if (!/^\d{4,6}$/.test(pin)) { $('#err').textContent = 'הקוד צריך להיות 4 עד 6 ספרות.'; return; }
     if (first) {
       if (pin !== $('#pin2').value.trim()) { $('#err').textContent = 'שני הקודים לא זהים.'; return; }
-      const fam = cloud.normCode($('#fam').value); if (fam.length < 8) { $('#err').textContent = 'קוד המשפחה צריך 8 תווים. אפשר להעתיק מההגדרות בטלפון של הילד.'; return; }
+      const fam = cloud.normCode($('#fam').value); if (fam && fam.length < 8) { $('#err').textContent = 'קוד המשפחה צריך 8 תווים. אפשר להשאיר ריק לפעילות במכשיר הזה.'; return; }
       store.setProfile({ familyCode: fam }); store.setParent({ pinHash: await sha(pin) }); unlock(); return next();
     }
     if (await sha(pin) === p.pinHash) { unlock(); next(); } else { $('#err').textContent = 'קוד לא נכון.'; $('#pin1').value = ''; }
@@ -54,13 +57,13 @@ export async function parentHome() {
   const code = store.profile.familyCode;
   const render = (feed, loading, err) => {
     const seen = store.parent.lastSeen || '';
-    const sessions = feed.map(r => ({ ...r.payload, created: r.created, isNew: r.created > seen }));
+    const sessions = code ? feed.map(r => ({ ...r.payload, created: r.created, isNew: r.created > seen })) : [...store.sessions].reverse();
     const newCount = sessions.filter(s => s.isNew).length;
     const st = { streak: streak(sessions), week: sessions.filter(s => Date.now() - new Date(s.date) < 7 * 864e5).length, minutes: Math.round(sessions.reduce((a, s) => a + (s.duration || 0), 0) / 60) };
     mount(`
     <div class="stack">
       <div class="row between"><button class="btn icon ghost" data-go="#/settings" aria-label="חזרה">→</button><h1 class="grow">מצב הורים 👨‍👦</h1><button class="btn icon ghost" id="refresh" aria-label="רענון">🔄</button></div>
-      <div class="row wrap"><span class="pill solid">קוד משפחה: <span class="ltr">${esc(code)}</span></span>${newCount ? `<span class="pill hall">${newCount} חדשים</span>` : ''}${loading ? '<span class="muted small">טוען מהענן...</span>' : ''}</div>
+      <div class="row wrap"><span class="pill solid">${code ? `קוד משפחה: <span class="ltr">${esc(code)}</span>` : 'האימונים במכשיר הזה'}</span>${newCount ? `<span class="pill hall">${newCount} חדשים</span>` : ''}${loading ? '<span class="muted small">טוען מהענן...</span>' : ''}</div>
       ${err ? `<div class="tip">⚠️ ${esc(err)}</div>` : ''}
       <div class="tiles">
         <div class="tile hot"><b>🔥 ${st.streak}</b>ימים ברצף</div>
@@ -68,7 +71,8 @@ export async function parentHome() {
         <div class="tile"><b>${sessions.length}</b>אימונים בסך הכול</div>
         <div class="tile"><b>${st.minutes}</b>דקות</div>
       </div>
-      <button class="btn primary big" data-go="#/basketball">🏀 יומן הכדורסל שלנו</button>
+      <button class="btn primary big" data-go="#/parent-together">👨‍👦 בחירת פעילות: אבא ואני</button>
+      <button class="btn big" data-go="#/basketball">🏀 יומן הכדורסל שלנו</button>
       ${sessions[0]?.games?.top?.length ? `<div class="card"><h3>🏆 השיאים שלו במשחקים <span class="muted small">(${sessions[0].games.count} משחקים)</span></h3><div class="list">${sessions[0].games.top.map((t, i) => `<div class="item"><span>${['🥇', '🥈', '🥉'][i] || (i + 1)}</span><span class="grow">${t.emoji} ${esc(t.name)}</span><b>${t.best}</b></div>`).join('')}</div></div>` : ''}
       <h2>האימונים של ${esc(sessions[0]?.name || 'הילד')}</h2>
       ${sessions.length ? sessions.map((s, i) => { const sum = summarize(s); return `
@@ -77,8 +81,8 @@ export async function parentHome() {
             <div><b>${s.emoji || '🏋️'} ${esc(s.programName)}</b>${s.isNew ? ' <span class="pill hall" style="font-size:12px;padding:1px 8px">חדש</span>' : ''}<div class="muted small">${fmtDate(s.date)} ${new Date(s.date).toTimeString().slice(0, 5)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים${s.gamesPlayed ? ` · 🎮 ${s.gamesPlayed}` : ''}${s.feedback ? ` · ${{ easy: '😎 היה לו קל', ok: '👌 בדיוק', hard: '😮‍💨 היה לו קשה' }[s.feedback]}${s.change ? ({ boost: ', העלה 10%', swaps: ', עבר לתרגילים מתקדמים', down: ', הוריד קצת' }[s.change] || '') : ''}` : ''}</div></div>
             <span style="color:var(--star);font-size:22px" aria-label="${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}">${'★'.repeat(sum.stars)}</span>
           </div>
-          <div class="list" id="pd-${i}" hidden style="margin-top:10px"><p class="small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>${(s.items || []).map(it => `<div class="item"><span class="grow">${esc(it.name)}</span>${it.done >= it.target ? `<span class="done">✓ ${it.done}${it.type === 'time' ? ' שנ׳' : ''}</span>` : it.done > 0 ? `<span class="part">${it.done} מתוך ${it.target}</span>` : '<span class="skip">דילוג</span>'}</div>`).join('')}</div>
-        </div>`; }).join('') : `<div class="card center muted">${loading ? 'רגע...' : 'עוד אין אימונים בענן. כשהילד יסיים אימון בטלפון שלו (עם אותו קוד משפחה), זה יופיע כאן.'}</div>`}
+          <div class="list" id="pd-${i}" hidden style="margin-top:10px">${s.together ? `<p class="small">👨‍👦 ${esc(togetherLabel(s.together))}</p>` : ''}<p class="small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>${(s.items || []).map(it => `<div class="item"><span class="grow">${esc(it.name)}</span>${it.done >= it.target ? `<span class="done">✓ ${it.done}${it.type === 'time' ? ' שנ׳' : ''}</span>` : it.done > 0 ? `<span class="part">${it.done} מתוך ${it.target}</span>` : '<span class="skip">דילוג</span>'}</div>`).join('')}</div>
+        </div>`; }).join('') : `<div class="card center muted">${loading ? 'רגע...' : code ? 'עוד אין אימונים בענן. כשהילד יסיים אימון בטלפון שלו (עם אותו קוד משפחה), זה יופיע כאן.' : 'עוד אין אימונים במכשיר הזה. אחרי הפעילות הראשונה היא תופיע כאן.'}</div>`}
       <button class="btn ghost" id="lock">🔒 יציאה ממצב הורים</button>
     </div>`);
     $('#refresh').onclick = load;
@@ -86,11 +90,50 @@ export async function parentHome() {
     document.querySelectorAll('[data-toggle]').forEach(r => r.onclick = () => { const d = $('#pd-' + r.dataset.toggle); d.hidden = !d.hidden; });
   };
   async function load() {
+    if (!code) return render([], false, '');
     render(store.parent.feed, true, '');
     try { const feed = await cloud.list(code, 'workout'); store.setParent({ feed }); render(feed, false, ''); store.setParent({ lastSeen: new Date().toISOString() }); }
     catch (e) { render(store.parent.feed, false, e.status === 404 ? 'הטבלה בענן עוד לא נוצרה. צריך להריץ את supabase/family.sql פעם אחת.' : 'אין חיבור לענן: ' + e.message); }
   }
   load();
+}
+
+// הבחירה מוגנת בקוד הורה ונשמרת במכשיר שבו מתאמנים יחד.
+export function parentTogether() {
+  if (!unlocked() || !store.parent.pinHash) return parentGate(parentTogether);
+  const { mount, esc, go, $ } = ctx;
+  let choice = togetherChoice(store.parent.together, programById, byId) || { mode: 'workout', programId: 'full' };
+  const render = () => {
+    const challenge = choice.mode === 'challenge', ex = challenge && byId[choice.exId];
+    mount(`<div class="stack">
+      <div class="row"><button class="btn icon ghost" data-go="#/parent" aria-label="חזרה">→</button><h1>אבא ואני 👨‍👦</h1></div>
+      <p>בוחרים פעילות משותפת במכשיר שבו הילד מתאמן. הבחירה נשמרת כאן גם בלי חיבור לאינטרנט.</p>
+      <div class="card stack">
+        <label class="field">סוג הפעילות<select id="together-mode"><option value="workout" ${!challenge ? 'selected' : ''}>אימון משותף</option><option value="challenge" ${challenge ? 'selected' : ''}>אתגר משותף</option></select></label>
+        ${challenge ? `<label class="field">תרגיל<select id="together-ex">${EXERCISES.map(e => `<option value="${e.id}" ${choice.exId === e.id ? 'selected' : ''}>${esc(e.name)}</option>`).join('')}</select></label>
+          <label class="field">${ex.type === 'time' ? 'שניות לילד' : 'חזרות לילד'}<input type="number" inputmode="numeric" id="together-target" min="1" max="${ex.type === 'time' ? 180 : 100}" step="1" value="${choice.target}"></label>`
+          : `<label class="field">תוכנית<select id="together-program">${PROGRAMS.map(p => `<option value="${p.id}" ${choice.programId === p.id ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select></label>`}
+        <p class="muted small">שניכם עושים את התרגילים, כל אחד בקצב שלו. סופרים רק את התנועות של הילד. הכוכבים על המאמץ שלו, בלי השוואת תוצאות.</p>
+        <p id="together-error" class="muted small" role="status"></p>
+        <button class="btn primary big" id="together-save">לשמור ולחזור לילד</button>
+      </div>
+    </div>`);
+    $('#together-mode').onchange = e => {
+      choice = e.target.value === 'workout' ? { mode: 'workout', programId: 'full' }
+        : { mode: 'challenge', exId: 'squats', target: scaleTarget(byId.squats.base, store.profile.level) };
+      render();
+    };
+    if (challenge) {
+      $('#together-ex').onchange = e => { const next = byId[e.target.value]; choice = { mode: 'challenge', exId: next.id, target: scaleTarget(next.base, store.profile.level, next.type) }; render(); };
+      $('#together-target').oninput = e => { choice.target = Number(e.target.value); };
+    } else $('#together-program').onchange = e => { choice.programId = e.target.value; };
+    $('#together-save').onclick = () => {
+      const selected = togetherChoice(choice, programById, byId);
+      if (!selected) { $('#together-error').textContent = `בוחרים מספר שלם בין 1 ל־${ex.type === 'time' ? 180 : 100}.`; return; }
+      store.setParent({ together: selected }); lockParent(); go('#/together');
+    };
+  };
+  render();
 }
 
 // ---- יומן הכדורסל ----

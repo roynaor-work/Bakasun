@@ -1,5 +1,5 @@
 // תצוגה משותפת לבית, לסיום האימון ולמעקב. החגורה נגזרת מההיסטוריה, בלי שמירה נוספת.
-import { rankOf, rankUp } from './logic.js?v=20261007-belts-1';
+import { rankOf, rankUp } from './logic.js?v=20261008-together-1';
 
 export function beltCard(workouts, { previousWorkouts } = {}) {
   const rank = rankOf(workouts);

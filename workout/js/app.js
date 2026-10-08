@@ -4,16 +4,17 @@ import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js';
 import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js';
 import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js';
 import { Figure, cycleMs } from './figure.js';
-import { store } from './store.js';
-import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261007-belts-1';
-import { beltCard } from './belts.js?v=20261007-belts-1';
+import { store } from './store.js?v=20261008-together-1';
+import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261008-together-1';
+import { beltCard } from './belts.js?v=20261008-together-1';
 import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js';
-import { runGame } from './games/engine.js?v=20261007-stars-1';
+import { runGame } from './games/engine.js?v=20261008-together-1';
 import * as cloud from './cloud.js';
 import { showLobby } from './games/lobby.js';
-import { initParent, parentGate, parentHome, basketball } from './parent.js?v=20261007-stars-1';
+import { initParent, parentGate, parentHome, parentTogether, lockParent, basketball } from './parent.js?v=20261008-together-1';
+import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261008-together-1';
 import { playIntro } from './intro.js';
-import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js';
+import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261008-together-1';
 import { SAY } from './say.js';
 import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261008-minute-1';
 
@@ -115,9 +116,10 @@ function confetti() {
 }
 
 // ---- ניתוב ----
-const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, minute: minuteScreen, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, basketball };
+const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, minute: minuteScreen, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, 'parent-together': parentTogether, together, basketball };
 function route() {
   const [path, arg] = location.hash.replace(/^#\/?/, '').split('/');
+  if (!['parent', 'parent-together', 'basketball'].includes(path)) lockParent();
   (routes[path] || home)(arg);
   renderNav(path);
 }
@@ -153,6 +155,12 @@ function home() {
     </section>
 
     ${beltCard(st.workouts)}
+
+    <div class="card stack">
+      <h2>אבא ואני 👨‍👦</h2>
+      <p>זמן לזוז יחד. כל אחד בקצב שלו.</p>
+      <button class="btn primary big" data-go="#/together">לפעילות עם אבא</button>
+    </div>
 
     <div class="weekstrip">
       ${week.map(d => { const pid = plan()[d.day]; const p = pid && programById[pid]; return `<div class="wd ${d.today ? 'today' : ''} ${d.done ? 'done' : ''} ${d.past && !d.done && p ? 'missed' : ''}"><span>${DAY_NAMES[d.day].slice(0, 2)}</span><span class="e">${d.done ? '✅' : p ? p.emoji : '😴'}</span></div>`; }).join('')}
@@ -195,6 +203,45 @@ function home() {
   const lu = $('#levelup'); if (lu) lu.onclick = () => { store.setProfile({ level: nextLevel }); home(); };
   const rs = $('#resume'); if (rs) rs.onclick = () => { W = loadW(); if (W) go('#/workout'); else home(); };
   const dc = $('#discard'); if (dc) dc.onclick = () => { if (confirm('לבטל את האימון שבאמצע? מה שסימנת עד עכשיו לא יישמר.')) { discardW(); home(); } };
+}
+
+// ---- אבא ואני: בחירת ההורה, ואז שנינו מוכנים באותו מכשיר ----
+function together() {
+  const choice = togetherChoice(store.parent.together, programById, byId);
+  const activity = buildTogetherWorkout(choice, programById, byId, store.profile.level, choice?.mode === 'workout' ? store.progBoost(choice.programId) : {});
+  if (!activity) {
+    mount(`<div class="stack">
+      <div class="row"><button class="btn icon ghost" data-go="#/home" aria-label="חזרה">→</button><h1>אבא ואני 👨‍👦</h1></div>
+      <div class="card stack"><p>אבא יבחר לנו אימון או אתגר שנעשה יחד.</p><button class="btn primary big" data-go="#/parent-together">אבא, בוחרים פעילות</button></div>
+    </div>`);
+    return;
+  }
+  const pending = W || loadW();
+  mount(`<div class="stack">
+    <div class="row"><button class="btn icon ghost" data-go="#/home" aria-label="חזרה">→</button><h1>אבא ואני 👨‍👦</h1></div>
+    <div class="card stack">
+      <span class="pill solid">${esc(togetherLabel(choice))}</span>
+      <h2>${esc(activity.program.name)}</h2>
+      <p>אבא ואני עושים את התרגילים יחד. כל אחד בקצב שלו, ואפשר לנוח כשצריך.</p>
+      <p class="muted small">סופרים רק את התנועות שלך. אבא זז איתך.</p>
+      <div class="list">${activity.items.map(it => `<div class="item"><span class="grow">${esc(it.name)}</span><span class="pill solid">${targetText(it)}</span></div>`).join('')}</div>
+      ${pending ? `<p role="status">יש אימון שמחכה לך. נמשיך אותו לפני פעילות חדשה.</p><button class="btn primary big" id="together-resume">להמשיך את האימון</button>`
+        : `<button class="btn big" id="child-ready" aria-pressed="false">אני מוכן</button>
+          <button class="btn big" id="dad-ready" aria-pressed="false">אבא מוכן</button>
+          <button class="btn primary big" id="together-begin" disabled>מתחילים יחד</button>`}
+      <button class="btn ghost" data-go="#/parent-together">אבא, בוחרים פעילות אחרת 🔒</button>
+    </div>
+  </div>`);
+  if (pending) { $('#together-resume').onclick = () => { W = pending; go('#/workout'); }; return; }
+  const ready = { child: false, dad: false };
+  for (const who of ['child', 'dad']) $('#'+ who + '-ready').onclick = () => {
+    ready[who] = !ready[who];
+    $('#'+ who + '-ready').setAttribute('aria-pressed', String(ready[who]));
+    $('#'+ who + '-ready').classList.toggle('on', ready[who]);
+    $('#'+ who + '-ready').textContent = (who === 'child' ? 'אני מוכן' : 'אבא מוכן') + (ready[who] ? ' ✓' : '');
+    $('#together-begin').disabled = !ready.child || !ready.dad;
+  };
+  $('#together-begin').onclick = () => { if (ready.child && ready.dad) beginWorkout(activity.program, activity.items, activity.choice); };
 }
 
 // ---- תצוגה מקדימה והתחלה ----
@@ -394,8 +441,9 @@ function saveW() { try { if (!W) return; if (W.phase !== 'done') localStorage.se
 function loadW() { try { const w = JSON.parse(localStorage.getItem(W_KEY) || 'null'); if (!w || Date.now() - w.savedAt > 6 * 3600e3) { localStorage.removeItem(W_KEY); return null; } if (w.gift) w.gift = gameById[w.gift] || null; if (!w.gift && w.phase === 'gift') w.phase = w.afterGift || 'exercise'; if (w.phase === 'intro') w.phase = 'exercise'; return w; } catch { return null; } }
 const pendingWorkout = () => (W ? null : loadW());
 function discardW() { W = null; try { localStorage.removeItem(W_KEY); } catch { /* */ } }
-function beginWorkout(program, items) {
-  W = { program, items: items.map(i => ({ ...i, done: 0, skipped: false })), idx: 0, phase: store.profile.intro === false ? 'exercise' : 'intro', startedAt: Date.now(), saved: false, mainDone: 0, gift: null, afterGift: null, gamesPlayed: 0 };
+function beginWorkout(program, items, together = null) {
+  W = { program, items: items.map(i => ({ ...i, done: 0, skipped: false })), idx: 0, phase: together || store.profile.intro === false ? 'exercise' : 'intro', startedAt: Date.now(), saved: false, mainDone: 0, gift: null, afterGift: null, gamesPlayed: 0,
+    ...(together ? { together: { ...together } } : {}) };
   go('#/workout');
 }
 
@@ -428,6 +476,7 @@ function exercisePhase() {
       <span></span>
     </div>
     <div class="row between"><span class="pill block">${esc(blockLabel)}</span><span class="row">${placePill(ex)}${catPill(ex.cat)}</span></div>
+    ${W.together ? '<p class="center small">👨‍👦 אבא זז איתך. סופרים רק את התנועות שלך, בקצב שלך.</p>' : ''}
     <div class="stage">${stageHtml(ex)}</div>
     <h1 class="center">${esc(ex.name)}</h1>
     ${helpButton()}
@@ -625,7 +674,8 @@ function restPhase() {
 function saveSession() {
   if (W.saved) return null;
   const s = { id: uid(), date: new Date().toISOString(), programId: W.program.id, programName: W.program.name, emoji: W.program.emoji,
-    duration: Math.round((Date.now() - W.startedAt) / 1000), items: W.items.map(i => ({ exId: i.exId, name: i.name, type: i.type, target: i.target, done: i.done, skipped: i.skipped, round: i.round, block: i.block, secs: i.secs || 0 })) };
+    duration: Math.round((Date.now() - W.startedAt) / 1000), items: W.items.map(i => ({ exId: i.exId, name: i.name, type: i.type, target: i.target, done: i.done, skipped: i.skipped, round: i.round, block: i.block, secs: i.secs || 0 })),
+    ...(W.together ? { together: { ...W.together } } : {}) };
   // זמן אמיתי: תרגיל שסומן מהר מדי (פחות מ-45% מהזמן הצפוי) לא נספר. המתנות לפי דקות אמיתיות
   const h = honestTime(s.items, store.profile.rest || 0); s.honestSeconds = h.seconds; s.fastItems = h.fast;
   s.tokensEarned = tokensFor(h.seconds, store.profile.tokenMinutes || 3);
@@ -704,6 +754,7 @@ function donePhase() {
       <div class="stars" role="img" aria-label="${sum.stars} כוכבים על מאמץ והשלמה">${'★'.repeat(sum.stars)}<span class="off">${'★'.repeat(3 - sum.stars)}</span></div>
       <h1>סיימת! ${W.program.emoji}</h1>
       <p class="muted">${cheer}</p>
+      ${s.together ? `<p>👨‍👦 ${esc(togetherLabel(s.together))}. היה נעים לזוז יחד!</p>` : ''}
       ${sum.starReasons.map(reason => `<p class="small">⭐ ${esc(reason)}</p>`).join('')}
     </section>
     <div class="card center" style="border:2px solid var(--accent)"><b>${esc(perseveranceLine(st))}</b></div>
@@ -769,7 +820,7 @@ function history() {
           <div><b>${s.emoji || '🏋️'} ${esc(s.programName)}</b><div class="muted small">${fmtDate(s.date)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים</div></div>
           <span style="color:var(--star);font-size:22px" aria-label="${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}">${'★'.repeat(sum.stars)}</span>
         </div>
-        <div class="list" id="d-${s.id}" hidden style="margin-top:10px"><p class="small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>${itemsList(s)}<div class="item"><button class="btn chip danger" data-del="${s.id}">מחיקת האימון</button></div></div>
+        <div class="list" id="d-${s.id}" hidden style="margin-top:10px">${s.together ? `<p class="small">👨‍👦 ${esc(togetherLabel(s.together))}</p>` : ''}<p class="small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>${itemsList(s)}<div class="item"><button class="btn chip danger" data-del="${s.id}">מחיקת האימון</button></div></div>
       </div>`; }).join('') : '<div class="card center muted">עוד אין אימונים. הראשון מחכה לך בדף הבית!</div>'}
   </div>`);
   app.querySelectorAll('[data-toggle]').forEach(r => r.onclick = () => { const d = $('#d-' + r.dataset.toggle); d.hidden = !d.hidden; });

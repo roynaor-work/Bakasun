@@ -1,7 +1,7 @@
 // מנוע המשחקים הקטנים: קנבס בגודל לוגי קבוע, ניקוד, טיימר, מגע/מקלדת, מסכי פתיחה וסיום.
 // כל משחק הוא אובייקט { id, name, emoji, how, make(r) } כאשר make מחזיר { update(dt), draw(), tap(x,y), down, up, move, swipe(dir), key(code) }.
 import { poseAt } from '../figure.js';
-import { gameReward } from '../logic.js?v=20261007-stars-1';
+import { gameReward } from '../logic.js?v=20261008-together-1';
 import { celebrate as celebrate2d } from './celebrate.js';
 import { celebrate3d } from './celebrate3d.js';
 // חגיגת שיא: בתלת-ממד (הדמות של Kenney, אצטדיון) כשיש WebGL, אחרת הגרסה הדו-ממדית
