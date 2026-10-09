@@ -1,6 +1,6 @@
 // משחקי ארקייד קלאסיים
-import { POSE, S as SP, KITS } from './sprites.js?v=20261009-weekly-1';
-import { renderStill, SCENE_IDS, STILL_T } from './celebrate.js?v=20261009-weekly-1';
+import { POSE, S as SP, KITS } from './sprites.js?v=20261009-companion-1';
+import { renderStill, SCENE_IDS, STILL_T } from './celebrate.js?v=20261009-companion-1';
 const G = [];
 
 // ---- טטריס ----

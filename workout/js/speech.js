@@ -1,9 +1,9 @@
 // דיבור בעברית: הקול של המכשיר (Web Speech API), עם בחירת הקול הטוב ביותר, קצב מכוון, וטקסטים מנוקדים.
 // למה ניקוד: מנועי הדיבור (גוגל באנדרואיד, "כרמית" באייפון) מנחשים הגייה של מילים בלי ניקוד וטועים. עם ניקוד הם קוראים נכון.
-import { store } from './store.js?v=20261009-weekly-1';
+import { store } from './store.js?v=20261009-companion-1';
 
-import { createVoicePlayer } from './voice-player.js?v=20261009-weekly-1';
-import { VOICE_BY_ID } from './voice-lines.js?v=20261009-weekly-1';
+import { createVoicePlayer } from './voice-player.js?v=20261009-companion-1';
+import { VOICE_BY_ID } from './voice-lines.js?v=20261009-companion-1';
 
 const synth = window.speechSynthesis;
 let voices = [];
@@ -75,4 +75,4 @@ export function playVoiceRecording(id) {
   return player.play(line.text, { lang: line.lang, rate: 1, pitch: 1 });
 }
 
-export { SAY_UI } from './say-ui.js?v=20261009-weekly-1';
+export { SAY_UI } from './say-ui.js?v=20261009-companion-1';

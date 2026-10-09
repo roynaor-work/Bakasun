@@ -1,6 +1,6 @@
 // חגיגת שיא חדש: סימולציה אקראית מחמש (שער מבעיטה, שער בנגיחה, סלאם דאנק, קליעת שלוש, ריצת 100 מטר).
 // פרספקטיבה, כדור תלת-ממדי שמסתובב עם צל, זום מצלמה, רשת שמתנפחת, קהל אמיתי, מקהלת "גוווול", קריין. בלי צפצופים.
-import { POSE, GK, KITS, player, crowd, crowdGen, soccerBall, basketBall, groundShadow } from './sprites.js?v=20261009-weekly-1';
+import { POSE, GK, KITS, player, crowd, crowdGen, soccerBall, basketBall, groundShadow } from './sprites.js?v=20261009-companion-1';
 
 const rnd = (a, b) => a + Math.random() * (b - a), clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, easeOut = t => 1 - Math.pow(1 - t, 3);

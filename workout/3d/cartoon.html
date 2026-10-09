@@ -21,8 +21,8 @@ h1{margin:0;font-size:22px}p{margin:0;color:var(--muted);font-size:14px;line-hei
   <div class="view" id="view"><span class="tag" id="tag">טוען...</span></div>
 </div>
 <script type="module">
-import { Stage3D } from '../js/stage3d.js?v=20261009-weekly-1';
-import { EXERCISES, byId } from '../js/exercises.js?v=20261009-weekly-1';
+import { Stage3D } from '../js/stage3d.js?v=20261009-companion-1';
+import { EXERCISES, byId } from '../js/exercises.js?v=20261009-companion-1';
 const CATS = { warm: 'חימום', jump: 'ניתור', speed: 'מהירות', core: 'בטן', legs: 'רגליים', upper: 'כוח עליון', stretch: 'מתיחות' };
 const sel = document.getElementById('sel');
 for (const cat in CATS) { const og = document.createElement('optgroup'); og.label = CATS[cat]; EXERCISES.filter(e => e.cat === cat).forEach(e => { const o = document.createElement('option'); o.value = e.id; o.textContent = e.name; og.appendChild(o); }); sel.appendChild(og); }

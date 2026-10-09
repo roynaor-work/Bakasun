@@ -1,7 +1,7 @@
 // סימולציית תרגיל: הדמות המלאה (player מ-sprites.js) על קנבס, בתוך חדר, עם קצב חזרות ואפקטים.
 // מחליף את דמות המקלות ב-SVG במסך התרגיל. אותן פוזות מהקטלוג (exercises.js), אותו מנוע זמן (figure.js).
-import { poseAt, cycleMs } from './figure.js?v=20261009-weekly-1';
-import { player, KITS, isFront } from './games/sprites.js?v=20261009-weekly-1';
+import { poseAt, cycleMs } from './figure.js?v=20261009-companion-1';
+import { player, KITS, isFront } from './games/sprites.js?v=20261009-companion-1';
 
 const W = 360, H = 300, GROUND = 268, CX = 180;
 const J = ['head', 'neck', 'hip', 'le', 'lh', 're', 'rh', 'lk', 'lf', 'rk', 'rf'];

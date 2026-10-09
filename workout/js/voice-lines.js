@@ -1,10 +1,10 @@
 // קטלוג אחד משותף לנגן, לדף ההקלטה ול-LINES.md. בלי גישה לדפדפן או לנתוני הילד.
-import { SAY } from './say.js?v=20261009-weekly-1';
-import { SAY_UI } from './say-ui.js?v=20261009-weekly-1';
-import { EXERCISES } from './exercises.js?v=20261009-weekly-1';
-import { numWord } from './count.js?v=20261009-weekly-1';
+import { SAY } from './say.js?v=20261009-companion-1';
+import { SAY_UI } from './say-ui.js?v=20261009-companion-1';
+import { EXERCISES } from './exercises.js?v=20261009-companion-1';
+import { numWord } from './count.js?v=20261009-companion-1';
 
-export const VOICE_VERSION = '20261008-voice-1';
+export const VOICE_VERSION = '20261009-companion-1';
 export const normalizeVoice = text => String(text).replace(/[֑-ׇ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ');
 const lines = [];
 const add = (id, text, source, lang = 'he-IL') => lines.push(Object.freeze({ id, text, source, lang, file: `${id}.wav` }));
@@ -25,6 +25,7 @@ export const FRAGMENTS = {
   start: 'מַתְחִילִים!', finished: 'סִיַּמְתָּ!', encourage: 'כָּל הַכָּבוֹד!',
   'minute-end': 'הַדַּקָּה הִסְתַּיְּמָה. כָּל תְּנוּעָה נֶחְשֶׁבֶת.',
   'minute-start': 'מַתְחִילִים. בַּקֶּצֶב שֶׁלְּךָ.',
+  'companion-upgraded': 'הַדְּמוּת שֶׁלְּךָ הִשְׁתַּפְּרָה! גְּדֵלִים יַחַד, בַּקֶּצֶב שֶׁלְּךָ.',
   thanks: 'תּוֹדָה, רָשַׁמְתִּי.',
   'program-free': 'אימון חופשי',
   'boost-before': 'הָיָה קַל? מֵעַכְשָׁו',
@@ -47,6 +48,7 @@ export const FRAGMENTS = {
 for (const [id, text] of Object.entries(FRAGMENTS)) {
   const source = /^time-|^(start|finished)$/.test(id) ? 'workout/js/count.js: timeCue; workout/js/app.js: wireTimer' :
     /^minute-/.test(id) ? 'workout/js/app.js: minuteScreen' :
+    id === 'companion-upgraded' ? 'workout/js/app.js: donePhase; workout/js/companion.js: companionCard' :
     /^(boost|swaps|level|down)-/.test(id) ? `workout/js/say-ui.js: SAY_UI.adjust.${id.split('-')[0] === 'down' ? 'downLevel' : id.split('-')[0]}; workout/js/app.js: adjustDifficulty` :
     /^(week|streak|milestone)-|^(number-label|first-workout)$/.test(id) ? 'workout/js/say-ui.js: SAY_UI.perseverance; workout/js/app.js: askFeedback' :
     id === 'program-free' ? 'workout/js/app.js: free / adjustDifficulty' :

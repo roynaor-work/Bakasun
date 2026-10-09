@@ -147,8 +147,8 @@ export function stats(sessions, today = new Date()) {
 
 export const BADGES = [
   { id: 'first', name: 'התחלה!', emoji: '🚀', desc: 'האימון הראשון', test: s => s.workouts >= 1 },
-  { id: 'three', name: 'שלישייה', emoji: '🔥', desc: '3 ימים ברצף', test: s => s.streak >= 3 },
-  { id: 'week', name: 'שבוע שלם', emoji: '🏆', desc: '7 ימים ברצף', test: s => s.streak >= 7 },
+  { id: 'three', name: 'שלישייה', emoji: '🔥', desc: '3 ימי אימון ברצף', test: s => s.streak >= 3 },
+  { id: 'week', name: 'שבוע שלם', emoji: '🏆', desc: '7 ימי אימון ברצף', test: s => s.streak >= 7 },
   { id: 'ten', name: 'עשרה', emoji: '🔟', desc: '10 אימונים', test: s => s.workouts >= 10 },
   { id: 'reps500', name: 'חמש מאות', emoji: '💯', desc: '500 חזרות בסך הכול', test: s => s.totalReps >= 500 },
   { id: 'hour', name: 'שעה של כוח', emoji: '⏰', desc: 'שעה של אימונים', test: s => s.totalDuration >= 3600 },

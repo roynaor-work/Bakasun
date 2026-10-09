@@ -1,11 +1,11 @@
 // מצב הורים: רק אבא פותח, עם קוד סודי. רואה את האימונים של הילד מהענן ומנהל את יומן הכדורסל.
-import { store } from './store.js?v=20261009-weekly-1';
-import * as cloud from './cloud.js?v=20261009-weekly-1';
-import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid, scaleTarget } from './logic.js?v=20261009-weekly-1';
-import { EXERCISES, byId } from './exercises.js?v=20261009-weekly-1';
-import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261009-weekly-1';
-import { togetherChoice, togetherLabel } from './together.js?v=20261009-weekly-1';
-import { normalizePlan, validatePlan, reportSessions, weeklyReport } from './weekly.js?v=20261009-weekly-1';
+import { store } from './store.js?v=20261009-companion-1';
+import * as cloud from './cloud.js?v=20261009-companion-1';
+import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid, scaleTarget } from './logic.js?v=20261009-companion-1';
+import { EXERCISES, byId } from './exercises.js?v=20261009-companion-1';
+import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261009-companion-1';
+import { togetherChoice, togetherLabel } from './together.js?v=20261009-companion-1';
+import { normalizePlan, validatePlan, reportSessions, weeklyReport } from './weekly.js?v=20261009-companion-1';
 
 let ctx = null; // { mount, esc, go, $ } מהאפליקציה
 export function initParent(c) { ctx = c; }
