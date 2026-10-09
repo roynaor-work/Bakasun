@@ -10,7 +10,7 @@ self.onmessage = async ({ data }) => {
       pose = await PoseLandmarker.createFromOptions(files, {
         baseOptions: { modelAssetPath: new URL('./models/pose_landmarker_lite.task', self.location.href).href, delegate: 'CPU' },
         canvas: new OffscreenCanvas(640, 480),
-        runningMode: 'VIDEO', numPoses: 1,
+        runningMode: 'VIDEO', numPoses: data.numPoses === 2 ? 2 : 1,
         minPoseDetectionConfidence: .65, minPosePresenceConfidence: .65, minTrackingConfidence: .65,
         outputSegmentationMasks: false,
       });
@@ -26,7 +26,7 @@ self.onmessage = async ({ data }) => {
       lastTimestamp = timestamp;
       const result = pose.detectForVideo(bitmap, timestamp);
       self.postMessage({ type: 'pose', id, timestamp,
-        landmarks: result.landmarks[0] || [], world: result.worldLandmarks[0] || [],
+        poses: result.landmarks.map((landmarks, i) => ({ landmarks, world: result.worldLandmarks[i] || [] })),
         inferenceMs: performance.now() - started });
     } catch (error) {
       self.postMessage({ type: 'error', message: String(error.message || error) });
