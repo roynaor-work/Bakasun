@@ -1,10 +1,10 @@
 // פנדלים ו"אני השוער" בתלת-ממד (01/10/2026): אותו אצטדיון, דמות מצוירת, פוזות בעיטה ושוער כמו בחגיגות (celebrate3d), אותם חוקים
 // כמו הגרסה הדו-ממדית (9 אזורים, השוער מנחש צד וגובה, 3 פספוסים = נפסלת). בלי WebGL חוזרים לגרסה הדו-ממדית מ-sport.js.
-import { layer3d } from './layer3d.js';
-import { loadCharacter, KITS3D, soccerBallMesh } from '../char3d.js';
-import { stadium, pose, face, ballShadow, KICKP, GK_SET, FIST, CROUCH_F } from './celebrate3d.js';
-import { SPRINT, poseAt } from './celebrate.js';
-import { penaltyGame } from './sport.js';
+import { layer3d } from './layer3d.js?v=20261009-weekly-1';
+import { loadCharacter, KITS3D, soccerBallMesh } from '../char3d.js?v=20261009-weekly-1';
+import { stadium, pose, face, ballShadow, KICKP, GK_SET, FIST, CROUCH_F } from './celebrate3d.js?v=20261009-weekly-1';
+import { SPRINT, poseAt } from './celebrate.js?v=20261009-weekly-1';
+import { penaltyGame } from './sport.js?v=20261009-weekly-1';
 
 const GZ = -600, GW = 690, GH = 230, SZ = GZ + 640, BALL_R = 11, FLY_T = .55;
 // פוזות מלפנים (200x200): ידיים למעלה (חגיגה), זינוק (ידיים מעל הראש, הגוף מסתובב בעולם), כריעה נמוכה, שכיבה

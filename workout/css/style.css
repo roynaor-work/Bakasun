@@ -42,6 +42,12 @@ p { margin: 0; }
 .row.between { justify-content: space-between; }
 .wrap { flex-wrap: wrap; }
 .grow { flex: 1; }
+.parent-week .week-plan-day { min-width: 0; }
+.parent-week select { width: 100%; min-width: 0; }
+.parent-week .weekly-session { border-top: 1px solid var(--line); padding-top: 10px; overflow-wrap: anywhere; }
+.parent-week .btn:disabled { opacity: .5; cursor: default; }
+.parent-week .tiles .tile b { font-variant-numeric: tabular-nums; }
+.parent-week .btn:focus-visible, .parent-week select:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 .center { text-align: center; }
 
 .card { background: var(--card); border-radius: var(--r); padding: 16px; box-shadow: var(--shadow); }

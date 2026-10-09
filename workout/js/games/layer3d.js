@@ -1,6 +1,6 @@
 // שכבת תלת-ממד למשחק: קנבס WebGL מאחורי קנבס המשחק. המשחק מצייר על הקנבס הדו-ממדי רק ממשק (מד, קשת, טקסט) אחרי clearRect,
 // והסצנה (מגרש, דמות, כדור) מתרנדרת ב-three.js. project() ממיר נקודה בעולם לפיקסלים כדי לצייר ממשק מעל עצמים.
-import { THREE, hasWebGL, makeRenderer } from '../char3d.js';
+import { THREE, hasWebGL, makeRenderer } from '../char3d.js?v=20261009-weekly-1';
 export function layer3d(r, { fov = 48 } = {}) {
   const cv = r.cv; const hasDoc = typeof document !== 'undefined'; const gl = hasDoc ? document.createElement('canvas') : null; if (gl) { gl.className = 'g3d'; gl.width = r.W; gl.height = r.H; }
   let renderer = null;

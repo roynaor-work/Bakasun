@@ -1,6 +1,6 @@
 // ענן משפחתי: הטלפון של הילד מעלה כל אימון שנגמר, הטלפון של אבא רואה. אותו פרויקט Supabase של באקה סאן, טבלה family_events.
 // גישה עם המפתח הציבורי בלי התחברות, לפי קוד משפחה סודי. מקומי קודם: אם אין רשת, נשמר בתור ונשלח אחר כך.
-import { CLOUD } from '../../js/data/cloudcfg.js';
+import { CLOUD } from '../../js/data/cloudcfg.js?v=20261009-weekly-1';
 
 const Q_KEY = 'kidfit.cloud.queue';
 let queue = []; try { queue = JSON.parse(localStorage.getItem(Q_KEY) || '[]'); } catch { queue = []; }

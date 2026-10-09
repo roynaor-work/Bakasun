@@ -1,10 +1,11 @@
 // מצב הורים: רק אבא פותח, עם קוד סודי. רואה את האימונים של הילד מהענן ומנהל את יומן הכדורסל.
-import { store } from './store.js?v=20261008-together-1';
-import * as cloud from './cloud.js';
-import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid, scaleTarget } from './logic.js?v=20261008-together-1';
-import { EXERCISES, byId } from './exercises.js';
-import { PROGRAMS, programById } from './programs.js';
-import { togetherChoice, togetherLabel } from './together.js?v=20261008-together-1';
+import { store } from './store.js?v=20261009-weekly-1';
+import * as cloud from './cloud.js?v=20261009-weekly-1';
+import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid, scaleTarget } from './logic.js?v=20261009-weekly-1';
+import { EXERCISES, byId } from './exercises.js?v=20261009-weekly-1';
+import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261009-weekly-1';
+import { togetherChoice, togetherLabel } from './together.js?v=20261009-weekly-1';
+import { normalizePlan, validatePlan, reportSessions, weeklyReport } from './weekly.js?v=20261009-weekly-1';
 
 let ctx = null; // { mount, esc, go, $ } מהאפליקציה
 export function initParent(c) { ctx = c; }
@@ -56,6 +57,7 @@ export async function parentHome() {
   if (!unlocked() || !store.parent.pinHash) return parentGate(parentHome);
   const code = store.profile.familyCode;
   const render = (feed, loading, err) => {
+    if (location.hash.split('/')[1] !== 'parent' || !unlocked()) return;
     const seen = store.parent.lastSeen || '';
     const sessions = code ? feed.map(r => ({ ...r.payload, created: r.created, isNew: r.created > seen })) : [...store.sessions].reverse();
     const newCount = sessions.filter(s => s.isNew).length;
@@ -72,6 +74,7 @@ export async function parentHome() {
         <div class="tile"><b>${st.minutes}</b>דקות</div>
       </div>
       <button class="btn primary big" data-go="#/parent-together">👨‍👦 בחירת פעילות: אבא ואני</button>
+      <button class="btn big" data-go="#/parent-week">📅 תכנון השבוע ודוח שבועי</button>
       <button class="btn big" data-go="#/basketball">🏀 יומן הכדורסל שלנו</button>
       ${sessions[0]?.games?.top?.length ? `<div class="card"><h3>🏆 השיאים שלו במשחקים <span class="muted small">(${sessions[0].games.count} משחקים)</span></h3><div class="list">${sessions[0].games.top.map((t, i) => `<div class="item"><span>${['🥇', '🥈', '🥉'][i] || (i + 1)}</span><span class="grow">${t.emoji} ${esc(t.name)}</span><b>${t.best}</b></div>`).join('')}</div></div>` : ''}
       <h2>האימונים של ${esc(sessions[0]?.name || 'הילד')}</h2>
@@ -94,6 +97,98 @@ export async function parentHome() {
     render(store.parent.feed, true, '');
     try { const feed = await cloud.list(code, 'workout'); store.setParent({ feed }); render(feed, false, ''); store.setParent({ lastSeen: new Date().toISOString() }); }
     catch (e) { render(store.parent.feed, false, e.status === 404 ? 'הטבלה בענן עוד לא נוצרה. צריך להריץ את supabase/family.sql פעם אחת.' : 'אין חיבור לענן: ' + e.message); }
+  }
+  load();
+}
+
+// תכנון חוזר לראשון–שבת במכשיר האימון; דוח של הפעילות בפועל, גם בשבועות קודמים.
+export function parentWeek(selected) {
+  if (!unlocked() || !store.parent.pinHash) return parentGate(() => parentWeek(selected));
+  const { mount, esc, $, go } = ctx;
+  const code = store.profile.familyCode, activeHash = location.hash;
+  let draft = normalizePlan(store.profile.plan, programById, DEFAULT_PLAN);
+  let feed = code ? store.parent.feed : [], loading = !!code, error = '', notice = '';
+  const active = () => location.hash === activeHash && unlocked();
+  const dateLabel = date => date.toLocaleDateString('he-IL');
+  const render = () => {
+    if (!active()) return;
+    const report = weeklyReport(reportSessions(store.sessions, feed), selected);
+    mount(`<div class="stack parent-week">
+      <div class="row"><button class="btn icon ghost" data-go="#/parent" aria-label="חזרה">→</button><h1>השבוע שלנו 📅</h1></div>
+      <section class="card stack" aria-labelledby="plan-heading">
+        <h2 id="plan-heading">תכנון השבוע</h2>
+        <p class="muted small">בוחרים אימון או מנוחה לכל יום. התוכנית חוזרת בכל שבוע ומופיעה במסך הבית של הילד. מתכננים במכשיר שבו הוא מתאמן; התוכנית נשמרת כאן.</p>
+        ${DAY_NAMES.map((day, i) => `<label class="field week-plan-day"><span>יום ${day}</span><select data-plan-day="${i}"><option value="" ${draft[i] === '' ? 'selected' : ''}>😴 מנוחה</option>${PROGRAMS.map(program => `<option value="${program.id}" ${draft[i] === program.id ? 'selected' : ''}>${program.emoji} ${esc(program.name)}</option>`).join('')}</select></label>`).join('')}
+        <button class="btn primary big" id="week-plan-save">שמירת התוכנית</button>
+        <button class="btn" id="week-plan-default">בחירת התוכנית המומלצת</button>
+        <p class="muted small">השינויים נכנסים לתוקף רק בלחיצה על שמירת התוכנית. האימונים שכבר נשמרו נשארים כמו שהם.</p>
+        <p class="small" id="week-plan-status" role="status">${esc(notice)}</p>
+        <button class="btn" id="week-to-child">לחזור למסך הילד 🔒</button>
+      </section>
+      <section class="stack" aria-labelledby="report-heading">
+        <h2 id="report-heading">דוח שבועי</h2>
+        <p id="week-range"><b>${dateLabel(report.start)} – ${dateLabel(report.end)}</b> · ראשון עד שבת</p>
+        <div class="row wrap">
+          <button class="btn chip" data-go="#/parent-week/${report.previous}">שבוע קודם</button>
+          <button class="btn chip" ${report.next ? `data-go="#/parent-week/${report.next}"` : 'disabled'}>שבוע הבא</button>
+          ${report.next ? '<button class="btn chip" data-go="#/parent-week">השבוע הנוכחי</button>' : ''}
+          <button class="btn chip" id="week-refresh">רענון הדוח</button>
+        </div>
+        <p class="muted small" role="status">${loading ? 'טוען אימונים מהענן…' : code ? 'האימונים במכשיר הזה ובפיד הענן, בלי לספור אימון פעמיים.' : 'האימונים השמורים במכשיר הזה.'}</p>
+        ${error ? `<p class="tip" role="status">${esc(error)} הדוח מציג את האימונים השמורים ואת פיד הענן האחרון שנטען.</p>` : ''}
+        ${code ? '<p class="muted small">מהענן מוצגים עד 200 האימונים האחרונים. שבועות ישנים יותר עשויים לכלול רק אימונים שנשמרו במכשיר הזה.</p>' : ''}
+        <div class="tiles" id="weekly-totals">
+          <div class="tile"><b data-total="workouts">${report.workouts}</b>אימונים</div>
+          <div class="tile"><b data-total="days">${report.activeDays}</b>ימים עם פעילות</div>
+          <div class="tile"><b data-total="minutes">${report.minutes}</b>דקות באימונים</div>
+          <div class="tile"><b data-total="stars">${report.stars} ⭐</b>כוכבים על מאמץ והשלמה</div>
+        </div>
+        <div class="card stack" id="weekly-details">
+          <p>ניסיון ב־${report.tried} תרגילים · ${report.completed} תרגילים הושלמו</p>
+          <p>👨‍👦 ${report.together} פעילויות של אבא ואני</p>
+          <p class="small">המשוב של הילד: ${report.feedback.easy} קל · ${report.feedback.ok} בדיוק · ${report.feedback.hard} קשה</p>
+          <p class="muted small">הזמן הוא זמן האימון שנשמר, כולל מנוחות. הדוח מתאר את הפעילות בפועל; אין השוואה לתוכנית הנוכחית בשבועות קודמים.</p>
+        </div>
+        ${!report.workouts ? '<p class="card muted" id="week-empty">עוד אין אימונים שמורים בשבוע הזה. אפשר לתכנן יחד זמן שנעים לזוז בו.</p>' : ''}
+        <div class="stack" id="weekly-days">${report.days.map(day => `<div class="card stack" data-report-day="${day.day}">
+          <h3>יום ${DAY_NAMES[day.day]} · ${dateLabel(day.date)}</h3>
+          ${day.workouts ? `<p class="small">${day.workouts} אימונים · ${fmtTime(day.seconds)} · ${day.stars} ⭐</p>
+            ${day.sessions.map(session => { const sum = summarize(session); return `<div class="weekly-session">
+              <b>${esc(session.programName || 'אימון')}</b>
+              <p class="small">${fmtTime(Math.max(0, Number(session.duration) || 0))} · ניסיון ב־${sum.doneCount} מתוך ${sum.total} תרגילים · ${sum.stars} ⭐</p>
+              <p class="muted small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>
+              ${session.together ? `<p class="small">👨‍👦 ${esc(togetherLabel(session.together))}</p>` : ''}
+            </div>`; }).join('')}` : '<p class="muted small">אין אימון שמור ביום הזה.</p>'}
+        </div>`).join('')}</div>
+      </section>
+      <button class="btn ghost" id="week-lock">🔒 יציאה ממצב הורים</button>
+    </div>`);
+    document.querySelectorAll('[data-plan-day]').forEach(select => select.onchange = () => { draft[select.dataset.planDay] = select.value; notice = ''; $('#week-plan-status').textContent = 'יש שינויים שעוד לא נשמרו.'; });
+    $('#week-plan-default').onclick = () => { draft = { ...DEFAULT_PLAN }; notice = 'התוכנית המומלצת נבחרה. לוחצים על שמירת התוכנית כדי לשמור.'; render(); };
+    $('#week-plan-save').onclick = () => {
+      const plan = validatePlan(draft, programById);
+      if (!plan) { $('#week-plan-status').textContent = 'בוחרים אימון או מנוחה לכל יום.'; return; }
+      const previous = store.profile.plan;
+      store.setProfile({ plan });
+      let saved = false;
+      try { saved = JSON.stringify(JSON.parse(localStorage.getItem('kidfit.v1')).profile.plan) === JSON.stringify(plan); } catch { /* שמירה לא זמינה */ }
+      if (!saved) store.data.profile.plan = previous;
+      notice = saved ? 'התוכנית נשמרה. היא מחכה במסך הבית של הילד.' : 'התוכנית עוד לא נשמרה במכשיר. נסו שוב לפני שסוגרים את האפליקציה.';
+      $('#week-plan-status').textContent = notice;
+    };
+    const leave = () => { lockParent(); go('#/home'); };
+    $('#week-to-child').onclick = leave; $('#week-lock').onclick = leave;
+    $('#week-refresh').onclick = load;
+  };
+  async function load() {
+    loading = !!code; error = ''; render();
+    if (!code) return;
+    try {
+      const rows = await cloud.list(code, 'workout');
+      if (!active()) return;
+      feed = rows; store.setParent({ feed });
+    } catch { if (active()) error = 'לא הצלחנו לרענן מהענן כרגע.'; }
+    if (active()) { loading = false; render(); }
   }
   load();
 }

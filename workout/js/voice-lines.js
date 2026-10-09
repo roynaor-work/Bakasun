@@ -1,8 +1,8 @@
 // קטלוג אחד משותף לנגן, לדף ההקלטה ול-LINES.md. בלי גישה לדפדפן או לנתוני הילד.
-import { SAY } from './say.js';
-import { SAY_UI } from './say-ui.js?v=20261008-voice-1';
-import { EXERCISES } from './exercises.js';
-import { numWord } from './count.js';
+import { SAY } from './say.js?v=20261009-weekly-1';
+import { SAY_UI } from './say-ui.js?v=20261009-weekly-1';
+import { EXERCISES } from './exercises.js?v=20261009-weekly-1';
+import { numWord } from './count.js?v=20261009-weekly-1';
 
 export const VOICE_VERSION = '20261008-voice-1';
 export const normalizeVoice = text => String(text).replace(/[֑-ׇ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ');

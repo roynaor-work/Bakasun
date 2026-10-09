@@ -1,4 +1,4 @@
-import { VOICE_LINES, VOICE_BY_ID, VOICE_VERSION, splitVoiceText } from './voice-lines.js?v=20261008-voice-1';
+import { VOICE_LINES, VOICE_BY_ID, VOICE_VERSION, splitVoiceText } from './voice-lines.js?v=20261009-weekly-1';
 
 // טהור: מחסור בהקלטה מחזיר רק את החלק החסר ל-TTS, בלי להקריא שוב את המשפט כולו.
 export function chooseVoice(text, buffers, lang = 'he-IL') {
