@@ -9,13 +9,15 @@ const lights=[
  {direction:new T.Vector3(1,3,-4).normalize(),color:new T.Color('#fff5e5'),strength:.32},
 ];
 export function bakeStudio(geometry,material){
- const normals=geometry.attributes.normal,colors=new Float32Array(normals.count*3),normal=new T.Vector3();
+ const normals=geometry.attributes.normal,authoredColors=geometry.attributes.color,colors=new Float32Array(normals.count*3),normal=new T.Vector3(),authoredColor=new T.Color();
  const sky=new T.Color('#fff5eb'),ground=new T.Color('#9da8be'),color=new T.Color(),illumination=new T.Color();
  for(let i=0;i<normals.count;i++){
   normal.fromBufferAttribute(normals,i).normalize();
   illumination.copy(ground).lerp(sky,(normal.y+1)/2).multiplyScalar(.68);
   for(const light of lights){color.copy(light.color).multiplyScalar(light.strength*Math.max(0,normal.dot(light.direction)));illumination.add(color);}
   color.copy(material.color).multiply(illumination);
+  // Preserve the soft cheek tint authored on the head, in source and GLB.
+  if(material.vertexColors&&authoredColors)color.multiply(authoredColor.fromBufferAttribute(authoredColors,i));
   // glTF COLOR_0 is a normalized color in [0,1], including float accessors.
   colors.set([Math.min(1,color.r),Math.min(1,color.g),Math.min(1,color.b)],i*3);
  }

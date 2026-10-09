@@ -49,7 +49,7 @@ function skeleton(root){
 
 export function buildCharacter({detail='mobile',experiment='final'}={}){
  const start=performance.now(),root=new T.Group();root.name='Kid';
- const rig=skeleton(root),groups=new Map(),sourceParts={},groundProbes=[],rigidHead=[];
+ const rig=skeleton(root),groups=new Map(),sourceParts={},groundProbes=[],rigidHead=[],rigidShoes=new Map();
  const ix=n=>rig.bones.indexOf(rig.byName[n]);
  // Each vertex carries at most four normalized influences. Garment and skin
  // share weight equations; smoothstep has zero slope at either boundary.
@@ -135,6 +135,14 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
     if(category==='head'&&detail==='mobile'&&experiment!=='pbr'){
      g.deleteAttribute('skinIndex');g.deleteAttribute('skinWeight');rigidHead.push({geometry:g,material:mat});continue;
     }
+    // Every shoe vertex has exactly one Foot influence. A standard rigid
+    // bone child preserves that transform and exports without skin fetches.
+    if(category==='shoe'&&detail==='mobile'&&experiment!=='pbr'){
+     const bone='Foot_'+(mesh.name.includes('left')?'L':'R');
+     g.deleteAttribute('skinIndex');g.deleteAttribute('skinWeight');
+     if(!rigidShoes.has(bone))rigidShoes.set(bone,[]);
+     rigidShoes.get(bone).push({geometry:g,material:mat});continue;
+    }
     const key=JSON.stringify([mat.color.getHex(),mat.roughness,mat.metalness,mat.map?.uuid,mat.side,mat.transparent,mat.alphaTest]);
     if(!groups.has(key))groups.set(key,{material:mat,geometries:[],parts:[]});
     groups.get(key).geometries.push(g);groups.get(key).parts.push(mesh.name);
@@ -153,17 +161,26 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
   const hp=handGeometry.attributes.position,hn=handGeometry.attributes.normal;
   for(let i=0;i<hp.count;i++){
    const sourceY=hp.getY(i)+center[1],x=hp.getX(i)+center[0],z=hp.getZ(i)+center[2]+.015;
-   const t=T.MathUtils.clamp((sourceY+1.05)/.65,0,1),f=1+.7*(1-t*t*(3-2*t));
+   const t=T.MathUtils.clamp((sourceY+1.05)/.65,0,1),fade=t*t*(3-2*t),f=1+.7*(1-fade);
    const derivative=sourceY>-1.05&&sourceY<-.40?-.7*6*t*(1-t)/.65:0;
-   hp.setX(i,x*f-center[0]);hp.setZ(i,z*f-.015-center[2]);
+   // A fuller palm in profile tapers back into the authored wrist pivot.
+   const depth=1.15+.45*fade,fz=f*depth;
+   const depthDerivative=sourceY>-1.05&&sourceY<-.40?.45*6*t*(1-t)/.65:0;
+   const zDerivative=derivative*depth+f*depthDerivative;
+   hp.setX(i,x*f-center[0]);hp.setZ(i,z*fz-.015-center[2]);
    // Inverse transpose of the radial deformation Jacobian keeps the smooth
    // SDF normals accurate, including the taper from the cuff into the palm.
-   const nx=hn.getX(i)/f,nz=hn.getZ(i)/f,ny=hn.getY(i)-derivative*(x*nx+z*nz),length=Math.hypot(nx,ny,nz);
+   const nx=hn.getX(i)/f,nz=hn.getZ(i)/fz,ny=hn.getY(i)-derivative*x*nx-zDerivative*z*nz,length=Math.hypot(nx,ny,nz);
    hn.setXYZ(i,nx/length,ny/length,nz/length);
   }
   handGeometry.computeBoundingBox();handGeometry.computeBoundingSphere();
-  handGeometry.userData.wristReshape={radialFactor:1.7,fullBelowY:-1.05,fadeToY:-.40,axisZ:-.015};
-  const handScale=.093;const rot=new T.Quaternion().setFromEuler(new T.Euler(0,0,Math.PI+s*.075));
+  handGeometry.userData.wristReshape={radialFactor:1.7,depthWrist:1.15,depthPalm:1.60,fullBelowY:-1.05,fadeToY:-.40,axisZ:-.015};
+  // Digit rest joints must follow the same palm depth change as their vertices.
+  fields.jointPoints=fields.jointPoints.map(([x,y,z])=>{
+   const t=T.MathUtils.clamp((y+center[1]+1.05)/.65,0,1),fade=t*t*(3-2*t),f=1+.7*(1-fade);
+   return [(x+center[0])*f-center[0],y,(z+center[2]+.015)*f*(1.15+.45*fade)-.015-center[2]];
+  });
+  const handScale=.113;const rot=new T.Quaternion().setFromEuler(new T.Euler(0,0,Math.PI+s*.075));
   // With fingertips down, mirror source X on the +X hand so both thumbs
   // point toward the torso. Skin fields remain in the authored source space.
   hand.scale.set(s>0?-handScale:handScale,handScale,handScale);hand.quaternion.copy(rot);
@@ -180,6 +197,16 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
   shoe.position.copy(new T.Vector3(s*.198,.10*BODY_Y_SCALE,-.008).sub(ankle.multiply(shoe.scale).applyAxisAngle(new T.Vector3(0,1,0),s*.05)));
   shoe.traverse(m=>{if(m.isMesh)m.name='shoe-'+label+'-'+m.name;});collect(shoe,'shoe');
  }
+ // Many directions select the same support vertex, often across shoe parts.
+ // Keep every distinct candidate exactly: the minimum is unchanged for every
+ // foot transform, with fewer matrix transforms during animation/benchmark.
+ const supportByBone=new Map();
+ for(const probe of groundProbes){
+  if(!supportByBone.has(probe.bone))supportByBone.set(probe.bone,new Map());
+  const points=supportByBone.get(probe.bone);
+  for(const point of probe.points)points.set(point.join(','),point);
+ }
+ groundProbes.splice(0,groundProbes.length,...Array.from(supportByBone,([bone,points])=>({bone,points:[...points.values()]})));
  // Digit rest pivots changed after the original skeleton construction.
  root.updateMatrixWorld(true);rig.skeleton.calculateInverses();
  for(const batch of groups.values()){
@@ -194,6 +221,12 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
   geometry.applyMatrix4(rig.byName.Head.matrixWorld.clone().invert());
   const mesh=new T.Mesh(geometry,rigidHead[0].material);mesh.name='HeadSurface';mesh.userData.rigidBone='Head';mesh.frustumCulled=false;
   rig.byName.Head.add(mesh);
+ }
+ for(const [bone,surfaces] of rigidShoes){
+  const geometry=mergeGeometries(surfaces.map(s=>s.geometry),false);surfaces.forEach(s=>s.geometry.dispose());
+  geometry.deleteAttribute('uv');geometry.applyMatrix4(rig.byName[bone].matrixWorld.clone().invert());
+  const mesh=new T.Mesh(geometry,surfaces[0].material);mesh.name='ShoeSurface_'+bone;
+  mesh.userData.rigidBone=bone;mesh.frustumCulled=false;rig.byName[bone].add(mesh);
  }
  const ballGeometry=new T.IcosahedronGeometry(.14,detail==='dense'?3:detail==='balanced'?2:1),ballMaterial=new T.MeshStandardMaterial({color:'#f4f0dd',roughness:.72});
  const ball=new T.Mesh(ballGeometry,experiment==='pbr'?ballMaterial:bakeStudio(ballGeometry,ballMaterial));
