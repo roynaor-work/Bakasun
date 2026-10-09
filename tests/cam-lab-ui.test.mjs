@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { pose } from './cam-lab-fixtures.js';
+import { pose, person, floorPose } from './cam-lab-fixtures.js';
 
 test('app shows and exports attempt diagnostics; local-only speech is throttled and camera stops', async () => {
   const saved = new Map();
@@ -37,7 +37,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
       addEventListener: (name, handler) => { documentHandlers[name] = handler; } });
     replace('window', { isSecureContext: true, Worker: FakeWorker, OffscreenCanvas: class {}, createImageBitmap() {},
       speechSynthesis: { getVoices: () => voices, addEventListener() {}, cancel() {},
-        speak: utterance => speech.push({ time: now, voice: utterance.voice }) }, addEventListener() {} });
+        speak: utterance => speech.push({ time: now, voice: utterance.voice, text: utterance.text }) }, addEventListener() {} });
     replace('navigator', { mediaDevices: { getUserMedia: async options => {
       assert.equal(options.audio, false);
       const track = { stop: () => stopped++, addEventListener() {} };
@@ -58,7 +58,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     const frame = async sample => {
       now += 50; get('video').currentTime += .05; await raf();
       worker.onmessage({ data: { type: 'pose', id: now / 50, timestamp: now,
-        landmarks: sample?.p || [], world: sample?.world || [], inferenceMs: 54 } });
+        landmarks: sample?.p || [], world: sample?.world || [], ...(Array.isArray(sample) ? { poses: sample } : {}), inferenceMs: 54 } });
     };
     for (let i = 0; i < 30; i++) await frame(pose({ angle: 159, feet: 1.7, hands: .3 }));
     assert.equal(get('start').disabled, false); get('start').click();
@@ -94,10 +94,50 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     };
     numeric(output);
     assert.ok(!/"(?:x|y|z|landmarks|world|image|video)"/.test(JSON.stringify(output)));
+    // Exercise the app's actual two-person routing and recording controls.
+    get('again').click(); get('mode').value = 'pair'; get('record').checked = true;
+    await get('settings').handlers.submit({ preventDefault() {} }); await Promise.resolve();
+    const child = angle => person(pose({ angle }), { x: .28, size: .7 });
+    const dad = angle => person(pose({ angle }), { x: .72, size: 1 });
+    for (let i = 0; i < 60; i++) await frame([dad(180), child(180)]);
+    assert.equal(get('start').disabled, false); assert.equal(get('dad-score').hidden, false); get('start').click();
+    for (let i = 0; i < 16; i++) await frame([child(110), dad(180)]);
+    for (let i = 0; i < 16; i++) await frame([dad(180), child(180)]);
+    assert.equal(get('count').textContent, 1); assert.equal(get('dad-count').textContent, '0');
+    for (let i = 0; i < 16; i++) await frame([dad(110), child(110)]);
+    for (let i = 0; i < 16; i++) await frame([dad(180)]);
+    assert.equal(get('count').textContent, 1); assert.equal(get('dad-count').textContent, 1);
+    assert.match(get('child-status').textContent, /הספירה נעצרה/);
+    get('finish').click(); assert.equal(stopped, 2); assert.equal(terminated, 2);
+    assert.equal(get('result-count').textContent, 'הילד: 1 · אבא: 1 חזרות');
+    get('record-download').click(); const skeleton = JSON.parse(await exported.text());
+    assert.equal(skeleton.type, 'cam-lab-skeleton'); assert.equal(skeleton.mode, 'pair');
+    assert.ok(skeleton.countStartMs > 0); assert.ok(skeleton.frames[0].poses[0].landmarks.length === 33);
+    assert.ok(!/"(?:image|video|bitmap|age|height)"/.test(JSON.stringify(skeleton)));
+    const { replayRecording } = await import('../workout/cam-lab/recording.mjs');
+    assert.deepEqual(replayRecording(skeleton).map(c => c.counted), [1, 1]);
+    get('export').click(); const pairLog = JSON.parse(await exported.text());
+    assert.equal(pairLog.version, 3); assert.equal(pairLog.adult.counted, 1);
+    assert.ok(!/"(?:x|y|z|landmarks|world|image|video)"/.test(JSON.stringify(pairLog)));
+    // Floor setup first checks upright placement, then the floor rest pose.
+    get('again').click(); get('mode').value = 'solo'; get('record').checked = false; get('exercise').value = 'push-ups';
+    await get('settings').handlers.submit({ preventDefault() {} }); await Promise.resolve();
+    for (let i = 0; i < 30; i++) await frame(pose());
+    for (let i = 0; i < 30; i++) await frame(floorPose({ bridge: 180 }));
+    assert.equal(get('start').disabled, false); get('start').click();
+    for (let i = 0; i < 16; i++) await frame(floorPose({ elbow: 85, bridge: 180 }));
+    for (let i = 0; i < 16; i++) await frame(floorPose({ bridge: 180 }));
+    assert.equal(get('count').textContent, 1);
+    for (let i = 0; i < 16; i++) await frame(floorPose({ elbow: 85, bridge: 180, badForm: true }));
+    for (let i = 0; i < 140; i++) await frame(floorPose({ bridge: 180 }));
+    assert.equal(get('count').textContent, 1);
+    assert.ok(speech.some(s => s.text.includes('הַגּוּף בְּקוֹ יָשָׁר')));
+    get('finish').click();
+    assert.equal(stopped, 3); assert.equal(terminated, 3); assert.equal(get('record-download').disabled, true);
     const spokenBefore = speech.length; voices = [{ lang: 'he-IL', localService: false }];
     now += 7000; get('again').click(); await get('settings').handlers.submit({ preventDefault() {} });
     await frame(pose()); assert.equal(speech.length, spokenBefore);
-    get('stop').click(); assert.equal(stopped, 2); assert.equal(terminated, 2);
+    get('stop').click(); assert.equal(stopped, 4); assert.equal(terminated, 4);
   } finally {
     URL.createObjectURL = oldCreate; URL.revokeObjectURL = oldRevoke;
     for (const [key, descriptor] of saved) {

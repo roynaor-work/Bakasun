@@ -16,3 +16,37 @@ export function pose({ angle = 180, feet = 1, hands = .54, footConfidence = 1 } 
   }
   return { p, world };
 }
+
+export function floorPose({ elbow = 180, bridge = 115, badForm = false, farHidden = true, arch = false } = {}) {
+  const sample = pose(), { p, world } = sample;
+  const set = (i, x, y) => Object.assign(p[i], { x, y });
+  set(0, .12, .5); set(7, .13, .5); set(8, .13, .51);
+  for (const shift of [0, 1]) {
+    set(11 + shift, .22, .6); set(13 + shift, .24, .72); set(15 + shift, .26, .85);
+    set(23 + shift, .48, arch ? .42 : .6); set(25 + shift, .69, .6);
+    for (const i of [27, 29, 31]) set(i + shift, .86, .65);
+    world[11 + shift] = { x: 0, y: 0, z: 0 };
+    world[13 + shift] = { x: 0, y: .2, z: 0 };
+    world[15 + shift] = { x: Math.sin(elbow * Math.PI / 180) * .2, y: .2 - Math.cos(elbow * Math.PI / 180) * .2, z: 0 };
+    world[23 + shift] = { x: .3, y: badForm ? .2 : 0, z: 0 };
+    world[25 + shift] = { x: .3 + Math.cos((180 - bridge) * Math.PI / 180) * .25,
+      y: Math.sin((180 - bridge) * Math.PI / 180) * .25, z: 0 };
+    world[27 + shift] = { x: .75, y: 0, z: 0 };
+  }
+  if (farHidden) for (const i of [12, 14, 16, 24, 26, 28, 30, 32]) p[i].visibility = .1;
+  return sample;
+}
+
+export function lungePose({ angle = 180, side = 'left', lean = false } = {}) {
+  const sample = pose({ angle });
+  const other = pose();
+  for (const i of side === 'left' ? [24, 26, 28] : [23, 25, 27]) sample.world[i] = other.world[i];
+  if (angle < 157) sample.world[side === 'left' ? 27 : 28].z *= -1;
+  if (lean) for (const i of [11, 12]) sample.world[i].z -= .15;
+  return sample;
+}
+
+export function person(sample, { x = .3, size = .7 } = {}) {
+  const transform = p => ({ ...p, x: x + (p.x - .5) * size, y: .94 + (p.y - .92) * size });
+  return { landmarks: sample.p.map(transform), world: structuredClone(sample.world) };
+}

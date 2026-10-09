@@ -1,5 +1,12 @@
 // Pure, deterministic pose logic. Nothing here records images or writes storage.
-export const EXERCISES = ['squats', 'jumping-jacks', 'high-knees'];
+export const EXERCISES = ['squats', 'jumping-jacks', 'high-knees', 'lunges', 'push-ups', 'knee-push-ups', 'glute-bridge'];
+export const FLOOR = ['push-ups', 'knee-push-ups', 'glute-bridge'];
+export const EXERCISE_FEEDBACK = {
+  lunges: 'בַּמַּכְרָע שׁוֹמְרִים עַל גּוּף זָקוּף. עוֹלִים בְּנַחַת וּמַחֲלִיפִים רֶגֶל.',
+  'push-ups': 'הַגּוּף בְּקוֹ יָשָׁר. לֹא שׁוֹמְטִים אֶת הָאַגָּן. מְכַוְּפִים אֶת הַמַּרְפְּקִים וְדוֹחֲפִים בְּנַחַת.',
+  'knee-push-ups': 'הַגּוּף יָשָׁר מֵהַבִּרְכַּיִם עַד הַכְּתֵפַיִם. לֹא מְקַפְּלִים אֶת הַמָּתְנַיִם בִּמְקוֹם אֶת הַמַּרְפְּקִים.',
+  'glute-bridge': 'מַרְמִים אֶת הָאַגָּן עַד קוֹ יָשָׁר בְּנוֹחוּת, בְּלִי לְקַמֵּר אֶת הַגַּב. מוֹרִידִים לְאַט.',
+};
 export const REASONS = {
   partial: 'טווח התנועה היה חלקי',
   knees: 'הברכיים התקרבו פנימה לאורך התנועה',
@@ -8,6 +15,7 @@ export const REASONS = {
   timeout: 'לא זוהתה חזרה לעמדת ההתחלה',
   alternate: 'לא זוהתה החלפה לרגל השנייה',
   unfinished: 'התנועה הייתה עדיין באמצע בסיום',
+  alignment: 'לא נשמר קו הגוף המתאים לתרגיל',
 };
 export const FEEDBACK = {
   partial: 'נְנַסֶּה תְּנוּעָה שְׁלֵמָה וְנוֹחָה, וְנַחֲזֹר לַעֲמִידַת הַהַתְחָלָה. אֶפְשָׁר לְבַקֵּשׁ מִמְּבֻגָּר לְהַדְגִּים.',
@@ -34,7 +42,10 @@ export function thresholds({ age = 7, height = 120 } = {}) {
     kneeRise: clamp((age <= 8 ? 12 : 14) / height, .07, .16),
     kneeStart: .045, kneeRest: .025, jackOpen: 1.8, jackStart: 1.5, jackClosed: 1.3,
     wristMargin: 4 / height, dwell: age <= 8 ? 150 : 120, minCycle: 350,
-    maxCycle: 8000, maxGap: 450, trackingGrace: 300, smoothing: 80, valgusHold: 200 };
+    maxCycle: 8000, maxGap: 450, trackingGrace: 300, smoothing: 80, valgusHold: 200,
+    lungeStart: 145, lungeDown: 110, lungeUp: 157, lungeDepth: .08, torsoLean: .45,
+    pushStart: 145, pushDown: 100, pushUp: 160, bodyStraight: 150,
+    bridgeStart: 145, bridgeUp: 165, bridgeDown: 135, bridgeArch: .15, formHold: 200 };
 }
 const BODY = [0, 7, 8, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
 // Feet are small and often occluded by each other. Keep confident ankles, but
@@ -45,6 +56,7 @@ export const DIAGNOSTIC_LABELS = {
   presence: 'זיהוי נקודה חלש', margin: 'נקודה קרובה לשולי התמונה', headroom: 'חסר מקום מעל הראש',
   bodySpan: 'הגוף קטן מדי בתמונה', shoulderWidth: 'הכתפיים צרות מדי בתמונה',
   frontRatio: 'הגוף אינו מול המצלמה', hipWidth: 'האגן צר מדי בתמונה',
+  floorView: 'תרגיל הרצפה אינו במבט צד ברור',
 };
 export const POINT_LABELS = {
   0: 'אף', 7: 'אוזן שמאל', 8: 'אוזן ימין', 11: 'כתף שמאל', 12: 'כתף ימין',
@@ -55,10 +67,21 @@ export const POINT_LABELS = {
 };
 // Only failure codes and point IDs leave this function, never coordinates.
 // Several failures can occur in one frame; each cause/point is counted once.
-export function bodyReport(points, aspect = 1) {
+export function bodyReport(points, aspect = 1, exercise = 'squats') {
   const failures = [];
   if (!points || points.length < 33) return { ok: false, failures: [{ reason: 'missing' }] };
-  for (const i of BODY) {
+  const floor = FLOOR.includes(exercise);
+  // A side view hides the far limbs. Require one COMPLETE confident side,
+  // never splice the visible elbow from one side with the hip from the other.
+  const sides = [[11, 13, 15, 23, 25, 27, 29, 31], [12, 14, 16, 24, 26, 28, 30, 32]];
+  const quality = ids => Math.min(...ids.map(i => {
+    const p = points[i], confidence = i >= 29 ? FRAMING.footConfidence : FRAMING.coreConfidence;
+    if (!p || !Number.isFinite(p.x) || !Number.isFinite(p.y) || p.x <= FRAMING.margin || p.x >= 1 - FRAMING.margin ||
+      p.y <= FRAMING.margin || p.y >= 1 - FRAMING.margin) return 0;
+    return Math.min(p.visibility || 0, p.presence ?? 1) / confidence;
+  }));
+  const side = quality(sides[0]) >= quality(sides[1]) ? 0 : 1;
+  for (const i of floor ? [0, ...sides[side]] : BODY) {
     const p = points[i], confidence = i >= 29 ? FRAMING.footConfidence : FRAMING.coreConfidence;
     if (!p || !Number.isFinite(p.x) || !Number.isFinite(p.y)) {
       failures.push({ reason: 'coordinates', point: i }); continue;
@@ -69,7 +92,18 @@ export function bodyReport(points, aspect = 1) {
       failures.push({ reason: 'margin', point: i });
     }
   }
-  if (!failures.some(f => f.reason === 'coordinates')) {
+  if (floor) {
+    if (!failures.some(f => f.reason === 'coordinates')) {
+      const ids = [0, ...sides[side]], xs = ids.map(i => points[i].x), ys = ids.map(i => points[i].y);
+      if (Math.hypot((Math.max(...xs) - Math.min(...xs)) * aspect, Math.max(...ys) - Math.min(...ys)) < .4) {
+        failures.push({ reason: 'bodySpan' });
+      }
+      const [s, , , h] = sides[side];
+      if (Math.abs(points[s].x - points[h].x) * aspect < Math.abs(points[s].y - points[h].y) * .5) {
+        failures.push({ reason: 'floorView' });
+      }
+    }
+  } else if (!failures.some(f => f.reason === 'coordinates')) {
     const torso = Math.abs((points[23].y + points[24].y - points[11].y - points[12].y) / 2);
     const head = Math.min(points[0].y, points[7].y, points[8].y);
     const top = head - torso * FRAMING.headroom;
@@ -83,7 +117,7 @@ export function bodyReport(points, aspect = 1) {
     }
     if (Math.abs(points[23].x - points[24].x) < .025) failures.push({ reason: 'hipWidth' });
   }
-  return { ok: failures.length === 0, failures };
+  return { ok: failures.length === 0, failures, side };
 }
 export function fullBody(points, aspect = 1) {
   return bodyReport(points, aspect).ok;
@@ -98,10 +132,27 @@ export function features(points, world, aspect = 1, report = bodyReport(points, 
   const usableWorld = world?.length >= 33 && [23, 24, 25, 26, 27, 28].every(i =>
     world[i] && ['x', 'y', 'z'].every(k => Number.isFinite(world[i][k])));
   const kneeAngles = usableWorld ? [angle(world[23], world[25], world[27]), angle(world[24], world[26], world[28])] : [];
+  const depthDifference = usableWorld ? (world[27].z - world[23].z) - (world[28].z - world[24].z) : null;
   const ankleWidth = Math.abs(p[27].x - p[28].x);
   const kneeWidth = Math.abs(p[25].x - p[26].x);
+  const [s, e, w, h, k, a] = report.side === 1 ? [12, 14, 16, 24, 26, 28] : [11, 13, 15, 23, 25, 27];
+  const worldAngle = ids => world?.length >= 33 && ids.every(i => world[i] && ['x', 'y', 'z'].every(key => Number.isFinite(world[i][key]))) ?
+    angle(...ids.map(i => world[i])) : NaN;
+  const finite = n => Number.isFinite(n) ? n : null;
+  const torsoLength = Math.hypot((p[s].x - p[h].x) * aspect, p[s].y - p[h].y);
+  const lineY = p[k].x !== p[s].x ? p[s].y + (p[k].y - p[s].y) * (p[h].x - p[s].x) / (p[k].x - p[s].x) : p[h].y;
+  const torsoWorld = [11, 12, 23, 24].every(i => world?.[i] && ['x', 'y', 'z'].every(key => Number.isFinite(world[i][key])));
+  const torsoDelta = key => world[11][key] + world[12][key] - world[23][key] - world[24][key];
   return {
     squat: kneeAngles.length && kneeAngles.every(Number.isFinite) ? Math.max(...kneeAngles) : null,
+    lunge: kneeAngles.length && kneeAngles.every(Number.isFinite) ? Math.min(...kneeAngles) : null,
+    lungeDepthDifference: depthDifference,
+    leftKnee: kneeAngles[0] ?? null, rightKnee: kneeAngles[1] ?? null,
+    elbow: finite(worldAngle([s, e, w])),
+    bodyLine: finite(worldAngle([s, h, a])), kneeBodyLine: finite(worldAngle([s, h, k])),
+    bridge: finite(worldAngle([s, h, k])),
+    arch: torsoLength > 0 ? (lineY - p[h].y) / torsoLength : 0,
+    lean: torsoWorld ? Math.hypot(torsoDelta('x'), torsoDelta('z')) / Math.max(.001, Math.abs(torsoDelta('y'))) : null,
     kneeIn: ankleWidth > hip * .85 && kneeWidth < ankleWidth * .60 && kneeWidth < hip * .85,
     feet: ankleWidth / shoulder,
     armsUp: p[15].y < p[0].y && p[16].y < p[0].y,
@@ -118,10 +169,15 @@ export function atRest(exercise, f, t) {
   if (!f) return false;
   if (exercise === 'squats') return f.squat != null && f.squat > t.squatUp;
   if (exercise === 'jumping-jacks') return f.feet < t.jackClosed && f.armsDown;
+  if (exercise === 'lunges') return f.lunge != null && f.lunge > t.lungeUp;
+  if (exercise === 'push-ups' || exercise === 'knee-push-ups') return f.elbow != null && f.elbow > t.pushUp;
+  if (exercise === 'glute-bridge') return f.bridge != null && f.bridge < t.bridgeDown;
   return Math.max(f.leftRise, f.rightRise) < t.kneeRest;
 }
 export function statusCode(report, phase, worldMissing = false) {
   if (!report.ok) {
+    if (report.failures.some(f => f.reason === 'bodySpan')) return 'far';
+    if (report.failures.some(f => f.reason === 'floorView')) return 'side';
     if (report.failures.some(f => f.point >= 23)) return 'legs';
     if (report.failures.some(f => [0, 7, 8].includes(f.point) || f.reason === 'headroom')) return 'head';
     if (report.failures.some(f => [13, 14, 15, 16].includes(f.point))) return 'hands';
@@ -130,6 +186,11 @@ export function statusCode(report, phase, worldMissing = false) {
   }
   if (worldMissing) return 'world';
   return phase;
+}
+export function worldRequired(exercise, f) {
+  return !f || (exercise === 'squats' && f.squat == null) || (exercise === 'lunges' && (f.lunge == null || f.lean == null)) ||
+    (['push-ups', 'knee-push-ups'].includes(exercise) && (f.elbow == null || f.bodyLine == null || f.kneeBodyLine == null)) ||
+    (exercise === 'glute-bridge' && f.bridge == null);
 }
 
 export class RepCounter {
@@ -152,7 +213,7 @@ export class RepCounter {
   }
   reset() {
     this.phase = 'waiting'; this.smoothed = null; this.restSince = null;
-    this.targetSince = null; this.kneeSince = null; this.cycle = null;
+    this.targetSince = null; this.kneeSince = null; this.formSince = null; this.cycle = null;
   }
   reject(reason) {
     this.rejected++; this.reasons[reason] = (this.reasons[reason] || 0) + 1;
@@ -183,7 +244,7 @@ export class RepCounter {
     this.lastTime = time;
     let event = null;
     if (gap > this.t.maxGap && !this.lossReset) event = this.resetTracking();
-    const report = bodyReport(points, aspect);
+    const report = bodyReport(points, aspect, this.exercise);
     const d = this.diagnostics;
     d.frames++; if (report.ok) d.fullBodyPassed++; else d.fullBodyFailed++;
     for (const reason of new Set(report.failures.map(f => f.reason))) d.failureFrames[reason]++;
@@ -193,9 +254,9 @@ export class RepCounter {
       d.failedPoints[reason][point] = (d.failedPoints[reason][point] || 0) + 1;
     }
     const raw = features(points, world, aspect, report);
-    const worldMissing = report.ok && this.exercise === 'squats' && raw.squat == null;
+    const worldMissing = report.ok && worldRequired(this.exercise, raw);
     if (worldMissing) d.worldMissingFrames++;
-    if (!raw || (this.exercise === 'squats' && raw.squat == null)) {
+    if (!raw || worldMissing) {
       this.lostSince ??= this.lastGoodTime ?? time;
       if (time - this.lostSince > this.t.trackingGrace && !this.lossReset) event = this.resetTracking();
       this.status = statusCode(report, this.phase, worldMissing);
@@ -206,7 +267,7 @@ export class RepCounter {
       if (lostMs > this.t.trackingGrace && !this.lossReset) event = this.resetTracking();
       if (!this.lossReset) {
         // Unknown frames preserve state but never satisfy dwell/minimum cycle time.
-        for (const key of ['restSince', 'targetSince', 'kneeSince']) if (this[key] != null) this[key] += lostMs;
+        for (const key of ['restSince', 'targetSince', 'kneeSince', 'formSince']) if (this[key] != null) this[key] += lostMs;
         if (this.cycle) this.cycle.since += lostMs;
         d.graceRecoveries++;
       }
@@ -214,12 +275,14 @@ export class RepCounter {
     this.lostSince = null; this.lossReset = false; this.lastGoodTime = time;
     const k = 1 - Math.exp(-Math.min(gap || 50, 150) / this.t.smoothing);
     if (!this.smoothed) this.smoothed = { ...raw };
-    else for (const key of ['squat', 'feet', 'wristRise', 'leftRise', 'rightRise']) {
+    else for (const key of ['squat', 'lunge', 'elbow', 'bridge', 'feet', 'wristRise', 'leftRise', 'rightRise']) {
       if (raw[key] != null) this.smoothed[key] += k * (raw[key] - this.smoothed[key]);
     }
     const f = { ...raw, ...this.smoothed, armsUp: raw.armsUp, armsDown: raw.armsDown, kneeIn: raw.kneeIn };
     const t = this.t;
-    const side = f.leftRise >= f.rightRise ? 'left' : 'right';
+    const side = this.exercise === 'lunges' ? raw.lungeDepthDifference < -t.lungeDepth ? 'left' :
+      raw.lungeDepthDifference > t.lungeDepth ? 'right' : null : f.leftRise >= f.rightRise ? 'left' : 'right';
+    const alternating = ['high-knees', 'lunges'].includes(this.exercise);
     const rise = Math.max(f.leftRise, f.rightRise);
     const rest = atRest(this.exercise, f, t);
     let start, target;
@@ -228,6 +291,13 @@ export class RepCounter {
     } else if (this.exercise === 'jumping-jacks') {
       start = f.feet > t.jackStart || f.wristRise > t.wristMargin;
       target = f.feet > t.jackOpen && f.armsUp;
+    } else if (this.exercise === 'lunges') {
+      start = f.lunge < t.lungeStart;
+      target = side != null && f.lunge <= t.lungeDown && (side === 'left' ? raw.leftKnee : raw.rightKnee) <= t.lungeDown;
+    } else if (['push-ups', 'knee-push-ups'].includes(this.exercise)) {
+      start = f.elbow < t.pushStart; target = f.elbow <= t.pushDown;
+    } else if (this.exercise === 'glute-bridge') {
+      start = f.bridge > t.bridgeStart; target = f.bridge >= t.bridgeUp;
     } else {
       start = rise > t.kneeStart;
       target = rise > t.kneeRise && Math.min(f.leftRise, f.rightRise) < t.kneeRest;
@@ -241,7 +311,7 @@ export class RepCounter {
       } else {
         this.restSince = null;
         if (this.phase === 'armed' && start) {
-          this.cycle = { since: time, reached: false, kneeIn: false, side };
+          this.cycle = { since: time, reached: false, kneeIn: false, badForm: false, side };
           this.phase = 'moving'; d.cyclesStarted++;
         }
       }
@@ -250,7 +320,8 @@ export class RepCounter {
     if (time - this.cycle.since > t.maxCycle) {
       event = this.reject('timeout'); this.reset(); this.status = this.phase; return event;
     }
-    if (target && (this.exercise !== 'high-knees' || side === this.cycle.side)) {
+    if (this.exercise === 'lunges' && this.cycle.side == null && side != null) this.cycle.side = side;
+    if (target && (!alternating || side === this.cycle.side)) {
       this.targetSince ??= time;
       if (time - this.targetSince >= t.dwell) this.cycle.reached = true;
     } else this.targetSince = null;
@@ -258,15 +329,23 @@ export class RepCounter {
       this.kneeSince ??= time;
       if (time - this.kneeSince >= t.valgusHold) this.cycle.kneeIn = true;
     } else this.kneeSince = null;
+    const badForm = this.exercise === 'lunges' ? raw.lean > t.torsoLean :
+      this.exercise === 'push-ups' ? raw.bodyLine < t.bodyStraight :
+      this.exercise === 'knee-push-ups' ? raw.kneeBodyLine < t.bodyStraight :
+      this.exercise === 'glute-bridge' ? raw.arch > t.bridgeArch : false;
+    if (badForm) {
+      this.formSince ??= time;
+      if (time - this.formSince >= t.formHold) this.cycle.badForm = true;
+    } else this.formSince = null;
     if (rest) {
       this.restSince ??= time;
       if (time - this.restSince >= t.dwell) {
         const c = this.cycle;
-        const reason = time - c.since < t.minCycle ? 'fast' : c.kneeIn ? 'knees' : !c.reached ? 'partial' :
-          this.exercise === 'high-knees' && c.side === this.lastSide ? 'alternate' : null;
+        const reason = time - c.since < t.minCycle ? 'fast' : c.kneeIn ? 'knees' : c.badForm ? 'alignment' : !c.reached ? 'partial' :
+          alternating && c.side === this.lastSide ? 'alternate' : null;
         if (reason) event = this.reject(reason);
         else { this.count++; event = { type: 'counted', count: this.count }; }
-        if (this.exercise === 'high-knees' && c.reached) this.lastSide = c.side;
+        if (alternating && !reason) this.lastSide = c.side;
         this.reset(); this.phase = 'armed'; this.restSince = time;
       }
     } else this.restSince = null;

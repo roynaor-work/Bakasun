@@ -1,24 +1,36 @@
-import { RepCounter, bodyReport, features, statusCode, EXERCISES, FRAMING, REASONS, FEEDBACK } from './counter.mjs';
+import { RepCounter, bodyReport, features, statusCode, worldRequired, FLOOR, EXERCISE_FEEDBACK, EXERCISES, FRAMING, REASONS, FEEDBACK } from './counter.mjs';
 import { StatusLine, RestGate, diagnosticLines } from './feedback.mjs';
+import { PeopleTracker } from './people.mjs';
+import { PlacementGuide } from './placement.mjs';
+import { SkeletonRecorder } from './recording.mjs';
 const $ = id => document.getElementById(id);
 const video = $('video'), canvas = $('overlay'), context = canvas.getContext('2d');
-const titles = { squats: 'סקוואט', 'jumping-jacks': 'קפיצות פיסוק', 'high-knees': 'ברכיים גבוהות' };
+const titles = { squats: 'סקוואט', 'jumping-jacks': 'קפיצות פיסוק', 'high-knees': 'ברכיים גבוהות',
+  lunges: 'מכרעים', 'push-ups': 'שכיבות סמיכה', 'knee-push-ups': 'שכיבות סמיכה על הברכיים', 'glute-bridge': 'גשר ישבן' };
 const instructions = {
   squats: 'מול המצלמה: יורדים בנוחות כאילו מתיישבים, הברכיים בכיוון אצבעות הרגליים, ואז עומדים שוב. אין צורך לרדת בכוח.',
   'jumping-jacks': 'מול המצלמה: פותחים רגליים ומרימים את שתי הידיים מעל הראש, ואז סוגרים ומורידים. נשארים באותו מקום.',
   'high-knees': 'מול המצלמה: מרימים ברך, מורידים ומחליפים רגל. כל הרמה והורדה היא חזרה אחת; לא צריך לרוץ מהר.',
+  lunges: 'מול המצלמה: צעד קדימה, כיפוף ברכיים בנוחות, חזרה לעמידה והחלפת רגל. כל ירידה ועלייה = חזרה אחת. הגוף זקוף.',
+  'push-ups': 'מבט צד, מכשיר על הרצפה או כיסא נמוך: גוף ישר מהכתפיים לקרסוליים. מכופפים מרפקים ומיישרים. ירידה ועלייה = חזרה.',
+  'knee-push-ups': 'מבט צד: הברכיים על הרצפה, גוף ישר מהברכיים לכתפיים. מכופפים ומיישרים מרפקים; לא מתקפלים במותניים.',
+  'glute-bridge': 'מבט צד: שכיבה על הגב וברכיים כפופות. מרימים אגן לקו כתפיים–אגן–ברכיים, בלי לקמר גב, ומורידים. עלייה וירידה = חזרה.',
 };
 const spoken = {
-  placement: 'מַנִּיחִים אֶת הַמַּכְשִׁיר בְּיַצִּיבוּת בְּגֹבַהּ הָאַגָּן, מוּל הַגּוּף. עוֹמְדִים בְּמֶרְחָק שְׁנַיִם עַד שְׁלוֹשָׁה מֶטְרִים. מַשְׁאִירִים מָקוֹם לַיָּדַיִם מֵעַל הָרֹאשׁ. מְבֻגָּר יָכוֹל לַעֲזֹר.',
+  placement: 'מַנִּיחִים אֶת הַמַּכְשִׁיר בְּיַצִּיבוּת עַל הָרִצְפָּה אוֹ עַל כִּסֵּא, בְּלִי הֲטָיָה לַצַּד. מְכַוְּנִים עַד שֶׁרוֹאִים אֶת כָּל הַגּוּף. בִּשְׁנַיִם עוֹמְדִים זֶה לְצַד זֶה בְּאוֹתוֹ מֶרְחָק מֵהַמַּצְלֵמָה.',
   ready: 'רוֹאִים אֶת כָּל הַגּוּף. אֶפְשָׁר לְהַתְחִיל.',
   squats: 'יוֹרְדִים בְּנוֹחוּת כְּאִלּוּ מִתְיַשְּׁבִים, וְאָז עוֹמְדִים שׁוּב. הַבִּרְכַּיִם בְּכִוּוּן אֶצְבְּעוֹת הָרַגְלַיִם.',
   'jumping-jacks': 'פּוֹתְחִים רַגְלַיִם וּמַרְמִים יָדַיִם מֵעַל הָרֹאשׁ. אָז סוֹגְרִים וּמוֹרִידִים.',
   'high-knees': 'מַרְמִים בֶּרֶךְ אַחַת, מוֹרִידִים, וּמַחֲלִיפִים רֶגֶל. לֹא צָרִיךְ לָרוּץ מַהֵר.',
+  ...EXERCISE_FEEDBACK,
 };
 let worker, stream, generation = 0, raf = 0, ready = false, busy = false, active = false;
 let counter, exercise, gate, statusLine, attemptStarted = null, lastVideoTime = -1, frameId = 0, pending;
 let lastFrame = null, totalFrames = 0, totalInference = 0, log = [], lastSpeak = -Infinity;
 let lastMetricPaint = 0, watchdog = 0, totalElapsed = 0;
+let pair = false, adult, adultGate, tracker, placement, placementGate, placementDone, queuedSpeech = null;
+let missing = [false, false], calibratedPeople = [false, false];
+let recorder = new SkeletonRecorder();
 function localVoice() {
   return window.speechSynthesis?.getVoices().find(v => v.localService && /^he(?:-|_|$)/i.test(v.lang));
 }
@@ -28,11 +40,18 @@ function voiceStatus() {
 }
 window.speechSynthesis?.addEventListener('voiceschanged', voiceStatus);
 voiceStatus();
-function speak(text) {
+function speak(text, priority = 0) {
+  const now = performance.now();
+  if (!queuedSpeech || queuedSpeech.expires < now || priority >= queuedSpeech.priority) queuedSpeech = { text, priority, expires: now + 12000 };
+  flushSpeech();
+}
+function flushSpeech() {
   const voice = localVoice();
-  if (!$('voice').checked || !voice || performance.now() - lastSpeak < 6000) return;
+  if (!$('voice').checked || !voice) { queuedSpeech = null; return; }
+  if (queuedSpeech?.expires < performance.now()) queuedSpeech = null;
+  if (!queuedSpeech || performance.now() - lastSpeak < 6000) return;
   window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
+  const utterance = new SpeechSynthesisUtterance(queuedSpeech.text); queuedSpeech = null;
   utterance.voice = voice; utterance.lang = 'he-IL'; utterance.rate = .85;
   window.speechSynthesis.speak(utterance); lastSpeak = performance.now();
 }
@@ -41,6 +60,7 @@ function release() {
   cancelAnimationFrame(raf); clearTimeout(watchdog); worker?.terminate(); worker = null;
   stream?.getTracks().forEach(t => t.stop()); stream = null;
   video.srcObject = null; window.speechSynthesis?.cancel();
+  queuedSpeech = null; recorder.stop(); paintRecorder();
   $('camera').disabled = false;
 }
 function fail(message, detail = '') {
@@ -49,33 +69,41 @@ function fail(message, detail = '') {
   if (detail) console.error('cam-lab:', detail);
 }
 const links = [[11,12],[11,13],[13,15],[12,14],[14,16],[11,23],[12,24],[23,24],[23,25],[25,27],[24,26],[26,28],[27,31],[28,32]];
-function draw(points, visible) {
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  context.strokeStyle = visible ? '#70e2b5' : '#ffd685'; context.lineWidth = 3;
+function draw(points, visible, isAdult = false) {
+  context.strokeStyle = visible ? isAdult ? '#85dcfc' : '#70e2b5' : '#ffd685'; context.lineWidth = 3;
   for (const [a,b] of links) {
     if (!points[a] || !points[b] || points[a].visibility < .65 || points[b].visibility < .65) continue;
     context.beginPath(); context.moveTo(points[a].x * canvas.width, points[a].y * canvas.height);
     context.lineTo(points[b].x * canvas.width, points[b].y * canvas.height); context.stroke();
   }
 }
-function handleEvent(event) {
+function handleEvent(event, person = 0) {
   if (!event) return;
-  if (event.type === 'counted') { $('count').textContent = counter.count; $('feedback').textContent = 'זוהתה תנועה שלמה'; }
+  const prefix = pair ? person ? 'אבא: ' : 'הילד: ' : '';
+  if (event.type === 'counted') { $(person ? 'dad-count' : 'count').textContent = person ? adult.count : counter.count; $('feedback').textContent = prefix + 'זוהתה תנועה שלמה'; }
   else if (event.type === 'rejected') {
     const reason = event.reason || 'tracking';
-    $('feedback').textContent = FEEDBACK[reason]; speak(FEEDBACK[reason]);
+    const message = ['partial', 'alignment', 'alternate'].includes(reason) && EXERCISE_FEEDBACK[exercise] ? EXERCISE_FEEDBACK[exercise] : FEEDBACK[reason];
+    $('feedback').textContent = prefix + message; speak(message, 1);
   }
 }
 function poseResult(data) {
   busy = false; clearTimeout(watchdog);
-  const { landmarks, world, timestamp, inferenceMs } = data;
+  const { timestamp, inferenceMs } = data;
+  const poses = data.poses || (data.landmarks?.length ? [{ landmarks: data.landmarks, world: data.world }] : []);
   const aspect = video.videoWidth / video.videoHeight;
-  const report = bodyReport(landmarks, aspect);
-  const f = features(landmarks, world, aspect, report);
-  const visible = report.ok && (exercise !== 'squats' || f.squat != null);
-  draw(landmarks, visible);
   // A worker frame captured before the start click belongs to placement.
   if (active && timestamp < attemptStarted) return;
+  recorder.add(poses, timestamp); paintRecorder();
+  const placementCode = !active && (!FLOOR.includes(exercise) || !placementDone) ? placement.update(poses, timestamp, aspect) : null;
+  const assigned = pair ? tracker.update(placementCode ? [] : poses, timestamp, aspect) : [poses[0] || null];
+  if (pair && tracker.tracks.length) placementDone = true;
+  const reports = assigned.map(p => bodyReport(p?.landmarks || [], aspect, exercise));
+  const fs = assigned.map((p, i) => features(p?.landmarks || [], p?.world || [], aspect, reports[i]));
+  const visibility = fs.map((f, i) => reports[i].ok && !worldRequired(exercise, f));
+  const visible = visibility[0], report = reports[0];
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  assigned.forEach((p, i) => { if (p) draw(p.landmarks, visibility[i], i === 1); });
   const interval = lastFrame == null ? 0 : timestamp - lastFrame;
   const fps = interval ? 1000 / interval : 0;
   totalElapsed += interval;
@@ -86,16 +114,32 @@ function poseResult(data) {
     lastMetricPaint = performance.now();
   }
   if (active) {
-    handleEvent(counter.update(landmarks, world, timestamp, aspect));
-    paintStatus(counter.status);
-    $('view').classList.toggle('ready', visible);
+    [counter, ...(pair ? [adult] : [])].forEach((c, i) => {
+      if (pair && !visibility[i] && !missing[i]) handleEvent(c.resetTracking(), i);
+      missing[i] = !visibility[i];
+      handleEvent(c.update(assigned[i]?.landmarks || [], assigned[i]?.world || [], timestamp, aspect), i);
+      if (pair) $(i ? 'dad-status' : 'child-status').textContent = visibility[i] ? c.phase === 'waiting' ? 'מחכה לעמדת התחלה' : 'סופר' : 'הספירה נעצרה — מחכה לחזרה';
+    });
+    paintStatus(pair && !visibility.every(Boolean) ? assigned.every(Boolean) ? 'missing-person' : tracker.status : counter.status);
+    $('view').classList.toggle('ready', visibility.every(Boolean));
   } else {
-    const calibrated = gate.update(visible ? f : null, timestamp);
+    if (FLOOR.includes(exercise) && !pair && !placementDone) {
+      const upright = bodyReport(poses[0]?.landmarks || [], aspect);
+      const standing = features(poses[0]?.landmarks || [], poses[0]?.world || [], aspect, upright);
+      placementDone = placementGate.update(placementCode ? null : standing, timestamp);
+    }
+    calibratedPeople = [counter, ...(pair ? [adult] : [])].map((c, i) => (i ? adultGate : gate).update(
+      !placementCode && (!FLOOR.includes(exercise) || placementDone) && visibility[i] ? fs[i] : null, timestamp));
+    const calibrated = calibratedPeople.every(Boolean);
     if (calibrated && $('start').disabled) speak(spoken.ready);
     $('start').disabled = !calibrated;
     $('view').classList.toggle('ready', calibrated);
-    paintStatus(statusCode(report, calibrated ? 'armed' : 'waiting', report.ok && !visible));
+    const code = placementCode || (pair && !tracker.tracks.length ? 'pair' : FLOOR.includes(exercise) && !placementDone ? 'stand-placement' :
+      pair && !assigned.every(Boolean) ? tracker.status :
+      statusCode(report, calibrated ? 'armed' : FLOOR.includes(exercise) ? 'floor-rest' : 'waiting', report.ok && !visible));
+    paintStatus(code);
   }
+  flushSpeech();
   log.push({ frame: data.id, fps: +fps.toFixed(2), inferenceMs: +inferenceMs.toFixed(2),
     processingMs: +processingMs.toFixed(2), tracked: +visible, fullBody: +report.ok,
     phase: active ? ['waiting', 'armed', 'moving'].indexOf(counter.phase) : -1 });
@@ -103,7 +147,7 @@ function poseResult(data) {
 }
 function paintStatus(code) {
   const message = statusLine.update(code, performance.now());
-  if (message) { $('status').textContent = message[0]; speak(message[1]); }
+  if (message) { $('status').textContent = message[0]; speak(message[1], ['far', 'tilt'].includes(code) ? 1 : 0); }
 }
 async function tick(token) {
   if (token !== generation) return;
@@ -134,9 +178,18 @@ $('settings').addEventListener('submit', async event => {
   exercise = $('exercise').value;
   try { counter = new RepCounter(exercise, { age: Number($('age').value), height: Number($('height').value) }); }
   catch (error) { fail(error.message); return; }
+  pair = $('mode').value === 'pair'; adult = pair ? new RepCounter(exercise, { age: 10, height: 180 }) : null;
+  tracker = pair ? new PeopleTracker() : null; placement = new PlacementGuide();
+  placementGate = new RestGate('squats', counter.t); placementDone = !FLOOR.includes(exercise);
+  missing = [false, false]; calibratedPeople = [false, false]; recorder = new SkeletonRecorder();
+  $('dad-score').hidden = !pair; $('child-label').textContent = pair ? 'הילד' : 'חזרות שנספרו';
+  $('dad-count').textContent = '0'; $('child-status').textContent = ''; $('dad-status').textContent = '';
+  $('recording-panel').hidden = false; paintRecorder();
   $('camera').disabled = true; $('result').hidden = true;
   log = []; totalFrames = 0; totalInference = 0; totalElapsed = 0; frameId = 0; lastFrame = null; lastVideoTime = -1;
+  lastMetricPaint = 0; $('metrics').textContent = 'FPS — · processing —';
   gate = new RestGate(exercise, counter.t); statusLine = new StatusLine(); attemptStarted = null;
+  adultGate = pair ? new RestGate(exercise, adult.t) : null;
   $('count').textContent = '0'; $('feedback').textContent = ''; $('start').disabled = true;
   $('start').hidden = false; $('finish').hidden = true; $('view').classList.remove('ready');
   $('session-title').textContent = `2. הצבה · ${titles[exercise]}`; $('instructions').textContent = instructions[exercise];
@@ -149,6 +202,7 @@ $('settings').addEventListener('submit', async event => {
     stream = acquired; video.srcObject = stream; await video.play();
     if (token !== generation) return;
     canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+    if ($('record').checked) startRecording(); else paintRecorder();
     $('view').style.aspectRatio = `${video.videoWidth}/${video.videoHeight}`;
     $('setup').hidden = true; $('session').hidden = false;
     worker = new Worker('./pose-worker.js');
@@ -161,7 +215,7 @@ $('settings').addEventListener('submit', async event => {
     worker.onerror = e => {
       if (token === generation) fail('עיבוד המצלמה נעצר. אפשר לנסות מחדש בדפדפן מעודכן.', e.message);
     };
-    worker.postMessage({ type: 'init' });
+    worker.postMessage({ type: 'init', numPoses: pair ? 2 : 1 });
     watchdog = setTimeout(() => {
       if (token === generation) fail('טעינת המודל המקומי נמשכה זמן רב מדי. נסו שוב לאחר שהקבצים סיימו לרדת.');
     }, 60000);
@@ -178,22 +232,23 @@ $('start').onclick = () => {
   attemptStarted = performance.now(); active = true;
   // The 1.2-second standing reference is already established by the gate.
   counter.begin(attemptStarted, true);
+  adult?.begin(attemptStarted, true); recorder.markCountStart(attemptStarted); paintRecorder();
   log = []; totalFrames = 0; totalInference = 0; totalElapsed = 0; lastFrame = null;
   $('start').hidden = true; $('finish').hidden = false;
   $('session-title').textContent = `סופרים · ${titles[exercise]}`; speak(spoken[exercise]);
 };
 function results() {
-  counter?.finish(performance.now()); release(); $('session').hidden = true; $('result').hidden = false;
-  $('result-count').textContent = `${counter.count} חזרות נספרו`;
-  $('result-rejected').textContent = `${counter.rejected} תנועות לא נספרו:`;
+  counter?.finish(performance.now()); adult?.finish(performance.now()); release(); $('session').hidden = true; $('result').hidden = false;
+  $('result-count').textContent = pair ? `הילד: ${counter.count} · אבא: ${adult.count} חזרות` : `${counter.count} חזרות נספרו`;
+  $('result-rejected').textContent = `${counter.rejected + (adult?.rejected || 0)} תנועות לא נספרו:`;
   $('reasons').replaceChildren();
-  for (const [reason, number] of Object.entries(counter.reasons)) {
-    const li = document.createElement('li'); li.textContent = `${REASONS[reason]} — ${number}`; $('reasons').append(li);
+  for (const [i, c] of [counter, ...(pair ? [adult] : [])].entries()) for (const [reason, number] of Object.entries(c.reasons)) {
+    const li = document.createElement('li'); li.textContent = `${pair ? i ? 'אבא: ' : 'הילד: ' : ''}${REASONS[reason]} — ${number}`; $('reasons').append(li);
   }
-  if (!counter.rejected) { const li = document.createElement('li'); li.textContent = 'לא זוהו תנועות שנפסלו'; $('reasons').append(li); }
+  if (!counter.rejected && !adult?.rejected) { const li = document.createElement('li'); li.textContent = 'לא זוהו תנועות שנפסלו'; $('reasons').append(li); }
   $('diagnostics').replaceChildren();
-  for (const line of diagnosticLines(counter.snapshot())) {
-    const li = document.createElement('li'); li.textContent = line; $('diagnostics').append(li);
+  for (const [i, c] of [counter, ...(pair ? [adult] : [])].entries()) for (const line of diagnosticLines(c.snapshot())) {
+    const li = document.createElement('li'); li.textContent = (pair ? i ? 'אבא: ' : 'הילד: ' : '') + line; $('diagnostics').append(li);
   }
   const p95 = log.length ? [...log].sort((a,b) => a.processingMs - b.processingMs)[Math.floor((log.length - 1) * .95)].processingMs : 0;
   const meanFps = totalElapsed ? 1000 * Math.max(0, totalFrames - 1) / totalElapsed : 0;
@@ -201,14 +256,38 @@ function results() {
 }
 $('finish').onclick = results;
 $('stop').onclick = () => { if (active) results(); else { release(); $('setup').hidden = false; $('session').hidden = true; } };
-$('again').onclick = () => { $('result').hidden = true; $('setup').hidden = false; };
+$('again').onclick = () => { $('result').hidden = true; $('setup').hidden = false; $('recording-panel').hidden = true; $('record').checked = false; };
 $('export').onclick = () => {
-  const blob = new Blob([JSON.stringify({ version: 2, exercise: EXERCISES.indexOf(exercise), totalFrames, retainedFrames: log.length,
+  const blob = new Blob([JSON.stringify({ version: pair ? 3 : 2, exercise: EXERCISES.indexOf(exercise), totalFrames, retainedFrames: log.length,
     counted: counter.count, rejected: counter.rejected, reasons: counter.reasons,
-    thresholds: counter.t, framing: FRAMING, diagnostics: counter.snapshot(), frames: log }, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob); const a = document.createElement('a');
-  a.href = url; a.download = 'cam-lab-performance.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    thresholds: counter.t, framing: FRAMING, diagnostics: counter.snapshot(), frames: log,
+    ...(pair ? { adult: { counted: adult.count, rejected: adult.rejected, reasons: adult.reasons, thresholds: adult.t, diagnostics: adult.snapshot() } } : {}) }, null, 2)], { type: 'application/json' });
+  download(blob, 'cam-lab-performance.json');
 };
+function download(blob, name) {
+  const url = URL.createObjectURL(blob), a = document.createElement('a');
+  a.href = url; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+function startRecording() {
+  // A pair recording must include the upright identity reference, even when
+  // recording is enabled manually after the first placement check.
+  if (pair) tracker = new PeopleTracker();
+  placement = new PlacementGuide();
+  gate = new RestGate(exercise, counter.t); adultGate = pair ? new RestGate(exercise, adult.t) : null;
+  placementGate = new RestGate('squats', counter.t); placementDone = !FLOOR.includes(exercise);
+  $('start').disabled = true;
+  recorder.start({ exercise, mode: pair ? 'pair' : 'solo', thresholds: counter.t, adultThresholds: adult?.t,
+    aspect: video.videoWidth / video.videoHeight || 4 / 3 }, performance.now()); paintRecorder();
+}
+function paintRecorder() {
+  $('record-toggle').textContent = recorder.active ? 'עצירת הקלטת שלד' : 'התחלת הקלטת שלד';
+  $('record-toggle').disabled = !recorder.active && (active || !stream || !!recorder.recording);
+  $('record-download').disabled = !recorder.recording?.frames.length;
+  $('record-status').textContent = recorder.active ? `מקליט נקודות שלד בלבד · ${recorder.recording.frames.length} פריימים` :
+    recorder.recording ? recorder.recording.stoppedByLimit ? 'ההקלטה נעצרה במגבלת 6000 פריימים. אפשר להוריד אותה.' : 'הקלטת השלד נעצרה. אפשר להוריד אותה.' : 'מצב פרטי: הקלטת שלד כבויה';
+}
+$('record-toggle').onclick = () => { if (recorder.active) recorder.stop(); else if (!active && stream && !recorder.recording) startRecording(); paintRecorder(); };
+$('record-download').onclick = () => { const json = recorder.json(); if (json) download(new Blob([json], { type: 'application/json' }), 'cam-lab-skeleton.json'); };
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && stream) {
     if (active) results(); else { release(); $('setup').hidden = false; $('session').hidden = true; }
