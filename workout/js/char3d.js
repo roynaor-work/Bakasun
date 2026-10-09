@@ -1,7 +1,7 @@
 // הדמות התלת-ממדית המשותפת: טעינת המודל (Kenney, CC0), הנעת השלד מפוזות הקטלוג (PoseRig), ערכות בגדים (צביעת הטקסטורה),
 // וסצנות מוכנות (חדר, אצטדיון, מסלול). משמש את מסך התרגיל (3d/), את חגיגת השיא (games/celebrate3d.js) ובעתיד את משחקי הספורט.
-import * as THREE from '../3d/lib/three.module.min.js?v=20261009-weekly-1';
-import { FBXLoader } from '../3d/lib/loaders/FBXLoader.js?v=20261009-weekly-1';
+import * as THREE from '../3d/lib/three.module.min.js?v=20261009-companion-1';
+import { FBXLoader } from '../3d/lib/loaders/FBXLoader.js?v=20261009-companion-1';
 
 export { THREE };
 export const SCALE = 68 / 111; // רגל תלת-ממד (111 יחידות) = רגל דו-ממד (68), כך שהדמות בקנה מידה של פוזות הקטלוג
@@ -45,6 +45,13 @@ export async function kitTexture(kit = KITS3D.maccabi) {
   g.fillStyle = kit.shirt; g.fillRect(150, 488, 340, 536);
   g.fillStyle = kit.shirt2; g.fillRect(150, 488, 340, 26); // צווארון כהה
   if (kit.stripe) { g.fillStyle = kit.stripe; for (let x = 170; x < 480; x += 64) g.fillRect(x, 514, 22, 510); }
+  // תג האימונים על קדמת החולצה של החבר. שאר הדמויות משתמשות בערכות הקיימות.
+  if (kit.patch) {
+    g.fillStyle = '#FACC15'; g.beginPath(); g.arc(320, 920, 66, 0, Math.PI * 2); g.fill();
+    g.strokeStyle = '#FFFFFF'; g.lineWidth = 7; g.stroke();
+    g.fillStyle = '#241B3A'; g.font = `900 ${kit.patch.length > 2 ? 42 : 70}px Arial, sans-serif`;
+    g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(kit.patch, 320, 920, 108);
+  }
   // המספר על הגב (האזור הזה ממופה לגב, במראה, לכן מציירים הפוך כדי שייקרא נכון)
   if (kit.number) { g.save(); g.translate(320, 720); g.scale(-1, 1); g.fillStyle = kit.numberColor; g.font = '900 150px Heebo, Arial Black, Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(kit.number, 0, 0); g.restore(); }
   if (kit.face !== false) toonFace(g); /* פרצוף מצויר: עיניים גדולות, גבות, חיוך, סומק (רועי 01/10: "לשפר את הדמות") */
@@ -57,7 +64,7 @@ export async function kitTexture(kit = KITS3D.maccabi) {
 // ---- המודל ----
 let fbxText = null;
 async function fbxBuffer() {
-  if (!fbxText) fbxText = import('../3d/model/character.js?v=20261009-weekly-1').then(m => { const bin = atob(m.FBX_B64), buf = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i); return buf.buffer; });
+  if (!fbxText) fbxText = import('../3d/model/character.js?v=20261009-companion-1').then(m => { const bin = atob(m.FBX_B64), buf = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i); return buf.buffer; });
   return fbxText;
 }
 // דמות חדשה (כל קריאה = עותק עצמאי עם שלד משלו). מחזיר { model, rig, mesh, setKit }

@@ -1,6 +1,6 @@
 # משפטים להקלטה
 
-201 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
+202 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
 
 מקליטים בטלפון ב־https://roynaor-work.github.io/Bakasun/workout/voice-rec/ (אחרי מיזוג). Chrome באנדרואיד או Safari באייפון, דרך HTTPS. אין קישור מהאפליקציה.
 
@@ -197,6 +197,7 @@
 | `encourage` | כָּל הַכָּבוֹד! | workout/js/app.js: wireReps / wireTimer | `encourage.wav` |
 | `minute-end` | הַדַּקָּה הִסְתַּיְּמָה. כָּל תְּנוּעָה נֶחְשֶׁבֶת. | workout/js/app.js: minuteScreen | `minute-end.wav` |
 | `minute-start` | מַתְחִילִים. בַּקֶּצֶב שֶׁלְּךָ. | workout/js/app.js: minuteScreen | `minute-start.wav` |
+| `companion-upgraded` | הַדְּמוּת שֶׁלְּךָ הִשְׁתַּפְּרָה! גְּדֵלִים יַחַד, בַּקֶּצֶב שֶׁלְּךָ. | workout/js/app.js: donePhase; workout/js/companion.js: companionCard | `companion-upgraded.wav` |
 | `thanks` | תּוֹדָה, רָשַׁמְתִּי. | workout/js/app.js: askFeedback (משוב ללא תוכנית) | `thanks.wav` |
 | `program-free` | אימון חופשי | workout/js/app.js: free / adjustDifficulty | `program-free.wav` |
 | `boost-before` | הָיָה קַל? מֵעַכְשָׁו | workout/js/say-ui.js: SAY_UI.adjust.boost; workout/js/app.js: adjustDifficulty | `boost-before.wav` |

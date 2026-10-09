@@ -1,7 +1,7 @@
 // במת התרגיל בסגנון "סרט מצויר" (סגנון 3 שרועי בחר, 01/10/2026): הדמות התלת-ממדית שלנו עם קו מתאר עבה,
 // שתי דרגות צבע, רקע שטוח, רצפה שטוחה וצל עגול מתחת לרגליים. אותו ממשק כמו Figure: play(ex, speed), still(ex), stop(), onRep.
-import { THREE, loadCharacter, KITS3D, viewFront, propMesh, outlineMaterial } from './char3d.js?v=20261009-weekly-1';
-import { poseAt, cycleMs } from './figure.js?v=20261009-weekly-1';
+import { THREE, loadCharacter, KITS3D, viewFront, propMesh, outlineMaterial } from './char3d.js?v=20261009-companion-1';
+import { poseAt, cycleMs } from './figure.js?v=20261009-companion-1';
 
 const BG = '#F2A9E3', FLOOR = '#E58FD6', LINE = '#241B3A';
 let gradTex = null;
@@ -16,7 +16,7 @@ export function flatLights(scene) { scene.add(new THREE.HemisphereLight('#ffffff
 const KEY = ['Head_end', 'LeftHand', 'RightHand', 'LeftToes', 'RightToes', 'Hips', 'LeftLeg', 'RightLeg', 'LeftHandIndex3_end', 'RightHandIndex3_end'];
 export const STAGE_SPEED = 0.7; /* רועי 01/10: "מהירות הגדרנו יותר לאט שיהיה ברור"; ההסבר (×.55) איטי עוד יותר */
 export class Stage3D {
-  constructor(el, ex, { onReady = null, onFail = null, bg = BG, floor = FLOOR, flat = false } = {}) {
+  constructor(el, ex, { onReady = null, onFail = null, bg = BG, floor = FLOOR, flat = false, kit = KITS3D.maccabi } = {}) {
     this.flat = flat; /* ניסוי דו-ממד (רועי 01/10): מצלמה אורתוגרפית ישרה מהצד, צבע שטוח לגמרי, קו מתאר עבה יותר: נראה כמו אנימציה דו-ממדית */
     this.el = el; this.onRep = null; this.speed = 1; this.frames = null; this.front = false; this.raf = 0; this.start = 0; this.cyc = 0; this.ch = null; this.prop = null; this.dead = false;
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' }); this.renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -28,7 +28,7 @@ export class Stage3D {
     el.appendChild(this.renderer.domElement); this.renderer.domElement.className = 'stage3d-canvas';
     this.ro = new ResizeObserver(() => this.resize()); this.ro.observe(el); this.resize();
     this._v = new THREE.Vector3(); this._w = new THREE.Vector3();
-    loadCharacter(KITS3D.maccabi).then(ch => { if (this.dead) return; this.ch = cartoonize(ch); if (this.flat) flatten(ch); this.scene.add(ch.model); if (this.pending) { const [e, s, stillOnly] = this.pending; this.pending = null; stillOnly ? this.still(e) : this.play(e, s); } onReady && onReady(this); }).catch(e => { console.warn('stage3d', e); onFail && onFail(e); });
+    loadCharacter(kit).then(ch => { if (this.dead) return; this.ch = cartoonize(ch); if (this.flat) flatten(ch); this.scene.add(ch.model); if (this.pending) { const [e, s, stillOnly] = this.pending; this.pending = null; stillOnly ? this.still(e) : this.play(e, s); } onReady && onReady(this); }).catch(e => { console.warn('stage3d', e); onFail && onFail(e); });
     if (ex) this.play(ex, 1);
   }
   resize() { const w = Math.max(1, this.el.clientWidth), h = Math.max(1, this.el.clientHeight || w * 1.25); this.renderer.setPixelRatio(Math.min(3, devicePixelRatio || 1)); this.renderer.setSize(w, h, false); this.aspect = w / h; if (!this.flat) this.camera.aspect = w / h; this.camera.updateProjectionMatrix(); if (this.frames) this.frameCamera(); this.render(); }

@@ -1,5 +1,5 @@
 // עוד משחקים: חץ למטרה, ביליארד, כדורעף, דוחף קופסאות, ציור לפי מספרים, ניחוש מילה, צייר מהזיכרון, איפה הכדור
-import { POSE, S, KITS } from './sprites.js?v=20261009-weekly-1';
+import { POSE, S, KITS } from './sprites.js?v=20261009-companion-1';
 export const arcade = [], sport = [], puzzle = [], quick = [];
 
 // ---- חץ למטרה ----

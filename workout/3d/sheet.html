@@ -6,8 +6,8 @@
 <canvas id="sheet"></canvas>
 <!-- גיליון ביקורת: לכל תרגיל שתי פוזות מפתח (ההתחלה והשיא של התנועה) זו לצד זו, כדי שרועי יעבור על הפוזות ויעיר. ?page=0..3&per=12 -->
 <script type="module">
-import { THREE, loadCharacter, KITS3D, lights, room, propMesh, viewFront } from '../js/char3d.js?v=20261009-weekly-1';
-import { EXERCISES } from '../js/exercises.js?v=20261009-weekly-1';
+import { THREE, loadCharacter, KITS3D, lights, room, propMesh, viewFront } from '../js/char3d.js?v=20261009-companion-1';
+import { EXERCISES } from '../js/exercises.js?v=20261009-companion-1';
 const u = new URL(location.href), PAGE = +(u.searchParams.get('page') || 0), PER = +(u.searchParams.get('per') || 12);
 const list = EXERCISES.slice(PAGE * PER, PAGE * PER + PER);
 const CW = 340, CH = 260, COLS = 2, ROW_H = CH + 44;

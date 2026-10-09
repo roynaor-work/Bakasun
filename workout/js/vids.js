@@ -1,8 +1,8 @@
 // סרטונים (או תמונות) לתרגילים: במקום ציור, סרטון קצר אמיתי בלופ. שלושה מקורות, לפי סדר:
 // 1. מקומי: מה שצולם/נבחר בטלפון הזה (IndexedDB kidfit-vids). 2. ענן משפחתי: Supabase Storage, דלי kidfit-vids, נתיב <קוד משפחה>/<תרגיל>
 // (רועי מצלם בטלפון שלו, מגיע לטלפון של הילד; נשמר גם במטמון מקומי). 3. קובץ vid/<id>.mp4 בריפו (VIDEO_IDS).
-import { CLOUD } from '../../js/data/cloudcfg.js?v=20261009-weekly-1';
-import { normCode } from './cloud.js?v=20261009-weekly-1';
+import { CLOUD } from '../../js/data/cloudcfg.js?v=20261009-companion-1';
+import { normCode } from './cloud.js?v=20261009-companion-1';
 
 export const VIDEO_IDS = new Set([]);
 const DB = 'kidfit-vids', STORE = 'v', BUCKET = 'kidfit-vids', C_KEY = 'kidfit.cloudVids';

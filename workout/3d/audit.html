@@ -1,9 +1,9 @@
 <!doctype html><html><meta charset="utf-8"><body style="background:#fff;margin:0">
 <!-- כלי בדיקה (01/10/2026): עובר על כל התרגילים × 16 דגימות + פריימי מפתח ומודד גובה עולמי של כפות רגליים/ידיים/ראש. מריצים עם scratchpad/audit.mjs (Playwright) נגד python3 -m http.server 8765; התוצאה ב-window.__audit -->
 <script type="module">
-import { THREE, loadCharacter, KITS3D, viewFront } from '../js/char3d.js?v=20261009-weekly-1';
-import { EXERCISES } from '../js/exercises.js?v=20261009-weekly-1';
-import { poseAt, cycleMs } from '../js/figure.js?v=20261009-weekly-1';
+import { THREE, loadCharacter, KITS3D, viewFront } from '../js/char3d.js?v=20261009-companion-1';
+import { EXERCISES } from '../js/exercises.js?v=20261009-companion-1';
+import { poseAt, cycleMs } from '../js/figure.js?v=20261009-companion-1';
 const ch = await loadCharacter(KITS3D.maccabi);
 const v = new THREE.Vector3(); const P = n => { const b = ch.rig.b[n]; if (!b) return null; b.getWorldPosition(v); return { x: +v.x.toFixed(1), y: +v.y.toFixed(1), z: +v.z.toFixed(1) }; }; const Y = n => { const p = P(n); return p ? p.y : null; };
 ch.model.position.set(0, 0, 0); ch.model.rotation.set(0, 0, 0); ch.model.updateMatrixWorld(true);
