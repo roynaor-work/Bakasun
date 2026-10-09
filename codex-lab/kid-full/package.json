@@ -1,0 +1,5 @@
+{
+  "name": "kid-full-learning-lab", "private": true, "version": "1.0.0", "type": "module",
+  "scripts": {"serve": "node serve.mjs", "capture": "node capture.mjs", "verify": "node verify.mjs", "validate:glb": "node validate-glb.mjs"},
+  "devDependencies": {"gltf-validator": "2.0.0-dev.3.10", "playwright-core": "1.57.0", "pngjs": "7.0.0", "three": "0.160.0"}
+}
