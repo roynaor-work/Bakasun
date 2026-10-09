@@ -20,12 +20,15 @@ const flags = ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swi
 const errors = [], warnings = [], externalRequests = [];
 const args = process.argv.slice(2);
 const shotsOnly = args.includes('--shots-only');
-const benchmarkOnly = args.includes('--benchmark-only');
+const baselineBenchmark = args.includes('--baseline-benchmark');
+const deliveredBenchmark = args.includes('--delivered-benchmark');
+const benchmarkOnly = args.includes('--benchmark-only') || baselineBenchmark || deliveredBenchmark;
 const selectedExperiment = args.find(a => a.startsWith('--experiment='))?.split('=')[1] || '';
 const selectedQualities = (args.find(a => a.startsWith('--qualities='))?.split('=')[1] || 'dense,balanced,mobile').split(',');
 const trialCount = Number(args.find(a => a.startsWith('--trials='))?.split('=')[1] || 3);
 // Defined before measuring. The same limits apply to every quality and trial.
-const stabilityCriteria = { minimumFPS: 30, maximumP95FrameMs: 50, maximumTrialFPSRatio: 1.15 };
+const stabilityCriteria = { minimumFPS: 40, maximumP95FrameMs: 50, maximumTrialFPSRatio: 1.15 };
+const budgetCriteria = { profile: 'mobile and delivered GLB', maximumModelTriangles: 20000, minimumMobileFPS: 40 };
 const roundtripCriteria = { maximumRGBMeanDifference: .05, maximumAbove8PixelPercent: .1, maximumSampledVertexDelta: 1e-5, maximumBoneLocalChannelDelta: 1e-6 };
 await mkdir(shots, { recursive: true });
 await mkdir(work, { recursive: true });
@@ -33,13 +36,19 @@ const service = await startServer();
 const origin = new URL(service.url).origin;
 let browser;
 let report = {};
-if (benchmarkOnly) {
+if (benchmarkOnly || shotsOnly) {
   try { report = JSON.parse(await readFile(resolve(shots, 'metrics.json'), 'utf8')); } catch { /* first run */ }
 }
+const preservedImplementation = report.implementation;
 delete report.failure;
 report.capture = { viewport: pictureViewport, dpr: 1, views, poses };
 report.environment = { chromiumPath: process.env.CHROMIUM_PATH || '/usr/bin/chromium', flags, browserVersion: null, playwrightVersion: JSON.parse(await readFile(new URL(import.meta.resolve('playwright-core/package.json')), 'utf8')).version };
 report.stabilityCriteria = stabilityCriteria;
+report.budgetCriteria = budgetCriteria;
+report.implementation = {};
+for (const file of ['rig.mjs', 'scene.mjs', 'studio-bake.mjs', 'parts/body.mjs', 'parts/head.mjs', 'parts/hand.mjs', 'parts/shoe.mjs']) report.implementation[file] = createHash('sha256').update(await readFile(resolve(root, file))).digest('hex');
+// Refreshing pictures must not relabel an older benchmark as the current model.
+if ((shotsOnly || deliveredBenchmark) && report.phone) assert.deepEqual(preservedImplementation, report.implementation, 'Source changed since the saved phone benchmark; measure it again before refreshing evidence');
 report.stabilityScope = 'Chromium in the cloud at phone viewport; this is not a physical phone GPU measurement.';
 report.buildTimingMethod = 'Initial source geometry/material/texture construction in each fresh browser context; excludes shader compile/GPU upload and asset download. Captures that switch quality record rebuilding; phone trials preserve the first startup build.';
 try { report.pbrBaseline = JSON.parse(await readFile(resolve(work, 'pbr-baseline.json'), 'utf8')).phone; } catch { /* no earlier baseline */ }
@@ -203,6 +212,7 @@ async function captureModels() {
       await saveImage(page, `quality/${quality}-${view}.png`);
     }
   }
+  assert(report.appearance.mobile.front.modelTriangles <= budgetCriteria.maximumModelTriangles, `Mobile triangle budget exceeded: ${report.appearance.mobile.front.modelTriangles}`);
   report.optimizationImageDifference = {};
   for (const view of views) {
     report.optimizationImageDifference[view] = imageDifference(await readFile(resolve(shots, `quality/dense-${view}.png`)), await readFile(resolve(shots, `quality/mobile-${view}.png`)));
@@ -251,6 +261,8 @@ async function captureModels() {
   assert.equal(report.glb.externalBufferURIs.length, 0, 'GLB references external buffers');
   assert(report.glb.imagesEmbedded, 'GLB references external images');
   await page.evaluate(async url => window.lab.loadGLB(url), `${service.url}/kid-full.glb`);
+  report.glb.loadedMetrics = await configure(page, { pose: 'stand', view: 'front' });
+  assert(report.glb.loadedMetrics.modelTriangles <= budgetCriteria.maximumModelTriangles, `Delivered GLB triangle budget exceeded: ${report.glb.loadedMetrics.modelTriangles}`);
   for (const pose of poses) {
     report.glb.views[pose] = {};
     for (const view of views) {
@@ -288,6 +300,7 @@ async function captureModels() {
       await saveImage(page, `transitions/${from}-${to}-${String(t).replace('.', '_')}.png`);
     }
   }
+  await captureBaseline(page);
   await buildComparison(page);
   await buildPoseGrid(page);
   await context.close();
@@ -353,51 +366,118 @@ async function captureExperiments() {
   await writeFile(resolve(shots, 'studio-bake.png'), Buffer.from(shadingData.split(',')[1], 'base64'));
   await context.close();
 }
+async function studioSettings(page) {
+  return page.evaluate(() => {
+    const { scene, renderer, camera } = window.lab, lights = [];
+    scene.traverse(o => {
+      if (!o.isLight) return;
+      lights.push({ type: o.type, position: o.position.toArray(), colour: o.color.getHexString(), intensity: o.intensity, groundColour: o.groundColor?.getHexString() });
+    });
+    return { camera: { type: camera.type, position: camera.position.toArray(), quaternion: camera.quaternion.toArray(), left: camera.left, right: camera.right, top: camera.top, bottom: camera.bottom, near: camera.near, far: camera.far }, lights, background: scene.background.getHexString(), outputColorSpace: renderer.outputColorSpace, toneMapping: renderer.toneMapping, exposure: renderer.toneMappingExposure, width: renderer.domElement.width, height: renderer.domElement.height, renderScale: renderer.getPixelRatio() };
+  });
+}
+async function captureBaseline(page) {
+  // The preserved disk GLB is loaded into this exact scene. It never imports
+  // old source modules or inherits a different camera/light screenshot preset.
+  const baselinePath = resolve(shots, 'before/kid-full.glb');
+  let bytes;
+  try { bytes = await readFile(resolve(work, 'baseline/kid-full.glb')); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; bytes = await readFile(baselinePath); }
+  await mkdir(dirname(baselinePath), { recursive: true });
+  await writeFile(baselinePath, bytes);
+  await configure(page, { quality: 'mobile', pose: 'stand', view: 'front' });
+  const settings = await studioSettings(page);
+  report.beforeAfter = {
+    before: { path: 'shots/before/kid-full.glb', sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length, metrics: {}, crops: {} },
+    after: { source: 'procedural mobile; exported and roundtrip checked', metrics: {}, crops: report.screenshotCrops },
+    settings, settingsIdentical: true, pose: 'stand', views, fullModelPairResizing: 'one common crop and one uniform scale per before/after pair',
+    headCropCSS: [70, 20, 340, 280], headCropMethod: 'fixed raster crop from the full-model camera; identical before and after',
+    lightingNote: 'Both models share these live scene lights. Each model retains its own baked vertex colours and materials.',
+  };
+  await page.evaluate(async () => window.lab.loadGLB('./shots/before/kid-full.glb'));
+  for (const view of views) {
+    report.beforeAfter.before.metrics[view] = await configure(page, { pose: 'stand', view });
+    assert.deepEqual(await studioSettings(page), settings, `Before camera/light settings changed for ${view}`);
+    await saveImage(page, `before/${view}.png`);
+    report.beforeAfter.before.crops[view] = await projectedCrop(page);
+  }
+  await page.evaluate(() => window.lab.useSource());
+  for (const view of views) {
+    report.beforeAfter.after.metrics[view] = await configure(page, { pose: 'stand', view });
+    assert.deepEqual(await studioSettings(page), settings, `After camera/light settings changed for ${view}`);
+    await saveImage(page, `after/${view}.png`);
+  }
+}
 async function buildComparison(page) {
-  const referenceName = (await readdir(resolve(root, '../ref'))).find(name => name.startsWith('מבטים'));
-  assert(referenceName, 'No source reference view sheet found');
+  const files = await readdir(resolve(root, '../ref'));
+  const referenceName = files.find(name => name.startsWith('מבטים'));
+  const expressionName = files.find(name => name.startsWith('גיליון הבעות'));
+  assert(referenceName && expressionName, 'Original view and expression reference sheets are required');
   const referenceBytes = await readFile(resolve(root, '../ref', referenceName));
-  report.reference = { path: `../ref/${referenceName}`, sha256: createHash('sha256').update(referenceBytes).digest('hex'), sourcePixelAccess: true, crops: [[15, 246, 295, 720], [330, 246, 280, 720], [620, 246, 295, 720], [935, 246, 305, 720]], fourthView: 'frontRepeat', threeQuarterTarget: false, cropOnly: false, uniformResizing: true, heightNormalized: true, modelCropMethod: 'precise projected skinned bounds plus 8 CSS pixels', colourEdits: false, perspectiveOrShapeWarp: false };
-  const dataURL = await page.evaluate(async ({ origin, name, crops, modelCrops }) => {
-    const getImage = url => new Promise((resolveImage, reject) => { const image = new Image(); image.onload = () => resolveImage(image); image.onerror = reject; image.src = url; });
-    const target = await getImage(`${origin}/ref/${encodeURIComponent(name)}`);
-    const modelViews = ['front', 'side', 'back', 'front'];
-    const models = await Promise.all(modelViews.map(view => getImage(`${origin}/shots/${view}.png`)));
-    const threeQuarter = await getImage(`${origin}/shots/threeQuarter.png`);
-    const canvas = document.createElement('canvas');
-    canvas.width = 2740; canvas.height = 890;
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#f3f0e9'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.textAlign = 'center'; ctx.direction = 'rtl';
-    ctx.fillStyle = '#27364a'; ctx.font = 'bold 32px sans-serif';
-    ctx.fillText('דמות מלאה — פיקסלי היעד לצד המודל', canvas.width / 2, 52);
-    ctx.font = '19px sans-serif'; ctx.fillText('חיתוך שוליים ושינוי גודל אחיד; היחס נשמר. צילום המודל באותה מצלמה ותאורה בכל מבט.', canvas.width / 2, 86);
-    const names = ['חזית', 'צד', 'גב', 'חזית חוזרת'];
-    for (let i = 0; i < 4; i++) {
-      const x = 20 + i * 560;
-      ctx.fillStyle = '#ffffff'; ctx.fillRect(x, 117, 544, 685);
-      ctx.fillStyle = '#27364a'; ctx.font = 'bold 24px sans-serif'; ctx.fillText(names[i], x + 272, 150);
-      ctx.font = '17px sans-serif'; ctx.fillText('יעד מקורי', x + 136, 185); ctx.fillText('מודל', x + 408, 185);
-      const crop = crops[i], h = 550, scale = h / crop[3], w = crop[2] * scale;
-      ctx.drawImage(target, ...crop, x + 136 - w / 2, 210, w, h);
-      const modelBounds = modelCrops[modelViews[i]];
-      const modelScale = Math.min(550 / modelBounds[3], 262 / modelBounds[2]);
-      const mw = modelBounds[2] * modelScale, mh = modelBounds[3] * modelScale;
-      ctx.drawImage(models[i], ...modelBounds, x + 408 - mw / 2, 210 + 550 - mh, mw, mh);
-      ctx.fillStyle = '#27364a'; ctx.font = '15px sans-serif'; ctx.fillText(i === 3 ? 'העמודה הרביעית במקור היא חזית נוספת' : 'ללא שינוי צורה או צביעה של היעד', x + 272, 784);
+  const expressionBytes = await readFile(resolve(root, '../ref', expressionName));
+  report.reference = { path: `../ref/${referenceName}`, sha256: createHash('sha256').update(referenceBytes).digest('hex'), sourcePixelAccess: true, crops: [[15, 246, 295, 720], [330, 246, 280, 720], [620, 246, 295, 720], [935, 246, 305, 720]], fourthView: 'frontRepeat', threeQuarterTarget: false, cropOnly: false, uniformResizing: true, heightNormalized: true, modelCropMethod: 'common precise projected before/after skinned bounds plus 8 CSS pixels', colourEdits: false, perspectiveOrShapeWarp: false };
+  report.expressionReference = { path: `../ref/${expressionName}`, sha256: createHash('sha256').update(expressionBytes).digest('hex'), sourcePixelAccess: true, neutralHeadCrop: [8, 0, 495, 454], fullSheetShown: true, expressionSystemAdded: false, colourEdits: false, uniformResizing: true };
+  const dataURL = await page.evaluate(async ({ origin, viewName, expressionName, crops, expressionCrop, comparison }) => {
+    const getImage = url => new Promise((accept, reject) => { const image = new Image(); image.onload = () => accept(image); image.onerror = () => reject(Error(`Could not load image ${url}`)); image.src = url; });
+    const [target, expressions] = await Promise.all([getImage(`${origin}/ref/${encodeURIComponent(viewName)}`), getImage(`${origin}/ref/${encodeURIComponent(expressionName)}`)]);
+    const views = ['front', 'side', 'back'], names = ['חזית', 'צד', 'גב'];
+    const before = await Promise.all(views.map(view => getImage(`${origin}/shots/before/${view}.png`)));
+    const after = await Promise.all(views.map(view => getImage(`${origin}/shots/after/${view}.png`)));
+    const canvas = document.createElement('canvas'); canvas.width = 2460; canvas.height = 1830;
+    const ctx = canvas.getContext('2d'); ctx.fillStyle = '#f3f0e9'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.fillStyle = '#27364a'; ctx.font = 'bold 36px sans-serif';
+    ctx.fillText('שיפור הדמות — יעד מקורי, לפני ואחרי', 1230, 50);
+    ctx.font = '23px sans-serif'; ctx.fillText('לפני ואחרי: אותה מצלמה, תאורה, תנוחה ורזולוציה; אותו חיתוך וקנה מידה לכל זוג.', 1230, 91);
+    const fit = (image, crop, x, y, width, height, bottom = false) => {
+      const scale = Math.min(width / crop[2], height / crop[3]), w = crop[2] * scale, h = crop[3] * scale;
+      ctx.drawImage(image, ...crop, x + (width - w) / 2, y + (bottom ? height - h : (height - h) / 2), w, h);
+    };
+    const commonCrop = view => {
+      const a = comparison.before.crops[view], b = comparison.after.crops[view];
+      const x = Math.min(a[0], b[0]), y = Math.min(a[1], b[1]);
+      return [x, y, Math.max(a[0] + a[2], b[0] + b[2]) - x, Math.max(a[1] + a[3], b[1] + b[3]) - y];
+    };
+    const labels = ['יעד מקורי', 'לפני — GLB המקור', 'אחרי — mobile'];
+    for (let i = 0; i < 3; i++) {
+      const x = 20 + i * 810;
+      ctx.fillStyle = '#fff'; ctx.fillRect(x, 120, 800, 605);
+      ctx.fillStyle = '#27364a'; ctx.font = 'bold 29px sans-serif'; ctx.fillText(names[i], x + 400, 159);
+      ctx.font = '21px sans-serif'; for (let c = 0; c < 3; c++) ctx.fillText(labels[c], x + 140 + c * 260, 196);
+      const pairCrop = commonCrop(views[i]);
+      fit(target, crops[i], x + 10, 216, 260, 470, true);
+      fit(before[i], pairCrop, x + 270, 216, 260, 470, true);
+      fit(after[i], pairCrop, x + 530, 216, 260, 470, true);
     }
-    const x = 2260;
-    ctx.fillStyle = '#ffffff'; ctx.fillRect(x, 117, 460, 685);
-    ctx.fillStyle = '#27364a'; ctx.font = 'bold 24px sans-serif'; ctx.fillText('שלושה רבעים', x + 230, 150);
-    ctx.font = '17px sans-serif'; ctx.fillText('אין מבט יעד מקביל בגליון המקורי', x + 230, 185);
-    const threeCrop = modelCrops.threeQuarter;
-    const threeScale = Math.min(550 / threeCrop[3], 430 / threeCrop[2]);
-    ctx.drawImage(threeQuarter, ...threeCrop, x + 230 - threeCrop[2] * threeScale / 2, 210 + 550 - threeCrop[3] * threeScale, threeCrop[2] * threeScale, threeCrop[3] * threeScale);
-    ctx.font = '15px sans-serif'; ctx.fillText('מוצג לבדיקת הנפח והחיבורים', x + 230, 784);
-    ctx.font = '18px sans-serif'; ctx.fillText('היעד: גיליון המבטים המקורי מתוך codex-lab/ref/; הצבעים במודל חופשיים.', canvas.width / 2, 849);
+    ctx.fillStyle = '#27364a'; ctx.font = '21px sans-serif';
+    ctx.fillText('היעד מוצג בשינוי גודל אחיד לגובה; זוגות לפני/אחרי שומרים על אותו קנה מידה, בלי תיקון פרופורציות.', 1230, 756);
+    ctx.fillStyle = '#fff'; ctx.fillRect(20, 790, 1400, 455); ctx.fillRect(1440, 790, 1000, 700);
+    ctx.fillStyle = '#27364a'; ctx.font = 'bold 29px sans-serif'; ctx.fillText('תקריב פנים ושיער — חיוך קטן', 720, 830);
+    ctx.font = '23px sans-serif'; for (let c = 0; c < 3; c++) ctx.fillText(labels[c], 253 + c * 466, 869);
+    fit(expressions, expressionCrop, 35, 892, 436, 324);
+    fit(before[0], comparison.headCropCSS, 501, 892, 436, 324);
+    fit(after[0], comparison.headCropCSS, 967, 892, 436, 324);
+    ctx.fillStyle = '#27364a'; ctx.font = 'bold 28px sans-serif'; ctx.fillText('גיליון ההבעות המקורי', 1940, 830);
+    fit(expressions, [0, 0, expressions.width, expressions.height], 1460, 849, 960, 622);
+    ctx.font = '20px sans-serif'; ctx.fillText('ששת מבטי ההבעה הם רפרנס בלבד; המודל שומר על החיוך הקטן.', 1940, 1520);
+    const sideHeadCrops = [[330, 246, 280, 285], [620, 246, 295, 285]];
+    for (let i = 0; i < 2; i++) {
+      const x = 20 + i * 710, view = views[i + 1];
+      ctx.fillStyle = '#fff'; ctx.fillRect(x, 1270, 700, 445);
+      ctx.fillStyle = '#27364a'; ctx.font = 'bold 27px sans-serif'; ctx.fillText(`תקריב שיער — ${names[i + 1]}`, x + 350, 1310);
+      ctx.font = '20px sans-serif'; for (let c = 0; c < 3; c++) ctx.fillText(labels[c], x + 116 + c * 233, 1347);
+      fit(target, sideHeadCrops[i], x + 5, 1370, 223, 310);
+      fit(before[i + 1], comparison.headCropCSS, x + 238, 1370, 223, 310);
+      fit(after[i + 1], comparison.headCropCSS, x + 471, 1370, 223, 310);
+    }
+    ctx.fillStyle = '#27364a'; ctx.font = '22px sans-serif';
+    ctx.fillText('כל תמונות היעד נטענו ישירות מ־codex-lab/ref/; חיתוך ושינוי גודל אחיד בלבד, ללא עריכת צבע או עיוות.', 1230, 1760);
+    ctx.fillText('תקריבי המודל נחתכו מאותו צילום גוף מלא; צבעי הקודקודים האפויים והחומרים נשמרים בכל גרסה.', 1230, 1794);
     return canvas.toDataURL('image/png');
-  }, { origin, name: referenceName, crops: report.reference.crops, modelCrops: report.screenshotCrops });
-  await writeFile(resolve(shots, 'comparison.png'), Buffer.from(dataURL.split(',')[1], 'base64'));
+  }, { origin, viewName: referenceName, expressionName, crops: report.reference.crops, expressionCrop: report.expressionReference.neutralHeadCrop, comparison: report.beforeAfter });
+  const comparisonBytes = Buffer.from(dataURL.split(',')[1], 'base64');
+  await writeFile(resolve(shots, 'comparison.png'), comparisonBytes);
+  await writeFile(resolve(shots, 'before-after-target.png'), comparisonBytes);
+  report.beforeAfter.comparisonPath = 'shots/comparison.png';
 }
 async function buildPoseGrid(page) {
   const data = await page.evaluate(async origin => {
@@ -416,15 +496,35 @@ async function buildPoseGrid(page) {
   }, origin);
   await writeFile(resolve(shots, 'poses.png'), Buffer.from(data.split(',')[1], 'base64'));
 }
-async function benchmark() {
-  report.phone = { experiment: selectedExperiment || 'final', viewport: phoneViewport, dpr: 1, requestedWarmupMs: 1000, requestedMeasureMs: 5000, freshContextsPerQuality: trialCount, view: 'threeQuarter', animation: 'stand → run → kick → stand; 1.2 s per leg; cosine eased', glFinishEachFrame: true, quality: {} };
-  for (const quality of selectedQualities) {
+async function benchmark({ baseline = false, delivered = false } = {}) {
+  const fromGLB = baseline || delivered;
+  let baselineRelative, baselineBytes;
+  if (baseline) {
+    try { baselineRelative = 'shots/before/kid-full.glb'; baselineBytes = await readFile(resolve(root, baselineRelative)); }
+    catch (error) { if (error.code !== 'ENOENT') throw error; baselineRelative = 'work/baseline/kid-full.glb'; baselineBytes = await readFile(resolve(root, baselineRelative)); }
+  } else if (delivered) {
+    baselineRelative = 'kid-full.glb';
+    baselineBytes = await readFile(resolve(root, baselineRelative));
+  }
+  const key = baseline ? 'phoneBaseline' : delivered ? 'phoneDelivered' : 'phone';
+  const phone = report[key] = { experiment: selectedExperiment || 'final', viewport: phoneViewport, dpr: 1, requestedWarmupMs: 1000, requestedMeasureMs: 5000, freshContextsPerQuality: trialCount, view: 'threeQuarter', animation: 'stand → run → kick → stand; 1.2 s per leg; cosine eased', glFinishEachFrame: true, quality: {} };
+  if (fromGLB) Object.assign(phone, { experiment: baseline ? 'preserved-original-GLB' : 'delivered-GLB', modelSource: `${baseline ? 'preserved original' : 'delivered'} GLB loaded through the same lab scene`, path: baselineRelative, sha256: createHash('sha256').update(baselineBytes).digest('hex'), timingMethod: 'loadAndFirstDrawMs measures local GLB loading/parsing and first completed draw; embedded source procedural buildMs is deliberately omitted.' });
+  for (const quality of fromGLB ? ['mobile'] : selectedQualities) {
     const trials = [];
     for (let trial = 0; trial < trialCount; trial++) {
       const context = await browser.newContext({ viewport: phoneViewport, deviceScaleFactor: 1 });
       const page = await open(context, `benchmark-${quality}-${trial}`, quality);
       await configure(page, { view: 'threeQuarter', pose: 'stand' });
+      let loadAndFirstDrawMs;
+      if (fromGLB) {
+        loadAndFirstDrawMs = await page.evaluate(async url => {
+          const started = performance.now(); await window.lab.loadGLB(url);
+          window.lab.setView('threeQuarter'); window.lab.setPose('stand', true); window.lab.renderer.getContext().finish();
+          return performance.now() - started;
+        }, `${service.url}/${baselineRelative}`);
+      }
       const modelMetrics = await page.evaluate(() => window.lab.metrics());
+      if (fromGLB) delete modelMetrics.buildMs;
       const result = await page.evaluate(async () => {
         const lab = window.lab, gl = lab.renderer.getContext();
         const gpuExtension = gl.getExtension('WEBGL_debug_renderer_info');
@@ -458,12 +558,12 @@ async function benchmark() {
         });
         return { intervals, renderAndFinishMs: drawDurations, fps: intervals.length * 1000 / (last - first), intervalWindowMs: last - first, measureWallMs: performance.now() - elapsedStart, warmupWallMs: elapsedStart - warmupStart, gpu, glVersion: gl.getParameter(gl.VERSION), dpr: devicePixelRatio, rendererSize: { width: gl.drawingBufferWidth, height: gl.drawingBufferHeight }, rendererCalls: lab.renderer.info.render.calls, rendererTriangles: lab.renderer.info.render.triangles };
       });
-      trials.push({ trial: trial + 1, ...modelMetrics, ...result, frameMs: stats(result.intervals), renderAndFinishMsStats: stats(result.renderAndFinishMs), meetsFrameLimits: result.fps >= stabilityCriteria.minimumFPS && stats(result.intervals).p95 <= stabilityCriteria.maximumP95FrameMs });
+      trials.push({ trial: trial + 1, ...modelMetrics, ...(fromGLB ? { loadAndFirstDrawMs } : {}), ...result, frameMs: stats(result.intervals), renderAndFinishMsStats: stats(result.renderAndFinishMs), meetsFrameLimits: result.fps >= stabilityCriteria.minimumFPS && stats(result.intervals).p95 <= stabilityCriteria.maximumP95FrameMs });
       await context.close();
-      console.log(`${quality} ${trial + 1}/${trialCount}: ${result.fps.toFixed(2)} FPS, p95 ${stats(result.intervals).p95.toFixed(1)} ms`);
+      console.log(`${baseline ? 'baseline GLB ' : delivered ? 'delivered GLB ' : ''}${quality} ${trial + 1}/${trialCount}: ${result.fps.toFixed(2)} FPS, p95 ${stats(result.intervals).p95.toFixed(1)} ms`);
     }
     const fps = stats(trials.map(t => t.fps));
-    report.phone.quality[quality] = { trials, fps, buildMs: stats(trials.map(t => t.buildMs ?? t.totalBuildMs ?? t.buildTimeMs ?? 0)), modelTriangles: trials[0].modelTriangles ?? trials[0].triangles, renderScale: trials[0].viewport?.renderScale ?? trials[0].rendererSize.width / phoneViewport.width, rendererSize: trials[0].rendererSize, stable: trials.every(t => t.meetsFrameLimits) && fps.max / fps.min <= stabilityCriteria.maximumTrialFPSRatio, trialFPSRatio: fps.max / fps.min };
+    phone.quality[quality] = { trials, fps, ...(fromGLB ? { loadAndFirstDrawMs: stats(trials.map(t => t.loadAndFirstDrawMs)) } : { buildMs: stats(trials.map(t => t.buildMs ?? t.totalBuildMs ?? t.buildTimeMs ?? 0)) }), modelTriangles: trials[0].modelTriangles ?? trials[0].triangles, renderScale: trials[0].viewport?.renderScale ?? trials[0].rendererSize.width / phoneViewport.width, rendererSize: trials[0].rendererSize, stable: trials.every(t => t.meetsFrameLimits) && fps.max / fps.min <= stabilityCriteria.maximumTrialFPSRatio, trialFPSRatio: fps.max / fps.min };
     await writeReport();
   }
 }
@@ -474,13 +574,19 @@ async function writeReport() {
   await writeFile(resolve(shots, 'metrics.json'), `${JSON.stringify(report, null, 2)}\n`);
   const qualities = report.phone?.quality || {};
   const rows = Object.entries(qualities).map(([name, q]) => `| ${name} | ${q.modelTriangles ?? '?'} | ${q.buildMs.median.toFixed(2)} | ${q.rendererSize?.width ?? '?'}×${q.rendererSize?.height ?? '?'} (${q.renderScale ?? '?'}) | ${q.fps.median.toFixed(2)} | ${Math.max(...q.trials.map(t => t.frameMs.p95)).toFixed(1)} | ${q.stable ? 'עבר' : 'לא עבר'} |`).join('\n');
-  await writeFile(resolve(work, 'capture-report.md'), `# צילום ומדידה\n\nתנאי יציבות שנקבעו מראש: לפחות 30 FPS בכל ריצה, p95 לכל היותר 50ms, יחס מקסימום/מינימום בין הריצות לכל היותר 1.15.\n\n| איכות | משולשים במודל | בנייה חציונית ms | buffer וקנה מידה | FPS חציוני | p95 מקסימלי ms | יציבות |\n|---|---:|---:|---|---:|---:|---|\n${rows}\n\n390×844 CSS pixels, DPR1 של context. גודל ה־buffer וקנה המידה בפועל מפורטים בטבלה; דגימת הפריימים כוללת הגדלה למסך. חימום 1s ו־5s מדידה בכל context טרי; requestAnimationFrame ו־gl.finish לאחר כל ציור; מעבר תנוחות רציף. ${report.environment.browserVersion || ''}. הרינדור בענן ולא בטלפון פיזי.\n\nGLB: ${report.glb?.bytes ?? '?'} bytes; הפרש RGB ממוצע מקסימלי מתוך 255: ${report.glb?.maximumRGBMeanDifference ?? '?'}. ההשוואה ב־24 צילומים: שלוש תנוחות וארבע זוויות, ועוד 12 דגימות של האנימציות המיוצאות במיקסר; snapshots קודקודים נשמרים בדוח לכל תנוחה.\n\nגישה לפיקסלי תמונות היעד: ${report.reference?.sourcePixelAccess ? 'כן — קובץ המקור נקרא ישירות' : 'טרם נבדקה'}. המבט הרביעי הוא חזית חוזרת. שלושה רבעים מוצג ללא יעד מקביל.\n`);
+  const baseline = report.phoneBaseline?.quality?.mobile;
+  const baselineSummary = baseline ? `\n\nבסיס המקור נמדד מחדש באותה סביבת דפדפן וב־${baseline.trials.length} contexts טריים: ${baseline.modelTriangles} משולשים; FPS חציוני ${baseline.fps.median.toFixed(2)}, טווח ${baseline.fps.min.toFixed(2)}–${baseline.fps.max.toFixed(2)}, p95 מרבי ${Math.max(...baseline.trials.map(t => t.frameMs.p95)).toFixed(1)}ms. טעינת GLB וציור ראשון חציוניים: ${baseline.loadAndFirstDrawMs.median.toFixed(2)}ms. אין כאן זמן בנייה פרוצדורלי של גרסת המקור. ` : '';
+  await writeFile(resolve(work, 'capture-report.md'), `# צילום ומדידה\n\nתקציב mobile וה־GLB שנמסר: עד 20,000 משולשים. תנאי יציבות שנקבעו מראש: לפחות 40 FPS בכל ריצה, p95 לכל היותר 50ms, יחס מקסימום/מינימום בין הריצות לכל היותר 1.15.\n\n| איכות | משולשים במודל | בנייה חציונית ms | buffer וקנה מידה | FPS חציוני | p95 מקסימלי ms | יציבות |\n|---|---:|---:|---|---:|---:|---|\n${rows}${baselineSummary}\n\n390×844 CSS pixels, DPR1 של context. גודל ה־buffer וקנה המידה בפועל מפורטים בטבלה; דגימת הפריימים כוללת הגדלה למסך. חימום 1s ו־5s מדידה בכל context טרי; requestAnimationFrame ו־gl.finish לאחר כל ציור; מעבר תנוחות רציף. ${report.environment.browserVersion || ''}. הרינדור בענן ולא בטלפון פיזי.\n\nGLB: ${report.glb?.bytes ?? '?'} bytes; הפרש RGB ממוצע מקסימלי מתוך 255: ${report.glb?.maximumRGBMeanDifference ?? '?'}. ההשוואה ב־24 צילומים: שלוש תנוחות וארבע זוויות, ועוד 12 דגימות של האנימציות המיוצאות במיקסר; snapshots קודקודים נשמרים בדוח לכל תנוחה.\n\nגישה לפיקסלי תמונות היעד: ${report.reference?.sourcePixelAccess ? 'כן — קובץ המקור נקרא ישירות' : 'טרם נבדקה'}. גיליון ההבעות נגיש: ${report.expressionReference?.sourcePixelAccess ? 'כן' : 'טרם נבדק'}. צילום ההשוואה החדש כולל יעד/לפני/אחרי וחיתוכי פנים ושיער, באותה מצלמה ותאורה. המבט הרביעי ביעד הוא חזית חוזרת; אין יעד שלושה רבעים.\n`);
 }
 try {
   browser = await chromium.launch({ executablePath: report.environment.chromiumPath, headless: true, args: flags });
   report.environment.browserVersion = browser.version();
   if (!benchmarkOnly) await captureModels();
-  if (!shotsOnly) await benchmark();
+  if (baselineBenchmark) await benchmark({ baseline: true });
+  else if (deliveredBenchmark) await benchmark({ delivered: true });
+  else if (!shotsOnly) { await benchmark(); if (!benchmarkOnly) { await benchmark({ baseline: true }); await benchmark({ delivered: true }); } }
+  if (!shotsOnly && !baselineBenchmark && !deliveredBenchmark && selectedQualities.includes('mobile')) assert(report.phone.quality.mobile.stable, 'Mobile did not meet >=40 FPS, p95<=50ms and maximum trial ratio 1.15');
+  if (deliveredBenchmark || (!benchmarkOnly && !shotsOnly)) assert(report.phoneDelivered.quality.mobile.stable, 'Delivered GLB did not meet >=40 FPS, p95<=50ms and maximum trial ratio 1.15');
   await writeReport();
   if (!benchmarkOnly) assert(report.glb.pass, `GLB roundtrip exceeded predefined tolerances: meanRGB ${report.glb.maximumRGBMeanDifference}, pixels>8 ${report.glb.maximumAbove8PixelsPercent}%`);
   assert.equal(errors.length, 0, `Browser errors: ${JSON.stringify(errors)}`);

@@ -15,7 +15,7 @@ export const SHOE_PARAMETERS = Object.freeze({
   upperBaseY: -0.27,
   collarFrontY: 0.51,
   collarRearY: 0.71,
-  crownExponent: 0.60,
+  crownExponent: 0.46,
   soleBottomY: -0.53,
   soleTopY: -0.265,
   studCount: 10,
@@ -32,7 +32,7 @@ export const SHOE_PARAMETERS = Object.freeze({
 export const SHOE_DETAILS = Object.freeze({
   dense: { upperAngularSegments: 128, upperRadialSegments: 24, soleSegments: 128, collarSegments: 96, liningRows: 8, rimSegments: 112, tubeRadialSegments: 8, stripeRows: 30, stripeCols: 6, tongueRows: 32, tongueCols: 12, eyelets: true, eyeletRadialSegments: 6, eyeletTubularSegments: 12, studSegments: 16, studProfile: 'full', ribDetails: true, segmentScale: 1, knotWidthSegments: 12, knotHeightSegments: 8 },
   balanced: { upperAngularSegments: 48, upperRadialSegments: 10, soleSegments: 48, collarSegments: 32, liningRows: 4, rimSegments: 40, tubeRadialSegments: 6, stripeRows: 12, stripeCols: 2, tongueRows: 12, tongueCols: 5, eyelets: true, eyeletRadialSegments: 4, eyeletTubularSegments: 8, studSegments: 10, studProfile: 'full', ribDetails: true, segmentScale: 0.5, knotWidthSegments: 8, knotHeightSegments: 6 },
-  mobile: { upperAngularSegments: 16, upperRadialSegments: 3, soleSegments: 16, collarSegments: 8, liningRows: 1, rimSegments: 10, tubeRadialSegments: 3, stripeRows: 3, stripeCols: 1, tongueRows: 3, tongueCols: 1, eyelets: false, eyeletRadialSegments: 3, eyeletTubularSegments: 6, studSegments: 6, studProfile: 'short', ribDetails: false, segmentScale: 0.15, knotWidthSegments: 4, knotHeightSegments: 2 },
+  mobile: { upperAngularSegments: 20, upperRadialSegments: 5, soleSegments: 20, collarSegments: 12, liningRows: 1, rimSegments: 14, tubeRadialSegments: 3, stripeRows: 4, stripeCols: 1, tongueRows: 5, tongueCols: 2, eyelets: false, eyeletRadialSegments: 3, eyeletTubularSegments: 6, studSegments: 6, studProfile: 'short', ribDetails: false, segmentScale: 0.15, knotWidthSegments: 4, knotHeightSegments: 2 },
 });
 
 export function createShoe({ revision = 'final', detail = 'mobile' } = {}) {
@@ -44,11 +44,13 @@ const v3 = (x, y, z) => new THREE.Vector3(x, y, z);
 const clamp = THREE.MathUtils.clamp;
 
 const outlineControls = [
-  [0, 1.63], [0.38, 1.54], [0.65, 1.25], [0.75, 0.80],
+  // A broad toe cap retains its volume before turning into the forefoot sides.
+  // Its bounds and the collar centre stay unchanged, preserving ankle placement.
+  [0, 1.63], [0.34, 1.59], [0.60, 1.40], [0.73, 1.10], [0.75, 0.74],
   [0.71, 0.30], [0.60, -0.18], [0.53, -0.66], [0.49, -1.15],
   [0.38, -1.40], [0, -1.50], [-0.38, -1.40], [-0.49, -1.15],
-  [-0.53, -0.66], [-0.60, -0.18], [-0.71, 0.30], [-0.75, 0.80],
-  [-0.65, 1.25], [-0.38, 1.54],
+  [-0.53, -0.66], [-0.60, -0.18], [-0.71, 0.30], [-0.75, 0.74],
+  [-0.73, 1.10], [-0.60, 1.40], [-0.34, 1.59],
 ];
 const footprintCurve = new THREE.CatmullRomCurve3(
   outlineControls.map(([x, z]) => v3(x, 0, z)), true, 'centripetal',
@@ -143,12 +145,19 @@ function surfaceNormal(t, theta) {
 
 function upperGeometry() {
   const positions = [];
+  const normals = [];
   const indices = [];
   const n = P.upperAngularSegments;
   for (let j = 0; j <= P.upperRadialSegments; j++) {
+    // Concentrate rings at the rounded toe wall instead of drawing a long
+    // straight final span from the vamp down to the sole.
+    const t = Math.sin(j / P.upperRadialSegments * Math.PI / 2);
     for (let i = 0; i < n; i++) {
-      const p = upperPoint(j / P.upperRadialSegments, i / n * TAU);
+      const theta = i / n * TAU;
+      const p = upperPoint(t, theta);
+      const normal = surfaceNormal(t, theta);
       positions.push(p.x, p.y, p.z);
+      normals.push(normal.x, normal.y, normal.z);
     }
   }
   for (let j = 0; j < P.upperRadialSegments; j++) {
@@ -160,7 +169,9 @@ function upperGeometry() {
       indices.push(a, c, b, b, c, d);
     }
   }
-  return indexedGeometry(positions, indices);
+  const geometry = indexedGeometry(positions, indices);
+  geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+  return geometry;
 }
 
 function soleGeometry(levels) {
@@ -449,7 +460,7 @@ function baselineShoe(group, materials) {
     revision, detail,
     anklePivot: [0, 0.61, P.collarCenterZ],
     parameters: P,
-    referenceStatus: 'No target images were available; modeled from the written brief.',
+    referenceStatus: 'Original pixels of the views and hands/football-shoes reference sheets were inspected directly from codex-lab/ref; rounded toe silhouette updated, not a full material/detail match.',
   };
   return group;
 }

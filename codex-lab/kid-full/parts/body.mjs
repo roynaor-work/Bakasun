@@ -27,7 +27,7 @@ const TESSELLATION = {
     sockHeight:28, numberSegments:12 },
   mobile: { torsoRadial:8, torsoHeight:4, neckRadial:10, neckHeight:3,
     shirtRadial:12, shirtHeight:12, collarRadial:16, collarHeight:2, hemHeight:1,
-    limbRadial:8, armHeight:8, sleeveHeight:8, cuffHeight:1, cuffLipHeight:1,
+    limbRadial:8, armRadial:12, armHeight:8, sleeveHeight:8, cuffHeight:1, cuffLipHeight:1,
     armExposedHeight:6, armCoveredHeight:3,
     shortsRadial:10, shortsHeight:8, shortsHemHeight:1, stripeHeight:5, stripeWidth:1,
     legHeight:10, legCoveredLowHeight:3, legExposedHeight:5, legCoveredHighHeight:3,
@@ -165,12 +165,12 @@ function tubePoint(rows, side, folded = false, type = '') {
 }
 
 const armRows = [
-  { y: .790, x: .496, z: .010, rx: .048, rz: .050 },
-  { y: .842, x: .494, z: .010, rx: .057, rz: .060 },
-  { y: .960, x: .465, z: .003, rx: .085, rz: .083 },
-  { y: 1.065, x: .441, z: -.003, rx: .092, rz: .094 },
-  { y: 1.19, x: .387, z: .0, rx: .100, rz: .105 },
-  { y: 1.33, x: .335, z: .0, rx: .121, rz: .119 },
+  { y: .790, x: .496, z: .010, rx: .054, rz: .061 },
+  { y: .842, x: .494, z: .010, rx: .064, rz: .073 },
+  { y: .960, x: .465, z: .003, rx: .088, rz: .104 },
+  { y: 1.065, x: .441, z: -.003, rx: .096, rz: .112 },
+  { y: 1.19, x: .387, z: .0, rx: .104, rz: .120 },
+  { y: 1.33, x: .335, z: .0, rx: .121, rz: .125 },
   { y: 1.445, x: .263, z: .0, rx: .116, rz: .128 },
 ];
 const sleeveRows = [
@@ -362,22 +362,23 @@ export function buildKidBody({ palette = 'blue', stage = 'final', detail = 'bala
     add('shirt-hem', ringGeometry(range(.922, .943, tessellation.hemHeight), tessellation.shirtRadial, (y, t) => jerseyPoint(y, t, folded, .0017)), shirt, 'hem');
     for (const side of [-1, 1]) {
       const suffix = side < 0 ? 'left' : 'right';
+      const armRadial = tessellation.armRadial ?? tessellation.limbRadial;
       const arm = tubePoint(armRows, side, folded, 'arm');
       const sleeve = tubePoint(sleeveRows, side, folded, 'sleeve');
       // Keep the hidden upper end below the closed shoulder roof.
       const armYs = detail === 'dense' ? range(.79, 1.38, tessellation.armHeight)
         : [...range(.79, 1.206, tessellation.armExposedHeight),
           ...range(1.206, 1.38, tessellation.armCoveredHeight).slice(1)];
-      add(`arm-${suffix}`, ringGeometry(armYs, tessellation.limbRadial, arm), skin, 'arm');
-      add(`wrist-port-${suffix}`, capGeometry(arm, .79, true, tessellation.limbRadial), skin, 'wrist-port');
-      add(`sleeve-${suffix}`, ringGeometry(range(1.206, 1.486, tessellation.sleeveHeight), tessellation.limbRadial, sleeve), shirt, 'sleeve');
+      add(`arm-${suffix}`, ringGeometry(armYs, armRadial, arm), skin, 'arm');
+      add(`wrist-port-${suffix}`, capGeometry(arm, .79, true, armRadial), skin, 'wrist-port');
+      add(`sleeve-${suffix}`, ringGeometry(range(1.206, 1.486, tessellation.sleeveHeight), armRadial, sleeve), shirt, 'sleeve');
       const cuffPoint = (y, t) => {
         const v = sleeve(y, t), c = new THREE.Vector3(profile(sleeveRows, y, 'x') * side * .95, y, 0);
         const roll = .002 + .001 * Math.sin((y - 1.206) / .035 * Math.PI);
         return v.add(v.clone().sub(c).normalize().multiplyScalar(roll));
       };
-      add(`sleeve-cuff-${suffix}`, ringGeometry(range(1.206, 1.241, tessellation.cuffHeight), tessellation.limbRadial, cuffPoint), trim, 'cuff');
-      add(`sleeve-cuff-lip-${suffix}`, ringGeometry(range(0, 1, tessellation.cuffLipHeight), tessellation.limbRadial, (v, t) => {
+      add(`sleeve-cuff-${suffix}`, ringGeometry(range(1.206, 1.241, tessellation.cuffHeight), armRadial, cuffPoint), trim, 'cuff');
+      add(`sleeve-cuff-lip-${suffix}`, ringGeometry(range(0, 1, tessellation.cuffLipHeight), armRadial, (v, t) => {
         const outer = cuffPoint(1.206, t), inner = arm(1.206, t);
         return outer.lerp(inner, v).add(new THREE.Vector3(0, -.0015*Math.sin(v*Math.PI), 0));
       }), trim, 'cuff');

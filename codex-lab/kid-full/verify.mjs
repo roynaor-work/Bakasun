@@ -15,7 +15,7 @@ const failures = [];
 const report = {
   recordedAt: new Date().toISOString(),
   method: 'All deformed vertices and shoe triangles, in world space; no renderer or physical-phone claim.',
-  limits: { weightSumError: 2e-6, standingHeadRatio: [2.5, 2.7], groundPenetration: .01, kickContactSurfaceGap: .025, clipLoopDelta: 2e-6 },
+  limits: { weightSumError: 2e-6, standingHeadRatio: [2.5, 2.7], groundPenetration: .01, kickContactSurfaceGap: .025, clipLoopDelta: 2e-6, mobileModelTriangles: 20000, minimumMobileFPS: 40, maximumP95FrameMs: 50, maximumTrialFPSRatio: 1.15 },
   qualities: {}, originals: [],
 };
 const check = (condition, message) => { if (!condition) failures.push(message); };
@@ -63,24 +63,30 @@ function validateSkin(model) {
   }
   check(model.bones.length === expected.length, `Bone count ${model.bones.length}, expected ${expected.length}`);
   for (const name of expected) check(model.byName[name]?.isBone, `Missing bone ${name}`);
-  for (const mesh of skinnedMeshes(model)) {
+  const surfaces = [];
+  model.root.traverse(mesh => { if (mesh.isSkinnedMesh || (mesh.isMesh && mesh.userData.rigidBone)) surfaces.push(mesh); });
+  for (const mesh of surfaces) {
     const { position, normal, skinIndex, skinWeight } = mesh.geometry.attributes;
     if (mesh.geometry.attributes.color) for (const value of mesh.geometry.attributes.color.array) {
       maximumVertexColor = Math.max(maximumVertexColor, value);
       check(Number.isFinite(value) && value >= 0 && value <= 1, 'Source baked vertex color outside glTF COLOR_0 range [0,1]');
     }
-    check(position.count === skinIndex.count && position.count === skinWeight.count, `${mesh.name}: skin attribute count differs`);
-    check(skinIndex.itemSize === 4 && skinWeight.itemSize === 4, `${mesh.name}: must have four skin influence slots`);
+    if (mesh.isSkinnedMesh) {
+      check(position.count === skinIndex.count && position.count === skinWeight.count, `${mesh.name}: skin attribute count differs`);
+      check(skinIndex.itemSize === 4 && skinWeight.itemSize === 4, `${mesh.name}: must have four skin influence slots`);
+    } else if (position.count > 0) usedBones.add(mesh.userData.rigidBone);
     const indices = mesh.geometry.index?.array;
     if (indices) for (const index of indices) check(Number.isInteger(index) && index >= 0 && index < position.count, `${mesh.name}: out of range triangle index`);
     for (let i = 0; i < position.count; i++) {
-      let sum = 0, positive = 0;
       for (let c = 0; c < 3; c++) check(Number.isFinite(position.array[i * 3 + c]), `${mesh.name}: nonfinite source position`);
       if (normal) {
         const length = Math.hypot(...normal.array.subarray(i * 3, i * 3 + 3));
         check(Number.isFinite(length) && length <= 1.2, `${mesh.name}: nonfinite or excessive normal length at ${i}: ${length}`);
         zeroNormals += Number(length < 1e-8);
       }
+      vertices++;
+      if (!mesh.isSkinnedMesh) continue;
+      let sum = 0, positive = 0;
       for (let slot = 0; slot < 4; slot++) {
         const index = skinIndex.array[i * 4 + slot], weight = skinWeight.array[i * 4 + slot];
         check(Number.isInteger(index) && index >= 0 && index < model.bones.length, `${mesh.name}: invalid joint index`);
@@ -89,7 +95,7 @@ function validateSkin(model) {
         if (weight > 1e-6) { positive++; usedBones.add(model.bones[index].name); }
       }
       maximumWeightSumError = Math.max(maximumWeightSumError, Math.abs(sum - 1));
-      mixedVertices += Number(positive > 1); vertices++;
+      mixedVertices += Number(positive > 1);
     }
   }
   check(maximumWeightSumError <= report.limits.weightSumError, `Skin weight sum error ${maximumWeightSumError}`);
@@ -105,11 +111,14 @@ function kickContact(model) {
   const footIndex = model.bones.indexOf(model.byName.Foot_R);
   let minimum = Infinity, checkedTriangles = 0;
   const triangle = new T.Triangle(), closest = new T.Vector3();
-  for (const mesh of skinnedMeshes(model)) {
+  const contactSurfaces=skinnedMeshes(model);
+  model.root.traverse(mesh=>{if(mesh.isMesh&&mesh.userData.rigidBone==='Foot_R')contactSurfaces.push(mesh);});
+  for (const mesh of contactSurfaces) {
     const { position, skinIndex, skinWeight } = mesh.geometry.attributes;
     const index = mesh.geometry.index;
     const count = index?.count ?? position.count;
     const footWeight = i => {
+      if(mesh.userData.rigidBone==='Foot_R')return 1;
       let total = 0;
       for (let slot = 0; slot < 4; slot++) if (skinIndex.array[i * 4 + slot] === footIndex) total += skinWeight.array[i * 4 + slot];
       return total;
@@ -118,7 +127,7 @@ function kickContact(model) {
       const ids = [0, 1, 2].map(s => index ? index.getX(i + s) : i + s);
       if (!ids.every(id => footWeight(id) > .99999)) continue;
       for (const [slot, point] of [triangle.a, triangle.b, triangle.c].entries()) {
-        point.fromBufferAttribute(position, ids[slot]); mesh.applyBoneTransform(ids[slot], point); point.applyMatrix4(mesh.matrixWorld);
+        point.fromBufferAttribute(position, ids[slot]); if(mesh.isSkinnedMesh)mesh.applyBoneTransform(ids[slot], point); point.applyMatrix4(mesh.matrixWorld);
       }
       if (triangle.getArea() <= 1e-20) continue;
       triangle.closestPointToPoint(center, closest);
@@ -189,6 +198,7 @@ for (const detail of ['dense', 'balanced', 'mobile']) {
     applyPose(model, pose); result.poses[pose] = deformedBounds(model);
     check(result.poses[pose].minimumY >= -report.limits.groundPenetration, `${detail}/${pose} ground penetration`);
   }
+  if (detail === 'mobile') check(result.modelTriangles <= report.limits.mobileModelTriangles, `Mobile model has ${result.modelTriangles} triangles, above the 20,000 limit`);
   const ratio = result.poses.stand.heightInHeads;
   check(ratio >= 2.5 && ratio <= 2.7, `${detail}: standing height ${ratio} heads, expected 2.5–2.7`);
   for (const [from, to] of [['stand', 'run'], ['run', 'kick'], ['kick', 'stand']]) for (const t of [0, .25, .5, .75, 1]) {
@@ -223,6 +233,13 @@ if (glbBytes) {
     check(skin.joints.every(j => json.nodes[j]), 'GLB skin references missing nodes');
     if (skin.inverseBindMatrices !== undefined) check(accessor(skin.inverseBindMatrices).flat().every(Number.isFinite), 'GLB inverse bind matrix is nonfinite');
   }
+  let exportedModelTriangles = 0;
+  for (const node of json.nodes || []) if (node.mesh !== undefined) for (const primitive of json.meshes[node.mesh].primitives) {
+    check(primitive.mode === undefined || primitive.mode === 4, 'Delivered GLB has a non-triangle primitive');
+    exportedModelTriangles += json.accessors[primitive.indices ?? primitive.attributes.POSITION].count / 3;
+  }
+  check(exportedModelTriangles <= report.limits.mobileModelTriangles, `Delivered GLB has ${exportedModelTriangles} triangles, above the 20,000 limit`);
+  check(exportedModelTriangles === report.qualities.mobile.modelTriangles, 'Delivered GLB triangle topology does not match current mobile source');
   let exportedMaximumVertexColor = 0;
   for (const mesh of json.meshes || []) for (const primitive of mesh.primitives) if (primitive.attributes.COLOR_0 !== undefined) {
     for (const value of accessor(primitive.attributes.COLOR_0).flat()) {
@@ -260,23 +277,79 @@ if (glbBytes) {
     animationResults.push({ name: animation.name, channels: animation.channels.length, maximumLoopDelta });
   }
   check(animationResults.map(a => a.name).join(',') === 'stand,run,kick', 'GLB must contain stand, run and kick clips');
-  report.glb = { bytes: glbBytes.length, sha256: sha256(glbBytes), skins: json.skins.length, exportedSkinVertices, exportedMaximumWeightSumError, exportedMaximumVertexColor, animations: animationResults };
+  report.glb = { bytes: glbBytes.length, sha256: sha256(glbBytes), modelTriangles: exportedModelTriangles, skins: json.skins.length, exportedSkinVertices, exportedMaximumWeightSumError, exportedMaximumVertexColor, animations: animationResults };
 } else { report.glb = { skipped: 'kid-full.glb has not been captured yet' }; }
 
 const metricBytes = await exists(resolve(root, 'shots/metrics.json'));
 if (metricBytes) {
   const metrics = JSON.parse(metricBytes);
   if (metrics.glb?.sha256 && report.glb.sha256) check(metrics.glb.sha256 === report.glb.sha256, 'Capture metrics refer to a different GLB');
-  if (metrics.glb?.maximumRGBMeanDifference !== undefined) check(metrics.glb.maximumRGBMeanDifference <= .5, `GLB maximum roundtrip mean RGB difference ${metrics.glb.maximumRGBMeanDifference}`);
+  if (metrics.glb?.maximumRGBMeanDifference !== undefined) check(metrics.glb.maximumRGBMeanDifference <= .05, `GLB maximum roundtrip mean RGB difference ${metrics.glb.maximumRGBMeanDifference}`);
+  for (const [file, hash] of Object.entries(report.implementation)) check(metrics.implementation?.[file] === hash, `Capture implementation hash is stale: ${file}`);
+  if (metrics.glb?.maximumAbove8PixelsPercent !== undefined) check(metrics.glb.maximumAbove8PixelsPercent <= .1, 'GLB roundtrip exceeded pixel tolerance');
   for (const [pose, sample] of Object.entries(metrics.glb?.vertexChecks || {})) check(sample.maximumPositionDelta <= 1e-5, `${pose}: GLB sampled vertex mismatch ${sample.maximumPositionDelta}`);
   for (const quality of Object.keys(metrics.phone?.quality || {})) {
     const captured = metrics.phone.quality[quality];
     if (report.qualities[quality]) check(captured.modelTriangles === report.qualities[quality].modelTriangles, `${quality}: benchmark triangle count is stale`);
   }
-  if (metrics.phone?.quality?.mobile) check(metrics.phone.quality.mobile.stable === true, 'Mobile quality did not pass the declared FPS stability limits');
+  const mobile = metrics.phone?.quality?.mobile;
+  check(!!mobile && mobile.trials?.length >= 3, 'Mobile requires at least three fresh phone-size benchmark trials');
+  if (mobile) {
+    check(mobile.stable === true, 'Mobile quality did not pass the declared FPS stability limits');
+    check(metrics.phone.viewport?.width === 390 && metrics.phone.viewport?.height === 844 && metrics.phone.dpr === 1, 'Mobile benchmark viewport or DPR differs from the declared phone preset');
+    check(metrics.stabilityCriteria?.minimumFPS >= report.limits.minimumMobileFPS && metrics.stabilityCriteria?.maximumP95FrameMs <= report.limits.maximumP95FrameMs && metrics.stabilityCriteria?.maximumTrialFPSRatio <= report.limits.maximumTrialFPSRatio, 'Capture uses weaker performance limits than the acceptance criteria');
+    for (const trial of mobile.trials || []) {
+      check(Number.isFinite(trial.fps) && trial.fps >= report.limits.minimumMobileFPS, `Mobile trial ${trial.trial}: ${trial.fps} FPS, require at least 40`);
+      check(Number.isFinite(trial.frameMs?.p95) && trial.frameMs.p95 <= report.limits.maximumP95FrameMs, `Mobile trial ${trial.trial}: p95 frame time exceeds 50ms`);
+      check(trial.modelTriangles <= report.limits.mobileModelTriangles, `Mobile trial ${trial.trial}: triangle budget exceeded`);
+    }
+    const fps = (mobile.trials || []).map(trial => trial.fps);
+    check(fps.length > 0 && Math.max(...fps) / Math.min(...fps) <= report.limits.maximumTrialFPSRatio, 'Mobile trial FPS ratio exceeds 1.15');
+  }
+  const comparison = metrics.beforeAfter;
+  check(comparison?.settingsIdentical === true && comparison.before?.path && comparison.after?.source, 'Before/after comparison with identical camera/light settings is missing');
+  if (comparison?.before?.path) {
+    const baseline = await exists(resolve(root, comparison.before.path));
+    check(!!baseline && sha256(baseline) === comparison.before.sha256, 'Before model is missing or its hash differs from comparison metadata');
+  }
+  const baseline = metrics.phoneBaseline;
+  check(!!baseline && baseline.quality?.mobile?.trials?.length >= 3, 'Original GLB requires three fresh baseline phone benchmark trials');
+  if (baseline) {
+    check(baseline.sha256 === comparison?.before?.sha256, 'Measured original GLB differs from the before/after source');
+    check(baseline.viewport?.width === metrics.phone?.viewport?.width && baseline.viewport?.height === metrics.phone?.viewport?.height && baseline.dpr === metrics.phone?.dpr, 'Original and current phone benchmark viewports differ');
+    for (const trial of baseline.quality?.mobile?.trials || []) {
+      check(trial.source === 'GLB' && trial.buildMs === undefined, 'Original baseline should record GLB loading rather than an embedded source build time');
+      check(Number.isFinite(trial.fps) && Number.isFinite(trial.loadAndFirstDrawMs), 'Original GLB baseline timing is missing');
+      check(trial.rendererSize?.width === mobile?.rendererSize?.width && trial.rendererSize?.height === mobile?.rendererSize?.height, 'Original and current phone rendering buffer sizes differ');
+    }
+  }
+  const delivered = metrics.phoneDelivered;
+  const deliveredMobile = delivered?.quality?.mobile;
+  check(!!deliveredMobile && deliveredMobile.trials?.length >= 3, 'Delivered GLB requires three fresh phone-size benchmark trials');
+  if (deliveredMobile) {
+    check(delivered.sha256 === report.glb.sha256, 'Phone benchmark used a different delivered GLB');
+    check(deliveredMobile.stable === true, 'Delivered GLB did not pass the declared FPS stability limits');
+    check(delivered.viewport?.width === 390 && delivered.viewport?.height === 844 && delivered.dpr === 1, 'Delivered GLB phone benchmark viewport or DPR differs');
+    for (const trial of deliveredMobile.trials || []) {
+      check(trial.source === 'GLB' && trial.buildMs === undefined && Number.isFinite(trial.loadAndFirstDrawMs), 'Delivered GLB should record loading and first draw rather than procedural build time');
+      check(Number.isFinite(trial.fps) && trial.fps >= report.limits.minimumMobileFPS, `Delivered GLB trial ${trial.trial}: ${trial.fps} FPS, require at least 40`);
+      check(Number.isFinite(trial.frameMs?.p95) && trial.frameMs.p95 <= report.limits.maximumP95FrameMs, `Delivered GLB trial ${trial.trial}: p95 frame time exceeds 50ms`);
+      check(trial.modelTriangles === report.qualities.mobile.modelTriangles && trial.modelTriangles <= report.limits.mobileModelTriangles, 'Delivered GLB benchmark triangle count differs or exceeds budget');
+      check(trial.rendererSize?.width === mobile?.rendererSize?.width && trial.rendererSize?.height === mobile?.rendererSize?.height, 'Delivered GLB and procedural source phone rendering buffer sizes differ');
+    }
+    const fps = (deliveredMobile.trials || []).map(trial => trial.fps);
+    check(fps.length > 0 && Math.max(...fps) / Math.min(...fps) <= report.limits.maximumTrialFPSRatio, 'Delivered GLB trial FPS ratio exceeds 1.15');
+  }
+  for (const reference of [metrics.reference, metrics.expressionReference]) {
+    check(reference?.sourcePixelAccess === true && !!reference?.path, 'Original reference pixel access is missing from comparison metadata');
+    if (reference?.path) {
+      const bytes = await exists(resolve(root, reference.path));
+      check(!!bytes && sha256(bytes) === reference.sha256, `Reference sheet hash mismatch: ${reference.path}`);
+    }
+  }
   check((metrics.browserChecks?.errors || []).length === 0, 'Capture report contains browser errors');
   check((metrics.browserChecks?.externalRequests || []).length === 0, 'Capture made external runtime requests');
-  report.capture = { path: 'shots/metrics.json', sha256: sha256(metricBytes), roundtripMaximumRGBMeanDifference: metrics.glb?.maximumRGBMeanDifference, mobileStable: metrics.phone?.quality?.mobile?.stable ?? null };
+  report.capture = { path: 'shots/metrics.json', sha256: sha256(metricBytes), roundtripMaximumRGBMeanDifference: metrics.glb?.maximumRGBMeanDifference, mobileStable: mobile?.stable ?? null, minimumMobileFPS: mobile?.trials?.length ? Math.min(...mobile.trials.map(t => t.fps)) : null, comparison: comparison?.comparisonPath };
 }
 if (process.argv.includes('--browser')) {
   const { chromium } = await import('playwright-core');

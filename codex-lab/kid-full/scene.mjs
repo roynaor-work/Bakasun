@@ -18,7 +18,7 @@ for(const [p,c,i]of [[[-3,4.5,5],'#fff2e1',3.10],[[3,2,3],'#e3edff',1.35],[[1,3,
 const textureCanvas=document.createElement('canvas');textureCanvas.width=textureCanvas.height=128;
 const ctx=textureCanvas.getContext('2d'),gradient=ctx.createRadialGradient(64,64,3,64,64,62);gradient.addColorStop(0,'rgba(45,52,64,.20)');gradient.addColorStop(1,'rgba(45,52,64,0)');ctx.fillStyle=gradient;ctx.fillRect(0,0,128,128);
 const shadow=new T.Mesh(new T.PlaneGeometry(1.45,.9),new T.MeshBasicMaterial({map:new T.CanvasTexture(textureCanvas),transparent:true,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.position.y=-.003;scene.add(shadow);
-const holder=new T.Group();scene.add(holder);let source,loaded,current,clips,mixer,playing=false,frame=0,pose='stand',view='front',quality=params.get('quality')||(innerWidth<600?'mobile':'balanced'),transition;
+const holder=new T.Group();scene.add(holder);let source,loaded,current,clips,mixer,playing=false,frame=0,pose='stand',view='front',quality=params.get('quality')||'mobile',transition;
 const label=document.querySelector('#source-label');
 function render(){current.root.updateMatrixWorld(true);current.skeleton.update();renderer.render(scene,camera);}
 function resize(){const {width,height}=canvas.getBoundingClientRect(),aspect=width/height,vertical=Math.max(3.05,1.65/aspect);camera.left=-vertical*aspect/2;camera.right=vertical*aspect/2;camera.top=vertical/2;camera.bottom=-vertical/2;camera.updateProjectionMatrix();renderer.setPixelRatio(width<600&&params.get('resolution')!=='full'?.6:1);renderer.setSize(width,height,false);if(current)render();}
