@@ -8,13 +8,13 @@ import { store } from './store.js?v=20261008-together-1';
 import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261008-together-1';
 import { beltCard } from './belts.js?v=20261008-together-1';
 import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js';
-import { runGame } from './games/engine.js?v=20261008-together-1';
+import { runGame } from './games/engine.js?v=20261008-voice-1';
 import * as cloud from './cloud.js';
 import { showLobby } from './games/lobby.js';
 import { initParent, parentGate, parentHome, parentTogether, lockParent, basketball } from './parent.js?v=20261008-together-1';
 import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261008-together-1';
 import { playIntro } from './intro.js';
-import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261008-together-1';
+import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261008-voice-1';
 import { SAY } from './say.js';
 import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261008-minute-1';
 
@@ -635,7 +635,7 @@ function playDemo(g, onDone) { mount('', true); activeGame = runGame(g, { second
 function playGame(g, onDone) {
   mount('', true);
   const secs = store.profile.gameSeconds || 0; // 0 = בלי הגבלה: משחקים עד שנפסלים
-  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, music: store.profile.music !== false, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t),
+  activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, music: store.profile.music !== false, recording: playVoiceRecording, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t),
     tokens: () => store.tokens - 1, onContinue: () => { if (store.tokens <= 1) return false; store.addToken(-1); return true; }, // המשחק הזה עולה מתנה אחת בסוף; המשך עולה עוד אחת
     progress: store.progress[g.id] || null, onProgress: p => { if (p) store.setProgress(g.id, p); },
     onEnd({ score }) { store.recordGame(g.id, score, false, g.cost || 1); activeGame = null; onDone(score); } });

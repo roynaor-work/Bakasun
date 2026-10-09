@@ -2,8 +2,8 @@
 // כל משחק הוא אובייקט { id, name, emoji, how, make(r) } כאשר make מחזיר { update(dt), draw(), tap(x,y), down, up, move, swipe(dir), key(code) }.
 import { poseAt } from '../figure.js';
 import { gameReward } from '../logic.js?v=20261008-together-1';
-import { celebrate as celebrate2d } from './celebrate.js';
-import { celebrate3d } from './celebrate3d.js';
+import { celebrate as celebrate2d } from './celebrate.js?v=20261008-voice-1';
+import { celebrate3d } from './celebrate3d.js?v=20261008-voice-1';
 // חגיגת שיא: בתלת-ממד (הדמות של Kenney, אצטדיון) כשיש WebGL, אחרת הגרסה הדו-ממדית
 const celebrateGoal = (cv, opts) => { try { return celebrate3d(cv, opts); } catch (e) { console.warn('3d celebrate failed', e); return celebrate2d(cv, opts); } };
 import { player as drawPlayer, crowd as drawCrowd, crowdGen } from './sprites.js';
@@ -34,7 +34,7 @@ function tinted(key, color) { const im = getImg(key); if (!im || !im.complete ||
 // מוזיקת רקע: לופים CC0 מ-OpenGameArt ב-snd/music (battle, crazy, cunning, booxbep). לפי קבוצת המשחק, או def.music; המשחק יכול להחליף באמצע (r.music('crazy') בפקמן במצב כוח)
 const MUSIC_URL = name => new URL(`../../snd/music/${name}.ogg`, import.meta.url).href;
 const ALL_MUSIC = ['booxbep', 'battle', 'cunning', 'crazy']; let lastMusic = null; const pickMusic = () => { const opts = ALL_MUSIC.filter(m => m !== lastMusic); lastMusic = opts[Math.floor(Math.random() * opts.length)]; return lastMusic; };
-export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null, music = true }) {
+export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, recording = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null, music = true }) {
   host.innerHTML = `
     <div class="gamewrap">
       <div class="gamehud">
@@ -182,7 +182,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     };
     if (newBest) {
       // חגיגת שער: מסתירים את ההודעה בזמן הסימולציה, ומראים אותה בסופה
-      hide(); const stopFx = celebrateGoal(cv, { oldBest: best, newBest: score, sound, onText: (t, lang) => speak && speak(t, lang), onDone: () => { cv.onclick = null; showResult(); } });
+      hide(); const stopFx = celebrateGoal(cv, { oldBest: best, newBest: score, sound, onRecording: recording, onText: (t, lang) => speak && speak(t, lang), onDone: () => { cv.onclick = null; showResult(); } });
       cv.onclick = () => { stopFx(); cv.onclick = null; showResult(); };
       return;
     }

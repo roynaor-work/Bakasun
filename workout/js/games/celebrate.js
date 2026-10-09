@@ -282,7 +282,7 @@ function hoopFront(ctx, hp, stretch) {
 }
 
 /** חגיגה על קנבס. scene: אחד מ-SCENE_IDS או אקראי. onText(text, lang) לקריין. מחזיר פונקציית עצירה. */
-export function celebrate(canvas, { oldBest = 0, newBest = 1, sound = true, onText = null, onDone = null, scene = null } = {}) {
+export function celebrate(canvas, { oldBest = 0, newBest = 1, sound = true, onText = null, onRecording = null, onDone = null, scene = null } = {}) {
   const ctx = canvas.getContext('2d'), W = canvas.width, H = canvas.height;
   const id = SCENE_IDS.includes(scene) ? scene : SCENE_IDS[Math.floor(Math.random() * SCENE_IDS.length)];
   const sc = SCENES[id], S = makeAudio(sound), F = fx(ctx, W, H), s = { ...sc.setup(W, H), oldBest, newBest };
@@ -290,7 +290,7 @@ export function celebrate(canvas, { oldBest = 0, newBest = 1, sound = true, onTe
   // קריין: ההקלטות של רועי לפי סצנה (snd/goal.mp4 "גוווול", dunk.mp4 "בום", three.mp4 "סל", sprint.mp4 "מקום ראשון"). הקלטה מההגדרות גוברת בסצנות הכדורגל. אם הניגון נכשל, TTS.
   const REC = Object.fromEntries(['goal', 'dunk', 'three', 'sprint'].map(k => [k, new URL(`../../snd/${k}.mp4`, import.meta.url).href]));
   const recFor = id === 'header' ? (shout || REC.goal) : id === 'goal' ? (shout || REC.goal) : REC[id];
-  const say = (txt, lang) => { if (said) return; said = true; if (sound && recFor) { try { const a = new Audio(recFor); a.volume = 1; a.onerror = () => { if (txt) onText && onText(txt, lang); }; a.play().catch(() => { if (txt) onText && onText(txt, lang); }); return; } catch { /* */ } } if (txt) onText && onText(txt, lang); };
+  const say = (txt, lang) => { if (said) return; said = true; if (sound && onRecording?.(`celebration-${id === 'header' ? 'goal' : id}`)) return; if (sound && recFor) { try { const a = new Audio(recFor); a.volume = 1; a.onerror = () => { if (txt) onText && onText(txt, lang); }; a.play().catch(() => { if (txt) onText && onText(txt, lang); }); return; } catch { /* */ } } if (txt) onText && onText(txt, lang); };
   sc.sound(S);
   const started = performance.now(); let raf = 0, last = started;
   function frame(now) { const t = (now - started) / 1000, dt = Math.min(.05, (now - last) / 1000); last = now; sc.draw(ctx, W, H, t, dt, s, F, say); F.draw(dt); if (t < sc.dur) raf = requestAnimationFrame(frame); else onDone && onDone(); }
