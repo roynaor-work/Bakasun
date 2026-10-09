@@ -1,5 +1,5 @@
 // חדר למשחק מול טלפון אחר: יוצרים חדר (קוד 4 ספרות) או מצטרפים עם קוד. שני הטלפונים חייבים אותו קוד משפחה.
-import { connect, newRoomCode, normRoom } from '../net.js';
+import { connect, newRoomCode, normRoom } from '../net.js?v=20261009-weekly-1';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 // showLobby(hostEl, { familyCode, setFamilyCode(v), onReady(conn), onCancel() })

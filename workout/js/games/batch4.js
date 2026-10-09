@@ -1,8 +1,8 @@
 // מקבץ 4 (29/09): הקפצת כדור (היה הלוליין), יורה בועות, כדורסל, מיני גולף, באולינג. שופרו מראש: מראה (ספרייטים של Kenney), רעיונות ממשחקים דומים, חוקי פסילה, רמות, שמירת התקדמות, peek להדגמה.
-import { POSE, S as SP, KITS } from './sprites.js';
-import { layer3d } from './layer3d.js';
-import { loadCharacter, KITS3D, lights } from '../char3d.js';
-import { sky, court, basketBallMesh, ballShadow, SHOT, pose } from './celebrate3d.js';
+import { POSE, S as SP, KITS } from './sprites.js?v=20261009-weekly-1';
+import { layer3d } from './layer3d.js?v=20261009-weekly-1';
+import { loadCharacter, KITS3D, lights } from '../char3d.js?v=20261009-weekly-1';
+import { sky, court, basketBallMesh, ballShadow, SHOT, pose } from './celebrate3d.js?v=20261009-weekly-1';
 export const arcade = [], sport = [];
 const BALLS = ['puzzle/tileBlue_11', 'puzzle/tileRed_11', 'puzzle/tileGreen_11', 'puzzle/tileYellow_11', 'puzzle/tilePink_11', 'puzzle/tileOrange_11'], BALL_COL = ['#38bdf8', '#f87171', '#4ade80', '#facc15', '#f472b6', '#fb923c'];
 // גרירה מהכדור: כיוון וכוח (כמו בספורט)

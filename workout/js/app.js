@@ -1,28 +1,29 @@
 // האפליקציה: ניתוב, מסכים, מהלך אימון (חימום -> תרגילים -> מנוחות -> מתיחות -> סיכום), מעקב והגדרות.
-import { EXERCISES, CATS, byId } from './exercises.js';
-import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js';
-import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js';
-import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js';
-import { Figure, cycleMs } from './figure.js';
-import { store } from './store.js?v=20261008-together-1';
-import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261008-together-1';
-import { beltCard } from './belts.js?v=20261008-together-1';
-import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js';
-import { runGame } from './games/engine.js?v=20261008-voice-1';
-import * as cloud from './cloud.js';
-import { showLobby } from './games/lobby.js';
-import { initParent, parentGate, parentHome, parentTogether, lockParent, basketball } from './parent.js?v=20261008-together-1';
-import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261008-together-1';
-import { playIntro } from './intro.js';
-import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261008-voice-1';
-import { SAY } from './say.js';
-import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261008-minute-1';
+import { EXERCISES, CATS, byId } from './exercises.js?v=20261009-weekly-1';
+import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261009-weekly-1';
+import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js?v=20261009-weekly-1';
+import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js?v=20261009-weekly-1';
+import { Figure, cycleMs } from './figure.js?v=20261009-weekly-1';
+import { store } from './store.js?v=20261009-weekly-1';
+import { LEVELS, buildItems, summarize, stats, earned, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261009-weekly-1';
+import { beltCard } from './belts.js?v=20261009-weekly-1';
+import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js?v=20261009-weekly-1';
+import { runGame } from './games/engine.js?v=20261009-weekly-1';
+import * as cloud from './cloud.js?v=20261009-weekly-1';
+import { showLobby } from './games/lobby.js?v=20261009-weekly-1';
+import { initParent, parentGate, parentHome, parentTogether, parentWeek, lockParent, basketball } from './parent.js?v=20261009-weekly-1';
+import { normalizePlan } from './weekly.js?v=20261009-weekly-1';
+import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261009-weekly-1';
+import { playIntro } from './intro.js?v=20261009-weekly-1';
+import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261009-weekly-1';
+import { SAY } from './say.js?v=20261009-weekly-1';
+import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261009-weekly-1';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const go = h => { location.hash = h; };
-const plan = () => store.profile.plan || DEFAULT_PLAN;
+const plan = () => normalizePlan(store.profile.plan, programById, DEFAULT_PLAN);
 // משחקים פתוחים: null = הכול פתוח (הגדרה 'הכול פתוח'); אחרת רשימה שמתחילה בחמישה
 const unlockedList = () => { if (!store.profile.unlockEvery) return null; if (!store.unlocked) store.setUnlocked([...START_GAMES]); return store.unlocked; };
 const credits = () => unlockCredits(store.sessions.length, (unlockedList() || GAMES.map(g => g.id)).length, store.profile.unlockEvery);
@@ -52,7 +53,7 @@ function wireStage3d(box) {
     stop() { if (this._s) this._s.stop(); }, dispose() { if (this._s && this._s.dispose) this._s.dispose(); this._s = null; },
     _attach(s) { this._s = s; s.onRep = this._rep; if (this._last) { const [k, e, sp] = this._last; k === 'play' ? s.play(e, sp) : s.still(e); } } };
   const fallback = () => { if (!box.isConnected) return; box.outerHTML = figSvg(ex.id); const svg = app.querySelector(`svg[data-ex="${ex.id}"]`); if (svg) f._attach(new Figure(svg)); };
-  import('./stage3d.js').then(m => { if (!box.isConnected) return; new m.Stage3D(box, null, { onReady: s => f._attach(s), onFail: fallback }); }).catch(fallback);
+  import('./stage3d.js?v=20261009-weekly-1').then(m => { if (!box.isConnected) return; new m.Stage3D(box, null, { onReady: s => f._attach(s), onFail: fallback }); }).catch(fallback);
   f.play(ex, 1); figures.push(f); return f;
 }
 function wireStage() {
@@ -116,10 +117,10 @@ function confetti() {
 }
 
 // ---- ניתוב ----
-const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, minute: minuteScreen, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, 'parent-together': parentTogether, together, basketball };
+const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, minute: minuteScreen, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, 'parent-together': parentTogether, 'parent-week': parentWeek, together, basketball };
 function route() {
   const [path, arg] = location.hash.replace(/^#\/?/, '').split('/');
-  if (!['parent', 'parent-together', 'basketball'].includes(path)) lockParent();
+  if (!['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) lockParent();
   (routes[path] || home)(arg);
   renderNav(path);
 }
@@ -905,9 +906,9 @@ function settings() {
     </div>
     <div class="card stack">
       <h3>התוכנית השבועית</h3>
-      <p class="muted small">מה עושים בכל יום. ההמלצה: 3 אימוני ניתור, כוח רגליים, כוח עליון, בטן, ויום מנוחה.</p>
-      ${DAY_NAMES.map((d, i) => `<label class="field row between" style="grid-template-columns:none"><span style="min-width:64px">${d}</span><select data-day="${i}" class="grow"><option value="" ${!pl[i] ? 'selected' : ''}>😴 מנוחה</option>${PROGRAMS.map(pr => `<option value="${pr.id}" ${pl[i] === pr.id ? 'selected' : ''}>${pr.emoji} ${esc(pr.name)}</option>`).join('')}</select></label>`).join('')}
-      <button class="btn chip" id="resetplan">חזרה לתוכנית המומלצת</button>
+      <p class="muted small">אבא בוחר מה עושים בכל יום. אפשר גם לבחור יום מנוחה.</p>
+      <div class="list">${DAY_NAMES.map((day, i) => `<div class="item"><b>יום ${day}</b><span class="grow">${pl[i] ? esc(programById[pl[i]].name) : '😴 מנוחה'}</span></div>`).join('')}</div>
+      <button class="btn" data-go="#/parent-week">🔒 תכנון השבוע ודוח להורה</button>
     </div>
     <div class="card stack">
       <h3>חיבור לטלפון של אבא 📡</h3>
@@ -918,7 +919,7 @@ function settings() {
     </div>
     <div class="card stack">
       <h3>מצב הורים 🔒</h3>
-      <p class="muted small">לאבא בלבד, עם קוד סודי: מה הילד עשה ויומן הכדורסל.</p>
+      <p class="muted small">לאבא בלבד, עם קוד סודי: תכנון השבוע, דוח שבועי ויומן הכדורסל.</p>
       <button class="btn" data-go="#/parent">להיכנס למצב הורים</button>
     </div>
     <div class="card stack">
@@ -988,8 +989,6 @@ function settings() {
   $('#syncnow').onclick = async () => { $('#cloudstate').textContent = 'שולח...'; const ok = await cloud.flush(); $('#cloudstate').textContent = ok || !cloud.status.pending() ? 'הכול בענן ✓' : '⚠️ ' + (cloud.status.error || 'אין רשת'); };
   $('#gameSeconds').onchange = e => store.setProfile({ gameSeconds: +e.target.value }); $('#musicOn').onchange = e => store.setProfile({ music: e.target.checked });
   $('#unlockEvery').onchange = e => store.setProfile({ unlockEvery: +e.target.value });
-  app.querySelectorAll('[data-day]').forEach(s => s.onchange = () => { const np = { ...plan() }; np[s.dataset.day] = s.value; store.setProfile({ plan: np }); });
-  $('#resetplan').onclick = () => { store.setProfile({ plan: null }); settings(); };
   $('#export').onclick = () => {
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([store.export()], { type: 'application/json' }));
     a.download = `workouts-${new Date().toISOString().slice(0, 10)}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);

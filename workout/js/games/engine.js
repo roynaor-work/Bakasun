@@ -1,12 +1,12 @@
 // מנוע המשחקים הקטנים: קנבס בגודל לוגי קבוע, ניקוד, טיימר, מגע/מקלדת, מסכי פתיחה וסיום.
 // כל משחק הוא אובייקט { id, name, emoji, how, make(r) } כאשר make מחזיר { update(dt), draw(), tap(x,y), down, up, move, swipe(dir), key(code) }.
-import { poseAt } from '../figure.js';
-import { gameReward } from '../logic.js?v=20261008-together-1';
-import { celebrate as celebrate2d } from './celebrate.js?v=20261008-voice-1';
-import { celebrate3d } from './celebrate3d.js?v=20261008-voice-1';
+import { poseAt } from '../figure.js?v=20261009-weekly-1';
+import { gameReward } from '../logic.js?v=20261009-weekly-1';
+import { celebrate as celebrate2d } from './celebrate.js?v=20261009-weekly-1';
+import { celebrate3d } from './celebrate3d.js?v=20261009-weekly-1';
 // חגיגת שיא: בתלת-ממד (הדמות של Kenney, אצטדיון) כשיש WebGL, אחרת הגרסה הדו-ממדית
 const celebrateGoal = (cv, opts) => { try { return celebrate3d(cv, opts); } catch (e) { console.warn('3d celebrate failed', e); return celebrate2d(cv, opts); } };
-import { player as drawPlayer, crowd as drawCrowd, crowdGen } from './sprites.js';
+import { player as drawPlayer, crowd as drawCrowd, crowdGen } from './sprites.js?v=20261009-weekly-1';
 export const W = 360, H = 560;
 
 const PAL = { bg: '#1B1740', ink: '#F5F2FF', muted: '#9C96C4', accent: '#8B72FF', ok: '#22C55E', hot: '#FF7A3D', pink: '#FF4D8D', sky: '#38BDF8', gold: '#FFB84D', red: '#EF4444', teal: '#1FB6C9', lime: '#A3E635' };

@@ -25,8 +25,8 @@ h1{margin:0;font-size:22px}p{margin:0;color:var(--muted);font-size:14px;line-hei
   </div>
 </div>
 <script type="module">
-import { Stage3D } from '../js/stage3d.js';
-import { EXERCISES, byId } from '../js/exercises.js';
+import { Stage3D } from '../js/stage3d.js?v=20261009-weekly-1';
+import { EXERCISES, byId } from '../js/exercises.js?v=20261009-weekly-1';
 const sel = document.getElementById('sel'); EXERCISES.forEach(e => { const o = document.createElement('option'); o.value = e.id; o.textContent = e.name; sel.appendChild(o); });
 const q = new URLSearchParams(location.search); let cur = byId[q.get('ex')] ? q.get('ex') : 'jumping-jacks'; sel.value = cur; let speed = 1, ready = 0;
 const a = new Stage3D(document.getElementById('v3d'), byId[cur], { onReady: () => { ready++; window.__flat = { ready }; } });

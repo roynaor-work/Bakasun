@@ -1,6 +1,6 @@
 // פעילות משותפת באותו מכשיר. סופרים את התנועות של הילד בלבד;
 // ההורה בוחר את הפעילות, והכוכבים נשארים לפי המאמץ הרגיל של הילד.
-import { buildItems } from './logic.js?v=20261008-together-1';
+import { buildItems } from './logic.js?v=20261009-weekly-1';
 
 export function togetherChoice(choice, programs, catalog) {
   if (!choice || typeof choice !== 'object') return null;

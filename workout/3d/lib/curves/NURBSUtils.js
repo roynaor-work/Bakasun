@@ -1,7 +1,7 @@
 import {
 	Vector3,
 	Vector4
-} from '../three.module.min.js';
+} from '../three.module.min.js?v=20261009-weekly-1';
 
 /**
  * NURBS utils
