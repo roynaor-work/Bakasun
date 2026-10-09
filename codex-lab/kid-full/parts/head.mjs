@@ -78,6 +78,7 @@ export function targetModel(parameters={}){
   }
   const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(ps,3));if(m.vertexColors)g.setAttribute('color',new T.Float32BufferAttribute(colors,3));g.setIndex(ix);g.computeVertexNormals();const result=mesh(g,m);result.name=name;return result;
  }
+ if(!p.facialRig){
  for(const side of [-1,1]){
   const x=side*.323,y=-.215;
   patch(x,y-.004,.231,.248,.021,white,0,'eye-white',[x,y]);
@@ -93,6 +94,7 @@ export function targetModel(parameters={}){
  ellipse([.045,-.468*p.faceHeight,surfaceZ(.045,-.468)+.075],[.016,.009,.009],innerEar);
  // A quiet smile stays readable at full-body scale without expression meshes.
  line([[-.195,-.586],[-.095,-.625],[.055,-.631],[.197,-.586]].map(([x,y])=>[x,y*p.faceHeight,surfaceZ(x,y*p.faceHeight)+.016]),.012,innerEar);
+ }
  // Continuous scalp under every lock. The front has a high hairline while the
  // rear extends to the nape; no root or tip can reveal an empty scalp seam.
  const scalpPoint=(a,t,offset=0)=>new T.Vector3((.92*p.hairWidth+offset)*Math.sin(t)*Math.sin(a),.12+(1.05*p.crownHeight+offset)*Math.cos(t),-.10+(.88*p.hairDepth+offset)*Math.sin(t)*Math.cos(a));
@@ -117,30 +119,37 @@ export function targetModel(parameters={}){
   return r<1&&Math.acos(T.MathUtils.clamp(q.y/r,-1,1))<maxTheta(Math.atan2(q.x,q.z))-.10&&capPlanes.every(([x,y,z,d])=>x*v.x+y*v.y+z*v.z<d);
  };
  function lock(points,width,interior=false){
-  const path=new T.CatmullRomCurve3(points.map(v=>v.isVector3?v:new T.Vector3(...v)),false,'centripetal');const steps=p.detail==='mobile'&&interior?4:detail.lock[0],sides=detail.lock[1],ps=[],ns=[],ix=[],buried=[];
+  const path=new T.CatmullRomCurve3(points.map(v=>v.isVector3?v:new T.Vector3(...v)),false,'centripetal');const steps=detail.lock[0],sides=detail.lock[1],ps=[],ns=[],ix=[],buried=[];
   // A fuller elliptical section and gradual taper make rounded locks with a
   // small pointed end. Eight sides in mobile retain that round silhouette.
-  const lockRadius=t=>width*p.lockWidth*(.014+.986*Math.pow(Math.max(0,Math.sin(Math.PI*(.15+.85*t))),.66));
+  const lockRadius=t=>width*p.lockWidth*(interior
+   ? .035+.965*Math.pow(Math.max(0,Math.sin(Math.PI*(.23+.77*t))),.76)*(1-.20*t)
+   : .014+.986*Math.pow(Math.max(0,Math.sin(Math.PI*(.15+.85*t))),.66));
   for(let j=0;j<=steps;j++){const t=j/steps,point=path.getPoint(t),tangent=path.getTangent(t);
    let normal=new T.Vector3(point.x/(.92*p.hairWidth)**2,(point.y-.12)/(1.05*p.crownHeight)**2,(point.z+.10)/(.88*p.hairDepth)**2).normalize();
    const side=new T.Vector3().crossVectors(normal,tangent).normalize();normal=new T.Vector3().crossVectors(tangent,side).normalize();
    const w=lockRadius(t),lo=Math.max(0,t-.0001),hi=Math.min(1,t+.0001),distance=path.getPoint(hi).distanceTo(path.getPoint(lo));
    const taper=(lockRadius(hi)-lockRadius(lo))/Math.max(.000001,distance);
-   for(let k=0;k<sides;k++){const a=k/sides*Math.PI*2,depth=p.hair==='tubes'?.82:.56;const v=point.clone().addScaledVector(side,Math.cos(a)*w).addScaledVector(normal,Math.sin(a)*w*depth);ps.push(v.x,v.y,v.z);buried.push(buriedInCap(v));if(p.detail==='mobile'){const n=side.clone().multiplyScalar(Math.cos(a)).addScaledVector(normal,Math.sin(a)/depth).addScaledVector(tangent,-taper).normalize();ns.push(n.x,n.y,n.z);}}}
+   for(let k=0;k<sides;k++){const a=k/sides*Math.PI*2,depth=p.hair==='tubes'?.82:interior?.62:.56;const v=point.clone().addScaledVector(side,Math.cos(a)*w).addScaledVector(normal,Math.sin(a)*w*depth);ps.push(v.x,v.y,v.z);buried.push(buriedInCap(v));if(p.detail==='mobile'){const n=side.clone().multiplyScalar(Math.cos(a)).addScaledVector(normal,Math.sin(a)/depth).addScaledVector(tangent,-taper).normalize();
+    if(interior){const scalpNormal=new T.Vector3(v.x/(.92*p.hairWidth)**2,(v.y-.12)/(1.05*p.crownHeight)**2,(v.z+.10)/(.88*p.hairDepth)**2).normalize();n.lerp(scalpNormal,.48).normalize();}
+    ns.push(n.x,n.y,n.z);}}}
   const triangle=(a,b,c)=>{if(p.detail==='mobile'&&buried[a]&&buried[b]&&buried[c]){buriedTriangles++;return;}ix.push(a,b,c);};
   for(let j=0;j<steps;j++)for(let k=0;k<sides;k++){const a=j*sides+k,b=j*sides+(k+1)%sides;triangle(a,b,a+sides);triangle(b,b+sides,a+sides);}
   for(let k=1;k<sides-1;k++){triangle(0,k+1,k);triangle(steps*sides,steps*sides+k,steps*sides+k+1);}
   const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(ps,3));g.setIndex(ix);if(p.detail==='mobile')g.setAttribute('normal',new T.Float32BufferAttribute(ns,3));else g.computeVertexNormals();mesh(g,hairShades[lockNumber++%hairShades.length],root,hairEdge);
  }
- // Fewer overlapping rounded locks carry the same broad rear volume. Their
- // staggered paths converge toward the nape rather than form four rigid rows.
- for(let row=0;row<4;row++){
-  const theta=.35+row*.42,count=11+row*2;
-  for(let i=0;i<count;i++){if(p.detail==='mobile'&&row>0&&row<3&&i%2===1)continue;const a=.66+(Math.PI*2-1.32)*(i+.2*(row%2))/(count-1);const startTheta=theta+p.strandJitter*Math.sin(i*2.7+row)*.13;const end=Math.min(startTheta+.83+p.strandJitter*Math.cos(i*1.9)*.12,maxTheta(a)+.035);
-   if(theta>maxTheta(a)-.22)continue;
-   const swing=(a<Math.PI?1:-1)*(.30+row*.03),stagger=.045*Math.sin(i*1.8+row);
-   lock([scalpPoint(a,startTheta,-.105),scalpPoint(a+swing*.35,startTheta+.28,-.022),scalpPoint(a+swing,end-.19+stagger,-.018),scalpPoint(a+swing*1.15,end+stagger,.015)],.220+(row===0?.015:0),true);
-  }
+ // A low-discrepancy distribution replaces the four equal-height rows. Every
+ // side/rear path follows the same azimuthal sweep: no mirrored chevrons, and
+ // no periodic count/colour pattern. Long shallow locks overlap at their roots.
+ const rearLockCount=p.detail==='mobile'?28:44,fract=v=>v-Math.floor(v);
+ for(let i=0;i<rearLockCount;i++){
+  const u=(i+.5)/rearLockCount,a=.70+(Math.PI*2-1.40)*u;
+  const start=.28+1.40*fract(i*.61803398875+.11);
+  const sweep=.24+.12*fract(i*.41421356237+.27);
+  const end=Math.min(start+.91+.18*fract(i*.73205080757),maxTheta(a+sweep)-.035);
+  const width=.148+.038*fract(i*.75487766625+.34);
+  lock([scalpPoint(a,start,-.090),scalpPoint(a+sweep*.28,start+(end-start)*.28,-.022),
+   scalpPoint(a+sweep*.69,start+(end-start)*.68,-.014),scalpPoint(a+sweep,end,.010)],width,true);
  }
  // Seven asymmetric forehead locks: broad at the root, pointed along the cheek.
  const bangs=[
@@ -174,7 +183,7 @@ export function targetModel(parameters={}){
  // Batch every static head surface by material, baking local transforms. This
  // changes draw-call count but preserves triangles, smooth normals and shape.
  const groups=new Map(),sources=[];root.updateMatrixWorld(true);
- root.traverse(source=>{if(!source.isMesh)return;sources.push(source);const g=source.geometry,m=source.material;
+ root.traverse(source=>{if(!source.isMesh||(p.facialRig&&source===face))return;sources.push(source);const g=source.geometry,m=source.material;
   let batch=groups.get(m);if(!batch){batch={positions:[],normals:[],colors:[],indices:[]};groups.set(m,batch);}
   const offset=batch.positions.length/3,normMatrix=new T.Matrix3().getNormalMatrix(source.matrixWorld),v=new T.Vector3(),n=new T.Vector3();
   for(let i=0;i<g.attributes.position.count;i++){
@@ -186,6 +195,7 @@ export function targetModel(parameters={}){
   for(const index of indices)batch.indices.push(index+offset);
  });
  root.clear();
+ if(p.facialRig){root.add(face);face.name='face-skin';root.faceRig={face,faceGeometry,surfaceZ,skin,innerEar};}
  for(const [material,batch] of groups){const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(batch.positions,3));g.setAttribute('normal',new T.Float32BufferAttribute(batch.normals,3));if(material.vertexColors)g.setAttribute('color',new T.Float32BufferAttribute(batch.colors,3));g.setIndex(batch.indices);const part=mesh(g,material);part.name='head-'+material.color.getHexString();}
  for(const source of sources)source.geometry.dispose();
  root.name='kid-head-r9-'+p.detail;root.userData.source='kid-head/model.mjs:targetModel + expression-model.mjs:surface projection';
@@ -193,7 +203,7 @@ export function targetModel(parameters={}){
  root.userData.stats={triangles:root.children.reduce((sum,o)=>sum+(o.geometry?.index?.count||0)/3,0),locks:lockNumber,buriedTriangles};
  return {root,body};
 }
-export function buildHead({detail='mobile'}={}){
+export function buildHead({detail='mobile',facialRig=false}={}){
  if(!HEAD_DETAIL[detail])throw new Error('Unknown head detail '+detail);
- return targetModel({faceWidth:.99,faceHeight:1,jawDepth:1,hairWidth:1.07,hairDepth:1.10,crownHeight:.98,fringeSweep:1,lockWidth:1,spikeHeight:.90,napeLength:1,hair:'ribbons',hairFlow:'swept',detail}).root;
+ return targetModel({faceWidth:.99,faceHeight:1,jawDepth:1,hairWidth:1.07,hairDepth:1.10,crownHeight:.98,fringeSweep:1,lockWidth:1,spikeHeight:.90,napeLength:1,hair:'ribbons',hairFlow:'swept',detail,facialRig}).root;
 }

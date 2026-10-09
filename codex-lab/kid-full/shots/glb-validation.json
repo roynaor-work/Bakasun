@@ -1,9 +1,9 @@
 {
   "validatorVersion": "2.0.0-dev.3.10",
-  "sha256": "8ce159beac67612cb0f98f62b1df2625bd69a5daa40d81b04480e898c009cc62",
+  "sha256": "60cd99f6b702f1a0d118328ceec21533fde13dc8e3aa9f473036b8761cc24eb0",
   "uri": "kid-full.glb",
   "mimeType": "model/gltf-binary",
-  "validatedAt": "2026-10-09T05:34:59.289Z",
+  "validatedAt": "2026-10-09T20:52:07.803Z",
   "issues": {
     "numErrors": 0,
     "numWarnings": 0,
@@ -23,7 +23,7 @@
         "pointer": "/buffers/0",
         "mimeType": "application/gltf-buffer",
         "storage": "glb",
-        "byteLength": 594088
+        "byteLength": 816248
       },
       {
         "pointer": "/images/0",
@@ -40,16 +40,30 @@
       }
     ],
     "animationCount": 3,
-    "materialCount": 6,
-    "hasMorphTargets": false,
+    "materialCount": 7,
+    "hasMorphTargets": true,
     "hasSkins": true,
     "hasTextures": true,
     "hasDefaultScene": true,
-    "drawCallCount": 6,
-    "totalVertexCount": 9491,
-    "totalTriangleCount": 12366,
+    "drawCallCount": 7,
+    "totalVertexCount": 9573,
+    "totalTriangleCount": 12610,
     "maxUVs": 1,
     "maxInfluences": 4,
     "maxAttributes": 6
+  },
+  "expressionTargets": {
+    "required": [
+      "happy",
+      "effort",
+      "surprised",
+      "victory",
+      "tired",
+      "thinking"
+    ],
+    "meshNames": [
+      null
+    ],
+    "errors": []
   }
 }

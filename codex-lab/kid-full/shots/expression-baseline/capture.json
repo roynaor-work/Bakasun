@@ -1,0 +1,239 @@
+{
+  "recordedAt": "2026-10-09T15:49:25.641Z",
+  "path": "shots/expression-baseline/kid-full.glb",
+  "sha256": "8ce159beac67612cb0f98f62b1df2625bd69a5daa40d81b04480e898c009cc62",
+  "bytes": 677652,
+  "settings": {
+    "camera": {
+      "type": "OrthographicCamera",
+      "position": [
+        0,
+        1.33,
+        7
+      ],
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "left": -1.0166666666666666,
+      "right": 1.0166666666666666,
+      "top": 1.525,
+      "bottom": -1.525,
+      "near": 0.1,
+      "far": 30
+    },
+    "lights": [
+      {
+        "type": "HemisphereLight",
+        "position": [
+          0,
+          1,
+          0
+        ],
+        "colour": "fff5eb",
+        "intensity": 1,
+        "groundColour": "9da8be"
+      },
+      {
+        "type": "DirectionalLight",
+        "position": [
+          -3,
+          4.5,
+          5
+        ],
+        "colour": "fff2e1",
+        "intensity": 3.1
+      },
+      {
+        "type": "DirectionalLight",
+        "position": [
+          3,
+          2,
+          3
+        ],
+        "colour": "e3edff",
+        "intensity": 1.35
+      },
+      {
+        "type": "DirectionalLight",
+        "position": [
+          1,
+          3,
+          -4
+        ],
+        "colour": "fff5e5",
+        "intensity": 2
+      }
+    ],
+    "background": "eae7e2",
+    "outputColorSpace": "srgb",
+    "toneMapping": 4,
+    "exposure": 1,
+    "width": 480,
+    "height": 720,
+    "renderScale": 1
+  },
+  "metrics": {
+    "front": {
+      "modelTriangles": 12366,
+      "vertices": 9491,
+      "meshes": 6,
+      "buildMs": 443.80000000004657,
+      "detail": "mobile",
+      "bones": 31,
+      "renderCalls": 7,
+      "renderTriangles": 12368,
+      "headHeight": 1,
+      "viewport": {
+        "cssWidth": 480,
+        "cssHeight": 720,
+        "width": 480,
+        "height": 720,
+        "dpr": 1,
+        "renderScale": 1
+      },
+      "camera": {
+        "position": [
+          0,
+          1.33,
+          7
+        ],
+        "target": [
+          0,
+          1.33,
+          0
+        ],
+        "vertical": 3.05
+      },
+      "source": "GLB"
+    },
+    "side": {
+      "modelTriangles": 12366,
+      "vertices": 9491,
+      "meshes": 6,
+      "buildMs": 443.80000000004657,
+      "detail": "mobile",
+      "bones": 31,
+      "renderCalls": 7,
+      "renderTriangles": 12368,
+      "headHeight": 1,
+      "viewport": {
+        "cssWidth": 480,
+        "cssHeight": 720,
+        "width": 480,
+        "height": 720,
+        "dpr": 1,
+        "renderScale": 1
+      },
+      "camera": {
+        "position": [
+          0,
+          1.33,
+          7
+        ],
+        "target": [
+          0,
+          1.33,
+          0
+        ],
+        "vertical": 3.05
+      },
+      "source": "GLB"
+    },
+    "back": {
+      "modelTriangles": 12366,
+      "vertices": 9491,
+      "meshes": 6,
+      "buildMs": 443.80000000004657,
+      "detail": "mobile",
+      "bones": 31,
+      "renderCalls": 7,
+      "renderTriangles": 12368,
+      "headHeight": 1,
+      "viewport": {
+        "cssWidth": 480,
+        "cssHeight": 720,
+        "width": 480,
+        "height": 720,
+        "dpr": 1,
+        "renderScale": 1
+      },
+      "camera": {
+        "position": [
+          0,
+          1.33,
+          7
+        ],
+        "target": [
+          0,
+          1.33,
+          0
+        ],
+        "vertical": 3.05
+      },
+      "source": "GLB"
+    },
+    "threeQuarter": {
+      "modelTriangles": 12366,
+      "vertices": 9491,
+      "meshes": 6,
+      "buildMs": 443.80000000004657,
+      "detail": "mobile",
+      "bones": 31,
+      "renderCalls": 7,
+      "renderTriangles": 12368,
+      "headHeight": 1,
+      "viewport": {
+        "cssWidth": 480,
+        "cssHeight": 720,
+        "width": 480,
+        "height": 720,
+        "dpr": 1,
+        "renderScale": 1
+      },
+      "camera": {
+        "position": [
+          0,
+          1.33,
+          7
+        ],
+        "target": [
+          0,
+          1.33,
+          0
+        ],
+        "vertical": 3.05
+      },
+      "source": "GLB"
+    }
+  },
+  "crops": {
+    "front": [
+      101,
+      38,
+      278,
+      644
+    ],
+    "side": [
+      104,
+      38,
+      264,
+      644
+    ],
+    "back": [
+      101,
+      38,
+      278,
+      644
+    ],
+    "threeQuarter": [
+      104,
+      38,
+      264,
+      644
+    ]
+  },
+  "historicalBeforeUnchanged": true
+}

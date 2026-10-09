@@ -8,6 +8,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as T from './vendor/three.module.js';
 import { buildCharacter, applyPose, applyBlend, animationClips, countModel } from './rig.mjs';
+import { EXPRESSION_IDS } from './expressions.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const runFile = promisify(execFile);
@@ -43,7 +44,7 @@ function deformedBounds(model) {
   for (const mesh of surfaces) {
     const { position, skinIndex, skinWeight } = mesh.geometry.attributes;
     for (let i = 0; i < position.count; i++) {
-      p.fromBufferAttribute(position, i); if(mesh.isSkinnedMesh)mesh.applyBoneTransform(i,p);p.applyMatrix4(mesh.matrixWorld);
+      mesh.getVertexPosition(i,p);p.applyMatrix4(mesh.matrixWorld);
       check(Number.isFinite(p.x + p.y + p.z), `Nonfinite deformed vertex ${mesh.name}:${i}`);
       bounds.expandByPoint(p); vertices++;
       let headWeight = mesh.userData.rigidBone==='Head'?1:0;
@@ -127,7 +128,7 @@ function kickContact(model) {
       const ids = [0, 1, 2].map(s => index ? index.getX(i + s) : i + s);
       if (!ids.every(id => footWeight(id) > .99999)) continue;
       for (const [slot, point] of [triangle.a, triangle.b, triangle.c].entries()) {
-        point.fromBufferAttribute(position, ids[slot]); if(mesh.isSkinnedMesh)mesh.applyBoneTransform(ids[slot], point); point.applyMatrix4(mesh.matrixWorld);
+        mesh.getVertexPosition(ids[slot], point); point.applyMatrix4(mesh.matrixWorld);
       }
       if (triangle.getArea() <= 1e-20) continue;
       triangle.closestPointToPoint(center, closest);
@@ -143,6 +144,13 @@ function validateClips(model) {
   const clips = animationClips(model), result = [];
   check(clips.map(c => c.name).join(',') === 'stand,run,kick', 'Unexpected animation names');
   for (const clip of clips) {
+    const morphTracks = clip.tracks.filter(track => track.name.includes('.morphTargetInfluences['));
+    check(morphTracks.length === model.expressionMeshes.length * 6, `${clip.name}: expression weights missing from animation tracks`);
+    if (clip.name === 'run' || clip.name === 'kick') {
+      const expected = clip.name === 'run' ? 'effort' : 'victory';
+      const paired = morphTracks.filter(track => track.name.endsWith(`[${expected}]`));
+      check(paired.length === model.expressionMeshes.length && paired.every(track => Math.max(...track.values) >= .99), `${clip.name}: ${expected} does not reach its intended weight`);
+    }
     let maximumLoopDelta = 0;
     for (const track of clip.tracks) {
       check(track.validate(), `${clip.name}: invalid track ${track.name}`);
@@ -166,9 +174,81 @@ function validateClips(model) {
       check(bounds.minimumY >= -report.limits.groundPenetration, `${clip.name} clip at ${clip.duration * i / 120}s penetrates ground: ${bounds.minimumY}`);
     }
     mixer.stopAllAction(); mixer.uncacheRoot(model.root);
-    result.push({ name: clip.name, duration: clip.duration, tracks: clip.tracks.length, maximumLoopDelta, groundSamples: samples });
+    result.push({ name: clip.name, duration: clip.duration, tracks: clip.tracks.length, morphTracks: morphTracks.length, maximumLoopDelta, groundSamples: samples });
   }
   applyPose(model, 'stand'); return result;
+}
+function expressionPositions(model) {
+  model.root.updateMatrixWorld(true); model.skeleton.update();
+  const result = [], point = new T.Vector3();
+  for (const mesh of model.expressionMeshes) for (let i = 0; i < mesh.geometry.attributes.position.count; i++) {
+    mesh.getVertexPosition(i, point).applyMatrix4(mesh.matrixWorld);
+    check(Number.isFinite(point.x + point.y + point.z), `Nonfinite expression vertex ${mesh.name}:${i}`);
+    result.push(point.x, point.y, point.z);
+  }
+  return result;
+}
+const maximumDelta = (a, b) => { let maximum = 0; for (let i = 0; i < a.length; i++) maximum = Math.max(maximum, Math.abs(a[i] - b[i])); return maximum; };
+function validateExpressions(model) {
+  applyPose(model, 'stand');
+  const meshes = model.expressionMeshes;
+  check(meshes.length > 0, 'No facial morph meshes found');
+  const buffers = meshes.map(mesh => ({ mesh, geometry: mesh.geometry, position: mesh.geometry.attributes.position.array, morphPositions: mesh.geometry.morphAttributes.position.map(a => a.array), morphNormals: mesh.geometry.morphAttributes.normal.map(a => a.array) }));
+  for (const mesh of meshes) {
+    check(Object.keys(mesh.morphTargetDictionary).join(',') === EXPRESSION_IDS.join(','), `${mesh.name}: six named expression targets required`);
+    check(mesh.geometry.morphTargetsRelative === true, `${mesh.name}: expression targets must be relative`);
+    for (const attribute of ['position', 'normal']) {
+      check(mesh.geometry.morphAttributes[attribute]?.length === 6, `${mesh.name}: six ${attribute} morph targets required`);
+      for (const target of mesh.geometry.morphAttributes[attribute] || []) {
+        check(target.count === mesh.geometry.attributes.position.count, `${mesh.name}: morph target vertex count differs`);
+        check(target.array.every(Number.isFinite), `${mesh.name}: morph target contains nonfinite values`);
+      }
+    }
+  }
+  const neutral = expressionPositions(model), endpoints = {}, targets = [], transitions = [];
+  let neutralMinimumY = Infinity;
+  for (let i = 1; i < neutral.length; i += 3) neutralMinimumY = Math.min(neutralMinimumY, neutral[i]);
+  // Head normalization must use actual neutral vertices. A union of morph
+  // bounds can move the whole head upward while the height-in-heads test still
+  // passes because the neck itself carries Head weights.
+  const expectedNeutralMinimumY = 1.60 * .93 + model.byName.Hips.position.y - .88 * .93;
+  check(Math.abs(neutralMinimumY - expectedNeutralMinimumY) <= 3e-5, `Neutral facial skin no longer meets its neck anchor: ${neutralMinimumY} versus ${expectedNeutralMinimumY}`);
+  for (const id of EXPRESSION_IDS) {
+    model.setExpression(id); endpoints[id] = expressionPositions(model);
+    const delta = maximumDelta(neutral, endpoints[id]);
+    check(delta > 1e-4, `${id}: expression does not deform facial vertices`);
+    for (const mesh of meshes) for (const target of EXPRESSION_IDS) check(mesh.morphTargetInfluences[mesh.morphTargetDictionary[target]] === Number(target === id), `${id}: target weights are not one-hot`);
+    targets.push({ id, maximumCoordinateDeltaFromNeutral: delta, vertices: endpoints[id].length / 3 });
+  }
+  for (const from of EXPRESSION_IDS) for (const to of EXPRESSION_IDS) if (from !== to) {
+    check(maximumDelta(endpoints[from], endpoints[to]) > 1e-4, `${from}/${to}: expression vertices are indistinguishable`);
+    for (const t of [0, .25, .5, .75, 1]) {
+      model.setExpressionBlend(from, to, t); const forward = expressionPositions(model);
+      const expected = endpoints[from].map((value, i) => value + (endpoints[to][i] - value) * t);
+      const linearDelta = maximumDelta(forward, expected);
+      model.setExpressionBlend(to, from, 1 - t); const reverseDelta = maximumDelta(forward, expressionPositions(model));
+      check(linearDelta <= 2e-6 && reverseDelta <= 2e-6, `${from}→${to}/${t}: expression blend is discontinuous or order-dependent`);
+      for (const mesh of meshes) {
+        const weights = mesh.morphTargetInfluences;
+        check(weights.every(v => Number.isFinite(v) && v >= 0 && v <= 1) && Math.abs(weights.reduce((sum, v) => sum + v, 0) - 1) <= 1e-6, `${from}→${to}/${t}: invalid morph mixture`);
+      }
+      transitions.push({ from, to, t, maximumLinearDelta: linearDelta, maximumReverseDelta: reverseDelta });
+    }
+  }
+  model.setExpressionBlend('happy', 'surprised', -1); check(maximumDelta(endpoints.happy, expressionPositions(model)) <= 2e-6, 'Negative expression mix does not clamp');
+  model.setExpressionBlend('happy', 'surprised', 2); check(maximumDelta(endpoints.surprised, expressionPositions(model)) <= 2e-6, 'Expression mix above one does not clamp');
+  for (const row of buffers) {
+    check(row.mesh.geometry === row.geometry && row.mesh.geometry.attributes.position.array === row.position, `${row.mesh.name}: expression updates replace geometry or base buffer`);
+    check(row.mesh.geometry.morphAttributes.position.every((a, i) => a.array === row.morphPositions[i]) && row.mesh.geometry.morphAttributes.normal.every((a, i) => a.array === row.morphNormals[i]), `${row.mesh.name}: expression updates replace morph buffers`);
+  }
+  const pairs = [];
+  for (const [pose, expression] of [['run', 'effort'], ['kick', 'victory']]) {
+    applyPose(model, pose);
+    for (const mesh of meshes) check(mesh.morphTargetInfluences[mesh.morphTargetDictionary[expression]] === 1, `${pose}: ${expression} is not paired with the pose`);
+    pairs.push({ pose, expression, weights: [...meshes[0].morphTargetInfluences] });
+  }
+  applyPose(model, 'stand');
+  return { meshNames: meshes.map(m => m.name), targetNames: EXPRESSION_IDS, neutralNeckAnchor: { actualMinimumY: neutralMinimumY, expectedMinimumY: expectedNeutralMinimumY, tolerance: 3e-5 }, targets, directedPairs: 30, transitionSamples: transitions, allocatedBuffersPreserved: true, posePairs: pairs };
 }
 function dispose(model) {
   const geometries = new Set(), materials = new Set();
@@ -190,7 +270,7 @@ for (const relative of sourcePaths) {
   report.originals.push(row); check(row.unchangedFromHEAD, `Original source changed: ${repositoryPath}`);
 }
 report.implementation = {};
-for (const file of ['rig.mjs', 'scene.mjs', 'studio-bake.mjs', 'parts/body.mjs', 'parts/head.mjs', 'parts/hand.mjs', 'parts/shoe.mjs']) report.implementation[file] = sha256(await readFile(resolve(root, file)));
+for (const file of ['rig.mjs', 'scene.mjs', 'expressions.mjs', 'facial-morphs.mjs', 'studio-bake.mjs', 'parts/body.mjs', 'parts/head.mjs', 'parts/hand.mjs', 'parts/shoe.mjs']) report.implementation[file] = sha256(await readFile(resolve(root, file)));
 
 for (const detail of ['dense', 'balanced', 'mobile']) {
   const model = buildCharacter({ detail }), result = { ...countModel(model.root), skin: validateSkin(model), poses: {}, transitions: [] };
@@ -206,7 +286,7 @@ for (const detail of ['dense', 'balanced', 'mobile']) {
     result.transitions.push({ from, to, t, minimumY: bounds.minimumY });
     check(bounds.minimumY >= -report.limits.groundPenetration, `${detail}/${from}→${to}/${t} ground penetration: ${bounds.minimumY}`);
   }
-  result.contact = kickContact(model); result.animations = validateClips(model);
+  result.contact = kickContact(model); result.expressions = validateExpressions(model); result.animations = validateClips(model);
   report.qualities[detail] = result; dispose(model);
 }
 check(report.qualities.mobile.modelTriangles < report.qualities.balanced.modelTriangles && report.qualities.balanced.modelTriangles < report.qualities.dense.modelTriangles, 'Triangle budgets do not decrease dense → balanced → mobile');
@@ -240,6 +320,27 @@ if (glbBytes) {
   }
   check(exportedModelTriangles <= report.limits.mobileModelTriangles, `Delivered GLB has ${exportedModelTriangles} triangles, above the 20,000 limit`);
   check(exportedModelTriangles === report.qualities.mobile.modelTriangles, 'Delivered GLB triangle topology does not match current mobile source');
+  const exportedMorphMeshes = [];
+  const exportedMorphChanges = Object.fromEntries(EXPRESSION_IDS.map(id => [id, 0]));
+  for (const [meshIndex, mesh] of (json.meshes || []).entries()) if (mesh.primitives.some(p => p.targets?.length)) {
+    check(mesh.extras?.targetNames?.join(',') === EXPRESSION_IDS.join(','), `GLB ${mesh.name}: six named expression targets were not preserved`);
+    for (const primitive of mesh.primitives) {
+      check(primitive.targets?.length === 6, `GLB ${mesh.name}: morph target count differs`);
+      for (const [targetIndex, target] of (primitive.targets || []).entries()) {
+        for (const semantic of ['POSITION', 'NORMAL']) {
+          check(target[semantic] !== undefined, `GLB ${mesh.name}: target ${targetIndex} missing ${semantic}`);
+          if (target[semantic] === undefined) continue;
+          const data = accessor(target[semantic]);
+          check(data.length === json.accessors[primitive.attributes.POSITION].count, `GLB ${mesh.name}: morph attribute count differs`);
+          check(data.flat().every(Number.isFinite), `GLB ${mesh.name}: morph attribute is nonfinite`);
+          if (semantic === 'POSITION') for (const value of data.flat()) exportedMorphChanges[EXPRESSION_IDS[targetIndex]] = Math.max(exportedMorphChanges[EXPRESSION_IDS[targetIndex]], Math.abs(value));
+        }
+      }
+    }
+    exportedMorphMeshes.push({ meshIndex, name: mesh.name, targetNames: mesh.extras?.targetNames });
+  }
+  check(exportedMorphMeshes.length > 0, 'GLB has no expression morph meshes');
+  for (const [id, delta] of Object.entries(exportedMorphChanges)) check(delta > 1e-4, `GLB ${id}: target does not contain facial deformation`);
   let exportedMaximumVertexColor = 0;
   for (const mesh of json.meshes || []) for (const primitive of mesh.primitives) if (primitive.attributes.COLOR_0 !== undefined) {
     for (const value of accessor(primitive.attributes.COLOR_0).flat()) {
@@ -266,18 +367,35 @@ if (glbBytes) {
   const animationResults = [];
   for (const animation of json.animations || []) {
     let maximumLoopDelta = 0;
+    const weightChannels = [];
     for (const channel of animation.channels) {
       const sampler = animation.samplers[channel.sampler], input = accessor(sampler.input).flat(), output = accessor(sampler.output);
       check(input.every((time, i) => Number.isFinite(time) && (i === 0 || time > input[i - 1])), `GLB ${animation.name}: invalid keyframe times`);
       check(output.flat().every(Number.isFinite), `GLB ${animation.name}: nonfinite keyframe output`);
-      const a = output[0], b = output.at(-1), delta = channel.target.path === 'rotation' ? Math.min(Math.hypot(...a.map((v, i) => v - b[i])), Math.hypot(...a.map((v, i) => v + b[i]))) : Math.max(...a.map((v, i) => Math.abs(v - b[i])));
+      let a = output[0], b = output.at(-1);
+      if (channel.target.path === 'weights') {
+        const targetMesh = json.meshes[json.nodes[channel.target.node]?.mesh];
+        const targetNames = targetMesh?.extras?.targetNames || [];
+        check(targetNames.join(',') === EXPRESSION_IDS.join(','), `GLB ${animation.name}: weight channel names differ`);
+        const values = output.flat(), count = targetNames.length;
+        check(values.length === input.length * count, `GLB ${animation.name}: weight channel output length differs`);
+        a = values.slice(0, count); b = values.slice(-count);
+        const expected = animation.name === 'run' ? 'effort' : animation.name === 'kick' ? 'victory' : null;
+        const peak = expected ? Math.max(...Array.from({ length: input.length }, (_, i) => values[i * count + targetNames.indexOf(expected)])) : 0;
+        check(values.every(v => v >= 0 && v <= 1), `GLB ${animation.name}: weight track outside [0,1]`);
+        if (expected) check(peak >= .99, `GLB ${animation.name}: ${expected} animation weight is missing`);
+        else check(values.every(v => v === 0), 'GLB stand clip should retain the quiet neutral expression');
+        weightChannels.push({ node: json.nodes[channel.target.node]?.name, targetNames, pairedExpression: expected, peak });
+      }
+      const delta = channel.target.path === 'rotation' ? Math.min(Math.hypot(...a.map((v, i) => v - b[i])), Math.hypot(...a.map((v, i) => v + b[i]))) : Math.max(...a.map((v, i) => Math.abs(v - b[i])));
       maximumLoopDelta = Math.max(maximumLoopDelta, delta);
     }
     check(maximumLoopDelta <= report.limits.clipLoopDelta, `GLB ${animation.name}: loop endpoints differ`);
-    animationResults.push({ name: animation.name, channels: animation.channels.length, maximumLoopDelta });
+    check(weightChannels.length === exportedMorphMeshes.length, `GLB ${animation.name}: expression animation channels missing for a morph mesh`);
+    animationResults.push({ name: animation.name, channels: animation.channels.length, weightChannels, maximumLoopDelta });
   }
   check(animationResults.map(a => a.name).join(',') === 'stand,run,kick', 'GLB must contain stand, run and kick clips');
-  report.glb = { bytes: glbBytes.length, sha256: sha256(glbBytes), modelTriangles: exportedModelTriangles, skins: json.skins.length, exportedSkinVertices, exportedMaximumWeightSumError, exportedMaximumVertexColor, animations: animationResults };
+  report.glb = { bytes: glbBytes.length, sha256: sha256(glbBytes), modelTriangles: exportedModelTriangles, skins: json.skins.length, exportedSkinVertices, exportedMaximumWeightSumError, exportedMaximumVertexColor, morphMeshes: exportedMorphMeshes, morphMaximumDeformations: exportedMorphChanges, animations: animationResults };
 } else { report.glb = { skipped: 'kid-full.glb has not been captured yet' }; }
 
 const metricBytes = await exists(resolve(root, 'shots/metrics.json'));
@@ -288,6 +406,13 @@ if (metricBytes) {
   for (const [file, hash] of Object.entries(report.implementation)) check(metrics.implementation?.[file] === hash, `Capture implementation hash is stale: ${file}`);
   if (metrics.glb?.maximumAbove8PixelsPercent !== undefined) check(metrics.glb.maximumAbove8PixelsPercent <= .1, 'GLB roundtrip exceeded pixel tolerance');
   for (const [pose, sample] of Object.entries(metrics.glb?.vertexChecks || {})) check(sample.maximumPositionDelta <= 1e-5, `${pose}: GLB sampled vertex mismatch ${sample.maximumPositionDelta}`);
+  check(Object.keys(metrics.glb?.expressions || {}).join(',') === EXPRESSION_IDS.join(','), 'GLB roundtrip evidence is missing one or more expressions');
+  for (const [expression, result] of Object.entries(metrics.glb?.expressions || {})) {
+    check(Object.keys(result.views || {}).length === 4, `${expression}: four expression views required`);
+    for (const [view, sample] of Object.entries(result.vertexChecks || {})) check(sample.maximumPositionDelta <= 1e-5, `${expression}/${view}: morphed GLB vertex mismatch`);
+    for (const [view, sample] of Object.entries(result.morphChecks || {})) check(sample.sourceMeshes > 0 && sample.sourceMeshes === sample.loadedMeshes && sample.missingMeshes.length === 0 && sample.dictionaryDifferences.length === 0 && sample.maximumWeightDelta <= 1e-6, `${expression}/${view}: GLB named morph weights changed`);
+  }
+  check(metrics.expressionComparison?.fullOriginalTargetSheet === true && metrics.expressionComparison.targetCellMapping === 'none', 'Expression comparison must show the original sheet without inventing a mapping to the requested expressions');
   for (const quality of Object.keys(metrics.phone?.quality || {})) {
     const captured = metrics.phone.quality[quality];
     if (report.qualities[quality]) check(captured.modelTriangles === report.qualities[quality].modelTriangles, `${quality}: benchmark triangle count is stale`);
@@ -302,6 +427,7 @@ if (metricBytes) {
       check(Number.isFinite(trial.fps) && trial.fps >= report.limits.minimumMobileFPS, `Mobile trial ${trial.trial}: ${trial.fps} FPS, require at least 40`);
       check(Number.isFinite(trial.frameMs?.p95) && trial.frameMs.p95 <= report.limits.maximumP95FrameMs, `Mobile trial ${trial.trial}: p95 frame time exceeds 50ms`);
       check(trial.modelTriangles <= report.limits.mobileModelTriangles, `Mobile trial ${trial.trial}: triangle budget exceeded`);
+      check(trial.rendererSize?.width === 234 && trial.rendererSize?.height === 506, 'Mobile phone render buffer differs from the preserved 234×506 preset');
     }
     const fps = (mobile.trials || []).map(trial => trial.fps);
     check(fps.length > 0 && Math.max(...fps) / Math.min(...fps) <= report.limits.maximumTrialFPSRatio, 'Mobile trial FPS ratio exceeds 1.15');
@@ -372,6 +498,14 @@ if (process.argv.includes('--browser')) {
       check(await page.locator(`[data-pose="${pose}"]`).getAttribute('aria-pressed') === 'true', `Pose control ${pose} did not activate`);
       controls.push(`pose:${pose}`);
     }
+    for (const id of EXPRESSION_IDS) {
+      await page.locator(`[data-expression="${id}"]`).click();
+      check(await page.locator(`[data-expression="${id}"]`).getAttribute('aria-pressed') === 'true', `Expression control ${id} did not activate`);
+      controls.push(`expression:${id}`);
+    }
+    await page.locator('#expression-blend').focus(); await page.keyboard.press('End');
+    check(await page.locator('#expression-blend').inputValue() === '100', 'Expression blend keyboard End did not reach endpoint');
+    controls.push('expression-blend-keyboard');
     for (const view of ['front', 'side', 'back', 'threeQuarter']) {
       await page.locator(`[data-view="${view}"]`).click();
       check(await page.locator(`[data-view="${view}"]`).getAttribute('aria-pressed') === 'true', `View control ${view} did not activate`);
@@ -397,7 +531,7 @@ if (process.argv.includes('--browser')) {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     const startContinuity = await page.evaluate(() => {
       const lab = window.lab;
-      const state = () => [...lab.model.bones.flatMap(b => [...b.quaternion.toArray(), ...b.position.toArray()]), ...lab.model.ball.scale.toArray(), ...lab.model.ball.position.toArray()];
+      const state = () => [...lab.model.bones.flatMap(b => [...b.quaternion.toArray(), ...b.position.toArray()]), ...lab.model.ball.scale.toArray(), ...lab.model.ball.position.toArray(), ...lab.model.expressionMeshes.flatMap(mesh => [...mesh.morphTargetInfluences])];
       lab.setBlend('stand', 'run', .43);
       const before = state(); lab.setPose('kick', false); const after = state();
       return Math.max(...before.map((v, i) => Math.abs(v - after[i])));
@@ -405,7 +539,7 @@ if (process.argv.includes('--browser')) {
     await page.waitForTimeout(180);
     const interruptContinuity = await page.evaluate(() => {
       const lab = window.lab;
-      const state = () => [...lab.model.bones.flatMap(b => [...b.quaternion.toArray(), ...b.position.toArray()]), ...lab.model.ball.scale.toArray(), ...lab.model.ball.position.toArray()];
+      const state = () => [...lab.model.bones.flatMap(b => [...b.quaternion.toArray(), ...b.position.toArray()]), ...lab.model.ball.scale.toArray(), ...lab.model.ball.position.toArray(), ...lab.model.expressionMeshes.flatMap(mesh => [...mesh.morphTargetInfluences])];
       const before = state(); lab.setPose('stand', false); const after = state();
       return Math.max(...before.map((v, i) => Math.abs(v - after[i])));
     });
@@ -418,6 +552,28 @@ if (process.argv.includes('--browser')) {
     check(Math.max(startContinuity, interruptContinuity) <= 1e-8, 'Interrupted pose transition jumps at its start');
     check(transitionEndDelta <= 1e-8, 'Pose transition does not reach its target');
     controls.push('manual-blend-transition', 'interrupted-transition', 'transition-endpoint');
+    const expressionStartContinuity = await page.evaluate(() => {
+      const lab = window.lab;
+      const state = () => lab.model.expressionMeshes.flatMap(mesh => [...mesh.morphTargetInfluences]);
+      lab.sampleClip('run', .3);
+      const before = state(); lab.setExpression('happy', false); const after = state();
+      return Math.max(...before.map((v, i) => Math.abs(v - after[i])));
+    });
+    await page.waitForTimeout(180);
+    const expressionInterruptContinuity = await page.evaluate(() => {
+      const lab = window.lab, before = lab.model.expressionMeshes.flatMap(mesh => [...mesh.morphTargetInfluences]);
+      lab.setExpression('victory', false);
+      return Math.max(...before.map((v, i) => Math.abs(v - lab.model.expressionMeshes[Math.floor(i / 6)].morphTargetInfluences[i % 6])));
+    });
+    await page.waitForTimeout(850);
+    const expressionEndpointDelta = await page.evaluate(() => {
+      const lab = window.lab, before = lab.model.expressionMeshes.flatMap(mesh => [...mesh.morphTargetInfluences]);
+      lab.setExpression('victory', true);
+      return Math.max(...before.map((v, i) => Math.abs(v - lab.model.expressionMeshes[Math.floor(i / 6)].morphTargetInfluences[i % 6])));
+    });
+    check(Math.max(expressionStartContinuity, expressionInterruptContinuity) <= 1e-8, 'Expression transition after animation or interruption jumps at its start');
+    check(expressionEndpointDelta <= 1e-8, 'Expression transition does not reach its target');
+    controls.push('expression-transition-after-clip', 'expression-interrupted-transition', 'expression-transition-endpoint');
     const clipChecks = await page.evaluate(async () => {
       const T = await import('./vendor/three.module.js');
       const { GLTFLoader } = await import('./vendor/GLTFLoader.js');
@@ -432,8 +588,7 @@ if (process.argv.includes('--browser')) {
           if (mesh.isSkinnedMesh) mesh.skeleton.update();
           const a = mesh.geometry.attributes.position;
           for (let i = 0; i < a.count; i++) {
-            p.fromBufferAttribute(a, i);
-            if (mesh.isSkinnedMesh) mesh.applyBoneTransform(i, p);
+            mesh.getVertexPosition(i, p);
             p.applyMatrix4(mesh.matrixWorld).applyMatrix4(inverseRoot);
             // Both roots are sampled in model coordinates. Source's holder
             // supplies the UI view rotation; GLB is intentionally unattached.
@@ -464,7 +619,19 @@ if (process.argv.includes('--browser')) {
     for (const sample of clipChecks) check(sample.maximumPositionDelta <= 1e-5, `Browser GLB clip ${sample.clip} at ${sample.time}s differs by ${sample.maximumPositionDelta}`);
     check(browserErrors.length === 0, `Browser errors: ${browserErrors.join('; ')}`);
     check(externalRequests.length === 0, 'Browser verification requested external runtime assets');
-    report.browser = { version: browser.version(), viewport: { width: 390, height: 844 }, controls, dimensions, transitionChecks: { startContinuity, interruptContinuity, transitionEndDelta }, clipChecks, errors: browserErrors, externalRequests };
+    const gallery = await context.newPage();
+    gallery.on('pageerror', e => browserErrors.push(e.message));
+    gallery.on('console', m => { if (m.type() === 'error') browserErrors.push(m.text()); });
+    gallery.on('request', r => { if (/^https?:/.test(r.url()) && new URL(r.url()).origin !== new URL(service.url).origin) externalRequests.push(r.url()); });
+    gallery.on('response', r => { if (r.status() >= 400) browserErrors.push(`HTTP ${r.status()} ${r.url()}`); });
+    await gallery.goto(`${service.url}/expressions.html?quality=mobile`, { waitUntil: 'networkidle' });
+    await gallery.evaluate(() => window.labReady);
+    const galleryDimensions = await gallery.evaluate(() => ({ scrollWidth: document.documentElement.scrollWidth, viewport: innerWidth, canvases: document.querySelectorAll('canvas').length, images: [...document.querySelectorAll('table img')].map(img => ({ src: img.getAttribute('src'), loaded: img.complete && img.naturalWidth > 0 })) }));
+    check(galleryDimensions.scrollWidth <= galleryDimensions.viewport && galleryDimensions.canvases === 1, 'Expression gallery overflows phone or has multiple live canvases');
+    check(galleryDimensions.images.length === 6 && galleryDimensions.images.every(img => img.loaded), 'Expression gallery must load six preview images');
+    check(browserErrors.length === 0 && externalRequests.length === 0, 'Expression gallery browser errors or external requests');
+    await gallery.close();
+    report.browser = { version: browser.version(), viewport: { width: 390, height: 844 }, controls, dimensions, galleryDimensions, transitionChecks: { startContinuity, interruptContinuity, transitionEndDelta, expressionStartContinuity, expressionInterruptContinuity, expressionEndpointDelta }, clipChecks, errors: browserErrors, externalRequests };
     await context.close();
   } catch (error) {
     failures.push(`Browser verification: ${error.message}`);
