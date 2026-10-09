@@ -5,6 +5,8 @@ import { buildHead } from './parts/head.mjs';
 import { createHand, createHandSkinFields } from './parts/hand.mjs';
 import { createShoe } from './parts/shoe.mjs';
 import { bakeStudio } from './studio-bake.mjs';
+import { installFacialMorphs,transformMorphGeometry,nameExpressionTargets } from './facial-morphs.mjs';
+import { attachExpressionController,EXPRESSION_IDS,POSE_EXPRESSIONS } from './expressions.mjs';
 
 const smooth=(a,b,x)=>T.MathUtils.smoothstep(x,a,b);
 export const DETAILS=['dense','balanced','mobile'];
@@ -81,7 +83,7 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
   const objects=[];part.traverse(m=>{if(m.isMesh)objects.push(m);});
   for(const mesh of objects){
    if(mesh.name==='torso')continue; // hidden under the closed shirt
-   const original=mesh.geometry.clone().applyMatrix4(mesh.matrixWorld),pos=original.attributes.position;
+   const original=transformMorphGeometry(mesh.geometry.clone(),mesh.matrixWorld),pos=original.attributes.position;
    if(category==='shoe'){
     const bone=rig.byName['Foot_'+(mesh.name.includes('left')?'L':'R')],local=[];
     for(let direction=0;direction<32;direction++){
@@ -120,6 +122,11 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
    for(const slice of slices){
     const g=original.clone();if(original.index)g.setIndex(Array.from(original.index.array.slice(slice.start,slice.start+slice.count)));g.clearGroups();
     const sourceMat=mats[slice.materialIndex];
+    // Skin's cheek tint enables vertexColors on its shared material. Nose
+    // geometry has no tint, so give it identity colors before PBR batching.
+    if(sourceMat.vertexColors&&!g.attributes.color){
+     const colors=new Float32Array(pos.count*3);colors.fill(1);g.setAttribute('color',new T.Float32BufferAttribute(colors,3));
+    }
     const mat=experiment==='pbr'?sourceMat:bakeStudio(g,sourceMat);
     if(experiment!=='pbr'){
      const normals=g.attributes.normal;
@@ -129,9 +136,8 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
      }
     }
     if(experiment!=='pbr')mat.side=experiment==='doubleSide'?T.DoubleSide:T.FrontSide;
-    // The head never deforms within its own surface. A direct bone attachment
-    // gives the identical rigid pose without four skin-matrix fetches per
-    // vertex in the phone shader. The neck still blends into that head bone.
+    // Head parts follow the Head bone directly. Facial deformation is six
+    // standard morph targets; static hair remains a separate cheap shader.
     if(category==='head'&&detail==='mobile'&&experiment!=='pbr'){
      g.deleteAttribute('skinIndex');g.deleteAttribute('skinWeight');rigidHead.push({geometry:g,material:mat});continue;
     }
@@ -143,14 +149,14 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
      if(!rigidShoes.has(bone))rigidShoes.set(bone,[]);
      rigidShoes.get(bone).push({geometry:g,material:mat});continue;
     }
-    const key=JSON.stringify([mat.color.getHex(),mat.roughness,mat.metalness,mat.map?.uuid,mat.side,mat.transparent,mat.alphaTest]);
+    const key=JSON.stringify([mat.color.getHex(),mat.roughness,mat.metalness,mat.map?.uuid,mat.side,mat.transparent,mat.alphaTest,Boolean(g.morphAttributes.position?.length)]);
     if(!groups.has(key))groups.set(key,{material:mat,geometries:[],parts:[]});
     groups.get(key).geometries.push(g);groups.get(key).parts.push(mesh.name);
    } original.dispose();
   }
  }
  const body=buildKidBody({detail});body.group.scale.y=BODY_Y_SCALE;sourceParts.body=body.stats.triangles;collect(body.group,'body');
- const head=buildHead({detail});const headBox=new T.Box3().setFromObject(head),height=headBox.max.y-headBox.min.y;
+ const head=installFacialMorphs(buildHead({detail,facialRig:true}),{detail});const headBox=new T.Box3().setFromObject(head,true),height=headBox.max.y-headBox.min.y;
  const headScale=1/height;head.scale.setScalar(headScale);
  head.position.set(0,1.60*BODY_Y_SCALE-headBox.min.y*headScale,.025);sourceParts.head=head.userData.stats?.triangles;collect(head,'head');
  for(const [label,s] of [['left',-1],['right',1]]){
@@ -210,16 +216,17 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
  // Digit rest pivots changed after the original skeleton construction.
  root.updateMatrixWorld(true);rig.skeleton.calculateInverses();
  for(const batch of groups.values()){
-  const geometry=mergeGeometries(batch.geometries,false);batch.geometries.forEach(g=>g.dispose());
+  const geometry=nameExpressionTargets(mergeGeometries(batch.geometries,false));batch.geometries.forEach(g=>g.dispose());
   if(!batch.material.map)geometry.deleteAttribute('uv');
   const mesh=new T.SkinnedMesh(geometry,batch.material);mesh.name='Skin_'+root.children.length;
   mesh.userData.parts=[...new Set(batch.parts)];mesh.frustumCulled=false;root.add(mesh);mesh.bind(rig.skeleton);
  }
- if(rigidHead.length){
-  const geometry=mergeGeometries(rigidHead.map(s=>s.geometry),false);rigidHead.forEach(s=>s.geometry.dispose());
+ if(rigidHead.length)for(const morph of [false,true]){
+  const surfaces=rigidHead.filter(s=>Boolean(s.geometry.morphAttributes.position?.length)===morph);if(!surfaces.length)continue;
+  const geometry=nameExpressionTargets(mergeGeometries(surfaces.map(s=>s.geometry),false));surfaces.forEach(s=>s.geometry.dispose());
   geometry.deleteAttribute('uv');
-  geometry.applyMatrix4(rig.byName.Head.matrixWorld.clone().invert());
-  const mesh=new T.Mesh(geometry,rigidHead[0].material);mesh.name='HeadSurface';mesh.userData.rigidBone='Head';mesh.frustumCulled=false;
+  transformMorphGeometry(geometry,rig.byName.Head.matrixWorld.clone().invert());
+  const mesh=new T.Mesh(geometry,surfaces[0].material);mesh.name=morph?'FaceSurface':'HeadSurface';mesh.userData.rigidBone='Head';mesh.frustumCulled=false;
   rig.byName.Head.add(mesh);
  }
  for(const [bone,surfaces] of rigidShoes){
@@ -248,8 +255,9 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
   merged.deleteAttribute('uv');
   ball.geometry=merged;ball.material.side=T.DoubleSide;
  }
- root.userData={detail,experiment,headHeight:1,sourceParts,headScale,bodyYScale:BODY_Y_SCALE,groundProbes,buildMs:performance.now()-start};
+ root.userData={detail,experiment,headHeight:1,sourceParts,headScale,bodyYScale:BODY_Y_SCALE,groundProbes,expressionIds:[...EXPRESSION_IDS],poseExpressions:{...POSE_EXPRESSIONS},buildMs:performance.now()-start};
  const model={root,...rig,ball,detail,applyPose(id){applyPose(model,id);},blend(from,to,t){applyBlend(model,from,to,t);}};
+ attachExpressionController(model);
  applyPose(model,'stand');return model;
 }
 
@@ -267,6 +275,7 @@ export function applyBlend(model,from,to,t){
  }
  model.byName.Hips.position.y=.88*BODY_Y_SCALE;
  const ballScale=T.MathUtils.lerp(from==='kick'?1:0,to==='kick'?1:0,blend);model.ball.scale.setScalar(ballScale);
+ model.setExpressionBlend?.(POSE_EXPRESSIONS[from]||'neutral',POSE_EXPRESSIONS[to]||'neutral',blend);
  groundModel(model);
 }
 export function groundModel(model){
@@ -299,10 +308,11 @@ export function animationClips(model){
     }
     applyBlend(model,'run','runOpposite',.5-.5*Math.cos(times[i]*Math.PI*2));
    }
-   samples.push({q:Object.fromEntries(model.bones.map(b=>[b.name,b.quaternion.toArray()])),hip:model.byName.Hips.position.toArray(),ball:model.ball.scale.toArray(),ballPosition:model.ball.position.toArray()});
+   samples.push({q:Object.fromEntries(model.bones.map(b=>[b.name,b.quaternion.toArray()])),hip:model.byName.Hips.position.toArray(),ball:model.ball.scale.toArray(),ballPosition:model.ball.position.toArray(),expressions:{...model.expressionWeights}});
   }
   const tracks=model.bones.map(b=>new T.QuaternionKeyframeTrack(b.name+'.quaternion',times,samples.flatMap(s=>s.q[b.name])));
   tracks.push(new T.VectorKeyframeTrack('Hips.position',times,samples.flatMap(s=>s.hip)),new T.VectorKeyframeTrack('Ball.scale',times,samples.flatMap(s=>s.ball)),new T.VectorKeyframeTrack('Ball.position',times,samples.flatMap(s=>s.ballPosition)));
+  for(const mesh of model.expressionMeshes)for(const expression of EXPRESSION_IDS)tracks.push(new T.NumberKeyframeTrack(mesh.name+'.morphTargetInfluences['+expression+']',times,samples.map(s=>s.expressions[expression])));
   clips.push(new T.AnimationClip(id,times.at(-1),tracks));
  }
  applyPose(model,'stand');return clips;
@@ -310,7 +320,7 @@ export function animationClips(model){
 
 export function numericalSnapshot(model){
  model.root.updateMatrixWorld(true);model.skeleton.update();const result=[];
- model.root.traverse(m=>{if(!m.isSkinnedMesh)return;const p=new T.Vector3(),a=m.geometry.attributes.position;
-  for(let i=0;i<a.count;i++){p.fromBufferAttribute(a,i);m.applyBoneTransform(i,p);result.push(p.x,p.y,p.z);}
+ model.root.traverse(m=>{if(!m.isSkinnedMesh&&!m.userData.rigidBone)return;const p=new T.Vector3(),a=m.geometry.attributes.position;
+  for(let i=0;i<a.count;i++){m.getVertexPosition(i,p);p.applyMatrix4(m.matrixWorld);result.push(p.x,p.y,p.z);}
  });return result;
 }

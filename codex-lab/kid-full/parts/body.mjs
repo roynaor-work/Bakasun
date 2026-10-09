@@ -76,7 +76,9 @@ function shirtFold(x, y, theta, enabled) {
 
 function jerseyRadii(y) {
   let rx = profile(shirtRows, y, 'rx'), rz = profile(shirtRows, y, 'rz');
-  const topBlend = smooth(1.36, 1.58, y);
+  // Keep a broad shoulder bridge until the sleeves are inside the torso.
+  // The previous early taper exposed two sleeve roofs as separate shells.
+  const topBlend = smooth(1.44, 1.58, y);
   rx = THREE.MathUtils.lerp(rx, .132, topBlend);
   rz = THREE.MathUtils.lerp(rz, .112, topBlend);
   // Narrow the hem and torso, while keeping the opening clear of the neck.
@@ -471,6 +473,23 @@ export function buildKidBody({ palette = 'blue', stage = 'final', detail = 'bala
         n.setXYZ(a,v.x,v.y,v.z);n.setXYZ(b,v.x,v.y,v.z);
       }
     }
+    // Both shells sample one broad cloth-normal field around the armhole.
+    // Independent normals previously baked opposite dark/light strips into
+    // the overlap, although both surfaces used the same blue fabric material.
+    if (mesh.name === 'jersey' || /^sleeve-(left|right)$/.test(mesh.name)) {
+      const n = mesh.geometry.attributes.normal;
+      for (let i = 0; i < positions.count; i++) {
+        const x = positions.getX(i), y = positions.getY(i), z = positions.getZ(i), ax = Math.abs(x);
+        const blend = smooth(.16,.225,ax) * (1-smooth(.325,.405,ax))
+          * smooth(1.20,1.265,y) * (1-smooth(1.455,1.54,y));
+        if (!blend || Math.abs(z) < .025) continue;
+        const across = smooth(.245,.435,ax), up = .48*smooth(1.345,1.535,y);
+        const shared = new THREE.Vector3(Math.sign(x)*across,up,
+          Math.sign(z)*Math.sqrt(Math.max(.01,1-across*across))).normalize();
+        const normal = new THREE.Vector3(n.getX(i),n.getY(i),n.getZ(i)).lerp(shared,blend).normalize();
+        n.setXYZ(i,normal.x,normal.y,normal.z);
+      }
+    }
     stats.meshes++;
     stats.vertices += mesh.geometry.attributes.position.count;
     stats.triangles += mesh.geometry.index ? mesh.geometry.index.count / 3 : mesh.geometry.attributes.position.count / 3;
@@ -486,6 +505,7 @@ export function buildKidBody({ palette = 'blue', stage = 'final', detail = 'bala
     limbRadialSegments: tessellation.limbRadial, shortsRadialSegments: tessellation.shortsRadial,
     clothClearance: { radial: .031, depth: .022 },
     shirtWidthScale: .90, shirtWidthScaleNeckFade: [1.49,1.58], limbWidthScale: .95,
+    shoulderBridge: { necklineTaper: [1.44,1.58], sharedNormalX: [.16,.225,.325,.405], sharedNormalY: [1.20,1.265,1.455,1.54] },
     shortsWaistRadius: .282, shortsPelvisBlend: [.705,.86],
     foldAmplitude: { underarm: .012, waist: .009, knee: .003, kneeBack: .0018 },
     foldWidths: { underarm: .044, waist: .035, knee: .07, kneeBack: .045 },

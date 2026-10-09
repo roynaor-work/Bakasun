@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-09T05:35:04.262Z",
+  "recordedAt": "2026-10-09T20:52:16.022Z",
   "method": "All deformed vertices and shoe triangles, in world space; no renderer or physical-phone claim.",
   "limits": {
     "weightSumError": 0.000002,
@@ -17,11 +17,11 @@
   },
   "qualities": {
     "dense": {
-      "modelTriangles": 239224,
-      "vertices": 145420,
-      "meshes": 3,
+      "modelTriangles": 234616,
+      "vertices": 143064,
+      "meshes": 4,
       "skin": {
-        "vertices": 144280,
+        "vertices": 141924,
         "mixedVertices": 39549,
         "maximumWeightSumError": 4.45861696451999e-8,
         "zeroNormals": 0,
@@ -59,7 +59,7 @@
       },
       "poses": {
         "stand": {
-          "vertices": 144280,
+          "vertices": 141924,
           "minimumY": 0,
           "maximumY": 2.6581499129533768,
           "height": 2.6581499129533768,
@@ -67,20 +67,20 @@
           "heightInHeads": 2.658150229829577
         },
         "run": {
-          "vertices": 144280,
+          "vertices": 141924,
           "minimumY": -1.1102230246251565e-16,
           "maximumY": 2.5587778204381357,
           "height": 2.5587778204381357,
-          "headHeight": 1.0044197385493088,
-          "heightInHeads": 2.5475184549178596
+          "headHeight": 1.0046738316064343,
+          "heightInHeads": 2.5468741594938824
         },
         "kick": {
-          "vertices": 144280,
+          "vertices": 141924,
           "minimumY": -2.7755575615628914e-17,
           "maximumY": 2.6779892109663797,
           "height": 2.6779892109663797,
-          "headHeight": 1.0042457698710057,
-          "heightInHeads": 2.6666671558998596
+          "headHeight": 1.023587063705514,
+          "heightInHeads": 2.616278874482569
         }
       },
       "transitions": [
@@ -187,11 +187,1142 @@
         "surfaceGap": -0.022551824832769518,
         "limitation": "Unsigned point-to-triangle distance tests contact; this is not complete mesh collision detection."
       },
+      "expressions": {
+        "meshNames": [
+          "Skin_3"
+        ],
+        "targetNames": [
+          "happy",
+          "effort",
+          "surprised",
+          "victory",
+          "tired",
+          "thinking"
+        ],
+        "neutralNeckAnchor": {
+          "actualMinimumY": 1.6581500321626663,
+          "expectedMinimumY": 1.6581499968767166,
+          "tolerance": 0.00003
+        },
+        "targets": [
+          {
+            "id": "happy",
+            "maximumCoordinateDeltaFromNeutral": 0.09117569029331207,
+            "vertices": 12810
+          },
+          {
+            "id": "effort",
+            "maximumCoordinateDeltaFromNeutral": 0.05170728638768196,
+            "vertices": 12810
+          },
+          {
+            "id": "surprised",
+            "maximumCoordinateDeltaFromNeutral": 0.14050263166427612,
+            "vertices": 12810
+          },
+          {
+            "id": "victory",
+            "maximumCoordinateDeltaFromNeutral": 0.09006335586309433,
+            "vertices": 12810
+          },
+          {
+            "id": "tired",
+            "maximumCoordinateDeltaFromNeutral": 0.049514804035425186,
+            "vertices": 12810
+          },
+          {
+            "id": "thinking",
+            "maximumCoordinateDeltaFromNeutral": 0.05558719485998154,
+            "vertices": 12810
+          }
+        ],
+        "directedPairs": 30,
+        "transitionSamples": [
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 2.168404344971009e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 2.168404344971009e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 6.505213034913027e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 4.045645250226415e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 4.23177252027821e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 4.270518435652018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 6.505213034913027e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 4.1406973498967074e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 3.469446951953614e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 2.6020852139652106e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 1.7142201501334552e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 1.6692146617964257e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 3.469446951953614e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 2.6020852139652106e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 1.6831712020582413e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 1.682965492579657e-18,
+            "maximumReverseDelta": 0
+          }
+        ],
+        "allocatedBuffersPreserved": true,
+        "posePairs": [
+          {
+            "pose": "run",
+            "expression": "effort",
+            "weights": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pose": "kick",
+            "expression": "victory",
+            "weights": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          }
+        ]
+      },
       "animations": [
         {
           "name": "stand",
           "duration": 1,
-          "tracks": 34,
+          "tracks": 40,
+          "morphTracks": 6,
           "maximumLoopDelta": 0,
           "groundSamples": [
             {
@@ -683,7 +1814,8 @@
         {
           "name": "run",
           "duration": 1,
-          "tracks": 34,
+          "tracks": 40,
+          "morphTracks": 6,
           "maximumLoopDelta": 0,
           "groundSamples": [
             {
@@ -1175,7 +2307,8 @@
         {
           "name": "kick",
           "duration": 1.35,
-          "tracks": 34,
+          "tracks": 40,
+          "morphTracks": 6,
           "maximumLoopDelta": 1.4997597572211942e-32,
           "groundSamples": [
             {
@@ -1667,11 +2800,11 @@
       ]
     },
     "balanced": {
-      "modelTriangles": 65748,
-      "vertices": 46168,
-      "meshes": 3,
+      "modelTriangles": 68796,
+      "vertices": 47838,
+      "meshes": 4,
       "skin": {
-        "vertices": 45448,
+        "vertices": 47118,
         "mixedVertices": 12907,
         "maximumWeightSumError": 4.1039824871802466e-8,
         "zeroNormals": 0,
@@ -1709,7 +2842,7 @@
       },
       "poses": {
         "stand": {
-          "vertices": 45448,
+          "vertices": 47118,
           "minimumY": 0,
           "maximumY": 2.6581499129533768,
           "height": 2.6581499129533768,
@@ -1717,20 +2850,20 @@
           "heightInHeads": 2.658150229829577
         },
         "run": {
-          "vertices": 45448,
+          "vertices": 47118,
           "minimumY": -1.1102230246251565e-16,
           "maximumY": 2.5587778204381357,
           "height": 2.5587778204381357,
-          "headHeight": 1.004412459250226,
-          "heightInHeads": 2.5475369176007763
+          "headHeight": 1.0046713932481508,
+          "heightInHeads": 2.546880340810227
         },
         "kick": {
-          "vertices": 45448,
+          "vertices": 47118,
           "minimumY": -2.7755575615628914e-17,
           "maximumY": 2.6776221412585244,
           "height": 2.6776221412585244,
-          "headHeight": 1.0038723476211275,
-          "heightInHeads": 2.667293453797861
+          "headHeight": 1.0232122223704163,
+          "heightInHeads": 2.616878573885125
         }
       },
       "transitions": [
@@ -1837,11 +2970,1142 @@
         "surfaceGap": -0.022276627958776135,
         "limitation": "Unsigned point-to-triangle distance tests contact; this is not complete mesh collision detection."
       },
+      "expressions": {
+        "meshNames": [
+          "Skin_3"
+        ],
+        "targetNames": [
+          "happy",
+          "effort",
+          "surprised",
+          "victory",
+          "tired",
+          "thinking"
+        ],
+        "neutralNeckAnchor": {
+          "actualMinimumY": 1.6581500321626663,
+          "expectedMinimumY": 1.6581499968767166,
+          "tolerance": 0.00003
+        },
+        "targets": [
+          {
+            "id": "happy",
+            "maximumCoordinateDeltaFromNeutral": 0.09117569029331207,
+            "vertices": 4882
+          },
+          {
+            "id": "effort",
+            "maximumCoordinateDeltaFromNeutral": 0.05170728638768196,
+            "vertices": 4882
+          },
+          {
+            "id": "surprised",
+            "maximumCoordinateDeltaFromNeutral": 0.14050263166427612,
+            "vertices": 4882
+          },
+          {
+            "id": "victory",
+            "maximumCoordinateDeltaFromNeutral": 0.09004919975996017,
+            "vertices": 4882
+          },
+          {
+            "id": "tired",
+            "maximumCoordinateDeltaFromNeutral": 0.049514804035425186,
+            "vertices": 4882
+          },
+          {
+            "id": "thinking",
+            "maximumCoordinateDeltaFromNeutral": 0.05558719485998154,
+            "vertices": 4882
+          }
+        ],
+        "directedPairs": 30,
+        "transitionSamples": [
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 2.168404344971009e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 4.440892098500626e-16,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 2.168404344971009e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 2.168404344971009e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 4.440892098500626e-16,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 6.505213034913027e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 4.3063808511092546e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 4.192108046683556e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 4.1377145883066295e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 4.034105692940388e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 4.440892098500626e-16,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 4.440892098500626e-16,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 4.440892098500626e-16,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 2.6020852139652106e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 1.6883947442289371e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 1.613687862582725e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 4.440892098500626e-16,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 2.6020852139652106e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 1.643732678017785e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 4.440892098500626e-16,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 4.440892098500626e-16,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 1.682965492579657e-18,
+            "maximumReverseDelta": 0
+          }
+        ],
+        "allocatedBuffersPreserved": true,
+        "posePairs": [
+          {
+            "pose": "run",
+            "expression": "effort",
+            "weights": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pose": "kick",
+            "expression": "victory",
+            "weights": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          }
+        ]
+      },
       "animations": [
         {
           "name": "stand",
           "duration": 1,
-          "tracks": 34,
+          "tracks": 40,
+          "morphTracks": 6,
           "maximumLoopDelta": 0,
           "groundSamples": [
             {
@@ -2333,7 +4597,8 @@
         {
           "name": "run",
           "duration": 1,
-          "tracks": 34,
+          "tracks": 40,
+          "morphTracks": 6,
           "maximumLoopDelta": 0,
           "groundSamples": [
             {
@@ -2825,7 +5090,8 @@
         {
           "name": "kick",
           "duration": 1.35,
-          "tracks": 34,
+          "tracks": 40,
+          "morphTracks": 6,
           "maximumLoopDelta": 1.4997597572211942e-32,
           "groundSamples": [
             {
@@ -3317,11 +5583,11 @@
       ]
     },
     "mobile": {
-      "modelTriangles": 12366,
-      "vertices": 9491,
-      "meshes": 6,
+      "modelTriangles": 12610,
+      "vertices": 9573,
+      "meshes": 7,
       "skin": {
-        "vertices": 9071,
+        "vertices": 9153,
         "mixedVertices": 1434,
         "maximumWeightSumError": 3.882291821355466e-8,
         "zeroNormals": 0,
@@ -3359,7 +5625,7 @@
       },
       "poses": {
         "stand": {
-          "vertices": 9071,
+          "vertices": 9153,
           "minimumY": -9.65595242652384e-9,
           "maximumY": 2.6581499036073684,
           "height": 2.658149913263321,
@@ -3367,20 +5633,20 @@
           "heightInHeads": 2.658150254982619
         },
         "run": {
-          "vertices": 9071,
+          "vertices": 9153,
           "minimumY": -8.395435457941858e-9,
           "maximumY": 2.5581898191499324,
           "height": 2.558189827545368,
-          "headHeight": 1.0036781196048508,
-          "heightInHeads": 2.5488149811939014
+          "headHeight": 1.004002237142217,
+          "heightInHeads": 2.547992158689782
         },
         "kick": {
-          "vertices": 9071,
+          "vertices": 9153,
           "minimumY": -8.105721094331386e-9,
           "maximumY": 2.679713791578424,
           "height": 2.679713799684145,
-          "headHeight": 1.0058708067194426,
-          "heightInHeads": 2.6640735388511683
+          "headHeight": 1.025321694845477,
+          "heightInHeads": 2.6135346722454713
         }
       },
       "transitions": [
@@ -3487,11 +5753,1142 @@
         "surfaceGap": -0.01806349222710482,
         "limitation": "Unsigned point-to-triangle distance tests contact; this is not complete mesh collision detection."
       },
+      "expressions": {
+        "meshNames": [
+          "FaceSurface"
+        ],
+        "targetNames": [
+          "happy",
+          "effort",
+          "surprised",
+          "victory",
+          "tired",
+          "thinking"
+        ],
+        "neutralNeckAnchor": {
+          "actualMinimumY": 1.6581500339925288,
+          "expectedMinimumY": 1.6581499968767166,
+          "tolerance": 0.00003
+        },
+        "targets": [
+          {
+            "id": "happy",
+            "maximumCoordinateDeltaFromNeutral": 0.09168417751789093,
+            "vertices": 1488
+          },
+          {
+            "id": "effort",
+            "maximumCoordinateDeltaFromNeutral": 0.0519956573843956,
+            "vertices": 1488
+          },
+          {
+            "id": "surprised",
+            "maximumCoordinateDeltaFromNeutral": 0.1412862092256546,
+            "vertices": 1488
+          },
+          {
+            "id": "victory",
+            "maximumCoordinateDeltaFromNeutral": 0.09028584510087967,
+            "vertices": 1488
+          },
+          {
+            "id": "tired",
+            "maximumCoordinateDeltaFromNeutral": 0.049790944904088974,
+            "vertices": 1488
+          },
+          {
+            "id": "thinking",
+            "maximumCoordinateDeltaFromNeutral": 0.055897198617458344,
+            "vertices": 1488
+          }
+        ],
+        "directedPairs": 30,
+        "transitionSamples": [
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 2.168404344971009e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "happy",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 2.168404344971009e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "effort",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "surprised",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 6.505213034913027e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 3.731202880122038e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 4.223700594592885e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 4.2075948064551093e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 6.505213034913027e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 3.458839187778234e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "victory",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 2.168404344971009e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 4.336808689942018e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0.25,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 0.75,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "tired",
+            "to": "thinking",
+            "t": 1,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0.25,
+            "maximumLinearDelta": 3.469446951953614e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 0.75,
+            "maximumLinearDelta": 2.6020852139652106e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "happy",
+            "t": 1,
+            "maximumLinearDelta": 1.6345889201290472e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 0.75,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "effort",
+            "t": 1,
+            "maximumLinearDelta": 1.5958215303710554e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0.25,
+            "maximumLinearDelta": 3.469446951953614e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 0.75,
+            "maximumLinearDelta": 2.6020852139652106e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "surprised",
+            "t": 1,
+            "maximumLinearDelta": 1.6335509118578697e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 0.75,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "victory",
+            "t": 1,
+            "maximumLinearDelta": 8.673617379884035e-19,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0.25,
+            "maximumLinearDelta": 0,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0.5,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 0.75,
+            "maximumLinearDelta": 1.734723475976807e-18,
+            "maximumReverseDelta": 0
+          },
+          {
+            "from": "thinking",
+            "to": "tired",
+            "t": 1,
+            "maximumLinearDelta": 1.7310494498885763e-18,
+            "maximumReverseDelta": 0
+          }
+        ],
+        "allocatedBuffersPreserved": true,
+        "posePairs": [
+          {
+            "pose": "run",
+            "expression": "effort",
+            "weights": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pose": "kick",
+            "expression": "victory",
+            "weights": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          }
+        ]
+      },
       "animations": [
         {
           "name": "stand",
           "duration": 1,
-          "tracks": 34,
+          "tracks": 40,
+          "morphTracks": 6,
           "maximumLoopDelta": 0,
           "groundSamples": [
             {
@@ -3983,7 +7380,8 @@
         {
           "name": "run",
           "duration": 1,
-          "tracks": 34,
+          "tracks": 40,
+          "morphTracks": 6,
           "maximumLoopDelta": 0,
           "groundSamples": [
             {
@@ -4475,7 +7873,8 @@
         {
           "name": "kick",
           "duration": 1.35,
-          "tracks": 34,
+          "tracks": 40,
+          "morphTracks": 6,
           "maximumLoopDelta": 1.4997597572211942e-32,
           "groundSamples": [
             {
@@ -5047,46 +8446,114 @@
     }
   ],
   "implementation": {
-    "rig.mjs": "673bee269df5ac6a604e10e0feadedd8105522aff3cb6136ee4d0670cf07766d",
-    "scene.mjs": "1fecaa265b280537112692227459c9de657d8db70d23ffd23e4d3565f32c3581",
+    "rig.mjs": "95e3f53cc58fd302ce58aca3a52675d555cd8c22e353a6a10ffc83cb7ff73fb1",
+    "scene.mjs": "fbf105dc18589b21ed3dbdf29e6d9d1792f8d268f23f7c516ebd2cd69be9816e",
+    "expressions.mjs": "ba7907784b779644ec072260b7b890afc913c0ecc4e161266420b94d47571c86",
+    "facial-morphs.mjs": "0b91af36cf9787032c5becc12f1dce14b84edd20ee9585bac9e218afc30727cf",
     "studio-bake.mjs": "7d42189f399e6ad1c90d847eaf2b57b7fb011bccb93dd8bd843c9df9ec5d63ca",
-    "parts/body.mjs": "4f48d3c479f3023e07bfd45fa4efd7dad3fd51bee7af24f79c59011fb28974a0",
-    "parts/head.mjs": "9b85ebb87969e19bcc21842d07746ab31a1261802d33e26cebf8720d81531cad",
+    "parts/body.mjs": "ac1894e9dc734bdc6351dc5729f71c53f81ac251192f62348f6daa0561200b2e",
+    "parts/head.mjs": "b0caa803677048c5ef2a118f3757c64a0b084e50dcfb757238b60966db9b2365",
     "parts/hand.mjs": "1a941fde80fb984631f1eef8802f87933bbb1856314f569310269f6644144cb0",
     "parts/shoe.mjs": "d8a892f100a89593c1793f1fb15a4e38fb09709875b1beca5c5622a08839adc5"
   },
   "glb": {
-    "bytes": 677652,
-    "sha256": "8ce159beac67612cb0f98f62b1df2625bd69a5daa40d81b04480e898c009cc62",
-    "modelTriangles": 12366,
+    "bytes": 906120,
+    "sha256": "60cd99f6b702f1a0d118328ceec21533fde13dc8e3aa9f473036b8761cc24eb0",
+    "modelTriangles": 12610,
     "skins": 2,
     "exportedSkinVertices": 3362,
     "exportedMaximumWeightSumError": 3.882291821355466e-8,
     "exportedMaximumVertexColor": 1,
+    "morphMeshes": [
+      {
+        "meshIndex": 1,
+        "targetNames": [
+          "happy",
+          "effort",
+          "surprised",
+          "victory",
+          "tired",
+          "thinking"
+        ]
+      }
+    ],
+    "morphMaximumDeformations": {
+      "happy": 0.09168417751789093,
+      "effort": 0.0519956573843956,
+      "surprised": 0.1412862092256546,
+      "victory": 0.09028584510087967,
+      "tired": 0.049790944904088974,
+      "thinking": 0.055897198617458344
+    },
     "animations": [
       {
         "name": "stand",
-        "channels": 34,
+        "channels": 35,
+        "weightChannels": [
+          {
+            "node": "FaceSurface",
+            "targetNames": [
+              "happy",
+              "effort",
+              "surprised",
+              "victory",
+              "tired",
+              "thinking"
+            ],
+            "pairedExpression": null,
+            "peak": 0
+          }
+        ],
         "maximumLoopDelta": 0
       },
       {
         "name": "run",
-        "channels": 34,
+        "channels": 35,
+        "weightChannels": [
+          {
+            "node": "FaceSurface",
+            "targetNames": [
+              "happy",
+              "effort",
+              "surprised",
+              "victory",
+              "tired",
+              "thinking"
+            ],
+            "pairedExpression": "effort",
+            "peak": 1
+          }
+        ],
         "maximumLoopDelta": 0
       },
       {
         "name": "kick",
-        "channels": 34,
+        "channels": 35,
+        "weightChannels": [
+          {
+            "node": "FaceSurface",
+            "targetNames": [
+              "happy",
+              "effort",
+              "surprised",
+              "victory",
+              "tired",
+              "thinking"
+            ],
+            "pairedExpression": "victory",
+            "peak": 1
+          }
+        ],
         "maximumLoopDelta": 1.4997597572211942e-32
       }
     ]
   },
   "capture": {
     "path": "shots/metrics.json",
-    "sha256": "d34b71b9e8cc0aead21358af58e4f4820e58cc7b4bc2d8173669e73e55696548",
+    "sha256": "d95bf434230addd3c17e977d721c4f64c55f8470340c6bc62f415d73e733602c",
     "roundtripMaximumRGBMeanDifference": 0.0000028935185185185184,
     "mobileStable": true,
-    "minimumMobileFPS": 44.002640158409505,
+    "minimumMobileFPS": 40.60243614616876,
     "comparison": "shots/comparison.png"
   },
   "browser": {
@@ -5099,6 +8566,13 @@
       "pose:stand",
       "pose:run",
       "pose:kick",
+      "expression:happy",
+      "expression:effort",
+      "expression:surprised",
+      "expression:victory",
+      "expression:tired",
+      "expression:thinking",
+      "expression-blend-keyboard",
       "view:front",
       "view:side",
       "view:back",
@@ -5109,143 +8583,180 @@
       "restore-source",
       "manual-blend-transition",
       "interrupted-transition",
-      "transition-endpoint"
+      "transition-endpoint",
+      "expression-transition-after-clip",
+      "expression-interrupted-transition",
+      "expression-transition-endpoint"
     ],
     "dimensions": {
       "scrollWidth": 390,
       "viewport": 390,
       "canvases": 1
     },
+    "galleryDimensions": {
+      "scrollWidth": 390,
+      "viewport": 390,
+      "canvases": 1,
+      "images": [
+        {
+          "src": "shots/expressions/happy-front-head.png",
+          "loaded": true
+        },
+        {
+          "src": "shots/expressions/effort-front-head.png",
+          "loaded": true
+        },
+        {
+          "src": "shots/expressions/surprised-front-head.png",
+          "loaded": true
+        },
+        {
+          "src": "shots/expressions/victory-front-head.png",
+          "loaded": true
+        },
+        {
+          "src": "shots/expressions/tired-front-head.png",
+          "loaded": true
+        },
+        {
+          "src": "shots/expressions/thinking-front-head.png",
+          "loaded": true
+        }
+      ]
+    },
     "transitionChecks": {
       "startContinuity": 0,
       "interruptContinuity": 0,
-      "transitionEndDelta": 0
+      "transitionEndDelta": 0,
+      "expressionStartContinuity": 0,
+      "expressionInterruptContinuity": 0,
+      "expressionEndpointDelta": 0
     },
     "clipChecks": [
       {
         "clip": "stand",
         "time": 0,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917302119124e-8
       },
       {
         "clip": "stand",
         "time": 0.125,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917302119124e-8
       },
       {
         "clip": "stand",
         "time": 0.25,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917302119124e-8
       },
       {
         "clip": "stand",
         "time": 0.5,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917302119124e-8
       },
       {
         "clip": "stand",
         "time": 0.75,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917302119124e-8
       },
       {
         "clip": "stand",
         "time": 0.875,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917302119124e-8
       },
       {
         "clip": "stand",
         "time": 1,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917302119124e-8
       },
       {
         "clip": "run",
         "time": 0,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.4619173218178435e-8
       },
       {
         "clip": "run",
         "time": 0.125,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917335603723e-8
       },
       {
         "clip": "run",
         "time": 0.25,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.4619173160733614e-8
       },
       {
         "clip": "run",
         "time": 0.5,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.4619173131964854e-8
       },
       {
         "clip": "run",
         "time": 0.75,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.4619173160733614e-8
       },
       {
         "clip": "run",
         "time": 0.875,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917300023731e-8
       },
       {
         "clip": "run",
         "time": 1,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.4619173218178435e-8
       },
       {
         "clip": "kick",
         "time": 0,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917302119124e-8
       },
       {
         "clip": "kick",
         "time": 0.16875,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.4619173148326996e-8
       },
       {
         "clip": "kick",
         "time": 0.3375,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917324794118e-8
       },
       {
         "clip": "kick",
         "time": 0.675,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917339149407e-8
       },
       {
         "clip": "kick",
         "time": 1.0125000000000002,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.4619172952604437e-8
       },
       {
         "clip": "kick",
         "time": 1.1812500000000001,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917305925398e-8
       },
       {
         "clip": "kick",
         "time": 1.35,
-        "deformedVertices": 9071,
+        "deformedVertices": 9153,
         "maximumPositionDelta": 5.461917302967217e-8
       }
     ],

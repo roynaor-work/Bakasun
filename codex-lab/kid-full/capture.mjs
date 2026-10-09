@@ -13,12 +13,15 @@ const shots = resolve(root, 'shots');
 const work = resolve(root, 'work');
 const views = ['front', 'side', 'back', 'threeQuarter'];
 const poses = ['stand', 'run', 'kick'];
+const expressions = ['happy', 'effort', 'surprised', 'victory', 'tired', 'thinking'];
+const expressionNames = { happy: 'שמח', effort: 'מאמץ', surprised: 'מופתע', victory: 'ניצחון', tired: 'עייף ומרוצה', thinking: 'מחשבה' };
 const phoneViewport = { width: 390, height: 844 };
 const pictureViewport = { width: 480, height: 720 };
 const flags = ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--no-sandbox',
   '--disable-background-timer-throttling', '--disable-backgrounding-occluded-windows', '--disable-renderer-backgrounding'];
 const errors = [], warnings = [], externalRequests = [];
 const args = process.argv.slice(2);
+const expressionBaselineOnly = args.includes('--expression-baseline');
 const shotsOnly = args.includes('--shots-only');
 const baselineBenchmark = args.includes('--baseline-benchmark');
 const deliveredBenchmark = args.includes('--delivered-benchmark');
@@ -46,7 +49,7 @@ report.environment = { chromiumPath: process.env.CHROMIUM_PATH || '/usr/bin/chro
 report.stabilityCriteria = stabilityCriteria;
 report.budgetCriteria = budgetCriteria;
 report.implementation = {};
-for (const file of ['rig.mjs', 'scene.mjs', 'studio-bake.mjs', 'parts/body.mjs', 'parts/head.mjs', 'parts/hand.mjs', 'parts/shoe.mjs']) report.implementation[file] = createHash('sha256').update(await readFile(resolve(root, file))).digest('hex');
+for (const file of ['rig.mjs', 'scene.mjs', 'expressions.mjs', 'facial-morphs.mjs', 'studio-bake.mjs', 'parts/body.mjs', 'parts/head.mjs', 'parts/hand.mjs', 'parts/shoe.mjs']) report.implementation[file] = createHash('sha256').update(await readFile(resolve(root, file))).digest('hex');
 // Refreshing pictures must not relabel an older benchmark as the current model.
 if ((shotsOnly || deliveredBenchmark) && report.phone) assert.deepEqual(preservedImplementation, report.implementation, 'Source changed since the saved phone benchmark; measure it again before refreshing evidence');
 report.stabilityScope = 'Chromium in the cloud at phone viewport; this is not a physical phone GPU measurement.';
@@ -81,15 +84,16 @@ async function open(context, label, quality = 'balanced', capture = true, experi
   await configure(page, { quality });
   return page;
 }
-async function configure(page, { quality, view = 'front', pose = 'stand' } = {}) {
-  await page.evaluate(async ({ quality, view, pose }) => {
+async function configure(page, { quality, view = 'front', pose = 'stand', expression } = {}) {
+  await page.evaluate(async ({ quality, view, pose, expression }) => {
     const lab = window.lab;
     if (quality && lab.metrics().detail !== quality) await lab.setQuality(quality);
     await lab.setPose(pose, true);
+    if (expression !== undefined) await lab.setExpression(expression, true);
     lab.setView(view);
     lab.render();
     lab.renderer.getContext().finish();
-  }, { quality, view, pose });
+  }, { quality, view, pose, expression });
   return page.evaluate(() => window.lab.metrics());
 }
 const stats = values => {
@@ -132,18 +136,67 @@ async function snapshot(page) {
       for (let i = 0; i < attribute.count; i += step) indices.add(i);
       mesh.skeleton?.update();
       for (const i of indices) {
-        const point = new Vector3().fromBufferAttribute(attribute, i);
-        if (mesh.isSkinnedMesh) mesh.applyBoneTransform(i, point);
+        // Mesh/SkinnedMesh.getVertexPosition applies both morph targets and skin.
+        const point = mesh.getVertexPosition(i, new Vector3());
         point.applyMatrix4(mesh.matrixWorld);
         points.push(...point.toArray());
       }
-      meshes.push({ name: mesh.name, vertices: attribute.count, skinned: !!mesh.isSkinnedMesh, points });
+      meshes.push({ name: mesh.name, vertices: attribute.count, skinned: !!mesh.isSkinnedMesh, morphTargets: Object.keys(mesh.morphTargetDictionary || {}), points });
     });
     return meshes;
   });
 }
 async function boneSnapshot(page) {
   return page.evaluate(() => window.lab.model.bones.map(bone => ({ name: bone.name, position: bone.position.toArray(), quaternion: bone.quaternion.toArray(), scale: bone.scale.toArray() })));
+}
+async function morphSnapshot(page) {
+  return page.evaluate(() => {
+    const result = [];
+    window.lab.activeRoot.traverse(mesh => {
+      if (mesh.isMesh && mesh.morphTargetInfluences?.length) result.push({ name: mesh.name, dictionary: { ...mesh.morphTargetDictionary }, weights: [...mesh.morphTargetInfluences] });
+    });
+    return result;
+  });
+}
+function morphDifference(source, loaded) {
+  const lookup = new Map(loaded.map(mesh => [mesh.name, mesh]));
+  let maximumWeightDelta = 0;
+  const missing = [], dictionaryDifferences = [];
+  for (const mesh of source) {
+    const other = lookup.get(mesh.name);
+    if (!other) { missing.push(mesh.name); continue; }
+    if (JSON.stringify(mesh.dictionary) !== JSON.stringify(other.dictionary)) dictionaryDifferences.push(mesh.name);
+    for (const [name, index] of Object.entries(mesh.dictionary)) maximumWeightDelta = Math.max(maximumWeightDelta, Math.abs(mesh.weights[index] - other.weights[other.dictionary[name]]));
+  }
+  return { sourceMeshes: source.length, loadedMeshes: loaded.length, missingMeshes: missing, dictionaryDifferences, maximumWeightDelta };
+}
+async function saveHead(page, relative) {
+  const path = resolve(shots, relative);
+  await mkdir(dirname(path), { recursive: true });
+  // Raster crop of the same body photograph, with no new camera/light setup.
+  return page.screenshot({ path, clip: { x: 70, y: 20, width: 340, height: 280 }, animations: 'disabled' });
+}
+async function captureExpressionStates(page, { loaded = false, source = {} } = {}) {
+  const states = loaded ? report.glb.expressions : report.expressions;
+  for (const id of expressions) {
+    states[id] = { views: {}, vertexChecks: {}, morphChecks: {} };
+    for (const view of views) {
+      const metrics = await configure(page, { pose: 'stand', view, expression: id });
+      const relative = `${loaded ? 'roundtrip/expressions' : 'expressions'}/${id}-${view}`;
+      const bytes = await saveImage(page, `${relative}.png`);
+      await saveHead(page, `${relative}-head.png`);
+      const key = `${id}-${view}`;
+      if (loaded) {
+        states[id].views[view] = imageDifference(await readFile(resolve(shots, `expressions/${key}.png`)), bytes);
+        states[id].vertexChecks[view] = snapshotDifference(source[key].vertices, await snapshot(page));
+        states[id].morphChecks[view] = morphDifference(source[key].morphs, await morphSnapshot(page));
+      } else {
+        states[id].views[view] = metrics;
+        source[key] = { vertices: await snapshot(page), morphs: await morphSnapshot(page) };
+      }
+    }
+  }
+  return source;
 }
 function boneDifference(source, loaded) {
   const lookup = new Map(loaded.map(bone => [bone.name, bone]));
@@ -227,7 +280,7 @@ async function captureModels() {
       if (view === 'front') { sourceSnapshots[pose] = await snapshot(page); sourceBones[pose] = await boneSnapshot(page); }
     }
   }
-  const sourceAnimationSnapshots = {}, sourceAnimationBones = {};
+  const sourceAnimationSnapshots = {}, sourceAnimationBones = {}, sourceAnimationMorphs = {};
   report.animationSamples = [];
   const clipMetadata = await page.evaluate(() => window.lab.clips());
   for (const clip of clipMetadata) for (const fraction of [0, .25, .5, .75]) {
@@ -236,8 +289,12 @@ async function captureModels() {
     await saveImage(page, `animation/source-${sample.id}.png`);
     sourceAnimationSnapshots[sample.id] = await snapshot(page);
     sourceAnimationBones[sample.id] = await boneSnapshot(page);
+    sourceAnimationMorphs[sample.id] = await morphSnapshot(page);
     report.animationSamples.push(sample);
   }
+  assert.deepEqual(await page.evaluate(() => window.lab.expressions()), expressions, 'Scene must expose all six expression IDs');
+  report.expressions = {};
+  const sourceExpressionStates = await captureExpressionStates(page);
   // Export standing bind-pose animation set once, then load the exact disk file.
   await configure(page, { view: 'front', pose: 'stand' });
   const base64 = await page.evaluate(async () => {
@@ -257,7 +314,15 @@ async function captureModels() {
   assert(glbJSON.skins?.length > 0, 'GLB does not contain a skeleton skin');
   assert.deepEqual((glbJSON.animations || []).map(a => a.name).sort(), [...poses].sort(), 'GLB must contain exactly the three named animation clips');
   assert(glbJSON.animations.every(animation => animation.channels?.length > 0 && animation.samplers?.length > 0), 'GLB animation contains no channels or samplers');
+  const morphMeshes = (glbJSON.meshes || []).filter(mesh => mesh.primitives.some(p => p.targets?.length));
+  assert(morphMeshes.length > 0, 'GLB does not contain expression morph targets');
+  for (const mesh of morphMeshes) {
+    assert.deepEqual(mesh.extras?.targetNames, expressions, `GLB ${mesh.name}: named expression target order differs`);
+    for (const primitive of mesh.primitives) assert.equal(primitive.targets?.length, 6, `GLB ${mesh.name}: expected six morph targets`);
+  }
+  for (const animation of glbJSON.animations) assert(animation.channels.some(channel => channel.target.path === 'weights'), `GLB ${animation.name}: expression weight animation is missing`);
   report.glb = { path: 'kid-full.glb', bytes: glbBytes.length, sha256: createHash('sha256').update(glbBytes).digest('hex'), scenes: glbJSON.scenes?.length, skins: glbJSON.skins?.length, bones: new Set((glbJSON.skins || []).flatMap(skin => skin.joints)).size, animationNames: glbJSON.animations?.map(a => a.name), imageCount: glbJSON.images?.length, imagesEmbedded: (glbJSON.images || []).every(i => i.bufferView !== undefined && !i.uri), externalBufferURIs: (glbJSON.buffers || []).filter(b => b.uri).map(b => b.uri), views: {}, vertexChecks: {}, boneChecks: {}, animationViews: {}, animationVertexChecks: {}, animationBoneChecks: {} };
+  Object.assign(report.glb, { morphMeshNames: morphMeshes.map(m => m.name), morphTargetNames: expressions, expressions: {}, animationMorphChecks: {} });
   assert.equal(report.glb.externalBufferURIs.length, 0, 'GLB references external buffers');
   assert(report.glb.imagesEmbedded, 'GLB references external images');
   await page.evaluate(async url => window.lab.loadGLB(url), `${service.url}/kid-full.glb`);
@@ -279,10 +344,13 @@ async function captureModels() {
     report.glb.animationViews[sample.id] = imageDifference(await readFile(resolve(shots, `animation/source-${sample.id}.png`)), loaded);
     report.glb.animationVertexChecks[sample.id] = snapshotDifference(sourceAnimationSnapshots[sample.id], await snapshot(page));
     report.glb.animationBoneChecks[sample.id] = boneDifference(sourceAnimationBones[sample.id], await boneSnapshot(page));
+    report.glb.animationMorphChecks[sample.id] = morphDifference(sourceAnimationMorphs[sample.id], await morphSnapshot(page));
   }
+  await captureExpressionStates(page, { loaded: true, source: sourceExpressionStates });
   await page.evaluate(() => window.lab.useSource());
-  const allRoundtripPixels = [...Object.values(report.glb.views).flatMap(v => Object.values(v)), ...Object.values(report.glb.animationViews)];
-  const allRoundtripVertices = [...Object.values(report.glb.vertexChecks), ...Object.values(report.glb.animationVertexChecks)];
+  const expressionResults = Object.values(report.glb.expressions);
+  const allRoundtripPixels = [...Object.values(report.glb.views).flatMap(v => Object.values(v)), ...Object.values(report.glb.animationViews), ...expressionResults.flatMap(e => Object.values(e.views))];
+  const allRoundtripVertices = [...Object.values(report.glb.vertexChecks), ...Object.values(report.glb.animationVertexChecks), ...expressionResults.flatMap(e => Object.values(e.vertexChecks))];
   const allRoundtripBones = [...Object.values(report.glb.boneChecks), ...Object.values(report.glb.animationBoneChecks)];
   report.glb.maximumRGBMeanDifference = Math.max(...allRoundtripPixels.map(v => v.rgbMeanAbsoluteDifference));
   report.glb.maximumChangedPixelsPercent = Math.max(...allRoundtripPixels.map(v => v.changedPixelPercent));
@@ -291,7 +359,9 @@ async function captureModels() {
   report.glb.pass = report.glb.maximumRGBMeanDifference <= roundtripCriteria.maximumRGBMeanDifference
     && report.glb.maximumAbove8PixelsPercent <= roundtripCriteria.maximumAbove8PixelPercent
     && allRoundtripVertices.every(v => v.maximumPositionDelta <= roundtripCriteria.maximumSampledVertexDelta)
-    && allRoundtripBones.every(v => v.sourceBones === v.loadedBones && v.missingBoneNames.length === 0 && v.maximumLocalTransformChannelDelta <= roundtripCriteria.maximumBoneLocalChannelDelta);
+    && allRoundtripBones.every(v => v.sourceBones === v.loadedBones && v.missingBoneNames.length === 0 && v.maximumLocalTransformChannelDelta <= roundtripCriteria.maximumBoneLocalChannelDelta)
+    && expressionResults.flatMap(e => Object.values(e.morphChecks)).every(v => v.sourceMeshes > 0 && v.sourceMeshes === v.loadedMeshes && v.missingMeshes.length === 0 && v.dictionaryDifferences.length === 0 && v.maximumWeightDelta <= 1e-6);
+  report.glb.pass &&= Object.values(report.glb.animationMorphChecks).every(v => v.sourceMeshes > 0 && v.sourceMeshes === v.loadedMeshes && v.missingMeshes.length === 0 && v.dictionaryDifferences.length === 0 && v.maximumWeightDelta <= 1e-6);
   // Keep producing all measurements/artifacts; the final process result still fails if roundtrip did not pass.
   // Transition samples make the intermediate surface state reviewable.
   for (const [from, to] of [['stand', 'run'], ['run', 'kick'], ['kick', 'stand']]) {
@@ -300,16 +370,42 @@ async function captureModels() {
       await saveImage(page, `transitions/${from}-${to}-${String(t).replace('.', '_')}.png`);
     }
   }
+  for (const [from, to] of [['happy', 'surprised'], ['effort', 'victory'], ['tired', 'thinking']]) for (const t of [0, .25, .5, .75, 1]) {
+    await configure(page, { view: 'front', pose: 'stand' });
+    await page.evaluate(({ from, to, t }) => { window.lab.setExpressionBlend(from, to, t); window.lab.renderer.getContext().finish(); }, { from, to, t });
+    const key = `${from}-${to}-${String(t).replace('.', '_')}`;
+    await saveImage(page, `expression-transitions/${key}.png`);
+    await saveHead(page, `expression-transitions/${key}-head.png`);
+  }
   await captureBaseline(page);
   await buildComparison(page);
   await buildPoseGrid(page);
+  await buildExpressionGrid(page);
   await context.close();
   await captureExperiments();
+  await captureGallery();
   const phoneContext = await browser.newContext({ viewport: phoneViewport, deviceScaleFactor: 1 });
   const phonePage = await open(phoneContext, 'phone-shot', 'mobile');
   await configure(phonePage, { view: 'threeQuarter', pose: 'kick' });
   await saveImage(phonePage, 'phone.png');
   await phoneContext.close();
+}
+async function captureGallery() {
+  report.expressionGallery = {};
+  for (const [name, viewport] of [['desktop', { width: 1440, height: 1000 }], ['phone', phoneViewport]]) {
+    const context = await browser.newContext({ viewport, deviceScaleFactor: 1, reducedMotion: 'reduce' });
+    const page = await context.newPage(); watch(page, `expression-gallery-${name}`);
+    await page.goto(`${service.url}/expressions.html?quality=mobile`, { waitUntil: 'networkidle' });
+    await page.evaluate(async () => { await window.labReady; window.lab.stop(); window.lab.setExpression('happy', true); window.lab.renderer.getContext().finish(); });
+    const evidence = await page.evaluate(() => ({ viewport: { width: innerWidth, height: innerHeight }, scrollWidth: document.documentElement.scrollWidth, canvases: document.querySelectorAll('canvas').length, images: [...document.querySelectorAll('table img')].map(img => ({ src: img.getAttribute('src'), loaded: img.complete && img.naturalWidth > 0 })) }));
+    assert.equal(evidence.canvases, 1, 'Gallery must have one live renderer');
+    assert(evidence.scrollWidth <= viewport.width, 'Expression gallery has horizontal overflow');
+    assert.equal(evidence.images.length, 6, 'Expression gallery must contain six photos');
+    assert(evidence.images.every(img => img.loaded), 'Expression gallery preview did not load');
+    await page.screenshot({ path: resolve(shots, `expression-gallery-${name}.png`), fullPage: true, animations: 'disabled' });
+    report.expressionGallery[name] = evidence;
+    await context.close();
+  }
 }
 async function captureExperiments() {
   const context = await browser.newContext({ viewport: pictureViewport, deviceScaleFactor: 1 });
@@ -379,26 +475,24 @@ async function studioSettings(page) {
 async function captureBaseline(page) {
   // The preserved disk GLB is loaded into this exact scene. It never imports
   // old source modules or inherits a different camera/light screenshot preset.
-  const baselinePath = resolve(shots, 'before/kid-full.glb');
+  const baselinePath = resolve(shots, 'expression-baseline/kid-full.glb');
   let bytes;
-  try { bytes = await readFile(resolve(work, 'baseline/kid-full.glb')); }
-  catch (error) { if (error.code !== 'ENOENT') throw error; bytes = await readFile(baselinePath); }
-  await mkdir(dirname(baselinePath), { recursive: true });
-  await writeFile(baselinePath, bytes);
+  try { bytes = await readFile(baselinePath); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; throw Error('Run node capture.mjs --expression-baseline before exporting the new model'); }
   await configure(page, { quality: 'mobile', pose: 'stand', view: 'front' });
   const settings = await studioSettings(page);
   report.beforeAfter = {
-    before: { path: 'shots/before/kid-full.glb', sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length, metrics: {}, crops: {} },
+    before: { path: 'shots/expression-baseline/kid-full.glb', sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length, metrics: {}, crops: {} },
     after: { source: 'procedural mobile; exported and roundtrip checked', metrics: {}, crops: report.screenshotCrops },
     settings, settingsIdentical: true, pose: 'stand', views, fullModelPairResizing: 'one common crop and one uniform scale per before/after pair',
     headCropCSS: [70, 20, 340, 280], headCropMethod: 'fixed raster crop from the full-model camera; identical before and after',
     lightingNote: 'Both models share these live scene lights. Each model retains its own baked vertex colours and materials.',
   };
-  await page.evaluate(async () => window.lab.loadGLB('./shots/before/kid-full.glb'));
+  await page.evaluate(async () => window.lab.loadGLB('./shots/expression-baseline/kid-full.glb'));
   for (const view of views) {
     report.beforeAfter.before.metrics[view] = await configure(page, { pose: 'stand', view });
     assert.deepEqual(await studioSettings(page), settings, `Before camera/light settings changed for ${view}`);
-    await saveImage(page, `before/${view}.png`);
+    await saveImage(page, `expression-baseline/${view}.png`);
     report.beforeAfter.before.crops[view] = await projectedCrop(page);
   }
   await page.evaluate(() => window.lab.useSource());
@@ -408,6 +502,30 @@ async function captureBaseline(page) {
     await saveImage(page, `after/${view}.png`);
   }
 }
+async function captureExpressionBaseline() {
+  const path = resolve(shots, 'expression-baseline/kid-full.glb');
+  let bytes;
+  try { bytes = await readFile(path); }
+  catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    bytes = await readFile(resolve(root, 'kid-full.glb'));
+    await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
+  }
+  const context = await browser.newContext({ viewport: pictureViewport, deviceScaleFactor: 1 });
+  const page = await open(context, 'expression-baseline', 'mobile');
+  await page.evaluate(() => window.lab.loadGLB('./shots/expression-baseline/kid-full.glb'));
+  const settings = await studioSettings(page), metrics = {}, crops = {};
+  for (const view of views) {
+    metrics[view] = await configure(page, { pose: 'stand', view });
+    assert.deepEqual(await studioSettings(page), settings);
+    await saveImage(page, `expression-baseline/${view}.png`);
+    await saveHead(page, `expression-baseline/${view}-head.png`);
+    crops[view] = await projectedCrop(page);
+  }
+  await writeFile(resolve(shots, 'expression-baseline/capture.json'), `${JSON.stringify({ recordedAt: new Date().toISOString(), path: 'shots/expression-baseline/kid-full.glb', sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length, settings, metrics, crops, historicalBeforeUnchanged: true }, null, 2)}\n`);
+  await context.close();
+  console.log(`Preserved this-turn expression baseline: ${metrics.front.modelTriangles} triangles`);
+}
 async function buildComparison(page) {
   const files = await readdir(resolve(root, '../ref'));
   const referenceName = files.find(name => name.startsWith('מבטים'));
@@ -416,12 +534,12 @@ async function buildComparison(page) {
   const referenceBytes = await readFile(resolve(root, '../ref', referenceName));
   const expressionBytes = await readFile(resolve(root, '../ref', expressionName));
   report.reference = { path: `../ref/${referenceName}`, sha256: createHash('sha256').update(referenceBytes).digest('hex'), sourcePixelAccess: true, crops: [[15, 246, 295, 720], [330, 246, 280, 720], [620, 246, 295, 720], [935, 246, 305, 720]], fourthView: 'frontRepeat', threeQuarterTarget: false, cropOnly: false, uniformResizing: true, heightNormalized: true, modelCropMethod: 'common precise projected before/after skinned bounds plus 8 CSS pixels', colourEdits: false, perspectiveOrShapeWarp: false };
-  report.expressionReference = { path: `../ref/${expressionName}`, sha256: createHash('sha256').update(expressionBytes).digest('hex'), sourcePixelAccess: true, neutralHeadCrop: [8, 0, 495, 454], fullSheetShown: true, expressionSystemAdded: false, colourEdits: false, uniformResizing: true };
+  report.expressionReference = { path: `../ref/${expressionName}`, sha256: createHash('sha256').update(expressionBytes).digest('hex'), sourcePixelAccess: true, neutralHeadCrop: [8, 0, 495, 454], fullSheetShown: true, expressionSystemAdded: true, colourEdits: false, uniformResizing: true };
   const dataURL = await page.evaluate(async ({ origin, viewName, expressionName, crops, expressionCrop, comparison }) => {
     const getImage = url => new Promise((accept, reject) => { const image = new Image(); image.onload = () => accept(image); image.onerror = () => reject(Error(`Could not load image ${url}`)); image.src = url; });
     const [target, expressions] = await Promise.all([getImage(`${origin}/ref/${encodeURIComponent(viewName)}`), getImage(`${origin}/ref/${encodeURIComponent(expressionName)}`)]);
     const views = ['front', 'side', 'back'], names = ['חזית', 'צד', 'גב'];
-    const before = await Promise.all(views.map(view => getImage(`${origin}/shots/before/${view}.png`)));
+    const before = await Promise.all(views.map(view => getImage(`${origin}/shots/expression-baseline/${view}.png`)));
     const after = await Promise.all(views.map(view => getImage(`${origin}/shots/after/${view}.png`)));
     const canvas = document.createElement('canvas'); canvas.width = 2460; canvas.height = 1830;
     const ctx = canvas.getContext('2d'); ctx.fillStyle = '#f3f0e9'; ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -451,14 +569,14 @@ async function buildComparison(page) {
     ctx.fillStyle = '#27364a'; ctx.font = '21px sans-serif';
     ctx.fillText('היעד מוצג בשינוי גודל אחיד לגובה; זוגות לפני/אחרי שומרים על אותו קנה מידה, בלי תיקון פרופורציות.', 1230, 756);
     ctx.fillStyle = '#fff'; ctx.fillRect(20, 790, 1400, 455); ctx.fillRect(1440, 790, 1000, 700);
-    ctx.fillStyle = '#27364a'; ctx.font = 'bold 29px sans-serif'; ctx.fillText('תקריב פנים ושיער — חיוך קטן', 720, 830);
+    ctx.fillStyle = '#27364a'; ctx.font = 'bold 29px sans-serif'; ctx.fillText('תקריב פנים ושיער — לפני לעומת עמידה רגועה', 720, 830);
     ctx.font = '23px sans-serif'; for (let c = 0; c < 3; c++) ctx.fillText(labels[c], 253 + c * 466, 869);
     fit(expressions, expressionCrop, 35, 892, 436, 324);
     fit(before[0], comparison.headCropCSS, 501, 892, 436, 324);
     fit(after[0], comparison.headCropCSS, 967, 892, 436, 324);
     ctx.fillStyle = '#27364a'; ctx.font = 'bold 28px sans-serif'; ctx.fillText('גיליון ההבעות המקורי', 1940, 830);
     fit(expressions, [0, 0, expressions.width, expressions.height], 1460, 849, 960, 622);
-    ctx.font = '20px sans-serif'; ctx.fillText('ששת מבטי ההבעה הם רפרנס בלבד; המודל שומר על החיוך הקטן.', 1940, 1520);
+    ctx.font = '20px sans-serif'; ctx.fillText('גיליון המקור מוצג בשלמותו; שש ההבעות החדשות בגלריה נפרדת.', 1940, 1520);
     const sideHeadCrops = [[330, 246, 280, 285], [620, 246, 295, 285]];
     for (let i = 0; i < 2; i++) {
       const x = 20 + i * 710, view = views[i + 1];
@@ -477,6 +595,7 @@ async function buildComparison(page) {
   const comparisonBytes = Buffer.from(dataURL.split(',')[1], 'base64');
   await writeFile(resolve(shots, 'comparison.png'), comparisonBytes);
   await writeFile(resolve(shots, 'before-after-target.png'), comparisonBytes);
+  await writeFile(resolve(shots, 'expressions-before-after-target.png'), comparisonBytes);
   report.beforeAfter.comparisonPath = 'shots/comparison.png';
 }
 async function buildPoseGrid(page) {
@@ -496,18 +615,45 @@ async function buildPoseGrid(page) {
   }, origin);
   await writeFile(resolve(shots, 'poses.png'), Buffer.from(data.split(',')[1], 'base64'));
 }
+async function buildExpressionGrid(page) {
+  const files = await readdir(resolve(root, '../ref'));
+  const targetName = files.find(name => name.startsWith('גיליון הבעות'));
+  const data = await page.evaluate(async ({ origin, expressions, names, targetName }) => {
+    const getImage = url => new Promise((accept, reject) => { const image = new Image(); image.onload = () => accept(image); image.onerror = reject; image.src = url; });
+    const canvas = document.createElement('canvas'); canvas.width = 2440; canvas.height = 1460;
+    const ctx = canvas.getContext('2d'); ctx.fillStyle = '#f3f0e9'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.fillStyle = '#27364a'; ctx.font = 'bold 34px sans-serif';
+    ctx.fillText('שש הבעות בדמות המלאה — יעד המקור, לפני ואחרי', 1220, 52);
+    ctx.font = '22px sans-serif'; ctx.fillText('כל תקריבי המודל מאותה מצלמת גוף מלא ואותה תאורה; גיליון היעד מוצג ללא שיוך מומצא להבעות המבוקשות.', 1220, 90);
+    const fit = (image, x, y, w, h) => { const scale = Math.min(w / image.width, h / image.height); ctx.drawImage(image, x + (w - image.width * scale) / 2, y + (h - image.height * scale) / 2, image.width * scale, image.height * scale); };
+    const [target, before] = await Promise.all([getImage(`${origin}/ref/${encodeURIComponent(targetName)}`), getImage(`${origin}/shots/expression-baseline/front-head.png`)]);
+    ctx.fillStyle = '#fff'; ctx.fillRect(20, 120, 650, 900); ctx.fillRect(20, 1040, 650, 385);
+    ctx.fillStyle = '#27364a'; ctx.font = 'bold 27px sans-serif'; ctx.fillText('גיליון יעד מקורי — כל הפיקסלים', 345, 165);
+    fit(target, 35, 200, 620, 790); ctx.fillText('לפני הסבב — GLB שמור, חיוך קבוע', 345, 1082); fit(before, 105, 1110, 480, 280);
+    for (let i = 0; i < expressions.length; i++) {
+      const x = 700 + (i % 3) * 575, y = 120 + Math.floor(i / 3) * 650;
+      const [head, body] = await Promise.all([getImage(`${origin}/shots/expressions/${expressions[i]}-front-head.png`), getImage(`${origin}/shots/expressions/${expressions[i]}-front.png`)]);
+      ctx.fillStyle = '#fff'; ctx.fillRect(x, y, 550, 625); ctx.fillStyle = '#27364a'; ctx.font = 'bold 29px sans-serif'; ctx.fillText(names[expressions[i]], x + 275, y + 43);
+      fit(head, x + 15, y + 65, 520, 330); fit(body, x + 165, y + 397, 220, 220);
+    }
+    ctx.font = '21px sans-serif'; ctx.fillText('יעד: שינוי גודל אחיד בלבד. תקריבי המודל: חיתוך רסטר קבוע 340×280 מתוך צילום 480×720.', 1570, 1440);
+    return canvas.toDataURL('image/png');
+  }, { origin, expressions, names: expressionNames, targetName });
+  await writeFile(resolve(shots, 'expression-comparison.png'), Buffer.from(data.split(',')[1], 'base64'));
+  report.expressionComparison = { path: 'shots/expression-comparison.png', baseline: 'shots/expression-baseline/front-head.png', fullOriginalTargetSheet: true, targetCellMapping: 'none', cameraAndLights: 'identical full-body studio; fixed head raster crops', expressions };
+}
 async function benchmark({ baseline = false, delivered = false } = {}) {
   const fromGLB = baseline || delivered;
   let baselineRelative, baselineBytes;
   if (baseline) {
-    try { baselineRelative = 'shots/before/kid-full.glb'; baselineBytes = await readFile(resolve(root, baselineRelative)); }
+    try { baselineRelative = 'shots/expression-baseline/kid-full.glb'; baselineBytes = await readFile(resolve(root, baselineRelative)); }
     catch (error) { if (error.code !== 'ENOENT') throw error; baselineRelative = 'work/baseline/kid-full.glb'; baselineBytes = await readFile(resolve(root, baselineRelative)); }
   } else if (delivered) {
     baselineRelative = 'kid-full.glb';
     baselineBytes = await readFile(resolve(root, baselineRelative));
   }
   const key = baseline ? 'phoneBaseline' : delivered ? 'phoneDelivered' : 'phone';
-  const phone = report[key] = { experiment: selectedExperiment || 'final', viewport: phoneViewport, dpr: 1, requestedWarmupMs: 1000, requestedMeasureMs: 5000, freshContextsPerQuality: trialCount, view: 'threeQuarter', animation: 'stand → run → kick → stand; 1.2 s per leg; cosine eased', glFinishEachFrame: true, quality: {} };
+  const phone = report[key] = { experiment: selectedExperiment || 'final', viewport: phoneViewport, dpr: 1, requestedWarmupMs: 1000, requestedMeasureMs: 5000, freshContextsPerQuality: trialCount, view: 'threeQuarter', animation: 'stand → run → kick → stand body loop (1.2s per leg) and all six expressions (0.8s per leg); cosine eased; one completed draw per frame', glFinishEachFrame: true, quality: {} };
   if (fromGLB) Object.assign(phone, { experiment: baseline ? 'preserved-original-GLB' : 'delivered-GLB', modelSource: `${baseline ? 'preserved original' : 'delivered'} GLB loaded through the same lab scene`, path: baselineRelative, sha256: createHash('sha256').update(baselineBytes).digest('hex'), timingMethod: 'loadAndFirstDrawMs measures local GLB loading/parsing and first completed draw; embedded source procedural buildMs is deliberately omitted.' });
   for (const quality of fromGLB ? ['mobile'] : selectedQualities) {
     const trials = [];
@@ -534,8 +680,14 @@ async function benchmark({ baseline = false, delivered = false } = {}) {
           const before = performance.now();
           const cycle = Math.max(0, elapsed) / 1200, step = Math.floor(cycle) % 3, fraction = cycle % 1;
           const names = ['stand', 'run', 'kick'];
-          lab.setBlend(names[step], names[(step + 1) % 3], .5 - .5 * Math.cos(Math.PI * fraction));
-          // setBlend performs exactly one render; finish measures its GPU completion.
+          const t = .5 - .5 * Math.cos(Math.PI * fraction);
+          lab.setBlend(names[step], names[(step + 1) % 3], t, false);
+          const expressionNames = ['happy', 'effort', 'surprised', 'victory', 'tired', 'thinking'];
+          const expressionCycle = Math.max(0, elapsed) / 800, expressionStep = Math.floor(expressionCycle) % expressionNames.length;
+          const expressionT = .5 - .5 * Math.cos(Math.PI * (expressionCycle % 1));
+          if (lab.model.expressionMeshes?.length) lab.setExpressionBlend(expressionNames[expressionStep], expressionNames[(expressionStep + 1) % 6], expressionT, false);
+          lab.render();
+          // Body and expression weights update together before exactly one draw.
           gl.finish();
           if (measure) drawDurations.push(performance.now() - before);
         };
@@ -576,11 +728,13 @@ async function writeReport() {
   const rows = Object.entries(qualities).map(([name, q]) => `| ${name} | ${q.modelTriangles ?? '?'} | ${q.buildMs.median.toFixed(2)} | ${q.rendererSize?.width ?? '?'}×${q.rendererSize?.height ?? '?'} (${q.renderScale ?? '?'}) | ${q.fps.median.toFixed(2)} | ${Math.max(...q.trials.map(t => t.frameMs.p95)).toFixed(1)} | ${q.stable ? 'עבר' : 'לא עבר'} |`).join('\n');
   const baseline = report.phoneBaseline?.quality?.mobile;
   const baselineSummary = baseline ? `\n\nבסיס המקור נמדד מחדש באותה סביבת דפדפן וב־${baseline.trials.length} contexts טריים: ${baseline.modelTriangles} משולשים; FPS חציוני ${baseline.fps.median.toFixed(2)}, טווח ${baseline.fps.min.toFixed(2)}–${baseline.fps.max.toFixed(2)}, p95 מרבי ${Math.max(...baseline.trials.map(t => t.frameMs.p95)).toFixed(1)}ms. טעינת GLB וציור ראשון חציוניים: ${baseline.loadAndFirstDrawMs.median.toFixed(2)}ms. אין כאן זמן בנייה פרוצדורלי של גרסת המקור. ` : '';
-  await writeFile(resolve(work, 'capture-report.md'), `# צילום ומדידה\n\nתקציב mobile וה־GLB שנמסר: עד 20,000 משולשים. תנאי יציבות שנקבעו מראש: לפחות 40 FPS בכל ריצה, p95 לכל היותר 50ms, יחס מקסימום/מינימום בין הריצות לכל היותר 1.15.\n\n| איכות | משולשים במודל | בנייה חציונית ms | buffer וקנה מידה | FPS חציוני | p95 מקסימלי ms | יציבות |\n|---|---:|---:|---|---:|---:|---|\n${rows}${baselineSummary}\n\n390×844 CSS pixels, DPR1 של context. גודל ה־buffer וקנה המידה בפועל מפורטים בטבלה; דגימת הפריימים כוללת הגדלה למסך. חימום 1s ו־5s מדידה בכל context טרי; requestAnimationFrame ו־gl.finish לאחר כל ציור; מעבר תנוחות רציף. ${report.environment.browserVersion || ''}. הרינדור בענן ולא בטלפון פיזי.\n\nGLB: ${report.glb?.bytes ?? '?'} bytes; הפרש RGB ממוצע מקסימלי מתוך 255: ${report.glb?.maximumRGBMeanDifference ?? '?'}. ההשוואה ב־24 צילומים: שלוש תנוחות וארבע זוויות, ועוד 12 דגימות של האנימציות המיוצאות במיקסר; snapshots קודקודים נשמרים בדוח לכל תנוחה.\n\nגישה לפיקסלי תמונות היעד: ${report.reference?.sourcePixelAccess ? 'כן — קובץ המקור נקרא ישירות' : 'טרם נבדקה'}. גיליון ההבעות נגיש: ${report.expressionReference?.sourcePixelAccess ? 'כן' : 'טרם נבדק'}. צילום ההשוואה החדש כולל יעד/לפני/אחרי וחיתוכי פנים ושיער, באותה מצלמה ותאורה. המבט הרביעי ביעד הוא חזית חוזרת; אין יעד שלושה רבעים.\n`);
+  await writeFile(resolve(work, 'capture-report.md'), `# צילום ומדידה\n\nתקציב mobile וה־GLB שנמסר: עד 20,000 משולשים. תנאי יציבות שנקבעו מראש: לפחות 40 FPS בכל ריצה, p95 לכל היותר 50ms, יחס מקסימום/מינימום בין הריצות לכל היותר 1.15.\n\n| איכות | משולשים במודל | בנייה חציונית ms | buffer וקנה מידה | FPS חציוני | p95 מקסימלי ms | יציבות |\n|---|---:|---:|---|---:|---:|---|\n${rows}${baselineSummary}\n\n390×844 CSS pixels, DPR1 של context. גודל ה־buffer וקנה המידה בפועל מפורטים בטבלה; דגימת הפריימים כוללת הגדלה למסך. חימום 1s ו־5s מדידה בכל context טרי; requestAnimationFrame ו־gl.finish לאחר כל ציור; מעבר תנוחות רציף. ${report.environment.browserVersion || ''}. הרינדור בענן ולא בטלפון פיזי.\n\nGLB: ${report.glb?.bytes ?? '?'} bytes; הפרש RGB ממוצע מקסימלי מתוך 255: ${report.glb?.maximumRGBMeanDifference ?? '?'}. ההשוואה ב־48 מצבי צילום: שלוש תנוחות וארבע זוויות, 12 דגימות של האנימציות המיוצאות במיקסר, ועוד שש הבעות בארבע זוויות; snapshots קודקודים נשמרים בדוח לכל תנוחה.\n\nגישה לפיקסלי תמונות היעד: ${report.reference?.sourcePixelAccess ? 'כן — קובץ המקור נקרא ישירות' : 'טרם נבדקה'}. גיליון ההבעות נגיש: ${report.expressionReference?.sourcePixelAccess ? 'כן' : 'טרם נבדק'}. צילום ההשוואה החדש כולל יעד/לפני/אחרי וחיתוכי פנים ושיער, באותה מצלמה ותאורה. המבט הרביעי ביעד הוא חזית חוזרת; אין יעד שלושה רבעים.\n`);
 }
 try {
   browser = await chromium.launch({ executablePath: report.environment.chromiumPath, headless: true, args: flags });
   report.environment.browserVersion = browser.version();
+  if (expressionBaselineOnly) await captureExpressionBaseline();
+  else {
   if (!benchmarkOnly) await captureModels();
   if (baselineBenchmark) await benchmark({ baseline: true });
   else if (deliveredBenchmark) await benchmark({ delivered: true });
@@ -592,9 +746,10 @@ try {
   assert.equal(errors.length, 0, `Browser errors: ${JSON.stringify(errors)}`);
   assert.equal(externalRequests.length, 0, 'External runtime requests');
   console.log(`Captured evidence in ${shots}; report in shots/metrics.json`);
+  }
 } catch (error) {
   report.failure = { message: error.message, stack: error.stack };
-  await writeReport();
+  if (!expressionBaselineOnly) await writeReport();
   throw error;
 } finally {
   await browser?.close();
