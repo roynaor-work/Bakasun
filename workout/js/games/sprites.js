@@ -1,5 +1,5 @@
 // ציורים משותפים למשחקים: פוזות של דמויות מהקטלוג, ודמויות מצוירות (מכונית, ציפור, חללית...) במקום אימוג'י.
-import { byId } from '../exercises.js?v=20261009-companion-1';
+import { byId } from '../exercises.js?v=20261010-child-copy-1';
 
 export const POSE = {
   run: byId['hall-sprint'].frames.slice(0, 4),         // רצף ריצה

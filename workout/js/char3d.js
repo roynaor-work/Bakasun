@@ -1,7 +1,7 @@
 // הדמות התלת-ממדית המשותפת: טעינת המודל (Kenney, CC0), הנעת השלד מפוזות הקטלוג (PoseRig), ערכות בגדים (צביעת הטקסטורה),
 // וסצנות מוכנות (חדר, אצטדיון, מסלול). משמש את מסך התרגיל (3d/), את חגיגת השיא (games/celebrate3d.js) ובעתיד את משחקי הספורט.
-import * as THREE from '../3d/lib/three.module.min.js?v=20261009-companion-1';
-import { FBXLoader } from '../3d/lib/loaders/FBXLoader.js?v=20261009-companion-1';
+import * as THREE from '../3d/lib/three.module.min.js?v=20261010-child-copy-1';
+import { FBXLoader } from '../3d/lib/loaders/FBXLoader.js?v=20261010-child-copy-1';
 
 export { THREE };
 export const SCALE = 68 / 111; // רגל תלת-ממד (111 יחידות) = רגל דו-ממד (68), כך שהדמות בקנה מידה של פוזות הקטלוג
@@ -64,7 +64,7 @@ export async function kitTexture(kit = KITS3D.maccabi) {
 // ---- המודל ----
 let fbxText = null;
 async function fbxBuffer() {
-  if (!fbxText) fbxText = import('../3d/model/character.js?v=20261009-companion-1').then(m => { const bin = atob(m.FBX_B64), buf = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i); return buf.buffer; });
+  if (!fbxText) fbxText = import('../3d/model/character.js?v=20261010-child-copy-1').then(m => { const bin = atob(m.FBX_B64), buf = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i); return buf.buffer; });
   return fbxText;
 }
 // דמות חדשה (כל קריאה = עותק עצמאי עם שלד משלו). מחזיר { model, rig, mesh, setKit }

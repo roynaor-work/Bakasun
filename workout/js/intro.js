@@ -1,6 +1,6 @@
 // סרטוני פתיחה: סצנה קצרה (כ-6 שניות) שבה הדמות שלו מנצחת. אחת אקראית לפני כל אימון, כדי להתחיל עם חיוך.
-import { Figure, poseAt } from './figure.js?v=20261009-companion-1';
-import { byId } from './exercises.js?v=20261009-companion-1';
+import { Figure, poseAt } from './figure.js?v=20261010-child-copy-1';
+import { byId } from './exercises.js?v=20261010-child-copy-1';
 
 const NS = 'http://www.w3.org/2000/svg';
 const el = (tag, attrs) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };

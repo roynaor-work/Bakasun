@@ -1,10 +1,10 @@
 // חגיגת שיא חדש בתלת-ממד: אותה דמות כמו במסך התרגיל (Kenney, חולצת מכבי חיפה) באצטדיון או במגרש כדורסל.
 // חמש סצנות: שער מבעיטה, שער בנגיחה, סלאם דאנק, קליעת שלוש, ריצת 100 מטר. הקצב איטי וברור (רועי, 30/09).
 // הצלילים והקריין מהגרסה הדו-ממדית (makeAudio, ההקלטות של רועי). בלי WebGL, או אם הטעינה נכשלה, המנוע חוזר לגרסה הדו-ממדית.
-import { THREE, hasWebGL, loadCharacter, KITS3D, lights, crowd, confetti, soccerBallMesh, makeRenderer } from '../char3d.js?v=20261009-companion-1';
-import { makeAudio, SPRINT, WALK, LEAN, poseAt, celebrate as celebrate2d } from './celebrate.js?v=20261009-companion-1';
-import { lerpPose } from '../figure.js?v=20261009-companion-1';
-import { POSE, GK } from './sprites.js?v=20261009-companion-1';
+import { THREE, hasWebGL, loadCharacter, KITS3D, lights, crowd, confetti, soccerBallMesh, makeRenderer } from '../char3d.js?v=20261010-child-copy-1';
+import { makeAudio, SPRINT, WALK, LEAN, poseAt, celebrate as celebrate2d } from './celebrate.js?v=20261010-child-copy-1';
+import { lerpPose } from '../figure.js?v=20261010-child-copy-1';
+import { POSE, GK } from './sprites.js?v=20261010-child-copy-1';
 
 const rnd = (a, b) => a + Math.random() * (b - a), clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, easeOut = t => 1 - Math.pow(1 - t, 3);

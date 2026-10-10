@@ -1,4 +1,6 @@
 // היגיון טהור בלי DOM: חישוב יעדים לפי רמה, סיכומים, רצף ימים, תגים. נבדק ב-tests/workout.test.mjs.
+import { SAY_UI } from './say-ui.js?v=20261010-child-copy-1';
+
 export const LEVELS = { easy: { name: 'קל', mult: 0.7 }, normal: { name: 'רגיל', mult: 1 }, hard: { name: 'חזק', mult: 1.35 }, pro: { name: 'אלוף', mult: 1.7 } };
 
 // העלאת קושי לכל תוכנית בנפרד (מהשאלה בסוף האימון): boost = +10% חזרות/זמן לכל דרגה, swaps = כמה פעמים החלפנו לתרגיל קשה יותר
@@ -168,7 +170,7 @@ export const BB_DRILLS = [
   { id: 'dribble', name: 'כדרור', emoji: '🔄', shots: false },
   { id: 'passing', name: 'מסירות', emoji: '🤝', shots: true },
   { id: 'defense', name: 'הגנה ורגליים', emoji: '🛡️', shots: false },
-  { id: 'jump', name: 'ניתור לסל', emoji: '🦘', shots: false },
+  { id: 'jump', name: 'קפיצות לסל', emoji: '🦘', shots: false },
   { id: 'game', name: 'משחק אחד על אחד', emoji: '🆚', shots: true },
 ];
 export const bbDrillById = Object.fromEntries(BB_DRILLS.map(d => [d.id, d]));
@@ -227,14 +229,7 @@ export function rankUp(before, after) {
 }
 
 // המשפט של ההתמדה בסוף אימון
-export function perseveranceLine(st) {
-  const n = st.thisWeek, ord = ['', 'הראשון', 'השני', 'השלישי', 'הרביעי', 'החמישי', 'השישי', 'השביעי'][n] || `ה-${n}`;
-  const parts = [`כל הכבוד! זה האימון ${ord} שלך השבוע.`];
-  if (st.streak >= 2) parts.push(`${st.streak} ימים ברצף!`);
-  if (st.workouts === 1) parts.push('האימון הראשון בכלל. התחלה מעולה!');
-  else if ([5, 10, 20, 30, 50, 100].includes(st.workouts)) parts.push(`וזה האימון מספר ${st.workouts} שלך. וואו!`);
-  return parts.join(' ');
-}
+export const perseveranceLine = st => SAY_UI.perseverance(st);
 
 // זמן אימון אמיתי (29/09, רועי): תרגיל שסומן מהר מדי (פחות מ-45% מהזמן הצפוי) לא נספר. זמן צפוי: זמן = היעד; חזרות = 2.2 שניות לחזרה (לפחות 10).
 // נספר לכל היותר 160% מהצפוי לתרגיל. מנוחות בין תרגילי האימון נספרות. המתנות: אחת על כל tokenMinutes דקות, עד 8

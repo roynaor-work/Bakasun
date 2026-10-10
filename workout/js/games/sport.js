@@ -1,5 +1,5 @@
 // משחקי ספורט וקפיצה, עם דמויות מקלות אמיתיות (שוער שקופץ, רץ, קופץ), אפקטים וצלילים.
-import { POSE, GK, S, KITS } from './sprites.js?v=20261009-companion-1';
+import { POSE, GK, S, KITS } from './sprites.js?v=20261010-child-copy-1';
 const SP = S;
 const G = [];
 

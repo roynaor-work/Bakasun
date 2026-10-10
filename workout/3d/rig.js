@@ -1,6 +1,6 @@
 // מניע שלד תלת-ממדי (Mixamo-style: Hips, Spine, Neck, Head, UpLeg/Leg/Foot, Arm/ForeArm/Hand) מפוזות הדו-ממד של הקטלוג (200x200, רצפה 182).
 // הרעיון: לכל עצם יש כיוון מנוחה (אל הילד שלו). מחשבים מהפוזה כיוון יעד במישור המסך ומסובבים את העצם בסיבוב המינימלי מכיוון המנוחה לכיוון היעד.
-import * as THREE from './lib/three.module.min.js?v=20261009-companion-1';
+import * as THREE from './lib/three.module.min.js?v=20261010-child-copy-1';
 
 const _q = new THREE.Quaternion(), _pq = new THREE.Quaternion(), _v = new THREE.Vector3(), _w = new THREE.Vector3();
 export class PoseRig {
