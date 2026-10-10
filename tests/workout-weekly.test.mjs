@@ -5,6 +5,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { normalizePlan, validatePlan, weekStart, reportSessions, weeklyReport } from '../workout/js/weekly.js';
 import { DEFAULT_PLAN, programById } from '../workout/js/programs.js';
 import { dayKey, todayProgram } from '../workout/js/logic.js';
+import { APP_VERSION } from '../workout/js/camera-session.mjs';
 
 const date = (day, hour = 12) => new Date(2026, 9, day, hour);
 const item = (done, target = 10) => ({ exId: 'squats', name: 'סקוואט', type: 'reps', done, target });
@@ -117,12 +118,12 @@ test('calendar weeks cross year and daylight-saving boundaries and date-only val
 });
 
 test('all app imports and entry assets use one version, including lazy imports and the three.js loader chain', async () => {
-  const version = '20261010-child-copy-1';
+  const version = APP_VERSION;
   async function inspect(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const url = new URL(entry.name + (entry.isDirectory() ? '/' : ''), directory);
       if (entry.isDirectory()) { await inspect(url); continue; }
-      if (!/\.(js|html)$/.test(entry.name) || ['three.module.min.js', 'character.js'].includes(entry.name)) continue;
+      if (!/\.(js|mjs|html)$/.test(entry.name) || ['three.module.min.js', 'character.js'].includes(entry.name)) continue;
       const content = await readFile(url, 'utf8');
       for (const match of content.matchAll(/\b(?:from\s*|import\s*\(\s*|import\s+)(['"])([^'"]+)\1/g)) {
         if (match[2].startsWith('node:')) continue;

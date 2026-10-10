@@ -1,9 +1,9 @@
 // דיבור בעברית: הקול של המכשיר (Web Speech API), עם בחירת הקול הטוב ביותר, קצב מכוון, וטקסטים מנוקדים.
 // למה ניקוד: מנועי הדיבור (גוגל באנדרואיד, "כרמית" באייפון) מנחשים הגייה של מילים בלי ניקוד וטועים. עם ניקוד הם קוראים נכון.
-import { store } from './store.js?v=20261010-child-copy-1';
+import { store } from './store.js?v=20261010-camera-1';
 
-import { createVoicePlayer } from './voice-player.js?v=20261010-child-copy-1';
-import { VOICE_BY_ID } from './voice-lines.js?v=20261010-child-copy-1';
+import { createVoicePlayer } from './voice-player.js?v=20261010-camera-1';
+import { VOICE_BY_ID } from './voice-lines.js?v=20261010-camera-1';
 
 const synth = window.speechSynthesis;
 let voices = [];
@@ -42,9 +42,10 @@ const player = createVoicePlayer({
     try {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = options.lang; u.rate = options.rate; u.pitch = options.pitch;
-      const v = options.lang === 'he-IL' ? bestVoice() :
+      const v = options.localOnly ? hebrewVoices().find(v => v.localService === true) : options.lang === 'he-IL' ? bestVoice() :
         (synth.getVoices() || []).find(v => v.lang.startsWith(options.lang.slice(0, 2)) && /natural|neural|online|google|samantha|daniel/i.test(v.name)) ||
         (synth.getVoices() || []).find(v => v.lang.startsWith(options.lang.slice(0, 2)));
+      if (options.localOnly && !v) return false;
       if (v) u.voice = v;
       let ended = false;
       const finish = () => { if (!ended) { ended = true; onDone(); } };
@@ -68,6 +69,11 @@ export function sayQuick(text, { rate = 1.05 } = {}) {
 }
 export const spokeRecently = ms => player.spokeRecently(ms);
 export const stopSpeak = () => player.stop();
+// Camera mode keeps speech on the device too; installed recordings still win.
+export function speakLocal(text, { quick = false } = {}) {
+  if (store.profile.voice === false) return false;
+  return player.play(clean(text), { localOnly: true, quick, rate: .92, pitch: 1 });
+}
 // חגיגות משתמשות בהקלטות הישנות שלהן כאשר אין קובץ חדש מוכן.
 export function playVoiceRecording(id) {
   if (store.profile.voice === false || !player.buffers.has(id)) return false;
@@ -75,4 +81,4 @@ export function playVoiceRecording(id) {
   return player.play(line.text, { lang: line.lang, rate: 1, pitch: 1 });
 }
 
-export { SAY_UI } from './say-ui.js?v=20261010-child-copy-1';
+export { SAY_UI } from './say-ui.js?v=20261010-camera-1';

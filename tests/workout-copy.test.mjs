@@ -6,7 +6,7 @@ import { SAY_UI, SAY_UI_TTS } from '../workout/js/say-ui.js';
 import { EXERCISES, CATS } from '../workout/js/exercises.js';
 import { PROGRAMS } from '../workout/js/programs.js';
 import { numWord, timeCue } from '../workout/js/count.js';
-import { VOICE_LINES, VOICE_BY_ID, splitVoiceText, FRAGMENTS } from '../workout/js/voice-lines.js';
+import { VOICE_LINES, VOICE_BY_ID, splitVoiceText, FRAGMENTS, CAMERA_LINES } from '../workout/js/voice-lines.js';
 import { chooseVoice } from '../workout/js/voice-player.js';
 import { exerciseName, workoutName } from '../workout/js/workout-copy.js';
 
@@ -58,9 +58,11 @@ test('all 25 exercise names change exactly as approved, retaining exercise IDs',
 });
 
 test('catalog display copy is unpointed, each Hebrew line has separate pointed TTS and every ID is retained', () => {
-  assert.equal(VOICE_LINES.length, 202);
-  assert.equal(new Set(VOICE_LINES.map(line => line.id)).size, 202);
+  const cameraIds = Object.entries(CAMERA_LINES).flatMap(([group, entries]) => Object.keys(entries).map(id => `camera-${group}-${id}`));
+  assert.equal(VOICE_LINES.length, 202 + cameraIds.length);
+  assert.equal(new Set(VOICE_LINES.map(line => line.id)).size, 202 + cameraIds.length);
   const expectedIds = [
+    ...cameraIds,
     ...EXERCISES.flatMap(ex => [`exercise-${ex.id}`, `name-${ex.id}`]),
     ...['costTwo', 'howWas', 'test'].map(id => `ui-${id}`),
     ...Object.keys(SAY_UI.intro).map(id => `intro-${id}`),

@@ -1,6 +1,6 @@
 # משפטים להקלטה
 
-202 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
+215 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
 
 מקליטים בטלפון ב־https://roynaor-work.github.io/Bakasun/workout/voice-rec/ (אחרי מיזוג). Chrome באנדרואיד או Safari באייפון, דרך HTTPS. אין קישור מהאפליקציה.
 
@@ -18,6 +18,19 @@
 
 | מזהה | הטקסט המדויק | איפה נאמר בקוד | שם קובץ צפוי |
 |---|---|---|---|
+| `camera-instructions-squats` | יורדים כמו לשבת, ואז עומדים. | workout/js/camera-demo.mjs: CameraDemo | `camera-instructions-squats.wav` |
+| `camera-instructions-jumping-jacks` | פותחים רגלים וידים, ואז סוגרים. | workout/js/camera-demo.mjs: CameraDemo | `camera-instructions-jumping-jacks.wav` |
+| `camera-instructions-high-knees` | מרימים ברך, מורידים ומחליפים רגל. | workout/js/camera-demo.mjs: CameraDemo | `camera-instructions-high-knees.wav` |
+| `camera-instructions-lunges` | צועדים, יורדים, עולים ומחליפים רגל. | workout/js/camera-demo.mjs: CameraDemo | `camera-instructions-lunges.wav` |
+| `camera-instructions-push-ups` | גוף ישר. מכופים ידים ודוחפים למעלה. | workout/js/camera-demo.mjs: CameraDemo | `camera-instructions-push-ups.wav` |
+| `camera-instructions-knee-push-ups` | ברכים ברצפה. מכופים ידים ודוחפים. | workout/js/camera-demo.mjs: CameraDemo | `camera-instructions-knee-push-ups.wav` |
+| `camera-instructions-glute-bridge` | מרימים ישבן לקו ישר, ומורידים. | workout/js/camera-demo.mjs: CameraDemo | `camera-instructions-glute-bridge.wav` |
+| `camera-reasons-partial` | ננסה תנועה שלמה, בנחת. | workout/js/camera-demo.mjs: CameraDemo | `camera-reasons-partial.wav` |
+| `camera-reasons-knees` | ברכים לכוון אצבעות הרגלים. | workout/js/camera-demo.mjs: CameraDemo | `camera-reasons-knees.wav` |
+| `camera-reasons-fast` | ננסה לזוז קצת יותר לאט. | workout/js/camera-demo.mjs: CameraDemo | `camera-reasons-fast.wav` |
+| `camera-reasons-tracking` | נחזר לתמונה ונתחיל שוב. | workout/js/camera-demo.mjs: CameraDemo | `camera-reasons-tracking.wav` |
+| `camera-reasons-timeout` | חוזרים לתנוחה שבה התחלנו. | workout/js/camera-demo.mjs: CameraDemo | `camera-reasons-timeout.wav` |
+| `camera-reasons-alternate` | עכשו נחליף לרגל השניה. | workout/js/camera-demo.mjs: CameraDemo | `camera-reasons-alternate.wav` |
 | `exercise-jog` | ריצה קלה במקום. רצים במקום, לאט ונעים. הידיים זזות כמו בריצה. זה חימום, לא מרוץ. | workout/js/say.js: SAY[jog]; workout/js/app.js: wireHelp / sayText | `exercise-jog.wav` |
 | `exercise-arm-circles` | סיבובי ידיים. פותחים ידיים לצדדים. עושים עיגולים גדולים קדימה. באמצע מחליפים, ומסובבים אחורה. הכתפיים רגועות. | workout/js/say.js: SAY[arm-circles]; workout/js/app.js: wireHelp / sayText | `exercise-arm-circles.wav` |
 | `exercise-ankle-hops` | קפיצות קפיץ. רגליים צמודות. קופצים קטן ומהר, כמו קפיץ. נוחתים על קצות האצבעות. | workout/js/say.js: SAY[ankle-hops]; workout/js/app.js: wireHelp / sayText | `exercise-ankle-hops.wav` |

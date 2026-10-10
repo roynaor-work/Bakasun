@@ -109,7 +109,7 @@ with sync_playwright() as pw:
     expect(page.locator('.companion-card')).to_contain_text('5 אימונים')
     assert data(page)['sessions'] == after['sessions']
     modules = [url for url in requests if '.js?' in url and url.startswith(BASE)]
-    assert modules and all(url.endswith('?v=20261009-companion-1') for url in modules), modules
+    assert modules and all(url.endswith('?v=20261010-camera-1') for url in modules), modules
     assert not errors, errors
     context.close()
 
