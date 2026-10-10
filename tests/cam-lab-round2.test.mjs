@@ -101,7 +101,7 @@ function pairRig() {
       time += 50; recorder.add(poses, time);
       const assigned = tracker.update(poses, time, 4 / 3);
       if (started) counters.forEach((c, index) => {
-        if (!assigned[index] && !missing[index]) c.resetTracking();
+        if (tracker.status === 'ambiguous' && !c.lossReset) c.resetTracking();
         missing[index] = !assigned[index];
         c.update(assigned[index]?.landmarks || [], assigned[index]?.world || [], time, 4 / 3);
       });
@@ -116,9 +116,10 @@ test('two people count independently despite detector order changes, disappearan
   r.send([r.child({ angle: 110 }), r.dad()]); r.send([r.dad(), r.child()]);
   assert.deepEqual(r.counters.map(c => c.count), [1, 0]);
   r.send([r.dad({ angle: 110 }), r.child({ angle: 110 })]);
-  r.send([r.dad()], 100); // Child leaves mid-rep: immediately cancels, even under grace.
-  assert.equal(r.counters[0].cycle, null); assert.equal(r.counters[0].reasons.tracking, 1);
+  r.send([r.dad()], 100); // Brief loss preserves the cycle, longer absence cancels.
+  assert.ok(r.counters[0].cycle); assert.equal(r.counters[0].rejected, 0);
   r.send([r.dad()]); assert.deepEqual(r.counters.map(c => c.count), [1, 1]);
+  assert.equal(r.counters[0].cycle, null); assert.equal(r.counters[0].reasons.tracking, 1);
   r.send([r.child(), r.dad()]); r.send([r.dad(), r.child({ angle: 110 })]); r.send([r.child(), r.dad()]);
   assert.deepEqual(r.counters.map(c => c.count), [2, 1]);
   const replay = replayRecording(JSON.parse(r.recorder.json()));
@@ -169,7 +170,7 @@ test('tracker handles gradual standing-to-floor movement without relabeling by c
   }
 });
 test('placement gives actionable distance and sustained roll feedback; floor poses are excluded', () => {
-  const guide = new PlacementGuide(), small = person(pose(), { size: .4 });
+  const guide = new PlacementGuide(), small = person(pose(), { size: .3 });
   assert.equal(guide.update([small], 0, 4 / 3), 'far');
   const tilted = person(pose(), { x: .5, size: .8 });
   tilted.landmarks.forEach(p => p.y += (p.x - .5) * 4 / 3 * Math.tan(12 * Math.PI / 180));

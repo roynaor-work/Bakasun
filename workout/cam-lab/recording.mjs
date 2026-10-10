@@ -1,4 +1,4 @@
-import { RepCounter, EXERCISES, FLOOR, bodyReport, features, worldRequired } from './counter.mjs';
+import { RepCounter, EXERCISES, FLOOR } from './counter.mjs';
 import { PeopleTracker } from './people.mjs';
 import { PlacementGuide } from './placement.mjs';
 
@@ -47,7 +47,7 @@ export function replayRecording(recording) {
   }
   const tracker = recording.mode === 'pair' ? new PeopleTracker() : null;
   const placement = new PlacementGuide(); let placementDone = !FLOOR.includes(recording.exercise);
-  let started = false, last = -1; const missing = [false, false];
+  let started = false, last = -1;
   for (const frame of recording.frames) {
     if (!Number.isFinite(frame.t) || frame.t <= last || !Array.isArray(frame.poses)) throw new TypeError('רצף פריימים לא תקין');
     last = frame.t;
@@ -58,11 +58,7 @@ export function replayRecording(recording) {
     if (frame.t < recording.countStartMs) continue;
     if (!started) { counters.forEach(c => c.begin(recording.countStartMs, true)); started = true; }
     counters.forEach((c, i) => {
-      const report = bodyReport(poses[i]?.landmarks || [], recording.aspect, recording.exercise);
-      const valid = report.ok && !worldRequired(recording.exercise,
-        features(poses[i]?.landmarks || [], poses[i]?.world || [], recording.aspect, report));
-      if (!valid && tracker && !missing[i]) c.resetTracking();
-      missing[i] = !valid;
+      if (tracker?.status === 'ambiguous' && !c.lossReset) c.resetTracking();
       c.update(poses[i]?.landmarks || [], poses[i]?.world || [], frame.t, recording.aspect);
     });
   }

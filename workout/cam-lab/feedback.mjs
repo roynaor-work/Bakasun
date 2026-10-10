@@ -56,13 +56,20 @@ export class RestGate {
 
 export function diagnosticLines(d) {
   const lines = [
-    d.frames ? `כל הגוף היה ברור ב־${d.fullBodyPercent.toFixed(1)}% מהפריימים (${d.fullBodyPassed} מתוך ${d.frames})` : 'לא התקבלו פריימים בזמן הספירה',
+    d.frames ? `נקודות החובה במסגרת עברו ב־${d.fullBodyPercent.toFixed(1)}% מהפריימים (${d.fullBodyPassed} מתוך ${d.frames})` : 'לא התקבלו פריימים בזמן הספירה',
+    `חזרות שנפסלו בגלל מסגרת/נקודות חובה: ${d.rejectedBy.framing} · תנועה שלא הגיעה לסף: ${d.rejectedBy.motionThreshold} · אובדן זיהוי/זוויות: ${d.rejectedBy.tracking} · סיבות אחרות: ${d.rejectedBy.other}`,
     `זמן המתנה לעמידה: ${(d.phaseMs.waiting / 1000).toFixed(1)} שניות · מוכן לתנועה: ${(d.phaseMs.armed / 1000).toFixed(1)} שניות · באמצע תנועה: ${(d.phaseMs.moving / 1000).toFixed(1)} שניות`,
     `מחזורים שהתחילו: ${d.cyclesStarted} · איפוסים בגלל אובדן זיהוי לפני מחזור: ${d.idleTrackingResets}`,
     `פריימים בעמידת התחלה: ${d.restFrames} · בתחילת תנועה: ${d.startFrames} · ביעד: ${d.targetFrames}`,
     `אובדני זיהוי קצרים שמהם חזרנו: ${d.graceRecoveries} · איפוסי זיהוי בסך הכול: ${d.trackingResets}`,
-    `פריימים ללא זווית ברך תלת־ממדית ברורה: ${d.worldMissingFrames}`,
+    `פריימים ללא זוויות התרגיל בעולם: ${d.worldMissingFrames}`,
   ];
+  const frequent = Object.entries({ ...d.failureFrames, world: d.worldMissingFrames }).sort((a, b) => b[1] - a[1])[0];
+  lines.push(frequent?.[1] ? `הסיבה הנפוצה להמתנה: ${DIAGNOSTIC_LABELS[frequent[0]] || 'זוויות לא ברורות'} — ${frequent[1]} פריימים` : 'כשל מסגרת/זיהוי: 0 פריימים');
+  if (d.frames && !d.startFrames) lines.push('פריימים שעברו את סף תחילת התנועה: 0; לא זוהתה תחילת חזרה');
+  for (const [id, percent] of Object.entries(d.requiredPointPercent)) {
+    lines.push(`${POINT_LABELS[id]} — עברה ב־${percent.toFixed(1)}% (${d.requiredPointPassed[id] || 0}/${d.requiredPointFrames[id]})`);
+  }
   for (const [reason, count] of Object.entries(d.failureFrames)) {
     if (!count) continue;
     const points = Object.entries(d.failedPoints[reason] || {}).map(([id, n]) => `${POINT_LABELS[id]}: ${n}`).join(', ');
