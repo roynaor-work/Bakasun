@@ -169,15 +169,24 @@ export class UploadQueue {
     const controller = new AbortController(); this.controller = controller;
     let timer;
     try {
-      const body = JSON.stringify({ secret: config.secret, session: record.session, part: part.part, mime: part.mime, data: await blobToBase64(part.blob) });
+      const mime = part.part === 'video' ? part.mime.split(';', 1)[0].trim() : part.mime;
+      const body = JSON.stringify({ secret: config.secret, session: record.session, part: part.part, mime, data: await blobToBase64(part.blob) });
       if (!this.enabled || this.config !== config) return false;
       const timedOut = new Promise((_, reject) => {
         timer = setTimeout(() => { controller.abort(); reject(new Error(sendError)); }, this.timeoutMs);
       });
       const response = await Promise.race([this.fetchImpl(config.endpoint, {
         method: 'POST', headers: { 'Content-Type': 'text/plain' }, body, signal: controller.signal,
-        credentials: 'omit', referrerPolicy: 'no-referrer', redirect: 'error',
-      }).then(async response => ({ response, result: await response.json() })), timedOut]);
+        credentials: 'omit', referrerPolicy: 'no-referrer', redirect: 'follow',
+      }).then(async response => {
+        if (response.redirected) {
+          let url;
+          try { url = new URL(response.url); } catch { throw new Error(sendError); }
+          if (url.protocol !== 'https:' ||
+            (url.hostname !== 'script.googleusercontent.com' && url.hostname !== new URL(config.endpoint).hostname)) throw new Error(sendError);
+        }
+        return { response, result: await response.json() };
+      }), timedOut]);
       if (!response.response.ok || response.result?.ok !== true) throw new Error(sendError);
       return true;
     } finally { clearTimeout(timer); if (this.controller === controller) this.controller = null; }

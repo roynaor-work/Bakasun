@@ -112,12 +112,67 @@ test('three files are durable before POST, with exact text/plain contract and no
   assert.deepEqual(requests.map(request => request.body.part), ['video', 'skeleton', 'diagnostics']);
   for (const { endpoint, options, body } of requests) {
     assert.equal(endpoint, config.endpoint); assert.equal(options.method, 'POST'); assert.equal(options.headers['Content-Type'], 'text/plain');
-    assert.equal(options.credentials, 'omit'); assert.equal(options.redirect, 'error'); assert.equal(options.referrerPolicy, 'no-referrer');
+    assert.equal(options.credentials, 'omit'); assert.equal(options.redirect, 'follow'); assert.equal(options.referrerPolicy, 'no-referrer');
     assert.deepEqual(Object.keys(body), ['secret', 'session', 'part', 'mime', 'data']); assert.equal(body.secret, config.secret);
   }
   assert.equal(Buffer.from(requests[0].body.data, 'base64').toString(), 'synthetic-video');
   assert.deepEqual(statuses.filter(status => status.state === 'sending').map(status => status.message), ['שולח 1 מתוך 3', 'שולח 2 מתוך 3', 'שולח 3 מתוך 3']);
   assert.equal(statuses.at(-1).message, 'נשלח לבדיקה');
+});
+
+test('video MIME parameters are stripped at send time without changing queued bytes or Blob type', async () => {
+  const store = new MemoryStore(), requests = [], data = input();
+  data.video = new Blob(['synthetic-video'], { type: 'video/webm;codecs=vp8' });
+  const queue = new UploadQueue({ config, store, fetchImpl: async (_, options) => {
+    requests.push(JSON.parse(options.body)); return goodResponse();
+  } });
+  await queue.enqueue(data);
+  assert.equal([...store.records.values()][0].parts[0].blob.type, 'video/webm;codecs=vp8');
+  assert.equal(await queue.retry(), true);
+  assert.deepEqual(requests.map(request => request.mime), ['video/webm', 'application/json', 'application/json']);
+  assert.equal(Buffer.from(requests[0].data, 'base64').toString(), 'synthetic-video');
+});
+
+test('HTTPS redirects to Apps Script response host or configured host acknowledge all three parts', async () => {
+  for (const url of ['https://script.googleusercontent.com/macros/echo?test=synthetic',
+    'https://upload.example.invalid/response']) {
+    const store = new MemoryStore(), parts = [];
+    const queue = new UploadQueue({ config, store, fetchImpl: async (_, options) => {
+      assert.equal(options.redirect, 'follow'); parts.push(JSON.parse(options.body).part);
+      return { ...goodResponse(), redirected: true, url };
+    } });
+    await queue.enqueue(input()); assert.equal(await queue.retry(), true);
+    assert.deepEqual(parts, ['video', 'skeleton', 'diagnostics']); assert.equal(store.records.size, 0);
+  }
+});
+
+test('foreign, non-HTTPS, and malformed redirect URLs fail before JSON is read and retain queued files', async () => {
+  for (const url of ['https://foreign.example.invalid/response',
+    'https://script.googleusercontent.com.foreign.example.invalid/response',
+    'http://script.googleusercontent.com/response', 'http://upload.example.invalid/response', 'invalid']) {
+    const store = new MemoryStore(), statuses = []; let calls = 0, jsonReads = 0;
+    const queue = new UploadQueue({ config, store, onStatus: status => statuses.push(status), fetchImpl: async () => {
+      calls++;
+      return { ok: true, redirected: true, url, json: async () => { jsonReads++; return { ok: true }; } };
+    } });
+    await queue.enqueue(input()); assert.equal(await queue.retry(), false);
+    assert.equal(calls, 1); assert.equal(jsonReads, 0); assert.equal(store.records.size, 1);
+    assert.equal([...store.records.values()][0].parts.some(part => part.acked), false);
+    assert.equal(statuses.at(-1).state, 'error');
+    assert.match(statuses.at(-1).message, /השליחה לבדיקה נכשלה/);
+    assert.equal(JSON.stringify(statuses).includes(url), false);
+  }
+});
+
+test('allowed redirect still requires successful HTTP and JSON ok strictly true', async () => {
+  for (const [ok, result] of [[false, { ok: true }], [true, { ok: false, error: 'secret' }], [true, { ok: 'true' }]]) {
+    const store = new MemoryStore();
+    const queue = new UploadQueue({ config, store, fetchImpl: async () => ({
+      ok, redirected: true, url: 'https://script.googleusercontent.com/macros/echo?test=synthetic', json: async () => result,
+    }) });
+    await queue.enqueue(input()); assert.equal(await queue.retry(), false);
+    assert.equal([...store.records.values()][0].parts.some(part => part.acked), false);
+  }
 });
 
 test('partial success is durable and next visit retries only unacknowledged files', async () => {
