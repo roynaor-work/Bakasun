@@ -68,10 +68,13 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
       worker.onmessage({ data: { type: 'pose', id: now / 50, timestamp: now,
         landmarks: sample?.p || [], world: sample?.world || [], ...(Array.isArray(sample) ? { poses: sample } : {}), inferenceMs: 54 } });
     };
-    for (let i = 0; i < 30; i++) await frame(pose({ angle: 159, feet: 1.7, hands: .3 }));
+    for (let i = 0; i < 70; i++) await frame(pose({ angle: 159, feet: 1.7, hands: .3 }));
     assert.match(get('zoom-status').textContent, /0.5.*640×480/);
     assert.match(get('distance-status').textContent, /המרחק נוח/);
-    assert.equal(get('start').disabled, false); get('start').click();
+    assert.equal(get('start').hidden, true); // Automatic start also works in private mode.
+    assert.equal(get('record-option').hidden, false);
+    assert.equal(get('recording-panel').hidden, false);
+    assert.equal(get('export-panel').hidden, false);
     for (let i = 0; i < 10; i++) await frame(pose({ angle: 110 }));
     for (let i = 0; i < 4; i++) await frame(null);
     for (let i = 0; i < 6; i++) await frame(pose({ angle: 110 }));
@@ -83,10 +86,11 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     // Ignore the initial loading text; all live changes obey the 1-second limit.
     for (let i = 2; i < painted.length; i++) assert.ok(painted[i] - painted[i - 1] >= 1000);
     assert.ok(speech.length >= 2);
-    for (let i = 0; i < speech.length; i++) {
-      assert.equal(speech[i].voice.localService, true);
-      if (i) assert.ok(speech[i].time - speech[i - 1].time >= 6000);
-    }
+    const cues = new Set(['שָׁלוֹשׁ', 'שְׁתַּיִם', 'אַחַת']);
+    assert.deepEqual(speech.filter(s => cues.has(s.text)).map(s => s.text), [...cues]);
+    for (const s of speech) assert.equal(s.voice.localService, true);
+    const guidance = speech.filter(s => !cues.has(s.text));
+    for (let i = 1; i < guidance.length; i++) assert.ok(guidance[i].time - guidance[i - 1].time >= 6000);
     get('finish').click(); assert.equal(stopped, 1); assert.equal(terminated, 1);
     assert.equal(get('result-count').textContent, '1 חזרות נספרו');
     assert.ok(get('diagnostics').children.some(li => li.textContent.includes('לפני מחזור: 1')));

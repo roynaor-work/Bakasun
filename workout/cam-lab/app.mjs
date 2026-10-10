@@ -4,6 +4,7 @@ import { PeopleTracker } from './people.mjs';
 import { PlacementGuide, placementDistance } from './placement.mjs';
 import { SkeletonRecorder } from './recording.mjs';
 import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId } from './upload.mjs';
+import { AutoStart } from './auto-start.mjs';
 import { VideoRecorder } from './video-recording.mjs';
 import { acquireCamera, configureZoom, cameraSnapshot, reduceResolution } from './camera.mjs';
 export const LAB_VERSION = '4.0.0';
@@ -34,7 +35,7 @@ let lastFrame = null, totalFrames = 0, totalInference = 0, log = [], lastSpeak =
 let lastMetricPaint = 0, watchdog = 0, totalElapsed = 0;
 let pair = false, adult, adultGate, tracker, placement, placementGate, placementDone, queuedSpeech = null;
 let ambiguousTracking = [false, false], calibratedPeople = [false, false];
-let recorder = new SkeletonRecorder();
+let recorder = new SkeletonRecorder(), autoStart, attemptEnded = true, endReason = null;
 let poseFilters = [], lastFeatures = [], preparationCounters = [], videoRecorder = null, recordingError = null, finishing = false;
 let cameraInfo = {}, model = 'full', modelHistory = [], cameraOrientation = 'portrait', openedAt = null, sessionId, runtimeError = null, attemptTimer = 0;
 const uploadSetup = initializeUploadConfig({ location: window.location, history: window.history });
@@ -51,6 +52,9 @@ function paintUploadConfig() {
     'מצב פרטי: עיבוד במכשיר. בלי הגדרת שליחה של ההורה אין צילום וידאו או שליחת נתונים. אפשר להקליט שלד ולהוריד אותו למכשיר.';
   $('record').checked = !!uploadConfig;
   $('record').disabled = !!uploadConfig;
+  $('record-option').hidden = !!uploadConfig;
+  $('recording-panel').hidden = !!uploadConfig || !stream && !recorder.recording;
+  $('export-panel').hidden = !!uploadConfig;
 }
 paintUploadConfig();
 if (uploadSetup.error) paintUploadStatus({ state: 'error', message: uploadSetup.error });
@@ -81,6 +85,7 @@ function speak(text, priority = 0) {
   flushSpeech();
 }
 function flushSpeech() {
+  if (autoStart?.countingDown) return;
   const voice = localVoice();
   if (!$('voice').checked || !voice) { queuedSpeech = null; return; }
   if (queuedSpeech?.expires < performance.now()) queuedSpeech = null;
@@ -91,6 +96,7 @@ function flushSpeech() {
   window.speechSynthesis.speak(utterance); lastSpeak = performance.now();
 }
 function release() {
+  autoStart?.cancel(); $('countdown').textContent = '';
   generation++; active = false; ready = false; busy = false;
   cancelAnimationFrame(raf); clearTimeout(watchdog); clearTimeout(attemptTimer); worker?.terminate(); worker = null;
   stream?.getTracks().forEach(t => t.stop()); stream = null;
@@ -100,7 +106,7 @@ function release() {
 }
 function fail(message, detail = '') {
   if (uploadConfig && stream && recorder.recording && !finishing) {
-    runtimeError = message; results(); $('error').hidden = false; $('error').textContent = message; return;
+    runtimeError = message; results('runtime-error'); $('error').hidden = false; $('error').textContent = message; return;
   }
   release(); $('error').hidden = false; $('error').textContent = message;
   $('setup').hidden = false; $('session').hidden = true;
@@ -183,7 +189,6 @@ function poseResult(data) {
     preparationCounters.forEach((c,i) => c.update(assigned[i]?.landmarks || [], assigned[i]?.world || [], timestamp, aspect));
     calibratedPeople = visibility.map((visible, i) => visible && prepared[i].fresh);
     const calibrated = calibratedPeople.every(Boolean);
-    if (calibrated && $('start').disabled) speak(spoken.ready);
     $('start').disabled = !calibrated;
     $('view').classList.toggle('ready', calibrated);
     const code = (pair && !tracker.tracks.length ? 'pair' :
@@ -196,6 +201,9 @@ function poseResult(data) {
     processingMs: +processingMs.toFixed(2), tracked: +visible, fullBody: +report.ok,
     phase: active ? ['waiting', 'armed', 'moving'].indexOf(counter.phase) : -1 });
   if (log.length > 900) log.shift();
+  if (!active) {
+    autoStart.update(!$('start').disabled && ready && performance.now() - timestamp <= counter.t.maxGap, timestamp);
+  }
 }
 function paintStatus(code) {
   const message = statusLine.update(code, performance.now());
@@ -228,6 +236,10 @@ $('settings').addEventListener('submit', async event => {
     fail('נדרש דפדפן עם Web Worker ו־OffscreenCanvas. נסו דפדפן מעודכן.'); return;
   }
   release(); const token = generation;
+  attemptEnded = false; endReason = null;
+  autoStart = new AutoStart({ onCue: countdownCue, onCancel: () => {
+    $('countdown').textContent = ''; window.speechSynthesis?.cancel();
+  }, begin: beginCounting });
   exercise = $('exercise').value;
   try { counter = new RepCounter(exercise, { age: Number($('age').value), height: Number($('height').value) }); }
   catch (error) { fail(error.message); return; }
@@ -243,14 +255,14 @@ $('settings').addEventListener('submit', async event => {
   model = 'full'; modelHistory = []; cameraInfo = {}; runtimeError = null;
   $('dad-score').hidden = !pair; $('child-label').textContent = pair ? 'הילד' : 'חזרות שנספרו';
   $('dad-count').textContent = '0'; $('child-status').textContent = ''; $('dad-status').textContent = '';
-  $('recording-panel').hidden = false; paintRecorder();
+  $('recording-panel').hidden = !!uploadConfig; paintRecorder();
   $('camera').disabled = true; $('result').hidden = true;
   log = []; totalFrames = 0; totalInference = 0; totalElapsed = 0; frameId = 0; lastFrame = null; lastVideoTime = -1;
   lastMetricPaint = 0; $('metrics').textContent = 'FPS — · processing —';
   gate = new RestGate(exercise, counter.t); statusLine = new StatusLine(); attemptStarted = null;
   adultGate = pair ? new RestGate(exercise, adult.t) : null;
   $('count').textContent = '0'; $('feedback').textContent = ''; $('start').disabled = true;
-  $('start').hidden = false; $('finish').hidden = true; $('view').classList.remove('ready');
+  $('start').hidden = false; $('finish').hidden = !uploadConfig; $('view').classList.remove('ready');
   $('session-title').textContent = `2. הצבה · ${titles[exercise]}`; $('instructions').textContent = instructions[exercise];
   $('status').textContent = 'טוענים את מודל הזיהוי המקומי…';
   speak(spoken.placement);
@@ -262,6 +274,18 @@ $('settings').addEventListener('submit', async event => {
     if (token !== generation) { acquired.getTracks().forEach(t => t.stop()); return; }
     stream = acquired; video.srcObject = stream; await video.play();
     if (token !== generation) return;
+    canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+    if (uploadConfig || $('record').checked) startRecording(); else paintRecorder();
+    if (uploadConfig) {
+      try {
+        videoRecorder = new VideoRecorder({ onLimit: () => { $('feedback').textContent = 'הניסיון הסתיים במגבלת 4 דקות.'; results('duration-limit'); },
+          onError: () => { recordingError = 'הקלטת הווידאו נכשלה. השלד והאבחון נשמרים; יש לבדוק תמיכה בהקלטה בדפדפן.'; $('error').hidden = false; $('error').textContent = recordingError; } });
+        videoRecorder.start(stream);
+      } catch { recordingError = 'הדפדפן לא הצליח להתחיל הקלטת וידאו. השלד והאבחון יישלחו עם דיווח על התקלה.'; }
+      attemptTimer = setTimeout(() => { $('feedback').textContent = 'הניסיון הסתיים במגבלת 4 דקות.'; results('duration-limit'); }, 240000);
+      paintRecorder();
+    }
+    if (uploadConfig) paintUploadStatus({ state: 'recording', message: 'מקליט ושולח לבדיקה אוטומטית' });
     const track = stream.getVideoTracks()[0];
     const zoom = await configureZoom(track, { wide: $('camera-width').value !== 'normal', mediaDevices: navigator.mediaDevices,
       facing, ptz: permission });
@@ -275,17 +299,6 @@ $('settings').addEventListener('submit', async event => {
       for (const [value, label] of [['', 'המצלמה שנבחרה למעלה'], [zoom.wideDevice.deviceId, 'מצלמה רחבה נוספת']]) {
         const option = document.createElement('option'); option.value = value; option.textContent = label; $('camera-device').append(option);
       }
-    }
-    canvas.width = video.videoWidth; canvas.height = video.videoHeight;
-    if (uploadConfig || $('record').checked) startRecording(); else paintRecorder();
-    if (uploadConfig) {
-      try {
-        videoRecorder = new VideoRecorder({ onLimit: () => { $('feedback').textContent = 'הניסיון הסתיים במגבלת 4 דקות.'; results(); },
-          onError: () => { recordingError = 'הקלטת הווידאו נכשלה. השלד והאבחון נשמרים; יש לבדוק תמיכה בהקלטה בדפדפן.'; $('error').hidden = false; $('error').textContent = recordingError; } });
-        videoRecorder.start(stream);
-      } catch { recordingError = 'הדפדפן לא הצליח להתחיל הקלטת וידאו. השלד והאבחון יישלחו עם דיווח על התקלה.'; }
-      attemptTimer = setTimeout(() => { $('feedback').textContent = 'הניסיון הסתיים במגבלת 4 דקות.'; results(); }, 240000);
-      paintRecorder();
     }
     $('view').style.aspectRatio = `${video.videoWidth}/${video.videoHeight}`;
     $('setup').hidden = true; $('session').hidden = false;
@@ -319,19 +332,32 @@ $('settings').addEventListener('submit', async event => {
       'לא הצלחנו לפתוח את המצלמה. ודאו שאינה בשימוש באפליקציה אחרת.', error.message);
   }
 });
-$('start').onclick = () => {
-  if ($('start').disabled || !ready || lastFrame == null || performance.now() - lastFrame > counter.t.maxGap) return;
+function countdownCue(number) {
+  $('countdown').textContent = `${number}…`; queuedSpeech = null;
+  const voice = localVoice();
+  if (!$('voice').checked || !voice) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance({ 3: 'שָׁלוֹשׁ', 2: 'שְׁתַּיִם', 1: 'אַחַת' }[number]);
+  utterance.voice = voice; utterance.lang = 'he-IL'; utterance.rate = .85;
+  window.speechSynthesis.speak(utterance); lastSpeak = performance.now();
+}
+function beginCounting() {
+  if (active || attemptEnded || finishing || $('start').disabled || !ready || lastFrame == null || performance.now() - lastFrame > counter.t.maxGap) return;
+  autoStart.complete(); $('countdown').textContent = '';
   attemptStarted = performance.now(); active = true;
   // A mid-movement start must reach rest before arming a complete cycle.
   counter.begin(attemptStarted, atRest(exercise, lastFeatures[0], counter.t));
   adult?.begin(attemptStarted, atRest(exercise, lastFeatures[1], adult.t));
   recorder.markCountStart(attemptStarted, [atRest(exercise, lastFeatures[0], counter.t), ...(pair ? [atRest(exercise, lastFeatures[1], adult.t)] : [])]); paintRecorder();
-  log = []; totalFrames = 0; totalInference = 0; totalElapsed = 0; lastFrame = null;
+  if (!uploadConfig) { log = []; totalFrames = 0; totalInference = 0; totalElapsed = 0; lastFrame = null; }
   $('start').hidden = true; $('finish').hidden = false;
   $('session-title').textContent = `סופרים · ${titles[exercise]}`; speak(spoken[exercise]);
-};
-function results() {
-  if (finishing || !counter) return;
+}
+$('start').onclick = beginCounting;
+function results(reason = 'finish') {
+  if (attemptEnded || finishing || !counter) return;
+  attemptEnded = true; endReason = reason; autoStart?.cancel();
+  $('countdown').textContent = '';
   const endedAt = performance.now();
   clearTimeout(attemptTimer);
   counter.finish(endedAt); adult?.finish(endedAt); recorder.stop(endedAt);
@@ -383,6 +409,8 @@ function attemptDiagnostics() {
     model, modelHistory, detectorConfidence: { detection: .5, presence: .5, tracking: .5 },
     fps: meanFps, inferenceMs: totalInference / Math.max(1, totalFrames),
     totalFrames, thresholds: counter.t, framing: FRAMING, videoError: recordingError, runtimeError,
+    endReason, countStarted: attemptStarted != null,
+    countNotStartedReason: attemptStarted == null ? 'no-count-start' : null,
     attempts: [counter, ...(pair ? [adult] : [])].map((c, i) => {
       const snapshot = c.snapshot(), preparation = preparationCounters[i]?.snapshot();
       const stops = { ...snapshot.stopReasons };
@@ -392,8 +420,8 @@ function attemptDiagnostics() {
         thresholds: c.t, ...snapshot, preparation, mostCommonStop: top ? { reason: top[0], frames: top[1] } : null };
     }), performance: log };
 }
-$('finish').onclick = results;
-$('stop').onclick = () => { if (active || uploadConfig && stream) results(); else { release(); $('setup').hidden = false; $('session').hidden = true; } };
+$('finish').onclick = () => results('finish');
+$('stop').onclick = () => { if (active || uploadConfig && stream) results('camera-stop'); else { release(); $('setup').hidden = false; $('session').hidden = true; } };
 $('again').onclick = () => { if (finishing) return; $('result').hidden = true; $('setup').hidden = false; $('recording-panel').hidden = true; $('record').checked = !!uploadConfig; };
 $('export').onclick = () => {
   const blob = new Blob([JSON.stringify({ version: pair ? 3 : 2, exercise: EXERCISES.indexOf(exercise), totalFrames, retainedFrames: log.length,
@@ -424,6 +452,7 @@ function startRecording() {
     aspect: video.videoWidth / video.videoHeight || 4 / 3 }, performance.now()); paintRecorder();
 }
 function paintRecorder() {
+  if (uploadConfig) { $('recording-panel').hidden = true; return; }
   $('record-toggle').textContent = recorder.active ? 'עצירת הקלטת שלד' : 'התחלת הקלטת שלד';
   $('record-toggle').disabled = !!uploadConfig || !recorder.active && (active || !stream || !!recorder.recording);
   $('record-download').disabled = !recorder.recording?.frames.length;
@@ -434,7 +463,7 @@ $('record-toggle').onclick = () => { if (recorder.active) recorder.stop(); else 
 $('record-download').onclick = () => { const json = recorder.json(); if (json) download(new Blob([json], { type: 'application/json' }), 'cam-lab-skeleton.json'); };
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && stream) {
-    if (active || uploadConfig) results(); else { release(); $('setup').hidden = false; $('session').hidden = true; }
+    if (active || uploadConfig) results('hidden'); else { release(); $('setup').hidden = false; $('session').hidden = true; }
   }
 });
 window.addEventListener('pagehide', release);

@@ -32,7 +32,7 @@
       <p class="small">בשניים: קודם עומדים זקוף זה לצד זה באותו מרחק מהמצלמה. הנמוך מזוהה כילד והגבוה כאבא. נדרש הבדל גובה ברור; התוויות נשמרות לכל הניסיון. בתרגילי רצפה: אחר כך מסתובבים למבט צד ומשאירים רווח, כך ששני השלדים נראים.</p>
       <p class="small">הגיל והגובה מכוונים ספים ניסיוניים. הם אינם הערכה רפואית או מדידה מדויקת של הגוף.</p>
       <label class="check"><input id="voice" type="checkbox" checked> הדרכה בקול עברי מקומי, אם זמין במכשיר</label>
-      <label class="check"><input id="record" type="checkbox"> הקלטת נקודות שלד לניסוי הזה, כולל ההצבה — ללא תמונות או וידאו</label>
+      <label id="record-option" class="check"><input id="record" type="checkbox"> הקלטת נקודות שלד לניסוי הזה, כולל ההצבה — ללא תמונות או וידאו</label>
       <p id="voice-status" class="small"></p>
       <figure class="placement">
         <svg viewBox="0 0 440 150" role="img" aria-label="מכשיר נשען ביציבות מול ילד שכל הגוף שלו בתוך מסגרת המצלמה">
@@ -63,6 +63,7 @@
     <p id="distance-status" class="small" role="status">עומדים כך שרואים את המפרקים הדרושים לתרגיל.</p>
     <p id="status" role="status">טוענים את מודל הזיהוי המקומי…</p>
     <div class="scores"><div class="score"><span id="child-label">חזרות שנספרו</span><output id="count" aria-label="חזרות הילד" aria-live="polite">0</output><span id="child-status" class="small"></span></div><div id="dad-score" class="score" hidden><span>אבא</span><output id="dad-count" aria-label="חזרות אבא" aria-live="polite">0</output><span id="dad-status" class="small"></span></div></div>
+    <p id="countdown" role="status" aria-live="assertive"></p>
     <p id="feedback" role="status"></p>
     <p id="metrics" class="small" dir="ltr">FPS — · processing —</p>
     <div class="buttons"><button id="start" disabled>מתחילים לספור</button><button id="finish" hidden>סיום ותוצאה</button><button id="stop" class="secondary">עצירת המצלמה</button></div>
@@ -80,8 +81,8 @@
     <p id="result-metrics" class="small"></p>
     <h3>למה הספירה חיכתה?</h3><ul id="diagnostics"></ul>
     <p class="small">סיבה יכולה להופיע יחד עם סיבות נוספות באותו פריים. אלה מונים בלבד, ללא תמונות או מיקומי גוף.</p>
-    <details><summary>לוג אבחון וביצועים מקומי</summary><p>מוני אבחון לכל הניסיון ועד 900 פריימים אחרונים של ביצועים ושלב הספירה. מספרים בלבד, ללא תמונות, נקודות גוף או פרטים אישיים. ייצוא רק בלחיצה שלך.</p><button id="export" class="secondary">הורדת לוג אבחון וביצועים (JSON)</button></details>
-    <button id="again">תרגיל נוסף</button>
+    <details id="export-panel"><summary>לוג אבחון וביצועים מקומי</summary><p>מוני אבחון לכל הניסיון ועד 900 פריימים אחרונים של ביצועים ושלב הספירה. מספרים בלבד, ללא תמונות, נקודות גוף או פרטים אישיים. ייצוא רק בלחיצה שלך.</p><button id="export" class="secondary">הורדת לוג אבחון וביצועים (JSON)</button></details>
+    <button id="again">ניסיון נוסף</button>
   </section>
   <p id="error" role="alert" hidden></p>
   <noscript>המעבדה צריכה JavaScript כדי לעבוד במכשיר.</noscript>
