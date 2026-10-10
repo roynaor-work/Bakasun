@@ -61,6 +61,8 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     replace('fetch', () => assert.fail('unexpected request'));
     URL.createObjectURL = blob => { exported = blob; return 'blob:test'; }; URL.revokeObjectURL = () => {};
     await import('../workout/cam-lab/app.mjs');
+    assert.equal(get('upload-off-banner').hidden, false);
+    assert.equal(get('upload-on-banner').hidden, true);
     await get('settings').handlers.submit({ preventDefault() {} });
     await Promise.resolve();
     const frame = async sample => {
@@ -91,7 +93,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     for (const s of speech) assert.equal(s.voice.localService, true);
     const guidance = speech.filter(s => !cues.has(s.text));
     for (let i = 1; i < guidance.length; i++) assert.ok(guidance[i].time - guidance[i - 1].time >= 6000);
-    get('finish').click(); assert.equal(stopped, 1); assert.equal(terminated, 1);
+    get('finish').click(); assert.equal(get('result-upload-off').hidden, false); assert.equal(stopped, 1); assert.equal(terminated, 1);
     assert.equal(get('result-count').textContent, '1 חזרות נספרו');
     assert.ok(get('diagnostics').children.some(li => li.textContent.includes('לפני מחזור: 1')));
     get('export').click(); const output = JSON.parse(await exported.text());
