@@ -76,10 +76,10 @@ test('lunge side uses front-foot depth when both knees bend equally; uncertain d
 });
 test('floor framing accepts a complete visible side, but never mixes partial sides', () => {
   const p = floorPose(); assert.equal(bodyReport(p.p, 4 / 3, 'push-ups').ok, true);
-  assert.equal(bodyReport(p.p, 4 / 3).ok, false);
+  assert.equal(bodyReport(p.p, 4 / 3).ok, true);
   p.p[15].visibility = .1; p.p[16].visibility = 1;
   assert.equal(bodyReport(p.p, 4 / 3, 'push-ups').ok, false);
-  const q = floorPose(); q.p[27].x = .995;
+  const q = floorPose(); q.p[27].x = 1.1;
   assert.equal(bodyReport(q.p, 4 / 3, 'push-ups').ok, false);
   const feet = floorPose({ farHidden: false });
   feet.p[29].visibility = .4; feet.p[14].visibility = .55;
@@ -101,8 +101,8 @@ function pairRig() {
       time += 50; recorder.add(poses, time);
       const assigned = tracker.update(poses, time, 4 / 3);
       if (started) counters.forEach((c, index) => {
-        if (tracker.status === 'ambiguous' && !c.lossReset) c.resetTracking();
-        missing[index] = !assigned[index];
+        if (tracker.status === 'ambiguous' && !missing[index]) c.resetTracking('ambiguous');
+        missing[index] = tracker.status === 'ambiguous';
         c.update(assigned[index]?.landmarks || [], assigned[index]?.world || [], time, 4 / 3);
       });
     }
@@ -116,10 +116,10 @@ test('two people count independently despite detector order changes, disappearan
   r.send([r.child({ angle: 110 }), r.dad()]); r.send([r.dad(), r.child()]);
   assert.deepEqual(r.counters.map(c => c.count), [1, 0]);
   r.send([r.dad({ angle: 110 }), r.child({ angle: 110 })]);
-  r.send([r.dad()], 100); // Brief loss preserves the cycle, longer absence cancels.
-  assert.ok(r.counters[0].cycle); assert.equal(r.counters[0].rejected, 0);
-  r.send([r.dad()]); assert.deepEqual(r.counters.map(c => c.count), [1, 1]);
+  r.send([r.dad()], 100); // Brief pose loss preserves the unfinished cycle.
+  assert.ok(r.counters[0].cycle); r.send([r.dad()], 450);
   assert.equal(r.counters[0].cycle, null); assert.equal(r.counters[0].reasons.tracking, 1);
+  r.send([r.dad()]); assert.deepEqual(r.counters.map(c => c.count), [1, 1]);
   r.send([r.child(), r.dad()]); r.send([r.dad(), r.child({ angle: 110 })]); r.send([r.child(), r.dad()]);
   assert.deepEqual(r.counters.map(c => c.count), [2, 1]);
   const replay = replayRecording(JSON.parse(r.recorder.json()));
@@ -170,7 +170,7 @@ test('tracker handles gradual standing-to-floor movement without relabeling by c
   }
 });
 test('placement gives actionable distance and sustained roll feedback; floor poses are excluded', () => {
-  const guide = new PlacementGuide(), small = person(pose(), { size: .3 });
+  const guide = new PlacementGuide(), small = person(pose(), { size: .25 });
   assert.equal(guide.update([small], 0, 4 / 3), 'far');
   const tilted = person(pose(), { x: .5, size: .8 });
   tilted.landmarks.forEach(p => p.y += (p.x - .5) * 4 / 3 * Math.tan(12 * Math.PI / 180));

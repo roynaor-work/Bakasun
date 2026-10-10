@@ -1,4 +1,4 @@
-import { bodyReport, features } from './counter.mjs';
+import { bodyReport, features, FRAMING } from './counter.mjs';
 
 export const TRACKING = { calibrationMs: 1200, heightRatio: 1.18, feetLevel: .08,
   scaleChange: .22, sizeAdvantage: .04, movement: .30, ambiguity: .15, overlap: .18, maxGap: 450 };
@@ -6,14 +6,16 @@ const distance = (a, b, aspect) => Math.hypot((a.x - b.x) * aspect, a.y - b.y);
 function descriptor(p, aspect) {
   const sides = [[11, 23, 25, 27], [12, 24, 26, 28]];
   const good = ids => ids.every(i => p?.[i] && Number.isFinite(p[i].x) && Number.isFinite(p[i].y) &&
-    p[i].visibility >= .65 && (p[i].presence == null || p[i].presence >= .65));
+    p[i].x >= 0 && p[i].x <= 1 && p[i].y >= 0 && p[i].y <= 1 &&
+    p[i].visibility >= FRAMING.coreConfidence && (p[i].presence == null || p[i].presence >= FRAMING.coreConfidence));
   const ids = sides.find(good);
   if (!ids) return null;
   const [s, h, k, a] = ids;
   const size = distance(p[s], p[h], aspect) + distance(p[h], p[k], aspect) + distance(p[k], p[a], aspect);
-  if (size < .2) return null;
-  return { size, center: { x: p[h].x, y: p[h].y },
-    height: p[a].y - Math.min(p[0]?.y ?? 1, p[7]?.y ?? 1, p[8]?.y ?? 1), feet: p[a].y };
+  if (size < .14) return null;
+  const heads = [0, 7, 8].filter(i => good([i])).map(i => p[i].y);
+  const top = heads.length ? Math.min(...heads) : p[s].y - distance(p[s], p[h], aspect) * .6;
+  return { size, center: { x: p[h].x, y: p[h].y }, height: p[a].y - top, feet: p[a].y };
 }
 
 // Labels are established ONLY while both people stand at the same camera depth.

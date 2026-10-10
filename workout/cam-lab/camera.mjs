@@ -1,49 +1,99 @@
-// Browser camera controls only. No pixels, storage or network requests.
-export function cameraConstraints(portrait, deviceId = '') {
+// Browser camera controls are optional: their failure must not stop pose tracking.
+const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+export function screenOrientation(view = globalThis) {
+  if (typeof view.matchMedia === 'function') return view.matchMedia('(orientation: portrait)').matches ? 'portrait' : 'landscape';
+  return (view.innerHeight || 1) >= (view.innerWidth || 1) ? 'portrait' : 'landscape';
+}
+export function cameraConstraints({ facing = 'user', orientation = 'portrait', lowResolution = false, deviceId } = {}) {
+  const [width, height] = lowResolution ? [480, 640] : [720, 1280];
+  const dimensions = orientation === 'landscape' ? [height, width] : [width, height];
   return { audio: false, video: {
-    ...(deviceId ? { deviceId: { exact: deviceId } } : { facingMode: 'user' }),
-    width: { ideal: portrait ? 480 : 640, max: portrait ? 480 : 640 },
-    height: { ideal: portrait ? 640 : 480, max: portrait ? 640 : 480 },
+    ...(deviceId ? { deviceId: { exact: deviceId } } : { facingMode: { ideal: facing === 'environment' ? 'environment' : 'user' } }),
+    width: { ideal: dimensions[0], max: dimensions[0] }, height: { ideal: dimensions[1], max: dimensions[1] },
     frameRate: { ideal: 20, max: 24 },
   } };
 }
-export function chooseZoom(capabilities, wide = true) {
-  const z = capabilities?.zoom;
-  if (!z || !Number.isFinite(z.min) || !Number.isFinite(z.max) || z.min <= 0 || z.max < z.min) return null;
-  if (wide) return z.min < 1 ? z.min : null;
-  const target = Math.max(z.min, Math.min(z.max, 1));
-  return z.step > 0 ? Math.min(z.max, z.min + Math.round((target - z.min) / z.step) * z.step) : target;
+function read(track, method) {
+  try { return typeof track?.[method] === 'function' ? track[method]() || {} : {}; }
+  catch { return {}; }
 }
-export function wideCameras(devices, currentId = '') {
-  return devices.filter(d => d.kind === 'videoinput' && d.deviceId && d.deviceId !== currentId &&
-    /ultra[\s_-]*wide|wide[\s_-]*angle|\bwide\b|0[.,]5|רחב/i.test(d.label || ''));
+export function cameraSnapshot(track) {
+  const settings = { ...read(track, 'getSettings') }, capabilities = { ...read(track, 'getCapabilities') };
+  // Hardware IDs serve switching only; diagnostics need the effective controls.
+  for (const value of [settings, capabilities]) { delete value.deviceId; delete value.groupId; }
+  return { settings, capabilities };
 }
-export async function configureCamera(track, mediaDevices, wide = true) {
-  let caps = {};
-  try { caps = track.getCapabilities?.() || {}; } catch { /* Optional API. */ }
-  const target = chooseZoom(caps, wide);
-  let applied = false;
-  if (target != null && track.applyConstraints) {
-    try { await track.applyConstraints({ advanced: [{ zoom: target }] }); applied = true; }
-    catch { /* Keep the working camera and show the actual settings. */ }
+export function selectZoom(capabilities, wide = true) {
+  const range = capabilities?.zoom;
+  if (!range || !Number.isFinite(range.min) || !Number.isFinite(range.max) || range.min <= 0 || range.max < range.min) return null;
+  if (wide) return range.min < 1 ? range.min : null;
+  const target = clamp(1, range.min, range.max);
+  if (!Number.isFinite(range.step) || range.step <= 0) return target;
+  const steps = clamp(Math.round((target - range.min) / range.step), 0, Math.floor((range.max - range.min) / range.step + 1e-9));
+  return Number((range.min + steps * range.step).toPrecision(12));
+}
+const wideLabel = /(?:ultra[\s_-]*wide|wide[\s_-]*angle|0[.,]5\s*[x×]|רחב(?:ה)?)/i;
+const frontLabel = /(?:front|user|selfie|facetime|קדמי(?:ת)?)/i;
+const rearLabel = /(?:back|rear|environment|אחורי(?:ת)?)/i;
+export function findWideCamera(devices, { facing = 'user', currentDeviceId } = {}) {
+  const candidates = Array.from(devices || []).filter(d => d.kind === 'videoinput' && d.deviceId &&
+    d.deviceId !== currentDeviceId && wideLabel.test(d.label || ''));
+  // Prefer the selected facing; never infer an unlabeled device's field of view.
+  const matching = candidates.find(d => facing === 'user' ? frontLabel.test(d.label) : rearLabel.test(d.label));
+  const device = matching || candidates.find(d => rearLabel.test(d.label)) || candidates[0];
+  if (!device) return null;
+  return { deviceId: device.deviceId, label: device.label,
+    facing: frontLabel.test(device.label) ? 'user' : rearLabel.test(device.label) ? 'environment' : null };
+}
+function zoomMessage({ actualZoom, requestedZoom, wide, wideDevice, error }) {
+  if (Number.isFinite(actualZoom)) {
+    const actual = `${Number(actualZoom.toFixed(2))}×`;
+    if (wide && actualZoom > .5 + .01) return `זום בפועל: ${actual}. זום 0.5 לא זמין במצלמה הזאת.${wideDevice ? ' אפשר לבחור את המצלמה הרחבה שמופיעה למטה.' : ''}`;
+    return `זום בפועל: ${actual}.${error ? ' שינוי הזום לא הצליח; אפשר להמשיך עם המצלמה.' : ''}`;
   }
-  const settings = track.getSettings?.() || {};
-  // A fulfilled applyConstraints is not proof: some browsers ignore zoom.
-  const wideApplied = applied && Number.isFinite(settings.zoom) && settings.zoom < 1;
-  let alternatives = [];
-  if (wide && !wideApplied) {
-    try { alternatives = wideCameras(await mediaDevices.enumerateDevices?.() || [], settings.deviceId); }
-    catch { /* Device labels can remain unavailable after permission. */ }
-  }
-  return { zoom: Number.isFinite(settings.zoom) ? settings.zoom : 0,
-    width: settings.width || 0, height: settings.height || 0,
-    zoomSupported: +!!caps.zoom, wideApplied: +wideApplied, requestedWide: +wide,
-    alternatives };
+  if (error) return `שינוי הזום לא נתמך או לא הצליח; אפשר להמשיך במצלמה הנוכחית.${wideDevice ? ' נמצאה גם מצלמה רחבה לבחירה.' : ''}`;
+  if (requestedZoom != null) return `נשלחה בקשת זום ${requestedZoom}×; הדפדפן לא מדווח מה הזום בפועל.`;
+  return `הדפדפן לא מאפשר זום 0.5 במצלמה הזאת.${wideDevice ? ' נמצאה מצלמה רחבה נפרדת; אפשר לבחור בה למטה.' : ' נשתמש בזווית שהמצלמה מאפשרת.'}`;
 }
-export function cameraSummary(info) {
-  const zoom = info.zoom ? `${Number(info.zoom.toFixed(2))}` : 'לא דווח';
-  const size = info.width && info.height ? `${info.width}×${info.height}` : 'לא דווח';
-  return `בפועל: זום ${zoom} · גודל ${size}. ` + (info.requestedWide ? info.wideApplied ?
-    'הדפדפן אישר זום מתחת ל־1; אין בכך זיהוי של עדשת 0.5.' :
-    'הדפדפן לא אישר זום רחב. ייתכן שעדשת 0.5 אינה זמינה כאן.' : 'נבחר מצב רגיל.');
+export async function configureZoom(track, { wide = true, mediaDevices = globalThis.navigator?.mediaDevices, facing = 'user' } = {}) {
+  let { settings, capabilities } = cameraSnapshot(track);
+  const requestedZoom = selectZoom(capabilities, wide); let error = null, wideDevice = null;
+  if (requestedZoom != null) {
+    if (typeof track?.applyConstraints !== 'function') error = 'applyConstraints unavailable';
+    else try { await track.applyConstraints({ advanced: [{ zoom: requestedZoom }] }); }
+    catch (failure) { error = failure?.name || 'ZoomConstraintError'; }
+  }
+  ({ settings, capabilities } = cameraSnapshot(track));
+  const actualZoom = Number.isFinite(settings.zoom) ? settings.zoom : null;
+  // If controls cannot widen the picture, a physical lens may be a separate device.
+  if (wide && (requestedZoom == null || error || !(actualZoom != null && actualZoom < 1))) {
+    try {
+      if (typeof mediaDevices?.enumerateDevices === 'function') wideDevice = findWideCamera(await mediaDevices.enumerateDevices(),
+        { facing: settings.facingMode || facing, currentDeviceId: read(track, 'getSettings').deviceId });
+    } catch { /* Labels or enumeration can remain unavailable after permission. */ }
+  }
+  return { settings, capabilities, requestedZoom, actualZoom, wideDevice, error,
+    message: zoomMessage({ actualZoom, requestedZoom, wide, wideDevice, error }) };
+}
+export async function reduceResolution(track, { orientation = 'portrait' } = {}) {
+  if (typeof track?.applyConstraints !== 'function') return { ...cameraSnapshot(track), error: 'applyConstraints unavailable' };
+  const { video } = cameraConstraints({ orientation, lowResolution: true });
+  try { await track.applyConstraints({ width: video.width, height: video.height }); return { ...cameraSnapshot(track), error: null }; }
+  catch (error) { return { ...cameraSnapshot(track), error: error?.name || 'ResolutionConstraintError' }; }
+}
+
+// Measure delivered frames, including capture gaps, rather than inference speed.
+// One startup window per worker; switching models must not erase its history.
+export class ModelPerformance {
+  constructor({ windowMs = 5000, minFps = 12 } = {}) { this.windowMs = windowMs; this.minFps = minFps; this.start = null; this.frames = 0; this.checked = false; }
+  update(timestamp) {
+    if (this.checked || !Number.isFinite(timestamp)) return null;
+    if (this.start == null) { this.start = timestamp; this.frames = 1; return null; }
+    this.frames++;
+    const elapsed = timestamp - this.start;
+    if (elapsed < this.windowMs) return null;
+    this.checked = true;
+    const fps = (this.frames - 1) * 1000 / elapsed;
+    return { fps, elapsedMs: elapsed, frames: this.frames, fallback: fps < this.minFps };
+  }
 }
