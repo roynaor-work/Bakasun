@@ -1,20 +1,87 @@
 <!doctype html>
-<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>שש הבעות · הילד השלם</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ctext y='30' font-size='30'%3E⚽%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="style.css"></head>
-<body><main><header><span class="eyebrow">CODEX LAB / KID FULL</span><h1>שש הבעות, דמות שלמה</h1><p>מעבדת לימוד בתלת־ממד · הבעות פנים ותנוחות על שלד משותף</p></header>
-<section class="studio"><canvas id="stage" aria-label="דמות ילד תלת ממדית"></canvas><div class="caption"><span>תאורה ומצלמה קבועות</span><span id="source-label">מודל מקור</span></div></section>
-<aside><fieldset><legend>תנוחה</legend><div id="poses"><button data-pose="stand" aria-pressed="true">עמידה</button><button data-pose="run">ריצה</button><button data-pose="kick">בעיטה בכדור</button></div><button id="play">ניגון התנוחה</button></fieldset>
-<fieldset><legend>הבעה</legend><div id="expressions"><button data-expression="happy">שמח</button><button data-expression="effort">מאמץ</button><button data-expression="surprised">מופתע</button><button data-expression="victory">ניצחון</button><button data-expression="tired">עייף ומרוצה</button><button data-expression="thinking">מחשבה</button></div><small>ריצה בוחרת מאמץ; בעיטה בוחרת ניצחון. אפשר לבחור הבעה אחרת בכל תנוחה.</small></fieldset>
-<fieldset><legend>מעבר בין הבעות</legend><label>מ־<select id="expression-from"><option value="happy">שמח</option><option value="effort">מאמץ</option><option value="surprised">מופתע</option><option value="victory">ניצחון</option><option value="tired">עייף ומרוצה</option><option value="thinking">מחשבה</option></select></label><label>אל <select id="expression-to"><option value="surprised">מופתע</option><option value="happy">שמח</option><option value="effort">מאמץ</option><option value="victory">ניצחון</option><option value="tired">עייף ומרוצה</option><option value="thinking">מחשבה</option></select></label><input id="expression-blend" type="range" min="0" max="100" value="0" aria-label="התקדמות מעבר ההבעה"><small>לחיצה על הבעה עוברת ברכות; הסרגל מאפשר לעצור בין שתיים.</small></fieldset>
-<fieldset><legend>מבט</legend><div id="views"><button data-view="front" aria-pressed="true">חזית</button><button data-view="side">צד</button><button data-view="back">גב</button><button data-view="threeQuarter">שלושה רבעים</button></div></fieldset>
-<fieldset><legend>צפיפות</legend><select id="quality"><option value="mobile">גרסה למסירה · תקציב טלפון</option><option value="balanced">ניסוי פירוט בינוני</option><option value="dense">ניסוי פירוט צפוף</option></select></fieldset>
-<fieldset><legend>מעבר רך</legend><label>מ־<select id="from"><option value="stand">עמידה</option><option value="run">ריצה</option><option value="kick">בעיטה</option></select></label><label>אל <select id="to"><option value="run">ריצה</option><option value="stand">עמידה</option><option value="kick">בעיטה</option></select></label><input id="blend" type="range" min="0" max="100" value="0" aria-label="התקדמות המעבר"><small>הסרגל מאפשר לבדוק כל מצב ביניים.</small></fieldset>
-<fieldset><legend>קובץ הדמות</legend><div><button id="load">טעינת GLB שנמסר</button><button id="original">מודל מקור</button></div><a href="kid-full.glb" download>הורדת GLB</a></fieldset><output id="stats"></output><a href="expressions.html">טבלת שש ההבעות</a><a href="NOTES.md">יומן הלימוד והמדידות</a><a href="shots/comparison.png">המבטים מול תמונת היעד</a><a href="shots/expressions-before-after-target.png">לפני ואחרי מול היעד</a></aside>
-<section class="expression-sheet" aria-labelledby="sheet-title"><h2 id="sheet-title">שש הבעות על הדמות המלאה</h2><p>כל תמונה נחתכה מצילום הדמות המלאה באותה מצלמה ותאורה. לחיצה מפעילה את ההבעה בדמות החיה.</p><table><caption>הבעה, צילום ומה השתנה בפנים</caption><thead><tr><th scope="col">הבעה</th><th scope="col">צילום</th><th scope="col">עיניים, גבות ופה</th></tr></thead><tbody>
-<tr><th scope="row">שמח</th><td><button class="expression-preview" data-expression="happy" aria-label="הצגת שמח"><img src="shots/expressions/happy-front-head.png" alt="דמות מלאה בהבעת שמח, תקריב פנים" width="160" height="160"></button></td><td>לחיים מורמות, חיוך פתוח ועיניים מאירות.</td></tr>
-<tr><th scope="row">מאמץ</th><td><button class="expression-preview" data-expression="effort" aria-label="הצגת מאמץ"><img src="shots/expressions/effort-front-head.png" alt="דמות מלאה בהבעת מאמץ, תקריב פנים" width="160" height="160"></button></td><td>עיניים מכווצות, גבות מתכנסות ושיניים קפוצות. משולב בריצה.</td></tr>
-<tr><th scope="row">מופתע</th><td><button class="expression-preview" data-expression="surprised" aria-label="הצגת מופתע"><img src="shots/expressions/surprised-front-head.png" alt="דמות מלאה בהבעת מופתע, תקריב פנים" width="160" height="160"></button></td><td>עיניים רחבות, גבות גבוהות ופה עגול.</td></tr>
-<tr><th scope="row">ניצחון</th><td><button class="expression-preview" data-expression="victory" aria-label="הצגת ניצחון"><img src="shots/expressions/victory-front-head.png" alt="דמות מלאה בהבעת ניצחון, תקריב פנים" width="160" height="160"></button></td><td>קריצה וחיוך רחב ואסימטרי. משולב בבעיטה.</td></tr>
-<tr><th scope="row">עייף ומרוצה</th><td><button class="expression-preview" data-expression="tired" aria-label="הצגת עייף ומרוצה"><img src="shots/expressions/tired-front-head.png" alt="דמות מלאה בהבעת עייף ומרוצה, תקריב פנים" width="160" height="160"></button></td><td>עפעפיים כבדים וחיוך סגור של סיפוק.</td></tr>
-<tr><th scope="row">מחשבה</th><td><button class="expression-preview" data-expression="thinking" aria-label="הצגת מחשבה"><img src="shots/expressions/thinking-front-head.png" alt="דמות מלאה בהבעת מחשבה, תקריב פנים" width="160" height="160"></button></td><td>מבט הצידה ולמעלה, גבה מורמת ופה משוך הצידה.</td></tr>
-</tbody></table><p class="reference-note">גיליון היעד המקורי מציג גם דאגה וצחוק. ניצחון ומחשבה הן פרשנות להבעות המבוקשות, ואין להן תא יעד זהה.</p><a href="shots/expression-comparison.png">שש ההבעות לצד פיקסלי היעד</a> · <a href="shots/expressions-before-after-target.png">לפני ואחרי לצד היעד</a> · <a href="index.html">חזרה למעבדה</a></section><footer>הדמות היא תרגיל לימוד עצמאי. תמונות היעד המקוריות נקראות מ־codex-lab/ref/.</footer></main><script type="module" src="scene.mjs"></script></body></html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>שש הבעות · ילד שלם</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ctext y='30' font-size='30'%3E⚽%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="expressions.css">
+</head>
+<body>
+<main>
+  <header>
+    <span class="eyebrow">CODEX LAB / KID FULL</span>
+    <h1>ילד אחד, שש הבעות</h1>
+    <p>בחרו הבעה בטבלה ובדקו אותה על הדמות המלאה, גם בריצה ובבעיטה.</p>
+    <nav aria-label="דפי המעבדה"><a href="index.html">מעבדת הדמות</a><a href="#expression-table">טבלת ההבעות</a><a href="shots/expressions-before-after-target.png">לפני ואחרי ליד היעד</a></nav>
+  <p class="reference-note">גיליון היעד הוא רפרנס חזותי. ניצחון, עייף ומרוצה ומחשבה הם עיבודים לבקשה, ולא התאמה אחת לאחת לתאי הגיליון.</p></header>
+
+  <section class="studio" aria-label="תצוגה חיה של הדמות">
+    <canvas id="stage" aria-label="דמות ילד תלת ממדית עם הבעת פנים נבחרת"></canvas>
+    <div class="caption"><span>תאורה ומצלמה קבועות</span><span id="source-label">מודל מקור</span></div>
+  </section>
+
+  <aside aria-label="בקרות הדמות">
+    <fieldset>
+      <legend>הבעת פנים</legend>
+      <label class="select-label" for="expression">בחירת הבעה</label>
+      <select id="expression">
+        <option value="neutral">רגוע · עמידה</option>
+        <option value="happy">שמח</option><option value="effort">מאמץ</option><option value="surprised">מופתע</option><option value="victory">ניצחון</option><option value="tired">עייף ומרוצה</option><option value="thinking">מחשבה</option>
+      </select>
+      <label class="check-label"><input id="pose-expression" type="checkbox" checked> להתאים הבעה לתנוחה</label>
+      <small>ריצה עם מאמץ · בעיטה עם ניצחון</small>
+    </fieldset>
+    <fieldset>
+      <legend>תנוחה</legend>
+      <div id="poses"><button data-pose="stand" aria-pressed="true">עמידה</button><button data-pose="run" aria-pressed="false">ריצה</button><button data-pose="kick" aria-pressed="false">בעיטה בכדור</button></div>
+      <button id="play">ניגון התנוחה</button>
+    </fieldset>
+    <fieldset>
+      <legend>מבט</legend>
+      <div id="views"><button data-view="front" aria-pressed="true">חזית</button><button data-view="side" aria-pressed="false">צד</button><button data-view="back" aria-pressed="false">גב</button><button data-view="threeQuarter" aria-pressed="false">שלושה רבעים</button></div>
+    </fieldset>
+    <fieldset>
+      <legend>מעבר בין הבעות</legend>
+      <label>מ־<select id="expression-from"><option value="happy">שמח</option><option value="effort">מאמץ</option><option value="surprised">מופתע</option><option value="victory">ניצחון</option><option value="tired">עייף ומרוצה</option><option value="thinking">מחשבה</option></select></label>
+      <label>אל <select id="expression-to"><option value="surprised">מופתע</option><option value="happy">שמח</option><option value="effort">מאמץ</option><option value="victory">ניצחון</option><option value="tired">עייף ומרוצה</option><option value="thinking">מחשבה</option></select></label>
+      <input id="expression-blend" type="range" min="0" max="100" value="0" aria-label="התקדמות המעבר בין הבעות">
+      <small>בחירה בטבלה עוברת ברכות; הסרגל מציג כל מצב ביניים.</small>
+    </fieldset>
+    <details>
+      <summary>מעבר בין תנוחות ופירוט</summary>
+      <fieldset><legend>מעבר בין תנוחות</legend><label>מ־<select id="from"><option value="stand">עמידה</option><option value="run">ריצה</option><option value="kick">בעיטה</option></select></label><label>אל <select id="to"><option value="run">ריצה</option><option value="stand">עמידה</option><option value="kick">בעיטה</option></select></label><input id="blend" type="range" min="0" max="100" value="0" aria-label="התקדמות המעבר בין תנוחות"></fieldset>
+      <fieldset><legend>צפיפות</legend><label class="select-label" for="quality">פירוט המודל</label><select id="quality"><option value="mobile">גרסה למסירה · תקציב טלפון</option><option value="balanced">ניסוי פירוט בינוני</option><option value="dense">ניסוי פירוט צפוף</option></select></fieldset>
+    </details>
+    <fieldset>
+      <legend>קובץ הדמות</legend>
+      <div><button id="load">טעינת GLB שנמסר</button><button id="original">מודל מקור</button></div>
+      <a href="kid-full.glb" download>הורדת GLB עם ההבעות</a>
+    </fieldset>
+    <output id="stats"></output>
+    <a href="NOTES.md">יומן הלימוד והמדידות</a>
+  </aside>
+
+  <section class="expressions-sheet" aria-labelledby="expression-table">
+    <h2 id="expression-table">שש הבעות באותה מצלמה ותאורה</h2>
+    <p>התמונות מציגות את ההבעות על הראש של הדמות המלאה. לחצו על תמונה או שם כדי לבחור. הפרמטרים הם ביחידות המודל.</p>
+    <table>
+      <caption>הבעות הפנים של הילד</caption>
+      <thead><tr><th scope="col">הבעה</th><th scope="col">חזית</th><th scope="col">מה משתנה בפנים</th></tr></thead>
+      <tbody>
+        <tr data-expression-row="happy"><th scope="row"><button data-expression="happy" aria-pressed="false">שמח</button></th><td><button class="preview-button" data-expression="happy" aria-label="הצגת הבעה שמח" aria-pressed="false"><img src="shots/expressions/happy-front-head.png" width="160" height="160" alt="הילד עם חיוך סגור ורך ולחיים מורמות"></button></td><td><p>עיניים פתוחות, לחיים מורמות וחיוך סגור ורך.</p><small data-parameters="happy"></small></td></tr>
+        <tr data-expression-row="effort"><th scope="row"><button data-expression="effort" aria-pressed="false">מאמץ</button></th><td><button class="preview-button" data-expression="effort" aria-label="הצגת הבעה מאמץ" aria-pressed="false"><img src="shots/expressions/effort-front-head.png" width="160" height="160" alt="הילד עם עיניים מכווצות ושיניים קפוצות"></button></td><td><p>עיניים מכווצות, גבות מתכנסות ושיניים קפוצות.</p><small data-parameters="effort"></small></td></tr>
+        <tr data-expression-row="surprised"><th scope="row"><button data-expression="surprised" aria-pressed="false">מופתע</button></th><td><button class="preview-button" data-expression="surprised" aria-label="הצגת הבעה מופתע" aria-pressed="false"><img src="shots/expressions/surprised-front-head.png" width="160" height="160" alt="הילד עם עיניים רחבות ופה עגול"></button></td><td><p>עיניים רחבות, גבות גבוהות ופה עגול.</p><small data-parameters="surprised"></small></td></tr>
+        <tr data-expression-row="victory"><th scope="row"><button data-expression="victory" aria-pressed="false">ניצחון</button></th><td><button class="preview-button" data-expression="victory" aria-label="הצגת הבעה ניצחון" aria-pressed="false"><img src="shots/expressions/victory-front-head.png" width="160" height="160" alt="הילד קורץ ומחייך חיוך רחב"></button></td><td><p>קריצה וחיוך רחב עם הרמת לחיים.</p><small data-parameters="victory"></small></td></tr>
+        <tr data-expression-row="tired"><th scope="row"><button data-expression="tired" aria-pressed="false">עייף ומרוצה</button></th><td><button class="preview-button" data-expression="tired" aria-label="הצגת הבעה עייף ומרוצה" aria-pressed="false"><img src="shots/expressions/tired-front-head.png" width="160" height="160" alt="הילד עם עפעפיים כבדים וחיוך סגור"></button></td><td><p>עפעפיים כבדים, מבט נמוך וחיוך סגור של סיפוק.</p><small data-parameters="tired"></small></td></tr>
+        <tr data-expression-row="thinking"><th scope="row"><button data-expression="thinking" aria-pressed="false">מחשבה</button></th><td><button class="preview-button" data-expression="thinking" aria-label="הצגת הבעה מחשבה" aria-pressed="false"><img src="shots/expressions/thinking-front-head.png" width="160" height="160" alt="הילד מביט הצידה ולמעלה ומושך את הפה לצד"></button></td><td><p>מבט הצידה ולמעלה, גבה מורמת ופה משוך לצד.</p><small data-parameters="thinking"></small></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>תמונות היעד המקוריות נקראות מ־codex-lab/ref/. <a href="shots/expressions-before-after-target.png">צילום לפני ואחרי ליד היעד</a> · <a href="NOTES.md">פרמטרים, מדידות ומגבלות</a></footer>
+</main>
+<script type="module" src="expressions-page.mjs"></script>
+</body>
+</html>

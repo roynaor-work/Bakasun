@@ -76,9 +76,7 @@ function shirtFold(x, y, theta, enabled) {
 
 function jerseyRadii(y) {
   let rx = profile(shirtRows, y, 'rx'), rz = profile(shirtRows, y, 'rz');
-  // Keep a broad shoulder bridge until the sleeves are inside the torso.
-  // The previous early taper exposed two sleeve roofs as separate shells.
-  const topBlend = smooth(1.44, 1.58, y);
+  const topBlend = smooth(1.36, 1.58, y);
   rx = THREE.MathUtils.lerp(rx, .132, topBlend);
   rz = THREE.MathUtils.lerp(rz, .112, topBlend);
   // Narrow the hem and torso, while keeping the opening clear of the neck.
@@ -265,6 +263,120 @@ function numberGeometry(back, folded, segments) {
   return g;
 }
 
+// One implicit garment shell joins the torso and both sleeves. The field
+// keeps the original lofts outside a .045 shoulder transition, so the cuffs,
+// neckline, folds and decal retain their authored locations.
+function unifiedJerseyGeometry(folded, detail) {
+  const blend=.045, step=detail==='mobile'?.070:detail==='balanced'?.028:.018;
+  const smoothMin=(a,b)=>{const h=clamp(.5+.5*(b-a)/blend,0,1);return THREE.MathUtils.lerp(b,a,h)-blend*h*(1-h);};
+  const sleeveProjection=(x,y,z,side)=>{
+    const qx=x/.95;
+    let cy=clamp(y,1.206,1.486),slope=0,cx=0;
+    for(let i=0;i<4;i++){
+      cx=profile(sleeveRows,cy,'x')*side;
+      const low=Math.max(1.206,cy-.001),high=Math.min(1.486,cy+.001);
+      slope=(profile(sleeveRows,high,'x')-profile(sleeveRows,low,'x'))*side/Math.max(.00001,high-low);
+      cy=clamp(cy-((cx-qx)*slope+cy-y)/(1+slope*slope),1.206,1.486);
+    }
+    cx=profile(sleeveRows,cy,'x')*side;
+    const scale=Math.sqrt(1+slope*slope),u=((qx-cx)-(y-cy)*slope)/scale;
+    let puff=folded?.004*gauss(cy,1.29,.045)-.003*gauss(cy,1.35,.03):0;
+    const rx=Math.max(.001,profile(sleeveRows,cy,'rx')+puff),rz=Math.max(.001,profile(sleeveRows,cy,'rz')+puff);
+    const radius=(Math.hypot(u/rx,z/rz)-1)*Math.min(rx,rz);
+    const rootY=1.241,rootX=profile(sleeveRows,rootY,'x')*side,rootSlope=(profile(sleeveRows,rootY+.001,'x')-profile(sleeveRows,rootY-.001,'x'))/.002*side;
+    const bottom=-((qx-rootX)*rootSlope+y-rootY)/Math.sqrt(1+rootSlope*rootSlope);
+    return {distance:Math.max(radius,bottom),radius,bottom};
+  };
+  const distances=(x,y,z)=>{
+    let cy=y,theta=0,rx=.3,rz=.2;
+    // Invert the V-neck's shared vertical map before evaluating the loft.
+    for(let i=0;i<5;i++){
+      ({rx,rz}=jerseyRadii(cy));theta=Math.atan2(z/rz,x/rx);
+      const rounded=(Math.sqrt(Math.cos(theta)**2+.0025)-.05)/(Math.sqrt(1.0025)-.05);
+      cy=y+.118*(Math.sin(theta)>0?1-rounded:0)*smooth(1.24,1.58,cy);
+    }
+    const fold=shirtFold(x,cy,theta,folded);rx+=fold;rz+=fold;
+    const radius=(Math.hypot(x/rx,z/rz)-1)*Math.min(rx,rz);
+    const bottom=.943-y,top=cy-1.537;
+    const torso={distance:Math.max(radius,bottom,top),radius,bottom,top};
+    const left=sleeveProjection(x,y,z,-1),right=sleeveProjection(x,y,z,1);
+    return {torso,left,right};
+  };
+  const field=(x,y,z)=>{const d=distances(x,y,z);return smoothMin(smoothMin(d.torso.distance,d.left.distance),d.right.distance);};
+  const isOpening=(x,y,z)=>{
+    const d=distances(x,y,z),closest=[d.torso,d.left,d.right].reduce((a,b)=>a.distance<b.distance?a:b);
+    return Math.max(closest.bottom,closest.top??-Infinity)>closest.radius+.00005;
+  };
+  const geometry=extractJerseySurface(field,isOpening,step);
+  alignGarmentOpenings(geometry,folded);
+  geometry.userData.garmentUnion={blend,gridStep:step,field:'rounded union of original torso and sleeve lofts',openings:['neck','hem','left cuff','right cuff']};
+  return geometry;
+}
+
+// The marching grid samples the caps, then opens them. Project each resulting
+// boundary onto its exact authored rim, so no staircase can poke past a trim.
+function alignGarmentOpenings(geometry,folded){
+  const edges=new Map(),p=geometry.attributes.position,n=geometry.attributes.normal;
+  for(let i=0;i<geometry.index.count;i+=3){const ids=Array.from(geometry.index.array.slice(i,i+3));for(let j=0;j<3;j++){let a=ids[j],b=ids[(j+1)%3];if(a>b)[a,b]=[b,a];const key=a+','+b;edges.set(key,(edges.get(key)||0)+1);}}
+  const boundary=new Set();for(const[key,count]of edges)if(count===1)for(const id of key.split(','))boundary.add(Number(id));
+  const sleeveLeft=tubePoint(sleeveRows,-1,folded,'sleeve'),sleeveRight=tubePoint(sleeveRows,1,folded,'sleeve');
+  for(const id of boundary){
+    const x=p.getX(id),y=p.getY(id),z=p.getZ(id);let v;
+    if(y<1.02){const {rx,rz}=jerseyRadii(.943);v=jerseyPoint(.943,Math.atan2(z/rz,x/rx),folded);}
+    else if(y>1.39){const {rx,rz}=jerseyRadii(1.537);v=jerseyPoint(1.537,Math.atan2(z/rz,x/rx),folded);}
+    else{const side=x<0?-1:1,row={y:1.241,x:profile(sleeveRows,1.241,'x'),rx:profile(sleeveRows,1.241,'rx'),rz:profile(sleeveRows,1.241,'rz')},slope=(profile(sleeveRows,row.y+.001,'x')-profile(sleeveRows,row.y-.001,'x'))/.002*side,normal=new THREE.Vector3(1,-slope,0).normalize();
+      const u=(x/.95-row.x*side)*normal.x+(y-row.y)*normal.y,theta=Math.atan2(z/row.rz,u/row.rx);v=(side<0?sleeveLeft:sleeveRight)(row.y,theta);
+    }
+    p.setXYZ(id,v.x,v.y,v.z);
+    let point,sourceY,theta;
+    if(y<1.02){sourceY=.943;const {rx,rz}=jerseyRadii(sourceY);theta=Math.atan2(z/rz,x/rx);point=(cy,t)=>jerseyPoint(cy,t,folded);}
+    else if(y>1.39){sourceY=1.537;const {rx,rz}=jerseyRadii(sourceY);theta=Math.atan2(z/rz,x/rx);point=(cy,t)=>jerseyPoint(cy,t,folded);}
+    else{const side=x<0?-1:1;sourceY=1.241;const cx=profile(sleeveRows,sourceY,'x')*side,slope=(profile(sleeveRows,sourceY+.001,'x')-profile(sleeveRows,sourceY-.001,'x'))/.002*side,normal=new THREE.Vector3(1,-slope,0).normalize();const u=(x/.95-cx)*normal.x+(y-sourceY)*normal.y;theta=Math.atan2(z/profile(sleeveRows,sourceY,'rz'),u/profile(sleeveRows,sourceY,'rx'));point=side<0?sleeveLeft:sleeveRight;}
+    const epsilon=.001,dy=point(sourceY+epsilon,theta).sub(point(sourceY-epsilon,theta)),dt=point(sourceY,theta+epsilon).sub(point(sourceY,theta-epsilon)),normal=dy.cross(dt).normalize();n.setXYZ(id,normal.x,normal.y,normal.z);
+  }
+  // A cap can leave an ear triangle whose three vertices all project onto
+  // the same opening. It has no outer garment area; keep only the side shell.
+  const clean=[];for(let i=0;i<geometry.index.count;i+=3){const a=geometry.index.getX(i),b=geometry.index.getX(i+1),c=geometry.index.getX(i+2);if(boundary.has(a)&&boundary.has(b)&&boundary.has(c))continue;clean.push(a,b,c);}
+  geometry.setIndex(clean);
+  // Rim projection may reverse a tiny sampled side face. Restore its outward
+  // winding against the authored surface normal before FrontSide rendering.
+  const pa=new THREE.Vector3(),pb=new THREE.Vector3(),pc=new THREE.Vector3(),normal=new THREE.Vector3(),v=new THREE.Vector3();
+  for(let i=0;i<geometry.index.count;i+=3){const a=geometry.index.getX(i),b=geometry.index.getX(i+1),c=geometry.index.getX(i+2);pa.fromBufferAttribute(p,a);pb.fromBufferAttribute(p,b);pc.fromBufferAttribute(p,c);v.copy(pb).sub(pa).cross(pc.sub(pa));normal.fromBufferAttribute(n,a).add(new THREE.Vector3().fromBufferAttribute(n,b)).add(new THREE.Vector3().fromBufferAttribute(n,c));if(v.dot(normal)<0){geometry.index.setX(i+1,c);geometry.index.setX(i+2,b);}}
+}
+
+function extractJerseySurface(field,isOpening,step) {
+  const min=[-.58,.86,-.25],max=[.58,1.65,.25];
+  const nx=Math.ceil((max[0]-min[0])/step)+1,ny=Math.ceil((max[1]-min[1])/step)+1,nz=Math.ceil((max[2]-min[2])/step)+1;
+  const size=nx*ny*nz,slice=nx*ny,values=new Float32Array(size),idx=(i,j,k)=>i+nx*j+slice*k;
+  for(let k=0;k<nz;k++)for(let j=0;j<ny;j++)for(let i=0;i<nx;i++)values[idx(i,j,k)]=field(min[0]+i*step,min[1]+j*step,min[2]+k*step);
+  const positions=[],normals=[],indices=[],edges=new Map();
+  const node=n=>{const k=Math.floor(n/slice),r=n-k*slice,j=Math.floor(r/nx),i=r-j*nx;return [min[0]+i*step,min[1]+j*step,min[2]+k*step];};
+  function crossing(a,b){
+    if(a>b)[a,b]=[b,a];const key=a*size+b;if(edges.has(key))return edges.get(key);
+    const t=values[a]/(values[a]-values[b]),pa=node(a),pb=node(b),id=positions.length/3;
+    const x=THREE.MathUtils.lerp(pa[0],pb[0],t),y=THREE.MathUtils.lerp(pa[1],pb[1],t),z=THREE.MathUtils.lerp(pa[2],pb[2],t);
+    positions.push(x,y,z);const e=.0005,n=new THREE.Vector3(field(x+e,y,z)-field(x-e,y,z),field(x,y+e,z)-field(x,y-e,z),field(x,y,z+e)-field(x,y,z-e)).normalize();normals.push(n.x,n.y,n.z);edges.set(key,id);return id;
+  }
+  function triangle(a,b,c){
+    const pa=new THREE.Vector3().fromArray(positions,a*3),pb=new THREE.Vector3().fromArray(positions,b*3),pc=new THREE.Vector3().fromArray(positions,c*3),center=pa.clone().add(pb).add(pc).multiplyScalar(1/3);
+    if(isOpening(center.x,center.y,center.z))return;
+    const cross=pb.sub(pa).cross(pc.sub(pa));if(cross.lengthSq()<1e-30)return;
+    const n=new THREE.Vector3().fromArray(normals,a*3).add(new THREE.Vector3().fromArray(normals,b*3)).add(new THREE.Vector3().fromArray(normals,c*3));
+    indices.push(a,cross.dot(n)>=0?b:c,cross.dot(n)>=0?c:b);
+  }
+  const offsets=[0,1,1+nx,nx,slice,slice+1,slice+1+nx,slice+nx],tets=[[0,5,1,6],[0,1,2,6],[0,2,3,6],[0,3,7,6],[0,7,4,6],[0,4,5,6]];
+  for(let k=0;k<nz-1;k++)for(let j=0;j<ny-1;j++)for(let i=0;i<nx-1;i++){
+    const origin=idx(i,j,k),nodes=offsets.map(n=>origin+n);if(nodes.every(n=>values[n]>=0)||nodes.every(n=>values[n]<0))continue;
+    for(const tet of tets){const inside=[],outside=[];for(const n of tet)(values[nodes[n]]<0?inside:outside).push(nodes[n]);if(!inside.length||!outside.length)continue;
+      if(inside.length===1)triangle(...outside.map(n=>crossing(inside[0],n)));
+      else if(outside.length===1)triangle(...inside.map(n=>crossing(outside[0],n)));
+      else{const a=crossing(inside[0],outside[0]),b=crossing(inside[0],outside[1]),c=crossing(inside[1],outside[0]),d=crossing(inside[1],outside[1]);triangle(a,b,c);triangle(b,d,c);}
+    }
+  }
+  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));geometry.setIndex(indices);
+  geometry.userData.analyticGarmentNormals=true;return geometry;
+}
+
 function finishTexture() {
   const canvas = document.createElement('canvas');
   canvas.width = canvas.height = 128;
@@ -358,7 +470,7 @@ export function buildKidBody({ palette = 'blue', stage = 'final', detail = 'bala
       const v = jerseyPoint(y, t, false); v.x *= .89;v.z *= .88;v.y -= .01;return v;
     }), skin).castShadow = false;
     add('neck', neckGeometry(tessellation), skin);
-    add('jersey', ringGeometry(range(.918, 1.58, tessellation.shirtHeight), tessellation.shirtRadial, (y, t) => jerseyPoint(y, t, folded)), shirt);
+    add('jersey-unified', unifiedJerseyGeometry(folded,detail), shirt, 'jersey');
     add('collar-v', collarGeometry(tessellation), trim, 'collar');
     // Narrow rolled hem uses the same surface equations, including the folds.
     add('shirt-hem', ringGeometry(range(.922, .943, tessellation.hemHeight), tessellation.shirtRadial, (y, t) => jerseyPoint(y, t, folded, .0017)), shirt, 'hem');
@@ -370,10 +482,10 @@ export function buildKidBody({ palette = 'blue', stage = 'final', detail = 'bala
       // Keep the hidden upper end below the closed shoulder roof.
       const armYs = detail === 'dense' ? range(.79, 1.38, tessellation.armHeight)
         : [...range(.79, 1.206, tessellation.armExposedHeight),
-          ...range(1.206, 1.38, tessellation.armCoveredHeight).slice(1)];
+          ...range(1.206, 1.34, tessellation.armCoveredHeight).slice(1)];
       add(`arm-${suffix}`, ringGeometry(armYs, armRadial, arm), skin, 'arm');
       add(`wrist-port-${suffix}`, capGeometry(arm, .79, true, armRadial), skin, 'wrist-port');
-      add(`sleeve-${suffix}`, ringGeometry(range(1.206, 1.486, tessellation.sleeveHeight), armRadial, sleeve), shirt, 'sleeve');
+      // Sleeves are part of jersey-unified; the cuff remains an independent trim.
       const cuffPoint = (y, t) => {
         const v = sleeve(y, t), c = new THREE.Vector3(profile(sleeveRows, y, 'x') * side * .95, y, 0);
         const roll = .002 + .001 * Math.sin((y - 1.206) / .035 * Math.PI);
@@ -461,7 +573,15 @@ export function buildKidBody({ palette = 'blue', stage = 'final', detail = 'bala
     const positions = mesh.geometry.attributes.position;
     const landmarks = /arm|sleeve|cuff|wrist/.test(mesh.userData.part) ? armLandmarks : bodyLandmarks;
     for (let i = 0; i < positions.count; i++) positions.setY(i, landmarkY(landmarks, positions.getY(i)));
-    positions.needsUpdate = true; mesh.geometry.computeVertexNormals();
+    positions.needsUpdate = true;
+    if(!mesh.geometry.userData.analyticGarmentNormals)mesh.geometry.computeVertexNormals();
+    else{
+      const n=mesh.geometry.attributes.normal;
+      for(let i=0;i<positions.count;i++){
+        const mappedY=positions.getY(i);let lo=.85,hi=1.66;for(let j=0;j<18;j++){const mid=(lo+hi)/2;if(landmarkY(landmarks,mid)<mappedY)lo=mid;else hi=mid;}
+        const sourceY=(lo+hi)/2,e=.0001,slope=(landmarkY(landmarks,sourceY+e)-landmarkY(landmarks,sourceY-e))/(2*e),v=new THREE.Vector3(n.getX(i),n.getY(i)/slope,n.getZ(i)).normalize();n.setXYZ(i,v.x,v.y,v.z);
+      }
+    }
     // A ring seam is duplicated for UVs. Restore normal continuity after baking
     // the vertical landmark map, which otherwise exposes a long lighting line.
     const radial = mesh.geometry.userData.radialSegments;
@@ -471,23 +591,6 @@ export function buildKidBody({ palette = 'blue', stage = 'final', detail = 'bala
         const a = i * (radial + 1), b = a + radial;
         const v = new THREE.Vector3(n.getX(a)+n.getX(b),n.getY(a)+n.getY(b),n.getZ(a)+n.getZ(b)).normalize();
         n.setXYZ(a,v.x,v.y,v.z);n.setXYZ(b,v.x,v.y,v.z);
-      }
-    }
-    // Both shells sample one broad cloth-normal field around the armhole.
-    // Independent normals previously baked opposite dark/light strips into
-    // the overlap, although both surfaces used the same blue fabric material.
-    if (mesh.name === 'jersey' || /^sleeve-(left|right)$/.test(mesh.name)) {
-      const n = mesh.geometry.attributes.normal;
-      for (let i = 0; i < positions.count; i++) {
-        const x = positions.getX(i), y = positions.getY(i), z = positions.getZ(i), ax = Math.abs(x);
-        const blend = smooth(.16,.225,ax) * (1-smooth(.325,.405,ax))
-          * smooth(1.20,1.265,y) * (1-smooth(1.455,1.54,y));
-        if (!blend || Math.abs(z) < .025) continue;
-        const across = smooth(.245,.435,ax), up = .48*smooth(1.345,1.535,y);
-        const shared = new THREE.Vector3(Math.sign(x)*across,up,
-          Math.sign(z)*Math.sqrt(Math.max(.01,1-across*across))).normalize();
-        const normal = new THREE.Vector3(n.getX(i),n.getY(i),n.getZ(i)).lerp(shared,blend).normalize();
-        n.setXYZ(i,normal.x,normal.y,normal.z);
       }
     }
     stats.meshes++;
@@ -504,8 +607,8 @@ export function buildKidBody({ palette = 'blue', stage = 'final', detail = 'bala
     shirtRadialSegments: tessellation.shirtRadial, shirtHeightSegments: tessellation.shirtHeight,
     limbRadialSegments: tessellation.limbRadial, shortsRadialSegments: tessellation.shortsRadial,
     clothClearance: { radial: .031, depth: .022 },
+    garmentUnion: { blend: .045, gridStep: detail==='mobile'?.070:detail==='balanced'?.028:.018, sharedShoulderSurface:true },
     shirtWidthScale: .90, shirtWidthScaleNeckFade: [1.49,1.58], limbWidthScale: .95,
-    shoulderBridge: { necklineTaper: [1.44,1.58], sharedNormalX: [.16,.225,.325,.405], sharedNormalY: [1.20,1.265,1.455,1.54] },
     shortsWaistRadius: .282, shortsPelvisBlend: [.705,.86],
     foldAmplitude: { underarm: .012, waist: .009, knee: .003, kneeBack: .0018 },
     foldWidths: { underarm: .044, waist: .035, knee: .07, kneeBack: .045 },

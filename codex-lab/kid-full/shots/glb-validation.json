@@ -1,9 +1,9 @@
 {
   "validatorVersion": "2.0.0-dev.3.10",
-  "sha256": "60cd99f6b702f1a0d118328ceec21533fde13dc8e3aa9f473036b8761cc24eb0",
+  "sha256": "f573f629f080610ba0f385c8f39bbb41a0f1927cb5bff72c4bdb44bb3109bbe1",
   "uri": "kid-full.glb",
   "mimeType": "model/gltf-binary",
-  "validatedAt": "2026-10-09T20:52:07.803Z",
+  "validatedAt": "2026-10-10T05:21:45.081Z",
   "issues": {
     "numErrors": 0,
     "numWarnings": 0,
@@ -23,7 +23,7 @@
         "pointer": "/buffers/0",
         "mimeType": "application/gltf-buffer",
         "storage": "glb",
-        "byteLength": 816248
+        "byteLength": 928604
       },
       {
         "pointer": "/images/0",
@@ -46,14 +46,14 @@
     "hasTextures": true,
     "hasDefaultScene": true,
     "drawCallCount": 7,
-    "totalVertexCount": 9573,
-    "totalTriangleCount": 12610,
+    "totalVertexCount": 11019,
+    "totalTriangleCount": 15152,
     "maxUVs": 1,
     "maxInfluences": 4,
     "maxAttributes": 6
   },
-  "expressionTargets": {
-    "required": [
+  "expressions": {
+    "expectedExpressions": [
       "happy",
       "effort",
       "surprised",
@@ -61,9 +61,64 @@
       "tired",
       "thinking"
     ],
-    "meshNames": [
-      null
+    "facialMorphs": [
+      {
+        "expressionNames": [
+          "happy",
+          "effort",
+          "surprised",
+          "victory",
+          "tired",
+          "thinking"
+        ],
+        "primitives": [
+          {
+            "vertices": 1672,
+            "targets": [
+              {
+                "positionCount": 1672,
+                "normalCount": 1672
+              },
+              {
+                "positionCount": 1672,
+                "normalCount": 1672
+              },
+              {
+                "positionCount": 1672,
+                "normalCount": 1672
+              },
+              {
+                "positionCount": 1672,
+                "normalCount": 1672
+              },
+              {
+                "positionCount": 1672,
+                "normalCount": 1672
+              },
+              {
+                "positionCount": 1672,
+                "normalCount": 1672
+              }
+            ]
+          }
+        ]
+      }
     ],
-    "errors": []
+    "animations": [
+      {
+        "name": "stand",
+        "facialWeightChannels": 1
+      },
+      {
+        "name": "run",
+        "facialWeightChannels": 1
+      },
+      {
+        "name": "kick",
+        "facialWeightChannels": 1
+      }
+    ],
+    "failures": [],
+    "passed": true
   }
 }

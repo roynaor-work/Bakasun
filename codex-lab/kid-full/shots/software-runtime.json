@@ -1,0 +1,241 @@
+{
+  "method": "Browser CDP SystemInfo.getProcessInfo; GPU /proc/task/comm worker names after labReady; no process arguments or environment values",
+  "configuration": {
+    "path": "work/swiftshader-runtime/SwiftShader.ini",
+    "content": "[Processor]\nThreadCount=3\n",
+    "lines": [
+      "[Processor]",
+      "ThreadCount=3"
+    ],
+    "threadCount": 3,
+    "actualNewlines": 2
+  },
+  "requiredWorkerThreads": 3,
+  "cpuQuota": "200000 100000",
+  "cpuAffinity": "0-1",
+  "observations": [
+    {
+      "label": "benchmark-mobile-0",
+      "recordedAtUTC": "2026-10-10T05:20:49.710Z",
+      "gpuPid": 25223,
+      "softwareWorkerThreads": 3,
+      "softwareWorkerNames": [
+        "Thread<00>",
+        "Thread<01>",
+        "Thread<02>"
+      ],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "buffer": {
+        "width": 234,
+        "height": 506
+      }
+    },
+    {
+      "label": "benchmark-mobile-1",
+      "recordedAtUTC": "2026-10-10T05:21:00.204Z",
+      "gpuPid": 25366,
+      "softwareWorkerThreads": 3,
+      "softwareWorkerNames": [
+        "Thread<00>",
+        "Thread<01>",
+        "Thread<02>"
+      ],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "buffer": {
+        "width": 234,
+        "height": 506
+      }
+    },
+    {
+      "label": "benchmark-mobile-2",
+      "recordedAtUTC": "2026-10-10T05:21:10.916Z",
+      "gpuPid": 25488,
+      "softwareWorkerThreads": 3,
+      "softwareWorkerNames": [
+        "Thread<00>",
+        "Thread<01>",
+        "Thread<02>"
+      ],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "buffer": {
+        "width": 234,
+        "height": 506
+      }
+    }
+  ],
+  "benchmarks": {
+    "phone": [
+      {
+        "label": "benchmark-mobile-0",
+        "recordedAtUTC": "2026-10-10T05:15:49.051Z",
+        "gpuPid": 23334,
+        "softwareWorkerThreads": 3,
+        "softwareWorkerNames": [
+          "Thread<00>",
+          "Thread<01>",
+          "Thread<02>"
+        ],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "buffer": {
+          "width": 234,
+          "height": 506
+        }
+      },
+      {
+        "label": "benchmark-mobile-1",
+        "recordedAtUTC": "2026-10-10T05:16:00.332Z",
+        "gpuPid": 23461,
+        "softwareWorkerThreads": 3,
+        "softwareWorkerNames": [
+          "Thread<00>",
+          "Thread<01>",
+          "Thread<02>"
+        ],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "buffer": {
+          "width": 234,
+          "height": 506
+        }
+      },
+      {
+        "label": "benchmark-mobile-2",
+        "recordedAtUTC": "2026-10-10T05:16:12.453Z",
+        "gpuPid": 23591,
+        "softwareWorkerThreads": 3,
+        "softwareWorkerNames": [
+          "Thread<00>",
+          "Thread<01>",
+          "Thread<02>"
+        ],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "buffer": {
+          "width": 234,
+          "height": 506
+        }
+      }
+    ],
+    "phoneBaseline": [
+      {
+        "label": "benchmark-mobile-0",
+        "recordedAtUTC": "2026-10-10T05:18:43.997Z",
+        "gpuPid": 24216,
+        "softwareWorkerThreads": 3,
+        "softwareWorkerNames": [
+          "Thread<00>",
+          "Thread<01>",
+          "Thread<02>"
+        ],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "buffer": {
+          "width": 234,
+          "height": 506
+        }
+      },
+      {
+        "label": "benchmark-mobile-1",
+        "recordedAtUTC": "2026-10-10T05:18:55.002Z",
+        "gpuPid": 24345,
+        "softwareWorkerThreads": 3,
+        "softwareWorkerNames": [
+          "Thread<00>",
+          "Thread<01>",
+          "Thread<02>"
+        ],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "buffer": {
+          "width": 234,
+          "height": 506
+        }
+      },
+      {
+        "label": "benchmark-mobile-2",
+        "recordedAtUTC": "2026-10-10T05:19:05.298Z",
+        "gpuPid": 24478,
+        "softwareWorkerThreads": 3,
+        "softwareWorkerNames": [
+          "Thread<00>",
+          "Thread<01>",
+          "Thread<02>"
+        ],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "buffer": {
+          "width": 234,
+          "height": 506
+        }
+      }
+    ],
+    "phoneDelivered": [
+      {
+        "label": "benchmark-mobile-0",
+        "recordedAtUTC": "2026-10-10T05:20:49.710Z",
+        "gpuPid": 25223,
+        "softwareWorkerThreads": 3,
+        "softwareWorkerNames": [
+          "Thread<00>",
+          "Thread<01>",
+          "Thread<02>"
+        ],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "buffer": {
+          "width": 234,
+          "height": 506
+        }
+      },
+      {
+        "label": "benchmark-mobile-1",
+        "recordedAtUTC": "2026-10-10T05:21:00.204Z",
+        "gpuPid": 25366,
+        "softwareWorkerThreads": 3,
+        "softwareWorkerNames": [
+          "Thread<00>",
+          "Thread<01>",
+          "Thread<02>"
+        ],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "buffer": {
+          "width": 234,
+          "height": 506
+        }
+      },
+      {
+        "label": "benchmark-mobile-2",
+        "recordedAtUTC": "2026-10-10T05:21:10.916Z",
+        "gpuPid": 25488,
+        "softwareWorkerThreads": 3,
+        "softwareWorkerNames": [
+          "Thread<00>",
+          "Thread<01>",
+          "Thread<02>"
+        ],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "buffer": {
+          "width": 234,
+          "height": 506
+        }
+      }
+    ]
+  },
+  "phoneRendering": {
+    "viewport": "390x844 CSS",
+    "buffer": "234x506",
+    "antialias": false,
+    "preserveDrawingBuffer": false
+  },
+  "comparisonRendering": {
+    "viewport": "480x720 CSS",
+    "antialias": true,
+    "preserveDrawingBuffer": true
+  }
+}
