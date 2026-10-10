@@ -1,8 +1,9 @@
 import { RepCounter, bodyReport, features, statusCode, worldRequired, FLOOR, EXERCISE_FEEDBACK, EXERCISES, FRAMING, REASONS, FEEDBACK } from './counter.mjs';
 import { StatusLine, RestGate, diagnosticLines } from './feedback.mjs';
 import { PeopleTracker } from './people.mjs';
-import { PlacementGuide } from './placement.mjs';
+import { PlacementGuide, distanceGuide } from './placement.mjs';
 import { SkeletonRecorder } from './recording.mjs';
+import { cameraConstraints, configureCamera, cameraSummary } from './camera.mjs';
 const $ = id => document.getElementById(id);
 const video = $('video'), canvas = $('overlay'), context = canvas.getContext('2d');
 const titles = { squats: 'סקוואט', 'jumping-jacks': 'קפיצות פיסוק', 'high-knees': 'ברכיים גבוהות',
@@ -29,8 +30,9 @@ let counter, exercise, gate, statusLine, attemptStarted = null, lastVideoTime = 
 let lastFrame = null, totalFrames = 0, totalInference = 0, log = [], lastSpeak = -Infinity;
 let lastMetricPaint = 0, watchdog = 0, totalElapsed = 0;
 let pair = false, adult, adultGate, tracker, placement, placementGate, placementDone, queuedSpeech = null;
-let missing = [false, false], calibratedPeople = [false, false];
+let calibratedPeople = [false, false];
 let recorder = new SkeletonRecorder();
+let cameraInfo = null;
 function localVoice() {
   return window.speechSynthesis?.getVoices().find(v => v.localService && /^he(?:-|_|$)/i.test(v.lang));
 }
@@ -98,7 +100,8 @@ function poseResult(data) {
   const placementCode = !active && (!FLOOR.includes(exercise) || !placementDone) ? placement.update(poses, timestamp, aspect) : null;
   const assigned = pair ? tracker.update(placementCode ? [] : poses, timestamp, aspect) : [poses[0] || null];
   if (pair && tracker.tracks.length) placementDone = true;
-  const reports = assigned.map(p => bodyReport(p?.landmarks || [], aspect, exercise));
+  const reports = assigned.map((p, i) => bodyReport(p?.landmarks || [], aspect, exercise,
+    { movement: active && (i ? adult : counter).phase !== 'waiting' }));
   const fs = assigned.map((p, i) => features(p?.landmarks || [], p?.world || [], aspect, reports[i]));
   const visibility = fs.map((f, i) => reports[i].ok && !worldRequired(exercise, f));
   const visible = visibility[0], report = reports[0];
@@ -115,16 +118,21 @@ function poseResult(data) {
   }
   if (active) {
     [counter, ...(pair ? [adult] : [])].forEach((c, i) => {
-      if (pair && !visibility[i] && !missing[i]) handleEvent(c.resetTracking(), i);
-      missing[i] = !visibility[i];
+      // Ambiguous identity never bridges a rep; brief missing/weak frames use
+      // the same 400ms grace as solo, without crediting unknown time.
+      if (pair && tracker.status === 'ambiguous' && !c.lossReset) handleEvent(c.resetTracking(), i);
       handleEvent(c.update(assigned[i]?.landmarks || [], assigned[i]?.world || [], timestamp, aspect), i);
       if (pair) $(i ? 'dad-status' : 'child-status').textContent = visibility[i] ? c.phase === 'waiting' ? 'מחכה לעמדת התחלה' : 'סופר' : 'הספירה נעצרה — מחכה לחזרה';
     });
     paintStatus(pair && !visibility.every(Boolean) ? assigned.every(Boolean) ? 'missing-person' : tracker.status : counter.status);
     $('view').classList.toggle('ready', visibility.every(Boolean));
   } else {
+    const distance = distanceGuide(assigned[0]?.landmarks || poses[0]?.landmarks || [], aspect,
+      FLOOR.includes(exercise) && placementDone ? exercise : 'placement');
+    $('distance-meter').value = distance.value;
+    $('distance-hint').textContent = distance.text;
     if (FLOOR.includes(exercise) && !pair && !placementDone) {
-      const upright = bodyReport(poses[0]?.landmarks || [], aspect);
+      const upright = bodyReport(poses[0]?.landmarks || [], aspect, 'placement');
       const standing = features(poses[0]?.landmarks || [], poses[0]?.world || [], aspect, upright);
       placementDone = placementGate.update(placementCode ? null : standing, timestamp);
     }
@@ -181,7 +189,7 @@ $('settings').addEventListener('submit', async event => {
   pair = $('mode').value === 'pair'; adult = pair ? new RepCounter(exercise, { age: 10, height: 180 }) : null;
   tracker = pair ? new PeopleTracker() : null; placement = new PlacementGuide();
   placementGate = new RestGate('squats', counter.t); placementDone = !FLOOR.includes(exercise);
-  missing = [false, false]; calibratedPeople = [false, false]; recorder = new SkeletonRecorder();
+  calibratedPeople = [false, false]; recorder = new SkeletonRecorder();
   $('dad-score').hidden = !pair; $('child-label').textContent = pair ? 'הילד' : 'חזרות שנספרו';
   $('dad-count').textContent = '0'; $('child-status').textContent = ''; $('dad-status').textContent = '';
   $('recording-panel').hidden = false; paintRecorder();
@@ -194,13 +202,37 @@ $('settings').addEventListener('submit', async event => {
   $('start').hidden = false; $('finish').hidden = true; $('view').classList.remove('ready');
   $('session-title').textContent = `2. הצבה · ${titles[exercise]}`; $('instructions').textContent = instructions[exercise];
   $('status').textContent = 'טוענים את מודל הזיהוי המקומי…';
+  $('distance-guide').hidden = false; $('wide-offer').hidden = true;
   speak(spoken.placement);
   try {
-    const acquired = await navigator.mediaDevices.getUserMedia({ audio: false, video: {
-      facingMode: 'user', width: { ideal: 640, max: 640 }, height: { ideal: 480, max: 480 }, frameRate: { ideal: 20, max: 24 } } });
+    const acquired = await navigator.mediaDevices.getUserMedia(cameraConstraints(window.innerHeight > window.innerWidth,
+      $('camera-device').value || ''));
     if (token !== generation) { acquired.getTracks().forEach(t => t.stop()); return; }
-    stream = acquired; video.srcObject = stream; await video.play();
+    stream = acquired;
+    const { alternatives, ...actual } = await configureCamera(stream.getVideoTracks()[0], navigator.mediaDevices,
+      $('camera-width').value !== 'normal');
     if (token !== generation) return;
+    cameraInfo = actual;
+    video.srcObject = stream; await video.play();
+    if (token !== generation) return;
+    cameraInfo.width ||= video.videoWidth; cameraInfo.height ||= video.videoHeight;
+    $('camera-actual').textContent = cameraSummary(cameraInfo);
+    if (alternatives.length) {
+      $('camera-device').replaceChildren();
+      const automatic = document.createElement('option'); automatic.value = ''; automatic.textContent = 'קדמית — אוטומטי';
+      $('camera-device').append(automatic);
+      for (const d of alternatives) {
+        const option = document.createElement('option'); option.value = d.deviceId;
+        option.textContent = `מצלמה רחבה אפשרית: ${d.label}`; $('camera-device').append(option);
+      }
+      $('wide-offer').hidden = false;
+      $('wide-offer').textContent = 'נמצאה מצלמה רחבה אפשרית — בחירה והצבה מחדש (ייתכן שהיא אחורית)';
+      $('wide-offer').onclick = () => {
+        if (active) return;
+        $('camera-device').value = alternatives[0].deviceId;
+        release(); $('setup').hidden = false; $('session').hidden = true;
+      };
+    }
     canvas.width = video.videoWidth; canvas.height = video.videoHeight;
     if ($('record').checked) startRecording(); else paintRecorder();
     $('view').style.aspectRatio = `${video.videoWidth}/${video.videoHeight}`;
@@ -235,11 +267,13 @@ $('start').onclick = () => {
   adult?.begin(attemptStarted, true); recorder.markCountStart(attemptStarted); paintRecorder();
   log = []; totalFrames = 0; totalInference = 0; totalElapsed = 0; lastFrame = null;
   $('start').hidden = true; $('finish').hidden = false;
+  $('distance-guide').hidden = true; $('wide-offer').hidden = true;
   $('session-title').textContent = `סופרים · ${titles[exercise]}`; speak(spoken[exercise]);
 };
 function results() {
   counter?.finish(performance.now()); adult?.finish(performance.now()); release(); $('session').hidden = true; $('result').hidden = false;
   $('result-count').textContent = pair ? `הילד: ${counter.count} · אבא: ${adult.count} חזרות` : `${counter.count} חזרות נספרו`;
+  $('result-camera').textContent = cameraSummary(cameraInfo);
   $('result-rejected').textContent = `${counter.rejected + (adult?.rejected || 0)} תנועות לא נספרו:`;
   $('reasons').replaceChildren();
   for (const [i, c] of [counter, ...(pair ? [adult] : [])].entries()) for (const [reason, number] of Object.entries(c.reasons)) {
@@ -260,7 +294,7 @@ $('again').onclick = () => { $('result').hidden = true; $('setup').hidden = fals
 $('export').onclick = () => {
   const blob = new Blob([JSON.stringify({ version: pair ? 3 : 2, exercise: EXERCISES.indexOf(exercise), totalFrames, retainedFrames: log.length,
     counted: counter.count, rejected: counter.rejected, reasons: counter.reasons,
-    thresholds: counter.t, framing: FRAMING, diagnostics: counter.snapshot(), frames: log,
+    thresholds: counter.t, framing: FRAMING, camera: cameraInfo, diagnostics: counter.snapshot(), frames: log,
     ...(pair ? { adult: { counted: adult.count, rejected: adult.rejected, reasons: adult.reasons, thresholds: adult.t, diagnostics: adult.snapshot() } } : {}) }, null, 2)], { type: 'application/json' });
   download(blob, 'cam-lab-performance.json');
 };

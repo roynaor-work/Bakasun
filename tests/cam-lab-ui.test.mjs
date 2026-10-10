@@ -21,7 +21,8 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
   get('overlay').getContext = () => ({ clearRect() {}, beginPath() {}, moveTo() {}, lineTo() {}, stroke() {} });
   Object.assign(get('video'), { videoWidth: 640, videoHeight: 480, readyState: 2, currentTime: 0, play: async () => {} });
   get('exercise').value = 'squats'; get('age').value = '7'; get('height').value = '120'; get('voice').checked = true;
-  let now = 0, raf, worker, stopped = 0, terminated = 0, exported;
+  let now = 0, raf, worker, stopped = 0, terminated = 0, exported, cameraMode = 'wide';
+  const requestedCameras = [];
   let voices = [{ lang: 'he-IL', localService: false }, { lang: 'he-IL', localService: true }];
   const speech = [], painted = [];
   const status = get('status'); let statusText = '';
@@ -39,10 +40,17 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
       speechSynthesis: { getVoices: () => voices, addEventListener() {}, cancel() {},
         speak: utterance => speech.push({ time: now, voice: utterance.voice, text: utterance.text }) }, addEventListener() {} });
     replace('navigator', { mediaDevices: { getUserMedia: async options => {
+      requestedCameras.push(options);
       assert.equal(options.audio, false);
-      const track = { stop: () => stopped++, addEventListener() {} };
+      assert.deepEqual(options.video.width, { ideal: 480, max: 480 });
+      assert.deepEqual(options.video.height, { ideal: 640, max: 640 });
+      const track = { stop: () => stopped++, addEventListener() {},
+        getCapabilities: () => cameraMode === 'wide' ? { zoom: { min: .5, max: 4 } } : {},
+        applyConstraints: async c => assert.equal(c.advanced[0].zoom, .5),
+        getSettings: () => ({ deviceId: 'front', zoom: cameraMode === 'wide' ? .5 : 1, width: 640, height: 480 }) };
       return { getTracks: () => [track], getVideoTracks: () => [track] };
-    } } });
+    }, enumerateDevices: async () => [{ kind: 'videoinput', deviceId: 'rear-wide', label: 'Back ultra-wide camera' }] } });
+    window.innerHeight = 844; window.innerWidth = 390;
     replace('performance', { now: () => now }); replace('Worker', FakeWorker);
     replace('SpeechSynthesisUtterance', class { constructor(text) { this.text = text; } });
     replace('requestAnimationFrame', callback => { raf = callback; return 1; }); replace('cancelAnimationFrame', () => {});
@@ -61,6 +69,8 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
         landmarks: sample?.p || [], world: sample?.world || [], ...(Array.isArray(sample) ? { poses: sample } : {}), inferenceMs: 54 } });
     };
     for (let i = 0; i < 30; i++) await frame(pose({ angle: 159, feet: 1.7, hands: .3 }));
+    assert.match(get('camera-actual').textContent, /זום 0.5.*640×480/);
+    assert.match(get('distance-hint').textContent, /המרחק מתאים/);
     assert.equal(get('start').disabled, false); get('start').click();
     for (let i = 0; i < 10; i++) await frame(pose({ angle: 110 }));
     for (let i = 0; i < 4; i++) await frame(null);
@@ -79,10 +89,13 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     }
     get('finish').click(); assert.equal(stopped, 1); assert.equal(terminated, 1);
     assert.equal(get('result-count').textContent, '1 חזרות נספרו');
+    assert.match(get('result-camera').textContent, /זום 0.5.*640×480/);
     assert.ok(get('diagnostics').children.some(li => li.textContent.includes('לפני מחזור: 1')));
+    assert.ok(get('diagnostics').children.some(li => li.textContent.includes('כתף שמאל — עברה ב־')));
     get('export').click(); const output = JSON.parse(await exported.text());
     assert.equal(output.version, 2); assert.equal(output.counted, 1); assert.equal(output.rejected, 0);
     assert.equal(output.exercise, 0); assert.equal(output.framing.footConfidence, .35);
+    assert.equal(output.camera.wideApplied, 1); assert.equal(output.camera.zoom, .5);
     assert.equal(output.diagnostics.graceRecoveries, 1);
     assert.equal(output.diagnostics.frames, output.totalFrames);
     assert.equal(output.frames.length, output.totalFrames);
@@ -102,6 +115,9 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     for (let i = 0; i < 60; i++) await frame([dad(180), child(180)]);
     assert.equal(get('start').disabled, false); assert.equal(get('dad-score').hidden, false); get('start').click();
     for (let i = 0; i < 16; i++) await frame([child(110), dad(180)]);
+    const weak = child(110); weak.landmarks[27].visibility = .1;
+    for (let i = 0; i < 2; i++) await frame([dad(180), weak]);
+    await frame([child(110), dad(180)]);
     for (let i = 0; i < 16; i++) await frame([dad(180), child(180)]);
     assert.equal(get('count').textContent, 1); assert.equal(get('dad-count').textContent, '0');
     for (let i = 0; i < 16; i++) await frame([dad(110), child(110)]);
@@ -118,6 +134,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     assert.deepEqual(replayRecording(skeleton).map(c => c.counted), [1, 1]);
     get('export').click(); const pairLog = JSON.parse(await exported.text());
     assert.equal(pairLog.version, 3); assert.equal(pairLog.adult.counted, 1);
+    assert.equal(pairLog.diagnostics.graceRecoveries, 1);
     assert.ok(!/"(?:x|y|z|landmarks|world|image|video)"/.test(JSON.stringify(pairLog)));
     // Floor setup first checks upright placement, then the floor rest pose.
     get('again').click(); get('mode').value = 'solo'; get('record').checked = false; get('exercise').value = 'push-ups';
@@ -138,6 +155,16 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     now += 7000; get('again').click(); await get('settings').handlers.submit({ preventDefault() {} });
     await frame(pose()); assert.equal(speech.length, spokenBefore);
     get('stop').click(); assert.equal(stopped, 4); assert.equal(terminated, 4);
+    cameraMode = 'nozoom';
+    await get('settings').handlers.submit({ preventDefault() {} });
+    assert.match(get('camera-actual').textContent, /לא אישר זום רחב/);
+    assert.equal(get('wide-offer').hidden, false);
+    assert.equal(requestedCameras.at(-1).video.facingMode, 'user');
+    get('wide-offer').click(); assert.equal(stopped, 5);
+    assert.equal(get('camera-device').value, 'rear-wide'); assert.equal(get('setup').hidden, false);
+    cameraMode = 'wide'; await get('settings').handlers.submit({ preventDefault() {} });
+    assert.deepEqual(requestedCameras.at(-1).video.deviceId, { exact: 'rear-wide' });
+    get('stop').click(); assert.equal(stopped, 6); assert.equal(terminated, 6);
   } finally {
     URL.createObjectURL = oldCreate; URL.revokeObjectURL = oldRevoke;
     for (const [key, descriptor] of saved) {

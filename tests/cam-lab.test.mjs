@@ -26,10 +26,11 @@ test('a point inside the new margin and reasonable headroom pass; clipped head/a
   assert.ok(fullBody(sample.p, 4 / 3));
   sample.p[27].y = .995;
   assert.ok(bodyReport(sample.p, 4 / 3).failures.some(f => f.reason === 'margin' && f.point === 27));
-  sample.p[27].y = .92; sample.p[0].y = .03;
-  assert.ok(bodyReport(sample.p, 4 / 3).failures.some(f => f.reason === 'headroom'));
+  sample.p[27].y = .92; sample.p[0].y = .025;
+  assert.ok(bodyReport(sample.p, 4 / 3, 'placement').failures.some(f => f.reason === 'headroom'));
+  assert.ok(bodyReport(sample.p, 4 / 3, 'squats').ok); // Setup clearance cannot block a rep.
 });
-test('heel flicker during standing, descent and return does not lose the rep', () => {
+test('optional heel flicker during standing, descent and return does not block squats', () => {
   const s = sequence(); s.send(pose());
   for (const angle of [110, 110, 110, 180, 180, 180]) {
     s.send(pose({ angle, footConfidence: .1 }), 50);
@@ -37,9 +38,9 @@ test('heel flicker during standing, descent and return does not lose the rep', (
   }
   assert.equal(s.c.count, 1); assert.equal(s.c.rejected, 0);
   const d = s.c.snapshot();
-  assert.equal(d.fullBodyFailed, 6); assert.equal(d.failureFrames.visibility, 6);
-  assert.equal(d.failedPoints.visibility[29], 6); assert.equal(d.failedPoints.presence[32], 6);
-  assert.equal(d.graceRecoveries, 6); assert.equal(d.trackingResets, 0);
+  assert.equal(d.fullBodyFailed, 0); assert.equal(d.failureFrames.visibility, 0);
+  assert.equal(d.failedPoints.visibility?.[29], undefined); assert.equal(d.failedPoints.presence?.[32], undefined);
+  assert.equal(d.graceRecoveries, 0); assert.equal(d.trackingResets, 0);
 });
 test('200ms tracking loss midway through a rep preserves the cycle', () => {
   const s = sequence(); s.send(pose()); s.send(pose({ angle: 110 }));
@@ -49,12 +50,12 @@ test('200ms tracking loss midway through a rep preserves the cycle', () => {
   assert.equal(s.c.count, 1); assert.equal(s.c.rejected, 0);
   assert.equal(s.c.snapshot().graceRecoveries, 1);
 });
-test('300ms between good frames survives; 350ms requires rearming', () => {
-  for (const missing of [250, 300]) {
+test('400ms between good frames survives; 450ms requires rearming', () => {
+  for (const missing of [350, 400]) {
     const s = sequence(); s.send(pose()); s.send(pose({ angle: 110 }));
     s.send(null, missing); s.send(pose());
-    assert.equal(s.c.count, missing === 250 ? 1 : 0);
-    assert.equal(s.c.reasons.tracking || 0, missing === 250 ? 0 : 1);
+    assert.equal(s.c.count, missing === 350 ? 1 : 0);
+    assert.equal(s.c.reasons.tracking || 0, missing === 350 ? 0 : 1);
   }
 });
 test('unknown frames do not satisfy target dwell', () => {
@@ -107,7 +108,7 @@ test('diagnostics count phases, failures, idle resets once per outage, and finis
   assert.equal(d.frames, 17); assert.equal(d.fullBodyPassed, 6); assert.equal(d.fullBodyFailed, 11);
   assert.equal(d.fullBodyPercent, 600 / 17); assert.equal(d.failureFrames.missing, 11);
   assert.equal(d.idleTrackingResets, 1); assert.equal(d.trackingResets, 1);
-  assert.deepEqual(d.phaseMs, { waiting: 500, armed: 400, moving: 0 });
+  assert.deepEqual(d.phaseMs, { waiting: 400, armed: 500, moving: 0 });
   assert.equal(c.count, 0); assert.equal(c.rejected, 0);
   assert.ok(diagnosticLines(d).some(line => line.includes('לפני מחזור: 1')));
   const before = c.snapshot(); c.update([], [], 1100); assert.deepEqual(c.snapshot(), before);
@@ -126,12 +127,13 @@ test('moving phase records wall time across grace, while duplicate timestamps ad
 });
 test('all framing failures are named without leaking coordinates; numeric snapshots only', () => {
   const c = new RepCounter('squats'); const sample = pose();
-  sample.p[27].visibility = .1; sample.p[28].presence = .1; sample.p[15].x = .995;
+  sample.p[27].visibility = .1; sample.p[28].presence = .1; sample.p[23].x = .995;
   sample.p[0].y = .03; sample.p[11].x = .47; sample.p[12].x = .53;
   c.update(sample.p, sample.world, 50, 4 / 3);
   const d = c.snapshot();
-  for (const key of ['visibility', 'presence', 'margin', 'headroom', 'frontRatio']) assert.equal(d.failureFrames[key], 1, key);
-  assert.equal(d.failedPoints.margin[15], 1); assert.equal(d.failedPoints.visibility[27], 1);
+  for (const key of ['visibility', 'presence', 'margin', 'frontRatio']) assert.equal(d.failureFrames[key], 1, key);
+  assert.equal(d.failureFrames.headroom, 0);
+  assert.equal(d.failedPoints.margin[23], 1); assert.equal(d.failedPoints.visibility[27], 1);
   const numeric = value => {
     if (typeof value === 'object') for (const v of Object.values(value)) numeric(v);
     else assert.ok(typeof value === 'number' && Number.isFinite(value));
@@ -149,7 +151,9 @@ test('front-view and world failures are distinguished from framing and rest fail
   assert.equal(statusCode(report, 'waiting'), 'waiting');
   sample.p[27].visibility = .1; assert.equal(statusCode(bodyReport(sample.p), 'armed'), 'legs');
   sample.p[27].visibility = 1; sample.p[7].visibility = .1;
-  assert.equal(statusCode(bodyReport(sample.p), 'armed'), 'head');
+  assert.equal(statusCode(bodyReport(sample.p), 'armed'), 'armed');
+  sample.p[0].visibility = .1;
+  assert.equal(statusCode(bodyReport(sample.p, 1, 'placement'), 'armed'), 'head');
 });
 test('status line changes at most once a second and uses the latest reason', () => {
   const line = new StatusLine(); assert.equal(line.update('waiting', 0)[0], 'תעמוד ישר כדי להתחיל');
