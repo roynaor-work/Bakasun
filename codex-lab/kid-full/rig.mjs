@@ -5,8 +5,10 @@ import { buildHead } from './parts/head.mjs';
 import { createHand, createHandSkinFields } from './parts/hand.mjs';
 import { createShoe } from './parts/shoe.mjs';
 import { bakeStudio } from './studio-bake.mjs';
-import { installFacialMorphs,transformMorphGeometry,nameExpressionTargets } from './facial-morphs.mjs';
-import { attachExpressionController,EXPRESSION_IDS,POSE_EXPRESSIONS } from './expressions.mjs';
+import { transformGeometry,nameMorphs } from './geometry-morphs.mjs';
+import { EXPRESSION_IDS,applyExpression,blendExpression,setExpressionWeights,getExpressionWeights as expressionWeights } from './parts/expressions.mjs';
+export { applyExpression,blendExpression,setExpressionWeights,expressionWeights };
+export const POSE_EXPRESSIONS={stand:'neutral',run:'effort',runOpposite:'effort',kick:'victory'};
 
 const smooth=(a,b,x)=>T.MathUtils.smoothstep(x,a,b);
 export const DETAILS=['dense','balanced','mobile'];
@@ -67,6 +69,13 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
    const t=smooth(1.49,1.63,p.y),head=smooth(1.55,1.60,p.y);
    return [[ix('Chest'),(1-t)*(1-head)],[ix('Neck'),t*(1-head)],[ix('Head'),head]];
   }
+  if(name==='jersey-unified'||name.startsWith('sleeve-cuff')){
+   const side=p.x<0?'L':'R',arm=smooth(.22,.36,Math.abs(p.x));
+   const elbow=smooth(1.01,1.14,p.y),shoulder=smooth(1.28,1.47,p.y);
+   const contributions=new Map(torso(p.y).map(([joint,weight])=>[joint,weight*(1-arm)]));
+   for(const [joint,weight]of [[ix('LowerArm_'+side),1-elbow],[ix('UpperArm_'+side),elbow*(1-shoulder)],[ix('Chest'),elbow*shoulder]])contributions.set(joint,(contributions.get(joint)||0)+weight*arm);
+   return [...contributions].sort((a,b)=>b[1]-a[1]).slice(0,4);
+  }
   if(/arm|wrist|sleeve/.test(name)){
    const elbow=smooth(1.01,1.14,p.y),shoulder=smooth(1.28,1.47,p.y);
    return [[ix('LowerArm_'+side),1-elbow],[ix('UpperArm_'+side),elbow*(1-shoulder)],[ix('Chest'),elbow*shoulder]];
@@ -83,7 +92,7 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
   const objects=[];part.traverse(m=>{if(m.isMesh)objects.push(m);});
   for(const mesh of objects){
    if(mesh.name==='torso')continue; // hidden under the closed shirt
-   const original=transformMorphGeometry(mesh.geometry.clone(),mesh.matrixWorld),pos=original.attributes.position;
+   const original=transformGeometry(mesh.geometry.clone(),mesh.matrixWorld),pos=original.attributes.position;
    if(category==='shoe'){
     const bone=rig.byName['Foot_'+(mesh.name.includes('left')?'L':'R')],local=[];
     for(let direction=0;direction<32;direction++){
@@ -122,11 +131,6 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
    for(const slice of slices){
     const g=original.clone();if(original.index)g.setIndex(Array.from(original.index.array.slice(slice.start,slice.start+slice.count)));g.clearGroups();
     const sourceMat=mats[slice.materialIndex];
-    // Skin's cheek tint enables vertexColors on its shared material. Nose
-    // geometry has no tint, so give it identity colors before PBR batching.
-    if(sourceMat.vertexColors&&!g.attributes.color){
-     const colors=new Float32Array(pos.count*3);colors.fill(1);g.setAttribute('color',new T.Float32BufferAttribute(colors,3));
-    }
     const mat=experiment==='pbr'?sourceMat:bakeStudio(g,sourceMat);
     if(experiment!=='pbr'){
      const normals=g.attributes.normal;
@@ -136,8 +140,9 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
      }
     }
     if(experiment!=='pbr')mat.side=experiment==='doubleSide'?T.DoubleSide:T.FrontSide;
-    // Head parts follow the Head bone directly. Facial deformation is six
-    // standard morph targets; static hair remains a separate cheap shader.
+    // The head never deforms within its own surface. A direct bone attachment
+    // gives the identical rigid pose without four skin-matrix fetches per
+    // vertex in the phone shader. The neck still blends into that head bone.
     if(category==='head'&&detail==='mobile'&&experiment!=='pbr'){
      g.deleteAttribute('skinIndex');g.deleteAttribute('skinWeight');rigidHead.push({geometry:g,material:mat});continue;
     }
@@ -149,14 +154,14 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
      if(!rigidShoes.has(bone))rigidShoes.set(bone,[]);
      rigidShoes.get(bone).push({geometry:g,material:mat});continue;
     }
-    const key=JSON.stringify([mat.color.getHex(),mat.roughness,mat.metalness,mat.map?.uuid,mat.side,mat.transparent,mat.alphaTest,Boolean(g.morphAttributes.position?.length)]);
+    const key=JSON.stringify([mat.color.getHex(),mat.roughness,mat.metalness,mat.map?.uuid,mat.side,mat.transparent,mat.alphaTest,!!g.morphAttributes.position?.length]);
     if(!groups.has(key))groups.set(key,{material:mat,geometries:[],parts:[]});
     groups.get(key).geometries.push(g);groups.get(key).parts.push(mesh.name);
    } original.dispose();
   }
  }
  const body=buildKidBody({detail});body.group.scale.y=BODY_Y_SCALE;sourceParts.body=body.stats.triangles;collect(body.group,'body');
- const head=installFacialMorphs(buildHead({detail,facialRig:true}),{detail});const headBox=new T.Box3().setFromObject(head,true),height=headBox.max.y-headBox.min.y;
+ const head=buildHead({detail});applyExpression(head,'neutral');const headBox=new T.Box3().setFromObject(head,true),height=headBox.max.y-headBox.min.y;
  const headScale=1/height;head.scale.setScalar(headScale);
  head.position.set(0,1.60*BODY_Y_SCALE-headBox.min.y*headScale,.025);sourceParts.head=head.userData.stats?.triangles;collect(head,'head');
  for(const [label,s] of [['left',-1],['right',1]]){
@@ -216,17 +221,20 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
  // Digit rest pivots changed after the original skeleton construction.
  root.updateMatrixWorld(true);rig.skeleton.calculateInverses();
  for(const batch of groups.values()){
-  const geometry=nameExpressionTargets(mergeGeometries(batch.geometries,false));batch.geometries.forEach(g=>g.dispose());
+  const geometry=mergeGeometries(batch.geometries,false);batch.geometries.forEach(g=>g.dispose());
   if(!batch.material.map)geometry.deleteAttribute('uv');
+  if(geometry.morphAttributes.position?.length)nameMorphs(geometry,EXPRESSION_IDS);
   const mesh=new T.SkinnedMesh(geometry,batch.material);mesh.name='Skin_'+root.children.length;
   mesh.userData.parts=[...new Set(batch.parts)];mesh.frustumCulled=false;root.add(mesh);mesh.bind(rig.skeleton);
  }
- if(rigidHead.length)for(const morph of [false,true]){
-  const surfaces=rigidHead.filter(s=>Boolean(s.geometry.morphAttributes.position?.length)===morph);if(!surfaces.length)continue;
-  const geometry=nameExpressionTargets(mergeGeometries(surfaces.map(s=>s.geometry),false));surfaces.forEach(s=>s.geometry.dispose());
+ for(const animated of [false,true]){
+  const surfaces=rigidHead.filter(s=>!!s.geometry.morphAttributes.position?.length===animated);
+  if(!surfaces.length)continue;
+  const geometry=mergeGeometries(surfaces.map(s=>s.geometry),false);surfaces.forEach(s=>s.geometry.dispose());
   geometry.deleteAttribute('uv');
-  transformMorphGeometry(geometry,rig.byName.Head.matrixWorld.clone().invert());
-  const mesh=new T.Mesh(geometry,surfaces[0].material);mesh.name=morph?'FaceSurface':'HeadSurface';mesh.userData.rigidBone='Head';mesh.frustumCulled=false;
+  if(animated)nameMorphs(geometry,EXPRESSION_IDS);
+  transformGeometry(geometry,rig.byName.Head.matrixWorld.clone().invert());
+  const mesh=new T.Mesh(geometry,surfaces[0].material);mesh.name=animated?'HeadExpressions':'HeadSurface';mesh.userData.rigidBone='Head';mesh.frustumCulled=false;
   rig.byName.Head.add(mesh);
  }
  for(const [bone,surfaces] of rigidShoes){
@@ -255,15 +263,15 @@ export function buildCharacter({detail='mobile',experiment='final'}={}){
   merged.deleteAttribute('uv');
   ball.geometry=merged;ball.material.side=T.DoubleSide;
  }
- root.userData={detail,experiment,headHeight:1,sourceParts,headScale,bodyYScale:BODY_Y_SCALE,groundProbes,expressionIds:[...EXPRESSION_IDS],poseExpressions:{...POSE_EXPRESSIONS},buildMs:performance.now()-start};
- const model={root,...rig,ball,detail,applyPose(id){applyPose(model,id);},blend(from,to,t){applyBlend(model,from,to,t);}};
- attachExpressionController(model);
+ root.userData={detail,experiment,headHeight:1,sourceParts,headScale,bodyYScale:BODY_Y_SCALE,groundProbes,buildMs:performance.now()-start};
+ const model={root,...rig,ball,detail,getExpressionWeights(){return expressionWeights(root);},setExpressionWeights(weights){return setExpressionWeights(root,weights);},get expressionMeshes(){const meshes=[];root.traverse(m=>{if(m.morphTargetInfluences)meshes.push(m);});return meshes;},setExpression(id){applyExpression(root,id);},setExpressionBlend(from,to,t){blendExpression(root,from,to,t);},applyPose(id){applyPose(model,id);},blend(from,to,t){applyBlend(model,from,to,t);}};
  applyPose(model,'stand');return model;
 }
 
 function poseState(id){if(!POSES[id])throw new Error('Unknown pose: '+id);return POSES[id];}
 export function applyBlend(model,from,to,t){
  const a=poseState(from),b=poseState(to),blend=T.MathUtils.clamp(t,0,1);
+ blendExpression(model.root,POSE_EXPRESSIONS[from]||'happy',POSE_EXPRESSIONS[to]||'happy',blend);
  for(const [name,bone] of Object.entries(model.byName)){
   const qa=new T.Quaternion().setFromEuler(new T.Euler(...(a[name]??[0,0,0])));
   const qb=new T.Quaternion().setFromEuler(new T.Euler(...(b[name]??[0,0,0])));
@@ -275,7 +283,6 @@ export function applyBlend(model,from,to,t){
  }
  model.byName.Hips.position.y=.88*BODY_Y_SCALE;
  const ballScale=T.MathUtils.lerp(from==='kick'?1:0,to==='kick'?1:0,blend);model.ball.scale.setScalar(ballScale);
- model.setExpressionBlend?.(POSE_EXPRESSIONS[from]||'neutral',POSE_EXPRESSIONS[to]||'neutral',blend);
  groundModel(model);
 }
 export function groundModel(model){
@@ -308,11 +315,11 @@ export function animationClips(model){
     }
     applyBlend(model,'run','runOpposite',.5-.5*Math.cos(times[i]*Math.PI*2));
    }
-   samples.push({q:Object.fromEntries(model.bones.map(b=>[b.name,b.quaternion.toArray()])),hip:model.byName.Hips.position.toArray(),ball:model.ball.scale.toArray(),ballPosition:model.ball.position.toArray(),expressions:{...model.expressionWeights}});
+   samples.push({q:Object.fromEntries(model.bones.map(b=>[b.name,b.quaternion.toArray()])),hip:model.byName.Hips.position.toArray(),ball:model.ball.scale.toArray(),ballPosition:model.ball.position.toArray(),expression:expressionWeights(model.root)});
   }
   const tracks=model.bones.map(b=>new T.QuaternionKeyframeTrack(b.name+'.quaternion',times,samples.flatMap(s=>s.q[b.name])));
   tracks.push(new T.VectorKeyframeTrack('Hips.position',times,samples.flatMap(s=>s.hip)),new T.VectorKeyframeTrack('Ball.scale',times,samples.flatMap(s=>s.ball)),new T.VectorKeyframeTrack('Ball.position',times,samples.flatMap(s=>s.ballPosition)));
-  for(const mesh of model.expressionMeshes)for(const expression of EXPRESSION_IDS)tracks.push(new T.NumberKeyframeTrack(mesh.name+'.morphTargetInfluences['+expression+']',times,samples.map(s=>s.expressions[expression])));
+  model.root.traverse(mesh=>{if(mesh.morphTargetInfluences?.length)tracks.push(new T.NumberKeyframeTrack(mesh.name+'.morphTargetInfluences',times,samples.flatMap(s=>EXPRESSION_IDS.map(id=>s.expression[id]))));});
   clips.push(new T.AnimationClip(id,times.at(-1),tracks));
  }
  applyPose(model,'stand');return clips;
@@ -320,7 +327,7 @@ export function animationClips(model){
 
 export function numericalSnapshot(model){
  model.root.updateMatrixWorld(true);model.skeleton.update();const result=[];
- model.root.traverse(m=>{if(!m.isSkinnedMesh&&!m.userData.rigidBone)return;const p=new T.Vector3(),a=m.geometry.attributes.position;
+ model.root.traverse(m=>{if(!m.isMesh||(!m.isSkinnedMesh&&!m.userData.rigidBone&&!m.morphTargetInfluences))return;const p=new T.Vector3(),a=m.geometry.attributes.position;
   for(let i=0;i<a.count;i++){m.getVertexPosition(i,p);p.applyMatrix4(m.matrixWorld);result.push(p.x,p.y,p.z);}
  });return result;
 }
