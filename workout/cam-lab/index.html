@@ -11,6 +11,10 @@
   <script type="module" src="app.mjs"></script>
 </head>
 <body>
+<aside id="upload-banner" aria-label="מצב שליחה לבדיקה" aria-live="polite">
+  <p id="upload-off-banner" class="upload-banner upload-off">השליחה לבדיקה כבויה בטלפון הזה. הניסיון יישאר רק בטלפון ולא יגיע לבדיקה. כדי להפעיל, פותחים פעם אחת את קישור ההגדרה.</p>
+  <p id="upload-on-banner" class="upload-banner upload-on" hidden>שליחה לבדיקה פעילה</p>
+</aside>
 <main>
   <header><span class="badge">מעבדה נפרדת · סבב 4</span><h1>זזים מול המצלמה</h1><p>שבעה תרגילים · לבד או אבא ואני</p></header>
   <p id="privacy" class="privacy">מצב פרטי: עיבוד במכשיר. בלי הגדרת שליחה של ההורה אין צילום וידאו או שליחת נתונים. אפשר להקליט שלד ולהוריד אותו למכשיר.</p>
@@ -75,6 +79,7 @@
   </section>
   <section id="result" hidden aria-labelledby="result-title">
     <h2 id="result-title">3. מה המצלמה הצליחה לראות?</h2>
+    <p id="result-upload-off" role="status" hidden>הניסיון לא נשלח, כי השליחה כבויה בטלפון הזה</p>
     <p id="result-count" class="result-count"></p>
     <p id="result-rejected"></p><ul id="reasons"></ul>
     <p>תנועה שלא נספרה אינה אומרת שעשית משהו לא טוב. המצלמה יכולה לפספס. אם לא ברור מה לשנות, שואלים מבוגר.</p>

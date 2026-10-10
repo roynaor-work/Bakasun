@@ -51,6 +51,16 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
 
+def check_banner(page, enabled):
+    assert page.locator('#upload-on-banner').is_visible() == enabled
+    assert page.locator('#upload-off-banner').is_visible() == (not enabled)
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    page.evaluate('scrollTo(0, document.body.scrollHeight)')
+    box = page.locator('#upload-banner').bounding_box()
+    assert box['y'] == 0 and box['x'] == 0 and box['width'] == 360
+    page.evaluate('scrollTo(0, 0)')
+
+
 def hidden_manual_controls(page):
     for selector in ['#record-option', '#record', '#recording-panel', '#record-toggle',
                      '#record-download', '#export-panel', '#export']:
@@ -64,6 +74,7 @@ def open_camera(page):
     assert page.locator('#finish').is_visible()
     assert page.locator('#upload-status').inner_text() == 'מקליט ושולח לבדיקה אוטומטית'
     assert page.locator('#zoom-status').is_visible()
+    check_banner(page, True)
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
 
 
@@ -72,6 +83,8 @@ def wait_sent(page):
     page.locator('#again').wait_for(state='visible')
     page.wait_for_function("() => !document.querySelector('#again').disabled")
     hidden_manual_controls(page)
+    check_banner(page, True)
+    assert page.locator('#result-upload-off').is_hidden()
     assert page.evaluate("document.querySelector('#video').srcObject===null")
 
 
@@ -114,13 +127,47 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             browser = p.chromium.launch(executable_path=shutil.which('chromium'), headless=True, args=[
                 '--no-sandbox', '--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream',
                 '--use-gl=angle', '--use-angle=swiftshader'])
-            context = browser.new_context(viewport={'width': 390, 'height': 844}, ignore_https_errors=True)
+            context = browser.new_context(viewport={'width': 360, 'height': 844}, ignore_https_errors=True)
             page = context.new_page()
             errors, reports = [], []
             page.on('pageerror', lambda e: errors.append(str(e)))
             url = origin + '/workout/cam-lab/'
+            # Fresh context without a hash or inherited upload consent.
+            private_context = browser.new_context(viewport={'width': 360, 'height': 844}, ignore_https_errors=True)
+            private_page = private_context.new_page()
+            private_errors, private_requests = [], []
+            private_page.on('pageerror', lambda e: private_errors.append(str(e)))
+            private_page.on('request', lambda r: private_requests.append(r.url) if r.url == origin + '/receive' else None)
+            private_page.goto(url)
+            assert private_page.evaluate("localStorage.getItem('camlab.upload')") is None
+            check_banner(private_page, False)
+            private_page.screenshot(path='/tmp/cam-lab-upload-off.png')
+            private_page.locator('#record').check()
+            private_page.locator('#camera').click()
+            private_page.wait_for_function("() => document.querySelector('#metrics').textContent.includes('inference')", timeout=60000)
+            assert private_page.locator('#session').is_visible()
+            check_banner(private_page, False)
+            # The synthetic camera is a pattern, not a person. Invoke the real
+            # finish handler without claiming the private rep counter started.
+            private_page.locator('#finish').evaluate('(button) => button.click()')
+            assert private_page.locator('#result').is_visible()
+            check_banner(private_page, False)
+            assert private_page.locator('#result-upload-off').inner_text() == 'הניסיון לא נשלח, כי השליחה כבויה בטלפון הזה'
+            assert private_page.locator('#record-download').is_enabled()
+            private_page.locator('#export-panel').evaluate('(panel) => panel.open = true')
+            assert private_page.locator('#export').is_visible()
+            assert private_page.evaluate("document.querySelector('#video').srcObject===null")
+            private_page.reload()
+            check_banner(private_page, False)
+            assert not private_requests, private_requests
+            assert not parts, parts
+            assert not private_errors, private_errors
+            private_context.close()
+
             page.goto(url + '#upload=' + quote(origin + '/receive', safe='') + '&key=test')
             assert page.evaluate('location.hash') == ''
+            check_banner(page, True)
+            page.screenshot(path='/tmp/cam-lab-upload-on.png')
             assert page.locator('#upload-config-status').inner_text() == 'שליחה לבדיקה: פעילה'
             assert page.locator('#ptz-permission').is_visible()
             hidden_manual_controls(page)
@@ -190,7 +237,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             assert not errors, errors
             print(json.dumps({'browser': 'Chromium synthetic camera', 'attempts': reports,
                               'redirect302': True, 'retryAfterReload': True, 'privateNoUpload': True,
-                              'mobileWidth': 390, 'errors': errors}))
+                              'privateNoRequests': True, 'bannersAllScreens': True, 'mobileWidth': 360, 'errors': errors}))
             browser.close()
     finally:
         server.shutdown()

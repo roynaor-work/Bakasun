@@ -22,6 +22,7 @@ const instructions = {
   'glute-bridge': 'מבט צד: שכיבה על הגב וברכיים כפופות. מרימים אגן לקו כתפיים–אגן–ברכיים, בלי לקמר גב, ומורידים. עלייה וירידה = חזרה.',
 };
 const spoken = {
+  uploadOff: 'הַשְּׁלִיחָה לִבְדִיקָה כְּבוּיָה בַּטֵּלֵפוֹן הַזֶּה. הַנִּיסָּיוֹן יִישָּׁאֵר רַק בַּטֵּלֵפוֹן וְלֹא יַגִּיעַ לִבְדִיקָה. כְּדֵי לְהַפְעִיל, פּוֹתְחִים פַּעַם אַחַת אֶת קִישּׁוּר הַהַגְדָּרָה.',
   placement: 'מַנִּיחִים אֶת הַמַּכְשִׁיר בְּיַצִּיבוּת עַל הָרִצְפָּה אוֹ עַל כִּסֵּא, בְּלִי הֲטָיָה לַצַּד. מְכַוְּנִים עַד שֶׁרוֹאִים אֶת כָּל הַגּוּף. בִּשְׁנַיִם עוֹמְדִים זֶה לְצַד זֶה בְּאוֹתוֹ מֶרְחָק מֵהַמַּצְלֵמָה.',
   ready: 'רוֹאִים אֶת כָּל הַגּוּף. אֶפְשָׁר לְהַתְחִיל.',
   squats: 'יוֹרְדִים בְּנוֹחוּת כְּאִלּוּ מִתְיַשְּׁבִים, וְאָז עוֹמְדִים שׁוּב. הַבִּרְכַּיִם בְּכִוּוּן אֶצְבְּעוֹת הָרַגְלַיִם.',
@@ -48,6 +49,9 @@ function paintUploadStatus(status) {
 function paintUploadConfig() {
   $('upload-config-status').textContent = uploadConfig ? 'שליחה לבדיקה: פעילה' : 'שליחה לבדיקה: כבויה';
   $('upload-disable').hidden = !uploadConfig;
+  $('upload-off-banner').hidden = !!uploadConfig;
+  $('upload-on-banner').hidden = !uploadConfig;
+  $('result-upload-off').hidden = !!uploadConfig;
   $('privacy').textContent = uploadConfig ? 'ההורה הפעיל שליחה לבדיקה: המצלמה מוקלטת ללא קול, יחד עם השלד ואבחון. בסיום הנתונים נשלחים ליעד שהוגדר בקישור. אם השליחה נכשלת הם נשמרים במכשיר לניסיון הבא.' :
     'מצב פרטי: עיבוד במכשיר. בלי הגדרת שליחה של ההורה אין צילום וידאו או שליחת נתונים. אפשר להקליט שלד ולהוריד אותו למכשיר.';
   $('record').checked = !!uploadConfig;
@@ -73,9 +77,20 @@ $('camera-width').addEventListener('change', () => { if ($('camera-width').value
 function localVoice() {
   return window.speechSynthesis?.getVoices().find(v => v.localService && /^he(?:-|_|$)/i.test(v.lang));
 }
+let uploadWarningSpoken = false;
+function announceUploadWarning() {
+  if (uploadConfig || $('setup').hidden || uploadWarningSpoken || !$('voice').checked || !localVoice()) return;
+  uploadWarningSpoken = true;
+  speak(spoken.uploadOff, 2);
+}
+function showSetup() {
+  $('setup').hidden = false;
+  announceUploadWarning();
+}
 function voiceStatus() {
   $('voice-status').textContent = localVoice() ? 'הדרכה בקול עברי מותקן במכשיר; אין שימוש בקול רשת.' :
     'לא נמצא קול עברי מקומי. ההדרכה מופיעה בכתב; אפשר להתקין קול עברי בהגדרות המכשיר.';
+  announceUploadWarning();
 }
 window.speechSynthesis?.addEventListener('voiceschanged', voiceStatus);
 voiceStatus();
@@ -109,7 +124,7 @@ function fail(message, detail = '') {
     runtimeError = message; results('runtime-error'); $('error').hidden = false; $('error').textContent = message; return;
   }
   release(); $('error').hidden = false; $('error').textContent = message;
-  $('setup').hidden = false; $('session').hidden = true;
+  showSetup(); $('session').hidden = true;
   if (detail) console.error('cam-lab:', detail);
 }
 const links = [[11,12],[11,13],[13,15],[12,14],[14,16],[11,23],[12,24],[23,24],[23,25],[25,27],[24,26],[26,28],[27,31],[28,32]];
@@ -387,6 +402,7 @@ function results(reason = 'finish') {
     })();
   } else release();
   $('session').hidden = true; $('result').hidden = false;
+  $('result-upload-off').hidden = !!uploadConfig;
   $('result-count').textContent = pair ? `הילד: ${counter.count} · אבא: ${adult.count} חזרות` : `${counter.count} חזרות נספרו`;
   $('result-rejected').textContent = `${counter.rejected + (adult?.rejected || 0)} תנועות לא נספרו:`;
   $('reasons').replaceChildren();
@@ -421,8 +437,8 @@ function attemptDiagnostics() {
     }), performance: log };
 }
 $('finish').onclick = () => results('finish');
-$('stop').onclick = () => { if (active || uploadConfig && stream) results('camera-stop'); else { release(); $('setup').hidden = false; $('session').hidden = true; } };
-$('again').onclick = () => { if (finishing) return; $('result').hidden = true; $('setup').hidden = false; $('recording-panel').hidden = true; $('record').checked = !!uploadConfig; };
+$('stop').onclick = () => { if (active || uploadConfig && stream) results('camera-stop'); else { release(); showSetup(); $('session').hidden = true; } };
+$('again').onclick = () => { if (finishing) return; $('result').hidden = true; showSetup(); $('recording-panel').hidden = true; $('record').checked = !!uploadConfig; };
 $('export').onclick = () => {
   const blob = new Blob([JSON.stringify({ version: pair ? 3 : 2, exercise: EXERCISES.indexOf(exercise), totalFrames, retainedFrames: log.length,
     counted: counter.count, rejected: counter.rejected, reasons: counter.reasons,
@@ -463,7 +479,7 @@ $('record-toggle').onclick = () => { if (recorder.active) recorder.stop(); else 
 $('record-download').onclick = () => { const json = recorder.json(); if (json) download(new Blob([json], { type: 'application/json' }), 'cam-lab-skeleton.json'); };
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && stream) {
-    if (active || uploadConfig) results('hidden'); else { release(); $('setup').hidden = false; $('session').hidden = true; }
+    if (active || uploadConfig) results('hidden'); else { release(); showSetup(); $('session').hidden = true; }
   }
 });
 window.addEventListener('pagehide', release);

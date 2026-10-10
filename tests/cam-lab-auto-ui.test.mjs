@@ -66,6 +66,7 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     globals('performance',{now:()=>now});globals('requestAnimationFrame',callback=>{raf=callback;return 1;});globals('cancelAnimationFrame',()=>{});
     globals('createImageBitmap',async()=>({close(){}}));globals('setTimeout',(fn,delay)=>{const t={fn,delay};timers.push(t);return t;});globals('clearTimeout',t=>{if(t)t.cleared=true;});
     await import('../workout/cam-lab/app.mjs?auto-upload-test');await flush();
+    assert.equal(get('upload-off-banner').hidden,true);assert.equal(get('upload-on-banner').hidden,false);
     assert.equal(location.hash,'');assert.equal(get('upload-config-status').textContent,'שליחה לבדיקה: פעילה');assert.equal(get('record').checked,true);
     await get('settings').handlers.submit({preventDefault(){}});await flush();assert.equal(FakeMediaRecorder.instances.length,1);
     assert.equal(cameraRequests[0].video.zoom,true);
