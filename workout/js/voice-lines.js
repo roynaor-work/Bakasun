@@ -1,38 +1,41 @@
 // קטלוג אחד משותף לנגן, לדף ההקלטה ול-LINES.md. בלי גישה לדפדפן או לנתוני הילד.
-import { SAY } from './say.js?v=20261009-companion-1';
-import { SAY_UI } from './say-ui.js?v=20261009-companion-1';
-import { EXERCISES } from './exercises.js?v=20261009-companion-1';
-import { numWord } from './count.js?v=20261009-companion-1';
+import { SAY, SAY_TTS } from './say.js?v=20261010-child-copy-1';
+import { SAY_UI, SAY_UI_TTS } from './say-ui.js?v=20261010-child-copy-1';
+import { EXERCISES } from './exercises.js?v=20261010-child-copy-1';
+import { numWord, numWordTts } from './count.js?v=20261010-child-copy-1';
 
-export const VOICE_VERSION = '20261009-companion-1';
+export const VOICE_VERSION = '20261010-child-copy-1';
 export const normalizeVoice = text => String(text).replace(/[֑-ׇ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ');
 const lines = [];
-const add = (id, text, source, lang = 'he-IL') => lines.push(Object.freeze({ id, text, source, lang, file: `${id}.wav` }));
-for (const [id, text] of Object.entries(SAY)) add(`exercise-${id}`, text, `workout/js/say.js: SAY[${id}]; workout/js/app.js: wireHelp / sayText`);
-for (const ex of EXERCISES) add(`name-${ex.id}`, ex.name, `workout/js/exercises.js: ${ex.id}.name; workout/js/app.js: adjustDifficulty (אימון יחיד)`);
-for (const key of ['costTwo', 'howWas', 'test']) add(`ui-${key}`, SAY_UI[key], `workout/js/say-ui.js: SAY_UI.${key}; workout/js/app.js`);
-for (const [id, text] of Object.entries(SAY_UI.intro)) add(`intro-${id}`, text, `workout/js/say-ui.js: SAY_UI.intro.${id}; workout/js/app.js: introPhase`);
-for (const [id, text] of Object.entries(SAY_UI.adjust)) if (typeof text === 'string') add(`adjust-${id}`, text, `workout/js/say-ui.js: SAY_UI.adjust.${id}; workout/js/app.js: adjustDifficulty`);
-for (const [id, text] of Object.entries(SAY_UI.levels)) add(`level-${id}`, text, `workout/js/say-ui.js: SAY_UI.levels.${id}; SAY_UI.adjust.level / downLevel`);
-for (const [id, text] of Object.entries(SAY_UI.programs)) add(`program-${id}`, text, `workout/js/say-ui.js: SAY_UI.programs[${id}]; workout/js/app.js: adjustDifficulty`);
-SAY_UI.ordinals.forEach((text, n) => { if (text) add(`ordinal-${n}`, text, 'workout/js/say-ui.js: SAY_UI.ordinals / perseverance'); });
-for (const n of [...Array(20).keys(), 20, 30, 40, 50, 60, 70, 80, 90]) add(`number-${n}`, numWord(n), 'workout/js/count.js: numWord / timeCue; workout/js/app.js: wireReps / minuteScreen; SAY_UI.perseverance');
-for (let n = 1; n < 10; n++) add(`number-and-${n}`, `וְ${numWord(n)}`, 'workout/js/count.js: numWord (אחדות אחרי עשרות)');
-add('number-100', 'מֵאָה', 'workout/js/say-ui.js: SAY_UI.perseverance (100 אימונים)');
+const add = (id, text, tts, source, lang = 'he-IL') => lines.push(Object.freeze({ id, text, tts, source, lang, file: `${id}.wav` }));
+for (const [id, text] of Object.entries(SAY)) add(`exercise-${id}`, text, SAY_TTS[id], `workout/js/say.js: SAY[${id}]; workout/js/app.js: wireHelp / sayText`);
+for (const ex of EXERCISES) {
+  const suffix = ex.name.includes('(כל רגל)') ? ' (כָּל רֶגֶל)' : ex.name.includes('(כל צד)') ? ' (כָּל צַד)' : '';
+  add(`name-${ex.id}`, ex.name, SAY_TTS[ex.id].split('. ')[0] + suffix, `workout/js/exercises.js: ${ex.id}.name; workout/js/app.js: adjustDifficulty (אימון יחיד)`);
+}
+for (const key of ['costTwo', 'howWas', 'test']) add(`ui-${key}`, SAY_UI[key], SAY_UI_TTS[key], `workout/js/say-ui.js: SAY_UI.${key}; workout/js/app.js`);
+for (const [id, text] of Object.entries(SAY_UI.intro)) add(`intro-${id}`, text, SAY_UI_TTS.intro[id], `workout/js/say-ui.js: SAY_UI.intro.${id}; workout/js/app.js: introPhase`);
+for (const [id, text] of Object.entries(SAY_UI.adjust)) if (typeof text === 'string') add(`adjust-${id}`, text, SAY_UI_TTS.adjust[id], `workout/js/say-ui.js: SAY_UI.adjust.${id}; workout/js/app.js: adjustDifficulty`);
+for (const [id, text] of Object.entries(SAY_UI.levels)) add(`level-${id}`, text, SAY_UI_TTS.levels[id], `workout/js/say-ui.js: SAY_UI.levels.${id}; SAY_UI.adjust.level / downLevel`);
+for (const [id, text] of Object.entries(SAY_UI.programs)) add(`program-${id}`, text, SAY_UI_TTS.programs[id], `workout/js/say-ui.js: SAY_UI.programs[${id}]; workout/js/app.js: adjustDifficulty`);
+SAY_UI.ordinals.forEach((text, n) => { if (text) add(`ordinal-${n}`, text, SAY_UI_TTS.ordinals[n], 'workout/js/say-ui.js: SAY_UI.ordinals / perseverance'); });
+for (const n of [...Array(20).keys(), 20, 30, 40, 50, 60, 70, 80, 90]) add(`number-${n}`, numWord(n), numWordTts(n), 'workout/js/count.js: numWord / timeCue; workout/js/app.js: wireReps / minuteScreen; SAY_UI.perseverance');
+for (let n = 1; n < 10; n++) add(`number-and-${n}`, `ו${numWord(n)}`, `וְ${numWordTts(n)}`, 'workout/js/count.js: numWord (אחדות אחרי עשרות)');
+add('number-100', 'מאה', 'מֵאָה', 'workout/js/say-ui.js: SAY_UI.perseverance (100 אימונים)');
 
-export const FRAGMENTS = {
+export const FRAGMENTS_TTS = {
   'time-more': 'עוֹד', 'time-seconds': 'שְׁנִיּוֹת',
   start: 'מַתְחִילִים!', finished: 'סִיַּמְתָּ!', encourage: 'כָּל הַכָּבוֹד!',
   'minute-end': 'הַדַּקָּה הִסְתַּיְּמָה. כָּל תְּנוּעָה נֶחְשֶׁבֶת.',
   'minute-start': 'מַתְחִילִים. בַּקֶּצֶב שֶׁלְּךָ.',
   'companion-upgraded': 'הַדְּמוּת שֶׁלְּךָ הִשְׁתַּפְּרָה! גְּדֵלִים יַחַד, בַּקֶּצֶב שֶׁלְּךָ.',
   thanks: 'תּוֹדָה, רָשַׁמְתִּי.',
-  'program-free': 'אימון חופשי',
+  'program-free': 'אִימּוּן חוֹפְשִׁי',
   'boost-before': 'הָיָה קַל? מֵעַכְשָׁו',
   'boost-after': 'עִם עוֹד קְצָת חֲזָרוֹת וּזְמַן.',
   'swaps-before': 'הָיָה קַל? בְּ',
   'swaps-after': 'נִכְנָסִים תַּרְגִּילִים קָשִׁים יוֹתֵר.',
-  'level-before': 'וָאוּ. עָלִיתָ לְרָמָה',
+  'level-before': 'וַואוּ. עָלִיתָ לְרָמָה',
   'level-after': 'בְּכָל הָאִמּוּנִים!',
   'down-before': 'הוֹרַדְתִּי לְרָמָה',
   'down-after': 'לְאַט לְאַט בּוֹנִים כּוֹחַ.',
@@ -40,10 +43,27 @@ export const FRAGMENTS = {
   'week-after': 'שֶׁלְּךָ הַשָּׁבוּעַ.',
   'number-label': 'מִסְפָּר',
   'streak-after': 'יָמִים בְּרֶצֶף!',
-  'first-workout': 'הָאִמּוּן הָרִאשׁוֹן בִּכְלָל. הַתְחָלָה מְעֻלָּה!',
+  'first-workout': 'הָאִמּוּן הָרִאשׁוֹן שֶׁלְּךָ. הַתְחָלָה מְעֻלָּה!',
   'milestone-before': 'וְזֶה הָאִמּוּן מִסְפָּר',
-  'milestone-after': 'שֶׁלְּךָ. וָאוּ!',
-  'cost-two-short': 'שִׂים לֵב, הַמִּשְׂחָק הַזֶּה עוֹלֶה שְׁתֵּי מַתָּנוֹת.',
+  'milestone-after': 'שֶׁלְּךָ. וַואוּ!',
+  'cost-two-short': 'הַמִּשְׂחָק הַזֶּה עוֹלֶה שְׁתֵּי מַתָּנוֹת.',
+};
+export const FRAGMENTS = {
+  'time-more': 'עוד', 'time-seconds': 'שניות',
+  start: 'מתחילים!', finished: 'סיימת!', encourage: 'כל הכבוד!',
+  'minute-end': 'הדקה הסתיימה. כל תנועה נחשבת.',
+  'minute-start': 'מתחילים. בקצב שלך.',
+  'companion-upgraded': 'הדמות שלך השתפרה! גדלים יחד, בקצב שלך.',
+  thanks: 'תודה, רשמתי.', 'program-free': 'אימון חופשי',
+  'boost-before': 'היה קל? מעכשיו', 'boost-after': 'עם עוד קצת חזרות וזמן.',
+  'swaps-before': 'היה קל? ב', 'swaps-after': 'נכנסים תרגילים קשים יותר.',
+  'level-before': 'וואו. עלית לרמה', 'level-after': 'בכל האימונים!',
+  'down-before': 'הורדתי לרמה', 'down-after': 'לאט לאט בונים כוח.',
+  'week-before': 'כל הכבוד! זה האימון', 'week-after': 'שלך השבוע.',
+  'number-label': 'מספר', 'streak-after': 'ימים ברצף!',
+  'first-workout': 'האימון הראשון שלך. התחלה מעולה!',
+  'milestone-before': 'וזה האימון מספר', 'milestone-after': 'שלך. וואו!',
+  'cost-two-short': 'המשחק הזה עולה שתי מתנות.',
 };
 for (const [id, text] of Object.entries(FRAGMENTS)) {
   const source = /^time-|^(start|finished)$/.test(id) ? 'workout/js/count.js: timeCue; workout/js/app.js: wireTimer' :
@@ -55,11 +75,11 @@ for (const [id, text] of Object.entries(FRAGMENTS)) {
     id === 'thanks' ? 'workout/js/app.js: askFeedback (משוב ללא תוכנית)' :
     id === 'cost-two-short' ? 'workout/js/app.js: arcade (גיבוי ל-SAY_UI.costTwo)' :
     'workout/js/app.js: wireReps / wireTimer';
-  add(id, text, source);
+  add(id, text, FRAGMENTS_TTS[id], source);
 }
 // גם אמירות קיימות בהקלטות המשחקים נכללות בקטלוג. אפקטים בלי מילים אינם משפטים.
-for (const [id, text, lang] of [['goal', 'Gooooooooooool!', 'pt-BR'], ['dunk', 'בּוּם!', 'he-IL'], ['three', 'סַל!', 'he-IL'], ['sprint', 'מָקוֹם רִאשׁוֹן!', 'he-IL']])
-  add(`celebration-${id}`, text, `workout/js/games/celebrate.js / celebrate3d.js: say; הקלטה קיימת workout/snd/${id}.mp4`, lang);
+for (const [id, text, tts, lang] of [['goal', 'Gooooooooooool!', 'Gooooooooooool!', 'pt-BR'], ['dunk', 'בום!', 'בּוּם!', 'he-IL'], ['three', 'סל!', 'סַל!', 'he-IL'], ['sprint', 'מקום ראשון!', 'מָקוֹם רִאשׁוֹן!', 'he-IL']])
+  add(`celebration-${id}`, text, tts, `workout/js/games/celebrate.js / celebrate3d.js: say; הקלטה קיימת workout/snd/${id}.mp4`, lang);
 
 export const VOICE_LINES = Object.freeze(lines);
 export const VOICE_BY_ID = Object.freeze(Object.fromEntries(lines.map(line => [line.id, line])));
@@ -102,7 +122,7 @@ export function splitVoiceText(text, lang = 'he-IL') {
   }
   if (text.startsWith(`${FRAGMENTS['number-label']} `))
     return [part('number-label'), ...splitVoiceText(text.slice(FRAGMENTS['number-label'].length))];
-  const streak = text.match(/^(\d+) יָמִים בְּרֶצֶף!\s*(.*)$/s);
+  const streak = text.match(/^(\d+) ימים ברצף!\s*(.*)$/s);
   if (streak) return [...numberParts(Number(streak[1])), part('streak-after'), ...splitVoiceText(streak[2])];
   if (text.startsWith(FRAGMENTS['first-workout']))
     return [part('first-workout'), ...splitVoiceText(text.slice(FRAGMENTS['first-workout'].length))];

@@ -3,17 +3,27 @@ const ONES = ['', 'אַחַת', 'שְׁתַּיִם', 'שָׁלוֹשׁ', 'אַ�
 const TEENS = ['', 'אַחַת עֶשְׂרֵה', 'שְׁתֵּים עֶשְׂרֵה', 'שְׁלוֹשׁ עֶשְׂרֵה', 'אַרְבַּע עֶשְׂרֵה', 'חֲמֵשׁ עֶשְׂרֵה', 'שֵׁשׁ עֶשְׂרֵה', 'שְׁבַע עֶשְׂרֵה', 'שְׁמוֹנֶה עֶשְׂרֵה', 'תְּשַׁע עֶשְׂרֵה'];
 const TENS = ['', '', 'עֶשְׂרִים', 'שְׁלוֹשִׁים', 'אַרְבָּעִים', 'חֲמִשִּׁים', 'שִׁשִּׁים', 'שִׁבְעִים', 'שְׁמוֹנִים', 'תִּשְׁעִים'];
 // מספר במילים (נקבה: כך סופרים חזרות ושניות)
-export function numWord(n) {
+export function numWordTts(n) {
   n = Math.round(n); if (n <= 0) return 'אֶפֶס'; if (n <= 10) return ONES[n]; if (n < 20) return TEENS[n - 10];
   if (n < 100) { const t = Math.floor(n / 10), o = n % 10; return o ? `${TENS[t]} וְ${ONES[o]}` : TENS[t]; }
   return String(n);
 }
+// כתיב מלא לספירה שמוצגת ונכנסת לקטלוג; הניקוד נשמר בנפרד.
+const DISPLAY_ONES = ['', 'אחת', 'שתיים', 'שלוש', 'ארבע', 'חמש', 'שש', 'שבע', 'שמונה', 'תשע', 'עשר'];
+const DISPLAY_TEENS = ['', 'אחת עשרה', 'שתים עשרה', 'שלוש עשרה', 'ארבע עשרה', 'חמש עשרה', 'שש עשרה', 'שבע עשרה', 'שמונה עשרה', 'תשע עשרה'];
+const DISPLAY_TENS = ['', '', 'עשרים', 'שלושים', 'ארבעים', 'חמישים', 'שישים', 'שבעים', 'שמונים', 'תשעים'];
+export function numWord(n) {
+  n = Math.round(n); if (n <= 0) return 'אפס'; if (n <= 10) return DISPLAY_ONES[n]; if (n < 20) return DISPLAY_TEENS[n - 10];
+  if (n < 100) { const t = Math.floor(n / 10), o = n % 10; return o ? `${DISPLAY_TENS[t]} ו${DISPLAY_ONES[o]}` : DISPLAY_TENS[t]; }
+  return String(n);
+}
+
 // מה אומרים בתרגיל זמן כשנשארו sec שניות (מתוך target): כל 10 שניות "עוד X שניות", ב-10 האחרונות סופרים לאחור, בסוף "סיימת"
 export function timeCue(sec, target) {
-  if (sec <= 0) return 'סִיַּמְתָּ!';
+  if (sec <= 0) return 'סיימת!';
   if (sec <= 10) return numWord(sec);
-  if (sec % 10 === 0 && sec < target) return `עוֹד ${numWord(sec)} שְׁנִיּוֹת`;
-  if (sec === target) return 'מַתְחִילִים!';
+  if (sec % 10 === 0 && sec < target) return `עוד ${numWord(sec)} שניות`;
+  if (sec === target) return 'מתחילים!';
   return null;
 }
 // מה הילד אמר: מחזירים את המספר האחרון שנשמע במשפט (1-99), או null. מבינים "שתיים", "שניים", "אחת עשרה", "עשרים ושלוש", וספרות

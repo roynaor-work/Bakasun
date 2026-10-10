@@ -22,9 +22,9 @@ test('counting and countdown reuse number clips; tens and conjunctions are recor
   for (let n = 0; n < 100; n++) assert.ok(ids(numWord(n)).every(Boolean), String(n));
   assert.deepEqual(ids(numWord(23)), ['number-20', 'number-and-3']);
   assert.deepEqual(ids(timeCue(20, 60)), ['time-more', 'number-20', 'time-seconds']);
-  assert.deepEqual(ids('עוֹד 10 שְׁנִיּוֹת'), ['time-more', 'number-10', 'time-seconds']);
-  assert.deepEqual(ids(`${numWord(12)}! כָּל הַכָּבוֹד!`), ['number-12', 'encourage']);
-  assert.deepEqual(ids('סִיַּמְתָּ! כָּל הַכָּבוֹד!'), ['finished', 'encourage']);
+  assert.deepEqual(ids('עוד 10 שניות'), ['time-more', 'number-10', 'time-seconds']);
+  assert.deepEqual(ids(`${numWord(12)}! כל הכבוד!`), ['number-12', 'encourage']);
+  assert.deepEqual(ids('סיימת! כל הכבוד!'), ['finished', 'encourage']);
   assert.deepEqual(ids(timeCue(0, 30)), ['finished']);
 });
 test('dynamic feedback splits every program and level, including the attached Hebrew preposition', () => {
@@ -50,7 +50,7 @@ test('recording wins; absent/partial clips use existing speech without losing te
   assert.deepEqual(chooseVoice(numWord(20), buffers).map(p => p.kind), ['recording']);
   const text = timeCue(20, 60);
   assert.deepEqual(chooseVoice(text, buffers).map(p => p.kind), ['speech', 'recording', 'speech']);
-  assert.deepEqual(chooseVoice(text, new Map()), [{ kind: 'speech', text }]);
+  assert.deepEqual(chooseVoice(text, new Map()), [{ kind: 'speech', text, tts: 'עוֹד עֶשְׂרִים שְׁנִיּוֹת' }]);
   assert.equal(chooseVoice(SAY_UI.adjust.boost('תוכנית חדשה'), new Map())[0].text, SAY_UI.adjust.boost('תוכנית חדשה'));
   assert.deepEqual(chooseVoice('מַתְחִילִים!', new Map([['start', buffer]])).map(p => p.kind), ['recording']);
 });

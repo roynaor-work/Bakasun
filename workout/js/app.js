@@ -1,26 +1,27 @@
 // האפליקציה: ניתוב, מסכים, מהלך אימון (חימום -> תרגילים -> מנוחות -> מתיחות -> סיכום), מעקב והגדרות.
-import { EXERCISES, CATS, byId } from './exercises.js?v=20261009-companion-1';
-import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261009-companion-1';
-import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js?v=20261009-companion-1';
-import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js?v=20261009-companion-1';
-import { Figure, cycleMs } from './figure.js?v=20261009-companion-1';
-import { store } from './store.js?v=20261009-companion-1';
-import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261009-companion-1';
-import { beltCard } from './belts.js?v=20261009-companion-1';
-import { companionCard, companionKit } from './companion.js?v=20261009-companion-1';
-import { restProgress, restCard, restBadges } from './rest-days.js?v=20261009-companion-1';
-import { FRAGMENTS } from './voice-lines.js?v=20261009-companion-1';
-import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js?v=20261009-companion-1';
-import { runGame } from './games/engine.js?v=20261009-companion-1';
-import * as cloud from './cloud.js?v=20261009-companion-1';
-import { showLobby } from './games/lobby.js?v=20261009-companion-1';
-import { initParent, parentGate, parentHome, parentTogether, parentWeek, lockParent, basketball } from './parent.js?v=20261009-companion-1';
-import { normalizePlan } from './weekly.js?v=20261009-companion-1';
-import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261009-companion-1';
-import { playIntro } from './intro.js?v=20261009-companion-1';
-import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261009-companion-1';
-import { SAY } from './say.js?v=20261009-companion-1';
-import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261009-companion-1';
+import { EXERCISES, CATS, byId } from './exercises.js?v=20261010-child-copy-1';
+import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261010-child-copy-1';
+import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js?v=20261010-child-copy-1';
+import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js?v=20261010-child-copy-1';
+import { Figure, cycleMs } from './figure.js?v=20261010-child-copy-1';
+import { store } from './store.js?v=20261010-child-copy-1';
+import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261010-child-copy-1';
+import { beltCard } from './belts.js?v=20261010-child-copy-1';
+import { companionCard, companionKit } from './companion.js?v=20261010-child-copy-1';
+import { restProgress, restCard, restBadges } from './rest-days.js?v=20261010-child-copy-1';
+import { FRAGMENTS } from './voice-lines.js?v=20261010-child-copy-1';
+import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js?v=20261010-child-copy-1';
+import { runGame } from './games/engine.js?v=20261010-child-copy-1';
+import * as cloud from './cloud.js?v=20261010-child-copy-1';
+import { showLobby } from './games/lobby.js?v=20261010-child-copy-1';
+import { initParent, parentGate, parentHome, parentTogether, parentWeek, lockParent, basketball } from './parent.js?v=20261010-child-copy-1';
+import { normalizePlan } from './weekly.js?v=20261010-child-copy-1';
+import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261010-child-copy-1';
+import { playIntro } from './intro.js?v=20261010-child-copy-1';
+import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261010-child-copy-1';
+import { exerciseName, workoutName } from './workout-copy.js?v=20261010-child-copy-1';
+import { SAY } from './say.js?v=20261010-child-copy-1';
+import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261010-child-copy-1';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
@@ -58,8 +59,8 @@ function wireCompanion(workouts) {
     const figure = new Figure(box.querySelector('svg')); figure.still(standing); figures.push(figure);
   };
   if (!use3d()) return fallback();
-  import('./stage3d.js?v=20261009-companion-1').then(async ({ Stage3D }) => {
-    const { KITS3D } = await import('./char3d.js?v=20261009-companion-1');
+  import('./stage3d.js?v=20261010-child-copy-1').then(async ({ Stage3D }) => {
+    const { KITS3D } = await import('./char3d.js?v=20261010-child-copy-1');
     if (!box.isConnected) return;
     let stage;
     const failed = () => { if (stage) stage.dispose(); fallback(); };
@@ -77,7 +78,7 @@ function wireStage3d(box) {
     stop() { if (this._s) this._s.stop(); }, dispose() { if (this._s && this._s.dispose) this._s.dispose(); this._s = null; },
     _attach(s) { this._s = s; s.onRep = this._rep; if (this._last) { const [k, e, sp] = this._last; k === 'play' ? s.play(e, sp) : s.still(e); } } };
   const fallback = () => { if (!box.isConnected) return; box.outerHTML = figSvg(ex.id); const svg = app.querySelector(`svg[data-ex="${ex.id}"]`); if (svg) f._attach(new Figure(svg)); };
-  import('./stage3d.js?v=20261009-companion-1').then(m => { if (!box.isConnected) return; new m.Stage3D(box, null, { onReady: s => f._attach(s), onFail: fallback }); }).catch(fallback);
+  import('./stage3d.js?v=20261010-child-copy-1').then(m => { if (!box.isConnected) return; new m.Stage3D(box, null, { onReady: s => f._attach(s), onFail: fallback }); }).catch(fallback);
   f.play(ex, 1); figures.push(f); return f;
 }
 function wireStage() {
@@ -105,8 +106,7 @@ function wireHelp(ex, mainFig) {
     box.hidden = false;
     box.innerHTML = `<div class="card stack helpcard pop">
       <div class="row between"><h3>איך עושים ${esc(ex.name)}</h3><button class="btn chip" id="sayagain">🔊 להשמיע שוב</button></div>
-      ${stepsHtml(ex)}<div class="tip">👀 ${esc(ex.tip)}</div>
-      <p class="muted small">האנימציה עכשיו לאט. ${canSpeak() && store.profile.voice !== false ? 'ההסבר מוקרא בקול.' : 'אין קול במכשיר הזה, קוראים.'}</p>
+      ${stepsHtml(ex)}
     </div>`;
     mainFig && mainFig.play(ex, 0.75); /* הסבר: לאט אבל לא זוחל (רועי 01/10: "החלק האיטי נראה ממש איטי"; הדמות המצוירת כבר ב-.7) */
     speak(sayText(ex));
@@ -128,7 +128,7 @@ function beep(freq = 880, ms = 120, at = 0) {
 }
 const fanfare = () => { beep(660, 120); beep(880, 120, .14); beep(1100, 260, .28); };
 
-const sayText = ex => SAY[ex.id] || ex.say || `${ex.name}. ${ex.steps.join('. ')}. שימו לב: ${ex.tip}`;
+const sayText = ex => SAY[ex.id];
 function confetti() {
   const c = document.createElement('div'); c.className = 'confetti';
   const colors = ['#FF7A3D', '#FF4D8D', '#1FB6C9', '#6C4CF1', '#FFB84D', '#22C55E'];
@@ -198,7 +198,7 @@ function home() {
       <button class="btn primary big" data-go="#/minute">למבחן הדקה שלי</button>
     </div>
 
-    ${pendingWorkout() ? `<div class="card" style="border:3px solid var(--hot)"><div class="row"><span style="font-size:32px">⏸️</span><div class="grow"><b>יש אימון באמצע: ${esc(pendingWorkout().program.name)}</b><p class="muted small">עצרת אחרי ${pendingWorkout().items.filter(i => i.done > 0 || i.skipped).length} מתוך ${pendingWorkout().items.length} תרגילים.</p></div></div>
+    ${pendingWorkout() ? `<div class="card" style="border:3px solid var(--hot)"><div class="row"><span style="font-size:32px">⏸️</span><div class="grow"><b>יש אימון באמצע: ${esc(workoutName(pendingWorkout()))}</b><p class="muted small">עצרת אחרי ${pendingWorkout().items.filter(i => i.done > 0 || i.skipped).length} מתוך ${pendingWorkout().items.length} תרגילים.</p></div></div>
       <div class="row" style="margin-top:10px"><button class="btn primary grow" id="resume">להמשיך מאיפה שעצרת ▶️</button><button class="btn ghost" id="discard">לבטל</button></div></div>` : ''}
     <h2>${todayCount ? 'עוד אחד היום?' : 'האימון של היום'}</h2>
     ${today ? `
@@ -208,8 +208,8 @@ function home() {
         <span class="pill solid">${today.minutes} דק'</span>
       </div>
       <button class="btn primary big" data-go="#/start/${today.id}">מתחילים את האימון של היום 🚀</button>`
-    : `<div class="card"><h3>😴 יום מנוחה</h3><p class="muted small">השרירים גדלים דווקא במנוחה. אם בכל זאת בא לך לזוז: מתיחות או אימון 7 דקות קל.</p></div>
-       <div class="card tap prog jump" data-go="#/start/quick"><div class="emoji">⏱️</div><div><h3>אימון 7 דקות</h3><p class="muted small">קצר וקל.</p></div><span class="pill solid">7 דק'</span></div>`}
+    : `<div class="card"><h3>😴 יום מנוחה</h3><p class="muted small">השרירים גדלים דווקא במנוחה. אם בכל זאת בא לך לזוז: מתיחות או אימון שבע דקות קל.</p></div>
+       <div class="card tap prog jump" data-go="#/start/quick"><div class="emoji">⏱️</div><div><h3>אימון שבע דקות</h3><p class="muted small">קצר וקל.</p></div><span class="pill solid">7 דק'</span></div>`}
 
     ${nextLevel ? `<div class="card row" style="border:2px solid var(--star)"><span style="font-size:32px">🏅</span><div class="grow"><b>סיימת שלושה אימונים!</b><p class="muted small">אם מתאים לך, אפשר לנסות את הרמה "${LEVELS[nextLevel].name}".</p></div><button class="btn chip on" id="levelup">לעלות רמה</button></div>` : ''}
 
@@ -292,7 +292,7 @@ function start(id) {
         const key = i.block + (i.rounds > 1 ? ' ' + i.round : '');
         const head = key !== lastBlock ? `<div class="blockhead">${esc(i.block)}${i.rounds > 1 ? ` · סבב ${i.round} מתוך ${i.rounds}` : ''}</div>` : '';
         lastBlock = key;
-        return head + `<div class="item">${figSvg(i.exId, 'mini')}<div class="grow"><b>${esc(i.name)}</b>${i.swapped ? ' <span class="muted small">מתקדם</span>' : ''}</div><span class="pill solid">${targetText(i)}</span></div>`;
+        return head + `<div class="item">${figSvg(i.exId, 'mini')}<div class="grow"><b>${esc(exerciseName(i))}</b>${i.swapped ? ' <span class="muted small">מתקדם</span>' : ''}</div><span class="pill solid">${targetText(i)}</span></div>`;
       }).join('')}
     </div>
     <button class="btn primary big" id="begin">יאללה, מתחילים! 🚀</button>
@@ -428,7 +428,7 @@ function minuteScreen(id) {
       <button class="btn ghost big" data-go="#/home">לדף הבית 🏠</button>
     </div>`);
     $('#minute-again').onclick = () => minuteScreen(ex.id);
-    if (result) sayQuick('הַדַּקָּה הִסְתַּיְּמָה. כָּל תְּנוּעָה נֶחְשֶׁבֶת.');
+    if (result) sayQuick(FRAGMENTS['minute-end']);
   };
   const paint = () => {
     if (!state || finished) return;
@@ -441,7 +441,7 @@ function minuteScreen(id) {
     const sec = Math.ceil(((running ? state.endAt : state.readyAt) - performance.now()) / 1000);
     $('#minute-clock').textContent = running ? fmtTime(sec) : sec;
     $('#minute-status').textContent = running ? 'אחרי כל חזרה לוחצים על המספר. בקצב שלך.' : 'מתכוננים יחד…';
-    if (running && lastCue !== 'running') { lastCue = 'running'; mainFig.play(ex, 1); beep(880, 160); sayQuick('מַתְחִילִים. בַּקֶּצֶב שֶׁלְּךָ.'); }
+    if (running && lastCue !== 'running') { lastCue = 'running'; mainFig.play(ex, 1); beep(880, 160); sayQuick(FRAGMENTS['minute-start']); }
     else if (!running && lastCue !== sec) { lastCue = sec; sayQuick(numWord(sec)); beep(520, 90); }
   };
   $('#minute-start').onclick = () => {
@@ -501,7 +501,7 @@ function exercisePhase() {
   <div class="stack">
     <div class="topbar">
       <button class="btn icon ghost" id="quit" aria-label="יציאה">✕</button>
-      <div><div class="center small muted">${W.idx + 1} מתוך ${W.items.length} · ${esc(W.program.name)}</div><div class="bar"><i style="width:${pct}%"></i></div></div>
+      <div><div class="center small muted">${W.idx + 1} מתוך ${W.items.length} · ${esc(workoutName(W))}</div><div class="bar"><i style="width:${pct}%"></i></div></div>
       <span></span>
     </div>
     <div class="row between"><span class="pill block">${esc(blockLabel)}</span><span class="row">${placePill(ex)}${catPill(ex.cat)}</span></div>
@@ -558,7 +558,7 @@ function wireReps(it, ex, mainFig) {
     // כל חזרה: המספר עולה ונאמר בקול (סופרים יחד). fromChild: הילד אמר את המספר קודם, אז לא חוזרים אחריו, רק מסנכרנים את הדמות
     const step = (fromChild = false) => {
       n++; show();
-      if (n >= it.target) { stopCount(); fanfare(); if (voiceOn) sayQuick(`${numWord(n)}! כָּל הַכָּבוֹד!`); $('#did').classList.add('pop'); return; }
+      if (n >= it.target) { stopCount(); fanfare(); if (voiceOn) sayQuick(`${numWord(n)}! ${FRAGMENTS.encourage}`); $('#did').classList.add('pop'); return; }
       if (fromChild) { mainFig.onRep = null; mainFig.play(ex, 1); mainFig.onRep = () => step(); } // הדמות מתחילה סיבוב חדש יחד איתו
       else if (voiceOn) sayQuick(numWord(n)); else beep(780, 70);
     };
@@ -601,13 +601,13 @@ function wireTimer(it) {
   const voiceOn = canSpeak() && store.profile.voice !== false;
   const run = () => {
     T.running = true; T.endAt = Date.now() + T.left * 1000; $('#startstop').textContent = '⏸️ עצור';
-    if (voiceOn && T.left >= it.target) sayQuick('מַתְחִילִים!');
+    if (voiceOn && T.left >= it.target) sayQuick(FRAGMENTS.start);
     tick = setInterval(() => {
       const prev = T.left; T.left = Math.max(0, (T.endAt - Date.now()) / 1000); paint();
       const sec = Math.ceil(T.left), changed = Math.ceil(prev) > sec;
       // בקול: "עוד 20 שניות" כל 10 שניות, וב-10 האחרונות סופרים לאחור יחד; בלי קול: צפצוף ב-3 האחרונות
       if (changed && T.left > 0) { const cue = voiceOn && sec < it.target ? timeCue(sec, it.target) : null; if (cue) sayQuick(cue); else if (sec <= 3) beep(660, 90); }
-      if (T.left <= 0) { stop(); fanfare(); if (voiceOn) sayQuick('סִיַּמְתָּ! כָּל הַכָּבוֹד!'); finishItem(it.target, false); }
+      if (T.left <= 0) { stop(); fanfare(); if (voiceOn) sayQuick(`${FRAGMENTS.finished} ${FRAGMENTS.encourage}`); finishItem(it.target, false); }
     }, 200);
   };
   $('#startstop').onclick = () => T.running ? stop() : run();
@@ -724,19 +724,19 @@ function adjustDifficulty(program, val) {
   const order = ['easy', 'normal', 'hard', 'pro'], li = order.indexOf(store.profile.level);
   const spokenName = SAY_UI.programs[program.id] || program.name, A = SAY_UI.adjust;
   if (val === 'easy') {
-    if (cur.boost < 2) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: `היה קל? מעכשיו "${program.name}" עם ${boostText(store.progBoost(program.id))}. 💪`, say: A.boost(spokenName) }; }
-    if (cur.swaps < MAX_SWAPS) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps + 1 }); return { change: 'swaps', msg: `היה קל? ב"${program.name}" נכנסים תרגילים קשים יותר. 🔥`, say: A.swaps(spokenName) }; }
-    if (cur.boost < MAX_BOOST) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: `עוד קצת יותר: "${program.name}" עם ${boostText(store.progBoost(program.id))}. 💪`, say: A.boost(spokenName) }; }
-    if (li < order.length - 1) { store.setProfile({ level: order[li + 1] }); return { change: 'level', msg: `וואו. עלית לרמה "${LEVELS[order[li + 1]].name}" בכל האימונים! 🏆`, say: A.level(SAY_UI.levels[order[li + 1]]) }; }
-    return { change: '', msg: 'אתה כבר ברמה הכי גבוהה. אלוף אמיתי! 👑', say: A.top };
+    if (cur.boost < 2) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: A.boost(spokenName), say: A.boost(spokenName) }; }
+    if (cur.swaps < MAX_SWAPS) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps + 1 }); return { change: 'swaps', msg: A.swaps(spokenName), say: A.swaps(spokenName) }; }
+    if (cur.boost < MAX_BOOST) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: A.boost(spokenName), say: A.boost(spokenName) }; }
+    if (li < order.length - 1) { store.setProfile({ level: order[li + 1] }); return { change: 'level', msg: A.level(SAY_UI.levels[order[li + 1]]), say: A.level(SAY_UI.levels[order[li + 1]]) }; }
+    return { change: '', msg: A.top, say: A.top };
   }
   if (val === 'hard') {
     if (cur.swaps) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps - 1 }); return { change: 'down', msg: 'היה קשה? בפעם הבאה חוזרים לתרגילים הרגילים. 👍', say: A.downSwaps }; }
     if (cur.boost) { store.setProgBoost(program.id, { ...cur, boost: cur.boost - 1 }); return { change: 'down', msg: 'היה קשה? הורדתי קצת. בפעם הבאה יהיה נוח יותר. 👍', say: A.downBoost }; }
-    if (li > 0) { store.setProfile({ level: order[li - 1] }); return { change: 'down', msg: `הורדתי לרמה "${LEVELS[order[li - 1]].name}". לאט לאט בונים כוח. 👍`, say: A.downLevel(SAY_UI.levels[order[li - 1]]) }; }
-    return { change: '', msg: 'כל הכבוד שסיימת! זו הרמה הכי קלה, בפעם הבאה יהיה יותר קל כי אתה מתחזק. 💙', say: A.bottom };
+    if (li > 0) { store.setProfile({ level: order[li - 1] }); return { change: 'down', msg: A.downLevel(SAY_UI.levels[order[li - 1]]), say: A.downLevel(SAY_UI.levels[order[li - 1]]) }; }
+    return { change: '', msg: A.bottom, say: A.bottom };
   }
-  return { change: '', msg: 'מעולה, בדיוק ברמה שלך. 👌', say: A.ok };
+  return { change: '', msg: A.ok, say: A.ok };
 }
 
 // בסוף האימון: קודם שאלה שחייבים לענות עליה, ורק אחר כך הסיכום
@@ -756,7 +756,7 @@ function askFeedback(s, program, gamesPlayed, then) {
   speak(SAY_UI.howWas);
   app.querySelectorAll('[data-fb]').forEach(b => b.onclick = () => {
     stopSpeak();
-    const val = b.dataset.fb, adj = adjustDifficulty(program, val) || { change: '', msg: 'תודה, רשמתי.', say: 'תּוֹדָה, רָשַׁמְתִּי.' };
+    const val = b.dataset.fb, adj = adjustDifficulty(program, val) || { change: '', msg: 'תודה, רשמתי.', say: FRAGMENTS.thanks };
     s.feedback = val; s.change = adj.change; store.save();
     if (store.profile.familyCode) cloud.push(store.profile.familyCode, 'workout', s.id, { ...s, name: store.profile.name, gamesPlayed, level: store.profile.level, games: gamesSummary() });
     speak(adj.say + ' ' + SAY_UI.perseverance(stats(store.sessions)));
@@ -814,7 +814,7 @@ function donePhase() {
   W = null;
 }
 const itemsList = s => s.items.map(i => `<div class="item">
-  <span class="grow">${esc(i.name)}${i.round > 1 ? ` <span class="muted small">(סבב ${i.round})</span>` : ''}</span>
+  <span class="grow">${esc(exerciseName(i))}${i.round > 1 ? ` <span class="muted small">(סבב ${i.round})</span>` : ''}</span>
   ${i.done >= i.target ? `<span class="done">✓ ${targetText({ type: i.type, target: i.done })}</span>` : i.done > 0 ? `<span class="part">${i.done} מתוך ${i.target}</span>` : `<span class="skip">דילוג</span>`}
 </div>`).join('');
 
@@ -850,12 +850,12 @@ function history() {
     </div>
     <h2>תגים</h2>
     <div class="badges">${BADGES.map(b => `<div class="badge ${badges.includes(b.id) ? '' : 'off'}"><span class="e">${b.emoji}</span><b>${b.name}</b><br>${b.desc}</div>`).join('')}</div>
-    ${Object.keys(st.perExercise).length ? `<h2>שיאים</h2><div class="card list">${Object.values(st.perExercise).sort((a, b) => b.times - a.times).map(p => `<div class="item"><span class="grow">${esc(p.name)}</span><span class="muted small">${p.times} פעמים</span><span class="pill solid">שיא ${p.best}${p.type === 'time' ? ' שנ\'' : ''}</span></div>`).join('')}</div>` : ''}
+    ${Object.keys(st.perExercise).length ? `<h2>שיאים</h2><div class="card list">${Object.values(st.perExercise).sort((a, b) => b.times - a.times).map(p => `<div class="item"><span class="grow">${esc(exerciseName(p))}</span><span class="muted small">${p.times} פעמים</span><span class="pill solid">שיא ${p.best}${p.type === 'time' ? ' שנ\'' : ''}</span></div>`).join('')}</div>` : ''}
     <h2>האימונים</h2>
     ${sessions.length ? sessions.map(s => { const sum = summarize(s); return `
       <div class="card" data-sess="${s.id}">
         <div class="row between tap" data-toggle="${s.id}">
-          <div><b>${s.emoji || '🏋️'} ${esc(s.programName)}</b><div class="muted small">${fmtDate(s.date)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים</div></div>
+          <div><b>${s.emoji || '🏋️'} ${esc(workoutName(s))}</b><div class="muted small">${fmtDate(s.date)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים</div></div>
           <span style="color:var(--star);font-size:22px" aria-label="${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}">${'★'.repeat(sum.stars)}</span>
         </div>
         <div class="list" id="d-${s.id}" hidden style="margin-top:10px">${s.together ? `<p class="small">👨‍👦 ${esc(togetherLabel(s.together))}</p>` : ''}<p class="small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>${itemsList(s)}<div class="item"><button class="btn chip danger" data-del="${s.id}">מחיקת האימון</button></div></div>
@@ -898,8 +898,8 @@ function arcade() {
       return;
     }
     const cost = gameById[id].cost || 1;
-    if (store.tokens < cost) { c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500); if (cost > 1 && store.tokens) speak(SAY_UI.costTwo || 'שִׂים לֵב, הַמִּשְׂחָק הַזֶּה עוֹלֶה שְׁתֵּי מַתָּנוֹת.'); return; }
-    if (cost > 1) speak(SAY_UI.costTwo || 'שִׂים לֵב, הַמִּשְׂחָק הַזֶּה עוֹלֶה שְׁתֵּי מַתָּנוֹת.'); /* רועי: להגיד גם בקול */
+    if (store.tokens < cost) { c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500); if (cost > 1 && store.tokens) speak(SAY_UI.costTwo); return; }
+    if (cost > 1) speak(SAY_UI.costTwo); /* רועי: להגיד גם בקול */
     playGame(gameById[id], () => arcade());
   });
 }

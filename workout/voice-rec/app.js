@@ -1,7 +1,7 @@
-import { VOICE_LINES } from '../js/voice-lines.js?v=20261009-companion-1';
-import { trimVoiceBuffer } from '../js/voice-player.js?v=20261009-companion-1';
-import { wavBlob, zipBlob } from './files.js?v=20261009-companion-1';
-import { openRecordings } from './storage.js?v=20261009-companion-1';
+import { VOICE_LINES } from '../js/voice-lines.js?v=20261010-child-copy-1';
+import { trimVoiceBuffer } from '../js/voice-player.js?v=20261010-child-copy-1';
+import { wavBlob, zipBlob } from './files.js?v=20261010-child-copy-1';
+import { openRecordings } from './storage.js?v=20261010-child-copy-1';
 
 const $ = id => document.getElementById(id), clips = new Map();
 let index = 0, recorder = null, stream = null, context = null, database = null, previewUrl = null, busy = false, recording = false;

@@ -26,10 +26,10 @@ select{font:inherit;font-size:18px;font-weight:700;padding:10px 14px;border-radi
   <div class="note">מה שעובד כבר: כל 47 התרגילים מונעים אוטומטית מהפוזות הקיימות, כפות רגליים על הרצפה, צל, סיבוב מצלמה. מה שעוד לא: הבעות פנים, אצבעות, פוזות מותאמות לתלת־ממד (למשל ידיים לפנים בסקוואט), ודמות של ילד.</div>
 </div>
 <script type="module">
-import { THREE, loadCharacter, KITS3D, lights, room, propMesh, viewFront } from '../js/char3d.js?v=20261009-companion-1';
-import { EXERCISES, byId } from '../js/exercises.js?v=20261009-companion-1';
-import { poseAt } from '../js/figure.js?v=20261009-companion-1';
-const CATS = { warm: 'חימום', jump: 'ניתור', speed: 'מהירות', core: 'בטן', legs: 'רגליים', upper: 'כוח עליון', stretch: 'מתיחות' };
+import { THREE, loadCharacter, KITS3D, lights, room, propMesh, viewFront } from '../js/char3d.js?v=20261010-child-copy-1';
+import { EXERCISES, byId } from '../js/exercises.js?v=20261010-child-copy-1';
+import { poseAt } from '../js/figure.js?v=20261010-child-copy-1';
+const CATS = { warm: 'חימום', jump: 'קפיצות', speed: 'מהירות', core: 'בטן', legs: 'רגליים', upper: 'כוח עליון', stretch: 'מתיחות' };
 const sel = document.getElementById('sel');
 for (const cat in CATS) { const og = document.createElement('optgroup'); og.label = CATS[cat]; EXERCISES.filter(e => e.cat === cat).forEach(e => { const o = document.createElement('option'); o.value = e.id; o.textContent = e.name; og.appendChild(o); }); sel.appendChild(og); }
 const QUICK = ['jumping-jacks', 'squats', 'push-ups', 'jog', 'lunges', 'crunches', 'plank', 'burpees'];

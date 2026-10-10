@@ -1,11 +1,12 @@
 // מצב הורים: רק אבא פותח, עם קוד סודי. רואה את האימונים של הילד מהענן ומנהל את יומן הכדורסל.
-import { store } from './store.js?v=20261009-companion-1';
-import * as cloud from './cloud.js?v=20261009-companion-1';
-import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid, scaleTarget } from './logic.js?v=20261009-companion-1';
-import { EXERCISES, byId } from './exercises.js?v=20261009-companion-1';
-import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261009-companion-1';
-import { togetherChoice, togetherLabel } from './together.js?v=20261009-companion-1';
-import { normalizePlan, validatePlan, reportSessions, weeklyReport } from './weekly.js?v=20261009-companion-1';
+import { exerciseName, workoutName } from './workout-copy.js?v=20261010-child-copy-1';
+import { store } from './store.js?v=20261010-child-copy-1';
+import * as cloud from './cloud.js?v=20261010-child-copy-1';
+import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid, scaleTarget } from './logic.js?v=20261010-child-copy-1';
+import { EXERCISES, byId } from './exercises.js?v=20261010-child-copy-1';
+import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261010-child-copy-1';
+import { togetherChoice, togetherLabel } from './together.js?v=20261010-child-copy-1';
+import { normalizePlan, validatePlan, reportSessions, weeklyReport } from './weekly.js?v=20261010-child-copy-1';
 
 let ctx = null; // { mount, esc, go, $ } מהאפליקציה
 export function initParent(c) { ctx = c; }
@@ -81,10 +82,10 @@ export async function parentHome() {
       ${sessions.length ? sessions.map((s, i) => { const sum = summarize(s); return `
         <div class="card ${s.isNew ? 'today' : ''}">
           <div class="row between tap" data-toggle="${i}">
-            <div><b>${s.emoji || '🏋️'} ${esc(s.programName)}</b>${s.isNew ? ' <span class="pill hall" style="font-size:12px;padding:1px 8px">חדש</span>' : ''}<div class="muted small">${fmtDate(s.date)} ${new Date(s.date).toTimeString().slice(0, 5)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים${s.gamesPlayed ? ` · 🎮 ${s.gamesPlayed}` : ''}${s.feedback ? ` · ${{ easy: '😎 היה לו קל', ok: '👌 בדיוק', hard: '😮‍💨 היה לו קשה' }[s.feedback]}${s.change ? ({ boost: ', העלה 10%', swaps: ', עבר לתרגילים מתקדמים', down: ', הוריד קצת' }[s.change] || '') : ''}` : ''}</div></div>
+            <div><b>${s.emoji || '🏋️'} ${esc(workoutName(s))}</b>${s.isNew ? ' <span class="pill hall" style="font-size:12px;padding:1px 8px">חדש</span>' : ''}<div class="muted small">${fmtDate(s.date)} ${new Date(s.date).toTimeString().slice(0, 5)} · ${fmtTime(sum.duration)} · ${sum.doneCount} מתוך ${sum.total} תרגילים${s.gamesPlayed ? ` · 🎮 ${s.gamesPlayed}` : ''}${s.feedback ? ` · ${{ easy: '😎 היה לו קל', ok: '👌 בדיוק', hard: '😮‍💨 היה לו קשה' }[s.feedback]}${s.change ? ({ boost: ', העלה 10%', swaps: ', עבר לתרגילים מתקדמים', down: ', הוריד קצת' }[s.change] || '') : ''}` : ''}</div></div>
             <span style="color:var(--star);font-size:22px" aria-label="${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}">${'★'.repeat(sum.stars)}</span>
           </div>
-          <div class="list" id="pd-${i}" hidden style="margin-top:10px">${s.together ? `<p class="small">👨‍👦 ${esc(togetherLabel(s.together))}</p>` : ''}<p class="small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>${(s.items || []).map(it => `<div class="item"><span class="grow">${esc(it.name)}</span>${it.done >= it.target ? `<span class="done">✓ ${it.done}${it.type === 'time' ? ' שנ׳' : ''}</span>` : it.done > 0 ? `<span class="part">${it.done} מתוך ${it.target}</span>` : '<span class="skip">דילוג</span>'}</div>`).join('')}</div>
+          <div class="list" id="pd-${i}" hidden style="margin-top:10px">${s.together ? `<p class="small">👨‍👦 ${esc(togetherLabel(s.together))}</p>` : ''}<p class="small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>${(s.items || []).map(it => `<div class="item"><span class="grow">${esc(exerciseName(it))}</span>${it.done >= it.target ? `<span class="done">✓ ${it.done}${it.type === 'time' ? ' שנ׳' : ''}</span>` : it.done > 0 ? `<span class="part">${it.done} מתוך ${it.target}</span>` : '<span class="skip">דילוג</span>'}</div>`).join('')}</div>
         </div>`; }).join('') : `<div class="card center muted">${loading ? 'רגע...' : code ? 'עוד אין אימונים בענן. כשהילד יסיים אימון בטלפון שלו (עם אותו קוד משפחה), זה יופיע כאן.' : 'עוד אין אימונים במכשיר הזה. אחרי הפעילות הראשונה היא תופיע כאן.'}</div>`}
       <button class="btn ghost" id="lock">🔒 יציאה ממצב הורים</button>
     </div>`);
@@ -154,7 +155,7 @@ export function parentWeek(selected) {
           <h3>יום ${DAY_NAMES[day.day]} · ${dateLabel(day.date)}</h3>
           ${day.workouts ? `<p class="small">${day.workouts} אימונים · ${fmtTime(day.seconds)} · ${day.stars} ⭐</p>
             ${day.sessions.map(session => { const sum = summarize(session); return `<div class="weekly-session">
-              <b>${esc(session.programName || 'אימון')}</b>
+              <b>${esc(workoutName(session))}</b>
               <p class="small">${fmtTime(Math.max(0, Number(session.duration) || 0))} · ניסיון ב־${sum.doneCount} מתוך ${sum.total} תרגילים · ${sum.stars} ⭐</p>
               <p class="muted small">${esc(sum.starReasons.join(' · ') || sum.rewardMessage)}</p>
               ${session.together ? `<p class="small">👨‍👦 ${esc(togetherLabel(session.together))}</p>` : ''}
@@ -247,12 +248,12 @@ export async function basketball(arg) {
     <div class="row between"><button class="btn icon ghost" data-go="#/parent" aria-label="חזרה">→</button><h1 class="grow">יומן הכדורסל 🏀</h1></div>
     <button class="btn primary big" data-go="#/basketball/new">➕ אימון חדש</button>
     <div class="tiles"><div class="tile"><b>${st.sessions}</b>אימונים</div><div class="tile"><b>${st.minutes}</b>דקות</div>${st.per['free-throws'] ? `<div class="tile hot"><b>${st.per['free-throws'].pct ?? '–'}%</b>עונשין בסך הכול</div>` : ''}</div>
-    ${Object.keys(st.per).length ? `<h2>התקדמות לפי תרגיל</h2><div class="card list">${Object.values(st.per).sort((a, b) => b.times - a.times).map(p => `<div class="item"><div class="grow"><b>${esc(p.name)}</b><div class="muted small">${p.times} פעמים${p.pct != null ? ` · ${p.made} מתוך ${p.att} (${p.pct}%) · שיא ${p.best}%` : ''}</div></div>${p.trend.length ? trendBars(p) : ''}</div>`).join('')}</div>` : ''}
+    ${Object.keys(st.per).length ? `<h2>התקדמות לפי תרגיל</h2><div class="card list">${Object.values(st.per).sort((a, b) => b.times - a.times).map(p => `<div class="item"><div class="grow"><b>${esc(bbDrillById[p.drillId]?.name || p.name)}</b><div class="muted small">${p.times} פעמים${p.pct != null ? ` · ${p.made} מתוך ${p.att} (${p.pct}%) · שיא ${p.best}%` : ''}</div></div>${p.trend.length ? trendBars(p) : ''}</div>`).join('')}</div>` : ''}
     <h2>האימונים</h2>
     ${sessions.length ? sessions.map(s => `
       <div class="card">
         <div class="row between"><div><b>${fmtDate(s.date)}</b> <span class="muted small">· ${s.minutes || 0} דק׳${s.place ? ' · ' + esc(s.place) : ''}</span></div><span style="color:var(--star)">${'★'.repeat(s.rating || 0)}</span></div>
-        <div class="list" style="margin-top:6px">${(s.drills || []).map(d => `<div class="item"><span class="grow">${esc(d.name)}${d.note ? ` <span class="muted small">${esc(d.note)}</span>` : ''}</span>${d.att ? `<span class="pill solid">${d.made} מתוך ${d.att} · ${pct(d.made, d.att)}%</span>` : ''}</div>`).join('')}</div>
+        <div class="list" style="margin-top:6px">${(s.drills || []).map(d => `<div class="item"><span class="grow">${esc(bbDrillById[d.drillId]?.name || d.name)}${d.note ? ` <span class="muted small">${esc(d.note)}</span>` : ''}</span>${d.att ? `<span class="pill solid">${d.made} מתוך ${d.att} · ${pct(d.made, d.att)}%</span>` : ''}</div>`).join('')}</div>
         ${s.note ? `<p class="small" style="margin-top:6px">📝 ${esc(s.note)}</p>` : ''}
         <div class="row" style="margin-top:8px"><button class="btn chip" data-go="#/basketball/edit-${s.id}">עריכה</button><button class="btn chip danger" data-del="${s.id}">מחיקה</button></div>
       </div>`).join('') : '<div class="card center muted">עוד אין אימונים. לוחצים "אימון חדש" אחרי האימון הראשון שלכם.</div>'}

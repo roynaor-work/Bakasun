@@ -1,10 +1,10 @@
-import { VOICE_LINES, VOICE_BY_ID, VOICE_VERSION, splitVoiceText } from './voice-lines.js?v=20261009-companion-1';
+import { VOICE_LINES, VOICE_BY_ID, VOICE_VERSION, splitVoiceText } from './voice-lines.js?v=20261010-child-copy-1';
 
 // טהור: מחסור בהקלטה מחזיר רק את החלק החסר ל-TTS, בלי להקריא שוב את המשפט כולו.
 export function chooseVoice(text, buffers, lang = 'he-IL') {
   const parts = splitVoiceText(text, lang);
-  const selected = parts.map(p => ({ ...p, buffer: p.id && buffers.get(p.id), kind: p.id && buffers.get(p.id) ? 'recording' : 'speech' }));
-  if (selected.length && selected.every(p => p.kind === 'speech')) return [{ kind: 'speech', text: String(text) }];
+  const selected = parts.map(p => ({ ...p, tts: VOICE_BY_ID[p.id]?.tts || p.text, buffer: p.id && buffers.get(p.id), kind: p.id && buffers.get(p.id) ? 'recording' : 'speech' }));
+  if (selected.length && selected.every(p => p.kind === 'speech')) return [{ kind: 'speech', text: String(text), tts: selected.map(p => p.tts || p.text).join(' ') }];
   return selected;
 }
 
@@ -75,7 +75,7 @@ export function createVoicePlayer({ context, fetchFile, speakFallback, cancelFal
       if (index >= plan.length) { done(); return; }
       const kind = plan[index].kind, group = [];
       while (index < plan.length && plan[index].kind === kind) group.push(plan[index++]);
-      const text = group.map(p => p.text).join(' ');
+      const text = group.map(p => p.tts || p.text).join(' ');
       const fallback = () => {
         if (token !== generation) return;
         lastSpokeAt = now();

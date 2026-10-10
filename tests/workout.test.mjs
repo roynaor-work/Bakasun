@@ -52,7 +52,7 @@ test('every program refers to real exercises; every exercise has a valid loop', 
     assert.ok(cycleMs(ex.frames) > 0, ex.id);
     const p = poseAt(ex.frames, 123);
     for (const j of ['head', 'neck', 'hip', 'lh', 'rh', 'lf', 'rf']) assert.ok(Array.isArray(p[j]) && (p[j].length === 2 || p[j].length === 3), ex.id + ' ' + j); // z אופציונלי: עומק לתלת-ממד
-    assert.ok(ex.name && !/[؀-ۿ]/.test(ex.name + ex.tip));
+    assert.ok(ex.name && !/[؀-ۿ]/.test(ex.name + ex.steps.join(' ')));
   }
 });
 
@@ -173,7 +173,7 @@ test('exercise simulation: fixed view per exercise and front override on the ful
 // ספירה בקול והקשבה לילד (js/count.js)
 import { numWord, timeCue, parseCount } from '../workout/js/count.js';
 test('count words, time cues and parsing what the child said', () => {
-  assert.equal(numWord(1), 'אַחַת'); assert.equal(numWord(12), 'שְׁתֵּים עֶשְׂרֵה'); assert.equal(numWord(20), 'עֶשְׂרִים'); assert.equal(numWord(23), 'עֶשְׂרִים וְשָׁלוֹשׁ');
-  assert.equal(timeCue(30, 30), 'מַתְחִילִים!'); assert.equal(timeCue(20, 30), 'עוֹד עֶשְׂרִים שְׁנִיּוֹת'); assert.equal(timeCue(15, 30), null); assert.equal(timeCue(10, 30), 'עֶשֶׂר'); assert.equal(timeCue(3, 30), 'שָׁלוֹשׁ'); assert.equal(timeCue(0, 30), 'סִיַּמְתָּ!');
+  assert.equal(numWord(1), 'אחת'); assert.equal(numWord(12), 'שתים עשרה'); assert.equal(numWord(20), 'עשרים'); assert.equal(numWord(23), 'עשרים ושלוש');
+  assert.equal(timeCue(30, 30), 'מתחילים!'); assert.equal(timeCue(20, 30), 'עוד עשרים שניות'); assert.equal(timeCue(15, 30), null); assert.equal(timeCue(10, 30), 'עשר'); assert.equal(timeCue(3, 30), 'שלוש'); assert.equal(timeCue(0, 30), 'סיימת!');
   for (const [t, n] of [['אחת', 1], ['שתיים', 2], ['שניים', 2], ['שלוש', 3], ['אחת עשרה', 11], ['שתים עשרה', 12], ['עשרים ושלוש', 23], ['שלושים', 30], ['7', 7], ['ואחת שתיים', 2], ['יאללה', null], ['אַחַת', 1]]) assert.equal(parseCount(t), n, t);
 });
