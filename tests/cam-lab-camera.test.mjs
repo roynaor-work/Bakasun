@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cameraConstraints, screenOrientation, cameraSnapshot, selectZoom, configureZoom, findWideCamera,
+import { cameraConstraints, screenOrientation, cameraSnapshot, acquireCamera, selectZoom, configureZoom, findWideCamera,
   reduceResolution, ModelPerformance } from '../workout/cam-lab/camera.mjs';
 import { PlacementGuide, placementDistance } from '../workout/cam-lab/placement.mjs';
 import { pose, person, floorPose } from './cam-lab-fixtures.js';
@@ -18,6 +18,82 @@ test('portrait and landscape request full frame dimensions and a low-FPS resolut
   }
   assert.equal(screenOrientation({ matchMedia: () => ({ matches: true }) }), 'portrait');
   assert.equal(screenOrientation({ innerWidth: 800, innerHeight: 400 }), 'landscape');
+});
+
+function permissionCamera({ support = { zoom: true }, capabilities = { zoom: { min: .5, max: 4 } },
+  settings = { zoom: 1, facingMode: 'user', width: 720, height: 1280 }, error = null } = {}) {
+  const calls = [], queries = [];
+  const track = { getCapabilities: () => capabilities, getSettings: () => settings };
+  const stream = { getVideoTracks: () => [track] };
+  const mediaDevices = { ...(support === null ? {} : { getSupportedConstraints: () => support }),
+    getUserMedia: async constraints => { calls.push(constraints); if (calls.length === 1 && error) throw error; return stream; } };
+  const permissions = { query: async descriptor => { queries.push(descriptor); return { state: 'granted' }; } };
+  return { calls, queries, track, stream, mediaDevices, permissions };
+}
+
+test('camera requests supported PTZ controls and confirms the separate permission', async () => {
+  const rig = permissionCamera({ support: { zoom: true, pan: true, tilt: true } });
+  const options = { facing: 'environment', orientation: 'landscape', deviceId: 'chosen' };
+  const result = await acquireCamera(rig.mediaDevices, options, rig.permissions);
+  assert.equal(result.stream, rig.stream);
+  assert.deepEqual(rig.calls[0], { audio: false, video: { ...cameraConstraints(options).video, zoom: true, pan: true, tilt: true } });
+  assert.deepEqual(rig.queries, [{ name: 'camera', panTiltZoom: true }]);
+  assert.deepEqual(result.permission, { requested: true, supported: true, granted: true, state: 'granted',
+    fallback: false, requestError: null, actualZoom: 1 });
+});
+
+test('PTZ denial and unsupported requests fall back to the unchanged capture constraints', async () => {
+  for (const name of ['NotAllowedError', 'SecurityError', 'NotSupportedError', 'OverconstrainedError', 'TypeError']) {
+    const rig = permissionCamera({ error: Object.assign(new Error('PTZ unavailable'), { name }) });
+    const result = await acquireCamera(rig.mediaDevices, {}, rig.permissions);
+    assert.equal(rig.calls.length, 2); assert.equal(rig.calls[0].video.zoom, true);
+    assert.deepEqual(rig.calls[1], cameraConstraints());
+    assert.equal(result.stream, rig.stream); assert.equal(result.permission.fallback, true);
+    assert.equal(result.permission.requested, true); assert.equal(result.permission.requestError, name);
+    assert.equal(result.permission.state, ['NotAllowedError', 'SecurityError'].includes(name) ? 'denied' : 'unsupported');
+    assert.notEqual(result.permission.granted, true); assert.equal(rig.queries.length, 0);
+  }
+});
+
+test('known unsupported PTZ captures once without requesting an unavailable permission', async () => {
+  for (const support of [{ zoom: false, pan: true, tilt: true }, {}]) {
+    const rig = permissionCamera({ support, capabilities: {}, settings: { width: 720, height: 1280 } });
+    const result = await acquireCamera(rig.mediaDevices, {}, rig.permissions);
+    assert.deepEqual(rig.calls, [cameraConstraints()]); assert.deepEqual(rig.queries, []);
+    assert.equal(result.permission.requested, false); assert.equal(result.permission.supported, false);
+    assert.equal(result.permission.state, 'unsupported'); assert.equal(result.permission.actualZoom, null);
+    assert.equal(result.permission.granted, null); assert.equal(result.permission.fallback, false);
+  }
+});
+
+test('ignored PTZ requests and generic camera grants never claim a confirmed PTZ grant', async () => {
+  for (const [support, capabilities, state] of [[null, { zoom: { min: .5, max: 4 } }, 'unknown'],
+    [{ zoom: true }, {}, 'unavailable'], [{ zoom: true }, { zoom: {} }, 'unavailable']]) {
+    const rig = permissionCamera({ support, capabilities });
+    const result = await acquireCamera(rig.mediaDevices, {}, rig.permissions);
+    assert.equal(rig.calls[0].video.zoom, true); assert.equal(result.permission.state, state);
+    assert.equal(result.permission.granted, null, 'successful camera capture is not a PTZ permission grant');
+  }
+  const rig = permissionCamera();
+  const unknown = await acquireCamera(rig.mediaDevices, {}, { query: async () => { throw new TypeError('unsupported descriptor'); } });
+  assert.equal(unknown.permission.state, 'unknown'); assert.equal(unknown.permission.granted, null);
+  for (const state of ['denied', 'prompt']) {
+    const ungranted = await acquireCamera(rig.mediaDevices, {}, { query: async () => ({ state }) });
+    assert.equal(ungranted.permission.state, state); assert.equal(ungranted.permission.granted, false);
+  }
+});
+
+test('PTZ fallback preserves a real camera denial and does not retry capture hardware failures', async () => {
+  const denied = Object.assign(new Error('capture denied'), { name: 'NotAllowedError' });
+  let calls = 0;
+  await assert.rejects(acquireCamera({ getSupportedConstraints: () => ({ zoom: true }),
+    getUserMedia: async () => { calls++; throw denied; } }), error => error === denied);
+  assert.equal(calls, 2);
+  const unavailable = Object.assign(new Error('camera in use'), { name: 'NotReadableError' });
+  calls = 0;
+  await assert.rejects(acquireCamera({ getSupportedConstraints: () => ({ zoom: true }),
+    getUserMedia: async () => { calls++; throw unavailable; } }), error => error === unavailable);
+  assert.equal(calls, 1);
 });
 
 test('zoom ranges choose real supported wide minimum or clamp regular zoom', () => {
@@ -38,6 +114,22 @@ test('wide default applies optional controls and reads back effective zoom', asy
   assert.equal(wide.settings.deviceId, undefined); assert.equal(wide.capabilities.deviceId, undefined);
   const regular = await configureZoom(track, { wide: false });
   assert.equal(regular.actualZoom, 1); assert.deepEqual(calls[1], { advanced: [{ zoom: 1 }] });
+});
+
+test('confirmed PTZ restores a minimum of 1 while unconfirmed grants preserve round 3 behavior', async () => {
+  for (const granted of [true, false, null]) {
+    let zoom = 3; const calls = [];
+    const track = { getSettings: () => ({ zoom }), getCapabilities: () => ({ zoom: { min: 1, max: 5 } }),
+      applyConstraints: async constraint => { calls.push(constraint); zoom = constraint.advanced[0].zoom; } };
+    const result = await configureZoom(track, { ptz: { granted } });
+    assert.equal(result.actualZoom, granted === true ? 1 : 3);
+    assert.equal(result.requestedZoom, granted === true ? 1 : null);
+    assert.deepEqual(calls, granted === true ? [{ advanced: [{ zoom: 1 }] }] : []);
+  }
+  const rig = permissionCamera({ capabilities: { zoom: { min: 1, max: 5 } }, settings: { zoom: 3 } });
+  const acquired = await acquireCamera(rig.mediaDevices, {}, { query: async () => ({ state: 'denied' }) });
+  const result = await configureZoom(rig.track, { ptz: acquired.permission });
+  assert.equal(acquired.permission.granted, false); assert.equal(result.actualZoom, 3);
 });
 
 test('unsupported zoom offers a labeled physical wide device without inferring labels', async () => {

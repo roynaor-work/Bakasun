@@ -23,6 +23,50 @@ export function cameraSnapshot(track) {
   for (const value of [settings, capabilities]) { delete value.deviceId; delete value.groupId; }
   return { settings, capabilities };
 }
+// PTZ is a separate permission from camera capture. Unsupported browsers may
+// ignore both the zoom constraint and the extra permission-descriptor member,
+// so a working stream (or a generic camera grant) alone proves neither.
+export async function acquireCamera(mediaDevices, options = {}, permissions = globalThis.navigator?.permissions) {
+  const constraints = cameraConstraints(options);
+  let supportedConstraints = null;
+  try { supportedConstraints = mediaDevices.getSupportedConstraints?.() || null; } catch { /* Optional API. */ }
+  const supported = supportedConstraints == null ? null : supportedConstraints.zoom === true;
+  const permission = { requested: supported !== false, supported, granted: null,
+    state: supported === false ? 'unsupported' : 'unknown', fallback: false, requestError: null, actualZoom: null };
+  let stream;
+  if (permission.requested) {
+    const video = { ...constraints.video, zoom: true };
+    for (const control of ['pan', 'tilt']) if (supportedConstraints?.[control] === true) video[control] = true;
+    try { stream = await mediaDevices.getUserMedia({ ...constraints, video }); }
+    catch (error) {
+      const denied = ['NotAllowedError', 'SecurityError', 'PermissionDeniedError'].includes(error?.name);
+      const unsupported = ['NotSupportedError', 'OverconstrainedError', 'ConstraintNotSatisfiedError', 'TypeError'].includes(error?.name);
+      if (!denied && !unsupported) throw error;
+      permission.fallback = true; permission.requestError = error.name;
+      permission.state = denied ? 'denied' : 'unsupported';
+      permission.granted = denied ? false : null;
+      // If camera capture itself is denied, this ordinary request still fails
+      // and the caller shows the existing camera-permission error.
+      stream = await mediaDevices.getUserMedia(constraints);
+    }
+  } else stream = await mediaDevices.getUserMedia(constraints);
+  const { settings, capabilities } = cameraSnapshot(stream.getVideoTracks()[0]);
+  permission.actualZoom = Number.isFinite(settings.zoom) ? settings.zoom : null;
+  if (supported === true && !permission.fallback) {
+    const range = capabilities.zoom;
+    const zoomAvailable = !!range && Number.isFinite(range.min) && Number.isFinite(range.max) && range.min > 0 && range.max >= range.min;
+    if (!zoomAvailable) permission.state = 'unavailable';
+    try {
+      const status = await permissions?.query?.({ name: 'camera', panTiltZoom: true });
+      if (status?.state === 'denied' || status?.state === 'prompt') {
+        permission.state = status.state; permission.granted = false;
+      } else if (status?.state === 'granted' && zoomAvailable) {
+        permission.state = 'granted'; permission.granted = true;
+      }
+    } catch { /* PTZ permission queries are not supported in every browser. */ }
+  }
+  return { stream, permission };
+}
 export function selectZoom(capabilities, wide = true) {
   const range = capabilities?.zoom;
   if (!range || !Number.isFinite(range.min) || !Number.isFinite(range.max) || range.min <= 0 || range.max < range.min) return null;
@@ -55,9 +99,14 @@ function zoomMessage({ actualZoom, requestedZoom, wide, wideDevice, error }) {
   if (requestedZoom != null) return `נשלחה בקשת זום ${requestedZoom}×; הדפדפן לא מדווח מה הזום בפועל.`;
   return `הדפדפן לא מאפשר זום 0.5 במצלמה הזאת.${wideDevice ? ' נמצאה מצלמה רחבה נפרדת; אפשר לבחור בה למטה.' : ' נשתמש בזווית שהמצלמה מאפשרת.'}`;
 }
-export async function configureZoom(track, { wide = true, mediaDevices = globalThis.navigator?.mediaDevices, facing = 'user' } = {}) {
+export async function configureZoom(track, { wide = true, mediaDevices = globalThis.navigator?.mediaDevices, facing = 'user', ptz } = {}) {
   let { settings, capabilities } = cameraSnapshot(track);
-  const requestedZoom = selectZoom(capabilities, wide); let error = null, wideDevice = null;
+  const range = capabilities.zoom;
+  // Once PTZ is confirmed, restore the lens's widest supported setting even
+  // when its minimum is 1 (or larger); permission fallback keeps round 3 rules.
+  const minimum = wide && ptz?.granted === true && Number.isFinite(range?.min) && Number.isFinite(range?.max) &&
+    range.min > 0 && range.max >= range.min ? range.min : null;
+  const requestedZoom = minimum ?? selectZoom(capabilities, wide); let error = null, wideDevice = null;
   if (requestedZoom != null) {
     if (typeof track?.applyConstraints !== 'function') error = 'applyConstraints unavailable';
     else try { await track.applyConstraints({ advanced: [{ zoom: requestedZoom }] }); }

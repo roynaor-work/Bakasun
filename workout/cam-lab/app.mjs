@@ -5,8 +5,8 @@ import { PlacementGuide, placementDistance } from './placement.mjs';
 import { SkeletonRecorder } from './recording.mjs';
 import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId } from './upload.mjs';
 import { VideoRecorder } from './video-recording.mjs';
-import { cameraConstraints, configureZoom, cameraSnapshot, reduceResolution } from './camera.mjs';
-export const LAB_VERSION = '3.0.0';
+import { acquireCamera, configureZoom, cameraSnapshot, reduceResolution } from './camera.mjs';
+export const LAB_VERSION = '4.0.0';
 const $ = id => document.getElementById(id);
 const video = $('video'), canvas = $('overlay'), context = canvas.getContext('2d');
 const titles = { squats: 'סקוואט', 'jumping-jacks': 'קפיצות פיסוק', 'high-knees': 'ברכיים גבוהות',
@@ -257,15 +257,16 @@ $('settings').addEventListener('submit', async event => {
   try {
     cameraOrientation = window.innerHeight >= window.innerWidth || !window.innerWidth ? 'portrait' : 'landscape';
     const facing = $('camera-facing').value || 'user';
-    const acquired = await navigator.mediaDevices.getUserMedia(cameraConstraints({ facing, orientation: cameraOrientation,
-      deviceId: $('camera-device').value || undefined }));
+    const { stream: acquired, permission } = await acquireCamera(navigator.mediaDevices, { facing, orientation: cameraOrientation,
+      deviceId: $('camera-device').value || undefined });
     if (token !== generation) { acquired.getTracks().forEach(t => t.stop()); return; }
     stream = acquired; video.srcObject = stream; await video.play();
     if (token !== generation) return;
     const track = stream.getVideoTracks()[0];
-    const zoom = await configureZoom(track, { wide: $('camera-width').value !== 'normal', mediaDevices: navigator.mediaDevices, facing });
+    const zoom = await configureZoom(track, { wide: $('camera-width').value !== 'normal', mediaDevices: navigator.mediaDevices,
+      facing, ptz: permission });
     if (token !== generation) return;
-    cameraInfo = cameraSnapshot(track);
+    cameraInfo = { ...cameraSnapshot(track), ptz: { ...permission, actualZoom: zoom.actualZoom } };
     $('zoom-status').textContent = `${zoom.message} · ${cameraInfo.settings.width || video.videoWidth}×${cameraInfo.settings.height || video.videoHeight}`;
     $('view').classList.toggle('rear', (cameraInfo.settings?.facingMode || facing) === 'environment');
     $('wide-camera-option').hidden = !zoom.wideDevice;
@@ -298,7 +299,7 @@ $('settings').addEventListener('submit', async event => {
         ready = true;
         model = data.model; modelHistory = data.modelHistory || modelHistory;
         if (data.lowerResolution && stream) void reduceResolution(stream.getVideoTracks()[0], { orientation: cameraOrientation }).then(result => {
-          if (token === generation && stream) cameraInfo = { ...cameraSnapshot(stream.getVideoTracks()[0]), resolutionError: result.error || null };
+          if (token === generation && stream) cameraInfo = { ...cameraInfo, ...cameraSnapshot(stream.getVideoTracks()[0]), resolutionError: result.error || null };
         });
       }
       else if (data.type === 'error') fail('הזיהוי המקומי לא נטען. ודאו שקובצי המודל וה־WASM קיימים ושיש WebGL פעיל בדפדפן.', data.message);
