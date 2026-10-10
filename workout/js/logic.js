@@ -1,5 +1,5 @@
 // היגיון טהור בלי DOM: חישוב יעדים לפי רמה, סיכומים, רצף ימים, תגים. נבדק ב-tests/workout.test.mjs.
-import { SAY_UI } from './say-ui.js?v=20261010-child-copy-1';
+import { SAY_UI } from './say-ui.js?v=20261010-camera-1';
 
 export const LEVELS = { easy: { name: 'קל', mult: 0.7 }, normal: { name: 'רגיל', mult: 1 }, hard: { name: 'חזק', mult: 1.35 }, pro: { name: 'אלוף', mult: 1.7 } };
 

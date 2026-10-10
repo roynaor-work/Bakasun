@@ -1,10 +1,10 @@
 // קטלוג אחד משותף לנגן, לדף ההקלטה ול-LINES.md. בלי גישה לדפדפן או לנתוני הילד.
-import { SAY, SAY_TTS } from './say.js?v=20261010-child-copy-1';
-import { SAY_UI, SAY_UI_TTS } from './say-ui.js?v=20261010-child-copy-1';
-import { EXERCISES } from './exercises.js?v=20261010-child-copy-1';
-import { numWord, numWordTts } from './count.js?v=20261010-child-copy-1';
+import { SAY, SAY_TTS } from './say.js?v=20261010-camera-1';
+import { SAY_UI, SAY_UI_TTS } from './say-ui.js?v=20261010-camera-1';
+import { EXERCISES } from './exercises.js?v=20261010-camera-1';
+import { numWord, numWordTts } from './count.js?v=20261010-camera-1';
 
-export const VOICE_VERSION = '20261010-child-copy-1';
+export const VOICE_VERSION = '20261010-camera-1';
 export const normalizeVoice = text => String(text).replace(/[֑-ׇ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ');
 const lines = [];
 const add = (id, text, tts, source, lang = 'he-IL') => lines.push(Object.freeze({ id, text, tts, source, lang, file: `${id}.wav` }));
@@ -80,6 +80,38 @@ for (const [id, text] of Object.entries(FRAGMENTS)) {
 // גם אמירות קיימות בהקלטות המשחקים נכללות בקטלוג. אפקטים בלי מילים אינם משפטים.
 for (const [id, text, tts, lang] of [['goal', 'Gooooooooooool!', 'Gooooooooooool!', 'pt-BR'], ['dunk', 'בום!', 'בּוּם!', 'he-IL'], ['three', 'סל!', 'סַל!', 'he-IL'], ['sprint', 'מקום ראשון!', 'מָקוֹם רִאשׁוֹן!', 'he-IL']])
   add(`celebration-${id}`, text, tts, `workout/js/games/celebrate.js / celebrate3d.js: say; הקלטה קיימת workout/snd/${id}.mp4`, lang);
+
+// Short camera coaching has display copy and separate local-voice pronunciation.
+export const CAMERA_LINES = {
+  'intro-squats': ['יורדים כאילו יושבים, ואז עומדים שוב.', 'יוֹרְדִים כְּאִלּוּ יוֹשְׁבִים, וְאָז עוֹמְדִים שׁוּב.'],
+  'intro-jumping-jacks': ['פותחים רגליים וידיים, ואז סוגרים.', 'פּוֹתְחִים רַגְלַיִם וְיָדַיִם, וְאָז סוֹגְרִים.'],
+  'intro-high-knees': ['מרימים ברך, מורידים, ומחליפים רגל.', 'מְרִימִים בֶּרֶךְ, מוֹרִידִים, וּמַחֲלִיפִים רֶגֶל.'],
+  'intro-lunges': ['יורדים לברך, עולים, ומחליפים רגל.', 'יוֹרְדִים לְבֶרֶךְ, עוֹלִים, וּמַחֲלִיפִים רֶגֶל.'],
+  'intro-push-ups': ['הגוף ישר. מכופפים ידיים ודוחפים למעלה.', 'הַגּוּף יָשָׁר. מְכוֹפְפִים יָדַיִם וְדוֹחֲפִים לְמַעְלָה.'],
+  'intro-knee-push-ups': ['ברכיים ברצפה. מכופפים ידיים ודוחפים למעלה.', 'בִּרְכַּיִם בָּרִצְפָּה. מְכוֹפְפִים יָדַיִם וְדוֹחֲפִים לְמַעְלָה.'],
+  'intro-glute-bridge': ['שוכבים ומרימים טוסיק, ואז מורידים לאט.', 'שׁוֹכְבִים וּמְרִימִים טוּסִיק, וְאָז מוֹרִידִים לְאַט.'],
+  partial: ['ננסה תנועה שלמה, כמו הדמות.', 'נְנַסֶּה תְּנוּעָה שְׁלֵמָה, כְּמוֹ הַדְּמוּת.'],
+  knees: ['הברכיים פונות לאן שהאצבעות פונות.', 'הַבִּרְכַּיִם פּוֹנוֹת לְאָן שֶׁהָאֶצְבָּעוֹת פּוֹנוֹת.'],
+  fast: ['נעשה לאט, כמו הדמות.', 'נַעֲשֶׂה לְאַט, כְּמוֹ הַדְּמוּת.'],
+  tracking: ['נחזור למקום שהמצלמה רואה.', 'נַחֲזוֹר לַמָּקוֹם שֶׁהַמַּצְלֵמָה רוֹאָה.'],
+  timeout: ['חוזרים להתחלה, ואז מנסים שוב.', 'חוֹזְרִים לַהַתְחָלָה, וְאָז מְנַסִּים שׁוּב.'],
+  alternate: ['עכשיו עושים עם הרגל השנייה.', 'עַכְשָׁו עוֹשִׂים עִם הָרֶגֶל הַשְּׁנִיָּה.'],
+  alignment: ['הגוף ישר, כמו הדמות.', 'הַגּוּף יָשָׁר, כְּמוֹ הַדְּמוּת.'],
+  legs: ['לא רואה את הרגליים', 'לֹא רוֹאָה אֶת הָרַגְלַיִם'],
+  hands: ['לא רואה את הידיים', 'לֹא רוֹאָה אֶת הַיָּדַיִם'],
+  head: ['לא רואה את הראש', 'לֹא רוֹאָה אֶת הָרֹאשׁ'],
+  far: ['תתקרב קצת', 'תִּתְקָרֵב קְצָת'],
+  close: ['תתרחק קצת', 'תִּתְרַחֵק קְצָת'],
+  side: ['תעמוד עם הצד למצלמה', 'תַּעֲמוֹד עִם הַצַּד לַמַּצְלֵמָה'],
+  tilt: ['אבא, ניישר את הטלפון', 'אַבָּא, נְיַשֵּׁר אֶת הַטֶּלֶפוֹן'],
+  body: ['נחכה שהמצלמה תראה אותך', 'נְחַכֶּה שֶׁהַמַּצְלֵמָה תִּרְאֶה אוֹתְךָ'],
+  world: ['רגע, המצלמה מחפשת אותך', 'רֶגַע, הַמַּצְלֵמָה מְחַפֶּשֶׂת אוֹתְךָ'],
+  waiting: ['מחכים בתנוחת ההתחלה', 'מְחַכִּים בִּתְנוּחַת הַהַתְחָלָה'],
+  armed: ['מוכן, בקצב שלך', 'מוּכָן, בַּקֶּצֶב שֶׁלְּךָ'],
+  moving: ['יפה, ממשיכים בתנועה', 'יָפֶה, מַמְשִׁיכִים בַּתְּנוּעָה'],
+  '3': ['שלוש', 'שָׁלוֹשׁ'], '2': ['שתיים', 'שְׁתַּיִם'], '1': ['אחת', 'אַחַת'],
+};
+for (const [id, [text, tts]] of Object.entries(CAMERA_LINES)) add(`camera-${id}`, text, tts, 'workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs');
 
 export const VOICE_LINES = Object.freeze(lines);
 export const VOICE_BY_ID = Object.freeze(Object.fromEntries(lines.map(line => [line.id, line])));

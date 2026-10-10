@@ -117,12 +117,12 @@ test('calendar weeks cross year and daylight-saving boundaries and date-only val
 });
 
 test('all app imports and entry assets use one version, including lazy imports and the three.js loader chain', async () => {
-  const version = '20261010-child-copy-1';
+  const version = '20261010-camera-1';
   async function inspect(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const url = new URL(entry.name + (entry.isDirectory() ? '/' : ''), directory);
       if (entry.isDirectory()) { await inspect(url); continue; }
-      if (!/\.(js|html)$/.test(entry.name) || ['three.module.min.js', 'character.js'].includes(entry.name)) continue;
+      if (!/\.(mjs|js|html)$/.test(entry.name) || ['three.module.min.js', 'character.js'].includes(entry.name)) continue;
       const content = await readFile(url, 'utf8');
       for (const match of content.matchAll(/\b(?:from\s*|import\s*\(\s*|import\s+)(['"])([^'"]+)\1/g)) {
         if (match[2].startsWith('node:')) continue;

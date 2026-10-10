@@ -1,7 +1,7 @@
 // במת התרגיל בסגנון "סרט מצויר" (סגנון 3 שרועי בחר, 01/10/2026): הדמות התלת-ממדית שלנו עם קו מתאר עבה,
 // שתי דרגות צבע, רקע שטוח, רצפה שטוחה וצל עגול מתחת לרגליים. אותו ממשק כמו Figure: play(ex, speed), still(ex), stop(), onRep.
-import { THREE, loadCharacter, KITS3D, viewFront, propMesh, outlineMaterial } from './char3d.js?v=20261010-child-copy-1';
-import { poseAt, cycleMs } from './figure.js?v=20261010-child-copy-1';
+import { THREE, loadCharacter, KITS3D, viewFront, propMesh, outlineMaterial } from './char3d.js?v=20261010-camera-1';
+import { poseAt, cycleMs } from './figure.js?v=20261010-camera-1';
 
 const BG = '#F2A9E3', FLOOR = '#E58FD6', LINE = '#241B3A';
 let gradTex = null;
@@ -14,6 +14,15 @@ export function blobShadow(scene, w = 130, h = 60) { const c = document.createEl
 export function flatLights(scene) { scene.add(new THREE.HemisphereLight('#ffffff', '#ffffff', 2.6)); const key = new THREE.DirectionalLight('#ffffff', .9); key.position.set(120, 300, 260); scene.add(key); }
 
 const KEY = ['Head_end', 'LeftHand', 'RightHand', 'LeftToes', 'RightToes', 'Hips', 'LeftLeg', 'RightLeg', 'LeftHandIndex3_end', 'RightHandIndex3_end'];
+function releaseObjects(root) {
+  const disposed = new Set();
+  const release = value => { if (value && !disposed.has(value)) { disposed.add(value); value.dispose?.(); } };
+  root.traverse(object => {
+    release(object.geometry);
+    for (const material of [].concat(object.material || [])) { release(material.map); release(material); }
+    release(object.skeleton);
+  });
+}
 export const STAGE_SPEED = 0.7; /* רועי 01/10: "מהירות הגדרנו יותר לאט שיהיה ברור"; ההסבר (×.55) איטי עוד יותר */
 export class Stage3D {
   constructor(el, ex, { onReady = null, onFail = null, bg = BG, floor = FLOOR, flat = false, kit = KITS3D.maccabi } = {}) {
@@ -28,10 +37,10 @@ export class Stage3D {
     el.appendChild(this.renderer.domElement); this.renderer.domElement.className = 'stage3d-canvas';
     this.ro = new ResizeObserver(() => this.resize()); this.ro.observe(el); this.resize();
     this._v = new THREE.Vector3(); this._w = new THREE.Vector3();
-    loadCharacter(kit).then(ch => { if (this.dead) return; this.ch = cartoonize(ch); if (this.flat) flatten(ch); this.scene.add(ch.model); if (this.pending) { const [e, s, stillOnly] = this.pending; this.pending = null; stillOnly ? this.still(e) : this.play(e, s); } onReady && onReady(this); }).catch(e => { console.warn('stage3d', e); onFail && onFail(e); });
+    loadCharacter(kit).then(ch => { if (this.dead) { releaseObjects(ch.model); return; } this.ch = cartoonize(ch); if (this.flat) flatten(ch); this.scene.add(ch.model); if (this.pending) { const [e, s, stillOnly] = this.pending; this.pending = null; stillOnly ? this.still(e) : this.play(e, s); } onReady && onReady(this); }).catch(e => { console.warn('stage3d', e); onFail && onFail(e); });
     if (ex) this.play(ex, 1);
   }
-  resize() { const w = Math.max(1, this.el.clientWidth), h = Math.max(1, this.el.clientHeight || w * 1.25); this.renderer.setPixelRatio(Math.min(3, devicePixelRatio || 1)); this.renderer.setSize(w, h, false); this.aspect = w / h; if (!this.flat) this.camera.aspect = w / h; this.camera.updateProjectionMatrix(); if (this.frames) this.frameCamera(); this.render(); }
+  resize() { if (this.dead) return; const w = Math.max(1, this.el.clientWidth), h = Math.max(1, this.el.clientHeight || w * 1.25); this.renderer.setPixelRatio(Math.min(3, devicePixelRatio || 1)); this.renderer.setSize(w, h, false); this.aspect = w / h; if (!this.flat) this.camera.aspect = w / h; this.camera.updateProjectionMatrix(); if (this.frames) this.frameCamera(); this.render(); }
   frameCamera() {
     const ch = this.ch; if (!ch || !this.frames) return;
     const box = new THREE.Box3(), v = this._v;
@@ -62,7 +71,9 @@ export class Stage3D {
     const air = Math.max(0, minY - 6), s = Math.max(.45, 1 - air / 160) * (lying ? 1.7 : 1), a = Math.max(.35, 1 - air / 220);
     this.shadow.scale.set(s, s, 1); this.shadow.material.opacity = a;
   }
-  render() { if (this.ch && this.frames) { const pose = poseAt(this.frames, this.ms()); this.ch.rig.apply(pose, this.front); this.updateShadow(pose); } this.renderer.render(this.scene, this.camera); }
+  render() { if (this.dead) return; if (this.ch && this.frames) { const pose = poseAt(this.frames, this.ms()); this.ch.rig.apply(pose, this.front); this.updateShadow(pose); } this.renderer.render(this.scene, this.camera); }
+  // Camera companion follows the observed movement without a second animation loop.
+  showPose(pose) { if (!this.ch || this.dead) return; this.stop(); this.ch.rig.apply(pose, this.front); this.updateShadow(pose); this.renderer.render(this.scene, this.camera); }
   ms() { return this.raf ? (performance.now() - this.start) * this.speed : 0; }
   play(ex, speed = 1) {
     if (!this.ch) { this.pending = [ex, speed, false]; return; }
@@ -73,5 +84,5 @@ export class Stage3D {
   }
   still(ex) { if (!this.ch) { this.pending = [ex, 1, true]; return; } this.stop(); this.setExercise(ex); this.render(); }
   stop() { if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0; }
-  dispose() { this.dead = true; this.stop(); try { this.ro.disconnect(); } catch { /* */ } try { this.renderer.dispose(); this.renderer.forceContextLoss(); } catch { /* */ } if (this.renderer.domElement.parentNode) this.renderer.domElement.remove(); }
+  dispose() { if (this.dead) return; this.dead = true; this.stop(); try { this.ro.disconnect(); } catch { /* */ } releaseObjects(this.scene); this.scene.clear(); this.ch = null; try { this.renderer.dispose(); this.renderer.forceContextLoss(); } catch { /* */ } if (this.renderer.domElement.parentNode) this.renderer.domElement.remove(); }
 }

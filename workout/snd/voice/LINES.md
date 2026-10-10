@@ -1,6 +1,6 @@
 # משפטים להקלטה
 
-202 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
+231 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
 
 מקליטים בטלפון ב־https://roynaor-work.github.io/Bakasun/workout/voice-rec/ (אחרי מיזוג). Chrome באנדרואיד או Safari באייפון, דרך HTTPS. אין קישור מהאפליקציה.
 
@@ -220,3 +220,32 @@
 | `celebration-dunk` | בום! | workout/js/games/celebrate.js / celebrate3d.js: say; הקלטה קיימת workout/snd/dunk.mp4 | `celebration-dunk.wav` |
 | `celebration-three` | סל! | workout/js/games/celebrate.js / celebrate3d.js: say; הקלטה קיימת workout/snd/three.mp4 | `celebration-three.wav` |
 | `celebration-sprint` | מקום ראשון! | workout/js/games/celebrate.js / celebrate3d.js: say; הקלטה קיימת workout/snd/sprint.mp4 | `celebration-sprint.wav` |
+| `camera-1` | אחת | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-1.wav` |
+| `camera-2` | שתיים | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-2.wav` |
+| `camera-3` | שלוש | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-3.wav` |
+| `camera-intro-squats` | יורדים כאילו יושבים, ואז עומדים שוב. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-intro-squats.wav` |
+| `camera-intro-jumping-jacks` | פותחים רגליים וידיים, ואז סוגרים. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-intro-jumping-jacks.wav` |
+| `camera-intro-high-knees` | מרימים ברך, מורידים, ומחליפים רגל. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-intro-high-knees.wav` |
+| `camera-intro-lunges` | יורדים לברך, עולים, ומחליפים רגל. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-intro-lunges.wav` |
+| `camera-intro-push-ups` | הגוף ישר. מכופפים ידיים ודוחפים למעלה. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-intro-push-ups.wav` |
+| `camera-intro-knee-push-ups` | ברכיים ברצפה. מכופפים ידיים ודוחפים למעלה. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-intro-knee-push-ups.wav` |
+| `camera-intro-glute-bridge` | שוכבים ומרימים טוסיק, ואז מורידים לאט. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-intro-glute-bridge.wav` |
+| `camera-partial` | ננסה תנועה שלמה, כמו הדמות. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-partial.wav` |
+| `camera-knees` | הברכיים פונות לאן שהאצבעות פונות. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-knees.wav` |
+| `camera-fast` | נעשה לאט, כמו הדמות. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-fast.wav` |
+| `camera-tracking` | נחזור למקום שהמצלמה רואה. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-tracking.wav` |
+| `camera-timeout` | חוזרים להתחלה, ואז מנסים שוב. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-timeout.wav` |
+| `camera-alternate` | עכשיו עושים עם הרגל השנייה. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-alternate.wav` |
+| `camera-alignment` | הגוף ישר, כמו הדמות. | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-alignment.wav` |
+| `camera-legs` | לא רואה את הרגליים | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-legs.wav` |
+| `camera-hands` | לא רואה את הידיים | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-hands.wav` |
+| `camera-head` | לא רואה את הראש | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-head.wav` |
+| `camera-far` | תתקרב קצת | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-far.wav` |
+| `camera-close` | תתרחק קצת | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-close.wav` |
+| `camera-side` | תעמוד עם הצד למצלמה | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-side.wav` |
+| `camera-tilt` | אבא, ניישר את הטלפון | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-tilt.wav` |
+| `camera-body` | נחכה שהמצלמה תראה אותך | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-body.wav` |
+| `camera-world` | רגע, המצלמה מחפשת אותך | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-world.wav` |
+| `camera-waiting` | מחכים בתנוחת ההתחלה | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-waiting.wav` |
+| `camera-armed` | מוכן, בקצב שלך | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-armed.wav` |
+| `camera-moving` | יפה, ממשיכים בתנועה | workout/js/camera-screen.mjs: cameraCoach / camera-demo.mjs | `camera-moving.wav` |

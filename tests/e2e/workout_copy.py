@@ -59,7 +59,7 @@ try:
             assert ' '.join(steps) == expected, exercise_id
             assert page.locator('#helpbox .tip').count() == 0
             plain(page.locator('#app').inner_text())
-            pointed = page.evaluate("async (id)=>(await import('./js/say.js?v=20261010-child-copy-1')).SAY_TTS[id]", exercise_id)
+            pointed = page.evaluate("async (id)=>(await import('./js/say.js?v=20261010-camera-1')).SAY_TTS[id]", exercise_id)
             assert page.evaluate('spoken.at(-1)') == pointed, exercise_id
             assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'), exercise_id
             page.locator('#help').click()
@@ -77,15 +77,16 @@ try:
 
         page.goto(origin + '/workout/voice-rec/')
         page.locator('#line').wait_for()
-        lines = page.evaluate("async ()=>(await import('../js/voice-lines.js?v=20261010-child-copy-1')).VOICE_LINES.map(l=>l.text)")
-        assert len(lines) == 202
+        lines = page.evaluate("async ()=>(await import('../js/voice-lines.js?v=20261010-camera-1')).VOICE_LINES.map(l=>l.text)")
+        camera_count = page.evaluate("async ()=>Object.keys((await import('../js/voice-lines.js?v=20261010-camera-1')).CAMERA_LINES).length")
+        assert len(lines) == 202 + camera_count
         for index, text in enumerate(lines):
             assert page.locator('#line').inner_text() == text
             plain(text)
             if index + 1 < len(lines):
                 page.locator('#next').click()
         assert not errors, errors
-        print(json.dumps({'explanations': 50, 'recordingLines': 202, 'phoneWidth': 390,
+        print(json.dumps({'explanations': 50, 'recordingLines': len(lines), 'phoneWidth': 390,
                           'pointedFallback': True, 'savedNames': True, 'pageErrors': errors}))
         browser.close()
 finally:

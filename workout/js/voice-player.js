@@ -1,4 +1,4 @@
-import { VOICE_LINES, VOICE_BY_ID, VOICE_VERSION, splitVoiceText } from './voice-lines.js?v=20261010-child-copy-1';
+import { VOICE_LINES, VOICE_BY_ID, VOICE_VERSION, splitVoiceText } from './voice-lines.js?v=20261010-camera-1';
 
 // טהור: מחסור בהקלטה מחזיר רק את החלק החסר ל-TTS, בלי להקריא שוב את המשפט כולו.
 export function chooseVoice(text, buffers, lang = 'he-IL') {
@@ -68,6 +68,7 @@ export function createVoicePlayer({ context, fetchFile, speakFallback, cancelFal
     const done = () => {
       if (token !== generation) return;
       lastSpokeAt = now(); active = false;
+      job.onDone?.();
       const nextJob = queue.shift(); if (nextJob) run(nextJob);
     };
     const next = () => {

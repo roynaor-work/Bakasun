@@ -1,14 +1,14 @@
 // קטלוג המשחקים הקטנים: ארבע קבוצות, כל משחק דקה עד שתי דקות.
-import arcade from './arcade.js?v=20261010-child-copy-1';
-import arcade2 from './arcade2.js?v=20261010-child-copy-1'; /* מקבץ 3: הרץ הקופץ, צפרדע, מבוך הנקודות, קפיצות לשמיים, יהלומים */
-import sport0 from './sport.js?v=20261010-child-copy-1';
-import { UPGRADE3D } from './sport3d.js?v=20261010-child-copy-1'; /* פנדלים ואני השוער בתלת-ממד (01/10); נופל לגרסה הדו-ממדית בלי WebGL */
+import arcade from './arcade.js?v=20261010-camera-1';
+import arcade2 from './arcade2.js?v=20261010-camera-1'; /* מקבץ 3: הרץ הקופץ, צפרדע, מבוך הנקודות, קפיצות לשמיים, יהלומים */
+import sport0 from './sport.js?v=20261010-camera-1';
+import { UPGRADE3D } from './sport3d.js?v=20261010-camera-1'; /* פנדלים ואני השוער בתלת-ממד (01/10); נופל לגרסה הדו-ממדית בלי WebGL */
 const sport = sport0.map(g => UPGRADE3D[g.id] ? { ...g, make: UPGRADE3D[g.id] } : g);
-import puzzle from './puzzle.js?v=20261010-child-copy-1';
-import quick from './quick.js?v=20261010-child-copy-1';
-import * as more from './more.js?v=20261010-child-copy-1';
-import * as b4 from './batch4.js?v=20261010-child-copy-1'; /* מקבץ 4: הקפצת כדור, יורה בועות, כדורסל, מיני גולף, באולינג */
-import { DEMOS, DEMO_DUR, DEMO_TOP } from './demos.js?v=20261010-child-copy-1';
+import puzzle from './puzzle.js?v=20261010-camera-1';
+import quick from './quick.js?v=20261010-camera-1';
+import * as more from './more.js?v=20261010-camera-1';
+import * as b4 from './batch4.js?v=20261010-camera-1'; /* מקבץ 4: הקפצת כדור, יורה בועות, כדורסל, מיני גולף, באולינג */
+import { DEMOS, DEMO_DUR, DEMO_TOP } from './demos.js?v=20261010-camera-1';
 
 export const GAME_GROUPS = [
   { id: 'arcade', name: 'ארקייד', emoji: '🕹️', games: [...arcade, ...arcade2, ...b4.arcade, ...more.arcade] },

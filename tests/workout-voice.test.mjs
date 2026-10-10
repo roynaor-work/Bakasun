@@ -87,6 +87,16 @@ test('loaded parts are scheduled on the same audio clock with no gap; recent-spe
   h.advance(5000); assert.equal(h.player.spokeRecently(), true);
   h.nodes.at(-1).onended(); h.advance(901); assert.equal(h.player.spokeRecently(), false);
 });
+test('camera intro completion waits for recording or fallback, and cancellation suppresses completion', async () => {
+  const h = harness(); let completed = 0;
+  await h.player.load('camera-intro-squats');
+  h.player.play(VOICE_BY_ID['camera-intro-squats'].text, { onDone: () => completed++ });
+  assert.equal(completed, 0); h.nodes.at(-1).onended(); assert.equal(completed, 1);
+  h.player.play(VOICE_BY_ID['camera-intro-squats'].text, { onDone: () => completed++ });
+  h.player.stop(); h.nodes.at(-1).onended(); assert.equal(completed, 1);
+  h.player.play('טקסט לבדיקה', { onDone: () => completed++ });
+  assert.equal(completed, 1); h.callbacks.at(-1)(); assert.equal(completed, 2);
+});
 test('missing and corrupt files preserve fallback; requests are fetched once and an early call uses its recording', async () => {
   const h = harness(); h.player.play('סִיַּמְתָּ!');
   await h.player.load('finished'); await Promise.resolve(); assert.equal(h.spoken[0].text, 'סִיַּמְתָּ!');

@@ -6,7 +6,7 @@ import { SAY_UI, SAY_UI_TTS } from '../workout/js/say-ui.js';
 import { EXERCISES, CATS } from '../workout/js/exercises.js';
 import { PROGRAMS } from '../workout/js/programs.js';
 import { numWord, timeCue } from '../workout/js/count.js';
-import { VOICE_LINES, VOICE_BY_ID, splitVoiceText, FRAGMENTS } from '../workout/js/voice-lines.js';
+import { VOICE_LINES, VOICE_BY_ID, splitVoiceText, FRAGMENTS, CAMERA_LINES } from '../workout/js/voice-lines.js';
 import { chooseVoice } from '../workout/js/voice-player.js';
 import { exerciseName, workoutName } from '../workout/js/workout-copy.js';
 
@@ -58,8 +58,8 @@ test('all 25 exercise names change exactly as approved, retaining exercise IDs',
 });
 
 test('catalog display copy is unpointed, each Hebrew line has separate pointed TTS and every ID is retained', () => {
-  assert.equal(VOICE_LINES.length, 202);
-  assert.equal(new Set(VOICE_LINES.map(line => line.id)).size, 202);
+  assert.equal(VOICE_LINES.length, 202 + Object.keys(CAMERA_LINES).length);
+  assert.equal(new Set(VOICE_LINES.map(line => line.id)).size, VOICE_LINES.length);
   const expectedIds = [
     ...EXERCISES.flatMap(ex => [`exercise-${ex.id}`, `name-${ex.id}`]),
     ...['costTwo', 'howWas', 'test'].map(id => `ui-${id}`),
@@ -72,6 +72,7 @@ test('catalog display copy is unpointed, each Hebrew line has separate pointed T
     ...Array.from({ length: 9 }, (_, n) => `number-and-${n + 1}`),
     ...Object.keys(FRAGMENTS),
     ...['goal', 'dunk', 'three', 'sprint'].map(id => `celebration-${id}`),
+    ...Object.keys(CAMERA_LINES).map(id => `camera-${id}`),
   ];
   assert.deepEqual(VOICE_LINES.map(line => line.id).sort(), expectedIds.sort());
   for (const line of VOICE_LINES) {
