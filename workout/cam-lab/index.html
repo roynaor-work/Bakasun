@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self' https: http://localhost:* http://127.0.0.1:*; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
   <title>מעבדת מצלמה · האימון שלי</title>
   <link rel="stylesheet" href="lab.css">
   <script type="module" src="app.mjs"></script>
@@ -12,16 +13,22 @@
 <body>
 <main>
   <header><span class="badge">מעבדה נפרדת · סבב 3</span><h1>זזים מול המצלמה</h1><p>שבעה תרגילים · לבד או אבא ואני</p></header>
-  <p class="privacy">🔒 מצב פרטי כברירת מחדל: עיבוד במכשיר, הקלטת שלד כבויה. שום וידאו או תמונה לא נשמרים ולא עולים לענן. אפשר להפעיל הקלטת נקודות שלד בלבד ולהוריד JSON למכשיר בלחיצה.</p>
+  <p id="privacy" class="privacy">מצב פרטי: עיבוד במכשיר. בלי הגדרת שליחה של ההורה אין צילום וידאו או שליחת נתונים. אפשר להקליט שלד ולהוריד אותו למכשיר.</p>
+  <div id="upload-panel" aria-label="שליחה לבדיקה">
+    <p id="upload-config-status">שליחה לבדיקה: כבויה</p>
+    <button id="upload-disable" class="secondary" hidden>כיבוי שליחה לבדיקה</button>
+    <p id="upload-status" role="status" aria-live="polite"></p>
+    <button id="upload-retry" class="secondary" hidden>נסה שוב</button>
+  </div>
+  <p id="zoom-status" class="small" role="status"></p>
+  <label id="wide-camera-option" hidden>נמצאה מצלמה רחבה נוספת — בחירה לניסיון הבא <select id="camera-device"><option value="">המצלמה שנבחרה בהגדרות</option></select></label>
   <section id="setup" aria-labelledby="setup-title">
     <h2 id="setup-title">1. מכינים מקום</h2>
     <form id="settings">
       <div class="fields"><label>גיל <input id="age" type="number" min="5" max="12" value="7" required inputmode="numeric"></label><label>גובה בס״מ <input id="height" type="number" min="90" max="180" value="120" required inputmode="numeric"></label></div>
       <label>התרגיל <select id="exercise"><option value="squats">סקוואט</option><option value="jumping-jacks">קפיצות פיסוק</option><option value="high-knees">ברכיים גבוהות — הרמה והורדה של רגל אחת = חזרה</option><option value="lunges">מכרעים — ירידה ועלייה והחלפת רגל</option><option value="push-ups">שכיבות סמיכה — מבט צד</option><option value="knee-push-ups">שכיבות סמיכה על הברכיים — מבט צד</option><option value="glute-bridge">גשר ישבן — מבט צד</option></select></label>
       <label>משתתפים <select id="mode"><option value="solo" selected>לבד</option><option value="pair">אבא ואני — שני מונים נפרדים</option></select></label>
-      <label>שדה ראייה <select id="camera-width"><option value="wide" selected>רחב (0.5) — אם הדפדפן מאפשר</option><option value="normal">רגיל</option></select></label>
-      <label>מצלמה <select id="camera-device"><option value="">קדמית — אוטומטי</option></select></label>
-      <p class="small">ננסה זום החוצה אחרי פתיחת המצלמה. אם אין תמיכה, נציע מצלמה רחבה שהדפדפן מציג. עדשת 0.5 אינה זמינה בכל טלפון או דפדפן; הגודל והזום בפועל יופיעו בהצבה ובתוצאה. „רגיל” מבקש זום 1 במצלמה שנבחרה.</p>
+      <div class="fields"><label>מצלמה <select id="camera-facing"><option value="user">קדמית</option><option value="environment">אחורית</option></select></label><label>שדה ראייה <select id="camera-width"><option value="wide">רחב</option><option value="normal">רגיל</option></select></label></div>
       <p class="small">בשניים: קודם עומדים זקוף זה לצד זה באותו מרחק מהמצלמה. הנמוך מזוהה כילד והגבוה כאבא. נדרש הבדל גובה ברור; התוויות נשמרות לכל הניסיון. בתרגילי רצפה: אחר כך מסתובבים למבט צד ומשאירים רווח, כך ששני השלדים נראים.</p>
       <p class="small">הגיל והגובה מכוונים ספים ניסיוניים. הם אינם הערכה רפואית או מדידה מדויקת של הגוף.</p>
       <label class="check"><input id="voice" type="checkbox" checked> הדרכה בקול עברי מקומי, אם זמין במכשיר</label>
@@ -40,18 +47,17 @@
         </svg>
         <figcaption>המכשיר יציב על הרצפה או על כיסא, לא ביד. לתרגילי עמידה מכוונים מעט כלפי מעלה; לתרגילי רצפה מצלמה נמוכה במבט צד. מתחילים בכ־2–3 מטר ומתקנים לפי המסגרת. משאירים מקום לידיים ולרגליים.</figcaption>
       </figure>
-      <p>אור מול הגוף, רצפה פנויה ומבוגר לידך. עומדים ישר עד שהמסגרת ירוקה. לא צריך לקנות ציוד.</p>
+      <p>אור מול הגוף, רצפה פנויה ומבוגר לידך. כשהמפרקים הדרושים לתרגיל נראים אפשר להתחיל; מד המרחק הוא המלצה בלבד.</p>
       <button type="submit" id="camera">הפעלת מצלמה והדרכה</button>
     </form>
   </section>
   <section id="session" hidden aria-labelledby="session-title">
     <h2 id="session-title">2. עומדים בתוך התמונה</h2>
     <p id="instructions"></p>
-    <p id="camera-actual" class="small"></p>
-    <button id="wide-offer" class="secondary" hidden></button>
     <div id="view"><video id="video" autoplay playsinline muted></video><canvas id="overlay" aria-hidden="true"></canvas><div id="frame-guide"></div></div>
+    <label class="small" for="distance-meter">המרחק מהמצלמה — המלצה</label><meter id="distance-meter" min="0" max="1" low="0.24" high="0.85" optimum="0.5" value="0"></meter>
+    <p id="distance-status" class="small" role="status">עומדים כך שרואים את המפרקים הדרושים לתרגיל.</p>
     <p id="status" role="status">טוענים את מודל הזיהוי המקומי…</p>
-    <div id="distance-guide"><label for="distance-meter">גודל הגוף בתמונה — טווח מתאים 26%–85%</label><meter id="distance-meter" min="0" max="1" low="0.26" high="0.85" optimum="0.5" value="0"></meter><p id="distance-hint" role="status"></p></div>
     <div class="scores"><div class="score"><span id="child-label">חזרות שנספרו</span><output id="count" aria-label="חזרות הילד" aria-live="polite">0</output><span id="child-status" class="small"></span></div><div id="dad-score" class="score" hidden><span>אבא</span><output id="dad-count" aria-label="חזרות אבא" aria-live="polite">0</output><span id="dad-status" class="small"></span></div></div>
     <p id="feedback" role="status"></p>
     <p id="metrics" class="small" dir="ltr">FPS — · processing —</p>
@@ -59,7 +65,7 @@
   </section>
   <section id="recording-panel" hidden aria-label="הקלטת שלד מקומית">
     <p id="record-status" role="status">מצב פרטי: הקלטת שלד כבויה</p>
-    <p class="small">רק נקודות ומדדי ביטחון נשמרים בזיכרון עד סגירת הדף. התחלת הקלטה מחזירה לבדיקת הצבה וכיול זהות לפני הספירה. עד 6000 פריימים, ואז עצירה גלויה. ההורדה היא קובץ JSON מקומי; אין שליחה אוטומטית.</p>
+    <p id="record-help" class="small">במצב פרטי: הקלטת שלד בלבד והורדה ידנית. כששליחה לבדיקה פעילה: וידאו, שלד ואבחון מוקלטים אוטומטית ונשלחים בסיום. עד 4 דקות לניסיון.</p>
     <div class="buttons"><button id="record-toggle" class="secondary">התחלת הקלטת שלד</button><button id="record-download" class="secondary" disabled>הורדת נקודות שלד (JSON)</button></div>
   </section>
   <section id="result" hidden aria-labelledby="result-title">
@@ -68,7 +74,6 @@
     <p id="result-rejected"></p><ul id="reasons"></ul>
     <p>תנועה שלא נספרה אינה אומרת שעשית משהו לא טוב. המצלמה יכולה לפספס. אם לא ברור מה לשנות, שואלים מבוגר.</p>
     <p id="result-metrics" class="small"></p>
-    <p id="result-camera" class="small"></p>
     <h3>למה הספירה חיכתה?</h3><ul id="diagnostics"></ul>
     <p class="small">סיבה יכולה להופיע יחד עם סיבות נוספות באותו פריים. אלה מונים בלבד, ללא תמונות או מיקומי גוף.</p>
     <details><summary>לוג אבחון וביצועים מקומי</summary><p>מוני אבחון לכל הניסיון ועד 900 פריימים אחרונים של ביצועים ושלב הספירה. מספרים בלבד, ללא תמונות, נקודות גוף או פרטים אישיים. ייצוא רק בלחיצה שלך.</p><button id="export" class="secondary">הורדת לוג אבחון וביצועים (JSON)</button></details>

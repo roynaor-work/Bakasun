@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { RepCounter, EXERCISES, bodyReport, requiredPoints, features } from '../workout/cam-lab/counter.mjs';
-import { distanceGuide } from '../workout/cam-lab/placement.mjs';
+import { RepCounter, EXERCISES, bodyReport, REQUIRED_POINTS, features } from '../workout/cam-lab/counter.mjs';
+import { placementDistance } from '../workout/cam-lab/placement.mjs';
 import { diagnosticLines } from '../workout/cam-lab/feedback.mjs';
-import { cameraConstraints, chooseZoom, configureCamera, cameraSummary, wideCameras } from '../workout/cam-lab/camera.mjs';
+import { cameraConstraints, selectZoom, configureZoom, cameraSnapshot, findWideCamera, reduceResolution } from '../workout/cam-lab/camera.mjs';
 import { pose, floorPose, lungePose, person } from './cam-lab-fixtures.js';
 
 const motion = {
@@ -53,10 +53,11 @@ for (const exercise of EXERCISES) {
     assert.equal(s.c.count, 1); assert.equal(s.c.rejected, 0);
   });
   test(`${exercise}: one/two invalid required-point frames preserve a rep, not stationary noise`, () => {
-    const [rest, target] = motion[exercise];
+    const [rawRest, rawTarget] = motion[exercise];
+    const rest = () => optionalMissing(rawRest(), exercise), target = () => optionalMissing(rawTarget(), exercise);
     for (const frames of [1, 2]) {
       const s = rig(exercise); s.send(rest()); s.send(target());
-      const bad = target(), id = requiredPoints(exercise)[0]; bad.p[id].visibility = .1;
+      const bad = target(), id = REQUIRED_POINTS[exercise].left[0]; bad.p[id].visibility = .1;
       s.send(bad, frames * 50); s.send(target(), 300); s.send(rest());
       assert.equal(s.c.count, 1); assert.equal(s.c.rejected, 0); assert.equal(s.c.diagnostics.graceRecoveries, 1);
       const still = rig(exercise); still.send(rest());
@@ -81,10 +82,10 @@ for (const exercise of ['push-ups', 'knee-push-ups', 'glute-bridge']) {
   test(`${exercise}: small floor span 0.28 and the right side alone count, while holding still does not`, () => {
     const [rest, target] = motion[exercise];
     const transform = sample => {
-      const ids = requiredPoints(exercise), xs = ids.map(i => sample.p[i].x), ys = ids.map(i => sample.p[i].y);
+      const ids = REQUIRED_POINTS[exercise].left, xs = ids.map(i => sample.p[i].x), ys = ids.map(i => sample.p[i].y);
       const scale = .28 / Math.hypot((Math.max(...xs) - Math.min(...xs)) * .75, Math.max(...ys) - Math.min(...ys));
       sample.p.forEach(p => { p.x = .5 + (p.x - .5) * scale; p.y = .5 + (p.y - .6) * scale; });
-      for (const i of requiredPoints(exercise, 1)) sample.p[i].visibility = 1;
+      for (const i of REQUIRED_POINTS[exercise].right) sample.p[i].visibility = 1;
       for (const i of ids) sample.p[i].visibility = .1;
       const report = bodyReport(sample.p, .75, exercise); assert.equal(report.side, 1); assert.ok(report.ok);
       return optionalMissing(sample, exercise);
@@ -119,7 +120,7 @@ test('squatting can shrink apparent height below placement span, without allowin
   const s = rig('squats'); s.send(small(pose()));
   const down = small(pose({ angle: 110 }));
   down.p.forEach(p => { p.y = .55 + (p.y - .55) * .7; });
-  assert.ok(bodyReport(down.p, .75, 'squats').failures.some(f => f.reason === 'bodySpan'));
+  assert.ok(bodyReport(down.p, .75, 'squats').warnings.some(f => f.reason === 'bodySpan'));
   s.send(down); s.send(small(pose())); assert.equal(s.c.count, 1); assert.equal(s.c.rejected, 0);
   const still = rig('squats'); still.send(small(pose()));
   for (let i = 0; i < 20; i++) {
@@ -134,27 +135,27 @@ test('distance meter accepts a simulated 1.2m interval; gives relative approach/
     const span = 1.2 / (2 * metres * Math.tan(Math.PI / 6));
     const sample = person(pose(), { size: span / .77, x: .5 });
     assert.ok(bodyReport(sample.landmarks, 3 / 4, 'placement').ok);
-    assert.equal(distanceGuide(sample.landmarks, 3 / 4).direction, 'good');
+    assert.equal(placementDistance(sample.landmarks, { aspect: 3 / 4 }).direction, null);
     const c = rig('squats'); c.send({ p: sample.landmarks, world: sample.world }, 2000); assert.equal(c.c.count, 0);
   }
   const far = person(pose(), { size: .2 / .77 });
-  assert.equal(distanceGuide(far.landmarks).direction, 'closer'); assert.equal(distanceGuide(far.landmarks).percent, 33);
+  assert.equal(placementDistance(far.landmarks).direction, 'closer'); assert.equal(placementDistance(far.landmarks).steps > 0, true);
   const close = pose(); close.p[0].y = -.04;
-  assert.equal(distanceGuide(close.p).direction, 'away'); assert.ok(distanceGuide(close.p).percent >= 10);
-  assert.equal(distanceGuide([]).direction, 'unknown');
+  assert.equal(placementDistance(close.p).direction, 'away'); assert.ok(placementDistance(close.p).steps >= 1);
+  assert.equal(placementDistance([]).span, null);
 });
 test('numeric diagnostics distinguish framing, insufficient motion and missing model angles, with per-point percentages', () => {
   const s = rig('squats'); s.send(pose()); s.send(pose({ angle: 110 }));
-  const clipped = pose({ angle: 110 }); clipped.p[27].y = 1.1;
+  const clipped = pose({ angle: 110 }); clipped.p[27].y = clipped.p[28].y = 1.1;
   s.send(clipped, 600); s.send(pose());
   s.send(pose({ angle: 140 })); s.send(pose());
   const d = s.c.snapshot();
   assert.equal(d.rejectedBy.framing, 1); assert.equal(d.rejectedBy.motionThreshold, 1);
-  assert.ok(d.requiredPointPercent[27] < 100); assert.equal(d.requiredPointPercent[11], 100);
-  assert.equal(d.requiredPointPercent[15], undefined);
+  assert.ok(d.requiredPoints[27].observedPercent < 100); assert.equal(d.requiredPoints[11].observedPercent, 100);
+  assert.equal(d.requiredPoints[15], undefined);
   const lines = diagnosticLines(d).join('\n');
   assert.match(lines, /מסגרת\/נקודות חובה: 1/); assert.match(lines, /תנועה שלא הגיעה לסף: 1/);
-  assert.match(lines, /הסיבה הנפוצה.*שולי התמונה/);
+  assert.match(lines, /סיבת העצירה הנפוצה.*נקודה מחוץ לתמונה/);
   const numeric = value => { if (typeof value === 'object') Object.values(value).forEach(numeric);
     else assert.ok(typeof value === 'number' && Number.isFinite(value)); };
   numeric(d); assert.doesNotMatch(JSON.stringify(d), /"(?:x|y|z|landmarks|world|image|video)"/);
@@ -162,20 +163,31 @@ test('numeric diagnostics distinguish framing, insufficient motion and missing m
   assert.ok(diagnosticLines(idle.c.snapshot()).some(l => /לא זוהתה תחילת חזרה/.test(l)));
 });
 test('camera orientation and explicit lens selection keep a bounded pixel budget', () => {
-  assert.deepEqual(cameraConstraints(true).video.width, { ideal: 480, max: 480 });
-  assert.deepEqual(cameraConstraints(true).video.height, { ideal: 640, max: 640 });
-  assert.equal(cameraConstraints(false).video.facingMode, 'user');
-  assert.deepEqual(cameraConstraints(false, 'chosen').video.deviceId, { exact: 'chosen' });
-  assert.equal(cameraConstraints(false).audio, false);
+  const portrait = cameraConstraints({ orientation: 'portrait' });
+  assert.deepEqual(portrait.video.width, { ideal: 720, max: 720 });
+  assert.deepEqual(portrait.video.height, { ideal: 1280, max: 1280 });
+  const landscape = cameraConstraints({ orientation: 'landscape' });
+  assert.deepEqual(landscape.video.width, { ideal: 1280, max: 1280 });
+  assert.deepEqual(landscape.video.height, { ideal: 720, max: 720 });
+  assert.deepEqual(landscape.video.facingMode, { ideal: 'user' });
+  assert.deepEqual(cameraConstraints({ facing: 'environment' }).video.facingMode, { ideal: 'environment' });
+  assert.deepEqual(cameraConstraints({ deviceId: 'chosen' }).video.deviceId, { exact: 'chosen' });
+  assert.equal(portrait.audio, false);
+  for (const [orientation, width, height] of [['portrait', 480, 640], ['landscape', 640, 480]]) {
+    const video = cameraConstraints({ orientation, lowResolution: true }).video;
+    assert.deepEqual(video.width, { ideal: width, max: width });
+    assert.deepEqual(video.height, { ideal: height, max: height });
+  }
 });
 test('zoom selection handles fractional minima, steps, fixed zoom and missing/invalid zoom', () => {
   for (const [caps, wide, normal] of [
     [{}, null, null], [{ zoom: { min: .5, max: 4, step: .1 } }, .5, 1],
     [{ zoom: { min: .7, max: 3, step: .1 } }, .7, 1],
+    [{ zoom: { min: .6, max: 3, step: .3 } }, .6, .9],
     [{ zoom: { min: 1, max: 4 } }, null, 1], [{ zoom: { min: 2, max: 4 } }, null, 2],
     [{ zoom: { min: .5, max: .5 } }, .5, .5], [{ zoom: { min: 0, max: 4 } }, null, null],
     [{ zoom: { min: 4, max: 1 } }, null, null], [{ zoom: true }, null, null],
-  ]) { assert.equal(chooseZoom(caps), wide); assert.equal(chooseZoom(caps, false), normal); }
+  ]) { assert.equal(selectZoom(caps), wide); assert.equal(selectZoom(caps, false), normal); }
 });
 test('camera applies supported wide zoom and reports actual values, never claims an unavailable 0.5 lens', async () => {
   const devices = [{ kind: 'videoinput', deviceId: 'rear-wide', label: 'Back ultra-wide camera' },
@@ -186,20 +198,36 @@ test('camera applies supported wide zoom and reports actual values, never claims
       applyConstraints: async c => { calls++; if (mode === 'rejected') throw Error('not supported');
         if (mode !== 'ignored') zoom = c.advanced[0].zoom; },
       getSettings: () => ({ deviceId: 'front', width: 480, height: 640, ...(mode === 'unreported' ? {} : { zoom }) }) };
-    const result = await configureCamera(track, { enumerateDevices: async () => { enumerated++; return devices; } });
+    const result = await configureZoom(track, { mediaDevices: { enumerateDevices: async () => { enumerated++; return devices; } } });
     assert.equal(calls, ['nozoom', 'min-one'].includes(mode) ? 0 : 1);
-    assert.equal(result.wideApplied, +(mode === 'supported'));
+    assert.equal(result.actualZoom, mode === 'unreported' ? null : mode === 'supported' ? .5 : 1);
+    assert.equal(result.error !== null, mode === 'rejected');
     assert.equal(enumerated, mode === 'supported' ? 0 : 1);
-    assert.equal(result.alternatives.length, mode === 'supported' ? 0 : 1);
-    assert.match(cameraSummary(result), /480×640/);
-    if (mode !== 'supported') assert.match(cameraSummary(result), /לא אישר זום רחב/);
-    if (mode === 'unreported') assert.match(cameraSummary(result), /זום לא דווח/);
+    assert.equal(result.wideDevice?.deviceId || null, mode === 'supported' ? null : 'rear-wide');
+    const snapshot = cameraSnapshot(track);
+    assert.equal(snapshot.settings.width, 480); assert.equal(snapshot.settings.height, 640);
+    assert.equal(snapshot.settings.deviceId, undefined);
+    if (['nozoom', 'rejected', 'ignored', 'min-one'].includes(mode)) assert.match(result.message, /0.5 לא זמין/);
+    if (mode === 'unreported') assert.match(result.message, /לא מדווח מה הזום בפועל/);
     // Controls cannot synthesize exercise movement.
     const still = rig('squats'); still.send(pose(), 2000); assert.equal(still.c.count, 0);
   }
-  assert.deepEqual(wideCameras(devices, 'rear-wide'), []);
-  assert.deepEqual(wideCameras([{ kind: 'videoinput', deviceId: 'hidden', label: '' }]), []);
-  const normal = await configureCamera({ getCapabilities: () => ({ zoom: { min: .5, max: 4 } }),
-    applyConstraints: async c => assert.equal(c.advanced[0].zoom, 1), getSettings: () => ({ zoom: 1 }) }, {}, false);
-  assert.equal(normal.requestedWide, 0); assert.match(cameraSummary(normal), /נבחר מצב רגיל/);
+  assert.equal(findWideCamera(devices, { currentDeviceId: 'rear-wide' }), null);
+  assert.equal(findWideCamera([{ kind: 'videoinput', deviceId: 'hidden', label: '' }]), null);
+  const normal = await configureZoom({ getCapabilities: () => ({ zoom: { min: .5, max: 4 } }),
+    applyConstraints: async c => assert.equal(c.advanced[0].zoom, 1), getSettings: () => ({ zoom: 1 }) }, { wide: false });
+  assert.equal(normal.requestedZoom, 1); assert.equal(normal.actualZoom, 1); assert.match(normal.message, /זום בפועל: 1×/);
+});
+test('camera lowers portrait and landscape resolution when FPS falls; failures preserve the working track', async () => {
+  for (const [orientation, width, height] of [['portrait', 480, 640], ['landscape', 640, 480]]) {
+    let applied;
+    const track = { applyConstraints: async c => { applied = c; }, getSettings: () => ({ width, height, zoom: .5 }) };
+    const result = await reduceResolution(track, { orientation });
+    assert.deepEqual(applied, { width: { ideal: width, max: width }, height: { ideal: height, max: height } });
+    assert.equal(result.error, null); assert.equal(result.settings.zoom, .5);
+  }
+  const failed = await reduceResolution({ applyConstraints: async () => { throw Object.assign(Error('not supported'), { name: 'OverconstrainedError' }); },
+    getSettings: () => ({ width: 720, height: 1280 }) });
+  assert.equal(failed.error, 'OverconstrainedError'); assert.equal(failed.settings.width, 720);
+  assert.ok((await reduceResolution({})).error);
 });

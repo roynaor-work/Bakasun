@@ -12,7 +12,6 @@ export const REASONS = {
   knees: 'הברכיים התקרבו פנימה לאורך התנועה',
   fast: 'התנועה הייתה קצרה מכדי לזהות מחזור ברור',
   tracking: 'הגוף הוסתר או הזיהוי לא היה ברור',
-  framing: 'נקודות החובה לא היו ברורות בתוך המסגרת',
   timeout: 'לא זוהתה חזרה לעמדת ההתחלה',
   alternate: 'לא זוהתה החלפה לרגל השנייה',
   unfinished: 'התנועה הייתה עדיין באמצע בסיום',
@@ -23,7 +22,6 @@ export const FEEDBACK = {
   knees: 'בַּסְּקְוָואט, הַבִּרְכַּיִם נָעוֹת בְּכִוּוּן אֶצְבְּעוֹת הָרַגְלַיִם. נֵרֵד בְּנוֹחוּת וְנַעֲלֶה בְּנַחַת.',
   fast: 'נְנַסֶּה לָנוּעַ בְּנַחַת, כְּדֵי שֶׁהַמַּצְלֵמָה תַּסְפִּיק לִרְאוֹת אֶת כָּל הַתְּנוּעָה.',
   tracking: 'הַמַּצְלֵמָה לֹא רוֹאָה בְּבֵרוּר. נַחֲזֹר לַמָּקוֹם הַמְּסֻמָּן. אִם לֹא בָּרוּר, נִשְׁאַל מְבֻגָּר.',
-  framing: 'נַחֲזֹר לַמִּסְגֶּרֶת. הַמַּצְלֵמָה צְרִיכָה לִרְאוֹת אֶת הַמִּפְרָקִים שֶׁל הַתַּרְגִּיל.',
   timeout: 'נַעֲצֹר לְרֶגַע וְנַחֲזֹר לַעֲמִידַת הַהַתְחָלָה. אִם לֹא בָּרוּר, נִשְׁאַל מְבֻגָּר.',
   alternate: 'בְּבִרְכַּיִם גְּבוֹהוֹת מַרְמִים רֶגֶל אַחַת, מוֹרִידִים, וְאָז מַחֲלִיפִים רֶגֶל.',
   unfinished: 'הַתְּנוּעָה עוֹד לֹא הִסְתַּיְּמָה.',
@@ -49,45 +47,25 @@ export function thresholds({ age = 7, height = 120 } = {}) {
     pushStart: 145, pushDown: 100, pushUp: 160, bodyStraight: 150,
     bridgeStart: 145, bridgeUp: 165, bridgeDown: 135, bridgeArch: .15, formHold: 200 };
 }
-const BODY = [0, 7, 8, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
-// Feet are small and often occluded by each other. Keep confident ankles, but
-// accept weaker heel/toe confidence. A separate grace period handles flicker.
-export const FRAMING = { coreConfidence: .65, footConfidence: .35, margin: .01, headroom: .08,
-  bodySpan: .26, shoulderWidth: .025, hipWidth: .012 };
-const CORE = [11, 12, 23, 24, 25, 26, 27, 28];
-export function requiredPoints(exercise, side = 0) {
-  if (exercise === 'full-body') return BODY;
-  if (exercise === 'placement') return [0, ...CORE];
-  if (!FLOOR.includes(exercise)) return exercise === 'jumping-jacks' ? [...CORE, 13, 14] : CORE;
-  const ids = exercise === 'push-ups' ? [11, 13, 15, 23, 27] :
-    exercise === 'knee-push-ups' ? [11, 13, 15, 23, 25] : [11, 23, 25];
-  return ids.map(i => i + side);
-}
-export function pointFailures(p, i) {
-  const failures = [], confidence = i >= 29 ? FRAMING.footConfidence : FRAMING.coreConfidence;
-  if (!p || !Number.isFinite(p.x) || !Number.isFinite(p.y)) return [{ reason: 'coordinates', point: i }];
-  if (!(p.visibility >= confidence)) failures.push({ reason: 'visibility', point: i });
-  if (p.presence != null && !(p.presence >= confidence)) failures.push({ reason: 'presence', point: i });
-  if (!(p.x > FRAMING.margin && p.x < 1 - FRAMING.margin && p.y > FRAMING.margin && p.y < 1 - FRAMING.margin)) {
-    failures.push({ reason: 'margin', point: i });
-  }
-  return failures;
-}
-function headY(p) {
-  const heads = [0, 7, 8].filter(i => !pointFailures(p[i], i).length).map(i => p[i].y);
-  const average = ids => {
-    const ys = ids.map(i => p[i]?.y).filter(Number.isFinite);
-    return ys.length ? ys.reduce((a, b) => a + b, 0) / ys.length : 0;
-  };
-  const shoulder = average([11, 12]);
-  return heads.length ? Math.min(...heads) : shoulder - Math.abs(average([23, 24]) - shoulder) * .6;
-}
+const SIDES = [[11, 13, 15, 23, 25, 27], [12, 14, 16, 24, 26, 28]];
+// A complete side is an alternative, never a mixture of left and right joints.
+export const REQUIRED_POINTS = {
+  squats: { left: [11, 23, 25, 27], right: [12, 24, 26, 28] },
+  'high-knees': { left: [11, 23, 25, 27], right: [12, 24, 26, 28] },
+  lunges: { left: [11, 23, 25, 27], right: [12, 24, 26, 28] },
+  'jumping-jacks': { left: [11, 13, 23, 25, 27], right: [12, 14, 24, 26, 28] },
+  'push-ups': { left: [11, 13, 15, 23, 27], right: [12, 14, 16, 24, 28] },
+  'knee-push-ups': { left: [11, 13, 15, 23, 25], right: [12, 14, 16, 24, 26] },
+  'glute-bridge': { left: [11, 23, 25], right: [12, 24, 26] },
+};
+export const FRAMING = { coreConfidence: .45, footConfidence: .30, observationConfidence: .30,
+  margin: 0, headroom: .05, minSpan: .24, pointHoldMs: 400 };
 export const DIAGNOSTIC_LABELS = {
   missing: 'לא זוהה גוף', coordinates: 'נקודה לא ברורה', visibility: 'נקודה מוסתרת',
-  presence: 'זיהוי נקודה חלש', margin: 'נקודה קרובה לשולי התמונה', headroom: 'חסר מקום מעל הראש',
-  bodySpan: 'הגוף קטן מדי בתמונה', shoulderWidth: 'הכתפיים צרות מדי בתמונה',
-  frontRatio: 'הגוף אינו מול המצלמה', hipWidth: 'האגן צר מדי בתמונה',
-  floorView: 'תרגיל הרצפה אינו במבט צד ברור',
+  presence: 'זיהוי נקודה חלש', margin: 'נקודה מחוץ לתמונה', headroom: 'חסר מקום מעל הראש',
+  bodySpan: 'הגוף קטן בתמונה', shoulderWidth: 'הכתפיים צרות בתמונה',
+  frontRatio: 'מומלץ לפנות למצלמה', hipWidth: 'האגן צר בתמונה',
+  floorView: 'תרגיל הרצפה אינו במבט צד ברור', held: 'נקודות נשמרו מפריים קודם',
 };
 export const POINT_LABELS = {
   0: 'אף', 7: 'אוזן שמאל', 8: 'אוזן ימין', 11: 'כתף שמאל', 12: 'כתף ימין',
@@ -96,106 +74,147 @@ export const POINT_LABELS = {
   27: 'קרסול שמאל', 28: 'קרסול ימין', 29: 'עקב שמאל', 30: 'עקב ימין',
   31: 'אצבעות רגל שמאל', 32: 'אצבעות רגל ימין',
 };
-// Only failure codes and point IDs leave this function, never coordinates.
-// Several failures can occur in one frame; each cause/point is counted once.
-export function bodyReport(points, aspect = 1, exercise = 'squats', { movement = false } = {}) {
-  const failures = [];
-  if (!points || points.length < 33) return { ok: false, failures: [{ reason: 'missing' }], required: requiredPoints(exercise) };
-  const floor = FLOOR.includes(exercise);
-  // A side view hides the far limbs. Require one COMPLETE confident side,
-  // never splice the visible elbow from one side with the hip from the other.
-  const sides = [requiredPoints(exercise, 0), requiredPoints(exercise, 1)];
-  const quality = ids => Math.min(...ids.map(i => {
-    const p = points[i], confidence = i >= 29 ? FRAMING.footConfidence : FRAMING.coreConfidence;
-    if (!p || !Number.isFinite(p.x) || !Number.isFinite(p.y) || p.x <= FRAMING.margin || p.x >= 1 - FRAMING.margin ||
-      p.y <= FRAMING.margin || p.y >= 1 - FRAMING.margin) return 0;
-    return Math.min(p.visibility || 0, p.presence ?? 1) / confidence;
-  }));
-  const side = quality(sides[0]) >= quality(sides[1]) ? 0 : 1;
-  const required = floor ? sides[side] : requiredPoints(exercise);
-  for (const i of required) failures.push(...pointFailures(points[i], i));
-  if (floor) {
-    if (!failures.some(f => f.reason === 'coordinates')) {
-      const xs = required.map(i => points[i].x), ys = required.map(i => points[i].y);
-      if (!movement && Math.hypot((Math.max(...xs) - Math.min(...xs)) * aspect, Math.max(...ys) - Math.min(...ys)) < FRAMING.bodySpan) {
-        failures.push({ reason: 'bodySpan' });
-      }
-      const s = 11 + side, h = 23 + side;
-      if (Math.abs(points[s].x - points[h].x) * aspect < Math.abs(points[s].y - points[h].y) * .5) {
-        failures.push({ reason: 'floorView' });
-      }
-    }
-  } else if (!movement && !failures.some(f => f.reason === 'coordinates')) {
-    const torso = Math.abs((points[23].y + points[24].y - points[11].y - points[12].y) / 2);
-    const head = headY(points);
-    const top = head - torso * (exercise === 'full-body' ? .2 : FRAMING.headroom);
-    const span = Math.max(points[27].y, points[28].y) - head;
-    const shoulder = Math.abs(points[11].x - points[12].x);
-    // Head clearance is setup guidance; it must not discard a squat/jack frame.
-    if (['placement', 'full-body'].includes(exercise) && !(top > FRAMING.margin)) failures.push({ reason: 'headroom' });
-    if (!(span >= (exercise === 'full-body' ? .4 : FRAMING.bodySpan))) failures.push({ reason: 'bodySpan' });
-    if (shoulder < (exercise === 'full-body' ? .06 : FRAMING.shoulderWidth)) failures.push({ reason: 'shoulderWidth' });
-    if (!(torso > 0 && Number.isFinite(aspect) && aspect > 0 && shoulder * aspect / torso >= .45)) {
-      failures.push({ reason: 'frontRatio' });
-    }
-    if (Math.abs(points[23].x - points[24].x) < (exercise === 'full-body' ? .025 : FRAMING.hipWidth)) failures.push({ reason: 'hipWidth' });
+const confidence = p => Math.min(Number.isFinite(p?.visibility) ? p.visibility : 0, p?.presence ?? 1);
+const imageCoordinates = p => p && Number.isFinite(p.x) && Number.isFinite(p.y);
+const inImage = p => imageCoordinates(p) && p.x >= 0 && p.x <= 1 && p.y >= 0 && p.y <= 1;
+const goodPoint = (p, limit = FRAMING.coreConfidence) => inImage(p) && confidence(p) >= limit;
+const finiteWorld = p => p && ['x', 'y', 'z'].every(key => Number.isFinite(p[key]));
+const requiredIds = exercise => [...new Set(Object.values(REQUIRED_POINTS[exercise] || REQUIRED_POINTS.squats).flat())];
+const finiteValues = values => values.filter(Number.isFinite);
+const maxValue = values => finiteValues(values).length ? Math.max(...finiteValues(values)) : null;
+const minValue = values => finiteValues(values).length ? Math.min(...finiteValues(values)) : null;
+
+// report.ok describes the movement dependencies. Placement warnings never stop
+// an otherwise observable exercise; floor orientation is a movement safeguard.
+export function bodyReport(points, aspect = 1, exercise = 'squats') {
+  const p = points || [], failures = [], warnings = [];
+  const sets = Object.values(REQUIRED_POINTS[exercise] || REQUIRED_POINTS.squats);
+  const scores = sets.map(ids => ids.reduce((sum, i) => sum + (goodPoint(p[i]) ? 2 : confidence(p[i])), 0) / ids.length);
+  const side = scores[0] >= scores[1] ? 0 : 1, required = sets[side];
+  const availableSides = sets.map(ids => ids.every(i => goodPoint(p[i])));
+  if (!p.length) failures.push({ reason: 'missing' });
+  else for (const i of required) {
+    if (!imageCoordinates(p[i])) { failures.push({ reason: 'coordinates', point: i }); continue; }
+    if (!(p[i].visibility >= FRAMING.coreConfidence)) failures.push({ reason: 'visibility', point: i });
+    if (p[i].presence != null && !(p[i].presence >= FRAMING.coreConfidence)) failures.push({ reason: 'presence', point: i });
+    if (!inImage(p[i])) failures.push({ reason: 'margin', point: i });
   }
-  return { ok: failures.length === 0, failures, side, required };
+  const [s, , , h, k, a] = SIDES[side];
+  const visible = p.filter(q => goodPoint(q)), xs = visible.map(q => q.x), ys = visible.map(q => q.y);
+  const head = minValue([0, 7, 8].filter(i => goodPoint(p[i])).map(i => p[i].y));
+  const ankle = maxValue([27, 28].filter(i => goodPoint(p[i])).map(i => p[i].y));
+  const torso = imageCoordinates(p[s]) && imageCoordinates(p[h]) ? Math.hypot((p[s].x - p[h].x) * aspect, p[s].y - p[h].y) : 0;
+  const span = FLOOR.includes(exercise) ? (visible.length ? Math.hypot((Math.max(...xs) - Math.min(...xs)) * aspect, Math.max(...ys) - Math.min(...ys)) : 0) :
+    head != null && ankle != null ? ankle - head : imageCoordinates(p[s]) && imageCoordinates(p[a]) ? (p[a].y - p[s].y) / .8 : torso * 3;
+  if (span < FRAMING.minSpan) warnings.push({ reason: 'bodySpan' });
+  if (head != null && head - torso * FRAMING.headroom < 0) warnings.push({ reason: 'headroom' });
+  if (!FLOOR.includes(exercise) && goodPoint(p[11]) && goodPoint(p[12])) {
+    const shoulder = Math.abs(p[11].x - p[12].x);
+    if (shoulder < .03) warnings.push({ reason: 'shoulderWidth' });
+    if (torso > 0 && shoulder * aspect / torso < .30) warnings.push({ reason: 'frontRatio' });
+  }
+  if (FLOOR.includes(exercise) && imageCoordinates(p[s]) && imageCoordinates(p[h]) &&
+      Math.abs(p[s].x - p[h].x) * aspect < Math.abs(p[s].y - p[h].y) * .5) failures.push({ reason: 'floorView' });
+  return { ok: failures.length === 0, failures, warnings, side, required, availableSides, span };
 }
-export function fullBody(points, aspect = 1) {
-  // Compatibility utility for the original all-landmarks regressions.
-  // Runtime setup/counting use bodyReport with their explicit purpose.
-  return bodyReport(points, aspect, 'full-body').ok;
-}
+export function fullBody(points, aspect = 1) { return bodyReport(points, aspect).ok; }
+
 export function features(points, world, aspect = 1, report = bodyReport(points, aspect)) {
   if (!report.ok) return null;
-  const p = points;
-  const span = Math.max(p[27]?.y ?? 0, p[28]?.y ?? 0) - headY(p);
-  const shoulder = Math.abs((p[11]?.x ?? 0) - (p[12]?.x ?? 0));
-  const hip = Math.abs((p[23]?.x ?? 0) - (p[24]?.x ?? 0));
-  // World points preserve squat flexion in a front view; image-space knee angles do not.
-  const usableWorld = world?.length >= 33 && [23, 24, 25, 26, 27, 28].every(i =>
-    world[i] && ['x', 'y', 'z'].every(k => Number.isFinite(world[i][k])));
-  const kneeAngles = usableWorld ? [angle(world[23], world[25], world[27]), angle(world[24], world[26], world[28])] : [];
-  const depthDifference = usableWorld ? (world[27].z - world[23].z) - (world[28].z - world[24].z) : null;
-  const ankleWidth = Math.abs((p[27]?.x ?? 0) - (p[28]?.x ?? 0));
-  const kneeWidth = Math.abs((p[25]?.x ?? 0) - (p[26]?.x ?? 0));
-  const [s, e, w, h, k, a] = report.side === 1 ? [12, 14, 16, 24, 26, 28] : [11, 13, 15, 23, 25, 27];
-  const worldAngle = ids => world?.length >= 33 && ids.every(i => world[i] && ['x', 'y', 'z'].every(key => Number.isFinite(world[i][key]))) ?
-    angle(...ids.map(i => world[i])) : NaN;
+  const p = points, [s, e, w, h, k, a] = SIDES[report.side];
+  const point = i => goodPoint(p[i]);
+  const worldAngle = ids => ids.every(i => point(i) && finiteWorld(world?.[i])) ? angle(...ids.map(i => world[i])) : NaN;
   const finite = n => Number.isFinite(n) ? n : null;
+  const knees = SIDES.map(([, , , hip, knee, ankle]) => finite(worldAngle([hip, knee, ankle])));
+  const visibleSides = report.availableSides || [true, true];
+  const span = Math.max(.001, report.span || 0);
   const torsoLength = Math.hypot((p[s].x - p[h].x) * aspect, p[s].y - p[h].y);
-  const lineY = p[k] && p[k].x !== p[s].x ? p[s].y + (p[k].y - p[s].y) * (p[h].x - p[s].x) / (p[k].x - p[s].x) : p[h].y;
-  const torsoWorld = [11, 12, 23, 24].every(i => world?.[i] && ['x', 'y', 'z'].every(key => Number.isFinite(world[i][key])));
-  const torsoDelta = key => world[11][key] + world[12][key] - world[23][key] - world[24][key];
-  const arms = [[11, 13, 15], [12, 14, 16]].map(([s, e, w]) => {
-    if (!p[s] || !Number.isFinite(p[s].y)) return { up: false, down: false, rise: 0 };
-    const torso = Math.abs((p[23]?.y ?? p[h].y) - p[s]?.y);
-    if (!pointFailures(p[w], w).length) return { up: p[w].y < headY(p),
-      down: p[w].y >= p[s].y - span * .015, rise: (p[s].y - p[w].y) / span };
-    if (!pointFailures(p[e], e).length) return { up: p[e].y < p[s].y - torso * .25,
-      down: p[e].y > p[s].y + torso * .15, rise: (p[s].y - p[e].y) / span };
-    return { up: false, down: false, rise: 0 };
-  });
-  return {
-    squat: kneeAngles.length && kneeAngles.every(Number.isFinite) ? Math.max(...kneeAngles) : null,
-    lunge: kneeAngles.length && kneeAngles.every(Number.isFinite) ? Math.min(...kneeAngles) : null,
-    lungeDepthDifference: depthDifference,
-    leftKnee: kneeAngles[0] ?? null, rightKnee: kneeAngles[1] ?? null,
-    elbow: finite(worldAngle([s, e, w])),
-    bodyLine: finite(worldAngle([s, h, a])), kneeBodyLine: finite(worldAngle([s, h, k])),
-    bridge: finite(worldAngle([s, h, k])),
-    arch: torsoLength > 0 ? (lineY - p[h].y) / torsoLength : 0,
-    lean: torsoWorld ? Math.hypot(torsoDelta('x'), torsoDelta('z')) / Math.max(.001, Math.abs(torsoDelta('y'))) : null,
-    kneeIn: ankleWidth > hip * .85 && kneeWidth < ankleWidth * .60 && kneeWidth < hip * .85,
-    feet: shoulder ? ankleWidth / shoulder : 0,
-    armsUp: arms.every(a => a.up),
-    // Relaxed arms need not touch the torso; allow 1.5% of body span above shoulders.
-    armsDown: arms.every(a => a.down),
-    wristRise: Math.min(...arms.map(a => a.rise)),
-    leftRise: span > 0 && p[25] ? (p[23].y - p[25].y) / span : 0,
-    rightRise: span > 0 && p[26] ? (p[24].y - p[26].y) / span : 0,
+  const shoulder = point(11) && point(12) && Math.abs(p[11].x - p[12].x) > .03 ? Math.abs(p[11].x - p[12].x) : torsoLength * .8;
+  const hip = point(23) && point(24) ? Math.abs(p[23].x - p[24].x) : null;
+  const ankleWidth = point(27) && point(28) ? Math.abs(p[27].x - p[28].x) : null;
+  const kneeWidth = point(25) && point(26) ? Math.abs(p[25].x - p[26].x) : null;
+  const arm = ([shoulderId, elbowId, wristId]) => {
+    const hasWrist = point(wristId) && !p[wristId].held, hasElbow = point(elbowId);
+    // A wrist beyond the frame is never a required point for jumping jacks.
+    const up = hasWrist ? p[wristId].y < (point(0) ? p[0].y : p[shoulderId].y - torsoLength * .5) : hasElbow && p[elbowId].y < p[shoulderId].y;
+    const down = hasWrist ? p[wristId].y >= p[shoulderId].y - span * .015 : hasElbow && p[elbowId].y >= p[shoulderId].y;
+    const rise = hasWrist ? (p[shoulderId].y - p[wristId].y) / span : hasElbow ? (p[shoulderId].y - p[elbowId].y) / span : null;
+    return { up, down, rise };
   };
+  const arms = SIDES.map(([shoulderId, elbowId, wristId], i) => visibleSides[i] ? arm([shoulderId, elbowId, wristId]) : null).filter(Boolean);
+  const lineY = point(k) && p[k].x !== p[s].x ? p[s].y + (p[k].y - p[s].y) * (p[h].x - p[s].x) / (p[k].x - p[s].x) : p[h].y;
+  const torsoWorld = finiteWorld(world?.[s]) && finiteWorld(world?.[h]);
+  const depth = SIDES.map(([, , , hipId, , ankleId]) => point(hipId) && point(ankleId) && finiteWorld(world?.[hipId]) && finiteWorld(world?.[ankleId]) ? world[ankleId].z - world[hipId].z : null);
+  return {
+    squat: maxValue(knees), lunge: minValue(knees), leftKnee: knees[0], rightKnee: knees[1],
+    lungeDepthDifference: depth.every(v => v != null) ? depth[0] - depth[1] : null,
+    leftDepth: depth[0], rightDepth: depth[1],
+    elbow: finite(worldAngle([s, e, w])), bodyLine: finite(worldAngle([s, h, a])),
+    kneeBodyLine: finite(worldAngle([s, h, k])), bridge: finite(worldAngle([s, h, k])),
+    arch: torsoLength > 0 ? (lineY - p[h].y) / torsoLength : 0,
+    lean: torsoWorld ? Math.hypot(world[s].x - world[h].x, world[s].z - world[h].z) / Math.max(.001, Math.abs(world[s].y - world[h].y)) : null,
+    kneeIn: ankleWidth != null && kneeWidth != null && hip != null && ankleWidth > hip * .85 && kneeWidth < ankleWidth * .60 && kneeWidth < hip * .85,
+    feet: shoulder > 0 ? (ankleWidth ?? (point(a) ? (Math.abs(p[a].x - p[h].x) + shoulder * .30) * 2 : 0)) / shoulder : null,
+    armsUp: arms.length > 0 && arms.every(arm => arm.up), armsDown: arms.length > 0 && arms.every(arm => arm.down),
+    wristRise: minValue(arms.map(arm => arm.rise)),
+    leftRise: visibleSides[0] && point(23) && point(25) ? (p[23].y - p[25].y) / span : null,
+    rightRise: visibleSides[1] && point(24) && point(26) ? (p[24].y - p[26].y) / span : null,
+  };
+}
+
+// Confidence EMA and confidence-weighted coordinate EMA share the exact path
+// in live calibration, counting and replay. Raw records remain untouched.
+export class PoseFilter {
+  constructor(exercise = 'squats', options = {}) { this.exercise = exercise; this.t = options; this.reset(); }
+  reset() { this.lastTime = null; this.imageCache = []; this.worldCache = []; this.confidences = []; }
+  update(points, world, time, aspect = 1) {
+    const step = this.lastTime == null ? 50 : Math.max(0, time - this.lastTime);
+    this.lastTime = time;
+    const smoothing = this.t.smoothing || 80, holdMs = Math.min(FRAMING.pointHoldMs, this.t.trackingGrace || FRAMING.pointHoldMs);
+    const coordinateK = 1 - Math.exp(-Math.min(step || 50, 200) / (smoothing / 2));
+    const confidenceK = 1 - Math.exp(-Math.min(step || 50, 200) / (smoothing * 1.5));
+    const observed = [], held = [], observedWorld = [], filtered = [], filteredWorld = [];
+    for (let i = 0; i < 33; i++) {
+      const raw = points?.[i], q = inImage(raw) ? confidence(raw) : 0;
+      this.confidences[i] = this.confidences[i] == null ? q : this.confidences[i] + confidenceK * (q - this.confidences[i]);
+      observed[i] = inImage(raw) && q >= FRAMING.observationConfidence;
+      if (observed[i]) {
+        const previous = this.imageCache[i], blend = previous && time - previous.time <= holdMs ? coordinateK * clamp(q, .1, 1) : 1;
+        const value = { x: raw.x, y: raw.y, z: Number.isFinite(raw.z) ? raw.z : 0 };
+        if (previous) for (const key of ['x', 'y', 'z']) value[key] = previous.value[key] + blend * (value[key] - previous.value[key]);
+        this.imageCache[i] = { value, time, confidence: this.confidences[i] };
+      }
+      const cached = this.imageCache[i];
+      held[i] = !observed[i] && !!cached && time - cached.time <= holdMs;
+      if (cached && time - cached.time <= holdMs) {
+        // A clearly observed returning point is usable immediately. A decayed
+        // confidence EMA must not extend an otherwise bounded dropout.
+        const currentConfidence = Math.max(cached.confidence, observed[i] ? Math.min(q, FRAMING.coreConfidence) : 0);
+        filtered[i] = { ...cached.value, visibility: currentConfidence, presence: currentConfidence, held: held[i] };
+      }
+      observedWorld[i] = observed[i] && finiteWorld(world?.[i]);
+      if (observedWorld[i]) {
+        const previous = this.worldCache[i], blend = previous && time - previous.time <= holdMs ? coordinateK * clamp(q, .1, 1) : 1;
+        const value = { x: world[i].x, y: world[i].y, z: world[i].z };
+        if (previous) for (const key of ['x', 'y', 'z']) value[key] = previous.value[key] + blend * (value[key] - previous.value[key]);
+        this.worldCache[i] = { value, time };
+      }
+      const cachedWorld = this.worldCache[i];
+      if (cachedWorld && time - cachedWorld.time <= holdMs) filteredWorld[i] = { ...cachedWorld.value };
+    }
+    let report = bodyReport(filtered, aspect, this.exercise);
+    const sides = Object.values(REQUIRED_POINTS[this.exercise]);
+    const currentSide = sides.findIndex(ids => ids.every(i => observed[i] && goodPoint(filtered[i])));
+    if (report.ok && !report.required.every(i => observed[i]) && currentSide >= 0) {
+      report = { ...report, side: currentSide, required: sides[currentSide] };
+    }
+    const f = features(filtered, filteredWorld, aspect, report);
+    const needsWorld = !['jumping-jacks', 'high-knees'].includes(this.exercise);
+    const worldIds = this.exercise === 'squats' ? report.required.filter(i => i >= 23) : report.required;
+    const fresh = report.ok && report.required.every(i => observed[i]) && (!needsWorld || worldIds.every(i => observedWorld[i]));
+    const usable = report.ok && !worldRequired(this.exercise, f);
+    return { points: filtered, world: filteredWorld, report, features: f, observed, held, observedWorld, usable, fresh: usable && fresh };
+  }
 }
 
 // The start button and counter use the SAME exercise-specific rest condition.
@@ -206,7 +225,7 @@ export function atRest(exercise, f, t) {
   if (exercise === 'lunges') return f.lunge != null && f.lunge > t.lungeUp;
   if (exercise === 'push-ups' || exercise === 'knee-push-ups') return f.elbow != null && f.elbow > t.pushUp;
   if (exercise === 'glute-bridge') return f.bridge != null && f.bridge < t.bridgeDown;
-  return Math.max(f.leftRise, f.rightRise) < t.kneeRest;
+  return maxValue([f.leftRise, f.rightRise]) != null && maxValue([f.leftRise, f.rightRise]) < t.kneeRest;
 }
 export function statusCode(report, phase, worldMissing = false) {
   if (!report.ok) {
@@ -237,14 +256,14 @@ export class RepCounter {
   begin(time = null, armed = false) {
     this.count = 0; this.rejected = 0; this.reasons = {}; this.lastSide = null;
     this.lastTime = time; this.lastGoodTime = time; this.lostSince = null; this.lossReset = false;
-    this.ended = false;
+    this.ended = false; this.trackingCause = null; this.filter = new PoseFilter(this.exercise, this.t);
     this.diagnostics = { frames: 0, fullBodyPassed: 0, fullBodyFailed: 0,
       failureFrames: Object.fromEntries(Object.keys(DIAGNOSTIC_LABELS).map(k => [k, 0])), failedPoints: {},
-      requiredPointFrames: {}, requiredPointPassed: {},
-      rejectedBy: { framing: 0, motionThreshold: 0, tracking: 0, other: 0 },
       worldMissingFrames: 0, phaseMs: { waiting: 0, armed: 0, moving: 0 },
       idleTrackingResets: 0, trackingResets: 0, graceRecoveries: 0,
-      cyclesStarted: 0, restFrames: 0, startFrames: 0, targetFrames: 0 };
+      cyclesStarted: 0, restFrames: 0, startFrames: 0, targetFrames: 0, heldFrames: 0,
+      requiredPoints: Object.fromEntries(requiredIds(this.exercise).map(i => [i, { observedFrames: 0, heldFrames: 0, usableFrames: 0 }])),
+      stopReasons: {}, warningFrames: {}, rejectedBy: { framing: 0, motionThreshold: 0, tracking: 0, other: 0 } };
     this.reset(); if (armed) this.phase = 'armed';
     this.status = this.phase;
   }
@@ -254,15 +273,17 @@ export class RepCounter {
   }
   reject(reason) {
     this.rejected++; this.reasons[reason] = (this.reasons[reason] || 0) + 1;
-    this.diagnostics.rejectedBy[reason === 'framing' ? 'framing' : reason === 'partial' ? 'motionThreshold' :
-      reason === 'tracking' ? 'tracking' : 'other']++;
+    const category = reason === 'partial' ? 'motionThreshold' : reason === 'tracking' ? (this.trackingCause === 'framing' ? 'framing' : 'tracking') : 'other';
+    this.diagnostics.rejectedBy[category]++;
     return { type: 'rejected', reason };
   }
   snapshot() {
-    const d = this.diagnostics;
-    return { ...structuredClone(d), fullBodyPercent: d.frames ? 100 * d.fullBodyPassed / d.frames : 0,
-      requiredPointPercent: Object.fromEntries(Object.keys(d.requiredPointFrames).map(i =>
-        [i, 100 * (d.requiredPointPassed[i] || 0) / d.requiredPointFrames[i]])) };
+    const d = structuredClone(this.diagnostics);
+    for (const point of Object.values(d.requiredPoints)) {
+      point.observedPercent = d.frames ? 100 * point.observedFrames / d.frames : 0;
+      point.heldPercent = d.frames ? 100 * point.heldFrames / d.frames : 0;
+    }
+    return { ...d, fullBodyPercent: d.frames ? 100 * d.fullBodyPassed / d.frames : 0 };
   }
   finish(time = this.lastTime) {
     if (this.ended) return null;
@@ -274,9 +295,10 @@ export class RepCounter {
   }
   resetTracking(reason = 'tracking') {
     this.diagnostics.trackingResets++;
-    const event = this.cycle ? this.reject(reason) : null;
+    this.diagnostics.stopReasons[reason] = (this.diagnostics.stopReasons[reason] || 0) + 1;
+    const event = this.cycle ? this.reject('tracking') : null;
     if (!this.cycle) this.diagnostics.idleTrackingResets++;
-    this.reset(); this.lossReset = true; return event;
+    this.reset(); this.filter?.reset(); this.lossReset = true; return event;
   }
   update(points, world, time, aspect = 1) {
     if (this.ended || !Number.isFinite(time) || (this.lastTime != null && time <= this.lastTime)) return null;
@@ -285,35 +307,43 @@ export class RepCounter {
     this.lastTime = time;
     let event = null;
     if (gap > this.t.maxGap && !this.lossReset) event = this.resetTracking();
-    // Apparent size/front projection can shrink during a squat. Placement and
-    // rearming check geometry; an armed cycle requires its actual joints only.
-    const report = bodyReport(points, aspect, this.exercise, { movement: this.phase !== 'waiting' });
+    const rawReport = bodyReport(points, aspect, this.exercise);
+    this.filter.t = this.t;
+    const filtered = this.filter.update(points, world, time, aspect);
+    const { report, features: raw } = filtered;
     const d = this.diagnostics;
-    d.frames++; if (report.ok) d.fullBodyPassed++; else d.fullBodyFailed++;
-    for (const i of report.required) {
-      d.requiredPointFrames[i] = (d.requiredPointFrames[i] || 0) + 1;
-      if (!pointFailures(points?.[i], i).length) d.requiredPointPassed[i] = (d.requiredPointPassed[i] || 0) + 1;
-    }
-    for (const reason of new Set(report.failures.map(f => f.reason))) d.failureFrames[reason]++;
-    for (const { reason, point } of report.failures) {
+    d.frames++; if (rawReport.ok) d.fullBodyPassed++; else d.fullBodyFailed++;
+    for (const reason of new Set(rawReport.failures.map(f => f.reason))) d.failureFrames[reason]++;
+    for (const { reason, point } of rawReport.failures) {
       if (point == null) continue;
       d.failedPoints[reason] ??= {};
       d.failedPoints[reason][point] = (d.failedPoints[reason][point] || 0) + 1;
     }
-    const raw = features(points, world, aspect, report);
-    const worldMissing = report.ok && worldRequired(this.exercise, raw);
+    for (const reason of new Set(rawReport.warnings.map(f => f.reason))) d.warningFrames[reason] = (d.warningFrames[reason] || 0) + 1;
+    for (const [id, diagnostic] of Object.entries(d.requiredPoints)) {
+      if (filtered.observed[id]) diagnostic.observedFrames++;
+      if (filtered.held[id]) diagnostic.heldFrames++;
+      if (goodPoint(filtered.points[id])) diagnostic.usableFrames++;
+    }
+    if (report.required.some(id => filtered.held[id])) d.heldFrames++;
+    const worldMissing = report.ok && (worldRequired(this.exercise, raw) ||
+      (!['jumping-jacks', 'high-knees'].includes(this.exercise) && report.required.some(i =>
+        (this.exercise !== 'squats' || i >= 23) && !filtered.observedWorld[i])));
     if (worldMissing) d.worldMissingFrames++;
-    if (!raw || worldMissing) {
+    // Held coordinates maintain continuity only. They cannot arm, finish a
+    // target dwell, complete a repetition or satisfy the minimum cycle time.
+    if (!filtered.fresh) {
       this.lostSince ??= this.lastGoodTime ?? time;
-      // Keep the outage cause for the first good frame after a long dropout.
-      this.lossReason = report.ok || report.failures.some(f => f.reason === 'missing') ? 'tracking' : 'framing';
-      if (time - this.lostSince > this.t.trackingGrace && !this.lossReset) event = this.resetTracking(this.lossReason);
-      this.status = statusCode(report, this.phase, worldMissing);
+      this.trackingCause = points?.length && !rawReport.ok ? 'framing' : 'tracking';
+      if (time - this.lostSince > this.t.trackingGrace && !this.lossReset) event = this.resetTracking();
+      this.status = statusCode(rawReport, this.phase, worldMissing);
+      const reason = !points?.length ? 'missing' : !rawReport.ok ? rawReport.failures[0].reason : worldMissing ? 'world' : 'held';
+      d.stopReasons[reason] = (d.stopReasons[reason] || 0) + 1;
       return event || { type: 'tracking' };
     }
     if (this.lostSince != null) {
       const lostMs = time - this.lostSince;
-      if (lostMs > this.t.trackingGrace && !this.lossReset) event = this.resetTracking(this.lossReason);
+      if (lostMs > this.t.trackingGrace && !this.lossReset) event = this.resetTracking();
       if (!this.lossReset) {
         // Unknown frames preserve state but never satisfy dwell/minimum cycle time.
         for (const key of ['restSince', 'targetSince', 'kneeSince', 'formSince']) if (this[key] != null) this[key] += lostMs;
@@ -321,18 +351,21 @@ export class RepCounter {
         d.graceRecoveries++;
       }
     }
-    this.lostSince = null; this.lossReset = false; this.lastGoodTime = time;
+    this.lostSince = null; this.lossReset = false; this.lastGoodTime = time; this.trackingCause = null;
     const k = 1 - Math.exp(-Math.min(gap || 50, 150) / this.t.smoothing);
     if (!this.smoothed) this.smoothed = { ...raw };
     else for (const key of ['squat', 'lunge', 'elbow', 'bridge', 'feet', 'wristRise', 'leftRise', 'rightRise']) {
-      if (raw[key] != null) this.smoothed[key] += k * (raw[key] - this.smoothed[key]);
+      if (raw[key] == null || this.smoothed[key] == null) this.smoothed[key] = raw[key];
+      else this.smoothed[key] += k * (raw[key] - this.smoothed[key]);
     }
     const f = { ...raw, ...this.smoothed, armsUp: raw.armsUp, armsDown: raw.armsDown, kneeIn: raw.kneeIn };
     const t = this.t;
-    const side = this.exercise === 'lunges' ? raw.lungeDepthDifference < -t.lungeDepth ? 'left' :
-      raw.lungeDepthDifference > t.lungeDepth ? 'right' : null : f.leftRise >= f.rightRise ? 'left' : 'right';
+    const side = this.exercise === 'lunges' ? raw.lungeDepthDifference != null ?
+      raw.lungeDepthDifference < -t.lungeDepth ? 'left' : raw.lungeDepthDifference > t.lungeDepth ? 'right' : null :
+      raw.leftDepth != null && raw.leftDepth < -t.lungeDepth ? 'left' : raw.rightDepth != null && raw.rightDepth < -t.lungeDepth ? 'right' : null :
+      f.leftRise != null && (f.rightRise == null || f.leftRise >= f.rightRise) ? 'left' : f.rightRise != null ? 'right' : null;
     const alternating = ['high-knees', 'lunges'].includes(this.exercise);
-    const rise = Math.max(f.leftRise, f.rightRise);
+    const rise = maxValue([f.leftRise, f.rightRise]);
     const rest = atRest(this.exercise, f, t);
     let start, target;
     if (this.exercise === 'squats') {
@@ -349,7 +382,7 @@ export class RepCounter {
       start = f.bridge > t.bridgeStart; target = f.bridge >= t.bridgeUp;
     } else {
       start = rise > t.kneeStart;
-      target = rise > t.kneeRise && Math.min(f.leftRise, f.rightRise) < t.kneeRest;
+      target = rise > t.kneeRise && (f.leftRise == null || f.rightRise == null || minValue([f.leftRise, f.rightRise]) < t.kneeRest);
     }
     if (rest) d.restFrames++; if (start) d.startFrames++; if (target) d.targetFrames++;
     this.status = this.phase;

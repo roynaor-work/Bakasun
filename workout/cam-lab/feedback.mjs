@@ -2,7 +2,7 @@ import { atRest, DIAGNOSTIC_LABELS, POINT_LABELS } from './counter.mjs';
 
 export const STATUS = {
   side: ['בתרגיל רצפה עוברים למבט צד, כך שרואים את אורך הגוף', 'בְּתַרְגִּיל רִצְפָּה עוֹבְרִים לְמַבָּט צַד, כָּךְ שֶׁרוֹאִים אֶת אֹרֶךְ הַגּוּף.'],
-  far: ['המכשיר רחוק מדי — קרבו אותו עד שכל הגוף ברור ונשאר בתוך התמונה', 'הַמַּכְשִׁיר רָחוֹק מִדַּי. קָרְבוּ אוֹתוֹ עַד שֶׁכָּל הַגּוּף בָּרוּר וְנִשְׁאָר בַּתְּמוּנָה.'],
+  far: ['כדאי להתקרב מעט כדי שהנקודות יהיו ברורות יותר; אפשר לספור כשהן מזוהות', 'הַמַּכְשִׁיר רָחוֹק מִדַּי. קָרְבוּ אוֹתוֹ עַד שֶׁכָּל הַגּוּף בָּרוּר וְנִשְׁאָר בַּתְּמוּנָה.'],
   tilt: ['המכשיר נטוי לצד — ישרו אותו ועמדו זקוף לבדיקה', 'הַמַּכְשִׁיר נָטוּי לַצַּד. יַשְּׁרוּ אוֹתוֹ וְעִמְדוּ זָקוּף לַבְּדִיקָה.'],
   pair: ['אבא ואני: עמדו זקוף זה לצד זה, באותו מרחק; צריך הבדל גובה ברור', 'עִמְדוּ זָקוּף זֶה לְצַד זֶה, בְּאוֹתוֹ מֶרְחָק מֵהַמַּצְלֵמָה. צָרִיךְ הֶבְדֵּל גֹּבַהּ בָּרוּר.'],
   ambiguous: ['האנשים חופפים או הזהות לא ברורה — התרחקו מעט זה מזה; הספירה נעצרה', 'הַזֶּהוּת לֹא בְּרוּרָה. הִתְרַחֲקוּ מְעַט זֶה מִזֶּה. הַסְּפִירָה נֶעֶצְרָה.'],
@@ -13,7 +13,7 @@ export const STATUS = {
   head: ['לא רואה את הראש', 'לֹא רוֹאֶה אֶת הָרֹאשׁ.'],
   hands: ['לא רואה את הידיים', 'לֹא רוֹאֶה אֶת הַיָּדַיִם.'],
   front: ['תעמוד מול המצלמה', 'תַּעֲמֹד מוּל הַמַּצְלֵמָה.'],
-  body: ['לא רואה את כל הגוף', 'לֹא רוֹאֶה אֶת כָּל הַגּוּף.'],
+  body: ['לא רואה את הנקודות הדרושות לתרגיל', 'לֹא רוֹאֶה אֶת הַנְּקוּדוֹת הַדְּרוּשׁוֹת לַתַּרְגִּיל.'],
   world: ['לא מזהה את זוויות המפרקים', 'לֹא מְזַהֶה אֶת זָוִיּוֹת הַמִּפְרָקִים.'],
   waiting: ['תעמוד ישר כדי להתחיל', 'תַּעֲמֹד יָשָׁר כְּדֵי לְהַתְחִיל.'],
   armed: ['מוכן, אפשר להתחיל', 'מוּכָן, אֶפְשָׁר לְהַתְחִיל.'],
@@ -56,24 +56,22 @@ export class RestGate {
 
 export function diagnosticLines(d) {
   const lines = [
-    d.frames ? `נקודות החובה במסגרת עברו ב־${d.fullBodyPercent.toFixed(1)}% מהפריימים (${d.fullBodyPassed} מתוך ${d.frames})` : 'לא התקבלו פריימים בזמן הספירה',
-    `חזרות שנפסלו בגלל מסגרת/נקודות חובה: ${d.rejectedBy.framing} · תנועה שלא הגיעה לסף: ${d.rejectedBy.motionThreshold} · אובדן זיהוי/זוויות: ${d.rejectedBy.tracking} · סיבות אחרות: ${d.rejectedBy.other}`,
+    d.frames ? `נקודות החובה זוהו כעת ב־${d.fullBodyPercent.toFixed(1)}% מהפריימים (${d.fullBodyPassed} מתוך ${d.frames})` : 'לא התקבלו פריימים בזמן הספירה',
+    `חזרות שנפסלו בגלל מסגרת/נקודות חובה: ${d.rejectedBy?.framing || 0} · תנועה שלא הגיעה לסף: ${d.rejectedBy?.motionThreshold || 0} · אובדן זיהוי/זוויות: ${d.rejectedBy?.tracking || 0} · סיבות אחרות: ${d.rejectedBy?.other || 0}`,
     `זמן המתנה לעמידה: ${(d.phaseMs.waiting / 1000).toFixed(1)} שניות · מוכן לתנועה: ${(d.phaseMs.armed / 1000).toFixed(1)} שניות · באמצע תנועה: ${(d.phaseMs.moving / 1000).toFixed(1)} שניות`,
     `מחזורים שהתחילו: ${d.cyclesStarted} · איפוסים בגלל אובדן זיהוי לפני מחזור: ${d.idleTrackingResets}`,
     `פריימים בעמידת התחלה: ${d.restFrames} · בתחילת תנועה: ${d.startFrames} · ביעד: ${d.targetFrames}`,
     `אובדני זיהוי קצרים שמהם חזרנו: ${d.graceRecoveries} · איפוסי זיהוי בסך הכול: ${d.trackingResets}`,
-    `פריימים ללא זוויות התרגיל בעולם: ${d.worldMissingFrames}`,
+    `פריימים ללא נקודות עולם נוכחיות וברורות: ${d.worldMissingFrames}`,
   ];
-  const frequent = Object.entries({ ...d.failureFrames, world: d.worldMissingFrames }).sort((a, b) => b[1] - a[1])[0];
-  lines.push(frequent?.[1] ? `הסיבה הנפוצה להמתנה: ${DIAGNOSTIC_LABELS[frequent[0]] || 'זוויות לא ברורות'} — ${frequent[1]} פריימים` : 'כשל מסגרת/זיהוי: 0 פריימים');
-  if (d.frames && !d.startFrames) lines.push('פריימים שעברו את סף תחילת התנועה: 0; לא זוהתה תחילת חזרה');
-  for (const [id, percent] of Object.entries(d.requiredPointPercent)) {
-    lines.push(`${POINT_LABELS[id]} — עברה ב־${percent.toFixed(1)}% (${d.requiredPointPassed[id] || 0}/${d.requiredPointFrames[id]})`);
-  }
+  if (d.frames && !d.startFrames) lines.push('לא זוהתה תחילת חזרה');
   for (const [reason, count] of Object.entries(d.failureFrames)) {
     if (!count) continue;
     const points = Object.entries(d.failedPoints[reason] || {}).map(([id, n]) => `${POINT_LABELS[id]}: ${n}`).join(', ');
     lines.push(`${DIAGNOSTIC_LABELS[reason]} — ${count} פריימים${points ? ` (${points})` : ''}`);
   }
+  for (const [id, point] of Object.entries(d.requiredPoints || {})) lines.push(`${POINT_LABELS[id]} — נצפתה ב־${point.observedPercent.toFixed(1)}% מהפריימים; נשמרה מפריים קודם ב־${point.heldPercent.toFixed(1)}%`);
+  const stops = Object.entries(d.stopReasons || {}).sort((a, b) => b[1] - a[1]);
+  if (stops.length) lines.push(`סיבת העצירה הנפוצה: ${DIAGNOSTIC_LABELS[stops[0][0]] || STATUS[stops[0][0]]?.[0] || stops[0][0]} — ${stops[0][1]} פריימים או אירועי עצירה`);
   return lines;
 }
