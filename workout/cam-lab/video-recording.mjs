@@ -3,10 +3,11 @@ export const VIDEO_LIMIT_MS = 4 * 60 * 1000;
 export const VIDEO_BITRATE = 1200000;
 const recordingError = 'המכשיר לא הצליח להקליט וידאו לבדיקה. נסו דפדפן מעודכן; הניסיון עדיין לא נשלח.';
 
-export function chooseVideoMime(MediaRecorderClass = globalThis.MediaRecorder) {
+export function chooseVideoMime(MediaRecorderClass = globalThis.MediaRecorder, userAgent = globalThis.navigator?.userAgent || '') {
   if (!MediaRecorderClass?.isTypeSupported) return null;
-  return ['video/webm;codecs=vp8', 'video/webm', 'video/mp4', 'video/mp4;codecs=avc1.42E01E']
-    .find(mime => MediaRecorderClass.isTypeSupported(mime)) || null;
+  const webm = ['video/webm;codecs=vp8', 'video/webm'], mp4 = ['video/mp4', 'video/mp4;codecs=avc1.42E01E'];
+  const candidates = /iPhone|iPad|iPod/i.test(userAgent) ? [...mp4, ...webm] : [...webm, ...mp4];
+  return candidates.find(mime => MediaRecorderClass.isTypeSupported(mime)) || null;
 }
 
 // This class is created and started only after the parent opts into upload.

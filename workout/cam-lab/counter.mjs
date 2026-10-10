@@ -66,6 +66,7 @@ export const DIAGNOSTIC_LABELS = {
   bodySpan: 'הגוף קטן בתמונה', shoulderWidth: 'הכתפיים צרות בתמונה',
   frontRatio: 'מומלץ לפנות למצלמה', hipWidth: 'האגן צר בתמונה',
   floorView: 'תרגיל הרצפה אינו במבט צד ברור', held: 'נקודות נשמרו מפריים קודם',
+  activeSide: 'הצד שבתנועה אינו נראה כעת',
 };
 export const POINT_LABELS = {
   0: 'אף', 7: 'אוזן שמאל', 8: 'אוזן ימין', 11: 'כתף שמאל', 12: 'כתף ימין',
@@ -86,11 +87,12 @@ const minValue = values => finiteValues(values).length ? Math.min(...finiteValue
 
 // report.ok describes the movement dependencies. Placement warnings never stop
 // an otherwise observable exercise; floor orientation is a movement safeguard.
-export function bodyReport(points, aspect = 1, exercise = 'squats') {
+export function bodyReport(points, aspect = 1, exercise = 'squats', { side: preferredSide } = {}) {
   const p = points || [], failures = [], warnings = [];
   const sets = Object.values(REQUIRED_POINTS[exercise] || REQUIRED_POINTS.squats);
   const scores = sets.map(ids => ids.reduce((sum, i) => sum + (goodPoint(p[i]) ? 2 : confidence(p[i])), 0) / ids.length);
-  const side = scores[0] >= scores[1] ? 0 : 1, required = sets[side];
+  const side = preferredSide === 0 || preferredSide === 1 ? preferredSide : scores[0] >= scores[1] ? 0 : 1;
+  const required = sets[side];
   const availableSides = sets.map(ids => ids.every(i => goodPoint(p[i])));
   if (!p.length) failures.push({ reason: 'missing' });
   else for (const i of required) {
@@ -167,7 +169,7 @@ export function features(points, world, aspect = 1, report = bodyReport(points, 
 export class PoseFilter {
   constructor(exercise = 'squats', options = {}) { this.exercise = exercise; this.t = options; this.reset(); }
   reset() { this.lastTime = null; this.imageCache = []; this.worldCache = []; this.confidences = []; }
-  update(points, world, time, aspect = 1) {
+  update(points, world, time, aspect = 1, { side: preferredSide } = {}) {
     const step = this.lastTime == null ? 50 : Math.max(0, time - this.lastTime);
     this.lastTime = time;
     const smoothing = this.t.smoothing || 80, holdMs = Math.min(FRAMING.pointHoldMs, this.t.trackingGrace || FRAMING.pointHoldMs);
@@ -202,18 +204,35 @@ export class PoseFilter {
       const cachedWorld = this.worldCache[i];
       if (cachedWorld && time - cachedWorld.time <= holdMs) filteredWorld[i] = { ...cachedWorld.value };
     }
-    let report = bodyReport(filtered, aspect, this.exercise);
+    let report = bodyReport(filtered, aspect, this.exercise, { side: preferredSide });
     const sides = Object.values(REQUIRED_POINTS[this.exercise]);
     const currentSide = sides.findIndex(ids => ids.every(i => observed[i] && goodPoint(filtered[i])));
-    if (report.ok && !report.required.every(i => observed[i]) && currentSide >= 0) {
+    if (preferredSide == null && report.ok && !report.required.every(i => observed[i]) && currentSide >= 0) {
       report = { ...report, side: currentSide, required: sides[currentSide] };
     }
-    const f = features(filtered, filteredWorld, aspect, report);
+    const motionFeatures = (image, worldPoints, body) => {
+      const result = features(image, worldPoints, aspect, body);
+      // A newly visible straight knee cannot return a squat started on the
+      // other knee. Before a cycle starts, retain the bilateral safeguard.
+      if (result && this.exercise === 'squats' && preferredSide != null) {
+        result.squat = preferredSide === 0 ? result.leftKnee : result.rightKnee;
+      }
+      return result;
+    };
+    const heldFeatures = motionFeatures(filtered, filteredWorld, report);
     const needsWorld = !['jumping-jacks', 'high-knees'].includes(this.exercise);
-    const worldIds = this.exercise === 'squats' ? report.required.filter(i => i >= 23) : report.required;
-    const fresh = report.ok && report.required.every(i => observed[i]) && (!needsWorld || worldIds.every(i => observedWorld[i]));
-    const usable = report.ok && !worldRequired(this.exercise, f);
-    return { points: filtered, world: filteredWorld, report, features: f, observed, held, observedWorld, usable, fresh: usable && fresh };
+    const freshSides = sides.map(ids => ids.every(i => observed[i] && goodPoint(filtered[i])) &&
+      (!needsWorld || ids.filter(i => this.exercise !== 'squats' || i >= 23).every(i => observedWorld[i])));
+    // A visible opposite side keeps the overlay useful, but held joints must
+    // never supply an arm, knee angle, raised leg or return-to-rest signal.
+    const currentReport = { ...report, availableSides: sides.map(ids => ids.every(i => observed[i] && goodPoint(filtered[i]))) };
+    const currentFeatures = report.ok && freshSides[report.side] ? motionFeatures(
+      filtered.map((point, i) => observed[i] ? point : undefined),
+      filteredWorld.map((point, i) => observedWorld[i] ? point : undefined), currentReport) : null;
+    const usable = report.ok && !worldRequired(this.exercise, heldFeatures);
+    const fresh = usable && freshSides[report.side] && !worldRequired(this.exercise, currentFeatures);
+    return { points: filtered, world: filteredWorld, report, features: fresh ? currentFeatures : heldFeatures,
+      observed, held, observedWorld, freshSides, usable, fresh };
   }
 }
 
@@ -309,7 +328,7 @@ export class RepCounter {
     if (gap > this.t.maxGap && !this.lossReset) event = this.resetTracking();
     const rawReport = bodyReport(points, aspect, this.exercise);
     this.filter.t = this.t;
-    const filtered = this.filter.update(points, world, time, aspect);
+    const filtered = this.filter.update(points, world, time, aspect, { side: this.cycle?.observationSide });
     const { report, features: raw } = filtered;
     const d = this.diagnostics;
     d.frames++; if (rawReport.ok) d.fullBodyPassed++; else d.fullBodyFailed++;
@@ -332,12 +351,14 @@ export class RepCounter {
     if (worldMissing) d.worldMissingFrames++;
     // Held coordinates maintain continuity only. They cannot arm, finish a
     // target dwell, complete a repetition or satisfy the minimum cycle time.
-    if (!filtered.fresh) {
+    const activeSideMissing = this.cycle?.observationSide != null && !filtered.freshSides[this.cycle.observationSide];
+    if (!filtered.fresh || activeSideMissing) {
       this.lostSince ??= this.lastGoodTime ?? time;
       this.trackingCause = points?.length && !rawReport.ok ? 'framing' : 'tracking';
       if (time - this.lostSince > this.t.trackingGrace && !this.lossReset) event = this.resetTracking();
-      this.status = statusCode(rawReport, this.phase, worldMissing);
-      const reason = !points?.length ? 'missing' : !rawReport.ok ? rawReport.failures[0].reason : worldMissing ? 'world' : 'held';
+      this.status = activeSideMissing && rawReport.ok ? 'activeSide' : statusCode(rawReport, this.phase, worldMissing);
+      const reason = !points?.length ? 'missing' : !rawReport.ok ? rawReport.failures[0].reason :
+        activeSideMissing ? 'activeSide' : worldMissing ? 'world' : 'held';
       d.stopReasons[reason] = (d.stopReasons[reason] || 0) + 1;
       return event || { type: 'tracking' };
     }
@@ -393,7 +414,8 @@ export class RepCounter {
       } else {
         this.restSince = null;
         if (this.phase === 'armed' && start) {
-          this.cycle = { since: time, reached: false, kneeIn: false, badForm: false, side };
+          this.cycle = { since: time, reached: false, kneeIn: false, badForm: false, side,
+            observationSide: alternating ? side === 'left' ? 0 : side === 'right' ? 1 : null : report.side };
           this.phase = 'moving'; d.cyclesStarted++;
         }
       }
@@ -402,7 +424,9 @@ export class RepCounter {
     if (time - this.cycle.since > t.maxCycle) {
       event = this.reject('timeout'); this.reset(); this.status = this.phase; return event;
     }
-    if (this.exercise === 'lunges' && this.cycle.side == null && side != null) this.cycle.side = side;
+    if (this.exercise === 'lunges' && this.cycle.side == null && side != null) {
+      this.cycle.side = side; this.cycle.observationSide = side === 'left' ? 0 : 1;
+    }
     if (target && (!alternating || side === this.cycle.side)) {
       this.targetSince ??= time;
       if (time - this.targetSince >= t.dwell) this.cycle.reached = true;

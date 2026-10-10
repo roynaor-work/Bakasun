@@ -46,6 +46,7 @@ try:
         page.goto(url + '#upload=' + quote(origin + '/receive', safe='') + '&key=synthetic-browser-key')
         assert page.evaluate('location.hash') == ''
         assert page.locator('#upload-config-status').inner_text() == 'שליחה לבדיקה: פעילה'
+        assert page.locator('#ptz-permission').is_visible()
         page.locator('#camera').click()
         page.wait_for_function("() => document.querySelector('#metrics').textContent.includes('inference')", timeout=60000)
         assert page.locator('#zoom-status').is_visible()
@@ -58,11 +59,14 @@ try:
         assert len(parts[0]['data']) > 0
         skeleton, diagnostics = json.loads(parts[1]['data']), json.loads(parts[2]['data'])
         assert skeleton['version'] == 2 and len(skeleton['frames']) > 0
-        assert diagnostics['labVersion'] == '3.0.0' and diagnostics['model'] in ['full', 'lite']
+        assert diagnostics['labVersion'] == '4.0.0' and diagnostics['model'] in ['full', 'lite']
+        ptz = diagnostics['camera']['ptz']
+        assert set(['requested', 'supported', 'granted', 'state', 'fallback', 'actualZoom']).issubset(ptz)
+        assert ptz['granted'] in [True, False, None]
         assert diagnostics['attempts'][0]['preparation']['frames'] > 0
         assert page.evaluate("document.querySelector('#video').srcObject===null")
         first_report = {'model': diagnostics['model'], 'modelHistory': diagnostics['modelHistory'],
-                        'frames': len(skeleton['frames']), 'videoBytes': len(parts[0]['data']), 'mime': parts[0]['mime']}
+                        'frames': len(skeleton['frames']), 'videoBytes': len(parts[0]['data']), 'mime': parts[0]['mime'], 'ptz': ptz}
 
         # A failed part survives the real IndexedDB store and a page reload.
         fail_skeleton = True

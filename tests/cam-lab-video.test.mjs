@@ -51,6 +51,13 @@ test('iPhone-style mp4-only support selects mp4, and unsupported encoders fail c
   assert.throws(() => recording.start(camera()), /להקליט וידאו/);
 });
 
+test('iPhone prefers mp4 even when its browser also supports WebM', () => {
+  const both = { isTypeSupported: mime => ['video/mp4', 'video/webm;codecs=vp8'].includes(mime) };
+  assert.equal(chooseVideoMime(both, 'synthetic iPhone'), 'video/mp4');
+  assert.equal(chooseVideoMime(both, 'synthetic Android'), 'video/webm;codecs=vp8');
+  assert.equal(chooseVideoMime(FakeRecorder, 'synthetic iPhone'), 'video/webm;codecs=vp8', 'use a supported encoder when MP4 is unavailable');
+});
+
 test('stop resolves after final dataavailable, includes every chunk, and is idempotent', async () => {
   const { recording } = setup(); recording.start(camera());
   recording.recorder.ondataavailable({ data: new Blob(['first-']) });
