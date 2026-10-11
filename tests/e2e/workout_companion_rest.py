@@ -3,6 +3,7 @@
 Run a local server, then python3 tests/e2e/workout_companion_rest.py.
 """
 import os
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
@@ -109,7 +110,7 @@ with sync_playwright() as pw:
     expect(page.locator('.companion-card')).to_contain_text('5 אימונים')
     assert data(page)['sessions'] == after['sessions']
     modules = [url for url in requests if '.js?' in url and url.startswith(BASE)]
-    assert modules and all(url.endswith('?v=20261010-camera-1') for url in modules), modules
+    assert modules and all(url.endswith('?v=' + ('20261011-vids-signed-1' if re.search(r'/js/(?:app|vids|vids-cloud)\.js\?', url) else '20261010-camera-1')) for url in modules), modules
     assert not errors, errors
     context.close()
 

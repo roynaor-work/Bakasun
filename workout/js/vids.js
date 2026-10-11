@@ -1,80 +1,142 @@
-// סרטונים (או תמונות) לתרגילים: במקום ציור, סרטון קצר אמיתי בלופ. שלושה מקורות, לפי סדר:
-// 1. מקומי: מה שצולם/נבחר בטלפון הזה (IndexedDB kidfit-vids). 2. ענן משפחתי: Supabase Storage, דלי kidfit-vids, נתיב <קוד משפחה>/<תרגיל>
-// (רועי מצלם בטלפון שלו, מגיע לטלפון של הילד; נשמר גם במטמון מקומי). 3. קובץ vid/<id>.mp4 בריפו (VIDEO_IDS).
+// מקומי, ענן משפחתי פרטי עם גרסאות, ואז קובץ מובנה בריפו.
 import { CLOUD } from '../../js/data/cloudcfg.js?v=20261010-camera-1';
-import { normCode } from './cloud.js?v=20261010-camera-1';
-
+import { createVideoCloud, videoCode, videoPath, videoVersion } from './vids-cloud.js?v=20261011-vids-signed-1';
 export const VIDEO_IDS = new Set([]);
-const DB = 'kidfit-vids', STORE = 'v', BUCKET = 'kidfit-vids', C_KEY = 'kidfit.cloudVids';
-const local = new Set(); const urls = {}, kinds = {};
-let cloud = {}; try { cloud = JSON.parse(localStorage.getItem(C_KEY) || '{}'); } catch { cloud = {}; }
+const DB = 'kidfit-vids', STORE = 'v', C_KEY = 'kidfit.cloudVids', VERSION = 2;
+const local = new Set(), origins = new Map(), urls = new Map(), revisions = new Map();
+const client = createVideoCloud({ baseUrl: CLOUD.url, publicKey: CLOUD.key });
+let cloud = {}, family = null, epoch = 0, refresh = 0, cleanup = Promise.resolve(), saved;
 export const vidStatus = { error: '', busy: '' };
-
+try {
+  saved = JSON.parse(localStorage.getItem(C_KEY) || 'null');
+  if (saved?.version !== VERSION || !saved.code || !saved.videos) { saved = null; localStorage.removeItem(C_KEY); }
+} catch { saved = null; }
 function db() { return new Promise((res, rej) => { try { const r = indexedDB.open(DB, 1); r.onupgradeneeded = () => r.result.createObjectStore(STORE); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); } catch (e) { rej(e); } }); }
-const tx = (mode, fn) => db().then(d => new Promise((res, rej) => { const t = d.transaction(STORE, mode), req = fn(t.objectStore(STORE)); t.oncomplete = () => res(req.result); t.onerror = () => rej(t.error); }));
+const tx = (mode, fn) => db().then(d => new Promise((res, rej) => {
+  const t = d.transaction(STORE, mode), req = fn(t.objectStore(STORE));
+  t.oncomplete = () => { d.close(); res(req?.result); }; t.onerror = t.onabort = () => { d.close(); rej(t.error); };
+}));
 const kindOf = mime => (mime || '').startsWith('image/') ? 'image' : 'video';
-const dropUrl = id => { if (urls[id]) { URL.revokeObjectURL(urls[id]); delete urls[id]; delete kinds[id]; } };
-
-export async function refreshVideos() { try { const keys = await tx('readonly', s => s.getAllKeys()); local.clear(); keys.filter(k => !String(k).startsWith('c:')).forEach(k => local.add(k)); } catch { /* אין IndexedDB */ } return local; }
+const dropUrl = id => { const entry = urls.get(id); if (entry) URL.revokeObjectURL(entry.url); urls.delete(id); };
+const persist = () => { try { localStorage.setItem(C_KEY, JSON.stringify({ version: VERSION, code: family, videos: cloud })); } catch { /* full storage */ } };
+const clearCache = (keepCode = '', keep = {}) => tx('readwrite', s => {
+  const keys = s.getAllKeys();
+  keys.onsuccess = () => keys.result.filter(k => String(k).startsWith('c:')).forEach(key => {
+    const request = s.get(key);
+    request.onsuccess = () => { const entry = request.result, expected = keep[String(key).slice(2)];
+      if (entry?.version !== VERSION || entry.code !== keepCode || !expected || entry.path !== expected.path || entry.updated !== expected.updated) s.delete(key);
+    };
+  });
+});
+export function setVideoFamily(value) {
+  let code = ''; try { code = videoCode(value); } catch { /* partial or empty code */ }
+  if (code === family) return false;
+  family = code; epoch++; refresh++; cloud = {}; vidStatus.error = ''; vidStatus.busy = '';
+  for (const id of urls.keys()) dropUrl(id);
+  try { localStorage.removeItem(C_KEY); } catch { /* unavailable storage */ }
+  if (saved?.code === code) {
+    try {
+      for (const [id, entry] of Object.entries(saved.videos)) videoPath(code, entry.path, id);
+      cloud = saved.videos; persist();
+    } catch { cloud = {}; }
+  }
+  const keep = saved?.code === code ? cloud : {};
+  saved = null;
+  cleanup = cleanup.then(() => clearCache(code, keep)).catch(() => {});
+  return true;
+}
+const useLocal = id => local.has(id) && (!cloud[id] || !origins.get(id) ||
+  origins.get(id).code !== family || origins.get(id).path === cloud[id].path);
+export async function refreshVideos() {
+  try {
+    const keys = await tx('readonly', s => s.getAllKeys());
+    local.clear(); origins.clear();
+    for (const key of keys) {
+      const entry = await tx('readonly', s => s.get(key));
+      if (String(key).startsWith('c:')) {
+        if (entry?.version !== VERSION || entry.code !== family || entry.path !== cloud[String(key).slice(2)]?.path || entry.updated !== cloud[String(key).slice(2)]?.updated) await tx('readwrite', s => s.delete(key));
+      } else { local.add(key); if (entry?.uploaded) origins.set(key, entry.uploaded); }
+    }
+  } catch { /* IndexedDB unavailable */ }
+  return local;
+}
 export const hasVideo = id => local.has(id) || !!cloud[id] || VIDEO_IDS.has(id);
 export const localVideos = () => local;
 export const cloudVideos = () => cloud;
-export const sourceOf = id => local.has(id) ? 'local' : cloud[id] ? 'cloud' : VIDEO_IDS.has(id) ? 'repo' : null;
-
-export async function saveVideo(id, blob) { await tx('readwrite', s => s.put(blob, id)); local.add(id); dropUrl(id); }
-export async function deleteVideo(id) { await tx('readwrite', s => s.delete(id)); local.delete(id); dropUrl(id); }
-
-// ---- ענן ----
-const H = (extra = {}) => ({ apikey: CLOUD.key, Authorization: 'Bearer ' + CLOUD.key, ...extra });
-const objPath = (code, id) => `${BUCKET}/${normCode(code)}/${id}`;
-export const publicUrl = (code, id, v = '') => `${CLOUD.url}/storage/v1/object/public/${objPath(code, id)}${v ? `?v=${encodeURIComponent(v)}` : ''}`;
-const fail = async r => { const t = await r.text(); const e = new Error(r.status === 404 || r.status === 400 && /Bucket not found/i.test(t) ? 'הדלי בענן עוד לא נוצר (vids.sql)' : `${r.status} ${t.slice(0, 120)}`); e.status = r.status; throw e; };
-// רשימת הסרטונים של המשפחה בענן → cloud[id] = { updated, mime }
+export const sourceOf = id => useLocal(id) ? 'local' : cloud[id] ? 'cloud' : VIDEO_IDS.has(id) ? 'repo' : null;
+export async function saveVideo(id, blob) { revisions.set(id, (revisions.get(id) || 0) + 1); await tx('readwrite', s => s.put(blob, id)); local.add(id); origins.delete(id); dropUrl(id); }
+// מחיקה מהטלפון בלבד: המקור בענן נשאר וניתן לצפות בו שוב.
+export async function deleteVideo(id) {
+  revisions.set(id, (revisions.get(id) || 0) + 1);
+  await tx('readwrite', s => { s.delete('c:' + id); return s.delete(id); });
+  local.delete(id); origins.delete(id); dropUrl(id);
+}
 export async function refreshCloud(code) {
-  code = normCode(code); if (code.length < 8) return cloud;
+  setVideoFamily(code); const generation = epoch, request = ++refresh;
   try {
-    const r = await fetch(`${CLOUD.url}/storage/v1/object/list/${BUCKET}`, { method: 'POST', headers: H({ 'Content-Type': 'application/json' }), body: JSON.stringify({ prefix: code + '/', limit: 200, offset: 0, sortBy: { column: 'name', order: 'asc' } }) });
-    if (!r.ok) await fail(r);
-    const rows = await r.json(); const next = {};
-    for (const o of rows || []) { if (!o.name || !o.id) continue; next[o.name] = { updated: o.updated_at || o.created_at || '', mime: o.metadata?.mimetype || '' }; }
-    cloud = next; try { localStorage.setItem(C_KEY, JSON.stringify(cloud)); } catch { /* */ }
-    for (const id in cloud) if (!local.has(id)) dropUrl(id);
-    vidStatus.error = '';
-  } catch (e) { vidStatus.error = e.message; }
+    const rows = await client.catalog(code);
+    if (generation !== epoch || request !== refresh) return cloud;
+    const next = Object.fromEntries(rows.map(({ id, ...entry }) => [id, entry]));
+    for (const [id, entry] of urls) if (entry.source === 'cloud' &&
+      (next[id]?.path !== entry.path || next[id]?.updated !== entry.updated)) dropUrl(id);
+    cloud = next; persist(); vidStatus.error = '';
+  } catch (e) {
+    if (generation === epoch && request === refresh) {
+      vidStatus.error = e.message;
+      // A rejected code cannot keep displaying previously authorized metadata.
+      if (/לא רשום/.test(e.message)) { cloud = {}; persist(); for (const id of urls.keys()) dropUrl(id); cleanup = cleanup.then(() => clearCache()).catch(() => {}); }
+    }
+  }
   return cloud;
 }
 export async function cloudUpload(code, id, blob) {
-  code = normCode(code); if (code.length < 8) return false;
-  vidStatus.busy = id;
+  setVideoFamily(code); const generation = epoch, revision = revisions.get(id) || 0; vidStatus.busy = id;
   try {
-    const r = await fetch(`${CLOUD.url}/storage/v1/object/${objPath(code, id)}`, { method: 'POST', headers: H({ 'Content-Type': blob.type || 'video/mp4', 'x-upsert': 'true' }), body: blob });
-    if (!r.ok) await fail(r);
-    cloud[id] = { updated: new Date().toISOString(), mime: blob.type || 'video/mp4' }; try { localStorage.setItem(C_KEY, JSON.stringify(cloud)); } catch { /* */ }
+    const entry = await client.upload(code, id, blob, videoVersion(cloud[id]?.path));
+    if (generation !== epoch) return false;
+    refresh++;
+    if (videoVersion(entry.path) >= videoVersion(cloud[id]?.path)) cloud[id] = entry;
+    persist(); dropUrl(id);
+    // Track the uploaded local copy so another phone's newer version takes precedence.
+    if (local.has(id) && revision === (revisions.get(id) || 0) && cloud[id]?.path === entry.path) {
+      const uploaded = { code: family, path: entry.path };
+      await tx('readwrite', s => { if (generation === epoch && revision === (revisions.get(id) || 0) && cloud[id]?.path === entry.path) return s.put({ blob, uploaded }, id); });
+      if (generation === epoch && revision === (revisions.get(id) || 0)) origins.set(id, uploaded);
+    }
+    if (generation !== epoch) return false;
     vidStatus.error = ''; return true;
-  } catch (e) { vidStatus.error = e.message; return false; } finally { vidStatus.busy = ''; }
+  } catch (e) { if (generation === epoch) vidStatus.error = e.message; return false; }
+  finally { if (generation === epoch) vidStatus.busy = ''; }
 }
-export async function cloudDelete(code, id) {
-  code = normCode(code); if (code.length < 8) return false;
-  try { const r = await fetch(`${CLOUD.url}/storage/v1/object/${objPath(code, id)}`, { method: 'DELETE', headers: H() }); if (!r.ok) await fail(r); delete cloud[id]; try { localStorage.setItem(C_KEY, JSON.stringify(cloud)); } catch { /* */ } try { await tx('readwrite', s => s.delete('c:' + id)); } catch { /* */ } dropUrl(id); vidStatus.error = ''; return true; }
-  catch (e) { vidStatus.error = e.message; return false; }
-}
-
-// מחזיר { url, kind: 'video' | 'image' } או null. סרטון מהענן נשמר במטמון המקומי אחרי הצפייה הראשונה (c:<id>), כדי לא להוריד שוב
 export async function videoUrl(id, code = '') {
-  if (local.has(id)) {
-    if (!urls[id]) { const b = await tx('readonly', s => s.get(id)); if (!b) { local.delete(id); return videoUrl(id, code); } urls[id] = URL.createObjectURL(b); kinds[id] = kindOf(b.type); }
-    return { url: urls[id], kind: kinds[id] };
+  setVideoFamily(code); const generation = epoch, revision = revisions.get(id) || 0;
+  if (useLocal(id)) {
+    const existing = urls.get(id); if (existing?.source === 'local') return existing;
+    const entry = await tx('readonly', s => s.get(id)), blob = entry?.blob || entry;
+    if (!blob) { local.delete(id); return videoUrl(id, code); }
+    if (generation !== epoch || revision !== (revisions.get(id) || 0)) return null;
+    dropUrl(id); const media = { url: URL.createObjectURL(blob), kind: kindOf(blob.type), source: 'local' }; urls.set(id, media); return media;
   }
-  if (cloud[id]) {
-    const c = cloud[id], kind = kindOf(c.mime);
-    if (urls[id]) return { url: urls[id], kind };
+  const entry = cloud[id];
+  if (entry) {
+    const current = () => generation === epoch && revision === (revisions.get(id) || 0) &&
+      cloud[id]?.path === entry.path && cloud[id]?.updated === entry.updated;
+    const existing = urls.get(id);
+    if (existing?.source === 'cloud' && existing.code === family && existing.path === entry.path && existing.updated === entry.updated) return existing;
     try {
-      const cached = await tx('readonly', s => s.get('c:' + id));
-      if (cached && cached.updated === c.updated && cached.blob) { urls[id] = URL.createObjectURL(cached.blob); kinds[id] = kind; return { url: urls[id], kind }; }
-    } catch { /* */ }
-    const url = publicUrl(code, id, c.updated);
-    if (code) fetch(url).then(r => r.ok ? r.blob() : null).then(b => { if (b) tx('readwrite', s => s.put({ blob: b, updated: c.updated }, 'c:' + id)).catch(() => {}); }).catch(() => {});
-    return { url, kind };
+      videoPath(family, entry.path, id);
+      await cleanup;
+      const cached = await tx('readonly', s => s.get('c:' + id)).catch(() => null);
+      let blob = cached?.version === VERSION && cached.code === family && cached.path === entry.path && cached.updated === entry.updated ? cached.blob : null;
+      if (!blob) {
+        blob = await client.download(code, entry.path);
+        if (!current()) return null;
+        await tx('readwrite', s => { if (current()) return s.put({ version: VERSION, code: family, path: entry.path, updated: entry.updated, blob }, 'c:' + id); }).catch(() => {});
+      }
+      if (!current()) return null;
+      dropUrl(id); const media = { url: URL.createObjectURL(blob), kind: kindOf(entry.mime || blob.type), source: 'cloud', code: family, path: entry.path, updated: entry.updated };
+      urls.set(id, media); vidStatus.error = ''; return media;
+    } catch (e) { if (current()) vidStatus.error = e.message; return null; }
   }
   return VIDEO_IDS.has(id) ? { url: `vid/${id}.mp4`, kind: 'video' } : null;
 }
