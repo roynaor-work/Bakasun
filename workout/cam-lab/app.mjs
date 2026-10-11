@@ -3,8 +3,9 @@ import { StatusLine, RestGate, diagnosticLines } from './feedback.mjs';
 import { PeopleTracker } from './people.mjs';
 import { PlacementGuide, placementDistance } from './placement.mjs';
 import { SkeletonRecorder } from './recording.mjs';
-import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId } from './upload.mjs';
+import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId, readUploadLog } from './upload.mjs';
 import { AutoStart } from './auto-start.mjs';
+import { ScreenWakeLock } from './screen-wake-lock.mjs';
 import { VideoRecorder } from './video-recording.mjs';
 import { acquireCamera, configureZoom, cameraSnapshot, reduceResolution } from './camera.mjs';
 export const LAB_VERSION = '4.0.0';
@@ -39,12 +40,21 @@ let ambiguousTracking = [false, false], calibratedPeople = [false, false];
 let recorder = new SkeletonRecorder(), autoStart, attemptEnded = true, endReason = null;
 let poseFilters = [], lastFeatures = [], preparationCounters = [], videoRecorder = null, recordingError = null, finishing = false;
 let cameraInfo = {}, model = 'full', modelHistory = [], cameraOrientation = 'portrait', openedAt = null, sessionId, runtimeError = null, attemptTimer = 0;
+const pageOpenedAt = 0; // performance.now() is relative to navigation start.
+const timeline = { workerInitStart: null, modelReady: null };
+let attemptTimeline = {};
+const mark = name => { if (attemptTimeline[name] == null) attemptTimeline[name] = Math.round(performance.now() - pageOpenedAt); };
+const wakeLock = new ScreenWakeLock();
+let workerLoading = null, workerLoaded = false, configureWaiter = null, workerLoadTimer = 0;
 const uploadSetup = initializeUploadConfig({ location: window.location, history: window.history });
 let uploadConfig = uploadSetup.config;
 const uploadQueue = uploadConfig ? new UploadQueue({ config: uploadConfig, onStatus: paintUploadStatus }) : null;
 function paintUploadStatus(status) {
   $('upload-status').textContent = status.state === 'sent' && status.session === sessionId && recordingError ? 'השלד והאבחון נשלחו, אך הווידאו לא הוקלט. יש להתחיל ניסיון חדש בדפדפן מעודכן.' : status.message;
   $('upload-retry').hidden = status.state !== 'error';
+  $('upload-keep-open').hidden = !['queued', 'sending'].includes(status.state);
+  if (status.state === 'sending') void wakeLock.hold();
+  if (['sent', 'error', 'disabled'].includes(status.state) && !stream && !finishing && (!status.pending || status.state !== 'sent')) void wakeLock.release();
 }
 function paintUploadConfig() {
   $('upload-config-status').textContent = uploadConfig ? 'שליחה לבדיקה: פעילה' : 'שליחה לבדיקה: כבויה';
@@ -84,6 +94,7 @@ function announceUploadWarning() {
   speak(spoken.uploadOff, 2);
 }
 function showSetup() {
+  $('zoom-status').before($('upload-panel'));
   $('setup').hidden = false;
   announceUploadWarning();
 }
@@ -112,8 +123,10 @@ function flushSpeech() {
 }
 function release() {
   autoStart?.cancel(); $('countdown').textContent = '';
+  if (configureWaiter) { clearTimeout(configureWaiter.timer); configureWaiter.resolve(); configureWaiter = null; }
   generation++; active = false; ready = false; busy = false;
-  cancelAnimationFrame(raf); clearTimeout(watchdog); clearTimeout(attemptTimer); worker?.terminate(); worker = null;
+  cancelAnimationFrame(raf); clearTimeout(watchdog); clearTimeout(attemptTimer);
+  if (!finishing) void wakeLock.release();
   stream?.getTracks().forEach(t => t.stop()); stream = null;
   video.srcObject = null; window.speechSynthesis?.cancel();
   queuedSpeech = null; recorder.stop(); paintRecorder();
@@ -161,7 +174,8 @@ function poseResult(data) {
   const aspect = video.videoWidth / video.videoHeight;
   // A worker frame captured before the start click belongs to placement.
   if (active && timestamp < attemptStarted) return;
-  if (finishing) return;
+  if (finishing || attemptEnded) return;
+  if (poses.length) mark('firstPose');
   model = data.model || model; modelHistory = data.modelHistory || modelHistory;
   if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
     canvas.width = video.videoWidth; canvas.height = video.videoHeight;
@@ -176,6 +190,7 @@ function poseResult(data) {
   lastFeatures = fs;
   const visibility = fs.map((f, i) => reports[i].ok && !worldRequired(exercise, f));
   const visible = visibility[0], report = reports[0];
+  if (report.ok) mark('firstFullBody');
   context.clearRect(0, 0, canvas.width, canvas.height);
   poses.forEach(p => draw(p.landmarks || []));
   const distance = placementDistance(assigned[0]?.landmarks || poses[0]?.landmarks || [], { aspect, heightCm: Number($('height').value) });
@@ -227,13 +242,14 @@ function paintStatus(code) {
 async function tick(token) {
   if (token !== generation) return;
   if (ready && !busy && video.readyState >= 2 && video.currentTime !== lastVideoTime && !document.hidden) {
+    mark('firstFrame');
     busy = true; lastVideoTime = video.currentTime;
     const started = performance.now();
     try {
       const bitmap = await createImageBitmap(video);
       if (token !== generation) { bitmap.close(); return; }
       const timestamp = performance.now();
-      pending = { started }; worker.postMessage({ type: 'frame', bitmap, timestamp, id: ++frameId }, [bitmap]);
+      pending = { started }; worker.postMessage({ type: 'frame', bitmap, timestamp, id: ++frameId, generation: token }, [bitmap]);
       watchdog = setTimeout(() => {
         if (token === generation) fail('עיבוד פריים נמשך זמן רב מדי. נסו דפדפן מעודכן או מכשיר אחר.');
       }, 15000);
@@ -251,6 +267,10 @@ $('settings').addEventListener('submit', async event => {
     fail('נדרש דפדפן עם Web Worker ו־OffscreenCanvas. נסו דפדפן מעודכן.'); return;
   }
   release(); const token = generation;
+  attemptTimeline = {}; mark('cameraStart');
+  void wakeLock.hold();
+  const modelForAttempt = prepareModel(token, $('mode').value === 'pair');
+  modelForAttempt.catch(() => {});
   attemptEnded = false; endReason = null;
   autoStart = new AutoStart({ onCue: countdownCue, onCancel: () => {
     $('countdown').textContent = ''; window.speechSynthesis?.cancel();
@@ -267,7 +287,7 @@ $('settings').addEventListener('submit', async event => {
     const probe = new RepCounter(exercise); probe.t = { ...c.t }; return probe;
   });
   videoRecorder = null; recordingError = null; openedAt = new Date(); sessionId = createSessionId(exercise, openedAt);
-  model = 'full'; modelHistory = []; cameraInfo = {}; runtimeError = null;
+  cameraInfo = {}; runtimeError = null;
   $('dad-score').hidden = !pair; $('child-label').textContent = pair ? 'הילד' : 'חזרות שנספרו';
   $('dad-count').textContent = '0'; $('child-status').textContent = ''; $('dad-status').textContent = '';
   $('recording-panel').hidden = !!uploadConfig; paintRecorder();
@@ -279,7 +299,7 @@ $('settings').addEventListener('submit', async event => {
   $('count').textContent = '0'; $('feedback').textContent = ''; $('start').disabled = true;
   $('start').hidden = false; $('finish').hidden = !uploadConfig; $('view').classList.remove('ready');
   $('session-title').textContent = `2. הצבה · ${titles[exercise]}`; $('instructions').textContent = instructions[exercise];
-  $('status').textContent = 'טוענים את מודל הזיהוי המקומי…';
+  $('status').textContent = workerLoaded ? 'מכינים את הזיהוי למצלמה…' : 'טוענים את מודל הזיהוי, עוד רגע';
   speak(spoken.placement);
   try {
     cameraOrientation = window.innerHeight >= window.innerWidth || !window.innerWidth ? 'portrait' : 'landscape';
@@ -289,6 +309,7 @@ $('settings').addEventListener('submit', async event => {
     if (token !== generation) { acquired.getTracks().forEach(t => t.stop()); return; }
     stream = acquired; video.srcObject = stream; await video.play();
     if (token !== generation) return;
+    mark('cameraReady');
     canvas.width = video.videoWidth; canvas.height = video.videoHeight;
     if (uploadConfig || $('record').checked) startRecording(); else paintRecorder();
     if (uploadConfig) {
@@ -317,37 +338,20 @@ $('settings').addEventListener('submit', async event => {
     }
     $('view').style.aspectRatio = `${video.videoWidth}/${video.videoHeight}`;
     $('setup').hidden = true; $('session').hidden = false;
-    worker = new Worker('./pose-worker.js');
-    worker.onmessage = ({ data }) => {
-      if (token !== generation) return;
-      if (data.type === 'ready') { clearTimeout(watchdog); model = data.model || model; modelHistory = data.modelHistory || modelHistory; ready = true; tick(token); }
-      else if (data.type === 'pose') poseResult(data);
-      else if (data.type === 'model-switching') { ready = false; }
-      else if (data.type === 'model-change') {
-        ready = true;
-        model = data.model; modelHistory = data.modelHistory || modelHistory;
-        if (data.lowerResolution && stream) void reduceResolution(stream.getVideoTracks()[0], { orientation: cameraOrientation }).then(result => {
-          if (token === generation && stream) cameraInfo = { ...cameraInfo, ...cameraSnapshot(stream.getVideoTracks()[0]), resolutionError: result.error || null };
-        });
-      }
-      else if (data.type === 'error') fail('הזיהוי המקומי לא נטען. ודאו שקובצי המודל וה־WASM קיימים ושיש WebGL פעיל בדפדפן.', data.message);
-    };
-    worker.onerror = e => {
-      if (token === generation) fail('עיבוד המצלמה נעצר. אפשר לנסות מחדש בדפדפן מעודכן.', e.message);
-    };
-    worker.postMessage({ type: 'init', numPoses: pair ? 2 : 1 });
-    watchdog = setTimeout(() => {
-      if (token === generation) fail('טעינת המודל המקומי נמשכה זמן רב מדי. נסו שוב לאחר שהקבצים סיימו לרדת.');
-    }, 60000);
+    try { await modelForAttempt; }
+    catch { if (token === generation && !attemptEnded) fail('הזיהוי המקומי לא נטען. נסו שוב בדפדפן מעודכן.'); return; }
+    if (token !== generation || attemptEnded) return;
+    ready = true; tick(token);
     stream.getVideoTracks()[0].addEventListener('ended', () => {
       if (token === generation) fail('המצלמה התנתקה. אפשר להפעיל אותה מחדש.');
     });
   } catch (error) {
-    if (token === generation) fail(error.name === 'NotAllowedError' ? 'הרשאת המצלמה לא ניתנה. אפשר לאפשר מצלמה בהגדרות האתר ולנסות שוב.' :
+    if (token === generation && !attemptEnded) fail(error.name === 'NotAllowedError' ? 'הרשאת המצלמה לא ניתנה. אפשר לאפשר מצלמה בהגדרות האתר ולנסות שוב.' :
       'לא הצלחנו לפתוח את המצלמה. ודאו שאינה בשימוש באפליקציה אחרת.', error.message);
   }
 });
 function countdownCue(number) {
+  if (number === 3) mark('countdownStart');
   $('countdown').textContent = `${number}…`; queuedSpeech = null;
   const voice = localVoice();
   if (!$('voice').checked || !voice) return;
@@ -359,6 +363,7 @@ function countdownCue(number) {
 function beginCounting() {
   if (active || attemptEnded || finishing || $('start').disabled || !ready || lastFrame == null || performance.now() - lastFrame > counter.t.maxGap) return;
   autoStart.complete(); $('countdown').textContent = '';
+  mark('countStart');
   attemptStarted = performance.now(); active = true;
   // A mid-movement start must reach rest before arming a complete cycle.
   counter.begin(attemptStarted, atRest(exercise, lastFeatures[0], counter.t));
@@ -373,35 +378,44 @@ function results(reason = 'finish') {
   if (attemptEnded || finishing || !counter) return;
   attemptEnded = true; endReason = reason; autoStart?.cancel();
   $('countdown').textContent = '';
+  mark('finish');
   const endedAt = performance.now();
   clearTimeout(attemptTimer);
   counter.finish(endedAt); adult?.finish(endedAt); recorder.stop(endedAt);
   const consent = uploadConfig;
   if (consent) {
     finishing = true; active = false; ready = false; cancelAnimationFrame(raf); clearTimeout(watchdog);
-    worker?.terminate(); worker = null;
+    // Keep the warmed worker for the next attempt; generation rejects late frames.
     $('again').disabled = true;
     const capture = videoRecorder; videoRecorder = null;
     const skeleton = new Blob([recorder.json({ compact: true }) || '{}'], { type: 'application/json' });
     const diagnostics = new Blob([JSON.stringify(attemptDiagnostics())], { type: 'application/json' });
+    const attemptSession = sessionId;
+    // Start a durable write immediately on pagehide, using timeslice data already
+    // delivered. The complete final recorder Blob replaces it if stop() finishes.
+    const snapshot = reason === 'pagehide' ? capture?.snapshot() : null;
+    const savingSnapshot = snapshot && uploadConfig === consent ? uploadQueue.enqueue({ session: attemptSession, video: snapshot, skeleton, diagnostics }) : null;
+    savingSnapshot?.catch(() => {});
     paintUploadStatus({ state: 'sending', message: 'מכינים את ההקלטה לשליחה…' });
     void (async () => {
       let videoBlob;
       try { videoBlob = capture ? await capture.stop() : new Blob([], { type: 'video/webm' });
         if (!videoBlob?.size) recordingError ||= 'לא התקבל וידאו מהדפדפן.'; }
-      catch { recordingError ||= 'הקלטת הווידאו לא הושלמה; הפרטים מופיעים באבחון.'; videoBlob = new Blob([], { type: 'video/webm' }); }
+      catch { recordingError ||= 'הקלטת הווידאו לא הושלמה; הפרטים מופיעים באבחון.'; videoBlob = snapshot || new Blob([], { type: 'video/webm' }); }
       finally { release(); }
       try {
         if (uploadConfig === consent && uploadQueue.enabled) {
-          await uploadQueue.enqueue({ session: sessionId, video: videoBlob, skeleton,
+          await savingSnapshot?.catch(() => {});
+          await uploadQueue.enqueue({ session: attemptSession, video: videoBlob, skeleton,
             diagnostics: recordingError ? new Blob([JSON.stringify(attemptDiagnostics())], { type: 'application/json' }) : diagnostics });
-          await uploadQueue.retry();
+          if (reason !== 'pagehide') await uploadQueue.retry();
         }
       } catch (error) { paintUploadStatus({ state: 'error', message: error.message || 'לא הצלחנו לשמור או לשלוח את הניסיון. השאירו את הדף פתוח ונסו שוב.' }); }
-      finally { finishing = false; $('again').disabled = false; }
+      finally { finishing = false; $('again').disabled = false; void wakeLock.release(); }
     })();
   } else release();
   $('session').hidden = true; $('result').hidden = false;
+  if (uploadConfig) $('result-upload-off').before($('upload-panel'));
   $('result-upload-off').hidden = !!uploadConfig;
   $('result-count').textContent = pair ? `הילד: ${counter.count} · אבא: ${adult.count} חזרות` : `${counter.count} חזרות נספרו`;
   $('result-rejected').textContent = `${counter.rejected + (adult?.rejected || 0)} תנועות לא נספרו:`;
@@ -425,6 +439,9 @@ function attemptDiagnostics() {
     model, modelHistory, detectorConfidence: { detection: .5, presence: .5, tracking: .5 },
     fps: meanFps, inferenceMs: totalInference / Math.max(1, totalFrames),
     totalFrames, thresholds: counter.t, framing: FRAMING, videoError: recordingError, runtimeError,
+    wakeLock: wakeLock.state, timeline: { ...timeline,
+      ...Object.fromEntries(['cameraStart', 'cameraReady', 'firstFrame', 'firstPose', 'firstFullBody', 'countdownStart', 'countStart', 'finish'].map(name => [name, attemptTimeline[name] ?? null])) },
+    uploadLog: readUploadLog(),
     endReason, countStarted: attemptStarted != null,
     countNotStartedReason: attemptStarted == null ? 'no-count-start' : null,
     attempts: [counter, ...(pair ? [adult] : [])].map((c, i) => {
@@ -478,8 +495,84 @@ function paintRecorder() {
 $('record-toggle').onclick = () => { if (recorder.active) recorder.stop(); else if (!active && stream && !recorder.recording) startRecording(); paintRecorder(); };
 $('record-download').onclick = () => { const json = recorder.json(); if (json) download(new Blob([json], { type: 'application/json' }), 'cam-lab-skeleton.json'); };
 document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) void wakeLock.acquire();
   if (document.hidden && stream) {
     if (active || uploadConfig) results('hidden'); else { release(); showSetup(); $('session').hidden = true; }
   }
 });
-window.addEventListener('pagehide', release);
+window.addEventListener('pagehide', () => {
+  if (!attemptEnded) results('pagehide');
+  else if (!finishing) release();
+});
+
+function discardWorker() {
+  clearTimeout(workerLoadTimer); worker?.terminate();
+  worker = null; workerLoaded = false; workerLoading = null;
+  $('model-status').textContent = 'מודל הזיהוי: לא זמין — נסו לפתוח מצלמה שוב';
+}
+function preloadModel() {
+  if (workerLoading) return workerLoading;
+  timeline.workerInitStart = Math.round(performance.now() - pageOpenedAt);
+  $('model-status').textContent = 'מודל הזיהוי: נטען…';
+  workerLoading = new Promise((resolve, reject) => {
+    try {
+      worker = new Worker('./pose-worker.js');
+      const initializedWorker = worker;
+      workerLoadTimer = setTimeout(() => reject(new Error('טעינת המודל המקומי נמשכה זמן רב מדי.')), 60000);
+      worker.onmessage = ({ data }) => {
+        if (worker !== initializedWorker) return;
+        if (data.type === 'ready') {
+          clearTimeout(workerLoadTimer); workerLoaded = true;
+          timeline.modelReady = Math.round(performance.now() - pageOpenedAt);
+          model = data.model; modelHistory = data.modelHistory;
+          $('model-status').textContent = 'מודל הזיהוי: מוכן'; resolve(); return;
+        }
+        if (data.type === 'configured') {
+          if (data.generation === generation) {
+            model = data.model; modelHistory = data.modelHistory;
+            if (configureWaiter?.generation === data.generation) { clearTimeout(configureWaiter.timer); configureWaiter.resolve(); configureWaiter = null; }
+          }
+          return;
+        }
+        if (data.type === 'error') {
+          if (data.generation != null && data.generation !== generation) return;
+          if (configureWaiter) { clearTimeout(configureWaiter.timer); configureWaiter.reject(new Error('model')); configureWaiter = null; }
+          if (!workerLoaded) { clearTimeout(workerLoadTimer); reject(new Error('הזיהוי המקומי לא נטען.')); }
+          else { fail('הזיהוי המקומי נעצר. נסו דפדפן מעודכן.', data.message); discardWorker(); }
+          return;
+        }
+        if (!stream || attemptEnded || data.generation !== generation) return;
+        if (data.type === 'pose') poseResult(data);
+        else if (data.type === 'model-switching') ready = false;
+        else if (data.type === 'model-change') {
+          ready = true; model = data.model; modelHistory = data.modelHistory || modelHistory;
+          const token = generation;
+          if (data.lowerResolution) void reduceResolution(stream.getVideoTracks()[0], { orientation: cameraOrientation }).then(result => {
+            if (token === generation && stream) cameraInfo = { ...cameraInfo, ...cameraSnapshot(stream.getVideoTracks()[0]), resolutionError: result.error || null };
+          });
+        }
+      };
+      worker.onerror = () => {
+        if (worker !== initializedWorker) return;
+        if (configureWaiter) { clearTimeout(configureWaiter.timer); configureWaiter.reject(new Error('model')); configureWaiter = null; }
+        clearTimeout(workerLoadTimer);
+        if (!workerLoaded) reject(new Error('עיבוד הזיהוי לא נטען.'));
+        else { fail('עיבוד המצלמה נעצר. אפשר לנסות מחדש בדפדפן מעודכן.'); discardWorker(); }
+      };
+      worker.postMessage({ type: 'init', numPoses: 1 });
+    } catch { reject(new Error('הזיהוי המקומי לא נטען. נדרש דפדפן מעודכן.')); }
+  });
+  const loading = workerLoading;
+  loading.catch(error => { if (workerLoading === loading) discardWorker(); $('model-status').textContent = error.message; });
+  return workerLoading;
+}
+async function prepareModel(token, pairMode) {
+  await preloadModel();
+  if (token !== generation || attemptEnded) return;
+  await new Promise((resolve, reject) => {
+    configureWaiter = { generation: token, resolve, reject,
+      timer: setTimeout(() => { configureWaiter = null; discardWorker(); reject(new Error('model timeout')); }, 60000) };
+    worker.postMessage({ type: 'configure', numPoses: pairMode ? 2 : 1, generation: token });
+  });
+}
+void preloadModel();

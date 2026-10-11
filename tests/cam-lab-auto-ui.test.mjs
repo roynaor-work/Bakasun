@@ -13,6 +13,7 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     constructor() {this.textContent='';this.children=[];this.hidden=false;this.disabled=false;this.style={};this.handlers={};this.value='';}
     addEventListener(name,handler){this.handlers[name]=handler;}
     append(child){this.children.push(child);} replaceChildren(){this.children=[];}
+    before(){}
     classList={toggle(){},remove(){}};
   }
   const elements=new Map(), get=id=>{if(!elements.has(id))elements.set(id,new Element());return elements.get(id);};
@@ -20,11 +21,11 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
   get('overlay').getContext=()=>ctx;
   Object.assign(get('video'),{videoWidth:720,videoHeight:1280,readyState:2,currentTime:0,play:async()=>{}});
   get('exercise').value='squats';get('age').value='7';get('height').value='120';get('mode').value='solo';get('camera-facing').value='user';get('camera-width').value='wide';
-  let now=0,raf,worker,stopped=0,cameraMode='approved';const events=[],requests=[],values=new Map(),records=new Map(),timers=[],cameraRequests=[];
+  let now=0,raf,worker,workerInit,workerCount=0,stopped=0,cameraMode='approved';const events=[],requests=[],values=new Map(),records=new Map(),timers=[],cameraRequests=[];
   const location={hash:'#upload=https%3A%2F%2Fupload.example.invalid%2Freceive&key=synthetic-key',pathname:'/cam-lab/',search:''};
   class FakeWorker {
-    constructor(){worker=this;} terminate(){events.push('worker-stop');}
-    postMessage(m){if(m.type==='init')this.onmessage({data:{type:'ready',model:'full',modelHistory:[{model:'full',reason:'initial',timestamp:0}]}});}
+    constructor(){worker=this;workerCount++;} terminate(){events.push('worker-stop');}
+    postMessage(m){if(m.type==='init'){workerInit=()=>this.onmessage({data:{type:'ready',model:'full',modelHistory:[{model:'full',reason:'initial',timestamp:0}]}});}else if(m.type==='configure'){this.generation=m.generation;this.onmessage({data:{type:'configured',generation:m.generation,model:'full',modelHistory:[{model:'full',reason:'initial',timestamp:0}]}});}}
   }
   class FakeStream {constructor(tracks){this.tracks=tracks;}getVideoTracks(){return this.tracks;}getTracks(){return this.tracks;}}
   class FakeMediaRecorder {
@@ -61,18 +62,22 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
       const track={kind:'video',stop(){stopped++;events.push('camera-stop');},addEventListener(){},getSettings:()=>({width:720,height:1280,...(zoom===undefined?{}:{zoom}),facingMode:'user'}),
         getCapabilities:()=>cameraMode==='approved'?{zoom:{min:.5,max:3}}:{},applyConstraints:async constraints=>{if(constraints.advanced?.[0]?.zoom!==undefined)zoom=constraints.advanced[0].zoom;}};return new FakeStream([track]);
     }}});
-    globals('fetch',async(endpoint,options)=>{requests.push(JSON.parse(options.body));events.push('fetch');return{ok:true,json:async()=>({ok:true})};});
+    globals('fetch',async(endpoint,options)=>{requests.push(JSON.parse(options.body));events.push('fetch');return{ok:true,json:async()=>({ok:true,assembled:true,bytes:JSON.parse(options.body).totalBytes})};});
     globals('MediaRecorder',FakeMediaRecorder);globals('MediaStream',FakeStream);globals('Worker',FakeWorker);
     globals('performance',{now:()=>now});globals('requestAnimationFrame',callback=>{raf=callback;return 1;});globals('cancelAnimationFrame',()=>{});
     globals('createImageBitmap',async()=>({close(){}}));globals('setTimeout',(fn,delay)=>{const t={fn,delay};timers.push(t);return t;});globals('clearTimeout',t=>{if(t)t.cleared=true;});
     await import('../workout/cam-lab/app.mjs?auto-upload-test');await flush();
+    assert.equal(get('model-status').textContent,'מודל הזיהוי: נטען…');assert.equal(workerCount,1);assert.equal(FakeMediaRecorder.instances.length,0);
     assert.equal(get('upload-off-banner').hidden,true);assert.equal(get('upload-on-banner').hidden,false);
     assert.equal(location.hash,'');assert.equal(get('upload-config-status').textContent,'שליחה לבדיקה: פעילה');assert.equal(get('record').checked,true);
-    await get('settings').handlers.submit({preventDefault(){}});await flush();assert.equal(FakeMediaRecorder.instances.length,1);
+    const opening=get('settings').handlers.submit({preventDefault(){}});await flush();
+    assert.equal(get('status').textContent,'טוענים את מודל הזיהוי, עוד רגע');assert.equal(get('start').disabled,true);assert.equal(get('countdown').textContent,'');
+    now=12000;workerInit();await opening;await flush();assert.equal(get('model-status').textContent,'מודל הזיהוי: מוכן');assert.equal(FakeMediaRecorder.instances.length,1);
+    worker.onmessage({data:{type:'error',generation:worker.generation-1,message:'stale worker error'}});assert.equal(get('error').hidden,true);
     assert.equal(cameraRequests[0].video.zoom,true);
     assert.equal(requests.length,0);assert.match(get('zoom-status').textContent,/0.5/);
     const frame=async sample=>{now+=50;get('video').currentTime+=.05;await raf();
-      worker.onmessage({data:{type:'pose',id:now/50,timestamp:now,poses:[{landmarks:sample.p,world:sample.world}],inferenceMs:20,model:'full'}});};
+      worker.onmessage({data:{type:'pose',generation:worker.generation,id:now/50,timestamp:now,poses:[{landmarks:sample.p,world:sample.world}],inferenceMs:20,model:'full'}});};
     const partial=pose();partial.p[15].visibility=.1;partial.p[16].visibility=.4;
     await frame(partial);assert.ok(colors.includes('#70e2b5'));assert.ok(colors.includes('#ffd685'));assert.ok(colors.includes('#ff8b8b'));
     assert.equal(get('start').disabled,false);
@@ -83,12 +88,15 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     for(let i=0;i<20;i++)await frame(pose({angle:110}));for(let i=0;i<20;i++)await frame(pose());
     get('finish').onclick();get('stop').onclick();get('finish').onclick();await flush();
     assert.equal(stopped,1);assert.ok(events.indexOf('video-final')<events.indexOf('camera-stop'));assert.ok(events.indexOf('durable')<events.indexOf('fetch'));
-    assert.deepEqual(requests.map(r=>r.part),['video','skeleton','diagnostics']);assert.equal(get('upload-status').textContent,'נשלח לבדיקה');assert.equal(records.size,0);
-    const diagnostic=JSON.parse(Buffer.from(requests[2].data,'base64').toString());
+    assert.deepEqual(requests.map(r=>r.part),['diagnostics','skeleton','video']);assert.equal(get('upload-status').textContent,'נשלח לבדיקה');assert.equal(records.size,0);
+    const diagnostic=JSON.parse(Buffer.from(requests[0].data,'base64').toString());
     assert.equal(diagnostic.countStarted,true);assert.equal(diagnostic.countNotStartedReason,null);assert.equal(diagnostic.endReason,'finish');
     assert.equal(diagnostic.labVersion,'4.0.0');assert.equal(diagnostic.userAgent,'synthetic-Android');assert.equal(diagnostic.camera.settings.zoom,.5);
     assert.equal(diagnostic.camera.ptz.requested,true);assert.equal(diagnostic.camera.ptz.granted,true);
     assert.equal(diagnostic.camera.ptz.state,'granted');assert.equal(diagnostic.camera.ptz.fallback,false);assert.equal(diagnostic.camera.ptz.actualZoom,.5);
+    assert.equal(diagnostic.wakeLock,'unsupported');
+    for(const name of ['workerInitStart','modelReady','cameraStart','cameraReady','firstFrame','firstPose','firstFullBody','countdownStart','countStart','finish'])assert.equal(typeof diagnostic.timeline[name],'number',name);
+    assert.ok(diagnostic.timeline.workerInitStart<=diagnostic.timeline.cameraStart&&diagnostic.timeline.modelReady<=diagnostic.timeline.firstFrame);
     assert.equal(diagnostic.model,'full');assert.equal(diagnostic.attempts[0].counted,1);assert.ok(diagnostic.attempts[0].requiredPoints[27].observedPercent>0);
     assert.ok(diagnostic.attempts[0].preparation.frames>0);assert.equal(JSON.stringify(diagnostic).includes('synthetic-key'),false);
     const skeleton=JSON.parse(Buffer.from(requests[1].data,'base64').toString());assert.equal(skeleton.version,2);
@@ -97,7 +105,8 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     // Four-minute limit also delivers an attempt that never reached Start.
     timers.filter(t=>t.delay===240000&&!t.cleared).at(-1).fn();await flush();assert.equal(requests.length,6);
     get('finish').onclick();get('stop').onclick();await flush();assert.equal(requests.length,6); // Already finalized, including after sending.
-    const placementOnly=JSON.parse(Buffer.from(requests[5].data,'base64').toString());assert.equal(placementOnly.attempts[0].counted,0);
+    const placementOnly=JSON.parse(Buffer.from(requests[3].data,'base64').toString());assert.equal(placementOnly.attempts[0].counted,0);
+    assert.equal(placementOnly.uploadLog.length,3);assert.equal(placementOnly.timeline.countStart,null);
     assert.equal(placementOnly.countStarted,false);assert.equal(placementOnly.countNotStartedReason,'no-count-start');assert.equal(placementOnly.endReason,'duration-limit');
     assert.ok(placementOnly.attempts[0].preparation.frames>0);
     assert.equal(get('error').hidden,true);assert.equal(placementOnly.camera.settings.zoom,1);
@@ -109,14 +118,18 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     for(let i=0;i<60;i++)await frame(pose());
     assert.equal(get('start').hidden,true);assert.equal(FakeMediaRecorder.instances.length,3);
     get('finish').onclick();await flush();assert.equal(requests.length,9);
-    const unsupported=JSON.parse(Buffer.from(requests[8].data,'base64').toString());assert.equal(unsupported.camera.settings.zoom,undefined);
+    const unsupported=JSON.parse(Buffer.from(requests[6].data,'base64').toString());assert.equal(unsupported.camera.settings.zoom,undefined);
     assert.equal(unsupported.countStarted,true);assert.equal(unsupported.countNotStartedReason,null);
     assert.ok(JSON.parse(Buffer.from(requests[7].data,'base64').toString()).countStartMs>0);
-    assert.equal(new Set(requests.map(r=>r.session)).size,3); // New capture and countdown after Again, without reload.
+    assert.equal(workerCount,1);assert.equal(new Set(requests.map(r=>r.session)).size,3); // New capture and countdown after Again, without reload.
     assert.equal(unsupported.camera.ptz.requested,false);assert.equal(unsupported.camera.ptz.granted,null);
     assert.equal(unsupported.camera.ptz.state,'unsupported');assert.equal(unsupported.camera.ptz.actualZoom,null);
     get('again').onclick();await get('settings').handlers.submit({preventDefault(){}});await get('upload-disable').onclick();
     assert.equal(values.has('camlab.upload'),false);get('finish').onclick();await flush();assert.equal(requests.length,9);
+    get('again').onclick();await get('settings').handlers.submit({preventDefault(){}});
+    worker.onerror();await flush();assert.equal(get('error').hidden,false);
+    const recovering=get('settings').handlers.submit({preventDefault(){}});await flush();assert.equal(workerCount,2);workerInit();await recovering;
+    assert.equal(get('model-status').textContent,'מודל הזיהוי: מוכן');get('stop').onclick();
   } finally {for(const [key,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}}
 });
 

@@ -36,9 +36,9 @@ test('native-style timers retain the global receiver', async () => {
   recording.start(camera());await recording.stop();assert.ok(calls>=3);
 });
 
-test('video uses supported webm at 1.2Mbps and strips all audio tracks', async () => {
+test('video uses supported webm at 0.6Mbps and strips all audio tracks', async () => {
   const { recording, clock } = setup(); const stream = camera(); assert.equal(recording.start(stream), 'video/webm;codecs=vp8');
-  const encoder = recording.recorder; assert.equal(encoder.options.videoBitsPerSecond, VIDEO_BITRATE); assert.equal(VIDEO_BITRATE, 1200000);
+  const encoder = recording.recorder; assert.equal(encoder.options.videoBitsPerSecond, VIDEO_BITRATE); assert.equal(VIDEO_BITRATE, 600000);
   assert.equal(encoder.stream.tracks.length, 1); assert.equal(encoder.stream.tracks[0].kind, 'video'); assert.equal(encoder.timeslice, 1000);
   assert.equal(clock.entries[0].delay, 240000);
   await recording.stop(); assert.equal(stream.getVideoTracks()[0].stopped, false);

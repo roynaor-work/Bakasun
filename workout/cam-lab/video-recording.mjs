@@ -1,6 +1,6 @@
 import { MAX_UPLOAD_BYTES } from './upload.mjs';
 export const VIDEO_LIMIT_MS = 4 * 60 * 1000;
-export const VIDEO_BITRATE = 1200000;
+export const VIDEO_BITRATE = 600000;
 const recordingError = 'המכשיר לא הצליח להקליט וידאו לבדיקה. נסו דפדפן מעודכן; הניסיון עדיין לא נשלח.';
 
 export function chooseVideoMime(MediaRecorderClass = globalThis.MediaRecorder, userAgent = globalThis.navigator?.userAgent || '') {
@@ -79,6 +79,7 @@ export class VideoRecorder {
     else { this.blob = new Blob(this.chunks, { type: this.mime }); this.resolve(this.blob); }
     this.chunks = [];
   }
+  snapshot() { return this.blob || new Blob(this.chunks, { type: this.mime || 'video/webm' }); }
   stop() {
     if (!this.recorder) return Promise.resolve(null);
     this.requestStop(); return this.finished;

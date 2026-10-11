@@ -14,6 +14,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     append(child) { this.children.push(child); }
     replaceChildren() { this.children = []; }
     click() { this.onclick?.(); }
+    before() {}
     classList = { toggle() {}, remove() {} };
   }
   const elements = new Map(), documentHandlers = {};
@@ -29,7 +30,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
   Object.defineProperty(status, 'textContent', { get: () => statusText, set: text => { statusText = text; painted.push(now); } });
   class FakeWorker {
     constructor() { worker = this; }
-    postMessage(message) { if (message.type === 'init') this.onmessage({ data: { type: 'ready' } }); }
+    postMessage(message) { if (['init', 'configure'].includes(message.type)) { this.generation = message.generation; this.onmessage({ data: { type: message.type === 'init' ? 'ready' : 'configured', generation: message.generation, model: 'full', modelHistory: [] } }); } }
     terminate() { terminated++; }
   }
   const oldCreate = URL.createObjectURL, oldRevoke = URL.revokeObjectURL;
@@ -67,7 +68,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     await Promise.resolve();
     const frame = async sample => {
       now += 50; get('video').currentTime += .05; await raf();
-      worker.onmessage({ data: { type: 'pose', id: now / 50, timestamp: now,
+      worker.onmessage({ data: { type: 'pose', generation: worker.generation, id: now / 50, timestamp: now,
         landmarks: sample?.p || [], world: sample?.world || [], ...(Array.isArray(sample) ? { poses: sample } : {}), inferenceMs: 54 } });
     };
     for (let i = 0; i < 70; i++) await frame(pose({ angle: 159, feet: 1.7, hands: .3 }));
@@ -93,7 +94,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     for (const s of speech) assert.equal(s.voice.localService, true);
     const guidance = speech.filter(s => !cues.has(s.text));
     for (let i = 1; i < guidance.length; i++) assert.ok(guidance[i].time - guidance[i - 1].time >= 6000);
-    get('finish').click(); assert.equal(get('result-upload-off').hidden, false); assert.equal(stopped, 1); assert.equal(terminated, 1);
+    get('finish').click(); assert.equal(get('result-upload-off').hidden, false); assert.equal(stopped, 1); assert.equal(terminated, 0);
     assert.equal(get('result-count').textContent, '1 חזרות נספרו');
     assert.ok(get('diagnostics').children.some(li => li.textContent.includes('לפני מחזור: 1')));
     get('export').click(); const output = JSON.parse(await exported.text());
@@ -137,7 +138,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
       person(pose(), { x: .54, size: 1 })]);
     for (let i = 0; i < 16; i++) await frame([child(180), dad(180)]);
     assert.equal(get('count').textContent, 1); assert.equal(get('dad-count').textContent, 1);
-    get('finish').click(); assert.equal(stopped, 2); assert.equal(terminated, 2);
+    get('finish').click(); assert.equal(stopped, 2); assert.equal(terminated, 0);
     assert.equal(get('result-count').textContent, 'הילד: 1 · אבא: 1 חזרות');
     get('record-download').click(); const skeleton = JSON.parse(await exported.text());
     assert.equal(skeleton.type, 'cam-lab-skeleton'); assert.equal(skeleton.mode, 'pair');
@@ -165,11 +166,11 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     assert.equal(get('count').textContent, 1);
     assert.ok(speech.some(s => s.text.includes('הַגּוּף בְּקוֹ יָשָׁר')));
     get('finish').click();
-    assert.equal(stopped, 3); assert.equal(terminated, 3); assert.equal(get('record-download').disabled, true);
+    assert.equal(stopped, 3); assert.equal(terminated, 0); assert.equal(get('record-download').disabled, true);
     const spokenBefore = speech.length; voices = [{ lang: 'he-IL', localService: false }];
     now += 7000; get('again').click(); await get('settings').handlers.submit({ preventDefault() {} });
     await frame(pose()); assert.equal(speech.length, spokenBefore);
-    get('stop').click(); assert.equal(stopped, 4); assert.equal(terminated, 4);
+    get('stop').click(); assert.equal(stopped, 4); assert.equal(terminated, 0);
     cameraMode = 'nozoom';
     await get('settings').handlers.submit({ preventDefault() {} });
     assert.match(get('zoom-status').textContent, /0.5 לא זמין/);
@@ -179,7 +180,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     assert.equal(stopped, 5); assert.equal(get('setup').hidden, false);
     cameraMode = 'wide'; await get('settings').handlers.submit({ preventDefault() {} });
     assert.deepEqual(requestedCameras.at(-1).video.deviceId, { exact: 'rear-wide' });
-    get('stop').click(); assert.equal(stopped, 6); assert.equal(terminated, 6);
+    get('stop').click(); assert.equal(stopped, 6); assert.equal(terminated, 0);
   } finally {
     URL.createObjectURL = oldCreate; URL.revokeObjectURL = oldRevoke;
     for (const [key, descriptor] of saved) {

@@ -20,7 +20,7 @@ test('upload warning is spoken once, only for disabled uploads with a local Hebr
       const elements = new Map(), speech = [], handlers = {};
       let voices = initialVoices;
       const get = id => {
-        if (!elements.has(id)) elements.set(id, { hidden: false, checked: true, textContent: '', addEventListener() {} });
+        if (!elements.has(id)) elements.set(id, { hidden: false, checked: true, textContent: '', before() {}, addEventListener() {} });
         return elements.get(id);
       };
       get('overlay').getContext = () => ({});
