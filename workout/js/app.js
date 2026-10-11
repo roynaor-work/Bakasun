@@ -2,7 +2,7 @@
 import { EXERCISES, CATS, byId } from './exercises.js?v=20261010-camera-1';
 import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261010-camera-1';
 import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js?v=20261010-camera-1';
-import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js?v=20261010-camera-1';
+import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus, setVideoFamily } from './vids.js?v=20261011-private-vids-1';
 import { Figure, cycleMs } from './figure.js?v=20261010-camera-1';
 import { store } from './store.js?v=20261010-camera-1';
 import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261010-camera-1';
@@ -173,6 +173,7 @@ function confetti() {
 // ---- ניתוב ----
 const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, minute: minuteScreen, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, 'parent-together': parentTogether, 'parent-week': parentWeek, together, basketball };
 function route() {
+  setVideoFamily(store.profile.familyCode);
   const [path, arg] = location.hash.replace(/^#\/?/, '').split('/');
   if (!['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) lockParent();
   (routes[path] || home)(arg);
@@ -1064,7 +1065,7 @@ function settings() {
   });
   if ($('#vidrefresh')) $('#vidrefresh').onclick = async () => { $('#vidrefresh').textContent = '⏳'; await refreshCloud(store.profile.familyCode); settings(); };
   app.querySelectorAll('[data-playvid]').forEach(b => b.onclick = async () => { const box = app.querySelector(`.vidprev[data-prev="${b.dataset.playvid}"]`); if (!box.hidden) { box.hidden = true; box.innerHTML = ''; return; } const m = await videoUrl(b.dataset.playvid, store.profile.familyCode); if (!m) return; box.innerHTML = m.kind === 'image' ? `<img class="exvid" src="${m.url}" alt="">` : `<video class="exvid" src="${m.url}" autoplay muted loop playsinline controls></video>`; box.hidden = false; });
-  app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { const id = b.dataset.delvid, inCloud = !!cloudVideos()[id]; if (!confirm(`למחוק את הסרטון של "${byId[id].name}"${inCloud ? ' מהטלפון הזה ומהענן (גם מהטלפון של הילד)' : ''}?`)) return; await deleteVideo(id); if (inCloud && store.profile.familyCode) await cloudDelete(store.profile.familyCode, id); settings(); });
+  app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { const id = b.dataset.delvid, inCloud = !!cloudVideos()[id]; if (!confirm(`למחוק את הסרטון של "${byId[id].name}"${inCloud ? ' מהטלפון הזה ומהענן (גם מהטלפון של הילד)' : ''}?`)) return; if (inCloud && store.profile.familyCode && !await cloudDelete(store.profile.familyCode, id)) { alert('המחיקה בענן נכשלה: ' + vidStatus.error); return; } await deleteVideo(id); settings(); });
   $('#intro').onchange = e => store.setProfile({ intro: e.target.checked });
   $('#stage3d').onchange = e => store.setProfile({ stage3d: e.target.checked }); /* כיבוי = דמות המקלות (טלפון איטי / בלי WebGL) */
   $('#voicetest').onclick = () => { if (!speak(SAY_UI.test, { force: true })) alert('אין הקראה במכשיר הזה.'); };
@@ -1080,9 +1081,9 @@ function settings() {
   document.querySelectorAll('[data-clear]').forEach(btn => btn.onclick = () => { if (confirm('להסיר את ההקלטה?')) { localStorage.removeItem(btn.dataset.clear); settings(); } });
   $('#facePic').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { localStorage.setItem('kidfit.facePic', await fitImage(f, 160, 160, 0.85)); settings(); } catch { alert('לא הצלחתי לקרוא את התמונה.'); } };
   const fpc = $('#facePicClear'); if (fpc) fpc.onclick = () => { if (confirm('להסיר את תמונת הפנים?')) { localStorage.removeItem('kidfit.facePic'); settings(); } };
-  $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); if (v.length >= 8) { cloud.register(v); refreshCloud(v); } }; // עם קוד מלא: מביאים גם את רשימת הסרטונים של המשפחה
+  $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); setVideoFamily(v); if (v.length >= 8) refreshCloud(v); }; // קוד שמוקלד נבדק; רק יצירת קוד חדש רושמת משפחה
   // קוד חדש נרשם בענן (רק הגיבוב שלו); בלי רישום הענן דוחה כתיבה וקריאה
-  $('#newfam').onclick = async () => { if (p.familyCode && !confirm('ליצור קוד חדש? צריך להקליד אותו גם בטלפון של אבא.')) return; const c = cloud.newFamilyCode(); store.setProfile({ familyCode: c }); await cloud.register(c); settings(); };
+  $('#newfam').onclick = async () => { if (p.familyCode && !confirm('ליצור קוד חדש? צריך להקליד אותו גם בטלפון של אבא.')) return; const c = cloud.newFamilyCode(); store.setProfile({ familyCode: c }); setVideoFamily(c); await cloud.register(c); settings(); };
   $('#copyfam').onclick = async () => { try { await navigator.clipboard.writeText(store.profile.familyCode); $('#cloudstate').textContent = 'הקוד הועתק'; } catch { $('#fam').select(); } };
   $('#syncnow').onclick = async () => { $('#cloudstate').textContent = 'שולח...'; const ok = await cloud.flush(); $('#cloudstate').textContent = ok || !cloud.status.pending() ? 'הכול בענן ✓' : '⚠️ ' + (cloud.status.error || 'אין רשת'); };
   $('#gameSeconds').onchange = e => store.setProfile({ gameSeconds: +e.target.value }); $('#musicOn').onchange = e => store.setProfile({ music: e.target.checked });
