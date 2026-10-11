@@ -224,9 +224,11 @@ export class UploadQueue {
         data: await blobToBase64(blob) });
       bodyBytes = new TextEncoder().encode(body).length;
       if (!this.enabled || this.config !== config) return false;
+      // The final video request also waits for assembly of the entire file.
+      const finalChunk = chunk != null && chunk === Math.max(1, Math.ceil(part.blob.size / VIDEO_CHUNK_BYTES)) - 1;
       const timedOut = new Promise((_, reject) => {
         timer = this.setTimer(() => { controller.abort(); reject(new UploadError('timeout')); },
-          Math.max(this.timeoutMs, requestTimeoutMs(bodyBytes)));
+          Math.max(this.timeoutMs, requestTimeoutMs(bodyBytes), finalChunk ? 5000 * part.blob.size / 1_000_000 : 0));
       });
       const { response, result } = await Promise.race([this.fetchImpl(config.endpoint, {
         method: 'POST', headers: { 'Content-Type': 'text/plain' }, body, signal: controller.signal,

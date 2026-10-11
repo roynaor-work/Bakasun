@@ -430,6 +430,42 @@ test('timeout is at least 60 seconds and grows with UTF-8 request body; retries 
   assert.deepEqual(waits, [2000, 5000, 15000]);
 });
 
+test('a slow final fetch uses at least 5 seconds per MB of the full file, while earlier chunks use the normal timeout', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const store = new MemoryStore(), requests = [], timeouts = [];
+  let notifyFinal, finalSignal;
+  const finalStarted = new Promise(resolve => { notifyFinal = resolve; });
+  const data = input('slow-final'); data.video = new Blob([new Uint8Array(15_000_001)], { type: 'video/webm' });
+  const queue = new NativeUploadQueue({ config, store,
+    setTimer(fn, ms) { timeouts.push(ms); return setTimeout(fn, ms); },
+    fetchImpl: async (_, options) => {
+      const body = JSON.parse(options.body), final = body.chunk === body.chunks - 1;
+      requests.push(body);
+      const normal = requestTimeoutMs(new TextEncoder().encode(options.body).length);
+      assert.equal(timeouts.at(-1), Math.max(normal, final ? 5000 * data.video.size / 1_000_000 : 0));
+      if (final) {
+        finalSignal = options.signal; notifyFinal();
+        await new Promise(resolve => setTimeout(resolve, 65000));
+      }
+      return { ok: true, json: async () => ({ ok: true, assembled: final, ...(final ? { bytes: body.totalBytes } : {}) }) };
+    } });
+  await queue.enqueue(data); const sending = queue.retry(); await finalStarted;
+  t.mock.timers.tick(60001); assert.equal(finalSignal.aborted, false);
+  assert.equal(store.records.size, 1, 'retain the file until final assembly is acknowledged');
+  t.mock.timers.tick(5000); assert.equal(await sending, true); assert.equal(store.records.size, 0);
+  const chunks = requests.filter(r => r.part === 'video').map(r => r.chunk);
+  assert.deepEqual(chunks, Array.from({ length: Math.ceil(data.video.size / VIDEO_CHUNK_BYTES) }, (_, i) => i));
+});
+
+test('the final timeout keeps the normal and configured timeout floors for a small file', async () => {
+  for (const minimum of [0, 90000]) {
+    const timeouts = [], queue = new NativeUploadQueue({ config, store: new MemoryStore(), timeoutMs: minimum,
+      setTimer(fn, ms) { timeouts.push(ms); return setTimeout(fn, ms); }, fetchImpl: async () => goodResponse() });
+    await queue.enqueue(input()); assert.equal(await queue.retry(), true);
+    assert.deepEqual(timeouts, [Math.max(60000, minimum), Math.max(60000, minimum), Math.max(60000, minimum)]);
+  }
+});
+
 test('upload log survives queues, contains last 30 safe events and excludes endpoint, key and raw errors', async () => {
   const storage = fakeStorage(), requests = [], store = new MemoryStore();
   const queue = new UploadQueue({ config, store, logStorage: storage, fetchImpl: chunkServer(requests) });

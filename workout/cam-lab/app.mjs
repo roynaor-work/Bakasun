@@ -316,8 +316,9 @@ $('settings').addEventListener('submit', async event => {
       try {
         videoRecorder = new VideoRecorder({ onLimit: () => { $('feedback').textContent = 'הניסיון הסתיים במגבלת 4 דקות.'; results('duration-limit'); },
           onError: () => { recordingError = 'הקלטת הווידאו נכשלה. השלד והאבחון נשמרים; יש לבדוק תמיכה בהקלטה בדפדפן.'; $('error').hidden = false; $('error').textContent = recordingError; } });
-        videoRecorder.start(stream);
+        await videoRecorder.startConstrained(stream);
       } catch { recordingError = 'הדפדפן לא הצליח להתחיל הקלטת וידאו. השלד והאבחון יישלחו עם דיווח על התקלה.'; }
+      if (token !== generation || attemptEnded) return;
       attemptTimer = setTimeout(() => { $('feedback').textContent = 'הניסיון הסתיים במגבלת 4 דקות.'; results('duration-limit'); }, 240000);
       paintRecorder();
     }
@@ -389,7 +390,7 @@ function results(reason = 'finish') {
     $('again').disabled = true;
     const capture = videoRecorder; videoRecorder = null;
     const skeleton = new Blob([recorder.json({ compact: true }) || '{}'], { type: 'application/json' });
-    const diagnostics = new Blob([JSON.stringify(attemptDiagnostics())], { type: 'application/json' });
+    const diagnostics = new Blob([JSON.stringify(attemptDiagnostics(capture))], { type: 'application/json' });
     const attemptSession = sessionId;
     // Start a durable write immediately on pagehide, using timeslice data already
     // delivered. The complete final recorder Blob replaces it if stop() finishes.
@@ -407,7 +408,7 @@ function results(reason = 'finish') {
         if (uploadConfig === consent && uploadQueue.enabled) {
           await savingSnapshot?.catch(() => {});
           await uploadQueue.enqueue({ session: attemptSession, video: videoBlob, skeleton,
-            diagnostics: recordingError ? new Blob([JSON.stringify(attemptDiagnostics())], { type: 'application/json' }) : diagnostics });
+            diagnostics: new Blob([JSON.stringify(attemptDiagnostics(capture))], { type: 'application/json' }) });
           if (reason !== 'pagehide') await uploadQueue.retry();
         }
       } catch (error) { paintUploadStatus({ state: 'error', message: error.message || 'לא הצלחנו לשמור או לשלוח את הניסיון. השאירו את הדף פתוח ונסו שוב.' }); }
@@ -432,13 +433,13 @@ function results(reason = 'finish') {
   const meanFps = totalElapsed ? 1000 * Math.max(0, totalFrames - 1) / totalElapsed : 0;
   $('result-metrics').textContent = `${totalFrames} פריימים עובדו · FPS ממוצע: ${meanFps.toFixed(1)} · זיהוי ממוצע: ${(totalInference / Math.max(totalFrames, 1)).toFixed(0)} מ״ש · זמן עיבוד P95 (עד 900 פריימים): ${p95.toFixed(0)} מ״ש`;
 }
-function attemptDiagnostics() {
+function attemptDiagnostics(capture = videoRecorder) {
   const meanFps = totalElapsed ? 1000 * Math.max(0, totalFrames - 1) / totalElapsed : 0;
   return { labVersion: LAB_VERSION, userAgent: navigator.userAgent || '', session: sessionId,
     openedAt: openedAt?.toISOString(), exercise, mode: pair ? 'pair' : 'solo', camera: cameraInfo,
     model, modelHistory, detectorConfidence: { detection: .5, presence: .5, tracking: .5 },
     fps: meanFps, inferenceMs: totalInference / Math.max(1, totalFrames),
-    totalFrames, thresholds: counter.t, framing: FRAMING, videoError: recordingError, runtimeError,
+    totalFrames, thresholds: counter.t, framing: FRAMING, videoError: recordingError, video: capture?.diagnostics() || null, runtimeError,
     wakeLock: wakeLock.state, timeline: { ...timeline,
       ...Object.fromEntries(['cameraStart', 'cameraReady', 'firstFrame', 'firstPose', 'firstFullBody', 'countdownStart', 'countStart', 'finish'].map(name => [name, attemptTimeline[name] ?? null])) },
     uploadLog: readUploadLog(),

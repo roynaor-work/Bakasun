@@ -109,6 +109,7 @@ def open_camera(page):
     assert page.locator('#zoom-status').is_visible()
     check_banner(page, True)
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    assert page.evaluate("sourceVideoTrack.getSettings().frameRate === sourceFrameRate"), 'recording must leave the camera/inference frame rate unchanged'
 
 
 def wait_sent(page, timeout=30000):
@@ -121,7 +122,7 @@ def wait_sent(page, timeout=30000):
     assert page.evaluate("document.querySelector('#video').srcObject===null")
 
 
-def check_attempt(offset, end_reason):
+def check_attempt(offset, end_reason, fallback=False):
     attempt = parts[offset:]
     assert [v['part'] for v in attempt[:2]] == ['diagnostics', 'skeleton']
     assert all(v['part'] == 'video' for v in attempt[2:])
@@ -132,6 +133,15 @@ def check_attempt(offset, end_reason):
     assert skeleton['version'] == 2 and len(skeleton['frames']) > 0
     assert diagnostics['labVersion'] == '4.0.0' and diagnostics['model'] in ['full', 'lite']
     assert diagnostics['session'] == attempt[0]['session'] and diagnostics['endReason'] == end_reason
+    video = diagnostics['video']
+    assert video['requestedFrameRate'] == 15 and video['requestedVideoBitsPerSecond'] == 800000
+    assert video['videoBitsPerSecond'] == 800000
+    if fallback:
+        assert video['track'] == 'original' and video['constraint'] == 'rejected'
+        assert video['fallback'] == 'constraints-rejected' and video['frameRate'] == diagnostics['camera']['settings']['frameRate']
+    else:
+        assert video['track'] == 'clone' and video['constraint'] == 'applied'
+        assert video['fallback'] is None and video['frameRate'] == 15
     assert diagnostics['attempts'][0]['preparation']['frames'] > 0
     assert diagnostics['countStarted'] == (skeleton['countStartMs'] is not None)
     if skeleton['countStartMs'] is None:
@@ -169,6 +179,15 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
                 '--no-sandbox', '--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream',
                 '--use-gl=angle', '--use-angle=swiftshader'])
             context = browser.new_context(viewport={'width': 360, 'height': 844}, ignore_https_errors=True)
+            context.add_init_script("""(() => {
+              const acquire = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+              navigator.mediaDevices.getUserMedia = async constraints => {
+                const stream = await acquire(constraints);
+                window.sourceVideoTrack = stream.getVideoTracks()[0];
+                window.sourceFrameRate = sourceVideoTrack.getSettings().frameRate;
+                return stream;
+              };
+            })();""")
             page = context.new_page()
             errors, reports = [], []
             page.on('pageerror', lambda e: errors.append(str(e)))
@@ -223,6 +242,31 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
                 assert len({r['session'] for r in reports}) == len(reports)
                 assert len(acknowledgements) == len(parts) == 3 * len(reports)
                 page.locator('#again').click()
+
+            # Reject only the clone's frame-rate constraint. Camera, model and
+            # encoder remain real; the recorder must fall back to the source.
+            fallback_page = context.new_page()
+            fallback_page.on('pageerror', lambda e: errors.append(str(e)))
+            fallback_page.add_init_script("""(() => {
+              const nativeClone = MediaStreamTrack.prototype.clone;
+              const nativeApply = MediaStreamTrack.prototype.applyConstraints;
+              const copies = new WeakSet();
+              MediaStreamTrack.prototype.clone = function() {
+                const copy = nativeClone.call(this); copies.add(copy); return copy;
+              };
+              MediaStreamTrack.prototype.applyConstraints = function(value) {
+                if (copies.has(this) && value.frameRate === 15) return Promise.reject(new DOMException('synthetic rejection', 'OverconstrainedError'));
+                return nativeApply.call(this, value);
+              };
+            })();""")
+            fallback_page.goto(url)
+            offset = len(parts)
+            open_camera(fallback_page)
+            fallback_page.wait_for_timeout(1200)
+            fallback_page.locator('#finish').click()
+            wait_sent(fallback_page)
+            reports.append(check_attempt(offset, 'finish', fallback=True))
+            fallback_page.close()
 
             # Drive both four-minute callbacks without waiting four wall-clock minutes.
             # MediaRecorder and final data events remain real; only timer delivery is simulated.
@@ -312,6 +356,10 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             slow_report = {'recordingSeconds': 60, 'uploadBytesPerSecond': 200000, 'uploadSeconds': upload_seconds,
                            'videoBytes': len(captured), 'sha256': hashlib.sha256(captured).hexdigest(),
                            'identicalBytes': True, 'chunksRequested': chunk_numbers}
+            slow_diagnostics = json.loads(slow_requests[0]['data'])
+            assert slow_diagnostics['video']['frameRate'] == 15 and slow_diagnostics['video']['videoBitsPerSecond'] == 800000
+            slow_report['frameRate'] = slow_diagnostics['video']['frameRate']
+            slow_report['videoBitsPerSecond'] = slow_diagnostics['video']['videoBitsPerSecond']
             print(json.dumps({'slowUpload': slow_report}), flush=True)
             cdp.detach()
             slow_page.close()

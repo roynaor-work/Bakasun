@@ -17,8 +17,9 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[2]
-PARTS, REDIRECTS = [], []
-FAIL_SKELETON = False
+PARTS, REDIRECTS, RESPONSES = [], [], []
+CHUNKS = {}
+FAIL_SKELETON = 0
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -37,12 +38,27 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         assert self.headers['Content-Type'] == 'text/plain'
         data = json.loads(self.rfile.read(int(self.headers['Content-Length'])))
         assert data['secret'] == 'synthetic-browser-key'
-        PARTS.append({**data, 'data': base64.b64decode(data['data'])})
+        decoded = base64.b64decode(data['data'], validate=True)
+        PARTS.append({**data, 'data': decoded})
         reject = FAIL_SKELETON and data['part'] == 'skeleton'
         if reject:
-            FAIL_SKELETON = False
+            FAIL_SKELETON -= 1
+        result = {'ok': not bool(reject)}
+        if data['part'] == 'video':
+            chunk, count, total = data['chunk'], data['chunks'], data['totalBytes']
+            assert 0 <= chunk < count and count == max(1, (total + 1572863) // 1572864)
+            assert len(decoded) == min(1572864, max(0, total - chunk * 1572864))
+            saved = CHUNKS.setdefault(data['session'], {})
+            saved[chunk] = decoded
+            assembled = len(saved) == count
+            result['assembled'] = assembled
+            if assembled:
+                merged = b''.join(saved[i] for i in range(count))
+                assert len(merged) == total
+                result['bytes'] = len(merged)
+        RESPONSES.append(result)
         self.send_response(302)
-        self.send_header('Location', '/receipt-failed' if reject else '/receipt')
+        self.send_header('Location', f'/receipt/{len(RESPONSES) - 1}')
         self.send_header('Content-Length', '0')
         self.end_headers()
 
@@ -53,7 +69,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
-            self.wfile.write(b'{"ok":false}' if self.path == '/receipt-failed' else b'{"ok":true}')
+            self.wfile.write(json.dumps(RESPONSES[int(self.path.rsplit('/', 1)[1])]).encode())
         else:
             super().do_GET()
 
@@ -94,11 +110,11 @@ def open_camera(page, origin):
 
 def verify_parts(start, reason):
     received = PARTS[start:]
-    assert [part['part'] for part in received] == ['video', 'skeleton', 'diagnostics'], received
+    assert [part['part'] for part in received] == ['diagnostics', 'skeleton', 'video'], received
     assert len({part['session'] for part in received}) == 1
     assert all(part['session'].startswith('app-') for part in received)
-    assert received[0]['mime'] == 'video/webm' and len(received[0]['data']) > 0
-    skeleton, diagnostics = json.loads(received[1]['data']), json.loads(received[2]['data'])
+    assert received[2]['mime'] == 'video/webm' and len(received[2]['data']) > 0
+    skeleton, diagnostics = json.loads(received[1]['data']), json.loads(received[0]['data'])
     assert skeleton['version'] == 2 and skeleton['exercise'] == 'squats'
     assert diagnostics['endReason'] == reason and diagnostics['exercise'] == 'squats'
     assert diagnostics['appVersion'] == '20261010-camera-1' and diagnostics['target'] == 11
@@ -237,8 +253,8 @@ def simulation(browser, origin):
     expect(page.locator('#camera-count')).to_have_text('1')
     hold(145, 5); hold(90); hold(180, 6)
     expect(page.locator('#camera-upload')).to_contain_text('נשלח לבדיקה', timeout=30000)
-    assert [p['part'] for p in PARTS[start:]] == ['video', 'skeleton', 'diagnostics']
-    diagnostics = json.loads(PARTS[-1]['data'])
+    assert [p['part'] for p in PARTS[start:]] == ['diagnostics', 'skeleton', 'video']
+    diagnostics = json.loads(PARTS[start]['data'])
     assert diagnostics['endReason'] == 'target' and diagnostics['counted'] == 2
     session = page.evaluate("JSON.parse(localStorage.getItem('kidfit.v1')).sessions.at(-1)")
     assert session['items'][0]['done'] == 2 and session['items'][0]['secs'] > 4
@@ -324,18 +340,18 @@ with tempfile.TemporaryDirectory(prefix='workout-camera-') as temp:
             expect(page.locator('#camera-upload')).to_contain_text('נשלח לבדיקה', timeout=30000)
             assert verify_parts(start, 'exit') > 0
             assert page.locator('#camera-video').count() == 0
-            # An acknowledged video is not sent again after a failed skeleton.
+            # An acknowledged diagnostic is not sent again after skeleton retries fail.
             start = len(PARTS)
-            FAIL_SKELETON = True
+            FAIL_SKELETON = 4
             open_camera(page, origin)
             page.wait_for_timeout(2000)
             page.locator('#camera-finish').click()
-            expect(page.locator('#camera-upload button')).to_be_visible(timeout=30000)
-            assert [part['part'] for part in PARTS[start:]] == ['video', 'skeleton']
+            expect(page.locator('#camera-upload')).to_contain_text('השליחה נעצרה', timeout=40000)
+            assert [part['part'] for part in PARTS[start:]] == ['diagnostics'] + ['skeleton'] * 4
             page.goto(origin + '/workout/#/home')
             page.reload()
             expect(page.locator('#camera-upload')).to_contain_text('נשלח לבדיקה', timeout=30000)
-            assert [part['part'] for part in PARTS[start:]] == ['video', 'skeleton', 'skeleton', 'diagnostics']
+            assert [part['part'] for part in PARTS[start:]] == ['diagnostics'] + ['skeleton'] * 5 + ['video']
             assert not errors, errors
             assert all(r.url.startswith(origin) for r in requests), [r.url for r in requests if not r.url.startswith(origin)]
             assert len(REDIRECTS) == len(PARTS)
