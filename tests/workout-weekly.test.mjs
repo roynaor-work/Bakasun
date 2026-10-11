@@ -117,8 +117,8 @@ test('calendar weeks cross year and daylight-saving boundaries and date-only val
   }
 });
 
-test('all app imports and entry assets use one version, including lazy imports and the three.js loader chain', async () => {
-  const version = APP_VERSION;
+test('app imports retain their version; only the video modules and app entry use the signed-video version', async () => {
+  const version = APP_VERSION, videoVersion = '20261011-vids-signed-1';
   async function inspect(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const url = new URL(entry.name + (entry.isDirectory() ? '/' : ''), directory);
@@ -127,7 +127,8 @@ test('all app imports and entry assets use one version, including lazy imports a
       const content = await readFile(url, 'utf8');
       for (const match of content.matchAll(/\b(?:from\s*|import\s*\(\s*|import\s+)(['"])([^'"]+)\1/g)) {
         if (match[2].startsWith('node:')) continue;
-        assert.ok(match[2].endsWith('?v=' + version), url.pathname + ': ' + match[2]);
+        const expected = /(?:^|\/)vids(?:-cloud)?\.js\?/.test(match[2]) ? videoVersion : version;
+        assert.ok(match[2].endsWith('?v=' + expected), url.pathname + ': ' + match[2]);
       }
     }
   }
@@ -135,7 +136,8 @@ test('all app imports and entry assets use one version, including lazy imports a
   for (const path of ['../workout/index.html', '../workout/voice-rec/index.html']) {
     const content = await readFile(new URL(path, import.meta.url), 'utf8');
     for (const match of content.matchAll(/(?:src|href)="([^"\n]+\.(?:js|css)(?:\?[^"\n]+)?)"/g)) {
-      assert.ok(match[1].endsWith('?v=' + version), path + ': ' + match[1]);
+      const expected = path === '../workout/index.html' && match[1].startsWith('js/app.js?') ? videoVersion : version;
+      assert.ok(match[1].endsWith('?v=' + expected), path + ': ' + match[1]);
     }
   }
 });
