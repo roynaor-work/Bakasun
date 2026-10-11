@@ -19,7 +19,7 @@ function harness({ enabled = true, target = 3, initialCount = 0, onEnd } = {}) {
       put: async record => records.set(record.session, structuredClone(record)),
       list: async () => [...records.values()].map(record => structuredClone(record)),
       remove: async session => records.delete(session), clear: async () => records.clear(),
-    }, fetchImpl: async (_, options) => { sent.push(JSON.parse(options.body)); return { ok: true, json: async () => ({ ok: true }) }; } }) });
+    }, fetchImpl: async (_, options) => { sent.push(JSON.parse(options.body)); return { ok: true, json: async () => ({ ok: true, assembled: true, bytes: JSON.parse(options.body).totalBytes }) }; } }) });
   const attempt = new CameraAttempt({ exercise: 'squats', target, initialCount, uploads, now: () => time,
     onCue: n => cues.push(n), onCount: (n, secs) => progress.push({ n, secs }), onRejected: reason => rejected.push(reason), onEnd,
     makeVideo: () => ({ start: () => videoStarts++, stop: async () => { videoStops++; return new Blob(['synthetic-video'], { type: 'video/webm;codecs=vp8' }); } }) });
@@ -68,7 +68,7 @@ test('real lab events reach workout progress, complete at target and retain hone
   const result = h.attempt.result;
   assert.ok(result.seconds > 6);
   assert.ok(honestTime([{ exId: 'squats', type: 'reps', target: 3, done: result.counted, secs: result.seconds }]).seconds > 0);
-  const diagnostics = JSON.parse(Buffer.from(h.sent[2].data, 'base64'));
+  const diagnostics = JSON.parse(Buffer.from(h.sent[0].data, 'base64'));
   assert.equal(diagnostics.appVersion, APP_VERSION); assert.equal(diagnostics.counted, 3);
   assert.equal(diagnostics.target, 3); assert.equal(diagnostics.endReason, 'target');
   assert.deepEqual(diagnostics.thresholds, h.attempt.counter.t);
@@ -86,7 +86,7 @@ test('reopening after partial progress adds new reps to the workout total and fi
   const h = harness({ initialCount: 2, target: 3 }); h.prepare(); h.rep();
   await h.attempt.ending;
   assert.equal(h.attempt.result.counted, 3); assert.equal(h.attempt.endReason, 'target');
-  const diagnostics = JSON.parse(Buffer.from(h.sent[2].data, 'base64'));
+  const diagnostics = JSON.parse(Buffer.from(h.sent[0].data, 'base64'));
   assert.equal(diagnostics.counted, 3); assert.equal(diagnostics.attemptCount, 1);
 });
 
@@ -100,9 +100,9 @@ for (const reason of ['finish','exit','target','limit','hidden','pagehide','swit
   assert.equal(h.attempt.finish('finish'), ending);
   assert.equal(h.attempt.finish('exit'), ending);
   await ending;
-  assert.deepEqual(h.sent.map(s => s.part), ['video','skeleton','diagnostics']);
+  assert.deepEqual(h.sent.map(s => s.part), ['diagnostics','skeleton','video']);
   assert.equal(new Set(h.sent.map(s => s.session)).size, 1); assert.match(h.sent[0].session, /^app-/);
-  assert.ok(Buffer.from(h.sent[0].data, 'base64').length > 0);
+  assert.ok(Buffer.from(h.sent[2].data, 'base64').length > 0);
   assert.equal(h.counts().videoStarts, 1); assert.equal(h.counts().videoStops, 1); assert.equal(h.counts().stopped, 1);
   assert.equal(h.records.size, 0);
 });
@@ -120,7 +120,7 @@ test('a screen rendering exception cannot interrupt stopping capture and queuing
   const h = harness({ onEnd: () => { throw Error('synthetic render failure'); } });
   assert.throws(() => h.attempt.finish(), /synthetic render failure/);
   await h.attempt.ending;
-  assert.deepEqual(h.sent.map(part => part.part), ['video','skeleton','diagnostics']);
+  assert.deepEqual(h.sent.map(part => part.part), ['diagnostics','skeleton','video']);
   assert.equal(h.counts().videoStops, 1); assert.equal(h.counts().stopped, 1);
 });
 
@@ -133,7 +133,7 @@ test('focus/online/manual retries during a pending save enqueue an attempt only 
   while (!saves) await Promise.resolve();
   const retryA = h.uploads.retry(), retryB = h.uploads.retry();
   release(); await Promise.all([ending, retryA, retryB]);
-  assert.equal(saves, 1); assert.deepEqual(h.sent.map(part => part.part), ['video','skeleton','diagnostics']);
+  assert.equal(saves, 1); assert.deepEqual(h.sent.map(part => part.part), ['diagnostics','skeleton','video']);
 });
 
 test('rejection enlarges the existing demo for two seconds; help uses it fullscreen; low FPS freezes the corner', async () => {
