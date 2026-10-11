@@ -117,8 +117,11 @@ test('calendar weeks cross year and daylight-saving boundaries and date-only val
   }
 });
 
-test('all app imports and entry assets use one version, including lazy imports and the three.js loader chain', async () => {
+test('all app imports and entry assets are versioned, including lazy imports and the three.js loader chain', async () => {
   const version = APP_VERSION;
+  // The storage security rollout refreshes only these modules and the entrypoint.
+  const privateVideoVersion = '20261011-private-vids-1';
+  const expectedVersion = path => /(?:^|\/)(?:app|vids|vids-cloud)\.js(?:\?|$)/.test(path) && !path.includes('voice-rec/') ? privateVideoVersion : version;
   async function inspect(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const url = new URL(entry.name + (entry.isDirectory() ? '/' : ''), directory);
@@ -127,7 +130,7 @@ test('all app imports and entry assets use one version, including lazy imports a
       const content = await readFile(url, 'utf8');
       for (const match of content.matchAll(/\b(?:from\s*|import\s*\(\s*|import\s+)(['"])([^'"]+)\1/g)) {
         if (match[2].startsWith('node:')) continue;
-        assert.ok(match[2].endsWith('?v=' + version), url.pathname + ': ' + match[2]);
+        assert.ok(match[2].endsWith('?v=' + expectedVersion(new URL(match[2], url).pathname)), url.pathname + ': ' + match[2]);
       }
     }
   }
@@ -135,7 +138,7 @@ test('all app imports and entry assets use one version, including lazy imports a
   for (const path of ['../workout/index.html', '../workout/voice-rec/index.html']) {
     const content = await readFile(new URL(path, import.meta.url), 'utf8');
     for (const match of content.matchAll(/(?:src|href)="([^"\n]+\.(?:js|css)(?:\?[^"\n]+)?)"/g)) {
-      assert.ok(match[1].endsWith('?v=' + version), path + ': ' + match[1]);
+      assert.ok(match[1].endsWith('?v=' + expectedVersion(new URL(match[1], new URL(path, import.meta.url)).pathname)), path + ': ' + match[1]);
     }
   }
 });
