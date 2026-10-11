@@ -2,7 +2,7 @@
 // מדברים ישירות בפרוטוקול ה-websocket של Realtime (Phoenix, vsn 1.0.0): phx_join לערוץ, broadcast להודעות, heartbeat כל 25 שניות.
 // חדר = קוד משפחה + קוד חדר של 4 ספרות. זר שלא יודע את קוד המשפחה לא יכול להיכנס גם אם ניחש ספרות.
 // המארח (host) מחשב את המשחק ומשדר מצב; האורח (guest) שולח את מיקום האצבע ומצייר את המצב שקיבל.
-import { CLOUD } from '../../js/data/cloudcfg.js?v=20261010-child-copy-1';
+import { CLOUD } from '../../js/data/cloudcfg.js?v=20261010-camera-1';
 
 export const newRoomCode = () => String(1000 + (crypto.getRandomValues(new Uint32Array(1))[0] % 9000));
 export const normRoom = c => String(c || '').replace(/\D/g, '').slice(0, 4);

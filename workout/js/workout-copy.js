@@ -1,5 +1,5 @@
-import { byId } from './exercises.js?v=20261010-child-copy-1';
-import { programById } from './programs.js?v=20261010-child-copy-1';
+import { byId } from './exercises.js?v=20261010-camera-1';
+import { programById } from './programs.js?v=20261010-camera-1';
 
 // שמות בנתונים שמורים מוצגים לפי המזהה, בלי לשנות את הרשומה במכשיר או בענן.
 export const exerciseName = item => byId[item.exId]?.name || item.name;

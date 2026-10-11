@@ -3,6 +3,8 @@
 הרצה: `python3 -m http.server 8765` ברקע, ואז `python3 tests/e2e/<script>.py`.
 הדפדפן: `/opt/pw-browsers/chromium-1194/chrome-linux/chrome` (בקונטיינר). צילומי מסך נכתבים ל-/tmp.
 
+`workout_camera.py` מריץ בעצמו שרת HTTPS מקומי, עם תעודה זמנית ונתוני בדיקה בלבד. נדרשים Python Playwright, Chromium ו־OpenSSL. מריצים `python3 tests/e2e/workout_camera.py` משורש המאגר. Chromium משתמש ב־`--use-fake-device-for-media-stream` וב־`--use-fake-ui-for-media-stream`; אין צורך במצלמה פיזית או בקישור שליחה אמיתי. הבדיקה מכסה את המודל האמיתי, וידאו/שלד/אבחון דרך POST והפניית 302, סיום/יציאה/ניסיון מחדש, תור לאחר רענון ומצב ללא שליחה. תרחיש נוסף מדמה רק תנוחות ושעון, ובודק את Stage3D, הספירה והשליחה האמיתיים. תמונות הבדיקה נכתבות ל־`work/`.
+
 - `smoke_all_screens.py`: כל המסכים וכל לשוניות התיק, 400px ו-1280px, he/fr/en. חייב להדפיס "errors: none".
 - `workgroup_and_invoice.py`: קבוצת עבודה בקול (כרטיס, "וואטסאפ", "תוסיפי את", משימות, לשונית בתיק) + חשבונית ללקוח חדש.
 - `invoice_new_client.py`: שאלת "לקוח חדש" אחרי "במייל לרועי".

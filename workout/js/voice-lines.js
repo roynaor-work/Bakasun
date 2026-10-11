@@ -1,13 +1,34 @@
 // קטלוג אחד משותף לנגן, לדף ההקלטה ול-LINES.md. בלי גישה לדפדפן או לנתוני הילד.
-import { SAY, SAY_TTS } from './say.js?v=20261010-child-copy-1';
-import { SAY_UI, SAY_UI_TTS } from './say-ui.js?v=20261010-child-copy-1';
-import { EXERCISES } from './exercises.js?v=20261010-child-copy-1';
-import { numWord, numWordTts } from './count.js?v=20261010-child-copy-1';
+import { SAY, SAY_TTS } from './say.js?v=20261010-camera-1';
+import { SAY_UI, SAY_UI_TTS } from './say-ui.js?v=20261010-camera-1';
+import { EXERCISES } from './exercises.js?v=20261010-camera-1';
+import { numWord, numWordTts } from './count.js?v=20261010-camera-1';
 
-export const VOICE_VERSION = '20261010-child-copy-1';
+export const VOICE_VERSION = '20261010-camera-1';
 export const normalizeVoice = text => String(text).replace(/[֑-ׇ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ');
+export const CAMERA_LINES = {
+  instructions: {
+    squats: 'יוֹרְדִים כְּמוֹ לָשֶׁבֶת, וְאָז עוֹמְדִים.',
+    'jumping-jacks': 'פּוֹתְחִים רַגְלַיִם וְיָדַיִם, וְאָז סוֹגְרִים.',
+    'high-knees': 'מְרִימִים בֶּרֶךְ, מוֹרִידִים וּמַחֲלִיפִים רֶגֶל.',
+    lunges: 'צוֹעֲדִים, יוֹרְדִים, עוֹלִים וּמַחֲלִיפִים רֶגֶל.',
+    'push-ups': 'גּוּף יָשָׁר. מְכַוְּפִים יָדַיִם וְדוֹחֲפִים לְמַעְלָה.',
+    'knee-push-ups': 'בִּרְכַּיִם בָּרִצְפָּה. מְכַוְּפִים יָדַיִם וְדוֹחֲפִים.',
+    'glute-bridge': 'מְרִימִים יַשְׁבָן לְקוֹ יָשָׁר, וּמוֹרִידִים.',
+  },
+  reasons: {
+    partial: 'נְנַסֶּה תְּנוּעָה שְׁלֵמָה, בְּנַחַת.',
+    knees: 'בִּרְכַּיִם לְכִוּוּן אֶצְבְּעוֹת הָרַגְלַיִם.',
+    fast: 'נְנַסֶּה לָזוּז קְצָת יוֹתֵר לְאַט.',
+    tracking: 'נַחֲזֹר לַתְּמוּנָה וְנַתְחִיל שׁוּב.',
+    timeout: 'חוֹזְרִים לַתְּנוּחָה שֶׁבַּהּ הִתְחַלְנוּ.',
+    alternate: 'עַכְשָׁו נַחֲלִיף לָרֶגֶל הַשְּׁנִיָּה.',
+  },
+};
 const lines = [];
 const add = (id, text, tts, source, lang = 'he-IL') => lines.push(Object.freeze({ id, text, tts, source, lang, file: `${id}.wav` }));
+for (const [group, entries] of Object.entries(CAMERA_LINES)) for (const [id, text] of Object.entries(entries))
+  add(`camera-${group}-${id}`, text.replace(/[֑-ׇ]/g, ''), text, 'workout/js/camera-demo.mjs: CameraDemo');
 for (const [id, text] of Object.entries(SAY)) add(`exercise-${id}`, text, SAY_TTS[id], `workout/js/say.js: SAY[${id}]; workout/js/app.js: wireHelp / sayText`);
 for (const ex of EXERCISES) {
   const suffix = ex.name.includes('(כל רגל)') ? ' (כָּל רֶגֶל)' : ex.name.includes('(כל צד)') ? ' (כָּל צַד)' : '';

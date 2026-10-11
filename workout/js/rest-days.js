@@ -1,6 +1,6 @@
 // יום חופש אחד בין ימי אימון שומר על הרצף. סופרים רק ימים שהתאמנו בהם.
 // תאריכים אזרחיים מקומיים, בלי להניח שכל יום מכיל 24 שעות (שעון קיץ).
-import { earned } from './logic.js?v=20261010-child-copy-1';
+import { earned } from './logic.js?v=20261010-camera-1';
 function calendarDay(value) {
   let date;
   if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)) {

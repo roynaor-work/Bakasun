@@ -1,27 +1,29 @@
 // האפליקציה: ניתוב, מסכים, מהלך אימון (חימום -> תרגילים -> מנוחות -> מתיחות -> סיכום), מעקב והגדרות.
-import { EXERCISES, CATS, byId } from './exercises.js?v=20261010-child-copy-1';
-import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261010-child-copy-1';
-import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js?v=20261010-child-copy-1';
-import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js?v=20261010-child-copy-1';
-import { Figure, cycleMs } from './figure.js?v=20261010-child-copy-1';
-import { store } from './store.js?v=20261010-child-copy-1';
-import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261010-child-copy-1';
-import { beltCard } from './belts.js?v=20261010-child-copy-1';
-import { companionCard, companionKit } from './companion.js?v=20261010-child-copy-1';
-import { restProgress, restCard, restBadges } from './rest-days.js?v=20261010-child-copy-1';
-import { FRAGMENTS } from './voice-lines.js?v=20261010-child-copy-1';
-import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js?v=20261010-child-copy-1';
-import { runGame } from './games/engine.js?v=20261010-child-copy-1';
-import * as cloud from './cloud.js?v=20261010-child-copy-1';
-import { showLobby } from './games/lobby.js?v=20261010-child-copy-1';
-import { initParent, parentGate, parentHome, parentTogether, parentWeek, lockParent, basketball } from './parent.js?v=20261010-child-copy-1';
-import { normalizePlan } from './weekly.js?v=20261010-child-copy-1';
-import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261010-child-copy-1';
-import { playIntro } from './intro.js?v=20261010-child-copy-1';
-import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261010-child-copy-1';
-import { exerciseName, workoutName } from './workout-copy.js?v=20261010-child-copy-1';
-import { SAY } from './say.js?v=20261010-child-copy-1';
-import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261010-child-copy-1';
+import { EXERCISES, CATS, byId } from './exercises.js?v=20261010-camera-1';
+import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261010-camera-1';
+import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js?v=20261010-camera-1';
+import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js?v=20261010-camera-1';
+import { Figure, cycleMs } from './figure.js?v=20261010-camera-1';
+import { store } from './store.js?v=20261010-camera-1';
+import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261010-camera-1';
+import { beltCard } from './belts.js?v=20261010-camera-1';
+import { companionCard, companionKit } from './companion.js?v=20261010-camera-1';
+import { restProgress, restCard, restBadges } from './rest-days.js?v=20261010-camera-1';
+import { FRAGMENTS } from './voice-lines.js?v=20261010-camera-1';
+import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js?v=20261010-camera-1';
+import { runGame } from './games/engine.js?v=20261010-camera-1';
+import * as cloud from './cloud.js?v=20261010-camera-1';
+import { showLobby } from './games/lobby.js?v=20261010-camera-1';
+import { initParent, parentGate, parentHome, parentTogether, parentWeek, lockParent, basketball } from './parent.js?v=20261010-camera-1';
+import { normalizePlan } from './weekly.js?v=20261010-camera-1';
+import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261010-camera-1';
+import { playIntro } from './intro.js?v=20261010-camera-1';
+import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261010-camera-1';
+import { exerciseName, workoutName } from './workout-copy.js?v=20261010-camera-1';
+import { SAY } from './say.js?v=20261010-camera-1';
+import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261010-camera-1';
+import { CameraUploads, cameraAvailable, cameraPrivacy, readCameraConsent } from './camera-session.mjs?v=20261010-camera-1';
+import { cameraScreen } from './camera-screen.mjs?v=20261010-camera-1';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
@@ -32,8 +34,25 @@ const plan = () => normalizePlan(store.profile.plan, programById, DEFAULT_PLAN);
 const unlockedList = () => { if (!store.profile.unlockEvery) return null; if (!store.unlocked) store.setUnlocked([...START_GAMES]); return store.unlocked; };
 const credits = () => unlockCredits(store.sessions.length, (unlockedList() || GAMES.map(g => g.id)).length, store.profile.unlockEvery);
 
-let figures = [], activeGame = null;
+let figures = [], activeGame = null, activeCamera = null;
+const cameraFailed = new Set();
+const cameraUploads = new CameraUploads({ onStatus: status => {
+  let box = document.getElementById('camera-upload');
+  if (!box) {
+    box = document.createElement('aside'); box.id = 'camera-upload'; box.className = 'camera-upload';
+    box.innerHTML = '<span role="status"></span> <button class="btn chip" hidden>נסה שוב</button>'; document.body.append(box);
+    box.querySelector('button').onclick = () => cameraUploads.retry();
+  }
+  box.hidden = status.state === 'disabled' || status.state === 'recording';
+  box.querySelector('span').textContent = status.state === 'error' ? status.message?.startsWith('לא נשמר') ? status.message : 'השליחה נעצרה. נסה שוב' : status.message;
+  box.querySelector('button').hidden = status.state !== 'error';
+} });
+void cameraUploads.retry();
+window.addEventListener('online', () => { cameraUploads.refresh(); void cameraUploads.retry(); });
+window.addEventListener('focus', () => { cameraUploads.refresh(); void cameraUploads.retry(); });
+window.addEventListener('storage', event => { if (event.key === 'camlab.upload') { cameraUploads.refresh(); void cameraUploads.retry(); } });
 function mount(html, full = false) {
+  if (activeCamera) { const camera = activeCamera; activeCamera = null; camera.leave('exit'); }
   figures.forEach(f => { f.stop(); if (f.dispose) f.dispose(); }); figures = []; /* dispose: הבמה התלת-ממדית משחררת את ה-WebGL */
   if (activeGame) { activeGame.stop(); activeGame = null; }
   stopSpeak();
@@ -46,7 +65,15 @@ function fig(svg, ex, speed = 1) { const f = new Figure(svg); f.play(ex, speed);
 function figs(sel = 'svg[data-ex]') { return [...app.querySelectorAll(sel)].map(s => fig(s, byId[s.dataset.ex])); }
 const figSvg = (exId, cls = '') => `<svg class="figure ${cls}" data-ex="${exId}" aria-hidden="true"></svg>`;
 // הבמה במסך התרגיל: סרטון אמיתי אם יש לתרגיל (vids.js), אחרת דמות המקלות. wireStage מחזיר אובייקט עם אותו ממשק: play(ex, speed), stop, onRep
-const webgl = () => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; } };
+let webglSupported;
+const webgl = () => {
+  if (webglSupported != null) return webglSupported;
+  try {
+    const c = document.createElement('canvas'), gl = c.getContext('webgl2') || c.getContext('webgl');
+    webglSupported = !!gl; gl?.getExtension('WEBGL_lose_context')?.loseContext();
+  } catch { webglSupported = false; }
+  return webglSupported;
+};
 const use3d = () => store.profile.stage3d !== false && webgl();
 const stageHtml = ex => hasVideo(ex.id) ? `<div class="exmedia" data-vid="${ex.id}"></div>` : use3d() ? `<div class="exmedia stage3d" data-ex3d="${ex.id}"></div>` : figSvg(ex.id);
 // אותה דמות מוכרת, בפוזה שקטה. כשל ב-WebGL משאיר דמות ותג אימונים ב-SVG.
@@ -59,8 +86,8 @@ function wireCompanion(workouts) {
     const figure = new Figure(box.querySelector('svg')); figure.still(standing); figures.push(figure);
   };
   if (!use3d()) return fallback();
-  import('./stage3d.js?v=20261010-child-copy-1').then(async ({ Stage3D }) => {
-    const { KITS3D } = await import('./char3d.js?v=20261010-child-copy-1');
+  import('./stage3d.js?v=20261010-camera-1').then(async ({ Stage3D }) => {
+    const { KITS3D } = await import('./char3d.js?v=20261010-camera-1');
     if (!box.isConnected) return;
     let stage;
     const failed = () => { if (stage) stage.dispose(); fallback(); };
@@ -73,12 +100,15 @@ function wireCompanion(workouts) {
 // הדמות המצוירת בתלת-ממד (js/stage3d.js, נטען רק כשצריך כי הוא מביא את three.js). עד שהמודול נטען הפקודות נשמרות; אם נכשל, דמות המקלות
 function wireStage3d(box) {
   const ex = byId[box.dataset.ex3d];
-  const f = { _s: null, _rep: null, _last: null, get onRep() { return this._rep; }, set onRep(fn) { this._rep = fn; if (this._s) this._s.onRep = fn; },
+  let stageReady;
+  const ready = new Promise(resolve => { stageReady = resolve; });
+  const f = { ready, _s: null, _rep: null, _last: null, get onRep() { return this._rep; }, set onRep(fn) { this._rep = fn; if (this._s) this._s.onRep = fn; },
     play(e, speed = 1) { this._last = ['play', e, speed]; if (this._s) this._s.play(e, speed); }, still(e) { this._last = ['still', e]; if (this._s) this._s.still(e); },
-    stop() { if (this._s) this._s.stop(); }, dispose() { if (this._s && this._s.dispose) this._s.dispose(); this._s = null; },
-    _attach(s) { this._s = s; s.onRep = this._rep; if (this._last) { const [k, e, sp] = this._last; k === 'play' ? s.play(e, sp) : s.still(e); } } };
-  const fallback = () => { if (!box.isConnected) return; box.outerHTML = figSvg(ex.id); const svg = app.querySelector(`svg[data-ex="${ex.id}"]`); if (svg) f._attach(new Figure(svg)); };
-  import('./stage3d.js?v=20261010-child-copy-1').then(m => { if (!box.isConnected) return; new m.Stage3D(box, null, { onReady: s => f._attach(s), onFail: fallback }); }).catch(fallback);
+    pace(e, duration) { this.play(e, cycleMs(e.frames) / duration / (this._s instanceof Figure ? 1 : .7)); },
+    stop() { if (this._s) this._s.stop(); }, dispose() { if (this._disposed) return; this._disposed = true; this._created?.dispose(); if (this._s !== this._created) this._s?.dispose?.(); this._s?.stop(); this._s = null; stageReady(); },
+    _attach(s) { this._s = s; s.onRep = this._rep; if (this._last) { const [k, e, sp] = this._last; k === 'play' ? s.play(e, sp) : s.still(e); } stageReady(); } };
+  const fallback = () => { f._created?.dispose(); if (f._disposed || !box.isConnected) return; box.innerHTML = figSvg(ex.id); f._attach(new Figure(box.querySelector('svg'))); };
+  import('./stage3d.js?v=20261010-camera-1').then(m => { if (f._disposed || !box.isConnected) return; f._created = new m.Stage3D(box, null, { onReady: s => { if (f._disposed) s.dispose(); else f._attach(s); }, onFail: fallback }); }).catch(fallback);
   f.play(ex, 1); figures.push(f); return f;
 }
 function wireStage() {
@@ -362,6 +392,7 @@ function exerciseDetail(id) {
     <div class="stage">${stageHtml(ex)}</div>
     ${ex.place === 'hall' ? `<div class="row wrap">${placePill(ex)}</div>` : ''}
     ${helpButton()}
+    ${cameraButton(ex.id)}
     <div class="tiles">
       <div class="tile"><b>${target}</b>${ex.type === 'time' ? 'שניות ברמה שלך' : 'חזרות ברמה שלך'}</div>
       <div class="tile hot"><b>${p ? p.best : '–'}</b>השיא שלך</div>
@@ -376,6 +407,29 @@ function exerciseDetail(id) {
     const program = { id: 'solo', name: ex.name, emoji: '💥', items: [ex.id], rounds: 1, minutes: 1 };
     beginWorkout(program, buildItems(program, byId, store.profile.level));
   };
+  const camera = $('#workout-camera'); if (camera) camera.onclick = () => {
+    const program = { id: 'solo', name: ex.name, emoji: '💥', items: [ex.id], rounds: 1, minutes: 1 };
+    beginWorkout(program, buildItems(program, byId, store.profile.level)); W.phase = 'exercise'; W.cameraOpen = true;
+  };
+}
+
+const cameraButton = id => cameraAvailable(store.profile, id) && !cameraFailed.has(id) ? '<button class="btn big" id="workout-camera">מצלמה</button>' : '';
+function openWorkoutCamera(it, ex, options = {}) {
+  const progress = (count, secs) => {
+    it.done = count; it.secs = Math.round(secs);
+    if (count > 0) it.type = 'reps'; // Camera high-knees counts lifts, preserving the numerical target.
+    saveW();
+  };
+  activeCamera = cameraScreen({ host: app, item: it, exercise: ex, uploads: cameraUploads, mount, esc,
+    stageHtml: e => use3d() ? `<div class="exmedia stage3d" data-ex3d="${e.id}"></div>` : figSvg(e.id),
+    wireStage: () => {
+      const stage = wireStage();
+      if (!stage.pace) stage.pace = (e, duration) => stage.play(e, cycleMs(e.frames) / duration);
+      return stage;
+    }, progress, complete: (n, secs) => finishItem(n, false, secs),
+    fallback: (failed = true) => { if (failed) cameraFailed.add(ex.id); exercisePhase(); },
+    back: next => openWorkoutCamera(it, ex, next || {}) });
+  void activeCamera.open(options);
 }
 
 // ---- הדקה שלי: מונה לחיץ, ורק מבחן מלא שומר שיא ----
@@ -494,7 +548,8 @@ function introPhase() {
 }
 
 function exercisePhase() {
-  const it = W.items[W.idx], ex = byId[it.exId]; it.startAt = Date.now(); // למדידת זמן אמיתי (נגד דילוגים)
+  const it = W.items[W.idx], ex = byId[it.exId]; it.startAt = Date.now() - (it.secs || 0) * 1000; // למדידת זמן אמיתי (נגד דילוגים)
+  if (W.cameraOpen && cameraAvailable(store.profile, ex.id)) { W.cameraOpen = false; saveW(); openWorkoutCamera(it, ex); return; }
   const pct = Math.round(100 * W.idx / W.items.length);
   const blockLabel = it.block === 'האימון' ? (it.rounds > 1 ? `סבב ${it.round} מתוך ${it.rounds}` : 'האימון') : it.block;
   mount(`
@@ -509,6 +564,7 @@ function exercisePhase() {
     <div class="stage">${stageHtml(ex)}</div>
     <h1 class="center">${esc(ex.name)}</h1>
     ${helpButton()}
+    ${cameraButton(ex.id)}
     ${it.type === 'time' ? timeBlock(it) : repsBlock(it)}
     <div class="row">
       <button class="btn ghost grow" id="skip">דילוג ⏭️</button>
@@ -517,6 +573,7 @@ function exercisePhase() {
   </div>`, true);
   const mainFig = wireStage();
   wireHelp(ex, mainFig);
+  const camera = $('#workout-camera'); if (camera) camera.onclick = () => openWorkoutCamera(it, ex);
   $('#quit').onclick = quit;
   $('#skip').onclick = () => finishItem(0, true);
   $('#prev').onclick = () => { if (W.idx) { W.idx--; W.phase = 'exercise'; workoutScreen(); } };
@@ -615,9 +672,9 @@ function wireTimer(it) {
   paint();
 }
 
-function finishItem(done, skipped) {
+function finishItem(done, skipped, cameraSeconds = null) {
   const it = W.items[W.idx];
-  it.done = done; it.skipped = skipped; it.secs = it.startAt ? Math.round((Date.now() - it.startAt) / 1000) : 0;
+  it.done = done; it.skipped = skipped; it.secs = cameraSeconds == null ? it.startAt ? Math.round((Date.now() - it.startAt) / 1000) : 0 : Math.round(cameraSeconds);
   clearInterval(tick); tick = 0;
   if (!skipped && done > 0) beep(990, 120);
   const last = W.idx >= W.items.length - 1;
@@ -919,6 +976,8 @@ function settings() {
       <div class="toggle"><b>הסבר בקול בעברית</b><input type="checkbox" id="voice" ${p.voice !== false ? 'checked' : ''}></div>
       <div class="toggle"><b>סרטון פתיחה לפני אימון</b><input type="checkbox" id="intro" ${p.intro !== false ? 'checked' : ''}></div>
       <div class="toggle"><b>דמות מצוירת בתלת-ממד בתרגילים</b><input type="checkbox" id="stage3d" ${p.stage3d !== false ? 'checked' : ''}></div>
+      <label class="toggle"><b>אימון עם מצלמה</b><input type="checkbox" id="workout-camera-setting" ${p.camera === true ? 'checked' : ''} aria-describedby="workout-camera-info"></label>
+      <p class="muted small" id="workout-camera-info">להורה: ספירה אוטומטית בשבעה תרגילים. ${cameraPrivacy(!!readCameraConsent())}. הגדרת שליחה נעשית רק דרך קישור המעבדה.</p>
       <div class="toggle"><b>לשמוע אותו סופר (מיקרופון)</b><input type="checkbox" id="listen" ${p.listen !== false ? 'checked' : ''} ${canListen() ? '' : 'disabled'}></div>
       <p class="muted small">${canListen() ? 'ב"ספור איתי": האפליקציה סופרת בקול, ואם הוא אומר את המספר הבא לפניה, היא מתקדמת איתו. בפעם הראשונה הטלפון יבקש אישור למיקרופון.' : 'הדפדפן הזה לא מזהה דיבור. בכרום באנדרואיד זה עובד.'}</p>
       <label class="field">הקול<select id="voiceName"><option value="">אוטומטי (הטוב ביותר במכשיר)</option>${hebrewVoices().map(v => `<option value="${esc(v.name)}" ${v.name === p.voiceName ? 'selected' : ''}>${esc(v.name)}${v.localService === false ? ' (רשת)' : ''}</option>`).join('')}</select></label>
@@ -995,6 +1054,7 @@ function settings() {
   $('#sound').onchange = e => store.setProfile({ sound: e.target.checked });
   $('#voice').onchange = e => store.setProfile({ voice: e.target.checked });
   $('#listen').onchange = e => store.setProfile({ listen: e.target.checked });
+  $('#workout-camera-setting').onchange = e => store.setProfile({ camera: e.target.checked });
   app.querySelectorAll('input[data-vid]').forEach(inp => inp.onchange = async e => {
     const f = e.target.files[0]; if (!f) return; if (f.size > 60e6) return alert('הסרטון גדול מדי (מעל 60MB). מצלמים קצר יותר.');
     try { await saveVideo(inp.dataset.vid, f); } catch { return alert('לא הצלחתי לשמור את הסרטון במכשיר.'); }

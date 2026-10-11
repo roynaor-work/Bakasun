@@ -1,5 +1,5 @@
 // תכנון שבוע ודוח להורה. תאריכים לפי לוח השנה המקומי של הטלפון, ראשון עד שבת.
-import { dayKey, summarize } from './logic.js?v=20261010-child-copy-1';
+import { dayKey, summarize } from './logic.js?v=20261010-camera-1';
 
 export function normalizePlan(plan, programs, defaults) {
   return Object.fromEntries(Array.from({ length: 7 }, (_, day) => {

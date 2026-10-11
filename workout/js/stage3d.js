@@ -1,7 +1,7 @@
 // במת התרגיל בסגנון "סרט מצויר" (סגנון 3 שרועי בחר, 01/10/2026): הדמות התלת-ממדית שלנו עם קו מתאר עבה,
 // שתי דרגות צבע, רקע שטוח, רצפה שטוחה וצל עגול מתחת לרגליים. אותו ממשק כמו Figure: play(ex, speed), still(ex), stop(), onRep.
-import { THREE, loadCharacter, KITS3D, viewFront, propMesh, outlineMaterial } from './char3d.js?v=20261010-child-copy-1';
-import { poseAt, cycleMs } from './figure.js?v=20261010-child-copy-1';
+import { THREE, loadCharacter, KITS3D, viewFront, propMesh, outlineMaterial } from './char3d.js?v=20261010-camera-1';
+import { poseAt, cycleMs } from './figure.js?v=20261010-camera-1';
 
 const BG = '#F2A9E3', FLOOR = '#E58FD6', LINE = '#241B3A';
 let gradTex = null;

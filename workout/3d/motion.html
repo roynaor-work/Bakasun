@@ -25,8 +25,8 @@ h1{margin:0;font-size:22px}p{margin:0;color:var(--muted);font-size:14px;line-hei
   <div class="grid" id="grid"></div>
 </div>
 <script type="module">
-import { Stage3D } from '../js/stage3d.js?v=20261010-child-copy-1';
-import { EXERCISES } from '../js/exercises.js?v=20261010-child-copy-1';
+import { Stage3D } from '../js/stage3d.js?v=20261010-camera-1';
+import { EXERCISES } from '../js/exercises.js?v=20261010-camera-1';
 const CATS = { warm: 'חימום', jump: 'ניתור', speed: 'מהירות', core: 'בטן', legs: 'רגליים', upper: 'כוח עליון', stretch: 'מתיחות' };
 const chips = document.getElementById('chips'), grid = document.getElementById('grid');
 for (const cat in CATS) { const b = document.createElement('button'); b.className = 'chip'; b.dataset.cat = cat; b.textContent = CATS[cat]; chips.insertBefore(b, document.getElementById('slow')); }

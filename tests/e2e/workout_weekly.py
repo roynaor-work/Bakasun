@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from playwright.sync_api import sync_playwright, expect
 
 BASE = os.environ.get('WORKOUT_TEST_URL', 'http://127.0.0.1:8765/workout/')
-VERSION = '20261009-companion-1'
+VERSION = '20261010-camera-1'
 
 
 def stored(page):
