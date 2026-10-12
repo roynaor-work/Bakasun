@@ -4,12 +4,16 @@ import functools
 import hashlib
 import time
 import http.server
+import io
 import json
+import math
 import shutil
 import ssl
 import subprocess
 import tempfile
 import threading
+import struct
+import wave
 from pathlib import Path
 from urllib.parse import quote
 from playwright.sync_api import sync_playwright
@@ -165,18 +169,24 @@ def check_child_guidance(browser, origin, root):
       import {pose,person} from './tests/cam-lab-fixtures.js';
       import {PLACEMENT_LINES} from './workout/cam-lab/placement-lines.mjs';
       const shifted = center => {const s=pose();[s.p[11].x,s.p[12].x]=[s.p[12].x,s.p[11].x];s.p.forEach(p=>p.x+=center-.5);return s.p;};
-      console.log(JSON.stringify({right:shifted(.72),wrong:shifted(.80),left:shifted(.28),center:shifted(.5),
+      console.log(JSON.stringify({right:shifted(.72),wrong:shifted(.80),secondWrong:shifted(.88),left:shifted(.28),center:shifted(.5),
         far:person(pose(),{x:.5,size:.2}).landmarks,near:person(pose(),{x:.5,size:1.2}).landmarks,lines:PLACEMENT_LINES}));
     """], cwd=root))
     context = browser.new_context(viewport={'width': 360, 'height': 844}, ignore_https_errors=True)
     context.add_init_script("""
       window.guidancePose=%s; window.guidanceNow=10000; window.guidanceSpeech=[];
+      window.guidanceRecordings=0;
+      const audioStart=AudioBufferSourceNode.prototype.start;
+      AudioBufferSourceNode.prototype.start=function(...args){guidanceRecordings++;return audioStart.apply(this,args);};
       performance.now=()=>window.guidanceNow;
       window.SpeechSynthesisUtterance=class {constructor(text){this.text=text;}};
+      window.guidanceVoices=[{name:'English local',lang:'en-US',localService:true,default:true},
+        {name:'Hebrew local',lang:'he-IL',localService:true},
+        {name:'Second Hebrew',lang:'he-IL',localService:true},{name:'Remote Hebrew',lang:'he-IL',localService:false}];
       Object.defineProperty(window,'speechSynthesis',{value:{
-        getVoices:()=>[{name:'English local',lang:'en-US',localService:true,default:true},
-          {name:'Second local',lang:'fr-FR',localService:true},{name:'Remote Hebrew',lang:'he-IL',localService:false}],
-        addEventListener(){},cancel(){},speak(u){guidanceSpeech.push({text:u.text,voice:u.voice.name});queueMicrotask(()=>u.onend?.());}
+        getVoices:()=>guidanceVoices,
+        addEventListener(name,cb){if(name==='voiceschanged')window.guidanceVoicesChanged=cb;},cancel(){},
+        speak(u){guidanceSpeech.push({text:u.text,voice:u.voice.name});queueMicrotask(()=>u.onend?.());}
       }});
       const NativeWorker=window.Worker;
       window.Worker=class extends NativeWorker {
@@ -199,40 +209,68 @@ def check_child_guidance(browser, origin, root):
           id:data.id,inferenceMs:1,model:'full',poses:[{landmarks:data.sample,world:[]}]});}
       };
     """))
+    # Exercise real decoding/playback with an in-memory tone, not a child's or
+    # adult's recording. Every other absent clip follows the real 404 fallback.
+    wav_bytes = io.BytesIO()
+    with wave.open(wav_bytes, 'wb') as wav:
+        wav.setnchannels(1); wav.setsampwidth(2); wav.setframerate(24000)
+        wav.writeframes(b''.join(struct.pack('<h', int(6000 * math.sin(2 * math.pi * 440 * i / 24000))) for i in range(2400)))
+    context.route('**/workout/snd/voice/camera-placement-right.wav*',
+                  lambda route: route.fulfill(content_type='audio/wav', body=wav_bytes.getvalue()))
     page = context.new_page()
     errors = []
     page.on('pageerror', lambda e: errors.append(str(e)))
     page.goto(origin + '/workout/cam-lab/')
-    assert 'אין קול עברי מקומי' in page.locator('#voice-status').inner_text()
-    assert page.locator('#voice-select option').count() == 3  # Auto + two local voices; remote is excluded.
+    assert 'עברית מקומית' in page.locator('#voice-status').inner_text()
+    assert page.locator('#voice-select option').count() == 3  # Auto + local Hebrew voices; network is a later tier.
     page.locator('#camera').click()
 
     def hint(sample, code):
         page.evaluate('p=>window.guidancePose=p', samples[sample])
         page.wait_for_function('text=>document.querySelector("#placement-hint").textContent===text', arg=samples['lines'][code]['text'])
 
-    def spoken(code, voice='English local'):
+    def spoken(code, voice='Hebrew local'):
         page.wait_for_function('expected=>guidanceSpeech.some(u=>u.text===expected.text&&u.voice===expected.voice)',
                                arg={'text': samples['lines'][code]['tts'], 'voice': voice}, timeout=15000)
 
-    hint('right', 'right'); spoken('right')
+    def diagnostics():
+        # Angles are absent to isolate preparation guidance. Dispatch the real
+        # finish handler without starting a squat just to expose its export.
+        page.locator('#finish').evaluate('el=>el.click()')
+        page.locator('#export-panel').evaluate('el=>el.open=true')
+        with page.expect_download() as download:
+            page.locator('#export').click()
+        data = json.loads(Path(download.value.path()).read_text())['voicePlayback']
+        assert all(set(e) == {'timeMs', 'source', 'ids'} for e in data['events'])
+        assert not any('voice' in e or 'text' in e for e in data['events'])
+        page.locator('#again').click()
+        return data
+
+    hint('right', 'right')
+    page.wait_for_function('()=>guidanceRecordings>0')
+    assert not page.evaluate('text=>guidanceSpeech.some(u=>u.text===text)', samples['lines']['right']['tts'])
     assert page.locator('#direction-arrow').inner_text() == '→'
     assert page.locator('#direction-arrow').is_visible()
     assert page.evaluate('getComputedStyle(document.querySelector("#direction-arrow")).direction') == 'ltr'
     assert page.locator('#start').is_disabled()  # World angles are intentionally absent.
-    hint('wrong', 'arrow'); spoken('arrow')
+    hint('wrong', 'wrong-side'); spoken('wrong-side')
     assert page.locator('#direction-arrow').inner_text() == '→'
-    page.evaluate('p=>window.guidancePose=p', samples['center'])
+    hint('secondWrong', 'arrow'); spoken('arrow')
+    assert page.locator('#direction-arrow').inner_text() == '→'
+    hint('center', 'arrived'); spoken('arrived')
     page.locator('#direction-arrow').wait_for(state='hidden')
-    assert page.locator('#placement-hint').inner_text() == ''
+    page.wait_for_function('()=>document.querySelector("#placement-hint").textContent===""')
+    assert page.evaluate('text=>guidanceSpeech.filter(u=>u.text===text).length', samples['lines']['arrived']['tts']) == 1
     hint('far', 'far'); spoken('far')
     hint('near', 'near'); spoken('near')
     assert page.locator('#direction-arrow').is_hidden()
-    page.locator('#stop').click()
-    page.locator('#voice-select').select_option('fr-FR:Second local')
+    first_sources = diagnostics()['sources']
+    assert first_sources['recording'] >= 1 and first_sources['hebrew-local'] >= 1
+    assert 'hebrew-network' not in first_sources
+    page.locator('#voice-select').select_option('he-IL:Second Hebrew')
     page.evaluate('p=>window.guidancePose=p', samples['left'])
     page.locator('#camera').click()
-    hint('left', 'left'); spoken('left', 'Second local')
+    hint('left', 'left'); spoken('left', 'Second Hebrew')
     assert page.locator('#direction-arrow').inner_text() == '←'
     for width in [320, 360, 390]:
         page.set_viewport_size({'width': width, 'height': 844})
@@ -250,9 +288,21 @@ def check_child_guidance(browser, origin, root):
     assert page.evaluate('getComputedStyle(document.querySelector("#video")).transform') == 'none'
     page.screenshot(path=str(root / 'work/cam-lab-guidance-rear.png'))
     page.locator('#stop').click()
+    page.evaluate("guidanceVoices=guidanceVoices.filter(v=>!v.localService||v.lang==='en-US');guidanceVoicesChanged()")
+    assert 'עברית ברשת' in page.locator('#voice-status').inner_text()
+    page.locator('#camera').click()
+    hint('left', 'left'); spoken('left', 'Remote Hebrew')
+    assert diagnostics()['sources']['hebrew-network'] >= 1
+    page.evaluate("guidanceVoices=guidanceVoices.filter(v=>v.lang==='en-US');guidanceVoicesChanged()")
+    before = page.evaluate('guidanceSpeech.length')
+    page.locator('#camera').click()
+    hint('left', 'left')
+    assert page.locator('#direction-arrow').is_visible()
+    assert diagnostics()['sources']['text-only'] >= 1
+    assert page.evaluate('guidanceSpeech.length') == before, 'English must never read Hebrew'
     assert not errors, errors
     context.close()
-    print('Child guidance passed: far/near, anatomical sides, opposite response, mirrored/unmirrored arrows, local fallback voice and mobile widths.', flush=True)
+    print('Child guidance passed: two-stage correction, arrival once, real WAV priority, Hebrew local/network/text fallback, source diagnostics and mobile arrows.', flush=True)
 
 
 root = Path(__file__).resolve().parents[2]

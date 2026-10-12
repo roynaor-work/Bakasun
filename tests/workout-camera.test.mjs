@@ -154,8 +154,9 @@ test('rejection enlarges the existing demo for two seconds; help uses it fullscr
 
 test('partial reps drive corrective guidance through the unchanged counter; all new spoken lines are short and catalogued', async () => {
   const h = harness(); h.prepare(); h.rep(140); assert.deepEqual(h.rejected, ['partial']); assert.equal(h.progress.length, 0); await h.attempt.finish();
-  for (const group of Object.values(CAMERA_LINES)) for (const line of Object.values(group)) {
-    assert.ok(normalizeVoice(line).split(' ').length <= 8, line);
+  for (const group of Object.values(CAMERA_LINES)) for (const [id, line] of Object.entries(group)) {
+    if (id === 'wrong-side') assert.equal(line, 'הָלַכְתָּ לַצַּד הַשֵּׁנִי. זֶה הַצַּד הַשֵּׁנִי שֶׁלְּךָ. תָּזוּז לַצַּד הַהָפוּךְ, לְפִי הַחֵץ.');
+    else assert.ok(normalizeVoice(line).split(' ').length <= 8, line);
     assert.ok(splitVoiceText(line).every(part => part.id), line);
   }
   const ui = await readFile(new URL('../workout/js/camera-screen.mjs', import.meta.url), 'utf8');

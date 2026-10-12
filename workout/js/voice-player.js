@@ -68,6 +68,7 @@ export function createVoicePlayer({ context, fetchFile, speakFallback, cancelFal
     const done = () => {
       if (token !== generation) return;
       lastSpokeAt = now(); active = false;
+      job.onDone?.();
       const nextJob = queue.shift(); if (nextJob) run(nextJob);
     };
     const next = () => {
@@ -97,6 +98,7 @@ export function createVoicePlayer({ context, fetchFile, speakFallback, cancelFal
             source.start(at); at += p.buffer.duration;
           }
           lastSpokeAt = now();
+          job.onSource?.('recording', group.map(p => p.id));
         } catch {
           for (const source of scheduled) { source.onended = null; sources.delete(source); try { source.stop(); } catch { /* */ } }
           fallback();

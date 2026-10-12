@@ -1,6 +1,6 @@
 # משפטים להקלטה
 
-220 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
+222 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
 
 מקליטים בטלפון ב־https://roynaor-work.github.io/Bakasun/workout/voice-rec/ (אחרי מיזוג). Chrome באנדרואיד או Safari באייפון, דרך HTTPS. אין קישור מהאפליקציה.
 
@@ -23,6 +23,8 @@
 | `camera-placement-right` | צעד קטן ימינה, לימין שלך. לפי החץ. | workout/cam-lab/placement-lines.mjs; workout/cam-lab/app.mjs: placement guidance | `camera-placement-right.wav` |
 | `camera-placement-left` | צעד קטן שמאלה, לשמאל שלך. לפי החץ. | workout/cam-lab/placement-lines.mjs; workout/cam-lab/app.mjs: placement guidance | `camera-placement-left.wav` |
 | `camera-placement-arrow` | בלי ימין ושמאל. צעד קטן בכיוון החץ. | workout/cam-lab/placement-lines.mjs; workout/cam-lab/app.mjs: placement guidance | `camera-placement-arrow.wav` |
+| `camera-placement-wrong-side` | הלכת לצד השני. זה הצד השני שלך. תזוז לצד ההפוך, לפי החץ. | workout/cam-lab/placement-lines.mjs; workout/cam-lab/app.mjs: placement guidance | `camera-placement-wrong-side.wav` |
+| `camera-placement-arrived` | מעולה, תישאר שם. | workout/cam-lab/placement-lines.mjs; workout/cam-lab/app.mjs: placement guidance | `camera-placement-arrived.wav` |
 | `camera-instructions-squats` | יורדים כמו לשבת, ואז עומדים. | workout/js/camera-demo.mjs: CameraDemo | `camera-instructions-squats.wav` |
 | `camera-instructions-jumping-jacks` | פותחים רגלים וידים, ואז סוגרים. | workout/js/camera-demo.mjs: CameraDemo | `camera-instructions-jumping-jacks.wav` |
 | `camera-instructions-high-knees` | מרימים ברך, מורידים ומחליפים רגל. | workout/js/camera-demo.mjs: CameraDemo | `camera-instructions-high-knees.wav` |

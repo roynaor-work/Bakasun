@@ -3,7 +3,9 @@ import { StatusLine, RestGate, diagnosticLines } from './feedback.mjs';
 import { PeopleTracker } from './people.mjs';
 import { PlacementGuide, placementDistance } from './placement.mjs';
 import { PlacementCoach } from './placement-coach.mjs';
-import { selectLocalVoice, localVoices, voiceId, isHebrewVoice } from './voice-selection.mjs';
+import { selectHebrewVoice, preferredHebrewVoices, voiceId } from './voice-selection.mjs';
+import { createLabSpeech } from './speech.mjs';
+import { CAMERA_LINES } from '../js/voice-lines.js?v=20261010-camera-1';
 import { SkeletonRecorder } from './recording.mjs';
 import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId, readUploadLog } from './upload.mjs';
 import { AutoStart } from './auto-start.mjs';
@@ -46,7 +48,15 @@ let cameraInfo = {}, model = 'full', modelHistory = [], cameraOrientation = 'por
 let modelTransitionAfter = null;
 let restCalibrations = [], calibrationReady = [];
 let placementCoach = new PlacementCoach(), placementHint = null, selectedVoiceId = '';
-let placementSpeechActive = false, voiceGeneration = 0, lastPlacementSpeak = -Infinity;
+let placementSpeechActive = false, playingHintEvent = null, voiceGeneration = 0, lastPlacementSpeak = -Infinity;
+let audioContext;
+const getAudioContext = () => {
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!audioContext && AC) { try { audioContext = new AC(); } catch { /* Text/speech fallback remains available. */ } }
+  return audioContext || null;
+};
+const labSpeech = createLabSpeech({ synth: window.speechSynthesis, Utterance: globalThis.SpeechSynthesisUtterance,
+  context: getAudioContext, fetchFile: url => fetch(url), now: () => performance.now() });
 const pageOpenedAt = 0; // performance.now() is relative to navigation start.
 const timeline = { workerInitStart: null, modelReady: null };
 let attemptTimeline = {};
@@ -91,12 +101,12 @@ $('upload-disable').onclick = async () => {
 window.addEventListener('online', () => { if (uploadConfig) void uploadQueue.retry().catch(() => {}); });
 $('camera-facing').addEventListener('change', () => { $('camera-device').value = ''; $('wide-camera-option').hidden = true; });
 $('camera-width').addEventListener('change', () => { if ($('camera-width').value === 'normal') $('camera-device').value = ''; });
-function localVoice() {
-  return selectLocalVoice(window.speechSynthesis?.getVoices() || [], selectedVoiceId);
+function guidanceVoice() {
+  return selectHebrewVoice(window.speechSynthesis?.getVoices() || [], selectedVoiceId);
 }
 let uploadWarningSpoken = false;
 function announceUploadWarning() {
-  if (uploadConfig || $('setup').hidden || uploadWarningSpoken || !$('voice').checked || !localVoice()) return;
+  if (uploadConfig || $('setup').hidden || uploadWarningSpoken || !$('voice').checked || !guidanceVoice()) return;
   uploadWarningSpoken = true;
   speak(spoken.uploadOff, 2);
 }
@@ -106,20 +116,19 @@ function showSetup() {
   announceUploadWarning();
 }
 function voiceStatus() {
-  const choices = localVoices(window.speechSynthesis?.getVoices() || []), select = $('voice-select');
+  const choices = preferredHebrewVoices(window.speechSynthesis?.getVoices() || []), select = $('voice-select');
   select.replaceChildren();
-  for (const [value, label] of [['', 'בחירה אוטומטית — עדיפות לעברית'], ...choices.map(v => [voiceId(v), `${v.name || v.lang} (${v.lang})`])]) {
+  for (const [value, label] of [['', 'הקלטה, ואז קול עברי'], ...choices.map(v => [voiceId(v), `${v.name || v.lang} — ${v.localService ? 'מקומי' : 'ברשת'}`])]) {
     const option = document.createElement('option'); option.value = value; option.textContent = label; select.append(option);
   }
   if (selectedVoiceId && !choices.some(v => voiceId(v) === selectedVoiceId)) selectedVoiceId = '';
   select.value = selectedVoiceId; select.disabled = !choices.length || !$('voice').checked;
-  const voice = localVoice();
-  $('voice-status').textContent = !voice ? 'אין קול מקומי זמין. הטקסט והחץ מופיעים גם בלי קול; אפשר להתקין קול עברי בהגדרות המכשיר.' :
-    isHebrewVoice(voice) ? `הדרכה בקול עברי מהמכשיר: ${voice.name || voice.lang}.` :
-    `${choices.some(isHebrewVoice) ? 'נבחר קול בשפה אחרת.' : 'אין קול עברי מקומי.'} נבחר ${voice.name || voice.lang}; אפשר לבחור קול אחר למעלה. ההגייה בעברית תלויה בקול, והטקסט והחץ תמיד מופיעים.`;
+  const voice = guidanceVoice();
+  $('voice-status').textContent = !voice ? 'הקלטה בעברית תתנגן כשיש קובץ. אין קול עברי זמין להקראה; אחרת מופיעים רק טקסט וחץ.' :
+    `הקלטה בעברית קודמת להקראה. קול הגיבוי: ${voice.name || voice.lang} — ${voice.localService ? 'עברית מקומית' : 'עברית ברשת למשפטי ההכוונה הקבועים'}.`;
   announceUploadWarning();
 }
-function cancelSpeech() { voiceGeneration++; placementSpeechActive = false; window.speechSynthesis?.cancel(); }
+function cancelSpeech() { voiceGeneration++; placementSpeechActive = false; playingHintEvent = null; labSpeech.stop(); }
 $('voice-select').addEventListener('change', () => { selectedVoiceId = $('voice-select').value; cancelSpeech(); voiceStatus(); });
 $('voice').addEventListener('change', () => { if (!$('voice').checked) { queuedSpeech = null; cancelSpeech(); } voiceStatus(); });
 window.speechSynthesis?.addEventListener('voiceschanged', voiceStatus);
@@ -131,18 +140,18 @@ function speak(text, priority = 0, hint = null) {
 }
 function flushSpeech() {
   if (autoStart?.countingDown) return;
-  const voice = localVoice();
-  if (!$('voice').checked || !voice) { queuedSpeech = null; return; }
+  if (!$('voice').checked) { queuedSpeech = null; return; }
   if (queuedSpeech?.expires < performance.now()) queuedSpeech = null;
   if (queuedSpeech?.hint && (queuedSpeech.hint.code !== placementHint?.code || queuedSpeech.hint.arrow !== placementHint?.arrow)) queuedSpeech = null;
-  if (!queuedSpeech || performance.now() - (queuedSpeech.hint ? lastPlacementSpeak : lastSpeak) < 6000) return;
+  if (placementSpeechActive && queuedSpeech?.hint?.event === playingHintEvent) return;
+  if (!queuedSpeech || !queuedSpeech.hint?.urgent && performance.now() - (queuedSpeech.hint ? lastPlacementSpeak : lastSpeak) < 6000) return;
   cancelSpeech();
-  const job = queuedSpeech, utterance = new SpeechSynthesisUtterance(job.text); queuedSpeech = null;
-  const token = voiceGeneration; placementSpeechActive = !!job.hint;
-  utterance.onend = utterance.onerror = () => { if (token === voiceGeneration) placementSpeechActive = false; };
-  utterance.voice = voice; utterance.lang = 'he-IL'; utterance.rate = .85;
-  window.speechSynthesis.speak(utterance); lastSpeak = performance.now();
-  if (job.hint) { lastPlacementSpeak = lastSpeak; placementCoach.markSpoken(job.hint, lastSpeak); }
+  const job = queuedSpeech; queuedSpeech = null;
+  const token = voiceGeneration; placementSpeechActive = !!job.hint; playingHintEvent = job.hint?.event;
+  lastSpeak = performance.now(); if (job.hint) lastPlacementSpeak = lastSpeak;
+  labSpeech.play(job.text, { voiceId: selectedVoiceId,
+    onSource: () => { if (token === voiceGeneration && job.hint) placementCoach.markSpoken(job.hint, performance.now()); },
+    onDone: () => { if (token === voiceGeneration) { placementSpeechActive = false; playingHintEvent = null; } } });
 }
 function release() {
   autoStart?.cancel(); $('countdown').textContent = '';
@@ -298,6 +307,7 @@ async function tick(token) {
 }
 $('settings').addEventListener('submit', async event => {
   event.preventDefault(); $('error').hidden = true;
+  const ctx = getAudioContext(); if (ctx?.state === 'suspended') void ctx.resume().catch(() => {});
   if (finishing) return;
   if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
     fail('מצלמה דורשת כתובת HTTPS בטלפון, או localhost במחשב.'); return;
@@ -306,6 +316,8 @@ $('settings').addEventListener('submit', async event => {
     fail('נדרש דפדפן עם Web Worker ו־OffscreenCanvas. נסו דפדפן מעודכן.'); return;
   }
   release(); const token = generation;
+  labSpeech.resetDiagnostics();
+  void labSpeech.preload(['number-3', 'number-2', 'number-1', ...Object.keys(CAMERA_LINES.placement).map(id => `camera-placement-${id}`)]);
   attemptTimeline = {}; mark('cameraStart');
   void wakeLock.hold();
   const modelForAttempt = prepareModel(token, $('mode').value === 'pair');
@@ -401,12 +413,10 @@ $('settings').addEventListener('submit', async event => {
 function countdownCue(number) {
   if (number === 3) { finalizeCalibration(); mark('countdownStart'); }
   $('countdown').textContent = `${number}…`; queuedSpeech = null;
-  const voice = localVoice();
-  if (!$('voice').checked || !voice) return;
+  if (!$('voice').checked) return;
   cancelSpeech();
-  const utterance = new SpeechSynthesisUtterance({ 3: 'שָׁלוֹשׁ', 2: 'שְׁתַּיִם', 1: 'אַחַת' }[number]);
-  utterance.voice = voice; utterance.lang = 'he-IL'; utterance.rate = .85;
-  window.speechSynthesis.speak(utterance); lastSpeak = performance.now();
+  labSpeech.play({ 3: 'שָׁלוֹשׁ', 2: 'שְׁתַּיִם', 1: 'אַחַת' }[number], { voiceId: selectedVoiceId });
+  lastSpeak = performance.now();
 }
 function finalizeCalibration() {
   [counter, ...(pair ? [adult] : [])].forEach((c, i) => { c.calibration = restCalibrations[i].finalize(); });
@@ -493,7 +503,7 @@ function attemptDiagnostics(capture = videoRecorder) {
     model, modelHistory, detectorConfidence: { detection: .5, presence: .5, tracking: .5 },
     fps: meanFps, inferenceMs: totalInference / Math.max(1, totalFrames),
     totalFrames, thresholds: counter.t, framing: FRAMING, videoError: recordingError, video: capture?.diagnostics() || null, runtimeError,
-    wakeLock: wakeLock.state, timeline: { ...timeline,
+    wakeLock: wakeLock.state, voicePlayback: labSpeech.snapshot(), timeline: { ...timeline,
       ...Object.fromEntries(['cameraStart', 'cameraReady', 'firstFrame', 'firstPose', 'firstFullBody', 'countdownStart', 'countStart', 'finish'].map(name => [name, attemptTimeline[name] ?? null])) },
     uploadLog: readUploadLog(),
     endReason, countStarted: attemptStarted != null,
@@ -518,7 +528,7 @@ $('export').onclick = () => {
       height: cameraInfo.settings?.height || video.videoHeight || 0,
       zoom: Number.isFinite(cameraInfo.settings?.zoom) ? cameraInfo.settings.zoom : -1,
       wideApplied: +(Number.isFinite(cameraInfo.settings?.zoom) && cameraInfo.settings.zoom < 1) },
-    diagnostics: counter.snapshot(), frames: log,
+    diagnostics: counter.snapshot(), voicePlayback: labSpeech.snapshot(), frames: log,
     ...(pair ? { adult: { counted: adult.count, rejected: adult.rejected, reasons: adult.reasons, thresholds: adult.t, diagnostics: adult.snapshot() } } : {}) }, null, 2)], { type: 'application/json' });
   download(blob, 'cam-lab-performance.json');
 };

@@ -112,7 +112,9 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     };
     const { calibration, ...numericDiagnostics } = output.diagnostics;
     assert.equal(calibration.status, 'calibrated'); assert.ok(Math.abs(calibration.median - 159) < .001);
-    numeric({ ...output, diagnostics: numericDiagnostics });
+    assert.ok(output.voicePlayback.sources['hebrew-local'] > 0);
+    const { voicePlayback, ...numericOutput } = output;
+    numeric({ ...numericOutput, diagnostics: numericDiagnostics });
     assert.ok(!/"(?:x|y|z|landmarks|world|image|video)"/.test(JSON.stringify(output)));
     // Exercise the app's actual two-person routing and recording controls.
     get('again').click(); get('mode').value = 'pair'; get('record').checked = true;
@@ -171,7 +173,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     assert.equal(stopped, 3); assert.equal(terminated, 0); assert.equal(get('record-download').disabled, true);
     const spokenBefore = speech.length; voices = [{ lang: 'he-IL', localService: false }];
     now += 7000; get('again').click(); await get('settings').handlers.submit({ preventDefault() {} });
-    await frame(pose()); assert.equal(speech.length, spokenBefore);
+    await frame(pose()); assert.ok(speech.length > spokenBefore); assert.equal(speech.at(-1).voice.localService, false);
     get('stop').click(); assert.equal(stopped, 4); assert.equal(terminated, 0);
     cameraMode = 'nozoom';
     await get('settings').handlers.submit({ preventDefault() {} });

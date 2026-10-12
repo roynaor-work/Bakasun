@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 const html = await readFile(new URL('../workout/cam-lab/index.html', import.meta.url), 'utf8');
 const warning = html.match(/id="upload-off-banner"[^>]*>([^<]+)/)[1];
 
-test('upload warning is spoken once, only for disabled uploads with a local Hebrew voice', async () => {
+test('upload warning is spoken once for disabled uploads with a Hebrew local or network voice', async () => {
   const saved = new Map();
   const replace = (key, value) => {
     if (!saved.has(key)) saved.set(key, Object.getOwnPropertyDescriptor(globalThis, key));
@@ -38,7 +38,7 @@ test('upload warning is spoken once, only for disabled uploads with a local Hebr
       await import(`../workout/cam-lab/app.mjs?warning=${name}`);
       assert.equal(get('upload-off-banner').hidden, !!config);
       assert.equal(get('upload-on-banner').hidden, !config);
-      assert.equal(speech.length, 0);
+      assert.equal(speech.length, name === 'remote-only' ? 1 : 0);
       if (name === 'delayed-local') {
         voices = [{ lang: 'he_IL', localService: true }];
         handlers.voiceschanged(); handlers.voiceschanged();
@@ -48,7 +48,7 @@ test('upload warning is spoken once, only for disabled uploads with a local Hebr
         assert.equal(speech[0].voice.localService, true);
       } else {
         handlers.voiceschanged();
-        assert.equal(speech.length, 0);
+        assert.equal(speech.length, name === 'remote-only' ? 1 : 0);
       }
     }
   } finally {

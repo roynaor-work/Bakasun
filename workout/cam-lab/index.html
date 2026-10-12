@@ -36,8 +36,8 @@
       <div class="fields"><label>מצלמה <select id="camera-facing"><option value="user">קדמית</option><option value="environment">אחורית</option></select></label><label>שדה ראייה <select id="camera-width"><option value="wide">רחב</option><option value="normal">רגיל</option></select></label></div>
       <p class="small">בשניים: קודם עומדים זקוף זה לצד זה באותו מרחק מהמצלמה. הנמוך מזוהה כילד והגבוה כאבא. נדרש הבדל גובה ברור; התוויות נשמרות לכל הניסיון. בתרגילי רצפה: אחר כך מסתובבים למבט צד ומשאירים רווח, כך ששני השלדים נראים.</p>
       <p class="small">הגיל והגובה מכוונים ספים ניסיוניים. הם אינם הערכה רפואית או מדידה מדויקת של הגוף.</p>
-      <label class="check"><input id="voice" type="checkbox" checked> הדרכה בקול מהמכשיר</label>
-      <label>קול להדרכה <select id="voice-select"><option value="">בחירה אוטומטית — עדיפות לעברית</option></select></label>
+      <label class="check"><input id="voice" type="checkbox" checked> הדרכה בקול</label>
+      <label>קול להדרכה <select id="voice-select"><option value="">הקלטה, ואז קול עברי</option></select></label>
       <label id="record-option" class="check"><input id="record" type="checkbox"> הקלטת נקודות שלד לניסוי הזה, כולל ההצבה — ללא תמונות או וידאו</label>
       <p id="voice-status" class="small"></p>
       <figure class="placement">
@@ -90,7 +90,7 @@
     <p id="result-metrics" class="small"></p>
     <h3>למה הספירה חיכתה?</h3><ul id="diagnostics"></ul>
     <p class="small">סיבה יכולה להופיע יחד עם סיבות נוספות באותו פריים. אלה מונים בלבד, ללא תמונות או מיקומי גוף.</p>
-    <details id="export-panel"><summary>לוג אבחון וביצועים מקומי</summary><p>מוני אבחון לכל הניסיון ועד 900 פריימים אחרונים של ביצועים ושלב הספירה. מספרים בלבד, ללא תמונות, נקודות גוף או פרטים אישיים. ייצוא רק בלחיצה שלך.</p><button id="export" class="secondary">הורדת לוג אבחון וביצועים (JSON)</button></details>
+    <details id="export-panel"><summary>לוג אבחון וביצועים מקומי</summary><p>מוני אבחון לכל הניסיון ועד 900 פריימים אחרונים של ביצועים ושלב הספירה, ומקור הקול ששימש. ללא תמונות, נקודות גוף או פרטים אישיים. ייצוא רק בלחיצה שלך.</p><button id="export" class="secondary">הורדת לוג אבחון וביצועים (JSON)</button></details>
     <button id="again">ניסיון נוסף</button>
   </section>
   <p id="error" role="alert" hidden></p>

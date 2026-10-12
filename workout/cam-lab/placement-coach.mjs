@@ -23,14 +23,26 @@ export function placementHint(points, options = {}) {
   const code = lateral && clipped ? rightImageDirection ? imageDirection === rightImageDirection ? 'right' : 'left' : 'arrow' :
     distance.direction === 'closer' ? 'far' : distance.direction === 'away' ? 'near' :
     lateral ? rightImageDirection ? imageDirection === rightImageDirection ? 'right' : 'left' : 'arrow' : null;
-  return { code, center, imageDirection, rightImageDirection, arrow: ['left', 'right', 'arrow'].includes(code) ? arrow : null,
+  return { code, center, placed: center != null && distance.span != null && !code,
+    imageDirection, rightImageDirection, arrow: ['left', 'right', 'arrow'].includes(code) ? arrow : null,
     ...(PLACEMENT_LINES[code] || {}), advisory: true, blocking: false };
 }
 
 export class PlacementCoach {
   constructor() { this.reset(); }
-  reset() { this.since = null; this.key = null; this.lastTime = null; this.spoken = null; this.confused = false; this.current = null; }
+  reset() {
+    this.since = null; this.key = null; this.lastTime = null; this.spoken = null; this.current = null;
+    this.mistakes = 0; this.sideUncertain = false; this.episode = 0; this.instructed = false;
+    this.arrivalSince = null; this.arrivalDelivered = false; this.arrivalUntil = null; this.delivered = new Set();
+  }
   markSpoken(hint, time) {
+    if (!hint) return;
+    if (hint.event) this.delivered.add(hint.event);
+    if (hint.code === 'arrived') {
+      this.arrivalDelivered = true; this.arrivalUntil = time + 1800; this.instructed = false; return;
+    }
+    if (!this.instructed) { this.episode++; this.arrivalDelivered = false; this.arrivalUntil = null; }
+    this.instructed = true;
     if (hint?.arrow) this.spoken = { center: hint.center, imageDirection: hint.imageDirection,
       rightImageDirection: hint.rightImageDirection, time };
   }
@@ -38,16 +50,32 @@ export class PlacementCoach {
     const gap = this.lastTime != null && time - this.lastTime > COACH.maxGap;
     this.lastTime = time;
     const hint = placementHint(points, options);
-    if (!hint.code || gap) { this.since = null; this.key = null; this.current = null; }
-    if (!hint.code) { this.spoken = null; this.confused = false; return null; }
+    if (gap) { this.since = null; this.key = null; this.arrivalSince = null; this.spoken = null; }
+    if (!hint.code) {
+      this.since = null; this.key = null; this.current = null; this.spoken = null;
+      this.mistakes = 0; this.sideUncertain = false;
+      if (!hint.placed) { this.arrivalSince = null; return null; }
+      this.arrivalSince ??= time;
+      if (time - this.arrivalSince < COACH.holdMs || !this.instructed &&
+        !(this.arrivalDelivered && time < this.arrivalUntil)) return null;
+      const event = `arrived:${this.episode}`;
+      return this.current = { ...hint, code: 'arrived', ...PLACEMENT_LINES.arrived, event, urgent: !this.delivered.has(event) };
+    }
+    this.arrivalSince = null;
     if (hint.imageDirection && this.spoken && time - this.spoken.time <= COACH.responseMs &&
       hint.imageDirection === this.spoken.imageDirection) {
       const wrongWay = (hint.center - this.spoken.center) * hint.imageDirection < -COACH.confusionMove;
       const reversedLabels = hint.rightImageDirection && this.spoken.rightImageDirection &&
         hint.rightImageDirection !== this.spoken.rightImageDirection;
-      this.confused ||= wrongWay || reversedLabels;
+      if (wrongWay) { this.mistakes = Math.min(2, this.mistakes + 1); this.spoken = null; }
+      if (reversedLabels) { this.sideUncertain = true; this.spoken = null; }
     }
-    if (this.confused && hint.arrow) Object.assign(hint, { code: 'arrow', ...PLACEMENT_LINES.arrow });
+    if (hint.arrow && (this.sideUncertain || this.mistakes)) {
+      const code = this.sideUncertain || this.mistakes >= 2 ? 'arrow' : 'wrong-side';
+      Object.assign(hint, { code, ...PLACEMENT_LINES[code] });
+    }
+    hint.event = `${hint.code}:${this.episode}:${this.mistakes}`;
+    hint.urgent = (hint.code === 'wrong-side' || this.mistakes >= 2) && !this.delivered.has(hint.event);
     const key = `${hint.code}:${hint.arrow || ''}`;
     if (key !== this.key) { this.key = key; this.since = time; }
     if (time - this.since < COACH.holdMs) { this.current = null; return null; }
