@@ -38,7 +38,7 @@ export function thresholds({ age = 7, height = 120 } = {}) {
     throw new RangeError('גיל 5–12 וגובה 90–180 ס״מ נדרשים למעבדה');
   }
   // Engineering starting points, NOT paediatric norms. Keep the age effect small.
-  return { squatDown: age <= 8 ? 125 : 120, squatStart: 150, squatUp: 157,
+  return { squatDown: 120, squatStart: 150, squatUp: 157,
     kneeRise: clamp((age <= 8 ? 12 : 14) / height, .07, .16),
     kneeStart: .045, kneeRest: .025, jackOpen: 1.8, jackStart: 1.5, jackClosed: 1.3,
     wristMargin: 4 / height, dwell: age <= 8 ? 150 : 120, minCycle: 350,
@@ -279,7 +279,7 @@ export class RepCounter {
     this.diagnostics = { frames: 0, fullBodyPassed: 0, fullBodyFailed: 0,
       failureFrames: Object.fromEntries(Object.keys(DIAGNOSTIC_LABELS).map(k => [k, 0])), failedPoints: {},
       worldMissingFrames: 0, phaseMs: { waiting: 0, armed: 0, moving: 0 },
-      idleTrackingResets: 0, trackingResets: 0, graceRecoveries: 0,
+      idleTrackingResets: 0, trackingResets: 0, graceRecoveries: 0, modelTransitionGaps: 0,
       cyclesStarted: 0, restFrames: 0, startFrames: 0, targetFrames: 0, heldFrames: 0,
       requiredPoints: Object.fromEntries(requiredIds(this.exercise).map(i => [i, { observedFrames: 0, heldFrames: 0, usableFrames: 0 }])),
       stopReasons: {}, warningFrames: {}, rejectedBy: { framing: 0, motionThreshold: 0, tracking: 0, other: 0 } };
@@ -302,7 +302,8 @@ export class RepCounter {
       point.observedPercent = d.frames ? 100 * point.observedFrames / d.frames : 0;
       point.heldPercent = d.frames ? 100 * point.heldFrames / d.frames : 0;
     }
-    return { ...d, fullBodyPercent: d.frames ? 100 * d.fullBodyPassed / d.frames : 0 };
+    return { ...d, ...(this.calibration ? { calibration: structuredClone(this.calibration) } : {}),
+      fullBodyPercent: d.frames ? 100 * d.fullBodyPassed / d.frames : 0 };
   }
   finish(time = this.lastTime) {
     if (this.ended) return null;
@@ -319,13 +320,21 @@ export class RepCounter {
     if (!this.cycle) this.diagnostics.idleTrackingResets++;
     this.reset(); this.filter?.reset(); this.lossReset = true; return event;
   }
-  update(points, world, time, aspect = 1) {
+  update(points, world, time, aspect = 1, { modelTransition = false } = {}) {
     if (this.ended || !Number.isFinite(time) || (this.lastTime != null && time <= this.lastTime)) return null;
     const gap = this.lastTime == null ? 0 : time - this.lastTime;
     this.diagnostics.phaseMs[this.phase] += gap;
     this.lastTime = time;
     let event = null;
-    if (gap > this.t.maxGap && !this.lossReset) event = this.resetTracking();
+    if (modelTransition && gap > 0) {
+      // Model loading is known processing downtime, not evidence of a lost
+      // person. It also cannot satisfy a target/rest dwell or cycle duration.
+      for (const key of ['restSince', 'targetSince', 'kneeSince', 'formSince']) if (this[key] != null) this[key] += gap;
+      if (this.cycle) this.cycle.since += gap;
+      if (this.lostSince != null) this.lostSince += gap;
+      if (this.lastGoodTime != null) this.lastGoodTime += gap;
+      this.diagnostics.modelTransitionGaps++;
+    } else if (gap > this.t.maxGap && !this.lossReset) event = this.resetTracking();
     const rawReport = bodyReport(points, aspect, this.exercise);
     this.filter.t = this.t;
     const filtered = this.filter.update(points, world, time, aspect, { side: this.cycle?.observationSide });

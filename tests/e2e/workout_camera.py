@@ -108,10 +108,22 @@ def open_camera(page, origin):
     assert page.get_by_role('button', name='הורדה', exact=True).count() == 0
 
 
+def verify_part_sequence(received, prefix=('diagnostics', 'skeleton')):
+    assert [part['part'] for part in received[:len(prefix)]] == list(prefix)
+    video = received[len(prefix):]
+    assert video and all(part['part'] == 'video' for part in video)
+    assert len({part['session'] for part in received}) == 1
+    count, total = video[0]['chunks'], video[0]['totalBytes']
+    assert len(video) == count
+    assert [part['chunk'] for part in video] == list(range(count))
+    assert all(part['chunks'] == count and part['totalBytes'] == total and
+               part['mime'] == 'video/webm' for part in video)
+    assert total > 0 and sum(len(part['data']) for part in video) == total
+
+
 def verify_parts(start, reason):
     received = PARTS[start:]
-    assert [part['part'] for part in received] == ['diagnostics', 'skeleton', 'video'], received
-    assert len({part['session'] for part in received}) == 1
+    verify_part_sequence(received)
     assert all(part['session'].startswith('app-') for part in received)
     assert received[2]['mime'] == 'video/webm' and len(received[2]['data']) > 0
     skeleton, diagnostics = json.loads(received[1]['data']), json.loads(received[0]['data'])
@@ -253,7 +265,7 @@ def simulation(browser, origin):
     expect(page.locator('#camera-count')).to_have_text('1')
     hold(145, 5); hold(90); hold(180, 6)
     expect(page.locator('#camera-upload')).to_contain_text('נשלח לבדיקה', timeout=30000)
-    assert [p['part'] for p in PARTS[start:]] == ['diagnostics', 'skeleton', 'video']
+    verify_part_sequence(PARTS[start:])
     diagnostics = json.loads(PARTS[start]['data'])
     assert diagnostics['endReason'] == 'target' and diagnostics['counted'] == 2
     session = page.evaluate("JSON.parse(localStorage.getItem('kidfit.v1')).sessions.at(-1)")
@@ -328,8 +340,9 @@ with tempfile.TemporaryDirectory(prefix='workout-camera-') as temp:
             page.get_by_role('button', name='סיום', exact=True).click()
             expect(page.locator('#camera-upload')).to_contain_text('נשלח לבדיקה', timeout=30000)
             assert verify_parts(start, 'finish') > 0
+            delivered = len(PARTS)
             page.wait_for_timeout(500)
-            assert len(PARTS) == start + 3
+            assert len(PARTS) == delivered
             # A retry opens and records a fresh attempt without any record button.
             start = len(PARTS)
             page.locator('#camera-again').click()
@@ -351,7 +364,7 @@ with tempfile.TemporaryDirectory(prefix='workout-camera-') as temp:
             page.goto(origin + '/workout/#/home')
             page.reload()
             expect(page.locator('#camera-upload')).to_contain_text('נשלח לבדיקה', timeout=30000)
-            assert [part['part'] for part in PARTS[start:]] == ['diagnostics'] + ['skeleton'] * 5 + ['video']
+            verify_part_sequence(PARTS[start:], ['diagnostics'] + ['skeleton'] * 5)
             assert not errors, errors
             assert all(r.url.startswith(origin) for r in requests), [r.url for r in requests if not r.url.startswith(origin)]
             assert len(REDIRECTS) == len(PARTS)

@@ -61,10 +61,10 @@ async function handle(data) {
       lastTimestamp = timestamp;
       const result = pose.detectForVideo(bitmap, timestamp);
       const performanceResult = performanceWindow.update(timestamp);
-      const fallback = model === 'full' && performanceResult?.fallback;
+      const fallback = !data.counting && model === 'full' && performanceResult?.fallback;
       if (fallback) {
         switching = true;
-        self.postMessage({ type: 'model-switching', generation, model, fps: performanceResult.fps, reason: 'startup-low-fps' });
+        self.postMessage({ type: 'model-switching', generation, timestamp, model, fps: performanceResult.fps, reason: 'startup-low-fps' });
       }
       self.postMessage({ type: 'pose', generation, id, timestamp,
         poses: result.landmarks.map((landmarks, i) => ({ landmarks, world: result.worldLandmarks[i] || [] })),

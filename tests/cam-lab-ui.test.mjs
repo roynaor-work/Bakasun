@@ -71,7 +71,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
       worker.onmessage({ data: { type: 'pose', generation: worker.generation, id: now / 50, timestamp: now,
         landmarks: sample?.p || [], world: sample?.world || [], ...(Array.isArray(sample) ? { poses: sample } : {}), inferenceMs: 54 } });
     };
-    for (let i = 0; i < 70; i++) await frame(pose({ angle: 159, feet: 1.7, hands: .3 }));
+    for (let i = 0; i < 80; i++) await frame(pose({ angle: 159, feet: 1.7, hands: .3 }));
     assert.match(get('zoom-status').textContent, /0.5.*640×480/);
     assert.match(get('distance-status').textContent, /המרחק נוח/);
     assert.equal(get('start').hidden, true); // Automatic start also works in private mode.
@@ -110,7 +110,11 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
       if (typeof value === 'object') for (const v of Object.values(value)) numeric(v);
       else assert.ok(typeof value === 'number' && Number.isFinite(value));
     };
-    numeric(output);
+    const { calibration, ...numericDiagnostics } = output.diagnostics;
+    assert.equal(calibration.status, 'calibrated'); assert.ok(Math.abs(calibration.median - 159) < .001);
+    assert.ok(output.voicePlayback.sources['hebrew-local'] > 0);
+    const { voicePlayback, ...numericOutput } = output;
+    numeric({ ...numericOutput, diagnostics: numericDiagnostics });
     assert.ok(!/"(?:x|y|z|landmarks|world|image|video)"/.test(JSON.stringify(output)));
     // Exercise the app's actual two-person routing and recording controls.
     get('again').click(); get('mode').value = 'pair'; get('record').checked = true;
@@ -169,7 +173,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     assert.equal(stopped, 3); assert.equal(terminated, 0); assert.equal(get('record-download').disabled, true);
     const spokenBefore = speech.length; voices = [{ lang: 'he-IL', localService: false }];
     now += 7000; get('again').click(); await get('settings').handlers.submit({ preventDefault() {} });
-    await frame(pose()); assert.equal(speech.length, spokenBefore);
+    await frame(pose()); assert.ok(speech.length > spokenBefore); assert.equal(speech.at(-1).voice.localService, false);
     get('stop').click(); assert.equal(stopped, 4); assert.equal(terminated, 0);
     cameraMode = 'nozoom';
     await get('settings').handlers.submit({ preventDefault() {} });

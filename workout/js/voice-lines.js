@@ -3,10 +3,12 @@ import { SAY, SAY_TTS } from './say.js?v=20261010-camera-1';
 import { SAY_UI, SAY_UI_TTS } from './say-ui.js?v=20261010-camera-1';
 import { EXERCISES } from './exercises.js?v=20261010-camera-1';
 import { numWord, numWordTts } from './count.js?v=20261010-camera-1';
+import { PLACEMENT_LINES } from '../cam-lab/placement-lines.mjs?v=20261010-camera-1';
 
 export const VOICE_VERSION = '20261010-camera-1';
 export const normalizeVoice = text => String(text).replace(/[֑-ׇ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ');
 export const CAMERA_LINES = {
+  placement: Object.fromEntries(Object.entries(PLACEMENT_LINES).map(([id, line]) => [id, line.tts])),
   instructions: {
     squats: 'יוֹרְדִים כְּמוֹ לָשֶׁבֶת, וְאָז עוֹמְדִים.',
     'jumping-jacks': 'פּוֹתְחִים רַגְלַיִם וְיָדַיִם, וְאָז סוֹגְרִים.',
@@ -28,7 +30,8 @@ export const CAMERA_LINES = {
 const lines = [];
 const add = (id, text, tts, source, lang = 'he-IL') => lines.push(Object.freeze({ id, text, tts, source, lang, file: `${id}.wav` }));
 for (const [group, entries] of Object.entries(CAMERA_LINES)) for (const [id, text] of Object.entries(entries))
-  add(`camera-${group}-${id}`, text.replace(/[֑-ׇ]/g, ''), text, 'workout/js/camera-demo.mjs: CameraDemo');
+  add(`camera-${group}-${id}`, group === 'placement' ? PLACEMENT_LINES[id].text : text.replace(/[֑-ׇ]/g, ''), text, group === 'placement' ?
+    'workout/cam-lab/placement-lines.mjs; workout/cam-lab/app.mjs: placement guidance' : 'workout/js/camera-demo.mjs: CameraDemo');
 for (const [id, text] of Object.entries(SAY)) add(`exercise-${id}`, text, SAY_TTS[id], `workout/js/say.js: SAY[${id}]; workout/js/app.js: wireHelp / sayText`);
 for (const ex of EXERCISES) {
   const suffix = ex.name.includes('(כל רגל)') ? ' (כָּל רֶגֶל)' : ex.name.includes('(כל צד)') ? ' (כָּל צַד)' : '';
@@ -104,7 +107,9 @@ for (const [id, text, tts, lang] of [['goal', 'Gooooooooooool!', 'Gooooooooooool
 
 export const VOICE_LINES = Object.freeze(lines);
 export const VOICE_BY_ID = Object.freeze(Object.fromEntries(lines.map(line => [line.id, line])));
-const exact = new Map(lines.map(line => [`${line.lang}:${normalizeVoice(line.text)}`, line]));
+const exact = new Map(lines.flatMap(line => [
+  [`${line.lang}:${normalizeVoice(line.text)}`, line], [`${line.lang}:${normalizeVoice(line.tts)}`, line],
+]));
 const part = id => ({ id, text: VOICE_BY_ID[id].text });
 export function numberParts(n) {
   if (!Number.isInteger(n) || n < 0 || n > 100) return [{ id: null, text: String(n) }];
