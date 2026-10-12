@@ -1,4 +1,5 @@
 import { bodyReport, features, FRAMING } from './counter.mjs';
+import { REST_CALIBRATION } from './rest-calibration.mjs';
 
 export const TRACKING = { calibrationMs: 1200, heightRatio: 1.18, feetLevel: .08,
   scaleChange: .22, sizeAdvantage: .04, movement: .30, ambiguity: .15, overlap: .18, maxGap: 450 };
@@ -31,7 +32,7 @@ export class PeopleTracker {
       const standing = candidates.filter(c => {
         const report = bodyReport(c.pose.landmarks, aspect);
         const f = features(c.pose.landmarks, c.pose.world, aspect, report);
-        return report.ok && f?.squat > 157;
+        return report.ok && f?.squat >= REST_CALIBRATION.minReference;
       });
       standing.sort((a, b) => a.d.height - b.d.height);
       if (standing.length !== 2 || standing[1].d.height / standing[0].d.height < TRACKING.heightRatio ||

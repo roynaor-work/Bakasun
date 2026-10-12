@@ -65,6 +65,8 @@ export function diagnosticLines(d) {
     `אובדני זיהוי קצרים שמהם חזרנו: ${d.graceRecoveries} · איפוסי זיהוי בסך הכול: ${d.trackingResets}`,
     `פריימים ללא נקודות עולם נוכחיות וברורות: ${d.worldMissingFrames}`,
   ];
+  if (d.calibration?.status === 'calibrated') lines.push(`כיול מצב ההתחלה: חציון ${d.calibration.median.toFixed(1)}° · ספים ${Object.values(d.calibration.thresholds).map(v => `${v.toFixed(1)}°`).join(' / ')}`);
+  else if (d.calibration?.status === 'fallback') lines.push('לא היו מספיק פריימים יציבים לכיול; נעשה שימוש בספים הקבועים');
   if (d.frames && !d.startFrames) lines.push('לא זוהתה תחילת חזרה');
   for (const [reason, count] of Object.entries(d.failureFrames)) {
     if (!count) continue;

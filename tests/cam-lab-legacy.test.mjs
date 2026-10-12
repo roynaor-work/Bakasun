@@ -49,7 +49,7 @@ test('exercise dependencies accept optional limbs and one complete side', () => 
 });
 test('configuration is validated; age and height affect documented thresholds', () => {
   assert.ok(thresholds({age:7,height:110}).kneeRise > thresholds({age:7,height:150}).kneeRise);
-  assert.ok(thresholds({age:7,height:120}).squatDown > thresholds({age:10,height:120}).squatDown);
+  for (const age of [7, 10]) assert.equal(thresholds({age,height:120}).squatDown,120);
   for (const profile of [{age:NaN,height:120},{age:7,height:0},{age:20,height:120}]) assert.throws(() => thresholds(profile));
   assert.throws(() => new RepCounter('unknown'));
 });

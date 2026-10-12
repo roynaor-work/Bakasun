@@ -20,12 +20,13 @@ test('upload warning is spoken once, only for disabled uploads with a local Hebr
       const elements = new Map(), speech = [], handlers = {};
       let voices = initialVoices;
       const get = id => {
-        if (!elements.has(id)) elements.set(id, { hidden: false, checked: true, textContent: '', before() {}, addEventListener() {} });
+        if (!elements.has(id)) elements.set(id, { hidden: false, checked: true, textContent: '', children: [], before() {}, addEventListener() {},
+          replaceChildren() { this.children = []; }, append(child) { this.children.push(child); } });
         return elements.get(id);
       };
       get('overlay').getContext = () => ({});
       get('upload-off-banner').textContent = warning;
-      replace('document', { getElementById: get, addEventListener() {} });
+      replace('document', { getElementById: get, createElement: () => ({}), addEventListener() {} });
       replace('window', { location: { hash: '' }, addEventListener() {}, speechSynthesis: {
         getVoices: () => voices, addEventListener: (name, handler) => { handlers[name] = handler; },
         cancel() {}, speak: utterance => speech.push(utterance),

@@ -160,6 +160,101 @@ def check_attempt(offset, end_reason, fallback=False):
             'videoBytes': len(assembled_files[(attempt[0]['session'], 'video')]), 'mime': attempt[2]['mime'], 'endReason': end_reason}
 
 
+def check_child_guidance(browser, origin, root):
+    samples = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', """
+      import {pose,person} from './tests/cam-lab-fixtures.js';
+      import {PLACEMENT_LINES} from './workout/cam-lab/placement-lines.mjs';
+      const shifted = center => {const s=pose();[s.p[11].x,s.p[12].x]=[s.p[12].x,s.p[11].x];s.p.forEach(p=>p.x+=center-.5);return s.p;};
+      console.log(JSON.stringify({right:shifted(.72),wrong:shifted(.80),left:shifted(.28),center:shifted(.5),
+        far:person(pose(),{x:.5,size:.2}).landmarks,near:person(pose(),{x:.5,size:1.2}).landmarks,lines:PLACEMENT_LINES}));
+    """], cwd=root))
+    context = browser.new_context(viewport={'width': 360, 'height': 844}, ignore_https_errors=True)
+    context.add_init_script("""
+      window.guidancePose=%s; window.guidanceNow=10000; window.guidanceSpeech=[];
+      performance.now=()=>window.guidanceNow;
+      window.SpeechSynthesisUtterance=class {constructor(text){this.text=text;}};
+      Object.defineProperty(window,'speechSynthesis',{value:{
+        getVoices:()=>[{name:'English local',lang:'en-US',localService:true,default:true},
+          {name:'Second local',lang:'fr-FR',localService:true},{name:'Remote Hebrew',lang:'he-IL',localService:false}],
+        addEventListener(){},cancel(){},speak(u){guidanceSpeech.push({text:u.text,voice:u.voice.name});queueMicrotask(()=>u.onend?.());}
+      }});
+      const NativeWorker=window.Worker;
+      window.Worker=class extends NativeWorker {
+        postMessage(data,transfer){if(data.type==='frame'){guidanceNow+=100;data.timestamp=guidanceNow;data.sample=guidancePose;}super.postMessage(data,transfer);}
+      };
+      const capture=navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+      navigator.mediaDevices.getUserMedia=async constraints=>{
+        const stream=await capture(constraints),track=stream.getVideoTracks()[0],read=track.getSettings.bind(track);
+        // The fake device has no rear lens. Mock only the reported facing mode
+        // so the real CSS and arrow mapping exercise both display orientations.
+        track.getSettings=()=>({...read(),facingMode:constraints.video.facingMode?.ideal||'user'});
+        return stream;
+      };
+    """ % json.dumps(samples['right']))
+    context.route('**/cam-lab/pose-worker.js', lambda route: route.fulfill(content_type='application/javascript', body="""
+      onmessage=({data})=>{
+        if(data.type==='init')postMessage({type:'ready',model:'full',modelHistory:[]});
+        else if(data.type==='configure')postMessage({type:'configured',generation:data.generation,model:'full',modelHistory:[]});
+        else if(data.type==='frame'){data.bitmap.close();postMessage({type:'pose',generation:data.generation,timestamp:data.timestamp,
+          id:data.id,inferenceMs:1,model:'full',poses:[{landmarks:data.sample,world:[]}]});}
+      };
+    """))
+    page = context.new_page()
+    errors = []
+    page.on('pageerror', lambda e: errors.append(str(e)))
+    page.goto(origin + '/workout/cam-lab/')
+    assert 'אין קול עברי מקומי' in page.locator('#voice-status').inner_text()
+    assert page.locator('#voice-select option').count() == 3  # Auto + two local voices; remote is excluded.
+    page.locator('#camera').click()
+
+    def hint(sample, code):
+        page.evaluate('p=>window.guidancePose=p', samples[sample])
+        page.wait_for_function('text=>document.querySelector("#placement-hint").textContent===text', arg=samples['lines'][code]['text'])
+
+    def spoken(code, voice='English local'):
+        page.wait_for_function('expected=>guidanceSpeech.some(u=>u.text===expected.text&&u.voice===expected.voice)',
+                               arg={'text': samples['lines'][code]['tts'], 'voice': voice}, timeout=15000)
+
+    hint('right', 'right'); spoken('right')
+    assert page.locator('#direction-arrow').inner_text() == '→'
+    assert page.locator('#direction-arrow').is_visible()
+    assert page.evaluate('getComputedStyle(document.querySelector("#direction-arrow")).direction') == 'ltr'
+    assert page.locator('#start').is_disabled()  # World angles are intentionally absent.
+    hint('wrong', 'arrow'); spoken('arrow')
+    assert page.locator('#direction-arrow').inner_text() == '→'
+    page.evaluate('p=>window.guidancePose=p', samples['center'])
+    page.locator('#direction-arrow').wait_for(state='hidden')
+    assert page.locator('#placement-hint').inner_text() == ''
+    hint('far', 'far'); spoken('far')
+    hint('near', 'near'); spoken('near')
+    assert page.locator('#direction-arrow').is_hidden()
+    page.locator('#stop').click()
+    page.locator('#voice-select').select_option('fr-FR:Second local')
+    page.evaluate('p=>window.guidancePose=p', samples['left'])
+    page.locator('#camera').click()
+    hint('left', 'left'); spoken('left', 'Second local')
+    assert page.locator('#direction-arrow').inner_text() == '←'
+    for width in [320, 360, 390]:
+        page.set_viewport_size({'width': width, 'height': 844})
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+        arrow = page.locator('#direction-arrow').bounding_box()
+        banner = page.locator('#upload-banner').bounding_box()
+        assert arrow['y'] >= banner['y'] + banner['height'] and arrow['y'] + arrow['height'] <= 844, arrow
+    (root / 'work').mkdir(exist_ok=True)
+    page.screenshot(path=str(root / 'work/cam-lab-guidance-front.png'))
+    page.locator('#stop').click()
+    page.locator('#camera-facing').select_option('environment')
+    page.locator('#camera').click()
+    hint('left', 'left')
+    assert page.locator('#direction-arrow').inner_text() == '→'  # Same child's left, unmirrored display.
+    assert page.evaluate('getComputedStyle(document.querySelector("#video")).transform') == 'none'
+    page.screenshot(path=str(root / 'work/cam-lab-guidance-rear.png'))
+    page.locator('#stop').click()
+    assert not errors, errors
+    context.close()
+    print('Child guidance passed: far/near, anatomical sides, opposite response, mirrored/unmirrored arrows, local fallback voice and mobile widths.', flush=True)
+
+
 root = Path(__file__).resolve().parents[2]
 # Ephemeral self-signed localhost certificate: preserve production's HTTPS redirect checks.
 with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
@@ -178,6 +273,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             browser = p.chromium.launch(executable_path=shutil.which('chromium'), headless=True, args=[
                 '--no-sandbox', '--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream',
                 '--use-gl=angle', '--use-angle=swiftshader'])
+            check_child_guidance(browser, origin, root)
             context = browser.new_context(viewport={'width': 360, 'height': 844}, ignore_https_errors=True)
             context.add_init_script("""(() => {
               const acquire = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
@@ -350,8 +446,10 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             assert assembled_files[(slow_session, 'video')] == captured
             assert [v['part'] for v in slow_requests[:2]] == ['diagnostics', 'skeleton']
             chunk_numbers = [v['chunk'] for v in slow_requests if v['part'] == 'video']
-            assert len(set(chunk_numbers)) >= 2, chunk_numbers
-            assert chunk_numbers == [0, 1, 1] + list(range(2, max(chunk_numbers) + 1)), chunk_numbers
+            chunk_count = max(1, (len(captured) + 1572863) // 1572864)
+            expected_chunks = [0] if chunk_count == 1 else [0, 1, 1] + list(range(2, chunk_count))
+            assert chunk_numbers == expected_chunks, chunk_numbers
+            fail_video_chunk_once = None
             assert slow_page.locator('#upload-keep-open').is_hidden()
             slow_report = {'recordingSeconds': 60, 'uploadBytesPerSecond': 200000, 'uploadSeconds': upload_seconds,
                            'videoBytes': len(captured), 'sha256': hashlib.sha256(captured).hexdigest(),
@@ -371,6 +469,9 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             legacy_page.goto(origin + '/tests/e2e/')
             legacy_bytes = bytes(i % 251 for i in range(1572864 * 2 + 11))
             legacy_offset = len(parts)
+            # A simple fake camera can compress 60 seconds below one chunk.
+            # This fixed-size synthetic payload always exercises chunk retry.
+            fail_video_chunk_once = 1
             legacy_page.evaluate("""async size => {
               const config = JSON.parse(localStorage.getItem('camlab.upload'));
               const bytes = Uint8Array.from({ length: size }, (_, i) => i % 251);
@@ -389,7 +490,8 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             }""", len(legacy_bytes))
             legacy_page.goto(url)
             legacy_page.wait_for_function("() => document.querySelector('#upload-status').textContent==='נשלח לבדיקה'", timeout=30000)
-            assert [v['part'] for v in parts[legacy_offset:]] == ['diagnostics', 'skeleton', 'video', 'video', 'video']
+            assert [v['part'] for v in parts[legacy_offset:]] == ['diagnostics', 'skeleton'] + ['video'] * 4
+            assert [v['chunk'] for v in parts[legacy_offset:] if v['part'] == 'video'] == [0, 1, 1, 2]
             assert assembled_files[('legacy-browser', 'video')] == legacy_bytes
             legacy_page.close()
 

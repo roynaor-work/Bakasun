@@ -36,7 +36,8 @@
       <div class="fields"><label>מצלמה <select id="camera-facing"><option value="user">קדמית</option><option value="environment">אחורית</option></select></label><label>שדה ראייה <select id="camera-width"><option value="wide">רחב</option><option value="normal">רגיל</option></select></label></div>
       <p class="small">בשניים: קודם עומדים זקוף זה לצד זה באותו מרחק מהמצלמה. הנמוך מזוהה כילד והגבוה כאבא. נדרש הבדל גובה ברור; התוויות נשמרות לכל הניסיון. בתרגילי רצפה: אחר כך מסתובבים למבט צד ומשאירים רווח, כך ששני השלדים נראים.</p>
       <p class="small">הגיל והגובה מכוונים ספים ניסיוניים. הם אינם הערכה רפואית או מדידה מדויקת של הגוף.</p>
-      <label class="check"><input id="voice" type="checkbox" checked> הדרכה בקול עברי מקומי, אם זמין במכשיר</label>
+      <label class="check"><input id="voice" type="checkbox" checked> הדרכה בקול מהמכשיר</label>
+      <label>קול להדרכה <select id="voice-select"><option value="">בחירה אוטומטית — עדיפות לעברית</option></select></label>
       <label id="record-option" class="check"><input id="record" type="checkbox"> הקלטת נקודות שלד לניסוי הזה, כולל ההצבה — ללא תמונות או וידאו</label>
       <p id="voice-status" class="small"></p>
       <figure class="placement">
@@ -64,7 +65,8 @@
   <section id="session" hidden aria-labelledby="session-title">
     <h2 id="session-title">2. עומדים בתוך התמונה</h2>
     <p id="instructions"></p>
-    <div id="view"><video id="video" autoplay playsinline muted></video><canvas id="overlay" aria-hidden="true"></canvas><div id="frame-guide"></div></div>
+    <div id="view"><video id="video" autoplay playsinline muted></video><canvas id="overlay" aria-hidden="true"></canvas><div id="frame-guide"></div><span id="direction-arrow" hidden aria-hidden="true" dir="ltr"></span></div>
+    <p id="placement-hint" role="status" aria-live="polite"></p>
     <label class="small" for="distance-meter">המרחק מהמצלמה — המלצה</label><meter id="distance-meter" min="0" max="1" low="0.24" high="0.85" optimum="0.5" value="0"></meter>
     <p id="distance-status" class="small" role="status">עומדים כך שרואים את המפרקים הדרושים לתרגיל.</p>
     <p id="status" role="status">טוענים את מודל הזיהוי המקומי…</p>

@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { replayRecording } from '../recording.mjs';
 
 const MAX_FILE_BYTES = 40_000_000;
-const usage = 'node workout/cam-lab/tools/replay.mjs skeleton.json [--thresholds \'{"squatDown":135}\' | thresholds.json]';
+const usage = 'node workout/cam-lab/tools/replay.mjs skeleton.json [--calibrate] [--thresholds \'{"squatDown":135}\' | thresholds.json]';
 
 async function readJson(path) {
   if ((await stat(path)).size > MAX_FILE_BYTES) throw new RangeError('הקובץ גדול מהמגבלה של 40MB');
@@ -16,9 +16,10 @@ async function readJson(path) {
 // and compares replayed counts rather than trusting a recorded count field.
 export async function runReplay(args) {
   if (args.includes('--help') || args.includes('-h')) return { help: usage };
-  let input, thresholdSource;
+  let input, thresholdSource, calibrate = false;
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === '--thresholds') {
+    if (args[i] === '--calibrate') calibrate = true;
+    else if (args[i] === '--thresholds') {
       if (thresholdSource != null || !args[i + 1]) throw new TypeError('נדרש ערך יחיד אחרי --thresholds');
       thresholdSource = args[++i];
     } else if (args[i].startsWith('--')) throw new TypeError(`דגל לא מוכר: ${args[i]}`);
@@ -30,6 +31,7 @@ export async function runReplay(args) {
   const result = { exercise: recording.exercise, mode: recording.mode, frames: recording.frames?.length,
     durationMs: recording.endMs ?? recording.frames?.at(-1)?.t ?? 0,
     countStartMs: recording.countStartMs ?? null, baseline: replayRecording(recording, { details: true }) };
+  if (calibrate) result.calibrated = replayRecording(recording, { details: true, calibrate: true });
   if (thresholdSource != null) {
     const parsed = thresholdSource.trim().startsWith('{') ? JSON.parse(thresholdSource) : await readJson(resolve(thresholdSource));
     const overrides = parsed && Object.hasOwn(parsed, 'thresholds') ? parsed : { thresholds: parsed };

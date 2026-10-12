@@ -2,9 +2,12 @@ import { RepCounter, PoseFilter, atRest, bodyReport, features, statusCode, world
 import { StatusLine, RestGate, diagnosticLines } from './feedback.mjs';
 import { PeopleTracker } from './people.mjs';
 import { PlacementGuide, placementDistance } from './placement.mjs';
+import { PlacementCoach } from './placement-coach.mjs';
+import { selectLocalVoice, localVoices, voiceId, isHebrewVoice } from './voice-selection.mjs';
 import { SkeletonRecorder } from './recording.mjs';
 import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId, readUploadLog } from './upload.mjs';
 import { AutoStart } from './auto-start.mjs';
+import { RestCalibration } from './rest-calibration.mjs';
 import { ScreenWakeLock } from './screen-wake-lock.mjs';
 import { VideoRecorder } from './video-recording.mjs';
 import { acquireCamera, configureZoom, cameraSnapshot, reduceResolution } from './camera.mjs';
@@ -40,6 +43,10 @@ let ambiguousTracking = [false, false], calibratedPeople = [false, false];
 let recorder = new SkeletonRecorder(), autoStart, attemptEnded = true, endReason = null;
 let poseFilters = [], lastFeatures = [], preparationCounters = [], videoRecorder = null, recordingError = null, finishing = false;
 let cameraInfo = {}, model = 'full', modelHistory = [], cameraOrientation = 'portrait', openedAt = null, sessionId, runtimeError = null, attemptTimer = 0;
+let modelTransitionAfter = null;
+let restCalibrations = [], calibrationReady = [];
+let placementCoach = new PlacementCoach(), placementHint = null, selectedVoiceId = '';
+let placementSpeechActive = false, voiceGeneration = 0, lastPlacementSpeak = -Infinity;
 const pageOpenedAt = 0; // performance.now() is relative to navigation start.
 const timeline = { workerInitStart: null, modelReady: null };
 let attemptTimeline = {};
@@ -85,7 +92,7 @@ window.addEventListener('online', () => { if (uploadConfig) void uploadQueue.ret
 $('camera-facing').addEventListener('change', () => { $('camera-device').value = ''; $('wide-camera-option').hidden = true; });
 $('camera-width').addEventListener('change', () => { if ($('camera-width').value === 'normal') $('camera-device').value = ''; });
 function localVoice() {
-  return window.speechSynthesis?.getVoices().find(v => v.localService && /^he(?:-|_|$)/i.test(v.lang));
+  return selectLocalVoice(window.speechSynthesis?.getVoices() || [], selectedVoiceId);
 }
 let uploadWarningSpoken = false;
 function announceUploadWarning() {
@@ -99,15 +106,27 @@ function showSetup() {
   announceUploadWarning();
 }
 function voiceStatus() {
-  $('voice-status').textContent = localVoice() ? 'הדרכה בקול עברי מותקן במכשיר; אין שימוש בקול רשת.' :
-    'לא נמצא קול עברי מקומי. ההדרכה מופיעה בכתב; אפשר להתקין קול עברי בהגדרות המכשיר.';
+  const choices = localVoices(window.speechSynthesis?.getVoices() || []), select = $('voice-select');
+  select.replaceChildren();
+  for (const [value, label] of [['', 'בחירה אוטומטית — עדיפות לעברית'], ...choices.map(v => [voiceId(v), `${v.name || v.lang} (${v.lang})`])]) {
+    const option = document.createElement('option'); option.value = value; option.textContent = label; select.append(option);
+  }
+  if (selectedVoiceId && !choices.some(v => voiceId(v) === selectedVoiceId)) selectedVoiceId = '';
+  select.value = selectedVoiceId; select.disabled = !choices.length || !$('voice').checked;
+  const voice = localVoice();
+  $('voice-status').textContent = !voice ? 'אין קול מקומי זמין. הטקסט והחץ מופיעים גם בלי קול; אפשר להתקין קול עברי בהגדרות המכשיר.' :
+    isHebrewVoice(voice) ? `הדרכה בקול עברי מהמכשיר: ${voice.name || voice.lang}.` :
+    `${choices.some(isHebrewVoice) ? 'נבחר קול בשפה אחרת.' : 'אין קול עברי מקומי.'} נבחר ${voice.name || voice.lang}; אפשר לבחור קול אחר למעלה. ההגייה בעברית תלויה בקול, והטקסט והחץ תמיד מופיעים.`;
   announceUploadWarning();
 }
+function cancelSpeech() { voiceGeneration++; placementSpeechActive = false; window.speechSynthesis?.cancel(); }
+$('voice-select').addEventListener('change', () => { selectedVoiceId = $('voice-select').value; cancelSpeech(); voiceStatus(); });
+$('voice').addEventListener('change', () => { if (!$('voice').checked) { queuedSpeech = null; cancelSpeech(); } voiceStatus(); });
 window.speechSynthesis?.addEventListener('voiceschanged', voiceStatus);
 voiceStatus();
-function speak(text, priority = 0) {
+function speak(text, priority = 0, hint = null) {
   const now = performance.now();
-  if (!queuedSpeech || queuedSpeech.expires < now || priority >= queuedSpeech.priority) queuedSpeech = { text, priority, expires: now + 12000 };
+  if (!queuedSpeech || queuedSpeech.expires < now || priority >= queuedSpeech.priority) queuedSpeech = { text, priority, hint, expires: now + 12000 };
   flushSpeech();
 }
 function flushSpeech() {
@@ -115,21 +134,26 @@ function flushSpeech() {
   const voice = localVoice();
   if (!$('voice').checked || !voice) { queuedSpeech = null; return; }
   if (queuedSpeech?.expires < performance.now()) queuedSpeech = null;
-  if (!queuedSpeech || performance.now() - lastSpeak < 6000) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(queuedSpeech.text); queuedSpeech = null;
+  if (queuedSpeech?.hint && (queuedSpeech.hint.code !== placementHint?.code || queuedSpeech.hint.arrow !== placementHint?.arrow)) queuedSpeech = null;
+  if (!queuedSpeech || performance.now() - (queuedSpeech.hint ? lastPlacementSpeak : lastSpeak) < 6000) return;
+  cancelSpeech();
+  const job = queuedSpeech, utterance = new SpeechSynthesisUtterance(job.text); queuedSpeech = null;
+  const token = voiceGeneration; placementSpeechActive = !!job.hint;
+  utterance.onend = utterance.onerror = () => { if (token === voiceGeneration) placementSpeechActive = false; };
   utterance.voice = voice; utterance.lang = 'he-IL'; utterance.rate = .85;
   window.speechSynthesis.speak(utterance); lastSpeak = performance.now();
+  if (job.hint) { lastPlacementSpeak = lastSpeak; placementCoach.markSpoken(job.hint, lastSpeak); }
 }
 function release() {
   autoStart?.cancel(); $('countdown').textContent = '';
   if (configureWaiter) { clearTimeout(configureWaiter.timer); configureWaiter.resolve(); configureWaiter = null; }
-  generation++; active = false; ready = false; busy = false;
+  generation++; active = false; ready = false; busy = false; modelTransitionAfter = null;
   cancelAnimationFrame(raf); clearTimeout(watchdog); clearTimeout(attemptTimer);
   if (!finishing) void wakeLock.release();
   stream?.getTracks().forEach(t => t.stop()); stream = null;
-  video.srcObject = null; window.speechSynthesis?.cancel();
+  video.srcObject = null; cancelSpeech(); lastPlacementSpeak = -Infinity;
   queuedSpeech = null; recorder.stop(); paintRecorder();
+  placementHint = null; placementCoach.reset(); $('direction-arrow').hidden = true; $('placement-hint').textContent = '';
   $('camera').disabled = false;
 }
 function fail(message, detail = '') {
@@ -181,7 +205,9 @@ function poseResult(data) {
     canvas.width = video.videoWidth; canvas.height = video.videoHeight;
     $('view').style.aspectRatio = `${video.videoWidth}/${video.videoHeight}`;
   }
-  recorder.add(poses, timestamp, aspect); paintRecorder();
+  const modelTransition = modelTransitionAfter != null && timestamp > modelTransitionAfter;
+  if (modelTransition) modelTransitionAfter = null;
+  recorder.add(poses, timestamp, aspect, { modelTransition }); paintRecorder();
   const placementCode = !active ? placement.update(poses, timestamp, aspect) : null;
   const assigned = pair ? tracker.update(poses, timestamp, aspect) : [poses[0] || null];
   if (pair && tracker.tracks.length) placementDone = true;
@@ -193,9 +219,20 @@ function poseResult(data) {
   if (report.ok) mark('firstFullBody');
   context.clearRect(0, 0, canvas.width, canvas.height);
   poses.forEach(p => draw(p.landmarks || []));
-  const distance = placementDistance(assigned[0]?.landmarks || poses[0]?.landmarks || [], { aspect, heightCm: Number($('height').value) });
+  const childPoints = assigned[0]?.landmarks || (!pair ? poses[0]?.landmarks : null) || [];
+  const placementOptions = { aspect, heightCm: Number($('height').value),
+    mirrored: (cameraInfo.settings?.facingMode || $('camera-facing').value || 'user') !== 'environment' };
+  const distance = placementDistance(childPoints, placementOptions);
   $('distance-meter').value = distance.span ?? .5;
-  $('distance-status').textContent = (distance.direction === 'closer' ? '← ' : distance.direction === 'away' ? '→ ' : '') + distance.message + (placementCode === 'tilt' ? ' · כדאי ליישר את המכשיר.' : '');
+  $('distance-status').textContent = distance.message + (placementCode === 'tilt' ? ' · כדאי ליישר את המכשיר.' : '');
+  // Coach only placement or a counter waiting for tracking. Counted motion
+  // must never cause a lateral cue as the person lunges or opens their arms.
+  const previousHint = placementHint;
+  placementHint = placementCoach.update(!active || counter.phase === 'waiting' ? childPoints : [], timestamp, placementOptions);
+  if (placementSpeechActive && (previousHint?.code !== placementHint?.code || previousHint?.arrow !== placementHint?.arrow)) cancelSpeech();
+  $('placement-hint').textContent = placementHint?.text || '';
+  $('direction-arrow').hidden = !placementHint?.arrow;
+  $('direction-arrow').textContent = placementHint?.arrow === 'right' ? '→' : placementHint?.arrow === 'left' ? '←' : '';
   const interval = lastFrame == null ? 0 : timestamp - lastFrame;
   const fps = interval ? 1000 / interval : 0;
   totalElapsed += interval;
@@ -210,13 +247,14 @@ function poseResult(data) {
       const uncertain = pair && tracker.status === 'ambiguous';
       if (uncertain && !ambiguousTracking[i]) handleEvent(c.resetTracking('ambiguous'), i);
       ambiguousTracking[i] = uncertain;
-      handleEvent(c.update(assigned[i]?.landmarks || [], assigned[i]?.world || [], timestamp, aspect), i);
+      handleEvent(c.update(assigned[i]?.landmarks || [], assigned[i]?.world || [], timestamp, aspect, { modelTransition }), i);
       if (pair) $(i ? 'dad-status' : 'child-status').textContent = visibility[i] ? c.phase === 'waiting' ? 'מחכה לעמדת התחלה' : 'סופר' : 'הספירה נעצרה — מחכה לחזרה';
     });
     paintStatus(pair && !visibility.every(Boolean) ? assigned.every(Boolean) ? 'missing-person' : tracker.status : counter.status);
     $('view').classList.toggle('ready', visibility.every(Boolean));
   } else {
     preparationCounters.forEach((c,i) => c.update(assigned[i]?.landmarks || [], assigned[i]?.world || [], timestamp, aspect));
+    if (!autoStart.countingDown) calibrationReady = restCalibrations.map((c, i) => c.update(fs[i], timestamp, prepared[i].fresh));
     calibratedPeople = visibility.map((visible, i) => visible && prepared[i].fresh);
     const calibrated = calibratedPeople.every(Boolean);
     $('start').disabled = !calibrated;
@@ -226,13 +264,14 @@ function poseResult(data) {
       statusCode(report, calibrated ? 'armed' : FLOOR.includes(exercise) ? 'floor-rest' : 'waiting', report.ok && !visible));
     paintStatus(code);
   }
+  if (placementHint) speak(placementHint.tts, 1, placementHint);
   flushSpeech();
   log.push({ frame: data.id, fps: +fps.toFixed(2), inferenceMs: +inferenceMs.toFixed(2),
     processingMs: +processingMs.toFixed(2), tracked: +visible, fullBody: +report.ok,
     phase: active ? ['waiting', 'armed', 'moving'].indexOf(counter.phase) : -1 });
   if (log.length > 900) log.shift();
   if (!active) {
-    autoStart.update(!$('start').disabled && ready && performance.now() - timestamp <= counter.t.maxGap, timestamp);
+    autoStart.update(!$('start').disabled && calibrationReady.every(Boolean) && ready && !placementSpeechActive && performance.now() - timestamp <= counter.t.maxGap, timestamp);
   }
 }
 function paintStatus(code) {
@@ -249,7 +288,7 @@ async function tick(token) {
       const bitmap = await createImageBitmap(video);
       if (token !== generation) { bitmap.close(); return; }
       const timestamp = performance.now();
-      pending = { started }; worker.postMessage({ type: 'frame', bitmap, timestamp, id: ++frameId, generation: token }, [bitmap]);
+      pending = { started, timestamp }; worker.postMessage({ type: 'frame', bitmap, timestamp, id: ++frameId, generation: token, counting: active }, [bitmap]);
       watchdog = setTimeout(() => {
         if (token === generation) fail('עיבוד פריים נמשך זמן רב מדי. נסו דפדפן מעודכן או מכשיר אחר.');
       }, 15000);
@@ -273,7 +312,12 @@ $('settings').addEventListener('submit', async event => {
   modelForAttempt.catch(() => {});
   attemptEnded = false; endReason = null;
   autoStart = new AutoStart({ onCue: countdownCue, onCancel: () => {
-    $('countdown').textContent = ''; window.speechSynthesis?.cancel();
+    $('countdown').textContent = ''; cancelSpeech();
+    if (!attemptEnded) {
+      restCalibrations.forEach(c => c.reset()); calibrationReady = [];
+      [counter, ...(pair ? [adult] : [])].forEach(c => { delete c.calibration; });
+      if (recorder.recording) { delete recorder.recording.calibration; delete recorder.recording.calibrationEndMs; }
+    }
   }, begin: beginCounting });
   exercise = $('exercise').value;
   try { counter = new RepCounter(exercise, { age: Number($('age').value), height: Number($('height').value) }); }
@@ -286,6 +330,8 @@ $('settings').addEventListener('submit', async event => {
   preparationCounters = [counter, ...(pair ? [adult] : [])].map(c => {
     const probe = new RepCounter(exercise); probe.t = { ...c.t }; return probe;
   });
+  restCalibrations = [counter, ...(pair ? [adult] : [])].map(c => new RestCalibration(exercise, c.t));
+  calibrationReady = [];
   videoRecorder = null; recordingError = null; openedAt = new Date(); sessionId = createSessionId(exercise, openedAt);
   cameraInfo = {}; runtimeError = null;
   $('dad-score').hidden = !pair; $('child-label').textContent = pair ? 'הילד' : 'חזרות שנספרו';
@@ -339,6 +385,7 @@ $('settings').addEventListener('submit', async event => {
     }
     $('view').style.aspectRatio = `${video.videoWidth}/${video.videoHeight}`;
     $('setup').hidden = true; $('session').hidden = false;
+    $('view').scrollIntoView?.({ block: 'center' });
     try { await modelForAttempt; }
     catch { if (token === generation && !attemptEnded) fail('הזיהוי המקומי לא נטען. נסו שוב בדפדפן מעודכן.'); return; }
     if (token !== generation || attemptEnded) return;
@@ -352,18 +399,23 @@ $('settings').addEventListener('submit', async event => {
   }
 });
 function countdownCue(number) {
-  if (number === 3) mark('countdownStart');
+  if (number === 3) { finalizeCalibration(); mark('countdownStart'); }
   $('countdown').textContent = `${number}…`; queuedSpeech = null;
   const voice = localVoice();
   if (!$('voice').checked || !voice) return;
-  window.speechSynthesis.cancel();
+  cancelSpeech();
   const utterance = new SpeechSynthesisUtterance({ 3: 'שָׁלוֹשׁ', 2: 'שְׁתַּיִם', 1: 'אַחַת' }[number]);
   utterance.voice = voice; utterance.lang = 'he-IL'; utterance.rate = .85;
   window.speechSynthesis.speak(utterance); lastSpeak = performance.now();
 }
+function finalizeCalibration() {
+  [counter, ...(pair ? [adult] : [])].forEach((c, i) => { c.calibration = restCalibrations[i].finalize(); });
+  recorder.setCalibration(performance.now(), { thresholds: counter.t, adultThresholds: adult?.t,
+    calibration: [counter.calibration, ...(pair ? [adult.calibration] : [])] });
+}
 function beginCounting() {
   if (active || attemptEnded || finishing || $('start').disabled || !ready || lastFrame == null || performance.now() - lastFrame > counter.t.maxGap) return;
-  autoStart.complete(); $('countdown').textContent = '';
+  finalizeCalibration(); autoStart.complete(); cancelSpeech(); $('countdown').textContent = '';
   mark('countStart');
   attemptStarted = performance.now(); active = true;
   // A mid-movement start must reach rest before arming a complete cycle.
@@ -378,6 +430,7 @@ $('start').onclick = beginCounting;
 function results(reason = 'finish') {
   if (attemptEnded || finishing || !counter) return;
   attemptEnded = true; endReason = reason; autoStart?.cancel();
+  finalizeCalibration();
   $('countdown').textContent = '';
   mark('finish');
   const endedAt = performance.now();
@@ -544,8 +597,11 @@ function preloadModel() {
         }
         if (!stream || attemptEnded || data.generation !== generation) return;
         if (data.type === 'pose') poseResult(data);
-        else if (data.type === 'model-switching') ready = false;
+        else if (data.type === 'model-switching') {
+          ready = false; modelTransitionAfter = data.timestamp ?? pending?.timestamp ?? lastFrame;
+        }
         else if (data.type === 'model-change') {
+          modelTransitionAfter ??= lastFrame;
           ready = true; model = data.model; modelHistory = data.modelHistory || modelHistory;
           const token = generation;
           if (data.lowerResolution) void reduceResolution(stream.getVideoTracks()[0], { orientation: cameraOrientation }).then(result => {

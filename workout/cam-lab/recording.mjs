@@ -1,4 +1,5 @@
-import { RepCounter, EXERCISES, FLOOR } from './counter.mjs';
+import { RepCounter, PoseFilter, EXERCISES, FLOOR } from './counter.mjs';
+import { RestCalibration } from './rest-calibration.mjs';
 import { PeopleTracker } from './people.mjs';
 import { PlacementGuide } from './placement.mjs';
 
@@ -58,7 +59,14 @@ export class SkeletonRecorder {
       if (Array.isArray(armed)) this.recording.countArmed = armed.slice(0, 2).map(Boolean);
     }
   }
-  add(poses, time, aspect) {
+  setCalibration(time, { thresholds, adultThresholds, calibration }) {
+    if (!this.recording || this.recording.calibration != null) return;
+    this.recording.calibrationEndMs = Math.max(0, Math.min(RECORDING_DURATION, time - this.origin));
+    this.recording.thresholds = { ...thresholds };
+    if (adultThresholds) this.recording.adultThresholds = { ...adultThresholds };
+    this.recording.calibration = structuredClone(calibration);
+  }
+  add(poses, time, aspect, { modelTransition = false } = {}) {
     if (!this.active) return;
     const t = time - this.origin, frames = this.recording.frames;
     if (!Number.isFinite(t) || t < 0 || (frames.length && t <= frames.at(-1).t)) return;
@@ -66,7 +74,7 @@ export class SkeletonRecorder {
     // Store a changed aspect with the frame that uses it. Dropping resolution
     // in the same orientation leaves the existing aspect unchanged.
     const changedAspect = Number.isFinite(aspect) && aspect > 0 && aspect !== this.recording.aspect;
-    frames.push({ t, ...(changedAspect ? { aspect } : {}),
+    frames.push({ t, ...(changedAspect ? { aspect } : {}), ...(modelTransition ? { modelTransition: true } : {}),
       poses: poses.slice(0, 2).map(p => {
         const landmarks = cleanPoints(p.landmarks), world = cleanPoints(p.world);
         return { landmarks: this.compact ? compactPoints(landmarks) : landmarks, world: this.compact ? compactPoints(world) : world };
@@ -97,6 +105,8 @@ export function replayRecording(recording, options = {}) {
     !['solo', 'pair'].includes(recording.mode) || !Number.isFinite(recording.aspect) || recording.aspect <= 0 ||
     (!hasCountStart && (!details || recording.countStartMs != null)) ||
     (hasCountStart && recording.countStartMs > RECORDING_DURATION) ||
+    (recording.calibrationEndMs != null && (!Number.isFinite(recording.calibrationEndMs) || recording.calibrationEndMs < 0 ||
+      recording.calibrationEndMs > (hasCountStart ? recording.countStartMs : RECORDING_DURATION))) ||
     !Array.isArray(recording.frames) || recording.frames.length > RECORDING_LIMIT ||
     (recording.endMs != null && (!Number.isFinite(recording.endMs) || recording.endMs < 0 || recording.endMs > RECORDING_DURATION))) {
     throw new TypeError('קובץ הקלטת שלד לא תקין או ללא התחלת ספירה');
@@ -117,6 +127,9 @@ export function replayRecording(recording, options = {}) {
     }
   }
   const preparation = counters.map(c => { const probe = new RepCounter(recording.exercise); probe.t = { ...c.t }; return probe; });
+  const calibrations = counters.map(c => new RestCalibration(recording.exercise, c.t));
+  const calibrationFilters = counters.map(c => new PoseFilter(recording.exercise, c.t));
+  const calibrationEnd = recording.calibrationEndMs ?? recording.countStartMs;
   const stopReasons = counters.map(() => ({})), preparationStops = counters.map(() => ({}));
   const blocked = counters.map(() => null), preparationBlocked = counters.map(() => null);
   const noteStop = (reasons, previous, index, code) => {
@@ -131,6 +144,7 @@ export function replayRecording(recording, options = {}) {
     if (!Number.isFinite(frame.t) || frame.t < 0 || frame.t > RECORDING_DURATION || frame.t <= last ||
       !Array.isArray(frame.poses) || frame.poses.length > 2 ||
       (frame.aspect != null && (!Number.isFinite(frame.aspect) || frame.aspect <= 0)) ||
+      (frame.modelTransition != null && typeof frame.modelTransition !== 'boolean') ||
       frame.poses.some(p => !p || typeof p !== 'object' || !Array.isArray(p.landmarks) || p.landmarks.length > 33 ||
         (p.world != null && (!Array.isArray(p.world) || p.world.length > 33)))) throw new TypeError('רצף פריימים לא תקין');
     last = frame.t;
@@ -143,24 +157,39 @@ export function replayRecording(recording, options = {}) {
     if (preparing) {
       preparation.forEach((c, i) => {
         c.update(poses[i]?.landmarks || [], poses[i]?.world || [], frame.t, aspect);
+        if (options.calibrate === true && frame.t <= calibrationEnd) {
+          const sample = calibrationFilters[i].update(poses[i]?.landmarks || [], poses[i]?.world || [], frame.t, aspect);
+          calibrations[i].update(sample.features, frame.t, sample.fresh);
+        }
         noteStop(preparationStops, preparationBlocked, i, placementCode ||
           (tracker && !poses[i] ? tracker.status : c.status));
       });
       continue;
     }
-    if (!started) { counters.forEach((c,i) => c.begin(recording.countStartMs, recording.countArmed?.[i] ?? true)); started = true; }
+    if (!started) {
+      counters.forEach((c,i) => {
+        if (options.calibrate === true) c.calibration = calibrations[i].finalize();
+        else if (recording.calibration?.[i]) c.calibration = structuredClone(recording.calibration[i]);
+        c.begin(recording.countStartMs, recording.countArmed?.[i] ?? true);
+      });
+      started = true;
+    }
     counters.forEach((c, i) => {
       // Identity uncertainty cannot use held points. An ordinary missing pose
       // uses exactly the same bounded per-point grace as the live counter.
       const uncertain = tracker?.status === 'ambiguous';
       if (uncertain && !ambiguous[i]) c.resetTracking('ambiguous');
       ambiguous[i] = uncertain;
-      c.update(poses[i]?.landmarks || [], poses[i]?.world || [], frame.t, aspect);
+      c.update(poses[i]?.landmarks || [], poses[i]?.world || [], frame.t, aspect, { modelTransition: frame.modelTransition === true });
       noteStop(stopReasons, blocked, i, tracker && !poses[i] ? tracker.status : c.status);
     });
   }
   if (recording.endMs != null && recording.endMs < last) throw new TypeError('זמן סיום הקלטה קודם לפריים האחרון');
-  counters.forEach(c => c.finish(recording.endMs ?? last));
+  counters.forEach((c, i) => {
+    if (!started && options.calibrate === true) c.calibration = calibrations[i].finalize();
+    else if (!started && recording.calibration?.[i]) c.calibration = structuredClone(recording.calibration[i]);
+    c.finish(recording.endMs ?? last);
+  });
   return counters.map((c, i) => ({ counted: c.count, rejected: c.rejected, reasons: { ...c.reasons },
     ...(details ? { thresholds: { ...c.t }, diagnostics: c.snapshot(),
       stopReasons: { ...stopReasons[i], ...(!hasCountStart ? { 'no-count-start': 1 } : {}) },

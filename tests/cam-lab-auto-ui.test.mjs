@@ -25,7 +25,7 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
   const location={hash:'#upload=https%3A%2F%2Fupload.example.invalid%2Freceive&key=synthetic-key',pathname:'/cam-lab/',search:''};
   class FakeWorker {
     constructor(){worker=this;workerCount++;} terminate(){events.push('worker-stop');}
-    postMessage(m){if(m.type==='init'){workerInit=()=>this.onmessage({data:{type:'ready',model:'full',modelHistory:[{model:'full',reason:'initial',timestamp:0}]}});}else if(m.type==='configure'){this.generation=m.generation;this.onmessage({data:{type:'configured',generation:m.generation,model:'full',modelHistory:[{model:'full',reason:'initial',timestamp:0}]}});}}
+    postMessage(m){if(m.type==='init'){workerInit=()=>this.onmessage({data:{type:'ready',model:'full',modelHistory:[{model:'full',reason:'initial',timestamp:0}]}});}else if(m.type==='configure'){this.generation=m.generation;this.onmessage({data:{type:'configured',generation:m.generation,model:'full',modelHistory:[{model:'full',reason:'initial',timestamp:0}]}});}else if(m.type==='frame'){this.counting=m.counting;}}
   }
   class FakeStream {constructor(tracks){this.tracks=tracks;}getVideoTracks(){return this.tracks;}getTracks(){return this.tracks;}}
   class FakeMediaRecorder {
@@ -76,16 +76,22 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     worker.onmessage({data:{type:'error',generation:worker.generation-1,message:'stale worker error'}});assert.equal(get('error').hidden,true);
     assert.equal(cameraRequests[0].video.zoom,true);
     assert.equal(requests.length,0);assert.match(get('zoom-status').textContent,/0.5/);
-    const frame=async sample=>{now+=50;get('video').currentTime+=.05;await raf();
+    const frame=async (sample,step=50)=>{now+=step;get('video').currentTime+=step/1000;await raf();
       worker.onmessage({data:{type:'pose',generation:worker.generation,id:now/50,timestamp:now,poses:[{landmarks:sample.p,world:sample.world}],inferenceMs:20,model:'full'}});};
     const partial=pose();partial.p[15].visibility=.1;partial.p[16].visibility=.4;
     await frame(partial);assert.ok(colors.includes('#70e2b5'));assert.ok(colors.includes('#ffd685'));assert.ok(colors.includes('#ff8b8b'));
     assert.equal(get('start').disabled,false);
     assert.equal(get('record-option').hidden,true);assert.equal(get('recording-panel').hidden,true);assert.equal(get('export-panel').hidden,true);
     assert.equal(get('finish').hidden,false);assert.equal(get('upload-status').textContent,'מקליט ושולח לבדיקה אוטומטית');
-    for(let i=0;i<60;i++)await frame(pose());
+    assert.equal(worker.counting,false);
+    for(let i=0;i<80;i++)await frame(pose({angle:160}));
     assert.equal(get('start').hidden,true); // No recording, download or Start click.
-    for(let i=0;i<20;i++)await frame(pose({angle:110}));for(let i=0;i<20;i++)await frame(pose());
+    for(let i=0;i<20;i++)await frame(pose({angle:110}));
+    assert.equal(worker.counting,true);
+    worker.onmessage({data:{type:'model-switching',generation:worker.generation,timestamp:now,reason:'startup-low-fps'}});
+    worker.onmessage({data:{type:'model-change',generation:worker.generation,model:'lite'}});
+    await frame(pose({angle:110}),504);
+    for(let i=0;i<20;i++)await frame(pose({angle:146}));
     get('finish').onclick();get('stop').onclick();get('finish').onclick();await flush();
     assert.equal(stopped,1);assert.ok(events.indexOf('video-final')<events.indexOf('camera-stop'));assert.ok(events.indexOf('durable')<events.indexOf('fetch'));
     assert.deepEqual(requests.map(r=>r.part),['diagnostics','skeleton','video']);assert.equal(get('upload-status').textContent,'נשלח לבדיקה');assert.equal(records.size,0);
@@ -99,6 +105,10 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     assert.ok(diagnostic.timeline.workerInitStart<=diagnostic.timeline.cameraStart&&diagnostic.timeline.modelReady<=diagnostic.timeline.firstFrame);
     assert.equal(diagnostic.model,'full');assert.equal(diagnostic.attempts[0].counted,1);assert.ok(diagnostic.attempts[0].requiredPoints[27].observedPercent>0);
     assert.ok(diagnostic.attempts[0].preparation.frames>0);assert.equal(JSON.stringify(diagnostic).includes('synthetic-key'),false);
+    assert.equal(diagnostic.attempts[0].calibration.status,'calibrated');
+    assert.ok(Math.abs(diagnostic.attempts[0].calibration.median-160)<.01);
+    assert.ok(Math.abs(diagnostic.attempts[0].thresholds.squatUp-140)<.01);
+    assert.equal(diagnostic.attempts[0].modelTransitionGaps,1);assert.equal(diagnostic.attempts[0].trackingResets,0);
     const skeleton=JSON.parse(Buffer.from(requests[1].data,'base64').toString());assert.equal(skeleton.version,2);
     const {replayRecording}=await import('../workout/cam-lab/recording.mjs');assert.equal(replayRecording(skeleton)[0].counted,1);
     cameraMode='denied';get('again').onclick();await get('settings').handlers.submit({preventDefault(){}});await frame(pose());
@@ -109,13 +119,14 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     assert.equal(placementOnly.uploadLog.length,3);assert.equal(placementOnly.timeline.countStart,null);
     assert.equal(placementOnly.countStarted,false);assert.equal(placementOnly.countNotStartedReason,'no-count-start');assert.equal(placementOnly.endReason,'duration-limit');
     assert.ok(placementOnly.attempts[0].preparation.frames>0);
+    assert.equal(placementOnly.attempts[0].calibration.status,'fallback');assert.equal(placementOnly.attempts[0].thresholds.squatUp,157);
     assert.equal(get('error').hidden,true);assert.equal(placementOnly.camera.settings.zoom,1);
     assert.equal(placementOnly.camera.ptz.requested,true);assert.equal(placementOnly.camera.ptz.granted,false);
     assert.equal(placementOnly.camera.ptz.state,'denied');assert.equal(placementOnly.camera.ptz.fallback,true);assert.equal(placementOnly.camera.ptz.actualZoom,1);
     assert.equal(cameraRequests.length,3);assert.equal(cameraRequests[1].video.zoom,true);assert.equal(cameraRequests[2].video.zoom,undefined);
     cameraMode='unsupported';get('again').onclick();await get('settings').handlers.submit({preventDefault(){}});await frame(pose());
     assert.equal(get('error').hidden,true);assert.equal(cameraRequests.length,4);assert.equal(cameraRequests[3].video.zoom,undefined);
-    for(let i=0;i<60;i++)await frame(pose());
+    for(let i=0;i<80;i++)await frame(pose());
     assert.equal(get('start').hidden,true);assert.equal(FakeMediaRecorder.instances.length,3);
     get('finish').onclick();await flush();assert.equal(requests.length,9);
     const unsupported=JSON.parse(Buffer.from(requests[6].data,'base64').toString());assert.equal(unsupported.camera.settings.zoom,undefined);
