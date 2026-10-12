@@ -2,7 +2,7 @@
 import { EXERCISES, CATS, byId } from './exercises.js?v=20261010-camera-1';
 import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261010-camera-1';
 import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js?v=20261010-camera-1';
-import { refreshVideos, refreshCloud, cloudUpload, cloudDelete, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js?v=20261010-camera-1';
+import { refreshVideos, refreshCloud, cloudUpload, setVideoFamily, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js?v=20261011-vids-signed-1';
 import { Figure, cycleMs } from './figure.js?v=20261010-camera-1';
 import { store } from './store.js?v=20261010-camera-1';
 import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261010-camera-1';
@@ -173,6 +173,7 @@ function confetti() {
 // ---- ניתוב ----
 const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, minute: minuteScreen, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, 'parent-together': parentTogether, 'parent-week': parentWeek, together, basketball };
 function route() {
+  if (setVideoFamily(store.profile.familyCode) && store.profile.familyCode) refreshCloud(store.profile.familyCode).then(softRoute);
   const [path, arg] = location.hash.replace(/^#\/?/, '').split('/');
   if (!['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) lockParent();
   (routes[path] || home)(arg);
@@ -964,6 +965,7 @@ function arcade() {
 // ---- הגדרות ----
 function tetrisPics() { try { const a = JSON.parse(localStorage.getItem('kidfit.tetrisPics') || '[]'); const one = localStorage.getItem('kidfit.tetrisPic'); return one && !a.length ? [one] : a; } catch { return []; } }
 function settings() {
+  setVideoFamily(store.profile.familyCode);
   const p = store.profile, pl = plan();
   mount(`
   <div class="stack">
@@ -996,10 +998,10 @@ function settings() {
     <div class="card stack">
       <h3>סרטונים לתרגילים 🎥</h3>
       <p class="muted small">במקום הדמות המצוירת: סרטון קצר אמיתי (או תמונה) לכל תרגיל, בלופ. מצלמים ישר מהטלפון או בוחרים מהגלריה. ${EXERCISES.filter(e => hasVideo(e.id)).length} מתוך ${EXERCISES.length} יש.</p>
-      <p class="muted small" id="vidcloud">${p.familyCode ? `☁️ ענן משפחתי: כל סרטון שמצלמים כאן עולה לענן ומגיע לטלפון של הילד (אותו קוד משפחה). בענן ${Object.keys(cloudVideos()).length} סרטונים.${vidStatus.error ? ` ⚠️ ${esc(vidStatus.error)}` : ''}` : 'כדי שהסרטונים יגיעו גם לטלפון שלו: קוד משפחה בכרטיס "חיבור לטלפון של אבא" למטה, אותו קוד בשני הטלפונים.'}</p>
+      <p class="muted small" id="vidcloud">${p.familyCode ? `☁️ ענן משפחתי: כל סרטון שמצלמים כאן עולה לענן ומגיע לטלפון של הילד (אותו קוד משפחה). בענן ${Object.keys(cloudVideos()).length} סרטונים. סרטון חדש מוצג במקום הקודם; הקודם נשמר בענן.${vidStatus.error ? ` ⚠️ ${esc(vidStatus.error)}` : ''}` : 'כדי שהסרטונים יגיעו גם לטלפון שלו: קוד משפחה בכרטיס "חיבור לטלפון של אבא" למטה, אותו קוד בשני הטלפונים.'}</p>
       ${p.familyCode ? '<button class="btn chip" id="vidrefresh">🔄 לרענן מהענן</button>' : ''}
       <div class="tip">🎬 איך לצלם: הטלפון לרוחב, בגובה החזה, כל הגוף בפריים עם קצת אוויר מעל הראש ומתחת לרגליים. רקע פשוט (קיר). 5 עד 8 שניות: שתיים-שלוש חזרות בקצב רגיל, בלי לדבר (הסרטון מוצג בלי קול). תרגילי רצפה מצלמים מהצד.</div>
-      <details><summary class="small" style="cursor:pointer">כל התרגילים (${EXERCISES.length})</summary><div class="stack" style="margin-top:8px">${Object.entries(CATS).map(([cat, c]) => `<b class="small muted">${c.emoji} ${c.name}</b>` + EXERCISES.filter(e => e.cat === cat).map(e => `<div class="row between"><span>${{ local: '✅', cloud: '☁️', repo: '📦' }[sourceOf(e.id)] || '▫️'} ${esc(e.name)}</span><span class="row">${hasVideo(e.id) ? `<button class="btn chip" data-playvid="${e.id}">▶️</button>` : ''}<label class="btn chip">📹 ${hasVideo(e.id) ? 'להחליף' : 'לצלם / לבחור'}<input type="file" accept="video/*,image/*" data-vid="${e.id}" hidden></label>${localVideos().has(e.id) || cloudVideos()[e.id] ? `<button class="btn chip" data-delvid="${e.id}" aria-label="למחוק">🗑️</button>` : ''}</span></div><div class="vidprev" data-prev="${e.id}" hidden></div>`).join('')).join('')}</div></details>
+      <details><summary class="small" style="cursor:pointer">כל התרגילים (${EXERCISES.length})</summary><div class="stack" style="margin-top:8px">${Object.entries(CATS).map(([cat, c]) => `<b class="small muted">${c.emoji} ${c.name}</b>` + EXERCISES.filter(e => e.cat === cat).map(e => `<div class="row between"><span>${{ local: '✅', cloud: '☁️', repo: '📦' }[sourceOf(e.id)] || '▫️'} ${esc(e.name)}</span><span class="row">${hasVideo(e.id) ? `<button class="btn chip" data-playvid="${e.id}">▶️</button>` : ''}<label class="btn chip">📹 ${hasVideo(e.id) ? 'להחליף' : 'לצלם / לבחור'}<input type="file" accept="video/*,image/*" data-vid="${e.id}" hidden></label>${localVideos().has(e.id) || cloudVideos()[e.id] ? `<button class="btn chip" data-delvid="${e.id}" aria-label="למחוק מהטלפון בלבד">🗑️</button>` : ''}</span></div>${cloudVideos()[e.id] ? '<p class="muted small">מחיקה מהענן נעשית בלוח הבקרה</p>' : ''}<div class="vidprev" data-prev="${e.id}" hidden></div>`).join('')).join('')}</div></details>
     </div>
     <div class="card stack">
       <h3>התוכנית השבועית</h3>
@@ -1064,7 +1066,7 @@ function settings() {
   });
   if ($('#vidrefresh')) $('#vidrefresh').onclick = async () => { $('#vidrefresh').textContent = '⏳'; await refreshCloud(store.profile.familyCode); settings(); };
   app.querySelectorAll('[data-playvid]').forEach(b => b.onclick = async () => { const box = app.querySelector(`.vidprev[data-prev="${b.dataset.playvid}"]`); if (!box.hidden) { box.hidden = true; box.innerHTML = ''; return; } const m = await videoUrl(b.dataset.playvid, store.profile.familyCode); if (!m) return; box.innerHTML = m.kind === 'image' ? `<img class="exvid" src="${m.url}" alt="">` : `<video class="exvid" src="${m.url}" autoplay muted loop playsinline controls></video>`; box.hidden = false; });
-  app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { const id = b.dataset.delvid, inCloud = !!cloudVideos()[id]; if (!confirm(`למחוק את הסרטון של "${byId[id].name}"${inCloud ? ' מהטלפון הזה ומהענן (גם מהטלפון של הילד)' : ''}?`)) return; await deleteVideo(id); if (inCloud && store.profile.familyCode) await cloudDelete(store.profile.familyCode, id); settings(); });
+  app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { const id = b.dataset.delvid; if (!confirm(`למחוק מהטלפון הזה את הסרטון של "${byId[id].name}"?`)) return; await deleteVideo(id); settings(); });
   $('#intro').onchange = e => store.setProfile({ intro: e.target.checked });
   $('#stage3d').onchange = e => store.setProfile({ stage3d: e.target.checked }); /* כיבוי = דמות המקלות (טלפון איטי / בלי WebGL) */
   $('#voicetest').onclick = () => { if (!speak(SAY_UI.test, { force: true })) alert('אין הקראה במכשיר הזה.'); };
@@ -1080,9 +1082,9 @@ function settings() {
   document.querySelectorAll('[data-clear]').forEach(btn => btn.onclick = () => { if (confirm('להסיר את ההקלטה?')) { localStorage.removeItem(btn.dataset.clear); settings(); } });
   $('#facePic').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { localStorage.setItem('kidfit.facePic', await fitImage(f, 160, 160, 0.85)); settings(); } catch { alert('לא הצלחתי לקרוא את התמונה.'); } };
   const fpc = $('#facePicClear'); if (fpc) fpc.onclick = () => { if (confirm('להסיר את תמונת הפנים?')) { localStorage.removeItem('kidfit.facePic'); settings(); } };
-  $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); if (v.length >= 8) { cloud.register(v); refreshCloud(v); } }; // עם קוד מלא: מביאים גם את רשימת הסרטונים של המשפחה
+  $('#fam').oninput = e => { const v = cloud.normCode(e.target.value); store.setProfile({ familyCode: v }); setVideoFamily(v); softRoute(); if (v.length >= 8) refreshCloud(v).then(softRoute); }; // רק קוד שנוצר כאן נרשם; קוד מוקלד נבדק בשרת
   // קוד חדש נרשם בענן (רק הגיבוב שלו); בלי רישום הענן דוחה כתיבה וקריאה
-  $('#newfam').onclick = async () => { if (p.familyCode && !confirm('ליצור קוד חדש? צריך להקליד אותו גם בטלפון של אבא.')) return; const c = cloud.newFamilyCode(); store.setProfile({ familyCode: c }); await cloud.register(c); settings(); };
+  $('#newfam').onclick = async () => { if (p.familyCode && !confirm('ליצור קוד חדש? צריך להקליד אותו גם בטלפון של אבא.')) return; const c = cloud.newFamilyCode(); store.setProfile({ familyCode: c }); setVideoFamily(c); await cloud.register(c); await refreshCloud(c); settings(); };
   $('#copyfam').onclick = async () => { try { await navigator.clipboard.writeText(store.profile.familyCode); $('#cloudstate').textContent = 'הקוד הועתק'; } catch { $('#fam').select(); } };
   $('#syncnow').onclick = async () => { $('#cloudstate').textContent = 'שולח...'; const ok = await cloud.flush(); $('#cloudstate').textContent = ok || !cloud.status.pending() ? 'הכול בענן ✓' : '⚠️ ' + (cloud.status.error || 'אין רשת'); };
   $('#gameSeconds').onchange = e => store.setProfile({ gameSeconds: +e.target.value }); $('#musicOn').onchange = e => store.setProfile({ music: e.target.checked });
@@ -1096,10 +1098,24 @@ function settings() {
 
 initParent({ mount, esc, go, $ });
 // סרטונים: קודם המקומיים, ואז הרשימה מהענן המשפחתי (אם יש קוד). מסך פרטי תרגיל או הגדרות מתרעננים; אימון פעיל לא נקטע
-const softRoute = () => { if (/#\/(settings|exercise\/)/.test(location.hash)) route(); };
-refreshVideos().then(softRoute).then(() => store.profile.familyCode && refreshCloud(store.profile.familyCode).then(softRoute));
+const softRoute = () => {
+  if (!/#\/(settings|exercise\/)/.test(location.hash)) return;
+  const editing = document.activeElement?.id === 'fam', caret = editing ? $('#fam').selectionStart : null;
+  const videosOpen = app.querySelector('details:has([data-playvid], input[data-vid])')?.open;
+  route();
+  if (editing && $('#fam')) { $('#fam').focus(); $('#fam').setSelectionRange(caret, caret); }
+  if (videosOpen) { const details = app.querySelector('details:has(input[data-vid])'); if (details) details.open = true; }
+};
+refreshVideos().then(softRoute);
 if (store.profile.familyCode) cloud.flush();
-window.addEventListener('focus', () => { if (store.profile.familyCode) cloud.flush(); });
+const syncVideos = () => {
+  const before = JSON.stringify(cloudVideos());
+  if (store.profile.familyCode) refreshCloud(store.profile.familyCode).then(() => { if (before !== JSON.stringify(cloudVideos())) softRoute(); });
+  else if (setVideoFamily('')) softRoute();
+};
+window.addEventListener('focus', () => { if (store.profile.familyCode) cloud.flush(); syncVideos(); });
+window.addEventListener('online', syncVideos);
+setInterval(() => { if (!document.hidden) syncVideos(); }, 30000);
 
 // ---- כללי: כל אלמנט עם data-go מנווט ----
 app.addEventListener('click', e => { const t = e.target.closest('[data-go]'); if (t && app.contains(t)) go(t.dataset.go); });
