@@ -38,6 +38,7 @@ export class BackgroundUploads {
     if (!this.queue?.enabled) { await this.remove(); return; }
     try {
       await this.queue.ready;
+      if (!this.queue.enabled) return;
       if (!sw || !('SyncManager' in globalThis)) { this.onSupport(false); return; }
       const registration = await sw.register(workerURL.href, { scope: scopeURL.pathname, type: 'module', updateViaCache: 'none' });
       this.registration = registration;

@@ -158,6 +158,12 @@ test('both lifecycle hooks register the same sync tag, including a write complet
     assert.deepEqual(tags, [UPLOAD_TAG, UPLOAD_TAG, UPLOAD_TAG]);
     assert.ok(log.every(event => event.registered && event.time > 0));
     background.detach();
+    let finishSaving, registeredAfterRevocation = 0;
+    const revoked = { enabled: true, ready: new Promise(resolve => { finishSaving = resolve; }) };
+    const cancelled = new BackgroundUploads({ queue: revoked, navigator: { serviceWorker: { ...host,
+      async register() { registeredAfterRevocation++; throw Error('must not register'); } } } });
+    revoked.enabled = false; finishSaving(); await cancelled.ready;
+    assert.equal(registeredAfterRevocation, 0);
   } finally {
     if (previous) Object.defineProperty(globalThis, 'SyncManager', previous); else delete globalThis.SyncManager;
   }
