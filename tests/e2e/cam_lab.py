@@ -17,11 +17,13 @@ import wave
 from pathlib import Path
 from urllib.parse import quote
 from playwright.sync_api import sync_playwright
+from upload_background import run_background_tests
 
 parts, acknowledgements, responses = [], [], []
 fail_skeleton = 0
 fail_video_chunk_once = None
 chunk_files, assembled_files = {}, {}
+slow_upload = False
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -31,7 +33,17 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         global fail_skeleton, fail_video_chunk_once
         assert self.path == '/receive'
-        data = json.loads(self.rfile.read(int(self.headers['Content-Length'])))
+        remaining = int(self.headers['Content-Length'])
+        buffers = []
+        while remaining:
+            raw = self.rfile.read(min(32768, remaining))
+            if not raw:
+                return  # A closed page aborted a partial POST; it was not accepted.
+            buffers.append(raw)
+            remaining -= len(raw)
+            if slow_upload:
+                time.sleep(len(raw) / 200000)
+        data = json.loads(b''.join(buffers))
         assert self.headers['Content-Type'] == 'text/plain'
         assert data['secret'] == 'test'
         raw = base64.b64decode(data['data'], validate=True)
@@ -321,7 +333,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(executable_path=shutil.which('chromium'), headless=True, args=[
-                '--no-sandbox', '--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream',
+                '--no-sandbox', '--ignore-certificate-errors', '--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream',
                 '--use-gl=angle', '--use-angle=swiftshader'])
             check_child_guidance(browser, origin, root)
             context = browser.new_context(viewport={'width': 360, 'height': 844}, ignore_https_errors=True)
@@ -365,6 +377,8 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             assert private_page.evaluate("document.querySelector('#video').srcObject===null")
             private_page.reload()
             check_banner(private_page, False)
+            assert private_page.evaluate('navigator.serviceWorker.getRegistrations().then(rs => rs.length)') == 0
+            assert not any(db['name'] == 'camlab.upload.queue' for db in private_page.evaluate('indexedDB.databases()'))
             assert not private_requests, private_requests
             assert not parts, parts
             assert not private_errors, private_errors
@@ -478,6 +492,8 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
                      'downloadThroughput': -1, 'uploadThroughput': 200000})
             # Fail chunk 2 once during the long upload; chunk 1 must not be resent.
             fail_video_chunk_once = 1
+            # The foreground sender may be the SW, so throttle at the server too.
+            slow_upload = True
             upload_start = time.monotonic()
             slow_page.locator('#finish').click()
             assert slow_page.locator('#upload-keep-open').is_visible()
@@ -512,6 +528,13 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             cdp.detach()
             slow_page.close()
 
+            slow_upload = True
+            try:
+                background_report = run_background_tests(p, origin, temp, parts, assembled_files)
+                print(json.dumps({'backgroundUpload': background_report}), flush=True)
+            finally:
+                slow_upload = False
+
             # Insert the old video-first IndexedDB structure before importing app.mjs.
             legacy_page = context.new_page()
             legacy_page.on('pageerror', lambda e: errors.append(str(e)))
@@ -526,7 +549,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
               const config = JSON.parse(localStorage.getItem('camlab.upload'));
               const bytes = Uint8Array.from({ length: size }, (_, i) => i % 251);
               const db = await new Promise((resolve, reject) => {
-                const req = indexedDB.open('camlab.upload.queue', 1);
+                const req = indexedDB.open('camlab.upload.queue', 2);
                 req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error);
               });
               await new Promise((resolve, reject) => {
@@ -545,7 +568,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             assert assembled_files[('legacy-browser', 'video')] == legacy_bytes
             legacy_page.close()
 
-            # pagehide finishes once and saves without depending on a background network request.
+            # pagehide finishes once, saves and asks the shared worker to continue.
             hide_page = context.new_page()
             hide_page.on('pageerror', lambda e: errors.append(str(e)))
             hide_page.goto(url)
@@ -554,8 +577,6 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             hide_offset = len(parts)
             hide_page.evaluate("window.dispatchEvent(new PageTransitionEvent('pagehide'))")
             hide_page.wait_for_function("() => !document.querySelector('#again').disabled")
-            assert len(parts) == hide_offset
-            hide_page.reload()
             hide_page.wait_for_function("() => document.querySelector('#upload-status').textContent==='נשלח לבדיקה'", timeout=30000)
             check_attempt(hide_offset, 'pagehide')
             hide_page.close()
@@ -563,6 +584,8 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             page.locator('#upload-disable').click()
             page.wait_for_function("() => document.querySelector('#upload-status').textContent==='שליחה לבדיקה: כבויה'", timeout=10000)
             assert page.evaluate("localStorage.getItem('camlab.upload')") is None
+            assert page.evaluate('navigator.serviceWorker.getRegistrations().then(rs => rs.length)') == 0
+            assert page.evaluate("async () => { const { IndexedDBUploadStore } = await import('/workout/cam-lab/upload.mjs?v=20261012-background-1'); return (new IndexedDBUploadStore()).getConfig(); }") is None
             assert page.locator('#record-option').is_visible()
             # Private camera: manual controls return and no upload occurs.
             private_offset = len(parts)
@@ -576,7 +599,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             assert len(parts) == private_offset
             assert not errors, errors
             print(json.dumps({'browser': 'Chromium synthetic camera', 'attempts': reports,
-                              'slowUpload': slow_report, 'legacyAutoUpload': True, 'pagehideQueue': True,
+                              'slowUpload': slow_report, 'backgroundUpload': background_report, 'legacyAutoUpload': True, 'pagehideQueue': True,
                               'redirect302': True, 'retryAfterReload': True, 'privateNoUpload': True,
                               'privateNoRequests': True, 'bannersAllScreens': True, 'mobileWidth': 360, 'errors': errors}))
             browser.close()

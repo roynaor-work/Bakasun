@@ -34,11 +34,13 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     start(){this.state='recording';events.push('video-start');}
     stop(){this.state='inactive';queueMicrotask(()=>{this.ondataavailable({data:new Blob(['synthetic-video'])});events.push('video-final');this.onstop();});}
   }
+  const stateRecords=new Map();
   const db={objectStoreNames:{contains:()=>true},close(){},transaction(){
-    const tx={abort(){tx.onabort?.();},objectStore(){return{
-      put(record){return request(()=>{records.set(record.session,structuredClone(record));events.push('durable');});},
-      getAll(){return request(()=>[...records.values()].map(r=>structuredClone(r)));},
-      delete(key){return request(()=>records.delete(key));},clear(){return request(()=>records.clear());}
+    const tx={abort(){tx.onabort?.();},objectStore(name){const data=name==='state'?stateRecords:records;return{
+      get(key){return request(()=>structuredClone(data.get(key)));},
+      put(record,key){return request(()=>{data.set(key??record.session,structuredClone(record));if(name==='sessions')events.push('durable');});},
+      getAll(){return request(()=>[...data.values()].map(r=>structuredClone(r)));},
+      delete(key){return request(()=>data.delete(key));},clear(){return request(()=>data.clear());}
     };}};
     function request(operation){const req={};queueMicrotask(()=>{req.result=operation();req.onsuccess?.();queueMicrotask(()=>tx.oncomplete?.());});return req;}
     return tx;

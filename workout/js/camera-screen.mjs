@@ -1,7 +1,7 @@
-import { CameraAttempt, cameraPrivacy } from './camera-session.mjs?v=20261010-camera-1';
+import { CameraAttempt, cameraPrivacy } from './camera-session.mjs?v=20261012-background-1';
 import { CameraDemo } from './camera-demo.mjs?v=20261010-camera-1';
 import { acquireCamera, configureZoom, cameraSnapshot, reduceResolution, screenOrientation } from '../cam-lab/camera.mjs?v=20261010-camera-1';
-import { VIDEO_LIMIT_MS } from '../cam-lab/video-recording.mjs?v=20261010-camera-1';
+import { VIDEO_LIMIT_MS } from '../cam-lab/video-recording.mjs?v=20261012-background-1';
 import { numWord } from './count.js?v=20261010-camera-1';
 import { speakLocal, stopSpeak } from './speech.js?v=20261010-camera-1';
 

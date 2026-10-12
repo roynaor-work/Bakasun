@@ -12,7 +12,9 @@ class UploadQueue extends NativeUploadQueue {
   constructor(options = {}) { super({ setTimer: (fn, ms) => setTimeout(fn, [2000, 5000, 15000].includes(ms) ? 0 : ms), ...options }); }
 }
 class MemoryStore {
-  constructor() { this.records = new Map(); this.events = []; }
+  constructor() { this.records = new Map(); this.events = []; this.log = []; }
+  async readLog() { return structuredClone(this.log); }
+  async appendLog(event) { this.log = [...this.log, event].slice(-30); return structuredClone(this.log); }
   async put(record) { this.events.push('durable'); this.records.set(record.session, structuredClone(record)); }
   async list() { return [...this.records.values()].map(record => structuredClone(record)); }
   async remove(id) { this.records.delete(id); }
@@ -467,16 +469,16 @@ test('the final timeout keeps the normal and configured timeout floors for a sma
 });
 
 test('upload log survives queues, contains last 30 safe events and excludes endpoint, key and raw errors', async () => {
-  const storage = fakeStorage(), requests = [], store = new MemoryStore();
-  const queue = new UploadQueue({ config, store, logStorage: storage, fetchImpl: chunkServer(requests) });
+  const requests = [], store = new MemoryStore();
+  const queue = new UploadQueue({ config, store, fetchImpl: chunkServer(requests) });
   for (let i = 0; i < 11; i++) { await queue.enqueue(input(`log-${i}`)); await queue.retry(); }
-  const log = readUploadLog(storage); assert.equal(log.length, 30); assert.equal(log.at(-1).result, 'assembled');
+  const log = await readUploadLog(store); assert.equal(log.length, 30); assert.equal(log.at(-1).result, 'assembled');
   assert.equal(log.at(-1).bytes, input().video.size); assert.ok(log.at(-1).bodyBytes > log.at(-1).bytes);
   assert.equal(JSON.stringify(log).includes(config.secret), false); assert.equal(JSON.stringify(log).includes(config.endpoint), false);
-  const failing = new UploadQueue({ config, store, logStorage: storage, fetchImpl: async () => { throw new Error(config.secret + config.endpoint); } });
+  const failing = new UploadQueue({ config, store, fetchImpl: async () => { throw new Error(config.secret + config.endpoint); } });
   await failing.enqueue(input('failed-log')); await failing.retry();
-  assert.equal(readUploadLog(storage).at(-1).error, 'network');
-  assert.equal(storage.getItem(UPLOAD_LOG_KEY).includes(config.secret), false); assert.equal(storage.getItem(UPLOAD_LOG_KEY).includes(config.endpoint), false);
+  assert.equal((await readUploadLog(store)).at(-1).error, 'network');
+  assert.equal(JSON.stringify(store.log).includes(config.secret), false); assert.equal(JSON.stringify(store.log).includes(config.endpoint), false);
 });
 
 test('revocation during retry backoff cancels the wait and remaining attempts', async () => {

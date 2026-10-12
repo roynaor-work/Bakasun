@@ -92,6 +92,9 @@ def setup(browser, origin, consent=True, stage3d=False):
     page.on('pageerror', lambda e: (errors.append(str(e)), print('Page error:', str(e), flush=True)))
     page.on('request', lambda r: requests.append(r))
     page.goto(origin + '/workout/#/settings')
+    if consent:
+        page.wait_for_function("() => navigator.serviceWorker.controller?.scriptURL.includes('/workout/upload-sw.js?v=20261012-background-1')")
+        assert page.evaluate("navigator.serviceWorker.getRegistrations().then(rs => rs.length === 1 && rs[0].scope === location.origin + '/workout/')")
     expect(page.locator('#workout-camera-setting')).not_to_be_checked()
     expect(page.locator('#workout-camera-info')).to_contain_text(
         'הסרטון נשלח לבדיקה בסיום' if consent else 'הסרטון לא נשמר ולא יוצא מהטלפון')
@@ -129,7 +132,7 @@ def verify_parts(start, reason):
     skeleton, diagnostics = json.loads(received[1]['data']), json.loads(received[0]['data'])
     assert skeleton['version'] == 2 and skeleton['exercise'] == 'squats'
     assert diagnostics['endReason'] == reason and diagnostics['exercise'] == 'squats'
-    assert diagnostics['appVersion'] == '20261010-camera-1' and diagnostics['target'] == 11
+    assert diagnostics['appVersion'] == '20261012-background-1' and diagnostics['target'] == 11
     assert 'ptz' in diagnostics['camera']
     assert diagnostics['videoError'] is None
     assert 'synthetic-browser-key' not in json.dumps(diagnostics)
@@ -387,6 +390,7 @@ with tempfile.TemporaryDirectory(prefix='workout-camera-') as temp:
             assert len(PARTS) == start
             assert not [r for r in requests if r.method == 'POST']
             assert not any(db['name'] == 'camlab.upload.queue' for db in page.evaluate('indexedDB.databases()'))
+            assert page.evaluate('navigator.serviceWorker.getRegistrations().then(rs => rs.length)') == 0
             assert not errors, errors
             assert page.evaluate('window.recorderStarts') == 0
             private.close()
