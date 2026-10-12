@@ -584,7 +584,11 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             page.locator('#upload-disable').click()
             page.wait_for_function("() => document.querySelector('#upload-status').textContent==='שליחה לבדיקה: כבויה'", timeout=10000)
             assert page.evaluate("localStorage.getItem('camlab.upload')") is None
-            page.wait_for_function('() => navigator.serviceWorker.getRegistrations().then(rs => rs.length === 0)')
+            # evaluate awaits the Promise; wait_for_function would treat it as truthy.
+            unregister_deadline = time.monotonic() + 10
+            while page.evaluate('navigator.serviceWorker.getRegistrations().then(rs => rs.length)') != 0:
+                assert time.monotonic() < unregister_deadline, 'Upload worker did not unregister within 10 seconds'
+                page.wait_for_timeout(100)
             assert page.evaluate('navigator.serviceWorker.getRegistrations().then(rs => rs.length)') == 0
             assert page.evaluate("async () => { const { IndexedDBUploadStore } = await import('/workout/cam-lab/upload.mjs?v=20261012-background-1'); return (new IndexedDBUploadStore()).getConfig(); }") is None
             assert page.locator('#record-option').is_visible()
