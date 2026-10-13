@@ -45,7 +45,7 @@ test('camera is opt-in for exactly the seven lab exercise identifiers; saved con
   globalThis.location = { get hash() { throw Error('router hash must not be read'); } };
   assert.deepEqual(readCameraConsent(storage(consent)), consent);
   assert.equal(readCameraConsent(storage({ ...consent, consentId: null })), null);
-  assert.equal(cameraPrivacy(true), 'הסרטון נשלח לבדיקה בסיום');
+  assert.equal(cameraPrivacy(true), 'הסרטון ותמונות המפתח נשלחים לבדיקה בסיום');
   assert.equal(cameraPrivacy(false), 'הסרטון לא נשמר ולא יוצא מהטלפון');
   delete globalThis.location; delete globalThis.localStorage;
 });
@@ -100,9 +100,9 @@ for (const reason of ['finish','exit','target','limit','hidden','pagehide','swit
   assert.equal(h.attempt.finish('finish'), ending);
   assert.equal(h.attempt.finish('exit'), ending);
   await ending;
-  assert.deepEqual(h.sent.map(s => s.part), ['diagnostics','skeleton','video']);
+  assert.deepEqual(h.sent.map(s => s.part), ['diagnostics','skeleton','frames','video']);
   assert.equal(new Set(h.sent.map(s => s.session)).size, 1); assert.match(h.sent[0].session, /^app-/);
-  assert.ok(Buffer.from(h.sent[2].data, 'base64').length > 0);
+  assert.ok(Buffer.from(h.sent[3].data, 'base64').length > 0);
   assert.equal(h.counts().videoStarts, 1); assert.equal(h.counts().videoStops, 1); assert.equal(h.counts().stopped, 1);
   assert.equal(h.records.size, 0);
 });
@@ -112,7 +112,7 @@ test('every reopened attempt records immediately with its own app session; priva
   const second = harness(); assert.equal(second.counts().videoStarts, 1); await second.attempt.finish('finish');
   assert.notEqual(first.sent[0].session, second.sent[0].session);
   const privateAttempt = harness({ enabled: false }); privateAttempt.prepare(); privateAttempt.rep(); await privateAttempt.attempt.finish('exit');
-  assert.equal(privateAttempt.attempt.skeleton, undefined); assert.equal(privateAttempt.uploads.queue, null);
+  assert.equal(privateAttempt.attempt.skeleton, undefined); assert.equal(privateAttempt.attempt.keyframes, undefined); assert.equal(privateAttempt.uploads.queue, null);
   assert.equal(privateAttempt.counts().videoStarts, 0); assert.equal(privateAttempt.counts().videoStops, 0); assert.deepEqual(privateAttempt.sent, []);
 });
 
@@ -120,7 +120,7 @@ test('a screen rendering exception cannot interrupt stopping capture and queuing
   const h = harness({ onEnd: () => { throw Error('synthetic render failure'); } });
   assert.throws(() => h.attempt.finish(), /synthetic render failure/);
   await h.attempt.ending;
-  assert.deepEqual(h.sent.map(part => part.part), ['diagnostics','skeleton','video']);
+  assert.deepEqual(h.sent.map(part => part.part), ['diagnostics','skeleton','frames','video']);
   assert.equal(h.counts().videoStops, 1); assert.equal(h.counts().stopped, 1);
 });
 
@@ -133,7 +133,7 @@ test('focus/online/manual retries during a pending save enqueue an attempt only 
   while (!saves) await Promise.resolve();
   const retryA = h.uploads.retry(), retryB = h.uploads.retry();
   release(); await Promise.all([ending, retryA, retryB]);
-  assert.equal(saves, 1); assert.deepEqual(h.sent.map(part => part.part), ['diagnostics','skeleton','video']);
+  assert.equal(saves, 1); assert.deepEqual(h.sent.map(part => part.part), ['diagnostics','skeleton','frames','video']);
 });
 
 test('rejection enlarges the existing demo for two seconds; help uses it fullscreen; low FPS freezes the corner', async () => {

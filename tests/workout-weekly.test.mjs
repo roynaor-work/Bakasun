@@ -128,7 +128,7 @@ test('changed entrypoints and upload modules use the current version; other asse
       for (const match of content.matchAll(/\b(?:from\s*|import\s*\(\s*|import\s+)(['"])([^'"]+)\1/g)) {
         if (match[2].startsWith('node:')) continue;
         const expected = /(?:^|\/)vids(?:-cloud)?\.js\?/.test(match[2]) ? videoVersion :
-          /(?:^|\/)(?:camera-session\.mjs|camera-screen\.mjs|upload\.mjs|upload-background\.mjs|video-recording\.mjs)\?/.test(match[2]) ? APP_VERSION : version;
+          /(?:^|\/)(?:camera-session\.mjs|camera-screen\.mjs|keyframes\.mjs|upload\.mjs|upload-background\.mjs|video-recording\.mjs)\?/.test(match[2]) ? APP_VERSION : version;
         assert.ok(match[2].endsWith('?v=' + expected), url.pathname + ': ' + match[2]);
       }
     }

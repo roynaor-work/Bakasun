@@ -3,15 +3,17 @@ import { EXERCISES, RepCounter, PoseFilter, statusCode } from '../cam-lab/counte
 import { RestGate } from '../cam-lab/feedback.mjs?v=20261010-camera-1';
 import { placementDistance } from '../cam-lab/placement.mjs?v=20261010-camera-1';
 import { SkeletonRecorder } from '../cam-lab/recording.mjs?v=20261010-camera-1';
-import { VideoRecorder, VIDEO_LIMIT_MS } from '../cam-lab/video-recording.mjs?v=20261012-background-1';
-import { UploadQueue, initializeUploadConfig, createSessionId } from '../cam-lab/upload.mjs?v=20261012-background-1';
-import { BackgroundUploads, NEXT_OPEN_MESSAGE } from '../cam-lab/upload-background.mjs?v=20261012-background-1';
+import { VideoRecorder, VIDEO_LIMIT_MS } from '../cam-lab/video-recording.mjs?v=20261013-frames-1';
+import { UploadQueue, initializeUploadConfig, createSessionId } from '../cam-lab/upload.mjs?v=20261013-frames-1';
+import { BackgroundUploads, NEXT_OPEN_MESSAGE } from '../cam-lab/upload-background.mjs?v=20261013-frames-1';
 
-export const APP_VERSION = '20261012-background-1';
+import { KeyFrameRecorder } from '../cam-lab/keyframes.mjs?v=20261013-frames-1';
+
+export const APP_VERSION = '20261013-frames-1';
 export const cameraAvailable = (profile, id) => profile.camera === true && EXERCISES.includes(id);
 // Never pass the application's router fragment to the lab initializer.
 export const readCameraConsent = storage => initializeUploadConfig({ storage, location: { hash: '' } }).config;
-export const cameraPrivacy = enabled => enabled ? 'הסרטון נשלח לבדיקה בסיום' : 'הסרטון לא נשמר ולא יוצא מהטלפון';
+export const cameraPrivacy = enabled => enabled ? 'הסרטון ותמונות המפתח נשלחים לבדיקה בסיום' : 'הסרטון לא נשמר ולא יוצא מהטלפון';
 
 export class CameraUploads {
   constructor({ storage, onStatus = () => {}, queueFactory = options => new UploadQueue(options) } = {}) {
@@ -79,6 +81,7 @@ export class CameraAttempt {
     this.queue = this.uploads?.queue;
     // Start capture immediately, before video playback, zoom or model loading.
     if (this.queue?.enabled) {
+      this.keyframes = new KeyFrameRecorder({ session: this.session, startedAt: this.openedAt });
       this.skeleton = this.makeSkeleton();
       this.skeleton.start({ exercise: this.exercise, mode: 'solo', thresholds: this.counter.t, aspect: 1 }, this.openedAt);
       try {
@@ -91,9 +94,12 @@ export class CameraAttempt {
   seconds(time = this.now()) {
     return this.countStarted == null ? 0 : Math.max(0, (time - this.countStarted - this.pauseMs - (this.pausedAt == null ? 0 : time - this.pausedAt)) / 1000);
   }
-  frame({ poses = [], timestamp, inferenceMs = 0, model, modelHistory }, aspect = 1) {
-    if (this.ending || this.openedAt == null || timestamp < this.openedAt) return null;
-    if (timestamp - this.openedAt >= VIDEO_LIMIT_MS) { this.finish('limit'); return null; }
+  frame({ poses = [], timestamp, inferenceMs = 0, model, modelHistory, bitmap }, aspect = 1) {
+    if (this.ending || this.openedAt == null || timestamp < this.openedAt) { bitmap?.close(); return null; }
+    if (timestamp - this.openedAt >= VIDEO_LIMIT_MS) { bitmap?.close(); this.finish('limit'); return null; }
+    if (this.keyframes && !this.queue?.enabled) this.keyframes.cancel();
+    this.keyframes?.frame(bitmap, timestamp, poses, this.initialCount + this.counter.count);
+    if (!this.keyframes) bitmap?.close();
     this.frames++; this.inferenceMs += inferenceMs; this.model = model; this.modelHistory = modelHistory || this.modelHistory;
     this.skeleton?.add(poses, timestamp, aspect);
     const pose = poses[0], points = pose?.landmarks || [], world = pose?.world || [];
@@ -116,6 +122,7 @@ export class CameraAttempt {
       }
     } else if (this.state === 'counting' && timestamp > (this.resumeAt ?? -Infinity)) {
       event = this.counter.update(points, world, timestamp, aspect); code = this.counter.status;
+      this.keyframes?.observe(this.counter, event, { landmarks: points, world, aspect, initialCount: this.initialCount });
       if (event?.type === 'counted') {
         this.onCount(this.initialCount + event.count, this.seconds(timestamp), timestamp);
         if (this.initialCount + event.count >= this.target) this.finish('target');
@@ -127,7 +134,8 @@ export class CameraAttempt {
     if (this.ending) return;
     if (open && this.state !== 'paused') {
       this.beforeHelp = this.state; this.state = 'paused'; this.pausedAt = this.now();
-      this.counter.resetTracking('help');
+      const event = this.counter.resetTracking('help');
+      this.keyframes?.observe(this.counter, event, { landmarks: this.keyframes?.last?.landmarks || [], initialCount: this.initialCount });
     } else if (!open && this.state === 'paused') {
       if (this.countStarted != null) this.pauseMs += this.now() - this.pausedAt;
       this.pausedAt = null; this.resumeAt = this.now();
@@ -141,7 +149,9 @@ export class CameraAttempt {
     let resolve;
     this.ending = new Promise(done => { resolve = done; });
     const endedAt = this.now(); this.state = 'finished'; this.endReason = reason;
-    this.counter.finish(endedAt); this.skeleton?.stop(endedAt);
+    const event = this.counter.finish(endedAt);
+    this.keyframes?.observe(this.counter, event, { landmarks: this.keyframes?.last?.landmarks || [], initialCount: this.initialCount });
+    this.skeleton?.stop(endedAt);
     this.result = { counted: this.initialCount + this.counter.count, seconds: this.seconds(endedAt), reason };
     if (this.skeleton && this.queue?.enabled) this.uploads.onStatus({ state: 'stopping', session: this.session, message: 'מסיימים ושולחים' });
     // Capture must finish even if rendering the next screen fails.
@@ -154,15 +164,16 @@ export class CameraAttempt {
     try { video = await this.video?.stop(); if (this.queue && !video?.size) this.videoError ||= 'empty-video'; }
     catch { this.videoError ||= 'recording-failed'; }
     finally { this.stream?.getTracks().forEach(track => track.stop()); this.stream = null; this.resolveReleased(); }
-    if (!this.skeleton || !this.queue?.enabled) return;
+    if (!this.skeleton || !this.queue?.enabled) { this.keyframes?.cancel(); return; }
+    const frames = await this.keyframes?.stop();
     const diagnostics = { appVersion: APP_VERSION, session: this.session, exercise: this.exercise,
       target: this.target, counted: this.result.counted, attemptCount: this.counter.count, endReason: this.endReason,
       seconds: this.result.seconds, camera: this.camera, model: this.model, modelHistory: this.modelHistory,
       totalFrames: this.frames, inferenceMs: this.inferenceMs / Math.max(1, this.frames),
-      uploadLog: this.queue.log || [],
+      uploadLog: this.queue.log || [], keyframes: this.keyframes?.diagnostics() || null,
       thresholds: this.counter.t, preparation: this.probe.snapshot(), diagnostics: this.counter.snapshot(),
       rejected: this.counter.rejected, reasons: this.counter.reasons, videoError: this.videoError, runtimeError: this.runtimeError };
     await this.uploads.send({ session: this.session, video: video || new Blob([], { type: 'video/webm' }),
-      skeleton: this.skeleton.json({ compact: true }), diagnostics }, this.queue);
+      skeleton: this.skeleton.json({ compact: true }), frames, diagnostics }, this.queue);
   }
 }

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { IndexedDBUploadStore, UploadLock, UploadQueue, VIDEO_CHUNK_BYTES, UPLOAD_TAG, readUploadLog } from '../workout/cam-lab/upload.mjs?v=20261012-background-1';
-import { BackgroundUploads, NEXT_OPEN_MESSAGE } from '../workout/cam-lab/upload-background.mjs?v=20261012-background-1';
+import { IndexedDBUploadStore, UploadLock, UploadQueue, VIDEO_CHUNK_BYTES, UPLOAD_TAG, readUploadLog } from '../workout/cam-lab/upload.mjs?v=20261013-frames-1';
+import { BackgroundUploads, NEXT_OPEN_MESSAGE } from '../workout/cam-lab/upload-background.mjs?v=20261013-frames-1';
 import { uploadIndexedDB } from './helpers/upload-idb.mjs';
 
 const config = { endpoint: 'https://upload.example.invalid/exec', secret: 'synthetic-background-key', consentId: 'synthetic-consent' };
@@ -145,7 +145,7 @@ test('both lifecycle hooks register the same sync tag, including a write complet
   try {
     const background = new BackgroundUploads({ queue, window: host, document: { ...host, hidden: false },
       navigator: { serviceWorker: { ...host, async register(url, options) {
-        assert.match(url, /workout\/upload-sw\.js\?v=20261012-background-1$/);
+        assert.match(url, /workout\/upload-sw\.js\?v=20261013-frames-1$/);
         assert.ok(options.scope.endsWith('/workout/')); assert.equal(options.type, 'module'); assert.equal(options.updateViaCache, 'none');
         return { active: {}, sync: { async register(tag) { tags.push(tag); } } };
       } } } });

@@ -56,6 +56,7 @@ async function handle(data) {
     const { bitmap, timestamp, id } = data;
     generation = data.generation;
     const started = performance.now();
+    let returned = false;
     try {
       if (!pose || switching || timestamp <= lastTimestamp) throw new Error('Invalid worker frame sequence');
       lastTimestamp = timestamp;
@@ -68,7 +69,9 @@ async function handle(data) {
       }
       self.postMessage({ type: 'pose', generation, id, timestamp,
         poses: result.landmarks.map((landmarks, i) => ({ landmarks, world: result.worldLandmarks[i] || [] })),
-        inferenceMs: performance.now() - started, model, modelHistory });
+        inferenceMs: performance.now() - started, model, modelHistory,
+        ...(data.keepFrame ? { bitmap } : {}) }, data.keepFrame ? [bitmap] : []);
+      returned = !!data.keepFrame;
       if (fallback) {
         try {
           await selectModel('lite', 'startup-low-fps', timestamp, performanceResult.fps);
@@ -82,7 +85,7 @@ async function handle(data) {
       }
     } catch (error) {
       self.postMessage({ type: 'error', generation: data.generation, message: String(error.message || error) });
-    } finally { bitmap.close(); }
+    } finally { if (!returned) bitmap.close(); }
   }
 }
 // Serialize configure/frame work, including an asynchronous lite fallback.

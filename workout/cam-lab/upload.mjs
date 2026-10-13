@@ -1,16 +1,16 @@
 export const UPLOAD_STORAGE_KEY = 'camlab.upload';
 export const MAX_UPLOAD_BYTES = 40_000_000;
-export const UPLOAD_PARTS = ['diagnostics', 'skeleton', 'video'];
+export const UPLOAD_PARTS = ['diagnostics', 'skeleton', 'frames', 'video'];
 export const VIDEO_CHUNK_BYTES = 1_572_864;
 export const UPLOAD_LOG_KEY = 'camlab.upload.log';
 export const RETRY_DELAYS_MS = [2000, 5000, 15000];
 export const UPLOAD_TAG = 'camlab-upload';
 export const UPLOAD_DB_VERSION = 2;
-export const UPLOAD_VERSION = '20261012-background-1';
+export const UPLOAD_VERSION = '20261013-frames-1';
 const storageError = 'לא ניתן לשמור את ההגדרה במכשיר. אפשרו אחסון באתר ופתחו שוב את קישור ההגדרה.';
 const queueError = 'לא ניתן לשמור את הניסיון במכשיר. פנו מקום באחסון ונסו שוב; הניסיון עדיין לא נשלח.';
 const sendError = 'השליחה לבדיקה נכשלה';
-const partNames = { diagnostics: 'אבחון', skeleton: 'שלד', video: 'וידאו' };
+const partNames = { diagnostics: 'אבחון', skeleton: 'שלד', frames: 'תמונות מפתח', video: 'וידאו' };
 const errorCodes = new Set(['size-mismatch', 'chunk-fields', 'chunk-data', 'secret', 'network', 'timeout', 'response', 'redirect', 'storage']);
 class UploadError extends Error {
   constructor(code) { super(errorCodes.has(code) ? code : 'response'); this.code = this.message; }
@@ -249,7 +249,7 @@ export class UploadQueue {
     this.running = null; this.controller = null; this.pending = 0; this.writes = new Set();
   }
   get enabled() { return this.config != null; }
-  status(state, message, extra = {}) { this.onStatus({ state, message, pending: this.pending, total: 3, ...extra }); }
+  status(state, message, extra = {}) { this.onStatus({ state, message, pending: this.pending, total: 4, ...extra }); }
   stop() { this.config = null; this.epoch++; this.controller?.abort(); this.pending = 0; }
   async disable() {
     this.stop();
@@ -260,15 +260,15 @@ export class UploadQueue {
     await this.ready.catch(() => {});
     try { if (this.store.revoke) await this.store.revoke(); else await this.store.clear(); } catch { /* Revocation still blocks every send. */ }
   }
-  async enqueue({ session, video, skeleton, diagnostics, readyAt = 0 }) {
+  async enqueue({ session, video, skeleton, frames, diagnostics, readyAt = 0 }) {
     if (!this.enabled) return false;
     const epoch = this.epoch, config = this.config;
     if (typeof session !== 'string' || !/^[a-zA-Z0-9-]{1,160}$/.test(session)) throw new TypeError('מזהה ניסיון לא תקין.');
-    const values = { video, skeleton, diagnostics };
-    const parts = UPLOAD_PARTS.map(part => {
+    const values = { video, skeleton, frames, diagnostics };
+    const parts = UPLOAD_PARTS.filter(part => part !== 'frames' || frames != null).map(part => {
       if (values[part] == null) throw new TypeError('חסר חלק מהניסיון; הנתונים לא נשלחו.');
       const blob = asBlob(values[part], part);
-      if (blob.size > MAX_UPLOAD_BYTES) throw new RangeError(`הקובץ גדול מ־40MB (${part === 'video' ? 'וידאו' : part === 'skeleton' ? 'שלד' : 'אבחון'}). הניסיון לא נשלח.`);
+      if (blob.size > MAX_UPLOAD_BYTES) throw new RangeError(`הקובץ גדול מ־40MB (${partNames[part]}). הניסיון לא נשלח.`);
       return { part, mime: blob.type || (part === 'video' ? 'video/webm' : 'application/json'), blob, acked: false };
     });
     const record = { session, consentId: config.consentId, createdAt: Date.now(), readyAt, parts };
@@ -385,8 +385,8 @@ export class UploadQueue {
     for (let attempt = 0; attempt < 4; attempt++) {
       if (!await this.canSend(epoch, config)) return false;
       this.status('sending', chunk == null ? `שולח ${partNames[part.part]}` :
-        `שולח וידאו: חלק ${chunk + 1} מתוך ${Math.max(1, Math.ceil(part.blob.size / VIDEO_CHUNK_BYTES))}`,
-      { part: UPLOAD_PARTS.indexOf(part.part) + 1, partName: part.part, session: record.session,
+        `שולח ${partNames[part.part]}: חלק ${chunk + 1} מתוך ${Math.max(1, Math.ceil(part.blob.size / VIDEO_CHUNK_BYTES))}`,
+      { part: UPLOAD_PARTS.filter(name => name !== 'frames' || record.parts.some(p => p.part === 'frames')).indexOf(part.part) + 1, partName: part.part, session: record.session, total: record.parts.length,
         chunk, chunks: chunk == null ? null : Math.max(1, Math.ceil(part.blob.size / VIDEO_CHUNK_BYTES)), attempt: attempt + 1 });
       try { return await this.post(config, record, part, chunk); }
       catch (error) {
@@ -402,7 +402,7 @@ export class UploadQueue {
   async sendPart(config, record, part, epoch) {
     if (part.acked) return true;
     if (!(part.blob instanceof Blob) || part.blob.size > MAX_UPLOAD_BYTES) throw new UploadError('response');
-    if (part.part !== 'video') {
+    if (!['video', 'frames'].includes(part.part)) {
       if (!await this.sendWithRetries(config, record, part, null, epoch) || !this.isCurrent(epoch, config)) return false;
       part.acked = true; await this.save(record); return true;
     }
@@ -457,6 +457,7 @@ export class UploadQueue {
             // Always order explicitly: queued pre-update records were video first.
             for (const name of UPLOAD_PARTS) {
               currentPart = record.parts.find(part => part.part === name);
+              if (!currentPart && name === 'frames') continue;
               if (!currentPart) throw new UploadError('response');
               if (!await this.sendPart(config, record, currentPart, epoch)) return false;
             }
@@ -466,7 +467,7 @@ export class UploadQueue {
           } catch (error) {
             if (!this.isCurrent(epoch, config)) return false;
             const name = currentPart?.part;
-            const chunk = Number.isInteger(error.chunk) ? error.chunk : name === 'video' && currentPart.blob instanceof Blob ? Array.from({ length: Math.max(1, Math.ceil(currentPart.blob.size / VIDEO_CHUNK_BYTES)) }, (_, i) => i)
+            const chunk = Number.isInteger(error.chunk) ? error.chunk : ['video', 'frames'].includes(name) && currentPart.blob instanceof Blob ? Array.from({ length: Math.max(1, Math.ceil(currentPart.blob.size / VIDEO_CHUNK_BYTES)) }, (_, i) => i)
               .find(i => !currentPart.ackedChunks?.includes(i)) : null;
             const failure = { message: `${sendError}: ${partNames[name] || 'נתונים'}${chunk == null ? '' : `, חלק ${chunk + 1}`}${error.code === 'size-mismatch' ? ' — גודל הקובץ אינו תואם גם אחרי שליחה מחדש' : ''}. הניסיון שמור בטלפון. אפשר ללחוץ על ״נסה שוב״.`,
               extra: { session: record.session, partName: name, chunk, error: errorCodes.has(error.code) ? error.code : 'storage' } };
