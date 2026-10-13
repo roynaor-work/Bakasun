@@ -333,10 +333,18 @@ for (const detail of ['dense', 'balanced', 'mobile']) {
 check(report.qualities.mobile.modelTriangles < report.qualities.balanced.modelTriangles && report.qualities.balanced.modelTriangles < report.qualities.dense.modelTriangles, 'Triangle budgets do not decrease dense → balanced → mobile');
 
 const glbBytes = await exists(resolve(root, 'kid-full.glb'));
+const exerciseIds = ['squats', 'jumping-jacks', 'high-knees', 'lunges', 'push-ups', 'knee-push-ups', 'glute-bridge'];
+let exerciseAnimationBase;
 if (glbBytes) {
   assert.equal(glbBytes.readUInt32LE(0), 0x46546c67); assert.equal(glbBytes.readUInt32LE(4), 2); assert.equal(glbBytes.readUInt32LE(8), glbBytes.length);
   const chunks = []; for (let offset = 12; offset < glbBytes.length;) { const length = glbBytes.readUInt32LE(offset), type = glbBytes.readUInt32LE(offset + 4); chunks.push({ type, data: glbBytes.subarray(offset + 8, offset + 8 + length) }); offset += length + 8; }
   const json = JSON.parse(chunks.find(c => c.type === 0x4e4f534a).data.toString().trim()), binary = chunks.find(c => c.type === 0x004e4942)?.data;
+  exerciseAnimationBase = json.asset.extras?.exerciseAnimationBase;
+  if (exerciseAnimationBase) {
+    check(exerciseAnimationBase.animations === 3, 'Exercise animation base must retain the original three clips');
+    check(Number.isInteger(exerciseAnimationBase.byteLength) && exerciseAnimationBase.byteLength > 0 && exerciseAnimationBase.byteLength <= binary.length, 'Exercise animation base byte range is invalid');
+    check(sha256(binary.subarray(0, exerciseAnimationBase.byteLength)) === exerciseAnimationBase.binarySHA256, 'Preserved base GLB binary changed during animation augmentation');
+  }
   const component = { 5120: ['getInt8', 1], 5121: ['getUint8', 1], 5122: ['getInt16', 2], 5123: ['getUint16', 2], 5125: ['getUint32', 4], 5126: ['getFloat32', 4] }, dimensions = { SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4, MAT4: 16 };
   const accessor = id => {
     const a = json.accessors[id], view = json.bufferViews[a.bufferView], [method, size] = component[a.componentType], width = dimensions[a.type], stride = view.byteStride || size * width;
@@ -432,14 +440,18 @@ if (glbBytes) {
     check(facialWeightChannels === morphNodeCount, `GLB ${animation.name}: expression animation channel missing for one or more facial meshes`);
     animationResults.push({ name: animation.name, channels: animation.channels.length, facialWeightChannels, maximumLoopDelta });
   }
-  check(animationResults.map(a => a.name).join(',') === 'stand,run,kick', 'GLB must contain stand, run and kick clips');
-  report.glb = { bytes: glbBytes.length, sha256: sha256(glbBytes), modelTriangles: exportedModelTriangles, skins: json.skins.length, exportedSkinVertices, exportedMaximumWeightSumError, exportedMaximumVertexColor, morphs: exportedMorphs, morphChanges: exportedMorphChanges, animations: animationResults };
+  const expectedClips = ['stand', 'run', 'kick', ...(exerciseAnimationBase ? exerciseIds : [])];
+  check(animationResults.map(a => a.name).join(',') === expectedClips.join(','), `GLB must contain ${expectedClips.join(', ')} clips`);
+  report.glb = { bytes: glbBytes.length, sha256: sha256(glbBytes), modelTriangles: exportedModelTriangles, skins: json.skins.length, exportedSkinVertices, exportedMaximumWeightSumError, exportedMaximumVertexColor, morphs: exportedMorphs, morphChanges: exportedMorphChanges, animations: animationResults, ...(exerciseAnimationBase ? { preservedAnimationBase: exerciseAnimationBase } : {}) };
 } else { report.glb = { skipped: 'kid-full.glb has not been captured yet' }; }
 
 const metricBytes = await exists(resolve(root, 'shots/metrics.json'));
 if (metricBytes) {
   const metrics = JSON.parse(metricBytes);
-  if (metrics.glb?.sha256 && report.glb.sha256) check(metrics.glb.sha256 === report.glb.sha256, 'Capture metrics refer to a different GLB');
+  // Existing roundtrip/expression evidence belongs to the preserved base asset.
+  // Augmented exercise playback needs its own current-asset capture below.
+  const captureAssetSHA256 = exerciseAnimationBase?.sourceSHA256 || report.glb.sha256;
+  if (metrics.glb?.sha256 && captureAssetSHA256) check(metrics.glb.sha256 === captureAssetSHA256, 'Capture metrics refer to a different base GLB');
   if (metrics.glb?.maximumRGBMeanDifference !== undefined) check(metrics.glb.maximumRGBMeanDifference <= .05, `GLB maximum roundtrip mean RGB difference ${metrics.glb.maximumRGBMeanDifference}`);
   for (const [file, hash] of Object.entries(report.implementation)) check(metrics.implementation?.[file] === hash, `Capture implementation hash is stale: ${file}`);
   if (metrics.glb?.maximumAbove8PixelsPercent !== undefined) check(metrics.glb.maximumAbove8PixelsPercent <= .1, 'GLB roundtrip exceeded pixel tolerance');
@@ -492,7 +504,7 @@ if (metricBytes) {
   const deliveredMobile = delivered?.quality?.mobile;
   check(!!deliveredMobile && deliveredMobile.trials?.length >= 3, 'Delivered GLB requires three fresh phone-size benchmark trials');
   if (deliveredMobile) {
-    check(delivered.sha256 === report.glb.sha256, 'Phone benchmark used a different delivered GLB');
+    check(delivered.sha256 === captureAssetSHA256, 'Phone benchmark used a different captured base GLB');
     check(deliveredMobile.stable === true, 'Delivered GLB did not pass the declared FPS stability limits');
     check(delivered.viewport?.width === 390 && delivered.viewport?.height === 844 && delivered.dpr === 1, 'Delivered GLB phone benchmark viewport or DPR differs');
     for (const trial of deliveredMobile.trials || []) {
@@ -515,7 +527,27 @@ if (metricBytes) {
   }
   check((metrics.browserChecks?.errors || []).length === 0, 'Capture report contains browser errors');
   check((metrics.browserChecks?.externalRequests || []).length === 0, 'Capture made external runtime requests');
-  report.capture = { path: 'shots/metrics.json', sha256: sha256(metricBytes), roundtripMaximumRGBMeanDifference: metrics.glb?.maximumRGBMeanDifference, mobileStable: mobile?.stable ?? null, minimumMobileFPS: mobile?.trials?.length ? Math.min(...mobile.trials.map(t => t.fps)) : null, comparison: comparison?.comparisonPath };
+  report.capture = { path: 'shots/metrics.json', sha256: sha256(metricBytes), assetSHA256: captureAssetSHA256, assetScope: exerciseAnimationBase ? 'Historical preserved base: geometry, expressions and stand/run/kick; excludes new exercise playback.' : 'Current delivered GLB.', roundtripMaximumRGBMeanDifference: metrics.glb?.maximumRGBMeanDifference, mobileStable: mobile?.stable ?? null, minimumMobileFPS: mobile?.trials?.length ? Math.min(...mobile.trials.map(t => t.fps)) : null, comparison: comparison?.comparisonPath };
+}
+if (exerciseAnimationBase) {
+  const animationBytes = await exists(resolve(root, 'shots/animation-verification.json'));
+  check(!!animationBytes, 'Augmented exercise GLB requires current animation capture evidence');
+  if (animationBytes) {
+    const evidence = JSON.parse(animationBytes), trials = evidence.phone?.trials || [];
+    check(evidence.asset?.sha256 === report.glb.sha256, 'Exercise playback capture refers to a different current GLB');
+    check(evidence.pass === true && evidence.phone?.pass === true, 'Current exercise animation capture did not pass');
+    check(trials.length === 3, 'Exercise playback requires three fresh-browser trials');
+    for (const trial of trials) {
+      const measurements = trial.measurements || [];
+      check(measurements.map(m => m.id).sort().join(',') === [...exerciseIds].sort().join(','), `Exercise trial ${trial.trial} must measure all seven clips exactly once`);
+      for (const measurement of measurements) {
+        check(measurement.pass === true && Number.isFinite(measurement.fps) && measurement.fps >= report.limits.minimumMobileFPS, `Exercise ${measurement.id} trial ${trial.trial}: ${measurement.fps} FPS, require at least 40`);
+        check(measurement.modelTriangles === report.glb.modelTriangles && measurement.modelTriangles <= report.limits.mobileModelTriangles, `Exercise ${measurement.id} trial ${trial.trial}: current GLB triangle count differs or exceeds budget`);
+      }
+    }
+    const measurements = trials.flatMap(trial => trial.measurements || []);
+    report.animationCapture = { path: 'shots/animation-verification.json', sha256: sha256(animationBytes), assetSHA256: evidence.asset?.sha256, assetScope: 'Current augmented GLB exercise playback.', measurements: measurements.length, minimumFPS: measurements.length ? Math.min(...measurements.map(m => m.fps)) : null, pass: evidence.pass };
+  }
 }
 if (process.argv.includes('--browser')) {
   const { chromium } = await import('playwright-core');

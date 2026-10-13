@@ -1,9 +1,9 @@
 {
   "validatorVersion": "2.0.0-dev.3.10",
-  "sha256": "f573f629f080610ba0f385c8f39bbb41a0f1927cb5bff72c4bdb44bb3109bbe1",
+  "sha256": "8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2a9ae673a",
   "uri": "kid-full.glb",
   "mimeType": "model/gltf-binary",
-  "validatedAt": "2026-10-10T05:21:45.081Z",
+  "validatedAt": "2026-10-13T07:35:48.206Z",
   "issues": {
     "numErrors": 0,
     "numWarnings": 0,
@@ -23,7 +23,7 @@
         "pointer": "/buffers/0",
         "mimeType": "application/gltf-buffer",
         "storage": "glb",
-        "byteLength": 928604
+        "byteLength": 1290056
       },
       {
         "pointer": "/images/0",
@@ -39,7 +39,7 @@
         }
       }
     ],
-    "animationCount": 3,
+    "animationCount": 10,
     "materialCount": 7,
     "hasMorphTargets": true,
     "hasSkins": true,
@@ -115,6 +115,34 @@
       },
       {
         "name": "kick",
+        "facialWeightChannels": 1
+      },
+      {
+        "name": "squats",
+        "facialWeightChannels": 1
+      },
+      {
+        "name": "jumping-jacks",
+        "facialWeightChannels": 1
+      },
+      {
+        "name": "high-knees",
+        "facialWeightChannels": 1
+      },
+      {
+        "name": "lunges",
+        "facialWeightChannels": 1
+      },
+      {
+        "name": "push-ups",
+        "facialWeightChannels": 1
+      },
+      {
+        "name": "knee-push-ups",
+        "facialWeightChannels": 1
+      },
+      {
+        "name": "glute-bridge",
         "facialWeightChannels": 1
       }
     ],

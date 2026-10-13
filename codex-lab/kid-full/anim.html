@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ככה עושים · אנימציות לילד המלא</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%231a5147'/%3E%3Cpath d='m12 8 13 8-13 8Z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="anim.css">
+</head>
+<body>
+  <main>
+    <header>
+      <a class="lab-link" href="index.html">מעבדת הילד המלא</a>
+      <p class="eyebrow" dir="ltr">KID FULL / EXERCISE ANIMATIONS</p>
+      <h1>ככה עושים</h1>
+      <p class="intro">שבע הדגמות תנועה. בוחרים תרגיל, מסתכלים מקרוב ומאטים את הקצב.</p>
+    </header>
+    <div class="workspace">
+      <section class="studio" aria-label="הדגמת התרגיל">
+        <div class="stage-label"><span id="exercise-title">סקוואט</span><span id="view-label">מבט מלפנים</span></div>
+        <canvas id="stage" aria-label="דמות ילד מדגימה תרגיל בתלת ממד"></canvas>
+        <p id="load-status" role="status">טוענים את הדמות והאנימציות…</p>
+        <div class="transport">
+          <button id="play" disabled aria-pressed="false">ניגון</button>
+          <label class="timeline"><span class="sr-only">מיקום בחזרה</span><input id="time" type="range" min="0" max="2" step="0.001" value="0" disabled></label>
+          <output id="time-label" dir="ltr">0.00 / — s</output>
+        </div>
+      </section>
+      <aside aria-label="בחירת תרגיל ובקרת ההדגמה">
+        <label class="exercise-control" for="exercise">מה מתרגלים?</label>
+        <select id="exercise" disabled>
+          <option value="squats">סקוואט</option>
+          <option value="jumping-jacks">פתח-סגור · קפיצות פיסוק</option>
+          <option value="high-knees">ברכיים גבוהות</option>
+          <option value="lunges">מכרעים · ירידה לברך</option>
+          <option value="push-ups">שכיבות סמיכה</option>
+          <option value="knee-push-ups">שכיבות סמיכה על הברכיים</option>
+          <option value="glute-bridge">גשר ישבן</option>
+        </select>
+        <fieldset><legend>קצב ההדגמה</legend><div class="segments"><button data-speed="1" aria-pressed="true" disabled>רגיל · 1×</button><button data-speed="0.25" aria-pressed="false" disabled>איטי · 0.25×</button></div></fieldset>
+        <fieldset><legend>מבט</legend><div class="segments"><button data-view="front" aria-pressed="true" disabled>מלפנים</button><button data-view="side" aria-pressed="false" disabled>מהצד</button></div></fieldset>
+        <section class="cue"><h2>התנועה</h2><p id="exercise-cue">רגליים קצת פתוחות. יורדים כמו לשבת על כיסא, ידיים קדימה. קמים חזק. הגב ישר.</p></section>
+        <p class="repeat-note" id="repeat-note">חזרה אחת בלולאה. אפשר לעצור ולגרור את הסרגל כדי לבדוק כל רגע בתנועה.</p>
+        <div class="metrics" aria-label="מדדי רינדור"><div><span>פריימים לשנייה</span><output id="fps">—</output><small id="fps-note">נמדד בזמן ניגון</small></div><div><span>משולשים בדמות</span><output id="triangles">—</output><small>תקציב עד 20,000</small></div></div>
+        <p class="asset-links"><a href="kid-full.glb" download>הורדת הדמות והקטעים</a><a href="NOTES.md">יומן הבנייה והבדיקות</a></p>
+      </aside>
+    </div>
+  </main>
+  <script type="module" src="anim.mjs"></script>
+</body>
+</html>
