@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-10T05:21:50.543Z",
+  "recordedAt": "2026-10-13T07:41:54.598Z",
   "method": "All deformed vertices and shoe triangles, in world space; no renderer or physical-phone claim.",
   "limits": {
     "weightSumError": 0.000002,
@@ -9018,8 +9018,8 @@
     "deformed-geometry.mjs": "3d68270911a49baf8d11d7d2052fb036d552547689e51fffae42b5f7ec37c683"
   },
   "glb": {
-    "bytes": 1018408,
-    "sha256": "f573f629f080610ba0f385c8f39bbb41a0f1927cb5bff72c4bdb44bb3109bbe1",
+    "bytes": 1473368,
+    "sha256": "8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2a9ae673a",
     "modelTriangles": 15152,
     "skins": 2,
     "exportedSkinVertices": 4135,
@@ -9057,16 +9057,77 @@
         "channels": 35,
         "facialWeightChannels": 1,
         "maximumLoopDelta": 1.4997597572211942e-32
+      },
+      {
+        "name": "squats",
+        "channels": 35,
+        "facialWeightChannels": 1,
+        "maximumLoopDelta": 0
+      },
+      {
+        "name": "jumping-jacks",
+        "channels": 35,
+        "facialWeightChannels": 1,
+        "maximumLoopDelta": 0
+      },
+      {
+        "name": "high-knees",
+        "channels": 35,
+        "facialWeightChannels": 1,
+        "maximumLoopDelta": 0
+      },
+      {
+        "name": "lunges",
+        "channels": 35,
+        "facialWeightChannels": 1,
+        "maximumLoopDelta": 0
+      },
+      {
+        "name": "push-ups",
+        "channels": 35,
+        "facialWeightChannels": 1,
+        "maximumLoopDelta": 0
+      },
+      {
+        "name": "knee-push-ups",
+        "channels": 35,
+        "facialWeightChannels": 1,
+        "maximumLoopDelta": 0
+      },
+      {
+        "name": "glute-bridge",
+        "channels": 35,
+        "facialWeightChannels": 1,
+        "maximumLoopDelta": 0
       }
-    ]
+    ],
+    "preservedAnimationBase": {
+      "animations": 3,
+      "accessors": 256,
+      "bufferViews": 257,
+      "byteLength": 928604,
+      "sourceSHA256": "f573f629f080610ba0f385c8f39bbb41a0f1927cb5bff72c4bdb44bb3109bbe1",
+      "binarySHA256": "f9cc2653d8f6e2fdef84a80c4e714a514e76c736c98e1108828e07eae5a86432"
+    }
   },
   "capture": {
     "path": "shots/metrics.json",
     "sha256": "28642b9d3a0dd56503b1b2bdd99f82195e246b5e2b43e34dc510a17483ad3277",
+    "assetSHA256": "f573f629f080610ba0f385c8f39bbb41a0f1927cb5bff72c4bdb44bb3109bbe1",
+    "assetScope": "Historical preserved base: geometry, expressions and stand/run/kick; excludes new exercise playback.",
     "roundtripMaximumRGBMeanDifference": 0.0000028935185185185184,
     "mobileStable": true,
     "minimumMobileFPS": 43.14583291525356,
     "comparison": "shots/expressions-before-after-target.png"
+  },
+  "animationCapture": {
+    "path": "shots/animation-verification.json",
+    "sha256": "a7e3522157c7632f676132c989b5c4bbee4dd65f95c0496c82b1b049c690f6db",
+    "assetSHA256": "8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2a9ae673a",
+    "assetScope": "Current augmented GLB exercise playback.",
+    "measurements": 21,
+    "minimumFPS": 60.00120002400046,
+    "pass": true
   },
   "browser": {
     "version": "151.0.7922.173",
