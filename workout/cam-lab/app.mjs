@@ -7,13 +7,14 @@ import { selectHebrewVoice, preferredHebrewVoices, voiceId } from './voice-selec
 import { createLabSpeech } from './speech.mjs';
 import { CAMERA_LINES } from '../js/voice-lines.js?v=20261010-camera-1';
 import { SkeletonRecorder } from './recording.mjs';
-import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId } from './upload.mjs?v=20261012-background-1';
-import { BackgroundUploads, NEXT_OPEN_MESSAGE } from './upload-background.mjs?v=20261012-background-1';
+import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId } from './upload.mjs?v=20261013-frames-1';
+import { BackgroundUploads, NEXT_OPEN_MESSAGE } from './upload-background.mjs?v=20261013-frames-1';
 import { AutoStart } from './auto-start.mjs';
 import { RestCalibration } from './rest-calibration.mjs';
 import { ScreenWakeLock } from './screen-wake-lock.mjs';
-import { VideoRecorder } from './video-recording.mjs?v=20261012-background-1';
+import { VideoRecorder } from './video-recording.mjs?v=20261013-frames-1';
 import { acquireCamera, configureZoom, cameraSnapshot, reduceResolution } from './camera.mjs';
+import { KeyFrameRecorder } from './keyframes.mjs?v=20261013-frames-1';
 export const LAB_VERSION = '4.0.0';
 const $ = id => document.getElementById(id);
 const video = $('video'), canvas = $('overlay'), context = canvas.getContext('2d');
@@ -37,6 +38,7 @@ const spoken = {
   'high-knees': 'מַרְמִים בֶּרֶךְ אַחַת, מוֹרִידִים, וּמַחֲלִיפִים רֶגֶל. לֹא צָרִיךְ לָרוּץ מַהֵר.',
   ...EXERCISE_FEEDBACK,
 };
+let keyframes;
 let worker, stream, generation = 0, raf = 0, ready = false, busy = false, active = false;
 let counter, exercise, gate, statusLine, attemptStarted = null, lastVideoTime = -1, frameId = 0, pending;
 let lastFrame = null, totalFrames = 0, totalInference = 0, log = [], lastSpeak = -Infinity;
@@ -84,7 +86,7 @@ function paintUploadConfig() {
   $('upload-off-banner').hidden = !!uploadConfig;
   $('upload-on-banner').hidden = !uploadConfig;
   $('result-upload-off').hidden = !!uploadConfig;
-  $('privacy').textContent = uploadConfig ? 'ההורה הפעיל שליחה לבדיקה: המצלמה מוקלטת ללא קול, יחד עם השלד ואבחון. בסיום הנתונים נשלחים ליעד שהוגדר בקישור. אם השליחה נכשלת הם נשמרים במכשיר לניסיון הבא.' :
+  $('privacy').textContent = uploadConfig ? 'ההורה הפעיל שליחה לבדיקה: המצלמה מוקלטת ללא קול, יחד עם השלד, האבחון ותמונות מפתח חדות. בסיום הנתונים נשלחים ליעד שהוגדר בקישור. אם השליחה נכשלת הם נשמרים במכשיר לניסיון הבא.' :
     'מצב פרטי: עיבוד במכשיר. בלי הגדרת שליחה של ההורה אין צילום וידאו או שליחת נתונים. אפשר להקליט שלד ולהוריד אותו למכשיר.';
   $('record').checked = !!uploadConfig;
   $('record').disabled = !!uploadConfig;
@@ -97,6 +99,7 @@ if (uploadSetup.error) paintUploadStatus({ state: 'error', message: uploadSetup.
 if (uploadQueue) void uploadQueue.retry().catch(() => {});
 $('upload-retry').onclick = () => { if (uploadConfig) void uploadQueue.retry().catch(() => {}); };
 $('upload-disable').onclick = async () => {
+  keyframes?.cancel();
   uploadConfig = null; const removed = disableUploadConfig(); paintUploadConfig();
   await uploadQueue?.disable();
   await backgroundUploads.remove();
@@ -107,7 +110,7 @@ $('upload-disable').onclick = async () => {
 window.addEventListener('online', () => { if (uploadConfig) void uploadQueue.retry().catch(() => {}); });
 window.addEventListener('storage', event => {
   if (event.key !== 'camlab.upload') return;
-  uploadQueue?.stop(); backgroundUploads.detach();
+  keyframes?.cancel(); uploadQueue?.stop(); backgroundUploads.detach();
   uploadConfig = initializeUploadConfig({ location: { hash: '' } }).config;
   uploadQueue = uploadConfig ? new UploadQueue({ config: uploadConfig, onStatus: paintUploadStatus }) : null;
   backgroundUploads = new BackgroundUploads({ queue: uploadQueue, ...backgroundOptions });
@@ -222,8 +225,8 @@ function poseResult(data) {
   const poses = data.poses || (data.landmarks?.length ? [{ landmarks: data.landmarks, world: data.world }] : []);
   const aspect = video.videoWidth / video.videoHeight;
   // A worker frame captured before the start click belongs to placement.
-  if (active && timestamp < attemptStarted) return;
-  if (finishing || attemptEnded) return;
+  if (active && timestamp < attemptStarted) { data.bitmap?.close(); return; }
+  if (finishing || attemptEnded) { data.bitmap?.close(); return; }
   if (poses.length) mark('firstPose');
   model = data.model || model; modelHistory = data.modelHistory || modelHistory;
   if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
@@ -234,6 +237,8 @@ function poseResult(data) {
   if (modelTransition) modelTransitionAfter = null;
   recorder.add(poses, timestamp, aspect, { modelTransition }); paintRecorder();
   const placementCode = !active ? placement.update(poses, timestamp, aspect) : null;
+  keyframes?.frame(data.bitmap, timestamp, poses, counter.count);
+  if (!keyframes) data.bitmap?.close();
   const assigned = pair ? tracker.update(poses, timestamp, aspect) : [poses[0] || null];
   if (pair && tracker.tracks.length) placementDone = true;
   const prepared = assigned.map((p, i) => poseFilters[i].update(p?.landmarks || [], p?.world || [], timestamp, aspect));
@@ -270,9 +275,15 @@ function poseResult(data) {
   if (active) {
     [counter, ...(pair ? [adult] : [])].forEach((c, i) => {
       const uncertain = pair && tracker.status === 'ambiguous';
-      if (uncertain && !ambiguousTracking[i]) handleEvent(c.resetTracking('ambiguous'), i);
+      if (uncertain && !ambiguousTracking[i]) {
+        const event = c.resetTracking('ambiguous');
+        keyframes?.observe(c, event, { landmarks: assigned[i]?.landmarks || [], participant: pair ? i : undefined });
+        handleEvent(event, i);
+      }
       ambiguousTracking[i] = uncertain;
-      handleEvent(c.update(assigned[i]?.landmarks || [], assigned[i]?.world || [], timestamp, aspect, { modelTransition }), i);
+      const event = c.update(assigned[i]?.landmarks || [], assigned[i]?.world || [], timestamp, aspect, { modelTransition });
+      keyframes?.observe(c, event, { landmarks: assigned[i]?.landmarks || [], world: assigned[i]?.world || [], aspect, participant: pair ? i : undefined });
+      handleEvent(event, i);
       if (pair) $(i ? 'dad-status' : 'child-status').textContent = visibility[i] ? c.phase === 'waiting' ? 'מחכה לעמדת התחלה' : 'סופר' : 'הספירה נעצרה — מחכה לחזרה';
     });
     paintStatus(pair && !visibility.every(Boolean) ? assigned.every(Boolean) ? 'missing-person' : tracker.status : counter.status);
@@ -313,7 +324,7 @@ async function tick(token) {
       const bitmap = await createImageBitmap(video);
       if (token !== generation) { bitmap.close(); return; }
       const timestamp = performance.now();
-      pending = { started, timestamp }; worker.postMessage({ type: 'frame', bitmap, timestamp, id: ++frameId, generation: token, counting: active }, [bitmap]);
+      pending = { started, timestamp }; worker.postMessage({ type: 'frame', bitmap, timestamp, id: ++frameId, generation: token, counting: active, keepFrame: !!keyframes?.enabled }, [bitmap]);
       watchdog = setTimeout(() => {
         if (token === generation) fail('עיבוד פריים נמשך זמן רב מדי. נסו דפדפן מעודכן או מכשיר אחר.');
       }, 15000);
@@ -360,6 +371,7 @@ $('settings').addEventListener('submit', async event => {
   });
   restCalibrations = [counter, ...(pair ? [adult] : [])].map(c => new RestCalibration(exercise, c.t));
   calibrationReady = [];
+  keyframes?.cancel(); keyframes = null;
   videoRecorder = null; recordingError = null; openedAt = new Date(); sessionId = createSessionId(exercise, openedAt);
   cameraInfo = {}; runtimeError = null;
   $('dad-score').hidden = !pair; $('child-label').textContent = pair ? 'הילד' : 'חזרות שנספרו';
@@ -387,6 +399,7 @@ $('settings').addEventListener('submit', async event => {
     canvas.width = video.videoWidth; canvas.height = video.videoHeight;
     if (uploadConfig || $('record').checked) startRecording(); else paintRecorder();
     if (uploadConfig) {
+      keyframes = new KeyFrameRecorder({ session: sessionId, startedAt: recorder.origin });
       try {
         videoRecorder = new VideoRecorder({ onLimit: () => { $('feedback').textContent = 'הניסיון הסתיים במגבלת 4 דקות.'; results('duration-limit'); },
           onError: () => { recordingError = 'הקלטת הווידאו נכשלה. השלד והאבחון נשמרים; יש לבדוק תמיכה בהקלטה בדפדפן.'; $('error').hidden = false; $('error').textContent = recordingError; } });
@@ -461,7 +474,11 @@ function results(reason = 'finish') {
   mark('finish');
   const endedAt = performance.now();
   clearTimeout(attemptTimer);
-  counter.finish(endedAt); adult?.finish(endedAt); recorder.stop(endedAt);
+  [counter, ...(pair ? [adult] : [])].forEach((c, i) => {
+    const event = c.finish(endedAt);
+    keyframes?.observe(c, event, { participant: pair ? i : undefined });
+  });
+  recorder.stop(endedAt);
   const consent = uploadConfig;
   if (consent) {
     finishing = true; active = false; ready = false; cancelAnimationFrame(raf); clearTimeout(watchdog);
@@ -470,11 +487,12 @@ function results(reason = 'finish') {
     const capture = videoRecorder; videoRecorder = null;
     const skeleton = new Blob([recorder.json({ compact: true }) || '{}'], { type: 'application/json' });
     const diagnostics = new Blob([JSON.stringify(attemptDiagnostics(capture))], { type: 'application/json' });
-    const attemptSession = sessionId;
+    const attemptSession = sessionId, frameCapture = keyframes;
+    const frames = frameCapture?.snapshot();
     // Start a durable write immediately on pagehide, using timeslice data already
     // delivered. The complete final recorder Blob replaces it if stop() finishes.
     const snapshot = reason === 'pagehide' ? capture?.snapshot() : null;
-    const savingSnapshot = snapshot && uploadConfig === consent ? uploadQueue.enqueue({ session: attemptSession, video: snapshot, skeleton, diagnostics,
+    const savingSnapshot = snapshot && uploadConfig === consent ? uploadQueue.enqueue({ session: attemptSession, video: snapshot, skeleton, frames, diagnostics,
       readyAt: Date.now() + 3000 }) : null;
     savingSnapshot?.catch(() => {});
     paintUploadStatus({ state: 'sending', message: 'מכינים את ההקלטה לשליחה…' });
@@ -487,12 +505,13 @@ function results(reason = 'finish') {
       try {
         if (uploadConfig === consent && uploadQueue.enabled) {
           await savingSnapshot?.catch(() => {});
-          await uploadQueue.enqueue({ session: attemptSession, video: videoBlob, skeleton,
+          const frames = await frameCapture?.stop();
+          await uploadQueue.enqueue({ session: attemptSession, video: videoBlob, skeleton, frames,
             diagnostics: new Blob([JSON.stringify(attemptDiagnostics(capture))], { type: 'application/json' }) });
           if (reason !== 'pagehide') await uploadQueue.retry();
         }
       } catch (error) { paintUploadStatus({ state: 'error', message: error.message || 'לא הצלחנו לשמור או לשלוח את הניסיון. השאירו את הדף פתוח ונסו שוב.' }); }
-      finally { finishing = false; $('again').disabled = false; void wakeLock.release(); }
+      finally { if (frameCapture?.enabled && !frameCapture.closed) frameCapture.cancel(); finishing = false; $('again').disabled = false; void wakeLock.release(); }
     })();
   } else release();
   $('session').hidden = true; $('result').hidden = false;
@@ -523,6 +542,7 @@ function attemptDiagnostics(capture = videoRecorder) {
     wakeLock: wakeLock.state, voicePlayback: labSpeech.snapshot(), timeline: { ...timeline,
       ...Object.fromEntries(['cameraStart', 'cameraReady', 'firstFrame', 'firstPose', 'firstFullBody', 'countdownStart', 'countStart', 'finish'].map(name => [name, attemptTimeline[name] ?? null])) },
     uploadLog: uploadQueue?.log || [],
+    keyframes: keyframes?.diagnostics() || null,
     endReason, countStarted: attemptStarted != null,
     countNotStartedReason: attemptStarted == null ? 'no-count-start' : null,
     attempts: [counter, ...(pair ? [adult] : [])].map((c, i) => {
@@ -597,7 +617,7 @@ function preloadModel() {
   $('model-status').textContent = 'מודל הזיהוי: נטען…';
   workerLoading = new Promise((resolve, reject) => {
     try {
-      worker = new Worker('./pose-worker.js');
+      worker = new Worker('./pose-worker.js?v=20261013-frames-1');
       const initializedWorker = worker;
       workerLoadTimer = setTimeout(() => reject(new Error('טעינת המודל המקומי נמשכה זמן רב מדי.')), 60000);
       worker.onmessage = ({ data }) => {
@@ -622,7 +642,7 @@ function preloadModel() {
           else { fail('הזיהוי המקומי נעצר. נסו דפדפן מעודכן.', data.message); discardWorker(); }
           return;
         }
-        if (!stream || attemptEnded || data.generation !== generation) return;
+        if (!stream || attemptEnded || data.generation !== generation) { data.bitmap?.close(); return; }
         if (data.type === 'pose') poseResult(data);
         else if (data.type === 'model-switching') {
           ready = false; modelTransitionAfter = data.timestamp ?? pending?.timestamp ?? lastFrame;

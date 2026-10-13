@@ -1,7 +1,7 @@
-import { CameraAttempt, cameraPrivacy } from './camera-session.mjs?v=20261012-background-1';
+import { CameraAttempt, cameraPrivacy } from './camera-session.mjs?v=20261013-frames-1';
 import { CameraDemo } from './camera-demo.mjs?v=20261010-camera-1';
 import { acquireCamera, configureZoom, cameraSnapshot, reduceResolution, screenOrientation } from '../cam-lab/camera.mjs?v=20261010-camera-1';
-import { VIDEO_LIMIT_MS } from '../cam-lab/video-recording.mjs?v=20261012-background-1';
+import { VIDEO_LIMIT_MS } from '../cam-lab/video-recording.mjs?v=20261013-frames-1';
 import { numWord } from './count.js?v=20261010-camera-1';
 import { speakLocal, stopSpeak } from './speech.js?v=20261010-camera-1';
 
@@ -107,7 +107,7 @@ export function cameraScreen({ host, exercise: ex, item, uploads, mount, esc, st
       try {
         const bitmap = await createImageBitmap(video);
         if (stopped || token !== generation) { bitmap.close(); return; }
-        worker.postMessage({ type: 'frame', bitmap, timestamp: performance.now(), id: ++frameId }, [bitmap]);
+        worker.postMessage({ type: 'frame', bitmap, timestamp: performance.now(), id: ++frameId, keepFrame: !!attempt.keyframes?.enabled && !!attempt.queue?.enabled }, [bitmap]);
         watchdog = setTimeout(fail, 15000);
       } catch { fail(); return; }
     }
@@ -133,9 +133,9 @@ export function cameraScreen({ host, exercise: ex, item, uploads, mount, esc, st
       $('camera-view').classList.toggle('rear', (zoom.settings.facingMode || facing) === 'environment');
       $('camera-zoom').textContent = zoom.actualZoom == null ? 'הזום לפי המצלמה שלך' : `זום המצלמה: ${zoom.actualZoom}×`;
       wideDevice = zoom.wideDevice; $('camera-wide').hidden = !wideDevice;
-      worker = new Worker(new URL('../cam-lab/pose-worker.js?v=20261010-camera-1', import.meta.url));
+      worker = new Worker(new URL('../cam-lab/pose-worker.js?v=20261013-frames-1', import.meta.url));
       worker.onmessage = ({ data }) => {
-        if (stopped || token !== generation) return;
+        if (stopped || token !== generation) { data.bitmap?.close(); return; }
         if (data.type === 'ready') { clearTimeout(watchdog); ready = true; $('camera-status').textContent = 'נחזור לתנוחה הראשונה'; tick(token); }
         else if (data.type === 'model-switching') { ready = false; demo.fps(data.fps); }
         else if (data.type === 'model-change') {

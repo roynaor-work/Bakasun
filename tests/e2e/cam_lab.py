@@ -18,6 +18,7 @@ from pathlib import Path
 from urllib.parse import quote
 from playwright.sync_api import sync_playwright
 from upload_background import run_background_tests
+from keyframes import verify_frames, run_keyframe_benchmark
 
 parts, acknowledgements, responses = [], [], []
 fail_skeleton = 0
@@ -29,6 +30,12 @@ slow_upload = False
 class Handler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
+
+    def handle(self):
+        try:
+            super().handle()
+        except (BrokenPipeError, ConnectionResetError):
+            pass  # Navigation may cancel optional voice-file probes.
 
     def do_POST(self):
         global fail_skeleton, fail_video_chunk_once
@@ -141,9 +148,14 @@ def wait_sent(page, timeout=30000):
 def check_attempt(offset, end_reason, fallback=False):
     attempt = parts[offset:]
     assert [v['part'] for v in attempt[:2]] == ['diagnostics', 'skeleton']
-    assert all(v['part'] == 'video' for v in attempt[2:])
+    frame_parts = [v for v in attempt if v['part'] == 'frames']
+    video_parts = [v for v in attempt if v['part'] == 'video']
+    assert [v['part'] for v in attempt] == ['diagnostics', 'skeleton'] + ['frames'] * len(frame_parts) + ['video'] * len(video_parts)
+    assert frame_parts and video_parts
+    frame_data = json.loads(assembled_files[(attempt[0]['session'], 'frames')])
+    assert frame_data['session'] == attempt[0]['session'] and frame_data['version'] == 1
     assert len({v['session'] for v in attempt}) == 1
-    assert attempt[2]['mime'] in ['video/webm', 'video/mp4'] and attempt[2]['data']
+    assert video_parts[0]['mime'] in ['video/webm', 'video/mp4'] and video_parts[0]['data']
     assert all(v['mime'] == 'application/json' for v in attempt[:2])
     skeleton, diagnostics = json.loads(attempt[1]['data']), json.loads(attempt[0]['data'])
     assert skeleton['version'] == 2 and len(skeleton['frames']) > 0
@@ -173,7 +185,7 @@ def check_attempt(offset, end_reason, fallback=False):
     assert set(['requested', 'supported', 'granted', 'state', 'fallback', 'actualZoom']).issubset(ptz)
     assert ptz['granted'] in [True, False, None]
     return {'session': attempt[0]['session'], 'frames': len(skeleton['frames']),
-            'videoBytes': len(assembled_files[(attempt[0]['session'], 'video')]), 'mime': attempt[2]['mime'], 'endReason': end_reason}
+            'videoBytes': len(assembled_files[(attempt[0]['session'], 'video')]), 'mime': video_parts[0]['mime'], 'endReason': end_reason}
 
 
 def check_child_guidance(browser, origin, root):
@@ -213,7 +225,7 @@ def check_child_guidance(browser, origin, root):
         return stream;
       };
     """ % json.dumps(samples['right']))
-    context.route('**/cam-lab/pose-worker.js', lambda route: route.fulfill(content_type='application/javascript', body="""
+    context.route('**/cam-lab/pose-worker.js?*', lambda route: route.fulfill(content_type='application/javascript', body="""
       onmessage=({data})=>{
         if(data.type==='init')postMessage({type:'ready',model:'full',modelHistory:[]});
         else if(data.type==='configure')postMessage({type:'configured',generation:data.generation,model:'full',modelHistory:[]});
@@ -355,7 +367,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             private_page = private_context.new_page()
             private_errors, private_requests = [], []
             private_page.on('pageerror', lambda e: private_errors.append(str(e)))
-            private_page.on('request', lambda r: private_requests.append(r.url) if r.url == origin + '/receive' else None)
+            private_page.on('request', lambda r: private_requests.append(r.url) if r.url == origin + '/receive' or 'frame-encoder' in r.url else None)
             private_page.goto(url)
             assert private_page.evaluate("localStorage.getItem('camlab.upload')") is None
             check_banner(private_page, False)
@@ -400,7 +412,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
                 wait_sent(page)
                 reports.append(check_attempt(offset, 'finish' if selector == '#finish' else 'camera-stop'))
                 assert len({r['session'] for r in reports}) == len(reports)
-                assert len(acknowledgements) == len(parts) == 3 * len(reports)
+                assert len(acknowledgements) == len(parts) == 4 * len(reports)
                 page.locator('#again').click()
 
             # Reject only the clone's frame-rate constraint. Camera, model and
@@ -449,7 +461,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             reports.append(check_attempt(offset, 'duration-limit'))
             limit_page.evaluate('() => attemptLimits.forEach(fn => fn())')
             limit_page.wait_for_timeout(300)
-            assert len(parts) == offset + 3
+            assert len(parts) == offset + 4
             limit_page.close()
 
             # Failed skeleton persists through IndexedDB and reload; diagnostics is not repeated.
@@ -462,7 +474,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             assert [v['part'] for v in parts[offset:]] == ['diagnostics', 'skeleton', 'skeleton', 'skeleton', 'skeleton']
             page.reload()
             page.wait_for_function("() => document.querySelector('#upload-status').textContent==='נשלח לבדיקה'", timeout=30000)
-            assert [v['part'] for v in parts[offset:]] == ['diagnostics', 'skeleton', 'skeleton', 'skeleton', 'skeleton', 'skeleton', 'video']
+            assert [v['part'] for v in parts[offset:]] == ['diagnostics', 'skeleton', 'skeleton', 'skeleton', 'skeleton', 'skeleton', 'frames', 'video']
             assert len({v['session'] for v in parts[offset:]}) == 1
             assert len(acknowledgements) == len(parts)
             # Real 60-second recording with CDP upload bandwidth capped at 200,000 B/s.
@@ -517,7 +529,9 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             assert chunk_numbers == expected_chunks, chunk_numbers
             fail_video_chunk_once = None
             assert slow_page.locator('#upload-keep-open').is_hidden()
+            frame_data = verify_frames(slow_page, assembled_files[(slow_session, 'frames')], slow_session, require_images=True)
             slow_report = {'recordingSeconds': 60, 'uploadBytesPerSecond': 200000, 'uploadSeconds': upload_seconds,
+                           'keyframes': len(frame_data['frames']), 'framesBytes': len(assembled_files[(slow_session, 'frames')]),
                            'videoBytes': len(captured), 'sha256': hashlib.sha256(captured).hexdigest(),
                            'identicalBytes': True, 'chunksRequested': chunk_numbers}
             slow_diagnostics = json.loads(slow_requests[0]['data'])
@@ -527,6 +541,9 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             print(json.dumps({'slowUpload': slow_report}), flush=True)
             cdp.detach()
             slow_page.close()
+
+            slow_upload = False  # FPS trials measure capture; bandwidth throttling is tested separately.
+            benchmark_report = run_keyframe_benchmark(browser, origin, root, parts, assembled_files)
 
             slow_upload = True
             try:
@@ -590,7 +607,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
                 assert time.monotonic() < unregister_deadline, 'Upload worker did not unregister within 10 seconds'
                 page.wait_for_timeout(100)
             assert page.evaluate('navigator.serviceWorker.getRegistrations().then(rs => rs.length)') == 0
-            assert page.evaluate("async () => { const { IndexedDBUploadStore } = await import('/workout/cam-lab/upload.mjs?v=20261012-background-1'); return (new IndexedDBUploadStore()).getConfig(); }") is None
+            assert page.evaluate("async () => { const { IndexedDBUploadStore } = await import('/workout/cam-lab/upload.mjs?v=20261013-frames-1'); return (new IndexedDBUploadStore()).getConfig(); }") is None
             assert page.locator('#record-option').is_visible()
             # Private camera: manual controls return and no upload occurs.
             private_offset = len(parts)
@@ -604,7 +621,7 @@ with tempfile.TemporaryDirectory(prefix='cam-lab-e2e-') as temp:
             assert len(parts) == private_offset
             assert not errors, errors
             print(json.dumps({'browser': 'Chromium synthetic camera', 'attempts': reports,
-                              'slowUpload': slow_report, 'backgroundUpload': background_report, 'legacyAutoUpload': True, 'pagehideQueue': True,
+                              'keyframeBenchmark': benchmark_report, 'slowUpload': slow_report, 'backgroundUpload': background_report, 'legacyAutoUpload': True, 'pagehideQueue': True,
                               'redirect302': True, 'retryAfterReload': True, 'privateNoUpload': True,
                               'privateNoRequests': True, 'bannersAllScreens': True, 'mobileWidth': 360, 'errors': errors}))
             browser.close()

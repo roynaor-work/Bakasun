@@ -96,7 +96,7 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     for(let i=0;i<20;i++)await frame(pose({angle:146}));
     get('finish').onclick();get('stop').onclick();get('finish').onclick();await flush();
     assert.equal(stopped,1);assert.ok(events.indexOf('video-final')<events.indexOf('camera-stop'));assert.ok(events.indexOf('durable')<events.indexOf('fetch'));
-    assert.deepEqual(requests.map(r=>r.part),['diagnostics','skeleton','video']);assert.equal(get('upload-status').textContent,'נשלח לבדיקה');assert.equal(records.size,0);
+    assert.deepEqual(requests.map(r=>r.part),['diagnostics','skeleton','frames','video']);assert.equal(get('upload-status').textContent,'נשלח לבדיקה');assert.equal(records.size,0);
     const diagnostic=JSON.parse(Buffer.from(requests[0].data,'base64').toString());
     assert.equal(diagnostic.countStarted,true);assert.equal(diagnostic.countNotStartedReason,null);assert.equal(diagnostic.endReason,'finish');
     assert.equal(diagnostic.labVersion,'4.0.0');assert.equal(diagnostic.userAgent,'synthetic-Android');assert.equal(diagnostic.camera.settings.zoom,.5);
@@ -115,10 +115,10 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     const {replayRecording}=await import('../workout/cam-lab/recording.mjs');assert.equal(replayRecording(skeleton)[0].counted,1);
     cameraMode='denied';get('again').onclick();await get('settings').handlers.submit({preventDefault(){}});await frame(pose());
     // Four-minute limit also delivers an attempt that never reached Start.
-    timers.filter(t=>t.delay===240000&&!t.cleared).at(-1).fn();await flush();assert.equal(requests.length,6);
-    get('finish').onclick();get('stop').onclick();await flush();assert.equal(requests.length,6); // Already finalized, including after sending.
-    const placementOnly=JSON.parse(Buffer.from(requests[3].data,'base64').toString());assert.equal(placementOnly.attempts[0].counted,0);
-    assert.equal(placementOnly.uploadLog.length,3);assert.equal(placementOnly.timeline.countStart,null);
+    timers.filter(t=>t.delay===240000&&!t.cleared).at(-1).fn();await flush();assert.equal(requests.length,8);
+    get('finish').onclick();get('stop').onclick();await flush();assert.equal(requests.length,8); // Already finalized, including after sending.
+    const placementOnly=JSON.parse(Buffer.from(requests[4].data,'base64').toString());assert.equal(placementOnly.attempts[0].counted,0);
+    assert.equal(placementOnly.uploadLog.length,4);assert.equal(placementOnly.timeline.countStart,null);
     assert.equal(placementOnly.countStarted,false);assert.equal(placementOnly.countNotStartedReason,'no-count-start');assert.equal(placementOnly.endReason,'duration-limit');
     assert.ok(placementOnly.attempts[0].preparation.frames>0);
     assert.equal(placementOnly.attempts[0].calibration.status,'fallback');assert.equal(placementOnly.attempts[0].thresholds.squatUp,157);
@@ -130,15 +130,15 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     assert.equal(get('error').hidden,true);assert.equal(cameraRequests.length,4);assert.equal(cameraRequests[3].video.zoom,undefined);
     for(let i=0;i<80;i++)await frame(pose());
     assert.equal(get('start').hidden,true);assert.equal(FakeMediaRecorder.instances.length,3);
-    get('finish').onclick();await flush();assert.equal(requests.length,9);
-    const unsupported=JSON.parse(Buffer.from(requests[6].data,'base64').toString());assert.equal(unsupported.camera.settings.zoom,undefined);
+    get('finish').onclick();await flush();assert.equal(requests.length,12);
+    const unsupported=JSON.parse(Buffer.from(requests[8].data,'base64').toString());assert.equal(unsupported.camera.settings.zoom,undefined);
     assert.equal(unsupported.countStarted,true);assert.equal(unsupported.countNotStartedReason,null);
-    assert.ok(JSON.parse(Buffer.from(requests[7].data,'base64').toString()).countStartMs>0);
+    assert.ok(JSON.parse(Buffer.from(requests[9].data,'base64').toString()).countStartMs>0);
     assert.equal(workerCount,1);assert.equal(new Set(requests.map(r=>r.session)).size,3); // New capture and countdown after Again, without reload.
     assert.equal(unsupported.camera.ptz.requested,false);assert.equal(unsupported.camera.ptz.granted,null);
     assert.equal(unsupported.camera.ptz.state,'unsupported');assert.equal(unsupported.camera.ptz.actualZoom,null);
     get('again').onclick();await get('settings').handlers.submit({preventDefault(){}});await get('upload-disable').onclick();
-    assert.equal(values.has('camlab.upload'),false);get('finish').onclick();await flush();assert.equal(requests.length,9);
+    assert.equal(values.has('camlab.upload'),false);get('finish').onclick();await flush();assert.equal(requests.length,12);
     get('again').onclick();await get('settings').handlers.submit({preventDefault(){}});
     worker.onerror();await flush();assert.equal(get('error').hidden,false);
     const recovering=get('settings').handlers.submit({preventDefault(){}});await flush();assert.equal(workerCount,2);workerInit();await recovering;

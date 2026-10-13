@@ -1,4 +1,4 @@
-import { IndexedDBUploadStore, UPLOAD_TAG, UPLOAD_VERSION, readUploadLog } from './upload.mjs?v=20261012-background-1';
+import { IndexedDBUploadStore, UPLOAD_TAG, UPLOAD_VERSION, readUploadLog } from './upload.mjs?v=20261013-frames-1';
 
 export const NEXT_OPEN_MESSAGE = 'השליחה תמשיך בפתיחה הבאה';
 const workerURL = new URL(`../upload-sw.js?v=${UPLOAD_VERSION}`, import.meta.url);

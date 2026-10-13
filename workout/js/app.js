@@ -22,8 +22,8 @@ import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecordin
 import { exerciseName, workoutName } from './workout-copy.js?v=20261010-camera-1';
 import { SAY } from './say.js?v=20261010-camera-1';
 import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261010-camera-1';
-import { CameraUploads, cameraAvailable, cameraPrivacy, readCameraConsent } from './camera-session.mjs?v=20261012-background-1';
-import { cameraScreen } from './camera-screen.mjs?v=20261012-background-1';
+import { CameraUploads, cameraAvailable, cameraPrivacy, readCameraConsent } from './camera-session.mjs?v=20261013-frames-1';
+import { cameraScreen } from './camera-screen.mjs?v=20261013-frames-1';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');

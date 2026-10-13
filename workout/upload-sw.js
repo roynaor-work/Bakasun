@@ -1,4 +1,4 @@
-import { IndexedDBUploadStore, UploadQueue, UPLOAD_TAG } from './cam-lab/upload.mjs?v=20261012-background-1';
+import { IndexedDBUploadStore, UploadQueue, UPLOAD_TAG } from './cam-lab/upload.mjs?v=20261013-frames-1';
 
 // Uploads only: deliberately no fetch listener and no CacheStorage.
 self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));

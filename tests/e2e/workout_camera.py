@@ -8,6 +8,7 @@ import functools
 import http.server
 import json
 import os
+from keyframes import verify_frames
 import shutil
 import ssl
 import subprocess
@@ -44,11 +45,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if reject:
             FAIL_SKELETON -= 1
         result = {'ok': not bool(reject)}
-        if data['part'] == 'video':
+        if data['part'] in ['video', 'frames']:
             chunk, count, total = data['chunk'], data['chunks'], data['totalBytes']
             assert 0 <= chunk < count and count == max(1, (total + 1572863) // 1572864)
             assert len(decoded) == min(1572864, max(0, total - chunk * 1572864))
-            saved = CHUNKS.setdefault(data['session'], {})
+            saved = CHUNKS.setdefault((data['session'], data['part']), {})
             saved[chunk] = decoded
             assembled = len(saved) == count
             result['assembled'] = assembled
@@ -93,11 +94,11 @@ def setup(browser, origin, consent=True, stage3d=False):
     page.on('request', lambda r: requests.append(r))
     page.goto(origin + '/workout/#/settings')
     if consent:
-        page.wait_for_function("() => navigator.serviceWorker.controller?.scriptURL.includes('/workout/upload-sw.js?v=20261012-background-1')")
+        page.wait_for_function("() => navigator.serviceWorker.controller?.scriptURL.includes('/workout/upload-sw.js?v=20261013-frames-1')")
         assert page.evaluate("navigator.serviceWorker.getRegistrations().then(rs => rs.length === 1 && rs[0].scope === location.origin + '/workout/')")
     expect(page.locator('#workout-camera-setting')).not_to_be_checked()
     expect(page.locator('#workout-camera-info')).to_contain_text(
-        'הסרטון נשלח לבדיקה בסיום' if consent else 'הסרטון לא נשמר ולא יוצא מהטלפון')
+        'הסרטון ותמונות המפתח נשלחים לבדיקה בסיום' if consent else 'הסרטון לא נשמר ולא יוצא מהטלפון')
     page.locator('#workout-camera-setting').check()
     return context, page, errors, requests
 
@@ -113,7 +114,11 @@ def open_camera(page, origin):
 
 def verify_part_sequence(received, prefix=('diagnostics', 'skeleton')):
     assert [part['part'] for part in received[:len(prefix)]] == list(prefix)
-    video = received[len(prefix):]
+    remaining = received[len(prefix):]
+    frames = [part for part in remaining if part['part'] == 'frames']
+    video = [part for part in remaining if part['part'] == 'video']
+    assert frames and [part['part'] for part in remaining] == ['frames'] * len(frames) + ['video'] * len(video)
+    assert [part['chunk'] for part in frames] == list(range(frames[0]['chunks']))
     assert video and all(part['part'] == 'video' for part in video)
     assert len({part['session'] for part in received}) == 1
     count, total = video[0]['chunks'], video[0]['totalBytes']
@@ -128,11 +133,11 @@ def verify_parts(start, reason):
     received = PARTS[start:]
     verify_part_sequence(received)
     assert all(part['session'].startswith('app-') for part in received)
-    assert received[2]['mime'] == 'video/webm' and len(received[2]['data']) > 0
+    assert received[-1]['mime'] == 'video/webm' and len(received[-1]['data']) > 0
     skeleton, diagnostics = json.loads(received[1]['data']), json.loads(received[0]['data'])
     assert skeleton['version'] == 2 and skeleton['exercise'] == 'squats'
     assert diagnostics['endReason'] == reason and diagnostics['exercise'] == 'squats'
-    assert diagnostics['appVersion'] == '20261012-background-1' and diagnostics['target'] == 11
+    assert diagnostics['appVersion'] == '20261013-frames-1' and diagnostics['target'] == 11
     assert 'ptz' in diagnostics['camera']
     assert diagnostics['videoError'] is None
     assert 'synthetic-browser-key' not in json.dumps(diagnostics)
@@ -191,9 +196,9 @@ def simulation(browser, origin):
           onmessage = ({data}) => {
             if (data.type === 'init') postMessage({type:'ready', model:'full'});
             if (data.type === 'frame') {
-              data.bitmap.close();
-              postMessage({type:'pose', timestamp:data.timestamp, inferenceMs:1, model:'full',
-                poses:[{landmarks:data.sample.p, world:data.sample.world}]});
+              const bitmap = data.bitmap;
+              postMessage({type:'pose', bitmap, timestamp:data.timestamp, inferenceMs:1, model:'full',
+                poses:[{landmarks:data.sample.p, world:data.sample.world}]}, [bitmap]);
             }
           };
         """))
@@ -269,7 +274,12 @@ def simulation(browser, origin):
     hold(145, 5); hold(90); hold(180, 6)
     expect(page.locator('#camera-upload')).to_contain_text('נשלח לבדיקה', timeout=30000)
     verify_part_sequence(PARTS[start:])
+    frame_parts = [p for p in PARTS[start:] if p['part'] == 'frames']
+    frame_data = verify_frames(page, b''.join(p['data'] for p in frame_parts), PARTS[start]['session'], require_images=True)
+    assert len([f for f in frame_data['frames'] if f['reason']=='bottom']) == 2
+    assert any(f['reason']=='rejected' and f['rejectReason']=='partial' for f in frame_data['frames'])
     diagnostics = json.loads(PARTS[start]['data'])
+    assert not diagnostics['keyframes']['errors']
     assert diagnostics['endReason'] == 'target' and diagnostics['counted'] == 2
     session = page.evaluate("JSON.parse(localStorage.getItem('kidfit.v1')).sessions.at(-1)")
     assert session['items'][0]['done'] == 2 and session['items'][0]['secs'] > 4
@@ -297,7 +307,7 @@ def failures(browser, origin):
     context.route('**/cam-lab/pose-worker.js?*', lambda route: route.fulfill(content_type='application/javascript', body="""
       onmessage = ({data}) => {
         if (data.type === 'init') {postMessage({type:'ready'});setTimeout(()=>postMessage({type:'error'}),2000);}
-        else {data.bitmap.close();postMessage({type:'pose',timestamp:data.timestamp,poses:[]});}
+        else {postMessage({type:'pose',bitmap:data.bitmap,timestamp:data.timestamp,poses:[]},[data.bitmap]);}
       };
     """))
     open_camera(page, origin)
@@ -339,10 +349,12 @@ with tempfile.TemporaryDirectory(prefix='workout-camera-') as temp:
             start = len(PARTS)
             open_camera(page, origin)
             page.wait_for_function("Number(document.querySelector('#camera-view')?.dataset.frames)>3", timeout=60000)
-            page.wait_for_timeout(2200)
+            page.wait_for_timeout(5200)
             page.get_by_role('button', name='סיום', exact=True).click()
             expect(page.locator('#camera-upload')).to_contain_text('נשלח לבדיקה', timeout=30000)
             assert verify_parts(start, 'finish') > 0
+            frame_parts = [p for p in PARTS[start:] if p['part'] == 'frames']
+            verify_frames(page, b''.join(p['data'] for p in frame_parts), PARTS[start]['session'], require_images=True)
             delivered = len(PARTS)
             page.wait_for_timeout(500)
             assert len(PARTS) == delivered
@@ -388,13 +400,13 @@ with tempfile.TemporaryDirectory(prefix='workout-camera-') as temp:
             expect(page.locator('.camera-result')).to_be_visible()
             page.wait_for_timeout(700)
             assert len(PARTS) == start
-            assert not [r for r in requests if r.method == 'POST']
+            assert not [r for r in requests if r.method == 'POST' or 'frame-encoder' in r.url]
             assert not any(db['name'] == 'camlab.upload.queue' for db in page.evaluate('indexedDB.databases()'))
             assert page.evaluate('navigator.serviceWorker.getRegistrations().then(rs => rs.length)') == 0
             assert not errors, errors
             assert page.evaluate('window.recorderStarts') == 0
             private.close()
-            print('Real camera passed: three parts via HTTPS 302, finish/exit, retry/reload, app- session, private mode, local assets.')
+            print('Real camera passed: four parts via HTTPS 302, finish/exit, retry/reload, app- session, private mode, local assets.')
             simulation(browser, origin)
             failures(browser, origin)
             browser.close()
