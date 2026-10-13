@@ -7,11 +7,12 @@ import { selectHebrewVoice, preferredHebrewVoices, voiceId } from './voice-selec
 import { createLabSpeech } from './speech.mjs';
 import { CAMERA_LINES } from '../js/voice-lines.js?v=20261010-camera-1';
 import { SkeletonRecorder } from './recording.mjs';
-import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId, readUploadLog } from './upload.mjs';
+import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId } from './upload.mjs?v=20261012-background-1';
+import { BackgroundUploads, NEXT_OPEN_MESSAGE } from './upload-background.mjs?v=20261012-background-1';
 import { AutoStart } from './auto-start.mjs';
 import { RestCalibration } from './rest-calibration.mjs';
 import { ScreenWakeLock } from './screen-wake-lock.mjs';
-import { VideoRecorder } from './video-recording.mjs';
+import { VideoRecorder } from './video-recording.mjs?v=20261012-background-1';
 import { acquireCamera, configureZoom, cameraSnapshot, reduceResolution } from './camera.mjs';
 export const LAB_VERSION = '4.0.0';
 const $ = id => document.getElementById(id);
@@ -65,11 +66,15 @@ const wakeLock = new ScreenWakeLock();
 let workerLoading = null, workerLoaded = false, configureWaiter = null, workerLoadTimer = 0;
 const uploadSetup = initializeUploadConfig({ location: window.location, history: window.history });
 let uploadConfig = uploadSetup.config;
-const uploadQueue = uploadConfig ? new UploadQueue({ config: uploadConfig, onStatus: paintUploadStatus }) : null;
+let uploadQueue = uploadConfig ? new UploadQueue({ config: uploadConfig, onStatus: paintUploadStatus }) : null;
+const backgroundOptions = { onSupport: supported => {
+  $('upload-keep-open').textContent = supported ? 'אפשר לסגור את הדף; השליחה תמשיך ברקע כשהדפדפן יאפשר זאת' : NEXT_OPEN_MESSAGE;
+} };
+let backgroundUploads = new BackgroundUploads({ queue: uploadQueue, ...backgroundOptions });
 function paintUploadStatus(status) {
   $('upload-status').textContent = status.state === 'sent' && status.session === sessionId && recordingError ? 'השלד והאבחון נשלחו, אך הווידאו לא הוקלט. יש להתחיל ניסיון חדש בדפדפן מעודכן.' : status.message;
   $('upload-retry').hidden = status.state !== 'error';
-  $('upload-keep-open').hidden = !['queued', 'sending'].includes(status.state);
+  $('upload-keep-open').hidden = !uploadConfig || !['queued', 'sending', 'error'].includes(status.state);
   if (status.state === 'sending') void wakeLock.hold();
   if (['sent', 'error', 'disabled'].includes(status.state) && !stream && !finishing && (!status.pending || status.state !== 'sent')) void wakeLock.release();
 }
@@ -94,11 +99,22 @@ $('upload-retry').onclick = () => { if (uploadConfig) void uploadQueue.retry().c
 $('upload-disable').onclick = async () => {
   uploadConfig = null; const removed = disableUploadConfig(); paintUploadConfig();
   await uploadQueue?.disable();
+  await backgroundUploads.remove();
   if (videoRecorder) { await videoRecorder.stop().catch(() => {}); videoRecorder = null; }
   recorder.stop(); paintRecorder();
   if (!removed) $('upload-status').textContent = 'השליחה כובתה בדף הזה, אך ההגדרה לא נמחקה מהאחסון. יש למחוק את נתוני האתר לפני פתיחה נוספת.';
 };
 window.addEventListener('online', () => { if (uploadConfig) void uploadQueue.retry().catch(() => {}); });
+window.addEventListener('storage', event => {
+  if (event.key !== 'camlab.upload') return;
+  uploadQueue?.stop(); backgroundUploads.detach();
+  uploadConfig = initializeUploadConfig({ location: { hash: '' } }).config;
+  uploadQueue = uploadConfig ? new UploadQueue({ config: uploadConfig, onStatus: paintUploadStatus }) : null;
+  backgroundUploads = new BackgroundUploads({ queue: uploadQueue, ...backgroundOptions });
+  paintUploadConfig();
+  if (uploadQueue) void uploadQueue.retry().catch(() => {});
+  else paintUploadStatus({ state: 'disabled', message: 'שליחה לבדיקה: כבויה' });
+});
 $('camera-facing').addEventListener('change', () => { $('camera-device').value = ''; $('wide-camera-option').hidden = true; });
 $('camera-width').addEventListener('change', () => { if ($('camera-width').value === 'normal') $('camera-device').value = ''; });
 function guidanceVoice() {
@@ -458,7 +474,8 @@ function results(reason = 'finish') {
     // Start a durable write immediately on pagehide, using timeslice data already
     // delivered. The complete final recorder Blob replaces it if stop() finishes.
     const snapshot = reason === 'pagehide' ? capture?.snapshot() : null;
-    const savingSnapshot = snapshot && uploadConfig === consent ? uploadQueue.enqueue({ session: attemptSession, video: snapshot, skeleton, diagnostics }) : null;
+    const savingSnapshot = snapshot && uploadConfig === consent ? uploadQueue.enqueue({ session: attemptSession, video: snapshot, skeleton, diagnostics,
+      readyAt: Date.now() + 3000 }) : null;
     savingSnapshot?.catch(() => {});
     paintUploadStatus({ state: 'sending', message: 'מכינים את ההקלטה לשליחה…' });
     void (async () => {
@@ -505,7 +522,7 @@ function attemptDiagnostics(capture = videoRecorder) {
     totalFrames, thresholds: counter.t, framing: FRAMING, videoError: recordingError, video: capture?.diagnostics() || null, runtimeError,
     wakeLock: wakeLock.state, voicePlayback: labSpeech.snapshot(), timeline: { ...timeline,
       ...Object.fromEntries(['cameraStart', 'cameraReady', 'firstFrame', 'firstPose', 'firstFullBody', 'countdownStart', 'countStart', 'finish'].map(name => [name, attemptTimeline[name] ?? null])) },
-    uploadLog: readUploadLog(),
+    uploadLog: uploadQueue?.log || [],
     endReason, countStarted: attemptStarted != null,
     countNotStartedReason: attemptStarted == null ? 'no-count-start' : null,
     attempts: [counter, ...(pair ? [adult] : [])].map((c, i) => {

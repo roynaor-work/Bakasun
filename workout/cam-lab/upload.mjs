@@ -4,6 +4,9 @@ export const UPLOAD_PARTS = ['diagnostics', 'skeleton', 'video'];
 export const VIDEO_CHUNK_BYTES = 1_572_864;
 export const UPLOAD_LOG_KEY = 'camlab.upload.log';
 export const RETRY_DELAYS_MS = [2000, 5000, 15000];
+export const UPLOAD_TAG = 'camlab-upload';
+export const UPLOAD_DB_VERSION = 2;
+export const UPLOAD_VERSION = '20261012-background-1';
 const storageError = 'לא ניתן לשמור את ההגדרה במכשיר. אפשרו אחסון באתר ופתחו שוב את קישור ההגדרה.';
 const queueError = 'לא ניתן לשמור את הניסיון במכשיר. פנו מקום באחסון ונסו שוב; הניסיון עדיין לא נשלח.';
 const sendError = 'השליחה לבדיקה נכשלה';
@@ -15,16 +18,18 @@ class UploadError extends Error {
 export function requestTimeoutMs(bodyBytes) {
   return Math.max(60000, 20000 + 15000 * bodyBytes / 1_000_000);
 }
-export function readUploadLog(storage) {
-  try {
-    const entries = JSON.parse((storage || globalThis.localStorage)?.getItem(UPLOAD_LOG_KEY) || '[]');
-    if (!Array.isArray(entries)) return [];
-    return entries.slice(-30).filter(e => e && /^[a-zA-Z0-9-]{1,160}$/.test(e.session) && UPLOAD_PARTS.includes(e.part))
-      .map(e => ({ time: Number(e.time) || 0, session: e.session, part: e.part, chunk: Number.isInteger(e.chunk) ? e.chunk : null,
+export function safeUploadLog(entries) {
+  if (!Array.isArray(entries)) return [];
+  return entries.slice(-30).filter(e => e && (e.event === 'sync' || /^[a-zA-Z0-9-]{1,160}$/.test(e.session) && UPLOAD_PARTS.includes(e.part)))
+      .map(e => e.event === 'sync' ? { event: 'sync', time: Number(e.time) || 0,
+        actor: e.actor === 'sw' ? 'sw' : 'page', registered: e.registered === true } : ({ actor: e.actor === 'sw' ? 'sw' : 'page',
+        time: Number(e.time) || 0, session: e.session, part: e.part, chunk: Number.isInteger(e.chunk) ? e.chunk : null,
         bytes: Number(e.bytes) || 0, bodyBytes: Number(e.bodyBytes) || 0, durationMs: Number(e.durationMs) || 0,
         ...(e.result === 'stored' || e.result === 'assembled' || e.result === 'duplicate' ? { result: e.result } :
           { error: errorCodes.has(e.error) ? e.error : 'response' }) }));
-  } catch { return []; }
+}
+export async function readUploadLog(store = new IndexedDBUploadStore()) {
+  try { return safeUploadLog(await store.readLog()); } catch { return []; }
 }
 const uniqueToken = () => globalThis.crypto?.randomUUID?.() || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 
@@ -95,9 +100,10 @@ export class IndexedDBUploadStore {
   open() {
     if (!this.database) this.database = new Promise((resolve, reject) => {
       if (!this.indexedDB) { reject(new Error(queueError)); return; }
-      const request = this.indexedDB.open(this.name, 1);
+      const request = this.indexedDB.open(this.name, UPLOAD_DB_VERSION);
       request.onupgradeneeded = () => {
         if (!request.result.objectStoreNames.contains('sessions')) request.result.createObjectStore('sessions', { keyPath: 'session' });
+        if (!request.result.objectStoreNames.contains('state')) request.result.createObjectStore('state');
       };
       request.onsuccess = () => {
         const db = request.result;
@@ -109,15 +115,15 @@ export class IndexedDBUploadStore {
     });
     return this.database;
   }
-  async transaction(mode, operation) {
+  async transaction(mode, operation, name = 'sessions') {
     const db = await this.open();
     return new Promise((resolve, reject) => {
       let result;
-      const tx = db.transaction('sessions', mode);
+      const tx = db.transaction(name, mode);
       tx.oncomplete = () => resolve(result);
       tx.onabort = tx.onerror = () => reject(new Error(queueError));
       try {
-        const request = operation(tx.objectStore('sessions'));
+        const request = operation(tx.objectStore(name));
         if (request) request.onsuccess = () => { result = request.result; };
       } catch { try { tx.abort(); } catch { /* Already aborted. */ } reject(new Error(queueError)); }
     });
@@ -126,6 +132,84 @@ export class IndexedDBUploadStore {
   list() { return this.transaction('readonly', store => store.getAll()); }
   remove(session) { return this.transaction('readwrite', store => store.delete(session)); }
   clear() { return this.transaction('readwrite', store => store.clear()); }
+  getConfig() { return this.transaction('readonly', store => store.get(UPLOAD_STORAGE_KEY), 'state').then(validConfig); }
+  setConfig(config) { return this.transaction('readwrite', store => validConfig(config) ?
+    store.put(validConfig(config), UPLOAD_STORAGE_KEY) : store.delete(UPLOAD_STORAGE_KEY), 'state'); }
+  readLog() { return this.transaction('readonly', store => store.get(UPLOAD_LOG_KEY), 'state'); }
+  // All read/modify/write operations run in a single serialized IDB transaction.
+  async updateState(key, update) {
+    const db = await this.open();
+    return new Promise((resolve, reject) => {
+      let result;
+      const tx = db.transaction('state', 'readwrite'), store = tx.objectStore('state');
+      tx.oncomplete = () => resolve(result);
+      tx.onabort = tx.onerror = () => reject(new UploadError('storage'));
+      const request = store.get(key);
+      request.onsuccess = () => {
+        try {
+          const next = update(request.result); result = next.result;
+          if (next.value === null) store.delete(key);
+          else if (next.value !== undefined) store.put(next.value, key);
+        } catch { tx.abort(); }
+      };
+    });
+  }
+  appendLog(event) { return this.updateState(UPLOAD_LOG_KEY, entries => {
+    const log = safeUploadLog([...(entries || []), event]); return { value: log, result: log };
+  }); }
+  acquireLease(owner, now, ttl) { return this.updateState(UPLOAD_TAG, lease => !lease || lease.expires <= now || lease.owner === owner ?
+    { value: { owner, expires: now + ttl }, result: true } : { result: false }); }
+  renewLease(owner, now, ttl) { return this.updateState(UPLOAD_TAG, lease => lease?.owner === owner && lease.expires > now ?
+    { value: { owner, expires: now + ttl }, result: true } : { result: false }); }
+  releaseLease(owner) { return this.updateState(UPLOAD_TAG, lease => lease?.owner === owner ? { value: null } : {}); }
+  async revoke() {
+    const db = await this.open();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(['state', 'sessions'], 'readwrite');
+      tx.oncomplete = resolve; tx.onabort = tx.onerror = () => reject(new UploadError('storage'));
+      tx.objectStore('state').delete(UPLOAD_STORAGE_KEY); tx.objectStore('sessions').clear();
+    });
+  }
+  async putCurrent(record, owner = null, now = Date.now()) {
+    const db = await this.open();
+    return new Promise((resolve, reject) => {
+      let saved = false;
+      const tx = db.transaction(['state', 'sessions'], 'readwrite');
+      tx.oncomplete = () => resolve(saved); tx.onabort = tx.onerror = () => reject(new UploadError('storage'));
+      const request = tx.objectStore('state').get(UPLOAD_STORAGE_KEY);
+      request.onsuccess = () => {
+        if (request.result?.consentId !== record.consentId) return;
+        if (!owner) { tx.objectStore('sessions').put(record); saved = true; return; }
+        const lease = tx.objectStore('state').get(UPLOAD_TAG);
+        lease.onsuccess = () => {
+          if (lease.result?.owner === owner && lease.result.expires > now) { tx.objectStore('sessions').put(record); saved = true; }
+        };
+      };
+    });
+  }
+}
+
+export class UploadLock {
+  constructor({ store, locks = globalThis.navigator?.locks, now = Date.now, ttl = 120000,
+    setTimer = setTimeout, clearTimer = clearTimeout, onLost = () => {} } = {}) {
+    Object.assign(this, { store, locks, now, ttl, setTimer, clearTimer, onLost }); this.owner = uniqueToken();
+  }
+  async run(operation, { ifAvailable = false } = {}) {
+    if (this.locks?.request) return this.locks.request(UPLOAD_TAG, { ifAvailable }, lock => lock ? operation() : false);
+    // In-memory test stores have no cross-context persistence. Production always
+    // uses the atomic IDB lease when Web Locks is unavailable.
+    if (!this.store.acquireLease) return operation();
+    if (!await this.store.acquireLease(this.owner, this.now(), this.ttl)) return false;
+    let timer, finished = false, renewal = Promise.resolve();
+    const schedule = () => { timer = this.setTimer(() => {
+      renewal = this.store.renewLease(this.owner, this.now(), this.ttl).then(ok => {
+        if (!ok) this.onLost(); else if (!finished) schedule();
+      }).catch(() => this.onLost());
+    }, this.ttl / 3); };
+    schedule();
+    try { return await operation(); }
+    finally { finished = true; this.clearTimer(timer); await renewal; await this.store.releaseLease(this.owner); }
+  }
 }
 
 export async function blobToBase64(blob) {
@@ -145,27 +229,38 @@ function asBlob(value, part) {
 export class UploadQueue {
   constructor({ config = null, store = new IndexedDBUploadStore(), fetchImpl = globalThis.fetch,
     onStatus = () => {}, timeoutMs = 0,
-    setTimer = setTimeout, clearTimer = clearTimeout, logStorage } = {}) {
+    setTimer = setTimeout, clearTimer = clearTimeout, actor = 'page', locks = globalThis.navigator?.locks,
+    now = Date.now, persistConfig = true, onQueued = () => {} } = {}) {
     this.config = validConfig(config); this.store = store;
     // Native browser methods require their Window/Worker receiver, even when
     // dependency injection stores them on another object's property.
     this.fetchImpl = (...args) => fetchImpl.call(globalThis, ...args);
     this.onStatus = onStatus; this.timeoutMs = timeoutMs; this.epoch = 0;
     this.setTimer = (...args) => setTimer.call(globalThis, ...args);
-    this.clearTimer = (...args) => clearTimer.call(globalThis, ...args); this.logStorage = logStorage;
+    this.clearTimer = (...args) => clearTimer.call(globalThis, ...args);
+    this.actor = actor; this.now = now; this.onQueued = onQueued; this.log = []; this.deadline = Infinity;
+    this.lock = new UploadLock({ store, locks, now, setTimer: this.setTimer, clearTimer: this.clearTimer,
+      onLost: () => { this.epoch++; this.controller?.abort(); } });
+    this.ready = this.enabled ? (async () => {
+      if (persistConfig) await store.setConfig?.(this.config);
+      this.log = await readUploadLog(store);
+    })() : Promise.resolve();
+    this.ready.catch(() => {});
     this.running = null; this.controller = null; this.pending = 0; this.writes = new Set();
   }
   get enabled() { return this.config != null; }
   status(state, message, extra = {}) { this.onStatus({ state, message, pending: this.pending, total: 3, ...extra }); }
+  stop() { this.config = null; this.epoch++; this.controller?.abort(); this.pending = 0; }
   async disable() {
-    this.config = null; this.epoch++; this.controller?.abort(); this.pending = 0;
+    this.stop();
     this.status('disabled', 'שליחה לבדיקה: כבויה');
     // Also wait for a save already in progress so revoking consent cannot race
     // with a late IndexedDB write and resurrect a queued private recording.
     await Promise.allSettled([...this.writes]);
-    try { await this.store.clear(); } catch { /* Revocation still blocks every send. */ }
+    await this.ready.catch(() => {});
+    try { if (this.store.revoke) await this.store.revoke(); else await this.store.clear(); } catch { /* Revocation still blocks every send. */ }
   }
-  async enqueue({ session, video, skeleton, diagnostics }) {
+  async enqueue({ session, video, skeleton, diagnostics, readyAt = 0 }) {
     if (!this.enabled) return false;
     const epoch = this.epoch, config = this.config;
     if (typeof session !== 'string' || !/^[a-zA-Z0-9-]{1,160}$/.test(session)) throw new TypeError('מזהה ניסיון לא תקין.');
@@ -176,32 +271,54 @@ export class UploadQueue {
       if (blob.size > MAX_UPLOAD_BYTES) throw new RangeError(`הקובץ גדול מ־40MB (${part === 'video' ? 'וידאו' : part === 'skeleton' ? 'שלד' : 'אבחון'}). הניסיון לא נשלח.`);
       return { part, mime: blob.type || (part === 'video' ? 'video/webm' : 'application/json'), blob, acked: false };
     });
-    const record = { session, consentId: config.consentId, createdAt: Date.now(), parts };
-    const writing = this.store.put(record); this.writes.add(writing);
-    try { await writing; }
+    const record = { session, consentId: config.consentId, createdAt: Date.now(), readyAt, parts };
+    const writing = this.ready.then(() => this.store.putCurrent ? this.store.putCurrent(record) : this.store.put(record)); this.writes.add(writing);
+    let saved;
+    try { saved = await writing; }
     catch { if (epoch === this.epoch) this.status('error', queueError); throw new Error(queueError); }
     finally { this.writes.delete(writing); }
-    if (!this.enabled || epoch !== this.epoch) { await this.store.remove(session).catch(() => {}); return false; }
-    this.pending++; this.status('queued', 'הניסיון נשמר במכשיר וממתין לשליחה.'); return true;
+    if (!this.enabled || epoch !== this.epoch || saved === false) { await this.store.remove(session).catch(() => {}); return false; }
+    this.pending++; this.status('queued', 'הניסיון נשמר במכשיר וממתין לשליחה.');
+    void Promise.resolve(this.onQueued()).catch(() => {}); return true;
   }
-  retry() {
+  retry({ budgetMs = Infinity } = {}) {
     if (!this.enabled) return Promise.resolve(false);
     if (this.running) return this.running;
-    this.running = this.drain(this.epoch).finally(() => { this.running = null; });
+    const epoch = this.epoch;
+    this.pausedForBudget = false;
+    this.running = this.ready.then(() => this.backgroundReady).then(() => {
+      if (!this.isCurrent(epoch)) return false;
+      if (this.remoteRetry) return this.remoteRetry();
+      return this.lock.run(() => {
+        this.deadline = this.now() + budgetMs; return this.drain(epoch);
+      }, { ifAvailable: this.actor === 'sw' });
+    }).catch(() => {
+      if (this.isCurrent(epoch)) this.status('error', queueError);
+      return false;
+    }).finally(() => { this.running = null; });
     return this.running;
   }
   async save(record) {
-    const writing = this.store.put(record); this.writes.add(writing);
-    try { await writing; } catch { throw new UploadError('storage'); }
+    const writing = this.store.putCurrent ? this.store.putCurrent(record,
+      this.lock.locks?.request ? null : this.lock.owner, this.now()) : this.store.put(record); this.writes.add(writing);
+    try { if (await writing === false) throw new UploadError('storage'); } catch { throw new UploadError('storage'); }
     finally { this.writes.delete(writing); }
   }
-  logUpload(event) {
-    try {
-      const storage = this.logStorage || globalThis.localStorage;
-      storage?.setItem(UPLOAD_LOG_KEY, JSON.stringify([...readUploadLog(storage), event].slice(-30)));
-    } catch { /* Logging failure must not prevent a durable upload. */ }
+  async logUpload(event) {
+    event = { ...event, actor: this.actor };
+    this.log = safeUploadLog([...this.log, event]);
+    try { if (this.store.appendLog) this.log = await this.store.appendLog(event); }
+    catch { /* Logging failure must not prevent a durable upload. */ }
   }
   isCurrent(epoch, config = this.config) { return this.enabled && epoch === this.epoch && config === this.config; }
+  async canSend(epoch, config) {
+    if (!this.isCurrent(epoch, config)) return false;
+    if (this.now() >= this.deadline) { this.pausedForBudget = true; return false; }
+    if (this.store.getConfig && (await this.store.getConfig())?.consentId !== config.consentId) return false;
+    if (!this.lock.locks?.request && this.store.renewLease &&
+      !await this.store.renewLease(this.lock.owner, this.now(), this.lock.ttl)) return false;
+    return this.isCurrent(epoch, config);
+  }
   async pause(delay, epoch) {
     if (!this.isCurrent(epoch)) return;
     const controller = new AbortController(); this.controller = controller;
@@ -226,9 +343,14 @@ export class UploadQueue {
       if (!this.enabled || this.config !== config) return false;
       // The final video request also waits for assembly of the entire file.
       const finalChunk = chunk != null && chunk === Math.max(1, Math.ceil(part.blob.size / VIDEO_CHUNK_BYTES)) - 1;
+      const fullTimeout = Math.max(this.timeoutMs, requestTimeoutMs(bodyBytes), finalChunk ? 5000 * part.blob.size / 1_000_000 : 0);
+      const timeout = this.actor === 'sw' || this.store.acquireLease && !this.lock.locks?.request ? Math.min(90000, fullTimeout) : fullTimeout;
+      // Leave enough time for a whole request and its durable acknowledgement.
+      // Yield between chunks, rather than aborting an accepted chunk at a deadline.
+      if (this.deadline - this.now() < timeout + 1000) { this.pausedForBudget = true; return false; }
       const timedOut = new Promise((_, reject) => {
         timer = this.setTimer(() => { controller.abort(); reject(new UploadError('timeout')); },
-          Math.max(this.timeoutMs, requestTimeoutMs(bodyBytes), finalChunk ? 5000 * part.blob.size / 1_000_000 : 0));
+          timeout);
       });
       const { response, result } = await Promise.race([this.fetchImpl(config.endpoint, {
         method: 'POST', headers: { 'Content-Type': 'text/plain' }, body, signal: controller.signal,
@@ -250,18 +372,18 @@ export class UploadQueue {
         if (typeof result.assembled !== 'boolean' || chunk === chunks - 1 && !result.assembled ||
           result.assembled && result.duplicate !== true && result.bytes !== part.blob.size) throw new UploadError('response');
       }
-      this.logUpload({ ...event, bodyBytes, durationMs: Date.now() - started,
+      await this.logUpload({ ...event, bodyBytes, durationMs: Date.now() - started,
         result: result.duplicate ? 'duplicate' : result.assembled ? 'assembled' : 'stored' });
       return result;
     } catch (error) {
       const safe = error instanceof UploadError ? error : new UploadError('network');
-      this.logUpload({ ...event, bodyBytes, durationMs: Date.now() - started, error: safe.code });
+      await this.logUpload({ ...event, bodyBytes, durationMs: Date.now() - started, error: safe.code });
       throw safe;
     } finally { this.clearTimer(timer); if (this.controller === controller) this.controller = null; }
   }
   async sendWithRetries(config, record, part, chunk, epoch) {
     for (let attempt = 0; attempt < 4; attempt++) {
-      if (!this.isCurrent(epoch, config)) return false;
+      if (!await this.canSend(epoch, config)) return false;
       this.status('sending', chunk == null ? `שולח ${partNames[part.part]}` :
         `שולח וידאו: חלק ${chunk + 1} מתוך ${Math.max(1, Math.ceil(part.blob.size / VIDEO_CHUNK_BYTES))}`,
       { part: UPLOAD_PARTS.indexOf(part.part) + 1, partName: part.part, session: record.session,
@@ -272,6 +394,7 @@ export class UploadQueue {
         error.chunk = chunk;
         // Retrying cannot repair protocol/auth errors; size-mismatch is repaired at file level.
         if (['size-mismatch', 'chunk-fields', 'chunk-data', 'secret', 'redirect'].includes(error.code) || attempt === 3) throw error;
+        if (this.now() + RETRY_DELAYS_MS[attempt] >= this.deadline) { this.pausedForBudget = true; return false; }
         await this.pause(RETRY_DELAYS_MS[attempt], epoch);
       }
     }
@@ -316,10 +439,16 @@ export class UploadQueue {
         if (!this.isCurrent(epoch, config)) return false;
         const own = records.filter(record => record.consentId === config.consentId);
         this.pending = own.length;
-        const batch = own.filter(record => !visited.has(record.session));
+        const batch = own.filter(record => !visited.has(record.session) && (record.readyAt || 0) <= this.now());
         if (!batch.length) {
+          const deferred = own.filter(record => !visited.has(record.session) && record.readyAt > this.now());
+          if (deferred.length) {
+            const delay = Math.min(...deferred.map(record => record.readyAt)) - this.now();
+            if (this.now() + delay >= this.deadline) { this.pausedForBudget = true; return false; }
+            await this.pause(delay, epoch); continue;
+          }
           if (failures.length) this.status('error', failures.at(-1).message, failures.at(-1).extra);
-          return failures.length === 0;
+          return failures.length === 0 && !own.length;
         }
         for (const record of batch) {
           visited.add(record.session);

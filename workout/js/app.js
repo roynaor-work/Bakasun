@@ -22,8 +22,8 @@ import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecordin
 import { exerciseName, workoutName } from './workout-copy.js?v=20261010-camera-1';
 import { SAY } from './say.js?v=20261010-camera-1';
 import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261010-camera-1';
-import { CameraUploads, cameraAvailable, cameraPrivacy, readCameraConsent } from './camera-session.mjs?v=20261010-camera-1';
-import { cameraScreen } from './camera-screen.mjs?v=20261010-camera-1';
+import { CameraUploads, cameraAvailable, cameraPrivacy, readCameraConsent } from './camera-session.mjs?v=20261012-background-1';
+import { cameraScreen } from './camera-screen.mjs?v=20261012-background-1';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
@@ -44,7 +44,8 @@ const cameraUploads = new CameraUploads({ onStatus: status => {
     box.querySelector('button').onclick = () => cameraUploads.retry();
   }
   box.hidden = status.state === 'disabled' || status.state === 'recording';
-  box.querySelector('span').textContent = status.state === 'error' ? status.message?.startsWith('לא נשמר') ? status.message : 'השליחה נעצרה. נסה שוב' : status.message;
+  const message = status.state === 'error' ? status.message?.startsWith('לא נשמר') ? status.message : 'השליחה נעצרה. נסה שוב' : status.message;
+  box.querySelector('span').textContent = message + (['queued', 'sending', 'error'].includes(status.state) && status.backgroundMessage ? ` · ${status.backgroundMessage}` : '');
   box.querySelector('button').hidden = status.state !== 'error';
 } });
 void cameraUploads.retry();

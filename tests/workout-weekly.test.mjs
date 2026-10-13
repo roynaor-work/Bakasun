@@ -117,8 +117,8 @@ test('calendar weeks cross year and daylight-saving boundaries and date-only val
   }
 });
 
-test('app imports retain their version; only the video modules and app entry use the signed-video version', async () => {
-  const version = APP_VERSION, videoVersion = '20261011-vids-signed-1';
+test('changed entrypoints and upload modules use the current version; other assets retain theirs', async () => {
+  const version = '20261010-camera-1', videoVersion = '20261011-vids-signed-1';
   async function inspect(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const url = new URL(entry.name + (entry.isDirectory() ? '/' : ''), directory);
@@ -127,7 +127,8 @@ test('app imports retain their version; only the video modules and app entry use
       const content = await readFile(url, 'utf8');
       for (const match of content.matchAll(/\b(?:from\s*|import\s*\(\s*|import\s+)(['"])([^'"]+)\1/g)) {
         if (match[2].startsWith('node:')) continue;
-        const expected = /(?:^|\/)vids(?:-cloud)?\.js\?/.test(match[2]) ? videoVersion : version;
+        const expected = /(?:^|\/)vids(?:-cloud)?\.js\?/.test(match[2]) ? videoVersion :
+          /(?:^|\/)(?:camera-session\.mjs|camera-screen\.mjs|upload\.mjs|upload-background\.mjs|video-recording\.mjs)\?/.test(match[2]) ? APP_VERSION : version;
         assert.ok(match[2].endsWith('?v=' + expected), url.pathname + ': ' + match[2]);
       }
     }
@@ -136,7 +137,7 @@ test('app imports retain their version; only the video modules and app entry use
   for (const path of ['../workout/index.html', '../workout/voice-rec/index.html']) {
     const content = await readFile(new URL(path, import.meta.url), 'utf8');
     for (const match of content.matchAll(/(?:src|href)="([^"\n]+\.(?:js|css)(?:\?[^"\n]+)?)"/g)) {
-      const expected = path === '../workout/index.html' && match[1].startsWith('js/app.js?') ? videoVersion : version;
+      const expected = path === '../workout/index.html' && match[1].startsWith('js/app.js?') ? APP_VERSION : version;
       assert.ok(match[1].endsWith('?v=' + expected), path + ': ' + match[1]);
     }
   }

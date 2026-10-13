@@ -3,10 +3,11 @@ import { EXERCISES, RepCounter, PoseFilter, statusCode } from '../cam-lab/counte
 import { RestGate } from '../cam-lab/feedback.mjs?v=20261010-camera-1';
 import { placementDistance } from '../cam-lab/placement.mjs?v=20261010-camera-1';
 import { SkeletonRecorder } from '../cam-lab/recording.mjs?v=20261010-camera-1';
-import { VideoRecorder, VIDEO_LIMIT_MS } from '../cam-lab/video-recording.mjs?v=20261010-camera-1';
-import { UploadQueue, initializeUploadConfig, createSessionId } from '../cam-lab/upload.mjs?v=20261010-camera-1';
+import { VideoRecorder, VIDEO_LIMIT_MS } from '../cam-lab/video-recording.mjs?v=20261012-background-1';
+import { UploadQueue, initializeUploadConfig, createSessionId } from '../cam-lab/upload.mjs?v=20261012-background-1';
+import { BackgroundUploads, NEXT_OPEN_MESSAGE } from '../cam-lab/upload-background.mjs?v=20261012-background-1';
 
-export const APP_VERSION = '20261010-camera-1';
+export const APP_VERSION = '20261012-background-1';
 export const cameraAvailable = (profile, id) => profile.camera === true && EXERCISES.includes(id);
 // Never pass the application's router fragment to the lab initializer.
 export const readCameraConsent = storage => initializeUploadConfig({ storage, location: { hash: '' } }).config;
@@ -21,10 +22,20 @@ export class CameraUploads {
     const config = readCameraConsent(this.storage);
     if (JSON.stringify(config) === JSON.stringify(this.config)) return;
     const disabling = this.queue?.disable();
-    this.ready = Promise.allSettled([this.ready, disabling]);
+    const removing = this.background?.remove();
+    this.ready = Promise.allSettled([this.ready, disabling, removing]);
     this.unsaved.clear(); this.videoMissing.clear(); this.config = config;
-    this.queue = config ? this.queueFactory({ config, onStatus: status => this.onStatus(status.state === 'sent' && this.videoMissing.has(status.session) ?
-      { ...status, state: 'error', message: 'הסרטון חסר. נסה שוב עם המצלמה' } : status) }) : null;
+    this.queue = config ? this.queueFactory({ config, persistConfig: false, onStatus: status => this.onStatus(status.state === 'sent' && this.videoMissing.has(status.session) ?
+      { ...status, state: 'error', message: 'הסרטון חסר. נסה שוב עם המצלמה' } :
+      { ...status, backgroundMessage: this.background?.supported ? '' : NEXT_OPEN_MESSAGE }) }) : null;
+    // Wait for old revocation before copying the replacement configuration.
+    const queue = this.queue;
+    this.ready = this.ready.then(async () => {
+      if (queue !== this.queue) return;
+      if (queue) { await queue.ready; await queue.store.setConfig?.(config); }
+      this.background = new BackgroundUploads({ queue });
+      return this.background.ready;
+    }).catch(() => this.onStatus({ state: 'error', message: 'לא נשמר. השאר פתוח ונסה שוב' }));
   }
   send(payload, queue = this.queue) {
     if (this.saving.has(payload.session)) return this.saving.get(payload.session);
@@ -148,6 +159,7 @@ export class CameraAttempt {
       target: this.target, counted: this.result.counted, attemptCount: this.counter.count, endReason: this.endReason,
       seconds: this.result.seconds, camera: this.camera, model: this.model, modelHistory: this.modelHistory,
       totalFrames: this.frames, inferenceMs: this.inferenceMs / Math.max(1, this.frames),
+      uploadLog: this.queue.log || [],
       thresholds: this.counter.t, preparation: this.probe.snapshot(), diagnostics: this.counter.snapshot(),
       rejected: this.counter.rejected, reasons: this.counter.reasons, videoError: this.videoError, runtimeError: this.runtimeError };
     await this.uploads.send({ session: this.session, video: video || new Blob([], { type: 'video/webm' }),

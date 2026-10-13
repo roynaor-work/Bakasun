@@ -1,4 +1,4 @@
-import { MAX_UPLOAD_BYTES } from './upload.mjs';
+import { MAX_UPLOAD_BYTES } from './upload.mjs?v=20261012-background-1';
 export const VIDEO_LIMIT_MS = 4 * 60 * 1000;
 export const VIDEO_BITRATE = 800000;
 export const VIDEO_FRAME_RATE = 15;
