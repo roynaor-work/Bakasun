@@ -463,9 +463,13 @@ export class IslandInterface {
     const modal = this.openModal('avatar.title', 'avatar.subtitle');
     modal.classList.add('avatar-modal');
     if (!this.engine.state.avatar.created) modal.querySelector('[data-action=close-modal]').hidden = true;
+    const content = el('div', 'avatar-scroll');
+    const close = modal.querySelector('[data-action=close-modal]');
+    content.append(...[...modal.children].filter(node => node !== close));
+    modal.append(content);
     const draft = { ...this.engine.state.avatar };
     const preview = el('div', 'avatar-preview');
-    modal.append(preview);
+    content.append(preview);
     const previewCanvas = el('canvas', 'avatar-preview-canvas');
     previewCanvas.setAttribute('aria-label', this.t('avatar.preview'));
     preview.append(previewCanvas);
@@ -498,11 +502,11 @@ export class IslandInterface {
         };
         choices.append(b);
       }
-      field.append(choices); modal.append(field);
+      field.append(choices); content.append(field);
     }
     const start = button(this.t('avatar.start'), 'avatar-start', 'primary-button avatar-start');
     start.onclick = () => { this.engine.setAvatar({ ...draft, created: true }); this.closeModal(); this.toast('tutorial.welcome'); };
-    modal.append(start);
+    const footer = el('footer', 'avatar-footer'); footer.append(start); modal.append(footer);
   }
   showParent() {
     const modal = this.openModal('parent.title', 'parent.subtitle');
