@@ -1,0 +1,70 @@
+{
+  "browser": "155.0.8059.79",
+  "environment": "Desktop Chromium with ANGLE/SwiftShader; viewport checks, not a physical Android 10 device",
+  "deploymentScope": "Private server exposes only workout/island/; all requests are audited against that folder",
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "tutorialSteps": 5,
+      "buildingTypes": 17,
+      "screenshots": [
+        "island-desktop-tutorial.png",
+        "island-desktop-green.png",
+        "island-desktop-red.png",
+        "island-desktop-info.png"
+      ],
+      "performance": {
+        "triangles": 28800,
+        "calls": 81,
+        "fps": 10,
+        "citizens": 4,
+        "pixelRatio": 1,
+        "quality": "low",
+        "avatarLoaded": true,
+        "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "rafFps": 8.287201246395066,
+        "p95FrameMs": 166.59999999999945,
+        "sampleMs": 3016.7000000000007
+      },
+      "errors": [],
+      "externalRequests": [],
+      "outsideIslandRequests": [],
+      "failedRequests": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "tutorialSteps": 5,
+      "buildingTypes": 17,
+      "screenshots": [
+        "island-phone-tutorial.png",
+        "island-phone-green.png",
+        "island-phone-red.png",
+        "island-phone-info.png",
+        "island-phone-landscape.png"
+      ],
+      "performance": {
+        "triangles": 28800,
+        "calls": 81,
+        "fps": 29,
+        "citizens": 4,
+        "pixelRatio": 1,
+        "quality": "low",
+        "avatarLoaded": true,
+        "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "rafFps": 25.525425976264668,
+        "p95FrameMs": 50.09999999999991,
+        "sampleMs": 3016.6
+      },
+      "errors": [],
+      "externalRequests": [],
+      "outsideIslandRequests": [],
+      "failedRequests": []
+    }
+  ]
+}
