@@ -1,7 +1,8 @@
 // אחסון מקומי בדפדפן. הנתונים נשארים במכשיר; מחיקה רק דרך ההגדרות ובאישור.
+import { outdoorTask, outdoorStars } from './outdoors.js?v=20261014-w2g-1';
 const KEY = 'kidfit.v1';
 const DEFAULTS = { profile: { name: '', level: 'normal', rest: 15, sound: true, plan: null, giftEvery: 2, gameSeconds: 0, voice: true, camera: false, familyCode: '', prog: {}, unlockEvery: 10, ratioV2: true, noTimerV1: true, tokenMinutes: 3 }, sessions: [], tokens: 0, games: { bests: {}, played: {}, recent: [], count: 0, unlocked: null, progress: {} },
-  parent: { pinHash: '', lastSeen: '', feed: [], together: null }, basketball: [] };
+  parent: { pinHash: '', lastSeen: '', feed: [], together: null, outdoorEnabled: true, outdoorAge: 6, dadTestDate: '' }, basketball: [] };
 
 function load() {
   try {
@@ -43,7 +44,17 @@ export const store = {
   get progress() { return this.data.games.progress || (this.data.games.progress = {}); },
   setProgress(id, p) { this.progress[id] = p; this.save(); },
   recordGame(id, score, free = false, cost = 1) { const g = this.data.games; if (!free) this.data.tokens = Math.max(0, this.data.tokens - cost); /* cost: באולינג עולה 2 (משחק ארוך; רועי 30/09) */ /* free: משחק מול טלפון אחר, בלי מתנה */ g.played[id] = (g.played[id] || 0) + 1; if (score > (g.bests[id] || 0)) { g.bests[id] = score; g.bestAt = g.bestAt || {}; g.bestAt[id] = new Date().toISOString(); } g.recent = [id, ...g.recent.filter(x => x !== id)].slice(0, 6); g.count++; this.save(); },
-  save() { try { localStorage.setItem(KEY, JSON.stringify(this.data)); } catch { /* אין מקום או מצב פרטי: ממשיכים בלי לשמור */ } },
+  save() { try { localStorage.setItem(KEY, JSON.stringify(this.data)); return true; } catch { return false; } },
+  completeOutdoor(id, now = new Date()) {
+    const session = this.sessions.find(s => s.id === id), task = outdoorTask(session?.outdoor?.taskId);
+    if (this.parent.outdoorEnabled === false || !task || task.age !== session.outdoor.age ||
+        outdoorStars(session.outdoor) || !Number.isFinite(now.getTime())) return false;
+    const before = session.outdoor;
+    session.outdoor = { ...before, completedAt: now.toISOString() };
+    if (this.save()) return true;
+    session.outdoor = before;
+    return false;
+  },
   setProfile(patch) { Object.assign(this.data.profile, patch); this.save(); },
   addSession(s) { this.data.sessions.push(s); this.save(); },
   removeSession(id) { this.data.sessions = this.data.sessions.filter(s => s.id !== id); this.save(); },

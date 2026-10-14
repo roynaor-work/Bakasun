@@ -77,9 +77,10 @@ try:
 
         page.goto(origin + '/workout/voice-rec/')
         page.locator('#line').wait_for()
-        lines = page.evaluate("async ()=>(await import('../js/voice-lines.js?v=20261010-camera-1')).VOICE_LINES.map(l=>l.text)")
-        camera_lines = page.evaluate("async ()=>(await import('../js/voice-lines.js?v=20261010-camera-1')).VOICE_LINES.filter(l=>l.id.startsWith('camera-')).length")
-        assert len(lines) == 202 + camera_lines and camera_lines == 13
+        lines = page.evaluate("async ()=>(await import('../js/voice-lines.js?v=20261014-w2g-1')).VOICE_LINES.map(l=>l.text)")
+        camera_lines = page.evaluate("async ()=>(await import('../js/voice-lines.js?v=20261014-w2g-1')).VOICE_LINES.filter(l=>l.id.startsWith('camera-')).length")
+        finish_lines = page.evaluate("async ()=>(await import('../js/voice-lines.js?v=20261014-w2g-1')).VOICE_LINES.filter(l=>l.id.startsWith('outdoor-')||l.id.startsWith('dad-test-')).length")
+        assert len(lines) == 202 + camera_lines + finish_lines and camera_lines == 20 and finish_lines == 31
         for index, text in enumerate(lines):
             assert page.locator('#line').inner_text() == text
             plain(text)

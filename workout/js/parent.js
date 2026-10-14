@@ -1,12 +1,14 @@
 // מצב הורים: רק אבא פותח, עם קוד סודי. רואה את האימונים של הילד מהענן ומנהל את יומן הכדורסל.
 import { exerciseName, workoutName } from './workout-copy.js?v=20261010-camera-1';
-import { store } from './store.js?v=20261010-camera-1';
+import { store } from './store.js?v=20261014-w2g-1';
 import * as cloud from './cloud.js?v=20261010-camera-1';
-import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid, scaleTarget } from './logic.js?v=20261010-camera-1';
+import { BB_DRILLS, bbDrillById, bbStats, pct, streak, summarize, fmtDate, fmtTime, uid, scaleTarget } from './logic.js?v=20261014-w2g-1';
 import { EXERCISES, byId } from './exercises.js?v=20261010-camera-1';
 import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=20261010-camera-1';
-import { togetherChoice, togetherLabel } from './together.js?v=20261010-camera-1';
-import { normalizePlan, validatePlan, reportSessions, weeklyReport } from './weekly.js?v=20261010-camera-1';
+import { togetherChoice, togetherLabel } from './together.js?v=20261014-w2g-1';
+import { normalizePlan, validatePlan, reportSessions, weeklyReport } from './weekly.js?v=20261014-w2g-1';
+import { outdoorAge } from './outdoors.js?v=20261014-w2g-1';
+import { validTestDate, localDateKey } from './dad-test.js?v=20261014-w2g-1';
 
 let ctx = null; // { mount, esc, go, $ } מהאפליקציה
 export function initParent(c) { ctx = c; }
@@ -77,6 +79,20 @@ export async function parentHome() {
       <button class="btn primary big" data-go="#/parent-together">👨‍👦 בחירת פעילות: אבא ואני</button>
       <button class="btn big" data-go="#/parent-week">📅 תכנון השבוע ודוח שבועי</button>
       <button class="btn big" data-go="#/basketball">🏀 יומן הכדורסל שלנו</button>
+      <section class="card stack" aria-labelledby="outdoor-settings-heading">
+        <h2 id="outdoor-settings-heading">עכשיו החוצה 🌳</h2>
+        <label class="row"><input type="checkbox" id="outdoor-enabled" ${store.parent.outdoorEnabled !== false ? 'checked' : ''}> משחק קצר בחוץ אחרי כל אימון</label>
+        <label class="field">גיל הילד<select id="outdoor-age">${[6, 7, 8, 9].map(age => `<option value="${age}" ${outdoorAge(store.parent.outdoorAge) === age ? 'selected' : ''}>${age}</option>`).join('')}</select></label>
+        <p class="muted small">הילד מקבל כוכב נוסף כשמסמן שעשה את המשימה. הגיל והבחירה נשמרים במכשיר הזה.</p>
+        <p class="small" id="outdoor-settings-status" role="status"></p>
+      </section>
+      <section class="card stack" aria-labelledby="dad-test-heading">
+        <h2 id="dad-test-heading">מבחן עם אבא 📅</h2>
+        <label class="field">תאריך למבחן אימון גוף מלא<input type="date" id="dad-test-date" min="${localDateKey()}" value="${esc(validTestDate(store.parent.dadTestDate))}"></label>
+        <p class="muted small">שלושה ימים לפני המבחן הדמות תזכיר לילד כמה ימים נשארו. ביום המבחן נכנסים ל״אבא ואני״ ועושים אימון גוף מלא עם סיכום שחוגג הצלחה.</p>
+        <div class="row wrap"><button class="btn primary" id="dad-test-save">שמירת התאריך</button><button class="btn ghost" id="dad-test-clear">ביטול המבחן</button></div>
+        <p class="small" id="dad-test-status" role="status"></p>
+      </section>
       ${sessions[0]?.games?.top?.length ? `<div class="card"><h3>🏆 השיאים שלו במשחקים <span class="muted small">(${sessions[0].games.count} משחקים)</span></h3><div class="list">${sessions[0].games.top.map((t, i) => `<div class="item"><span>${['🥇', '🥈', '🥉'][i] || (i + 1)}</span><span class="grow">${t.emoji} ${esc(t.name)}</span><b>${t.best}</b></div>`).join('')}</div></div>` : ''}
       <h2>האימונים של ${esc(sessions[0]?.name || 'הילד')}</h2>
       ${sessions.length ? sessions.map((s, i) => { const sum = summarize(s); return `
@@ -91,6 +107,26 @@ export async function parentHome() {
     </div>`);
     $('#refresh').onclick = load;
     $('#lock').onclick = () => { lockParent(); ctx.go('#/home'); };
+    const saveOptions = (patch, target) => {
+      const previous = { ...store.parent };
+      Object.assign(store.parent, patch);
+      const saved = store.save();
+      if (!saved) Object.assign(store.parent, previous);
+      $(target).textContent = saved ? 'נשמר במכשיר הזה.' : 'לא נשמר. נסו שוב.';
+      return saved;
+    };
+    $('#outdoor-enabled').onchange = e => {
+      if (!saveOptions({ outdoorEnabled: e.target.checked }, '#outdoor-settings-status')) e.target.checked = store.parent.outdoorEnabled !== false;
+    };
+    $('#outdoor-age').onchange = e => {
+      if (!saveOptions({ outdoorAge: Number(e.target.value) }, '#outdoor-settings-status')) e.target.value = outdoorAge(store.parent.outdoorAge);
+    };
+    $('#dad-test-save').onclick = () => {
+      const date = validTestDate($('#dad-test-date').value);
+      if (!date || date < localDateKey()) { $('#dad-test-status').textContent = 'בוחרים תאריך מהיום והלאה.'; return; }
+      saveOptions({ dadTestDate: date }, '#dad-test-status');
+    };
+    $('#dad-test-clear').onclick = () => { if (saveOptions({ dadTestDate: '' }, '#dad-test-status')) $('#dad-test-date').value = ''; };
     document.querySelectorAll('[data-toggle]').forEach(r => r.onclick = () => { const d = $('#pd-' + r.dataset.toggle); d.hidden = !d.hidden; });
   };
   async function load() {

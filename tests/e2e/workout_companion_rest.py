@@ -3,10 +3,10 @@
 Run a local server, then python3 tests/e2e/workout_companion_rest.py.
 """
 import os
-import re
 from datetime import datetime, timezone
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
+from workout_finish_helpers import check_versions
 
 BASE = os.environ.get('WORKOUT_TEST_URL', 'http://127.0.0.1:8765/workout/')
 OUTPUT = Path('/workspace/work')
@@ -109,8 +109,7 @@ with sync_playwright() as pw:
     expect(page.locator('.rest-card')).to_contain_text('הכי הרבה: 5')
     expect(page.locator('.companion-card')).to_contain_text('5 אימונים')
     assert data(page)['sessions'] == after['sessions']
-    modules = [url for url in requests if '.js?' in url and url.startswith(BASE)]
-    assert modules and all(url.endswith('?v=' + ('20261011-vids-signed-1' if re.search(r'/js/(?:app|vids|vids-cloud)\.js\?', url) else '20261010-camera-1')) for url in modules), modules
+    check_versions(requests)
     assert not errors, errors
     context.close()
 

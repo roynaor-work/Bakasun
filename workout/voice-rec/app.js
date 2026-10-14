@@ -1,5 +1,5 @@
-import { VOICE_LINES } from '../js/voice-lines.js?v=20261010-camera-1';
-import { trimVoiceBuffer } from '../js/voice-player.js?v=20261010-camera-1';
+import { VOICE_LINES } from '../js/voice-lines.js?v=20261014-w2g-1';
+import { trimVoiceBuffer } from '../js/voice-player.js?v=20261014-w2g-1';
 import { wavBlob, zipBlob } from './files.js?v=20261010-camera-1';
 import { openRecordings } from './storage.js?v=20261010-camera-1';
 

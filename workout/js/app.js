@@ -4,26 +4,28 @@ import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=
 import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js?v=20261010-camera-1';
 import { refreshVideos, refreshCloud, cloudUpload, setVideoFamily, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js?v=20261011-vids-signed-1';
 import { Figure, cycleMs } from './figure.js?v=20261010-camera-1';
-import { store } from './store.js?v=20261010-camera-1';
-import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261010-camera-1';
-import { beltCard } from './belts.js?v=20261010-camera-1';
+import { store } from './store.js?v=20261014-w2g-1';
+import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261014-w2g-1';
+import { beltCard } from './belts.js?v=20261014-w2g-1';
 import { companionCard, companionKit } from './companion.js?v=20261010-camera-1';
-import { restProgress, restCard, restBadges } from './rest-days.js?v=20261010-camera-1';
-import { FRAGMENTS } from './voice-lines.js?v=20261010-camera-1';
+import { restProgress, restCard, restBadges } from './rest-days.js?v=20261014-w2g-1';
+import { FRAGMENTS, VOICE_BY_ID } from './voice-lines.js?v=20261014-w2g-1';
+import { outdoorAge, outdoorTask, pickOutdoorTask, outdoorStars, pendingOutdoor } from './outdoors.js?v=20261014-w2g-1';
+import { dadTestReminder, dadTestToday, isDadTest } from './dad-test.js?v=20261014-w2g-1';
 import { GAMES, GAME_GROUPS, gameById, pickGift } from './games/index.js?v=20261010-camera-1';
-import { runGame } from './games/engine.js?v=20261010-camera-1';
+import { runGame } from './games/engine.js?v=20261014-w2g-1';
 import * as cloud from './cloud.js?v=20261010-camera-1';
 import { showLobby } from './games/lobby.js?v=20261010-camera-1';
-import { initParent, parentGate, parentHome, parentTogether, parentWeek, lockParent, basketball } from './parent.js?v=20261010-camera-1';
-import { normalizePlan } from './weekly.js?v=20261010-camera-1';
-import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261010-camera-1';
+import { initParent, parentGate, parentHome, parentTogether, parentWeek, lockParent, basketball } from './parent.js?v=20261014-w2g-1';
+import { normalizePlan } from './weekly.js?v=20261014-w2g-1';
+import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261014-w2g-1';
 import { playIntro } from './intro.js?v=20261010-camera-1';
-import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261010-camera-1';
+import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261014-w2g-1';
 import { exerciseName, workoutName } from './workout-copy.js?v=20261010-camera-1';
 import { SAY } from './say.js?v=20261010-camera-1';
 import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261010-camera-1';
 import { CameraUploads, cameraAvailable, cameraPrivacy, readCameraConsent } from './camera-session.mjs?v=20261013-frames-1';
-import { cameraScreen } from './camera-screen.mjs?v=20261013-frames-1';
+import { cameraScreen } from './camera-screen.mjs?v=20261014-w2g-1';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
@@ -79,7 +81,9 @@ const use3d = () => store.profile.stage3d !== false && webgl();
 const stageHtml = ex => hasVideo(ex.id) ? `<div class="exmedia" data-vid="${ex.id}"></div>` : use3d() ? `<div class="exmedia stage3d" data-ex3d="${ex.id}"></div>` : figSvg(ex.id);
 // אותה דמות מוכרת, בפוזה שקטה. כשל ב-WebGL משאיר דמות ותג אימונים ב-SVG.
 function wireCompanion(workouts) {
-  const box = app.querySelector('[data-companion-portrait]'); if (!box) return;
+  app.querySelectorAll('[data-companion-portrait]').forEach(box => wireCompanionPortrait(box, workouts));
+}
+function wireCompanionPortrait(box, workouts) {
   const standing = { frames: [[byId['jumping-jacks'].frames[0][0], 1000]], view3d: 'front' };
   const fallback = () => {
     if (!box.isConnected) return;
@@ -179,6 +183,11 @@ function route() {
   if (!['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) lockParent();
   (routes[path] || home)(arg);
   renderNav(path);
+  const reminder = dadTestReminder(store.parent.dadTestDate);
+  if (!lastDadReminder && reminder && !['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) {
+    lastDadReminder = reminder.key;
+    sayQuick(voiceText(reminder.voiceId));
+  }
 }
 function renderNav(path) {
   const tabs = [['home', '🏠', 'היום'], ['exercises', '🤸', 'תרגילים'], ['arcade', '🎮', 'משחקים'], ['history', '📈', 'מעקב'], ['settings', '⚙️', 'הגדרות']];
@@ -189,6 +198,37 @@ window.addEventListener('hashchange', route);
 const name = () => store.profile.name.trim();
 const hi = () => name() ? `היי, ${esc(name())}!` : 'היי, אלוף!';
 const blocksText = p => (p.blocks || []).map(b => b.name === 'האימון' ? `${b.items.length} תרגילים${b.rounds > 1 ? ` × ${b.rounds} סבבים` : ''}` : b.name).join(' ← ');
+let lastDadReminder = '';
+const voiceText = id => VOICE_BY_ID[id].text;
+function outdoorCard(session) {
+  if (store.parent.outdoorEnabled === false) return '';
+  const task = outdoorTask(session?.outdoor?.taskId);
+  if (!task) return '';
+  const completed = outdoorStars(session.outdoor);
+  return `<section class="card stack outdoor-card" data-outdoor-session="${esc(session.id)}" aria-labelledby="outdoor-heading">
+    <h2 id="outdoor-heading">עכשיו החוצה 🌳</h2>
+    <h3>${esc(task.name)}</h3><p>${esc(voiceText(task.voiceId))}</p>
+    <button class="btn" id="outdoor-hear">לשמוע 🔊</button>
+    <button class="btn primary big" id="outdoor-done" ${completed ? 'disabled' : ''}>${completed ? 'עשיתי ⭐' : 'עשיתי'}</button>
+    <p role="status" id="outdoor-status">${completed ? esc(voiceText('outdoor-done')) : 'אחרי המשחק מחכה לך עוד כוכב.'}</p>
+  </section>`;
+}
+function wireOutdoor(session) {
+  const button = $('#outdoor-done'); if (!button) return;
+  $('#outdoor-hear').onclick = () => speak(voiceText(outdoorTask(session.outdoor.taskId).voiceId));
+  button.onclick = () => {
+    if (!store.completeOutdoor(session.id)) {
+      $('#outdoor-status').textContent = outdoorStars(session.outdoor) ? voiceText('outdoor-done') : 'עוד לא נשמר. ננסה שוב.';
+      return;
+    }
+    button.disabled = true; button.textContent = 'עשיתי ⭐';
+    $('#outdoor-status').textContent = voiceText('outdoor-done');
+    const stars = $('#session-stars');
+    if (stars) { const sum = summarize(session); stars.textContent = '★'.repeat(sum.stars); stars.setAttribute('aria-label', `${sum.stars} כוכבים על מאמץ ומשחק בחוץ`); }
+    if (store.profile.familyCode) cloud.push(store.profile.familyCode, 'workout', session.id, { ...session, name: store.profile.name, level: store.profile.level, games: gamesSummary() });
+    speak(voiceText('outdoor-done'));
+  };
+}
 
 // ---- בית: האימון של היום ----
 function home() {
@@ -200,6 +240,8 @@ function home() {
   const today = todayId ? programById[todayId] : null;
   const week = weekDays(store.sessions, now);
   const nextLevel = suggestLevel(store.sessions, store.profile.level);
+  const reminder = dadTestReminder(store.parent.dadTestDate);
+  const outdoor = pendingOutdoor(store.sessions);
   mount(`
   <div class="stack">
     <section class="hero">
@@ -213,6 +255,13 @@ function home() {
     </section>
 
     ${beltCard(st.workouts)}
+    ${reminder ? `<section class="card stack dad-test-reminder" role="status">
+      <h2>מבחן עם אבא 👨‍👦</h2><p data-dad-test-days="${reminder.days}">${esc(voiceText(reminder.voiceId))}</p>
+      <div class="companion-portrait" data-companion-portrait aria-hidden="true"></div>
+      <button class="btn" id="dad-test-hear">לשמוע 🔊</button>
+      ${reminder.days === 0 ? '<button class="btn primary big" data-go="#/together">למבחן עם אבא</button>' : ''}
+    </section>` : ''}
+    ${outdoorCard(outdoor)}
 
     <div class="card stack">
       <h2>אבא ואני 👨‍👦</h2>
@@ -262,13 +311,19 @@ function home() {
   </div>`);
   const lu = $('#levelup'); if (lu) lu.onclick = () => { store.setProfile({ level: nextLevel }); home(); };
   wireCompanion(st.workouts);
+  wireOutdoor(outdoor);
+  if (reminder) {
+    $('#dad-test-hear').onclick = () => speak(voiceText(reminder.voiceId));
+    if (lastDadReminder !== reminder.key) { lastDadReminder = reminder.key; speak(voiceText(reminder.voiceId)); }
+  }
   const rs = $('#resume'); if (rs) rs.onclick = () => { W = loadW(); if (W) go('#/workout'); else home(); };
   const dc = $('#discard'); if (dc) dc.onclick = () => { if (confirm('לבטל את האימון שבאמצע? מה שסימנת עד עכשיו לא יישמר.')) { discardW(); home(); } };
 }
 
 // ---- אבא ואני: בחירת ההורה, ואז שנינו מוכנים באותו מכשיר ----
 function together() {
-  const choice = togetherChoice(store.parent.together, programById, byId);
+  const testDate = dadTestToday(store.parent.dadTestDate);
+  const choice = testDate ? { mode: 'workout', programId: 'full' } : togetherChoice(store.parent.together, programById, byId);
   const activity = buildTogetherWorkout(choice, programById, byId, store.profile.level, choice?.mode === 'workout' ? store.progBoost(choice.programId) : {});
   if (!activity) {
     mount(`<div class="stack">
@@ -283,6 +338,7 @@ function together() {
     <div class="card stack">
       <span class="pill solid">${esc(togetherLabel(choice))}</span>
       <h2>${esc(activity.program.name)}</h2>
+      ${testDate ? `<p class="pill solid">${esc(voiceText('dad-test-in-0'))}</p>` : ''}
       <p>אבא ואני עושים את התרגילים יחד. כל אחד בקצב שלו, ואפשר לנוח כשצריך.</p>
       <p class="muted small">סופרים רק את התנועות שלך. אבא זז איתך.</p>
       <div class="list">${activity.items.map(it => `<div class="item"><span class="grow">${esc(it.name)}</span><span class="pill solid">${targetText(it)}</span></div>`).join('')}</div>
@@ -302,7 +358,7 @@ function together() {
     $('#'+ who + '-ready').textContent = (who === 'child' ? 'אני מוכן' : 'אבא מוכן') + (ready[who] ? ' ✓' : '');
     $('#together-begin').disabled = !ready.child || !ready.dad;
   };
-  $('#together-begin').onclick = () => { if (ready.child && ready.dad) beginWorkout(activity.program, activity.items, activity.choice); };
+  $('#together-begin').onclick = () => { if (ready.child && ready.dad) beginWorkout(activity.program, activity.items, activity.choice, testDate); };
 }
 
 // ---- תצוגה מקדימה והתחלה ----
@@ -526,9 +582,9 @@ function saveW() { try { if (!W) return; if (W.phase !== 'done') localStorage.se
 function loadW() { try { const w = JSON.parse(localStorage.getItem(W_KEY) || 'null'); if (!w || Date.now() - w.savedAt > 6 * 3600e3) { localStorage.removeItem(W_KEY); return null; } if (w.gift) w.gift = gameById[w.gift] || null; if (!w.gift && w.phase === 'gift') w.phase = w.afterGift || 'exercise'; if (w.phase === 'intro') w.phase = 'exercise'; return w; } catch { return null; } }
 const pendingWorkout = () => (W ? null : loadW());
 function discardW() { W = null; try { localStorage.removeItem(W_KEY); } catch { /* */ } }
-function beginWorkout(program, items, together = null) {
+function beginWorkout(program, items, together = null, dadTestDate = '') {
   W = { program, items: items.map(i => ({ ...i, done: 0, skipped: false })), idx: 0, phase: together || store.profile.intro === false ? 'exercise' : 'intro', startedAt: Date.now(), saved: false, mainDone: 0, gift: null, afterGift: null, gamesPlayed: 0,
-    ...(together ? { together: { ...together } } : {}) };
+    ...(together ? { together: { ...together } } : {}), ...(dadTestDate ? { dadTestDate } : {}) };
   go('#/workout');
 }
 
@@ -763,7 +819,11 @@ function saveSession() {
   if (W.saved) return null;
   const s = { id: uid(), date: new Date().toISOString(), programId: W.program.id, programName: W.program.name, emoji: W.program.emoji,
     duration: Math.round((Date.now() - W.startedAt) / 1000), items: W.items.map(i => ({ exId: i.exId, name: i.name, type: i.type, target: i.target, done: i.done, skipped: i.skipped, round: i.round, block: i.block, secs: i.secs || 0 })),
-    ...(W.together ? { together: { ...W.together } } : {}) };
+    ...(W.together ? { together: { ...W.together } } : {}), ...(W.dadTestDate ? { dadTestDate: W.dadTestDate } : {}) };
+  if (store.parent.outdoorEnabled !== false) {
+    const age = outdoorAge(store.parent.outdoorAge), task = pickOutdoorTask(age, store.sessions);
+    s.outdoor = { taskId: task.id, age };
+  }
   // זמן אמיתי: תרגיל שסומן מהר מדי (פחות מ-45% מהזמן הצפוי) לא נספר. המתנות לפי דקות אמיתיות
   const h = honestTime(s.items, store.profile.rest || 0); s.honestSeconds = h.seconds; s.fastItems = h.fast;
   s.tokensEarned = tokensFor(h.seconds, store.profile.tokenMinutes || 3);
@@ -830,8 +890,9 @@ function donePhase() {
   const s = res ? res.session : store.sessions.at(-1);
   if (!s.feedback) return askFeedback(s, W.program, W.gamesPlayed, msg => { W.adjustMsg = msg; donePhase(); });
   const sum = summarize(s);
+  const testSuccess = isDadTest(s);
   const newBadges = res ? res.newBadges : [];
-  if (sum.stars) { fanfare(); confetti(); }
+  if (sum.stars || testSuccess) { fanfare(); confetti(); }
   const st = stats(store.sessions);
   const cheer = sum.rewardMessage;
   const rest = restProgress(store.sessions);
@@ -840,36 +901,40 @@ function donePhase() {
   mount(`
   <div class="stack">
     <section class="hero center pop">
-      <div class="stars" role="img" aria-label="${sum.stars} כוכבים על מאמץ והשלמה">${'★'.repeat(sum.stars)}<span class="off">${'★'.repeat(3 - sum.stars)}</span></div>
-      <h1>סיימת! ${W.program.emoji}</h1>
-      <p class="muted">${cheer}</p>
+      <div class="stars" id="session-stars" role="img" aria-label="${sum.stars} כוכבים על מאמץ והשלמה">${'★'.repeat(sum.stars)}${testSuccess ? '' : `<span class="off">${'★'.repeat(Math.max(0, 3 - sum.stars))}</span>`}</div>
+      <h1>${testSuccess ? esc(voiceText('dad-test-success')) : `סיימת! ${W.program.emoji}`}</h1>
+      <p class="muted">${testSuccess ? esc(voiceText('dad-test-together')) : cheer}</p>
       ${s.together ? `<p>👨‍👦 ${esc(togetherLabel(s.together))}. היה נעים לזוז יחד!</p>` : ''}
       ${sum.starReasons.map(reason => `<p class="small">⭐ ${esc(reason)}</p>`).join('')}
     </section>
+    ${outdoorCard(s)}
     <div class="card center" style="border:2px solid var(--accent)"><b>${esc(perseveranceLine(st))}</b></div>
     ${beltCard(st.workouts, { previousWorkouts: st.workouts - 1 })}
     ${companionCard(st.workouts, { fresh: true })}
     ${restCard(rest)}
-    ${W.adjustMsg ? `<div class="card" style="border:2px solid var(--star)"><b>${esc(W.adjustMsg)}</b></div>` : ''}
+    ${W.adjustMsg && !testSuccess ? `<div class="card" style="border:2px solid var(--star)"><b>${esc(W.adjustMsg)}</b></div>` : ''}
     ${credits() ? `<div class="card row" style="border:2px solid var(--star)" data-go="#/arcade"><span style="font-size:30px">🔓</span><div class="grow"><b>פתחת ${credits()} משחקים חדשים לבחירה!</b></div></div>` : ''}
     <div class="tiles">
       <div class="tile"><b>${fmtTime(sum.duration)}</b>זמן אימון</div>
-      <div class="tile"><b>${sum.doneCount} <span class="muted" style="font-size:16px">מתוך</span> ${sum.total}</b>תרגילים</div>
+      ${testSuccess ? '' : `<div class="tile"><b>${sum.doneCount} <span class="muted" style="font-size:16px">מתוך</span> ${sum.total}</b>תרגילים</div>`}
       ${sum.reps ? `<div class="tile hot"><b>${sum.reps}</b>חזרות</div>` : ''}
       ${sum.seconds ? `<div class="tile hot"><b>${sum.seconds}</b>שניות עבודה</div>` : ''}
       <div class="tile"><b>🔥 ${rest.days}</b>ימי אימון ברצף</div>
       <div class="tile next"><b>${nextP ? nextP.emoji + ' ' + esc(nextP.name.split(':')[0]) : '😴 מנוחה'}</b>מחר</div>
       ${store.tokens ? `<div class="tile" data-go="#/arcade"><b>🎁 ${store.tokens}</b>מתנות לשחק</div>` : ''}
     </div>
-    <div class="card" style="border:2px solid var(--accent)"><b>🎁 קיבלת ${s.tokensEarned || 0} ${s.tokensEarned === 1 ? 'מתנה' : 'מתנות'}</b> על ${Math.round((s.honestSeconds || 0) / 60)} דקות אימון אמיתי (מתנה על כל ${store.profile.tokenMinutes || 3} דקות).${s.fastItems ? ` <span class="muted">${s.fastItems} ${s.fastItems === 1 ? 'תרגיל סומן' : 'תרגילים סומנו'} מהר מדי ולא נספרו.</span>` : ''}</div>
+    ${testSuccess ? '' : `<div class="card" style="border:2px solid var(--accent)"><b>🎁 קיבלת ${s.tokensEarned || 0} ${s.tokensEarned === 1 ? 'מתנה' : 'מתנות'}</b> על ${Math.round((s.honestSeconds || 0) / 60)} דקות אימון אמיתי (מתנה על כל ${store.profile.tokenMinutes || 3} דקות).${s.fastItems ? ` <span class="muted">${s.fastItems} ${s.fastItems === 1 ? 'תרגיל סומן' : 'תרגילים סומנו'} מהר מדי ולא נספרו.</span>` : ''}</div>`}
     ${newBadges.length ? `<h2>תג חדש! 🎉</h2><div class="badges">${newBadges.map(id => { const b = BADGES.find(x => x.id === id); return `<div class="badge pop"><span class="e">${b.emoji}</span><b>${b.name}</b><br>${b.desc}</div>`; }).join('')}</div>` : ''}
-    <div class="card list">${itemsList(s)}</div>
+    ${testSuccess ? '' : `<div class="card list">${itemsList(s)}</div>`}
     <button class="btn primary big" data-go="#/home">לדף הבית 🏠</button>
     <button class="btn ghost big" data-go="#/history">לראות את המעקב 📈</button>
   </div>`, false);
   wireCompanion(st.workouts);
+  wireOutdoor(s);
   // mount עוצר הקראה קודמת. המשפט החדש נאמר אחרי שמסך הסיום מוצג.
-  speak(FRAGMENTS['companion-upgraded']);
+  if (testSuccess) speak(voiceText('dad-test-success'));
+  else speak(FRAGMENTS['companion-upgraded']);
+  if (store.parent.outdoorEnabled !== false && s.outdoor) sayQuick(voiceText(outdoorTask(s.outdoor.taskId).voiceId));
   W = null;
 }
 const itemsList = s => s.items.map(i => `<div class="item">
@@ -1115,6 +1180,12 @@ const syncVideos = () => {
   else if (setVideoFamily('')) softRoute();
 };
 window.addEventListener('focus', () => { if (store.profile.familyCode) cloud.flush(); syncVideos(); });
+// חזרה לאפליקציה שנשארה פתוחה מעבר לחצות מעדכנת את ההודעה במסך הבית.
+window.addEventListener('visibilitychange', () => {
+  if (document.hidden || !['', '#/', '#/home'].includes(location.hash)) return;
+  const reminder = dadTestReminder(store.parent.dadTestDate);
+  if (reminder?.key !== lastDadReminder && (reminder || lastDadReminder)) home();
+});
 window.addEventListener('online', syncVideos);
 setInterval(() => { if (!document.hidden) syncVideos(); }, 30000);
 

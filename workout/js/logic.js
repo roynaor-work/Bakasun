@@ -1,5 +1,6 @@
 // היגיון טהור בלי DOM: חישוב יעדים לפי רמה, סיכומים, רצף ימים, תגים. נבדק ב-tests/workout.test.mjs.
 import { SAY_UI } from './say-ui.js?v=20261010-camera-1';
+import { outdoorStars } from './outdoors.js?v=20261014-w2g-1';
 
 export const LEVELS = { easy: { name: 'קל', mult: 0.7 }, normal: { name: 'רגיל', mult: 1 }, hard: { name: 'חזק', mult: 1.35 }, pro: { name: 'אלוף', mult: 1.7 } };
 
@@ -60,7 +61,7 @@ export function suggestLevel(sessions, level) {
   if (i < 0 || i === order.length - 1) return null;
   const last = sessions.slice(-3);
   if (last.length < 3) return null;
-  return last.every(s => (s.items || []).length >= 5 && summarize(s).stars === 3) ? order[i + 1] : null;
+  return last.every(s => (s.items || []).length >= 5 && workoutReward(s.items).stars === 3) ? order[i + 1] : null;
 }
 
 export const dayKey = d => { const x = new Date(d); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`; };
@@ -110,6 +111,10 @@ export function summarize(session) {
   const full = items.filter(completedItem).length;
   const pct = items.length ? Math.round(100 * done.length / items.length) : 0;
   const reward = workoutReward(items);
+  if (outdoorStars(session.outdoor)) {
+    reward.stars++;
+    reward.reasons.push('על המשחק שלך בחוץ');
+  }
   return { total: items.length, doneCount: done.length, full, reps, seconds, pct, stars: reward.stars, starReasons: reward.reasons, rewardMessage: reward.message, duration: session.duration || 0 };
 }
 
