@@ -1,6 +1,7 @@
 import * as T from '../../../codex-lab/kid-full/vendor/three.module.js';
 import { Environment, GROUND, primitive, material } from './environment.mjs';
 import { Avatar, Citizens } from './avatar.mjs';
+import { createBuilding, disposeBuilding } from './buildings.mjs';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -22,22 +23,18 @@ export class IslandView {
   }
   definition(id) {const b=this.data.buildings;return b instanceof Map?b.get(id):Array.isArray(b)?b.find(r=>r.id===id):b?.[id]||this.data.registry?.buildings?.get(id);}
   worldPosition(x,z,footprint=[1,1]) {return new T.Vector3(x+(footprint[0]-1)/2-(this.size-1)/2,GROUND,z+(footprint[1]-1)/2-(this.size-1)/2);}
-  makeBuilding(record,level=1) {
-    const group=new T.Group(),[w,d]=record.footprint||[1,1];
-    const visual=record.visual||{},height=visual.height||.8;
-    primitive(group,'box',visual.color||'#e6bca0',[0,height/2,0],[w*.8,height,d*.8]);return group;
-  }
+  makeBuilding(record,level=1) {return createBuilding(record,level);}
   setBuildingFactory(factory) {this.buildingFactory=factory;if(this.state)this.setWorld(this.state,true);}
   setWorld(state,force=false) {
     this.state=state;if(!this.renderer)return;
     const previousSize=this.size;this.size=Number(state.world?.size||state.worldSize||16);this.environment.rebuild(this.size);
     const buildings=state.buildings||state.world?.buildings||[],ids=new Set(buildings.map(b=>b.id));
-    for(const [id,item] of this.groups)if(!ids.has(id)||force){this.buildingRoot.remove(item.group);this.groups.delete(id);}
+    for(const [id,item] of this.groups)if(!ids.has(id)||force){this.buildingRoot.remove(item.group);disposeBuilding(item.group);this.groups.delete(id);}
     for(const b of buildings) {
       const record=this.definition(b.typeId||b.type);if(!record)continue;
       let item=this.groups.get(b.id);
       if(!item||item.level!==b.level||item.typeId!==(b.typeId||b.type)) {
-        if(item)this.buildingRoot.remove(item.group);
+        if(item){this.buildingRoot.remove(item.group);disposeBuilding(item.group);}
         const group=this.buildingFactory?this.buildingFactory(record,b.level||1):this.makeBuilding(record,b.level);
         group.userData.buildingId=b.id;group.traverse(o=>{if(o.isMesh)o.userData.buildingId=b.id;});this.buildingRoot.add(group);item={group,level:b.level,typeId:b.typeId||b.type};this.groups.set(b.id,item);
       }
@@ -53,17 +50,18 @@ export class IslandView {
     this.walkPoints=points;this.citizens.setPoints(points,Math.min(30,Math.max(0,buildings.length*2)));
     if(points.length&&!this.avatarPositioned){this.avatar.holder.position.copy(points[Math.floor(points.length/2)]);this.avatarPositioned=true;}
   }
-  setAvatar(record) {if(record)this.avatar?.setRecord(record);}
+  setAvatar(record) {const key=JSON.stringify(record);if(record&&this.avatarKey!==key){this.avatarKey=key;this.avatar?.setRecord(record);}}
   setGhost(record,x,z,valid=true) {
-    if(!this.renderer||!record)return;this.clearGhost();
+    if(!this.renderer||!record)return;
+    const key=[record.id,x,z,valid].join(':');if(this.ghostKey===key)return;this.clearGhost();this.ghostKey=key;
     const [w,d]=record.footprint||[1,1],color=valid?'#39c88c':'#f06b77';
     const group=this.buildingFactory?this.buildingFactory(record,1):this.makeBuilding(record);
-    group.traverse(o=>{if(o.isMesh){o.material=new T.MeshBasicMaterial({color,transparent:true,opacity:.42,depthWrite:false});o.castShadow=false;o.receiveShadow=false;}});
-    const floor=new T.Mesh(new T.PlaneGeometry(w-.04,d-.04),new T.MeshBasicMaterial({color,transparent:true,opacity:.48,side:T.DoubleSide,depthWrite:false}));floor.rotation.x=-Math.PI/2;floor.position.y=.025;group.add(floor);
-    const border=new T.LineSegments(new T.EdgesGeometry(new T.BoxGeometry(w,.055,d)),new T.LineBasicMaterial({color,linewidth:2}));border.position.y=.035;group.add(border);
+    group.traverse(o=>{if(o.isMesh||o.isLineSegments){if(o.userData.ownedMaterial)o.material.dispose();o.material=new T.MeshBasicMaterial({color,transparent:true,opacity:.42,depthWrite:false});o.userData.ghostMaterial=true;o.castShadow=false;o.receiveShadow=false;}});
+    const floor=new T.Mesh(new T.PlaneGeometry(w-.04,d-.04),new T.MeshBasicMaterial({color,transparent:true,opacity:.48,side:T.DoubleSide,depthWrite:false}));floor.rotation.x=-Math.PI/2;floor.position.y=.025;floor.userData.ownedGeometry=true;floor.userData.ghostMaterial=true;group.add(floor);
+    const box=new T.BoxGeometry(w,.055,d),border=new T.LineSegments(new T.EdgesGeometry(box),new T.LineBasicMaterial({color,linewidth:2}));box.dispose();border.position.y=.035;border.userData.ownedGeometry=true;border.userData.ghostMaterial=true;group.add(border);
     group.position.copy(this.worldPosition(x,z,[w,d]));this.scene.add(group);this.ghost=group;this.canvas.dataset.ghost=valid?'valid':'invalid';
   }
-  clearGhost() {if(this.ghost){this.scene.remove(this.ghost);this.ghost.traverse(o=>{if(o.material&&o.material.transparent)o.material.dispose();});this.ghost=null;}delete this.canvas.dataset.ghost;}
+  clearGhost() {if(this.ghost){this.scene.remove(this.ghost);this.ghost.traverse(o=>{if(o.userData.ghostMaterial)o.material.dispose();});disposeBuilding(this.ghost);this.ghost=null;}this.ghostKey=null;delete this.canvas.dataset.ghost;}
   showRadius(record,instance) {
     if(this.radius){this.scene.remove(this.radius);this.radius.geometry.dispose();this.radius.material.dispose();this.radius=null;}
     if(!record||!instance||!record.radius)return;

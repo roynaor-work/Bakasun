@@ -1,0 +1,23 @@
+[
+  {"id":"house","title":"building.house","icon":"🏠","category":"basic","model":"house","requiresRoad":true,"visual":{"kind":"house","color":"#ffe2a5","roofColor":"#e66a52"}},
+  {"id":"factory","title":"building.factory","icon":"🏭","category":"basic","model":"factory","requiresRoad":true,"visual":{"kind":"factory","color":"#a3bad4","roofColor":"#5e7899"}},
+  {"id":"farm","title":"building.farm","icon":"🌾","category":"basic","model":"farm","requiresRoad":true,"visual":{"kind":"farm","color":"#d9c886","roofColor":"#e67d52"}},
+  {"id":"harbor","title":"building.harbor","icon":"⚓","category":"basic","model":"harbor","requiresRoad":true,"requiresShore":true,"visual":{"kind":"harbor","color":"#e2bf8c","roofColor":"#438db2"}},
+  {"id":"road","title":"building.road","icon":"🛣️","category":"basic","model":"road","isRoad":true,"visual":{"kind":"road","color":"#d6cab1","roofColor":"#f5e7c5"}},
+  {"id":"park","title":"building.park","icon":"🌳","category":"basic","model":"park","requiresRoad":true,"visual":{"kind":"park","color":"#7aca81","roofColor":"#4ca96d"}},
+  {"id":"fireStation","title":"building.fireStation","icon":"🚒","category":"services","model":"fireStation","requiresRoad":true,"visual":{"kind":"fireStation","color":"#f07a65","roofColor":"#d95543"}},
+  {"id":"waterTower","title":"building.waterTower","icon":"💧","category":"services","model":"waterTower","requiresRoad":true,"visual":{"kind":"waterTower","color":"#81c8e5","roofColor":"#5299bd"}},
+  {"id":"hospital","title":"building.hospital","icon":"🏥","category":"services","model":"hospital","requiresRoad":true,"visual":{"kind":"hospital","color":"#fff2dc","roofColor":"#ef7286"}},
+  {"id":"school","title":"building.school","icon":"🎒","category":"services","model":"school","requiresRoad":true,"visual":{"kind":"school","color":"#ffcf69","roofColor":"#e0a151"}},
+  {"id":"police","title":"building.police","icon":"🛡️","category":"services","model":"police","requiresRoad":true,"visual":{"kind":"police","color":"#88b4f0","roofColor":"#4e80c9"}},
+  {"id":"prison","title":"building.prison","icon":"🔐","category":"services","model":"prison","requiresRoad":true,"visual":{"kind":"prison","color":"#b3b7cf","roofColor":"#787e9f"}},
+  {"id":"soccer","title":"building.soccer","icon":"⚽","category":"sports","model":"soccer","sportId":"soccer","requiresRoad":true,"visual":{"kind":"soccer","color":"#54bc79","roofColor":"#ffffff"}},
+  {"id":"tennis","title":"building.tennis","icon":"🎾","category":"sports","model":"tennis","sportId":"tennis","requiresRoad":true,"visual":{"kind":"tennis","color":"#7f93d9","roofColor":"#ffffff"}},
+  {"id":"basketball","title":"building.basketball","icon":"🏀","category":"sports","model":"basketball","sportId":"basketball","requiresRoad":true,"visual":{"kind":"basketball","color":"#e99b61","roofColor":"#e46e45"}},
+  {"id":"pool","title":"building.pool","icon":"🏊","category":"sports","model":"pool","sportId":"swimming","requiresRoad":true,"visual":{"kind":"pool","color":"#48bbdd","roofColor":"#fff6dc"}},
+  {"id":"athletics","title":"building.athletics","icon":"🏃","category":"sports","model":"athletics","sportId":"athletics","requiresRoad":true,"visual":{"kind":"athletics","color":"#e88170","roofColor":"#7ac789"}},
+  {"id":"wall","title":"building.wall","icon":"🧱","category":"defense","model":"wall","locked":true,"visual":{"kind":"wall","color":"#bdc4d8","roofColor":"#8795b8"}},
+  {"id":"watchtower","title":"building.watchtower","icon":"🏰","category":"defense","model":"watchtower","locked":true,"visual":{"kind":"watchtower","color":"#a7bbd6","roofColor":"#6085b1"}},
+  {"id":"shield","title":"building.shield","icon":"🛡️","category":"defense","model":"shield","locked":true,"visual":{"kind":"shield","color":"#8ca9df","roofColor":"#ded78b"}},
+  {"id":"embassy","title":"building.embassy","icon":"🤝","category":"defense","model":"embassy","locked":true,"visual":{"kind":"embassy","color":"#ead5ec","roofColor":"#b28fc3"}}
+]
