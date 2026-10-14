@@ -56,6 +56,13 @@ test('island migration also recognizes an unversioned legacy world', () => {
   assert.equal(migrated.state.version, 2);
 });
 
+test('island migration retains an expanded legacy world and derives its matching stage', () => {
+  const migrated = migrateSave({ version: 1, worldSize: 20, buildings: [], coins: 90, parts: { general: 5 } }, data, registry);
+  assert.equal(migrated.ok, true);
+  assert.deepEqual(migrated.state.world, { size: 20, stage: 1 });
+  assert.equal(migrated.state.parts.general, 5);
+});
+
 test('island a save from a future version is rejected instead of silently downgraded', () => {
   const state = { ...initial(), version: 100 };
   assert.equal(migrateSave(state, data, registry).reason, 'reason.future');
@@ -143,6 +150,14 @@ test('island importing the same backup twice cannot duplicate money, parts or bu
   assert.equal(second.state.money, first.state.money);
   assert.equal(second.state.parts.general, first.state.parts.general);
   assert.equal(second.state.buildings.length, first.state.buildings.length);
+});
+
+test('island import opens land already earned by merged parts without shrinking the current world', () => {
+  const current = initial(), incoming = initial(); incoming.parts.general = 12;
+  const merged = importWorld(exportWorld(incoming), current, data, registry);
+  assert.equal(merged.ok, true);
+  assert.equal(merged.state.parts.general, 12);
+  assert.deepEqual(merged.state.world, { size: 24, stage: 2 });
 });
 
 test('island a conflicting imported building never removes or replaces current construction', () => {

@@ -1,4 +1,4 @@
-import * as T from '../../../codex-lab/kid-full/vendor/three.module.js';
+import * as T from '../vendor/three.module.js';
 import { Environment, GROUND, primitive, material } from './environment.mjs';
 import { Avatar, Citizens } from './avatar.mjs';
 import { createBuilding, disposeBuilding } from './buildings.mjs';
@@ -13,15 +13,16 @@ export class IslandView {
     try {this.renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'low-power'});}catch(error){onError('error.webgl');return;}
     this.renderer.outputColorSpace=T.SRGBColorSpace;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.2;
     this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.PCFSoftShadowMap;
+    this.quality='high';this.started=performance.now();this.qualityCheckedAt=this.started;
     this.camera=new T.OrthographicCamera(-14,14,14,-14,.1,180);
     this.scene.add(new T.HemisphereLight('#fcf5da','#8eaead',2.5));
     const sun=new T.DirectionalLight('#fff0d1',3);sun.position.set(-17,30,15);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-24;sun.shadow.camera.right=24;sun.shadow.camera.top=24;sun.shadow.camera.bottom=-24;sun.shadow.camera.near=1;sun.shadow.camera.far=85;sun.shadow.bias=-.00035;sun.shadow.normalBias=.07;this.scene.add(sun);this.sun=sun;
-    this.environment=new Environment(this.scene);this.environment.rebuild(this.size);this.buildingRoot=new T.Group();this.scene.add(this.buildingRoot);
-    this.avatar=new Avatar(this.scene);this.citizens=new Citizens(this.scene,30);
-    this.avatar.load(data.avatar||{}).then(()=>{if(!this.disposed){this.avatar.holder.position.set(0,GROUND,0);this.onReady(this);}}).catch(()=>this.onError('error.avatar'));
+    this.environment=new Environment(this.scene,data.world);this.environment.rebuild(this.size);this.buildingRoot=new T.Group();this.scene.add(this.buildingRoot);
+    this.avatar=new Avatar(this.scene);this.citizens=new Citizens(this.scene,Math.min(30,data.config?.maxCitizens??30));
+    this.avatar.load({}).then(()=>{if(!this.disposed){if(!this.avatarPositioned)this.avatar.holder.position.set(0,GROUND,0);this.onReady(this);}}).catch(()=>this.onError('error.avatar'));
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(canvas);this.handlers={};this.bindEvents();this.resize();this.last=performance.now();this.samples=[];this.animate=this.animate.bind(this);this.frame=requestAnimationFrame(this.animate);
   }
-  definition(id) {const b=this.data.buildings;return b instanceof Map?b.get(id):Array.isArray(b)?b.find(r=>r.id===id):b?.[id]||this.data.registry?.buildings?.get(id);}
+  definition(id) {const registered=this.data.registry?.buildings?.get(id);if(registered)return registered;const b=this.data.buildings;return b instanceof Map?b.get(id):Array.isArray(b)?b.find(r=>r.id===id):b?.[id];}
   worldPosition(x,z,footprint=[1,1]) {return new T.Vector3(x+(footprint[0]-1)/2-(this.size-1)/2,GROUND,z+(footprint[1]-1)/2-(this.size-1)/2);}
   makeBuilding(record,level=1) {return createBuilding(record,level);}
   setBuildingFactory(factory) {this.buildingFactory=factory;if(this.state)this.setWorld(this.state,true);}
@@ -47,16 +48,35 @@ export class IslandView {
     const road=buildings.filter(b=>this.definition(b.typeId||b.type)?.visual?.kind==='road');
     const points=road.map(b=>this.worldPosition(b.x,b.z));
     if(!points.length)for(const b of buildings){const r=this.definition(b.typeId||b.type);if(r){const p=this.worldPosition(b.x,b.z,r.footprint);p.z+=(r.footprint?.[1]||1)/2+.22;points.push(p);}}
-    this.walkPoints=points;this.citizens.setPoints(points,Math.min(30,Math.max(0,buildings.length*2)));
+    const population=buildings.reduce((sum,b)=>sum+(this.definition(b.typeId||b.type)?.population||0),0);
+    this.walkPoints=points;this.citizens.setPoints(points,this.data.featureFlags?.citizens===false?0:Math.min(this.data.config?.maxCitizens??30,population));
     if(points.length&&!this.avatarPositioned){this.avatar.holder.position.copy(points[Math.floor(points.length/2)]);this.avatarPositioned=true;}
   }
   setAvatar(record) {const key=JSON.stringify(record);if(record&&this.avatarKey!==key){this.avatarKey=key;this.avatar?.setRecord(record);}}
+  attachAvatarPreview(canvas) {
+    this.detachAvatarPreview();if(!canvas)return;
+    try {
+      const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(1.5,window.devicePixelRatio||1));renderer.outputColorSpace=T.SRGBColorSpace;renderer.setClearColor('#f9efda',0);
+      const scene=new T.Scene(),holder=new T.Group();holder.rotation.y=-.3;scene.add(holder);scene.add(new T.HemisphereLight('#fff5da','#92bcb2',2));
+      const camera=new T.OrthographicCamera(-1.5,1.5,1.4,-1.4,.1,20);camera.position.set(0,1.25,6);camera.lookAt(0,1.25,0);this.preview={canvas,renderer,scene,holder,camera};
+      const resize=()=>{const rect=canvas.getBoundingClientRect(),aspect=Math.max(rect.width,1)/Math.max(rect.height,1);renderer.setSize(Math.max(1,rect.width),Math.max(1,rect.height),false);camera.left=-1.4*aspect;camera.right=1.4*aspect;camera.top=1.4;camera.bottom=-1.4;camera.updateProjectionMatrix();};
+      this.preview.resizeObserver=new ResizeObserver(resize);this.preview.resizeObserver.observe(canvas);resize();
+    }catch{this.preview=null;this.onError('error.webgl');}
+  }
+  detachAvatarPreview() {if(this.preview){this.preview.resizeObserver?.disconnect();this.preview.renderer.dispose();this.preview=null;}}
+  renderAvatarPreview() {
+    const preview=this.preview,root=this.avatar?.root;if(!preview||!root)return;
+    // Render sequentially: the real rig belongs to the preview only during its
+    // draw and is restored before the next world frame. No skinned clone or
+    // second animation mixer is required, and clothing stays exactly in sync.
+    const parent=root.parent;preview.holder.add(root);preview.renderer.render(preview.scene,preview.camera);parent?.add(root);
+  }
   setGhost(record,x,z,valid=true) {
     if(!this.renderer||!record)return;
     const key=[record.id,x,z,valid].join(':');if(this.ghostKey===key)return;this.clearGhost();this.ghostKey=key;
     const [w,d]=record.footprint||[1,1],color=valid?'#39c88c':'#f06b77';
     const group=this.buildingFactory?this.buildingFactory(record,1):this.makeBuilding(record);
-    group.traverse(o=>{if(o.isMesh||o.isLineSegments){if(o.userData.ownedMaterial)o.material.dispose();o.material=new T.MeshBasicMaterial({color,transparent:true,opacity:.42,depthWrite:false});o.userData.ghostMaterial=true;o.castShadow=false;o.receiveShadow=false;}});
+    group.traverse(o=>{if(o.isMesh||o.isLineSegments){if(o.userData.ownedMaterial)o.material.dispose();o.material=o.isLineSegments?new T.LineBasicMaterial({color,transparent:true,opacity:.65,depthWrite:false}):new T.MeshBasicMaterial({color,transparent:true,opacity:.42,depthWrite:false});o.userData.ownedMaterial=false;o.userData.ghostMaterial=true;o.castShadow=false;o.receiveShadow=false;}});
     const floor=new T.Mesh(new T.PlaneGeometry(w-.04,d-.04),new T.MeshBasicMaterial({color,transparent:true,opacity:.48,side:T.DoubleSide,depthWrite:false}));floor.rotation.x=-Math.PI/2;floor.position.y=.025;floor.userData.ownedGeometry=true;floor.userData.ghostMaterial=true;group.add(floor);
     const box=new T.BoxGeometry(w,.055,d),border=new T.LineSegments(new T.EdgesGeometry(box),new T.LineBasicMaterial({color,linewidth:2}));box.dispose();border.position.y=.035;border.userData.ownedGeometry=true;border.userData.ghostMaterial=true;group.add(border);
     group.position.copy(this.worldPosition(x,z,[w,d]));this.scene.add(group);this.ghost=group;this.canvas.dataset.ghost=valid?'valid':'invalid';
@@ -70,9 +90,10 @@ export class IslandView {
   }
   resize() {
     if(!this.renderer)return;const rect=this.canvas.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height),aspect=width/height;
-    this.renderer.setPixelRatio(Math.min(1.5,window.devicePixelRatio||1));this.renderer.setSize(width,height,false);
-    const span=Math.max(this.size*.73, this.size*.72/aspect)/this.zoom;
-    this.camera.left=-span*aspect;this.camera.right=span*aspect;this.camera.top=span;this.camera.bottom=-span;this.camera.updateProjectionMatrix();this.updateCamera();
+    this.renderer.setPixelRatio(Math.min(this.quality==='low'?1:1.5,window.devicePixelRatio||1));this.renderer.setSize(width,height,false);
+    const compact=width>height&&height<=500;
+    const span=Math.max(this.size*.86, this.size*.81/aspect)*(compact?1.05:1)/this.zoom,offset=compact?-span*.14:0;
+    this.camera.left=-span*aspect;this.camera.right=span*aspect;this.camera.top=span+offset;this.camera.bottom=-span+offset;this.camera.updateProjectionMatrix();this.updateCamera();
   }
   updateCamera() {if(!this.camera)return;const r=45;this.camera.position.set(this.target.x+Math.sin(this.angle)*Math.cos(this.elevation)*r,this.target.y+Math.sin(this.elevation)*r,this.target.z+Math.cos(this.angle)*Math.cos(this.elevation)*r);this.camera.lookAt(this.target);this.camera.updateMatrixWorld();}
   home() {this.angle=.69;this.elevation=.76;this.zoom=1;this.target.set(0,.4,0);this.resize();}
@@ -94,7 +115,11 @@ export class IslandView {
     });
     listen('pointerup',e=>{
       const p=this.pointers.get(e.pointerId),tap=p&&!this.dragged&&this.pointers.size===1;this.pointers.delete(e.pointerId);this.pinch=0;if(!tap)return;
-      const cell=this.cellAt(e.clientX,e.clientY);if(!cell)return;
+      const cell=this.cellAt(e.clientX,e.clientY);
+      // During placement the ground grid is the target, even behind a roof.
+      if(this.ghost&&cell){this.onCell(cell);return;}
+      const picked=this.ray.intersectObjects([...this.groups.values()].map(item=>item.group),true).find(hit=>hit.object.userData.buildingId);
+      if(picked){this.onSelect(picked.object.userData.buildingId);return;}if(!cell)return;
       const buildings=this.state?.buildings||[];
       const selected=buildings.find(b=>{const f=this.definition(b.typeId||b.type)?.footprint||[1,1];return cell.x>=b.x&&cell.z>=b.z&&cell.x<b.x+f[0]&&cell.z<b.z+f[1];});
       if(selected)this.onSelect(selected.id);else this.onCell(cell);
@@ -108,10 +133,16 @@ export class IslandView {
     if(!document.hidden){
       this.environment.tick(time);this.citizens.tick(delta,time);
       if(!this.route.length&&this.walkPoints?.length>1&&now>(this.nextWalk||0)){const p=this.walkPoints[Math.floor((now/3500)%this.walkPoints.length)];this.route.push({x:p.x,z:p.z});this.nextWalk=now+4000;}
-      this.avatar.tick(delta,time,this.route);this.renderer.render(this.scene,this.camera);this.samples.push(now);while(this.samples[0]<now-1000)this.samples.shift();
+      this.avatar.tick(delta,time,this.preview?[]:this.route);
+      if(!this.preview||now-(this.lastWorldRender||0)>500){this.renderer.render(this.scene,this.camera);this.lastWorldRender=now;}
+      this.renderAvatarPreview();this.samples.push(now);while(this.samples[0]<now-1000)this.samples.shift();
+      if(!this.preview&&now-this.started>5000&&now-this.qualityCheckedAt>2000){
+        this.qualityCheckedAt=now;
+        if(this.quality==='high'&&this.samples.length<27){this.quality='low';this.renderer.shadowMap.enabled=false;this.resize();}
+      }
     }
     this.frame=requestAnimationFrame(this.animate);
   }
-  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,pixelRatio:this.renderer?.getPixelRatio()||0,avatarLoaded:!!this.avatar?.root,renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
-  dispose() {this.disposed=true;cancelAnimationFrame(this.frame);this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.renderer?.dispose();}
+  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
+  dispose() {this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.renderer?.dispose();}
 }

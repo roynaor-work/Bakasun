@@ -1,8 +1,8 @@
-import * as T from '../../../codex-lab/kid-full/vendor/three.module.js';
-import { GLTFLoader } from '../../../codex-lab/kid-full/vendor/GLTFLoader.js';
+import * as T from '../vendor/three.module.js';
+import { GLTFLoader } from '../vendor/GLTFLoader.js';
 import { GROUND, primitive, material } from './environment.mjs';
 
-const MODEL_URL=new URL('../../../codex-lab/kid-full/kid-full.glb',import.meta.url).href;
+const MODEL_URL=new URL('../assets/kid-full.glb',import.meta.url).href;
 const color=new T.Color();
 function recolor(mesh,record) {
   const attr=mesh.geometry.attributes.color;if(!attr)return;
@@ -32,7 +32,7 @@ export class Avatar {
     this.holder.add(this.root);this.mixer=new T.AnimationMixer(this.root);
     // The existing run animation drives the real rig; it is slowed to a walk.
     this.walkClip=gltf.animations.find(c=>c.name==='run');this.standClip=gltf.animations.find(c=>c.name==='stand');
-    this.setRecord(record);this.play(false);return this;
+    this.setRecord(Object.keys(this.record).length?this.record:record);this.play(false);return this;
   }
   setRecord(record={}) {
     this.record=record;if(!this.root)return;
@@ -41,10 +41,11 @@ export class Avatar {
     if(this.extraHair){head.remove(this.extraHair);this.extraHair=null;}
     const style=record.hairstyle||record.hairStyle||'short';
     // Retain the authored scalp and hair. Extra locks attach to the same bone.
-    if(style==='ponytail'||style==='long'||style==='bob') {
+    if(style==='ponytail'||style==='long'||style==='bob'||style==='curly') {
       this.extraHair=new T.Group();head.add(this.extraHair);
       const hair=record.hairColor||'#593a29';
-      if(style==='ponytail') { primitive(this.extraHair,'sphere',hair,[0,.21,-.48],[.3,.55,.35]);primitive(this.extraHair,'sphere',hair,[0,-.05,-.54],[.24,.45,.26]); }
+      if(style==='curly')for(let i=0;i<7;i++)primitive(this.extraHair,'sphere',hair,[Math.sin(i/7*Math.PI*2)*.3,.33+(i%2)*.07,Math.cos(i/7*Math.PI*2)*.3-.05],[.25,.24,.25]);
+      else if(style==='ponytail') { primitive(this.extraHair,'sphere',hair,[0,.21,-.48],[.3,.55,.35]);primitive(this.extraHair,'sphere',hair,[0,-.05,-.54],[.24,.45,.26]); }
       else for(const side of [-1,1])primitive(this.extraHair,'sphere',hair,[side*.32,-.13,-.11],[.18,style==='long'?.67:.4,.3]);
     }
   }
@@ -71,12 +72,15 @@ export class Citizens {
     this.body=new T.InstancedMesh(new T.CylinderGeometry(.095,.12,.28,6),material('#fff1d2'),this.max);
     this.head=new T.InstancedMesh(new T.IcosahedronGeometry(.09,1),material('#efbc8c'),this.max);
     this.hair=new T.InstancedMesh(new T.IcosahedronGeometry(.095,0),material('#695348'),this.max);
-    for(const mesh of [this.body,this.head,this.hair]){mesh.castShadow=true;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);mesh.count=0;this.root.add(mesh);}
+    this.leftLeg=new T.InstancedMesh(new T.CylinderGeometry(.035,.035,.17,5),material('#5b7c81'),this.max);
+    this.rightLeg=new T.InstancedMesh(new T.CylinderGeometry(.035,.035,.17,5),material('#5b7c81'),this.max);
+    this.meshes=[this.body,this.head,this.hair,this.leftLeg,this.rightLeg];
+    for(const mesh of this.meshes){mesh.castShadow=true;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);mesh.count=0;this.root.add(mesh);}
   }
   setPoints(points,count) {
     this.points=points;count=Math.max(0,Math.min(this.max,count,points.length>1?this.max:0));
     while(this.people.length<count){const i=this.people.length,p=points[i%points.length];this.people.push({x:p.x,z:p.z,target:(i+1)%points.length,phase:i*1.7,speed:.32+(i%4)*.04});this.body.setColorAt(i,new T.Color(['#f8cc75','#eaa19b','#83bdb8','#b4a3d6','#e8eee0'][i%5]));}
-    this.people.length=count;for(const mesh of [this.body,this.head,this.hair])mesh.count=count;
+    this.people.length=count;for(const mesh of this.meshes)mesh.count=count;
     if(this.body.instanceColor)this.body.instanceColor.needsUpdate=true;
   }
   tick(delta,time) {
@@ -87,7 +91,8 @@ export class Citizens {
       else {p.x+=dx/len*Math.min(len,delta*p.speed);p.z+=dz/len*Math.min(len,delta*p.speed);}
       const bob=Math.sin(time*6+p.phase)*.015;
       for(const [mesh,y,scale] of [[this.body,.24,1],[this.head,.47,1],[this.hair,.525,1]]) {dummy.position.set(p.x,GROUND+y+bob,p.z);dummy.rotation.set(0,Math.atan2(dx,dz),0);dummy.scale.setScalar(scale);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}
+      for(const [mesh,side]of [[this.leftLeg,-1],[this.rightLeg,1]]){dummy.position.set(p.x+side*.043,GROUND+.08,p.z);dummy.rotation.set(Math.sin(time*7+p.phase)*.4*side,Math.atan2(dx,dz),0);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}
     }
-    for(const mesh of [this.body,this.head,this.hair])mesh.instanceMatrix.needsUpdate=true;
+    for(const mesh of this.meshes)mesh.instanceMatrix.needsUpdate=true;
   }
 }

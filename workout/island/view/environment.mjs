@@ -1,4 +1,5 @@
-import * as T from '../../../codex-lab/kid-full/vendor/three.module.js';
+import * as T from '../vendor/three.module.js';
+import { batchMeshes } from './batch.mjs';
 
 export const GROUND = .34;
 export const palette = { grass:'#91c75c', sand:'#f6d99a', sea:'#53cbd1', stone:'#dfb988', cream:'#fff4dc', teal:'#287a83', coral:'#ec9279' };
@@ -29,23 +30,24 @@ export function makeTree(parent,x,z,scale=1,tone=0) {
   primitive(group,'cylinder','#ad875b',[0,.46,0],[.17,.92,.17]);
   primitive(group,'sphere',['#4ba675','#67ae71','#87bd68'][tone%3],[0,1.2,0],[1.05,1.45,1.05]);return group;
 }
-function makeScenery(scene) {
+function makeScenery(scene,neighbors=[]) {
   const root=new T.Group();scene.add(root);
-  const landmarks={iron:new T.Vector3(-27,2,-25),fish:new T.Vector3(30,1,-18),mist:new T.Vector3(1,4,-39)};
-  for(const [id,p] of Object.entries(landmarks)) {
+  const positions=[[-18,.2,-3],[2,.2,-18],[-10,-.4,-15]],landmarks={};
+  for(const [index,record]of neighbors.entries()) {
+    const kind=record.kind,p=new T.Vector3(...(record.position||positions[index%positions.length]));landmarks[record.id]=p;
     const island=new T.Group();island.position.copy(p);root.add(island);
-    primitive(island,'cylinder','#d9c9a5',[0,-1.8,0],[id==='mist'?14:8,1.8,id==='mist'?9:6]);
-    primitive(island,'cylinder',id==='mist'?'#bec6a7':'#a8ca84',[0,-.75,0],[id==='mist'?13.7:7.8,.5,id==='mist'?8.8:5.8]);
-    if(id==='iron') {
-      for(const x of [-1.9,1.9]) { primitive(island,'cylinder','#819ab4',[x,.6,0],[1.3,2.4,1.3]);primitive(island,'cone','#7286ad',[x,2.1,0],[1.7,1.1,1.7]); }
+    primitive(island,'cylinder','#d9c9a5',[0,-1.8,0],[kind==='mountains'?14:8,1.8,kind==='mountains'?9:6]);
+    primitive(island,'cylinder',kind==='mountains'?'#bec6a7':'#a8ca84',[0,-.75,0],[kind==='mountains'?13.7:7.8,.5,kind==='mountains'?8.8:5.8]);
+    if(kind==='castle') {
+      for(const x of [-1.9,1.9]) { primitive(island,'cylinder',record.color||'#819ab4',[x,.6,0],[1.3,2.4,1.3]);primitive(island,'cone','#7286ad',[x,2.1,0],[1.7,1.1,1.7]); }
       primitive(island,'box','#a3b6c9',[0,.3,.2],[3,1.8,1.4]);primitive(island,'cone','#a6a1c7',[0,2,0],[2.3,2.4,2.3]);
       primitive(island,'box','#f1ca87',[0,3.6,0],[.8,.45,.08]);
-    } else if(id==='fish') {
+    } else if(kind==='fishing') {
       for(const [x,c] of [[-1.7,'#ecb48b'],[.3,'#efc7b8'],[1.6,'#e99984']]) { primitive(island,'box',c,[x,0,0],[1.25,1.25,1.25]);primitive(island,'cone','#ce8d80',[x,.95,0],[1.8,.8,1.8]); }
       primitive(island,'box','#b59373',[0,-.5,3],[1,.22,3]);
       primitive(island,'box','#f9efd6',[1.1,.3,3.3],[.1,2.4,.1]);const sail=primitive(island,'cone','#fdf9e9',[1.1,.7,3.3],[1.2,1.7,.09]);sail.rotation.z=-.3;
     } else {
-      for(const [x,h,c] of [[-3,5,'#a3abc9'],[0,7.4,'#8d9bbd'],[3,4.3,'#b9bad1']]) { primitive(island,'cone',c,[x,h/2-.4,0],[5,h,4.5]);primitive(island,'cone','#eef4e9',[x,h-.9,0],[1.35,1.6,1.25]); }
+      for(const [x,h,c] of [[-3,3.2,'#a3abc9'],[0,4.5,'#8d9bbd'],[3,2.8,'#b9bad1']]) { primitive(island,'cone',c,[x,h/2-.4,0],[4,h,3.8]);primitive(island,'cone','#eef4e9',[x,h-.7,0],[1.1,1.2,1.05]); }
     }
   }
   // Slow clouds are intentionally just low polygon scenery, with no textures.
@@ -53,26 +55,25 @@ function makeScenery(scene) {
   for(const [i,x,z,y] of [[0,-17,-13,10],[1,19,-28,10],[2,-4,-31,13],[3,27,5,12]]) {
     const cloud=new T.Group();cloud.position.set(x,y,z);root.add(cloud);
     for(let k=0;k<3;k++) primitive(cloud,'sphere','#f8fbeb',[(k-1)*1.7,k===1?.35:0,0],[2.8,1.25,1.6]);
-    clouds.push({root:cloud,x,phase:i});
+    batchMeshes(cloud);clouds.push({root:cloud,x,phase:i});
   }
   return {root,landmarks,clouds};
 }
 export class Environment {
-  constructor(scene) {
+  constructor(scene,world={}) {
     this.scene=scene;this.size=0;this.root=new T.Group();scene.add(this.root);
     const sea=new T.Mesh(new T.PlaneGeometry(300,300),material(palette.sea,{roughness:.32}));sea.rotation.x=-Math.PI/2;sea.position.y=-1;sea.receiveShadow=true;scene.add(sea);this.sea=sea;
     const shimmer=new T.InstancedMesh(new T.PlaneGeometry(1,.07),new T.MeshBasicMaterial({color:'#c3f7eb',transparent:true,opacity:.36,depthWrite:false}),80);
     const rand=rng(21),dummy=new T.Object3D();
     for(let i=0;i<80;i++) { dummy.position.set((rand()-.5)*100,-.98,(rand()-.5)*80);dummy.rotation.x=-Math.PI/2;dummy.scale.set(.6+rand()*1.4,1,1);dummy.updateMatrix();shimmer.setMatrixAt(i,dummy.matrix); }
-    scene.add(shimmer);this.shimmer=shimmer;Object.assign(this,makeScenery(scene));
+    scene.add(shimmer);this.shimmer=shimmer;Object.assign(this,makeScenery(scene,world.neighbors||[]));
   }
   rebuild(size) {
     if(this.size===size)return;this.size=size;
-    this.land?.traverse(o=>{if(o.geometry&&!geometries.has(o.geometry)){} });
-    if(this.land){this.scene.remove(this.land);this.land.traverse(o=>{if(o.geometry&&o.userData.terrain)o.geometry.dispose();});}
+    if(this.land){this.scene.remove(this.land);this.land.traverse(o=>{if(o.geometry&&(o.userData.terrain||o.userData.ownedGeometry||o.isGridHelper))o.geometry.dispose();if(o.isGridHelper)o.material.dispose();});}
     const land=new T.Group();this.land=land;this.scene.add(land);
     for(const [w,d,h,y,c,r] of [[size+6.6,size+6.8,1.25,-1.7,'#be9e78',4],[size+6.2,size+6.4,.4,-.48,'#e9c792',3.8],[size+5.8,size+6,.32,-.1,palette.sand,3.6],[size+1.6,size+1.9,.22,.12,palette.grass,2.5]]) {
-      slab(land,w,d,h,y,c,r).userData.terrain=true;
+      const mesh=slab(land,w,d,h,y,c,r);mesh.userData.terrain=true;mesh.userData.ownedGeometry=true;
     }
     // A pale rim and darker grass patches give the island an authored diorama feel.
     const rand=rng(19);
@@ -83,6 +84,7 @@ export class Environment {
     }
     // A little beach on the front corner leaves the whole building grid open.
     for(let i=0;i<7;i++)primitive(land,'sphere','#eee4c2',[size/2+1+(i%2)*.4,-.03,-size/2+1+i*.48],[.5,.3,.45]);
+    batchMeshes(land);
     const grid=new T.GridHelper(size,size,'#5d9e70','#aad58a');grid.position.set(0,GROUND+.006,0);grid.material.transparent=true;grid.material.opacity=.34;grid.material.depthWrite=false;land.add(grid);this.grid=grid;
   }
   tick(time) { for(const cloud of this.clouds)cloud.root.position.x=cloud.x+Math.sin(time*.035+cloud.phase)*.8; }

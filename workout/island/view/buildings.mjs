@@ -1,4 +1,4 @@
-import * as T from '../../../codex-lab/kid-full/vendor/three.module.js';
+import * as T from '../vendor/three.module.js';
 import { primitive as part, material, makeTree } from './environment.mjs';
 import { batchMeshes } from './batch.mjs';
 

@@ -78,11 +78,8 @@ export class IslandInterface {
     this.resourcesNode = el('div', 'resources');
     this.city.append(cityTitle, this.metricsNode, this.resourcesNode);
 
+    // A large click target here makes Chrome redirect nearby touches away from the island.
     this.mission = el('aside', 'mission panel');
-    this.mission.onclick = () => {
-      const step = this.tutorialStep() ?? this.engine.nextObjective?.();
-      if (step?.buildType) this.selectBuilding(step.buildType);
-    };
     this.mission.setAttribute('aria-live', 'polite');
 
     const camera = el('div', 'camera-controls');
@@ -120,10 +117,10 @@ export class IslandInterface {
   refresh() {
     const s = this.engine.state;
     this.view.setWorld(s);
-    const activeStep = this.tutorialStep();
+    const activeStep = this.tutorialStep() ?? this.engine.nextObjective?.();
     if (activeStep && this.activeStepId !== activeStep.id) {
       this.activeStepId = activeStep.id;
-      this.category = this.getBuilding(activeStep.buildType).category;
+      if (activeStep.buildType) this.category = this.getBuilding(activeStep.buildType).category;
       this.drawCatalog();
     }
     this.wallet.replaceChildren();
@@ -151,12 +148,13 @@ export class IslandInterface {
       this.resourcesNode.append(cell);
     }
     const saveFailed = !this.engine.storageStatus.ok;
-    this.saveBadge.textContent = this.t(saveFailed ? this.engine.storageStatus.reason ?? 'reason.storage' : 'app.saved');
+    const saveReason = this.engine.storageStatus.reason === 'reason.invalid' ? 'error.saveInvalid' : this.engine.storageStatus.reason ?? 'reason.storage';
+    this.saveBadge.textContent = this.t(saveFailed ? saveReason : 'app.saved');
     this.saveBadge.classList.toggle('save-error', saveFailed);
     this.root.dataset.saveStatus = saveFailed ? 'error' : 'saved';
     this.drawMission();
     if (this.currentGhost) this.updateGhost(this.currentGhost);
-    if (this.infoId) this.drawInfo();
+    if (this.infoId && this.infoSignature !== JSON.stringify(s.buildings.find(b => b.id === this.infoId))) this.drawInfo();
     this.updateCatalogState();
   }
   drawMission() {
@@ -196,7 +194,7 @@ export class IslandInterface {
     this.updateCatalogState();
   }
   updateCatalogState() {
-    const step = this.tutorialStep();
+    const step = this.tutorialStep() ?? this.engine.nextObjective?.();
     for (const b of this.categories.children) {
       b.setAttribute('aria-current', String(b.dataset.category === this.category));
       const required = step && this.getBuilding(step.buildType)?.category === b.dataset.category;
@@ -254,7 +252,7 @@ export class IslandInterface {
     const result = this.movingId ? this.engine.move(this.movingId, x, z) : this.engine.place(this.selected, x, z);
     if (result.ok) {
       this.cancelPlacement();
-      if (this.engine.state.tutorial.step > before) this.toast('tutorial.reward', { money: this.steps()[before].reward.money });
+      if (this.engine.state.tutorial.step > before && result.reward?.paid) this.toast('tutorial.reward', { money: this.steps()[before].reward.money });
       if (this.engine.state.tutorial.completed && before < this.steps().length) this.toast('tutorial.complete');
     } else this.result(result);
   }
@@ -272,10 +270,11 @@ export class IslandInterface {
     this.infoId = id;
     this.drawInfo();
   }
-  closeInfo() { this.infoId = null; this.info.hidden = true; this.view.showRadius(null); }
+  closeInfo() { this.infoId = null; this.infoSignature = null; this.info.hidden = true; this.view.showRadius(null); }
   drawInfo() {
     const instance = this.engine.state.buildings.find(b => b.id === this.infoId);
     if (!instance) { this.closeInfo(); return; }
+    this.infoSignature = JSON.stringify(instance);
     const record = this.getBuilding(instance.typeId);
     const factor = levelFactor(instance, this.data.config);
     const amount = value => Number((value * factor).toFixed(1)).toLocaleString('he-IL');
@@ -361,7 +360,6 @@ export class IslandInterface {
     if (!this.engine.state.avatar.created) modal.querySelector('[data-action=close-modal]').hidden = true;
     const draft = { ...this.engine.state.avatar };
     const preview = el('div', 'avatar-preview');
-    preview.append(el('span', '', '✦'), el('strong', '', this.t('app.mayor')), el('span', '', '✦'));
     modal.append(preview);
     const previewCanvas = el('canvas', 'avatar-preview-canvas');
     previewCanvas.setAttribute('aria-label', this.t('avatar.preview'));
