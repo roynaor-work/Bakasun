@@ -3,12 +3,11 @@
 Run a local server, then python3 tests/e2e/workout_weekly.py.
 """
 import os
-import re
 from datetime import datetime, timezone
 from playwright.sync_api import sync_playwright, expect
+from workout_finish_helpers import check_versions
 
 BASE = os.environ.get('WORKOUT_TEST_URL', 'http://127.0.0.1:8765/workout/')
-VERSION = '20261010-camera-1'
 
 
 def stored(page):
@@ -131,9 +130,7 @@ with sync_playwright() as pw:
     page.goto(BASE + '#/parent-week/2026-09-27')
     expect(page.locator('#pin1')).to_be_visible()
     assert not errors, errors
-    modules = [url for url in requests if '/workout/' in url and '.js' in url]
-    assert modules and all(url.endswith('?v=' + ('20261011-vids-signed-1' if re.search(r'/js/(?:app|vids|vids-cloud)\.js\?', url) else VERSION)) for url in modules), modules
-    assert len({url for url in modules if '/logic.js' in url}) == 1
+    check_versions(requests)
     context.close()
 
     context, page = setup(browser, cloud=True)

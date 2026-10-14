@@ -119,6 +119,10 @@ test('calendar weeks cross year and daylight-saving boundaries and date-only val
 
 test('changed entrypoints and upload modules use the current version; other assets retain theirs', async () => {
   const version = '20261010-camera-1', videoVersion = '20261011-vids-signed-1';
+  const finishVersion = '20261014-w2g-1';
+  const finishModules = new Set(['app.js', 'belts.js', 'camera-demo.mjs', 'camera-screen.mjs',
+    'dad-test.js', 'engine.js', 'logic.js', 'outdoors.js', 'parent.js', 'rest-days.js',
+    'speech.js', 'store.js', 'together.js', 'voice-lines.js', 'voice-player.js', 'weekly.js']);
   async function inspect(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const url = new URL(entry.name + (entry.isDirectory() ? '/' : ''), directory);
@@ -127,7 +131,8 @@ test('changed entrypoints and upload modules use the current version; other asse
       const content = await readFile(url, 'utf8');
       for (const match of content.matchAll(/\b(?:from\s*|import\s*\(\s*|import\s+)(['"])([^'"]+)\1/g)) {
         if (match[2].startsWith('node:')) continue;
-        const expected = /(?:^|\/)vids(?:-cloud)?\.js\?/.test(match[2]) ? videoVersion :
+        const basename = match[2].split('?')[0].split('/').at(-1);
+        const expected = finishModules.has(basename) ? finishVersion : /(?:^|\/)vids(?:-cloud)?\.js\?/.test(match[2]) ? videoVersion :
           /(?:^|\/)(?:camera-session\.mjs|camera-screen\.mjs|keyframes\.mjs|upload\.mjs|upload-background\.mjs|video-recording\.mjs)\?/.test(match[2]) ? APP_VERSION : version;
         assert.ok(match[2].endsWith('?v=' + expected), url.pathname + ': ' + match[2]);
       }
@@ -137,7 +142,7 @@ test('changed entrypoints and upload modules use the current version; other asse
   for (const path of ['../workout/index.html', '../workout/voice-rec/index.html']) {
     const content = await readFile(new URL(path, import.meta.url), 'utf8');
     for (const match of content.matchAll(/(?:src|href)="([^"\n]+\.(?:js|css)(?:\?[^"\n]+)?)"/g)) {
-      const expected = path === '../workout/index.html' && match[1].startsWith('js/app.js?') ? APP_VERSION : version;
+      const expected = /(?:^|\/)app\.js\?/.test(match[1]) ? finishVersion : version;
       assert.ok(match[1].endsWith('?v=' + expected), path + ': ' + match[1]);
     }
   }

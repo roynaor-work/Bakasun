@@ -1,4 +1,4 @@
-import { CAMERA_LINES } from './voice-lines.js?v=20261010-camera-1';
+import { CAMERA_LINES } from './voice-lines.js?v=20261014-w2g-1';
 
 // One existing stage is resized, never cloned into a second WebGL renderer.
 export class CameraDemo {

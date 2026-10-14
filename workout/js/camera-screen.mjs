@@ -1,9 +1,9 @@
 import { CameraAttempt, cameraPrivacy } from './camera-session.mjs?v=20261013-frames-1';
-import { CameraDemo } from './camera-demo.mjs?v=20261010-camera-1';
+import { CameraDemo } from './camera-demo.mjs?v=20261014-w2g-1';
 import { acquireCamera, configureZoom, cameraSnapshot, reduceResolution, screenOrientation } from '../cam-lab/camera.mjs?v=20261010-camera-1';
 import { VIDEO_LIMIT_MS } from '../cam-lab/video-recording.mjs?v=20261013-frames-1';
 import { numWord } from './count.js?v=20261010-camera-1';
-import { speakLocal, stopSpeak } from './speech.js?v=20261010-camera-1';
+import { speakLocal, stopSpeak } from './speech.js?v=20261014-w2g-1';
 
 const statusText = { legs: 'לא רואה את הרגליים', hands: 'לא רואה את הידיים', head: 'לא רואה את הראש',
   side: 'נסתובב לצד המצלמה', body: 'ניכנס לתמונה', world: 'נחכה רגע', activeSide: 'נחזור לתמונה',

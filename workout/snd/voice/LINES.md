@@ -1,6 +1,6 @@
 # משפטים להקלטה
 
-222 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
+253 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
 
 מקליטים בטלפון ב־https://roynaor-work.github.io/Bakasun/workout/voice-rec/ (אחרי מיזוג). Chrome באנדרואיד או Safari באייפון, דרך HTTPS. אין קישור מהאפליקציה.
 
@@ -18,6 +18,37 @@
 
 | מזהה | הטקסט המדויק | איפה נאמר בקוד | שם קובץ צפוי |
 |---|---|---|---|
+| `outdoor-wall-6` | תבעט בכדור לקיר 6 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-wall-6.wav` |
+| `outdoor-tree-6` | תרוץ עד העץ ותחזור. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-tree-6.wav` |
+| `outdoor-hops-6` | תקפוץ על רגל אחת 6 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-hops-6.wav` |
+| `outdoor-catch-6` | תזרוק כדור למעלה ותתפוס 4 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-catch-6.wav` |
+| `outdoor-line-6` | תלך על קו בחוץ 10 צעדים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-line-6.wav` |
+| `outdoor-dance-6` | תבחר שיר ותרקוד בחוץ. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-dance-6.wav` |
+| `outdoor-wall-7` | תבעט בכדור לקיר 8 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-wall-7.wav` |
+| `outdoor-tree-7` | תרוץ עד העץ ותחזור פעמיים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-tree-7.wav` |
+| `outdoor-hops-7` | תקפוץ על כל רגל 8 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-hops-7.wav` |
+| `outdoor-catch-7` | תזרוק כדור למעלה ותתפוס 6 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-catch-7.wav` |
+| `outdoor-zigzag-7` | תבחר 3 סימנים בחוץ ותרוץ ביניהם בזיגזג. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-zigzag-7.wav` |
+| `outdoor-shadow-7` | תקפוץ מעל הצל שלך 8 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-shadow-7.wav` |
+| `outdoor-wall-8` | תבעט בכדור לקיר 10 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-wall-8.wav` |
+| `outdoor-tree-8` | תרוץ עד העץ ותחזור 3 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-tree-8.wav` |
+| `outdoor-hops-8` | תקפוץ על כל רגל 10 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-hops-8.wav` |
+| `outdoor-catch-8` | תזרוק כדור למעלה ותתפוס 8 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-catch-8.wav` |
+| `outdoor-side-8` | תעשה 10 צעדי צד לכל כיוון בחוץ. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-side-8.wav` |
+| `outdoor-goal-8` | תבנה שער קטן ותבעט אליו 10 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-goal-8.wav` |
+| `outdoor-wall-9` | תבעט בכדור לקיר 12 פעמים ותעצור אותו בכל פעם. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-wall-9.wav` |
+| `outdoor-tree-9` | תרוץ עד העץ ותחזור 4 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-tree-9.wav` |
+| `outdoor-hops-9` | תקפוץ על כל רגל 12 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-hops-9.wav` |
+| `outdoor-catch-9` | תזרוק כדור למעלה ותתפוס 10 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-catch-9.wav` |
+| `outdoor-zigzag-9` | תבחר 5 סימנים בחוץ ותוביל כדור ביניהם. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-zigzag-9.wav` |
+| `outdoor-jump-9` | תקפוץ קדימה בשתי רגליים 10 פעמים. | workout/js/app.js: outdoorCard / wireOutdoor; workout/js/outdoors.js: OUTDOOR_TASKS | `outdoor-jump-9.wav` |
+| `outdoor-done` | עשית את זה! עוד כוכב על המשחק בחוץ. | workout/js/app.js: wireOutdoor | `outdoor-done.wav` |
+| `dad-test-in-3` | עוד 3 ימים יש לנו מבחן עם אבא! | workout/js/app.js: home / together / donePhase; workout/js/dad-test.js | `dad-test-in-3.wav` |
+| `dad-test-in-2` | עוד יומיים יש לנו מבחן עם אבא! | workout/js/app.js: home / together / donePhase; workout/js/dad-test.js | `dad-test-in-2.wav` |
+| `dad-test-in-1` | מחר יש לנו מבחן עם אבא! | workout/js/app.js: home / together / donePhase; workout/js/dad-test.js | `dad-test-in-1.wav` |
+| `dad-test-in-0` | היום יש לנו מבחן עם אבא! | workout/js/app.js: home / together / donePhase; workout/js/dad-test.js | `dad-test-in-0.wav` |
+| `dad-test-success` | הצלחת במבחן עם אבא! | workout/js/app.js: home / together / donePhase; workout/js/dad-test.js | `dad-test-success.wav` |
+| `dad-test-together` | עשינו את זה יחד, בקצב שלך. | workout/js/app.js: home / together / donePhase; workout/js/dad-test.js | `dad-test-together.wav` |
 | `camera-placement-far` | אתה רחוק מדי. תתקרב אל המצלמה בצעד קטן. | workout/cam-lab/placement-lines.mjs; workout/cam-lab/app.mjs: placement guidance | `camera-placement-far.wav` |
 | `camera-placement-near` | אתה קרוב מדי. תתרחק מהמצלמה בצעד קטן. | workout/cam-lab/placement-lines.mjs; workout/cam-lab/app.mjs: placement guidance | `camera-placement-near.wav` |
 | `camera-placement-right` | צעד קטן ימינה, לימין שלך. לפי החץ. | workout/cam-lab/placement-lines.mjs; workout/cam-lab/app.mjs: placement guidance | `camera-placement-right.wav` |
