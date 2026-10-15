@@ -1,0 +1,152 @@
+import {gameContext} from '../minigames/context.mjs';
+
+const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
+const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
+
+export class ActivityInterface {
+  constructor({ui,engine,activity,data,t,now=Date.now}) {
+    Object.assign(this,{ui,engine,activity,data,t,now});this.current=null;this.closing=false;this.eventOpen=false;
+    ui.activityInterface=this;
+    this.openButton=button(t('minigame.open'),'open-games',()=>this.menu());
+    this.openButton.hidden=!data.featureFlags.minigames;ui.cityDetails.append(this.openButton);
+    this.panel=el('aside','event-panel panel');this.panel.hidden=true;
+    this.indicator=button('','toggle-event',()=>{this.eventOpen=!this.eventOpen;this.render();});
+    this.indicator.setAttribute('aria-expanded','false');this.details=el('div','event-details');this.details.hidden=true;
+    this.panel.append(this.indicator,this.details);ui.root.querySelector('.hud').append(this.panel);
+    this.unsubscribe=activity.subscribe(()=>{this.render();ui.refresh();});
+    this.unsubscribeEngine=engine.subscribe(()=>this.render());this.render();
+  }
+  cleanup(eventId) {
+    this.closing=true;const current=this.current;this.current=null;current?.cancel();
+    if(eventId)this.activity.cancel(eventId);
+    this.ui.view.paused=false;this.closing=false;
+  }
+  modal(title,subtitle,eventId) {
+    const dialog=this.ui.openModal(title,subtitle);
+    this.ui.previousFocus=this.ui.cityToggle;
+    this.ui.modalCleanup=()=>this.cleanup(eventId);return dialog;
+  }
+  enabledGames(){return [...this.engine.registry.minigames.values()].filter(g=>this.data.featureFlags.minigames&&(!g.featureFlag||this.data.featureFlags[g.featureFlag]));}
+  menu() {
+    const dialog=this.modal('minigame.title','minigame.subtitle');
+    const cards=el('div','game-cards');
+    for(const game of this.enabledGames()) {
+      const card=el('article','game-card');card.dataset.game=game.id;
+      const context=gameContext(this.engine,this.data.config.minigames,this.now(),game.id),level=this.engine.state.minigameLevels[game.id];
+      card.append(el('h3','',`${game.icon} ${this.t(game.title)}`),el('p','',this.t('minigame.level',{level,difficulty:context.level})),el('p','',this.t('minigame.power',{power:Math.round(context.power*this.data.config.minigames.percentScale)})),el('p','',this.t('minigame.best',{score:this.engine.state.highScores[game.id]||0})));
+      const actions=el('div','game-card-actions');
+      actions.append(button(this.t('minigame.play'),'game-play',()=>this.start(game.id), 'primary-button'),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
+      const next=this.data.config.minigameLevels[game.id]?.[level];
+      const upgrade=button(next?this.t('minigame.upgrade',{cost:next.cost}):this.t('app.maxLevel'),'game-upgrade',()=>{const result=this.activity.upgrade(game.id);if(result.ok)this.menu();else this.ui.result(result);});
+      upgrade.disabled=!next;actions.append(upgrade);card.append(actions);cards.append(card);
+    }
+    dialog.append(cards);
+  }
+  narrateHelp(id) {for(let i=1;i<=3;i++){const key=`minigame.${id}.help.${i}`;this.engine.narration.announce(key);this.ui.narrate(key);}}
+  helpLines(id) {const lines=el('div','game-help-lines');for(let i=1;i<=3;i++)lines.append(el('p','',this.t(`minigame.${id}.help.${i}`)));return lines;}
+  intro(id,eventId) {
+    const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
+    dialog.append(this.helpLines(id),button(this.t('minigame.understood'),'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId);},'primary-button'),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
+    this.narrateHelp(id);
+  }
+  start(id,eventId) {
+    if(!this.engine.state.instructionsSeen.includes(id))this.intro(id,eventId);else this.launch(id,eventId);
+  }
+  launch(id,eventId) {
+    // Switching from instructions must retain the event's playing state.
+    this.ui.modalCleanup=null;
+    const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
+    dialog.classList.add('game-screen');dialog.dataset.game=id;
+    const close=dialog.querySelector('[data-action="close-modal"]');close.remove();
+    const header=el('header','game-header'),heading=dialog.querySelector('h2');
+    dialog.querySelector('.modal-subtitle').remove();
+    const exit=button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal());header.append(heading,exit);
+    const status=el('p','game-status');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+    const stage=el('div','game-stage'),canvas=el('canvas','minigame-canvas');canvas.setAttribute('aria-label',this.t(game.title));canvas.tabIndex=0;stage.append(canvas);
+    const controls=el('div','game-controls'),balance=this.data.config.minigames[id];
+    const control=(key,label)=>{const node=button(label,`control-${key}`,()=>{});node.dataset.gameControl=key;return node;};
+    let gauges,turnLabel;
+    if(id==='alienDefense')controls.append(control('left',`◀ ${this.t('minigame.left')}`),control('fire',this.t('minigame.fire')),control('right',`${this.t('minigame.right')} ▶`));
+    if(id==='fireRescue') {
+      gauges={};for(const key of ['water','pressure']){const label=el('label','game-gauge',this.t(`minigame.${key}`)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);gauges[key]=meter;}
+    }
+    if(id==='navalDuel') {
+      for(const [key,min,max,value]of [['angle',balance.minAngle,balance.maxAngle,balance.defaultAngle],['power',0,balance.powerMaximum,balance.defaultPower]]){
+        const label=el('label','game-slider',this.t(key==='angle'?'minigame.aim':'minigame.force')),input=el('input');input.type='range';input.min=min;input.max=max;input.value=value;input.dataset.gameInput=key;label.append(input);controls.append(label);
+      }
+      controls.append(control('fire',this.t('minigame.launch')));turnLabel=el('p','game-turn');controls.append(turnLabel);
+    }
+    dialog.replaceChildren(header,status,stage,controls);
+    this.ui.view.paused=true;
+    const context=gameContext(this.engine,this.data.config.minigames,this.now(),id);
+    const eventBonuses=eventId?this.activity.bonuses():{};
+    const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,turnLabel,t:this.t,
+      onError:reason=>this.ui.toast(reason),
+      onFinish:result=>{
+        this.current=null;
+        if(result.cancelled){if(!this.closing)this.ui.closeModal();return;}
+        if(eventId)this.activity.resolve(eventId,result);
+        this.showResult(id,eventId,result);
+      }
+    });
+    if(!response.ok){this.ui.closeModal();this.ui.result(response);return;}
+    this.current=response;
+    // The large exit button remains reachable during help and throughout play.
+    const help=button(this.t('minigame.help'),'game-help',()=>{
+      this.current?.session.setPaused(true);
+      const sheet=el('div','game-help-sheet');sheet.append(this.helpLines(id),button(this.t('minigame.understood'),'game-understood',()=>{sheet.remove();this.current?.session.setPaused(false);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
+      stage.append(sheet);this.narrateHelp(id);
+    });controls.append(help);canvas.focus();
+  }
+  showResult(id,eventId,result) {
+    const game=this.engine.registry.minigames.get(id);
+    this.ui.modalCleanup=null;
+    const dialog=this.modal(result.outcome==='win'?'minigame.win':'minigame.lose','minigame.resultHint',eventId);
+    dialog.dataset.result=id;
+    const summary=el('div','game-result');
+    for(const key of ['score','money','parts']){const row=el('p','result-row'),value=el('bdi','',String(result[key]));row.append(el('span','',this.t(`minigame.result.${key}`)),value);summary.append(row);}
+    dialog.append(el('h3','',this.t(game.title)),summary,
+      button(this.t('minigame.again'),'game-again',()=>{
+        const active=this.engine.state.events.active;
+        if(eventId&&active?.id===eventId){
+          this.ui.modalCleanup=null;this.ui.closeModal();
+          const choice=this.activity.choose('play');if(!choice.ok){this.ui.view.paused=false;this.ui.result(choice);return;}
+        }
+        this.start(id,active?.id===eventId?eventId:undefined);
+      },'primary-button'),button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal()));
+    this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
+    this.engine.narration.announce('minigame.result',result);
+  }
+  render() {
+    const event=this.engine.state.events.active;this.panel.hidden=!event||!this.data.featureFlags.events||(event&&!this.data.featureFlags[this.data.config.events.types[event.typeId].featureFlag]);
+    if(!event){this.eventOpen=false;this.signature=null;return;}
+    const type=this.data.config.events.types[event.typeId],seconds=Math.max(0,Math.ceil((event.warningUntil-this.now())/this.data.config.events.millisecondsPerSecond));
+    this.indicator.textContent=`${type.icon} ${this.t(type.titleId)}${event.phase==='warning'?` · ${this.t('event.shortTime',{seconds})}`:''}`;
+    const countdown=event.phase==='warning'?this.t('event.warningTime',{seconds}):this.t('event.ready');
+    const signature=JSON.stringify([event,this.eventOpen,this.engine.state.events.repairs]);
+    if(signature===this.signature){this.countdown.textContent=countdown;return;}this.signature=signature;
+    this.indicator.setAttribute('aria-expanded',String(this.eventOpen));this.details.hidden=!this.eventOpen;
+    this.countdown=el('p','',countdown);
+    this.details.replaceChildren(el('p','',this.t(type.warningId)),this.countdown);
+    if(this.activity.bonuses().fireWater)this.details.append(el('p','',this.t('event.bonus')));
+    this.details.append(button(this.t('event.go'),'event-go',()=>{
+      const target=this.engine.state.buildings.find(b=>b.id===event.targetId);
+      this.ui.view.focusCell(target?.x??0,target?.z??Math.floor(this.engine.state.world.size/2));
+      this.eventOpen=false;this.signature=null;this.render();
+    }));
+    for(const action of this.data.config.events.actions){
+      const b=button(this.t(action.labelId),`event-${action.id}`,()=>{
+        const result=this.activity.choose(action.id);if(!result.ok){this.ui.result(result);return;}
+        if(result.gameId){this.eventOpen=false;this.start(result.gameId,result.eventId);}
+        else this.ui.toast(result.deferred?'event.deferred':'event.handled');this.render();
+      });
+      b.disabled=event.phase==='playing'||(action.id==='defer'?event.deferred:event.phase!=='ready');this.details.append(b);
+    }
+  }
+  decorateInfo(instance,actions) {
+    if(!(this.engine.state.events.repairs[instance.id]>this.now()))return;
+    this.ui.info.append(el('p','repair-status',this.t('event.repair')));
+    actions.append(button(this.t('event.repairNow',{cost:this.data.config.events.repairCost}),'repair-building',()=>{const result=this.activity.repair(instance.id);if(result.ok){this.ui.drawInfo();this.ui.toast('event.repaired');}else this.ui.result(result);}));
+  }
+  dispose(){this.cleanup();this.unsubscribe();this.unsubscribeEngine();this.panel.remove();this.openButton.remove();}
+}

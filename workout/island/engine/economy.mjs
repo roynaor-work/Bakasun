@@ -2,6 +2,7 @@ import { levelFactor, population } from './metrics.mjs';
 
 /** All income sources are records in config.json or explicit registry extensions. Amounts are per minute. */
 export function calculateIncome(state, registry, config) {
+  const active = state.buildings.filter(row => !(state.events?.repairs?.[row.id] > state.updatedAt));
   const result = { money: 0, food: 0, materials: 0, energy: 0, sources: [] };
   const add = (id, resource, amount) => {
     if (!Number.isFinite(amount) || amount < 0 || !(resource in result) || resource === 'sources') return;
@@ -10,15 +11,15 @@ export function calculateIncome(state, registry, config) {
   };
   for (const source of [...config.incomeSources, ...registry.incomeSources.values()]) {
     if (typeof source.calculate === 'function') {
-      const amounts = source.calculate({ state, registry, config });
+      const amounts = source.calculate({ state, registry, config, activeBuildings: active });
       for (const [resource, amount] of Object.entries(amounts)) add(source.id, resource, amount);
     } else if (source.kind === 'tourists') {
-      const parks = state.buildings.filter(row => row.typeId === 'park').length;
+      const parks = active.filter(row => row.typeId === 'park').length;
       add(source.id, source.resource, source.basePerMinute + population(state, registry, config) * source.populationRate + parks * source.parkRate);
     } else if (source.kind === 'buildingIncome') {
-      for (const row of state.buildings) add(source.id, source.resource, (registry.buildings.get(row.typeId)?.income || 0) * levelFactor(row, config));
+      for (const row of active) add(source.id, source.resource, (registry.buildings.get(row.typeId)?.income || 0) * levelFactor(row, config));
     } else if (source.kind === 'production') {
-      for (const row of state.buildings) for (const [resource, amount] of Object.entries(registry.buildings.get(row.typeId)?.resources || {})) add(source.id, resource, amount * levelFactor(row, config));
+      for (const row of active) for (const [resource, amount] of Object.entries(registry.buildings.get(row.typeId)?.resources || {})) add(source.id, resource, amount * levelFactor(row, config));
     } else if (source.kind === 'constant') {
       add(source.id, source.resource, source.perMinute);
     }

@@ -3,6 +3,7 @@ import { access, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import {checkActivity} from './island-activity.mjs';
 
 // The default serves this checkout on an ephemeral loopback port. Override the
 // URL to inspect a separately started server. Dependencies are never downloaded.
@@ -17,7 +18,7 @@ let server;
 if (!process.env.ISLAND_BASE_URL) {
   const repoRoot = fileURLToPath(new URL('../../', import.meta.url));
   const islandRoot = path.join(repoRoot, 'workout', 'island');
-  const types = { '.html': 'text/html', '.mjs': 'text/javascript', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.glb': 'model/gltf-binary', '.png': 'image/png', '.jpg': 'image/jpeg' };
+  const types = { '.html': 'text/html', '.mjs': 'text/javascript', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.glb': 'model/gltf-binary', '.png': 'image/png', '.jpg': 'image/jpeg' };
   server = createServer(async (request, response) => {
     try {
       const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
@@ -41,14 +42,17 @@ if (!executablePath && process.platform === 'win32') {
 }
 const directory = process.env.ISLAND_OUTPUT_DIR ? path.resolve(process.env.ISLAND_OUTPUT_DIR) : fileURLToPath(new URL('./screenshots/', import.meta.url));
 await mkdir(directory, { recursive: true });
-const browser = await chromium.launch({ executablePath, headless: true, args: [
+const launchBrowser = () => chromium.launch({ executablePath, headless: true, args: [
   '--no-proxy-server', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
 ] });
+let browser = await launchBrowser();
 const reports = [];
 
 async function checkViewport(width, height, label) {
   console.log(`${label}: gameplay ${width}x${height}`);
   const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1, hasTouch: width < 600 });
+  // Keep the construction regression focused; activity has its own seeded flow.
+  await context.route('**/data/featureFlags.json',async route=>{const response=await route.fetch();const flags=await response.json();await route.fulfill({response,json:{...flags,events:false}});});
   const page = await context.newPage();
   page.setDefaultTimeout(60000);
   const errors = [], externalRequests = [], outsideIslandRequests = [], failedRequests = [];
@@ -320,7 +324,7 @@ async function measureLayout(page) {
       return { left, right, top, bottom, width: Math.max(0, right - left), height: Math.max(0, bottom - top) };
     };
     const visible = node => node.getClientRects().length && getComputedStyle(node).visibility !== 'hidden' && !node.closest('[inert]');
-    const nodes = [...document.querySelectorAll('button,.city-panel,.mission,.info-card,.build-dock,.avatar-footer,.modal-overlay,#toast.visible,.save-error')].filter(visible).map(node => ({ node, box: rect(node) })).filter(({box}) => box.width > .5 && box.height > .5);
+    const nodes = [...document.querySelectorAll('button,.city-panel,.mission,.event-panel,.info-card,.build-dock,.avatar-footer,.modal-overlay,#toast.visible,.save-error')].filter(visible).map(node => ({ node, box: rect(node) })).filter(({box}) => box.width > .5 && box.height > .5);
     const name = node => node.dataset.action || node.className || node.id;
     const intersects = (a,b) => Math.min(a.right,b.right)-Math.max(a.left,b.left) > .5 && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top) > .5;
     const overlaps = [];
@@ -439,11 +443,15 @@ async function checkLayoutViewport(width,height) {
 async function checkCityViewport(width, height) {
   console.log(`city rules: ${width}x${height}`);
   const context = await browser.newContext({ viewport: { width, height }, hasTouch: true, deviceScaleFactor: 1 });
+  // City limits are checked independently of the separately tested scheduler.
+  await context.route('**/data/featureFlags.json',async route=>{const response=await route.fetch();const flags=await response.json();await route.fulfill({response,json:{...flags,events:false}});});
   const page = await context.newPage(); page.setDefaultTimeout(60000);
-  const errors = [], failedRequests = [], outsideRequests = [], screenshots = [], levels = [];
+  const errors = [], failedRequests = [], outsideRequests = [], screenshots = [], levels = [], assetRequests=[];
+  let phase='initial';
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-  page.on('requestfailed', request => failedRequests.push(request.url()));
+  for(const type of ['request','requestfinished','requestfailed'])page.on(type,request=>{if(request.url().endsWith('/kid-full.glb'))assetRequests.push({type,phase,timing:request.timing(),error:request.failure()?.errorText});});
+  page.on('requestfailed', request => failedRequests.push({url:request.url(),error:request.failure()?.errorText}));
   page.on('request', request => { const url = new URL(request.url()); if (['http:', 'https:'].includes(url.protocol) && (url.origin !== baseUrl.origin || !url.pathname.startsWith(appPath))) outsideRequests.push(url.href); });
   const shot = async name => { const file = `island-g1c-${width}-${name}.png`; await page.screenshot({ path: path.join(directory, file) }); screenshots.push(file); };
   const cell = async (x, z) => {
@@ -587,20 +595,24 @@ async function checkCityViewport(width, height) {
     await shot('moved');
     await page.locator('[data-action="undo"]').tap();
     assert.deepEqual(await page.evaluate(id => { const b = window.__island.engine.state.buildings.find(b => b.id === id); return [b.x, b.z]; }, tower), [1, 1]);
-    await page.reload({ waitUntil: 'networkidle' }); await page.waitForFunction(() => window.__island?.view?.metrics().avatarLoaded);
+    phase='reload';await page.reload({ waitUntil: 'networkidle' }); await page.waitForFunction(() => window.__island?.view?.metrics().avatarLoaded);phase='reloaded';
     assert.equal(await page.evaluate(id => window.__island.engine.state.buildings.find(b => b.id === id).level, home), 4);
     assert.deepEqual(errors, []); assert.deepEqual(failedRequests, []); assert.deepEqual(outsideRequests, []);
     reports.push({ cityViewport: { width, height }, levels, actions, moved: moved.instance, errors, failedRequests, outsideRequests, screenshots });
-  } catch (error) { await shot('failure').catch(() => {}); console.error(JSON.stringify({ width, errors, failedRequests, outsideRequests })); throw error; }
+  } catch (error) { await shot('failure').catch(() => {}); console.error(JSON.stringify({ width, errors, failedRequests, outsideRequests,assetRequests })); throw error; }
   finally { await context.close(); }
 }
 
 try {
+  if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'activity') reports.push(...await checkActivity({browser,target,directory}));
+  // Keep virtual-clock activity and the real-time city suite in separate
+  // Chromium processes, including their network and graphics state.
+  if (!process.env.ISLAND_ONLY) {await browser.close();browser=await launchBrowser();}
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'city') for (const width of [390, 360]) await checkCityViewport(width, width === 390 ? 844 : 740);
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'desktop') await checkViewport(1440, 900, 'desktop');
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'phone') await checkViewport(390, 844, 'phone');
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'layout') for (const [width,height] of [[360,740],[390,844],[412,915],[844,390]]) if (!process.env.ISLAND_LAYOUT_VIEWPORT || process.env.ISLAND_LAYOUT_VIEWPORT === `${width}x${height}`) await checkLayoutViewport(width,height);
   const report = { browser: await browser.version(), environment: 'Desktop Chromium with ANGLE/SwiftShader; viewport checks, not a physical Android 10 device', deploymentScope: 'Private server exposes only workout/island/; all requests are audited against that folder', results: reports };
-  await writeFile(path.join(directory, process.env.ISLAND_ONLY === 'city' ? 'island-city-report.json' : process.env.ISLAND_ONLY === 'layout' ? 'island-layout-report.json' : 'island-report.json'), JSON.stringify(report, null, 2));
+  await writeFile(path.join(directory, process.env.ISLAND_REPORT_NAME ? path.basename(process.env.ISLAND_REPORT_NAME) : process.env.ISLAND_ONLY === 'city' ? 'island-city-report.json' : process.env.ISLAND_ONLY === 'layout' ? 'island-layout-report.json' : 'island-report.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 } finally { await browser.close(); if (server) { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); } }

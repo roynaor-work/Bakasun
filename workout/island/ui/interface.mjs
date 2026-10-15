@@ -392,7 +392,7 @@ export class IslandInterface {
   closeInfo() { this.infoId = null; this.infoSignature = null; this.info.hidden = true; this.view.showRadius(null); }
   currentInfoSignature() {
     const state = this.engine.state;
-    return JSON.stringify([state.buildings.find(row => row.id === this.infoId), state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason]);
+    return JSON.stringify([state.buildings.find(row => row.id === this.infoId), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason]);
   }
   drawInfo() {
     const instance = this.engine.state.buildings.find(b => b.id === this.infoId);
@@ -441,6 +441,7 @@ export class IslandInterface {
       remove.onclick = () => { this.closeInfo(); this.result(this.engine.remove(instance.id)); };
     };
     actions.append(move, upgrade, remove); this.info.append(actions);
+    this.activityInterface?.decorateInfo(instance,actions);
     if (nextLevel) {
       const nextInstance = { ...instance, level: instance.level + 1 };
       const details = el('p', 'upgrade-details');
@@ -471,6 +472,7 @@ export class IslandInterface {
     node.onclick = () => this.toast('parent.hold');
   }
   openModal(titleId, subtitleId) {
+    this.modalCleanup?.(); this.modalCleanup = null;
     this.modalRoot.replaceChildren();
     const overlay = el('div', 'modal-overlay');
     const modal = el('section', 'modal panel'); modal.setAttribute('role', 'dialog'); modal.setAttribute('aria-modal', 'true');
@@ -494,6 +496,7 @@ export class IslandInterface {
     return modal;
   }
   closeModal() {
+    const cleanup=this.modalCleanup;this.modalCleanup=null;cleanup?.();
     this.view.detachAvatarPreview?.();
     this.modalRoot.replaceChildren(); this.root.inert = false;
     this.previousFocus?.focus();

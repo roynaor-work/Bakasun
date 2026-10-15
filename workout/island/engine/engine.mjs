@@ -19,6 +19,7 @@ export function createEngine(data, options = {}) {
   const loaded = loadWorld(storage, data, registry, now());
   const state = loaded.ok && loaded.state ? loaded.state : createInitialState(data, now());
   const listeners = new Set(), history = [];
+  let activeMinigame = null;
   let saveBlocked = !loaded.ok && loaded.reason !== 'reason.storage';
   const narration = createNarrationHook();
   const engine = { state, data, registry, flags, narration, storageStatus: loaded.ok ? { ok: true } : loaded, canPlay, spendPlayTime };
@@ -175,6 +176,7 @@ export function createEngine(data, options = {}) {
   engine.tick = seconds => {
     if (!Number.isFinite(seconds) || seconds <= 0) return { ok: false, reason: 'reason.invalid' };
     const duration = Math.min(seconds, config.maxTickSeconds);
+    state.updatedAt = now();
     const gained = flags.economy ? accrueIncome(state, registry, config, duration) : {};
     state.playSeconds += duration;
     changed('tick', { gained });
@@ -237,14 +239,56 @@ export function createEngine(data, options = {}) {
   engine.startMinigame = (id, context = {}) => {
     const minigame = registry.minigames.get(id);
     if (!minigame || !flags.minigames || (minigame.featureFlag && !flags[minigame.featureFlag])) return { ok: false, reason: 'reason.locked' };
-    if (!canPlay()) return { ok: false, reason: 'reason.playTime' };
-    return { ok: true, session: minigame.start({ state, engine, canPlay, spendPlayTime, ...context }) };
+    if (activeMinigame) return { ok: false, reason: 'reason.gameBusy' };
+    if (!engine.canPlay()) return { ok: false, reason: 'reason.playTime' };
+    const token = {}, startedAt = now();
+    let ended = false, session;
+    const ctx = { ...context, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
+    const finish = (raw, cancelled = false) => {
+      if (ended) return { ok: false, reason: 'reason.duplicate' };
+      let result;
+      if (!cancelled) {
+        try { result = minigame.onResult(raw, ctx); } catch { return { ok: false, reason: 'reason.invalid' }; }
+        if (!result || !['win', 'lose'].includes(result.outcome) || !Number.isSafeInteger(result.score) || result.score < 0 || !Number.isSafeInteger(result.money) || result.money < 0 || !Number.isFinite(state.money + result.money)) return { ok: false, reason: 'reason.invalid' };
+        const wins = (state.minigameWins[id] || 0) + Number(result.outcome === 'win');
+        const parts = result.outcome === 'win' && config.minigames?.partEveryWins && wins % config.minigames.partEveryWins === 0 ? config.minigames.winParts : 0;
+        result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts });
+      }
+      ended = true; activeMinigame = null;
+      session?.dispose?.();
+      ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
+      if (result) {
+        state.money += result.money;
+        // Only shipped game IDs are persisted; third-party contract examples remain compatible.
+        if (config.minigameLevels?.[id]) {
+          state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
+          if(result.outcome==='win')state.minigameWins[id]=Math.min(Number.MAX_SAFE_INTEGER,(state.minigameWins[id]||0)+1);
+          if(result.parts){const group=data.world.partGroup;state.parts[group]=(state.parts[group]||0)+result.parts;expand();}
+        }
+        changed('minigame', { id, result });
+      }
+      context.onFinish?.(cancelled ? { cancelled: true } : result);
+      return { ok: true, ...(cancelled ? { cancelled: true } : { result }) };
+    };
+    ctx.finish = raw => finish(raw);
+    ctx.cancel = () => finish(null, true);
+    activeMinigame = token;
+    try {
+      session = minigame.start(ctx);
+      // A synchronous extension may finish from start() itself.
+      if (ended) session?.dispose?.();
+      return { ok: true, session, cancel: ctx.cancel };
+    } catch {
+      if (activeMinigame === token) activeMinigame = null;
+      ended = true; session?.dispose?.();
+      return { ok: false, reason: 'reason.gameStart' };
+    }
   };
-  engine.prepareEvent = id => {
+  engine.prepareEvent = (id, context = {}) => {
     const event = registry.eventTypes.get(id);
     if (!event || !flags.events || (event.featureFlag && !flags[event.featureFlag])) return { ok: false, reason: 'reason.locked' };
     if (!event.warningId) return { ok: false, reason: 'reason.invalid' };
-    return { ok: true, warningId: event.warningId, prepared: event.prepare?.({ state, engine }) };
+    return { ok: true, warningId: event.warningId, prepared: event.prepare?.({ ...context, state, engine }) };
   };
   for (const name of ['registerBuilding', 'registerSport', 'registerMinigame', 'registerEventType', 'registerMetric', 'registerIncomeSource']) engine[name] = record => { const result = registry[name](record); notify('registry', { id: record.id }); return result; };
   return engine;

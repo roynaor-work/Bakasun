@@ -41,6 +41,14 @@ export class IslandView {
         group.userData.buildingId=b.id;group.traverse(o=>{if(o.isMesh)o.userData.buildingId=b.id;});this.buildingRoot.add(group);item={group,level:b.level,typeId:b.typeId||b.type};this.groups.set(b.id,item);
       }
       item.group.position.copy(this.worldPosition(b.x,b.z,record.footprint));
+      const repairing=state.events?.repairs?.[b.id]>state.updatedAt;
+      if(repairing&&!item.repairMarker){
+        const style=this.data.config.events.repairMarker;
+        item.repairMarker=new T.Mesh(new T.ConeGeometry(style.radius,style.height,style.sides),new T.MeshBasicMaterial({color:style.color}));
+        item.repairMarker.position.y=(record.levels?.[b.level-1]?.visual?.height??record.visual?.height??0)+style.offset;item.repairMarker.rotation.z=Math.PI;
+        item.repairMarker.userData.ownedGeometry=true;item.repairMarker.userData.ownedMaterial=true;item.group.add(item.repairMarker);
+      }
+      if(item.repairMarker)item.repairMarker.visible=Boolean(repairing);
     }
     if(previousSize!==this.size)this.resize();
     this.setAvatar(state.avatar||state.character||{});this.refreshWalkers(buildings);
@@ -99,6 +107,7 @@ export class IslandView {
   }
   updateCamera() {if(!this.camera)return;const r=45;this.camera.position.set(this.target.x+Math.sin(this.angle)*Math.cos(this.elevation)*r,this.target.y+Math.sin(this.elevation)*r,this.target.z+Math.cos(this.angle)*Math.cos(this.elevation)*r);this.camera.lookAt(this.target);this.camera.updateMatrixWorld();}
   home() {this.angle=.69;this.elevation=.76;this.zoom=1;this.target.set(0,.4,0);this.resize();}
+  focusCell(x,z) {this.target.copy(this.worldPosition(x,z));this.updateCamera();}
   screenForCell(x,z) {const p=this.worldPosition(x,z);p.project(this.camera);const r=this.canvas.getBoundingClientRect();return {x:r.left+(p.x+1)*r.width/2,y:r.top+(1-p.y)*r.height/2};}
   screenForLandmark(id) {const p=this.environment?.landmarks[id]?.clone();if(!p)return null;p.project(this.camera);const r=this.canvas.getBoundingClientRect();return {x:r.left+(p.x+1)*r.width/2,y:r.top+(1-p.y)*r.height/2,visible:Math.abs(p.x)<1&&Math.abs(p.y)<1};}
   cellAt(clientX,clientY) {
@@ -132,7 +141,7 @@ export class IslandView {
   }
   animate(now) {
     if(this.disposed)return;const delta=Math.min((now-this.last)/1000,.05),time=now/1000;this.last=now;
-    if(!document.hidden){
+    if(!document.hidden&&!this.paused){
       this.environment.tick(time);this.citizens.tick(delta,time);
       if(!this.route.length&&this.walkPoints?.length>1&&now>(this.nextWalk||0)){const p=this.walkPoints[Math.floor((now/3500)%this.walkPoints.length)];this.route.push({x:p.x,z:p.z});this.nextWalk=now+4000;}
       this.avatar.tick(delta,time,this.preview?[]:this.route);

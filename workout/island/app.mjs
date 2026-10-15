@@ -2,6 +2,8 @@ import { loadData } from './engine/load-data.mjs';
 import { createEngine } from './engine/engine.mjs';
 import { IslandView } from './view/island-view.mjs';
 import { IslandInterface } from './ui/interface.mjs';
+import {createActivity} from './activity/runtime.mjs';
+import {ActivityInterface} from './ui/activity.mjs';
 
 const strings = await fetch(new URL('./data/strings.he.json', import.meta.url)).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -26,21 +28,30 @@ try {
     onError: id => { if (ui) ui.toast(id); else root.textContent = t(id); }
   });
   ui = new IslandInterface({ root, engine, view, data, t });
+  const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length)});
+  const games=new ActivityInterface({ui,engine,activity,data,t});
+  let openedGames=false;
+  const requestedGames=new URLSearchParams(location.search).get('games')==='1';
+  const openRequestedGames=()=>{
+    if(requestedGames&&data.featureFlags.minigames&&!openedGames&&engine.state.avatar.created&&!ui.modalRoot.children.length){openedGames=true;games.menu();}
+  };
+  const stopGameShortcut=requestedGames?engine.subscribe((_,event)=>{if(event.type==='avatar')queueMicrotask(openRequestedGames);}):()=>{};
+  queueMicrotask(openRequestedGames);
   window.islandApi = Object.freeze({
     grantParts: (groupId, count) => engine.grantParts(groupId, count),
-    canPlay: () => true,
-    spendPlayTime: () => true,
+    canPlay: () => engine.canPlay(),
+    spendPlayTime: minutes => engine.spendPlayTime(minutes),
     onNarrate: null
   });
   const tick = setInterval(() => {
-    if (!document.hidden) engine.tick(data.config.ui.economyTickMs / 1000);
+    if (!document.hidden) {activity.tick();games.render();engine.tick(data.config.ui.economyTickMs / 1000);}
   }, data.config.ui.economyTickMs);
   const persist = () => engine.save();
   document.addEventListener('visibilitychange', persist);
   window.addEventListener('pagehide', persist);
-  window.addEventListener('beforeunload', () => { clearInterval(tick); persist(); view.dispose(); }, { once: true });
+  window.addEventListener('beforeunload', () => { clearInterval(tick);stopGameShortcut();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
   if (new URLSearchParams(location.search).get('dev') === '1') {
-    window.__island = { engine, view, ui, data };
+    window.__island = { engine, view, ui, data, activity, games };
   }
 } catch (error) {
   root.className = 'load-error';

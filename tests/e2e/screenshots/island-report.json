@@ -4,6 +4,44 @@
   "deploymentScope": "Private server exposes only workout/island/; all requests are audited against that folder",
   "results": [
     {
+      "width": 390,
+      "results": [
+        "ניקוד200מטבעות שהרווחת70חלקים שהרווחת0",
+        "ניקוד100מטבעות שהרווחת50חלקים שהרווחת0",
+        "ניקוד100מטבעות שהרווחת55חלקים שהרווחת0"
+      ],
+      "screenshots": [
+        "island-g2-390-alienDefense.png",
+        "island-g2-390-alienDefense-result.png",
+        "island-g2-390-fireRescue.png",
+        "island-g2-390-fireRescue-result.png",
+        "island-g2-390-navalDuel.png",
+        "island-g2-390-navalDuel-result.png"
+      ],
+      "errors": [],
+      "outside": [],
+      "failed": []
+    },
+    {
+      "width": 1440,
+      "results": [
+        "ניקוד200מטבעות שהרווחת70חלקים שהרווחת0",
+        "ניקוד100מטבעות שהרווחת50חלקים שהרווחת0",
+        "ניקוד110מטבעות שהרווחת57חלקים שהרווחת0"
+      ],
+      "screenshots": [
+        "island-g2-1440-alienDefense.png",
+        "island-g2-1440-alienDefense-result.png",
+        "island-g2-1440-fireRescue.png",
+        "island-g2-1440-fireRescue-result.png",
+        "island-g2-1440-navalDuel.png",
+        "island-g2-1440-navalDuel-result.png"
+      ],
+      "errors": [],
+      "outside": [],
+      "failed": []
+    },
+    {
       "viewport": {
         "width": 1440,
         "height": 900
@@ -25,9 +63,9 @@
         "quality": "low",
         "avatarLoaded": true,
         "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
-        "rafFps": 2.637478570486614,
-        "p95FrameMs": 750,
-        "sampleMs": 3033.2000000000007
+        "rafFps": 2.6867275658248246,
+        "p95FrameMs": 716.6999999999989,
+        "sampleMs": 3349.800000000001
       },
       "errors": [],
       "externalRequests": [],
@@ -51,15 +89,15 @@
       "performance": {
         "triangles": 28800,
         "calls": 81,
-        "fps": 9,
+        "fps": 16,
         "citizens": 4,
         "pixelRatio": 1,
         "quality": "low",
         "avatarLoaded": true,
         "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
-        "rafFps": 6.923381247527364,
-        "p95FrameMs": 233.39999999999964,
-        "sampleMs": 3033.2
+        "rafFps": 13.260401127134095,
+        "p95FrameMs": 100,
+        "sampleMs": 3016.5
       },
       "errors": [],
       "externalRequests": [],
@@ -1232,6 +1270,11 @@
               "height": 56
             },
             {
+              "action": "open-games",
+              "width": 85.9375,
+              "height": 56
+            },
+            {
               "action": "toggle-mission",
               "width": 270,
               "height": 56
@@ -1269,9 +1312,9 @@
               "left": 80,
               "right": 352,
               "top": 8,
-              "bottom": 392,
+              "bottom": 448,
               "width": 272,
-              "height": 384
+              "height": 440
             },
             {
               "name": "toggle-city",
@@ -1283,11 +1326,20 @@
               "height": 56
             },
             {
+              "name": "open-games",
+              "left": 253.0625,
+              "right": 339,
+              "top": 379,
+              "bottom": 435,
+              "width": 85.9375,
+              "height": 56
+            },
+            {
               "name": "mission panel",
               "left": 80,
               "right": 352,
-              "top": 400,
-              "bottom": 458,
+              "top": 456,
+              "bottom": 514,
               "width": 272,
               "height": 58
             },
@@ -1295,8 +1347,8 @@
               "name": "toggle-mission",
               "left": 81,
               "right": 351,
-              "top": 401,
-              "bottom": 457,
+              "top": 457,
+              "bottom": 513,
               "width": 270,
               "height": 56
             },
@@ -1348,13 +1400,13 @@
           ],
           "clearRectangle": {
             "left": 0,
-            "right": 351,
-            "top": 458,
+            "right": 253.0625,
+            "top": 514,
             "bottom": 740,
-            "width": 351,
-            "height": 282
+            "width": 253.0625,
+            "height": 226
           },
-          "clearPercent": 38.108108108108105,
+          "clearPercent": 30.54054054054054,
           "axis": "height"
         },
         "mission-details": {
@@ -3780,6 +3832,11 @@
               "height": 56
             },
             {
+              "action": "open-games",
+              "width": 85.9375,
+              "height": 56
+            },
+            {
               "action": "toggle-mission",
               "width": 300,
               "height": 56
@@ -3817,9 +3874,9 @@
               "left": 80,
               "right": 382,
               "top": 8,
-              "bottom": 392,
+              "bottom": 448,
               "width": 302,
-              "height": 384
+              "height": 440
             },
             {
               "name": "toggle-city",
@@ -3831,11 +3888,20 @@
               "height": 56
             },
             {
+              "name": "open-games",
+              "left": 283.0625,
+              "right": 369,
+              "top": 379,
+              "bottom": 435,
+              "width": 85.9375,
+              "height": 56
+            },
+            {
               "name": "mission panel",
               "left": 80,
               "right": 382,
-              "top": 400,
-              "bottom": 458,
+              "top": 456,
+              "bottom": 514,
               "width": 302,
               "height": 58
             },
@@ -3843,8 +3909,8 @@
               "name": "toggle-mission",
               "left": 81,
               "right": 381,
-              "top": 401,
-              "bottom": 457,
+              "top": 457,
+              "bottom": 513,
               "width": 300,
               "height": 56
             },
@@ -3896,13 +3962,13 @@
           ],
           "clearRectangle": {
             "left": 0,
-            "right": 381,
-            "top": 458,
+            "right": 283.0625,
+            "top": 514,
             "bottom": 844,
-            "width": 381,
-            "height": 386
+            "width": 283.0625,
+            "height": 330
           },
-          "clearPercent": 45.7345971563981,
+          "clearPercent": 39.09952606635071,
           "axis": "height"
         },
         "mission-details": {
@@ -6364,6 +6430,11 @@
               "height": 56
             },
             {
+              "action": "open-games",
+              "width": 85.9375,
+              "height": 56
+            },
+            {
               "action": "toggle-mission",
               "width": 322,
               "height": 56
@@ -6401,9 +6472,9 @@
               "left": 80,
               "right": 404,
               "top": 8,
-              "bottom": 392,
+              "bottom": 448,
               "width": 324,
-              "height": 384
+              "height": 440
             },
             {
               "name": "toggle-city",
@@ -6415,11 +6486,20 @@
               "height": 56
             },
             {
+              "name": "open-games",
+              "left": 305.0625,
+              "right": 391,
+              "top": 379,
+              "bottom": 435,
+              "width": 85.9375,
+              "height": 56
+            },
+            {
               "name": "mission panel",
               "left": 80,
               "right": 404,
-              "top": 400,
-              "bottom": 458,
+              "top": 456,
+              "bottom": 514,
               "width": 324,
               "height": 58
             },
@@ -6427,8 +6507,8 @@
               "name": "toggle-mission",
               "left": 81,
               "right": 403,
-              "top": 401,
-              "bottom": 457,
+              "top": 457,
+              "bottom": 513,
               "width": 322,
               "height": 56
             },
@@ -6480,13 +6560,13 @@
           ],
           "clearRectangle": {
             "left": 0,
-            "right": 403,
-            "top": 458,
+            "right": 305.0625,
+            "top": 514,
             "bottom": 915,
-            "width": 403,
-            "height": 457
+            "width": 305.0625,
+            "height": 401
           },
-          "clearPercent": 49.94535519125683,
+          "clearPercent": 43.82513661202186,
           "axis": "height"
         },
         "mission-details": {
@@ -8657,6 +8737,11 @@
             {
               "action": "toggle-city",
               "width": 238,
+              "height": 56
+            },
+            {
+              "action": "open-games",
+              "width": 85.9375,
               "height": 56
             },
             {
