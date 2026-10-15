@@ -28,8 +28,8 @@ try {
   ui = new IslandInterface({ root, engine, view, data, t });
   window.islandApi = Object.freeze({
     grantParts: (groupId, count) => engine.grantParts(groupId, count),
-    canPlay: () => true,
-    spendPlayTime: () => true,
+    canPlay: () => engine.canPlay(),
+    spendPlayTime: minutes => engine.spendPlayTime(minutes),
     onNarrate: null
   });
   const tick = setInterval(() => {

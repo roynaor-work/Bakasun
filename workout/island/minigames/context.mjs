@@ -1,0 +1,15 @@
+/** Stable seeded generator; every game uses ctx.random rather than Math.random. */
+export function seededRandom(seed) {
+  let value = Number(seed) >>> 0;
+  return () => { value = (Math.imul(value, 1664525) + 1013904223) >>> 0; return value / 4294967296; };
+}
+
+export function gameContext(engine, config, seed) {
+  const level = Math.min(config.levelCount, engine.state.world.stage + config.firstLevel);
+  const bonuses = {};
+  for (const [id, bonus] of Object.entries(config.cityBonuses)) {
+    const levels = engine.state.buildings.filter(b => b.typeId === bonus.buildingId).reduce((sum,b) => sum + b.level, 0);
+    bonuses[id] = Math.min(bonus.maximum, levels * bonus.perBuildingLevel);
+  }
+  return { level, bonuses: Object.freeze(bonuses), random: seededRandom(seed), seed };
+}

@@ -1,10 +1,60 @@
 {
-  "modules":["extensions/example-building.mjs","extensions/example-sport.mjs","extensions/example-minigame.mjs","extensions/example-event.mjs","extensions/example-metric.mjs"],
+  "modules": [
+    "extensions/example-building.mjs",
+    "extensions/example-sport.mjs",
+    "extensions/example-minigame.mjs",
+    "extensions/example-event.mjs",
+    "extensions/example-metric.mjs",
+    "extensions/alien-defense.mjs"
+  ],
   "records": {
-    "building": {"id":"flowerGarden","title":"building.flowerGarden","category":"basic","icon":"🌷","model":"park","featureFlag":"exampleContent","requiresRoad":true,"visual":{"kind":"park","color":"#dfb5df","roofColor":"#9dc887"}},
-    "sport": {"id":"practiceSport","title":"sport.practice","icon":"⭐","buildingId":"soccer","balanceId":"soccer","featureFlag":"exampleContent"},
-    "minigame": {"id":"practiceContract","title":"minigame.practice","featureFlag":"exampleContent"},
-    "event": {"id":"friendlyVisit","title":"event.friendlyVisit","warningId":"event.friendlyVisit.warning","featureFlag":"exampleContent"},
-    "metric": {"id":"teamSpirit","title":"metric.teamSpirit","icon":"⭐","color":"#e5b85b","featureFlag":"exampleContent"}
+    "building": {
+      "id": "flowerGarden",
+      "title": "building.flowerGarden",
+      "category": "basic",
+      "icon": "🌷",
+      "model": "park",
+      "featureFlag": "exampleContent",
+      "requiresRoad": true,
+      "visual": {
+        "kind": "park",
+        "color": "#dfb5df",
+        "roofColor": "#9dc887"
+      }
+    },
+    "sport": {
+      "id": "practiceSport",
+      "title": "sport.practice",
+      "icon": "⭐",
+      "buildingId": "soccer",
+      "balanceId": "soccer",
+      "featureFlag": "exampleContent"
+    },
+    "minigame": {
+      "id": "practiceContract",
+      "title": "minigame.practice",
+      "featureFlag": "exampleContent"
+    },
+    "event": {
+      "id": "friendlyVisit",
+      "title": "event.friendlyVisit",
+      "warningId": "event.friendlyVisit.warning",
+      "featureFlag": "exampleContent"
+    },
+    "metric": {
+      "id": "teamSpirit",
+      "title": "metric.teamSpirit",
+      "icon": "⭐",
+      "color": "#e5b85b",
+      "featureFlag": "exampleContent"
+    },
+    "alienDefense": {
+      "id": "alienDefense",
+      "title": "minigame.alienDefense",
+      "featureFlag": "alienDefense",
+      "difficulty": "cityLevel",
+      "helpId": "minigame.alienDefense.help",
+      "icon": "🛸"
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { cellsFor } from './rules.mjs';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs';
 
-export const CURRENT_VERSION = 2;
+export const CURRENT_VERSION = 3;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -18,11 +19,13 @@ export function createInitialState(data, now = Date.now()) {
     avatar: clone(data.avatar.defaults), team: clone(data.team), players: (data.players || []).map(row => ({ ...data.config.playerDefaults, ...row })),
     tutorial: { step: 0, completed: false, skipped: false }, claimedRewards: [], completedMissions: [], completedEpisodes: [],
     nextId: 1, playSeconds: 0, createdAt: now, updatedAt: now,
+    ...initialActivity(data,now),
   };
 }
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  2(old,data) { return {...old,...initialActivity(data,old.updatedAt||old.createdAt||Date.now()),version:3}; },
   1(old, data) {
     const initial = createInitialState(data, old.createdAt || Date.now());
     const size = old.world?.size || old.worldSize || initial.world.size;
@@ -83,6 +86,7 @@ export function validateSave(state, data, registry) {
   if (!isObject(state.parts) || !Object.entries(state.parts).every(([key, value]) => validId(key) && Number.isSafeInteger(value) && value >= 0)) return invalid();
   for (const key of ['claimedRewards', 'completedMissions', 'completedEpisodes']) if (!Array.isArray(state[key]) || !state[key].every(value => typeof value === 'string')) return invalid();
   if (!Number.isSafeInteger(state.nextId) || state.nextId < 1 || !finitePositive(state.playSeconds)) return invalid();
+  if (!validActivity(state,data,registry)) return invalid();
   return { ok: true };
 }
 
@@ -144,6 +148,7 @@ export function importWorld(raw, current, data, registry) {
   if (!merged.avatar.created && incoming.avatar.created) merged.avatar = clone(incoming.avatar);
   merged.nextId = Math.max(merged.nextId, incoming.nextId);
   merged.playSeconds = Math.max(merged.playSeconds, incoming.playSeconds);
+  mergeActivity(merged,incoming,data);
   merged.updatedAt = Date.now();
   const validation = validateSave(merged, data, registry);
   return validation.ok ? { ok: true, state: merged, added, conflicts } : validation;
