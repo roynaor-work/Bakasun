@@ -3,6 +3,7 @@ import { access, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import {checkActivity} from './island-activity.mjs';
 
 // The default serves this checkout on an ephemeral loopback port. Override the
 // URL to inspect a separately started server. Dependencies are never downloaded.
@@ -49,6 +50,8 @@ const reports = [];
 async function checkViewport(width, height, label) {
   console.log(`${label}: gameplay ${width}x${height}`);
   const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1, hasTouch: width < 600 });
+  // Keep the construction regression focused; activity has its own seeded flow.
+  await context.route('**/data/featureFlags.json',async route=>{const response=await route.fetch();const flags=await response.json();await route.fulfill({response,json:{...flags,events:false}});});
   const page = await context.newPage();
   page.setDefaultTimeout(60000);
   const errors = [], externalRequests = [], outsideIslandRequests = [], failedRequests = [];
@@ -320,7 +323,7 @@ async function measureLayout(page) {
       return { left, right, top, bottom, width: Math.max(0, right - left), height: Math.max(0, bottom - top) };
     };
     const visible = node => node.getClientRects().length && getComputedStyle(node).visibility !== 'hidden' && !node.closest('[inert]');
-    const nodes = [...document.querySelectorAll('button,.city-panel,.mission,.info-card,.build-dock,.avatar-footer,.modal-overlay,#toast.visible,.save-error')].filter(visible).map(node => ({ node, box: rect(node) })).filter(({box}) => box.width > .5 && box.height > .5);
+    const nodes = [...document.querySelectorAll('button,.city-panel,.mission,.event-panel,.info-card,.build-dock,.avatar-footer,.modal-overlay,#toast.visible,.save-error')].filter(visible).map(node => ({ node, box: rect(node) })).filter(({box}) => box.width > .5 && box.height > .5);
     const name = node => node.dataset.action || node.className || node.id;
     const intersects = (a,b) => Math.min(a.right,b.right)-Math.max(a.left,b.left) > .5 && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top) > .5;
     const overlaps = [];
@@ -437,10 +440,11 @@ async function checkLayoutViewport(width,height) {
 }
 
 try {
+  if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'activity') reports.push(...await checkActivity({browser,target,directory}));
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'desktop') await checkViewport(1440, 900, 'desktop');
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'phone') await checkViewport(390, 844, 'phone');
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'layout') for (const [width,height] of [[360,740],[390,844],[412,915],[844,390]]) if (!process.env.ISLAND_LAYOUT_VIEWPORT || process.env.ISLAND_LAYOUT_VIEWPORT === `${width}x${height}`) await checkLayoutViewport(width,height);
   const report = { browser: await browser.version(), environment: 'Desktop Chromium with ANGLE/SwiftShader; viewport checks, not a physical Android 10 device', deploymentScope: 'Private server exposes only workout/island/; all requests are audited against that folder', results: reports };
-  await writeFile(path.join(directory, process.env.ISLAND_ONLY === 'layout' ? 'island-layout-report.json' : 'island-report.json'), JSON.stringify(report, null, 2));
+  await writeFile(path.join(directory, process.env.ISLAND_REPORT_NAME ? path.basename(process.env.ISLAND_REPORT_NAME) : process.env.ISLAND_ONLY === 'layout' ? 'island-layout-report.json' : 'island-report.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 } finally { await browser.close(); if (server) { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); } }

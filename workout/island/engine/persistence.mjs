@@ -56,6 +56,8 @@ export function migrateSave(value, data, registry) {
     if (!migrate) return { ok: false, reason: 'reason.invalid' };
     state = migrate(state, data);
   }
+  // New content IDs can start at level one without changing the save schema.
+  if (isObject(state.minigameLevels)) for (const id of Object.keys(data.config.minigameLevels || {})) if (!(id in state.minigameLevels)) state.minigameLevels[id] = 1;
   const validation = validateSave(state, data, registry);
   return validation.ok ? { ok: true, state, migrated: fromVersion !== CURRENT_VERSION } : validation;
 }
