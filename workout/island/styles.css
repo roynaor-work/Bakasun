@@ -59,3 +59,6 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .stage-map { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-block:12px; }
 .stage-map button { min-height:64px; min-width:0; white-space:normal; font-size:16px; }
 .stage-map button:disabled { opacity:.55; }
+
+/* G2c equipment lives between rounds; game controls retain 56px touch targets. */
+.equipment-list{display:grid;gap:10px;margin-block:12px}.equipment-row{display:grid;gap:4px}.equipment-row p{font-size:13px}.equipment-row button{width:100%;text-align:start}.game-screen[data-game=alienDefense] .game-controls>button{flex:1 1 25%}.game-screen[data-game=fireRescue] .game-controls>button{flex:1 1 25%}.game-screen[data-game=navalDuel] .game-gauge{min-width:110px}.game-screen[data-game=navalDuel] .game-turn{order:3}.game-status{line-height:1.35}.game-stage{box-shadow:inset 0 0 0 1px #ffffff2a}.game-controls>button[data-game-control=nova]{background:#5b518b;color:#fff}.game-controls>button[data-game-control=charge]{background:#ffe1a2;color:#244b58}.game-controls>button:disabled{opacity:.55}

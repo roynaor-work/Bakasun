@@ -1,3 +1,4 @@
+import {equipmentOffer} from '../activity/equipment.mjs';
 import {gameContext} from '../minigames/context.mjs';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
@@ -38,9 +39,24 @@ export class ActivityInterface {
       actions.append(button(this.t('minigame.play'),'game-play',()=>this.stages(game.id), 'primary-button'),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
       const next=this.data.config.minigameLevels[game.id]?.[level];
       const upgrade=button(next?this.t('minigame.upgrade',{cost:next.cost}):this.t('app.maxLevel'),'game-upgrade',()=>{const result=this.activity.upgrade(game.id);if(result.ok)this.menu();else this.ui.result(result);});
-      upgrade.disabled=!next;actions.append(upgrade);card.append(actions);cards.append(card);
+      upgrade.disabled=!next;actions.append(upgrade,button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(game.id)));card.append(actions);cards.append(card);
     }
     dialog.append(cards);
+  }
+  equipment(id) {
+    const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'equipment.hint');dialog.dataset.equipment=id;
+    dialog.append(el('p','',this.t('minigame.totalStars',{stars:this.engine.state.minigameProgress[id].stars.reduce((sum,n)=>sum+n,0)})));
+    const list=el('div','equipment-list');
+    for(const [key,track]of Object.entries(this.data.config.minigames[id].equipment)){
+      const rank=this.engine.state.minigameEquipment[id][key],offer=equipmentOffer(this.engine.state,this.data,id,key),row=el('article','equipment-row');
+      const buy=button(this.t(offer.cost!==undefined?'equipment.buy':'equipment.owned',{title:this.t(track.title),level:offer.rank||rank,cost:offer.cost}),'equipment-buy',()=>{
+        const result=this.activity.upgrade(id,key);if(result.ok){this.equipment(id);this.ui.toast('equipment.bought');}else this.ui.result(result);
+      });buy.dataset.track=key;buy.disabled=!offer.ok;row.append(buy,el('p','',this.t(track.description)));
+      if(!offer.ok&&offer.reason==='reason.money')row.append(el('p','',this.t(offer.reason)));
+      if(offer.stars>this.engine.state.minigameProgress[id].stars.reduce((sum,n)=>sum+n,0))row.append(el('p','',this.t('equipment.locked',{stars:offer.stars})));
+      list.append(row);
+    }
+    dialog.append(list,button(this.t('minigame.play'),'equipment-play',()=>this.stages(id),'primary-button'));
   }
   stages(id) {
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
@@ -84,16 +100,18 @@ export class ActivityInterface {
     const stage=el('div','game-stage'),canvas=el('canvas','minigame-canvas');canvas.setAttribute('aria-label',this.t(game.title));canvas.tabIndex=0;stage.append(canvas);
     const controls=el('div','game-controls'),balance=this.data.config.minigames[id];
     const control=(key,label)=>{const node=button(label,`control-${key}`,()=>{});node.dataset.gameControl=key;return node;};
-    let gauges,turnLabel;
-    if(id==='alienDefense')controls.append(control('left',`◀ ${this.t('minigame.left')}`),control('fire',this.t('minigame.fire')),control('right',`${this.t('minigame.right')} ▶`));
+    let gauges,turnLabel,novaButton,ammoButton,fleetMeters;
+    if(id==='alienDefense'){novaButton=control('nova',this.t('minigame.nova'));novaButton.title=this.t('minigame.novaHint');controls.append(control('left',`◀ ${this.t('minigame.left')}`),control('fire',this.t('minigame.fire')),control('right',`${this.t('minigame.right')} ▶`),novaButton);}
     if(id==='fireRescue') {
       gauges={};for(const key of ['water','pressure']){const label=el('label','game-gauge',this.t(`minigame.${key}`)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);gauges[key]=meter;}
+      controls.append(control('refill',this.t('minigame.refill')),control('charge',this.t('minigame.charge')));
     }
     if(id==='navalDuel') {
       for(const [key,min,max,value]of [['angle',balance.minAngle,balance.maxAngle,balance.defaultAngle],['power',0,balance.powerMaximum,balance.defaultPower]]){
         const label=el('label','game-slider',this.t(key==='angle'?'minigame.aim':'minigame.force')),input=el('input');input.type='range';input.min=min;input.max=max;input.value=value;input.dataset.gameInput=key;label.append(input);controls.append(label);
       }
-      controls.append(control('fire',this.t('minigame.launch')));turnLabel=el('p','game-turn');controls.append(turnLabel);
+      ammoButton=control('ammo',this.t('ammo.normal'));controls.append(control('fire',this.t('minigame.launch')),ammoButton);
+      fleetMeters={};for(const [key,title]of [['player','minigame.fleet'],['enemy','minigame.enemyFleet']]){const label=el('label','game-gauge',this.t(title)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);fleetMeters[key]=meter;}turnLabel=el('p','game-turn');controls.append(turnLabel);
     }
     dialog.replaceChildren(header,status,stage,controls);
     this.ui.view.paused=true;
@@ -101,7 +119,7 @@ export class ActivityInterface {
     heading.textContent=this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
     dialog.dataset.stage=context.level;
     const eventBonuses=eventId?this.activity.bonuses():{};
-    const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,turnLabel,t:this.t,
+    const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,turnLabel,novaButton,ammoButton,fleetMeters,gameId:id,t:this.t,
       onError:reason=>this.ui.toast(reason),
       onFinish:result=>{
         this.current=null;
@@ -135,7 +153,7 @@ export class ActivityInterface {
         }
         this.start(id,active?.id===eventId?eventId:undefined,result.stage);
       },'primary-button'),button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal()));
-    dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)));
+    dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(id)));
     if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage)dialog.append(button(this.t('minigame.nextStage'),'game-next-stage',()=>this.start(id,undefined,result.stage+1),'primary-button'));
     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
     this.engine.narration.announce('minigame.result',result);
