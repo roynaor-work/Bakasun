@@ -25,7 +25,7 @@ test('G2c v4 → v5 adds only equipment and leaves input, city, stars, event and
   const f=fixture(),old=JSON.parse(f.engine.exportJSON());old.version=4;delete old.minigameEquipment;
   old.money=321;old.minigameLevels.alienDefense=3;recordStageWin(old,data,'alienDefense',1,3);
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:42,phase:'playing',warningUntil:0,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,5);assert.equal(r.state.version,5);assert.equal(STORAGE_KEY,'island.v1');
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,6);assert.equal(r.state.version,6);assert.equal(STORAGE_KEY,'island.v1');
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key],key);
   assert.deepEqual(old,before);for(const tracks of Object.values(r.state.minigameEquipment))assert.ok(Object.values(tracks).every(n=>n===0));
   f.storage.setItem(STORAGE_KEY,JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.equal(loaded.state.money,321);assert.equal(loaded.state.minigameProgress.alienDefense.stars[0],3);assert.equal(f.values.get('other-app'),'keep');
@@ -35,7 +35,7 @@ for(const bad of [-1,1.5,999,'1',null])test(`G2c invalid equipment rank ${JSON.s
   assert.equal(f.engine.importJSON(save).ok,false);assert.equal(f.engine.exportJSON(),old);
 });
 test('G2c missing/unknown equipment and future versions cannot silently reset upgrades',()=>{
-  const f=fixture();for(const mutate of [s=>delete s.minigameEquipment,s=>s.minigameEquipment.bad={},s=>s.minigameEquipment.navalDuel.bad=1,s=>s.version=6]){
+  const f=fixture();for(const mutate of [s=>delete s.minigameEquipment,s=>s.minigameEquipment.bad={},s=>s.minigameEquipment.navalDuel.bad=1,s=>s.version=7]){
     const save=JSON.parse(f.engine.exportJSON());mutate(save);assert.equal(migrateSave(save,data,f.engine.registry).ok,false);
   }
 });
@@ -72,7 +72,7 @@ test('G2c splitter children are bounded, weaker, and do not inflate island rewar
 test('G2c carriers launch a finite budget of mini-ships, and bosses arrive at the final wave',()=>{
   const m=make('alienDefense',10),carrier=m.aliens.find(a=>a.kind===4);carrier.launchTime=.01;m.update(.02,{});assert.ok(m.aliens.some(a=>a.child));
   const born=m.aliens.filter(a=>a.child).length;for(const a of m.aliens)if(a.kind===4)a.launchTime=0;m.update(.02,{});assert.ok(m.aliens.filter(a=>a.child).length<=m.settings.spawnBudget);assert.ok(born>0);
-  const boss=make('alienDefense',5);boss.aliens.length=0;advance(boss,config.alienDefense.wavePauseSeconds+.1);assert.equal(boss.wave,2);assert.equal(boss.aliens.filter(a=>a.boss).length,1);
+  const boss=make('alienDefense',5),memory={};for(let i=0;i<20000&&boss.wave<boss.settings.waves&&!boss.result;i++)boss.update(.04,pilotInput('alienDefense',boss,config.alienDefense,memory));assert.equal(boss.wave,boss.settings.waves);assert.equal(boss.aliens.filter(a=>a.boss).length,1);
 });
 test('G2c kills drop collectible capsules with a repeatable four-upgrade cycle',()=>{
   const m=make('alienDefense',10),b=config.alienDefense;
@@ -95,7 +95,7 @@ test('G2c nova flies to a chosen area, preserves distant enemies, shows a light 
 });
 test('G2c permanent weapon, damage and rate affect actual projectiles rather than just labels',()=>{
   const base=make('alienDefense'),strong=make('alienDefense',1,{equipment:{weapon:2,damage:1.8,rate:1.5}});
-  base.update(.02,{firing:true});strong.update(.02,{firing:true});assert.equal(strong.shots.length,3);assert.equal(strong.shots[0].kind,1);
+  base.update(.02,{firing:true});strong.update(.02,{firing:true});assert.equal(strong.shots.length,5);assert.equal(strong.shots[0].kind,1);
   const a=strong.aliens[0];a.hp=2;shotAt(strong,a,2);strong.update(.001,{});assert.ok(a.hp<1);
   advance(base,.4,{firing:true});advance(strong,.4,{firing:true});assert.ok(strong.shots.length>base.shots.length);
 });
@@ -128,7 +128,7 @@ for(const index of [1,2,3])test(`G2c special naval ${config.navalDuel.ammo[index
 });
 test('G2c shields absorb real hits, upgraded hull survives longer, and bosses have more HP',()=>{
   const m=make('navalDuel',1,{equipment:{shield:2,hull:1.3}}),b=config.navalDuel;m.update(.01,{firing:true});m.ball.owner='enemy';m.ball.x=b.shipX;m.ball.y=b.shipY;m.ball.vy=1;m.ball.vx=0;const hp=m.lives;m.update(.01,{});assert.equal(m.lives,hp);assert.ok(m.playerShip.shield<2);assert.ok(m.maxLives>make('navalDuel').maxLives);
-  const boss=make('navalDuel',10);boss.enemyShip.hp=0;boss.update(.01,{firing:true});navalHit(boss,b);advance(boss,b.sinkSeconds+.1);boss.enemyShip.hp=0;boss.update(.01,{firing:true});navalHit(boss,b);advance(boss,b.sinkSeconds+.1);assert.equal(boss.boss,true);assert.ok(boss.enemyShip.maxHp>b.levels[9].enemyLives*b.shipTypes[2].hp);
+  const boss=make('navalDuel',10);while(boss.wave<boss.settings.waves){boss.enemyShip.hp=0;boss.update(.01,{firing:true});navalHit(boss,b);advance(boss,b.sinkSeconds+.1);}assert.equal(boss.boss,true);assert.ok(boss.enemyShip.maxHp>b.levels[9].enemyLives*b.shipTypes[2].hp);
 });
 for(const id of Object.keys(models))for(const level of [1,10])test(`G2c ${id} stage ${level} remains winnable, repeatable, and settles fair bounded rewards`,()=>{
   const run=()=>{const m=make(id,level,{power:level===1?1:1.45}),memory={};for(let i=0;i<40000&&!m.result;i++)m.update(.04,pilotInput(id,m,config[id],memory));return m;};
@@ -150,7 +150,7 @@ test('G2c stubborn fire resists water and spreading fire grows faster at equal s
   a.flames[0].heat=.5;advance(a,.1);advance(d,.1);assert.ok(d.flames[0].heat>a.flames[0].heat);assert.ok(b.fireTypes[2].growth>1);
 });
 test('G2c depleted special ammunition falls back without going negative, and rate reduces the actual turn wait',()=>{
-  const b=config.navalDuel,m=make('navalDuel',10,{equipment:{ammo:1}});m.update(.001,{ammo:true});m.ammo[1]=0;m.update(.001,{firing:true});assert.equal(m.ball.ammo,0);assert.equal(m.ammo[1],0);
+  const b=config.navalDuel,m=make('navalDuel',10,{equipment:{ammo:1}});m.update(.001,{ammo:true});m.ammo[1]=0;m.update(.001,{firing:true});assert.equal(m.phase,'shot');assert.equal(m.ball.ammo,0);assert.equal(m.ammo[1],0);
   const normal=make('navalDuel',10),fast=make('navalDuel',10,{equipment:{rate:1.6}});
   for(const ship of [normal,fast]){ship.update(.01,{firing:true});navalHit(ship,b);}
   advance(fast,b.turnPauseSeconds/1.6+.02);advance(normal,b.turnPauseSeconds/1.6+.02);assert.equal(fast.phase,'shot');assert.equal(normal.phase,'enemy');
@@ -158,6 +158,6 @@ test('G2c depleted special ammunition falls back without going negative, and rat
 for(const id of Object.keys(models))test(`G2c ${id} stage-10 threat and rewards exceed stage 1 with identical equipment`,()=>{
   const low=make(id,1),high=make(id,10);assert.ok(high.settings.winMoney>low.settings.winMoney);assert.ok(high.settings.winParts>low.settings.winParts);
   if(id==='alienDefense'){assert.ok(high.aliens.reduce((s,a)=>s+a.hp,0)>low.aliens.reduce((s,a)=>s+a.hp,0));assert.ok(high.settings.boltSpeed>low.settings.boltSpeed);assert.ok(high.settings.waves>low.settings.waves);}
-  else if(id==='fireRescue'){assert.ok(high.flames.filter(f=>f.active).length>low.flames.filter(f=>f.active).length);assert.ok(high.remaining<low.remaining);assert.ok(high.water+high.reserve<low.water+low.reserve);assert.ok(high.settings.growthPerSecond>low.settings.growthPerSecond);}
+  else if(id==='fireRescue'){assert.ok(high.flames.filter(f=>f.active).length>low.flames.filter(f=>f.active).length);assert.ok(high.remaining>low.remaining);assert.ok(high.water+high.reserve<low.water+low.reserve);assert.ok(high.settings.growthPerSecond>low.settings.growthPerSecond);}
   else{assert.ok(high.maxEnemyFleet>low.maxEnemyFleet);assert.ok(high.settings.enemyAimError<low.settings.enemyAimError);assert.ok(high.settings.drift>low.settings.drift);}
 });

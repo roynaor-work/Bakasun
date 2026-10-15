@@ -46,13 +46,25 @@ export function createFireSiteVisual(kind,config){
   }return c;
 }
 export function createShipVisual(kind,config){
-  const palette=config.visuals.palette;
-  const c=surface(132,126),p=c.getContext('2d');p.translate(66,83);const color=kind==='player'?palette.playerHull:kind==='boss'?palette.bossHull:palette.enemyHull;
-  oval(p,0,17,53,8,palette.waterHalo);hull(p,color,palette.hullShade);p.fillStyle=palette.deck;p.fillRect(-30,-9,57,10);p.fillStyle=palette.cabin;p.fillRect(-17,-27,24,18);p.fillStyle=palette.cabinGlass;p.fillRect(-13,-24,7,9);p.fillRect(-3,-24,6,9);
-  p.strokeStyle=palette.mast;p.lineWidth=4;p.beginPath();p.moveTo(-12,-27);p.lineTo(-12,-68);p.stroke();p.fillStyle=color;p.beginPath();p.moveTo(-10,-65);p.lineTo(21,-57);p.lineTo(-10,-47);p.fill();
-  p.fillStyle=palette.cannon;p.fillRect(13,-18,29,7);oval(p,17,-9,10,7,palette.turret);
-  for(let i=0;i<4;i++)oval(p,-25+i*14,7,3,3,palette.deck);
-  p.strokeStyle=palette.foam;p.lineWidth=2;p.beginPath();p.moveTo(-40,-2);p.quadraticCurveTo(0,5,43,-5);p.stroke();return c;
+  const a=config.visuals.palette,c=surface(132,126),p=c.getContext('2d'),color=kind==='player'?a.playerHull:kind==='boss'?a.bossHull:a.enemyHull;p.translate(66,76);
+  function face(points,fill){p.fillStyle=fill;p.beginPath();for(let i=0;i<points.length;i++){if(i)p.lineTo(...points[i]);else p.moveTo(...points[i]);}p.closePath();p.fill();}
+  oval(p,0,28,46,10,a.shadow);
+  face([[-36,17],[0,-53],[40,10],[30,42],[-29,45]],a.hullShade);
+  face([[-36,8],[0,-61],[40,0],[30,28],[-29,31]],color);
+  face([[-30,7],[0,-55],[34,1],[26,23],[-24,26]],a.deck);
+  face([[-17,-17],[6,-31],[23,-14],[-1,0]],a.cabinGlass);
+  face([[-17,-17],[-1,0],[-1,22],[-17,7]],a.cabin);
+  face([[-1,0],[23,-14],[23,10],[-1,22]],color);
+  face([[-16,-20],[5,-35],[25,-16],[-1,1]],a.ivory);
+  face([[-10,-23],[4,-32],[17,-21],[3,-12]],a.cabin);
+  face([[-9,-23],[3,-12],[3,-5],[-9,-16]],a.cabinGlass);
+  face([[3,-12],[17,-21],[17,-13],[3,-5]],a.glass);
+  p.strokeStyle=a.mast;p.lineWidth=3;p.beginPath();p.moveTo(4,-25);p.lineTo(4,-69);p.moveTo(-5,-58);p.lineTo(15,-58);p.stroke();face([[5,-67],[27,-61],[5,-54]],color);
+  oval(p,-1,-42,9,5,a.turret);p.save();p.translate(-1,-42);p.rotate(-.2);p.fillStyle=a.cannon;p.fillRect(-3,-20,7,21);p.fillStyle=a.ivory;p.fillRect(-3,-21,7,3);p.restore();
+  p.fillStyle=a.cannon;p.fillRect(13,-7,8,15);oval(p,17,-7,5,3,a.gold);
+  p.strokeStyle=a.foam;p.lineWidth=1.5;p.beginPath();p.moveTo(-32,6);p.lineTo(0,-54);p.lineTo(35,0);p.stroke();
+  for(let i=0;i<5;i++){const y=3+i*5;p.strokeStyle=a.mast;p.beginPath();p.moveTo(-31+i,y);p.lineTo(-31+i,y-6);p.stroke();}
+  p.strokeStyle=a.gold;p.lineWidth=3;p.beginPath();p.ellipse(-18,14,5,7,-.3,0,TAU);p.stroke();return c;
 }
 export function createGameArt(id,config,balance){
   const palette=config.visuals.palette;
@@ -70,7 +82,7 @@ export function createGameArt(id,config,balance){
     p.fillStyle=v.ground;p.fillRect(0,125,w,h-125);p.fillStyle=v.street;p.fillRect(0,195,w,30);p.fillRect(0,297,w,30);p.fillRect(0,395,w,38);
     p.strokeStyle=palette.roadMark;p.lineWidth=2;p.setLineDash([12,16]);for(let y=211;y<430;y+=101){p.beginPath();p.moveTo(0,y);p.lineTo(w,y);p.stroke();}p.setLineDash([]);
     const sites={};for(const site of balance.sites){sites[site.kind]||=createFireSiteVisual(site.kind,config);p.drawImage(sites[site.kind],site.x-55,site.y-65,110,100);}
-    return {backdrop:c};
+    return {backdrop:c,truck:createTruckVisual(config)};
   }
   g.addColorStop(0,palette.seaSkyTop);g.addColorStop(.68,palette.seaSkyMiddle);g.addColorStop(1,palette.seaSkyBottom);p.fillStyle=g;p.fillRect(0,0,w,h);
   oval(p,290,69,28,28,palette.sun);for(let i=0;i<3;i++){oval(p,60+i*120,85+i*24,30,8,palette.cloud);}
@@ -81,4 +93,32 @@ export function createGameArt(id,config,balance){
 export function drawHealthBar(p,x,y,width,height,value,max,config){
   const ratio=Math.max(0,Math.min(1,value/Math.max(1,max))),v=config.visuals;
   p.fillStyle=v.hpBack;p.fillRect(x-2,y-2,width+4,height+4);p.fillStyle=ratio>.5?v.hpGood:ratio>.25?v.hpWarn:v.hpDanger;p.fillRect(x,y,width*ratio,height);
+}
+
+/** Original truck artwork, baked once; articulated crew are drawn separately. */
+export function createTruckVisual(config){
+  const c=surface(180,100),p=c.getContext('2d'),a=config.visuals.palette;
+  oval(p,90,86,83,10,a.shadow);
+  p.fillStyle=a.enemyHull;p.beginPath();p.moveTo(9,30);p.lineTo(113,30);p.lineTo(118,15);p.lineTo(151,15);p.lineTo(172,39);p.lineTo(172,77);p.lineTo(9,77);p.closePath();p.fill();
+  p.fillStyle=a.cabinGlass;p.beginPath();p.moveTo(124,21);p.lineTo(148,21);p.lineTo(163,40);p.lineTo(124,40);p.fill();
+  p.fillStyle=a.ivory;p.fillRect(9,51,164,9);p.fillStyle=a.cannon;p.fillRect(18,37,31,12);p.fillRect(54,37,31,12);p.fillRect(91,37,20,12);
+  p.strokeStyle=a.ivory;p.lineWidth=3;for(let x=18;x<111;x+=11){p.beginPath();p.moveTo(x,17);p.lineTo(x,28);p.stroke();}p.beginPath();p.moveTo(14,17);p.lineTo(114,17);p.moveTo(14,27);p.lineTo(114,27);p.stroke();
+  for(let x=37;x<=144;x+=107){oval(p,x,78,15,16,a.tire);oval(p,x,78,8,8,a.wheel);oval(p,x,78,3,3,a.ivory);}
+  p.fillStyle=a.cockpitShine;p.fillRect(130,8,21,8);p.fillStyle=a.gold;p.fillRect(162,49,11,9);p.fillStyle=a.metal||a.cannon;p.fillRect(20,65,85,9);
+  p.strokeStyle=a.gold;p.lineWidth=5;p.beginPath();p.arc(73,63,11,0,Math.PI*2);p.stroke();p.fillStyle=a.ivory;p.fillRect(167,68,10,8);return c;
+}
+
+/** Rounded, clothed figures with independent shoulders, elbows, hips and knees. */
+export function drawCrew(p,x,y,time,config,firefighter=false,walking=false,aim=0){
+  const a=config.visuals.palette,step=walking?Math.sin(time*8)*7:Math.sin(time*2)*1.5;
+  p.save();p.translate(x,y);oval(p,0,4,13,4,a.shadow);p.lineCap='round';
+  p.strokeStyle=a.cannon;p.lineWidth=7;
+  for(let side=-1;side<=1;side+=2){p.beginPath();p.moveTo(side*4,-16);p.lineTo(side*5+step*side*.5,-7);p.lineTo(side*6-step*side,1);p.stroke();}
+  p.fillStyle=firefighter?a.uniform:a.carBody;p.beginPath();p.roundRect(-10,-37,20,23,6);p.fill();
+  p.strokeStyle=firefighter?a.gold:a.ivory;p.lineWidth=3;p.beginPath();p.moveTo(-9,-23);p.lineTo(9,-23);p.stroke();
+  p.strokeStyle=firefighter?a.uniform:a.carBody;p.lineWidth=6;
+  for(let side=-1;side<=1;side+=2){p.beginPath();p.moveTo(side*8,-32);p.lineTo(side*13,-25+step*side*.4);p.lineTo(firefighter?Math.cos(aim)*16:side*15,firefighter?-30+Math.sin(aim)*9:-38-step*side);p.stroke();}
+  oval(p,0,-44,8,10,a.skin);oval(p,-3,-46,1,1.5,a.pupil);oval(p,3,-46,1,1.5,a.pupil);
+  if(firefighter){oval(p,0,-51,11,5,a.helmet);p.fillStyle=a.helmet;p.fillRect(-8,-54,16,7);}else{oval(p,0,-52,8,4,a.bark);}
+  p.restore();
 }

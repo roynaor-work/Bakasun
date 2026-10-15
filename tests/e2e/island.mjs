@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
-import { access, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { access, mkdir, mkdtemp, readFile, stat, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import path from 'node:path';
+import {tmpdir} from 'node:os';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import {checkActivity} from './island-activity.mjs';
+import {checkG2d} from './island-g2d.mjs';
 import {checkG2c} from './island-g2c.mjs';
 
 // The default serves this checkout on an ephemeral loopback port. Override the
@@ -41,7 +43,7 @@ if (!executablePath && process.platform === 'win32') {
   executablePath = path.join(process.env.ProgramFiles || 'C:/Program Files', 'Google/Chrome/Application/chrome.exe');
   await access(executablePath);
 }
-const directory = process.env.ISLAND_OUTPUT_DIR ? path.resolve(process.env.ISLAND_OUTPUT_DIR) : fileURLToPath(new URL('./screenshots/', import.meta.url));
+const directory = process.env.ISLAND_OUTPUT_DIR ? path.resolve(process.env.ISLAND_OUTPUT_DIR) : await mkdtemp(path.join(tmpdir(),'island-e2e-'));
 await mkdir(directory, { recursive: true });
 const launchBrowser = () => chromium.launch({ executablePath, headless: true, args: [
   '--no-proxy-server', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
@@ -605,6 +607,7 @@ async function checkCityViewport(width, height) {
 }
 
 try {
+  if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'g2d') reports.push(...await checkG2d({browser,target,directory}));
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'g2c') reports.push(...await checkG2c({browser,target,directory}));
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'activity') reports.push(...await checkActivity({browser,target,directory}));
   // Keep virtual-clock activity and the real-time city suite in separate

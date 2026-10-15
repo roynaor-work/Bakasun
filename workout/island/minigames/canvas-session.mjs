@@ -1,14 +1,18 @@
 import {createGameArt} from './art.mjs';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
-export function runCanvasGame(ctx, createModel, draw) {
+export function runCanvasGame(ctx, createModel, draw, createView) {
   const { canvas, controls, status, config, t } = ctx;
   const model = createModel(ctx);
   const paint = canvas.getContext('2d');
   if (!paint) throw new Error('reason.gameStart');
   const quality={low:false};
   const art=createGameArt(ctx.gameId,config,ctx.balance);
-  art.hudFont=config.visuals.hudFont;art.fleetLabel=t('minigame.fleet');art.enemyFleetLabel=t('minigame.enemyFleet');
-  const renderContext={...ctx,art,quality};
+  art.hudFont=config.visuals.hudFont;art.fleetLabel=t('minigame.fleet');art.enemyFleetLabel=t('minigame.enemyFleet');if(ctx.gameId==='navalDuel')art.enemyNames=model.enemies.map(e=>t(e.boss?'naval.boss':ctx.balance.shipTypes[e.kind].name));
+  const view=createView?.(ctx,model);
+  const renderContext={...ctx,art,quality,view};
+  const gesture={x:0,y:0,angle:0};
+  const naval=ctx.gameId==='navalDuel';
+  let qualitySamples=0,qualityMs=0;
   const events = new AbortController(), options = { signal: events.signal };
   const input = { x: undefined, y: undefined, firing: false, nova:false,ammo:false,charge:false,refill:false,left: false, right: false, angle:ctx.balance.defaultAngle, power:ctx.balance.defaultPower };
   const pointers = new Map(), keys = new Set();
@@ -17,14 +21,16 @@ export function runCanvasGame(ctx, createModel, draw) {
   function syncInput() {
     input.charge=keys.has('charge');input.refill=keys.has('refill');
     input.left = keys.has('ArrowLeft')||keys.has('left');input.right = keys.has('ArrowRight')||keys.has('right');heldFire=keys.has('fire');
-    for(const value of pointers.values()){input.left||=value==='left';input.right||=value==='right';heldFire||=value==='fire'||value==='canvas';input.charge||=value==='charge';input.refill||=value==='refill';}
+    for(const value of pointers.values()){input.left||=value==='left';input.right||=value==='right';heldFire||=value==='fire'||(!naval&&value==='canvas');input.charge||=value==='charge';input.refill||=value==='refill';}
     if(input.left||input.right)input.x=undefined;
     input.firing=heldFire;
   }
-  function position(event) {
+  function position(event,start=false) {
     const box = canvas.getBoundingClientRect();
     input.x = Math.max(0, Math.min(config.width, (event.clientX - box.left - offsetX) / scale));
     input.y = Math.max(0, Math.min(config.height, (event.clientY - box.top - offsetY) / scale));
+    applyCanvasGesture(input,ctx.gameId,gesture,ctx.balance,start);
+    if(naval){const slider=controls.querySelector('[data-game-input=angle]');if(slider)slider.value=input.angle;}
   }
   function resize() {
     if(disposed)return;
@@ -41,23 +47,24 @@ export function runCanvasGame(ctx, createModel, draw) {
     for (const id of pointers.keys()) {
       for (const node of [canvas,...controls.querySelectorAll('button')]) if (node.hasPointerCapture?.(id)) node.releasePointerCapture(id);
     }
+    view?.dispose();
     clearInput(); canvas.width = canvas.height = 0;
     for(const value of Object.values(art)){
       if(value?.getContext)value.width=value.height=0;
-      else if(Array.isArray(value))for(const sprite of value)sprite.width=sprite.height=0;
+      else if(Array.isArray(value))for(const sprite of value)if(sprite?.getContext)sprite.width=sprite.height=0;
     }
   }
   try {
     canvas.addEventListener('pointerdown',event=>{
-      event.preventDefault(); canvas.setPointerCapture(event.pointerId); pointers.set(event.pointerId,'canvas');queuedFire=true;position(event);syncInput();
+      event.preventDefault(); canvas.setPointerCapture(event.pointerId); pointers.set(event.pointerId,'canvas');if(!naval)queuedFire=true;position(event,true);syncInput();
     },options);
     canvas.addEventListener('pointermove',event=>{if(pointers.get(event.pointerId)==='canvas')position(event);},options);
     for (const node of controls.querySelectorAll('[data-game-control]')) {
       node.addEventListener('pointerdown',event=>{
-        event.preventDefault();node.setPointerCapture(event.pointerId);pointers.set(event.pointerId,node.dataset.gameControl);if(node.dataset.gameControl==='fire')queuedFire=true;if(node.dataset.gameControl==='nova')queuedNova=true;if(node.dataset.gameControl==='ammo')queuedAmmo=true;syncInput();
+        event.preventDefault();node.setPointerCapture(event.pointerId);pointers.set(event.pointerId,node.dataset.gameControl);if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(node.dataset.gameControl==='fire')queuedFire=true;if(node.dataset.gameControl==='nova')queuedNova=true;if(node.dataset.gameControl==='ammo')queuedAmmo=true;syncInput();
       },options);
     }
-    for(const node of controls.querySelectorAll('[data-game-control]'))node.addEventListener('click',event=>{if(event.detail!==0)return;const key=node.dataset.gameControl;if(key==='nova')queuedNova=true;else if(key==='ammo')queuedAmmo=true;else if(key==='refill'||key==='charge')input[key]=!input[key];},options);
+    for(const node of controls.querySelectorAll('[data-game-control]'))node.addEventListener('click',event=>{if(event.detail!==0)return;const key=node.dataset.gameControl;if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(key==='fire')queuedFire=true;else if(key==='nova')queuedNova=true;else if(key==='ammo')queuedAmmo=true;else if(key==='refill'||key==='charge')input[key]=!input[key];},options);
     for(const node of controls.querySelectorAll('[data-game-input]'))node.addEventListener('input',()=>{input[node.dataset.gameInput]=Number(node.value);},options);
     for (const type of ['pointerup','pointercancel','lostpointercapture']) window.addEventListener(type,event=>{pointers.delete(event.pointerId);syncInput();},options);
     const key = event => {
@@ -77,10 +84,11 @@ export function runCanvasGame(ctx, createModel, draw) {
     function tick(time) {
       if (disposed) return;
       const dt = last === undefined || document.hidden || paused ? 0 : Math.min(config.maxFrameSeconds,(time-last)/1000);
-      if(last!==undefined&&!document.hidden){samples++;totalFrameMs+=time-last;if(!lowQuality&&samples>=config.qualitySampleFrames&&totalFrameMs/samples>config.slowFrameMs){lowQuality=quality.low=true;resize();}}
+      if(last!==undefined&&!document.hidden&&!paused){samples++;totalFrameMs+=time-last;if(!lowQuality&&samples>=config.qualitySampleFrames&&totalFrameMs/samples>config.slowFrameMs){lowQuality=quality.low=true;view?.degrade();qualitySamples=qualityMs=0;resize();}}
+      if(view&&last!==undefined&&!document.hidden&&!paused){qualitySamples++;qualityMs+=time-last;if(qualitySamples>=ctx.balance.render.fallbackSampleFrames){if(qualityMs/qualitySamples>ctx.balance.render.fallbackFrameMs){if(!lowQuality){lowQuality=quality.low=true;view.degrade();resize();}else view.degrade(true);}qualitySamples=qualityMs=0;}}
       last = time;
       try {
-        input.firing=heldFire||queuedFire;input.nova=queuedNova;input.ammo=queuedAmmo;model.update(dt,input);if(dt>0)queuedFire=queuedNova=queuedAmmo=false;
+        input.firing=heldFire||queuedFire;input.nova=queuedNova;input.ammo=queuedAmmo;model.update(dt,input);if(naval&&input.ammoIndex!==undefined)input.ammoIndex=model.ammoIndex;if(dt>0)queuedFire=queuedNova=queuedAmmo=false;
         if (model.result) {
           const finished = ctx.finish(model.result);
           if (!finished.ok) { ctx.cancel();ctx.onError?.(finished.reason); }
@@ -91,10 +99,14 @@ export function runCanvasGame(ctx, createModel, draw) {
         statusTime-=dt;
         if(statusTime<=0){
           let text=t(model.statusId||'minigame.status',model.statusValues?.()||{score:model.score,lives:model.lives,wave:model.wave,waves:model.settings.waves});
+          if(ctx.gameId==='alienDefense'){art.clockText=String(Math.ceil(model.remaining));art.comboText='×'+model.combo;}
+          if(ctx.gameId==='alienDefense')text+=' · '+t('minigame.waveClock',{seconds:Math.ceil(model.remaining),pattern:t('pattern.'+model.pattern)})+' · '+t('minigame.combo',{combo:model.combo})+' · '+t('minigame.loot',{coins:model.coins,crystals:model.crystals});
           if(model.powerup>=0)text+=' · '+t('minigame.powerupStatus',{name:t('powerup.'+ctx.balance.pickups.kinds[model.powerup]),seconds:Math.ceil(model.powerTime)});
           if(status.textContent!==text)status.textContent=text;
           if(ctx.gauges){ctx.gauges.water.value=model.water/model.maxWater;ctx.gauges.pressure.value=model.pressure/model.maxPressure;}
           if(ctx.novaButton)ctx.novaButton.disabled=model.novaCharges<=0||model.nova.flight>0||model.nova.life>0;
+          if(ctx.ammoButtons)for(let i=0;i<ctx.ammoButtons.length;i++){const button=ctx.ammoButtons[i],seconds=Math.ceil(model.cooldowns[i]),count=model.ammo[i];button.textContent=t(count<=0?'minigame.ammoEmpty':seconds?'minigame.ammoReload':'minigame.ammoReady',{ammo:t(ctx.balance.ammo[i].title),count,seconds});button.setAttribute('aria-pressed',String(model.ammoIndex===i));button.disabled=count<=0;}
+          if(ctx.upgradePanel){const panel=ctx.upgradePanel;panel.hidden=!model.choosing;if(model.choosing&&panel.dataset.wave!==String(model.wave)){panel.dataset.wave=model.wave;for(let i=0;i<ctx.upgradeButtons.length;i++){const id=model.choices[i],button=ctx.upgradeButtons[i];button.textContent=t('minigame.upgradeStack',{name:t('runUpgrade.'+id),rank:model.upgrades[id]+1});button.onclick=()=>{model.chooseUpgrade(i);clearInput();panel.hidden=true;};}}}
           if(ctx.ammoButton){const index=model.ammoIndex;ctx.ammoButton.textContent=t('minigame.ammoSwitch',{ammo:t(ctx.balance.ammo[index].title),count:index===0?t('ammo.unlimited'):model.ammo[index]});}
           if(ctx.fleetMeters){ctx.fleetMeters.player.value=model.lives/model.maxLives;ctx.fleetMeters.enemy.value=model.enemyFleetHp/model.maxEnemyFleet;}
           if(ctx.turnLabel)ctx.turnLabel.textContent=t(model.phase==='aim'?'minigame.aimTurn':'minigame.enemyTurn');
@@ -104,6 +116,13 @@ export function runCanvasGame(ctx, createModel, draw) {
       } catch { ctx.cancel();ctx.onError?.('reason.gameStart'); }
     }
     frame=requestAnimationFrame(tick);
-    return { dispose, cancel: ctx.cancel, setPaused(value){paused=value;clearInput();last=undefined;},get snapshot() { return model.snapshot(); } };
+    return { dispose, cancel: ctx.cancel, setPaused(value){paused=value;clearInput();last=undefined;},get snapshot() { const snapshot=model.snapshot();if(view)snapshot.renderMode=view.mode;return snapshot; } };
   } catch(error) {dispose();throw error;}
+}
+
+/** Shared gesture contract: naval canvas is angle-only, with no firing side effect. */
+export function applyCanvasGesture(input,gameId,anchor,balance,start=false){
+  if(gameId!=='navalDuel')return;
+  if(start){anchor.x=input.x;anchor.y=input.y;anchor.angle=input.angle;return;}
+  input.angle=Math.max(balance.minAngle,Math.min(balance.maxAngle,anchor.angle+(anchor.y-input.y+input.x-anchor.x)*balance.controls.dragDegreesPerPixel));
 }

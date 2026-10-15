@@ -51,7 +51,7 @@ test('island first save has seed access roads, shared money, four resources and 
   assert.ok(engine.state.buildings.every(b => b.typeId === 'road'));
   assert.equal(engine.state.avatar.created, false);
   assert.equal(engine.state.world.size, 16);
-  assert.equal(engine.state.version, 5);
+  assert.equal(engine.state.version, 6);
 });
 
 test('island character choices persist and unlisted choices do not replace the avatar', () => {
