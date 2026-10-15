@@ -53,7 +53,7 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .info-actions button:disabled{opacity:1;background:#e9ede5;color:#526b65;border-color:#dfe8d9}
 
 /* Parent-only reset: two explicit stages inside the existing gated modal. */
-.reset-stage{display:grid;gap:14px}.reset-keep{display:flex;align-items:center;gap:10px;min-height:44px}.reset-keep input{width:24px;height:24px}.reset-confirm-label{font-weight:700}.reset-stage input[type=text]{font:inherit;padding:12px;border:2px solid #946647;border-radius:12px;min-width:0;width:100%;box-sizing:border-box}.danger-button{font:inherit;min-height:44px;border:2px solid #aa4039;border-radius:12px;padding:10px;background:#fff0e8;color:#842b27;font-weight:700}.danger-button:disabled{opacity:.45}.danger-button:focus-visible{outline:3px solid #287a83;outline-offset:3px}
+.reset-stage{display:grid;gap:14px}.reset-keep{display:flex;align-items:center;gap:10px;min-height:44px}.reset-keep input{width:24px;height:24px}.reset-confirm-label{font-weight:700}.reset-stage input[type=text]{font:inherit;padding:12px;border:2px solid #946647;border-radius:12px;min-width:0;width:100%;box-sizing:border-box}.danger-button{font:inherit;min-height:56px;border:2px solid #aa4039;border-radius:12px;padding:10px;background:#fff0e8;color:#842b27;font-weight:700}.danger-button:disabled{opacity:.45}.danger-button:focus-visible{outline:3px solid #287a83;outline-offset:3px}
 
 /* Ten stage choices fit narrow phones and remain inside the scrollable modal. */
 .stage-map { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-block:12px; }
