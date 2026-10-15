@@ -1,3 +1,17 @@
+/** Balance stays authoritative; appearance and external-model slots belong to content. */
+export function configureBuilding(record, config = {}) {
+  const balance = config.buildings?.[record.balanceId || record.id] || {};
+  return {
+    ...record, ...balance, model: record.model ?? null,
+    visual: { ...record.visual, ...balance.visual },
+    levels: (balance.levels || record.levels || []).map((level, index) => ({
+      ...level, model: record.levels?.[index]?.model ?? null,
+      title: record.levels?.[index]?.title ?? level.title,
+      visual: { ...level.visual, ...record.levels?.[index]?.visual },
+    })),
+  };
+}
+
 /** Registries contain content, not rendering or DOM behavior. Extension modules call these methods. */
 export function createRegistry(data = {}) {
   const registry = {
@@ -11,11 +25,7 @@ export function createRegistry(data = {}) {
     map.set(value.id, value);
     return value;
   }
-  registry.registerBuilding = record => add(registry.buildings, {
-    ...record,
-    ...(data.config?.buildings?.[record.balanceId || record.id] || {}),
-    visual: { ...(record.visual || {}), ...(data.config?.buildings?.[record.balanceId || record.id]?.visual || {}) },
-  });
+  registry.registerBuilding = record => add(registry.buildings, configureBuilding(record, data.config));
   registry.registerSport = record => add(registry.sports, { ...record, ...(data.config?.sports?.[record.balanceId || record.id] || {}) });
   registry.registerMinigame = record => {
     if (typeof record.start !== 'function' || typeof record.onResult !== 'function') throw new TypeError('reason.invalid');

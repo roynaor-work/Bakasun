@@ -2,7 +2,7 @@ import { createRegistry } from './registry.mjs';
 import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs';
 import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs';
 import { calculateIncome, accrueIncome } from './economy.mjs';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld } from './persistence.mjs';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs';
 import { loadEpisode, episodeAvailable } from './episodes.mjs';
 import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs';
 
@@ -99,6 +99,17 @@ export function createEngine(data, options = {}) {
 
   engine.subscribe = listener => { listeners.add(listener); return () => listeners.delete(listener); };
   engine.save = save;
+  engine.reset = ({ keepAvatar = false } = {}) => {
+    const fresh = createInitialState(data, now());
+    if (keepAvatar) fresh.avatar = clone(state.avatar);
+    const result = resetWorld(storage, fresh);
+    engine.storageStatus = result;
+    if (!result.ok) { notify('storage', result); return result; }
+    for (const key of Object.keys(state)) delete state[key];
+    Object.assign(state, fresh); history.length = 0; saveBlocked = false;
+    notify('reset');
+    return { ok: true };
+  };
   engine.validatePlacement = check;
   engine.nextObjective = nextObjective;
   engine.population = () => population(state, registry, config);

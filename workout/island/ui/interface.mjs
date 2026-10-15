@@ -551,14 +551,44 @@ export class IslandInterface {
     start.onclick = () => { this.engine.setAvatar({ ...draft, created: true }); this.closeModal(); this.toast('tutorial.welcome'); };
     const footer = el('footer', 'avatar-footer'); footer.append(start); modal.append(footer);
   }
+  exportBackup() {
+    const blob = new Blob([this.engine.exportJSON()], { type: 'application/json' });
+    const url = URL.createObjectURL(blob); const anchor = el('a'); anchor.href = url; anchor.download = this.t('parent.exportName'); anchor.click();
+    setTimeout(() => URL.revokeObjectURL(url), this.data.config.ui.toastMs);
+  }
+  showReset() {
+    const modal = this.openModal('parent.reset', 'parent.resetWarning');
+    modal.classList.add('reset-modal');
+    const backup = button(this.t('parent.resetBackup'), 'reset-backup', 'primary-button');
+    backup.onclick = () => this.exportBackup();
+    const keep = el('input'); keep.type = 'checkbox'; keep.id = 'reset-keep-avatar'; keep.checked = true;
+    const keepLabel = el('label', 'reset-keep'); keepLabel.append(keep, document.createTextNode(this.t('parent.keepAvatar')));
+    const cancel = button(this.t('parent.resetCancel'), 'reset-cancel', 'secondary-button'); cancel.onclick = () => this.showParent();
+    const next = button(this.t('parent.resetNext'), 'reset-next', 'danger-button');
+    const first = el('div', 'reset-stage'); first.append(backup, el('p', '', this.t('parent.resetBackupHint')), keepLabel, next, cancel);
+    modal.append(first);
+    next.onclick = () => {
+      const keepAvatar = keep.checked;
+      const label = el('label', 'reset-confirm-label', this.t('parent.resetType')); label.htmlFor = 'reset-confirmation';
+      const confirmation = el('input'); confirmation.id = 'reset-confirmation'; confirmation.type = 'text'; confirmation.autocomplete = 'off';
+      const confirm = button(this.t('parent.resetConfirm'), 'reset-confirm', 'danger-button'); confirm.disabled = true;
+      confirmation.oninput = () => { confirm.disabled = confirmation.value.trim() !== this.t('parent.resetWord'); };
+      confirm.onclick = () => {
+        if (confirmation.value.trim() !== this.t('parent.resetWord')) return;
+        confirm.disabled = true;
+        const result = this.engine.reset({ keepAvatar });
+        if (!result.ok) { this.result(result); confirm.disabled = false; return; }
+        // The engine already holds the fresh state, including for pagehide/beforeunload saves.
+        window.location.reload();
+      };
+      first.replaceChildren(el('p', '', this.t(keepAvatar ? 'parent.resetKeepsAvatar' : 'parent.resetDropsAvatar')), label, confirmation, confirm, cancel);
+      confirmation.focus();
+    };
+  }
   showParent() {
     const modal = this.openModal('parent.title', 'parent.subtitle');
     const exportButton = button(`↓ ${this.t('parent.export')}`, 'export', 'primary-button');
-    exportButton.onclick = () => {
-      const blob = new Blob([this.engine.exportJSON()], { type: 'application/json' });
-      const url = URL.createObjectURL(blob); const anchor = el('a'); anchor.href = url; anchor.download = this.t('parent.exportName'); anchor.click();
-      setTimeout(() => URL.revokeObjectURL(url), this.data.config.ui.toastMs);
-    };
+    exportButton.onclick = () => this.exportBackup();
     const file = el('input', 'import-file'); file.type = 'file'; file.accept = '.json,application/json'; file.id = 'island-import';
     file.setAttribute('aria-label', this.t('parent.import'));
     const importButton = button(`↑ ${this.t('parent.import')}`, 'import', 'secondary-button'); importButton.onclick = () => file.click();
@@ -576,7 +606,9 @@ export class IslandInterface {
     };
     const restart = button(this.t('tutorial.restart'), 'restart-tutorial', 'secondary-button'); restart.onclick = () => { this.engine.restartTutorial(); this.closeModal(); };
     const edit = button(this.t('avatar.edit'), 'edit-avatar', 'secondary-button'); edit.onclick = () => this.showAvatar();
-    const controls = el('div', 'parent-controls'); controls.append(exportButton, importButton, copy, restart, edit, file);
+    const reset = button(this.t('parent.reset'), 'reset-game', 'danger-button');
+    reset.onclick = () => this.showReset();
+    const controls = el('div', 'parent-controls'); controls.append(exportButton, importButton, copy, restart, edit, reset, file);
     modal.append(controls, el('p', '', this.t('parent.importHint')), el('small', '', `${this.t('parent.version')} ${this.engine.state.version}`));
     if (this.dev && this.data.featureFlags.devParts) {
       const dev = button(this.t('dev.parts'), 'dev-parts', 'secondary-button');

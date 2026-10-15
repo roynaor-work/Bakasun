@@ -8,26 +8,56 @@ const visuals=new Map();
 export function registerBuildingVisual(kind, factory) {visuals.set(kind,factory);}
 const C={cream:'#fff4dc',ink:'#356d76',glass:'#93d7d2',wood:'#c99a6a',path:'#e9d6aa',white:'#fffbed',line:'#fff9df'};
 function block(g,c,p,s){return part(g,'box',c,p,s);}
+// A single normalized wedge is reused by every pitched roof before batching.
+const roofGeometry=new T.BufferGeometry();
+roofGeometry.setAttribute('position',new T.Float32BufferAttribute([-.5,0,-.5,.5,0,-.5,0,1,-.5,-.5,0,.5,.5,0,.5,0,1,.5],3));
+roofGeometry.setIndex([0,2,1,3,4,5,0,3,5,0,5,2,1,2,5,1,5,4,0,1,4,0,4,3]);roofGeometry.computeVertexNormals();
 function roof(g,color,w,d,y,h=.55) {
-  const geo=new T.BufferGeometry();
-  geo.setAttribute('position',new T.Float32BufferAttribute([-w/2,0,-d/2,w/2,0,-d/2,0,h,-d/2,-w/2,0,d/2,w/2,0,d/2,0,h,d/2],3));
-  geo.setIndex([0,2,1,3,4,5,0,3,5,0,5,2,1,2,5,1,5,4,0,1,4,0,4,3]);geo.computeVertexNormals();
-  const mesh=new T.Mesh(geo,material(color,{flatShading:true}));mesh.position.y=y;mesh.castShadow=true;mesh.receiveShadow=true;mesh.userData.ownedGeometry=true;g.add(mesh);return mesh;
+  const mesh=new T.Mesh(roofGeometry,material(color,{flatShading:true}));mesh.position.y=y;mesh.scale.set(w,h,d);mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);return mesh;
 }
 function windows(g,w,d,y,count=2,color=C.glass) {
   for(let i=0;i<count;i++){const x=(i-(count-1)/2)*w/(count+.5);block(g,C.cream,[x,y,d/2+.012],[.3,.36,.055]);block(g,color,[x,y,d/2+.045],[.23,.27,.02]);}
   for(let i=0;i<count;i++)block(g,color,[-w/2-.015,y,(i-(count-1)/2)*d/(count+.5)],[.035,.27,.24]);
 }
 function base(g,w,d,color=C.cream){block(g,color,[0,.055,0],[w*.96,.11,d*.96]);}
-function house(g,v,w,d,h) {
-  base(g,w,d);const bw=w*.78,bd=d*.75;block(g,v.color,[0,h/2+.08,0],[bw,h,bd]);roof(g,v.roofColor,bw+.18,bd+.22,h+.08,.5);
-  const floors=v.floors||1;
-  for(let floor=0;floor<floors;floor++) {
-    windows(g,bw,bd,(floor+.58)*h/floors,Math.max(1,Math.floor(w)));
-    if(floor)block(g,C.cream,[0,.08+floor*h/floors,0],[bw+.04,.07,bd+.04]);
+function parapet(g,w,d,y,color) {
+  for(const side of [-1,1]) {
+    block(g,color,[0,y,side*d/2],[w,.16,.055]);
+    block(g,color,[side*w/2,y,0],[.055,.16,d]);
   }
-  block(g,C.wood,[bw*.24,.29,bd/2+.04],[.26,.52,.07]);block(g,C.cream,[bw*.24,.07,bd/2+.23],[.45,.12,.32]);
-  block(g,C.cream,[-bw*.2,h+.46,-bd*.2],[.19,.45,.21]);
+}
+function house(g,v,w,d,h) {
+  const design=v.design||'cabin',floors=v.floors||1;
+  const bw=w*(design==='cabin'?.64:design==='gardenTower'?.68:.83),bd=d*(design==='balcony'?.62:.73);
+  base(g,w,d);block(g,v.color,[0,h/2+.08,0],[bw,h,bd]);
+  if(design==='apartments'||design==='gardenTower') {
+    block(g,v.roofColor,[0,h+.12,0],[bw+.1,.13,bd+.1]);
+    parapet(g,bw+.08,bd+.08,h+.26,v.roofColor);
+  } else roof(g,v.roofColor,bw+.18,bd+.22,h+.08,.5);
+  for(let floor=0;floor<floors;floor++) {
+    windows(g,bw,bd,.08+(floor+.56)*h/floors,design==='cabin'?1:design==='gardenTower'?3:2,v.windowColor||C.glass);
+    if(floor)block(g,design==='gardenTower'?v.roofColor:C.cream,[0,.08+floor*h/floors,0],[bw+.04,.06,bd+.04]);
+  }
+  block(g,design==='gardenTower'?v.windowColor:C.wood,[bw*.24,.32,bd/2+.04],[.26,.48,.07]);
+  block(g,C.cream,[bw*.24,.07,bd/2+.18],[.45,.12,.24]);
+  if(design==='balcony') {
+    block(g,C.cream,[0,h*.54,bd/2+.22],[bw*.85,.1,.45]);
+    for(const x of [-bw*.39,0,bw*.39])block(g,v.roofColor,[x,h*.66,bd/2+.4],[.045,.48,.045]);
+    block(g,v.roofColor,[0,h*.76,bd/2+.4],[bw*.85,.05,.05]);
+    block(g,v.roofColor,[-bw*.25,h+.43,-bd*.18],[.22,.85,.24]);
+    block(g,C.cream,[-bw*.25,h+.87,-bd*.18],[.29,.1,.3]);
+  } else if(design==='apartments') {
+    block(g,C.cream,[0,.7,bd/2+.18],[bw*.9,.08,.32]);
+    for(const x of [-bw*.38,bw*.38])block(g,C.cream,[x,.4,bd/2+.25],[.07,.6,.07]);
+  } else if(design==='gardenTower') {
+    block(g,'#77ad71',[0,h+.21,0],[bw*.82,.06,bd*.82]);
+    for(const x of [-bw*.29,bw*.29]) {
+      block(g,'#b77f66',[x,h+.3,-bd*.22],[.3,.16,.42]);
+      part(g,'sphere','#519e74',[x,h+.51,-bd*.22],[.34,.4,.43]);
+    }
+    for(const x of [-bw*.32,bw*.32])block(g,C.cream,[x,h+.43,bd*.25],[.045,.42,.045]);
+    for(const z of [bd*.08,bd*.26,bd*.44])block(g,C.wood,[0,h+.66,z],[bw*.8,.06,.07]);
+  }
 }
 function civic(g,v,w,d,h,variant) {
   base(g,w,d);const bw=w*.82,bd=d*.78;block(g,v.color,[0,h/2+.1,0],[bw,h,bd]);
@@ -140,6 +170,86 @@ function defense(g,v,w,d,h,kind) {
   else if(kind==='shield'){part(g,'sphere',v.color,[0,h*.5,0],[w*.7,h,d*.4]);cross(g,v.roofColor,[0,h*.5,d*.2],h*.55);}
   else{civic(g,v,w,d,h,'embassy');block(g,C.cream,[w*.34,h+.6,0],[.05,1.2,.05]);block(g,v.roofColor,[w*.34+.26,h+.95,0],[.52,.35,.055]);}
 }
+function flag(g,x,y,z,color) {
+  block(g,C.cream,[x,y+.36,z],[.035,.72,.035]);
+  block(g,color,[x+.17,y+.57,z],[.34,.22,.045]);
+}
+function levelDetails(g,v,w,d,h) {
+  const tier=v.tier||1;if(tier===1||v.kind==='house')return;
+  const civicKinds=['school','hospital','fireStation','police','prison'];
+  if(civicKinds.includes(v.kind)) {
+    // A low side wing breaks the original rectangular silhouette.
+    block(g,v.roofColor,[-w*.34,h*.25,d*.12],[w*.28,h*.5,d*.72]);
+    block(g,C.cream,[-w*.34,h*.51,d*.12],[w*.32,.09,d*.77]);
+    windows(g,w*.86,d*.94,h*.32,3,v.windowColor);
+    if(tier===3) {
+      if(v.kind==='hospital') {
+        block(g,C.ink,[0,h+.29,0],[w*.54,.04,d*.55]);
+        // Roof landing mark: two bars and a crossbar, no texture or new light.
+        for(const x of [-w*.12,w*.12])block(g,C.white,[x,h+.32,0],[.07,.02,d*.3]);
+        block(g,C.white,[0,h+.32,0],[w*.24,.02,.07]);
+      } else {
+        block(g,v.roofColor,[w*.29,h*.75,-d*.16],[w*.27,h*1.5,d*.35]);
+        block(g,C.cream,[w*.29,h*1.52,-d*.16],[w*.32,.12,d*.4]);
+        if(v.kind==='fireStation')for(let i=0;i<3;i++)block(g,C.ink,[w*.29,h*(.7+i*.2),d*.02],[w*.14,.13,.035]);
+        flag(g,w*.29,h*1.58,-d*.16,v.color);
+      }
+    }
+  } else if(v.kind==='waterTower') {
+    block(g,v.roofColor,[0,h*.58,0],[w*.98,.1,d*.98]);
+    parapet(g,w*.94,d*.94,h*.72,C.cream);
+    for(let i=0;i<6;i++)block(g,C.ink,[-w*.35,h*.1+i*h*.08,d*.35],[.23,.035,.04]);
+    if(tier===3) {
+      block(g,v.roofColor,[0,h*.19,0],[w*.72,h*.38,d*.7]);
+      block(g,C.cream,[0,h*.18,d*.36],[w*.23,h*.3,.05]);
+      flag(g,0,h*1.18,0,v.roofColor);
+    }
+  } else if(v.kind==='farm') {
+    block(g,'#a1d8cc',[w*.22,h*.28,-d*.25],[w*.36,h*.55,d*.36]);
+    const greenhouseRoof=roof(g,'#ddf0d1',w*.4,d*.4,h*.55,h*.22);greenhouseRoof.position.set(w*.22,h*.55,-d*.25);
+    for(const x of [w*.08,w*.22,w*.36])block(g,C.cream,[x,h*.28,-d*.06],[.035,h*.55,.035]);
+    if(tier===3) {
+      part(g,'cylinder',v.roofColor,[-w*.35,h*.66,d*.24],[w*.22,h*1.3,d*.22]);
+      part(g,'cone',C.cream,[-w*.35,h*1.4,d*.24],[w*.26,h*.25,d*.26]);
+    }
+  } else if(v.kind==='factory') {
+    block(g,v.roofColor,[w*.31,h*.25,d*.2],[w*.35,h*.5,d*.5]);
+    for(let i=0;i<3;i++)block(g,C.cream,[w*.31,h*(.12+i*.1),d*.46],[w*.24,.04,.025]);
+    if(tier===3) {
+      part(g,'cylinder',C.cream,[-w*.3,h*.8,d*.22],[w*.18,h*1.6,d*.18]);
+      for(const y of [.7,1,1.3])part(g,'cylinder',v.roofColor,[-w*.3,h*y,d*.22],[w*.19,.11,d*.19]);
+    }
+  } else if(v.kind==='harbor') {
+    for(let i=0;i<tier;i++)block(g,i%2?v.roofColor:v.color,[w*.26,.37+i*.18,-d*.26],[w*.28,.18,d*.3]);
+    if(tier===3) {
+      block(g,v.roofColor,[-w*.37,h*.65,d*.15],[.14,h*1.3,.14]);
+      block(g,v.roofColor,[-w*.12,h*1.3,d*.15],[w*.62,.14,.14]);
+      block(g,C.ink,[w*.14,h*.97,d*.15],[.025,h*.65,.025]);
+      block(g,C.wood,[w*.14,h*.63,d*.15],[.18,.09,.12]);
+    }
+  } else if(v.kind==='park') {
+    for(const x of [w*.12,w*.4])for(const z of [-d*.4,-d*.12])block(g,C.wood,[x,.52,z],[.055,.85,.055]);
+    if(tier===2) {
+      const cover=roof(g,v.roofColor,w*.45,d*.43,.95,.28);cover.position.set(w*.26,.95,-d*.26);
+    } else {
+      for(let i=0;i<5;i++)block(g,v.roofColor,[w*.26,.95,-d*.43+i*d*.085],[w*.43,.08,.06]);
+      for(const x of [-w*.35,-w*.15])for(const z of [-d*.3,0,d*.3]) {
+        block(g,'#bd8d68',[x,.18,z],[.22,.13,.26]);
+        part(g,'sphere','#f1b2c4',[x,.32,z],[.22,.2,.22]);
+      }
+    }
+  } else if(['soccer','tennis','basketball','pool','athletics'].includes(v.kind)) {
+    // Stands are already level-driven; add a scoreboard, then a canopy and flags.
+    for(const x of [-w*.17,w*.17])block(g,C.ink,[x,.55,-d*.44],[.05,.9,.05]);
+    block(g,C.ink,[0,1,-d*.44],[w*.48,.38,.07]);
+    for(const x of [-w*.12,w*.12])block(g,'#f9df8f',[x,1,-d*.395],[w*.07,.2,.025]);
+    if(tier===3) {
+      for(const z of [-d*.3,d*.3])block(g,v.roofColor,[-w*.45,.73,z],[.05,1.15,.05]);
+      block(g,v.roofColor,[-w*.4,1.32,0],[w*.24,.1,d*.76]);
+      flag(g,w*.42,.5,-d*.3,v.roofColor);flag(g,w*.42,.5,d*.3,v.roofColor);
+    }
+  }
+}
 registerBuildingVisual('house',house);
 registerBuildingVisual('factory',factory);
 registerBuildingVisual('farm',farm);
@@ -154,7 +264,9 @@ for(const kind of ['wall','watchtower','shield','embassy'])registerBuildingVisua
 export function createBuilding(record,level=1) {
   const levelVisual=record.levels?.[level-1]?.visual;
   const visual={kind:'house',color:'#efb99c',roofColor:'#d97e70',height:.85,...record.visual,...levelVisual},[w,d]=record.footprint||[1,1],group=new T.Group();
-  group.name=record.id;const factory=visuals.get(visual.kind)||house;factory(group,visual,w,d,visual.height*(levelVisual?.height?1:1+(Math.max(1,level)-1)*.13));
+  const height=visual.height*(levelVisual?.height?1:1+(Math.max(1,level)-1)*.13);
+  group.name=record.id;const factory=visuals.get(visual.kind)||house;factory(group,visual,w,d,height);
+  levelDetails(group,visual,w,d,height);
   for(let tier=0;tier<(visual.stands||0);tier++)for(const side of [-1,1])block(group,visual.roofColor,[side*w*.45,.22+tier*.2,0],[w*.09,.18,d*.65]);
   if(level>1){for(let i=0;i<Math.min(level-1,3);i++)part(group,'sphere','#f4d17d',[w*.36,.18+i*.16,d*.36],[.12,.12,.12]);}
   return batchMeshes(group);

@@ -112,6 +112,27 @@ export function saveWorld(storage, state) {
   catch { return { ok: false, reason: 'reason.storage' }; }
 }
 
+/** Explicit ownership only: this game never owns other localStorage keys or any IndexedDB database. */
+export function resetWorld(storage, freshState) {
+  try {
+    const backups = [];
+    for (let i = 0; i < storage.length; i++) {
+      const key = storage.key(i);
+      if (/^island\.v1\.corrupt\.\d+$/.test(key)) backups.push(key);
+    }
+    // Remove backups first, so a failed cleanup does not remove the active save.
+    for (const key of backups) storage.removeItem(key);
+    const previous = storage.getItem(STORAGE_KEY);
+    storage.removeItem(STORAGE_KEY);
+    const saved = saveWorld(storage, freshState);
+    if (!saved.ok) {
+      if (previous !== null) storage.setItem(STORAGE_KEY, previous);
+      return saved;
+    }
+    return { ok: true };
+  } catch { return { ok: false, reason: 'reason.storage' }; }
+}
+
 export function exportWorld(state) { return JSON.stringify({ ...state, version: CURRENT_VERSION }, null, 2); }
 
 /** Import is an additive merge. Current buildings win on conflicts; current progress is never reduced. */
