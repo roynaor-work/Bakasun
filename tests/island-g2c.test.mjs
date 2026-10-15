@@ -74,11 +74,6 @@ test('G2c carriers launch a finite budget of mini-ships, and bosses arrive at th
   const born=m.aliens.filter(a=>a.child).length;for(const a of m.aliens)if(a.kind===4)a.launchTime=0;m.update(.02,{});assert.ok(m.aliens.filter(a=>a.child).length<=m.settings.spawnBudget);assert.ok(born>0);
   const boss=make('alienDefense',5),memory={};for(let i=0;i<20000&&boss.wave<boss.settings.waves&&!boss.result;i++)boss.update(.04,pilotInput('alienDefense',boss,config.alienDefense,memory));assert.equal(boss.wave,boss.settings.waves);assert.equal(boss.aliens.filter(a=>a.boss).length,1);
 });
-test('G2c kills drop collectible capsules with a repeatable four-upgrade cycle',()=>{
-  const m=make('alienDefense',10),b=config.alienDefense;
-  for(let i=0;i<8;i++){const a=m.aliens.find(a=>!a.child&&a.kind!==3);shotAt(m,a,1);m.update(.001,{});}
-  assert.equal(m.pickups.length,4);assert.deepEqual(m.pickups.map(d=>b.pickups.kinds[d.kind]),b.pickups.kinds);
-});
 for(let kind=0;kind<4;kind++)test(`G2c temporary ${config.alienDefense.pickups.kinds[kind]} collects, changes play and expires`,()=>{
   const m=make('alienDefense',1);m.pickups.push({x:m.player.x,y:m.player.y,vx:0,vy:0,kind});m.update(.001,{});assert.equal(m.powerup,kind);assert.equal(m.powerTime,config.alienDefense.pickups.seconds);
   m.update(.02,{firing:true});assert.equal(m.shots.length,kind===0?3:1);if(kind===1)assert.equal(m.shots[0].hp,config.alienDefense.pickups.laserPierce);
@@ -149,8 +144,8 @@ test('G2c stubborn fire resists water and spreading fire grows faster at equal s
   advance(a,.1,{firing:true,x:a.flames[0].x,y:a.flames[0].y});advance(c,.1,{firing:true,x:c.flames[0].x,y:c.flames[0].y});assert.ok(a.flames[0].heat<c.flames[0].heat);
   a.flames[0].heat=.5;advance(a,.1);advance(d,.1);assert.ok(d.flames[0].heat>a.flames[0].heat);assert.ok(b.fireTypes[2].growth>1);
 });
-test('G2c depleted special ammunition falls back without going negative, and rate reduces the actual turn wait',()=>{
-  const b=config.navalDuel,m=make('navalDuel',10,{equipment:{ammo:1}});m.update(.001,{ammo:true});m.ammo[1]=0;m.update(.001,{firing:true});assert.equal(m.phase,'shot');assert.equal(m.ball.ammo,0);assert.equal(m.ammo[1],0);
+test('G2c depleted selected ammunition does not fire or silently switch, and rate reduces the actual turn wait',()=>{
+  const b=config.navalDuel,m=make('navalDuel',10,{equipment:{ammo:1}});m.update(.001,{ammo:true});m.ammo[1]=0;m.update(.001,{firing:true});assert.equal(m.phase,'aim');assert.equal(m.ammoIndex,1);assert.equal(m.ammo[1],0);const supply=m.ammo[0];m.update(.001,{firing:false,ammoIndex:0});m.update(.001,{firing:true});assert.equal(m.phase,'shot');assert.equal(m.ammo[0],supply-1);
   const normal=make('navalDuel',10),fast=make('navalDuel',10,{equipment:{rate:1.6}});
   for(const ship of [normal,fast]){ship.update(.01,{firing:true});navalHit(ship,b);}
   advance(fast,b.turnPauseSeconds/1.6+.02);advance(normal,b.turnPauseSeconds/1.6+.02);assert.equal(fast.phase,'shot');assert.equal(normal.phase,'enemy');

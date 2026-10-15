@@ -1,5 +1,5 @@
-import {runCanvasGame} from './canvas-session.mjs';
-import {oval,drawCrew} from './art.mjs';
+import {runCanvasGame} from './canvas-session.mjs?v=g2e-20261015-1';
+import {oval,drawCrew} from './art.mjs?v=g2e-20261015-1';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 export function createFireEntity(site,type,active,heat,index){return {x:site.x,y:site.y,kind:site.kind,type,active,heat,phase:index*1.7,spreadAge:0};}
 export function createFireModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY}) {

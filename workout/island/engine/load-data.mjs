@@ -1,3 +1,4 @@
+import {DATA_VERSION,dataURL} from '../release.mjs?v=g2e-20261015-1';
 import { configureBuilding } from './registry.mjs';
 
 const FILES = ['config', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
@@ -6,7 +7,7 @@ const FILES = ['config', 'buildings', 'categories', 'metrics', 'avatar', 'team',
 export async function loadData(base = new URL('../', import.meta.url), fetcher = globalThis.fetch) {
   const root = new URL(base, import.meta.url);
   const read = async path => {
-    const response = await fetcher(new URL(path, root));
+    const response = await fetcher(dataURL(path, root));
     if (!response.ok) throw new Error('reason.data');
     return response.json();
   };
@@ -19,6 +20,7 @@ export async function loadData(base = new URL('../', import.meta.url), fetcher =
   for (const path of extensionManifest.modules) {
     const moduleUrl = new URL(path, root);
     if (moduleUrl.origin !== root.origin || !moduleUrl.pathname.startsWith(root.pathname)) throw new Error('reason.invalid');
+    moduleUrl.searchParams.set('v',DATA_VERSION);
     const module = await import(moduleUrl.href);
     data.extensionInstallers.push(module.install || module.default);
   }

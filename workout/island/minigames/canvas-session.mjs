@@ -1,4 +1,5 @@
-import {createGameArt} from './art.mjs';
+import {loadOptionalArt} from './model-art.mjs?v=g2e-20261015-1';
+import {createGameArt} from './art.mjs?v=g2e-20261015-1';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   const { canvas, controls, status, config, t } = ctx;
@@ -10,14 +11,15 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
   art.hudFont=config.visuals.hudFont;art.fleetLabel=t('minigame.fleet');art.enemyFleetLabel=t('minigame.enemyFleet');if(ctx.gameId==='navalDuel')art.enemyNames=model.enemies.map(e=>t(e.boss?'naval.boss':ctx.balance.shipTypes[e.kind].name));
   const view=createView?.(ctx,model);
   const renderContext={...ctx,art,quality,view};
-  const gesture={x:0,y:0,angle:0};
+  const gesture={x:0,y:0,angle:0,yaw:0};
   const naval=ctx.gameId==='navalDuel';
   let qualitySamples=0,qualityMs=0;
   const events = new AbortController(), options = { signal: events.signal };
-  const input = { x: undefined, y: undefined, firing: false, nova:false,ammo:false,charge:false,refill:false,left: false, right: false, angle:ctx.balance.defaultAngle, power:ctx.balance.defaultPower };
+  const input = { x: undefined, y: undefined, firing: false, nova:false,ammo:false,charge:false,refill:false,left: false, right: false, angle:ctx.balance.defaultAngle, yaw:ctx.balance.controls?.defaultYaw, power:ctx.balance.defaultPower };
   const pointers = new Map(), keys = new Set();
   let frame, last, disposed = false, observer, scale = 1, offsetX = 0, offsetY = 0, statusTime=0, samples=0, totalFrameMs=0, lowQuality=false, paused=false, queuedFire=false, queuedNova=false, queuedAmmo=false, heldFire=false, cssWidth=0,cssHeight=0,pixelRatio=1;
-  const clearInput = () => { pointers.clear(); keys.clear(); queuedNova=queuedAmmo=queuedFire=heldFire=input.firing=input.left=input.right=input.nova=input.ammo=input.charge=keys.has('charge');input.refill=keys.has('refill'); };
+  if(ctx.gameId==='alienDefense')void loadOptionalArt(art,ctx.balance,()=>disposed);
+  const clearInput = () => { pointers.clear(); keys.clear(); queuedNova=queuedAmmo=queuedFire=heldFire=input.firing=input.left=input.right=input.nova=input.ammo=input.charge=input.refill=false; };
   function syncInput() {
     input.charge=keys.has('charge');input.refill=keys.has('refill');
     input.left = keys.has('ArrowLeft')||keys.has('left');input.right = keys.has('ArrowRight')||keys.has('right');heldFire=keys.has('fire');
@@ -55,6 +57,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
     }
   }
   try {
+    for(const node of [canvas,controls,ctx.dialog])for(const type of ['contextmenu','selectstart','dragstart'])node.addEventListener(type,event=>event.preventDefault(),options);
     canvas.addEventListener('pointerdown',event=>{
       event.preventDefault(); canvas.setPointerCapture(event.pointerId); pointers.set(event.pointerId,'canvas');if(!naval)queuedFire=true;position(event,true);syncInput();
     },options);
@@ -65,6 +68,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
       },options);
     }
     for(const node of controls.querySelectorAll('[data-game-control]'))node.addEventListener('click',event=>{if(event.detail!==0)return;const key=node.dataset.gameControl;if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(key==='fire')queuedFire=true;else if(key==='nova')queuedNova=true;else if(key==='ammo')queuedAmmo=true;else if(key==='refill'||key==='charge')input[key]=!input[key];},options);
+    for(const node of controls.querySelectorAll('[data-angle-step]'))node.addEventListener('click',()=>{const axis=node.dataset.angleAxis;if(axis==='angle'&&model.ammoIndex===2)return;const slider=controls.querySelector(`[data-game-input=${axis}]`);input[axis]=Math.max(Number(slider.min),Math.min(Number(slider.max),input[axis]+Number(node.dataset.angleStep)));slider.value=input[axis];},options);
     for(const node of controls.querySelectorAll('[data-game-input]'))node.addEventListener('input',()=>{input[node.dataset.gameInput]=Number(node.value);},options);
     for (const type of ['pointerup','pointercancel','lostpointercapture']) window.addEventListener(type,event=>{pointers.delete(event.pointerId);syncInput();},options);
     const key = event => {
@@ -105,10 +109,15 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
           if(status.textContent!==text)status.textContent=text;
           if(ctx.gauges){ctx.gauges.water.value=model.water/model.maxWater;ctx.gauges.pressure.value=model.pressure/model.maxPressure;}
           if(ctx.novaButton)ctx.novaButton.disabled=model.novaCharges<=0||model.nova.flight>0||model.nova.life>0;
-          if(ctx.ammoButtons)for(let i=0;i<ctx.ammoButtons.length;i++){const button=ctx.ammoButtons[i],seconds=Math.ceil(model.cooldowns[i]),count=model.ammo[i];button.textContent=t(count<=0?'minigame.ammoEmpty':seconds?'minigame.ammoReload':'minigame.ammoReady',{ammo:t(ctx.balance.ammo[i].title),count,seconds});button.setAttribute('aria-pressed',String(model.ammoIndex===i));button.disabled=count<=0;}
+          if(ctx.ammoButtons)for(let i=0;i<ctx.ammoButtons.length;i++){const button=ctx.ammoButtons[i],seconds=Math.ceil(model.cooldowns[i]),count=model.ammo[i];const state=count<=0?'minigame.unavailableEmpty':seconds?'minigame.unavailableReload':model.phase!=='aim'?'minigame.unavailableTurn':'minigame.available';button.querySelector('.ammo-copy').textContent=t('minigame.ammoDetails',{ammo:t(ctx.balance.ammo[i].title),count,seconds:seconds||Math.round(ctx.balance.ammo[i].reloadSeconds/(model.equipment.rate||1)*10)/10,state:t(state)});button.setAttribute('aria-pressed',String(model.ammoIndex===i));button.disabled=count<=0;}
           if(ctx.upgradePanel){const panel=ctx.upgradePanel;panel.hidden=!model.choosing;if(model.choosing&&panel.dataset.wave!==String(model.wave)){panel.dataset.wave=model.wave;for(let i=0;i<ctx.upgradeButtons.length;i++){const id=model.choices[i],button=ctx.upgradeButtons[i];button.textContent=t('minigame.upgradeStack',{name:t('runUpgrade.'+id),rank:model.upgrades[id]+1});button.onclick=()=>{model.chooseUpgrade(i);clearInput();panel.hidden=true;};}}}
           if(ctx.ammoButton){const index=model.ammoIndex;ctx.ammoButton.textContent=t('minigame.ammoSwitch',{ammo:t(ctx.balance.ammo[index].title),count:index===0?t('ammo.unlimited'):model.ammo[index]});}
           if(ctx.fleetMeters){ctx.fleetMeters.player.value=model.lives/model.maxLives;ctx.fleetMeters.enemy.value=model.enemyFleetHp/model.maxEnemyFleet;}
+          if(naval){
+            for(const key of ['yaw','angle','power']){const slider=controls.querySelector(`[data-game-input=${key}]`),output=controls.querySelector(`[data-game-value=${key}]`);if(slider)slider.value=model.aim[key];if(output)output.textContent=Math.round(model.aim[key])+(key==='power'?'%':'°');}
+            const torpedo=model.ammoIndex===2;for(const node of controls.querySelectorAll('[data-angle-axis=angle],[data-game-input=angle]'))node.disabled=torpedo;
+            art.yawText=t('minigame.yawValue',{degrees:Math.round(model.aim.yaw)});art.elevationText=torpedo?t('minigame.torpedoFlat'):t('minigame.elevationValue',{degrees:Math.round(model.aim.angle)});
+          }
           if(ctx.turnLabel)ctx.turnLabel.textContent=t(model.phase==='aim'?'minigame.aimTurn':'minigame.enemyTurn');
           statusTime=config.statusIntervalSeconds;
         }
@@ -116,13 +125,14 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
       } catch { ctx.cancel();ctx.onError?.('reason.gameStart'); }
     }
     frame=requestAnimationFrame(tick);
-    return { dispose, cancel: ctx.cancel, setPaused(value){paused=value;clearInput();last=undefined;},get snapshot() { const snapshot=model.snapshot();if(view)snapshot.renderMode=view.mode;return snapshot; } };
+    return { dispose, cancel: ctx.cancel, setPaused(value){paused=value;clearInput();last=undefined;},get snapshot() { const snapshot=model.snapshot();if(art.modelArt)snapshot.artModels={...art.modelArt};if(view)snapshot.renderMode=view.mode;return snapshot; } };
   } catch(error) {dispose();throw error;}
 }
 
 /** Shared gesture contract: naval canvas is angle-only, with no firing side effect. */
 export function applyCanvasGesture(input,gameId,anchor,balance,start=false){
   if(gameId!=='navalDuel')return;
-  if(start){anchor.x=input.x;anchor.y=input.y;anchor.angle=input.angle;return;}
-  input.angle=Math.max(balance.minAngle,Math.min(balance.maxAngle,anchor.angle+(anchor.y-input.y+input.x-anchor.x)*balance.controls.dragDegreesPerPixel));
+  if(start){anchor.x=input.x;anchor.y=input.y;anchor.angle=input.angle;anchor.yaw=input.yaw??balance.controls.defaultYaw;return;}
+  input.yaw=Math.max(balance.controls.minYaw,Math.min(balance.controls.maxYaw,anchor.yaw+(input.x-anchor.x)*balance.controls.dragDegreesPerPixel));
+  input.angle=Math.max(balance.minAngle,Math.min(balance.maxAngle,anchor.angle+(anchor.y-input.y)*balance.controls.dragDegreesPerPixel));
 }

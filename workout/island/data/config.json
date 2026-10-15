@@ -1139,7 +1139,8 @@
           "feature": "feature.alien.1",
           "scoreLimit": 50000,
           "bossShots": 1,
-          "rewardScoreLimit": 400
+          "rewardScoreLimit": 400,
+          "killsPerBonus": 10
         },
         {
           "difficulty": 2,
@@ -1164,7 +1165,8 @@
           "feature": "feature.alien.2",
           "scoreLimit": 70000,
           "bossShots": 1,
-          "rewardScoreLimit": 550
+          "rewardScoreLimit": 550,
+          "killsPerBonus": 10
         },
         {
           "difficulty": 3,
@@ -1189,7 +1191,8 @@
           "feature": "feature.alien.3",
           "scoreLimit": 90000,
           "bossShots": 1,
-          "rewardScoreLimit": 700
+          "rewardScoreLimit": 700,
+          "killsPerBonus": 10
         },
         {
           "difficulty": 4,
@@ -1214,7 +1217,8 @@
           "feature": "feature.alien.4",
           "scoreLimit": 110000,
           "bossShots": 1,
-          "rewardScoreLimit": 850
+          "rewardScoreLimit": 850,
+          "killsPerBonus": 12
         },
         {
           "difficulty": 5,
@@ -1239,7 +1243,8 @@
           "feature": "feature.alien.5",
           "scoreLimit": 130000,
           "bossShots": 1,
-          "rewardScoreLimit": 1000
+          "rewardScoreLimit": 1000,
+          "killsPerBonus": 12
         },
         {
           "difficulty": 6,
@@ -1264,7 +1269,8 @@
           "feature": "feature.alien.6",
           "scoreLimit": 150000,
           "bossShots": 1,
-          "rewardScoreLimit": 1150
+          "rewardScoreLimit": 1150,
+          "killsPerBonus": 12
         },
         {
           "difficulty": 7,
@@ -1289,7 +1295,8 @@
           "feature": "feature.alien.7",
           "scoreLimit": 170000,
           "bossShots": 1,
-          "rewardScoreLimit": 1300
+          "rewardScoreLimit": 1300,
+          "killsPerBonus": 14
         },
         {
           "difficulty": 8,
@@ -1314,7 +1321,8 @@
           "feature": "feature.alien.8",
           "scoreLimit": 190000,
           "bossShots": 2,
-          "rewardScoreLimit": 1450
+          "rewardScoreLimit": 1450,
+          "killsPerBonus": 14
         },
         {
           "difficulty": 9,
@@ -1339,7 +1347,8 @@
           "feature": "feature.alien.9",
           "scoreLimit": 210000,
           "bossShots": 2,
-          "rewardScoreLimit": 1600
+          "rewardScoreLimit": 1600,
+          "killsPerBonus": 14
         },
         {
           "difficulty": 10,
@@ -1364,7 +1373,8 @@
           "feature": "feature.alien.10",
           "scoreLimit": 230000,
           "bossShots": 2,
-          "rewardScoreLimit": 1750
+          "rewardScoreLimit": 1750,
+          "killsPerBonus": 16
         }
       ],
       "maxAliens": 48,
@@ -1389,7 +1399,8 @@
           "radius": 1.18,
           "pattern": "circle",
           "amplitude": 4,
-          "frequency": 1.4
+          "frequency": 1.4,
+          "loot": "coin"
         },
         {
           "id": "weaver",
@@ -1419,35 +1430,45 @@
           "amplitude": 5,
           "frequency": 1,
           "launchSeconds": 7,
-          "launchLimit": 2
+          "launchLimit": 2,
+          "loot": "crystal"
         }
       ],
       "bossScale": 1.8,
       "pickups": {
-        "everyKills": 2,
         "speed": 125,
         "radius": 26,
         "magnetRadius": 80,
         "magnetSpeed": 260,
         "seconds": 8,
-        "max": 16,
+        "max": 1,
         "kinds": [
           "spread",
           "laser",
           "rapid",
-          "shield"
+          "shield",
+          "wing",
+          "nova"
         ],
         "colors": [
           "#ffbd68",
           "#69dcff",
           "#ff8bbb",
-          "#65f5c2"
+          "#65f5c2",
+          "#f4d17c",
+          "#b8efff"
         ],
         "spreadSpeed": 110,
         "rapidMultiplier": 1.8,
         "laserPierce": 4,
         "childScale": 0.6,
-        "childSpeed": 1.3
+        "childSpeed": 1.3,
+        "rotation": [
+          0,
+          3,
+          4,
+          5
+        ]
       },
       "nova": {
         "charges": 2,
@@ -1573,12 +1594,10 @@
         "comboBonus": 2,
         "wingOffset": 42,
         "wingDamage": 0.7,
-        "coinEveryKills": 3,
-        "crystalEveryKills": 5,
         "coinPoints": 8,
         "crystalPoints": 18,
         "lootSpeed": 90,
-        "maxLoot": 24,
+        "maxLoot": 2,
         "maxWings": 2,
         "celebrationSeconds": 1.4,
         "bossSpreadSpeed": 32,
@@ -1586,6 +1605,26 @@
         "spreadStep": 0.55,
         "wingRadius": 15,
         "wingFrontOffset": 35
+      },
+      "hitFlashSeconds": 0.12,
+      "models": {
+        "player": null,
+        "enemies": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "modelArt": {
+        "size": 128,
+        "camera": [
+          0,
+          1.5,
+          6
+        ],
+        "scale": 2.6
       }
     },
     "fireRescue": {
@@ -2002,8 +2041,8 @@
       "gravity": 110,
       "minSpeed": 130,
       "maxSpeed": 230,
-      "minAngle": 20,
-      "maxAngle": 75,
+      "minAngle": 0,
+      "maxAngle": 90,
       "defaultAngle": 45,
       "defaultPower": 45,
       "powerMaximum": 100,
@@ -2186,28 +2225,47 @@
           "damage": 1,
           "scale": 1,
           "name": "naval.scout",
-          "attack": "aimed"
+          "attack": "aimed",
+          "speed": 1.25,
+          "beam": 0.72,
+          "length": 0.78,
+          "turrets": 1,
+          "hull": "#ab7858"
         },
         {
           "hp": 1.2,
           "damage": 1,
           "scale": 1.1,
           "name": "naval.heavy",
-          "attack": "heavy"
+          "attack": "heavy",
+          "speed": 0.8,
+          "beam": 1,
+          "length": 1.15,
+          "turrets": 2,
+          "hull": "#9c586b"
         },
         {
           "hp": 0.85,
           "damage": 1.25,
           "scale": 0.85,
           "name": "naval.runner",
-          "attack": "rapid"
+          "attack": "rapid",
+          "speed": 1,
+          "beam": 1.2,
+          "length": 1.35,
+          "turrets": 3,
+          "hull": "#756ba5"
         }
       ],
       "boss": {
         "everyStages": 5,
         "hp": 1.4,
         "damage": 1.15,
-        "scale": 1.2
+        "scale": 1.2,
+        "beam": 1.4,
+        "length": 1.5,
+        "turrets": 4,
+        "hull": "#b66851"
       },
       "enemySalvoStage": 7,
       "enemySalvoShots": 2,
@@ -2360,7 +2418,12 @@
       },
       "salvoDamageScale": 0.4,
       "controls": {
-        "dragDegreesPerPixel": 0.24
+        "dragDegreesPerPixel": 0.24,
+        "minYaw": -90,
+        "maxYaw": 90,
+        "defaultYaw": 0,
+        "fineStep": 1,
+        "dialRadius": 25
       },
       "render": {
         "width": 360,
@@ -2387,8 +2450,8 @@
         "playerScale": 1.45,
         "fogNear": 48,
         "fogFar": 130,
-        "sky": "#e6ab9c",
-        "sea": "#247f99",
+        "sky": "#bf9e99",
+        "sea": "#103e59",
         "sun": "#ffdd9c",
         "hull": "#237f91",
         "enemy": "#bd615b",
@@ -2402,12 +2465,18 @@
         "nameFont": "bold 12px sans-serif",
         "playerMeterY": 22,
         "fleetMeterY": 48,
-        "mapY": 10
+        "mapY": 10,
+        "hemisphereIntensity": 1.35,
+        "sunIntensity": 1.8,
+        "enemyBarWidth": 34,
+        "enemyLabelStep": 16
       },
       "combat": {
         "heavySpeed": 0.85,
         "rapidShots": 2,
-        "heavyDamage": 1.1
+        "heavyDamage": 1.1,
+        "laneSpacing": 52,
+        "lateralRadius": 22
       }
     },
     "art": {
@@ -2583,8 +2652,8 @@
         "sun": "#fff1c3",
         "cloud": "#f5fcff9a",
         "distantIsland": "#75a8b0",
-        "waterTop": "#32b5d3",
-        "waterBottom": "#176ca3",
+        "waterTop": "#174e68",
+        "waterBottom": "#0b2f48",
         "enemyGlow": "#ff8bbb44",
         "enemyCore": "#ffc5e3",
         "novaWash": "#e5ffff25",
