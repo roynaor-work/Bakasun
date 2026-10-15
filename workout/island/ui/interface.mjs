@@ -12,6 +12,12 @@ const button = (label, action, className = '') => {
   node.dataset.action = action;
   return node;
 };
+const compactStat = (icon, value, label) => {
+  const node = el('span', 'status-value');
+  node.append(el('span', '', icon), el('b', '', value));
+  node.setAttribute('aria-label', `${label} ${value}`);
+  return node;
+};
 const list = value => Array.isArray(value) ? value : Object.values(value ?? {});
 
 export class IslandInterface {
@@ -44,12 +50,22 @@ export class IslandInterface {
     const node = document.querySelector('#toast');
     node.textContent = this.t(id, values);
     node.classList.add('visible');
+    // The HUD is inert behind a modal. Keep modal feedback in its own flow
+    // below the subtitle, so errors remain visible and announced there too.
+    const modal = this.modalRoot.querySelector('.modal');
+    let feedback = modal?.querySelector('.modal-toast');
+    if (modal && !feedback) {
+      feedback = el('div', 'modal-toast'); feedback.setAttribute('role', 'status'); feedback.setAttribute('aria-live', 'polite');
+      modal.querySelector('.modal-subtitle').after(feedback);
+    }
+    if (feedback) { feedback.textContent = node.textContent; feedback.hidden = false; }
     clearTimeout(this.toastTimer);
-    this.toastTimer = setTimeout(() => node.classList.remove('visible'), this.data.config.ui.toastMs);
+    this.toastTimer = setTimeout(() => { node.classList.remove('visible'); if (feedback) feedback.hidden = true; }, this.data.config.ui.toastMs);
     this.narrate(id, values);
   }
   narrate(id, values) { window.dispatchEvent(new CustomEvent('island:narrate', { detail: { id, values } })); }
   buildShell() {
+    const hud = el('div', 'hud');
     const header = el('header', 'topbar');
     const brand = el('div', 'brand');
     brand.append(el('span', 'brand-mark', '🏝️'));
@@ -69,24 +85,37 @@ export class IslandInterface {
     this.setupParentGate(parent);
     parent.hidden = !this.data.featureFlags.parentTransfer;
     utilities.append(help, undo, parent);
-    header.append(brand, this.wallet, utilities);
+    header.append(brand, this.wallet);
 
     this.city = el('aside', 'city-panel panel');
     const cityTitle = el('div', 'panel-heading');
     cityTitle.append(el('span', '', '✦'), el('strong', '', this.t('app.city')));
     this.metricsNode = el('div', 'metrics');
     this.resourcesNode = el('div', 'resources');
-    this.city.append(cityTitle, this.metricsNode, this.resourcesNode);
+    this.cityToggle = button('', 'toggle-city', 'status-strip');
+    this.cityToggle.setAttribute('aria-label', this.t('app.city'));
+    this.cityToggle.setAttribute('aria-expanded', 'false');
+    this.cityToggle.setAttribute('aria-controls', 'city-details');
+    this.cityToggle.onclick = () => this.toggleDetails('city');
+    this.cityDetails = el('div', 'city-details'); this.cityDetails.id = 'city-details'; this.cityDetails.hidden = true;
+    this.cityDetails.append(header, cityTitle, this.metricsNode, this.resourcesNode);
+    this.city.append(this.cityToggle, this.cityDetails);
 
-    // A large click target here makes Chrome redirect nearby touches away from the island.
     this.mission = el('aside', 'mission panel');
-    this.mission.setAttribute('aria-live', 'polite');
+    this.missionToggle = button('', 'toggle-mission', 'mission-strip');
+    this.missionToggle.setAttribute('aria-expanded', 'false');
+    this.missionToggle.setAttribute('aria-live', 'polite');
+    this.missionToggle.setAttribute('aria-controls', 'mission-details');
+    this.missionToggle.onclick = () => this.toggleDetails('mission');
+    this.missionDetails = el('div', 'mission-details'); this.missionDetails.id = 'mission-details'; this.missionDetails.hidden = true;
+    this.mission.append(this.missionToggle, this.missionDetails);
 
     const camera = el('div', 'camera-controls');
     const home = button(`⌂ ${this.t('app.home')}`, 'home', 'home-button'); home.onclick = () => this.view.home();
-    camera.append(home);
+    home.title = this.t('app.home');
+    camera.append(utilities);
     const edit = button('☺', 'avatar-edit', 'round-button'); edit.setAttribute('aria-label', this.t('avatar.edit')); edit.onclick = () => this.showAvatar();
-    camera.append(edit);
+    camera.append(edit, home);
 
     this.placement = el('div', 'placement panel');
     this.placement.hidden = true;
@@ -97,22 +126,76 @@ export class IslandInterface {
     this.placement.append(this.ghostStatus, this.placeButton, cancel);
 
     this.info = el('aside', 'info-card panel'); this.info.hidden = true;
-    const dock = el('section', 'build-dock');
+    const dock = this.dock = el('section', 'build-dock');
+    dock.dataset.open = 'false';
     const dockTop = el('div', 'dock-top');
-    dockTop.append(el('strong', '', this.t('app.choose')), el('span', 'camera-hint', this.t('app.cameraHint')));
+    this.dockToggle = button('⌃', 'toggle-build', 'dock-handle');
+    this.dockToggle.setAttribute('aria-label', this.t('app.choose'));
+    this.dockToggle.setAttribute('aria-expanded', 'false');
+    this.dockToggle.setAttribute('aria-controls', 'building-catalog');
+    this.dockToggle.onclick = () => this.setDockOpen(dock.dataset.open !== 'true');
     this.categories = el('nav', 'categories'); this.categories.setAttribute('aria-label', this.t('app.build'));
     for (const category of list(this.data.categories)) {
       const b = button(`${category.icon} ${this.label(category, 'category')}`, 'category', 'category-button');
       b.dataset.category = category.id;
       b.style.setProperty('--category-color', category.color);
-      b.onclick = () => { this.category = category.id; this.drawCatalog(); };
+      b.onclick = () => { this.category = category.id; this.drawCatalog(); this.setDockOpen(true); };
       this.categories.append(b);
     }
     this.catalog = el('div', 'catalog');
-    dock.append(dockTop, this.categories, this.catalog);
+    this.catalog.id = 'building-catalog'; this.catalog.hidden = true;
+    dockTop.append(this.dockToggle, this.categories);
+    this.catalogHint = el('div', 'catalog-caption'); this.catalogHint.hidden = true;
+    this.catalogHint.append(el('strong', '', this.t('app.choose')), el('span', '', this.t('app.cameraHint')));
+    dock.append(dockTop, this.catalogHint, this.catalog, this.placement);
     this.saveBadge = el('div', 'save-badge', `✓ ${this.t('app.saved')}`);
-    this.root.append(header, this.city, this.mission, camera, this.placement, this.info, this.saveBadge, dock);
+    hud.append(this.city, this.mission, document.querySelector('#toast'), this.saveBadge);
+    this.root.append(hud, camera, this.info, dock);
+    // A world tap opens a card on pointerup. Chromium can then retarget its
+    // compatibility click to a new button under the finger. Only the control
+    // where this gesture started may receive that click; keyboard clicks pass.
+    document.addEventListener('pointerdown', event => {
+      this.pointerOrigin = event.target.closest('button') ?? event.target;
+      if (!this.city.contains(event.target) && !this.mission.contains(event.target)) this.closeDetails();
+    }, true);
+    document.addEventListener('pointercancel', () => { this.pointerOrigin = null; }, true);
+    document.addEventListener('click', event => {
+      const origin = this.pointerOrigin;
+      this.pointerOrigin = null;
+      if (!event.isTrusted || event.detail === 0 || !origin) return;
+      const target = event.target.closest('button') ?? event.target;
+      if (target !== origin) { event.preventDefault(); event.stopImmediatePropagation(); }
+    }, true);
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') this.closeDetails(); });
+    this.hudObserver = new ResizeObserver(() => this.root.style.setProperty('--hud-height', `${hud.getBoundingClientRect().height}px`));
+    this.hudObserver.observe(hud);
     this.drawCatalog();
+  }
+  closeDetails() {
+    this.dock.hidden = false;
+    for (const name of ['city', 'mission']) {
+      this[`${name}Details`].hidden = true;
+      this[`${name}Toggle`].setAttribute('aria-expanded', 'false');
+    }
+  }
+  toggleDetails(name) {
+    const open = this[`${name}Details`].hidden;
+    this.closeDetails(); this.closeInfo();
+    this.dock.hidden = open;
+    this[`${name}Details`].hidden = !open;
+    this[`${name}Toggle`].setAttribute('aria-expanded', String(open));
+  }
+  setDockOpen(open) {
+    this.dock.dataset.open = String(open);
+    this.dockToggle.setAttribute('aria-expanded', String(open));
+    this.dockToggle.textContent = open ? '⌄' : '⌃';
+    this.catalog.hidden = !open;
+    this.catalogHint.hidden = !open;
+    if (open) this.closeInfo();
+  }
+  syncPlacementLayout() {
+    this.dock.dataset.placing = String(Boolean(this.selected));
+    if (this.selected) { this.closeDetails(); this.setDockOpen(false); }
   }
   refresh() {
     const s = this.engine.state;
@@ -129,11 +212,16 @@ export class IslandInterface {
     const population = this.engine.population?.() ?? s.buildings.reduce((sum, b) => sum + (this.getBuilding(b.typeId)?.population ?? 0) * b.level, 0);
     const pop = el('div', 'population', `♟ ${Math.round(population)} ${this.t('app.population')}`);
     this.wallet.append(money, pop);
+    this.cityToggle.replaceChildren();
+    const balance = compactStat('●', Math.floor(s.money).toLocaleString('he-IL'), this.t('app.money'));
+    this.cityToggle.append(balance);
     this.metricsNode.replaceChildren();
     const values = this.engine.metrics();
     for (const metric of this.engine.registry.metrics.values()) {
       if (!this.data.featureFlags.metrics || (metric.featureFlag && !this.data.featureFlags[metric.featureFlag])) continue;
       const value = Math.round(values[metric.id]?.value ?? values[metric.id] ?? 0);
+      const compact = compactStat(metric.icon, String(value), this.label(metric, 'metric'));
+      this.cityToggle.append(compact);
       const row = el('div', 'metric');
       const label = el('div', 'metric-label');
       label.append(el('span', '', `${metric.icon} ${this.label(metric, 'metric')}`), el('b', '', value));
@@ -145,7 +233,7 @@ export class IslandInterface {
     for (const [key, icon] of [['food', '🌽'], ['materials', '🧱'], ['energy', '⚡']]) {
       const cell = el('span', 'resource', `${icon} ${Math.floor(s.resources[key])}`);
       cell.title = this.t(`app.${key}`); cell.setAttribute('aria-label', `${this.t(`app.${key}`)} ${Math.floor(s.resources[key])}`);
-      this.resourcesNode.append(cell);
+      this.resourcesNode.append(cell); this.cityToggle.append(compactStat(icon, String(Math.floor(s.resources[key])), this.t(`app.${key}`)));
     }
     const saveFailed = !this.engine.storageStatus.ok;
     const saveReason = this.engine.storageStatus.reason === 'reason.invalid' ? 'error.saveInvalid' : this.engine.storageStatus.reason ?? 'reason.storage';
@@ -160,14 +248,28 @@ export class IslandInterface {
   drawMission() {
     const step = this.tutorialStep();
     const objective = step ?? this.engine.nextObjective?.();
-    this.mission.replaceChildren();
+    const signature = JSON.stringify([objective, this.selected === step?.buildType, this.engine.state.tutorial.step]);
+    if (signature === this.missionSignature) return;
+    this.missionSignature = signature;
+    const objectiveId = objective?.id ?? 'free-play';
+    if (this.missionObjectiveId !== undefined && this.missionObjectiveId !== objectiveId) {
+      this.mission.classList.remove('mission-complete');
+      void this.mission.offsetWidth;
+      this.mission.classList.add('mission-complete');
+      clearTimeout(this.missionTimer);
+      this.missionTimer = setTimeout(() => this.mission.classList.remove('mission-complete'), 900);
+    }
+    this.missionObjectiveId = objectiveId;
+    this.missionToggle.replaceChildren(el('span', '', '🧑‍✈️'), el('strong', '', this.t(objective?.title ?? 'app.freePlay')), el('span', '', '⌄'));
+    this.missionToggle.setAttribute('aria-label', `${this.t('app.next')}: ${this.t(objective?.title ?? 'app.freePlay')}`);
+    this.missionDetails.replaceChildren();
     const eyebrow = el('div', 'mission-eyebrow', `↙ ${this.t('app.next')}`);
     const row = el('div', 'mission-main');
     row.append(el('div', 'guide-avatar', '🧑‍✈️'));
     const text = el('div');
     text.append(el('small', '', this.t('tutorial.guide')), el('strong', '', this.t(objective?.title ?? 'app.freePlay')));
     row.append(text);
-    this.mission.append(eyebrow, row);
+    this.missionDetails.append(eyebrow, row);
     if (step) {
       const count = el('div', 'tutorial-count');
       count.append(el('span', '', this.t('tutorial.step', { current: this.engine.state.tutorial.step + 1, total: this.steps().length })), el('b', 'reward', `● +${step.reward?.money ?? 0}`));
@@ -175,10 +277,10 @@ export class IslandInterface {
       for (let i = 0; i < this.steps().length; i++) dots.append(el('span', i < this.engine.state.tutorial.step ? 'done' : i === this.engine.state.tutorial.step ? 'current' : ''));
       const skip = button(this.t('tutorial.skip'), 'skip-tutorial', 'text-button');
       skip.onclick = event => { event.stopPropagation(); this.engine.skipTutorial(); };
-      this.mission.append(count, dots, el('p', 'mission-hint', this.t(this.selected === step.buildType ? 'tutorial.place' : 'tutorial.select')), skip);
+      this.missionDetails.append(count, dots, el('p', 'mission-hint', this.t(this.selected === step.buildType ? 'tutorial.place' : 'tutorial.select')), skip);
     } else {
-      this.mission.append(el('p', 'mission-hint', this.t('app.explore')));
-      if (objective?.reward?.money) this.mission.append(el('b', 'reward', `${this.t('app.reward')} ● +${objective.reward.money}`));
+      this.missionDetails.append(el('p', 'mission-hint', this.t('app.explore')));
+      if (objective?.reward?.money) this.missionDetails.append(el('b', 'reward', `${this.t('app.reward')} ● +${objective.reward.money}`));
     }
   }
   drawCatalog() {
@@ -218,6 +320,7 @@ export class IslandInterface {
     this.category = building.category;
     this.drawCatalog();
     this.placement.hidden = false;
+    this.syncPlacementLayout();
     let cell = this.currentGhost;
     if (!cell || !this.engine.validatePlacement(id, cell.x, cell.z).ok) cell = this.findCell(id);
     this.updateGhost(cell);
@@ -258,7 +361,7 @@ export class IslandInterface {
   }
   cancelPlacement() {
     this.selected = null; this.movingId = null; this.currentGhost = null;
-    this.placement.hidden = true; this.view.clearGhost(); this.updateCatalogState(); this.drawMission();
+    this.placement.hidden = true; this.syncPlacementLayout(); this.view.clearGhost(); this.updateCatalogState(); this.drawMission();
   }
   result(result) { if (result && !result.ok) this.toast(result.reason); return result; }
   showInfo(id) {
@@ -267,6 +370,7 @@ export class IslandInterface {
       if (b) this.updateGhost({ x: b.x, z: b.z });
       return;
     }
+    this.closeDetails(); this.setDockOpen(false);
     this.infoId = id;
     this.drawInfo();
   }
@@ -299,6 +403,7 @@ export class IslandInterface {
     const move = button(`↔ ${this.t('app.move')}`, 'move', 'secondary-button');
     move.onclick = () => {
       this.closeInfo(); this.selected = record.id; this.movingId = instance.id; this.placement.hidden = false;
+      this.syncPlacementLayout();
       this.updateGhost({ x: instance.x, z: instance.z }); this.updateCatalogState();
     };
     const remove = button(`↩ ${this.t('app.remove')}`, 'remove', 'secondary-button');
@@ -358,9 +463,13 @@ export class IslandInterface {
     const modal = this.openModal('avatar.title', 'avatar.subtitle');
     modal.classList.add('avatar-modal');
     if (!this.engine.state.avatar.created) modal.querySelector('[data-action=close-modal]').hidden = true;
+    const content = el('div', 'avatar-scroll');
+    const close = modal.querySelector('[data-action=close-modal]');
+    content.append(...[...modal.children].filter(node => node !== close));
+    modal.append(content);
     const draft = { ...this.engine.state.avatar };
     const preview = el('div', 'avatar-preview');
-    modal.append(preview);
+    content.append(preview);
     const previewCanvas = el('canvas', 'avatar-preview-canvas');
     previewCanvas.setAttribute('aria-label', this.t('avatar.preview'));
     preview.append(previewCanvas);
@@ -393,11 +502,11 @@ export class IslandInterface {
         };
         choices.append(b);
       }
-      field.append(choices); modal.append(field);
+      field.append(choices); content.append(field);
     }
     const start = button(this.t('avatar.start'), 'avatar-start', 'primary-button avatar-start');
     start.onclick = () => { this.engine.setAvatar({ ...draft, created: true }); this.closeModal(); this.toast('tutorial.welcome'); };
-    modal.append(start);
+    const footer = el('footer', 'avatar-footer'); footer.append(start); modal.append(footer);
   }
   showParent() {
     const modal = this.openModal('parent.title', 'parent.subtitle');

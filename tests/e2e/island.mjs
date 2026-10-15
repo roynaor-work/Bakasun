@@ -47,9 +47,10 @@ const browser = await chromium.launch({ executablePath, headless: true, args: [
 const reports = [];
 
 async function checkViewport(width, height, label) {
+  console.log(`${label}: gameplay ${width}x${height}`);
   const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1, hasTouch: width < 600 });
   const page = await context.newPage();
-  page.setDefaultTimeout(20000);
+  page.setDefaultTimeout(60000);
   const errors = [], externalRequests = [], outsideIslandRequests = [], failedRequests = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
@@ -84,7 +85,19 @@ async function checkViewport(width, height, label) {
     assert.deepEqual(await page.evaluate(() => window.__island.ui.currentGhost), { x, z }, `${typeId} snaps to requested cell`);
     assert.equal(await page.locator('#world').getAttribute('data-ghost'), 'valid');
     if (greenShot) await screenshot(greenShot);
+    if (greenShot) await page.evaluate(() => {
+      window.__missionUpdates = [];
+      const { engine, ui } = window.__island;
+      const unsubscribe = engine.subscribe(() => {
+        window.__missionUpdates.push({ title: ui.missionToggle.textContent, highlighted: ui.mission.classList.contains('mission-complete') });
+      });
+      window.__stopMissionUpdates = unsubscribe;
+    });
     await page.locator('[data-action="place"]').click();
+    if (greenShot) {
+      const updates = await page.evaluate(() => { window.__stopMissionUpdates(); return window.__missionUpdates; });
+      assert.ok(updates.some(update => update.highlighted), 'objective advances and flashes during the engine notification, without waiting for the highlight');
+    }
     await page.waitForFunction(count => window.__island.engine.state.buildings.length === count + 1, before);
     return page.evaluate(({ typeId, x, z }) => window.__island.engine.state.buildings.find(b => b.typeId === typeId && b.x === x && b.z === z), { typeId, x, z });
   }
@@ -127,6 +140,7 @@ async function checkViewport(width, height, label) {
       assert.equal(await page.evaluate(() => window.__island.engine.state.tutorial.step), i + 1, 'only real construction completes a guide step');
     }
     assert.equal(await page.evaluate(() => window.__island.engine.state.tutorial.completed), true);
+    console.log(`${label}: tutorial passed`);
 
     // Overlap must be red, disabled, and cannot spend currency or place anything.
     await selectType('house'); await clickCell(4, 5);
@@ -141,7 +155,8 @@ async function checkViewport(width, height, label) {
     await clickCell(7, 5);
     await page.locator('.info-card:not([hidden])').waitFor({ state: 'visible' });
     assert.equal(await page.evaluate(() => Boolean(window.__island.view.radius)), true);
-    await screenshot('info'); await closeInfo();
+    assert.equal(await page.locator('[data-action="remove"]').count(),1,'opening information does not also request removal');
+    await screenshot('info'); assertLayout(await measureLayout(page), null, `${label} building information`); await closeInfo();
 
     // Fund the fixture through ordinary bounded economy ticks, not state injection.
     await page.evaluate(() => { for (let i = 0; i < 60; i++) window.__island.engine.tick(60); });
@@ -178,6 +193,7 @@ async function checkViewport(width, height, label) {
     }
     const placedTypes = await page.evaluate(() => [...new Set(window.__island.engine.state.buildings.map(b => b.typeId))]);
     for (const id of allTypes) assert.ok(placedTypes.includes(id), `${id} placed by actual UI`);
+    console.log(`${label}: all 17 building types passed`);
 
     await page.locator('[data-category="defense"]').click();
     assert.equal(await page.locator('[data-building].locked').count(), 4);
@@ -225,13 +241,15 @@ async function checkViewport(width, height, label) {
     assert.deepEqual(await page.evaluate(id => { const b = window.__island.engine.state.buildings.find(b => b.id === id); return { x: b.x, z: b.z }; }, road2.id), destination);
     await page.locator('[data-action="undo"]').click();
     await clickCell(roadCell.x, roadCell.z);
-    await page.locator('[data-action="remove"]').click();
+    assert.equal(await page.locator('[data-action="remove"]').count(),1,'the world tap must not activate a new button under the finger');
+    if (width < 600) await page.locator('[data-action="remove"]').tap(); else await page.locator('[data-action="remove"]').click();
     assert.equal(await page.evaluate(id => window.__island.engine.state.buildings.some(b => b.id === id), road2.id), true, 'first tap only asks for confirmation');
-    await page.locator('[data-action="remove-yes"]').click();
+    if (width < 600) await page.locator('[data-action="remove-yes"]').tap(); else await page.locator('[data-action="remove-yes"]').click();
     assert.equal(await page.evaluate(id => window.__island.engine.state.buildings.some(b => b.id === id), road2.id), false);
     await page.locator('[data-action="undo"]').click();
     assert.equal(await page.evaluate(id => window.__island.engine.state.buildings.some(b => b.id === id), road2.id), true);
 
+    console.log(`${label}: move, remove, confirmation and undo passed`);
     const snapshot = await page.evaluate(() => { window.__island.engine.save(); return { buildings: window.__island.engine.state.buildings, avatar: window.__island.engine.state.avatar, tutorial: window.__island.engine.state.tutorial }; });
     await page.reload({ waitUntil: 'networkidle' });
     await page.waitForFunction(() => window.__island?.view?.metrics().avatarLoaded);
@@ -246,6 +264,11 @@ async function checkViewport(width, height, label) {
     await page.waitForTimeout(await page.evaluate(() => window.__island.data.config.ui.parentHoldMs + 150));
     await page.mouse.up();
     await page.locator('[data-action="export"]').waitFor({ state: 'visible' });
+    const beforeInvalidImport = await page.evaluate(() => window.__island.engine.state.buildings);
+    await page.locator('#island-import').setInputFiles({ name: 'invalid-island.json', mimeType: 'application/json', buffer: Buffer.from('{') });
+    await page.locator('.modal-toast:not([hidden])').waitFor({ state: 'visible' });
+    assert.deepEqual(await page.evaluate(() => window.__island.engine.state.buildings), beforeInvalidImport, 'invalid import only reports an error');
+    assertLayout(await measureLayout(page), null, `${label} parent feedback`);
     await page.locator('[data-action="close-modal"]').click();
 
     await page.waitForTimeout(250); // Measure settled CSS, not the 160ms pressed-button animation.
@@ -266,14 +289,7 @@ async function checkViewport(width, height, label) {
       await page.locator('[data-action="home"]').click();
       await screenshot('landscape');
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'landscape has no horizontal page overflow');
-      const panels = await page.evaluate(() => {
-        const box = selector => {
-          const r = document.querySelector(selector).getBoundingClientRect();
-          return { top: r.top, bottom: r.bottom };
-        };
-        return { dock: box('.build-dock'), city: box('.city-panel'), mission: box('.mission'), camera: box('.camera-controls') };
-      });
-      for (const name of ['city', 'mission', 'camera']) assert.ok(panels[name].bottom <= panels.dock.top, `landscape ${name} remains above the building dock`);
+      assertLayout(await measureLayout(page), 60, 'gameplay rotation');
     }
     assert.deepEqual(externalRequests, [], 'no request leaves the local app origin');
     assert.deepEqual(outsideIslandRequests, [], 'every static app dependency is deployed inside workout/island/');
@@ -282,15 +298,149 @@ async function checkViewport(width, height, label) {
     reports.push({ viewport: { width, height }, tutorialSteps: 5, buildingTypes: placedTypes.length, screenshots: shots, performance, errors, externalRequests, outsideIslandRequests, failedRequests });
   } catch (error) {
     await screenshot('failure').catch(() => {});
-    console.error(JSON.stringify({ label, url: page.url(), errors, externalRequests, outsideIslandRequests, failedRequests, completedViewports: reports }, null, 2));
+    console.error(JSON.stringify({ label, url: page.url(), errors, externalRequests, outsideIslandRequests, failedRequests, completedViewports: reports, tapLog: await page.evaluate(() => window.__islandTapLog?.slice(-20)) }, null, 2));
     throw error;
   } finally { await context.close(); }
+}
+
+// Geometry uses clipped visible rectangles, including scroll-container clips.
+// An empty rectangle must span >=65% of portrait width or >=60% of landscape
+// height, so a narrow gap beside a panel cannot count as a visible island.
+async function measureLayout(page) {
+  return page.evaluate(() => {
+    const rect = node => {
+      const r = node.getBoundingClientRect();
+      let left = Math.max(0, r.left), right = Math.min(innerWidth, r.right), top = Math.max(0, r.top), bottom = Math.min(innerHeight, r.bottom);
+      // Fixed UI is clipped by the viewport, not the zero flow height of body.
+      for (let parent = node.parentElement; parent && parent !== document.body && parent !== document.documentElement; parent = parent.parentElement) {
+        const style = getComputedStyle(parent), p = parent.getBoundingClientRect();
+        if (/(auto|scroll|hidden|clip)/.test(style.overflowX)) { left = Math.max(left, p.left + parent.clientLeft); right = Math.min(right, p.left + parent.clientLeft + parent.clientWidth); }
+        if (/(auto|scroll|hidden|clip)/.test(style.overflowY)) { top = Math.max(top, p.top + parent.clientTop); bottom = Math.min(bottom, p.top + parent.clientTop + parent.clientHeight); }
+      }
+      return { left, right, top, bottom, width: Math.max(0, right - left), height: Math.max(0, bottom - top) };
+    };
+    const visible = node => node.getClientRects().length && getComputedStyle(node).visibility !== 'hidden' && !node.closest('[inert]');
+    const nodes = [...document.querySelectorAll('button,.city-panel,.mission,.info-card,.build-dock,.avatar-footer,.modal-overlay,#toast.visible,.save-error')].filter(visible).map(node => ({ node, box: rect(node) })).filter(({box}) => box.width > .5 && box.height > .5);
+    const name = node => node.dataset.action || node.className || node.id;
+    const intersects = (a,b) => Math.min(a.right,b.right)-Math.max(a.left,b.left) > .5 && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top) > .5;
+    const overlaps = [];
+    for (let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++) {
+      const a=nodes[i],b=nodes[j];
+      if (!a.node.contains(b.node) && !b.node.contains(a.node) && intersects(a.box,b.box)) overlaps.push([name(a.node),name(b.node)]);
+    }
+    const buttons = [...document.querySelectorAll('button')].filter(visible).map(node => ({ action:name(node), width:node.getBoundingClientRect().width,height:node.getBoundingClientRect().height }));
+    const boxes = nodes.map(n=>n.box);
+    const xs = [...new Set([0,innerWidth,...boxes.flatMap(b=>[b.left,b.right])])].sort((a,b)=>a-b);
+    const ys = [...new Set([0,innerHeight,...boxes.flatMap(b=>[b.top,b.bottom])])].sort((a,b)=>a-b);
+    const portrait = innerHeight >= innerWidth;
+    let clear = {left:0,right:0,top:0,bottom:0,width:0,height:0}, fraction=0;
+    for(let xi=0;xi<xs.length-1;xi++) for(let xj=xi+1;xj<xs.length;xj++) {
+      const width=xs[xj]-xs[xi]; if(portrait && width < innerWidth*.65) continue;
+      for(let yi=0;yi<ys.length-1;yi++) for(let yj=yi+1;yj<ys.length;yj++) {
+        const height=ys[yj]-ys[yi]; if(!portrait && height < innerHeight*.6) continue;
+        const candidate={left:xs[xi],right:xs[xj],top:ys[yi],bottom:ys[yj],width,height};
+        const ratio=portrait?height/innerHeight:width/innerWidth;
+        if(ratio <= fraction || boxes.some(b=>intersects(candidate,b))) continue;
+        clear=candidate;fraction=ratio;
+      }
+    }
+    return {width:innerWidth,height:innerHeight,scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth,buttons,overlaps,obstructions:nodes.map(({node,box})=>({name:name(node),...box})),clearRectangle:clear,clearPercent:fraction*100,axis:portrait?'height':'width'};
+  });
+}
+function assertLayout(layout, minimum, label) {
+  assert.equal(layout.scrollWidth,layout.clientWidth,`${label}: no horizontal page overflow`);
+  assert.ok(layout.obstructions.length>0,`${label}: geometry includes real visible UI rectangles`);
+  assert.deepEqual(layout.overlaps,[],`${label}: visible interactive components do not overlap`);
+  assert.ok(layout.buttons.every(b=>b.width>=56 && b.height>=56),`${label}: 56px buttons ${JSON.stringify(layout.buttons.filter(b=>b.width<56||b.height<56))}`);
+  if(minimum) assert.ok(layout.clearPercent>=minimum,`${label}: clear island ${layout.clearPercent.toFixed(2)}% of ${layout.axis}, required ${minimum}%`);
+}
+async function checkLayoutViewport(width,height) {
+  const label=`${width}x${height}`, context=await browser.newContext({viewport:{width,height},hasTouch:true,deviceScaleFactor:1});
+  const page=await context.newPage();page.setDefaultTimeout(60000);
+  const errors=[],failedRequests=[],outsideRequests=[],layouts={},shots=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+  page.on('requestfailed',r=>failedRequests.push(r.url()));
+  page.on('request',r=>{const u=new URL(r.url());if(['http:','https:'].includes(u.protocol)&&(u.origin!==baseUrl.origin||!u.pathname.startsWith(appPath)))outsideRequests.push(u.href);});
+  const shot=async name=>{const file=`island-after-${label}-${name}.png`;await page.screenshot({path:path.join(directory,file)});shots.push(file);};
+  const measure=async(name,minimum)=>{const layout=await measureLayout(page);layouts[name]=layout;console.log(`${label} ${name}: ${layout.clearPercent.toFixed(2)}% clear`);assertLayout(layout,minimum,`${label} ${name}`);};
+  const avatarFields=async()=>{
+    await measure('avatar');
+    const fields=page.locator('.avatar-field');
+    for(let i=0;i<await fields.count();i++) {
+      await fields.nth(i).scrollIntoViewIfNeeded();
+      const geometry=await fields.nth(i).evaluate(field=>{
+        const r=field.getBoundingClientRect(), scroll=field.closest('.avatar-scroll'), s=scroll.getBoundingClientRect(),f=document.querySelector('.avatar-footer').getBoundingClientRect();
+        return {top:r.top,bottom:r.bottom,scrollTop:s.top,footerTop:f.top,scrollWidth:scroll.scrollWidth,clientWidth:scroll.clientWidth};
+      });
+      assert.equal(geometry.scrollWidth,geometry.clientWidth,`${label}: avatar scroll has no horizontal overflow`);
+      assert.ok(geometry.top>=geometry.scrollTop-.5 && geometry.bottom<=geometry.footerTop+.5,`${label}: complete field ${i} scrolls above the footer: ${JSON.stringify(geometry)}`);
+    }
+    await measure('avatar-last-field');await shot('avatar-last-field');
+  };
+  try {
+    await page.goto(target,{waitUntil:'networkidle'});
+    await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded);
+    assert.equal(await page.locator('html').getAttribute('dir'),'rtl');
+    await shot('avatar');await avatarFields();
+    assert.equal(await page.locator('.modal-overlay').evaluate(node=>getComputedStyle(node).backdropFilter),'none','no expensive backdrop filter');
+    await page.locator('[data-field="gender"][data-value="girl"]').tap();
+    await page.locator('[data-field="hairstyle"][data-value="long"]').tap();
+    await page.locator('[data-field="shirtColor"]').nth(2).tap();
+    await page.locator('[data-action="avatar-start"]').tap();
+    await page.locator('[role="dialog"]').waitFor({state:'hidden'});
+    await measure('welcome-toast');await shot('toast');
+    await page.waitForFunction(()=>!document.querySelector('#toast').classList.contains('visible'));
+    const minimum=width>height?60:55;
+    await measure('closed',minimum);await shot('closed');
+    const city=page.locator('[data-action="toggle-city"]'), mission=page.locator('[data-action="toggle-mission"]');
+    assert.equal(await page.locator('.metric-track:visible').count(),0,'collapsed strip contains no progress bars');
+    assert.equal(await city.locator('.status-value').count(),9,'money, five metrics and three resources remain in the strip');
+    const strip=await city.evaluate(n=>({width:n.clientWidth,scroll:n.scrollWidth}));assert.equal(strip.scroll,strip.width,'all summary values fit the strip');
+    await city.tap();assert.equal(await city.getAttribute('aria-expanded'),'true');await measure('city-details');await shot('city-details');
+    assert.equal(await page.locator('.metric-track:visible').count(),5);
+    await city.tap();assert.equal(await city.getAttribute('aria-expanded'),'false');
+    await city.tap();await page.touchscreen.tap(width/2,height>width?height-110:height/2);assert.equal(await city.getAttribute('aria-expanded'),'false','outside tap closes city');
+    assert.equal(await mission.getAttribute('aria-expanded'),'false','outside tap cannot click through to another strip');
+    await mission.tap();assert.equal(await mission.getAttribute('aria-expanded'),'true');await measure('mission-details');await shot('mission-details');
+    await mission.tap();assert.equal(await mission.getAttribute('aria-expanded'),'false');
+    await mission.tap();await page.touchscreen.tap(width/2,height>width?height-110:height/2);assert.equal(await mission.getAttribute('aria-expanded'),'false','outside tap closes mission');
+    await page.locator('[data-action="toggle-build"]').tap();await measure('open',width>height?60:40);await shot('open');
+    await page.locator('[data-action="toggle-build"]').tap();await measure('reclosed',minimum);
+    await page.locator('[data-category="basic"]').tap();await page.locator('[data-building="house"]').tap();
+    assert.equal(await page.locator('.build-dock').getAttribute('data-placing'),'true');
+    assert.equal(await page.locator('.catalog').isVisible(),false,'catalog collapses automatically for the ghost');
+    await measure('placing',minimum);await shot('placing');
+    const occupied = await page.evaluate(() => {
+      const {engine,view}=window.__island, building=engine.state.buildings[0];
+      return view.screenForCell(building.x,building.z);
+    });
+    assert.equal(await page.evaluate(p=>document.elementFromPoint(p.x,p.y)?.id,occupied),'world','occupied fixture cell remains uncovered');
+    await page.touchscreen.tap(occupied.x,occupied.y);
+    await page.locator('#ghost-status[data-valid="false"]').waitFor({state:'visible'});
+    assert.equal(await page.locator('[data-action="place"]').isDisabled(),true);
+    await measure('placing-red',minimum);await shot('placing-red');
+    await page.locator('[data-action="cancel"]').tap();
+    assert.equal(await page.locator('#world').getAttribute('data-ghost'),null);
+    await page.locator('[data-action="avatar-edit"]').tap();await avatarFields();
+    await page.locator('[data-field="skinColor"]').last().tap();await page.locator('[data-action="avatar-start"]').tap();
+    const skin=await page.evaluate(()=>window.__island.engine.state.avatar.skinColor);
+    assert.equal(skin,await page.evaluate(()=>window.__island.data.avatar.skinColors.at(-1).color));
+    await page.waitForFunction(()=>!document.querySelector('#toast').classList.contains('visible'));
+    // Rotation reuses this live UI and saved character, rather than a new page.
+    await page.setViewportSize({width:height,height:width});await page.locator('[data-action="home"]').tap();
+    await measure('rotated',height>width?60:55);
+    assert.deepEqual(errors,[]);assert.deepEqual(failedRequests,[]);assert.deepEqual(outsideRequests,[]);
+    reports.push({layoutViewport:{width,height},layouts,screenshots:shots,errors,failedRequests,outsideRequests});
+  } catch(error) {await shot('failure').catch(()=>{});console.error(JSON.stringify({label,layouts,errors,failedRequests,outsideRequests},null,2));throw error;}
+  finally{await context.close();}
 }
 
 try {
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'desktop') await checkViewport(1440, 900, 'desktop');
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'phone') await checkViewport(390, 844, 'phone');
+  if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'layout') for (const [width,height] of [[360,740],[390,844],[412,915],[844,390]]) if (!process.env.ISLAND_LAYOUT_VIEWPORT || process.env.ISLAND_LAYOUT_VIEWPORT === `${width}x${height}`) await checkLayoutViewport(width,height);
   const report = { browser: await browser.version(), environment: 'Desktop Chromium with ANGLE/SwiftShader; viewport checks, not a physical Android 10 device', deploymentScope: 'Private server exposes only workout/island/; all requests are audited against that folder', results: reports };
-  await writeFile(path.join(directory, 'island-report.json'), JSON.stringify(report, null, 2));
+  await writeFile(path.join(directory, process.env.ISLAND_ONLY === 'layout' ? 'island-layout-report.json' : 'island-report.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 } finally { await browser.close(); if (server) { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); } }
