@@ -27,10 +27,11 @@ export async function checkG2e({browser,target,directory}){
     try{
       await page.clock.install();await page.goto(target,{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await tap('[data-action=avatar-start]');
       await page.evaluate(()=>{window.__island.engine.skipTutorial();window.__island.data.featureFlags.events=false;});await page.clock.pauseAt(await page.evaluate(()=>Date.now()+100));
-      for(const boss of [false,true])for(const route of ['clear','timer']){
+      const cases=[{boss:false,route:'clear'},{boss:false,route:'timer'},{boss:true,route:'clear'},{boss:true,route:'timer'},{boss:false,route:'empty-timer'}];
+      for(const {boss,route}of cases){
         console.log(`G2e ${width}: alien ${route}, boss=${boss}`);
         // Short deterministic encounter, real model, RAF, collision and finish UI.
-        await page.evaluate(({boss,route})=>{const b=window.__island.data.config.minigames.alienDefense;window.__g2eLevel=b.levels[0];b.levels[0]={...b.levels[0],seconds:6,waves:1,rows:1,columns:1,boss,bossLives:1,alienSpeed:0,drop:0,boltSeconds:999};},{boss,route});
+        await page.evaluate(({boss,route})=>{const b=window.__island.data.config.minigames.alienDefense;window.__g2eLevel=b.levels[0];window.__g2ePause=b.wavePauseSeconds;if(route==='empty-timer')b.wavePauseSeconds=6;b.levels[0]={...b.levels[0],seconds:6,waves:route==='empty-timer'?2:1,rows:route==='empty-timer'?0:1,columns:1,boss,bossLives:1,alienSpeed:0,drop:0,boltSeconds:999};},{boss,route});
         await start('alienDefense');let holding=false;
         for(let i=0;i<180&&await page.locator('.minigame-canvas').count();i++){
           const m=await snap();if(route==='clear'){const a=m.aliens[0];if(a){const p=await point(a.x,440);await touch(holding?'touchMove':'touchStart',p);holding=true;}}await tick(50);
@@ -38,7 +39,7 @@ export async function checkG2e({browser,target,directory}){
         if(holding)await touch('touchEnd');await page.locator('[data-result=alienDefense]').waitFor();
         const values=await page.locator('.result-row bdi').allTextContents();assert.equal(values.length,4);assert.ok(Number(values[1])>0);assert.ok(Number(values[3])>=1);assert.equal(await page.locator('[data-action=game-next-stage]').count(),1);
         const wins=await page.evaluate(()=>window.__island.engine.state.minigameWins.alienDefense);await tick(500);assert.equal(await page.evaluate(()=>window.__island.engine.state.minigameWins.alienDefense),wins);
-        await page.evaluate(()=>{window.__island.data.config.minigames.alienDefense.levels[0]=window.__g2eLevel;});await tap('[data-action=game-next-stage]');await tick(100);assert.equal(await page.locator('.game-screen').getAttribute('data-stage'),'2');await exit();routes.push({boss,route,result:true,stars:true,prize:true,next:true});
+        await page.evaluate(()=>{window.__island.data.config.minigames.alienDefense.levels[0]=window.__g2eLevel;window.__island.data.config.minigames.alienDefense.wavePauseSeconds=window.__g2ePause;});await tap('[data-action=game-next-stage]');await tick(100);assert.equal(await page.locator('.game-screen').getAttribute('data-stage'),'2');await exit();routes.push({boss,route,result:true,stars:true,prize:true,next:true});
       }
       console.log(`G2e ${width}: fire long press, no selection or context menu`);
       await start('fireRescue');const p=await point(350,0);await touch('touchStart',p);await tick(3000);await touch('touchEnd');const before=await snap(),box=await page.locator('[data-game-control=refill]').boundingBox();await touch('touchStart',{x:box.x+box.width/2,y:box.y+box.height/2});

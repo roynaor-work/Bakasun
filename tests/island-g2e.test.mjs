@@ -73,10 +73,14 @@ test('G2e optional model paths stay inside the published island and retain code 
 test('G2e temporary wing expires and a nova capsule replenishes a real charge',()=>{
   const m=alien({seconds:99}),b=config.alienDefense,charges=m.novaCharges;
   m.pickups.push({x:m.player.x,y:m.player.y,vx:0,vy:0,kind:4});m.update(.001,{});m.update(.001,{});assert.equal(m.wings.filter(w=>w.active).length,1);advance(m,b.pickups.seconds+.1);assert.equal(m.wings.filter(w=>w.active).length,0);
-  m.pickups.push({x:m.player.x,y:m.player.y,vx:0,vy:0,kind:5});m.update(.001,{});assert.equal(m.novaCharges,charges+1);
+  m.pickups.push({x:m.player.x,y:m.player.y,vx:0,vy:0,kind:3});m.update(.001,{});m.pickups.push({x:m.player.x,y:m.player.y,vx:0,vy:0,kind:5});m.update(.001,{});assert.equal(m.novaCharges,charges+1);assert.equal(m.powerup,3,'a single-use nova does not replace a timed shield');assert.ok(m.powerTime>0);
 });
 test('G2e all vessel factories create distinct finite hulls and actual turret counts',async()=>{
   const THREE=await import('../workout/island/vendor/three.module.js'),{createVessel}=await import('../workout/island/minigames/naval-view.mjs'),b=config.navalDuel,lengths=[],turrets=[];
   for(const type of [...b.shipTypes,b.boss]){const v=createVessel(THREE,b.render,{},type),bounds=new THREE.Box3().setFromObject(v.root.children[0]);lengths.push(Math.round((bounds.max.z-bounds.min.z)*100));turrets.push(v.turret.children.length);v.root.traverse(o=>{if(o.geometry)for(const n of o.geometry.attributes.position.array)assert.ok(Number.isFinite(n));});v.dispose();}
   assert.equal(new Set(lengths).size,4);assert.equal(new Set(turrets).size,4);
+});
+test('G2e timer expiry takes precedence when an empty intermediate wave would open an upgrade in the same frame',()=>{
+  const balance=structuredClone(config.alienDefense);Object.assign(balance.levels[0],{rows:0,columns:0,waves:2,seconds:6});balance.wavePauseSeconds=6;
+  const m=createAlienModel({config,balance,level:1,random:seededRandom(12)});advance(m,6.1);assert.equal(m.result?.outcome,'win');assert.equal(m.choosing,false);
 });

@@ -95,7 +95,11 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
         for(const wing of wings)if(wing.active)fireShot(0,laser?1:0,wing.x,true,wing.y);
         shotTime=settings.shotSeconds/(1+upgrades.rapid*campaign.ratePerStack)/(power*rate+(bonuses.fireRate||0))/(powerup===2?balance.pickups.rapidMultiplier:1);
       }
-      if(!aliens.length){nextWave+=dt;if(nextWave>=balance.wavePauseSeconds){
+      if(!aliens.length){
+        // Expiry must precede an upgrade pause, including when both deadlines
+        // are crossed in this frame. Otherwise choosing freezes a zero clock.
+        if(time>=settings.seconds){finish(lives<=0?'lose':'win');return;}
+        nextWave+=dt;if(nextWave>=balance.wavePauseSeconds){
         while(bolts.length)releaseAt(bolts,bolts.length-1,boltPool);
         // A cleared wave stays cleared. Respawning here recycled the final wave
         // before its deadline and tied completion to another kill after expiry.
@@ -123,7 +127,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
       }
       for(let i=pickups.length-1;i>=0;i--){const d=pickups[i],dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx,dy);d.y+=d.vy*dt;
         if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}
-        if(dist<balance.pickups.radius+balance.playerRadius){powerup=d.kind;powerTime=balance.pickups.seconds;if(d.kind===5)novaCharges++;releaseAt(pickups,i,pickupPool);}else if(d.y>config.height+balance.pickups.radius)releaseAt(pickups,i,pickupPool);
+        if(dist<balance.pickups.radius+balance.playerRadius){if(d.kind===5)novaCharges++;else{powerup=d.kind;powerTime=balance.pickups.seconds;}releaseAt(pickups,i,pickupPool);}else if(d.y>config.height+balance.pickups.radius)releaseAt(pickups,i,pickupPool);
       }
       dropBonus();
       for(let i=loot.length-1;i>=0;i--){const d=loot[i];d.y+=d.vy*dt;const dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx,dy);if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}if(dist<balance.pickups.radius+balance.playerRadius){if(d.kind)crystals++;else coins++;score+=d.kind?campaign.crystalPoints:campaign.coinPoints;releaseAt(loot,i,lootPool);}else if(d.y>config.height)releaseAt(loot,i,lootPool);}
