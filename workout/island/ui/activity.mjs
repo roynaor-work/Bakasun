@@ -1,6 +1,9 @@
-import {createAmmoVisual} from '../minigames/art.mjs?v=g2e-20261015-1';
-import {equipmentOffer} from '../activity/equipment.mjs';
-import {gameContext} from '../minigames/context.mjs';
+import {createSound} from '../minigames/sound.mjs?v=g2f-20261015-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g2f-20261015-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2f-20261015-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=g2f-20261015-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=g2f-20261015-1';
+import {gameContext} from '../minigames/context.mjs?v=g2f-20261015-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -8,6 +11,10 @@ const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,t
 export class ActivityInterface {
   constructor({ui,engine,activity,data,t,now=Date.now}) {
     Object.assign(this,{ui,engine,activity,data,t,now});this.current=null;this.closing=false;this.eventOpen=false;
+    let storage;try{storage=window.localStorage;}catch{}
+    this.sound=createSound({storage});this.soundEvents=new AbortController();
+    document.addEventListener('pointerdown',event=>{this.sound.unlock();if(event.target.closest('button')&&ui.modalRoot.contains(event.target))this.sound.play('button');},{capture:true,signal:this.soundEvents.signal});
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)this.sound.suspend();},{signal:this.soundEvents.signal});
     ui.activityInterface=this;
     this.openButton=button(t('minigame.open'),'open-games',()=>this.menu());
     this.openButton.hidden=!data.featureFlags.minigames;ui.cityDetails.append(this.openButton);
@@ -23,8 +30,14 @@ export class ActivityInterface {
     if(eventId)this.activity.cancel(eventId);
     this.ui.view.paused=false;this.closing=false;
   }
+  soundToggle(){
+    const toggle=button('','game-sound',()=>{this.sound.setMuted(!this.sound.muted);render();},'secondary-button sound-toggle');
+    const render=()=>{toggle.replaceChildren(gameIcon(this.sound.muted?'muted':'sound'),el('span','',this.t(this.sound.muted?'sound.off':'sound.on')));toggle.setAttribute('aria-label',this.t(this.sound.muted?'sound.unmute':'sound.mute'));toggle.setAttribute('aria-pressed',String(this.sound.muted));};render();return toggle;
+  }
+  saveAlienUpgrades(ranks){this.engine.state.alienUpgrades={...ranks};const saved=this.engine.save();if(!saved.ok)this.ui.toast(saved.reason);}
   modal(title,subtitle,eventId) {
     const dialog=this.ui.openModal(title,subtitle);
+    dialog.append(this.soundToggle());
     this.ui.previousFocus=this.ui.cityToggle;
     this.ui.modalCleanup=()=>this.cleanup(eventId);return dialog;
   }
@@ -96,37 +109,30 @@ export class ActivityInterface {
     const close=dialog.querySelector('[data-action="close-modal"]');close.remove();
     const header=el('header','game-header'),heading=dialog.querySelector('h2');
     dialog.querySelector('.modal-subtitle').remove();
-    const exit=button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal());header.append(heading,exit);
+    const exit=button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal());header.append(heading,dialog.querySelector('.sound-toggle'),exit);
     const status=el('p','game-status');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
     const stage=el('div','game-stage'),canvas=el('canvas','minigame-canvas');canvas.setAttribute('aria-label',this.t(game.title));canvas.tabIndex=0;stage.append(canvas);
     const controls=el('div','game-controls'),balance=this.data.config.minigames[id];
     const control=(key,label)=>{const node=button(label,`control-${key}`,()=>{});node.dataset.gameControl=key;return node;};
-    let gauges,turnLabel,novaButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons;
-    if(id==='alienDefense'){upgradePanel=el('div','game-upgrade-panel');upgradePanel.hidden=true;upgradePanel.setAttribute('role','group');upgradePanel.setAttribute('aria-label',this.t('minigame.chooseUpgrade'));upgradePanel.append(el('h3','',this.t('minigame.chooseUpgrade')));upgradeButtons=Array.from({length:balance.campaign.choiceCount},()=>button('','run-upgrade',()=>{}));upgradePanel.append(...upgradeButtons);stage.append(upgradePanel);novaButton=control('nova',this.t('minigame.nova'));novaButton.title=this.t('minigame.novaHint');controls.append(control('left',`◀ ${this.t('minigame.left')}`),control('fire',this.t('minigame.fire')),control('right',`${this.t('minigame.right')} ▶`),novaButton);}
+    let gauges,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,warning;
+    if(id==='alienDefense'){upgradePanel=el('div','game-upgrade-panel');upgradePanel.hidden=true;upgradePanel.setAttribute('role','group');upgradePanel.setAttribute('aria-label',this.t('minigame.chooseUpgrade'));upgradePanel.append(el('h3','',this.t('minigame.chooseUpgrade')));upgradeButtons=Array.from({length:balance.campaign.choiceCount},()=>button('','run-upgrade',()=>{}));upgradePanel.append(...upgradeButtons);stage.append(upgradePanel);spreadButton=control('spread',this.t('minigame.spreadReady'));controls.append(spreadButton);novaButton=control('nova',this.t('minigame.nova'));novaButton.prepend(gameIcon('nova'));novaButton.title=this.t('minigame.novaHint');controls.append(control('left',`◀ ${this.t('minigame.left')}`),control('fire',this.t('minigame.fire')),control('right',`${this.t('minigame.right')} ▶`),novaButton);}
     if(id==='fireRescue') {
       gauges={};for(const key of ['water','pressure']){const label=el('label','game-gauge',this.t(`minigame.${key}`)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);gauges[key]=meter;}
-      controls.append(control('refill',this.t('minigame.refill')),control('charge',this.t('minigame.charge')));
+      const refill=control('refill',this.t('minigame.refill')),pump=control('charge',this.t('minigame.charge'));refill.prepend(gameIcon('tap'));pump.prepend(gameIcon('pump'));controls.append(refill,pump);
     }
     if(id==='navalDuel') {
-      for(const [key,min,max,value]of [['power',0,balance.powerMaximum,balance.defaultPower]]){
-        const label=el('label','game-slider',this.t(key==='angle'?'minigame.aim':'minigame.force')),input=el('input');input.type='range';input.min=min;input.max=max;input.value=value;input.dataset.gameInput=key;label.append(input);controls.append(label);
-      }
-      const angles=el('div','naval-angles');
-      for(const [key,min,max,value]of [['yaw',balance.controls.minYaw,balance.controls.maxYaw,balance.controls.defaultYaw],['angle',balance.minAngle,balance.maxAngle,balance.defaultAngle]]){
-        const label=el('label','game-slider',this.t(key==='yaw'?'minigame.yaw':'minigame.elevation')),output=el('output'),input=el('input');input.type='range';input.min=min;input.max=max;input.step=balance.controls.fineStep;input.value=value;input.dataset.gameInput=key;input.id='naval-'+key;output.htmlFor=input.id;output.dataset.gameValue=key;label.append(output,input);
-        const fine=el('div','angle-fine');for(const sign of [-1,1]){const b=button(this.t('minigame.fineAngle',{axis:this.t(key==='yaw'?'minigame.yaw':'minigame.elevation'),sign:sign<0?'−':'+'}),'fine-angle',()=>{});b.dataset.angleAxis=key;b.dataset.angleStep=sign*balance.controls.fineStep;b.textContent=(sign<0?'−':'+')+balance.controls.fineStep+'°';b.setAttribute('aria-label',this.t('minigame.fineAngle',{axis:this.t(key==='yaw'?'minigame.yaw':'minigame.elevation'),sign:sign<0?'−':'+'}));fine.append(b);}label.append(fine);angles.append(label);
-      }controls.prepend(angles);
-      const powerOutput=el('output');powerOutput.dataset.gameValue='power';controls.querySelector('[data-game-input=power]').parentElement.prepend(powerOutput);
-      controls.append(control('fire',this.t('minigame.launch')));const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select','');node.append(createAmmoVisual(i,this.data.config.minigames),el('span','ammo-copy',this.t(ammo.title)));node.dataset.ammoIndex=i;node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
+      const fire=control('fire',this.t('minigame.launch'));fire.prepend(gameIcon('cannon'));controls.append(fire);
+      const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select','');node.append(createAmmoVisual(i,this.data.config.minigames),el('span','ammo-copy'));node.dataset.ammoIndex=i;node.setAttribute('aria-label',this.t(ammo.title));node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
       fleetMeters={};for(const [key,title]of [['player','minigame.fleet'],['enemy','minigame.enemyFleet']]){const label=el('label','game-gauge',this.t(title)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);fleetMeters[key]=meter;}turnLabel=el('p','game-turn');controls.append(turnLabel);
     }
+    warning=el('p','game-warning');warning.hidden=true;warning.setAttribute('role','alert');stage.append(warning);
     dialog.replaceChildren(header,status,stage,controls);
     this.ui.view.paused=true;
     const context=gameContext(this.engine,this.data.config.minigames,this.now(),id,stageNumber);
     heading.textContent=this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
     dialog.dataset.stage=context.level;
     const eventBonuses=eventId?this.activity.bonuses():{};
-    const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,turnLabel,novaButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,
+    const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onError:reason=>this.ui.toast(reason),
       onFinish:result=>{
         this.current=null;
@@ -137,6 +143,7 @@ export class ActivityInterface {
     });
     if(!response.ok){this.ui.closeModal();this.ui.result(response);return;}
     this.current=response;
+    if(id==='navalDuel')status.textContent=this.t('minigame.aimCircle');
     // The large exit button remains reachable during help and throughout play.
     const help=button(this.t('minigame.help'),'game-help',()=>{
       this.current?.session.setPaused(true);
@@ -148,7 +155,7 @@ export class ActivityInterface {
     const game=this.engine.registry.minigames.get(id);
     this.ui.modalCleanup=null;
     const dialog=this.modal(result.outcome==='win'?'minigame.win':'minigame.lose','minigame.resultHint',eventId);
-    dialog.dataset.result=id;
+    dialog.dataset.result=id;this.sound.play(result.outcome==='win'?'win':'lose');
     const summary=el('div','game-result');
     for(const key of ['score','money','parts','stars']){const row=el('p','result-row'),value=el('bdi','',String(result[key]));row.append(el('span','',this.t(`minigame.result.${key}`)),value);summary.append(row);}
     dialog.append(el('h3','',this.t(game.title)),summary,
@@ -161,7 +168,12 @@ export class ActivityInterface {
         this.start(id,active?.id===eventId?eventId:undefined,result.stage);
       },'primary-button'),button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal()));
     dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(id)));
-    if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage)dialog.append(button(this.t('minigame.nextStage'),'game-next-stage',()=>this.start(id,undefined,result.stage+1),'primary-button'));
+    if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage)dialog.append(button(this.t('minigame.continue'),'game-next-stage',()=>this.start(id,undefined,result.stage+1),'primary-button'));
+    if(id==='alienDefense'&&result.outcome==='win'){
+      const balance=this.data.config.minigames.alienDefense,available=availableAlienUpgrades(this.engine.state.alienUpgrades,balance,gameContext(this.engine,this.data.config.minigames,this.now(),id,result.stage).equipment),cards=el('div','result-upgrades');cards.append(el('h3','',this.t(available.length?'minigame.chooseUpgrade':'minigame.upgradesFull')));
+      // Results and Continue are usable immediately; taking a reward is optional.
+      for(const upgrade of available.slice(0,balance.campaign.choiceCount)){const choose=button('','result-upgrade',()=>{const ranks={...this.engine.state.alienUpgrades,[upgrade]:this.engine.state.alienUpgrades[upgrade]+1};this.saveAlienUpgrades(ranks);this.sound.play('upgrade');cards.replaceChildren(el('p','',this.t('minigame.upgradeSaved')));});upgradeCard(choose,upgrade,this.t('minigame.upgradeStack',{name:this.t('runUpgrade.'+upgrade),rank:this.engine.state.alienUpgrades[upgrade]+1}),this.t('runUpgrade.'+upgrade+'.hint'));cards.append(choose);}dialog.append(cards);
+    }
     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
     this.engine.narration.announce('minigame.result',result);
   }
@@ -196,5 +208,5 @@ export class ActivityInterface {
     this.ui.info.append(el('p','repair-status',this.t('event.repair')));
     actions.append(button(this.t('event.repairNow',{cost:this.data.config.events.repairCost}),'repair-building',()=>{const result=this.activity.repair(instance.id);if(result.ok){this.ui.drawInfo();this.ui.toast('event.repaired');}else this.ui.result(result);}));
   }
-  dispose(){this.cleanup();this.unsubscribe();this.unsubscribeEngine();this.panel.remove();this.openButton.remove();}
+  dispose(){this.soundEvents.abort();this.sound.dispose();this.cleanup();this.unsubscribe();this.unsubscribeEngine();this.panel.remove();this.openButton.remove();}
 }

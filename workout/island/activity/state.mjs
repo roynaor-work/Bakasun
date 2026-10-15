@@ -1,13 +1,15 @@
-import {initialEquipment,validEquipment} from './equipment.mjs';
-import {initialProgress,validProgress,applyStarEquipment} from './progress.mjs';
+import {initialAlienUpgrades,validAlienUpgrades} from './alien-upgrades.mjs?v=g2f-20261015-1';
+import {initialEquipment,validEquipment} from './equipment.mjs?v=g2f-20261015-1';
+import {initialProgress,validProgress,applyStarEquipment} from './progress.mjs?v=g2f-20261015-1';
 const object = value => value && typeof value==='object' && !Array.isArray(value);
 const count = value => Number.isSafeInteger(value) && value>=0;
 const time = value => Number.isFinite(value) && value>=0;
 export function initialActivity(data,now) {
-  return {minigameEquipment:initialEquipment(data),minigameProgress:initialProgress(data),minigameLevels:Object.fromEntries(Object.keys(data.config.minigameLevels||{}).map(id=>[id,1])),highScores:{},minigameWins:{},instructionsSeen:[],events:{counts:{},lastAt:{},nextAt:now+(data.config.events?.initialDelayMs||0),sequence:0,active:null,repairs:{},resolved:[]}};
+  return {alienUpgrades:initialAlienUpgrades(data),minigameEquipment:initialEquipment(data),minigameProgress:initialProgress(data),minigameLevels:Object.fromEntries(Object.keys(data.config.minigameLevels||{}).map(id=>[id,1])),highScores:{},minigameWins:{},instructionsSeen:[],events:{counts:{},lastAt:{},nextAt:now+(data.config.events?.initialDelayMs||0),sequence:0,active:null,repairs:{},resolved:[]}};
 }
 export function validActivity(state,data,registry) {
   const games=data.config.minigameLevels||{}, events=state.events;
+  if(!validAlienUpgrades(state.alienUpgrades,data))return false;
   if(!validEquipment(state.minigameEquipment,data))return false;
   if(!validProgress(state.minigameProgress,data))return false;
   if(!object(state.minigameLevels)||!object(state.highScores)||!object(state.minigameWins)||!Array.isArray(state.instructionsSeen))return false;
@@ -25,6 +27,7 @@ export function validActivity(state,data,registry) {
   return a===null || (object(a)&&/^event-\d+$/.test(a.id)&&known(a.typeId)&&registry.eventTypes.has(a.typeId)&&['warning','ready','playing'].includes(a.phase)&&time(a.warningUntil)&&count(a.seed)&&a.seed<=0xffffffff&&typeof a.deferred==='boolean'&&(a.targetId===null||buildings.has(a.targetId)));
 }
 export function mergeActivity(current,incoming,data) {
+  for(const [id,rank] of Object.entries(incoming.alienUpgrades))current.alienUpgrades[id]=Math.max(current.alienUpgrades[id],rank);
   for(const [id,tracks]of Object.entries(incoming.minigameEquipment))for(const [key,rank]of Object.entries(tracks))current.minigameEquipment[id][key]=Math.max(current.minigameEquipment[id][key],rank);
   for(const key of ['minigameLevels','highScores','minigameWins'])for(const [id,value] of Object.entries(incoming[key]))current[key][id]=Math.max(current[key][id]||0,value);
   for(const [id,p]of Object.entries(incoming.minigameProgress)){

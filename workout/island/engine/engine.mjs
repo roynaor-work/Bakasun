@@ -1,11 +1,11 @@
-import {recordStageWin} from '../activity/progress.mjs';
-import { createRegistry } from './registry.mjs';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs';
-import { calculateIncome, accrueIncome } from './economy.mjs';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs';
-import { loadEpisode, episodeAvailable } from './episodes.mjs';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs';
+import {recordStageWin} from '../activity/progress.mjs?v=g2f-20261015-1';
+import { createRegistry } from './registry.mjs?v=g2f-20261015-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g2f-20261015-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g2f-20261015-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=g2f-20261015-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g2f-20261015-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g2f-20261015-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g2f-20261015-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 

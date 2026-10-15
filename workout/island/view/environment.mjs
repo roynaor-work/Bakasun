@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import { batchMeshes } from './batch.mjs';
+import { batchMeshes } from './batch.mjs?v=g2f-20261015-1';
 
 export const GROUND = .34;
 export const palette = { grass:'#91c75c', sand:'#f6d99a', sea:'#53cbd1', stone:'#dfb988', cream:'#fff4dc', teal:'#287a83', coral:'#ec9279' };

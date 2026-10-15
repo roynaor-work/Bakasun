@@ -1,9 +1,10 @@
-import {initialEquipment} from '../activity/equipment.mjs';
-import {initialProgress} from '../activity/progress.mjs';
-import { cellsFor } from './rules.mjs';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2f-20261015-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=g2f-20261015-1';
+import {initialProgress} from '../activity/progress.mjs?v=g2f-20261015-1';
+import { cellsFor } from './rules.mjs?v=g2f-20261015-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g2f-20261015-1';
 
-export const CURRENT_VERSION = 6;
+export const CURRENT_VERSION = 7;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -27,6 +28,7 @@ export function createInitialState(data, now = Date.now()) {
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  6(old,data) { return {...old,alienUpgrades:initialAlienUpgrades(data),version:7}; },
   // Only the new hose track is added; malformed/missing old tracks still fail validation.
   5(old) {
     if (!old.minigameEquipment?.fireRescue || typeof old.minigameEquipment.fireRescue !== 'object') return {...old,version:6};
@@ -128,7 +130,7 @@ export function resetWorld(storage, freshState) {
     const backups = [];
     for (let i = 0; i < storage.length; i++) {
       const key = storage.key(i);
-      if (/^island\.v1\.corrupt\.\d+$/.test(key)) backups.push(key);
+      if (key === 'island.sound' || /^island\.v1\.corrupt\.\d+$/.test(key)) backups.push(key);
     }
     // Remove backups first, so a failed cleanup does not remove the active save.
     for (const key of backups) storage.removeItem(key);

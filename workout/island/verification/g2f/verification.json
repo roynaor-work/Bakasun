@@ -1,0 +1,80 @@
+{
+  "release": "g2f-20261015-1",
+  "browser": "Chromium software rendering, simulated touch",
+  "reports": [
+    {
+      "width": 390,
+      "touchOnly": true,
+      "upgradeSavedAfterReload": true,
+      "immediateContinue": true,
+      "navalTargetMatchesImpact": true,
+      "finiteAmmoRetry": true,
+      "waterAndPressure": true,
+      "muteSaved": true,
+      "events": [
+        "button",
+        "shot",
+        "explosion",
+        "upgrade",
+        "win",
+        "cannon",
+        "splash",
+        "lose",
+        "crackle",
+        "spray",
+        "refill"
+      ],
+      "shots": [
+        "upgrades.png",
+        "naval.png",
+        "fire.png"
+      ],
+      "errors": []
+    },
+    {
+      "width": 360,
+      "touchOnly": true,
+      "upgradeSavedAfterReload": true,
+      "immediateContinue": true,
+      "navalTargetMatchesImpact": true,
+      "finiteAmmoRetry": true,
+      "waterAndPressure": true,
+      "muteSaved": true,
+      "events": [
+        "button",
+        "shot",
+        "explosion",
+        "upgrade",
+        "win",
+        "cannon",
+        "splash",
+        "lose",
+        "crackle",
+        "spray",
+        "refill"
+      ],
+      "shots": [],
+      "errors": []
+    }
+  ],
+  "notTested": [
+    "Physical phone FPS",
+    "Physical Android/iOS audio output and device interruptions",
+    "Human difficulty/playability assessment"
+  ],
+  "omitted": [
+    "Optional background music: effects only, to keep the mobile audio graph small"
+  ],
+  "unitTests": {
+    "command": "node --test workout/island/tests/*.test.mjs",
+    "passed": 76,
+    "failed": 0
+  },
+  "requiredSuite": {
+    "command": "node --test tests/*.mjs",
+    "passed": 1063,
+    "failed": 52,
+    "skippedExisting": 38,
+    "blocker": "Legacy island assertions require updates under tests/, outside the user-authorized directory; awaiting clarification. No tests were skipped or changed by G2f."
+  }
+}
