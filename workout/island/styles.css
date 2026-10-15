@@ -40,3 +40,9 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .load-error{position:fixed;inset:25%;background:var(--cream);border-radius:24px;display:grid;place-items:center;padding:30px;color:var(--ink)}
 @media(orientation:landscape) and (max-height:600px){.avatar-preview{height:120px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* City guidance stays inside the existing dock and information card. */
+.building-hint{font-size:10px;line-height:1.25;padding:2px 4px;border-radius:6px;background:#f5e8cf;color:#735620}.building-card[data-availability=recommended] .building-hint{background:#d9f1df;color:#237349}
+.info-actions{flex-wrap:nowrap;margin-block:8px;align-items:stretch}.info-actions button,.info-actions .primary-button{flex:1 1 0;min-width:56px;min-height:56px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;white-space:normal;overflow-wrap:anywhere}.info-actions small{font-size:10px;line-height:1.4}.upgrade-details{display:flex;flex-direction:column;gap:4px}.placement [data-action=cancel]{padding-inline:8px;font-size:11px}
+.building-card[data-availability=limited][data-limit=unique]{gap:5px}.building-card[data-availability=limited][data-limit=unique] .building-cost{display:none}
+.info-actions button:disabled{opacity:1;background:#e9ede5;color:#526b65;border-color:#dfe8d9}

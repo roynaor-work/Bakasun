@@ -1,4 +1,5 @@
-import { levelFactor } from '../engine/metrics.mjs';
+import { levelFactor, levelValue } from '../engine/metrics.mjs';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -76,7 +77,7 @@ export class IslandInterface {
     const utilities = el('div', 'utilities');
     const help = button('?', 'help', 'round-button');
     help.title = this.t('app.help'); help.setAttribute('aria-label', this.t('app.help'));
-    help.onclick = () => this.toast(this.infoId ? 'help.info' : this.selected ? 'help.build' : 'help.world');
+    help.onclick = () => this.toast(this.movingId ? 'help.move' : this.infoId ? 'help.info' : this.selected ? 'help.build' : 'help.world');
     const undo = button('↶', 'undo', 'round-button');
     undo.title = this.t('app.undo'); undo.setAttribute('aria-label', this.t('app.undo'));
     undo.onclick = () => this.result(this.engine.undo());
@@ -120,9 +121,10 @@ export class IslandInterface {
     this.placement = el('div', 'placement panel');
     this.placement.hidden = true;
     this.ghostStatus = el('div', 'ghost-status'); this.ghostStatus.id = 'ghost-status';
+    this.ghostStatus.setAttribute('role', 'status');
     this.placeButton = button(this.t('app.place'), 'place', 'primary-button');
     this.placeButton.onclick = () => this.commitPlacement();
-    const cancel = button('×', 'cancel', 'round-button'); cancel.setAttribute('aria-label', this.t('app.cancel')); cancel.onclick = () => this.cancelPlacement();
+    const cancel = this.cancelButton = button('×', 'cancel', 'round-button'); cancel.setAttribute('aria-label', this.t('app.cancel')); cancel.onclick = () => this.cancelPlacement();
     this.placement.append(this.ghostStatus, this.placeButton, cancel);
 
     this.info = el('aside', 'info-card panel'); this.info.hidden = true;
@@ -242,7 +244,7 @@ export class IslandInterface {
     this.root.dataset.saveStatus = saveFailed ? 'error' : 'saved';
     this.drawMission();
     if (this.currentGhost) this.updateGhost(this.currentGhost);
-    if (this.infoId && this.infoSignature !== JSON.stringify(s.buildings.find(b => b.id === this.infoId))) this.drawInfo();
+    if (this.infoId && this.infoSignature !== this.currentInfoSignature()) this.drawInfo();
     this.updateCatalogState();
   }
   drawMission() {
@@ -290,6 +292,7 @@ export class IslandInterface {
       const b = button('', 'select-building', 'building-card');
       b.dataset.building = building.id;
       b.append(el('span', 'building-icon', building.icon), el('strong', '', this.label(building, 'building')), el('span', 'building-cost', building.locked ? `🔒 ${this.t('app.locked')}` : `● ${building.cost}`));
+      b.append(el('span', 'building-hint'));
       b.onclick = () => this.selectBuilding(building.id);
       this.catalog.append(b);
     }
@@ -308,6 +311,15 @@ export class IslandInterface {
       b.classList.toggle('guided', b.dataset.building === step?.buildType);
       b.classList.toggle('locked', !!record.locked);
       b.setAttribute('aria-pressed', String(b.dataset.building === this.selected));
+      const availability = placementAvailability(this.engine.state, this.engine.registry, record.id);
+      const hint = b.querySelector('.building-hint');
+      const label = record.locked ? null : !availability.ok ? record.limit.kind === 'capacity' && availability.reason === record.limit.reason ? 'app.noNeed' : 'app.atLimit' : availability.recommended ? 'app.recommended' : null;
+      hint.textContent = label ? this.t(label) : '';
+      if (!record.locked && !availability.ok && record.limit.kind === 'unique') hint.textContent += ` · ${this.t('app.upgradeExisting')}`;
+      hint.hidden = !label;
+      b.dataset.limit = record.limit?.kind ?? 'free';
+      b.dataset.availability = !availability.ok ? 'limited' : availability.recommended ? 'recommended' : 'available';
+      b.title = !record.locked && !availability.ok ? this.t(availability.reason) : '';
     }
   }
   selectBuilding(id) {
@@ -341,12 +353,15 @@ export class IslandInterface {
     this.currentGhost = { x: Math.floor(cell.x), z: Math.floor(cell.z) };
     const result = this.engine.validatePlacement(this.selected, this.currentGhost.x, this.currentGhost.z, this.movingId);
     const building = this.getBuilding(this.selected);
-    this.view.setGhost(building, this.currentGhost.x, this.currentGhost.z, result.ok);
+    const moving = this.engine.state.buildings.find(row => row.id === this.movingId);
+    this.view.setGhost({ ...building, previewLevel: moving?.level ?? 1 }, this.currentGhost.x, this.currentGhost.z, result.ok);
     this.ghostStatus.dataset.valid = String(result.ok);
     this.ghostStatus.dataset.reason = result.reason ?? 'reason.ok';
-    this.ghostStatus.textContent = `${result.ok ? '✓' : result.reason === 'reason.money' ? '●' : result.reason === 'reason.road' ? '🛣️' : '✕'} ${this.t(result.ok ? 'reason.ok' : result.reason)}`;
+    this.ghostStatus.textContent = `${this.movingId ? this.t('app.moveHint', { building: this.label(building, 'building') }) + ' ' : ''}${result.ok ? '✓' : result.reason === 'reason.money' ? '●' : result.reason === 'reason.road' ? '🛣️' : '✕'} ${this.t(result.ok ? this.movingId ? 'app.moveAllowed' : 'reason.ok' : result.reason)}`;
     this.placeButton.disabled = !result.ok;
     this.placeButton.textContent = this.t(this.movingId ? 'app.moveHere' : 'app.place');
+    this.cancelButton.textContent = this.movingId ? this.t('app.cancelMove') : '×';
+    this.cancelButton.setAttribute('aria-label', this.t(this.movingId ? 'app.cancelMove' : 'app.cancel'));
   }
   commitPlacement() {
     if (!this.currentGhost || !this.selected) return;
@@ -375,10 +390,14 @@ export class IslandInterface {
     this.drawInfo();
   }
   closeInfo() { this.infoId = null; this.infoSignature = null; this.info.hidden = true; this.view.showRadius(null); }
+  currentInfoSignature() {
+    const state = this.engine.state;
+    return JSON.stringify([state.buildings.find(row => row.id === this.infoId), state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason]);
+  }
   drawInfo() {
     const instance = this.engine.state.buildings.find(b => b.id === this.infoId);
     if (!instance) { this.closeInfo(); return; }
-    this.infoSignature = JSON.stringify(instance);
+    this.infoSignature = this.currentInfoSignature();
     const record = this.getBuilding(instance.typeId);
     const factor = levelFactor(instance, this.data.config);
     const amount = value => Number((value * factor).toFixed(1)).toLocaleString('he-IL');
@@ -386,19 +405,27 @@ export class IslandInterface {
     const close = button('×', 'close-info', 'round-button'); close.onclick = () => this.closeInfo(); close.setAttribute('aria-label', this.t('app.close'));
     const title = el('div', 'info-title');
     title.append(el('span', 'building-icon', record.icon), el('h2', '', this.label(record, 'building')), close);
-    this.info.append(title, el('span', 'level-badge', `${this.t('app.level')} ${instance.level}`), el('h3', '', this.t('app.gives')));
+    const currentLevel = record.levels[instance.level - 1];
+    this.info.append(title, el('span', 'level-badge', `${currentLevel.title ? this.t(currentLevel.title) + ' · ' : ''}${this.t('app.level')} ${instance.level}`));
     const effects = el('div', 'info-effects');
     for (const [id, value] of Object.entries(record.effects ?? record.metrics ?? {})) effects.append(el('span', '', `${this.t(`metric.${id}`)} +${amount(value)}`));
-    if (record.population) effects.append(el('span', '', `♟ +${amount(record.population)} ${this.t('app.population')}`));
+    const residents = levelValue(instance, record, 'population', this.data.config);
+    if (residents) effects.append(el('span', '', `♟ ${residents.toLocaleString('he-IL')} ${this.t('app.population')}`));
+    if (record.supply) {
+      const supply = levelValue(instance, record, 'supply', this.data.config), population = this.engine.population();
+      effects.append(el('span', 'service-supply', this.t('app.serves', { supply: Math.min(supply, population), population })), el('span', '', this.t('app.supply', { supply })));
+    }
     if (record.income) effects.append(el('span', '', `● +${amount(record.income)} ${this.t('app.income')}`));
     for (const [key, value] of Object.entries(record.resources ?? {})) effects.append(el('span', '', `${this.t(`app.${key}`)} +${amount(value)}`));
     if (record.capacity) effects.append(el('span', '', `${this.t('app.capacity')} ${amount(record.capacity)}`));
     if (!effects.children.length) effects.append(el('span', '', this.t('app.explore')));
-    this.info.append(effects, el('p', 'radius-label', `◯ ${amount(record.radius ?? 0)} ${this.t('app.radius')}`));
     const actions = el('div', 'info-actions');
-    const nextLevel = record.levels?.[instance.level];
-    const upgrade = button(nextLevel ? `✦ ${this.t('app.upgrade')} · ● ${nextLevel.cost}` : this.t('app.maxLevel'), 'upgrade', 'primary-button');
-    upgrade.disabled = !nextLevel;
+    const upgradeStatus = upgradeAvailability(this.engine.state, this.engine.registry, instance.id);
+    const nextLevel = upgradeStatus.nextLevel;
+    const upgrade = button('', 'upgrade', 'primary-button');
+    upgrade.append(el('span', '', `✦ ${this.t('app.upgrade')}`), el('small', '', nextLevel ? `● ${nextLevel.cost}` : this.t('app.maxLevel')));
+    if (!upgradeStatus.ok && nextLevel) upgrade.append(el('small', 'upgrade-reason', this.t(upgradeStatus.reason)));
+    upgrade.disabled = !upgradeStatus.ok;
     upgrade.onclick = () => this.result(this.engine.upgrade(instance.id));
     const move = button(`↔ ${this.t('app.move')}`, 'move', 'secondary-button');
     move.onclick = () => {
@@ -413,7 +440,20 @@ export class IslandInterface {
       this.info.append(el('p', '', this.t('app.removeConfirm')));
       remove.onclick = () => { this.closeInfo(); this.result(this.engine.remove(instance.id)); };
     };
-    actions.append(upgrade, move, remove); this.info.append(actions);
+    actions.append(move, upgrade, remove); this.info.append(actions);
+    if (nextLevel) {
+      const nextInstance = { ...instance, level: instance.level + 1 };
+      const details = el('p', 'upgrade-details');
+      if (nextLevel.title) details.append(el('strong', '', this.t(nextLevel.title)));
+      for (const [field, label] of [['population', 'app.upgradePopulation'], ['supply', 'app.upgradeSupply']]) {
+        const delta = levelValue(nextInstance, record, field, this.data.config) - levelValue(instance, record, field, this.data.config);
+        if (delta) details.append(el('span', '', this.t(label, { amount: delta })));
+      }
+      if (record.income) details.append(el('span', '', this.t('app.upgradeReward', { before: amount(record.income), after: Number((record.income * levelFactor(nextInstance, this.data.config)).toFixed(1)) })));
+      if (record.radius) details.append(el('span', '', this.t('app.upgradeEffects')));
+      this.info.append(details);
+    }
+    this.info.append(el('h3', '', this.t('app.gives')), effects, el('p', 'radius-label', `◯ ${amount(record.radius ?? 0)} ${this.t('app.radius')}`));
     this.view.showRadius({ ...record, radius: (record.radius ?? 0) * factor }, instance);
   }
   setupParentGate(node) {
