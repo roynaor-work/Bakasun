@@ -28,7 +28,7 @@ try {
     onError: id => { if (ui) ui.toast(id); else root.textContent = t(id); }
   });
   ui = new IslandInterface({ root, engine, view, data, t });
-  const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length)});
+  const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length),onLaunch:choice=>games.autoLaunch(choice)});
   const games=new ActivityInterface({ui,engine,activity,data,t});
   let openedGames=false;
   const requestedGames=new URLSearchParams(location.search).get('games')==='1';

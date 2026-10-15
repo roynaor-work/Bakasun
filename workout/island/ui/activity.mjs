@@ -35,24 +35,43 @@ export class ActivityInterface {
       const context=gameContext(this.engine,this.data.config.minigames,this.now(),game.id),level=this.engine.state.minigameLevels[game.id];
       card.append(el('h3','',`${game.icon} ${this.t(game.title)}`),el('p','',this.t('minigame.level',{level,difficulty:context.level})),el('p','',this.t('minigame.power',{power:Math.round(context.power*this.data.config.minigames.percentScale)})),el('p','',this.t('minigame.best',{score:this.engine.state.highScores[game.id]||0})));
       const actions=el('div','game-card-actions');
-      actions.append(button(this.t('minigame.play'),'game-play',()=>this.start(game.id), 'primary-button'),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
+      actions.append(button(this.t('minigame.play'),'game-play',()=>this.stages(game.id), 'primary-button'),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
       const next=this.data.config.minigameLevels[game.id]?.[level];
       const upgrade=button(next?this.t('minigame.upgrade',{cost:next.cost}):this.t('app.maxLevel'),'game-upgrade',()=>{const result=this.activity.upgrade(game.id);if(result.ok)this.menu();else this.ui.result(result);});
       upgrade.disabled=!next;actions.append(upgrade);card.append(actions);cards.append(card);
     }
     dialog.append(cards);
   }
+  stages(id) {
+    const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
+    const dialog=this.modal(game.title,'minigame.progressHint');dialog.dataset.stageMap=id;
+    dialog.append(el('p','',this.t('minigame.totalStars',{stars:p.stars.reduce((sum,n)=>sum+n,0)})));
+    for(const bonus of this.data.config.minigames.starBonuses)dialog.append(el('p','',this.t('minigame.starBonus',{stars:bonus.stars,level:bonus.upgradeLevel})));
+    const map=el('div','stage-map');
+    p.stars.forEach((stars,i)=>{
+      const stage=i+1,locked=stage>p.stage;
+      const node=button(`${this.t('minigame.stage',{stage})} ${locked?'🔒':'★'.repeat(stars)+'☆'.repeat(3-stars)}`,'stage-play',()=>this.start(id,undefined,stage));
+      node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
+    });dialog.append(map);
+  }
+  autoLaunch(choice) {
+    this.eventOpen=false;
+    const highest=this.engine.state.minigameProgress[choice.gameId].stage;
+    const stage=Math.max(1,Math.min(highest,highest+this.data.config.events.eventStageOffset));
+    // Event countdown is the introduction; play opens directly and help stays reachable.
+    this.launch(choice.gameId,choice.eventId,stage);
+  }
   narrateHelp(id) {for(let i=1;i<=3;i++){const key=`minigame.${id}.help.${i}`;this.engine.narration.announce(key);this.ui.narrate(key);}}
   helpLines(id) {const lines=el('div','game-help-lines');for(let i=1;i<=3;i++)lines.append(el('p','',this.t(`minigame.${id}.help.${i}`)));return lines;}
-  intro(id,eventId) {
+  intro(id,eventId,stage) {
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
-    dialog.append(this.helpLines(id),button(this.t('minigame.understood'),'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId);},'primary-button'),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
+    dialog.append(this.helpLines(id),button(this.t('minigame.understood'),'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage);},'primary-button'),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
     this.narrateHelp(id);
   }
-  start(id,eventId) {
-    if(!this.engine.state.instructionsSeen.includes(id))this.intro(id,eventId);else this.launch(id,eventId);
+  start(id,eventId,stage) {
+    if(!this.engine.state.instructionsSeen.includes(id))this.intro(id,eventId,stage);else this.launch(id,eventId,stage);
   }
-  launch(id,eventId) {
+  launch(id,eventId,stageNumber) {
     // Switching from instructions must retain the event's playing state.
     this.ui.modalCleanup=null;
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
@@ -78,7 +97,9 @@ export class ActivityInterface {
     }
     dialog.replaceChildren(header,status,stage,controls);
     this.ui.view.paused=true;
-    const context=gameContext(this.engine,this.data.config.minigames,this.now(),id);
+    const context=gameContext(this.engine,this.data.config.minigames,this.now(),id,stageNumber);
+    heading.textContent=this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
+    dialog.dataset.stage=context.level;
     const eventBonuses=eventId?this.activity.bonuses():{};
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,turnLabel,t:this.t,
       onError:reason=>this.ui.toast(reason),
@@ -104,7 +125,7 @@ export class ActivityInterface {
     const dialog=this.modal(result.outcome==='win'?'minigame.win':'minigame.lose','minigame.resultHint',eventId);
     dialog.dataset.result=id;
     const summary=el('div','game-result');
-    for(const key of ['score','money','parts']){const row=el('p','result-row'),value=el('bdi','',String(result[key]));row.append(el('span','',this.t(`minigame.result.${key}`)),value);summary.append(row);}
+    for(const key of ['score','money','parts','stars']){const row=el('p','result-row'),value=el('bdi','',String(result[key]));row.append(el('span','',this.t(`minigame.result.${key}`)),value);summary.append(row);}
     dialog.append(el('h3','',this.t(game.title)),summary,
       button(this.t('minigame.again'),'game-again',()=>{
         const active=this.engine.state.events.active;
@@ -112,8 +133,10 @@ export class ActivityInterface {
           this.ui.modalCleanup=null;this.ui.closeModal();
           const choice=this.activity.choose('play');if(!choice.ok){this.ui.view.paused=false;this.ui.result(choice);return;}
         }
-        this.start(id,active?.id===eventId?eventId:undefined);
+        this.start(id,active?.id===eventId?eventId:undefined,result.stage);
       },'primary-button'),button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal()));
+    dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)));
+    if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage)dialog.append(button(this.t('minigame.nextStage'),'game-next-stage',()=>this.start(id,undefined,result.stage+1),'primary-button'));
     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
     this.engine.narration.announce('minigame.result',result);
   }

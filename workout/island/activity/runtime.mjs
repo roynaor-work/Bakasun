@@ -1,14 +1,15 @@
+import {eventEligible} from './eligibility.mjs';
 import {seededRandom} from '../minigames/context.mjs';
 import {buildingCenter,levelFactor} from '../engine/metrics.mjs';
 
-export function createActivity(engine,{now=Date.now,random=seededRandom(now()),blocked=()=>false}={}) {
+export function createActivity(engine,{now=Date.now,random=seededRandom(now()),blocked=()=>false,onLaunch}={}) {
   const {state,data,registry}=engine,config=data.config.events,listeners=new Set();
   let disposed=false,playing=false;
   // Reloads never resume a half-created canvas or award an unfinished result.
   if(state.events.active?.phase==='playing'){state.events.active.phase='ready';engine.save();}
   const emit=()=>{for(const listener of listeners)listener();};
   const save=()=>{const saved=engine.save();emit();return saved;};
-  const busy=()=>blocked()||(!state.tutorial.completed&&!state.tutorial.skipped)||!state.avatar.created;
+  const busy=()=>blocked()||engine.isMinigameActive()||(!state.tutorial.completed&&!state.tutorial.skipped)||!state.avatar.created;
   const enabled=id=>data.featureFlags.events&&data.featureFlags[config.types[id]?.featureFlag]&&data.featureFlags.minigames&&data.featureFlags[config.types[id]?.gameId];
   function bonuses(event=state.events.active) {
     if(event?.typeId!=='fire'||!event.targetId)return {};
@@ -21,8 +22,10 @@ export function createActivity(engine,{now=Date.now,random=seededRandom(now()),b
     });
     return covered?{fireTime:config.fireTimeBonus,fireWater:config.fireWaterBonus}:{};
   }
+  const lastType=()=>Object.entries(state.events.lastAt).reduce((last,row)=>!last||row[1]>=last[1]?row:last,null)?.[0];
+  const eligible=id=>eventEligible(state,config.types[id].eligibility);
   function prepare(typeId) {
-    if(disposed||busy()||state.events.active||!enabled(typeId))return {ok:false,reason:'event.unavailable'};
+    if(disposed||busy()||state.events.active||!enabled(typeId)||!eligible(typeId)||(config.avoidConsecutive&&lastType()===typeId))return {ok:false,reason:'event.unavailable'};
     const at=now(),type=config.types[typeId];
     if(state.events.sequence>=Number.MAX_SAFE_INTEGER)return {ok:false,reason:'reason.invalid'};
     if(state.events.lastAt[typeId]!=null&&at-state.events.lastAt[typeId]<type.cooldownMs)return {ok:false,reason:'event.unavailable'};
@@ -31,7 +34,7 @@ export function createActivity(engine,{now=Date.now,random=seededRandom(now()),b
     if(!prepared.ok||!prepared.prepared)return {ok:false,reason:'event.noTarget'};
     state.events.sequence++;
     state.events.active={id:`event-${state.events.sequence}`,typeId,targetId:prepared.prepared.targetId,seed,phase:'warning',warningUntil:at+config.warningMs,deferred:false};
-    state.events.counts[typeId]=(state.events.counts[typeId]||0)+1;state.events.lastAt[typeId]=at;
+    state.events.counts[typeId]=(state.events.counts[typeId]||0)+1;delete state.events.lastAt[typeId];state.events.lastAt[typeId]=at;
     engine.narration.announce(type.warningId);save();return {ok:true,event:state.events.active};
   }
   function complete(outcome,automatic=false) {
@@ -57,10 +60,18 @@ export function createActivity(engine,{now=Date.now,random=seededRandom(now()),b
       if(repaired)save();
       if(busy()||playing)return;
       const event=state.events.active;
-      if(event){if(enabled(event.typeId)&&event.phase==='warning'&&now()>=event.warningUntil){event.phase='ready';save();}return;}
+      if(event){
+        if(enabled(event.typeId)&&event.phase==='warning'&&now()>=event.warningUntil){event.phase='ready';save();}
+        if(enabled(event.typeId)&&event.phase==='ready'&&onLaunch){const choice=api.choose('play');if(choice.ok)onLaunch(choice);}
+        return;
+      }
       if(now()<state.events.nextAt)return;
-      const candidates=Object.keys(config.types).filter(id=>enabled(id)&&(state.events.lastAt[id]==null||now()-state.events.lastAt[id]>=config.types[id].cooldownMs));
-      if(candidates.length){const chosen=candidates[Math.floor(random()*candidates.length)];if(!prepare(chosen).ok)state.events.nextAt=now()+config.minGapMs;}
+      const candidates=Object.keys(config.types).filter(id=>config.types[id].weight>0&&enabled(id)&&eligible(id)&&(!config.avoidConsecutive||id!==lastType())&&(state.events.lastAt[id]==null||now()-state.events.lastAt[id]>=config.types[id].cooldownMs));
+      if(candidates.length){
+        const total=candidates.reduce((sum,id)=>sum+config.types[id].weight,0);let draw=random()*total;
+        const chosen=candidates.find(id=>(draw-=config.types[id].weight)<0)??candidates.at(-1);
+        if(!prepare(chosen).ok)state.events.nextAt=now()+config.minGapMs;
+      }
     },
     choose(action) {
       const event=state.events.active;if(!event||!enabled(event.typeId)||busy()||playing||!config.actions.some(row=>row.id===action))return {ok:false,reason:'event.unavailable'};
@@ -73,7 +84,10 @@ export function createActivity(engine,{now=Date.now,random=seededRandom(now()),b
       playing=true;event.phase='playing';save();return {ok:true,gameId:config.types[event.typeId].gameId,eventId:event.id};
     },
     resolve(eventId,result) {if(state.events.active?.id!==eventId)return {ok:false,reason:'event.unavailable'};return complete(result.outcome);},
-    cancel(eventId) {if(state.events.active?.id===eventId){playing=false;state.events.active.phase='ready';save();}},
+    cancel(eventId) {if(state.events.active?.id===eventId){
+      playing=false;state.events.resolved.push(eventId);state.events.resolved=state.events.resolved.slice(-config.historyLimit);
+      state.events.active=null;state.events.nextAt=now()+config.minGapMs;save();
+    }},
     repair(id) {
       if(!(state.events.repairs[id]>now()))return {ok:false,reason:'event.unavailable'};
       if(state.money<config.repairCost)return {ok:false,reason:'reason.money'};

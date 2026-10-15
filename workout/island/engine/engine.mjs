@@ -1,3 +1,4 @@
+import {recordStageWin} from '../activity/progress.mjs';
 import { createRegistry } from './registry.mjs';
 import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs';
 import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs';
@@ -247,14 +248,17 @@ export function createEngine(data, options = {}) {
     changed('episode', { id, paid });
     return { ok: true, paid };
   };
+  engine.isMinigameActive = () => Boolean(activeMinigame);
   engine.startMinigame = (id, context = {}) => {
     const minigame = registry.minigames.get(id);
     if (!minigame || !flags.minigames || (minigame.featureFlag && !flags[minigame.featureFlag])) return { ok: false, reason: 'reason.locked' };
     if (activeMinigame) return { ok: false, reason: 'reason.gameBusy' };
     if (!engine.canPlay()) return { ok: false, reason: 'reason.playTime' };
+    const progress=state.minigameProgress[id],stage=context.level??progress?.stage;
+    if(progress&&(!Number.isInteger(stage)||stage<1||stage>progress.stage))return {ok:false,reason:'minigame.stageLockedReason'};
     const token = {}, startedAt = now();
     let ended = false, session;
-    const ctx = { ...context, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
+    const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
     const finish = (raw, cancelled = false) => {
       if (ended) return { ok: false, reason: 'reason.duplicate' };
       let result;
@@ -262,8 +266,12 @@ export function createEngine(data, options = {}) {
         try { result = minigame.onResult(raw, ctx); } catch { return { ok: false, reason: 'reason.invalid' }; }
         if (!result || !['win', 'lose'].includes(result.outcome) || !Number.isSafeInteger(result.score) || result.score < 0 || !Number.isSafeInteger(result.money) || result.money < 0 || !Number.isFinite(state.money + result.money)) return { ok: false, reason: 'reason.invalid' };
         const wins = (state.minigameWins[id] || 0) + Number(result.outcome === 'win');
-        const parts = result.outcome === 'win' && config.minigames?.partEveryWins && wins % config.minigames.partEveryWins === 0 ? config.minigames.winParts : 0;
-        result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts });
+        const periodicParts = result.outcome === 'win' && config.minigames?.partEveryWins && wins % config.minigames.partEveryWins === 0 ? config.minigames.winParts : 0;
+        const won=result.outcome==='win',settings=config.minigames?.[id]?.levels[stage-1];
+        const stars=progress&&won?result.stars:0;
+        if(progress&&won&&(!Number.isInteger(stars)||stars<1||stars>3))return {ok:false,reason:'reason.invalid'};
+        const parts=periodicParts+(won?(settings?.winParts||0):0);
+        result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts,stars,stage });
       }
       ended = true; activeMinigame = null;
       session?.dispose?.();
@@ -273,6 +281,7 @@ export function createEngine(data, options = {}) {
         // Only shipped game IDs are persisted; third-party contract examples remain compatible.
         if (config.minigameLevels?.[id]) {
           state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
+          if(result.outcome==='win'){recordStageWin(state,data,id,stage,result.stars);}
           if(result.outcome==='win')state.minigameWins[id]=Math.min(Number.MAX_SAFE_INTEGER,(state.minigameWins[id]||0)+1);
           if(result.parts){const group=data.world.partGroup;state.parts[group]=(state.parts[group]||0)+result.parts;expand();}
         }

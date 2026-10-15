@@ -1,0 +1,145 @@
+{
+  "date": "2026-10-15",
+  "timezone": "Asia/Jerusalem",
+  "base": "af33284",
+  "node": "24.19.0",
+  "browser": "Chromium 151.0.7922.173, ANGLE/SwiftShader",
+  "fullSuite": {
+    "command": "npm test",
+    "tests": 1062,
+    "passed": 1024,
+    "skipped": 38,
+    "failed": 0
+  },
+  "islandSuite": {
+    "command": "node --test --test-isolation=none tests/island-*.test.mjs",
+    "tests": 171,
+    "passed": 171,
+    "failed": 0
+  },
+  "seededStageVictories": 30,
+  "seed": 12,
+  "stageRepetitions": 2,
+  "activity": [
+    {
+      "width": 360,
+      "results": [
+        {
+          "id": "alienDefense",
+          "level": 1,
+          "outcome": "win",
+          "stars": 2
+        },
+        {
+          "id": "alienDefense",
+          "level": 10,
+          "outcome": "win",
+          "stars": 2
+        },
+        {
+          "id": "fireRescue",
+          "level": 1,
+          "outcome": "win",
+          "stars": 3
+        },
+        {
+          "id": "fireRescue",
+          "level": 10,
+          "outcome": "win",
+          "stars": 3
+        },
+        {
+          "id": "navalDuel",
+          "level": 1,
+          "outcome": "win",
+          "stars": 3
+        },
+        {
+          "id": "navalDuel",
+          "level": 10,
+          "outcome": "win",
+          "stars": 2
+        }
+      ],
+      "events": [
+        "fire",
+        "aliens",
+        "ship"
+      ],
+      "errors": [],
+      "outside": [],
+      "failed": []
+    },
+    {
+      "width": 390,
+      "results": [
+        {
+          "id": "alienDefense",
+          "level": 1,
+          "outcome": "win",
+          "stars": 2
+        },
+        {
+          "id": "alienDefense",
+          "level": 10,
+          "outcome": "win",
+          "stars": 2
+        },
+        {
+          "id": "fireRescue",
+          "level": 1,
+          "outcome": "win",
+          "stars": 3
+        },
+        {
+          "id": "fireRescue",
+          "level": 10,
+          "outcome": "win",
+          "stars": 3
+        },
+        {
+          "id": "navalDuel",
+          "level": 1,
+          "outcome": "win",
+          "stars": 3
+        },
+        {
+          "id": "navalDuel",
+          "level": 10,
+          "outcome": "win",
+          "stars": 2
+        }
+      ],
+      "events": [
+        "fire",
+        "aliens",
+        "ship"
+      ],
+      "errors": [],
+      "outside": [],
+      "failed": []
+    }
+  ],
+  "layoutViewports": [
+    [
+      360,
+      740
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      412,
+      915
+    ],
+    [
+      844,
+      390
+    ]
+  ],
+  "uniqueActivityScreenshots": 44,
+  "configOutsideMinigamesAndEvents": "unchanged",
+  "fps": "לא נבדק — סביבת ענן עם רינדור תוכנתי",
+  "physicalPhone": "לא נבדק — אין גישה לטלפון פיזי"
+}
