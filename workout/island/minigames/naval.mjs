@@ -1,6 +1,6 @@
-import {runCanvasGame} from './canvas-session.mjs';
-import {oval,drawHealthBar} from './art.mjs';
-import {createNavalView} from './naval-view.mjs';
+import {runCanvasGame} from './canvas-session.mjs?v=g2e-20261015-1';
+import {oval,drawHealthBar} from './art.mjs?v=g2e-20261015-1';
+import {createNavalView} from './naval-view.mjs?v=g2e-20261015-1';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 export function createShipEntity(x,maxHp,shield=0){return {x,hp:maxHp,maxHp,shield,maxShield:shield,recoil:0};}
 export function createNavalModel({config,balance,level,random,power=1,equipment=EMPTY}) {

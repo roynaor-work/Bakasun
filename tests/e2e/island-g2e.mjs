@@ -11,6 +11,9 @@ export async function checkG2e({browser,target,directory}){
     page.on('request',r=>{if(new URL(r.url()).pathname.endsWith('.json'))jsonRequests.push(r.url());});
     // Model the reported stale unversioned cache. A correct release never uses it.
     await page.route('**/data/*.json*',async route=>{if(!new URL(route.request().url()).searchParams.has('v'))await route.fulfill({json:{}});else await route.continue();});
+    // Warm G2d module caches must not bypass the new versioned JSON loader.
+    const changedModules=new Set(['release.mjs','ui/translate.mjs','ui/activity.mjs','engine/load-data.mjs','minigames/aliens.mjs','minigames/fire.mjs','minigames/naval.mjs','minigames/naval-view.mjs','minigames/canvas-session.mjs','minigames/art.mjs','minigames/pool.mjs','minigames/model-art.mjs','extensions/alien-defense.mjs','extensions/fire-rescue.mjs','extensions/naval-duel.mjs']);
+    await page.route('**/*.mjs*',async route=>{const url=new URL(route.request().url()),key=url.pathname.split('/island/')[1];if(changedModules.has(key)&&url.searchParams.get('v')!==DATA_VERSION)await route.fulfill({contentType:'text/javascript',body:'throw Error("stale module cache")'});else await route.continue();});
     const cdp=await context.newCDPSession(page),tick=ms=>page.clock.runFor(ms),snap=()=>page.evaluate(()=>window.__island.games.current?.session.snapshot),tap=s=>page.locator(s).tap();
     const touch=(type,p)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'?[]:[{...p,id:1}]});
     async function point(x,y){return page.locator('.minigame-canvas').evaluate((n,{x,y})=>{const r=n.getBoundingClientRect(),c=window.__island.data.config.minigames,h=window.__island.games.current.session.snapshot.enemies?c.navalDuel.render.height:c.height,s=Math.min(r.width/c.width,r.height/h);return {x:r.x+(r.width-c.width*s)/2+x*s,y:r.y+(r.height-h*s)/2+y*s};},{x,y});}

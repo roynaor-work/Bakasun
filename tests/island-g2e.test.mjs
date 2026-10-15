@@ -26,6 +26,8 @@ test('G2e every bundled JSON request, including episode files and manifests, car
   const urls=[];await loadData(new URL('../workout/island/',import.meta.url),async url=>{urls.push(url);return {ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))};});
   assert.ok(urls.length>14);for(const url of urls)assert.equal(url.searchParams.get('v'),DATA_VERSION);
   assert.equal(dataURL('data/strings.he.json').searchParams.get('v'),DATA_VERSION);
+  for(const file of ['app.mjs','engine/load-data.mjs','ui/activity.mjs','minigames/canvas-session.mjs','minigames/aliens.mjs','minigames/fire.mjs','minigames/naval.mjs','minigames/naval-view.mjs','minigames/model-art.mjs','extensions/alien-defense.mjs','extensions/fire-rescue.mjs','extensions/naval-duel.mjs']){const source=await readFile(new URL('../workout/island/'+file,import.meta.url),'utf8');for(const [,version]of source.matchAll(/\.mjs\?v=([^'"]+)/g))assert.equal(version,DATA_VERSION,file);}
+  const app=await readFile(new URL('../workout/island/app.mjs',import.meta.url),'utf8');assert.ok(app.includes('load-data.mjs?v='+DATA_VERSION));
   const html=await readFile(new URL('../workout/island/index.html',import.meta.url),'utf8');assert.ok(html.includes('app.mjs?v='+DATA_VERSION));assert.ok(html.includes('styles.css?v='+DATA_VERSION));
 });
 test('G2e missing t() is an error, never a raw key; all game literal and dynamic keys exist',async()=>{

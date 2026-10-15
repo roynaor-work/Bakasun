@@ -1,6 +1,6 @@
-import {runCanvasGame} from './canvas-session.mjs';
-import {createPool,releaseAt} from './pool.mjs';
-import {oval,drawHealthBar} from './art.mjs';
+import {runCanvasGame} from './canvas-session.mjs?v=g2e-20261015-1';
+import {createPool,releaseAt} from './pool.mjs?v=g2e-20261015-1';
+import {oval,drawHealthBar} from './art.mjs?v=g2e-20261015-1';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 
 /** One pooled entity factory for all enemy variants; geometry lives in art.mjs. */

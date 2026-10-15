@@ -1,11 +1,11 @@
-import {dataURL} from './release.mjs';
-import {createTranslator} from './ui/translate.mjs';
-import { loadData } from './engine/load-data.mjs';
+import {dataURL} from './release.mjs?v=g2e-20261015-1';
+import {createTranslator} from './ui/translate.mjs?v=g2e-20261015-1';
+import { loadData } from './engine/load-data.mjs?v=g2e-20261015-1';
 import { createEngine } from './engine/engine.mjs';
 import { IslandView } from './view/island-view.mjs';
 import { IslandInterface } from './ui/interface.mjs';
 import {createActivity} from './activity/runtime.mjs';
-import {ActivityInterface} from './ui/activity.mjs';
+import {ActivityInterface} from './ui/activity.mjs?v=g2e-20261015-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

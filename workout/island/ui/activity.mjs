@@ -1,4 +1,4 @@
-import {createAmmoVisual} from '../minigames/art.mjs';
+import {createAmmoVisual} from '../minigames/art.mjs?v=g2e-20261015-1';
 import {equipmentOffer} from '../activity/equipment.mjs';
 import {gameContext} from '../minigames/context.mjs';
 

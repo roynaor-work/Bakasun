@@ -1,5 +1,5 @@
-import {loadOptionalArt} from './model-art.mjs';
-import {createGameArt} from './art.mjs';
+import {loadOptionalArt} from './model-art.mjs?v=g2e-20261015-1';
+import {createGameArt} from './art.mjs?v=g2e-20261015-1';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   const { canvas, controls, status, config, t } = ctx;
