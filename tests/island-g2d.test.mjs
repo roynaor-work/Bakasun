@@ -24,7 +24,7 @@ test('G2d naval canvas touch/drag changes angle only; force and explicit firing 
 });
 test('G2d drag clamps angle and never changes a supplied force or fire state',()=>{
   const b=config.navalDuel,input={x:0,y:0,angle:45,power:23,firing:false},anchor={};applyCanvasGesture(input,'navalDuel',anchor,b,true);
-  input.x=9999;applyCanvasGesture(input,'navalDuel',anchor,b);assert.equal(input.angle,b.maxAngle);input.x=-9999;applyCanvasGesture(input,'navalDuel',anchor,b);assert.equal(input.angle,b.minAngle);assert.equal(input.power,23);assert.equal(input.firing,false);
+  input.y=-9999;applyCanvasGesture(input,'navalDuel',anchor,b);assert.equal(input.angle,b.maxAngle);input.y=9999;applyCanvasGesture(input,'navalDuel',anchor,b);assert.equal(input.angle,b.minAngle);assert.equal(input.power,23);assert.equal(input.firing,false);
 });
 for(let index=0;index<4;index++)test(`G2d ammunition ${index} is available without purchases, finite and reloads independently`,()=>{
   const m=make('navalDuel'),b=config.navalDuel,supply=m.ammo[index];assert.ok(supply>0);m.update(.02,{ammoIndex:index});assert.equal(m.ammoIndex,index);assert.equal(m.phase,'aim');
@@ -38,9 +38,9 @@ test('G2d firing upgrades shorten ammunition reload and every naval encounter ha
   const a=make('navalDuel'),b=make('navalDuel',1,{equipment:{rate:1.6}});for(const m of [a,b])m.update(.02,{firing:true});assert.ok(b.cooldowns[0]<a.cooldowns[0]);
   for(const id of ['navalDuel','alienDefense','fireRescue'])for(let i=1;i<10;i++)assert.ok(config[id].levels[i].seconds>config[id].levels[i-1].seconds);
 });
-test('G2d alien stage one cannot finish before sixty active seconds, and all stages end with a boss',()=>{
+test('G2d alien stage one has a sixty-second budget with early clear, and all stages end with a boss',()=>{
   const m=make('alienDefense'),memory={};assert.ok(m.settings.seconds>=60);
-  for(let i=0;i<8000&&!m.result;i++)m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));assert.equal(m.result?.outcome,'win');assert.ok(m.time>=60);assert.ok(m.result.score<=m.settings.scoreLimit);
+  for(let i=0;i<8000&&!m.result;i++)m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));assert.equal(m.result?.outcome,'win');assert.ok(m.time<=m.settings.seconds+config.maxFrameSeconds);assert.ok(m.result.score<=m.settings.scoreLimit);
   for(const s of config.alienDefense.levels)assert.equal(s.boss,true);
 });
 test('G2d three distinct random upgrades pause combat; a valid choice stacks and resumes exactly once',()=>{

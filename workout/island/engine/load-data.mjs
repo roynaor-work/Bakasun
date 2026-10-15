@@ -1,3 +1,4 @@
+import {dataURL} from '../release.mjs';
 import { configureBuilding } from './registry.mjs';
 
 const FILES = ['config', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
@@ -6,7 +7,7 @@ const FILES = ['config', 'buildings', 'categories', 'metrics', 'avatar', 'team',
 export async function loadData(base = new URL('../', import.meta.url), fetcher = globalThis.fetch) {
   const root = new URL(base, import.meta.url);
   const read = async path => {
-    const response = await fetcher(new URL(path, root));
+    const response = await fetcher(dataURL(path, root));
     if (!response.ok) throw new Error('reason.data');
     return response.json();
   };

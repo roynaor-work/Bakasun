@@ -8,24 +8,26 @@ export function createNavalModel({config,balance,level,random,power=1,equipment=
   const isBoss=w=>level%balance.boss.everyStages===0&&w===settings.waves;
   const shipType=w=>balance.shipTypes[(w-1)%settings.shipKinds];
   const hpAt=w=>settings.enemyLives*shipType(w).hp*(isBoss(w)?balance.boss.hp:1);
-  const enemyX=()=>balance.enemyX+Math.sin(time)*settings.drift;
+  const enemyX=()=>balance.enemyX+Math.sin(time*balance.shipTypes[(wave-1)%settings.shipKinds].speed)*settings.drift;
   const cooldowns=balance.ammo.map(()=>0);
   let remaining=settings.seconds;
   const playerShip=createShipEntity(balance.shipX,settings.lives*power*(equipment.hull||1),equipment.shield||0);
   const enemies=Array.from({length:settings.waves},(_,i)=>({...createShipEntity(balance.enemyX,hpAt(i+1)),kind:i%settings.shipKinds,boss:isBoss(i+1),index:i,z:0,active:i<settings.concurrent}));
-  let enemyShip=enemies[0],attacker=enemyShip;
-  const ball={x:0,y:0,vx:0,vy:0,owner:'player',ammo:0},aim={angle:balance.defaultAngle,power:balance.defaultPower},blast={x:0,y:0,life:0};
+  let enemyShip=enemies[0],attacker=enemyShip,sinkingShip=null;
+  const ball={x:0,y:0,vx:0,vy:0,owner:'player',ammo:0,z:0,vz:0},aim={yaw:balance.controls.defaultYaw,angle:balance.defaultAngle,power:balance.defaultPower},blast={x:0,y:0,life:0};
   const ammo=balance.ammo.map((a,i)=>a.charges+(i>0&&i<=(equipment.ammo||0)?equipment.ammo:0)),trail=Array.from({length:config.visuals.trailSegments},()=>({x:0,y:0,life:0}));
   let maxEnemyFleet=0;for(let w=1;w<=settings.waves;w++)maxEnemyFleet+=hpAt(w);
   const status={round,wave,waves:settings.waves,lives:0,enemyLives:0};
   function fleetHealth(){let total=0;for(const e of enemies)total+=Math.max(0,e.hp);return total;}
   function shoot(owner,angle,speed){
-    if(owner==='player'){fired++;ball.ammo=ammo[ammoIndex]>0?ammoIndex:0;if(ammo[ball.ammo]<=0)return;ammo[ball.ammo]--;cooldowns[ball.ammo]=balance.ammo[ball.ammo].reloadSeconds/(equipment.rate||1);}
+    if(owner==='player'){ball.ammo=ammoIndex;if(ammo[ball.ammo]<=0)return;fired++;ammo[ball.ammo]--;cooldowns[ball.ammo]=balance.ammo[ball.ammo].reloadSeconds/(equipment.rate||1);}
     else ball.ammo=0;
     ball.gravity=balance.gravity*(owner==='enemy'&&balance.shipTypes[attacker.kind].attack==='heavy'?balance.combat.heavySpeed**2:1);
+    const yaw=owner==='player'?aim.yaw*Math.PI/180:Math.atan2((attacker.index-wave+1)*balance.combat.laneSpacing,attacker.x-balance.shipX);
+    ball.z=owner==='player'?0:(attacker.index-wave+1)*balance.combat.laneSpacing;ball.vz=Math.sin(yaw)*Math.cos(angle)*speed*(owner==='player'?1:-1);
     ball.owner=owner;ball.source=owner==='player'?enemyShip.index:attacker.index;ball.x=owner==='player'?balance.shipX:attacker.x;ball.y=balance.shipY-balance.muzzleRise;
-    ball.vx=Math.cos(angle)*speed*(owner==='player'?1:-1);ball.vy=-Math.sin(angle)*speed;
-    if(ball.ammo===2){ball.y=balance.shipY;ball.vx=balance.maxSpeed;ball.vy=0;}
+    ball.vx=Math.cos(yaw)*Math.cos(angle)*speed*(owner==='player'?1:-1);ball.vy=-Math.sin(angle)*speed;
+    if(ball.ammo===2){ball.y=balance.shipY;ball.vx=Math.cos(yaw)*balance.maxSpeed;ball.vz=Math.sin(yaw)*balance.maxSpeed;ball.vy=0;}
     (owner==='player'?playerShip:attacker).recoil=config.visuals.recoilSeconds;
     for(const point of trail)point.life=0;phase='shot';
   }
@@ -34,18 +36,18 @@ export function createNavalModel({config,balance,level,random,power=1,equipment=
     phase=ball.owner==='player'?'enemy':'aim';delay=balance.turnPauseSeconds/(equipment.rate||1);
     if(ball.owner==='enemy')round++;else salvo=level>=balance.enemySalvoStage?balance.enemySalvoShots:shipType(wave).attack==='rapid'?balance.combat.rapidShots:1;
   }
-  function impact(hit){
+  function impact(hit,targetShip=enemyShip){
     blast.x=ball.x;blast.y=balance.shipY;blast.life=config.visuals.blastSeconds;blast.hit=hit;
     if(hit){
       if(ball.owner==='player'){
-        hits++;const type=balance.ammo[ball.ammo];enemyShip.hp=Math.max(0,enemyShip.hp-settings.damage*power*(equipment.damage||1)*type.damage);score+=balance.hitPoints;
+        hits++;const type=balance.ammo[ball.ammo];targetShip.hp=Math.max(0,targetShip.hp-settings.damage*power*(equipment.damage||1)*type.damage);score+=balance.hitPoints;
         if(type.heal)playerShip.hp=Math.min(playerShip.maxHp,playerShip.hp+type.heal);
       }else{
         const damage=settings.damage*(level>=balance.enemySalvoStage?balance.salvoDamageScale:1)*balance.shipTypes[attacker.kind].damage*(attacker.boss?balance.boss.damage:1)*(balance.shipTypes[attacker.kind].attack==='heavy'?balance.combat.heavyDamage:1),absorbed=Math.min(playerShip.shield,damage);
         playerShip.shield-=absorbed;playerShip.hp=Math.max(0,playerShip.hp-damage+absorbed);
       }
     }
-    if(enemyShip.hp<=0||playerShip.hp<=0){phase='sink';delay=balance.sinkSeconds;if(enemyShip.hp<=0)score+=Math.ceil(playerShip.hp)*balance.survivalPoints;}
+    if(targetShip.hp<=0||playerShip.hp<=0){sinkingShip=targetShip;phase='sink';delay=balance.sinkSeconds;if(targetShip.hp<=0)score+=Math.ceil(playerShip.hp)*balance.survivalPoints;}
     else endShot();
   }
   const model={settings,ball,aim,blast,trail,playerShip,enemies,ammo,cooldowns,maxEnemyFleet,equipment,
@@ -56,35 +58,39 @@ export function createNavalModel({config,balance,level,random,power=1,equipment=
       if(result||dt<=0)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;delay=Math.max(0,delay-dt);blast.life=Math.max(0,blast.life-dt);playerShip.recoil=Math.max(0,playerShip.recoil-dt);
       remaining=Math.max(0,remaining-dt);for(let i=0;i<cooldowns.length;i++)cooldowns[i]=Math.max(0,cooldowns[i]-dt);
       for(const point of trail)point.life=Math.max(0,point.life-dt);
-      for(const e of enemies){e.recoil=Math.max(0,e.recoil-dt);e.active=e.index>=wave-1&&e.index<wave-1+settings.concurrent;e.x=balance.enemyX+Math.sin(time+e.index)*settings.drift;e.z=Math.cos(time*.6+e.index)*settings.drift*.08;}enemyShip.x=enemyX();
+      let activeCount=0;
+      for(const e of enemies){e.recoil=Math.max(0,e.recoil-dt);e.active=(e.hp>0&&e.index>=wave-1&&activeCount<settings.concurrent)||(phase==='sink'&&e===sinkingShip);if(e.active&&e.hp>0)activeCount++;e.x=balance.enemyX+Math.sin(time*balance.shipTypes[e.kind].speed+e.index)*settings.drift;e.z=Math.cos(time*.6+e.index)*settings.drift*.08;}enemyShip.x=enemyX();
       const pressed=Boolean(input.firing&&!wasFiring);wasFiring=Boolean(input.firing);
       if(Number.isInteger(input.ammoIndex)&&input.ammoIndex>=0&&input.ammoIndex<ammo.length)ammoIndex=input.ammoIndex;
       if(input.ammo&&!wasAmmo){for(let i=1;i<=balance.ammo.length;i++){const next=(ammoIndex+i)%balance.ammo.length;if(next===0||ammo[next]>0){ammoIndex=next;break;}}}wasAmmo=Boolean(input.ammo);
       if(phase==='sink'){
         if(delay<=0){
-          if(enemyShip.hp<=0&&wave<settings.waves){wave++;enemyShip=enemies[wave-1];phase='aim';}
-          else result={outcome:enemyShip.hp<=0?'win':'lose',score,performance:.7*hits/Math.max(1,fired)+.3*Math.max(0,playerShip.hp)/playerShip.maxHp};
+          if(playerShip.hp>0&&fleetHealth()>0){enemyShip=enemies.find(e=>e.hp>0);wave=enemyShip.index+1;sinkingShip=null;phase='aim';}
+          else result={outcome:playerShip.hp>0?'win':'lose',score,performance:.7*hits/Math.max(1,fired)+.3*Math.max(0,playerShip.hp)/playerShip.maxHp};
         }return;
       }
       if(round>settings.rounds||remaining<=0){playerShip.hp=0;phase='sink';delay=balance.sinkSeconds;return;}
       if(phase==='aim'){
-        if(Number.isFinite(input.angle))aim.angle=Math.max(balance.minAngle,Math.min(balance.maxAngle,input.angle));
+        if(Number.isFinite(input.yaw))aim.yaw=Math.max(balance.controls.minYaw,Math.min(balance.controls.maxYaw,input.yaw));
+        if(Number.isFinite(input.angle)&&ammoIndex!==2)aim.angle=Math.max(balance.minAngle,Math.min(balance.maxAngle,input.angle));
         if(Number.isFinite(input.power))aim.power=Math.max(0,Math.min(balance.powerMaximum,input.power));
-        const selected=ammo[ammoIndex]>0?ammoIndex:0;
-        if(pressed&&delay<=0&&cooldowns[selected]<=0&&ammo[selected]>0){ammoIndex=selected;shoot('player',aim.angle*Math.PI/180,balance.minSpeed+aim.power/balance.powerMaximum*(balance.maxSpeed-balance.minSpeed));}
+        const selected=ammoIndex;
+        if(pressed&&delay<=0&&cooldowns[selected]<=0&&ammo[selected]>0){ammoIndex=selected;shoot('player',(ammoIndex===2?0:aim.angle)*Math.PI/180,balance.minSpeed+aim.power/balance.powerMaximum*(balance.maxSpeed-balance.minSpeed));}
       }else if(phase==='enemy'&&delay<=0){
-        attacker=enemies[Math.min(enemies.length-1,wave-1+(round-1)%settings.concurrent)];
+        let turn=(round-1)%Math.min(settings.concurrent,activeCount);attacker=enemyShip;for(const e of enemies)if(e.active&&e.hp>0){if(turn--===0){attacker=e;break;}}
         const angle=(balance.enemyAngleMin+random()*balance.enemyAngleRange)*Math.PI/180,d=attacker.x-balance.shipX;
         const gravity=balance.gravity*(balance.shipTypes[attacker.kind].attack==='heavy'?balance.combat.heavySpeed**2:1);
         const ideal=Math.sqrt(gravity*d*d/(2*Math.cos(angle)**2*(d*Math.tan(angle)+balance.muzzleRise)));
         shoot('enemy',angle,ideal*(1+(random()-.5)*settings.enemyAimError));
       }else if(phase==='shot'){
         const point=trail[trailIndex];point.x=ball.x;point.y=ball.y;point.life=config.visuals.blastSeconds;trailIndex=(trailIndex+1)%trail.length;
-        ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;if(ball.ammo!==2)ball.vy+=ball.gravity*dt;
+        ball.x+=ball.vx*dt;ball.z+=ball.vz*dt;ball.y+=ball.vy*dt;if(ball.ammo!==2)ball.vy+=ball.gravity*dt;
         const target=ball.owner==='player'?enemyX():balance.shipX,width=balance.shipRadius*balance.ammo[ball.ammo].width;
-        if(ball.ammo===2&&ball.x>=target-width)impact(Math.abs(ball.x-target)<=width);
-        else if(ball.y>=balance.shipY&&ball.vy>0)impact(Math.abs(ball.x-target)<=width);
-        else if(ball.x < -balance.worldMargin||ball.x>config.width+balance.worldMargin)endShot();
+        let victim=null;if(ball.owner==='player')for(const e of enemies)if(e.active&&e.hp>0&&Math.abs(ball.x-e.x)<=width&&Math.abs(ball.z-(e.index-wave+1)*balance.combat.laneSpacing)<=balance.combat.lateralRadius){victim=e;break;}
+        if(ball.ammo===2&&victim)impact(true,victim);
+        else if(ball.y>=balance.shipY&&ball.vy>0)impact(ball.owner==='player'?Boolean(victim):Math.abs(ball.x-target)<=width&&Math.abs(ball.z)<=balance.combat.lateralRadius,victim||enemyShip);
+        else if(ball.ammo===2&&ball.x>balance.enemyX+settings.drift+width)endShot();
+        else if(Math.abs(ball.z)>config.width+balance.worldMargin||ball.x < -balance.worldMargin||ball.x>config.width+balance.worldMargin)endShot();
       }
     },
     snapshot(){return {lives:playerShip.hp,maxLives:playerShip.maxHp,enemyLives:enemyShip.hp,phase,round,wave,time,enemyX:enemyX(),score,result,attacker:attacker.index,ball:{...ball},aim:{...aim},playerShip:{...playerShip},enemyShip:{...enemyShip},enemyFleetHp:fleetHealth(),maxEnemyFleet,boss:isBoss(wave),ammoIndex,ammo:[...ammo],cooldowns:[...cooldowns],remaining,enemies:enemies.map(e=>({...e}))};}
@@ -110,12 +116,12 @@ export function drawNaval(p,m,{config,balance,art,quality,view}) {
   }
   const r=balance.render,meterWidth=config.width-r.mapSize-48;
   drawHealthBar(p,18,r.playerMeterY,meterWidth,7,m.lives,m.maxLives,config);drawHealthBar(p,18,r.fleetMeterY,meterWidth,7,m.enemyFleetHp,m.maxEnemyFleet,config);
-  p.font=art.hudFont;p.textAlign='left';p.fillStyle=a.inkColor;p.fillText(art.fleetLabel,18,r.playerMeterY-8);p.fillText(art.enemyFleetLabel,18,r.fleetMeterY-8);
+  p.font=art.hudFont;p.textAlign='left';p.fillStyle=v.foam;p.fillText(art.fleetLabel,18,r.playerMeterY-8);p.fillText(art.enemyFleetLabel,18,r.fleetMeterY-8);
   if(!full3d){
   const rows=quality.low?2:5;p.strokeStyle=palette.waveGlint;p.lineWidth=2;
   for(let row=0;row<rows;row++)for(let x=0;x<config.width;x+=a.waterWaveGap){const y=config.height*.42+row*24+Math.sin(m.time*a.waterWaveSpeed+x*.1)*a.waterWaveHeight;p.beginPath();p.moveTo(x,y);p.quadraticCurveTo(x+10,y+4,x+a.waterWaveGap/2,y);p.stroke();}
   drawVessel(p,m.playerShip,art.player,m,config,balance,1.65,false,105,config.height*.82);
-  for(const e of m.enemies)if(e.active){const x=220+(e.index-m.wave+1)*49+Math.sin(m.time+e.index)*m.settings.drift*.5,y=config.height*.5+e.z*4;drawVessel(p,e,e.boss?art.boss:art.enemy,m,config,balance,.65*balance.shipTypes[e.kind].scale,true,x,y);p.font=art.hudFont;p.fillStyle=a.creamColor;p.textAlign='center';p.fillText(art.enemyNames[e.index],x,y-67);}
+  for(const e of m.enemies)if(e.active){const x=220+(e.index-m.wave+1)*49+Math.sin(m.time+e.index)*m.settings.drift*.5,y=config.height*.5+e.z*4;drawVessel(p,e,e.boss?art.boss:art.enemies[e.kind],m,config,balance,.65*balance.shipTypes[e.kind].scale,true,x,y);p.font=art.hudFont;p.fillStyle=a.creamColor;p.textAlign='center';p.fillText(art.enemyNames[e.index],x,y-67);}
   p.save();p.transform(.48,-.425,0,.7,76,53);
 
   if(m.phase==='shot'){
@@ -130,6 +136,24 @@ export function drawNaval(p,m,{config,balance,art,quality,view}) {
   p.fillStyle=v.hpBack;p.globalAlpha=.85;p.fillRect(x,y,size,size);p.globalAlpha=1;p.strokeStyle=v.foam;p.lineWidth=1;p.strokeRect(x,y,size,size);
   oval(p,x+size/2,y+size-10,3,3,a.tealColor);
   for(const e of m.enemies)if(e.active)oval(p,x+size/2+(e.index-m.wave+1)*12,y+10+(e.x-balance.enemyX)*.4,3,e.boss?5:3,a.coralColor);
+  drawAimPanel(p,m,config,balance,art);
   if(m.blast.hit&&m.blast.life>0){p.strokeStyle=v.foam;p.lineWidth=3;const x=full3d?config.width/2:220,y=full3d?config.height/2:240;p.beginPath();p.moveTo(x-8,y-8);p.lineTo(x+8,y+8);p.moveTo(x+8,y-8);p.lineTo(x-8,y+8);p.stroke();}
 }
 export function startNaval(ctx){return runCanvasGame({...ctx,config:{...ctx.config,height:ctx.balance.render.height}},createNavalModel,drawNaval,createNavalView);}
+
+/** Compact 360° dial, allowed forward semicircle and independent degree rulers. */
+export function drawAimPanel(p,m,config,balance,art){
+  const r=balance.controls.dialRadius,x=r+12,y=config.height-r-26,a=m.aim.yaw*Math.PI/180,v=config.visuals;
+  p.save();p.direction='ltr';p.fillStyle=v.hpBack;p.globalAlpha=.85;p.beginPath();p.roundRect(5,config.height-94,config.width-10,88,10);p.fill();p.globalAlpha=1;
+  p.strokeStyle=v.smoke;p.lineWidth=2;p.beginPath();p.arc(x,y,r,0,TAU);p.stroke();p.strokeStyle=v.foam;p.lineWidth=4;p.beginPath();p.arc(x,y,r,Math.PI,TAU);p.stroke();
+  p.strokeStyle=v.hpWarn;p.lineWidth=2;p.beginPath();p.moveTo(x,y);p.lineTo(x+Math.sin(a)*r,y-Math.cos(a)*r);p.stroke();
+  p.font=art.hudFont;p.fillStyle=v.foam;p.textAlign='center';p.fillText('360°',x,y+r+15);
+  const left=x+r+18,right=config.width-18,span=right-left;
+  for(let i=0;i<=6;i++){const tx=left+span*i/6;p.beginPath();p.moveTo(tx,y-28);p.lineTo(tx,y-22);p.strokeStyle=v.foam;p.stroke();if(i%3===0){const degrees=balance.controls.minYaw+(balance.controls.maxYaw-balance.controls.minYaw)*i/6;p.fillText((degrees>0?'+':'')+degrees+'°',tx,y-33);}}
+  p.strokeStyle=v.foam;p.beginPath();p.moveTo(left,y-25);p.lineTo(right,y-25);p.stroke();
+  const at=left+(m.aim.yaw-balance.controls.minYaw)/(balance.controls.maxYaw-balance.controls.minYaw)*span;p.fillStyle=v.hpWarn;p.fillRect(at-2,y-29,4,9);
+  p.fillStyle=v.foam;p.textAlign='left';p.fillText(art.yawText||'',left,y-6);p.fillText(art.elevationText||'',left,y+14);
+  p.textAlign='center';p.strokeStyle=v.foam;p.beginPath();p.moveTo(left,y+26);p.lineTo(right,y+26);p.stroke();
+  for(let i=0;i<3;i++){const tx=left+span*i/2;p.beginPath();p.moveTo(tx,y+23);p.lineTo(tx,y+29);p.stroke();p.fillText(String(balance.minAngle+(balance.maxAngle-balance.minAngle)*i/2)+'°',tx,y+41);}
+  if(m.ammoIndex!==2){const elevation=left+(m.aim.angle-balance.minAngle)/(balance.maxAngle-balance.minAngle)*span;p.fillStyle=v.hpWarn;p.fillRect(elevation-2,y+22,4,9);}p.restore();
+}

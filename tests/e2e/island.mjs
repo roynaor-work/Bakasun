@@ -5,6 +5,7 @@ import path from 'node:path';
 import {tmpdir} from 'node:os';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import {checkActivity} from './island-activity.mjs';
+import {checkG2e} from './island-g2e.mjs';
 import {checkG2d} from './island-g2d.mjs';
 import {checkG2c} from './island-g2c.mjs';
 
@@ -55,7 +56,7 @@ async function checkViewport(width, height, label) {
   console.log(`${label}: gameplay ${width}x${height}`);
   const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1, hasTouch: width < 600 });
   // Keep the construction regression focused; activity has its own seeded flow.
-  await context.route('**/data/featureFlags.json',async route=>{const response=await route.fetch();const flags=await response.json();await route.fulfill({response,json:{...flags,events:false}});});
+  await context.route('**/data/featureFlags.json*',async route=>{const response=await route.fetch();const flags=await response.json();await route.fulfill({response,json:{...flags,events:false}});});
   const page = await context.newPage();
   page.setDefaultTimeout(60000);
   const errors = [], externalRequests = [], outsideIslandRequests = [], failedRequests = [];
@@ -447,7 +448,7 @@ async function checkCityViewport(width, height) {
   console.log(`city rules: ${width}x${height}`);
   const context = await browser.newContext({ viewport: { width, height }, hasTouch: true, deviceScaleFactor: 1 });
   // City limits are checked independently of the separately tested scheduler.
-  await context.route('**/data/featureFlags.json',async route=>{const response=await route.fetch();const flags=await response.json();await route.fulfill({response,json:{...flags,events:false}});});
+  await context.route('**/data/featureFlags.json*',async route=>{const response=await route.fetch();const flags=await response.json();await route.fulfill({response,json:{...flags,events:false}});});
   const page = await context.newPage(); page.setDefaultTimeout(60000);
   const errors = [], failedRequests = [], outsideRequests = [], screenshots = [], levels = [], assetRequests=[];
   let phase='initial';
@@ -607,6 +608,7 @@ async function checkCityViewport(width, height) {
 }
 
 try {
+  if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'g2e') reports.push(...await checkG2e({browser,target,directory}));
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'g2d') reports.push(...await checkG2d({browser,target,directory}));
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'g2c') reports.push(...await checkG2c({browser,target,directory}));
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'activity') reports.push(...await checkActivity({browser,target,directory}));

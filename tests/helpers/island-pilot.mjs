@@ -16,7 +16,7 @@ export function pilotInput(id,m,b,memory={}) {
   for(let j=0;j<8;j++) {
     v=Math.sqrt(b.gravity*d*d/(2*Math.cos(angle)**2*(d*Math.tan(angle)+b.muzzleRise)));
     const flight=(v*Math.sin(angle)+Math.sqrt((v*Math.sin(angle))**2+2*b.gravity*b.muzzleRise))/b.gravity;
-    d=b.enemyX+Math.sin(m.time+flight)*m.settings.drift-b.shipX;
+    d=b.enemyX+Math.sin((m.time+flight)*b.shipTypes[(m.wave-1)%m.settings.shipKinds].speed)*m.settings.drift-b.shipX;
   }
   memory.pressed=m.phase==='aim'&&!memory.pressed;
   return {angle:b.defaultAngle,power:(v-b.minSpeed)/(b.maxSpeed-b.minSpeed)*b.powerMaximum,firing:memory.pressed};

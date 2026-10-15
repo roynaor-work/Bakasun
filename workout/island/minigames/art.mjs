@@ -19,6 +19,8 @@ export function createAlienVisual(type,config,balance){
   for(let i=-1;i<=1;i+=2){oval(p,i*8,-10,6,8,palette.pupil);oval(p,i*8+2,-12,2,3,palette.white);}
   p.strokeStyle=palette.alienTrim;p.lineWidth=2;p.beginPath();p.arc(0,-3,5,0,Math.PI);p.stroke();
   for(let i=-1;i<=1;i++){oval(p,i*21,8,4,3,color);oval(p,i*21,7,2,1,palette.white);}
+  if(type===2){p.strokeStyle=color;p.lineWidth=4;p.beginPath();p.moveTo(-34,4);p.lineTo(-44,-13);p.lineTo(-21,-4);p.moveTo(34,4);p.lineTo(44,-13);p.lineTo(21,-4);p.stroke();}
+  for(let side=-1;side<=1;side+=2){p.strokeStyle=color;p.lineWidth=2;p.beginPath();p.moveTo(side*12,-22);p.quadraticCurveTo(side*24,-28,side*20,-35);p.stroke();oval(p,side*20,-35,3,3,palette.cockpitShine);}
   p.strokeStyle=color;p.lineWidth=3;p.beginPath();p.moveTo(0,-27);p.lineTo(5,-34);p.stroke();oval(p,5,-34,4,4,color);
   return c;
 }
@@ -45,8 +47,8 @@ export function createFireSiteVisual(kind,config){
     if(kind==='roof'){p.fillStyle=palette.chimney;p.fillRect(19,-71,11,26);}
   }return c;
 }
-export function createShipVisual(kind,config){
-  const a=config.visuals.palette,c=surface(132,126),p=c.getContext('2d'),color=kind==='player'?a.playerHull:kind==='boss'?a.bossHull:a.enemyHull;p.translate(66,76);
+export function createShipVisual(kind,config,variant={}){
+  const a=config.visuals.palette,c=surface(132,126),p=c.getContext('2d'),color=variant.hull||(kind==='player'?a.playerHull:kind==='boss'?a.bossHull:a.enemyHull);p.translate(66,76);if(variant.beam)p.scale(variant.beam*.85,variant.length*.72);
   function face(points,fill){p.fillStyle=fill;p.beginPath();for(let i=0;i<points.length;i++){if(i)p.lineTo(...points[i]);else p.moveTo(...points[i]);}p.closePath();p.fill();}
   oval(p,0,28,46,10,a.shadow);
   face([[-36,17],[0,-53],[40,10],[30,42],[-29,45]],a.hullShade);
@@ -74,6 +76,7 @@ export function createGameArt(id,config,balance){
     g.addColorStop(0,palette.spaceTop);g.addColorStop(.6,palette.spaceMiddle);g.addColorStop(1,palette.spaceBottom);p.fillStyle=g;p.fillRect(0,0,w,h);
     for(let i=0;i<3;i++){const r=p.createRadialGradient(70+i*125,150+i*83,0,70+i*125,150+i*83,140);r.addColorStop(0,i%2?palette.nebulaPurple:palette.nebulaTeal);r.addColorStop(1,palette.transparent);p.fillStyle=r;p.fillRect(0,0,w,h);}
     oval(p,315,325,80,80,v.planetColor);oval(p,332,310,73,74,palette.planetLight);oval(p,323,303,14,8,palette.crater);oval(p,350,340,20,12,palette.crater);
+    oval(p,65,90,24,24,palette.spaceMiddle);p.strokeStyle=palette.nebulaTeal;p.lineWidth=6;p.beginPath();p.ellipse(65,90,39,10,-.35,0,TAU);p.stroke();oval(p,242,55,9,9,v.planetColor);
     return {backdrop:c,aliens:balance.enemyTypes.map((_,i)=>createAlienVisual(i,config,balance)),player:createSpacecraftVisual(config)};
   }
   if(id==='fireRescue'){
@@ -88,7 +91,7 @@ export function createGameArt(id,config,balance){
   oval(p,290,69,28,28,palette.sun);for(let i=0;i<3;i++){oval(p,60+i*120,85+i*24,30,8,palette.cloud);}
   p.fillStyle=palette.distantIsland;p.beginPath();p.moveTo(0,balance.waterY);p.lineTo(50,balance.waterY-38);p.lineTo(110,balance.waterY);p.lineTo(235,balance.waterY);p.lineTo(280,balance.waterY-24);p.lineTo(w,balance.waterY);p.fill();
   const sea=p.createLinearGradient(0,balance.waterY,0,h);sea.addColorStop(0,palette.waterTop);sea.addColorStop(1,palette.waterBottom);p.fillStyle=sea;p.fillRect(0,balance.waterY,w,h-balance.waterY);
-  return {backdrop:c,player:createShipVisual('player',config),enemy:createShipVisual('enemy',config),boss:createShipVisual('boss',config)};
+  return {backdrop:c,player:createShipVisual('player',config),enemies:balance.shipTypes.map(type=>createShipVisual('enemy',config,type)),boss:createShipVisual('boss',config,balance.boss)};
 }
 export function drawHealthBar(p,x,y,width,height,value,max,config){
   const ratio=Math.max(0,Math.min(1,value/Math.max(1,max))),v=config.visuals;
@@ -121,4 +124,13 @@ export function drawCrew(p,x,y,time,config,firefighter=false,walking=false,aim=0
   oval(p,0,-44,8,10,a.skin);oval(p,-3,-46,1,1.5,a.pupil);oval(p,3,-46,1,1.5,a.pupil);
   if(firefighter){oval(p,0,-51,11,5,a.helmet);p.fillStyle=a.helmet;p.fillRect(-8,-54,16,7);}else{oval(p,0,-52,8,4,a.bark);}
   p.restore();
+}
+
+/** Ammunition icons are baked into small canvases once, with no asset requests. */
+export function createAmmoVisual(index,config){
+  const c=surface(44,28),p=c.getContext('2d'),a=config.visuals.palette;
+  const shell=(x,y,color)=>{p.fillStyle=color;p.beginPath();p.roundRect(x,y,10,20,[6,6,2,2]);p.fill();p.fillStyle=a.cannon;p.fillRect(x,y+15,10,3);};
+  if(index===2){p.fillStyle=a.cockpitShine;p.beginPath();p.ellipse(22,14,19,6,0,0,TAU);p.fill();p.fillStyle=a.cannon;p.fillRect(3,6,6,16);}
+  else {shell(index===1?11:17,4,index===3?a.healShell:a.gold);if(index===1)shell(24,1,a.ivory);if(index===3){p.fillStyle=a.ivory;p.fillRect(20,8,3,10);p.fillRect(17,11,9,3);}}
+  c.setAttribute('aria-hidden','true');return c;
 }

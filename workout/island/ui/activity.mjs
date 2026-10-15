@@ -1,3 +1,4 @@
+import {createAmmoVisual} from '../minigames/art.mjs';
 import {equipmentOffer} from '../activity/equipment.mjs';
 import {gameContext} from '../minigames/context.mjs';
 
@@ -110,7 +111,13 @@ export class ActivityInterface {
       for(const [key,min,max,value]of [['power',0,balance.powerMaximum,balance.defaultPower]]){
         const label=el('label','game-slider',this.t(key==='angle'?'minigame.aim':'minigame.force')),input=el('input');input.type='range';input.min=min;input.max=max;input.value=value;input.dataset.gameInput=key;label.append(input);controls.append(label);
       }
-      controls.append(control('fire',this.t('minigame.launch')));const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select',this.t(ammo.title));node.dataset.ammoIndex=i;node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
+      const angles=el('div','naval-angles');
+      for(const [key,min,max,value]of [['yaw',balance.controls.minYaw,balance.controls.maxYaw,balance.controls.defaultYaw],['angle',balance.minAngle,balance.maxAngle,balance.defaultAngle]]){
+        const label=el('label','game-slider',this.t(key==='yaw'?'minigame.yaw':'minigame.elevation')),output=el('output'),input=el('input');input.type='range';input.min=min;input.max=max;input.step=balance.controls.fineStep;input.value=value;input.dataset.gameInput=key;input.id='naval-'+key;output.htmlFor=input.id;output.dataset.gameValue=key;label.append(output,input);
+        const fine=el('div','angle-fine');for(const sign of [-1,1]){const b=button(this.t('minigame.fineAngle',{axis:this.t(key==='yaw'?'minigame.yaw':'minigame.elevation'),sign:sign<0?'−':'+'}),'fine-angle',()=>{});b.dataset.angleAxis=key;b.dataset.angleStep=sign*balance.controls.fineStep;b.textContent=(sign<0?'−':'+')+balance.controls.fineStep+'°';b.setAttribute('aria-label',this.t('minigame.fineAngle',{axis:this.t(key==='yaw'?'minigame.yaw':'minigame.elevation'),sign:sign<0?'−':'+'}));fine.append(b);}label.append(fine);angles.append(label);
+      }controls.prepend(angles);
+      const powerOutput=el('output');powerOutput.dataset.gameValue='power';controls.querySelector('[data-game-input=power]').parentElement.prepend(powerOutput);
+      controls.append(control('fire',this.t('minigame.launch')));const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select','');node.append(createAmmoVisual(i,this.data.config.minigames),el('span','ammo-copy',this.t(ammo.title)));node.dataset.ammoIndex=i;node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
       fleetMeters={};for(const [key,title]of [['player','minigame.fleet'],['enemy','minigame.enemyFleet']]){const label=el('label','game-gauge',this.t(title)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);fleetMeters[key]=meter;}turnLabel=el('p','game-turn');controls.append(turnLabel);
     }
     dialog.replaceChildren(header,status,stage,controls);
