@@ -1,3 +1,5 @@
+import { configureBuilding } from './registry.mjs';
+
 const FILES = ['config', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 
 /** Reads only local, bundled content. No CDN, analytics, account, or remote request. */
@@ -20,7 +22,7 @@ export async function loadData(base = new URL('../', import.meta.url), fetcher =
     const module = await import(moduleUrl.href);
     data.extensionInstallers.push(module.install || module.default);
   }
-  data.buildings = data.buildings.map(row => ({ ...row, ...data.config.buildings[row.balanceId || row.id], visual: { ...row.visual, ...data.config.buildings[row.balanceId || row.id]?.visual } }));
+  data.buildings = data.buildings.map(row => configureBuilding(row, data.config));
   data.metrics = data.metrics.map(row => ({ ...row, ...data.config.metrics[row.id] }));
   data.players = data.players.map(row => ({ ...data.config.playerDefaults, ...row }));
   data.tutorial.steps = data.tutorial.steps.map(step => ({ ...step, reward: data.config.tutorialRewards[step.id] || {}, target: data.config.tutorialPlacements[step.id] }));
