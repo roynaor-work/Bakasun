@@ -50,7 +50,7 @@ for(const [id,make]of Object.entries(models)) {
 test('G2b v3 to v4 adds only stage/star defaults, preserves the input, and survives reload',()=>{
   const f=fixture();eventCity(f);const old=JSON.parse(f.engine.exportJSON());old.version=3;delete old.minigameProgress;
   old.minigameLevels.alienDefense=3;old.highScores.alienDefense=1234;old.minigameWins.alienDefense=12;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,4);
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,5);
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key]);
   assert.deepEqual(old,before);
   for(const p of Object.values(r.state.minigameProgress))assert.deepEqual(p,{stage:1,stars:Array(10).fill(0)});
@@ -119,7 +119,7 @@ test('G2b fire really spreads and finite refill water can be exhausted; aliens a
   const fire=createFireModel({config:data.config.minigames,balance:data.config.minigames.fireRescue,level:5,power:1,random:seededRandom(12)});
   const active=fire.flames.filter(f=>f.active).length;for(let i=0;i<400&&!fire.result;i++)fire.update(.04,{});assert.ok(fire.flames.filter(f=>f.active).length>active);
   for(let i=0;i<10000&&!fire.result;i++)fire.update(.04,{firing:i%2===0,x:0,y:0});assert.ok(fire.reserve<data.config.minigames.fireRescue.levels[4].refillWater);
-  const alien=createAlienModel({config:data.config.minigames,balance:data.config.minigames.alienDefense,level:10,power:1.45,random:seededRandom(12)});assert.equal(new Set(alien.aliens.map(a=>a.kind)).size,3);
+  const alien=createAlienModel({config:data.config.minigames,balance:data.config.minigames.alienDefense,level:10,power:1.45,random:seededRandom(12)});assert.equal(new Set(alien.aliens.map(a=>a.kind)).size,data.config.minigames.alienDefense.levels[9].enemyKinds);
 });
 test('G2b all three star ratings use data thresholds and import keeps the best star in each stage',()=>{
   for(const [performance,stars]of [[0,1],[data.config.minigames.starThresholds[0],2],[data.config.minigames.starThresholds[1],3]]) {

@@ -1092,7 +1092,7 @@
       "formationY": 54,
       "columnSpacing": 56,
       "rowSpacing": 40,
-      "alienKinds": 3,
+      "alienKinds": 5,
       "alienRadius": 17,
       "shotRadius": 5,
       "shotSpeed": 460,
@@ -1109,9 +1109,11 @@
       "starCount": 32,
       "starSpeed": 7,
       "alienColors": [
-        "#91c75c",
-        "#ec9279",
-        "#a6a1c7"
+        "#65f5c2",
+        "#ffbd68",
+        "#b7a1ff",
+        "#ff8bbb",
+        "#69dcff"
       ],
       "levels": [
         {
@@ -1130,7 +1132,8 @@
           "winParts": 0,
           "enemyKinds": 1,
           "boss": false,
-          "bossLives": 9
+          "bossLives": 9,
+          "spawnBudget": 0
         },
         {
           "difficulty": 2,
@@ -1148,7 +1151,8 @@
           "winParts": 0,
           "enemyKinds": 1,
           "boss": false,
-          "bossLives": 10
+          "bossLives": 10,
+          "spawnBudget": 0
         },
         {
           "difficulty": 3,
@@ -1166,7 +1170,8 @@
           "winParts": 0,
           "enemyKinds": 2,
           "boss": false,
-          "bossLives": 11
+          "bossLives": 11,
+          "spawnBudget": 0
         },
         {
           "difficulty": 4,
@@ -1184,7 +1189,8 @@
           "winParts": 1,
           "enemyKinds": 2,
           "boss": false,
-          "bossLives": 12
+          "bossLives": 12,
+          "spawnBudget": 0
         },
         {
           "difficulty": 5,
@@ -1202,7 +1208,8 @@
           "winParts": 1,
           "enemyKinds": 3,
           "boss": true,
-          "bossLives": 13
+          "bossLives": 13,
+          "spawnBudget": 0
         },
         {
           "difficulty": 6,
@@ -1220,7 +1227,8 @@
           "winParts": 1,
           "enemyKinds": 3,
           "boss": false,
-          "bossLives": 14
+          "bossLives": 14,
+          "spawnBudget": 2
         },
         {
           "difficulty": 7,
@@ -1236,9 +1244,10 @@
           "points": 22,
           "winMoney": 102,
           "winParts": 2,
-          "enemyKinds": 3,
+          "enemyKinds": 4,
           "boss": false,
-          "bossLives": 15
+          "bossLives": 15,
+          "spawnBudget": 2
         },
         {
           "difficulty": 8,
@@ -1254,9 +1263,10 @@
           "points": 24,
           "winMoney": 114,
           "winParts": 2,
-          "enemyKinds": 3,
+          "enemyKinds": 4,
           "boss": false,
-          "bossLives": 16
+          "bossLives": 16,
+          "spawnBudget": 2
         },
         {
           "difficulty": 9,
@@ -1272,9 +1282,10 @@
           "points": 26,
           "winMoney": 126,
           "winParts": 2,
-          "enemyKinds": 3,
+          "enemyKinds": 5,
           "boss": false,
-          "bossLives": 17
+          "bossLives": 17,
+          "spawnBudget": 2
         },
         {
           "difficulty": 10,
@@ -1290,34 +1301,189 @@
           "points": 28,
           "winMoney": 138,
           "winParts": 3,
-          "enemyKinds": 3,
+          "enemyKinds": 5,
           "boss": true,
-          "bossLives": 18
+          "bossLives": 18,
+          "spawnBudget": 2
         }
       ],
-      "maxAliens": 16,
+      "maxAliens": 48,
       "maxShots": 64,
       "maxBolts": 64,
       "maxSparks": 128,
       "blinkOpacity": 0.45,
       "enemyTypes": [
         {
-          "hp": 1,
-          "speed": 1,
-          "radius": 1
-        },
-        {
+          "id": "scout",
           "hp": 1,
           "speed": 1.12,
-          "radius": 0.85
+          "radius": 0.85,
+          "pattern": "zigzag",
+          "amplitude": 6,
+          "frequency": 2.6
         },
         {
+          "id": "heavy",
           "hp": 2,
-          "speed": 0.92,
-          "radius": 1.1
+          "speed": 0.72,
+          "radius": 1.18,
+          "pattern": "circle",
+          "amplitude": 4,
+          "frequency": 1.4
+        },
+        {
+          "id": "weaver",
+          "hp": 2,
+          "speed": 0.95,
+          "radius": 1,
+          "pattern": "dive",
+          "amplitude": 8,
+          "frequency": 2
+        },
+        {
+          "id": "splitter",
+          "hp": 2,
+          "speed": 0.9,
+          "radius": 1,
+          "pattern": "zigzag",
+          "amplitude": 7,
+          "frequency": 2,
+          "children": 2
+        },
+        {
+          "id": "carrier",
+          "hp": 3,
+          "speed": 0.65,
+          "radius": 1.25,
+          "pattern": "circle",
+          "amplitude": 5,
+          "frequency": 1,
+          "launchSeconds": 7,
+          "launchLimit": 2
         }
       ],
-      "bossScale": 1.8
+      "bossScale": 1.8,
+      "pickups": {
+        "everyKills": 2,
+        "speed": 125,
+        "radius": 26,
+        "magnetRadius": 80,
+        "magnetSpeed": 260,
+        "seconds": 8,
+        "max": 16,
+        "kinds": [
+          "spread",
+          "laser",
+          "rapid",
+          "shield"
+        ],
+        "colors": [
+          "#ffbd68",
+          "#69dcff",
+          "#ff8bbb",
+          "#65f5c2"
+        ],
+        "spreadSpeed": 110,
+        "rapidMultiplier": 1.8,
+        "laserPierce": 4,
+        "childScale": 0.6,
+        "childSpeed": 1.3
+      },
+      "nova": {
+        "charges": 2,
+        "radius": 112,
+        "damage": 4,
+        "seconds": 0.75,
+        "color": "#d5fbff",
+        "throwSeconds": 0.28,
+        "arcRise": 60
+      },
+      "hpPerStage": 0.06,
+      "equipment": {
+        "damage": {
+          "title": "equipment.damage",
+          "base": 1,
+          "levels": [
+            {
+              "value": 1.25,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 1.5,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 1.8,
+              "cost": 130,
+              "stars": 8
+            }
+          ],
+          "description": "equipment.damage.hint"
+        },
+        "rate": {
+          "title": "equipment.rate",
+          "base": 1,
+          "levels": [
+            {
+              "value": 1.15,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 1.3,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 1.5,
+              "cost": 130,
+              "stars": 8
+            }
+          ],
+          "description": "equipment.rate.hint"
+        },
+        "shield": {
+          "title": "equipment.shield",
+          "base": 0,
+          "levels": [
+            {
+              "value": 1,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 2,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 3,
+              "cost": 130,
+              "stars": 8
+            }
+          ],
+          "description": "equipment.shield.hint"
+        },
+        "weapon": {
+          "title": "equipment.weapon",
+          "base": 0,
+          "levels": [
+            {
+              "value": 1,
+              "cost": 65,
+              "stars": 0
+            },
+            {
+              "value": 2,
+              "cost": 120,
+              "stars": 6
+            }
+          ],
+          "description": "equipment.weapon.hint"
+        }
+      }
     },
     "fireRescue": {
       "flameColumns": 3,
@@ -1354,7 +1520,8 @@
           "spreadCount": 0,
           "refillWater": 120,
           "parSeconds": 7.2,
-          "parWater": 60
+          "parWater": 60,
+          "fireKinds": 1
         },
         {
           "difficulty": 2,
@@ -1369,7 +1536,8 @@
           "spreadCount": 0,
           "refillWater": 110,
           "parSeconds": 9.0,
-          "parWater": 75
+          "parWater": 75,
+          "fireKinds": 1
         },
         {
           "difficulty": 3,
@@ -1384,7 +1552,8 @@
           "spreadCount": 3,
           "refillWater": 100,
           "parSeconds": 16.2,
-          "parWater": 135
+          "parWater": 135,
+          "fireKinds": 1
         },
         {
           "difficulty": 4,
@@ -1399,7 +1568,8 @@
           "spreadCount": 2,
           "refillWater": 90,
           "parSeconds": 16.2,
-          "parWater": 135
+          "parWater": 135,
+          "fireKinds": 2
         },
         {
           "difficulty": 5,
@@ -1414,7 +1584,8 @@
           "spreadCount": 1,
           "refillWater": 80,
           "parSeconds": 16.2,
-          "parWater": 135
+          "parWater": 135,
+          "fireKinds": 2
         },
         {
           "difficulty": 6,
@@ -1429,7 +1600,8 @@
           "spreadCount": 1,
           "refillWater": 70,
           "parSeconds": 16.2,
-          "parWater": 135
+          "parWater": 135,
+          "fireKinds": 2
         },
         {
           "difficulty": 7,
@@ -1444,7 +1616,8 @@
           "spreadCount": 1,
           "refillWater": 60,
           "parSeconds": 16.2,
-          "parWater": 135
+          "parWater": 135,
+          "fireKinds": 3
         },
         {
           "difficulty": 8,
@@ -1459,7 +1632,8 @@
           "spreadCount": 1,
           "refillWater": 50,
           "parSeconds": 16.2,
-          "parWater": 135
+          "parWater": 135,
+          "fireKinds": 3
         },
         {
           "difficulty": 9,
@@ -1474,7 +1648,8 @@
           "spreadCount": 1,
           "refillWater": 40,
           "parSeconds": 16.2,
-          "parWater": 135
+          "parWater": 135,
+          "fireKinds": 3
         },
         {
           "difficulty": 10,
@@ -1489,9 +1664,156 @@
           "spreadCount": 1,
           "refillWater": 30,
           "parSeconds": 16.2,
-          "parWater": 135
+          "parWater": 135,
+          "fireKinds": 3
         }
-      ]
+      ],
+      "sites": [
+        {
+          "kind": "home",
+          "x": 74,
+          "y": 153
+        },
+        {
+          "kind": "roof",
+          "x": 182,
+          "y": 128
+        },
+        {
+          "kind": "tree",
+          "x": 286,
+          "y": 165
+        },
+        {
+          "kind": "car",
+          "x": 75,
+          "y": 257
+        },
+        {
+          "kind": "warehouse",
+          "x": 180,
+          "y": 254
+        },
+        {
+          "kind": "tree",
+          "x": 291,
+          "y": 273
+        },
+        {
+          "kind": "home",
+          "x": 76,
+          "y": 354
+        },
+        {
+          "kind": "roof",
+          "x": 185,
+          "y": 353
+        },
+        {
+          "kind": "car",
+          "x": 289,
+          "y": 367
+        }
+      ],
+      "fireTypes": [
+        {
+          "id": "normal",
+          "resistance": 1,
+          "growth": 1,
+          "color": "#ff743d"
+        },
+        {
+          "id": "stubborn",
+          "resistance": 1.2,
+          "growth": 1,
+          "color": "#ffb32f"
+        },
+        {
+          "id": "spreading",
+          "resistance": 0.9,
+          "growth": 1.65,
+          "color": "#ff586e"
+        }
+      ],
+      "range": 355,
+      "chargeSeconds": 1.2,
+      "chargeBoost": 0.4,
+      "rescue": {
+        "x": 303,
+        "y": 412,
+        "radius": 32,
+        "seconds": 1.2,
+        "points": 35,
+        "waterReward": 14
+      },
+      "equipment": {
+        "pressure": {
+          "title": "equipment.pressure",
+          "base": 1,
+          "levels": [
+            {
+              "value": 1.15,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 1.3,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 1.5,
+              "cost": 130,
+              "stars": 8
+            }
+          ],
+          "description": "equipment.pressure.hint"
+        },
+        "range": {
+          "title": "equipment.range",
+          "base": 1,
+          "levels": [
+            {
+              "value": 1.1,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 1.2,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 1.3,
+              "cost": 130,
+              "stars": 8
+            }
+          ],
+          "description": "equipment.range.hint"
+        },
+        "tank": {
+          "title": "equipment.tank",
+          "base": 1,
+          "levels": [
+            {
+              "value": 1.2,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 1.4,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 1.6,
+              "cost": 130,
+              "stars": 8
+            }
+          ],
+          "description": "equipment.tank.hint"
+        }
+      }
     },
     "navalDuel": {
       "shipX": 60,
@@ -1667,7 +1989,159 @@
           "damage": 1.25,
           "scale": 0.85
         }
-      ]
+      ],
+      "boss": {
+        "everyStages": 5,
+        "hp": 1.4,
+        "damage": 1.15,
+        "scale": 1.2
+      },
+      "enemySalvoStage": 7,
+      "enemySalvoShots": 2,
+      "ammo": [
+        {
+          "id": "normal",
+          "title": "ammo.normal",
+          "damage": 1,
+          "width": 1,
+          "charges": 0
+        },
+        {
+          "id": "double",
+          "title": "ammo.double",
+          "damage": 1.7,
+          "width": 1,
+          "charges": 3
+        },
+        {
+          "id": "torpedo",
+          "title": "ammo.torpedo",
+          "damage": 1.4,
+          "width": 1.3,
+          "charges": 2
+        },
+        {
+          "id": "absorb",
+          "title": "ammo.absorb",
+          "damage": 0.9,
+          "width": 1,
+          "charges": 2,
+          "heal": 1.5
+        }
+      ],
+      "equipment": {
+        "shield": {
+          "title": "equipment.shield",
+          "base": 0,
+          "levels": [
+            {
+              "value": 1,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 2,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 3,
+              "cost": 130,
+              "stars": 8
+            }
+          ],
+          "description": "equipment.shield.hint"
+        },
+        "hull": {
+          "title": "equipment.hull",
+          "base": 1,
+          "levels": [
+            {
+              "value": 1.15,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 1.3,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 1.5,
+              "cost": 130,
+              "stars": 8
+            }
+          ],
+          "description": "equipment.hull.hint"
+        },
+        "rate": {
+          "title": "equipment.rate",
+          "base": 1,
+          "levels": [
+            {
+              "value": 1.2,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 1.4,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 1.6,
+              "cost": 130,
+              "stars": 8
+            }
+          ],
+          "description": "equipment.rate.hint"
+        },
+        "damage": {
+          "title": "equipment.damage",
+          "base": 1,
+          "levels": [
+            {
+              "value": 1.2,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 1.4,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 1.65,
+              "cost": 130,
+              "stars": 8
+            }
+          ],
+          "description": "equipment.damage.hint"
+        },
+        "ammo": {
+          "title": "equipment.ammo",
+          "base": 0,
+          "levels": [
+            {
+              "value": 1,
+              "cost": 55,
+              "stars": 0
+            },
+            {
+              "value": 2,
+              "cost": 95,
+              "stars": 4
+            },
+            {
+              "value": 3,
+              "cost": 140,
+              "stars": 9
+            }
+          ],
+          "description": "equipment.ammo.hint"
+        }
+      },
+      "salvoDamageScale": 0.4
     },
     "art": {
       "starSize": 2,
@@ -1753,7 +2227,132 @@
         "stars": 18,
         "upgradeLevel": 3
       }
-    ]
+    ],
+    "visuals": {
+      "stars": 70,
+      "nebulaColor": "#39447f",
+      "planetColor": "#426b96",
+      "hudColor": "#112f48",
+      "waterDeep": "#168dba",
+      "foam": "#ddfaff",
+      "fireSky": "#accfe4",
+      "street": "#97a6aa",
+      "ground": "#b4d18a",
+      "roof": "#536b91",
+      "smoke": "#68798b",
+      "flameCore": "#fff5bd",
+      "hpBack": "#183e56",
+      "hpGood": "#60e8a9",
+      "hpWarn": "#ffbd68",
+      "hpDanger": "#ff8694",
+      "wakeSegments": 6,
+      "flameLobes": 3,
+      "smokePuffs": 4,
+      "waterDrops": 12,
+      "trailSegments": 8,
+      "recoilSeconds": 0.24,
+      "blastSeconds": 0.6,
+      "palette": {
+        "halo": "#ffffff16",
+        "armor": "#59758d",
+        "pearl": "#efffff",
+        "alienTrim": "#24566e",
+        "eyeGlass": "#e9ffff",
+        "pupil": "#102d4e",
+        "white": "#fff",
+        "shipPearl": "#b5fbff",
+        "shipBlue": "#367bcd",
+        "gold": "#ffce77",
+        "cockpit": "#244575",
+        "cockpitShine": "#a3ffff",
+        "ivory": "#fff8e7",
+        "shadow": "#294c6028",
+        "bark": "#8b6452",
+        "leafDark": "#438b6e",
+        "leaf": "#52a477",
+        "leafLight": "#80c488",
+        "carBody": "#e0ac4e",
+        "carGlass": "#d7f7ff",
+        "glassFrame": "#4287a1",
+        "tire": "#34485a",
+        "wheel": "#b5ced8",
+        "warehouse": "#7e9cba",
+        "plaster": "#f5d5aa",
+        "roof": "#536b91",
+        "tile": "#d37e76",
+        "window": "#638ba0",
+        "door": "#a88476",
+        "glass": "#e8faff",
+        "plasterEdge": "#fff4d0",
+        "chimney": "#f4b493",
+        "playerHull": "#45d6cb",
+        "bossHull": "#aa8dff",
+        "enemyHull": "#ff9b85",
+        "waterHalo": "#ffffff24",
+        "hullShade": "#31597b",
+        "deck": "#f8e1ba",
+        "cabin": "#577e98",
+        "cabinGlass": "#d9ffff",
+        "mast": "#344e72",
+        "cannon": "#31516e",
+        "turret": "#527697",
+        "foam": "#eaffff",
+        "spaceTop": "#0d193c",
+        "spaceMiddle": "#233462",
+        "spaceBottom": "#4a5482",
+        "nebulaPurple": "#7665a533",
+        "nebulaTeal": "#32a3b92a",
+        "transparent": "#23346200",
+        "planetLight": "#577d9c",
+        "crater": "#486b91",
+        "fireSkyTop": "#86b7d9",
+        "fireSkyMiddle": "#dce6d0",
+        "fireSkyBottom": "#c6d9b2",
+        "skyline": "#6f94a044",
+        "roadMark": "#edf4db",
+        "seaSkyTop": "#6eb9df",
+        "seaSkyMiddle": "#d6edf0",
+        "seaSkyBottom": "#75cee0",
+        "sun": "#fff1c3",
+        "cloud": "#f5fcff9a",
+        "distantIsland": "#75a8b0",
+        "waterTop": "#32b5d3",
+        "waterBottom": "#176ca3",
+        "enemyGlow": "#ff8bbb44",
+        "enemyCore": "#ffc5e3",
+        "novaWash": "#e5ffff25",
+        "exhaust": "#70eaff77",
+        "exhaustCore": "#fff4be",
+        "shieldGlow": "#8bffe7",
+        "cooled": "#7de9ce88",
+        "embers": "#ffe0a0",
+        "uniform": "#225d80",
+        "skin": "#f8d3af",
+        "helmet": "#ffcb5b",
+        "rescueRing": "#fff6cc",
+        "rescueBadge": "#53bfa2",
+        "stream": "#86e7ff99",
+        "streamSpray": "#e0fbff",
+        "hose": "#476d8d",
+        "nozzle": "#f4d192",
+        "nozzleEdge": "#eefbff",
+        "chargeGlow": "#ffe8a3",
+        "muzzle": "#ffcd7a",
+        "muzzleCore": "#fff4cd",
+        "waveGlint": "#c7f8fc44",
+        "trail": "#ffd497",
+        "healShell": "#b2ffdc",
+        "shell": "#fff0c4",
+        "doubleShell": "#ffd49c",
+        "blast": "#fff1b8",
+        "aim": "#fff9d6aa"
+      },
+      "sparksLow": 1,
+      "sparksHigh": 3,
+      "hudFont": "bold 13px sans-serif",
+      "waterArcRise": 35,
+      "chargeWidthBoost": 0.3
+    }
   },
   "minigameLevels": {
     "alienDefense": [

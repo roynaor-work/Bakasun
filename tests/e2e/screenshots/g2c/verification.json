@@ -1,0 +1,40 @@
+{
+  "base": "80d5c9a666ffab05429dbc28f6a368f5d765cafd",
+  "node": {
+    "command": "node --test tests/*.mjs",
+    "tests": 1105,
+    "pass": 1067,
+    "skipped": 38,
+    "fail": 0,
+    "newG2cTests": 43
+  },
+  "touch": {
+    "command": "ISLAND_ONLY=g2c node tests/e2e/island.mjs",
+    "viewports": [
+      "360x740",
+      "390x844"
+    ],
+    "passed": true
+  },
+  "fullE2e": {
+    "allSelectorsPassed": true,
+    "initialFailure": "Existing G1d reset button height 44px, reproduced using unchanged main stylesheet.",
+    "fix": "danger-button min-height 56px; reset behavior unchanged.",
+    "completedInDefault": [
+      "g2c",
+      "activity (360/390/1440)",
+      "city (360/390)"
+    ],
+    "rerunAfterFix": [
+      "desktop",
+      "phone",
+      "layout (360/390/412/844 landscape)"
+    ],
+    "g1dReset360And390": true
+  },
+  "physicalFps": {
+    "tested": false,
+    "reason": "Cloud Chromium uses SwiftShader; no physical medium/low-end phones available.",
+    "nextCheckpoint": "After PR review and before merge/release acceptance on physical phones."
+  }
+}

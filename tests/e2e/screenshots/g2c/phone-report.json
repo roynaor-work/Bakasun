@@ -1,0 +1,39 @@
+{
+  "browser": "151.0.7922.173",
+  "environment": "Desktop Chromium with ANGLE/SwiftShader; viewport checks, not a physical Android 10 device",
+  "deploymentScope": "Private server exposes only workout/island/; all requests are audited against that folder",
+  "results": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "tutorialSteps": 5,
+      "buildingTypes": 17,
+      "screenshots": [
+        "island-phone-tutorial.png",
+        "island-phone-green.png",
+        "island-phone-red.png",
+        "island-phone-info.png",
+        "island-phone-landscape.png"
+      ],
+      "performance": {
+        "triangles": 28728,
+        "calls": 81,
+        "fps": 7,
+        "citizens": 4,
+        "pixelRatio": 1,
+        "quality": "low",
+        "avatarLoaded": true,
+        "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "rafFps": 6.8856974227818215,
+        "p95FrameMs": 233.30000000000018,
+        "sampleMs": 3049.8
+      },
+      "errors": [],
+      "externalRequests": [],
+      "outsideIslandRequests": [],
+      "failedRequests": []
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import {equipmentOffer} from './equipment.mjs';
 import {eventEligible} from './eligibility.mjs';
 import {seededRandom} from '../minigames/context.mjs';
 import {buildingCenter,levelFactor} from '../engine/metrics.mjs';
@@ -93,7 +94,12 @@ export function createActivity(engine,{now=Date.now,random=seededRandom(now()),b
       if(state.money<config.repairCost)return {ok:false,reason:'reason.money'};
       state.money-=config.repairCost;delete state.events.repairs[id];save();return {ok:true};
     },
-    upgrade(gameId) {
+    upgrade(gameId,trackId) {
+      if(engine.isMinigameActive())return {ok:false,reason:'reason.gameBusy'};
+      if(trackId){
+        const offer=equipmentOffer(state,data,gameId,trackId);if(!offer.ok)return offer;
+        state.money-=offer.cost;state.minigameEquipment[gameId][trackId]=offer.rank;save();return {ok:true};
+      }
       const level=state.minigameLevels[gameId],next=data.config.minigameLevels[gameId]?.[level];
       if(!next)return {ok:false,reason:'reason.invalid'};
       if(state.money<next.cost)return {ok:false,reason:'reason.money'};

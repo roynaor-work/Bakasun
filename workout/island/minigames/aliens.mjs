@@ -1,100 +1,122 @@
-import { runCanvasGame } from './canvas-session.mjs';
+import {runCanvasGame} from './canvas-session.mjs';
 import {createPool,releaseAt} from './pool.mjs';
+import {oval,drawHealthBar} from './art.mjs';
+const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 
-export function createAlienModel({ config, balance, level, bonuses = {}, random, power=1 }) {
-  const settings = { ...balance.levels[level-1] };
-  const player = { x:config.width/2, y:config.height-balance.playerBottom };
-  const aliens=[], shots=[], bolts=[], sparks=[];
-  const alienPool=createPool(balance.maxAliens),shotPool=createPool(balance.maxShots),boltPool=createPool(balance.maxBolts),sparkPool=createPool(balance.maxSparks);
-  let score=0, lives=Math.ceil(settings.lives*power)+(bonuses.shield||0), wave=1, shotTime=0, boltTime=0, direction=1, invulnerable=0, nextWave=0, time=0, fired=0, hits=0, result;
-  function formation() {
-    direction=random()<.5?-1:1;
-    for(let row=0;row<settings.rows;row++) for(let column=0;column<settings.columns;column++) {
-      const alien=alienPool.take(balance.formationX+column*balance.columnSpacing,balance.formationY+row*balance.rowSpacing,0,0,0,(row+column)%(settings.enemyKinds||1));
-      if(alien){const type=balance.enemyTypes[alien.kind];Object.assign(alien,{hp:type.hp,speed:type.speed,radius:balance.alienRadius*type.radius,boss:false});aliens.push(alien);}
-    }
-    if(settings.boss&&wave===settings.waves){const boss=alienPool.take(config.width/2,balance.formationY/2,0,0,0,0);if(boss){Object.assign(boss,{hp:settings.bossLives,speed:1,radius:balance.alienRadius*balance.bossScale,boss:true});aliens.push(boss);}}
+/** One pooled entity factory for all enemy variants; geometry lives in art.mjs. */
+export function createAlienEntity(pool,balance,x,y,kind,level,phase=0,child=false,bossHp=0) {
+  const a=pool.take(x,y,0,0,0,kind);if(!a)return null;
+  const type=balance.enemyTypes[kind],scale=child?balance.pickups.childScale:bossHp?balance.bossScale:1;
+  a.hp=bossHp||type.hp*(child?1:1+(level-1)*balance.hpPerStage);a.maxHp=a.hp;
+  a.speed=type.speed*(child?balance.pickups.childSpeed:1);a.radius=balance.alienRadius*type.radius*scale;
+  a.boss=bossHp>0;a.child=child;a.scale=scale;a.baseX=x;a.baseY=y;a.age=0;a.phase=phase;a.launchTime=type.launchSeconds||0;a.launched=0;
+  a.reward=child?0:1;return a;
+}
+export function createAlienModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY}) {
+  const settings={...balance.levels[level-1]},player={x:config.width/2,y:config.height-balance.playerBottom};
+  const aliens=[],shots=[],bolts=[],sparks=[],pickups=[];
+  const alienPool=createPool(balance.maxAliens),shotPool=createPool(balance.maxShots),boltPool=createPool(balance.maxBolts),sparkPool=createPool(balance.maxSparks),pickupPool=createPool(balance.pickups.max);
+  const maxLives=Math.ceil(settings.lives*power)+(bonuses.shield||0)+(equipment.shield||0),damage=equipment.damage||1,rate=equipment.rate||1;
+  const nova={x:config.width/2,y:balance.formationY+balance.rowSpacing,life:0,flight:0,fromX:0,fromY:0,radius:balance.nova.radius};
+  const novaAim={x:nova.x,y:nova.y};
+  let score=0,lives=maxLives,wave=1,shotTime=0,boltTime=0,direction=1,invulnerable=0,nextWave=0,time=0,fired=0,hits=0,result,kills=0,dropSerial=0,powerup=-1,powerTime=0,novaCharges=balance.nova.charges,novaPressed=false,spawned=0,serial=0;
+  const status={score:0,lives,wave,waves:settings.waves,nova:novaCharges};
+  function spawn(x,y,kind,child=false,bossHp=0){const a=createAlienEntity(alienPool,balance,x,y,kind,level,random()*TAU,child,bossHp);if(a){a.id=++serial;aliens.push(a);}return a;}
+  function formation(){
+    direction=random()<.5?-1:1;spawned=0;
+    for(let row=0;row<settings.rows;row++)for(let col=0;col<settings.columns;col++)spawn(balance.formationX+col*balance.columnSpacing,balance.formationY+row*balance.rowSpacing,(row+col)%settings.enemyKinds);
+    if(settings.boss&&wave===settings.waves)spawn(config.width/2,balance.formationY/2,4,false,settings.bossLives);
   }
-  function burst(x,y) {
-    for(let i=0;i<balance.sparkCount;i++) {const angle=random()*Math.PI*2,spark=sparkPool.take(x,y,Math.cos(angle)*balance.sparkSpeed,Math.sin(angle)*balance.sparkSpeed,balance.sparkSeconds);if(spark)sparks.push(spark);}
+  function burst(x,y){for(let i=0;i<balance.sparkCount;i++){const angle=random()*TAU,s=sparkPool.take(x,y,Math.cos(angle)*balance.sparkSpeed,Math.sin(angle)*balance.sparkSpeed,balance.sparkSeconds);if(s)sparks.push(s);}}
+  function destroy(i,split=true){
+    const a=aliens[i],x=a.x,y=a.y,type=balance.enemyTypes[a.kind],children=split&&!a.child&&!a.boss?(type.children||0):0;
+    score+=a.reward*settings.points;kills+=a.reward;burst(x,y);
+    if(a.reward&&kills%balance.pickups.everyKills===0){const d=pickupPool.take(x,y,0,balance.pickups.speed,0,dropSerial++%balance.pickups.kinds.length);if(d)pickups.push(d);}
+    releaseAt(aliens,i,alienPool);
+    for(let n=0;n<children;n++)spawn(x+(n-.5)*balance.alienRadius,y,0,true);
   }
-  function finish(outcome) { result={outcome,score,performance:.65*lives/(Math.ceil(settings.lives*power)+(bonuses.shield||0))+.35*hits/Math.max(1,fired)}; }
+  function fireShot(vx,kind){const s=shotPool.take(player.x,player.y-balance.playerRadius,vx,-balance.shotSpeed,0,kind);if(s){s.hp=kind===1?balance.pickups.laserPierce:1;s.lastHit=-1;s.hitLo=s.hitHi=0;shots.push(s);fired++;}}
+  function finish(outcome){result={outcome,score,performance:.65*lives/maxLives+.35*Math.min(1,hits/Math.max(1,fired))};}
   formation();
-  return {
-    settings,player,aliens,shots,bolts,sparks,
-    get score(){return score;},get lives(){return lives;},get wave(){return wave;},get result(){return result;},get time(){return time;},get invulnerable(){return invulnerable;},
-    update(dt,input={}) {
-      if(result || dt<=0) return;
-      dt=Math.min(dt,config.maxFrameSeconds);time+=dt;invulnerable=Math.max(0,invulnerable-dt);
+  const model={settings,player,aliens,shots,bolts,sparks,pickups,nova,novaAim,maxLives,statusId:'minigame.alienStatus',
+    get score(){return score;},get lives(){return lives;},get wave(){return wave;},get result(){return result;},get time(){return time;},get invulnerable(){return invulnerable;},get powerup(){return powerup;},get powerTime(){return powerTime;},get novaCharges(){return novaCharges;},
+    statusValues(){status.score=score;status.lives=lives;status.wave=wave;status.nova=novaCharges;return status;},
+    update(dt,input=EMPTY){
+      if(result||dt<=0)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;invulnerable=Math.max(0,invulnerable-dt);nova.life=Math.max(0,nova.life-dt);
+      powerTime=Math.max(0,powerTime-dt);if(!powerTime)powerup=-1;
       const axis=Number(Boolean(input.right))-Number(Boolean(input.left));
-      if(axis) player.x+=axis*balance.playerSpeed*dt;
-      else if(Number.isFinite(input.x)) player.x+=(Math.max(-balance.playerSpeed*dt,Math.min(balance.playerSpeed*dt,input.x-player.x)));
+      if(axis)player.x+=axis*balance.playerSpeed*dt;
+      else if(Number.isFinite(input.x))player.x+=Math.max(-balance.playerSpeed*dt,Math.min(balance.playerSpeed*dt,input.x-player.x));
       player.x=Math.max(balance.playerRadius,Math.min(config.width-balance.playerRadius,player.x));
-      shotTime-=dt;
-      if(input.firing && shotTime<=0) {const shot=shotPool.take(player.x,player.y-balance.playerRadius);if(shot){shots.push(shot);fired++;}shotTime=settings.shotSeconds/(power+(bonuses.fireRate||0));}
-      if(!aliens.length) {
-        nextWave+=dt;
-        if(nextWave>=balance.wavePauseSeconds) {
-          if(wave>=settings.waves) {finish('win');return;}
-          wave++;nextWave=0;while(bolts.length)releaseAt(bolts,bolts.length-1,boltPool);while(shots.length)releaseAt(shots,shots.length-1,shotPool);formation();
+      if(Number.isFinite(input.x)&&Number.isFinite(input.y)&&input.y<player.y-balance.playerRadius){novaAim.x=input.x;novaAim.y=input.y;}
+      if(nova.flight>0){
+        nova.flight=Math.max(0,nova.flight-dt);
+        if(nova.flight===0){
+          nova.life=balance.nova.seconds;
+          for(let i=aliens.length-1;i>=0;i--){const a=aliens[i];if(Math.hypot(a.x-nova.x,a.y-nova.y)<=nova.radius+a.radius){a.hp-=balance.nova.damage*damage;if(a.hp<=0)destroy(i,false);else burst(a.x,a.y);}}
+          for(let i=bolts.length-1;i>=0;i--)if(Math.hypot(bolts[i].x-nova.x,bolts[i].y-nova.y)<=nova.radius)releaseAt(bolts,i,boltPool);
         }
       }
-      const speed=settings.alienSpeed+(wave-1)*balance.speedPerWave;
-      for(const alien of aliens) alien.x+=direction*speed*alien.speed*dt;
-      let edge=false;for(const a of aliens)if(a.x<a.radius||a.x>config.width-a.radius){edge=true;break;}
-      if(edge) {
-        direction*=-1;
-        for(const alien of aliens){alien.x=Math.max(alien.radius,Math.min(config.width-alien.radius,alien.x));alien.y+=settings.drop;}
+      if(input.nova&&!novaPressed&&novaCharges>0&&nova.flight===0&&nova.life===0){
+        nova.x=novaAim.x;nova.y=novaAim.y;nova.fromX=player.x;nova.fromY=player.y;novaCharges--;nova.flight=balance.nova.throwSeconds;
+      }novaPressed=Boolean(input.nova);
+      shotTime-=dt;
+      if(input.firing&&shotTime<=0){
+        const spread=powerup===0||(powerup!==1&&(equipment.weapon||0)>=1),laser=powerup===1||(powerup!==0&&(equipment.weapon||0)>=2);
+        fireShot(0,laser?1:0);if(spread){fireShot(-balance.pickups.spreadSpeed,0);fireShot(balance.pickups.spreadSpeed,0);}
+        shotTime=settings.shotSeconds/(power*rate+(bonuses.fireRate||0))/(powerup===2?balance.pickups.rapidMultiplier:1);
       }
+      if(!aliens.length){nextWave+=dt;if(nextWave>=balance.wavePauseSeconds){if(wave>=settings.waves){finish('win');return;}wave++;nextWave=0;while(bolts.length)releaseAt(bolts,bolts.length-1,boltPool);formation();}}
+      const speed=settings.alienSpeed+(wave-1)*balance.speedPerWave;let edge=false;
+      for(const a of aliens){
+        const type=balance.enemyTypes[a.kind];a.age+=dt;a.baseX+=direction*speed*a.speed*dt;
+        a.x=a.baseX+Math.sin(a.age*type.frequency+a.phase)*type.amplitude;
+        a.y=a.baseY+(type.pattern==='circle'?Math.cos(a.age*type.frequency+a.phase)*type.amplitude:type.pattern==='dive'?Math.max(0,Math.sin(a.age*type.frequency+a.phase))*type.amplitude*2:0);
+        if(a.baseX<a.radius||a.baseX>config.width-a.radius)edge=true;
+        if(type.launchSeconds&&!a.child&&a.launched<type.launchLimit&&spawned<settings.spawnBudget){a.launchTime-=dt;if(a.launchTime<=0){a.launchTime=type.launchSeconds;a.launched++;spawned++;spawn(a.x,a.y+balance.rowSpacing,0,true);}}
+      }
+      if(edge){direction*=-1;for(const a of aliens){a.baseX=Math.max(a.radius,Math.min(config.width-a.radius,a.baseX));a.baseY+=settings.drop;}}
       boltTime-=dt;
-      if(boltTime<=0 && aliens.length) {
-        const alien=aliens[Math.floor(random()*aliens.length)];
-        const bolt=boltPool.take(alien.x,alien.y+balance.alienRadius);if(bolt)bolts.push(bolt);boltTime=settings.boltSeconds*(balance.boltJitterBase+random()*balance.boltJitterRange);
+      if(boltTime<=0&&aliens.length){const a=aliens[Math.floor(random()*aliens.length)],b=boltPool.take(a.x,a.y+balance.alienRadius);if(b)bolts.push(b);boltTime=settings.boltSeconds*(balance.boltJitterBase+random()*balance.boltJitterRange);}
+      for(const shot of shots){shot.y+=shot.vy*dt;shot.x+=shot.vx*dt;}
+      for(const bolt of bolts)bolt.y+=settings.boltSpeed*dt;
+      for(let i=shots.length-1;i>=0;i--){
+        const s=shots[i];let hit=-1;
+        for(let j=0;j<aliens.length;j++){const a=aliens[j];const mask=a.slot<32?s.hitLo:s.hitHi;if(!(mask&(1<<(a.slot%32)))&&Math.abs(a.x-s.x)<a.radius+balance.shotRadius&&Math.abs(a.y-s.y)<a.radius+balance.shotRadius){hit=j;break;}}
+        if(hit>=0){const a=aliens[hit];s.lastHit=a.id;if(a.slot<32)s.hitLo|=1<<a.slot;else s.hitHi|=1<<(a.slot-32);hits++;a.hp-=damage*power;burst(a.x,a.y);if(a.hp<=0)destroy(hit);if(--s.hp<=0)releaseAt(shots,i,shotPool);}
+        else if(s.y<-balance.shotRadius||s.x<0||s.x>config.width)releaseAt(shots,i,shotPool);
       }
-      for(const shot of shots) shot.y-=balance.shotSpeed*dt;
-      for(const bolt of bolts) bolt.y+=settings.boltSpeed*dt;
-      for(let i=shots.length-1;i>=0;i--) {
-        const shot=shots[i];let hit=-1;
-        for(let j=0;j<aliens.length;j++){const a=aliens[j];if(Math.abs(a.x-shot.x)<a.radius+balance.shotRadius&&Math.abs(a.y-shot.y)<a.radius+balance.shotRadius){hit=j;break;}}
-        if(hit>=0){const alien=aliens[hit];hits++;alien.hp--;burst(alien.x,alien.y);releaseAt(shots,i,shotPool);if(alien.hp<=0){releaseAt(aliens,hit,alienPool);score+=settings.points;}}
-        else if(shot.y < -balance.shotRadius)releaseAt(shots,i,shotPool);
+      for(let i=pickups.length-1;i>=0;i--){const d=pickups[i],dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx,dy);d.y+=d.vy*dt;
+        if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}
+        if(dist<balance.pickups.radius+balance.playerRadius){powerup=d.kind;powerTime=balance.pickups.seconds;releaseAt(pickups,i,pickupPool);}else if(d.y>config.height+balance.pickups.radius)releaseAt(pickups,i,pickupPool);
       }
-      if(!aliens.length&&wave>=settings.waves){finish('win');return;}
-      for(let i=bolts.length-1;i>=0;i--) {
-        const bolt=bolts[i];
-        if(Math.hypot(bolt.x-player.x,bolt.y-player.y)<balance.playerRadius+balance.boltRadius) {
-          releaseAt(bolts,i,boltPool);
-          if(!invulnerable){lives--;invulnerable=balance.invulnerableSeconds;burst(player.x,player.y);}
-        } else if(bolt.y>config.height+balance.boltRadius) releaseAt(bolts,i,boltPool);
-      }
+      for(let i=bolts.length-1;i>=0;i--){const b=bolts[i];if(Math.hypot(b.x-player.x,b.y-player.y)<balance.playerRadius+balance.boltRadius){releaseAt(bolts,i,boltPool);if(!invulnerable&&powerup!==3){lives--;invulnerable=balance.invulnerableSeconds;burst(player.x,player.y);}}else if(b.y>config.height+balance.boltRadius)releaseAt(bolts,i,boltPool);}
       for(let i=sparks.length-1;i>=0;i--){const s=sparks[i];s.x+=s.vx*dt;s.y+=s.vy*dt;s.life-=dt;if(s.life<=0)releaseAt(sparks,i,sparkPool);}
-      let landed=false;for(const a of aliens)if(a.y+balance.alienRadius>=player.y-balance.playerRadius){landed=true;break;}
-      if(lives<=0 || landed)finish('lose');
+      let landed=false;for(const a of aliens)if(a.y+a.radius>=player.y-balance.playerRadius){landed=true;break;}
+      if(lives<=0||landed)finish('lose');else if(!aliens.length&&wave>=settings.waves)finish('win');
     },
-    snapshot(){return {score,lives,wave,result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b}))};}
-  };
+    snapshot(){return {score,lives,maxLives,wave,time,result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},novaAim:{...novaAim}};}
+  };return model;
 }
-
-export function drawAliens(p,model,{config,balance}) {
-  const {width:w,height:h,art:a}=config;
-  p.fillStyle=a.spaceColor;p.fillRect(0,0,w,h);
-  p.fillStyle=a.creamColor;
-  for(let i=0;i<balance.starCount;i++){const x=(i*a.starStrideX+a.starOffsetX)%w,y=(i*a.starStrideY+model.time*balance.starSpeed)%(h-balance.playerBottom);p.globalAlpha=a.starOpacity+(i%a.starVariants)*a.starOpacityStep;p.fillRect(x,y,a.starSize,a.starSize);}p.globalAlpha=1;
-  p.fillStyle=a.tealColor;p.beginPath();p.ellipse(w/2,h+a.seaBottomOffset,w*a.seaWidthRatio,a.seaHeight,0,0,Math.PI*2);p.fill();
-  for(const alien of model.aliens){
-    p.save();p.translate(alien.x,alien.y);if(alien.boss)p.scale(balance.bossScale,balance.bossScale);p.fillStyle=balance.alienColors[alien.kind];
-    p.beginPath();p.ellipse(0,1,a.alienWidth,a.alienHeight,0,0,Math.PI*2);p.fill();
-    p.fillStyle=a.creamColor;p.beginPath();p.ellipse(0,a.alienDomeY,a.alienDomeWidth,a.alienDomeHeight,0,Math.PI,Math.PI*2);p.fill();
-    p.fillStyle=a.spaceColor;p.fillRect(-a.alienEyeX,a.alienEyeY,a.alienEyeWidth,a.alienEyeHeight);p.fillRect(a.alienEyeX-a.alienEyeWidth,a.alienEyeY,a.alienEyeWidth,a.alienEyeHeight);
-    p.fillStyle=a.creamColor;for(let light=-1;light<=1;light++){p.beginPath();p.arc(light*a.alienLightSpacing,a.alienLightY,a.alienLightRadius,0,Math.PI*2);p.fill();}p.restore();
+export function drawAliens(p,m,{config,balance,art,quality}) {
+  const palette=config.visuals.palette;
+  const {width:w,height:h,art:a,visuals:v}=config;
+  p.drawImage(art.backdrop,0,0);p.fillStyle=a.creamColor;
+  const count=quality.low?balance.starCount:v.stars;
+  for(let i=0;i<count;i++){const depth=1+i%3,x=(i*a.starStrideX+a.starOffsetX)%w,y=(i*a.starStrideY+m.time*balance.starSpeed*depth)%h;p.globalAlpha=a.starOpacity+(i%a.starVariants)*a.starOpacityStep;p.fillRect(x,y,a.starSize*depth/2,a.starSize*depth/2);}p.globalAlpha=1;
+  for(const e of m.aliens){const size=balance.alienRadius*3*e.scale;p.save();p.translate(e.x,e.y);p.rotate(Math.sin(e.age*2+e.phase)*.09);p.drawImage(art.aliens[e.kind],-size/2,-size/2,size,size*.88);p.restore();if(e.maxHp>2)drawHealthBar(p,e.x-size/3,e.y-size*.5,size*2/3,3,e.hp,e.maxHp,config);}
+  for(const s of m.shots){p.strokeStyle=s.kind===1?v.foam:a.sandColor;p.lineWidth=s.kind===1?5:3;p.beginPath();p.moveTo(s.x,s.y+16);p.lineTo(s.x,s.y-9);p.stroke();oval(p,s.x,s.y,2,8,palette.white);}
+  for(const b of m.bolts){oval(p,b.x,b.y,6,10,palette.enemyGlow);oval(p,b.x,b.y,3,6,palette.enemyCore);}
+  for(const d of m.pickups){p.save();p.translate(d.x,d.y);p.rotate(m.time*2);p.fillStyle=balance.pickups.colors[d.kind];p.fillRect(-7,-7,14,14);p.fillStyle=palette.white;p.fillRect(-2,-2,4,4);p.restore();}
+  for(const s of m.sparks){p.globalAlpha=s.life/balance.sparkSeconds;oval(p,s.x,s.y,3,3,a.creamColor);}p.globalAlpha=1;
+  if(m.nova.flight>0){
+    const t=1-m.nova.flight/balance.nova.throwSeconds,u=1-t,cx=(m.nova.fromX+m.nova.x)/2,cy=Math.min(m.nova.fromY,m.nova.y)-balance.nova.arcRise;
+    const x=u*u*m.nova.fromX+2*u*t*cx+t*t*m.nova.x,y=u*u*m.nova.fromY+2*u*t*cy+t*t*m.nova.y;
+    p.strokeStyle=palette.novaWash;p.lineWidth=7;p.beginPath();p.moveTo(m.nova.fromX,m.nova.fromY);p.quadraticCurveTo(cx,cy,x,y);p.stroke();oval(p,x,y,13,13,balance.nova.color);oval(p,x-3,y-3,5,5,palette.white);
   }
-  p.fillStyle=a.sandColor;for(const shot of model.shots)p.fillRect(shot.x-a.shotWidth/2,shot.y-a.shotHeight/2,a.shotWidth,a.shotHeight);
-  p.fillStyle=a.coralColor;for(const bolt of model.bolts){p.beginPath();p.ellipse(bolt.x,bolt.y,a.boltWidth,a.boltHeight,0,0,Math.PI*2);p.fill();}
-  for(const s of model.sparks){p.globalAlpha=s.life/balance.sparkSeconds;p.fillStyle=a.creamColor;p.fillRect(s.x-a.sparkSize/2,s.y-a.sparkSize/2,a.sparkSize,a.sparkSize);}p.globalAlpha=1;
-  const {x,y}=model.player;
-  p.save();p.translate(x,y);if(model.invulnerable && Math.floor(model.time*a.shipBlinkRate)%2)p.globalAlpha=balance.blinkOpacity;
-  p.fillStyle=a.seaColor;p.beginPath();p.moveTo(0,a.shipNoseY);p.lineTo(a.shipWingX,a.shipWingY);p.lineTo(0,a.shipCenterY);p.lineTo(-a.shipWingX,a.shipWingY);p.closePath();p.fill();
-  p.fillStyle=a.creamColor;p.fillRect(-a.shipCoreWidth/2,a.shipCoreY,a.shipCoreWidth,a.shipCoreHeight);p.fillStyle=a.coralColor;p.fillRect(-a.shipExhaustWidth/2,a.shipExhaustY,a.shipExhaustWidth,a.shipExhaustHeight);p.restore();
+  if(m.nova.life>0){const t=1-m.nova.life/balance.nova.seconds;p.globalAlpha=1-t;p.strokeStyle=balance.nova.color;p.lineWidth=12*(1-t)+2;p.beginPath();p.arc(m.nova.x,m.nova.y,Math.max(1,t*balance.nova.radius),0,TAU);p.stroke();oval(p,m.nova.x,m.nova.y,t*balance.nova.radius,t*balance.nova.radius,palette.novaWash);p.globalAlpha=1;}
+  const {x,y}=m.player;p.save();p.translate(x,y);if(m.invulnerable&&Math.floor(m.time*a.shipBlinkRate)%2)p.globalAlpha=balance.blinkOpacity;
+  const exhaust=12+Math.sin(m.time*25)*4;oval(p,0,30,6,exhaust,palette.exhaust);oval(p,0,29,3,exhaust*.7,palette.exhaustCore);p.drawImage(art.player,-35,-40,70,77);
+  if(m.powerup===3){p.strokeStyle=palette.shieldGlow;p.lineWidth=3;p.beginPath();p.arc(0,0,32+Math.sin(m.time*5)*2,0,TAU);p.stroke();}p.restore();
 }
-
-export function startAliens(ctx) {return runCanvasGame(ctx,createAlienModel,drawAliens);}
+export function startAliens(ctx){return runCanvasGame(ctx,createAlienModel,drawAliens);}

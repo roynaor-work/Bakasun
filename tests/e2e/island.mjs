@@ -4,6 +4,7 @@ import { createServer } from 'node:http';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import {checkActivity} from './island-activity.mjs';
+import {checkG2c} from './island-g2c.mjs';
 
 // The default serves this checkout on an ephemeral loopback port. Override the
 // URL to inspect a separately started server. Dependencies are never downloaded.
@@ -604,6 +605,7 @@ async function checkCityViewport(width, height) {
 }
 
 try {
+  if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'g2c') reports.push(...await checkG2c({browser,target,directory}));
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'activity') reports.push(...await checkActivity({browser,target,directory}));
   // Keep virtual-clock activity and the real-time city suite in separate
   // Chromium processes, including their network and graphics state.
