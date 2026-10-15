@@ -1,11 +1,13 @@
+import {initialProgress,validProgress,applyStarEquipment} from './progress.mjs';
 const object = value => value && typeof value==='object' && !Array.isArray(value);
 const count = value => Number.isSafeInteger(value) && value>=0;
 const time = value => Number.isFinite(value) && value>=0;
 export function initialActivity(data,now) {
-  return {minigameLevels:Object.fromEntries(Object.keys(data.config.minigameLevels||{}).map(id=>[id,1])),highScores:{},minigameWins:{},instructionsSeen:[],events:{counts:{},lastAt:{},nextAt:now+(data.config.events?.initialDelayMs||0),sequence:0,active:null,repairs:{},resolved:[]}};
+  return {minigameProgress:initialProgress(data),minigameLevels:Object.fromEntries(Object.keys(data.config.minigameLevels||{}).map(id=>[id,1])),highScores:{},minigameWins:{},instructionsSeen:[],events:{counts:{},lastAt:{},nextAt:now+(data.config.events?.initialDelayMs||0),sequence:0,active:null,repairs:{},resolved:[]}};
 }
 export function validActivity(state,data,registry) {
   const games=data.config.minigameLevels||{}, events=state.events;
+  if(!validProgress(state.minigameProgress,data))return false;
   if(!object(state.minigameLevels)||!object(state.highScores)||!object(state.minigameWins)||!Array.isArray(state.instructionsSeen))return false;
   if(!Object.keys(games).every(id=>Number.isInteger(state.minigameLevels[id])&&state.minigameLevels[id]>=1&&state.minigameLevels[id]<=games[id].length))return false;
   if(!Object.keys(state.minigameLevels).every(id=>id in games))return false;
@@ -22,6 +24,9 @@ export function validActivity(state,data,registry) {
 }
 export function mergeActivity(current,incoming,data) {
   for(const key of ['minigameLevels','highScores','minigameWins'])for(const [id,value] of Object.entries(incoming[key]))current[key][id]=Math.max(current[key][id]||0,value);
+  for(const [id,p]of Object.entries(incoming.minigameProgress)){
+    const target=current.minigameProgress[id];target.stage=Math.max(target.stage,p.stage);target.stars=target.stars.map((n,i)=>Math.max(n,p.stars[i]));applyStarEquipment(current,data,id);
+  }
   current.instructionsSeen=[...new Set([...current.instructionsSeen,...incoming.instructionsSeen])];
   const a=current.events,b=incoming.events;
   for(const key of ['counts','lastAt'])for(const [id,value]of Object.entries(b[key]))a[key][id]=Math.max(a[key][id]||0,value);

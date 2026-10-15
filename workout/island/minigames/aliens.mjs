@@ -6,17 +6,19 @@ export function createAlienModel({ config, balance, level, bonuses = {}, random,
   const player = { x:config.width/2, y:config.height-balance.playerBottom };
   const aliens=[], shots=[], bolts=[], sparks=[];
   const alienPool=createPool(balance.maxAliens),shotPool=createPool(balance.maxShots),boltPool=createPool(balance.maxBolts),sparkPool=createPool(balance.maxSparks);
-  let score=0, lives=settings.lives+(bonuses.shield||0), wave=1, shotTime=0, boltTime=0, direction=1, invulnerable=0, nextWave=0, time=0, result;
+  let score=0, lives=Math.ceil(settings.lives*power)+(bonuses.shield||0), wave=1, shotTime=0, boltTime=0, direction=1, invulnerable=0, nextWave=0, time=0, fired=0, hits=0, result;
   function formation() {
     direction=random()<.5?-1:1;
     for(let row=0;row<settings.rows;row++) for(let column=0;column<settings.columns;column++) {
-      const alien=alienPool.take(balance.formationX+column*balance.columnSpacing,balance.formationY+row*balance.rowSpacing,0,0,0,row%balance.alienKinds);if(alien)aliens.push(alien);
+      const alien=alienPool.take(balance.formationX+column*balance.columnSpacing,balance.formationY+row*balance.rowSpacing,0,0,0,(row+column)%(settings.enemyKinds||1));
+      if(alien){const type=balance.enemyTypes[alien.kind];Object.assign(alien,{hp:type.hp,speed:type.speed,radius:balance.alienRadius*type.radius,boss:false});aliens.push(alien);}
     }
+    if(settings.boss&&wave===settings.waves){const boss=alienPool.take(config.width/2,balance.formationY/2,0,0,0,0);if(boss){Object.assign(boss,{hp:settings.bossLives,speed:1,radius:balance.alienRadius*balance.bossScale,boss:true});aliens.push(boss);}}
   }
   function burst(x,y) {
     for(let i=0;i<balance.sparkCount;i++) {const angle=random()*Math.PI*2,spark=sparkPool.take(x,y,Math.cos(angle)*balance.sparkSpeed,Math.sin(angle)*balance.sparkSpeed,balance.sparkSeconds);if(spark)sparks.push(spark);}
   }
-  function finish(outcome) { result={outcome,score}; }
+  function finish(outcome) { result={outcome,score,performance:.65*lives/(Math.ceil(settings.lives*power)+(bonuses.shield||0))+.35*hits/Math.max(1,fired)}; }
   formation();
   return {
     settings,player,aliens,shots,bolts,sparks,
@@ -29,7 +31,7 @@ export function createAlienModel({ config, balance, level, bonuses = {}, random,
       else if(Number.isFinite(input.x)) player.x+=(Math.max(-balance.playerSpeed*dt,Math.min(balance.playerSpeed*dt,input.x-player.x)));
       player.x=Math.max(balance.playerRadius,Math.min(config.width-balance.playerRadius,player.x));
       shotTime-=dt;
-      if(input.firing && shotTime<=0) {const shot=shotPool.take(player.x,player.y-balance.playerRadius);if(shot)shots.push(shot);shotTime=settings.shotSeconds/(power+(bonuses.fireRate||0));}
+      if(input.firing && shotTime<=0) {const shot=shotPool.take(player.x,player.y-balance.playerRadius);if(shot){shots.push(shot);fired++;}shotTime=settings.shotSeconds/(power+(bonuses.fireRate||0));}
       if(!aliens.length) {
         nextWave+=dt;
         if(nextWave>=balance.wavePauseSeconds) {
@@ -38,11 +40,11 @@ export function createAlienModel({ config, balance, level, bonuses = {}, random,
         }
       }
       const speed=settings.alienSpeed+(wave-1)*balance.speedPerWave;
-      for(const alien of aliens) alien.x+=direction*speed*dt;
-      let edge=false;for(const a of aliens)if(a.x<balance.alienRadius||a.x>config.width-balance.alienRadius){edge=true;break;}
+      for(const alien of aliens) alien.x+=direction*speed*alien.speed*dt;
+      let edge=false;for(const a of aliens)if(a.x<a.radius||a.x>config.width-a.radius){edge=true;break;}
       if(edge) {
         direction*=-1;
-        for(const alien of aliens){alien.x=Math.max(balance.alienRadius,Math.min(config.width-balance.alienRadius,alien.x));alien.y+=settings.drop;}
+        for(const alien of aliens){alien.x=Math.max(alien.radius,Math.min(config.width-alien.radius,alien.x));alien.y+=settings.drop;}
       }
       boltTime-=dt;
       if(boltTime<=0 && aliens.length) {
@@ -53,8 +55,8 @@ export function createAlienModel({ config, balance, level, bonuses = {}, random,
       for(const bolt of bolts) bolt.y+=settings.boltSpeed*dt;
       for(let i=shots.length-1;i>=0;i--) {
         const shot=shots[i];let hit=-1;
-        for(let j=0;j<aliens.length;j++){const a=aliens[j];if(Math.abs(a.x-shot.x)<balance.alienRadius+balance.shotRadius&&Math.abs(a.y-shot.y)<balance.alienRadius+balance.shotRadius){hit=j;break;}}
-        if(hit>=0){const alien=releaseAt(aliens,hit,alienPool);burst(alien.x,alien.y);releaseAt(shots,i,shotPool);score+=settings.points;}
+        for(let j=0;j<aliens.length;j++){const a=aliens[j];if(Math.abs(a.x-shot.x)<a.radius+balance.shotRadius&&Math.abs(a.y-shot.y)<a.radius+balance.shotRadius){hit=j;break;}}
+        if(hit>=0){const alien=aliens[hit];hits++;alien.hp--;burst(alien.x,alien.y);releaseAt(shots,i,shotPool);if(alien.hp<=0){releaseAt(aliens,hit,alienPool);score+=settings.points;}}
         else if(shot.y < -balance.shotRadius)releaseAt(shots,i,shotPool);
       }
       if(!aliens.length&&wave>=settings.waves){finish('win');return;}
@@ -80,7 +82,7 @@ export function drawAliens(p,model,{config,balance}) {
   for(let i=0;i<balance.starCount;i++){const x=(i*a.starStrideX+a.starOffsetX)%w,y=(i*a.starStrideY+model.time*balance.starSpeed)%(h-balance.playerBottom);p.globalAlpha=a.starOpacity+(i%a.starVariants)*a.starOpacityStep;p.fillRect(x,y,a.starSize,a.starSize);}p.globalAlpha=1;
   p.fillStyle=a.tealColor;p.beginPath();p.ellipse(w/2,h+a.seaBottomOffset,w*a.seaWidthRatio,a.seaHeight,0,0,Math.PI*2);p.fill();
   for(const alien of model.aliens){
-    p.save();p.translate(alien.x,alien.y);p.fillStyle=balance.alienColors[alien.kind];
+    p.save();p.translate(alien.x,alien.y);if(alien.boss)p.scale(balance.bossScale,balance.bossScale);p.fillStyle=balance.alienColors[alien.kind];
     p.beginPath();p.ellipse(0,1,a.alienWidth,a.alienHeight,0,0,Math.PI*2);p.fill();
     p.fillStyle=a.creamColor;p.beginPath();p.ellipse(0,a.alienDomeY,a.alienDomeWidth,a.alienDomeHeight,0,Math.PI,Math.PI*2);p.fill();
     p.fillStyle=a.spaceColor;p.fillRect(-a.alienEyeX,a.alienEyeY,a.alienEyeWidth,a.alienEyeHeight);p.fillRect(a.alienEyeX-a.alienEyeWidth,a.alienEyeY,a.alienEyeWidth,a.alienEyeHeight);

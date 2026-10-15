@@ -1,7 +1,8 @@
+import {initialProgress} from '../activity/progress.mjs';
 import { cellsFor } from './rules.mjs';
 import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs';
 
-export const CURRENT_VERSION = 3;
+export const CURRENT_VERSION = 4;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -25,6 +26,7 @@ export function createInitialState(data, now = Date.now()) {
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  3(old,data) { return {...old,minigameProgress:initialProgress(data),version:4}; },
   2(old,data) { return {...old,...initialActivity(data,old.updatedAt||old.createdAt||Date.now()),version:3}; },
   1(old, data) {
     const initial = createInitialState(data, old.createdAt || Date.now());
@@ -58,6 +60,7 @@ export function migrateSave(value, data, registry) {
   }
   // New content IDs can start at level one without changing the save schema.
   if (isObject(state.minigameLevels)) for (const id of Object.keys(data.config.minigameLevels || {})) if (!(id in state.minigameLevels)) state.minigameLevels[id] = 1;
+  if (isObject(state.minigameProgress)) for (const [id,p] of Object.entries(initialProgress(data))) if (!(id in state.minigameProgress)) state.minigameProgress[id] = p;
   const validation = validateSave(state, data, registry);
   return validation.ok ? { ok: true, state, migrated: fromVersion !== CURRENT_VERSION } : validation;
 }

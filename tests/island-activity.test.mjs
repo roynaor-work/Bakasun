@@ -17,10 +17,10 @@ export function fixture() {
   const engine=createEngine(data,{storage,now:()=>time});
   return {engine,storage,advance:ms=>time+=ms,now:()=>time};
 }
-test('seeded generator repeats including seed zero, and every city has one of three difficulties',()=>{
+test('seeded generator repeats including seed zero, and stages are independent of city expansion',()=>{
   assert.deepEqual(Array.from({length:20},seededRandom(0)),Array.from({length:20},seededRandom(0)));
   const {engine}=fixture();
-  for(let stage=0;stage<3;stage++){engine.state.world.stage=stage;assert.equal(gameContext(engine,data.config.minigames,17).level,stage+1);}
+  for(let stage=0;stage<3;stage++){engine.state.world.stage=stage;assert.equal(gameContext(engine,data.config.minigames,17,'alienDefense').level,1);}
 });
 test('minigame hooks deny start, settle only once and charge actual minutes on completion or exit',()=>{
   const f=fixture(),{engine}=f;let ctx,starts=0,disposed=0;const charged=[];
@@ -41,7 +41,7 @@ test('version two migrates activity defaults without losing money, buildings, ch
   const {engine}=fixture(),old=createInitialState(data,17);old.version=2;
   for(const key of ['minigameLevels','highScores','minigameWins','instructionsSeen','events'])delete old[key];
   old.money=900;old.avatar.created=true;const snapshot=structuredClone(old);
-  const result=migrateSave(old,data,engine.registry);assert.equal(result.ok,true);assert.equal(result.state.version,3);
+  const result=migrateSave(old,data,engine.registry);assert.equal(result.ok,true);assert.equal(result.state.version,4);
   for(const key of Object.keys(snapshot).filter(k=>k!=='version'))assert.deepEqual(result.state[key],snapshot[key]);
   assert.deepEqual(result.state.minigameLevels,{alienDefense:1,fireRescue:1,navalDuel:1});assert.equal(result.state.events.active,null);
 });
@@ -86,7 +86,8 @@ test('naval duel uses alternating ballistic turns, is winnable and deterministic
     assert.ok(phases.has('enemy'));assert.equal(model.result.outcome,'win');return model.snapshot();
   }assert.deepEqual(play(),play());
 });
-function playable(f){f.engine.setAvatar({created:true});f.engine.skipTutorial();return createActivity(f.engine,{now:f.now,random:seededRandom(9)});}
+function eventCity(f){f.engine.state.world={stage:1,size:20};f.engine.state.buildings.push({id:'test-harbor',typeId:'harbor',x:0,z:6,level:1});}
+function playable(f){eventCity(f);f.engine.setAvatar({created:true});f.engine.skipTutorial();return createActivity(f.engine,{now:f.now,random:seededRandom(9)});}
 test('each seeded event warns before starting, respects its cooldown, defers once and cannot stack',()=>{
   for(const type of ['fire','aliens','ship']){
     const f=fixture();f.engine.place('house',4,5);const activity=playable(f);
@@ -100,7 +101,7 @@ test('each seeded event warns before starting, respects its cooldown, defers onc
   }
 });
 test('events pause for tutorial and avatar dialogs and restore a saved game as a retry',()=>{
-  const f=fixture();let blocked=false;const activity=createActivity(f.engine,{now:f.now,random:seededRandom(3),blocked:()=>blocked});
+  const f=fixture();eventCity(f);let blocked=false;const activity=createActivity(f.engine,{now:f.now,random:seededRandom(3),blocked:()=>blocked});
   f.advance(data.config.events.initialDelayMs);activity.tick();assert.equal(f.engine.state.events.active,null);
   f.engine.skipTutorial();f.engine.setAvatar({created:true});blocked=true;activity.tick();assert.equal(f.engine.state.events.active,null);
   blocked=false;assert.equal(activity.prepare('ship').ok,true);f.advance(data.config.events.warningMs);blocked=true;activity.tick();assert.equal(f.engine.state.events.active.phase,'warning');
@@ -127,8 +128,8 @@ test('new registered income, purchased upgrades, high scores and occasional part
   const record=f.engine.registry.minigames.get('alienDefense');let ctx;
   f.engine.registry.minigames.set('alienDefense',{...record,start:c=>{ctx=c;return {dispose(){}};}});
   const parts=f.engine.state.parts.general;
-  for(let i=0;i<data.config.minigames.partEveryWins;i++){f.engine.startMinigame('alienDefense',{level:1});ctx.finish({outcome:'win',score:100});}
-  assert.equal(f.engine.state.parts.general,parts+data.config.minigames.winParts);assert.equal(f.engine.state.highScores.alienDefense,100);
+  for(let i=0;i<data.config.minigames.partEveryWins;i++){f.engine.startMinigame('alienDefense',{level:1});ctx.finish({outcome:'win',score:80});}
+  assert.equal(f.engine.state.parts.general,parts+data.config.minigames.winParts);assert.equal(f.engine.state.highScores.alienDefense,80);
   const raw=f.engine.exportJSON();assert.equal(f.engine.importJSON(raw).ok,true);assert.equal(f.engine.importJSON(raw).ok,true);assert.equal(f.engine.state.parts.general,parts+data.config.minigames.winParts);
   const loaded=createEngine(data,{storage:f.storage,now:f.now});assert.deepEqual(loaded.state.minigameLevels,f.engine.state.minigameLevels);assert.deepEqual(loaded.state.highScores,f.engine.state.highScores);
 });
