@@ -4,11 +4,16 @@ export function buildingCenter(building, registry) {
 }
 
 export function levelFactor(building, config) {
-  return 1 + (building.level - 1) * config.levelMultiplier;
+  return 1 + (building.level - 1) * (config.levelMultiplier ?? 0);
+}
+
+/** Explicit level values override the legacy multiplier, including a value of zero. */
+export function levelValue(building, type, field, config) {
+  return type?.levels?.[building.level - 1]?.[field] ?? (type?.[field] || 0) * levelFactor(building, config);
 }
 
 export function population(state, registry, config) {
-  return state.buildings.reduce((sum, row) => sum + (registry.buildings.get(row.typeId)?.population || 0) * levelFactor(row, config), 0);
+  return state.buildings.reduce((sum, row) => sum + levelValue(row, registry.buildings.get(row.typeId), 'population', config), 0);
 }
 
 /** Service radius is measured between footprint centers, including its boundary. */
@@ -19,7 +24,7 @@ export function coverageForBuilding(state, registry, id, config = { levelMultipl
   const center = buildingCenter(building, registry);
   const radius = type.radius * levelFactor(building, config);
   return state.buildings.filter(row => {
-    if (row.id === id || !(registry.buildings.get(row.typeId)?.population > 0)) return false;
+    if (row.id === id || !(levelValue(row, registry.buildings.get(row.typeId), 'population', config) > 0)) return false;
     const target = buildingCenter(row, registry);
     return Math.hypot(target.x - center.x, target.z - center.z) <= radius;
   }).map(row => row.id);
@@ -27,7 +32,7 @@ export function coverageForBuilding(state, registry, id, config = { levelMultipl
 
 /** City values are population-weighted service coverage; no per-citizen needs are stored. */
 export function calculateMetrics(state, registry, config) {
-  const households = state.buildings.filter(row => registry.buildings.get(row.typeId)?.population > 0);
+  const households = state.buildings.filter(row => levelValue(row, registry.buildings.get(row.typeId), 'population', config) > 0);
   const totalPopulation = population(state, registry, config);
   const values = {};
   for (const metric of registry.metrics.values()) {
@@ -37,7 +42,7 @@ export function calculateMetrics(state, registry, config) {
       const effect = type.effects?.[metric.id] || 0;
       if (!effect || !type.radius) continue;
       const coveredIds = coverageForBuilding(state, registry, source.id, config);
-      const coveredPopulation = households.filter(row => coveredIds.includes(row.id)).reduce((sum, row) => sum + registry.buildings.get(row.typeId).population * levelFactor(row, config), 0);
+      const coveredPopulation = households.filter(row => coveredIds.includes(row.id)).reduce((sum, row) => sum + levelValue(row, registry.buildings.get(row.typeId), 'population', config), 0);
       const coverage = totalPopulation ? coveredPopulation / totalPopulation : 0;
       score += effect * levelFactor(source, config) * coverage;
     }

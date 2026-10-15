@@ -1,3 +1,39 @@
+import { levelValue, population } from './metrics.mjs';
+
+// These checks apply only to a new instance. Saves, undo and moves keep the
+// existing city intact, including cities built before limits were introduced.
+export function placementAvailability(state, registry, typeId) {
+  const type = registry.buildings.get(typeId);
+  if (!type) return { ok: false, reason: 'reason.invalid' };
+  const limit = type.limit;
+  if (!limit || limit.kind === 'free') return { ok: true, reason: 'reason.allowed' };
+  const stage = state.world.stage ?? 0;
+  const existing = state.buildings.filter(row => row.typeId === type.id);
+  const maxCount = limit.maxCount?.[stage];
+  if (maxCount != null && existing.length >= maxCount) return { ok: false, reason: limit.countReason || limit.reason };
+  const config = registry.config;
+  const residents = population(state, registry, config);
+  if (existing.length && limit.minPopulation?.[stage] > residents) return { ok: false, reason: limit.reason };
+  if (limit.kind === 'capacity') {
+    const supply = existing.reduce((sum, row) => sum + levelValue(row, type, 'supply', config), 0);
+    if (supply >= residents + limit.margin) return { ok: false, reason: limit.reason };
+    return { ok: true, reason: 'reason.allowed', recommended: supply < residents };
+  }
+  return { ok: true, reason: 'reason.allowed' };
+}
+
+/** Shared by the upgrade command and its visible UI explanation. */
+export function upgradeAvailability(state, registry, id) {
+  const building = state.buildings.find(row => row.id === id);
+  if (!building) return { ok: false, reason: 'reason.invalid' };
+  const type = registry.buildings.get(building.typeId);
+  const nextLevel = type.levels[building.level];
+  if (!nextLevel) return { ok: false, reason: 'reason.maxLevel' };
+  if (building.level >= type.maxLevelByStage?.[state.world.stage]) return { ok: false, reason: 'reason.stageLevel', nextLevel };
+  if (state.money < nextLevel.cost) return { ok: false, reason: 'reason.money', nextLevel };
+  return { ok: true, reason: 'reason.allowed', nextLevel };
+}
+
 export function cellsFor(type, x, z) {
   const [width, depth] = type.footprint;
   const cells = [];
@@ -15,6 +51,10 @@ export function validatePlacement(state, registry, typeId, x, z, ignoreId, flags
   const type = registry.buildings.get(typeId);
   if (!type || !Number.isInteger(x) || !Number.isInteger(z)) return { ok: false, reason: 'reason.invalid' };
   if (type.locked || (type.featureFlag && !flags[type.featureFlag])) return { ok: false, reason: 'reason.locked' };
+  if (!ignoreId) {
+    const availability = placementAvailability(state, registry, typeId);
+    if (!availability.ok) return availability;
+  }
   const cells = cellsFor(type, x, z);
   if (cells.some(([cx, cz]) => cx < 0 || cz < 0 || cx >= state.world.size || cz >= state.world.size)) return { ok: false, reason: 'reason.bounds' };
   const others = state.buildings.filter(row => row.id !== ignoreId);
