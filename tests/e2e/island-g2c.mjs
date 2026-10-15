@@ -31,7 +31,7 @@ export async function checkG2c({browser,target,directory}){
         if(await page.locator('[data-action="game-understood"]').count())await tap('[data-action="game-understood"]');
         await page.waitForTimeout(80);await tick(120);
         assert.ok(await page.locator('.game-screen').evaluate(n=>n.scrollWidth===n.clientWidth&&n.scrollHeight===n.clientHeight));
-        assert.ok(await page.locator('.game-screen button').evaluateAll(nodes=>nodes.every(n=>{const r=n.getBoundingClientRect();return r.width>=56&&r.height>=56;})));
+        assert.ok(await page.locator('.game-screen button').evaluateAll(nodes=>nodes.every(n=>{if(!n.getClientRects().length)return true;const r=n.getBoundingClientRect();return r.width>=56&&r.height>=56;})));
         if(id==='alienDefense'){
           const initial=await snapshot(),p=await point(initial.aliens[0].x,initial.aliens[0].y);await touch('touchStart',p.x,p.y);await tick(80);await touch('touchEnd');
           await tap('[data-game-control="nova"]');await tick(400);let m=await snapshot();assert.equal(m.novaCharges,initial.novaCharges-1);assert.ok(m.nova.life>0);assert.ok(m.score>0);
@@ -42,12 +42,12 @@ export async function checkG2c({browser,target,directory}){
         }else if(id==='fireRescue'){
           let m=await snapshot(),water=m.water,heat=m.flames[0].heat;const p=await point(m.flames[0].x,m.flames[0].y);
           await touch('touchStart',p.x,p.y);await tick(320);m=await snapshot();assert.equal(m.spraying,true);assert.ok(m.flames[0].heat<heat);assert.ok(m.water<water);await shot(`${id}-water`);await touch('touchEnd');
-          const dry=m.water;await tap('[data-game-control="refill"]');await tick(260);assert.ok((await snapshot()).water>dry);
+          const dry=m.water;await page.locator('[data-game-control="refill"]').focus();await page.keyboard.down(' ');await tick(260);await page.keyboard.up(' ');assert.ok((await snapshot()).water>dry);
           await page.locator('[data-game-control="charge"]').focus();await page.keyboard.down(' ');await tick(1300);await page.keyboard.up(' ');assert.equal((await snapshot()).charge,1);await shot(`${id}-charged`);
         }else{
-          let m=await snapshot();assert.ok(m.enemyFleetHp>0);await tap('[data-game-control="ammo"]');await tick(80);m=await snapshot();assert.equal(m.ammoIndex,1);
+          let m=await snapshot();assert.ok(m.enemyFleetHp>0);await tap('[data-ammo-index="1"]');await tick(80);m=await snapshot();assert.equal(m.ammoIndex,1);
           const slider=page.locator('[data-game-input="power"]');await slider.focus();await page.keyboard.press('Home');const forward=await slider.evaluate(n=>getComputedStyle(n).direction==='rtl'?'ArrowLeft':'ArrowRight');for(let step=0;step<27;step++)await page.keyboard.press(forward);assert.equal(await slider.inputValue(),'27');
-          await tap('[data-game-control="fire"]');await tick(250);m=await snapshot();assert.equal(m.ball.ammo,1);assert.equal(m.ammo[1],2);assert.equal(m.phase,'shot');assert.equal(await page.locator('.game-gauge progress').count(),2);await shot(`${id}-salvo`);
+          await tap('[data-game-control="fire"]');await tick(250);m=await snapshot();assert.equal(m.ball.ammo,1);assert.equal(m.ammo[1],3);assert.equal(m.phase,'shot');assert.equal(await page.locator('.game-gauge progress').count(),2);await shot(`${id}-salvo`);
           // Wait for real physics to alter HP and the fleet meter, without editing a model.
           await tick(3000);m=await snapshot();assert.ok(m.enemyLives<m.enemyShip.maxHp);assert.ok(await page.locator('.game-gauge progress').nth(1).evaluate(n=>n.value<1));
         }

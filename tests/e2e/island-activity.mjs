@@ -33,7 +33,7 @@ export async function checkActivity({browser,target,directory}) {
         for(let i=0;i<pixels.length;i+=64)colors.add(`${pixels[i]},${pixels[i+1]},${pixels[i+2]}`);return colors.size>4;
       }),'the game canvas renders its shapes after resize');
       assert.equal(await page.locator('.game-screen').getAttribute('data-stage'),String(level));
-      assert.ok(await page.locator('.game-screen button').evaluateAll(nodes=>nodes.every(n=>{const b=n.getBoundingClientRect();return b.width>=56&&b.height>=56;})));
+      assert.ok(await page.locator('.game-screen button').evaluateAll(nodes=>nodes.every(n=>{if(!n.getClientRects().length)return true;const b=n.getBoundingClientRect();return b.width>=56&&b.height>=56;})));
       assert.ok(await page.locator('.game-screen').evaluate(n=>n.scrollHeight<=n.clientHeight&&n.scrollWidth<=n.clientWidth));
       await shot(`${id}-stage-${level}`);
     }
@@ -42,6 +42,7 @@ export async function checkActivity({browser,target,directory}) {
       for(let i=0;i<4000&&await page.locator('.minigame-canvas').count();i++) {
         const m=await page.evaluate(()=>window.__island.games.current?.session.snapshot);if(!m)break;
         if(id==='alienDefense'&&m.aliens.some(a=>a.boss)&&!memory.bossShot){await shot('alienDefense-boss-10');memory.bossShot=true;}
+        if(m.choosing){if(down){await touch('touchEnd');down=false;}await page.clock.runFor(200);await page.locator('[data-action=run-upgrade]').first().click();await page.clock.runFor(200);continue;}
         m.settings=balance.levels[level-1];memory.last={lives:m.lives,score:m.score,wave:m.wave,aliens:m.aliens?.length,remaining:m.remaining,water:m.water};const input=pilotInput(id,m,balance,memory);
         if(id==='navalDuel') {
           if(m.phase==='aim') {
@@ -55,6 +56,7 @@ export async function checkActivity({browser,target,directory}) {
           },input);
           await touch(down?'touchMove':'touchStart',point);down=true;
         }else if(down){await touch('touchEnd');down=false;}
+        if(id==='fireRescue'&&input.refill){const node=page.locator('[data-game-control=refill]');await node.focus();await page.keyboard.down(' ');}else if(id==='fireRescue')await page.keyboard.up(' ');
         await page.clock.runFor(40);
       }
       if(down)await touch('touchEnd');

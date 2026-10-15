@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 const { chromium } = await import(process.env.ISLAND_PLAYWRIGHT ? pathToFileURL(process.env.ISLAND_PLAYWRIGHT).href : 'playwright');
 const root = path.resolve(fileURLToPath(new URL('../../workout/island/', import.meta.url)));
-const output = fileURLToPath(new URL('./screenshots/g1d/', import.meta.url));
+const output = process.env.ISLAND_OUTPUT_DIR ? path.resolve(process.env.ISLAND_OUTPUT_DIR) : fileURLToPath(new URL('./screenshots/g1d/', import.meta.url));
 await mkdir(output, { recursive: true });
 const types = { '.html':'text/html', '.mjs':'text/javascript', '.js':'text/javascript', '.json':'application/json', '.css':'text/css', '.glb':'model/gltf-binary', '.svg':'image/svg+xml' };
 const server = createServer(async (req,res) => {
@@ -55,7 +55,7 @@ try {
     reports.push(performanceReport);
     console.log(JSON.stringify(performanceReport));
     if (!baseline) {
-      const before=JSON.parse(await readFile(path.join(output,'baseline.json'),'utf8')).find(row=>row.width===width);
+      const before=JSON.parse(await readFile(new URL('./screenshots/g1d/baseline.json',import.meta.url),'utf8')).find(row=>row.width===width);
       for(let i=0;i<before.counts.length;i++) {
         assert.ok(performanceReport.counts[i].scene.calls<=before.counts[i].scene.calls*1.2,'20-building scene draw calls within +20%');
         assert.ok(performanceReport.counts[i].buildings.calls<=before.counts[i].buildings.calls*1.2);

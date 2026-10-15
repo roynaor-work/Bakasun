@@ -8,9 +8,11 @@ export function install(registry,data) {
     start:ctx=>startAliens({...ctx,balance}),
     onResult(raw,ctx) {
       const level=balance.levels[ctx.level-1];
-      const maximum=(level.rows*level.columns*level.waves+Number(level.boss))*level.points;
+      const maximum=level.scoreLimit;
       if(!raw || !['win','lose'].includes(raw.outcome) || !Number.isSafeInteger(raw.score) || raw.score<0 || raw.score>maximum) return null;
-      return gameResult(raw,ctx,{...balance,maximumScore:maximum});
+      const result=gameResult(raw,ctx,{...balance,maximumScore:maximum});
+      if(result)result.money=Math.floor(Math.min(raw.score,level.rewardScoreLimit)/balance.pointsPerCoin)+(raw.outcome==='win'?level.winMoney:0);
+      return result;
     }
   });
 }

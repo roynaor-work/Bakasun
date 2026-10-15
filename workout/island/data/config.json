@@ -1068,7 +1068,7 @@
     "firstLevel": 1,
     "partEveryWins": 3,
     "winParts": 1,
-    "slowFrameMs": 40,
+    "slowFrameMs": 24,
     "qualitySampleFrames": 90,
     "lowDpr": 1,
     "statusIntervalSeconds": 0.15,
@@ -1120,46 +1120,58 @@
           "difficulty": 1,
           "rows": 2,
           "columns": 4,
-          "waves": 1,
-          "lives": 3,
+          "waves": 4,
+          "lives": 5,
           "alienSpeed": 20,
           "drop": 12,
           "shotSeconds": 0.22,
-          "boltSeconds": 1.9,
-          "boltSpeed": 100,
+          "boltSeconds": 2.3,
+          "boltSpeed": 85,
           "points": 10,
           "winMoney": 30,
           "winParts": 0,
           "enemyKinds": 1,
-          "boss": false,
+          "boss": true,
           "bossLives": 9,
-          "spawnBudget": 0
+          "spawnBudget": 0,
+          "seconds": 60,
+          "patternKinds": 2,
+          "feature": "feature.alien.1",
+          "scoreLimit": 50000,
+          "bossShots": 1,
+          "rewardScoreLimit": 400
         },
         {
           "difficulty": 2,
           "rows": 2,
           "columns": 5,
-          "waves": 1,
-          "lives": 3,
+          "waves": 4,
+          "lives": 4,
           "alienSpeed": 23,
           "drop": 13,
           "shotSeconds": 0.22,
-          "boltSeconds": 1.78,
-          "boltSpeed": 109,
+          "boltSeconds": 1.9,
+          "boltSpeed": 100,
           "points": 12,
           "winMoney": 42,
           "winParts": 0,
           "enemyKinds": 1,
-          "boss": false,
+          "boss": true,
           "bossLives": 10,
-          "spawnBudget": 0
+          "spawnBudget": 0,
+          "seconds": 68,
+          "patternKinds": 3,
+          "feature": "feature.alien.2",
+          "scoreLimit": 70000,
+          "bossShots": 1,
+          "rewardScoreLimit": 550
         },
         {
           "difficulty": 3,
           "rows": 3,
           "columns": 5,
-          "waves": 2,
-          "lives": 3,
+          "waves": 4,
+          "lives": 4,
           "alienSpeed": 26,
           "drop": 14,
           "shotSeconds": 0.22,
@@ -1169,15 +1181,21 @@
           "winMoney": 54,
           "winParts": 0,
           "enemyKinds": 2,
-          "boss": false,
+          "boss": true,
           "bossLives": 11,
-          "spawnBudget": 0
+          "spawnBudget": 0,
+          "seconds": 76,
+          "patternKinds": 4,
+          "feature": "feature.alien.3",
+          "scoreLimit": 90000,
+          "bossShots": 1,
+          "rewardScoreLimit": 700
         },
         {
           "difficulty": 4,
           "rows": 3,
           "columns": 5,
-          "waves": 2,
+          "waves": 5,
           "lives": 3,
           "alienSpeed": 29,
           "drop": 15,
@@ -1188,15 +1206,21 @@
           "winMoney": 66,
           "winParts": 1,
           "enemyKinds": 2,
-          "boss": false,
+          "boss": true,
           "bossLives": 12,
-          "spawnBudget": 0
+          "spawnBudget": 0,
+          "seconds": 84,
+          "patternKinds": 4,
+          "feature": "feature.alien.4",
+          "scoreLimit": 110000,
+          "bossShots": 1,
+          "rewardScoreLimit": 850
         },
         {
           "difficulty": 5,
           "rows": 3,
           "columns": 5,
-          "waves": 2,
+          "waves": 5,
           "lives": 3,
           "alienSpeed": 32,
           "drop": 16,
@@ -1209,13 +1233,19 @@
           "enemyKinds": 3,
           "boss": true,
           "bossLives": 13,
-          "spawnBudget": 0
+          "spawnBudget": 0,
+          "seconds": 92,
+          "patternKinds": 4,
+          "feature": "feature.alien.5",
+          "scoreLimit": 130000,
+          "bossShots": 1,
+          "rewardScoreLimit": 1000
         },
         {
           "difficulty": 6,
           "rows": 3,
           "columns": 5,
-          "waves": 3,
+          "waves": 5,
           "lives": 3,
           "alienSpeed": 35,
           "drop": 17,
@@ -1226,15 +1256,21 @@
           "winMoney": 90,
           "winParts": 1,
           "enemyKinds": 3,
-          "boss": false,
+          "boss": true,
           "bossLives": 14,
-          "spawnBudget": 2
+          "spawnBudget": 2,
+          "seconds": 100,
+          "patternKinds": 4,
+          "feature": "feature.alien.6",
+          "scoreLimit": 150000,
+          "bossShots": 1,
+          "rewardScoreLimit": 1150
         },
         {
           "difficulty": 7,
           "rows": 3,
           "columns": 5,
-          "waves": 3,
+          "waves": 6,
           "lives": 3,
           "alienSpeed": 38,
           "drop": 18,
@@ -1245,15 +1281,21 @@
           "winMoney": 102,
           "winParts": 2,
           "enemyKinds": 4,
-          "boss": false,
+          "boss": true,
           "bossLives": 15,
-          "spawnBudget": 2
+          "spawnBudget": 2,
+          "seconds": 108,
+          "patternKinds": 4,
+          "feature": "feature.alien.7",
+          "scoreLimit": 170000,
+          "bossShots": 1,
+          "rewardScoreLimit": 1300
         },
         {
           "difficulty": 8,
           "rows": 3,
           "columns": 5,
-          "waves": 3,
+          "waves": 6,
           "lives": 3,
           "alienSpeed": 41,
           "drop": 19,
@@ -1264,15 +1306,21 @@
           "winMoney": 114,
           "winParts": 2,
           "enemyKinds": 4,
-          "boss": false,
+          "boss": true,
           "bossLives": 16,
-          "spawnBudget": 2
+          "spawnBudget": 2,
+          "seconds": 116,
+          "patternKinds": 4,
+          "feature": "feature.alien.8",
+          "scoreLimit": 190000,
+          "bossShots": 2,
+          "rewardScoreLimit": 1450
         },
         {
           "difficulty": 9,
           "rows": 3,
           "columns": 5,
-          "waves": 3,
+          "waves": 6,
           "lives": 3,
           "alienSpeed": 44,
           "drop": 20,
@@ -1283,15 +1331,21 @@
           "winMoney": 126,
           "winParts": 2,
           "enemyKinds": 5,
-          "boss": false,
+          "boss": true,
           "bossLives": 17,
-          "spawnBudget": 2
+          "spawnBudget": 2,
+          "seconds": 124,
+          "patternKinds": 4,
+          "feature": "feature.alien.9",
+          "scoreLimit": 210000,
+          "bossShots": 2,
+          "rewardScoreLimit": 1600
         },
         {
           "difficulty": 10,
           "rows": 3,
           "columns": 5,
-          "waves": 3,
+          "waves": 7,
           "lives": 3,
           "alienSpeed": 47,
           "drop": 21,
@@ -1304,7 +1358,13 @@
           "enemyKinds": 5,
           "boss": true,
           "bossLives": 18,
-          "spawnBudget": 2
+          "spawnBudget": 2,
+          "seconds": 132,
+          "patternKinds": 4,
+          "feature": "feature.alien.10",
+          "scoreLimit": 230000,
+          "bossShots": 2,
+          "rewardScoreLimit": 1750
         }
       ],
       "maxAliens": 48,
@@ -1483,6 +1543,49 @@
           ],
           "description": "equipment.weapon.hint"
         }
+      },
+      "campaign": {
+        "minimumSeconds": 60,
+        "secondsPerStage": 8,
+        "patterns": [
+          "rows",
+          "v",
+          "circle",
+          "dive"
+        ],
+        "patternSpacing": 26,
+        "circleRadius": 74,
+        "diveDepth": 55,
+        "choiceCount": 3,
+        "choiceIds": [
+          "spread",
+          "laser",
+          "rapid",
+          "shield",
+          "wing",
+          "damage"
+        ],
+        "maxStack": 3,
+        "damagePerStack": 0.18,
+        "ratePerStack": 0.18,
+        "comboSeconds": 3,
+        "comboMilestone": 5,
+        "comboBonus": 2,
+        "wingOffset": 42,
+        "wingDamage": 0.7,
+        "coinEveryKills": 3,
+        "crystalEveryKills": 5,
+        "coinPoints": 8,
+        "crystalPoints": 18,
+        "lootSpeed": 90,
+        "maxLoot": 24,
+        "maxWings": 2,
+        "celebrationSeconds": 1.4,
+        "bossSpreadSpeed": 32,
+        "piercePerStack": 2,
+        "spreadStep": 0.55,
+        "wingRadius": 15,
+        "wingFrontOffset": 35
       }
     },
     "fireRescue": {
@@ -1502,7 +1605,7 @@
       "initialHeatBase": 0.65,
       "initialHeatRange": 0.35,
       "extinguishPerSecond": 0.72,
-      "nozzleX": 180,
+      "nozzleX": 230,
       "nozzleY": 450,
       "pointsPerCoin": 5,
       "maximumScore": 1000,
@@ -1521,12 +1624,15 @@
           "refillWater": 120,
           "parSeconds": 7.2,
           "parWater": 60,
-          "fireKinds": 1
+          "fireKinds": 1,
+          "feature": "feature.fire.1",
+          "rescueCount": 1,
+          "wind": 0
         },
         {
           "difficulty": 2,
           "flames": 5,
-          "seconds": 54,
+          "seconds": 62,
           "water": 107,
           "growthPerSecond": 0.02,
           "points": 28,
@@ -1537,12 +1643,15 @@
           "refillWater": 110,
           "parSeconds": 9.0,
           "parWater": 75,
-          "fireKinds": 1
+          "fireKinds": 1,
+          "feature": "feature.fire.2",
+          "rescueCount": 1,
+          "wind": 0
         },
         {
           "difficulty": 3,
           "flames": 6,
-          "seconds": 50,
+          "seconds": 66,
           "water": 104,
           "growthPerSecond": 0.028,
           "points": 31,
@@ -1553,12 +1662,15 @@
           "refillWater": 100,
           "parSeconds": 16.2,
           "parWater": 135,
-          "fireKinds": 1
+          "fireKinds": 1,
+          "feature": "feature.fire.3",
+          "rescueCount": 1,
+          "wind": 0
         },
         {
           "difficulty": 4,
           "flames": 7,
-          "seconds": 46,
+          "seconds": 70,
           "water": 101,
           "growthPerSecond": 0.036,
           "points": 34,
@@ -1569,12 +1681,15 @@
           "refillWater": 90,
           "parSeconds": 16.2,
           "parWater": 135,
-          "fireKinds": 2
+          "fireKinds": 2,
+          "feature": "feature.fire.4",
+          "rescueCount": 1,
+          "wind": 0
         },
         {
           "difficulty": 5,
           "flames": 8,
-          "seconds": 42,
+          "seconds": 74,
           "water": 98,
           "growthPerSecond": 0.044,
           "points": 37,
@@ -1585,12 +1700,15 @@
           "refillWater": 80,
           "parSeconds": 16.2,
           "parWater": 135,
-          "fireKinds": 2
+          "fireKinds": 2,
+          "feature": "feature.fire.5",
+          "rescueCount": 1,
+          "wind": 0
         },
         {
           "difficulty": 6,
           "flames": 8,
-          "seconds": 38,
+          "seconds": 78,
           "water": 95,
           "growthPerSecond": 0.052,
           "points": 40,
@@ -1601,12 +1719,15 @@
           "refillWater": 70,
           "parSeconds": 16.2,
           "parWater": 135,
-          "fireKinds": 2
+          "fireKinds": 2,
+          "feature": "feature.fire.6",
+          "rescueCount": 2,
+          "wind": 0
         },
         {
           "difficulty": 7,
           "flames": 8,
-          "seconds": 34,
+          "seconds": 82,
           "water": 92,
           "growthPerSecond": 0.06,
           "points": 43,
@@ -1617,12 +1738,15 @@
           "refillWater": 60,
           "parSeconds": 16.2,
           "parWater": 135,
-          "fireKinds": 3
+          "fireKinds": 3,
+          "feature": "feature.fire.7",
+          "rescueCount": 2,
+          "wind": 0
         },
         {
           "difficulty": 8,
           "flames": 8,
-          "seconds": 30,
+          "seconds": 86,
           "water": 89,
           "growthPerSecond": 0.068,
           "points": 46,
@@ -1633,12 +1757,15 @@
           "refillWater": 50,
           "parSeconds": 16.2,
           "parWater": 135,
-          "fireKinds": 3
+          "fireKinds": 3,
+          "feature": "feature.fire.8",
+          "rescueCount": 2,
+          "wind": 6
         },
         {
           "difficulty": 9,
           "flames": 8,
-          "seconds": 26,
+          "seconds": 90,
           "water": 86,
           "growthPerSecond": 0.076,
           "points": 49,
@@ -1649,12 +1776,15 @@
           "refillWater": 40,
           "parSeconds": 16.2,
           "parWater": 135,
-          "fireKinds": 3
+          "fireKinds": 3,
+          "feature": "feature.fire.9",
+          "rescueCount": 2,
+          "wind": 10
         },
         {
           "difficulty": 10,
           "flames": 8,
-          "seconds": 22,
+          "seconds": 94,
           "water": 83,
           "growthPerSecond": 0.084,
           "points": 52,
@@ -1665,7 +1795,10 @@
           "refillWater": 30,
           "parSeconds": 16.2,
           "parWater": 135,
-          "fireKinds": 3
+          "fireKinds": 3,
+          "feature": "feature.fire.10",
+          "rescueCount": 3,
+          "wind": 14
         }
       ],
       "sites": [
@@ -1812,8 +1945,52 @@
             }
           ],
           "description": "equipment.tank.hint"
+        },
+        "hose": {
+          "title": "equipment.hose",
+          "description": "equipment.hose.hint",
+          "base": 0,
+          "levels": [
+            {
+              "value": 1,
+              "cost": 70,
+              "stars": 0
+            },
+            {
+              "value": 2,
+              "cost": 110,
+              "stars": 5
+            },
+            {
+              "value": 3,
+              "cost": 150,
+              "stars": 10
+            }
+          ]
         }
-      }
+      },
+      "crew": {
+        "truckX": 132,
+        "truckY": 419,
+        "hoseColor": "#ffda63",
+        "secondPower": 0.35,
+        "rescueWalkSpeed": 42,
+        "secondWaterUse": 0.15
+      },
+      "rescueSites": [
+        {
+          "x": 303,
+          "y": 412
+        },
+        {
+          "x": 305,
+          "y": 311
+        },
+        {
+          "x": 43,
+          "y": 331
+        }
+      ]
     },
     "navalDuel": {
       "shipX": 60,
@@ -1840,7 +2017,7 @@
       "hitPoints": 30,
       "survivalPoints": 10,
       "pointsPerCoin": 5,
-      "maximumScore": 1000,
+      "maximumScore": 2000,
       "levels": [
         {
           "difficulty": 1,
@@ -1853,12 +2030,15 @@
           "winParts": 0,
           "waves": 1,
           "shipKinds": 1,
-          "drift": 0
+          "drift": 2.0,
+          "concurrent": 1,
+          "seconds": 120,
+          "feature": "feature.naval.1"
         },
         {
           "difficulty": 2,
           "lives": 8,
-          "enemyLives": 2,
+          "enemyLives": 3,
           "enemyAimError": 0.185,
           "damage": 1,
           "rounds": 11,
@@ -1866,7 +2046,10 @@
           "winParts": 0,
           "waves": 1,
           "shipKinds": 1,
-          "drift": 0
+          "drift": 3.65,
+          "concurrent": 1,
+          "seconds": 138,
+          "feature": "feature.naval.2"
         },
         {
           "difficulty": 3,
@@ -1877,9 +2060,12 @@
           "rounds": 13,
           "winMoney": 59,
           "winParts": 0,
-          "waves": 1,
+          "waves": 2,
           "shipKinds": 1,
-          "drift": 0
+          "drift": 5.3,
+          "concurrent": 1,
+          "seconds": 156,
+          "feature": "feature.naval.3"
         },
         {
           "difficulty": 4,
@@ -1892,7 +2078,10 @@
           "winParts": 1,
           "waves": 2,
           "shipKinds": 2,
-          "drift": 11
+          "drift": 6.949999999999999,
+          "concurrent": 2,
+          "seconds": 174,
+          "feature": "feature.naval.4"
         },
         {
           "difficulty": 5,
@@ -1905,7 +2094,10 @@
           "winParts": 1,
           "waves": 2,
           "shipKinds": 2,
-          "drift": 12
+          "drift": 8.6,
+          "concurrent": 2,
+          "seconds": 192,
+          "feature": "feature.naval.5"
         },
         {
           "difficulty": 6,
@@ -1916,26 +2108,32 @@
           "rounds": 19,
           "winMoney": 95,
           "winParts": 1,
-          "waves": 2,
+          "waves": 3,
           "shipKinds": 2,
-          "drift": 13
+          "drift": 10.25,
+          "concurrent": 2,
+          "seconds": 210,
+          "feature": "feature.naval.6"
         },
         {
           "difficulty": 7,
-          "lives": 8,
+          "lives": 9,
           "enemyLives": 4,
           "enemyAimError": 0.11,
           "damage": 1,
           "rounds": 21,
           "winMoney": 107,
           "winParts": 2,
-          "waves": 2,
+          "waves": 3,
           "shipKinds": 3,
-          "drift": 14
+          "drift": 11.899999999999999,
+          "concurrent": 3,
+          "seconds": 228,
+          "feature": "feature.naval.7"
         },
         {
           "difficulty": 8,
-          "lives": 8,
+          "lives": 9,
           "enemyLives": 4,
           "enemyAimError": 0.095,
           "damage": 1,
@@ -1944,50 +2142,65 @@
           "winParts": 2,
           "waves": 3,
           "shipKinds": 3,
-          "drift": 15
+          "drift": 13.549999999999999,
+          "concurrent": 3,
+          "seconds": 246,
+          "feature": "feature.naval.8"
         },
         {
           "difficulty": 9,
-          "lives": 8,
+          "lives": 9,
           "enemyLives": 4,
           "enemyAimError": 0.08,
           "damage": 1,
           "rounds": 25,
           "winMoney": 131,
           "winParts": 2,
-          "waves": 3,
+          "waves": 4,
           "shipKinds": 3,
-          "drift": 16
+          "drift": 15.2,
+          "concurrent": 3,
+          "seconds": 264,
+          "feature": "feature.naval.9"
         },
         {
           "difficulty": 10,
-          "lives": 8,
+          "lives": 9,
           "enemyLives": 5,
           "enemyAimError": 0.065,
           "damage": 1,
           "rounds": 27,
           "winMoney": 143,
           "winParts": 3,
-          "waves": 3,
+          "waves": 4,
           "shipKinds": 3,
-          "drift": 17
+          "drift": 16.85,
+          "concurrent": 3,
+          "seconds": 282,
+          "feature": "feature.naval.10"
         }
       ],
       "shipTypes": [
         {
           "hp": 1,
           "damage": 1,
-          "scale": 1
+          "scale": 1,
+          "name": "naval.scout",
+          "attack": "aimed"
         },
         {
           "hp": 1.2,
           "damage": 1,
-          "scale": 1.1
+          "scale": 1.1,
+          "name": "naval.heavy",
+          "attack": "heavy"
         },
         {
           "hp": 0.85,
           "damage": 1.25,
-          "scale": 0.85
+          "scale": 0.85,
+          "name": "naval.runner",
+          "attack": "rapid"
         }
       ],
       "boss": {
@@ -2004,21 +2217,24 @@
           "title": "ammo.normal",
           "damage": 1,
           "width": 1,
-          "charges": 0
+          "charges": 60,
+          "reloadSeconds": 1.2
         },
         {
           "id": "double",
           "title": "ammo.double",
           "damage": 1.7,
           "width": 1,
-          "charges": 3
+          "charges": 3,
+          "reloadSeconds": 7
         },
         {
           "id": "torpedo",
           "title": "ammo.torpedo",
           "damage": 1.4,
           "width": 1.3,
-          "charges": 2
+          "charges": 2,
+          "reloadSeconds": 9
         },
         {
           "id": "absorb",
@@ -2026,7 +2242,8 @@
           "damage": 0.9,
           "width": 1,
           "charges": 2,
-          "heal": 1.5
+          "heal": 1.5,
+          "reloadSeconds": 10
         }
       ],
       "equipment": {
@@ -2141,7 +2358,57 @@
           "description": "equipment.ammo.hint"
         }
       },
-      "salvoDamageScale": 0.4
+      "salvoDamageScale": 0.4,
+      "controls": {
+        "dragDegreesPerPixel": 0.24
+      },
+      "render": {
+        "width": 360,
+        "height": 320,
+        "dpr": 1,
+        "fallbackFrameMs": 32,
+        "fallbackSampleFrames": 90,
+        "waterSegments": 20,
+        "waveHeight": 0.16,
+        "waveSpeed": 1.5,
+        "seaSize": 180,
+        "camera": [
+          6,
+          12,
+          22
+        ],
+        "lookAt": [
+          0,
+          0,
+          -10
+        ],
+        "worldScale": 0.15,
+        "enemySpacing": 8,
+        "playerScale": 1.45,
+        "fogNear": 48,
+        "fogFar": 130,
+        "sky": "#e6ab9c",
+        "sea": "#247f99",
+        "sun": "#ffdd9c",
+        "hull": "#237f91",
+        "enemy": "#bd615b",
+        "deck": "#e9cba0",
+        "metal": "#354d67",
+        "glass": "#93e4ed",
+        "foam": "#e8fbf7",
+        "smoke": "#635d6b",
+        "flame": "#ffac4b",
+        "mapSize": 66,
+        "nameFont": "bold 12px sans-serif",
+        "playerMeterY": 22,
+        "fleetMeterY": 48,
+        "mapY": 10
+      },
+      "combat": {
+        "heavySpeed": 0.85,
+        "rapidShots": 2,
+        "heavyDamage": 1.1
+      }
     },
     "art": {
       "starSize": 2,

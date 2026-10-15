@@ -67,7 +67,7 @@ export class ActivityInterface {
     p.stars.forEach((stars,i)=>{
       const stage=i+1,locked=stage>p.stage;
       const node=button(`${this.t('minigame.stage',{stage})} ${locked?'🔒':'★'.repeat(stars)+'☆'.repeat(3-stars)}`,'stage-play',()=>this.start(id,undefined,stage));
-      node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
+      node.title=this.t(this.data.config.minigames[id].levels[i].feature);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
     });dialog.append(map);
   }
   autoLaunch(choice) {
@@ -100,17 +100,17 @@ export class ActivityInterface {
     const stage=el('div','game-stage'),canvas=el('canvas','minigame-canvas');canvas.setAttribute('aria-label',this.t(game.title));canvas.tabIndex=0;stage.append(canvas);
     const controls=el('div','game-controls'),balance=this.data.config.minigames[id];
     const control=(key,label)=>{const node=button(label,`control-${key}`,()=>{});node.dataset.gameControl=key;return node;};
-    let gauges,turnLabel,novaButton,ammoButton,fleetMeters;
-    if(id==='alienDefense'){novaButton=control('nova',this.t('minigame.nova'));novaButton.title=this.t('minigame.novaHint');controls.append(control('left',`◀ ${this.t('minigame.left')}`),control('fire',this.t('minigame.fire')),control('right',`${this.t('minigame.right')} ▶`),novaButton);}
+    let gauges,turnLabel,novaButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons;
+    if(id==='alienDefense'){upgradePanel=el('div','game-upgrade-panel');upgradePanel.hidden=true;upgradePanel.setAttribute('role','group');upgradePanel.setAttribute('aria-label',this.t('minigame.chooseUpgrade'));upgradePanel.append(el('h3','',this.t('minigame.chooseUpgrade')));upgradeButtons=Array.from({length:balance.campaign.choiceCount},()=>button('','run-upgrade',()=>{}));upgradePanel.append(...upgradeButtons);stage.append(upgradePanel);novaButton=control('nova',this.t('minigame.nova'));novaButton.title=this.t('minigame.novaHint');controls.append(control('left',`◀ ${this.t('minigame.left')}`),control('fire',this.t('minigame.fire')),control('right',`${this.t('minigame.right')} ▶`),novaButton);}
     if(id==='fireRescue') {
       gauges={};for(const key of ['water','pressure']){const label=el('label','game-gauge',this.t(`minigame.${key}`)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);gauges[key]=meter;}
       controls.append(control('refill',this.t('minigame.refill')),control('charge',this.t('minigame.charge')));
     }
     if(id==='navalDuel') {
-      for(const [key,min,max,value]of [['angle',balance.minAngle,balance.maxAngle,balance.defaultAngle],['power',0,balance.powerMaximum,balance.defaultPower]]){
+      for(const [key,min,max,value]of [['power',0,balance.powerMaximum,balance.defaultPower]]){
         const label=el('label','game-slider',this.t(key==='angle'?'minigame.aim':'minigame.force')),input=el('input');input.type='range';input.min=min;input.max=max;input.value=value;input.dataset.gameInput=key;label.append(input);controls.append(label);
       }
-      ammoButton=control('ammo',this.t('ammo.normal'));controls.append(control('fire',this.t('minigame.launch')),ammoButton);
+      controls.append(control('fire',this.t('minigame.launch')));const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select',this.t(ammo.title));node.dataset.ammoIndex=i;node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
       fleetMeters={};for(const [key,title]of [['player','minigame.fleet'],['enemy','minigame.enemyFleet']]){const label=el('label','game-gauge',this.t(title)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);fleetMeters[key]=meter;}turnLabel=el('p','game-turn');controls.append(turnLabel);
     }
     dialog.replaceChildren(header,status,stage,controls);
@@ -119,7 +119,7 @@ export class ActivityInterface {
     heading.textContent=this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
     dialog.dataset.stage=context.level;
     const eventBonuses=eventId?this.activity.bonuses():{};
-    const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,turnLabel,novaButton,ammoButton,fleetMeters,gameId:id,t:this.t,
+    const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,turnLabel,novaButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,
       onError:reason=>this.ui.toast(reason),
       onFinish:result=>{
         this.current=null;

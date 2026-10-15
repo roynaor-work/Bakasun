@@ -1,0 +1,110 @@
+{
+  "base": "c6c815b",
+  "node": {
+    "command": "node --test tests/*.mjs",
+    "baseline": {
+      "tests": 1105,
+      "pass": 1067,
+      "skipped": 38,
+      "fail": 0
+    },
+    "tests": 1135,
+    "pass": 1097,
+    "fail": 0,
+    "skipped": 38,
+    "newG2dTests": 30
+  },
+  "browser": {
+    "version": "151.0.7922.173",
+    "fullCommand": "node tests/e2e/island.mjs",
+    "allSelectorsPassed": true,
+    "defaultRun": {
+      "completedBeforeStop": [
+        "G2d",
+        "G2c",
+        "activity 360/390/1440",
+        "city 390"
+      ],
+      "stoppedAt": "city 360 asset request audit",
+      "error": "Existing kid-full.glb request reported net::ERR_ABORTED; avatar still loaded.",
+      "followup": "City rerun passed at both widths with all network assertions enabled; desktop, phone and layout selectors passed separately."
+    },
+    "suites": [
+      "G2d touch 360x740 / 390x844",
+      "G2c controls 360 / 390",
+      "activity stages 1 and 10 + automatic events at 360 / 390 / 1440",
+      "city 360 / 390",
+      "desktop and phone gameplay",
+      "layout 360 / 390 / 412 / 844 landscape"
+    ],
+    "latestG2dRerun": {
+      "passed": true,
+      "viewports": [
+        "360x740",
+        "390x844"
+      ],
+      "angleOnlyCanvas": true,
+      "separatePowerAndFire": true,
+      "fourLimitedAmmoSlots": true,
+      "threeBeforeQualityFallback": true,
+      "firstResolutionThenFallback": true,
+      "liveBetweenWaveChoice": true,
+      "companions": true,
+      "explicitRefillAndRescue": true,
+      "errors": 0,
+      "outsideRequests": 0,
+      "failedRequests": 0
+    },
+    "g1dResetAndBuildingLevels": [
+      360,
+      390
+    ],
+    "installationPrefixes": [
+      "/workout/island/",
+      "/Bakasun/workout/island/"
+    ]
+  },
+  "rendering": {
+    "default": "Three.js procedural geometry, behind/side perspective camera",
+    "reducedResolutionBeforeFallback": true,
+    "fallback": "cached isometric Canvas2D; same model and progress",
+    "frameWindows": 90,
+    "lowQualityFrameMs": 24,
+    "fallbackFrameMs": 32,
+    "qualityTest": "Forced slow-frame thresholds exercise both stages; this is not a physical-device benchmark.",
+    "shadowAndReflection": "Lightweight surfaces; no dynamic mirror render pass."
+  },
+  "save": {
+    "version": 6,
+    "onlyAddition": "minigameEquipment.fireRescue.hose",
+    "v5PreservationAndInvalidRanksTested": true,
+    "eventsResetBuildingsAndStarsUnchanged": true
+  },
+  "artifacts": {
+    "screenshots": [
+      "360-navalDuel.png",
+      "360-alienDefense.png",
+      "360-fireRescue.png",
+      "390-navalDuel.png",
+      "390-alienDefense.png",
+      "390-fireRescue.png"
+    ],
+    "representativeStages": {
+      "360-navalDuel": 1,
+      "390-navalDuel": 10,
+      "aliens": 4,
+      "fire": 1
+    },
+    "g2cRetained": "verification.json and six stage-10 screenshots",
+    "largeReportsCommitted": false,
+    "defaultFullReports": "OS temporary directory; ISLAND_OUTPUT_DIR can override"
+  },
+  "physicalFps": {
+    "tested": false,
+    "targets": {
+      "mediumPhone": 60,
+      "weakPhone": 30
+    },
+    "reason": "Cloud Chromium uses ANGLE/SwiftShader; no physical target phones are available. Touch feel, sustained GPU FPS, heat and battery remain unmeasured."
+  }
+}

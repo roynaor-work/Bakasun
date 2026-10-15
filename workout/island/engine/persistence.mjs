@@ -3,7 +3,7 @@ import {initialProgress} from '../activity/progress.mjs';
 import { cellsFor } from './rules.mjs';
 import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs';
 
-export const CURRENT_VERSION = 5;
+export const CURRENT_VERSION = 6;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -27,6 +27,11 @@ export function createInitialState(data, now = Date.now()) {
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  // Only the new hose track is added; malformed/missing old tracks still fail validation.
+  5(old) {
+    if (!old.minigameEquipment?.fireRescue || typeof old.minigameEquipment.fireRescue !== 'object') return {...old,version:6};
+    return {...old,minigameEquipment:{...old.minigameEquipment,fireRescue:{hose:0,...old.minigameEquipment.fireRescue}},version:6};
+  },
   4(old,data) { return {...old,minigameEquipment:initialEquipment(data),version:5}; },
   3(old,data) { return {...old,minigameProgress:initialProgress(data),version:4}; },
   2(old,data) { return {...old,...initialActivity(data,old.updatedAt||old.createdAt||Date.now()),version:3}; },
