@@ -39,7 +39,7 @@ export async function checkActivity({browser,target,directory}) {
     }
     async function play(id,level) {
       const balance=await page.evaluate(id=>window.__island.data.config.minigames[id],id),memory={};let down=false;
-      for(let i=0;i<2400&&await page.locator('.minigame-canvas').count();i++) {
+      for(let i=0;i<4000&&await page.locator('.minigame-canvas').count();i++) {
         const m=await page.evaluate(()=>window.__island.games.current?.session.snapshot);if(!m)break;
         if(id==='alienDefense'&&m.aliens.some(a=>a.boss)&&!memory.bossShot){await shot('alienDefense-boss-10');memory.bossShot=true;}
         m.settings=balance.levels[level-1];memory.last={lives:m.lives,score:m.score,wave:m.wave,aliens:m.aliens?.length,remaining:m.remaining,water:m.water};const input=pilotInput(id,m,balance,memory);
