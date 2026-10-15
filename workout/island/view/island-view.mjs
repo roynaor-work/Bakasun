@@ -2,6 +2,7 @@ import * as T from '../vendor/three.module.js';
 import { Environment, GROUND, primitive, material } from './environment.mjs';
 import { Avatar, Citizens } from './avatar.mjs';
 import { createBuilding, disposeBuilding } from './buildings.mjs';
+import { levelValue } from '../engine/metrics.mjs';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -44,7 +45,7 @@ export class IslandView {
       if(repairing&&!item.repairMarker){
         const style=this.data.config.events.repairMarker;
         item.repairMarker=new T.Mesh(new T.ConeGeometry(style.radius,style.height,style.sides),new T.MeshBasicMaterial({color:style.color}));
-        item.repairMarker.position.y=(record.visual?.height||0)+style.offset;item.repairMarker.rotation.z=Math.PI;
+        item.repairMarker.position.y=(record.levels?.[b.level-1]?.visual?.height??record.visual?.height??0)+style.offset;item.repairMarker.rotation.z=Math.PI;
         item.repairMarker.userData.ownedGeometry=true;item.repairMarker.userData.ownedMaterial=true;item.group.add(item.repairMarker);
       }
       if(item.repairMarker)item.repairMarker.visible=Boolean(repairing);
@@ -56,7 +57,7 @@ export class IslandView {
     const road=buildings.filter(b=>this.definition(b.typeId||b.type)?.visual?.kind==='road');
     const points=road.map(b=>this.worldPosition(b.x,b.z));
     if(!points.length)for(const b of buildings){const r=this.definition(b.typeId||b.type);if(r){const p=this.worldPosition(b.x,b.z,r.footprint);p.z+=(r.footprint?.[1]||1)/2+.22;points.push(p);}}
-    const population=buildings.reduce((sum,b)=>sum+(this.definition(b.typeId||b.type)?.population||0),0);
+    const population=buildings.reduce((sum,b)=>sum+levelValue(b,this.definition(b.typeId||b.type),'population',this.data.config),0);
     this.walkPoints=points;this.citizens.setPoints(points,this.data.featureFlags?.citizens===false?0:Math.min(this.data.config?.maxCitizens??30,population));
     if(points.length&&!this.avatarPositioned){this.avatar.holder.position.copy(points[Math.floor(points.length/2)]);this.avatarPositioned=true;}
   }
@@ -81,9 +82,10 @@ export class IslandView {
   }
   setGhost(record,x,z,valid=true) {
     if(!this.renderer||!record)return;
-    const key=[record.id,x,z,valid].join(':');if(this.ghostKey===key)return;this.clearGhost();this.ghostKey=key;
+    const level=record.previewLevel||1;
+    const key=[record.id,level,x,z,valid].join(':');if(this.ghostKey===key)return;this.clearGhost();this.ghostKey=key;
     const [w,d]=record.footprint||[1,1],color=valid?'#39c88c':'#f06b77';
-    const group=this.buildingFactory?this.buildingFactory(record,1):this.makeBuilding(record);
+    const group=this.buildingFactory?this.buildingFactory(record,level):this.makeBuilding(record,level);
     group.traverse(o=>{if(o.isMesh||o.isLineSegments){if(o.userData.ownedMaterial)o.material.dispose();o.material=o.isLineSegments?new T.LineBasicMaterial({color,transparent:true,opacity:.65,depthWrite:false}):new T.MeshBasicMaterial({color,transparent:true,opacity:.42,depthWrite:false});o.userData.ownedMaterial=false;o.userData.ghostMaterial=true;o.castShadow=false;o.receiveShadow=false;}});
     const floor=new T.Mesh(new T.PlaneGeometry(w-.04,d-.04),new T.MeshBasicMaterial({color,transparent:true,opacity:.48,side:T.DoubleSide,depthWrite:false}));floor.rotation.x=-Math.PI/2;floor.position.y=.025;floor.userData.ownedGeometry=true;floor.userData.ghostMaterial=true;group.add(floor);
     const box=new T.BoxGeometry(w,.055,d),border=new T.LineSegments(new T.EdgesGeometry(box),new T.LineBasicMaterial({color,linewidth:2}));box.dispose();border.position.y=.035;border.userData.ownedGeometry=true;border.userData.ghostMaterial=true;group.add(border);

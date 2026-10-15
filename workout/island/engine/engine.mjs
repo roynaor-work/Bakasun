@@ -1,5 +1,5 @@
 import { createRegistry } from './registry.mjs';
-import { validatePlacement, canRemove } from './rules.mjs';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs';
 import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs';
 import { calculateIncome, accrueIncome } from './economy.mjs';
 import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld } from './persistence.mjs';
@@ -151,12 +151,10 @@ export function createEngine(data, options = {}) {
     return { ok: true, reason: 'reason.removed', id, refund };
   };
   engine.upgrade = id => {
+    const validation = upgradeAvailability(state, registry, id);
+    if (!validation.ok) return validation;
     const building = state.buildings.find(row => row.id === id);
-    if (!building) return { ok: false, reason: 'reason.invalid' };
-    const type = registry.buildings.get(building.typeId);
-    const nextLevel = type.levels[building.level];
-    if (!nextLevel) return { ok: false, reason: 'reason.maxLevel' };
-    if (state.money < nextLevel.cost) return { ok: false, reason: 'reason.money' };
+    const nextLevel = validation.nextLevel;
     remember({ kind: 'upgrade', id, previousLevel: building.level, moneyDelta: -nextLevel.cost });
     state.money -= nextLevel.cost; building.level++;
     changed('upgrade', { id });

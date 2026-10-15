@@ -21,7 +21,11 @@ function windows(g,w,d,y,count=2,color=C.glass) {
 function base(g,w,d,color=C.cream){block(g,color,[0,.055,0],[w*.96,.11,d*.96]);}
 function house(g,v,w,d,h) {
   base(g,w,d);const bw=w*.78,bd=d*.75;block(g,v.color,[0,h/2+.08,0],[bw,h,bd]);roof(g,v.roofColor,bw+.18,bd+.22,h+.08,.5);
-  windows(g,bw,bd,h*.58,Math.max(1,Math.floor(w)));
+  const floors=v.floors||1;
+  for(let floor=0;floor<floors;floor++) {
+    windows(g,bw,bd,(floor+.58)*h/floors,Math.max(1,Math.floor(w)));
+    if(floor)block(g,C.cream,[0,.08+floor*h/floors,0],[bw+.04,.07,bd+.04]);
+  }
   block(g,C.wood,[bw*.24,.29,bd/2+.04],[.26,.52,.07]);block(g,C.cream,[bw*.24,.07,bd/2+.23],[.45,.12,.32]);
   block(g,C.cream,[-bw*.2,h+.46,-bd*.2],[.19,.45,.21]);
 }
@@ -148,8 +152,10 @@ for(const kind of ['soccer','tennis','basketball'])registerBuildingVisual(kind,(
 registerBuildingVisual('pool',pool);registerBuildingVisual('athletics',athletics);
 for(const kind of ['wall','watchtower','shield','embassy'])registerBuildingVisual(kind,(g,v,w,d,h)=>defense(g,v,w,d,h,kind));
 export function createBuilding(record,level=1) {
-  const visual={kind:'house',color:'#efb99c',roofColor:'#d97e70',height:.85,...record.visual},[w,d]=record.footprint||[1,1],group=new T.Group();
-  group.name=record.id;const factory=visuals.get(visual.kind)||house;factory(group,visual,w,d,visual.height*(1+(Math.max(1,level)-1)*.13));
+  const levelVisual=record.levels?.[level-1]?.visual;
+  const visual={kind:'house',color:'#efb99c',roofColor:'#d97e70',height:.85,...record.visual,...levelVisual},[w,d]=record.footprint||[1,1],group=new T.Group();
+  group.name=record.id;const factory=visuals.get(visual.kind)||house;factory(group,visual,w,d,visual.height*(levelVisual?.height?1:1+(Math.max(1,level)-1)*.13));
+  for(let tier=0;tier<(visual.stands||0);tier++)for(const side of [-1,1])block(group,visual.roofColor,[side*w*.45,.22+tier*.2,0],[w*.09,.18,d*.65]);
   if(level>1){for(let i=0;i<Math.min(level-1,3);i++)part(group,'sphere','#f4d17d',[w*.36,.18+i*.16,d*.36],[.12,.12,.12]);}
   return batchMeshes(group);
 }

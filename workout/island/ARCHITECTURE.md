@@ -36,6 +36,8 @@ node --test tests/island-*.test.mjs
 node tests/e2e/island.mjs
 ```
 
+סבב `ISLAND_ONLY=city` מריץ רק את בדיקות G1c ברוחב 390 וברוחב 360: צורך בשירות, שדרוגי בית, חסימת כפילות ספורט והזזה בין פינות. `ISLAND_ONLY=layout` שומר את כל בדיקות הפריסה של G1b. ברירת המחדל כוללת את כל הסבבים.
+
 הבדיקה משתמשת ב־Playwright מותקן וב־Chrome המקומי ב־Windows. אפשר להתאים את הכתובת והכלים באמצעות משתני סביבה:
 
 ```powershell
@@ -45,7 +47,7 @@ $env:ISLAND_BROWSER = 'C:/path/to/chrome.exe'
 node tests/e2e/island.mjs
 ```
 
-הבדיקה מפיקה תמונות ודוח ב־`tests/e2e/screenshots/`, בודקת רוחב 1440 ורוחב 390 וגם תצוגה אופקית. השרת הפרטי שלה מגיש רק את `/workout/island/` וחוסם כל נתיב אחר, לרבות `codex-lab/`; אותה פקודה בודקת גם עצמאות של התיקייה המפורסמת. בדיקות תוכנה ו־SwiftShader אינן מדידת ביצועים במכשיר Android 10 פיזי; מכשיר כזה טרם נמדד.
+הבדיקה מפיקה תמונות ודוח ב־`tests/e2e/screenshots/` (אפשר להפנות לתיקייה אחרת ב־`ISLAND_OUTPUT_DIR`), בודקת רוחב 1440 ורוחב 390 וגם תצוגה אופקית. השרת הפרטי שלה מגיש רק את `/workout/island/` וחוסם כל נתיב אחר, לרבות `codex-lab/`; אותה פקודה בודקת גם עצמאות של התיקייה המפורסמת. בדיקות תוכנה ו־SwiftShader אינן מדידת ביצועים במכשיר Android 10 פיזי; מכשיר כזה טרם נמדד.
 
 ## חוזה המנוע
 
@@ -82,11 +84,32 @@ export function install(registry, data) {
 
 אפשר לקרוא לאותן פונקציות דרך `engine.registerBuilding(...)` ושאר שיטות הרישום. מקור הכנסה חדש נרשם ב־`config.incomeSources` או דרך `registerIncomeSource({ id, calculate(ctx) })`; הוא מחזיר כמויות לדקה לפי שמות המשאבים. כל המקורות מופיעים בפירוט של `income()`.
 
-שדרוגים מוגדרים רק ב־`config.buildings[id].levels`: הרשומה הראשונה היא הרמה הבסיסית, והבאות מציינות את מחיר השדרוג. `levelMultiplier` מגדיר כיצד האפקט, הרדיוס וההכנסה גדלים. `balanceId` מאפשר לסוג חדש להשתמש ברשומת איזון קיימת. דגל `featureFlag` ברשומה נבדק מול `featureFlags.json`; הדוגמאות מוסתרות תחת `exampleContent`. ארבע רשומות ההגנה נעולות במפורש.
+שדרוגים מוגדרים רק ב־`config.buildings[id].levels`: הרשומה הראשונה היא הרמה הבסיסית, והבאות מציינות את מחיר השדרוג. `levels[].population` ו־`levels[].supply` הם ערכים מפורשים לרמה, כולל אפס. שדה חסר משתמש בשדה הבסיס כפול `levelMultiplier`, לשמירת התאימות של הרחבות קיימות. `levelValue()` מרכז את החישוב; האוכלוסייה מחושבת באותו אופן למדדים, לתיירות, לביקוש ולאזרחים בתצוגה. `levelMultiplier` ממשיך להגדיל אפקט, רדיוס והכנסה. `levels[].title` מפנה לשם הרמה במילון, ו־`levels[].visual` מתמזג במראה הבסיסי. לבתים `floors` ו־`height` מגדירים קומות וגובה מפורשים; למתקני ספורט `stands` מוסיף יציעים מהגאומטריה הקיימת.
+
+`maxLevelByStage` הוא מערך רמות מרביות לפי האינדקס ב־`worldStages`. הוא נבדק רק בעת שדרוג: מבנה ישן ברמה גבוהה יותר נשאר תקין ופועל. כפתור השדרוג נשאר מוצג, עם המחיר, התוספת וסיבת חסימה (`reason.stageLevel`, כסף או רמה אחרונה). `upgradeAvailability()` ב־`rules.mjs` משותף לפקודה ולממשק. אין שינוי בחתימת `engine.upgrade(id)`. `balanceId` מאפשר לסוג חדש להשתמש ברשומת איזון קיימת. דגל `featureFlag` ברשומה נבדק מול `featureFlags.json`; הדוגמאות מוסתרות תחת `exampleContent`. ארבע רשומות ההגנה נעולות במפורש.
 
 למודל חזותי חדש אפשר להוסיף מפעל תצוגה באמצעות `view.setBuildingFactory((record, level) => group)`. המבנה יכול להשתמש מיד ב־`visual.kind` קיים; הדוגמה משתמשת בסגנון הפארק.
 
 אפשר גם לייבא `registerBuildingVisual` מ־`view/buildings.mjs` ולרשום `registerBuildingVisual('kind', (group, visual, width, depth, height) => { ... })`. שדה `visual.kind` בוחר במראה החדש בלי לשנות חוקים.
+
+## מגבלות עיר מבוססות נתונים — G1c
+
+לכל סוג קיים `config.buildings[id].limit`, ורשומות ההרחבה מקבלות אותו דרך ה־registry או דרך `balanceId`. לבחירת סוג חדש מגדירים:
+
+| `limit.kind` | שדות | כלל בעת הנחה חדשה |
+| --- | --- | --- |
+| `capacity` | `supply`, `levels[].supply`, `limit.margin`, `limit.reason` | סכום האספקה הקיימת מאותו סוג חייב להיות קטן מ־`population() + margin`. |
+| `stageCap` | `limit.maxCount[]`, `limit.reason` | מספר המופעים חייב להיות קטן מהתקרה של השלב הנוכחי. |
+| `unique` | `limit.maxCount[]`, `limit.minPopulation[]` לפי הצורך, `limit.reason` | תקרה מפורשת לכל שלב; מהמבנה השני נדרש גם סף האוכלוסייה של אותו שלב. |
+| `free` | ללא שדות נוספים | אין הגבלת כמות עירונית חדשה. |
+
+אפשר לצרף `maxCount[]` גם ל־`capacity`, כמו בחווה. `countReason` אופציונלי נותן סיבה נפרדת לחסימת התקרה, בעוד `reason` מסביר שהאספקה מספיקה. כל מערך שלבים מכיל ערך לכל שלב ב־`worldStages`; הוספת שלב דורשת לעדכן גם מערכים אלה. `minPopulation` אינו מגביל את המופע הראשון. בסוג `unique` חובה להגדיר `maxCount` במפורש; אין מספר איזון קבוע בקוד. את כל הסיבות מגדירים ב־`strings.he.json` עם הסבר על שדרוג, הגדלת העיר או איסוף חלקים. ערכי כל הסוגים הקיימים מופיעים בטבלת G1c ב־`QA.md`.
+
+`registry.config` מחזיק את הגדרות האיזון לצורך החישובים הטהורים ב־`rules.mjs`. `placementAvailability(state, registry, typeId)` בודק רק צורך ותקרות; הממשק משתמש בו לתגים בתוך הקטלוג הקיים. `validatePlacement()` משלב אותו בחוזה הקיים לפני תנאי המיקום, רק כאשר אין `ignoreId`. לכן בחירה חסומה מציגה את סיבת העיר בכל משבצת, והצל האדום וכפתור ההנחה ממשיכים לעבוד באותו מסלול. צורך אספקה שאינו מסופק (`supply < population`) מסומן ״מומלץ״; זה אינו עוקף כסף, כביש או מקום פנוי.
+
+המגבלות אינן נאכפות על טעינה, ייבוא, הזזה, הסרה או `undo()`. אין להוסיף אותן ל־`validateSave()`: ערים ישנות נשמרות גם כשהן חורגות מהכמות או מהרמה המותרת לבנייה חדשה. G1c לא הוסיף שדה לשמירה; G2 מוסיף בנפרד מעבר לגרסה 3 לנתוני הפעילות. ממשק ההזזה משאיר את המבנה המקורי במקומו עד אישור חוקי, משתמש באותו צל ובאותן סיבות גאומטריות, ושומר את הרמה בתצוגת הצל. אין עלות להזזה, וביטול בחירה אינו משנה מצב. שלוש הפעולות בכרטיס מוצגות בשורה של כפתורי 56 פיקסלים לפחות.
+
+ב־`world.json` אין כיום שכבת אזורים אסורים או נעולים בתוך האי. גבול הבנייה הקיים הוא `worldStages[stage].size`, נבדק לכל ה־footprint, ונפתח באיסוף החלקים הנדרש. איי הנוף אינם משטחי בנייה. אין כאן פורמט אזורים חדש.
 
 ## פרקים, קבוצה ושחקנים
 
@@ -106,7 +129,7 @@ export function install(registry, data) {
 
 ## החלפת תצוגה ושילוב חיצוני
 
-תצוגה חלופית תממש את חוזה `IslandView`: בנאי עם `canvas`, `data` והקריאות החוזרות `onCell({x,z})`, `onHover({x,z})`, `onSelect(id)`, `onReady()` ו־`onError(textId)`; שיטות `setWorld(state)`, `setGhost(record,x,z,valid)`, `clearGhost()`, `showRadius(record,instance)`, `setAvatar(record)`, `home()` ו־`dispose()`. תצוגת יצירת הדמות משתמשת גם ב־`attachAvatarPreview(canvas)` וב־`detachAvatarPreview()`. בדיקות הדפדפן משתמשות ב־`screenForCell(x,z)` וב־`metrics()` לצילום ולמדידה.
+תצוגה חלופית תממש את חוזה `IslandView`: בנאי עם `canvas`, `data` והקריאות החוזרות `onCell({x,z})`, `onHover({x,z})`, `onSelect(id)`, `onReady()` ו־`onError(textId)`; שיטות `setWorld(state)`, `setGhost(record,x,z,valid)`, `clearGhost()`, `showRadius(record,instance)`, `setAvatar(record)`, `home()` ו־`dispose()`. תצוגת יצירת הדמות משתמשת גם ב־`attachAvatarPreview(canvas)` וב־`detachAvatarPreview()`. `record.previewLevel` הוא רמז תצוגה אופציונלי לצל בזמן הזזה; בהיעדרו מוצגת רמה 1, בלי שינוי בחתימת השיטה. בדיקות הדפדפן משתמשות ב־`screenForCell(x,z)` וב־`metrics()` לצילום ולמדידה.
 
 הדמות נטענת מ־`assets/kid-full.glb`, ו־Three.js ו־GLTFLoader מ־`vendor/`, בתוך תיקיית האי. אלה עותקים ללא שינוי של הנכסים הקיימים במאגר, כולל הרישיון; אין CDN או פנייה לשירות חיצוני. ההעתקה נחוצה משום ש־GitHub Pages מפרסם את `workout/` ואינו מפרסם את `codex-lab/`. בדיקת תאימות הפרסום חייבת להצליח גם כאשר נתיבי המעבדה מחזירים 404. כמות האזרחים מוגבלת ב־`config.maxCitizens`, עד 30, והתצוגה מפחיתה איכות אוטומטית בקצב נמוך.
 

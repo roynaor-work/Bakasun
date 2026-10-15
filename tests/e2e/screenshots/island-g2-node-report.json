@@ -16,5 +16,13 @@
   },
   "command": "node --test tests/*.mjs",
   "environment": "Linux Node 24.19.0; isolated child processes enabled",
-  "cam_lab": "No baseline or final failure in the full run; cam-lab files unchanged."
+  "cam_lab": "No baseline or final failure in the full run; cam-lab files unchanged.",
+  "integration_with_main": {
+    "commit": "a1ed704",
+    "tests": 1009,
+    "pass": 971,
+    "fail": 0,
+    "skipped": 38,
+    "island_pass": 118
+  }
 }

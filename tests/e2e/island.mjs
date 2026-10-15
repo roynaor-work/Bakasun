@@ -40,11 +40,12 @@ if (!executablePath && process.platform === 'win32') {
   executablePath = path.join(process.env.ProgramFiles || 'C:/Program Files', 'Google/Chrome/Application/chrome.exe');
   await access(executablePath);
 }
-const directory = fileURLToPath(new URL('./screenshots/', import.meta.url));
+const directory = process.env.ISLAND_OUTPUT_DIR ? path.resolve(process.env.ISLAND_OUTPUT_DIR) : fileURLToPath(new URL('./screenshots/', import.meta.url));
 await mkdir(directory, { recursive: true });
-const browser = await chromium.launch({ executablePath, headless: true, args: [
+const launchBrowser = () => chromium.launch({ executablePath, headless: true, args: [
   '--no-proxy-server', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
 ] });
+let browser = await launchBrowser();
 const reports = [];
 
 async function checkViewport(width, height, label) {
@@ -439,12 +440,179 @@ async function checkLayoutViewport(width,height) {
   finally{await context.close();}
 }
 
+async function checkCityViewport(width, height) {
+  console.log(`city rules: ${width}x${height}`);
+  const context = await browser.newContext({ viewport: { width, height }, hasTouch: true, deviceScaleFactor: 1 });
+  // City limits are checked independently of the separately tested scheduler.
+  await context.route('**/data/featureFlags.json',async route=>{const response=await route.fetch();const flags=await response.json();await route.fulfill({response,json:{...flags,events:false}});});
+  const page = await context.newPage(); page.setDefaultTimeout(60000);
+  const errors = [], failedRequests = [], outsideRequests = [], screenshots = [], levels = [], assetRequests=[];
+  let phase='initial';
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+  for(const type of ['request','requestfinished','requestfailed'])page.on(type,request=>{if(request.url().endsWith('/kid-full.glb'))assetRequests.push({type,phase,timing:request.timing(),error:request.failure()?.errorText});});
+  page.on('requestfailed', request => failedRequests.push({url:request.url(),error:request.failure()?.errorText}));
+  page.on('request', request => { const url = new URL(request.url()); if (['http:', 'https:'].includes(url.protocol) && (url.origin !== baseUrl.origin || !url.pathname.startsWith(appPath))) outsideRequests.push(url.href); });
+  const shot = async name => { const file = `island-g1c-${width}-${name}.png`; await page.screenshot({ path: path.join(directory, file) }); screenshots.push(file); };
+  const cell = async (x, z) => {
+    const point = await page.evaluate(({ x, z }) => window.__island.view.screenForCell(x, z), { x, z });
+    assert.equal(await page.evaluate(p => document.elementFromPoint(p.x, p.y)?.id, point), 'world', `cell ${x},${z} remains visible`);
+    await page.touchscreen.tap(point.x, point.y);
+  };
+  const select = async typeId => {
+    const category = await page.evaluate(id => window.__island.engine.registry.buildings.get(id).category, typeId);
+    await page.locator(`[data-category="${category}"]`).tap();
+    await page.locator(`[data-building="${typeId}"]`).tap();
+  };
+  const place = async (typeId, x, z) => {
+    await select(typeId); await cell(x, z);
+    assert.equal(await page.locator('#ghost-status').getAttribute('data-valid'), 'true');
+    await page.locator('[data-action="place"]').tap();
+    return page.evaluate(() => window.__island.engine.state.buildings.at(-1).id);
+  };
+  const inspect = async (id, x, z) => {
+    // A tall foreground house can cover another building's ground anchor.
+    // Tap an actually visible part of the requested mesh, just as a child does.
+    const point = await page.evaluate(async ({ id, x, z }) => {
+      const T = await import('./vendor/three.module.js');
+      const { view } = window.__island;
+      view.scene.updateMatrixWorld(true);
+      const box = new T.Box3().setFromObject(view.groups.get(id).group);
+      const points = [view.screenForCell(x, z)];
+      const projected = [];
+      for (const px of [box.min.x, box.max.x]) for (const py of [box.min.y, box.max.y]) for (const pz of [box.min.z, box.max.z]) {
+        const p = new T.Vector3(px, py, pz).project(view.camera);
+        projected.push({ x: (p.x + 1) * innerWidth / 2, y: (1 - p.y) * innerHeight / 2 });
+      }
+      for (let py = Math.min(...projected.map(p => p.y)); py <= Math.max(...projected.map(p => p.y)); py += 2) for (let px = Math.min(...projected.map(p => p.x)); px <= Math.max(...projected.map(p => p.x)); px += 2) points.push({ x: px, y: py });
+      return points.find(p => {
+        if (document.elementFromPoint(p.x, p.y)?.id !== 'world') return false;
+        view.cellAt(p.x, p.y);
+        return view.ray.intersectObjects([...view.groups.values()].map(item => item.group), true).find(hit => hit.object.userData.buildingId)?.object.userData.buildingId === id;
+      });
+    }, { id, x, z });
+    assert.ok(point, `visible mesh for ${id}`);
+    await page.touchscreen.tap(point.x, point.y);
+    assert.equal(await page.evaluate(() => window.__island.ui.infoId), id);
+    await page.locator('.info-card:not([hidden])').waitFor();
+  };
+  try {
+    await page.goto(target, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => window.__island?.view?.metrics().avatarLoaded);
+    await page.locator('[data-action="avatar-start"]').tap();
+    await page.evaluate(() => { const { engine } = window.__island; engine.skipTutorial(); for (let i = 0; i < 200; i++) engine.tick(60); });
+    await page.waitForFunction(() => !document.querySelector('#toast').classList.contains('visible'));
+    const home = await place('house', 4, 5);
+    await inspect(home, 4, 5);
+    for (let level = 1; level <= 4; level++) {
+      const result = await page.evaluate(id => {
+        const { engine, view } = window.__island, item = view.groups.get(id);
+        return { level: engine.state.buildings.find(b => b.id === id).level, population: engine.population(), visualId: item.group.uuid };
+      }, home);
+      assert.equal(result.level, level); levels.push(result);
+      assertLayout(await measureLayout(page), null, `${width} house level ${level}`);
+      await shot(`house-level-${level}`);
+      if (level === 4) { assert.equal(await page.locator('[data-action="upgrade"]').isDisabled(), true); break; }
+      if (level > 1) {
+        assert.equal(await page.locator('[data-action="upgrade"]').isDisabled(), true);
+        assert.match(await page.locator('[data-action="upgrade"]').textContent(), /כשהאי יתרחב/);
+        await page.evaluate(stage => { const { engine, data } = window.__island; engine.grantParts(data.world.partGroup, data.config.worldStages[stage].requiredParts - engine.state.parts[data.world.partGroup]); }, level - 1);
+        await page.locator('[data-action="home"]').tap();
+      }
+      assert.equal(await page.locator('[data-action="upgrade"]').isDisabled(), false);
+      await page.locator('[data-action="upgrade"]').tap();
+    }
+    assert.deepEqual(levels.map(item => item.population), [4, 8, 16, 24]);
+    assert.equal(new Set(levels.map(item => item.visualId)).size, 4, 'each upgrade replaces the visible model');
+    await page.locator('[data-action="close-info"]').tap();
+    const tower = await place('waterTower', 8, 5);
+    await inspect(tower, 8, 5);
+    assert.match(await page.locator('.service-supply').textContent(), /24 מתוך 24/);
+    await page.locator('[data-action="close-info"]').tap();
+    await select('waterTower');
+    assert.equal(await page.locator('#ghost-status').getAttribute('data-reason'), 'reason.limit.waterTower');
+    assert.match(await page.locator('#ghost-status').textContent(), /לשדרג/);
+    assert.equal(await page.locator('[data-action="place"]').isDisabled(), true);
+    assert.equal(await page.locator('#world').getAttribute('data-ghost'), 'invalid');
+    assertLayout(await measureLayout(page), 55, `${width} blocked water placement`);
+    await shot('water-blocked');
+    await page.locator('[data-action="cancel"]').tap();
+    await page.locator('[data-category="services"]').tap();
+    assert.equal(await page.locator('[data-building="waterTower"] .building-hint').textContent(), 'אין צורך');
+    await shot('catalog-no-need');
+    await page.locator('[data-action="toggle-build"]').tap();
+    const secondHome = await place('house', 6, 5);
+    await inspect(secondHome, 6, 5); await page.locator('[data-action="upgrade"]').tap();
+    await page.locator('[data-action="close-info"]').tap();
+    await page.locator('[data-category="services"]').tap();
+    assert.equal(await page.locator('[data-building="school"] .building-hint').textContent(), 'מומלץ');
+    await shot('catalog-recommended');
+    await page.locator('[data-action="toggle-build"]').tap();
+    await select('waterTower'); await cell(10, 5);
+    assert.equal(await page.locator('#ghost-status').getAttribute('data-valid'), 'true', 'house upgrade creates demand');
+    await page.locator('[data-action="cancel"]').tap();
+    await place('soccer', 3, 8);
+    await page.locator('[data-category="sports"]').tap();
+    assert.match(await page.locator('[data-building="soccer"] .building-hint').textContent(), /שדרוג הקיים/);
+    await shot('catalog-upgrade');
+    await page.locator('[data-building="soccer"]').tap();
+    assert.equal(await page.locator('#ghost-status').getAttribute('data-reason'), 'reason.limit.soccer');
+    assert.match(await page.locator('#ghost-status').textContent(), /לשדרג את הקיים/);
+    await shot('soccer-blocked'); await page.locator('[data-action="cancel"]').tap();
+
+    // A service moves across opposite corners using the same pointer flow. The
+    // access roads are ordinary commands; no instance, currency or save is injected.
+    await page.evaluate(() => { const { engine } = window.__island; for (const [x, z] of [[3, 1], [22, 20]]) { const r = engine.place('road', x, z); if (!r.ok) throw new Error(r.reason); } });
+    await inspect(tower, 8, 5);
+    await page.locator('[data-action="move"]').tap();
+    await cell(1, 1); await page.locator('[data-action="place"]').tap();
+    await inspect(tower, 1, 1);
+    const actions = await page.locator('.info-actions button').evaluateAll(nodes => nodes.map(node => ({ action: node.dataset.action, text: node.textContent, width: node.getBoundingClientRect().width, height: node.getBoundingClientRect().height })));
+    assert.deepEqual(actions.map(item => item.action), ['move', 'upgrade', 'remove']);
+    assert.ok(actions.every(item => item.width >= 56 && item.height >= 56));
+    await shot('actions'); await page.locator('[data-action="move"]').tap();
+    assert.match(await page.locator('#ghost-status').textContent(), /ללא עלות/);
+    await cell(6, 5);
+    assert.equal(await page.locator('#ghost-status').getAttribute('data-reason'), 'reason.occupied');
+    assert.equal(await page.locator('[data-action="place"]').isDisabled(), true);
+    assert.equal(await page.evaluate(id => window.__island.engine.state.buildings.find(b => b.id === id).x, tower), 1);
+    await shot('move-red'); await page.locator('[data-action="cancel"]').tap();
+    await inspect(tower, 1, 1); await page.locator('[data-action="move"]').tap();
+    await cell(20, 20); assertLayout(await measureLayout(page), 55, `${width} free move placement`); await shot('move-green');
+    const moveResult = await page.evaluate(() => {
+      const { engine, ui } = window.__island, money = engine.state.money;
+      let change, previousMoney = money;
+      const off = engine.subscribe((state, event) => { if (event.type === 'move') change = { money: state.money, previousMoney, id: event.id }; previousMoney = state.money; });
+      window.__cityMove = { money, off, getChange: () => change };
+      return { ghost: ui.currentGhost };
+    });
+    assert.deepEqual(moveResult.ghost, { x: 20, z: 20 });
+    await page.locator('[data-action="place"]').tap();
+    const moved = await page.evaluate(id => { const { engine } = window.__island, check = window.__cityMove; check.off(); return { change: check.getChange(), before: check.money, instance: engine.state.buildings.find(b => b.id === id) }; }, tower);
+    // Only engine events are used for this comparison, excluding unrelated ticks.
+    assert.equal(moved.change.money, moved.change.previousMoney); assert.equal(moved.change.id, tower);
+    assert.deepEqual([moved.instance.x, moved.instance.z], [20, 20]);
+    await shot('moved');
+    await page.locator('[data-action="undo"]').tap();
+    assert.deepEqual(await page.evaluate(id => { const b = window.__island.engine.state.buildings.find(b => b.id === id); return [b.x, b.z]; }, tower), [1, 1]);
+    phase='reload';await page.reload({ waitUntil: 'networkidle' }); await page.waitForFunction(() => window.__island?.view?.metrics().avatarLoaded);phase='reloaded';
+    assert.equal(await page.evaluate(id => window.__island.engine.state.buildings.find(b => b.id === id).level, home), 4);
+    assert.deepEqual(errors, []); assert.deepEqual(failedRequests, []); assert.deepEqual(outsideRequests, []);
+    reports.push({ cityViewport: { width, height }, levels, actions, moved: moved.instance, errors, failedRequests, outsideRequests, screenshots });
+  } catch (error) { await shot('failure').catch(() => {}); console.error(JSON.stringify({ width, errors, failedRequests, outsideRequests,assetRequests })); throw error; }
+  finally { await context.close(); }
+}
+
 try {
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'activity') reports.push(...await checkActivity({browser,target,directory}));
+  // Keep virtual-clock activity and the real-time city suite in separate
+  // Chromium processes, including their network and graphics state.
+  if (!process.env.ISLAND_ONLY) {await browser.close();browser=await launchBrowser();}
+  if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'city') for (const width of [390, 360]) await checkCityViewport(width, width === 390 ? 844 : 740);
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'desktop') await checkViewport(1440, 900, 'desktop');
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'phone') await checkViewport(390, 844, 'phone');
   if (!process.env.ISLAND_ONLY || process.env.ISLAND_ONLY === 'layout') for (const [width,height] of [[360,740],[390,844],[412,915],[844,390]]) if (!process.env.ISLAND_LAYOUT_VIEWPORT || process.env.ISLAND_LAYOUT_VIEWPORT === `${width}x${height}`) await checkLayoutViewport(width,height);
   const report = { browser: await browser.version(), environment: 'Desktop Chromium with ANGLE/SwiftShader; viewport checks, not a physical Android 10 device', deploymentScope: 'Private server exposes only workout/island/; all requests are audited against that folder', results: reports };
-  await writeFile(path.join(directory, process.env.ISLAND_REPORT_NAME ? path.basename(process.env.ISLAND_REPORT_NAME) : process.env.ISLAND_ONLY === 'layout' ? 'island-layout-report.json' : 'island-report.json'), JSON.stringify(report, null, 2));
+  await writeFile(path.join(directory, process.env.ISLAND_REPORT_NAME ? path.basename(process.env.ISLAND_REPORT_NAME) : process.env.ISLAND_ONLY === 'city' ? 'island-city-report.json' : process.env.ISLAND_ONLY === 'layout' ? 'island-layout-report.json' : 'island-report.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 } finally { await browser.close(); if (server) { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); } }

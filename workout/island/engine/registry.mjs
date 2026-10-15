@@ -1,6 +1,7 @@
 /** Registries contain content, not rendering or DOM behavior. Extension modules call these methods. */
 export function createRegistry(data = {}) {
   const registry = {
+    config: data.config || {},
     buildings: new Map(), sports: new Map(), minigames: new Map(), eventTypes: new Map(), metrics: new Map(), incomeSources: new Map(),
   };
   function add(map, record) {
