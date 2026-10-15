@@ -66,15 +66,27 @@
     "Optional background music: effects only, to keep the mobile audio graph small"
   ],
   "unitTests": {
-    "command": "node --test workout/island/tests/*.test.mjs",
+    "command": "node --test tests/island-g2f.test.mjs",
     "passed": 76,
     "failed": 0
   },
   "requiredSuite": {
     "command": "node --test tests/*.mjs",
-    "passed": 1063,
-    "failed": 52,
+    "tests": 1229,
+    "passed": 1191,
+    "failed": 0,
     "skippedExisting": 38,
-    "blocker": "Legacy island assertions require updates under tests/, outside the user-authorized directory; awaiting clarification. No tests were skipped or changed by G2f."
+    "before": {
+      "tests": 1153,
+      "passed": 1063,
+      "failed": 52,
+      "skippedExisting": 38
+    }
+  },
+  "testUpdate": {
+    "islandTestsPassed": 338,
+    "runtimeChanged": false,
+    "g2fSuiteRelocated": "tests/island-g2f.test.mjs",
+    "existingSkipsUnchanged": true
   }
 }

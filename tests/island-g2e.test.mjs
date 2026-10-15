@@ -12,7 +12,7 @@ function kill(m){let guard=200;while(m.aliens.length&&!m.result&&guard--){const 
 function advance(m,seconds){for(let i=0;i<Math.ceil(seconds/.02)&&!m.result;i++)m.update(.02,{});}
 for(const boss of [false,true])test(`G2e final wave cleared with six seconds left completes immediately (boss=${boss})`,()=>{const m=alien({boss});kill(m);assert.equal(m.aliens.length,0);assert.equal(m.result?.outcome,'win');assert.ok(m.remaining>5);});
 for(const boss of [false,true])test(`G2e timer completion with living enemies terminates (boss=${boss})`,()=>{const m=alien({boss});advance(m,6.1);assert.equal(m.result?.outcome,'win');});
-test('G2e an empty intermediate wave stays empty until its deadline, then offers one upgrade',()=>{const m=alien({waves:2});kill(m);advance(m,1);assert.equal(m.aliens.length,0);assert.equal(m.choosing,false);advance(m,2.1);assert.equal(m.choosing,true);const wave=m.wave;assert.equal(m.chooseUpgrade(0),true);assert.equal(m.wave,wave+1);assert.equal(m.chooseUpgrade(0),false);kill(m);assert.equal(m.result?.outcome,'win');});
+test('G2e an empty intermediate wave offers one upgrade within the short G2f pause',()=>{const m=alien({waves:2});kill(m);advance(m,.1);assert.equal(m.aliens.length,0);assert.equal(m.choosing,false);advance(m,config.alienDefense.wavePauseSeconds+.02);assert.ok(m.time<1.5);assert.equal(m.choosing,true);const wave=m.wave;assert.equal(m.chooseUpgrade(0),true);assert.equal(m.wave,wave+1);assert.equal(m.chooseUpgrade(0),false);kill(m);assert.equal(m.result?.outcome,'win');});
 for(const route of ['clear','timer'])test(`G2e ${route} result passes the engine contract and grants stars, prize and next stage once`,()=>{const e=createEngine(data,{storage:null}),m=alien();if(route==='clear')kill(m);else advance(m,6.1);assert.ok(m.result);let result,finish;const game=e.registry.minigames.get('alienDefense');e.registry.minigames.set('alienDefense',{...game,start:ctx=>{finish=ctx.finish;return {dispose(){}};}});const money=e.state.money;const run=e.startMinigame('alienDefense',{level:1,onFinish:r=>{result=r;}});assert.equal(run.ok,true);finish(m.result);assert.ok(result.stars>=1);assert.ok(result.money>0);assert.equal(e.state.money,money+result.money);assert.equal(e.state.minigameProgress.alienDefense.stage,2);assert.equal(finish(m.result).ok,false);});
 
 import {DATA_VERSION,dataURL} from '../workout/island/release.mjs';
@@ -55,16 +55,19 @@ test('G2e regular aliens never drop currency; special aliens and bosses do, with
   const m=alien({waves:2,boss:false});kill(m);assert.equal(m.loot.length,0);
   const special=alien({waves:2,boss:true,enemyKinds:5});kill(special);assert.ok(special.loot.length>0);assert.ok(special.loot.length<=config.alienDefense.campaign.maxLoot);
 });
-test('G2e yaw and elevation axes clamp independently, preserve force and never fire on drag',()=>{
-  const b=config.navalDuel,input={x:100,y:100,yaw:0,angle:45,power:37,firing:false},anchor={};applyCanvasGesture(input,'navalDuel',anchor,b,true);input.x=10000;applyCanvasGesture(input,'navalDuel',anchor,b);assert.equal(input.yaw,90);assert.equal(input.angle,45);input.x=-10000;input.y=-10000;applyCanvasGesture(input,'navalDuel',anchor,b);assert.equal(input.yaw,-90);assert.equal(input.angle,90);input.y=10000;applyCanvasGesture(input,'navalDuel',anchor,b);assert.equal(input.angle,0);assert.equal(input.power,37);assert.equal(input.firing,false);
+test('G2e dragging supplies one target and never fires or consumes ammunition',()=>{
+  const b=config.navalDuel,m=naval(),input={x:100,y:100,firing:false},anchor={},ammo=[...m.ammo];
+  applyCanvasGesture(input,'navalDuel',anchor,b,true);assert.deepEqual([input.targetX,input.targetZ],[100,100]);
+  input.x=250;input.y=-30;applyCanvasGesture(input,'navalDuel',anchor,b);m.update(.01,input);
+  assert.deepEqual(m.aim,{x:250,z:-30});assert.equal(input.firing,false);assert.equal(m.phase,'aim');assert.deepEqual(m.ammo,ammo);
 });
-test('G2e torpedo ignores elevation, respects yaw, and unavailable selected weapons do not fire',()=>{
-  const m=naval();m.update(.01,{ammoIndex:2,yaw:30,angle:88,firing:true});assert.equal(m.ball.vy,0);assert.ok(m.ball.vz>0);assert.ok(Math.abs(m.ball.vz/m.ball.vx-Math.tan(Math.PI/6))<1e-8);assert.equal(m.aim.angle,config.navalDuel.defaultAngle);
-  const empty=naval();empty.ammo[1]=0;empty.update(.01,{ammoIndex:1,firing:true});assert.equal(empty.phase,'aim');assert.equal(empty.ammoIndex,1);assert.equal(empty.ammo[0],config.navalDuel.ammo[0].charges);
-  const reload=naval();reload.cooldowns[2]=5;reload.update(.01,{ammoIndex:2,firing:true});assert.equal(reload.phase,'aim');assert.equal(reload.ammo[2],config.navalDuel.ammo[2].charges);
+test('G2e torpedo follows the selected sea point without elevation or reload; an empty weapon cannot fire',()=>{
+  const m=naval();m.update(.01,{ammoIndex:2,targetX:240,targetZ:45,firing:true});advance(m,.1);assert.equal(m.ball.y,config.navalDuel.shipY);assert.ok(m.ball.z>0);assert.deepEqual([m.ball.targetX,m.ball.targetZ],[240,45]);
+  const empty=naval();empty.ammo[1]=0;empty.update(.01,{ammoIndex:1,firing:true});assert.equal(empty.phase,'aim');assert.equal(empty.ammoIndex,1);assert.equal(empty.ammo[0],config.navalDuel.levels[0].ammunition[0]);
+  const ready=naval(),supply=ready.ammo[2];assert.equal(ready.cooldowns[2],0);ready.update(.01,{ammoIndex:2,firing:true});assert.equal(ready.phase,'shot');assert.equal(ready.ammo[2],supply-1);assert.equal(ready.cooldowns[2],0);
 });
-test('G2e yaw can hit a concurrent second ship; sinking it leaves the first alive and advances only on fleet defeat',()=>{
-  const b=config.navalDuel,m=naval(10,{equipment:{damage:100}});m.update(.01,{ammoIndex:2,yaw:Math.atan2(b.combat.laneSpacing,b.enemyX-b.shipX)*180/Math.PI,firing:true});const first=m.enemies[0].hp;advance(m,2);assert.equal(m.enemies[0].hp,first);assert.equal(m.enemies[1].hp,0);advance(m,b.sinkSeconds+.1);assert.equal(m.result,undefined);assert.equal(m.wave,1);assert.equal(m.phase,'aim');m.update(.01,{});assert.equal(m.enemies.filter(e=>e.active&&e.hp>0).length,3);
+test('G2e the target circle can hit a concurrent second ship; sinking it leaves the first alive and advances only on fleet defeat',()=>{
+  const b=config.navalDuel,m=naval(10,{equipment:{damage:100}});m.update(.01,{ammoIndex:2,targetX:m.enemies[1].x,targetZ:m.enemies[1].z,firing:true});const first=m.enemies[0].hp;advance(m,2);assert.equal(m.enemies[0].hp,first);assert.equal(m.enemies[1].hp,0);advance(m,b.sinkSeconds+.1);assert.equal(m.result,undefined);assert.equal(m.wave,1);assert.equal(m.phase,'aim');m.update(.01,{});assert.equal(m.enemies.filter(e=>e.active&&e.hp>0).length,3);
 });
 test('G2e each naval ship class has independent speed, armament, hull shape and HP',()=>{const m=naval(10),types=config.navalDuel.shipTypes;assert.equal(new Set(types.map(t=>t.speed)).size,3);assert.equal(new Set(types.map(t=>t.attack)).size,3);assert.equal(new Set(types.map(t=>t.beam+':'+t.length)).size,3);advance(m,.5);const fleet=m.enemies.filter(e=>e.active);assert.equal(fleet.length,3);assert.equal(new Set(fleet.map(e=>e.maxHp)).size,3);});
 test('G2e optional model paths stay inside the published island and retain code fallback when absent',()=>{
