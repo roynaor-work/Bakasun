@@ -70,7 +70,7 @@ test('fire hose aims at cartoon flames, refills water and pressure, and repeats 
   for(const model of [a,b]){const memory={};for(let i=0;i<3000&&!model.result;i++)model.update(.04,pilotInput('fireRescue',model,data.config.minigames.fireRescue,memory));}
   assert.equal(a.result.outcome,'win');assert.deepEqual(a.snapshot(),b.snapshot());
   const dry=make();for(let i=0;i<100;i++)dry.update(.04,{firing:true,x:0,y:0});const water=dry.water,pressure=dry.pressure;
-  for(let i=0;i<100;i++)dry.update(.04,{refill:true,charge:true});assert.ok(dry.water>water);assert.ok(dry.pressure>pressure);
+  for(let i=0;i<100;i++)dry.update(.04,{refill:true,charge:true});assert.equal(dry.water,water);assert.ok(dry.pressure>pressure);
   for(let i=0;i<2000&&!dry.result;i++)dry.update(.04,{});assert.equal(dry.result.outcome,'lose');
 });
 test('naval duel uses a sea target and alternating turns, is winnable and deterministic with a seed',()=>{

@@ -1452,7 +1452,7 @@
           "winParts": 3,
           "enemyKinds": 5,
           "boss": true,
-          "bossLives": 18,
+          "bossLives": 600,
           "spawnBudget": 2,
           "seconds": 132,
           "patternKinds": 4,
@@ -1526,7 +1526,7 @@
         "radius": 26,
         "magnetRadius": 80,
         "magnetSpeed": 260,
-        "seconds": 8,
+        "seconds": 6,
         "max": 1,
         "kinds": [
           "spread",
@@ -1672,8 +1672,6 @@
           "damage"
         ],
         "maxStack": 3,
-        "damagePerStack": 0.18,
-        "ratePerStack": 0.18,
         "comboSeconds": 3,
         "comboMilestone": 5,
         "comboBonus": 2,
@@ -1686,10 +1684,31 @@
         "maxWings": 2,
         "celebrationSeconds": 1.4,
         "bossSpreadSpeed": 32,
-        "piercePerStack": 2,
         "spreadStep": 0.55,
         "wingRadius": 15,
-        "wingFrontOffset": 35
+        "wingFrontOffset": 35,
+        "stackCurve": {
+          "damage": [
+            0.18,
+            0.12,
+            0.07
+          ],
+          "rapid": [
+            0.16,
+            0.09,
+            0.05
+          ],
+          "laser": [
+            1,
+            0.6,
+            0.3
+          ],
+          "wing": [
+            0.12,
+            0.07,
+            0.04
+          ]
+        }
       },
       "hitFlashSeconds": 0.12,
       "models": {
@@ -1794,7 +1813,40 @@
           "shield": 1
         }
       ],
-      "requiresBuilding": "airbase"
+      "requiresBuilding": "airbase",
+      "balance": {
+        "minBossSeconds": 16
+      },
+      "render": {
+        "width": 844,
+        "height": 480,
+        "dpr": 1,
+        "worldScale": 0.065,
+        "camera": [
+          0,
+          30,
+          32
+        ],
+        "lookAt": [
+          0,
+          0,
+          -6
+        ],
+        "fov": 52,
+        "sky": "#071b39",
+        "stars": "#cbeaff",
+        "shot": "#ffe28a",
+        "bolt": "#fa799c",
+        "pickup": "#85e5bd",
+        "modelHeight": 3.2,
+        "bossHeight": 5.6,
+        "maxTriangles": 90000,
+        "maxDrawCalls": 70,
+        "fallbackSampleFrames": 90,
+        "fallbackFrameMs": 32,
+        "starCount": 100,
+        "starDepth": 70
+      }
     },
     "fireRescue": {
       "flameColumns": 3,
@@ -1820,15 +1872,15 @@
       "levels": [
         {
           "difficulty": 1,
-          "flames": 5,
+          "flames": 2,
           "seconds": 46,
           "water": 110,
-          "growthPerSecond": 0.024,
+          "growthPerSecond": 0.008,
           "points": 25,
           "winMoney": 30,
           "winParts": 0,
-          "spreadSeconds": 9.0,
-          "spreadCount": 4,
+          "spreadSeconds": 20,
+          "spreadCount": 7,
           "refillWater": 200,
           "parSeconds": 7.2,
           "parWater": 60,
@@ -1836,19 +1888,20 @@
           "feature": "feature.fire.1",
           "rescueCount": 0,
           "wind": 0,
-          "eruptionSeconds": 8.0
+          "eruptionSeconds": 14,
+          "resistance": 1
         },
         {
           "difficulty": 2,
-          "flames": 6,
+          "flames": 3,
           "seconds": 50,
           "water": 107,
-          "growthPerSecond": 0.032,
+          "growthPerSecond": 0.012,
           "points": 28,
           "winMoney": 42,
           "winParts": 0,
-          "spreadSeconds": 8.65,
-          "spreadCount": 3,
+          "spreadSeconds": 19,
+          "spreadCount": 6,
           "refillWater": 200,
           "parSeconds": 9.0,
           "parWater": 75,
@@ -1856,19 +1909,20 @@
           "feature": "feature.fire.2",
           "rescueCount": 0,
           "wind": 0,
-          "eruptionSeconds": 7.7
+          "eruptionSeconds": 13,
+          "resistance": 1
         },
         {
           "difficulty": 3,
-          "flames": 7,
+          "flames": 4,
           "seconds": 54,
           "water": 104,
-          "growthPerSecond": 0.04,
+          "growthPerSecond": 0.016,
           "points": 31,
           "winMoney": 54,
           "winParts": 0,
-          "spreadSeconds": 8.3,
-          "spreadCount": 2,
+          "spreadSeconds": 18,
+          "spreadCount": 5,
           "refillWater": 200,
           "parSeconds": 16.2,
           "parWater": 135,
@@ -1876,7 +1930,8 @@
           "feature": "feature.fire.3",
           "rescueCount": 1,
           "wind": 0,
-          "eruptionSeconds": 7.4
+          "eruptionSeconds": 12,
+          "resistance": 1
         },
         {
           "difficulty": 4,
@@ -1896,7 +1951,8 @@
           "feature": "feature.fire.4",
           "rescueCount": 1,
           "wind": 0,
-          "eruptionSeconds": 7.1
+          "eruptionSeconds": 7.1,
+          "resistance": 1
         },
         {
           "difficulty": 5,
@@ -1916,7 +1972,8 @@
           "feature": "feature.fire.5",
           "rescueCount": 1,
           "wind": 0,
-          "eruptionSeconds": 6.8
+          "eruptionSeconds": 6.8,
+          "resistance": 1
         },
         {
           "difficulty": 6,
@@ -1936,7 +1993,8 @@
           "feature": "feature.fire.6",
           "rescueCount": 2,
           "wind": 0,
-          "eruptionSeconds": 6.5
+          "eruptionSeconds": 6.5,
+          "resistance": 1
         },
         {
           "difficulty": 7,
@@ -1956,7 +2014,8 @@
           "feature": "feature.fire.7",
           "rescueCount": 2,
           "wind": 0,
-          "eruptionSeconds": 6.2
+          "eruptionSeconds": 6.2,
+          "resistance": 1.4
         },
         {
           "difficulty": 8,
@@ -1976,7 +2035,8 @@
           "feature": "feature.fire.8",
           "rescueCount": 2,
           "wind": 6,
-          "eruptionSeconds": 5.9
+          "eruptionSeconds": 5.9,
+          "resistance": 1.8
         },
         {
           "difficulty": 9,
@@ -1996,7 +2056,8 @@
           "feature": "feature.fire.9",
           "rescueCount": 2,
           "wind": 10,
-          "eruptionSeconds": 5.6
+          "eruptionSeconds": 5.6,
+          "resistance": 2.4
         },
         {
           "difficulty": 10,
@@ -2016,10 +2077,31 @@
           "feature": "feature.fire.10",
           "rescueCount": 3,
           "wind": 14,
-          "eruptionSeconds": 5.300000000000001
+          "eruptionSeconds": 5.300000000000001,
+          "resistance": 3
         }
       ],
       "sites": [
+        {
+          "kind": "car",
+          "x": 75,
+          "y": 257
+        },
+        {
+          "kind": "home",
+          "x": 76,
+          "y": 354
+        },
+        {
+          "kind": "warehouse",
+          "x": 180,
+          "y": 254
+        },
+        {
+          "kind": "roof",
+          "x": 185,
+          "y": 353
+        },
         {
           "kind": "home",
           "x": 74,
@@ -2036,29 +2118,9 @@
           "y": 165
         },
         {
-          "kind": "car",
-          "x": 75,
-          "y": 257
-        },
-        {
-          "kind": "warehouse",
-          "x": 180,
-          "y": 254
-        },
-        {
           "kind": "tree",
           "x": 291,
           "y": 273
-        },
-        {
-          "kind": "home",
-          "x": 76,
-          "y": 354
-        },
-        {
-          "kind": "roof",
-          "x": 185,
-          "y": 353
         },
         {
           "kind": "car",
@@ -2086,7 +2148,7 @@
           "color": "#ff586e"
         }
       ],
-      "range": 355,
+      "range": 210,
       "chargeSeconds": 1.2,
       "chargeBoost": 0.4,
       "rescue": {
@@ -2303,6 +2365,26 @@
         "sites": [
           [
             -6,
+            0.8,
+            0
+          ],
+          [
+            -6,
+            1.8,
+            7.2
+          ],
+          [
+            0,
+            2.6,
+            1.5
+          ],
+          [
+            0,
+            4.7,
+            5
+          ],
+          [
+            -6,
             1.6,
             -4.8
           ],
@@ -2317,29 +2399,9 @@
             -7
           ],
           [
-            -6,
-            0.8,
-            0
-          ],
-          [
-            0,
-            2.6,
-            1.5
-          ],
-          [
             7,
             2.4,
             0
-          ],
-          [
-            -6,
-            1.8,
-            7.2
-          ],
-          [
-            0,
-            4.7,
-            5
           ],
           [
             7,
@@ -2390,8 +2452,8 @@
         "x": -3,
         "z": 11,
         "minX": -8,
-        "maxX": 6,
-        "minZ": 9.5,
+        "maxX": 8,
+        "minZ": -5,
         "maxZ": 13,
         "speed": 6,
         "length": 5.3,
@@ -2423,9 +2485,18 @@
           7.3,
           0.1,
           10
-        ]
+        ],
+        "radius": 1.8,
+        "parkedSpeed": 0.1,
+        "lowWaterRatio": 0.2,
+        "hoseColor": "#ffd75f"
       },
-      "requiresBuilding": "fireStation"
+      "requiresBuilding": "fireStation",
+      "balance": {
+        "earlySeeds": 10,
+        "earlyWins": 9,
+        "lateMaxWins": 3
+      }
     },
     "navalDuel": {
       "shipX": 60,

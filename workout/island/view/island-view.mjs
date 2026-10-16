@@ -1,9 +1,9 @@
 import * as T from '../vendor/three.module.js';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=g6-20261017-1';
-import { Avatar, Citizens } from './avatar.mjs?v=g6-20261017-1';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=g6-20261017-1';
-import { levelValue } from '../engine/metrics.mjs?v=g6-20261017-1';
-import { LocalModels } from './local-models.mjs?v=g6-20261017-1';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=g2h-20261017-1';
+import { Avatar, Citizens } from './avatar.mjs?v=g2h-20261017-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=g2h-20261017-1';
+import { levelValue } from '../engine/metrics.mjs?v=g2h-20261017-1';
+import { LocalModels } from './local-models.mjs?v=g2h-20261017-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.

@@ -1,11 +1,11 @@
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g6-20261017-1';
-import {withCityHall} from './city-hall.mjs?v=g6-20261017-1';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=g6-20261017-1';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g6-20261017-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=g6-20261017-1';
-import {initialProgress} from '../activity/progress.mjs?v=g6-20261017-1';
-import { cellsFor } from './rules.mjs?v=g6-20261017-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g6-20261017-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2h-20261017-1';
+import {withCityHall} from './city-hall.mjs?v=g2h-20261017-1';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=g2h-20261017-1';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g2h-20261017-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=g2h-20261017-1';
+import {initialProgress} from '../activity/progress.mjs?v=g2h-20261017-1';
+import { cellsFor } from './rules.mjs?v=g2h-20261017-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g2h-20261017-1';
 
 export const CURRENT_VERSION = 10;
 export const STORAGE_KEY = 'island.v1';

@@ -1,8 +1,8 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig} from './soccer-rig.mjs?v=g6-20261017-1';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint} from './soccer-presentation.mjs?v=g6-20261017-1';
+import {cloneSoccerRig} from './soccer-rig.mjs?v=g2h-20261017-1';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint} from './soccer-presentation.mjs?v=g2h-20261017-1';
 
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   const renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'high-performance'});

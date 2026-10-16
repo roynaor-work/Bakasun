@@ -1,6 +1,7 @@
-import {runCanvasGame} from './canvas-session.mjs?v=g6-20261017-1';
-import {oval,drawCrew} from './art.mjs?v=g6-20261017-1';
-import {createFireView} from './fire-view.mjs?v=g6-20261017-1';
+import {runCanvasGame} from './canvas-session.mjs?v=g2h-20261017-1';
+import {oval,drawCrew} from './art.mjs?v=g2h-20261017-1';
+import {createFireView} from './fire-view.mjs?v=g2h-20261017-1';
+export function fireHydrantDistance(truck,balance){return Math.hypot(truck.x-balance.hydrant.position[0],truck.z-balance.hydrant.position[2]);}
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 export function createFireEntity(site,type,active,heat,index){return {x:site.x,y:site.y,kind:site.kind,type,active,heat,phase:index*1.7,spreadAge:0,warning:0};}
 export function createFireModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,sound=()=>{}}) {
@@ -12,8 +13,8 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
   const rescues=balance.rescueSites.slice(0,settings.rescueCount).map(site=>({...balance.rescue,...site,rescued:false,expired:false,remaining:balance.rescue.timeoutSeconds,progress:0,descent:0,feedback:0,walkX:site.x,walkY:site.y})),rescue=rescues[0],crew=balance.crew,extraHose=equipment.hose||0,status={seconds:0,reserve:0,out:0,total:settings.flames,rescued:0};
   for(let i=0;i<settings.flames+settings.spreadCount;i++)flames.push(createFireEntity(balance.sites[i],i%settings.fireKinds,i<settings.flames,i<settings.flames?balance.initialHeatBase+random()*balance.initialHeatRange:0,i));
   function activeCount(){let n=0;for(const f of flames)if(f.active)n++;return n;}
-  const model={settings,flames,aim,impact,truck,nozzle,rescue,rescues,maxWater,maxPressure,range,aimRadius,extraHose,equipment,get rescueProgress(){return rescue?.progress||0;},statusId:'minigame.fireStatus',spraying:false,refilling:false,charging:false,rescuing:false,
-    get warningIds(){return [water<=0?'minigame.noWater':null,pressureEmpty?'minigame.noPressure':null].filter(Boolean);},get warningId(){return water<=0?'minigame.noWater':pressureEmpty?'minigame.noPressure':null;},get pressureEmpty(){return pressureEmpty;},get score(){return score;},get lives(){return Math.ceil(remaining);},get wave(){return 1;},get result(){return result;},get water(){return water;},get pressure(){return pressure;},get remaining(){return remaining;},get reserve(){return reserve;},get time(){return time;},get charge(){return charge;},
+  const model={settings,flames,aim,impact,truck,nozzle,rescue,rescues,maxWater,maxPressure,range,aimRadius,extraHose,equipment,get rescueProgress(){return rescue?.progress||0;},statusId:'minigame.fireStatus',atHydrant:false,inRange:true,spraying:false,refilling:false,charging:false,rescuing:false,
+    get warningIds(){return [water<=0?'minigame.noWater':water/maxWater<=balance.hydrant.lowWaterRatio?'minigame.lowWater':null,pressureEmpty?'minigame.noPressure':null].filter(Boolean);},get warningId(){return water<=0?'minigame.noWater':pressureEmpty?'minigame.noPressure':water/maxWater<=balance.hydrant.lowWaterRatio?'minigame.lowWater':null;},get pressureEmpty(){return pressureEmpty;},get score(){return score;},get lives(){return Math.ceil(remaining);},get wave(){return 1;},get result(){return result;},get water(){return water;},get pressure(){return pressure;},get remaining(){return remaining;},get reserve(){return reserve;},get time(){return time;},get charge(){return charge;},
     statusValues(){status.seconds=Math.ceil(remaining);status.reserve=Math.floor(reserve);status.out=out;status.total=activeCount();status.rescued=0;for(const r of rescues)status.rescued+=Number(r.rescued);return status;},
     update(dt,input=EMPTY){
       if(result||dt<=0)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;remaining=Math.max(0,remaining-dt);
@@ -22,16 +23,18 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
       if(input.left||input.right)truck.targetX=Math.max(vehicle.minX,Math.min(vehicle.maxX,truck.x+(Number(Boolean(input.right))-Number(Boolean(input.left)))*vehicle.speed*dt));
       const moveX=truck.targetX-truck.x,moveZ=truck.targetZ-truck.z,moveDistance=Math.hypot(moveX,moveZ),moveStep=Math.min(moveDistance,vehicle.speed*dt);
       if(moveDistance>0){truck.x+=moveX/moveDistance*moveStep;truck.z+=moveZ/moveDistance*moveStep;}
+      model.atHydrant=fireHydrantDistance(truck,balance)<=balance.hydrant.radius&&moveStep/dt<=balance.hydrant.parkedSpeed;
       nozzle.x=balance.nozzleX+(truck.x-vehicle.x)/balance.render.worldScale;nozzle.y=balance.nozzleY+(truck.z-vehicle.z)/balance.render.worldScale;
       if(Number.isFinite(input.x))aim.x=input.x;if(Number.isFinite(input.y))aim.y=input.y;
       const dx=aim.x+Math.sin(time*1.6)*settings.wind-nozzle.x,dy=aim.y-nozzle.y,distance=Math.hypot(dx,dy),ratio=distance>range?range/distance:1;
+      model.inRange=distance<=range;
       impact.x=nozzle.x+dx*ratio;impact.y=nozzle.y+dy*ratio;
-      model.charging=Boolean(input.charge);model.refilling=Boolean(input.refill);
+      model.charging=Boolean(input.charge);model.refilling=Boolean(model.atHydrant&&!input.firing);
       model.rescuing=Boolean(input.rescue&&!input.refill&&!input.charge);
       model.spraying=Boolean(input.firing&&!input.rescue&&!input.refill&&!input.charge&&water>0&&!pressureEmpty);
       if(model.charging){charge=Math.min(1,charge+dt/balance.chargeSeconds);pressure=Math.min(maxPressure,pressure+balance.pressureRefillPerSecond*dt);if(pressure>=balance.pressureRestart)pressureEmpty=false;sound('refill');}
       if(model.spraying){water=Math.max(0,water-balance.waterUsePerSecond*(1+extraHose*crew.secondWaterUse)*dt);pressure=Math.max(0,pressure-balance.pressureUsePerSecond*dt);if(pressure===0)pressureEmpty=true;sound('spray');}
-      else{if(model.refilling){const refill=Math.min(maxWater-water,reserve,balance.waterRefillPerSecond*(equipment.tank||1)*dt);water+=refill;reserve-=refill;if(refill>0)sound('refill');}}
+      else{if(model.refilling){const refill=Math.min(maxWater-water,balance.waterRefillPerSecond*(equipment.tank||1)*dt);water+=refill;if(refill>0)sound('refill');}}
       const boost=1+balance.chargeBoost*charge;
       if(model.spraying)charge=Math.max(0,charge-dt/balance.chargeSeconds);
       eruption-=dt;if(eruption<=0){const candidates=flames.filter(f=>!f.active);if(candidates.length){const target=candidates[Math.floor(random()*candidates.length)];target.active=true;target.warning=balance.eruptionWarningSeconds;}eruption=settings.eruptionSeconds;}
@@ -39,7 +42,7 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
         if(f.warning>0){f.warning=Math.max(0,f.warning-dt);if(f.warning===0){f.heat=balance.initialHeatBase;sound('crackle');}continue;}
         if(f.heat<=0)continue;sound('crackle');
         const type=balance.fireTypes[f.type];
-        if(model.spraying&&Math.hypot(f.x-impact.x,f.y-impact.y)<=aimRadius)f.heat-=balance.extinguishPerSecond*pressure*power*boost*(1+extraHose*crew.secondPower)/type.resistance*dt;
+        if(model.spraying&&Math.hypot(f.x-nozzle.x,f.y-nozzle.y)<=range&&Math.hypot(f.x-impact.x,f.y-impact.y)<=aimRadius)f.heat-=balance.extinguishPerSecond*pressure*power*boost*(1+extraHose*crew.secondPower)/type.resistance/(settings.resistance||1)*dt;
         else{f.heat=Math.min(1,f.heat+settings.growthPerSecond*type.growth*dt);f.spreadAge+=dt*type.growth;}
         if(f.heat<=0){f.heat=0;out++;score+=settings.points;continue;}
         if(settings.spreadSeconds&&f.spreadAge>=settings.spreadSeconds){
@@ -64,7 +67,7 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
       else if(remaining<=0)result={outcome:'lose',score};
       if(result)result.summary={out,rescued:rescues.filter(r=>r.rescued).length,water:Math.floor(water)};
     },
-    snapshot(){return {maxWater,maxPressure,warningId:model.warningId,pressureEmpty,score,result,extraHose,equipment:{...equipment},water,pressure,remaining,reserve,time,charge,range,truck:{...truck},nozzle:{...nozzle},rescueProgress:model.rescueProgress,rescues:rescues.map(r=>({...r})),rescue:rescue?{...rescue}:null,flames:flames.map(f=>({...f})),aim:{...aim},impact:{...impact},spraying:model.spraying,rescuing:model.rescuing};}
+    snapshot(){return {atHydrant:model.atHydrant,inRange:model.inRange,hydrantDistance:fireHydrantDistance(truck,balance),hose:{start:{...nozzle},truck:{...truck}},maxWater,maxPressure,warningId:model.warningId,pressureEmpty,score,result,extraHose,equipment:{...equipment},water,pressure,remaining,reserve,time,charge,range,truck:{...truck},nozzle:{...nozzle},rescueProgress:model.rescueProgress,rescues:rescues.map(r=>({...r})),rescue:rescue?{...rescue}:null,flames:flames.map(f=>({...f})),aim:{...aim},impact:{...impact},spraying:model.spraying,rescuing:model.rescuing};}
   };return model;
 }
 export function drawFire(p,m,{config,balance,art,quality,view,t}) {

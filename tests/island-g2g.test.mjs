@@ -68,7 +68,7 @@ test('G2g geometry, textures, materials and instance buffers dispose once, inclu
 });
 test('G2g projected targets round-trip to fire/window coordinates and hit the same logical impact',()=>{
  const model=make(),renderer=fakeRenderer(),view=createFireView(sceneContext,model,()=>renderer);
- for(const target of [...model.flames,model.rescue]){const screen=view.projectTarget(target.x,target.y),logical=view.targetAt(screen.x,screen.y);assert.deepEqual(logical,{x:target.x,y:target.y});model.update(.001,{...logical,firing:true});assert.ok(Math.hypot(model.impact.x-target.x,model.impact.y-target.y)<.01);}
+ for(const target of [...model.flames,model.rescue]){const screen=view.projectTarget(target.x,target.y),logical=view.targetAt(screen.x,screen.y);assert.deepEqual(logical,{x:target.x,y:target.y});model.update(.001,{...logical,firing:true});if(model.inRange)assert.ok(Math.hypot(model.impact.x-target.x,model.impact.y-target.y)<.01);else{assert.ok(Math.abs(Math.hypot(model.impact.x-model.nozzle.x,model.impact.y-model.nozzle.y)-model.range)<.01);assert.ok(Math.hypot(model.impact.x-target.x,model.impact.y-target.y)>0);}}
  view.dispose();
 });
 test('G2g quality lowers resolution first, then releases WebGL and preserves model state for Canvas2D',()=>{
@@ -111,7 +111,7 @@ test('G2g unsupported WebGL preserves procedural model sprites and reports faile
  const {art,draws}=sprites();await loadOptionalArt(art,config.alienDefense,()=>false,{createRenderer(){throw Error('no WebGL');}});assert.equal(art.modelArt.failed,6);assert.equal(draws.length,0);
 });
 test('G2g release and new sounds are present; all runtime versioned imports use the same release',async()=>{
- assert.equal(DATA_VERSION,'g6-20261017-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
+ assert.equal(DATA_VERSION,'g2h-20261017-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
  async function walk(url){for(const entry of await readdir(url,{withFileTypes:true})){if(['vendor','verification'].includes(entry.name))continue;const next=new URL(entry.name+(entry.isDirectory()?'/':''),url);if(entry.isDirectory())await walk(next);else if(/\.(mjs|html)$/.test(entry.name)){const source=await readFile(next,'utf8');for(const [,v]of source.matchAll(/(?:\.mjs|\.css)\?v=([^'"\s]+)/g))assert.equal(v,DATA_VERSION,next.pathname);}}}await walk(root);
 });
 

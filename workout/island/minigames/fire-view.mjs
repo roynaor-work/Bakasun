@@ -1,9 +1,9 @@
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {palette} from '../view/environment.mjs?v=g6-20261017-1';
-import {loadFireTruck} from './fire-truck.mjs?v=g6-20261017-1';
-import {Avatar} from '../view/avatar.mjs?v=g6-20261017-1';
-import {LocalModels} from '../view/local-models.mjs?v=g6-20261017-1';
+import {palette} from '../view/environment.mjs?v=g2h-20261017-1';
+import {loadFireTruck} from './fire-truck.mjs?v=g2h-20261017-1';
+import {Avatar} from '../view/avatar.mjs?v=g2h-20261017-1';
+import {LocalModels} from '../view/local-models.mjs?v=g2h-20261017-1';
 
 /** Own everything in this round. Static colored parts share a material and are
  * merged at setup; particles, stream vertices and scratch vectors are fixed. */
@@ -72,11 +72,9 @@ export function createFireScene(ctx,model,adapters={}) {
   const hydrantBase=new T.Group();scene.add(hydrantBase);
   round(.24,1,r.truck,7.3,.6,10,hydrantBase);round(.37,.16,palette.cream,7.3,1.07,10,hydrantBase);
   box(1,.17,.17,r.truck,7.3,.9,10,hydrantBase);merge(hydrantBase);
-  // Hose curves are authored once, with a separate stream updated in place.
-  const nozzle=new T.Vector3(...r.avatarPosition);nozzle.y+=1.25;nozzle.z-=.35;
-  const hose=new T.CatmullRomCurve3([new T.Vector3(tx+1,.5,tz),new T.Vector3(0,.2,13),new T.Vector3(3,.2,13),nozzle]);
-  part(new T.TubeGeometry(hose,20,.11,5,false),balance.crew.hoseColor,0,0,0);
+  const nozzle=new T.Vector3();
   merge(fixed);
+  const hoseArray=new Float32Array(9),hoseGeometry=ownG(new T.BufferGeometry());hoseGeometry.setAttribute('position',new T.BufferAttribute(hoseArray,3));const hydrantHose=new T.Line(hoseGeometry,ownM(new T.LineBasicMaterial({color:balance.hydrant.hoseColor})));scene.add(hydrantHose);
   const cannon=new T.Group(),barrel=new T.Group(),cannonMuzzle=new T.Object3D();scene.add(cannon);cannon.add(barrel);
   const cap=new T.Group();cannon.add(cap);round(.4,.25,colors.cannon,0,0,0,cap);merge(cap);
   // The barrel is a separate pivot; no geometry is made when its aim changes.
@@ -135,6 +133,7 @@ export function createFireScene(ctx,model,adapters={}) {
   function put(mesh,index,x,y,z,sx,sy= sx,sz=sx,billboard=false){dummy.position.set(x,y,z);dummy.scale.set(sx,sy,sz);if(billboard)dummy.quaternion.copy(camera.quaternion);else dummy.quaternion.identity();dummy.updateMatrix();mesh.setMatrixAt(index,dummy.matrix);}
   function animate(){
     if(disposed)return;
+    hydrantHose.visible=model.atHydrant;const hp=balance.hydrant.position;hoseArray.set([hp[0],.35,hp[2],(hp[0]+model.truck.x)/2,.12,(hp[2]+model.truck.z)/2,model.truck.x,.7,model.truck.z]);hoseGeometry.attributes.position.needsUpdate=true;
     truckBase.position.set(model.truck.x,0,model.truck.z);
     ladder.position.set(model.truck.x,2,model.truck.z);
     worldPoint(model.aim.x,model.aim.y,impact);
@@ -187,7 +186,7 @@ export function createFireScene(ctx,model,adapters={}) {
     async loadHydrant(){const spec=balance.hydrant;if(!await models.load(spec)||disposed)return false;const visual=models.create(spec,{height:spec.height});if(!visual)return false;visual.position.fromArray(spec.position);scene.add(visual);hydrantVisual=visual;hydrantBase.visible=false;return true;},
     hydrantMetrics(){return {loaded:Boolean(hydrantVisual),art:models.metrics()};},
     setTruck(visual){if(disposed){visual.dispose();return false;}scene.add(visual.root);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls||visual.cannonFaces===0){visual.dispose();return false;}truckVisual=visual;truckBase.visible=cannon.visible=false;return true;},
-    truckMetrics(){return {loaded:Boolean(truckVisual),cannonFaces:truckVisual?.cannonFaces||0,yaw:truckVisual?.turret.rotation.y??cannon.rotation.y,muzzle:{x:nozzle.x,y:nozzle.y,z:nozzle.z}};},worldPoint,project,animate,metrics,dispose,anchors,point,scratch};
+    truckMetrics(){return {loaded:Boolean(truckVisual),cannonFaces:truckVisual?.cannonFaces||0,yaw:truckVisual?.turret.rotation.y??cannon.rotation.y,muzzle:{x:nozzle.x,y:nozzle.y,z:nozzle.z},hydrantHose:model.atHydrant,hoseEnd:{x:model.truck.x,z:model.truck.z}};},worldPoint,project,animate,metrics,dispose,anchors,point,scratch};
 }
 
 /** Same two-stage degradation contract as naval-view; the model never changes. */
@@ -219,6 +218,7 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
   const view={get mode(){return failed?'canvas':'three';},
     metrics(){return {...world.metrics(),low,avatarLoaded:avatarReady,rendererTriangles:renderer.info?.render.triangles||0,rendererDrawCalls:renderer.info?.render.calls||0,truck:world.truckMetrics(),hydrant:world.hydrantMetrics()};},
     degrade(fallback=false){if(disposed)return;if(fallback){failed=true;dispose();}else if(!low){low=true;renderer.setSize(r.width*r.resolutionScale,r.height*r.resolutionScale,false);if(avatar){disposeAvatar();avatarReady=false;world.firefighter.visible=true;}}},dispose,
+    resize(w=ctx.config.width,h=ctx.config.height){if(disposed)return;renderer.setSize(w*(low?r.resolutionScale:1),h*(low?r.resolutionScale:1),false);world.camera.aspect=w/h;const factor=Math.max(1,(r.width/r.height)/(w/h));world.camera.position.fromArray(r.camera);world.camera.position.sub(new T.Vector3(...r.lookAt)).multiplyScalar(factor).add(new T.Vector3(...r.lookAt));world.camera.lookAt(...r.lookAt);world.camera.updateProjectionMatrix();},
     projectTarget(x,y){if(disposed)return null;world.worldPoint(x,y,point);world.project(point,screen);return {x:screen.x,y:screen.y};},
     truckScreen(){if(disposed)return null;point.set(model.truck.x,1.5,model.truck.z);world.project(point,screen);return {x:screen.x,y:screen.y};},
     isTruckAt(x,y){if(disposed)return undefined;const pos=view.truckScreen();return Math.hypot(x-pos.x,y-pos.y)<ctx.balance.vehicle.hitRadius;},
@@ -240,12 +240,13 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
         const {palette:colors}=ctx.config.visuals;p.font=r.markerFont;p.textAlign='center';
         for(const f of model.flames){if(!f.active)continue;world.worldPoint(f.x,f.y,point);point.y+=1.8;world.project(point,screen);
           if(f.warning>0){p.globalAlpha=.4+.6*Math.abs(Math.sin(model.time*14));p.strokeStyle=colors.embers;p.lineWidth=3;p.beginPath();p.arc(screen.x,screen.y+15,16,0,Math.PI*2);p.stroke();p.globalAlpha=1;}
-          else if(f.heat>0){p.fillStyle=palette.teal;p.fillRect(screen.x-r.barWidth/2,screen.y,r.barWidth,r.barHeight);p.fillStyle=f.heat>r.heatThresholds[1]?ctx.balance.fireTypes[0].color:colors.gold;p.fillRect(screen.x-r.barWidth/2,screen.y,r.barWidth*f.heat,r.barHeight);}
+          else if(f.heat>0){if(Math.hypot(f.x-model.nozzle.x,f.y-model.nozzle.y)>model.range){p.fillStyle=colors.white;p.fillText(ctx.t('minigame.tooFar'),screen.x,screen.y-10);}p.fillStyle=palette.teal;p.fillRect(screen.x-r.barWidth/2,screen.y,r.barWidth,r.barHeight);p.fillStyle=f.heat>r.heatThresholds[1]?ctx.balance.fireTypes[0].color:colors.gold;p.fillRect(screen.x-r.barWidth/2,screen.y,r.barWidth*f.heat,r.barHeight);}
         }
         for(const rescue of model.rescues){if(rescue.expired)continue;point.fromArray(rescue.world);point.y+=2.2;world.project(point,screen);
           if(!rescue.rescued){p.fillStyle=colors.white;p.fillText(ctx.t('minigame.rescueMarker'),screen.x,screen.y);p.fillStyle=palette.teal;p.fillRect(screen.x-r.timerWidth/2,screen.y+5,r.timerWidth,4);p.fillStyle=colors.white;p.fillRect(screen.x-r.timerWidth/2,screen.y+5,r.timerWidth*rescue.remaining/rescue.timeoutSeconds,4);}
           else if(rescue.feedback>0){p.fillStyle=r.success;p.fillText(ctx.t('minigame.rescueHeart'),screen.x,screen.y-rescue.descent*12);}
         }
+        if(model.water/model.maxWater<=ctx.balance.hydrant.lowWaterRatio){point.fromArray(ctx.balance.hydrant.position);point.y+=2;world.project(point,screen);p.fillStyle=ctx.balance.hydrant.hoseColor;p.fillText(ctx.t('minigame.hydrantArrow'),Math.max(30,Math.min(ctx.config.width-30,screen.x)),Math.max(100,Math.min(ctx.config.height-25,screen.y)));}
         world.worldPoint(model.aim.x,model.aim.y,point);world.project(point,screen);p.strokeStyle=model.rescuing?r.success:colors.streamSpray;p.lineWidth=2;p.beginPath();p.arc(screen.x,screen.y,13,0,Math.PI*2);p.stroke();p.fillStyle=colors.pearl;p.fillRect(screen.x-2,screen.y-2,4,4);
         return true;
       }catch{failed=true;dispose();return false;}
