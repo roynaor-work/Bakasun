@@ -1,0 +1,3 @@
+import {createTennis} from '../minigames/tennis.mjs';
+/** Reads only the landing marker and timing, never the RNG or AI decisions. */
+export function tennisBot(config,stage=1,seed=42,difficulty='easy',ranks=config.player.defaults){const model=createTennis({config,stage,seed,difficulty,ranks});let lastContact=-1,lastServe=-1;for(let i=0;i<144000&&!model.result;i++){const s=model.getState();let swing=false;if(s.phase==='serve'&&s.server===0&&lastServe!==s.pointNumber){swing=true;lastServe=s.pointNumber;}if(s.phase==='rally'&&s.contact?.side===0&&s.contact.eta<=.15&&lastContact!==s.contact.at){swing=true;lastContact=s.contact.at;}model.update(1/60,{swing,targetX:s.contact?.side===0?s.contact.x:0});}return model;}

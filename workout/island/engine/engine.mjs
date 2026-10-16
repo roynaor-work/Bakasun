@@ -1,14 +1,14 @@
-import {recordStageWin} from '../activity/progress.mjs?v=g2h-20261017-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g2h-20261017-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=g2h-20261017-1';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=g2h-20261017-1';
-import { createRegistry } from './registry.mjs?v=g2h-20261017-1';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g2h-20261017-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g2h-20261017-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=g2h-20261017-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g2h-20261017-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g2h-20261017-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g2h-20261017-1';
+import {recordStageWin} from '../activity/progress.mjs?v=g4b-20261017-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g4b-20261017-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=g4b-20261017-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=g4b-20261017-1';
+import { createRegistry } from './registry.mjs?v=g4b-20261017-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g4b-20261017-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g4b-20261017-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=g4b-20261017-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g4b-20261017-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g4b-20261017-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g4b-20261017-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -269,6 +269,7 @@ export function createEngine(data, options = {}) {
     card.stars-=offer.cost;card.attributes[key]=Math.min(config.minigames.soccer.card.max,card.attributes[key]+config.minigames.soccer.training.gain);
     card.trainings=Math.min(Number.MAX_SAFE_INTEGER,card.trainings+1);card.lastTrainingAt=Math.floor(now());changed('soccer-training');return {ok:true,cost:offer.cost};
   };
+  engine.setTennisDifficulty=difficulty=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};if(!Object.hasOwn(config.minigames.tennis.difficulties,difficulty))return {ok:false,reason:'reason.invalid'};state.tennisDifficulty=difficulty;changed('tennis-difficulty');return {ok:true};};
   engine.startMinigame = (id, context = {}) => {
     const minigame = registry.minigames.get(id);
     if (!minigame || !flags.minigames || (minigame.featureFlag && !flags[minigame.featureFlag])) return { ok: false, reason: 'reason.locked' };
@@ -283,6 +284,7 @@ export function createEngine(data, options = {}) {
     const token = {}, startedAt = now();
     let ended = false, session;
     const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
+    if(id==='tennis')ctx.difficulty=state.tennisDifficulty;
     if(id==='soccer'){ctx.difficulty=state.soccerCard.difficulty;ctx.soccerCard=clone(state.soccerCard);}
     const finish = (raw, cancelled = false) => {
       if (ended) return { ok: false, reason: 'reason.duplicate' };
@@ -309,6 +311,7 @@ export function createEngine(data, options = {}) {
           state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
           if(result.outcome==='win'){recordStageWin(state,data,id,stage,result.stars);}
           if(result.outcome==='win')state.minigameWins[id]=Math.min(Number.MAX_SAFE_INTEGER,(state.minigameWins[id]||0)+1);
+          if(id==='tennis'&&result.outcome==='win')recordTeamWin(state,config.minigames.soccer,'tennis');
           if(id==='soccer'&&result.outcome==='win'){
             recordTeamWin(state,config.minigames.soccer);
             state.soccerCard.stars=Math.min(Number.MAX_SAFE_INTEGER,state.soccerCard.stars+result.trainingStars);

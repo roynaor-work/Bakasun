@@ -4006,6 +4006,463 @@
         "travelSeconds": 1.2,
         "runSeconds": 2.5
       }
+    },
+    "tennis": {
+      "version": 1,
+      "seed": 4107,
+      "simulation": {
+        "step": 0.008333333333333333,
+        "maxDelta": 0.25
+      },
+      "court": {
+        "halfWidth": 4.1,
+        "halfLength": 9,
+        "serviceLength": 4.5,
+        "netHeight": 0.92,
+        "lineTolerance": 0.06,
+        "playerLimit": 4.6
+      },
+      "ball": {
+        "radius": 0.13,
+        "gravity": 9.81,
+        "bounce": 0.72,
+        "hitHeight": 0.85,
+        "serveHeight": 2.5,
+        "flightSeconds": 1.43,
+        "minimumFlight": 0.9,
+        "powerFlightFactor": 0.27,
+        "depth": 5.4,
+        "spread": 3.35,
+        "outMargin": 0.8,
+        "rallyPowerPerHit": 0.06,
+        "rallyPowerLimit": 0.6
+      },
+      "rules": {
+        "gamesToWin": 4,
+        "pointsToWin": 4,
+        "pointMargin": 2,
+        "pointValues": [
+          0,
+          15,
+          30,
+          40
+        ],
+        "pointPause": 1.35,
+        "gamePause": 2.8,
+        "serveWait": 1.2,
+        "serveTimeout": 9,
+        "rallyTimeout": 90,
+        "winStars": 1,
+        "goodWinStars": 2,
+        "perfectStars": 3,
+        "goodWinAgainst": 1,
+        "lossStars": 1
+      },
+      "player": {
+        "defaults": {
+          "speed": 1,
+          "hit": 1,
+          "serve": 1
+        },
+        "rankMin": 1,
+        "rankMax": 5,
+        "speedByRank": [
+          3.4,
+          4.1,
+          4.8,
+          5.6,
+          6.4
+        ],
+        "hitPowerByRank": [
+          0.28,
+          0.42,
+          0.56,
+          0.7,
+          0.84
+        ],
+        "servePowerByRank": [
+          0.35,
+          0.49,
+          0.63,
+          0.77,
+          0.91
+        ],
+        "reach": 1.05,
+        "autoZSpeed": 9,
+        "assistStages": 3,
+        "assistSpeed": 16,
+        "readyZ": 7.8,
+        "contactOffsetZ": 0.45,
+        "chargeSeconds": 1.1,
+        "chargeBonus": 0.35,
+        "timingCenterFraction": 0.28,
+        "timingPowerPenalty": 0.2,
+        "swingCooldown": 0.28,
+        "swingSeconds": 0.48
+      },
+      "levels": [
+        {
+          "stage": 1,
+          "speed": 2.1,
+          "accuracy": 0.48,
+          "power": 0.12,
+          "timingWindow": 0.5,
+          "missChance": 0.4,
+          "cornerChance": 0,
+          "netChance": 0,
+          "reaction": 0.18,
+          "difficulty": 1,
+          "winMoney": 35,
+          "winParts": 0,
+          "feature": "feature.tennis.1"
+        },
+        {
+          "stage": 2,
+          "speed": 2.5,
+          "accuracy": 0.55,
+          "power": 0.2,
+          "timingWindow": 0.465,
+          "missChance": 0.32,
+          "cornerChance": 0.08,
+          "netChance": 0,
+          "reaction": 0.16,
+          "difficulty": 2,
+          "winMoney": 47,
+          "winParts": 0,
+          "feature": "feature.tennis.2"
+        },
+        {
+          "stage": 3,
+          "speed": 2.9,
+          "accuracy": 0.62,
+          "power": 0.28,
+          "timingWindow": 0.43,
+          "missChance": 0.26,
+          "cornerChance": 0.14,
+          "netChance": 0.02,
+          "reaction": 0.14,
+          "difficulty": 3,
+          "winMoney": 59,
+          "winParts": 0,
+          "feature": "feature.tennis.3"
+        },
+        {
+          "stage": 4,
+          "speed": 3.4,
+          "accuracy": 0.7,
+          "power": 0.37,
+          "timingWindow": 0.395,
+          "missChance": 0.2,
+          "cornerChance": 0.28,
+          "netChance": 0.05,
+          "reaction": 0.12,
+          "difficulty": 4,
+          "winMoney": 71,
+          "winParts": 1,
+          "feature": "feature.tennis.4"
+        },
+        {
+          "stage": 5,
+          "speed": 3.9,
+          "accuracy": 0.77,
+          "power": 0.46,
+          "timingWindow": 0.36,
+          "missChance": 0.15,
+          "cornerChance": 0.4,
+          "netChance": 0.08,
+          "reaction": 0.1,
+          "difficulty": 5,
+          "winMoney": 83,
+          "winParts": 1,
+          "feature": "feature.tennis.5"
+        },
+        {
+          "stage": 6,
+          "speed": 4.5,
+          "accuracy": 0.83,
+          "power": 0.56,
+          "timingWindow": 0.325,
+          "missChance": 0.1,
+          "cornerChance": 0.54,
+          "netChance": 0.12,
+          "reaction": 0.08,
+          "difficulty": 6,
+          "winMoney": 95,
+          "winParts": 1,
+          "feature": "feature.tennis.6"
+        },
+        {
+          "stage": 7,
+          "speed": 5.1,
+          "accuracy": 0.88,
+          "power": 0.65,
+          "timingWindow": 0.29,
+          "missChance": 0.07,
+          "cornerChance": 0.68,
+          "netChance": 0.16,
+          "reaction": 0.06,
+          "difficulty": 7,
+          "winMoney": 107,
+          "winParts": 2,
+          "feature": "feature.tennis.7"
+        },
+        {
+          "stage": 8,
+          "speed": 5.8,
+          "accuracy": 0.92,
+          "power": 0.75,
+          "timingWindow": 0.255,
+          "missChance": 0.045,
+          "cornerChance": 0.8,
+          "netChance": 0.2,
+          "reaction": 0.04,
+          "difficulty": 8,
+          "winMoney": 119,
+          "winParts": 2,
+          "feature": "feature.tennis.8"
+        },
+        {
+          "stage": 9,
+          "speed": 6.5,
+          "accuracy": 0.96,
+          "power": 0.85,
+          "timingWindow": 0.22,
+          "missChance": 0.025,
+          "cornerChance": 0.9,
+          "netChance": 0.25,
+          "reaction": 0.025,
+          "difficulty": 9,
+          "winMoney": 131,
+          "winParts": 2,
+          "feature": "feature.tennis.9"
+        },
+        {
+          "stage": 10,
+          "speed": 7.2,
+          "accuracy": 0.985,
+          "power": 0.96,
+          "timingWindow": 0.18,
+          "missChance": 0.012,
+          "cornerChance": 0.98,
+          "netChance": 0.3,
+          "reaction": 0.01,
+          "difficulty": 10,
+          "winMoney": 143,
+          "winParts": 2,
+          "feature": "feature.tennis.10"
+        }
+      ],
+      "controls": {
+        "deadzone": 0.12,
+        "joystickRadius": 48,
+        "rightHanded": true,
+        "kickKey": "Space",
+        "passKey": "KeyX",
+        "sprintKeys": [
+          "KeyL"
+        ],
+        "switchKey": "KeyC",
+        "floating": true,
+        "handednessKey": "island.tennis.hand"
+      },
+      "render": {
+        "targetFPS": 60,
+        "slowFrameMs": 25,
+        "slowSamples": 75,
+        "qualityCooldown": 3,
+        "pixelRatios": [
+          1.5,
+          1,
+          0.75
+        ],
+        "crowdCounts": [
+          72,
+          36,
+          0
+        ],
+        "shadowEnabled": [
+          false,
+          false,
+          false
+        ],
+        "shadowMapSize": 512,
+        "particles": 72,
+        "particleSeconds": 1.8,
+        "hudInterval": 0.08,
+        "flashSeconds": 0.32,
+        "maxTriangles": 90000,
+        "maxDrawCalls": 70,
+        "cameraFov": 48,
+        "cameraPortrait": [
+          0,
+          18,
+          25
+        ],
+        "cameraLandscape": [
+          0,
+          14,
+          24
+        ],
+        "cameraTarget": [
+          0,
+          0,
+          0
+        ],
+        "characterScale": 1.08,
+        "colors": {
+          "sky": "#c8e9e4",
+          "sea": "#75c7ce",
+          "island": "#e6d4a7",
+          "apron": "#4d9686",
+          "court": "#247969",
+          "line": "#f3f4dc",
+          "dark": "#143d41",
+          "accent": "#ffd16f",
+          "ball": "#dfff55"
+        },
+        "fallbackQuality": 2,
+        "shirtColor": "#4d9ddb"
+      },
+      "audio": {
+        "gain": 0.055,
+        "hitFrequency": 440,
+        "pointFrequency": 660,
+        "endFrequency": 880,
+        "seconds": 0.14
+      },
+      "opponent": {
+        "fatigueAfterHits": 4,
+        "fatigueMissPerHit": 0.055,
+        "maximumMissChance": 0.8
+      },
+      "requiresBuilding": "tennis",
+      "maximumScore": 4,
+      "pointsPerCoin": 1,
+      "maximumSeconds": 3600,
+      "lob": {
+        "flightMultiplier": 1.35
+      },
+      "difficulties": {
+        "easy": {
+          "speed": 0.8,
+          "timing": 1.2,
+          "miss": 0.12,
+          "coinMultiplier": 0.85
+        },
+        "normal": {
+          "speed": 1,
+          "timing": 1,
+          "miss": 0,
+          "coinMultiplier": 1
+        },
+        "hard": {
+          "speed": 1.15,
+          "timing": 0.85,
+          "miss": -0.04,
+          "coinMultiplier": 1.3
+        }
+      },
+      "opponents": [
+        {
+          "shirtColor": "#e77764",
+          "nameId": "tennis.opponent.1"
+        },
+        {
+          "shirtColor": "#9473c4",
+          "nameId": "tennis.opponent.2"
+        },
+        {
+          "shirtColor": "#e2ad42",
+          "nameId": "tennis.opponent.3"
+        },
+        {
+          "shirtColor": "#4da780",
+          "nameId": "tennis.opponent.4"
+        }
+      ],
+      "equipment": {
+        "speed": {
+          "title": "equipment.tennis.speed",
+          "description": "equipment.tennis.speed.hint",
+          "base": 1,
+          "levels": [
+            {
+              "value": 2,
+              "cost": 40,
+              "stars": 0
+            },
+            {
+              "value": 3,
+              "cost": 80,
+              "stars": 3
+            },
+            {
+              "value": 4,
+              "cost": 125,
+              "stars": 8
+            },
+            {
+              "value": 5,
+              "cost": 175,
+              "stars": 15
+            }
+          ]
+        },
+        "hit": {
+          "title": "equipment.tennis.hit",
+          "description": "equipment.tennis.hit.hint",
+          "base": 1,
+          "levels": [
+            {
+              "value": 2,
+              "cost": 40,
+              "stars": 0
+            },
+            {
+              "value": 3,
+              "cost": 80,
+              "stars": 3
+            },
+            {
+              "value": 4,
+              "cost": 125,
+              "stars": 8
+            },
+            {
+              "value": 5,
+              "cost": 175,
+              "stars": 15
+            }
+          ]
+        },
+        "serve": {
+          "title": "equipment.tennis.serve",
+          "description": "equipment.tennis.serve.hint",
+          "base": 1,
+          "levels": [
+            {
+              "value": 2,
+              "cost": 40,
+              "stars": 0
+            },
+            {
+              "value": 3,
+              "cost": 80,
+              "stars": 3
+            },
+            {
+              "value": 4,
+              "cost": 125,
+              "stars": 8
+            },
+            {
+              "value": 5,
+              "cost": 175,
+              "stars": 15
+            }
+          ]
+        }
+      }
     }
   },
   "minigameLevels": {
@@ -4052,6 +4509,20 @@
       }
     ],
     "soccer": [
+      {
+        "cost": 0,
+        "power": 1
+      },
+      {
+        "cost": 120,
+        "power": 1.2
+      },
+      {
+        "cost": 240,
+        "power": 1.45
+      }
+    ],
+    "tennis": [
       {
         "cost": 0,
         "power": 1

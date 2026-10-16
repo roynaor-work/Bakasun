@@ -9,7 +9,8 @@ export function teamRank(wins,balance) {
 export function validTeamProgress(team,balance) {
   return Number.isSafeInteger(team.wins)&&team.wins>=0&&Number.isInteger(team.rank)&&team.rank>=0&&team.rank<balance.teamRanks.length&&team.rank===teamRank(team.wins,balance);
 }
-export function recordTeamWin(state,balance) {
+export function recordTeamWin(state,balance,sport='soccer') {
+  if(state.team.sportWins)state.team.sportWins[sport]=Math.min(Number.MAX_SAFE_INTEGER,(state.team.sportWins[sport]||0)+1);
   state.team.wins=Math.min(Number.MAX_SAFE_INTEGER,state.team.wins+1);
   state.team.rank=teamRank(state.team.wins,balance);
 }

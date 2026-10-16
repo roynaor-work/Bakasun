@@ -1,4 +1,4 @@
-import {cardEffects} from '../activity/soccer-card.mjs?v=g2h-20261017-1';
+import {cardEffects} from '../activity/soccer-card.mjs?v=g4b-20261017-1';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);
