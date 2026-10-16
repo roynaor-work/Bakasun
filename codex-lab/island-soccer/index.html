@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#132b36">
+  <title></title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23e7edca'/%3E%3Cpath d='M20 10 30 17 26 29 14 29 10 17Z' fill='%232868ee'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="lab" class="menu-open">
+  <canvas id="pitch"></canvas>
+<header id="masthead"><span class="brand-mark" aria-hidden="true">◈</span><div><strong data-text="title"></strong><small data-text="eyebrow"></small></div><span class="lab-pill" data-text="lab"></span></header>
+  <section id="hud" hidden>
+    <div class="scoreboard"><span class="team-name blue" data-text="team.default"></span><strong id="score" dir="ltr">0 : 0</strong><span class="team-name red" data-text="opponent"></span><div class="clock"><span id="half"></span><b id="clock" dir="ltr">1:15</b><span id="stage-hud"></span></div></div>
+    <nav class="tools"><button id="pause" data-label="pause"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button><button id="help" data-label="help">?</button><button id="hand" data-label="hand">⇆</button><button id="sound" data-label="sound">♪</button></nav>
+    <div id="direction" data-text="attackRight"></div>
+  </section>
+  <div id="moment" role="status" aria-live="polite" hidden></div>
+  <div id="controls" hidden>
+    <div class="stick-area"><div id="joystick" role="group" data-label="joystick"><span class="crosshair" aria-hidden="true">＋</span><div id="knob"></div></div><small data-text="joystick"></small></div>
+    <div class="actions"><button id="switch"><span aria-hidden="true">⇄</span><small data-text="switch"></small></button><button id="shoot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M6 5h13v13"/></svg><strong data-text="shoot"></strong><span class="power"><i id="power-fill"></i></span></button></div>
+    <p class="control-hint" data-text="tap"></p>
+  </div>
+  <section id="menu" class="panel">
+    <div class="intro"><p class="eyebrow" data-text="eyebrow"></p><h1 data-text="title"></h1><p data-text="tagline"></p></div>
+    <label class="section-label" data-text="stage"></label><div id="stages" class="stages"></div><p class="hint" data-text="stagesHint"></p>
+    <details id="team-settings"><summary data-text="ranks"></summary><p class="hint" data-text="ranksHint"></p><div id="ranks"></div></details>
+    <div class="seed-row"><label for="seed" data-text="seed"></label><input id="seed" type="number" min="0" max="4294967295" value="2026" inputmode="numeric"></div>
+    <button id="start" class="primary" disabled data-text="loading"></button><p id="menu-status" class="hint" role="status"></p><p class="hint instructions" data-text="keyboard"></p><p class="local-note" data-text="localOnly"></p>
+  </section>
+  <section id="result" class="panel result-panel" hidden>
+    <p class="eyebrow" data-text="fulltime"></p><h1 id="result-title"></h1><div class="result-score" id="result-score" dir="ltr"></div><div id="stars" class="result-stars"></div><p class="hint" data-text="starsHint"></p><p id="saved" role="status"></p>
+    <button id="next" class="primary" data-text="next"></button><button id="again" data-text="again"></button><button id="setup" data-text="setup"></button>
+    <details><summary data-text="resultLabel"></summary><pre id="result-json" dir="ltr"></pre><button id="copy-result" data-text="resultCopy"></button></details>
+  </section>
+  <section id="pause-panel" class="panel small-panel" hidden><h2 data-text="paused"></h2><button id="resume" class="primary" data-text="resume"></button><button id="quit" data-text="cancel"></button></section>
+  <section id="help-panel" class="panel small-panel" hidden><h2 data-text="help"></h2><p data-text="touchHelp"></p><p data-text="hold"></p><p data-text="keyboard"></p><p data-text="portraitHint"></p><button id="close-help" class="primary" data-text="close"></button></section>
+  <p id="notice" role="status" hidden></p>
+</main>
+<script type="module" src="app.mjs"></script>
+</body>
+</html>
