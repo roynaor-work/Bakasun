@@ -7,7 +7,7 @@ import {migrateSave,migrations,validateSave,CURRENT_VERSION,STORAGE_KEY} from '.
 import {createActivity} from '../workout/island/activity/runtime.mjs';
 import {equipmentValues} from '../workout/island/activity/equipment.mjs';
 import {recordStageWin} from '../workout/island/activity/progress.mjs';
-import {soccerAvailability,soccerTeam,teamRank} from '../workout/island/activity/soccer-team.mjs';
+import {soccerAvailability,soccerTeam,soccerViewConfig,teamRank} from '../workout/island/activity/soccer-team.mjs';
 import {gameContext} from '../workout/island/minigames/context.mjs';
 import {soccerResult} from '../workout/island/minigames/soccer-result.mjs';
 import {createSoccer} from '../workout/island/minigames/soccer.mjs';
@@ -27,6 +27,12 @@ test('G3b soccer registers once as both sport and game with local model byte par
 });
 test('G3b the same pitch availability locks the menu and engine; city construction rules stay in place',()=>{
  const f=fixture();assert.deepEqual(soccerAvailability(f.engine.state),{ok:false,reason:'minigame.soccer.locked'});assert.equal(f.engine.startMinigame('soccer').reason,'minigame.soccer.locked');pitch(f.engine);assert.equal(soccerAvailability(f.engine.state).ok,true);const r=f.engine.startMinigame('soccer');assert.equal(r.ok,true);r.cancel();
+});
+test('G3b view receives city colors and stage-cycled opponents from data, including changed palettes',()=>{
+ const f=fixture(),ctx={...gameContext(f.engine,data.config.minigames,42,'soccer',1),state:f.engine.state};
+ const first=soccerViewConfig(ctx,balance);assert.deepEqual(first.team.colors,data.team.colors);assert.deepEqual(first.opponent.colors,balance.opponents[0].colors);assert.equal(first.opponent.colors[0],'#e94d51');
+ f.engine.state.team.colors=['#269847','#ebda61'];const palettes=[['#a83491','#f3edcb'],['#435fa1','#dfde76'],['#31764b','#fdc263']],custom={...balance,opponents:balance.opponents.map((row,i)=>({...row,colors:palettes[i]}))};
+ for(const level of [1,2,3,4,10]){const supplied=soccerViewConfig({...ctx,level},custom);assert.deepEqual(supplied.team.colors,f.engine.state.team.colors);assert.deepEqual(supplied.opponent.colors,custom.opponents[(level-1)%custom.opponents.length].colors);assert.notEqual(supplied.team.colors[0],supplied.opponent.colors[0]);}
 });
 test('G3b single session, one payment, stage unlocking and neutral cancellation use the island lifecycle',()=>{
  const f=fixture();pitch(f.engine);const money=f.engine.state.money,parts=structuredClone(f.engine.state.parts),r=round(f);assert.equal(r.response.ok,true);assert.equal(f.engine.startMinigame('navalDuel').reason,'reason.gameBusy');

@@ -3,6 +3,7 @@ import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 
 export function createSoccerView({canvas,config,onAsset=()=>{},onContextLost=()=>{}}) {
+  const teamShirtColor=new T.Color(config.team.colors[0]);
   const renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,config.view.maxPixelRatio));renderer.outputColorSpace=T.SRGBColorSpace;
   const scene=new T.Scene();scene.background=new T.Color('#92c5cc');
@@ -79,7 +80,7 @@ export function createSoccerView({canvas,config,onAsset=()=>{},onContextLost=()=
     if(embeddedBall){embeddedBall.visible=false;const mesh=new T.Mesh(track(embeddedBall.geometry.clone()),embeddedBall.material);mesh.geometry.computeBoundingBox();mesh.geometry.boundingBox.getCenter(target);mesh.geometry.translate(-target.x,-target.y,-target.z);mesh.geometry.computeBoundingSphere();mesh.scale.setScalar(config.physics.ballRadius/mesh.geometry.boundingSphere.radius);ballRoot.remove(fallbackBall);ballRoot.add(mesh);}
     bounds.setFromObject(root);bounds.getSize(size);const scale=1.8/size.y;root.scale.setScalar(scale);root.position.y=-bounds.min.y*scale;
     // Recolor only the blue vertex-color range in a material shader, retaining skin.
-    root.traverse(o=>{if(o.isMesh){track(o.geometry);const materials=Array.isArray(o.material)?o.material:[o.material];for(const material of materials){track(material);if(material.map)track(material.map);material.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(diffuseColor.b>diffuseColor.r*1.4 && diffuseColor.b>diffuseColor.g*1.1) diffuseColor.rgb*=vec3(0.85,1.12,1.2);');};}}});
+    root.traverse(o=>{if(o.isMesh){track(o.geometry);const materials=Array.isArray(o.material)?o.material:[o.material];for(const material of materials){track(material);if(material.map)track(material.map);material.onBeforeCompile=shader=>{shader.uniforms.soccerShirtColor={value:teamShirtColor};shader.fragmentShader='uniform vec3 soccerShirtColor;\n'+shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(diffuseColor.b>diffuseColor.r*1.4 && diffuseColor.b>diffuseColor.g*1.1) diffuseColor.rgb=soccerShirtColor;');};}}});
     mixer=new T.AnimationMixer(root);actions={};for(const clip of data.animations)if(['stand','run','kick'].includes(clip.name)){actions[clip.name]=mixer.clipAction(clip);}
     actions.kick.setLoop(T.LoopOnce,1);actions.kick.clampWhenFinished=true;actions.stand.play();activeAction='stand';
     let triangles=0,meshes=0;root.traverse(o=>{if(o.isMesh){triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;meshes++;}});
@@ -116,12 +117,12 @@ export function createSoccerView({canvas,config,onAsset=()=>{},onContextLost=()=
         if(action!==activeAction){actions[activeAction].fadeOut(.12);actions[action].reset().fadeIn(.12).play();activeAction=action;}
         mixer.update(dt*(s.phase==='goal'?.18:1));
       } else {
-        const angle=Math.atan2(p.fx,p.fz),cos=Math.cos(angle),sin=Math.sin(angle),shirt=p.team===0?'#2868ee':'#e94d51';
+        const angle=Math.atan2(p.fx,p.fz),cos=Math.cos(angle),sin=Math.sin(angle),kit=p.team===0?config.team.colors:config.opponent.colors,shirt=kit[0];
         const point=(x,z)=>({x:p.x+x*cos+z*sin,z:p.z-x*sin+z*cos});
         const speed=Math.hypot(p.vx,p.vz),swing=Math.sin(time*12+p.id)*Math.min(.18,speed*.045);
         box(p.x,.99,p.z,.58,.63,.34,shirt,angle);sphere(p.x,1.55,p.z,.29,.33,.28,'#edac78');sphere(p.x,1.74,p.z-.02,.3,.16,.28,p.id%2?'#50382e':'#302d35');
         for(const side of [-1,1]){let q=point(side*.17,swing*side);box(q.x,.48,q.z,.21,.48,.24,'#fff4d9',angle);q=point(side*.17,.1+swing*side);box(q.x,.13,q.z,.24,.18,.42,'#293b54',angle);q=point(side*.38,-swing*side);box(q.x,.93,q.z,.16,.55,.18,'#edac78',angle);q=point(side*.11,.265);box(q.x,1.6,q.z,.065,.065,.035,'#273345',angle);}
-        const number=point(0,.176);box(number.x,1.02,number.z,.065,.22,.018,'#fff4d9',angle);
+        const number=point(0,.176);box(number.x,1.02,number.z,.065,.22,.018,kit[1],angle);
       }
       dummy.position.set(p.x,.03,p.z);dummy.rotation.set(-Math.PI/2,0,0);dummy.scale.set(1.15,.75,1);dummy.updateMatrix();shadows.setMatrixAt(p.id,dummy.matrix);
       dummy.position.set(p.x,2.15,p.z);dummy.rotation.set(Math.PI/2-.6,0,0);dummy.scale.setScalar(p.request?1:0);dummy.updateMatrix();requests.setMatrixAt(p.id,dummy.matrix);

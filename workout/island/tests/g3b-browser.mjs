@@ -6,15 +6,15 @@ import {serveIsland} from '../../../tests/helpers/island-browser.mjs';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const directory=fileURLToPath(new URL('../verification/g3b/',import.meta.url));await mkdir(directory,{recursive:true});
 const server=await serveIsland('/workout/island/'),browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
-const reports=[];
-try{for(const width of [390,360,1440]){
+const reports=[],soccerColors=process.argv.includes('--soccer-colors');
+try{for(const width of (soccerColors?[390]:[390,360,1440])){
  const context=await browser.newContext({viewport:{width,height:width===360?740:width===390?844:1000},hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[],outside=[],requests=[],shots=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')){requests.push(u.href);if(!u.pathname.startsWith('/workout/island/'))outside.push(u.href);}});
  let decodedBytes=0;const pendingBodies=new Set();page.on('response',response=>{if(!response.url().startsWith(server.url))return;const task=response.body().then(body=>{decodedBytes+=body.length;}).catch(()=>{});pendingBodies.add(task);task.finally(()=>pendingBodies.delete(task));});
  const loadBytes=async()=>{await Promise.all([...pendingBodies]);return decodedBytes;};
  const tick=ms=>page.clock.runFor(ms),snap=()=>page.evaluate(()=>window.__island.games.current?.session.snapshot),tap=selector=>page.locator(selector).tap();
- async function shot(name){const file=`${width}-${name}.png`;await page.screenshot({path:directory+file});shots.push(file);}
+ async function shot(name){if(soccerColors&&!['soccer-pitch','failure'].includes(name))return;const file=`${width}-${name}.png`;await page.screenshot({path:directory+file});shots.push(file);}
  async function exit(){await page.evaluate(()=>{window.__previousSession=window.__island.games.current.session;window.__previousModel=window.__previousSession.debug?.model;});await tap('[data-action=game-exit]');assert.equal(await page.evaluate(()=>window.__island.engine.isMinigameActive()),false);assert.equal(await page.evaluate(()=>window.__island.view.paused),false);if(await page.evaluate(()=>Boolean(window.__previousModel)))assert.equal(await page.evaluate(()=>window.__previousSession.snapshot.disposed),true);await page.evaluate(()=>{window.__previousSnapshot=window.__previousModel?.snapshot();});}
  async function readySoccer(){if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await page.waitForFunction(()=>window.__island.games.current?.session.snapshot.renderMetrics?.assetStatus==='ready');await tick(100);assert.equal(await page.evaluate(()=>window.__island.view.paused),true);}
  async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await tick(100);}
@@ -26,6 +26,12 @@ try{for(const width of [390,360,1440]){
   const card=page.locator('.game-card[data-game=soccer]');assert.equal(await card.locator('[data-action=game-play]').isDisabled(),true);assert.match(await card.innerText(),/בנו מגרש כדורגל/);await shot('locked');await tap('[data-action=close-modal]');
   const pitch=await page.evaluate(()=>{const {engine}=window.__island;for(let z=0;z<16;z++)for(let x=0;x<16;x++){const result=engine.place('soccer',x,z);if(result.ok)return result;}throw Error('no soccer placement');});
   const soccerBefore=await loadBytes();await page.evaluate(()=>window.__island.games.menu());await card.locator('[data-action=game-play]').tap();await tap('[data-stage="1"]');await readySoccer();
+  if(soccerColors){
+   const m=await snap(),expected=await page.evaluate(()=>({team:window.__island.data.team.colors,opponent:window.__island.data.config.minigames.soccer.opponents[0].colors}));
+   assert.equal(m.stage,1);assert.deepEqual(m.team.colors,expected.team);assert.deepEqual(m.opponent.colors,expected.opponent);assert.equal(m.opponent.colors[0],'#e94d51');assert.notEqual(m.team.colors[0],m.opponent.colors[0]);
+   await shot('soccer-pitch');await exit();assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);
+   reports.push({width,stage:m.stage,teamColors:m.team.colors,opponentColors:m.opponent.colors,soccer:m.renderMetrics,outsideRequests:outside,consoleErrors:errors,shots});console.log('G3b jersey colors verified',width);continue;
+  }
   let m=await snap();const initial=m.players[0].x;await page.keyboard.down('ArrowRight');await tick(1700);await page.keyboard.up('ArrowRight');m=await snap();assert.ok(m.players[0].x>initial+1,JSON.stringify({initial,player:m.players[0],phase:m.phase,elapsed:m.elapsed,paused:m.paused,active:await page.evaluate(()=>document.activeElement.outerHTML)}));await page.keyboard.down('Space');await tick(600);assert.ok((await snap()).charge>0);await page.keyboard.up('Space');await tick(300);
   const soccerLoadBytes=(await loadBytes())-soccerBefore;assert.ok(soccerLoadBytes>0);const metrics=(await snap()).renderMetrics;assert.ok(metrics.triangles<=80000,JSON.stringify(metrics));assert.ok(metrics.drawCalls<=60);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await shot('soccer-menu');
   // Help pauses time and clears a held kick before reopening play.
@@ -44,5 +50,5 @@ try{for(const width of [390,360,1440]){
  }catch(error){await shot('failure');throw error;}finally{await context.close();}
 }
  const sizes={};for(const path of ['assets/kid-full.glb','assets/models/boat-patrol-512.glb','minigames/soccer.mjs','minigames/soccer-view.mjs','minigames/soccer-session.mjs'])sizes[path]=(await stat(new URL('../'+path,import.meta.url))).size;
- await writeFile(directory+'verification.json',JSON.stringify({release:'g3b-20261016-1',saveVersion:8,browser:'Chromium / ANGLE SwiftShader',physicalPhone:false,realFPS:false,sizes,reports},null,2)+'\n');
+ await writeFile(directory+(soccerColors?'soccer-colors.json':'verification.json'),JSON.stringify({release:'g3b-20261016-1',saveVersion:8,browser:'Chromium / ANGLE SwiftShader',physicalPhone:false,realFPS:false,sizes,reports},null,2)+'\n');
 }finally{await browser.close();await server.close();}

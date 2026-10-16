@@ -21,3 +21,6 @@ export function soccerTeam(ctx,balance) {
     return {...template,...player,...ranks};
   })};
 }
+export function soccerViewConfig(ctx,balance) {
+  return {...balance,team:soccerTeam(ctx,balance),opponent:balance.opponents[(ctx.level-1)%balance.opponents.length]};
+}

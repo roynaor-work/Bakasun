@@ -1,15 +1,14 @@
 import {createSoccer} from './soccer.mjs?v=g3b-20261016-1';
 import {createSoccerView} from './soccer-view.mjs?v=g3b-20261016-1';
 import {createControls} from './controls.mjs?v=g3b-20261016-1';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=g3b-20261016-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=g3b-20261016-1';
 import {gameContext} from './context.mjs?v=g3b-20261016-1';
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
   const {balance,canvas,controls,status,t}=ctx;
   const defaults=gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed??0,'soccer',ctx.level);
-  const context={...defaults,...ctx},seed=context.seed>>>0,team=soccerTeam(context,balance);
-  const opponent=balance.opponents[(context.level-1)%balance.opponents.length];
+  const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=soccerViewConfig(context,balance),{team,opponent}=viewConfig;
   const model=createSoccer({config:balance,stage:context.level,seed,random:context.random,team});
   let view,input,frame,last=0,hud=0,eventId=0,paused=false,disposed=false,handed=balance.controls.rightHanded;
   const events=new AbortController(),options={signal:events.signal};
@@ -38,7 +37,7 @@ export function startSoccer(ctx) {
     pause.addEventListener('click',()=>{setPaused(!paused);pause.textContent=t(paused?'minigame.soccer.resume':'minigame.soccer.pause');canvas.focus();},options);
     document.addEventListener('visibilitychange',()=>{last=0;input.setEnabled(!document.hidden&&!paused);model.clearInput();},options);
     window.addEventListener('pagehide',()=>ctx.cancel(),options);
-    view=createSoccerView({canvas,config:{...balance,team,opponent},onContextLost:()=>{if(!disposed){ctx.onError?.('minigame.soccer.webglError');ctx.cancel();}}});
+    view=createSoccerView({canvas,config:viewConfig,onContextLost:()=>{if(!disposed){ctx.onError?.('minigame.soccer.webglError');ctx.cancel();}}});
     function updateHud(){
       const s=model.getState();status.textContent=t('minigame.soccer.scoreboard',{team:t(team.nameId),opponent:t(opponent.nameId),goalsFor:s.score[0],goalsAgainst:s.score[1],half:t(s.half===1?'minigame.soccer.half1':'minigame.soccer.half2'),seconds:Math.max(0,Math.ceil(balance.match.halfSeconds-s.halfElapsed))});power.value=s.charge;
     }
