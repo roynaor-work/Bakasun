@@ -1,13 +1,13 @@
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g4b-20261017-1';
-import {withCityHall} from './city-hall.mjs?v=g4b-20261017-1';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=g4b-20261017-1';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g4b-20261017-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=g4b-20261017-1';
-import {initialProgress} from '../activity/progress.mjs?v=g4b-20261017-1';
-import { cellsFor } from './rules.mjs?v=g4b-20261017-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g4b-20261017-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3e-20261017-1';
+import {withCityHall} from './city-hall.mjs?v=g3e-20261017-1';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=g3e-20261017-1';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g3e-20261017-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=g3e-20261017-1';
+import {initialProgress} from '../activity/progress.mjs?v=g3e-20261017-1';
+import { cellsFor } from './rules.mjs?v=g3e-20261017-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g3e-20261017-1';
 
-export const CURRENT_VERSION = 11;
+export const CURRENT_VERSION = 12;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -31,6 +31,7 @@ export function createInitialState(data, now = Date.now()) {
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  11(old,data){if(!Array.isArray(old.players))return {...old,version:12};return {...old,version:12,players:[...old.players,...data.players.filter(row=>!old.players.some(p=>p.id===row.id)).map(row=>({...data.config.playerDefaults,...row}))]};},
   10(old,data){return {...old,version:11,minigameLevels:{...old.minigameLevels,tennis:old.minigameLevels?.tennis||1},minigameEquipment:{...old.minigameEquipment,tennis:{speed:0,hit:0,serve:0,...old.minigameEquipment?.tennis}},minigameProgress:{...old.minigameProgress,tennis:old.minigameProgress?.tennis||initialProgress(data).tennis},team:{...old.team,sportWins:{soccer:old.team?.wins||0,tennis:0,...old.team?.sportWins}},tennisDifficulty:old.tennisDifficulty||'easy'};},
   9(old,data) {return {...old,version:10,soccerCard:initialSoccerCard(old.minigameProgress?.soccer,data.config.minigames.soccer)};},
   8(old,data,registry) {return withCityHall({...old,version:9},data,registry);},

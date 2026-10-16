@@ -232,3 +232,6 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .game-screen[data-game=tennis] .soccer-controls.left-handed .soccer-stick-zone{left:auto;right:0}
 .game-screen[data-game=tennis] .soccer-controls.left-handed .soccer-actions{right:auto;left:max(16px,env(safe-area-inset-left));transform:scaleX(-1)}
 .game-screen[data-game=tennis] .soccer-controls.left-handed .soccer-actions button{transform:scaleX(-1)}
+/* G3e: sprint rests under the thumb; the large shot/slide button sits above it. */
+.game-screen[data-game=soccer] #shoot{right:0;bottom:102px;width:90px;height:90px}
+.game-screen[data-game=soccer] #sprint{right:4px;bottom:4px;width:72px;height:72px}

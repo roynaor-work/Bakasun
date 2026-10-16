@@ -41,13 +41,13 @@ test('G3c assist works only in opposing half and within the goal cone, targeting
  assert.equal(shot({x:7,moveZ:1}).getState().event.assisted,false);
 });
 test('G3c pass compatibility uses the G3d endpoint and waits for reception to transfer control',()=>{
- const g=setup(),s=g.getState();Object.assign(s.players[1],{x:6,z:.4});Object.assign(s.players[2],{x:3,z:1});g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,1);assert.equal(s.controlled,0);assert.equal(s.ball.owner,null);
+ const g=setup(),s=g.getState();Object.assign(s.players[1],{x:6,z:.4});Object.assign(s.players[2],{x:3,z:1});g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,2);assert.equal(s.controlled,0);assert.equal(s.ball.owner,null);
 });
 test('G3c short pass compatibility targets the nearest teammate to its endpoint',()=>{
  const g=setup(),s=g.getState();Object.assign(s.players[1],{x:10,z:1});Object.assign(s.players[2],{x:2,z:.3});g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.target,2);assert.equal(s.controlled,0);
 });
 test('G3c pass to open space preserves its direction and keeps control until reception',()=>{
- const g=setup(),s=g.getState();g.update(dt,{passPressed:true,moveZ:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,1);assert.equal(s.controlled,0);near(s.ball.vx,0);assert.ok(s.ball.vz>0);
+ const g=setup(),s=g.getState();g.update(dt,{passPressed:true,moveZ:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,1);assert.equal(s.controlled,0);near(s.event.x,-12);near(s.event.z,7);assert.ok(s.ball.vx<0&&s.ball.vz>0);
 });
 test('G3c fixed-tick input retains short pass/switch/kick edges at 120Hz',()=>{
  const g=setup(),s=g.getState();g.update(dt/2,{kickHeld:true,moveZ:1});g.update(dt/2,{moveZ:1});assert.equal(s.charging,false);
@@ -141,10 +141,10 @@ test('G3c no training or difficulty changes during any active game; no spending 
  const {engine:e}=fixture();pitch(e);e.state.soccerCard.stars=10;const {response}=round(e),before=structuredClone(e.state.soccerCard);assert.equal(e.trainSoccer('power').reason,'reason.gameBusy');assert.equal(e.setSoccerDifficulty('hard').reason,'reason.gameBusy');assert.deepEqual(e.state.soccerCard,before);response.cancel();assert.ok(e.trainSoccer('power').ok);
 });
 for(const version of [8,9])test(`G3c authentic v${version} fixture migrates through explicit steps without losing existing state`,async()=>{
- const f=fixture(),path=version===8?new URL('./fixtures/save-v8.json',import.meta.url):new URL('tests/fixtures/save-v9.json',root),old=JSON.parse(await readFile(path,'utf8')),before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(old.version,version);assert.ok(r.ok);assert.equal(r.state.version,11);assert.deepEqual(old,before);
+ const f=fixture(),path=version===8?new URL('./fixtures/save-v8.json',import.meta.url):new URL('tests/fixtures/save-v9.json',root),old=JSON.parse(await readFile(path,'utf8')),before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(old.version,version);assert.ok(r.ok);assert.equal(r.state.version,12);assert.deepEqual(old,before);
  assert.equal(r.state.soccerCard.stars,old.minigameProgress.soccer.stars.reduce((a,b)=>a+b,0));for(const n of Object.values(r.state.soccerCard.attributes))assert.equal(n,50);assert.equal(r.state.soccerCard.difficulty,'easy');
- for(const key of Object.keys(old).filter(key=>!['version','buildings'].includes(key)))assert.deepEqual(r.state[key],key==='team'?{...old.team,sportWins:{soccer:old.team.wins,tennis:0}}:key==='minigameEquipment'?{...old[key],tennis:{speed:0,hit:0,serve:0}}:key==='minigameProgress'?{...old[key],tennis:{stage:1,stars:Array(10).fill(0)}}:key==='minigameLevels'?{...old[key],tennis:1}:old[key],key);assert.deepEqual(r.state.buildings.filter(b=>b.typeId!=='cityHall'),old.buildings.filter(b=>b.typeId!=='cityHall'));
- if(version===9)assert.deepEqual(migrations[10](migrations[9](old,data),data),r.state);
+ for(const key of Object.keys(old).filter(key=>!['version','buildings'].includes(key)))assert.deepEqual(r.state[key],key==='players'?[...old.players,...data.players.filter(p=>!old.players.some(old=>old.id===p.id))]:key==='team'?{...old.team,sportWins:{soccer:old.team.wins,tennis:0}}:key==='minigameEquipment'?{...old[key],tennis:{speed:0,hit:0,serve:0}}:key==='minigameProgress'?{...old[key],tennis:{stage:1,stars:Array(10).fill(0)}}:key==='minigameLevels'?{...old[key],tennis:1}:old[key],key);assert.deepEqual(r.state.buildings.filter(b=>b.typeId!=='cityHall'),old.buildings.filter(b=>b.typeId!=='cityHall'));
+ if(version===9)assert.deepEqual(migrations[11](migrations[10](migrations[9](old,data),data),data),r.state);
  f.storage.setItem('island.v1',JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.ok(loaded.storageStatus.ok);assert.deepEqual(loaded.state.soccerCard,r.state.soccerCard);assert.ok(loaded.importJSON(old).ok);
 });
 test('G3c malformed legacy card sources reject cleanly rather than throwing in migration',async()=>{

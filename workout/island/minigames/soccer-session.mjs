@@ -1,9 +1,9 @@
-import {actionIcon} from './soccer-icons.mjs?v=g4b-20261017-1';
-import {createSoccer} from './soccer.mjs?v=g4b-20261017-1';
-import {createSoccerView} from './soccer-view.mjs?v=g4b-20261017-1';
-import {createControls} from './controls.mjs?v=g4b-20261017-1';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=g4b-20261017-1';
-import {gameContext} from './context.mjs?v=g4b-20261017-1';
+import {actionIcon} from './soccer-icons.mjs?v=g3e-20261017-1';
+import {createSoccer} from './soccer.mjs?v=g3e-20261017-1';
+import {createSoccerView} from './soccer-view.mjs?v=g3e-20261017-1';
+import {createControls} from './controls.mjs?v=g3e-20261017-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=g3e-20261017-1';
+import {gameContext} from './context.mjs?v=g3e-20261017-1';
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
@@ -16,7 +16,7 @@ export function startSoccer(ctx) {
   function dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);events.abort();input?.dispose();model.clearInput();view?.dispose();if(canvas)canvas.width=canvas.height=0;}
   function setPaused(value){paused=Boolean(value);last=0;input?.setEnabled(!paused&&(typeof document==='undefined'||!document.hidden));model.clearInput();if(!paused)canvas?.focus();}
   const session={dispose,setPaused,get snapshot(){return {...model.snapshot(),team,opponent,paused,disposed,renderMetrics:view?.metrics()};}};
-  if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={model,qualitySample:(...args)=>view?.qualitySample(...args)};
+  if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={model,qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:id=>view?.poseCamera(id)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
@@ -62,7 +62,7 @@ export function startSoccer(ctx) {
       if(!paused&&!document.hidden){if(!started){started=true;ctx.sound?.('soccerWhistle');}model.update(dt,input.sample(model.getState().attackDir));view.render(model.getState(),dt,frameMs);hud+=dt;}else view.render(model.getState(),0);
       banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
-      if(s.eventId!==eventId){eventId=s.eventId;const sound={shot:'soccerKick',pass:'soccerPass',slide:'soccerSlide',goal:'soccerCrowd',halftime:'soccerWhistle',fulltime:'soccerWhistle',play:'soccerWhistle'}[s.event?.type];if(sound)ctx.sound?.(sound);}
+      if(s.eventId!==eventId){eventId=s.eventId;const sound={header:'soccerKick',volley:'soccerKick',loft:'soccerPass',shot:'soccerKick',pass:'soccerPass',slide:'soccerSlide',goal:'soccerCrowd',halftime:'soccerWhistle',fulltime:'soccerWhistle',play:'soccerWhistle'}[s.event?.type];if(sound)ctx.sound?.(sound);}
       if(hud>=.1||!last){hud=0;updateHud();}
       if(model.result){ctx.finish({outcome:model.result.won?'win':'lose',score:model.result.goalsFor,performance:model.result.won?1:0,soccer:model.result});return;}
       frame=requestAnimationFrame(tick);

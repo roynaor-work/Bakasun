@@ -1704,9 +1704,12 @@
             0.3
           ],
           "wing": [
-            0.12,
+            1,
+            0.6,
+            0.3,
+            0.15,
             0.07,
-            0.04
+            0.03
           ]
         }
       },
@@ -3302,8 +3305,8 @@
         "fixedStep": 0.016666666666666666
       },
       "pitch": {
-        "length": 30,
-        "width": 18,
+        "length": 36,
+        "width": 22,
         "goalWidth": 5.4,
         "goalHeight": 2.3,
         "goalDepth": 1.6
@@ -3328,7 +3331,59 @@
         "kickPerRank": 0.06,
         "defensePerRank": 0.12,
         "acceleration": 12,
-        "radius": 0.42
+        "radius": 0.42,
+        "roles": [
+          "striker",
+          "support",
+          "keeper",
+          "wing"
+        ],
+        "roster": [
+          {
+            "team": 0,
+            "role": "striker",
+            "template": 0
+          },
+          {
+            "team": 0,
+            "role": "support",
+            "template": 1
+          },
+          {
+            "team": 0,
+            "role": "keeper",
+            "template": 2
+          },
+          {
+            "team": 1,
+            "role": "striker",
+            "template": 0
+          },
+          {
+            "team": 1,
+            "role": "support",
+            "template": 1
+          },
+          {
+            "team": 1,
+            "role": "keeper",
+            "template": 2
+          },
+          {
+            "team": 0,
+            "role": "wing",
+            "template": 3
+          },
+          {
+            "team": 1,
+            "role": "wing",
+            "template": 3
+          }
+        ],
+        "deceleration": 7,
+        "turnRate": 12,
+        "turnLean": 0.1,
+        "maxTurnLean": 0.2
       },
       "team": {
         "id": "islandTeam",
@@ -3358,6 +3413,14 @@
             "id": "playerStar",
             "nameId": "player.star",
             "role": "keeper",
+            "speed": 1,
+            "kick": 1,
+            "guard": 1
+          },
+          {
+            "id": "playerBolt",
+            "nameId": "player.bolt",
+            "role": "wing",
             "speed": 1,
             "kick": 1,
             "guard": 1
@@ -3464,8 +3527,8 @@
         "lowPixelRatio": 0.85,
         "slowFrameMs": 25,
         "qualityWindowSeconds": 4,
-        "maxTriangles": 110000,
-        "maxDrawCalls": 80,
+        "maxTriangles": 130000,
+        "maxDrawCalls": 90,
         "confettiCount": 96,
         "crowdCount": 144,
         "aimArrowLength": 2,
@@ -3489,14 +3552,23 @@
         "animation": {
           "idleSpeed": 0.2,
           "runSpeed": 4.5,
-          "minRate": 0.35,
+          "minRate": 0.05,
           "maxRate": 2.2,
           "sprintLean": 0.18,
-          "slideLean": 1.2,
-          "fadeSeconds": 0.14,
+          "slideLean": -1.2,
+          "fadeSeconds": 0.18,
           "characterHeight": 1.8,
-          "slideHeight": 0.35,
-          "keeperMix": 0.65
+          "slideHeight": 0.18,
+          "keeperMix": 0.65,
+          "slideRoll": 0.42,
+          "slideLeg": 0.7,
+          "slideKnee": 0.85,
+          "turnSmoothing": 10,
+          "stealLean": 0.15,
+          "stealRate": 1.6,
+          "headerLean": 0.16,
+          "turfColor": "#c0ba78",
+          "turfPerPlayer": 4
         },
         "trail": {
           "count": 7,
@@ -3509,7 +3581,8 @@
         },
         "aimArrowMinLength": 0.8,
         "aimArrowMaxLength": 5.2,
-        "teamAbbreviationLength": 3
+        "teamAbbreviationLength": 3,
+        "farModelDistance": 6
       },
       "controls": {
         "deadzone": 0.12,
@@ -3528,10 +3601,11 @@
       "ai": {
         "kickoffX": [
           -2,
-          -6,
-          -13.3
+          -7,
+          -16.3,
+          -5
         ],
-        "kickoffZ": 4,
+        "kickoffZ": 5,
         "kickoffOwnerX": 0.8,
         "kickoffGrace": 1,
         "initialThink": 0.4,
@@ -3570,7 +3644,7 @@
         "supportAdvance": 4,
         "strikerAdvance": 6,
         "supportGoalInset": 3,
-        "supportWidth": 4.2,
+        "supportWidth": 5.2,
         "requestDistance": 3,
         "requestClearance": 2.2,
         "defenseDepth": 5,
@@ -3594,7 +3668,9 @@
         "sprintSeconds": 0.65,
         "sprintRestSeconds": 3.8,
         "sprintMultiplier": 1.1,
-        "sprintDistance": 3
+        "sprintDistance": 3,
+        "wingWidth": 6.5,
+        "wingAdvance": 3
       },
       "rules": {
         "playerBoundary": 0.35,
@@ -3907,7 +3983,8 @@
       "steal": {
         "reach": 0.9,
         "baseChance": 0.35,
-        "cooldownSeconds": 0.6
+        "cooldownSeconds": 0.6,
+        "animationSeconds": 0.3
       },
       "difficulties": {
         "easy": {
@@ -4004,7 +4081,30 @@
         "maxDistance": 22,
         "chargeSeconds": 0.9,
         "travelSeconds": 1.2,
-        "runSeconds": 2.5
+        "runSeconds": 2.5,
+        "loftThresholdSeconds": 0.32,
+        "groundTravelSeconds": 0.55,
+        "groundConeDegrees": 80,
+        "leadSeconds": 0.32,
+        "loftMinSeconds": 1.05,
+        "loftExtraSeconds": 0.45,
+        "loftMinHeight": 2.8,
+        "loftExtraHeight": 1.4,
+        "landingColor": "#fce36a",
+        "alignmentWeight": 2
+      },
+      "aerial": {
+        "minHeight": 1,
+        "maxHeight": 2.4,
+        "headerHeight": 1.45,
+        "reach": 1.5,
+        "power": 0.55,
+        "seconds": 0.5,
+        "jumpHeight": 0.38,
+        "headLean": 0.55,
+        "keeperHeight": 2.6,
+        "clearanceZone": 6,
+        "clearPower": 0.25
       }
     },
     "tennis": {

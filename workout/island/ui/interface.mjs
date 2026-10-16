@@ -1,5 +1,5 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=g4b-20261017-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=g4b-20261017-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=g3e-20261017-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=g3e-20261017-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);

@@ -1,8 +1,8 @@
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g4b-20261017-1';
-import {createAlienView} from './alien-view.mjs?v=g4b-20261017-1';
-import {runCanvasGame} from './canvas-session.mjs?v=g4b-20261017-1';
-import {createPool,releaseAt} from './pool.mjs?v=g4b-20261017-1';
-import {oval,drawHealthBar} from './art.mjs?v=g4b-20261017-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3e-20261017-1';
+import {createAlienView} from './alien-view.mjs?v=g3e-20261017-1';
+import {runCanvasGame} from './canvas-session.mjs?v=g3e-20261017-1';
+import {createPool,releaseAt} from './pool.mjs?v=g3e-20261017-1';
+import {oval,drawHealthBar} from './art.mjs?v=g3e-20261017-1';
 export function alienStack(campaign,id,rank){return (campaign.stackCurve[id]||[]).slice(0,rank).reduce((n,v)=>n+v,0);}
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 
@@ -55,7 +55,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
     for(let n=0;n<children;n++)spawn(x+(n-.5)*balance.alienRadius,y,0,true);
   }
   function dropBonus(){if(!pendingBonuses||pickups.length)return;const rotation=balance.pickups.rotation,d=pickupPool.take(bonusX,bonusY,0,balance.pickups.speed,0,rotation[dropSerial%rotation.length]);if(d){pendingBonuses--;dropSerial++;pickups.push(d);}}
-  function fireShot(vx,kind,fromX=player.x,wing=false,fromY=player.y){const s=shotPool.take(fromX,fromY-balance.playerRadius,vx,-balance.shotSpeed,0,kind);if(s){s.damage=wing?campaign.wingDamage*(1+alienStack(campaign,'wing',upgrades.wing)):1;s.hp=kind===1?balance.pickups.laserPierce+alienStack(campaign,'laser',upgrades.laser):1;s.lastHit=-1;s.hitLo=s.hitHi=0;shots.push(s);fired++;}}
+  function fireShot(vx,kind,fromX=player.x,wing=false,fromY=player.y){const s=shotPool.take(fromX,fromY-balance.playerRadius,vx,-balance.shotSpeed,0,kind);if(s){s.wing=wing;s.damage=wing?campaign.wingDamage*alienStack(campaign,'wing',upgrades.wing+(equipment.weapon||0)+(powerup===4?1:0))/Math.max(1,wings.filter(w=>w.active).length):1;s.hp=kind===1?balance.pickups.laserPierce+alienStack(campaign,'laser',upgrades.laser):1;s.lastHit=-1;s.hitLo=s.hitHi=0;shots.push(s);fired++;}}
   function offerUpgrade(){
     const available=availableAlienUpgrades(upgrades,balance,equipment);let count=available.length;
     if(!count)return false;bag.splice(0,bag.length,...available);choices.length=Math.min(campaign.choiceCount,count);

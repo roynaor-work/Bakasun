@@ -1,7 +1,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {drawHealthBar} from './art.mjs?v=g4b-20261017-1';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=g4b-20261017-1';
+import {drawHealthBar} from './art.mjs?v=g3e-20261017-1';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=g3e-20261017-1';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */
@@ -91,9 +91,9 @@ export function createNavalView(ctx,model,adapters={}) {
   const labelNames=model.enemies.map(e=>t(e.boss?'naval.boss':balance.shipTypes[e.kind].name));
   const onLost=event=>{event.preventDefault();failed=true;};canvas.addEventListener('webglcontextlost',onLost);
   function animateVessel(v,e,x,z,enemy){
-    v.root.rotation.y=enemy?Math.PI/2+Math.sin(model.time*.4+e.index)*.12:Math.PI/2-model.playerShip.heading;
+    if(enemy)vesselHeading(v,x,z,model.time);else v.root.rotation.y=-model.playerShip.heading;
     const sink=e.hp<=0?model.sinkProgress:0;v.root.position.set(x,Math.sin(model.time*1.6+(e.index||0))*.12-sink*4,z);v.root.rotation.z=Math.sin(model.time*1.9+x)*.035+sink*.3;
-    v.turret.rotation.y=enemy?-Math.PI/2:Math.PI/2-model.yaw-v.root.rotation.y;v.barrel.rotation.x=model.ammoIndex===2?0:.35;v.barrel.position.z=-.85+e.recoil;
+    v.turret.rotation.y=enemy?Math.atan2(x,-z)-v.root.rotation.y:-model.yaw-v.root.rotation.y;v.barrel.rotation.x=model.ammoIndex===2?0:.35;v.barrel.position.z=-.85+e.recoil;
     v.flag.rotation.y=Math.sin(model.time*4)*.2;v.shield.visible=e.shield>0;v.smoke.visible=e.hp<e.maxHp;v.flame.visible=e.hp<e.maxHp;
     v.smoke.position.y=3+(model.time%2);v.smoke.scale.setScalar(.6+(model.time%2)*.5);v.flame.scale.y=.75+Math.sin(model.time*12)*.2;v.foam.scale.y=2.5+Math.sin(model.time*2)*.3;
   }
