@@ -25,7 +25,7 @@ test('G2c v4 → v5 adds only equipment and leaves input, city, stars, event and
   const f=fixture(),old=JSON.parse(f.engine.exportJSON());old.version=4;delete old.minigameEquipment;
   old.money=321;old.minigameLevels.alienDefense=3;recordStageWin(old,data,'alienDefense',1,3);
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:42,phase:'playing',warningUntil:0,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,8);assert.equal(r.state.version,8);assert.equal(STORAGE_KEY,'island.v1');
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,9);assert.equal(r.state.version,9);assert.equal(STORAGE_KEY,'island.v1');
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key],key);
   assert.deepEqual(old,before);for(const tracks of Object.values(r.state.minigameEquipment))assert.ok(Object.values(tracks).every(n=>n===0));
   f.storage.setItem(STORAGE_KEY,JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.equal(loaded.state.money,321);assert.equal(loaded.state.minigameProgress.alienDefense.stars[0],3);assert.equal(f.values.get('other-app'),'keep');
@@ -35,7 +35,7 @@ for(const bad of [-1,1.5,999,'1',null])test(`G2c invalid equipment rank ${JSON.s
   assert.equal(f.engine.importJSON(save).ok,false);assert.equal(f.engine.exportJSON(),old);
 });
 test('G2c missing/unknown equipment and future versions cannot silently reset upgrades',()=>{
-  const f=fixture();for(const mutate of [s=>delete s.minigameEquipment,s=>s.minigameEquipment.bad={},s=>s.minigameEquipment.navalDuel.bad=1,s=>s.version=9]){
+  const f=fixture();for(const mutate of [s=>delete s.minigameEquipment,s=>s.minigameEquipment.bad={},s=>s.minigameEquipment.navalDuel.bad=1,s=>s.version=CURRENT_VERSION+1]){
     const save=JSON.parse(f.engine.exportJSON());mutate(save);assert.equal(migrateSave(save,data,f.engine.registry).ok,false);
   }
 });
@@ -57,7 +57,7 @@ for(const [id,b]of Object.entries(config).filter(([id,b])=>b.equipment&&id in mo
 });
 test('G2c purchases cannot charge for locked/maxed/unknown equipment, insufficient money or mid-round',()=>{
   const f=fixture();f.engine.state.money=0;assert.equal(f.activity.upgrade('alienDefense','damage').reason,'reason.money');assert.equal(f.activity.upgrade('unknown','damage').ok,false);assert.equal(f.activity.upgrade('alienDefense','constructor').ok,false);
-  f.engine.state.money=500;f.engine.registry.minigames.set('alienDefense',{...f.engine.registry.minigames.get('alienDefense'),start:()=>({dispose(){}})});
+  f.engine.state.buildings.push({id:'airbase-test',typeId:'airbase',x:12,z:0,level:1});f.engine.state.money=500;f.engine.registry.minigames.set('alienDefense',{...f.engine.registry.minigames.get('alienDefense'),start:()=>({dispose(){}})});
   const session=f.engine.startMinigame('alienDefense'),before=f.engine.state.money;assert.equal(f.activity.upgrade('alienDefense','shield').reason,'reason.gameBusy');assert.equal(f.engine.state.money,before);session.cancel();
 });
 test('G2c five aliens have distinct speed/health and real zigzag, circle and dive trajectories',()=>{

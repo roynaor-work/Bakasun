@@ -1,9 +1,9 @@
-import {eventEligible} from '../activity/eligibility.mjs?v=task016-20261016-1';
-import {seededRandom} from '../minigames/context.mjs?v=task016-20261016-1';
+import {eventEligible} from '../activity/eligibility.mjs?v=g5-20261016-1';
+import {seededRandom} from '../minigames/context.mjs?v=g5-20261016-1';
 export function install(registry,data) {
   for(const [id,record]of Object.entries(data.config.events.types))registry.registerEventType({id,...record,
     prepare({state,random=seededRandom(state.events.sequence)}){
-      const candidates=state.buildings.filter(b=>b.typeId!=='road');
+      const candidates=state.buildings.filter(b=>!['road','cityHall'].includes(b.typeId));
       if(!eventEligible(state,record.eligibility))return null;
       return {targetId:id==='ship'?null:candidates[Math.floor(random()*candidates.length)]?.id??null};
     },

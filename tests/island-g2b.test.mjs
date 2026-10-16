@@ -19,9 +19,11 @@ function fixture() {
   const engine=createEngine(data,{storage,now:()=>time});
   return {engine,storage,now:()=>time,advance:ms=>time+=ms};
 }
+
+function facilities(e){e.state.buildings.push({id:'test-airbase',typeId:'airbase',x:12,z:0,level:1},{id:'test-fire-station',typeId:'fireStation',x:12,z:3,level:1});}
 function ready(f) {f.engine.setAvatar({created:true});f.engine.skipTutorial();}
 function eventCity(f) {
-  ready(f);f.engine.state.world={size:20,stage:1};f.engine.state.buildings.push({id:'harbor-test',typeId:'harbor',x:0,z:6,level:1});f.engine.place('house',4,5);
+  ready(f);facilities(f.engine);f.engine.state.world={size:20,stage:1};f.engine.state.buildings.push({id:'harbor-test',typeId:'harbor',x:0,z:6,level:1});f.engine.place('house',4,5);
 }
 for(const [id,make]of Object.entries(models)) {
   test(`G2b ${id}: actual difficulty and rewards increase across all ten stages`,()=>{
@@ -50,7 +52,7 @@ for(const [id,make]of Object.entries(models)) {
 test('G2b v3 to v4 adds only stage/star defaults, preserves the input, and survives reload',()=>{
   const f=fixture();eventCity(f);const old=JSON.parse(f.engine.exportJSON());old.version=3;delete old.minigameProgress;
   old.minigameLevels.alienDefense=3;old.highScores.alienDefense=1234;old.minigameWins.alienDefense=12;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,8);
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,9);
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key]);
   assert.deepEqual(old,before);
   for(const p of Object.values(r.state.minigameProgress))assert.deepEqual(p,{stage:1,stars:Array(10).fill(0)});
@@ -58,7 +60,7 @@ test('G2b v3 to v4 adds only stage/star defaults, preserves the input, and survi
 });
 test('G2b stages cannot be skipped by context, by loss, by exit or by malformed import',()=>{
   for(const id of Object.keys(models)) {
-    const f=fixture(),e=f.engine;let ctx;e.registry.minigames.set(id,{...e.registry.minigames.get(id),start:c=>{ctx=c;return {dispose(){}};}});
+    const f=fixture(),e=f.engine;facilities(e);e.state.buildings.push({id:'test-harbor',typeId:'harbor',x:0,z:8,level:1});let ctx;e.registry.minigames.set(id,{...e.registry.minigames.get(id),start:c=>{ctx=c;return {dispose(){}};}});
     const before=e.exportJSON();assert.equal(e.startMinigame(id,{level:2}).reason,'minigame.stageLockedReason');assert.equal(e.exportJSON(),before);
     for(const bad of [0,-1,1.5,NaN,Infinity,11])assert.equal(e.startMinigame(id,{level:bad}).ok,false);
     e.startMinigame(id,{level:1});ctx.finish({outcome:'lose',score:0});assert.equal(e.state.minigameProgress[id].stage,1);
@@ -70,7 +72,7 @@ test('G2b stages cannot be skipped by context, by loss, by exit or by malformed 
   }
 });
 test('G2b stars, staged parts, duplicate settlement and free equipment bonuses persist and merge upward',()=>{
-  const f=fixture(),e=f.engine,id='fireRescue';let ctx;e.registry.minigames.set(id,{...e.registry.minigames.get(id),start:c=>{ctx=c;return {dispose(){}};}});
+  const f=fixture(),e=f.engine,id='fireRescue';facilities(e);e.state.buildings.push({id:'test-harbor',typeId:'harbor',x:0,z:8,level:1});let ctx;e.registry.minigames.set(id,{...e.registry.minigames.get(id),start:c=>{ctx=c;return {dispose(){}};}});
   for(let level=1;level<=6;level++){e.startMinigame(id,{level});ctx.finish({outcome:'win',score:0,performance:1});assert.equal(ctx.finish({outcome:'win',score:0}).ok,false);}
   assert.equal(e.state.minigameLevels[id],3);assert.deepEqual(e.state.minigameProgress[id].stars,[3,3,3,3,3,3,0,0,0,0]);
   assert.equal(e.state.parts.general,5); // Three stage parts and two periodic parts.
@@ -94,7 +96,7 @@ test('G2b no event interrupts tutorial, avatar, a modal or another engine miniga
   f.engine.place('house',4,5);assert.equal(a.prepare('fire').ok,false);f.engine.skipTutorial();assert.equal(a.prepare('fire').ok,false);f.engine.setAvatar({created:true});
   blocked=true;assert.equal(a.prepare('fire').ok,false);blocked=false;assert.equal(a.prepare('fire').ok,true);
   f.engine.registerMinigame({id:'other',start:()=>({dispose(){}}),onResult:r=>r});const session=f.engine.startMinigame('other');
-  f.advance(data.config.events.warningMs);a.tick();assert.equal(launches.length,0);session.cancel();a.tick();assert.equal(launches.length,1);
+  f.advance(data.config.events.warningMs);a.tick();assert.equal(launches.length,0);session.cancel();facilities(f.engine);a.tick();assert.equal(launches.length,1);
 });
 test('G2b eligibility, weighted selection and never repeating an event survive saving and additive import',()=>{
   const f=fixture();ready(f);let a=createActivity(f.engine,{now:f.now,random:seededRandom(2)});
@@ -123,7 +125,7 @@ test('G2b fire really spreads and finite refill water can be exhausted; aliens a
 });
 test('G2b all three star ratings use data thresholds and import keeps the best star in each stage',()=>{
   for(const [performance,stars]of [[0,1],[data.config.minigames.starThresholds[0],2],[data.config.minigames.starThresholds[1],3]]) {
-    const e=fixture().engine;let ctx;e.registry.minigames.set('fireRescue',{...e.registry.minigames.get('fireRescue'),start:c=>{ctx=c;return {dispose(){}};}});
+    const e=fixture().engine;facilities(e);e.state.buildings.push({id:'test-harbor',typeId:'harbor',x:0,z:8,level:1});let ctx;e.registry.minigames.set('fireRescue',{...e.registry.minigames.get('fireRescue'),start:c=>{ctx=c;return {dispose(){}};}});
     e.startMinigame('fireRescue');ctx.finish({outcome:'win',score:0,performance});assert.equal(e.state.minigameProgress.fireRescue.stars[0],stars);
   }
   const a=fixture().engine,b=fixture().engine,id='fireRescue';

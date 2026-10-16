@@ -179,7 +179,7 @@
     "id": "harbor",
     "title": "building.harbor",
     "icon": "⚓",
-    "category": "basic",
+    "category": "defense",
     "model": null,
     "requiresRoad": true,
     "requiresShore": true,
@@ -842,6 +842,44 @@
     "levels": [
       {
         "model": null
+      }
+    ]
+  },
+  {
+    "id": "airbase",
+    "title": "building.airbase",
+    "icon": "✈",
+    "category": "defense",
+    "model": null,
+    "requiresRoad": true,
+    "visual": {
+      "kind": "airbase",
+      "color": "#adc7c3",
+      "roofColor": "#496d86"
+    },
+    "levels": [
+      {
+        "model": null,
+        "title": "building.airbase"
+      }
+    ]
+  },
+  {
+    "id": "cityHall",
+    "title": "building.cityHall",
+    "icon": "🏛️",
+    "category": "basic",
+    "model": null,
+    "removable": false,
+    "visual": {
+      "kind": "cityHall",
+      "color": "#fff0cc",
+      "roofColor": "#4e8396"
+    },
+    "levels": [
+      {
+        "model": null,
+        "title": "building.cityHall"
       }
     ]
   }

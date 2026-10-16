@@ -328,11 +328,11 @@
         "height": 1.1
       },
       "limit": {
-        "kind": "stageCap",
+        "kind": "unique",
         "maxCount": [
           1,
-          2,
-          3
+          1,
+          1
         ],
         "reason": "reason.limit.harbor"
       },
@@ -646,8 +646,8 @@
     },
     "soccer": {
       "footprint": [
-        4,
-        3
+        3,
+        2
       ],
       "cost": 150,
       "radius": 5,
@@ -1088,6 +1088,60 @@
         1,
         1
       ]
+    },
+    "airbase": {
+      "footprint": [
+        2,
+        2
+      ],
+      "cost": 180,
+      "radius": 4,
+      "income": 2,
+      "effects": {
+        "security": 12
+      },
+      "levels": [
+        {
+          "cost": 0
+        }
+      ],
+      "visual": {
+        "height": 1.0
+      },
+      "limit": {
+        "kind": "unique",
+        "maxCount": [
+          1,
+          1,
+          1
+        ],
+        "reason": "reason.limit.airbase"
+      }
+    },
+    "cityHall": {
+      "footprint": [
+        1,
+        1
+      ],
+      "cost": 0,
+      "radius": 0,
+      "levels": [
+        {
+          "cost": 0
+        }
+      ],
+      "visual": {
+        "height": 1.6
+      },
+      "limit": {
+        "kind": "unique",
+        "maxCount": [
+          1,
+          1,
+          1
+        ],
+        "reason": "reason.limit.cityHall"
+      }
     }
   },
   "minigames": {
@@ -1739,7 +1793,8 @@
           "shoots": true,
           "shield": 1
         }
-      ]
+      ],
+      "requiresBuilding": "airbase"
     },
     "fireRescue": {
       "flameColumns": 3,
@@ -2369,7 +2424,8 @@
           0.1,
           10
         ]
-      }
+      },
+      "requiresBuilding": "fireStation"
     },
     "navalDuel": {
       "shipX": 60,
@@ -2921,7 +2977,8 @@
           1.8,
           -2.1
         ]
-      }
+      },
+      "requiresBuilding": "harbor"
     },
     "art": {
       "starSize": 2,
@@ -3669,7 +3726,8 @@
             "#e9ebf2"
           ]
         }
-      ]
+      ],
+      "requiresBuilding": "soccer"
     }
   },
   "minigameLevels": {

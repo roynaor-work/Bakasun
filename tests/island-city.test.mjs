@@ -56,15 +56,15 @@ for (const type of data.buildings.filter(type => type.limit.kind === 'capacity')
 test('island house upgrades raise real population and reopen demand; water upgrades satisfy it again', () => {
   const engine = fixture();
   const tower = engine.place('waterTower', 4, 8); assert.equal(tower.ok, true);
-  assert.equal(engine.validatePlacement('waterTower', 6, 8).reason, data.config.buildings.waterTower.limit.reason);
+  assert.equal(engine.validatePlacement('waterTower', 10, 8).reason, data.config.buildings.waterTower.limit.reason);
   const houses = [4, 6, 8, 10].map(x => engine.place('house', x, 5));
   for (const house of houses) assert.equal(house.ok, true);
   assert.equal(engine.population(), 16);
   for (const house of houses) assert.equal(engine.upgrade(house.id).ok, true);
   assert.equal(engine.population(), 32);
-  assert.equal(engine.validatePlacement('waterTower', 6, 8).ok, true);
+  assert.equal(engine.validatePlacement('waterTower', 10, 8).ok, true);
   assert.equal(engine.upgrade(tower.id).ok, true);
-  assert.equal(engine.validatePlacement('waterTower', 6, 8).reason, data.config.buildings.waterTower.limit.reason);
+  assert.equal(engine.validatePlacement('waterTower', 10, 8).reason, data.config.buildings.waterTower.limit.reason);
   assert.equal(engine.income().sources.find(source => source.id === 'tourists').amount,
     data.config.incomeSources[0].basePerMinute + 32 * data.config.incomeSources[0].populationRate);
 });
@@ -94,7 +94,7 @@ for (const typeId of ['house', 'shop', 'factory', 'farm', 'harbor']) {
 
 test('island expansion raises the house count cap without replacing the city', () => {
   const engine = fixture();
-  for (const [x, z] of [[4, 5], [6, 5], [8, 5], [4, 8], [6, 8], [8, 8]]) assert.equal(engine.place('house', x, z).ok, true);
+  for (const [x, z] of [[4, 5], [6, 5], [8, 5], [4, 8], [10, 8], [8, 8]]) assert.equal(engine.place('house', x, z).ok, true);
   const before = engine.exportJSON();
   assert.equal(engine.place('house', 10, 5).reason, 'reason.limit.house');
   assert.equal(engine.exportJSON(), before, 'blocked placement cannot charge, allocate an ID, or change progress');

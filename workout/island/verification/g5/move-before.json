@@ -1,0 +1,9 @@
+{
+  "base": "a61f155",
+  "viewport": {"width": 390, "height": 844},
+  "input": "CDP touchStart, five touchMove samples, touchEnd while a soccer move ghost is active",
+  "before": {"footprint": [4,3], "cameraAngle": 0.69, "ghost": {"x":4,"z":8}},
+  "afterOriginalDrag": {"cameraAngle": 0.3186594238281249, "ghost": {"x":4,"z":8}},
+  "cause": "view pointermove treated one-finger ghost dragging as camera rotation",
+  "fixedBehavior": "one-finger drag updates ghost; two fingers retain camera control; engine commit preserves level and costs no money"
+}

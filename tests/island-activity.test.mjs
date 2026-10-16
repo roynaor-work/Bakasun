@@ -42,7 +42,7 @@ test('version two migrates activity defaults without losing money, buildings, ch
   const {engine}=fixture(),old=createInitialState(data,17);old.version=2;
   for(const key of ['minigameLevels','highScores','minigameWins','instructionsSeen','events'])delete old[key];
   old.money=900;old.avatar.created=true;const snapshot=structuredClone(old);
-  const result=migrateSave(old,data,engine.registry);assert.equal(result.ok,true);assert.equal(result.state.version,8);
+  const result=migrateSave(old,data,engine.registry);assert.equal(result.ok,true);assert.equal(result.state.version,9);
   for(const key of Object.keys(snapshot).filter(k=>k!=='version'))assert.deepEqual(result.state[key],snapshot[key]);
   assert.deepEqual(result.state.minigameLevels,{alienDefense:1,fireRescue:1,navalDuel:1,soccer:1});assert.equal(result.state.events.active,null);
 });
@@ -81,7 +81,7 @@ test('naval duel uses a sea target and alternating turns, is winnable and determ
     assert.ok(phases.has('enemy'));assert.equal(model.result.outcome,'win');return model.snapshot();
   }assert.deepEqual(play(),play());
 });
-function eventCity(f){f.engine.state.world={stage:1,size:20};f.engine.state.buildings.push({id:'test-harbor',typeId:'harbor',x:0,z:6,level:1});}
+function eventCity(f){f.engine.state.buildings.push({id:'test-airbase',typeId:'airbase',x:16,z:0,level:1});f.engine.state.world={stage:1,size:20};f.engine.state.buildings.push({id:'test-harbor',typeId:'harbor',x:0,z:6,level:1});}
 function playable(f){eventCity(f);f.engine.setAvatar({created:true});f.engine.skipTutorial();return createActivity(f.engine,{now:f.now,random:seededRandom(9)});}
 test('each seeded event warns before starting, respects its cooldown, defers once and cannot stack',()=>{
   for(const type of ['fire','aliens','ship']){

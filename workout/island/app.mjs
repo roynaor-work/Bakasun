@@ -1,11 +1,11 @@
-import {dataURL} from './release.mjs?v=task016-20261016-1';
-import {createTranslator} from './ui/translate.mjs?v=task016-20261016-1';
-import { loadData } from './engine/load-data.mjs?v=task016-20261016-1';
-import { createEngine } from './engine/engine.mjs?v=task016-20261016-1';
-import { IslandView } from './view/island-view.mjs?v=task016-20261016-1';
-import { IslandInterface } from './ui/interface.mjs?v=task016-20261016-1';
-import {createActivity} from './activity/runtime.mjs?v=task016-20261016-1';
-import {ActivityInterface} from './ui/activity.mjs?v=task016-20261016-1';
+import {dataURL} from './release.mjs?v=g5-20261016-1';
+import {createTranslator} from './ui/translate.mjs?v=g5-20261016-1';
+import { loadData } from './engine/load-data.mjs?v=g5-20261016-1';
+import { createEngine } from './engine/engine.mjs?v=g5-20261016-1';
+import { IslandView } from './view/island-view.mjs?v=g5-20261016-1';
+import { IslandInterface } from './ui/interface.mjs?v=g5-20261016-1';
+import {createActivity} from './activity/runtime.mjs?v=g5-20261016-1';
+import {ActivityInterface} from './ui/activity.mjs?v=g5-20261016-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

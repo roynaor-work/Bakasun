@@ -1,9 +1,9 @@
 import * as T from '../vendor/three.module.js';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=task016-20261016-1';
-import { Avatar, Citizens } from './avatar.mjs?v=task016-20261016-1';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=task016-20261016-1';
-import { levelValue } from '../engine/metrics.mjs?v=task016-20261016-1';
-import { LocalModels } from './local-models.mjs?v=task016-20261016-1';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=g5-20261016-1';
+import { Avatar, Citizens } from './avatar.mjs?v=g5-20261016-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=g5-20261016-1';
+import { levelValue } from '../engine/metrics.mjs?v=g5-20261016-1';
+import { LocalModels } from './local-models.mjs?v=g5-20261016-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -125,6 +125,8 @@ export class IslandView {
     listen('pointermove',e=>{
       const p=this.pointers.get(e.pointerId);if(!p){const cell=this.cellAt(e.clientX,e.clientY);if(cell)this.onHover(cell);return;}
       const dx=e.clientX-p.x,dy=e.clientY-p.y;p.x=e.clientX;p.y=e.clientY;
+      // A one-finger placement drag moves the ghost. Two fingers still control the camera.
+      if(this.ghost&&this.pointers.size===1){const cell=this.cellAt(e.clientX,e.clientY);if(cell)this.onHover(cell);return;}
       if(this.pointers.size===2){const [a,b]=[...this.pointers.values()],distance=Math.hypot(a.x-b.x,a.y-b.y);if(this.pinch)this.zoom=T.MathUtils.clamp(this.zoom*distance/this.pinch,.68,2.8);this.pinch=distance;this.dragged=true;this.resize();}
       else if(Math.hypot(p.x-p.startX,p.y-p.startY)>7||this.dragged){this.dragged=true;this.angle-=dx*.008;this.elevation=T.MathUtils.clamp(this.elevation+dy*.004,.42,1.2);this.updateCamera();}
     });

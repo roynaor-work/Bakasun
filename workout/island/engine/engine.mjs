@@ -1,12 +1,13 @@
-import {recordStageWin} from '../activity/progress.mjs?v=task016-20261016-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=task016-20261016-1';
-import { createRegistry } from './registry.mjs?v=task016-20261016-1';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=task016-20261016-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=task016-20261016-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=task016-20261016-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=task016-20261016-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=task016-20261016-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=task016-20261016-1';
+import {recordStageWin} from '../activity/progress.mjs?v=g5-20261016-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g5-20261016-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=g5-20261016-1';
+import { createRegistry } from './registry.mjs?v=g5-20261016-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g5-20261016-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g5-20261016-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=g5-20261016-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g5-20261016-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g5-20261016-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g5-20261016-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -254,8 +255,10 @@ export function createEngine(data, options = {}) {
     const minigame = registry.minigames.get(id);
     if (!minigame || !flags.minigames || (minigame.featureFlag && !flags[minigame.featureFlag])) return { ok: false, reason: 'reason.locked' };
     if (activeMinigame) return { ok: false, reason: 'reason.gameBusy' };
-    const available=minigame.availability?.(state);
+    const available=gameAvailability(state,config,id);
     if(available&&!available.ok)return available;
+    const customAvailable=minigame.availability?.(state);
+    if(customAvailable&&!customAvailable.ok)return customAvailable;
     if (!engine.canPlay()) return { ok: false, reason: 'reason.playTime' };
     const progress=state.minigameProgress[id],stage=context.level??progress?.stage;
     if(progress&&(!Number.isInteger(stage)||stage<1||stage>progress.stage))return {ok:false,reason:'minigame.stageLockedReason'};

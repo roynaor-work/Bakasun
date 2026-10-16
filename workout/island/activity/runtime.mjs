@@ -1,7 +1,8 @@
-import {equipmentOffer} from './equipment.mjs?v=task016-20261016-1';
-import {eventEligible} from './eligibility.mjs?v=task016-20261016-1';
-import {seededRandom} from '../minigames/context.mjs?v=task016-20261016-1';
-import {buildingCenter,levelFactor} from '../engine/metrics.mjs?v=task016-20261016-1';
+import {equipmentOffer} from './equipment.mjs?v=g5-20261016-1';
+import {gameAvailability} from './availability.mjs?v=g5-20261016-1';
+import {eventEligible} from './eligibility.mjs?v=g5-20261016-1';
+import {seededRandom} from '../minigames/context.mjs?v=g5-20261016-1';
+import {buildingCenter,levelFactor} from '../engine/metrics.mjs?v=g5-20261016-1';
 
 export function createActivity(engine,{now=Date.now,random=seededRandom(now()),blocked=()=>false,onLaunch}={}) {
   const {state,data,registry}=engine,config=data.config.events,listeners=new Set();
@@ -63,7 +64,7 @@ export function createActivity(engine,{now=Date.now,random=seededRandom(now()),b
       const event=state.events.active;
       if(event){
         if(enabled(event.typeId)&&event.phase==='warning'&&now()>=event.warningUntil){event.phase='ready';save();}
-        if(enabled(event.typeId)&&event.phase==='ready'&&onLaunch){const choice=api.choose('play');if(choice.ok)onLaunch(choice);}
+        if(enabled(event.typeId)&&event.phase==='ready'&&onLaunch&&gameAvailability(state,data.config,config.types[event.typeId].gameId).ok){const choice=api.choose('play');if(choice.ok)onLaunch(choice);}
         return;
       }
       if(now()<state.events.nextAt)return;
@@ -82,6 +83,8 @@ export function createActivity(engine,{now=Date.now,random=seededRandom(now()),b
       }
       if(event.phase!=='ready')return {ok:false,reason:'event.unavailable'};
       if(action==='auto')return complete(registry.eventTypes.get(event.typeId).apply({state,engine,random:seededRandom(event.seed)}).outcome,true);
+      const available=gameAvailability(state,data.config,config.types[event.typeId].gameId);
+      if(!available.ok)return available;
       playing=true;event.phase='playing';save();return {ok:true,gameId:config.types[event.typeId].gameId,eventId:event.id};
     },
     resolve(eventId,result) {if(state.events.active?.id!==eventId)return {ok:false,reason:'event.unavailable'};return complete(result.outcome);},

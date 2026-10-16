@@ -1,5 +1,5 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=task016-20261016-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=task016-20261016-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=g5-20261016-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=g5-20261016-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -29,12 +29,13 @@ export class IslandInterface {
     this.currentGhost = null;
     this.infoId = null;
     this.movingId = null;
+    this.cityHallIntro=true;
     this.dev = new URLSearchParams(location.search).get('dev') === '1';
     this.modalRoot = document.querySelector('#modal-root');
     root.replaceChildren();
     root.className = 'island-ui';
     this.buildShell();
-    this.unsubscribe = engine.subscribe(() => this.refresh());
+    this.unsubscribe = engine.subscribe((state,event) => {if(event.type==='tutorial'&&state.tutorial.step===0&&!state.tutorial.skipped)this.cityHallIntro=true;this.refresh();});
     this.refresh();
     if (!engine.state.avatar.created) this.showAvatar();
   }
@@ -57,7 +58,8 @@ export class IslandInterface {
     let feedback = modal?.querySelector('.modal-toast');
     if (modal && !feedback) {
       feedback = el('div', 'modal-toast'); feedback.setAttribute('role', 'status'); feedback.setAttribute('aria-live', 'polite');
-      modal.querySelector('.modal-subtitle').after(feedback);
+      const anchor=modal.querySelector('.modal-subtitle')??modal.querySelector('.game-header');
+      if(anchor)anchor.after(feedback);else modal.append(feedback);
     }
     if (feedback) { feedback.textContent = node.textContent; feedback.hidden = false; }
     clearTimeout(this.toastTimer);
@@ -249,6 +251,16 @@ export class IslandInterface {
   }
   drawMission() {
     const step = this.tutorialStep();
+    if(step&&this.engine.state.tutorial.step===0&&this.cityHallIntro){
+      if(this.missionSignature==='cityHallIntro')return;
+      this.missionSignature='cityHallIntro';
+      this.missionToggle.replaceChildren(el('span','','🏛️'),el('strong','',this.t('tutorial.cityHall')),el('span','','⌄'));
+      this.missionToggle.setAttribute('aria-label',this.t('tutorial.cityHall'));
+      this.missionDetails.replaceChildren(el('p','',this.t('tutorial.cityHallHint')));
+      const start=button(this.t('tutorial.cityHallContinue'),'tutorial-city-hall','primary-button');
+      start.onclick=()=>{this.cityHallIntro=false;this.missionSignature=null;this.drawMission();const hall=this.engine.state.buildings.find(b=>b.typeId==='cityHall');if(hall){this.view.focusCell(hall.x,hall.z);this.showInfo(hall.id);}};
+      this.missionDetails.append(start);return;
+    }
     const objective = step ?? this.engine.nextObjective?.();
     const signature = JSON.stringify([objective, this.selected === step?.buildType, this.engine.state.tutorial.step]);
     if (signature === this.missionSignature) return;
@@ -339,6 +351,12 @@ export class IslandInterface {
     this.drawMission();
     this.narrate(building.title ?? building.nameId ?? `building.${id}`);
   }
+  openBuildingCatalog(id){
+    const building=this.getBuilding(id);if(!building)return;
+    this.cancelPlacement();this.closeDetails();this.category=building.category;this.drawCatalog();this.setDockOpen(true);
+    const card=[...this.catalog.children].find(node=>node.dataset.building===id);
+    if(card){card.classList.add('required-building');card.scrollIntoView({block:'nearest',inline:'center'});card.focus();}
+  }
   findCell(id, ignoreId) {
     const size = this.engine.state.world.size;
     const cells = [];
@@ -392,13 +410,15 @@ export class IslandInterface {
   closeInfo() { this.infoId = null; this.infoSignature = null; this.info.hidden = true; this.view.showRadius(null); }
   currentInfoSignature() {
     const state = this.engine.state;
-    return JSON.stringify([state.buildings.find(row => row.id === this.infoId), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason]);
+    const instance=state.buildings.find(row=>row.id===this.infoId);
+    return JSON.stringify([instance, state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null]);
   }
   drawInfo() {
     const instance = this.engine.state.buildings.find(b => b.id === this.infoId);
     if (!instance) { this.closeInfo(); return; }
     this.infoSignature = this.currentInfoSignature();
     const record = this.getBuilding(instance.typeId);
+    this.info.dataset.type=record.id;
     const factor = levelFactor(instance, this.data.config);
     const amount = value => Number((value * factor).toFixed(1)).toLocaleString('he-IL');
     this.info.hidden = false; this.info.replaceChildren();
@@ -433,6 +453,8 @@ export class IslandInterface {
       this.syncPlacementLayout();
       this.updateGhost({ x: instance.x, z: instance.z }); this.updateCatalogState();
     };
+    const [width,depth]=record.footprint;
+    if(record.id==='soccer'&&!this.findMoveCell(record.id,instance))this.info.append(el('p','move-space-reason',this.t('app.noMoveSpace',{width,depth})));
     const remove = button(`↩ ${this.t('app.remove')}`, 'remove', 'secondary-button');
     remove.onclick = () => {
       remove.textContent = this.t('app.removeYes');
@@ -440,8 +462,9 @@ export class IslandInterface {
       this.info.append(el('p', '', this.t('app.removeConfirm')));
       remove.onclick = () => { this.closeInfo(); this.result(this.engine.remove(instance.id)); };
     };
-    actions.append(move, upgrade, remove); this.info.append(actions);
+    actions.append(move);if(record.id!=='cityHall')actions.append(upgrade);if(record.removable!==false)actions.append(remove);this.info.append(actions);
     this.activityInterface?.decorateInfo(instance,actions);
+    if(record.id==='cityHall'){this.view.showRadius(null);return;}
     if (nextLevel) {
       const nextInstance = { ...instance, level: instance.level + 1 };
       const details = el('p', 'upgrade-details');
@@ -471,6 +494,11 @@ export class IslandInterface {
     for (const name of ['pointerup', 'pointercancel', 'lostpointercapture', 'keyup', 'blur']) node.addEventListener(name, cancel);
     node.onclick = () => this.toast('parent.hold');
   }
+  findMoveCell(typeId,instance){
+    const size=this.engine.state.world.size;
+    for(let z=0;z<size;z++)for(let x=0;x<size;x++)if((x!==instance.x||z!==instance.z)&&this.engine.validatePlacement(typeId,x,z,instance.id).ok)return {x,z};
+    return null;
+  }
   openModal(titleId, subtitleId) {
     this.modalCleanup?.(); this.modalCleanup = null;
     this.modalRoot.replaceChildren();
@@ -484,9 +512,12 @@ export class IslandInterface {
     this.previousFocus = document.activeElement;
     this.root.inert = true;
     this.modalKeyHandler = event => {
-      if (event.key === 'Escape' && this.engine.state.avatar.created) this.closeModal();
+      if (event.key === 'Escape' && this.engine.state.avatar.created) {
+        if(modal.classList.contains('game-screen')){event.preventDefault();this.activityInterface?.shell?.pause('exit');}
+        else this.closeModal();
+      }
       if (event.key !== 'Tab') return;
-      const focusable = [...modal.querySelectorAll('button,input')].filter(n => !n.disabled && !n.hidden);
+      const focusable = [...modal.querySelectorAll('button,input')].filter(n => !n.disabled && !n.hidden && !n.closest('[inert]') && n.getClientRects().length);
       if (!focusable.length) return;
       if (event.shiftKey && document.activeElement === focusable[0]) { focusable.at(-1).focus(); event.preventDefault(); }
       else if (!event.shiftKey && document.activeElement === focusable.at(-1)) { focusable[0].focus(); event.preventDefault(); }

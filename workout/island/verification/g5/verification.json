@@ -1,0 +1,523 @@
+{
+  "release": "g5-20261016-1",
+  "saveVersion": 9,
+  "browser": "Chromium / ANGLE SwiftShader",
+  "physicalPhone": false,
+  "iOS": false,
+  "realFPS": false,
+  "reports": [
+    {
+      "width": 390,
+      "height": 844,
+      "fullscreenFallback": false,
+      "baseLength": 2,
+      "checks": [
+        {
+          "id": "soccer",
+          "lockedLabel": "יש לבנות מגרש כדורגל",
+          "catalogBuilding": "soccer"
+        },
+        {
+          "id": "navalDuel",
+          "lockedLabel": "יש לבנות נמל ימי",
+          "catalogBuilding": "harbor"
+        },
+        {
+          "id": "fireRescue",
+          "lockedLabel": "יש לבנות תחנת כיבוי",
+          "catalogBuilding": "fireStation"
+        },
+        {
+          "id": "alienDefense",
+          "lockedLabel": "יש לבנות בסיס חיל אוויר",
+          "catalogBuilding": "airbase"
+        },
+        {
+          "lockedEventBuildOrSelfHandle": true
+        },
+        {
+          "id": "soccer",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 844
+          },
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "navalDuel",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 844
+          },
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "fireRescue",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 844
+          },
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "alienDefense",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 844
+          },
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "touchMove390": true,
+          "from": {
+            "id": "building-2",
+            "typeId": "soccer",
+            "x": 1,
+            "z": 5,
+            "level": 1
+          },
+          "to": {
+            "id": "building-2",
+            "typeId": "soccer",
+            "x": 0,
+            "z": 5,
+            "level": 1
+          }
+        }
+      ],
+      "consoleErrors": [],
+      "outsideRequests": [],
+      "labBlocked": true,
+      "shots": [
+        "390x844-locked-catalog.png",
+        "390x844-soccer-play.png",
+        "390x844-soccer-back.png",
+        "390x844-navalDuel-play.png",
+        "390x844-navalDuel-back.png",
+        "390x844-fireRescue-play.png",
+        "390x844-fireRescue-back.png",
+        "390x844-alienDefense-play.png",
+        "390x844-alienDefense-back.png",
+        "390x844-soccer-moved.png",
+        "390x844-city-hall.png"
+      ]
+    },
+    {
+      "width": 360,
+      "height": 740,
+      "fullscreenFallback": "denied",
+      "baseLength": 2,
+      "checks": [
+        {
+          "id": "soccer",
+          "lockedLabel": "יש לבנות מגרש כדורגל",
+          "catalogBuilding": "soccer"
+        },
+        {
+          "id": "navalDuel",
+          "lockedLabel": "יש לבנות נמל ימי",
+          "catalogBuilding": "harbor"
+        },
+        {
+          "id": "fireRescue",
+          "lockedLabel": "יש לבנות תחנת כיבוי",
+          "catalogBuilding": "fireStation"
+        },
+        {
+          "id": "alienDefense",
+          "lockedLabel": "יש לבנות בסיס חיל אוויר",
+          "catalogBuilding": "airbase"
+        },
+        {
+          "id": "soccer",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 360,
+            "height": 740
+          },
+          "viewport": {
+            "width": 360,
+            "height": 740
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "navalDuel",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 360,
+            "height": 740
+          },
+          "viewport": {
+            "width": 360,
+            "height": 740
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "fireRescue",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 360,
+            "height": 740
+          },
+          "viewport": {
+            "width": 360,
+            "height": 740
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "alienDefense",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 360,
+            "height": 740
+          },
+          "viewport": {
+            "width": 360,
+            "height": 740
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        }
+      ],
+      "consoleErrors": [],
+      "outsideRequests": [],
+      "labBlocked": true,
+      "shots": [
+        "360x740-locked-catalog.png",
+        "360x740-soccer-play.png",
+        "360x740-soccer-back.png",
+        "360x740-navalDuel-play.png",
+        "360x740-navalDuel-back.png",
+        "360x740-fireRescue-play.png",
+        "360x740-fireRescue-back.png",
+        "360x740-alienDefense-play.png",
+        "360x740-alienDefense-back.png",
+        "360x740-city-hall.png"
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "fullscreenFallback": false,
+      "baseLength": 2,
+      "checks": [
+        {
+          "id": "soccer",
+          "lockedLabel": "יש לבנות מגרש כדורגל",
+          "catalogBuilding": "soccer"
+        },
+        {
+          "id": "navalDuel",
+          "lockedLabel": "יש לבנות נמל ימי",
+          "catalogBuilding": "harbor"
+        },
+        {
+          "id": "fireRescue",
+          "lockedLabel": "יש לבנות תחנת כיבוי",
+          "catalogBuilding": "fireStation"
+        },
+        {
+          "id": "alienDefense",
+          "lockedLabel": "יש לבנות בסיס חיל אוויר",
+          "catalogBuilding": "airbase"
+        },
+        {
+          "id": "soccer",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1000
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "navalDuel",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1000
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "fireRescue",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1000
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "alienDefense",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1000
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        }
+      ],
+      "consoleErrors": [],
+      "outsideRequests": [],
+      "labBlocked": true,
+      "shots": [
+        "1440x1000-locked-catalog.png",
+        "1440x1000-soccer-play.png",
+        "1440x1000-soccer-back.png",
+        "1440x1000-navalDuel-play.png",
+        "1440x1000-navalDuel-back.png",
+        "1440x1000-fireRescue-play.png",
+        "1440x1000-fireRescue-back.png",
+        "1440x1000-alienDefense-play.png",
+        "1440x1000-alienDefense-back.png",
+        "1440x1000-city-hall.png"
+      ]
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "fullscreenFallback": "unavailable",
+      "baseLength": 2,
+      "checks": [
+        {
+          "id": "soccer",
+          "lockedLabel": "יש לבנות מגרש כדורגל",
+          "catalogBuilding": "soccer"
+        },
+        {
+          "id": "navalDuel",
+          "lockedLabel": "יש לבנות נמל ימי",
+          "catalogBuilding": "harbor"
+        },
+        {
+          "id": "fireRescue",
+          "lockedLabel": "יש לבנות תחנת כיבוי",
+          "catalogBuilding": "fireStation"
+        },
+        {
+          "id": "alienDefense",
+          "lockedLabel": "יש לבנות בסיס חיל אוויר",
+          "catalogBuilding": "airbase"
+        },
+        {
+          "id": "soccer",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 844,
+            "height": 390
+          },
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "navalDuel",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 844,
+            "height": 390
+          },
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "fireRescue",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 844,
+            "height": 390
+          },
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        },
+        {
+          "id": "alienDefense",
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 844,
+            "height": 390
+          },
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "pauseMinimum56": true,
+          "pauseFreezesModel": true,
+          "visibilityPause": true,
+          "twoBackConfirmations": true,
+          "stayResumes": true,
+          "cancelWithoutReward": true,
+          "noHistoryGrowth": true
+        }
+      ],
+      "consoleErrors": [],
+      "outsideRequests": [],
+      "labBlocked": true,
+      "shots": [
+        "844x390-locked-catalog.png",
+        "844x390-soccer-play.png",
+        "844x390-soccer-back.png",
+        "844x390-navalDuel-play.png",
+        "844x390-navalDuel-back.png",
+        "844x390-fireRescue-play.png",
+        "844x390-fireRescue-back.png",
+        "844x390-alienDefense-play.png",
+        "844x390-alienDefense-back.png",
+        "844x390-city-hall.png"
+      ]
+    }
+  ]
+}
