@@ -52,7 +52,7 @@ for(const [id,make]of Object.entries(models)) {
 test('G2b v3 to v4 adds only stage/star defaults, preserves the input, and survives reload',()=>{
   const f=fixture();eventCity(f);const old=JSON.parse(f.engine.exportJSON());old.version=3;delete old.minigameProgress;
   old.minigameLevels.alienDefense=3;old.highScores.alienDefense=1234;old.minigameWins.alienDefense=12;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,9);
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,10);
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key]);
   assert.deepEqual(old,before);
   for(const p of Object.values(r.state.minigameProgress))assert.deepEqual(p,{stage:1,stars:Array(10).fill(0)});

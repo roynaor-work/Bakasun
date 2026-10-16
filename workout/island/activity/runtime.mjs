@@ -1,8 +1,8 @@
-import {equipmentOffer} from './equipment.mjs?v=g5-20261016-1';
-import {gameAvailability} from './availability.mjs?v=g5-20261016-1';
-import {eventEligible} from './eligibility.mjs?v=g5-20261016-1';
-import {seededRandom} from '../minigames/context.mjs?v=g5-20261016-1';
-import {buildingCenter,levelFactor} from '../engine/metrics.mjs?v=g5-20261016-1';
+import {equipmentOffer} from './equipment.mjs?v=g3c-20261016-1';
+import {gameAvailability} from './availability.mjs?v=g3c-20261016-1';
+import {eventEligible} from './eligibility.mjs?v=g3c-20261016-1';
+import {seededRandom} from '../minigames/context.mjs?v=g3c-20261016-1';
+import {buildingCenter,levelFactor} from '../engine/metrics.mjs?v=g3c-20261016-1';
 
 export function createActivity(engine,{now=Date.now,random=seededRandom(now()),blocked=()=>false,onLaunch}={}) {
   const {state,data,registry}=engine,config=data.config.events,listeners=new Set();

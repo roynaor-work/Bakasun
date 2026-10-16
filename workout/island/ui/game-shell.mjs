@@ -1,26 +1,33 @@
 /** Own only two entries: map -> games -> active game. Back reuses the guard via
  * forward(), and closing traverses to the map; the next entry truncates forward history. */
 export class GameNavigation {
-  constructor({target=window,onGameBack=()=>{},onMenuBack=()=>{}}={}) {
-    Object.assign(this,{target,onGameBack,onMenuBack});this.history=target.history;
+  constructor({target=window,onGameBack=()=>{},onMenuBack=()=>{},onMapBack}={}) {
+    Object.assign(this,{target,onGameBack,onMenuBack,onMapBack});this.history=target.history;this.mapGuard=Boolean(onMapBack);
     const marker=this.history.state?.islandShell;
     this.owner=marker?.owner||`island-${Date.now()}-${Math.random()}`;
     this.depth=marker?.depth||0;this.desired=0;this.traversing=false;
-    if(!marker)this.history.replaceState({...this.history.state,islandShell:{owner:this.owner,depth:0}},'');
+    if(!marker||this.mapGuard&&!marker.mapGuard){
+      this.depth=this.mapGuard?-1:0;
+      this.history.replaceState({...this.history.state,islandShell:{owner:this.owner,depth:this.depth,mapGuard:this.mapGuard}},'');
+    }
     this.listener=event=>this.pop(event);target.addEventListener('popstate',this.listener);
     this.reconcile();
   }
   menu(){this.desired=1;this.reconcile();}
   game(){this.desired=2;this.reconcile();}
   leave(){this.desired=0;this.reconcile();}
+  stayOnMap(){if(!this.mapQuestion||this.exiting)return;this.mapQuestion=false;this.desired=0;this.reconcile();}
+  exitIsland(){if(!this.mapQuestion)return;this.exiting=true;this.mapQuestion=false;this.history.go(-1);}
   reconcile(){
     if(this.traversing)return;
     if(this.depth>this.desired){this.traversing=true;this.history.go(this.desired-this.depth);return;}
-    while(this.depth<this.desired){this.depth++;this.history.pushState({...this.history.state,islandShell:{owner:this.owner,depth:this.depth}},'');}
+    while(this.depth<this.desired){this.depth++;this.history.pushState({...this.history.state,islandShell:{owner:this.owner,depth:this.depth,mapGuard:this.mapGuard}},'');}
   }
   pop(event){
+    if(this.exiting)return;
     const own=event.state?.islandShell,wasTraversal=this.traversing;
     this.traversing=false;this.depth=own?.owner===this.owner?own.depth:0;
+    if(!wasTraversal&&this.mapGuard&&this.desired===0&&this.depth<0){this.mapQuestion=true;this.onMapBack();return;}
     if(!wasTraversal&&this.desired===2&&this.depth<2){
       this.onGameBack();
       // Restore the existing guard, including when Back is pressed repeatedly.
@@ -94,10 +101,10 @@ export function fitGameViewport(width,height,modelWidth,modelHeight){
 export function gamePlayArea(canvas,dialog,controls){
   const box=canvas.getBoundingClientRect(),c=controls.getBoundingClientRect();
   let top=8;
-  for(const selector of ['.game-header','.game-status','.soccer-roster']){
+  for(const selector of ['.game-header','.game-status:not(.soccer-live-status)','.soccer-roster','.soccer-scoreboard']){
     const node=dialog.querySelector(selector);if(node)top=Math.max(top,node.getBoundingClientRect().bottom-box.top+8);
   }
-  const side=box.width>box.height&&c.width<box.width*.5;
+  const side=box.width>box.height&&c.width<box.width*.5&&c.top<box.top+box.height*.5;
   const width=Math.max(1,side?c.left-box.left-16:box.width-16);
   const height=Math.max(1,(side?box.height-8:c.top-box.top-8)-top);
   return {x:8,y:top,width,height};

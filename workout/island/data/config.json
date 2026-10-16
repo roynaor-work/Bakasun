@@ -3365,12 +3365,26 @@
         "maxTriangles": 80000,
         "maxDrawCalls": 60,
         "confettiCount": 96,
-        "crowdCount": 144
+        "crowdCount": 144,
+        "cameraFov": 40,
+        "cameraMargin": 1.08,
+        "cameraElevation": 0.79,
+        "cameraDepth": 0.61,
+        "aimArrowLength": 2,
+        "aimArrowWidth": 0.045,
+        "staminaBarWidth": 1.2
       },
       "controls": {
         "deadzone": 0.12,
         "joystickRadius": 48,
-        "rightHanded": true
+        "rightHanded": true,
+        "kickKey": "Space",
+        "passKey": "KeyX",
+        "sprintKeys": [
+          "ShiftLeft",
+          "ShiftRight"
+        ],
+        "switchKey": "KeyC"
       },
       "ai": {
         "kickoffX": [
@@ -3727,7 +3741,85 @@
           ]
         }
       ],
-      "requiresBuilding": "soccer"
+      "requiresBuilding": "soccer",
+      "aimAssistDegrees": 25,
+      "passConeDegrees": 35,
+      "sprint": {
+        "capacity": 100,
+        "multiplier": 1.45,
+        "drainPerSecond": 30,
+        "regenPerSecond": 18,
+        "regenDelaySeconds": 0.6,
+        "minToStart": 20
+      },
+      "slide": {
+        "seconds": 0.35,
+        "speedMultiplier": 2.2,
+        "reach": 1,
+        "baseChance": 0.55,
+        "recoverSeconds": 0.6,
+        "cooldownSeconds": 1.2
+      },
+      "steal": {
+        "reach": 0.9,
+        "baseChance": 0.35,
+        "cooldownSeconds": 0.6
+      },
+      "difficulties": {
+        "easy": {
+          "speed": 0.7,
+          "stealRate": 0.45,
+          "accuracy": 0.65,
+          "keeper": 0.5,
+          "tackleReach": 0.8,
+          "thinkSeconds": 0.7,
+          "coinMultiplier": 0.8,
+          "bonusStars": 0
+        },
+        "normal": {
+          "speed": 1,
+          "stealRate": 1,
+          "accuracy": 1,
+          "keeper": 1,
+          "tackleReach": 1,
+          "thinkSeconds": 1,
+          "coinMultiplier": 1,
+          "bonusStars": 0
+        },
+        "hard": {
+          "speed": 1.22,
+          "stealRate": 1.4,
+          "accuracy": 1.12,
+          "keeper": 1.18,
+          "tackleReach": 1.12,
+          "thinkSeconds": 1.25,
+          "coinMultiplier": 1.3,
+          "bonusStars": 1
+        }
+      },
+      "card": {
+        "initial": 50,
+        "min": 1,
+        "max": 99,
+        "silverRating": 60,
+        "goldRating": 75,
+        "effects": {
+          "power": 0.2,
+          "pace": 0.12,
+          "accuracySpreadReduction": 0.5,
+          "accuracyAssistDegrees": 10,
+          "staminaCapacity": 0.6,
+          "staminaRegen": 0.4,
+          "defense": 0.25
+        }
+      },
+      "training": {
+        "gain": 3,
+        "baseCost": 2,
+        "pointsPerCost": 10,
+        "cooldownSeconds": 3600,
+        "millisecondsPerSecond": 1000
+      }
     }
   },
   "minigameLevels": {

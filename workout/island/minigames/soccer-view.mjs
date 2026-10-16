@@ -7,7 +7,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   const renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,config.view.maxPixelRatio));renderer.outputColorSpace=T.SRGBColorSpace;
   const scene=new T.Scene();scene.background=new T.Color('#92c5cc');
-  const camera=new T.PerspectiveCamera(40,1,.1,140),target=new T.Vector3(),dummy=new T.Object3D(),color=new T.Color();
+  const camera=new T.PerspectiveCamera(config.view.cameraFov,1,.1,140),target=new T.Vector3(),dummy=new T.Object3D(),color=new T.Color();
   const resources=new Set(),track=o=>(resources.add(o),o);
   const mat=(c,extra={})=>track(new T.MeshLambertMaterial({color:c,...extra}));
   scene.add(new T.HemisphereLight('#ffefda','#536f70',2.3));const sun=new T.DirectionalLight('#fff2c7',2.3);sun.position.set(-12,24,8);scene.add(sun);
@@ -67,6 +67,11 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   const shadows=new T.InstancedMesh(track(new T.CircleGeometry(.52,20)),track(new T.MeshBasicMaterial({color:'#153b36',transparent:true,opacity:.25,depthWrite:false})),7);shadows.frustumCulled=false;scene.add(shadows);
   const selector=new T.Mesh(track(new T.RingGeometry(.68,.8,40)),track(new T.MeshBasicMaterial({color:'#fff49c',side:T.DoubleSide})));selector.rotation.x=-Math.PI/2;scene.add(selector);
   const arrow=new T.Mesh(track(new T.ConeGeometry(.25,.42,3)),track(new T.MeshBasicMaterial({color:'#fff49c'})));arrow.rotation.z=Math.PI;scene.add(arrow);
+  const aimArrow=new T.Group(),aimMaterial=track(new T.MeshBasicMaterial({color:config.team.colors[0],side:T.DoubleSide}));
+  const shaft=new T.Mesh(track(new T.PlaneGeometry(config.view.aimArrowWidth,config.view.aimArrowLength)),aimMaterial);shaft.position.z=config.view.aimArrowLength/2;shaft.rotation.x=-Math.PI/2;aimArrow.add(shaft);
+  const head=new T.Mesh(track(new T.ConeGeometry(.13,.32,3)),aimMaterial);head.rotation.x=Math.PI/2;head.position.z=config.view.aimArrowLength;aimArrow.add(head);scene.add(aimArrow);
+  const staminaBack=new T.Mesh(track(new T.PlaneGeometry(config.view.staminaBarWidth,.1)),mat('#173c4b'));
+  const staminaFill=new T.Mesh(track(new T.PlaneGeometry(config.view.staminaBarWidth,.07)),mat('#83efb8'));scene.add(staminaBack,staminaFill);
   const requests=new T.InstancedMesh(track(new T.RingGeometry(.14,.22,12)),track(new T.MeshBasicMaterial({color:'#dfffac',side:T.DoubleSide})),6);requests.frustumCulled=false;scene.add(requests);
   const ballRoot=new T.Group();const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));ballRoot.add(fallbackBall);scene.add(ballRoot);
   const particleCount=config.view.confettiCount,particles=Array.from({length:particleCount},()=>({x:0,y:-10,z:0,vx:0,vy:0,vz:0,life:0,rotation:0}));
@@ -98,10 +103,15 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     if(disposed)return;time+=dt;qualitySample(frameMs,dt);
     const dir=s.attackDir;
     // The whole pitch remains visible; the second-half camera keeps attack right.
-    const distance=lastWidth<600?48:39;
-    const visibleWidth=2*distance*Math.tan(camera.fov*Math.PI/360)*camera.aspect;
-    const cameraDistance=distance*Math.max(1,36/Math.max(1,visibleWidth));
-    camera.position.set(0,cameraDistance*.79,cameraDistance*.61*dir);camera.lookAt(0,0,0);
+    const portrait=canvas.clientHeight>canvas.clientWidth;
+    const halfLength=hx+gd,halfWidth=hz+1,margin=config.view.cameraMargin;
+    let cameraDistance=Math.max((portrait?halfWidth:halfLength)/camera.aspect,portrait?halfLength:halfWidth)/Math.tan(camera.fov*Math.PI/360)*margin;
+    for(let fit=0;fit<4;fit++){
+      camera.position.set(portrait?-cameraDistance*config.view.cameraDepth*dir:0,cameraDistance*config.view.cameraElevation,portrait?0:cameraDistance*config.view.cameraDepth*dir);camera.lookAt(0,0,0);camera.updateMatrixWorld();
+      let extent=0;
+      for(const x of [-halfLength,halfLength])for(const z of [-halfWidth,halfWidth]){target.set(x,0,z).project(camera);extent=Math.max(extent,Math.abs(target.x),Math.abs(target.y));}
+      if(extent*margin<=1)break;cameraDistance*=extent*margin;
+    }
     if(s.eventId!==lastEvent){lastEvent=s.eventId;if(s.event?.type==='goal'){
       goalPulse=1;goalTeam=s.event.team;
       for(let i=0;i<particles.length;i++){const p=particles[i];p.x=s.ball.x;p.z=s.ball.z;p.y=.6+(i%4)*.2;p.vx=Math.sin(i*2.39)*5;p.vz=Math.cos(i*2.39)*6;p.vy=5+(i%7)*.55;p.life=2+(i%5)*.15;p.rotation=i;confetti.setColorAt(i,color.set(i%3===0?'#ffe48b':goalTeam===0?'#3a8dff':'#ff5c65'));}confetti.instanceColor.needsUpdate=true;
@@ -129,6 +139,9 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     }
     boxes.count=boxIndex;spheres.count=sphereIndex;boxes.instanceMatrix.needsUpdate=true;spheres.instanceMatrix.needsUpdate=true;if(boxes.instanceColor)boxes.instanceColor.needsUpdate=true;if(spheres.instanceColor)spheres.instanceColor.needsUpdate=true;requests.instanceMatrix.needsUpdate=true;
     const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);
+    aimArrow.visible=s.charging;aimArrow.position.set(controlled.x,.065,controlled.z);aimArrow.rotation.y=Math.atan2(s.aim.x,s.aim.z);
+    staminaBack.position.set(controlled.x,2.2,controlled.z);staminaFill.position.copy(staminaBack.position);staminaBack.quaternion.copy(camera.quaternion);staminaFill.quaternion.copy(camera.quaternion);staminaFill.translateZ(.01);staminaFill.scale.x=s.sprint.value/s.sprint.capacity;
+    if(glb){glb.rotation.z=controlled.recover>0?Math.PI/2:0;glb.position.y=controlled.recover>0?.4:controlled.slideTime>0?-.65:0;}
     ballRoot.position.set(s.ball.x,s.ball.y,s.ball.z);if(s.ball.owner===null){ballRoot.rotation.z-=s.ball.vx*dt*2;ballRoot.rotation.x+=s.ball.vz*dt*2;}
     dummy.position.set(s.ball.x,.032,s.ball.z);dummy.rotation.set(-Math.PI/2,0,0);dummy.scale.setScalar(.5);dummy.updateMatrix();shadows.setMatrixAt(6,dummy.matrix);shadows.instanceMatrix.needsUpdate=true;
     for(const net of nets){const array=net.geometry.attributes.position.array;for(let i=0;i<array.length;i+=3){array[i]=net.base[i]+(net.direction*s.attackDir===(goalTeam===0?1:-1)?net.direction*Math.sin(time*27+net.base[i+2]*2)*goalPulse*.22:0);}net.geometry.attributes.position.needsUpdate=true;}
@@ -136,8 +149,12 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     renderer.render(scene,camera);
   }
   const lost=event=>{event.preventDefault();onContextLost();};canvas.addEventListener('webglcontextlost',lost);
+  function pitchBounds(){
+    const points=[];for(const x of [-hx,hx])for(const z of [-hz,hz]){target.set(x,0,z).project(camera);points.push({x:(target.x+1)*lastWidth/2,y:(1-target.y)*lastHeight/2});}
+    return {width:Math.max(...points.map(p=>p.x))-Math.min(...points.map(p=>p.x)),height:Math.max(...points.map(p=>p.y))-Math.min(...points.map(p=>p.y))};
+  }
   return {ready,render,qualitySample,
-    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,assetStatus,assetStats,width:lastWidth,height:lastHeight}),
+    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,assetStatus,assetStats,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
     dispose(){if(disposed)return;disposed=true;observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);mixer?.stopAllAction();if(mixer&&glb)mixer.uncacheRoot(glb.children[0]);glb?.traverse(o=>o.skeleton?.dispose());for(const resource of resources)resource.dispose();resources.clear();scene.clear();glb=mixer=actions=null;renderer.dispose();renderer.forceContextLoss();}
   };
 }
