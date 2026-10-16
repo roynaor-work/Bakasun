@@ -1,7 +1,7 @@
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2f-20261015-1';
-import {runCanvasGame} from './canvas-session.mjs?v=g2f-20261015-1';
-import {createPool,releaseAt} from './pool.mjs?v=g2f-20261015-1';
-import {oval,drawHealthBar} from './art.mjs?v=g2f-20261015-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2g-20261016-1';
+import {runCanvasGame} from './canvas-session.mjs?v=g2g-20261016-1';
+import {createPool,releaseAt} from './pool.mjs?v=g2g-20261016-1';
+import {oval,drawHealthBar} from './art.mjs?v=g2g-20261016-1';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 
 /** One pooled entity factory for all enemy variants; geometry lives in art.mjs. */
@@ -150,7 +150,7 @@ export function drawAliens(p,m,{config,balance,art,quality}) {
   p.drawImage(art.backdrop,0,0);p.fillStyle=a.creamColor;
   const count=quality.low?balance.starCount:v.stars;
   for(let i=0;i<count;i++){const depth=1+i%3,x=(i*a.starStrideX+a.starOffsetX)%w,y=(i*a.starStrideY+m.time*balance.starSpeed*depth)%h;p.globalAlpha=a.starOpacity+(i%a.starVariants)*a.starOpacityStep;p.fillRect(x,y,a.starSize*depth/2,a.starSize*depth/2);}p.globalAlpha=1;
-  for(const e of m.aliens){if(e.shield>0){p.strokeStyle=palette.shieldGlow;p.lineWidth=3;p.beginPath();p.ellipse(e.x,e.y,e.radius+7,e.radius+5,0,0,TAU);p.stroke();}const size=balance.alienRadius*3*e.scale;p.save();p.translate(e.x,e.y);p.rotate(Math.sin(e.age*2+e.phase)*.09);p.drawImage(art.aliens[e.kind],-size/2,-size/2,size,size*.88);if(e.hitTime>0){p.globalCompositeOperation='screen';p.globalAlpha=e.hitTime/balance.hitFlashSeconds;p.drawImage(art.aliens[e.kind],-size/2,-size/2,size,size*.88);}p.restore();if(e.maxHp>2)drawHealthBar(p,e.x-size/3,e.y-size*.5,size*2/3,3,e.hp,e.maxHp,config);}
+  for(const e of m.aliens){if(e.shield>0){p.strokeStyle=palette.shieldGlow;p.lineWidth=3;p.beginPath();p.ellipse(e.x,e.y,e.radius+7,e.radius+5,0,0,TAU);p.stroke();}const modelScale=art.modelScales?.enemies[e.kind]||1,regularScale=modelScale!==1?(balance.models.enemies[e.kind]?.regularScale??modelScale):1,size=balance.alienRadius*3*(modelScale!==1&&e.boss?modelScale:e.scale*regularScale);p.save();p.translate(e.x,e.y);p.rotate(Math.sin(e.age*2+e.phase)*.09);p.drawImage(art.aliens[e.kind],-size/2,-size/2,size,size*.88);if(e.hitTime>0){p.globalCompositeOperation='screen';p.globalAlpha=e.hitTime/balance.hitFlashSeconds;p.drawImage(art.aliens[e.kind],-size/2,-size/2,size,size*.88);}p.restore();if(e.maxHp>2)drawHealthBar(p,e.x-size/3,e.y-size*.5,size*2/3,3,e.hp,e.maxHp,config);}
   for(const s of m.shots){p.strokeStyle=s.kind===1?v.foam:a.sandColor;p.lineWidth=s.kind===1?5:3;p.beginPath();p.moveTo(s.x,s.y+16);p.lineTo(s.x,s.y-9);p.stroke();oval(p,s.x,s.y,2,8,palette.white);}
   for(const b of m.bolts){oval(p,b.x,b.y,6,10,palette.enemyGlow);oval(p,b.x,b.y,3,6,palette.enemyCore);}
   for(const d of m.pickups){p.save();p.translate(d.x,d.y);p.rotate(m.time*2);p.fillStyle=balance.pickups.colors[d.kind];p.fillRect(-7,-7,14,14);p.fillStyle=palette.white;p.fillRect(-2,-2,4,4);p.restore();}
@@ -168,7 +168,7 @@ export function drawAliens(p,m,{config,balance,art,quality}) {
   p.textAlign='right';p.fillText(art.clockText||'',w-12,21);
   if(m.combo>1){p.font=m.celebration>0?'bold 26px sans-serif':'bold 19px sans-serif';p.fillStyle=palette.gold;p.fillText(art.comboText||'',w-12,53);}
   const {x,y}=m.player;p.save();p.translate(x,y);if(m.invulnerable&&Math.floor(m.time*a.shipBlinkRate)%2)p.globalAlpha=balance.blinkOpacity;
-  const exhaust=12+Math.sin(m.time*25)*4;oval(p,0,30,6,exhaust,palette.exhaust);oval(p,0,29,3,exhaust*.7,palette.exhaustCore);p.drawImage(art.player,-35,-40,70,77);
+  const exhaust=12+Math.sin(m.time*25)*4;oval(p,0,30,6,exhaust,palette.exhaust);oval(p,0,29,3,exhaust*.7,palette.exhaustCore);const playerScale=art.modelScales?.player||1;p.drawImage(art.player,-35*playerScale,-40*playerScale,70*playerScale,77*playerScale);
   if(m.upgrades.damage>0||(m.equipment.damage||1)>1){oval(p,0,-9,4+m.upgrades.damage,9,palette.gold);}if((m.equipment.rate||1)>1){oval(p,-20,26,3,12,palette.cockpitShine);oval(p,20,26,3,12,palette.cockpitShine);}if(m.upgrades.laser>0||m.spreadTime>0){p.fillStyle=palette.ivory;p.fillRect(-25,-6,5,21);p.fillRect(20,-6,5,21);}
   if(m.powerup===3||m.upgrades.shield>0||(m.equipment.shield||0)>0){p.strokeStyle=palette.shieldGlow;p.lineWidth=3;p.beginPath();p.arc(0,0,32+Math.sin(m.time*5)*2,0,TAU);p.stroke();}p.restore();
 }

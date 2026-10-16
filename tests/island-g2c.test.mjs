@@ -110,7 +110,7 @@ test('G2c charged water and pressure equipment extinguish faster; charging does 
   advance(a,.2,{x:f.x,y:f.y,firing:true});advance(b,.2,{x:g.x,y:g.y,firing:true});assert.ok(g.heat<f.heat);
 });
 test('G2c a rescued friend awards water and score once, is optional, and resets each round',()=>{
-  const m=make('fireRescue'),r=m.rescue,reserve=m.reserve;advance(m,r.seconds+.1,{firing:true,x:r.x,y:r.y});assert.equal(r.rescued,true);assert.equal(m.score,r.points);assert.ok(m.reserve>=reserve);const score=m.score;advance(m,1,{firing:true,x:r.x,y:r.y});assert.equal(m.score,score);assert.equal(make('fireRescue').rescue.rescued,false);
+  const m=make('fireRescue',3),r=m.rescue,reserve=m.reserve;advance(m,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,true);assert.equal(m.score,r.points);assert.ok(m.reserve>=reserve);const score=m.score;advance(m,1,{rescue:true,x:r.x,y:r.y});assert.equal(m.score,score);assert.equal(make('fireRescue',3).rescue.rescued,false);
 });
 test('G2c naval HP tracks each ship and the entire remaining fleet; bars clamp at zero/full',()=>{
   const m=make('navalDuel',10);assert.ok(m.maxEnemyFleet>m.enemyLives);const total=m.enemyFleetHp; m.update(.02,{firing:true});navalHit(m,config.navalDuel);assert.ok(m.enemyLives<m.enemyShip.maxHp);assert.ok(m.enemyFleetHp<total);
