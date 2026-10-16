@@ -1,13 +1,13 @@
-import {createSound} from '../minigames/sound.mjs?v=g3c-20261016-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g3c-20261016-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3c-20261016-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=g3c-20261016-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=g3c-20261016-1';
-import {gameContext} from '../minigames/context.mjs?v=g3c-20261016-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g3c-20261016-1';
-import {GameNavigation,GameShell} from './game-shell.mjs?v=g3c-20261016-1';
-import {playerCard} from './soccer-card.mjs?v=g3c-20261016-1';
-import {attributes} from '../activity/soccer-card.mjs?v=g3c-20261016-1';
+import {createSound} from '../minigames/sound.mjs?v=g3d-20261016-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g3d-20261016-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3d-20261016-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=g3d-20261016-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=g3d-20261016-1';
+import {gameContext} from '../minigames/context.mjs?v=g3d-20261016-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g3d-20261016-1';
+import {GameNavigation,GameShell} from './game-shell.mjs?v=g3d-20261016-1';
+import {playerCard} from './soccer-card.mjs?v=g3d-20261016-1';
+import {attributes} from '../activity/soccer-card.mjs?v=g3d-20261016-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -17,7 +17,7 @@ export class ActivityInterface {
     Object.assign(this,{ui,engine,activity,data,t,now});this.current=null;this.closing=false;this.eventOpen=false;
     this.navigation=new GameNavigation({onGameBack:()=>this.shell?.pause('exit'),onMenuBack:()=>this.ui.closeModal(),onMapBack:()=>this.confirmMapExit()});
     let storage;try{storage=window.localStorage;}catch{}
-    this.sound=createSound({storage});this.soundEvents=new AbortController();
+    this.sound=createSound({storage,soccerVoices:data.config.minigames.soccer.sound});this.soundEvents=new AbortController();
     document.addEventListener('pointerdown',event=>{this.sound.unlock();if(event.target.closest('button')&&ui.modalRoot.contains(event.target))this.sound.play('button');},{capture:true,signal:this.soundEvents.signal});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)this.sound.suspend();},{signal:this.soundEvents.signal});
     ui.activityInterface=this;
@@ -132,7 +132,7 @@ export class ActivityInterface {
       const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));
       for(const key of Object.keys(this.data.config.minigames.soccer.difficulties)){
         const choose=button(this.t(`soccer.difficulty.${key}`),'soccer-difficulty',()=>{const r=this.engine.setSoccerDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.soccerCard.difficulty===key));choices.append(choose);
-      }dialog.append(choices,button(this.t('soccer.training'),'soccer-training',()=>this.training()));
+      }dialog.append(choices,this.soccerHandedness(),button(this.t('soccer.training'),'soccer-training',()=>this.training()));
     }
     for(const bonus of this.data.config.minigames.starBonuses)dialog.append(el('p','',this.t('minigame.starBonus',{stars:bonus.stars,level:bonus.upgradeLevel})));
     const map=el('div','stage-map');
@@ -151,8 +151,15 @@ export class ActivityInterface {
   }
   narrateHelp(id) {for(let i=1;i<=3;i++){const key=`minigame.${id}.help.${i}`;this.engine.narration.announce(key);this.ui.narrate(key);}}
   helpLines(id) {const lines=el('div','game-help-lines');for(let i=1;i<=3;i++)lines.append(el('p','',this.t(`minigame.${id}.help.${i}`)));return lines;}
+  soccerHandedness(){
+    const c=this.data.config.minigames.soccer.controls,label=el('label','soccer-hand-setting'),toggle=el('input'),text=el('span');toggle.type='checkbox';toggle.setAttribute('role','switch');toggle.dataset.action='soccer-hand';
+    let right=c.rightHanded;try{const saved=localStorage.getItem(c.handednessKey);if(saved!==null)right=saved==='right';}catch{}
+    const render=()=>{toggle.checked=right;text.textContent=this.t(right?'soccer.leftStick':'soccer.rightStick');};
+    toggle.onchange=()=>{right=toggle.checked;try{localStorage.setItem(c.handednessKey,right?'right':'left');}catch{}render();};render();label.append(toggle,text);return label;
+  }
   intro(id,eventId,stage) {
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
+    if(id==='soccer')dialog.append(this.soccerHandedness());
     dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
     this.narrateHelp(id);
   }
@@ -193,7 +200,7 @@ export class ActivityInterface {
     heading.textContent=this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
     dialog.dataset.stage=context.level;
     this.navigation.game();
-    this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal()});
+    this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:id==='soccer'});
     const eventBonuses=eventId?this.activity.bonuses():{};
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onFireSummary:summary=>{fireSummary=summary;},onError:reason=>this.ui.toast(reason),
@@ -209,10 +216,7 @@ export class ActivityInterface {
     this.current=response;
     this.shell.bind(response.session);
     if(id==='navalDuel')status.textContent=this.t('minigame.aimCircle');
-    const help=button(this.t('minigame.help'),'game-help',()=>{
-      const content=el('div','game-help-lines');content.append(this.helpLines(id),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
-      this.shell?.pause('help',content);this.narrateHelp(id);
-    });(id==='soccer'?controls.querySelector('.soccer-utilities'):controls).append(help);canvas.focus();
+    canvas.focus();
   }
   showResult(id,eventId,result,fireSummary) {
     const game=this.engine.registry.minigames.get(id);

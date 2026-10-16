@@ -100,20 +100,6 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .game-screen[data-game=fireRescue] [data-action=game-help]{grid-column:1/-1;min-height:56px}
 @media(orientation:landscape) and (max-height:600px){.game-screen[data-game=fireRescue] .game-controls{grid-template-columns:repeat(2,minmax(0,1fr));overflow:auto}.game-screen[data-game=fireRescue] .game-gauge{grid-column:auto}}
 
-/* G3b: the existing full-screen game shell hosts the soccer view and controls. */
-.game-screen[data-game="soccer"]{grid-template-rows:auto auto auto minmax(0,1fr) auto}
-.soccer-roster{margin:0;text-align:center;font-size:.8rem;color:var(--muted,#b9ced3)}
-.soccer-canvas{touch-action:none;width:100%;height:100%}
-.soccer-controls{display:grid;grid-template-columns:112px minmax(112px,1fr);gap:8px;align-items:center;padding:8px}
-.soccer-joystick{width:108px;height:108px;border-radius:50%;background:#163d4e;border:2px solid #74acb7;position:relative;touch-action:none;justify-self:center;grid-row:span 2}
-.soccer-knob{position:absolute;left:calc(50% - 23px);top:calc(50% - 23px);width:46px;height:46px;border-radius:50%;background:#f4c76d;pointer-events:none}
-.soccer-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.soccer-actions button{min-width:56px;min-height:56px}.soccer-power{grid-column:1/-1;width:100%;height:12px}
-.soccer-controls #shoot.held{background:#ffe6a4;color:#163744}.soccer-controls.left-handed .soccer-joystick{grid-column:2}.soccer-controls.left-handed .soccer-actions{grid-column:1;grid-row:1}.soccer-controls [data-action="game-help"]{grid-column:1/-1}
-.game-locked{color:#f4c76d}.team-rank{font-weight:700}
-@media(min-width:700px){.soccer-controls{grid-template-columns:112px minmax(180px,360px) auto auto;justify-content:center}.soccer-joystick{grid-row:auto}.soccer-controls [data-action="game-help"]{grid-column:auto}}
-.soccer-roster{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;align-items:center}.soccer-team-name{display:inline-block;border-inline-start:6px solid;padding:2px 6px;border-radius:4px;color:#163744;font-weight:700}.soccer-player-names{flex-basis:100%}
-
-/* G5: the canvas occupies the window; HUD and controls float over its safe play area. */
 .modal-overlay:has(.game-screen){padding:0;display:block;background:#103e59}
 .game-screen.game-screen{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;display:block;overflow:hidden;background:#103e59;color:#effcff}
 .game-screen:fullscreen{width:100%;height:100%;background:#103e59}
@@ -126,16 +112,6 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .game-screen .game-controls.game-controls{position:absolute;bottom:max(8px,env(safe-area-inset-bottom));left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));z-index:2;width:auto;max-height:38dvh;padding:6px;border-radius:16px;background:#10394bd9;overflow:auto;gap:6px}
 .game-screen .game-controls>button{min-height:56px;color:#173d54}
 .game-screen .game-gauge{color:#fff}
-.game-screen .soccer-roster{position:absolute;top:calc(max(8px,env(safe-area-inset-top)) + 96px);left:8px;right:8px;z-index:2;font-size:11px;gap:3px;color:#fff}
-.game-screen .soccer-player-names{font-size:10px}
-.game-screen .soccer-controls.soccer-controls{display:grid;grid-template-columns:108px minmax(120px,1fr);align-items:center}
-.game-screen .soccer-joystick{grid-row:1/3;width:100px;height:100px}
-.game-screen .soccer-actions{grid-column:2}
-.game-screen .soccer-controls [data-action=soccer-hand],.game-screen .soccer-controls [data-action=game-help]{grid-column:auto;min-height:56px;font-size:12px;padding:4px}
-.game-screen .soccer-controls [data-action=game-help]{grid-column:2}
-.game-screen .soccer-controls.left-handed{direction:ltr}
-.game-screen .soccer-controls.left-handed .soccer-joystick{grid-column:2}
-.game-screen .soccer-controls.left-handed .soccer-actions,.game-screen .soccer-controls.left-handed [data-action=game-help]{grid-column:1}
 .game-screen[data-game=navalDuel] .ammo-rack{position:static;display:flex;flex-direction:row;flex:1;width:auto;gap:4px}
 .game-screen[data-game=navalDuel] .game-controls{flex-wrap:wrap}
 .game-screen[data-game=navalDuel] .ammo-rack button{flex:1;min-height:56px}
@@ -152,13 +128,6 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 @media(orientation:landscape) and (max-height:600px){
  .game-screen .game-controls.game-controls{left:auto;right:max(8px,env(safe-area-inset-right));top:96px;bottom:max(8px,env(safe-area-inset-bottom));width:214px;max-height:none;align-content:start;flex-wrap:wrap;overflow:auto}
  .game-screen .game-status{right:238px}
- .game-screen .soccer-roster{top:96px;right:238px;font-size:10px}
- .game-screen .soccer-controls.soccer-controls{grid-template-columns:78px minmax(100px,1fr);padding:4px;gap:4px}
- .game-screen .soccer-joystick{width:76px;height:76px;grid-row:1/3}
- .game-screen .soccer-actions{gap:4px}
- .game-screen .soccer-actions button{font-size:12px;padding:4px}
- .game-screen .soccer-controls [data-action=soccer-hand]{grid-column:1;grid-row:3}
- .game-screen .soccer-controls [data-action=game-help]{grid-column:2;grid-row:3}
  .game-screen[data-game=fireRescue] .game-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
  .game-screen[data-game=navalDuel] .ammo-rack{display:grid;grid-template-columns:1fr 1fr;flex-basis:100%}
  .game-screen[data-game=navalDuel] .ammo-rack button{width:auto}
@@ -171,7 +140,8 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .info-card[data-type=cityHall] .info-actions{display:grid;grid-template-columns:1fr 1fr}.info-card[data-type=cityHall] [data-action=city-hall-games]{grid-column:1/-1;grid-row:1}
 .game-screen[data-paused=true] .game-header.game-header{z-index:9;pointer-events:none}.game-screen[data-paused=true] .game-header .game-pause{pointer-events:auto}
 
-/* G3c: card, training and soccer HUD. All four actions have independent touch targets. */
+
+/* Soccer card and pre-match training. */
 .soccer-player-card{position:relative;isolation:isolate;width:min(280px,100%);margin:14px auto;padding:18px 22px;border:3px solid #9f6638;border-radius:28px 28px 42px 42px;background:linear-gradient(135deg,#f3d2a4,#bd8051);color:#34291e;text-align:center;box-shadow:0 8px 22px #173d5426}
 .soccer-player-card.silver{border-color:#899aa6;background:linear-gradient(135deg,#f6fafc,#a9bac6);color:#1b3445}
 .soccer-player-card.gold{border-color:#bc8e22;background:linear-gradient(135deg,#fff0a4,#d3a63c);color:#47340e}
@@ -180,21 +150,44 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .soccer-difficulties{display:flex;gap:8px;justify-content:center;border:0;padding:10px 0}.soccer-difficulties legend{font-weight:700;text-align:center}.soccer-difficulties button{min-height:56px;flex:1}.soccer-difficulties button[aria-pressed=true]{background:#1a7065;color:white;outline:3px solid #e4b13d}
 .soccer-training-list{display:grid;gap:10px}.soccer-training-row{display:grid;gap:4px}.soccer-training-row button{min-height:56px}.soccer-training-reason{font-size:13px;color:#713e27}.soccer-training-countdown{font-weight:700;text-align:center}
 .game-screen[data-game=soccer] .soccer-live-status{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);padding:0;margin:0;white-space:nowrap}
-.game-screen .soccer-scoreboard{position:absolute;top:76px;left:8px;right:8px;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:3px 8px;align-items:center;padding:5px 8px;background:#153849ed;border:1px solid #c3e9df66;border-radius:12px;text-align:center;color:#fff}
-.soccer-scoreboard .soccer-team-name{font-size:12px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.soccer-score{font-size:32px;line-height:1.15;font-weight:900;direction:ltr;white-space:nowrap}.soccer-clock{grid-column:2;direction:ltr;font-size:16px;font-variant-numeric:tabular-nums}.soccer-half{grid-column:3;grid-row:2;font-size:12px}
-.game-screen[data-game=soccer] .soccer-controls.soccer-controls{display:grid;grid-template-columns:96px minmax(0,1fr);grid-template-rows:auto auto;gap:6px;padding:6px;max-height:none;overflow:visible;width:auto;top:auto;left:8px;right:8px;bottom:max(8px,env(safe-area-inset-bottom));align-content:center}
-.game-screen[data-game=soccer] .soccer-joystick{grid-column:1;grid-row:1;width:92px;height:92px}.game-screen[data-game=soccer] .soccer-actions{grid-column:2;grid-row:1;display:grid;grid-template-columns:minmax(56px,1fr) 56px 56px;grid-template-rows:10px 56px 56px;gap:4px}
-.game-screen[data-game=soccer] .soccer-actions button{padding:4px;min-width:56px;min-height:56px;font-size:12px;margin:0;position:relative;transition:background-color .18s,color .18s;touch-action:none}
-.game-screen[data-game=soccer] .soccer-power{grid-column:1/-1;grid-row:1;margin:0;height:8px;align-self:center}.game-screen[data-game=soccer] #shoot{grid-row:2/4;grid-column:1;font-size:16px}.game-screen[data-game=soccer] #pass{grid-column:2/4;grid-row:2}.game-screen[data-game=soccer] #switch{grid-column:2;grid-row:3}.game-screen[data-game=soccer] #sprint{grid-column:3;grid-row:3;border-radius:50%;isolation:isolate;background:#eaf8e6}
-.soccer-sprint-ring{position:absolute;inset:0;z-index:-1;border:4px solid transparent;border-radius:50%;background:conic-gradient(#21836b var(--energy,100%),#a0b3ae 0) border-box;mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);mask-composite:exclude}.soccer-sprint[data-exhausted=true]{opacity:.65}
-.game-screen[data-game=soccer] .soccer-utilities{display:flex;grid-row:2;grid-column:1/-1;gap:6px}.game-screen[data-game=soccer] .soccer-utilities button{flex:1;min-width:0;min-height:56px;margin:0;font-size:12px;padding:4px;grid-column:auto;grid-row:auto}
-.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #shoot{background:#d8e9ff;color:#18395a}.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #pass{background:#eadcfd;color:#462469}
-.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-joystick{grid-column:2}.game-screen[data-game=soccer] .soccer-controls.left-handed{grid-template-columns:minmax(0,1fr) 96px}.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions{grid-column:1}
-@media(min-width:700px) and (min-height:601px){.game-screen[data-game=soccer] .soccer-controls.soccer-controls{width:470px;left:50%;right:auto;transform:translateX(-50%);grid-template-columns:140px 1fr}.game-screen[data-game=soccer] .soccer-joystick{width:108px;height:108px}.game-screen .soccer-scoreboard{width:min(600px,80vw);left:50%;right:auto;transform:translateX(-50%)}}
-@media(orientation:landscape) and (max-height:600px){
- .game-screen[data-game=soccer] .soccer-controls.soccer-controls{top:76px;left:auto;right:8px;bottom:8px;width:294px;grid-template-columns:92px minmax(0,1fr);align-content:center}
- .game-screen[data-game=soccer] .soccer-controls.left-handed{grid-template-columns:minmax(0,1fr) 92px}
- .game-screen[data-game=soccer] .soccer-actions{grid-template-columns:56px 56px 56px}
- .game-screen[data-game=soccer] .soccer-scoreboard{top:76px;right:312px;left:8px;font-size:12px}.game-screen[data-game=soccer] .soccer-score{font-size:30px}
-}
-.soccer-action-icon{width:24px;height:24px;flex:none}.game-screen[data-game=soccer] #shoot,.game-screen[data-game=soccer] #pass{display:flex;align-items:center;justify-content:center;gap:5px}.game-screen[data-game=soccer] #shoot{flex-direction:column}
+
+/* G3d: full-window broadcast view, three action circles and floating thumb zones. */
+.game-screen[data-game=soccer] .game-header.game-header{padding:0;pointer-events:none}
+.game-screen[data-game=soccer] .game-header h2{display:none}
+.game-screen[data-game=soccer] .game-header button{pointer-events:auto;background:#12354999;color:#fff;border:1px solid #ffffff80;backdrop-filter:blur(5px)}
+.game-screen[data-game=soccer] .game-header .sound-toggle{position:absolute;right:64px;top:0;margin:0;width:56px}
+.game-screen[data-game=soccer] .game-header .game-pause{left:auto;right:max(8px,env(safe-area-inset-right));min-width:56px;width:56px;font-size:12px;flex-direction:column;gap:3px}
+.game-screen[data-game=soccer] .soccer-scoreboard{position:absolute;z-index:2;left:max(8px,env(safe-area-inset-left));top:max(8px,env(safe-area-inset-top));display:flex;align-items:center;width:max-content;max-width:calc(100vw - 170px);height:28px;gap:6px;padding:3px 7px;direction:ltr;border:1px solid #c3e9df66;border-radius:4px;background:#102f46c9;color:#fff;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-team-name{border-inline-start:6px solid;border-radius:4px;color:#173d54;font-weight:700;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:11px;padding:1px 4px;max-width:80px;direction:rtl}
+.game-screen[data-game=soccer] .soccer-score{font-size:20px;line-height:1;font-weight:900;white-space:nowrap}
+.game-screen[data-game=soccer] .soccer-clock{font-size:13px;line-height:1;padding-left:6px;border-left:1px solid #ffffff50;font-variant-numeric:tabular-nums}
+.game-screen[data-game=soccer] .soccer-controls.soccer-controls{position:absolute;inset:0;width:100%;height:100%;max-height:none;display:block;transform:none;padding:0;border:0;border-radius:0;background:transparent;overflow:hidden;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-stick-zone{position:absolute;left:0;top:80px;bottom:0;width:50%;touch-action:none;pointer-events:auto}
+.game-screen[data-game=soccer] .soccer-joystick{position:absolute;border-radius:50%;width:108px;height:108px;margin:0;transform:translate(-50%,-50%);background:#eaf8ff20;border:2px solid #ffffff80;pointer-events:none;box-shadow:0 2px 16px #062b4533}
+.game-screen[data-game=soccer] .soccer-joystick[hidden]{display:none}
+.game-screen[data-game=soccer] .soccer-knob{position:absolute;left:calc(50% - 23px);top:calc(50% - 23px);width:46px;height:46px;border-radius:50%;background:#fff9;box-shadow:0 2px 6px #062b4566}
+.game-screen[data-game=soccer] .soccer-actions{position:absolute;right:max(32px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));width:216px;height:216px;display:block;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-actions button{position:absolute;min-width:64px;min-height:64px;padding:4px;border:2px solid #ffffff80;border-radius:50%;background:#e6f7ff29;color:#fff;box-shadow:0 3px 14px #061d3266,inset 0 0 12px #ffffff20;font-size:12px;text-shadow:0 1px 3px #000;pointer-events:auto;backdrop-filter:blur(3px);margin:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;touch-action:none}
+.game-screen[data-game=soccer] #shoot{right:0;bottom:0;width:90px;height:90px;background:#ecb95a66;font-size:16px}
+.game-screen[data-game=soccer] #pass{right:102px;bottom:4px;width:72px;height:72px}
+.game-screen[data-game=soccer] #sprint{right:4px;bottom:102px;width:72px;height:72px;background:#64e3b33b}
+.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #shoot{background:#4d8ccc66}
+.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #pass{background:#9f6dc966}
+.game-screen[data-game=soccer] .soccer-controls .held{background:#ffe4a5a1!important;color:#173d54!important;text-shadow:none}
+.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-stick-zone{left:auto;right:0}
+.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions{right:auto;left:max(16px,env(safe-area-inset-left));transform:scaleX(-1)}
+.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions button{transform:scaleX(-1)}
+.soccer-action-icon{width:25px;height:25px;flex:none}
+.soccer-sprint[data-exhausted=true]{opacity:.65}
+.soccer-goal-banner{position:absolute;top:26%;left:50%;transform:translateX(-50%) rotate(-5deg);font-size:clamp(48px,10vw,110px);font-weight:900;color:#fff0a5;text-shadow:0 4px 0 #9e6835,0 8px 24px #10293f;pointer-events:none;z-index:1}
+.soccer-edge-arrow{position:absolute;font-size:32px;color:#ffe293;text-shadow:0 2px 5px #10293f;pointer-events:none;z-index:1}
+.soccer-rotate{position:absolute;inset:0;z-index:12;background:#102b43;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center;padding:24px;color:#fff4ce;font-size:27px;font-weight:800}
+.soccer-rotate svg{width:130px;height:130px;animation:soccer-turn 2s ease-in-out infinite alternate}
+.soccer-rotate[hidden],.soccer-goal-banner[hidden],.soccer-edge-arrow[hidden]{display:none}
+.game-screen[data-orientation-blocked=true]>.game-header,.game-screen[data-orientation-blocked=true]>.soccer-scoreboard,.game-screen[data-orientation-blocked=true]>.soccer-controls{visibility:hidden}
+.soccer-energy{position:absolute;right:max(8px,env(safe-area-inset-right));top:86px;width:10px;height:calc(100% - 200px);min-height:90px;max-height:300px;border:1px solid #ffffffb3;background:#122f4f88;border-radius:7px;overflow:hidden}
+.soccer-energy-fill{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(#b8f5ab,#34b79b);height:100%;transition:height .1s linear}
+.soccer-hand-setting{display:flex;justify-content:center;align-items:center;gap:10px;min-height:56px;margin:8px 0;font-weight:700}
+.soccer-hand-setting input{width:56px;height:32px;accent-color:#288c81}
+@keyframes soccer-turn{to{transform:rotate(-35deg)}}
+@media(prefers-reduced-motion:reduce){.soccer-rotate svg{animation:none}}
