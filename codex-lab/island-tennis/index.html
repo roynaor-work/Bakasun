@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#153f40"><link rel="icon" href="data:,">
+<title></title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="lab">
+  <canvas tabindex="0" id="court" data-label="brand"></canvas>
+  <header class="topbar"><div><small data-text="eyebrow"></small><strong data-text="brand"></strong></div><div class="top-actions"><span id="stage-label" class="chip"></span><button id="settings" class="icon" data-label="settings">⚙</button><button id="pause" class="icon" data-label="pause"><span class="pause-glyph" aria-hidden="true"></span></button></div></header>
+  <section class="scoreboard" data-label="games"><div class="score-side" id="score-you"><span data-text="you"></span><strong id="games-you">0</strong><b id="points-you">0</b><div class="dots" id="dots-you"></div></div><div class="score-divider"><span data-text="games"></span><small id="server-indicator">●</small></div><div class="score-side opponent" id="score-ai"><span data-text="opponent"></span><strong id="games-ai">0</strong><b id="points-ai">0</b><div class="dots" id="dots-ai"></div></div></section>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="timing" class="timing" hidden><span id="timing-text"></span><div class="timing-track"><i></i><b id="timing-cursor"></b></div></div>
+  <footer id="play-controls" hidden><div class="movement"><span data-text="dragHint"></span><small id="hint"></small></div><button id="hit"><span id="hit-label" data-text="hit"></span><span class="charge-track"><i id="charge-fill"></i></span></button></footer>
+  <section id="welcome" class="panel welcome"><span class="panel-eyebrow" data-text="labBadge"></span><h1 data-text="startTitle"></h1><p data-text="startSubtitle"></p><div class="instruction"><span>↔</span><p data-text="gesture"></p></div><div class="instruction"><span>◉</span><p data-text="holdHelp"></p></div><small data-text="rules"></small><button id="start" class="primary" data-text="loading" disabled></button><small id="last-result"></small><small class="keyboard" data-text="keyboard"></small></section>
+  <section id="break-panel" class="panel break-panel" hidden><div id="break-icon" class="break-icon">✦</div><h1 id="break-title"></h1><p id="break-score"></p></section>
+  <section id="result" class="panel result" hidden><div class="trophy" aria-hidden="true"><svg viewBox="0 0 64 64" width="54" height="54"><path fill="#d3a04d" d="M19 8h26v18c0 10-6 16-13 16s-13-6-13-16Z"/><path fill="none" stroke="#d3a04d" stroke-width="5" d="M19 12H9v9c0 8 6 12 13 12M45 12h10v9c0 8-6 12-13 12M32 41v12M21 56h22"/><path fill="#ffe3a1" d="m32 14 2 6 6 .5-5 4 1.5 6-4.5-3.5-5 3.5 1.5-6-5-4 6.5-.5Z"/></svg></div><h1 id="result-title"></h1><p id="result-note"></p><div id="result-score" class="result-score"></div><div id="stars" class="stars"></div><button id="retry" class="primary" data-text="retry"></button><button id="next" data-text="next"></button><small id="save-status"></small><details><summary data-text="resultLabel"></summary><pre id="result-json" dir="ltr"></pre></details></section>
+  <section id="paused" class="panel" hidden><h1 data-text="paused"></h1><button id="resume" class="primary" data-text="resume"></button><button id="exit" data-text="exit"></button><button id="sound" data-text="soundOn"></button></section>
+  <section id="error" class="panel" hidden><h1 data-text="loadError"></h1><button id="reload" class="primary" data-text="retryLoad"></button></section>
+  <dialog id="settings-dialog"><form method="dialog"><div class="dialog-header"><h2 data-text="settingsTitle"></h2><button id="settings-close" class="icon" data-label="close">×</button></div><p data-text="settingsNote"></p><label for="stage-select" data-text="stageOf" id="settings-stage-label"></label><div id="stage-options" class="stages"></div><div id="rank-controls"></div><small data-text="timingHelp"></small><button id="apply" class="primary" type="button" data-text="apply"></button></form></dialog>
+  <span id="quality" class="quality" aria-live="polite"></span>
+</main>
+<script type="module" src="app.mjs"></script>
+</body></html>
