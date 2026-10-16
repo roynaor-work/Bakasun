@@ -1,0 +1,363 @@
+{
+  "browser": "151.0.7922.173",
+  "renderer": "Chromium headless / ANGLE SwiftShader (not a physical phone)",
+  "reports": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "checks": [
+        "manual ranks applied",
+        "native multitouch joystick + short pass",
+        "charged touch shot with arc",
+        "switch to nearest player",
+        "keyboard arrows, space and shift",
+        "handedness mirror",
+        "pause freezes time and clears charge",
+        "goal, net motion and fixed confetti",
+        "injected slowness reduces resolution, crowd and shadows",
+        "model full-time, result UI and lab-only storage",
+        "dispose runs without errors"
+      ],
+      "high": {
+        "triangles": 19003,
+        "drawCalls": 27,
+        "geometries": 26,
+        "textures": 5,
+        "quality": 0,
+        "pixelRatio": 1.5,
+        "crowdCount": 144,
+        "shadows": true,
+        "assetStatus": "ready",
+        "assetStats": {
+          "triangles": 15152,
+          "meshes": 7,
+          "sixCharacterTriangles": 90912
+        },
+        "width": 390,
+        "height": 844
+      },
+      "low": {
+        "triangles": 18431,
+        "drawCalls": 26,
+        "geometries": 26,
+        "textures": 5,
+        "quality": 2,
+        "pixelRatio": 0.85,
+        "crowdCount": 36,
+        "shadows": false,
+        "assetStatus": "ready",
+        "assetStats": {
+          "triangles": 15152,
+          "meshes": 7,
+          "sixCharacterTriangles": 90912
+        },
+        "width": 390,
+        "height": 844
+      },
+      "touchSizes": [
+        {
+          "selector": "#shoot",
+          "width": 88,
+          "height": 88
+        },
+        {
+          "selector": "#switch",
+          "width": 60,
+          "height": 60
+        },
+        {
+          "selector": "#pause",
+          "width": 56,
+          "height": 56
+        },
+        {
+          "selector": "#hand",
+          "width": 56,
+          "height": 56
+        }
+      ],
+      "result": {
+        "won": true,
+        "goalsFor": 3,
+        "goalsAgainst": 0,
+        "stage": 1,
+        "stars": 3,
+        "seed": 2026,
+        "durationSeconds": 150
+      },
+      "requests": [
+        "/codex-lab/island-soccer/",
+        "/codex-lab/island-soccer/styles.css",
+        "/codex-lab/island-soccer/app.mjs",
+        "/codex-lab/island-soccer/soccer.mjs",
+        "/codex-lab/island-soccer/soccer-view.mjs",
+        "/codex-lab/island-soccer/controls.mjs",
+        "/codex-lab/island-soccer/vendor/three.module.js",
+        "/codex-lab/island-soccer/vendor/GLTFLoader.js",
+        "/codex-lab/island-soccer/vendor/BufferGeometryUtils.js",
+        "/codex-lab/island-soccer/config.json",
+        "/codex-lab/island-soccer/strings.he.json",
+        "/codex-lab/kid-full/kid-full.glb"
+      ],
+      "errors": [],
+      "disposed": {
+        "triangles": 18431,
+        "drawCalls": 26,
+        "geometries": 0,
+        "textures": 0,
+        "quality": 2,
+        "pixelRatio": 0.85,
+        "crowdCount": 36,
+        "shadows": false,
+        "assetStatus": "ready",
+        "assetStats": {
+          "triangles": 15152,
+          "meshes": 7,
+          "sixCharacterTriangles": 90912
+        },
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "viewport": {
+        "width": 360,
+        "height": 740
+      },
+      "checks": [
+        "manual ranks applied",
+        "native multitouch joystick + short pass",
+        "charged touch shot with arc",
+        "switch to nearest player",
+        "keyboard arrows, space and shift",
+        "handedness mirror",
+        "pause freezes time and clears charge",
+        "goal, net motion and fixed confetti",
+        "injected slowness reduces resolution, crowd and shadows",
+        "model full-time, result UI and lab-only storage",
+        "dispose runs without errors"
+      ],
+      "high": {
+        "triangles": 19003,
+        "drawCalls": 27,
+        "geometries": 26,
+        "textures": 5,
+        "quality": 0,
+        "pixelRatio": 1.5,
+        "crowdCount": 144,
+        "shadows": true,
+        "assetStatus": "ready",
+        "assetStats": {
+          "triangles": 15152,
+          "meshes": 7,
+          "sixCharacterTriangles": 90912
+        },
+        "width": 360,
+        "height": 740
+      },
+      "low": {
+        "triangles": 18431,
+        "drawCalls": 26,
+        "geometries": 26,
+        "textures": 5,
+        "quality": 2,
+        "pixelRatio": 0.85,
+        "crowdCount": 36,
+        "shadows": false,
+        "assetStatus": "ready",
+        "assetStats": {
+          "triangles": 15152,
+          "meshes": 7,
+          "sixCharacterTriangles": 90912
+        },
+        "width": 360,
+        "height": 740
+      },
+      "touchSizes": [
+        {
+          "selector": "#shoot",
+          "width": 82,
+          "height": 82
+        },
+        {
+          "selector": "#switch",
+          "width": 60,
+          "height": 60
+        },
+        {
+          "selector": "#pause",
+          "width": 56,
+          "height": 56
+        },
+        {
+          "selector": "#hand",
+          "width": 56,
+          "height": 56
+        }
+      ],
+      "result": {
+        "won": true,
+        "goalsFor": 3,
+        "goalsAgainst": 0,
+        "stage": 1,
+        "stars": 3,
+        "seed": 2026,
+        "durationSeconds": 150
+      },
+      "requests": [
+        "/codex-lab/island-soccer/",
+        "/codex-lab/island-soccer/styles.css",
+        "/codex-lab/island-soccer/app.mjs",
+        "/codex-lab/island-soccer/soccer.mjs",
+        "/codex-lab/island-soccer/soccer-view.mjs",
+        "/codex-lab/island-soccer/controls.mjs",
+        "/codex-lab/island-soccer/vendor/three.module.js",
+        "/codex-lab/island-soccer/vendor/GLTFLoader.js",
+        "/codex-lab/island-soccer/vendor/BufferGeometryUtils.js",
+        "/codex-lab/island-soccer/config.json",
+        "/codex-lab/island-soccer/strings.he.json",
+        "/codex-lab/kid-full/kid-full.glb"
+      ],
+      "errors": [],
+      "disposed": {
+        "triangles": 18431,
+        "drawCalls": 26,
+        "geometries": 0,
+        "textures": 0,
+        "quality": 2,
+        "pixelRatio": 0.85,
+        "crowdCount": 36,
+        "shadows": false,
+        "assetStatus": "ready",
+        "assetStats": {
+          "triangles": 15152,
+          "meshes": 7,
+          "sixCharacterTriangles": 90912
+        },
+        "width": 360,
+        "height": 740
+      }
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "checks": [
+        "manual ranks applied",
+        "native multitouch joystick + short pass",
+        "charged touch shot with arc",
+        "switch to nearest player",
+        "keyboard arrows, space and shift",
+        "handedness mirror",
+        "pause freezes time and clears charge",
+        "goal, net motion and fixed confetti",
+        "injected slowness reduces resolution, crowd and shadows",
+        "model full-time, result UI and lab-only storage",
+        "dispose runs without errors"
+      ],
+      "high": {
+        "triangles": 19003,
+        "drawCalls": 27,
+        "geometries": 26,
+        "textures": 5,
+        "quality": 0,
+        "pixelRatio": 1.5,
+        "crowdCount": 144,
+        "shadows": true,
+        "assetStatus": "ready",
+        "assetStats": {
+          "triangles": 15152,
+          "meshes": 7,
+          "sixCharacterTriangles": 90912
+        },
+        "width": 844,
+        "height": 390
+      },
+      "low": {
+        "triangles": 18431,
+        "drawCalls": 26,
+        "geometries": 26,
+        "textures": 5,
+        "quality": 2,
+        "pixelRatio": 0.85,
+        "crowdCount": 36,
+        "shadows": false,
+        "assetStatus": "ready",
+        "assetStats": {
+          "triangles": 15152,
+          "meshes": 7,
+          "sixCharacterTriangles": 90912
+        },
+        "width": 844,
+        "height": 390
+      },
+      "touchSizes": [
+        {
+          "selector": "#shoot",
+          "width": 88,
+          "height": 88
+        },
+        {
+          "selector": "#switch",
+          "width": 62,
+          "height": 62
+        },
+        {
+          "selector": "#pause",
+          "width": 56,
+          "height": 56
+        },
+        {
+          "selector": "#hand",
+          "width": 56,
+          "height": 56
+        }
+      ],
+      "result": {
+        "won": true,
+        "goalsFor": 3,
+        "goalsAgainst": 0,
+        "stage": 1,
+        "stars": 3,
+        "seed": 2026,
+        "durationSeconds": 150
+      },
+      "requests": [
+        "/codex-lab/island-soccer/",
+        "/codex-lab/island-soccer/styles.css",
+        "/codex-lab/island-soccer/app.mjs",
+        "/codex-lab/island-soccer/soccer.mjs",
+        "/codex-lab/island-soccer/soccer-view.mjs",
+        "/codex-lab/island-soccer/controls.mjs",
+        "/codex-lab/island-soccer/vendor/three.module.js",
+        "/codex-lab/island-soccer/vendor/GLTFLoader.js",
+        "/codex-lab/island-soccer/vendor/BufferGeometryUtils.js",
+        "/codex-lab/island-soccer/config.json",
+        "/codex-lab/island-soccer/strings.he.json",
+        "/codex-lab/kid-full/kid-full.glb"
+      ],
+      "errors": [],
+      "disposed": {
+        "triangles": 18431,
+        "drawCalls": 26,
+        "geometries": 0,
+        "textures": 0,
+        "quality": 2,
+        "pixelRatio": 0.85,
+        "crowdCount": 36,
+        "shadows": false,
+        "assetStatus": "ready",
+        "assetStats": {
+          "triangles": 15152,
+          "meshes": 7,
+          "sixCharacterTriangles": 90912
+        },
+        "width": 844,
+        "height": 390
+      }
+    }
+  ]
+}
