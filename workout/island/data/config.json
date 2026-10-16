@@ -132,7 +132,7 @@
   },
   "sports": {
     "soccer": {
-      "teamSize": 5
+      "teamSize": 3
     },
     "tennis": {
       "teamSize": 2
@@ -2850,6 +2850,18 @@
         "secondsPerRange": 0.001,
         "arcHeight": 65,
         "radius": 32
+      },
+      "playerModel": {
+        "path": "assets/models/boat-patrol-512.glb",
+        "rotationY": -90,
+        "scale": 1,
+        "length": 7.6,
+        "waterline": 0.3,
+        "cannonPivot": [
+          0,
+          1.8,
+          -2.1
+        ]
       }
     },
     "art": {
@@ -3061,6 +3073,544 @@
       "hudFont": "bold 13px sans-serif",
       "waterArcRise": 35,
       "chargeWidthBoost": 0.3
+    },
+    "soccer": {
+      "version": 1,
+      "match": {
+        "halfSeconds": 75,
+        "halftimeSeconds": 3,
+        "goalSeconds": 2.2,
+        "restartSeconds": 0.9,
+        "fixedStep": 0.016666666666666666
+      },
+      "pitch": {
+        "length": 30,
+        "width": 18,
+        "goalWidth": 5.4,
+        "goalHeight": 2.3,
+        "goalDepth": 1.6
+      },
+      "physics": {
+        "ballRadius": 0.22,
+        "gravity": 12,
+        "friction": 0.7,
+        "bounce": 0.28,
+        "pickupRadius": 0.85,
+        "dribbleOffset": 0.62,
+        "chargeSeconds": 1.1,
+        "shortPressSeconds": 0.28,
+        "passSpeed": 12,
+        "shotSpeed": 17,
+        "shotBoost": 10,
+        "possessionGrace": 0.6
+      },
+      "players": {
+        "speed": 5.3,
+        "speedPerRank": 0.28,
+        "kickPerRank": 0.06,
+        "defensePerRank": 0.12,
+        "acceleration": 12,
+        "radius": 0.42
+      },
+      "team": {
+        "id": "islandTeam",
+        "nameId": "team.default",
+        "colors": [
+          "#2868ee",
+          "#ffcf69"
+        ],
+        "players": [
+          {
+            "id": "playerSun",
+            "nameId": "player.sun",
+            "role": "striker",
+            "speed": 1,
+            "kick": 1,
+            "guard": 1
+          },
+          {
+            "id": "playerWave",
+            "nameId": "player.wave",
+            "role": "support",
+            "speed": 1,
+            "kick": 1,
+            "guard": 1
+          },
+          {
+            "id": "playerStar",
+            "nameId": "player.star",
+            "role": "keeper",
+            "speed": 1,
+            "kick": 1,
+            "guard": 1
+          }
+        ],
+        "minRank": 1,
+        "maxRank": 5
+      },
+      "stages": [
+        {
+          "speed": 2.3,
+          "pressure": 0.3,
+          "stealRate": 0.015,
+          "keeper": 0.08,
+          "thinkSeconds": 1.6,
+          "accuracy": 0.25,
+          "help": true,
+          "tackleReach": 0.6
+        },
+        {
+          "speed": 2.65,
+          "pressure": 0.4,
+          "stealRate": 0.08,
+          "keeper": 0.16,
+          "thinkSeconds": 1.4,
+          "accuracy": 0.32,
+          "tackleReach": 0.695
+        },
+        {
+          "speed": 3,
+          "pressure": 0.5,
+          "stealRate": 0.16,
+          "keeper": 0.25,
+          "thinkSeconds": 1.2,
+          "accuracy": 0.4,
+          "tackleReach": 0.79
+        },
+        {
+          "speed": 3.3,
+          "pressure": 0.6,
+          "stealRate": 0.24,
+          "keeper": 0.33,
+          "thinkSeconds": 1.05,
+          "accuracy": 0.48,
+          "tackleReach": 0.885
+        },
+        {
+          "speed": 3.6,
+          "pressure": 0.7,
+          "stealRate": 0.35,
+          "keeper": 0.42,
+          "thinkSeconds": 0.9,
+          "accuracy": 0.56,
+          "tackleReach": 0.98
+        },
+        {
+          "speed": 3.85,
+          "pressure": 0.8,
+          "stealRate": 0.5,
+          "keeper": 0.51,
+          "thinkSeconds": 0.78,
+          "accuracy": 0.64,
+          "tackleReach": 1.075
+        },
+        {
+          "speed": 4.1,
+          "pressure": 0.9,
+          "stealRate": 0.7,
+          "keeper": 0.59,
+          "thinkSeconds": 0.67,
+          "accuracy": 0.72,
+          "tackleReach": 1.17
+        },
+        {
+          "speed": 4.35,
+          "pressure": 1,
+          "stealRate": 2.2,
+          "keeper": 0.67,
+          "thinkSeconds": 0.57,
+          "accuracy": 0.8,
+          "tackleReach": 1.2650000000000001
+        },
+        {
+          "speed": 4.6,
+          "pressure": 1.1,
+          "stealRate": 2.9,
+          "keeper": 0.75,
+          "thinkSeconds": 0.48,
+          "accuracy": 0.88,
+          "tackleReach": 1.3599999999999999
+        },
+        {
+          "speed": 4.95,
+          "pressure": 1.25,
+          "stealRate": 3.6,
+          "keeper": 0.84,
+          "thinkSeconds": 0.38,
+          "accuracy": 0.95,
+          "tackleReach": 1.455
+        }
+      ],
+      "view": {
+        "maxPixelRatio": 1.5,
+        "lowPixelRatio": 0.85,
+        "slowFrameMs": 25,
+        "qualityWindowSeconds": 4,
+        "maxTriangles": 80000,
+        "maxDrawCalls": 60,
+        "confettiCount": 96,
+        "crowdCount": 144
+      },
+      "controls": {
+        "deadzone": 0.12,
+        "joystickRadius": 48,
+        "rightHanded": true
+      },
+      "ai": {
+        "kickoffX": [
+          -2,
+          -6,
+          -13.3
+        ],
+        "kickoffZ": 4,
+        "kickoffOwnerX": 0.8,
+        "kickoffGrace": 1,
+        "initialThink": 0.4,
+        "initialCooldown": 0.3,
+        "passLeadSeconds": 0.25,
+        "shotSpread": 1.8,
+        "playerAccuracy": 0.94,
+        "passLift": 0.5,
+        "shotLift": 1.5,
+        "shotLiftPower": 1.5,
+        "curveStrength": 1.4,
+        "kickCooldown": 0.65,
+        "kickAnimationSeconds": 0.42,
+        "movingThreshold": 0.2,
+        "keeperSpeedScale": 0.85,
+        "targetGoalInset": 2,
+        "dribbleCentering": 0.6,
+        "passPressure": 2.6,
+        "passAheadMargin": 1,
+        "quickPassStage": 7,
+        "quickPassHold": 1.1,
+        "quickPassPressure": 4,
+        "teamShootDistance": 10,
+        "opponentShootDistance": 8,
+        "minShotHold": 0.4,
+        "teamShotPower": 0.8,
+        "opponentShotPower": 0.4,
+        "opponentPowerPerStage": 0.04,
+        "teamThinkSeconds": 0.55,
+        "keeperInset": 1.2,
+        "keeperTracking": 0.65,
+        "keeperPostInset": 0.4,
+        "keeperChaseDistance": 4,
+        "keeperChaseRadius": 3,
+        "interceptSeconds": 0.12,
+        "supportAdvance": 4,
+        "strikerAdvance": 6,
+        "supportGoalInset": 3,
+        "supportWidth": 4.2,
+        "requestDistance": 3,
+        "requestClearance": 2.2,
+        "defenseDepth": 5,
+        "teamDefenseDepth": 4,
+        "defenseWidth": 0.4,
+        "doublePress": 1,
+        "pressInterceptSeconds": 0.3,
+        "pressFrontDistance": 3.5,
+        "idleHelpSeconds": 2.5,
+        "idleThreshold": 0.05,
+        "teamStealRate": 2.8,
+        "keeperBaseReach": 0.7,
+        "keeperReachScale": 1.1,
+        "teamKeeper": 0.68,
+        "teamKeeperSave": 0.78,
+        "keeperAttemptCooldown": 0.35,
+        "keeperFastBall": 8,
+        "passSelectionAdvanceWeight": 0.3,
+        "keeperStealRate": 12
+      },
+      "rules": {
+        "playerBoundary": 0.35,
+        "outMargin": 0.15,
+        "cornerInset": 0.6,
+        "goalKickInset": 2.5,
+        "sideInset": 1,
+        "sideGoalInset": 2,
+        "restartSpace": 2.2,
+        "restartPushX": 2.5,
+        "restartPushZ": 2,
+        "restartPlayerInset": 0.5,
+        "restartGrace": 1.1,
+        "tackleCooldown": 0.7,
+        "separationScale": 0.25,
+        "goalSlowMotion": 0.13,
+        "netBallInset": 1,
+        "netBallWidth": 2.3,
+        "ballCurveDecay": 2,
+        "bounceThreshold": 0.65,
+        "airFrictionScale": 0.08,
+        "groundThreshold": 0.01,
+        "pickupHeight": 1.25,
+        "stealRadius": 1,
+        "goalTargetExtra": 1,
+        "maxUpdateSeconds": 0.25
+      },
+      "opponentDefaults": {
+        "speed": 1,
+        "kick": 1,
+        "guard": 1
+      },
+      "levels": [
+        {
+          "speed": 2.3,
+          "pressure": 0.3,
+          "stealRate": 0.015,
+          "keeper": 0.08,
+          "thinkSeconds": 1.6,
+          "accuracy": 0.25,
+          "help": true,
+          "tackleReach": 0.6,
+          "winMoney": 35,
+          "winParts": 0,
+          "feature": "minigame.soccer.feature.1"
+        },
+        {
+          "speed": 2.65,
+          "pressure": 0.4,
+          "stealRate": 0.08,
+          "keeper": 0.16,
+          "thinkSeconds": 1.4,
+          "accuracy": 0.32,
+          "tackleReach": 0.695,
+          "winMoney": 47,
+          "winParts": 0,
+          "feature": "minigame.soccer.feature.2"
+        },
+        {
+          "speed": 3,
+          "pressure": 0.5,
+          "stealRate": 0.16,
+          "keeper": 0.25,
+          "thinkSeconds": 1.2,
+          "accuracy": 0.4,
+          "tackleReach": 0.79,
+          "winMoney": 59,
+          "winParts": 0,
+          "feature": "minigame.soccer.feature.3"
+        },
+        {
+          "speed": 3.3,
+          "pressure": 0.6,
+          "stealRate": 0.24,
+          "keeper": 0.33,
+          "thinkSeconds": 1.05,
+          "accuracy": 0.48,
+          "tackleReach": 0.885,
+          "winMoney": 71,
+          "winParts": 1,
+          "feature": "minigame.soccer.feature.4"
+        },
+        {
+          "speed": 3.6,
+          "pressure": 0.7,
+          "stealRate": 0.35,
+          "keeper": 0.42,
+          "thinkSeconds": 0.9,
+          "accuracy": 0.56,
+          "tackleReach": 0.98,
+          "winMoney": 83,
+          "winParts": 1,
+          "feature": "minigame.soccer.feature.5"
+        },
+        {
+          "speed": 3.85,
+          "pressure": 0.8,
+          "stealRate": 0.5,
+          "keeper": 0.51,
+          "thinkSeconds": 0.78,
+          "accuracy": 0.64,
+          "tackleReach": 1.075,
+          "winMoney": 95,
+          "winParts": 1,
+          "feature": "minigame.soccer.feature.6"
+        },
+        {
+          "speed": 4.1,
+          "pressure": 0.9,
+          "stealRate": 0.7,
+          "keeper": 0.59,
+          "thinkSeconds": 0.67,
+          "accuracy": 0.72,
+          "tackleReach": 1.17,
+          "winMoney": 107,
+          "winParts": 2,
+          "feature": "minigame.soccer.feature.7"
+        },
+        {
+          "speed": 4.35,
+          "pressure": 1,
+          "stealRate": 2.2,
+          "keeper": 0.67,
+          "thinkSeconds": 0.57,
+          "accuracy": 0.8,
+          "tackleReach": 1.2650000000000001,
+          "winMoney": 119,
+          "winParts": 2,
+          "feature": "minigame.soccer.feature.8"
+        },
+        {
+          "speed": 4.6,
+          "pressure": 1.1,
+          "stealRate": 2.9,
+          "keeper": 0.75,
+          "thinkSeconds": 0.48,
+          "accuracy": 0.88,
+          "tackleReach": 1.3599999999999999,
+          "winMoney": 131,
+          "winParts": 2,
+          "feature": "minigame.soccer.feature.9"
+        },
+        {
+          "speed": 4.95,
+          "pressure": 1.25,
+          "stealRate": 3.6,
+          "keeper": 0.84,
+          "thinkSeconds": 0.38,
+          "accuracy": 0.95,
+          "tackleReach": 1.455,
+          "winMoney": 143,
+          "winParts": 3,
+          "feature": "minigame.soccer.feature.10"
+        }
+      ],
+      "maximumScore": 100,
+      "pointsPerCoin": 2,
+      "equipment": {
+        "speed": {
+          "title": "minigame.soccer.speed",
+          "description": "minigame.soccer.speed.hint",
+          "base": 1,
+          "levels": [
+            {
+              "value": 2,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 3,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 4,
+              "cost": 130,
+              "stars": 8
+            },
+            {
+              "value": 5,
+              "cost": 180,
+              "stars": 15
+            }
+          ]
+        },
+        "kick": {
+          "title": "minigame.soccer.kick",
+          "description": "minigame.soccer.kick.hint",
+          "base": 1,
+          "levels": [
+            {
+              "value": 2,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 3,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 4,
+              "cost": 130,
+              "stars": 8
+            },
+            {
+              "value": 5,
+              "cost": 180,
+              "stars": 15
+            }
+          ]
+        },
+        "guard": {
+          "title": "minigame.soccer.guard",
+          "description": "minigame.soccer.guard.hint",
+          "base": 1,
+          "levels": [
+            {
+              "value": 2,
+              "cost": 45,
+              "stars": 0
+            },
+            {
+              "value": 3,
+              "cost": 85,
+              "stars": 3
+            },
+            {
+              "value": 4,
+              "cost": 130,
+              "stars": 8
+            },
+            {
+              "value": 5,
+              "cost": 180,
+              "stars": 15
+            }
+          ]
+        }
+      },
+      "teamRanks": [
+        {
+          "wins": 0,
+          "title": "minigame.soccer.rank.0",
+          "bonus": 0
+        },
+        {
+          "wins": 3,
+          "title": "minigame.soccer.rank.1",
+          "bonus": 0.25
+        },
+        {
+          "wins": 8,
+          "title": "minigame.soccer.rank.2",
+          "bonus": 0.5
+        },
+        {
+          "wins": 15,
+          "title": "minigame.soccer.rank.3",
+          "bonus": 0.75
+        },
+        {
+          "wins": 25,
+          "title": "minigame.soccer.rank.4",
+          "bonus": 1
+        }
+      ],
+      "opponents": [
+        {
+          "nameId": "minigame.soccer.opponent.0",
+          "colors": [
+            "#e94d51",
+            "#fff4d9"
+          ]
+        },
+        {
+          "nameId": "minigame.soccer.opponent.1",
+          "colors": [
+            "#8d52cb",
+            "#ffd66d"
+          ]
+        },
+        {
+          "nameId": "minigame.soccer.opponent.2",
+          "colors": [
+            "#cb5d21",
+            "#e9ebf2"
+          ]
+        }
+      ]
     }
   },
   "minigameLevels": {
@@ -3093,6 +3643,20 @@
       }
     ],
     "navalDuel": [
+      {
+        "cost": 0,
+        "power": 1
+      },
+      {
+        "cost": 120,
+        "power": 1.2
+      },
+      {
+        "cost": 240,
+        "power": 1.45
+      }
+    ],
+    "soccer": [
       {
         "cost": 0,
         "power": 1

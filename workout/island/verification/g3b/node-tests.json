@@ -1,0 +1,21 @@
+{
+  "release": "g3b-20261016-1",
+  "saveVersion": 8,
+  "island": {
+    "command": "node --test tests/island-*.test.mjs",
+    "tests": 458,
+    "passed": 458,
+    "failed": 0,
+    "skipped": 0
+  },
+  "all": {
+    "command": "node --test tests/*.mjs",
+    "tests": 1349,
+    "passed": 1311,
+    "failed": 0,
+    "skipped": 38
+  },
+  "newG3bTests": 38,
+  "v7FixtureSource": "f131be2, generated using the unmodified base engine",
+  "physicalPhone": false
+}

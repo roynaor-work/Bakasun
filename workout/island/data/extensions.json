@@ -9,7 +9,8 @@
     "extensions/fire-rescue.mjs",
     "extensions/naval-duel.mjs",
     "extensions/island-events.mjs",
-    "extensions/activity-income.mjs"
+    "extensions/activity-income.mjs",
+    "extensions/soccer.mjs"
   ],
   "records": {
     "building": {
@@ -75,6 +76,14 @@
       "difficulty": "cityLevel",
       "helpId": "minigame.navalDuel.help",
       "icon": "⛵"
+    },
+    "soccer": {
+      "id": "soccer",
+      "title": "minigame.soccer.title",
+      "featureFlag": "soccer",
+      "difficulty": "stage",
+      "helpId": "minigame.soccer.help",
+      "icon": "⚽"
     }
   }
 }
