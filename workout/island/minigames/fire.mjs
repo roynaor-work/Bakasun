@@ -1,17 +1,17 @@
-import {runCanvasGame} from './canvas-session.mjs?v=g2e-20261015-1';
-import {oval,drawCrew} from './art.mjs?v=g2e-20261015-1';
+import {runCanvasGame} from './canvas-session.mjs?v=g2f-20261015-1';
+import {oval,drawCrew} from './art.mjs?v=g2f-20261015-1';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
-export function createFireEntity(site,type,active,heat,index){return {x:site.x,y:site.y,kind:site.kind,type,active,heat,phase:index*1.7,spreadAge:0};}
-export function createFireModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY}) {
+export function createFireEntity(site,type,active,heat,index){return {x:site.x,y:site.y,kind:site.kind,type,active,heat,phase:index*1.7,spreadAge:0,warning:0};}
+export function createFireModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,sound=()=>{}}) {
   const settings=balance.levels[level-1],flames=[];
   const maxWater=(settings.water+(bonuses.fireWater||0))*power*(equipment.tank||1),maxPressure=balance.initialPressure*(equipment.pressure||1),range=balance.range*(equipment.range||1),aimRadius=balance.aimRadius*(equipment.range||1);
-  let water=maxWater,pressure=maxPressure,remaining=settings.seconds+(bonuses.fireTime||0),score=0,out=0,result,reserve=settings.refillWater,time=0,charge=0;
+  let water=maxWater,pressure=maxPressure,remaining=settings.seconds+(bonuses.fireTime||0),score=0,out=0,result,reserve=settings.refillWater,time=0,charge=0,eruption=settings.eruptionSeconds,pressureEmpty=false;
   const timeTarget=Math.max(1,remaining-settings.parSeconds),waterTarget=Math.max(1,water+reserve-settings.parWater),aim={x:config.width/2,y:config.height/2},impact={x:aim.x,y:aim.y};
   const rescues=balance.rescueSites.slice(0,settings.rescueCount).map(site=>({...balance.rescue,...site,rescued:false,progress:0,walkX:site.x,walkY:site.y})),rescue=rescues[0],crew=balance.crew,extraHose=equipment.hose||0,status={seconds:0,reserve:0,out:0,total:settings.flames,rescued:0};
   for(let i=0;i<settings.flames+settings.spreadCount;i++)flames.push(createFireEntity(balance.sites[i],i%settings.fireKinds,i<settings.flames,i<settings.flames?balance.initialHeatBase+random()*balance.initialHeatRange:0,i));
   function activeCount(){let n=0;for(const f of flames)if(f.active)n++;return n;}
   const model={settings,flames,aim,impact,rescue,rescues,maxWater,maxPressure,range,aimRadius,extraHose,equipment,get rescueProgress(){return rescue.progress;},statusId:'minigame.fireStatus',spraying:false,refilling:false,charging:false,
-    get score(){return score;},get lives(){return Math.ceil(remaining);},get wave(){return 1;},get result(){return result;},get water(){return water;},get pressure(){return pressure;},get remaining(){return remaining;},get reserve(){return reserve;},get time(){return time;},get charge(){return charge;},
+    get warningIds(){return [water<=0?'minigame.noWater':null,pressureEmpty?'minigame.noPressure':null].filter(Boolean);},get warningId(){return water<=0?'minigame.noWater':pressureEmpty?'minigame.noPressure':null;},get pressureEmpty(){return pressureEmpty;},get score(){return score;},get lives(){return Math.ceil(remaining);},get wave(){return 1;},get result(){return result;},get water(){return water;},get pressure(){return pressure;},get remaining(){return remaining;},get reserve(){return reserve;},get time(){return time;},get charge(){return charge;},
     statusValues(){status.seconds=Math.ceil(remaining);status.reserve=Math.floor(reserve);status.out=out;status.total=activeCount();status.rescued=0;for(const r of rescues)status.rescued+=Number(r.rescued);return status;},
     update(dt,input=EMPTY){
       if(result||dt<=0)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;remaining=Math.max(0,remaining-dt);
@@ -19,14 +19,16 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
       const dx=aim.x+Math.sin(time*1.6)*settings.wind-balance.nozzleX,dy=aim.y-balance.nozzleY,distance=Math.hypot(dx,dy),ratio=distance>range?range/distance:1;
       impact.x=balance.nozzleX+dx*ratio;impact.y=balance.nozzleY+dy*ratio;
       model.charging=Boolean(input.charge);model.refilling=Boolean(input.refill);
-      model.spraying=Boolean(input.firing&&!input.refill&&!input.charge&&water>0);
-      if(model.charging)charge=Math.min(1,charge+dt/balance.chargeSeconds);
-      if(model.spraying){water=Math.max(0,water-balance.waterUsePerSecond*(1+extraHose*crew.secondWaterUse)*dt);pressure=Math.max(balance.minPressure,pressure-balance.pressureUsePerSecond*dt);}
-      else{if(model.refilling){const refill=Math.min(maxWater-water,reserve,balance.waterRefillPerSecond*(equipment.tank||1)*dt);water+=refill;reserve-=refill;}pressure=Math.min(maxPressure,pressure+balance.pressureRefillPerSecond*dt);}
+      model.spraying=Boolean(input.firing&&!input.refill&&!input.charge&&water>0&&!pressureEmpty);
+      if(model.charging){charge=Math.min(1,charge+dt/balance.chargeSeconds);pressure=Math.min(maxPressure,pressure+balance.pressureRefillPerSecond*dt);if(pressure>=balance.pressureRestart)pressureEmpty=false;sound('refill');}
+      if(model.spraying){water=Math.max(0,water-balance.waterUsePerSecond*(1+extraHose*crew.secondWaterUse)*dt);pressure=Math.max(0,pressure-balance.pressureUsePerSecond*dt);if(pressure===0)pressureEmpty=true;sound('spray');}
+      else{if(model.refilling){const refill=Math.min(maxWater-water,reserve,balance.waterRefillPerSecond*(equipment.tank||1)*dt);water+=refill;reserve-=refill;if(refill>0)sound('refill');}}
       const boost=1+balance.chargeBoost*charge;
       if(model.spraying)charge=Math.max(0,charge-dt/balance.chargeSeconds);
+      eruption-=dt;if(eruption<=0){const candidates=flames.filter(f=>!f.active);if(candidates.length){const target=candidates[Math.floor(random()*candidates.length)];target.active=true;target.warning=balance.eruptionWarningSeconds;}eruption=settings.eruptionSeconds;}
       for(const f of flames){
-        if(f.heat<=0)continue;
+        if(f.warning>0){f.warning=Math.max(0,f.warning-dt);if(f.warning===0){f.heat=balance.initialHeatBase;sound('crackle');}continue;}
+        if(f.heat<=0)continue;sound('crackle');
         const type=balance.fireTypes[f.type];
         if(model.spraying&&Math.hypot(f.x-impact.x,f.y-impact.y)<=aimRadius)f.heat-=balance.extinguishPerSecond*pressure*power*boost*(1+extraHose*crew.secondPower)/type.resistance*dt;
         else{f.heat=Math.min(1,f.heat+settings.growthPerSecond*type.growth*dt);f.spreadAge+=dt*type.growth;}
@@ -34,7 +36,7 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
         if(settings.spreadSeconds&&f.spreadAge>=settings.spreadSeconds){
           let target=null,nearest=Infinity;
           for(const other of flames)if(!other.active){const d=Math.hypot(f.x-other.x,f.y-other.y);if(d<nearest){target=other;nearest=d;}}
-          if(target){target.active=true;target.heat=balance.initialHeatBase;f.spreadAge=0;}
+          if(target){target.active=true;target.warning=balance.eruptionWarningSeconds;f.spreadAge=0;}
         }
       }
       for(const r of rescues){
@@ -44,7 +46,7 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
       if(out===activeCount())result={outcome:'win',score,performance:.6*Math.min(1,remaining/timeTarget)+.4*Math.min(1,(water+reserve)/waterTarget)};
       else if(remaining<=0)result={outcome:'lose',score};
     },
-    snapshot(){return {score,result,extraHose,equipment:{...equipment},water,pressure,remaining,reserve,time,charge,range,rescueProgress:rescue.progress,rescues:rescues.map(r=>({...r})),rescue:{...rescue},flames:flames.map(f=>({...f})),aim:{...aim},impact:{...impact},spraying:model.spraying};}
+    snapshot(){return {warningId:model.warningId,pressureEmpty,score,result,extraHose,equipment:{...equipment},water,pressure,remaining,reserve,time,charge,range,rescueProgress:rescue.progress,rescues:rescues.map(r=>({...r})),rescue:{...rescue},flames:flames.map(f=>({...f})),aim:{...aim},impact:{...impact},spraying:model.spraying};}
   };return model;
 }
 export function drawFire(p,m,{config,balance,art,quality}) {
@@ -53,6 +55,7 @@ export function drawFire(p,m,{config,balance,art,quality}) {
   const puffs=quality.low?1:v.smokePuffs;
   for(const f of m.flames){
     if(!f.active)continue;
+    if(f.warning>0){p.globalAlpha=.35+.65*Math.abs(Math.sin(m.time*18));p.strokeStyle=palette.embers;p.lineWidth=5;p.beginPath();p.arc(f.x,f.y,26,0,TAU);p.stroke();p.globalAlpha=1;continue;}
     if(f.heat<=0){oval(p,f.x,f.y,14,5,palette.cooled);continue;}
     for(let i=0;i<puffs;i++){const t=(m.time*.36+i/puffs+f.phase)%1;p.globalAlpha=(1-t)*.27;oval(p,f.x+Math.sin(t*4+f.phase)*14,f.y-25-t*61,8+t*18,7+t*16,v.smoke);}p.globalAlpha=1;
     const height=a.flameHeight*(.6+f.heat*.5),color=balance.fireTypes[f.type].color;
@@ -86,6 +89,7 @@ export function drawFire(p,m,{config,balance,art,quality}) {
   }
   p.save();p.translate(balance.nozzleX,balance.nozzleY);p.rotate(Math.atan2(m.impact.y-balance.nozzleY,m.impact.x-balance.nozzleX));p.fillStyle=palette.nozzle;p.fillRect(-13,-8,24,16);p.fillStyle=palette.nozzleEdge;p.fillRect(8,-10,10,20);p.restore();
   if(m.extraHose>0&&m.spraying){p.strokeStyle=palette.streamSpray;p.lineWidth=5;p.beginPath();p.moveTo(balance.nozzleX+31,balance.nozzleY);p.quadraticCurveTo(balance.nozzleX+60,Math.min(m.impact.y,balance.nozzleY)-v.waterArcRise,m.impact.x+5,m.impact.y);p.stroke();}
+  p.strokeStyle=palette.streamSpray;p.lineWidth=3;p.beginPath();p.arc(m.aim.x,m.aim.y,13,0,TAU);p.stroke();oval(p,m.aim.x,m.aim.y,3,3,palette.pearl);
   if((m.equipment.pressure||1)>1){oval(p,balance.nozzleX,balance.nozzleY,4,4,palette.gold);}
   if(m.charging){p.strokeStyle=palette.chargeGlow;p.lineWidth=4;p.beginPath();p.arc(balance.nozzleX,balance.nozzleY,26,-Math.PI/2,-Math.PI/2+TAU*m.charge);p.stroke();}
 }

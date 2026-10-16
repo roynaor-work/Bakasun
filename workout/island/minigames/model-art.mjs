@@ -1,6 +1,6 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {dataURL} from '../release.mjs?v=g2e-20261015-1';
+import {dataURL} from '../release.mjs?v=g2f-20261015-1';
 
 /** Bake optional local GLBs into the existing sprite factories once per session.
  * Failed/absent assets keep procedural art; closing also disposes late loads. */

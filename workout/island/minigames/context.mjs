@@ -1,4 +1,4 @@
-import {equipmentValues} from '../activity/equipment.mjs';
+import {equipmentValues} from '../activity/equipment.mjs?v=g2f-20261015-1';
 /** Stable seeded generator; every game uses ctx.random rather than Math.random. */
 export function seededRandom(seed) {
   let value = Number(seed) >>> 0;
@@ -15,5 +15,5 @@ export function gameContext(engine, config, seed, gameId, stage) {
   }
   const upgradeLevel=engine.state.minigameLevels[gameId]||1;
   const power=engine.data.config.minigameLevels[gameId]?.[upgradeLevel-1]?.power||1;
-  return { equipment:equipmentValues(engine.state,engine.data,gameId), level, difficulty:level, upgradeLevel, power, bonuses: Object.freeze(bonuses), random: seededRandom(seed), seed };
+  return { permanentUpgrades:{...engine.state.alienUpgrades},equipment:equipmentValues(engine.state,engine.data,gameId), level, difficulty:level, upgradeLevel, power, bonuses: Object.freeze(bonuses), random: seededRandom(seed), seed };
 }

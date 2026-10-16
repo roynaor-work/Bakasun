@@ -1,3 +1,4 @@
+import {pilotInput} from '../workout/island/tests/pilot.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -41,7 +42,7 @@ test('version two migrates activity defaults without losing money, buildings, ch
   const {engine}=fixture(),old=createInitialState(data,17);old.version=2;
   for(const key of ['minigameLevels','highScores','minigameWins','instructionsSeen','events'])delete old[key];
   old.money=900;old.avatar.created=true;const snapshot=structuredClone(old);
-  const result=migrateSave(old,data,engine.registry);assert.equal(result.ok,true);assert.equal(result.state.version,6);
+  const result=migrateSave(old,data,engine.registry);assert.equal(result.ok,true);assert.equal(result.state.version,7);
   for(const key of Object.keys(snapshot).filter(k=>k!=='version'))assert.deepEqual(result.state[key],snapshot[key]);
   assert.deepEqual(result.state.minigameLevels,{alienDefense:1,fireRescue:1,navalDuel:1});assert.equal(result.state.events.active,null);
 });
@@ -55,8 +56,8 @@ test('activity export/import merges levels and records monotonically and rejects
 test('alien waves are playable to victory with real firing, repeat by seed and also allow a loss without world damage',()=>{
   function run(play) {
     const f=fixture(),before=f.engine.exportJSON();
-    const model=createAlienModel({...gameContext(f.engine,data.config.minigames,12),config:data.config.minigames,balance:data.config.minigames.alienDefense});
-    for(let i=0;i<20000&&!model.result;i++){if(model.choosing)model.chooseUpgrade(0);model.update(.04,play?{firing:true,x:model.aliens.at(-1)?.x??180}:{});}
+    const model=createAlienModel({...gameContext(f.engine,data.config.minigames,12,'alienDefense',play?1:7),config:data.config.minigames,balance:data.config.minigames.alienDefense});
+    const memory={};for(let i=0;i<20000&&!model.result;i++)model.update(.04,play?pilotInput('alienDefense',model,data.config.minigames.alienDefense,memory):{});
     assert.equal(f.engine.exportJSON(),before,'a game model cannot mutate the island');
     assert.ok(model.result);return model.snapshot();
   }
@@ -66,23 +67,17 @@ test('alien waves are playable to victory with real firing, repeat by seed and a
 test('fire hose aims at cartoon flames, refills water and pressure, and repeats by seed',()=>{
   const make=()=>createFireModel({config:data.config.minigames,balance:data.config.minigames.fireRescue,level:1,random:seededRandom(42)});
   const a=make(),b=make();assert.deepEqual(a.snapshot(),b.snapshot());
-  for(const model of [a,b])for(let i=0;i<3000&&!model.result;i++){
-    const flame=model.flames.find(f=>f.heat>0);const refill=i%180>=110;
-    model.update(.04,{x:flame?.x,y:flame?.y,firing:!refill,refill});
-  }
+  for(const model of [a,b]){const memory={};for(let i=0;i<3000&&!model.result;i++)model.update(.04,pilotInput('fireRescue',model,data.config.minigames.fireRescue,memory));}
   assert.equal(a.result.outcome,'win');assert.deepEqual(a.snapshot(),b.snapshot());
   const dry=make();for(let i=0;i<100;i++)dry.update(.04,{firing:true,x:0,y:0});const water=dry.water,pressure=dry.pressure;
-  for(let i=0;i<100;i++)dry.update(.04,{refill:true});assert.ok(dry.water>water);assert.ok(dry.pressure>pressure);
+  for(let i=0;i<100;i++)dry.update(.04,{refill:true,charge:true});assert.ok(dry.water>water);assert.ok(dry.pressure>pressure);
   for(let i=0;i<2000&&!dry.result;i++)dry.update(.04,{});assert.equal(dry.result.outcome,'lose');
 });
-test('naval duel uses alternating ballistic turns, is winnable and deterministic with a seed',()=>{
+test('naval duel uses a sea target and alternating turns, is winnable and deterministic with a seed',()=>{
   function play(){
     const balance=data.config.minigames.navalDuel,model=createNavalModel({config:data.config.minigames,balance,level:1,random:seededRandom(5)});
-    const angle=balance.defaultAngle*Math.PI/180,distance=balance.enemyX-balance.shipX;
-    const speed=Math.sqrt(balance.gravity*distance*distance/(2*Math.cos(angle)**2*(distance*Math.tan(angle)+balance.muzzleRise)));
-    const power=(speed-balance.minSpeed)/(balance.maxSpeed-balance.minSpeed)*balance.powerMaximum;
-    let pressed=false;const phases=new Set();
-    for(let i=0;i<10000&&!model.result;i++){phases.add(model.phase);pressed=model.phase==='aim'&&!pressed;model.update(.04,{angle:balance.defaultAngle,power,firing:pressed});}
+    const memory={},phases=new Set();
+    for(let i=0;i<10000&&!model.result;i++){phases.add(model.phase);model.update(.04,pilotInput('navalDuel',model,balance,memory));}
     assert.ok(phases.has('enemy'));assert.equal(model.result.outcome,'win');return model.snapshot();
   }assert.deepEqual(play(),play());
 });

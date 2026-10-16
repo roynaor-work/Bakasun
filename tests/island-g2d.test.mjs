@@ -9,39 +9,40 @@ import {applyCanvasGesture} from '../workout/island/minigames/canvas-session.mjs
 import {createNavalModel} from '../workout/island/minigames/naval.mjs';
 import {createAlienModel} from '../workout/island/minigames/aliens.mjs';
 import {createFireModel} from '../workout/island/minigames/fire.mjs';
-import {pilotInput} from './helpers/island-pilot.mjs';
+import {pilotInput} from '../workout/island/tests/pilot.mjs';
 const data=await loadData(new URL('../workout/island/',import.meta.url),async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))}));
 const config=data.config.minigames,strings=JSON.parse(await readFile(new URL('../workout/island/data/strings.he.json',import.meta.url),'utf8'));
 const make=(id,level=1,extra={})=>({navalDuel:createNavalModel,alienDefense:createAlienModel,fireRescue:createFireModel}[id])({config,balance:config[id],level,random:seededRandom(12),...extra});
 function advance(m,seconds,input={}){for(let i=0;i<Math.ceil(seconds/.02)&&!m.result;i++)m.update(.02,input);}
 function nextChoice(m){const memory={};for(let i=0;i<12000&&!m.choosing&&!m.result;i++)m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));assert.equal(m.choosing,true);}
 
-test('G2d naval canvas touch/drag changes angle only; force and explicit firing are independent',()=>{
-  const b=config.navalDuel,m=make('navalDuel'),input={x:120,y:200,angle:b.defaultAngle,power:b.defaultPower,firing:false},anchor={};
-  applyCanvasGesture(input,'navalDuel',anchor,b,true);m.update(.02,input);assert.equal(m.phase,'aim');assert.equal(m.ammo[0],b.ammo[0].charges);
-  input.x+=20;input.y-=20;applyCanvasGesture(input,'navalDuel',anchor,b);m.update(.02,input);assert.ok(m.aim.angle>b.defaultAngle);assert.equal(m.aim.power,b.defaultPower);assert.equal(m.phase,'aim');
-  input.power=71;m.update(.02,input);assert.equal(m.aim.power,71);assert.equal(m.phase,'aim');input.firing=true;m.update(.02,input);assert.equal(m.phase,'shot');assert.equal(m.ammo[0],b.ammo[0].charges-1);
+test('G2d naval touch moves the circle; explicit firing alone consumes stage ammunition',()=>{
+  const b=config.navalDuel,m=make('navalDuel'),input={x:120,y:30,firing:false},anchor={},supply=m.ammo[0];
+  applyCanvasGesture(input,'navalDuel',anchor,b,true);m.update(.02,input);assert.equal(m.phase,'aim');assert.equal(supply,m.settings.ammunition[0]);
+  input.x+=20;input.y-=20;applyCanvasGesture(input,'navalDuel',anchor,b);m.update(.02,input);assert.deepEqual(m.aim,{x:140,z:10});assert.equal(m.phase,'aim');assert.equal(m.ammo[0],supply);
+  input.firing=true;m.update(.02,input);assert.equal(m.phase,'shot');assert.equal(m.ammo[0],supply-1);
 });
-test('G2d drag clamps angle and never changes a supplied force or fire state',()=>{
-  const b=config.navalDuel,input={x:0,y:0,angle:45,power:23,firing:false},anchor={};applyCanvasGesture(input,'navalDuel',anchor,b,true);
-  input.y=-9999;applyCanvasGesture(input,'navalDuel',anchor,b);assert.equal(input.angle,b.maxAngle);input.y=9999;applyCanvasGesture(input,'navalDuel',anchor,b);assert.equal(input.angle,b.minAngle);assert.equal(input.power,23);assert.equal(input.firing,false);
+test('G2d the sea target clamps within configured range without firing',()=>{
+  const b=config.navalDuel,m=make('navalDuel'),input={x:9999,y:9999,firing:false},anchor={},ammo=[...m.ammo];
+  applyCanvasGesture(input,'navalDuel',anchor,b,true);m.update(.01,input);assert.deepEqual(m.aim,{x:b.targeting.maxX,z:b.targeting.maxZ});
+  input.x=input.y=-9999;applyCanvasGesture(input,'navalDuel',anchor,b);m.update(.01,input);assert.deepEqual(m.aim,{x:b.targeting.minX,z:b.targeting.minZ});assert.equal(input.firing,false);assert.deepEqual(m.ammo,ammo);
 });
-for(let index=0;index<4;index++)test(`G2d ammunition ${index} is available without purchases, finite and reloads independently`,()=>{
+for(let index=0;index<4;index++)test(`G2d ammunition ${index} is available without purchases, finite with no reload`,()=>{
   const m=make('navalDuel'),b=config.navalDuel,supply=m.ammo[index];assert.ok(supply>0);m.update(.02,{ammoIndex:index});assert.equal(m.ammoIndex,index);assert.equal(m.phase,'aim');
-  m.update(.02,{firing:true,ammoIndex:index});assert.equal(m.ball.ammo,index);assert.equal(m.ammo[index],supply-1);assert.ok(m.cooldowns[index]>0);const wait=m.cooldowns[index];m.update(.02,{ammoIndex:(index+1)%4});assert.equal(m.ammoIndex,(index+1)%4);assert.ok(m.cooldowns[index]<wait);assert.equal(m.cooldowns[(index+1)%4],0);
+  m.update(.02,{firing:true,ammoIndex:index});assert.equal(m.ball.ammo,index);assert.equal(m.ammo[index],supply-1);assert.equal(m.cooldowns[index],0);m.update(.02,{ammoIndex:(index+1)%4});assert.equal(m.ammoIndex,(index+1)%4);assert.equal(m.cooldowns[index],0);assert.equal(m.cooldowns[(index+1)%4],0);
 });
 test('G2d enemies move in distance and position at stage one; several living ships share high stages',()=>{
   const m=make('navalDuel'),x=m.enemyX,z=m.enemies[0].z;advance(m,.8);assert.notEqual(m.enemyX,x);assert.notEqual(m.enemies[0].z,z);
   const high=make('navalDuel',10);high.update(.02,{});assert.equal(high.enemies.filter(e=>e.active&&e.hp>0).length,3);assert.equal(new Set(high.enemies.map(e=>e.kind)).size,3);
 });
-test('G2d firing upgrades shorten ammunition reload and every naval encounter has a longer time budget',()=>{
-  const a=make('navalDuel'),b=make('navalDuel',1,{equipment:{rate:1.6}});for(const m of [a,b])m.update(.02,{firing:true});assert.ok(b.cooldowns[0]<a.cooldowns[0]);
+test('G2d ammunition needs no reload at either firing rank and later encounters have longer budgets',()=>{
+  const a=make('navalDuel'),b=make('navalDuel',1,{equipment:{rate:1.6}});for(const m of [a,b])m.update(.02,{firing:true});assert.equal(a.cooldowns[0],0);assert.equal(b.cooldowns[0],0);
   for(const id of ['navalDuel','alienDefense','fireRescue'])for(let i=1;i<10;i++)assert.ok(config[id].levels[i].seconds>config[id].levels[i-1].seconds);
 });
-test('G2d alien stage one has a sixty-second budget with early clear, and all stages end with a boss',()=>{
+test('G2d alien stage one has a sixty-second budget with early clear, and the moving boss arrives at stage ten',()=>{
   const m=make('alienDefense'),memory={};assert.ok(m.settings.seconds>=60);
   for(let i=0;i<8000&&!m.result;i++)m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));assert.equal(m.result?.outcome,'win');assert.ok(m.time<=m.settings.seconds+config.maxFrameSeconds);assert.ok(m.result.score<=m.settings.scoreLimit);
-  for(const s of config.alienDefense.levels)assert.equal(s.boss,true);
+  for(const [i,s] of config.alienDefense.levels.entries())assert.equal(s.boss,i===9);
 });
 test('G2d three distinct random upgrades pause combat; a valid choice stacks and resumes exactly once',()=>{
   const m=make('alienDefense',4);nextChoice(m);assert.equal(m.choices.length,3);assert.equal(new Set(m.choices).size,3);const before=m.snapshot();advance(m,2,{firing:true});assert.deepEqual(m.snapshot(),before);
@@ -55,23 +56,23 @@ test('G2d wing companions follow the ship and fire their own energy shots',()=>{
   const m=make('alienDefense',1,{equipment:{weapon:1}});m.update(.02,{firing:true});assert.equal(m.wings.filter(w=>w.active).length,1);assert.ok(m.shots.some(s=>s.damage===config.alienDefense.campaign.wingDamage));const before=m.wings[0].x;m.update(.02,{x:300});m.update(.02,{x:300});assert.ok(m.wings[0].x>before);
 });
 test('G2d stacked upgrades combine spread, piercing, rate and damage without erasing each other',()=>{
-  const m=make('alienDefense');Object.assign(m.upgrades,{spread:1,laser:1,rapid:1,damage:1,wing:2});m.update(.02,{firing:true});assert.equal(m.shots.length,5);assert.equal(m.shots[0].kind,1);assert.equal(m.wings.filter(w=>w.active).length,2);assert.equal(m.upgrades.spread,1);
+  const m=make('alienDefense');Object.assign(m.upgrades,{laser:1,rapid:1,damage:1,wing:2});m.update(.02,{firing:true,spread:true});assert.equal(m.shots.length,5);assert.equal(m.shots[0].kind,1);assert.equal(m.wings.filter(w=>w.active).length,2);assert.equal(Object.hasOwn(m.upgrades,'spread'),false);assert.equal(m.spreadTime,config.alienDefense.spread.seconds);
 });
 test('G2d collectible coins/crystals and combo have real score and timeout effects',()=>{
-  const m=make('alienDefense');m.loot.push({x:m.player.x,y:m.player.y,vx:0,vy:0,kind:0},{x:m.player.x,y:m.player.y,vx:0,vy:0,kind:1});m.update(.001,{});assert.equal(m.coins,1);assert.equal(m.crystals,1);assert.equal(m.score,config.alienDefense.campaign.coinPoints+config.alienDefense.campaign.crystalPoints);
+  const m=make('alienDefense',2);m.loot.push({x:m.player.x,y:m.player.y,vx:0,vy:0,kind:0},{x:m.player.x,y:m.player.y,vx:0,vy:0,kind:1});m.update(.001,{});assert.equal(m.coins,1);assert.equal(m.crystals,1);assert.equal(m.score,config.alienDefense.campaign.coinPoints+config.alienDefense.campaign.crystalPoints);
   for(let i=0;i<5;i++){const a=m.aliens[0];a.hp=1;m.shots.push({x:a.x,y:a.y,vx:0,vy:0,hp:1,kind:0});m.update(.001,{});}assert.equal(m.combo,5);assert.ok(m.celebration>0);advance(m,config.alienDefense.campaign.comboSeconds+.1);assert.equal(m.combo,0);
 });
-test('G2d refill is an explicit choice: resting restores pressure, filling spends reserve and stops spray',()=>{
-  const m=make('fireRescue');advance(m,1,{firing:true,x:350,y:0});const water=m.water,reserve=m.reserve,pressure=m.pressure;advance(m,.3);assert.equal(m.water,water);assert.equal(m.reserve,reserve);assert.ok(m.pressure>pressure);advance(m,.3,{refill:true,firing:true});assert.equal(m.spraying,false);assert.ok(m.water>water);assert.ok(m.reserve<reserve);
+test('G2d refill is an explicit choice: the pump restores pressure, filling spends reserve and stops spray',()=>{
+  const m=make('fireRescue');advance(m,1,{firing:true,x:350,y:0});const water=m.water,reserve=m.reserve,pressure=m.pressure;advance(m,.3);assert.equal(m.water,water);assert.equal(m.reserve,reserve);assert.equal(m.pressure,pressure);advance(m,.3,{charge:true});assert.ok(m.pressure>pressure);advance(m,.3,{refill:true,firing:true});assert.equal(m.spraying,false);assert.ok(m.water>water);assert.ok(m.reserve<reserve);
 });
 test('G2d extra hose uses more water, cools faster and rescue walks to the truck',()=>{
   const a=make('fireRescue'),b=make('fireRescue',1,{equipment:{hose:1}});for(const m of [a,b])advance(m,.2,{firing:true,x:m.flames[0].x,y:m.flames[0].y});assert.ok(b.flames[0].heat<a.flames[0].heat);assert.ok(b.water<a.water);
   const r=b.rescue;advance(b,r.seconds+.1,{firing:true,x:r.x,y:r.y});assert.equal(r.rescued,true);const x=r.walkX;advance(b,.5);assert.ok(r.walkX<x);
 });
-test('G2d v5 → v6 adds only the hose rank and preserves city, event, currency, avatar and all earned upgrades',()=>{
+test('G2d v5 → v7 adds hose and permanent alien ranks and preserves city, event, currency, avatar and all earned upgrades',()=>{
   const e=createEngine(data,{storage:null,now:()=>1234}),old=JSON.parse(e.exportJSON());old.version=5;delete old.minigameEquipment.fireRescue.hose;old.minigameEquipment.navalDuel.damage=2;old.money=432;
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:22,phase:'playing',warningUntil:100,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,6);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=6;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
+  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,7);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=7;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
 });
 for(const rank of [-1,1.5,99,'1'])test(`G2d v6 rejects invalid hose rank ${rank}`,()=>{
   const e=createEngine(data,{storage:null}),save=JSON.parse(e.exportJSON());save.minigameEquipment.fireRescue.hose=rank;assert.equal(migrateSave(save,data,e.registry).ok,false);
@@ -101,16 +102,18 @@ test('G2d late bosses fire a separate moving energy bolt',()=>{
 });
 test('G2d concurrently visible naval enemies take their own firing turns',()=>{
   const b=config.navalDuel,m=make('navalDuel',10);
-  function land(owner,x){Object.assign(m.ball,{owner,x,y:b.shipY,vx:0,vy:1});m.update(.02,{});}
-  m.update(.02,{firing:true});land('player',m.enemyX+b.shipRadius*3);advance(m,b.turnPauseSeconds+.06);assert.equal(m.ball.owner,'enemy');assert.equal(m.ball.source,0);for(let i=0;i<b.enemySalvoShots;i++){land('enemy',b.shipX);advance(m,b.turnPauseSeconds+.06);}
-  m.update(.02,{firing:true});land('player',m.enemyX+b.shipRadius*3);advance(m,b.turnPauseSeconds+.06);assert.equal(m.ball.owner,'enemy');assert.equal(m.ball.source,1);
+  for(let turn=0;turn<3;turn++){
+    m.update(.01,{firing:false});m.update(.01,{firing:true,targetX:b.targeting.minX,targetZ:b.targeting.maxZ});
+    advance(m,m.ball.duration+.02);advance(m,b.turnPauseSeconds+.04);assert.equal(m.ball.owner,'enemy');assert.equal(m.ball.source,turn);
+    advance(m,m.ball.duration+.02);advance(m,b.turnPauseSeconds+.04);assert.equal(m.phase,'aim');
+  }
 });
 test('G2d longer alien rounds preserve earned score while bounding their coin payout',()=>{
   const e=createEngine(data,{storage:null}),b=config.alienDefense,s=b.levels[0],result=e.registry.minigames.get('alienDefense').onResult({outcome:'win',score:s.scoreLimit,performance:1},{engine:e,config,level:1});assert.ok(result);assert.equal(result.score,s.scoreLimit);assert.equal(result.money,Math.floor(s.rewardScoreLimit/b.pointsPerCoin)+s.winMoney);assert.equal(result.stars,3);
 });
 
-test('G2d repeat spread/laser choices strengthen the weapon, and fully equipped wings are not offered',()=>{
-  const a=make('alienDefense'),b=make('alienDefense');Object.assign(a.upgrades,{spread:1,laser:1});Object.assign(b.upgrades,{spread:3,laser:2});a.update(.02,{firing:true});b.update(.02,{firing:true});assert.equal(a.shots.length,3);assert.equal(b.shots.length,7);assert.ok(b.shots[0].hp>a.shots[0].hp);
+test('G2d repeat laser choices increase piercing while spread stays temporary and equipped wings are not offered',()=>{
+  const a=make('alienDefense'),b=make('alienDefense');a.upgrades.laser=1;b.upgrades.laser=2;a.update(.02,{firing:true,spread:true});b.update(.02,{firing:true,spread:true});assert.equal(a.shots.length,3);assert.equal(b.shots.length,3);assert.ok(b.shots[0].hp>a.shots[0].hp);assert.equal(a.spreadTime,config.alienDefense.spread.seconds);assert.equal(b.spreadTime,config.alienDefense.spread.seconds);assert.equal(Object.hasOwn(b.upgrades,'spread'),false);
   const equipped=make('alienDefense',1,{equipment:{weapon:2}});nextChoice(equipped);assert.equal(equipped.choices.includes('wing'),false);
 });
 

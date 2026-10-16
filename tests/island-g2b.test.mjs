@@ -10,7 +10,7 @@ import {seededRandom,gameContext} from '../workout/island/minigames/context.mjs'
 import {createAlienModel} from '../workout/island/minigames/aliens.mjs';
 import {createFireModel} from '../workout/island/minigames/fire.mjs';
 import {createNavalModel} from '../workout/island/minigames/naval.mjs';
-import {pilotInput} from './helpers/island-pilot.mjs';
+import {pilotInput} from '../workout/island/tests/pilot.mjs';
 const data=await loadData(new URL('../workout/island/',import.meta.url),async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))}));
 const models={alienDefense:createAlienModel,fireRescue:createFireModel,navalDuel:createNavalModel};
 function fixture() {
@@ -32,8 +32,8 @@ for(const [id,make]of Object.entries(models)) {
       if(id==='alienDefense') {
         let hp=0;for(let row=0;row<s.rows;row++)for(let col=0;col<s.columns;col++)hp+=b.enemyTypes[(row+col)%s.enemyKinds].hp;
         threat=(hp*s.waves+(s.boss?s.bossLives:0))*(s.alienSpeed+s.boltSpeed)/s.boltSeconds;
-        assert.equal(s.boss,true);
-      }else if(id==='fireRescue')threat=(s.flames+s.spreadCount)*(1+s.growthPerSecond)/(s.seconds*(s.water+s.refillWater));
+        assert.equal(s.boss,i===9);
+      }else if(id==='fireRescue')threat=(s.flames+s.spreadCount)*(1+s.growthPerSecond)/(s.seconds*(s.water+s.refillWater)*s.spreadSeconds*s.eruptionSeconds);
       else {let hp=0;for(let w=0;w<s.waves;w++)hp+=s.enemyLives*b.shipTypes[w%s.shipKinds].hp;threat=hp*(1+s.drift)/s.enemyAimError;}
       assert.ok(threat>last,`${i+1}: ${threat} > ${last}`);last=threat;
     }
@@ -50,7 +50,7 @@ for(const [id,make]of Object.entries(models)) {
 test('G2b v3 to v4 adds only stage/star defaults, preserves the input, and survives reload',()=>{
   const f=fixture();eventCity(f);const old=JSON.parse(f.engine.exportJSON());old.version=3;delete old.minigameProgress;
   old.minigameLevels.alienDefense=3;old.highScores.alienDefense=1234;old.minigameWins.alienDefense=12;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,6);
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,7);
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key]);
   assert.deepEqual(old,before);
   for(const p of Object.values(r.state.minigameProgress))assert.deepEqual(p,{stage:1,stars:Array(10).fill(0)});

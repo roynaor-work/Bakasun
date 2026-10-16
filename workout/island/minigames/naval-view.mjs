@@ -1,6 +1,6 @@
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {drawHealthBar} from './art.mjs?v=g2e-20261015-1';
+import {drawHealthBar} from './art.mjs?v=g2f-20261015-1';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */
@@ -70,29 +70,30 @@ export function createNavalView(ctx,model) {
   const aimGeometry=new THREE.BufferGeometry(),aimArray=new Float32Array(18*3);aimGeometry.setAttribute('position',new THREE.BufferAttribute(aimArray,3));const aimMaterial=new THREE.LineBasicMaterial({color:r.foam}),aimLine=new THREE.LineSegments(aimGeometry,aimMaterial);scene.add(aimLine);
   const splashGeometry=new THREE.ConeGeometry(.12,.8,5),splashMaterial=new THREE.MeshBasicMaterial({color:r.foam});const splash=[];for(let i=0;i<12;i++){const drop=new THREE.Mesh(splashGeometry,splashMaterial);scene.add(drop);splash.push(drop);}
   const burstGeometry=new THREE.SphereGeometry(.5,8,6),burstMaterial=new THREE.MeshBasicMaterial({color:r.flame,transparent:true,opacity:0}),burst=new THREE.Mesh(burstGeometry,burstMaterial);scene.add(burst);
-  const projected=new THREE.Vector3();const positions=seaGeometry.attributes.position;
+  const projected=new THREE.Vector3(),raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),seaPlane=new THREE.Plane(new THREE.Vector3(0,1,0),0),intersection=new THREE.Vector3();camera.updateMatrixWorld();const positions=seaGeometry.attributes.position;
   const labelNames=model.enemies.map(e=>t(e.boss?'naval.boss':balance.shipTypes[e.kind].name));
   const onLost=event=>{event.preventDefault();failed=true;};canvas.addEventListener('webglcontextlost',onLost);
   function animateVessel(v,e,x,z,enemy){
     const sink=e.hp<=0?model.sinkProgress:0;v.root.position.set(x,Math.sin(model.time*1.6+(e.index||0))*.12-sink*4,z);v.root.rotation.z=Math.sin(model.time*1.9+x)*.035+sink*.3;
-    v.turret.rotation.y=enemy?.2:-model.aim.yaw*Math.PI/180;v.barrel.rotation.x=model.ammoIndex===2?0:model.aim.angle*Math.PI/180*.4;v.barrel.position.z=-.85+e.recoil;
+    v.turret.rotation.y=enemy?.2:-Math.atan2(model.aim.z,model.aim.x-balance.shipX);v.barrel.rotation.x=model.ammoIndex===2?0:.35;v.barrel.position.z=-.85+e.recoil;
     v.flag.rotation.y=Math.sin(model.time*4)*.2;v.shield.visible=e.shield>0;v.smoke.visible=e.hp<e.maxHp;v.flame.visible=e.hp<e.maxHp;
     v.smoke.position.y=3+(model.time%2);v.smoke.scale.setScalar(.6+(model.time%2)*.5);v.flame.scale.y=.75+Math.sin(model.time*12)*.2;v.foam.scale.y=2.5+Math.sin(model.time*2)*.3;
   }
   function dispose(){if(disposed)return;disposed=true;canvas.removeEventListener('webglcontextlost',onLost);player.dispose();for(const v of vessels)v.dispose();for(const g of [seaGeometry,sunGeometry,shotGeometry,aimGeometry,splashGeometry,burstGeometry])g.dispose();for(const m of [seaMaterial,sunMaterial,shotMaterial,aimMaterial,splashMaterial,burstMaterial])m.dispose();renderer.dispose();renderer.forceContextLoss();canvas.width=canvas.height=0;}
   return {get mode(){return failed?'perspective':'three';},degrade(fallback=false){if(fallback){failed=true;dispose();}else if(!low){low=true;renderer.setSize(r.width*.75,r.height*.75,false);}},dispose,
+    resize(){if(failed||disposed)return;camera.aspect=config.width/config.height;camera.updateProjectionMatrix();renderer.setSize(r.width,config.height*(low?.75:1),false);},
+    projectTarget(x,z){if(failed||disposed)return null;projected.set(z*r.enemySpacing/balance.combat.laneSpacing,0,-(x-balance.shipX)*r.worldScale).project(camera);return {x:(projected.x+1)*config.width/2,y:(1-projected.y)*config.height/2};},
+    targetAt(x,y){if(failed||disposed)return null;pointer.set(x/config.width*2-1,1-y/config.height*2);raycaster.setFromCamera(pointer,camera);if(!raycaster.ray.intersectPlane(seaPlane,intersection))return null;return {x:balance.shipX-intersection.z/r.worldScale,z:intersection.x/r.enemySpacing*balance.combat.laneSpacing};},
     draw(p){
       if(failed||disposed)return false;
       try{
         for(let i=0;i<positions.count;i++){const x=positions.getX(i),z=positions.getZ(i);positions.setY(i,Math.sin(x*.32+model.time*r.waveSpeed)*Math.cos(z*.2+model.time)*r.waveHeight);}positions.needsUpdate=true;
-        animateVessel(player,model.playerShip,0,2,false);
-        for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];v.root.visible=e.active;if(e.active)animateVessel(v,e,(i-(model.wave-1))*r.enemySpacing,e.z-(e.x-balance.shipX)*r.worldScale,true);}
-        shot.visible=model.phase==='shot';shot.position.set(model.ball.z*r.worldScale,Math.max(.25,(balance.shipY-model.ball.y)*r.worldScale),-3-(model.ball.x-balance.shipX)*r.worldScale);shot.scale.set(1,1,model.ball.ammo===2?4:1);secondShot.visible=shot.visible&&model.ball.ammo===1;secondShot.position.copy(shot.position);secondShot.position.x+=.6;
-        aimLine.visible=model.phase==='aim';const angle=(model.ammoIndex===2?0:model.aim.angle)*Math.PI/180,yaw=model.aim.yaw*Math.PI/180,speed=balance.minSpeed+model.aim.power/balance.powerMaximum*(balance.maxSpeed-balance.minSpeed);
-        for(let i=0;i<18;i++){const time=i*.045;aimArray[i*3]=Math.sin(yaw)*Math.cos(angle)*speed*time*r.worldScale;aimArray[i*3+1]=(model.ammoIndex===2?1:balance.muzzleRise+Math.sin(angle)*speed*time-balance.gravity*time*time/2)*r.worldScale;aimArray[i*3+2]=-3-Math.cos(yaw)*Math.cos(angle)*speed*time*r.worldScale;}
-        aimGeometry.attributes.position.needsUpdate=true;
-        for(let i=0;i<splash.length;i++){const d=splash[i],age=1-model.blast.life/config.visuals.blastSeconds;d.visible=model.blast.life>0;d.position.set(shot.position.x+Math.cos(i*2.4)*age*3,Math.sin(age*Math.PI)*2,shot.position.z+Math.sin(i*2.4)*age*3);}
-        burst.visible=model.blast.hit&&model.blast.life>0;if(burst.visible){const age=1-model.blast.life/config.visuals.blastSeconds;burst.position.copy(shot.position);burst.position.y=1;burst.scale.setScalar(1+age*5);burstMaterial.opacity=(1-age)*.8;}
+        animateVessel(player,model.playerShip,0,0,false);
+        for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];v.root.visible=e.active;if(e.active)animateVessel(v,e,e.z*r.enemySpacing/balance.combat.laneSpacing,-(e.x-balance.shipX)*r.worldScale,true);}
+        shot.visible=model.phase==='shot';shot.position.set(model.ball.z*r.enemySpacing/balance.combat.laneSpacing,Math.max(.25,(balance.shipY-model.ball.y)*r.worldScale),-(model.ball.x-balance.shipX)*r.worldScale);shot.scale.set(1,1,model.ball.ammo===2?4:1);secondShot.visible=shot.visible&&model.ball.ammo===1;secondShot.position.copy(shot.position);secondShot.position.x+=.6;
+        aimLine.visible=false;
+        for(let i=0;i<splash.length;i++){const d=splash[i],age=1-model.blast.life/config.visuals.blastSeconds;d.visible=model.blast.life>0;d.position.set(model.blast.z*r.enemySpacing/balance.combat.laneSpacing+Math.cos(i*2.4)*age*3,Math.sin(age*Math.PI)*2,-(model.blast.x-balance.shipX)*r.worldScale+Math.sin(i*2.4)*age*3);}
+        burst.visible=model.blast.hit&&model.blast.life>0;if(burst.visible){const age=1-model.blast.life/config.visuals.blastSeconds;burst.position.set(model.blast.z*r.enemySpacing/balance.combat.laneSpacing,1,-(model.blast.x-balance.shipX)*r.worldScale);burst.position.y=1;burst.scale.setScalar(1+age*5);burstMaterial.opacity=(1-age)*.8;}
         renderer.render(scene,camera);p.drawImage(canvas,0,0,config.width,config.height);
         p.font=r.nameFont;p.textAlign='center';
         for(const e of model.enemies)if(e.active){const v=vessels[e.index];projected.set(v.root.position.x,v.root.position.y+4,v.root.position.z).project(camera);const x=(projected.x+1)*config.width/2,y=Math.max(r.fleetMeterY+25,x>config.width-r.mapSize-40?r.mapY+r.mapSize+25:0,(1-projected.y)*config.height/2)+(e.index-model.wave+1)%model.settings.concurrent*r.enemyLabelStep;p.fillStyle=r.foam;p.fillText(labelNames[e.index],x,y-9);drawHealthBar(p,x-r.enemyBarWidth/2,y,r.enemyBarWidth,4,e.hp,e.maxHp,config);}
