@@ -80,7 +80,7 @@ test('island capacity sums every existing level but only for the requested servi
   assert.equal(placementAvailability(state, registry, type.id).ok, true);
 });
 
-for (const typeId of ['house', 'factory', 'farm', 'harbor']) {
+for (const typeId of ['house', 'shop', 'factory', 'farm', 'harbor']) {
   test(`island ${typeId} count cap applies at every world stage`, () => {
     for (let stage = 0; stage < data.config.worldStages.length; stage++) {
       const registry = createRegistry(data), limit = registry.buildings.get(typeId).limit;

@@ -1,6 +1,6 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {dataURL} from '../release.mjs?v=g3b-20261016-1';
+import {dataURL} from '../release.mjs?v=task016-20261016-1';
 
 export function localModelURL(path) {
   if(typeof path!=='string'||!path.endsWith('.glb')||/^(?:[a-z]+:|\/\/)/i.test(path)||path.includes('\\'))return null;
@@ -14,7 +14,7 @@ export function modelSpec(value){
 export function modelTargets(art,models){
   return [{value:models.player,sprite:art.player,index:-1},...(models.enemies||[]).map((value,index)=>({value,sprite:art.aliens[index],index}))].map(row=>({...row,spec:modelSpec(row.value)})).filter(row=>row.spec&&row.sprite&&localModelURL(row.spec.path));
 }
-function disposeObject(object){
+export function disposeObject(object){
   const geometries=new Set(),materials=new Set(),textures=new Set();
   object.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material])if(m){materials.add(m);for(const value of Object.values(m))if(value?.isTexture)textures.add(value);}});
   for(const g of geometries)g.dispose();for(const m of materials)m.dispose();for(const t of textures)t.dispose();

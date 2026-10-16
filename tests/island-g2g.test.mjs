@@ -84,14 +84,14 @@ test('G2g WebGL context loss cleans resources and immediately exposes the canvas
 function sprites(){const clears=[],draws=[],sprite=()=>{let x=50,y=44;const saved=[],p={save(){saved.push([x,y]);},setTransform(a,b,c,d,e,f){x=e;y=f;},restore(){[x,y]=saved.pop();},clearRect:(cx,cy)=>clears.push([cx+x,cy+y]),drawImage:(image,dx,dy)=>draws.push([dx+x,dy+y])};return {width:100,height:100,getContext:()=>p};};return {art:{player:sprite(),aliens:Array.from({length:5},sprite)},clears,draws};}
 function fakeObject(){const root=new T.Group(),geometry=new T.BoxGeometry(3,1,2),material=new T.MeshBasicMaterial();root.add(new T.Mesh(geometry,material));return root;}
 function adapters(load){const renderer=fakeRenderer();renderer.render=(scene,camera)=>{const object=scene.children.find(o=>o.isGroup);if(object){renderer.rotation=object.rotation.y;renderer.bounds=new T.Box3().setFromObject(object);renderer.camera=camera;}};return {renderer,createRenderer:()=>renderer,createLoader:()=>({loadAsync:load})};}
-test('G2g five existing, unchanged local Meshy GLBs have the requested orientations and relative sizes',async()=>{
- const b=config.alienDefense,{art}=sprites(),targets=modelTargets(art,b.models);assert.equal(targets.length,5);assert.equal(b.models.enemies[3],null);assert.deepEqual(targets.map(t=>t.spec.scale),[1.15,.92,.86,1.08,2.4]);assert.deepEqual(targets.map(t=>t.spec.rotationY),[-90,90,90,90,90]);
- const expected=[382476,326784,340240,358472,329348];
+test('G2g six unchanged local Meshy GLBs have the requested orientations and relative sizes',async()=>{
+ const b=config.alienDefense,{art}=sprites(),targets=modelTargets(art,b.models);assert.equal(targets.length,6);assert.equal(b.models.enemies[3].path,'assets/models/alien-d-512.glb');assert.deepEqual(targets.map(t=>t.spec.scale),[1.15,.92,.86,1.08,.95,2.4]);assert.deepEqual(targets.map(t=>t.spec.rotationY),[-90,90,90,90,90,90]);
+ const expected=[382476,326784,340240,358472,274880,329348];
  for(let i=0;i<targets.length;i++){const url=localModelURL(targets[i].spec.path),buffer=await readFile(url);assert.equal((await stat(url)).size,expected[i]);assert.equal(buffer.toString('ascii',0,4),'glTF');const json=JSON.parse(buffer.toString('utf8',20,20+buffer.readUInt32LE(12)));assert.ok(json.meshes.length);assert.ok((json.buffers||[]).every(b=>!b.uri));assert.ok((json.images||[]).every(image=>image.bufferView!==undefined));}
 });
-test('G2g real local file loads replace exactly five sprites, orient their noses, and release the bake renderer',async()=>{
+test('G2g real local file loads replace exactly six sprites, orient their noses, and release the bake renderer',async()=>{
  const {art,draws}=sprites(),b=config.alienDefense,seen=[];const a=adapters(async url=>{await readFile(new URL(url));seen.push(url);return {scene:fakeObject()};});await loadOptionalArt(art,b,()=>false,a);
- assert.deepEqual(art.modelArt,{requested:5,loaded:5,failed:0});assert.deepEqual(draws,Array.from({length:5},()=>[0,0]));assert.deepEqual(art.modelScales,{player:1.15,enemies:[.92,.86,1.08,1,2.4]});assert.equal(a.renderer.rotation,Math.PI/2);assert.ok(Math.abs(a.renderer.bounds.getCenter(new T.Vector3()).length())<1e-6);assert.equal(a.renderer.camera.up.z,-1);assert.equal(a.renderer.disposed,1);assert.equal(a.renderer.lost,1);for(const url of seen)assert.ok(new URL(url).pathname.startsWith(root.pathname));
+ assert.deepEqual(art.modelArt,{requested:6,loaded:6,failed:0});assert.deepEqual(draws,Array.from({length:6},()=>[0,0]));assert.deepEqual(art.modelScales,{player:1.15,enemies:[.92,.86,1.08,.95,2.4]});assert.equal(a.renderer.rotation,Math.PI/2);assert.ok(Math.abs(a.renderer.bounds.getCenter(new T.Vector3()).length())<1e-6);assert.equal(a.renderer.camera.up.z,-1);assert.equal(a.renderer.disposed,1);assert.equal(a.renderer.lost,1);for(const url of seen)assert.ok(new URL(url).pathname.startsWith(root.pathname));
 });
 test('G2g missing model and null slots preserve the code sprite without aborting the game',async()=>{
  const {art,draws,clears}=sprites(),b=structuredClone(config.alienDefense);b.models={player:{path:'assets/models/missing.glb',rotationY:0,scale:1},enemies:[null]};await loadOptionalArt(art,b,()=>false,adapters(async url=>({scene:await readFile(new URL(url))})));
@@ -108,10 +108,10 @@ test('G2g closing during an asynchronous model load releases late geometry witho
  await loadOptionalArt(art,b,()=>closed,adapters(async()=>{closed=true;return {scene:object};}));assert.equal(draws.length,0);assert.equal(released,1);assert.equal(art.modelArt.loaded,0);
 });
 test('G2g unsupported WebGL preserves procedural model sprites and reports failed optional loads',async()=>{
- const {art,draws}=sprites();await loadOptionalArt(art,config.alienDefense,()=>false,{createRenderer(){throw Error('no WebGL');}});assert.equal(art.modelArt.failed,5);assert.equal(draws.length,0);
+ const {art,draws}=sprites();await loadOptionalArt(art,config.alienDefense,()=>false,{createRenderer(){throw Error('no WebGL');}});assert.equal(art.modelArt.failed,6);assert.equal(draws.length,0);
 });
 test('G2g release and new sounds are present; all runtime versioned imports use the same release',async()=>{
- assert.equal(DATA_VERSION,'g3b-20261016-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
+ assert.equal(DATA_VERSION,'task016-20261016-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
  async function walk(url){for(const entry of await readdir(url,{withFileTypes:true})){if(['vendor','verification'].includes(entry.name))continue;const next=new URL(entry.name+(entry.isDirectory()?'/':''),url);if(entry.isDirectory())await walk(next);else if(/\.(mjs|html)$/.test(entry.name)){const source=await readFile(next,'utf8');for(const [,v]of source.matchAll(/(?:\.mjs|\.css)\?v=([^'"\s]+)/g))assert.equal(v,DATA_VERSION,next.pathname);}}}await walk(root);
 });
 
@@ -127,9 +127,9 @@ test('G2g the truck cannon follows aim and its moving muzzle supplies the real 3
 test('G2g a single local textured truck mesh partitions once into body and rotating roof cannon',()=>{
  const object=fakeTruck(),visual=createTruckVisual(object,config.fireRescue);assert.ok(visual.cannonFaces>0);const geometry=visual.turret.children.find(o=>o.isMesh).geometry,before=geometry.attributes.position.array.slice();visual.turret.rotation.y=1;visual.root.updateMatrixWorld(true);assert.deepEqual(geometry.attributes.position.array,before);assert.ok(visual.muzzle.getWorldPosition(new T.Vector3()).length()>0);let released=0;geometry.addEventListener('dispose',()=>released++);visual.dispose();visual.dispose();assert.equal(released,1);
 });
-test('G2g optional truck failure and late completion preserve procedural rendering; patrol loading is confined to naval play',async()=>{
+test('G2g optional truck failure and late completion preserve procedural rendering; the patrol boat is configured locally',async()=>{
  const b=structuredClone(config.fireRescue);b.vehicle.model=null;assert.equal(await loadFireTruck(b),null);b.vehicle.model='assets/models/missing.glb';await assert.rejects(loadFireTruck(b,{loader:{async loadAsync(url){await readFile(new URL(url));}}}));
- const world=createFireScene(sceneContext,make()),visual=createTruckVisual(fakeTruck(),config.fireRescue);world.dispose();assert.equal(world.setTruck(visual),false);assert.equal(visual.root.children.length,0);assert.equal(JSON.stringify(config.fireRescue).includes('boat-patrol-512.glb'),false);
+ const world=createFireScene(sceneContext,make()),visual=createTruckVisual(fakeTruck(),config.fireRescue);world.dispose();assert.equal(world.setTruck(visual),false);assert.equal(visual.root.children.length,0);assert.equal(config.navalDuel.playerModel.path,'assets/models/boat-patrol-512.glb');
 });
 
 async function localMesh(path){
@@ -143,14 +143,14 @@ test('G2g the real 512 truck loads locally, preserves 4587 faces, isolates only 
  visual.root.updateMatrixWorld(true);const muzzle=visual.muzzle.getWorldPosition(new T.Vector3()),vertex=new T.Vector3();let nearest=Infinity;for(let i=0;i<cannon.attributes.position.count;i++){vertex.fromBufferAttribute(cannon.attributes.position,i).applyMatrix4(visual.turret.matrixWorld);nearest=Math.min(nearest,vertex.distanceTo(muzzle));}assert.ok(nearest<.25,'muzzle must sit at the modeled opening');
  const world=createFireScene(sceneContext,make(10));assert.equal(world.setTruck(visual),true);assert.ok(world.metrics().triangles+15152<60000);assert.ok(world.metrics().drawCalls+7<40);world.dispose();assert.deepEqual(await readFile(new URL('assets/models/fire-truck-512.glb',root)),before);
 });
-test('G2g the patrol boat is a local 4905-triangle asset configured for naval play; full-size backups stay unused',async()=>{
+test('G2g the patrol boat is a local 4905-triangle asset and the naval model uses its 512 version',async()=>{
  const boat=await localMesh('assets/models/boat-patrol-512.glb');assert.equal(boat.bytes.length,282084);assert.equal(boat.faces,4905);boat.object.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});
  assert.equal(config.navalDuel.playerModel.path,'assets/models/boat-patrol-512.glb');assert.equal(JSON.stringify(config).includes('fire-truck.glb'),false);assert.match(config.fireRescue.vehicle.model,/-512\.glb$/);
 });
 
 import {createAlienModel,drawAliens} from '../workout/island/minigames/aliens.mjs';
 test('G2g a real baked boss uses scale 2.40 once; regular carriers stay readable and code fallback retains its size',()=>{
- const balance=config.alienDefense,m=createAlienModel({config,balance,level:10,random:seededRandom(12)}),sprite={},art={backdrop:{},player:{},aliens:[{},{},{},{},sprite],modelScales:{player:1.15,enemies:[.92,.86,1.08,1,2.4]}},widths=[],p=paint();p.drawImage=(image,x,y,w)=>{if(image===sprite)widths.push(w);};
+ const balance=config.alienDefense,m=createAlienModel({config,balance,level:10,random:seededRandom(12)}),sprite={},art={backdrop:{},player:{},aliens:[{},{},{},{},sprite],modelScales:{player:1.15,enemies:[.92,.86,1.08,.95,2.4]}},widths=[],p=paint();p.drawImage=(image,x,y,w)=>{if(image===sprite)widths.push(w);};
  const entity={x:180,y:100,kind:4,shield:0,maxHp:1,age:0,phase:0,hitTime:0,scale:1,boss:false};m.aliens.splice(0,m.aliens.length,entity);drawAliens(p,m,{config,balance,art,quality:{low:true}});assert.equal(widths.pop(),balance.alienRadius*3);
  entity.boss=true;entity.scale=balance.bossScale;drawAliens(p,m,{config,balance,art,quality:{low:true}});assert.equal(widths.pop(),balance.alienRadius*3*2.4);
  delete art.modelScales;drawAliens(p,m,{config,balance,art,quality:{low:true}});assert.equal(widths.pop(),balance.alienRadius*3*balance.bossScale);

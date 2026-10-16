@@ -43,7 +43,7 @@ test('island view imports and model URLs resolve to existing files inside the de
       assert.match(relative, /^\.\.?\//, `local relative reference in ${file.pathname}`);
       const target = new URL(relative, file);
       const targetPath = path.resolve(fileURLToPath(target));
-      assert.ok(targetPath.startsWith(islandPath + path.sep), `deployment must not depend on ${relative} outside workout/island/`);
+      assert.ok(targetPath === islandPath || targetPath.startsWith(islandPath + path.sep), `deployment must not depend on ${relative} outside workout/island/`);
       await access(target);
       references++;
     }

@@ -1,0 +1,581 @@
+{
+  "browser": "Chromium / ANGLE SwiftShader",
+  "reports": [
+    {
+      "width": 390,
+      "intentionallyCorruptSixGLBs": false,
+      "city": {
+        "metrics": {
+          "triangles": 34020,
+          "calls": 45,
+          "fps": 43,
+          "citizens": 4,
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 3,
+            "failed": 0
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        },
+        "buildings": [
+          {
+            "typeId": "house",
+            "model": "assets/models/house-a-512.glb",
+            "position": [
+              -3,
+              0.34,
+              -1
+            ],
+            "minY": 0.3400000000000001,
+            "size": [
+              1.4620013397932055,
+              1.3854332906007767,
+              1.273378276824951
+            ]
+          },
+          {
+            "typeId": "shop",
+            "model": "assets/models/shop-corner-512.glb",
+            "position": [
+              0,
+              0.34,
+              -1
+            ],
+            "minY": 0.33999999999999997,
+            "size": [
+              1.8424034839868546,
+              1.6644947540760042,
+              1.7278076434135436
+            ]
+          },
+          {
+            "typeId": "hospital",
+            "model": "assets/models/hospital-512.glb",
+            "position": [
+              3.5,
+              0.34,
+              -1
+            ],
+            "minY": 0.3400000000000001,
+            "size": [
+              2.638763501644135,
+              1.8166855663061139,
+              1.8405600851774215
+            ]
+          }
+        ],
+        "ghostModel": "assets/models/house-a-512.glb",
+        "populatedCity": {
+          "description": "six houses, one shop, one hospital; fixed camera, shadows enabled",
+          "triangles": 59840,
+          "calls": 50,
+          "fps": 43,
+          "citizens": 24,
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 3,
+            "failed": 0
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        }
+      },
+      "fire": {
+        "triangles": 29859,
+        "drawCalls": 24,
+        "geometries": 11,
+        "materials": 7,
+        "textures": 3,
+        "disposed": false,
+        "low": false,
+        "avatarLoaded": true,
+        "rendererTriangles": 28079,
+        "rendererDrawCalls": 15,
+        "truck": {
+          "loaded": true,
+          "cannonFaces": 585,
+          "yaw": 2.8627889623693,
+          "muzzle": {
+            "x": -2.3890432749020825,
+            "y": 3.176443905144286,
+            "z": 8.965724506991275
+          }
+        },
+        "hydrant": {
+          "loaded": true,
+          "art": {
+            "requested": 1,
+            "loaded": 1,
+            "failed": 0
+          }
+        }
+      },
+      "naval": {
+        "triangles": 10899,
+        "drawCalls": 15,
+        "playerModel": {
+          "requested": true,
+          "loaded": true,
+          "failed": false
+        },
+        "disposed": false,
+        "models": {
+          "requested": 2,
+          "loaded": 2,
+          "failed": 0
+        },
+        "playerLoaded": true,
+        "enemiesLoaded": 1,
+        "playerLength": 11.02,
+        "enemyLengths": [
+          11.02
+        ],
+        "headings": [
+          0.0017078183860123374
+        ]
+      },
+      "aliens": {
+        "requested": 6,
+        "loaded": 6,
+        "failed": 0
+      },
+      "errors": [],
+      "outside": []
+    },
+    {
+      "width": 390,
+      "intentionallyCorruptSixGLBs": true,
+      "city": {
+        "metrics": {
+          "triangles": 21358,
+          "calls": 45,
+          "fps": 29,
+          "citizens": 4,
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 0,
+            "failed": 3
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        },
+        "buildings": [
+          {
+            "typeId": "house",
+            "position": [
+              -3,
+              0.34,
+              -1
+            ],
+            "minY": 0.34,
+            "size": [
+              1.9199999570846558,
+              1.8799999952316282,
+              1.9899999499320984
+            ]
+          },
+          {
+            "typeId": "shop",
+            "position": [
+              0,
+              0.34,
+              -1
+            ],
+            "minY": 0.34,
+            "size": [
+              1.9199999570846558,
+              1.8600000143051145,
+              2.165000021457672
+            ]
+          },
+          {
+            "typeId": "hospital",
+            "position": [
+              3.5,
+              0.34,
+              -1
+            ],
+            "minY": 0.34,
+            "size": [
+              2.880000114440918,
+              1.9600000381469724,
+              2.165000021457672
+            ]
+          }
+        ],
+        "populatedCity": {
+          "description": "six houses, one shop, one hospital; fixed camera, shadows enabled",
+          "triangles": 25098,
+          "calls": 50,
+          "fps": 29,
+          "citizens": 24,
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 0,
+            "failed": 3
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        }
+      },
+      "fire": {
+        "triangles": 24769,
+        "drawCalls": 23,
+        "geometries": 11,
+        "materials": 7,
+        "textures": 3,
+        "disposed": false,
+        "low": false,
+        "avatarLoaded": true,
+        "rendererTriangles": 23065,
+        "rendererDrawCalls": 15,
+        "truck": {
+          "loaded": true,
+          "cannonFaces": 585,
+          "yaw": 2.8627889623693,
+          "muzzle": {
+            "x": -2.3890432749020825,
+            "y": 3.176443905144286,
+            "z": 8.965724506991275
+          }
+        },
+        "hydrant": {
+          "loaded": false,
+          "art": {
+            "requested": 1,
+            "loaded": 0,
+            "failed": 1
+          }
+        }
+      },
+      "naval": {
+        "triangles": 6897,
+        "drawCalls": 19,
+        "playerModel": {
+          "requested": true,
+          "loaded": true,
+          "failed": false
+        },
+        "disposed": false,
+        "models": {
+          "requested": 2,
+          "loaded": 1,
+          "failed": 1
+        },
+        "playerLoaded": true,
+        "enemiesLoaded": 0,
+        "playerLength": 11.02,
+        "enemyLengths": [
+          null
+        ],
+        "headings": [
+          0.0017078183860123374
+        ]
+      },
+      "aliens": {
+        "requested": 6,
+        "loaded": 5,
+        "failed": 1
+      },
+      "errors": [],
+      "outside": []
+    },
+    {
+      "width": 360,
+      "intentionallyCorruptSixGLBs": false,
+      "city": {
+        "metrics": {
+          "triangles": 34020,
+          "calls": 45,
+          "fps": 37,
+          "citizens": 4,
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 3,
+            "failed": 0
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        },
+        "buildings": [
+          {
+            "typeId": "house",
+            "model": "assets/models/house-a-512.glb",
+            "position": [
+              -3,
+              0.34,
+              -1
+            ],
+            "minY": 0.3400000000000001,
+            "size": [
+              1.4620013397932055,
+              1.3854332906007767,
+              1.273378276824951
+            ]
+          },
+          {
+            "typeId": "shop",
+            "model": "assets/models/shop-corner-512.glb",
+            "position": [
+              0,
+              0.34,
+              -1
+            ],
+            "minY": 0.33999999999999997,
+            "size": [
+              1.8424034839868546,
+              1.6644947540760042,
+              1.7278076434135436
+            ]
+          },
+          {
+            "typeId": "hospital",
+            "model": "assets/models/hospital-512.glb",
+            "position": [
+              3.5,
+              0.34,
+              -1
+            ],
+            "minY": 0.3400000000000001,
+            "size": [
+              2.638763501644135,
+              1.8166855663061139,
+              1.8405600851774215
+            ]
+          }
+        ],
+        "ghostModel": "assets/models/house-a-512.glb",
+        "populatedCity": {
+          "description": "six houses, one shop, one hospital; fixed camera, shadows enabled",
+          "triangles": 59840,
+          "calls": 50,
+          "fps": 37,
+          "citizens": 24,
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 3,
+            "failed": 0
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        }
+      },
+      "fire": {
+        "triangles": 29859,
+        "drawCalls": 24,
+        "geometries": 11,
+        "materials": 7,
+        "textures": 3,
+        "disposed": false,
+        "low": false,
+        "avatarLoaded": true,
+        "rendererTriangles": 28079,
+        "rendererDrawCalls": 15,
+        "truck": {
+          "loaded": true,
+          "cannonFaces": 585,
+          "yaw": 2.8627889623693,
+          "muzzle": {
+            "x": -2.3890432749020825,
+            "y": 3.176443905144286,
+            "z": 8.965724506991275
+          }
+        },
+        "hydrant": {
+          "loaded": true,
+          "art": {
+            "requested": 1,
+            "loaded": 1,
+            "failed": 0
+          }
+        }
+      },
+      "naval": {
+        "triangles": 10899,
+        "drawCalls": 15,
+        "playerModel": {
+          "requested": true,
+          "loaded": true,
+          "failed": false
+        },
+        "disposed": false,
+        "models": {
+          "requested": 2,
+          "loaded": 2,
+          "failed": 0
+        },
+        "playerLoaded": true,
+        "enemiesLoaded": 1,
+        "playerLength": 11.02,
+        "enemyLengths": [
+          11.02
+        ],
+        "headings": [
+          0.0017078183860123374
+        ]
+      },
+      "aliens": {
+        "requested": 6,
+        "loaded": 6,
+        "failed": 0
+      },
+      "errors": [],
+      "outside": []
+    },
+    {
+      "width": 360,
+      "intentionallyCorruptSixGLBs": true,
+      "city": {
+        "metrics": {
+          "triangles": 21358,
+          "calls": 45,
+          "fps": 56,
+          "citizens": 4,
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 0,
+            "failed": 3
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        },
+        "buildings": [
+          {
+            "typeId": "house",
+            "position": [
+              -3,
+              0.34,
+              -1
+            ],
+            "minY": 0.34,
+            "size": [
+              1.9199999570846558,
+              1.8799999952316282,
+              1.9899999499320984
+            ]
+          },
+          {
+            "typeId": "shop",
+            "position": [
+              0,
+              0.34,
+              -1
+            ],
+            "minY": 0.34,
+            "size": [
+              1.9199999570846558,
+              1.8600000143051145,
+              2.165000021457672
+            ]
+          },
+          {
+            "typeId": "hospital",
+            "position": [
+              3.5,
+              0.34,
+              -1
+            ],
+            "minY": 0.34,
+            "size": [
+              2.880000114440918,
+              1.9600000381469724,
+              2.165000021457672
+            ]
+          }
+        ],
+        "populatedCity": {
+          "description": "six houses, one shop, one hospital; fixed camera, shadows enabled",
+          "triangles": 25098,
+          "calls": 50,
+          "fps": 56,
+          "citizens": 24,
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 0,
+            "failed": 3
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        }
+      },
+      "fire": {
+        "triangles": 24769,
+        "drawCalls": 23,
+        "geometries": 11,
+        "materials": 7,
+        "textures": 3,
+        "disposed": false,
+        "low": false,
+        "avatarLoaded": true,
+        "rendererTriangles": 23065,
+        "rendererDrawCalls": 15,
+        "truck": {
+          "loaded": true,
+          "cannonFaces": 585,
+          "yaw": 2.8627889623693,
+          "muzzle": {
+            "x": -2.3890432749020825,
+            "y": 3.176443905144286,
+            "z": 8.965724506991275
+          }
+        },
+        "hydrant": {
+          "loaded": false,
+          "art": {
+            "requested": 1,
+            "loaded": 0,
+            "failed": 1
+          }
+        }
+      },
+      "naval": {
+        "triangles": 6897,
+        "drawCalls": 19,
+        "playerModel": {
+          "requested": true,
+          "loaded": true,
+          "failed": false
+        },
+        "disposed": false,
+        "models": {
+          "requested": 2,
+          "loaded": 1,
+          "failed": 1
+        },
+        "playerLoaded": true,
+        "enemiesLoaded": 0,
+        "playerLength": 11.02,
+        "enemyLengths": [
+          null
+        ],
+        "headings": [
+          0.0017078183860123374
+        ]
+      },
+      "aliens": {
+        "requested": 6,
+        "loaded": 5,
+        "failed": 1
+      },
+      "errors": [],
+      "outside": []
+    }
+  ]
+}

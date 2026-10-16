@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import { primitive as part, material, makeTree } from './environment.mjs?v=g3b-20261016-1';
-import { batchMeshes } from './batch.mjs?v=g3b-20261016-1';
+import { primitive as part, material, makeTree } from './environment.mjs?v=task016-20261016-1';
+import { batchMeshes } from './batch.mjs?v=task016-20261016-1';
 
 // A visual kind is an independent extension point. Building IDs never select
 // geometry; two data records can share a visual, or register their own renderer.
@@ -258,10 +258,13 @@ registerBuildingVisual('park',park);
 registerBuildingVisual('waterTower',waterTower);
 registerBuildingVisual('road',(g,v,w,d)=>{base(g,w,d,'#c2b79d');block(g,v.color,[0,.08,0],[w*.88,.075,d*.88]);for(const x of [-.22,.22])block(g,v.roofColor,[x,.12,0],[.17,.01,.035]);});
 for(const kind of ['fireStation','hospital','school','police','prison'])registerBuildingVisual(kind,(g,v,w,d,h)=>civic(g,v,w,d,h,kind));
+registerBuildingVisual('shop',(g,v,w,d,h)=>{civic(g,v,w,d,h,'shop');block(g,v.roofColor,[0,h*.58,d*.43],[w*.88,.1,.4]);});
 for(const kind of ['soccer','tennis','basketball'])registerBuildingVisual(kind,(g,v,w,d)=>field(g,v,w,d,kind));
 registerBuildingVisual('pool',pool);registerBuildingVisual('athletics',athletics);
 for(const kind of ['wall','watchtower','shield','embassy'])registerBuildingVisual(kind,(g,v,w,d,h)=>defense(g,v,w,d,h,kind));
-export function createBuilding(record,level=1) {
+export function createBuilding(record,level=1,models) {
+  const modeled=models?.create(record.levels?.[level-1]?.model??record.model);
+  if(modeled){modeled.name=record.id;modeled.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});return modeled;}
   const levelVisual=record.levels?.[level-1]?.visual;
   const visual={kind:'house',color:'#efb99c',roofColor:'#d97e70',height:.85,...record.visual,...levelVisual},[w,d]=record.footprint||[1,1],group=new T.Group();
   const height=visual.height*(levelVisual?.height?1:1+(Math.max(1,level)-1)*.13);
