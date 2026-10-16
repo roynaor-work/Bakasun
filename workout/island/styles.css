@@ -90,3 +90,12 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 @media(orientation:landscape) and (max-height:600px){.game-screen[data-game=navalDuel] .ammo-rack{top:66px;inset-inline-end:9px;flex-direction:row;width:auto}.game-screen[data-game=navalDuel] .ammo-rack button{width:58px;min-height:60px}.game-screen[data-game=navalDuel] [data-game-control=fire]{min-height:48px}.game-upgrade-panel{flex-direction:row;align-items:center;flex-wrap:wrap}.game-upgrade-panel h3{width:100%}.game-upgrade-panel button{flex:1;min-width:140px}.game-upgrade-panel .game-icon{width:38px;height:38px}}
 
 .game-screen[data-game=navalDuel] .game-status{color:#d5f3ff}.game-screen[data-game=navalDuel] .game-stage{background:#103e59}
+
+/* Four fire actions plus help stay thumb sized on both narrow viewports. */
+.game-screen[data-game=fireRescue] .game-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.game-screen[data-game=fireRescue] .game-gauge{grid-column:span 2;min-width:0}
+.game-screen[data-game=fireRescue] [data-game-control]{min-width:56px;min-height:58px;flex-direction:column;gap:1px;padding:4px;font-size:12px}
+.game-screen[data-game=fireRescue] .game-icon{width:28px;height:28px}
+.game-screen[data-game=fireRescue] [data-game-control=rescue]{background:#246f67;color:#fff}
+.game-screen[data-game=fireRescue] [data-action=game-help]{grid-column:1/-1;min-height:56px}
+@media(orientation:landscape) and (max-height:600px){.game-screen[data-game=fireRescue] .game-controls{grid-template-columns:repeat(2,minmax(0,1fr));overflow:auto}.game-screen[data-game=fireRescue] .game-gauge{grid-column:auto}}

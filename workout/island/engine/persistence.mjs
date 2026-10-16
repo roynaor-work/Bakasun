@@ -1,8 +1,8 @@
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2f-20261015-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=g2f-20261015-1';
-import {initialProgress} from '../activity/progress.mjs?v=g2f-20261015-1';
-import { cellsFor } from './rules.mjs?v=g2f-20261015-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g2f-20261015-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2g-20261016-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=g2g-20261016-1';
+import {initialProgress} from '../activity/progress.mjs?v=g2g-20261016-1';
+import { cellsFor } from './rules.mjs?v=g2g-20261016-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g2g-20261016-1';
 
 export const CURRENT_VERSION = 7;
 export const STORAGE_KEY = 'island.v1';

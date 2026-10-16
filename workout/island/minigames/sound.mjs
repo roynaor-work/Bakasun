@@ -1,7 +1,7 @@
 /** Stable semantic events. A future sample bank can replace these synthesizers. */
-export const SOUND_EVENTS=Object.freeze(['shot','hit','explosion','bonus','upgrade','win','lose','button','cannon','splash','spray','crackle','refill']);
+export const SOUND_EVENTS=Object.freeze(['shot','hit','explosion','bonus','upgrade','win','lose','button','cannon','splash','spray','crackle','refill','ladder','rescue','timeout']);
 export const SOUND_KEY='island.sound';
-const voices={shot:[740,180,.07,'triangle'],hit:[320,90,.09,'square'],explosion:[650,50,.28,'noise'],bonus:[680,1200,.16,'sine'],upgrade:[440,1320,.24,'triangle'],win:[520,1040,.45,'triangle'],lose:[240,90,.4,'sine'],button:[580,740,.045,'sine'],cannon:[450,70,.2,'noise'],splash:[800,180,.26,'noise'],spray:[1200,700,.15,'noise'],crackle:[2400,800,.07,'noise'],refill:[380,640,.17,'sine']};
+const voices={shot:[740,180,.07,'triangle'],hit:[320,90,.09,'square'],explosion:[650,50,.28,'noise'],bonus:[680,1200,.16,'sine'],upgrade:[440,1320,.24,'triangle'],win:[520,1040,.45,'triangle'],lose:[240,90,.4,'sine'],button:[580,740,.045,'sine'],cannon:[450,70,.2,'noise'],splash:[800,180,.26,'noise'],spray:[1200,700,.15,'noise'],crackle:[2400,800,.07,'noise'],refill:[380,640,.17,'sine'],ladder:[300,600,.22,'triangle'],rescue:[660,1320,.28,'sine'],timeout:[460,300,.22,'sine']};
 export function createSound({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,volume=.045}={}){
   let muted=false,context,master,noise,disposed=false,active=0;const last=new Map();
   try{muted=storage?.getItem(SOUND_KEY)==='off';}catch{/* Sound remains usable without storage. */}

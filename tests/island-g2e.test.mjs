@@ -71,7 +71,7 @@ test('G2e the target circle can hit a concurrent second ship; sinking it leaves 
 });
 test('G2e each naval ship class has independent speed, armament, hull shape and HP',()=>{const m=naval(10),types=config.navalDuel.shipTypes;assert.equal(new Set(types.map(t=>t.speed)).size,3);assert.equal(new Set(types.map(t=>t.attack)).size,3);assert.equal(new Set(types.map(t=>t.beam+':'+t.length)).size,3);advance(m,.5);const fleet=m.enemies.filter(e=>e.active);assert.equal(fleet.length,3);assert.equal(new Set(fleet.map(e=>e.maxHp)).size,3);});
 test('G2e optional model paths stay inside the published island and retain code fallback when absent',()=>{
-  for(const p of [null,undefined,'https://example.com/a.glb','../outside.glb','assets/a.png'])assert.equal(localModelURL(p),null);assert.ok(localModelURL('assets/kid-full.glb').pathname.endsWith('/assets/kid-full.glb'));assert.equal(localModelURL('assets/kid-full.glb').searchParams.get('v'),DATA_VERSION);assert.equal(config.alienDefense.models.player,null);
+  for(const p of [null,undefined,'https://example.com/a.glb','../outside.glb','assets/a.png'])assert.equal(localModelURL(p),null);assert.ok(localModelURL('assets/kid-full.glb').pathname.endsWith('/assets/kid-full.glb'));assert.equal(localModelURL('assets/kid-full.glb').searchParams.get('v'),DATA_VERSION);assert.equal(config.alienDefense.models.player.path,'assets/models/ship-player.glb');
 });
 test('G2e temporary wing expires and a nova capsule replenishes a real charge',()=>{
   const m=alien({seconds:99}),b=config.alienDefense,charges=m.novaCharges;

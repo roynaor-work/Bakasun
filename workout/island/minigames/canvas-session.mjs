@@ -1,6 +1,6 @@
-import {upgradeCard} from './icons.mjs?v=g2f-20261015-1';
-import {loadOptionalArt} from './model-art.mjs?v=g2f-20261015-1';
-import {createGameArt} from './art.mjs?v=g2f-20261015-1';
+import {upgradeCard} from './icons.mjs?v=g2g-20261016-1';
+import {loadOptionalArt} from './model-art.mjs?v=g2g-20261016-1';
+import {createGameArt} from './art.mjs?v=g2g-20261016-1';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   const { canvas, controls, status, config, t } = ctx;
@@ -20,19 +20,26 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
   const pointers = new Map(), keys = new Set();
   let frame, last, disposed = false, observer, scale = 1, offsetX = 0, offsetY = 0, statusTime=0, samples=0, totalFrameMs=0, lowQuality=false, paused=false, queuedFire=false, queuedNova=false, queuedAmmo=false, heldFire=false, cssWidth=0,cssHeight=0,pixelRatio=1;
   if(ctx.gameId==='alienDefense')void loadOptionalArt(art,ctx.balance,()=>disposed);
-  const clearInput = () => { pointers.clear(); keys.clear(); queuedNova=queuedAmmo=queuedFire=heldFire=input.firing=input.left=input.right=input.nova=input.ammo=input.charge=input.refill=input.spread=queuedSpread=false; };
+  const clearInput = () => { pointers.clear(); keys.clear(); queuedNova=queuedAmmo=queuedFire=heldFire=input.firing=input.left=input.right=input.nova=input.ammo=input.charge=input.refill=input.rescue=input.spread=queuedSpread=false;input.truckX=input.truckZ=undefined; };
   function syncInput() {
-    input.charge=keys.has('charge');input.refill=keys.has('refill');
+    input.charge=keys.has('charge');input.refill=keys.has('refill');input.rescue=keys.has('rescue');
     input.left = keys.has('ArrowLeft')||keys.has('left');input.right = keys.has('ArrowRight')||keys.has('right');heldFire=keys.has('fire');
     for(const value of pointers.values()){input.left||=value==='left';input.right||=value==='right';heldFire||=value==='fire'||(!naval&&value==='canvas');input.charge||=value==='charge';input.refill||=value==='refill';}
     if(input.left||input.right)input.x=undefined;
+    for(const value of pointers.values())input.rescue||=value==='rescue';
     input.firing=heldFire;
   }
   function position(event,start=false) {
     const box = canvas.getBoundingClientRect();
-    input.x = Math.max(0, Math.min(config.width, (event.clientX - box.left - offsetX) / scale));
-    input.y = Math.max(0, Math.min(config.height, (event.clientY - box.top - offsetY) / scale));
+    const x=Math.max(0,Math.min(config.width,(event.clientX-box.left-offsetX)/scale)),y=Math.max(0,Math.min(config.height,(event.clientY-box.top-offsetY)/scale));
+    if(ctx.gameId==='fireRescue'){
+      const b=ctx.balance,truckX=b.crew.truckX+(model.truck.x-b.vehicle.x)/b.render.worldScale,truckY=b.crew.truckY+(model.truck.z-b.vehicle.z)/b.render.worldScale;
+      if(start&&(view?.isTruckAt?.(x,y)??(Math.abs(x-truckX)<70&&Math.abs(y-truckY)<45))){pointers.set(event.pointerId,'vehicle');queuedFire=false;}
+      if(pointers.get(event.pointerId)==='vehicle'){const target=view?.truckTargetAt?.(x,y)||{x:b.vehicle.x+(x-b.crew.truckX)*b.render.worldScale,z:b.vehicle.z+(y-b.crew.truckY)*b.render.worldScale};input.truckX=target.x;input.truckZ=target.z;return;}
+    }
+    input.x=x;input.y=y;
     applyCanvasGesture(input,ctx.gameId,gesture,ctx.balance,start);
+    if(ctx.gameId==='fireRescue'){const point=view?.targetAt?.(input.x,input.y);if(point){input.x=point.x;input.y=point.y;}}
     if(naval){const point=view?.targetAt?.(input.x,input.y)||model.targetAt(input.x,input.y);input.targetX=point.x;input.targetZ=point.z;}
     if(naval){const slider=controls.querySelector('[data-game-input=angle]');if(slider)slider.value=input.angle;}
   }
@@ -53,7 +60,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
       for (const node of [canvas,...controls.querySelectorAll('button')]) if (node.hasPointerCapture?.(id)) node.releasePointerCapture(id);
     }
     view?.dispose();
-    clearInput(); canvas.width = canvas.height = 0;
+    clearInput(); input.rescue=false;canvas.width = canvas.height = 0;
     for(const value of Object.values(art)){
       if(value?.getContext)value.width=value.height=0;
       else if(Array.isArray(value))for(const sprite of value)if(sprite?.getContext)sprite.width=sprite.height=0;
@@ -64,13 +71,13 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
     canvas.addEventListener('pointerdown',event=>{
       event.preventDefault(); canvas.setPointerCapture(event.pointerId); pointers.set(event.pointerId,'canvas');if(!naval)queuedFire=true;position(event,true);syncInput();
     },options);
-    canvas.addEventListener('pointermove',event=>{if(pointers.get(event.pointerId)==='canvas')position(event);},options);
+    canvas.addEventListener('pointermove',event=>{if(['canvas','vehicle'].includes(pointers.get(event.pointerId)))position(event);},options);
     for (const node of controls.querySelectorAll('[data-game-control]')) {
       node.addEventListener('pointerdown',event=>{
         event.preventDefault();node.setPointerCapture(event.pointerId);pointers.set(event.pointerId,node.dataset.gameControl);if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(node.dataset.gameControl==='fire')queuedFire=true;if(node.dataset.gameControl==='nova')queuedNova=true;if(node.dataset.gameControl==='spread')queuedSpread=true;if(node.dataset.gameControl==='ammo')queuedAmmo=true;syncInput();
       },options);
     }
-    for(const node of controls.querySelectorAll('[data-game-control]'))node.addEventListener('click',event=>{if(event.detail!==0)return;const key=node.dataset.gameControl;if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(key==='fire')queuedFire=true;else if(key==='nova')queuedNova=true;else if(key==='spread')queuedSpread=true;else if(key==='ammo')queuedAmmo=true;else if(key==='refill'||key==='charge')input[key]=!input[key];},options);
+    for(const node of controls.querySelectorAll('[data-game-control]'))node.addEventListener('click',event=>{if(event.detail!==0)return;const key=node.dataset.gameControl;if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(key==='fire')queuedFire=true;else if(key==='nova')queuedNova=true;else if(key==='spread')queuedSpread=true;else if(key==='ammo')queuedAmmo=true;else if(key==='refill'||key==='charge'||key==='rescue')input[key]=!input[key];},options);
     for(const node of controls.querySelectorAll('[data-angle-step]'))node.addEventListener('click',()=>{const axis=node.dataset.angleAxis;if(axis==='angle'&&model.ammoIndex===2)return;const slider=controls.querySelector(`[data-game-input=${axis}]`);input[axis]=Math.max(Number(slider.min),Math.min(Number(slider.max),input[axis]+Number(node.dataset.angleStep)));slider.value=input[axis];},options);
     for(const node of controls.querySelectorAll('[data-game-input]'))node.addEventListener('input',()=>{input[node.dataset.gameInput]=Number(node.value);},options);
     for (const type of ['pointerup','pointercancel','lostpointercapture']) window.addEventListener(type,event=>{pointers.delete(event.pointerId);syncInput();},options);
@@ -127,7 +134,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
       } catch { ctx.cancel();ctx.onError?.('reason.gameStart'); }
     }
     frame=requestAnimationFrame(tick);
-    return { dispose, cancel: ctx.cancel, setPaused(value){paused=value;clearInput();last=undefined;},get snapshot() { const snapshot=model.snapshot();if(naval){snapshot.canvasHeight=config.height;const project=(x,z)=>view?.projectTarget?.(x,z)||model.screenPoint(x,z);snapshot.aimScreen=project(model.aim.x,model.aim.z);snapshot.enemyScreens=model.enemies.filter(e=>e.active&&e.hp>0).map(e=>({index:e.index,...project(e.x,e.z)}));}if(art.modelArt)snapshot.artModels={...art.modelArt};if(view)snapshot.renderMode=view.mode;return snapshot; } };
+    return { dispose, cancel: ctx.cancel, setPaused(value){paused=value;clearInput();last=undefined;},get snapshot() { const snapshot=model.snapshot();if(naval){snapshot.canvasHeight=config.height;const project=(x,z)=>view?.projectTarget?.(x,z)||model.screenPoint(x,z);snapshot.aimScreen=project(model.aim.x,model.aim.z);snapshot.enemyScreens=model.enemies.filter(e=>e.active&&e.hp>0).map(e=>({index:e.index,...project(e.x,e.z)}));}if(ctx.gameId==='fireRescue'){const project=(x,y)=>view?.projectTarget?.(x,y)||{x,y};snapshot.flameScreens=model.flames.map(f=>({...project(f.x,f.y),active:f.active,heat:f.heat}));snapshot.rescueScreens=model.rescues.map(r=>({...project(r.x,r.y),rescued:r.rescued,expired:r.expired}));snapshot.truckScreen=view?.truckScreen?.()||{x:ctx.balance.crew.truckX+(model.truck.x-ctx.balance.vehicle.x)/ctx.balance.render.worldScale,y:ctx.balance.crew.truckY+(model.truck.z-ctx.balance.vehicle.z)/ctx.balance.render.worldScale};snapshot.aimScreen=project(model.aim.x,model.aim.y);snapshot.impactScreen=project(model.impact.x,model.impact.y);snapshot.renderMode=view?.mode||'canvas';}if(art.modelArt)snapshot.artModels={...art.modelArt};if(view){snapshot.renderMode=view.mode;snapshot.renderMetrics=view.metrics?.();}return snapshot; } };
   } catch(error) {dispose();throw error;}
 }
 

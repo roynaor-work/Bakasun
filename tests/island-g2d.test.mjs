@@ -66,8 +66,8 @@ test('G2d refill is an explicit choice: the pump restores pressure, filling spen
   const m=make('fireRescue');advance(m,1,{firing:true,x:350,y:0});const water=m.water,reserve=m.reserve,pressure=m.pressure;advance(m,.3);assert.equal(m.water,water);assert.equal(m.reserve,reserve);assert.equal(m.pressure,pressure);advance(m,.3,{charge:true});assert.ok(m.pressure>pressure);advance(m,.3,{refill:true,firing:true});assert.equal(m.spraying,false);assert.ok(m.water>water);assert.ok(m.reserve<reserve);
 });
 test('G2d extra hose uses more water, cools faster and rescue walks to the truck',()=>{
-  const a=make('fireRescue'),b=make('fireRescue',1,{equipment:{hose:1}});for(const m of [a,b])advance(m,.2,{firing:true,x:m.flames[0].x,y:m.flames[0].y});assert.ok(b.flames[0].heat<a.flames[0].heat);assert.ok(b.water<a.water);
-  const r=b.rescue;advance(b,r.seconds+.1,{firing:true,x:r.x,y:r.y});assert.equal(r.rescued,true);const x=r.walkX;advance(b,.5);assert.ok(r.walkX<x);
+  const a=make('fireRescue',3),b=make('fireRescue',3,{equipment:{hose:1}});for(const m of [a,b])advance(m,.2,{firing:true,x:m.flames[0].x,y:m.flames[0].y});assert.ok(b.flames[0].heat<a.flames[0].heat);assert.ok(b.water<a.water);
+  const r=b.rescue;advance(b,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,true);const distance=Math.hypot(r.walkX-config.fireRescue.crew.truckX,r.walkY-config.fireRescue.crew.truckY);advance(b,.5);assert.ok(Math.hypot(r.walkX-config.fireRescue.crew.truckX,r.walkY-config.fireRescue.crew.truckY)<distance);
 });
 test('G2d v5 → v7 adds hose and permanent alien ranks and preserves city, event, currency, avatar and all earned upgrades',()=>{
   const e=createEngine(data,{storage:null,now:()=>1234}),old=JSON.parse(e.exportJSON());old.version=5;delete old.minigameEquipment.fireRescue.hose;old.minigameEquipment.navalDuel.damage=2;old.money=432;
@@ -95,7 +95,7 @@ test('G2d naval round/time limits cannot silently award undefeated ships',()=>{
 });
 
 test('G2d later fire stages add a second/third civilian and wind affects the actual spray impact',()=>{
-  assert.equal(make('fireRescue',1).rescues.length,1);assert.equal(make('fireRescue',6).rescues.length,2);const m=make('fireRescue',10);assert.equal(m.rescues.length,3);assert.equal(m.rescue,m.rescues[0]);advance(m,.4,{x:180,y:250,firing:true});assert.notEqual(m.impact.x,m.aim.x);assert.ok(Math.hypot(m.impact.x-config.fireRescue.nozzleX,m.impact.y-config.fireRescue.nozzleY)<=m.range+.001);
+  assert.equal(make('fireRescue',1).rescues.length,0);assert.equal(make('fireRescue',2).rescues.length,0);assert.equal(make('fireRescue',3).rescues.length,1);assert.equal(make('fireRescue',6).rescues.length,2);const m=make('fireRescue',10);assert.equal(m.rescues.length,3);assert.equal(m.rescue,m.rescues[0]);advance(m,.4,{x:180,y:250,firing:true});assert.notEqual(m.impact.x,m.aim.x);assert.ok(Math.hypot(m.impact.x-config.fireRescue.nozzleX,m.impact.y-config.fireRescue.nozzleY)<=m.range+.001);
 });
 test('G2d late bosses fire a separate moving energy bolt',()=>{
   const balance=structuredClone(config.alienDefense);Object.assign(balance.levels[0],{waves:1,boss:true,bossShots:2});const m=make('alienDefense',1,{balance,random:()=>.999});m.update(.02,{});assert.equal(m.bolts.length,2);assert.ok(m.bolts.some(b=>b.vx!==0));
