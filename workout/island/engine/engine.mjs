@@ -1,13 +1,14 @@
-import {recordStageWin} from '../activity/progress.mjs?v=g5-20261016-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g5-20261016-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=g5-20261016-1';
-import { createRegistry } from './registry.mjs?v=g5-20261016-1';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g5-20261016-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g5-20261016-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=g5-20261016-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g5-20261016-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g5-20261016-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g5-20261016-1';
+import {recordStageWin} from '../activity/progress.mjs?v=g3c-20261016-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g3c-20261016-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=g3c-20261016-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=g3c-20261016-1';
+import { createRegistry } from './registry.mjs?v=g3c-20261016-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g3c-20261016-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g3c-20261016-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=g3c-20261016-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g3c-20261016-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g3c-20261016-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g3c-20261016-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -25,7 +26,7 @@ export function createEngine(data, options = {}) {
   let activeMinigame = null;
   let saveBlocked = !loaded.ok && loaded.reason !== 'reason.storage';
   const narration = createNarrationHook();
-  const engine = { state, data, registry, flags, narration, storageStatus: loaded.ok ? { ok: true } : loaded, canPlay, spendPlayTime };
+  const engine = { state, data, registry, flags, narration, now, storageStatus: loaded.ok ? { ok: true } : loaded, canPlay, spendPlayTime };
 
   function notify(type, detail = {}) {
     const event = { type, ...detail };
@@ -251,6 +252,23 @@ export function createEngine(data, options = {}) {
     return { ok: true, paid };
   };
   engine.isMinigameActive = () => Boolean(activeMinigame);
+  engine.setSoccerDifficulty = difficulty => {
+    if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};
+    if(typeof difficulty!=='string'||!Object.hasOwn(config.minigames.soccer.difficulties,difficulty))return {ok:false,reason:'reason.invalid'};
+    state.soccerCard.difficulty=difficulty;changed('soccer-difficulty');return {ok:true};
+  };
+  engine.soccerTrainingOffer = key => {
+    if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};
+    const card=state.soccerCard,at=Math.floor(now());
+    if(card.lastTrainingAt>at){card.lastTrainingAt=at;changed('soccer-clock');}
+    return trainingOffer(card,key,config.minigames.soccer,at);
+  };
+  engine.trainSoccer = key => {
+    const offer=engine.soccerTrainingOffer(key);if(!offer.ok)return offer;
+    const card=state.soccerCard;
+    card.stars-=offer.cost;card.attributes[key]=Math.min(config.minigames.soccer.card.max,card.attributes[key]+config.minigames.soccer.training.gain);
+    card.trainings=Math.min(Number.MAX_SAFE_INTEGER,card.trainings+1);card.lastTrainingAt=Math.floor(now());changed('soccer-training');return {ok:true,cost:offer.cost};
+  };
   engine.startMinigame = (id, context = {}) => {
     const minigame = registry.minigames.get(id);
     if (!minigame || !flags.minigames || (minigame.featureFlag && !flags[minigame.featureFlag])) return { ok: false, reason: 'reason.locked' };
@@ -265,6 +283,7 @@ export function createEngine(data, options = {}) {
     const token = {}, startedAt = now();
     let ended = false, session;
     const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
+    if(id==='soccer'){ctx.difficulty=state.soccerCard.difficulty;ctx.soccerCard=clone(state.soccerCard);}
     const finish = (raw, cancelled = false) => {
       if (ended) return { ok: false, reason: 'reason.duplicate' };
       let result;
@@ -277,7 +296,8 @@ export function createEngine(data, options = {}) {
         const stars=progress&&won?result.stars:0;
         if(progress&&won&&(!Number.isInteger(stars)||stars<1||stars>3))return {ok:false,reason:'reason.invalid'};
         const parts=periodicParts+(won?(settings?.winParts||0):0);
-        result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts,stars,stage });
+        result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts,stars,stage,
+          ...(id==='soccer'?{difficulty:ctx.difficulty,trainingStars:won?stars+config.minigames.soccer.difficulties[ctx.difficulty].bonusStars:0}:{}) });
       }
       ended = true; activeMinigame = null;
       session?.dispose?.();
@@ -289,7 +309,10 @@ export function createEngine(data, options = {}) {
           state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
           if(result.outcome==='win'){recordStageWin(state,data,id,stage,result.stars);}
           if(result.outcome==='win')state.minigameWins[id]=Math.min(Number.MAX_SAFE_INTEGER,(state.minigameWins[id]||0)+1);
-          if(id==='soccer'&&result.outcome==='win')recordTeamWin(state,config.minigames.soccer);
+          if(id==='soccer'&&result.outcome==='win'){
+            recordTeamWin(state,config.minigames.soccer);
+            state.soccerCard.stars=Math.min(Number.MAX_SAFE_INTEGER,state.soccerCard.stars+result.trainingStars);
+          }
           if(result.parts){const group=data.world.partGroup;state.parts[group]=(state.parts[group]||0)+result.parts;expand();}
         }
         changed('minigame', { id, result });

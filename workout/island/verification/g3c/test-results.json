@@ -1,0 +1,51 @@
+{
+  "base": "21dc3eb6494afb7e157e861980505c6505a5d662",
+  "release": "g3c-20261016-1",
+  "saveVersion": 10,
+  "before": {
+    "total": 1387,
+    "passed": 1349,
+    "skipped": 38,
+    "failed": 0
+  },
+  "after": {
+    "total": 1437,
+    "passed": 1399,
+    "skipped": 38,
+    "failed": 0
+  },
+  "g3cTests": 50,
+  "livePinnedReferences": 106,
+  "priorPinsUpdated": 99,
+  "newPins": 7,
+  "initialSandboxRun": {
+    "result": "EPERM in spawnSync; rerun with subprocess permission",
+    "totalFileEntries": 113,
+    "passedFileEntries": 111,
+    "failedFileEntries": 2
+  },
+  "difficultyCalibration": {
+    "seeds": [
+      1,
+      20
+    ],
+    "stage1": {
+      "easy": 20,
+      "normal": 20,
+      "hard": 20,
+      "easyFirst10": 10
+    },
+    "stage5": {
+      "easy": 20,
+      "normal": 20,
+      "hard": 20
+    },
+    "stage10": {
+      "easy": 20,
+      "normal": 4,
+      "hard": 0
+    }
+  },
+  "physicalPhone": false,
+  "realFPS": false
+}

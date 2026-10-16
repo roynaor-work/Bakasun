@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {loadData} from '../workout/island/engine/load-data.mjs';
@@ -15,15 +16,16 @@ import {createVessel,createNavalView} from '../workout/island/minigames/naval-vi
 import {loadPatrolBoat} from '../workout/island/minigames/patrol-boat.mjs';
 import * as T from '../workout/island/vendor/three.module.js';
 const root=new URL('../workout/island/',import.meta.url),data=await loadData(root,async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))})),balance=data.config.minigames.soccer;
-const fixture=()=>{const values=new Map(),storage={getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,String(v))},engine=createEngine(data,{storage,now:()=>123456});return {engine,storage,values,activity:createActivity(engine,{now:()=>123456})};};
+const fixture=()=>{const values=new Map(),storage={getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,String(v))},engine=createEngine(data,{storage,now:()=>123456});engine.setSoccerDifficulty('normal');return {engine,storage,values,activity:createActivity(engine,{now:()=>123456})};};
 function pitch(engine){engine.state.buildings.push({id:'soccer-test',typeId:'soccer',x:1,z:0,level:1});}
-const payload=(extra={})=>({won:true,goalsFor:3,goalsAgainst:0,stage:1,stars:3,seed:42,durationSeconds:150,...extra});
+const payload=(extra={})=>({won:true,goalsFor:3,goalsAgainst:0,stage:1,stars:3,seed:42,durationSeconds:150,difficulty:'normal',...extra});
 const envelope=r=>({outcome:r.won?'win':'lose',score:r.goalsFor,performance:1,soccer:r});
 function round(f){let ctx;const game=f.engine.registry.minigames.get('soccer'),start=game.start;f.engine.registry.minigames.set('soccer',{...game,start:c=>{ctx=c;return start(c);}});const response=f.engine.startMinigame('soccer',gameContext(f.engine,data.config.minigames,42,'soccer',1));return {ctx,response};}
 
-test('G3b soccer registers once as both sport and game with local model byte parity',async()=>{
+test('G3b soccer registers once as both sport and game with pinned original lab and pure island simulation',async()=>{
  const f=fixture(),game=f.engine.registry.minigames.get('soccer');assert.equal(game.icon,'⚽');assert.equal(game.featureFlag,'soccer');assert.equal(game.helpId,'minigame.soccer.help');assert.equal(f.engine.registry.sports.get('soccer').teamSize,3);assert.equal(f.engine.registry.sports.get('soccer').buildingId,'soccer');assert.equal(data.config.playerDefaults.speed,3);assert.equal(balance.levels.length,10);assert.equal(data.config.minigameLevels.soccer.length,3);
- assert.deepEqual(await readFile(new URL('minigames/soccer.mjs',root)),await readFile(new URL('../../codex-lab/island-soccer/soccer.mjs',root)));
+ assert.equal(createHash('sha256').update(await readFile(new URL('../../codex-lab/island-soccer/soccer.mjs',root))).digest('hex'),'aaaf74218c45e080a2578fcca8b4e8c20ae81d0c7b68e9dc03e7846022eefbc0');
+ assert.doesNotMatch((await readFile(new URL('minigames/soccer.mjs',root),'utf8')).replace(/\/\/[^\n]*/g,''),/\b(document|window|localStorage|Date|Math\.random)\b/);
 });
 test('G3b the same pitch availability locks the menu and engine; city construction rules stay in place',()=>{
  const f=fixture();assert.deepEqual(soccerAvailability(f.engine.state),{ok:false,reason:'minigame.soccer.locked'});assert.equal(f.engine.startMinigame('soccer').reason,'minigame.soccer.locked');pitch(f.engine);assert.equal(soccerAvailability(f.engine.state).ok,true);const r=f.engine.startMinigame('soccer');assert.equal(r.ok,true);r.cancel();
@@ -46,8 +48,8 @@ for(const score of [[0,1],[1,1]])test(`G3b ${score[0]}:${score[1]} receives no c
 for(const [field,value]of [['won',false],['goalsFor',1.5],['goalsAgainst',-1],['stage',2],['stars',1],['seed',43],['durationSeconds',1],['goalsFor',balance.maximumScore+1],['seed','42'],['durationSeconds',NaN]])test(`G3b malformed laboratory result ${field}=${value} is rejected before settlement`,()=>{
  const f=fixture();pitch(f.engine);const r=round(f),before=f.engine.exportJSON();assert.equal(r.ctx.finish(envelope(payload({[field]:value}))).ok,false);assert.equal(f.engine.exportJSON(),before);assert.equal(f.engine.isMinigameActive(),true);r.response.cancel();
 });
-test('G3b result requires exactly the seven laboratory fields and agrees with the envelope',()=>{
- const ctx={level:1,seed:42};for(const r of [payload({unknown:1}),Object.fromEntries(Object.entries(payload()).filter(([key])=>key!=='seed')),null])assert.equal(soccerResult({soccer:r},ctx,balance),null);assert.equal(soccerResult({...envelope(payload()),outcome:'lose'},ctx,balance),null);
+test('G3b result requires exactly the eight G3c fields and agrees with the envelope',()=>{
+ const ctx={level:1,seed:42,difficulty:'normal'};for(const r of [payload({unknown:1}),Object.fromEntries(Object.entries(payload()).filter(([key])=>key!=='seed')),null])assert.equal(soccerResult({soccer:r},ctx,balance),null);assert.equal(soccerResult({...envelope(payload()),outcome:'lose'},ctx,balance),null);
  for(const r of [payload({goalsFor:1}),payload({goalsFor:3,goalsAgainst:1,stars:2}),payload({goalsFor:2,goalsAgainst:1,stars:1})])assert.equal(soccerResult(envelope(r),ctx,balance).stars,r.stars);
 });
 test('G3b all three equipment tracks spend coins, require stars from their second purchase and merge max',()=>{
@@ -69,9 +71,9 @@ test('G3b team wins cross each data threshold exactly; rank bonus reaches all mo
  const target=fixture();assert.equal(target.engine.importJSON(f.engine.exportJSON()).ok,true);assert.equal(target.engine.importJSON(fixture().engine.exportJSON()).ok,true);assert.equal(target.engine.state.team.wins,25);assert.equal(target.engine.state.team.rank,4);
 });
 test('G3b authentic f131be2 v7 save migrates, reloads and imports without resetting existing equipment',async()=>{
- const f=fixture(),old=JSON.parse(await readFile(new URL('tests/fixtures/save-v7.json',root),'utf8')),before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(old.version,7);assert.equal(CURRENT_VERSION,9);assert.equal(STORAGE_KEY,'island.v1');assert.equal(r.ok,true);assert.deepEqual(old,before);
+ const f=fixture(),old=JSON.parse(await readFile(new URL('tests/fixtures/save-v7.json',root),'utf8')),before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(old.version,7);assert.equal(CURRENT_VERSION,10);assert.equal(STORAGE_KEY,'island.v1');assert.equal(r.ok,true);assert.deepEqual(old,before);
  assert.deepEqual(r.state.minigameEquipment.soccer,{speed:0,kick:0,guard:0});assert.deepEqual(r.state.team,{...old.team,wins:0,rank:0});for(const key of ['money','avatar','resources','alienUpgrades'])assert.deepEqual(r.state[key],old[key]);assert.deepEqual(r.state.buildings.filter(b=>b.typeId!=='cityHall'),old.buildings);assert.equal(r.state.minigameEquipment.navalDuel.damage,2);assert.equal(r.state.minigameProgress.alienDefense.stars[0],3);
- f.storage.setItem(STORAGE_KEY,JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.equal(loaded.state.version,9);assert.equal(loaded.state.money,321);assert.equal(loaded.importJSON(old).ok,true);assert.equal(validateSave(loaded.state,data,loaded.registry).ok,true);assert.deepEqual([...f.values.keys()],[STORAGE_KEY]);
+ f.storage.setItem(STORAGE_KEY,JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.equal(loaded.state.version,10);assert.equal(loaded.state.money,321);assert.equal(loaded.importJSON(old).ok,true);assert.equal(validateSave(loaded.state,data,loaded.registry).ok,true);assert.deepEqual([...f.values.keys()],[STORAGE_KEY]);
  const direct={...before,minigameEquipment:{...before.minigameEquipment,soccer:{speed:2,kick:1,guard:3}},team:{...before.team,wins:8,rank:2}};assert.deepEqual(migrations[7](direct).minigameEquipment.soccer,direct.minigameEquipment.soccer);assert.equal(migrations[7](direct).team.wins,8);
 });
 for(const [label,mutate]of [['negative rank',s=>s.minigameEquipment.soccer.speed=-1],['fractional rank',s=>s.minigameEquipment.soccer.kick=1.5],['excess rank',s=>s.minigameEquipment.soccer.guard=5],['missing track',s=>delete s.minigameEquipment.soccer.guard],['unknown track',s=>s.minigameEquipment.soccer.bad=0],['missing soccer',s=>delete s.minigameEquipment.soccer],['string wins',s=>s.team.wins='3'],['negative wins',s=>s.team.wins=-1],['unsafe wins',s=>s.team.wins=2**53],['bad rank',s=>s.team.rank=5],['fractional team rank',s=>s.team.rank=.5],['inconsistent rank',s=>s.team.rank=1]])test(`G3b corrupt save rejects ${label} without changing current progress`,()=>{
@@ -81,7 +83,7 @@ function fakeBoat(){const root=new T.Group(),texture=new T.Texture(),material=ne
 const naval=data.config.minigames.navalDuel;
 test('G3b patrol normalizes locally, keeps articulated cannon/flag, and releases texture/material/geometry once',async()=>{
  const object=fakeBoat(),resources=[object.children[0].geometry,object.children[0].material,object.children[0].material.map],counts=resources.map(()=>0);resources.forEach((r,i)=>r.addEventListener('dispose',()=>counts[i]++));
- const vessel=createVessel(T,naval.render,{}, {},naval.playerModel,{loader:{async loadAsync(url){assert.match(url,/boat-patrol-512\.glb\?v=g5/);return {scene:object};}}});await vessel.ready;assert.equal(vessel.modelStatus.loaded,true);assert.equal(vessel.root.children[0].visible,false);assert.ok(vessel.turret.parent);assert.ok(vessel.flag.parent);const bounds=new T.Box3().setFromObject(object);assert.ok(Math.abs(bounds.getSize(new T.Vector3()).z-naval.playerModel.length)<1e-6);vessel.turret.rotation.y=.7;assert.equal(vessel.turret.rotation.y,.7);vessel.dispose();vessel.dispose();assert.deepEqual(counts,[1,1,1]);
+ const vessel=createVessel(T,naval.render,{}, {},naval.playerModel,{loader:{async loadAsync(url){assert.match(url,/boat-patrol-512\.glb\?v=g3c/);return {scene:object};}}});await vessel.ready;assert.equal(vessel.modelStatus.loaded,true);assert.equal(vessel.root.children[0].visible,false);assert.ok(vessel.turret.parent);assert.ok(vessel.flag.parent);const bounds=new T.Box3().setFromObject(object);assert.ok(Math.abs(bounds.getSize(new T.Vector3()).z-naval.playerModel.length)<1e-6);vessel.turret.rotation.y=.7;assert.equal(vessel.turret.rotation.y,.7);vessel.dispose();vessel.dispose();assert.deepEqual(counts,[1,1,1]);
 });
 for(const path of ['../codex-lab/boat.glb','https://example.com/boat.glb','assets/%2e%2e/%2e%2e/boat.glb'])test(`G3b external patrol path rejected: ${path}`,async()=>{let requests=0;assert.equal(await loadPatrolBoat({...naval.playerModel,path},{loader:{loadAsync(){requests++;}}}),null);assert.equal(requests,0);});
 test('G3b missing/corrupt patrol keeps code ship; late model completion releases its resources',async()=>{

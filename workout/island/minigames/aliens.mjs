@@ -1,7 +1,7 @@
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g5-20261016-1';
-import {runCanvasGame} from './canvas-session.mjs?v=g5-20261016-1';
-import {createPool,releaseAt} from './pool.mjs?v=g5-20261016-1';
-import {oval,drawHealthBar} from './art.mjs?v=g5-20261016-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3c-20261016-1';
+import {runCanvasGame} from './canvas-session.mjs?v=g3c-20261016-1';
+import {createPool,releaseAt} from './pool.mjs?v=g3c-20261016-1';
+import {oval,drawHealthBar} from './art.mjs?v=g3c-20261016-1';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 
 /** One pooled entity factory for all enemy variants; geometry lives in art.mjs. */

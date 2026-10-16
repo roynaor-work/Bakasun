@@ -1,11 +1,13 @@
-import {createSound} from '../minigames/sound.mjs?v=g5-20261016-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g5-20261016-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g5-20261016-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=g5-20261016-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=g5-20261016-1';
-import {gameContext} from '../minigames/context.mjs?v=g5-20261016-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g5-20261016-1';
-import {GameNavigation,GameShell} from './game-shell.mjs?v=g5-20261016-1';
+import {createSound} from '../minigames/sound.mjs?v=g3c-20261016-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g3c-20261016-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3c-20261016-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=g3c-20261016-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=g3c-20261016-1';
+import {gameContext} from '../minigames/context.mjs?v=g3c-20261016-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g3c-20261016-1';
+import {GameNavigation,GameShell} from './game-shell.mjs?v=g3c-20261016-1';
+import {playerCard} from './soccer-card.mjs?v=g3c-20261016-1';
+import {attributes} from '../activity/soccer-card.mjs?v=g3c-20261016-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -13,7 +15,7 @@ const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,t
 export class ActivityInterface {
   constructor({ui,engine,activity,data,t,now=Date.now}) {
     Object.assign(this,{ui,engine,activity,data,t,now});this.current=null;this.closing=false;this.eventOpen=false;
-    this.navigation=new GameNavigation({onGameBack:()=>this.shell?.pause('exit'),onMenuBack:()=>this.ui.closeModal()});
+    this.navigation=new GameNavigation({onGameBack:()=>this.shell?.pause('exit'),onMenuBack:()=>this.ui.closeModal(),onMapBack:()=>this.confirmMapExit()});
     let storage;try{storage=window.localStorage;}catch{}
     this.sound=createSound({storage});this.soundEvents=new AbortController();
     document.addEventListener('pointerdown',event=>{this.sound.unlock();if(event.target.closest('button')&&ui.modalRoot.contains(event.target))this.sound.play('button');},{capture:true,signal:this.soundEvents.signal});
@@ -58,6 +60,34 @@ export class ActivityInterface {
     const dialog=this.modal('minigame.soccer.teamCard','minigame.soccer.stagesHint');dialog.dataset.team='soccer';
     dialog.append(el('h3','',this.teamLabel()),el('p','',this.t('minigame.soccer.roster',{players:this.engine.state.players.map(row=>this.t(row.nameId)).join(' · ')})),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment('soccer')));
   }
+  confirmMapExit(){
+    const dialog=this.ui.openModal('soccer.exitIsland','soccer.exitIslandHint');dialog.dataset.mapExit='true';
+    const stay=()=>{this.ui.closeModal();this.navigation.stayOnMap();};
+    dialog.querySelector('[data-action=close-modal]').onclick=stay;
+    const primary=button(this.t('game.stay'),'map-stay',stay,'primary-button');
+    dialog.append(primary,button(this.t('game.leave'),'map-exit',()=>this.navigation.exitIsland()));queueMicrotask(()=>primary.focus());
+    this.ui.modalCleanup=()=>this.navigation.stayOnMap();
+  }
+  training(){
+    if(this.engine.isMinigameActive()){this.ui.toast('reason.gameBusy');return;}
+    if(this.requireBuilding('soccer'))return;
+    const dialog=this.modal('soccer.training','soccer.training.hint');dialog.dataset.soccerTraining='true';
+    const balance=this.data.config.minigames.soccer,card=playerCard(this.engine.state,balance,this.t),countdown=el('p','soccer-training-countdown'),list=el('div','soccer-training-list');
+    dialog.append(card,countdown,list);const rows=[];
+    for(const key of attributes){
+      const row=el('div','soccer-training-row'),reason=el('span','soccer-training-reason');
+      const train=button('','soccer-train',()=>{const r=this.engine.trainSoccer(key);if(r.ok)this.training();else{this.ui.result(r);update();}});train.dataset.attribute=key;row.append(train,reason);list.append(row);rows.push({key,train,reason});
+    }
+    const update=()=>{
+      let remaining=0;
+      for(const {key,train,reason}of rows){const offer=this.engine.soccerTrainingOffer(key);remaining=Math.max(remaining,offer.remaining||0);train.disabled=!offer.ok;
+        train.textContent=this.t('soccer.training.buy',{attribute:this.t(`soccer.attribute.${key}`),gain:Math.min(balance.training.gain,balance.card.max-this.engine.state.soccerCard.attributes[key]),cost:offer.cost??0});
+        reason.textContent=offer.ok?'':this.t(offer.reason);}
+      countdown.textContent=remaining?this.t('soccer.training.countdown',{minutes:Math.ceil(remaining/balance.training.millisecondsPerSecond/60)}):this.t('soccer.training.ready');
+    };update();
+    const timer=setInterval(update,1000),cleanup=this.ui.modalCleanup;this.ui.modalCleanup=()=>{clearInterval(timer);cleanup?.();};
+    dialog.append(button(this.t('minigame.stages'),'training-stages',()=>this.stages('soccer')));
+  }
   menu() {
     const dialog=this.modal('minigame.title','minigame.subtitle');
     const cards=el('div','game-cards');
@@ -68,6 +98,7 @@ export class ActivityInterface {
       if(game.id==='soccer')card.append(el('p','team-rank',this.teamLabel()));
       const actions=el('div','game-card-actions');
       actions.append(this.playButton(game.id,'game-play',()=>this.stages(game.id)),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
+      if(game.id==='soccer')actions.append(button(this.t('soccer.training'),'soccer-training',()=>this.training()));
       const available=this.availability(game.id);
       if(!available.ok){card.dataset.locked='true';card.append(el('p','game-locked',this.t(available.reason)));}
       const next=this.data.config.minigameLevels[game.id]?.[level];
@@ -96,6 +127,13 @@ export class ActivityInterface {
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
     const dialog=this.modal(game.title,'minigame.progressHint');dialog.dataset.stageMap=id;
     dialog.append(el('p','',this.t('minigame.totalStars',{stars:p.stars.reduce((sum,n)=>sum+n,0)})));
+    if(id==='soccer'){
+      dialog.append(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t));
+      const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));
+      for(const key of Object.keys(this.data.config.minigames.soccer.difficulties)){
+        const choose=button(this.t(`soccer.difficulty.${key}`),'soccer-difficulty',()=>{const r=this.engine.setSoccerDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.soccerCard.difficulty===key));choices.append(choose);
+      }dialog.append(choices,button(this.t('soccer.training'),'soccer-training',()=>this.training()));
+    }
     for(const bonus of this.data.config.minigames.starBonuses)dialog.append(el('p','',this.t('minigame.starBonus',{stars:bonus.stars,level:bonus.upgradeLevel})));
     const map=el('div','stage-map');
     p.stars.forEach((stars,i)=>{
@@ -174,7 +212,7 @@ export class ActivityInterface {
     const help=button(this.t('minigame.help'),'game-help',()=>{
       const content=el('div','game-help-lines');content.append(this.helpLines(id),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
       this.shell?.pause('help',content);this.narrateHelp(id);
-    });controls.append(help);canvas.focus();
+    });(id==='soccer'?controls.querySelector('.soccer-utilities'):controls).append(help);canvas.focus();
   }
   showResult(id,eventId,result,fireSummary) {
     const game=this.engine.registry.minigames.get(id);
@@ -193,6 +231,7 @@ export class ActivityInterface {
         }
         this.start(id,active?.id===eventId?eventId:undefined,result.stage);
       },'primary-button'),button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal()));
+    if(id==='soccer')dialog.insertBefore(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t,{starsAdded:result.trainingStars}),summary);
     dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(id)));
     if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage)dialog.append(button(this.t('minigame.continue'),'game-next-stage',()=>this.start(id,undefined,result.stage+1),'primary-button'));
     if(id==='alienDefense'&&result.outcome==='win'){
@@ -233,6 +272,7 @@ export class ActivityInterface {
   }
   decorateInfo(instance,actions) {
     for(const game of this.enabledGames())if(this.data.config.minigames[game.id].requiresBuilding===instance.typeId)actions.append(button(this.t('minigame.soccer.play'),`${instance.typeId}-building-play`,()=>this.stages(game.id),'primary-button'));
+    if(instance.typeId==='soccer')actions.append(button(this.t('soccer.training'),'soccer-training',()=>this.training()));
     if(instance.typeId==='cityHall'){
       const metrics=el('div','city-hall-metrics');
       const values=this.engine.metrics();

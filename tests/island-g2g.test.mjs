@@ -50,7 +50,7 @@ test('G2g optional rescue preserves immediate completion, stars and the single-a
   assert.equal(m.result.outcome,'win');assert.deepEqual(m.result.summary,{out:config.fireRescue.levels[2].flames,rescued:Number(rescueFirst),water:Math.floor(m.water)});
   const engine=createEngine(data,{storage:null});engine.state.minigameProgress.fireRescue.stage=3;let finish,disposed=0,result;
   const game=engine.registry.minigames.get('fireRescue');engine.registry.minigames.set('fireRescue',{...game,start:ctx=>{finish=ctx.finish;return {dispose(){disposed++;}};}});
-  engine.state.buildings.push({id:'fire-station-test',typeId:'fireStation',x:12,z:0,level:1});const money=engine.state.money;assert.equal(engine.startMinigame('fireRescue',{level:3,onFinish:r=>{result=r;}}).ok,true);assert.equal(finish(m.result).ok,true);assert.ok(result.stars>=1&&result.stars<=3);assert.equal(result.money,Math.floor(m.score/config.fireRescue.pointsPerCoin)+m.settings.winMoney);assert.equal(engine.state.money,money+result.money);assert.equal(disposed,1);assert.equal(finish(m.result).ok,false);assert.equal(CURRENT_VERSION,9);
+  engine.state.buildings.push({id:'fire-station-test',typeId:'fireStation',x:12,z:0,level:1});const money=engine.state.money;assert.equal(engine.startMinigame('fireRescue',{level:3,onFinish:r=>{result=r;}}).ok,true);assert.equal(finish(m.result).ok,true);assert.ok(result.stars>=1&&result.stars<=3);assert.equal(result.money,Math.floor(m.score/config.fireRescue.pointsPerCoin)+m.settings.winMoney);assert.equal(engine.state.money,money+result.money);assert.equal(disposed,1);assert.equal(finish(m.result).ok,false);assert.equal(CURRENT_VERSION,10);
  }
 });
 test('G2g all ten scene variants remain within triangle/draw budgets with fixed pools and finite vertices',()=>{
@@ -111,7 +111,7 @@ test('G2g unsupported WebGL preserves procedural model sprites and reports faile
  const {art,draws}=sprites();await loadOptionalArt(art,config.alienDefense,()=>false,{createRenderer(){throw Error('no WebGL');}});assert.equal(art.modelArt.failed,6);assert.equal(draws.length,0);
 });
 test('G2g release and new sounds are present; all runtime versioned imports use the same release',async()=>{
- assert.equal(DATA_VERSION,'g5-20261016-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
+ assert.equal(DATA_VERSION,'g3c-20261016-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
  async function walk(url){for(const entry of await readdir(url,{withFileTypes:true})){if(['vendor','verification'].includes(entry.name))continue;const next=new URL(entry.name+(entry.isDirectory()?'/':''),url);if(entry.isDirectory())await walk(next);else if(/\.(mjs|html)$/.test(entry.name)){const source=await readFile(next,'utf8');for(const [,v]of source.matchAll(/(?:\.mjs|\.css)\?v=([^'"\s]+)/g))assert.equal(v,DATA_VERSION,next.pathname);}}}await walk(root);
 });
 
