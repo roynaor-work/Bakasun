@@ -1,8 +1,8 @@
-import {createSoccer} from './soccer.mjs?v=g3b-20261016-1';
-import {createSoccerView} from './soccer-view.mjs?v=g3b-20261016-1';
-import {createControls} from './controls.mjs?v=g3b-20261016-1';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=g3b-20261016-1';
-import {gameContext} from './context.mjs?v=g3b-20261016-1';
+import {createSoccer} from './soccer.mjs?v=task016-20261016-1';
+import {createSoccerView} from './soccer-view.mjs?v=task016-20261016-1';
+import {createControls} from './controls.mjs?v=task016-20261016-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=task016-20261016-1';
+import {gameContext} from './context.mjs?v=task016-20261016-1';
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {

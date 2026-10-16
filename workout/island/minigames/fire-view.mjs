@@ -1,15 +1,17 @@
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {palette} from '../view/environment.mjs?v=g3b-20261016-1';
-import {loadFireTruck} from './fire-truck.mjs?v=g3b-20261016-1';
-import {Avatar} from '../view/avatar.mjs?v=g3b-20261016-1';
+import {palette} from '../view/environment.mjs?v=task016-20261016-1';
+import {loadFireTruck} from './fire-truck.mjs?v=task016-20261016-1';
+import {Avatar} from '../view/avatar.mjs?v=task016-20261016-1';
+import {LocalModels} from '../view/local-models.mjs?v=task016-20261016-1';
 
 /** Own everything in this round. Static colored parts share a material and are
  * merged at setup; particles, stream vertices and scratch vectors are fixed. */
-export function createFireScene(ctx,model) {
+export function createFireScene(ctx,model,adapters={}) {
   const {config,balance}=ctx,r=balance.render,colors=config.visuals.palette;
   const scene=new T.Scene(),geometries=new Set(),materials=new Set(),textures=new Set();
-  let disposed=false,truckVisual=null;
+  let disposed=false,truckVisual=null,hydrantVisual=null;
+  const models=new LocalModels(adapters);
   const ownG=g=>(geometries.add(g),g),ownM=m=>(materials.add(m),m);
   const solid=ownM(new T.MeshStandardMaterial({vertexColors:true,roughness:.82}));
   scene.background=new T.Color(r.sky);scene.fog=new T.Fog(r.sky,r.fogNear,r.fogFar);
@@ -67,8 +69,9 @@ export function createFireScene(ctx,model) {
   for(let i=0;i<4;i++)box(.8,.67,.07,palette.stone,tx-1.8+i*.8,1.22,tz+1.15);
   box(1.2,.2,1.7,palette.cream,tx+1.6,2.59,tz);box(.4,.23,1.4,colors.shipBlue,tx+1.6,2.8,tz);
   merge(truckBase);truckBase.children[0].geometry.translate(-tx,0,-tz);truckBase.rotation.y=Math.PI/2;truckBase.position.set(model.truck.x,0,model.truck.z);defaultParent=fixed;
-  round(.24,1,r.truck,7.3,.6,10);round(.37,.16,palette.cream,7.3,1.07,10);
-  box(1,.17,.17,r.truck,7.3,.9,10);
+  const hydrantBase=new T.Group();scene.add(hydrantBase);
+  round(.24,1,r.truck,7.3,.6,10,hydrantBase);round(.37,.16,palette.cream,7.3,1.07,10,hydrantBase);
+  box(1,.17,.17,r.truck,7.3,.9,10,hydrantBase);merge(hydrantBase);
   // Hose curves are authored once, with a separate stream updated in place.
   const nozzle=new T.Vector3(...r.avatarPosition);nozzle.y+=1.25;nozzle.z-=.35;
   const hose=new T.CatmullRomCurve3([new T.Vector3(tx+1,.5,tz),new T.Vector3(0,.2,13),new T.Vector3(3,.2,13),nozzle]);
@@ -177,10 +180,12 @@ export function createFireScene(ctx,model) {
     smoke.instanceColor.needsUpdate=true;
   }
   const newColorSmoke=new T.Color(r.smoke),newColorSteam=new T.Color(colors.pearl);
-  function dispose(){if(disposed)return;disposed=true;truckVisual?.dispose();scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});for(const g of geometries)g.dispose();for(const m of materials)m.dispose();for(const t of textures){t.dispose();if(t.image?.getContext)t.image.width=t.image.height=0;}scene.clear();geometries.clear();materials.clear();textures.clear();}
+  function dispose(){if(disposed)return;disposed=true;truckVisual?.dispose();models.dispose();scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});for(const g of geometries)g.dispose();for(const m of materials)m.dispose();for(const t of textures){t.dispose();if(t.image?.getContext)t.image.width=t.image.height=0;}scene.clear();geometries.clear();materials.clear();textures.clear();}
   function metrics(){let triangles=0,drawCalls=0;scene.traverse(o=>{if(!o.isMesh)return;triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);drawCalls+=Array.isArray(o.material)?o.material.length:1;});return {triangles,drawCalls,geometries:geometries.size,materials:materials.size,textures:textures.size,disposed};}
   animate();
   return {scene,camera,firefighter,truckBase,cannon,nozzle,
+    async loadHydrant(){const spec=balance.hydrant;if(!await models.load(spec)||disposed)return false;const visual=models.create(spec,{height:spec.height});if(!visual)return false;visual.position.fromArray(spec.position);scene.add(visual);hydrantVisual=visual;hydrantBase.visible=false;return true;},
+    hydrantMetrics(){return {loaded:Boolean(hydrantVisual),art:models.metrics()};},
     setTruck(visual){if(disposed){visual.dispose();return false;}scene.add(visual.root);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls||visual.cannonFaces===0){visual.dispose();return false;}truckVisual=visual;truckBase.visible=cannon.visible=false;return true;},
     truckMetrics(){return {loaded:Boolean(truckVisual),cannonFaces:truckVisual?.cannonFaces||0,yaw:truckVisual?.turret.rotation.y??cannon.rotation.y,muzzle:{x:nozzle.x,y:nozzle.y,z:nozzle.z}};},worldPoint,project,animate,metrics,dispose,anchors,point,scratch};
 }
@@ -200,6 +205,7 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
     world=createFireScene(ctx,model);surface.addEventListener('webglcontextlost',onLost);
     if(globalThis.document){
       void loadFireTruck(ctx.balance).then(visual=>{if(visual)world.setTruck(visual);}).catch(()=>{});
+      void world.loadHydrant();
       avatar=new Avatar(world.scene);avatar.holder.position.fromArray(r.avatarPosition);avatar.holder.scale.setScalar(r.avatarScale);avatar.holder.visible=false;
       // Reuse the island loader and rig; never copy city character logic here.
       void avatar.load({shirtColor:ctx.config.visuals.palette.uniform,pantsColor:palette.teal,hairstyle:'short'}).then(()=>{
@@ -211,7 +217,7 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
   }catch{failed=true;dispose();return null;}
   const pointer=new T.Vector2(),ray=new T.Raycaster(),ground=new T.Plane(new T.Vector3(0,1,0),0),hit=new T.Vector3(),point=new T.Vector3(),screen={x:0,y:0};
   const view={get mode(){return failed?'canvas':'three';},
-    metrics(){return {...world.metrics(),low,avatarLoaded:avatarReady,rendererTriangles:renderer.info?.render.triangles||0,rendererDrawCalls:renderer.info?.render.calls||0,truck:world.truckMetrics()};},
+    metrics(){return {...world.metrics(),low,avatarLoaded:avatarReady,rendererTriangles:renderer.info?.render.triangles||0,rendererDrawCalls:renderer.info?.render.calls||0,truck:world.truckMetrics(),hydrant:world.hydrantMetrics()};},
     degrade(fallback=false){if(disposed)return;if(fallback){failed=true;dispose();}else if(!low){low=true;renderer.setSize(r.width*r.resolutionScale,r.height*r.resolutionScale,false);if(avatar){disposeAvatar();avatarReady=false;world.firefighter.visible=true;}}},dispose,
     projectTarget(x,y){if(disposed)return null;world.worldPoint(x,y,point);world.project(point,screen);return {x:screen.x,y:screen.y};},
     truckScreen(){if(disposed)return null;point.set(model.truck.x,1.5,model.truck.z);world.project(point,screen);return {x:screen.x,y:screen.y};},

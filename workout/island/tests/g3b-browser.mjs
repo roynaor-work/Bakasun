@@ -50,5 +50,5 @@ try{for(const width of (soccerColors?[390]:[390,360,1440])){
  }catch(error){await shot('failure');throw error;}finally{await context.close();}
 }
  const sizes={};for(const path of ['assets/kid-full.glb','assets/models/boat-patrol-512.glb','minigames/soccer.mjs','minigames/soccer-view.mjs','minigames/soccer-session.mjs'])sizes[path]=(await stat(new URL('../'+path,import.meta.url))).size;
- await writeFile(directory+(soccerColors?'soccer-colors.json':'verification.json'),JSON.stringify({release:'g3b-20261016-1',saveVersion:8,browser:'Chromium / ANGLE SwiftShader',physicalPhone:false,realFPS:false,sizes,reports},null,2)+'\n');
+ await writeFile(directory+(soccerColors?'soccer-colors.json':'verification.json'),JSON.stringify({release:'task016-20261016-1',saveVersion:8,browser:'Chromium / ANGLE SwiftShader',physicalPhone:false,realFPS:false,sizes,reports},null,2)+'\n');
 }finally{await browser.close();await server.close();}

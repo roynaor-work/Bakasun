@@ -13,7 +13,11 @@
     },
     "levels": [
       {
-        "model": null,
+        "model": {
+          "path": "assets/models/house-a-512.glb",
+          "rotationY": 0,
+          "scale": 0.77
+        },
         "title": "level.house.1",
         "visual": {
           "tier": 1,
@@ -55,6 +59,29 @@
           "windowColor": "#f6d385",
           "design": "gardenTower"
         }
+      }
+    ]
+  },
+  {
+    "id": "shop",
+    "title": "building.shop",
+    "icon": "🏪",
+    "category": "basic",
+    "model": {
+      "path": "assets/models/shop-corner-512.glb",
+      "rotationY": 0,
+      "scale": 0.97
+    },
+    "requiresRoad": true,
+    "visual": {
+      "kind": "shop",
+      "color": "#d8e6be",
+      "roofColor": "#6d9980"
+    },
+    "levels": [
+      {
+        "model": null,
+        "title": "level.shop.1"
       }
     ]
   },
@@ -352,7 +379,11 @@
     "title": "building.hospital",
     "icon": "🏥",
     "category": "services",
-    "model": null,
+    "model": {
+      "path": "assets/models/hospital-512.glb",
+      "rotationY": 0,
+      "scale": 1.39
+    },
     "requiresRoad": true,
     "visual": {
       "kind": "hospital",

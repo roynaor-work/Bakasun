@@ -1056,6 +1056,38 @@
         2,
         2
       ]
+    },
+    "shop": {
+      "footprint": [
+        2,
+        2
+      ],
+      "cost": 120,
+      "radius": 0,
+      "income": 6,
+      "effects": {},
+      "levels": [
+        {
+          "cost": 0
+        }
+      ],
+      "visual": {
+        "height": 1.6
+      },
+      "limit": {
+        "kind": "stageCap",
+        "maxCount": [
+          2,
+          4,
+          6
+        ],
+        "reason": "reason.limit.shop"
+      },
+      "maxLevelByStage": [
+        1,
+        1,
+        1
+      ]
     }
   },
   "minigames": {
@@ -1628,7 +1660,11 @@
             "rotationY": 90,
             "scale": 1.08
           },
-          null,
+          {
+            "path": "assets/models/alien-d-512.glb",
+            "rotationY": 90,
+            "scale": 0.95
+          },
           {
             "path": "assets/models/boss.glb",
             "rotationY": 90,
@@ -2322,6 +2358,17 @@
           0.35,
           2.22
         ]
+      },
+      "hydrant": {
+        "path": "assets/models/hydrant-512.glb",
+        "rotationY": 0,
+        "scale": 1,
+        "height": 1.15,
+        "position": [
+          7.3,
+          0.1,
+          10
+        ]
       }
     },
     "navalDuel": {
@@ -2853,6 +2900,18 @@
       },
       "playerModel": {
         "path": "assets/models/boat-patrol-512.glb",
+        "rotationY": -90,
+        "scale": 1,
+        "length": 7.6,
+        "waterline": 0.3,
+        "cannonPivot": [
+          0,
+          1.8,
+          -2.1
+        ]
+      },
+      "enemyModel": {
+        "path": "assets/models/enemy-gunboat-512.glb",
         "rotationY": -90,
         "scale": 1,
         "length": 7.6,

@@ -59,9 +59,9 @@ for(const version of [1,2,3]) test(`G1d old v${version} cities retain three gran
 test('G1d model slots and Hebrew names reach runtime without changing balance',()=>{
   for(const row of content) {
     const runtime=data.buildings.find(r=>r.id===row.id),balance=data.config.buildings[row.id];
-    assert.equal(row.model,null);assert.equal(row.levels.length,balance.levels.length);
+    assert.deepEqual(runtime.model,row.model);assert.equal(row.levels.length,balance.levels.length);
     for(const [i,level] of row.levels.entries()) {
-      assert.equal(level.model,null);assert.equal(runtime.levels[i].model,null);
+      assert.deepEqual(runtime.levels[i].model,level.model);
       for(const [key,value] of Object.entries(balance.levels[i]))if(!['visual','title'].includes(key))assert.deepEqual(runtime.levels[i][key],value,`${row.id} ${i} ${key}`);
       if(runtime.levels.length>1)assert.ok(strings[runtime.levels[i].title],`${row.id} level ${i+1}`);
     }

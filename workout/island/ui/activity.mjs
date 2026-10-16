@@ -1,9 +1,9 @@
-import {createSound} from '../minigames/sound.mjs?v=g3b-20261016-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g3b-20261016-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3b-20261016-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=g3b-20261016-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=g3b-20261016-1';
-import {gameContext} from '../minigames/context.mjs?v=g3b-20261016-1';
+import {createSound} from '../minigames/sound.mjs?v=task016-20261016-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=task016-20261016-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=task016-20261016-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=task016-20261016-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=task016-20261016-1';
+import {gameContext} from '../minigames/context.mjs?v=task016-20261016-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};

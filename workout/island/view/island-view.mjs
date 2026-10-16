@@ -1,8 +1,9 @@
 import * as T from '../vendor/three.module.js';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=g3b-20261016-1';
-import { Avatar, Citizens } from './avatar.mjs?v=g3b-20261016-1';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=g3b-20261016-1';
-import { levelValue } from '../engine/metrics.mjs?v=g3b-20261016-1';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=task016-20261016-1';
+import { Avatar, Citizens } from './avatar.mjs?v=task016-20261016-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=task016-20261016-1';
+import { levelValue } from '../engine/metrics.mjs?v=task016-20261016-1';
+import { LocalModels } from './local-models.mjs?v=task016-20261016-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -19,13 +20,16 @@ export class IslandView {
     this.scene.add(new T.HemisphereLight('#fcf5da','#8eaead',2.5));
     const sun=new T.DirectionalLight('#fff0d1',3);sun.position.set(-17,30,15);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-24;sun.shadow.camera.right=24;sun.shadow.camera.top=24;sun.shadow.camera.bottom=-24;sun.shadow.camera.near=1;sun.shadow.camera.far=85;sun.shadow.bias=-.00035;sun.shadow.normalBias=.07;this.scene.add(sun);this.sun=sun;
     this.environment=new Environment(this.scene,data.world);this.environment.rebuild(this.size);this.buildingRoot=new T.Group();this.scene.add(this.buildingRoot);
+    this.models=new LocalModels();
+    const records=data.buildings instanceof Map?[...data.buildings.values()]:data.buildings||[];
+    this.modelsReady=Promise.all(records.flatMap(record=>[record.model,...(record.levels||[]).map(level=>level.model)]).filter(Boolean).map(spec=>this.models.load(spec))).then(()=>{if(!this.disposed&&this.state)this.setWorld(this.state,true);});
     this.avatar=new Avatar(this.scene);this.citizens=new Citizens(this.scene,Math.min(30,data.config?.maxCitizens??30));
     this.avatar.load({}).then(()=>{if(!this.disposed){if(!this.avatarPositioned)this.avatar.holder.position.set(0,GROUND,0);this.onReady(this);}}).catch(()=>this.onError('error.avatar'));
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(canvas);this.handlers={};this.bindEvents();this.resize();this.last=performance.now();this.samples=[];this.animate=this.animate.bind(this);this.frame=requestAnimationFrame(this.animate);
   }
   definition(id) {const registered=this.data.registry?.buildings?.get(id);if(registered)return registered;const b=this.data.buildings;return b instanceof Map?b.get(id):Array.isArray(b)?b.find(r=>r.id===id):b?.[id];}
   worldPosition(x,z,footprint=[1,1]) {return new T.Vector3(x+(footprint[0]-1)/2-(this.size-1)/2,GROUND,z+(footprint[1]-1)/2-(this.size-1)/2);}
-  makeBuilding(record,level=1) {return createBuilding(record,level);}
+  makeBuilding(record,level=1) {return createBuilding(record,level,this.models);}
   setBuildingFactory(factory) {this.buildingFactory=factory;if(this.state)this.setWorld(this.state,true);}
   setWorld(state,force=false) {
     this.state=state;if(!this.renderer)return;
@@ -154,6 +158,6 @@ export class IslandView {
     }
     this.frame=requestAnimationFrame(this.animate);
   }
-  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
-  dispose() {this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.renderer?.dispose();}
+  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,models:this.models?.metrics(),renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
+  dispose() {this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();for(const item of this.groups.values())disposeBuilding(item.group);this.models?.dispose();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.renderer?.dispose();}
 }
