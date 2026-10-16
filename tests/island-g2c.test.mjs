@@ -120,7 +120,7 @@ for(const index of [1,2,3])test(`G2c special naval ${config.navalDuel.ammo[index
   const m=make('navalDuel',10,{equipment:{ammo:3}}),b=config.navalDuel;
   for(let i=0;i<index;i++){m.update(.001,{ammo:true});m.update(.001,{});}assert.equal(m.ammoIndex,index);
   const supply=m.ammo[index];m.update(.001,{firing:true});assert.equal(m.ammo[index],supply-1);assert.equal(m.ball.ammo,index);
-  const hp=m.enemyLives;m.playerShip.hp-=3;const lives=m.lives;navalHit(m,b,index);assert.ok(m.enemyLives<hp);if(index===3)assert.ok(m.lives>lives);if(index===2)assert.equal(m.ball.y,b.shipY);
+  const hp=m.enemyLives;m.playerShip.hp-=3;const lives=m.lives;navalHit(m,b,index);assert.ok(m.enemyLives<hp);if(index===3)assert.ok(m.lives>lives);if(index===2)assert.equal(m.ball.y,b.shipY-Math.sin(m.ball.sampleTime*b.render.waveSpeed)*b.aim.torpedoBob);
 });
 test('G2c shields absorb real hits, upgraded hull survives longer, and bosses have more HP',()=>{
   const m=make('navalDuel',1,{equipment:{shield:2,hull:1.3}}),b=config.navalDuel;m.update(.01,{firing:true});Object.assign(m.ball,{owner:'enemy',targetX:b.shipX,targetZ:0,age:m.ball.duration});const hp=m.lives;m.update(.01,{});assert.equal(m.lives,hp);assert.ok(m.playerShip.shield<2);assert.ok(m.maxLives>make('navalDuel').maxLives);

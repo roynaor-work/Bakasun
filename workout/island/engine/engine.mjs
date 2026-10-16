@@ -1,14 +1,14 @@
-import {recordStageWin} from '../activity/progress.mjs?v=g3d-20261016-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g3d-20261016-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=g3d-20261016-1';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=g3d-20261016-1';
-import { createRegistry } from './registry.mjs?v=g3d-20261016-1';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g3d-20261016-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g3d-20261016-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=g3d-20261016-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g3d-20261016-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g3d-20261016-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g3d-20261016-1';
+import {recordStageWin} from '../activity/progress.mjs?v=g6-20261017-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g6-20261017-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=g6-20261017-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=g6-20261017-1';
+import { createRegistry } from './registry.mjs?v=g6-20261017-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g6-20261017-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g6-20261017-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=g6-20261017-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g6-20261017-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g6-20261017-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g6-20261017-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 

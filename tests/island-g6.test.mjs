@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {createNavalModel,navalTrajectory,navalSway,navalComposition,healthPercent} from '../workout/island/minigames/naval.mjs';
+import {seededRandom} from '../workout/island/minigames/context.mjs';
+const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames,b=config.navalDuel;
+const make=(level=1,seed=1,extra={})=>createNavalModel({config,balance:b,level,seed,random:seededRandom(seed),...extra});
+test('G6 movement and steering stay in the configured sea boundaries',()=>{const m=make();for(let i=0;i<2000&&!m.result;i++)m.update(.04,{moveZ:-1,moveX:.2});assert.ok(m.playerShip.x>=b.movement.minX&&m.playerShip.x<=b.movement.maxX);assert.ok(m.playerShip.z>=b.movement.minZ&&m.playerShip.z<=b.movement.maxZ);assert.notEqual(m.playerShip.x,b.shipX);assert.notEqual(m.playerShip.z,0);});
+test('G6 yaw and elevation independently change the projectile landing point',()=>{const ship={x:60,z:0},a=navalTrajectory(ship,0,35,b),side=navalTrajectory(ship,.3,35,b),high=navalTrajectory(ship,0,50,b);assert.notEqual(a.z,side.z);assert.ok(high.x>a.x);});
+test('G6 sea sway is seeded and time dependent',()=>{assert.deepEqual(navalSway(12,2,b),navalSway(12,2,b));assert.notDeepEqual(navalSway(12,2,b),navalSway(13,2,b));assert.notDeepEqual(navalSway(12,2,b),navalSway(12,3,b));});
+test('G6 fire has no reload and preserves multiple in-flight shots without losing ammo',()=>{const m=make(),n=m.ammo[0];m.update(.01,{firing:true});m.update(.01,{});m.update(.01,{firing:true});assert.equal(m.ammo[0],n-2);assert.equal(m.extraShots.length,1);assert.ok(m.cooldowns.every(n=>n===0));});
+test('G6 visible torpedo travels slower than a shell, bobs and reaches a real enemy',()=>{const a=make(),m=make(1,1,{equipment:{damage:100}});a.update(.01,{firing:true,targetX:300,targetZ:0});m.update(.01,{ammoIndex:2,firing:true,targetX:m.enemyShip.x,targetZ:m.enemyShip.z});assert.ok(m.ball.duration>a.ball.duration);for(let i=0;i<200&&!m.result;i++)m.update(.02,{});assert.equal(m.result?.outcome,'win');assert.ok(m.score>0);});
+test('G6 health is clamped to percentages',()=>{assert.equal(healthPercent(4,8),50);assert.equal(healthPercent(-1,8),0);assert.equal(healthPercent(9,8),100);});
+for(let stage=1;stage<=10;stage++)test(`G6 stage ${stage} compositions vary across twenty seeds and repeat prevention`,()=>{let previous;for(let seed=0;seed<20;seed++){const m=make(stage,seed),composition=m.snapshot().composition;assert.notEqual(composition,previous);previous=composition;assert.equal(m.enemies.some(e=>e.boss),stage%5===0);}const a=navalComposition(4,2,3);assert.notEqual(navalComposition(4,2,3,a.join()).join(),a.join());});

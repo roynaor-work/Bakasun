@@ -1,7 +1,7 @@
-import {upgradeCard} from './icons.mjs?v=g3d-20261016-1';
-import {loadOptionalArt} from './model-art.mjs?v=g3d-20261016-1';
-import {createGameArt} from './art.mjs?v=g3d-20261016-1';
-import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=g3d-20261016-1';
+import {upgradeCard} from './icons.mjs?v=g6-20261017-1';
+import {loadOptionalArt} from './model-art.mjs?v=g6-20261017-1';
+import {createGameArt} from './art.mjs?v=g6-20261017-1';
+import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=g6-20261017-1';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   // Each adapter keeps its model coordinates; viewport changes never mutate shared game data.
@@ -16,14 +16,14 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
   const view=createView?.(ctx,model);
   const renderContext={...ctx,art,quality,view};
   const gesture={x:0,y:0,angle:0,yaw:0};
-  const naval=ctx.gameId==='navalDuel';
+  const naval=ctx.gameId==='navalDuel';let stickPointer=null,stickOrigin;const stick=controls.querySelector('.naval-stick'),knob=controls.querySelector('.naval-knob');
   let qualitySamples=0,qualityMs=0,queuedSpread=false;
   const events = new AbortController(), options = { signal: events.signal };
-  const input = { x: undefined, y: undefined, firing: false, nova:false,ammo:false,charge:false,refill:false,left: false, right: false, angle:ctx.balance.defaultAngle, yaw:ctx.balance.controls?.defaultYaw, power:ctx.balance.defaultPower };
+  const input = { x: undefined, y: undefined, firing: false, nova:false,ammo:false,charge:false,refill:false,left: false, right: false, angle:ctx.balance.defaultAngle, yaw:ctx.balance.controls?.defaultYaw, power:ctx.balance.defaultPower,moveX:0,moveZ:0,yaw:0,elevation:ctx.balance.aim?.defaultElevation,angularAim:naval };
   const pointers = new Map(), keys = new Set();
   let frame, last, disposed = false, observer, scale = 1, offsetX = 0, offsetY = 0, statusTime=0, samples=0, totalFrameMs=0, lowQuality=false, paused=false, queuedFire=false, queuedNova=false, queuedAmmo=false, heldFire=false, cssWidth=0,cssHeight=0,pixelRatio=1;
   if(ctx.gameId==='alienDefense')void loadOptionalArt(art,ctx.balance,()=>disposed);
-  const clearInput = () => { pointers.clear(); keys.clear(); queuedNova=queuedAmmo=queuedFire=heldFire=input.firing=input.left=input.right=input.nova=input.ammo=input.charge=input.refill=input.rescue=input.spread=queuedSpread=false;input.x=input.y=input.truckX=input.truckZ=input.targetX=input.targetZ=input.ammoIndex=undefined; };
+  const clearInput = () => {input.moveX=input.moveZ=0;stickPointer=null;if(stick)stick.hidden=true; pointers.clear(); keys.clear(); queuedNova=queuedAmmo=queuedFire=heldFire=input.firing=input.left=input.right=input.nova=input.ammo=input.charge=input.refill=input.rescue=input.spread=queuedSpread=false;input.x=input.y=input.truckX=input.truckZ=input.targetX=input.targetZ=input.ammoIndex=undefined; };
   function syncInput() {
     input.charge=keys.has('charge');input.refill=keys.has('refill');input.rescue=keys.has('rescue');
     input.left = keys.has('ArrowLeft')||keys.has('left');input.right = keys.has('ArrowRight')||keys.has('right');heldFire=keys.has('fire');
@@ -40,6 +40,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
       if(start&&(view?.isTruckAt?.(x,y)??(Math.abs(x-truckX)<70&&Math.abs(y-truckY)<45))){pointers.set(event.pointerId,'vehicle');queuedFire=false;}
       if(pointers.get(event.pointerId)==='vehicle'){const target=view?.truckTargetAt?.(x,y)||{x:b.vehicle.x+(x-b.crew.truckX)*b.render.worldScale,z:b.vehicle.z+(y-b.crew.truckY)*b.render.worldScale};input.truckX=target.x;input.truckZ=target.z;return;}
     }
+    if(naval){if(start){gesture.x=event.clientX;gesture.y=event.clientY;gesture.yaw=input.yaw;gesture.elevation=input.elevation;}input.yaw=gesture.yaw+(event.clientX-gesture.x)*ctx.balance.controls.dragDegreesPerPixel*Math.PI/180;input.elevation=gesture.elevation-(event.clientY-gesture.y)*ctx.balance.controls.dragDegreesPerPixel;return;}
     input.x=x;input.y=y;
     applyCanvasGesture(input,ctx.gameId,gesture,ctx.balance,start);
     if(ctx.gameId==='fireRescue'){const point=view?.targetAt?.(input.x,input.y);if(point){input.x=point.x;input.y=point.y;}}
@@ -52,6 +53,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
     cssWidth=box.width;cssHeight=box.height;pixelRatio=dpr;
     const width=Math.max(1,Math.round(box.width*dpr)),height=Math.max(1,Math.round(box.height*dpr));
     if(canvas.width!==width)canvas.width=width;if(canvas.height!==height)canvas.height=height;
+    if(naval){config.width=cssWidth;config.height=cssHeight;scale=1;offsetX=offsetY=0;view?.resize();return;}
     const area=gamePlayArea(canvas,ctx.dialog,controls),fit=fitGameViewport(area.width,area.height,config.width,config.height);
     scale=fit.scale;offsetX=area.x+fit.offsetX;offsetY=area.y+fit.offsetY;
   }
@@ -69,6 +71,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
     }
   }
   try {
+    if(naval){const zone=controls.querySelector('.naval-stick-zone');zone.addEventListener('pointerdown',e=>{e.preventDefault();stickPointer=e.pointerId;stickOrigin={x:e.clientX,y:e.clientY};zone.setPointerCapture(e.pointerId);stick.hidden=false;stick.style.left=e.clientX+'px';stick.style.top=e.clientY+'px';},options);zone.addEventListener('pointermove',e=>{if(e.pointerId!==stickPointer)return;const dx=e.clientX-stickOrigin.x,dz=e.clientY-stickOrigin.y,r=ctx.balance.controls.dialRadius;input.moveX=Math.max(-1,Math.min(1,dx/r));input.moveZ=Math.max(-1,Math.min(1,dz/r));knob.style.transform=`translate(${input.moveX*r}px,${input.moveZ*r}px)`;},options);for(const type of ['pointerup','pointercancel','lostpointercapture'])zone.addEventListener(type,e=>{if(e.pointerId===stickPointer){stickPointer=null;input.moveX=input.moveZ=0;stick.hidden=true;}},options);}
     for(const node of [canvas,controls,ctx.dialog])for(const type of ['contextmenu','selectstart','dragstart'])node.addEventListener(type,event=>event.preventDefault(),options);
     canvas.addEventListener('pointerdown',event=>{
       event.preventDefault(); canvas.setPointerCapture(event.pointerId); pointers.set(event.pointerId,'canvas');if(!naval)queuedFire=true;position(event,true);syncInput();
@@ -128,7 +131,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
           if(ctx.upgradePanel){const panel=ctx.upgradePanel;panel.hidden=!model.choosing;if(model.choosing&&panel.dataset.wave!==String(model.wave)){panel.dataset.wave=model.wave;for(let i=0;i<ctx.upgradeButtons.length;i++){const id=model.choices[i],button=ctx.upgradeButtons[i];button.hidden=!id;if(!id)continue;upgradeCard(button,id,t('minigame.upgradeStack',{name:t('runUpgrade.'+id),rank:model.upgrades[id]+1}),t('runUpgrade.'+id+'.hint'));button.onclick=()=>{model.chooseUpgrade(i);clearInput();panel.hidden=true;statusTime=0;};}}}
           if(ctx.ammoButton){const index=model.ammoIndex;ctx.ammoButton.textContent=t('minigame.ammoSwitch',{ammo:t(ctx.balance.ammo[index].title),count:index===0?t('ammo.unlimited'):model.ammo[index]});}
           if(ctx.fleetMeters){ctx.fleetMeters.player.value=model.lives/model.maxLives;ctx.fleetMeters.enemy.value=model.enemyFleetHp/model.maxEnemyFleet;}
-          if(naval){const fire=controls.querySelector('[data-game-control=fire]');fire.disabled=model.phase!=='aim'||model.ammo[model.ammoIndex]<=0;}
+          if(naval){const fire=controls.querySelector('[data-game-control=fire]');fire.disabled=model.ammo[model.ammoIndex]<=0;}
           if(ctx.turnLabel)ctx.turnLabel.textContent=t(model.phase==='aim'?'minigame.aimTurn':'minigame.enemyTurn');
           statusTime=config.statusIntervalSeconds;
         }
@@ -136,7 +139,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
       } catch { ctx.cancel();ctx.onError?.('reason.gameStart'); }
     }
     frame=requestAnimationFrame(tick);
-    return { dispose, cancel: ctx.cancel, setPaused(value){paused=Boolean(value);clearInput();last=undefined;},get snapshot() { const snapshot=model.snapshot();snapshot.paused=paused;snapshot.viewport={scale,offsetX,offsetY,width:cssWidth/scale,height:cssHeight/scale,modelWidth:config.width,modelHeight:config.height};if(naval){snapshot.canvasHeight=config.height;const project=(x,z)=>view?.projectTarget?.(x,z)||model.screenPoint(x,z);snapshot.aimScreen=project(model.aim.x,model.aim.z);snapshot.enemyScreens=model.enemies.filter(e=>e.active&&e.hp>0).map(e=>({index:e.index,...project(e.x,e.z)}));}if(ctx.gameId==='fireRescue'){const project=(x,y)=>view?.projectTarget?.(x,y)||{x,y};snapshot.flameScreens=model.flames.map(f=>({...project(f.x,f.y),active:f.active,heat:f.heat}));snapshot.rescueScreens=model.rescues.map(r=>({...project(r.x,r.y),rescued:r.rescued,expired:r.expired}));snapshot.truckScreen=view?.truckScreen?.()||{x:ctx.balance.crew.truckX+(model.truck.x-ctx.balance.vehicle.x)/ctx.balance.render.worldScale,y:ctx.balance.crew.truckY+(model.truck.z-ctx.balance.vehicle.z)/ctx.balance.render.worldScale};snapshot.aimScreen=project(model.aim.x,model.aim.y);snapshot.impactScreen=project(model.impact.x,model.impact.y);snapshot.renderMode=view?.mode||'canvas';}if(art.modelArt)snapshot.artModels={...art.modelArt};if(view){snapshot.renderMode=view.mode;snapshot.renderMetrics=view.metrics?.();}return snapshot; } };
+    const session={ dispose, cancel: ctx.cancel, setPaused(value){paused=Boolean(value);clearInput();last=undefined;},get snapshot() { const snapshot=model.snapshot();snapshot.paused=paused;snapshot.viewport={scale,offsetX,offsetY,width:cssWidth/scale,height:cssHeight/scale,modelWidth:config.width,modelHeight:config.height};if(naval){snapshot.canvasHeight=config.height;const project=(x,z)=>view?.projectTarget?.(x,z)||model.screenPoint(x,z);snapshot.aimScreen=project(model.aim.x,model.aim.z);snapshot.enemyScreens=model.enemies.filter(e=>e.active&&e.hp>0).map(e=>({index:e.index,...project(e.x,e.z)}));}if(ctx.gameId==='fireRescue'){const project=(x,y)=>view?.projectTarget?.(x,y)||{x,y};snapshot.flameScreens=model.flames.map(f=>({...project(f.x,f.y),active:f.active,heat:f.heat}));snapshot.rescueScreens=model.rescues.map(r=>({...project(r.x,r.y),rescued:r.rescued,expired:r.expired}));snapshot.truckScreen=view?.truckScreen?.()||{x:ctx.balance.crew.truckX+(model.truck.x-ctx.balance.vehicle.x)/ctx.balance.render.worldScale,y:ctx.balance.crew.truckY+(model.truck.z-ctx.balance.vehicle.z)/ctx.balance.render.worldScale};snapshot.aimScreen=project(model.aim.x,model.aim.y);snapshot.impactScreen=project(model.impact.x,model.impact.y);snapshot.renderMode=view?.mode||'canvas';}if(art.modelArt)snapshot.artModels={...art.modelArt};if(view){snapshot.renderMode=view.mode;snapshot.renderMetrics=view.metrics?.();}return snapshot; } };if(new URLSearchParams(location.search).get('dev')==='1')session.debug={model,view};return session;
   } catch(error) {dispose();throw error;}
 }
 

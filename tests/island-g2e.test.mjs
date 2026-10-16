@@ -62,7 +62,7 @@ test('G2e dragging supplies one target and never fires or consumes ammunition',(
   assert.deepEqual(m.aim,{x:250,z:-30});assert.equal(input.firing,false);assert.equal(m.phase,'aim');assert.deepEqual(m.ammo,ammo);
 });
 test('G2e torpedo follows the selected sea point without elevation or reload; an empty weapon cannot fire',()=>{
-  const m=naval();m.update(.01,{ammoIndex:2,targetX:240,targetZ:45,firing:true});advance(m,.1);assert.equal(m.ball.y,config.navalDuel.shipY);assert.ok(m.ball.z>0);assert.deepEqual([m.ball.targetX,m.ball.targetZ],[240,45]);
+  const m=naval();m.update(.01,{ammoIndex:2,targetX:240,targetZ:45,firing:true});advance(m,.1);assert.equal(m.ball.y,config.navalDuel.shipY-Math.sin(m.ball.sampleTime*config.navalDuel.render.waveSpeed)*config.navalDuel.aim.torpedoBob);assert.ok(m.ball.z>0);assert.deepEqual([m.ball.targetX,m.ball.targetZ],[240,45]);
   const empty=naval();empty.ammo[1]=0;empty.update(.01,{ammoIndex:1,firing:true});assert.equal(empty.phase,'aim');assert.equal(empty.ammoIndex,1);assert.equal(empty.ammo[0],config.navalDuel.levels[0].ammunition[0]);
   const ready=naval(),supply=ready.ammo[2];assert.equal(ready.cooldowns[2],0);ready.update(.01,{ammoIndex:2,firing:true});assert.equal(ready.phase,'shot');assert.equal(ready.ammo[2],supply-1);assert.equal(ready.cooldowns[2],0);
 });

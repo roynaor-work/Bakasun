@@ -1,0 +1,85 @@
+{
+  "part": "g6",
+  "browser": "Chromium / SwiftShader",
+  "physicalPhone": false,
+  "iPhone": false,
+  "phoneFPS": false,
+  "reports": [
+    {
+      "width": 844,
+      "height": 390,
+      "metrics": {
+        "triangles": 7969,
+        "drawCalls": 33,
+        "playerModel": {
+          "requested": true,
+          "loaded": true,
+          "failed": false
+        },
+        "disposed": false,
+        "models": {
+          "requested": 1,
+          "loaded": 1,
+          "failed": 0
+        },
+        "playerLoaded": true,
+        "enemiesLoaded": 0,
+        "playerLength": 11.02,
+        "enemyLengths": [
+          null
+        ],
+        "headings": [
+          1.6105431495156912
+        ]
+      },
+      "worst": {
+        "triangles": 13875,
+        "drawCalls": 50,
+        "playerModel": {
+          "requested": true,
+          "loaded": true,
+          "failed": false
+        },
+        "disposed": false,
+        "models": {
+          "requested": 2,
+          "loaded": 2,
+          "failed": 0
+        },
+        "playerLoaded": true,
+        "enemiesLoaded": 1,
+        "playerLength": 11.02,
+        "enemyLengths": [
+          null,
+          null,
+          11.02,
+          null
+        ],
+        "headings": [
+          1.5777045053693604,
+          1.6753378881659724,
+          1.6768562415561288,
+          3.141592653589793
+        ]
+      },
+      "checks": {
+        "fullWindow": true,
+        "rotation": true,
+        "weapons": true,
+        "firing": true,
+        "torpedo": true,
+        "fallback": true
+      },
+      "errors": [],
+      "outside": [],
+      "shots": [
+        "battle.webp",
+        "weapons.webp",
+        "firing.webp",
+        "torpedo.webp",
+        "victory.webp",
+        "fallback.webp"
+      ]
+    }
+  ]
+}

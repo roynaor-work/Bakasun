@@ -2696,7 +2696,8 @@
           "beam": 0.72,
           "length": 0.78,
           "turrets": 1,
-          "hull": "#ab7858"
+          "hull": "#ab7858",
+          "model": true
         },
         {
           "hp": 1.2,
@@ -2892,8 +2893,8 @@
         "dialRadius": 25
       },
       "render": {
-        "width": 360,
-        "height": 520,
+        "width": 844,
+        "height": 390,
         "dpr": 1,
         "fallbackFrameMs": 32,
         "fallbackSampleFrames": 90,
@@ -2902,9 +2903,9 @@
         "waveSpeed": 1.5,
         "seaSize": 180,
         "camera": [
-          0,
-          30,
-          18
+          -28,
+          19,
+          24
         ],
         "lookAt": [
           0,
@@ -2916,9 +2917,9 @@
         "playerScale": 1.45,
         "fogNear": 48,
         "fogFar": 130,
-        "sky": "#bf9e99",
-        "sea": "#103e59",
-        "sun": "#ffdd9c",
+        "sky": "#a8ddf2",
+        "sea": "#238fc4",
+        "sun": "#fff2ce",
         "hull": "#237f91",
         "enemy": "#bd615b",
         "deck": "#e9cba0",
@@ -2935,7 +2936,13 @@
         "hemisphereIntensity": 1.35,
         "sunIntensity": 1.8,
         "enemyBarWidth": 34,
-        "enemyLabelStep": 16
+        "enemyLabelStep": 16,
+        "island": "#73996e",
+        "rock": "#b5b5a5",
+        "cloud": "#ffffff",
+        "cameraEase": 3.2,
+        "maxTriangles": 90000,
+        "maxDrawCalls": 70
       },
       "combat": {
         "heavySpeed": 0.85,
@@ -2978,7 +2985,31 @@
           -2.1
         ]
       },
-      "requiresBuilding": "harbor"
+      "requiresBuilding": "harbor",
+      "movement": {
+        "speed": 32,
+        "turnSpeed": 1.4,
+        "minX": 20,
+        "maxX": 160,
+        "minZ": -110,
+        "maxZ": 110
+      },
+      "aim": {
+        "minElevation": 5,
+        "maxElevation": 65,
+        "defaultElevation": 35,
+        "minRange": 80,
+        "rangePerDegree": 5.333333333333333,
+        "sway": {
+          "yaw": 0.018,
+          "elevation": 0.65,
+          "frequency": 1.3
+        },
+        "previewFraction": 0.28,
+        "previewSegments": 12,
+        "torpedoSecondsMultiplier": 1.8,
+        "torpedoBob": 0.75
+      }
     },
     "art": {
       "starSize": 2,
