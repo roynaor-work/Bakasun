@@ -2,7 +2,7 @@ import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 
-export function createSoccerView({canvas,config,onAsset=()=>{},onContextLost=()=>{}}) {
+export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onContextLost=()=>{}}) {
   const teamShirtColor=new T.Color(config.team.colors[0]);
   const renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,config.view.maxPixelRatio));renderer.outputColorSpace=T.SRGBColorSpace;
@@ -87,8 +87,8 @@ export function createSoccerView({canvas,config,onAsset=()=>{},onContextLost=()=
     assetStats={triangles,meshes,sixCharacterTriangles:triangles*6};assetStatus='ready';onAsset('ready');
   }).catch(()=>{if(!disposed){assetStatus='fallback';onAsset('fallback');}});
   function disposeObject(root){root.traverse(o=>{o.geometry?.dispose();for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[]){m.map?.dispose();m.dispose();}});}
-  const observer=new ResizeObserver(resize);observer.observe(canvas);
-  function resize(){if(disposed)return;const rect=canvas.getBoundingClientRect();lastWidth=rect.width;lastHeight=rect.height;renderer.setSize(lastWidth,lastHeight,false);camera.aspect=lastWidth/Math.max(1,lastHeight);camera.updateProjectionMatrix();}
+  const observer=new ResizeObserver(resize);for(const node of [canvas,...layoutNodes])observer.observe(node);
+  function resize(){if(disposed)return;const rect=canvas.getBoundingClientRect(),area=playArea?.()||{x:0,y:0,width:rect.width,height:rect.height};lastWidth=area.width;lastHeight=area.height;renderer.setSize(rect.width,rect.height,false);renderer.setViewport(area.x,rect.height-area.y-area.height,area.width,area.height);camera.aspect=lastWidth/Math.max(1,lastHeight);camera.updateProjectionMatrix();}
   resize();
   function qualitySample(frameMs,dt) {
     if(!Number.isFinite(frameMs)||frameMs<=0)return;frameSum+=frameMs;frameCount++;qualitySeconds+=dt;

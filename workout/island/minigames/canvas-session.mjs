@@ -1,8 +1,11 @@
-import {upgradeCard} from './icons.mjs?v=task016-20261016-1';
-import {loadOptionalArt} from './model-art.mjs?v=task016-20261016-1';
-import {createGameArt} from './art.mjs?v=task016-20261016-1';
+import {upgradeCard} from './icons.mjs?v=g5-20261016-1';
+import {loadOptionalArt} from './model-art.mjs?v=g5-20261016-1';
+import {createGameArt} from './art.mjs?v=g5-20261016-1';
+import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=g5-20261016-1';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
+  // Each adapter keeps its model coordinates; viewport changes never mutate shared game data.
+  ctx={...ctx,config:{...ctx.config}};
   const { canvas, controls, status, config, t } = ctx;
   const model = createModel(ctx);
   const paint = canvas.getContext('2d');
@@ -20,7 +23,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
   const pointers = new Map(), keys = new Set();
   let frame, last, disposed = false, observer, scale = 1, offsetX = 0, offsetY = 0, statusTime=0, samples=0, totalFrameMs=0, lowQuality=false, paused=false, queuedFire=false, queuedNova=false, queuedAmmo=false, heldFire=false, cssWidth=0,cssHeight=0,pixelRatio=1;
   if(ctx.gameId==='alienDefense')void loadOptionalArt(art,ctx.balance,()=>disposed);
-  const clearInput = () => { pointers.clear(); keys.clear(); queuedNova=queuedAmmo=queuedFire=heldFire=input.firing=input.left=input.right=input.nova=input.ammo=input.charge=input.refill=input.rescue=input.spread=queuedSpread=false;input.truckX=input.truckZ=undefined; };
+  const clearInput = () => { pointers.clear(); keys.clear(); queuedNova=queuedAmmo=queuedFire=heldFire=input.firing=input.left=input.right=input.nova=input.ammo=input.charge=input.refill=input.rescue=input.spread=queuedSpread=false;input.x=input.y=input.truckX=input.truckZ=input.targetX=input.targetZ=input.ammoIndex=undefined; };
   function syncInput() {
     input.charge=keys.has('charge');input.refill=keys.has('refill');input.rescue=keys.has('rescue');
     input.left = keys.has('ArrowLeft')||keys.has('left');input.right = keys.has('ArrowRight')||keys.has('right');heldFire=keys.has('fire');
@@ -46,12 +49,11 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
   function resize() {
     if(disposed)return;
     const box = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, lowQuality?config.lowDpr:config.maxDpr);
-    if(naval&&box.width>0){config.height=config.width*box.height/box.width;view?.resize?.();}
     cssWidth=box.width;cssHeight=box.height;pixelRatio=dpr;
     const width=Math.max(1,Math.round(box.width*dpr)),height=Math.max(1,Math.round(box.height*dpr));
     if(canvas.width!==width)canvas.width=width;if(canvas.height!==height)canvas.height=height;
-    scale = Math.min(box.width/config.width,box.height/config.height);
-    offsetX = (box.width-config.width*scale)/2; offsetY = (box.height-config.height*scale)/2;
+    const area=gamePlayArea(canvas,ctx.dialog,controls),fit=fitGameViewport(area.width,area.height,config.width,config.height);
+    scale=fit.scale;offsetX=area.x+fit.offsetX;offsetY=area.y+fit.offsetY;
   }
   function dispose() {
     if (disposed) return;
@@ -94,7 +96,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
     ctx.dialog.addEventListener('keydown',key,options);ctx.dialog.addEventListener('keyup',key,options);
     window.addEventListener('blur',clearInput,options);
     document.addEventListener('visibilitychange',()=>{clearInput();last=undefined;},options);
-    observer = new ResizeObserver(resize);observer.observe(canvas);resize();
+    observer = new ResizeObserver(resize);for(const node of [canvas,controls,status])observer.observe(node);resize();
     function tick(time) {
       if (disposed) return;
       const dt = last === undefined || document.hidden || paused ? 0 : Math.min(config.maxFrameSeconds,(time-last)/1000);
@@ -102,7 +104,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
       if(view&&last!==undefined&&!document.hidden&&!paused){qualitySamples++;qualityMs+=time-last;if(qualitySamples>=ctx.balance.render.fallbackSampleFrames){if(qualityMs/qualitySamples>ctx.balance.render.fallbackFrameMs){if(!lowQuality){lowQuality=quality.low=true;view.degrade();resize();}else view.degrade(true);}qualitySamples=qualityMs=0;}}
       last = time;
       try {
-        input.firing=heldFire||queuedFire;input.nova=queuedNova;input.spread=queuedSpread;input.ammo=queuedAmmo;model.update(dt,input);if(naval&&input.ammoIndex!==undefined)input.ammoIndex=model.ammoIndex;if(dt>0)queuedFire=queuedNova=queuedAmmo=queuedSpread=false;
+        input.firing=heldFire||queuedFire;input.nova=queuedNova;input.spread=queuedSpread;input.ammo=queuedAmmo;if(!paused&&!document.hidden)model.update(dt,input);if(naval&&input.ammoIndex!==undefined)input.ammoIndex=model.ammoIndex;if(dt>0)queuedFire=queuedNova=queuedAmmo=queuedSpread=false;
         if (model.result) {
           const finished = ctx.finish(model.result);
           if (!finished.ok) { ctx.cancel();ctx.onError?.(finished.reason); }
@@ -134,7 +136,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
       } catch { ctx.cancel();ctx.onError?.('reason.gameStart'); }
     }
     frame=requestAnimationFrame(tick);
-    return { dispose, cancel: ctx.cancel, setPaused(value){paused=value;clearInput();last=undefined;},get snapshot() { const snapshot=model.snapshot();if(naval){snapshot.canvasHeight=config.height;const project=(x,z)=>view?.projectTarget?.(x,z)||model.screenPoint(x,z);snapshot.aimScreen=project(model.aim.x,model.aim.z);snapshot.enemyScreens=model.enemies.filter(e=>e.active&&e.hp>0).map(e=>({index:e.index,...project(e.x,e.z)}));}if(ctx.gameId==='fireRescue'){const project=(x,y)=>view?.projectTarget?.(x,y)||{x,y};snapshot.flameScreens=model.flames.map(f=>({...project(f.x,f.y),active:f.active,heat:f.heat}));snapshot.rescueScreens=model.rescues.map(r=>({...project(r.x,r.y),rescued:r.rescued,expired:r.expired}));snapshot.truckScreen=view?.truckScreen?.()||{x:ctx.balance.crew.truckX+(model.truck.x-ctx.balance.vehicle.x)/ctx.balance.render.worldScale,y:ctx.balance.crew.truckY+(model.truck.z-ctx.balance.vehicle.z)/ctx.balance.render.worldScale};snapshot.aimScreen=project(model.aim.x,model.aim.y);snapshot.impactScreen=project(model.impact.x,model.impact.y);snapshot.renderMode=view?.mode||'canvas';}if(art.modelArt)snapshot.artModels={...art.modelArt};if(view){snapshot.renderMode=view.mode;snapshot.renderMetrics=view.metrics?.();}return snapshot; } };
+    return { dispose, cancel: ctx.cancel, setPaused(value){paused=Boolean(value);clearInput();last=undefined;},get snapshot() { const snapshot=model.snapshot();snapshot.paused=paused;snapshot.viewport={scale,offsetX,offsetY,width:cssWidth/scale,height:cssHeight/scale,modelWidth:config.width,modelHeight:config.height};if(naval){snapshot.canvasHeight=config.height;const project=(x,z)=>view?.projectTarget?.(x,z)||model.screenPoint(x,z);snapshot.aimScreen=project(model.aim.x,model.aim.z);snapshot.enemyScreens=model.enemies.filter(e=>e.active&&e.hp>0).map(e=>({index:e.index,...project(e.x,e.z)}));}if(ctx.gameId==='fireRescue'){const project=(x,y)=>view?.projectTarget?.(x,y)||{x,y};snapshot.flameScreens=model.flames.map(f=>({...project(f.x,f.y),active:f.active,heat:f.heat}));snapshot.rescueScreens=model.rescues.map(r=>({...project(r.x,r.y),rescued:r.rescued,expired:r.expired}));snapshot.truckScreen=view?.truckScreen?.()||{x:ctx.balance.crew.truckX+(model.truck.x-ctx.balance.vehicle.x)/ctx.balance.render.worldScale,y:ctx.balance.crew.truckY+(model.truck.z-ctx.balance.vehicle.z)/ctx.balance.render.worldScale};snapshot.aimScreen=project(model.aim.x,model.aim.y);snapshot.impactScreen=project(model.impact.x,model.impact.y);snapshot.renderMode=view?.mode||'canvas';}if(art.modelArt)snapshot.artModels={...art.modelArt};if(view){snapshot.renderMode=view.mode;snapshot.renderMetrics=view.metrics?.();}return snapshot; } };
   } catch(error) {dispose();throw error;}
 }
 

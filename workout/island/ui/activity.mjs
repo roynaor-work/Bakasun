@@ -1,9 +1,11 @@
-import {createSound} from '../minigames/sound.mjs?v=task016-20261016-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=task016-20261016-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=task016-20261016-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=task016-20261016-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=task016-20261016-1';
-import {gameContext} from '../minigames/context.mjs?v=task016-20261016-1';
+import {createSound} from '../minigames/sound.mjs?v=g5-20261016-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g5-20261016-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g5-20261016-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=g5-20261016-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=g5-20261016-1';
+import {gameContext} from '../minigames/context.mjs?v=g5-20261016-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g5-20261016-1';
+import {GameNavigation,GameShell} from './game-shell.mjs?v=g5-20261016-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -11,6 +13,7 @@ const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,t
 export class ActivityInterface {
   constructor({ui,engine,activity,data,t,now=Date.now}) {
     Object.assign(this,{ui,engine,activity,data,t,now});this.current=null;this.closing=false;this.eventOpen=false;
+    this.navigation=new GameNavigation({onGameBack:()=>this.shell?.pause('exit'),onMenuBack:()=>this.ui.closeModal()});
     let storage;try{storage=window.localStorage;}catch{}
     this.sound=createSound({storage});this.soundEvents=new AbortController();
     document.addEventListener('pointerdown',event=>{this.sound.unlock();if(event.target.closest('button')&&ui.modalRoot.contains(event.target))this.sound.play('button');},{capture:true,signal:this.soundEvents.signal});
@@ -29,7 +32,9 @@ export class ActivityInterface {
   }
   cleanup(eventId) {
     this.closing=true;const current=this.current;this.current=null;current?.cancel();
+    this.shell?.dispose();this.shell=null;
     if(eventId)this.activity.cancel(eventId);
+    if(!this.switching)this.navigation.leave();
     this.ui.view.paused=false;this.closing=false;
   }
   soundToggle(){
@@ -38,12 +43,16 @@ export class ActivityInterface {
   }
   saveAlienUpgrades(ranks){this.engine.state.alienUpgrades={...ranks};const saved=this.engine.save();if(!saved.ok)this.ui.toast(saved.reason);}
   modal(title,subtitle,eventId) {
-    const dialog=this.ui.openModal(title,subtitle);
+    this.switching=true;const dialog=this.ui.openModal(title,subtitle);this.switching=false;
+    this.navigation.menu();
     dialog.append(this.soundToggle());
     this.ui.previousFocus=this.ui.cityToggle;
     this.ui.modalCleanup=()=>this.cleanup(eventId);return dialog;
   }
   enabledGames(){return [...this.engine.registry.minigames.values()].filter(g=>this.data.featureFlags.minigames&&(!g.featureFlag||this.data.featureFlags[g.featureFlag]));}
+  availability(id){return gameAvailability(this.engine.state,this.data.config,id);}
+  requireBuilding(id){const available=this.availability(id);if(available.ok)return false;this.ui.closeModal();this.ui.openBuildingCatalog(available.buildingId);return true;}
+  playButton(id,action,play){const available=this.availability(id);return button(this.t(available.ok?'minigame.play':available.reason),action,()=>available.ok?play():this.requireBuilding(id),'primary-button');}
   teamLabel(){const team=this.engine.state.team;return this.t('minigame.soccer.teamRank',{team:this.t(team.nameId),wins:team.wins,rank:this.t(this.data.config.minigames.soccer.teamRanks[team.rank].title)});}
   team(){
     const dialog=this.modal('minigame.soccer.teamCard','minigame.soccer.stagesHint');dialog.dataset.team='soccer';
@@ -58,9 +67,9 @@ export class ActivityInterface {
       card.append(el('h3','',`${game.icon} ${this.t(game.title)}`),el('p','',this.t('minigame.level',{level,difficulty:context.level})),el('p','',this.t('minigame.power',{power:Math.round(context.power*this.data.config.minigames.percentScale)})),el('p','',this.t('minigame.best',{score:this.engine.state.highScores[game.id]||0})));
       if(game.id==='soccer')card.append(el('p','team-rank',this.teamLabel()));
       const actions=el('div','game-card-actions');
-      actions.append(button(this.t('minigame.play'),'game-play',()=>this.stages(game.id), 'primary-button'),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
-      const available=game.availability?.(this.engine.state);
-      if(available&&!available.ok){actions.querySelector('[data-action=game-play]').disabled=true;card.append(el('p','game-locked',this.t(available.reason)));}
+      actions.append(this.playButton(game.id,'game-play',()=>this.stages(game.id)),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
+      const available=this.availability(game.id);
+      if(!available.ok){card.dataset.locked='true';card.append(el('p','game-locked',this.t(available.reason)));}
       const next=this.data.config.minigameLevels[game.id]?.[level];
       const upgrade=button(next?this.t('minigame.upgrade',{cost:next.cost}):this.t('app.maxLevel'),'game-upgrade',()=>{const result=this.activity.upgrade(game.id);if(result.ok)this.menu();else this.ui.result(result);});
       upgrade.disabled=!next;actions.append(upgrade,button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(game.id)));card.append(actions);cards.append(card);
@@ -80,9 +89,10 @@ export class ActivityInterface {
       if(offer.stars>this.engine.state.minigameProgress[id].stars.reduce((sum,n)=>sum+n,0))row.append(el('p','',this.t('equipment.locked',{stars:offer.stars})));
       list.append(row);
     }
-    dialog.append(list,button(this.t('minigame.play'),'equipment-play',()=>this.stages(id),'primary-button'));
+    dialog.append(list,this.playButton(id,'equipment-play',()=>this.stages(id)));
   }
   stages(id) {
+    if(this.requireBuilding(id))return;
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
     const dialog=this.modal(game.title,'minigame.progressHint');dialog.dataset.stageMap=id;
     dialog.append(el('p','',this.t('minigame.totalStars',{stars:p.stars.reduce((sum,n)=>sum+n,0)})));
@@ -105,13 +115,15 @@ export class ActivityInterface {
   helpLines(id) {const lines=el('div','game-help-lines');for(let i=1;i<=3;i++)lines.append(el('p','',this.t(`minigame.${id}.help.${i}`)));return lines;}
   intro(id,eventId,stage) {
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
-    dialog.append(this.helpLines(id),button(this.t('minigame.understood'),'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage);},'primary-button'),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
+    dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
     this.narrateHelp(id);
   }
   start(id,eventId,stage) {
+    if(this.requireBuilding(id))return;
     if(!this.engine.state.instructionsSeen.includes(id))this.intro(id,eventId,stage);else this.launch(id,eventId,stage);
   }
   launch(id,eventId,stageNumber) {
+    if(this.requireBuilding(id))return;
     // Switching from instructions must retain the event's playing state.
     this.ui.modalCleanup=null;
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
@@ -119,7 +131,7 @@ export class ActivityInterface {
     const close=dialog.querySelector('[data-action="close-modal"]');close.remove();
     const header=el('header','game-header'),heading=dialog.querySelector('h2');
     dialog.querySelector('.modal-subtitle').remove();
-    const exit=button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal());header.append(heading,dialog.querySelector('.sound-toggle'),exit);
+    const pause=button(this.t('game.pause'),'game-pause',()=>{},'secondary-button game-pause');pause.setAttribute('aria-label',this.t('game.pause'));header.append(heading,dialog.querySelector('.sound-toggle'),pause);
     const status=el('p','game-status');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
     const stage=el('div','game-stage'),canvas=el('canvas','minigame-canvas');canvas.setAttribute('aria-label',this.t(game.title));canvas.tabIndex=0;stage.append(canvas);
     const controls=el('div','game-controls'),balance=this.data.config.minigames[id];
@@ -142,11 +154,14 @@ export class ActivityInterface {
     if(id==='fireRescue')controls.querySelector('[data-game-control=rescue]').disabled=context.level<3;
     heading.textContent=this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
     dialog.dataset.stage=context.level;
+    this.navigation.game();
+    this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal()});
     const eventBonuses=eventId?this.activity.bonuses():{};
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onFireSummary:summary=>{fireSummary=summary;},onError:reason=>this.ui.toast(reason),
       onFinish:result=>{
         this.current=null;
+        this.shell?.dispose();this.shell=null;
         if(result.cancelled){if(!this.closing)this.ui.closeModal();return;}
         if(eventId)this.activity.resolve(eventId,result);
         this.showResult(id,eventId,result,fireSummary);
@@ -154,12 +169,11 @@ export class ActivityInterface {
     });
     if(!response.ok){this.ui.closeModal();this.ui.result(response);return;}
     this.current=response;
+    this.shell.bind(response.session);
     if(id==='navalDuel')status.textContent=this.t('minigame.aimCircle');
-    // The large exit button remains reachable during help and throughout play.
     const help=button(this.t('minigame.help'),'game-help',()=>{
-      this.current?.session.setPaused(true);
-      const sheet=el('div','game-help-sheet');sheet.append(this.helpLines(id),button(this.t('minigame.understood'),'game-understood',()=>{sheet.remove();this.current?.session.setPaused(false);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
-      stage.append(sheet);this.narrateHelp(id);
+      const content=el('div','game-help-lines');content.append(this.helpLines(id),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
+      this.shell?.pause('help',content);this.narrateHelp(id);
     });controls.append(help);canvas.focus();
   }
   showResult(id,eventId,result,fireSummary) {
@@ -195,7 +209,7 @@ export class ActivityInterface {
     const type=this.data.config.events.types[event.typeId],seconds=Math.max(0,Math.ceil((event.warningUntil-this.now())/this.data.config.events.millisecondsPerSecond));
     this.indicator.textContent=`${type.icon} ${this.t(type.titleId)}${event.phase==='warning'?` · ${this.t('event.shortTime',{seconds})}`:''}`;
     const countdown=event.phase==='warning'?this.t('event.warningTime',{seconds}):this.t('event.ready');
-    const signature=JSON.stringify([event,this.eventOpen,this.engine.state.events.repairs]);
+    const signature=JSON.stringify([event,this.eventOpen,this.engine.state.events.repairs,this.availability(type.gameId)]);
     if(signature===this.signature){this.countdown.textContent=countdown;return;}this.signature=signature;
     this.indicator.setAttribute('aria-expanded',String(this.eventOpen));this.details.hidden=!this.eventOpen;
     this.countdown=el('p','',countdown);
@@ -207,7 +221,9 @@ export class ActivityInterface {
       this.eventOpen=false;this.signature=null;this.render();
     }));
     for(const action of this.data.config.events.actions){
-      const b=button(this.t(action.labelId),`event-${action.id}`,()=>{
+      const available=this.availability(type.gameId);
+      const b=button(this.t(action.id==='play'&&!available.ok?available.reason:action.labelId),`event-${action.id}`,()=>{
+        if(action.id==='play'&&!available.ok){this.requireBuilding(type.gameId);return;}
         const result=this.activity.choose(action.id);if(!result.ok){this.ui.result(result);return;}
         if(result.gameId){this.eventOpen=false;this.start(result.gameId,result.eventId);}
         else this.ui.toast(result.deferred?'event.deferred':'event.handled');this.render();
@@ -216,10 +232,17 @@ export class ActivityInterface {
     }
   }
   decorateInfo(instance,actions) {
-    if(instance.typeId==='soccer'&&this.data.featureFlags.soccer)actions.append(button(this.t('minigame.soccer.play'),'soccer-building-play',()=>this.stages('soccer'),'primary-button'));
+    for(const game of this.enabledGames())if(this.data.config.minigames[game.id].requiresBuilding===instance.typeId)actions.append(button(this.t('minigame.soccer.play'),`${instance.typeId}-building-play`,()=>this.stages(game.id),'primary-button'));
+    if(instance.typeId==='cityHall'){
+      const metrics=el('div','city-hall-metrics');
+      const values=this.engine.metrics();
+      for(const metric of this.engine.registry.metrics.values()){const value=values[metric.id];if(value!==undefined)metrics.append(el('p','',`${metric.icon} ${this.t(metric.title)}: ${Math.round(value.value??value)}`));}
+      this.ui.info.append(metrics,el('p','team-rank',this.teamLabel()));
+      actions.append(button(this.t('minigame.open'),'city-hall-games',()=>this.menu(),'primary-button'),button(this.t('minigame.soccer.teamCard'),'city-hall-team',()=>this.team()));
+    }
     if(!(this.engine.state.events.repairs[instance.id]>this.now()))return;
     this.ui.info.append(el('p','repair-status',this.t('event.repair')));
     actions.append(button(this.t('event.repairNow',{cost:this.data.config.events.repairCost}),'repair-building',()=>{const result=this.activity.repair(instance.id);if(result.ok){this.ui.drawInfo();this.ui.toast('event.repaired');}else this.ui.result(result);}));
   }
-  dispose(){this.soundEvents.abort();this.sound.dispose();this.cleanup();this.unsubscribe();this.unsubscribeEngine();this.panel.remove();this.openButton.remove();this.teamButton.remove();}
+  dispose(){this.soundEvents.abort();this.cleanup();this.navigation.dispose();this.sound.dispose();this.unsubscribe();this.unsubscribeEngine();this.panel.remove();this.openButton.remove();this.teamButton.remove();}
 }

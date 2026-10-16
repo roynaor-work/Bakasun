@@ -1,8 +1,9 @@
-import {createSoccer} from './soccer.mjs?v=task016-20261016-1';
-import {createSoccerView} from './soccer-view.mjs?v=task016-20261016-1';
-import {createControls} from './controls.mjs?v=task016-20261016-1';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=task016-20261016-1';
-import {gameContext} from './context.mjs?v=task016-20261016-1';
+import {createSoccer} from './soccer.mjs?v=g5-20261016-1';
+import {createSoccerView} from './soccer-view.mjs?v=g5-20261016-1';
+import {createControls} from './controls.mjs?v=g5-20261016-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=g5-20261016-1';
+import {gameContext} from './context.mjs?v=g5-20261016-1';
+import {gamePlayArea} from '../ui/game-shell.mjs?v=g5-20261016-1';
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
@@ -25,19 +26,17 @@ export function startSoccer(ctx) {
     const actions=element('div','soccer-actions'),shoot=element('button','primary-button',t('minigame.soccer.shoot')),swap=element('button','secondary-button',t('minigame.soccer.switch'));
     shoot.id='shoot';swap.id='switch';shoot.type=swap.type='button';shoot.dataset.gameControl='shoot';swap.dataset.gameControl='switch';
     const hand=element('button','secondary-button',t('minigame.soccer.hand'));hand.type='button';hand.dataset.action='soccer-hand';hand.setAttribute('aria-pressed',String(!handed));
-    const pause=element('button','secondary-button',t('minigame.soccer.pause'));pause.type='button';pause.dataset.action='soccer-pause';
     const power=element('progress','soccer-power');power.max=balance.physics.chargeSeconds;power.value=0;power.setAttribute('aria-label',t('minigame.soccer.charging'));
-    actions.append(power,shoot,swap);controls.classList.add('soccer-controls');controls.append(stick,actions,hand,pause);
+    actions.append(power,shoot,swap);controls.classList.add('soccer-controls');controls.append(stick,actions,hand);
     const roster=element('div','soccer-roster'),home=element('span','soccer-team-name',t(team.nameId)),away=element('span','soccer-team-name',t(opponent.nameId));
     for(const [badge,identity]of [[home,team],[away,opponent]]){badge.style.borderColor=identity.colors[0];badge.style.backgroundColor=identity.colors[1];}
     roster.append(home,away,element('span','soccer-player-names',t('minigame.soccer.roster',{players:team.players.map(p=>t(p.nameId)).join(' · ')})));
     status.after(roster);canvas.classList.add('soccer-canvas');
     input=createControls({root:controls,config:balance.controls,onCancel:()=>model.clearInput()});input.setHanded(handed);input.setEnabled(true);
     hand.addEventListener('click',()=>{handed=!handed;input.setHanded(handed);hand.setAttribute('aria-pressed',String(!handed));canvas.focus();},options);
-    pause.addEventListener('click',()=>{setPaused(!paused);pause.textContent=t(paused?'minigame.soccer.resume':'minigame.soccer.pause');canvas.focus();},options);
     document.addEventListener('visibilitychange',()=>{last=0;input.setEnabled(!document.hidden&&!paused);model.clearInput();},options);
     window.addEventListener('pagehide',()=>ctx.cancel(),options);
-    view=createSoccerView({canvas,config:viewConfig,onContextLost:()=>{if(!disposed){ctx.onError?.('minigame.soccer.webglError');ctx.cancel();}}});
+    view=createSoccerView({canvas,config:viewConfig,layoutNodes:[controls,status,roster],playArea:()=>gamePlayArea(canvas,ctx.dialog,controls),onContextLost:()=>{if(!disposed){ctx.onError?.('minigame.soccer.webglError');ctx.cancel();}}});
     function updateHud(){
       const s=model.getState();status.textContent=t('minigame.soccer.scoreboard',{team:t(team.nameId),opponent:t(opponent.nameId),goalsFor:s.score[0],goalsAgainst:s.score[1],half:t(s.half===1?'minigame.soccer.half1':'minigame.soccer.half2'),seconds:Math.max(0,Math.ceil(balance.match.halfSeconds-s.halfElapsed))});power.value=s.charge;
     }

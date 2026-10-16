@@ -29,9 +29,9 @@ function finishTutorial(engine) {
 
 test('island bundled data loads through local file URLs and joins balance values for the view', () => {
   assert.ok(requested.every(url => url.startsWith('file:')));
-  assert.equal(base.buildings.filter(b => !b.locked).length, 18);
+  assert.equal(base.buildings.filter(b => !b.locked).length, 20);
   assert.equal(base.buildings.find(b => b.id === 'house').cost, base.config.buildings.house.cost);
-  assert.deepEqual(base.buildings.find(b => b.id === 'soccer').footprint, [4, 3]);
+  assert.deepEqual(base.buildings.find(b => b.id === 'soccer').footprint, [3, 2]);
   assert.equal(base.tutorial.steps.length, 5);
   assert.equal(base.episodes.length, 1);
 });
@@ -48,10 +48,10 @@ test('island first save has seed access roads, shared money, four resources and 
   const { engine } = fixture();
   assert.equal(engine.state.money, base.config.startingMoney);
   assert.deepEqual(engine.state.resources, base.config.startingResources);
-  assert.ok(engine.state.buildings.every(b => b.typeId === 'road'));
+  assert.ok(engine.state.buildings.every(b => ['road','cityHall'].includes(b.typeId)));
   assert.equal(engine.state.avatar.created, false);
   assert.equal(engine.state.world.size, 16);
-  assert.equal(engine.state.version, 8);
+  assert.equal(engine.state.version, 9);
 });
 
 test('island character choices persist and unlisted choices do not replace the avatar', () => {

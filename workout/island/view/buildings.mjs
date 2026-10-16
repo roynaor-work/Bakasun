@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import { primitive as part, material, makeTree } from './environment.mjs?v=task016-20261016-1';
-import { batchMeshes } from './batch.mjs?v=task016-20261016-1';
+import { primitive as part, material, makeTree } from './environment.mjs?v=g5-20261016-1';
+import { batchMeshes } from './batch.mjs?v=g5-20261016-1';
 
 // A visual kind is an independent extension point. Building IDs never select
 // geometry; two data records can share a visual, or register their own renderer.
@@ -254,6 +254,21 @@ registerBuildingVisual('house',house);
 registerBuildingVisual('factory',factory);
 registerBuildingVisual('farm',farm);
 registerBuildingVisual('harbor',harbor);
+registerBuildingVisual('cityHall',(g,v,w,d,h)=>{
+  base(g,w,d);block(g,v.color,[0,h*.38,0],[w*.8,h*.7,d*.7]);
+  roof(g,v.roofColor,w*.94,d*.86,h*.74,.28);
+  for(const x of [-w*.28,0,w*.28])block(g,C.white,[x,h*.3,d*.4],[.08,h*.56,.09]);
+  block(g,C.wood,[0,.25,d*.36],[.2,.4,.05]);
+  block(g,v.roofColor,[0,h+.18,0],[.04,.5,.04]);block(g,C.white,[.13,h+.32,0],[.26,.17,.035]);
+});
+registerBuildingVisual('airbase',(g,v,w,d,h)=>{
+  base(g,w,d,'#6d8390');block(g,C.cream,[0,.12,d*.16],[w*.85,.025,.045]);
+  block(g,v.color,[-w*.18,h*.35,-d*.12],[w*.48,h*.7,d*.55]);
+  roof(g,v.roofColor,w*.54,d*.61,h*.7,.25);
+  block(g,'#355464',[-w*.18,h*.22,d*.17],[w*.36,h*.42,.04]);
+  block(g,v.color,[w*.3,h*.55,-d*.25],[w*.18,h*1.1,d*.2]);
+  block(g,C.glass,[w*.3,h*1.05,-d*.25],[w*.25,.2,d*.27]);
+});
 registerBuildingVisual('park',park);
 registerBuildingVisual('waterTower',waterTower);
 registerBuildingVisual('road',(g,v,w,d)=>{base(g,w,d,'#c2b79d');block(g,v.color,[0,.08,0],[w*.88,.075,d*.88]);for(const x of [-.22,.22])block(g,v.roofColor,[x,.12,0],[.17,.01,.035]);});

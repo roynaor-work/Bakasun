@@ -54,7 +54,7 @@ for(const version of [1,2,3]) test(`G1d old v${version} cities retain three gran
   state.buildings.push({id:'home',typeId:'house',x:0,z:4,level:4});
   const result=migrateSave(state,data,createRegistry(data));
   assert.equal(result.ok,true);assert.equal(result.state.version,CURRENT_VERSION);
-  assert.deepEqual(result.state.buildings,state.buildings);
+  assert.deepEqual(result.state.buildings.filter(b=>b.typeId!=='cityHall'),state.buildings);
 });
 test('G1d model slots and Hebrew names reach runtime without changing balance',()=>{
   for(const row of content) {

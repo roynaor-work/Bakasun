@@ -1,4 +1,4 @@
-import { levelValue, population } from './metrics.mjs?v=task016-20261016-1';
+import { levelValue, population } from './metrics.mjs?v=g5-20261016-1';
 
 // These checks apply only to a new instance. Saves, undo and moves keep the
 // existing city intact, including cities built before limits were introduced.
@@ -76,6 +76,7 @@ export function validatePlacement(state, registry, typeId, x, z, ignoreId, flags
 export function canRemove(state, registry, id) {
   const building = state.buildings.find(row => row.id === id);
   if (!building) return { ok: false, reason: 'reason.invalid' };
+  if (registry.buildings.get(building.typeId)?.removable===false) return {ok:false,reason:'reason.cityHallPermanent'};
   if (registry.buildings.get(building.typeId)?.isRoad) {
     const others = state.buildings.filter(row => row.id !== id);
     const roads = others.filter(row => registry.buildings.get(row.typeId)?.isRoad);

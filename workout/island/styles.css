@@ -112,3 +112,61 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .game-locked{color:#f4c76d}.team-rank{font-weight:700}
 @media(min-width:700px){.soccer-controls{grid-template-columns:112px minmax(180px,360px) auto auto;justify-content:center}.soccer-joystick{grid-row:auto}.soccer-controls [data-action="game-help"]{grid-column:auto}}
 .soccer-roster{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;align-items:center}.soccer-team-name{display:inline-block;border-inline-start:6px solid;padding:2px 6px;border-radius:4px;color:#163744;font-weight:700}.soccer-player-names{flex-basis:100%}
+
+/* G5: the canvas occupies the window; HUD and controls float over its safe play area. */
+.modal-overlay:has(.game-screen){padding:0;display:block;background:#103e59}
+.game-screen.game-screen{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;display:block;overflow:hidden;background:#103e59;color:#effcff}
+.game-screen:fullscreen{width:100%;height:100%;background:#103e59}
+.game-screen .game-stage.game-stage{position:absolute;inset:0;width:100%;height:100%;border-radius:0;overflow:hidden;box-shadow:none}
+.game-screen .game-header.game-header{position:absolute;top:max(8px,env(safe-area-inset-top));left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));z-index:3;min-height:56px;padding-inline-end:108px;gap:6px}
+.game-screen .game-header h2{font-size:13px;max-width:44%;text-shadow:0 1px 3px #000}
+.game-screen .game-header .sound-toggle{min-width:56px;min-height:56px;margin-inline-start:auto;font-size:11px;padding:5px;background:#e5f3f0;color:#173d54}
+.game-screen .game-header .game-pause{position:fixed;top:max(8px,env(safe-area-inset-top));left:max(8px,env(safe-area-inset-left));z-index:10;min-width:100px;min-height:56px;padding:8px;font-size:16px;background:#ffe3a3;color:#173d54}
+.game-screen .game-status{position:absolute;top:calc(max(8px,env(safe-area-inset-top)) + 64px);left:8px;right:8px;z-index:2;color:#fff;text-shadow:0 1px 3px #000;background:#102b48b8;border-radius:8px;padding:3px;font-size:11px}
+.game-screen .game-controls.game-controls{position:absolute;bottom:max(8px,env(safe-area-inset-bottom));left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));z-index:2;width:auto;max-height:38dvh;padding:6px;border-radius:16px;background:#10394bd9;overflow:auto;gap:6px}
+.game-screen .game-controls>button{min-height:56px;color:#173d54}
+.game-screen .game-gauge{color:#fff}
+.game-screen .soccer-roster{position:absolute;top:calc(max(8px,env(safe-area-inset-top)) + 96px);left:8px;right:8px;z-index:2;font-size:11px;gap:3px;color:#fff}
+.game-screen .soccer-player-names{font-size:10px}
+.game-screen .soccer-controls.soccer-controls{display:grid;grid-template-columns:108px minmax(120px,1fr);align-items:center}
+.game-screen .soccer-joystick{grid-row:1/3;width:100px;height:100px}
+.game-screen .soccer-actions{grid-column:2}
+.game-screen .soccer-controls [data-action=soccer-hand],.game-screen .soccer-controls [data-action=game-help]{grid-column:auto;min-height:56px;font-size:12px;padding:4px}
+.game-screen .soccer-controls [data-action=game-help]{grid-column:2}
+.game-screen .soccer-controls.left-handed{direction:ltr}
+.game-screen .soccer-controls.left-handed .soccer-joystick{grid-column:2}
+.game-screen .soccer-controls.left-handed .soccer-actions,.game-screen .soccer-controls.left-handed [data-action=game-help]{grid-column:1}
+.game-screen[data-game=navalDuel] .ammo-rack{position:static;display:flex;flex-direction:row;flex:1;width:auto;gap:4px}
+.game-screen[data-game=navalDuel] .game-controls{flex-wrap:wrap}
+.game-screen[data-game=navalDuel] .ammo-rack button{flex:1;min-height:56px}
+.game-screen[data-game=navalDuel] [data-game-control=fire]{min-height:56px;font-size:18px}
+.game-screen[data-game=fireRescue] .game-controls{grid-template-columns:repeat(4,minmax(0,1fr))}
+.game-screen[data-game=fireRescue] [data-action=game-help]{grid-column:auto}
+.game-pause-sheet{position:absolute;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;padding:76px 16px 16px;background:#0d2538d9;overflow:auto;color:#173d54}
+.game-pause-card{width:min(480px,100%);max-height:100%;overflow:auto;padding:20px;border-radius:20px;background:#fff4dc;text-align:center;box-shadow:0 8px 36px #0006}
+.game-pause-card h2{font-size:25px;margin:0 0 18px}
+.game-pause-actions{display:flex;gap:12px}
+.game-pause-actions button{flex:1;min-width:100px;min-height:64px;font-size:20px}
+.game-screen[data-paused=true] .game-header .sound-toggle{visibility:hidden}
+.required-building{outline:4px solid #288c81;outline-offset:-4px}.move-space-reason{color:#923c29}.city-hall-metrics{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:12px}
+@media(orientation:landscape) and (max-height:600px){
+ .game-screen .game-controls.game-controls{left:auto;right:max(8px,env(safe-area-inset-right));top:96px;bottom:max(8px,env(safe-area-inset-bottom));width:214px;max-height:none;align-content:start;flex-wrap:wrap;overflow:auto}
+ .game-screen .game-status{right:238px}
+ .game-screen .soccer-roster{top:96px;right:238px;font-size:10px}
+ .game-screen .soccer-controls.soccer-controls{grid-template-columns:78px minmax(100px,1fr);padding:4px;gap:4px}
+ .game-screen .soccer-joystick{width:76px;height:76px;grid-row:1/3}
+ .game-screen .soccer-actions{gap:4px}
+ .game-screen .soccer-actions button{font-size:12px;padding:4px}
+ .game-screen .soccer-controls [data-action=soccer-hand]{grid-column:1;grid-row:3}
+ .game-screen .soccer-controls [data-action=game-help]{grid-column:2;grid-row:3}
+ .game-screen[data-game=fireRescue] .game-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .game-screen[data-game=navalDuel] .ammo-rack{display:grid;grid-template-columns:1fr 1fr;flex-basis:100%}
+ .game-screen[data-game=navalDuel] .ammo-rack button{width:auto}
+ .game-pause-sheet{padding-top:72px}.game-pause-card{padding:14px}
+}
+.game-screen .game-header .game-pause{display:flex;align-items:center;justify-content:center;gap:8px}
+.game-pause::before{content:"";display:inline-block;flex:none;width:12px;height:18px;border-left:4px solid currentColor;border-right:4px solid currentColor}
+.game-screen[data-paused=true] .game-pause::before{width:0;height:0;border:0;border-left:15px solid currentColor;border-top:9px solid transparent;border-bottom:9px solid transparent}
+.game-screen.game-screen .game-status{color:#fff}
+.info-card[data-type=cityHall] .info-actions{display:grid;grid-template-columns:1fr 1fr}.info-card[data-type=cityHall] [data-action=city-hall-games]{grid-column:1/-1;grid-row:1}
+.game-screen[data-paused=true] .game-header.game-header{z-index:9;pointer-events:none}.game-screen[data-paused=true] .game-header .game-pause{pointer-events:auto}
