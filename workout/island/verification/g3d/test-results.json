@@ -1,0 +1,71 @@
+{
+  "baseCommit": "e2d62c7a5cd32c0321891396d7a1dd6e3c03869b",
+  "command": "node --test tests/*.mjs",
+  "before": {
+    "tests": 1437,
+    "pass": 1399,
+    "fail": 0,
+    "skipped": 38
+  },
+  "after": {
+    "tests": 1469,
+    "pass": 1431,
+    "fail": 0,
+    "skipped": 38
+  },
+  "newG3dTests": 32,
+  "sameSkippedTests": true,
+  "unchangedCalibrationPolicy": "workout/island/tests/g3c-bot.mjs; seeds 1–20; 180 full matches",
+  "calibration": [
+    {
+      "stage": 1,
+      "easy": {
+        "wins": 20,
+        "firstTen": 10
+      },
+      "normal": {
+        "wins": 20,
+        "firstTen": 10
+      },
+      "hard": {
+        "wins": 20,
+        "firstTen": 10
+      }
+    },
+    {
+      "stage": 5,
+      "easy": {
+        "wins": 20,
+        "firstTen": 10
+      },
+      "normal": {
+        "wins": 20,
+        "firstTen": 10
+      },
+      "hard": {
+        "wins": 20,
+        "firstTen": 10
+      }
+    },
+    {
+      "stage": 10,
+      "easy": {
+        "wins": 18,
+        "firstTen": 8
+      },
+      "normal": {
+        "wins": 1,
+        "firstTen": 1
+      },
+      "hard": {
+        "wins": 0,
+        "firstTen": 0
+      }
+    }
+  ],
+  "saveVersion": 10,
+  "dataVersion": "g3d-20261016-1",
+  "existingPinnedEdgesUpdated": 105,
+  "newPinnedEdges": 3,
+  "totalPinnedEdges": 108
+}

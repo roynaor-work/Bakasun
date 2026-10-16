@@ -1,4 +1,4 @@
-import {equipmentValues} from '../activity/equipment.mjs?v=g3c-20261016-1';
+import {equipmentValues} from '../activity/equipment.mjs?v=g3d-20261016-1';
 /** Stable seeded generator; every game uses ctx.random rather than Math.random. */
 export function seededRandom(seed) {
   let value = Number(seed) >>> 0;

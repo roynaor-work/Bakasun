@@ -40,14 +40,14 @@ test('G3c assist works only in opposing half and within the goal cone, targeting
  assert.equal(shot({x:-2,moveX:1}).getState().event.assisted,false);
  assert.equal(shot({x:7,moveZ:1}).getState().event.assisted,false);
 });
-test('G3c pass selects the closest teammate to the directional line inside the cone',()=>{
- const g=setup(),s=g.getState();Object.assign(s.players[1],{x:6,z:.4});Object.assign(s.players[2],{x:3,z:1});g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,1);assert.equal(s.controlled,1);assert.equal(s.ball.owner,null);
+test('G3c pass compatibility uses the G3d endpoint and waits for reception to transfer control',()=>{
+ const g=setup(),s=g.getState();Object.assign(s.players[1],{x:6,z:.4});Object.assign(s.players[2],{x:3,z:1});g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,1);assert.equal(s.controlled,0);assert.equal(s.ball.owner,null);
 });
-test('G3c pass chooses perpendicular distance to the direction line, rather than angular distance',()=>{
- const g=setup(),s=g.getState();Object.assign(s.players[1],{x:10,z:1});Object.assign(s.players[2],{x:2,z:.3});g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.target,2);assert.equal(s.controlled,2);
+test('G3c short pass compatibility targets the nearest teammate to its endpoint',()=>{
+ const g=setup(),s=g.getState();Object.assign(s.players[1],{x:10,z:1});Object.assign(s.players[2],{x:2,z:.3});g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.target,2);assert.equal(s.controlled,0);
 });
-test('G3c a pass with no teammate in its cone goes to space and keeps control',()=>{
- const g=setup(),s=g.getState();g.update(dt,{passPressed:true,moveZ:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,null);assert.equal(s.controlled,0);near(s.ball.vx,0);assert.ok(s.ball.vz>0);
+test('G3c pass to open space preserves its direction and keeps control until reception',()=>{
+ const g=setup(),s=g.getState();g.update(dt,{passPressed:true,moveZ:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,1);assert.equal(s.controlled,0);near(s.ball.vx,0);assert.ok(s.ball.vz>0);
 });
 test('G3c fixed-tick input retains short pass/switch/kick edges at 120Hz',()=>{
  const g=setup(),s=g.getState();g.update(dt/2,{kickHeld:true,moveZ:1});g.update(dt/2,{moveZ:1});assert.equal(s.charging,false);

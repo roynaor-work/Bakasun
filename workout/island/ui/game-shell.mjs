@@ -41,7 +41,7 @@ export class GameNavigation {
 
 /** Shared fullscreen, pause, visibility and input/audio lifecycle for every adapter. */
 export class GameShell {
-  constructor({dialog,stage,controls,pauseButton,sound,t,onExit}) {
+  constructor({dialog,stage,controls,pauseButton,sound,t,onExit,landscape=false}) {
     Object.assign(this,{dialog,stage,controls,pauseButton,sound,t,onExit});
     this.events=new AbortController();this.paused=false;this.disposed=false;
     const options={signal:this.events.signal};
@@ -52,14 +52,32 @@ export class GameShell {
       else if(this.wasFullscreen&&!this.disposed)this.pause('exit');
     },options);
     dialog.dataset.paused='false';
-    try {
-      const request=dialog.requestFullscreen?.({navigationUI:'hide'});
-      Promise.resolve(request).then(()=>{
-        if(this.disposed&&document.fullscreenElement===dialog)void document.exitFullscreen().catch(()=>{});
-      }).catch(()=>{}); // iOS/denied permission keeps the fixed 100dvh layer.
-    }catch{}
+    this.landscape=landscape;
+    if(landscape){
+      const overlay=this.rotationOverlay=document.createElement('section');overlay.className='soccer-rotate';
+      overlay.setAttribute('role','status');
+      overlay.innerHTML='<svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5"><rect x="38" y="22" width="44" height="76" rx="8" transform="rotate(35 60 60)"/><path d="M20 64a42 42 0 0 1 72-34m-1-15 3 17-17-2M100 56a42 42 0 0 1-72 34m1 15-3-17 17 2"/></g></svg>';
+      const text=document.createElement('p');text.textContent=t('soccer.rotate');overlay.append(text);dialog.append(overlay);
+      const resize=()=>this.setOrientationBlocked(window.innerHeight>window.innerWidth);
+      window.addEventListener('resize',resize,options);screen.orientation?.addEventListener?.('change',resize,options);resize();
+    }
+    let request;try{request=dialog.requestFullscreen?.({navigationUI:'hide'});}catch{}
+    Promise.resolve(request).catch(()=>{}).then(()=>{
+      if(this.disposed&&document.fullscreenElement===dialog)void document.exitFullscreen().catch(()=>{});
+      if(landscape&&!this.disposed){try{void screen.orientation?.lock?.('landscape')?.catch(()=>{});}catch{}}
+    }); // iOS/denied permission keeps the fixed 100dvh layer.
   }
-  bind(session){this.session=session;if(document.hidden)this.pause();else session.setPaused?.(this.paused);}
+  setOrientationBlocked(value){
+    value=Boolean(value);if(this.orientationBlocked===value)return;
+    this.orientationBlocked=value;this.rotationOverlay.hidden=!value;
+    this.dialog.dataset.orientationBlocked=String(value);this.applyPause();if(!value&&!this.paused)this.sound.unlock();
+  }
+  applyPause(){
+    const blocked=this.paused||this.orientationBlocked;
+    this.session?.setPaused?.(Boolean(blocked));this.sound.setPaused(Boolean(blocked));
+    this.stage.inert=this.controls.inert=Boolean(blocked);
+  }
+  bind(session){this.session=session;if(document.hidden)this.pause();else this.applyPause();}
   pause(kind='pause',content){
     if(this.disposed)return;
     this.paused=true;this.session?.setPaused?.(true);this.sound.setPaused(true);
@@ -78,14 +96,16 @@ export class GameShell {
   }
   resume(){
     if(this.disposed||document.hidden)return;
-    this.paused=false;this.sheet?.remove();this.sheet=null;this.stage.inert=this.controls.inert=false;
+    this.paused=false;this.sheet?.remove();this.sheet=null;
     this.dialog.dataset.paused='false';this.pauseButton.textContent=this.t('game.pause');
     this.pauseButton.setAttribute('aria-label',this.t('game.pause'));
-    this.sound.setPaused(false);this.sound.unlock();this.session?.setPaused?.(false);
+    this.applyPause();this.sound.unlock();
     this.stage.querySelector('canvas')?.focus();
   }
   dispose(){
     if(this.disposed)return;this.disposed=true;this.events.abort();this.sheet?.remove();this.sound.setPaused(false);
+    this.rotationOverlay?.remove();
+    if(this.landscape){try{screen.orientation?.unlock?.();}catch{}}
     if(document.fullscreenElement===this.dialog)void document.exitFullscreen().catch(()=>{});
   }
 }

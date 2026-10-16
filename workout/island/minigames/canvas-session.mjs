@@ -1,7 +1,7 @@
-import {upgradeCard} from './icons.mjs?v=g3c-20261016-1';
-import {loadOptionalArt} from './model-art.mjs?v=g3c-20261016-1';
-import {createGameArt} from './art.mjs?v=g3c-20261016-1';
-import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=g3c-20261016-1';
+import {upgradeCard} from './icons.mjs?v=g3d-20261016-1';
+import {loadOptionalArt} from './model-art.mjs?v=g3d-20261016-1';
+import {createGameArt} from './art.mjs?v=g3d-20261016-1';
+import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=g3d-20261016-1';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   // Each adapter keeps its model coordinates; viewport changes never mutate shared game data.

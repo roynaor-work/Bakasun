@@ -3362,17 +3362,52 @@
         "lowPixelRatio": 0.85,
         "slowFrameMs": 25,
         "qualityWindowSeconds": 4,
-        "maxTriangles": 80000,
-        "maxDrawCalls": 60,
+        "maxTriangles": 110000,
+        "maxDrawCalls": 80,
         "confettiCount": 96,
         "crowdCount": 144,
-        "cameraFov": 40,
-        "cameraMargin": 1.08,
-        "cameraElevation": 0.79,
-        "cameraDepth": 0.61,
         "aimArrowLength": 2,
         "aimArrowWidth": 0.045,
-        "staminaBarWidth": 1.2
+        "camera": {
+          "elevationDegrees": 30,
+          "fovDegrees": 42,
+          "nearDistance": 15,
+          "speedZoom": 7,
+          "fastBallSpeed": 25,
+          "leadSeconds": 0.14,
+          "maxLead": 2,
+          "smoothing": 5,
+          "safeX": 0.83,
+          "safeY": 0.72,
+          "playerHeight": 2.5,
+          "edgeInset": 28,
+          "nearPlane": 0.1,
+          "farPlane": 240
+        },
+        "animation": {
+          "idleSpeed": 0.2,
+          "runSpeed": 4.5,
+          "minRate": 0.35,
+          "maxRate": 2.2,
+          "sprintLean": 0.18,
+          "slideLean": 1.2,
+          "fadeSeconds": 0.14,
+          "characterHeight": 1.8,
+          "slideHeight": 0.35,
+          "keeperMix": 0.65
+        },
+        "trail": {
+          "count": 7,
+          "speed": 18,
+          "spacingSeconds": 0.018,
+          "opacity": 0.22,
+          "radius": 0.13,
+          "radialSegments": 6,
+          "heightSegments": 4
+        },
+        "aimArrowMinLength": 0.8,
+        "aimArrowMaxLength": 5.2,
+        "teamAbbreviationLength": 3
       },
       "controls": {
         "deadzone": 0.12,
@@ -3384,7 +3419,9 @@
           "ShiftLeft",
           "ShiftRight"
         ],
-        "switchKey": "KeyC"
+        "switchKey": "KeyC",
+        "floating": true,
+        "handednessKey": "island.soccer.handed"
       },
       "ai": {
         "kickoffX": [
@@ -3450,7 +3487,12 @@
         "keeperAttemptCooldown": 0.35,
         "keeperFastBall": 8,
         "passSelectionAdvanceWeight": 0.3,
-        "keeperStealRate": 12
+        "keeperStealRate": 12,
+        "sprintFromStage": 6,
+        "sprintSeconds": 0.65,
+        "sprintRestSeconds": 3.8,
+        "sprintMultiplier": 1.1,
+        "sprintDistance": 3
       },
       "rules": {
         "playerBoundary": 0.35,
@@ -3819,6 +3861,48 @@
         "pointsPerCost": 10,
         "cooldownSeconds": 3600,
         "millisecondsPerSecond": 1000
+      },
+      "autoSwitchSeconds": 0.5,
+      "sound": {
+        "soccerKick": [
+          420,
+          85,
+          0.13,
+          "noise"
+        ],
+        "soccerPass": [
+          280,
+          100,
+          0.08,
+          "noise"
+        ],
+        "soccerWhistle": [
+          1900,
+          2200,
+          0.32,
+          "sine"
+        ],
+        "soccerCrowd": [
+          1800,
+          450,
+          0.95,
+          "noise"
+        ],
+        "soccerSlide": [
+          900,
+          110,
+          0.26,
+          "noise"
+        ]
+      },
+      "autoSwitchAdvantage": 1.5,
+      "chargeSpeedMultiplier": 0.5,
+      "passing": {
+        "minDistance": 5,
+        "maxDistance": 22,
+        "chargeSeconds": 0.9,
+        "travelSeconds": 1.2,
+        "runSeconds": 2.5
       }
     }
   },

@@ -1,6 +1,6 @@
-import {runCanvasGame} from './canvas-session.mjs?v=g3c-20261016-1';
-import {oval,drawHealthBar} from './art.mjs?v=g3c-20261016-1';
-import {createNavalView} from './naval-view.mjs?v=g3c-20261016-1';
+import {runCanvasGame} from './canvas-session.mjs?v=g3d-20261016-1';
+import {oval,drawHealthBar} from './art.mjs?v=g3d-20261016-1';
+import {createNavalView} from './naval-view.mjs?v=g3d-20261016-1';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 export function createShipEntity(x,maxHp,shield=0){return {x,hp:maxHp,maxHp,shield,maxShield:shield,recoil:0};}
 export function navalScreenPoint(x,z,config,balance){return {x:config.width/2+z*.85,y:config.height*.8-(x-balance.shipX)*1.05};}
