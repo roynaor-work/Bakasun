@@ -1,10 +1,11 @@
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2g-20261016-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=g2g-20261016-1';
-import {initialProgress} from '../activity/progress.mjs?v=g2g-20261016-1';
-import { cellsFor } from './rules.mjs?v=g2g-20261016-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g2g-20261016-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3b-20261016-1';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=g3b-20261016-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=g3b-20261016-1';
+import {initialProgress} from '../activity/progress.mjs?v=g3b-20261016-1';
+import { cellsFor } from './rules.mjs?v=g3b-20261016-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g3b-20261016-1';
 
-export const CURRENT_VERSION = 7;
+export const CURRENT_VERSION = 8;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -19,7 +20,7 @@ export function createInitialState(data, now = Date.now()) {
   return {
     version: CURRENT_VERSION, money: data.config.startingMoney, resources: clone(data.config.startingResources),
     buildings, world: { size: data.config.worldStages[0].size, stage: 0 }, parts: { [data.world.partGroup]: 0 },
-    avatar: clone(data.avatar.defaults), team: clone(data.team), players: (data.players || []).map(row => ({ ...data.config.playerDefaults, ...row })),
+    avatar: clone(data.avatar.defaults), team: {...clone(data.team),wins:0,rank:0}, players: (data.players || []).map(row => ({ ...data.config.playerDefaults, ...row })),
     tutorial: { step: 0, completed: false, skipped: false }, claimedRewards: [], completedMissions: [], completedEpisodes: [],
     nextId: 1, playSeconds: 0, createdAt: now, updatedAt: now,
     ...initialActivity(data,now),
@@ -28,6 +29,10 @@ export function createInitialState(data, now = Date.now()) {
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  7(old) {
+    return {...old,version:8,team:{wins:0,rank:0,...old.team},
+      minigameEquipment:{...old.minigameEquipment,soccer:{speed:0,kick:0,guard:0,...old.minigameEquipment?.soccer}}};
+  },
   6(old,data) { return {...old,alienUpgrades:initialAlienUpgrades(data),version:7}; },
   // Only the new hose track is added; malformed/missing old tracks still fail validation.
   5(old) {
@@ -96,6 +101,7 @@ export function validateSave(state, data, registry) {
   if (typeof state.avatar.nameId !== 'string' || (state.avatar.name != null && (typeof state.avatar.name !== 'string' || state.avatar.name.length > 30))) return invalid();
   if (!isObject(state.tutorial) || !Number.isInteger(state.tutorial.step) || state.tutorial.step < 0 || state.tutorial.step > data.tutorial.steps.length || typeof state.tutorial.completed !== 'boolean' || typeof state.tutorial.skipped !== 'boolean') return invalid();
   if (!isObject(state.team) || !validId(state.team.id) || typeof state.team.nameId !== 'string' || !Array.isArray(state.team.colors) || !state.team.colors.every(validColor) || !Array.isArray(state.players)) return invalid();
+  if (!validTeamProgress(state.team,data.config.minigames.soccer)) return invalid();
   if (!state.players.every(player => isObject(player) && validId(player.id) && typeof player.nameId === 'string' && validColor(player.color) && ['speed', 'kick', 'guard', 'level'].every(key => finitePositive(player[key])))) return invalid();
   if (!isObject(state.parts) || !Object.entries(state.parts).every(([key, value]) => validId(key) && Number.isSafeInteger(value) && value >= 0)) return invalid();
   for (const key of ['claimedRewards', 'completedMissions', 'completedEpisodes']) if (!Array.isArray(state[key]) || !state[key].every(value => typeof value === 'string')) return invalid();
@@ -183,6 +189,8 @@ export function importWorld(raw, current, data, registry) {
   if (!merged.avatar.created && incoming.avatar.created) merged.avatar = clone(incoming.avatar);
   merged.nextId = Math.max(merged.nextId, incoming.nextId);
   merged.playSeconds = Math.max(merged.playSeconds, incoming.playSeconds);
+  merged.team.wins = Math.max(merged.team.wins,incoming.team.wins);
+  merged.team.rank = Math.max(merged.team.rank,incoming.team.rank);
   mergeActivity(merged,incoming,data);
   merged.updatedAt = Date.now();
   const validation = validateSave(merged, data, registry);

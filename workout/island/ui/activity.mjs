@@ -1,9 +1,9 @@
-import {createSound} from '../minigames/sound.mjs?v=g2g-20261016-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g2g-20261016-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2g-20261016-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=g2g-20261016-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=g2g-20261016-1';
-import {gameContext} from '../minigames/context.mjs?v=g2g-20261016-1';
+import {createSound} from '../minigames/sound.mjs?v=g3b-20261016-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g3b-20261016-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3b-20261016-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=g3b-20261016-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=g3b-20261016-1';
+import {gameContext} from '../minigames/context.mjs?v=g3b-20261016-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -18,6 +18,8 @@ export class ActivityInterface {
     ui.activityInterface=this;
     this.openButton=button(t('minigame.open'),'open-games',()=>this.menu());
     this.openButton.hidden=!data.featureFlags.minigames;ui.cityDetails.append(this.openButton);
+    this.teamButton=button(t('minigame.soccer.teamCard'),'open-team',()=>this.team());
+    this.teamButton.hidden=!data.featureFlags.soccer;ui.cityDetails.append(this.teamButton);
     this.panel=el('aside','event-panel panel');this.panel.hidden=true;
     this.indicator=button('','toggle-event',()=>{this.eventOpen=!this.eventOpen;this.render();});
     this.indicator.setAttribute('aria-expanded','false');this.details=el('div','event-details');this.details.hidden=true;
@@ -42,6 +44,11 @@ export class ActivityInterface {
     this.ui.modalCleanup=()=>this.cleanup(eventId);return dialog;
   }
   enabledGames(){return [...this.engine.registry.minigames.values()].filter(g=>this.data.featureFlags.minigames&&(!g.featureFlag||this.data.featureFlags[g.featureFlag]));}
+  teamLabel(){const team=this.engine.state.team;return this.t('minigame.soccer.teamRank',{team:this.t(team.nameId),wins:team.wins,rank:this.t(this.data.config.minigames.soccer.teamRanks[team.rank].title)});}
+  team(){
+    const dialog=this.modal('minigame.soccer.teamCard','minigame.soccer.stagesHint');dialog.dataset.team='soccer';
+    dialog.append(el('h3','',this.teamLabel()),el('p','',this.t('minigame.soccer.roster',{players:this.engine.state.players.map(row=>this.t(row.nameId)).join(' · ')})),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment('soccer')));
+  }
   menu() {
     const dialog=this.modal('minigame.title','minigame.subtitle');
     const cards=el('div','game-cards');
@@ -49,8 +56,11 @@ export class ActivityInterface {
       const card=el('article','game-card');card.dataset.game=game.id;
       const context=gameContext(this.engine,this.data.config.minigames,this.now(),game.id),level=this.engine.state.minigameLevels[game.id];
       card.append(el('h3','',`${game.icon} ${this.t(game.title)}`),el('p','',this.t('minigame.level',{level,difficulty:context.level})),el('p','',this.t('minigame.power',{power:Math.round(context.power*this.data.config.minigames.percentScale)})),el('p','',this.t('minigame.best',{score:this.engine.state.highScores[game.id]||0})));
+      if(game.id==='soccer')card.append(el('p','team-rank',this.teamLabel()));
       const actions=el('div','game-card-actions');
       actions.append(button(this.t('minigame.play'),'game-play',()=>this.stages(game.id), 'primary-button'),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
+      const available=game.availability?.(this.engine.state);
+      if(available&&!available.ok){actions.querySelector('[data-action=game-play]').disabled=true;card.append(el('p','game-locked',this.t(available.reason)));}
       const next=this.data.config.minigameLevels[game.id]?.[level];
       const upgrade=button(next?this.t('minigame.upgrade',{cost:next.cost}):this.t('app.maxLevel'),'game-upgrade',()=>{const result=this.activity.upgrade(game.id);if(result.ok)this.menu();else this.ui.result(result);});
       upgrade.disabled=!next;actions.append(upgrade,button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(game.id)));card.append(actions);cards.append(card);
@@ -206,9 +216,10 @@ export class ActivityInterface {
     }
   }
   decorateInfo(instance,actions) {
+    if(instance.typeId==='soccer'&&this.data.featureFlags.soccer)actions.append(button(this.t('minigame.soccer.play'),'soccer-building-play',()=>this.stages('soccer'),'primary-button'));
     if(!(this.engine.state.events.repairs[instance.id]>this.now()))return;
     this.ui.info.append(el('p','repair-status',this.t('event.repair')));
     actions.append(button(this.t('event.repairNow',{cost:this.data.config.events.repairCost}),'repair-building',()=>{const result=this.activity.repair(instance.id);if(result.ok){this.ui.drawInfo();this.ui.toast('event.repaired');}else this.ui.result(result);}));
   }
-  dispose(){this.soundEvents.abort();this.sound.dispose();this.cleanup();this.unsubscribe();this.unsubscribeEngine();this.panel.remove();this.openButton.remove();}
+  dispose(){this.soundEvents.abort();this.sound.dispose();this.cleanup();this.unsubscribe();this.unsubscribeEngine();this.panel.remove();this.openButton.remove();this.teamButton.remove();}
 }

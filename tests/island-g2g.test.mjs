@@ -50,7 +50,7 @@ test('G2g optional rescue preserves immediate completion, stars and the single-a
   assert.equal(m.result.outcome,'win');assert.deepEqual(m.result.summary,{out:config.fireRescue.levels[2].flames,rescued:Number(rescueFirst),water:Math.floor(m.water)});
   const engine=createEngine(data,{storage:null});engine.state.minigameProgress.fireRescue.stage=3;let finish,disposed=0,result;
   const game=engine.registry.minigames.get('fireRescue');engine.registry.minigames.set('fireRescue',{...game,start:ctx=>{finish=ctx.finish;return {dispose(){disposed++;}};}});
-  const money=engine.state.money;assert.equal(engine.startMinigame('fireRescue',{level:3,onFinish:r=>{result=r;}}).ok,true);assert.equal(finish(m.result).ok,true);assert.ok(result.stars>=1&&result.stars<=3);assert.equal(result.money,Math.floor(m.score/config.fireRescue.pointsPerCoin)+m.settings.winMoney);assert.equal(engine.state.money,money+result.money);assert.equal(disposed,1);assert.equal(finish(m.result).ok,false);assert.equal(CURRENT_VERSION,7);
+  const money=engine.state.money;assert.equal(engine.startMinigame('fireRescue',{level:3,onFinish:r=>{result=r;}}).ok,true);assert.equal(finish(m.result).ok,true);assert.ok(result.stars>=1&&result.stars<=3);assert.equal(result.money,Math.floor(m.score/config.fireRescue.pointsPerCoin)+m.settings.winMoney);assert.equal(engine.state.money,money+result.money);assert.equal(disposed,1);assert.equal(finish(m.result).ok,false);assert.equal(CURRENT_VERSION,8);
  }
 });
 test('G2g all ten scene variants remain within triangle/draw budgets with fixed pools and finite vertices',()=>{
@@ -111,7 +111,7 @@ test('G2g unsupported WebGL preserves procedural model sprites and reports faile
  const {art,draws}=sprites();await loadOptionalArt(art,config.alienDefense,()=>false,{createRenderer(){throw Error('no WebGL');}});assert.equal(art.modelArt.failed,5);assert.equal(draws.length,0);
 });
 test('G2g release and new sounds are present; all runtime versioned imports use the same release',async()=>{
- assert.equal(DATA_VERSION,'g2g-20261016-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
+ assert.equal(DATA_VERSION,'g3b-20261016-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
  async function walk(url){for(const entry of await readdir(url,{withFileTypes:true})){if(['vendor','verification'].includes(entry.name))continue;const next=new URL(entry.name+(entry.isDirectory()?'/':''),url);if(entry.isDirectory())await walk(next);else if(/\.(mjs|html)$/.test(entry.name)){const source=await readFile(next,'utf8');for(const [,v]of source.matchAll(/(?:\.mjs|\.css)\?v=([^'"\s]+)/g))assert.equal(v,DATA_VERSION,next.pathname);}}}await walk(root);
 });
 
@@ -127,9 +127,9 @@ test('G2g the truck cannon follows aim and its moving muzzle supplies the real 3
 test('G2g a single local textured truck mesh partitions once into body and rotating roof cannon',()=>{
  const object=fakeTruck(),visual=createTruckVisual(object,config.fireRescue);assert.ok(visual.cannonFaces>0);const geometry=visual.turret.children.find(o=>o.isMesh).geometry,before=geometry.attributes.position.array.slice();visual.turret.rotation.y=1;visual.root.updateMatrixWorld(true);assert.deepEqual(geometry.attributes.position.array,before);assert.ok(visual.muzzle.getWorldPosition(new T.Vector3()).length()>0);let released=0;geometry.addEventListener('dispose',()=>released++);visual.dispose();visual.dispose();assert.equal(released,1);
 });
-test('G2g optional truck failure and late completion preserve procedural rendering; the boat is not configured',async()=>{
+test('G2g optional truck failure and late completion preserve procedural rendering; patrol loading is confined to naval play',async()=>{
  const b=structuredClone(config.fireRescue);b.vehicle.model=null;assert.equal(await loadFireTruck(b),null);b.vehicle.model='assets/models/missing.glb';await assert.rejects(loadFireTruck(b,{loader:{async loadAsync(url){await readFile(new URL(url));}}}));
- const world=createFireScene(sceneContext,make()),visual=createTruckVisual(fakeTruck(),config.fireRescue);world.dispose();assert.equal(world.setTruck(visual),false);assert.equal(visual.root.children.length,0);assert.equal(JSON.stringify(config).includes('boat-patrol-512.glb'),false);
+ const world=createFireScene(sceneContext,make()),visual=createTruckVisual(fakeTruck(),config.fireRescue);world.dispose();assert.equal(world.setTruck(visual),false);assert.equal(visual.root.children.length,0);assert.equal(JSON.stringify(config.fireRescue).includes('boat-patrol-512.glb'),false);
 });
 
 async function localMesh(path){
@@ -143,9 +143,9 @@ test('G2g the real 512 truck loads locally, preserves 4587 faces, isolates only 
  visual.root.updateMatrixWorld(true);const muzzle=visual.muzzle.getWorldPosition(new T.Vector3()),vertex=new T.Vector3();let nearest=Infinity;for(let i=0;i<cannon.attributes.position.count;i++){vertex.fromBufferAttribute(cannon.attributes.position,i).applyMatrix4(visual.turret.matrixWorld);nearest=Math.min(nearest,vertex.distanceTo(muzzle));}assert.ok(nearest<.25,'muzzle must sit at the modeled opening');
  const world=createFireScene(sceneContext,make(10));assert.equal(world.setTruck(visual),true);assert.ok(world.metrics().triangles+15152<60000);assert.ok(world.metrics().drawCalls+7<40);world.dispose();assert.deepEqual(await readFile(new URL('assets/models/fire-truck-512.glb',root)),before);
 });
-test('G2g the patrol boat is a local 4905-triangle asset but neither boat nor full-size backups are requested',async()=>{
+test('G2g the patrol boat is a local 4905-triangle asset configured for naval play; full-size backups stay unused',async()=>{
  const boat=await localMesh('assets/models/boat-patrol-512.glb');assert.equal(boat.bytes.length,282084);assert.equal(boat.faces,4905);boat.object.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});
- assert.equal(JSON.stringify(config).includes('boat-patrol'),false);assert.equal(JSON.stringify(config).includes('fire-truck.glb'),false);assert.match(config.fireRescue.vehicle.model,/-512\.glb$/);
+ assert.equal(config.navalDuel.playerModel.path,'assets/models/boat-patrol-512.glb');assert.equal(JSON.stringify(config).includes('fire-truck.glb'),false);assert.match(config.fireRescue.vehicle.model,/-512\.glb$/);
 });
 
 import {createAlienModel,drawAliens} from '../workout/island/minigames/aliens.mjs';

@@ -1,6 +1,6 @@
-import {upgradeCard} from './icons.mjs?v=g2g-20261016-1';
-import {loadOptionalArt} from './model-art.mjs?v=g2g-20261016-1';
-import {createGameArt} from './art.mjs?v=g2g-20261016-1';
+import {upgradeCard} from './icons.mjs?v=g3b-20261016-1';
+import {loadOptionalArt} from './model-art.mjs?v=g3b-20261016-1';
+import {createGameArt} from './art.mjs?v=g3b-20261016-1';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   const { canvas, controls, status, config, t } = ctx;

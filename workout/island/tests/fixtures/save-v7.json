@@ -1,0 +1,234 @@
+{
+  "version": 7,
+  "money": 321,
+  "resources": {
+    "food": 30,
+    "materials": 40,
+    "energy": 25
+  },
+  "buildings": [
+    {
+      "id": "seed-road-3",
+      "typeId": "road",
+      "x": 3,
+      "z": 7,
+      "level": 1
+    },
+    {
+      "id": "seed-road-4",
+      "typeId": "road",
+      "x": 4,
+      "z": 7,
+      "level": 1
+    },
+    {
+      "id": "seed-road-5",
+      "typeId": "road",
+      "x": 5,
+      "z": 7,
+      "level": 1
+    },
+    {
+      "id": "seed-road-6",
+      "typeId": "road",
+      "x": 6,
+      "z": 7,
+      "level": 1
+    },
+    {
+      "id": "seed-road-7",
+      "typeId": "road",
+      "x": 7,
+      "z": 7,
+      "level": 1
+    },
+    {
+      "id": "seed-road-8",
+      "typeId": "road",
+      "x": 8,
+      "z": 7,
+      "level": 1
+    },
+    {
+      "id": "seed-road-9",
+      "typeId": "road",
+      "x": 9,
+      "z": 7,
+      "level": 1
+    },
+    {
+      "id": "seed-road-10",
+      "typeId": "road",
+      "x": 10,
+      "z": 7,
+      "level": 1
+    },
+    {
+      "id": "seed-road-11",
+      "typeId": "road",
+      "x": 11,
+      "z": 7,
+      "level": 1
+    }
+  ],
+  "world": {
+    "size": 16,
+    "stage": 0
+  },
+  "parts": {
+    "general": 0
+  },
+  "avatar": {
+    "created": false,
+    "nameId": "avatar.name.hero",
+    "gender": "boy",
+    "skinColor": "#e9b88b",
+    "hairColor": "#543326",
+    "hairstyle": "short",
+    "shirtColor": "#4d9ddb",
+    "pantsColor": "#385274"
+  },
+  "team": {
+    "id": "islandTeam",
+    "nameId": "team.default",
+    "colors": [
+      "#4d9ddb",
+      "#ffcf69"
+    ]
+  },
+  "players": [
+    {
+      "speed": 3,
+      "kick": 3,
+      "guard": 3,
+      "level": 1,
+      "id": "playerSun",
+      "nameId": "player.sun",
+      "color": "#f2ad59"
+    },
+    {
+      "speed": 3,
+      "kick": 3,
+      "guard": 3,
+      "level": 1,
+      "id": "playerWave",
+      "nameId": "player.wave",
+      "color": "#4d9ddb"
+    },
+    {
+      "speed": 3,
+      "kick": 3,
+      "guard": 3,
+      "level": 1,
+      "id": "playerStar",
+      "nameId": "player.star",
+      "color": "#8d6fba"
+    }
+  ],
+  "tutorial": {
+    "step": 0,
+    "completed": false,
+    "skipped": false
+  },
+  "claimedRewards": [],
+  "completedMissions": [],
+  "completedEpisodes": [],
+  "nextId": 1,
+  "playSeconds": 0,
+  "createdAt": 123456,
+  "updatedAt": 123456,
+  "alienUpgrades": {
+    "laser": 0,
+    "rapid": 0,
+    "shield": 0,
+    "wing": 0,
+    "damage": 1
+  },
+  "minigameEquipment": {
+    "alienDefense": {
+      "damage": 0,
+      "rate": 0,
+      "shield": 0,
+      "weapon": 0
+    },
+    "fireRescue": {
+      "pressure": 0,
+      "range": 0,
+      "tank": 0,
+      "hose": 0
+    },
+    "navalDuel": {
+      "shield": 0,
+      "hull": 0,
+      "rate": 0,
+      "damage": 2,
+      "ammo": 0
+    }
+  },
+  "minigameProgress": {
+    "alienDefense": {
+      "stage": 2,
+      "stars": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "fireRescue": {
+      "stage": 1,
+      "stars": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "navalDuel": {
+      "stage": 1,
+      "stars": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "minigameLevels": {
+    "alienDefense": 1,
+    "fireRescue": 1,
+    "navalDuel": 1
+  },
+  "highScores": {},
+  "minigameWins": {
+    "alienDefense": 1
+  },
+  "instructionsSeen": [],
+  "events": {
+    "counts": {},
+    "lastAt": {},
+    "nextAt": 243456,
+    "sequence": 0,
+    "active": null,
+    "repairs": {},
+    "resolved": []
+  }
+}
