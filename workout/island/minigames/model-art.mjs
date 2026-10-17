@@ -1,6 +1,6 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {dataURL} from '../release.mjs?v=g2j-20261019-1';
+import {dataURL} from '../release.mjs?v=task017-20261017-1';
 
 export function localModelURL(path) {
   if(typeof path!=='string'||!path.endsWith('.glb')||/^(?:[a-z]+:|\/\/)/i.test(path)||path.includes('\\'))return null;

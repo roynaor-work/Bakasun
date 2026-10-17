@@ -1,12 +1,12 @@
-import {dataURL} from './release.mjs?v=g2j-20261019-1';
-import {createTranslator} from './ui/translate.mjs?v=g2j-20261019-1';
-import { loadData } from './engine/load-data.mjs?v=g2j-20261019-1';
-import { createEngine } from './engine/engine.mjs?v=g2j-20261019-1';
-import { IslandView } from './view/island-view.mjs?v=g2j-20261019-1';
-import { IslandInterface } from './ui/interface.mjs?v=g2j-20261019-1';
-import {createActivity} from './activity/runtime.mjs?v=g2j-20261019-1';
-import {ActivityInterface} from './ui/activity.mjs?v=g2j-20261019-1';
-import {installPressFeedback} from './ui/press.mjs?v=g2j-20261019-1';
+import {dataURL} from './release.mjs?v=task017-20261017-1';
+import {createTranslator} from './ui/translate.mjs?v=task017-20261017-1';
+import { loadData } from './engine/load-data.mjs?v=task017-20261017-1';
+import { createEngine } from './engine/engine.mjs?v=task017-20261017-1';
+import { IslandView } from './view/island-view.mjs?v=task017-20261017-1';
+import { IslandInterface } from './ui/interface.mjs?v=task017-20261017-1';
+import {createActivity} from './activity/runtime.mjs?v=task017-20261017-1';
+import {ActivityInterface} from './ui/activity.mjs?v=task017-20261017-1';
+import {installPressFeedback} from './ui/press.mjs?v=task017-20261017-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

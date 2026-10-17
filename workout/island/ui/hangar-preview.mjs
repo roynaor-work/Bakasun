@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from '../view/local-models.mjs?v=g2j-20261019-1';
+import {LocalModels} from '../view/local-models.mjs?v=task017-20261017-1';
 /** Small local GLB preview; owned by the pre-game modal and disposed on navigation. */
 export function hangarPreview(canvas,balance,color){
  let renderer,frame,disposed=false;const models=new LocalModels();
