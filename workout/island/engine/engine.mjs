@@ -1,15 +1,16 @@
-import {recordStageWin} from '../activity/progress.mjs?v=g7-20261018-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g7-20261018-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=g7-20261018-1';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=g7-20261018-1';
-import {repairHarbors} from './placement-help.mjs?v=g7-20261018-1';
-import { createRegistry } from './registry.mjs?v=g7-20261018-1';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g7-20261018-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g7-20261018-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=g7-20261018-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g7-20261018-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g7-20261018-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g7-20261018-1';
+import {recordStageWin} from '../activity/progress.mjs?v=g3f-20261018-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g3f-20261018-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=g3f-20261018-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=g3f-20261018-1';
+import {repairHarbors} from './placement-help.mjs?v=g3f-20261018-1';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=g3f-20261018-1';
+import { createRegistry } from './registry.mjs?v=g3f-20261018-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g3f-20261018-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g3f-20261018-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=g3f-20261018-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g3f-20261018-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g3f-20261018-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g3f-20261018-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -254,6 +255,9 @@ export function createEngine(data, options = {}) {
     return { ok: true, paid };
   };
   engine.isMinigameActive = () => Boolean(activeMinigame);
+  engine.editSoccerPlayer=(id,input)=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};const r=editSoccerPlayer(state.soccerRoster,id,input,config.minigames.soccer);if(r.ok)changed('soccer-roster');return r;};
+  engine.setSoccerRole=role=>{if(activeMinigame||!['field','keeper'].includes(role))return {ok:false,reason:'reason.invalid'};state.soccerRoster.role=role;changed('soccer-role');return {ok:true};};
+  engine.soccerOutdoorPractice=()=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};const r=awardSoccerPractice(state,config.minigames.soccer,'outdoor',now());if(r.ok)changed('soccer-outdoor');return r;};
   engine.setSoccerDifficulty = difficulty => {
     if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};
     if(typeof difficulty!=='string'||!Object.hasOwn(config.minigames.soccer.difficulties,difficulty))return {ok:false,reason:'reason.invalid'};
@@ -269,6 +273,7 @@ export function createEngine(data, options = {}) {
     const offer=engine.soccerTrainingOffer(key);if(!offer.ok)return offer;
     const card=state.soccerCard;
     card.stars-=offer.cost;card.attributes[key]=Math.min(config.minigames.soccer.card.max,card.attributes[key]+config.minigames.soccer.training.gain);
+    const attribute={power:'shot',pace:'pace',accuracy:'pass',defense:'defense'}[key];if(attribute)state.soccerRoster.players[0].attributes[attribute]=Math.max(state.soccerRoster.players[0].attributes[attribute],card.attributes[key]);
     card.trainings=Math.min(Number.MAX_SAFE_INTEGER,card.trainings+1);card.lastTrainingAt=Math.floor(now());changed('soccer-training');return {ok:true,cost:offer.cost};
   };
   engine.setTennisDifficulty=difficulty=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};if(!Object.hasOwn(config.minigames.tennis.difficulties,difficulty))return {ok:false,reason:'reason.invalid'};state.tennisDifficulty=difficulty;changed('tennis-difficulty');return {ok:true};};
@@ -287,7 +292,7 @@ export function createEngine(data, options = {}) {
     let ended = false, session;
     const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
     if(id==='tennis')ctx.difficulty=state.tennisDifficulty;
-    if(id==='soccer'){ctx.difficulty=state.soccerCard.difficulty;ctx.soccerCard=clone(state.soccerCard);}
+    if(id==='soccer'){if(ctx.drill&&!['targets','penalties','cones'].includes(ctx.drill))return {ok:false,reason:'reason.invalid'};ctx.difficulty=state.soccerCard.difficulty;ctx.soccerCard=clone(state.soccerCard);ctx.role=state.soccerRoster.role;}
     const finish = (raw, cancelled = false) => {
       if (ended) return { ok: false, reason: 'reason.duplicate' };
       let result;
@@ -301,12 +306,14 @@ export function createEngine(data, options = {}) {
         if(progress&&won&&(!Number.isInteger(stars)||stars<1||stars>3))return {ok:false,reason:'reason.invalid'};
         const parts=periodicParts+(won?(settings?.winParts||0):0);
         result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts,stars,stage,
+          ...(result.drill?{drill:result.drill}:{}),
           ...(id==='soccer'?{difficulty:ctx.difficulty,trainingStars:won?stars+config.minigames.soccer.difficulties[ctx.difficulty].bonusStars:0}:{}) });
       }
       ended = true; activeMinigame = null;
       session?.dispose?.();
       ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
       if (result) {
+        if(result.drill){const practice=result.drill.attempts>=config.minigames.soccer.training.drillAttempts?awardSoccerPractice(state,config.minigames.soccer,result.drill.kind,now()):{ok:false,reason:'soccer.practice.tryAgain'};result={...result,practice};changed('soccer-practice',{result});context.onFinish?.(result);return {ok:true,result};}
         state.money += result.money;
         // Only shipped game IDs are persisted; third-party contract examples remain compatible.
         if (config.minigameLevels?.[id]) {

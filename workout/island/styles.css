@@ -259,3 +259,24 @@ button[data-pressed=true]{scale:.95;filter:brightness(.82)}
 /* G3e: sprint rests under the thumb; the large shot/slide button sits above it. */
 .game-screen[data-game=soccer] #shoot{right:0;bottom:102px;width:90px;height:90px}
 .game-screen[data-game=soccer] #sprint{right:4px;bottom:4px;width:72px;height:72px}
+
+/* G3f pre-match roster and short practices. */
+.soccer-roster-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+.soccer-roster-card {border:2px solid #759fb4;border-radius:18px;padding:12px;background:linear-gradient(145deg,#fff6d5,#e2edf1);min-width:0;}
+.soccer-roster-card[data-team="1"] {border-color:#c58374;background:linear-gradient(145deg,#fff0dc,#f0d8d0);}
+.soccer-roster-card h3 {margin:0 0 6px;padding-left:35px;}
+.soccer-name-editor {display:grid;grid-template-columns:1fr 90px;gap:8px;margin:12px 0;padding:10px;border:1px solid #a0bac5;border-radius:12px;}
+.soccer-name-editor input,.soccer-role-choice button,.soccer-drill-choices button {min-height:48px;min-width:48px;max-width:100%;}
+.soccer-name-editor input {display:block;width:100%;box-sizing:border-box;}
+.soccer-role-choice {display:flex;flex-wrap:wrap;gap:8px;}
+.soccer-drill-choices {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;}
+.soccer-drill-choices progress {width:100%;height:16px;}
+.soccer-card-improved .soccer-player-card {animation:card-improved .6s ease-out;}
+@keyframes card-improved {50% {transform:scale(1.04);filter:brightness(1.15);}}
+.game-screen[data-drill] .soccer-phase-banner {top:64px;font-size:15px;max-width:calc(100% - 32px);padding:6px;pointer-events:none;}
+.soccer-roster-card {position:relative;font-size:13px;}
+.soccer-roster-card .soccer-overall {font-size:25px;top:8px;inset-inline-start:auto;inset-inline-end:8px;}
+.soccer-roster-card .soccer-card-attributes {gap:4px 9px;}
+.modal[data-rosters] {width:min(900px,calc(100vw - 16px));max-width:calc(100vw - 16px);}
+.modal[data-rosters] select {min-height:48px;min-width:90px;}
+.game-screen:not([data-drill]) .soccer-phase-banner {left:16px;transform:none;max-width:calc(100% - 100px);}

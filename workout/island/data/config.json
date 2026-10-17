@@ -3316,7 +3316,12 @@
         "goalWidth": 5.4,
         "goalHeight": 2.3,
         "goalDepth": 1.6,
-        "postRadius": 0.075
+        "postRadius": 0.075,
+        "penaltyDepth": 4.8,
+        "penaltyWidth": 9.6,
+        "penaltySpot": 3.3,
+        "goalAreaDepth": 1.7,
+        "goalAreaWidth": 5.8
       },
       "physics": {
         "ballRadius": 0.22,
@@ -3538,7 +3543,7 @@
         "maxTriangles": 130000,
         "maxDrawCalls": 90,
         "confettiCount": 96,
-        "crowdCount": 144,
+        "crowdCount": 96,
         "aimArrowLength": 2,
         "aimArrowWidth": 0.045,
         "camera": {
@@ -3563,12 +3568,12 @@
           "minRate": 0.05,
           "maxRate": 2.2,
           "sprintLean": 0.18,
-          "slideLean": -1.2,
+          "slideLean": -0.25,
           "fadeSeconds": 0.18,
           "characterHeight": 1.8,
-          "slideHeight": 0.18,
+          "slideHeight": -0.2,
           "keeperMix": 0.65,
-          "slideRoll": 0.42,
+          "slideRoll": 0.6,
           "slideLeg": 0.7,
           "slideKnee": 0.85,
           "turnSmoothing": 10,
@@ -3576,7 +3581,17 @@
           "stealRate": 1.6,
           "headerLean": 0.16,
           "turfColor": "#c0ba78",
-          "turfPerPlayer": 4
+          "turfPerPlayer": 4,
+          "slideHip": -1.15,
+          "slideSpine": 0.35,
+          "slideSupportArm": 1.1,
+          "slideBentHip": 0.85,
+          "throwArm": -2.7,
+          "throwElbow": -0.6,
+          "diveRoll": 1.25,
+          "catchArm": -1.25,
+          "slideStraightHip": -0.25,
+          "slideStraightKnee": 0.1
         },
         "trail": {
           "count": 7,
@@ -3590,7 +3605,30 @@
         "aimArrowMinLength": 0.8,
         "aimArrowMaxLength": 5.2,
         "teamAbbreviationLength": 3,
-        "farModelDistance": 6
+        "farModelDistance": 6,
+        "crowd": {
+          "count": 96,
+          "lowDivisor": 3,
+          "headRadius": 0.13,
+          "bodyWidth": 0.28,
+          "bodyHeight": 0.42,
+          "armLength": 0.32,
+          "cheerHeight": 0.25,
+          "colors": [
+            "#e78b69",
+            "#f6cf6a",
+            "#2868ee",
+            "#e94d51",
+            "#63ad93"
+          ],
+          "flagEvery": 12
+        },
+        "shirts": {
+          "width": 0.36,
+          "height": 0.32,
+          "offset": 0.26,
+          "heightOffset": -0.08
+        }
       },
       "controls": {
         "deadzone": 0.12,
@@ -3686,8 +3724,8 @@
         "playerBoundary": 0.35,
         "outMargin": 0.15,
         "cornerInset": 0.6,
-        "goalKickInset": 2.5,
-        "sideInset": 1,
+        "goalKickInset": 1.2,
+        "sideInset": 0,
         "sideGoalInset": 2,
         "restartSpace": 2.2,
         "restartPushX": 2.5,
@@ -3948,29 +3986,32 @@
           "bonus": 1
         }
       ],
-      "opponents": [
-        {
-          "nameId": "minigame.soccer.opponent.0",
-          "colors": [
-            "#e94d51",
-            "#fff4d9"
-          ]
-        },
-        {
-          "nameId": "minigame.soccer.opponent.1",
-          "colors": [
-            "#8d52cb",
-            "#ffd66d"
-          ]
-        },
-        {
-          "nameId": "minigame.soccer.opponent.2",
-          "colors": [
-            "#cb5d21",
-            "#e9ebf2"
-          ]
-        }
-      ],
+      "opponents": {
+        "teams": [
+          {
+            "nameId": "minigame.soccer.opponent.0",
+            "colors": [
+              "#e94d51",
+              "#fff4d9"
+            ]
+          },
+          {
+            "nameId": "minigame.soccer.opponent.1",
+            "colors": [
+              "#8d52cb",
+              "#ffd66d"
+            ]
+          },
+          {
+            "nameId": "minigame.soccer.opponent.2",
+            "colors": [
+              "#cb5d21",
+              "#e9ebf2"
+            ]
+          }
+        ],
+        "minSpeedRatio": 0.9
+      },
       "requiresBuilding": "soccer",
       "aimAssistDegrees": 25,
       "passConeDegrees": 35,
@@ -3984,11 +4025,12 @@
       },
       "slide": {
         "seconds": 0.35,
-        "speedMultiplier": 2.2,
+        "speedMultiplier": 0.8,
         "reach": 1,
         "baseChance": 0.55,
         "recoverSeconds": 0.6,
-        "cooldownSeconds": 1.2
+        "cooldownSeconds": 1.2,
+        "distance": 1.5
       },
       "steal": {
         "reach": 0.9,
@@ -3998,7 +4040,7 @@
       },
       "difficulties": {
         "easy": {
-          "speed": 0.7,
+          "speed": 1,
           "stealRate": 0.45,
           "accuracy": 0.65,
           "keeper": 0.5,
@@ -4018,9 +4060,9 @@
           "bonusStars": 0
         },
         "hard": {
-          "speed": 1.22,
+          "speed": 1,
           "stealRate": 1.4,
-          "accuracy": 1.12,
+          "accuracy": 1.6,
           "keeper": 1.18,
           "tackleReach": 1.12,
           "thinkSeconds": 1.25,
@@ -4049,7 +4091,31 @@
         "baseCost": 2,
         "pointsPerCost": 10,
         "cooldownSeconds": 3600,
-        "millisecondsPerSecond": 1000
+        "millisecondsPerSecond": 1000,
+        "dailyCap": 3,
+        "pointsPerDrill": 1,
+        "pointsPerAttribute": 4,
+        "outdoorPoints": 1,
+        "dayMilliseconds": 86400000,
+        "drillSeconds": 40,
+        "drillAttempts": 3,
+        "minDrillSeconds": 3,
+        "attemptSeconds": 2.4,
+        "targetRadius": 0.75,
+        "targetZ": [
+          -1.8,
+          1.8,
+          0
+        ],
+        "coneDistance": 9,
+        "coneWidth": 1.5,
+        "shotDistance": 8,
+        "penaltyDistance": 3.3,
+        "outdoorMessages": [
+          "soccer.practice.message.0",
+          "soccer.practice.message.1",
+          "soccer.practice.message.2"
+        ]
       },
       "autoSwitchSeconds": 0.5,
       "sound": {
@@ -4115,6 +4181,63 @@
         "keeperHeight": 2.6,
         "clearanceZone": 6,
         "clearPower": 0.25
+      },
+      "ball": {
+        "grassFriction": 0.7,
+        "airDrag": 0.056,
+        "gravity": 12,
+        "bounce": 0.28,
+        "bounceThreshold": 0.55,
+        "restSpeed": 0.05,
+        "spinRadius": 0.22,
+        "landingCarry": 0.62
+      },
+      "roster": {
+        "numbers": [
+          9,
+          8,
+          1,
+          7
+        ],
+        "nameMaxLength": 12,
+        "opponentBase": 43,
+        "stageGain": 3,
+        "difficultyGain": {
+          "easy": -8,
+          "normal": 0,
+          "hard": 18
+        },
+        "passSpread": 0.1,
+        "duelWeight": 0.004,
+        "attributeSpeedWeight": 0.12,
+        "attributeShotWeight": 0.25,
+        "interceptionBase": 0.75,
+        "interceptionCooldown": 0.2
+      },
+      "goalkeeping": {
+        "baseSave": 1.25,
+        "cardWeight": 0.008,
+        "speedWeight": 0.022,
+        "cornerWeight": 0.85,
+        "distanceWeight": 0.006,
+        "minSave": 0.02,
+        "maxSave": 0.98,
+        "diveSeconds": 0.65,
+        "diveSpeed": 5,
+        "catchSeconds": 0.7,
+        "holdHeight": 1.05
+      },
+      "restarts": {
+        "walkSeconds": 0.4,
+        "readySeconds": 0.5,
+        "aiReleaseSeconds": 0.8,
+        "throwHeight": 2.1,
+        "throwSpeed": 10,
+        "throwLift": 3.2,
+        "throwSeconds": 0.6,
+        "defaultCornerPower": 0.65,
+        "inwardMinimum": 0.18,
+        "goalKickDepth": 1.2
       }
     },
     "tennis": {

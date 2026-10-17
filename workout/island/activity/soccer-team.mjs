@@ -19,9 +19,10 @@ export function soccerTeam(ctx,balance) {
   return {...state.team,colors:[...state.team.colors],players:balance.team.players.map(template=>{
     const player=state.players.find(row=>row.id===template.id);
     const ranks=Object.fromEntries(['speed','kick','guard'].map(key=>[key,Math.max(balance.team.minRank,Math.min(balance.team.maxRank,Math.round((ctx.equipment[key]+bonus)*(ctx.power||1))))]));
-    return {...template,...player,...ranks};
+    return {...template,...player,...ranks,card:state.soccerRoster?.players.find(p=>p.id===template.id)};
   })};
 }
 export function soccerViewConfig(ctx,balance) {
-  return {...balance,team:soccerTeam(ctx,balance),opponent:balance.opponents[(ctx.level-1)%balance.opponents.length]};
+  const teams=balance.opponents.teams||balance.opponents;
+  return {...balance,team:soccerTeam(ctx,balance),opponent:teams[(ctx.level-1)%teams.length]};
 }

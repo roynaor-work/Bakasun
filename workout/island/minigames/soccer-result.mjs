@@ -1,5 +1,6 @@
 /** The saved selection is captured by the engine before the session starts. */
 export function soccerResult(raw,ctx,balance) {
+  if(ctx.drill){const d=raw?.drill,c=balance.training;if(!d||d.kind!==ctx.drill||!['targets','penalties','cones'].includes(d.kind)||!Number.isInteger(d.attempts)||d.attempts<0||d.attempts>c.drillAttempts||!Number.isInteger(d.hits)||d.hits<0||d.hits>d.attempts||!Number.isFinite(d.elapsed)||d.elapsed<c.minDrillSeconds||d.elapsed>c.drillSeconds+balance.rules.maxUpdateSeconds)return null;return {outcome:'lose',score:d.hits,money:0,drill:d};}
   const r=raw?.soccer,fields=['won','goalsFor','goalsAgainst','stage','stars','seed','durationSeconds','difficulty'];
   if(!r||typeof r!=='object'||Array.isArray(r)||Object.keys(r).length!==fields.length||!fields.every(key=>Object.hasOwn(r,key)))return null;
   if(typeof r.won!=='boolean'||r.won!==(r.goalsFor>r.goalsAgainst))return null;

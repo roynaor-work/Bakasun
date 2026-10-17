@@ -1,4 +1,4 @@
-import {cellsFor} from './rules.mjs?v=g7-20261018-1';
+import {cellsFor} from './rules.mjs?v=g3f-20261018-1';
 const key=(x,z)=>`${x},${z}`;
 /** Free cosmetic footpaths are derived from the city; they never spend money,
  * occupy construction cells or change the saved road/access rules. */

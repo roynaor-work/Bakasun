@@ -36,7 +36,7 @@ export function createControls({root,config,onGesture=()=>{},onCancel=()=>{},aut
     node.addEventListener('pointerdown',event=>{if(!enabled||heldPointers[key]!==null)return;event.preventDefault();onGesture();gestures.start(key,event.clientX,event.clientY);heldPointers[key]=event.pointerId;pulses[key]=true;capture(node,event);node.classList.add('held');},options);
     node.addEventListener('pointermove',event=>{if(event.pointerId!==heldPointers[key]||key==='sprint')return;event.preventDefault();gestures.move(key,event.clientX,event.clientY);const aim=gestures.direction(key),manual=aim.manual;let arrow=node.querySelector('.action-direction');if(manual&&!arrow){arrow=document.createElement('span');arrow.className='action-direction';arrow.setAttribute('aria-hidden','true');node.append(arrow);}if(arrow){arrow.hidden=!manual;arrow.style.setProperty('--aim-angle',`${Math.atan2(aim.z,aim.x)}rad`);}},options);
     node.addEventListener('pointerup',event=>{if(event.pointerId===heldPointers[key]){gestures.move(key,event.clientX,event.clientY);heldPointers[key]=null;release(event.pointerId);node.classList.remove('held');node.querySelector('.action-direction')?.remove();}},options);
-    for(const type of ['pointercancel','lostpointercapture'])node.addEventListener(type,event=>{if(event.pointerId===heldPointers[key]){heldPointers[key]=null;node.classList.remove('held');onCancel();}},options);
+    for(const type of ['pointercancel','lostpointercapture'])node.addEventListener(type,event=>{if(event.pointerId===heldPointers[key]){heldPointers[key]=null;pulses[key]=false;gestures.start(key,0,0);node.querySelector('.action-direction')?.remove();node.classList.remove('held');onCancel();}},options);
   }
   for(const [node,action]of [[swap,()=>switchPulse=true]])node?.addEventListener('click',()=>{if(enabled){onGesture();action();node.blur();}},options);
   const actionKeys=[config.kickKey,config.passKey,config.switchKey,...config.sprintKeys];
@@ -44,7 +44,7 @@ export function createControls({root,config,onGesture=()=>{},onCancel=()=>{},aut
     if(!enabled||event.target.matches('input,select,textarea,button'))return;
     if(event.code.startsWith('Arrow')||actionKeys.includes(event.code))event.preventDefault();
     if(event.repeat)return;
-    onGesture();keys.add(event.code);if(event.code===config.kickKey)pulses.kick=true;if(event.code===config.passKey)pulses.pass=true;if(config.sprintKeys.includes(event.code))pulses.sprint=true;
+    onGesture();keys.add(event.code);if(event.code===config.kickKey){gestures.start('kick',0,0);pulses.kick=true;}if(event.code===config.passKey){gestures.start('pass',0,0);pulses.pass=true;}if(config.sprintKeys.includes(event.code))pulses.sprint=true;
     if(event.code===config.switchKey)switchPulse=true;
     if(event.code===config.kickKey)shoot.classList.add('held');
   },options);

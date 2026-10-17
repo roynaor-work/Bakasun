@@ -1,10 +1,12 @@
-import {attributes,cardRating} from '../activity/soccer-card.mjs?v=g7-20261018-1';
+import {attributes,cardRating} from '../activity/soccer-card.mjs?v=g3f-20261018-1';
 const node=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls;n.textContent=text??'';return n;};
 /** Local SVG portrait uses only the validated avatar palette; names remain text. */
 export function playerCard(state,balance,t,{starsAdded}={}) {
-  const card=state.soccerCard,rating=cardRating(card,balance),root=node('article',`soccer-player-card ${rating.tier}`);
+  const card=state.soccerCard,identity=state.soccerRoster?.players[0],rating=cardRating(card,balance),root=node('article',`soccer-player-card ${rating.tier}`);
+  if(identity){rating.overall=Math.round(['pace','shot','pass','defense'].reduce((sum,key)=>sum+identity.attributes[key],0)/4);rating.tier=rating.overall>=balance.card.goldRating?'gold':rating.overall>=balance.card.silverRating?'silver':'bronze';root.className=`soccer-player-card ${rating.tier}`;}
   root.dataset.playerCard=rating.tier;root.setAttribute('aria-label',t('soccer.card'));
-  root.append(node('strong','soccer-overall',String(rating.overall)),node('h3','soccer-card-name',t(state.avatar.nameId)));
+  root.append(node('strong','soccer-overall',String(rating.overall)),node('h3','soccer-card-name',identity?.name||t(state.avatar.nameId)));
+  if(identity)root.append(node('span','soccer-shirt-number',`#${identity.number} ${identity.name||''}`));
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 160 142');svg.setAttribute('aria-hidden','true');svg.classList.add('soccer-portrait');
   const shape=(tag,properties)=>{const n=document.createElementNS(svg.namespaceURI,tag);for(const [key,value]of Object.entries(properties))n.setAttribute(key,String(value));svg.append(n);};
   const a=state.avatar;
@@ -20,4 +22,9 @@ export function playerCard(state,balance,t,{starsAdded}={}) {
   root.append(node('p','soccer-wallet',t('soccer.wallet',{stars:card.stars})));
   if(starsAdded!==undefined)root.append(node('p','soccer-stars-added',t('soccer.starsAdded',{stars:starsAdded})));
   return root;
+}
+export function rosterCard(card,t){
+ const root=node('article','soccer-roster-card');root.dataset.rosterPlayer=card.id;root.dataset.team=card.team;
+ root.append(node('strong','soccer-overall',card.overall),node('h3','',`${card.name||t(card.nameId)} #${card.number}`),node('p','',t('soccer.role.'+card.role)));
+ const dl=node('dl','soccer-card-attributes');for(const key of ['pace','shot','pass','defense',...(card.role==='keeper'?['reactions','catching']:[])]){const row=node('div','');row.append(node('dt','',t('soccer.stat.'+key)),node('dd','',card[key]));dl.append(row);}root.append(dl);return root;
 }
