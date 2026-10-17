@@ -1,0 +1,335 @@
+{
+  "part": "g2l",
+  "browser": "Chromium / SwiftShader",
+  "browserVersion": "151.0.7922.173",
+  "physicalPhone": false,
+  "iPhone": false,
+  "phoneFPS": false,
+  "base": "fa3b133",
+  "preconditionBase": "28eaec4",
+  "versions": {
+    "data": "g2j-20261019-1",
+    "save": 15
+  },
+  "nodeTests": {
+    "command": "node --test tests/*.mjs",
+    "tests": 1695,
+    "pass": 1656,
+    "fail": 1,
+    "skipped": 38,
+    "newTests": 14,
+    "knownFailure": "island complete deployable folder including bundled assets stays within 15 MB"
+  },
+  "baselineTests": {
+    "tests": 1681,
+    "pass": 1642,
+    "fail": 1,
+    "skipped": 38
+  },
+  "calibration": {
+    "easyWins": 10,
+    "seeds": 10,
+    "seconds": [
+      3.86,
+      3.9,
+      3.94,
+      3.98,
+      4.02,
+      4.06,
+      4.1,
+      2.8,
+      2.9,
+      3.78
+    ]
+  },
+  "reports": [
+    {
+      "width": 844,
+      "height": 390,
+      "coverage": 1,
+      "framesAudited": 859,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "worst": {
+        "triangles": 63793,
+        "drawCalls": 32,
+        "geometries": 27,
+        "materials": 11,
+        "textures": 3,
+        "disposed": false,
+        "low": false,
+        "avatarLoaded": true,
+        "avatarPosition": {
+          "x": 8,
+          "y": 0,
+          "z": 18
+        },
+        "city": {
+          "buildings": 5,
+          "firefighterLoaded": true,
+          "crewRigged": true,
+          "citizens": 3,
+          "roads": 8,
+          "intersections": 16,
+          "crewVisible": true,
+          "hoseConnected": true,
+          "camera": {
+            "x": 4.9710287988619415,
+            "z": 7.657009599620648
+          },
+          "models": {
+            "requested": 8,
+            "loaded": 8,
+            "failed": 0
+          }
+        },
+        "rendererTriangles": 49521,
+        "rendererDrawCalls": 28,
+        "truck": {
+          "loaded": true,
+          "cannonFaces": 585,
+          "yaw": -1.1005042973034005,
+          "muzzle": {
+            "x": 7.978987906743418,
+            "y": 3.176443905144286,
+            "z": 16.89401448073876
+          },
+          "hydrantHose": false,
+          "hoseEnd": {
+            "x": 6,
+            "z": 18
+          }
+        },
+        "hydrant": {
+          "loaded": true,
+          "art": {
+            "requested": 8,
+            "loaded": 8,
+            "failed": 0
+          }
+        }
+      },
+      "certificate": {
+        "fast": true,
+        "rescue": true,
+        "careful": true,
+        "stars": 3
+      },
+      "checks": {
+        "noVisibleText": true,
+        "fullCity": true,
+        "roadOnly": true,
+        "crewBoards": true,
+        "hoseConnected": true,
+        "hydrant": true,
+        "ladder": true,
+        "certificatePersists": true,
+        "lowResolution": true,
+        "canvasFallback": true,
+        "repeatExit": true
+      },
+      "errors": [],
+      "outside": [],
+      "shots": [
+        "city-wide.webp",
+        "truck-junction-turn.webp",
+        "firefighter-connected-hose.webp",
+        "map-direction-arrow.webp",
+        "hydrant-refill-icons.webp",
+        "ladder-window-rescue.webp",
+        "certificate-stars.webp",
+        "simple-city-fallback.webp"
+      ]
+    },
+    {
+      "width": 740,
+      "height": 360,
+      "coverage": 1,
+      "framesAudited": 890,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 740,
+        "height": 360
+      },
+      "worst": {
+        "triangles": 63793,
+        "drawCalls": 32,
+        "geometries": 27,
+        "materials": 11,
+        "textures": 3,
+        "disposed": false,
+        "low": false,
+        "avatarLoaded": true,
+        "avatarPosition": {
+          "x": 8,
+          "y": 0,
+          "z": 18
+        },
+        "city": {
+          "buildings": 5,
+          "firefighterLoaded": true,
+          "crewRigged": true,
+          "citizens": 3,
+          "roads": 8,
+          "intersections": 16,
+          "crewVisible": true,
+          "hoseConnected": true,
+          "camera": {
+            "x": 4.9710287988619415,
+            "z": 7.657009599620648
+          },
+          "models": {
+            "requested": 8,
+            "loaded": 8,
+            "failed": 0
+          }
+        },
+        "rendererTriangles": 54061,
+        "rendererDrawCalls": 30,
+        "truck": {
+          "loaded": true,
+          "cannonFaces": 585,
+          "yaw": -1.1005042973034005,
+          "muzzle": {
+            "x": 7.978987906743418,
+            "y": 3.176443905144286,
+            "z": 16.89401448073876
+          },
+          "hydrantHose": false,
+          "hoseEnd": {
+            "x": 6,
+            "z": 18
+          }
+        },
+        "hydrant": {
+          "loaded": true,
+          "art": {
+            "requested": 8,
+            "loaded": 8,
+            "failed": 0
+          }
+        }
+      },
+      "certificate": {
+        "fast": true,
+        "rescue": true,
+        "careful": true,
+        "stars": 3
+      },
+      "checks": {
+        "noVisibleText": true,
+        "fullCity": true,
+        "roadOnly": true,
+        "crewBoards": true,
+        "hoseConnected": true,
+        "hydrant": true,
+        "ladder": true,
+        "certificatePersists": true,
+        "lowResolution": true,
+        "canvasFallback": true,
+        "repeatExit": true
+      },
+      "errors": [],
+      "outside": [],
+      "shots": []
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "coverage": 1,
+      "framesAudited": 871,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 1000
+      },
+      "worst": {
+        "triangles": 63793,
+        "drawCalls": 32,
+        "geometries": 27,
+        "materials": 11,
+        "textures": 3,
+        "disposed": false,
+        "low": false,
+        "avatarLoaded": true,
+        "avatarPosition": {
+          "x": 8,
+          "y": 0,
+          "z": 18
+        },
+        "city": {
+          "buildings": 5,
+          "firefighterLoaded": true,
+          "crewRigged": true,
+          "citizens": 3,
+          "roads": 8,
+          "intersections": 16,
+          "crewVisible": true,
+          "hoseConnected": true,
+          "camera": {
+            "x": 4.9710287988619415,
+            "z": 7.657009599620648
+          },
+          "models": {
+            "requested": 8,
+            "loaded": 8,
+            "failed": 0
+          }
+        },
+        "rendererTriangles": 63793,
+        "rendererDrawCalls": 32,
+        "truck": {
+          "loaded": true,
+          "cannonFaces": 585,
+          "yaw": -1.1005042973034005,
+          "muzzle": {
+            "x": 7.978987906743418,
+            "y": 3.176443905144286,
+            "z": 16.89401448073876
+          },
+          "hydrantHose": false,
+          "hoseEnd": {
+            "x": 6,
+            "z": 18
+          }
+        },
+        "hydrant": {
+          "loaded": true,
+          "art": {
+            "requested": 8,
+            "loaded": 8,
+            "failed": 0
+          }
+        }
+      },
+      "certificate": {
+        "fast": true,
+        "rescue": true,
+        "careful": true,
+        "stars": 3
+      },
+      "checks": {
+        "noVisibleText": true,
+        "fullCity": true,
+        "roadOnly": true,
+        "crewBoards": true,
+        "hoseConnected": true,
+        "hydrant": true,
+        "ladder": true,
+        "certificatePersists": true,
+        "lowResolution": true,
+        "canvasFallback": true,
+        "repeatExit": true
+      },
+      "errors": [],
+      "outside": [],
+      "shots": []
+    }
+  ]
+}
