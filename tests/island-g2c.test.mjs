@@ -25,7 +25,7 @@ test('G2c v4 → v5 adds only equipment and leaves input, city, stars, event and
   const f=fixture(),old=JSON.parse(f.engine.exportJSON());old.version=4;delete old.minigameEquipment;
   old.money=321;old.minigameLevels.alienDefense=3;recordStageWin(old,data,'alienDefense',1,3);
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:42,phase:'playing',warningUntil:0,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,14);assert.equal(r.state.version,14);assert.equal(STORAGE_KEY,'island.v1');
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,15);assert.equal(r.state.version,15);assert.equal(STORAGE_KEY,'island.v1');
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key],key);
   assert.deepEqual(old,before);for(const tracks of Object.values(r.state.minigameEquipment))assert.ok(Object.values(tracks).every(n=>n===0));
   f.storage.setItem(STORAGE_KEY,JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.equal(loaded.state.money,321);assert.equal(loaded.state.minigameProgress.alienDefense.stars[0],3);assert.equal(f.values.get('other-app'),'keep');
@@ -97,7 +97,7 @@ test('G2c permanent weapon, damage and rate affect actual projectiles rather tha
 });
 test('G2c fires occupy homes, roof, tree, car and warehouse; high stages add resistant and spreading fire',()=>{
   const m=make('fireRescue',10);assert.equal(new Set(m.flames.map(f=>f.kind)).size,5);assert.equal(new Set(m.flames.map(f=>f.type)).size,3);assert.equal(make('fireRescue').settings.fireKinds,1);
-  const f=m.flames[0],heat=f.heat;advance(m,.2,{});assert.ok(f.heat>heat);advance(m,11,{});assert.equal(m.flames.filter(f=>f.active).length,9);
+  const f=m.flames[0],heat=f.heat;advance(m,config.fireRescue.startGrace+.2,{});assert.ok(f.heat>heat);advance(m,11,{});assert.equal(m.flames.filter(f=>f.active).length,9);
 });
 test('G2c aiming misses, visible water uses the same clamped impact, and refill away from a hydrant is blocked',()=>{
   const m=make('fireRescue'),f=m.flames[0],before=m.water;advance(m,.3,{firing:true,x:350,y:0});assert.ok(m.water<before);assert.ok(f.heat>0);
@@ -110,7 +110,7 @@ test('G2c charged water and pressure equipment extinguish faster; charging does 
   advance(a,.2,{x:f.x,y:f.y,firing:true});advance(b,.2,{x:g.x,y:g.y,firing:true});assert.ok(g.heat<f.heat);
 });
 test('G2c a rescued friend awards water and score once, is optional, and resets each round',()=>{
-  const m=make('fireRescue',3),r=m.rescue,reserve=m.reserve;advance(m,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,true);assert.equal(m.score,r.points);assert.ok(m.reserve>=reserve);const score=m.score;advance(m,1,{rescue:true,x:r.x,y:r.y});assert.equal(m.score,score);assert.equal(make('fireRescue',3).rescue.rescued,false);
+  const m=parkRescue(make('fireRescue',3)),r=m.rescue,reserve=m.reserve;advance(m,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,true);assert.equal(m.score,r.points);assert.ok(m.reserve>=reserve);const score=m.score;advance(m,1,{rescue:true,x:r.x,y:r.y});assert.equal(m.score,score);assert.equal(make('fireRescue',3).rescue.rescued,false);
 });
 test('G2c naval HP tracks each ship and the entire remaining fleet; bars clamp at zero/full',()=>{
   const m=make('navalDuel',10);assert.ok(m.maxEnemyFleet>m.enemyLives);const total=m.enemyFleetHp; m.update(.02,{firing:true});navalHit(m,config.navalDuel);assert.ok(m.enemyLives<m.enemyShip.maxHp);assert.ok(m.enemyFleetHp<total);
@@ -140,7 +140,7 @@ test('G2c nova light stays at the detonation point while the next aim moves',()=
   const m=make('alienDefense');const center=[m.aliens.reduce((n,a)=>n+a.x,0)/m.aliens.length,m.aliens.reduce((n,a)=>n+a.y,0)/m.aliens.length];m.update(.01,{nova:true,x:10,y:10});m.update(.01,{x:330,y:180});assert.deepEqual([m.nova.x,m.nova.y],center);assert.deepEqual([m.novaAim.x,m.novaAim.y],[330,180]);
 });
 test('G2c stubborn fire resists water and spreading fire grows faster at equal starting heat',()=>{
-  const b=config.fireRescue,a=make('fireRescue',10),c=make('fireRescue',10),d=make('fireRescue',10);for(const m of [a,c,d]){m.flames[0].heat=.5;m.flames[0].type=0;}
+  const b=config.fireRescue,a=make('fireRescue',10),c=make('fireRescue',10),d=make('fireRescue',10);for(const m of [a,c,d]){advance(m,b.startGrace+.1);m.flames[0].heat=.5;m.flames[0].type=0;}
   c.flames[0].type=1;d.flames[0].type=2;
   advance(a,.1,{firing:true,x:a.flames[0].x,y:a.flames[0].y});advance(c,.1,{firing:true,x:c.flames[0].x,y:c.flames[0].y});assert.ok(a.flames[0].heat<c.flames[0].heat);
   a.flames[0].heat=.5;advance(a,.1);advance(d,.1);assert.ok(d.flames[0].heat>a.flames[0].heat);assert.ok(b.fireTypes[2].growth>1);
@@ -155,3 +155,5 @@ for(const id of Object.keys(models))test(`G2c ${id} stage-10 threat and rewards 
   else if(id==='fireRescue'){assert.ok(high.flames.filter(f=>f.active).length>low.flames.filter(f=>f.active).length);assert.ok(high.remaining>low.remaining);assert.ok(high.water+high.reserve<low.water+low.reserve);assert.ok(high.settings.growthPerSecond>low.settings.growthPerSecond);}
   else{assert.ok(high.maxEnemyFleet>low.maxEnemyFleet);assert.ok(high.settings.enemyAimError<low.settings.enemyAimError);assert.ok(high.settings.drift>low.settings.drift);}
 });
+
+function parkRescue(m){const b=config.fireRescue,r=m.rescue;Object.assign(m.truck,{x:r.world[0],z:r.world[2],targetX:r.world[0],targetZ:r.world[2]});m.flames[r.fireIndex].heat=Math.min(m.flames[r.fireIndex].heat,b.rescue.safeHeat/2);m.update(.001,{});return m;}

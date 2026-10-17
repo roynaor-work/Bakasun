@@ -1,5 +1,5 @@
-import {attributes,cardRating} from '../activity/soccer-card.mjs?v=g2i-20261019-1';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=g2i-20261019-1';
+import {attributes,cardRating} from '../activity/soccer-card.mjs?v=g2j-20261019-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=g2j-20261019-1';
 const node=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls;n.textContent=text??'';return n;};
 /** Local SVG portrait uses only the validated avatar palette; names remain text. */
 export function playerCard(state,balance,t,{starsAdded}={}) {

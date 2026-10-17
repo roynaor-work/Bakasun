@@ -68,7 +68,7 @@ test('G7 no lawful anchor is invented when money or an occupied island blocks pl
 test('G7 authentic v12 expansion port is repaired to the nearest free shore on load, retaining identity and money',async()=>{
  const old=JSON.parse(await readFile(new URL('./fixtures/save-v12-expanded-harbor.json',import.meta.url),'utf8')),e=engine(),port=old.buildings.find(b=>b.typeId==='harbor'),before=structuredClone(old);
  assert.equal(shoreDirection(old,e.registry.buildings.get('harbor'),port.x,port.z),null);
- const r=migrateSave(old,data,e.registry);assert.ok(r.ok);assert.deepEqual(old,before);assert.deepEqual(r.repairedHarbors,[port.id]);assert.equal(r.state.version,14);assert.equal(r.state.money,old.money);
+ const r=migrateSave(old,data,e.registry);assert.ok(r.ok);assert.deepEqual(old,before);assert.deepEqual(r.repairedHarbors,[port.id]);assert.equal(r.state.version,15);assert.equal(r.state.money,old.money);
  const moved=r.state.buildings.find(b=>b.id===port.id);assert.ok(shoreDirection(r.state,e.registry.buildings.get('harbor'),moved.x,moved.z));assert.ok(e.registry.buildings.has('road'));
  const loaded=createEngine(data,{storage:{getItem:()=>JSON.stringify(old),setItem(){}},now:()=>1000000});assert.ok(loaded.validatePlacement('harbor',moved.x,moved.z,moved.id).ok);assert.deepEqual(migrateSave(r.state,data,e.registry).repairedHarbors,[]);
 });

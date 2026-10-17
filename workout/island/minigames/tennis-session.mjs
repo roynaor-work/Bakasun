@@ -1,8 +1,8 @@
-import {gameContext} from './context.mjs?v=g2i-20261019-1';
-import {createTennis} from './tennis.mjs?v=g2i-20261019-1';
-import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=g2i-20261019-1';
-import {createControls} from './controls.mjs?v=g2i-20261019-1';
-import {actionIcon} from './soccer-icons.mjs?v=g2i-20261019-1';
+import {gameContext} from './context.mjs?v=g2j-20261019-1';
+import {createTennis} from './tennis.mjs?v=g2j-20261019-1';
+import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=g2j-20261019-1';
+import {createControls} from './controls.mjs?v=g2j-20261019-1';
+import {actionIcon} from './soccer-icons.mjs?v=g2j-20261019-1';
 export function tennisOpponent(balance,stage,shirt=balance.render.shirtColor){const opponent=balance.opponents[(stage-1)%balance.opponents.length];return {...opponent,shirtColor:opponent.shirtColor===shirt?balance.opponents.find(o=>o.shirtColor!==shirt).shirtColor:opponent.shirtColor};}
 export function startTennis(ctx){
  ctx={...gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed>>>0,'tennis',ctx.level),...ctx};
@@ -23,7 +23,7 @@ export function startTennis(ctx){
  createTennisView(canvas,viewConfig).then(loaded=>{if(disposed){loaded.dispose();return;}view=loaded;last=0;frame=requestAnimationFrame(tick);}).catch(()=>{if(!disposed){fallback();last=0;frame=requestAnimationFrame(tick);}});
  function tick(at){if(disposed)return;const dt=last?Math.min((at-last)/1000,balance.simulation.maxDelta):0,frameMs=last?at-last:0;last=at;
   if(!paused&&!document.hidden){const sample=input.sample(),hit=kickHeld&&!sample.kickHeld,loft=lobHeld&&!sample.sprintHeld;kickHeld=sample.kickHeld;lobHeld=sample.sprintHeld;model.update(dt,{move:sample.moveX,moveZ:sample.moveZ,serve:sample.passHeld,swing:hit||loft,lob:loft,aim:model.getState().phase==='rally'?sample.kickAim:{x:sample.moveX,manual:true}});view.observeFrame(frameMs);if(view.metrics().quality>=balance.render.fallbackQuality)fallback();}view.render(model.getState(),paused?0:dt);
-  const s=model.getState();serveHint.hidden=!(s.server===0&&['serve','toss'].includes(s.phase));meter.hidden=s.phase!=='toss';meter.dataset.zone=s.serveZone;needle.style.bottom=`${s.serveMeter*100}%`;controls.querySelector('#pass').classList.toggle('serve-ready',!serveHint.hidden);games.textContent=s.score.games.join(' : ');points.textContent=s.pointLabels.map(v=>typeof v==='string'?t('tennis.'+v):v).join(' : ');banner.hidden=!['point','game'].includes(s.phase);status.textContent=t('tennis.score',{home:s.score.games[0],away:s.score.games[1]});
+  const s=model.getState();serveHint.hidden=!(s.server===0&&['serve','toss'].includes(s.phase));meter.hidden=s.phase!=='toss';meter.dataset.zone=s.serveZone;const green=balance.serve.green[ctx.difficulty]+(s.ranks.serve-1)*balance.serve.rankGreenBonus,low=(.5-green/2)*100,high=(.5+green/2)*100,yellow=balance.serve.yellowWidth*50;meter.style.background=`linear-gradient(to top,#f06960 0% ${low-yellow}%,#efc355 ${low-yellow}% ${low}%,#67d398 ${low}% ${high}%,#efc355 ${high}% ${high+yellow}%,#f06960 ${high+yellow}%)`;needle.style.bottom=`${s.serveMeter*100}%`;controls.querySelector('#pass').classList.toggle('serve-ready',!serveHint.hidden);games.textContent=s.score.games.join(' : ');points.textContent=s.pointLabels.map(v=>typeof v==='string'?t('tennis.'+v):v).join(' : ');banner.hidden=!['point','game'].includes(s.phase);status.textContent=t('tennis.score',{home:s.score.games[0],away:s.score.games[1]});
   if(s.event.id!==eventId){eventId=s.event.id;if(s.event.type==='hit')ctx.sound?.(s.shot?.lob?'soccerPass':'soccerKick');else if(['point','game'].includes(s.event.type))ctx.sound?.('soccerCrowd');}
   if(model.result){ctx.finish({outcome:model.result.won?'win':'lose',score:model.result.gamesFor,tennis:model.result});return;}frame=requestAnimationFrame(tick);
  }

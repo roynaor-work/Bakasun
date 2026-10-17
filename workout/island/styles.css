@@ -300,3 +300,12 @@ button[data-pressed=true]{scale:.95;filter:brightness(.82)}
 .game-screen[data-game=alienDefense] #shoot{right:12px}.game-screen[data-game=alienDefense] #pass{right:94px}.game-screen[data-game=alienDefense] #sprint{right:176px}
 .game-screen[data-game=alienDefense] .game-controls.game-controls{position:absolute;inset:0;width:100%;height:100%;max-height:none;background:transparent;padding:0;display:block;overflow:hidden;pointer-events:none}
 .game-screen[data-game=alienDefense] #pass{background-image:conic-gradient(#75dac4 var(--charge,100%),#174360 0)}
+.fire-certificate{padding:18px;border:3px solid #e4b957;border-radius:20px;background:#fff7dd;color:#234b56;text-align:center;margin:10px 0}.certificate-stars{font-size:34px;color:#b47719}.fire-certificate p{margin:5px}.fire-certificate .earned{font-weight:800;color:#237954}
+.game-screen[data-game=fireRescue] .game-controls.game-controls{position:absolute;inset:0;width:100%;height:100%;max-height:none;background:transparent;padding:0;display:block;overflow:hidden;pointer-events:none}
+.game-screen[data-game=fireRescue] .soccer-stick-zone{position:absolute;left:0;top:130px;bottom:0;width:48%;pointer-events:auto;touch-action:none}
+.game-screen[data-game=fireRescue] .soccer-joystick{position:absolute;transform:translate(-50%,-50%);width:108px;height:108px;border-radius:50%;border:2px solid #fff8;background:#fff2;pointer-events:none}
+.game-screen[data-game=fireRescue] .soccer-knob{position:absolute;left:calc(50% - 23px);top:calc(50% - 23px);width:46px;height:46px;background:#fff9;border-radius:50%}
+.game-screen[data-game=fireRescue] [data-game-control]{position:absolute;width:68px;height:68px;min-width:0;min-height:0;border-radius:50%;bottom:12px;right:12px;font-size:12px;padding:3px;pointer-events:auto;display:flex;flex-direction:column}
+.game-screen[data-game=fireRescue] #pass{right:88px}.game-screen[data-game=fireRescue] [data-game-control=charge]{bottom:88px}.game-screen[data-game=fireRescue] [data-game-control=refill]{right:88px;bottom:88px}
+.game-screen[data-game=fireRescue] .game-gauge{position:absolute;left:12px;top:65px;width:120px;pointer-events:none;padding:2px;color:#fff;background:#123d41b0;font-size:12px}.game-screen[data-game=fireRescue] .game-gauge:nth-of-type(2){top:108px}.game-screen[data-game=fireRescue] .game-gauge progress{height:10px}
+.game-screen[data-game=fireRescue] [data-action=fire-certificate]{position:absolute;right:166px;bottom:12px;width:105px;min-height:56px;pointer-events:auto}

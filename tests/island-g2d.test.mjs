@@ -67,12 +67,12 @@ test('G2d refill is an explicit choice: the pump restores pressure, filling away
 });
 test('G2d extra hose uses more water, cools faster and rescue walks to the truck',()=>{
   const a=make('fireRescue',3),b=make('fireRescue',3,{equipment:{hose:1}});for(const m of [a,b])advance(m,.2,{firing:true,x:m.flames[0].x,y:m.flames[0].y});assert.ok(b.flames[0].heat<a.flames[0].heat);assert.ok(b.water<a.water);
-  const r=b.rescue;advance(b,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,true);const distance=Math.hypot(r.walkX-config.fireRescue.crew.truckX,r.walkY-config.fireRescue.crew.truckY);advance(b,.5);assert.ok(Math.hypot(r.walkX-config.fireRescue.crew.truckX,r.walkY-config.fireRescue.crew.truckY)<distance);
+  parkRescue(b);const r=b.rescue;advance(b,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,true);const distance=Math.hypot(r.walkX-config.fireRescue.crew.truckX,r.walkY-config.fireRescue.crew.truckY);advance(b,.5);assert.ok(Math.hypot(r.walkX-config.fireRescue.crew.truckX,r.walkY-config.fireRescue.crew.truckY)<distance);
 });
 test('G2d v5 → v7 adds hose and permanent alien ranks and preserves city, event, currency, avatar and all earned upgrades',()=>{
   const e=createEngine(data,{storage:null,now:()=>1234}),old=JSON.parse(e.exportJSON());old.version=5;delete old.minigameEquipment.fireRescue.hose;old.minigameEquipment.navalDuel.damage=2;old.money=432;
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:22,phase:'playing',warningUntil:100,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,14);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=14;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
+  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,15);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=15;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
 });
 for(const rank of [-1,1.5,99,'1'])test(`G2d v6 rejects invalid hose rank ${rank}`,()=>{
   const e=createEngine(data,{storage:null}),save=JSON.parse(e.exportJSON());save.minigameEquipment.fireRescue.hose=rank;assert.equal(migrateSave(save,data,e.registry).ok,false);
@@ -115,3 +115,5 @@ test('G2d fully upgraded naval hull and weapons can settle a long fleet victory'
   for(let i=0;i<20000&&!m.result;i++)m.update(.04,pilotInput('navalDuel',m,b,memory));assert.equal(m.result?.outcome,'win');assert.ok(m.score<=b.maximumScore);
   const e=createEngine(data,{storage:null}),result=e.registry.minigames.get('navalDuel').onResult(m.result,{engine:e,config,level:10});assert.ok(result,'a legitimate upgraded victory must pass score validation');assert.ok(result.stars>=1);
 });
+
+function parkRescue(m){const b=config.fireRescue,r=m.rescue;Object.assign(m.truck,{x:r.world[0],z:r.world[2],targetX:r.world[0],targetZ:r.world[2]});m.flames[r.fireIndex].heat=Math.min(m.flames[r.fireIndex].heat,b.rescue.safeHeat/2);m.update(.001,{});return m;}
