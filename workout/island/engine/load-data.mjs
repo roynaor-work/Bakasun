@@ -1,5 +1,5 @@
-import {DATA_VERSION,dataURL} from '../release.mjs?v=g3e-20261017-1';
-import { configureBuilding } from './registry.mjs?v=g3e-20261017-1';
+import {DATA_VERSION,dataURL} from '../release.mjs?v=g7-g3f-20261017-1';
+import { configureBuilding } from './registry.mjs?v=g7-g3f-20261017-1';
 
 const FILES = ['config', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 

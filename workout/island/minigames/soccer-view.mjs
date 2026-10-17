@@ -1,8 +1,8 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig} from './soccer-rig.mjs?v=g3e-20261017-1';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint} from './soccer-presentation.mjs?v=g3e-20261017-1';
+import {cloneSoccerRig} from './soccer-rig.mjs?v=g7-g3f-20261017-1';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint} from './soccer-presentation.mjs?v=g7-g3f-20261017-1';
 
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   const roster=config.players.roster;let poseFocus=null,poses=[];
@@ -31,8 +31,8 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     line(d*(hx-4.1),0,.08,9);line(d*(hx-2.05),-4.5,4.1,.08);line(d*(hx-2.05),4.5,4.1,.08);
     line(d*(hx-1.7),0,.08,5.8);line(d*(hx-.85),-2.9,1.7,.08);line(d*(hx-.85),2.9,1.7,.08);
     addStatic(new T.CircleGeometry(.1,12),white,d*(hx-3),.025,0,-Math.PI/2);
-    for(const z of [-gw/2,gw/2])addStatic(new T.CylinderGeometry(.075,.075,gh,8),white,d*hx,gh/2,z);
-    addStatic(new T.CylinderGeometry(.075,.075,gw,8),white,d*hx,gh,0,Math.PI/2);
+    for(const z of [-gw/2,gw/2])addStatic(new T.CylinderGeometry(config.pitch.postRadius,config.pitch.postRadius,gh,8),white,d*hx,gh/2,z);
+    addStatic(new T.CylinderGeometry(config.pitch.postRadius,config.pitch.postRadius,gw,8),white,d*hx,gh,0,Math.PI/2);
     addStatic(new T.BoxGeometry(gd,.06,gw),white,d*(hx+gd/2),.04,0);
     for(let row=0;row<3;row++)addStatic(new T.BoxGeometry(32,.38,1.1),row===2?seat:concrete,0,.1+row*.43,-hz-2.6-row*1.1);
     addStatic(new T.BoxGeometry(31,.7,.12),dark,0,.3,d*(hz+1.3));

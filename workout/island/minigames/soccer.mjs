@@ -1,4 +1,5 @@
-import {cardEffects} from '../activity/soccer-card.mjs?v=g3e-20261017-1';
+import {cardEffects} from '../activity/soccer-card.mjs?v=g7-g3f-20261017-1';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=g7-g3f-20261017-1';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);
@@ -47,10 +48,11 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     for (const p of players) {
       const d=direction(p.team),role=config.players.roles.indexOf(p.role);
       p.x=d*aiConfig.kickoffX[role];p.z=role===1?(p.team===0?-1:1)*aiConfig.kickoffZ:role===3?(p.team===0?1:-1)*aiConfig.kickoffZ:0;p.vx=p.vz=0;p.fx=d;p.fz=0;p.hold=0;p.think=aiConfig.initialThink;p.cooldown=aiConfig.initialCooldown;p.sprinting=false;p.sprintTime=p.sprintRest=0;
+      p.slideTime=p.recover=p.headerTime=p.kickTime=p.stealTime=p.turnLean=0;p.slideAttempted=p.slideWon=false;
     }
     const owner=players.find(p=>p.team===teamId&&p.role==='striker');owner.x=-direction(teamId)*aiConfig.kickoffOwnerX;owner.z=0;
     Object.assign(s.ball,{flight:null,x:0,z:0,y:ph.ballRadius,vx:0,vz:0,vy:0,curve:0,owner:owner.id,lastTeam:teamId,lastPlayer:owner.id,grace:aiConfig.kickoffGrace});
-    s.charge=0;s.charging=false;s.chargeKind=null;s.defenseIdle=0;s.autoSwitchCandidate=null;s.passTarget=null;if(teamId===0)s.controlled=owner.id;
+    clearInput();s.idle=0;s.defenseIdle=0;s.autoSwitchCandidate=null;s.passTarget=null;if(teamId===0)s.controlled=owner.id;
   }
   positionKickoff();
   function nearest(teamId,point,exclude=-1) {
@@ -175,7 +177,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   }
   function restart(type,teamId,x,z) {
     s.phase='restart';s.phaseTime=config.match.restartSeconds;s.restart={type,team:teamId,x,z};
-    const owner=nearest(teamId,{x,z});owner.x=x;owner.z=z;owner.vx=owner.vz=0;owner.fx=direction(teamId);owner.fz=0;
+    const owner=nearest(teamId,{x,z});owner.x=x;owner.z=z;owner.vx=owner.vz=0;owner.fx=direction(teamId);owner.fz=0;owner.slideTime=owner.recover=owner.headerTime=owner.kickTime=owner.stealTime=0;
     for(const p of players)if(p!==owner && distance(p,owner)<rules.restartSpace){p.x=clamp(p.x-direction(teamId)*rules.restartPushX,-hx+rules.restartPlayerInset,hx-rules.restartPlayerInset);p.z=clamp(p.z+(p.id%2?1:-1)*rules.restartPushZ,-hz+rules.restartPlayerInset,hz-rules.restartPlayerInset);}
     Object.assign(s.ball,{flight:null,x,z,y:ph.ballRadius,vx:0,vz:0,vy:0,curve:0,owner:owner.id,grace:rules.restartGrace,lastTeam:teamId,lastPlayer:owner.id});
     if(teamId===0)s.controlled=owner.id;s.passTarget=null;s.chargeKind=null;
@@ -186,7 +188,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     event('goal',{team:teamId});
   }
   function ball(dt) {
-    const b=s.ball,oldX=b.x;b.grace=Math.max(0,b.grace-dt);
+    const b=s.ball;let from={x:b.x,y:b.y,z:b.z};b.grace=Math.max(0,b.grace-dt);
     if(b.owner!==null){const p=players[b.owner];b.x=p.x+p.fx*ph.dribbleOffset;b.z=p.z+p.fz*ph.dribbleOffset;b.y=ph.ballRadius;b.vx=p.vx;b.vz=p.vz;b.vy=0;}
     else if(b.flight){const f=b.flight;f.age=Math.min(f.duration,f.age+dt);const u=f.age/f.duration;b.x=f.fromX+(f.x-f.fromX)*u;b.z=f.fromZ+(f.z-f.fromZ)*u;b.y=ph.ballRadius+4*f.height*u*(1-u);b.vy=4*f.height/f.duration*(1-2*u);if(u>=1){b.flight=null;b.vx=b.vz=b.vy=0;}}
     else {
@@ -196,16 +198,25 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       if(b.y<ph.ballRadius){b.y=ph.ballRadius;b.vy=Math.abs(b.vy)>rules.bounceThreshold?-b.vy*ph.bounce:0;}
       const friction=Math.exp(-ph.friction*dt*(b.y<=ph.ballRadius+rules.groundThreshold?1:rules.airFrictionScale));b.vx*=friction;b.vz*=friction;
     }
-      // Sweep the goal plane for both shots and dribbles.
-      if(Math.abs(b.x)>=hx && Math.abs(oldX)<hx) {
-        const t=(Math.sign(b.x)*hx-oldX)/(b.x-oldX),z=b.z-b.vz*dt*(1-t);
-        if(Math.abs(z)<config.pitch.goalWidth/2-ph.ballRadius && b.y<config.pitch.goalHeight-ph.ballRadius){goal(b.x*s.attackDir>0?0:1);return;}
-      }
-    if(Math.abs(b.x)>hx+rules.outMargin || Math.abs(b.z)>hz+rules.outMargin){
-      const end=Math.abs(b.x)>hx,defender=b.x*s.attackDir>0?1:0;
+    let crossing=pitchCrossing(from,b,config);
+    const contact=goalFrameContact(from,b,config);
+    if(contact&&(!crossing||contact.time<crossing.time)){
+      if(b.owner!==null)players[b.owner].cooldown=rules.tackleCooldown;
+      b.owner=null;b.flight=null;s.passTarget=null;
+      const n=contact.normal,normalSpeed=b.vx*n.x+b.vy*n.y+b.vz*n.z;
+      for(const axis of ['x','y','z'])b['v'+axis]-=(1+ph.postBounce)*normalSpeed*n[axis];
+      from={...contact.point};
+      for(const axis of ['x','y','z']){from[axis]+=n[axis]*1e-5;b[axis]=from[axis]+b['v'+axis]*dt*(1-contact.time);}
+      b.y=Math.max(ph.ballRadius,b.y);b.curve=0;event('post',{kind:contact.kind});
+      crossing=pitchCrossing(from,b,config);
+    }
+    if(crossing){
+      const end=crossing.axis==='x';
+      if(end&&Math.abs(from.x)<=hx+ph.ballRadius&&Math.abs(crossing.z)<config.pitch.goalWidth/2-ph.ballRadius-config.pitch.postRadius&&crossing.y<config.pitch.goalHeight-ph.ballRadius-config.pitch.postRadius){goal(crossing.side*s.attackDir>0?0:1);return;}
+      const defender=crossing.x*s.attackDir>0?1:0;
       const corner=end && b.lastTeam===defender;
       const teamId=end?(corner?1-defender:defender):1-b.lastTeam;
-      restart(corner?'corner':'goalKick',teamId,end?(corner?Math.sign(b.x)*(hx-rules.cornerInset):Math.sign(b.x)*(hx-rules.goalKickInset)):clamp(b.x,-hx+rules.sideGoalInset,hx-rules.sideGoalInset),corner?Math.sign(b.z||1)*(hz-rules.cornerInset):end?0:Math.sign(b.z)*(hz-rules.sideInset));return;
+      restart(!end?'throwIn':corner?'corner':'goalKick',teamId,end?(corner?crossing.side*(hx-rules.cornerInset):crossing.side*(hx-rules.goalKickInset)):clamp(crossing.x,-hx+rules.sideGoalInset,hx-rules.sideGoalInset),corner?Math.sign(crossing.z||1)*(hz-rules.cornerInset):end?0:crossing.side*(hz-rules.sideInset));return;
     }
     for(const p of players) {
       if(p.id===b.owner || p.cooldown>0 || p.recover>0 || p.slideTime>0)continue;
@@ -297,9 +308,13 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       else {s.elapsed=config.match.halfSeconds*2;s.phase='finished';s.result=matchResult(s);event('fulltime');}
     }
   }
+  function clearInput(){held=previousKick=previousPass=previousSwitch=pendingSwitch=pendingRelease=pendingPass=pendingSlide=pendingKick=previousPassHeld=pendingPassStart=pendingPassRelease=false;s.sprint.active=false;s.charging=false;s.charge=0;s.chargeKind=null;}
   return {
     update(dt,input={}) {
       if(!Number.isFinite(dt)||dt<=0 || s.result)return s;
+      // Stoppages must not queue a tap for the next kickoff or restart.
+      if(s.phase!=='playing')clearInput();
+      else {
       // Retain edges until a fixed tick, even on a 120 Hz display.
       if(input.switchPlayer&&!previousSwitch)pendingSwitch=true;previousSwitch=!!input.switchPlayer;
       if(input.passHeld&&!previousPassHeld)pendingPassStart=true;if(previousPassHeld&&!input.passHeld)pendingPassRelease=true;previousPassHeld=!!input.passHeld;
@@ -307,12 +322,13 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       if(held&&!previousKick){if(mode()==='defense')pendingSlide=true;else pendingKick=true;}
       if(previousKick&&!held)pendingRelease=true;previousKick=held;
       if(input.passPressed&&!previousPass)pendingPass=true;previousPass=!!input.passPressed;
+      }
       accumulator+=Math.min(dt,rules.maxUpdateSeconds);
       while(accumulator+1e-10>=step){tick(input);accumulator-=step;}
       return s;
     },
     getState:()=>s,
-    clearInput(){held=previousKick=previousPass=previousSwitch=pendingSwitch=pendingRelease=pendingPass=pendingSlide=pendingKick=previousPassHeld=pendingPassStart=pendingPassRelease=false;s.sprint.active=false;s.charging=false;s.charge=0;s.chargeKind=null;},
+    clearInput,
     snapshot:()=>JSON.parse(JSON.stringify(s)),
     get result(){return s.result;}
   };

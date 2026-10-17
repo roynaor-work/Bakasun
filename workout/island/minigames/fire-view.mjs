@@ -1,9 +1,9 @@
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {palette} from '../view/environment.mjs?v=g3e-20261017-1';
-import {loadFireTruck} from './fire-truck.mjs?v=g3e-20261017-1';
-import {Avatar} from '../view/avatar.mjs?v=g3e-20261017-1';
-import {LocalModels} from '../view/local-models.mjs?v=g3e-20261017-1';
+import {palette} from '../view/environment.mjs?v=g7-g3f-20261017-1';
+import {loadFireTruck} from './fire-truck.mjs?v=g7-g3f-20261017-1';
+import {Avatar} from '../view/avatar.mjs?v=g7-g3f-20261017-1';
+import {LocalModels} from '../view/local-models.mjs?v=g7-g3f-20261017-1';
 
 /** Own everything in this round. Static colored parts share a material and are
  * merged at setup; particles, stream vertices and scratch vectors are fixed. */

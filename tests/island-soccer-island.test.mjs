@@ -2,6 +2,7 @@ import test from 'node:test';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {DATA_VERSION} from '../workout/island/release.mjs';
 import {loadData} from '../workout/island/engine/load-data.mjs';
 import {createEngine} from '../workout/island/engine/engine.mjs';
 import {migrateSave,migrations,validateSave,CURRENT_VERSION,STORAGE_KEY} from '../workout/island/engine/persistence.mjs';
@@ -83,7 +84,7 @@ function fakeBoat(){const root=new T.Group(),texture=new T.Texture(),material=ne
 const naval=data.config.minigames.navalDuel;
 test('G3b patrol normalizes locally, keeps articulated cannon/flag, and releases texture/material/geometry once',async()=>{
  const object=fakeBoat(),resources=[object.children[0].geometry,object.children[0].material,object.children[0].material.map],counts=resources.map(()=>0);resources.forEach((r,i)=>r.addEventListener('dispose',()=>counts[i]++));
- const vessel=createVessel(T,naval.render,{}, {},naval.playerModel,{loader:{async loadAsync(url){assert.match(url,/boat-patrol-512\.glb\?v=g3e/);return {scene:object};}}});await vessel.ready;assert.equal(vessel.modelStatus.loaded,true);assert.equal(vessel.root.children[0].visible,false);assert.ok(vessel.turret.parent);assert.ok(vessel.flag.parent);const bounds=new T.Box3().setFromObject(object);assert.ok(Math.abs(bounds.getSize(new T.Vector3()).z-naval.playerModel.length)<1e-6);vessel.turret.rotation.y=.7;assert.equal(vessel.turret.rotation.y,.7);vessel.dispose();vessel.dispose();assert.deepEqual(counts,[1,1,1]);
+ const vessel=createVessel(T,naval.render,{}, {},naval.playerModel,{loader:{async loadAsync(url){const requested=new URL(url);assert.match(requested.pathname,/boat-patrol-512\.glb$/);assert.equal(requested.searchParams.get('v'),DATA_VERSION);return {scene:object};}}});await vessel.ready;assert.equal(vessel.modelStatus.loaded,true);assert.equal(vessel.root.children[0].visible,false);assert.ok(vessel.turret.parent);assert.ok(vessel.flag.parent);const bounds=new T.Box3().setFromObject(object);assert.ok(Math.abs(bounds.getSize(new T.Vector3()).z-naval.playerModel.length)<1e-6);vessel.turret.rotation.y=.7;assert.equal(vessel.turret.rotation.y,.7);vessel.dispose();vessel.dispose();assert.deepEqual(counts,[1,1,1]);
 });
 for(const path of ['../codex-lab/boat.glb','https://example.com/boat.glb','assets/%2e%2e/%2e%2e/boat.glb'])test(`G3b external patrol path rejected: ${path}`,async()=>{let requests=0;assert.equal(await loadPatrolBoat({...naval.playerModel,path},{loader:{loadAsync(){requests++;}}}),null);assert.equal(requests,0);});
 test('G3b missing/corrupt patrol keeps code ship; late model completion releases its resources',async()=>{

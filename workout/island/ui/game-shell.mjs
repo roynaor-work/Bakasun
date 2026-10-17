@@ -55,9 +55,11 @@ export class GameShell {
     this.landscape=landscape;
     if(landscape){
       const overlay=this.rotationOverlay=document.createElement('section');overlay.className='soccer-rotate';
-      overlay.setAttribute('role','status');
+      overlay.setAttribute('role','region');overlay.setAttribute('aria-label',t('soccer.rotate'));
       overlay.innerHTML='<svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5"><rect x="38" y="22" width="44" height="76" rx="8" transform="rotate(35 60 60)"/><path d="M20 64a42 42 0 0 1 72-34m-1-15 3 17-17-2M100 56a42 42 0 0 1-72 34m1 15-3-17 17 2"/></g></svg>';
-      const text=document.createElement('p');text.textContent=t('soccer.rotate');overlay.append(text);dialog.append(overlay);
+      const text=document.createElement('p');text.textContent=t('soccer.rotate');
+      const pause=document.createElement('button');pause.type='button';pause.className='secondary-button';pause.dataset.action='game-rotate-pause';pause.textContent=t('game.pause');pause.addEventListener('click',()=>this.pause(),options);
+      overlay.append(text,pause);dialog.append(overlay);
       const resize=()=>this.setOrientationBlocked(window.innerHeight>window.innerWidth);
       window.addEventListener('resize',resize,options);screen.orientation?.addEventListener?.('change',resize,options);resize();
     }
@@ -99,8 +101,8 @@ export class GameShell {
     this.paused=false;this.sheet?.remove();this.sheet=null;
     this.dialog.dataset.paused='false';this.pauseButton.textContent=this.t('game.pause');
     this.pauseButton.setAttribute('aria-label',this.t('game.pause'));
-    this.applyPause();this.sound.unlock();
-    this.stage.querySelector('canvas')?.focus();
+    this.applyPause();if(!this.orientationBlocked){this.sound.unlock();this.stage.querySelector('canvas')?.focus();}
+    else this.rotationOverlay.querySelector('button')?.focus();
   }
   dispose(){
     if(this.disposed)return;this.disposed=true;this.events.abort();this.sheet?.remove();this.sound.setPaused(false);

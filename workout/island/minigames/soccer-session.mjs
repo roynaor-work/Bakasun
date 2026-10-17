@@ -1,9 +1,9 @@
-import {actionIcon} from './soccer-icons.mjs?v=g3e-20261017-1';
-import {createSoccer} from './soccer.mjs?v=g3e-20261017-1';
-import {createSoccerView} from './soccer-view.mjs?v=g3e-20261017-1';
-import {createControls} from './controls.mjs?v=g3e-20261017-1';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=g3e-20261017-1';
-import {gameContext} from './context.mjs?v=g3e-20261017-1';
+import {actionIcon} from './soccer-icons.mjs?v=g7-g3f-20261017-1';
+import {createSoccer} from './soccer.mjs?v=g7-g3f-20261017-1';
+import {createSoccerView} from './soccer-view.mjs?v=g7-g3f-20261017-1';
+import {createControls} from './controls.mjs?v=g7-g3f-20261017-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=g7-g3f-20261017-1';
+import {gameContext} from './context.mjs?v=g7-g3f-20261017-1';
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
@@ -39,6 +39,7 @@ export function startSoccer(ctx) {
     document.addEventListener('visibilitychange',()=>{last=0;input.setEnabled(!document.hidden&&!paused);model.clearInput();},options);
     window.addEventListener('pagehide',()=>ctx.cancel(),options);
     const banner=element('div','soccer-goal-banner',t('soccer.goal'));banner.hidden=true;banner.setAttribute('role','status');canvas.after(banner);
+    const phaseBanner=element('div','soccer-phase-banner');phaseBanner.hidden=true;phaseBanner.setAttribute('role','status');canvas.after(phaseBanner);
     const edge=element('span','soccer-edge-arrow','➤');edge.hidden=true;edge.setAttribute('aria-hidden','true');canvas.after(edge);
     view=createSoccerView({canvas,config:viewConfig,onEdge:point=>{edge.hidden=!point;if(point){edge.style.left=`${point.x}px`;edge.style.top=`${point.y}px`;edge.style.transform=`translate(-50%,-50%) rotate(${point.angle}rad)`;}},onContextLost:()=>{if(!disposed){ctx.onError?.('minigame.soccer.webglError');ctx.cancel();}}});
     function updateHud(){
@@ -62,7 +63,9 @@ export function startSoccer(ctx) {
       if(!paused&&!document.hidden){if(!started){started=true;ctx.sound?.('soccerWhistle');}model.update(dt,input.sample(model.getState().attackDir));view.render(model.getState(),dt,frameMs);hud+=dt;}else view.render(model.getState(),0);
       banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
-      if(s.eventId!==eventId){eventId=s.eventId;const sound={header:'soccerKick',volley:'soccerKick',loft:'soccerPass',shot:'soccerKick',pass:'soccerPass',slide:'soccerSlide',goal:'soccerCrowd',halftime:'soccerWhistle',fulltime:'soccerWhistle',play:'soccerWhistle'}[s.event?.type];if(sound)ctx.sound?.(sound);}
+      const phaseText=s.phase==='restart'?t('minigame.soccer.restart.'+s.restart.type):s.phase==='halftime'?t('minigame.soccer.halftime'):'';
+      phaseBanner.hidden=!phaseText;if(phaseBanner.textContent!==phaseText)phaseBanner.textContent=phaseText;
+      if(s.eventId!==eventId){eventId=s.eventId;const sound={post:'hit',restart:'soccerWhistle',header:'soccerKick',volley:'soccerKick',loft:'soccerPass',shot:'soccerKick',pass:'soccerPass',slide:'soccerSlide',goal:'soccerCrowd',halftime:'soccerWhistle',fulltime:'soccerWhistle',play:'soccerWhistle'}[s.event?.type];if(sound)ctx.sound?.(sound);}
       if(hud>=.1||!last){hud=0;updateHud();}
       if(model.result){ctx.finish({outcome:model.result.won?'win':'lose',score:model.result.goalsFor,performance:model.result.won?1:0,soccer:model.result});return;}
       frame=requestAnimationFrame(tick);

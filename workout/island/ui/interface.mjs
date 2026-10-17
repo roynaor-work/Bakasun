@@ -1,5 +1,5 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=g3e-20261017-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=g3e-20261017-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=g7-g3f-20261017-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=g7-g3f-20261017-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -171,7 +171,12 @@ export class IslandInterface {
       if (target !== origin) { event.preventDefault(); event.stopImmediatePropagation(); }
     }, true);
     document.addEventListener('keydown', event => { if (event.key === 'Escape') this.closeDetails(); });
-    this.hudObserver = new ResizeObserver(() => this.root.style.setProperty('--hud-height', `${hud.getBoundingClientRect().height}px`));
+    this.hudObserver = new ResizeObserver(() => {
+      const height=hud.getBoundingClientRect().height;
+      const details=[...hud.querySelectorAll('.city-details,.mission-details,.event-details')].reduce((sum,node)=>sum+node.getBoundingClientRect().height,0);
+      this.root.style.setProperty('--hud-height', `${height}px`);
+      this.root.style.setProperty('--hud-base-height', `${height-details}px`);
+    });
     this.hudObserver.observe(hud);
     this.drawCatalog();
   }
