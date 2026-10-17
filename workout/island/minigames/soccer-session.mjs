@@ -1,10 +1,10 @@
-import {actionIcon} from './soccer-icons.mjs?v=g4c-20261019-1';
-import {createSoccer} from './soccer.mjs?v=g4c-20261019-1';
-import {createSoccerDrill} from './soccer-drill.mjs?v=g4c-20261019-1';
-import {createSoccerView} from './soccer-view.mjs?v=g4c-20261019-1';
-import {createControls} from './controls.mjs?v=g4c-20261019-1';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=g4c-20261019-1';
-import {gameContext} from './context.mjs?v=g4c-20261019-1';
+import {actionIcon} from './soccer-icons.mjs?v=g6b-20261019-1';
+import {createSoccer} from './soccer.mjs?v=g6b-20261019-1';
+import {createSoccerDrill} from './soccer-drill.mjs?v=g6b-20261019-1';
+import {createSoccerView} from './soccer-view.mjs?v=g6b-20261019-1';
+import {createControls} from './controls.mjs?v=g6b-20261019-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=g6b-20261019-1';
+import {gameContext} from './context.mjs?v=g6b-20261019-1';
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {

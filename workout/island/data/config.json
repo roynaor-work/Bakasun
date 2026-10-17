@@ -2554,6 +2554,8 @@
             28,
             12,
             10,
+            8,
+            150,
             8
           ],
           "weaponLevel": 1
@@ -2577,7 +2579,9 @@
             33,
             14,
             12,
-            9
+            9,
+            150,
+            8
           ],
           "weaponLevel": 1
         },
@@ -2600,7 +2604,9 @@
             38,
             16,
             14,
-            10
+            10,
+            150,
+            8
           ],
           "weaponLevel": 1
         },
@@ -2623,7 +2629,9 @@
             43,
             18,
             16,
-            11
+            11,
+            150,
+            8
           ],
           "weaponLevel": 2
         },
@@ -2646,7 +2654,9 @@
             48,
             20,
             18,
-            12
+            12,
+            150,
+            8
           ],
           "weaponLevel": 2
         },
@@ -2669,7 +2679,9 @@
             53,
             22,
             20,
-            13
+            13,
+            150,
+            8
           ],
           "weaponLevel": 2
         },
@@ -2692,7 +2704,9 @@
             58,
             24,
             22,
-            14
+            14,
+            150,
+            8
           ],
           "weaponLevel": 3
         },
@@ -2715,7 +2729,9 @@
             63,
             26,
             24,
-            15
+            15,
+            150,
+            8
           ],
           "weaponLevel": 3
         },
@@ -2738,7 +2754,9 @@
             68,
             28,
             26,
-            16
+            16,
+            150,
+            8
           ],
           "weaponLevel": 3
         },
@@ -2761,7 +2779,9 @@
             73,
             30,
             28,
-            17
+            17,
+            150,
+            8
           ],
           "weaponLevel": 4
         }
@@ -2784,9 +2804,9 @@
           "hp": 1.2,
           "damage": 1,
           "scale": 1.1,
-          "name": "naval.heavy",
+          "name": "naval.cargo",
           "attack": "heavy",
-          "speed": 0.8,
+          "speed": 0.45,
           "beam": 1,
           "length": 1.15,
           "turrets": 2,
@@ -2796,13 +2816,26 @@
           "hp": 0.85,
           "damage": 1.25,
           "scale": 0.85,
-          "name": "naval.runner",
+          "name": "naval.torpedoBoat",
           "attack": "rapid",
-          "speed": 1,
+          "speed": 1.8,
           "beam": 1.2,
           "length": 1.35,
           "turrets": 3,
           "hull": "#756ba5"
+        },
+        {
+          "hp": 1.1,
+          "damage": 0.8,
+          "scale": 0.75,
+          "name": "naval.submarine",
+          "attack": "torpedo",
+          "speed": 0.65,
+          "beam": 0.55,
+          "length": 0.95,
+          "turrets": 0,
+          "hull": "#586a7f",
+          "submarine": true
         }
       ],
       "boss": {
@@ -2849,6 +2882,22 @@
           "width": 1,
           "charges": 2,
           "heal": 1.5,
+          "reloadSeconds": 0
+        },
+        {
+          "id": "vulcan",
+          "title": "ammo.vulcan",
+          "damage": 0.12,
+          "width": 0.45,
+          "charges": 180,
+          "reloadSeconds": 0
+        },
+        {
+          "id": "depth",
+          "title": "ammo.depth",
+          "damage": 1.2,
+          "width": 1.7,
+          "charges": 10,
           "reloadSeconds": 0
         }
       ],
@@ -2971,7 +3020,18 @@
         "maxYaw": 90,
         "defaultYaw": 0,
         "fineStep": 1,
-        "dialRadius": 25
+        "dialRadius": 25,
+        "deadzone": 0.12,
+        "joystickRadius": 48,
+        "rightHanded": true,
+        "kickKey": "Space",
+        "passKey": "KeyX",
+        "sprintKeys": [],
+        "switchKey": "KeyC",
+        "floating": true,
+        "aimDragThreshold": 14,
+        "aimHeightPixels": 160,
+        "aimPixelsToRange": 1.5
       },
       "render": {
         "width": 844,
@@ -3030,7 +3090,18 @@
         "rapidShots": 2,
         "heavyDamage": 1.1,
         "laneSpacing": 52,
-        "lateralRadius": 22
+        "lateralRadius": 22,
+        "enemyFireSeconds": 9,
+        "enemyStagger": 1.8,
+        "vulcanSeconds": 0.09,
+        "vulcanHeatPerShot": 0.07,
+        "vulcanCoolPerSecond": 0.22,
+        "vulcanSpread": 22,
+        "vulcanFlight": 0.22,
+        "vulcanCargoScale": 0.45,
+        "submarineCycle": 9,
+        "submarineSurface": 4,
+        "submarineHitDepth": 0.3
       },
       "targeting": {
         "minX": 65,
@@ -3089,7 +3160,13 @@
         "previewFraction": 0.28,
         "previewSegments": 12,
         "torpedoSecondsMultiplier": 1.8,
-        "torpedoBob": 0.75
+        "torpedoBob": 0.75,
+        "assist": 0.25,
+        "assistRadius": 42,
+        "autoLead": 0.7,
+        "hullLength": 34,
+        "hullBeam": 16,
+        "torpedoTurnRadians": 0.07
       }
     },
     "art": {

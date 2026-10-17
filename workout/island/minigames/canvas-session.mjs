@@ -1,7 +1,8 @@
-import {upgradeCard} from './icons.mjs?v=g4c-20261019-1';
-import {loadOptionalArt} from './model-art.mjs?v=g4c-20261019-1';
-import {createGameArt} from './art.mjs?v=g4c-20261019-1';
-import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=g4c-20261019-1';
+import {createControls} from './controls.mjs?v=g6b-20261019-1';
+import {upgradeCard} from './icons.mjs?v=g6b-20261019-1';
+import {loadOptionalArt} from './model-art.mjs?v=g6b-20261019-1';
+import {createGameArt} from './art.mjs?v=g6b-20261019-1';
+import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=g6b-20261019-1';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   // Each adapter keeps its model coordinates; viewport changes never mutate shared game data.
@@ -16,14 +17,14 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
   const view=createView?.(ctx,model);
   const renderContext={...ctx,art,quality,view};
   const gesture={x:0,y:0,angle:0,yaw:0};
-  const naval=ctx.gameId==='navalDuel';let stickPointer=null,stickOrigin;const stick=controls.querySelector('.naval-stick'),knob=controls.querySelector('.naval-knob');
+  const naval=ctx.gameId==='navalDuel';let sharedControls,previousKick=false,heatFill;let stickPointer=null,stickOrigin;const stick=controls.querySelector('.naval-stick'),knob=controls.querySelector('.naval-knob');
   let qualitySamples=0,qualityMs=0,queuedSpread=false;
   const events = new AbortController(), options = { signal: events.signal };
   const input = { x: undefined, y: undefined, firing: false, nova:false,ammo:false,charge:false,refill:false,left: false, right: false, angle:ctx.balance.defaultAngle, yaw:ctx.balance.controls?.defaultYaw, power:ctx.balance.defaultPower,moveX:0,moveZ:0,yaw:0,elevation:ctx.balance.aim?.defaultElevation,angularAim:naval };
   const pointers = new Map(), keys = new Set();
   let frame, last, disposed = false, observer, scale = 1, scaleY = 1, offsetX = 0, offsetY = 0, statusTime=0, samples=0, totalFrameMs=0, lowQuality=false, paused=false, queuedFire=false, queuedNova=false, queuedAmmo=false, heldFire=false, cssWidth=0,cssHeight=0,pixelRatio=1;
   if(ctx.gameId==='alienDefense')void loadOptionalArt(art,ctx.balance,()=>disposed);
-  const clearInput = () => {input.moveX=input.moveZ=0;stickPointer=null;if(stick)stick.hidden=true; pointers.clear(); keys.clear(); queuedNova=queuedAmmo=queuedFire=heldFire=input.firing=input.left=input.right=input.nova=input.ammo=input.charge=input.refill=input.rescue=input.spread=queuedSpread=false;input.x=input.y=input.truckX=input.truckZ=input.targetX=input.targetZ=input.ammoIndex=undefined; };
+  const clearInput = () => {sharedControls?.reset();previousKick=false;input.moveX=input.moveZ=0;stickPointer=null;if(stick)stick.hidden=true; pointers.clear(); keys.clear(); queuedNova=queuedAmmo=queuedFire=heldFire=input.firing=input.left=input.right=input.nova=input.ammo=input.charge=input.refill=input.rescue=input.spread=queuedSpread=false;input.x=input.y=input.truckX=input.truckZ=input.targetX=input.targetZ=input.ammoIndex=undefined; };
   function syncInput() {
     input.charge=keys.has('charge');input.refill=keys.has('refill');input.rescue=keys.has('rescue');
     input.left = keys.has('ArrowLeft')||keys.has('left');input.right = keys.has('ArrowRight')||keys.has('right');heldFire=keys.has('fire');
@@ -64,7 +65,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
     for (const id of pointers.keys()) {
       for (const node of [canvas,...controls.querySelectorAll('button')]) if (node.hasPointerCapture?.(id)) node.releasePointerCapture(id);
     }
-    view?.dispose();
+    sharedControls?.dispose();view?.dispose();
     clearInput(); input.rescue=false;canvas.width = canvas.height = 0;
     for(const value of Object.values(art)){
       if(value?.getContext)value.width=value.height=0;
@@ -72,7 +73,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
     }
   }
   try {
-    if(naval){const zone=controls.querySelector('.naval-stick-zone');zone.addEventListener('pointerdown',e=>{e.preventDefault();stickPointer=e.pointerId;stickOrigin={x:e.clientX,y:e.clientY};zone.setPointerCapture(e.pointerId);stick.hidden=false;stick.style.left=e.clientX+'px';stick.style.top=e.clientY+'px';},options);zone.addEventListener('pointermove',e=>{if(e.pointerId!==stickPointer)return;const dx=e.clientX-stickOrigin.x,dz=e.clientY-stickOrigin.y,r=ctx.balance.controls.dialRadius;input.moveX=Math.max(-1,Math.min(1,dx/r));input.moveZ=Math.max(-1,Math.min(1,dz/r));knob.style.transform=`translate(${input.moveX*r}px,${input.moveZ*r}px)`;},options);for(const type of ['pointerup','pointercancel','lostpointercapture'])zone.addEventListener(type,e=>{if(e.pointerId===stickPointer){stickPointer=null;input.moveX=input.moveZ=0;stick.hidden=true;}},options);}
+    if(naval){sharedControls=createControls({root:controls,config:ctx.balance.controls});sharedControls.setHanded(true);sharedControls.setEnabled(true);const heat=document.createElement('div');heat.className='naval-heat';heatFill=document.createElement('span');heat.append(heatFill);controls.append(heat);}
     for(const node of [canvas,controls,ctx.dialog])for(const type of ['contextmenu','selectstart','dragstart'])node.addEventListener(type,event=>event.preventDefault(),options);
     canvas.addEventListener('pointerdown',event=>{
       event.preventDefault(); canvas.setPointerCapture(event.pointerId); pointers.set(event.pointerId,'canvas');if(!naval)queuedFire=true;position(event,true);syncInput();
@@ -80,7 +81,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
     canvas.addEventListener('pointermove',event=>{if(['canvas','vehicle'].includes(pointers.get(event.pointerId)))position(event);},options);
     for (const node of controls.querySelectorAll('[data-game-control]')) {
       node.addEventListener('pointerdown',event=>{
-        event.preventDefault();node.setPointerCapture(event.pointerId);pointers.set(event.pointerId,node.dataset.gameControl);if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(node.dataset.gameControl==='fire')queuedFire=true;if(node.dataset.gameControl==='nova')queuedNova=true;if(node.dataset.gameControl==='spread')queuedSpread=true;if(node.dataset.gameControl==='ammo')queuedAmmo=true;syncInput();
+        if(naval&&node.dataset.gameControl==='fire')return;event.preventDefault();node.setPointerCapture(event.pointerId);pointers.set(event.pointerId,node.dataset.gameControl);if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(node.dataset.gameControl==='fire'&&!naval)queuedFire=true;if(node.dataset.gameControl==='nova')queuedNova=true;if(node.dataset.gameControl==='spread')queuedSpread=true;if(node.dataset.gameControl==='ammo')queuedAmmo=true;syncInput();
       },options);
     }
     for(const node of controls.querySelectorAll('[data-game-control]'))node.addEventListener('click',event=>{if(event.detail!==0)return;const key=node.dataset.gameControl;if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(key==='fire')queuedFire=true;else if(key==='nova')queuedNova=true;else if(key==='spread')queuedSpread=true;else if(key==='ammo')queuedAmmo=true;else if(key==='refill'||key==='charge'||key==='rescue')input[key]=!input[key];},options);
@@ -108,6 +109,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
       if(view&&last!==undefined&&!document.hidden&&!paused){qualitySamples++;qualityMs+=time-last;if(qualitySamples>=ctx.balance.render.fallbackSampleFrames){if(qualityMs/qualitySamples>ctx.balance.render.fallbackFrameMs){if(!lowQuality){lowQuality=quality.low=true;view.degrade();resize();}else view.degrade(true);}qualitySamples=qualityMs=0;}}
       last = time;
       try {
+        if(naval&&sharedControls){const sample=sharedControls.sample(),released=previousKick&&!sample.kickHeld;previousKick=sample.kickHeld;if(heatFill){heatFill.style.width=`${model.heat*100}%`;heatFill.parentNode.dataset.overheated=String(model.overheated);}input.moveX=sample.moveX;input.moveZ=sample.moveZ;input.angularAim=false;queuedFire=released;heldFire=model.ammoIndex===4&&sample.kickHeld;input.autoAim=!sample.kickAim.manual;input.assistAim=sample.kickAim.manual;if(sample.kickAim.manual){const range=ctx.balance.aim.minRange+sample.kickAim.height*ctx.balance.aim.rangePerDegree*ctx.balance.aim.maxElevation;input.targetX=model.playerShip.x-sample.kickAim.z*range;input.targetZ=model.playerShip.z+sample.kickAim.x*range;}else{input.targetX=input.targetZ=undefined;}}
         input.firing=heldFire||queuedFire;input.nova=queuedNova;input.spread=queuedSpread;input.ammo=queuedAmmo;if(!paused&&!document.hidden)model.update(dt,input);if(naval&&input.ammoIndex!==undefined)input.ammoIndex=model.ammoIndex;if(dt>0)queuedFire=queuedNova=queuedAmmo=queuedSpread=false;
         if (model.result) {
           const finished = ctx.finish(model.result);

@@ -1,7 +1,7 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=g4c-20261019-1';
-import {inPenaltyArea,keeperSaveChance,rollBall} from './soccer-physics.mjs?v=g4c-20261019-1';
-import {cardEffects} from '../activity/soccer-card.mjs?v=g4c-20261019-1';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=g4c-20261019-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=g6b-20261019-1';
+import {inPenaltyArea,keeperSaveChance,rollBall} from './soccer-physics.mjs?v=g6b-20261019-1';
+import {cardEffects} from '../activity/soccer-card.mjs?v=g6b-20261019-1';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=g6b-20261019-1';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);

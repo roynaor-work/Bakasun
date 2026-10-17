@@ -147,11 +147,9 @@ test('G2c stubborn fire resists water and spreading fire grows faster at equal s
   advance(a,.1,{firing:true,x:a.flames[0].x,y:a.flames[0].y});advance(c,.1,{firing:true,x:c.flames[0].x,y:c.flames[0].y});assert.ok(a.flames[0].heat<c.flames[0].heat);
   a.flames[0].heat=.5;advance(a,.1);advance(d,.1);assert.ok(d.flames[0].heat>a.flames[0].heat);assert.ok(b.fireTypes[2].growth>1);
 });
-test('G2c depleted selected ammunition does not fire or silently switch, and rate reduces the actual turn wait',()=>{
+test('G2c depleted selected ammunition does not fire or silently switch, and enemy fire follows its own timer',()=>{
   const b=config.navalDuel,m=make('navalDuel',10,{equipment:{ammo:1}});m.update(.001,{ammo:true});m.ammo[1]=0;m.update(.001,{firing:true});assert.equal(m.phase,'aim');assert.equal(m.ammoIndex,1);assert.equal(m.ammo[1],0);const supply=m.ammo[0];m.update(.001,{firing:false,ammoIndex:0});m.update(.001,{firing:true});assert.equal(m.phase,'shot');assert.equal(m.ammo[0],supply-1);
-  const normal=make('navalDuel',10),fast=make('navalDuel',10,{equipment:{rate:1.6}});
-  for(const ship of [normal,fast]){ship.update(.01,{firing:true});navalHit(ship,b);}
-  advance(fast,b.turnPauseSeconds/1.6+.02);advance(normal,b.turnPauseSeconds/1.6+.02);assert.equal(fast.phase,'shot');assert.equal(normal.phase,'enemy');
+  const idle=make('navalDuel',10);advance(idle,b.combat.enemyFireSeconds+.1);assert.ok(idle.enemyFired>0);assert.equal(idle.ammo[0],b.levels[9].ammunition[0]);
 });
 for(const id of Object.keys(models))test(`G2c ${id} stage-10 threat and rewards exceed stage 1 with identical equipment`,()=>{
   const low=make(id,1),high=make(id,10);assert.ok(high.settings.winMoney>low.settings.winMoney);assert.ok(high.settings.winParts>low.settings.winParts);

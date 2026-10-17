@@ -33,7 +33,7 @@ for(let index=0;index<4;index++)test(`G2d ammunition ${index} is available witho
 });
 test('G2d enemies move in distance and position at stage one; several living ships share high stages',()=>{
   const m=make('navalDuel'),x=m.enemyX,z=m.enemies[0].z;advance(m,.8);assert.notEqual(m.enemyX,x);assert.notEqual(m.enemies[0].z,z);
-  const high=make('navalDuel',10);high.update(.02,{});assert.equal(high.enemies.filter(e=>e.active&&e.hp>0).length,3);assert.equal(new Set(high.enemies.map(e=>e.kind)).size,3);
+  const high=make('navalDuel',10);high.update(.02,{});assert.equal(high.enemies.filter(e=>e.active&&e.hp>0).length,3);assert.equal(new Set(high.enemies.map(e=>e.kind)).size,4);
 });
 test('G2d ammunition needs no reload at either firing rank and later encounters have longer budgets',()=>{
   const a=make('navalDuel'),b=make('navalDuel',1,{equipment:{rate:1.6}});for(const m of [a,b])m.update(.02,{firing:true});assert.equal(a.cooldowns[0],0);assert.equal(b.cooldowns[0],0);
@@ -100,14 +100,7 @@ test('G2d later fire stages add a second/third civilian and wind affects the act
 test('G2d late bosses fire a separate moving energy bolt',()=>{
   const balance=structuredClone(config.alienDefense);Object.assign(balance.levels[0],{waves:1,boss:true,bossShots:2});const m=make('alienDefense',1,{balance,random:()=>.999});m.update(.02,{});assert.equal(m.bolts.length,2);assert.ok(m.bolts.some(b=>b.vx!==0));
 });
-test('G2d concurrently visible naval enemies take their own firing turns',()=>{
-  const b=config.navalDuel,m=make('navalDuel',10);
-  for(let turn=0;turn<3;turn++){
-    m.update(.01,{firing:false});m.update(.01,{firing:true,targetX:b.targeting.minX,targetZ:b.targeting.maxZ});
-    advance(m,m.ball.duration+.02);advance(m,b.turnPauseSeconds+.04);assert.equal(m.ball.owner,'enemy');assert.equal(m.ball.source,turn);
-    advance(m,m.ball.duration+.02);advance(m,b.turnPauseSeconds+.04);assert.equal(m.phase,'aim');
-  }
-});
+test('G2d concurrently visible naval enemies fire on independent timers',()=>{const b=config.navalDuel,m=make('navalDuel',10),supply=[...m.ammo];advance(m,b.combat.enemyFireSeconds+b.combat.enemyStagger*2+.1);for(const e of m.enemies.filter(e=>e.active))assert.ok(e.fired>=1);assert.deepEqual(m.ammo,supply);assert.ok(m.enemyFired>=3);});
 test('G2d longer alien rounds preserve earned score while bounding their coin payout',()=>{
   const e=createEngine(data,{storage:null}),b=config.alienDefense,s=b.levels[0],result=e.registry.minigames.get('alienDefense').onResult({outcome:'win',score:s.scoreLimit,performance:1},{engine:e,config,level:1});assert.ok(result);assert.equal(result.score,s.scoreLimit);assert.equal(result.money,Math.floor(s.rewardScoreLimit/b.pointsPerCoin)+s.winMoney);assert.equal(result.stars,3);
 });

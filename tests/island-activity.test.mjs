@@ -73,12 +73,12 @@ test('fire hose aims at cartoon flames, refills water and pressure, and repeats 
   for(let i=0;i<100;i++)dry.update(.04,{refill:true,charge:true});assert.equal(dry.water,water);assert.ok(dry.pressure>pressure);
   for(let i=0;i<2000&&!dry.result;i++)dry.update(.04,{});assert.equal(dry.result.outcome,'lose');
 });
-test('naval duel uses a sea target and alternating turns, is winnable and deterministic with a seed',()=>{
+test('naval duel uses a sea target and independent firing, is winnable and deterministic with a seed',()=>{
   function play(){
     const balance=data.config.minigames.navalDuel,model=createNavalModel({config:data.config.minigames,balance,level:1,random:seededRandom(5)});
     const memory={},phases=new Set();
     for(let i=0;i<10000&&!model.result;i++){phases.add(model.phase);model.update(.04,pilotInput('navalDuel',model,balance,memory));}
-    assert.ok(phases.has('enemy'));assert.equal(model.result.outcome,'win');return model.snapshot();
+    assert.ok(phases.has('shot'));assert.ok(!phases.has('enemy'));assert.equal(model.result.outcome,'win');return model.snapshot();
   }assert.deepEqual(play(),play());
 });
 function eventCity(f){f.engine.state.buildings.push({id:'test-airbase',typeId:'airbase',x:16,z:0,level:1});f.engine.state.world={stage:1,size:20};f.engine.state.buildings.push({id:'test-harbor',typeId:'harbor',x:0,z:6,level:1});}

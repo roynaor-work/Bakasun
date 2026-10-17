@@ -1,14 +1,14 @@
-import {createSound} from '../minigames/sound.mjs?v=g4c-20261019-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g4c-20261019-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g4c-20261019-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=g4c-20261019-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=g4c-20261019-1';
-import {gameContext} from '../minigames/context.mjs?v=g4c-20261019-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g4c-20261019-1';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=g4c-20261019-1';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=g4c-20261019-1';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=g4c-20261019-1';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=g4c-20261019-1';
+import {createSound} from '../minigames/sound.mjs?v=g6b-20261019-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g6b-20261019-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g6b-20261019-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=g6b-20261019-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=g6b-20261019-1';
+import {gameContext} from '../minigames/context.mjs?v=g6b-20261019-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g6b-20261019-1';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=g6b-20261019-1';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=g6b-20261019-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=g6b-20261019-1';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=g6b-20261019-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -189,8 +189,8 @@ export class ActivityInterface {
       const refill=control('refill',this.t('minigame.refill')),pump=control('charge',this.t('minigame.charge'));refill.prepend(gameIcon('tap'));pump.prepend(gameIcon('pump'));const rescue=control('rescue',this.t('minigame.rescue')),spray=control('fire',this.t('minigame.spray'));rescue.prepend(gameIcon('ladder'));controls.append(spray,refill,pump,rescue);
     }
     if(id==='navalDuel') {
-      const zone=el('div','naval-stick-zone'),stick=el('div','naval-stick'),knob=el('span','naval-knob');stick.hidden=true;stick.append(knob);zone.append(stick);controls.append(zone);const fire=control('fire',this.t('minigame.launch'));fire.prepend(gameIcon('cannon'));controls.append(fire);
-      const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select','');node.append(gameIcon(['shell','double','torpedo','absorb'][i]),el('span','ammo-copy'));node.dataset.ammoIndex=i;node.setAttribute('aria-label',this.t(ammo.title));node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
+      const zone=el('div','naval-stick-zone soccer-stick-zone'),stick=el('div','naval-stick soccer-joystick'),knob=el('span','naval-knob soccer-knob');stick.id='joystick';knob.id='knob';stick.hidden=true;stick.append(knob);zone.append(stick);controls.append(zone);const fire=control('fire',this.t('minigame.launch'));fire.id='shoot';fire.prepend(gameIcon('cannon'));controls.append(fire);
+      const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select','');node.append(gameIcon(['shell','double','torpedo','absorb','cannon','ladder'][i]),el('span','ammo-copy'));node.dataset.ammoIndex=i;node.setAttribute('aria-label',this.t(ammo.title));node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
       fleetMeters={};for(const [key,title]of [['player','minigame.fleet'],['enemy','minigame.enemyFleet']]){const label=el('label','game-gauge',this.t(title)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);fleetMeters[key]=meter;}turnLabel=el('p','game-turn');controls.append(turnLabel);
     }
     warning=el('p','game-warning');warning.hidden=true;warning.setAttribute('role','alert');stage.append(warning);
