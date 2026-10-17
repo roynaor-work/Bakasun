@@ -55,11 +55,11 @@ test('G3c fixed-tick input retains short pass/switch/kick edges at 120Hz',()=>{
  assert.equal(s.event?.type,'shot');
 });
 test('G3c sprint increases only controlled speed by the configured multiplier',()=>{
- const normal=setup(),fast=setup();for(const g of [normal,fast])Object.assign(g.getState().ball,{owner:null,y:1000});advance(normal,.4,{moveX:1});advance(fast,.4,{moveX:1,sprintHeld:true});near(fast.getState().players[0].vx/normal.getState().players[0].vx,c.sprint.multiplier);near(fast.getState().sprint.value,100-.4*30);
+ const normal=setup(),fast=setup();for(const g of [normal,fast])Object.assign(g.getState().ball,{owner:null,y:1000});advance(normal,.4,{moveX:1});advance(fast,.4,{moveX:1,sprintHeld:true});near(fast.getState().players[0].vx/normal.getState().players[0].vx,c.sprint.multiplier);near(fast.getState().sprint.value,c.sprint.capacity-.4*c.sprint.drainPerSecond);
  for(let i=1;i<6;i++)near(fast.getState().players[i].vx,normal.getState().players[i].vx);
 });
 test('G3c exhaustion stops sprint until minToStart; regeneration waits for delay',()=>{
- const g=setup(),s=g.getState();Object.assign(s.ball,{owner:null,y:1000});advance(g,3.5,{moveZ:1,sprintHeld:true});assert.equal(s.sprint.locked,true);assert.equal(s.sprint.active,false);
+ const g=setup(),s=g.getState();Object.assign(s.ball,{owner:null,y:1000});advance(g,c.sprint.capacity/c.sprint.drainPerSecond+.15,{moveZ:1,sprintHeld:true});assert.equal(s.sprint.locked,true);assert.equal(s.sprint.active,false);
  const empty=s.sprint.value;advance(g,.3,{});near(s.sprint.value,empty);advance(g,.8,{});assert.ok(s.sprint.value>empty&&s.sprint.value<c.sprint.minToStart);g.update(dt,{moveX:1,sprintHeld:true});assert.equal(s.sprint.active,false);
  advance(g,1.4,{});assert.ok(s.sprint.value>=c.sprint.minToStart);g.update(dt,{moveX:1,sprintHeld:true});assert.equal(s.sprint.active,true);
 });
