@@ -536,6 +536,8 @@ export class IslandInterface {
     this.view.detachAvatarPreview?.();
     this.modalRoot.replaceChildren(); this.root.inert = false;
     this.previousFocus?.focus();
+    // Landscape info cards hide the HUD, so its city toggle cannot receive focus.
+    if(document.activeElement!==this.previousFocus)(this.info.hidden?this.cityToggle:this.info.querySelector('button:not(:disabled)'))?.focus();
     this.view.setAvatar(this.engine.state.avatar);
   }
   showAvatar() {

@@ -15,6 +15,7 @@ await verify('g7',[{width:740,height:360},{width:844,height:390},{width:390,heig
  await shot('city-card',740);
  await tap('[data-action=city-hall-games]');assert.ok(await page.locator('.game-cards').isVisible());
  await tap('[data-action=close-modal]');await nav();
+ if(landscape)assert.equal(await page.evaluate(()=>document.activeElement.closest('.info-card')!==null),true);
  await page.evaluate(()=>window.__island.ui.closeInfo());
  const rotation=[];
  for(const id of ['soccer','navalDuel','tennis']){
@@ -30,5 +31,5 @@ await verify('g7',[{width:740,height:360},{width:844,height:390},{width:390,heig
   rotation.push(id);
  }
  await page.setViewportSize(viewport);
- return {city,hud,dock,info,rotation,checks:{boundedCityDetails:true,catalogBelowHud:true,usableCityCard:true,cityGamesReachable:true,portraitPauseReachable:true,portraitBackReachable:true,rotationResumesSameSession:true}};
+ return {city,hud,dock,info,rotation,checks:{boundedCityDetails:true,catalogBelowHud:true,usableCityCard:true,cityGamesReachable:true,visibleFocusAfterModal:true,portraitPauseReachable:true,portraitBackReachable:true,rotationResumesSameSession:true}};
 });
