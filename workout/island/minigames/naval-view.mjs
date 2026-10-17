@@ -1,7 +1,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {drawHealthBar} from './art.mjs?v=g3f-20261018-2';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=g3f-20261018-2';
+import {drawHealthBar} from './art.mjs?v=g2j-20261019-1';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=g2j-20261019-1';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */
@@ -109,7 +109,7 @@ export function createNavalView(ctx,model,adapters={}) {
       try{
         for(let i=0;i<positions.count;i++){const x=positions.getX(i),z=positions.getZ(i);positions.setY(i,Math.sin(x*.32+model.time*r.waveSpeed)*Math.cos(z*.2+model.time)*r.waveHeight);}positions.needsUpdate=true;
         const px=model.playerShip.z*r.enemySpacing/balance.combat.laneSpacing,pz=-(model.playerShip.x-balance.shipX)*r.worldScale;animateVessel(player,model.playerShip,px,pz,false);const ease=1-Math.exp(-r.cameraEase*config.maxFrameSeconds);camera.position.x+=(r.camera[0]+px-camera.position.x)*ease;camera.position.z+=(r.camera[2]+pz-camera.position.z)*ease;camera.lookAt(px+r.lookAt[0],r.lookAt[1],pz+r.lookAt[2]);
-        for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];v.root.visible=e.active;if(e.active)animateVessel(v,e,e.z*r.enemySpacing/balance.combat.laneSpacing,-(e.x-balance.shipX)*r.worldScale,true);}
+        for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];v.root.visible=e.active;if(e.active){animateVessel(v,e,e.z*r.enemySpacing/balance.combat.laneSpacing,-(e.x-balance.shipX)*r.worldScale,true);if(balance.shipTypes[e.kind].submarine){v.root.position.y-=e.depth*2;v.root.scale.y=e.depth?.35:1;}}}
         shot.visible=model.phase==='shot';shot.position.set(model.ball.z*r.enemySpacing/balance.combat.laneSpacing,Math.max(.25,(balance.shipY-model.ball.y)*r.worldScale),-(model.ball.x-balance.shipX)*r.worldScale);shot.scale.set(1,1,model.ball.ammo===2?4:1);secondShot.visible=shot.visible&&model.ball.ammo===1;secondShot.position.copy(shot.position);secondShot.position.x+=.6;
         for(let i=0;i<extraVisuals.length;i++){const p=model.extraShots[i],o=extraVisuals[i];o.visible=Boolean(p);if(p)o.position.set(p.z*r.enemySpacing/balance.combat.laneSpacing,Math.max(.25,(balance.shipY-p.y)*r.worldScale),-(p.x-balance.shipX)*r.worldScale);}
         wakes.visible=shot.visible&&model.ball.ammo===2;for(let i=0;i<12;i++){wakeMatrix.makeScale(1+i*.12,1+i*.1,1);wakeMatrix.setPosition(shot.position.x, -shot.position.z+i*.3, .3);wakes.setMatrixAt(i,wakeMatrix);}wakes.instanceMatrix.needsUpdate=true;

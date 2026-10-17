@@ -33,7 +33,7 @@ for(let index=0;index<4;index++)test(`G2d ammunition ${index} is available witho
 });
 test('G2d enemies move in distance and position at stage one; several living ships share high stages',()=>{
   const m=make('navalDuel'),x=m.enemyX,z=m.enemies[0].z;advance(m,.8);assert.notEqual(m.enemyX,x);assert.notEqual(m.enemies[0].z,z);
-  const high=make('navalDuel',10);high.update(.02,{});assert.equal(high.enemies.filter(e=>e.active&&e.hp>0).length,3);assert.equal(new Set(high.enemies.map(e=>e.kind)).size,3);
+  const high=make('navalDuel',10);high.update(.02,{});assert.equal(high.enemies.filter(e=>e.active&&e.hp>0).length,3);assert.equal(new Set(high.enemies.map(e=>e.kind)).size,4);
 });
 test('G2d ammunition needs no reload at either firing rank and later encounters have longer budgets',()=>{
   const a=make('navalDuel'),b=make('navalDuel',1,{equipment:{rate:1.6}});for(const m of [a,b])m.update(.02,{firing:true});assert.equal(a.cooldowns[0],0);assert.equal(b.cooldowns[0],0);
@@ -67,12 +67,12 @@ test('G2d refill is an explicit choice: the pump restores pressure, filling away
 });
 test('G2d extra hose uses more water, cools faster and rescue walks to the truck',()=>{
   const a=make('fireRescue',3),b=make('fireRescue',3,{equipment:{hose:1}});for(const m of [a,b])advance(m,.2,{firing:true,x:m.flames[0].x,y:m.flames[0].y});assert.ok(b.flames[0].heat<a.flames[0].heat);assert.ok(b.water<a.water);
-  const r=b.rescue;advance(b,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,true);const distance=Math.hypot(r.walkX-config.fireRescue.crew.truckX,r.walkY-config.fireRescue.crew.truckY);advance(b,.5);assert.ok(Math.hypot(r.walkX-config.fireRescue.crew.truckX,r.walkY-config.fireRescue.crew.truckY)<distance);
+  parkRescue(b);const r=b.rescue;advance(b,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,true);const distance=Math.hypot(r.walkX-config.fireRescue.crew.truckX,r.walkY-config.fireRescue.crew.truckY);advance(b,.5);assert.ok(Math.hypot(r.walkX-config.fireRescue.crew.truckX,r.walkY-config.fireRescue.crew.truckY)<distance);
 });
 test('G2d v5 → v7 adds hose and permanent alien ranks and preserves city, event, currency, avatar and all earned upgrades',()=>{
   const e=createEngine(data,{storage:null,now:()=>1234}),old=JSON.parse(e.exportJSON());old.version=5;delete old.minigameEquipment.fireRescue.hose;old.minigameEquipment.navalDuel.damage=2;old.money=432;
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:22,phase:'playing',warningUntil:100,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,13);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=13;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
+  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,15);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=15;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
 });
 for(const rank of [-1,1.5,99,'1'])test(`G2d v6 rejects invalid hose rank ${rank}`,()=>{
   const e=createEngine(data,{storage:null}),save=JSON.parse(e.exportJSON());save.minigameEquipment.fireRescue.hose=rank;assert.equal(migrateSave(save,data,e.registry).ok,false);
@@ -100,14 +100,7 @@ test('G2d later fire stages add a second/third civilian and wind affects the act
 test('G2d late bosses fire a separate moving energy bolt',()=>{
   const balance=structuredClone(config.alienDefense);Object.assign(balance.levels[0],{waves:1,boss:true,bossShots:2});const m=make('alienDefense',1,{balance,random:()=>.999});m.update(.02,{});assert.equal(m.bolts.length,2);assert.ok(m.bolts.some(b=>b.vx!==0));
 });
-test('G2d concurrently visible naval enemies take their own firing turns',()=>{
-  const b=config.navalDuel,m=make('navalDuel',10);
-  for(let turn=0;turn<3;turn++){
-    m.update(.01,{firing:false});m.update(.01,{firing:true,targetX:b.targeting.minX,targetZ:b.targeting.maxZ});
-    advance(m,m.ball.duration+.02);advance(m,b.turnPauseSeconds+.04);assert.equal(m.ball.owner,'enemy');assert.equal(m.ball.source,turn);
-    advance(m,m.ball.duration+.02);advance(m,b.turnPauseSeconds+.04);assert.equal(m.phase,'aim');
-  }
-});
+test('G2d concurrently visible naval enemies fire on independent timers',()=>{const b=config.navalDuel,m=make('navalDuel',10),supply=[...m.ammo];advance(m,b.combat.enemyFireSeconds+b.combat.enemyStagger*2+.1);for(const e of m.enemies.filter(e=>e.active))assert.ok(e.fired>=1);assert.deepEqual(m.ammo,supply);assert.ok(m.enemyFired>=3);});
 test('G2d longer alien rounds preserve earned score while bounding their coin payout',()=>{
   const e=createEngine(data,{storage:null}),b=config.alienDefense,s=b.levels[0],result=e.registry.minigames.get('alienDefense').onResult({outcome:'win',score:s.scoreLimit,performance:1},{engine:e,config,level:1});assert.ok(result);assert.equal(result.score,s.scoreLimit);assert.equal(result.money,Math.floor(s.rewardScoreLimit/b.pointsPerCoin)+s.winMoney);assert.equal(result.stars,3);
 });
@@ -122,3 +115,5 @@ test('G2d fully upgraded naval hull and weapons can settle a long fleet victory'
   for(let i=0;i<20000&&!m.result;i++)m.update(.04,pilotInput('navalDuel',m,b,memory));assert.equal(m.result?.outcome,'win');assert.ok(m.score<=b.maximumScore);
   const e=createEngine(data,{storage:null}),result=e.registry.minigames.get('navalDuel').onResult(m.result,{engine:e,config,level:10});assert.ok(result,'a legitimate upgraded victory must pass score validation');assert.ok(result.stars>=1);
 });
+
+function parkRescue(m){const b=config.fireRescue,r=m.rescue;Object.assign(m.truck,{x:r.world[0],z:r.world[2],targetX:r.world[0],targetZ:r.world[2]});m.flames[r.fireIndex].heat=Math.min(m.flames[r.fireIndex].heat,b.rescue.safeHeat/2);m.update(.001,{});return m;}

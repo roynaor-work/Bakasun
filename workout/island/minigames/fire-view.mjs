@@ -1,9 +1,9 @@
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {palette} from '../view/environment.mjs?v=g3f-20261018-2';
-import {loadFireTruck} from './fire-truck.mjs?v=g3f-20261018-2';
-import {Avatar} from '../view/avatar.mjs?v=g3f-20261018-2';
-import {LocalModels} from '../view/local-models.mjs?v=g3f-20261018-2';
+import {palette} from '../view/environment.mjs?v=g2j-20261019-1';
+import {loadFireTruck} from './fire-truck.mjs?v=g2j-20261019-1';
+import {Avatar} from '../view/avatar.mjs?v=g2j-20261019-1';
+import {LocalModels} from '../view/local-models.mjs?v=g2j-20261019-1';
 
 /** Own everything in this round. Static colored parts share a material and are
  * merged at setup; particles, stream vertices and scratch vectors are fixed. */
@@ -72,7 +72,7 @@ export function createFireScene(ctx,model,adapters={}) {
   const hydrantBase=new T.Group();scene.add(hydrantBase);
   round(.24,1,r.truck,7.3,.6,10,hydrantBase);round(.37,.16,palette.cream,7.3,1.07,10,hydrantBase);
   box(1,.17,.17,r.truck,7.3,.9,10,hydrantBase);merge(hydrantBase);
-  const nozzle=new T.Vector3();
+  const nozzle=new T.Vector3(),hoseStart=new T.Vector3();let handHose=false;
   merge(fixed);
   const hoseArray=new Float32Array(9),hoseGeometry=ownG(new T.BufferGeometry());hoseGeometry.setAttribute('position',new T.BufferAttribute(hoseArray,3));const hydrantHose=new T.Line(hoseGeometry,ownM(new T.LineBasicMaterial({color:balance.hydrant.hoseColor})));scene.add(hydrantHose);
   const cannon=new T.Group(),barrel=new T.Group(),cannonMuzzle=new T.Object3D();scene.add(cannon);cannon.add(barrel);
@@ -134,7 +134,7 @@ export function createFireScene(ctx,model,adapters={}) {
   function animate(){
     if(disposed)return;
     hydrantHose.visible=model.atHydrant;const hp=balance.hydrant.position;hoseArray.set([hp[0],.35,hp[2],(hp[0]+model.truck.x)/2,.12,(hp[2]+model.truck.z)/2,model.truck.x,.7,model.truck.z]);hoseGeometry.attributes.position.needsUpdate=true;
-    truckBase.position.set(model.truck.x,0,model.truck.z);
+    truckBase.position.set(model.truck.x,0,model.truck.z);firefighter.position.set(model.truck.x+balance.crew.followX,0,model.truck.z+balance.crew.followZ);firefighter.rotation.y=Math.atan2(model.aim.x-model.nozzle.x,model.aim.y-model.nozzle.y);firefighter.rotation.x=model.spraying?balance.crew.sprayLean:0;
     ladder.position.set(model.truck.x,2,model.truck.z);
     worldPoint(model.aim.x,model.aim.y,impact);
     cannon.position.set(model.truck.x,balance.vehicle.cannonPivot[1],model.truck.z);
@@ -167,7 +167,7 @@ export function createFireScene(ctx,model,adapters={}) {
     stream.visible=model.spraying;secondStream.visible=model.spraying&&model.extraHose>0;secondStream.position.x=.45;
     if(model.spraying){
       const radius=r.streamRadius*Math.max(.25,model.pressure)*(1+model.charge);
-      for(let i=0;i<=r.streamSegments;i++){const t=i/r.streamSegments,u=1-t,cx=u*nozzle.x+t*impact.x,cy=u*nozzle.y+t*impact.y+4*u*t*r.streamRise,cz=u*nozzle.z+t*impact.z;
+      for(let i=0;i<=r.streamSegments;i++){const t=i/r.streamSegments,u=1-t,cx=u*(handHose?hoseStart.x:nozzle.x)+t*impact.x,cy=u*(handHose?hoseStart.y:nozzle.y)+t*impact.y+4*u*t*r.streamRise,cz=u*(handHose?hoseStart.z:nozzle.z)+t*impact.z;
         for(let j=0;j<r.streamSides;j++){const angle=j/r.streamSides*Math.PI*2,index=(i*r.streamSides+j)*3;streamArray[index]=cx+Math.cos(angle)*radius;streamArray[index+1]=cy+Math.sin(angle)*radius;streamArray[index+2]=cz;}}
       streamG.attributes.position.needsUpdate=true;
     }
@@ -182,7 +182,7 @@ export function createFireScene(ctx,model,adapters={}) {
   function dispose(){if(disposed)return;disposed=true;truckVisual?.dispose();models.dispose();scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});for(const g of geometries)g.dispose();for(const m of materials)m.dispose();for(const t of textures){t.dispose();if(t.image?.getContext)t.image.width=t.image.height=0;}scene.clear();geometries.clear();materials.clear();textures.clear();}
   function metrics(){let triangles=0,drawCalls=0;scene.traverse(o=>{if(!o.isMesh)return;triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);drawCalls+=Array.isArray(o.material)?o.material.length:1;});return {triangles,drawCalls,geometries:geometries.size,materials:materials.size,textures:textures.size,disposed};}
   animate();
-  return {scene,camera,firefighter,truckBase,cannon,nozzle,
+  return {scene,camera,firefighter,truckBase,cannon,nozzle,setHoseStart(v){handHose=Boolean(v);if(v)hoseStart.copy(v);},
     async loadHydrant(){const spec=balance.hydrant;if(!await models.load(spec)||disposed)return false;const visual=models.create(spec,{height:spec.height});if(!visual)return false;visual.position.fromArray(spec.position);scene.add(visual);hydrantVisual=visual;hydrantBase.visible=false;return true;},
     hydrantMetrics(){return {loaded:Boolean(hydrantVisual),art:models.metrics()};},
     setTruck(visual){if(disposed){visual.dispose();return false;}scene.add(visual.root);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls||visual.cannonFaces===0){visual.dispose();return false;}truckVisual=visual;truckBase.visible=cannon.visible=false;return true;},
@@ -210,13 +210,14 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
       void avatar.load({shirtColor:ctx.config.visuals.palette.uniform,pantsColor:palette.teal,hairstyle:'short'}).then(()=>{
         if(disposed||low){disposeAvatar();return;}
         if(world.metrics().triangles>r.maxTriangles||world.metrics().drawCalls>r.maxDrawCalls){disposeAvatar();return;}
+        const head=avatar.root.getObjectByName('Head');if(head){const helmet=new T.Mesh(new T.SphereGeometry(.36,10,6),new T.MeshStandardMaterial({color:ctx.config.visuals.palette.helmet}));helmet.scale.y=.4;helmet.position.y=.24;head.add(helmet);}const chest=avatar.root.getObjectByName('Chest');if(chest){const stripe=new T.Mesh(new T.BoxGeometry(.7,.08,.12),new T.MeshBasicMaterial({color:0xffff99}));stripe.position.set(0,.2,.22);chest.add(stripe);}
         avatarReady=true;avatar.holder.visible=true;world.firefighter.visible=false;
       }).catch(()=>{disposeAvatar();});
     }
   }catch{failed=true;dispose();return null;}
   const pointer=new T.Vector2(),ray=new T.Raycaster(),ground=new T.Plane(new T.Vector3(0,1,0),0),hit=new T.Vector3(),point=new T.Vector3(),screen={x:0,y:0};
   const view={get mode(){return failed?'canvas':'three';},
-    metrics(){return {...world.metrics(),low,avatarLoaded:avatarReady,rendererTriangles:renderer.info?.render.triangles||0,rendererDrawCalls:renderer.info?.render.calls||0,truck:world.truckMetrics(),hydrant:world.hydrantMetrics()};},
+    metrics(){return {...world.metrics(),low,avatarLoaded:avatarReady,avatarPosition:avatarReady?{x:avatar.holder.position.x,y:avatar.holder.position.y,z:avatar.holder.position.z}:null,rendererTriangles:renderer.info?.render.triangles||0,rendererDrawCalls:renderer.info?.render.calls||0,truck:world.truckMetrics(),hydrant:world.hydrantMetrics()};},
     degrade(fallback=false){if(disposed)return;if(fallback){failed=true;dispose();}else if(!low){low=true;renderer.setSize(r.width*r.resolutionScale,r.height*r.resolutionScale,false);if(avatar){disposeAvatar();avatarReady=false;world.firefighter.visible=true;}}},dispose,
     resize(w=ctx.config.width,h=ctx.config.height){if(disposed)return;renderer.setSize(w*(low?r.resolutionScale:1),h*(low?r.resolutionScale:1),false);world.camera.aspect=w/h;const factor=Math.max(1,(r.width/r.height)/(w/h));world.camera.position.fromArray(r.camera);world.camera.position.sub(new T.Vector3(...r.lookAt)).multiplyScalar(factor).add(new T.Vector3(...r.lookAt));world.camera.lookAt(...r.lookAt);world.camera.updateProjectionMatrix();},
     projectTarget(x,y){if(disposed)return null;world.worldPoint(x,y,point);world.project(point,screen);return {x:screen.x,y:screen.y};},
@@ -235,13 +236,14 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
     draw(p){
       if(disposed||failed)return false;
       try{
-        world.animate();if(avatarReady)avatar.tick(Math.max(0,model.time-lastTime),model.time);lastTime=model.time;
+        if(avatarReady){const delta=Math.max(0,model.time-lastTime),driving=Math.hypot(model.truck.targetX-model.truck.x,model.truck.targetZ-model.truck.z)>.05;avatar.play(driving);avatar.mixer?.update(delta);avatar.holder.position.set(model.truck.x+ctx.balance.crew.followX,driving?1.1:0,model.truck.z+ctx.balance.crew.followZ);world.worldPoint(model.aim.x,model.aim.y,point);avatar.holder.rotation.y=Math.atan2(point.x-avatar.holder.position.x,point.z-avatar.holder.position.z);avatar.holder.rotation.x=model.atHydrant&&model.connection<ctx.balance.hydrant.connectSeconds?ctx.balance.crew.connectLean:model.spraying?ctx.balance.crew.sprayLean:0;const rescue=model.rescues.find(r=>r.progress>0&&(!r.rescued||r.descent<1));if(rescue){const u=rescue.rescued?1-rescue.descent:rescue.progress/rescue.seconds;point.fromArray(rescue.world);avatar.holder.position.lerp(point,u);}for(const side of ['L','R']){const arm=avatar.root.getObjectByName('UpperArm_'+side),fore=avatar.root.getObjectByName('LowerArm_'+side);if(arm&&(model.spraying||model.atHydrant||rescue)){arm.rotation.x-=ctx.balance.crew.armRaise;arm.rotation.z+=(side==='L'?1:-1)*ctx.balance.crew.sprayLean;}if(fore&&(model.spraying||model.atHydrant))fore.rotation.x-=ctx.balance.crew.forearmBend;}avatar.root.getObjectByName('Ball')?.traverse(o=>o.visible=false);avatar.holder.updateMatrixWorld(true);const hand=avatar.root.getObjectByName('Hand_R');if(hand){hand.getWorldPosition(point);world.setHoseStart(point);}}else world.setHoseStart(null);world.animate();lastTime=model.time;
         renderer.render(world.scene,world.camera);p.drawImage(surface,0,0,ctx.config.width,ctx.config.height);
         const {palette:colors}=ctx.config.visuals;p.font=r.markerFont;p.textAlign='center';
         for(const f of model.flames){if(!f.active)continue;world.worldPoint(f.x,f.y,point);point.y+=1.8;world.project(point,screen);
           if(f.warning>0){p.globalAlpha=.4+.6*Math.abs(Math.sin(model.time*14));p.strokeStyle=colors.embers;p.lineWidth=3;p.beginPath();p.arc(screen.x,screen.y+15,16,0,Math.PI*2);p.stroke();p.globalAlpha=1;}
-          else if(f.heat>0){if(Math.hypot(f.x-model.nozzle.x,f.y-model.nozzle.y)>model.range){p.fillStyle=colors.white;p.fillText(ctx.t('minigame.tooFar'),screen.x,screen.y-10);}p.fillStyle=palette.teal;p.fillRect(screen.x-r.barWidth/2,screen.y,r.barWidth,r.barHeight);p.fillStyle=f.heat>r.heatThresholds[1]?ctx.balance.fireTypes[0].color:colors.gold;p.fillRect(screen.x-r.barWidth/2,screen.y,r.barWidth*f.heat,r.barHeight);}
+          else if(f.heat>0){p.fillStyle=palette.teal;p.fillRect(screen.x-r.barWidth/2,screen.y,r.barWidth,r.barHeight);p.fillStyle=f.heat>r.heatThresholds[1]?ctx.balance.fireTypes[0].color:colors.gold;p.fillRect(screen.x-r.barWidth/2,screen.y,r.barWidth*f.heat,r.barHeight);}
         }
+        if(model.hintId){point.set(model.truck.x,3.5,model.truck.z);world.project(point,screen);p.fillStyle=colors.white;p.fillText(ctx.t(model.hintId),Math.max(70,Math.min(ctx.config.width-70,screen.x)),Math.max(80,screen.y));}
         for(const rescue of model.rescues){if(rescue.expired)continue;point.fromArray(rescue.world);point.y+=2.2;world.project(point,screen);
           if(!rescue.rescued){p.fillStyle=colors.white;p.fillText(ctx.t('minigame.rescueMarker'),screen.x,screen.y);p.fillStyle=palette.teal;p.fillRect(screen.x-r.timerWidth/2,screen.y+5,r.timerWidth,4);p.fillStyle=colors.white;p.fillRect(screen.x-r.timerWidth/2,screen.y+5,r.timerWidth*rescue.remaining/rescue.timeoutSeconds,4);}
           else if(rescue.feedback>0){p.fillStyle=r.success;p.fillText(ctx.t('minigame.rescueHeart'),screen.x,screen.y-rescue.descent*12);}

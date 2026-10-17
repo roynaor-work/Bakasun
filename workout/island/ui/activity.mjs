@@ -1,14 +1,16 @@
-import {createSound} from '../minigames/sound.mjs?v=g3f-20261018-2';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g3f-20261018-2';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3f-20261018-2';
-import {createAmmoVisual} from '../minigames/art.mjs?v=g3f-20261018-2';
-import {equipmentOffer} from '../activity/equipment.mjs?v=g3f-20261018-2';
-import {gameContext} from '../minigames/context.mjs?v=g3f-20261018-2';
-import {gameAvailability} from '../activity/availability.mjs?v=g3f-20261018-2';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=g3f-20261018-2';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=g3f-20261018-2';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=g3f-20261018-2';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=g3f-20261018-2';
+import {hangarAction} from '../activity/hangar.mjs?v=g2j-20261019-1';
+import {hangarPreview} from './hangar-preview.mjs?v=g2j-20261019-1';
+import {createSound} from '../minigames/sound.mjs?v=g2j-20261019-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g2j-20261019-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2j-20261019-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=g2j-20261019-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=g2j-20261019-1';
+import {gameContext} from '../minigames/context.mjs?v=g2j-20261019-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g2j-20261019-1';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=g2j-20261019-1';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=g2j-20261019-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=g2j-20261019-1';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=g2j-20261019-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -121,10 +123,19 @@ export class ActivityInterface {
     }
     dialog.append(list,this.playButton(id,'equipment-play',()=>this.stages(id)));
   }
+  certificateCard(c,stage){const card=el('article','fire-certificate');card.dataset.certificate=String(stage);card.append(el('h3','',this.t('fire.certificate')),el('p','',this.t('fire.certificateName',{name:this.engine.state.avatar.name||this.t(this.engine.state.avatar.nameId)})),el('p','',this.t('minigame.stage',{stage})),el('strong','certificate-stars','★'.repeat(c.stars)+'☆'.repeat(3-c.stars)));for(const key of ['fast','rescue','careful'])card.append(el('p',c[key]?'earned':'',this.t('fire.'+key)));return card;}
+  certificates(){const dialog=this.modal('fire.certificates','minigame.progressHint');let count=0;for(const [i,c]of this.engine.state.fireCertificates.entries())if(c){dialog.append(this.certificateCard(c,i+1));count++;}if(!count)dialog.append(el('p','',this.t('fire.noCertificates')));dialog.append(this.playButton('fireRescue','certificate-play',()=>this.stages('fireRescue')));}
+  hangar(){
+    const dialog=this.modal('hangar.title','hangar.hint'),h=this.engine.state.hangar,c=this.data.config.minigames.alienDefense,canvas=el('canvas','hangar-preview');dialog.dataset.hangar='true';canvas.width=canvas.height=c.hangar.previewSize;
+    const preview=hangarPreview(canvas,c,c.hangar.paints[h.paint]),cleanup=this.ui.modalCleanup;this.ui.modalCleanup=()=>{preview.dispose();cleanup?.();};
+    dialog.append(canvas,el('p','',this.t('hangar.stats',{damage:h.damage,coins:h.coins,credits:h.credits})));const actions=el('div','hangar-actions');
+    for(const key of ['repair','upgrade','paint']){const choose=button(this.t('hangar.'+key),'hangar-'+key,()=>{if(key==='upgrade'){choices.hidden=false;return;}if(hangarAction(h,key,c.hangar)){this.engine.save();this.hangar();}});if(key==='repair')choose.disabled=!h.damage||h.coins<h.damage*c.hangar.repairCost;actions.append(choose);}
+    const choices=el('div','hangar-choices');choices.hidden=true;for(const key of ['rapid','shield']){const choose=button(this.t('hangar.'+key),'hangar-'+key,()=>{if(hangarAction(h,key,c.hangar)){this.engine.save();this.hangar();}});choose.disabled=!h.credits||h[key]>=c.hangar.maxRank;choices.append(choose);}dialog.append(actions,choices,this.playButton('alienDefense','hangar-play',()=>this.stages('alienDefense')));
+  }
   stages(id) {
     if(this.requireBuilding(id))return;
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
-    const dialog=this.modal(game.title,'minigame.progressHint');dialog.dataset.stageMap=id;
+    const dialog=this.modal(game.title,'minigame.progressHint');dialog.dataset.stageMap=id;if(id==='fireRescue')dialog.append(button(this.t('fire.certificates'),'open-certificates',()=>this.certificates()));if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
     dialog.append(el('p','',this.t('minigame.totalStars',{stars:p.stars.reduce((sum,n)=>sum+n,0)})));
     if(id==='tennis'){const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));for(const key of Object.keys(this.data.config.minigames.tennis.difficulties)){const choose=button(this.t('soccer.difficulty.'+key),'tennis-difficulty',()=>{const r=this.engine.setTennisDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.tennisDifficulty===key));choices.append(choose);}dialog.append(choices,this.soccerHandedness('tennis'));}
     if(id==='soccer'){
@@ -183,14 +194,14 @@ export class ActivityInterface {
     const controls=el('div','game-controls'),balance=this.data.config.minigames[id];
     const control=(key,label)=>{const node=button(label,`control-${key}`,()=>{});node.dataset.gameControl=key;return node;};
     let gauges,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,warning;let fireSummary;
-    if(id==='alienDefense'){upgradePanel=el('div','game-upgrade-panel');upgradePanel.hidden=true;upgradePanel.setAttribute('role','group');upgradePanel.setAttribute('aria-label',this.t('minigame.chooseUpgrade'));upgradePanel.append(el('h3','',this.t('minigame.chooseUpgrade')));upgradeButtons=Array.from({length:balance.campaign.choiceCount},()=>button('','run-upgrade',()=>{}));upgradePanel.append(...upgradeButtons);stage.append(upgradePanel);spreadButton=control('spread',this.t('minigame.spreadReady'));controls.append(spreadButton);novaButton=control('nova',this.t('minigame.nova'));novaButton.prepend(gameIcon('nova'));novaButton.title=this.t('minigame.novaHint');controls.append(control('left',`◀ ${this.t('minigame.left')}`),control('fire',this.t('minigame.fire')),control('right',`${this.t('minigame.right')} ▶`),novaButton);}
+    if(id==='alienDefense'){upgradePanel=el('div','game-upgrade-panel');upgradePanel.hidden=true;upgradePanel.setAttribute('role','group');upgradePanel.setAttribute('aria-label',this.t('minigame.chooseUpgrade'));upgradePanel.append(el('h3','',this.t('minigame.chooseUpgrade')));upgradeButtons=Array.from({length:balance.campaign.choiceCount},()=>button('','run-upgrade',()=>{}));upgradePanel.append(...upgradeButtons);stage.append(upgradePanel);spreadButton=control('spread',this.t('minigame.spreadReady'));controls.append(spreadButton);novaButton=control('nova',this.t('minigame.nova'));novaButton.prepend(gameIcon('nova'));novaButton.title=this.t('minigame.novaHint');const zone=el('div','soccer-stick-zone'),stick=el('div','soccer-joystick'),knob=el('span','soccer-knob');stick.id='joystick';knob.id='knob';stick.append(knob);zone.append(stick);const fire=control('fire',this.t('minigame.fire'));fire.id='shoot';novaButton.id='pass';spreadButton.id='sprint';controls.append(zone,fire,novaButton);}
     if(id==='fireRescue') {
-      gauges={};for(const key of ['water','pressure']){const label=el('label','game-gauge',this.t(`minigame.${key}`)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);gauges[key]=meter;}
-      const refill=control('refill',this.t('minigame.refill')),pump=control('charge',this.t('minigame.charge'));refill.prepend(gameIcon('tap'));pump.prepend(gameIcon('pump'));const rescue=control('rescue',this.t('minigame.rescue')),spray=control('fire',this.t('minigame.spray'));rescue.prepend(gameIcon('ladder'));controls.append(spray,refill,pump,rescue);
+      const zone=el('div','soccer-stick-zone'),stick=el('div','soccer-joystick'),knob=el('span','soccer-knob');stick.id='joystick';knob.id='knob';stick.append(knob);zone.append(stick);controls.append(zone);gauges={};for(const key of ['water','pressure']){const label=el('label','game-gauge',this.t(`minigame.${key}`)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);gauges[key]=meter;}
+      const refill=control('refill',this.t('minigame.refill')),pump=control('charge',this.t('minigame.charge'));refill.prepend(gameIcon('tap'));pump.prepend(gameIcon('pump'));const rescue=control('rescue',this.t('minigame.rescue')),spray=control('fire',this.t('minigame.spray'));rescue.id='pass';spray.id='shoot';rescue.prepend(gameIcon('ladder'));controls.append(spray,refill,pump,rescue);
     }
     if(id==='navalDuel') {
-      const zone=el('div','naval-stick-zone'),stick=el('div','naval-stick'),knob=el('span','naval-knob');stick.hidden=true;stick.append(knob);zone.append(stick);controls.append(zone);const fire=control('fire',this.t('minigame.launch'));fire.prepend(gameIcon('cannon'));controls.append(fire);
-      const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select','');node.append(gameIcon(['shell','double','torpedo','absorb'][i]),el('span','ammo-copy'));node.dataset.ammoIndex=i;node.setAttribute('aria-label',this.t(ammo.title));node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
+      const zone=el('div','naval-stick-zone soccer-stick-zone'),stick=el('div','naval-stick soccer-joystick'),knob=el('span','naval-knob soccer-knob');stick.id='joystick';knob.id='knob';stick.hidden=true;stick.append(knob);zone.append(stick);controls.append(zone);const fire=control('fire',this.t('minigame.launch'));fire.id='shoot';fire.prepend(gameIcon('cannon'));controls.append(fire);
+      const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select','');node.append(gameIcon(['shell','double','torpedo','absorb','cannon','ladder'][i]),el('span','ammo-copy'));node.dataset.ammoIndex=i;node.setAttribute('aria-label',this.t(ammo.title));node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
       fleetMeters={};for(const [key,title]of [['player','minigame.fleet'],['enemy','minigame.enemyFleet']]){const label=el('label','game-gauge',this.t(title)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);fleetMeters[key]=meter;}turnLabel=el('p','game-turn');controls.append(turnLabel);
     }
     warning=el('p','game-warning');warning.hidden=true;warning.setAttribute('role','alert');stage.append(warning);
@@ -234,6 +245,7 @@ export class ActivityInterface {
     const summary=el('div','game-result');
     for(const key of ['score','money','parts','stars']){const row=el('p','result-row'),value=el('bdi','',String(result[key]));row.append(el('span','',this.t(`minigame.result.${key}`)),value);summary.append(row);}
     if(id==='fireRescue'&&fireSummary)for(const key of ['out','rescued','water']){const row=el('p','result-row');row.dataset.fireSummary=key;row.append(el('span','',this.t(`minigame.result.${key}`)),el('bdi','',String(fireSummary[key])));summary.append(row);}
+    if(id==='fireRescue'&&result.certificate)dialog.append(this.certificateCard(result.certificate,result.stage));
     dialog.append(el('h3','',this.t(game.title)),summary,
       button(this.t('minigame.again'),'game-again',()=>{
         const active=this.engine.state.events.active;
@@ -247,11 +259,7 @@ export class ActivityInterface {
     if(id==='soccer')dialog.insertBefore(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t,{starsAdded:result.trainingStars}),summary);
     dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(id)));
     if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage)dialog.append(button(this.t('minigame.continue'),'game-next-stage',()=>this.start(id,undefined,result.stage+1),'primary-button'));
-    if(id==='alienDefense'&&result.outcome==='win'){
-      const balance=this.data.config.minigames.alienDefense,available=availableAlienUpgrades(this.engine.state.alienUpgrades,balance,gameContext(this.engine,this.data.config.minigames,this.now(),id,result.stage).equipment),cards=el('div','result-upgrades');cards.append(el('h3','',this.t(available.length?'minigame.chooseUpgrade':'minigame.upgradesFull')));
-      // Results and Continue are usable immediately; taking a reward is optional.
-      for(const upgrade of available.slice(0,balance.campaign.choiceCount)){const choose=button('','result-upgrade',()=>{const ranks={...this.engine.state.alienUpgrades,[upgrade]:this.engine.state.alienUpgrades[upgrade]+1};this.saveAlienUpgrades(ranks);this.sound.play('upgrade');cards.replaceChildren(el('p','',this.t('minigame.upgradeSaved')));});upgradeCard(choose,upgrade,this.t('minigame.upgradeStack',{name:this.t('runUpgrade.'+upgrade),rank:this.engine.state.alienUpgrades[upgrade]+1}),this.t('runUpgrade.'+upgrade+'.hint'));cards.append(choose);}dialog.append(cards);
-    }
+    if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
     this.engine.narration.announce('minigame.result',result);
   }

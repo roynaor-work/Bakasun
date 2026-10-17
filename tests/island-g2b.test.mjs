@@ -44,7 +44,7 @@ for(const [id,make]of Object.entries(models)) {
     const b=data.config.minigames[id],power=level<4?1:level<7?1.2:1.45;
     const run=()=>{const m=make({config:data.config.minigames,balance:b,level,power,random:seededRandom(12)}),memory={};
       for(let i=0;i<40000&&!m.result;i++)m.update(.04,pilotInput(id,m,b,memory));return m;};
-    const a=run(),again=run();assert.equal(a.result?.outcome,(id==='fireRescue'&&level>=9||id==='alienDefense'&&level===10)?'lose':'win');assert.deepEqual(a.snapshot(),again.snapshot());
+    const a=run(),again=run();assert.equal(a.result?.outcome,(id==='fireRescue'&&level>=10||id==='alienDefense'&&level===10)?'lose':'win');assert.deepEqual(a.snapshot(),again.snapshot());
     const f=fixture(),ctx={engine:f.engine,level,config:data.config.minigames};
     const result=f.engine.registry.minigames.get(id).onResult(a.result,ctx);assert.ok(result);assert.ok(a.result.outcome==='win'?result.stars>=1&&result.stars<=3:result.stars===0);
   });
@@ -52,7 +52,7 @@ for(const [id,make]of Object.entries(models)) {
 test('G2b v3 to v4 adds only stage/star defaults, preserves the input, and survives reload',()=>{
   const f=fixture();eventCity(f);const old=JSON.parse(f.engine.exportJSON());old.version=3;delete old.minigameProgress;
   old.minigameLevels.alienDefense=3;old.highScores.alienDefense=1234;old.minigameWins.alienDefense=12;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,13);
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,15);
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key]);
   assert.deepEqual(old,before);
   for(const p of Object.values(r.state.minigameProgress))assert.deepEqual(p,{stage:1,stars:Array(10).fill(0)});

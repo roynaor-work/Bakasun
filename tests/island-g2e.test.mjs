@@ -37,7 +37,7 @@ test('G2e missing t() is an error, never a raw key; all game literal and dynamic
   for(const key of keys)assert.ok(Object.hasOwn(strings,key),key);assert.match(t('minigame.waveClock',{seconds:6,pattern:'שורות'}),/6/);
 });
 test('G2e bonus every ten kills, exactly one on screen, queued thresholds and configurable rotation',()=>{
-  const m=alien({waves:2,rows:1,columns:45,seconds:999,boss:false}),b=config.alienDefense;assert.equal(m.settings.killsPerBonus,10);const rotation=[];for(const a of m.aliens)a.baseX=a.x=180;
+  const m=alien({waves:2,rows:8,columns:6,seconds:999,boss:false,enemyKinds:1}),b=config.alienDefense;assert.equal(m.settings.killsPerBonus,10);const rotation=[];
   for(let i=1;i<=40;i++){
     const a=m.aliens[0];m.shots.push({x:a.x,y:a.y,vx:0,vy:0,hp:1,damage:10000,kind:0});m.update(.00001,{});
     assert.equal(m.snapshot().kills,i);assert.ok(m.pickups.length<=1);
@@ -49,10 +49,10 @@ test('G2e bonus every ten kills, exactly one on screen, queued thresholds and co
   // appears immediately after collection, without losing a threshold.
   assert.deepEqual(rotation,[b.pickups.rotation[0],b.pickups.rotation[0],...b.pickups.rotation.slice(1)]);
   assert.equal(m.snapshot().bonusesDropped,4);assert.ok(config.alienDefense.levels.some(s=>s.killsPerBonus!==10));
-  const custom=alien({killsPerBonus:12,rows:1,columns:20,waves:2,seconds:999,boss:false});for(const a of custom.aliens)a.baseX=a.x=180;for(let i=1;i<=12;i++){const a=custom.aliens[0];custom.shots.push({x:a.x,y:a.y,vx:0,vy:0,hp:1,damage:10000,kind:0});custom.update(.00001,{});assert.equal(custom.pickups.length,i<12?0:1);}
+  const custom=alien({killsPerBonus:12,rows:4,columns:5,waves:2,seconds:999,boss:false,enemyKinds:1});for(let i=1;i<=12;i++){const a=custom.aliens[0];custom.shots.push({x:a.x,y:a.y,vx:0,vy:0,hp:1,damage:10000,kind:0});custom.update(.00001,{});assert.equal(custom.pickups.length,i<12?0:1);}
 });
 test('G2e regular aliens never drop currency; special aliens and bosses do, with a bounded pool',()=>{
-  const m=alien({waves:2,boss:false});kill(m);assert.equal(m.loot.length,0);
+  const m=alien({waves:2,boss:false,enemyKinds:1});kill(m);assert.equal(m.loot.length,0);
   const special=alien({waves:2,boss:true,enemyKinds:5});kill(special);assert.ok(special.loot.length>0);assert.ok(special.loot.length<=config.alienDefense.campaign.maxLoot);
 });
 test('G2e dragging supplies one target and never fires or consumes ammunition',()=>{
@@ -69,7 +69,7 @@ test('G2e torpedo follows the selected sea point without elevation or reload; an
 test('G2e the target circle can hit a concurrent second ship; sinking it leaves the first alive and advances only on fleet defeat',()=>{
   const b=config.navalDuel,m=naval(10,{equipment:{damage:100}});m.update(.01,{ammoIndex:2,targetX:m.enemies[1].x,targetZ:m.enemies[1].z,firing:true});const first=m.enemies[0].hp;advance(m,2);assert.equal(m.enemies[0].hp,first);assert.equal(m.enemies[1].hp,0);advance(m,b.sinkSeconds+.1);assert.equal(m.result,undefined);assert.equal(m.wave,1);assert.equal(m.phase,'aim');m.update(.01,{});assert.equal(m.enemies.filter(e=>e.active&&e.hp>0).length,3);
 });
-test('G2e each naval ship class has independent speed, armament, hull shape and HP',()=>{const m=naval(10),types=config.navalDuel.shipTypes;assert.equal(new Set(types.map(t=>t.speed)).size,3);assert.equal(new Set(types.map(t=>t.attack)).size,3);assert.equal(new Set(types.map(t=>t.beam+':'+t.length)).size,3);advance(m,.5);const fleet=m.enemies.filter(e=>e.active);assert.equal(fleet.length,3);assert.equal(new Set(fleet.map(e=>e.maxHp)).size,3);});
+test('G2e each naval ship class has independent speed, armament, hull shape and HP',()=>{const m=naval(10),types=config.navalDuel.shipTypes;assert.equal(new Set(types.map(t=>t.speed)).size,4);assert.equal(new Set(types.map(t=>t.attack)).size,4);assert.equal(new Set(types.map(t=>t.beam+':'+t.length)).size,4);advance(m,.5);const fleet=m.enemies.filter(e=>e.active);assert.equal(fleet.length,3);assert.equal(new Set(fleet.map(e=>e.maxHp)).size,3);});
 test('G2e optional model paths stay inside the published island and retain code fallback when absent',()=>{
   for(const p of [null,undefined,'https://example.com/a.glb','../outside.glb','assets/a.png'])assert.equal(localModelURL(p),null);assert.ok(localModelURL('assets/kid-full.glb').pathname.endsWith('/assets/kid-full.glb'));assert.equal(localModelURL('assets/kid-full.glb').searchParams.get('v'),DATA_VERSION);assert.equal(config.alienDefense.models.player.path,'assets/models/ship-player.glb');
 });
@@ -81,7 +81,7 @@ test('G2e temporary wing expires and a nova capsule replenishes a real charge',(
 test('G2e all vessel factories create distinct finite hulls and actual turret counts',async()=>{
   const THREE=await import('../workout/island/vendor/three.module.js'),{createVessel}=await import('../workout/island/minigames/naval-view.mjs'),b=config.navalDuel,lengths=[],turrets=[];
   for(const type of [...b.shipTypes,b.boss]){const v=createVessel(THREE,b.render,{},type),bounds=new THREE.Box3().setFromObject(v.root.children[0]);lengths.push(Math.round((bounds.max.z-bounds.min.z)*100));turrets.push(v.turret.children.length);v.root.traverse(o=>{if(o.geometry)for(const n of o.geometry.attributes.position.array)assert.ok(Number.isFinite(n));});v.dispose();}
-  assert.equal(new Set(lengths).size,4);assert.equal(new Set(turrets).size,4);
+  assert.equal(new Set(lengths).size,5);assert.equal(new Set(turrets).size,4);
 });
 test('G2e timer expiry takes precedence when an empty intermediate wave would open an upgrade in the same frame',()=>{
   const balance=structuredClone(config.alienDefense);Object.assign(balance.levels[0],{rows:0,columns:0,waves:2,seconds:6});balance.wavePauseSeconds=6;

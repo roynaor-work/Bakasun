@@ -1,5 +1,5 @@
-import {eventEligible} from '../activity/eligibility.mjs?v=g3f-20261018-2';
-import {seededRandom} from '../minigames/context.mjs?v=g3f-20261018-2';
+import {eventEligible} from '../activity/eligibility.mjs?v=g2j-20261019-1';
+import {seededRandom} from '../minigames/context.mjs?v=g2j-20261019-1';
 export function install(registry,data) {
   for(const [id,record]of Object.entries(data.config.events.types))registry.registerEventType({id,...record,
     prepare({state,random=seededRandom(state.events.sequence)}){

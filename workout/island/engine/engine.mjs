@@ -1,16 +1,17 @@
-import {recordStageWin} from '../activity/progress.mjs?v=g3f-20261018-2';
-import {gameAvailability} from '../activity/availability.mjs?v=g3f-20261018-2';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=g3f-20261018-2';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=g3f-20261018-2';
-import {repairHarbors} from './placement-help.mjs?v=g3f-20261018-2';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=g3f-20261018-2';
-import { createRegistry } from './registry.mjs?v=g3f-20261018-2';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g3f-20261018-2';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g3f-20261018-2';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=g3f-20261018-2';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g3f-20261018-2';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g3f-20261018-2';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g3f-20261018-2';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=g2j-20261019-1';
+import {recordStageWin} from '../activity/progress.mjs?v=g2j-20261019-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g2j-20261019-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=g2j-20261019-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=g2j-20261019-1';
+import {repairHarbors} from './placement-help.mjs?v=g2j-20261019-1';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=g2j-20261019-1';
+import { createRegistry } from './registry.mjs?v=g2j-20261019-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g2j-20261019-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g2j-20261019-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=g2j-20261019-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g2j-20261019-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g2j-20261019-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g2j-20261019-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -306,7 +307,7 @@ export function createEngine(data, options = {}) {
         if(progress&&won&&(!Number.isInteger(stars)||stars<1||stars>3))return {ok:false,reason:'reason.invalid'};
         const parts=periodicParts+(won?(settings?.winParts||0):0);
         result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts,stars,stage,
-          ...(result.drill?{drill:result.drill}:{}),
+          ...(result.drill?{drill:result.drill}:{}),...(id==='fireRescue'&&validCertificate(raw?.certificate)?{certificate:{...raw.certificate}}:{}),
           ...(id==='soccer'?{difficulty:ctx.difficulty,trainingStars:won?stars+config.minigames.soccer.difficulties[ctx.difficulty].bonusStars:0}:{}) });
       }
       ended = true; activeMinigame = null;
@@ -314,6 +315,8 @@ export function createEngine(data, options = {}) {
       ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
       if (result) {
         if(result.drill){const practice=result.drill.attempts>=config.minigames.soccer.training.drillAttempts?awardSoccerPractice(state,config.minigames.soccer,result.drill.kind,now()):{ok:false,reason:'soccer.practice.tryAgain'};result={...result,practice};changed('soccer-practice',{result});context.onFinish?.(result);return {ok:true,result};}
+        if(id==='fireRescue'&&result.certificate)recordFireCertificate(state.fireCertificates,stage,result.certificate);
+        if(id==='alienDefense'){const h=config.minigames.alienDefense.hangar;state.hangar.damage=Number.isSafeInteger(raw?.damage)?Math.max(0,Math.min(h.maxDamage,raw.damage)):state.hangar.damage;state.hangar.coins=Math.min(h.maxCoins,state.hangar.coins+(result.outcome==='win'?h.winCoins:h.lossCoins));if(result.outcome==='win')state.hangar.credits=Math.min(h.maxCoins,state.hangar.credits+1);}
         state.money += result.money;
         // Only shipped game IDs are persisted; third-party contract examples remain compatible.
         if (config.minigameLevels?.[id]) {

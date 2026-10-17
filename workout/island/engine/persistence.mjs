@@ -1,15 +1,17 @@
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3f-20261018-2';
-import {withCityHall} from './city-hall.mjs?v=g3f-20261018-2';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=g3f-20261018-2';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g3f-20261018-2';
-import {initialEquipment} from '../activity/equipment.mjs?v=g3f-20261018-2';
-import {initialProgress} from '../activity/progress.mjs?v=g3f-20261018-2';
-import { cellsFor } from './rules.mjs?v=g3f-20261018-2';
-import {repairHarbors} from './placement-help.mjs?v=g3f-20261018-2';
-import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=g3f-20261018-2';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g3f-20261018-2';
+import {initialFireCertificates,validFireCertificates} from '../activity/fire-certificates.mjs?v=g2j-20261019-1';
+import {initialHangar,validHangar} from '../activity/hangar.mjs?v=g2j-20261019-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2j-20261019-1';
+import {withCityHall} from './city-hall.mjs?v=g2j-20261019-1';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=g2j-20261019-1';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g2j-20261019-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=g2j-20261019-1';
+import {initialProgress} from '../activity/progress.mjs?v=g2j-20261019-1';
+import { cellsFor } from './rules.mjs?v=g2j-20261019-1';
+import {repairHarbors} from './placement-help.mjs?v=g2j-20261019-1';
+import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=g2j-20261019-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g2j-20261019-1';
 
-export const CURRENT_VERSION = 13;
+export const CURRENT_VERSION = 15;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -23,7 +25,7 @@ export function createInitialState(data, now = Date.now()) {
   const buildings = [];
   for (let x = road.startX; x <= road.endX; x++) buildings.push({ id: `seed-road-${x}`, typeId: 'road', x, z: road.z, level: 1 });
   return withCityHall({
-    version: CURRENT_VERSION, money: data.config.startingMoney, resources: clone(data.config.startingResources),
+    fireCertificates:initialFireCertificates(data),hangar:initialHangar(),version: CURRENT_VERSION, money: data.config.startingMoney, resources: clone(data.config.startingResources),
     buildings, world: { size: data.config.worldStages[0].size, stage: 0 }, parts: { [data.world.partGroup]: 0 },
     avatar: clone(data.avatar.defaults), team: {...clone(data.team),wins:0,rank:0,sportWins:{soccer:0,tennis:0}}, players,
     tutorial: { step: 0, completed: false, skipped: false }, claimedRewards: [], completedMissions: [], completedEpisodes: [],
@@ -34,6 +36,8 @@ export function createInitialState(data, now = Date.now()) {
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  14(old,data){return {...old,version:15,fireCertificates:initialFireCertificates(data)};},
+  13(old){return {...old,version:14,hangar:initialHangar()};},
   12(old,data){return {...old,version:13,soccerRoster:initialSoccerRoster(old.players||data.players,old.soccerCard,data.config.minigames.soccer)};},
   11(old,data){if(!Array.isArray(old.players))return {...old,version:12};return {...old,version:12,players:[...old.players,...data.players.filter(row=>!old.players.some(p=>p.id===row.id)).map(row=>({...data.config.playerDefaults,...row}))]};},
   10(old,data){return {...old,version:11,minigameLevels:{...old.minigameLevels,tennis:old.minigameLevels?.tennis||1},minigameEquipment:{...old.minigameEquipment,tennis:{speed:0,hit:0,serve:0,...old.minigameEquipment?.tennis}},minigameProgress:{...old.minigameProgress,tennis:old.minigameProgress?.tennis||initialProgress(data).tennis},team:{...old.team,sportWins:{soccer:old.team?.wins||0,tennis:0,...old.team?.sportWins}},tennisDifficulty:old.tennisDifficulty||'easy'};},
@@ -93,6 +97,8 @@ export function migrateSave(value, data, registry) {
 
 export function validateSave(state, data, registry) {
   const invalid = () => ({ ok: false, reason: 'reason.invalid' });
+  if(!validFireCertificates(state?.fireCertificates,data))return invalid();
+  if(!validHangar(state?.hangar,data.config.minigames.alienDefense.hangar))return invalid();
   if (!isObject(state) || state.version !== CURRENT_VERSION || !finitePositive(state.money) || !isObject(state.resources)) return invalid();
   if (!Object.keys(data.config.startingResources).every(key => finitePositive(state.resources[key]))) return invalid();
   if (!isObject(state.world) || !data.config.worldStages.some(row => row.size === state.world.size) || !Number.isInteger(state.world.stage) || state.world.stage < 0 || state.world.stage >= data.config.worldStages.length || data.config.worldStages[state.world.stage].size !== state.world.size) return invalid();
@@ -214,6 +220,9 @@ export function importWorld(raw, current, data, registry) {
   mergeSoccerCard(merged.soccerCard,incoming.soccerCard);
   mergeSoccerRoster(merged.soccerRoster,incoming.soccerRoster,data.config.minigames.soccer);
   mergeActivity(merged,incoming,data);
+  for(let i=0;i<merged.fireCertificates.length;i++)if(incoming.fireCertificates[i]&&(!merged.fireCertificates[i]||incoming.fireCertificates[i].stars>merged.fireCertificates[i].stars))merged.fireCertificates[i]=clone(incoming.fireCertificates[i]);
+  for(const key of ['rapid','shield','coins'])merged.hangar[key]=Math.max(current.hangar[key],incoming.hangar[key]);merged.hangar.spent=merged.hangar.rapid+merged.hangar.shield;merged.hangar.credits=Math.max(0,Math.max(current.hangar.credits+current.hangar.spent,incoming.hangar.credits+incoming.hangar.spent)-merged.hangar.spent);
+
   merged.updatedAt = Date.now();
   const validation = validateSave(merged, data, registry);
   return validation.ok ? { ok: true, state: merged, added, conflicts } : validation;

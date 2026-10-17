@@ -1,9 +1,9 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {seededRandom} from './tennis.mjs?v=g3f-20261018-2';
+import {seededRandom} from './tennis.mjs?v=g2j-20261019-1';
 
-export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=g3f-20261018-2',import.meta.url)}={}) {
+export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=g2j-20261019-1',import.meta.url)}={}) {
   const r=config.render, colors=r.colors, scene=new T.Scene();
   scene.background=new T.Color(colors.sky);scene.fog=new T.Fog(colors.sky,38,75);
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
@@ -72,7 +72,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   const crowdHead=new T.InstancedMesh(keep(new T.SphereGeometry(.16,7,5)),skin,r.crowdCounts[0]);
   crowdBody.castShadow=true;crowdHead.castShadow=true;crowdRoot.add(crowdBody,crowdHead);const dummy=new T.Object3D(),rand=seededRandom(config.seed),palette=['#f2ad59','#e77b6d','#f5efd7','#5c98d0','#8d6fba'];
   for(let i=0;i<r.crowdCounts[0];i++){
-    const row=Math.floor((i%36)/12),side=i<36?-1:1,x=side*(7.3+row*.6),z=-8.5+(i%12);
+    const edge=i%4,row=Math.floor(i/24),along=(Math.floor(i/4)%6-2.5)*1.6,x=edge<2?(edge===0?-1:1)*(7.3+row*.6):along,z=edge<2?along:(edge===2?-1:1)*(11.7+row*.4);
     dummy.position.set(x,.7+row*.26,z);dummy.updateMatrix();crowdBody.setMatrixAt(i,dummy.matrix);crowdBody.setColorAt(i,new T.Color(palette[Math.floor(rand()*palette.length)]));
     dummy.position.y+=.4;dummy.updateMatrix();crowdHead.setMatrixAt(i,dummy.matrix);
   }
@@ -119,7 +119,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
     characters.forEach((ch,i)=>{
       const p=state.players[i];holders[i].position.set(p.x,.09,p.z);holders[i].rotation.y=i===0?Math.PI:0;
       ch.actions.run?.setEffectiveWeight(p.running?1:0);ch.actions.stand?.setEffectiveWeight(p.running?0:1);ch.mixer.update(dt);
-      if(p.swing>0){const u=1-p.swing/config.player.swingSeconds,arc=Math.sin(u*Math.PI);if(ch.arm){ch.arm.rotation.x-=arc*1.35;ch.arm.rotation.z-=arc*.8;}if(ch.forearm)ch.forearm.rotation.x-=arc*.6;if(ch.chest)ch.chest.rotation.y+=Math.sin(u*Math.PI*2)*.4;}
+      if(p.swing>0){const u=1-p.swing/config.player.swingSeconds,arc=Math.sin(u*Math.PI),sign=p.stroke==='backhand'?-1:1;if(ch.arm){ch.arm.rotation.x-=arc*(p.lob?1.85:1.35);ch.arm.rotation.z-=arc*.8*sign;}if(ch.forearm)ch.forearm.rotation.x-=arc*.6;if(ch.chest)ch.chest.rotation.y+=Math.sin(u*Math.PI*2)*.4;}
     });
     if(state.event.id!==lastEvent){lastEvent=state.event.id;if(state.event.ace||state.event.type==='complete'&&state.result?.won)burst(state.players[0].x,state.players[0].z);}
     let active=0;for(let i=0;i<particleData.length;i++){const p=particleData[i];if(p.life>0){p.life-=dt;positions[i*3]+=p.vx*dt;positions[i*3+1]+=p.vy*dt;positions[i*3+2]+=p.vz*dt;p.vy-=5*dt;active++;}else positions[i*3+1]=-10;}

@@ -1,13 +1,13 @@
 import * as T from '../vendor/three.module.js';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=g3f-20261018-2';
-import { Avatar, Citizens } from './avatar.mjs?v=g3f-20261018-2';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=g3f-20261018-2';
-import { levelValue } from '../engine/metrics.mjs?v=g3f-20261018-2';
-import { LocalModels } from './local-models.mjs?v=g3f-20261018-2';
-import {cityPaths} from '../engine/paths.mjs?v=g3f-20261018-2';
-import {shoreDirection} from '../engine/placement-help.mjs?v=g3f-20261018-2';
-import {pathMesh,beachDetails} from './city-life.mjs?v=g3f-20261018-2';
-import {batchMeshes} from './batch.mjs?v=g3f-20261018-2';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=g2j-20261019-1';
+import { Avatar, Citizens } from './avatar.mjs?v=g2j-20261019-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=g2j-20261019-1';
+import { levelValue } from '../engine/metrics.mjs?v=g2j-20261019-1';
+import { LocalModels } from './local-models.mjs?v=g2j-20261019-1';
+import {cityPaths} from '../engine/paths.mjs?v=g2j-20261019-1';
+import {shoreDirection} from '../engine/placement-help.mjs?v=g2j-20261019-1';
+import {pathMesh,beachDetails} from './city-life.mjs?v=g2j-20261019-1';
+import {batchMeshes} from './batch.mjs?v=g2j-20261019-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
