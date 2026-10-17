@@ -1,0 +1,63 @@
+{
+  "base": "fa3b133",
+  "originalBaseline": "28eaec4",
+  "sourceSHA256": {
+    "workout/island/data/config.json": "92564594cda1b31f298a9125487f198751fb1b5d68570c11953ae843e411fd1b",
+    "workout/island/minigames/naval-camera.mjs": "23eda6a33a3145d0a4bece99b45c57d3af6fe6259c6a794773626110c5b7ef87",
+    "workout/island/minigames/naval-controls.mjs": "844457f2bfc4828edda66a7f0715d010573b457e6325ad209ad3a859a11979ed",
+    "workout/island/minigames/naval-icons.mjs": "872a77d887c963af11ba181580ad64f7d390db86f7d8302526363399da9b1ab0",
+    "workout/island/minigames/naval-view.mjs": "262c62b738e3803c8d6a32ba4c9eca6760e995a89ac17161d7abbfc30d91ad6d",
+    "workout/island/minigames/naval.css": "1c779ce41377b224745d7af12819550d60e94d09fe27516fa660dafff6e1cf66",
+    "workout/island/minigames/naval.mjs": "7355ce23608326781715ecc6a41da8e005b3a06d13ca04d6515b852a9d625ba9"
+  },
+  "node": {
+    "tests": 1704,
+    "pass": 1665,
+    "fail": 1,
+    "skipped": 38
+  },
+  "onlyFailure": "island complete deployable folder including bundled assets stays within 15 MB",
+  "measuredFolderBytes": 33108278,
+  "baselineNode": {
+    "tests": 1681,
+    "pass": 1642,
+    "fail": 1,
+    "skipped": 38
+  },
+  "comparison": {
+    "viewport": [
+      844,
+      390
+    ],
+    "seed": 0,
+    "time": 0.128,
+    "samePlayer": true,
+    "sameEnemy": true
+  },
+  "renderMaximum": {
+    "844": {
+      "triangles": 17509,
+      "drawCalls": 52
+    },
+    "740": {
+      "triangles": 17509,
+      "drawCalls": 52
+    },
+    "1440": {
+      "triangles": 17509,
+      "drawCalls": 52
+    }
+  },
+  "screenshots": [
+    "after-844.webp",
+    "aim-zoom.webp",
+    "before-844.webp",
+    "cannon-flash.webp",
+    "fallback.webp",
+    "hit.webp",
+    "manual-reticle.webp",
+    "submarine.webp",
+    "torpedo.webp",
+    "vulcan.webp"
+  ]
+}
