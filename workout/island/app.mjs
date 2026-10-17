@@ -7,6 +7,7 @@ import { IslandInterface } from './ui/interface.mjs?v=g2j-20261019-1';
 import {createActivity} from './activity/runtime.mjs?v=g2j-20261019-1';
 import {ActivityInterface} from './ui/activity.mjs?v=g2j-20261019-1';
 import {installPressFeedback} from './ui/press.mjs?v=g2j-20261019-1';
+import {installGameShell} from './ui/game-shell.mjs?v=g2j-20261019-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -33,6 +34,7 @@ try {
   ui = new IslandInterface({ root, engine, view, data, t });
   const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length),onLaunch:choice=>games.autoLaunch(choice)});
   const games=new ActivityInterface({ui,engine,activity,data,t});
+  const stopShell=installGameShell({games,ui,t,countdownStepMs:data.config.ui.economyTickMs});
   const pressSamples=[];
   const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});
   let openedGames=false;
@@ -54,7 +56,7 @@ try {
   const persist = () => engine.save();
   document.addEventListener('visibilitychange', persist);
   window.addEventListener('pagehide', persist);
-  window.addEventListener('beforeunload', () => { clearInterval(tick);stopPress();stopGameShortcut();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
+  window.addEventListener('beforeunload', () => { clearInterval(tick);stopShell();stopPress();stopGameShortcut();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
   if (new URLSearchParams(location.search).get('dev') === '1') {
     window.__island = { engine, view, ui, data, activity, games,pressSamples };
   }

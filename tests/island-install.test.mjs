@@ -7,9 +7,10 @@ test('island install metadata and every icon stay relative to the published isla
   const manifest = JSON.parse(await readFile(new URL('manifest.webmanifest', root), 'utf8'));
   for (const key of ['name','short_name']) assert.equal(manifest[key], 'האי שלי');
   for (const key of ['id','start_url','scope']) assert.equal(manifest[key], './');
-  for (const [key,value] of Object.entries({ display:'standalone',dir:'rtl',lang:'he',orientation:'any',theme_color:'#edf7f5',background_color:'#edf7f5' })) assert.equal(manifest[key],value);
-  assert.deepEqual(manifest.icons.map(i=>[i.sizes,i.purpose]), [['192x192','any'],['512x512','any'],['512x512','maskable']]);
-  for (const icon of [...manifest.icons,{src:'./assets/icons/apple-touch-icon.png',sizes:'180x180',type:'image/png'}]) {
+  for (const [key,value] of Object.entries({ display:'fullscreen',dir:'rtl',lang:'he',orientation:'landscape',theme_color:'#edf7f5',background_color:'#edf7f5' })) assert.equal(manifest[key],value);
+  assert.deepEqual(manifest.icons.map(i=>[i.sizes,i.purpose]), [['any','any'],['192x192','any'],['512x512','any'],['512x512','maskable']]);
+  assert.deepEqual(manifest.icons[0],{src:'./assets/icons/island.svg',sizes:'any',type:'image/svg+xml',purpose:'any'});
+  for (const icon of [...manifest.icons.filter(i=>i.type==='image/png'),{src:'./assets/icons/apple-touch-icon.png',sizes:'180x180',type:'image/png'}]) {
     assert.match(icon.src,/^\.\/assets\/icons\/[\w-]+\.png$/);
     const target = new URL(icon.src,root);
     assert.ok(target.href.startsWith(root.href));
