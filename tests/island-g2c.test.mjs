@@ -25,7 +25,7 @@ test('G2c v4 → v5 adds only equipment and leaves input, city, stars, event and
   const f=fixture(),old=JSON.parse(f.engine.exportJSON());old.version=4;delete old.minigameEquipment;
   old.money=321;old.minigameLevels.alienDefense=3;recordStageWin(old,data,'alienDefense',1,3);
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:42,phase:'playing',warningUntil:0,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,13);assert.equal(r.state.version,13);assert.equal(STORAGE_KEY,'island.v1');
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,14);assert.equal(r.state.version,14);assert.equal(STORAGE_KEY,'island.v1');
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key],key);
   assert.deepEqual(old,before);for(const tracks of Object.values(r.state.minigameEquipment))assert.ok(Object.values(tracks).every(n=>n===0));
   f.storage.setItem(STORAGE_KEY,JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.equal(loaded.state.money,321);assert.equal(loaded.state.minigameProgress.alienDefense.stars[0],3);assert.equal(f.values.get('other-app'),'keep');
@@ -133,10 +133,8 @@ for(const id of Object.keys(models))for(const level of [1,10])test(`G2c ${id} st
   const m=run();assert.equal(m.result?.outcome,level===10&&id!=='navalDuel'?'lose':'win');assert.deepEqual(m.snapshot(),run().snapshot());const f=fixture(),r=f.engine.registry.minigames.get(id).onResult(m.result,{engine:f.engine,level,config});assert.ok(r);assert.ok(m.result.outcome==='win'?r.money>=config[id].levels[level-1].winMoney:r.money===Math.floor(Math.min(m.result.score,config[id].levels[level-1].rewardScoreLimit??Infinity)/config[id].pointsPerCoin));assert.ok(m.result.outcome==='win'?r.stars>=1&&r.stars<=3:r.stars===0);
 });
 
-test('G2c a piercing beam hits separate enemies once each, even when they overlap',()=>{
-  const m=make('alienDefense',8),a=m.aliens[0],b=m.aliens[1];a.baseX=b.baseX=150;a.baseY=b.baseY=100;a.phase=b.phase=0;a.hp=b.hp=10;for(const other of m.aliens)if(other!==a&&other!==b)other.baseY=250;
-  m.shots.push({x:150,y:100,vx:0,vy:0,kind:1,hp:4,hitLo:0,hitHi:0});
-  advance(m,.06,{});assert.equal(a.hp,9);assert.equal(b.hp,9);assert.equal(m.shots[0].hp,2);
+test('G2c a piercing beam hits two spaced enemies once each along its flight',()=>{
+ const m=make('alienDefense',8),a=m.aliens[0],b=m.aliens[1];m.aliens.splice(2);for(const [ship,y]of [[a,70],[b,130]]){Object.assign(ship,{baseX:150,x:150,baseY:y,y,phase:0,hp:10,shield:0,entry:0});}m.shots.push({x:150,y:160,vx:0,vy:-config.alienDefense.shotSpeed,kind:1,hp:4,hitLo:0,hitHi:0});advance(m,.22,{});assert.equal(a.hp,9);assert.equal(b.hp,9);assert.equal(m.shots[0].hp,2);
 });
 test('G2c nova light stays at the detonation point while the next aim moves',()=>{
   const m=make('alienDefense');const center=[m.aliens.reduce((n,a)=>n+a.x,0)/m.aliens.length,m.aliens.reduce((n,a)=>n+a.y,0)/m.aliens.length];m.update(.01,{nova:true,x:10,y:10});m.update(.01,{x:330,y:180});assert.deepEqual([m.nova.x,m.nova.y],center);assert.deepEqual([m.novaAim.x,m.novaAim.y],[330,180]);

@@ -1,6 +1,6 @@
-import {runCanvasGame} from './canvas-session.mjs?v=g6b-20261019-1';
-import {oval,drawCrew} from './art.mjs?v=g6b-20261019-1';
-import {createFireView} from './fire-view.mjs?v=g6b-20261019-1';
+import {runCanvasGame} from './canvas-session.mjs?v=g2i-20261019-1';
+import {oval,drawCrew} from './art.mjs?v=g2i-20261019-1';
+import {createFireView} from './fire-view.mjs?v=g2i-20261019-1';
 export function fireHydrantDistance(truck,balance){return Math.hypot(truck.x-balance.hydrant.position[0],truck.z-balance.hydrant.position[2]);}
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 export function createFireEntity(site,type,active,heat,index){return {x:site.x,y:site.y,kind:site.kind,type,active,heat,phase:index*1.7,spreadAge:0,warning:0};}

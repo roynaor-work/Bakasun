@@ -53,7 +53,7 @@ test('island migration also recognizes an unversioned legacy world', () => {
   const migrated = migrateSave({ buildings: [], coins: 42 }, data, registry);
   assert.equal(migrated.ok, true);
   assert.equal(migrated.state.money, 42);
-  assert.equal(migrated.state.version, 13);
+  assert.equal(migrated.state.version,14);
 });
 
 test('island migration retains an expanded legacy world and derives its matching stage', () => {

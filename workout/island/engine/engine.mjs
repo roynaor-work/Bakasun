@@ -1,16 +1,16 @@
-import {recordStageWin} from '../activity/progress.mjs?v=g6b-20261019-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g6b-20261019-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=g6b-20261019-1';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=g6b-20261019-1';
-import {repairHarbors} from './placement-help.mjs?v=g6b-20261019-1';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=g6b-20261019-1';
-import { createRegistry } from './registry.mjs?v=g6b-20261019-1';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g6b-20261019-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g6b-20261019-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=g6b-20261019-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g6b-20261019-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g6b-20261019-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g6b-20261019-1';
+import {recordStageWin} from '../activity/progress.mjs?v=g2i-20261019-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g2i-20261019-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=g2i-20261019-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=g2i-20261019-1';
+import {repairHarbors} from './placement-help.mjs?v=g2i-20261019-1';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=g2i-20261019-1';
+import { createRegistry } from './registry.mjs?v=g2i-20261019-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g2i-20261019-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g2i-20261019-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=g2i-20261019-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g2i-20261019-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g2i-20261019-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g2i-20261019-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -314,6 +314,7 @@ export function createEngine(data, options = {}) {
       ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
       if (result) {
         if(result.drill){const practice=result.drill.attempts>=config.minigames.soccer.training.drillAttempts?awardSoccerPractice(state,config.minigames.soccer,result.drill.kind,now()):{ok:false,reason:'soccer.practice.tryAgain'};result={...result,practice};changed('soccer-practice',{result});context.onFinish?.(result);return {ok:true,result};}
+        if(id==='alienDefense'){const h=config.minigames.alienDefense.hangar;state.hangar.damage=Number.isSafeInteger(raw?.damage)?Math.max(0,Math.min(h.maxDamage,raw.damage)):state.hangar.damage;state.hangar.coins=Math.min(h.maxCoins,state.hangar.coins+(result.outcome==='win'?h.winCoins:h.lossCoins));if(result.outcome==='win')state.hangar.credits=Math.min(h.maxCoins,state.hangar.credits+1);}
         state.money += result.money;
         // Only shipped game IDs are persisted; third-party contract examples remain compatible.
         if (config.minigameLevels?.[id]) {

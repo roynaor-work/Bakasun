@@ -37,7 +37,7 @@ test('G2e missing t() is an error, never a raw key; all game literal and dynamic
   for(const key of keys)assert.ok(Object.hasOwn(strings,key),key);assert.match(t('minigame.waveClock',{seconds:6,pattern:'שורות'}),/6/);
 });
 test('G2e bonus every ten kills, exactly one on screen, queued thresholds and configurable rotation',()=>{
-  const m=alien({waves:2,rows:1,columns:45,seconds:999,boss:false}),b=config.alienDefense;assert.equal(m.settings.killsPerBonus,10);const rotation=[];for(const a of m.aliens)a.baseX=a.x=180;
+  const m=alien({waves:2,rows:8,columns:6,seconds:999,boss:false,enemyKinds:1}),b=config.alienDefense;assert.equal(m.settings.killsPerBonus,10);const rotation=[];
   for(let i=1;i<=40;i++){
     const a=m.aliens[0];m.shots.push({x:a.x,y:a.y,vx:0,vy:0,hp:1,damage:10000,kind:0});m.update(.00001,{});
     assert.equal(m.snapshot().kills,i);assert.ok(m.pickups.length<=1);
@@ -49,10 +49,10 @@ test('G2e bonus every ten kills, exactly one on screen, queued thresholds and co
   // appears immediately after collection, without losing a threshold.
   assert.deepEqual(rotation,[b.pickups.rotation[0],b.pickups.rotation[0],...b.pickups.rotation.slice(1)]);
   assert.equal(m.snapshot().bonusesDropped,4);assert.ok(config.alienDefense.levels.some(s=>s.killsPerBonus!==10));
-  const custom=alien({killsPerBonus:12,rows:1,columns:20,waves:2,seconds:999,boss:false});for(const a of custom.aliens)a.baseX=a.x=180;for(let i=1;i<=12;i++){const a=custom.aliens[0];custom.shots.push({x:a.x,y:a.y,vx:0,vy:0,hp:1,damage:10000,kind:0});custom.update(.00001,{});assert.equal(custom.pickups.length,i<12?0:1);}
+  const custom=alien({killsPerBonus:12,rows:4,columns:5,waves:2,seconds:999,boss:false,enemyKinds:1});for(let i=1;i<=12;i++){const a=custom.aliens[0];custom.shots.push({x:a.x,y:a.y,vx:0,vy:0,hp:1,damage:10000,kind:0});custom.update(.00001,{});assert.equal(custom.pickups.length,i<12?0:1);}
 });
 test('G2e regular aliens never drop currency; special aliens and bosses do, with a bounded pool',()=>{
-  const m=alien({waves:2,boss:false});kill(m);assert.equal(m.loot.length,0);
+  const m=alien({waves:2,boss:false,enemyKinds:1});kill(m);assert.equal(m.loot.length,0);
   const special=alien({waves:2,boss:true,enemyKinds:5});kill(special);assert.ok(special.loot.length>0);assert.ok(special.loot.length<=config.alienDefense.campaign.maxLoot);
 });
 test('G2e dragging supplies one target and never fires or consumes ammunition',()=>{

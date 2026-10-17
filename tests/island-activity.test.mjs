@@ -42,7 +42,7 @@ test('version two migrates activity defaults without losing money, buildings, ch
   const {engine}=fixture(),old=createInitialState(data,17);old.version=2;
   for(const key of ['minigameLevels','highScores','minigameWins','instructionsSeen','events'])delete old[key];
   old.money=900;old.avatar.created=true;const snapshot=structuredClone(old);
-  const result=migrateSave(old,data,engine.registry);assert.equal(result.ok,true);assert.equal(result.state.version,13);
+  const result=migrateSave(old,data,engine.registry);assert.equal(result.ok,true);assert.equal(result.state.version,14);
   for(const key of Object.keys(snapshot).filter(k=>k!=='version'))assert.deepEqual(result.state[key],snapshot[key]);
   assert.deepEqual(result.state.minigameLevels,{alienDefense:1,fireRescue:1,navalDuel:1,soccer:1,tennis:1});assert.equal(result.state.events.active,null);
 });

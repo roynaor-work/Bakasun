@@ -1,8 +1,8 @@
-import {createControls} from './controls.mjs?v=g6b-20261019-1';
-import {upgradeCard} from './icons.mjs?v=g6b-20261019-1';
-import {loadOptionalArt} from './model-art.mjs?v=g6b-20261019-1';
-import {createGameArt} from './art.mjs?v=g6b-20261019-1';
-import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=g6b-20261019-1';
+import {createControls} from './controls.mjs?v=g2i-20261019-1';
+import {upgradeCard} from './icons.mjs?v=g2i-20261019-1';
+import {loadOptionalArt} from './model-art.mjs?v=g2i-20261019-1';
+import {createGameArt} from './art.mjs?v=g2i-20261019-1';
+import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=g2i-20261019-1';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   // Each adapter keeps its model coordinates; viewport changes never mutate shared game data.
@@ -17,7 +17,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
   const view=createView?.(ctx,model);
   const renderContext={...ctx,art,quality,view};
   const gesture={x:0,y:0,angle:0,yaw:0};
-  const naval=ctx.gameId==='navalDuel';let sharedControls,previousKick=false,heatFill;let stickPointer=null,stickOrigin;const stick=controls.querySelector('.naval-stick'),knob=controls.querySelector('.naval-knob');
+  const naval=ctx.gameId==='navalDuel',aliens=ctx.gameId==='alienDefense';let sharedControls,previousKick=false,heatFill;let stickPointer=null,stickOrigin;const stick=controls.querySelector('.naval-stick'),knob=controls.querySelector('.naval-knob');
   let qualitySamples=0,qualityMs=0,queuedSpread=false;
   const events = new AbortController(), options = { signal: events.signal };
   const input = { x: undefined, y: undefined, firing: false, nova:false,ammo:false,charge:false,refill:false,left: false, right: false, angle:ctx.balance.defaultAngle, yaw:ctx.balance.controls?.defaultYaw, power:ctx.balance.defaultPower,moveX:0,moveZ:0,yaw:0,elevation:ctx.balance.aim?.defaultElevation,angularAim:naval };
@@ -28,7 +28,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
   function syncInput() {
     input.charge=keys.has('charge');input.refill=keys.has('refill');input.rescue=keys.has('rescue');
     input.left = keys.has('ArrowLeft')||keys.has('left');input.right = keys.has('ArrowRight')||keys.has('right');heldFire=keys.has('fire');
-    for(const value of pointers.values()){input.left||=value==='left';input.right||=value==='right';heldFire||=value==='fire'||(!naval&&value==='canvas');input.charge||=value==='charge';input.refill||=value==='refill';}
+    for(const value of pointers.values()){input.left||=value==='left';input.right||=value==='right';heldFire||=value==='fire'||(ctx.gameId==='fireRescue'&&value==='canvas');input.charge||=value==='charge';input.refill||=value==='refill';}
     if(input.left||input.right)input.x=undefined;
     for(const value of pointers.values())input.rescue||=value==='rescue';
     input.firing=heldFire;
@@ -73,15 +73,15 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
     }
   }
   try {
-    if(naval){sharedControls=createControls({root:controls,config:ctx.balance.controls});sharedControls.setHanded(true);sharedControls.setEnabled(true);const heat=document.createElement('div');heat.className='naval-heat';heatFill=document.createElement('span');heat.append(heatFill);controls.append(heat);}
+    if(naval||aliens){sharedControls=createControls({root:controls,config:ctx.balance.controls});sharedControls.setHanded(true);sharedControls.setEnabled(true);if(naval){const heat=document.createElement('div');heat.className='naval-heat';heatFill=document.createElement('span');heat.append(heatFill);controls.append(heat);}}
     for(const node of [canvas,controls,ctx.dialog])for(const type of ['contextmenu','selectstart','dragstart'])node.addEventListener(type,event=>event.preventDefault(),options);
     canvas.addEventListener('pointerdown',event=>{
-      event.preventDefault(); canvas.setPointerCapture(event.pointerId); pointers.set(event.pointerId,'canvas');if(!naval)queuedFire=true;position(event,true);syncInput();
+      event.preventDefault(); canvas.setPointerCapture(event.pointerId); pointers.set(event.pointerId,'canvas');if(ctx.gameId==='fireRescue')queuedFire=true;position(event,true);syncInput();
     },options);
     canvas.addEventListener('pointermove',event=>{if(['canvas','vehicle'].includes(pointers.get(event.pointerId)))position(event);},options);
     for (const node of controls.querySelectorAll('[data-game-control]')) {
       node.addEventListener('pointerdown',event=>{
-        if(naval&&node.dataset.gameControl==='fire')return;event.preventDefault();node.setPointerCapture(event.pointerId);pointers.set(event.pointerId,node.dataset.gameControl);if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(node.dataset.gameControl==='fire'&&!naval)queuedFire=true;if(node.dataset.gameControl==='nova')queuedNova=true;if(node.dataset.gameControl==='spread')queuedSpread=true;if(node.dataset.gameControl==='ammo')queuedAmmo=true;syncInput();
+        if((naval||aliens)&&['fire','nova','spread'].includes(node.dataset.gameControl))return;event.preventDefault();node.setPointerCapture(event.pointerId);pointers.set(event.pointerId,node.dataset.gameControl);if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(node.dataset.gameControl==='fire'&&!naval)queuedFire=true;if(node.dataset.gameControl==='nova')queuedNova=true;if(node.dataset.gameControl==='spread')queuedSpread=true;if(node.dataset.gameControl==='ammo')queuedAmmo=true;syncInput();
       },options);
     }
     for(const node of controls.querySelectorAll('[data-game-control]'))node.addEventListener('click',event=>{if(event.detail!==0)return;const key=node.dataset.gameControl;if(node.dataset.ammoIndex!==undefined)input.ammoIndex=Number(node.dataset.ammoIndex);if(key==='fire')queuedFire=true;else if(key==='nova')queuedNova=true;else if(key==='spread')queuedSpread=true;else if(key==='ammo')queuedAmmo=true;else if(key==='refill'||key==='charge'||key==='rescue')input[key]=!input[key];},options);
@@ -109,6 +109,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
       if(view&&last!==undefined&&!document.hidden&&!paused){qualitySamples++;qualityMs+=time-last;if(qualitySamples>=ctx.balance.render.fallbackSampleFrames){if(qualityMs/qualitySamples>ctx.balance.render.fallbackFrameMs){if(!lowQuality){lowQuality=quality.low=true;view.degrade();resize();}else view.degrade(true);}qualitySamples=qualityMs=0;}}
       last = time;
       try {
+        if(aliens&&sharedControls){const sample=sharedControls.sample();input.moveX=sample.moveX;input.x=undefined;heldFire=sample.kickHeld;queuedNova=sample.passHeld;queuedSpread=sample.sprintHeld;if(sample.passAim.manual){input.novaTargetX=model.player.x+sample.passAim.x*config.width;input.novaTargetY=model.player.y+sample.passAim.z*config.height;}else{input.novaTargetX=input.novaTargetY=undefined;}}
         if(naval&&sharedControls){const sample=sharedControls.sample(),released=previousKick&&!sample.kickHeld;previousKick=sample.kickHeld;if(heatFill){heatFill.style.width=`${model.heat*100}%`;heatFill.parentNode.dataset.overheated=String(model.overheated);}input.moveX=sample.moveX;input.moveZ=sample.moveZ;input.angularAim=false;queuedFire=released;heldFire=model.ammoIndex===4&&sample.kickHeld;input.autoAim=!sample.kickAim.manual;input.assistAim=sample.kickAim.manual;if(sample.kickAim.manual){const range=ctx.balance.aim.minRange+sample.kickAim.height*ctx.balance.aim.rangePerDegree*ctx.balance.aim.maxElevation;input.targetX=model.playerShip.x-sample.kickAim.z*range;input.targetZ=model.playerShip.z+sample.kickAim.x*range;}else{input.targetX=input.targetZ=undefined;}}
         input.firing=heldFire||queuedFire;input.nova=queuedNova;input.spread=queuedSpread;input.ammo=queuedAmmo;if(!paused&&!document.hidden)model.update(dt,input);if(naval&&input.ammoIndex!==undefined)input.ammoIndex=model.ammoIndex;if(dt>0)queuedFire=queuedNova=queuedAmmo=queuedSpread=false;
         if (model.result) {
@@ -128,8 +129,8 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
           if(ctx.warning){ctx.warning.hidden=!model.warningId;ctx.warning.textContent=(model.warningIds||[model.warningId]).filter(Boolean).map(id=>t(id)).join(' · ');}
           if(status.textContent!==text)status.textContent=text;
           if(ctx.gauges){ctx.gauges.water.value=model.water/model.maxWater;ctx.gauges.pressure.value=model.pressure/model.maxPressure;}
-          if(ctx.novaButton)ctx.novaButton.disabled=model.novaCharges<=0||model.nova.flight>0||model.nova.life>0;
-          if(ctx.spreadButton){const active=model.spreadTime>0,wait=Math.max(0,model.spreadCooldown-model.spreadTime);ctx.spreadButton.disabled=!active&&wait>0;ctx.spreadButton.textContent=t(active?'minigame.spreadActive':wait>0?'minigame.spreadWait':'minigame.spreadReady',{seconds:Math.ceil(active?model.spreadTime:wait)});}
+          if(ctx.novaButton){ctx.novaButton.disabled=model.novaCharges<=0||model.nova.flight>0||model.nova.life>0;ctx.novaButton.style.setProperty('--charge',`${model.nova.flight>0?100*(1-model.nova.flight/ctx.balance.nova.throwSeconds):model.nova.life>0?100*(1-model.nova.life/ctx.balance.nova.seconds):model.novaCharges>0?100:0}%`);}
+          if(ctx.spreadButton){const active=model.spreadTime>0,wait=Math.max(0,model.spreadCooldown-model.spreadTime);ctx.spreadButton.style.setProperty('--charge',`${active?100:100*(1-wait/ctx.balance.spread.cooldownSeconds)}%`);ctx.spreadButton.disabled=!active&&wait>0;ctx.spreadButton.textContent=t(active?'minigame.spreadActive':wait>0?'minigame.spreadWait':'minigame.spreadReady',{seconds:Math.ceil(active?model.spreadTime:wait)});}
           if(ctx.ammoButtons)for(let i=0;i<ctx.ammoButtons.length;i++){const button=ctx.ammoButtons[i],count=model.ammo[i];button.querySelector('.ammo-copy').textContent=String(count);button.setAttribute('aria-label',t('minigame.ammoCount',{ammo:t(ctx.balance.ammo[i].title),count}));button.setAttribute('aria-pressed',String(model.ammoIndex===i));button.disabled=count<=0;}
           if(ctx.upgradePanel){const panel=ctx.upgradePanel;panel.hidden=!model.choosing;if(model.choosing&&panel.dataset.wave!==String(model.wave)){panel.dataset.wave=model.wave;for(let i=0;i<ctx.upgradeButtons.length;i++){const id=model.choices[i],button=ctx.upgradeButtons[i];button.hidden=!id;if(!id)continue;upgradeCard(button,id,t('minigame.upgradeStack',{name:t('runUpgrade.'+id),rank:model.upgrades[id]+1}),t('runUpgrade.'+id+'.hint'));button.onclick=()=>{model.chooseUpgrade(i);clearInput();panel.hidden=true;statusTime=0;};}}}
           if(ctx.ammoButton){const index=model.ammoIndex;ctx.ammoButton.textContent=t('minigame.ammoSwitch',{ammo:t(ctx.balance.ammo[index].title),count:index===0?t('ammo.unlimited'):model.ammo[index]});}

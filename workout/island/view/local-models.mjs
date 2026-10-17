@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {localModelURL,modelSpec,disposeObject} from '../minigames/model-art.mjs?v=g6b-20261019-1';
+import {localModelURL,modelSpec,disposeObject} from '../minigames/model-art.mjs?v=g2i-20261019-1';
 
 /** Static local GLBs share resources across instances. The owner releases them
  * once, including loads that finish after the view has closed. */
