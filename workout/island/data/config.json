@@ -1452,7 +1452,7 @@
           "winParts": 3,
           "enemyKinds": 5,
           "boss": true,
-          "bossLives": 18,
+          "bossLives": 600,
           "spawnBudget": 2,
           "seconds": 132,
           "patternKinds": 4,
@@ -1526,7 +1526,7 @@
         "radius": 26,
         "magnetRadius": 80,
         "magnetSpeed": 260,
-        "seconds": 8,
+        "seconds": 6,
         "max": 1,
         "kinds": [
           "spread",
@@ -1672,8 +1672,6 @@
           "damage"
         ],
         "maxStack": 3,
-        "damagePerStack": 0.18,
-        "ratePerStack": 0.18,
         "comboSeconds": 3,
         "comboMilestone": 5,
         "comboBonus": 2,
@@ -1686,10 +1684,34 @@
         "maxWings": 2,
         "celebrationSeconds": 1.4,
         "bossSpreadSpeed": 32,
-        "piercePerStack": 2,
         "spreadStep": 0.55,
         "wingRadius": 15,
-        "wingFrontOffset": 35
+        "wingFrontOffset": 35,
+        "stackCurve": {
+          "damage": [
+            0.18,
+            0.12,
+            0.07
+          ],
+          "rapid": [
+            0.16,
+            0.09,
+            0.05
+          ],
+          "laser": [
+            1,
+            0.6,
+            0.3
+          ],
+          "wing": [
+            1,
+            0.6,
+            0.3,
+            0.15,
+            0.07,
+            0.03
+          ]
+        }
       },
       "hitFlashSeconds": 0.12,
       "models": {
@@ -1794,7 +1816,40 @@
           "shield": 1
         }
       ],
-      "requiresBuilding": "airbase"
+      "requiresBuilding": "airbase",
+      "balance": {
+        "minBossSeconds": 16
+      },
+      "render": {
+        "width": 844,
+        "height": 480,
+        "dpr": 1,
+        "worldScale": 0.065,
+        "camera": [
+          0,
+          30,
+          32
+        ],
+        "lookAt": [
+          0,
+          0,
+          -6
+        ],
+        "fov": 52,
+        "sky": "#071b39",
+        "stars": "#cbeaff",
+        "shot": "#ffe28a",
+        "bolt": "#fa799c",
+        "pickup": "#85e5bd",
+        "modelHeight": 3.2,
+        "bossHeight": 5.6,
+        "maxTriangles": 90000,
+        "maxDrawCalls": 70,
+        "fallbackSampleFrames": 90,
+        "fallbackFrameMs": 32,
+        "starCount": 100,
+        "starDepth": 70
+      }
     },
     "fireRescue": {
       "flameColumns": 3,
@@ -1820,15 +1875,15 @@
       "levels": [
         {
           "difficulty": 1,
-          "flames": 5,
+          "flames": 2,
           "seconds": 46,
           "water": 110,
-          "growthPerSecond": 0.024,
+          "growthPerSecond": 0.008,
           "points": 25,
           "winMoney": 30,
           "winParts": 0,
-          "spreadSeconds": 9.0,
-          "spreadCount": 4,
+          "spreadSeconds": 20,
+          "spreadCount": 7,
           "refillWater": 200,
           "parSeconds": 7.2,
           "parWater": 60,
@@ -1836,19 +1891,20 @@
           "feature": "feature.fire.1",
           "rescueCount": 0,
           "wind": 0,
-          "eruptionSeconds": 8.0
+          "eruptionSeconds": 14,
+          "resistance": 1
         },
         {
           "difficulty": 2,
-          "flames": 6,
+          "flames": 3,
           "seconds": 50,
           "water": 107,
-          "growthPerSecond": 0.032,
+          "growthPerSecond": 0.012,
           "points": 28,
           "winMoney": 42,
           "winParts": 0,
-          "spreadSeconds": 8.65,
-          "spreadCount": 3,
+          "spreadSeconds": 19,
+          "spreadCount": 6,
           "refillWater": 200,
           "parSeconds": 9.0,
           "parWater": 75,
@@ -1856,19 +1912,20 @@
           "feature": "feature.fire.2",
           "rescueCount": 0,
           "wind": 0,
-          "eruptionSeconds": 7.7
+          "eruptionSeconds": 13,
+          "resistance": 1
         },
         {
           "difficulty": 3,
-          "flames": 7,
+          "flames": 4,
           "seconds": 54,
           "water": 104,
-          "growthPerSecond": 0.04,
+          "growthPerSecond": 0.016,
           "points": 31,
           "winMoney": 54,
           "winParts": 0,
-          "spreadSeconds": 8.3,
-          "spreadCount": 2,
+          "spreadSeconds": 18,
+          "spreadCount": 5,
           "refillWater": 200,
           "parSeconds": 16.2,
           "parWater": 135,
@@ -1876,7 +1933,8 @@
           "feature": "feature.fire.3",
           "rescueCount": 1,
           "wind": 0,
-          "eruptionSeconds": 7.4
+          "eruptionSeconds": 12,
+          "resistance": 1
         },
         {
           "difficulty": 4,
@@ -1896,7 +1954,8 @@
           "feature": "feature.fire.4",
           "rescueCount": 1,
           "wind": 0,
-          "eruptionSeconds": 7.1
+          "eruptionSeconds": 7.1,
+          "resistance": 1
         },
         {
           "difficulty": 5,
@@ -1916,7 +1975,8 @@
           "feature": "feature.fire.5",
           "rescueCount": 1,
           "wind": 0,
-          "eruptionSeconds": 6.8
+          "eruptionSeconds": 6.8,
+          "resistance": 1
         },
         {
           "difficulty": 6,
@@ -1936,7 +1996,8 @@
           "feature": "feature.fire.6",
           "rescueCount": 2,
           "wind": 0,
-          "eruptionSeconds": 6.5
+          "eruptionSeconds": 6.5,
+          "resistance": 1
         },
         {
           "difficulty": 7,
@@ -1956,7 +2017,8 @@
           "feature": "feature.fire.7",
           "rescueCount": 2,
           "wind": 0,
-          "eruptionSeconds": 6.2
+          "eruptionSeconds": 6.2,
+          "resistance": 1.4
         },
         {
           "difficulty": 8,
@@ -1976,7 +2038,8 @@
           "feature": "feature.fire.8",
           "rescueCount": 2,
           "wind": 6,
-          "eruptionSeconds": 5.9
+          "eruptionSeconds": 5.9,
+          "resistance": 1.8
         },
         {
           "difficulty": 9,
@@ -1996,7 +2059,8 @@
           "feature": "feature.fire.9",
           "rescueCount": 2,
           "wind": 10,
-          "eruptionSeconds": 5.6
+          "eruptionSeconds": 5.6,
+          "resistance": 2.4
         },
         {
           "difficulty": 10,
@@ -2016,10 +2080,31 @@
           "feature": "feature.fire.10",
           "rescueCount": 3,
           "wind": 14,
-          "eruptionSeconds": 5.300000000000001
+          "eruptionSeconds": 5.300000000000001,
+          "resistance": 3
         }
       ],
       "sites": [
+        {
+          "kind": "car",
+          "x": 75,
+          "y": 257
+        },
+        {
+          "kind": "home",
+          "x": 76,
+          "y": 354
+        },
+        {
+          "kind": "warehouse",
+          "x": 180,
+          "y": 254
+        },
+        {
+          "kind": "roof",
+          "x": 185,
+          "y": 353
+        },
         {
           "kind": "home",
           "x": 74,
@@ -2036,29 +2121,9 @@
           "y": 165
         },
         {
-          "kind": "car",
-          "x": 75,
-          "y": 257
-        },
-        {
-          "kind": "warehouse",
-          "x": 180,
-          "y": 254
-        },
-        {
           "kind": "tree",
           "x": 291,
           "y": 273
-        },
-        {
-          "kind": "home",
-          "x": 76,
-          "y": 354
-        },
-        {
-          "kind": "roof",
-          "x": 185,
-          "y": 353
         },
         {
           "kind": "car",
@@ -2086,7 +2151,7 @@
           "color": "#ff586e"
         }
       ],
-      "range": 355,
+      "range": 210,
       "chargeSeconds": 1.2,
       "chargeBoost": 0.4,
       "rescue": {
@@ -2303,6 +2368,26 @@
         "sites": [
           [
             -6,
+            0.8,
+            0
+          ],
+          [
+            -6,
+            1.8,
+            7.2
+          ],
+          [
+            0,
+            2.6,
+            1.5
+          ],
+          [
+            0,
+            4.7,
+            5
+          ],
+          [
+            -6,
             1.6,
             -4.8
           ],
@@ -2317,29 +2402,9 @@
             -7
           ],
           [
-            -6,
-            0.8,
-            0
-          ],
-          [
-            0,
-            2.6,
-            1.5
-          ],
-          [
             7,
             2.4,
             0
-          ],
-          [
-            -6,
-            1.8,
-            7.2
-          ],
-          [
-            0,
-            4.7,
-            5
           ],
           [
             7,
@@ -2390,8 +2455,8 @@
         "x": -3,
         "z": 11,
         "minX": -8,
-        "maxX": 6,
-        "minZ": 9.5,
+        "maxX": 8,
+        "minZ": -5,
         "maxZ": 13,
         "speed": 6,
         "length": 5.3,
@@ -2423,9 +2488,18 @@
           7.3,
           0.1,
           10
-        ]
+        ],
+        "radius": 1.8,
+        "parkedSpeed": 0.1,
+        "lowWaterRatio": 0.2,
+        "hoseColor": "#ffd75f"
       },
-      "requiresBuilding": "fireStation"
+      "requiresBuilding": "fireStation",
+      "balance": {
+        "earlySeeds": 10,
+        "earlyWins": 9,
+        "lateMaxWins": 3
+      }
     },
     "navalDuel": {
       "shipX": 60,
@@ -2696,7 +2770,8 @@
           "beam": 0.72,
           "length": 0.78,
           "turrets": 1,
-          "hull": "#ab7858"
+          "hull": "#ab7858",
+          "model": true
         },
         {
           "hp": 1.2,
@@ -2892,8 +2967,8 @@
         "dialRadius": 25
       },
       "render": {
-        "width": 360,
-        "height": 520,
+        "width": 844,
+        "height": 390,
         "dpr": 1,
         "fallbackFrameMs": 32,
         "fallbackSampleFrames": 90,
@@ -2902,9 +2977,9 @@
         "waveSpeed": 1.5,
         "seaSize": 180,
         "camera": [
-          0,
-          30,
-          18
+          -28,
+          19,
+          24
         ],
         "lookAt": [
           0,
@@ -2916,9 +2991,9 @@
         "playerScale": 1.45,
         "fogNear": 48,
         "fogFar": 130,
-        "sky": "#bf9e99",
-        "sea": "#103e59",
-        "sun": "#ffdd9c",
+        "sky": "#a8ddf2",
+        "sea": "#238fc4",
+        "sun": "#fff2ce",
         "hull": "#237f91",
         "enemy": "#bd615b",
         "deck": "#e9cba0",
@@ -2935,7 +3010,13 @@
         "hemisphereIntensity": 1.35,
         "sunIntensity": 1.8,
         "enemyBarWidth": 34,
-        "enemyLabelStep": 16
+        "enemyLabelStep": 16,
+        "island": "#73996e",
+        "rock": "#b5b5a5",
+        "cloud": "#ffffff",
+        "cameraEase": 3.2,
+        "maxTriangles": 90000,
+        "maxDrawCalls": 70
       },
       "combat": {
         "heavySpeed": 0.85,
@@ -2978,7 +3059,31 @@
           -2.1
         ]
       },
-      "requiresBuilding": "harbor"
+      "requiresBuilding": "harbor",
+      "movement": {
+        "speed": 32,
+        "turnSpeed": 1.4,
+        "minX": 20,
+        "maxX": 160,
+        "minZ": -110,
+        "maxZ": 110
+      },
+      "aim": {
+        "minElevation": 5,
+        "maxElevation": 65,
+        "defaultElevation": 35,
+        "minRange": 80,
+        "rangePerDegree": 5.333333333333333,
+        "sway": {
+          "yaw": 0.018,
+          "elevation": 0.65,
+          "frequency": 1.3
+        },
+        "previewFraction": 0.28,
+        "previewSegments": 12,
+        "torpedoSecondsMultiplier": 1.8,
+        "torpedoBob": 0.75
+      }
     },
     "art": {
       "starSize": 2,
@@ -3200,8 +3305,8 @@
         "fixedStep": 0.016666666666666666
       },
       "pitch": {
-        "length": 30,
-        "width": 18,
+        "length": 36,
+        "width": 22,
         "goalWidth": 5.4,
         "goalHeight": 2.3,
         "goalDepth": 1.6
@@ -3226,7 +3331,59 @@
         "kickPerRank": 0.06,
         "defensePerRank": 0.12,
         "acceleration": 12,
-        "radius": 0.42
+        "radius": 0.42,
+        "roles": [
+          "striker",
+          "support",
+          "keeper",
+          "wing"
+        ],
+        "roster": [
+          {
+            "team": 0,
+            "role": "striker",
+            "template": 0
+          },
+          {
+            "team": 0,
+            "role": "support",
+            "template": 1
+          },
+          {
+            "team": 0,
+            "role": "keeper",
+            "template": 2
+          },
+          {
+            "team": 1,
+            "role": "striker",
+            "template": 0
+          },
+          {
+            "team": 1,
+            "role": "support",
+            "template": 1
+          },
+          {
+            "team": 1,
+            "role": "keeper",
+            "template": 2
+          },
+          {
+            "team": 0,
+            "role": "wing",
+            "template": 3
+          },
+          {
+            "team": 1,
+            "role": "wing",
+            "template": 3
+          }
+        ],
+        "deceleration": 7,
+        "turnRate": 12,
+        "turnLean": 0.1,
+        "maxTurnLean": 0.2
       },
       "team": {
         "id": "islandTeam",
@@ -3256,6 +3413,14 @@
             "id": "playerStar",
             "nameId": "player.star",
             "role": "keeper",
+            "speed": 1,
+            "kick": 1,
+            "guard": 1
+          },
+          {
+            "id": "playerBolt",
+            "nameId": "player.bolt",
+            "role": "wing",
             "speed": 1,
             "kick": 1,
             "guard": 1
@@ -3362,8 +3527,8 @@
         "lowPixelRatio": 0.85,
         "slowFrameMs": 25,
         "qualityWindowSeconds": 4,
-        "maxTriangles": 110000,
-        "maxDrawCalls": 80,
+        "maxTriangles": 130000,
+        "maxDrawCalls": 90,
         "confettiCount": 96,
         "crowdCount": 144,
         "aimArrowLength": 2,
@@ -3387,14 +3552,23 @@
         "animation": {
           "idleSpeed": 0.2,
           "runSpeed": 4.5,
-          "minRate": 0.35,
+          "minRate": 0.05,
           "maxRate": 2.2,
           "sprintLean": 0.18,
-          "slideLean": 1.2,
-          "fadeSeconds": 0.14,
+          "slideLean": -1.2,
+          "fadeSeconds": 0.18,
           "characterHeight": 1.8,
-          "slideHeight": 0.35,
-          "keeperMix": 0.65
+          "slideHeight": 0.18,
+          "keeperMix": 0.65,
+          "slideRoll": 0.42,
+          "slideLeg": 0.7,
+          "slideKnee": 0.85,
+          "turnSmoothing": 10,
+          "stealLean": 0.15,
+          "stealRate": 1.6,
+          "headerLean": 0.16,
+          "turfColor": "#c0ba78",
+          "turfPerPlayer": 4
         },
         "trail": {
           "count": 7,
@@ -3407,7 +3581,8 @@
         },
         "aimArrowMinLength": 0.8,
         "aimArrowMaxLength": 5.2,
-        "teamAbbreviationLength": 3
+        "teamAbbreviationLength": 3,
+        "farModelDistance": 6
       },
       "controls": {
         "deadzone": 0.12,
@@ -3426,10 +3601,11 @@
       "ai": {
         "kickoffX": [
           -2,
-          -6,
-          -13.3
+          -7,
+          -16.3,
+          -5
         ],
-        "kickoffZ": 4,
+        "kickoffZ": 5,
         "kickoffOwnerX": 0.8,
         "kickoffGrace": 1,
         "initialThink": 0.4,
@@ -3468,7 +3644,7 @@
         "supportAdvance": 4,
         "strikerAdvance": 6,
         "supportGoalInset": 3,
-        "supportWidth": 4.2,
+        "supportWidth": 5.2,
         "requestDistance": 3,
         "requestClearance": 2.2,
         "defenseDepth": 5,
@@ -3492,7 +3668,9 @@
         "sprintSeconds": 0.65,
         "sprintRestSeconds": 3.8,
         "sprintMultiplier": 1.1,
-        "sprintDistance": 3
+        "sprintDistance": 3,
+        "wingWidth": 6.5,
+        "wingAdvance": 3
       },
       "rules": {
         "playerBoundary": 0.35,
@@ -3805,7 +3983,8 @@
       "steal": {
         "reach": 0.9,
         "baseChance": 0.35,
-        "cooldownSeconds": 0.6
+        "cooldownSeconds": 0.6,
+        "animationSeconds": 0.3
       },
       "difficulties": {
         "easy": {
@@ -3902,7 +4081,487 @@
         "maxDistance": 22,
         "chargeSeconds": 0.9,
         "travelSeconds": 1.2,
-        "runSeconds": 2.5
+        "runSeconds": 2.5,
+        "loftThresholdSeconds": 0.32,
+        "groundTravelSeconds": 0.55,
+        "groundConeDegrees": 80,
+        "leadSeconds": 0.32,
+        "loftMinSeconds": 1.05,
+        "loftExtraSeconds": 0.45,
+        "loftMinHeight": 2.8,
+        "loftExtraHeight": 1.4,
+        "landingColor": "#fce36a",
+        "alignmentWeight": 2
+      },
+      "aerial": {
+        "minHeight": 1,
+        "maxHeight": 2.4,
+        "headerHeight": 1.45,
+        "reach": 1.5,
+        "power": 0.55,
+        "seconds": 0.5,
+        "jumpHeight": 0.38,
+        "headLean": 0.55,
+        "keeperHeight": 2.6,
+        "clearanceZone": 6,
+        "clearPower": 0.25
+      }
+    },
+    "tennis": {
+      "version": 1,
+      "seed": 4107,
+      "simulation": {
+        "step": 0.008333333333333333,
+        "maxDelta": 0.25
+      },
+      "court": {
+        "halfWidth": 4.1,
+        "halfLength": 9,
+        "serviceLength": 4.5,
+        "netHeight": 0.92,
+        "lineTolerance": 0.06,
+        "playerLimit": 4.6
+      },
+      "ball": {
+        "radius": 0.13,
+        "gravity": 9.81,
+        "bounce": 0.72,
+        "hitHeight": 0.85,
+        "serveHeight": 2.5,
+        "flightSeconds": 1.43,
+        "minimumFlight": 0.9,
+        "powerFlightFactor": 0.27,
+        "depth": 5.4,
+        "spread": 3.35,
+        "outMargin": 0.8,
+        "rallyPowerPerHit": 0.06,
+        "rallyPowerLimit": 0.6
+      },
+      "rules": {
+        "gamesToWin": 4,
+        "pointsToWin": 4,
+        "pointMargin": 2,
+        "pointValues": [
+          0,
+          15,
+          30,
+          40
+        ],
+        "pointPause": 1.35,
+        "gamePause": 2.8,
+        "serveWait": 1.2,
+        "serveTimeout": 9,
+        "rallyTimeout": 90,
+        "winStars": 1,
+        "goodWinStars": 2,
+        "perfectStars": 3,
+        "goodWinAgainst": 1,
+        "lossStars": 1
+      },
+      "player": {
+        "defaults": {
+          "speed": 1,
+          "hit": 1,
+          "serve": 1
+        },
+        "rankMin": 1,
+        "rankMax": 5,
+        "speedByRank": [
+          3.4,
+          4.1,
+          4.8,
+          5.6,
+          6.4
+        ],
+        "hitPowerByRank": [
+          0.28,
+          0.42,
+          0.56,
+          0.7,
+          0.84
+        ],
+        "servePowerByRank": [
+          0.35,
+          0.49,
+          0.63,
+          0.77,
+          0.91
+        ],
+        "reach": 1.05,
+        "autoZSpeed": 9,
+        "assistStages": 3,
+        "assistSpeed": 16,
+        "readyZ": 7.8,
+        "contactOffsetZ": 0.45,
+        "chargeSeconds": 1.1,
+        "chargeBonus": 0.35,
+        "timingCenterFraction": 0.28,
+        "timingPowerPenalty": 0.2,
+        "swingCooldown": 0.28,
+        "swingSeconds": 0.48
+      },
+      "levels": [
+        {
+          "stage": 1,
+          "speed": 2.1,
+          "accuracy": 0.48,
+          "power": 0.12,
+          "timingWindow": 0.5,
+          "missChance": 0.4,
+          "cornerChance": 0,
+          "netChance": 0,
+          "reaction": 0.18,
+          "difficulty": 1,
+          "winMoney": 35,
+          "winParts": 0,
+          "feature": "feature.tennis.1"
+        },
+        {
+          "stage": 2,
+          "speed": 2.5,
+          "accuracy": 0.55,
+          "power": 0.2,
+          "timingWindow": 0.465,
+          "missChance": 0.32,
+          "cornerChance": 0.08,
+          "netChance": 0,
+          "reaction": 0.16,
+          "difficulty": 2,
+          "winMoney": 47,
+          "winParts": 0,
+          "feature": "feature.tennis.2"
+        },
+        {
+          "stage": 3,
+          "speed": 2.9,
+          "accuracy": 0.62,
+          "power": 0.28,
+          "timingWindow": 0.43,
+          "missChance": 0.26,
+          "cornerChance": 0.14,
+          "netChance": 0.02,
+          "reaction": 0.14,
+          "difficulty": 3,
+          "winMoney": 59,
+          "winParts": 0,
+          "feature": "feature.tennis.3"
+        },
+        {
+          "stage": 4,
+          "speed": 3.4,
+          "accuracy": 0.7,
+          "power": 0.37,
+          "timingWindow": 0.395,
+          "missChance": 0.2,
+          "cornerChance": 0.28,
+          "netChance": 0.05,
+          "reaction": 0.12,
+          "difficulty": 4,
+          "winMoney": 71,
+          "winParts": 1,
+          "feature": "feature.tennis.4"
+        },
+        {
+          "stage": 5,
+          "speed": 3.9,
+          "accuracy": 0.77,
+          "power": 0.46,
+          "timingWindow": 0.36,
+          "missChance": 0.15,
+          "cornerChance": 0.4,
+          "netChance": 0.08,
+          "reaction": 0.1,
+          "difficulty": 5,
+          "winMoney": 83,
+          "winParts": 1,
+          "feature": "feature.tennis.5"
+        },
+        {
+          "stage": 6,
+          "speed": 4.5,
+          "accuracy": 0.83,
+          "power": 0.56,
+          "timingWindow": 0.325,
+          "missChance": 0.1,
+          "cornerChance": 0.54,
+          "netChance": 0.12,
+          "reaction": 0.08,
+          "difficulty": 6,
+          "winMoney": 95,
+          "winParts": 1,
+          "feature": "feature.tennis.6"
+        },
+        {
+          "stage": 7,
+          "speed": 5.1,
+          "accuracy": 0.88,
+          "power": 0.65,
+          "timingWindow": 0.29,
+          "missChance": 0.07,
+          "cornerChance": 0.68,
+          "netChance": 0.16,
+          "reaction": 0.06,
+          "difficulty": 7,
+          "winMoney": 107,
+          "winParts": 2,
+          "feature": "feature.tennis.7"
+        },
+        {
+          "stage": 8,
+          "speed": 5.8,
+          "accuracy": 0.92,
+          "power": 0.75,
+          "timingWindow": 0.255,
+          "missChance": 0.045,
+          "cornerChance": 0.8,
+          "netChance": 0.2,
+          "reaction": 0.04,
+          "difficulty": 8,
+          "winMoney": 119,
+          "winParts": 2,
+          "feature": "feature.tennis.8"
+        },
+        {
+          "stage": 9,
+          "speed": 6.5,
+          "accuracy": 0.96,
+          "power": 0.85,
+          "timingWindow": 0.22,
+          "missChance": 0.025,
+          "cornerChance": 0.9,
+          "netChance": 0.25,
+          "reaction": 0.025,
+          "difficulty": 9,
+          "winMoney": 131,
+          "winParts": 2,
+          "feature": "feature.tennis.9"
+        },
+        {
+          "stage": 10,
+          "speed": 7.2,
+          "accuracy": 0.985,
+          "power": 0.96,
+          "timingWindow": 0.18,
+          "missChance": 0.012,
+          "cornerChance": 0.98,
+          "netChance": 0.3,
+          "reaction": 0.01,
+          "difficulty": 10,
+          "winMoney": 143,
+          "winParts": 2,
+          "feature": "feature.tennis.10"
+        }
+      ],
+      "controls": {
+        "deadzone": 0.12,
+        "joystickRadius": 48,
+        "rightHanded": true,
+        "kickKey": "Space",
+        "passKey": "KeyX",
+        "sprintKeys": [
+          "KeyL"
+        ],
+        "switchKey": "KeyC",
+        "floating": true,
+        "handednessKey": "island.tennis.hand"
+      },
+      "render": {
+        "targetFPS": 60,
+        "slowFrameMs": 25,
+        "slowSamples": 75,
+        "qualityCooldown": 3,
+        "pixelRatios": [
+          1.5,
+          1,
+          0.75
+        ],
+        "crowdCounts": [
+          72,
+          36,
+          0
+        ],
+        "shadowEnabled": [
+          false,
+          false,
+          false
+        ],
+        "shadowMapSize": 512,
+        "particles": 72,
+        "particleSeconds": 1.8,
+        "hudInterval": 0.08,
+        "flashSeconds": 0.32,
+        "maxTriangles": 90000,
+        "maxDrawCalls": 70,
+        "cameraFov": 48,
+        "cameraPortrait": [
+          0,
+          18,
+          25
+        ],
+        "cameraLandscape": [
+          0,
+          14,
+          24
+        ],
+        "cameraTarget": [
+          0,
+          0,
+          0
+        ],
+        "characterScale": 1.08,
+        "colors": {
+          "sky": "#c8e9e4",
+          "sea": "#75c7ce",
+          "island": "#e6d4a7",
+          "apron": "#4d9686",
+          "court": "#247969",
+          "line": "#f3f4dc",
+          "dark": "#143d41",
+          "accent": "#ffd16f",
+          "ball": "#dfff55"
+        },
+        "fallbackQuality": 2,
+        "shirtColor": "#4d9ddb"
+      },
+      "audio": {
+        "gain": 0.055,
+        "hitFrequency": 440,
+        "pointFrequency": 660,
+        "endFrequency": 880,
+        "seconds": 0.14
+      },
+      "opponent": {
+        "fatigueAfterHits": 4,
+        "fatigueMissPerHit": 0.055,
+        "maximumMissChance": 0.8
+      },
+      "requiresBuilding": "tennis",
+      "maximumScore": 4,
+      "pointsPerCoin": 1,
+      "maximumSeconds": 3600,
+      "lob": {
+        "flightMultiplier": 1.35
+      },
+      "difficulties": {
+        "easy": {
+          "speed": 0.8,
+          "timing": 1.2,
+          "miss": 0.12,
+          "coinMultiplier": 0.85
+        },
+        "normal": {
+          "speed": 1,
+          "timing": 1,
+          "miss": 0,
+          "coinMultiplier": 1
+        },
+        "hard": {
+          "speed": 1.15,
+          "timing": 0.85,
+          "miss": -0.04,
+          "coinMultiplier": 1.3
+        }
+      },
+      "opponents": [
+        {
+          "shirtColor": "#e77764",
+          "nameId": "tennis.opponent.1"
+        },
+        {
+          "shirtColor": "#9473c4",
+          "nameId": "tennis.opponent.2"
+        },
+        {
+          "shirtColor": "#e2ad42",
+          "nameId": "tennis.opponent.3"
+        },
+        {
+          "shirtColor": "#4da780",
+          "nameId": "tennis.opponent.4"
+        }
+      ],
+      "equipment": {
+        "speed": {
+          "title": "equipment.tennis.speed",
+          "description": "equipment.tennis.speed.hint",
+          "base": 1,
+          "levels": [
+            {
+              "value": 2,
+              "cost": 40,
+              "stars": 0
+            },
+            {
+              "value": 3,
+              "cost": 80,
+              "stars": 3
+            },
+            {
+              "value": 4,
+              "cost": 125,
+              "stars": 8
+            },
+            {
+              "value": 5,
+              "cost": 175,
+              "stars": 15
+            }
+          ]
+        },
+        "hit": {
+          "title": "equipment.tennis.hit",
+          "description": "equipment.tennis.hit.hint",
+          "base": 1,
+          "levels": [
+            {
+              "value": 2,
+              "cost": 40,
+              "stars": 0
+            },
+            {
+              "value": 3,
+              "cost": 80,
+              "stars": 3
+            },
+            {
+              "value": 4,
+              "cost": 125,
+              "stars": 8
+            },
+            {
+              "value": 5,
+              "cost": 175,
+              "stars": 15
+            }
+          ]
+        },
+        "serve": {
+          "title": "equipment.tennis.serve",
+          "description": "equipment.tennis.serve.hint",
+          "base": 1,
+          "levels": [
+            {
+              "value": 2,
+              "cost": 40,
+              "stars": 0
+            },
+            {
+              "value": 3,
+              "cost": 80,
+              "stars": 3
+            },
+            {
+              "value": 4,
+              "cost": 125,
+              "stars": 8
+            },
+            {
+              "value": 5,
+              "cost": 175,
+              "stars": 15
+            }
+          ]
+        }
       }
     }
   },
@@ -3950,6 +4609,20 @@
       }
     ],
     "soccer": [
+      {
+        "cost": 0,
+        "power": 1
+      },
+      {
+        "cost": 120,
+        "power": 1.2
+      },
+      {
+        "cost": 240,
+        "power": 1.45
+      }
+    ],
+    "tennis": [
       {
         "cost": 0,
         "power": 1

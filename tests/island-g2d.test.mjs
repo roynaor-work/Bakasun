@@ -62,8 +62,8 @@ test('G2d collectible coins/crystals and combo have real score and timeout effec
   const m=make('alienDefense',2);m.loot.push({x:m.player.x,y:m.player.y,vx:0,vy:0,kind:0},{x:m.player.x,y:m.player.y,vx:0,vy:0,kind:1});m.update(.001,{});assert.equal(m.coins,1);assert.equal(m.crystals,1);assert.equal(m.score,config.alienDefense.campaign.coinPoints+config.alienDefense.campaign.crystalPoints);
   for(let i=0;i<5;i++){const a=m.aliens[0];a.hp=1;m.shots.push({x:a.x,y:a.y,vx:0,vy:0,hp:1,kind:0});m.update(.001,{});}assert.equal(m.combo,5);assert.ok(m.celebration>0);advance(m,config.alienDefense.campaign.comboSeconds+.1);assert.equal(m.combo,0);
 });
-test('G2d refill is an explicit choice: the pump restores pressure, filling spends reserve and stops spray',()=>{
-  const m=make('fireRescue');advance(m,1,{firing:true,x:350,y:0});const water=m.water,reserve=m.reserve,pressure=m.pressure;advance(m,.3);assert.equal(m.water,water);assert.equal(m.reserve,reserve);assert.equal(m.pressure,pressure);advance(m,.3,{charge:true});assert.ok(m.pressure>pressure);advance(m,.3,{refill:true,firing:true});assert.equal(m.spraying,false);assert.ok(m.water>water);assert.ok(m.reserve<reserve);
+test('G2d refill is an explicit choice: the pump restores pressure, filling away from a hydrant is blocked and stops spray',()=>{
+  const m=make('fireRescue');advance(m,1,{firing:true,x:350,y:0});const water=m.water,reserve=m.reserve,pressure=m.pressure;advance(m,.3);assert.equal(m.water,water);assert.equal(m.reserve,reserve);assert.equal(m.pressure,pressure);advance(m,.3,{charge:true});assert.ok(m.pressure>pressure);advance(m,.3,{refill:true,firing:true});assert.equal(m.spraying,false);assert.equal(m.water,water);assert.equal(m.reserve,reserve);
 });
 test('G2d extra hose uses more water, cools faster and rescue walks to the truck',()=>{
   const a=make('fireRescue',3),b=make('fireRescue',3,{equipment:{hose:1}});for(const m of [a,b])advance(m,.2,{firing:true,x:m.flames[0].x,y:m.flames[0].y});assert.ok(b.flames[0].heat<a.flames[0].heat);assert.ok(b.water<a.water);
@@ -72,7 +72,7 @@ test('G2d extra hose uses more water, cools faster and rescue walks to the truck
 test('G2d v5 → v7 adds hose and permanent alien ranks and preserves city, event, currency, avatar and all earned upgrades',()=>{
   const e=createEngine(data,{storage:null,now:()=>1234}),old=JSON.parse(e.exportJSON());old.version=5;delete old.minigameEquipment.fireRescue.hose;old.minigameEquipment.navalDuel.damage=2;old.money=432;
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:22,phase:'playing',warningUntil:100,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,10);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=10;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
+  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,12);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=12;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
 });
 for(const rank of [-1,1.5,99,'1'])test(`G2d v6 rejects invalid hose rank ${rank}`,()=>{
   const e=createEngine(data,{storage:null}),save=JSON.parse(e.exportJSON());save.minigameEquipment.fireRescue.hose=rank;assert.equal(migrateSave(save,data,e.registry).ok,false);

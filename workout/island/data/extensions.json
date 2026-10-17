@@ -10,7 +10,8 @@
     "extensions/naval-duel.mjs",
     "extensions/island-events.mjs",
     "extensions/activity-income.mjs",
-    "extensions/soccer.mjs"
+    "extensions/soccer.mjs",
+    "extensions/tennis.mjs"
   ],
   "records": {
     "building": {
@@ -84,6 +85,14 @@
       "difficulty": "stage",
       "helpId": "minigame.soccer.help",
       "icon": "⚽"
+    },
+    "tennis": {
+      "id": "tennis",
+      "title": "minigame.tennis.title",
+      "featureFlag": "tennis",
+      "difficulty": "stage",
+      "helpId": "minigame.tennis.help",
+      "icon": "🎾"
     }
   }
 }

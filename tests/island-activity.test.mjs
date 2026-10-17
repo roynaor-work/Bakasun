@@ -42,9 +42,9 @@ test('version two migrates activity defaults without losing money, buildings, ch
   const {engine}=fixture(),old=createInitialState(data,17);old.version=2;
   for(const key of ['minigameLevels','highScores','minigameWins','instructionsSeen','events'])delete old[key];
   old.money=900;old.avatar.created=true;const snapshot=structuredClone(old);
-  const result=migrateSave(old,data,engine.registry);assert.equal(result.ok,true);assert.equal(result.state.version,10);
+  const result=migrateSave(old,data,engine.registry);assert.equal(result.ok,true);assert.equal(result.state.version,12);
   for(const key of Object.keys(snapshot).filter(k=>k!=='version'))assert.deepEqual(result.state[key],snapshot[key]);
-  assert.deepEqual(result.state.minigameLevels,{alienDefense:1,fireRescue:1,navalDuel:1,soccer:1});assert.equal(result.state.events.active,null);
+  assert.deepEqual(result.state.minigameLevels,{alienDefense:1,fireRescue:1,navalDuel:1,soccer:1,tennis:1});assert.equal(result.state.events.active,null);
 });
 test('activity export/import merges levels and records monotonically and rejects malformed game state',()=>{
   const {engine}=fixture();engine.state.highScores.alienDefense=70;engine.state.minigameLevels.alienDefense=2;
@@ -70,7 +70,7 @@ test('fire hose aims at cartoon flames, refills water and pressure, and repeats 
   for(const model of [a,b]){const memory={};for(let i=0;i<3000&&!model.result;i++)model.update(.04,pilotInput('fireRescue',model,data.config.minigames.fireRescue,memory));}
   assert.equal(a.result.outcome,'win');assert.deepEqual(a.snapshot(),b.snapshot());
   const dry=make();for(let i=0;i<100;i++)dry.update(.04,{firing:true,x:0,y:0});const water=dry.water,pressure=dry.pressure;
-  for(let i=0;i<100;i++)dry.update(.04,{refill:true,charge:true});assert.ok(dry.water>water);assert.ok(dry.pressure>pressure);
+  for(let i=0;i<100;i++)dry.update(.04,{refill:true,charge:true});assert.equal(dry.water,water);assert.ok(dry.pressure>pressure);
   for(let i=0;i<2000&&!dry.result;i++)dry.update(.04,{});assert.equal(dry.result.outcome,'lose');
 });
 test('naval duel uses a sea target and alternating turns, is winnable and deterministic with a seed',()=>{

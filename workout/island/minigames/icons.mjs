@@ -1,5 +1,10 @@
 /** Small inline vector illustrations; no text, external requests or fonts. */
 const paths={
+  shell:'<path d="M22 53V25Q22 9 32 4q10 5 10 21v28Z" fill="#ffd16a" stroke="#fff4ca" stroke-width="3"/><path d="M22 42h20v14H22Z" fill="#ba7d42"/>',
+  double:'<path d="M8 53V25Q8 10 18 4q10 6 10 21v28Z" fill="#ff9364"/><path d="M36 61V33q0-15 10-21 10 6 10 21v28Z" fill="#ffd479"/>',
+  torpedo:'<path d="M14 31q16-30 36 0-20 30-36 0Z" fill="#83dbf7" stroke="#eaffff" stroke-width="3"/><path d="m12 31-9-12v24Zm1 19h38m-35 8h30" fill="#4ccbb1" stroke="#4ccbb1" stroke-width="3"/>',
+  absorb:'<path d="m32 5 22 12v19Q46 52 32 61 18 52 10 36V17Z" fill="#77e3b2"/><path d="M28 19h8v10h10v8H36v10h-8V37H18v-8h10Z" fill="#fff6ce"/>',
+
   cannon:'<circle cx="26" cy="48" r="10" fill="#183c60"/><circle cx="26" cy="48" r="4" fill="#ffd77a"/><path d="M15 39 47 16l10 15-34 19Z" fill="#557c9c" stroke="#e2f8ff" stroke-width="3"/><ellipse cx="51" cy="24" rx="7" ry="10" transform="rotate(-35 51 24)" fill="#17334f"/><path d="m8 21 7 3m23-17 2 7m20 29-7-1" stroke="#ffd77a" stroke-width="4"/>',
   ladder:'<path d="m15 59 16-50m3 53L50 12M20 46l19 6M24 34l19 6M28 22l19 6" stroke="#e5faff" stroke-width="5" fill="none"/><path d="m8 43 9 3m-3 11 3-11" stroke="#6be6b0" stroke-width="4"/>',
   tap:'<path d="M10 28h31v12H28v12H15V39h-5Z" fill="#70c7ed" stroke="#e8faff" stroke-width="3"/><path d="M27 28V17m-12 0h25" stroke="#ffda80" stroke-width="6" stroke-linecap="round"/><path d="M21 52q-11 12 0 12 11 0 0-12" fill="#9beaff"/>',

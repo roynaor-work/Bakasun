@@ -1,11 +1,11 @@
-import {dataURL} from './release.mjs?v=g3d-20261016-1';
-import {createTranslator} from './ui/translate.mjs?v=g3d-20261016-1';
-import { loadData } from './engine/load-data.mjs?v=g3d-20261016-1';
-import { createEngine } from './engine/engine.mjs?v=g3d-20261016-1';
-import { IslandView } from './view/island-view.mjs?v=g3d-20261016-1';
-import { IslandInterface } from './ui/interface.mjs?v=g3d-20261016-1';
-import {createActivity} from './activity/runtime.mjs?v=g3d-20261016-1';
-import {ActivityInterface} from './ui/activity.mjs?v=g3d-20261016-1';
+import {dataURL} from './release.mjs?v=g3e-20261017-1';
+import {createTranslator} from './ui/translate.mjs?v=g3e-20261017-1';
+import { loadData } from './engine/load-data.mjs?v=g3e-20261017-1';
+import { createEngine } from './engine/engine.mjs?v=g3e-20261017-1';
+import { IslandView } from './view/island-view.mjs?v=g3e-20261017-1';
+import { IslandInterface } from './ui/interface.mjs?v=g3e-20261017-1';
+import {createActivity} from './activity/runtime.mjs?v=g3e-20261017-1';
+import {ActivityInterface} from './ui/activity.mjs?v=g3e-20261017-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

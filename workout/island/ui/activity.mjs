@@ -1,13 +1,13 @@
-import {createSound} from '../minigames/sound.mjs?v=g3d-20261016-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g3d-20261016-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3d-20261016-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=g3d-20261016-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=g3d-20261016-1';
-import {gameContext} from '../minigames/context.mjs?v=g3d-20261016-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g3d-20261016-1';
-import {GameNavigation,GameShell} from './game-shell.mjs?v=g3d-20261016-1';
-import {playerCard} from './soccer-card.mjs?v=g3d-20261016-1';
-import {attributes} from '../activity/soccer-card.mjs?v=g3d-20261016-1';
+import {createSound} from '../minigames/sound.mjs?v=g3e-20261017-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g3e-20261017-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3e-20261017-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=g3e-20261017-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=g3e-20261017-1';
+import {gameContext} from '../minigames/context.mjs?v=g3e-20261017-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g3e-20261017-1';
+import {GameNavigation,GameShell} from './game-shell.mjs?v=g3e-20261017-1';
+import {playerCard} from './soccer-card.mjs?v=g3e-20261017-1';
+import {attributes} from '../activity/soccer-card.mjs?v=g3e-20261017-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -95,7 +95,7 @@ export class ActivityInterface {
       const card=el('article','game-card');card.dataset.game=game.id;
       const context=gameContext(this.engine,this.data.config.minigames,this.now(),game.id),level=this.engine.state.minigameLevels[game.id];
       card.append(el('h3','',`${game.icon} ${this.t(game.title)}`),el('p','',this.t('minigame.level',{level,difficulty:context.level})),el('p','',this.t('minigame.power',{power:Math.round(context.power*this.data.config.minigames.percentScale)})),el('p','',this.t('minigame.best',{score:this.engine.state.highScores[game.id]||0})));
-      if(game.id==='soccer')card.append(el('p','team-rank',this.teamLabel()));
+      if(['soccer','tennis'].includes(game.id))card.append(el('p','team-rank',this.teamLabel()));
       const actions=el('div','game-card-actions');
       actions.append(this.playButton(game.id,'game-play',()=>this.stages(game.id)),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
       if(game.id==='soccer')actions.append(button(this.t('soccer.training'),'soccer-training',()=>this.training()));
@@ -127,6 +127,7 @@ export class ActivityInterface {
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
     const dialog=this.modal(game.title,'minigame.progressHint');dialog.dataset.stageMap=id;
     dialog.append(el('p','',this.t('minigame.totalStars',{stars:p.stars.reduce((sum,n)=>sum+n,0)})));
+    if(id==='tennis'){const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));for(const key of Object.keys(this.data.config.minigames.tennis.difficulties)){const choose=button(this.t('soccer.difficulty.'+key),'tennis-difficulty',()=>{const r=this.engine.setTennisDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.tennisDifficulty===key));choices.append(choose);}dialog.append(choices,this.soccerHandedness('tennis'));}
     if(id==='soccer'){
       dialog.append(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t));
       const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));
@@ -151,15 +152,15 @@ export class ActivityInterface {
   }
   narrateHelp(id) {for(let i=1;i<=3;i++){const key=`minigame.${id}.help.${i}`;this.engine.narration.announce(key);this.ui.narrate(key);}}
   helpLines(id) {const lines=el('div','game-help-lines');for(let i=1;i<=3;i++)lines.append(el('p','',this.t(`minigame.${id}.help.${i}`)));return lines;}
-  soccerHandedness(){
-    const c=this.data.config.minigames.soccer.controls,label=el('label','soccer-hand-setting'),toggle=el('input'),text=el('span');toggle.type='checkbox';toggle.setAttribute('role','switch');toggle.dataset.action='soccer-hand';
+  soccerHandedness(id='soccer'){
+    const c=this.data.config.minigames[id].controls,label=el('label','soccer-hand-setting'),toggle=el('input'),text=el('span');toggle.type='checkbox';toggle.setAttribute('role','switch');toggle.dataset.action=id+'-hand';
     let right=c.rightHanded;try{const saved=localStorage.getItem(c.handednessKey);if(saved!==null)right=saved==='right';}catch{}
     const render=()=>{toggle.checked=right;text.textContent=this.t(right?'soccer.leftStick':'soccer.rightStick');};
     toggle.onchange=()=>{right=toggle.checked;try{localStorage.setItem(c.handednessKey,right?'right':'left');}catch{}render();};render();label.append(toggle,text);return label;
   }
   intro(id,eventId,stage) {
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
-    if(id==='soccer')dialog.append(this.soccerHandedness());
+    if(['soccer','tennis'].includes(id))dialog.append(this.soccerHandedness(id));
     dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
     this.narrateHelp(id);
   }
@@ -188,19 +189,20 @@ export class ActivityInterface {
       const refill=control('refill',this.t('minigame.refill')),pump=control('charge',this.t('minigame.charge'));refill.prepend(gameIcon('tap'));pump.prepend(gameIcon('pump'));const rescue=control('rescue',this.t('minigame.rescue')),spray=control('fire',this.t('minigame.spray'));rescue.prepend(gameIcon('ladder'));controls.append(spray,refill,pump,rescue);
     }
     if(id==='navalDuel') {
-      const fire=control('fire',this.t('minigame.launch'));fire.prepend(gameIcon('cannon'));controls.append(fire);
-      const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select','');node.append(createAmmoVisual(i,this.data.config.minigames),el('span','ammo-copy'));node.dataset.ammoIndex=i;node.setAttribute('aria-label',this.t(ammo.title));node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
+      const zone=el('div','naval-stick-zone'),stick=el('div','naval-stick'),knob=el('span','naval-knob');stick.hidden=true;stick.append(knob);zone.append(stick);controls.append(zone);const fire=control('fire',this.t('minigame.launch'));fire.prepend(gameIcon('cannon'));controls.append(fire);
+      const rack=el('div','ammo-rack');ammoButtons=balance.ammo.map((ammo,i)=>{const node=control('ammo-select','');node.append(gameIcon(['shell','double','torpedo','absorb'][i]),el('span','ammo-copy'));node.dataset.ammoIndex=i;node.setAttribute('aria-label',this.t(ammo.title));node.setAttribute('aria-pressed',String(i===0));rack.append(node);return node;});controls.append(rack);
       fleetMeters={};for(const [key,title]of [['player','minigame.fleet'],['enemy','minigame.enemyFleet']]){const label=el('label','game-gauge',this.t(title)),meter=el('progress');meter.max=1;meter.value=1;label.append(meter);controls.append(label);fleetMeters[key]=meter;}turnLabel=el('p','game-turn');controls.append(turnLabel);
     }
     warning=el('p','game-warning');warning.hidden=true;warning.setAttribute('role','alert');stage.append(warning);
     dialog.replaceChildren(header,status,stage,controls);
     this.ui.view.paused=true;
     const context=gameContext(this.engine,this.data.config.minigames,this.now(),id,stageNumber);
+    if(id==='navalDuel')context.previousFleet=this.lastNavalFleet;
     if(id==='fireRescue')controls.querySelector('[data-game-control=rescue]').disabled=context.level<3;
     heading.textContent=this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
     dialog.dataset.stage=context.level;
     this.navigation.game();
-    this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:id==='soccer'});
+    this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:['soccer','navalDuel','tennis'].includes(id)});
     const eventBonuses=eventId?this.activity.bonuses():{};
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onFireSummary:summary=>{fireSummary=summary;},onError:reason=>this.ui.toast(reason),
@@ -213,7 +215,7 @@ export class ActivityInterface {
       }
     });
     if(!response.ok){this.ui.closeModal();this.ui.result(response);return;}
-    this.current=response;
+    this.current=response;if(id==='navalDuel')this.lastNavalFleet=response.session.snapshot.composition;
     this.shell.bind(response.session);
     if(id==='navalDuel')status.textContent=this.t('minigame.aimCircle');
     canvas.focus();

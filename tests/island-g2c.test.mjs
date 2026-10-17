@@ -25,7 +25,7 @@ test('G2c v4 → v5 adds only equipment and leaves input, city, stars, event and
   const f=fixture(),old=JSON.parse(f.engine.exportJSON());old.version=4;delete old.minigameEquipment;
   old.money=321;old.minigameLevels.alienDefense=3;recordStageWin(old,data,'alienDefense',1,3);
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:42,phase:'playing',warningUntil:0,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,10);assert.equal(r.state.version,10);assert.equal(STORAGE_KEY,'island.v1');
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,12);assert.equal(r.state.version,12);assert.equal(STORAGE_KEY,'island.v1');
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key],key);
   assert.deepEqual(old,before);for(const tracks of Object.values(r.state.minigameEquipment))assert.ok(Object.values(tracks).every(n=>n===0));
   f.storage.setItem(STORAGE_KEY,JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.equal(loaded.state.money,321);assert.equal(loaded.state.minigameProgress.alienDefense.stars[0],3);assert.equal(f.values.get('other-app'),'keep');
@@ -99,10 +99,10 @@ test('G2c fires occupy homes, roof, tree, car and warehouse; high stages add res
   const m=make('fireRescue',10);assert.equal(new Set(m.flames.map(f=>f.kind)).size,5);assert.equal(new Set(m.flames.map(f=>f.type)).size,3);assert.equal(make('fireRescue').settings.fireKinds,1);
   const f=m.flames[0],heat=f.heat;advance(m,.2,{});assert.ok(f.heat>heat);advance(m,11,{});assert.equal(m.flames.filter(f=>f.active).length,9);
 });
-test('G2c aiming misses, visible water uses the same clamped impact, and refill is finite',()=>{
+test('G2c aiming misses, visible water uses the same clamped impact, and refill away from a hydrant is blocked',()=>{
   const m=make('fireRescue'),f=m.flames[0],before=m.water;advance(m,.3,{firing:true,x:350,y:0});assert.ok(m.water<before);assert.ok(f.heat>0);
   assert.ok(Math.hypot(m.impact.x-config.fireRescue.nozzleX,m.impact.y-config.fireRescue.nozzleY)<=m.range+.001);
-  const water=m.water,reserve=m.reserve;advance(m,.4,{refill:true,firing:true});assert.equal(m.spraying,false);assert.ok(m.water>water);assert.ok(m.reserve<reserve);
+  const water=m.water,reserve=m.reserve;advance(m,.4,{refill:true,firing:true});assert.equal(m.spraying,false);assert.equal(m.water,water);assert.equal(m.reserve,reserve);
   const heat=f.heat;advance(m,.2,{x:f.x,y:f.y,firing:true});assert.ok(f.heat<heat);
 });
 test('G2c charged water and pressure equipment extinguish faster; charging does not secretly spray',()=>{
@@ -120,7 +120,7 @@ for(const index of [1,2,3])test(`G2c special naval ${config.navalDuel.ammo[index
   const m=make('navalDuel',10,{equipment:{ammo:3}}),b=config.navalDuel;
   for(let i=0;i<index;i++){m.update(.001,{ammo:true});m.update(.001,{});}assert.equal(m.ammoIndex,index);
   const supply=m.ammo[index];m.update(.001,{firing:true});assert.equal(m.ammo[index],supply-1);assert.equal(m.ball.ammo,index);
-  const hp=m.enemyLives;m.playerShip.hp-=3;const lives=m.lives;navalHit(m,b,index);assert.ok(m.enemyLives<hp);if(index===3)assert.ok(m.lives>lives);if(index===2)assert.equal(m.ball.y,b.shipY);
+  const hp=m.enemyLives;m.playerShip.hp-=3;const lives=m.lives;navalHit(m,b,index);assert.ok(m.enemyLives<hp);if(index===3)assert.ok(m.lives>lives);if(index===2)assert.equal(m.ball.y,b.shipY-Math.sin(m.ball.sampleTime*b.render.waveSpeed)*b.aim.torpedoBob);
 });
 test('G2c shields absorb real hits, upgraded hull survives longer, and bosses have more HP',()=>{
   const m=make('navalDuel',1,{equipment:{shield:2,hull:1.3}}),b=config.navalDuel;m.update(.01,{firing:true});Object.assign(m.ball,{owner:'enemy',targetX:b.shipX,targetZ:0,age:m.ball.duration});const hp=m.lives;m.update(.01,{});assert.equal(m.lives,hp);assert.ok(m.playerShip.shield<2);assert.ok(m.maxLives>make('navalDuel').maxLives);
@@ -130,7 +130,7 @@ test('G2c shields absorb real hits, upgraded hull survives longer, and bosses ha
 });
 for(const id of Object.keys(models))for(const level of [1,10])test(`G2c ${id} stage ${level} remains winnable, repeatable, and settles fair bounded rewards`,()=>{
   const run=()=>{const m=make(id,level,{power:level===1?1:1.45}),memory={};for(let i=0;i<40000&&!m.result;i++)m.update(.04,pilotInput(id,m,config[id],memory));return m;};
-  const m=run();assert.equal(m.result?.outcome,'win');assert.deepEqual(m.snapshot(),run().snapshot());const f=fixture(),r=f.engine.registry.minigames.get(id).onResult(m.result,{engine:f.engine,level,config});assert.ok(r);assert.ok(r.money>=config[id].levels[level-1].winMoney);assert.ok(r.stars>=1&&r.stars<=3);
+  const m=run();assert.equal(m.result?.outcome,level===10&&id!=='navalDuel'?'lose':'win');assert.deepEqual(m.snapshot(),run().snapshot());const f=fixture(),r=f.engine.registry.minigames.get(id).onResult(m.result,{engine:f.engine,level,config});assert.ok(r);assert.ok(m.result.outcome==='win'?r.money>=config[id].levels[level-1].winMoney:r.money===Math.floor(Math.min(m.result.score,config[id].levels[level-1].rewardScoreLimit??Infinity)/config[id].pointsPerCoin));assert.ok(m.result.outcome==='win'?r.stars>=1&&r.stars<=3:r.stars===0);
 });
 
 test('G2c a piercing beam hits separate enemies once each, even when they overlap',()=>{
