@@ -23,11 +23,12 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 #toast{display:none;background:#224f55;color:#fff;padding:10px 12px;border:1px solid #fff;border-radius:12px;font-size:12px;font-weight:700;line-height:1.5;text-align:center;pointer-events:none;overflow-wrap:anywhere}#toast.visible{display:block}
 @media(orientation:landscape) and (max-height:600px){
   :root{--land-panel:min(240px,calc(40vw - 80px))}
-  .hud{inset-inline-end:auto;width:var(--land-panel)}.city-details,.mission-details{max-height:calc(100dvh - 195px);background:var(--cream)}
-  .mission-details{max-height:calc(100dvh - 195px)}
-  .build-dock{inset-inline-start:max(var(--edge),env(safe-area-inset-right));inset-inline-end:auto;width:var(--land-panel);max-height:calc(100dvh - 144px - env(safe-area-inset-top));border-radius:16px;padding:8px;overflow:auto}
+  .hud{inset-inline-end:auto;width:var(--land-panel)}.city-details,.mission-details{max-height:calc(100dvh - var(--hud-base-height,124px) - max(8px,env(safe-area-inset-top)) - max(8px,env(safe-area-inset-bottom)));background:var(--cream)}
+  .build-dock{inset-inline-start:max(var(--edge),env(safe-area-inset-right));inset-inline-end:auto;inset-block-end:max(8px,env(safe-area-inset-bottom));width:var(--land-panel);max-height:calc(100dvh - var(--hud-height,124px) - max(8px,env(safe-area-inset-top)) - max(8px,env(safe-area-inset-bottom)) - 8px);border-radius:16px;padding:8px;overflow:auto}
+  .island-ui:has(.build-dock[data-open=true]) .mission{display:none}
   .category-button{flex-basis:56px}.camera-controls{inset-block-end:max(var(--edge),env(safe-area-inset-bottom))}.placement{flex-wrap:wrap}.ghost-status{flex-basis:100%}.placement .primary-button{flex:1}
-  .info-card{width:var(--land-panel);inset-inline-end:auto;inset-block-start:calc(var(--hud-height,120px) + 16px);max-height:calc(100dvh - var(--hud-height,120px) - 104px)}
+  .info-card{width:var(--land-panel);inset-inline-end:auto;inset-block-start:max(8px,env(safe-area-inset-top));max-height:calc(100dvh - max(8px,env(safe-area-inset-top)) - max(8px,env(safe-area-inset-bottom)))}
+  .island-ui:has(.info-card:not([hidden])) .hud,.island-ui:has(.info-card:not([hidden])) .build-dock{visibility:hidden}
 }
 @media(min-width:1000px) and (min-height:601px){.hud,.info-card{width:350px;inset-inline-end:auto}.status-strip,.status-strip .resource{font-size:12px}.mission-strip strong{font-size:15px}}
 
@@ -118,7 +119,7 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .game-screen[data-game=navalDuel] [data-game-control=fire]{min-height:56px;font-size:18px}
 .game-screen[data-game=fireRescue] .game-controls{grid-template-columns:repeat(4,minmax(0,1fr))}
 .game-screen[data-game=fireRescue] [data-action=game-help]{grid-column:auto}
-.game-pause-sheet{position:absolute;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;padding:76px 16px 16px;background:#0d2538d9;overflow:auto;color:#173d54}
+.game-pause-sheet{position:absolute;inset:0;z-index:14;display:flex;align-items:center;justify-content:center;padding:76px 16px 16px;background:#0d2538d9;overflow:auto;color:#173d54}
 .game-pause-card{width:min(480px,100%);max-height:100%;overflow:auto;padding:20px;border-radius:20px;background:#fff4dc;text-align:center;box-shadow:0 8px 36px #0006}
 .game-pause-card h2{font-size:25px;margin:0 0 18px}
 .game-pause-actions{display:flex;gap:12px}
@@ -180,6 +181,7 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .soccer-action-icon{width:25px;height:25px;flex:none}
 .soccer-sprint[data-exhausted=true]{opacity:.65}
 .soccer-goal-banner{position:absolute;top:26%;left:50%;transform:translateX(-50%) rotate(-5deg);font-size:clamp(48px,10vw,110px);font-weight:900;color:#fff0a5;text-shadow:0 4px 0 #9e6835,0 8px 24px #10293f;pointer-events:none;z-index:1}
+.soccer-phase-banner{position:absolute;top:max(48px,calc(env(safe-area-inset-top) + 40px));left:50%;transform:translateX(-50%);max-width:70%;padding:8px 14px;border-radius:10px;background:#102f46dd;color:#fff4ce;font-size:18px;font-weight:700;text-align:center;pointer-events:none;z-index:2}
 .soccer-edge-arrow{position:absolute;font-size:32px;color:#ffe293;text-shadow:0 2px 5px #10293f;pointer-events:none;z-index:1}
 .soccer-rotate{position:absolute;inset:0;z-index:12;background:#102b43;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center;padding:24px;color:#fff4ce;font-size:27px;font-weight:800}
 .soccer-rotate svg{width:130px;height:130px;animation:soccer-turn 2s ease-in-out infinite alternate}
@@ -232,6 +234,49 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .game-screen[data-game=tennis] .soccer-controls.left-handed .soccer-stick-zone{left:auto;right:0}
 .game-screen[data-game=tennis] .soccer-controls.left-handed .soccer-actions{right:auto;left:max(16px,env(safe-area-inset-left));transform:scaleX(-1)}
 .game-screen[data-game=tennis] .soccer-controls.left-handed .soccer-actions button{transform:scaleX(-1)}
+/* G7: one corner action, immediate pointer feedback, and a landscape city rail. */
+button[data-pressed=true]{scale:.95;filter:brightness(.82)}
+.placement-help{display:flex;align-items:center;justify-content:center;gap:6px;min-height:56px}.placement-help>span:first-child{font-size:25px}
+.placement-cue{animation:placement-help 1.2s ease-in-out infinite}.placement-confirm-cue{animation:placement-help 1s ease-in-out infinite}
+@keyframes placement-help{50%{box-shadow:inset 0 0 0 4px #e5b44e;background:#ffe6a9}}
+.info-title{position:sticky;top:-12px;z-index:2;background:var(--cream);padding-block:4px}
+.modal:not(.avatar-modal):not(.game-screen)>.modal-close{position:sticky;top:0;float:inline-end;min-width:56px;z-index:4}
+.action-direction{position:absolute;inset:-14px;border:2px solid #ffe7a3;border-radius:50%;pointer-events:none;transform:rotate(var(--aim-angle,0rad))}
+.action-direction:after{content:"";position:absolute;right:-10px;top:calc(50% - 7px);border-left:14px solid #ffe7a3;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.game-screen .game-header h2,.game-screen .game-header>.sound-toggle{display:none}
+.game-screen .game-header.game-header{padding:0;pointer-events:none;min-height:56px}
+.game-screen .game-header .game-pause{left:auto;right:max(8px,env(safe-area-inset-right));width:56px;min-width:56px;font-size:11px;padding:3px;flex-direction:column;pointer-events:auto}
+.game-screen .game-status:not(.soccer-live-status){top:max(8px,env(safe-area-inset-top));left:8px;right:80px;width:max-content;max-width:calc(100vw - 96px);font-size:12px;pointer-events:none;padding:5px 8px}
+.game-pause-card>[data-action=game-pause-sound]{margin-bottom:12px;min-height:48px}
+@media(orientation:landscape) and (max-height:600px){
+ .camera-controls{width:120px;height:max-content;display:grid;grid-template-columns:56px 56px;gap:8px;bottom:auto}.utilities{display:contents}
+ .build-dock[data-open=false]:not([data-placing=true]){max-height:none}.build-dock .dock-top{align-items:stretch}.build-dock .categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:4px}.build-dock .category-button{padding:2px;min-width:0;min-height:48px;white-space:normal;font-size:11px}
+ .build-dock .dock-handle{align-self:stretch;min-height:48px;width:48px;flex-basis:48px}
+ .island-ui:has(.build-dock[data-placing=true]) .mission{display:none}
+ .placement{display:grid;grid-template-columns:minmax(0,1fr) 56px;gap:8px}.ghost-status,.placement-help{grid-column:1/-1}.placement .primary-button{min-width:0;min-height:56px}
+ .game-screen[data-game=alienDefense] .game-controls.game-controls{top:auto;bottom:8px;left:8px;right:8px;width:auto;max-height:none;display:flex;justify-content:center;flex-wrap:nowrap}.game-screen[data-game=alienDefense] .game-controls>button{flex:1;min-width:56px;max-width:120px;font-size:12px;padding:4px;flex-basis:auto}
+}
 /* G3e: sprint rests under the thumb; the large shot/slide button sits above it. */
 .game-screen[data-game=soccer] #shoot{right:0;bottom:102px;width:90px;height:90px}
 .game-screen[data-game=soccer] #sprint{right:4px;bottom:4px;width:72px;height:72px}
+
+/* G3f pre-match roster and short practices. */
+.soccer-roster-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+.soccer-roster-card {border:2px solid #759fb4;border-radius:18px;padding:12px;background:linear-gradient(145deg,#fff6d5,#e2edf1);min-width:0;}
+.soccer-roster-card[data-team="1"] {border-color:#c58374;background:linear-gradient(145deg,#fff0dc,#f0d8d0);}
+.soccer-roster-card h3 {margin:0 0 6px;padding-left:35px;}
+.soccer-name-editor {display:grid;grid-template-columns:1fr 90px;gap:8px;margin:12px 0;padding:10px;border:1px solid #a0bac5;border-radius:12px;}
+.soccer-name-editor input,.soccer-role-choice button,.soccer-drill-choices button {min-height:48px;min-width:48px;max-width:100%;}
+.soccer-name-editor input {display:block;width:100%;box-sizing:border-box;}
+.soccer-role-choice {display:flex;flex-wrap:wrap;gap:8px;}
+.soccer-drill-choices {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;}
+.soccer-drill-choices progress {width:100%;height:16px;}
+.soccer-card-improved .soccer-player-card {animation:card-improved .6s ease-out;}
+@keyframes card-improved {50% {transform:scale(1.04);filter:brightness(1.15);}}
+.game-screen[data-drill] .soccer-phase-banner {top:64px;font-size:15px;max-width:calc(100% - 32px);padding:6px;pointer-events:none;}
+.soccer-roster-card {position:relative;font-size:13px;}
+.soccer-roster-card .soccer-overall {font-size:25px;top:8px;inset-inline-start:auto;inset-inline-end:8px;}
+.soccer-roster-card .soccer-card-attributes {gap:4px 9px;}
+.modal[data-rosters] {width:min(900px,calc(100vw - 16px));max-width:calc(100vw - 16px);}
+.modal[data-rosters] select {min-height:48px;min-width:90px;}
+.game-screen:not([data-drill]) .soccer-phase-banner {left:16px;transform:none;max-width:calc(100% - 100px);}

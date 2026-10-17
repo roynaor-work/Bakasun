@@ -80,8 +80,8 @@ test('G3c seeded defensive sequences are reproducible without unseeded randomnes
  function sequence(seed){const g=defend(undefined,{seed});for(let i=0;i<100;i++)g.update(dt,{passPressed:i%4===0,kickHeld:i%7<2,moveX:1});return g.snapshot();}
  assert.deepEqual(sequence(271),sequence(271));assert.notDeepEqual(sequence(271),sequence(272));
 });
-test('G3c defense card leaves a sliding player immediately when control transfers',()=>{
- const g=defend(()=>.7,{card:card(99)}),s=g.getState();s.controlled=1;Object.assign(s.players[0],{slideTime:.2,slideX:1,slideZ:0,slideAttempted:false});g.update(dt,{});assert.equal(s.event.type,'slide-contact');assert.equal(s.event.won,false);assert.equal(s.ball.owner,3);
+test('G3f individual defense card remains with its player after control transfers',()=>{
+ const g=defend(()=>.7,{card:card(99)}),s=g.getState();s.controlled=1;Object.assign(s.players[0],{slideTime:.2,slideX:1,slideZ:0,slideAttempted:false});g.update(dt,{});assert.equal(s.event.type,'slide-contact');assert.equal(s.event.won,true);assert.equal(s.ball.owner,0);
 });
 test('G3c clearInput cancels charge without firing and a paused model freezes every timer',()=>{
  const g=setup();advance(g,.4,{kickHeld:true,sprintHeld:true,moveX:1});g.clearInput();const before=g.snapshot();g.update(0,{kickHeld:true});assert.deepEqual(g.snapshot(),before);g.update(dt,{});assert.notEqual(g.getState().event?.type,'shot');assert.equal(g.getState().charging,false);assert.equal(g.getState().sprint.active,false);
@@ -89,11 +89,12 @@ test('G3c clearInput cancels charge without firing and a paused model freezes ev
 test('G3c normal difficulty preserves every stage parameter exactly; other levels scale all six',()=>{
  for(let stage=1;stage<=10;stage++){assert.deepEqual(opponentSettings(c,stage,'normal'),c.stages[stage-1]);for(const difficulty of ['easy','hard']){const settings=opponentSettings(c,stage,difficulty),scale=c.difficulties[difficulty];for(const key of ['speed','stealRate','accuracy','keeper','tackleReach'])near(settings[key],c.stages[stage-1][key]*scale[key]);near(settings.thinkSeconds,c.stages[stage-1].thinkSeconds/scale.thinkSeconds);}}
 });
-for(const stage of [1,5,10])test(`G3c fixed bot difficulty calibration stage ${stage}, 20 identical seeds`,()=>{
+for(const stage of [1,5,10])test(`G3c fixed bot difficulty calibration stage ${stage}, 20 identical seeds`,t=>{
  const wins=[];for(const difficulty of ['easy','normal','hard']){let won=0,firstTen=0;for(let seed=1;seed<=20;seed++){
   const g=createSoccer({config:c,seed,stage,difficulty});for(let tick=0;tick<24000&&!g.result;tick++)g.update(dt,bot(g,c));assert.ok(g.result);won+=Number(g.result.won);if(seed<=10)firstTen+=Number(g.result.won);
  }if(stage===1&&difficulty==='easy')assert.ok(firstTen>=7,`${firstTen}/10`);wins.push(won);}
  assert.ok(wins[0]>=wins[1]&&wins[1]>=wins[2],JSON.stringify(wins));
+ t.diagnostic('G3f profile calibration '+JSON.stringify({stage,seeds:20,wins}));
 });
 test('G3c all effects are zero at 50, linear, and exactly maximum at 99',()=>{
  assert.deepEqual(cardEffects(card(50),c),{power:1,pace:1,spread:1,assistDegrees:0,capacity:1,regen:1,defense:0});
@@ -101,9 +102,20 @@ test('G3c all effects are zero at 50, linear, and exactly maximum at 99',()=>{
  const middle=cardEffects(card(74),c);near(middle.power,1+.2*24/49);near(middle.defense,.25*24/49);
  for(const [value,tier]of [[50,'bronze'],[59,'bronze'],[60,'silver'],[74,'silver'],[75,'gold'],[99,'gold']])assert.deepEqual(cardRating(card(value),c),{overall:value,tier});
 });
-test('G3c power and pace change actual controlled actions only and follow a player switch',()=>{
- const low=shot({card:card(50)}).getState(),high=shot({card:card(99)}).getState();near(Math.hypot(high.ball.vx,high.ball.vz)/Math.hypot(low.ball.vx,low.ball.vz),1.2);
- for(const controlled of [0,1]){const a=setup({card:card(50)}),b=setup({card:card(99)});for(const g of [a,b]){g.getState().controlled=controlled;Object.assign(g.getState().ball,{owner:null,y:1000});}a.update(dt,{moveX:1});b.update(dt,{moveX:1});near(b.getState().players[controlled].vx/a.getState().players[controlled].vx,1.12);for(let i=0;i<6;i++)if(i!==controlled)near(b.getState().players[i].vx,a.getState().players[i].vx);}
+test('G3f individual shot strength, controlled pace and enemy speed floor follow saved attributes',()=>{
+ const pace=p=>cardEffects({attributes:{pace:p.card.pace}},c).pace;
+ const shotFactor=p=>cardEffects({attributes:{power:p.card.shot}},c).power*(1+(p.card.shot-c.card.initial)/c.card.max*c.roster.attributeShotWeight);
+ const low=shot({card:card(50)}).getState(),high=shot({card:card(99)}).getState();assert.ok(high.players[0].card.shot>low.players[0].card.shot);near(Math.hypot(high.ball.vx,high.ball.vz)/Math.hypot(low.ball.vx,low.ball.vz),shotFactor(high.players[0])/shotFactor(low.players[0]));
+ for(const controlled of [0,1]){
+  const a=setup({card:card(50)}),b=setup({card:card(99)});for(const g of [a,b]){g.getState().controlled=controlled;Object.assign(g.getState().ball,{owner:null,y:1000});}a.update(dt,{moveX:1});b.update(dt,{moveX:1});
+  const aa=a.getState().players,bb=b.getState().players;
+  near(bb[controlled].vx/aa[controlled].vx,pace(bb[controlled])/pace(aa[controlled]));
+  for(let i=0;i<aa.length;i++)if(i!==controlled){
+   let ratio=pace(bb[i])/pace(aa[i]);
+   if(aa[i].team){const base=opponentSettings(c,3,'normal').speed,reference=players=>Math.max(...players.filter(p=>!p.team).map(p=>(c.players.speed+(p.speed-1)*c.players.speedPerRank)*pace(p)))*c.opponents.minSpeedRatio;ratio=Math.max(base*pace(bb[i]),reference(bb))/Math.max(base*pace(aa[i]),reference(aa));}
+   near(bb[i].vx,aa[i].vx*ratio);near(bb[i].vz,aa[i].vz*ratio);
+  }
+ }
 });
 test('G3c accuracy halves assisted spread and extends the assist cone by ten degrees',()=>{
  const low=shot({x:7,card:card(50),random:()=>.9}).getState(),high=shot({x:7,card:card(99),random:()=>.9}).getState();near((high.ball.vz/high.ball.vx)/(low.ball.vz/low.ball.vx),.5,.01);
@@ -141,10 +153,10 @@ test('G3c no training or difficulty changes during any active game; no spending 
  const {engine:e}=fixture();pitch(e);e.state.soccerCard.stars=10;const {response}=round(e),before=structuredClone(e.state.soccerCard);assert.equal(e.trainSoccer('power').reason,'reason.gameBusy');assert.equal(e.setSoccerDifficulty('hard').reason,'reason.gameBusy');assert.deepEqual(e.state.soccerCard,before);response.cancel();assert.ok(e.trainSoccer('power').ok);
 });
 for(const version of [8,9])test(`G3c authentic v${version} fixture migrates through explicit steps without losing existing state`,async()=>{
- const f=fixture(),path=version===8?new URL('./fixtures/save-v8.json',import.meta.url):new URL('tests/fixtures/save-v9.json',root),old=JSON.parse(await readFile(path,'utf8')),before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(old.version,version);assert.ok(r.ok);assert.equal(r.state.version,12);assert.deepEqual(old,before);
+ const f=fixture(),path=version===8?new URL('./fixtures/save-v8.json',import.meta.url):new URL('tests/fixtures/save-v9.json',root),old=JSON.parse(await readFile(path,'utf8')),before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(old.version,version);assert.ok(r.ok);assert.equal(r.state.version,13);assert.deepEqual(old,before);
  assert.equal(r.state.soccerCard.stars,old.minigameProgress.soccer.stars.reduce((a,b)=>a+b,0));for(const n of Object.values(r.state.soccerCard.attributes))assert.equal(n,50);assert.equal(r.state.soccerCard.difficulty,'easy');
  for(const key of Object.keys(old).filter(key=>!['version','buildings'].includes(key)))assert.deepEqual(r.state[key],key==='players'?[...old.players,...data.players.filter(p=>!old.players.some(old=>old.id===p.id))]:key==='team'?{...old.team,sportWins:{soccer:old.team.wins,tennis:0}}:key==='minigameEquipment'?{...old[key],tennis:{speed:0,hit:0,serve:0}}:key==='minigameProgress'?{...old[key],tennis:{stage:1,stars:Array(10).fill(0)}}:key==='minigameLevels'?{...old[key],tennis:1}:old[key],key);assert.deepEqual(r.state.buildings.filter(b=>b.typeId!=='cityHall'),old.buildings.filter(b=>b.typeId!=='cityHall'));
- if(version===9)assert.deepEqual(migrations[11](migrations[10](migrations[9](old,data),data),data),r.state);
+ if(version===9)assert.deepEqual(migrations[12](migrations[11](migrations[10](migrations[9](old,data),data),data),data),r.state);
  f.storage.setItem('island.v1',JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.ok(loaded.storageStatus.ok);assert.deepEqual(loaded.state.soccerCard,r.state.soccerCard);assert.ok(loaded.importJSON(old).ok);
 });
 test('G3c malformed legacy card sources reject cleanly rather than throwing in migration',async()=>{

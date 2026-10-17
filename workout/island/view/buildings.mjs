@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import { primitive as part, material, makeTree } from './environment.mjs?v=g3e-20261017-1';
-import { batchMeshes } from './batch.mjs?v=g3e-20261017-1';
+import { primitive as part, material, makeTree } from './environment.mjs?v=g3f-20261018-2';
+import { batchMeshes } from './batch.mjs?v=g3f-20261018-2';
 
 // A visual kind is an independent extension point. Building IDs never select
 // geometry; two data records can share a visual, or register their own renderer.
@@ -100,7 +100,13 @@ function harbor(g,v,w,d,h) {
   for(let i=0;i<6;i++)block(g,C.wood,[(i-2.5)*w*.14,.17,d*.23],[w*.13,.12,d*.95]);
   for(const x of [-w*.43,w*.43])for(const z of [-d*.2,d*.65])part(g,'cylinder','#ad845b',[x,.2,z],[.13,.65,.13]);
   const hut=new T.Group();hut.position.set(-w*.18,.2,-d*.25);g.add(hut);house(hut,v,w*.6,d*.55,h*.62);
-  const boat=new T.Group();boat.position.set(w*.26,.13,d*.47);g.add(boat);part(boat,'sphere','#f6f1d4',[0,0,0],[.62,.32,1.2]);
+  if(v.deckExtension){
+    const length=v.deckExtension,center=d/2+length/2;
+    block(g,C.wood,[0,v.deckHeight,center],[w*.38,.16,length]);
+    for(const z of [d/2+length*.4,d/2+length*.9])for(const x of [-w*.17,w*.17])part(g,'cylinder','#ad845b',[x,v.deckHeight-v.pierHeight/2,z],[.12,v.pierHeight,.12]);
+    block(g,C.wood,[0,v.deckHeight,d/2+length],[w*.8,.16,.65]);
+  }
+  const boat=new T.Group();boat.position.set(w*.42,v.waterline??.13,v.deckExtension?d/2+v.deckExtension*.9:d*.47);g.add(boat);part(boat,'sphere','#f6f1d4',[0,0,0],[.62,.32,1.2]);
   block(boat,C.wood,[0,.45,0],[.06,.95,.06]);const sail=part(boat,'cone',v.color,[.18,.68,0],[.62,.7,.04]);sail.rotation.z=-.2;
 }
 function park(g,v,w,d,h) {

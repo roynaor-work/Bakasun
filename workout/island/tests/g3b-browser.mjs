@@ -27,7 +27,7 @@ try{for(const width of (soccerColors?[390]:[390,360,1440])){
   const pitch=await page.evaluate(()=>{const {engine}=window.__island;for(let z=0;z<16;z++)for(let x=0;x<16;x++){const result=engine.place('soccer',x,z);if(result.ok)return result;}throw Error('no soccer placement');});
   const soccerBefore=await loadBytes();await page.evaluate(()=>window.__island.games.menu());await card.locator('[data-action=game-play]').tap();await tap('[data-stage="1"]');await readySoccer();
   if(soccerColors){
-   const m=await snap(),expected=await page.evaluate(()=>({team:window.__island.data.team.colors,opponent:window.__island.data.config.minigames.soccer.opponents[0].colors}));
+   const m=await snap(),expected=await page.evaluate(()=>({team:window.__island.data.team.colors,opponent:window.__island.data.config.minigames.soccer.opponents.teams[0].colors}));
    assert.equal(m.stage,1);assert.deepEqual(m.team.colors,expected.team);assert.deepEqual(m.opponent.colors,expected.opponent);assert.equal(m.opponent.colors[0],'#e94d51');assert.notEqual(m.team.colors[0],m.opponent.colors[0]);
    await shot('soccer-pitch');await exit();assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);
    reports.push({width,stage:m.stage,teamColors:m.team.colors,opponentColors:m.opponent.colors,soccer:m.renderMetrics,outsideRequests:outside,consoleErrors:errors,shots});console.log('G3b jersey colors verified',width);continue;

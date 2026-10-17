@@ -39,13 +39,14 @@ export class GameNavigation {
   dispose(){this.target.removeEventListener('popstate',this.listener);}
 }
 
+export function gamePresentation(config,id){return config.gameShell.games[id];}
 /** Shared fullscreen, pause, visibility and input/audio lifecycle for every adapter. */
 export class GameShell {
   constructor({dialog,stage,controls,pauseButton,sound,t,onExit,landscape=false}) {
     Object.assign(this,{dialog,stage,controls,pauseButton,sound,t,onExit});
     this.events=new AbortController();this.paused=false;this.disposed=false;
     const options={signal:this.events.signal};
-    pauseButton.addEventListener('click',()=>this.paused?this.resume():this.pause(),options);
+    pauseButton.addEventListener('click',()=>this.paused?this.resume():this.pause('exit'),options);
     document.addEventListener('visibilitychange',()=>{if(document.hidden)this.pause();},options);
     document.addEventListener('fullscreenchange',()=>{
       if(document.fullscreenElement===dialog)this.wasFullscreen=true;
@@ -55,9 +56,11 @@ export class GameShell {
     this.landscape=landscape;
     if(landscape){
       const overlay=this.rotationOverlay=document.createElement('section');overlay.className='soccer-rotate';
-      overlay.setAttribute('role','status');
+      overlay.setAttribute('role','region');overlay.setAttribute('aria-label',t('soccer.rotate'));
       overlay.innerHTML='<svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5"><rect x="38" y="22" width="44" height="76" rx="8" transform="rotate(35 60 60)"/><path d="M20 64a42 42 0 0 1 72-34m-1-15 3 17-17-2M100 56a42 42 0 0 1-72 34m1 15-3-17 17 2"/></g></svg>';
-      const text=document.createElement('p');text.textContent=t('soccer.rotate');overlay.append(text);dialog.append(overlay);
+      const text=document.createElement('p');text.textContent=t('soccer.rotate');
+      const pause=document.createElement('button');pause.type='button';pause.className='secondary-button';pause.dataset.action='game-rotate-pause';pause.textContent=t('game.pause');pause.addEventListener('click',()=>this.pause(),options);
+      overlay.append(text,pause);dialog.append(overlay);
       const resize=()=>this.setOrientationBlocked(window.innerHeight>window.innerWidth);
       window.addEventListener('resize',resize,options);screen.orientation?.addEventListener?.('change',resize,options);resize();
     }
@@ -90,8 +93,9 @@ export class GameShell {
     const heading=document.createElement('h2');heading.textContent=this.t(kind==='exit'?'game.exitQuestion':'game.paused');card.append(heading);
     if(content)card.append(content);
     const actions=document.createElement('div');actions.className='game-pause-actions';
-    const resume=document.createElement('button');resume.type='button';resume.className='primary-button';resume.dataset.action='game-resume';resume.textContent=this.t(kind==='exit'?'game.stay':'game.resume');resume.onclick=()=>this.resume();
-    const exit=document.createElement('button');exit.type='button';exit.className='secondary-button';exit.dataset.action='game-exit';exit.textContent=this.t('game.leave');exit.onclick=this.onExit;
+    const resume=document.createElement('button');resume.type='button';resume.className='primary-button';resume.dataset.action='game-resume';resume.textContent=this.t('game.resume');resume.onclick=()=>this.resume();
+    const exit=document.createElement('button');exit.type='button';exit.className='secondary-button';exit.dataset.action='game-exit';exit.textContent=this.t('game.returnIsland');exit.onclick=this.onExit;
+    const mute=document.createElement('button');mute.type='button';mute.className='secondary-button';mute.dataset.action='game-pause-sound';const label=()=>{mute.textContent=this.t(this.sound.muted?'sound.unmute':'sound.mute');};mute.onclick=()=>{this.sound.setMuted(!this.sound.muted);label();};label();card.append(mute);
     actions.append(resume,exit);card.append(actions);sheet.append(card);this.dialog.append(sheet);resume.focus();
   }
   resume(){
@@ -99,8 +103,8 @@ export class GameShell {
     this.paused=false;this.sheet?.remove();this.sheet=null;
     this.dialog.dataset.paused='false';this.pauseButton.textContent=this.t('game.pause');
     this.pauseButton.setAttribute('aria-label',this.t('game.pause'));
-    this.applyPause();this.sound.unlock();
-    this.stage.querySelector('canvas')?.focus();
+    this.applyPause();if(!this.orientationBlocked){this.sound.unlock();this.stage.querySelector('canvas')?.focus();}
+    else this.rotationOverlay.querySelector('button')?.focus();
   }
   dispose(){
     if(this.disposed)return;this.disposed=true;this.events.abort();this.sheet?.remove();this.sound.setPaused(false);

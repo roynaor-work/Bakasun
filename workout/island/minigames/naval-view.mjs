@@ -1,7 +1,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {drawHealthBar} from './art.mjs?v=g3e-20261017-1';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=g3e-20261017-1';
+import {drawHealthBar} from './art.mjs?v=g3f-20261018-2';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=g3f-20261018-2';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */

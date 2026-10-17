@@ -1,0 +1,8 @@
+// Reproduce schema-13 fixture through the real model and validated engine result.
+// The headless adapter replaces only the DOM session, retaining real onResult.
+import {readFile,writeFile} from 'node:fs/promises';
+import {loadData} from '../engine/load-data.mjs';import {createEngine} from '../engine/engine.mjs';import {createSoccerDrill} from '../minigames/soccer-drill.mjs';
+const root=new URL('../',import.meta.url),d=await loadData(root,async u=>({ok:true,json:async()=>JSON.parse(await readFile(u,'utf8'))})),raw=await readFile(new URL('../../../tests/fixtures/save-v12.json',import.meta.url),'utf8');let at=1792195200000;const e=createEngine(d,{storage:{getItem:()=>raw,setItem(){}},now:()=>at});e.editSoccerPlayer(e.state.players[1].id,{name:'אורי',number:11});
+let pending;e.registry.minigames.set('soccer',{...e.registry.minigames.get('soccer'),start:ctx=>{const m=createSoccerDrill({config:d.config.minigames.soccer,kind:ctx.drill,seed:ctx.seed,difficulty:ctx.difficulty,card:ctx.soccerCard});pending={m,ctx};return {dispose(){}};}});
+for(let round=0;round<5;round++){if(round===3)at+=d.config.minigames.soccer.training.dayMilliseconds;const kind=round%3===2?'cones':'penalties';if(!e.startMinigame('soccer',{seed:42,level:1,drill:kind}).ok)throw Error('start');const {m,ctx}=pending;for(let i=0;i<4000&&!m.result;i++){const s=m.getState();m.update(1/60,kind==='cones'?{passHeld:s.ball.owner===0&&i%40<25}:{kickHeld:s.ball.owner===0&&i%40<25});}const finish=ctx.finish({drill:m.result});if(!finish.ok)throw Error(JSON.stringify(finish));}
+e.setSoccerRole('keeper');e.soccerOutdoorPractice();await writeFile(new URL('../../../tests/fixtures/save-v13.json',import.meta.url),e.exportJSON()+'\n');console.log(e.state.soccerRoster);

@@ -1,11 +1,12 @@
-import {dataURL} from './release.mjs?v=g3e-20261017-1';
-import {createTranslator} from './ui/translate.mjs?v=g3e-20261017-1';
-import { loadData } from './engine/load-data.mjs?v=g3e-20261017-1';
-import { createEngine } from './engine/engine.mjs?v=g3e-20261017-1';
-import { IslandView } from './view/island-view.mjs?v=g3e-20261017-1';
-import { IslandInterface } from './ui/interface.mjs?v=g3e-20261017-1';
-import {createActivity} from './activity/runtime.mjs?v=g3e-20261017-1';
-import {ActivityInterface} from './ui/activity.mjs?v=g3e-20261017-1';
+import {dataURL} from './release.mjs?v=g3f-20261018-2';
+import {createTranslator} from './ui/translate.mjs?v=g3f-20261018-2';
+import { loadData } from './engine/load-data.mjs?v=g3f-20261018-2';
+import { createEngine } from './engine/engine.mjs?v=g3f-20261018-2';
+import { IslandView } from './view/island-view.mjs?v=g3f-20261018-2';
+import { IslandInterface } from './ui/interface.mjs?v=g3f-20261018-2';
+import {createActivity} from './activity/runtime.mjs?v=g3f-20261018-2';
+import {ActivityInterface} from './ui/activity.mjs?v=g3f-20261018-2';
+import {installPressFeedback} from './ui/press.mjs?v=g3f-20261018-2';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -32,6 +33,8 @@ try {
   ui = new IslandInterface({ root, engine, view, data, t });
   const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length),onLaunch:choice=>games.autoLaunch(choice)});
   const games=new ActivityInterface({ui,engine,activity,data,t});
+  const pressSamples=[];
+  const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});
   let openedGames=false;
   const requestedGames=new URLSearchParams(location.search).get('games')==='1';
   const openRequestedGames=()=>{
@@ -51,9 +54,9 @@ try {
   const persist = () => engine.save();
   document.addEventListener('visibilitychange', persist);
   window.addEventListener('pagehide', persist);
-  window.addEventListener('beforeunload', () => { clearInterval(tick);stopGameShortcut();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
+  window.addEventListener('beforeunload', () => { clearInterval(tick);stopPress();stopGameShortcut();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
   if (new URLSearchParams(location.search).get('dev') === '1') {
-    window.__island = { engine, view, ui, data, activity, games };
+    window.__island = { engine, view, ui, data, activity, games,pressSamples };
   }
 } catch (error) {
   root.className = 'load-error';

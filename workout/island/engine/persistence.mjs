@@ -1,13 +1,15 @@
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3e-20261017-1';
-import {withCityHall} from './city-hall.mjs?v=g3e-20261017-1';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=g3e-20261017-1';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g3e-20261017-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=g3e-20261017-1';
-import {initialProgress} from '../activity/progress.mjs?v=g3e-20261017-1';
-import { cellsFor } from './rules.mjs?v=g3e-20261017-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g3e-20261017-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g3f-20261018-2';
+import {withCityHall} from './city-hall.mjs?v=g3f-20261018-2';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=g3f-20261018-2';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g3f-20261018-2';
+import {initialEquipment} from '../activity/equipment.mjs?v=g3f-20261018-2';
+import {initialProgress} from '../activity/progress.mjs?v=g3f-20261018-2';
+import { cellsFor } from './rules.mjs?v=g3f-20261018-2';
+import {repairHarbors} from './placement-help.mjs?v=g3f-20261018-2';
+import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=g3f-20261018-2';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g3f-20261018-2';
 
-export const CURRENT_VERSION = 12;
+export const CURRENT_VERSION = 13;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -17,20 +19,22 @@ const validColor = value => typeof value === 'string' && /^#[\da-f]{6}$/i.test(v
 
 export function createInitialState(data, now = Date.now()) {
   const road = data.config.seedRoad;
+  const players=(data.players||[]).map(row=>({...data.config.playerDefaults,...row})),soccerCard=initialSoccerCard(null,data.config.minigames.soccer);
   const buildings = [];
   for (let x = road.startX; x <= road.endX; x++) buildings.push({ id: `seed-road-${x}`, typeId: 'road', x, z: road.z, level: 1 });
   return withCityHall({
     version: CURRENT_VERSION, money: data.config.startingMoney, resources: clone(data.config.startingResources),
     buildings, world: { size: data.config.worldStages[0].size, stage: 0 }, parts: { [data.world.partGroup]: 0 },
-    avatar: clone(data.avatar.defaults), team: {...clone(data.team),wins:0,rank:0,sportWins:{soccer:0,tennis:0}}, players: (data.players || []).map(row => ({ ...data.config.playerDefaults, ...row })),
+    avatar: clone(data.avatar.defaults), team: {...clone(data.team),wins:0,rank:0,sportWins:{soccer:0,tennis:0}}, players,
     tutorial: { step: 0, completed: false, skipped: false }, claimedRewards: [], completedMissions: [], completedEpisodes: [],
     nextId: 1, playSeconds: 0, createdAt: now, updatedAt: now,
-    ...initialActivity(data,now),tennisDifficulty:'easy',soccerCard:initialSoccerCard(null,data.config.minigames.soccer),
+    ...initialActivity(data,now),tennisDifficulty:'easy',soccerCard,soccerRoster:initialSoccerRoster(players,soccerCard,data.config.minigames.soccer),
   },data);
 }
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  12(old,data){return {...old,version:13,soccerRoster:initialSoccerRoster(old.players||data.players,old.soccerCard,data.config.minigames.soccer)};},
   11(old,data){if(!Array.isArray(old.players))return {...old,version:12};return {...old,version:12,players:[...old.players,...data.players.filter(row=>!old.players.some(p=>p.id===row.id)).map(row=>({...data.config.playerDefaults,...row}))]};},
   10(old,data){return {...old,version:11,minigameLevels:{...old.minigameLevels,tennis:old.minigameLevels?.tennis||1},minigameEquipment:{...old.minigameEquipment,tennis:{speed:0,hit:0,serve:0,...old.minigameEquipment?.tennis}},minigameProgress:{...old.minigameProgress,tennis:old.minigameProgress?.tennis||initialProgress(data).tennis},team:{...old.team,sportWins:{soccer:old.team?.wins||0,tennis:0,...old.team?.sportWins}},tennisDifficulty:old.tennisDifficulty||'easy'};},
   9(old,data) {return {...old,version:10,soccerCard:initialSoccerCard(old.minigameProgress?.soccer,data.config.minigames.soccer)};},
@@ -76,13 +80,15 @@ export function migrateSave(value, data, registry) {
   while (state.version < CURRENT_VERSION) {
     const migrate = migrations[state.version];
     if (!migrate) return { ok: false, reason: 'reason.invalid' };
-    state = migrate(state, data, registry);
+    try{state = migrate(state, data, registry);}catch{return {ok:false,reason:'reason.invalid'};}
   }
   // New content IDs can start at level one without changing the save schema.
   if (isObject(state.minigameLevels)) for (const id of Object.keys(data.config.minigameLevels || {})) if (!(id in state.minigameLevels)) state.minigameLevels[id] = 1;
   if (isObject(state.minigameProgress)) for (const [id,p] of Object.entries(initialProgress(data))) if (!(id in state.minigameProgress)) state.minigameProgress[id] = p;
   const validation = validateSave(state, data, registry);
-  return validation.ok ? { ok: true, state, migrated: fromVersion !== CURRENT_VERSION } : validation;
+  if(!validation.ok)return validation;
+  const repairedHarbors=repairHarbors(state,registry,data.featureFlags);
+  return {ok:true,state,migrated:fromVersion!==CURRENT_VERSION,repairedHarbors};
 }
 
 export function validateSave(state, data, registry) {
@@ -111,6 +117,7 @@ export function validateSave(state, data, registry) {
   if (!validTeamProgress(state.team,data.config.minigames.soccer)) return invalid();
   if(!isObject(state.team.sportWins)||Object.keys(state.team.sportWins).length!==2||!['soccer','tennis'].every(k=>Number.isSafeInteger(state.team.sportWins[k])&&state.team.sportWins[k]>=0)||!Object.hasOwn(data.config.minigames.tennis.difficulties,state.tennisDifficulty))return invalid();
   if (!validSoccerCard(state.soccerCard,data.config.minigames.soccer)) return invalid();
+  if(!validSoccerRoster(state.soccerRoster,data.players,data.config.minigames.soccer))return invalid();
   if (!state.players.every(player => isObject(player) && validId(player.id) && typeof player.nameId === 'string' && validColor(player.color) && ['speed', 'kick', 'guard', 'level'].every(key => finitePositive(player[key])))) return invalid();
   if (!isObject(state.parts) || !Object.entries(state.parts).every(([key, value]) => validId(key) && Number.isSafeInteger(value) && value >= 0)) return invalid();
   for (const key of ['claimedRewards', 'completedMissions', 'completedEpisodes']) if (!Array.isArray(state[key]) || !state[key].every(value => typeof value === 'string')) return invalid();
@@ -205,6 +212,7 @@ export function importWorld(raw, current, data, registry) {
   for(const sport of ['soccer','tennis'])merged.team.sportWins[sport]=Math.max(merged.team.sportWins[sport],incoming.team.sportWins[sport]);
   merged.tennisDifficulty=incoming.tennisDifficulty;
   mergeSoccerCard(merged.soccerCard,incoming.soccerCard);
+  mergeSoccerRoster(merged.soccerRoster,incoming.soccerRoster,data.config.minigames.soccer);
   mergeActivity(merged,incoming,data);
   merged.updatedAt = Date.now();
   const validation = validateSave(merged, data, registry);

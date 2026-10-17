@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import { GLTFLoader } from '../vendor/GLTFLoader.js';
-import { GROUND, primitive, material } from './environment.mjs?v=g3e-20261017-1';
+import { GROUND, primitive, material } from './environment.mjs?v=g3f-20261018-2';
 
 const MODEL_URL=new URL('../assets/kid-full.glb',import.meta.url).href;
 const color=new T.Color();
@@ -67,8 +67,8 @@ export class Avatar {
 }
 
 export class Citizens {
-  constructor(scene,max=30) {
-    this.max=Math.min(30,max);this.people=[];this.dummy=new T.Object3D();this.root=new T.Group();scene.add(this.root);
+  constructor(scene,max=40) {
+    this.max=Math.min(40,max);this.people=[];this.dummy=new T.Object3D();this.root=new T.Group();scene.add(this.root);
     this.body=new T.InstancedMesh(new T.CylinderGeometry(.095,.12,.28,6),material('#fff1d2'),this.max);
     this.head=new T.InstancedMesh(new T.IcosahedronGeometry(.09,1),material('#efbc8c'),this.max);
     this.hair=new T.InstancedMesh(new T.IcosahedronGeometry(.095,0),material('#695348'),this.max);
@@ -79,7 +79,8 @@ export class Citizens {
   }
   setPoints(points,count) {
     this.points=points;count=Math.max(0,Math.min(this.max,count,points.length>1?this.max:0));
-    while(this.people.length<count){const i=this.people.length,p=points[i%points.length];this.people.push({x:p.x,z:p.z,target:(i+1)%points.length,phase:i*1.7,speed:.32+(i%4)*.04});this.body.setColorAt(i,new T.Color(['#f8cc75','#eaa19b','#83bdb8','#b4a3d6','#e8eee0'][i%5]));}
+    this.people=[];
+    while(this.people.length<count){const i=this.people.length,p=points[i%points.length];this.people.push({x:p.x,z:p.z,node:i%points.length,target:p.neighbors?.[0]??(i+1)%points.length,phase:i*1.7,speed:.32+(i%4)*.04});this.body.setColorAt(i,new T.Color(['#f8cc75','#eaa19b','#83bdb8','#b4a3d6','#e8eee0'][i%5]));}
     this.people.length=count;for(const mesh of this.meshes)mesh.count=count;
     if(this.body.instanceColor)this.body.instanceColor.needsUpdate=true;
   }
@@ -87,7 +88,7 @@ export class Citizens {
     if(!this.points?.length)return;const dummy=this.dummy;
     for(let i=0;i<this.people.length;i++) {
       const p=this.people[i],target=this.points[p.target%this.points.length],dx=target.x-p.x,dz=target.z-p.z,len=Math.hypot(dx,dz);
-      if(len<.12)p.target=(p.target+1+i%3)%this.points.length;
+      if(len<.12){const next=target.neighbors?.filter(n=>n!==p.node);p.node=p.target;p.target=next?.length?next[(i+Math.floor(time))%next.length]:target.neighbors?.[0]??(p.target+1+i%3)%this.points.length;}
       else {p.x+=dx/len*Math.min(len,delta*p.speed);p.z+=dz/len*Math.min(len,delta*p.speed);}
       const bob=Math.sin(time*6+p.phase)*.015;
       for(const [mesh,y,scale] of [[this.body,.24,1],[this.head,.47,1],[this.hair,.525,1]]) {dummy.position.set(p.x,GROUND+y+bob,p.z);dummy.rotation.set(0,Math.atan2(dx,dz),0);dummy.scale.setScalar(scale);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}

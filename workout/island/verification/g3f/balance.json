@@ -1,0 +1,152 @@
+{
+  "policy": "Same fixed bot and seeds for every difficulty; no score or difficulty inspection",
+  "calibration": [
+    {
+      "stage": 1,
+      "difficulty": "easy",
+      "seeds": 20,
+      "wins": 20,
+      "firstTen": 10,
+      "goalsFor": 147,
+      "goalsAgainst": 20
+    },
+    {
+      "stage": 1,
+      "difficulty": "normal",
+      "seeds": 20,
+      "wins": 20,
+      "firstTen": 10,
+      "goalsFor": 170,
+      "goalsAgainst": 44
+    },
+    {
+      "stage": 1,
+      "difficulty": "hard",
+      "seeds": 20,
+      "wins": 17,
+      "firstTen": 9,
+      "goalsFor": 153,
+      "goalsAgainst": 85
+    },
+    {
+      "stage": 5,
+      "difficulty": "easy",
+      "seeds": 20,
+      "wins": 9,
+      "firstTen": 5,
+      "goalsFor": 93,
+      "goalsAgainst": 94
+    },
+    {
+      "stage": 5,
+      "difficulty": "normal",
+      "seeds": 20,
+      "wins": 4,
+      "firstTen": 2,
+      "goalsFor": 81,
+      "goalsAgainst": 131
+    },
+    {
+      "stage": 5,
+      "difficulty": "hard",
+      "seeds": 20,
+      "wins": 0,
+      "firstTen": 0,
+      "goalsFor": 44,
+      "goalsAgainst": 183
+    },
+    {
+      "stage": 10,
+      "difficulty": "easy",
+      "seeds": 20,
+      "wins": 0,
+      "firstTen": 0,
+      "goalsFor": 24,
+      "goalsAgainst": 212
+    },
+    {
+      "stage": 10,
+      "difficulty": "normal",
+      "seeds": 20,
+      "wins": 0,
+      "firstTen": 0,
+      "goalsFor": 5,
+      "goalsAgainst": 275
+    },
+    {
+      "stage": 10,
+      "difficulty": "hard",
+      "seeds": 20,
+      "wins": 0,
+      "firstTen": 0,
+      "goalsFor": 6,
+      "goalsAgainst": 331
+    }
+  ],
+  "development": [
+    {
+      "days": 1,
+      "attributes": {
+        "pace": 50,
+        "shot": 50,
+        "pass": 50,
+        "defense": 50,
+        "reactions": 50,
+        "catching": 50
+      },
+      "points": {
+        "pace": 1,
+        "shot": 2,
+        "pass": 1,
+        "defense": 0,
+        "reactions": 0,
+        "catching": 0
+      },
+      "childCardOverall": 50,
+      "matchCardOverall": 50
+    },
+    {
+      "days": 7,
+      "attributes": {
+        "pace": 51,
+        "shot": 53,
+        "pass": 51,
+        "defense": 50,
+        "reactions": 50,
+        "catching": 50
+      },
+      "points": {
+        "pace": 3,
+        "shot": 2,
+        "pass": 3,
+        "defense": 0,
+        "reactions": 0,
+        "catching": 0
+      },
+      "childCardOverall": 51,
+      "matchCardOverall": 51
+    },
+    {
+      "days": 30,
+      "attributes": {
+        "pace": 57,
+        "shot": 65,
+        "pass": 57,
+        "defense": 50,
+        "reactions": 50,
+        "catching": 50
+      },
+      "points": {
+        "pace": 2,
+        "shot": 0,
+        "pass": 2,
+        "defense": 0,
+        "reactions": 0,
+        "catching": 0
+      },
+      "childCardOverall": 56,
+      "matchCardOverall": 57
+    }
+  ],
+  "dailyCap": 3
+}

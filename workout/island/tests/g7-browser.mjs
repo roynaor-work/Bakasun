@@ -1,0 +1,65 @@
+import {verify} from './night-browser.mjs';
+await verify('g7',[{width:740,height:360},{width:844,height:390},{width:390,height:844},{width:1440,height:1000}],async({page,viewport,tick,snap,tap,start,exit,shot,nav,assert})=>{
+ const landscape=viewport.width>viewport.height&&viewport.height<=600;
+ await tick(100);await shot('city-landscape',740);await shot('city-portrait',390);
+ const bounds=selector=>page.locator(selector).boundingBox();
+ await page.evaluate(()=>{const ui=window.__island.ui,select=ui.selectBuilding;window.catalogActivations=0;ui.selectBuilding=function(...args){window.catalogActivations++;return select.apply(this,args);};});
+ const panelChecks=[];
+ const panelState=()=>page.evaluate(()=>{const {ui}=window.__island;return {selected:ui.selected,movingId:ui.movingId,infoId:ui.infoId,catalogActivations:window.catalogActivations,dialogs:document.querySelectorAll('[role=dialog]').length,title:document.querySelector('.modal h2')?.textContent??null};});
+ const panelTap=async(selector,label,expected={})=>{const before=await panelState();await tap(selector);await tick(32);const after=await panelState();assert.deepEqual(after,{...before,...expected},label+' one gesture, one action');panelChecks.push({label,before,after});};
+ await page.evaluate(()=>window.__island.ui.toast('app.saved'));
+ await panelTap('[data-action=toggle-city]','city');assert.ok(await page.locator('.city-details').isVisible());await tick(100);
+ const city=await bounds('.hud');assert.ok(city.y+city.height<=viewport.height-7,JSON.stringify(city));
+ const cityDetails=page.locator('.city-details');await cityDetails.evaluate(n=>n.scrollTop=n.scrollHeight);
+ await panelTap('[data-action=toggle-city]','close city');await panelTap('[data-action=toggle-build]','build');assert.ok(await page.locator('.catalog').isVisible());await tick(100);
+ const hud=await bounds('.hud'),dock=await bounds('.build-dock');
+ if(landscape)assert.ok(dock.y>=hud.y+hud.height+7,JSON.stringify({hud,dock}));
+ const hallId=await page.evaluate(()=>window.__island.engine.state.buildings.find(b=>b.typeId==='cityHall').id);
+ await panelTap('[data-action=open-city-hall]','city hall',{infoId:hallId});await tick(100);
+ const info=await bounds('.info-card');assert.ok(info.y>=0&&info.y+info.height<=viewport.height);
+ if(landscape){assert.ok(info.height>=250);assert.equal(await page.locator('.hud').isVisible(),false);assert.equal(await page.locator('.build-dock').isVisible(),false);}
+ await shot('city-hall');
+ await tap('[data-action=city-hall-games]');assert.ok(await page.locator('.game-cards').isVisible());
+ await tap('[data-action=close-modal]');await nav();
+ if(landscape)assert.equal(await page.evaluate(()=>document.activeElement.closest('.info-card')!==null),true);
+ await page.evaluate(()=>window.__island.ui.closeInfo());
+ // The parent settings intentionally require a hold. A tap must not open them.
+ await panelTap('[data-action=parent]','settings short tap');
+ const settingsBefore=await panelState(),parentBox=await bounds('[data-action=parent]');
+ await page.mouse.move(parentBox.x+parentBox.width/2,parentBox.y+parentBox.height/2);await page.mouse.down();await tick(await page.evaluate(()=>window.__island.data.config.ui.parentHoldMs+1));await page.mouse.up();
+ const settingsAfter=await panelState();assert.equal(settingsAfter.selected,settingsBefore.selected);assert.equal(settingsAfter.infoId,settingsBefore.infoId);assert.equal(settingsAfter.dialogs,1);assert.ok(await page.locator('[data-action=export]').isVisible());panelChecks.push({label:'settings held opening',before:settingsBefore,after:settingsAfter});
+ await tap('[data-action=close-modal]');await nav();
+ const rotation=[];
+ for(const id of ['soccer','navalDuel','tennis','fireRescue','alienDefense']){
+  await page.setViewportSize({width:390,height:844});await start(id);await tick(100);
+  assert.equal((await snap()).paused,true);assert.ok(await page.locator('.soccer-rotate').isVisible());
+  await tap('[data-action=game-rotate-pause]');assert.ok(await page.locator('.game-pause-sheet').isVisible());
+  await tap('[data-action=game-resume]');assert.equal((await snap()).paused,true);
+  await page.goBack();await nav();assert.ok(await page.locator('.game-pause-sheet').isVisible());
+  await tap('[data-action=game-resume]');
+  await page.setViewportSize({width:844,height:390});await page.locator('.game-screen[data-orientation-blocked=false]').waitFor({state:'attached'});await tick(100);assert.equal((await snap()).paused,false);
+  await page.setViewportSize({width:390,height:844});await page.locator('.game-screen[data-orientation-blocked=true]').waitFor({state:'attached'});await tick(50);assert.equal((await snap()).paused,true);
+  await tap('[data-action=game-rotate-pause]');await tap('[data-action=game-exit]');await nav();assert.equal(await snap(),undefined);
+  rotation.push(id);
+ }
+ await page.setViewportSize(viewport);await tick(50);
+ const responseStart=performance.now(),cityButton=page.locator('[data-action=open-city-hall]'),cityBox=await cityButton.boundingBox();
+ await page.mouse.move(cityBox.x+cityBox.width/2,cityBox.y+cityBox.height/2);await page.mouse.down();
+ assert.ok(await page.locator('.info-card').isVisible());await tick(20);const responseRoundTripMs=performance.now()-responseStart;await page.mouse.up();
+ await tap('[data-action=close-info]');
+ await page.evaluate(()=>{const {ui,engine}=window.__island;ui.showInfo(engine.state.buildings.find(b=>b.typeId==='soccer').id);});await tap('[data-action=move]');await panelTap('[data-action=help-placement]','placement help');await tick(50);
+ const suggested=await page.evaluate(()=>{const {ui,engine}=window.__island;return {cell:ui.currentGhost,valid:engine.validatePlacement(ui.selected,ui.currentGhost.x,ui.currentGhost.z,ui.movingId).ok};});assert.ok(suggested.valid);await shot('placement-help');
+ await page.evaluate(()=>window.__island.ui.cancelPlacement());
+ const harbor=await page.evaluate(async()=>{const {engine,view}=window.__island,port=engine.state.buildings.find(b=>b.typeId==='harbor'),T=await import('/workout/island/vendor/three.module.js'),box=new T.Box3().setFromObject(view.groups.get(port.id).group);return {minX:box.min.x,maxX:box.max.x,minZ:box.min.z,maxZ:box.max.z,size:view.size};});
+ assert.ok(Math.min(harbor.minX,harbor.minZ)<-harbor.size/2-3.3||Math.max(harbor.maxX,harbor.maxZ)>harbor.size/2+3.3,JSON.stringify(harbor));
+ await page.evaluate(()=>{const {view,engine}=window.__island,p=engine.state.buildings.find(b=>b.typeId==='harbor');view.home();view.focusCell(p.x,p.z);view.zoom=1.4;view.resize();});await tick(100);await shot('harbor-water');
+ await page.evaluate(()=>window.__island.view.home());await tick(100);await shot('beach-paths-people');
+ const cityMetrics=await page.evaluate(()=>window.__island.view.metrics());assert.ok(cityMetrics.citizens>0&&cityMetrics.citizens<=40);assert.ok(cityMetrics.paths.every(p=>p.connected));assert.ok(cityMetrics.triangles<=120000&&cityMetrics.calls<=90,JSON.stringify(cityMetrics));
+ const visibleButtons=async()=>{for(const node of await page.locator('button').all()){if(!await node.isVisible()||await node.evaluate(n=>!!n.closest('[inert]')))continue;await node.scrollIntoViewIfNeeded();const b=await node.boundingBox();assert.ok(b.x>=-1&&b.y>=-1&&b.x+b.width<=await page.evaluate(()=>innerWidth)+1&&b.y+b.height<=await page.evaluate(()=>innerHeight)+1,JSON.stringify(b));assert.ok(b.width>=48&&b.height>=48,JSON.stringify(b));}};
+ await visibleButtons();
+ if(viewport.height>viewport.width)await page.setViewportSize({width:844,height:390});
+ await start('tennis');await page.locator('.game-screen[data-orientation-blocked=false]').waitFor({state:'attached'});await tick(100);await visibleButtons();await shot('tennis-controls');await tap('[data-action=game-pause]');assert.match(await page.locator('.game-pause-card h2').innerText(),/לצאת/);await shot('exit-question');await exit();
+ const feedback=await page.evaluate(()=>window.__island.pressSamples);assert.ok(feedback.length&&feedback.every(p=>p.milliseconds<100),JSON.stringify(feedback));
+ await page.setViewportSize(viewport);
+ return {city,hud,dock,info,rotation,suggested,harbor,cityMetrics,responseRoundTripMs,feedback,panelChecks,checks:{singleTapSingleAction:true,boundedCityDetails:true,catalogBelowHud:true,usableCityCard:true,cityGamesReachable:true,visibleFocusAfterModal:true,portraitPauseReachable:true,portraitBackReachable:true,rotationResumesSameSession:true}};
+});

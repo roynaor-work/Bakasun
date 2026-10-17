@@ -1,5 +1,6 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=g3e-20261017-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=g3e-20261017-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=g3f-20261018-2';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=g3f-20261018-2';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=g3f-20261018-2';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -30,6 +31,7 @@ export class IslandInterface {
     this.infoId = null;
     this.movingId = null;
     this.cityHallIntro=true;
+    try{this.placementHints=new Set(JSON.parse(localStorage.getItem(data.config.ui.placementHintsKey)||'[]'));}catch{this.placementHints=new Set();}
     this.dev = new URLSearchParams(location.search).get('dev') === '1';
     this.modalRoot = document.querySelector('#modal-root');
     root.replaceChildren();
@@ -118,7 +120,9 @@ export class IslandInterface {
     home.title = this.t('app.home');
     camera.append(utilities);
     const edit = button('☺', 'avatar-edit', 'round-button'); edit.setAttribute('aria-label', this.t('avatar.edit')); edit.onclick = () => this.showAvatar();
-    camera.append(edit, home);
+    const cityHall=button('🏛', 'open-city-hall', 'round-button');cityHall.setAttribute('aria-label',this.t('building.cityHall'));cityHall.title=this.t('building.cityHall');
+    cityHall.onclick=()=>{this.cancelPlacement();const hall=this.engine.state.buildings.find(b=>b.typeId==='cityHall');if(hall){this.showInfo(hall.id);this.view.focusCell(hall.x,hall.z);}};
+    camera.append(cityHall,edit, home);
 
     this.placement = el('div', 'placement panel');
     this.placement.hidden = true;
@@ -127,7 +131,10 @@ export class IslandInterface {
     this.placeButton = button(this.t('app.place'), 'place', 'primary-button');
     this.placeButton.onclick = () => this.commitPlacement();
     const cancel = this.cancelButton = button('×', 'cancel', 'round-button'); cancel.setAttribute('aria-label', this.t('app.cancel')); cancel.onclick = () => this.cancelPlacement();
-    this.placement.append(this.ghostStatus, this.placeButton, cancel);
+    this.placeHelp=button('', 'help-placement', 'secondary-button placement-help');
+    this.placeHelp.innerHTML='<span aria-hidden="true">☝ ✦</span>';this.placeHelp.append(el('span','',this.t('placement.help')));this.placeHelp.setAttribute('aria-label',this.t('placement.help'));
+    this.placeHelp.onclick=()=>{const cell=this.findCell(this.selected,this.movingId);this.updateGhost(cell,false);this.view.focusCell(cell.x,cell.z);this.placeHelp.classList.remove('placement-cue');this.placeButton.classList.add('placement-confirm-cue');};
+    this.placement.append(this.ghostStatus,this.placeHelp, this.placeButton, cancel);
 
     this.info = el('aside', 'info-card panel'); this.info.hidden = true;
     const dock = this.dock = el('section', 'build-dock');
@@ -165,13 +172,18 @@ export class IslandInterface {
     document.addEventListener('pointercancel', () => { this.pointerOrigin = null; }, true);
     document.addEventListener('click', event => {
       const origin = this.pointerOrigin;
-      this.pointerOrigin = null;
       if (!event.isTrusted || event.detail === 0 || !origin) return;
+      this.pointerOrigin = null;
       const target = event.target.closest('button') ?? event.target;
       if (target !== origin) { event.preventDefault(); event.stopImmediatePropagation(); }
     }, true);
     document.addEventListener('keydown', event => { if (event.key === 'Escape') this.closeDetails(); });
-    this.hudObserver = new ResizeObserver(() => this.root.style.setProperty('--hud-height', `${hud.getBoundingClientRect().height}px`));
+    this.hudObserver = new ResizeObserver(() => {
+      const height=hud.getBoundingClientRect().height;
+      const details=[...hud.querySelectorAll('.city-details,.mission-details,.event-details')].reduce((sum,node)=>sum+node.getBoundingClientRect().height,0);
+      this.root.style.setProperty('--hud-height', `${height}px`);
+      this.root.style.setProperty('--hud-base-height', `${height-details}px`);
+    });
     this.hudObserver.observe(hud);
     this.drawCatalog();
   }
@@ -350,6 +362,12 @@ export class IslandInterface {
     this.updateGhost(cell);
     this.drawMission();
     this.narrate(building.title ?? building.nameId ?? `building.${id}`);
+    this.placeHelp.classList.add('placement-cue');this.placeButton.classList.remove('placement-confirm-cue');
+    if(!this.placementHints.has(id)){
+      this.placementHints.add(id);try{localStorage.setItem(this.data.config.ui.placementHintsKey,JSON.stringify([...this.placementHints]));}catch{}
+      const voice=globalThis.speechSynthesis?.getVoices?.().find(v=>/^he(?:-|$)/i.test(v.lang));
+      if(voice&&!this.activityInterface?.sound.muted&&globalThis.SpeechSynthesisUtterance){const utterance=new SpeechSynthesisUtterance(this.t('placement.voiceHint'));utterance.lang='he-IL';utterance.voice=voice;speechSynthesis.speak(utterance);}
+    }
   }
   openBuildingCatalog(id){
     const building=this.getBuilding(id);if(!building)return;
@@ -358,17 +376,15 @@ export class IslandInterface {
     if(card){card.classList.add('required-building');card.scrollIntoView({block:'nearest',inline:'center'});card.focus();}
   }
   findCell(id, ignoreId) {
-    const size = this.engine.state.world.size;
-    const cells = [];
-    for (let z = 0; z < size; z++) for (let x = 0; x < size; x++) cells.push({ x, z });
-    cells.sort((a, b) => Math.hypot(a.x - size / 2, a.z - size / 2) - Math.hypot(b.x - size / 2, b.z - size / 2));
-    return cells.find(c => this.engine.validatePlacement(id, c.x, c.z, ignoreId).ok) ?? { x: 1, z: 1 };
+    const state=this.engine.state;
+    return nearestPlacement(state,this.engine.registry,id,{x:state.world.size/2,z:state.world.size/2},ignoreId,this.data.featureFlags)??{x:1,z:1};
   }
   onHover(cell) { if (this.selected) this.updateGhost(cell); }
   onCell(cell) { if (this.selected) this.updateGhost(cell); else this.closeInfo(); }
-  updateGhost(cell) {
+  updateGhost(cell,snap=true) {
     if (!this.selected) return;
     this.currentGhost = { x: Math.floor(cell.x), z: Math.floor(cell.z) };
+    if(snap)this.currentGhost=nearestPlacement(this.engine.state,this.engine.registry,this.selected,this.currentGhost,this.movingId,this.data.featureFlags)||this.currentGhost;
     const result = this.engine.validatePlacement(this.selected, this.currentGhost.x, this.currentGhost.z, this.movingId);
     const building = this.getBuilding(this.selected);
     const moving = this.engine.state.buildings.find(row => row.id === this.movingId);
@@ -377,7 +393,7 @@ export class IslandInterface {
     this.ghostStatus.dataset.reason = result.reason ?? 'reason.ok';
     this.ghostStatus.textContent = `${this.movingId ? this.t('app.moveHint', { building: this.label(building, 'building') }) + ' ' : ''}${result.ok ? '✓' : result.reason === 'reason.money' ? '●' : result.reason === 'reason.road' ? '🛣️' : '✕'} ${this.t(result.ok ? this.movingId ? 'app.moveAllowed' : 'reason.ok' : result.reason)}`;
     this.placeButton.disabled = !result.ok;
-    this.placeButton.textContent = this.t(this.movingId ? 'app.moveHere' : 'app.place');
+    this.placeButton.textContent = `✓ ${this.t(this.movingId ? 'app.moveHere' : 'app.place')}`;
     this.cancelButton.textContent = this.movingId ? this.t('app.cancelMove') : '×';
     this.cancelButton.setAttribute('aria-label', this.t(this.movingId ? 'app.cancelMove' : 'app.cancel'));
   }
@@ -531,6 +547,8 @@ export class IslandInterface {
     this.view.detachAvatarPreview?.();
     this.modalRoot.replaceChildren(); this.root.inert = false;
     this.previousFocus?.focus();
+    // Landscape info cards hide the HUD, so its city toggle cannot receive focus.
+    if(document.activeElement!==this.previousFocus)(this.info.hidden?this.cityToggle:this.info.querySelector('button:not(:disabled)'))?.focus();
     this.view.setAvatar(this.engine.state.avatar);
   }
   showAvatar() {
