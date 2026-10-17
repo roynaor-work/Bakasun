@@ -1,0 +1,14 @@
+.game-screen[data-game=navalDuel] .game-status,
+.game-screen[data-game=navalDuel] .game-header h2,
+.game-screen[data-game=navalDuel] .naval-heat,
+.game-screen[data-game=navalDuel] .game-warning{display:none}
+.game-screen[data-game=navalDuel] #shoot{font-size:0;background:#ce633cbb;box-shadow:0 0 0 4px #153b4b88,inset 0 0 0 2px #ffe4a5}
+.game-screen[data-game=navalDuel] #shoot .game-icon{width:44px;height:44px}
+.game-screen[data-game=navalDuel] [data-action=game-pause]{font-size:0;min-width:56px;min-height:56px}
+.game-screen[data-game=navalDuel] [data-action=game-pause] .game-icon{width:28px;height:28px}
+.game-screen[data-game=navalDuel] .game-controls[data-aiming=true] #shoot{box-shadow:0 0 0 5px #ffdc8d,0 0 22px #ffcf7399}
+.game-screen[data-game=navalDuel] #shoot:after{content:"";position:absolute;inset:-8px;border-radius:50%;background:conic-gradient(#ffad51 var(--naval-heat,0%),transparent 0);mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 0);pointer-events:none}
+.game-screen[data-game=navalDuel] [data-overheated=true] #shoot:after{background:#ff675d}
+.game-screen[data-game=navalDuel] .ammo-rack{top:80px}
+.game-screen[data-game=navalDuel] .ammo-rack button{background:#e9f7f0e8}
+.game-screen[data-game=navalDuel] .ammo-rack button[aria-pressed=true]{background:#28657be8;color:#fff}
