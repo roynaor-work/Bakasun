@@ -1,0 +1,36 @@
+const NS='http://www.w3.org/2000/svg';
+const paths={
+  spray:'M5 17l5-5 4 4-5 5zm5-5 4-4 3 3-3 5M17 7l3-3m-1 7 3-1m-7-5 1-3',
+  hydrant:'M8 21V9a4 4 0 0 1 8 0v12M5 21h14M6 12H3v4h5m8-4h5v4h-5M7 8h10M10 3h4',
+  ladder:'M5 21 11 3m2 18 6-18M7 16h8M9 10h8M10 6h8',
+  flame:'M13 2c2 6-2 6 2 9l2-4c7 8 2 15-5 15S2 15 7 9c0 4 3 4 3 1s3-5 3-8z',
+  person:'M9 21v-7l-4 2m10 5v-7l4 2M6 10l6 3 6-3M12 13v-4m3-4a3 3 0 1 1-6 0 3 3 0 0 1 6 0',
+  clock:'M12 7v6l4 2M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20',
+  pause:'M8 5v14M16 5v14',
+  star:'m12 2 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z',
+  drop:'M12 2C10 6 5 11 5 15a7 7 0 0 0 14 0c0-4-5-9-7-13z'
+};
+export function fireIcon(name){const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');const p=document.createElementNS(NS,'path');p.setAttribute('d',paths[name]||paths.star);svg.append(p);return svg;}
+function ring(node,color,radius){const svg=document.createElementNS(NS,'svg');svg.classList.add('fire-ring');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');const circle=document.createElementNS(NS,'circle');for(const [key,value]of Object.entries({cx:50,cy:50,r:radius,pathLength:100,fill:'none',stroke:color,'stroke-width':4,'stroke-dasharray':100}))circle.setAttribute(key,String(value));svg.append(circle);node.append(svg);return circle;}
+export function installFireUI(ctx){
+  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire.css?v=g2j-20261019-1',import.meta.url).href;document.head.append(link);
+  const {controls,dialog,t,balance}=ctx;dialog.classList.add('fire-play');ctx.status.hidden=true;if(ctx.warning)ctx.warning.hidden=true;
+  const pause=dialog.querySelector('[data-action=game-pause]');pause?.replaceChildren(fireIcon('pause'));
+  controls.replaceChildren();controls.style.setProperty('--fire-action-size',balance.ui.actionSize+'px');controls.style.setProperty('--fire-small-size',balance.ui.smallActionSize+'px');controls.style.setProperty('--fire-stick-size',balance.ui.stickSize+'px');
+  const zone=document.createElement('div');zone.className='soccer-stick-zone';const stick=document.createElement('div');stick.className='soccer-joystick';stick.id='joystick';stick.setAttribute('role','img');stick.setAttribute('aria-label',t('fire.drive'));const knob=document.createElement('span');knob.id='knob';knob.className='soccer-knob';stick.append(knob);zone.append(stick);controls.append(zone);
+  function action(id,key,icon,label){const button=document.createElement('button');button.type='button';button.id=id;button.dataset.gameControl=key;button.setAttribute('aria-label',t(label));button.append(fireIcon(icon));controls.append(button);return button;}
+  const spray=action('shoot','fire','spray','minigame.spray'),water=ring(spray,'#75dcf1',46),pressure=ring(spray,'#ffe387',39);
+  const refill=action('fire-refill','refill','hydrant','minigame.refill'),ladder=action('pass','rescue','ladder','minigame.rescue');ladder.disabled=ctx.level<3;
+  const finish=action('fire-finish','finish','star','fire.finish');finish.dataset.action='fire-certificate';finish.hidden=true;
+  const hud=document.createElement('div');hud.className='fire-hud';hud.setAttribute('aria-label',t('fire.mission'));const counters={};
+  for(const [key,icon,label]of [['flames','flame','fire.firesLeft'],['rescues','person','fire.peopleLeft'],['clock','clock','fire.timeLeft']]){const item=document.createElement('div');item.className='fire-counter';item.setAttribute('role','img');item.setAttribute('aria-label',t(label));item.append(fireIcon(icon));const number=document.createElement('bdi');item.append(number);counters[key]=number;hud.append(item);}
+  const timeRing=ring(counters.clock.parentElement,'#ffe387',46);dialog.append(hud);
+  return {spray,water,pressure,refill,ladder,finish,counters,timeRing,dialog,dispose(){hud.remove();link.remove();dialog.classList.remove('fire-play');}};
+}
+export function updateFireUI(ui,m,b){
+  ui.water.style.strokeDashoffset=String(100*(1-m.water/m.maxWater));ui.pressure.style.strokeDashoffset=String(100*(1-m.pressure/m.maxPressure));
+  ui.timeRing.style.strokeDashoffset=String(100*(1-m.remaining/(m.settings.seconds+b.startGrace)));
+  ui.counters.flames.textContent=String(m.flames.filter(f=>f.active&&f.heat>0).length);ui.counters.rescues.textContent=String(m.rescues.filter(r=>!r.rescued&&!r.expired).length);ui.counters.clock.textContent=String(Math.ceil(m.graceRemaining||m.remaining));
+  ui.counters.clock.parentElement.dataset.grace=String(m.graceRemaining>0);
+  ui.refill.classList.toggle('available',m.atHydrant);ui.refill.classList.toggle('held',m.refilling);ui.spray.classList.toggle('empty',m.water<=0||m.pressureEmpty);ui.ladder.classList.toggle('available',m.rescues.some(r=>r.near&&r.safe&&!r.rescued&&!r.expired));ui.finish.hidden=!m.firesOut;
+}
