@@ -1,17 +1,17 @@
-import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=g2j-20261019-1';
-import {recordStageWin} from '../activity/progress.mjs?v=g2j-20261019-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g2j-20261019-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=g2j-20261019-1';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=g2j-20261019-1';
-import {repairHarbors} from './placement-help.mjs?v=g2j-20261019-1';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=g2j-20261019-1';
-import { createRegistry } from './registry.mjs?v=g2j-20261019-1';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g2j-20261019-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g2j-20261019-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=g2j-20261019-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g2j-20261019-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g2j-20261019-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g2j-20261019-1';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=task017-20261017-1';
+import {recordStageWin} from '../activity/progress.mjs?v=task017-20261017-1';
+import {gameAvailability} from '../activity/availability.mjs?v=task017-20261017-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=task017-20261017-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=task017-20261017-1';
+import {repairHarbors} from './placement-help.mjs?v=task017-20261017-1';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=task017-20261017-1';
+import { createRegistry } from './registry.mjs?v=task017-20261017-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=task017-20261017-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=task017-20261017-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=task017-20261017-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=task017-20261017-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=task017-20261017-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=task017-20261017-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 

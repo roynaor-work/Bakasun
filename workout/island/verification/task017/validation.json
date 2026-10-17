@@ -1,0 +1,40 @@
+{
+  "baseCommit": "fa3b133880234a0d88d0226b61db011a0dfdb30b",
+  "baseTrackedIslandBytes": 32992172,
+  "dataVersionBefore": "g2j-20261019-1",
+  "dataVersionAfter": "task017-20261017-1",
+  "saveVersionBefore": 15,
+  "saveVersionAfter": 15,
+  "node": {
+    "command": "node --test tests/*.mjs",
+    "passed": 1647,
+    "failed": 0,
+    "skipped": 38,
+    "total": 1685,
+    "base": {
+      "passed": 1642,
+      "failed": 1,
+      "skipped": 38,
+      "failure": "old whole-folder 15 MB budget, already exceeded by uploaded library"
+    }
+  },
+  "browser": {
+    "cases": 8,
+    "passed": 8,
+    "consoleErrors": 0,
+    "outsideRequests": 0,
+    "report": "browser.json"
+  },
+  "measurement": {
+    "before": "before.json",
+    "after": "after.json",
+    "initialPreImplementation": "initial/before.json",
+    "cameraEqual": true
+  },
+  "unchangedPaths": [
+    "codex-lab/**",
+    "**/vendor/**",
+    "**/*.glb"
+  ],
+  "activeRuntimeBytes": 9155800
+}

@@ -5096,6 +5096,15 @@
   }
  },
  "cityView": {
+  "meshyPilot": {
+   "car": {"path": "assets/models/car-a-512.glb", "rotationY": -90, "scale": 0.38},
+   "walker": {"path": "assets/models/adult-man-rigged-512.glb", "rotationY": 0, "scale": 0.32},
+   "speed": 0.3,
+   "pauseSeconds": 1.5,
+   "stopTime": 0.08333333333333333,
+   "stopSoleHeight": 0.04563,
+   "sidewalkOffset": 0.3
+  },
   "camera": {
    "angle": 0.69,
    "elevation": 0.76,
