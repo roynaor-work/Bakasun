@@ -89,11 +89,12 @@ test('G3c clearInput cancels charge without firing and a paused model freezes ev
 test('G3c normal difficulty preserves every stage parameter exactly; other levels scale all six',()=>{
  for(let stage=1;stage<=10;stage++){assert.deepEqual(opponentSettings(c,stage,'normal'),c.stages[stage-1]);for(const difficulty of ['easy','hard']){const settings=opponentSettings(c,stage,difficulty),scale=c.difficulties[difficulty];for(const key of ['speed','stealRate','accuracy','keeper','tackleReach'])near(settings[key],c.stages[stage-1][key]*scale[key]);near(settings.thinkSeconds,c.stages[stage-1].thinkSeconds/scale.thinkSeconds);}}
 });
-for(const stage of [1,5,10])test(`G3c fixed bot difficulty calibration stage ${stage}, 20 identical seeds`,()=>{
+for(const stage of [1,5,10])test(`G3c fixed bot difficulty calibration stage ${stage}, 20 identical seeds`,t=>{
  const wins=[];for(const difficulty of ['easy','normal','hard']){let won=0,firstTen=0;for(let seed=1;seed<=20;seed++){
   const g=createSoccer({config:c,seed,stage,difficulty});for(let tick=0;tick<24000&&!g.result;tick++)g.update(dt,bot(g,c));assert.ok(g.result);won+=Number(g.result.won);if(seed<=10)firstTen+=Number(g.result.won);
  }if(stage===1&&difficulty==='easy')assert.ok(firstTen>=7,`${firstTen}/10`);wins.push(won);}
  assert.ok(wins[0]>=wins[1]&&wins[1]>=wins[2],JSON.stringify(wins));
+ t.diagnostic('G3f profile calibration '+JSON.stringify({stage,seeds:20,wins}));
 });
 test('G3c all effects are zero at 50, linear, and exactly maximum at 99',()=>{
  assert.deepEqual(cardEffects(card(50),c),{power:1,pace:1,spread:1,assistDegrees:0,capacity:1,regen:1,defense:0});
@@ -102,8 +103,19 @@ test('G3c all effects are zero at 50, linear, and exactly maximum at 99',()=>{
  for(const [value,tier]of [[50,'bronze'],[59,'bronze'],[60,'silver'],[74,'silver'],[75,'gold'],[99,'gold']])assert.deepEqual(cardRating(card(value),c),{overall:value,tier});
 });
 test('G3f individual shot strength, controlled pace and enemy speed floor follow saved attributes',()=>{
- const low=shot({card:card(50)}).getState(),high=shot({card:card(99)}).getState();near(Math.hypot(high.ball.vx,high.ball.vz)/Math.hypot(low.ball.vx,low.ball.vz),1.2*(1+49/c.card.max*c.roster.attributeShotWeight));
- for(const controlled of [0,1]){const a=setup({card:card(50)}),b=setup({card:card(99)});for(const g of [a,b]){g.getState().controlled=controlled;Object.assign(g.getState().ball,{owner:null,y:1000});}a.update(dt,{moveX:1});b.update(dt,{moveX:1});near(b.getState().players[controlled].vx/a.getState().players[controlled].vx,controlled===0?1.12:1);for(let i=0;i<6;i++)if(i!==controlled){if(a.getState().players[i].team===0)near(b.getState().players[i].vx,a.getState().players[i].vx*(i===0?1.12:1));else {const q=a.getState().players[i],base=opponentSettings(c,3,'normal').speed*(q.role==='keeper'?c.ai.keeperSpeedScale:1),floor=c.players.speed*c.opponents.minSpeedRatio,ratio=Math.max(base,floor*1.12)/Math.max(base,floor);near(b.getState().players[i].vx,q.vx*ratio);near(b.getState().players[i].vz,q.vz*ratio);}}}
+ const pace=p=>cardEffects({attributes:{pace:p.card.pace}},c).pace;
+ const shotFactor=p=>cardEffects({attributes:{power:p.card.shot}},c).power*(1+(p.card.shot-c.card.initial)/c.card.max*c.roster.attributeShotWeight);
+ const low=shot({card:card(50)}).getState(),high=shot({card:card(99)}).getState();assert.ok(high.players[0].card.shot>low.players[0].card.shot);near(Math.hypot(high.ball.vx,high.ball.vz)/Math.hypot(low.ball.vx,low.ball.vz),shotFactor(high.players[0])/shotFactor(low.players[0]));
+ for(const controlled of [0,1]){
+  const a=setup({card:card(50)}),b=setup({card:card(99)});for(const g of [a,b]){g.getState().controlled=controlled;Object.assign(g.getState().ball,{owner:null,y:1000});}a.update(dt,{moveX:1});b.update(dt,{moveX:1});
+  const aa=a.getState().players,bb=b.getState().players;
+  near(bb[controlled].vx/aa[controlled].vx,pace(bb[controlled])/pace(aa[controlled]));
+  for(let i=0;i<aa.length;i++)if(i!==controlled){
+   let ratio=pace(bb[i])/pace(aa[i]);
+   if(aa[i].team){const base=opponentSettings(c,3,'normal').speed,reference=players=>Math.max(...players.filter(p=>!p.team).map(p=>(c.players.speed+(p.speed-1)*c.players.speedPerRank)*pace(p)))*c.opponents.minSpeedRatio;ratio=Math.max(base*pace(bb[i]),reference(bb))/Math.max(base*pace(aa[i]),reference(aa));}
+   near(bb[i].vx,aa[i].vx*ratio);near(bb[i].vz,aa[i].vz*ratio);
+  }
+ }
 });
 test('G3c accuracy halves assisted spread and extends the assist cone by ten degrees',()=>{
  const low=shot({x:7,card:card(50),random:()=>.9}).getState(),high=shot({x:7,card:card(99),random:()=>.9}).getState();near((high.ball.vz/high.ball.vx)/(low.ball.vz/low.ball.vx),.5,.01);

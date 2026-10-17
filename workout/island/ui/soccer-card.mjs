@@ -1,4 +1,5 @@
-import {attributes,cardRating} from '../activity/soccer-card.mjs?v=g3f-20261018-1';
+import {attributes,cardRating} from '../activity/soccer-card.mjs?v=g3f-20261018-2';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=g3f-20261018-2';
 const node=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls;n.textContent=text??'';return n;};
 /** Local SVG portrait uses only the validated avatar palette; names remain text. */
 export function playerCard(state,balance,t,{starsAdded}={}) {
@@ -18,7 +19,8 @@ export function playerCard(state,balance,t,{starsAdded}={}) {
   shape('path',{d:'M69 68 Q80 77 91 68',fill:'none',stroke:'#7b453b','stroke-width':3,'stroke-linecap':'round'});
   shape('path',{d:'M63 98 Q80 113 97 98',fill:'none',stroke:'#fff6d5','stroke-width':4});root.append(svg);
   const list=node('dl','soccer-card-attributes');
-  for(const key of attributes){const row=node('div','');row.append(node('dt','',t(`soccer.attribute.${key}`)),node('dd','',String(card.attributes[key])));list.append(row);}root.append(list);
+  const profile=identity?rosterCards(balance,{players:state.players.map((p,i)=>({...p,card:state.soccerRoster.players[i]}))},card)[0]:null;
+  for(const key of attributes){const row=node('div',''),value=profile?.[{power:'shot',pace:'pace',accuracy:'pass',defense:'defense'}[key]]??card.attributes[key];row.append(node('dt','',t(`soccer.attribute.${key}`)),node('dd','',String(value)));list.append(row);}root.append(list);
   root.append(node('p','soccer-wallet',t('soccer.wallet',{stars:card.stars})));
   if(starsAdded!==undefined)root.append(node('p','soccer-stars-added',t('soccer.starsAdded',{stars:starsAdded})));
   return root;

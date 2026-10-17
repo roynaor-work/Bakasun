@@ -8,11 +8,24 @@ export function validSoccerRoster(r,players,c){const integer=n=>Number.isSafeInt
  return !!r&&['field','keeper'].includes(r.role)&&Array.isArray(r.players)&&r.players.length===players.length&&r.players.every((p,i)=>p&&p.id===players[i].id&&typeof p.name==='string'&&p.name===cleanFirstName(p.name,c)&&Number.isInteger(p.number)&&p.number>=1&&p.number<=99&&rosterAttributes.every(k=>Number.isInteger(p.attributes?.[k])&&p.attributes[k]>=c.card.min&&p.attributes[k]<=c.card.max&&integer(p.points?.[k])&&p.points[k]<c.training.pointsPerAttribute))&&!!r.training&&['day','outdoorDay'].every(k=>Number.isSafeInteger(r.training[k])&&r.training[k]>=-1)&&integer(r.training.completed)&&integer(r.training.awarded)&&r.training.awarded<=c.training.dailyCap;
 }
 export function editSoccerPlayer(roster,id,input,c){const p=roster.players.find(p=>p.id===id);if(!p||!input||!Number.isInteger(input.number)||input.number<1||input.number>99)return {ok:false,reason:'reason.invalid'};p.name=cleanFirstName(input.name,c);p.number=input.number;return {ok:true};}
+/** Fixed identity, not match RNG or editable name/number. Transfers preserve the
+ * exact attribute sum, including at the limits; saved training stays untouched. */
+function profileAttributes(attributes,entry,config){
+ const c=config.roster.profiles,keys=entry.role==='keeper'?rosterAttributes:rosterAttributes.slice(0,4),offsets=[...c.roles[entry.role]];
+ let seed=c.seed;for(const char of `${entry.team}:${entry.template}:${entry.role}`)seed=(Math.imul(seed,31)+char.charCodeAt(0))>>>0;
+ for(let i=0;i<keys.length-1;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const n=seed%(c.variation*2+1)-c.variation;offsets[i]+=n;offsets[keys.length-1]-=n;}
+ const result={...attributes};
+ for(let to=0;to<keys.length;to++)if(offsets[to]>0)for(let from=0;from<keys.length&&offsets[to]>0;from++)if(offsets[from]<0){
+  const amount=Math.min(offsets[to],-offsets[from],config.card.max-result[keys[to]],result[keys[from]]-config.card.min);
+  result[keys[to]]+=amount;result[keys[from]]-=amount;offsets[to]-=amount;offsets[from]+=amount;
+ }
+ return result;
+}
 export function rosterCards(config,team,legacy,stage=1,difficulty='normal'){
  const home=team.players||config.team.players;
  return config.players.roster.map((entry,id)=>{
   const source=home[entry.template]||config.team.players[entry.template],saved=source.card,level=entry.team?config.roster.opponentBase+(stage-1)*config.roster.stageGain+config.roster.difficultyGain[difficulty]:config.card.initial;
-  const attributes=Object.fromEntries(rosterAttributes.map(k=>[k,Math.max(config.card.min,Math.min(config.card.max,entry.team?level:saved?.attributes?.[k]??(entry.template===0?legacy?.attributes?.[{pace:'pace',shot:'power',pass:'accuracy',defense:'defense'}[k]]:undefined)??level))]));
+  const attributes=profileAttributes(Object.fromEntries(rosterAttributes.map(k=>[k,Math.max(config.card.min,Math.min(config.card.max,entry.team?level:saved?.attributes?.[k]??(entry.template===0?legacy?.attributes?.[{pace:'pace',shot:'power',pass:'accuracy',defense:'defense'}[k]]:undefined)??level))])),entry,config);
   const keys=entry.role==='keeper'?rosterAttributes:['pace','shot','pass','defense'];
   return {id,name:entry.team?'':saved?.name||'',nameId:entry.team?`soccer.opponentPlayer.${entry.template}`:source.nameId,number:entry.team?config.roster.numbers[entry.template]:saved?.number??config.roster.numbers[entry.template],role:entry.role,team:entry.team,overall:Math.round(keys.reduce((n,k)=>n+attributes[k],0)/keys.length),...attributes};
  });

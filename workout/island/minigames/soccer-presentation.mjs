@@ -1,4 +1,4 @@
-import {passDestination} from './soccer.mjs?v=g3f-20261018-1';
+import {passDestination} from './soccer.mjs?v=g3f-20261018-2';
 /** Pure presentation decisions; the simulation never imports this module. */
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 export function playerAnimation(player,state,config){

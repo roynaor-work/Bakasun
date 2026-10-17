@@ -30,7 +30,8 @@
     "economyTickMs": 1000,
     "toastMs": 3500,
     "placementHintsKey": "island.placementHints",
-    "pressSampleLimit": 50
+    "pressSampleLimit": 50,
+    "compatibilityClickMs": 400
   },
   "maxCitizens": 30,
   "maxSaveBuildings": 2000,
@@ -4200,6 +4201,44 @@
           7
         ],
         "nameMaxLength": 12,
+      "profiles": {
+        "seed": 18102026,
+        "variation": 2,
+        "roles": {
+          "striker": [
+            2,
+            10,
+            -4,
+            -8,
+            0,
+            0
+          ],
+          "support": [
+            -2,
+            -4,
+            10,
+            -4,
+            0,
+            0
+          ],
+          "wing": [
+            2,
+            -6,
+            -4,
+            8,
+            0,
+            0
+          ],
+          "keeper": [
+            -6,
+            -8,
+            -4,
+            -2,
+            10,
+            10
+          ]
+        }
+      },
         "opponentBase": 43,
         "stageGain": 3,
         "difficultyGain": {

@@ -1,6 +1,6 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=g3f-20261018-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=g3f-20261018-1';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=g3f-20261018-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=g3f-20261018-2';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=g3f-20261018-2';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=g3f-20261018-2';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -172,8 +172,8 @@ export class IslandInterface {
     document.addEventListener('pointercancel', () => { this.pointerOrigin = null; }, true);
     document.addEventListener('click', event => {
       const origin = this.pointerOrigin;
-      this.pointerOrigin = null;
       if (!event.isTrusted || event.detail === 0 || !origin) return;
+      this.pointerOrigin = null;
       const target = event.target.closest('button') ?? event.target;
       if (target !== origin) { event.preventDefault(); event.stopImmediatePropagation(); }
     }, true);

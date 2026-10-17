@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from '../view/local-models.mjs?v=g3f-20261018-1';
+import {LocalModels} from '../view/local-models.mjs?v=g3f-20261018-2';
 /** Presentation-only depth view; all collisions and timing remain on the original plane. */
 export function createAlienView(ctx,model,adapters={}){
  const {config,balance}=ctx,r=balance.render;let renderer,disposed=false,failed=false,low=false,currentWidth=config.width,currentHeight=config.height;

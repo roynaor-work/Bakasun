@@ -8,8 +8,33 @@ import {cityPaths} from '../workout/island/engine/paths.mjs';
 import {createActionGesture,controlSides} from '../workout/island/minigames/controls.mjs';
 import {gamePresentation} from '../workout/island/ui/game-shell.mjs';
 import {migrateSave} from '../workout/island/engine/persistence.mjs';
+import {installPressFeedback} from '../workout/island/ui/press.mjs';
 const data=await loadData(new URL('../workout/island/',import.meta.url),async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))}));
 function engine(){const e=createEngine(data,{storage:null,now:()=>1000});e.state.money=100000;e.skipTutorial();return e;}
+function pressHarness(){
+ let time=0;const listeners=new Map();
+ const target={addEventListener(type,fn,{signal}){const list=listeners.get(type)||[];list.push(fn);listeners.set(type,list);signal.addEventListener('abort',()=>list.splice(list.indexOf(fn),1));}};
+ const dispatch=(type,node,props={})=>{const event={target:node,pointerId:7,button:0,isTrusted:true,detail:1,preventDefault(){this.defaultPrevented=true;},stopImmediatePropagation(){this.stopped=true;},...props};for(const fn of listeners.get(type)||[]){fn(event);if(event.stopped)break;}if(!event.stopped)node['on'+type]?.(event);return event;};
+ const button=(action,onclick)=>{const node={dataset:{action},onclick,closest:s=>s==='button'?node:null,matches:()=>false,click:()=>dispatch('click',node,{isTrusted:false,detail:0,pointerId:-1})};return node;};
+ const stop=installPressFeedback({target,compatibilityClickMs:data.config.ui.compatibilityClickMs,now:()=>time,scheduleFrame:fn=>fn()});
+ return {dispatch,button,stop,at:ms=>{time=ms;}};
+}
+for(const release of ['pointerup','pointercancel'])for(const detail of [0,1])test(`G7 one touch cannot activate a newly opened card after ${release}, click detail ${detail}`,()=>{
+ const h=pressHarness();let open=false,selected=null,calls=0;const card=h.button('select-building',()=>{calls++;selected='fireStation';}),opener=h.button('toggle-build',()=>{open=true;});
+ h.dispatch('pointerdown',opener,{clientX:100,clientY:100});assert.equal(open,true,'panel opens immediately before release');assert.equal(selected,null);
+ h.dispatch(release,card);h.at(20);h.dispatch('click',card,{pointerId:99,detail,clientX:100,clientY:100});
+ h.at(399);h.dispatch('click',card,{pointerId:undefined,detail});assert.equal(calls,0,'even repeated compatibility clicks cannot reach catalog onclick');assert.equal(selected,null);
+ h.at(401);h.dispatch('click',card,{pointerId:101,detail});assert.equal(calls,1,'a later click reaches the new button');h.at(410);h.dispatch('pointerdown',card);assert.equal(calls,2);h.dispatch('pointerup',card);h.dispatch('click',card,{pointerId:102});assert.equal(calls,2);h.stop();
+});
+test('G7 retargeted releases and long holds are guarded while new touches and keyboard remain independent',()=>{
+ const h=pressHarness();let count=0,ups=0;const a=h.button('open',()=>count++),b=h.button('new',()=>count++);b.onpointerup=()=>ups++;
+ h.dispatch('pointerdown',a);h.dispatch('pointerup',b);assert.equal(ups,0);h.at(30);h.dispatch('pointerdown',b,{pointerId:8});assert.equal(count,2);h.dispatch('pointerup',b,{pointerId:8});
+ h.at(40);h.dispatch('keydown',b,{key:'Enter'});h.dispatch('click',b,{detail:0,pointerId:-1});assert.equal(count,3,'a fresh keyboard gesture remains accessible inside the window');h.at(50);h.dispatch('click',b,{detail:0});assert.equal(count,3,'keyboard intent cannot authorize a later touch click');
+ h.dispatch('click',{closest:()=>null,onclick:()=>count++},{detail:0});assert.equal(count,3,'a non-button click is not mistaken for keyboard intent');
+ h.at(431);h.dispatch('click',b,{detail:0,pointerId:-1});assert.equal(count,4);
+ h.at(500);h.dispatch('pointerdown',a);assert.equal(count,5);h.at(1001);h.dispatch('pointerup',b);h.dispatch('click',b,{pointerId:99});assert.equal(count,5,'holding beyond 400ms cannot leak the release click');
+ h.at(1402);h.dispatch('click',b);assert.equal(count,6);h.stop();h.dispatch('click',b);assert.equal(count,7,'cleanup removes the guard');
+});
 test('G7 each of the five playable games declares landscape in the shared shell config',()=>{for(const id of ['soccer','tennis','navalDuel','fireRescue','alienDefense'])assert.equal(gamePresentation(data.config,id).orientation,'landscape');});
 test('G7 action drag is independent of movement and short taps use automatic intent',()=>{
  const gesture=createActionGesture(data.config.minigames.soccer.controls);

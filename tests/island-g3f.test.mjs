@@ -84,6 +84,30 @@ test('G3f all eight cards have identity, shirt, role and individual skills; stag
  const cards=rosterCards(config,config.team,null,1,'easy');assert.equal(cards.length,8);for(const card of cards){assert.ok(card.nameId);assert.ok(card.number>=1);assert.ok(card.overall>=1);for(const key of ['pace','shot','pass','defense','reactions','catching'])assert.ok(card[key]>=config.card.min&&card[key]<=config.card.max);}
  assert.equal(cards.filter(c=>c.role==='keeper').length,2);const harder=rosterCards(config,config.team,null,5,'hard');for(const card of cards.filter(c=>c.team))assert.ok(harder[card.id].overall>card.overall);for(const p of createSoccer({config}).getState().players)assert.equal(p.card.id,p.id);
 });
+test('G3f seeded role profiles distinguish teammates, strikers, midfielders, defenders and keeper hands',()=>{
+ const cards=rosterCards(config,config.team,null);
+ for(const team of [0,1]){const side=cards.filter(c=>c.team===team),striker=side.find(c=>c.role==='striker'),support=side.find(c=>c.role==='support'),defender=side.find(c=>c.role==='wing'),keeper=side.find(c=>c.role==='keeper');
+  assert.ok(striker.shot>Math.max(striker.pace,striker.pass,striker.defense));assert.ok(support.pass>Math.max(support.pace,support.shot,support.defense));assert.ok(defender.defense>=Math.max(defender.pace,defender.shot,defender.pass));assert.ok(Math.min(keeper.reactions,keeper.catching)>Math.max(keeper.pace,keeper.shot,keeper.pass,keeper.defense));
+  assert.equal(new Set(side.map(c=>JSON.stringify([c.pace,c.shot,c.pass,c.defense,c.reactions,c.catching]))).size,4);
+ }
+ assert.notDeepEqual([cards[0].pace,cards[0].shot,cards[0].pass,cards[0].defense].map(n=>n-50),[cards[3].pace,cards[3].shot,cards[3].pass,cards[3].defense].map(n=>n-config.roster.opponentBase),'same role has individual seeded variation');
+});
+test('G3f profiles preserve the exact previous means and integer bounds even at skill limits',()=>{
+ for(const level of [1,2,50,98,99]){const team={players:config.team.players.map(p=>({...p,card:{attributes:Object.fromEntries(['pace','shot','pass','defense','reactions','catching'].map(k=>[k,level]))}}))};
+  for(const card of rosterCards(config,team,null)){const keys=card.role==='keeper'?['pace','shot','pass','defense','reactions','catching']:['pace','shot','pass','defense'],expected=card.team?config.roster.opponentBase:level;assert.equal(keys.reduce((n,k)=>n+card[k],0),expected*keys.length);assert.equal(card.overall,expected);for(const k of keys)assert.ok(Number.isInteger(card[k])&&card[k]>=1&&card[k]<=99);}
+ }
+ for(let n=0;n<400;n++){const keys=['pace','shot','pass','defense','reactions','catching'],team={players:config.team.players.map((p,i)=>({...p,card:{attributes:Object.fromEntries(keys.map((k,j)=>[k,1+(n*17+i*23+j*19)%99]))}}))},before=structuredClone(team);
+  for(const card of rosterCards(config,team,null).filter(c=>!c.team)){const relevant=card.role==='keeper'?keys:keys.slice(0,4),source=before.players[config.players.roster[card.id].template].card.attributes;assert.equal(relevant.reduce((sum,k)=>sum+card[k],0),relevant.reduce((sum,k)=>sum+source[k],0));for(const k of relevant)assert.ok(Number.isInteger(card[k])&&card[k]>=1&&card[k]<=99);}assert.deepEqual(team,before);
+ }
+ for(const difficulty of ['easy','normal','hard'])for(const stage of [1,5,10,30])for(const card of rosterCards(config,config.team,null,stage,difficulty).filter(c=>c.team)){const keys=card.role==='keeper'?['pace','shot','pass','defense','reactions','catching']:['pace','shot','pass','defense'],level=Math.max(1,Math.min(99,config.roster.opponentBase+(stage-1)*config.roster.stageGain+config.roster.difficultyGain[difficulty]));assert.equal(keys.reduce((n,k)=>n+card[k],0),level*keys.length);}
+});
+test('G3f home profiles never reroll through matches, stage, difficulty, name or shirt edits; only earned training raises the child',()=>{
+ const e=city(),make=()=>({players:e.state.players.map((p,i)=>({...p,card:e.state.soccerRoster.players[i]}))}),team=make(),before=structuredClone(e.state.soccerRoster),cards=rosterCards(config,team,e.state.soccerCard),skills=p=>['pace','shot','pass','defense','reactions','catching','overall'].map(k=>p[k]);
+ for(const difficulty of ['easy','normal','hard'])for(const stage of [1,5,10])assert.deepEqual(rosterCards(config,make(),e.state.soccerCard,stage,difficulty).filter(p=>!p.team).map(skills),cards.filter(p=>!p.team).map(skills));assert.deepEqual(e.state.soccerRoster,before);
+ e.editSoccerPlayer(e.state.players[0].id,{name:'דני',number:12});assert.deepEqual(skills(rosterCards(config,make(),e.state.soccerCard)[0]),skills(cards[0]));
+ for(const day of [0,1])for(let i=0;i<3;i++)awardSoccerPractice(e.state,config,'targets',day*config.training.dayMilliseconds);
+ const after=rosterCards(config,make(),e.state.soccerCard)[0];assert.equal(after.shot,cards[0].shot+1);for(const key of ['pace','pass','defense','reactions','catching'])assert.equal(after[key],cards[0][key]);
+});
 for(const team of [0,1])for(const dir of [1,-1])test(`G3f keeper hands are bounded by its own area, team ${team}, direction ${dir}`,()=>{
  const p={team},s={attackDir:dir},d=dir*(team? -1:1);assert.ok(inPenaltyArea(p,{x:-d*(hx-1),z:0},s,config));assert.equal(inPenaltyArea(p,{x:-d*(hx-config.pitch.penaltyDepth-.01),z:0},s,config),false);assert.equal(inPenaltyArea(p,{x:-d*(hx-1),z:config.pitch.penaltyWidth/2+.01},s,config),false);
 });
@@ -130,8 +154,8 @@ for(const version of [7,8,9,10,11,12,13])test(`G3f authentic v${version} reaches
 test('G3f explicit full 1 through 13 chain is additive for every prior migration',()=>{
  const e=city(),old={version:1,createdAt:1_000_000,updatedAt:1_000_000,money:200,buildings:e.state.buildings,world:e.state.world,avatar:e.state.avatar,players:e.state.players,team:{...e.state.team}};let s=old;for(let v=1;v<13;v++){s=migrations[v](s,data,e.registry);assert.equal(s.version,v+1);}assert.ok(validateSave(s,data,e.registry).ok);assert.deepEqual(migrateSave(old,data,e.registry).state,s);
 });
-test('G3f fixed bot wins at least seven of ten easy stage one and keeps easy >= normal >= hard',()=>{
- const wins=[];for(const difficulty of ['easy','normal','hard']){let won=0;for(let seed=1;seed<=10;seed++){const g=createSoccer({config,seed,difficulty});for(let i=0;i<24000&&!g.result;i++)g.update(dt,bot(g,config));assert.ok(g.result);won+=Number(g.result.won);}wins.push(won);}assert.ok(wins[0]>=7,JSON.stringify(wins));assert.ok(wins[0]>=wins[1]&&wins[1]>=wins[2],JSON.stringify(wins));
+test('G3f fixed bot wins at least seven of ten easy stage one and keeps easy >= normal >= hard',t=>{
+ const wins=[];for(const difficulty of ['easy','normal','hard']){let won=0;for(let seed=1;seed<=10;seed++){const g=createSoccer({config,seed,difficulty});for(let i=0;i<24000&&!g.result;i++)g.update(dt,bot(g,config));assert.ok(g.result);won+=Number(g.result.won);}wins.push(won);}assert.ok(wins[0]>=7,JSON.stringify(wins));assert.ok(wins[0]>=wins[1]&&wins[1]>=wins[2],JSON.stringify(wins));t.diagnostic('G3f profile calibration '+JSON.stringify({stage:1,seeds:10,wins}));
 });
 test('G3f malformed roster fields and legacy null players reject without throwing',()=>{
  const e=city();for(const mutate of [s=>s.soccerRoster.players[0]=null,s=>s.soccerRoster.players[0].name='<img>',s=>s.soccerRoster.players[0].number=0,s=>s.soccerRoster.players[0].points.shot=99,s=>s.soccerRoster.training.awarded=99,s=>s.soccerRoster.role='admin']){const s=structuredClone(e.state);mutate(s);assert.equal(migrateSave(s,data,e.registry).ok,false);}const old=structuredClone(e.state);old.version=12;old.players=[null];assert.equal(migrateSave(old,data,e.registry).ok,false);

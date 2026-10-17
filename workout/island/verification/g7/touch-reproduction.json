@@ -1,0 +1,120 @@
+{
+  "baseCommit": "c3066b6",
+  "browserVersion": "151.0.7922.173",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "nativeTapBeforeFix": {
+    "selected": null,
+    "trace": [
+      {
+        "type": "click",
+        "action": "toggle-city",
+        "trusted": false,
+        "detail": 0,
+        "id": -1,
+        "time": 3818,
+        "before": null,
+        "after": null,
+        "blocked": false
+      },
+      {
+        "type": "pointerdown",
+        "action": "toggle-city",
+        "trusted": true,
+        "detail": 0,
+        "id": 3,
+        "time": 3818,
+        "before": null,
+        "after": null,
+        "blocked": true
+      },
+      {
+        "type": "pointerup",
+        "action": "toggle-city",
+        "trusted": true,
+        "detail": 0,
+        "id": 3,
+        "time": 3818,
+        "before": null,
+        "after": null,
+        "blocked": false
+      },
+      {
+        "type": "click",
+        "action": "toggle-city",
+        "trusted": false,
+        "detail": 0,
+        "id": -1,
+        "time": 3918,
+        "before": null,
+        "after": null,
+        "blocked": false
+      },
+      {
+        "type": "pointerdown",
+        "action": "toggle-city",
+        "trusted": true,
+        "detail": 0,
+        "id": 4,
+        "time": 3918,
+        "before": null,
+        "after": null,
+        "blocked": true
+      },
+      {
+        "type": "pointerup",
+        "action": "toggle-city",
+        "trusted": true,
+        "detail": 0,
+        "id": 4,
+        "time": 3918,
+        "before": null,
+        "after": null,
+        "blocked": false
+      },
+      {
+        "type": "click",
+        "action": "toggle-build",
+        "trusted": false,
+        "detail": 0,
+        "id": -1,
+        "time": 3918,
+        "before": null,
+        "after": null,
+        "blocked": false
+      },
+      {
+        "type": "pointerdown",
+        "action": "toggle-build",
+        "trusted": true,
+        "detail": 0,
+        "id": 5,
+        "time": 3918,
+        "before": null,
+        "after": null,
+        "blocked": true
+      },
+      {
+        "type": "pointerup",
+        "action": "toggle-build",
+        "trusted": true,
+        "detail": 0,
+        "id": 5,
+        "time": 3918,
+        "before": null,
+        "after": null,
+        "blocked": false
+      }
+    ]
+  },
+  "unitRegressionAgainstBase": {
+    "command": "node --test /tmp/g7-regression-before.test.mjs",
+    "adapter": "requestAnimationFrame callback shim for Node only; original press logic unchanged",
+    "newTests": 5,
+    "failed": 5,
+    "failure": "new catalog onclick invoked after compatibility click, or retargeted pointerup invoked"
+  },
+  "scope": "Chromium 1194 native sequence was not reproduced: binary absent; CDN download returned HTTP 403."
+}

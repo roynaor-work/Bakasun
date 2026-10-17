@@ -1,5 +1,5 @@
 {
-  "dataVersion": "g3f-20261018-1",
+  "dataVersion": "g3f-20261018-2",
   "saveVersion": 13,
   "command": "node --test tests/*.mjs",
   "baseline": {
@@ -20,5 +20,13 @@
     "pass": 1604,
     "skip": 38,
     "fail": 0
+  },
+  "preMergeFix": {
+    "tests": 1650,
+    "pass": 1612,
+    "skip": 38,
+    "fail": 0,
+    "durationMilliseconds": 44696.927522,
+    "logSHA256": "af8b70a5ffd9c6b7794c297025e8c0d5aa2d6bf35a8056577d0bf34caf6cc9bf"
   }
 }

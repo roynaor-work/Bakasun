@@ -1,12 +1,12 @@
-import {dataURL} from './release.mjs?v=g3f-20261018-1';
-import {createTranslator} from './ui/translate.mjs?v=g3f-20261018-1';
-import { loadData } from './engine/load-data.mjs?v=g3f-20261018-1';
-import { createEngine } from './engine/engine.mjs?v=g3f-20261018-1';
-import { IslandView } from './view/island-view.mjs?v=g3f-20261018-1';
-import { IslandInterface } from './ui/interface.mjs?v=g3f-20261018-1';
-import {createActivity} from './activity/runtime.mjs?v=g3f-20261018-1';
-import {ActivityInterface} from './ui/activity.mjs?v=g3f-20261018-1';
-import {installPressFeedback} from './ui/press.mjs?v=g3f-20261018-1';
+import {dataURL} from './release.mjs?v=g3f-20261018-2';
+import {createTranslator} from './ui/translate.mjs?v=g3f-20261018-2';
+import { loadData } from './engine/load-data.mjs?v=g3f-20261018-2';
+import { createEngine } from './engine/engine.mjs?v=g3f-20261018-2';
+import { IslandView } from './view/island-view.mjs?v=g3f-20261018-2';
+import { IslandInterface } from './ui/interface.mjs?v=g3f-20261018-2';
+import {createActivity} from './activity/runtime.mjs?v=g3f-20261018-2';
+import {ActivityInterface} from './ui/activity.mjs?v=g3f-20261018-2';
+import {installPressFeedback} from './ui/press.mjs?v=g3f-20261018-2';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -34,7 +34,7 @@ try {
   const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length),onLaunch:choice=>games.autoLaunch(choice)});
   const games=new ActivityInterface({ui,engine,activity,data,t});
   const pressSamples=[];
-  const stopPress=installPressFeedback({onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});
+  const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});
   let openedGames=false;
   const requestedGames=new URLSearchParams(location.search).get('games')==='1';
   const openRequestedGames=()=>{
