@@ -4201,44 +4201,44 @@
           7
         ],
         "nameMaxLength": 12,
-      "profiles": {
-        "seed": 18102026,
-        "variation": 2,
-        "roles": {
-          "striker": [
-            2,
-            10,
-            -4,
-            -8,
-            0,
-            0
-          ],
-          "support": [
-            -2,
-            -4,
-            10,
-            -4,
-            0,
-            0
-          ],
-          "wing": [
-            2,
-            -6,
-            -4,
-            8,
-            0,
-            0
-          ],
-          "keeper": [
-            -6,
-            -8,
-            -4,
-            -2,
-            10,
-            10
-          ]
-        }
-      },
+        "profiles": {
+          "seed": 18102026,
+          "variation": 2,
+          "roles": {
+            "striker": [
+              2,
+              10,
+              -4,
+              -8,
+              0,
+              0
+            ],
+            "support": [
+              -2,
+              -4,
+              10,
+              -4,
+              0,
+              0
+            ],
+            "wing": [
+              2,
+              -6,
+              -4,
+              8,
+              0,
+              0
+            ],
+            "keeper": [
+              -6,
+              -8,
+              -4,
+              -2,
+              10,
+              10
+            ]
+          }
+        },
         "opponentBase": 43,
         "stageGain": 3,
         "difficultyGain": {
@@ -4370,7 +4370,8 @@
         "timingCenterFraction": 0.28,
         "timingPowerPenalty": 0.2,
         "swingCooldown": 0.28,
-        "swingSeconds": 0.48
+        "swingSeconds": 0.48,
+        "acceleration": 18
       },
       "levels": [
         {
@@ -4574,8 +4575,8 @@
         ],
         "cameraLandscape": [
           0,
-          14,
-          24
+          13,
+          25
         ],
         "cameraTarget": [
           0,
@@ -4607,14 +4608,16 @@
       "opponent": {
         "fatigueAfterHits": 4,
         "fatigueMissPerHit": 0.055,
-        "maximumMissChance": 0.8
+        "maximumMissChance": 0.8,
+        "minimumSpeedRatio": 0.9
       },
       "requiresBuilding": "tennis",
       "maximumScore": 4,
       "pointsPerCoin": 1,
       "maximumSeconds": 3600,
       "lob": {
-        "flightMultiplier": 1.35
+        "flightMultiplier": 1.35,
+        "depth": 7.6
       },
       "difficulties": {
         "easy": {
@@ -4736,6 +4739,24 @@
             }
           ]
         }
+      },
+      "serve": {
+        "baselineMargin": 0.7,
+        "sideX": 1.65,
+        "tossSeconds": 1.4,
+        "tossVelocity": 6.8,
+        "handHeight": 1.05,
+        "green": {
+          "easy": 0.3,
+          "normal": 0.22,
+          "hard": 0.16
+        },
+        "rankGreenBonus": 0.015,
+        "yellowWidth": 0.2,
+        "yellowFaultChance": 0.5,
+        "missDepth": 2,
+        "aimFraction": 0.7,
+        "centerPowerBonus": 0.3
       }
     }
   },

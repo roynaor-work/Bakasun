@@ -280,3 +280,9 @@ button[data-pressed=true]{scale:.95;filter:brightness(.82)}
 .modal[data-rosters] {width:min(900px,calc(100vw - 16px));max-width:calc(100vw - 16px);}
 .modal[data-rosters] select {min-height:48px;min-width:90px;}
 .game-screen:not([data-drill]) .soccer-phase-banner {left:16px;transform:none;max-width:calc(100% - 100px);}
+/* G4c: the serve meter stays beside the court, clear of movement and action controls. */
+.tennis-serve-hint{position:absolute;left:50%;top:42px;transform:translateX(-50%);padding:7px 16px;background:#123d41ed;color:#fff;border-radius:16px;pointer-events:none;font-weight:800}
+.tennis-serve-meter{position:absolute;left:12px;top:27%;height:130px;width:18px;border:2px solid white;border-radius:12px;background:linear-gradient(to top,#f06960 0% 25%,#efc355 25% 35%,#67d398 35% 65%,#efc355 65% 75%,#f06960 75%);pointer-events:none}
+.tennis-serve-needle{position:absolute;left:-6px;width:26px;height:4px;background:white;box-shadow:0 0 4px #123d41}
+.serve-ready{box-shadow:0 0 0 4px #67d398!important;animation:serve-ready 1s ease-in-out infinite alternate}
+@keyframes serve-ready{to{box-shadow:0 0 0 9px #67d39855}}

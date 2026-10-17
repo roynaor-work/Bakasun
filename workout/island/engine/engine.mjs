@@ -1,16 +1,16 @@
-import {recordStageWin} from '../activity/progress.mjs?v=g3f-20261018-2';
-import {gameAvailability} from '../activity/availability.mjs?v=g3f-20261018-2';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=g3f-20261018-2';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=g3f-20261018-2';
-import {repairHarbors} from './placement-help.mjs?v=g3f-20261018-2';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=g3f-20261018-2';
-import { createRegistry } from './registry.mjs?v=g3f-20261018-2';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g3f-20261018-2';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g3f-20261018-2';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=g3f-20261018-2';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g3f-20261018-2';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g3f-20261018-2';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g3f-20261018-2';
+import {recordStageWin} from '../activity/progress.mjs?v=g4c-20261019-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g4c-20261019-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=g4c-20261019-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=g4c-20261019-1';
+import {repairHarbors} from './placement-help.mjs?v=g4c-20261019-1';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=g4c-20261019-1';
+import { createRegistry } from './registry.mjs?v=g4c-20261019-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=g4c-20261019-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=g4c-20261019-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=g4c-20261019-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=g4c-20261019-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=g4c-20261019-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=g4c-20261019-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
