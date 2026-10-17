@@ -1,6 +1,6 @@
-import {runCanvasGame} from './canvas-session.mjs?v=g7-g3f-20261017-1';
-import {oval,drawHealthBar} from './art.mjs?v=g7-g3f-20261017-1';
-import {createNavalView} from './naval-view.mjs?v=g7-g3f-20261017-1';
+import {runCanvasGame} from './canvas-session.mjs?v=g7-20261018-1';
+import {oval,drawHealthBar} from './art.mjs?v=g7-20261018-1';
+import {createNavalView} from './naval-view.mjs?v=g7-20261018-1';
 export function healthPercent(hp,maxHp){return Math.round(Math.max(0,Math.min(1,hp/maxHp))*100);}
 export function navalSway(seed,time,balance){const a=balance.aim.sway,phase=(seed>>>0)%997;return {yaw:Math.sin(time*a.frequency+phase)*a.yaw,elevation:Math.cos(time*a.frequency*.73+phase)*a.elevation};}
 export function navalTrajectory(ship,yaw,elevation,balance){const range=balance.aim.minRange+(elevation-balance.aim.minElevation)*balance.aim.rangePerDegree;return {x:ship.x+Math.cos(yaw)*range,z:(ship.z||0)+Math.sin(yaw)*range};}

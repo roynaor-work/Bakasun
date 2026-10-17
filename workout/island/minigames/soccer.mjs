@@ -1,5 +1,5 @@
-import {cardEffects} from '../activity/soccer-card.mjs?v=g7-g3f-20261017-1';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=g7-g3f-20261017-1';
+import {cardEffects} from '../activity/soccer-card.mjs?v=g7-20261018-1';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=g7-20261018-1';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);

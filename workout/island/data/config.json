@@ -28,7 +28,9 @@
   "ui": {
     "parentHoldMs": 1400,
     "economyTickMs": 1000,
-    "toastMs": 3500
+    "toastMs": 3500,
+    "placementHintsKey": "island.placementHints",
+    "pressSampleLimit": 50
   },
   "maxCitizens": 30,
   "maxSaveBuildings": 2000,
@@ -325,7 +327,11 @@
         }
       ],
       "visual": {
-        "height": 1.1
+        "height": 1.1,
+        "deckExtension": 5.2,
+        "deckHeight": -0.22,
+        "waterline": -1.24,
+        "pierHeight": 1.6
       },
       "limit": {
         "kind": "unique",
@@ -3598,7 +3604,9 @@
         ],
         "switchKey": "KeyC",
         "floating": true,
-        "handednessKey": "island.soccer.handed"
+        "handednessKey": "island.soccer.handed",
+        "aimDragThreshold": 14,
+        "aimHeightPixels": 90
       },
       "ai": {
         "kickoffX": [
@@ -4365,7 +4373,9 @@
         ],
         "switchKey": "KeyC",
         "floating": true,
-        "handednessKey": "island.tennis.hand"
+        "handednessKey": "island.tennis.hand",
+        "aimDragThreshold": 14,
+        "aimHeightPixels": 90
       },
       "render": {
         "targetFPS": 60,
@@ -4726,6 +4736,68 @@
     "security": {
       "fireStation": 5,
       "police": 5
+    }
+  },
+  "gameShell": {
+    "games": {
+      "soccer": {
+        "orientation": "landscape"
+      },
+      "tennis": {
+        "orientation": "landscape"
+      },
+      "navalDuel": {
+        "orientation": "landscape"
+      },
+      "fireRescue": {
+        "orientation": "landscape"
+      },
+      "alienDefense": {
+        "orientation": "landscape"
+      }
+    }
+  },
+  "cityView": {
+    "camera": {
+      "angle": 0.69,
+      "elevation": 0.76,
+      "landscapeElevation": 0.95,
+      "spanRatio": 0.86,
+      "landscapeSpanRatio": 0.66,
+      "aspectRatio": 0.81,
+      "panelOffset": 0.18
+    },
+    "citizens": {
+      "max": 40,
+      "lowMax": 18,
+      "minimum": 6,
+      "perBuilding": 3
+    },
+    "paths": {
+      "width": 0.34,
+      "color": "#e6d2ac"
+    },
+    "harbor": {
+      "extension": 5.2,
+      "deckHeight": -0.22,
+      "waterline": -1.24,
+      "pierHeight": 1.6
+    },
+    "beach": {
+      "umbrellas": 4,
+      "palms": 2,
+      "waves": 8,
+      "waveSpeed": 0.65,
+      "waveWidth": 1.8
+    },
+    "neighbors": {
+      "roofColors": [
+        "#bf715b",
+        "#6a91bc",
+        "#cbad55"
+      ],
+      "houses": 4,
+      "smokeSpeed": 0.35
     }
   }
 }

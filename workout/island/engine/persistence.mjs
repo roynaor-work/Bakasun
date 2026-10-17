@@ -1,11 +1,12 @@
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g7-g3f-20261017-1';
-import {withCityHall} from './city-hall.mjs?v=g7-g3f-20261017-1';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=g7-g3f-20261017-1';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g7-g3f-20261017-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=g7-g3f-20261017-1';
-import {initialProgress} from '../activity/progress.mjs?v=g7-g3f-20261017-1';
-import { cellsFor } from './rules.mjs?v=g7-g3f-20261017-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g7-g3f-20261017-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g7-20261018-1';
+import {withCityHall} from './city-hall.mjs?v=g7-20261018-1';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=g7-20261018-1';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g7-20261018-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=g7-20261018-1';
+import {initialProgress} from '../activity/progress.mjs?v=g7-20261018-1';
+import { cellsFor } from './rules.mjs?v=g7-20261018-1';
+import {repairHarbors} from './placement-help.mjs?v=g7-20261018-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g7-20261018-1';
 
 export const CURRENT_VERSION = 12;
 export const STORAGE_KEY = 'island.v1';
@@ -82,7 +83,9 @@ export function migrateSave(value, data, registry) {
   if (isObject(state.minigameLevels)) for (const id of Object.keys(data.config.minigameLevels || {})) if (!(id in state.minigameLevels)) state.minigameLevels[id] = 1;
   if (isObject(state.minigameProgress)) for (const [id,p] of Object.entries(initialProgress(data))) if (!(id in state.minigameProgress)) state.minigameProgress[id] = p;
   const validation = validateSave(state, data, registry);
-  return validation.ok ? { ok: true, state, migrated: fromVersion !== CURRENT_VERSION } : validation;
+  if(!validation.ok)return validation;
+  const repairedHarbors=repairHarbors(state,registry,data.featureFlags);
+  return {ok:true,state,migrated:fromVersion!==CURRENT_VERSION,repairedHarbors};
 }
 
 export function validateSave(state, data, registry) {

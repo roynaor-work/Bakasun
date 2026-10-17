@@ -1,9 +1,13 @@
 import * as T from '../vendor/three.module.js';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=g7-g3f-20261017-1';
-import { Avatar, Citizens } from './avatar.mjs?v=g7-g3f-20261017-1';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=g7-g3f-20261017-1';
-import { levelValue } from '../engine/metrics.mjs?v=g7-g3f-20261017-1';
-import { LocalModels } from './local-models.mjs?v=g7-g3f-20261017-1';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=g7-20261018-1';
+import { Avatar, Citizens } from './avatar.mjs?v=g7-20261018-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=g7-20261018-1';
+import { levelValue } from '../engine/metrics.mjs?v=g7-20261018-1';
+import { LocalModels } from './local-models.mjs?v=g7-20261018-1';
+import {cityPaths} from '../engine/paths.mjs?v=g7-20261018-1';
+import {shoreDirection} from '../engine/placement-help.mjs?v=g7-20261018-1';
+import {pathMesh,beachDetails} from './city-life.mjs?v=g7-20261018-1';
+import {batchMeshes} from './batch.mjs?v=g7-20261018-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -19,21 +23,22 @@ export class IslandView {
     this.camera=new T.OrthographicCamera(-14,14,14,-14,.1,180);
     this.scene.add(new T.HemisphereLight('#fcf5da','#8eaead',2.5));
     const sun=new T.DirectionalLight('#fff0d1',3);sun.position.set(-17,30,15);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-24;sun.shadow.camera.right=24;sun.shadow.camera.top=24;sun.shadow.camera.bottom=-24;sun.shadow.camera.near=1;sun.shadow.camera.far=85;sun.shadow.bias=-.00035;sun.shadow.normalBias=.07;this.scene.add(sun);this.sun=sun;
-    this.environment=new Environment(this.scene,data.world);this.environment.rebuild(this.size);this.buildingRoot=new T.Group();this.scene.add(this.buildingRoot);
+    this.environment=new Environment(this.scene,{...data.world,viewConfig:data.config.cityView});this.environment.rebuild(this.size);this.decorateBeach();this.buildingRoot=new T.Group();this.scene.add(this.buildingRoot);
     this.models=new LocalModels();
     const records=data.buildings instanceof Map?[...data.buildings.values()]:data.buildings||[];
     this.modelsReady=Promise.all(records.flatMap(record=>[record.model,...(record.levels||[]).map(level=>level.model)]).filter(Boolean).map(spec=>this.models.load(spec))).then(()=>{if(!this.disposed&&this.state)this.setWorld(this.state,true);});
-    this.avatar=new Avatar(this.scene);this.citizens=new Citizens(this.scene,Math.min(30,data.config?.maxCitizens??30));
+    this.avatar=new Avatar(this.scene);this.citizens=new Citizens(this.scene,data.config.cityView.citizens.max);
     this.avatar.load({}).then(()=>{if(!this.disposed){if(!this.avatarPositioned)this.avatar.holder.position.set(0,GROUND,0);this.onReady(this);}}).catch(()=>this.onError('error.avatar'));
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(canvas);this.handlers={};this.bindEvents();this.resize();this.last=performance.now();this.samples=[];this.animate=this.animate.bind(this);this.frame=requestAnimationFrame(this.animate);
   }
   definition(id) {const registered=this.data.registry?.buildings?.get(id);if(registered)return registered;const b=this.data.buildings;return b instanceof Map?b.get(id):Array.isArray(b)?b.find(r=>r.id===id):b?.[id];}
+  decorateBeach(){const group=new T.Group();beachDetails(group,this.size,this.data.config.cityView.beach);batchMeshes(group);this.environment.land.add(group);}
   worldPosition(x,z,footprint=[1,1]) {return new T.Vector3(x+(footprint[0]-1)/2-(this.size-1)/2,GROUND,z+(footprint[1]-1)/2-(this.size-1)/2);}
   makeBuilding(record,level=1) {return createBuilding(record,level,this.models);}
   setBuildingFactory(factory) {this.buildingFactory=factory;if(this.state)this.setWorld(this.state,true);}
   setWorld(state,force=false) {
     this.state=state;if(!this.renderer)return;
-    const previousSize=this.size;this.size=Number(state.world?.size||state.worldSize||16);this.environment.rebuild(this.size);
+    const previousSize=this.size;this.size=Number(state.world?.size||state.worldSize||16);this.environment.rebuild(this.size);if(previousSize!==this.size)this.decorateBeach();
     const buildings=state.buildings||state.world?.buildings||[],ids=new Set(buildings.map(b=>b.id));
     for(const [id,item] of this.groups)if(!ids.has(id)||force){this.buildingRoot.remove(item.group);disposeBuilding(item.group);this.groups.delete(id);}
     for(const b of buildings) {
@@ -45,6 +50,7 @@ export class IslandView {
         group.userData.buildingId=b.id;group.traverse(o=>{if(o.isMesh)o.userData.buildingId=b.id;});this.buildingRoot.add(group);item={group,level:b.level,typeId:b.typeId||b.type};this.groups.set(b.id,item);
       }
       item.group.position.copy(this.worldPosition(b.x,b.z,record.footprint));
+      if(record.requiresShore){const outward=shoreDirection(state,record,b.x,b.z);item.group.rotation.y=outward?Math.atan2(outward.x,outward.z):0;}
       const repairing=state.events?.repairs?.[b.id]>state.updatedAt;
       if(repairing&&!item.repairMarker){
         const style=this.data.config.events.repairMarker;
@@ -58,11 +64,12 @@ export class IslandView {
     this.setAvatar(state.avatar||state.character||{});this.refreshWalkers(buildings);
   }
   refreshWalkers(buildings) {
-    const road=buildings.filter(b=>this.definition(b.typeId||b.type)?.visual?.kind==='road');
-    const points=road.map(b=>this.worldPosition(b.x,b.z));
-    if(!points.length)for(const b of buildings){const r=this.definition(b.typeId||b.type);if(r){const p=this.worldPosition(b.x,b.z,r.footprint);p.z+=(r.footprint?.[1]||1)/2+.22;points.push(p);}}
-    const population=buildings.reduce((sum,b)=>sum+levelValue(b,this.definition(b.typeId||b.type),'population',this.data.config),0);
-    this.walkPoints=points;this.citizens.setPoints(points,this.data.featureFlags?.citizens===false?0:Math.min(this.data.config?.maxCitizens??30,population));
+    const signature=JSON.stringify([this.size,this.quality,buildings.map(b=>[b.id,b.x,b.z,b.level])]);if(signature===this.pathSignature)return;this.pathSignature=signature;
+    const paths=this.paths=cityPaths(this.state,this.data.registry),settings=this.data.config.cityView;
+    if(this.pathsMesh){this.scene.remove(this.pathsMesh);this.pathsMesh.geometry.dispose();}this.pathsMesh=pathMesh(paths.cells,this.size,settings.paths);this.scene.add(this.pathsMesh);
+    const points=paths.cells.map(p=>Object.assign(this.worldPosition(p.x,p.z),{neighbors:p.neighbors}));
+    const count=Math.min(this.quality==='low'?settings.citizens.lowMax:settings.citizens.max,settings.citizens.minimum+buildings.filter(b=>!this.definition(b.typeId)?.isRoad).length*settings.citizens.perBuilding);
+    this.walkPoints=points;this.citizens.setPoints(points,this.data.featureFlags?.citizens===false?0:count);
     if(points.length&&!this.avatarPositioned){this.avatar.holder.position.copy(points[Math.floor(points.length/2)]);this.avatarPositioned=true;}
   }
   setAvatar(record) {const key=JSON.stringify(record);if(record&&this.avatarKey!==key){this.avatarKey=key;this.avatar?.setRecord(record);}}
@@ -94,6 +101,7 @@ export class IslandView {
     const floor=new T.Mesh(new T.PlaneGeometry(w-.04,d-.04),new T.MeshBasicMaterial({color,transparent:true,opacity:.48,side:T.DoubleSide,depthWrite:false}));floor.rotation.x=-Math.PI/2;floor.position.y=.025;floor.userData.ownedGeometry=true;floor.userData.ghostMaterial=true;group.add(floor);
     const box=new T.BoxGeometry(w,.055,d),border=new T.LineSegments(new T.EdgesGeometry(box),new T.LineBasicMaterial({color,linewidth:2}));box.dispose();border.position.y=.035;border.userData.ownedGeometry=true;border.userData.ghostMaterial=true;group.add(border);
     group.position.copy(this.worldPosition(x,z,[w,d]));this.scene.add(group);this.ghost=group;this.canvas.dataset.ghost=valid?'valid':'invalid';
+    if(record.requiresShore){const outward=shoreDirection(this.state,record,x,z);group.rotation.y=outward?Math.atan2(outward.x,outward.z):0;}
   }
   clearGhost() {if(this.ghost){this.scene.remove(this.ghost);this.ghost.traverse(o=>{if(o.userData.ghostMaterial)o.material.dispose();});disposeBuilding(this.ghost);this.ghost=null;}this.ghostKey=null;delete this.canvas.dataset.ghost;}
   showRadius(record,instance) {
@@ -106,11 +114,13 @@ export class IslandView {
     if(!this.renderer)return;const rect=this.canvas.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height),aspect=width/height;
     this.renderer.setPixelRatio(Math.min(this.quality==='low'?1:1.5,window.devicePixelRatio||1));this.renderer.setSize(width,height,false);
     const compact=width>height&&height<=500;
-    const span=Math.max(this.size*.86, this.size*.81/aspect)*(compact?1.05:1)/this.zoom,offset=compact?-span*.14:0;
-    this.camera.left=-span*aspect;this.camera.right=span*aspect;this.camera.top=span+offset;this.camera.bottom=-span+offset;this.camera.updateProjectionMatrix();this.updateCamera();
+    const c=this.data.config.cityView.camera;
+    if(this.compact!==compact){this.elevation=compact?c.landscapeElevation:c.elevation;this.compact=compact;}
+    const span=Math.max(this.size*(compact?c.landscapeSpanRatio:c.spanRatio),this.size*c.aspectRatio/aspect)/this.zoom,offset=compact?span*aspect*c.panelOffset:0;
+    this.camera.left=-span*aspect+offset;this.camera.right=span*aspect+offset;this.camera.top=span;this.camera.bottom=-span;this.camera.updateProjectionMatrix();this.updateCamera();
   }
   updateCamera() {if(!this.camera)return;const r=45;this.camera.position.set(this.target.x+Math.sin(this.angle)*Math.cos(this.elevation)*r,this.target.y+Math.sin(this.elevation)*r,this.target.z+Math.cos(this.angle)*Math.cos(this.elevation)*r);this.camera.lookAt(this.target);this.camera.updateMatrixWorld();}
-  home() {this.angle=.69;this.elevation=.76;this.zoom=1;this.target.set(0,.4,0);this.resize();}
+  home() {const c=this.data.config.cityView.camera;this.angle=c.angle;this.compact=undefined;this.zoom=1;this.target.set(0,.4,0);this.resize();}
   focusCell(x,z) {this.target.copy(this.worldPosition(x,z));this.updateCamera();}
   screenForCell(x,z) {const p=this.worldPosition(x,z);p.project(this.camera);const r=this.canvas.getBoundingClientRect();return {x:r.left+(p.x+1)*r.width/2,y:r.top+(1-p.y)*r.height/2};}
   screenForLandmark(id) {const p=this.environment?.landmarks[id]?.clone();if(!p)return null;p.project(this.camera);const r=this.canvas.getBoundingClientRect();return {x:r.left+(p.x+1)*r.width/2,y:r.top+(1-p.y)*r.height/2,visible:Math.abs(p.x)<1&&Math.abs(p.y)<1};}
@@ -149,17 +159,17 @@ export class IslandView {
     if(this.disposed)return;const delta=Math.min((now-this.last)/1000,.05),time=now/1000;this.last=now;
     if(!document.hidden&&!this.paused){
       this.environment.tick(time);this.citizens.tick(delta,time);
-      if(!this.route.length&&this.walkPoints?.length>1&&now>(this.nextWalk||0)){const p=this.walkPoints[Math.floor((now/3500)%this.walkPoints.length)];this.route.push({x:p.x,z:p.z});this.nextWalk=now+4000;}
+      if(!this.route.length&&this.walkPoints?.length>1&&now>(this.nextWalk||0)){const here=this.avatar.holder.position;let nearest=0;for(let i=0;i<this.walkPoints.length;i++)if(here.distanceTo(this.walkPoints[i])<here.distanceTo(this.walkPoints[nearest]))nearest=i;const p=this.walkPoints[nearest],next=this.walkPoints[p.neighbors?.[Math.floor(time)%p.neighbors.length]??nearest];this.route.push({x:p.x,z:p.z},{x:next.x,z:next.z});this.nextWalk=now+1500;}
       this.avatar.tick(delta,time,this.preview?[]:this.route);
       if(!this.preview||now-(this.lastWorldRender||0)>500){this.renderer.render(this.scene,this.camera);this.lastWorldRender=now;}
       this.renderAvatarPreview();this.samples.push(now);while(this.samples[0]<now-1000)this.samples.shift();
       if(!this.preview&&now-this.started>5000&&now-this.qualityCheckedAt>2000){
         this.qualityCheckedAt=now;
-        if(this.quality==='high'&&this.samples.length<27){this.quality='low';this.renderer.shadowMap.enabled=false;this.resize();}
+        if(this.quality==='high'&&this.samples.length<27){this.quality='low';this.renderer.shadowMap.enabled=false;this.resize();this.refreshWalkers(this.state.buildings);}
       }
     }
     this.frame=requestAnimationFrame(this.animate);
   }
-  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,models:this.models?.metrics(),renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
-  dispose() {this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();for(const item of this.groups.values())disposeBuilding(item.group);this.models?.dispose();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.renderer?.dispose();}
+  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,paths:this.paths?.routes.map(r=>({id:r.id,connected:r.connected})),pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,models:this.models?.metrics(),renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
+  dispose() {this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();this.pathsMesh?.geometry.dispose();for(const item of this.groups.values())disposeBuilding(item.group);this.models?.dispose();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.renderer?.dispose();}
 }

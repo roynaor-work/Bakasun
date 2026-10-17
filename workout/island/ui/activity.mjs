@@ -1,13 +1,13 @@
-import {createSound} from '../minigames/sound.mjs?v=g7-g3f-20261017-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g7-g3f-20261017-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g7-g3f-20261017-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=g7-g3f-20261017-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=g7-g3f-20261017-1';
-import {gameContext} from '../minigames/context.mjs?v=g7-g3f-20261017-1';
-import {gameAvailability} from '../activity/availability.mjs?v=g7-g3f-20261017-1';
-import {GameNavigation,GameShell} from './game-shell.mjs?v=g7-g3f-20261017-1';
-import {playerCard} from './soccer-card.mjs?v=g7-g3f-20261017-1';
-import {attributes} from '../activity/soccer-card.mjs?v=g7-g3f-20261017-1';
+import {createSound} from '../minigames/sound.mjs?v=g7-20261018-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=g7-20261018-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g7-20261018-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=g7-20261018-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=g7-20261018-1';
+import {gameContext} from '../minigames/context.mjs?v=g7-20261018-1';
+import {gameAvailability} from '../activity/availability.mjs?v=g7-20261018-1';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=g7-20261018-1';
+import {playerCard} from './soccer-card.mjs?v=g7-20261018-1';
+import {attributes} from '../activity/soccer-card.mjs?v=g7-20261018-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -202,7 +202,7 @@ export class ActivityInterface {
     heading.textContent=this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
     dialog.dataset.stage=context.level;
     this.navigation.game();
-    this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:['soccer','navalDuel','tennis'].includes(id)});
+    this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:gamePresentation(this.data.config,id).orientation==='landscape'});
     const eventBonuses=eventId?this.activity.bonuses():{};
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onFireSummary:summary=>{fireSummary=summary;},onError:reason=>this.ui.toast(reason),

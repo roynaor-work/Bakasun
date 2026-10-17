@@ -30,12 +30,272 @@
         "x": 516,
         "y": 8,
         "width": 216,
-        "height": 332
+        "height": 340
       },
       "rotation": [
         "soccer",
         "navalDuel",
-        "tennis"
+        "tennis",
+        "fireRescue",
+        "alienDefense"
+      ],
+      "suggested": {
+        "cell": {
+          "x": 8,
+          "z": 8
+        },
+        "valid": true
+      },
+      "harbor": {
+        "minX": -13.025000095367432,
+        "maxX": -5.472000002861023,
+        "minZ": -0.4400000572204592,
+        "maxZ": 2.6335821151733416,
+        "size": 16
+      },
+      "cityMetrics": {
+        "triangles": 28938,
+        "calls": 41,
+        "fps": 14,
+        "citizens": 24,
+        "paths": [
+          {
+            "id": "city-hall",
+            "connected": true
+          },
+          {
+            "id": "building-1",
+            "connected": true
+          },
+          {
+            "id": "building-2",
+            "connected": true
+          },
+          {
+            "id": "building-3",
+            "connected": true
+          },
+          {
+            "id": "building-4",
+            "connected": true
+          },
+          {
+            "id": "building-5",
+            "connected": true
+          },
+          {
+            "id": "building-6",
+            "connected": true
+          },
+          {
+            "id": "seed-road-10",
+            "connected": true
+          },
+          {
+            "id": "seed-road-11",
+            "connected": true
+          },
+          {
+            "id": "seed-road-3",
+            "connected": true
+          },
+          {
+            "id": "seed-road-4",
+            "connected": true
+          },
+          {
+            "id": "seed-road-5",
+            "connected": true
+          },
+          {
+            "id": "seed-road-6",
+            "connected": true
+          },
+          {
+            "id": "seed-road-7",
+            "connected": true
+          },
+          {
+            "id": "seed-road-8",
+            "connected": true
+          },
+          {
+            "id": "seed-road-9",
+            "connected": true
+          }
+        ],
+        "pixelRatio": 1,
+        "quality": "high",
+        "avatarLoaded": true,
+        "models": {
+          "requested": 3,
+          "loaded": 3,
+          "failed": 0
+        },
+        "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      },
+      "responseRoundTripMs": 37.007971000002726,
+      "feedback": [
+        {
+          "milliseconds": 15,
+          "action": "avatar-start"
+        },
+        {
+          "milliseconds": 11,
+          "action": "toggle-city"
+        },
+        {
+          "milliseconds": 7,
+          "action": "toggle-city"
+        },
+        {
+          "milliseconds": 7,
+          "action": "toggle-build"
+        },
+        {
+          "milliseconds": 15,
+          "action": "city-hall-games"
+        },
+        {
+          "milliseconds": 15,
+          "action": "close-modal"
+        },
+        {
+          "milliseconds": 15,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 7,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 7,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 7,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 1,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 1,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 1,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 9,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 9,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 9,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 3,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 3,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 3,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 11,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 11,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 11,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 5,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 5,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 5,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 13,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 13,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 13,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 7,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 7,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 7,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 15,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 15,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 15,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 9,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 9,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 7,
+          "action": "open-city-hall"
+        },
+        {
+          "milliseconds": 3,
+          "action": "close-info"
+        },
+        {
+          "milliseconds": 3,
+          "action": "move"
+        },
+        {
+          "milliseconds": 3,
+          "action": "help-placement"
+        }
       ],
       "checks": {
         "boundedCityDetails": true,
@@ -50,10 +310,7 @@
       "errors": [],
       "outside": [],
       "shots": [
-        "city-card.webp",
-        "portrait-pause.webp",
-        "portrait-pause.webp",
-        "portrait-pause.webp"
+        "city-landscape.webp"
       ]
     },
     {
@@ -73,20 +330,280 @@
       },
       "dock": {
         "x": 596,
-        "y": 151,
+        "y": 122,
         "width": 240,
-        "height": 231
+        "height": 260
       },
       "info": {
         "x": 596,
         "y": 8,
         "width": 240,
-        "height": 332
+        "height": 340
       },
       "rotation": [
         "soccer",
         "navalDuel",
-        "tennis"
+        "tennis",
+        "fireRescue",
+        "alienDefense"
+      ],
+      "suggested": {
+        "cell": {
+          "x": 8,
+          "z": 8
+        },
+        "valid": true
+      },
+      "harbor": {
+        "minX": -13.025000095367432,
+        "maxX": -5.472000002861023,
+        "minZ": -0.4400000572204592,
+        "maxZ": 2.6335821151733416,
+        "size": 16
+      },
+      "cityMetrics": {
+        "triangles": 28938,
+        "calls": 41,
+        "fps": 20,
+        "citizens": 24,
+        "paths": [
+          {
+            "id": "city-hall",
+            "connected": true
+          },
+          {
+            "id": "building-1",
+            "connected": true
+          },
+          {
+            "id": "building-2",
+            "connected": true
+          },
+          {
+            "id": "building-3",
+            "connected": true
+          },
+          {
+            "id": "building-4",
+            "connected": true
+          },
+          {
+            "id": "building-5",
+            "connected": true
+          },
+          {
+            "id": "building-6",
+            "connected": true
+          },
+          {
+            "id": "seed-road-10",
+            "connected": true
+          },
+          {
+            "id": "seed-road-11",
+            "connected": true
+          },
+          {
+            "id": "seed-road-3",
+            "connected": true
+          },
+          {
+            "id": "seed-road-4",
+            "connected": true
+          },
+          {
+            "id": "seed-road-5",
+            "connected": true
+          },
+          {
+            "id": "seed-road-6",
+            "connected": true
+          },
+          {
+            "id": "seed-road-7",
+            "connected": true
+          },
+          {
+            "id": "seed-road-8",
+            "connected": true
+          },
+          {
+            "id": "seed-road-9",
+            "connected": true
+          }
+        ],
+        "pixelRatio": 1,
+        "quality": "high",
+        "avatarLoaded": true,
+        "models": {
+          "requested": 3,
+          "loaded": 3,
+          "failed": 0
+        },
+        "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      },
+      "responseRoundTripMs": 86.31936099999803,
+      "feedback": [
+        {
+          "milliseconds": 6,
+          "action": "avatar-start"
+        },
+        {
+          "milliseconds": 2,
+          "action": "toggle-city"
+        },
+        {
+          "milliseconds": 14,
+          "action": "toggle-city"
+        },
+        {
+          "milliseconds": 14,
+          "action": "toggle-build"
+        },
+        {
+          "milliseconds": 6,
+          "action": "city-hall-games"
+        },
+        {
+          "milliseconds": 6,
+          "action": "close-modal"
+        },
+        {
+          "milliseconds": 6,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 14,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 14,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 14,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 8,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 8,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 8,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 16,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 16,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 16,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 10,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 10,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 10,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 2,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 2,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 2,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 12,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 12,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 12,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 4,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 4,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 4,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 14,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 14,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 14,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 6,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 6,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 6,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 16,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 16,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 14,
+          "action": "open-city-hall"
+        },
+        {
+          "milliseconds": 10,
+          "action": "close-info"
+        },
+        {
+          "milliseconds": 10,
+          "action": "move"
+        },
+        {
+          "milliseconds": 10,
+          "action": "help-placement"
+        }
       ],
       "checks": {
         "boundedCityDetails": true,
@@ -100,7 +617,14 @@
       },
       "errors": [],
       "outside": [],
-      "shots": []
+      "shots": [
+        "city-hall.webp",
+        "placement-help.webp",
+        "harbor-water.webp",
+        "beach-paths-people.webp",
+        "tennis-controls.webp",
+        "exit-question.webp"
+      ]
     },
     {
       "width": 390,
@@ -127,12 +651,272 @@
         "x": 80,
         "y": 188,
         "width": 302,
-        "height": 332
+        "height": 340
       },
       "rotation": [
         "soccer",
         "navalDuel",
-        "tennis"
+        "tennis",
+        "fireRescue",
+        "alienDefense"
+      ],
+      "suggested": {
+        "cell": {
+          "x": 8,
+          "z": 8
+        },
+        "valid": true
+      },
+      "harbor": {
+        "minX": -13.025000095367432,
+        "maxX": -5.472000002861023,
+        "minZ": -0.4400000572204592,
+        "maxZ": 2.6335821151733416,
+        "size": 16
+      },
+      "cityMetrics": {
+        "triangles": 28938,
+        "calls": 41,
+        "fps": 14,
+        "citizens": 24,
+        "paths": [
+          {
+            "id": "city-hall",
+            "connected": true
+          },
+          {
+            "id": "building-1",
+            "connected": true
+          },
+          {
+            "id": "building-2",
+            "connected": true
+          },
+          {
+            "id": "building-3",
+            "connected": true
+          },
+          {
+            "id": "building-4",
+            "connected": true
+          },
+          {
+            "id": "building-5",
+            "connected": true
+          },
+          {
+            "id": "building-6",
+            "connected": true
+          },
+          {
+            "id": "seed-road-10",
+            "connected": true
+          },
+          {
+            "id": "seed-road-11",
+            "connected": true
+          },
+          {
+            "id": "seed-road-3",
+            "connected": true
+          },
+          {
+            "id": "seed-road-4",
+            "connected": true
+          },
+          {
+            "id": "seed-road-5",
+            "connected": true
+          },
+          {
+            "id": "seed-road-6",
+            "connected": true
+          },
+          {
+            "id": "seed-road-7",
+            "connected": true
+          },
+          {
+            "id": "seed-road-8",
+            "connected": true
+          },
+          {
+            "id": "seed-road-9",
+            "connected": true
+          }
+        ],
+        "pixelRatio": 1,
+        "quality": "high",
+        "avatarLoaded": true,
+        "models": {
+          "requested": 3,
+          "loaded": 3,
+          "failed": 0
+        },
+        "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      },
+      "responseRoundTripMs": 77.67367499999818,
+      "feedback": [
+        {
+          "milliseconds": 14,
+          "action": "avatar-start"
+        },
+        {
+          "milliseconds": 10,
+          "action": "toggle-city"
+        },
+        {
+          "milliseconds": 6,
+          "action": "toggle-city"
+        },
+        {
+          "milliseconds": 6,
+          "action": "toggle-build"
+        },
+        {
+          "milliseconds": 14,
+          "action": "city-hall-games"
+        },
+        {
+          "milliseconds": 14,
+          "action": "close-modal"
+        },
+        {
+          "milliseconds": 14,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 6,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 6,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 6,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 16,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 16,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 16,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 8,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 8,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 8,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 2,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 2,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 2,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 10,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 10,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 10,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 4,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 4,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 4,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 12,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 12,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 12,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 6,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 6,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 6,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 14,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 14,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 14,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 8,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 8,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 6,
+          "action": "open-city-hall"
+        },
+        {
+          "milliseconds": 2,
+          "action": "close-info"
+        },
+        {
+          "milliseconds": 2,
+          "action": "move"
+        },
+        {
+          "milliseconds": 2,
+          "action": "help-placement"
+        }
       ],
       "checks": {
         "boundedCityDetails": true,
@@ -146,7 +930,9 @@
       },
       "errors": [],
       "outside": [],
-      "shots": []
+      "shots": [
+        "city-portrait.webp"
+      ]
     },
     {
       "width": 1440,
@@ -173,12 +959,272 @@
         "x": 1082,
         "y": 188,
         "width": 350,
-        "height": 332
+        "height": 340
       },
       "rotation": [
         "soccer",
         "navalDuel",
-        "tennis"
+        "tennis",
+        "fireRescue",
+        "alienDefense"
+      ],
+      "suggested": {
+        "cell": {
+          "x": 8,
+          "z": 8
+        },
+        "valid": true
+      },
+      "harbor": {
+        "minX": -13.025000095367432,
+        "maxX": -5.472000002861023,
+        "minZ": -0.4400000572204592,
+        "maxZ": 2.6335821151733416,
+        "size": 16
+      },
+      "cityMetrics": {
+        "triangles": 27954,
+        "calls": 41,
+        "fps": 13,
+        "citizens": 18,
+        "paths": [
+          {
+            "id": "city-hall",
+            "connected": true
+          },
+          {
+            "id": "building-1",
+            "connected": true
+          },
+          {
+            "id": "building-2",
+            "connected": true
+          },
+          {
+            "id": "building-3",
+            "connected": true
+          },
+          {
+            "id": "building-4",
+            "connected": true
+          },
+          {
+            "id": "building-5",
+            "connected": true
+          },
+          {
+            "id": "building-6",
+            "connected": true
+          },
+          {
+            "id": "seed-road-10",
+            "connected": true
+          },
+          {
+            "id": "seed-road-11",
+            "connected": true
+          },
+          {
+            "id": "seed-road-3",
+            "connected": true
+          },
+          {
+            "id": "seed-road-4",
+            "connected": true
+          },
+          {
+            "id": "seed-road-5",
+            "connected": true
+          },
+          {
+            "id": "seed-road-6",
+            "connected": true
+          },
+          {
+            "id": "seed-road-7",
+            "connected": true
+          },
+          {
+            "id": "seed-road-8",
+            "connected": true
+          },
+          {
+            "id": "seed-road-9",
+            "connected": true
+          }
+        ],
+        "pixelRatio": 1,
+        "quality": "low",
+        "avatarLoaded": true,
+        "models": {
+          "requested": 3,
+          "loaded": 3,
+          "failed": 0
+        },
+        "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      },
+      "responseRoundTripMs": 42.48917300000903,
+      "feedback": [
+        {
+          "milliseconds": 3,
+          "action": "avatar-start"
+        },
+        {
+          "milliseconds": 15,
+          "action": "toggle-city"
+        },
+        {
+          "milliseconds": 11,
+          "action": "toggle-city"
+        },
+        {
+          "milliseconds": 11,
+          "action": "toggle-build"
+        },
+        {
+          "milliseconds": 3,
+          "action": "city-hall-games"
+        },
+        {
+          "milliseconds": 3,
+          "action": "close-modal"
+        },
+        {
+          "milliseconds": 3,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 11,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 11,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 11,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 5,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 5,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 5,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 13,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 13,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 13,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 7,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 7,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 7,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 15,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 15,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 15,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 9,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 9,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 9,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 1,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 1,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 1,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 11,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 11,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 11,
+          "action": "game-understood"
+        },
+        {
+          "milliseconds": 3,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 3,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 3,
+          "action": "game-resume"
+        },
+        {
+          "milliseconds": 13,
+          "action": "game-rotate-pause"
+        },
+        {
+          "milliseconds": 13,
+          "action": "game-exit"
+        },
+        {
+          "milliseconds": 11,
+          "action": "open-city-hall"
+        },
+        {
+          "milliseconds": 7,
+          "action": "close-info"
+        },
+        {
+          "milliseconds": 7,
+          "action": "move"
+        },
+        {
+          "milliseconds": 7,
+          "action": "help-placement"
+        }
       ],
       "checks": {
         "boundedCityDetails": true,

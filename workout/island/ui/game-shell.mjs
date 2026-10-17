@@ -39,13 +39,14 @@ export class GameNavigation {
   dispose(){this.target.removeEventListener('popstate',this.listener);}
 }
 
+export function gamePresentation(config,id){return config.gameShell.games[id];}
 /** Shared fullscreen, pause, visibility and input/audio lifecycle for every adapter. */
 export class GameShell {
   constructor({dialog,stage,controls,pauseButton,sound,t,onExit,landscape=false}) {
     Object.assign(this,{dialog,stage,controls,pauseButton,sound,t,onExit});
     this.events=new AbortController();this.paused=false;this.disposed=false;
     const options={signal:this.events.signal};
-    pauseButton.addEventListener('click',()=>this.paused?this.resume():this.pause(),options);
+    pauseButton.addEventListener('click',()=>this.paused?this.resume():this.pause('exit'),options);
     document.addEventListener('visibilitychange',()=>{if(document.hidden)this.pause();},options);
     document.addEventListener('fullscreenchange',()=>{
       if(document.fullscreenElement===dialog)this.wasFullscreen=true;
@@ -92,8 +93,9 @@ export class GameShell {
     const heading=document.createElement('h2');heading.textContent=this.t(kind==='exit'?'game.exitQuestion':'game.paused');card.append(heading);
     if(content)card.append(content);
     const actions=document.createElement('div');actions.className='game-pause-actions';
-    const resume=document.createElement('button');resume.type='button';resume.className='primary-button';resume.dataset.action='game-resume';resume.textContent=this.t(kind==='exit'?'game.stay':'game.resume');resume.onclick=()=>this.resume();
-    const exit=document.createElement('button');exit.type='button';exit.className='secondary-button';exit.dataset.action='game-exit';exit.textContent=this.t('game.leave');exit.onclick=this.onExit;
+    const resume=document.createElement('button');resume.type='button';resume.className='primary-button';resume.dataset.action='game-resume';resume.textContent=this.t('game.resume');resume.onclick=()=>this.resume();
+    const exit=document.createElement('button');exit.type='button';exit.className='secondary-button';exit.dataset.action='game-exit';exit.textContent=this.t('game.returnIsland');exit.onclick=this.onExit;
+    const mute=document.createElement('button');mute.type='button';mute.className='secondary-button';mute.dataset.action='game-pause-sound';const label=()=>{mute.textContent=this.t(this.sound.muted?'sound.unmute':'sound.mute');};mute.onclick=()=>{this.sound.setMuted(!this.sound.muted);label();};label();card.append(mute);
     actions.append(resume,exit);card.append(actions);sheet.append(card);this.dialog.append(sheet);resume.focus();
   }
   resume(){
