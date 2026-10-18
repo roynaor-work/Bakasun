@@ -1,3 +1,4 @@
+import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -17,7 +18,7 @@ try{for(const viewport of viewports){
  async function nav(){await page.waitForFunction(()=>!window.__island.games.navigation.traversing);}
  async function shot(name){const wanted=width===844?['attack','defense','goal','celebrate','pause','fallback']:width===1440?['desktop']:width===390?['rotate']:[];if(!wanted.includes(name))return;const file=`${name}.webp`,png=await page.screenshot({type:'png'});
     const encoded=await page.evaluate(async base64=>{const bytes=Uint8Array.from(atob(base64),c=>c.charCodeAt(0)),bitmap=await createImageBitmap(new Blob([bytes],{type:'image/png'})),canvas=new OffscreenCanvas(bitmap.width,bitmap.height);canvas.getContext('2d').drawImage(bitmap,0,0);bitmap.close();const blob=await canvas.convertToBlob({type:'image/webp',quality:.18});return await new Promise(resolve=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result.split(',')[1]);reader.readAsDataURL(blob);});},png.toString('base64'));await writeFile(directory+file,Buffer.from(encoded,'base64'));shots.push(file);}
- async function start(id='soccer'){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await tick(100);await nav();}
+ async function start(id='soccer'){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await waitForGameStart(page);await tick(100);await nav();}
  async function exit(){if(!await page.locator('.game-pause-sheet').count())await tap('[data-action=game-pause]');await tap('[data-action=game-exit]');await nav();}
  async function scenario(defense=false){await page.evaluate(defense=>{const m=window.__island.games.current.session.debug.model,s=m.getState();m.clearInput();s.phase='playing';s.controlled=0;s.charge=0;s.charging=false;s.chargeKind=null;s.defenseIdle=0;s.autoSwitchCandidate=null;s.passTarget=null;s.sprint.value=s.sprint.capacity;s.sprint.locked=false;s.sprint.regenDelay=0;
   for(const p of s.players)Object.assign(p,{x:p.team?12:-12,z:p.id%2?7:-7,vx:0,vz:0,cooldown:0,think:100,slideTime:0,recover:0,slideCooldown:0,stealCooldown:0});Object.assign(s.players[0],{x:0,z:0,fx:1,fz:0});if(defense)Object.assign(s.players[3],{x:2,z:0});Object.assign(s.ball,{owner:defense?3:0,lastPlayer:defense?3:0,x:.62,z:0,y:.22,vx:0,vz:0,vy:0,grace:10});},defense);await tick(100);}
@@ -27,7 +28,7 @@ try{for(const viewport of viewports){
   assert.equal((await context.request.get(server.url.replace('/workout/island/','/codex-lab/island-soccer/'))).status(),404);
   await page.clock.install();await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await tap('[data-action=avatar-start]');
   await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();e.tick=()=>({ok:true});data.featureFlags.events=false;e.state.money=100000;data.config.minigames.soccer.view.slowFrameMs=10000;for(const type of ['soccer','fireStation','airbase']){let done=false;for(let z=0;z<e.state.world.size&&!done;z++)for(let x=0;x<e.state.world.size&&!done;x++)if(e.place(type,x,z).ok)done=true;if(!done)throw Error('Cannot place '+type);}e.place('road',0,7);if(!e.place('harbor',0,8).ok)throw Error('Cannot place harbor');});
-  await page.clock.pauseAt(await page.evaluate(()=>Date.now()+1000));
+  await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));
   await page.evaluate(()=>window.__island.games.stages('soccer'));const hand=page.locator('[data-action=soccer-hand]');assert.equal(await hand.isChecked(),true);await hand.uncheck();assert.equal(await page.evaluate(()=>localStorage.getItem(window.__island.data.config.minigames.soccer.controls.handednessKey)),'left');await hand.check();
   await start();await page.waitForFunction(()=>window.__island.games.current?.session.snapshot.renderMetrics.assetStatus==='ready');await tick(100);
   assert.equal(await page.locator('.soccer-controls.left-handed').count(),0);await noHelpers();

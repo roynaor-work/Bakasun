@@ -1,3 +1,4 @@
+import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
@@ -33,7 +34,7 @@ try{for(const viewport of viewports){
  try{
   assert.equal((await context.request.get(server.url.replace('/workout/island/','/codex-lab/island-soccer/'))).status(),404);
   await page.clock.install();await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await tap('[data-action=avatar-start]');
-  await page.evaluate(()=>{const {engine,data}=window.__island;engine.skipTutorial();engine.tick=()=>({ok:true});data.featureFlags.events=false;data.config.minigames.soccer.view.slowFrameMs=10000;});await page.clock.pauseAt(await page.evaluate(()=>Date.now()+100));
+  await page.evaluate(()=>{const {engine,data}=window.__island;engine.skipTutorial();engine.tick=()=>({ok:true});data.featureFlags.events=false;data.config.minigames.soccer.view.slowFrameMs=10000;});await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));
   await page.evaluate(()=>window.__island.games.menu());const locked=page.locator('.game-card[data-game=soccer]');assert.equal(await locked.getAttribute('data-locked'),'true');assert.match(await locked.innerText(),/יש לבנות מגרש כדורגל/);await locked.locator('[data-action=game-play]').tap();assert.equal(await page.locator('.required-building[data-building=soccer]').count(),1);await page.evaluate(()=>window.__island.ui.closeModal());await nav();
   const pitch=await page.evaluate(()=>{const e=window.__island.engine,r=e.place('soccer',4,8);if(!r.ok)throw Error(JSON.stringify(r));return r.id;});
   // The authentic G5 file seeds earned map stars via the production additive importer.
@@ -42,7 +43,7 @@ try{for(const viewport of viewports){
   await tap('[data-attribute=power]');assert.equal(await page.evaluate(()=>window.__island.engine.state.soccerCard.attributes.power),53);assert.equal(await page.locator('[data-attribute=pace]').isDisabled(),true);assert.match(await page.locator('.soccer-training-countdown').innerText(),/60 דקות/);await shot('training-locked');
   await page.clock.fastForward(3600_000);await tick(1100);assert.equal(await page.locator('[data-attribute=pace]').isEnabled(),true);await tap('[data-attribute=pace]');assert.equal(await page.evaluate(()=>window.__island.engine.state.soccerCard.attributes.pace),53);
   await page.evaluate(()=>window.__island.ui.closeModal());await nav();await page.evaluate(id=>window.__island.ui.showInfo(id),pitch);await tap('[data-action=soccer-training]');assert.equal(await page.locator('[data-soccer-training]').count(),1);await tap('[data-action=training-stages]');
-  await tap('[data-difficulty=hard]');assert.equal(await page.locator('[data-difficulty=hard]').getAttribute('aria-pressed'),'true');await shot('difficulty');await tap('[data-stage="1"]');if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');
+  await tap('[data-difficulty=hard]');assert.equal(await page.locator('[data-difficulty=hard]').getAttribute('aria-pressed'),'true');await shot('difficulty');await tap('[data-stage="1"]');if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await waitForGameStart(page);
   await page.waitForFunction(()=>window.__island.games.current?.session.snapshot.renderMetrics?.assetStatus==='ready');await tick(150);await nav();assert.equal((await snap()).difficulty,'hard');
   // Actual keyboard movement, followed by a weak shot facing away from the goal.
   await scenario();const initial=(await snap()).players[0];await page.keyboard.down('ArrowRight');await tick(250);await page.keyboard.up('ArrowRight');const moved=(await snap()).players[0];assert.ok(Math.hypot(moved.x-initial.x,moved.z-initial.z)>.2);

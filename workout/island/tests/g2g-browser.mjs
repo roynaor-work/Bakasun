@@ -1,3 +1,4 @@
+import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile,access} from 'node:fs/promises';
@@ -7,8 +8,8 @@ const directory=fileURLToPath(new URL('../verification/task016/',import.meta.url
 const truckExists=await access(new URL('../assets/models/fire-truck-512.glb',import.meta.url)).then(()=>true,()=>false);
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
 const reports=[];
-try{for(const width of [390,360]){
- const context=await browser.newContext({viewport:{width,height:width===390?844:740},hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[],outside=[],requests=[],events=[],shots=[];
+try{for(const width of (process.env.G2G_WIDTH?[Number(process.env.G2G_WIDTH)]:[390,360])){
+ const context=await browser.newContext({viewport:{width,height:Number(process.env.G2G_HEIGHT)||(width===390?844:740)},hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[],outside=[],requests=[],events=[],shots=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('console',message=>{if(message.type()==='error'&&!( !truckExists&&message.location().url.includes('fire-truck-512.glb')))errors.push(message.text());});
  page.on('request',request=>{const u=new URL(request.url());if(u.protocol.startsWith('http')){if(!u.pathname.includes('/workout/island/'))outside.push(u.href);else requests.push(u.href);}});
  const cdp=await context.newCDPSession(page),tick=ms=>page.clock.runFor(ms),snap=()=>page.evaluate(()=>window.__island.games.current?.session.snapshot),tap=selector=>page.locator(selector).tap();
@@ -16,14 +17,14 @@ try{for(const width of [390,360]){
  async function point(x,y){return page.locator('.minigame-canvas').evaluate((canvas,{x,y})=>{const r=canvas.getBoundingClientRect(),c=window.__island.data.config.minigames,scale=Math.min(r.width/c.width,r.height/c.height);return {x:r.x+(r.width-c.width*scale)/2+x*scale,y:r.y+(r.height-c.height*scale)/2+y*scale};},{x,y});}
  async function aim(screen){const p=await point(screen.x,screen.y);await touch('touchStart',p);await tick(20);await touch('touchEnd');await tick(20);}
  async function hold(selector,ms){const b=await page.locator(selector).boundingBox();await touch('touchStart',{x:b.x+b.width/2,y:b.y+b.height/2});await tick(ms);await touch('touchEnd');await tick(30);}
- async function start(id,stage=1){await page.evaluate(({id,stage})=>window.__island.games.start(id,undefined,stage),{id,stage});if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await tick(100);assert.ok(await snap());}
+ async function start(id,stage=1){await page.evaluate(({id,stage})=>window.__island.games.start(id,undefined,stage),{id,stage});if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await waitForGameStart(page);await tick(100);assert.ok(await snap());}
  async function exit(){await tap('[data-action=game-exit]');assert.equal(await page.evaluate(()=>window.__island.engine.isMinigameActive()),false);}
  async function screenshot(name){{const file=width+'-'+name+'.png';await page.screenshot({path:directory+file});shots.push(file);}}
  async function layout(){const measured=await page.locator('[data-game-control]').evaluateAll(nodes=>nodes.map(n=>({width:n.getBoundingClientRect().width,height:n.getBoundingClientRect().height})));for(const r of measured){assert.ok(r.width>=56,JSON.stringify(r));assert.ok(r.height>=56,JSON.stringify(r));}assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);}
  try{
   await page.clock.install();await page.goto(target,{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await tap('[data-action=avatar-start]');
   await page.evaluate(()=>{const {engine,data,games}=window.__island;engine.skipTutorial();data.featureFlags.events=false;data.config.minigames.slowFrameMs=10000;data.config.minigames.fireRescue.render.fallbackFrameMs=10000;const save=JSON.parse(engine.exportJSON());for(const id of ['fireRescue','alienDefense','navalDuel'])save.minigameProgress[id]={stage:10,stars:Array(10).fill(1)};if(!engine.importJSON(save).ok)throw Error('fixture import');const play=games.sound.play;window.__g2gEvents=[];window.__g2gRewards=[];engine.subscribe((_state,event)=>{if(event.type==='minigame')window.__g2gRewards.push(event.result);});games.sound.play=event=>{window.__g2gEvents.push(event);play(event);};});
-  await page.waitForFunction(()=>window.__island.view.metrics().models.loaded===3);await page.clock.pauseAt(await page.evaluate(()=>Date.now()+100));console.log('G2g',width,'scene and controls');
+  await page.waitForFunction(()=>window.__island.view.metrics().models.loaded===3);await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));console.log('G2g',width,'scene and controls');
   const prizesBefore=await page.evaluate(()=>window.__g2gRewards.length);await start('fireRescue');await layout();
   await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics.avatarLoaded,{},{polling:100});
   if(truckExists)await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics.truck.loaded,{},{polling:100});await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics.hydrant.loaded,{},{polling:100});await tick(50);

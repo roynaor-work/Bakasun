@@ -1,3 +1,4 @@
+import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -7,7 +8,7 @@ const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAY
 const directory=fileURLToPath(new URL('../verification/g5/',import.meta.url));await mkdir(directory,{recursive:true});
 const server=await serveIsland('/workout/island/'),browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
 const reports=[],games={soccer:['soccer','יש לבנות מגרש כדורגל'],navalDuel:['harbor','יש לבנות נמל ימי'],fireRescue:['fireStation','יש לבנות תחנת כיבוי'],alienDefense:['airbase','יש לבנות בסיס חיל אוויר']};
-const viewports=process.env.G5_WIDTH?[{width:Number(process.env.G5_WIDTH),height:844}]:[{width:390,height:844},{width:360,height:740},{width:1440,height:1000},{width:844,height:390}];
+const viewports=process.env.G5_WIDTH?[{width:Number(process.env.G5_WIDTH),height:Number(process.env.G5_HEIGHT)||844}]:[{width:390,height:844},{width:360,height:740},{width:1440,height:1000},{width:844,height:390}];
 try{for(const viewport of viewports){
  const {width,height}=viewport,context=await browser.newContext({viewport,hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[],outside=[],shots=[],checks=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
@@ -20,7 +21,7 @@ try{for(const viewport of viewports){
  async function shot(name){const file=`${width}x${height}-${name}.png`;await page.screenshot({path:directory+file});shots.push(file);}
  const progress=()=>page.evaluate(()=>{const s=window.__island.engine.state;return JSON.stringify({money:s.money,parts:s.parts,wins:s.minigameWins,stars:s.minigameProgress,team:s.team});});
  const simulation=()=>page.evaluate(()=>{const s=window.__island.games.current.session.snapshot;return Object.fromEntries(['time','elapsed','remaining','phase','score','lives','water','pressure','charge','wave','aim','players','truck','charging'].filter(k=>k in s).map(k=>[k,s[k]]));});
- async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await tick(120);await nav();assert.ok(await page.evaluate(()=>window.__island.engine.isMinigameActive()),id);}
+ async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await waitForGameStart(page);await tick(120);await nav();assert.ok(await page.evaluate(()=>window.__island.engine.isMinigameActive()),id);}
  async function back(){await page.evaluate(()=>history.back());await page.waitForSelector('[data-pause-kind=exit]');await nav();}
  try{
   assert.equal((await context.request.get(server.url.replace('/workout/island/','/codex-lab/island-soccer/'))).status(),404);
@@ -29,7 +30,7 @@ try{for(const viewport of viewports){
   await page.evaluate(()=>{const {engine,data}=window.__island;engine.skipTutorial();data.featureFlags.events=false;data.config.ui.economyTickMs=1000000;data.config.minigames.slowFrameMs=10000;data.config.minigames.navalDuel.render.fallbackFrameMs=10000;data.config.minigames.fireRescue.render.fallbackFrameMs=10000;data.config.minigames.soccer.view.slowFrameMs=10000;});
   // Freeze only the city economy; keep the real adapters and their RAF/model updates.
   await page.evaluate(()=>{window.__island.engine.tick=()=>({ok:true});});
-  await page.clock.pauseAt(await page.evaluate(()=>Date.now()+100));
+  await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));
   const baseDepth=await page.evaluate(()=>history.state.islandShell.depth),baseLength=await page.evaluate(()=>history.length);assert.equal(baseDepth,0);
   for(const [id,[building,label]]of Object.entries(games)){
    await page.evaluate(()=>window.__island.games.menu());await nav();const card=page.locator(`.game-card[data-game=${id}]`),play=card.locator('[data-action=game-play]');assert.equal(await play.innerText(),label);assert.equal(await play.isEnabled(),true);assert.equal(await card.getAttribute('data-locked'),'true');

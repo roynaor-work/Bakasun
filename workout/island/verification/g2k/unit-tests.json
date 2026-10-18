@@ -1,0 +1,84 @@
+{
+  "command": "node --test tests/*.mjs",
+  "base": "28eaec4d5ce7a7e8c8b35689a649dc6862201a1e",
+  "baseline": {
+    "tests": 1681,
+    "passed": 1642,
+    "failed": 1,
+    "skipped": 38
+  },
+  "result": {
+    "tests": 1689,
+    "passed": 1650,
+    "failed": 1,
+    "skipped": 38
+  },
+  "knownFailure": {
+    "file": "tests/island-assets.test.mjs",
+    "test": "island complete deployable folder including bundled assets stays within 15 MB",
+    "presentInBaseline": true,
+    "allowedByUser": true
+  },
+  "calibration": [
+    {
+      "seed": 1,
+      "outcome": "lose",
+      "lives": 1,
+      "seconds": 60
+    },
+    {
+      "seed": 2,
+      "outcome": "win",
+      "lives": 3,
+      "seconds": 53.66
+    },
+    {
+      "seed": 3,
+      "outcome": "win",
+      "lives": 4,
+      "seconds": 43
+    },
+    {
+      "seed": 4,
+      "outcome": "win",
+      "lives": 1,
+      "seconds": 44.66
+    },
+    {
+      "seed": 5,
+      "outcome": "win",
+      "lives": 2,
+      "seconds": 42.48
+    },
+    {
+      "seed": 6,
+      "outcome": "win",
+      "lives": 4,
+      "seconds": 54.72
+    },
+    {
+      "seed": 7,
+      "outcome": "win",
+      "lives": 4,
+      "seconds": 41.04
+    },
+    {
+      "seed": 8,
+      "outcome": "win",
+      "lives": 3,
+      "seconds": 39.58
+    },
+    {
+      "seed": 9,
+      "outcome": "win",
+      "lives": 4,
+      "seconds": 46.48
+    },
+    {
+      "seed": 10,
+      "outcome": "win",
+      "lives": 3,
+      "seconds": 45.38
+    }
+  ]
+}

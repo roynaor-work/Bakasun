@@ -1,3 +1,4 @@
+import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -6,17 +7,17 @@ const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAY
 const directory=fileURLToPath(new URL('../verification/task016/',import.meta.url)),target=process.env.ISLAND_URL||'http://127.0.0.1:8765/workout/island/?dev=1';await mkdir(directory,{recursive:true});
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']}),reports=[];
 const broken=/\/(alien-d|enemy-gunboat|hydrant|house-a|hospital|shop-corner)-512\.glb/;
-try{for(const width of [390,360])for(const failure of [false,true]){
- const context=await browser.newContext({viewport:{width,height:width===390?844:740},hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[],outside=[],requests=[];
+try{for(const width of (process.env.TASK016_WIDTH?[Number(process.env.TASK016_WIDTH)]:[390,360]))for(const failure of [false,true]){
+ const context=await browser.newContext({viewport:{width,height:Number(process.env.TASK016_HEIGHT)||(width===390?844:740)},hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[],outside=[],requests=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&!u.pathname.includes('/workout/island/'))outside.push(u.href);if(broken.test(u.pathname))requests.push(u.pathname);});
  if(failure)await page.route(broken,route=>route.fulfill({status:200,contentType:'model/gltf-binary',body:'invalid GLB for intentional fallback test'}));
  const tick=ms=>page.clock.runFor(ms),snap=()=>page.evaluate(()=>window.__island.games.current?.session.snapshot);
- async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').tap();await tick(50);}
+ async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').tap();await waitForGameStart(page);await tick(50);}
  async function exit(){await page.locator('[data-action=game-exit]').tap();}
  try{
   await page.clock.install();await page.goto(target,{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await page.locator('[data-action=avatar-start]').tap();
   await page.evaluate(()=>{const {data,engine}=window.__island;engine.skipTutorial();data.featureFlags.events=false;data.config.minigames.slowFrameMs=10000;for(const id of ['fireRescue','navalDuel'])data.config.minigames[id].render.fallbackFrameMs=10000;});
-  await page.evaluate(()=>window.__island.view.modelsReady);await page.clock.pauseAt(await page.evaluate(()=>Date.now()+100));
+  await page.evaluate(()=>window.__island.view.modelsReady);await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));
   await page.locator('[data-action=category][data-category=basic]').tap();const shopCard=page.locator('[data-action=select-building][data-building=shop]');assert.match(await shopCard.innerText(),/חנות פינתית/);assert.equal(await shopCard.isEnabled(),true);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:directory+width+'-shop-catalog-'+(failure?'fallback':'models')+'.png'});await shopCard.tap();assert.equal(await page.evaluate(()=>window.__island.view.ghost?.userData.modelPath),failure?undefined:'assets/models/shop-corner-512.glb');await page.locator('[data-action=cancel]').tap();if(await page.locator('.build-dock').getAttribute('data-open')==='true')await page.locator('[data-action=toggle-build]').tap();
   const city=await page.evaluate(async()=>{
    const T=await import('./vendor/three.module.js'),{view,engine}=window.__island,state=engine.state;

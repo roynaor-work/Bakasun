@@ -1,3 +1,4 @@
+import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile,stat} from 'node:fs/promises';
@@ -7,8 +8,8 @@ const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAY
 const directory=fileURLToPath(new URL('../verification/g3b/',import.meta.url));await mkdir(directory,{recursive:true});
 const server=await serveIsland('/workout/island/'),browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
 const reports=[],soccerColors=process.argv.includes('--soccer-colors');
-try{for(const width of (soccerColors?[390]:[390,360,1440])){
- const context=await browser.newContext({viewport:{width,height:width===360?740:width===390?844:1000},hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[],outside=[],requests=[],shots=[];
+try{for(const width of (process.env.G3B_WIDTH?[Number(process.env.G3B_WIDTH)]:soccerColors?[390]:[390,360,1440])){
+ const context=await browser.newContext({viewport:{width,height:Number(process.env.G3B_HEIGHT)||(width===360?740:width===390?844:1000)},hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[],outside=[],requests=[],shots=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')){requests.push(u.href);if(!u.pathname.startsWith('/workout/island/'))outside.push(u.href);}});
  let decodedBytes=0;const pendingBodies=new Set();page.on('response',response=>{if(!response.url().startsWith(server.url))return;const task=response.body().then(body=>{decodedBytes+=body.length;}).catch(()=>{});pendingBodies.add(task);task.finally(()=>pendingBodies.delete(task));});
@@ -16,12 +17,12 @@ try{for(const width of (soccerColors?[390]:[390,360,1440])){
  const tick=ms=>page.clock.runFor(ms),snap=()=>page.evaluate(()=>window.__island.games.current?.session.snapshot),tap=selector=>page.locator(selector).tap();
  async function shot(name){if(soccerColors&&!['soccer-pitch','failure'].includes(name))return;const file=`${width}-${name}.png`;await page.screenshot({path:directory+file});shots.push(file);}
  async function exit(){await page.evaluate(()=>{window.__previousSession=window.__island.games.current.session;window.__previousModel=window.__previousSession.debug?.model;});await tap('[data-action=game-exit]');assert.equal(await page.evaluate(()=>window.__island.engine.isMinigameActive()),false);assert.equal(await page.evaluate(()=>window.__island.view.paused),false);if(await page.evaluate(()=>Boolean(window.__previousModel)))assert.equal(await page.evaluate(()=>window.__previousSession.snapshot.disposed),true);await page.evaluate(()=>{window.__previousSnapshot=window.__previousModel?.snapshot();});}
- async function readySoccer(){if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await page.waitForFunction(()=>window.__island.games.current?.session.snapshot.renderMetrics?.assetStatus==='ready');await tick(100);assert.equal(await page.evaluate(()=>window.__island.view.paused),true);}
- async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await tick(100);}
+ async function readySoccer(){if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await waitForGameStart(page);await page.waitForFunction(()=>window.__island.games.current?.session.snapshot.renderMetrics?.assetStatus==='ready');await tick(100);assert.equal(await page.evaluate(()=>window.__island.view.paused),true);}
+ async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await waitForGameStart(page);await tick(100);}
  try{
   assert.equal((await context.request.get(server.url.replace('/workout/island/','/codex-lab/island-soccer/'))).status(),404);
   await page.clock.install();await page.goto(server.url+'?dev=1&games=1',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await tap('[data-action=avatar-start]');
-  await page.evaluate(()=>{const {engine,data}=window.__island;engine.skipTutorial();data.featureFlags.events=false;data.config.minigames.slowFrameMs=10000;data.config.minigames.navalDuel.render.fallbackFrameMs=10000;data.config.minigames.soccer.view.slowFrameMs=10000;});await page.clock.pauseAt(await page.evaluate(()=>Date.now()+100));
+  await page.evaluate(()=>{const {engine,data}=window.__island;engine.skipTutorial();data.featureFlags.events=false;data.config.minigames.slowFrameMs=10000;data.config.minigames.navalDuel.render.fallbackFrameMs=10000;data.config.minigames.soccer.view.slowFrameMs=10000;});await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));
   const initialLoadBytes=await loadBytes();
   const card=page.locator('.game-card[data-game=soccer]');assert.equal(await card.locator('[data-action=game-play]').isDisabled(),true);assert.match(await card.innerText(),/בנו מגרש כדורגל/);await shot('locked');await tap('[data-action=close-modal]');
   const pitch=await page.evaluate(()=>{const {engine}=window.__island;for(let z=0;z<16;z++)for(let x=0;x<16;x++){const result=engine.place('soccer',x,z);if(result.ok)return result;}throw Error('no soccer placement');});

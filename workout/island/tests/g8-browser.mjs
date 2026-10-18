@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {serveIsland} from '../../../tests/helpers/island-browser.mjs';
 
@@ -9,7 +9,7 @@ const directory=fileURLToPath(new URL('../verification/g8/',import.meta.url));aw
 const viewport={width:Number(process.env.G8_WIDTH)||844,height:Number(process.env.G8_HEIGHT)||390};
 // Decimal, uncompressed response bodies plus HTTP response headers. Local server
 // has no compression/cache: conservative for production, no warm-game discount.
-const budgets={city:8_000_000,gameAdditional:6_000_000};
+const {ui:{downloadBudget:budgets}}=JSON.parse(await readFile(new URL('../data/config.json',import.meta.url),'utf8'));
 const ids=['soccer','navalDuel','tennis','fireRescue','alienDefense'];
 const server=await serveIsland('/workout/island/'),browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
 const report={viewport,budgets,browser:browser.version(),physicalPhone:false,cold:[],continuity:[],fallback:[],shots:[]};
@@ -71,13 +71,13 @@ try{
    await page.waitForLoadState('networkidle');await tick(50);await run.check();console.log('G8',viewport.width,id,'downloads settled');
    const additional=run.downloads.filter(r=>r.phase!=='city').reduce((n,r)=>n+r.bytes,0);assert.ok(additional<=budgets.gameAdditional,`${id} additional ${additional}`);
    report.cold.push({id,cityBytes:run.cityBytes,additionalBytes:additional,requests:run.downloads});
-   const control=id==='fireRescue'?'[data-game-control=charge]':'#shoot';await tap(control);await tick(32);assert.equal((await trace()).calls.length,1,'first touch cannot request fullscreen');console.log('G8',viewport.width,id,'first control tapped');
+   await page.locator('.game-controls button:visible').first().tap();await tick(32);assert.equal((await trace()).calls.length,1,'first touch cannot request fullscreen');console.log('G8',viewport.width,id,'first control tapped');
    assert.equal(await page.locator('.game-status').isVisible(),false);assert.equal(await page.locator('[data-action=game-pause]').evaluate(n=>getComputedStyle(n).fontSize),'0px');
    await run.shot(id+'-controls');
    await run.rotate({width:390,height:844},true);assert.equal((await run.snap()).paused,true);await run.rotate(viewport,false);assert.equal((await trace()).calls.length,1,'rotation cannot reenter fullscreen');console.log('G8',viewport.width,id,'rotated');
    await page.goBack();await nav();assert.ok(await page.locator('.game-pause-sheet').isVisible());await tap('[data-action=game-resume]');assert.equal((await trace()).calls.length,1);
    console.log('G8',viewport.width,id,'resumed');await exit();console.log('G8',viewport.width,id,'exited');assert.equal(await page.evaluate(()=>document.fullscreenElement?.tagName),'HTML','leaving a game retains page fullscreen');
-   if(index===0){for(const other of ids){await start(other);console.log('G8',viewport.width,'continuity',other);await tap(other==='fireRescue'?'[data-game-control=charge]':'#shoot');assert.equal((await trace()).calls.length,1,'all five games share the initial request');await exit();report.continuity.push(other);}}
+   if(index===0){for(const other of ids){await start(other);console.log('G8',viewport.width,'continuity',other);await page.locator('.game-controls button:visible').first().tap();assert.equal((await trace()).calls.length,1,'all five games share the initial request');await exit();report.continuity.push(other);}}
    await run.check();
   }finally{await run.context.close();}
  }
@@ -85,7 +85,7 @@ try{
   for(const mode of ['denied','missing','installed','ios']){
    const run=await setup(mode);try{
     if(mode==='ios'){await run.page.evaluate(()=>window.__island.ui.showParent());await run.tap('[data-action=shell-install]');assert.match(await run.page.locator('.shell-install-help').innerText(),/שתף.*הוספה למסך הבית/);await run.shot('ios-install-guide');await run.tap('[data-action=close-modal]');await run.nav();}
-    await run.start('tennis',{first:true});await run.tap('#shoot');const calls=(await run.trace()).calls.length;assert.equal(calls,mode==='denied'?1:0);await run.exit();await run.check();report.fallback.push({mode,calls});
+    await run.start('tennis',{first:true});await run.page.locator('.game-controls button:visible').first().tap();const calls=(await run.trace()).calls.length;assert.equal(calls,mode==='denied'?1:0);await run.exit();await run.check();report.fallback.push({mode,calls});
    }finally{await run.context.close();}
   }
  }
