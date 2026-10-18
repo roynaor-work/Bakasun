@@ -1,0 +1,246 @@
+{
+  "browser": "Chromium / ANGLE SwiftShader",
+  "method": "two real 2-second rAF samples per variant, high quality/shadows, identical camera and city; temporary in-memory material/geometry substitutions only",
+  "reports": [
+    {
+      "width": 390,
+      "height": 844,
+      "assets": {
+        "textures": [
+          {
+            "slot": "map",
+            "width": 512,
+            "height": 512
+          },
+          {
+            "slot": "map",
+            "width": 512,
+            "height": 512
+          }
+        ],
+        "bones": 66,
+        "baseCitizenCount": 15
+      },
+      "results": [
+        {
+          "variant": "baseline",
+          "samples": [
+            7.198042132539626,
+            6.361323155216556
+          ],
+          "fps": 6.7796826438780915,
+          "triangles": 38824,
+          "calls": 35,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "two-empty-calls",
+          "samples": [
+            1.8117583114412543,
+            8.595578052623656
+          ],
+          "fps": 5.203668182032455,
+          "triangles": 38826,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "pilot",
+          "samples": [
+            7.9302141157818165,
+            8.295110764126463
+          ],
+          "fps": 8.11266243995414,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "frozen-mixer",
+          "samples": [
+            6.861063464837674,
+            2.469867615095829
+          ],
+          "fps": 4.6654655399667515,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "baked-rig",
+          "samples": [
+            7.138098410583737,
+            7.622677465460086
+          ],
+          "fps": 7.3803879380219115,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "without-textures",
+          "samples": [
+            9.111835795126751,
+            6.804167552626257
+          ],
+          "fps": 7.958001673876504,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "car-only",
+          "samples": [
+            7.171200458957463,
+            8.912214685349708
+          ],
+          "fps": 8.041707572153586,
+          "triangles": 43594,
+          "calls": 36,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "walker-only",
+          "samples": [
+            7.246026761992179,
+            7.388252678242221
+          ],
+          "fps": 7.317139720117201,
+          "triangles": 43830,
+          "calls": 36,
+          "quality": "high",
+          "pixelRatio": 1
+        }
+      ],
+      "errors": [],
+      "outside": []
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "assets": {
+        "textures": [
+          {
+            "slot": "map",
+            "width": 512,
+            "height": 512
+          },
+          {
+            "slot": "map",
+            "width": 512,
+            "height": 512
+          }
+        ],
+        "bones": 66,
+        "baseCitizenCount": 15
+      },
+      "results": [
+        {
+          "variant": "baseline",
+          "samples": [
+            6.818292504748142,
+            5.906093119400974
+          ],
+          "fps": 6.362192812074558,
+          "triangles": 38824,
+          "calls": 35,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "two-empty-calls",
+          "samples": [
+            5.360362555431021,
+            7.80754403942774
+          ],
+          "fps": 6.58395329742938,
+          "triangles": 38826,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "pilot",
+          "samples": [
+            7.271317077899064,
+            7.804116671544237
+          ],
+          "fps": 7.53771687472165,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "frozen-mixer",
+          "samples": [
+            5.1815708795716535,
+            5.934131144297198
+          ],
+          "fps": 5.557851011934426,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "baked-rig",
+          "samples": [
+            8.044290919415136,
+            7.621588148429072
+          ],
+          "fps": 7.832939533922104,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "without-textures",
+          "samples": [
+            7.6350448558875,
+            3.619516432604238
+          ],
+          "fps": 5.627280644245869,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "car-only",
+          "samples": [
+            8.350525591904532,
+            8.245222621010756
+          ],
+          "fps": 8.297874106457645,
+          "triangles": 43594,
+          "calls": 36,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "walker-only",
+          "samples": [
+            6.7567567567558555,
+            6.580300226196816
+          ],
+          "fps": 6.668528491476335,
+          "triangles": 43830,
+          "calls": 36,
+          "quality": "high",
+          "pixelRatio": 1
+        }
+      ],
+      "errors": [],
+      "outside": []
+    }
+  ]
+}
