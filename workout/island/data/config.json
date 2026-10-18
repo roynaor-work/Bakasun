@@ -2913,7 +2913,19 @@
      "beam": 1,
      "length": 1.15,
      "turrets": 2,
-     "hull": "#9c586b"
+     "hull": "#9c586b",
+     "modelSpec": {
+      "path": "assets/models/enemy-ship-b-512.glb",
+      "rotationY": -90,
+      "scale": 1,
+      "length": 9.6,
+      "waterline": 0.3,
+      "cannonPivot": [
+       0,
+       1.8,
+       -2.1
+      ]
+     }
     },
     {
      "hp": 0.85,
@@ -2949,7 +2961,19 @@
     "beam": 1.4,
     "length": 1.5,
     "turrets": 4,
-    "hull": "#b66851"
+    "hull": "#b66851",
+    "modelSpec": {
+     "path": "assets/models/boss-ship-512.glb",
+     "rotationY": -90,
+     "scale": 1,
+     "length": 10.2,
+     "waterline": 0.3,
+     "cannonPivot": [
+      0,
+      1.8,
+      -2.1
+     ]
+    }
    },
    "enemySalvoStage": 7,
    "enemySalvoShots": 2,
@@ -3186,7 +3210,58 @@
     "cloud": "#ffffff",
     "cameraEase": 3.2,
     "maxTriangles": 90000,
-    "maxDrawCalls": 70
+    "maxDrawCalls": 70,
+    "follow": {
+     "distance": 21,
+     "height": 12,
+     "lookAhead": 24,
+     "lookHeight": 0.8,
+     "aimDistance": 10,
+     "aimHeight": 7.5,
+     "aimFov": 36,
+     "fov": 55,
+     "aimFocus": 0.9,
+     "aimForwardMin": 3,
+     "ease": 6,
+     "near": 0.1,
+     "far": 220
+    },
+    "hud": {
+     "margin": 16,
+     "top": 20,
+     "barWidth": 78,
+     "barHeight": 5,
+     "gap": 30,
+     "font": "bold 12px sans-serif",
+     "labelHeight": 28,
+     "edgeInset": 24,
+     "ringRadius": 19,
+     "ringHeight": 8,
+     "crossRadius": 27
+    },
+    "effects": {
+     "flashSeconds": 0.18,
+     "smokeSeconds": 0.55,
+     "muzzleY": 1.95,
+     "muzzleForward": 3.8,
+     "smokeSize": 0.6,
+     "flashSize": 1.1,
+     "submergedY": 1.3,
+     "periscopeHeight": 4,
+     "periscopeBeam": 0.26,
+     "subLength": 7.8,
+     "subBeam": 0.65,
+     "subTube": 0.22,
+     "vulcanBarrels": 6,
+     "vulcanRadius": 0.14,
+     "vulcanLength": 1.5,
+     "vulcanSpin": 22,
+     "projectileHeightScale": 0.24,
+     "torpedoHeight": 0.16,
+     "healthLift": 4.2,
+     "maxProjectiles": 24,
+     "splashCount": 12
+    }
    },
    "combat": {
     "heavySpeed": 0.85,
@@ -3269,7 +3344,50 @@
     "autoLead": 0.7,
     "hullLength": 34,
     "hullBeam": 16,
-    "torpedoTurnRadians": 0.07
+    "torpedoTurnRadians": 0.07,
+    "difficulty": [
+     {
+      "assist": 0.68,
+      "radius": 72
+     },
+     {
+      "assist": 0.645,
+      "radius": 69
+     },
+     {
+      "assist": 0.61,
+      "radius": 66
+     },
+     {
+      "assist": 0.575,
+      "radius": 63
+     },
+     {
+      "assist": 0.54,
+      "radius": 60
+     },
+     {
+      "assist": 0.505,
+      "radius": 57
+     },
+     {
+      "assist": 0.47,
+      "radius": 54
+     },
+     {
+      "assist": 0.435,
+      "radius": 51
+     },
+     {
+      "assist": 0.4,
+      "radius": 48
+     },
+     {
+      "assist": 0.365,
+      "radius": 45
+     }
+    ],
+    "predictionSteps": 3
    }
   },
   "art": {

@@ -1,0 +1,116 @@
+{
+  "base": "54abefb",
+  "originalBaseline": "28eaec4",
+  "sourceSHA256": {
+    "workout/island/data/config.json": "fbadcae78a3a22ae7dc8675bed5d2bf5fa68ed7d1f6ab2fa3cc0fc1c30f8bd54",
+    "workout/island/minigames/naval-camera.mjs": "23eda6a33a3145d0a4bece99b45c57d3af6fe6259c6a794773626110c5b7ef87",
+    "workout/island/minigames/naval-controls.mjs": "9004ce275a1d3d41133f58475136ab7fc729e019695fbe9b1dc57a4ce0bd93c7",
+    "workout/island/minigames/naval-icons.mjs": "872a77d887c963af11ba181580ad64f7d390db86f7d8302526363399da9b1ab0",
+    "workout/island/minigames/naval-view.mjs": "262c62b738e3803c8d6a32ba4c9eca6760e995a89ac17161d7abbfc30d91ad6d",
+    "workout/island/minigames/naval.css": "1c779ce41377b224745d7af12819550d60e94d09fe27516fa660dafff6e1cf66",
+    "workout/island/minigames/naval.mjs": "7355ce23608326781715ecc6a41da8e005b3a06d13ca04d6515b852a9d625ba9"
+  },
+  "node": {
+    "tests": 1735,
+    "pass": 1696,
+    "fail": 1,
+    "skipped": 38
+  },
+  "onlyFailure": "island complete deployable folder including bundled assets stays within 15 MB",
+  "measuredFolderBytes": 19517761,
+  "baselineNode": {
+    "tests": 1681,
+    "pass": 1642,
+    "fail": 1,
+    "skipped": 38
+  },
+  "comparison": {
+    "viewport": [
+      844,
+      390
+    ],
+    "seed": 0,
+    "time": 0.128,
+    "samePlayer": true,
+    "sameEnemy": true
+  },
+  "renderMaximum": {
+    "844": {
+      "triangles": 17509,
+      "drawCalls": 52
+    },
+    "740": {
+      "triangles": 17509,
+      "drawCalls": 52
+    },
+    "1440": {
+      "triangles": 17509,
+      "drawCalls": 52
+    }
+  },
+  "screenshots": [
+    "after-844.webp",
+    "aim-zoom.webp",
+    "before-844.webp",
+    "cannon-flash.webp",
+    "fallback.webp",
+    "hit.webp",
+    "manual-reticle.webp",
+    "submarine.webp",
+    "torpedo.webp",
+    "vulcan.webp"
+  ],
+  "previousVerification": {
+    "base": "fa3b133",
+    "node": {
+      "tests": 1704,
+      "pass": 1665,
+      "fail": 1,
+      "skipped": 38
+    }
+  },
+  "mergeCommit": "93d33a4b22a323fcc39de236f87df9f8dfd6c6da",
+  "restoredModels": {
+    "source": "fa3b133880234a0d88d0226b61db011a0dfdb30b",
+    "files": {
+      "boss-ship-512.glb": {
+        "bytes": 321364,
+        "sha256": "42745c648a75efc9ab477917fa8e7a3c81ccf20b55ecc54c4ef59e3ad45a13a5"
+      },
+      "enemy-ship-b-512.glb": {
+        "bytes": 276116,
+        "sha256": "6c6c5a61cfa5fc62479339be7c071d1e021980d032a159d0b103972f82277844"
+      }
+    }
+  },
+  "compatibilityClickRegression": {
+    "beforeFixFired": 2,
+    "newUnitTests": 3,
+    "releaseByViewport": {
+      "844": {
+        "fired": 1,
+        "ammo": 27,
+        "touchCompatibilityClick": {
+          "detail": 0,
+          "pointerType": "touch"
+        }
+      },
+      "740": {
+        "fired": 1,
+        "ammo": 27,
+        "touchCompatibilityClick": {
+          "detail": 0,
+          "pointerType": "touch"
+        }
+      },
+      "1440": {
+        "fired": 1,
+        "ammo": 27,
+        "touchCompatibilityClick": {
+          "detail": 0,
+          "pointerType": "touch"
+        }
+      }
+    }
+  }
+}
