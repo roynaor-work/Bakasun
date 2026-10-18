@@ -1218,8 +1218,8 @@
      "alienSpeed": 10,
      "drop": 6,
      "shotSeconds": 0.36,
-     "boltSeconds": 2.3,
-     "boltSpeed": 85,
+     "boltSeconds": 2.21,
+     "boltSpeed": 120,
      "points": 10,
      "winMoney": 30,
      "winParts": 0,
@@ -1467,7 +1467,8 @@
      "scoreLimit": 230000,
      "bossShots": 2,
      "rewardScoreLimit": 1750,
-     "killsPerBonus": 16
+     "killsPerBonus": 16,
+     "diveClearance": 100
     }
    ],
    "maxAliens": 48,
@@ -1779,12 +1780,12 @@
      "shield": 0
     },
     {
-     "motion": "static",
+     "motion": "drift",
      "shoots": true,
      "shield": 0
     },
     {
-     "motion": "static",
+     "motion": "drift",
      "shoots": true,
      "shield": 0
     },
@@ -1866,7 +1867,16 @@
      "#a5e68a",
      "#f58da5"
     ],
-    "shipPixelScale": 1.25
+    "shipPixelScale": 1.5,
+    "bankAngle": 0.24,
+    "rocketTrailCount": 12,
+    "rocketTrailSpacing": 0.025,
+    "hudInset": 18,
+    "hudHeartSize": 8,
+    "hudHeartGap": 22,
+    "hudDotRadius": 4,
+    "hudDotGap": 16,
+    "facingCorrectionDegrees": 180
    },
    "formation": {
     "rowGap": 52,
@@ -1907,6 +1917,21 @@
     "handednessKey": "island.aliens.hand",
     "aimDragThreshold": 14,
     "aimHeightPixels": 90
+   },
+   "tactics": {
+    "firstDiveSeconds": 4.2,
+    "diveEverySeconds": 6,
+    "diveSeconds": 3.4,
+    "diveSway": 20,
+    "diveClearance": 85,
+    "descentSpeed": 0.25,
+    "entrySway": 8
+   },
+   "calibration": {
+    "reactionSeconds": 0.24,
+    "stepSeconds": 0.02,
+    "seeds": 10,
+    "minimumWins": 7
    }
   },
   "fireRescue": {
