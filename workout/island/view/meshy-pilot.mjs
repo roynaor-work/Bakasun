@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from './local-models.mjs?v=task017-20261017-1';
-import {GROUND} from './environment.mjs?v=task017-20261017-1';
+import {LocalModels} from './local-models.mjs?v=g2j-20261019-1';
+import {GROUND} from './environment.mjs?v=g2j-20261019-1';
 
 /** One cosmetic walker. Each instance owns its mixer and cloned skeleton;
  * geometry, materials and clips remain owned by LocalModels. */

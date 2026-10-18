@@ -1,9 +1,9 @@
-import {soccerCrowd} from './soccer-crowd.mjs?v=task017-20261017-1';
+import {soccerCrowd} from './soccer-crowd.mjs?v=g2j-20261019-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig} from './soccer-rig.mjs?v=task017-20261017-1';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint} from './soccer-presentation.mjs?v=task017-20261017-1';
+import {cloneSoccerRig} from './soccer-rig.mjs?v=g2j-20261019-1';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint} from './soccer-presentation.mjs?v=g2j-20261019-1';
 
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   const roster=config.players.roster;let poseFocus=null,poseMode=null,poses=[];

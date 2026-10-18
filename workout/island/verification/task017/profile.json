@@ -1,0 +1,1126 @@
+{
+  "browser": "Chromium / ANGLE SwiftShader",
+  "method": "seven interleaved synchronous render+gl.finish timings per variant, alternating order after shader warmup; pilot CPU tick measured separately",
+  "reports": [
+    {
+      "width": 390,
+      "height": 844,
+      "assets": {
+        "textures": [
+          {
+            "slot": "map",
+            "width": 512,
+            "height": 512
+          },
+          {
+            "slot": "map",
+            "width": 512,
+            "height": 512
+          }
+        ],
+        "bones": 66,
+        "baseCitizenCount": 15
+      },
+      "results": [
+        {
+          "variant": "baseline",
+          "samples": [
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 0.8999999999068677,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 0.8999999999068677,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.5,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2000000001862645,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.1000000000931323,
+          "medianCpuPilotMs": 0,
+          "triangles": 38824,
+          "calls": 35,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "two-empty-calls",
+          "samples": [
+            {
+              "renderMs": 1,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3999999999068677,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2000000001862645,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.400000000372529,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.1000000000931323,
+          "medianCpuPilotMs": 0,
+          "triangles": 38826,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "pilot",
+          "samples": [
+            {
+              "renderMs": 2.7999999998137355,
+              "cpuPilotMs": 0.39999999990686774,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.5,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.6000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3999999999068677,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3999999999068677,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.3999999999068677,
+          "medianCpuPilotMs": 0,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "frozen-mixer",
+          "samples": [
+            {
+              "renderMs": 1.900000000372529,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.8000000002793968,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.6000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3000000002793968,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3999999999068677,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.3999999999068677,
+          "medianCpuPilotMs": 0,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "baked-rig",
+          "samples": [
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.5,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3999999999068677,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.5,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.2999999998137355,
+          "medianCpuPilotMs": 0,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "without-textures",
+          "samples": [
+            {
+              "renderMs": 1.599999999627471,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.099999999627471,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3999999999068677,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.599999999627471,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3999999999068677,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.3999999999068677,
+          "medianCpuPilotMs": 0.10000000009313226,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "car-only",
+          "samples": [
+            {
+              "renderMs": 1.3000000002793968,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.6000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3000000002793968,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.8000000002793968,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.5,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.3000000002793968,
+          "medianCpuPilotMs": 0,
+          "triangles": 43594,
+          "calls": 36,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "walker-only",
+          "samples": [
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.099999999627471,
+              "cpuPilotMs": 0.20000000018626451,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.6999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.6000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.6000000000931323,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 2.5,
+              "cpuPilotMs": 0,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.6000000000931323,
+          "medianCpuPilotMs": 0,
+          "triangles": 43830,
+          "calls": 36,
+          "quality": "high",
+          "pixelRatio": 1
+        }
+      ],
+      "errors": [],
+      "outside": []
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "assets": {
+        "textures": [
+          {
+            "slot": "map",
+            "width": 512,
+            "height": 512
+          },
+          {
+            "slot": "map",
+            "width": 512,
+            "height": 512
+          }
+        ],
+        "bones": 66,
+        "baseCitizenCount": 15
+      },
+      "results": [
+        {
+          "variant": "baseline",
+          "samples": [
+            {
+              "renderMs": 1.2000000001862645,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 0.900000000372529,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 24.5,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2000000001862645,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 38824,
+              "calls": 35,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.2000000001862645,
+          "medianCpuPilotMs": 0,
+          "triangles": 38824,
+          "calls": 35,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "two-empty-calls",
+          "samples": [
+            {
+              "renderMs": 1.6000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 0.8999999999068677,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 0.8999999999068677,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.400000000372529,
+              "cpuPilotMs": 0,
+              "triangles": 38826,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.1000000000931323,
+          "medianCpuPilotMs": 0,
+          "triangles": 38826,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "pilot",
+          "samples": [
+            {
+              "renderMs": 1.900000000372529,
+              "cpuPilotMs": 0.2999999998137355,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 23.100000000093132,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 22.799999999813735,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 3.8000000002793968,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 2.1999999997206032,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.7000000001862645,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 2.1999999997206032,
+          "medianCpuPilotMs": 0.10000000009313226,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "frozen-mixer",
+          "samples": [
+            {
+              "renderMs": 1.2000000001862645,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2000000001862645,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.7999999998137355,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.2000000001862645,
+          "medianCpuPilotMs": 0,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "baked-rig",
+          "samples": [
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.6000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.7999999998137355,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.1999999997206032,
+          "medianCpuPilotMs": 0,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "without-textures",
+          "samples": [
+            {
+              "renderMs": 1.6000000000931323,
+              "cpuPilotMs": 0.19999999972060323,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 3.3000000002793968,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1,
+              "cpuPilotMs": 0.09999999962747097,
+              "triangles": 48600,
+              "calls": 37,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.1999999997206032,
+          "medianCpuPilotMs": 0,
+          "triangles": 48600,
+          "calls": 37,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "car-only",
+          "samples": [
+            {
+              "renderMs": 1.5,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 2.8999999999068677,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 2.3000000002793968,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2000000001862645,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.400000000372529,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 43594,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.400000000372529,
+          "medianCpuPilotMs": 0,
+          "triangles": 43594,
+          "calls": 36,
+          "quality": "high",
+          "pixelRatio": 1
+        },
+        {
+          "variant": "walker-only",
+          "samples": [
+            {
+              "renderMs": 1.2999999998137355,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3000000002793968,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.6000000000931323,
+              "cpuPilotMs": 0,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.3999999999068677,
+              "cpuPilotMs": 0,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.5,
+              "cpuPilotMs": 0.10000000009313226,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.1999999997206032,
+              "cpuPilotMs": 0,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            },
+            {
+              "renderMs": 1.2000000001862645,
+              "cpuPilotMs": 0.09999999962747097,
+              "triangles": 43830,
+              "calls": 36,
+              "quality": "high",
+              "pixelRatio": 1
+            }
+          ],
+          "medianRenderMs": 1.3000000002793968,
+          "medianCpuPilotMs": 0.09999999962747097,
+          "triangles": 43830,
+          "calls": 36,
+          "quality": "high",
+          "pixelRatio": 1
+        }
+      ],
+      "errors": [],
+      "outside": []
+    }
+  ]
+}

@@ -2,21 +2,22 @@
   "baseCommit": "fa3b133880234a0d88d0226b61db011a0dfdb30b",
   "baseTrackedIslandBytes": 32992172,
   "dataVersionBefore": "g2j-20261019-1",
-  "dataVersionAfter": "task017-20261017-1",
+  "dataVersionAfter": "g2j-20261019-1",
+  "existingVersionLinksUnchanged": true,
   "saveVersionBefore": 15,
   "saveVersionAfter": 15,
   "node": {
-    "command": "node --test tests/*.mjs",
-    "passed": 1647,
-    "failed": 0,
-    "skipped": 38,
-    "total": 1685,
-    "base": {
-      "passed": 1642,
-      "failed": 1,
+    "command": "node --test --test-reporter=tap tests/*.mjs",
+    "summary": {
+      "tests": 1685,
+      "pass": 1646,
+      "fail": 1,
       "skipped": 38,
-      "failure": "old whole-folder 15 MB budget, already exceeded by uploaded library"
-    }
+      "cancelled": 0
+    },
+    "onlyFailure": [
+      "island complete deployable folder including bundled assets stays within 15 MB"
+    ]
   },
   "browser": {
     "cases": 8,
@@ -31,10 +32,62 @@
     "initialPreImplementation": "initial/before.json",
     "cameraEqual": true
   },
+  "qaNotes": "workout/island/notes/task017-pilot-qa.md",
+  "testFiles": [
+    "tests/island-task017-pilot.test.mjs",
+    "workout/island/tests/task017-pilot-browser.mjs"
+  ],
   "unchangedPaths": [
     "codex-lab/**",
     "**/vendor/**",
-    "**/*.glb"
+    "**/*.glb",
+    "workout/island/app.mjs",
+    "workout/island/index.html",
+    "workout/island/release.mjs",
+    "workout/island/engine/persistence.mjs",
+    "workout/island/ui/**",
+    "workout/island/styles.css",
+    "tests/island-assets.test.mjs",
+    "CHANGELOG.md",
+    "QA.md"
   ],
-  "activeRuntimeBytes": 9155800
+  "changedFiles": [
+    "tests/island-task017-pilot.test.mjs",
+    "workout/island/data/config.json",
+    "workout/island/notes/task017-pilot-qa.md",
+    "workout/island/tests/task017-pilot-browser.mjs",
+    "workout/island/verification/task017/after-390x844.png",
+    "workout/island/verification/task017/after-844x390.png",
+    "workout/island/verification/task017/after.json",
+    "workout/island/verification/task017/before-390x844.png",
+    "workout/island/verification/task017/before-844x390.png",
+    "workout/island/verification/task017/before.json",
+    "workout/island/verification/task017/browser-390x844-both.png",
+    "workout/island/verification/task017/browser-390x844-car.png",
+    "workout/island/verification/task017/browser-390x844-none.png",
+    "workout/island/verification/task017/browser-390x844-walker.png",
+    "workout/island/verification/task017/browser-844x390-both.png",
+    "workout/island/verification/task017/browser-844x390-car.png",
+    "workout/island/verification/task017/browser-844x390-none.png",
+    "workout/island/verification/task017/browser-844x390-walker.png",
+    "workout/island/verification/task017/browser.json",
+    "workout/island/verification/task017/detail-stop.png",
+    "workout/island/verification/task017/diagnostics.json",
+    "workout/island/verification/task017/initial/before-390x844.png",
+    "workout/island/verification/task017/initial/before-844x390.png",
+    "workout/island/verification/task017/initial/before.json",
+    "workout/island/verification/task017/profile.json",
+    "workout/island/verification/task017/validation.json",
+    "workout/island/view/island-view.mjs",
+    "workout/island/view/local-models.mjs",
+    "workout/island/view/meshy-pilot.mjs",
+    "workout/island/view/skeleton-utils.mjs"
+  ],
+  "changedFileCount": 30,
+  "scopeAudit": "PASS",
+  "profiling": {
+    "raf": "diagnostics.json",
+    "synchronousWebGL": "profile.json",
+    "cause": "not conclusively isolated; large portrait FPS drop was not reproduced"
+  }
 }

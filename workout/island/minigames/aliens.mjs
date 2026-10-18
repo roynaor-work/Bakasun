@@ -1,8 +1,8 @@
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=task017-20261017-1';
-import {createAlienView} from './alien-view.mjs?v=task017-20261017-1';
-import {runCanvasGame} from './canvas-session.mjs?v=task017-20261017-1';
-import {createPool,releaseAt} from './pool.mjs?v=task017-20261017-1';
-import {oval,drawHealthBar} from './art.mjs?v=task017-20261017-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2j-20261019-1';
+import {createAlienView} from './alien-view.mjs?v=g2j-20261019-1';
+import {runCanvasGame} from './canvas-session.mjs?v=g2j-20261019-1';
+import {createPool,releaseAt} from './pool.mjs?v=g2j-20261019-1';
+import {oval,drawHealthBar} from './art.mjs?v=g2j-20261019-1';
 export function alienStack(campaign,id,rank){return (campaign.stackCurve[id]||[]).slice(0,rank).reduce((n,v)=>n+v,0);}
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 
