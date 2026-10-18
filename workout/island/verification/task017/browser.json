@@ -9,827 +9,7 @@
         "metrics": {
           "triangles": 48600,
           "calls": 37,
-          "fps": 13,
-          "citizens": 14,
-          "paths": [
-            {
-              "id": "pilot-home",
-              "connected": true
-            },
-            {
-              "id": "pilot-hospital",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-0",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-1",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-2",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-3",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-4",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-5",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-6",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-7",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-8",
-              "connected": true
-            },
-            {
-              "id": "pilot-shop",
-              "connected": true
-            }
-          ],
-          "pixelRatio": 1,
-          "quality": "high",
-          "avatarLoaded": true,
-          "models": {
-            "requested": 3,
-            "loaded": 3,
-            "failed": 0
-          },
-          "pilot": {
-            "carLoaded": true,
-            "walkerLoaded": true,
-            "carVisible": true,
-            "walkerVisible": true,
-            "stopped": true,
-            "position": [
-              -3.5,
-              0.4575,
-              -2.2
-            ],
-            "models": {
-              "requested": 2,
-              "loaded": 2,
-              "failed": 0
-            }
-          },
-          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
-        },
-        "car": {
-          "rotationY": -1.5707963267948966,
-          "scale": 0.38,
-          "minY": 0.4575,
-          "surface": 0.4575
-        },
-        "buildingModels": [
-          "assets/models/house-a-512.glb",
-          "assets/models/shop-corner-512.glb",
-          "assets/models/hospital-512.glb"
-        ],
-        "independence": {
-          "mixers": true,
-          "skeletons": true,
-          "skinCount": 1,
-          "firstPose": [
-            0.03513529771596602,
-            0.044731689278370124,
-            0.03559719794206373
-          ],
-          "heldPose": [
-            0.03513529771596602,
-            0.044731689278370124,
-            0.03559719794206373
-          ],
-          "secondPose": [
-            0.04152163298187972,
-            0.03650406690965713,
-            -0.007910633157778957
-          ],
-          "heldPosition": [
-            -3.5,
-            0.4575,
-            -2.2
-          ],
-          "firstPosition": [
-            -3.5,
-            0.4575,
-            -2.2
-          ],
-          "secondPosition": [
-            -3.62,
-            0.4575,
-            -2.2
-          ],
-          "firstStopped": true,
-          "secondStopped": false
-        },
-        "walking": {
-          "a": [
-            0.040427248219557566,
-            0.031305662595148664,
-            0.027663464003245597
-          ],
-          "b": [
-            0.04231888549746943,
-            0.04008783962220214,
-            -0.03941438435983091
-          ],
-          "positionA": [
-            -3.59,
-            0.4575,
-            -2.2
-          ],
-          "positionB": [
-            -3.65,
-            0.4575,
-            -2.2
-          ],
-          "hips": true,
-          "scale": 0.32,
-          "rotationY": 0
-        },
-        "endpoint": {
-          "stopped": true,
-          "timeScale": 0,
-          "time": 0.08333333333333333,
-          "position": [
-            -4.5,
-            0.4575,
-            -2.2
-          ],
-          "end": [
-            -4.5,
-            0.4575,
-            -2.2
-          ],
-          "pose": [
-            0.03513529771596602,
-            0.044731689278370124,
-            0.03559719794206373
-          ],
-          "stillPose": [
-            0.03513529771596602,
-            0.044731689278370124,
-            0.03559719794206373
-          ],
-          "stillPosition": [
-            -4.5,
-            0.4575,
-            -2.2
-          ],
-          "soles": {
-            "Left": 0.45749982705539083,
-            "Right": 0.45822764274984434
-          },
-          "ground": 0.4575,
-          "armAngle": 0.9558438724285778
-        },
-        "reverse": {
-          "yaw": 1.5707963267948966,
-          "outward": -1.5707963267948966,
-          "moving": true
-        },
-        "returned": {
-          "stopped": true,
-          "position": [
-            -3.5,
-            0.4575,
-            -2.2
-          ],
-          "start": [
-            -3.5,
-            0.4575,
-            -2.2
-          ]
-        },
-        "live": {
-          "before": {
-            "pose": [
-              0.03513529771596602,
-              0.044731689278370124,
-              0.03559719794206373
-            ],
-            "position": [
-              -3.5,
-              0.4575,
-              -2.2
-            ]
-          },
-          "after": {
-            "position": [
-              -3.5699900000000007,
-              0.4575,
-              -2.2
-            ],
-            "pose": [
-              0.04107775647775114,
-              0.030501099684703548,
-              0.05707005614984695
-            ]
-          }
-        },
-        "lifecycle": {
-          "hidden": {
-            "carLoaded": true,
-            "walkerLoaded": true,
-            "carVisible": false,
-            "walkerVisible": false,
-            "stopped": false,
-            "position": [
-              -3.5699900000000007,
-              0.4575,
-              -2.2
-            ],
-            "models": {
-              "requested": 2,
-              "loaded": 2,
-              "failed": 0
-            }
-          },
-          "restored": {
-            "carLoaded": true,
-            "walkerLoaded": true,
-            "carVisible": true,
-            "walkerVisible": true,
-            "stopped": true,
-            "position": [
-              -3.5,
-              0.4575,
-              -2.2
-            ],
-            "models": {
-              "requested": 2,
-              "loaded": 2,
-              "failed": 0
-            }
-          },
-          "version": 15,
-          "unchanged": true
-        }
-      },
-      "errors": [],
-      "outside": [],
-      "requests": [
-        "car-a-512.glb",
-        "adult-man-rigged-512.glb"
-      ]
-    },
-    {
-      "width": 390,
-      "height": 844,
-      "failure": "car",
-      "result": {
-        "metrics": {
-          "triangles": 43830,
-          "calls": 36,
-          "fps": 6,
-          "citizens": 14,
-          "paths": [
-            {
-              "id": "pilot-home",
-              "connected": true
-            },
-            {
-              "id": "pilot-hospital",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-0",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-1",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-2",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-3",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-4",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-5",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-6",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-7",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-8",
-              "connected": true
-            },
-            {
-              "id": "pilot-shop",
-              "connected": true
-            }
-          ],
-          "pixelRatio": 1,
-          "quality": "high",
-          "avatarLoaded": true,
-          "models": {
-            "requested": 3,
-            "loaded": 3,
-            "failed": 0
-          },
-          "pilot": {
-            "carLoaded": false,
-            "walkerLoaded": true,
-            "carVisible": false,
-            "walkerVisible": true,
-            "stopped": true,
-            "position": [
-              -3.5,
-              0.4575,
-              -2.2
-            ],
-            "models": {
-              "requested": 2,
-              "loaded": 1,
-              "failed": 1
-            }
-          },
-          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
-        },
-        "car": null,
-        "buildingModels": [
-          "assets/models/house-a-512.glb",
-          "assets/models/shop-corner-512.glb",
-          "assets/models/hospital-512.glb"
-        ],
-        "independence": {
-          "mixers": true,
-          "skeletons": true,
-          "skinCount": 1,
-          "firstPose": [
-            0.03513529771596602,
-            0.044731689278370124,
-            0.03559719794206373
-          ],
-          "heldPose": [
-            0.03513529771596602,
-            0.044731689278370124,
-            0.03559719794206373
-          ],
-          "secondPose": [
-            0.04152163298187972,
-            0.03650406690965713,
-            -0.007910633157778957
-          ],
-          "heldPosition": [
-            -3.5,
-            0.4575,
-            -2.2
-          ],
-          "firstPosition": [
-            -3.5,
-            0.4575,
-            -2.2
-          ],
-          "secondPosition": [
-            -3.62,
-            0.4575,
-            -2.2
-          ],
-          "firstStopped": true,
-          "secondStopped": false
-        },
-        "walking": {
-          "a": [
-            0.040427248219557566,
-            0.031305662595148664,
-            0.027663464003245597
-          ],
-          "b": [
-            0.04231888549746943,
-            0.04008783962220214,
-            -0.03941438435983091
-          ],
-          "positionA": [
-            -3.59,
-            0.4575,
-            -2.2
-          ],
-          "positionB": [
-            -3.65,
-            0.4575,
-            -2.2
-          ],
-          "hips": true,
-          "scale": 0.32,
-          "rotationY": 0
-        },
-        "endpoint": {
-          "stopped": true,
-          "timeScale": 0,
-          "time": 0.08333333333333333,
-          "position": [
-            -4.5,
-            0.4575,
-            -2.2
-          ],
-          "end": [
-            -4.5,
-            0.4575,
-            -2.2
-          ],
-          "pose": [
-            0.03513529771596602,
-            0.044731689278370124,
-            0.03559719794206373
-          ],
-          "stillPose": [
-            0.03513529771596602,
-            0.044731689278370124,
-            0.03559719794206373
-          ],
-          "stillPosition": [
-            -4.5,
-            0.4575,
-            -2.2
-          ],
-          "soles": {
-            "Left": 0.45749982705539083,
-            "Right": 0.45822764274984434
-          },
-          "ground": 0.4575,
-          "armAngle": 0.9558438724285778
-        },
-        "reverse": {
-          "yaw": 1.5707963267948966,
-          "outward": -1.5707963267948966,
-          "moving": true
-        },
-        "returned": {
-          "stopped": true,
-          "position": [
-            -3.5,
-            0.4575,
-            -2.2
-          ],
-          "start": [
-            -3.5,
-            0.4575,
-            -2.2
-          ]
-        },
-        "live": {
-          "before": {
-            "pose": [
-              0.03513529771596602,
-              0.044731689278370124,
-              0.03559719794206373
-            ],
-            "position": [
-              -3.5,
-              0.4575,
-              -2.2
-            ]
-          },
-          "after": {
-            "position": [
-              -3.5450600000000003,
-              0.4575,
-              -2.2
-            ],
-            "pose": [
-              0.043250264812851213,
-              0.04099443757475585,
-              0.08191039963766045
-            ]
-          }
-        },
-        "lifecycle": {
-          "hidden": {
-            "carLoaded": false,
-            "walkerLoaded": true,
-            "carVisible": false,
-            "walkerVisible": false,
-            "stopped": false,
-            "position": [
-              -3.5450600000000003,
-              0.4575,
-              -2.2
-            ],
-            "models": {
-              "requested": 2,
-              "loaded": 1,
-              "failed": 1
-            }
-          },
-          "restored": {
-            "carLoaded": false,
-            "walkerLoaded": true,
-            "carVisible": false,
-            "walkerVisible": true,
-            "stopped": true,
-            "position": [
-              -3.5,
-              0.4575,
-              -2.2
-            ],
-            "models": {
-              "requested": 2,
-              "loaded": 1,
-              "failed": 1
-            }
-          },
-          "version": 15,
-          "unchanged": true
-        }
-      },
-      "errors": [],
-      "outside": [],
-      "requests": [
-        "car-a-512.glb",
-        "adult-man-rigged-512.glb"
-      ]
-    },
-    {
-      "width": 390,
-      "height": 844,
-      "failure": "walker",
-      "result": {
-        "metrics": {
-          "triangles": 43594,
-          "calls": 36,
-          "fps": 10,
-          "citizens": 15,
-          "paths": [
-            {
-              "id": "pilot-home",
-              "connected": true
-            },
-            {
-              "id": "pilot-hospital",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-0",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-1",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-2",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-3",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-4",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-5",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-6",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-7",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-8",
-              "connected": true
-            },
-            {
-              "id": "pilot-shop",
-              "connected": true
-            }
-          ],
-          "pixelRatio": 1,
-          "quality": "high",
-          "avatarLoaded": true,
-          "models": {
-            "requested": 3,
-            "loaded": 3,
-            "failed": 0
-          },
-          "pilot": {
-            "carLoaded": true,
-            "walkerLoaded": false,
-            "carVisible": true,
-            "walkerVisible": false,
-            "stopped": null,
-            "models": {
-              "requested": 2,
-              "loaded": 1,
-              "failed": 1
-            }
-          },
-          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
-        },
-        "car": {
-          "rotationY": -1.5707963267948966,
-          "scale": 0.38,
-          "minY": 0.4575,
-          "surface": 0.4575
-        },
-        "buildingModels": [
-          "assets/models/house-a-512.glb",
-          "assets/models/shop-corner-512.glb",
-          "assets/models/hospital-512.glb"
-        ],
-        "lifecycle": {
-          "hidden": {
-            "carLoaded": true,
-            "walkerLoaded": false,
-            "carVisible": false,
-            "walkerVisible": false,
-            "stopped": null,
-            "models": {
-              "requested": 2,
-              "loaded": 1,
-              "failed": 1
-            }
-          },
-          "restored": {
-            "carLoaded": true,
-            "walkerLoaded": false,
-            "carVisible": true,
-            "walkerVisible": false,
-            "stopped": null,
-            "models": {
-              "requested": 2,
-              "loaded": 1,
-              "failed": 1
-            }
-          },
-          "version": 15,
-          "unchanged": true
-        }
-      },
-      "errors": [],
-      "outside": [],
-      "requests": [
-        "car-a-512.glb",
-        "adult-man-rigged-512.glb"
-      ]
-    },
-    {
-      "width": 390,
-      "height": 844,
-      "failure": "both",
-      "result": {
-        "metrics": {
-          "triangles": 38824,
-          "calls": 35,
-          "fps": 9,
-          "citizens": 15,
-          "paths": [
-            {
-              "id": "pilot-home",
-              "connected": true
-            },
-            {
-              "id": "pilot-hospital",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-0",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-1",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-2",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-3",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-4",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-5",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-6",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-7",
-              "connected": true
-            },
-            {
-              "id": "pilot-road-8",
-              "connected": true
-            },
-            {
-              "id": "pilot-shop",
-              "connected": true
-            }
-          ],
-          "pixelRatio": 1,
-          "quality": "high",
-          "avatarLoaded": true,
-          "models": {
-            "requested": 3,
-            "loaded": 3,
-            "failed": 0
-          },
-          "pilot": {
-            "carLoaded": false,
-            "walkerLoaded": false,
-            "carVisible": false,
-            "walkerVisible": false,
-            "stopped": null,
-            "models": {
-              "requested": 2,
-              "loaded": 0,
-              "failed": 2
-            }
-          },
-          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
-        },
-        "car": null,
-        "buildingModels": [
-          "assets/models/house-a-512.glb",
-          "assets/models/shop-corner-512.glb",
-          "assets/models/hospital-512.glb"
-        ],
-        "lifecycle": {
-          "hidden": {
-            "carLoaded": false,
-            "walkerLoaded": false,
-            "carVisible": false,
-            "walkerVisible": false,
-            "stopped": null,
-            "models": {
-              "requested": 2,
-              "loaded": 0,
-              "failed": 2
-            }
-          },
-          "restored": {
-            "carLoaded": false,
-            "walkerLoaded": false,
-            "carVisible": false,
-            "walkerVisible": false,
-            "stopped": null,
-            "models": {
-              "requested": 2,
-              "loaded": 0,
-              "failed": 2
-            }
-          },
-          "version": 15,
-          "unchanged": true
-        }
-      },
-      "errors": [],
-      "outside": [],
-      "requests": [
-        "car-a-512.glb",
-        "adult-man-rigged-512.glb"
-      ]
-    },
-    {
-      "width": 844,
-      "height": 390,
-      "failure": "none",
-      "result": {
-        "metrics": {
-          "triangles": 48600,
-          "calls": 37,
-          "fps": 15,
+          "fps": 11,
           "citizens": 14,
           "paths": [
             {
@@ -1056,7 +236,7 @@
             ],
             "pose": [
               0.04143975929775978,
-              0.031696408096384465,
+              0.03169640809638441,
               0.06514328952524906
             ]
           }
@@ -1098,6 +278,21 @@
           },
           "version": 15,
           "unchanged": true
+        },
+        "download": {
+          "bodyBytes": 5536264,
+          "transferBytes": 5570764,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 327664
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 1218676
+            }
+          ],
+          "limitBytes": 6000000
         }
       },
       "errors": [],
@@ -1108,14 +303,14 @@
       ]
     },
     {
-      "width": 844,
-      "height": 390,
+      "width": 390,
+      "height": 844,
       "failure": "car",
       "result": {
         "metrics": {
           "triangles": 43830,
           "calls": 36,
-          "fps": 10,
+          "fps": 7,
           "citizens": 14,
           "paths": [
             {
@@ -1331,14 +526,14 @@
           },
           "after": {
             "position": [
-              -3.5549600000000003,
+              -3.594980000000001,
               0.4575,
               -2.2
             ],
             "pose": [
-              0.04205845450652301,
-              0.035377529349544135,
-              0.07518660177634962
+              0.04031240504125311,
+              0.032365970154559,
+              0.020883136657013246
             ]
           }
         },
@@ -1350,7 +545,7 @@
             "walkerVisible": false,
             "stopped": false,
             "position": [
-              -3.5549600000000003,
+              -3.594980000000001,
               0.4575,
               -2.2
             ],
@@ -1379,6 +574,21 @@
           },
           "version": 15,
           "unchanged": true
+        },
+        "download": {
+          "bodyBytes": 5208623,
+          "transferBytes": 5243123,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 23
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 1218676
+            }
+          ],
+          "limitBytes": 6000000
         }
       },
       "errors": [],
@@ -1389,14 +599,14 @@
       ]
     },
     {
-      "width": 844,
-      "height": 390,
+      "width": 390,
+      "height": 844,
       "failure": "walker",
       "result": {
         "metrics": {
           "triangles": 43594,
           "calls": 36,
-          "fps": 11,
+          "fps": 12,
           "citizens": 15,
           "paths": [
             {
@@ -1508,6 +718,901 @@
           },
           "version": 15,
           "unchanged": true
+        },
+        "download": {
+          "bodyBytes": 4317611,
+          "transferBytes": 4352111,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 327664
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 23
+            }
+          ],
+          "limitBytes": 6000000
+        }
+      },
+      "errors": [],
+      "outside": [],
+      "requests": [
+        "car-a-512.glb",
+        "adult-man-rigged-512.glb"
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "failure": "both",
+      "result": {
+        "metrics": {
+          "triangles": 38824,
+          "calls": 35,
+          "fps": 13,
+          "citizens": 15,
+          "paths": [
+            {
+              "id": "pilot-home",
+              "connected": true
+            },
+            {
+              "id": "pilot-hospital",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-0",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-1",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-2",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-3",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-4",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-5",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-6",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-7",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-8",
+              "connected": true
+            },
+            {
+              "id": "pilot-shop",
+              "connected": true
+            }
+          ],
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 3,
+            "failed": 0
+          },
+          "pilot": {
+            "carLoaded": false,
+            "walkerLoaded": false,
+            "carVisible": false,
+            "walkerVisible": false,
+            "stopped": null,
+            "models": {
+              "requested": 2,
+              "loaded": 0,
+              "failed": 2
+            }
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        },
+        "car": null,
+        "buildingModels": [
+          "assets/models/house-a-512.glb",
+          "assets/models/shop-corner-512.glb",
+          "assets/models/hospital-512.glb"
+        ],
+        "lifecycle": {
+          "hidden": {
+            "carLoaded": false,
+            "walkerLoaded": false,
+            "carVisible": false,
+            "walkerVisible": false,
+            "stopped": null,
+            "models": {
+              "requested": 2,
+              "loaded": 0,
+              "failed": 2
+            }
+          },
+          "restored": {
+            "carLoaded": false,
+            "walkerLoaded": false,
+            "carVisible": false,
+            "walkerVisible": false,
+            "stopped": null,
+            "models": {
+              "requested": 2,
+              "loaded": 0,
+              "failed": 2
+            }
+          },
+          "version": 15,
+          "unchanged": true
+        },
+        "download": {
+          "bodyBytes": 3989970,
+          "transferBytes": 4024470,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 23
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 23
+            }
+          ],
+          "limitBytes": 6000000
+        }
+      },
+      "errors": [],
+      "outside": [],
+      "requests": [
+        "car-a-512.glb",
+        "adult-man-rigged-512.glb"
+      ]
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "failure": "none",
+      "result": {
+        "metrics": {
+          "triangles": 48600,
+          "calls": 37,
+          "fps": 9,
+          "citizens": 14,
+          "paths": [
+            {
+              "id": "pilot-home",
+              "connected": true
+            },
+            {
+              "id": "pilot-hospital",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-0",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-1",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-2",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-3",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-4",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-5",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-6",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-7",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-8",
+              "connected": true
+            },
+            {
+              "id": "pilot-shop",
+              "connected": true
+            }
+          ],
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 3,
+            "failed": 0
+          },
+          "pilot": {
+            "carLoaded": true,
+            "walkerLoaded": true,
+            "carVisible": true,
+            "walkerVisible": true,
+            "stopped": true,
+            "position": [
+              -3.5,
+              0.4575,
+              -2.2
+            ],
+            "models": {
+              "requested": 2,
+              "loaded": 2,
+              "failed": 0
+            }
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        },
+        "car": {
+          "rotationY": -1.5707963267948966,
+          "scale": 0.38,
+          "minY": 0.4575,
+          "surface": 0.4575
+        },
+        "buildingModels": [
+          "assets/models/house-a-512.glb",
+          "assets/models/shop-corner-512.glb",
+          "assets/models/hospital-512.glb"
+        ],
+        "independence": {
+          "mixers": true,
+          "skeletons": true,
+          "skinCount": 1,
+          "firstPose": [
+            0.03513529771596602,
+            0.044731689278370124,
+            0.03559719794206373
+          ],
+          "heldPose": [
+            0.03513529771596602,
+            0.044731689278370124,
+            0.03559719794206373
+          ],
+          "secondPose": [
+            0.04152163298187972,
+            0.03650406690965713,
+            -0.007910633157778957
+          ],
+          "heldPosition": [
+            -3.5,
+            0.4575,
+            -2.2
+          ],
+          "firstPosition": [
+            -3.5,
+            0.4575,
+            -2.2
+          ],
+          "secondPosition": [
+            -3.62,
+            0.4575,
+            -2.2
+          ],
+          "firstStopped": true,
+          "secondStopped": false
+        },
+        "walking": {
+          "a": [
+            0.040427248219557566,
+            0.031305662595148664,
+            0.027663464003245597
+          ],
+          "b": [
+            0.04231888549746943,
+            0.04008783962220214,
+            -0.03941438435983091
+          ],
+          "positionA": [
+            -3.59,
+            0.4575,
+            -2.2
+          ],
+          "positionB": [
+            -3.65,
+            0.4575,
+            -2.2
+          ],
+          "hips": true,
+          "scale": 0.32,
+          "rotationY": 0
+        },
+        "endpoint": {
+          "stopped": true,
+          "timeScale": 0,
+          "time": 0.08333333333333333,
+          "position": [
+            -4.5,
+            0.4575,
+            -2.2
+          ],
+          "end": [
+            -4.5,
+            0.4575,
+            -2.2
+          ],
+          "pose": [
+            0.03513529771596602,
+            0.044731689278370124,
+            0.03559719794206373
+          ],
+          "stillPose": [
+            0.03513529771596602,
+            0.044731689278370124,
+            0.03559719794206373
+          ],
+          "stillPosition": [
+            -4.5,
+            0.4575,
+            -2.2
+          ],
+          "soles": {
+            "Left": 0.45749982705539083,
+            "Right": 0.45822764274984434
+          },
+          "ground": 0.4575,
+          "armAngle": 0.9558438724285778
+        },
+        "reverse": {
+          "yaw": 1.5707963267948966,
+          "outward": -1.5707963267948966,
+          "moving": true
+        },
+        "returned": {
+          "stopped": true,
+          "position": [
+            -3.5,
+            0.4575,
+            -2.2
+          ],
+          "start": [
+            -3.5,
+            0.4575,
+            -2.2
+          ]
+        },
+        "live": {
+          "before": {
+            "pose": [
+              0.03513529771596602,
+              0.044731689278370124,
+              0.03559719794206373
+            ],
+            "position": [
+              -3.5,
+              0.4575,
+              -2.2
+            ]
+          },
+          "after": {
+            "position": [
+              -3.5600300000000007,
+              0.4575,
+              -2.2
+            ],
+            "pose": [
+              0.041749148454172325,
+              0.03326992267612394,
+              0.0703029774537467
+            ]
+          }
+        },
+        "lifecycle": {
+          "hidden": {
+            "carLoaded": true,
+            "walkerLoaded": true,
+            "carVisible": false,
+            "walkerVisible": false,
+            "stopped": false,
+            "position": [
+              -3.5600300000000007,
+              0.4575,
+              -2.2
+            ],
+            "models": {
+              "requested": 2,
+              "loaded": 2,
+              "failed": 0
+            }
+          },
+          "restored": {
+            "carLoaded": true,
+            "walkerLoaded": true,
+            "carVisible": true,
+            "walkerVisible": true,
+            "stopped": true,
+            "position": [
+              -3.5,
+              0.4575,
+              -2.2
+            ],
+            "models": {
+              "requested": 2,
+              "loaded": 2,
+              "failed": 0
+            }
+          },
+          "version": 15,
+          "unchanged": true
+        },
+        "download": {
+          "bodyBytes": 5536264,
+          "transferBytes": 5570764,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 327664
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 1218676
+            }
+          ],
+          "limitBytes": 6000000
+        }
+      },
+      "errors": [],
+      "outside": [],
+      "requests": [
+        "car-a-512.glb",
+        "adult-man-rigged-512.glb"
+      ]
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "failure": "car",
+      "result": {
+        "metrics": {
+          "triangles": 43830,
+          "calls": 36,
+          "fps": 9,
+          "citizens": 14,
+          "paths": [
+            {
+              "id": "pilot-home",
+              "connected": true
+            },
+            {
+              "id": "pilot-hospital",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-0",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-1",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-2",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-3",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-4",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-5",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-6",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-7",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-8",
+              "connected": true
+            },
+            {
+              "id": "pilot-shop",
+              "connected": true
+            }
+          ],
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 3,
+            "failed": 0
+          },
+          "pilot": {
+            "carLoaded": false,
+            "walkerLoaded": true,
+            "carVisible": false,
+            "walkerVisible": true,
+            "stopped": true,
+            "position": [
+              -3.5,
+              0.4575,
+              -2.2
+            ],
+            "models": {
+              "requested": 2,
+              "loaded": 1,
+              "failed": 1
+            }
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        },
+        "car": null,
+        "buildingModels": [
+          "assets/models/house-a-512.glb",
+          "assets/models/shop-corner-512.glb",
+          "assets/models/hospital-512.glb"
+        ],
+        "independence": {
+          "mixers": true,
+          "skeletons": true,
+          "skinCount": 1,
+          "firstPose": [
+            0.03513529771596602,
+            0.044731689278370124,
+            0.03559719794206373
+          ],
+          "heldPose": [
+            0.03513529771596602,
+            0.044731689278370124,
+            0.03559719794206373
+          ],
+          "secondPose": [
+            0.04152163298187972,
+            0.03650406690965713,
+            -0.007910633157778957
+          ],
+          "heldPosition": [
+            -3.5,
+            0.4575,
+            -2.2
+          ],
+          "firstPosition": [
+            -3.5,
+            0.4575,
+            -2.2
+          ],
+          "secondPosition": [
+            -3.62,
+            0.4575,
+            -2.2
+          ],
+          "firstStopped": true,
+          "secondStopped": false
+        },
+        "walking": {
+          "a": [
+            0.040427248219557566,
+            0.031305662595148664,
+            0.027663464003245597
+          ],
+          "b": [
+            0.04231888549746943,
+            0.04008783962220214,
+            -0.03941438435983091
+          ],
+          "positionA": [
+            -3.59,
+            0.4575,
+            -2.2
+          ],
+          "positionB": [
+            -3.65,
+            0.4575,
+            -2.2
+          ],
+          "hips": true,
+          "scale": 0.32,
+          "rotationY": 0
+        },
+        "endpoint": {
+          "stopped": true,
+          "timeScale": 0,
+          "time": 0.08333333333333333,
+          "position": [
+            -4.5,
+            0.4575,
+            -2.2
+          ],
+          "end": [
+            -4.5,
+            0.4575,
+            -2.2
+          ],
+          "pose": [
+            0.03513529771596602,
+            0.044731689278370124,
+            0.03559719794206373
+          ],
+          "stillPose": [
+            0.03513529771596602,
+            0.044731689278370124,
+            0.03559719794206373
+          ],
+          "stillPosition": [
+            -4.5,
+            0.4575,
+            -2.2
+          ],
+          "soles": {
+            "Left": 0.45749982705539083,
+            "Right": 0.45822764274984434
+          },
+          "ground": 0.4575,
+          "armAngle": 0.9558438724285778
+        },
+        "reverse": {
+          "yaw": 1.5707963267948966,
+          "outward": -1.5707963267948966,
+          "moving": true
+        },
+        "returned": {
+          "stopped": true,
+          "position": [
+            -3.5,
+            0.4575,
+            -2.2
+          ],
+          "start": [
+            -3.5,
+            0.4575,
+            -2.2
+          ]
+        },
+        "live": {
+          "before": {
+            "pose": [
+              0.03513529771596602,
+              0.044731689278370124,
+              0.03559719794206373
+            ],
+            "position": [
+              -3.5,
+              0.4575,
+              -2.2
+            ]
+          },
+          "after": {
+            "position": [
+              -3.5400199999999997,
+              0.4575,
+              -2.2
+            ],
+            "pose": [
+              0.043933287186121994,
+              0.043851191402391465,
+              0.08442894199222373
+            ]
+          }
+        },
+        "lifecycle": {
+          "hidden": {
+            "carLoaded": false,
+            "walkerLoaded": true,
+            "carVisible": false,
+            "walkerVisible": false,
+            "stopped": false,
+            "position": [
+              -3.5400199999999997,
+              0.4575,
+              -2.2
+            ],
+            "models": {
+              "requested": 2,
+              "loaded": 1,
+              "failed": 1
+            }
+          },
+          "restored": {
+            "carLoaded": false,
+            "walkerLoaded": true,
+            "carVisible": false,
+            "walkerVisible": true,
+            "stopped": true,
+            "position": [
+              -3.5,
+              0.4575,
+              -2.2
+            ],
+            "models": {
+              "requested": 2,
+              "loaded": 1,
+              "failed": 1
+            }
+          },
+          "version": 15,
+          "unchanged": true
+        },
+        "download": {
+          "bodyBytes": 5208623,
+          "transferBytes": 5243123,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 23
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 1218676
+            }
+          ],
+          "limitBytes": 6000000
+        }
+      },
+      "errors": [],
+      "outside": [],
+      "requests": [
+        "car-a-512.glb",
+        "adult-man-rigged-512.glb"
+      ]
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "failure": "walker",
+      "result": {
+        "metrics": {
+          "triangles": 43594,
+          "calls": 36,
+          "fps": 14,
+          "citizens": 15,
+          "paths": [
+            {
+              "id": "pilot-home",
+              "connected": true
+            },
+            {
+              "id": "pilot-hospital",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-0",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-1",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-2",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-3",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-4",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-5",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-6",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-7",
+              "connected": true
+            },
+            {
+              "id": "pilot-road-8",
+              "connected": true
+            },
+            {
+              "id": "pilot-shop",
+              "connected": true
+            }
+          ],
+          "pixelRatio": 1,
+          "quality": "high",
+          "avatarLoaded": true,
+          "models": {
+            "requested": 3,
+            "loaded": 3,
+            "failed": 0
+          },
+          "pilot": {
+            "carLoaded": true,
+            "walkerLoaded": false,
+            "carVisible": true,
+            "walkerVisible": false,
+            "stopped": null,
+            "models": {
+              "requested": 2,
+              "loaded": 1,
+              "failed": 1
+            }
+          },
+          "renderer": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        },
+        "car": {
+          "rotationY": -1.5707963267948966,
+          "scale": 0.38,
+          "minY": 0.4575,
+          "surface": 0.4575
+        },
+        "buildingModels": [
+          "assets/models/house-a-512.glb",
+          "assets/models/shop-corner-512.glb",
+          "assets/models/hospital-512.glb"
+        ],
+        "lifecycle": {
+          "hidden": {
+            "carLoaded": true,
+            "walkerLoaded": false,
+            "carVisible": false,
+            "walkerVisible": false,
+            "stopped": null,
+            "models": {
+              "requested": 2,
+              "loaded": 1,
+              "failed": 1
+            }
+          },
+          "restored": {
+            "carLoaded": true,
+            "walkerLoaded": false,
+            "carVisible": true,
+            "walkerVisible": false,
+            "stopped": null,
+            "models": {
+              "requested": 2,
+              "loaded": 1,
+              "failed": 1
+            }
+          },
+          "version": 15,
+          "unchanged": true
+        },
+        "download": {
+          "bodyBytes": 4317611,
+          "transferBytes": 4352111,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 327664
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 23
+            }
+          ],
+          "limitBytes": 6000000
         }
       },
       "errors": [],
@@ -1632,6 +1737,21 @@
           },
           "version": 15,
           "unchanged": true
+        },
+        "download": {
+          "bodyBytes": 3989970,
+          "transferBytes": 4024470,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 23
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 23
+            }
+          ],
+          "limitBytes": 6000000
         }
       },
       "errors": [],

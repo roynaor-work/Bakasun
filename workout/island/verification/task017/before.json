@@ -9,7 +9,7 @@
       "metrics": {
         "triangles": 38824,
         "calls": 35,
-        "fps": 9,
+        "fps": 7,
         "citizens": 15,
         "paths": [
           {
@@ -87,10 +87,10 @@
         "top": 28.046769230769232,
         "bottom": -28.046769230769232
       },
-      "loadMs": 206.69999999995343,
-      "readyMs": 2774.6999999999534,
-      "downloadedBytes": 3981819,
-      "transferBytes": 4015119,
+      "loadMs": 195.3000000002794,
+      "readyMs": 2147.2000000001863,
+      "downloadedBytes": 3964525,
+      "transferBytes": 3997525,
       "resources": [
         {
           "path": "/workout/island/styles.css",
@@ -129,84 +129,16 @@
           "bytes": 8265
         },
         {
-          "path": "/workout/island/ui/activity.mjs",
-          "bytes": 34322
-        },
-        {
           "path": "/workout/island/ui/press.mjs",
           "bytes": 2494
         },
         {
+          "path": "/workout/island/ui/activity.mjs",
+          "bytes": 34322
+        },
+        {
           "path": "/workout/island/engine/registry.mjs",
           "bytes": 2810
-        },
-        {
-          "path": "/workout/island/activity/equipment.mjs",
-          "bytes": 1721
-        },
-        {
-          "path": "/workout/island/activity/availability.mjs",
-          "bytes": 340
-        },
-        {
-          "path": "/workout/island/activity/eligibility.mjs",
-          "bytes": 357
-        },
-        {
-          "path": "/workout/island/minigames/context.mjs",
-          "bytes": 1262
-        },
-        {
-          "path": "/workout/island/engine/metrics.mjs",
-          "bytes": 2878
-        },
-        {
-          "path": "/workout/island/engine/rules.mjs",
-          "bytes": 5374
-        },
-        {
-          "path": "/workout/island/engine/placement-help.mjs",
-          "bytes": 2494
-        },
-        {
-          "path": "/workout/island/activity/hangar.mjs",
-          "bytes": 930
-        },
-        {
-          "path": "/workout/island/ui/hangar-preview.mjs",
-          "bytes": 1433
-        },
-        {
-          "path": "/workout/island/minigames/sound.mjs",
-          "bytes": 3667
-        },
-        {
-          "path": "/workout/island/activity/alien-upgrades.mjs",
-          "bytes": 800
-        },
-        {
-          "path": "/workout/island/minigames/icons.mjs",
-          "bytes": 3801
-        },
-        {
-          "path": "/workout/island/ui/game-shell.mjs",
-          "bytes": 9274
-        },
-        {
-          "path": "/workout/island/minigames/art.mjs",
-          "bytes": 12825
-        },
-        {
-          "path": "/workout/island/activity/soccer-roster.mjs",
-          "bytes": 6319
-        },
-        {
-          "path": "/workout/island/ui/soccer-card.mjs",
-          "bytes": 3680
-        },
-        {
-          "path": "/workout/island/activity/soccer-team.mjs",
-          "bytes": 1781
         },
         {
           "path": "/workout/island/activity/fire-certificates.mjs",
@@ -217,12 +149,36 @@
           "bytes": 1632
         },
         {
+          "path": "/workout/island/activity/availability.mjs",
+          "bytes": 340
+        },
+        {
+          "path": "/workout/island/activity/soccer-team.mjs",
+          "bytes": 1781
+        },
+        {
           "path": "/workout/island/activity/soccer-card.mjs",
           "bytes": 2820
         },
         {
+          "path": "/workout/island/engine/placement-help.mjs",
+          "bytes": 2494
+        },
+        {
+          "path": "/workout/island/activity/soccer-roster.mjs",
+          "bytes": 6319
+        },
+        {
+          "path": "/workout/island/engine/metrics.mjs",
+          "bytes": 2878
+        },
+        {
           "path": "/workout/island/engine/economy.mjs",
           "bytes": 2403
+        },
+        {
+          "path": "/workout/island/engine/rules.mjs",
+          "bytes": 5374
         },
         {
           "path": "/workout/island/engine/persistence.mjs",
@@ -237,28 +193,24 @@
           "bytes": 499
         },
         {
-          "path": "/workout/island/vendor/three.module.js",
-          "bytes": 670681
-        },
-        {
-          "path": "/workout/island/view/environment.mjs",
-          "bytes": 9087
-        },
-        {
           "path": "/workout/island/view/avatar.mjs",
           "bytes": 7660
-        },
-        {
-          "path": "/workout/island/view/local-models.mjs",
-          "bytes": 2621
         },
         {
           "path": "/workout/island/view/buildings.mjs",
           "bytes": 19844
         },
         {
-          "path": "/workout/island/view/city-life.mjs",
-          "bytes": 1614
+          "path": "/workout/island/view/environment.mjs",
+          "bytes": 9087
+        },
+        {
+          "path": "/workout/island/vendor/three.module.js",
+          "bytes": 670681
+        },
+        {
+          "path": "/workout/island/view/local-models.mjs",
+          "bytes": 2621
         },
         {
           "path": "/workout/island/engine/paths.mjs",
@@ -269,12 +221,60 @@
           "bytes": 1725
         },
         {
-          "path": "/workout/island/engine/city-hall.mjs",
-          "bytes": 1618
+          "path": "/workout/island/view/city-life.mjs",
+          "bytes": 1614
+        },
+        {
+          "path": "/workout/island/activity/equipment.mjs",
+          "bytes": 1721
+        },
+        {
+          "path": "/workout/island/activity/eligibility.mjs",
+          "bytes": 357
+        },
+        {
+          "path": "/workout/island/minigames/context.mjs",
+          "bytes": 1262
+        },
+        {
+          "path": "/workout/island/activity/hangar.mjs",
+          "bytes": 930
+        },
+        {
+          "path": "/workout/island/ui/hangar-preview.mjs",
+          "bytes": 1433
+        },
+        {
+          "path": "/workout/island/minigames/sound.mjs",
+          "bytes": 3667
+        },
+        {
+          "path": "/workout/island/minigames/icons.mjs",
+          "bytes": 3801
+        },
+        {
+          "path": "/workout/island/minigames/art.mjs",
+          "bytes": 12825
+        },
+        {
+          "path": "/workout/island/ui/game-shell.mjs",
+          "bytes": 9274
+        },
+        {
+          "path": "/workout/island/activity/alien-upgrades.mjs",
+          "bytes": 800
+        },
+        {
+          "path": "/workout/island/ui/soccer-card.mjs",
+          "bytes": 3680
         },
         {
           "path": "/workout/island/activity/state.mjs",
           "bytes": 4525
+        },
+        {
+          "path": "/workout/island/engine/city-hall.mjs",
+          "bytes": 1618
         },
         {
           "path": "/workout/island/vendor/GLTFLoader.js",
@@ -293,6 +293,10 @@
           "bytes": 53111
         },
         {
+          "path": "/workout/island/assets/icons/island.svg",
+          "bytes": 2228
+        },
+        {
           "path": "/workout/island/data/config.json",
           "bytes": 89347
         },
@@ -309,16 +313,16 @@
           "bytes": 377
         },
         {
-          "path": "/workout/island/data/team.json",
-          "bytes": 75
-        },
-        {
           "path": "/workout/island/data/avatar.json",
           "bytes": 1529
         },
         {
           "path": "/workout/island/data/players.json",
           "bytes": 341
+        },
+        {
+          "path": "/workout/island/data/team.json",
+          "bytes": 75
         },
         {
           "path": "/workout/island/data/world.json",
@@ -339,10 +343,6 @@
         {
           "path": "/workout/island/data/missions.json",
           "bytes": 766
-        },
-        {
-          "path": "/workout/island/assets/icons/island.svg",
-          "bytes": 2228
         },
         {
           "path": "/workout/island/episodes/index.json",
@@ -393,12 +393,12 @@
           "bytes": 8133
         },
         {
-          "path": "/workout/island/minigames/canvas-session.mjs",
-          "bytes": 20196
-        },
-        {
           "path": "/workout/island/minigames/pool.mjs",
           "bytes": 809
+        },
+        {
+          "path": "/workout/island/minigames/canvas-session.mjs",
+          "bytes": 20196
         },
         {
           "path": "/workout/island/minigames/controls.mjs",
@@ -449,24 +449,24 @@
           "bytes": 400
         },
         {
-          "path": "/workout/island/minigames/soccer-result.mjs",
-          "bytes": 1950
-        },
-        {
           "path": "/workout/island/minigames/soccer-session.mjs",
           "bytes": 9130
+        },
+        {
+          "path": "/workout/island/minigames/soccer-result.mjs",
+          "bytes": 1950
         },
         {
           "path": "/workout/island/minigames/soccer-icons.mjs",
           "bytes": 773
         },
         {
-          "path": "/workout/island/minigames/soccer.mjs",
-          "bytes": 35562
-        },
-        {
           "path": "/workout/island/minigames/soccer-drill.mjs",
           "bytes": 2523
+        },
+        {
+          "path": "/workout/island/minigames/soccer.mjs",
+          "bytes": 35562
         },
         {
           "path": "/workout/island/minigames/soccer-view.mjs",
@@ -497,12 +497,12 @@
           "bytes": 386
         },
         {
-          "path": "/workout/island/minigames/tennis-result.mjs",
-          "bytes": 1469
-        },
-        {
           "path": "/workout/island/minigames/tennis-session.mjs",
           "bytes": 5897
+        },
+        {
+          "path": "/workout/island/minigames/tennis-result.mjs",
+          "bytes": 1469
         },
         {
           "path": "/workout/island/minigames/tennis.mjs",
@@ -527,13 +527,14 @@
         {
           "path": "/workout/island/assets/kid-full.glb",
           "bytes": 1473368
-        },
-        {
-          "path": "/workout/island/assets/icons/apple-touch-icon.png",
-          "bytes": 17294
         }
       ],
-      "fps": 7.543255857809131,
+      "fps": 10.07242553599738,
+      "downloadBudget": {
+        "limitBytes": 6000000,
+        "bodyBytes": 3964525,
+        "transferBytes": 3997525
+      },
       "errors": [],
       "outside": []
     },
@@ -543,7 +544,7 @@
       "metrics": {
         "triangles": 38824,
         "calls": 35,
-        "fps": 6,
+        "fps": 14,
         "citizens": 15,
         "paths": [
           {
@@ -621,8 +622,8 @@
         "top": 10.56,
         "bottom": -10.56
       },
-      "loadMs": 182.70000000018626,
-      "readyMs": 4882,
+      "loadMs": 176.8000000002794,
+      "readyMs": 2211,
       "downloadedBytes": 3964525,
       "transferBytes": 3997525,
       "resources": [
@@ -635,36 +636,36 @@
           "bytes": 3594
         },
         {
-          "path": "/workout/island/release.mjs",
-          "bytes": 266
-        },
-        {
           "path": "/workout/island/ui/translate.mjs",
           "bytes": 390
+        },
+        {
+          "path": "/workout/island/release.mjs",
+          "bytes": 266
         },
         {
           "path": "/workout/island/engine/load-data.mjs",
           "bytes": 2119
         },
         {
-          "path": "/workout/island/engine/engine.mjs",
-          "bytes": 22483
-        },
-        {
           "path": "/workout/island/view/island-view.mjs",
           "bytes": 19203
-        },
-        {
-          "path": "/workout/island/ui/activity.mjs",
-          "bytes": 34322
         },
         {
           "path": "/workout/island/ui/interface.mjs",
           "bytes": 42764
         },
         {
+          "path": "/workout/island/engine/engine.mjs",
+          "bytes": 22483
+        },
+        {
           "path": "/workout/island/activity/runtime.mjs",
           "bytes": 8265
+        },
+        {
+          "path": "/workout/island/ui/activity.mjs",
+          "bytes": 34322
         },
         {
           "path": "/workout/island/ui/press.mjs",
@@ -675,12 +676,56 @@
           "bytes": 2810
         },
         {
-          "path": "/workout/island/activity/progress.mjs",
-          "bytes": 1632
+          "path": "/workout/island/vendor/three.module.js",
+          "bytes": 670681
+        },
+        {
+          "path": "/workout/island/view/buildings.mjs",
+          "bytes": 19844
+        },
+        {
+          "path": "/workout/island/view/avatar.mjs",
+          "bytes": 7660
+        },
+        {
+          "path": "/workout/island/engine/metrics.mjs",
+          "bytes": 2878
+        },
+        {
+          "path": "/workout/island/view/environment.mjs",
+          "bytes": 9087
+        },
+        {
+          "path": "/workout/island/engine/paths.mjs",
+          "bytes": 2074
+        },
+        {
+          "path": "/workout/island/view/city-life.mjs",
+          "bytes": 1614
+        },
+        {
+          "path": "/workout/island/engine/placement-help.mjs",
+          "bytes": 2494
+        },
+        {
+          "path": "/workout/island/view/local-models.mjs",
+          "bytes": 2621
+        },
+        {
+          "path": "/workout/island/view/batch.mjs",
+          "bytes": 1725
+        },
+        {
+          "path": "/workout/island/engine/rules.mjs",
+          "bytes": 5374
         },
         {
           "path": "/workout/island/activity/fire-certificates.mjs",
           "bytes": 1152
+        },
+        {
+          "path": "/workout/island/activity/progress.mjs",
+          "bytes": 1632
         },
         {
           "path": "/workout/island/activity/availability.mjs",
@@ -695,14 +740,6 @@
           "bytes": 2820
         },
         {
-          "path": "/workout/island/engine/placement-help.mjs",
-          "bytes": 2494
-        },
-        {
-          "path": "/workout/island/engine/rules.mjs",
-          "bytes": 5374
-        },
-        {
           "path": "/workout/island/activity/soccer-roster.mjs",
           "bytes": 6319
         },
@@ -711,76 +748,20 @@
           "bytes": 2403
         },
         {
-          "path": "/workout/island/engine/metrics.mjs",
-          "bytes": 2878
+          "path": "/workout/island/engine/persistence.mjs",
+          "bytes": 17305
         },
         {
           "path": "/workout/island/engine/episodes.mjs",
           "bytes": 843
         },
         {
-          "path": "/workout/island/engine/persistence.mjs",
-          "bytes": 17305
-        },
-        {
           "path": "/workout/island/engine/hooks.mjs",
           "bytes": 499
         },
         {
-          "path": "/workout/island/view/environment.mjs",
-          "bytes": 9087
-        },
-        {
-          "path": "/workout/island/vendor/three.module.js",
-          "bytes": 670681
-        },
-        {
-          "path": "/workout/island/view/avatar.mjs",
-          "bytes": 7660
-        },
-        {
-          "path": "/workout/island/view/buildings.mjs",
-          "bytes": 19844
-        },
-        {
-          "path": "/workout/island/view/local-models.mjs",
-          "bytes": 2621
-        },
-        {
-          "path": "/workout/island/engine/paths.mjs",
-          "bytes": 2074
-        },
-        {
-          "path": "/workout/island/view/city-life.mjs",
-          "bytes": 1614
-        },
-        {
-          "path": "/workout/island/view/batch.mjs",
-          "bytes": 1725
-        },
-        {
-          "path": "/workout/island/activity/hangar.mjs",
-          "bytes": 930
-        },
-        {
-          "path": "/workout/island/ui/hangar-preview.mjs",
-          "bytes": 1433
-        },
-        {
-          "path": "/workout/island/minigames/sound.mjs",
-          "bytes": 3667
-        },
-        {
-          "path": "/workout/island/activity/alien-upgrades.mjs",
-          "bytes": 800
-        },
-        {
-          "path": "/workout/island/minigames/icons.mjs",
-          "bytes": 3801
-        },
-        {
-          "path": "/workout/island/minigames/art.mjs",
-          "bytes": 12825
+          "path": "/workout/island/activity/eligibility.mjs",
+          "bytes": 357
         },
         {
           "path": "/workout/island/activity/equipment.mjs",
@@ -791,36 +772,56 @@
           "bytes": 1262
         },
         {
-          "path": "/workout/island/ui/game-shell.mjs",
-          "bytes": 9274
+          "path": "/workout/island/activity/hangar.mjs",
+          "bytes": 930
+        },
+        {
+          "path": "/workout/island/ui/hangar-preview.mjs",
+          "bytes": 1433
+        },
+        {
+          "path": "/workout/island/minigames/icons.mjs",
+          "bytes": 3801
+        },
+        {
+          "path": "/workout/island/activity/alien-upgrades.mjs",
+          "bytes": 800
+        },
+        {
+          "path": "/workout/island/minigames/sound.mjs",
+          "bytes": 3667
+        },
+        {
+          "path": "/workout/island/minigames/art.mjs",
+          "bytes": 12825
         },
         {
           "path": "/workout/island/ui/soccer-card.mjs",
           "bytes": 3680
         },
         {
-          "path": "/workout/island/activity/eligibility.mjs",
-          "bytes": 357
-        },
-        {
-          "path": "/workout/island/activity/state.mjs",
-          "bytes": 4525
-        },
-        {
-          "path": "/workout/island/engine/city-hall.mjs",
-          "bytes": 1618
+          "path": "/workout/island/ui/game-shell.mjs",
+          "bytes": 9274
         },
         {
           "path": "/workout/island/vendor/GLTFLoader.js",
           "bytes": 108527
         },
         {
+          "path": "/workout/island/vendor/BufferGeometryUtils.js",
+          "bytes": 31918
+        },
+        {
           "path": "/workout/island/minigames/model-art.mjs",
           "bytes": 5175
         },
         {
-          "path": "/workout/island/vendor/BufferGeometryUtils.js",
-          "bytes": 31918
+          "path": "/workout/island/engine/city-hall.mjs",
+          "bytes": 1618
+        },
+        {
+          "path": "/workout/island/activity/state.mjs",
+          "bytes": 4525
         },
         {
           "path": "/workout/island/data/strings.he.json",
@@ -843,12 +844,12 @@
           "bytes": 377
         },
         {
-          "path": "/workout/island/data/team.json",
-          "bytes": 75
-        },
-        {
           "path": "/workout/island/data/avatar.json",
           "bytes": 1529
+        },
+        {
+          "path": "/workout/island/data/team.json",
+          "bytes": 75
         },
         {
           "path": "/workout/island/data/players.json",
@@ -859,12 +860,12 @@
           "bytes": 283
         },
         {
-          "path": "/workout/island/data/featureFlags.json",
-          "bytes": 472
-        },
-        {
           "path": "/workout/island/data/tutorial.json",
           "bytes": 373
+        },
+        {
+          "path": "/workout/island/data/featureFlags.json",
+          "bytes": 472
         },
         {
           "path": "/workout/island/data/sports.json",
@@ -927,12 +928,12 @@
           "bytes": 8133
         },
         {
-          "path": "/workout/island/minigames/canvas-session.mjs",
-          "bytes": 20196
-        },
-        {
           "path": "/workout/island/minigames/pool.mjs",
           "bytes": 809
+        },
+        {
+          "path": "/workout/island/minigames/canvas-session.mjs",
+          "bytes": 20196
         },
         {
           "path": "/workout/island/minigames/controls.mjs",
@@ -991,16 +992,16 @@
           "bytes": 1950
         },
         {
-          "path": "/workout/island/minigames/soccer-drill.mjs",
-          "bytes": 2523
-        },
-        {
           "path": "/workout/island/minigames/soccer-icons.mjs",
           "bytes": 773
         },
         {
           "path": "/workout/island/minigames/soccer.mjs",
           "bytes": 35562
+        },
+        {
+          "path": "/workout/island/minigames/soccer-drill.mjs",
+          "bytes": 2523
         },
         {
           "path": "/workout/island/minigames/soccer-view.mjs",
@@ -1063,7 +1064,12 @@
           "bytes": 1473368
         }
       ],
-      "fps": 6.634756646605306,
+      "fps": 4.087750374710797,
+      "downloadBudget": {
+        "limitBytes": 6000000,
+        "bodyBytes": 3964525,
+        "transferBytes": 3997525
+      },
       "errors": [],
       "outside": []
     }

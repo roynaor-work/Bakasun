@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import * as T from '../workout/island/vendor/three.module.js';
 import {MeshyPilot} from '../workout/island/view/meshy-pilot.mjs';
 import {LocalModels} from '../workout/island/view/local-models.mjs';
@@ -16,9 +17,12 @@ function rig(){
  return {scene:root,animations:[clip]};
 }
 test('TASK-017 supplied GLBs retain byte size, topology, embedded images and Mixamo animation contract',async()=>{
+ const manifest=JSON.parse(await readFile(new URL('assets/models/manifest.json',root)));
+ const originalHashes={'car-a-512.glb':'91a0211f18a84cf47dd271aac51783d8d2bc0be7296ccdfd3782aaaf7b53d6c9','adult-man-rigged-512.glb':'5bf0beed6c7584ead260d579c11af3b707db9f4ebb420af98e4d81f84a2ce217'};
  for(const [file,bytes,triangles]of [['car-a-512.glb',327664,4770],['adult-man-rigged-512.glb',1218676,5170]]){
   const b=await readFile(new URL('assets/models/'+file,root)),json=JSON.parse(b.toString('utf8',20,20+b.readUInt32LE(12)));
   assert.equal(b.length,bytes);assert.equal(json.meshes.reduce((n,m)=>n+m.primitives.reduce((n,p)=>n+json.accessors[p.indices].count/3,0),0),triangles);
+  const hash=createHash('sha256').update(b).digest('hex');assert.equal(hash,originalHashes[file]);assert.equal(manifest['assets/models/'+file],hash);
   assert.ok(json.images.every(i=>i.bufferView!==undefined));assert.ok(json.buffers.every(b=>!b.uri));
   if(file.startsWith('adult')){assert.equal(json.skins[0].joints.length,66);assert.deepEqual(json.animations.map(a=>a.name).sort(),['Running','Walking']);}
  }

@@ -3,6 +3,9 @@ import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+// A pilot-specific cold-city ceiling, stricter than the unchanged 15 MB folder
+// guard. Includes navigation, scripts, avatar, existing buildings and both GLBs.
+const cityDownloadBudgetBytes=6_000_000;
 if(['diagnostics','profile'].includes(process.env.TASK017_PHASE)){
  await diagnosePilot();
 }else if(process.env.TASK017_PHASE){
@@ -77,6 +80,10 @@ try{for(const [width,height] of [[390,844],[844,390]])for(const failure of ['non
   // Rebuild, remove and re-add the house: no stale pilot objects or save edits.
   result.lifecycle=await page.evaluate(()=>{const {view,engine}=window.__island,buildings=engine.state.buildings,version=engine.state.version,original=JSON.stringify(buildings);engine.state.buildings=buildings.filter(b=>b.typeId!=='house');view.setWorld(engine.state,true);const hidden=view.pilot.metrics();engine.state.buildings=buildings;view.setWorld(engine.state,true);const restored=view.pilot.metrics();view.renderer.render(view.scene,view.camera);return {hidden,restored,version,unchanged:JSON.stringify(engine.state.buildings)===original};});
   assert.equal(result.lifecycle.hidden.carVisible,false);assert.equal(result.lifecycle.hidden.walkerVisible,false);assert.equal(result.lifecycle.restored.carVisible,carOK);assert.equal(result.lifecycle.restored.walkerVisible,walkerOK);assert.equal(result.lifecycle.version,15);assert.ok(result.lifecycle.unchanged);
+  result.download=await page.evaluate(()=>{const resources=performance.getEntriesByType('resource'),navigation=performance.getEntriesByType('navigation')[0];return {bodyBytes:resources.reduce((n,r)=>n+r.encodedBodySize,navigation.encodedBodySize),transferBytes:resources.reduce((n,r)=>n+r.transferSize,navigation.transferSize),models:resources.filter(r=>/\/(car-a|adult-man-rigged)-512\.glb/.test(r.name)).map(r=>({name:new URL(r.name).pathname,bytes:r.encodedBodySize}))};});
+  result.download.limitBytes=cityDownloadBudgetBytes;
+  assert.ok(result.download.bodyBytes<=cityDownloadBudgetBytes,JSON.stringify(result.download));assert.ok(result.download.transferBytes<=cityDownloadBudgetBytes,JSON.stringify(result.download));
+  if(failure==='none')assert.deepEqual(result.download.models.map(r=>r.bytes).sort((a,b)=>a-b),[327664,1218676]);
   assert.equal(new Set(requests).size,2);assert.equal(requests.length,2);assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);
   await page.screenshot({path:out+`browser-${width}x${height}-${failure}.png`});reports.push({width,height,failure,result,errors,outside,requests});console.log('TASK-017',width,height,failure,'PASS');
  }finally{await context.close();}
@@ -103,6 +110,8 @@ async function measurePilot(){
  const report=await page.evaluate(()=>{const {view}=window.__island,entries=performance.getEntriesByType('resource'),nav=performance.getEntriesByType('navigation')[0];return {metrics:view.metrics(),camera:{position:view.camera.position.toArray(),target:view.target.toArray(),left:view.camera.left,right:view.camera.right,top:view.camera.top,bottom:view.camera.bottom},loadMs:nav.loadEventEnd,readyMs:window.__task017ReadyMs,downloadedBytes:entries.reduce((s,e)=>s+e.encodedBodySize,nav.encodedBodySize),transferBytes:entries.reduce((s,e)=>s+e.transferSize,nav.transferSize),resources:entries.map(e=>({path:new URL(e.name).pathname,bytes:e.encodedBodySize})),pilot:view.pilot?.metrics()};});
  // Measure actual rAF delivery over a real 2-second window (no mock clock).
  report.fps=await page.evaluate(()=>new Promise(resolve=>{let n=0;const start=performance.now();function frame(now){n++;if(now-start>=2000)resolve(n*1000/(now-start));else requestAnimationFrame(frame)}requestAnimationFrame(frame)}));
+ report.downloadBudget={limitBytes:cityDownloadBudgetBytes,bodyBytes:report.downloadedBytes,transferBytes:report.transferBytes};
+ assert.ok(report.downloadedBytes<=cityDownloadBudgetBytes,JSON.stringify(report.downloadBudget));assert.ok(report.transferBytes<=cityDownloadBudgetBytes,JSON.stringify(report.downloadBudget));
  await page.screenshot({path:out+label+'-'+width+'x'+height+'.png'});assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);if(label!=='before')assert.equal(report.pilot.walkerLoaded&&report.pilot.carLoaded,true);reports.push({width,height,...report,errors,outside});console.log(label,width,height,JSON.stringify({metrics:report.metrics,fps:report.fps,bytes:report.downloadedBytes,errors,outside}));await context.close();
  }await writeFile(out+label+'.json',JSON.stringify({label,browser:'Chromium / ANGLE SwiftShader (software WebGL), DPR 1, cold context',scenario:'house L1 (4,6), shop (7,6), hospital (10,6), road x=3..11 z=5; default home camera; 2s real rAF',reports},null,2)+'\n');}finally{await browser.close()}
 }
