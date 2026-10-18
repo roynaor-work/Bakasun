@@ -23,9 +23,10 @@ function modelLOD(source,cells,budget){
 }
 export async function createTennisEnvironment(scene,config,keep){
  const e=config.render.environment,rand=seededRandom(config.seed),crowds=[],trees=[],benches=[],loaded=[],failures=[],uniforms={tennisClap:{value:0},tennisClapTime:{value:0}};
- const names=['adult-man-512.glb','adult-woman-512.glb','palm-tree-512.glb','tree-a-512.glb','bench-512.glb'];
- const results=await Promise.allSettled(names.map(async (name,modelIndex)=>{
-  const modelRand=seededRandom(config.seed+modelIndex),gltf=await new GLTFLoader().loadAsync(new URL('../assets/models/'+name,import.meta.url).href),mesh=gltf.scene.children.find(o=>o.isMesh);if(!mesh)throw Error('Missing mesh '+name);
+ const models=config.environment.models,names=models.map(path=>path.split('/').at(-1));
+ const results=await Promise.allSettled(models.map(async (path,modelIndex)=>{
+  const name=names[modelIndex];
+  const modelRand=seededRandom(config.seed+modelIndex),gltf=await new GLTFLoader().loadAsync(new URL('../'+path,import.meta.url).href),mesh=gltf.scene.children.find(o=>o.isMesh);if(!mesh)throw Error('Missing mesh '+name);
   gltf.scene.updateMatrixWorld(true);const geometry=mesh.geometry;geometry.applyMatrix4(mesh.matrixWorld);geometry.computeBoundingBox();const box=geometry.boundingBox,scale=(name.startsWith('adult')?e.crowdHeight:name.startsWith('bench')?e.benchHeight:e.treeHeight)/(box.max.y-box.min.y),cx=(box.min.x+box.max.x)/2,cz=(box.min.z+box.max.z)/2;
   geometry.translate(-cx,-box.min.y,-cz);geometry.scale(scale,scale,scale);const mat=keep(mesh.material);mat.roughness=1;mat.metalness=0;loaded.push(name);
   if(name.startsWith('adult')){
