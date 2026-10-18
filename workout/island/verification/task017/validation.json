@@ -1,0 +1,335 @@
+{
+  "baseCommit": "6df6b485c093dd13c5de0940353c44d2f0d5f396",
+  "originalAssetSource": "fa3b133880234a0d88d0226b61db011a0dfdb30b",
+  "originalPilotBase": "fa3b133880234a0d88d0226b61db011a0dfdb30b",
+  "dataVersionBefore": "g2j-20261019-1",
+  "dataVersionAfter": "g2j-20261019-1",
+  "existingVersionLinksUnchanged": true,
+  "saveVersionBefore": 15,
+  "saveVersionAfter": 15,
+  "node": {
+    "command": "node --test --test-reporter=tap tests/*.mjs",
+    "summary": {
+      "tests": 1686,
+      "pass": 1647,
+      "fail": 1,
+      "skipped": 38,
+      "cancelled": 0
+    },
+    "onlyFailure": [
+      "island complete deployable folder including bundled assets stays within 15 MB"
+    ]
+  },
+  "manifest": {
+    "entries": 15,
+    "testPassed": true,
+    "retainedModelBytesUnchanged": 13
+  },
+  "restoredModels": [
+    {
+      "path": "assets/models/car-a-512.glb",
+      "bytes": 327664,
+      "sha256": "91a0211f18a84cf47dd271aac51783d8d2bc0be7296ccdfd3782aaaf7b53d6c9"
+    },
+    {
+      "path": "assets/models/adult-man-rigged-512.glb",
+      "bytes": 1218676,
+      "sha256": "5bf0beed6c7584ead260d579c11af3b707db9f4ebb420af98e4d81f84a2ce217"
+    }
+  ],
+  "cityDownloadBudget": {
+    "limitBytes": 6000000,
+    "maxBrowserTransferBytes": 5570764,
+    "passed": true
+  },
+  "deploymentFolderBudget": {
+    "limitBytes": 15000000,
+    "bytesAtFullTest": 18385841,
+    "passed": false,
+    "allowedKnownFailure": true,
+    "unchangedMainTest": true
+  },
+  "browser": {
+    "cases": 8,
+    "passed": 8,
+    "consoleErrors": 0,
+    "outsideRequests": 0,
+    "report": "browser.json"
+  },
+  "measurement": {
+    "before": "before.json",
+    "after": "after.json",
+    "cameraEqual": true,
+    "baselineCommit": "6df6b485c093dd13c5de0940353c44d2f0d5f396",
+    "baselinePort": 8767
+  },
+  "upstreamRemovals": {
+    "sourceParent": "fa3b133880234a0d88d0226b61db011a0dfdb30b",
+    "removedBy": "6df6b485c093dd13c5de0940353c44d2f0d5f396",
+    "count": 41,
+    "bytes": 17996000,
+    "models": [
+      {
+        "file": "adult-man-512.glb",
+        "bytes": 319156,
+        "restoredInPilot": false
+      },
+      {
+        "file": "adult-man-rigged-512.glb",
+        "bytes": 1218676,
+        "restoredInPilot": true
+      },
+      {
+        "file": "adult-woman-512.glb",
+        "bytes": 298956,
+        "restoredInPilot": false
+      },
+      {
+        "file": "adult-woman-rigged-512.glb",
+        "bytes": 552580,
+        "restoredInPilot": false
+      },
+      {
+        "file": "ambulance-512.glb",
+        "bytes": 303668,
+        "restoredInPilot": false
+      },
+      {
+        "file": "apartment-block-512.glb",
+        "bytes": 328704,
+        "restoredInPilot": false
+      },
+      {
+        "file": "bench-512.glb",
+        "bytes": 308176,
+        "restoredInPilot": false
+      },
+      {
+        "file": "boss-ship-512.glb",
+        "bytes": 321364,
+        "restoredInPilot": false
+      },
+      {
+        "file": "bus-512.glb",
+        "bytes": 339584,
+        "restoredInPilot": false
+      },
+      {
+        "file": "bush-512.glb",
+        "bytes": 206072,
+        "restoredInPilot": false
+      },
+      {
+        "file": "cafe-512.glb",
+        "bytes": 317992,
+        "restoredInPilot": false
+      },
+      {
+        "file": "car-a-512.glb",
+        "bytes": 327664,
+        "restoredInPilot": true
+      },
+      {
+        "file": "enemy-ship-b-512.glb",
+        "bytes": 276116,
+        "restoredInPilot": false
+      },
+      {
+        "file": "fire-station-512.glb",
+        "bytes": 290468,
+        "restoredInPilot": false
+      },
+      {
+        "file": "firefighter-512.glb",
+        "bytes": 314580,
+        "restoredInPilot": false
+      },
+      {
+        "file": "firefighter-rigged-512.glb",
+        "bytes": 1164892,
+        "restoredInPilot": false
+      },
+      {
+        "file": "gas-station-512.glb",
+        "bytes": 294284,
+        "restoredInPilot": false
+      },
+      {
+        "file": "grocery-512.glb",
+        "bytes": 328620,
+        "restoredInPilot": false
+      },
+      {
+        "file": "helicopter-512.glb",
+        "bytes": 306524,
+        "restoredInPilot": false
+      },
+      {
+        "file": "house-a-512-orig.glb",
+        "bytes": 281152,
+        "restoredInPilot": false
+      },
+      {
+        "file": "kid-boy-512.glb",
+        "bytes": 301420,
+        "restoredInPilot": false
+      },
+      {
+        "file": "kid-boy-rigged-512.glb",
+        "bytes": 974924,
+        "restoredInPilot": false
+      },
+      {
+        "file": "kid-girl-512.glb",
+        "bytes": 320132,
+        "restoredInPilot": false
+      },
+      {
+        "file": "kid-girl-rigged-512.glb",
+        "bytes": 1204980,
+        "restoredInPilot": false
+      },
+      {
+        "file": "palm-tree-512.glb",
+        "bytes": 299172,
+        "restoredInPilot": false
+      },
+      {
+        "file": "pine-tree-512.glb",
+        "bytes": 296728,
+        "restoredInPilot": false
+      },
+      {
+        "file": "playground-park-512.glb",
+        "bytes": 301036,
+        "restoredInPilot": false
+      },
+      {
+        "file": "police-car-512.glb",
+        "bytes": 301012,
+        "restoredInPilot": false
+      },
+      {
+        "file": "police-officer-512.glb",
+        "bytes": 340436,
+        "restoredInPilot": false
+      },
+      {
+        "file": "police-officer-rigged-512.glb",
+        "bytes": 1201532,
+        "restoredInPilot": false
+      },
+      {
+        "file": "police-station-512.glb",
+        "bytes": 274056,
+        "restoredInPilot": false
+      },
+      {
+        "file": "rock-512.glb",
+        "bytes": 270772,
+        "restoredInPilot": false
+      },
+      {
+        "file": "school-512.glb",
+        "bytes": 320732,
+        "restoredInPilot": false
+      },
+      {
+        "file": "shop-corner-512-orig.glb",
+        "bytes": 248848,
+        "restoredInPilot": false
+      },
+      {
+        "file": "shop-corner.glb",
+        "bytes": 1276148,
+        "restoredInPilot": false
+      },
+      {
+        "file": "soccer-field-512.glb",
+        "bytes": 381976,
+        "restoredInPilot": false
+      },
+      {
+        "file": "street-lamp-512.glb",
+        "bytes": 284096,
+        "restoredInPilot": false
+      },
+      {
+        "file": "tennis-court-512.glb",
+        "bytes": 335848,
+        "restoredInPilot": false
+      },
+      {
+        "file": "trash-bin-512.glb",
+        "bytes": 355756,
+        "restoredInPilot": false
+      },
+      {
+        "file": "tree-a-512.glb",
+        "bytes": 272196,
+        "restoredInPilot": false
+      },
+      {
+        "file": "water-tower-512.glb",
+        "bytes": 334972,
+        "restoredInPilot": false
+      }
+    ]
+  },
+  "qaNotes": "workout/island/notes/task017-pilot-qa.md",
+  "changedFiles": [
+    "tests/island-task017-pilot.test.mjs",
+    "workout/island/assets/models/adult-man-rigged-512.glb",
+    "workout/island/assets/models/car-a-512.glb",
+    "workout/island/assets/models/manifest.json",
+    "workout/island/data/config.json",
+    "workout/island/notes/task017-pilot-qa.md",
+    "workout/island/tests/task017-pilot-browser.mjs",
+    "workout/island/verification/task017/after-390x844.png",
+    "workout/island/verification/task017/after-844x390.png",
+    "workout/island/verification/task017/after.json",
+    "workout/island/verification/task017/before-390x844.png",
+    "workout/island/verification/task017/before-844x390.png",
+    "workout/island/verification/task017/before.json",
+    "workout/island/verification/task017/browser-390x844-both.png",
+    "workout/island/verification/task017/browser-390x844-car.png",
+    "workout/island/verification/task017/browser-390x844-none.png",
+    "workout/island/verification/task017/browser-390x844-walker.png",
+    "workout/island/verification/task017/browser-844x390-both.png",
+    "workout/island/verification/task017/browser-844x390-car.png",
+    "workout/island/verification/task017/browser-844x390-none.png",
+    "workout/island/verification/task017/browser-844x390-walker.png",
+    "workout/island/verification/task017/browser.json",
+    "workout/island/verification/task017/detail-stop.png",
+    "workout/island/verification/task017/diagnostics.json",
+    "workout/island/verification/task017/initial/before-390x844.png",
+    "workout/island/verification/task017/initial/before-844x390.png",
+    "workout/island/verification/task017/initial/before.json",
+    "workout/island/verification/task017/profile.json",
+    "workout/island/verification/task017/validation.json",
+    "workout/island/view/island-view.mjs",
+    "workout/island/view/local-models.mjs",
+    "workout/island/view/meshy-pilot.mjs",
+    "workout/island/view/skeleton-utils.mjs"
+  ],
+  "changedFileCount": 33,
+  "testFiles": [
+    "tests/island-task017-pilot.test.mjs",
+    "workout/island/tests/task017-pilot-browser.mjs"
+  ],
+  "scopeAudit": "PASS",
+  "previousIntegrationBlocker": "resolved by explicit user exception; original two GLBs restored and manifest updated",
+  "unchangedPaths": [
+    "codex-lab/**",
+    "**/vendor/**",
+    "workout/island/app.mjs",
+    "workout/island/index.html",
+    "workout/island/release.mjs",
+    "workout/island/engine/persistence.mjs",
+    "workout/island/ui/**",
+    "workout/island/styles.css",
+    "tests/island-assets.test.mjs",
+    "CHANGELOG.md",
+    "QA.md"
+  ]
+}

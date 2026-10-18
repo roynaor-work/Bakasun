@@ -1,12 +1,18 @@
 import {passDestination} from './soccer.mjs?v=g2j-20261019-1';
 /** Pure presentation decisions; the simulation never imports this module. */
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+export function slideWeight(player,config){
+ if(player.recover>0)return clamp(player.recover/config.slide.recoverSeconds,0,1);
+ const u=clamp(1-player.slideTime/config.slide.seconds,0,1),keys=config.view.slidePhases;
+ for(let i=1;i<keys.length;i++)if(u<=keys[i].at){const a=keys[i-1],b=keys[i],v=(u-a.at)/(b.at-a.at),smooth=v*v*(3-2*v);return a.weight+(b.weight-a.weight)*smooth;}
+ return keys.at(-1).weight;
+}
 export function playerAnimation(player,state,config){
   const a=config.view.animation,speed=Math.hypot(player.vx,player.vz),celebrating=state.phase==='goal'&&state.ball.lastPlayer===player.id,sprinting=player.id===state.controlled?state.sprint.active:player.sprinting;
-  const mode=celebrating?'celebrate':player.throwTime>0?'throw':player.diveTime>0?'dive':player.catchTime>0?'catch':player.headerTime>0?'header':player.slideTime>0?'slide':player.recover>0?'recover':player.stealTime>0?'steal':player.kickTime>0?'kick':speed<=a.idleSpeed?'idle':sprinting?'sprint':'run';
-  const clip={idle:'stand',run:'run',sprint:'run',kick:'kick',steal:'stand',throw:'stand',dive:'stand',catch:'stand',slide:'stand',recover:'stand',header:'stand',celebrate:'jumping-jacks'}[mode];
-  const recovery=mode==='recover'?player.recover/config.slide.recoverSeconds:1,header=mode==='header'?Math.sin((1-player.headerTime/config.aerial.seconds)*Math.PI):0,steal=mode==='steal'?Math.sin((1-player.stealTime/config.steal.animationSeconds)*Math.PI):0;
-  return {mode,clip,speed:mode==='run'||mode==='sprint'?clamp(speed/a.runSpeed,a.minRate,a.maxRate):mode==='steal'?a.stealRate:1,
+  const mode=celebrating?'celebrate':player.throwTime>0?'throw':player.hands?'catch':player.diveTime>0?'dive':player.catchTime>0?'catch':player.headerTime>0?'header':player.slideTime>0?'slide':player.recover>0?'recover':player.stealTime>0?'steal':player.kickTime>0?'kick':speed<=a.idleSpeed?'idle':sprinting?'sprint':'run';
+  const clip=mode==='catch'&&player.hands&&speed>a.idleSpeed?'run':{idle:'stand',run:'run',sprint:'run',kick:'kick',steal:'stand',throw:'stand',dive:'stand',catch:'stand',slide:'stand',recover:'stand',header:'stand',celebrate:'jumping-jacks'}[mode];
+  const recovery=mode==='slide'||mode==='recover'?slideWeight(player,config):1,header=mode==='header'?Math.sin((1-player.headerTime/config.aerial.seconds)*Math.PI):0,steal=mode==='steal'?Math.sin((1-player.stealTime/config.steal.animationSeconds)*Math.PI):0;
+  return {mode,clip,speed:clip==='run'?clamp(speed/a.runSpeed,a.minRate,a.maxRate):mode==='steal'?a.stealRate:1,
     lean:mode==='slide'||mode==='recover'?a.slideLean*recovery:mode==='sprint'?a.sprintLean:mode==='steal'?a.stealLean*steal:mode==='header'?a.headerLean*header:0,
     roll:mode==='dive'?a.diveRoll*(player.diveZ||1):mode==='slide'||mode==='recover'?a.slideRoll*recovery:player.turnLean||0,height:mode==='slide'||mode==='recover'?a.slideHeight*recovery:header*config.aerial.jumpHeight,leg:mode==='slide'?a.slideLeg:mode==='steal'?steal*a.slideLeg:0,head:header*config.aerial.headLean,bonePose:mode};
 }
