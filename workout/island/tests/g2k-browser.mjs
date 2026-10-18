@@ -9,7 +9,7 @@ await verify('g2k',[{width:844,height:390},{width:740,height:360},{width:1440,he
  await tap('[data-action=hangar-upgrade]');await tap('[data-action=hangar-rapid]');assert.equal(await page.evaluate(()=>window.__island.engine.state.hangar.rapid),1);
  const paintBefore=await page.evaluate(()=>window.__island.engine.state.hangar.paint);await tap('[data-action=hangar-paint]');assert.equal(await page.evaluate(()=>window.__island.engine.state.hangar.paint),(paintBefore+1)%3);
  await tap('[data-alien-hand] button');assert.equal(await page.evaluate(()=>localStorage.getItem('island.aliens.hand')),'left');await tap('[data-action=hangar-play]');await tap('[data-action=stage-play][data-stage="1"]');
- if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await ready();await nav();await tick(32);
+ if(await page.locator('[data-action=game-understood]').count()){await page.clock.runFor(32);await tap('[data-action=game-understood]');}await ready();await nav();await tick(32);
  await page.waitForFunction(()=>{const s=window.__island.games.current.session.snapshot;return s.renderMetrics?.playerLoaded&&s.artModels?.loaded===6;});
  await tick(32);await shot('wave-entry');
  const textCheck=async()=>{

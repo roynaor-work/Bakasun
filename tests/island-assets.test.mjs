@@ -52,7 +52,7 @@ test('island view imports and model URLs resolve to existing files inside the de
   assert.ok(references >= 8, 'audit includes the real view modules, Three imports and GLB URL');
 });
 
-test('every bundled island GLB stays within 2 MB, including unused library models', async () => {
+test('every bundled island GLB stays within 2 MB', async () => {
   const models = (await filesIn(root)).filter(file => file.pathname.endsWith('.glb'));
   for (const model of models) {
     const bytes = (await stat(model)).size;

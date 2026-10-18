@@ -96,7 +96,7 @@ try{for(const [width,height] of viewports)for(const failure of ['none','car','wa
 async function measurePilot(){
  const label=process.env.TASK017_PHASE||'after',out=fileURLToPath(new URL('../verification/task017/',import.meta.url));await mkdir(out,{recursive:true});
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});const reports=[];
- try {for(const [width,height] of [[390,844],[844,390]]){
+ try {for(const [width,height] of viewports){
  const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,hasTouch:true}),page=await context.newPage(),errors=[],outside=[];
  page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/^https?:/.test(r.url())&&!new URL(r.url()).pathname.startsWith('/workout/island/'))outside.push(r.url())});
  // Cold context. Fixed random stream makes the decorative island reproducible.
@@ -124,7 +124,7 @@ async function diagnosePilot(){
  const out=fileURLToPath(new URL('../verification/task017/',import.meta.url));await mkdir(out,{recursive:true});
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']}),reports=[];
  const variants=['baseline','two-empty-calls','pilot','frozen-mixer','baked-rig','without-textures','car-only','walker-only'];
- try{for(const [width,height] of [[390,844],[844,390]]){
+ try{for(const [width,height] of viewports){
   const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,hasTouch:true}),page=await context.newPage(),errors=[],outside=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
   page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&!u.pathname.startsWith('/workout/island/'))outside.push(u.href);});

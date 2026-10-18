@@ -1,13 +1,13 @@
 /* Shell-only presentation. Keep live instructions in accessible names and the
    pre-game screens; the play surface contains icons, meters and small numbers. */
 .game-screen .game-status,.game-screen .game-warning,.game-screen .game-turn,
-.game-screen .tennis-serve-hint,.game-screen .soccer-phase-banner,
-.game-screen .soccer-goal-banner,.game-screen .soccer-team-name{display:none!important}
+.game-screen .tennis-serve-hint,.game-screen .soccer-team-name,
+.game-screen:not([data-game=soccer]) .soccer-goal-banner{display:none!important}
 .game-screen.game-screen .game-header .game-pause,
 .game-screen.game-screen [data-game-control],
 .game-screen.game-screen .game-gauge{font-size:0!important}
-.game-screen [data-game-control] span:not(.soccer-energy-fill),
-.game-screen [data-game-control] small{font-size:0!important}
+.game-screen [data-game-control] span:not(.soccer-energy-fill):not(.alien-ammo):not(.ammo-copy),
+.game-screen [data-game-control] small:not(.alien-ammo){font-size:0!important}
 .game-screen .game-upgrade-panel h3{display:none}
 .game-screen .game-upgrade-panel button span,.game-screen .game-upgrade-panel button strong,
 .game-screen .game-upgrade-panel button small{font-size:0!important}

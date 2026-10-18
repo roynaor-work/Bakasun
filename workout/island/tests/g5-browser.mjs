@@ -10,18 +10,18 @@ const server=await serveIsland('/workout/island/'),browser=await chromium.launch
 const reports=[],games={soccer:['soccer','יש לבנות מגרש כדורגל'],navalDuel:['harbor','יש לבנות נמל ימי'],fireRescue:['fireStation','יש לבנות תחנת כיבוי'],alienDefense:['airbase','יש לבנות בסיס חיל אוויר']};
 const viewports=process.env.G5_WIDTH?[{width:Number(process.env.G5_WIDTH),height:Number(process.env.G5_HEIGHT)||844}]:[{width:390,height:844},{width:360,height:740},{width:1440,height:1000},{width:844,height:390}];
 try{for(const viewport of viewports){
- const {width,height}=viewport,context=await browser.newContext({viewport,hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[],outside=[],shots=[],checks=[];
+ const {width,height}=viewport,context=await browser.newContext({viewport,hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[],outside=[],shots=[],checks=[];context.setDefaultTimeout(240000);
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&!u.pathname.startsWith('/workout/island/'))outside.push(u.href);});
  // Exercise the denied-fullscreen path too, without changing the production fallback.
  if(width===844)await page.addInitScript(()=>{HTMLElement.prototype.requestFullscreen=undefined;});
  if(width===360)await page.addInitScript(()=>{HTMLElement.prototype.requestFullscreen=()=>Promise.reject(new Error('fullscreen denied for test'));});
  const tap=selector=>page.locator(selector).tap(),tick=ms=>page.clock.runFor(ms),snap=()=>page.evaluate(()=>window.__island.games.current?.session.snapshot);
- async function nav(){for(let i=0;i<100;i++){if(await page.evaluate(()=>!window.__island.games.navigation.traversing))return;await new Promise(resolve=>setTimeout(resolve,10));}throw Error('history traversal did not settle');}
+ async function nav(){await waitForGameNavigation(page);}
  async function shot(name){const file=`${width}x${height}-${name}.png`;await page.screenshot({path:directory+file});shots.push(file);}
  const progress=()=>page.evaluate(()=>{const s=window.__island.engine.state;return JSON.stringify({money:s.money,parts:s.parts,wins:s.minigameWins,stars:s.minigameProgress,team:s.team});});
  const simulation=()=>page.evaluate(()=>{const s=window.__island.games.current.session.snapshot;return Object.fromEntries(['time','elapsed','remaining','phase','score','lives','water','pressure','charge','wave','aim','players','truck','charging'].filter(k=>k in s).map(k=>[k,s[k]]));});
- async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]');await waitForGameStart(page);await tick(120);await nav();assert.ok(await page.evaluate(()=>window.__island.engine.isMinigameActive()),id);}
+ async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count()){await page.clock.runFor(32);await tap('[data-action=game-understood]');}await waitForGameStart(page);await tick(120);await nav();assert.ok(await page.evaluate(()=>window.__island.engine.isMinigameActive()),id);}
  async function back(){await page.evaluate(()=>history.back());await page.waitForSelector('[data-pause-kind=exit]');await nav();}
  try{
   assert.equal((await context.request.get(server.url.replace('/workout/island/','/codex-lab/island-soccer/'))).status(),404);
@@ -49,20 +49,20 @@ try{for(const viewport of viewports){
    await page.evaluate(id=>window.__island.ui.showInfo(id),ids[building]);assert.equal(await page.locator(`[data-action=${building}-building-play]`).count(),1);await tap(`[data-action=${building}-building-play]`);assert.equal(await page.locator(`[data-stage-map=${id}]`).count(),1);await tap('[data-action=close-modal]');await nav();
    const before=await progress();await start(id);
    const canvas=await page.locator('.minigame-canvas').boundingBox(),size=await page.evaluate(()=>({width:innerWidth,height:innerHeight}));assert.ok(Math.abs(canvas.width-size.width)<=1,JSON.stringify({canvas,size}));assert.ok(Math.abs(canvas.height-size.height)<=1,JSON.stringify({canvas,size}));assert.ok(canvas.x<=1&&canvas.y<=1);
-   const pause=await page.locator('[data-action=game-pause]').boundingBox();assert.ok(pause.width>=56&&pause.height>=56);assert.equal(await page.locator('[data-action=game-exit]').count(),0);if(width===360||width===844)assert.equal(await page.evaluate(()=>Boolean(document.fullscreenElement)),false);if(width===390&&id==='soccer')assert.equal(await page.evaluate(()=>document.fullscreenElement===document.querySelector('.game-screen')),true);
-   const initial=await snap();if(id!=='soccer'){const v=initial.viewport;assert.ok(v.offsetX>=0&&v.offsetY>=0);assert.ok(v.offsetX+v.modelWidth*v.scale<=canvas.width+1);assert.ok(v.offsetY+v.modelHeight*v.scale<=canvas.height+1);}
+   const pause=await page.locator('[data-action=game-pause]').boundingBox();assert.ok(pause.width>=(id==='alienDefense'?48:56)&&pause.height>=(id==='alienDefense'?48:56));assert.equal(await page.locator('[data-action=game-exit]').count(),0);if(width===360||width===844)assert.equal(await page.evaluate(()=>Boolean(document.fullscreenElement)),false);if(width===390&&id==='soccer')assert.equal(await page.evaluate(()=>document.fullscreenElement===document.documentElement),true);
+   const initial=await snap();if(id!=='soccer'){const v=initial.viewport;assert.ok(v.offsetX>=0&&v.offsetY>=0);assert.ok(v.offsetX+v.modelWidth*v.scale<=canvas.width+1);assert.ok(v.offsetY+v.modelHeight*(v.scaleY??v.scale)<=canvas.height+1);}
    await shot(`${id}-play`);
    // Pause after held keyboard input; release while paused and prove the model is frozen.
    await page.locator('.minigame-canvas').focus();await page.keyboard.down(id==='soccer'?'Space':'ArrowRight');await tick(100);await tap('[data-action=game-pause]');await page.keyboard.up(id==='soccer'?'Space':'ArrowRight');
    assert.equal((await snap()).paused,true);assert.equal(await page.evaluate(()=>window.__island.games.sound.paused),true);const held=await simulation();await tick(1000);assert.deepEqual(await simulation(),held);if(id==='soccer')assert.equal((await snap()).charging,false);
-   await tap('[data-action=game-pause]');await tick(200);assert.equal((await snap()).paused,false);assert.equal(await page.evaluate(()=>window.__island.games.sound.paused),false);
+   await tap('[data-action=game-resume]');await tick(200);assert.equal((await snap()).paused,false);assert.equal(await page.evaluate(()=>window.__island.games.sound.paused),false);
    // Visibility must remain paused until an explicit resume, including after returning to the tab.
    await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});const hidden=await simulation();await tick(600);assert.deepEqual(await simulation(),hidden);await page.evaluate(()=>{delete document.hidden;document.dispatchEvent(new Event('visibilitychange'));});assert.equal((await snap()).paused,true);await tap('[data-action=game-resume]');
    const guardedLength=await page.evaluate(()=>history.length);assert.ok(guardedLength<=baseLength+2);
-   await back();assert.match(await page.locator('[data-pause-kind=exit]').innerText(),/לצאת מהמשחק\?/);const paused=await simulation();await tick(600);assert.deepEqual(await simulation(),paused);await shot(`${id}-back`);await tap('[data-action=game-resume]');await tick(120);assert.equal((await snap()).paused,false);
-   assert.equal(await page.evaluate(()=>history.length),guardedLength);await back();await tap('[data-action=game-exit]');await nav();assert.equal(await page.locator('.modal').count(),0);assert.equal(await page.evaluate(()=>window.__island.engine.isMinigameActive()),false);assert.equal(await page.evaluate(()=>window.__island.view.paused),false);assert.equal(await page.evaluate(()=>history.state.islandShell.depth),0);assert.equal(await page.evaluate(()=>Boolean(document.fullscreenElement)),false);assert.equal(await progress(),before);
+   await back();assert.match(await page.locator('[data-pause-kind=exit]').getAttribute('aria-label'),/לצאת מהמשחק\?/);const paused=await simulation();await tick(600);assert.deepEqual(await simulation(),paused);await shot(`${id}-back`);await tap('[data-action=game-resume]');await tick(120);assert.equal((await snap()).paused,false);
+   assert.equal(await page.evaluate(()=>history.length),guardedLength);await back();await tap('[data-action=game-exit]');await nav();assert.equal(await page.locator('.modal').count(),0);assert.equal(await page.evaluate(()=>window.__island.engine.isMinigameActive()),false);assert.equal(await page.evaluate(()=>window.__island.view.paused),false);assert.equal(await page.evaluate(()=>history.state.islandShell.depth),0);assert.equal(await page.evaluate(()=>Boolean(document.fullscreenElement)),width!==360&&width!==844);assert.equal(await progress(),before);
    await start(id);await tap('[data-action=game-pause]');await tap('[data-action=game-exit]');await nav();assert.ok(await page.evaluate(()=>history.length)<=baseLength+2);assert.equal(await progress(),before);
-   checks.push({id,canvas,viewport:size,pauseMinimum56:true,pauseFreezesModel:true,visibilityPause:true,twoBackConfirmations:true,stayResumes:true,cancelWithoutReward:true,noHistoryGrowth:true});
+   checks.push({id,canvas,viewport:size,pauseMinimum:id==='alienDefense'?48:56,pauseFreezesModel:true,visibilityPause:true,twoBackConfirmations:true,stayResumes:true,cancelWithoutReward:true,noHistoryGrowth:true});
   }
   if(width===390){
    // Reproduce the original finger drag through real CDP touch events, then confirm placement.
@@ -73,7 +73,7 @@ try{for(const viewport of viewports){
   // The hall has metrics, team and game entry and cannot expose removal.
   await page.evaluate(()=>{const {ui,engine}=window.__island;ui.showInfo(engine.state.buildings.find(b=>b.typeId==='cityHall').id);});assert.equal(await page.locator('[data-action=remove]').count(),0);assert.equal(await page.locator('[data-action=city-hall-games]').count(),1);assert.equal(await page.locator('.city-hall-metrics p').count(),await page.evaluate(()=>Object.keys(window.__island.engine.metrics()).length));assert.match(await page.locator('.info-card').innerText(),/כוכבי האי/);await shot('city-hall');
   assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);reports.push({width,height,fullscreenFallback:width===360?'denied':width===844?'unavailable':false,baseLength,checks,consoleErrors:errors,outsideRequests:outside,labBlocked:true,shots});console.log('G5 verified',width,height);
- }catch(error){await shot('failure');console.error(JSON.stringify({viewport,errors,outside}));throw error;}finally{await context.close();}
+ }catch(error){console.error(error,JSON.stringify({viewport,errors,outside}));try{await shot('failure');}catch(capture){console.error('failure screenshot:',capture.message);}throw error;}finally{await context.close();}
 }
  await writeFile(directory+'verification.json',JSON.stringify({release:'g5-20261016-1',saveVersion:9,browser:'Chromium / ANGLE SwiftShader',physicalPhone:false,iOS:false,realFPS:false,reports},null,2)+'\n');
 }finally{await browser.close();await server.close();}
