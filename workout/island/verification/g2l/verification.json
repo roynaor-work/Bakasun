@@ -5,7 +5,7 @@
   "physicalPhone": false,
   "iPhone": false,
   "phoneFPS": false,
-  "base": "fa3b133",
+  "base": "933abc9",
   "preconditionBase": "28eaec4",
   "versions": {
     "data": "g2j-20261019-1",
@@ -13,12 +13,13 @@
   },
   "nodeTests": {
     "command": "node --test tests/*.mjs",
-    "tests": 1695,
-    "pass": 1656,
+    "tests": 1763,
+    "pass": 1724,
     "fail": 1,
     "skipped": 38,
     "newTests": 14,
-    "knownFailure": "island complete deployable folder including bundled assets stays within 15 MB"
+    "knownFailure": "island complete deployable folder including bundled assets stays within 15 MB",
+    "islandBytesAtTest": 23989480
   },
   "baselineTests": {
     "tests": 1681,
@@ -47,7 +48,7 @@
       "width": 844,
       "height": 390,
       "coverage": 1,
-      "framesAudited": 859,
+      "framesAudited": 866,
       "bounds": {
         "x": 0,
         "y": 0,
@@ -149,7 +150,7 @@
       "width": 740,
       "height": 360,
       "coverage": 1,
-      "framesAudited": 890,
+      "framesAudited": 854,
       "bounds": {
         "x": 0,
         "y": 0,
@@ -242,7 +243,7 @@
       "width": 1440,
       "height": 1000,
       "coverage": 1,
-      "framesAudited": 871,
+      "framesAudited": 843,
       "bounds": {
         "x": 0,
         "y": 0,
@@ -331,5 +332,30 @@
       "outside": [],
       "shots": []
     }
-  ]
+  ],
+  "implementationBase": "fa3b133",
+  "mergeVerification": {
+    "main": "933abc9a32cf2559f376da573d5235e8d2cc00df",
+    "strategy": "merge, no rebase",
+    "restoredFrom": "fa3b133",
+    "restoredModels": {
+      "assets/models/firefighter-rigged-512.glb": "1403e301dd56428b9328c3df815a94ac64382d13450ed97e6dc5f74044a5fd41",
+      "assets/models/fire-station-512.glb": "352e6928f86f480c50eb81d4b414049e26f15b7fc8dd4ede90e64c4464a6207a",
+      "assets/models/cafe-512.glb": "b16a241b0872768cdfe485f78dc2e20d1a855d8996d1ed75e84eaf6932b205ce",
+      "assets/models/apartment-block-512.glb": "041a91571947d51094668b5416cc482d21d272575180333da9f6a3c06b07ef57",
+      "assets/models/adult-woman-rigged-512.glb": "289bb5fa9bc8ced9ca447eae44925490f210d4e979114107e1808937f215c057"
+    },
+    "existingMainModelsUnchanged": 22,
+    "jsonValid": true,
+    "alienStringsMatchMain": true,
+    "fireStringsMatchBranch": true,
+    "referencedModelsTestPassed": true,
+    "selectedFirefighterAssetTestPassed": true,
+    "protectedFilesUnchanged": true,
+    "browserCommands": [
+      "G2L_WIDTH=844 G2L_HEIGHT=390 CHROMIUM_PATH=/usr/bin/chromium PLAYWRIGHT_MODULE=/opt/codex/cua_node/lib/node_modules/playwright node workout/island/tests/g2l-browser.mjs",
+      "G2L_WIDTH=740 G2L_HEIGHT=360 CHROMIUM_PATH=/usr/bin/chromium PLAYWRIGHT_MODULE=/opt/codex/cua_node/lib/node_modules/playwright node workout/island/tests/g2l-browser.mjs",
+      "G2L_WIDTH=1440 G2L_HEIGHT=1000 CHROMIUM_PATH=/usr/bin/chromium PLAYWRIGHT_MODULE=/opt/codex/cua_node/lib/node_modules/playwright node workout/island/tests/g2l-browser.mjs"
+    ]
+  }
 }

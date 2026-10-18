@@ -1,0 +1,103 @@
+{
+  "baseCommit": "28eaec4",
+  "integratedMain": "fa3b133",
+  "baseline": {
+    "tests": 1681,
+    "pass": 1642,
+    "fail": 1,
+    "skipped": 38
+  },
+  "final": {
+    "tests": 1696,
+    "pass": 1657,
+    "fail": 1,
+    "skipped": 38
+  },
+  "knownFailure": "island complete deployable folder including bundled assets stays within 15 MB",
+  "comparison": [
+    {
+      "root": "/tmp/g3g-base",
+      "firstTickDisplacement": 0.01609054350603145,
+      "turnRadius": 0.1883772595980307,
+      "dribbleCentre": 0.62,
+      "minimumFieldTravel": 113.8851819744262,
+      "minimumFieldSpeed": 3.796172732480927,
+      "teamWidth": 2.9623216680470943,
+      "maxOverlap": 9.300000000000042
+    },
+    {
+      "root": "/workspace/Bakasun",
+      "firstTickDisplacement": 0.02926436630815843,
+      "turnRadius": 0.10205684059490366,
+      "dribbleCentre": 0.49,
+      "minimumFieldTravel": 86.21798144374844,
+      "minimumFieldSpeed": 3.7003425512338453,
+      "teamWidth": 10.561803866376152,
+      "maxOverlap": 0
+    }
+  ],
+  "budget": {
+    "triangles": 127549,
+    "calls": 86
+  },
+  "browser": [
+    {
+      "width": 844,
+      "height": 390,
+      "footDistance": 0.514912911972224,
+      "handRadii": [
+        0.2196356033525048,
+        0.2196363529093301
+      ],
+      "fallback": {
+        "triangles": 34121,
+        "calls": 50,
+        "models": 2,
+        "simple": 6
+      },
+      "errors": [],
+      "outside": []
+    },
+    {
+      "width": 740,
+      "height": 360,
+      "footDistance": 0.514912911972224,
+      "handRadii": [
+        0.21963560056812928,
+        0.21963635579216298
+      ],
+      "fallback": {
+        "triangles": 34121,
+        "calls": 50,
+        "models": 2,
+        "simple": 6
+      },
+      "errors": [],
+      "outside": []
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "footDistance": 0.514912911972224,
+      "handRadii": [
+        0.2196356005272963,
+        0.21963635583444635
+      ],
+      "fallback": {
+        "triangles": 34113,
+        "calls": 44,
+        "models": 2,
+        "simple": 6
+      },
+      "errors": [],
+      "outside": []
+    }
+  ],
+  "calibrationDiagnostics": [
+    "ℹ G3f profile calibration {\"stage\":1,\"seeds\":20,\"wins\":[20,20,20]}",
+    "ℹ G3f profile calibration {\"stage\":5,\"seeds\":20,\"wins\":[20,19,8]}",
+    "ℹ G3f profile calibration {\"stage\":10,\"seeds\":20,\"wins\":[20,14,1]}",
+    "ℹ G3f profile calibration {\"stage\":1,\"seeds\":10,\"wins\":[10,10,10]}",
+    "ℹ {\"stage\":1,\"seeds\":10,\"wins\":[10,10,10]}"
+  ]
+}

@@ -1,5 +1,33 @@
 # G2l · כיבוי: עיר רחבה, משאית ברחובות וכבאי אמיתי
 
+## עדכון אחרי מיזוג main · 18/10/2026
+
+נמשך אותו ענף `codex/g2l-fire` ואותו PR 145. בוצע fetch ואחריו merge של `origin/main` בקומיט `933abc9`, ללא rebase. זהו main העדכני שנמצא: הוא כולל את `c26a09a` ואת PRs 140, 141, 143, 146, 147, וגם את PR 144 של הטניס שמוזג אחריהם.
+
+ההתנגשות היחידה הייתה ב־`data/strings.he.json`. מפתחות `minigame.alienDefense.help.1-3` ו־`alien.stickSide`, `alien.stickLeft`, `alien.stickRight` נשמרו בדיוק מ־main; מפתחות `minigame.fireRescue.help.1-3` ו־`fire.drive`, `fire.mission`, `fire.firesLeft`, `fire.peopleLeft`, `fire.timeLeft` נשמרו מהענף. הקובץ פוענח כ־JSON והערכים הושוו למקורות. מיזוג config אומת מול main, עם סעיף fireRescue המקורי של הענף בלבד.
+
+חמשת הדגמים הדרושים לכיבוי הוחזרו מ־`fa3b133`, בהשוואת בייטים מלאה, ונוספו ל־`assets/models/manifest.json`:
+
+| דגם | SHA256 |
+|---|---|
+| firefighter-rigged-512.glb | `1403e301dd56428b9328c3df815a94ac64382d13450ed97e6dc5f74044a5fd41` |
+| fire-station-512.glb | `352e6928f86f480c50eb81d4b414049e26f15b7fc8dd4ede90e64c4464a6207a` |
+| cafe-512.glb | `b16a241b0872768cdfe485f78dc2e20d1a855d8996d1ed75e84eaf6932b205ce` |
+| apartment-block-512.glb | `041a91571947d51094668b5416cc482d21d272575180333da9f6a3c06b07ef57` |
+| adult-woman-rigged-512.glb | `289bb5fa9bc8ced9ca447eae44925490f210d4e979114107e1808937f215c057` |
+
+כל 22 הדגמים הקיימים ב־main וכל חתימותיהם נשמרו, כולל חמשת דגמי הטניס: adult-man-512, adult-woman-512, bench-512, palm-tree-512, tree-a-512. כעת יש 27 דגמים רשומים. אין מחיקת דגם ביחס ל־main; המחיקות שכבר היו ב־main נשארו כפי שהגיעו במיזוג. אין שינוי ב־DATA_VERSION, ב־CURRENT_VERSION, בקישורי `?v=`, ב־CHANGELOG.md, ב־QA.md או בקובצי המעטפת.
+
+`node --test tests/*.mjs` אחרי המיזוג: **1,763 בדיקות — 1,724 עברו, 38 דולגו, כשל אחד**. הכשל היחיד הוא בדיקת ה־15MB המותרת ב־`tests/island-assets.test.mjs`: `island complete deployable folder including bundled assets stays within 15 MB`, שמדדה 23,989,480 בייטים לתיקיית האי. בדיקת `island bundles only referenced game models and preserves their audited bytes` ובדיקת `G2l the selected firefighter asset has a skin, working skeleton and supplied walking clip` עברו; כל 14 בדיקות G2l עברו. הבדיקות עצמן לא נערכו בעדכון זה.
+
+בדיקות הדפדפן הורצו מחדש, כל גודל בתהליך נפרד דרך `G2L_WIDTH` ו־`G2L_HEIGHT`, באמצעות `CHROMIUM_PATH=/usr/bin/chromium` ו־`PLAYWRIGHT_MODULE=/opt/codex/cua_node/lib/node_modules/playwright`, בפקודה `node workout/island/tests/g2l-browser.mjs`. **3/3 הרצות עברו**. הצילומים, שלושת דוחות הגדלים ו־`verification/g2l/verification.json` עודכנו. בכל גודל: אפס שגיאות ואפס בקשות מחוץ לאי; כל בדיקות הנהיגה, הכבאי, הצינור, המילוי, ההצלה, התעודה והגיבוי עברו.
+
+| גודל | G2L_WIDTH / G2L_HEIGHT | משולשים / קריאות בסצנה | משולשים / קריאות בפועל | פריימי תנועה שנבדקו |
+|---|---|---:|---:|---:|
+| 844×390 | 844 / 390 | 63,793 / 32 | 49,521 / 28 | 866 |
+| 740×360 | 740 / 360 | 63,793 / 32 | 54,061 / 30 | 854 |
+| 1440×1000 | 1440 / 1000 | 63,793 / 32 | 63,793 / 32 | 843 |
+
 ## בסיס ותחום השינוי
 
 תנאי הפתיחה אומתו מול GitHub ולא רק מול העותק המקומי: PR 139 מוזג ל־main בקומיט `28eaec4`. לאחר מכן main התקדם ל־`fa3b133`, שמוסיף את `firefighter-rigged-512.glb`; הענף עודכן אליו והדגם שולב ללא שינוי בקובץ. `DATA_VERSION=g2j-20261019-1`, `CURRENT_VERSION=15`, וקישורי הגרסה הקיימים נשארו כפי שהיו. ענף: `codex/g2l-fire`.

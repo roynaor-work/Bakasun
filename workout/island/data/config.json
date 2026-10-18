@@ -1218,8 +1218,8 @@
      "alienSpeed": 10,
      "drop": 6,
      "shotSeconds": 0.36,
-     "boltSeconds": 2.3,
-     "boltSpeed": 85,
+     "boltSeconds": 2.21,
+     "boltSpeed": 120,
      "points": 10,
      "winMoney": 30,
      "winParts": 0,
@@ -1467,7 +1467,8 @@
      "scoreLimit": 230000,
      "bossShots": 2,
      "rewardScoreLimit": 1750,
-     "killsPerBonus": 16
+     "killsPerBonus": 16,
+     "diveClearance": 100
     }
    ],
    "maxAliens": 48,
@@ -1779,12 +1780,12 @@
      "shield": 0
     },
     {
-     "motion": "static",
+     "motion": "drift",
      "shoots": true,
      "shield": 0
     },
     {
-     "motion": "static",
+     "motion": "drift",
      "shoots": true,
      "shield": 0
     },
@@ -1866,7 +1867,16 @@
      "#a5e68a",
      "#f58da5"
     ],
-    "shipPixelScale": 1.25
+    "shipPixelScale": 1.5,
+    "bankAngle": 0.24,
+    "rocketTrailCount": 12,
+    "rocketTrailSpacing": 0.025,
+    "hudInset": 18,
+    "hudHeartSize": 8,
+    "hudHeartGap": 22,
+    "hudDotRadius": 4,
+    "hudDotGap": 16,
+    "facingCorrectionDegrees": 180
    },
    "formation": {
     "rowGap": 52,
@@ -1907,6 +1917,21 @@
     "handednessKey": "island.aliens.hand",
     "aimDragThreshold": 14,
     "aimHeightPixels": 90
+   },
+   "tactics": {
+    "firstDiveSeconds": 4.2,
+    "diveEverySeconds": 6,
+    "diveSeconds": 3.4,
+    "diveSway": 20,
+    "diveClearance": 85,
+    "descentSpeed": 0.25,
+    "entrySway": 8
+   },
+   "calibration": {
+    "reactionSeconds": 0.24,
+    "stepSeconds": 0.02,
+    "seeds": 10,
+    "minimumWins": 7
    }
   },
   "fireRescue": {
@@ -3104,7 +3129,19 @@
      "beam": 1,
      "length": 1.15,
      "turrets": 2,
-     "hull": "#9c586b"
+     "hull": "#9c586b",
+     "modelSpec": {
+      "path": "assets/models/enemy-ship-b-512.glb",
+      "rotationY": -90,
+      "scale": 1,
+      "length": 9.6,
+      "waterline": 0.3,
+      "cannonPivot": [
+       0,
+       1.8,
+       -2.1
+      ]
+     }
     },
     {
      "hp": 0.85,
@@ -3140,7 +3177,19 @@
     "beam": 1.4,
     "length": 1.5,
     "turrets": 4,
-    "hull": "#b66851"
+    "hull": "#b66851",
+    "modelSpec": {
+     "path": "assets/models/boss-ship-512.glb",
+     "rotationY": -90,
+     "scale": 1,
+     "length": 10.2,
+     "waterline": 0.3,
+     "cannonPivot": [
+      0,
+      1.8,
+      -2.1
+     ]
+    }
    },
    "enemySalvoStage": 7,
    "enemySalvoShots": 2,
@@ -3377,7 +3426,58 @@
     "cloud": "#ffffff",
     "cameraEase": 3.2,
     "maxTriangles": 90000,
-    "maxDrawCalls": 70
+    "maxDrawCalls": 70,
+    "follow": {
+     "distance": 21,
+     "height": 12,
+     "lookAhead": 24,
+     "lookHeight": 0.8,
+     "aimDistance": 10,
+     "aimHeight": 7.5,
+     "aimFov": 36,
+     "fov": 55,
+     "aimFocus": 0.9,
+     "aimForwardMin": 3,
+     "ease": 6,
+     "near": 0.1,
+     "far": 220
+    },
+    "hud": {
+     "margin": 16,
+     "top": 20,
+     "barWidth": 78,
+     "barHeight": 5,
+     "gap": 30,
+     "font": "bold 12px sans-serif",
+     "labelHeight": 28,
+     "edgeInset": 24,
+     "ringRadius": 19,
+     "ringHeight": 8,
+     "crossRadius": 27
+    },
+    "effects": {
+     "flashSeconds": 0.18,
+     "smokeSeconds": 0.55,
+     "muzzleY": 1.95,
+     "muzzleForward": 3.8,
+     "smokeSize": 0.6,
+     "flashSize": 1.1,
+     "submergedY": 1.3,
+     "periscopeHeight": 4,
+     "periscopeBeam": 0.26,
+     "subLength": 7.8,
+     "subBeam": 0.65,
+     "subTube": 0.22,
+     "vulcanBarrels": 6,
+     "vulcanRadius": 0.14,
+     "vulcanLength": 1.5,
+     "vulcanSpin": 22,
+     "projectileHeightScale": 0.24,
+     "torpedoHeight": 0.16,
+     "healthLift": 4.2,
+     "maxProjectiles": 24,
+     "splashCount": 12
+    }
    },
    "combat": {
     "heavySpeed": 0.85,
@@ -3460,7 +3560,50 @@
     "autoLead": 0.7,
     "hullLength": 34,
     "hullBeam": 16,
-    "torpedoTurnRadians": 0.07
+    "torpedoTurnRadians": 0.07,
+    "difficulty": [
+     {
+      "assist": 0.68,
+      "radius": 72
+     },
+     {
+      "assist": 0.645,
+      "radius": 69
+     },
+     {
+      "assist": 0.61,
+      "radius": 66
+     },
+     {
+      "assist": 0.575,
+      "radius": 63
+     },
+     {
+      "assist": 0.54,
+      "radius": 60
+     },
+     {
+      "assist": 0.505,
+      "radius": 57
+     },
+     {
+      "assist": 0.47,
+      "radius": 54
+     },
+     {
+      "assist": 0.435,
+      "radius": 51
+     },
+     {
+      "assist": 0.4,
+      "radius": 48
+     },
+     {
+      "assist": 0.365,
+      "radius": 45
+     }
+    ],
+    "predictionSteps": 3
    }
   },
   "art": {
@@ -3701,7 +3844,7 @@
     "friction": 0.7,
     "bounce": 0.28,
     "pickupRadius": 0.85,
-    "dribbleOffset": 0.62,
+    "dribbleOffset": 0.49,
     "chargeSeconds": 1.1,
     "shortPressSeconds": 0.28,
     "passSpeed": 12,
@@ -3715,7 +3858,7 @@
     "speedPerRank": 0.28,
     "kickPerRank": 0.06,
     "defensePerRank": 0.12,
-    "acceleration": 12,
+    "acceleration": 24,
     "radius": 0.42,
     "roles": [
      "striker",
@@ -3765,10 +3908,11 @@
       "template": 3
      }
     ],
-    "deceleration": 7,
-    "turnRate": 12,
+    "deceleration": 15,
+    "turnRate": 18,
     "turnLean": 0.1,
-    "maxTurnLean": 0.2
+    "maxTurnLean": 0.2,
+    "lowSpeedTurnBoost": 1.5
    },
    "team": {
     "id": "islandTeam",
@@ -3917,7 +4061,7 @@
     "confettiCount": 96,
     "crowdCount": 96,
     "aimArrowLength": 2,
-    "aimArrowWidth": 0.045,
+    "aimArrowWidth": 0.2,
     "camera": {
      "elevationDegrees": 30,
      "fovDegrees": 42,
@@ -3947,7 +4091,7 @@
      "keeperMix": 0.65,
      "slideRoll": 0.6,
      "slideLeg": 0.7,
-     "slideKnee": 0.85,
+     "slideKnee": 1.65,
      "turnSmoothing": 10,
      "stealLean": 0.15,
      "stealRate": 1.6,
@@ -3957,7 +4101,7 @@
      "slideHip": -1.15,
      "slideSpine": 0.35,
      "slideSupportArm": 1.1,
-     "slideBentHip": 0.85,
+     "slideBentHip": 1.2,
      "throwArm": -2.7,
      "throwElbow": -0.6,
      "diveRoll": 1.25,
@@ -3974,8 +4118,8 @@
      "radialSegments": 6,
      "heightSegments": 4
     },
-    "aimArrowMinLength": 0.8,
-    "aimArrowMaxLength": 5.2,
+    "aimArrowMinLength": 1.4,
+    "aimArrowMaxLength": 5.8,
     "teamAbbreviationLength": 3,
     "farModelDistance": 6,
     "crowd": {
@@ -4000,7 +4144,63 @@
      "height": 0.32,
      "offset": 0.26,
      "heightOffset": -0.08
-    }
+    },
+    "appearance": {
+     "skin": [
+      "#efba91",
+      "#c99168",
+      "#875a43",
+      "#dca17b",
+      "#b47c59",
+      "#f4c9a5",
+      "#a76c4d",
+      "#6c4738"
+     ],
+     "hair": [
+      "#382921",
+      "#bd8349",
+      "#171b23",
+      "#78442c",
+      "#d4ac66",
+      "#51352a",
+      "#97613b",
+      "#29202a"
+     ],
+     "socks": [
+      "#fff5db",
+      "#273d63",
+      "#d5e4ee",
+      "#f5d99c",
+      "#b9d7e0",
+      "#efc7ba",
+      "#ebe8d9",
+      "#638b9a"
+     ]
+    },
+    "slidePhases": [
+     {
+      "at": 0,
+      "weight": 0.05
+     },
+     {
+      "at": 0.2,
+      "weight": 0.55
+     },
+     {
+      "at": 0.4,
+      "weight": 1
+     },
+     {
+      "at": 0.8,
+      "weight": 1
+     },
+     {
+      "at": 1,
+      "weight": 1
+     }
+    ],
+    "ballShadowScale": 0.7,
+    "ballShadowHeightScale": 0.08
    },
    "controls": {
     "deadzone": 0.12,
@@ -4390,8 +4590,8 @@
    "sprint": {
     "capacity": 100,
     "multiplier": 1.45,
-    "drainPerSecond": 30,
-    "regenPerSecond": 18,
+    "drainPerSecond": 25,
+    "regenPerSecond": 12,
     "regenDelaySeconds": 0.6,
     "minToStart": 20
    },
@@ -4635,7 +4835,11 @@
     "diveSeconds": 0.65,
     "diveSpeed": 5,
     "catchSeconds": 0.7,
-    "holdHeight": 1.05
+    "holdHeight": 1.05,
+    "maxHoldSeconds": 5,
+    "carrySpeedMultiplier": 0.65,
+    "holdForward": 0.34,
+    "areaInset": 0.6
    },
    "restarts": {
     "walkSeconds": 0.4,
@@ -4648,6 +4852,45 @@
     "defaultCornerPower": 0.65,
     "inwardMinimum": 0.18,
     "goalKickDepth": 1.2
+   },
+   "tactics": {
+    "lanes": [
+     0,
+     -7,
+     0,
+     7
+    ],
+    "advance": [
+     3,
+     -3,
+     0,
+     1.5
+    ],
+    "strikerRun": 2,
+    "ballWidth": 0.2,
+    "interceptSeconds": 0.16,
+    "defenseDepth": 4,
+    "markDistance": 1.4,
+    "markWeight": 0.35,
+    "goalInset": 2.8,
+    "sideInset": 1.4,
+    "teammateDistance": 1.2,
+    "separationIterations": 6,
+    "minTravel30Seconds": 60,
+    "minAverageSpeed": 2.5,
+    "maxOverlapSeconds": 0.12,
+    "minTeamWidth": 7,
+    "switchCooldownSeconds": 0.6,
+    "evadeWidth": 2.2
+   },
+   "shooting": {
+    "lowLift": 1.1,
+    "chargeLift": 9.5,
+    "chargeExponent": 1.6,
+    "dragLift": 3.2,
+    "arrowLowColor": "#9bffbe",
+    "arrowMidColor": "#ffe172",
+    "arrowHighColor": "#ff9066"
    }
   },
   "tennis": {
@@ -4741,8 +4984,10 @@
     "timingCenterFraction": 0.28,
     "timingPowerPenalty": 0.2,
     "swingCooldown": 0.28,
-    "swingSeconds": 0.48,
-    "acceleration": 18
+    "swingSeconds": 0.64,
+    "acceleration": 18,
+    "volleyMinHeight": 0.45,
+    "volleyMaxHeight": 1.9
    },
    "levels": [
     {
@@ -4922,8 +5167,8 @@
      0.75
     ],
     "crowdCounts": [
-     72,
-     36,
+     40,
+     16,
      0
     ],
     "shadowEnabled": [
@@ -4938,7 +5183,7 @@
     "flashSeconds": 0.32,
     "maxTriangles": 90000,
     "maxDrawCalls": 70,
-    "cameraFov": 48,
+    "cameraFov": 43,
     "cameraPortrait": [
      0,
      18,
@@ -4946,8 +5191,8 @@
     ],
     "cameraLandscape": [
      0,
-     13,
-     25
+     15,
+     26
     ],
     "cameraTarget": [
      0,
@@ -4967,7 +5212,76 @@
      "ball": "#dfff55"
     },
     "fallbackQuality": 2,
-    "shirtColor": "#4d9ddb"
+    "shirtColor": "#4d9ddb",
+    "environment": {
+     "crowdHeight": 1.5,
+     "crowdTriangleBudget": 850,
+     "lodCells": 24,
+     "treeHeight": 4.8,
+     "treePositions": [
+      [
+       -10.5,
+       9
+      ],
+      [
+       10.5,
+       9
+      ],
+      [
+       -10.5,
+       -10.5
+      ],
+      [
+       10.5,
+       -10.5
+      ]
+     ],
+     "treeCounts": [
+      4,
+      2,
+      0
+     ],
+     "clapSeconds": 1.25,
+     "clapFrequency": 14,
+     "clapArmStart": 0.19,
+     "clapArmEnd": 0.38,
+     "clapLow": 0.58,
+     "clapHigh": 1.22,
+     "clapLift": 0.18,
+     "clapForward": 0.32,
+     "crowdPalette": [
+      "#ffffff",
+      "#e8c6aa",
+      "#aabedb",
+      "#c4b1d6",
+      "#cfdbab"
+     ],
+     "crowdSpacing": 1.6,
+     "crowdSideX": 7.35,
+     "crowdEndZ": 12.5,
+     "benchHeight": 0.6,
+     "benchPositions": [
+      [
+       -6.2,
+       7.5
+      ],
+      [
+       6.2,
+       7.5
+      ]
+     ],
+     "benchTriangleBudget": 600,
+     "crowdRowSize": 24,
+     "crowdColumns": 6,
+     "crowdRowGap": 0.6,
+     "crowdEndRowGap": 0.55,
+     "crowdFloor": 0.32,
+     "crowdRise": 0.26,
+     "crowdScale": 0.92,
+     "crowdScaleSpread": 0.12,
+     "clapPulseBase": 0.65,
+     "clapPulseRange": 0.25
+    }
    },
    "audio": {
     "gain": 0.055,
@@ -4987,7 +5301,7 @@
    "pointsPerCoin": 1,
    "maximumSeconds": 3600,
    "lob": {
-    "flightMultiplier": 1.35,
+    "flightMultiplier": 1.75,
     "depth": 7.6
    },
    "difficulties": {
@@ -5114,8 +5428,8 @@
    "serve": {
     "baselineMargin": 0.7,
     "sideX": 1.65,
-    "tossSeconds": 1.4,
-    "tossVelocity": 6.8,
+    "tossSeconds": 1.1,
+    "tossVelocity": 5.35,
     "handHeight": 1.05,
     "green": {
      "easy": 0.3,
@@ -5128,6 +5442,309 @@
     "missDepth": 2,
     "aimFraction": 0.7,
     "centerPowerBonus": 0.3
+   },
+   "animation": {
+    "contactFraction": 0.42,
+    "recoveryFraction": 0.82,
+    "previewFraction": 0.2,
+    "serveSeconds": 0.76,
+    "ready": {
+     "chest": 0,
+     "rightElbow": [
+      0.38,
+      1.22,
+      0.08
+     ],
+     "rightHand": [
+      0.4,
+      1.03,
+      0.4
+     ],
+     "leftElbow": [
+      -0.35,
+      1.22,
+      0.1
+     ],
+     "leftHand": [
+      -0.2,
+      1.14,
+      0.35
+     ]
+    },
+    "forehand": [
+     {
+      "at": 0,
+      "chest": -0.5,
+      "rightElbow": [
+       0.46,
+       1.28,
+       -0.16
+      ],
+      "rightHand": [
+       0.68,
+       1.08,
+       -0.35
+      ],
+      "leftElbow": [
+       -0.35,
+       1.27,
+       0.25
+      ],
+      "leftHand": [
+       -0.18,
+       1.3,
+       0.5
+      ]
+     },
+     {
+      "at": 0.42,
+      "chest": 0,
+      "rightElbow": [
+       0.4,
+       1.23,
+       0.25
+      ],
+      "rightHand": [
+       0.56,
+       1.06,
+       0.6
+      ],
+      "leftElbow": [
+       -0.37,
+       1.24,
+       0.05
+      ],
+      "leftHand": [
+       -0.44,
+       1.14,
+       0.2
+      ]
+     },
+     {
+      "at": 0.82,
+      "chest": 0.5,
+      "rightElbow": [
+       -0.02,
+       1.44,
+       0.22
+      ],
+      "rightHand": [
+       -0.34,
+       1.63,
+       0.44
+      ],
+      "leftElbow": [
+       -0.38,
+       1.25,
+       0
+      ],
+      "leftHand": [
+       -0.45,
+       1.1,
+       0.2
+      ]
+     }
+    ],
+    "backhand": [
+     {
+      "at": 0,
+      "chest": 0.5,
+      "rightElbow": [
+       0.14,
+       1.28,
+       0.15
+      ],
+      "rightHand": [
+       -0.38,
+       1.2,
+       -0.05
+      ],
+      "leftElbow": [
+       -0.4,
+       1.27,
+       0.05
+      ],
+      "leftHand": [
+       -0.43,
+       1.23,
+       -0.05
+      ]
+     },
+     {
+      "at": 0.42,
+      "chest": 0,
+      "rightElbow": [
+       0.03,
+       1.23,
+       0.26
+      ],
+      "rightHand": [
+       -0.45,
+       1.1,
+       0.6
+      ],
+      "leftElbow": [
+       -0.44,
+       1.22,
+       0.28
+      ],
+      "leftHand": [
+       -0.5,
+       1.14,
+       0.54
+      ]
+     },
+     {
+      "at": 0.82,
+      "chest": -0.45,
+      "rightElbow": [
+       0.36,
+       1.45,
+       0.25
+      ],
+      "rightHand": [
+       0.57,
+       1.65,
+       0.44
+      ],
+      "leftElbow": [
+       -0.01,
+       1.45,
+       0.32
+      ],
+      "leftHand": [
+       0.45,
+       1.62,
+       0.44
+      ]
+     }
+    ],
+    "lobLift": 0.34,
+    "lobFollowLift": 0.25,
+    "serve": [
+     {
+      "at": 0,
+      "chest": -0.15,
+      "rightElbow": [
+       0.4,
+       1.58,
+       -0.15
+      ],
+      "rightHand": [
+       0.25,
+       1.83,
+       -0.2
+      ],
+      "leftElbow": [
+       -0.24,
+       1.62,
+       0.12
+      ],
+      "leftHand": [
+       -0.15,
+       1.96,
+       0.1
+      ]
+     },
+     {
+      "at": 0.42,
+      "chest": 0,
+      "rightElbow": [
+       0.22,
+       1.74,
+       0.2
+      ],
+      "rightHand": [
+       0.1,
+       2.02,
+       0.3
+      ],
+      "leftElbow": [
+       -0.3,
+       1.4,
+       0.05
+      ],
+      "leftHand": [
+       -0.3,
+       1.18,
+       0.25
+      ]
+     },
+     {
+      "at": 0.82,
+      "chest": 0.25,
+      "rightElbow": [
+       0,
+       1.3,
+       0.25
+      ],
+      "rightHand": [
+       -0.27,
+       1.01,
+       0.53
+      ],
+      "leftElbow": [
+       -0.35,
+       1.22,
+       0.05
+      ],
+      "leftHand": [
+       -0.3,
+       1.1,
+       0.27
+      ]
+     }
+    ],
+    "racket": {
+     "headOffset": [
+      0,
+      -0.53,
+      0
+     ],
+     "handRotation": [
+      0,
+      0,
+      1.1
+     ],
+     "headScale": [
+      1,
+      1.3,
+      1
+     ],
+     "radius": 0.26,
+     "tube": 0.028,
+     "handleLength": 0.3,
+     "handleOffset": -0.2,
+     "stringGap": 0.06,
+     "stringRadius": 0.24,
+     "stringsPerHalf": 3,
+     "frameSegments": 20,
+     "tubeSegments": 5,
+     "handleSegments": 6,
+     "backhandRotation": [
+      0,
+      0,
+      -1.1
+     ],
+     "serveRotation": [
+      0,
+      0,
+      3.141592653589793
+     ]
+    },
+    "contactBlend": 0.24,
+    "ikEpsilon": 0.0001,
+    "contactTolerance": 0.4,
+    "exactContactTolerance": 0.15
+   },
+   "environment": {
+    "models": [
+     "assets/models/adult-man-512.glb",
+     "assets/models/adult-woman-512.glb",
+     "assets/models/palm-tree-512.glb",
+     "assets/models/tree-a-512.glb",
+     "assets/models/bench-512.glb"
+    ]
    }
   }
  },
@@ -5312,6 +5929,15 @@
   }
  },
  "cityView": {
+  "meshyPilot": {
+   "car": {"path": "assets/models/car-a-512.glb", "rotationY": -90, "scale": 0.38},
+   "walker": {"path": "assets/models/adult-man-rigged-512.glb", "rotationY": 0, "scale": 0.32},
+   "speed": 0.3,
+   "pauseSeconds": 1.5,
+   "stopTime": 0.08333333333333333,
+   "stopSoleHeight": 0.04563,
+   "sidewalkOffset": 0.3
+  },
   "camera": {
    "angle": 0.69,
    "elevation": 0.76,
