@@ -4,10 +4,32 @@ import {readFile} from 'node:fs/promises';
 import {createNavalModel,navalLead,navalSoftAim} from '../workout/island/minigames/naval.mjs';
 import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt} from '../workout/island/minigames/naval-camera.mjs';
 import {seededRandom} from '../workout/island/minigames/context.mjs';
+import {createNavalInput} from '../workout/island/minigames/naval-controls.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,b=config.navalDuel;
 const make=(level=1,seed=0)=>createNavalModel({config,balance:b,level,seed,random:seededRandom(seed)});
 const advance=(m,seconds,input={})=>{for(let i=0;i<Math.ceil(seconds/.02);i++)m.update(.02,input);};
 const near=(a,z)=>assert.ok(Math.abs(a-z)<1e-7,`${a} != ${z}`);
+function navalInputHarness(t){
+ const node=()=>{const listeners=new Map();return {matches:()=>false,addEventListener(type,fn,{signal}){const list=listeners.get(type)||[];list.push(fn);listeners.set(type,list);signal.addEventListener('abort',()=>list.splice(list.indexOf(fn),1),{once:true});},emit(type,props={}){const e={target:this,pointerId:7,button:0,clientX:700,clientY:320,preventDefault(){},...props};for(const fn of [...listeners.get(type)||[]])fn(e);}};};
+ const fire=node(),canvas={...node(),getBoundingClientRect:()=>({left:0,top:0,width:844,height:390})},win=node(),doc=node(),controls={querySelector:s=>s==='#shoot'?fire:null,dataset:{},style:{setProperty(){}}},saved=new Map(['window','document'].map(key=>[key,Object.getOwnPropertyDescriptor(globalThis,key)]));
+ Object.defineProperty(globalThis,'window',{configurable:true,value:win});Object.defineProperty(globalThis,'document',{configurable:true,value:doc});
+ const model=make(),input=createNavalInput({canvas,controls,balance:b},()=>model,()=>null);
+ t.after(()=>{input.dispose();for(const [key,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}});
+ return {model,fire,win,frame(){model.update(.02,input.sample({}));},down(){fire.emit('pointerdown');win.emit('pointerdown',{target:fire});},up(){win.emit('pointerup',{target:fire});},click(pointerType,detail=0){fire.emit('click',{detail,pointerType});},key(type,code,target=fire){const event={code,key:code==='Space'?' ':code,repeat:false,target};if(target===fire)fire.emit(type,event);win.emit(type,event);}};
+}
+test('G6c touch pointerdown/up followed by a detail-zero compatibility click fires exactly once',t=>{
+ const h=navalInputHarness(t);h.down();for(let i=0;i<35;i++)h.frame();assert.equal(h.model.fired,0);h.up();h.click('touch');for(let i=0;i<5;i++)h.frame();assert.equal(h.model.fired,1);assert.equal(h.model.snapshot().ammo[0],b.levels[0].ammunition[0]-1);
+});
+test('G6c detail-zero clicks require a fresh keydown on the fire button and reject pointer devices',t=>{
+ const h=navalInputHarness(t);
+ for(const pointerType of ['touch','mouse','pen',undefined]){h.click(pointerType);h.frame();}assert.equal(h.model.fired,0);
+ for(const pointerType of ['touch','mouse','pen']){h.key('keydown','Enter');h.click(pointerType);h.frame();h.click(undefined);h.frame();}assert.equal(h.model.fired,0);
+ h.key('keydown','Enter');h.click(undefined);h.frame();h.click(undefined);h.frame();assert.equal(h.model.fired,1);
+ h.key('keydown','Enter',h.win);h.click(undefined);h.frame();assert.equal(h.model.fired,1);
+});
+test('G6c Space release cannot be counted again as a keyboard compatibility click',t=>{
+ const h=navalInputHarness(t);h.key('keydown','Space');h.frame();assert.equal(h.model.fired,0);h.key('keyup','Space');h.click(undefined);for(let i=0;i<5;i++)h.frame();assert.equal(h.model.fired,1);
+});
 test('G6c camera is behind and above the bow at every ship heading',()=>{
  for(let i=0;i<24;i++){const heading=i*Math.PI/12,ship={x:100,z:12,heading},aim={x:300,z:0},c=navalCameraPose(ship,aim,false,b),p=navalWorldPoint(ship.x,ship.z,b),forward={x:Math.sin(heading),z:-Math.cos(heading)};
  assert.ok((c.position.x-p.x)*forward.x+(c.position.z-p.z)*forward.z<0);assert.ok(c.position.y>p.y);near((c.position.x-p.x)*Math.cos(heading)+(c.position.z-p.z)*Math.sin(heading),0);
