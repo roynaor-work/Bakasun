@@ -4,6 +4,7 @@ import { Avatar, Citizens } from './avatar.mjs?v=g2j-20261019-1';
 import { createBuilding, disposeBuilding } from './buildings.mjs?v=g2j-20261019-1';
 import { levelValue } from '../engine/metrics.mjs?v=g2j-20261019-1';
 import { LocalModels } from './local-models.mjs?v=g2j-20261019-1';
+import {MeshyPilot} from './meshy-pilot.mjs?v=g2j-20261019-1';
 import {cityPaths} from '../engine/paths.mjs?v=g2j-20261019-1';
 import {shoreDirection} from '../engine/placement-help.mjs?v=g2j-20261019-1';
 import {pathMesh,beachDetails} from './city-life.mjs?v=g2j-20261019-1';
@@ -28,6 +29,8 @@ export class IslandView {
     const records=data.buildings instanceof Map?[...data.buildings.values()]:data.buildings||[];
     this.modelsReady=Promise.all(records.flatMap(record=>[record.model,...(record.levels||[]).map(level=>level.model)]).filter(Boolean).map(spec=>this.models.load(spec))).then(()=>{if(!this.disposed&&this.state)this.setWorld(this.state,true);});
     this.avatar=new Avatar(this.scene);this.citizens=new Citizens(this.scene,data.config.cityView.citizens.max);
+    this.pilot=new MeshyPilot(this.scene,data.config.cityView.meshyPilot);
+    this.pilotReady=this.pilot.load().then(()=>{if(!this.disposed&&this.state){this.pathSignature=null;this.refreshWalkers(this.state.buildings);}});
     this.avatar.load({}).then(()=>{if(!this.disposed){if(!this.avatarPositioned)this.avatar.holder.position.set(0,GROUND,0);this.onReady(this);}}).catch(()=>this.onError('error.avatar'));
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(canvas);this.handlers={};this.bindEvents();this.resize();this.last=performance.now();this.samples=[];this.animate=this.animate.bind(this);this.frame=requestAnimationFrame(this.animate);
   }
@@ -68,8 +71,10 @@ export class IslandView {
     const paths=this.paths=cityPaths(this.state,this.data.registry),settings=this.data.config.cityView;
     if(this.pathsMesh){this.scene.remove(this.pathsMesh);this.pathsMesh.geometry.dispose();}this.pathsMesh=pathMesh(paths.cells,this.size,settings.paths);this.scene.add(this.pathsMesh);
     const points=paths.cells.map(p=>Object.assign(this.worldPosition(p.x,p.z),{neighbors:p.neighbors}));
+    this.pilot.sync(buildings,paths,id=>this.definition(id),(x,z)=>this.worldPosition(x,z));
+    if(this.data.featureFlags?.citizens===false&&this.pilot.walker)this.pilot.walker.root.visible=false;
     const count=Math.min(this.quality==='low'?settings.citizens.lowMax:settings.citizens.max,settings.citizens.minimum+buildings.filter(b=>!this.definition(b.typeId)?.isRoad).length*settings.citizens.perBuilding);
-    this.walkPoints=points;this.citizens.setPoints(points,this.data.featureFlags?.citizens===false?0:count);
+    this.walkPoints=points;this.citizens.setPoints(points,this.data.featureFlags?.citizens===false?0:count-(this.pilot.walker?.root.visible?1:0));
     if(points.length&&!this.avatarPositioned){this.avatar.holder.position.copy(points[Math.floor(points.length/2)]);this.avatarPositioned=true;}
   }
   setAvatar(record) {const key=JSON.stringify(record);if(record&&this.avatarKey!==key){this.avatarKey=key;this.avatar?.setRecord(record);}}
@@ -158,7 +163,7 @@ export class IslandView {
   animate(now) {
     if(this.disposed)return;const delta=Math.min((now-this.last)/1000,.05),time=now/1000;this.last=now;
     if(!document.hidden&&!this.paused){
-      this.environment.tick(time);this.citizens.tick(delta,time);
+      this.environment.tick(time);this.citizens.tick(delta,time);this.pilot.tick(delta);
       if(!this.route.length&&this.walkPoints?.length>1&&now>(this.nextWalk||0)){const here=this.avatar.holder.position;let nearest=0;for(let i=0;i<this.walkPoints.length;i++)if(here.distanceTo(this.walkPoints[i])<here.distanceTo(this.walkPoints[nearest]))nearest=i;const p=this.walkPoints[nearest],next=this.walkPoints[p.neighbors?.[Math.floor(time)%p.neighbors.length]??nearest];this.route.push({x:p.x,z:p.z},{x:next.x,z:next.z});this.nextWalk=now+1500;}
       this.avatar.tick(delta,time,this.preview?[]:this.route);
       if(!this.preview||now-(this.lastWorldRender||0)>500){this.renderer.render(this.scene,this.camera);this.lastWorldRender=now;}
@@ -170,6 +175,6 @@ export class IslandView {
     }
     this.frame=requestAnimationFrame(this.animate);
   }
-  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,paths:this.paths?.routes.map(r=>({id:r.id,connected:r.connected})),pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,models:this.models?.metrics(),renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
-  dispose() {this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();this.pathsMesh?.geometry.dispose();for(const item of this.groups.values())disposeBuilding(item.group);this.models?.dispose();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.renderer?.dispose();}
+  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,paths:this.paths?.routes.map(r=>({id:r.id,connected:r.connected})),pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,models:this.models?.metrics(),pilot:this.pilot?.metrics(),renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
+  dispose() {this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();this.pathsMesh?.geometry.dispose();for(const item of this.groups.values())disposeBuilding(item.group);this.pilot?.dispose();this.models?.dispose();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.renderer?.dispose();}
 }

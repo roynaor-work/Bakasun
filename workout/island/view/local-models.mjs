@@ -1,12 +1,14 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
+import * as SkeletonUtils from './skeleton-utils.mjs?v=g2j-20261019-1';
 import {localModelURL,modelSpec,disposeObject} from '../minigames/model-art.mjs?v=g2j-20261019-1';
 
-/** Static local GLBs share resources across instances. The owner releases them
- * once, including loads that finish after the view has closed. */
+/** Local GLBs share geometry, materials and clips across instances. Clones get
+ * independent skeletons; callers own their mixers and skeleton disposal. The
+ * cache releases shared resources once, including loads after view closure. */
 export class LocalModels {
   constructor(adapters={}) {
-    this.assets=new Map();this.pending=new Map();this.failed=0;this.disposed=false;
+    this.assets=new Map();this.animations=new Map();this.pending=new Map();this.failed=0;this.disposed=false;
     const root=new URL('../',import.meta.url),manager=new T.LoadingManager();
     manager.setURLModifier(path=>{if(path.startsWith('blob:')||path.startsWith('data:'))return path;const url=new URL(path,root);if(url.origin!==root.origin||!url.pathname.startsWith(root.pathname))throw Error('local model resources only');return url.href;});
     this.loader=adapters.loader||new GLTFLoader(manager);
@@ -15,7 +17,7 @@ export class LocalModels {
     const spec=modelSpec(value),url=spec&&localModelURL(spec.path);
     if(!url||this.disposed)return Promise.resolve(false);
     if(!this.pending.has(spec.path))this.pending.set(spec.path,(async()=>{
-      try{const object=(await this.loader.loadAsync(url.href)).scene;if(this.disposed){disposeObject(object);return false;}this.assets.set(spec.path,object);return true;}
+      try{const gltf=await this.loader.loadAsync(url.href),object=gltf.scene;if(this.disposed){disposeObject(object);return false;}this.assets.set(spec.path,object);this.animations.set(spec.path,gltf.animations||[]);return true;}
       catch{this.failed++;return false;}
     })());
     return this.pending.get(spec.path);
@@ -23,10 +25,10 @@ export class LocalModels {
   create(value,fit={}) {
     const spec=modelSpec(value),source=spec&&this.assets.get(spec.path);
     if(!source||this.disposed)return null;
-    return fitModel(source.clone(true),spec,fit);
+    return fitModel(SkeletonUtils.clone(source),spec,fit);
   }
   metrics(){return {requested:this.pending.size,loaded:this.assets.size,failed:this.failed};}
-  dispose(){if(this.disposed)return;this.disposed=true;for(const object of this.assets.values())disposeObject(object);this.assets.clear();}
+  dispose(){if(this.disposed)return;this.disposed=true;for(const object of this.assets.values())disposeObject(object);this.assets.clear();this.animations.clear();}
 }
 
 /** Keep the authored proportions, center X/Z, and put the lowest vertex at Y=0.

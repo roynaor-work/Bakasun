@@ -1218,8 +1218,8 @@
      "alienSpeed": 10,
      "drop": 6,
      "shotSeconds": 0.36,
-     "boltSeconds": 2.3,
-     "boltSpeed": 85,
+     "boltSeconds": 2.21,
+     "boltSpeed": 120,
      "points": 10,
      "winMoney": 30,
      "winParts": 0,
@@ -1467,7 +1467,8 @@
      "scoreLimit": 230000,
      "bossShots": 2,
      "rewardScoreLimit": 1750,
-     "killsPerBonus": 16
+     "killsPerBonus": 16,
+     "diveClearance": 100
     }
    ],
    "maxAliens": 48,
@@ -1779,12 +1780,12 @@
      "shield": 0
     },
     {
-     "motion": "static",
+     "motion": "drift",
      "shoots": true,
      "shield": 0
     },
     {
-     "motion": "static",
+     "motion": "drift",
      "shoots": true,
      "shield": 0
     },
@@ -1866,7 +1867,16 @@
      "#a5e68a",
      "#f58da5"
     ],
-    "shipPixelScale": 1.25
+    "shipPixelScale": 1.5,
+    "bankAngle": 0.24,
+    "rocketTrailCount": 12,
+    "rocketTrailSpacing": 0.025,
+    "hudInset": 18,
+    "hudHeartSize": 8,
+    "hudHeartGap": 22,
+    "hudDotRadius": 4,
+    "hudDotGap": 16,
+    "facingCorrectionDegrees": 180
    },
    "formation": {
     "rowGap": 52,
@@ -1907,6 +1917,21 @@
     "handednessKey": "island.aliens.hand",
     "aimDragThreshold": 14,
     "aimHeightPixels": 90
+   },
+   "tactics": {
+    "firstDiveSeconds": 4.2,
+    "diveEverySeconds": 6,
+    "diveSeconds": 3.4,
+    "diveSway": 20,
+    "diveClearance": 85,
+    "descentSpeed": 0.25,
+    "entrySway": 8
+   },
+   "calibration": {
+    "reactionSeconds": 0.24,
+    "stepSeconds": 0.02,
+    "seeds": 10,
+    "minimumWins": 7
    }
   },
   "fireRescue": {
@@ -3485,7 +3510,7 @@
     "friction": 0.7,
     "bounce": 0.28,
     "pickupRadius": 0.85,
-    "dribbleOffset": 0.62,
+    "dribbleOffset": 0.49,
     "chargeSeconds": 1.1,
     "shortPressSeconds": 0.28,
     "passSpeed": 12,
@@ -3499,7 +3524,7 @@
     "speedPerRank": 0.28,
     "kickPerRank": 0.06,
     "defensePerRank": 0.12,
-    "acceleration": 12,
+    "acceleration": 24,
     "radius": 0.42,
     "roles": [
      "striker",
@@ -3549,10 +3574,11 @@
       "template": 3
      }
     ],
-    "deceleration": 7,
-    "turnRate": 12,
+    "deceleration": 15,
+    "turnRate": 18,
     "turnLean": 0.1,
-    "maxTurnLean": 0.2
+    "maxTurnLean": 0.2,
+    "lowSpeedTurnBoost": 1.5
    },
    "team": {
     "id": "islandTeam",
@@ -3701,7 +3727,7 @@
     "confettiCount": 96,
     "crowdCount": 96,
     "aimArrowLength": 2,
-    "aimArrowWidth": 0.045,
+    "aimArrowWidth": 0.2,
     "camera": {
      "elevationDegrees": 30,
      "fovDegrees": 42,
@@ -3731,7 +3757,7 @@
      "keeperMix": 0.65,
      "slideRoll": 0.6,
      "slideLeg": 0.7,
-     "slideKnee": 0.85,
+     "slideKnee": 1.65,
      "turnSmoothing": 10,
      "stealLean": 0.15,
      "stealRate": 1.6,
@@ -3741,7 +3767,7 @@
      "slideHip": -1.15,
      "slideSpine": 0.35,
      "slideSupportArm": 1.1,
-     "slideBentHip": 0.85,
+     "slideBentHip": 1.2,
      "throwArm": -2.7,
      "throwElbow": -0.6,
      "diveRoll": 1.25,
@@ -3758,8 +3784,8 @@
      "radialSegments": 6,
      "heightSegments": 4
     },
-    "aimArrowMinLength": 0.8,
-    "aimArrowMaxLength": 5.2,
+    "aimArrowMinLength": 1.4,
+    "aimArrowMaxLength": 5.8,
     "teamAbbreviationLength": 3,
     "farModelDistance": 6,
     "crowd": {
@@ -3784,7 +3810,63 @@
      "height": 0.32,
      "offset": 0.26,
      "heightOffset": -0.08
-    }
+    },
+    "appearance": {
+     "skin": [
+      "#efba91",
+      "#c99168",
+      "#875a43",
+      "#dca17b",
+      "#b47c59",
+      "#f4c9a5",
+      "#a76c4d",
+      "#6c4738"
+     ],
+     "hair": [
+      "#382921",
+      "#bd8349",
+      "#171b23",
+      "#78442c",
+      "#d4ac66",
+      "#51352a",
+      "#97613b",
+      "#29202a"
+     ],
+     "socks": [
+      "#fff5db",
+      "#273d63",
+      "#d5e4ee",
+      "#f5d99c",
+      "#b9d7e0",
+      "#efc7ba",
+      "#ebe8d9",
+      "#638b9a"
+     ]
+    },
+    "slidePhases": [
+     {
+      "at": 0,
+      "weight": 0.05
+     },
+     {
+      "at": 0.2,
+      "weight": 0.55
+     },
+     {
+      "at": 0.4,
+      "weight": 1
+     },
+     {
+      "at": 0.8,
+      "weight": 1
+     },
+     {
+      "at": 1,
+      "weight": 1
+     }
+    ],
+    "ballShadowScale": 0.7,
+    "ballShadowHeightScale": 0.08
    },
    "controls": {
     "deadzone": 0.12,
@@ -4174,8 +4256,8 @@
    "sprint": {
     "capacity": 100,
     "multiplier": 1.45,
-    "drainPerSecond": 30,
-    "regenPerSecond": 18,
+    "drainPerSecond": 25,
+    "regenPerSecond": 12,
     "regenDelaySeconds": 0.6,
     "minToStart": 20
    },
@@ -4419,7 +4501,11 @@
     "diveSeconds": 0.65,
     "diveSpeed": 5,
     "catchSeconds": 0.7,
-    "holdHeight": 1.05
+    "holdHeight": 1.05,
+    "maxHoldSeconds": 5,
+    "carrySpeedMultiplier": 0.65,
+    "holdForward": 0.34,
+    "areaInset": 0.6
    },
    "restarts": {
     "walkSeconds": 0.4,
@@ -4432,6 +4518,45 @@
     "defaultCornerPower": 0.65,
     "inwardMinimum": 0.18,
     "goalKickDepth": 1.2
+   },
+   "tactics": {
+    "lanes": [
+     0,
+     -7,
+     0,
+     7
+    ],
+    "advance": [
+     3,
+     -3,
+     0,
+     1.5
+    ],
+    "strikerRun": 2,
+    "ballWidth": 0.2,
+    "interceptSeconds": 0.16,
+    "defenseDepth": 4,
+    "markDistance": 1.4,
+    "markWeight": 0.35,
+    "goalInset": 2.8,
+    "sideInset": 1.4,
+    "teammateDistance": 1.2,
+    "separationIterations": 6,
+    "minTravel30Seconds": 60,
+    "minAverageSpeed": 2.5,
+    "maxOverlapSeconds": 0.12,
+    "minTeamWidth": 7,
+    "switchCooldownSeconds": 0.6,
+    "evadeWidth": 2.2
+   },
+   "shooting": {
+    "lowLift": 1.1,
+    "chargeLift": 9.5,
+    "chargeExponent": 1.6,
+    "dragLift": 3.2,
+    "arrowLowColor": "#9bffbe",
+    "arrowMidColor": "#ffe172",
+    "arrowHighColor": "#ff9066"
    }
   },
   "tennis": {
@@ -5461,6 +5586,15 @@
   }
  },
  "cityView": {
+  "meshyPilot": {
+   "car": {"path": "assets/models/car-a-512.glb", "rotationY": -90, "scale": 0.38},
+   "walker": {"path": "assets/models/adult-man-rigged-512.glb", "rotationY": 0, "scale": 0.32},
+   "speed": 0.3,
+   "pauseSeconds": 1.5,
+   "stopTime": 0.08333333333333333,
+   "stopSoleHeight": 0.04563,
+   "sidewalkOffset": 0.3
+  },
   "camera": {
    "angle": 0.69,
    "elevation": 0.76,

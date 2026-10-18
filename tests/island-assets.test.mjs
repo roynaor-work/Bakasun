@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir, stat, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 
 const root = new URL('../workout/island/', import.meta.url);
 async function filesIn(directory) {
@@ -57,4 +58,25 @@ test('island complete deployable folder including bundled assets stays within 15
   const bytes = sizes.reduce((sum, size) => sum + size, 0);
   assert.ok(bytes > 1_473_368, 'the delivery includes the full model and its runtime');
   assert.ok(bytes <= 15_000_000, `${bytes} bytes exceeds the requested 15 MB budget`);
+});
+
+test('island bundles only referenced game models and preserves their audited bytes', async () => {
+  const manifest = JSON.parse(await readFile(new URL('assets/models/manifest.json', root), 'utf8'));
+  const referenced = new Set();
+  function collect(value) {
+    if (typeof value === 'string' && /^assets\/models\/[^/]+\.glb$/.test(value)) referenced.add(value);
+    else if (value && typeof value === 'object') Object.values(value).forEach(collect);
+  }
+  for (const name of ['config', 'buildings']) {
+    collect(JSON.parse(await readFile(new URL(`data/${name}.json`, root), 'utf8')));
+  }
+  const bundled = (await filesIn(new URL('assets/models/', root)))
+    .filter(file => file.pathname.endsWith('.glb'))
+    .map(file => path.relative(fileURLToPath(root), fileURLToPath(file)));
+  assert.deepEqual(bundled.sort(), [...referenced].sort(), 'unconnected models must stay out of the deployable folder');
+  assert.deepEqual(Object.keys(manifest).sort(), bundled);
+  for (const model of bundled) {
+    const bytes = await readFile(new URL(model, root));
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), manifest[model], `${model} changed from its visual audit`);
+  }
 });
