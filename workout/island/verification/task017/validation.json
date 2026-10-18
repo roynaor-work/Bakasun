@@ -89,5 +89,27 @@
     "raf": "diagnostics.json",
     "synchronousWebGL": "profile.json",
     "cause": "not conclusively isolated; large portrait FPS drop was not reproduced"
+  },
+  "upstreamIntegration": {
+    "base": "fa3b133880234a0d88d0226b61db011a0dfdb30b",
+    "main": "6df6b485c093dd13c5de0940353c44d2f0d5f396",
+    "upstreamPR": 147,
+    "simulatedMergeTree": "4660de7312bc80768346ecae2cc9f23c54e8db6b",
+    "missingModels": [
+      "car-a-512.glb",
+      "adult-man-rigged-512.glb"
+    ],
+    "command": "node --test --test-reporter=tap tests/island-task017-pilot.test.mjs",
+    "summary": {
+      "tests": 4,
+      "pass": 3,
+      "fail": 1,
+      "skipped": 0
+    },
+    "failures": [
+      "TASK-017 supplied GLBs retain byte size, topology, embedded images and Mixamo animation contract"
+    ],
+    "reason": "ENOENT after upstream deleted pilot GLBs; restoring them and the model manifest needs a user exception",
+    "status": "blocked_pending_user_decision"
   }
 }
