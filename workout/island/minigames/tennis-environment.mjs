@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {seededRandom} from './tennis.mjs?v=g2j-20261019-1';
+import {seededRandom} from './tennis.mjs?v=g9-20261020-1';
 
 /** Vertex clustering creates a small runtime LOD, preserving each corner's UV.
  * The source GLB and its textures are never rewritten. */

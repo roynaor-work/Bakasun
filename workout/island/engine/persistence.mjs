@@ -1,15 +1,15 @@
-import {initialFireCertificates,validFireCertificates} from '../activity/fire-certificates.mjs?v=g2j-20261019-1';
-import {initialHangar,validHangar} from '../activity/hangar.mjs?v=g2j-20261019-1';
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2j-20261019-1';
-import {withCityHall} from './city-hall.mjs?v=g2j-20261019-1';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=g2j-20261019-1';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g2j-20261019-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=g2j-20261019-1';
-import {initialProgress} from '../activity/progress.mjs?v=g2j-20261019-1';
-import { cellsFor } from './rules.mjs?v=g2j-20261019-1';
-import {repairHarbors} from './placement-help.mjs?v=g2j-20261019-1';
-import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=g2j-20261019-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g2j-20261019-1';
+import {initialFireCertificates,validFireCertificates} from '../activity/fire-certificates.mjs?v=g9-20261020-1';
+import {initialHangar,validHangar} from '../activity/hangar.mjs?v=g9-20261020-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g9-20261020-1';
+import {withCityHall} from './city-hall.mjs?v=g9-20261020-1';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=g9-20261020-1';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=g9-20261020-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=g9-20261020-1';
+import {initialProgress} from '../activity/progress.mjs?v=g9-20261020-1';
+import { cellsFor } from './rules.mjs?v=g9-20261020-1';
+import {repairHarbors} from './placement-help.mjs?v=g9-20261020-1';
+import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=g9-20261020-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g9-20261020-1';
 
 export const CURRENT_VERSION = 15;
 export const STORAGE_KEY = 'island.v1';

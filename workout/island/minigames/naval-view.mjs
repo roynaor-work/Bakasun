@@ -1,7 +1,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=g2j-20261019-1';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=g2j-20261019-1';
+import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=g9-20261020-1';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=g9-20261020-1';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */

@@ -1,8 +1,8 @@
-import {gameContext} from './context.mjs?v=g2j-20261019-1';
-import {createTennis} from './tennis.mjs?v=g2j-20261019-1';
-import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=g2j-20261019-1';
-import {createTennisControls} from './tennis-controls.mjs?v=g2j-20261019-1';
-import {tennisIcon,tennisScoreCells} from './tennis-ui.mjs?v=g2j-20261019-1';
+import {gameContext} from './context.mjs?v=g9-20261020-1';
+import {createTennis} from './tennis.mjs?v=g9-20261020-1';
+import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=g9-20261020-1';
+import {createTennisControls} from './tennis-controls.mjs?v=g9-20261020-1';
+import {tennisIcon,tennisScoreCells} from './tennis-ui.mjs?v=g9-20261020-1';
 export function tennisOpponent(balance,stage,shirt=balance.render.shirtColor){const opponent=balance.opponents[(stage-1)%balance.opponents.length];return {...opponent,shirtColor:opponent.shirtColor===shirt?balance.opponents.find(o=>o.shirtColor!==shirt).shirtColor:opponent.shirtColor};}
 export function startTennis(ctx){
  ctx={...gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed>>>0,'tennis',ctx.level),...ctx};

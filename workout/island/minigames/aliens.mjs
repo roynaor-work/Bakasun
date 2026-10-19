@@ -1,9 +1,9 @@
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g2j-20261019-1';
-import {createAlienView} from './alien-view.mjs?v=g2j-20261019-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g9-20261020-1';
+import {createAlienView} from './alien-view.mjs?v=g9-20261020-1';
 import {runAlienSession} from './alien-session.mjs';
 import './alien-ui.mjs';
-import {createPool,releaseAt} from './pool.mjs?v=g2j-20261019-1';
-import {oval,drawHealthBar} from './art.mjs?v=g2j-20261019-1';
+import {createPool,releaseAt} from './pool.mjs?v=g9-20261020-1';
+import {oval,drawHealthBar} from './art.mjs?v=g9-20261020-1';
 export function alienStack(campaign,id,rank){return (campaign.stackCurve[id]||[]).slice(0,rank).reduce((n,v)=>n+v,0);}
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 

@@ -1,7 +1,7 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=g2j-20261019-1';
-import {inPenaltyArea,keeperSaveChance,rollBall} from './soccer-physics.mjs?v=g2j-20261019-1';
-import {cardEffects} from '../activity/soccer-card.mjs?v=g2j-20261019-1';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=g2j-20261019-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=g9-20261020-1';
+import {inPenaltyArea,keeperSaveChance,rollBall} from './soccer-physics.mjs?v=g9-20261020-1';
+import {cardEffects} from '../activity/soccer-card.mjs?v=g9-20261020-1';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=g9-20261020-1';
 import {fieldTarget,separatePlayers} from './soccer-tactics.mjs';
 import {shotLift,safeShotAim} from './soccer-shot.mjs';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.

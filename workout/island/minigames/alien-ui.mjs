@@ -1,4 +1,4 @@
-import {dataURL} from '../release.mjs?v=g2j-20261019-1';
+import {dataURL} from '../release.mjs?v=g9-20261020-1';
 
 const paths={fire:'M12 3v12m-4-4 4 4 4-4M5 19h14M4 7l3-3m13 3-3-3',nova:'M12 2C7 7 7 13 8 17h8c1-4 1-10-4-15ZM8 12l-4 6h4m8-6 4 6h-4m-6 2 2 3 2-3',pause:'M8 4v16M16 4v16',repair:'m14 4 2 4 4 2-5 5-4-4-7 7-2-2 7-7-4-4 5-5',upgrade:'m12 3 8 9h-5v9H9v-9H4Z',paint:'M12 3C10 6 5 10 5 15a7 7 0 0 0 14 0c0-5-5-9-7-12Z',hand:'M4 12h16m-5-5 5 5-5 5M4 5v14',play:'m7 3 14 9-14 9Z',shield:'m12 3 9 4-2 9-7 5-7-5-2-9Z'};
 export function alienIcon(kind){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');const p=document.createElementNS(svg.namespaceURI,'path');p.setAttribute('d',paths[kind]||paths.upgrade);p.setAttribute('fill','none');p.setAttribute('stroke','currentColor');p.setAttribute('stroke-width','1.8');p.setAttribute('stroke-linecap','round');p.setAttribute('stroke-linejoin','round');svg.append(p);return svg;}

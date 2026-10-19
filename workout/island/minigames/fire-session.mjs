@@ -1,6 +1,6 @@
-import {createControls} from './controls.mjs?v=g2j-20261019-1';
-import {installFireUI,updateFireUI} from './fire-ui.mjs?v=g2j-20261019-1';
-import {drawFireCity} from './fire-canvas.mjs?v=g2j-20261019-1';
+import {createControls} from './controls.mjs?v=g9-20261020-1';
+import {installFireUI,updateFireUI} from './fire-ui.mjs?v=g9-20261020-1';
+import {drawFireCity} from './fire-canvas.mjs?v=g9-20261020-1';
 
 /** Fire owns its overlay and lifecycle; shared controls and shell stay untouched. */
 export function runFireSession(source,createModel,draw,createView){

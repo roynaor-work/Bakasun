@@ -1,4 +1,4 @@
-import {passDestination} from './soccer.mjs?v=g2j-20261019-1';
+import {passDestination} from './soccer.mjs?v=g9-20261020-1';
 /** Pure presentation decisions; the simulation never imports this module. */
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 export function slideWeight(player,config){

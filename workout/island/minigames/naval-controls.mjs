@@ -1,5 +1,5 @@
-import {navalWaterAt} from './naval-camera.mjs?v=g2j-20261019-1';
-import {navalWeaponIcons} from './naval-icons.mjs?v=g2j-20261019-1';
+import {navalWaterAt} from './naval-camera.mjs?v=g9-20261020-1';
+import {navalWeaponIcons} from './naval-icons.mjs?v=g9-20261020-1';
 /** Session-only gesture adapter. The shared G7 movement control stays in charge
  * of the joystick; this adapter supplies release-fire and screen-relative aim. */
 export function createNavalInput(ctx,getModel,getView){
