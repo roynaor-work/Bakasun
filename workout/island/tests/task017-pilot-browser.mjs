@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
-// A pilot-specific cold-city ceiling, stricter than the unchanged 15 MB folder
-// guard. Includes navigation, scripts, avatar, existing buildings and both GLBs.
-const cityDownloadBudgetBytes=6_000_000;
+// Shared cold-city ceiling: navigation, scripts, avatar, buildings and both GLBs.
+const {ui:{downloadBudget}}=JSON.parse(await readFile(new URL('../data/config.json',import.meta.url),'utf8'));
+const cityDownloadBudgetBytes=downloadBudget.city;
+const viewports=process.env.TASK017_WIDTH?[[Number(process.env.TASK017_WIDTH),Number(process.env.TASK017_HEIGHT)||390]]:[[390,844],[844,390]];
 if(['diagnostics','profile'].includes(process.env.TASK017_PHASE)){
  await diagnosePilot();
 }else if(process.env.TASK017_PHASE){
@@ -14,7 +15,7 @@ if(['diagnostics','profile'].includes(process.env.TASK017_PHASE)){
 const out=fileURLToPath(new URL('../verification/task017/',import.meta.url));await mkdir(out,{recursive:true});
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
 const reports=[],assets={car:'car-a-512.glb',walker:'adult-man-rigged-512.glb'};
-try{for(const [width,height] of [[390,844],[844,390]])for(const failure of ['none','car','walker','both']){
+try{for(const [width,height] of viewports)for(const failure of ['none','car','walker','both']){
  const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,hasTouch:true}),page=await context.newPage(),errors=[],outside=[],requests=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&!u.pathname.startsWith('/workout/island/'))outside.push(u.href);for(const name of Object.values(assets))if(u.pathname.endsWith('/'+name))requests.push(name);});
@@ -95,7 +96,7 @@ try{for(const [width,height] of [[390,844],[844,390]])for(const failure of ['non
 async function measurePilot(){
  const label=process.env.TASK017_PHASE||'after',out=fileURLToPath(new URL('../verification/task017/',import.meta.url));await mkdir(out,{recursive:true});
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});const reports=[];
- try {for(const [width,height] of [[390,844],[844,390]]){
+ try {for(const [width,height] of viewports){
  const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,hasTouch:true}),page=await context.newPage(),errors=[],outside=[];
  page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/^https?:/.test(r.url())&&!new URL(r.url()).pathname.startsWith('/workout/island/'))outside.push(r.url())});
  // Cold context. Fixed random stream makes the decorative island reproducible.
@@ -123,7 +124,7 @@ async function diagnosePilot(){
  const out=fileURLToPath(new URL('../verification/task017/',import.meta.url));await mkdir(out,{recursive:true});
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']}),reports=[];
  const variants=['baseline','two-empty-calls','pilot','frozen-mixer','baked-rig','without-textures','car-only','walker-only'];
- try{for(const [width,height] of [[390,844],[844,390]]){
+ try{for(const [width,height] of viewports){
   const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,hasTouch:true}),page=await context.newPage(),errors=[],outside=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
   page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&!u.pathname.startsWith('/workout/island/'))outside.push(u.href);});

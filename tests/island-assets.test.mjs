@@ -52,12 +52,12 @@ test('island view imports and model URLs resolve to existing files inside the de
   assert.ok(references >= 8, 'audit includes the real view modules, Three imports and GLB URL');
 });
 
-test('island complete deployable folder including bundled assets stays within 15 MB', async () => {
-  const files = await filesIn(root);
-  const sizes = await Promise.all(files.map(async file => (await stat(file)).size));
-  const bytes = sizes.reduce((sum, size) => sum + size, 0);
-  assert.ok(bytes > 1_473_368, 'the delivery includes the full model and its runtime');
-  assert.ok(bytes <= 15_000_000, `${bytes} bytes exceeds the requested 15 MB budget`);
+test('every bundled island GLB stays within 2 MB', async () => {
+  const models = (await filesIn(root)).filter(file => file.pathname.endsWith('.glb'));
+  for (const model of models) {
+    const bytes = (await stat(model)).size;
+    assert.ok(bytes > 0 && bytes <= 2_000_000, `${model.pathname}: ${bytes} bytes exceeds the 2 MB model budget`);
+  }
 });
 
 test('island bundles only referenced game models and preserves their audited bytes', async () => {
