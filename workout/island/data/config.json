@@ -1952,8 +1952,8 @@
    "initialHeatBase": 0.65,
    "initialHeatRange": 0.35,
    "extinguishPerSecond": 0.72,
-   "nozzleX": 152,
-   "nozzleY": 369,
+   "nozzleX": 265.7142857142857,
+   "nozzleY": 507.1428571428571,
    "pointsPerCoin": 5,
    "maximumScore": 1000,
    "levels": [
@@ -2123,7 +2123,7 @@
      "rescueCount": 2,
      "wind": 6,
      "eruptionSeconds": 5.9,
-     "resistance": 1.8
+     "resistance": 1.85
     },
     {
      "difficulty": 9,
@@ -2165,54 +2165,54 @@
      "rescueCount": 3,
      "wind": 14,
      "eruptionSeconds": 5.300000000000001,
-     "resistance": 3
+     "resistance": 3.1
     }
    ],
    "sites": [
     {
      "kind": "car",
-     "x": 75,
-     "y": 257
+     "x": 351.42857142857144,
+     "y": 463.57142857142856
     },
     {
      "kind": "home",
-     "x": 76,
-     "y": 354
+     "x": 8.571428571428584,
+     "y": 463.57142857142856
     },
     {
      "kind": "warehouse",
-     "x": 180,
-     "y": 254
+     "x": 180.0,
+     "y": 292.1428571428571
     },
     {
      "kind": "roof",
-     "x": 185,
-     "y": 353
+     "x": 180.0,
+     "y": 463.57142857142856
     },
     {
      "kind": "home",
-     "x": 74,
-     "y": 153
+     "x": 8.571428571428584,
+     "y": 120.71428571428572
     },
     {
      "kind": "roof",
-     "x": 182,
-     "y": 128
+     "x": 180.0,
+     "y": 120.71428571428572
     },
     {
      "kind": "tree",
-     "x": 286,
-     "y": 165
+     "x": 351.42857142857144,
+     "y": 120.71428571428572
     },
     {
      "kind": "tree",
-     "x": 291,
-     "y": 273
+     "x": 351.42857142857144,
+     "y": 292.1428571428571
     },
     {
      "kind": "car",
-     "x": 289,
-     "y": 367
+     "x": 8.571428571428584,
+     "y": 463.57142857142856
     }
    ],
    "fireTypes": [
@@ -2235,7 +2235,7 @@
      "color": "#ff586e"
     }
    ],
-   "range": 210,
+   "range": 270,
    "chargeSeconds": 1.2,
    "chargeBoost": 0.4,
    "rescue": {
@@ -2357,34 +2357,34 @@
    },
    "rescueSites": [
     {
-     "x": 44,
-     "y": 191,
+     "x": 382.85714285714283,
+     "y": 464.0,
      "world": [
-      -5.1,
-      3.2,
-      -4.800000000000001
+      14.2,
+      2.8,
+      14.98
      ],
      "fireIndex": 0
     },
     {
-     "x": 218,
-     "y": 206,
+     "x": 8.571428571428584,
+     "y": 121.14285714285717,
      "world": [
-      0.8,
-      3.9,
-      1.5
+      -12,
+      2.2,
+      -9.02
      ],
      "fireIndex": 4
     },
     {
-     "x": 44,
-     "y": 323,
+     "x": 351.42857142857144,
+     "y": 292.57142857142856,
      "world": [
-      -5.1,
-      3.3,
-      7.199999999999999
+      12,
+      3.2,
+      2.98
      ],
-     "fireIndex": 6
+     "fireIndex": 7
     }
    ],
    "pressureRestart": 0.18,
@@ -2413,8 +2413,8 @@
      250
     ],
     "sky": "#bce3df",
-    "fogNear": 60,
-    "fogFar": 120,
+    "fogNear": 70,
+    "fogFar": 130,
     "sun": "#fff1c3",
     "sunIntensity": 2,
     "hemisphereIntensity": 2,
@@ -2422,8 +2422,8 @@
     "smoke": "#737880",
     "water": "#b5f4ff",
     "success": "#69e6a4",
-    "maxTriangles": 60000,
-    "maxDrawCalls": 40,
+    "maxTriangles": 90000,
+    "maxDrawCalls": 70,
     "avatarScale": 1.05,
     "avatarPosition": [
      3.4,
@@ -2459,98 +2459,116 @@
     "markerFont": "bold 18px sans-serif",
     "sites": [
      [
-      -6,
-      0.8,
-      0
+      12,
+      2,
+      14.95
      ],
      [
-      -6,
+      -12,
       1.8,
-      7.2
+      14.95
      ],
      [
       0,
       2.6,
-      1.5
+      2.95
      ],
      [
       0,
       4.7,
-      5
+      14.95
      ],
      [
-      -6,
+      -12,
       1.6,
-      -4.8
+      -9.05
      ],
      [
       0,
       5.3,
-      -7
+      -9.05
      ],
      [
-      7,
+      12,
       2.6,
-      -7
+      -9.05
      ],
      [
-      7,
+      12,
       2.4,
-      0
+      2.95
      ],
      [
-      7,
+      -12,
       0.8,
-      6
+      14.95
      ]
     ],
     "buildings": [
      [
-      -6,
-      -7,
-      4.3,
+      -12,
+      -12,
+      4,
       0
      ],
      [
       0,
-      -8,
-      5,
+      -12,
+      6,
       1
      ],
      [
-      0,
-      -0.7,
-      4,
+      12,
+      -12,
+      4.2,
       2
      ],
      [
-      -6,
-      5,
-      4.4,
-      1
-     ],
-     [
+      -12,
       0,
-      5,
       4.5,
       0
      ],
      [
-      7,
-      -13,
+      0,
+      0,
+      3.5,
+      1
+     ],
+     [
+      12,
+      0,
       5.5,
+      2
+     ],
+     [
+      -12,
+      12,
+      4.2,
+      0
+     ],
+     [
+      0,
+      12,
+      4.1,
+      1
+     ],
+     [
+      12,
+      12,
+      4.8,
       2
      ]
     ]
    },
    "vehicle": {
-    "x": -3,
-    "z": 11,
-    "minX": -8,
-    "maxX": 8,
-    "minZ": -5,
-    "maxZ": 13,
-    "speed": 6,
+    "x": 6,
+    "z": 18,
+    "minX": -18,
+    "maxX": 18,
+    "minZ": -18,
+    "maxZ": 18,
+    "speed": 18,
     "length": 5.3,
     "model": "assets/models/fire-truck-512.glb",
     "rotationY": -90,
@@ -2569,7 +2587,15 @@
      0,
      0.35,
      2.22
-    ]
+    ],
+    "width": 2.65,
+    "turnRate": 6,
+    "turnEpsilon": 0.05,
+    "wheelRadius": 0.52,
+    "wheelSide": 0.95,
+    "wheelAxle": 1.6,
+    "wheelSelectRadius": 0.58,
+    "headingOffset": 180
    },
    "hydrant": {
     "path": "assets/models/hydrant-512.glb",
@@ -2581,7 +2607,7 @@
      0.1,
      10
     ],
-    "radius": 1.8,
+    "radius": 2.2,
     "parkedSpeed": 0.1,
     "lowWaterRatio": 0.2,
     "hoseColor": "#ffd75f",
@@ -2606,10 +2632,200 @@
     "passKey": "KeyX",
     "sprintKeys": [],
     "switchKey": "KeyC",
-    "floating": true,
+    "floating": false,
     "handednessKey": "island.fire.hand",
     "aimDragThreshold": 14,
     "aimHeightPixels": 90
+   },
+   "city": {
+    "roadsX": [
+     -18,
+     -6,
+     6,
+     18
+    ],
+    "roadsZ": [
+     -18,
+     -6,
+     6,
+     18
+    ],
+    "roadWidth": 6.2,
+    "sidewalkWidth": 0.45,
+    "extent": 55,
+    "dashLength": 1.15,
+    "dashGap": 3,
+    "blockSize": 5.7,
+    "parkRadius": 12,
+    "exitSeconds": 0.24,
+    "hoseHeight": 0.85,
+    "crewDistance": 2,
+    "cameraHeight": 34,
+    "cameraBack": 23,
+    "cameraFollow": 3.8,
+    "cameraLead": 4,
+    "buildings": [
+     {
+      "x": -12,
+      "z": -12,
+      "width": 5.7,
+      "depth": 5.7,
+      "height": 4,
+      "style": "house"
+     },
+     {
+      "x": 0,
+      "z": -12,
+      "width": 5.7,
+      "depth": 5.7,
+      "height": 6,
+      "style": "apartment"
+     },
+     {
+      "x": 12,
+      "z": -12,
+      "width": 5.7,
+      "depth": 5.7,
+      "height": 4.2,
+      "style": "shop"
+     },
+     {
+      "x": -12,
+      "z": 0,
+      "width": 5.7,
+      "depth": 5.7,
+      "height": 4.5,
+      "style": "house"
+     },
+     {
+      "x": 0,
+      "z": 0,
+      "width": 5.7,
+      "depth": 5.7,
+      "height": 3.5,
+      "style": "cafe"
+     },
+     {
+      "x": 12,
+      "z": 0,
+      "width": 5.7,
+      "depth": 5.7,
+      "height": 5.5,
+      "style": "apartment"
+     },
+     {
+      "x": -12,
+      "z": 12,
+      "width": 5.7,
+      "depth": 5.7,
+      "height": 4.2,
+      "style": "station"
+     },
+     {
+      "x": 0,
+      "z": 12,
+      "width": 5.7,
+      "depth": 5.7,
+      "height": 4.1,
+      "style": "house"
+     },
+     {
+      "x": 12,
+      "z": 12,
+      "width": 5.7,
+      "depth": 5.7,
+      "height": 4.8,
+      "style": "shop"
+     }
+    ],
+    "models": {
+     "house": {
+      "path": "assets/models/house-a-512.glb",
+      "rotationY": 0,
+      "scale": 1
+     },
+     "apartment": {
+      "path": "assets/models/apartment-block-512.glb",
+      "rotationY": 0,
+      "scale": 1
+     },
+     "shop": {
+      "path": "assets/models/shop-corner-512.glb",
+      "rotationY": 0,
+      "scale": 1
+     },
+     "cafe": {
+      "path": "assets/models/cafe-512.glb",
+      "rotationY": 0,
+      "scale": 1
+     },
+     "station": {
+      "path": "assets/models/fire-station-512.glb",
+      "rotationY": 0,
+      "scale": 1
+     },
+     "firefighter": {
+      "path": "assets/models/firefighter-rigged-512.glb",
+      "rotationY": 0,
+      "scale": 1
+     },
+     "citizen": {
+      "path": "assets/models/adult-woman-rigged-512.glb",
+      "rotationY": 0,
+      "scale": 1
+     }
+    },
+    "modelLots": [
+     0,
+     1,
+     4,
+     6,
+     8
+    ],
+    "hydrants": [
+     [
+      7.3,
+      0.1,
+      10
+     ],
+     [
+      -16.7,
+      0.1,
+      -6
+     ]
+    ],
+    "colors": {
+     "road": "#354e58",
+     "line": "#f8ead0",
+     "sidewalk": "#d2d3c2",
+     "grass": "#76ab83",
+     "roof": "#dfb782",
+     "water": "#7bc9d5",
+     "curb": "#f5e1bc"
+    },
+    "cameraLimit": 8,
+    "canvasScreenY": 0.58,
+    "crewHeight": 1.9,
+    "citizenHeight": 1.7,
+    "grip": {
+     "elbowX": 0.3,
+     "elbowY": 1,
+     "elbowZ": 0.2,
+     "handX": 0.12,
+     "handY": 1.05,
+     "handZ": 0.5
+    },
+    "canvasLeadFraction": 0.15
+   },
+   "ui": {
+    "actionSize": 62,
+    "smallActionSize": 54,
+    "stickSize": 104,
+    "clockSize": 46,
+    "lowPressureRatio": 0.2,
+    "arrowInset": 0.12,
+    "arrowDistance": 60,
+    "hintPulseSeconds": 1.2
    }
   },
   "navalDuel": {
@@ -4769,8 +4985,10 @@
     "timingCenterFraction": 0.28,
     "timingPowerPenalty": 0.2,
     "swingCooldown": 0.28,
-    "swingSeconds": 0.48,
-    "acceleration": 18
+    "swingSeconds": 0.64,
+    "acceleration": 18,
+    "volleyMinHeight": 0.45,
+    "volleyMaxHeight": 1.9
    },
    "levels": [
     {
@@ -4950,8 +5168,8 @@
      0.75
     ],
     "crowdCounts": [
-     72,
-     36,
+     40,
+     16,
      0
     ],
     "shadowEnabled": [
@@ -4966,7 +5184,7 @@
     "flashSeconds": 0.32,
     "maxTriangles": 90000,
     "maxDrawCalls": 70,
-    "cameraFov": 48,
+    "cameraFov": 43,
     "cameraPortrait": [
      0,
      18,
@@ -4974,8 +5192,8 @@
     ],
     "cameraLandscape": [
      0,
-     13,
-     25
+     15,
+     26
     ],
     "cameraTarget": [
      0,
@@ -4995,7 +5213,76 @@
      "ball": "#dfff55"
     },
     "fallbackQuality": 2,
-    "shirtColor": "#4d9ddb"
+    "shirtColor": "#4d9ddb",
+    "environment": {
+     "crowdHeight": 1.5,
+     "crowdTriangleBudget": 850,
+     "lodCells": 24,
+     "treeHeight": 4.8,
+     "treePositions": [
+      [
+       -10.5,
+       9
+      ],
+      [
+       10.5,
+       9
+      ],
+      [
+       -10.5,
+       -10.5
+      ],
+      [
+       10.5,
+       -10.5
+      ]
+     ],
+     "treeCounts": [
+      4,
+      2,
+      0
+     ],
+     "clapSeconds": 1.25,
+     "clapFrequency": 14,
+     "clapArmStart": 0.19,
+     "clapArmEnd": 0.38,
+     "clapLow": 0.58,
+     "clapHigh": 1.22,
+     "clapLift": 0.18,
+     "clapForward": 0.32,
+     "crowdPalette": [
+      "#ffffff",
+      "#e8c6aa",
+      "#aabedb",
+      "#c4b1d6",
+      "#cfdbab"
+     ],
+     "crowdSpacing": 1.6,
+     "crowdSideX": 7.35,
+     "crowdEndZ": 12.5,
+     "benchHeight": 0.6,
+     "benchPositions": [
+      [
+       -6.2,
+       7.5
+      ],
+      [
+       6.2,
+       7.5
+      ]
+     ],
+     "benchTriangleBudget": 600,
+     "crowdRowSize": 24,
+     "crowdColumns": 6,
+     "crowdRowGap": 0.6,
+     "crowdEndRowGap": 0.55,
+     "crowdFloor": 0.32,
+     "crowdRise": 0.26,
+     "crowdScale": 0.92,
+     "crowdScaleSpread": 0.12,
+     "clapPulseBase": 0.65,
+     "clapPulseRange": 0.25
+    }
    },
    "audio": {
     "gain": 0.055,
@@ -5015,7 +5302,7 @@
    "pointsPerCoin": 1,
    "maximumSeconds": 3600,
    "lob": {
-    "flightMultiplier": 1.35,
+    "flightMultiplier": 1.75,
     "depth": 7.6
    },
    "difficulties": {
@@ -5142,8 +5429,8 @@
    "serve": {
     "baselineMargin": 0.7,
     "sideX": 1.65,
-    "tossSeconds": 1.4,
-    "tossVelocity": 6.8,
+    "tossSeconds": 1.1,
+    "tossVelocity": 5.35,
     "handHeight": 1.05,
     "green": {
      "easy": 0.3,
@@ -5156,6 +5443,309 @@
     "missDepth": 2,
     "aimFraction": 0.7,
     "centerPowerBonus": 0.3
+   },
+   "animation": {
+    "contactFraction": 0.42,
+    "recoveryFraction": 0.82,
+    "previewFraction": 0.2,
+    "serveSeconds": 0.76,
+    "ready": {
+     "chest": 0,
+     "rightElbow": [
+      0.38,
+      1.22,
+      0.08
+     ],
+     "rightHand": [
+      0.4,
+      1.03,
+      0.4
+     ],
+     "leftElbow": [
+      -0.35,
+      1.22,
+      0.1
+     ],
+     "leftHand": [
+      -0.2,
+      1.14,
+      0.35
+     ]
+    },
+    "forehand": [
+     {
+      "at": 0,
+      "chest": -0.5,
+      "rightElbow": [
+       0.46,
+       1.28,
+       -0.16
+      ],
+      "rightHand": [
+       0.68,
+       1.08,
+       -0.35
+      ],
+      "leftElbow": [
+       -0.35,
+       1.27,
+       0.25
+      ],
+      "leftHand": [
+       -0.18,
+       1.3,
+       0.5
+      ]
+     },
+     {
+      "at": 0.42,
+      "chest": 0,
+      "rightElbow": [
+       0.4,
+       1.23,
+       0.25
+      ],
+      "rightHand": [
+       0.56,
+       1.06,
+       0.6
+      ],
+      "leftElbow": [
+       -0.37,
+       1.24,
+       0.05
+      ],
+      "leftHand": [
+       -0.44,
+       1.14,
+       0.2
+      ]
+     },
+     {
+      "at": 0.82,
+      "chest": 0.5,
+      "rightElbow": [
+       -0.02,
+       1.44,
+       0.22
+      ],
+      "rightHand": [
+       -0.34,
+       1.63,
+       0.44
+      ],
+      "leftElbow": [
+       -0.38,
+       1.25,
+       0
+      ],
+      "leftHand": [
+       -0.45,
+       1.1,
+       0.2
+      ]
+     }
+    ],
+    "backhand": [
+     {
+      "at": 0,
+      "chest": 0.5,
+      "rightElbow": [
+       0.14,
+       1.28,
+       0.15
+      ],
+      "rightHand": [
+       -0.38,
+       1.2,
+       -0.05
+      ],
+      "leftElbow": [
+       -0.4,
+       1.27,
+       0.05
+      ],
+      "leftHand": [
+       -0.43,
+       1.23,
+       -0.05
+      ]
+     },
+     {
+      "at": 0.42,
+      "chest": 0,
+      "rightElbow": [
+       0.03,
+       1.23,
+       0.26
+      ],
+      "rightHand": [
+       -0.45,
+       1.1,
+       0.6
+      ],
+      "leftElbow": [
+       -0.44,
+       1.22,
+       0.28
+      ],
+      "leftHand": [
+       -0.5,
+       1.14,
+       0.54
+      ]
+     },
+     {
+      "at": 0.82,
+      "chest": -0.45,
+      "rightElbow": [
+       0.36,
+       1.45,
+       0.25
+      ],
+      "rightHand": [
+       0.57,
+       1.65,
+       0.44
+      ],
+      "leftElbow": [
+       -0.01,
+       1.45,
+       0.32
+      ],
+      "leftHand": [
+       0.45,
+       1.62,
+       0.44
+      ]
+     }
+    ],
+    "lobLift": 0.34,
+    "lobFollowLift": 0.25,
+    "serve": [
+     {
+      "at": 0,
+      "chest": -0.15,
+      "rightElbow": [
+       0.4,
+       1.58,
+       -0.15
+      ],
+      "rightHand": [
+       0.25,
+       1.83,
+       -0.2
+      ],
+      "leftElbow": [
+       -0.24,
+       1.62,
+       0.12
+      ],
+      "leftHand": [
+       -0.15,
+       1.96,
+       0.1
+      ]
+     },
+     {
+      "at": 0.42,
+      "chest": 0,
+      "rightElbow": [
+       0.22,
+       1.74,
+       0.2
+      ],
+      "rightHand": [
+       0.1,
+       2.02,
+       0.3
+      ],
+      "leftElbow": [
+       -0.3,
+       1.4,
+       0.05
+      ],
+      "leftHand": [
+       -0.3,
+       1.18,
+       0.25
+      ]
+     },
+     {
+      "at": 0.82,
+      "chest": 0.25,
+      "rightElbow": [
+       0,
+       1.3,
+       0.25
+      ],
+      "rightHand": [
+       -0.27,
+       1.01,
+       0.53
+      ],
+      "leftElbow": [
+       -0.35,
+       1.22,
+       0.05
+      ],
+      "leftHand": [
+       -0.3,
+       1.1,
+       0.27
+      ]
+     }
+    ],
+    "racket": {
+     "headOffset": [
+      0,
+      -0.53,
+      0
+     ],
+     "handRotation": [
+      0,
+      0,
+      1.1
+     ],
+     "headScale": [
+      1,
+      1.3,
+      1
+     ],
+     "radius": 0.26,
+     "tube": 0.028,
+     "handleLength": 0.3,
+     "handleOffset": -0.2,
+     "stringGap": 0.06,
+     "stringRadius": 0.24,
+     "stringsPerHalf": 3,
+     "frameSegments": 20,
+     "tubeSegments": 5,
+     "handleSegments": 6,
+     "backhandRotation": [
+      0,
+      0,
+      -1.1
+     ],
+     "serveRotation": [
+      0,
+      0,
+      3.141592653589793
+     ]
+    },
+    "contactBlend": 0.24,
+    "ikEpsilon": 0.0001,
+    "contactTolerance": 0.4,
+    "exactContactTolerance": 0.15
+   },
+   "environment": {
+    "models": [
+     "assets/models/adult-man-512.glb",
+     "assets/models/adult-woman-512.glb",
+     "assets/models/palm-tree-512.glb",
+     "assets/models/tree-a-512.glb",
+     "assets/models/bench-512.glb"
+    ]
    }
   }
  },
