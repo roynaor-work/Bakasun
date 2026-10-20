@@ -1,0 +1,164 @@
+{
+  "base": "995e285",
+  "browser": "Chromium / SwiftShader",
+  "physicalPhone": false,
+  "results": [
+    {
+      "script": "workout/island/tests/g3b-browser.mjs",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "exitCode": 0,
+      "output": "G3b verified 844",
+      "checks": {
+        "lockedWithoutPitch": true,
+        "menuEntry": true,
+        "pitchEntry": true,
+        "keyboardAndMultitouch": true,
+        "pauseClearsInput": true,
+        "reopenAndCleanup": true,
+        "resultAndTeamWin": true,
+        "labBlocked": true
+      },
+      "errors": [],
+      "outside": []
+    },
+    {
+      "script": "workout/island/tests/g3c-browser.mjs",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "exitCode": 0,
+      "output": "G3c verified 844 390",
+      "checks": {
+        "lockedBeforeConstruction": true,
+        "authenticV9Migration": true,
+        "trainingTwiceWithClock": true,
+        "difficultySaved": true,
+        "keyboard": true,
+        "threeTouchContacts": true,
+        "directionalShot": true,
+        "pass": true,
+        "sprint": true,
+        "defense": true,
+        "slideAndSteal": true,
+        "shellPause": true,
+        "handPreferenceBeforePlay": true,
+        "layout": true,
+        "liveStatusThrottled": true,
+        "resultWallet": true,
+        "reload": true,
+        "mapBackStayBackExit": true,
+        "historyBound": true,
+        "lab404": true
+      },
+      "errors": [],
+      "outside": []
+    },
+    {
+      "script": "workout/island/tests/g3d-browser.mjs",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "exitCode": 0,
+      "output": "G3d verified 844 390",
+      "checks": {
+        "fullWindow": true,
+        "threePrimaryCircles64": true,
+        "manualSwitch48": true,
+        "floatingStick": true,
+        "threeTouchContacts": true,
+        "directedChargedShot": true,
+        "directedChargedPass": true,
+        "receiptTransfersSameTick": true,
+        "automaticSwitchHysteresis": true,
+        "pauseFreezes": true,
+        "goalAndCelebration": true,
+        "qualityFallback": true,
+        "invalidGLBFallback": true,
+        "handPreferenceSavedBeforeGame": true,
+        "orientationLockFailureHandled": true,
+        "lab404": true
+      },
+      "errors": [],
+      "outside": []
+    },
+    {
+      "script": "workout/island/tests/g3e-browser.mjs",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "exitCode": 0,
+      "output": "g3e verified { width: 844, height: 390 }",
+      "checks": {
+        "eightModels": true,
+        "budget": true,
+        "sprintAtBottom": true,
+        "slideFeetFirst": true,
+        "standingTackleAnimation": true,
+        "actualCross": true,
+        "landingMarker": true,
+        "receiverControl": true,
+        "actualHeader": true,
+        "goal": true,
+        "distantFallback": true,
+        "handedness": true
+      },
+      "errors": [],
+      "outside": []
+    },
+    {
+      "script": "workout/island/tests/g3f-browser.mjs",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "exitCode": 0,
+      "output": "g3f verified { width: 844, height: 390 }",
+      "checks": {
+        "eightCards": true,
+        "editableShirts": true,
+        "skeletalSlideAndSteal": true,
+        "twoHandThrow": true,
+        "cornerLoft": true,
+        "independentAim": true,
+        "pointerCancelClearsPendingAction": true,
+        "keeperMode": true,
+        "playablePractice": true,
+        "wholeBallAndFrame": true,
+        "noDoubleGoal": true,
+        "localSave": true
+      },
+      "errors": [],
+      "outside": []
+    },
+    {
+      "script": "workout/island/tests/g3g-browser.mjs",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "exitCode": 0,
+      "output": "g3g verified { width: 844, height: 390 }",
+      "checks": {
+        "touchStart": true,
+        "boundedIcons": true,
+        "noLiveText": true,
+        "groundArrow": true,
+        "chargeAndHeight": true,
+        "cancelDoesNotShoot": true,
+        "fourSlidePhases": true,
+        "keeperCarryAndThrow": true,
+        "sprintRing": true,
+        "nearestSwitch": true,
+        "qualityFallback": true
+      },
+      "errors": [],
+      "outside": []
+    }
+  ]
+}

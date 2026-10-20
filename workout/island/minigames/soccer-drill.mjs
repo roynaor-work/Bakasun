@@ -14,7 +14,7 @@ export function createSoccerDrill(options){
   s.practiceTarget={x,z,radius:c.training.targetRadius,cones:kind==='cones'};drill.flying=0;drill.hit=false;
  }
  setup();
- return {getState:()=>s,snapshot:()=>JSON.parse(JSON.stringify(s)),clearInput:()=>game.clearInput(),get result(){return result;},
+ return {drainEvents:()=>game.drainEvents(),getState:()=>s,snapshot:()=>JSON.parse(JSON.stringify(s)),clearInput:()=>game.clearInput(),get result(){return result;},
   update(dt,input={}){if(result||!Number.isFinite(dt)||dt<=0)return s;const step=Math.min(dt,c.rules.maxUpdateSeconds);drill.elapsed+=step;
    game.update(step,input);
    if(!drill.flying&&s.ball.owner!==0)drill.flying=Number.EPSILON;

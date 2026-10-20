@@ -30,9 +30,9 @@ test('TASK-016 city instances preserve centers, ground contact, individual size 
  assert.ok(sizes[0].x<sizes[1].x&&sizes[1].x<sizes[2].x);assert.ok(sizes[0].y<sizes[1].y&&sizes[1].y<sizes[2].y);assert.equal(released,0);
  const fallback=createBuilding(house,3,models);assert.equal(fallback.userData.modelPath,undefined);disposeBuilding(fallback);models.dispose();models.dispose();assert.equal(released,3);
 });
-test('TASK-016 hydrant fits the old 1.15-unit height upright at the same ground position without changing simulation',async()=>{
+test('TASK-016 hydrant fits the configured enlarged height upright at the same ground position without changing simulation',async()=>{
  const balance=config.fireRescue,model=createFireModel({config,balance,level:1,random:()=>.5}),before=model.snapshot(),world=createFireScene({config,balance},model,{loader});
- assert.equal(await world.loadHydrant(),true);const hydrant=world.scene.children.find(o=>o.userData.modelPath===balance.hydrant.path),box=bounds(hydrant),size=box.getSize(new T.Vector3());close(size.y,1.15);close(box.min.y,.1);close(box.getCenter(new T.Vector3()).x,7.3);close(box.getCenter(new T.Vector3()).z,10);assert.equal(hydrant.children[0].rotation.y,0);assert.deepEqual(model.snapshot(),before);world.dispose();
+ assert.equal(await world.loadHydrant(),true);const hydrant=world.scene.children.find(o=>o.userData.modelPath===balance.hydrant.path),box=bounds(hydrant),size=box.getSize(new T.Vector3());close(size.y,balance.hydrant.height);assert.ok(size.y>=1.15*1.5);close(box.min.y,.1);close(box.getCenter(new T.Vector3()).x,7.3);close(box.getCenter(new T.Vector3()).z,10);assert.equal(hydrant.children[0].rotation.y,0);assert.deepEqual(model.snapshot(),before);world.dispose();
 });
 test('TASK-016 boats match hull length after rotation, and gunboat yaw follows both directions without reflection',async()=>{
  const models=new LocalModels({loader}),specs={player:config.navalDuel.playerModel,enemy:config.navalDuel.enemyModel,length:config.navalDuel.playerModel.length};await Promise.all([models.load(specs.player),models.load(specs.enemy)]);

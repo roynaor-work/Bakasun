@@ -161,7 +161,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
         const {pivot,actions,mixer,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz);if(character.yaw===null||['slide','kick','throw'].includes(animation.mode))character.yaw=wanted;else character.yaw+=Math.atan2(Math.sin(wanted-character.yaw),Math.cos(wanted-character.yaw))*(1-Math.exp(-config.view.animation.turnSmoothing*dt));
         pivot.position.set(p.x,animation.height,p.z);pivot.rotation.set(0,character.yaw,0);pivot.rotateX(animation.lean);pivot.rotateZ(animation.roll);
         const retrigger=animation.clip==='kick'&&(p.kickTime>character.kickTime||p.stealTime>character.stealTime);
-        if(animation.clip!==character.active||retrigger){actions[character.active].fadeOut(config.view.animation.fadeSeconds);actions[animation.clip].reset().fadeIn(config.view.animation.fadeSeconds).play();character.active=animation.clip;}
+        if(animation.clip!==character.active||retrigger){const fade=animation.clip==='kick'||character.active==='kick'?config.view.animation.fadeSeconds:config.view.animation.locomotionFadeSeconds;actions[character.active].fadeOut(fade);actions[animation.clip].reset().fadeIn(fade).play();character.active=animation.clip;}
         actions[animation.clip].setEffectiveTimeScale(animation.speed);character.mode=animation.mode;character.kickTime=p.kickTime;character.stealTime=p.stealTime;
         for(const {bone,rest}of Object.values(bones))if(bone)bone.quaternion.copy(rest);
         mixer.update(dt*(s.phase==='goal'&&animation.mode!=='celebrate'?config.rules.goalSlowMotion:1));
