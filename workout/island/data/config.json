@@ -1181,7 +1181,7 @@
   "alienDefense": {
    "playerBottom": 38.4,
    "playerRadius": 18,
-   "playerSpeed": 340,
+   "playerSpeed": 221,
    "formationX": 50,
    "formationY": 48,
    "columnSpacing": 52,
@@ -1224,7 +1224,7 @@
      "points": 10,
      "winMoney": 30,
      "winParts": 0,
-     "enemyKinds": 5,
+     "enemyKinds": 2,
      "boss": false,
      "bossLives": 9,
      "spawnBudget": 0,
@@ -1250,7 +1250,7 @@
      "points": 12,
      "winMoney": 42,
      "winParts": 0,
-     "enemyKinds": 5,
+     "enemyKinds": 2,
      "boss": false,
      "bossLives": 10,
      "spawnBudget": 0,
@@ -1276,7 +1276,7 @@
      "points": 14,
      "winMoney": 54,
      "winParts": 0,
-     "enemyKinds": 5,
+     "enemyKinds": 3,
      "boss": false,
      "bossLives": 11,
      "spawnBudget": 0,
@@ -1302,7 +1302,7 @@
      "points": 16,
      "winMoney": 66,
      "winParts": 1,
-     "enemyKinds": 5,
+     "enemyKinds": 3,
      "boss": false,
      "bossLives": 12,
      "spawnBudget": 0,
@@ -1328,7 +1328,7 @@
      "points": 18,
      "winMoney": 78,
      "winParts": 1,
-     "enemyKinds": 5,
+     "enemyKinds": 4,
      "boss": false,
      "bossLives": 13,
      "spawnBudget": 0,
@@ -1354,7 +1354,7 @@
      "points": 20,
      "winMoney": 90,
      "winParts": 1,
-     "enemyKinds": 5,
+     "enemyKinds": 4,
      "boss": false,
      "bossLives": 14,
      "spawnBudget": 2,
@@ -1449,7 +1449,7 @@
      "rows": 4,
      "columns": 6,
      "waves": 7,
-     "lives": 3,
+     "lives": 5,
      "alienSpeed": 28,
      "drop": 15,
      "shotSeconds": 0.36,
@@ -1460,9 +1460,9 @@
      "winParts": 3,
      "enemyKinds": 5,
      "boss": true,
-     "bossLives": 600,
+     "bossLives": 220,
      "spawnBudget": 2,
-     "seconds": 132,
+     "seconds": 160,
      "patternKinds": 4,
      "feature": "feature.alien.10",
      "scoreLimit": 230000,
@@ -1485,7 +1485,9 @@
      "radius": 0.85,
      "pattern": "zigzag",
      "amplitude": 6,
-     "frequency": 2.6
+     "frequency": 2.6,
+     "color": "#a1e5f5",
+     "projectile": "needle"
     },
     {
      "id": "heavy",
@@ -1495,7 +1497,10 @@
      "pattern": "circle",
      "amplitude": 4,
      "frequency": 1.4,
-     "loot": "coin"
+     "loot": "coin",
+     "color": "#edb865",
+     "projectile": "orb",
+     "novaResistance": 0.3
     },
     {
      "id": "weaver",
@@ -1504,7 +1509,9 @@
      "radius": 1,
      "pattern": "dive",
      "amplitude": 8,
-     "frequency": 2
+     "frequency": 2,
+     "color": "#c985ed",
+     "projectile": "diamond"
     },
     {
      "id": "splitter",
@@ -1514,7 +1521,9 @@
      "pattern": "zigzag",
      "amplitude": 7,
      "frequency": 2,
-     "children": 2
+     "children": 2,
+     "color": "#a5e68a",
+     "projectile": "fork"
     },
     {
      "id": "carrier",
@@ -1527,7 +1536,9 @@
      "launchSeconds": 7,
      "launchLimit": 2,
      "loot": "crystal",
-     "mineSeconds": 3.4
+     "mineSeconds": 3.4,
+     "color": "#f58da5",
+     "projectile": "ring"
     }
    ],
    "bossScale": 1.8,
@@ -1568,12 +1579,15 @@
    },
    "nova": {
     "charges": 2,
-    "radius": 112,
-    "damage": 4,
+    "radius": 64,
+    "damage": 2.2,
     "seconds": 0.75,
     "color": "#d5fbff",
-    "throwSeconds": 0.28,
-    "arcRise": 60
+    "throwSeconds": 0.6,
+    "arcRise": 60,
+    "aimSeconds": 0.22,
+    "targetFraction": 0.3,
+    "maxRadius": 240
    },
    "hpPerStage": 0.06,
    "equipment": {
@@ -1926,13 +1940,18 @@
     "diveSway": 20,
     "diveClearance": 85,
     "descentSpeed": 0.25,
-    "entrySway": 8
+    "entrySway": 8,
+    "bossAttackSeconds": 2.5
    },
    "calibration": {
     "reactionSeconds": 0.24,
     "stepSeconds": 0.02,
     "seeds": 10,
     "minimumWins": 7
+   },
+   "movement": {
+    "rampSeconds": 0.15,
+    "dragSeconds": 0.22
    }
   },
   "fireRescue": {
