@@ -81,10 +81,10 @@ for(let kind=0;kind<4;kind++)test(`G2c temporary ${config.alienDefense.pickups.k
   if(kind===3){const lives=m.lives;m.bolts.push({x:m.player.x,y:m.player.y,kind:0});m.update(.001,{});assert.equal(m.lives,lives);}
   m.shots.length=0;m.pickups.length=0;advance(m,config.alienDefense.pickups.seconds+.1);assert.equal(m.powerup,-1);if(kind===0){assert.equal(m.spreadTime,0);assert.ok(m.spreadCooldown>0);}
 });
-test('G2c nova flies to the group center, preserves distant enemies, shows a light wave and has finite charges',()=>{
+test('G2c straight nova preserves distant enemies, shows a local light wave and has finite charges',()=>{
   const m=make('alienDefense');advance(m,2);
-  const a=m.aliens[0],far=m.aliens.at(-1);a.hp=1;far.x=far.baseX=340;far.y=far.baseY=300;far.hp=100;const farHp=far.hp,center={x:m.aliens.reduce((n,a)=>n+a.x,0)/m.aliens.length,y:m.aliens.reduce((n,a)=>n+a.y,0)/m.aliens.length};
-  m.update(.001,{nova:true,x:10,y:10});assert.deepEqual([m.nova.x,m.nova.y],[center.x,center.y]);assert.equal(m.nova.fromY,m.player.y);assert.equal(m.novaCharges,config.alienDefense.nova.charges-1);assert.ok(m.nova.flight>0);assert.equal(m.score,0);
+  const a=m.aliens[0],far=m.aliens.at(-1);a.hp=1;far.x=far.baseX=340;far.y=far.baseY=300;far.hp=100;const farHp=far.hp;
+  m.update(.001,{nova:true,x:10,y:10});assert.deepEqual([m.nova.x,m.nova.y],[m.player.x,m.player.y]);assert.equal(m.nova.fromY,m.player.y);assert.equal(m.novaCharges,config.alienDefense.nova.charges-1);assert.ok(m.nova.flight>0);assert.equal(m.score,0);
   advance(m,config.alienDefense.nova.aimSeconds+config.alienDefense.nova.throwSeconds+.02,{nova:true});assert.ok(m.nova.life>0);assert.ok(m.score>0);assert.equal(far.hp,farHp);assert.equal(m.novaCharges,1);
   m.update(.001,{});m.update(.001,{nova:true});assert.equal(m.novaCharges,1,'no lost charge during the light wave');
   advance(m,config.alienDefense.nova.seconds+.02);m.update(.001,{nova:true});assert.equal(m.novaCharges,0);advance(m,2);assert.equal(m.nova.life,0);m.update(.001,{nova:true});assert.equal(m.novaCharges,0);
@@ -136,8 +136,8 @@ for(const id of Object.keys(models))for(const level of [1,10])test(`G2c ${id} st
 test('G2c a piercing beam hits two spaced enemies once each along its flight',()=>{
  const m=make('alienDefense',8),a=m.aliens[0],b=m.aliens[1];m.aliens.splice(2);for(const [ship,y]of [[a,70],[b,130]]){Object.assign(ship,{baseX:150,x:150,baseY:y,y,phase:0,hp:10,shield:0,entry:0});}m.shots.push({x:150,y:160,vx:0,vy:-config.alienDefense.shotSpeed,kind:1,hp:4,hitLo:0,hitHi:0});advance(m,.22,{});assert.equal(a.hp,9);assert.equal(b.hp,9);assert.equal(m.shots[0].hp,2);
 });
-test('G2c nova light stays at the detonation point while the next aim moves',()=>{
-  const m=make('alienDefense');const center=[m.aliens.reduce((n,a)=>n+a.x,0)/m.aliens.length,m.aliens.reduce((n,a)=>n+a.y,0)/m.aliens.length];m.update(.01,{nova:true,x:10,y:10});m.update(.01,{x:330,y:180});assert.deepEqual([m.nova.x,m.nova.y],center);assert.deepEqual([m.novaAim.x,m.novaAim.y],[330,180]);
+test('G2c nova light stays at the detonation point when the ship moves',()=>{
+  const m=make('alienDefense');advance(m,2);m.update(.01,{nova:true});advance(m,config.alienDefense.nova.throwSeconds+.02);assert.ok(m.nova.life>0);const impact=[m.nova.x,m.nova.y];m.update(.01,{x:330,y:180});assert.deepEqual([m.nova.x,m.nova.y],impact);assert.equal(m.novaAim,undefined);
 });
 test('G2c stubborn fire resists water and spreading fire grows faster at equal starting heat',()=>{
   const b=config.fireRescue,a=make('fireRescue',10),c=make('fireRescue',10),d=make('fireRescue',10);for(const m of [a,c,d]){advance(m,b.startGrace+.1);m.flames[0].heat=.5;m.flames[0].type=0;}
