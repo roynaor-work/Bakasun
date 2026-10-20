@@ -27,8 +27,8 @@ export function fieldTarget(p,s,c){
   }
  }else if(chaser.id===p.id){x=b.x+b.vx*a.interceptSeconds;z=b.z+b.vz*a.interceptSeconds;duty='press';}
  else{
-  x=d*c.ai.kickoffX[role]+clamp(b.x,-a.zoneBallShift,a.zoneBallShift);
-  z=lane+b.z*a.ballWidth;duty='cover';
+  x=d*c.ai.kickoffX[role]+clamp(b.x,-a.zoneBallShift,a.zoneBallShift)+b.vx*a.interceptSeconds;
+  z=lane+b.z*a.ballWidth+b.vz*a.interceptSeconds;duty='cover';
  }
  // Avoid off-ball opponents, including on the presser's route to the ball.
  // This steers AI only: the child can cross every pitch/penalty-area line.

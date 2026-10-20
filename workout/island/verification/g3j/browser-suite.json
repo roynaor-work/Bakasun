@@ -1,0 +1,259 @@
+{
+  "mainMerged": "1f058267c554bf523698bee1a9af5c42139391d8",
+  "sourceCommit": "7d3c2c1aad9dfdcbb9514435cb14c66aa9ac5fa6",
+  "server": "python3 -m http.server 8765 --bind 127.0.0.1",
+  "serverRoot": "repository root",
+  "oldServerCheck": "Port was free before the server was started",
+  "ISLAND_URL": "http://127.0.0.1:8765/workout/island/?dev=1",
+  "PLAYWRIGHT_MODULE": "/opt/codex/cua_node/lib/node_modules/playwright",
+  "scriptCount": 33,
+  "finalFailures": 0,
+  "results": [
+    {
+      "script": "g2f-browser.mjs",
+      "exitCode": 0,
+      "seconds": 71.9,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g2g-browser.mjs",
+      "exitCode": 0,
+      "seconds": 82.7,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g2h-browser.mjs",
+      "exitCode": 0,
+      "seconds": 18.5,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g2i-browser.mjs",
+      "exitCode": 0,
+      "seconds": 12.1,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g2j-browser.mjs",
+      "exitCode": 0,
+      "seconds": 23.8,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g2k-browser.mjs",
+      "exitCode": 0,
+      "seconds": 28.5,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g2l-browser.mjs",
+      "exitCode": 0,
+      "seconds": 61.3,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g2m-browser.mjs",
+      "exitCode": 0,
+      "seconds": 50.8,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g2n-browser.mjs",
+      "exitCode": 0,
+      "seconds": 120.5,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g2o-browser.mjs",
+      "exitCode": 0,
+      "seconds": 23.3,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g3b-browser.mjs",
+      "exitCode": 0,
+      "seconds": 69.3,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g3c-browser.mjs",
+      "exitCode": 0,
+      "seconds": 94.4,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g3d-browser.mjs",
+      "exitCode": 0,
+      "seconds": null,
+      "viewport": "844x390",
+      "attempts": [
+        {
+          "exitCode": 1,
+          "note": "The isolated defense fixture retained a cooldown from a prior pass."
+        },
+        {
+          "exitCode": 0,
+          "note": "Fixture now resets switchCooldown; full 844x390 rerun passed."
+        }
+      ]
+    },
+    {
+      "script": "g3e-browser.mjs",
+      "exitCode": 0,
+      "seconds": 25.7,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g3f-browser.mjs",
+      "exitCode": 0,
+      "seconds": 228.6,
+      "viewport": "844x390",
+      "attempts": [
+        {
+          "exitCode": 0
+        },
+        {
+          "exitCode": 0,
+          "note": "Rerun after fixing restart aim."
+        }
+      ]
+    },
+    {
+      "script": "g3g-browser.mjs",
+      "exitCode": 0,
+      "seconds": 44.1,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g3h-browser.mjs",
+      "exitCode": 0,
+      "seconds": 43.0,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g3i-browser.mjs",
+      "exitCode": 0,
+      "seconds": 61.3,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g3j-browser.mjs",
+      "exitCode": 0,
+      "seconds": 206.1,
+      "viewport": "844x390 and 740x360",
+      "attempts": [
+        {
+          "exitCode": 0
+        },
+        {
+          "exitCode": 0,
+          "note": "Rerun after fixing restart aim."
+        }
+      ]
+    },
+    {
+      "script": "g4b-browser.mjs",
+      "exitCode": 0,
+      "seconds": 32.6,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g4c-browser.mjs",
+      "exitCode": 0,
+      "seconds": 26.7,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g4d-browser.mjs",
+      "exitCode": 0,
+      "seconds": null,
+      "viewport": "844x390",
+      "attempts": [
+        {
+          "exitCode": 1,
+          "note": "Stopped initial run: this script uses the G4E viewport prefix."
+        },
+        {
+          "exitCode": 1,
+          "note": "All browser assertions passed; report rename expected verification.json instead of 844-verification.json."
+        },
+        {
+          "exitCode": 0,
+          "note": "Full rerun with G4E_WIDTH=844 G4E_HEIGHT=390 and temporary hard link between both names of the fresh report; tennis sources unchanged."
+        }
+      ]
+    },
+    {
+      "script": "g5-browser.mjs",
+      "exitCode": 0,
+      "seconds": 288.6,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g6-browser.mjs",
+      "exitCode": 0,
+      "seconds": 22.0,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g6b-browser.mjs",
+      "exitCode": 0,
+      "seconds": 19.4,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g6c-browser.mjs",
+      "exitCode": 0,
+      "seconds": 83.0,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g6d-browser.mjs",
+      "exitCode": 0,
+      "seconds": 58.1,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g7-browser.mjs",
+      "exitCode": 0,
+      "seconds": 81.4,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g8-browser.mjs",
+      "exitCode": 0,
+      "seconds": 101.3,
+      "viewport": "844x390"
+    },
+    {
+      "script": "g8b-browser.mjs",
+      "exitCode": 0,
+      "seconds": 39.1,
+      "viewport": "844x390"
+    },
+    {
+      "script": "night-browser.mjs",
+      "exitCode": 0,
+      "seconds": 0.4,
+      "viewport": "844x390",
+      "note": "Helper module import smoke check; other scripts execute its browser scenarios."
+    },
+    {
+      "script": "task016-browser.mjs",
+      "exitCode": 0,
+      "seconds": 41.9,
+      "viewport": "844x390"
+    },
+    {
+      "script": "task017-pilot-browser.mjs",
+      "exitCode": 0,
+      "seconds": 29.8,
+      "viewport": "844x390"
+    }
+  ],
+  "additionalG3jRun": {
+    "viewport": "740x360",
+    "exitCode": 0,
+    "purpose": "Final celebration close-up, actual goal-kick departure and running AudioContext"
+  }
+}

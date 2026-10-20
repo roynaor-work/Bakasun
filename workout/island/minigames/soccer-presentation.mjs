@@ -1,4 +1,4 @@
-import {passDestination} from './soccer.mjs?v=g9-20261020-1';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=g9-20261020-1';
 /** Pure presentation decisions; the simulation never imports this module. */
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 export function slideWeight(player,config){
@@ -19,6 +19,16 @@ export function playerAnimation(player,state,config){
 export function passReceiver(state,config){
   return state.charging&&state.chargeKind==='pass'&&state.ball.owner===state.controlled?passDestination(state,config,state.charge/config.passing.chargeSeconds).target:null;
 }
+export function soccerShotIcon(state,config){
+ return canHead(state.players[state.controlled],state.ball,config)?'header':state.mode==='defense'?'slide':'shoot';
+}
+/** Preview and flight share the exact same endpoint, height and parabola. */
+export function crossArc(state,config){
+ if(state.ball.flight)return state.ball.flight;
+ if(!state.charging||state.chargeKind!=='pass'||state.charge<config.passing.loftThresholdSeconds)return null;
+ const power=state.charge/config.passing.chargeSeconds,destination=passDestination({...state,aim:soccerPassAim(state)},config,power);
+ return {fromX:state.ball.x,fromZ:state.ball.z,x:destination.x,z:destination.z,height:config.passing.loftMinHeight+power*config.passing.loftExtraHeight};
+}
 /** Analytic perspective projection matching the side camera, useful without WebGL. */
 export function projectSoccerPoint(point,camera,aspect,config){
   const c=config.view.camera,angle=c.elevationDegrees*Math.PI/180,sin=Math.sin(angle),cos=Math.cos(angle),tan=Math.tan(c.fovDegrees*Math.PI/360),dx=point.x-camera.x,dz=(point.z-camera.z)*camera.direction,y=point.y||0;
@@ -33,7 +43,9 @@ export function soccerCamera(state,aspect,config,previous,dt=0){
   const blend=previous?1-Math.exp(-c.smoothing*dt):1;
   const next={x:previous?previous.x+(wanted.x-previous.x)*blend:wanted.x,z:previous?previous.z+(wanted.z-previous.z)*blend:wanted.z,distance:previous?previous.distance+(wanted.distance-previous.distance)*blend:wanted.distance,direction:wanted.direction};
   const angle=c.elevationDegrees*Math.PI/180,sin=Math.sin(angle),cos=Math.cos(angle),tan=Math.tan(c.fovDegrees*Math.PI/360);
-  for(const point of [b,{x:p.x,z:p.z,y:0},{x:p.x,z:p.z,y:c.playerHeight}]){
+  const arc=crossArc(state,config),points=[b,{x:p.x,z:p.z,y:0},{x:p.x,z:p.z,y:c.playerHeight}];
+  if(arc)points.push({x:arc.x,z:arc.z,y:0},{x:(arc.fromX+arc.x)/2,z:(arc.fromZ+arc.z)/2,y:arc.height});
+  for(const point of points){
     const dx=point.x-next.x,dz=(point.z-next.z)*next.direction,y=point.y||0;
     next.distance=Math.max(next.distance,y*sin+dz*cos+Math.max(Math.abs(dx)/(tan*aspect*c.safeX),Math.abs(y*cos-dz*sin)/(tan*c.safeY)));
   }return next;

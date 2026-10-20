@@ -3,7 +3,7 @@ import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {cloneSoccerRig} from './soccer-rig.mjs?v=g9-20261020-1';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight} from './soccer-presentation.mjs?v=g9-20261020-1';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=g9-20261020-1';
 import {shotHeight,safeShotAim} from './soccer-shot.mjs';
 import {holdSoccerBall} from './soccer-poses.mjs';
 
@@ -67,6 +67,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   const head=new T.Mesh(track(new T.ConeGeometry(.13,.32,3)),aimMaterial);head.rotation.x=Math.PI/2;head.position.z=config.view.aimArrowLength;aimArrow.add(head);scene.add(aimArrow);
   const requests=new T.InstancedMesh(track(new T.RingGeometry(.14,.22,12)),track(new T.MeshBasicMaterial({color:'#dfffac',side:T.DoubleSide})),roster.length);requests.frustumCulled=false;scene.add(requests);
   const landing=new T.Mesh(track(new T.RingGeometry(.65,.74,32)),track(new T.MeshBasicMaterial({color:config.passing.landingColor,side:T.DoubleSide,transparent:true,opacity:.9})));landing.rotation.x=-Math.PI/2;scene.add(landing);
+  const arcDots=new T.InstancedMesh(track(new T.SphereGeometry(config.passing.arcRadius,6,4)),track(new T.MeshBasicMaterial({color:config.passing.landingColor,depthTest:false})),config.passing.arcDots);arcDots.frustumCulled=false;scene.add(arcDots);
   const turfPositions=new Float32Array(roster.length*config.view.animation.turfPerPlayer*3),turfG=track(new T.BufferGeometry());turfG.setAttribute('position',new T.BufferAttribute(turfPositions,3));const turf=new T.Points(turfG,track(new T.PointsMaterial({color:config.view.animation.turfColor,size:.12,transparent:true,opacity:.65})));scene.add(turf);
   const ballRoot=new T.Group();const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));ballRoot.add(fallbackBall);scene.add(ballRoot);
   const particleCount=config.view.confettiCount,particles=Array.from({length:particleCount},()=>({x:0,y:-10,z:0,vx:0,vy:0,vz:0,life:0,rotation:0}));
@@ -190,7 +191,9 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
       dummy.position.set(p.x,2.15,p.z);dummy.rotation.set(Math.PI/2-.6,0,0);dummy.scale.setScalar(p.request||receiver===p.id?1:0);dummy.updateMatrix();requests.setMatrixAt(p.id,dummy.matrix);
     }
     practiceTarget.visible=!!s.practiceTarget;practiceCones.count=s.practiceTarget?.cones?2:0;if(s.practiceTarget){const p=s.practiceTarget;practiceTarget.position.set(p.x,p.cones ? .05 : 1,p.z);practiceTarget.rotation.set(p.cones?-Math.PI/2:0,p.cones?0:Math.PI/2,0);for(let i=0;i<practiceCones.count;i++){dummy.position.set(p.x,.3,p.z+(i?1:-1)*config.training.coneWidth/2);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();practiceCones.setMatrixAt(i,dummy.matrix);}practiceCones.instanceMatrix.needsUpdate=true;}
-    turfG.attributes.position.needsUpdate=true;landing.visible=Boolean(s.ball.flight);if(s.ball.flight)landing.position.set(s.ball.flight.x,.04,s.ball.flight.z);
+    const arc=crossArc(s,config);arcDots.count=arc?config.passing.arcDots:0;
+    for(let i=0;i<arcDots.count;i++){const u=i/(arcDots.count-1);dummy.position.set(arc.fromX+(arc.x-arc.fromX)*u,config.physics.ballRadius+4*arc.height*u*(1-u),arc.fromZ+(arc.z-arc.fromZ)*u);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();arcDots.setMatrixAt(i,dummy.matrix);}arcDots.instanceMatrix.needsUpdate=true;
+    turfG.attributes.position.needsUpdate=true;landing.visible=Boolean(arc);if(arc)landing.position.set(arc.x,.04,arc.z);
     boxes.count=boxIndex;spheres.count=sphereIndex;boxes.instanceMatrix.needsUpdate=true;spheres.instanceMatrix.needsUpdate=true;if(boxes.instanceColor)boxes.instanceColor.needsUpdate=true;if(spheres.instanceColor)spheres.instanceColor.needsUpdate=true;requests.instanceMatrix.needsUpdate=true;
     const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);
     const aim=s.chargeKind==='pass'?s.passAim||s.aim:safeShotAim(s.actionAim||s.kickAim||s.aim,s.kickAim,s.attackDir,s.charge/config.physics.chargeSeconds,config);
@@ -214,7 +217,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   }
   return {ready,render,qualitySample,
     poseCamera(id,mode){poseFocus=id;poseMode=mode;},
-    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,assetStatus,assetStats,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
+    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,assetStatus,assetStats,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
     dispose(){if(disposed)return;disposed=true;observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);for(const c of characters){c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);c.root.traverse(o=>o.skeleton?.dispose());}characters.length=0;for(const resource of resources)resource.dispose();resources.clear();scene.clear();renderer.dispose();renderer.forceContextLoss();}
   };
 }
