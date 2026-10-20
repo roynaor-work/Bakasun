@@ -1,3 +1,4 @@
+import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=g9-20261020-1';
 import {initialFireCertificates,validFireCertificates} from '../activity/fire-certificates.mjs?v=g9-20261020-1';
 import {initialHangar,validHangar} from '../activity/hangar.mjs?v=g9-20261020-1';
 import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=g9-20261020-1';
@@ -11,7 +12,7 @@ import {repairHarbors} from './placement-help.mjs?v=g9-20261020-1';
 import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=g9-20261020-1';
 import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=g9-20261020-1';
 
-export const CURRENT_VERSION = 15;
+export const CURRENT_VERSION = 16;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -25,7 +26,7 @@ export function createInitialState(data, now = Date.now()) {
   const buildings = [];
   for (let x = road.startX; x <= road.endX; x++) buildings.push({ id: `seed-road-${x}`, typeId: 'road', x, z: road.z, level: 1 });
   return withCityHall({
-    fireCertificates:initialFireCertificates(data),hangar:initialHangar(),version: CURRENT_VERSION, money: data.config.startingMoney, resources: clone(data.config.startingResources),
+    learning:initialLearning(now),fireCertificates:initialFireCertificates(data),hangar:initialHangar(),version: CURRENT_VERSION, money: data.config.startingMoney, resources: clone(data.config.startingResources),
     buildings, world: { size: data.config.worldStages[0].size, stage: 0 }, parts: { [data.world.partGroup]: 0 },
     avatar: clone(data.avatar.defaults), team: {...clone(data.team),wins:0,rank:0,sportWins:{soccer:0,tennis:0}}, players,
     tutorial: { step: 0, completed: false, skipped: false }, claimedRewards: [], completedMissions: [], completedEpisodes: [],
@@ -36,6 +37,7 @@ export function createInitialState(data, now = Date.now()) {
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  15(old){return {...old,version:16,learning:initialLearning(old.createdAt||old.updatedAt||Date.now())};},
   14(old,data){return {...old,version:15,fireCertificates:initialFireCertificates(data)};},
   13(old){return {...old,version:14,hangar:initialHangar()};},
   12(old,data){return {...old,version:13,soccerRoster:initialSoccerRoster(old.players||data.players,old.soccerCard,data.config.minigames.soccer)};},
@@ -97,6 +99,7 @@ export function migrateSave(value, data, registry) {
 
 export function validateSave(state, data, registry) {
   const invalid = () => ({ ok: false, reason: 'reason.invalid' });
+  if(!validLearning(state?.learning))return invalid();
   if(!validFireCertificates(state?.fireCertificates,data))return invalid();
   if(!validHangar(state?.hangar,data.config.minigames.alienDefense.hangar))return invalid();
   if (!isObject(state) || state.version !== CURRENT_VERSION || !finitePositive(state.money) || !isObject(state.resources)) return invalid();
@@ -220,6 +223,7 @@ export function importWorld(raw, current, data, registry) {
   mergeSoccerCard(merged.soccerCard,incoming.soccerCard);
   mergeSoccerRoster(merged.soccerRoster,incoming.soccerRoster,data.config.minigames.soccer);
   mergeActivity(merged,incoming,data);
+  mergeLearning(merged.learning,incoming.learning,{restoreSettings:Object.hasOwn(parsed,'learning')});
   for(let i=0;i<merged.fireCertificates.length;i++)if(incoming.fireCertificates[i]&&(!merged.fireCertificates[i]||incoming.fireCertificates[i].stars>merged.fireCertificates[i].stars))merged.fireCertificates[i]=clone(incoming.fireCertificates[i]);
   for(const key of ['rapid','shield','coins'])merged.hangar[key]=Math.max(current.hangar[key],incoming.hangar[key]);merged.hangar.spent=merged.hangar.rapid+merged.hangar.shield;merged.hangar.credits=Math.max(0,Math.max(current.hangar.credits+current.hangar.spent,incoming.hangar.credits+incoming.hangar.spent)-merged.hangar.spent);
 

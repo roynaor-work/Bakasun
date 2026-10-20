@@ -1,3 +1,5 @@
+import './view/learning-buildings.mjs?v=g9-20261020-1';
+import {LearningInterface} from './learning/interface.mjs?v=g9-20261020-1';
 import {dataURL} from './release.mjs?v=g9-20261020-1';
 import {createTranslator} from './ui/translate.mjs?v=g9-20261020-1';
 import { loadData } from './engine/load-data.mjs?v=g9-20261020-1';
@@ -33,6 +35,7 @@ try {
   });
   ui = new IslandInterface({ root, engine, view, data, t });
   const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length),onLaunch:choice=>games.autoLaunch(choice)});
+  const learning=new LearningInterface({ui,engine});
   const games=new ActivityInterface({ui,engine,activity,data,t});
   const stopShell=installGameShell({games,ui,t,countdownStepMs:data.config.ui.economyTickMs});
   const pressSamples=[];
@@ -56,9 +59,9 @@ try {
   const persist = () => engine.save();
   document.addEventListener('visibilitychange', persist);
   window.addEventListener('pagehide', persist);
-  window.addEventListener('beforeunload', () => { clearInterval(tick);stopShell();stopPress();stopGameShortcut();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
+  window.addEventListener('beforeunload', () => { clearInterval(tick);stopShell();stopPress();stopGameShortcut();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
   if (new URLSearchParams(location.search).get('dev') === '1') {
-    window.__island = { engine, view, ui, data, activity, games,pressSamples };
+    window.__island = { engine, view, ui, data, activity, games,learning,pressSamples };
   }
 } catch (error) {
   root.className = 'load-error';

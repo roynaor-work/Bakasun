@@ -52,7 +52,7 @@ for(const [id,make]of Object.entries(models)) {
 test('G2b v3 to v4 adds only stage/star defaults, preserves the input, and survives reload',()=>{
   const f=fixture();eventCity(f);const old=JSON.parse(f.engine.exportJSON());old.version=3;delete old.minigameProgress;
   old.minigameLevels.alienDefense=3;old.highScores.alienDefense=1234;old.minigameWins.alienDefense=12;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,15);
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(r.state.version,16);
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key]);
   assert.deepEqual(old,before);
   for(const p of Object.values(r.state.minigameProgress))assert.deepEqual(p,{stage:1,stars:Array(10).fill(0)});
@@ -137,7 +137,7 @@ test('G2b an event selects the highest opened stage or the configured nearby sta
   const {ActivityInterface}=await import('../workout/island/ui/activity.mjs');
   const f=fixture();for(let stage=1;stage<6;stage++)recordStageWin(f.engine.state,data,'fireRescue',stage,1);
   const old=data.config.events.eventStageOffset;const launches=[];
-  const ui={engine:f.engine,data,launch:(...args)=>launches.push(args)};
+  const ui={engine:f.engine,data,requireDaily:()=>false,launch:(...args)=>launches.push(args)};
   try {
     for(const offset of [0,-2,-99,99]){data.config.events.eventStageOffset=offset;ActivityInterface.prototype.autoLaunch.call(ui,{gameId:'fireRescue',eventId:'event-1'});}
     assert.deepEqual(launches.map(args=>args[2]),[6,4,1,6]);

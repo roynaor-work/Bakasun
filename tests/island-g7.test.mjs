@@ -54,7 +54,8 @@ test('G7 nearest legal placement snaps occupied anchors and is deterministic wit
  assert.deepEqual(e.state,before);assert.deepEqual(nearestPlacement(e.state,e.registry,'soccer',point,undefined,data.featureFlags),cell);
 });
 for(const type of data.buildings.filter(b=>!b.locked&&!b.featureFlag))test(`G7 placement help finds an allowed anchor for ${type.id}`,()=>{
- const e=engine(),ignoreId=type.id==='cityHall'?e.state.buildings.find(b=>b.typeId==='cityHall').id:undefined,cell=nearestPlacement(e.state,e.registry,type.id,{x:8,z:8},ignoreId,data.featureFlags);assert.ok(cell,type.id);assert.ok(e.validatePlacement(type.id,cell.x,cell.z,ignoreId).ok,type.id);
+ const e=engine();const prerequisites=[];let prior=type.unlockAfter;while(prior){prerequisites.unshift(prior);prior=e.registry.buildings.get(prior).unlockAfter;}for(const id of prerequisites){const cell=nearestPlacement(e.state,e.registry,id,{x:8,z:8},undefined,data.featureFlags);assert.ok(e.place(id,cell.x,cell.z).ok);}
+ const ignoreId=type.id==='cityHall'?e.state.buildings.find(b=>b.typeId==='cityHall').id:undefined,cell=nearestPlacement(e.state,e.registry,type.id,{x:8,z:8},ignoreId,data.featureFlags);assert.ok(cell,type.id);assert.ok(e.validatePlacement(type.id,cell.x,cell.z,ignoreId).ok,type.id);
 });
 test('G7 harbor help stays on shore and reports the outward direction; inland is rejected',()=>{
  const e=engine(),cell=nearestPlacement(e.state,e.registry,'harbor',{x:8,z:8},undefined,data.featureFlags),type=e.registry.buildings.get('harbor');
@@ -68,7 +69,7 @@ test('G7 no lawful anchor is invented when money or an occupied island blocks pl
 test('G7 authentic v12 expansion port is repaired to the nearest free shore on load, retaining identity and money',async()=>{
  const old=JSON.parse(await readFile(new URL('./fixtures/save-v12-expanded-harbor.json',import.meta.url),'utf8')),e=engine(),port=old.buildings.find(b=>b.typeId==='harbor'),before=structuredClone(old);
  assert.equal(shoreDirection(old,e.registry.buildings.get('harbor'),port.x,port.z),null);
- const r=migrateSave(old,data,e.registry);assert.ok(r.ok);assert.deepEqual(old,before);assert.deepEqual(r.repairedHarbors,[port.id]);assert.equal(r.state.version,15);assert.equal(r.state.money,old.money);
+ const r=migrateSave(old,data,e.registry);assert.ok(r.ok);assert.deepEqual(old,before);assert.deepEqual(r.repairedHarbors,[port.id]);assert.equal(r.state.version,16);assert.equal(r.state.money,old.money);
  const moved=r.state.buildings.find(b=>b.id===port.id);assert.ok(shoreDirection(r.state,e.registry.buildings.get('harbor'),moved.x,moved.z));assert.ok(e.registry.buildings.has('road'));
  const loaded=createEngine(data,{storage:{getItem:()=>JSON.stringify(old),setItem(){}},now:()=>1000000});assert.ok(loaded.validatePlacement('harbor',moved.x,moved.z,moved.id).ok);assert.deepEqual(migrateSave(r.state,data,e.registry).repairedHarbors,[]);
 });
