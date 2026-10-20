@@ -5408,6 +5408,12 @@
    "maximumScore": 4,
    "pointsPerCoin": 1,
    "maximumSeconds": 3600,
+   "shotPower": {
+    "safeMax": {"easy": 0.9, "normal": 0.82, "hard": 0.7},
+    "outMargin": 0.65,
+    "depthBonus": 1.2
+   },
+   "drop": {"depth": 1.25, "bounce": 0.24, "horizontalBounce": 0.48, "netClearance": 0.12},
    "lob": {
     "flightMultiplier": 1.75,
     "depth": 7.6
@@ -5553,6 +5559,9 @@
     "missDepth": 2,
     "aimFraction": 0.7,
     "centerPowerBonus": 0.3,
+    "perfectWidth": 0.07,
+    "perfectSpeedMultiplier": 1.22,
+    "computerInRate": {"easy": 0.92, "normal": 0.85, "hard": 0.8},
     "holdSeconds": 0.18,
     "flightSeconds": 0.8,
     "minimumFlight": 0.7,
