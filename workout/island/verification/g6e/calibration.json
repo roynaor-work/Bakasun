@@ -1,34 +1,86 @@
 {
-  "shotsPerScenario": 200,
-  "aimedInside": [
+  "sourceCommit": "18b1d3a2625e4ddcc67eef99208cbe402f8ac8d6",
+  "shotsPerCell": 200,
+  "method": "Real model updates; enemy motion/submarine state retained; normal projectile collision, no hit roll. Inside x=150; varied hold and release times.",
+  "insideRingNormalDifficulty": [
     {
       "level": 1,
-      "hits": 101,
-      "rate": 0.505
+      "shots": 200,
+      "base": 105,
+      "fullAim": 182
     },
     {
       "level": 5,
-      "hits": 99,
-      "rate": 0.495
+      "shots": 200,
+      "base": 103,
+      "fullAim": 160
     },
     {
       "level": 10,
-      "hits": 82,
-      "rate": 0.41
+      "shots": 200,
+      "base": 94,
+      "fullAim": 142
     }
   ],
-  "randomMedium": [
+  "stage5Difficulties": [
     {
-      "playerX": 60,
-      "insideRing": false,
-      "hits": 3,
-      "rate": 0.015
+      "difficulty": "easy",
+      "stage": 5,
+      "aimRank": 0,
+      "hits": 115,
+      "shots": 200,
+      "percent": 57.5
     },
     {
-      "playerX": 150,
-      "insideRing": true,
-      "hits": 9,
-      "rate": 0.045
+      "difficulty": "easy",
+      "stage": 5,
+      "aimRank": 3,
+      "hits": 170,
+      "shots": 200,
+      "percent": 85
+    },
+    {
+      "difficulty": "normal",
+      "stage": 5,
+      "aimRank": 0,
+      "hits": 103,
+      "shots": 200,
+      "percent": 51.5
+    },
+    {
+      "difficulty": "normal",
+      "stage": 5,
+      "aimRank": 3,
+      "hits": 160,
+      "shots": 200,
+      "percent": 80
+    },
+    {
+      "difficulty": "hard",
+      "stage": 5,
+      "aimRank": 0,
+      "hits": 87,
+      "shots": 200,
+      "percent": 43.5
+    },
+    {
+      "difficulty": "hard",
+      "stage": 5,
+      "aimRank": 3,
+      "hits": 147,
+      "shots": 200,
+      "percent": 73.5
     }
-  ]
+  ],
+  "randomOutside": {
+    "hits": 19,
+    "shots": 200,
+    "seed": 6006,
+    "playerX": "20 + random()*40",
+    "waitSeconds": "random()*3",
+    "holdSeconds": "random()*1.5",
+    "percent": 9.5
+  },
+  "normalStage5AimImprovementPercentagePoints": 28.5,
+  "randomInsideRingMeasured": false
 }
