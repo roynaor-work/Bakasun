@@ -1,5 +1,5 @@
-/** Deterministic street graph. Coordinates and tuning come from fireRescue.city.
- * The vehicle consumes axis-aligned edges, including when a target is off-road. */
+/** Deterministic street graph for lane assistance and optional point navigation.
+ * Coordinates and tuning come from fireRescue.city. */
 const EPS=1e-7;
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 export function createFireRoads(city){
@@ -48,7 +48,7 @@ export function fireTruckIntersectsBuilding(truck,building,vehicle){
   const z=Math.max(building.z-building.depth/2,Math.min(building.z+building.depth/2,truck.z));
   return Math.hypot(x-truck.x,z-truck.z)<radius-EPS;
 }
-export function createFireDriver(truck,balance){
+function createRouteDriver(truck,balance){
   const roads=createFireRoads(balance.city),v=balance.vehicle;
   let route=[],destination=null,edgeEnd=null,forward={x:0,z:-1};
   const initial=projectFireRoad(roads,truck);truck.x=initial.x;truck.z=initial.z;
@@ -86,6 +86,69 @@ export function createFireDriver(truck,balance){
     const angle=Math.atan2(Math.sin(truck.heading-truck.yaw),Math.cos(truck.heading-truck.yaw));
     truck.yaw+=Math.max(-v.turnRate*dt,Math.min(v.turnRate*dt,angle));truck.turning=Math.abs(angle)>v.turnEpsilon;
     truck.speed=dt?moved/dt:0;truck.driving=moved>EPS;truck.wheelRotation+=moved/v.wheelRadius;
+    return moved;
+  }};
+}
+
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const angleTo=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
+/** Radial dead zone followed by a quadratic throttle, independent of heading. */
+export function fireThrottle(x,z,controls){return clamp((Math.hypot(x,z)-controls.deadzone)/(1-controls.deadzone),0,1)**2;}
+/** Move a conservative truck footprint and remove only penetration normal to a
+ * wall. Small steps prevent tunnelling; the tangent displacement survives. */
+export function slideFireTruck(truck,dx,dz,buildings,vehicle){
+  const radius=Math.hypot(vehicle.length/2,vehicle.width/2),steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.15));
+  const start={x:truck.x,z:truck.z};
+  for(let i=0;i<steps;i++){
+    truck.x+=dx/steps;truck.z+=dz/steps;
+    for(const b of buildings){
+      const minX=b.x-b.width/2,maxX=b.x+b.width/2,minZ=b.z-b.depth/2,maxZ=b.z+b.depth/2;
+      const x=clamp(truck.x,minX,maxX),z=clamp(truck.z,minZ,maxZ),nx=truck.x-x,nz=truck.z-z,d=Math.hypot(nx,nz);
+      if(d>=radius)continue;
+      if(d>EPS){truck.x+=nx/d*(radius-d);truck.z+=nz/d*(radius-d);}
+      else{const sides=[{d:truck.x-minX,x:minX-radius,z:truck.z},{d:maxX-truck.x,x:maxX+radius,z:truck.z},{d:truck.z-minZ,x:truck.x,z:minZ-radius},{d:maxZ-truck.z,x:truck.x,z:maxZ+radius}];sides.sort((a,b)=>a.d-b.d);truck.x=sides[0].x;truck.z=sides[0].z;}
+    }
+  }
+  return Math.hypot(truck.x-start.x,truck.z-start.z);
+}
+export function createFireDriver(truck,balance){
+  const route=createRouteDriver(truck,balance),roads=route.roads,v=balance.vehicle,city=balance.city;
+  let routed=false;
+  return {roads,update(dt,input={}){
+    if(dt<=0)return 0;
+    const dx=Number(input.moveX)||Number(Boolean(input.right))-Number(Boolean(input.left)),dz=Number(input.moveZ)||0;
+    const throttle=fireThrottle(dx,dz,balance.controls);
+    // Point navigation remains available for the existing deterministic pilots.
+    // Live touch/keyboard input always uses continuous steering below.
+    if(!throttle&&(Number.isFinite(input.truckX)||Number.isFinite(input.truckZ))){routed=true;return route.update(dt,input);}
+    if(routed){truck.speed=0;routed=false;}
+    const before=truck.speed,targetSpeed=v.speed*throttle;
+    truck.speed+=clamp(targetSpeed-truck.speed,-v.speed/v.brakeSeconds*dt,v.speed/v.accelerationSeconds*dt);
+    const road=projectFireRoad(roads,truck),horizontal=road.edge.a.z===road.edge.b.z;
+    let lane=0;
+    if(throttle){
+      let heading=Math.atan2(-dx,-dz),axis=horizontal?(dx>=0?-Math.PI/2:Math.PI/2):(dz<=0?0:Math.PI);
+      const alignment=Math.abs(angleTo(heading,axis));
+      // Deliberate turns override assistance. No position or heading snapping.
+      lane=road.distance<city.roadWidth/2?Math.max(0,1-alignment/city.laneAngle):0;
+      heading+=angleTo(heading,axis)*city.laneAlign*lane;
+      truck.heading=heading;
+      const delta=angleTo(truck.yaw,heading),step=clamp(delta*(1-Math.exp(-v.turnResponse*dt)),-v.turnRate*dt,v.turnRate*dt);
+      truck.yaw+=step;
+    }
+    truck.turning=throttle>0&&Math.abs(angleTo(truck.yaw,truck.heading))>v.turnEpsilon;
+    const travel=(before+truck.speed)*.5*dt;
+    let x=-Math.sin(truck.yaw)*travel,z=-Math.cos(truck.yaw)*travel;
+    if(throttle&&lane){const blend=1-Math.exp(-city.lanePull*lane*dt);x+=(road.x-truck.x)*blend;z+=(road.z-truck.z)*blend;}
+    const length=Math.hypot(x,z);if(length>travel&&length>0){x*=travel/length;z*=travel/length;}
+    const oldX=truck.x,oldZ=truck.z;
+    slideFireTruck(truck,x,z,roads.buildings,v);
+    const limit=city.extent/2-Math.hypot(v.length/2,v.width/2);
+    truck.x=clamp(truck.x,-limit,limit);truck.z=clamp(truck.z,-limit,limit);
+    const moved=Math.hypot(truck.x-oldX,truck.z-oldZ);
+    truck.velocityX=(truck.x-oldX)/dt;truck.velocityZ=(truck.z-oldZ)/dt;
+    truck.targetX=truck.x+dx;truck.targetZ=truck.z+dz;
+    truck.driving=truck.speed>EPS;truck.wheelRotation+=moved/v.wheelRadius;
     return moved;
   }};
 }

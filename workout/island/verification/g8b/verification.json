@@ -1,0 +1,1816 @@
+{
+  "browser": "151.0.7922.173",
+  "physicalPhone": false,
+  "reports": [
+    {
+      "id": "soccer",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "cycles": 3,
+      "comparedNodes": 21,
+      "comparison": "exact getBoundingClientRect + every computed CSS property + ::before/::after",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "game-pause",
+          "rect": {
+            "x": 780,
+            "y": 8,
+            "width": 56,
+            "height": 56,
+            "top": 8,
+            "right": 836,
+            "bottom": 64,
+            "left": 780
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "fixed",
+            "width": "56px",
+            "height": "56px",
+            "background-color": "rgba(18, 53, 73, 0.6)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "DIV",
+          "id": "joystick",
+          "action": "",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "108px",
+            "height": "108px",
+            "background-color": "rgba(234, 248, 255, 0.125)",
+            "color": "rgb(239, 252, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "shoot",
+          "action": "shoot",
+          "rect": {
+            "x": 722,
+            "y": 182,
+            "width": 90,
+            "height": 90,
+            "top": 182,
+            "right": 812,
+            "bottom": 272,
+            "left": 722
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "90px",
+            "height": "90px",
+            "background-color": "rgb(233, 117, 22)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pass",
+          "action": "pass",
+          "rect": {
+            "x": 638,
+            "y": 298,
+            "width": 72,
+            "height": 72,
+            "top": 298,
+            "right": 710,
+            "bottom": 370,
+            "left": 638
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgb(23, 105, 199)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "sprint",
+          "action": "sprint",
+          "rect": {
+            "x": 736,
+            "y": 298,
+            "width": 72,
+            "height": 72,
+            "top": 298,
+            "right": 808,
+            "bottom": 370,
+            "left": 736
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgb(24, 130, 78)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "soccer-switch",
+          "action": "",
+          "rect": {
+            "x": 656,
+            "y": 216,
+            "width": 52,
+            "height": 52,
+            "top": 216,
+            "right": 708,
+            "bottom": 268,
+            "left": 656
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "52px",
+            "height": "52px",
+            "background-color": "rgb(66, 84, 106)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        }
+      ],
+      "shot": "soccer-844-pause-resume.webp"
+    },
+    {
+      "id": "tennis",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "cycles": 3,
+      "comparedNodes": 19,
+      "comparison": "exact getBoundingClientRect + every computed CSS property + ::before/::after",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "game-pause",
+          "rect": {
+            "x": 780,
+            "y": 8,
+            "width": 56,
+            "height": 56,
+            "top": 8,
+            "right": 836,
+            "bottom": 64,
+            "left": 780
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "fixed",
+            "width": "56px",
+            "height": "56px",
+            "background-color": "rgba(18, 53, 73, 0.6)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "DIV",
+          "id": "joystick",
+          "action": "",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "108px",
+            "height": "108px",
+            "background-color": "rgba(234, 248, 255, 0.125)",
+            "color": "rgb(239, 252, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "shoot",
+          "action": "hit",
+          "rect": {
+            "x": 722,
+            "y": 284,
+            "width": 90,
+            "height": 90,
+            "top": 284,
+            "right": 812,
+            "bottom": 374,
+            "left": 722
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "90px",
+            "height": "90px",
+            "background-color": "rgba(138, 100, 44, 0.74)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pass",
+          "action": "serve",
+          "rect": {
+            "x": 638,
+            "y": 298,
+            "width": 72,
+            "height": 72,
+            "top": 298,
+            "right": 710,
+            "bottom": 370,
+            "left": 638
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgba(38, 104, 84, 0.85)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "sprint",
+          "action": "lob",
+          "rect": {
+            "x": 736,
+            "y": 200,
+            "width": 72,
+            "height": 72,
+            "top": 200,
+            "right": 808,
+            "bottom": 272,
+            "left": 736
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgba(38, 91, 126, 0.74)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        }
+      ],
+      "shot": "tennis-844-pause-resume.webp"
+    },
+    {
+      "id": "navalDuel",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "cycles": 3,
+      "comparedNodes": 59,
+      "comparison": "exact getBoundingClientRect + every computed CSS property + ::before/::after",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "game-pause",
+          "rect": {
+            "x": 780,
+            "y": 8,
+            "width": 56,
+            "height": 56,
+            "top": 8,
+            "right": 836,
+            "bottom": 64,
+            "left": 780
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "fixed",
+            "width": "56px",
+            "height": "56px",
+            "background-color": "rgb(255, 227, 163)",
+            "color": "rgb(23, 61, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "DIV",
+          "id": "joystick",
+          "action": "",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "108px",
+            "height": "108px",
+            "background-color": "rgba(255, 255, 255, 0.125)",
+            "color": "rgb(239, 252, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "shoot",
+          "action": "fire",
+          "rect": {
+            "x": 670,
+            "y": 284,
+            "width": 88,
+            "height": 88,
+            "top": 284,
+            "right": 758,
+            "bottom": 372,
+            "left": 670
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "88px",
+            "height": "88px",
+            "background-color": "rgba(206, 99, 60, 0.733)",
+            "color": "rgb(23, 61, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 774,
+            "y": 80,
+            "width": 58,
+            "height": 48,
+            "top": 80,
+            "right": 832,
+            "bottom": 128,
+            "left": 774
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(40, 101, 123, 0.91)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 711,
+            "y": 80,
+            "width": 58,
+            "height": 48,
+            "top": 80,
+            "right": 769,
+            "bottom": 128,
+            "left": 711
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(233, 247, 240, 0.91)",
+            "color": "rgb(19, 58, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 774,
+            "y": 133,
+            "width": 58,
+            "height": 48,
+            "top": 133,
+            "right": 832,
+            "bottom": 181,
+            "left": 774
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(233, 247, 240, 0.91)",
+            "color": "rgb(19, 58, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 711,
+            "y": 133,
+            "width": 58,
+            "height": 48,
+            "top": 133,
+            "right": 769,
+            "bottom": 181,
+            "left": 711
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(233, 247, 240, 0.91)",
+            "color": "rgb(19, 58, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 774,
+            "y": 186,
+            "width": 58,
+            "height": 48,
+            "top": 186,
+            "right": 832,
+            "bottom": 234,
+            "left": 774
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(233, 247, 240, 0.91)",
+            "color": "rgb(19, 58, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 711,
+            "y": 186,
+            "width": 58,
+            "height": 48,
+            "top": 186,
+            "right": 769,
+            "bottom": 234,
+            "left": 711
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(233, 247, 240, 0.91)",
+            "color": "rgb(19, 58, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        }
+      ],
+      "shot": "navalDuel-844-pause-resume.webp"
+    },
+    {
+      "id": "fireRescue",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "cycles": 3,
+      "comparedNodes": 23,
+      "comparison": "exact getBoundingClientRect + every computed CSS property + ::before/::after",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "game-pause",
+          "rect": {
+            "x": 788,
+            "y": 8,
+            "width": 48,
+            "height": 48,
+            "top": 8,
+            "right": 836,
+            "bottom": 56,
+            "left": 788
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "fixed",
+            "width": "48px",
+            "height": "48px",
+            "background-color": "rgba(23, 62, 75, 0.9)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "DIV",
+          "id": "joystick",
+          "action": "",
+          "rect": {
+            "x": 20,
+            "y": 264,
+            "width": 104,
+            "height": 104,
+            "top": 264,
+            "right": 124,
+            "bottom": 368,
+            "left": 20
+          },
+          "style": {
+            "display": "block",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "104px",
+            "height": "104px",
+            "background-color": "rgba(33, 78, 100, 0.4)",
+            "color": "rgb(239, 252, 255)",
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, -52, -52)",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "shoot",
+          "action": "fire",
+          "rect": {
+            "x": 746,
+            "y": 290,
+            "width": 80,
+            "height": 80,
+            "top": 290,
+            "right": 826,
+            "bottom": 370,
+            "left": 746
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "80px",
+            "height": "80px",
+            "background-color": "rgb(8, 124, 240)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "fire-refill",
+          "action": "refill",
+          "rect": {
+            "x": 772,
+            "y": 222,
+            "width": 54,
+            "height": 54,
+            "top": 222,
+            "right": 826,
+            "bottom": 276,
+            "left": 772
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "54px",
+            "height": "54px",
+            "background-color": "rgb(181, 53, 48)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pass",
+          "action": "rescue",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "54px",
+            "height": "54px",
+            "background-color": "rgb(190, 77, 36)",
+            "color": "rgb(232, 248, 239)",
+            "opacity": "0.55",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "fire-finish",
+          "action": "finish",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "54px",
+            "height": "54px",
+            "background-color": "rgb(183, 124, 45)",
+            "color": "rgb(232, 248, 239)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        }
+      ],
+      "shot": "fireRescue-844-pause-resume.webp"
+    },
+    {
+      "id": "alienDefense",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "cycles": 3,
+      "comparedNodes": 14,
+      "comparison": "exact getBoundingClientRect + every computed CSS property + ::before/::after",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "game-pause",
+          "rect": {
+            "x": 784,
+            "y": 8,
+            "width": 52,
+            "height": 52,
+            "top": 8,
+            "right": 836,
+            "bottom": 60,
+            "left": 784
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "fixed",
+            "width": "52px",
+            "height": "52px",
+            "background-color": "rgba(19, 47, 73, 0.733)",
+            "color": "rgb(220, 255, 248)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "DIV",
+          "id": "joystick",
+          "action": "",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "96px",
+            "height": "96px",
+            "background-color": "rgba(135, 219, 230, 0.1)",
+            "color": "rgb(239, 252, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "shoot",
+          "action": "fire",
+          "rect": {
+            "x": 754,
+            "y": 206,
+            "width": 72,
+            "height": 72,
+            "top": 206,
+            "right": 826,
+            "bottom": 278,
+            "left": 754
+          },
+          "style": {
+            "display": "block",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgba(33, 127, 130, 0.875)",
+            "color": "rgb(217, 255, 244)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pass",
+          "action": "nova",
+          "rect": {
+            "x": 670,
+            "y": 206,
+            "width": 72,
+            "height": 72,
+            "top": 206,
+            "right": 742,
+            "bottom": 278,
+            "left": 670
+          },
+          "style": {
+            "display": "block",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgba(22, 53, 78, 0.85)",
+            "color": "rgb(217, 255, 244)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        }
+      ],
+      "shot": "alienDefense-844-pause-resume.webp"
+    },
+    {
+      "id": "soccer",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "cycles": 3,
+      "comparedNodes": 21,
+      "comparison": "exact getBoundingClientRect + every computed CSS property + ::before/::after",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "game-pause",
+          "rect": {
+            "x": 676,
+            "y": 8,
+            "width": 56,
+            "height": 56,
+            "top": 8,
+            "right": 732,
+            "bottom": 64,
+            "left": 676
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "fixed",
+            "width": "56px",
+            "height": "56px",
+            "background-color": "rgba(18, 53, 73, 0.6)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "DIV",
+          "id": "joystick",
+          "action": "",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "108px",
+            "height": "108px",
+            "background-color": "rgba(234, 248, 255, 0.125)",
+            "color": "rgb(239, 252, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "shoot",
+          "action": "shoot",
+          "rect": {
+            "x": 618,
+            "y": 152,
+            "width": 90,
+            "height": 90,
+            "top": 152,
+            "right": 708,
+            "bottom": 242,
+            "left": 618
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "90px",
+            "height": "90px",
+            "background-color": "rgb(233, 117, 22)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pass",
+          "action": "pass",
+          "rect": {
+            "x": 534,
+            "y": 268,
+            "width": 72,
+            "height": 72,
+            "top": 268,
+            "right": 606,
+            "bottom": 340,
+            "left": 534
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgb(23, 105, 199)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "sprint",
+          "action": "sprint",
+          "rect": {
+            "x": 632,
+            "y": 268,
+            "width": 72,
+            "height": 72,
+            "top": 268,
+            "right": 704,
+            "bottom": 340,
+            "left": 632
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgb(24, 130, 78)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "soccer-switch",
+          "action": "",
+          "rect": {
+            "x": 552,
+            "y": 186,
+            "width": 52,
+            "height": 52,
+            "top": 186,
+            "right": 604,
+            "bottom": 238,
+            "left": 552
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "52px",
+            "height": "52px",
+            "background-color": "rgb(66, 84, 106)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        }
+      ],
+      "shot": "soccer-740-pause-resume.webp"
+    },
+    {
+      "id": "tennis",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "cycles": 3,
+      "comparedNodes": 19,
+      "comparison": "exact getBoundingClientRect + every computed CSS property + ::before/::after",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "game-pause",
+          "rect": {
+            "x": 676,
+            "y": 8,
+            "width": 56,
+            "height": 56,
+            "top": 8,
+            "right": 732,
+            "bottom": 64,
+            "left": 676
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "fixed",
+            "width": "56px",
+            "height": "56px",
+            "background-color": "rgba(18, 53, 73, 0.6)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "DIV",
+          "id": "joystick",
+          "action": "",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "108px",
+            "height": "108px",
+            "background-color": "rgba(234, 248, 255, 0.125)",
+            "color": "rgb(239, 252, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "shoot",
+          "action": "hit",
+          "rect": {
+            "x": 618,
+            "y": 254,
+            "width": 90,
+            "height": 90,
+            "top": 254,
+            "right": 708,
+            "bottom": 344,
+            "left": 618
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "90px",
+            "height": "90px",
+            "background-color": "rgba(138, 100, 44, 0.74)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pass",
+          "action": "serve",
+          "rect": {
+            "x": 534,
+            "y": 268,
+            "width": 72,
+            "height": 72,
+            "top": 268,
+            "right": 606,
+            "bottom": 340,
+            "left": 534
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgba(38, 104, 84, 0.85)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "sprint",
+          "action": "lob",
+          "rect": {
+            "x": 632,
+            "y": 170,
+            "width": 72,
+            "height": 72,
+            "top": 170,
+            "right": 704,
+            "bottom": 242,
+            "left": 632
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgba(38, 91, 126, 0.74)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        }
+      ],
+      "shot": "tennis-740-pause-resume.webp"
+    },
+    {
+      "id": "navalDuel",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "cycles": 3,
+      "comparedNodes": 59,
+      "comparison": "exact getBoundingClientRect + every computed CSS property + ::before/::after",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "game-pause",
+          "rect": {
+            "x": 676,
+            "y": 8,
+            "width": 56,
+            "height": 56,
+            "top": 8,
+            "right": 732,
+            "bottom": 64,
+            "left": 676
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "fixed",
+            "width": "56px",
+            "height": "56px",
+            "background-color": "rgb(255, 227, 163)",
+            "color": "rgb(23, 61, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "DIV",
+          "id": "joystick",
+          "action": "",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "108px",
+            "height": "108px",
+            "background-color": "rgba(255, 255, 255, 0.125)",
+            "color": "rgb(239, 252, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "shoot",
+          "action": "fire",
+          "rect": {
+            "x": 566,
+            "y": 254,
+            "width": 88,
+            "height": 88,
+            "top": 254,
+            "right": 654,
+            "bottom": 342,
+            "left": 566
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "88px",
+            "height": "88px",
+            "background-color": "rgba(206, 99, 60, 0.733)",
+            "color": "rgb(23, 61, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 670,
+            "y": 80,
+            "width": 58,
+            "height": 48,
+            "top": 80,
+            "right": 728,
+            "bottom": 128,
+            "left": 670
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(40, 101, 123, 0.91)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 607,
+            "y": 80,
+            "width": 58,
+            "height": 48,
+            "top": 80,
+            "right": 665,
+            "bottom": 128,
+            "left": 607
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(233, 247, 240, 0.91)",
+            "color": "rgb(19, 58, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 670,
+            "y": 133,
+            "width": 58,
+            "height": 48,
+            "top": 133,
+            "right": 728,
+            "bottom": 181,
+            "left": 670
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(233, 247, 240, 0.91)",
+            "color": "rgb(19, 58, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 607,
+            "y": 133,
+            "width": 58,
+            "height": 48,
+            "top": 133,
+            "right": 665,
+            "bottom": 181,
+            "left": 607
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(233, 247, 240, 0.91)",
+            "color": "rgb(19, 58, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 670,
+            "y": 186,
+            "width": 58,
+            "height": 48,
+            "top": 186,
+            "right": 728,
+            "bottom": 234,
+            "left": 670
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(233, 247, 240, 0.91)",
+            "color": "rgb(19, 58, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "ammo-select",
+          "rect": {
+            "x": 607,
+            "y": 186,
+            "width": 58,
+            "height": 48,
+            "top": 186,
+            "right": 665,
+            "bottom": 234,
+            "left": 607
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "static",
+            "width": "58px",
+            "height": "48px",
+            "background-color": "rgba(233, 247, 240, 0.91)",
+            "color": "rgb(19, 58, 84)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        }
+      ],
+      "shot": "navalDuel-740-pause-resume.webp"
+    },
+    {
+      "id": "fireRescue",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "cycles": 3,
+      "comparedNodes": 23,
+      "comparison": "exact getBoundingClientRect + every computed CSS property + ::before/::after",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "game-pause",
+          "rect": {
+            "x": 684,
+            "y": 8,
+            "width": 48,
+            "height": 48,
+            "top": 8,
+            "right": 732,
+            "bottom": 56,
+            "left": 684
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "fixed",
+            "width": "48px",
+            "height": "48px",
+            "background-color": "rgba(23, 62, 75, 0.9)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "DIV",
+          "id": "joystick",
+          "action": "",
+          "rect": {
+            "x": 16,
+            "y": 240,
+            "width": 104,
+            "height": 104,
+            "top": 240,
+            "right": 120,
+            "bottom": 344,
+            "left": 16
+          },
+          "style": {
+            "display": "block",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "104px",
+            "height": "104px",
+            "background-color": "rgba(33, 78, 100, 0.4)",
+            "color": "rgb(239, 252, 255)",
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, -52, -52)",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "shoot",
+          "action": "fire",
+          "rect": {
+            "x": 642,
+            "y": 260,
+            "width": 80,
+            "height": 80,
+            "top": 260,
+            "right": 722,
+            "bottom": 340,
+            "left": 642
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "80px",
+            "height": "80px",
+            "background-color": "rgb(8, 124, 240)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "fire-refill",
+          "action": "refill",
+          "rect": {
+            "x": 668,
+            "y": 192,
+            "width": 54,
+            "height": 54,
+            "top": 192,
+            "right": 722,
+            "bottom": 246,
+            "left": 668
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "54px",
+            "height": "54px",
+            "background-color": "rgb(181, 53, 48)",
+            "color": "rgb(255, 255, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pass",
+          "action": "rescue",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "54px",
+            "height": "54px",
+            "background-color": "rgb(190, 77, 36)",
+            "color": "rgb(232, 248, 239)",
+            "opacity": "0.55",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "fire-finish",
+          "action": "finish",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "54px",
+            "height": "54px",
+            "background-color": "rgb(183, 124, 45)",
+            "color": "rgb(232, 248, 239)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        }
+      ],
+      "shot": "fireRescue-740-pause-resume.webp"
+    },
+    {
+      "id": "alienDefense",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "cycles": 3,
+      "comparedNodes": 14,
+      "comparison": "exact getBoundingClientRect + every computed CSS property + ::before/::after",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "action": "game-pause",
+          "rect": {
+            "x": 680,
+            "y": 8,
+            "width": 52,
+            "height": 52,
+            "top": 8,
+            "right": 732,
+            "bottom": 60,
+            "left": 680
+          },
+          "style": {
+            "display": "flex",
+            "visibility": "visible",
+            "position": "fixed",
+            "width": "52px",
+            "height": "52px",
+            "background-color": "rgba(19, 47, 73, 0.733)",
+            "color": "rgb(220, 255, 248)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "DIV",
+          "id": "joystick",
+          "action": "",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": {
+            "display": "none",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "96px",
+            "height": "96px",
+            "background-color": "rgba(135, 219, 230, 0.1)",
+            "color": "rgb(239, 252, 255)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "shoot",
+          "action": "fire",
+          "rect": {
+            "x": 650,
+            "y": 176,
+            "width": 72,
+            "height": 72,
+            "top": 176,
+            "right": 722,
+            "bottom": 248,
+            "left": 650
+          },
+          "style": {
+            "display": "block",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgba(33, 127, 130, 0.875)",
+            "color": "rgb(217, 255, 244)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pass",
+          "action": "nova",
+          "rect": {
+            "x": 566,
+            "y": 176,
+            "width": 72,
+            "height": 72,
+            "top": 176,
+            "right": 638,
+            "bottom": 248,
+            "left": 566
+          },
+          "style": {
+            "display": "block",
+            "visibility": "visible",
+            "position": "absolute",
+            "width": "72px",
+            "height": "72px",
+            "background-color": "rgba(22, 53, 78, 0.85)",
+            "color": "rgb(217, 255, 244)",
+            "opacity": "1",
+            "transform": "none",
+            "scale": "none",
+            "filter": "none"
+          }
+        }
+      ],
+      "shot": "alienDefense-740-pause-resume.webp"
+    }
+  ]
+}

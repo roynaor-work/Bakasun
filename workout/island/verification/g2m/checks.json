@@ -1,0 +1,75 @@
+{
+  "branch": "codex/g2m-aliens",
+  "dataVersion": "g9-20261020-1",
+  "saveVersion": 15,
+  "unit": {
+    "command": "node --test tests/*.mjs",
+    "tests": 1828,
+    "pass": 1790,
+    "fail": 0,
+    "skipped": 38
+  },
+  "browser": {
+    "allBrowserFiles844x390": {
+      "files": 29,
+      "scenarioSuites": 28,
+      "helperModules": 1,
+      "passed": true
+    },
+    "g2f": {
+      "viewports": [
+        [
+          844,
+          390
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "passed": true
+    },
+    "g2m": {
+      "viewports": [
+        [
+          844,
+          390
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "passed": true
+    },
+    "server": "Python at 127.0.0.1:8765 from repository root",
+    "matrix": "browser-suites.json",
+    "portrait": "rotation guard pauses gameplay; landscape rotation resumes the complete scenario"
+  },
+  "audio": {
+    "oggFiles": 7,
+    "bytes": 51252,
+    "license": "CC0-1.0",
+    "decoded": 7
+  },
+  "scope": {
+    "configAlienDefenseOnly": true,
+    "stringsAlienKeysOnly": true,
+    "protectedFilesUnchanged": true
+  },
+  "physicalPhoneTested": false,
+  "screenshotCount": 8,
+  "originalBase": "995e285",
+  "mergedMain": "70239cd",
+  "mergedPullRequests": [
+    149,
+    150,
+    151
+  ],
+  "appearance": {
+    "stageOneDistinctModels": 2,
+    "stageTwoDistinctModels": 2,
+    "perKindVisual": "same authored sprite and battle camera angle in every row",
+    "screenshot": "01-stage-one-single-shot.webp"
+  }
+}

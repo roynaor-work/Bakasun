@@ -1,0 +1,162 @@
+{
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "pythonServer": "127.0.0.1:8765",
+  "files": [
+    {
+      "file": "g2f-browser.mjs",
+      "exit": 1,
+      "seconds": 17.5
+    },
+    {
+      "file": "g2g-browser.mjs",
+      "exit": 0,
+      "seconds": 79.0
+    },
+    {
+      "file": "g2h-browser.mjs",
+      "exit": 0,
+      "seconds": 17.9
+    },
+    {
+      "file": "g2i-browser.mjs",
+      "exit": 0,
+      "seconds": 14.9
+    },
+    {
+      "file": "g2j-browser.mjs",
+      "exit": 0,
+      "seconds": 28.8
+    },
+    {
+      "file": "g2k-browser.mjs",
+      "exit": 0,
+      "seconds": 46.1
+    },
+    {
+      "file": "g2l-browser.mjs",
+      "exit": 0,
+      "seconds": 71.9
+    },
+    {
+      "file": "g2n-browser.mjs",
+      "exit": 0,
+      "seconds": 109.9
+    },
+    {
+      "file": "g3b-browser.mjs",
+      "exit": 0,
+      "seconds": 70.2
+    },
+    {
+      "file": "g3c-browser.mjs",
+      "exit": 0,
+      "seconds": 67.7
+    },
+    {
+      "file": "g3d-browser.mjs",
+      "exit": 0,
+      "seconds": 98.3
+    },
+    {
+      "file": "g3e-browser.mjs",
+      "exit": 0,
+      "seconds": 33.5
+    },
+    {
+      "file": "g3f-browser.mjs",
+      "exit": 0,
+      "seconds": 109.2
+    },
+    {
+      "file": "g3g-browser.mjs",
+      "exit": 0,
+      "seconds": 55.7
+    },
+    {
+      "file": "g3h-browser.mjs",
+      "exit": 0,
+      "seconds": 33.4
+    },
+    {
+      "file": "g3i-browser.mjs",
+      "exit": 0,
+      "seconds": 38.0
+    },
+    {
+      "file": "g4b-browser.mjs",
+      "exit": 0,
+      "seconds": 24.2
+    },
+    {
+      "file": "g4c-browser.mjs",
+      "exit": 0,
+      "seconds": 21.1
+    },
+    {
+      "file": "g4d-browser.mjs",
+      "exit": 0,
+      "seconds": 145.3
+    },
+    {
+      "file": "g5-browser.mjs",
+      "exit": 0,
+      "seconds": 130.9
+    },
+    {
+      "file": "g6-browser.mjs",
+      "exit": 0,
+      "seconds": 14.8
+    },
+    {
+      "file": "g6b-browser.mjs",
+      "exit": 0,
+      "seconds": 12.3
+    },
+    {
+      "file": "g6c-browser.mjs",
+      "exit": 0,
+      "seconds": 64.4
+    },
+    {
+      "file": "g6d-browser.mjs",
+      "exit": 0,
+      "seconds": 34.7
+    },
+    {
+      "file": "g7-browser.mjs",
+      "exit": 0,
+      "seconds": 46.0
+    },
+    {
+      "file": "g8-browser.mjs",
+      "exit": 0,
+      "seconds": 65.7
+    },
+    {
+      "file": "night-browser.mjs",
+      "exit": 0,
+      "seconds": 0.4
+    },
+    {
+      "file": "task016-browser.mjs",
+      "exit": 0,
+      "seconds": 33.3
+    },
+    {
+      "file": "task017-pilot-browser.mjs",
+      "exit": 0,
+      "seconds": 25.9
+    }
+  ],
+  "passed": 28,
+  "failed": 1,
+  "baseline": {
+    "commit": "70239cd",
+    "g2fExit": 1,
+    "failure": "cannon assertion at g2f-browser.mjs:48"
+  },
+  "g2fBranchFailure": "enemyFleetHp assertion at g2f-browser.mjs:34"
+}

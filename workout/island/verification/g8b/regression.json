@@ -1,0 +1,188 @@
+{
+  "base": "70239cdbbaad00bca8e54608e4b1c20c79762971",
+  "server": {
+    "language": "Python",
+    "host": "127.0.0.1",
+    "port": 8765,
+    "root": "repository root",
+    "subtree": "/workout/island/",
+    "legacyHarness": "temporary ESM loader redirects serveIsland to this Python URL; assertions and scenario sources unchanged"
+  },
+  "unit": {
+    "command": "node --test tests/*.mjs",
+    "total": 1820,
+    "passed": 1782,
+    "failed": 0,
+    "skipped": 38,
+    "g8bPassed": 5
+  },
+  "browser": [
+    {
+      "file": "g2f-browser.mjs",
+      "exit": 1,
+      "seconds": 14.3
+    },
+    {
+      "file": "g2g-browser.mjs",
+      "exit": 0,
+      "seconds": 51.9
+    },
+    {
+      "file": "g2h-browser.mjs",
+      "exit": 0,
+      "seconds": 15.4
+    },
+    {
+      "file": "g2i-browser.mjs",
+      "exit": 0,
+      "seconds": 9.6
+    },
+    {
+      "file": "g2j-browser.mjs",
+      "exit": 0,
+      "seconds": 18.2
+    },
+    {
+      "file": "g2k-browser.mjs",
+      "exit": 0,
+      "seconds": 32.5
+    },
+    {
+      "file": "g2l-browser.mjs",
+      "exit": 0,
+      "seconds": 50.4
+    },
+    {
+      "file": "g2n-browser.mjs",
+      "exit": 0,
+      "seconds": 71.8
+    },
+    {
+      "file": "g3b-browser.mjs",
+      "exit": 0,
+      "seconds": 43.6
+    },
+    {
+      "file": "g3c-browser.mjs",
+      "exit": 0,
+      "seconds": 29.9
+    },
+    {
+      "file": "g3d-browser.mjs",
+      "exit": 0,
+      "seconds": 61.1
+    },
+    {
+      "file": "g3e-browser.mjs",
+      "exit": 0,
+      "seconds": 30.9
+    },
+    {
+      "file": "g3f-browser.mjs",
+      "exit": 0,
+      "seconds": 65.0
+    },
+    {
+      "file": "g3g-browser.mjs",
+      "exit": 0,
+      "seconds": 36.8
+    },
+    {
+      "file": "g3h-browser.mjs",
+      "exit": 0,
+      "seconds": 21.5
+    },
+    {
+      "file": "g4b-browser.mjs",
+      "exit": 0,
+      "seconds": 18.3
+    },
+    {
+      "file": "g4c-browser.mjs",
+      "exit": 0,
+      "seconds": 15.3
+    },
+    {
+      "file": "g4d-browser.mjs",
+      "exit": 0,
+      "seconds": 142.1
+    },
+    {
+      "file": "g5-browser.mjs",
+      "exit": 0,
+      "seconds": 88.2
+    },
+    {
+      "file": "g6-browser.mjs",
+      "exit": 0,
+      "seconds": 11.3
+    },
+    {
+      "file": "g6b-browser.mjs",
+      "exit": 0,
+      "seconds": 8.6
+    },
+    {
+      "file": "g6c-browser.mjs",
+      "exit": 0,
+      "seconds": 32.8
+    },
+    {
+      "file": "g6d-browser.mjs",
+      "exit": 0,
+      "seconds": 31.6
+    },
+    {
+      "file": "g7-browser.mjs",
+      "exit": 0,
+      "seconds": 54.5
+    },
+    {
+      "file": "g8-browser.mjs",
+      "exit": 0,
+      "seconds": 33.9
+    },
+    {
+      "file": "g8b-browser.mjs",
+      "exit": 0,
+      "viewports": [
+        [
+          844,
+          390
+        ],
+        [
+          740,
+          360
+        ]
+      ],
+      "cyclesPerGame": 3
+    },
+    {
+      "file": "night-browser.mjs",
+      "exit": 0,
+      "seconds": 0.6
+    },
+    {
+      "file": "task016-browser.mjs",
+      "exit": 0,
+      "seconds": 31.3
+    },
+    {
+      "file": "task017-pilot-browser.mjs",
+      "exit": 0,
+      "seconds": 10.9
+    }
+  ],
+  "baselineFailure": {
+    "file": "g2f-browser.mjs",
+    "line": 34,
+    "assertion": "assert.ok(m.enemyFleetHp<initial.enemyFleetHp)",
+    "reproducedOnCleanMain": true,
+    "baseline": "70239cd",
+    "viewport": [
+      844,
+      390
+    ],
+    "serverPort": 8766
+  }
+}
