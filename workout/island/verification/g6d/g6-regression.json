@@ -1,0 +1,136 @@
+{
+  "part": "g6",
+  "browser": "Chromium / SwiftShader",
+  "browserVersion": "151.0.7922.173",
+  "physicalPhone": false,
+  "iPhone": false,
+  "phoneFPS": false,
+  "reports": [
+    {
+      "width": 844,
+      "height": 390,
+      "metrics": {
+        "triangles": 13922,
+        "drawCalls": 23,
+        "playerModel": {
+          "requested": true,
+          "loaded": true,
+          "failed": false
+        },
+        "disposed": false,
+        "models": {
+          "requested": 2,
+          "loaded": 2,
+          "failed": 0
+        },
+        "effects": {
+          "foamInstances": 3,
+          "smokeInstances": 0,
+          "damagedShips": 0,
+          "cloudPuffs": 24,
+          "trees": 45,
+          "waterTime": 0.8240000000000006
+        },
+        "camera": {
+          "heading": 0.00019072133003658173,
+          "zoom": 0,
+          "fov": 55,
+          "position": {
+            "x": -0.004563858767251609,
+            "y": 14,
+            "z": 22.876799490361236
+          },
+          "focus": {
+            "x": 0.0038278797034835958,
+            "y": 0.8,
+            "z": -21.123199709397003
+          }
+        },
+        "quality": "full",
+        "playerLoaded": true,
+        "enemiesLoaded": 1,
+        "playerLength": 11.02,
+        "enemyLengths": [
+          11.02
+        ],
+        "headings": [
+          0.03537492057130153
+        ],
+        "periscopes": [
+          false
+        ]
+      },
+      "worst": {
+        "triangles": 19258,
+        "drawCalls": 39,
+        "playerModel": {
+          "requested": true,
+          "loaded": true,
+          "failed": false
+        },
+        "disposed": false,
+        "models": {
+          "requested": 2,
+          "loaded": 2,
+          "failed": 0
+        },
+        "effects": {
+          "foamInstances": 0,
+          "smokeInstances": 0,
+          "damagedShips": 0,
+          "cloudPuffs": 24,
+          "trees": 45,
+          "waterTime": 0.14400000000000002
+        },
+        "camera": {
+          "heading": 0,
+          "zoom": 0,
+          "fov": 55,
+          "position": {
+            "x": 0,
+            "y": 14,
+            "z": 24
+          },
+          "focus": {
+            "x": 0,
+            "y": 0.8,
+            "z": -20
+          }
+        },
+        "quality": "full",
+        "playerLoaded": true,
+        "enemiesLoaded": 2,
+        "playerLength": 11.02,
+        "enemyLengths": [
+          11.02,
+          10.56,
+          null,
+          null
+        ],
+        "headings": [
+          0.0032572024291110603,
+          0.19543343282948497,
+          3.103381495319306,
+          3.141592653589793
+        ],
+        "periscopes": [
+          false,
+          false,
+          false,
+          true
+        ]
+      },
+      "checks": {
+        "fullWindow": true,
+        "rotation": true,
+        "weapons": true,
+        "firing": true,
+        "torpedo": true,
+        "fallback": true
+      },
+      "errors": [],
+      "outside": []
+    }
+  ],
+  "evidenceNote": "Regression run at 844x390. Only the eight G6d screenshots are retained."
+}
