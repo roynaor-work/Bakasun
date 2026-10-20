@@ -1,37 +1,110 @@
 {
   "originalBase": "995e285",
-  "mergedMain": "70239cdbbaad00bca8e54608e4b1c20c79762971",
-  "mergeCommit": "a47de936f39e875cb3d737f2ea7449b848a825cf",
+  "mergedMain": "1f058267c554bf523698bee1a9af5c42139391d8",
+  "mergeCommit": "497983c9046f9d00ab6b5e84223ffb55f5061af3",
   "server": {
     "url": "http://127.0.0.1:8765/workout/island/",
+    "command": "python3 -m http.server 8765 --bind 127.0.0.1",
     "workingDirectory": "/workspace/Bakasun",
-    "oldListenerStopped": 24451,
-    "freshListenerVerified": true,
+    "portWasFreeBeforeStart": true,
+    "freshServerVerified": true,
     "appSHA256": "6832460dd7c271e90d273e3db5218751f2e4cb12406f7f24503d077c8e8ab3ad",
-    "unpublishedLabReturns404": true,
-    "externalServerEnvironment": "ISLAND_URL"
+    "externalServerEnvironment": "ISLAND_URL",
+    "customRouteFiltering": false,
+    "stoppedAfterVerification": true
+  },
+  "conflictResolution": {
+    "tests/helpers/island-browser.mjs": "Retained main external ISLAND_URL handling and directory normalization, plus L1 query/hash normalization.",
+    "workout/island/tests/g2f-browser.mjs": "Byte-for-byte identical to the merged main version; no learning-specific fixture changes needed."
+  },
+  "versions": {
+    "DATA_VERSION": "g9-20261020-1",
+    "CURRENT_VERSION": 16
   },
   "translationMerge": {
-    "L1Keys": 890,
     "mainKeys": 878,
     "mergedKeys": 891,
-    "allKeysAndValuesPreserved": true
+    "allMainKeysAndValuesPreserved": true
   },
   "requestedViewport": {
     "width": 844,
     "height": 390
   },
-  "L1AdditionalViewport": {
+  "additionalPortraitViewport": {
     "width": 390,
     "height": 844
   },
-  "functionalSuites": 28,
-  "passed": 28,
+  "functionalSuites": 32,
+  "passed": 32,
   "failed": 0,
   "scriptsExecuted": [
     {
       "script": "g2f-browser.mjs",
       "exitCode": 0,
+      "seconds": 67.11,
+      "viewports": [
+        {
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [],
+      "report": {
+        "release": "task016-20261016-1",
+        "browser": "Chromium software rendering, simulated touch",
+        "reports": [
+          {
+            "width": 390,
+            "portraitGuard": true,
+            "gameplayViewport": {
+              "width": 844,
+              "height": 390
+            },
+            "novaPartialAreaDamage": true,
+            "touchOnly": true,
+            "upgradeSavedAfterReload": true,
+            "immediateContinue": true,
+            "navalTargetMatchesImpact": true,
+            "finiteAmmoRetry": true,
+            "waterAndPressure": true,
+            "muteSaved": true,
+            "events": [
+              "button",
+              "win",
+              "cannon",
+              "whistle",
+              "metal",
+              "explosion",
+              "splash",
+              "lose",
+              "siren",
+              "crackle",
+              "spray",
+              "refill"
+            ],
+            "shots": [
+              "automatic-next-wave.png",
+              "naval.png",
+              "fire.png"
+            ],
+            "errors": []
+          }
+        ],
+        "notTested": [
+          "Physical phone FPS",
+          "Physical Android/iOS audio output and device interruptions",
+          "Human difficulty/playability assessment"
+        ],
+        "omitted": [
+          "Optional background music: effects only, to keep the mobile audio graph small"
+        ]
+      }
+    },
+    {
+      "script": "g2f-browser.mjs",
+      "exitCode": 0,
+      "seconds": 63.08,
       "viewports": [
         {
           "width": 844,
@@ -40,41 +113,57 @@
       ],
       "helperOnly": false,
       "passLines": [],
-      "initialExitCode": 1,
-      "initialSeconds": 21.38,
-      "rerunAfterCompatibilityUpdate": true,
-      "checks": {
-        "width": 844,
-        "touchOnly": true,
-        "upgradeSavedAfterReload": true,
-        "immediateContinue": true,
-        "navalTargetMatchesImpact": true,
-        "finiteAmmoRetry": true,
-        "waterAndPressure": true,
-        "muteSaved": true,
-        "events": [
-          "button",
-          "shot",
-          "explosion",
-          "win",
-          "cannon",
-          "whistle",
-          "metal",
-          "lose",
-          "splash",
-          "siren",
-          "crackle",
-          "spray",
-          "refill"
+      "report": {
+        "release": "task016-20261016-1",
+        "browser": "Chromium software rendering, simulated touch",
+        "reports": [
+          {
+            "width": 844,
+            "portraitGuard": false,
+            "gameplayViewport": {
+              "width": 844,
+              "height": 390
+            },
+            "novaPartialAreaDamage": true,
+            "touchOnly": true,
+            "upgradeSavedAfterReload": true,
+            "immediateContinue": true,
+            "navalTargetMatchesImpact": true,
+            "finiteAmmoRetry": true,
+            "waterAndPressure": true,
+            "muteSaved": true,
+            "events": [
+              "button",
+              "win",
+              "cannon",
+              "whistle",
+              "metal",
+              "explosion",
+              "splash",
+              "lose",
+              "siren",
+              "crackle",
+              "spray",
+              "refill"
+            ],
+            "shots": [],
+            "errors": []
+          }
         ],
-        "shots": [],
-        "errors": []
+        "notTested": [
+          "Physical phone FPS",
+          "Physical Android/iOS audio output and device interruptions",
+          "Human difficulty/playability assessment"
+        ],
+        "omitted": [
+          "Optional background music: effects only, to keep the mobile audio graph small"
+        ]
       }
     },
     {
       "script": "g2g-browser.mjs",
       "exitCode": 0,
-      "seconds": 72.95,
+      "seconds": 85.27,
       "viewports": [
         {
           "width": 844,
@@ -87,7 +176,7 @@
     {
       "script": "g2h-browser.mjs",
       "exitCode": 0,
-      "seconds": 25.52,
+      "seconds": 26.17,
       "viewports": [
         {
           "width": 844,
@@ -102,7 +191,7 @@
     {
       "script": "g2i-browser.mjs",
       "exitCode": 0,
-      "seconds": 13.84,
+      "seconds": 11.84,
       "viewports": [
         {
           "width": 844,
@@ -117,7 +206,7 @@
     {
       "script": "g2j-browser.mjs",
       "exitCode": 0,
-      "seconds": 27.23,
+      "seconds": 28.21,
       "viewports": [
         {
           "width": 844,
@@ -132,7 +221,7 @@
     {
       "script": "g2k-browser.mjs",
       "exitCode": 0,
-      "seconds": 42.41,
+      "seconds": 31.41,
       "viewports": [
         {
           "width": 844,
@@ -147,7 +236,7 @@
     {
       "script": "g2l-browser.mjs",
       "exitCode": 0,
-      "seconds": 72.9,
+      "seconds": 73.07,
       "viewports": [
         {
           "width": 844,
@@ -160,9 +249,24 @@
       ]
     },
     {
+      "script": "g2m-browser.mjs",
+      "exitCode": 0,
+      "seconds": 48.39,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g2m verified { width: 844, height: 390 }"
+      ]
+    },
+    {
       "script": "g2n-browser.mjs",
       "exitCode": 0,
-      "seconds": 136.63,
+      "seconds": 106.5,
       "viewports": [
         {
           "width": 844,
@@ -175,9 +279,24 @@
       ]
     },
     {
+      "script": "g2o-browser.mjs",
+      "exitCode": 0,
+      "seconds": 23.37,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "G2o verified { width: 844, height: 390 }"
+      ]
+    },
+    {
       "script": "g3b-browser.mjs",
       "exitCode": 0,
-      "seconds": 64.05,
+      "seconds": 51.84,
       "viewports": [
         {
           "width": 844,
@@ -192,7 +311,7 @@
     {
       "script": "g3c-browser.mjs",
       "exitCode": 0,
-      "seconds": 29.9,
+      "seconds": 34.33,
       "viewports": [
         {
           "width": 844,
@@ -207,7 +326,7 @@
     {
       "script": "g3d-browser.mjs",
       "exitCode": 0,
-      "seconds": 56.14,
+      "seconds": 58.29,
       "viewports": [
         {
           "width": 844,
@@ -222,7 +341,7 @@
     {
       "script": "g3e-browser.mjs",
       "exitCode": 0,
-      "seconds": 24.99,
+      "seconds": 26.33,
       "viewports": [
         {
           "width": 844,
@@ -237,7 +356,7 @@
     {
       "script": "g3f-browser.mjs",
       "exitCode": 0,
-      "seconds": 83.49,
+      "seconds": 81.35,
       "viewports": [
         {
           "width": 844,
@@ -252,7 +371,7 @@
     {
       "script": "g3g-browser.mjs",
       "exitCode": 0,
-      "seconds": 51.66,
+      "seconds": 47.09,
       "viewports": [
         {
           "width": 844,
@@ -267,7 +386,7 @@
     {
       "script": "g3h-browser.mjs",
       "exitCode": 0,
-      "seconds": 28.61,
+      "seconds": 31.72,
       "viewports": [
         {
           "width": 844,
@@ -280,9 +399,24 @@
       ]
     },
     {
+      "script": "g3i-browser.mjs",
+      "exitCode": 0,
+      "seconds": 33.82,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g3i verified { width: 844, height: 390 }"
+      ]
+    },
+    {
       "script": "g4b-browser.mjs",
       "exitCode": 0,
-      "seconds": 27.42,
+      "seconds": 32.15,
       "viewports": [
         {
           "width": 844,
@@ -297,7 +431,7 @@
     {
       "script": "g4c-browser.mjs",
       "exitCode": 0,
-      "seconds": 19.01,
+      "seconds": 25.49,
       "viewports": [
         {
           "width": 844,
@@ -312,7 +446,7 @@
     {
       "script": "g4d-browser.mjs",
       "exitCode": 0,
-      "seconds": 237.51,
+      "seconds": 180.18,
       "viewports": [
         {
           "width": 844,
@@ -321,13 +455,20 @@
       ],
       "helperOnly": false,
       "passLines": [
-        "g4d verified { width: 844, height: 390 }"
-      ]
+        "g4e meter/serve verified { width: 844, height: 390 }",
+        "g4e stationary verified { width: 844, height: 390 }",
+        "g4e movement verified { width: 844, height: 390 }",
+        "g4e verified { width: 844, height: 390 }"
+      ],
+      "environment": {
+        "G4E_WIDTH": "844",
+        "G4E_HEIGHT": "390"
+      }
     },
     {
       "script": "g5-browser.mjs",
       "exitCode": 0,
-      "seconds": 153.34,
+      "seconds": 126.71,
       "viewports": [
         {
           "width": 844,
@@ -342,7 +483,7 @@
     {
       "script": "g6-browser.mjs",
       "exitCode": 0,
-      "seconds": 22.04,
+      "seconds": 16.84,
       "viewports": [
         {
           "width": 844,
@@ -357,7 +498,7 @@
     {
       "script": "g6b-browser.mjs",
       "exitCode": 0,
-      "seconds": 13.46,
+      "seconds": 15.76,
       "viewports": [
         {
           "width": 844,
@@ -372,7 +513,7 @@
     {
       "script": "g6c-browser.mjs",
       "exitCode": 0,
-      "seconds": 60.4,
+      "seconds": 60.45,
       "viewports": [
         {
           "width": 844,
@@ -387,7 +528,7 @@
     {
       "script": "g6d-browser.mjs",
       "exitCode": 0,
-      "seconds": 35.49,
+      "seconds": 40.6,
       "viewports": [
         {
           "width": 844,
@@ -402,7 +543,7 @@
     {
       "script": "g7-browser.mjs",
       "exitCode": 0,
-      "seconds": 52.99,
+      "seconds": 61.39,
       "viewports": [
         {
           "width": 844,
@@ -417,7 +558,7 @@
     {
       "script": "g8-browser.mjs",
       "exitCode": 0,
-      "seconds": 80.78,
+      "seconds": 113.49,
       "viewports": [
         {
           "width": 844,
@@ -428,9 +569,28 @@
       "passLines": []
     },
     {
+      "script": "g8b-browser.mjs",
+      "exitCode": 0,
+      "seconds": 43.67,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "G8b verified soccer 844",
+        "G8b verified tennis 844",
+        "G8b verified navalDuel 844",
+        "G8b verified fireRescue 844",
+        "G8b verified alienDefense 844"
+      ]
+    },
+    {
       "script": "l1-browser.mjs",
       "exitCode": 0,
-      "seconds": 160.53,
+      "seconds": 118.4,
       "viewports": [
         {
           "width": 390,
@@ -450,7 +610,7 @@
     {
       "script": "night-browser.mjs",
       "exitCode": 0,
-      "seconds": 0.53,
+      "seconds": 0.58,
       "viewports": [
         {
           "width": 844,
@@ -463,7 +623,7 @@
     {
       "script": "task016-browser.mjs",
       "exitCode": 0,
-      "seconds": 31.37,
+      "seconds": 37.05,
       "viewports": [
         {
           "width": 844,
@@ -476,7 +636,7 @@
     {
       "script": "task017-pilot-browser.mjs",
       "exitCode": 0,
-      "seconds": 21.16,
+      "seconds": 24.65,
       "viewports": [
         {
           "width": 844,
@@ -493,14 +653,16 @@
     }
   ],
   "existingBrowserSourcesMatchMergedMain": {
-    "workout/island/tests/g2f-browser.mjs": false,
+    "workout/island/tests/g2f-browser.mjs": true,
     "workout/island/tests/g2g-browser.mjs": true,
     "workout/island/tests/g2h-browser.mjs": true,
     "workout/island/tests/g2i-browser.mjs": true,
     "workout/island/tests/g2j-browser.mjs": true,
     "workout/island/tests/g2k-browser.mjs": true,
     "workout/island/tests/g2l-browser.mjs": true,
+    "workout/island/tests/g2m-browser.mjs": true,
     "workout/island/tests/g2n-browser.mjs": true,
+    "workout/island/tests/g2o-browser.mjs": true,
     "workout/island/tests/g3b-browser.mjs": true,
     "workout/island/tests/g3c-browser.mjs": true,
     "workout/island/tests/g3d-browser.mjs": true,
@@ -508,9 +670,10 @@
     "workout/island/tests/g3f-browser.mjs": true,
     "workout/island/tests/g3g-browser.mjs": true,
     "workout/island/tests/g3h-browser.mjs": true,
+    "workout/island/tests/g3i-browser.mjs": true,
     "workout/island/tests/g4b-browser.mjs": true,
     "workout/island/tests/g4c-browser.mjs": true,
-    "workout/island/tests/g4d-browser.mjs": true,
+    "workout/island/tests/g4d-browser.mjs": false,
     "workout/island/tests/g5-browser.mjs": true,
     "workout/island/tests/g6-browser.mjs": true,
     "workout/island/tests/g6b-browser.mjs": true,
@@ -518,32 +681,24 @@
     "workout/island/tests/g6d-browser.mjs": true,
     "workout/island/tests/g7-browser.mjs": true,
     "workout/island/tests/g8-browser.mjs": true,
+    "workout/island/tests/g8b-browser.mjs": true,
     "workout/island/tests/night-browser.mjs": true,
     "workout/island/tests/task016-browser.mjs": true,
     "workout/island/tests/task017-pilot-browser.mjs": false
   },
-  "baselineFailure": {
-    "script": "g2f-browser.mjs",
-    "line": 34,
-    "assertion": "m.enemyFleetHp < initial.enemyFleetHp",
-    "baselineCommit": "70239cdbbaad00bca8e54608e4b1c20c79762971",
-    "baselineViewport": {
-      "width": 844,
-      "height": 390
-    },
-    "baselineServer": "http://127.0.0.1:8766/workout/island/",
-    "baselineExitCode": 1,
-    "branchExitCode": 1,
-    "reason": "The stationary-target fixture removes enemy movement but still assumes a guaranteed hit despite the new G6d wind.",
-    "resolved": true,
-    "currentExitCode": 0
+  "supersededTennisConfiguration": {
+    "reason": "g4d-browser.mjs selects its viewport with G4E, not G4D. The initial default-matrix run was stopped after its 844x390 case passed.",
+    "exitCode": -9,
+    "seconds": 442.53
   },
-  "versionAssertionUpdate": {
-    "script": "task017-pilot-browser.mjs",
-    "previousExpected": 15,
-    "expected": 16,
-    "actual": 16,
-    "onlyExpectedVersionLiteralChanged": true
+  "g2fMatchesMain": true,
+  "g2fBothViewports": true,
+  "L1BothViewports": true,
+  "firstDayBypass": true,
+  "tennisArtifactFilenameFix": {
+    "script": "g4d-browser.mjs",
+    "prefix": "G4E",
+    "testScenariosAndAssertionsUnchanged": true
   },
   "G8": {
     "checks": {
@@ -560,28 +715,28 @@
     "cold": [
       {
         "id": "soccer",
-        "cityBytes": 5777242,
+        "cityBytes": 5810834,
         "additionalBytes": 57402
       },
       {
         "id": "navalDuel",
-        "cityBytes": 5777242,
+        "cityBytes": 5810834,
         "additionalBytes": 283794
       },
       {
         "id": "tennis",
-        "cityBytes": 5759759,
-        "additionalBytes": 2993003
+        "cityBytes": 5810834,
+        "additionalBytes": 2424265
       },
       {
         "id": "fireRescue",
-        "cityBytes": 5777242,
-        "additionalBytes": 2731315
+        "cityBytes": 5793351,
+        "additionalBytes": 2749796
       },
       {
         "id": "alienDefense",
-        "cityBytes": 5759759,
-        "additionalBytes": 2030871
+        "cityBytes": 5810834,
+        "additionalBytes": 2065956
       }
     ],
     "fallback": [
@@ -603,113 +758,34 @@
       }
     ]
   },
-  "Task017": {
-    "cases": [
-      {
-        "width": 844,
-        "height": 390,
-        "failure": "none",
-        "saveVersion": 16,
-        "errors": [],
-        "outside": []
-      },
-      {
-        "width": 844,
-        "height": 390,
-        "failure": "car",
-        "saveVersion": 16,
-        "errors": [],
-        "outside": []
-      },
-      {
-        "width": 844,
-        "height": 390,
-        "failure": "walker",
-        "saveVersion": 16,
-        "errors": [],
-        "outside": []
-      },
-      {
-        "width": 844,
-        "height": 390,
-        "failure": "both",
-        "saveVersion": 16,
-        "errors": [],
-        "outside": []
-      }
-    ]
+  "G8b": {
+    "cases": 5,
+    "games": [
+      "soccer",
+      "tennis",
+      "navalDuel",
+      "fireRescue",
+      "alienDefense"
+    ],
+    "cyclesEach": 3
+  },
+  "G4e": {
+    "idleLegs": true,
+    "noAutonomousMovement": true,
+    "cyclingMeter": true,
+    "fullModelsAndBakedSprites": true,
+    "fourSides": true,
+    "umpire": true,
+    "plantedFoot": true,
+    "hipsFaceNet": true,
+    "applause": true,
+    "audio": true,
+    "pause": true,
+    "qualityReduction": true,
+    "fallback": true
   },
   "comprehensionHasUnrelatedIllustrations": false,
   "L1Screenshots": 14,
   "physicalPhone": false,
-  "G2fCompatibilityUpdate": {
-    "applied": true,
-    "candidateExitCode": 0,
-    "viewport": {
-      "width": 844,
-      "height": 390
-    },
-    "originalAssertionsRetained": 41,
-    "changes": [
-      "Neutralize wind only in the stationary-target fixture, then restore it immediately.",
-      "Unlock and await the new naval sample bank before audio assertions.",
-      "Retain and collect actual audio counters across result/retry disposal."
-    ],
-    "candidateReport": {
-      "width": 844,
-      "touchOnly": true,
-      "upgradeSavedAfterReload": true,
-      "immediateContinue": true,
-      "navalTargetMatchesImpact": true,
-      "finiteAmmoRetry": true,
-      "waterAndPressure": true,
-      "muteSaved": true,
-      "events": [
-        "button",
-        "shot",
-        "explosion",
-        "win",
-        "cannon",
-        "whistle",
-        "metal",
-        "lose",
-        "splash",
-        "siren",
-        "crackle",
-        "spray",
-        "refill"
-      ],
-      "shots": [],
-      "errors": []
-    },
-    "patchSHA256": "8ef9470b870902e9bb7cb6b7bcc0c0b00ed1cb57c1fb682e2f17ccb7c6d8b773",
-    "branchExitCode": 0,
-    "branchReport": {
-      "width": 844,
-      "touchOnly": true,
-      "upgradeSavedAfterReload": true,
-      "immediateContinue": true,
-      "navalTargetMatchesImpact": true,
-      "finiteAmmoRetry": true,
-      "waterAndPressure": true,
-      "muteSaved": true,
-      "events": [
-        "button",
-        "shot",
-        "explosion",
-        "win",
-        "cannon",
-        "whistle",
-        "metal",
-        "lose",
-        "splash",
-        "siren",
-        "crackle",
-        "spray",
-        "refill"
-      ],
-      "shots": [],
-      "errors": []
-    }
-  }
+  "originMainIsAncestor": true
 }
