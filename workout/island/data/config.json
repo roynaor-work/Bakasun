@@ -4914,7 +4914,7 @@
     "gravity": 9.81,
     "bounce": 0.72,
     "hitHeight": 0.85,
-    "serveHeight": 2.5,
+    "serveHeight": 3.1,
     "flightSeconds": 1.43,
     "minimumFlight": 0.9,
     "powerFlightFactor": 0.27,
@@ -4975,9 +4975,9 @@
      0.91
     ],
     "reach": 1.05,
-    "autoZSpeed": 9,
-    "assistStages": 3,
-    "assistSpeed": 16,
+    "autoZSpeed": 0,
+    "assistStages": 0,
+    "assistSpeed": 0,
     "readyZ": 7.8,
     "contactOffsetZ": 0.45,
     "chargeSeconds": 1.1,
@@ -5168,8 +5168,8 @@
      0.75
     ],
     "crowdCounts": [
-     40,
-     16,
+     144,
+     128,
      0
     ],
     "shadowEnabled": [
@@ -5184,7 +5184,7 @@
     "flashSeconds": 0.32,
     "maxTriangles": 90000,
     "maxDrawCalls": 70,
-    "cameraFov": 43,
+    "cameraFov": 40.3,
     "cameraPortrait": [
      0,
      18,
@@ -5215,81 +5215,73 @@
     "fallbackQuality": 2,
     "shirtColor": "#4d9ddb",
     "environment": {
-     "crowdHeight": 1.5,
-     "crowdTriangleBudget": 850,
-     "lodCells": 24,
+     "crowdHeight": 1.75,
      "treeHeight": 4.8,
      "treePositions": [
       [
-       -10.5,
+       -12,
        9
       ],
       [
-       10.5,
+       12,
        9
       ],
       [
-       -10.5,
-       -10.5
+       -12,
+       -12
       ],
       [
-       10.5,
-       -10.5
+       12,
+       -12
       ]
      ],
      "treeCounts": [
       4,
-      2,
+      3,
       0
      ],
      "clapSeconds": 1.25,
      "clapFrequency": 14,
-     "clapArmStart": 0.19,
-     "clapArmEnd": 0.38,
-     "clapLow": 0.58,
-     "clapHigh": 1.22,
-     "clapLift": 0.18,
-     "clapForward": 0.32,
      "crowdPalette": [
-      "#ffffff",
-      "#e8c6aa",
-      "#aabedb",
-      "#c4b1d6",
-      "#cfdbab"
+      "#ce544a",
+      "#e4b53b",
+      "#3982b5",
+      "#64a47e",
+      "#9b6bae",
+      "#e7e4d6"
      ],
-     "crowdSpacing": 1.6,
-     "crowdSideX": 7.35,
-     "crowdEndZ": 12.5,
-     "benchHeight": 0.6,
-     "benchPositions": [
-      [
-       -6.2,
-       7.5
-      ],
-      [
-       6.2,
-       7.5
-      ]
+     "crowdSpacing": 1.35,
+     "crowdSideX": 8,
+     "crowdEndZ": 13.8,
+     "crowdColumns": 12,
+     "crowdRowGap": 1,
+     "crowdEndRowGap": 1,
+     "crowdFloor": 0.28,
+     "crowdRise": 0.48,
+     "nearCount": [
+      4,
+      0,
+      0
      ],
-     "benchTriangleBudget": 600,
-     "crowdRowSize": 24,
-     "crowdColumns": 6,
-     "crowdRowGap": 0.6,
-     "crowdEndRowGap": 0.55,
-     "crowdFloor": 0.32,
-     "crowdRise": 0.26,
-     "crowdScale": 0.92,
-     "crowdScaleSpread": 0.12,
-     "clapPulseBase": 0.65,
-     "clapPulseRange": 0.25
+     "treeScales": [
+      1,
+      0.85,
+      1.15,
+      0.95
+     ],
+     "crowdRows": 3,
+     "fogNear": 65,
+     "fogFar": 180
     }
    },
    "audio": {
-    "gain": 0.055,
-    "hitFrequency": 440,
-    "pointFrequency": 660,
-    "endFrequency": 880,
-    "seconds": 0.14
+    "volume": 0.32,
+    "samples": {
+     "hit": "assets/audio/g4e/racket.ogg",
+     "bounce": "assets/audio/g4e/bounce.ogg",
+     "net": "assets/audio/g4e/net.ogg",
+     "applause": "assets/audio/g4e/applause.ogg"
+    }
    },
    "opponent": {
     "fatigueAfterHits": 4,
@@ -5308,21 +5300,24 @@
    "difficulties": {
     "easy": {
      "speed": 0.8,
-     "timing": 1.2,
+     "timing": 1.65,
      "miss": 0.12,
-     "coinMultiplier": 0.85
+     "coinMultiplier": 0.85,
+     "reach": 1.6
     },
     "normal": {
      "speed": 1,
-     "timing": 1,
+     "timing": 1.3,
      "miss": 0,
-     "coinMultiplier": 1
+     "coinMultiplier": 1,
+     "reach": 1.3
     },
     "hard": {
      "speed": 1.15,
      "timing": 0.85,
      "miss": -0.04,
-     "coinMultiplier": 1.3
+     "coinMultiplier": 1.3,
+     "reach": 1
     }
    },
    "opponents": [
@@ -5429,36 +5424,40 @@
    "serve": {
     "baselineMargin": 0.7,
     "sideX": 1.65,
-    "tossSeconds": 1.1,
-    "tossVelocity": 5.35,
-    "handHeight": 1.05,
+    "tossSeconds": 1.11,
+    "tossVelocity": 5.425,
+    "handHeight": 1.6,
     "green": {
-     "easy": 0.3,
-     "normal": 0.22,
+     "easy": 0.46,
+     "normal": 0.34,
      "hard": 0.16
     },
     "rankGreenBonus": 0.015,
     "yellowWidth": 0.2,
-    "yellowFaultChance": 0.5,
+    "yellowFaultChance": 0,
     "missDepth": 2,
     "aimFraction": 0.7,
-    "centerPowerBonus": 0.3
+    "centerPowerBonus": 0.3,
+    "holdSeconds": 0.18,
+    "flightSeconds": 0.8,
+    "minimumFlight": 0.7,
+    "powerFlightFactor": 0.08
    },
    "animation": {
     "contactFraction": 0.42,
     "recoveryFraction": 0.82,
-    "previewFraction": 0.2,
+    "previewFraction": 0.08,
     "serveSeconds": 0.76,
     "ready": {
      "chest": 0,
      "rightElbow": [
       0.38,
-      1.22,
+      1.4,
       0.08
      ],
      "rightHand": [
       0.4,
-      1.03,
+      1.4,
       0.4
      ],
      "leftElbow": [
@@ -5470,12 +5469,14 @@
       -0.2,
       1.14,
       0.35
-     ]
+     ],
+     "step": 0,
+     "knee": 0.08
     },
     "forehand": [
      {
       "at": 0,
-      "chest": -0.5,
+      "chest": -0.6,
       "rightElbow": [
        0.46,
        1.28,
@@ -5495,7 +5496,9 @@
        -0.18,
        1.3,
        0.5
-      ]
+      ],
+      "step": 0,
+      "knee": 0.08
      },
      {
       "at": 0.42,
@@ -5519,11 +5522,13 @@
        -0.44,
        1.14,
        0.2
-      ]
+      ],
+      "step": 0.22,
+      "knee": 0.28
      },
      {
       "at": 0.82,
-      "chest": 0.5,
+      "chest": 0.55,
       "rightElbow": [
        -0.02,
        1.44,
@@ -5543,13 +5548,15 @@
        -0.45,
        1.1,
        0.2
-      ]
+      ],
+      "step": 0.08,
+      "knee": 0.16
      }
     ],
     "backhand": [
      {
       "at": 0,
-      "chest": 0.5,
+      "chest": 0.6,
       "rightElbow": [
        0.14,
        1.28,
@@ -5569,7 +5576,9 @@
        -0.43,
        1.23,
        -0.05
-      ]
+      ],
+      "step": 0,
+      "knee": 0.08
      },
      {
       "at": 0.42,
@@ -5593,11 +5602,13 @@
        -0.5,
        1.14,
        0.54
-      ]
+      ],
+      "step": 0.22,
+      "knee": 0.28
      },
      {
       "at": 0.82,
-      "chest": -0.45,
+      "chest": -0.55,
       "rightElbow": [
        0.36,
        1.45,
@@ -5617,7 +5628,9 @@
        0.45,
        1.62,
        0.44
-      ]
+      ],
+      "step": 0.08,
+      "knee": 0.16
      }
     ],
     "lobLift": 0.34,
@@ -5633,7 +5646,7 @@
       ],
       "rightHand": [
        0.25,
-       1.83,
+       2.0,
        -0.2
       ],
       "leftElbow": [
@@ -5643,9 +5656,11 @@
       ],
       "leftHand": [
        -0.15,
-       1.96,
+       2.05,
        0.1
-      ]
+      ],
+      "step": 0,
+      "knee": 0.08
      },
      {
       "at": 0.42,
@@ -5669,7 +5684,9 @@
        -0.3,
        1.18,
        0.25
-      ]
+      ],
+      "step": 0.22,
+      "knee": 0.28
      },
      {
       "at": 0.82,
@@ -5693,19 +5710,21 @@
        -0.3,
        1.1,
        0.27
-      ]
+      ],
+      "step": 0.08,
+      "knee": 0.16
      }
     ],
     "racket": {
      "headOffset": [
       0,
-      -0.53,
+      -0.9,
       0
      ],
      "handRotation": [
       0,
       0,
-      1.1
+      0.6
      ],
      "headScale": [
       1,
@@ -5714,8 +5733,8 @@
      ],
      "radius": 0.26,
      "tube": 0.028,
-     "handleLength": 0.3,
-     "handleOffset": -0.2,
+     "handleLength": 0.65,
+     "handleOffset": -0.35,
      "stringGap": 0.06,
      "stringRadius": 0.24,
      "stringsPerHalf": 3,
@@ -5725,13 +5744,15 @@
      "backhandRotation": [
       0,
       0,
-      -1.1
+      -0.6
      ],
      "serveRotation": [
       0,
       0,
       3.141592653589793
-     ]
+     ],
+     "followAngle": 2.4,
+     "serveFollowAngle": 0.6
     },
     "contactBlend": 0.24,
     "ikEpsilon": 0.0001,
@@ -5742,9 +5763,7 @@
     "models": [
      "assets/models/adult-man-512.glb",
      "assets/models/adult-woman-512.glb",
-     "assets/models/palm-tree-512.glb",
-     "assets/models/tree-a-512.glb",
-     "assets/models/bench-512.glb"
+     "assets/models/palm-tree-512.glb"
     ]
    }
   }

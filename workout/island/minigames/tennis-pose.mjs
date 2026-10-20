@@ -4,7 +4,7 @@ function blend(a,b,t){return Object.fromEntries(Object.keys(a).filter(k=>k!=='at
 export function tennisPose(player,config,{toss=false,tossProgress=0}={}){
  const a=config.animation,ready=a.ready;
  let u,frames;
- if(toss){u=Math.min(a.previewFraction,tossProgress*a.previewFraction);frames=a.serve;}
+ if(toss){const t=Math.min(1,tossProgress*4);return blend(ready,a.serve[0],t*t*(3-2*t));}
  else if(player.swing>0){u=1-player.swing/(player.swingDuration||config.player.swingSeconds);frames=player.serving?a.serve:a[player.stroke||'forehand'];}
  else if(player.preparing){u=a.previewFraction;frames=a[player.stroke||'forehand'];}
  else return structuredClone(ready);
