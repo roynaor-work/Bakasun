@@ -2,7 +2,7 @@ import {verify} from './night-browser.mjs';
 await verify('g2p',[{width:844,height:390},{width:390,height:844}],async({page,context,viewport,tick,snap,tap,start,exit,shot,assert})=>{
  await start('alienDefense');
  const portrait=viewport.width<viewport.height;
- if(portrait){const before=await snap();assert.equal(before.paused,true);assert.equal(await page.locator('.game-screen').getAttribute('data-orientation-blocked'),'true');await tick(400);assert.equal((await snap()).time,before.time);await shot('06-portrait-controls',390);await page.setViewportSize({width:844,height:390});await tick(32);assert.equal((await snap()).paused,false);}
+ if(portrait){const before=await snap();assert.equal(before.paused,true);assert.equal(await page.locator('.game-screen').getAttribute('data-orientation-blocked'),'true');await tick(400);assert.equal((await snap()).time,before.time);for(const selector of ['#shoot','#pass','#joystick']){const r=await page.locator(selector).boundingBox();assert.ok(r.x>=0&&r.y>=0&&r.x+r.width<=390&&r.y+r.height<=844);}await shot('06-portrait-rotation-guard',390);await page.setViewportSize({width:844,height:390});await tick(32);assert.equal((await snap()).paused,false);}
  await page.waitForFunction(()=>{const s=window.__island.games.current.session.snapshot;return s.artModels?.loaded===6&&s.renderMetrics?.playerLoaded&&s.audio.loaded===7;});
  const noText=async()=>assert.match((await page.locator('.game-screen').innerText()).trim(),/^\d+$/);
  await noText();
