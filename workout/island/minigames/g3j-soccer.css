@@ -1,0 +1,8 @@
+/* Keep the scorer visible throughout the short celebration. */
+.game-screen[data-game=soccer] .soccer-goal-banner {
+  top: 10px;
+  left: auto;
+  right: max(86px, calc(env(safe-area-inset-right) + 86px));
+  transform: none;
+  font-size: 32px;
+}

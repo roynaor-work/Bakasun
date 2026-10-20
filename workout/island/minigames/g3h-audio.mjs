@@ -6,10 +6,11 @@ export const G3H_AUDIO_FILES=Object.freeze({
  crowd:new URL('../assets/audio/g3h/crowd.ogg?v=g9-20261020-1',import.meta.url).href
 });
 export function soccerAudioCues(event){
- return {goal:['whistle','cheer'],restart:['whistle'],halftime:['whistle'],fulltime:['whistle','whistle','whistle'],play:['whistle'],shot:['kick'],header:['kick'],volley:['kick'],pass:['pass'],loft:['pass'],throw:['pass'],post:['kick'],slide:['slide']}[event?.type]||[];
+ return {goal:['whistle','net','cheer'],restart:['whistle'],halftime:['whistle'],fulltime:['whistle','whistle','whistle'],play:['whistle'],shot:['kick'],header:['kick'],volley:['kick'],pass:['pass'],loft:['pass'],throw:['pass'],post:['kick'],slide:['slide']}[event?.type]||[];
 }
 export function createG3hAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){
  let context,master,ambience,ambienceGain,loading,disposed=false,paused=false,muted=false,excitement=0;
+ let netBuffer;
  const buffers=new Map(),sources=new Set(),pending=[],counts={};
  const readMute=()=>{try{return storage?.getItem('island.sound')==='off';}catch{return false;}};
  function sync(){muted=readMute();if(master)master.gain.setTargetAtTime(paused||muted?0:.32,context.currentTime,.025);}
@@ -33,16 +34,21 @@ export function createG3hAudio({storage,AudioContext=globalThis.AudioContext||gl
  }
  function voice(cue,delay=0){
   if(disposed||paused||readMute()||!context||context.state==='closed')return;
-  const key=cue==='cheer'?'crowd':cue==='slide'?'pass':cue,buffer=buffers.get(key);
+  if(cue==='net'&&!netBuffer){
+   netBuffer=context.createBuffer(1,Math.ceil(context.sampleRate*.28),context.sampleRate);
+   const samples=netBuffer.getChannelData(0);let seed=39,last=0;
+   for(let i=0;i<samples.length;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const noise=seed/2147483648-1;last=last*.4+noise*.6;samples[i]=last*Math.exp(-i/samples.length*5);}
+  }
+  const key=cue==='cheer'?'crowd':cue==='slide'?'pass':cue,buffer=cue==='net'?netBuffer:buffers.get(key);
   if(!buffer){if(pending.length<12)pending.push([cue,delay]);return;}
   const source=context.createBufferSource(),gain=context.createGain(),now=context.currentTime+delay;
-  source.buffer=buffer;source.playbackRate.value=cue==='cheer'?1.07:cue==='slide'?.65:1;
-  const duration=cue==='cheer'?Math.min(2.6,buffer.duration):buffer.duration;
+  source.buffer=buffer;source.playbackRate.value=cue==='cheer'?1.07:cue==='slide'?.65:cue==='net'?.72:1;
+  const duration=cue==='cheer'?Math.min(2,buffer.duration):buffer.duration;
   gain.gain.setValueAtTime(.001,now);gain.gain.exponentialRampToValueAtTime(cue==='cheer'?.65:cue==='kick'?.9:.65,now+.012);gain.gain.setTargetAtTime(.001,now+duration*.65,duration*.12);
-  source.connect(gain);gain.connect(master);sources.add(source);source.onended=()=>{sources.delete(source);source.disconnect();gain.disconnect();if(disposed&&!sources.size&&context.state!=='closed')void context.close().catch(()=>{});};source.start(now);source.stop(now+duration+.08);
+  if(cue==='net'){const filter=context.createBiquadFilter();filter.type='lowpass';filter.frequency.value=850;source.connect(filter);filter.connect(gain);}else source.connect(gain);gain.connect(master);sources.add(source);source.onended=()=>{sources.delete(source);source.disconnect();gain.disconnect();if(disposed&&!sources.size&&context.state!=='closed')void context.close().catch(()=>{});};source.start(now);source.stop(now+duration+.08);
  }
  function play(cue,delay=0){if(disposed||paused||readMute())return;counts[cue]=(counts[cue]||0)+1;voice(cue,delay);}
- function event(value){soccerAudioCues(value).forEach((cue,index)=>play(cue,index*.45));}
+ function event(value){soccerAudioCues(value).forEach((cue,index)=>play(cue,value?.type==='goal'?[0,.04,.08][index]:index*.45));}
  return {
   unlock,play,event,
   update(state){

@@ -1,6 +1,7 @@
 import {createG3hAudio} from './g3h-audio.mjs?v=g9-20261020-1';
 import {actionIcon} from './soccer-icons.mjs?v=g9-20261020-1';
 import {createSoccer} from './soccer.mjs?v=g9-20261020-1';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=g9-20261020-1';
 import {createSoccerDrill} from './soccer-drill.mjs?v=g9-20261020-1';
 import {createSoccerView} from './soccer-view.mjs?v=g9-20261020-1';
 import {createControls} from './controls.mjs?v=g9-20261020-1';
@@ -25,6 +26,7 @@ export function startSoccer(ctx) {
   if(!canvas)return session;
   const styleURL=new URL('./g3h-soccer.css?v=g9-20261020-1',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=g9-20261020-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
     document.addEventListener('pointerdown',()=>void audio.unlock(),options);
@@ -58,10 +60,11 @@ export function startSoccer(ctx) {
       const seconds=Math.max(0,Math.floor(s.elapsed));clock.textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;
       const percent=Math.round(s.sprint.value/s.sprint.capacity*100);meter.setAttribute('aria-valuenow',String(percent));ring.style.setProperty('--stamina',`${percent}%`);sprint.dataset.exhausted=String(s.sprint.locked);
       shoot.style.setProperty('--charge',`${s.charging?Math.round(s.charge/(s.chargeKind==='pass'?balance.passing.chargeSeconds:balance.physics.chargeSeconds)*100):0}%`);
-      if(mode!==s.mode){
-        mode=s.mode;controls.dataset.mode=mode;
-        const shotLabel=t(context.role==='keeper'?'soccer.keeperDive':mode==='defense'?'soccer.slide':'minigame.soccer.shoot'),passLabel=t(mode==='defense'&&context.role!=='keeper'?'soccer.steal':'soccer.pass');
-        shoot.replaceChildren(actionIcon(mode==='defense'?'slide':'shoot'));pass.replaceChildren(actionIcon(mode==='defense'?'steal':'pass'));
+      const icon=soccerShotIcon(s,balance),signatureMode=s.mode+icon;
+      if(mode!==signatureMode){
+        mode=signatureMode;controls.dataset.mode=s.mode;
+        const shotLabel=t(icon==='header'?'soccer.header':context.role==='keeper'?'soccer.keeperDive':s.mode==='defense'?'soccer.slide':'minigame.soccer.shoot'),passLabel=t(s.mode==='defense'&&context.role!=='keeper'?'soccer.steal':'soccer.pass');
+        shoot.replaceChildren(actionIcon(icon));pass.replaceChildren(actionIcon(s.mode==='defense'?'steal':'pass'));
         shoot.setAttribute('aria-label',shotLabel);pass.setAttribute('aria-label',passLabel);
       }
 
@@ -77,7 +80,7 @@ export function startSoccer(ctx) {
       phaseBanner.hidden=!phaseText;if(phaseBanner.textContent!==phaseText)phaseBanner.textContent=phaseText;
       audio.update(s);
       for(const event of model.drainEvents?.()||[]){audio.event(event);}
-      if(hud>=.1||!last){hud=0;updateHud();}
+      if(hud>=.1||shoot.querySelector('svg')?.dataset.soccerIcon!==soccerShotIcon(s,balance)){hud=0;updateHud();}
       if(model.result){ctx.finish(context.drill?{drill:model.result}:{outcome:model.result.won?'win':'lose',score:model.result.goalsFor,performance:model.result.won?1:0,soccer:model.result});return;}
       frame=requestAnimationFrame(tick);
     }

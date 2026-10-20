@@ -4831,7 +4831,7 @@
      "noise"
     ]
    },
-   "autoSwitchAdvantage": 1.5,
+   "autoSwitchAdvantage": 0,
    "chargeSpeedMultiplier": 0.5,
    "passing": {
     "minDistance": 5,
@@ -4848,7 +4848,9 @@
     "loftMinHeight": 2.8,
     "loftExtraHeight": 1.4,
     "landingColor": "#fce36a",
-    "alignmentWeight": 2
+    "alignmentWeight": 2,
+    "arcDots": 25,
+    "arcRadius": 0.07
    },
    "aerial": {
     "minHeight": 1,
@@ -4861,7 +4863,9 @@
     "headLean": 0.55,
     "keeperHeight": 2.6,
     "clearanceZone": 6,
-    "clearPower": 0.25
+    "clearPower": 0.25,
+    "lift": 0.7,
+    "autoHeaderDelaySeconds": 0.06
    },
    "ball": {
     "grassFriction": 0.7,
@@ -4961,7 +4965,7 @@
     "defaultCornerPower": 0.65,
     "inwardMinimum": 0.18,
     "goalKickDepth": 1.2,
-    "idleReleaseSeconds": 4
+    "idleReleaseSeconds": 0.9
    },
    "tactics": {
     "lanes": [
@@ -4996,7 +5000,7 @@
     "minAverageSpeed": 2.5,
     "maxOverlapSeconds": 0.12,
     "minTeamWidth": 7,
-    "switchCooldownSeconds": 0.6,
+    "switchCooldownSeconds": 1,
     "evadeWidth": 2.2
    },
    "shooting": {
