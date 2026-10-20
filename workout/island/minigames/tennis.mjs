@@ -1,6 +1,10 @@
 // Pure, fixed-step tennis. Coordinates: child +Z, opponent -Z; metres/seconds.
 // No DOM, storage, wall clock or Math.random. The host owns loading and lifecycle.
 export const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+export function serveMeterAt(seconds, riseSeconds) {
+  const phase = ((seconds / riseSeconds) % 2 + 2) % 2;
+  return { value: phase <= 1 ? phase : 2 - phase, direction: phase < 1 ? 1 : -1 };
+}
 export function seededRandom(seed) {
   let value = seed >>> 0;
   return () => { value = (value + 0x6D2B79F5) >>> 0; let t = value; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
@@ -40,16 +44,16 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
   seed = Number(seed) >>> 0;
   const rng = seededRandom(seed), selected=config.levels[stage-1],d=config.difficulties?.[difficulty]||{speed:1,timing:1,miss:0},level={...selected,speed:selected.speed*d.speed,timingWindow:selected.timingWindow*d.timing,missChance:clamp(selected.missChance+d.miss,0,config.opponent.maximumMissChance)}, p = config.player, c = config.ball, court = config.court, rules = config.rules;
   const safeRanks = Object.fromEntries(['speed', 'hit', 'serve'].map(k => [k, clamp(Math.trunc(Number(ranks[k]) || p.defaults[k]), p.rankMin, p.rankMax)]));
-  const attributes = { speed: p.speedByRank[safeRanks.speed - 1], hitPower: p.hitPowerByRank[safeRanks.hit - 1], servePower: p.servePowerByRank[safeRanks.serve - 1] };
+  const attributes = { speed: p.speedByRank[safeRanks.speed - 1], hitPower: p.hitPowerByRank[safeRanks.hit - 1], servePower: p.servePowerByRank[safeRanks.serve - 1], reach: p.reach * (d.reach || 1) };
   const score = createScore();
   const state = { stage, seed, ranks: safeRanks, attributes, timingWindow: level.timingWindow, faults:0,serveMeter:0,serveZone:'red',serveSide:1,phase: 'serve', elapsed: 0, phaseTime: 0, server: 0, score, pointLabels: [0, 0], players: [{ x: 0, z: p.readyZ, swing: 0, running: false }, { x: 0, z: -p.readyZ, swing: 0, running: false }], ball: { x: 0, y: c.serveHeight, z: p.readyZ, vx: 0, vy: 0, vz: 0, bounces: 0, lastHitter: 0 }, landing: null, contact: null, charge: 0, rallyHits: 0, pointNumber: 0, event: { id: 0, type: 'ready' }, result: null, shot: null };
-  let lob=false,aim=null,serveWasDown=false,pendingShot=null;let accumulator = 0, inputWasSwing = false, pendingTap = null, cooldown = 0, rallyTime = 0, shotTime = 0, aiMiss = false, aiOffset = 0, humanTarget = 0;
+  let lob=false,aim=null,serveWasDown=false,serveHeld=0,pendingShot=null;let accumulator = 0, inputWasSwing = false, pendingTap = null, cooldown = 0, rallyTime = 0, shotTime = 0, aiMiss = false, aiOffset = 0;
   function emit(type, details = {}) { state.event = { id: state.event.id + 1, type, ...details }; }
   function prepareServe() {
     state.phase = 'serve'; state.phaseTime = 0; state.charge = 0; state.rallyHits = 0; pendingTap = null;pendingShot=null; rallyTime = 0;
     state.serveSide=(score.points[0]+score.points[1])%2===0?1:-1;
     for (let i=0;i<2;i++){const serverSign=state.server===0?1:-1;state.players[i].x=(i===state.server?1:-1)*serverSign*state.serveSide*config.serve.sideX;state.players[i].z=(i===0?1:-1)*(court.halfLength+config.serve.baselineMargin);state.players[i].vx=state.players[i].vz=0;}
-    state.serveMeter=0;state.serveZone='red';state.manualMovement=false;
+    state.serveMeter=0;state.serveMeterDirection=1;state.tossProgress=0;state.serveZone='red';state.manualMovement=false;if(!state.faults)state.faultMark=null;
     state.players.forEach(player=>{player.swing=0;player.contactPoint=null;player.preparing=false;player.running=false;player.serving=false;});
     Object.assign(state.ball, { x: 0, y: c.serveHeight, z: state.players[state.server].z, vx: 0, vy: 0, vz: 0, bounces: 0, lastHitter: state.server });
     state.landing = null; state.contact = null; state.shot = null; emit('ready');
@@ -58,6 +62,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     if (!['rally','serve','toss'].includes(state.phase)) return;
     const ace = state.rallyHits === 1 && state.ball.lastHitter === state.server && winner === state.server && reason !== 'out' && reason !== 'net';
     state.ball.vx = state.ball.vy = state.ball.vz = 0;
+    state.players.forEach(player=>{player.running=false;player.vx=player.vz=0;});
     const transition = awardPoint(score, winner, rules);
     state.faults=0;state.pointLabels = pointLabels(score, rules); state.pointNumber++; state.phaseTime = 0;
     state.phase = transition.match ? 'complete' : transition.game ? 'game' : 'point';
@@ -91,15 +96,15 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     }
     const direction = side === 0 ? -1 : 1;
     let targetZ=direction*(serving?court.serviceLength-c.outMargin:side===0&&lob?config.lob.depth:c.depth);
-    if(serving){const sign=-Math.sign(state.players[side].x);targetX=sign*court.halfWidth/2*(1+clamp(aim?.manual?aim.x:0,-1,1)*config.serve.aimFraction);if(serveZone==='red'||serveZone==='yellow'&&rng()<config.serve.yellowFaultChance)targetZ=direction*(court.serviceLength+config.serve.missDepth);}
+    if(serving){const sign=-Math.sign(state.players[side].x);targetX=sign*court.halfWidth/2*(1+clamp(aim?.manual?aim.x:0,-1,1)*config.serve.aimFraction);if(serveZone==='red')targetZ=direction*(court.serviceLength+config.serve.missDepth);}
     const pace = power + (serving ? 0 : Math.min(c.rallyPowerLimit, state.rallyHits * c.rallyPowerPerHit));
-    const flight = Math.max(c.minimumFlight, c.flightSeconds - pace * c.powerFlightFactor)*(!serving&&side===0&&lob?config.lob.flightMultiplier:1);
+    const flight = serving ? Math.max(config.serve.minimumFlight,config.serve.flightSeconds-pace*config.serve.powerFlightFactor) : Math.max(c.minimumFlight,c.flightSeconds-pace*c.powerFlightFactor)*(side===0&&lob?config.lob.flightMultiplier:1);
     if (serving) { b.x = state.players[side].x; b.z = state.players[side].z - (side === 0 ? 1 : -1) * p.contactOffsetZ; }
     b.y = serving ? c.serveHeight : Math.max(c.hitHeight, b.y);
     b.vx = (targetX - b.x) / flight; b.vz = (targetZ - b.z) / flight;
     b.vy = (c.radius - b.y + 0.5 * c.gravity * flight ** 2) / flight;
     b.bounces = 0; b.lastHitter = side;
-    state.phase = 'rally'; state.phaseTime = 0; state.rallyHits++; shotTime = 0;
+    state.faultMark=null;state.phase = 'rally'; state.phaseTime = 0; state.rallyHits++; shotTime = 0;
     const player=state.players[side];
     player.stroke=(b.x-player.x)*(side===0?-1:1)>=0?'forehand':'backhand';
     player.lob=!serving&&side===0&&lob;player.serving=serving;player.preparing=false;
@@ -113,7 +118,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     state.shot = { side, serving, power, targetX, targetZ, flight, timing, lob:!serving&&side===0&&lob,serveZone };
     planContact(); emit('hit', { side, serving, timing, power }); pendingTap = null;
   }
-  function faultOrPoint(reason){if(!state.shot?.serving){point(1-state.ball.lastHitter,reason);return;}state.faults++;if(state.faults>=2)point(1-state.server,'doubleFault');else{prepareServe();emit('fault');}}
+  function faultOrPoint(reason){if(!state.shot?.serving){point(1-state.ball.lastHitter,reason);return;}const mark={x:state.ball.x,z:state.ball.z,reason};state.faults++;if(state.faults>=2)point(1-state.server,'doubleFault');else{prepareServe();emit('fault',{reason});}state.faultMark=mark;state.event.impact=reason;}
   function serve(){if(state.server!==0)return;if(state.phase==='serve'){state.phase='toss';state.phaseTime=0;emit('toss');}else if(state.phase==='toss')shoot(0);}
   function swing() {
     if (cooldown > 0) return;
@@ -121,7 +126,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     if(state.phase!=='rally')return;
     if (state.phase !== 'rally' || state.ball.lastHitter !== 1 || !state.contact) return;
     const b=state.ball,player=state.players[0];
-    const volley=!state.shot?.serving&&b.z>p.contactOffsetZ&&b.bounces===0&&b.y>=p.volleyMinHeight&&b.y<=p.volleyMaxHeight&&Math.hypot(player.x-b.x,player.z-b.z)<=p.reach;
+    const volley=!state.shot?.serving&&b.z>p.contactOffsetZ&&b.bounces===0&&b.y>=p.volleyMinHeight&&b.y<=p.volleyMaxHeight&&Math.hypot(player.x-b.x,player.z-b.z)<=attributes.reach;
     if(volley){shoot(0);return;}
     const difference = state.elapsed - state.contact.at;
     const half = level.timingWindow / 2;
@@ -134,8 +139,8 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
   }
   function tryHumanHit() {
     if (pendingTap === null || !state.contact) return;
-    const near = Math.abs(state.players[0].x - state.ball.x) <= p.reach && Math.abs(state.players[0].z - state.ball.z) <= p.reach;
-    if (near || stage <= p.assistStages) shoot(0, pendingTap);
+    const near = Math.abs(state.players[0].x - state.ball.x) <= attributes.reach && Math.abs(state.players[0].z - state.ball.z) <= attributes.reach;
+    if (near) shoot(0, pendingTap);
     else { pendingTap = null;pendingShot=null; emit('missSwing'); }
   }
   function movePlayer(index, x, z, speed, dt) {
@@ -155,24 +160,21 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     if (['serve','toss'].includes(state.phase)) {
       const b=state.ball,server=state.players[state.server];b.x=server.x;b.z=server.z;
       if(state.phase==='toss'){
-        const t=state.phaseTime;b.y=config.serve.handHeight+config.serve.tossVelocity*t-c.gravity*t*t/2;
-        state.serveMeter=clamp(t/config.serve.tossSeconds,0,1);
+        const t=state.phaseTime%config.serve.tossSeconds;b.y=Math.max(config.serve.handHeight,config.serve.handHeight+config.serve.tossVelocity*t-c.gravity*t*t/2);
+        const meter=serveMeterAt(state.phaseTime,config.serve.tossSeconds);state.serveMeter=meter.value;state.serveMeterDirection=meter.direction;state.tossProgress=t/config.serve.tossSeconds;
         const green=config.serve.green[difficulty]+(safeRanks.serve-1)*config.serve.rankGreenBonus,distance=Math.abs(state.serveMeter-.5);
         state.serveZone=distance<=green/2?'green':distance<=(green+config.serve.yellowWidth)/2?'yellow':'red';
-        if(t>=config.serve.tossSeconds)prepareServe();
       }else{b.y=config.serve.handHeight;if(state.server===1&&state.phaseTime>=rules.serveWait)shoot(1);}
       return;
     }
-    if(Number.isFinite(input.targetX))humanTarget=clamp(input.targetX,-court.playerLimit,court.playerLimit);
     const contact=state.contact;if(contact)contact.eta=contact.at-state.elapsed;
-    const incoming=contact?.side===0,length=Math.hypot(input.move||0,input.moveZ||0),hasManual=length>0;
+    const length=Math.hypot(input.move||0,input.moveZ||0),hasManual=length>0;
     if(hasManual)state.manualMovement=true;
-    const auto=incoming&&stage<=p.assistStages&&!state.manualMovement;
     const moveX=(input.move||0)/Math.max(1,length),moveZ=(input.moveZ||0)/Math.max(1,length);
-    movePlayer(0,auto?contact.x:hasManual?state.players[0].x+moveX*attributes.speed*dt:state.manualMovement?state.players[0].x:humanTarget,auto?contact.z+p.contactOffsetZ:state.players[0].z+moveZ*attributes.speed*dt,auto?p.assistSpeed:attributes.speed,dt);
+    if(!hasManual){state.players[0].vx=state.players[0].vz=0;state.players[0].running=false;}
+    else movePlayer(0,state.players[0].x+moveX*attributes.speed*dt,state.players[0].z+moveZ*attributes.speed*dt,attributes.speed,dt);
     state.players[0].preparing=Boolean(input.prepare)||pendingTap!==null;
     if(state.players[0].preparing){state.players[0].serving=false;state.players[0].stroke=(state.ball.x-state.players[0].x)*-1>=0?'forehand':'backhand';state.players[0].lob=Boolean(pendingShot?.lob??input.lob);}
-    if(hasManual)humanTarget=state.players[0].x;
     const aiIncoming=contact?.side===1;
     const approach=level.netChance>0&&state.pointNumber%Math.max(1,Math.round(1/level.netChance))===0;
     movePlayer(1,aiIncoming&&shotTime>=level.reaction?contact.x+aiOffset:0,aiIncoming?contact.z-p.contactOffsetZ:approach?-court.serviceLength:-p.readyZ,Math.max(level.speed,attributes.speed*config.opponent.minimumSpeedRatio),dt);
@@ -188,9 +190,10 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
       b.y = c.radius; b.bounces++;
       if (b.bounces === 1) {
         const wrongSide = b.z * (b.lastHitter === 0 ? -1 : 1) < 0;
-        const serveOut = state.shot.serving && (Math.abs(b.z)>court.serviceLength+court.lineTolerance||b.x*state.players[b.lastHitter].x>=0);
+        const serveOut = state.shot.serving && (Math.abs(b.z)>court.serviceLength+court.lineTolerance||b.x*Math.sign(state.players[b.lastHitter].x)>court.lineTolerance);
         if (Math.abs(b.x) > court.halfWidth + court.lineTolerance || Math.abs(b.z) > court.halfLength + court.lineTolerance || wrongSide || serveOut) { faultOrPoint('out'); return; }
         b.vy = -b.vy * c.bounce;
+        emit('bounce');
       } else { point(b.lastHitter, 'doubleBounce'); return; }
     }
     if (state.contact?.side === 0 && state.elapsed >= state.contact.at && pendingTap !== null) tryHumanHit();
@@ -203,7 +206,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
   function update(dt, input = {}) {
     if (!Number.isFinite(dt) || dt < 0 || state.phase === 'complete') return state;
     // A tap is an edge; held charge is continuous. Consume taps even below one tick.
-    lob=Boolean(input.lob);aim=input.aim;const serveTap=Boolean(input.serve)&&!serveWasDown;serveWasDown=Boolean(input.serve);if(serveTap)serve();const tap = Boolean(input.swing) && !inputWasSwing; inputWasSwing = Boolean(input.swing);
+    lob=Boolean(input.lob);aim=input.aim;const down=Boolean(input.serve),serveTap=down&&!serveWasDown,released=!down&&serveWasDown;serveWasDown=down;if(serveTap){serveHeld=0;serve();}if(down)serveHeld+=Math.max(0,Math.min(dt,config.simulation.maxDelta));if(released&&serveHeld>=config.serve.holdSeconds&&state.phase==='toss')serve();const tap = Boolean(input.swing) && !inputWasSwing; inputWasSwing = Boolean(input.swing);
     if (tap) swing();
     accumulator += Math.min(dt, config.simulation.maxDelta);
     while (accumulator + 1e-10 >= config.simulation.step && state.phase !== 'complete') { step(config.simulation.step, input); accumulator -= config.simulation.step; }

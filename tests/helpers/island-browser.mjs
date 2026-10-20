@@ -14,7 +14,7 @@ export async function islandChromium() {
 // Mirror the published subtree; missing lab and other application paths are 404.
 export async function serveIsland(prefix = '/Bakasun/workout/island/') {
   if (process.env.ISLAND_URL) {
-    const target = new URL(process.env.ISLAND_URL);
+    const target = new URL('./', process.env.ISLAND_URL);
     target.search = ''; target.hash = '';
     return { url: target.href, async close() {} };
   }

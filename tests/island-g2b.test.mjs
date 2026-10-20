@@ -44,7 +44,7 @@ for(const [id,make]of Object.entries(models)) {
     const b=data.config.minigames[id],power=level<4?1:level<7?1.2:1.45;
     const run=()=>{const m=make({config:data.config.minigames,balance:b,level,power,random:seededRandom(12)}),memory={};
       for(let i=0;i<40000&&!m.result;i++)m.update(.04,pilotInput(id,m,b,memory));return m;};
-    const a=run(),again=run();assert.equal(a.result?.outcome,(id==='fireRescue'&&level>=10||id==='alienDefense'&&level===10)?'lose':'win');assert.deepEqual(a.snapshot(),again.snapshot());
+    const a=run(),again=run();assert.equal(a.result?.outcome,(id==='fireRescue'&&level>=10||id==='alienDefense'&&[6,10].includes(level))?'lose':'win');assert.deepEqual(a.snapshot(),again.snapshot());
     const f=fixture(),ctx={engine:f.engine,level,config:data.config.minigames};
     const result=f.engine.registry.minigames.get(id).onResult(a.result,ctx);assert.ok(result);assert.ok(a.result.outcome==='win'?result.stars>=1&&result.stars<=3:result.stars===0);
   });

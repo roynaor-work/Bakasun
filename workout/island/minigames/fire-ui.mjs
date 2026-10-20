@@ -15,6 +15,7 @@ function ring(node,color,radius){const svg=document.createElementNS(NS,'svg');sv
 export function installFireUI(ctx){
   const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire.css?v=g9-20261020-1',import.meta.url).href;document.head.append(link);
   const g2n=document.createElement('link');g2n.rel='stylesheet';g2n.href=new URL('./g2n-fire.css?v=g9-20261020-1',import.meta.url).href;document.head.append(g2n);
+  const g2o=document.createElement('link');g2o.rel='stylesheet';g2o.href=new URL('./g2o-fire.css?v=g9-20261020-1',import.meta.url).href;document.head.append(g2o);
   const {controls,dialog,t,balance}=ctx;dialog.classList.add('fire-play');ctx.status.hidden=true;if(ctx.warning)ctx.warning.hidden=true;
   const pause=dialog.querySelector('[data-action=game-pause]');pause?.replaceChildren(fireIcon('pause'));
   controls.replaceChildren();controls.style.setProperty('--fire-action-size',balance.ui.actionSize+'px');controls.style.setProperty('--fire-small-size',balance.ui.smallActionSize+'px');controls.style.setProperty('--fire-stick-size',balance.ui.stickSize+'px');
@@ -27,7 +28,7 @@ export function installFireUI(ctx){
   const hud=document.createElement('div');hud.className='fire-hud';hud.setAttribute('aria-label',t('fire.mission'));const counters={};
   for(const [key,icon,label]of [['flames','flame','fire.firesLeft'],['rescues','person','fire.peopleLeft'],['clock','clock','fire.timeLeft']]){const item=document.createElement('div');item.className='fire-counter';item.setAttribute('role','img');item.setAttribute('aria-label',t(label));item.append(fireIcon(icon));const number=document.createElement('bdi');item.append(number);counters[key]=number;hud.append(item);}
   const timeRing=ring(counters.clock.parentElement,'#ffe387',46);dialog.append(hud);
-  return {stabilizer,marker,spray,water,pressure,refill,ladder,finish,counters,timeRing,dialog,dispose(){hud.remove();stabilizer.remove();link.remove();g2n.remove();dialog.classList.remove('fire-play');}};
+  return {stabilizer,marker,spray,water,pressure,refill,ladder,finish,counters,timeRing,dialog,dispose(){hud.remove();stabilizer.remove();link.remove();g2n.remove();g2o.remove();dialog.classList.remove('fire-play');}};
 }
 export function updateFireUI(ui,m,b){
   ui.water.style.strokeDashoffset=String(100*(1-m.water/m.maxWater));ui.pressure.style.strokeDashoffset=String(100*(1-m.pressure/m.maxPressure));

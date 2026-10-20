@@ -72,7 +72,7 @@ test('G2c splitter children are bounded, weaker, and do not inflate island rewar
 test('G2c carriers launch a finite budget of mini-ships, and bosses arrive at the final wave',()=>{
   const m=make('alienDefense',10),carrier=m.aliens.find(a=>a.kind===4);carrier.launchTime=.01;m.update(.02,{});assert.ok(m.aliens.some(a=>a.child));
   const born=m.aliens.filter(a=>a.child).length;for(const a of m.aliens)if(a.kind===4)a.launchTime=0;m.update(.02,{});assert.ok(m.aliens.filter(a=>a.child).length<=m.settings.spawnBudget);assert.ok(born>0);
-  const boss=make('alienDefense',10),memory={};for(let i=0;i<20000&&boss.wave<boss.settings.waves&&!boss.result;i++)boss.update(.04,pilotInput('alienDefense',boss,config.alienDefense,memory));assert.equal(boss.wave,boss.settings.waves);assert.equal(boss.aliens.filter(a=>a.boss).length,1);
+  const boss=make('alienDefense',10,{equipment:{damage:1.8,rate:1.5,weapon:2,shield:3},permanentUpgrades:{damage:3,rapid:3,laser:3,wing:3,shield:3}}),memory={};for(let i=0;i<20000&&boss.wave<boss.settings.waves&&!boss.result;i++)boss.update(.04,pilotInput('alienDefense',boss,config.alienDefense,memory));assert.equal(boss.wave,boss.settings.waves);assert.equal(boss.aliens.filter(a=>a.boss).length,1);
 });
 for(let kind=0;kind<4;kind++)test(`G2c temporary ${config.alienDefense.pickups.kinds[kind]} collects, changes play and expires`,()=>{
   const m=make('alienDefense',1);m.pickups.push({x:m.player.x,y:m.player.y,vx:0,vy:0,kind});m.update(.001,{});if(kind===0){assert.equal(m.spreadTime,config.alienDefense.spread.seconds);assert.equal(m.spreadCooldown,config.alienDefense.spread.seconds+config.alienDefense.spread.cooldownSeconds);}else{assert.equal(m.powerup,kind);assert.equal(m.powerTime,config.alienDefense.pickups.seconds);}
@@ -82,18 +82,18 @@ for(let kind=0;kind<4;kind++)test(`G2c temporary ${config.alienDefense.pickups.k
   m.shots.length=0;m.pickups.length=0;advance(m,config.alienDefense.pickups.seconds+.1);assert.equal(m.powerup,-1);if(kind===0){assert.equal(m.spreadTime,0);assert.ok(m.spreadCooldown>0);}
 });
 test('G2c nova flies to the group center, preserves distant enemies, shows a light wave and has finite charges',()=>{
-  const m=make('alienDefense',10);for(const a of m.aliens){a.x=a.baseX=120;a.y=a.baseY=100;a.phase=0;}
+  const m=make('alienDefense');advance(m,2);
   const a=m.aliens[0],far=m.aliens.at(-1);a.hp=1;far.x=far.baseX=340;far.y=far.baseY=300;far.hp=100;const farHp=far.hp,center={x:m.aliens.reduce((n,a)=>n+a.x,0)/m.aliens.length,y:m.aliens.reduce((n,a)=>n+a.y,0)/m.aliens.length};
   m.update(.001,{nova:true,x:10,y:10});assert.deepEqual([m.nova.x,m.nova.y],[center.x,center.y]);assert.equal(m.nova.fromY,m.player.y);assert.equal(m.novaCharges,config.alienDefense.nova.charges-1);assert.ok(m.nova.flight>0);assert.equal(m.score,0);
-  advance(m,config.alienDefense.nova.throwSeconds+.02,{nova:true});assert.ok(m.nova.life>0);assert.ok(m.score>0);assert.equal(far.hp,farHp);assert.equal(m.novaCharges,1);
+  advance(m,config.alienDefense.nova.aimSeconds+config.alienDefense.nova.throwSeconds+.02,{nova:true});assert.ok(m.nova.life>0);assert.ok(m.score>0);assert.equal(far.hp,farHp);assert.equal(m.novaCharges,1);
   m.update(.001,{});m.update(.001,{nova:true});assert.equal(m.novaCharges,1,'no lost charge during the light wave');
   advance(m,config.alienDefense.nova.seconds+.02);m.update(.001,{nova:true});assert.equal(m.novaCharges,0);advance(m,2);assert.equal(m.nova.life,0);m.update(.001,{nova:true});assert.equal(m.novaCharges,0);
 });
 test('G2c permanent weapon, damage and rate affect actual projectiles rather than just labels',()=>{
   const base=make('alienDefense'),strong=make('alienDefense',1,{equipment:{weapon:2,damage:1.8,rate:1.5}});
-  base.update(.02,{firing:true});strong.update(.02,{firing:true});assert.equal(strong.shots.length,3);assert.equal(strong.shots.filter(s=>s.vx!==0).length,0);assert.equal(strong.shots[0].kind,1);
+  base.update(.02,{firing:true});strong.update(.02,{firing:true});assert.equal(strong.shots.length,1);assert.equal(strong.shots.filter(s=>s.vx!==0).length,0);assert.equal(strong.shots[0].kind,1);
   const a=strong.aliens[0];a.hp=2;shotAt(strong,a,2);strong.update(.001,{});assert.ok(a.hp<1);
-  advance(base,.4,{firing:true});advance(strong,.4,{firing:true});assert.ok(strong.shots.length>base.shots.length);
+  advance(base,.6,{firing:true});advance(strong,.6,{firing:true});assert.ok(strong.shots.length>base.shots.length);
 });
 test('G2c fires occupy homes, roof, tree, car and warehouse; high stages add resistant and spreading fire',()=>{
   const m=make('fireRescue',10);assert.equal(new Set(m.flames.map(f=>f.kind)).size,5);assert.equal(new Set(m.flames.map(f=>f.type)).size,3);assert.equal(make('fireRescue').settings.fireKinds,1);

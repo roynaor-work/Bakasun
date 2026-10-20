@@ -1,24 +1,41 @@
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
-/** One press, two distinct passing lanes / goal-side markers. No match RNG. */
+const laneClearance=(p,a,b)=>{
+ const dx=b.x-a.x,dz=b.z-a.z,u=clamp(((p.x-a.x)*dx+(p.z-a.z)*dz)/(dx*dx+dz*dz||1),0,1);
+ return distance(p,{x:a.x+dx*u,z:a.z+dz*u});
+};
+/** One ball press; everyone else returns to a zone or finds a passing lane. */
 export function fieldTarget(p,s,c){
  const a=c.tactics,b=s.ball,d=s.attackDir*(p.team===0?1:-1),hx=c.pitch.length/2,hz=c.pitch.width/2;
  const owner=b.owner===null?null:s.players[b.owner],mates=s.players.filter(q=>q.team===p.team&&q.role!=='keeper');
  const chaser=mates.reduce((best,q)=>distance(q,b)<distance(best,b)?q:best,mates[0]);
- const lane=a.lanes[c.players.roles.indexOf(p.role)]*d;
+ const role=c.players.roles.indexOf(p.role),lane=a.lanes[role]*d;
+ const opponents=s.players.filter(q=>q.team!==p.team),minimum=a.markDistance[s.difficulty]+a.spacingBuffer;
  let x,z,duty;
  if(owner?.team===p.team){
   const advance=a.advance[c.players.roles.indexOf(p.role)];
   x=owner.x+d*advance;z=lane+owner.z*a.ballWidth;duty='support';
   if(p.role==='striker')x+=d*a.strikerRun;
+  // Search nearby space, rewarding both room to receive and a clear pass lane.
+  const ideal={x:clamp(x,-hx+a.goalInset,hx-a.goalInset),z:clamp(z,-hz+a.sideInset,hz-a.sideInset)};
+  let best=-Infinity;
+  if(p.team===0)for(const ox of [-1,0,1])for(const oz of [-1,0,1]){
+   const q={x:clamp(ideal.x+ox*a.openSpaceStep,-hx+a.goalInset,hx-a.goalInset),z:clamp(ideal.z+oz*a.openSpaceStep,-hz+a.sideInset,hz-a.sideInset)};
+   const clearance=Math.min(...opponents.map(o=>distance(o,q))),passing=Math.min(...opponents.map(o=>laneClearance(o,owner,q)));
+   const value=Math.min(clearance,minimum*2)+Math.min(passing,minimum)-distance(q,ideal)*.35-Math.max(0,c.ai.requestDistance-distance(q,owner))*2;
+   if(value>best){best=value;x=q.x;z=q.z;}
+  }
  }else if(chaser.id===p.id){x=b.x+b.vx*a.interceptSeconds;z=b.z+b.vz*a.interceptSeconds;duty='press';}
- else if(!owner){x=b.x-d*a.defenseDepth;z=lane+b.z*a.ballWidth;duty='cover';}
  else{
-  const marks=s.players.filter(q=>q.team!==p.team&&q.role!=='keeper'&&q.id!==owner?.id);
-  const defenders=mates.filter(q=>q.id!==chaser.id),mark=marks[defenders.findIndex(q=>q.id===p.id)%marks.length];
-  const zone=b.x-d*a.defenseDepth;
-  x=mark?(mark.x-d*a.markDistance)*a.markWeight+zone*(1-a.markWeight):zone;
-  z=mark?mark.z*a.markWeight+lane*(1-a.markWeight):lane;duty='mark';
+  x=d*c.ai.kickoffX[role]+clamp(b.x,-a.zoneBallShift,a.zoneBallShift);
+  z=lane+b.z*a.ballWidth;duty='cover';
+ }
+ // Avoid off-ball opponents, including on the presser's route to the ball.
+ // This steers AI only: the child can cross every pitch/penalty-area line.
+ if(owner&&owner.team!==p.team)for(let pass=0;pass<a.separationIterations;pass++)for(const q of opponents){
+  if(q.id===b.owner||q.role==='keeper')continue;
+  const dx=x-q.x,dz=z-q.z,l=Math.hypot(dx,dz);
+  if(l<minimum){x=q.x+(l?dx/l:-d)*minimum;z=q.z+(l?dz/l:0)*minimum;}
  }
  return {x:clamp(x,-hx+a.goalInset,hx-a.goalInset),z:clamp(z,-hz+a.sideInset,hz-a.sideInset),duty};
 }
