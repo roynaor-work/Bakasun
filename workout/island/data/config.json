@@ -4683,8 +4683,14 @@
     "distance": 1.5
    },
    "steal": {
-    "reach": 0.9,
-    "baseChance": 0.35,
+    "reach": 1.2,
+    "baseChance": {
+     "easy": 0.75,
+     "normal": 0.6,
+     "hard": 0.45
+    },
+    "behindCosine": 0.35,
+    "behindMultiplier": 0.5,
     "cooldownSeconds": 0.6,
     "animationSeconds": 0.3
    },
@@ -4914,7 +4920,7 @@
     "diveSpeed": 5,
     "catchSeconds": 0.7,
     "holdHeight": 1.05,
-    "maxHoldSeconds": 5,
+    "maxHoldSeconds": 3,
     "carrySpeedMultiplier": 0.65,
     "holdForward": 0.34,
     "areaInset": 0.6
@@ -4949,8 +4955,14 @@
     "ballWidth": 0.2,
     "interceptSeconds": 0.16,
     "defenseDepth": 4,
-    "markDistance": 1.4,
-    "markWeight": 0.35,
+    "markDistance": {
+     "easy": 5,
+     "normal": 3.5,
+     "hard": 2.5
+    },
+    "spacingBuffer": 0.8,
+    "zoneBallShift": 4,
+    "openSpaceStep": 3,
     "goalInset": 2.8,
     "sideInset": 1.4,
     "teammateDistance": 1.2,
