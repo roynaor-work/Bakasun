@@ -1,0 +1,4 @@
+.game-screen.fire-play .soccer-stick-zone{left:max(24px,env(safe-area-inset-left));bottom:max(24px,env(safe-area-inset-bottom));width:140px;height:140px}
+.game-screen.fire-play .soccer-joystick{width:140px;height:140px;box-sizing:border-box;background:radial-gradient(circle,#79b2ba38 0 25%,#173e4bbf 26% 68%,#c4ede855 69% 71%,#173e4be6 72%);border:2px solid #e9fff2d9;box-shadow:0 4px 18px #102d4255,inset 0 0 0 12px #102d421f}
+.game-screen.fire-play .soccer-knob{left:calc(50% - 28px);top:calc(50% - 28px);width:56px;height:56px;background:radial-gradient(circle at 35% 30%,#f5fff9,#acd8d1 70%);border:2px solid #fff9;box-sizing:border-box;box-shadow:0 4px 10px #102d4266;transition:transform 100ms ease-out;will-change:transform}
+.game-screen.fire-play .soccer-stick-zone:active .soccer-knob{transition:none}

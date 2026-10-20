@@ -1,3 +1,4 @@
+import {followFireCamera} from './fire-navigation.mjs?v=g9-20261020-1';
 import {createFireLadder} from './fire-ladder.mjs?v=g9-20261020-1';
 import {fireCertificate} from '../activity/fire-certificates.mjs?v=g9-20261020-1';
 import {runFireSession} from './fire-session.mjs?v=g9-20261020-1';
@@ -14,12 +15,12 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
   let connection=0,waterUsed=0,waterWasted=0,fireDoneAt=null;
   const timeTarget=Math.max(1,remaining-settings.parSeconds),waterTarget=Math.max(1,water+reserve-settings.parWater),aim={x:config.width/2,y:config.height/2},impact={x:aim.x,y:aim.y};
   const vehicle=balance.vehicle,truck={x:vehicle.x,z:vehicle.z,targetX:vehicle.x,targetZ:vehicle.z},nozzle={x:balance.nozzleX,y:balance.nozzleY};
-  const driver=createFireDriver(truck,balance),firefighter={state:'seated',progress:0,x:truck.x,z:truck.z,visible:false},hose={connected:false,start:null,end:null};
+  const driver=createFireDriver(truck,balance),camera={x:truck.x,z:truck.z},firefighter={state:'seated',progress:0,x:truck.x,z:truck.z,visible:false},hose={connected:false,start:null,end:null};
   const rescues=balance.rescueSites.slice(0,settings.rescueCount).map(site=>({...balance.rescue,...site,rescued:false,expired:false,remaining:balance.rescue.timeoutSeconds,progress:0,descent:0,feedback:0,walkX:site.x,walkY:site.y})),rescue=rescues[0],crew=balance.crew,extraHose=equipment.hose||0,status={seconds:0,reserve:0,out:0,total:settings.flames,rescued:0};
   for(let i=0;i<settings.flames+settings.spreadCount;i++)flames.push(createFireEntity(balance.sites[i],i%settings.fireKinds,i<settings.flames,i<settings.flames?balance.initialHeatBase+random()*balance.initialHeatRange:0,i));
   const ladderControl=createFireLadder(settings,rescues,flames,balance);
   function activeCount(){let n=0;for(const f of flames)if(f.active)n++;return n;}
-  const model={ladder:ladderControl.state,settings,flames,aim,impact,truck,nozzle,firefighter,hose,roads:driver.roads,rescue,rescues,maxWater,maxPressure,range,aimRadius,extraHose,equipment,get rescueProgress(){return rescue?.progress||0;},statusId:'minigame.fireStatus',atHydrant:false,inRange:true,spraying:false,refilling:false,charging:false,rescuing:false,
+  const model={ladder:ladderControl.state,settings,flames,aim,impact,truck,camera,nozzle,firefighter,hose,roads:driver.roads,rescue,rescues,maxWater,maxPressure,range,aimRadius,extraHose,equipment,get rescueProgress(){return rescue?.progress||0;},statusId:'minigame.fireStatus',atHydrant:false,inRange:true,spraying:false,refilling:false,charging:false,rescuing:false,
     get graceRemaining(){return Math.max(0,balance.startGrace-time);},get connection(){return connection;},get firesOut(){return fireDoneAt!==null;},
     get hintId(){if(model.atHydrant&&connection<balance.hydrant.connectSeconds)return 'fire.connecting';if(model.rescuing){const r=rescues.find(r=>!r.rescued&&!r.expired&&Math.hypot(aim.x-r.x,aim.y-r.y)<=r.radius);if(r&&!r.near)return 'fire.driveToRescue';if(r&&!r.safe)return 'fire.rescueBlocked';}return model.spraying&&!model.inRange?'minigame.tooFar':null;},get hintCount(){return model.hintId?1:0;},
     get warningIds(){return [water<=0?'minigame.noWater':water/maxWater<=balance.hydrant.lowWaterRatio?'minigame.lowWater':null,pressureEmpty?'minigame.noPressure':null].filter(Boolean);},get warningId(){return water<=0?'minigame.noWater':pressureEmpty?'minigame.noPressure':water/maxWater<=balance.hydrant.lowWaterRatio?'minigame.lowWater':null;},get pressureEmpty(){return pressureEmpty;},get score(){return score;},get lives(){return Math.ceil(remaining);},get wave(){return 1;},get result(){return result;},get water(){return water;},get pressure(){return pressure;},get remaining(){return remaining;},get reserve(){return reserve;},get time(){return time;},get charge(){return charge;},
@@ -28,6 +29,7 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
       if(result||dt<=0)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;remaining=Math.max(0,remaining-dt);
       const stabilizing=ladderControl.prepare(dt,time,input,truck);
       const moveStep=driver.update(dt,stabilizing?{...input,moveX:0,moveZ:0,truckX:undefined,truckZ:undefined}:input);
+      followFireCamera(camera,truck,balance,dt);
       const nearby=flames.some(f=>f.active&&f.heat>0&&Math.hypot(f.x-nozzle.x,f.y-nozzle.y)*balance.render.worldScale<=balance.city.parkRadius)||rescues.some(r=>!r.rescued&&!r.expired&&Math.hypot(truck.x-r.world[0],truck.z-r.world[2])<=balance.rescue.truckRadius);
       if(truck.driving){firefighter.state='seated';firefighter.progress=0;firefighter.visible=false;}
       else if(input.firing||input.rescue||nearby||fireHydrantDistance(truck,balance)<=balance.hydrant.radius){firefighter.progress=Math.min(1,firefighter.progress+dt/balance.city.exitSeconds);firefighter.state=firefighter.progress<1?'exiting':'working';firefighter.visible=true;}
@@ -36,7 +38,7 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
       firefighter.z=truck.z-Math.sin(truck.yaw)*balance.city.crewDistance*firefighter.progress;
       hose.connected=firefighter.visible&&!truck.driving;
       hose.start={x:truck.x,y:balance.city.hoseHeight,z:truck.z};hose.end={x:firefighter.x,y:balance.city.hoseHeight,z:firefighter.z};
-      model.atHydrant=fireHydrantDistance(truck,balance)<=balance.hydrant.radius&&moveStep/dt<=balance.hydrant.parkedSpeed;
+      model.atHydrant=!truck.driving&&fireHydrantDistance(truck,balance)<=balance.hydrant.radius&&moveStep/dt<=balance.hydrant.parkedSpeed;
       connection=model.atHydrant?Math.min(balance.hydrant.connectSeconds,connection+dt):0;
       nozzle.x=balance.nozzleX+(truck.x-vehicle.x)/balance.render.worldScale;nozzle.y=balance.nozzleY+(truck.z-vehicle.z)/balance.render.worldScale;
       if(Number.isFinite(input.x))aim.x=input.x;if(Number.isFinite(input.y))aim.y=input.y;
@@ -89,7 +91,7 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
       if(result)result.certificate=fireCertificate({won:result.outcome==='win',time:(fireDoneAt??time)-balance.startGrace,seconds:settings.seconds,rescued:rescues.some(r=>r.rescued),wasted:waterWasted,used:waterUsed},balance.certificate);
       if(result)result.summary={out,rescued:rescues.filter(r=>r.rescued).length,water:Math.floor(water)};
     },
-    snapshot(){return {ladder:{...model.ladder,target:model.ladder.target?{...model.ladder.target,world:[...model.ladder.target.world]}:null,targets:model.ladder.targets.map(r=>({...r,world:[...r.world]}))},refilling:model.refilling,graceRemaining:model.graceRemaining,connection,firesOut:model.firesOut,hintId:model.hintId,hintCount:model.hintCount,waterUsed,waterWasted,atHydrant:model.atHydrant,inRange:model.inRange,hydrantDistance:fireHydrantDistance(truck,balance),firefighter:{...firefighter},roads:{nodes:driver.roads.nodes.map(n=>({x:n.x,z:n.z})),edges:driver.roads.edges.map(e=>({a:{x:e.a.x,z:e.a.z},b:{x:e.b.x,z:e.b.z}}))},hose:{start:{...nozzle},truck:{...truck},connected:hose.connected,worldStart:{...hose.start},worldEnd:{...hose.end}},maxWater,maxPressure,warningId:model.warningId,pressureEmpty,score,result,extraHose,equipment:{...equipment},water,pressure,remaining,reserve,time,charge,range,truck:{...truck},nozzle:{...nozzle},rescueProgress:model.rescueProgress,rescues:rescues.map(r=>({...r,world:[...r.world]})),rescue:rescue?{...rescue,world:[...rescue.world]}:null,flames:flames.map(f=>({...f})),aim:{...aim},impact:{...impact},spraying:model.spraying,rescuing:model.rescuing};}
+    snapshot(){return {camera:{...camera},ladder:{...model.ladder,target:model.ladder.target?{...model.ladder.target,world:[...model.ladder.target.world]}:null,targets:model.ladder.targets.map(r=>({...r,world:[...r.world]}))},refilling:model.refilling,graceRemaining:model.graceRemaining,connection,firesOut:model.firesOut,hintId:model.hintId,hintCount:model.hintCount,waterUsed,waterWasted,atHydrant:model.atHydrant,inRange:model.inRange,hydrantDistance:fireHydrantDistance(truck,balance),firefighter:{...firefighter},roads:{nodes:driver.roads.nodes.map(n=>({x:n.x,z:n.z})),edges:driver.roads.edges.map(e=>({a:{x:e.a.x,z:e.a.z},b:{x:e.b.x,z:e.b.z}}))},hose:{start:{...nozzle},truck:{...truck},connected:hose.connected,worldStart:{...hose.start},worldEnd:{...hose.end}},maxWater,maxPressure,warningId:model.warningId,pressureEmpty,score,result,extraHose,equipment:{...equipment},water,pressure,remaining,reserve,time,charge,range,truck:{...truck},nozzle:{...nozzle},rescueProgress:model.rescueProgress,rescues:rescues.map(r=>({...r,world:[...r.world]})),rescue:rescue?{...rescue,world:[...rescue.world]}:null,flames:flames.map(f=>({...f})),aim:{...aim},impact:{...impact},spraying:model.spraying,rescuing:model.rescuing};}
   };return model;
 }
 export function drawFire(p,m,ctx) {if(!ctx.view?.draw(p))drawFireCity(p,m,ctx);}
