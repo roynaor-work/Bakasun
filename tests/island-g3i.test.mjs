@@ -32,7 +32,7 @@ test('G3i standing steal reaches a ball at 1.1m, but not beyond 1.2m',()=>{
   g.update(dt,{passPressed:true});assert.equal(s.ball.owner,range<1.2?0:3);
  }
 });
-for(const difficulty of ['easy','normal','hard'])test(`G3i ${difficulty}: actual standing-steal rate within 10 percentage points, rear approach harder`,t=>{
+for(const difficulty of ['easy','normal','hard'])test(`G3i ${difficulty}: actual standing-steal rate within 10%, rear approach harder`,t=>{
  const results={};
  for(const [side,x,z]of [['front',.8,0],['side',0,.8],['rear',-.8,0]]){
   const g=isolated({difficulty,random:seededRandom(9182)}),s=g.getState(),p=s.players[0],owner=s.players[3];let wins=0;
@@ -42,7 +42,7 @@ for(const difficulty of ['easy','normal','hard'])test(`G3i ${difficulty}: actual
   }
   results[side]=wins/3000;
  }
- const expected=c.steal.baseChance[difficulty];for(const side of ['front','side'])assert.ok(Math.abs(results[side]-expected)<=.1,JSON.stringify(results));
+ const expected=c.steal.baseChance[difficulty];for(const side of ['front','side'])assert.ok(Math.abs(results[side]-expected)<=expected*.1,JSON.stringify(results));
  assert.ok(results.rear<results.front*.7&&results.rear<results.side*.7);assert.equal(c.steal.reach,1.2);t.diagnostic(JSON.stringify({difficulty,expected,...results}));
 });
 for(const [difficulty,target,minimum]of [['easy',2,5],['normal',4,3.5],['hard',6,2.5]])test(`G3i ${difficulty}: spacing >= ${minimum}m and >= ${target} rival shots in 90s without input`,t=>{
