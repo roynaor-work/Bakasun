@@ -16,7 +16,7 @@ function language(level,r,index) {
   if(level<=2){
     type=index%2?'letter-picture':'initial-sound';
     const letter=w.word[0],letterNames={א:'אָלֶף',ב:'בֵּית',ג:'גִּימֶל',ד:'דָּלֶת',ה:'הֵא',ו:'וָו',ז:'זַיִן',ח:'חֵית',ט:'טֵית',י:'יוֹד',כ:'כָּף',ל:'לָמֶד',מ:'מֵם',נ:'נוּן',ס:'סָמֶךְ',ע:'עַיִן',פ:'פֵּא',צ:'צָדִי',ק:'קוּף',ר:'רֵישׁ',ש:'שִׁין',ת:'תָּו'};
-    q=lowChoice(type==='initial-sound'?`אֵיזוֹ תְּמוּנָה מַתְחִילָה כְּמוֹ ${w.pointed}?`:`אֵיזוֹ תְּמוּנָה מַתְחִילָה בָּאוֹת ${letterNames[letter]}?`,{letter,symbols:type==='initial-sound'?'👄':'🔤',fallback:w.icon},w.icon,WORDS.filter(x=>x.word[0]!==letter).map(x=>x.icon),`אִמְרוּ בְּקוֹל ${w.pointed}. הַקְשִׁיבוּ לַצְּלִיל הָרִאשׁוֹן.`,r);
+    q=lowChoice(type==='initial-sound'?`אֵיזוֹ תְּמוּנָה מַתְחִילָה כְּמוֹ ${w.pointed}?`:`אֵיזוֹ תְּמוּנָה מַתְחִילָה בָּאוֹת ${letterNames[letter]}?`,{letter,symbols:type==='initial-sound'?'👄':'✍️',fallback:w.icon},w.icon,WORDS.filter(x=>x.word[0]!==letter).map(x=>x.icon),`אִמְרוּ בְּקוֹל ${w.pointed}. הַקְשִׁיבוּ לַצְּלִיל הָרִאשׁוֹן.`,r);
   }else if(level<=4){
     type=['picture','missing','rhyme','word'][index%4];
     if(type==='picture')q=choice('אֵיזוֹ מִלָּה מַתְאִימָה לַתְּמוּנָה?',visual,w.pointed,WORDS.map(x=>x.pointed),`הַמִּלָּה מַתְחִילָה בָּאוֹת ${w.word[0]}.`,r);
@@ -69,7 +69,7 @@ function math(level,r,index) {
   return {...choice(prompt,visual,answer,[answer+1,answer+2,Math.max(0,answer-1),Math.max(0,answer-2)],hint,r),template:type};
 }
 function animals(level,r,index) {
-  const type=level<=2?['identify','sound','habitat'][index%3]:level<=4?['food','baby','habitat','baby'][index%4]:['fact','local','fact','local'][index%4],a=pick(ANIMALS,r);let q;
+  const type=level<=2?['identify','sound','habitat'][index%3]:level<=4?['food','baby','habitat','baby'][index%4]:['fact','local','food','baby','fact','local','habitat','fact'][index%8],a=pick(ANIMALS,r);let q;
   if(type==='identify'){q=lowChoice(`אֵיפֹה ${a.name}?`,{symbols:'🐾',fallback:a.icon},a.icon,ANIMALS.map(x=>x.icon),`חַפְּשׂוּ אֶת ${a.name}.`,r);q.answerVoice=a.name;}
   if(type==='sound'){const [icon,name,sound]=pick(SOUNDS,r);q=lowChoice(`מִי אוֹמֵר ${sound}?`,{symbols:'👄 🎵',fallback:icon},icon,SOUNDS.map(x=>x[0]),`זֶה הַקּוֹל שֶׁל ${name}.`,r);q.answerVoice=name;}
   if(type==='habitat'){
@@ -119,7 +119,7 @@ export function createQuestion(station,level,{rng=Math.random,index=0,exclude=[]
     q.level=level;q.station=station;q.voice=q.prompt;q.pictureOnly=level<=2;q.answerVoice=q.answerVoice||q.answerLabel||q.answer;
     if(q.visual.equation)q.voice+=' '+q.visual.equation.replace('−','פָּחוֹת').replace('+','וְעוֹד').replace('×','כָּפוּל').replace('÷','חֶלְקֵי').replace('=','שָׁוֶה').replace('?','');
     if(level>=5){q.prompt=unpoint(q.prompt);q.hint=unpoint(q.hint);if(q.visual.caption)q.visual.caption=unpoint(q.visual.caption);if(q.kind==='choice'){q.answer=unpoint(q.answer);q.options=q.options.map(unpoint);}}
-    q.id=JSON.stringify([q.template,q.prompt,q.visual,q.answer,q.cards,q.order,q.scene,q.optionSizes,q.options?.slice().sort()]);
+    q.id=JSON.stringify([q.template,q.prompt,q.visual,q.answer,q.cards,q.order,q.scene,q.optionSizes]);
     if(!exclude.includes(q.id))return q;
   }
   throw Error('learning question pool exhausted');

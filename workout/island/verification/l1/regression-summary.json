@@ -1,0 +1,208 @@
+{
+  "base": "995e285",
+  "configuredViewport": {
+    "width": 844,
+    "height": 390
+  },
+  "existingBrowserSuites": [
+    {
+      "script": "g2f-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g2g-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g2h-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g2i-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g2j-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g2k-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g2l-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g3b-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g3c-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g3d-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g3e-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g3f-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g3g-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g4b-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g4c-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g4d-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g5-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g6-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g6b-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g6c-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g7-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "g8-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "task016-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "script": "task017-pilot-browser.mjs",
+      "exitCode": 1
+    }
+  ],
+  "existingBrowserSourcesMatchBase": {
+    "workout/island/tests/g2f-browser.mjs": true,
+    "workout/island/tests/g2g-browser.mjs": true,
+    "workout/island/tests/g2h-browser.mjs": true,
+    "workout/island/tests/g2i-browser.mjs": true,
+    "workout/island/tests/g2j-browser.mjs": true,
+    "workout/island/tests/g2k-browser.mjs": true,
+    "workout/island/tests/g2l-browser.mjs": true,
+    "workout/island/tests/g3b-browser.mjs": true,
+    "workout/island/tests/g3c-browser.mjs": true,
+    "workout/island/tests/g3d-browser.mjs": true,
+    "workout/island/tests/g3e-browser.mjs": true,
+    "workout/island/tests/g3f-browser.mjs": true,
+    "workout/island/tests/g3g-browser.mjs": true,
+    "workout/island/tests/g4b-browser.mjs": true,
+    "workout/island/tests/g4c-browser.mjs": true,
+    "workout/island/tests/g4d-browser.mjs": true,
+    "workout/island/tests/g5-browser.mjs": true,
+    "workout/island/tests/g6-browser.mjs": true,
+    "workout/island/tests/g6b-browser.mjs": true,
+    "workout/island/tests/g6c-browser.mjs": true,
+    "workout/island/tests/g7-browser.mjs": true,
+    "workout/island/tests/g8-browser.mjs": true,
+    "workout/island/tests/task016-browser.mjs": true,
+    "workout/island/tests/task017-pilot-browser.mjs": true
+  },
+  "baselinePortraitFailure": {
+    "script": "g2h-browser.mjs",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "baselineExitCode": 1,
+    "branchExitCode": 1,
+    "step": "tap game-pause after 3D/canvas fallback checks",
+    "reason": "G8 portrait rotation overlay hides ordinary game controls"
+  },
+  "unresolvedVersionAssertion": {
+    "script": "task017-pilot-browser.mjs",
+    "line": 83,
+    "expected": 15,
+    "actual": 16,
+    "sourceKeptUnchanged": true
+  },
+  "G8": {
+    "checks": {
+      "trustedEntryClick": true,
+      "noFirstControlRequest": true,
+      "noRotationRequest": true,
+      "backAndResume": true,
+      "pausedCountdown": true,
+      "retainedFullscreenBetweenGames": true,
+      "coldDownloadBudgets": true,
+      "errors": [],
+      "outside": []
+    },
+    "cold": [
+      {
+        "id": "soccer",
+        "cityBytes": 5898907,
+        "additionalBytes": 1475577
+      },
+      {
+        "id": "navalDuel",
+        "cityBytes": 5881419,
+        "additionalBytes": 301292
+      },
+      {
+        "id": "tennis",
+        "cityBytes": 5881419,
+        "additionalBytes": 2993043
+      },
+      {
+        "id": "fireRescue",
+        "cityBytes": 5881419,
+        "additionalBytes": 3318213
+      },
+      {
+        "id": "alienDefense",
+        "cityBytes": 5898907,
+        "additionalBytes": 3644157
+      }
+    ],
+    "fallback": [
+      {
+        "mode": "denied",
+        "calls": 1
+      },
+      {
+        "mode": "missing",
+        "calls": 0
+      },
+      {
+        "mode": "installed",
+        "calls": 0
+      },
+      {
+        "mode": "ios",
+        "calls": 0
+      }
+    ]
+  },
+  "physicalPhone": false
+}

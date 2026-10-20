@@ -7,7 +7,8 @@ const phrase=(text,q)=>q.level<=4?text:unpoint(text);
 function townImage(seed) {
   const colors=['#e6a79a','#9cbfd6','#e8cf8a','#b3c89b'],sky=['#c9e7ee','#d2e5f3','#f6dfb5'][seed%3];
   const houses=Array.from({length:5},(_,i)=>{const x=12+i*57,y=105+(i%2)*24,c=colors[(seed+i)%4];return `<rect x="${x}" y="${y}" width="49" height="74" rx="3" fill="${c}"/><path d="M${x-3} ${y}l28 -32 28 32z" fill="#658b98"/><rect x="${x+7}" y="${y+13}" width="12" height="17" fill="#fff5d3"/><rect x="${x+28}" y="${y+13}" width="12" height="17" fill="#fff5d3"/><rect x="${x+20}" y="${y+46}" width="12" height="28" fill="#527b86"/>`;}).join('');
-  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="300" height="300" fill="${sky}"/><circle cx="${45+seed%210}" cy="40" r="22" fill="#f8cd72"/><path d="M0 180Q70 145 150 182T300 173V300H0" fill="#91c9a3"/>${houses}<path d="M0 265L300 218" stroke="#dfc5a3" stroke-width="30"/><path d="M0 265L300 218" stroke="#fff3cf" stroke-width="2" stroke-dasharray="12 10"/><rect x="25" y="198" width="8" height="43" fill="#a27856"/><circle cx="29" cy="195" r="24" fill="#5f9e7e"/><rect x="263" y="176" width="8" height="43" fill="#a27856"/><circle cx="267" cy="173" r="25" fill="#659d78"/></svg>`);
+  const clouds=Array.from({length:5},(_,i)=>{const x=20+i*60,y=12+(seed+i*7)%25,r=8+(seed+i)%6;return `<g fill="#fff8ed" opacity=".8"><ellipse cx="${x}" cy="${y+7}" rx="${r+8}" ry="7"/><circle cx="${x-5}" cy="${y+2}" r="${r-2}"/><circle cx="${x+5}" cy="${y}" r="${r}"/></g>`;}).join('');
+  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><defs><linearGradient id="sky" x1="0" y1="0" x2="1" y2=".71"><stop stop-color="${sky}"/><stop offset="1" stop-color="#edf3ed"/></linearGradient></defs><rect width="300" height="300" fill="url(#sky)"/>${clouds}<circle cx="${45+seed%210}" cy="40" r="22" fill="#f8cd72"/><path d="M0 180Q70 145 150 182T300 173V300H0" fill="#91c9a3"/>${houses}<path d="M0 265L300 218" stroke="#dfc5a3" stroke-width="30"/><path d="M0 265L300 218" stroke="#fff3cf" stroke-width="2" stroke-dasharray="12 10"/><rect x="25" y="198" width="8" height="43" fill="#a27856"/><circle cx="29" cy="195" r="24" fill="#5f9e7e"/><rect x="263" y="176" width="8" height="43" fill="#a27856"/><circle cx="267" cy="173" r="25" fill="#659d78"/></svg>`);
 }
 export class LearningInterface {
   constructor({ui,engine}) {
@@ -130,8 +131,18 @@ export class LearningInterface {
   }
   result(result){
     this.ui.closeModal();const dialog=this.ui.openModal('learning.done','learning.doneHint');dialog.classList.add('learning-result');dialog.dataset.learningResult=result.station;
-    dialog.append(el('div','learning-result-stars','★'.repeat(result.stars)+'☆'.repeat(3-result.stars)),el('h3','',STATIONS[result.station].title),el('p','',`${result.firstTry} מִתּוֹךְ ${result.total} בַּנִּסָּיוֹן הָרִאשׁוֹן · ${result.retried} אַחֲרֵי רֶמֶז`),el('div','learning-result-money',`🪙 +${result.money}`),el('p','',`רָמָה ${this.engine.state.learning.stations[result.station].level} · ${Math.min(this.engine.learningStatus().target,this.engine.learningStatus().rounds)}/${this.engine.learningStatus().target} סְבָבִים הַיּוֹם`));
-    dialog.append(button('📚 מְשִׂימַת הַיּוֹם','learning-result-daily',()=>this.daily()),button('🏝️ חוֹזְרִים לָעִיר','learning-result-map',()=>this.ui.closeModal(),'learning-small'));
+    this.ui.modalCleanup=()=>this.voice.stop();
+    const s=this.engine.learningStatus(),stars=el('div','learning-result-stars','★'.repeat(result.stars)+'☆'.repeat(3-result.stars)),money=el('div','learning-result-money',`🪙 +${result.money}`);
+    if(result.pictureOnly){
+      dialog.querySelector('h2').textContent='⭐';dialog.querySelector('.modal-subtitle').remove();
+      dialog.append(stars,el('div','learning-result-station',STATIONS[result.station].icon),el('p','',`${result.firstTry}/${result.total} · 💡 ${result.retried}`),money,el('p','',`📚 ${Math.min(s.target,s.rounds)}/${s.target}`));
+    }else{
+      const f=text=>result.level>=5?unpoint(text):text;
+      dialog.querySelector('h2').textContent=f(dialog.querySelector('h2').textContent);dialog.querySelector('.modal-subtitle').textContent=f(dialog.querySelector('.modal-subtitle').textContent);
+      dialog.append(stars,el('h3','',f(STATIONS[result.station].title)),el('p','',f(`${result.firstTry} מִתּוֹךְ ${result.total} בַּנִּסָּיוֹן הָרִאשׁוֹן · ${result.retried} אַחֲרֵי רֶמֶז`)),money,el('p','',f(`רָמָה ${result.level} · ${Math.min(s.target,s.rounds)}/${s.target} סְבָבִים הַיּוֹם`)));
+    }
+    const daily=button(result.pictureOnly?'📚':'📚 משימת היום','learning-result-daily',()=>this.daily()),map=button(result.pictureOnly?'🏝️':'🏝️ חוזרים לעיר','learning-result-map',()=>this.ui.closeModal(),'learning-small');daily.setAttribute('aria-label','משימת היום');map.setAttribute('aria-label','חוזרים לעיר');dialog.append(daily,map);
+    this.voice.speak(`כָּל הַכָּבוֹד! סִיַּמְתֶּם סֶבֶב. קִבַּלְתֶּם ${result.money} מַטְבְּעוֹת וְ־${result.stars} כּוֹכָבִים.`);
   }
   dispose(){this.clearQuestion();clearInterval(this.dayTimer);clearInterval(this.clockTimer);this.stopVoiceListener();this.voice.dispose();this.unsubscribe();this.panel.remove();}
 }
