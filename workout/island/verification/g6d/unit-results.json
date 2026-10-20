@@ -1,0 +1,30 @@
+{
+  "command": "node --test tests/*.mjs",
+  "totals": {
+    "tests": 1788,
+    "pass": 1750,
+    "fail": 0,
+    "skipped": 38
+  },
+  "g6dUnitTests": 10,
+  "calibration": [
+    {
+      "level": 1,
+      "hits": 88,
+      "fired": 200,
+      "rate": 0.44
+    },
+    {
+      "level": 5,
+      "hits": 86,
+      "fired": 200,
+      "rate": 0.43
+    },
+    {
+      "level": 10,
+      "hits": 66,
+      "fired": 200,
+      "rate": 0.33
+    }
+  ]
+}

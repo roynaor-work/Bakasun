@@ -14,23 +14,26 @@ export function fireIcon(name){const svg=document.createElementNS(NS,'svg');svg.
 function ring(node,color,radius){const svg=document.createElementNS(NS,'svg');svg.classList.add('fire-ring');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');const circle=document.createElementNS(NS,'circle');for(const [key,value]of Object.entries({cx:50,cy:50,r:radius,pathLength:100,fill:'none',stroke:color,'stroke-width':4,'stroke-dasharray':100}))circle.setAttribute(key,String(value));svg.append(circle);node.append(svg);return circle;}
 export function installFireUI(ctx){
   const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire.css?v=g9-20261020-1',import.meta.url).href;document.head.append(link);
+  const g2n=document.createElement('link');g2n.rel='stylesheet';g2n.href=new URL('./g2n-fire.css?v=g9-20261020-1',import.meta.url).href;document.head.append(g2n);
   const {controls,dialog,t,balance}=ctx;dialog.classList.add('fire-play');ctx.status.hidden=true;if(ctx.warning)ctx.warning.hidden=true;
   const pause=dialog.querySelector('[data-action=game-pause]');pause?.replaceChildren(fireIcon('pause'));
   controls.replaceChildren();controls.style.setProperty('--fire-action-size',balance.ui.actionSize+'px');controls.style.setProperty('--fire-small-size',balance.ui.smallActionSize+'px');controls.style.setProperty('--fire-stick-size',balance.ui.stickSize+'px');
   const zone=document.createElement('div');zone.className='soccer-stick-zone';const stick=document.createElement('div');stick.className='soccer-joystick';stick.id='joystick';stick.setAttribute('role','img');stick.setAttribute('aria-label',t('fire.drive'));const knob=document.createElement('span');knob.id='knob';knob.className='soccer-knob';stick.append(knob);zone.append(stick);controls.append(zone);
   function action(id,key,icon,label){const button=document.createElement('button');button.type='button';button.id=id;button.dataset.gameControl=key;button.setAttribute('aria-label',t(label));button.append(fireIcon(icon));controls.append(button);return button;}
-  const spray=action('shoot','fire','spray','minigame.spray'),water=ring(spray,'#75dcf1',46),pressure=ring(spray,'#ffe387',39);
-  const refill=action('fire-refill','refill','hydrant','minigame.refill'),ladder=action('pass','rescue','ladder','minigame.rescue');ladder.disabled=ctx.level<3;
+  const spray=action('shoot','fire','drop','minigame.spray'),water=ring(spray,'#75dcf1',46),pressure=ring(spray,'#ffe387',39);
+  const refill=action('fire-refill','refill','hydrant','minigame.refill'),ladder=action('pass','rescue','ladder','minigame.rescue');ladder.hidden=true;
+  const stabilizer=document.createElement('div');stabilizer.className='fire-ladder-balance';stabilizer.hidden=true;stabilizer.setAttribute('aria-label',t('fire.stabilize'));stabilizer.append(fireIcon('ladder'));const track=document.createElement('span');track.className='fire-balance-track';const marker=document.createElement('i');marker.className='fire-balance-marker';track.append(marker);stabilizer.append(track);dialog.append(stabilizer);
   const finish=action('fire-finish','finish','star','fire.finish');finish.dataset.action='fire-certificate';finish.hidden=true;
   const hud=document.createElement('div');hud.className='fire-hud';hud.setAttribute('aria-label',t('fire.mission'));const counters={};
   for(const [key,icon,label]of [['flames','flame','fire.firesLeft'],['rescues','person','fire.peopleLeft'],['clock','clock','fire.timeLeft']]){const item=document.createElement('div');item.className='fire-counter';item.setAttribute('role','img');item.setAttribute('aria-label',t(label));item.append(fireIcon(icon));const number=document.createElement('bdi');item.append(number);counters[key]=number;hud.append(item);}
   const timeRing=ring(counters.clock.parentElement,'#ffe387',46);dialog.append(hud);
-  return {spray,water,pressure,refill,ladder,finish,counters,timeRing,dialog,dispose(){hud.remove();link.remove();dialog.classList.remove('fire-play');}};
+  return {stabilizer,marker,spray,water,pressure,refill,ladder,finish,counters,timeRing,dialog,dispose(){hud.remove();stabilizer.remove();link.remove();g2n.remove();dialog.classList.remove('fire-play');}};
 }
 export function updateFireUI(ui,m,b){
   ui.water.style.strokeDashoffset=String(100*(1-m.water/m.maxWater));ui.pressure.style.strokeDashoffset=String(100*(1-m.pressure/m.maxPressure));
   ui.timeRing.style.strokeDashoffset=String(100*(1-m.remaining/(m.settings.seconds+b.startGrace)));
   ui.counters.flames.textContent=String(m.flames.filter(f=>f.active&&f.heat>0).length);ui.counters.rescues.textContent=String(m.rescues.filter(r=>!r.rescued&&!r.expired).length);ui.counters.clock.textContent=String(Math.ceil(m.graceRemaining||m.remaining));
   ui.counters.clock.parentElement.dataset.grace=String(m.graceRemaining>0);
+  ui.spray.classList.toggle('low-water',m.water/m.maxWater<=b.hydrant.lowWaterRatio);ui.ladder.hidden=!m.ladder.available;ui.ladder.disabled=!m.ladder.available;ui.ladder.classList.toggle('wind',m.ladder.mode==='wind');ui.ladder.classList.toggle('unstable',!m.ladder.stable);ui.stabilizer.hidden=!(m.ladder.engaged&&m.ladder.mode==='wind');ui.marker.style.left=String(50+m.ladder.sway*45)+'%';
   ui.refill.classList.toggle('available',m.atHydrant);ui.refill.classList.toggle('held',m.refilling);ui.spray.classList.toggle('empty',m.water<=0||m.pressureEmpty);ui.ladder.classList.toggle('available',m.rescues.some(r=>r.near&&r.safe&&!r.rescued&&!r.expired));ui.finish.hidden=!m.firesOut;
 }
