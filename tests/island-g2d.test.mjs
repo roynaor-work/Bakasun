@@ -49,7 +49,8 @@ test('G2d three distinct random upgrades pause combat; a valid choice stacks and
   assert.equal(m.chooseUpgrade(-1),false);assert.equal(m.chooseUpgrade(99),false);assert.equal(m.chooseUpgrade(.5),false);const id=m.choices[1],wave=m.wave;assert.equal(m.chooseUpgrade(1),true);assert.equal(m.upgrades[id],1);assert.equal(m.wave,wave+1);assert.equal(m.chooseUpgrade(1),false);
 });
 test('G2d formation geometry progresses through rows, V, circle and dive',()=>{
-  const m=make('alienDefense',4),patterns=[];const memory={};
+  // Isolate wave progression from the difficulty calibration covered elsewhere.
+  const m=make('alienDefense',4,{power:2}),patterns=[];const memory={};
   for(let i=0;i<30000&&!m.result;i++){if(!patterns.includes(m.pattern))patterns.push(m.pattern);m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));}assert.deepEqual(patterns,config.alienDefense.campaign.patterns);assert.equal(m.result?.outcome,'win');
 });
 test('G2d wing companions follow the ship and fire their own energy shots',()=>{

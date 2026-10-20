@@ -1182,12 +1182,12 @@
    "playerBottom": 38.4,
    "playerRadius": 18,
    "playerSpeed": 221,
-   "formationX": 50,
-   "formationY": 48,
+   "formationX": 64,
+   "formationY": 30,
    "columnSpacing": 52,
    "rowSpacing": 52,
    "alienKinds": 5,
-   "alienRadius": 17,
+   "alienRadius": 15.5,
    "shotRadius": 5,
    "shotSpeed": 460,
    "boltRadius": 7,
@@ -1584,10 +1584,12 @@
     "seconds": 0.75,
     "color": "#d5fbff",
     "throwSeconds": 0.6,
-    "arcRise": 60,
-    "aimSeconds": 0.22,
+    "aimSeconds": 0,
     "targetFraction": 0.3,
-    "maxRadius": 240
+    "maxRadius": 240,
+    "stopYFraction": 0.4,
+    "projectileRadius": 5,
+    "visualRadius": 78
    },
    "hpPerStage": 0.06,
    "equipment": {
@@ -1894,12 +1896,15 @@
     "facingCorrectionDegrees": 180
    },
    "formation": {
-    "rowGap": 52,
-    "colGap": 52,
+    "rowGap": 42,
+    "colGap": 46,
     "entryDistance": 235,
     "entrySeconds": 1.7,
     "collisionGap": 3,
-    "separationPasses": 24
+    "separationPasses": 24,
+    "sway": 10,
+    "swayFrequency": 0.65,
+    "bob": 1.5
    },
    "hangar": {
     "repairCost": 2,
@@ -1928,7 +1933,7 @@
      "KeyF"
     ],
     "switchKey": "KeyC",
-    "floating": true,
+    "floating": false,
     "handednessKey": "island.aliens.hand",
     "aimDragThreshold": 14,
     "aimHeightPixels": 90
@@ -1939,8 +1944,8 @@
     "diveSeconds": 3.4,
     "diveSway": 20,
     "diveClearance": 85,
-    "descentSpeed": 0.25,
-    "entrySway": 8,
+    "descentSpeed": 0.6,
+    "entrySway": 26,
     "bossAttackSeconds": 2.5
    },
    "calibration": {

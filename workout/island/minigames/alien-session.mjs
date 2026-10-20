@@ -32,7 +32,7 @@ export function runAlienSession(ctx,createModel,draw,createView){
  missile.setAttribute('aria-label',t('minigame.nova'));missile.replaceChildren(alienIcon('nova'));
  const count=document.createElement('small');count.className='alien-ammo';missile.append(count);
  const pause=dialog.querySelector('[data-action=game-pause]');pause?.replaceChildren(alienIcon('pause'));
- const stick=controls.querySelector('#joystick');stick.hidden=true;
+ const stick=controls.querySelector('#joystick');stick.hidden=false;
  const shared=createControls({root:controls,config:b.controls,onGesture:()=>audio.unlock()});
  shared.setHanded(alienHandedness(b.controls));shared.setEnabled(true);
  const resize=()=>{if(disposed)return;const rect=canvas.getBoundingClientRect();cssWidth=Math.max(1,rect.width);cssHeight=Math.max(1,rect.height);dpr=Math.min(devicePixelRatio||1,quality.low?config.lowDpr:config.maxDpr);canvas.width=Math.round(cssWidth*dpr);canvas.height=Math.round(cssHeight*dpr);model.effectAspect=(cssWidth/cssHeight)/(config.width/config.height);view?.resize(cssWidth,cssHeight);};
@@ -67,7 +67,7 @@ export function runAlienSession(ctx,createModel,draw,createView){
    paint.setTransform(dpr,0,0,dpr,0,0);paint.save();paint.scale(cssWidth/config.width,cssHeight/config.height);renderContext.pixelAspect=(cssWidth/cssHeight)/(config.width/config.height);draw(paint,model,renderContext);paint.restore();hud();
    count.textContent=String(model.novaCharges);
    missile.disabled=!model.aliens.some(a=>a.y+a.radius>0)||model.novaCharges<=0||model.nova.flight>0||model.nova.life>0;
-   const charge=model.nova.flight>0?1-(model.nova.flight+model.nova.aim)/(b.nova.throwSeconds+b.nova.aimSeconds):model.nova.life>0?1-model.nova.life/b.nova.seconds:model.novaCharges>0?1:0;
+   const charge=model.nova.flight>0?1-model.nova.flight/b.nova.throwSeconds:model.nova.life>0?1-model.nova.life/b.nova.seconds:model.novaCharges>0?1:0;
    missile.style.setProperty('--charge',`${charge*100}%`);
    missile.setAttribute('aria-label',`${t('minigame.nova')} ${model.novaCharges}`);
    frame=requestAnimationFrame(tick);
