@@ -1,0 +1,320 @@
+{
+  "browser": "Chromium / SwiftShader",
+  "suites": [
+    {
+      "suite": "g2f",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": [
+        {
+          "touchOnly": true,
+          "upgradeSavedAfterReload": true,
+          "immediateContinue": true,
+          "navalTargetMatchesImpact": true,
+          "finiteAmmoRetry": true,
+          "waterAndPressure": true,
+          "muteSaved": true
+        }
+      ]
+    },
+    {
+      "suite": "g2g",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": [
+        {
+          "touch": true,
+          "truckGLBLoaded": true,
+          "truckJoystick": true,
+          "cannonTracksAim": true,
+          "waterAndPressure": true,
+          "rescueComplete": true,
+          "timeoutWithoutDamage": true,
+          "resultSummary": true,
+          "continueImmediately": true,
+          "fallbackAfterInjectedSlowFrames": true,
+          "exitWithoutReward": true
+        }
+      ]
+    },
+    {
+      "suite": "g2h",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": [
+        {
+          "fullWindow": true,
+          "depth": true,
+          "fallback": true,
+          "movingMuzzle": true,
+          "hydrantHose": true,
+          "refill": true,
+          "noOutsideRequests": true
+        }
+      ]
+    },
+    {
+      "suite": "g2j",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": [
+        {
+          "grace": true,
+          "hose": true,
+          "singleHint": true,
+          "refill": true,
+          "ladder": true,
+          "rescue": true,
+          "certificate": true,
+          "noTapThrough": true,
+          "collection": true,
+          "fallback": true
+        }
+      ]
+    },
+    {
+      "suite": "g2l",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": [
+        {
+          "noVisibleText": true,
+          "fullCity": true,
+          "roadOnly": true,
+          "crewBoards": true,
+          "hoseConnected": true,
+          "hydrant": true,
+          "ladder": true,
+          "certificatePersists": true,
+          "lowResolution": true,
+          "canvasFallback": true,
+          "repeatExit": true
+        }
+      ],
+      "worstFireRender": {
+        "triangles": 64345,
+        "drawCalls": 33,
+        "rendererTriangles": 50073,
+        "rendererDrawCalls": 29
+      }
+    },
+    {
+      "suite": "task016",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": [
+        {
+          "intentionallyCorruptSixGLBs": false
+        },
+        {
+          "intentionallyCorruptSixGLBs": true
+        }
+      ]
+    },
+    {
+      "suite": "g5",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": [
+        [
+          {
+            "id": "soccer",
+            "lockedLabel": "יש לבנות מגרש כדורגל",
+            "catalogBuilding": "soccer"
+          },
+          {
+            "id": "navalDuel",
+            "lockedLabel": "יש לבנות נמל ימי",
+            "catalogBuilding": "harbor"
+          },
+          {
+            "id": "fireRescue",
+            "lockedLabel": "יש לבנות תחנת כיבוי",
+            "catalogBuilding": "fireStation"
+          },
+          {
+            "id": "alienDefense",
+            "lockedLabel": "יש לבנות בסיס חיל אוויר",
+            "catalogBuilding": "airbase"
+          },
+          {
+            "id": "soccer",
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 844,
+              "height": 390
+            },
+            "viewport": {
+              "width": 844,
+              "height": 390
+            },
+            "pauseMinimum": 56,
+            "pauseFreezesModel": true,
+            "visibilityPause": true,
+            "twoBackConfirmations": true,
+            "stayResumes": true,
+            "cancelWithoutReward": true,
+            "noHistoryGrowth": true
+          },
+          {
+            "id": "navalDuel",
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 844,
+              "height": 390
+            },
+            "viewport": {
+              "width": 844,
+              "height": 390
+            },
+            "pauseMinimum": 56,
+            "pauseFreezesModel": true,
+            "visibilityPause": true,
+            "twoBackConfirmations": true,
+            "stayResumes": true,
+            "cancelWithoutReward": true,
+            "noHistoryGrowth": true
+          },
+          {
+            "id": "fireRescue",
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 844,
+              "height": 390
+            },
+            "viewport": {
+              "width": 844,
+              "height": 390
+            },
+            "pauseMinimum": 48,
+            "pauseFreezesModel": true,
+            "visibilityPause": true,
+            "twoBackConfirmations": true,
+            "stayResumes": true,
+            "cancelWithoutReward": true,
+            "noHistoryGrowth": true
+          },
+          {
+            "id": "alienDefense",
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 844,
+              "height": 390
+            },
+            "viewport": {
+              "width": 844,
+              "height": 390
+            },
+            "pauseMinimum": 48,
+            "pauseFreezesModel": true,
+            "visibilityPause": true,
+            "twoBackConfirmations": true,
+            "stayResumes": true,
+            "cancelWithoutReward": true,
+            "noHistoryGrowth": true
+          }
+        ]
+      ]
+    },
+    {
+      "suite": "g7",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": [
+        {
+          "singleTapSingleAction": true,
+          "boundedCityDetails": true,
+          "catalogBelowHud": true,
+          "usableCityCard": true,
+          "cityGamesReachable": true,
+          "visibleFocusAfterModal": true,
+          "portraitPauseReachable": true,
+          "portraitBackReachable": true,
+          "rotationResumesSameSession": true
+        }
+      ]
+    },
+    {
+      "suite": "g8",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": [
+        {
+          "trustedEntryClick": true,
+          "noFirstControlRequest": true,
+          "noRotationRequest": true,
+          "backAndResume": true,
+          "pausedCountdown": true,
+          "retainedFullscreenBetweenGames": true,
+          "coldDownloadBudgets": true,
+          "errors": [],
+          "outside": []
+        }
+      ],
+      "fireColdDownload": {
+        "id": "fireRescue",
+        "cityBytes": 5826606,
+        "additionalBytes": 3376607
+      }
+    },
+    {
+      "suite": "g3d",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": [
+        {
+          "fullWindow": true,
+          "threePrimaryCircles64": true,
+          "manualSwitch48": true,
+          "floatingStick": true,
+          "threeTouchContacts": true,
+          "directedChargedShot": true,
+          "directedChargedPass": true,
+          "receiptTransfersSameTick": true,
+          "automaticSwitchHysteresis": true,
+          "pauseFreezes": true,
+          "goalAndCelebration": true,
+          "qualityFallback": true,
+          "invalidGLBFallback": true,
+          "handPreferenceSavedBeforeGame": true,
+          "orientationLockFailureHandled": true,
+          "lab404": true
+        }
+      ]
+    }
+  ]
+}

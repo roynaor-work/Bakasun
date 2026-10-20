@@ -1959,56 +1959,60 @@
    "levels": [
     {
      "difficulty": 1,
-     "flames": 2,
+     "flames": 3,
      "seconds": 46,
      "water": 110,
-     "growthPerSecond": 0.006,
+     "growthPerSecond": 0.009,
      "points": 25,
      "winMoney": 30,
      "winParts": 0,
      "spreadSeconds": 20,
-     "spreadCount": 7,
+     "spreadCount": 6,
      "refillWater": 200,
-     "parSeconds": 7.2,
+     "parSeconds": 10.5,
      "parWater": 60,
      "fireKinds": 1,
      "feature": "feature.fire.1",
      "rescueCount": 0,
      "wind": 0,
      "eruptionSeconds": 14,
-     "resistance": 1
+     "resistance": 1,
+     "reigniteSeconds": 0,
+     "ladderMode": "simple"
     },
     {
      "difficulty": 2,
-     "flames": 3,
+     "flames": 4,
      "seconds": 50,
      "water": 107,
-     "growthPerSecond": 0.009000000000000001,
+     "growthPerSecond": 0.023,
      "points": 28,
      "winMoney": 42,
      "winParts": 0,
-     "spreadSeconds": 19,
-     "spreadCount": 6,
+     "spreadSeconds": 12,
+     "spreadCount": 5,
      "refillWater": 200,
-     "parSeconds": 9.0,
+     "parSeconds": 13,
      "parWater": 75,
      "fireKinds": 1,
      "feature": "feature.fire.2",
      "rescueCount": 0,
      "wind": 0,
-     "eruptionSeconds": 13,
-     "resistance": 1
+     "eruptionSeconds": 10,
+     "resistance": 1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "simple"
     },
     {
      "difficulty": 3,
      "flames": 4,
      "seconds": 54,
      "water": 104,
-     "growthPerSecond": 0.012,
+     "growthPerSecond": 0.032,
      "points": 31,
      "winMoney": 54,
      "winParts": 0,
-     "spreadSeconds": 18,
+     "spreadSeconds": 11,
      "spreadCount": 5,
      "refillWater": 200,
      "parSeconds": 16.2,
@@ -2017,8 +2021,10 @@
      "feature": "feature.fire.3",
      "rescueCount": 1,
      "wind": 0,
-     "eruptionSeconds": 12,
-     "resistance": 1
+     "eruptionSeconds": 9,
+     "resistance": 1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "simple"
     },
     {
      "difficulty": 4,
@@ -2039,7 +2045,9 @@
      "rescueCount": 1,
      "wind": 0,
      "eruptionSeconds": 7.1,
-     "resistance": 1
+     "resistance": 1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "moving"
     },
     {
      "difficulty": 5,
@@ -2060,7 +2068,9 @@
      "rescueCount": 1,
      "wind": 0,
      "eruptionSeconds": 6.8,
-     "resistance": 1
+     "resistance": 1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "clear"
     },
     {
      "difficulty": 6,
@@ -2081,7 +2091,9 @@
      "rescueCount": 2,
      "wind": 0,
      "eruptionSeconds": 6.5,
-     "resistance": 1
+     "resistance": 1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "sequence"
     },
     {
      "difficulty": 7,
@@ -2102,7 +2114,9 @@
      "rescueCount": 2,
      "wind": 0,
      "eruptionSeconds": 6.2,
-     "resistance": 1.4
+     "resistance": 1.4,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "wind"
     },
     {
      "difficulty": 8,
@@ -2123,7 +2137,9 @@
      "rescueCount": 2,
      "wind": 6,
      "eruptionSeconds": 5.9,
-     "resistance": 1.85
+     "resistance": 1.85,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "wind"
     },
     {
      "difficulty": 9,
@@ -2144,7 +2160,9 @@
      "rescueCount": 2,
      "wind": 10,
      "eruptionSeconds": 5.6,
-     "resistance": 2.4
+     "resistance": 2.4,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "wind"
     },
     {
      "difficulty": 10,
@@ -2165,7 +2183,9 @@
      "rescueCount": 3,
      "wind": 14,
      "eruptionSeconds": 5.300000000000001,
-     "resistance": 3.1
+     "resistance": 3.1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "wind"
     }
    ],
    "sites": [
@@ -2601,7 +2621,7 @@
     "path": "assets/models/hydrant-512.glb",
     "rotationY": 0,
     "scale": 1,
-    "height": 1.15,
+    "height": 1.9,
     "position": [
      7.3,
      0.1,
@@ -2818,7 +2838,7 @@
     "canvasLeadFraction": 0.15
    },
    "ui": {
-    "actionSize": 62,
+    "actionSize": 80,
     "smallActionSize": 54,
     "stickSize": 104,
     "clockSize": 46,
@@ -2826,6 +2846,13 @@
     "arrowInset": 0.12,
     "arrowDistance": 60,
     "hintPulseSeconds": 1.2
+   },
+   "ladder": {
+    "accessSeconds": 1.5,
+    "floorSeconds": 2.8,
+    "floorHeight": 1.6,
+    "stableTolerance": 0.38,
+    "stabilizePower": 1.6
    }
   },
   "navalDuel": {
