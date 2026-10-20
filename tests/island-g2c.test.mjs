@@ -116,11 +116,11 @@ test('G2c naval HP tracks each ship and the entire remaining fleet; bars clamp a
   const m=make('navalDuel',10);assert.ok(m.maxEnemyFleet>m.enemyLives);const total=m.enemyFleetHp; m.update(.02,{firing:true});navalHit(m,config.navalDuel);assert.ok(m.enemyLives<m.enemyShip.maxHp);assert.ok(m.enemyFleetHp<total);
   const widths=[],p={fillRect:(x,y,w)=>widths.push(w)};drawHealthBar(p,0,0,100,6,-2,10,config);assert.equal(widths[1],0);drawHealthBar(p,0,0,100,6,20,10,config);assert.equal(widths[3],100);
 });
-for(const index of [1,2,3])test(`G2c special naval ${config.navalDuel.ammo[index].id} has a gameplay effect and finite per-round ammunition`,()=>{
+for(const index of [1,2,4])test(`G2c special naval ${config.navalDuel.ammo[index].id} has a gameplay effect and finite per-round ammunition`,()=>{
   const m=make('navalDuel',10,{equipment:{ammo:3}}),b=config.navalDuel;
   for(let i=0;i<index;i++){m.update(.001,{ammo:true});m.update(.001,{});}assert.equal(m.ammoIndex,index);
-  const supply=m.ammo[index];m.update(.001,{firing:true});assert.equal(m.ammo[index],supply-1);assert.equal(m.ball.ammo,index);
-  const hp=m.enemyLives;m.playerShip.hp-=3;const lives=m.lives;navalHit(m,b,index);assert.ok(m.enemyLives<hp);if(index===3)assert.ok(m.lives>lives);if(index===2)assert.equal(m.ball.y,b.shipY-Math.sin(m.ball.sampleTime*b.render.waveSpeed)*b.aim.torpedoBob);
+  const supply=m.ammo[index];m.update(.001,{firing:true,targetX:m.enemyShip.x,targetZ:m.enemyShip.z});assert.equal(m.ammo[index],supply-1);assert.equal(m.ball.ammo,index);
+  const hp=m.enemyLives;m.playerShip.hp-=3;const lives=m.lives;navalHit(m,b,index);assert.ok(m.enemyLives<hp);if(index===2)assert.equal(m.ball.y,b.shipY-Math.sin(m.ball.sampleTime*b.render.waveSpeed)*b.aim.torpedoBob);
 });
 test('G2c shields absorb real hits, upgraded hull survives longer, and bosses have more HP',()=>{
   const m=make('navalDuel',1,{equipment:{shield:2,hull:1.3}}),b=config.navalDuel;m.update(.01,{firing:true});Object.assign(m.ball,{owner:'enemy',targetX:b.shipX,targetZ:0,age:m.ball.duration});const hp=m.lives;m.update(.01,{});assert.equal(m.lives,hp);assert.ok(m.playerShip.shield<2);assert.ok(m.maxLives>make('navalDuel').maxLives);

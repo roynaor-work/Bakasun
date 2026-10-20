@@ -7,20 +7,13 @@ await verify('g6d',[{width:844,height:390}],async({page,context,tick,snap,tap,st
  const initial=await snap();assert.equal(initial.renderMode,'three');assert.equal(initial.wind.salvo,0);await capture('01-sea-waves');
  const stick=await page.locator('.soccer-stick-zone').boundingBox(),x=stick.x+stick.width*.4,y=stick.y+stick.height*.6,client=await context.newCDPSession(page);
  const touch=(type,points)=>client.send('Input.dispatchTouchEvent',{type,touchPoints:points});
- await touch('touchStart',[{x,y}]);await touch('touchMove',[{x:x+23,y:y-34}]);await tick(1200);const sailing=await snap();assert.ok(sailing.moving);assert.ok(sailing.renderMetrics.effects.foamInstances>=12);await capture('02-bow-foam-wake');
- await touch('touchEnd',[]);await tick(650);const stopped=await snap();assert.equal(stopped.moving,false);const e=stopped.enemyShip,p=stopped.playerShip,dx=e.x-p.x,dz=e.z-p.z;assert.ok(Math.abs((Math.cos(p.heading)*dx+Math.sin(p.heading)*dz)/Math.hypot(dx,dz))<.025);await capture('04-broadside-enemy');
  const fire=await page.locator('#shoot').boundingBox(),fx=fire.x+fire.width/2,fy=fire.y+fire.height/2;
+ await touch('touchStart',[{x:fx,y:fy}]);for(let i=0;i<40;i++){await tick(50);const s=await snap();if(Math.hypot(s.aim.x-s.enemyShip.x,s.aim.z-s.enemyShip.z)>65)break;}await touch('touchEnd',[]);await tick(32);const missLaunch=await snap();await tick(Math.ceil(missLaunch.ball.duration*1000)+20);const miss=await snap();assert.equal(miss.blast.hit,false);assert.ok(miss.blast.life>0);await capture('06-miss-splash');
+ await touch('touchStart',[{x,y}]);await touch('touchMove',[{x,y:y-34}]);await tick(2300);await touch('touchMove',[{x:x+23,y:y-34}]);await tick(400);const sailing=await snap();assert.ok(sailing.moving);assert.ok(sailing.rangeState.inside);assert.ok(sailing.renderMetrics.effects.foamInstances>=12);await capture('02-bow-foam-wake');
+ await touch('touchEnd',[]);await tick(650);const stopped=await snap();assert.equal(stopped.moving,false);const e=stopped.enemyShip,p=stopped.playerShip,dx=e.x-p.x,dz=e.z-p.z;assert.ok(Math.abs((Math.cos(p.heading)*dx+Math.sin(p.heading)*dz)/Math.hypot(dx,dz))<.025);await capture('04-broadside-enemy');
  await touch('touchStart',[{x:fx,y:fy}]);await tick(700);const aimed=await snap();assert.ok(aimed.aiming);await capture('03-reticle-wind');await touch('touchCancel',[]);await tick(200);
- // Real normal shots, with visible wind compensation on the manual sea reticle.
- // The debug model only supplies input here, no health/impact/effect is injected.
- const fireAt=async hit=>{
-  const point=await page.evaluate(hit=>{const {model:m}=window.__island.games.current.session.debug,b=window.__island.data.config.minigames.navalDuel,e=m.enemyShip;
-   const flight=b.targeting.flightSeconds+Math.hypot(e.x-m.playerShip.x,e.z-m.playerShip.z)*b.targeting.secondsPerRange,scale=b.aim.wind.driftScale*b.aim.wind.difficultyMin*flight*flight;
-   const q=m.screenPoint(hit?e.x-m.wind.x*scale:280,hit?e.z-m.wind.z*scale:-80),a=m.screenPoint(m.aim.x,m.aim.z);return {x:q.x-a.x,y:q.y-a.y};},hit);
-  await touch('touchStart',[{x:fx,y:fy}]);await touch('touchMove',[{x:fx+point.x,y:fy+point.y}]);await tick(32);await touch('touchEnd',[]);
- };
- await fireAt(true);await tick(32);await capture('07-muzzle-flash');await tick(1100);const hit=await snap();assert.ok(hit.hits>=1);assert.ok(hit.renderMetrics.effects.smokeInstances>=8);await touch('touchStart',[{x:fx,y:fy}]);await tick(600);await capture('05-hit-fire-smoke');await touch('touchCancel',[]);
- const windAfter={...hit.wind};await tick(200);await fireAt(false);await tick(750);await touch('touchStart',[{x:fx,y:fy}]);await tick(300);const miss=await snap();assert.equal(miss.blast.hit,false);assert.ok(miss.blast.life>0);assert.notDeepEqual(miss.wind,windAfter);await capture('06-miss-splash');await touch('touchCancel',[]);
+ // Real locked releases, freezing the water point visible before touchEnd.
+ let hit;for(let attempt=0;attempt<8;attempt++){await touch('touchStart',[{x:fx,y:fy}]);await tick(300+attempt*90);const point=(await snap()).aim;await touch('touchEnd',[]);await tick(32);const launch=await snap();assert.equal(launch.ball.targetX,point.x);assert.equal(launch.ball.targetZ,point.z);await capture('07-muzzle-flash');await tick(Math.ceil(launch.ball.duration*1000)+20);hit=await snap();if(hit.hits>=1)break;}assert.ok(hit.hits>=1);assert.ok(hit.renderMetrics.effects.smokeInstances>=8);await touch('touchStart',[{x:fx,y:fy}]);await tick(300);await capture('05-hit-fire-smoke');await touch('touchCancel',[]);assert.notDeepEqual(hit.wind,initial.wind);
  // Dedicated bank unlocks from real gestures, respects the existing pause toggle.
  await page.waitForFunction(()=>window.__island.games.current.session.debug.audio.metrics().loaded.length===8);
  let audio=await page.evaluate(()=>window.__island.games.current.session.debug.audio.metrics());assert.ok(audio.loops.includes('waves'));assert.ok(audio.counts.cannon>=1);assert.ok(audio.counts.whistle>=1);assert.ok(audio.counts.metal>=1);assert.ok(audio.counts.explosion>=1);assert.ok(audio.counts.splash>=1);

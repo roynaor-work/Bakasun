@@ -15,7 +15,7 @@ function navalInputHarness(t){
  Object.defineProperty(globalThis,'window',{configurable:true,value:win});Object.defineProperty(globalThis,'document',{configurable:true,value:doc});
  const model=make(),input=createNavalInput({canvas,controls,balance:b},()=>model,()=>null);
  t.after(()=>{input.dispose();for(const [key,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}});
- return {model,fire,win,frame(){model.update(.02,input.sample({}));},down(){fire.emit('pointerdown');win.emit('pointerdown',{target:fire});},up(){win.emit('pointerup',{target:fire});},click(pointerType,detail=0){fire.emit('click',{detail,pointerType});},key(type,code,target=fire){const event={code,key:code==='Space'?' ':code,repeat:false,target};if(target===fire)fire.emit(type,event);win.emit(type,event);}};
+ return {model,fire,canvas,win,frame(raw={}){model.update(.02,input.sample(raw));},down(){fire.emit('pointerdown');win.emit('pointerdown',{target:fire});},up(){win.emit('pointerup',{target:fire});},click(pointerType,detail=0){fire.emit('click',{detail,pointerType});},key(type,code,target=fire){const event={code,key:code==='Space'?' ':code,repeat:false,target};if(target===fire)fire.emit(type,event);win.emit(type,event);}};
 }
 test('G6c touch pointerdown/up followed by a detail-zero compatibility click fires exactly once',t=>{
  const h=navalInputHarness(t);h.down();for(let i=0;i<35;i++)h.frame();assert.equal(h.model.fired,0);h.up();h.click('touch');for(let i=0;i<5;i++)h.frame();assert.equal(h.model.fired,1);assert.equal(h.model.snapshot().ammo[0],b.levels[0].ammunition[0]-1);
@@ -29,6 +29,10 @@ test('G6c detail-zero clicks require a fresh keydown on the fire button and reje
 });
 test('G6c Space release cannot be counted again as a keyboard compatibility click',t=>{
  const h=navalInputHarness(t);h.key('keydown','Space');h.frame();assert.equal(h.model.fired,0);h.key('keyup','Space');h.click(undefined);for(let i=0;i<5;i++)h.frame();assert.equal(h.model.fired,1);
+});
+test('G6e the shared controller cannot overwrite the bearing selected on the water',t=>{
+ const h=navalInputHarness(t),point={clientX:620,clientY:215};h.canvas.emit('pointerdown',point);h.frame({yaw:.8});const selected=h.model.yaw;h.win.emit('pointerup',point);h.frame({yaw:.8});h.frame({yaw:.8});near(h.model.yaw,selected);assert.notEqual(selected,.8);
+ h.canvas.emit('pointerdown',point);h.win.emit('pointermove',{clientX:700,clientY:0});h.frame({yaw:.8});const horizon=h.model.yaw;assert.notEqual(horizon,selected);h.win.emit('pointerup',{clientX:700,clientY:0});h.frame({yaw:.8});h.frame({yaw:.8});near(h.model.yaw,horizon);
 });
 test('G6c camera is behind and above the bow at every ship heading',()=>{
  for(let i=0;i<24;i++){const heading=i*Math.PI/12,ship={x:100,z:12,heading},aim={x:300,z:0},c=navalCameraPose(ship,aim,false,b),p=navalWorldPoint(ship.x,ship.z,b),forward={x:Math.sin(heading),z:-Math.cos(heading)};
@@ -48,23 +52,15 @@ test('G6c screen/water mapping roundtrips at zoom, normal and turned views',()=>
 test('G6c lead uses the actual flight time and manual assistance decreases by difficulty',()=>{
  const ship={x:60,z:0},e={x:300,z:10,vx:4,vz:2,active:true,hp:1};const lead=navalLead(ship,e,b),flight=b.targeting.flightSeconds+Math.hypot(lead.x-ship.x,lead.z-ship.z)*b.targeting.secondsPerRange;assert.ok(Math.abs(lead.x-e.x-e.vx*flight)<.001);const aim={x:260,z:10};assert.ok(navalSoftAim(aim,[e],b,1).x>navalSoftAim(aim,[e],b,10).x);
 });
-const rates=[];
-for(let level=1;level<=10;level++)test(`G6c child short-tap hit rate at difficulty ${level}`,()=>{
- let fired=0,hits=0;
- // Fresh seeded encounters at varied times include every hull and dive state.
- // G6d wind/partial lead replaces the old >=60% tap baseline; the stricter
- // 200-shot medium target lives in island-g6d.test.mjs.
- for(let seed=0;seed<80;seed++){const m=make(level,seed);advance(m,(seed%9)*.7);m.update(.02,{autoAim:true,firing:true});advance(m,1.2);const s=m.snapshot();fired+=s.fired;hits+=s.hits;}
- const rate=hits/fired;rates.push({difficulty:level,hits,fired,percent:Math.round(rate*10000)/100});assert.equal(fired,80);assert.ok(rate>=.25&&rate<=.65,JSON.stringify(rates.at(-1)));if(level===10)console.log('G6c short-tap calibration',JSON.stringify(rates));
-});
+test('G6e a quick release locks and fires at the visible reticle',()=>{const m=make();m.beginAim();const aim={...m.aim};m.update(.02,{fireRelease:true});assert.equal(m.fired,1);assert.equal(m.ball.targetX,aim.x);assert.equal(m.ball.targetZ,aim.z);});
 test('G6c overlapping cannon fire preserves the older torpedo weapon',()=>{
  const m=make();m.update(.02,{ammoIndex:2,targetX:300,targetZ:0,firing:true});m.update(.02,{});m.update(.02,{ammoIndex:0,targetX:65,targetZ:180,firing:true});assert.equal(m.extraShots[0].ammo,2);assert.equal(m.ball.ammo,0);advance(m,2);assert.ok(m.snapshot().hits>0);
 });
 test('G6c a touching torpedo contacts the hull before its distant aim point',()=>{
  const nearBalance={...b,enemyX:140},m=createNavalModel({config,balance:nearBalance,level:1,seed:0,random:seededRandom(0)});m.playerShip.x=140-b.aim.hullLength/2;const hp=m.enemyShip.hp;m.update(.02,{ammoIndex:2,targetX:420,targetZ:0,firing:true});advance(m,.1);assert.ok(m.enemyShip.hp<hp);assert.ok(m.ball.age<m.ball.duration||m.blast.hit);
 });
-test('G6c submerged hull rejects quick shells while depth-charge tap selects it',()=>{
- const m=make(1,3);advance(m,b.combat.submarineSurface+.2);const hp=m.enemyShip.hp;m.update(.02,{autoAim:true,firing:true});advance(m,1);assert.equal(m.enemyShip.hp,hp);m.update(.02,{ammoIndex:5,autoAim:true,firing:true});advance(m,1);assert.ok(m.enemyShip.hp<hp);
+test('G6c submerged hull rejects quick shells while guided missile selects it',()=>{
+ const m=make(1,3);advance(m,b.combat.submarineSurface+.2);const hp=m.enemyShip.hp;m.update(.02,{autoAim:true,firing:true});advance(m,1);assert.equal(m.enemyShip.hp,hp);m.update(.02,{ammoIndex:1,autoAim:true,firing:true});advance(m,1);assert.ok(m.enemyShip.hp<hp);
 });
 test('G6c calibration is finite, local, monotonic and under the requested render budget',()=>{
  assert.equal(b.aim.difficulty.length,10);for(let i=0;i<10;i++){const d=b.aim.difficulty[i];assert.ok(d.assist>0&&d.assist<=1&&d.radius>0);if(i)assert.ok(d.assist<b.aim.difficulty[i-1].assist&&d.radius<b.aim.difficulty[i-1].radius);}

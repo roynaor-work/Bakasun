@@ -14,6 +14,6 @@ export function pilotInput(id,m,b,memory={}){
   return {...drive,x:target?.x,y:target?.y,firing:!memory.pumping&&!memory.refilling,refill:memory.refilling,charge:memory.pumping||memory.refilling};
  }
  memory.pressed=m.phase==='aim'&&!memory.pressed;
- const heal=m.lives<m.maxLives*.7&&m.ammo[3]>0,kind=heal?3:m.ammo[1]>0?1:m.ammo[2]>0?2:m.ammo[0]>0?0:3;
+ const heal=m.lives<m.maxLives*.7&&m.ammo[5]>0,kind=heal?5:m.ammo[1]>0?1:m.ammo[2]>0?2:m.ammo[0]>0?0:4;
  return {targetX:m.enemyShip.x,targetZ:m.enemyShip.z,ammoIndex:kind,firing:memory.pressed};
 }
