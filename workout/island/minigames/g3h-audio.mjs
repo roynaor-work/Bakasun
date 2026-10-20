@@ -58,7 +58,7 @@ export function createG3hAudio({storage,AudioContext=globalThis.AudioContext||gl
    if(ambienceGain)ambienceGain.gain.setTargetAtTime(.09+excitement*.22,context.currentTime,.4);
   },
   setPaused(value){paused=Boolean(value);pending.length=0;sync();if(paused){for(const source of sources){try{source.stop();}catch{}}if(context?.state==='running')void context.suspend().catch(()=>{});}else void unlock();},
-  get snapshot(){return {muted,paused,disposed,loaded:[...buffers.keys()],crowd:Boolean(ambience),excitement,counts:{...counts},active:sources.size};},
+  get snapshot(){return {muted,paused,disposed,contextState:context?.state||'uninitialized',loaded:[...buffers.keys()],crowd:Boolean(ambience),excitement,counts:{...counts},active:sources.size};},
   get ready(){return loading||Promise.resolve();},
   dispose({finish=false}={}){if(disposed)return;disposed=true;pending.length=0;ambience?.stop();if(!finish)for(const source of sources){try{source.stop();}catch{}}if(context&&context.state!=='closed'&&(!finish||!sources.size))void context.close().catch(()=>{});}
  };

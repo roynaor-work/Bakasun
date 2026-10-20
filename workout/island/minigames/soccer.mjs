@@ -120,7 +120,6 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if((manual||forceLoft)&&pass&&destination.kind==='loft'&&!handRelease){
       const flight=config.passing.loftMinSeconds+power*config.passing.loftExtraSeconds,height=config.passing.loftMinHeight+power*config.passing.loftExtraHeight;
       s.ball.flight={age:0,duration:flight,height,fromX:s.ball.x,fromZ:s.ball.z,x:tx,z:tz};s.ball.vx=dx/flight;s.ball.vz=dz/flight;s.ball.vy=4*height/flight;
-
     }else if(pass&&!handRelease){s.ball.vy=0;s.ball.y=ph.ballRadius;}
     if(pass&&p.card.pass<config.card.initial){const error=(rng()-.5)*(config.card.initial-p.card.pass)*config.roster.passSpread;s.ball.vz+=error;}
     if(pass&&target&&p.team===0&&role!=='keeper')selectPlayer(target.id);
