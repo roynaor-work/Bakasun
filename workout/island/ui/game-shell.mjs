@@ -23,7 +23,7 @@ export class FullscreenEntry {
   }
 }
 
-const paths={install:'M12 3v12m-4-4 4 4 4-4M5 15v6h14v-6',play:'m9 5 11 7-11 7Z',exit:'M10 4H4v16h6m4-13 5 5-5 5m-5-5h14',sound:'m4 10 5-5v14l-5-5H1v-4Zm10-3a7 7 0 0 1 0 10',pause:'M8 5v14M16 5v14',close:'m6 6 12 12M18 6 6 18'};
+const paths={install:'M12 3v12m-4-4 4 4 4-4M5 15v6h14v-6',play:'m9 5 11 7-11 7Z',exit:'M10 4H4v16h6m4-13 5 5-5 5m-5-5h14',sound:'m4 10 5-5v14l-5-5H1v-4Zm10-3a7 7 0 0 1 0 10',muted:'m4 10 5-5v14l-5-5H1v-4Zm10-2 7 8m0-8-7 8',pause:'M8 5v14M16 5v14',close:'m6 6 12 12M18 6 6 18'};
 function shellIcon(name){const template=document.createElement('template');template.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';const svg=template.content.firstChild;svg.firstChild.setAttribute('d',paths[name]);return svg;}
 function iconButton(action,label,icon){const b=document.createElement('button');b.type='button';b.className='secondary-button shell-icon';b.dataset.action=action;b.title=label;b.setAttribute('aria-label',label);b.append(shellIcon(icon));return b;}
 
@@ -153,24 +153,21 @@ export class GameShell {
     if(this.disposed)return;
     this.paused=true;this.session?.setPaused?.(true);this.sound.setPaused(true);
     this.dialog.dataset.paused='true';this.stage.inert=this.controls.inert=true;
-    this.pauseButton.textContent=this.t('game.resume');
-    this.pauseButton.setAttribute('aria-label',this.t('game.resume'));
     this.sheet?.remove();const sheet=this.sheet=document.createElement('section');sheet.className='game-pause-sheet';sheet.dataset.pauseKind=kind;
     sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');sheet.setAttribute('aria-label',this.t(kind==='exit'?'game.exitQuestion':'game.paused'));
     const card=document.createElement('div');card.className='game-pause-card';
-    const heading=document.createElement('h2');heading.className='shell-pause-symbol';heading.setAttribute('aria-label',this.t(kind==='exit'?'game.exitQuestion':'game.paused'));heading.append(shellIcon(kind==='exit'?'exit':'pause'));card.append(heading);
+    const heading=document.createElement('h2');heading.className='shell-pause-heading';heading.setAttribute('aria-label',this.t(kind==='exit'?'game.exitQuestion':'game.paused'));card.append(heading);
     if(content)card.append(content);
     const actions=document.createElement('div');actions.className='game-pause-actions';
     const resume=iconButton('game-resume',this.t('game.resume'),'play');resume.onclick=()=>this.resume();
     const exit=iconButton('game-exit',this.t('game.returnIsland'),'exit');exit.onclick=this.onExit;
-    const mute=iconButton('game-pause-sound',this.t('sound.mute'),'sound');const label=()=>{mute.setAttribute('aria-label',this.t(this.sound.muted?'sound.unmute':'sound.mute'));mute.setAttribute('aria-pressed',String(this.sound.muted));};mute.onclick=()=>{this.sound.setMuted(!this.sound.muted);label();};label();card.append(mute);
-    actions.append(resume,exit);card.append(actions);sheet.append(card);this.dialog.append(sheet);resume.focus();
+    const mute=iconButton('game-pause-sound',this.t('sound.mute'),'sound');const label=()=>{const text=this.t(this.sound.muted?'sound.unmute':'sound.mute');mute.title=text;mute.setAttribute('aria-label',text);mute.setAttribute('aria-pressed',String(this.sound.muted));mute.replaceChildren(shellIcon(this.sound.muted?'muted':'sound'));};mute.onclick=()=>{this.sound.setMuted(!this.sound.muted);label();};label();
+    actions.append(resume,mute,exit);card.append(actions);sheet.append(card);this.dialog.append(sheet);resume.focus();
   }
   resume(){
     if(this.disposed||document.hidden)return;
     this.paused=false;this.sheet?.remove();this.sheet=null;
-    this.dialog.dataset.paused='false';this.pauseButton.textContent=this.t('game.pause');
-    this.pauseButton.setAttribute('aria-label',this.t('game.pause'));
+    this.dialog.dataset.paused='false';
     this.applyPause();if(!this.orientationBlocked){this.sound.unlock();this.stage.querySelector('canvas')?.focus();}
     else this.rotationOverlay.querySelector('button')?.focus();
   }
