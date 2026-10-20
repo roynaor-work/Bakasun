@@ -1,0 +1,77 @@
+{
+  "base": "995e285",
+  "branch": "codex/g2m-aliens",
+  "dataVersion": "g9-20261020-1",
+  "saveVersion": 15,
+  "unit": {
+    "command": "node --test tests/*.mjs",
+    "tests": 1790,
+    "pass": 1752,
+    "fail": 0,
+    "skipped": 38
+  },
+  "browser": {
+    "g2m": {
+      "viewports": [
+        [
+          844,
+          390
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "passed": true,
+      "portrait": "rotation guard pauses the game; rotating to landscape resumes the full scenario"
+    },
+    "g2f": {
+      "viewport": [
+        844,
+        390
+      ],
+      "passed": true
+    },
+    "g2g": {
+      "viewport": [
+        844,
+        390
+      ],
+      "passed": true
+    },
+    "g2h": {
+      "viewport": [
+        844,
+        390
+      ],
+      "passed": true
+    },
+    "g2i": {
+      "viewport": [
+        844,
+        390
+      ],
+      "passed": true
+    },
+    "g2k": {
+      "viewport": [
+        844,
+        390
+      ],
+      "passed": true
+    }
+  },
+  "audio": {
+    "oggFiles": 7,
+    "bytes": 51252,
+    "license": "CC0-1.0",
+    "decoded": 7
+  },
+  "scope": {
+    "configAlienDefenseOnly": true,
+    "stringsAlienKeysOnly": true,
+    "protectedFilesUnchanged": true
+  },
+  "physicalPhoneTested": false,
+  "screenshotCount": 8
+}

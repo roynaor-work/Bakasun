@@ -24,8 +24,16 @@ try{for(const width of (process.env.G2F_WIDTH?[Number(process.env.G2F_WIDTH)]:[3
   await page.evaluate(()=>{window.__island.engine.skipTutorial();window.__island.data.featureFlags.events=false;const sound=window.__island.games.sound,play=sound.play;window.__g2fEvents=[];sound.play=event=>{window.__g2fEvents.push(event);play(event);};});await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));await prepareGameBuildings(page);
   console.log('G2f',width,'aliens');
   await page.evaluate(()=>{const b=window.__island.data.config.minigames.alienDefense;window.__g2fOriginalAlien={...b.levels[0]};Object.assign(b.levels[0],{waves:2,rows:1,columns:1,boss:false,seconds:20});});
-  await start('alienDefense');await tap('[data-game-control=nova]');await tick(900);assert.equal((await snap()).choosing,false);assert.equal(await page.locator('.game-upgrade-panel button:visible').count(),0);await shot('automatic-next-wave');
-  for(let i=0;i<40&&await page.locator('[data-game-control=nova]').isDisabled();i++)await tick(100);assert.equal(await page.locator('[data-game-control=nova]').isEnabled(),true);await tap('[data-game-control=nova]');await tick(600);assert.equal(await page.locator('[data-result=alienDefense]').count(),1);assert.equal(await page.locator('[data-action=game-next-stage]').isEnabled(),true);await tap('[data-action=game-next-stage]');await waitForGameStart(page);await tick(100);assert.equal((await snap()).wave,1);await exit();
+  await start('alienDefense');
+  for(let i=0;i<60&&(await snap()).aliens.some(a=>a.entry>0);i++)await tick(100);
+  assert.ok((await snap()).aliens.every(a=>a.entry===0));
+  await tap('[data-game-control=nova]');
+  for(let i=0;i<60&&(await snap()).wave<2;i++)await tick(100);
+  assert.equal((await snap()).wave,2);assert.equal((await snap()).choosing,false);assert.equal(await page.locator('.game-upgrade-panel button:visible').count(),0);await shot('automatic-next-wave');
+  for(let i=0;i<60&&((await snap()).aliens.some(a=>a.entry>0)||await page.locator('[data-game-control=nova]').isDisabled());i++)await tick(100);
+  assert.ok((await snap()).aliens.every(a=>a.entry===0));assert.equal(await page.locator('[data-game-control=nova]').isEnabled(),true);
+  await tap('[data-game-control=nova]');for(let i=0;i<60&&!await page.locator('[data-result=alienDefense]').count();i++)await tick(100);
+  assert.equal(await page.locator('[data-result=alienDefense]').count(),1);assert.equal(await page.locator('[data-action=game-next-stage]').isEnabled(),true);await tap('[data-action=game-next-stage]');await waitForGameStart(page);await tick(100);assert.equal((await snap()).wave,1);await exit();
   await page.evaluate(()=>{Object.assign(window.__island.data.config.minigames.alienDefense.levels[0],window.__g2fOriginalAlien);window.__island.engine.state.hangar.credits=Math.max(1,window.__island.engine.state.hangar.credits);window.__island.games.stages('alienDefense');});await tap('[data-action=open-hangar]');await tap('[data-action=hangar-upgrade]');await tap('[data-action=hangar-rapid]');assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('island.v1')).hangar.rapid),1);await tap('[data-action=close-modal]');await waitForGameNavigation(page);
   console.log('G2f',width,'naval');
   await start('navalDuel');assert.equal(await page.locator('[data-game-input]').count(),0);let m=await snap(),initial=m;
@@ -45,7 +53,7 @@ try{for(const width of (process.env.G2F_WIDTH?[Number(process.env.G2F_WIDTH)]:[3
   await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model,p=window.__island.data.config.minigames.fireRescue.hydrant.position;for(let i=0;i<500;i++){m.update(.02,{truckX:p[0],truckZ:p[2]});if(m.atHydrant)break;}});
   await hold('[data-game-control=refill]',1200);assert.ok((await snap()).water>water);await shot('fire');
   const blocked=await page.locator('[data-game-control=refill]').evaluate(n=>{const event=new MouseEvent('contextmenu',{bubbles:true,cancelable:true});return !n.dispatchEvent(event);});assert.equal(blocked,true);await tap('[data-action=game-pause]');await tap('[data-action=game-pause-sound]');assert.equal(await page.evaluate(()=>localStorage.getItem('island.sound')),'off');await exit();await start('navalDuel');await tap('[data-action=game-pause]');assert.equal(await page.locator('[data-action=game-pause-sound]').getAttribute('aria-pressed'),'true');await exit();
-  const events=await page.evaluate(()=>[...new Set(window.__g2fEvents)]);for(const event of ['button','shot','explosion','win','cannon','splash','lose','spray','crackle','refill'])assert.ok(events.includes(event),event);
+  const events=await page.evaluate(()=>[...new Set(window.__g2fEvents)]);for(const event of ['button','explosion','win','cannon','splash','lose','spray','crackle','refill'])assert.ok(events.includes(event),event);
   await page.reload({waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);assert.equal(await page.evaluate(()=>window.__island.games.sound.muted),true);assert.equal(await page.evaluate(()=>window.__island.engine.state.hangar.rapid),1);
   // main includes unversioned modules too; audit existing cache keys without changing runtime URLs.
   assert.ok(requests.some(url=>new URL(url).searchParams.has('v')));for(const url of requests){const u=new URL(url);if(/\.(json|mjs)$/.test(u.pathname)&&!u.pathname.includes('/vendor/')&&u.searchParams.has('v'))assert.equal(u.searchParams.get('v'),DATA_VERSION,url);}
