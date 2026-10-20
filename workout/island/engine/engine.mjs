@@ -1,3 +1,4 @@
+import {installLearning} from '../learning/runtime.mjs?v=g9-20261020-1';
 import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=g9-20261020-1';
 import {recordStageWin} from '../activity/progress.mjs?v=g9-20261020-1';
 import {gameAvailability} from '../activity/availability.mjs?v=g9-20261020-1';
@@ -356,5 +357,6 @@ export function createEngine(data, options = {}) {
     return { ok: true, warningId: event.warningId, prepared: event.prepare?.({ ...context, state, engine }) };
   };
   for (const name of ['registerBuilding', 'registerSport', 'registerMinigame', 'registerEventType', 'registerMetric', 'registerIncomeSource']) engine[name] = record => { const result = registry[name](record); notify('registry', { id: record.id }); return result; };
+  installLearning(engine,changed);
   return engine;
 }

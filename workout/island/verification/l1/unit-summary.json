@@ -1,0 +1,27 @@
+{
+  "command": "node --test tests/*.mjs",
+  "total": 1959,
+  "passed": 1921,
+  "failed": 0,
+  "skipped": 38,
+  "L1": {
+    "file": "tests/island-l1.test.mjs",
+    "passed": 39,
+    "failed": 0
+  },
+  "generatorStress": {
+    "stationLevelCombinations": 28,
+    "roundsEach": 20,
+    "questions": 4480,
+    "semanticHistoryWindow": 24,
+    "repetitions": 0
+  },
+  "migrationFixture": "tests/fixtures/save-v15.json",
+  "nativeCloudSpeech": {
+    "apiAvailable": true,
+    "languages": [],
+    "realHebrewAudioAudited": false
+  },
+  "mergedMain": "a26cdf85d99810477c480a08bfe975f1a5718c8a",
+  "duration_ms": 133395.648781
+}

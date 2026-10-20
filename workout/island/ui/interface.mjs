@@ -336,10 +336,11 @@ export class IslandInterface {
       b.classList.toggle('locked', !!record.locked);
       b.setAttribute('aria-pressed', String(b.dataset.building === this.selected));
       const availability = placementAvailability(this.engine.state, this.engine.registry, record.id);
+      if(availability.reason==='reason.learningOrder')b.classList.add('locked');
       const hint = b.querySelector('.building-hint');
       const label = record.locked ? null : !availability.ok ? record.limit.kind === 'capacity' && availability.reason === record.limit.reason ? 'app.noNeed' : 'app.atLimit' : availability.recommended ? 'app.recommended' : null;
-      hint.textContent = label ? this.t(label) : '';
-      if (!record.locked && !availability.ok && record.limit.kind === 'unique') hint.textContent += ` · ${this.t('app.upgradeExisting')}`;
+      hint.textContent = availability.reason==='reason.learningOrder'?`${this.t('reason.learningOrder')}: ${this.label(this.getBuilding(record.unlockAfter),'building')}`:label?this.t(label):'';
+      if (!record.locked && !availability.ok && availability.reason!=='reason.learningOrder' && record.limit.kind === 'unique' && record.levels.length>1) hint.textContent += ` · ${this.t('app.upgradeExisting')}`;
       hint.hidden = !label;
       b.dataset.limit = record.limit?.kind ?? 'free';
       b.dataset.availability = !availability.ok ? 'limited' : availability.recommended ? 'recommended' : 'available';
@@ -350,6 +351,7 @@ export class IslandInterface {
     const building = this.getBuilding(id);
     if (!building) return;
     if (building.locked) { this.toast('reason.locked'); return; }
+    if(placementAvailability(this.engine.state,this.engine.registry,id).reason==='reason.learningOrder'){this.toast('reason.learningOrder');return;}
     this.closeInfo();
     this.movingId = null;
     this.selected = id;
@@ -413,7 +415,9 @@ export class IslandInterface {
     this.placement.hidden = true; this.syncPlacementLayout(); this.view.clearGhost(); this.updateCatalogState(); this.drawMission();
   }
   result(result) { if (result && !result.ok) this.toast(result.reason); return result; }
-  showInfo(id) {
+  showInfo(id, {manage=false}={}) {
+    const instance=this.engine.state.buildings.find(b=>b.id===id),station=this.getBuilding(instance?.typeId)?.learningStation;
+    if(!this.selected&&station&&!manage&&this.learningInterface){this.learningInterface.start(station);return;}
     if (this.selected) {
       const b = this.engine.state.buildings.find(b => b.id === id);
       if (b) this.updateGhost({ x: b.x, z: b.z });
@@ -427,7 +431,7 @@ export class IslandInterface {
   currentInfoSignature() {
     const state = this.engine.state;
     const instance=state.buildings.find(row=>row.id===this.infoId);
-    return JSON.stringify([instance, state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null]);
+    return JSON.stringify([instance, state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null,this.engine.learningStatus().locked]);
   }
   drawInfo() {
     const instance = this.engine.state.buildings.find(b => b.id === this.infoId);
@@ -480,6 +484,7 @@ export class IslandInterface {
     };
     actions.append(move);if(record.id!=='cityHall')actions.append(upgrade);if(record.removable!==false)actions.append(remove);this.info.append(actions);
     this.activityInterface?.decorateInfo(instance,actions);
+    if(record.learningStation){const learn=button(`${record.icon} לומדים`,'building-learn','primary-button');learn.onclick=()=>this.learningInterface.start(record.learningStation);actions.append(learn);}
     if(record.id==='cityHall'){this.view.showRadius(null);return;}
     if (nextLevel) {
       const nextInstance = { ...instance, level: instance.level + 1 };
@@ -636,6 +641,7 @@ export class IslandInterface {
   }
   showParent() {
     const modal = this.openModal('parent.title', 'parent.subtitle');
+    this.learningInterface?.decorateParent(modal);
     const exportButton = button(`↓ ${this.t('parent.export')}`, 'export', 'primary-button');
     exportButton.onclick = () => this.exportBackup();
     const file = el('input', 'import-file'); file.type = 'file'; file.accept = '.json,application/json'; file.id = 'island-import';

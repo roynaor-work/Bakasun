@@ -27,7 +27,7 @@ for(const [id,[building,label]]of Object.entries(requirements)){
  });
  test(`G5 ${id} locked action closes menu and opens its exact catalog building`,()=>{
   const {engine}=fixture(),calls=[],ui={closeModal:()=>calls.push('close'),openBuildingCatalog:id=>calls.push(id)};
-  const subject={engine,data,ui,availability:id=>gameAvailability(engine.state,data.config,id)};
+  const subject={engine,data,ui,requireDaily:()=>false,availability:id=>gameAvailability(engine.state,data.config,id)};
   assert.equal(ActivityInterface.prototype.requireBuilding.call(subject,id),true);assert.deepEqual(calls,['close',building]);addFacility(engine,building);calls.length=0;assert.equal(ActivityInterface.prototype.requireBuilding.call(subject,id),false);assert.deepEqual(calls,[]);
  });
 }
@@ -36,15 +36,15 @@ test('G5 new games buildings are regular code visuals, affordable, unique at eve
  assert.equal(engine.registry.buildings.get('harbor').requiresShore,true);assert.equal(engine.validatePlacement('harbor',4,8).reason,'reason.shore');assert.equal(engine.place('road',0,7).ok,true);const port=engine.place('harbor',0,8);assert.equal(port.ok,true);assert.equal(engine.place('harbor',0,10).reason,'reason.limit.harbor');
 });
 test('G5 every new city has one central, movable, permanent city hall before the unchanged tutorial steps',()=>{
- const {engine:e}=fixture(),h=e.state.buildings.find(b=>b.typeId==='cityHall');assert.equal(CURRENT_VERSION,15);assert.equal(STORAGE_KEY,'island.v1');assert.equal(e.state.version,15);assert.equal(e.state.buildings.filter(b=>b.typeId==='cityHall').length,1);assert.ok(Math.hypot(h.x+.5-8,h.z+.5-8)<=1);
+ const {engine:e}=fixture(),h=e.state.buildings.find(b=>b.typeId==='cityHall');assert.equal(CURRENT_VERSION,16);assert.equal(STORAGE_KEY,'island.v1');assert.equal(e.state.version,16);assert.equal(e.state.buildings.filter(b=>b.typeId==='cityHall').length,1);assert.ok(Math.hypot(h.x+.5-8,h.z+.5-8)<=1);
  assert.equal(validateSave(e.state,data,e.registry).ok,true);assert.equal(e.remove(h.id).reason,'reason.cityHallPermanent');assert.equal(e.place('cityHall',1,1).reason,'reason.limit.cityHall');assert.equal(e.move(h.id,0,0).ok,true);assert.equal(e.undo().ok,true);assert.deepEqual(e.state.buildings.find(b=>b.id===h.id),h);
  assert.deepEqual(data.tutorial.steps.map(s=>s.id),['house','road','fireStation','park','soccer']);assert.equal(strings['tutorial.cityHall'],'זו העירייה שלך');
 });
 test('G5 authentic a61f155 v8 fixture migrates to v9 without input mutation or loss, then reloads and imports',()=>{
- const f=fixture(),before=structuredClone(legacy),r=migrateSave(legacy,data,f.engine.registry);assert.equal(legacy.version,8);assert.equal(legacy.money,321);assert.ok(legacy.buildings.some(b=>b.typeId==='soccer'));assert.equal(r.ok,true);assert.equal(r.migrated,true);assert.equal(r.state.version,15);assert.deepEqual(legacy,before);
+ const f=fixture(),before=structuredClone(legacy),r=migrateSave(legacy,data,f.engine.registry);assert.equal(legacy.version,8);assert.equal(legacy.money,321);assert.ok(legacy.buildings.some(b=>b.typeId==='soccer'));assert.equal(r.ok,true);assert.equal(r.migrated,true);assert.equal(r.state.version,16);assert.deepEqual(legacy,before);
  for(const key of Object.keys(legacy).filter(k=>!['version','buildings'].includes(k)))assert.deepEqual(r.state[key],key==='players'?[...legacy.players,...data.players.filter(p=>!legacy.players.some(old=>old.id===p.id))]:key==='team'?{...legacy.team,sportWins:{soccer:legacy.team.wins,tennis:0}}:key==='minigameEquipment'?{...legacy[key],tennis:{speed:0,hit:0,serve:0}}:key==='minigameProgress'?{...legacy[key],tennis:{stage:1,stars:Array(10).fill(0)}}:key==='minigameLevels'?{...legacy[key],tennis:1}:legacy[key],key);
  assert.deepEqual(r.state.buildings.filter(b=>b.typeId!=='cityHall'),legacy.buildings);assert.equal(r.state.buildings.length,legacy.buildings.length+1);assert.equal(validateSave(r.state,data,f.engine.registry).ok,true);
- const direct=migrations[8](legacy,data);assert.deepEqual(legacy,before);assert.deepEqual(migrations[14](migrations[13](migrations[12](migrations[11](migrations[10](migrations[9](direct,data),data),data),data),data),data),r.state);
+ const direct=migrations[8](legacy,data);assert.deepEqual(legacy,before);assert.deepEqual(migrations[15](migrations[14](migrations[13](migrations[12](migrations[11](migrations[10](migrations[9](direct,data),data),data),data),data),data),data),r.state);
  f.storage.setItem(STORAGE_KEY,JSON.stringify(legacy));const loaded=createEngine(data,{storage:f.storage});assert.equal(loaded.storageStatus.ok,true);assert.equal(loaded.state.money,321);assert.equal(loaded.state.minigameEquipment.navalDuel.damage,2);assert.equal(loaded.importJSON(legacy).ok,true);assert.equal(loaded.state.buildings.filter(b=>b.typeId==='cityHall').length,1);assert.deepEqual([...f.values.keys()],[STORAGE_KEY]);
 });
 test('G5 a packed center chooses the closest free cell, never overwrites buildings and avoids a colliding city-hall ID',()=>{

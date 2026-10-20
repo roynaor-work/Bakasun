@@ -51,14 +51,16 @@ export class ActivityInterface {
   modal(title,subtitle,eventId) {
     this.switching=true;const dialog=this.ui.openModal(title,subtitle);this.switching=false;
     this.navigation.menu();
+    this.ui.view.paused=true;
     dialog.append(this.soundToggle());
     this.ui.previousFocus=this.ui.cityToggle;
     this.ui.modalCleanup=()=>this.cleanup(eventId);return dialog;
   }
   enabledGames(){return [...this.engine.registry.minigames.values()].filter(g=>this.data.featureFlags.minigames&&(!g.featureFlag||this.data.featureFlags[g.featureFlag]));}
   availability(id){return gameAvailability(this.engine.state,this.data.config,id);}
-  requireBuilding(id){const available=this.availability(id);if(available.ok)return false;this.ui.closeModal();this.ui.openBuildingCatalog(available.buildingId);return true;}
-  playButton(id,action,play){const available=this.availability(id);return button(this.t(available.ok?'minigame.play':available.reason),action,()=>available.ok?play():this.requireBuilding(id),'primary-button');}
+  requireDaily(id){if(['soccer','tennis','navalDuel','fireRescue','alienDefense'].includes(id)&&this.engine.learningStatus().locked){this.ui.learningInterface.daily();return true;}return false;}
+  requireBuilding(id){if(this.requireDaily(id))return true;const available=this.availability(id);if(available.ok)return false;this.ui.closeModal();this.ui.openBuildingCatalog(available.buildingId);return true;}
+  playButton(id,action,play){const available=this.availability(id),locked=this.engine.learningStatus().locked;return button(locked?'🔒 📚 משימת היום':this.t(available.ok?'minigame.play':available.reason),action,()=>{if(this.requireDaily(id))return;available.ok?play():this.requireBuilding(id);},'primary-button');}
   teamLabel(){const team=this.engine.state.team;return this.t('minigame.soccer.teamRank',{team:this.t(team.nameId),wins:team.wins,rank:this.t(this.data.config.minigames.soccer.teamRanks[team.rank].title)});}
   team(){
     const dialog=this.modal('minigame.soccer.teamCard','minigame.soccer.stagesHint');dialog.dataset.team='soccer';
@@ -102,7 +104,8 @@ export class ActivityInterface {
       actions.append(this.playButton(game.id,'game-play',()=>this.stages(game.id)),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
       if(game.id==='soccer')actions.append(button(this.t('soccer.training'),'soccer-training',()=>this.training()));
       const available=this.availability(game.id);
-      if(!available.ok){card.dataset.locked='true';card.append(el('p','game-locked',this.t(available.reason)));}
+      if(this.engine.learningStatus().locked){card.dataset.dailyLocked='true';card.dataset.locked='true';card.append(el('p','game-locked','🔒 📚 קודם משלימים את משימת היום'));}
+      else if(!available.ok){card.dataset.locked='true';card.append(el('p','game-locked',this.t(available.reason)));}
       const next=this.data.config.minigameLevels[game.id]?.[level];
       const upgrade=button(next?this.t('minigame.upgrade',{cost:next.cost}):this.t('app.maxLevel'),'game-upgrade',()=>{const result=this.activity.upgrade(game.id);if(result.ok)this.menu();else this.ui.result(result);});
       upgrade.disabled=!next;actions.append(upgrade,button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(game.id)));card.append(actions);cards.append(card);
@@ -158,6 +161,7 @@ export class ActivityInterface {
     });dialog.append(map);
   }
   autoLaunch(choice) {
+    if(this.requireDaily(choice.gameId)){this.activity.cancel(choice.eventId);return;}
     this.eventOpen=false;
     const highest=this.engine.state.minigameProgress[choice.gameId].stage;
     const stage=Math.max(1,Math.min(highest,highest+this.data.config.events.eventStageOffset));
@@ -285,7 +289,8 @@ export class ActivityInterface {
     }));
     for(const action of this.data.config.events.actions){
       const available=this.availability(type.gameId);
-      const b=button(this.t(action.id==='play'&&!available.ok?available.reason:action.labelId),`event-${action.id}`,()=>{
+      const b=button(action.id==='play'&&this.engine.learningStatus().locked?'🔒 📚 משימת היום':this.t(action.id==='play'&&!available.ok?available.reason:action.labelId),`event-${action.id}`,()=>{
+        if(action.id==='play'&&this.requireDaily(type.gameId))return;
         if(action.id==='play'&&!available.ok){this.requireBuilding(type.gameId);return;}
         const result=this.activity.choose(action.id);if(!result.ok){this.ui.result(result);return;}
         if(result.gameId){this.eventOpen=false;this.start(result.gameId,result.eventId);}
@@ -295,7 +300,7 @@ export class ActivityInterface {
     }
   }
   decorateInfo(instance,actions) {
-    for(const game of this.enabledGames())if(this.data.config.minigames[game.id].requiresBuilding===instance.typeId)actions.append(button(this.t('minigame.soccer.play'),`${instance.typeId}-building-play`,()=>this.stages(game.id),'primary-button'));
+    for(const game of this.enabledGames())if(this.data.config.minigames[game.id].requiresBuilding===instance.typeId)actions.append(button(this.engine.learningStatus().locked?'🔒 📚 משימת היום':this.t('minigame.soccer.play'),`${instance.typeId}-building-play`,()=>this.stages(game.id),'primary-button'));
     if(instance.typeId==='soccer')actions.append(button(this.t('soccer.training'),'soccer-training',()=>this.training()));
     if(instance.typeId==='cityHall'){
       const metrics=el('div','city-hall-metrics');
