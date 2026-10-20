@@ -1,0 +1,10 @@
+.game-screen[data-game=tennis] #drop{right:100px;bottom:100px;width:64px;height:64px;background:#66538ddd}
+.game-screen[data-game=tennis] #drop svg{width:34px;height:34px}
+.game-screen[data-game=tennis] .tennis-perfect-band{position:absolute;left:0;right:0;bottom:46.5%;background:#8c64f7;box-shadow:0 0 0 1px #fff,0 0 8px #b5a2ff;pointer-events:none}
+.game-screen[data-game=tennis] .tennis-serve-meter{right:calc(max(32px,env(safe-area-inset-right)) + 182px);bottom:100px}
+.game-screen[data-game=tennis]:has(.left-handed) .tennis-serve-meter{left:calc(max(16px,env(safe-area-inset-left)) + 182px)}
+.game-screen[data-game=tennis] .tennis-power-meter{position:absolute;width:12px;height:68px;border:2px solid #fff;border-radius:6px;background:linear-gradient(to top,#173e3e var(--safe),#963e42 var(--safe));pointer-events:none;z-index:3;box-shadow:0 2px 8px #102c46}
+.game-screen[data-game=tennis] .tennis-power-meter::after{content:'';position:absolute;left:-3px;right:-3px;bottom:var(--safe);border-top:2px solid #fff}
+.game-screen[data-game=tennis] .tennis-power-fill{position:absolute;bottom:0;left:0;right:0;background:#70efaf;border-radius:3px}
+.game-screen[data-game=tennis] .tennis-power-meter[data-over=true] .tennis-power-fill{background:#ff645d}
+.game-screen[data-game=tennis] .tennis-power-meter[hidden]{display:none}

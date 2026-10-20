@@ -1,0 +1,61 @@
+{
+  "command": "node --test tests/*.mjs",
+  "exitCode": 0,
+  "tests": 1880,
+  "passed": 1842,
+  "skipped": 38,
+  "failed": 0,
+  "node": "v24.19.0",
+  "base": "1f05826",
+  "sourceCommit": "6b77535",
+  "screenshots": {
+    "01-held-power.png": {
+      "sha256": "ff710d2fb4c04c66a332dc515655834bf52114f72e4d2b8f20f60c942e849542",
+      "width": 844,
+      "height": 390
+    },
+    "06-computer-net-fault.png": {
+      "sha256": "586d6493130db79269c80bec777d41adc313a1009899dbaeaf405b4856c85b26",
+      "width": 844,
+      "height": 390
+    },
+    "04-serve-centre-band.png": {
+      "sha256": "1ec4b20491ebfc0738455d4857366b55f83381e4f806a3b366041e1807bbd3c9",
+      "width": 844,
+      "height": 390
+    },
+    "03-overpower-out.png": {
+      "sha256": "3cb93275db4724a55d615259a1a3d26c83b6d6de8d16c772a117615352782089",
+      "width": 844,
+      "height": 390
+    },
+    "05-computer-serve-in.png": {
+      "sha256": "13ed8c037ddb78a4bb5adb9f85b359e6d340c0e838660173b5af1ba6e0fa7025",
+      "width": 844,
+      "height": 390
+    },
+    "02-drop-low-bounce.png": {
+      "sha256": "e45289b9b7f92c29f654cdbaed3fd18b33324d5d8fa2faa9e447459cb3981181",
+      "width": 844,
+      "height": 390
+    }
+  },
+  "audio": {
+    "applause-browser.webm": {
+      "bytes": 40613,
+      "sha256": "7539e070e66fc0cc9f5a388baf405e6d0919c415b2d473da9b45d834656dde97"
+    },
+    "applause.ogg": {
+      "bytes": 55430,
+      "sha256": "85728ba7018539c6e2eb9c98573604395fb1a1f010227d449b7f5d7131e0bf57"
+    }
+  },
+  "recordedAudioAnalysis": {
+    "decodedSeconds": 2.76,
+    "channels": 2,
+    "sampleRate": 48000,
+    "peak": 0.26409912109375,
+    "rms": 0.031695236575555535,
+    "below400HzEnergyFraction": 0.007965450553405515
+  }
+}
