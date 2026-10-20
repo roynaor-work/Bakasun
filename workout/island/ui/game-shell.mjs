@@ -1,4 +1,4 @@
-import {nativeShellAction} from './press.mjs?v=g2j-20261019-1';
+import {nativeShellAction} from './press.mjs?v=g9-20261020-1';
 
 const entries=new WeakMap();
 export function installedShell(target=window){

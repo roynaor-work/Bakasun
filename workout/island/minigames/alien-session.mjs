@@ -1,6 +1,6 @@
-import {createControls} from './controls.mjs?v=g2j-20261019-1';
-import {createGameArt} from './art.mjs?v=g2j-20261019-1';
-import {loadOptionalArt} from './model-art.mjs?v=g2j-20261019-1';
+import {createControls} from './controls.mjs?v=g9-20261020-1';
+import {createGameArt} from './art.mjs?v=g9-20261020-1';
+import {loadOptionalArt} from './model-art.mjs?v=g9-20261020-1';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienModelSpecs} from './alien-assets.mjs';
 

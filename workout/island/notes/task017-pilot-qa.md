@@ -5,7 +5,7 @@
 ## בסיס וגבולות העבודה
 
 - בסיס נוכחי: **main `6df6b485c093dd13c5de0940353c44d2f0d5f396`**, ששולב בענף. מקור שני הקבצים: `fa3b133880234a0d88d0226b61db011a0dfdb30b`. הבסיס המקורי של הפיילוט היה fa3b133; המדידות הסופיות לפני/אחרי נעשו מחדש מול 6df6b48.
-- DATA_VERSION נשאר **`g2j-20261019-1`**; קישורי `?v=` קיימים לא שונו. CURRENT_VERSION נשאר **15**, ללא שדות שמירה או מעבר חדשים.
+- DATA_VERSION נשאר **`G2j (QA.md)`**; קישורי `?v=` קיימים לא שונו. CURRENT_VERSION נשאר **15**, ללא שדות שמירה או מעבר חדשים.
 - `app.mjs`, `index.html`, `ui/game-shell.mjs`, `ui/press.mjs`, `styles.css`, `release.mjs`, `engine/persistence.mjs` ו-`tests/island-assets.test.mjs` זהים לבסיס 6df6b48. אין שינוי ב-CHANGELOG.md, QA.md או codex-lab/vendor.
 - קוד המוצר מוגבל למודולי טעינת הדגמים/תצוגת העיר ול-`config.cityView.meshyPilot`. הבדיקות רק ב-`tests/island-task017-pilot.test.mjs` וב-`workout/island/tests/task017-pilot-browser.mjs`. QA ב-`workout/island/notes/task017-pilot-qa.md`.
 - חריג הנכסים המאושר כולל רק `car-a-512.glb`, `adult-man-rigged-512.glb` ושתי רשומות ה-manifest שלהם. **כל 13 הדגמים ש-main שמר נשארו זהים בבייטים**, ולא הוחזר אף אחד מ-39 הדגמים האחרים שהוסרו.

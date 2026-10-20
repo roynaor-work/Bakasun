@@ -1,11 +1,11 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {seededRandom} from './tennis.mjs?v=g2j-20261019-1';
-import {tennisPose} from './tennis-pose.mjs?v=g2j-20261019-1';
-import {createTennisEnvironment} from './tennis-environment.mjs?v=g2j-20261019-1';
+import {seededRandom} from './tennis.mjs?v=g9-20261020-1';
+import {tennisPose} from './tennis-pose.mjs?v=g9-20261020-1';
+import {createTennisEnvironment} from './tennis-environment.mjs?v=g9-20261020-1';
 
-export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=g2j-20261019-1',import.meta.url)}={}) {
+export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=g9-20261020-1',import.meta.url)}={}) {
   const r=config.render, colors=r.colors, scene=new T.Scene();
   scene.background=new T.Color(colors.sky);scene.fog=new T.Fog(colors.sky,38,75);
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});

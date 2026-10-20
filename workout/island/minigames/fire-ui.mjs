@@ -13,7 +13,7 @@ const paths={
 export function fireIcon(name){const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');const p=document.createElementNS(NS,'path');p.setAttribute('d',paths[name]||paths.star);svg.append(p);return svg;}
 function ring(node,color,radius){const svg=document.createElementNS(NS,'svg');svg.classList.add('fire-ring');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');const circle=document.createElementNS(NS,'circle');for(const [key,value]of Object.entries({cx:50,cy:50,r:radius,pathLength:100,fill:'none',stroke:color,'stroke-width':4,'stroke-dasharray':100}))circle.setAttribute(key,String(value));svg.append(circle);node.append(svg);return circle;}
 export function installFireUI(ctx){
-  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire.css?v=g2j-20261019-1',import.meta.url).href;document.head.append(link);
+  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire.css?v=g9-20261020-1',import.meta.url).href;document.head.append(link);
   const {controls,dialog,t,balance}=ctx;dialog.classList.add('fire-play');ctx.status.hidden=true;if(ctx.warning)ctx.warning.hidden=true;
   const pause=dialog.querySelector('[data-action=game-pause]');pause?.replaceChildren(fireIcon('pause'));
   controls.replaceChildren();controls.style.setProperty('--fire-action-size',balance.ui.actionSize+'px');controls.style.setProperty('--fire-small-size',balance.ui.smallActionSize+'px');controls.style.setProperty('--fire-stick-size',balance.ui.stickSize+'px');

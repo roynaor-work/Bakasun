@@ -1,8 +1,8 @@
-import {fireCertificate} from '../activity/fire-certificates.mjs?v=g2j-20261019-1';
-import {runFireSession} from './fire-session.mjs?v=g2j-20261019-1';
-import {createFireDriver} from './fire-roads.mjs?v=g2j-20261019-1';
-import {drawFireCity} from './fire-canvas.mjs?v=g2j-20261019-1';
-import {createFireView} from './fire-view.mjs?v=g2j-20261019-1';
+import {fireCertificate} from '../activity/fire-certificates.mjs?v=g9-20261020-1';
+import {runFireSession} from './fire-session.mjs?v=g9-20261020-1';
+import {createFireDriver} from './fire-roads.mjs?v=g9-20261020-1';
+import {drawFireCity} from './fire-canvas.mjs?v=g9-20261020-1';
+import {createFireView} from './fire-view.mjs?v=g9-20261020-1';
 export function fireHydrantDistance(truck,balance){return Math.min(...(balance.city?.hydrants||[balance.hydrant.position]).map(p=>Math.hypot(truck.x-p[0],truck.z-p[2])));}
 const EMPTY=Object.freeze({});
 export function createFireEntity(site,type,active,heat,index){return {x:site.x,y:site.y,kind:site.kind,type,active,heat,phase:index*1.7,spreadAge:0,warning:0};}

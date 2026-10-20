@@ -53,7 +53,12 @@ async function setup(mode='native'){
   await page.clock.fastForward(100);await page.clock.fastForward(1000);await page.locator('.game-screen[data-starting=false]').waitFor();await tick(32);assert.equal((await snap()).paused,false);
  }
  async function exit(){await tap('[data-action=game-pause]');assert.ok(await page.locator('.game-pause-sheet').isVisible());await tap('[data-action=game-exit]');await nav();}
- async function rotate(size,blocked){await page.setViewportSize(size);for(let i=0;i<100;i++){await tick(32);if(await page.locator('.game-screen').getAttribute('data-orientation-blocked')===String(blocked))return;}throw Error('resize event did not reach the shell');}
+ async function rotate(size,blocked){
+  await page.setViewportSize(size);
+  // Resize is a native event: give it real time even while the game clock is paused.
+  await page.waitForFunction(blocked=>document.querySelector('.game-screen')?.dataset.orientationBlocked===String(blocked),blocked,{timeout:5000,polling:50});
+  await tick(32);
+ }
  async function shot(name){if(viewport.width!==844)return;const filename=name+'.png';await page.screenshot({path:directory+filename});report.shots.push(filename);}
  async function check(){await Promise.all(pending);assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);}
  return {page,context,tick,tap,snap,trace,nav,start,exit,rotate,shot,check,downloads,cityBytes};
