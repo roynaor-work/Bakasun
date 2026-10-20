@@ -15,7 +15,7 @@ function navalInputHarness(t){
  Object.defineProperty(globalThis,'window',{configurable:true,value:win});Object.defineProperty(globalThis,'document',{configurable:true,value:doc});
  const model=make(),input=createNavalInput({canvas,controls,balance:b},()=>model,()=>null);
  t.after(()=>{input.dispose();for(const [key,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}});
- return {model,fire,win,frame(){model.update(.02,input.sample({}));},down(){fire.emit('pointerdown');win.emit('pointerdown',{target:fire});},up(){win.emit('pointerup',{target:fire});},click(pointerType,detail=0){fire.emit('click',{detail,pointerType});},key(type,code,target=fire){const event={code,key:code==='Space'?' ':code,repeat:false,target};if(target===fire)fire.emit(type,event);win.emit(type,event);}};
+ return {model,fire,canvas,win,frame(raw={}){model.update(.02,input.sample(raw));},down(){fire.emit('pointerdown');win.emit('pointerdown',{target:fire});},up(){win.emit('pointerup',{target:fire});},click(pointerType,detail=0){fire.emit('click',{detail,pointerType});},key(type,code,target=fire){const event={code,key:code==='Space'?' ':code,repeat:false,target};if(target===fire)fire.emit(type,event);win.emit(type,event);}};
 }
 test('G6c touch pointerdown/up followed by a detail-zero compatibility click fires exactly once',t=>{
  const h=navalInputHarness(t);h.down();for(let i=0;i<35;i++)h.frame();assert.equal(h.model.fired,0);h.up();h.click('touch');for(let i=0;i<5;i++)h.frame();assert.equal(h.model.fired,1);assert.equal(h.model.snapshot().ammo[0],b.levels[0].ammunition[0]-1);
@@ -29,6 +29,10 @@ test('G6c detail-zero clicks require a fresh keydown on the fire button and reje
 });
 test('G6c Space release cannot be counted again as a keyboard compatibility click',t=>{
  const h=navalInputHarness(t);h.key('keydown','Space');h.frame();assert.equal(h.model.fired,0);h.key('keyup','Space');h.click(undefined);for(let i=0;i<5;i++)h.frame();assert.equal(h.model.fired,1);
+});
+test('G6e the shared controller cannot overwrite the bearing selected on the water',t=>{
+ const h=navalInputHarness(t),point={clientX:620,clientY:215};h.canvas.emit('pointerdown',point);h.frame({yaw:.8});const selected=h.model.yaw;h.win.emit('pointerup',point);h.frame({yaw:.8});h.frame({yaw:.8});near(h.model.yaw,selected);assert.notEqual(selected,.8);
+ h.canvas.emit('pointerdown',point);h.win.emit('pointermove',{clientX:700,clientY:0});h.frame({yaw:.8});const horizon=h.model.yaw;assert.notEqual(horizon,selected);h.win.emit('pointerup',{clientX:700,clientY:0});h.frame({yaw:.8});h.frame({yaw:.8});near(h.model.yaw,horizon);
 });
 test('G6c camera is behind and above the bow at every ship heading',()=>{
  for(let i=0;i<24;i++){const heading=i*Math.PI/12,ship={x:100,z:12,heading},aim={x:300,z:0},c=navalCameraPose(ship,aim,false,b),p=navalWorldPoint(ship.x,ship.z,b),forward={x:Math.sin(heading),z:-Math.cos(heading)};
