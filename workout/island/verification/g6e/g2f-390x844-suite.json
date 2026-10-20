@@ -1,0 +1,50 @@
+{
+  "release": "task016-20261016-1",
+  "browser": "Chromium software rendering, simulated touch",
+  "reports": [
+    {
+      "width": 390,
+      "portraitGuard": true,
+      "gameplayViewport": {
+        "width": 844,
+        "height": 390
+      },
+      "novaPartialAreaDamage": true,
+      "touchOnly": true,
+      "upgradeSavedAfterReload": true,
+      "immediateContinue": true,
+      "navalTargetMatchesImpact": true,
+      "finiteAmmoRetry": true,
+      "waterAndPressure": true,
+      "muteSaved": true,
+      "events": [
+        "button",
+        "win",
+        "cannon",
+        "whistle",
+        "metal",
+        "explosion",
+        "splash",
+        "lose",
+        "siren",
+        "crackle",
+        "spray",
+        "refill"
+      ],
+      "shots": [
+        "automatic-next-wave.png",
+        "naval.png",
+        "fire.png"
+      ],
+      "errors": []
+    }
+  ],
+  "notTested": [
+    "Physical phone FPS",
+    "Physical Android/iOS audio output and device interruptions",
+    "Human difficulty/playability assessment"
+  ],
+  "omitted": [
+    "Optional background music: effects only, to keep the mobile audio graph small"
+  ]
+}

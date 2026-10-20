@@ -7,7 +7,7 @@ await verify('g6d',[{width:844,height:390}],async({page,context,tick,snap,tap,st
  const initial=await snap();assert.equal(initial.renderMode,'three');assert.equal(initial.wind.salvo,0);await capture('01-sea-waves');
  const stick=await page.locator('.soccer-stick-zone').boundingBox(),x=stick.x+stick.width*.4,y=stick.y+stick.height*.6,client=await context.newCDPSession(page);
  const touch=(type,points)=>client.send('Input.dispatchTouchEvent',{type,touchPoints:points});
- await touch('touchStart',[{x,y}]);await touch('touchMove',[{x:x+23,y:y-34}]);await tick(1200);const sailing=await snap();assert.ok(sailing.moving);assert.ok(sailing.renderMetrics.effects.foamInstances>=12);await capture('02-bow-foam-wake');
+ await touch('touchStart',[{x,y}]);await touch('touchMove',[{x,y:y-34}]);await tick(2300);await touch('touchMove',[{x:x+23,y:y-34}]);await tick(400);const sailing=await snap();assert.ok(sailing.moving);assert.ok(sailing.rangeState.inside);assert.ok(sailing.renderMetrics.effects.foamInstances>=12);await capture('02-bow-foam-wake');
  await touch('touchEnd',[]);await tick(650);const stopped=await snap();assert.equal(stopped.moving,false);const e=stopped.enemyShip,p=stopped.playerShip,dx=e.x-p.x,dz=e.z-p.z;assert.ok(Math.abs((Math.cos(p.heading)*dx+Math.sin(p.heading)*dz)/Math.hypot(dx,dz))<.025);await capture('04-broadside-enemy');
  const fire=await page.locator('#shoot').boundingBox(),fx=fire.x+fire.width/2,fy=fire.y+fire.height/2;
  await touch('touchStart',[{x:fx,y:fy}]);await tick(700);const aimed=await snap();assert.ok(aimed.aiming);await capture('03-reticle-wind');await touch('touchCancel',[]);await tick(200);
