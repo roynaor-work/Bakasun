@@ -1,6 +1,8 @@
 # ספריית דגמים — האי שלי
 
-27 דגמי GLB מקוריים שנמחקו מהמשחק ב־PR 147 ולא הוחזרו אליו בסבב G9. הקבצים הועתקו ללא שינוי מהקומיט `fa3b133880234a0d88d0226b61db011a0dfdb30b`, מהנתיב `workout/island/assets/models/`. הטבלה מתעדת את גודל ו־SHA256 הבתים בקומיט המקור.
+29 דגמי GLB שמורים. מתוכם 27 דגמים שנמחקו מהמשחק ב־PR 147 ולא הוחזרו אליו בסבב G9 הועתקו ללא שינוי מהקומיט `fa3b133880234a0d88d0226b61db011a0dfdb30b`, מהנתיב `workout/island/assets/models/`.
+
+שני הדגמים `bench-512.glb` ו־`tree-a-512.glb` נוספו לספרייה אחרי סבב G4e, בתיקון לפני מיזוג PR 154. הם הועתקו ללא שינוי בבייטים מ־`main` העדכני, בקומיט `70239cdbbaad00bca8e54608e4b1c20c79762971`, מהנתיב `workout/island/assets/models/`; מקורם בתוספת זו הוא main ולא `fa3b133`. הטבלה מתעדת את הגודל ואת SHA256 הבתים בכל קומיט מקור.
 
 הספרייה נמצאת מחוץ ל־`workout/island/`, אינה נטענת במשחק ואינה נכללת בתקציב ההורדה שלו. דגם עובר למשחק רק כשהוא נרשם ב־config וב־manifest; אז מעתיקים אותו ל־`workout/island/assets/models/` ורושמים את נתיבו ואת חתימתו.
 
@@ -9,6 +11,7 @@
 | שם | גודל בבתים | sha256 |
 |---|---:|---|
 | `ambulance-512.glb` | 303668 | `d95613b66f6121563951d2ac97a0fb264dece39fe94259ef3bacbecb1837edfe` |
+| `bench-512.glb` | 308176 | `cb4dfbd52780661f8dfe39b1dfac3d5d423357ade68a8c66e3c5c3cb17c6ad69` |
 | `bus-512.glb` | 339584 | `42aa416d0a58f05d28c814f4db7f982d7d71b94f9aea848c70d9f4393916b64b` |
 | `bush-512.glb` | 206072 | `07f5d1304808f336cf1838f7a62e800c22ba42579c511b480b87f171e7929105` |
 | `firefighter-512.glb` | 314580 | `3ceb8ed60c863140209f25e2759da8e328e3dfda24a78c3630f98d5d9a70e310` |
@@ -34,4 +37,5 @@
 | `street-lamp-512.glb` | 284096 | `bf47b974272f54c847dc1b6dbd090d5907ec5b75c91f0ec19b69ab02ad7e4127` |
 | `tennis-court-512.glb` | 335848 | `30b92304cc970a1642e9f6c48080c717fb9ddc6383563e2850ead869ded5e7bd` |
 | `trash-bin-512.glb` | 355756 | `1c9642ccdeb1b3e353ae66cf0aa8bb9cce877c12bfe1d907261c109a327d015f` |
+| `tree-a-512.glb` | 272196 | `5313bc18622b74384a64f8e14edbd4f8b76014e2e25baa77403b44d2e1dfe777` |
 | `water-tower-512.glb` | 334972 | `e70ff8bc1a3f1df397d280c8ecb6e93879ba3ffaf7fad240cec65d131fe62509` |
