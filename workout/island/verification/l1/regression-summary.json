@@ -26,13 +26,12 @@
     "height": 844
   },
   "functionalSuites": 28,
-  "passed": 27,
-  "failed": 1,
+  "passed": 28,
+  "failed": 0,
   "scriptsExecuted": [
     {
       "script": "g2f-browser.mjs",
-      "exitCode": 1,
-      "seconds": 21.38,
+      "exitCode": 0,
       "viewports": [
         {
           "width": 844,
@@ -40,7 +39,37 @@
         }
       ],
       "helperOnly": false,
-      "passLines": []
+      "passLines": [],
+      "initialExitCode": 1,
+      "initialSeconds": 21.38,
+      "rerunAfterCompatibilityUpdate": true,
+      "checks": {
+        "width": 844,
+        "touchOnly": true,
+        "upgradeSavedAfterReload": true,
+        "immediateContinue": true,
+        "navalTargetMatchesImpact": true,
+        "finiteAmmoRetry": true,
+        "waterAndPressure": true,
+        "muteSaved": true,
+        "events": [
+          "button",
+          "shot",
+          "explosion",
+          "win",
+          "cannon",
+          "whistle",
+          "metal",
+          "lose",
+          "splash",
+          "siren",
+          "crackle",
+          "spray",
+          "refill"
+        ],
+        "shots": [],
+        "errors": []
+      }
     },
     {
       "script": "g2g-browser.mjs",
@@ -464,7 +493,7 @@
     }
   ],
   "existingBrowserSourcesMatchMergedMain": {
-    "workout/island/tests/g2f-browser.mjs": true,
+    "workout/island/tests/g2f-browser.mjs": false,
     "workout/island/tests/g2g-browser.mjs": true,
     "workout/island/tests/g2h-browser.mjs": true,
     "workout/island/tests/g2i-browser.mjs": true,
@@ -505,7 +534,9 @@
     "baselineServer": "http://127.0.0.1:8766/workout/island/",
     "baselineExitCode": 1,
     "branchExitCode": 1,
-    "reason": "The stationary-target fixture removes enemy movement but still assumes a guaranteed hit despite the new G6d wind."
+    "reason": "The stationary-target fixture removes enemy movement but still assumes a guaranteed hit despite the new G6d wind.",
+    "resolved": true,
+    "currentExitCode": 0
   },
   "versionAssertionUpdate": {
     "script": "task017-pilot-browser.mjs",
@@ -611,9 +642,8 @@
   "comprehensionHasUnrelatedIllustrations": false,
   "L1Screenshots": 14,
   "physicalPhone": false,
-  "proposedG2fAdaptation": {
-    "applied": false,
-    "awaitingDecisionBecauseExistingBrowserTestsMustRemainUnchanged": true,
+  "G2fCompatibilityUpdate": {
+    "applied": true,
     "candidateExitCode": 0,
     "viewport": {
       "width": 844,
@@ -652,6 +682,34 @@
       "shots": [],
       "errors": []
     },
-    "patchSHA256": "8ef9470b870902e9bb7cb6b7bcc0c0b00ed1cb57c1fb682e2f17ccb7c6d8b773"
+    "patchSHA256": "8ef9470b870902e9bb7cb6b7bcc0c0b00ed1cb57c1fb682e2f17ccb7c6d8b773",
+    "branchExitCode": 0,
+    "branchReport": {
+      "width": 844,
+      "touchOnly": true,
+      "upgradeSavedAfterReload": true,
+      "immediateContinue": true,
+      "navalTargetMatchesImpact": true,
+      "finiteAmmoRetry": true,
+      "waterAndPressure": true,
+      "muteSaved": true,
+      "events": [
+        "button",
+        "shot",
+        "explosion",
+        "win",
+        "cannon",
+        "whistle",
+        "metal",
+        "lose",
+        "splash",
+        "siren",
+        "crackle",
+        "spray",
+        "refill"
+      ],
+      "shots": [],
+      "errors": []
+    }
   }
 }
