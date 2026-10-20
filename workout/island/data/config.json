@@ -3384,7 +3384,7 @@
     "fallbackFrameMs": 32,
     "fallbackSampleFrames": 90,
     "waterSegments": 20,
-    "waveHeight": 0.16,
+    "waveHeight": 0.28,
     "waveSpeed": 1.5,
     "seaSize": 180,
     "camera": [
@@ -3429,9 +3429,9 @@
     "maxTriangles": 90000,
     "maxDrawCalls": 70,
     "follow": {
-     "distance": 21,
-     "height": 12,
-     "lookAhead": 24,
+     "distance": 24,
+     "height": 14,
+     "lookAhead": 20,
      "lookHeight": 0.8,
      "aimDistance": 10,
      "aimHeight": 7.5,
@@ -3539,7 +3539,9 @@
     "minX": 20,
     "maxX": 160,
     "minZ": -110,
-    "maxZ": 110
+    "maxZ": 110,
+    "broadsideSeconds": 0.6,
+    "returnCameraSeconds": 0.6
    },
    "aim": {
     "minElevation": 5,
@@ -3548,17 +3550,17 @@
     "minRange": 80,
     "rangePerDegree": 5.333333333333333,
     "sway": {
-     "yaw": 0.018,
-     "elevation": 0.65,
+     "yaw": 0.027,
+     "elevation": 0.975,
      "frequency": 1.3
     },
-    "previewFraction": 0.28,
+    "previewFraction": 0.14,
     "previewSegments": 12,
     "torpedoSecondsMultiplier": 1.8,
     "torpedoBob": 0.75,
-    "assist": 0.25,
+    "assist": 0.1,
     "assistRadius": 42,
-    "autoLead": 0.7,
+    "autoLead": 0.3,
     "hullLength": 34,
     "hullBeam": 16,
     "torpedoTurnRadians": 0.07,
@@ -3604,7 +3606,14 @@
       "radius": 45
      }
     ],
-    "predictionSteps": 3
+    "predictionSteps": 3,
+    "wind": {
+     "minStrength": 30,
+     "maxStrength": 88,
+     "driftScale": 1,
+     "difficultyMin": 0.78,
+     "difficultyStep": 0.045
+    }
    }
   },
   "art": {
