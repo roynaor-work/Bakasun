@@ -1,37 +1,31 @@
 import {verify} from './night-browser.mjs';
-import {mkdir} from 'node:fs/promises';
+import {mkdir,readdir,unlink} from 'node:fs/promises';
 const evidence=new URL('../verification/g6e/',import.meta.url);await mkdir(evidence,{recursive:true});
-await verify('g6e',[{width:844,height:390}],async({page,context,tick,snap,tap,start,exit,assert})=>{
+for(const name of await readdir(evidence))if(/\.(jpg|png|webp)$/.test(name))await unlink(new URL(name,evidence));
+await verify('g6e',[{width:844,height:390}],async({page,context,tick,snap,tap,start,exit,nav,assert})=>{
  const capture=name=>page.screenshot({path:new URL(name+'.jpg',evidence).pathname,type:'jpeg',quality:92});
- await page.evaluate(()=>window.__island.games.now=()=>0);await start('navalDuel');await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(80);
- const initial=await snap();assert.equal(initial.renderMode,'three');assert.equal(initial.rangeState.inside,false);assert.deepEqual(initial.renderMetrics.playerMarkers,{flag:false,flame:false,flameY:.85});await capture('04-player-no-triangle');
+ await page.evaluate(()=>{const {engine,games}=window.__island;engine.state.minigameProgress.navalDuel.stage=10;engine.state.minigameProgress.navalDuel.stars.fill(3);games.equipment('navalDuel');});await nav();
+ assert.equal(await page.locator('[data-naval-upgrade]').count(),4);
+ for(const name of ['hull','cannon','aim','aim','aim','speed']){await tap(`[data-naval-upgrade="${name}"]`);await nav();}
+ const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('island.v1')));assert.equal(saved.version,15);assert.deepEqual(saved.minigameEquipment.navalDuel,{shield:0,hull:1,damage:1,rate:3,ammo:1});await page.locator('[data-naval-upgrades]').evaluate(n=>n.scrollIntoView({block:'center'}));await capture('01-upgrades');
+ await page.reload({waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);if(await page.locator('[data-action=avatar-start]').isVisible())await tap('[data-action=avatar-start]');await tick(32);
+ assert.deepEqual(await page.evaluate(()=>window.__island.engine.state.minigameEquipment.navalDuel),saved.minigameEquipment.navalDuel);
+ await page.evaluate(()=>{const {engine,data,games}=window.__island;engine.tick=()=>({ok:true});data.featureFlags.events=false;games.now=()=>0;data.config.minigames.navalDuel.render.fallbackFrameMs=10000;for(const key of Object.keys(engine.state.minigameEquipment.navalDuel))engine.state.minigameEquipment.navalDuel[key]=0;});
  const client=await context.newCDPSession(page),touch=(type,points=[])=>client.send('Input.dispatchTouchEvent',{type,touchPoints:points});
- const fire=await page.locator('#shoot').boundingBox(),x=fire.x+fire.width/2,y=fire.y+fire.height/2;
- const down=()=>touch('touchStart',[{x,y}]),up=()=>touch('touchEnd');
- await down();await tick(750);const charged=await snap();assert.equal(charged.fired,0);assert.ok(charged.chargePower>.45&&charged.chargePower<.55);assert.ok(await page.locator('#shoot').evaluate(n=>getComputedStyle(n,':before').opacity==='1'));await capture('01-power-meter');await up();await tick(40);
- const outside=await snap();assert.equal(outside.fired,1);assert.ok(outside.ball.power>.45);assert.equal(outside.rangeState.inside,false);await capture('03-outside-ring-shot');await tick(1000);
- // Sail into the circle with the actual movement control.
+ const firePoint=async()=>{const b=await page.locator('#shoot').boundingBox();return {x:b.x+b.width/2,y:b.y+b.height/2};};
+ const down=async()=>touch('touchStart',[await firePoint()]),up=()=>touch('touchEnd');
+ const fresh=async(stage=5)=>{await start('navalDuel',stage);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(80);};
+ await fresh();const initial=await snap();assert.equal(initial.renderMode,'three');assert.equal(initial.rangeState.inside,false);assert.deepEqual(initial.renderMetrics.playerMarkers,{flag:false,flame:false,flameY:.85});await capture('02-player-no-triangle');
+ const icons=await page.locator('.ammo-rack button').evaluateAll(nodes=>nodes.map(n=>({icon:n.querySelector('svg').innerHTML,color:n.style.getPropertyValue('--naval-weapon'),label:n.getAttribute('aria-label')})));assert.equal(new Set(icons.map(i=>i.icon)).size,6);assert.equal(new Set(icons.map(i=>i.color)).size,6);
+ await down();await tick(300);const lock=await snap();assert.ok(lock.aiming);assert.equal(lock.fired,0);assert.equal(lock.lockedTargetIndex,lock.enemyShip.index);assert.equal(await page.locator('#shoot').evaluate(n=>getComputedStyle(n,':before').content),'none');await capture('03-locked-jitter');await tick(250);const moved=await snap();assert.notDeepEqual(moved.aim,lock.aim);await up();await tick(32);const outside=await snap();assert.equal(outside.fired,1);assert.equal(outside.ball.targetX,moved.aim.x);assert.equal(outside.ball.targetZ,moved.aim.z);await capture('04-outside-ring-shot');await tick(1100);
  const stick=await page.locator('.soccer-stick-zone').boundingBox(),sx=stick.x+stick.width*.4,sy=stick.y+stick.height*.6;
- await touch('touchStart',[{x:sx,y:sy}]);await touch('touchMove',[{x:sx,y:sy-38}]);await tick(2800);await up();await tick(700);
- const inside=await snap();assert.ok(inside.rangeState.inside);assert.ok(inside.rangeState.spread<outside.rangeState.spread);assert.ok(inside.playerShip.x>initial.playerShip.x+50);await capture('02-ship-inside-ring');
- // Sea gestures choose a bearing only; idle frames and charging retain it.
- const aimAtEnemy=async()=>{
-  const q=await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model;return m.screenPoint(m.enemyShip.x,m.enemyShip.z);});
-  const box=await page.locator('.minigame-canvas').boundingBox();await touch('touchStart',[{x:box.x+q.x,y:box.y+q.y}]);await tick(32);await up();await tick(32);
- };
- let hit;
- for(let attempt=0;attempt<6;attempt++){
-  await aimAtEnemy();const aimed=await snap(),yaw=aimed.yaw;await tick(60);assert.equal((await snap()).yaw,yaw);
-  const hold=await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model,b=window.__island.data.config.minigames.navalDuel;return (Math.hypot(m.enemyShip.x-m.playerShip.x,m.enemyShip.z-m.playerShip.z)-b.charge.minRange)/(b.charge.maxRange-b.charge.minRange)*b.charge.seconds*1000;});
-  const before=(await snap()).fired;await down();await tick(hold);assert.equal((await snap()).fired,before);await up();await tick(32);const launched=await snap();assert.equal(launched.fired,before+1);
-  await tick(Math.ceil(launched.ball.duration*1000)+20);const landed=await snap();assert.equal(landed.blast.x,launched.ball.targetX);assert.equal(landed.blast.z,launched.ball.targetZ);
-  if(landed.blast.hit){hit=landed;await capture('05-hit');break;}
- }
- assert.ok(hit?.hits>0,'real charged projectile must hit');assert.ok(hit.renderMetrics.effects.smokeInstances>=8);
- // A very short tap still produces a near shot, with exactly one ammunition debit.
- const beforeTap=await snap();await tap('#shoot');await tick(32);const short=await snap();assert.equal(short.fired,beforeTap.fired+1);assert.ok(short.ball.power<.1);assert.ok(Math.hypot(short.ball.targetX-short.playerShip.x,short.ball.targetZ-short.playerShip.z)<80);
- // Dragging the aim control selects the other side, without moving the boat.
- await down();await touch('touchMove',[{x:x-90,y:y-45}]);await tick(100);const manual=await snap();assert.notEqual(manual.yaw,beforeTap.yaw);assert.equal(manual.playerShip.x,beforeTap.playerShip.x);await touch('touchCancel');await tick(50);assert.equal((await snap()).fired,short.fired);
- await page.evaluate(()=>window.__island.games.current.session.debug.view.degrade(true));await tick(32);assert.equal((await snap()).renderMode,'perspective');await capture('06-canvas-fallback');await exit();
- return {initial:{range:initial.rangeState,markers:initial.renderMetrics.playerMarkers},charged:{power:charged.chargePower,fired:charged.fired},outsideShot:{range:outside.rangeState,ball:outside.ball},inside:{range:inside.rangeState,ship:inside.playerShip},hit:{hits:hit.hits,blast:hit.blast},short:{power:short.ball.power,ball:short.ball},checks:{releaseOnly:true,chargeMeter:true,persistentBearing:true,rangeRing:true,sailingImprovesAccuracy:true,outsideShot:true,shortTap:true,noPlayerTriangle:true,actualHit:true,fallback:true}};
+ await touch('touchStart',[{x:sx,y:sy}]);await touch('touchMove',[{x:sx,y:sy-38}]);await tick(2800);await up();await tick(700);const inside=await snap();assert.ok(inside.rangeState.inside);assert.ok(inside.rangeState.spread<outside.rangeState.spread);assert.ok(inside.playerShip.x>initial.playerShip.x+50);await capture('05-ship-inside-ring');
+ let hit;for(let attempt=0;attempt<8;attempt++){await down();await tick(300+attempt*90);const visible=(await snap()).aim;await up();await tick(32);const launch=await snap();assert.equal(launch.ball.targetX,visible.x);assert.equal(launch.ball.targetZ,visible.z);await tick(Math.ceil(launch.ball.duration*1000)+20);const landed=await snap();assert.equal(landed.blast.x,visible.x);assert.equal(landed.blast.z,visible.z);if(landed.blast.hit){hit=landed;await capture('06-hit');break;}}assert.ok(hit?.hits>0);await exit();
+ // Weapon fixtures set only the starting situation; input and effects are real.
+ await fresh();await tap('[data-ammo-index="1"]');await tick(32);await down();await tick(250);await up();await tick(220);const guided=await snap();assert.equal(guided.ball.ammo,1);assert.ok(guided.ball.guided);assert.equal(guided.ball.targetX,guided.enemies[guided.ball.targetId].x);await capture('07-guided-missile');await tick(1000);assert.ok((await snap()).hits>0);await exit();
+ await fresh();await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model;m.playerShip.x=m.enemyShip.x+24;m.playerShip.z=m.enemyShip.z;m.playerShip.heading=0;});await tick(32);await tap('[data-ammo-index="3"]');await tick(32);const mineBefore=await snap();await tap('#shoot');await tick(32);const mine=await snap();assert.equal(mine.mines.length,1);assert.equal(mine.mines[0].x,mine.playerShip.x-24);await capture('08-mine');await tick(500);assert.equal((await snap()).mines.length,0);assert.ok((await snap()).enemyFleetHp<mineBefore.enemyFleetHp);await exit();
+ await fresh();await tap('[data-ammo-index="4"]');await tick(32);await down();await tick(350);await up();await tick(250);const salvo=await snap();assert.equal(salvo.ball.ammo,4);assert.equal(salvo.extraShots.filter(p=>p.ammo===4).length,2);assert.equal(salvo.fired,1);await capture('09-three-shell-salvo');await exit();
+ await fresh();await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model;m.playerShip.hp=m.playerShip.maxHp*.4;});await tick(32);await tap('[data-ammo-index="5"]');await tick(32);const hurt=await snap();await tap('#shoot');await tick(32);const repair=await snap();assert.ok(Math.abs(repair.lives-hurt.lives-hurt.maxLives*.25)<1e-7);assert.ok(repair.repairLife>0);assert.equal(repair.ball.active,false);await capture('10-repair');assert.equal(await page.locator('.game-status').isVisible(),false);
+ await page.evaluate(()=>window.__island.games.current.session.debug.view.degrade(true));await tick(32);assert.equal((await snap()).renderMode,'perspective');await down();await tick(100);assert.ok((await snap()).aiming);await touch('touchCancel');await tick(32);assert.equal((await snap()).aiming,false);await exit();
+ return {savedUpgrades:saved.minigameEquipment.navalDuel,icons,initial:{range:initial.rangeState,markers:initial.renderMetrics.playerMarkers},lock:{target:lock.lockedTargetIndex,before:lock.aim,after:moved.aim},inside:inside.rangeState,outside:outside.rangeState,hit:hit.blast,weapons:{guided:guided.ball,mine:mine.mines,salvo:[salvo.ball,...salvo.extraShots],repair:{before:hurt.lives,after:repair.lives,max:repair.maxLives}},checks:{savedAfterReload:true,fourUpgrades:true,noPowerMeter:true,enemyLock:true,movingReticle:true,visibleReleaseLanding:true,rangeRing:true,noTriangle:true,guidedTracks:true,mineCollision:true,threeShells:true,repair25Percent:true,distinctIcons:true,noGameText:true,fallback:true}};
 });

@@ -29,7 +29,7 @@ test('G2d the sea target clamps within configured range without firing',()=>{
 });
 for(let index=0;index<4;index++)test(`G2d ammunition ${index} is available without purchases, finite with no reload`,()=>{
   const m=make('navalDuel'),b=config.navalDuel,supply=m.ammo[index];assert.ok(supply>0);m.update(.02,{ammoIndex:index});assert.equal(m.ammoIndex,index);assert.equal(m.phase,'aim');
-  m.update(.02,{firing:true,ammoIndex:index});assert.equal(m.ball.ammo,index);assert.equal(m.ammo[index],supply-1);assert.equal(m.cooldowns[index],0);m.update(.02,{ammoIndex:(index+1)%4});assert.equal(m.ammoIndex,(index+1)%4);assert.equal(m.cooldowns[index],0);assert.equal(m.cooldowns[(index+1)%4],0);
+  m.update(.02,{firing:true,ammoIndex:index});if(index===3)assert.equal(m.mines.length,1);else assert.equal(m.ball.ammo,index);assert.equal(m.ammo[index],supply-1);assert.equal(m.cooldowns[index],0);m.update(.02,{ammoIndex:(index+1)%4});assert.equal(m.ammoIndex,(index+1)%4);assert.equal(m.cooldowns[index],0);assert.equal(m.cooldowns[(index+1)%4],0);
 });
 test('G2d enemies move in distance and position at stage one; several living ships share high stages',()=>{
   const m=make('navalDuel'),x=m.enemyX,z=m.enemies[0].z;advance(m,.8);assert.notEqual(m.enemyX,x);assert.notEqual(m.enemies[0].z,z);

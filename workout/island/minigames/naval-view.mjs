@@ -50,7 +50,7 @@ export function createVessel(THREE, colors, equipment={},variant={},playerModel=
   const shadow=mesh(new THREE.CircleGeometry(2.5,16),colors.metal,0,-.13,.1,root);shadow.rotation.x=-Math.PI/2;shadow.scale.set(.65,1.6,1);shadow.material=new THREE.MeshBasicMaterial({color:colors.metal,transparent:true,opacity:.18});
   // Smoke was a growing faceted balloon. Fire and soft water effects carry damage feedback.
   const smoke=new THREE.Group();root.add(smoke);
-  const flame=mesh(new THREE.SphereGeometry(.32,8,6),colors.flame,0,2,.9,root);flame.material=new THREE.MeshBasicMaterial({color:colors.flame});flame.visible=false;
+  const flame=mesh(new THREE.SphereGeometry(.32,8,6),colors.flame,.7,.85,.9,root);flame.material=new THREE.MeshBasicMaterial({color:colors.flame});flame.visible=false;
   let model,modelLength,disposed=false;const modelStatus={requested:Boolean(playerModel),loaded:false,failed:false};
   const ready=playerModel?loadPatrolBoat(playerModel,adapters).then(loaded=>{
     if(disposed){if(loaded)disposeBoat(loaded);return;}
@@ -95,8 +95,8 @@ export function createNavalView(ctx,model,adapters={}) {
   const fx=r.effects,flashGeometry=new THREE.SphereGeometry(fx.flashSize,8,6),flashMaterial=new THREE.MeshBasicMaterial({color:r.flame,transparent:true,depthWrite:false}),flash=new THREE.Mesh(flashGeometry,flashMaterial);scene.add(flash);
   const smokeCanvas=document.createElement('canvas');smokeCanvas.width=smokeCanvas.height=64;const brush=smokeCanvas.getContext('2d'),gradient=brush.createRadialGradient(32,32,0,32,32,32);gradient.addColorStop(0,'#e0e3dfaa');gradient.addColorStop(1,'#e0e3df00');brush.fillStyle=gradient;brush.fillRect(0,0,64,64);const smokeTexture=new THREE.CanvasTexture(smokeCanvas),smokeMaterial=new THREE.SpriteMaterial({map:smokeTexture,transparent:true,depthWrite:false}),muzzleSmoke=new THREE.Sprite(smokeMaterial);scene.add(muzzleSmoke);
   const plumeMaterial=new THREE.SpriteMaterial({map:smokeTexture,color:r.foam,transparent:true,depthWrite:false}),waterPlume=new THREE.Sprite(plumeMaterial);scene.add(waterPlume);
-  const gatling=new THREE.Group(),gatlingGeometry=new THREE.CylinderGeometry(fx.subTube/3,fx.subTube/3,fx.vulcanLength,6),gatlingMaterial=new THREE.MeshStandardMaterial({color:r.metal});
-  for(let i=0;i<fx.vulcanBarrels;i++){const barrel=new THREE.Mesh(gatlingGeometry,gatlingMaterial),a=i*Math.PI*2/fx.vulcanBarrels;barrel.rotation.x=Math.PI/2;barrel.position.set(Math.cos(a)*fx.vulcanRadius,Math.sin(a)*fx.vulcanRadius,0);gatling.add(barrel);}gatling.position.set(0,.18,-1);player.turret.add(gatling);
+  const gatling=new THREE.Group(),gatlingGeometry=new THREE.CylinderGeometry(fx.subTube/3,fx.subTube/3,fx.salvoLength,6),gatlingMaterial=new THREE.MeshStandardMaterial({color:r.metal});
+  for(let i=0;i<3;i++){const barrel=new THREE.Mesh(gatlingGeometry,gatlingMaterial),a=i*Math.PI*2/fx.salvoBarrels;barrel.rotation.x=Math.PI/2;barrel.position.set(Math.cos(a)*fx.salvoRadius,Math.sin(a)*fx.salvoRadius,0);gatling.add(barrel);}gatling.position.set(0,.18,-1);player.turret.add(gatling);
   const muzzle=new THREE.Vector3();let lastFire=-Infinity,lastFired=0;
 
   const onLost=event=>{event.preventDefault();failed=true;};canvas.addEventListener('webglcontextlost',onLost);
@@ -119,14 +119,14 @@ export function createNavalView(ctx,model,adapters={}) {
       try{
         for(let i=0;i<positions.count;i++){const x=positions.getX(i),z=positions.getZ(i);positions.setY(i,Math.sin(x*.32+model.time*r.waveSpeed)*Math.cos(z*.2+model.time)*r.waveHeight);}positions.needsUpdate=true;seaGeometry.computeVertexNormals();
         const px=model.playerShip.z*r.enemySpacing/balance.combat.laneSpacing,pz=-(model.playerShip.x-balance.shipX)*r.worldScale;animateVessel(player,model.playerShip,px,pz,false);syncCamera();scenery.update(camera);
-        if(model.fired!==lastFired){lastFired=model.fired;lastFire=model.time;}const fireAge=model.time-lastFire;
-        gatling.visible=model.ammoIndex===4;player.barrel.visible=!gatling.visible;gatling.rotation.z=model.time*fx.vulcanSpin;
+        if(model.fired!==lastFired){lastFired=model.fired;lastFire=['mine','repair'].includes(model.lastAction?.type)?-Infinity:model.time;}const fireAge=model.time-lastFire;
+        gatling.visible=model.ammoIndex===4;player.barrel.visible=!gatling.visible;gatling.rotation.z=0;
         player.root.updateMatrixWorld(true);muzzle.set(0,.18,-fx.muzzleForward);player.turret.localToWorld(muzzle);
         flash.visible=fireAge<fx.flashSeconds;flash.position.copy(muzzle);flash.scale.setScalar(1+fireAge/fx.flashSeconds);flashMaterial.opacity=Math.max(0,1-fireAge/fx.flashSeconds);
         muzzleSmoke.visible=fireAge<fx.smokeSeconds;muzzleSmoke.position.copy(muzzle);muzzleSmoke.position.y+=fireAge*fx.smokeSize;smokeMaterial.opacity=Math.max(0,1-fireAge/fx.smokeSeconds);muzzleSmoke.scale.setScalar(fx.smokeSize+fireAge*fx.smokeSize*4);
 
         for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];v.root.visible=e.active;if(e.active){animateVessel(v,e,e.z*r.enemySpacing/balance.combat.laneSpacing,-(e.x-balance.shipX)*r.worldScale,true);if(balance.shipTypes[e.kind].submarine){v.root.position.y-=e.depth*fx.submergedY;v.periscope.visible=e.hp>0;}}}
-        shot.visible=model.phase==='shot';shot.position.set(model.ball.z*r.enemySpacing/balance.combat.laneSpacing,navalProjectileHeight(model.ball.ammo,model.ball.age/model.ball.duration,model.time,balance),-(model.ball.x-balance.shipX)*r.worldScale);shot.scale.set(1,1,model.ball.ammo===2?4:1);secondShot.visible=shot.visible&&model.ball.ammo===1;secondShot.position.copy(shot.position);secondShot.position.x+=.6;
+        shot.visible=model.ball.active;shot.position.set(model.ball.z*r.enemySpacing/balance.combat.laneSpacing,navalProjectileHeight(model.ball.ammo,model.ball.age/model.ball.duration,model.time,balance),-(model.ball.x-balance.shipX)*r.worldScale);shot.scale.set(1,1,model.ball.ammo===2?4:model.ball.ammo===1?3:1);shotMaterial.color.set(['#ffd36e','#f7776f','#61d7ed','#d69bf4','#ffac58','#73e7aa'][model.ball.ammo]);secondShot.visible=false;secondShot.position.copy(shot.position);secondShot.position.x+=.6;
         extraVisuals.count=Math.min(model.extraShots.length,r.effects.maxProjectiles);for(let i=0;i<extraVisuals.count;i++){const p=model.extraShots[i];effectMatrix.makeRotationY(Math.atan2((p.targetZ-p.fromZ)*r.enemySpacing/balance.combat.laneSpacing,-(p.targetX-p.fromX)*r.worldScale));effectMatrix.scale(effectScale.set(1,1,p.ammo===2?4:1));effectMatrix.setPosition(p.z*r.enemySpacing/balance.combat.laneSpacing,navalProjectileHeight(p.ammo,p.age/p.duration,model.time,balance),-(p.x-balance.shipX)*r.worldScale);extraVisuals.setMatrixAt(i,effectMatrix);}extraVisuals.instanceMatrix.needsUpdate=true;
         wakes.visible=shot.visible&&model.ball.ammo===2;for(let i=0;i<12;i++){const u=Math.max(0,model.ball.age/model.ball.duration-i*.008),x=model.ball.fromZ+(model.ball.targetZ-model.ball.fromZ)*u,z=model.ball.fromX+(model.ball.targetX-model.ball.fromX)*u;wakeMatrix.makeScale(1+i*.12,1+i*.1,1);wakeMatrix.setPosition(x*r.enemySpacing/balance.combat.laneSpacing,(z-balance.shipX)*r.worldScale,fx.torpedoHeight);wakes.setMatrixAt(i,wakeMatrix);}wakes.instanceMatrix.needsUpdate=true;
         aimLine.visible=false;

@@ -52,17 +52,15 @@ test('G6c screen/water mapping roundtrips at zoom, normal and turned views',()=>
 test('G6c lead uses the actual flight time and manual assistance decreases by difficulty',()=>{
  const ship={x:60,z:0},e={x:300,z:10,vx:4,vz:2,active:true,hp:1};const lead=navalLead(ship,e,b),flight=b.targeting.flightSeconds+Math.hypot(lead.x-ship.x,lead.z-ship.z)*b.targeting.secondsPerRange;assert.ok(Math.abs(lead.x-e.x-e.vx*flight)<.001);const aim={x:260,z:10};assert.ok(navalSoftAim(aim,[e],b,1).x>navalSoftAim(aim,[e],b,10).x);
 });
-test('G6e a minimum-power release fires close and never auto-locks the enemy',()=>{
- const m=make();m.update(.02,{chargeHeld:false,releasePower:0,yaw:.4});assert.equal(m.fired,1);assert.ok(Math.hypot(m.ball.targetX-m.playerShip.x,m.ball.targetZ-m.playerShip.z)<80);assert.notEqual(m.ball.targetX,m.enemyShip.x);
-});
+test('G6e a quick release locks and fires at the visible reticle',()=>{const m=make();m.beginAim();const aim={...m.aim};m.update(.02,{fireRelease:true});assert.equal(m.fired,1);assert.equal(m.ball.targetX,aim.x);assert.equal(m.ball.targetZ,aim.z);});
 test('G6c overlapping cannon fire preserves the older torpedo weapon',()=>{
  const m=make();m.update(.02,{ammoIndex:2,targetX:300,targetZ:0,firing:true});m.update(.02,{});m.update(.02,{ammoIndex:0,targetX:65,targetZ:180,firing:true});assert.equal(m.extraShots[0].ammo,2);assert.equal(m.ball.ammo,0);advance(m,2);assert.ok(m.snapshot().hits>0);
 });
 test('G6c a touching torpedo contacts the hull before its distant aim point',()=>{
  const nearBalance={...b,enemyX:140},m=createNavalModel({config,balance:nearBalance,level:1,seed:0,random:seededRandom(0)});m.playerShip.x=140-b.aim.hullLength/2;const hp=m.enemyShip.hp;m.update(.02,{ammoIndex:2,targetX:420,targetZ:0,firing:true});advance(m,.1);assert.ok(m.enemyShip.hp<hp);assert.ok(m.ball.age<m.ball.duration||m.blast.hit);
 });
-test('G6c submerged hull rejects quick shells while depth-charge tap selects it',()=>{
- const m=make(1,3);advance(m,b.combat.submarineSurface+.2);const hp=m.enemyShip.hp;m.update(.02,{autoAim:true,firing:true});advance(m,1);assert.equal(m.enemyShip.hp,hp);m.update(.02,{ammoIndex:5,autoAim:true,firing:true});advance(m,1);assert.ok(m.enemyShip.hp<hp);
+test('G6c submerged hull rejects quick shells while guided missile selects it',()=>{
+ const m=make(1,3);advance(m,b.combat.submarineSurface+.2);const hp=m.enemyShip.hp;m.update(.02,{autoAim:true,firing:true});advance(m,1);assert.equal(m.enemyShip.hp,hp);m.update(.02,{ammoIndex:1,autoAim:true,firing:true});advance(m,1);assert.ok(m.enemyShip.hp<hp);
 });
 test('G6c calibration is finite, local, monotonic and under the requested render budget',()=>{
  assert.equal(b.aim.difficulty.length,10);for(let i=0;i<10;i++){const d=b.aim.difficulty[i];assert.ok(d.assist>0&&d.assist<=1&&d.radius>0);if(i)assert.ok(d.assist<b.aim.difficulty[i-1].assist&&d.radius<b.aim.difficulty[i-1].radius);}

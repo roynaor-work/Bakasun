@@ -26,7 +26,10 @@
   "z": 7
  },
  "ui": {
-  "downloadBudget": {"city": 8000000, "gameAdditional": 6000000},
+  "downloadBudget": {
+   "city": 8000000,
+   "gameAdditional": 6000000
+  },
   "parentHoldMs": 1400,
   "economyTickMs": 1000,
   "toastMs": 3500,
@@ -2924,11 +2927,11 @@
      "feature": "feature.naval.1",
      "ammunition": [
       28,
-      12,
+      3,
       10,
+      6,
       8,
-      150,
-      8
+      3
      ],
      "weaponLevel": 1
     },
@@ -2949,11 +2952,11 @@
      "feature": "feature.naval.2",
      "ammunition": [
       33,
-      14,
+      3,
       12,
-      9,
-      150,
-      8
+      6,
+      8,
+      3
      ],
      "weaponLevel": 1
     },
@@ -2974,11 +2977,11 @@
      "feature": "feature.naval.3",
      "ammunition": [
       38,
-      16,
+      3,
       14,
-      10,
-      150,
-      8
+      6,
+      8,
+      3
      ],
      "weaponLevel": 1
     },
@@ -2999,11 +3002,11 @@
      "feature": "feature.naval.4",
      "ammunition": [
       43,
-      18,
+      3,
       16,
-      11,
-      150,
-      8
+      6,
+      8,
+      3
      ],
      "weaponLevel": 2
     },
@@ -3024,11 +3027,11 @@
      "feature": "feature.naval.5",
      "ammunition": [
       48,
-      20,
+      3,
       18,
-      12,
-      150,
-      8
+      6,
+      8,
+      3
      ],
      "weaponLevel": 2
     },
@@ -3049,11 +3052,11 @@
      "feature": "feature.naval.6",
      "ammunition": [
       53,
-      22,
+      3,
       20,
-      13,
-      150,
-      8
+      6,
+      8,
+      3
      ],
      "weaponLevel": 2
     },
@@ -3074,11 +3077,11 @@
      "feature": "feature.naval.7",
      "ammunition": [
       58,
-      24,
+      4,
       22,
-      14,
-      150,
-      8
+      6,
+      8,
+      3
      ],
      "weaponLevel": 3
     },
@@ -3099,11 +3102,11 @@
      "feature": "feature.naval.8",
      "ammunition": [
       63,
-      26,
+      4,
       24,
-      15,
-      150,
-      8
+      6,
+      8,
+      3
      ],
      "weaponLevel": 3
     },
@@ -3124,11 +3127,11 @@
      "feature": "feature.naval.9",
      "ammunition": [
       68,
-      28,
+      4,
       26,
-      16,
-      150,
-      8
+      6,
+      8,
+      3
      ],
      "weaponLevel": 3
     },
@@ -3149,11 +3152,11 @@
      "feature": "feature.naval.10",
      "ammunition": [
       73,
-      30,
+      4,
       28,
-      17,
-      150,
-      8
+      6,
+      8,
+      3
      ],
      "weaponLevel": 4
     }
@@ -3249,51 +3252,50 @@
    "ammo": [
     {
      "id": "normal",
-     "title": "ammo.normal",
+     "title": "naval.weapon.normal",
      "damage": 1,
      "width": 1,
-     "charges": 60,
+     "charges": 28,
      "reloadSeconds": 0
     },
     {
-     "id": "double",
-     "title": "ammo.double",
-     "damage": 1.7,
+     "id": "guided",
+     "title": "naval.weapon.guided",
+     "damage": 2.2,
      "width": 1,
      "charges": 3,
      "reloadSeconds": 0
     },
     {
      "id": "torpedo",
-     "title": "ammo.torpedo",
+     "title": "naval.weapon.torpedo",
      "damage": 1.4,
      "width": 1.3,
-     "charges": 2,
-     "reloadSeconds": 0
-    },
-    {
-     "id": "absorb",
-     "title": "ammo.absorb",
-     "damage": 0.9,
-     "width": 1,
-     "charges": 2,
-     "heal": 1.5,
-     "reloadSeconds": 0
-    },
-    {
-     "id": "vulcan",
-     "title": "ammo.vulcan",
-     "damage": 0.12,
-     "width": 0.45,
-     "charges": 180,
-     "reloadSeconds": 0
-    },
-    {
-     "id": "depth",
-     "title": "ammo.depth",
-     "damage": 1.2,
-     "width": 1.7,
      "charges": 10,
+     "reloadSeconds": 0
+    },
+    {
+     "id": "mine",
+     "title": "naval.weapon.mine",
+     "damage": 2.2,
+     "width": 1.2,
+     "charges": 6,
+     "reloadSeconds": 0
+    },
+    {
+     "id": "salvo",
+     "title": "naval.weapon.salvo",
+     "damage": 0.6,
+     "width": 0.85,
+     "charges": 8,
+     "reloadSeconds": 0
+    },
+    {
+     "id": "repair",
+     "title": "naval.weapon.repair",
+     "damage": 0,
+     "width": 0,
+     "charges": 3,
      "reloadSeconds": 0
     }
    ],
@@ -3321,7 +3323,7 @@
      "description": "equipment.shield.hint"
     },
     "hull": {
-     "title": "equipment.hull",
+     "title": "naval.upgrades.hull",
      "base": 1,
      "levels": [
       {
@@ -3340,32 +3342,32 @@
        "stars": 8
       }
      ],
-     "description": "equipment.hull.hint"
+     "description": "naval.upgrades.hull.hint"
     },
     "rate": {
-     "title": "equipment.rate",
+     "title": "naval.upgrades.aim",
      "base": 1,
      "levels": [
       {
-       "value": 1.2,
+       "value": 1.15,
        "cost": 45,
        "stars": 0
       },
       {
-       "value": 1.4,
+       "value": 1.35,
        "cost": 85,
        "stars": 3
       },
       {
-       "value": 1.6,
+       "value": 1.65,
        "cost": 130,
        "stars": 8
       }
      ],
-     "description": "equipment.rate.hint"
+     "description": "naval.upgrades.aim.hint"
     },
     "damage": {
-     "title": "equipment.damage",
+     "title": "naval.upgrades.cannon",
      "base": 1,
      "levels": [
       {
@@ -3384,10 +3386,10 @@
        "stars": 8
       }
      ],
-     "description": "equipment.damage.hint"
+     "description": "naval.upgrades.cannon.hint"
     },
     "ammo": {
-     "title": "equipment.ammo",
+     "title": "naval.upgrades.speed",
      "base": 0,
      "levels": [
       {
@@ -3406,7 +3408,7 @@
        "stars": 9
       }
      ],
-     "description": "equipment.ammo.hint"
+     "description": "naval.upgrades.speed.hint"
     }
    },
    "salvoDamageScale": 0.4,
@@ -3521,15 +3523,14 @@
      "subLength": 7.8,
      "subBeam": 0.65,
      "subTube": 0.22,
-     "vulcanBarrels": 6,
-     "vulcanRadius": 0.14,
-     "vulcanLength": 1.5,
-     "vulcanSpin": 22,
      "projectileHeightScale": 0.24,
      "torpedoHeight": 0.16,
      "healthLift": 4.2,
      "maxProjectiles": 24,
-     "splashCount": 12
+     "splashCount": 12,
+     "salvoBarrels": 3,
+     "salvoRadius": 0.14,
+     "salvoLength": 1.5
     }
    },
    "combat": {
@@ -3540,12 +3541,6 @@
     "lateralRadius": 22,
     "enemyFireSeconds": 9,
     "enemyStagger": 1.8,
-    "vulcanSeconds": 0.09,
-    "vulcanHeatPerShot": 0.07,
-    "vulcanCoolPerSecond": 0.22,
-    "vulcanSpread": 22,
-    "vulcanFlight": 0.22,
-    "vulcanCargoScale": 0.45,
     "submarineCycle": 9,
     "submarineSurface": 4,
     "submarineHitDepth": 0.3
@@ -3589,7 +3584,7 @@
     "speed": 32,
     "turnSpeed": 1.4,
     "minX": 20,
-    "maxX": 160,
+    "maxX": 420,
     "minZ": -110,
     "maxZ": 110,
     "broadsideSeconds": 0.6,
@@ -3667,14 +3662,26 @@
      "difficultyStep": 0.045
     }
    },
-   "charge": {
-    "seconds": 1.5,
-    "minRange": 28,
-    "maxRange": 340,
-    "goodRadius": 190,
-    "spreadEasy": 42,
-    "spreadStep": 0.2,
-    "outsideSpread": 0.7
+   "lock": {
+    "radius": 46,
+    "stageBase": 0.86,
+    "stageStep": 0.055,
+    "outsideFalloff": 45,
+    "difficulties": {
+     "easy": 0.9,
+     "normal": 1,
+     "hard": 1.12
+    },
+    "goodRadius": 190
+   },
+   "weapons": {
+    "mineOffset": 24,
+    "mineRadius": 19,
+    "mineArmSeconds": 0.3,
+    "mineLifeSeconds": 40,
+    "salvoSpread": 22,
+    "repairFraction": 0.25,
+    "repairSeconds": 1.2
    }
   },
   "art": {
@@ -6074,8 +6081,16 @@
  },
  "cityView": {
   "meshyPilot": {
-   "car": {"path": "assets/models/car-a-512.glb", "rotationY": -90, "scale": 0.38},
-   "walker": {"path": "assets/models/adult-man-rigged-512.glb", "rotationY": 0, "scale": 0.32},
+   "car": {
+    "path": "assets/models/car-a-512.glb",
+    "rotationY": -90,
+    "scale": 0.38
+   },
+   "walker": {
+    "path": "assets/models/adult-man-rigged-512.glb",
+    "rotationY": 0,
+    "scale": 0.32
+   },
    "speed": 0.3,
    "pauseSeconds": 1.5,
    "stopTime": 0.08333333333333333,
