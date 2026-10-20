@@ -1,0 +1,72 @@
+{
+  "base": "995e285",
+  "branch": "codex/g3h-soccer",
+  "dataVersion": "g9-20261020-1",
+  "saveVersion": 15,
+  "unit": {
+    "command": "node --test tests/*.mjs",
+    "total": 1793,
+    "passed": 1755,
+    "skipped": 38,
+    "failed": 0,
+    "durationMs": 72809.133756
+  },
+  "ai": {
+    "matches": 180,
+    "seconds": 90,
+    "stages": [
+      1,
+      5,
+      10
+    ],
+    "seeds": [
+      1,
+      20
+    ],
+    "requiredShots": {
+      "easy": 2,
+      "normal": 4,
+      "hard": 6
+    }
+  },
+  "audioBytes": 51888,
+  "screenshots": 8,
+  "physicalPhone": false,
+  "regressions": {
+    "scripts": [
+      "G3b",
+      "G3c",
+      "G3d",
+      "G3e",
+      "G3f",
+      "G3g"
+    ],
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "failed": 0
+  },
+  "render": {
+    "maxTriangles": 127553,
+    "maxDrawCalls": 84,
+    "maxFootDistanceDuringTurn": 0.5571
+  },
+  "browser": {
+    "script": "workout/island/tests/g3h-browser.mjs",
+    "viewports": [
+      [
+        844,
+        390
+      ],
+      [
+        740,
+        360
+      ]
+    ],
+    "failed": 0,
+    "errors": 0,
+    "outsideRequests": 0,
+    "kickAndPassAudioFromActualReleases": true
+  }
+}

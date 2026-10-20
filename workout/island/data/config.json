@@ -1959,56 +1959,60 @@
    "levels": [
     {
      "difficulty": 1,
-     "flames": 2,
+     "flames": 3,
      "seconds": 46,
      "water": 110,
-     "growthPerSecond": 0.006,
+     "growthPerSecond": 0.009,
      "points": 25,
      "winMoney": 30,
      "winParts": 0,
      "spreadSeconds": 20,
-     "spreadCount": 7,
+     "spreadCount": 6,
      "refillWater": 200,
-     "parSeconds": 7.2,
+     "parSeconds": 10.5,
      "parWater": 60,
      "fireKinds": 1,
      "feature": "feature.fire.1",
      "rescueCount": 0,
      "wind": 0,
      "eruptionSeconds": 14,
-     "resistance": 1
+     "resistance": 1,
+     "reigniteSeconds": 0,
+     "ladderMode": "simple"
     },
     {
      "difficulty": 2,
-     "flames": 3,
+     "flames": 4,
      "seconds": 50,
      "water": 107,
-     "growthPerSecond": 0.009000000000000001,
+     "growthPerSecond": 0.023,
      "points": 28,
      "winMoney": 42,
      "winParts": 0,
-     "spreadSeconds": 19,
-     "spreadCount": 6,
+     "spreadSeconds": 12,
+     "spreadCount": 5,
      "refillWater": 200,
-     "parSeconds": 9.0,
+     "parSeconds": 13,
      "parWater": 75,
      "fireKinds": 1,
      "feature": "feature.fire.2",
      "rescueCount": 0,
      "wind": 0,
-     "eruptionSeconds": 13,
-     "resistance": 1
+     "eruptionSeconds": 10,
+     "resistance": 1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "simple"
     },
     {
      "difficulty": 3,
      "flames": 4,
      "seconds": 54,
      "water": 104,
-     "growthPerSecond": 0.012,
+     "growthPerSecond": 0.032,
      "points": 31,
      "winMoney": 54,
      "winParts": 0,
-     "spreadSeconds": 18,
+     "spreadSeconds": 11,
      "spreadCount": 5,
      "refillWater": 200,
      "parSeconds": 16.2,
@@ -2017,8 +2021,10 @@
      "feature": "feature.fire.3",
      "rescueCount": 1,
      "wind": 0,
-     "eruptionSeconds": 12,
-     "resistance": 1
+     "eruptionSeconds": 9,
+     "resistance": 1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "simple"
     },
     {
      "difficulty": 4,
@@ -2039,7 +2045,9 @@
      "rescueCount": 1,
      "wind": 0,
      "eruptionSeconds": 7.1,
-     "resistance": 1
+     "resistance": 1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "moving"
     },
     {
      "difficulty": 5,
@@ -2060,7 +2068,9 @@
      "rescueCount": 1,
      "wind": 0,
      "eruptionSeconds": 6.8,
-     "resistance": 1
+     "resistance": 1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "clear"
     },
     {
      "difficulty": 6,
@@ -2081,7 +2091,9 @@
      "rescueCount": 2,
      "wind": 0,
      "eruptionSeconds": 6.5,
-     "resistance": 1
+     "resistance": 1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "sequence"
     },
     {
      "difficulty": 7,
@@ -2102,7 +2114,9 @@
      "rescueCount": 2,
      "wind": 0,
      "eruptionSeconds": 6.2,
-     "resistance": 1.4
+     "resistance": 1.4,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "wind"
     },
     {
      "difficulty": 8,
@@ -2123,7 +2137,9 @@
      "rescueCount": 2,
      "wind": 6,
      "eruptionSeconds": 5.9,
-     "resistance": 1.85
+     "resistance": 1.85,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "wind"
     },
     {
      "difficulty": 9,
@@ -2144,7 +2160,9 @@
      "rescueCount": 2,
      "wind": 10,
      "eruptionSeconds": 5.6,
-     "resistance": 2.4
+     "resistance": 2.4,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "wind"
     },
     {
      "difficulty": 10,
@@ -2165,7 +2183,9 @@
      "rescueCount": 3,
      "wind": 14,
      "eruptionSeconds": 5.300000000000001,
-     "resistance": 3.1
+     "resistance": 3.1,
+     "reigniteSeconds": 2.0,
+     "ladderMode": "wind"
     }
    ],
    "sites": [
@@ -2601,7 +2621,7 @@
     "path": "assets/models/hydrant-512.glb",
     "rotationY": 0,
     "scale": 1,
-    "height": 1.15,
+    "height": 1.9,
     "position": [
      7.3,
      0.1,
@@ -2818,7 +2838,7 @@
     "canvasLeadFraction": 0.15
    },
    "ui": {
-    "actionSize": 62,
+    "actionSize": 80,
     "smallActionSize": 54,
     "stickSize": 104,
     "clockSize": 46,
@@ -2826,6 +2846,13 @@
     "arrowInset": 0.12,
     "arrowDistance": 60,
     "hintPulseSeconds": 1.2
+   },
+   "ladder": {
+    "accessSeconds": 1.5,
+    "floorSeconds": 2.8,
+    "floorHeight": 1.6,
+    "stableTolerance": 0.38,
+    "stabilizePower": 1.6
    }
   },
   "navalDuel": {
@@ -3384,7 +3411,7 @@
     "fallbackFrameMs": 32,
     "fallbackSampleFrames": 90,
     "waterSegments": 20,
-    "waveHeight": 0.16,
+    "waveHeight": 0.28,
     "waveSpeed": 1.5,
     "seaSize": 180,
     "camera": [
@@ -3429,9 +3456,9 @@
     "maxTriangles": 90000,
     "maxDrawCalls": 70,
     "follow": {
-     "distance": 21,
-     "height": 12,
-     "lookAhead": 24,
+     "distance": 24,
+     "height": 14,
+     "lookAhead": 20,
      "lookHeight": 0.8,
      "aimDistance": 10,
      "aimHeight": 7.5,
@@ -3539,7 +3566,9 @@
     "minX": 20,
     "maxX": 160,
     "minZ": -110,
-    "maxZ": 110
+    "maxZ": 110,
+    "broadsideSeconds": 0.6,
+    "returnCameraSeconds": 0.6
    },
    "aim": {
     "minElevation": 5,
@@ -3548,17 +3577,17 @@
     "minRange": 80,
     "rangePerDegree": 5.333333333333333,
     "sway": {
-     "yaw": 0.018,
-     "elevation": 0.65,
+     "yaw": 0.027,
+     "elevation": 0.975,
      "frequency": 1.3
     },
-    "previewFraction": 0.28,
+    "previewFraction": 0.14,
     "previewSegments": 12,
     "torpedoSecondsMultiplier": 1.8,
     "torpedoBob": 0.75,
-    "assist": 0.25,
+    "assist": 0.1,
     "assistRadius": 42,
-    "autoLead": 0.7,
+    "autoLead": 0.3,
     "hullLength": 34,
     "hullBeam": 16,
     "torpedoTurnRadians": 0.07,
@@ -3604,7 +3633,14 @@
       "radius": 45
      }
     ],
-    "predictionSteps": 3
+    "predictionSteps": 3,
+    "wind": {
+     "minStrength": 30,
+     "maxStrength": 88,
+     "driftScale": 1,
+     "difficultyMin": 0.78,
+     "difficultyStep": 0.045
+    }
    }
   },
   "art": {
@@ -3859,7 +3895,7 @@
     "speedPerRank": 0.28,
     "kickPerRank": 0.06,
     "defensePerRank": 0.12,
-    "acceleration": 24,
+    "acceleration": 17,
     "radius": 0.42,
     "roles": [
      "striker",
@@ -3909,11 +3945,12 @@
       "template": 3
      }
     ],
-    "deceleration": 15,
-    "turnRate": 18,
+    "deceleration": 10,
+    "turnRate": 15,
     "turnLean": 0.1,
     "maxTurnLean": 0.2,
-    "lowSpeedTurnBoost": 1.5
+    "lowSpeedTurnBoost": 1.5,
+    "turnDrive": 0.4
    },
    "team": {
     "id": "islandTeam",
@@ -4087,13 +4124,14 @@
      "sprintLean": 0.18,
      "slideLean": -0.25,
      "fadeSeconds": 0.18,
+     "locomotionFadeSeconds": 0.24,
      "characterHeight": 1.8,
      "slideHeight": -0.2,
      "keeperMix": 0.65,
      "slideRoll": 0.6,
      "slideLeg": 0.7,
      "slideKnee": 1.65,
-     "turnSmoothing": 10,
+     "turnSmoothing": 22,
      "stealLean": 0.15,
      "stealRate": 1.6,
      "headerLean": 0.16,
@@ -4291,7 +4329,46 @@
     "sprintMultiplier": 1.1,
     "sprintDistance": 3,
     "wingWidth": 6.5,
-    "wingAdvance": 3
+    "wingAdvance": 3,
+    "attackCombinationDistance": 8,
+    "attack": {
+     "easy": {
+      "speed": 1,
+      "thinkSeconds": 0.9,
+      "shootDistance": 16,
+      "shotHold": 0.65,
+      "passHold": 0.8,
+      "buildSeconds": 3.5,
+      "stealRate": 1.3,
+      "tackleReach": 0.95,
+      "accuracy": 0.85,
+      "shotIntervalSeconds": 8
+     },
+     "normal": {
+      "speed": 1.25,
+      "thinkSeconds": 0.55,
+      "shootDistance": 18,
+      "shotHold": 0.4,
+      "passHold": 0.55,
+      "buildSeconds": 2.5,
+      "stealRate": 1.8,
+      "tackleReach": 1.05,
+      "accuracy": 1.1,
+      "shotIntervalSeconds": 3
+     },
+     "hard": {
+      "speed": 1.475,
+      "thinkSeconds": 0.28,
+      "shootDistance": 20,
+      "shotHold": 0.2,
+      "passHold": 0.4,
+      "buildSeconds": 1.8,
+      "stealRate": 2.8,
+      "tackleReach": 1.15,
+      "accuracy": 1.4,
+      "shotIntervalSeconds": 1.5
+     }
+    }
    },
    "rules": {
     "playerBoundary": 0.35,
@@ -4583,7 +4660,7 @@
       ]
      }
     ],
-    "minSpeedRatio": 0.9
+    "minSpeedRatio": 0.72
    },
    "requiresBuilding": "soccer",
    "aimAssistDegrees": 25,
@@ -4852,7 +4929,8 @@
     "throwSeconds": 0.6,
     "defaultCornerPower": 0.65,
     "inwardMinimum": 0.18,
-    "goalKickDepth": 1.2
+    "goalKickDepth": 1.2,
+    "idleReleaseSeconds": 4
    },
    "tactics": {
     "lanes": [
