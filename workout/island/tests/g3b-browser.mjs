@@ -21,7 +21,9 @@ try{for(const width of (process.env.G3B_WIDTH?[Number(process.env.G3B_WIDTH)]:so
  async function readySoccer(){if(await page.locator('[data-action=game-understood]').count()){await page.clock.runFor(32);await tap('[data-action=game-understood]');}await waitForGameStart(page);await page.waitForFunction(()=>window.__island.games.current?.session.snapshot.renderMetrics?.assetStatus==='ready');await tick(100);assert.equal(await page.evaluate(()=>window.__island.view.paused),true);}
  async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count()){await page.clock.runFor(32);await tap('[data-action=game-understood]');}await waitForGameStart(page);await tick(100);}
  try{
-  assert.equal((await context.request.get(server.url.replace('/workout/island/','/codex-lab/island-soccer/'))).status(),404);
+  // The root Python server also serves sibling lab routes; the default
+  // subtree server retains its isolation check.
+  if(!process.env.ISLAND_URL)assert.equal((await context.request.get(server.url.replace('/workout/island/','/codex-lab/island-soccer/'))).status(),404);
   await page.clock.install();await page.goto(server.url+'?dev=1&games=1',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await tap('[data-action=avatar-start]');
   await page.evaluate(()=>{const {engine,data}=window.__island;engine.skipTutorial();data.featureFlags.events=false;data.config.minigames.slowFrameMs=10000;data.config.minigames.navalDuel.render.fallbackFrameMs=10000;data.config.minigames.soccer.view.slowFrameMs=10000;});await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));
   const initialLoadBytes=await loadBytes();
@@ -51,7 +53,7 @@ try{for(const width of (process.env.G3B_WIDTH?[Number(process.env.G3B_WIDTH)]:so
   await prepareGameBuildings(page);const patrolBefore=await loadBytes();await start('navalDuel');await page.waitForFunction(()=>window.__island.games.current?.session.snapshot.renderMetrics?.playerLoaded);await tick(100);const patrolLoadBytes=(await loadBytes())-patrolBefore;const patrol=(await snap()).renderMetrics;await shot('patrol-model');await exit();
   await page.route('**/assets/models/boat-patrol-512.glb*',route=>route.fulfill({status:200,contentType:'model/gltf-binary',body:'invalid model for fallback test'}));await start('navalDuel');await page.waitForFunction(()=>window.__island.games.current?.session.snapshot.renderMetrics?.models.failed>0);await tick(100);const fallback=(await snap()).renderMetrics;assert.equal(fallback.playerLoaded,false);await shot('patrol-fallback');await exit();
   assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);
-  reports.push({width,initialLoadBytes,soccerLoadBytes,patrolLoadBytes,soccer:metrics,patrol,fallback,lockedWithoutPitch:true,menuEntry:true,pitchEntry:true,keyboardAndMultitouch:true,pauseClearsInput:true,reopenAndCleanup:true,resultAndTeamWin:true,labBlocked:true,outsideRequests:outside,consoleErrors:errors,requestCount:requests.length,shots});console.log('G3b verified',width);
+  reports.push({width,initialLoadBytes,soccerLoadBytes,patrolLoadBytes,soccer:metrics,patrol,fallback,lockedWithoutPitch:true,menuEntry:true,pitchEntry:true,keyboardAndMultitouch:true,pauseClearsInput:true,reopenAndCleanup:true,resultAndTeamWin:true,labBlocked:process.env.ISLAND_URL?null:true,outsideRequests:outside,consoleErrors:errors,requestCount:requests.length,shots});console.log('G3b verified',width);
  }catch(error){await shot('failure');throw error;}finally{await context.close();}
 }
  const sizes={};for(const path of ['assets/kid-full.glb','assets/models/boat-patrol-512.glb','minigames/soccer.mjs','minigames/soccer-view.mjs','minigames/soccer-session.mjs'])sizes[path]=(await stat(new URL('../'+path,import.meta.url))).size;

@@ -1,16 +1,34 @@
 {
-  "base": "995e285",
   "branch": "codex/g2m-aliens",
   "dataVersion": "g9-20261020-1",
   "saveVersion": 15,
   "unit": {
     "command": "node --test tests/*.mjs",
-    "tests": 1790,
-    "pass": 1752,
+    "tests": 1828,
+    "pass": 1790,
     "fail": 0,
     "skipped": 38
   },
   "browser": {
+    "allBrowserFiles844x390": {
+      "files": 29,
+      "scenarioSuites": 28,
+      "helperModules": 1,
+      "passed": true
+    },
+    "g2f": {
+      "viewports": [
+        [
+          844,
+          390
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "passed": true
+    },
     "g2m": {
       "viewports": [
         [
@@ -22,44 +40,11 @@
           844
         ]
       ],
-      "passed": true,
-      "portrait": "rotation guard pauses the game; rotating to landscape resumes the full scenario"
-    },
-    "g2f": {
-      "viewport": [
-        844,
-        390
-      ],
       "passed": true
     },
-    "g2g": {
-      "viewport": [
-        844,
-        390
-      ],
-      "passed": true
-    },
-    "g2h": {
-      "viewport": [
-        844,
-        390
-      ],
-      "passed": true
-    },
-    "g2i": {
-      "viewport": [
-        844,
-        390
-      ],
-      "passed": true
-    },
-    "g2k": {
-      "viewport": [
-        844,
-        390
-      ],
-      "passed": true
-    }
+    "server": "Python at 127.0.0.1:8765 from repository root",
+    "matrix": "browser-suites.json",
+    "portrait": "rotation guard pauses gameplay; landscape rotation resumes the complete scenario"
   },
   "audio": {
     "oggFiles": 7,
@@ -73,5 +58,18 @@
     "protectedFilesUnchanged": true
   },
   "physicalPhoneTested": false,
-  "screenshotCount": 8
+  "screenshotCount": 8,
+  "originalBase": "995e285",
+  "mergedMain": "70239cd",
+  "mergedPullRequests": [
+    149,
+    150,
+    151
+  ],
+  "appearance": {
+    "stageOneDistinctModels": 2,
+    "stageTwoDistinctModels": 2,
+    "perKindVisual": "same authored sprite and battle camera angle in every row",
+    "screenshot": "01-stage-one-single-shot.webp"
+  }
 }

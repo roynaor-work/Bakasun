@@ -24,7 +24,9 @@ try{for(const viewport of viewports){
  async function start(id){await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count()){await page.clock.runFor(32);await tap('[data-action=game-understood]');}await waitForGameStart(page);await tick(120);await nav();assert.ok(await page.evaluate(()=>window.__island.engine.isMinigameActive()),id);}
  async function back(){await page.evaluate(()=>history.back());await page.waitForSelector('[data-pause-kind=exit]');await nav();}
  try{
-  assert.equal((await context.request.get(server.url.replace('/workout/island/','/codex-lab/island-soccer/'))).status(),404);
+  // The root Python server also serves sibling lab routes; the default
+  // subtree server retains its isolation check.
+  if(!process.env.ISLAND_URL)assert.equal((await context.request.get(server.url.replace('/workout/island/','/codex-lab/island-soccer/'))).status(),404);
   await page.clock.install();await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await tap('[data-action=avatar-start]');
   assert.match(await page.locator('.mission-strip').innerText(),/זו העירייה שלך/);await tap('[data-action=toggle-mission]');await tap('[data-action=tutorial-city-hall]');assert.equal(await page.locator('[data-action=city-hall-games]').count(),1);assert.equal(await page.evaluate(()=>window.__island.engine.state.tutorial.step),0);await page.evaluate(()=>window.__island.ui.closeInfo());
   await page.evaluate(()=>{const {engine,data}=window.__island;engine.skipTutorial();data.featureFlags.events=false;data.config.ui.economyTickMs=1000000;data.config.minigames.slowFrameMs=10000;data.config.minigames.navalDuel.render.fallbackFrameMs=10000;data.config.minigames.fireRescue.render.fallbackFrameMs=10000;data.config.minigames.soccer.view.slowFrameMs=10000;});
@@ -72,7 +74,7 @@ try{for(const viewport of viewports){
   }
   // The hall has metrics, team and game entry and cannot expose removal.
   await page.evaluate(()=>{const {ui,engine}=window.__island;ui.showInfo(engine.state.buildings.find(b=>b.typeId==='cityHall').id);});assert.equal(await page.locator('[data-action=remove]').count(),0);assert.equal(await page.locator('[data-action=city-hall-games]').count(),1);assert.equal(await page.locator('.city-hall-metrics p').count(),await page.evaluate(()=>Object.keys(window.__island.engine.metrics()).length));assert.match(await page.locator('.info-card').innerText(),/כוכבי האי/);await shot('city-hall');
-  assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);reports.push({width,height,fullscreenFallback:width===360?'denied':width===844?'unavailable':false,baseLength,checks,consoleErrors:errors,outsideRequests:outside,labBlocked:true,shots});console.log('G5 verified',width,height);
+  assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);reports.push({width,height,fullscreenFallback:width===360?'denied':width===844?'unavailable':false,baseLength,checks,consoleErrors:errors,outsideRequests:outside,labBlocked:process.env.ISLAND_URL?null:true,shots});console.log('G5 verified',width,height);
  }catch(error){console.error(error,JSON.stringify({viewport,errors,outside}));try{await shot('failure');}catch(capture){console.error('failure screenshot:',capture.message);}throw error;}finally{await context.close();}
 }
  await writeFile(directory+'verification.json',JSON.stringify({release:'g5-20261016-1',saveVersion:9,browser:'Chromium / ANGLE SwiftShader',physicalPhone:false,iOS:false,realFPS:false,reports},null,2)+'\n');

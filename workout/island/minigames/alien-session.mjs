@@ -3,7 +3,7 @@ import {createControls} from './controls.mjs?v=g9-20261020-1';
 import {createGameArt} from './art.mjs?v=g9-20261020-1';
 import {loadOptionalArt} from './model-art.mjs?v=g9-20261020-1';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
-import {alienModelSpecs} from './alien-assets.mjs';
+import {alienBakeSettings} from './alien-assets.mjs';
 
 /** Keep action pulses until a simulation frame can consume them. A touch which
  * starts and ends between RAFs must still launch exactly one missile. */
@@ -24,7 +24,7 @@ export function runAlienSession(ctx,createModel,draw,createView){
  let drag=null;
  let disposed=false,paused=false,frame,last,cssWidth=1,cssHeight=1,dpr=1,samples=0,frameMs=0;
  const view=createView?.({...ctx,art},model),renderContext={...ctx,art,quality,view};
- void loadOptionalArt(art,{...b,models:alienModelSpecs(b)},()=>disposed);
+ void loadOptionalArt(art,alienBakeSettings(b),()=>disposed);
  status.hidden=true;status.textContent='';ctx.upgradePanel?.remove();ctx.spreadButton?.remove();
  controls.classList.add('alien-controls');
  const shoot=controls.querySelector('#shoot'),missile=controls.querySelector('#pass');

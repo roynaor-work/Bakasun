@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import {LocalModels} from '../view/local-models.mjs?v=g9-20261020-1';
-import {alienModelSpecs} from './alien-assets.mjs';
+import {alienModelSpecs,alienAppearance} from './alien-assets.mjs';
 /** Presentation-only depth view; all collisions and timing remain on the original plane. */
 export function createAlienView(ctx,model,adapters={}){
  const {config}=ctx,balance={...ctx.balance,models:alienModelSpecs(ctx.balance)},r=balance.render;let renderer,disposed=false,failed=false,low=false,currentWidth=config.width,currentHeight=config.height;
@@ -12,8 +12,8 @@ export function createAlienView(ctx,model,adapters={}){
  const enemyGeometry=[shipG,geo(new T.BoxGeometry(1.3,.6,1.6)),geo(new T.OctahedronGeometry(.9)),geo(new T.CylinderGeometry(.5,.9,.7,4)),geo(new T.TorusGeometry(.6,.2,6,8))],enemyMaterials=r.enemyColors.map(color=>mat(new T.MeshStandardMaterial({color})));
  const player=new T.Group();scene.add(player);const playerFallback=new T.Mesh(shipG,shipM);playerFallback.rotation.x=Math.PI/2;player.add(playerFallback);let playerLoaded=false;const paint=balance.hangar.paints[model.snapshot().hangar.paint||0];
  const specs=[balance.models.player,...balance.models.enemies],ready=Promise.all(specs.map(s=>models.load(s))).then(()=>{if(disposed)return;const root=models.create(balance.models.player,{length:r.modelHeight});if(root){player.clear();root.traverse(o=>{if(o.isMesh&&o.material?.color){const m=o.material.clone();m.color.set(paint);o.material=m;ownedM.push(m);}});player.add(root);playerLoaded=true;}});
- // Far ships use the same authored models baked into sprites, rather than
- // unrelated geometric placeholders. This keeps every enemy legible in budget.
+ // Use one battle-angle bake per kind for every enemy. Mixing live models
+ // with top-down sprites made identical kinds look different across rows.
  const spriteTextures=(ctx.art?.aliens||[]).map(c=>new T.CanvasTexture(c));let baked=-1;
  const spriteMaterials=spriteTextures.map(map=>mat(new T.SpriteMaterial({map,transparent:true,depthWrite:false})));
  const particleG=geo(new T.SphereGeometry(.12,6,4));const particle=(count,color)=>{const o=new T.InstancedMesh(particleG,mat(new T.MeshBasicMaterial({color})),count);o.frustumCulled=false;scene.add(o);return o;};
@@ -25,12 +25,16 @@ export function createAlienView(ctx,model,adapters={}){
  function resize(w=currentWidth,h=currentHeight){if(disposed)return;currentWidth=w;currentHeight=h;const aspect=w/h,factor=Math.max(1,.8/aspect);camera.aspect=aspect;camera.position.set(r.camera[0],r.camera[1]*factor,r.camera[2]*factor);camera.lookAt(...r.lookAt);camera.updateProjectionMatrix();renderer.setSize(w*(low?.75:1),h*(low?.75:1),false);}
  function dispose(){if(disposed)return;disposed=true;surface.removeEventListener('webglcontextlost',lost);models.dispose();for(const g of ownedG)g.dispose();for(const m of ownedM)m.dispose();for(const t of spriteTextures)t.dispose();for(const o of [pickups,wings])o.dispose();scene.clear();renderer.dispose();renderer.forceContextLoss();surface.width=surface.height=0;}
  function lost(e){e.preventDefault();failed=true;dispose();}surface.addEventListener('webglcontextlost',lost);resize();
- return {ready,resize,dispose,get mode(){return failed?'canvas':'three';},metrics(){return {triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,models:models.metrics(),playerLoaded,low,disposed,elevationDegrees:Math.atan2(camera.position.y,camera.position.z-r.lookAt[2])*180/Math.PI};},degrade(fallback=false){if(fallback){failed=true;dispose();}else{low=true;resize();}},
+ return {ready,resize,dispose,get mode(){return failed?'canvas':'three';},metrics(){return {triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,models:models.metrics(),playerLoaded,low,disposed,appearances:[...entities.values()].map(e=>({...e.appearance,representation:e.root.isSprite?'sprite':'fallback'})),elevationDegrees:Math.atan2(camera.position.y,camera.position.z-r.lookAt[2])*180/Math.PI};},degrade(fallback=false){if(fallback){failed=true;dispose();}else{low=true;resize();}},
  targetAt(x,y){return {x,y};},
  draw(p){if(disposed||failed)return false;try{
   player.position.set(...world(model.player.x,model.player.y));player.rotation.z=-(model.player.bank||0)*r.bankAngle;
   if(ctx.art?.modelArt?.loaded!==baked){baked=ctx.art?.modelArt?.loaded;for(const texture of spriteTextures)texture.needsUpdate=true;}
-  const ids=new Set();for(const a of model.aliens){ids.add(a.id);let entry=entities.get(a.id);if(!entry){const spec=balance.models.enemies[a.kind],visual=!low&&[...entities.values()].filter(e=>e.model).length<r.modelLimit?models.create(spec,{length:a.boss?r.bossHeight:r.modelHeight}):null;entry={root:visual||(spriteMaterials[a.kind]?new T.Sprite(spriteMaterials[a.kind]):new T.Mesh(enemyGeometry[a.kind],enemyMaterials[a.kind])),model:Boolean(visual)};entities.set(a.id,entry);scene.add(entry.root);}if(!low&&!entry.model&&[...entities.values()].filter(e=>e.model).length<r.modelLimit&&models.assets.has(balance.models.enemies[a.kind]?.path)){entry.root.removeFromParent();entry.root=models.create(balance.models.enemies[a.kind],{length:a.boss?r.bossHeight:r.modelHeight});entry.model=true;scene.add(entry.root);}entry.root.position.set(...world(a.x,a.y));const l=world(a.x-a.radius,a.y),rr=world(a.x+a.radius,a.y),diameter=Math.hypot(rr[0]-l[0],rr[2]-l[2]);entry.root.scale.setScalar(diameter*Math.min(1,(config.width/config.height)/(currentWidth/currentHeight))*r.shipPixelScale/(entry.model?(a.boss?r.bossHeight:r.modelHeight)*balance.models.enemies[a.kind].scale:1));if(entry.root.isSprite)entry.root.scale.y*=.88;else if(!entry.model){entry.root.rotation.x=-Math.PI/2;entry.root.material=enemyMaterials[a.kind];}if(!entry.root.isSprite)entry.root.rotation.z=Math.sin(a.age*2+a.phase)*.06;}
+  const ids=new Set();for(const a of model.aliens){
+   ids.add(a.id);let entry=entities.get(a.id);
+   if(!entry){const appearance=alienAppearance(balance,a.kind);entry={root:spriteMaterials[a.kind]?new T.Sprite(spriteMaterials[a.kind]):new T.Mesh(enemyGeometry[a.kind],enemyMaterials[a.kind]),appearance};entities.set(a.id,entry);scene.add(entry.root);}
+   entry.root.position.set(...world(a.x,a.y));const l=world(a.x-a.radius,a.y),rr=world(a.x+a.radius,a.y),diameter=Math.hypot(rr[0]-l[0],rr[2]-l[2]);entry.root.scale.setScalar(diameter*Math.min(1,(config.width/config.height)/(currentWidth/currentHeight))*r.shipPixelScale);if(entry.root.isSprite)entry.root.scale.y*=.88;else{entry.root.rotation.x=-Math.PI/2;entry.root.material=enemyMaterials[a.kind];entry.root.rotation.z=Math.sin(a.age*2+a.phase)*.06;}
+  }
   for(const [id,e]of entities)if(!ids.has(id)){e.root.removeFromParent();entities.delete(id);}
   updateParticles(pickups,model.pickups,2);updateParticles(wings,model.wings.filter(w=>w.active),2);
   for(let i=0;i<r.starCount;i++)starArray[i*3+2]=-r.starDepth+((i*23+model.time*r.starSpeed)%r.starDepth);starG.attributes.position.needsUpdate=true;
