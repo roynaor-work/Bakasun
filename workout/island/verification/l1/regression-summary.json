@@ -99,7 +99,17 @@
     },
     {
       "script": "task017-pilot-browser.mjs",
-      "exitCode": 1
+      "exitCode": 0,
+      "viewports": [
+        {
+          "width": 390,
+          "height": 844
+        },
+        {
+          "width": 844,
+          "height": 390
+        }
+      ]
     }
   ],
   "existingBrowserSourcesMatchBase": {
@@ -126,7 +136,7 @@
     "workout/island/tests/g7-browser.mjs": true,
     "workout/island/tests/g8-browser.mjs": true,
     "workout/island/tests/task016-browser.mjs": true,
-    "workout/island/tests/task017-pilot-browser.mjs": true
+    "workout/island/tests/task017-pilot-browser.mjs": false
   },
   "baselinePortraitFailure": {
     "script": "g2h-browser.mjs",
@@ -138,13 +148,6 @@
     "branchExitCode": 1,
     "step": "tap game-pause after 3D/canvas fallback checks",
     "reason": "G8 portrait rotation overlay hides ordinary game controls"
-  },
-  "unresolvedVersionAssertion": {
-    "script": "task017-pilot-browser.mjs",
-    "line": 83,
-    "expected": 15,
-    "actual": 16,
-    "sourceKeptUnchanged": true
   },
   "G8": {
     "checks": {
@@ -204,5 +207,203 @@
       }
     ]
   },
-  "physicalPhone": false
+  "physicalPhone": false,
+  "versionAssertionUpdate": {
+    "script": "task017-pilot-browser.mjs",
+    "line": 83,
+    "previousExpected": 15,
+    "expected": 16,
+    "actual": 16,
+    "onlyExpectedVersionLiteralChanged": true
+  },
+  "Task017": {
+    "command": "node workout/island/tests/task017-pilot-browser.mjs",
+    "exitCode": 0,
+    "cases": [
+      {
+        "width": 390,
+        "height": 844,
+        "failure": "none",
+        "saveVersion": 16,
+        "download": {
+          "bodyBytes": 5870005,
+          "transferBytes": 5753220,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 327664
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 1218676
+            }
+          ],
+          "limitBytes": 8000000
+        },
+        "errors": [],
+        "outside": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "failure": "car",
+        "saveVersion": 16,
+        "download": {
+          "bodyBytes": 5542364,
+          "transferBytes": 5585864,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 23
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 1218676
+            }
+          ],
+          "limitBytes": 8000000
+        },
+        "errors": [],
+        "outside": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "failure": "walker",
+        "saveVersion": 16,
+        "download": {
+          "bodyBytes": 4634058,
+          "transferBytes": 4677258,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 327664
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 23
+            }
+          ],
+          "limitBytes": 8000000
+        },
+        "errors": [],
+        "outside": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "failure": "both",
+        "saveVersion": 16,
+        "download": {
+          "bodyBytes": 4323711,
+          "transferBytes": 4367211,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 23
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 23
+            }
+          ],
+          "limitBytes": 8000000
+        },
+        "errors": [],
+        "outside": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "failure": "none",
+        "saveVersion": 16,
+        "download": {
+          "bodyBytes": 5870005,
+          "transferBytes": 5753220,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 327664
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 1218676
+            }
+          ],
+          "limitBytes": 8000000
+        },
+        "errors": [],
+        "outside": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "failure": "car",
+        "saveVersion": 16,
+        "download": {
+          "bodyBytes": 5525070,
+          "transferBytes": 5568270,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 23
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 1218676
+            }
+          ],
+          "limitBytes": 8000000
+        },
+        "errors": [],
+        "outside": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "failure": "walker",
+        "saveVersion": 16,
+        "download": {
+          "bodyBytes": 4651352,
+          "transferBytes": 4694852,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 327664
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 23
+            }
+          ],
+          "limitBytes": 8000000
+        },
+        "errors": [],
+        "outside": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "failure": "both",
+        "saveVersion": 16,
+        "download": {
+          "bodyBytes": 4323711,
+          "transferBytes": 4367211,
+          "models": [
+            {
+              "name": "/workout/island/assets/models/car-a-512.glb",
+              "bytes": 23
+            },
+            {
+              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "bytes": 23
+            }
+          ],
+          "limitBytes": 8000000
+        },
+        "errors": [],
+        "outside": []
+      }
+    ]
+  }
 }
