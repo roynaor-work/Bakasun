@@ -123,7 +123,7 @@ test('G3c accuracy halves assisted spread and extends the assist cone by ten deg
 });
 test('G3c stamina enlarges capacity and regen; defense adds the configured chance',()=>{
  const a=setup({card:card(50)}),b=setup({card:card(99)});near(b.getState().sprint.capacity/a.getState().sprint.capacity,1.6);for(const g of [a,b])g.getState().sprint.value=10;advance(a,.5);advance(b,.5);near((b.getState().sprint.value-10)/(a.getState().sprint.value-10),1.4);
- const low=defend(()=>.5,{card:card(50)}),high=defend(()=>.5,{card:card(99)});low.update(dt,{passPressed:true});high.update(dt,{passPressed:true});assert.equal(low.getState().ball.owner,3);assert.equal(high.getState().ball.owner,0);
+ const low=defend(()=>.8,{card:card(50)}),high=defend(()=>.8,{card:card(99)});low.update(dt,{passPressed:true});high.update(dt,{passPressed:true});assert.equal(low.getState().ball.owner,3);assert.equal(high.getState().ball.owner,0);
 });
 for(const difficulty of ['easy','normal','hard'])test(`G3c ${difficulty} repeated wins credit training wallet independently of map stars`,()=>{
  const {engine:e}=fixture();pitch(e);e.setSoccerDifficulty(difficulty);const money=e.state.money,expected=Math.floor((c.levels[0].winMoney+1)*c.difficulties[difficulty].coinMultiplier);
