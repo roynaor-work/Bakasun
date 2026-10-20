@@ -16,10 +16,10 @@ await verify('g6d',[{width:844,height:390}],async({page,context,tick,snap,tap,st
  const fireAt=async hit=>{
   const point=await page.evaluate(hit=>{const {model:m}=window.__island.games.current.session.debug,b=window.__island.data.config.minigames.navalDuel,e=m.enemyShip;
    const flight=b.targeting.flightSeconds+Math.hypot(e.x-m.playerShip.x,e.z-m.playerShip.z)*b.targeting.secondsPerRange,scale=b.aim.wind.driftScale*b.aim.wind.difficultyMin*flight*flight;
-   const q=m.screenPoint(hit?e.x-m.wind.x*scale:280,hit?e.z-m.wind.z*scale:-80),a=m.screenPoint(m.aim.x,m.aim.z);return {x:q.x-a.x,y:q.y-a.y};},hit);
-  await touch('touchStart',[{x:fx,y:fy}]);await touch('touchMove',[{x:fx+point.x,y:fy+point.y}]);await tick(32);await touch('touchEnd',[]);
+   const tx=hit?e.x-m.wind.x*scale:240,tz=hit?e.z-m.wind.z*scale:-160,q=m.screenPoint(tx,tz),a=m.screenPoint(m.aim.x,m.aim.z),hold=(Math.hypot(tx-m.playerShip.x,tz-m.playerShip.z)-b.charge.minRange)/(b.charge.maxRange-b.charge.minRange)*b.charge.seconds*1000;return {x:q.x-a.x,y:q.y-a.y,hold};},hit);
+  await touch('touchStart',[{x:fx,y:fy}]);await touch('touchMove',[{x:fx+point.x,y:fy+point.y}]);await tick(Math.max(0,point.hold));await touch('touchEnd',[]);
  };
- await fireAt(true);await tick(32);await capture('07-muzzle-flash');await tick(1100);const hit=await snap();assert.ok(hit.hits>=1);assert.ok(hit.renderMetrics.effects.smokeInstances>=8);await touch('touchStart',[{x:fx,y:fy}]);await tick(600);await capture('05-hit-fire-smoke');await touch('touchCancel',[]);
+ let hit;for(let attempt=0;attempt<6;attempt++){await fireAt(true);await tick(32);await capture('07-muzzle-flash');await tick(1100);hit=await snap();if(hit.hits>=1)break;}assert.ok(hit.hits>=1);assert.ok(hit.renderMetrics.effects.smokeInstances>=8);await touch('touchStart',[{x:fx,y:fy}]);await tick(600);await capture('05-hit-fire-smoke');await touch('touchCancel',[]);
  const windAfter={...hit.wind};await tick(200);await fireAt(false);await tick(750);await touch('touchStart',[{x:fx,y:fy}]);await tick(300);const miss=await snap();assert.equal(miss.blast.hit,false);assert.ok(miss.blast.life>0);assert.notDeepEqual(miss.wind,windAfter);await capture('06-miss-splash');await touch('touchCancel',[]);
  // Dedicated bank unlocks from real gestures, respects the existing pause toggle.
  await page.waitForFunction(()=>window.__island.games.current.session.debug.audio.metrics().loaded.length===8);

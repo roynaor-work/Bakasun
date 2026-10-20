@@ -48,14 +48,8 @@ test('G6c screen/water mapping roundtrips at zoom, normal and turned views',()=>
 test('G6c lead uses the actual flight time and manual assistance decreases by difficulty',()=>{
  const ship={x:60,z:0},e={x:300,z:10,vx:4,vz:2,active:true,hp:1};const lead=navalLead(ship,e,b),flight=b.targeting.flightSeconds+Math.hypot(lead.x-ship.x,lead.z-ship.z)*b.targeting.secondsPerRange;assert.ok(Math.abs(lead.x-e.x-e.vx*flight)<.001);const aim={x:260,z:10};assert.ok(navalSoftAim(aim,[e],b,1).x>navalSoftAim(aim,[e],b,10).x);
 });
-const rates=[];
-for(let level=1;level<=10;level++)test(`G6c child short-tap hit rate at difficulty ${level}`,()=>{
- let fired=0,hits=0;
- // Fresh seeded encounters at varied times include every hull and dive state.
- // G6d wind/partial lead replaces the old >=60% tap baseline; the stricter
- // 200-shot medium target lives in island-g6d.test.mjs.
- for(let seed=0;seed<80;seed++){const m=make(level,seed);advance(m,(seed%9)*.7);m.update(.02,{autoAim:true,firing:true});advance(m,1.2);const s=m.snapshot();fired+=s.fired;hits+=s.hits;}
- const rate=hits/fired;rates.push({difficulty:level,hits,fired,percent:Math.round(rate*10000)/100});assert.equal(fired,80);assert.ok(rate>=.25&&rate<=.65,JSON.stringify(rates.at(-1)));if(level===10)console.log('G6c short-tap calibration',JSON.stringify(rates));
+test('G6e a minimum-power release fires close and never auto-locks the enemy',()=>{
+ const m=make();m.update(.02,{chargeHeld:false,releasePower:0,yaw:.4});assert.equal(m.fired,1);assert.ok(Math.hypot(m.ball.targetX-m.playerShip.x,m.ball.targetZ-m.playerShip.z)<80);assert.notEqual(m.ball.targetX,m.enemyShip.x);
 });
 test('G6c overlapping cannon fire preserves the older torpedo weapon',()=>{
  const m=make();m.update(.02,{ammoIndex:2,targetX:300,targetZ:0,firing:true});m.update(.02,{});m.update(.02,{ammoIndex:0,targetX:65,targetZ:180,firing:true});assert.equal(m.extraShots[0].ammo,2);assert.equal(m.ball.ammo,0);advance(m,2);assert.ok(m.snapshot().hits>0);

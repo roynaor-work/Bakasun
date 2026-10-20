@@ -1,0 +1,34 @@
+{
+  "shotsPerScenario": 200,
+  "aimedInside": [
+    {
+      "level": 1,
+      "hits": 101,
+      "rate": 0.505
+    },
+    {
+      "level": 5,
+      "hits": 99,
+      "rate": 0.495
+    },
+    {
+      "level": 10,
+      "hits": 82,
+      "rate": 0.41
+    }
+  ],
+  "randomMedium": [
+    {
+      "playerX": 60,
+      "insideRing": false,
+      "hits": 3,
+      "rate": 0.015
+    },
+    {
+      "playerX": 150,
+      "insideRing": true,
+      "hits": 9,
+      "rate": 0.045
+    }
+  ]
+}

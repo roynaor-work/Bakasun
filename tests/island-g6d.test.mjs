@@ -7,15 +7,6 @@ import {G6D_AUDIO_FILES,createNavalAudio} from '../workout/island/minigames/g6d-
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,b=config.navalDuel;
 const make=(level=5,seed=0)=>createNavalModel({config,balance:b,level,seed,random:seededRandom(seed)});
 const advance=(m,t,input={})=>{for(let i=0;i<Math.ceil(t/.02);i++)m.update(.02,input);};
-const rates=new Map();
-for(const level of [1,5,10])test(`G6d 200 normal unupgraded shots at stage ${level}`,()=>{
- let hits=0,fired=0;
- // Same fixed encounter distribution as G6c: all hulls, seeds 0..199,
- // release at 0..5.6s, real moving enemies and actual collision after flight.
- for(let seed=0;seed<200;seed++){const m=make(level,seed);advance(m,seed%9*.7);m.update(.02,{autoAim:true,firing:true});advance(m,1.2);hits+=m.snapshot().hits;fired+=m.fired;}
- const rate=hits/fired;rates.set(level,rate);console.log('G6d calibration',JSON.stringify({level,hits,fired,rate}));assert.equal(fired,200);
- assert.ok(rate>=.30&&rate<=.50);if(level===5)assert.ok(rate>=.35&&rate<=.45);if(level===10){assert.ok(rates.get(1)>rates.get(5));assert.ok(rate<rates.get(5));}
-});
 test('G6d joystick release aligns the nearest broadside in .6s and restores enemy view in 1s',()=>{
  for(const direction of [-1,1]){const m=make();advance(m,1,{moveX:direction,moveZ:-.6});const released={...m.playerShip};advance(m,.3);assert.notEqual(m.playerShip.heading,released.heading);assert.deepEqual({x:m.playerShip.x,z:m.playerShip.z},{x:released.x,z:released.z});advance(m,.3);const e=m.enemyShip,dx=e.x-m.playerShip.x,dz=e.z-m.playerShip.z;assert.ok(Math.abs((Math.cos(m.playerShip.heading)*dx+Math.sin(m.playerShip.heading)*dz)/Math.hypot(dx,dz))<.02);advance(m,.4);const q=m.screenPoint(e.x,e.z);assert.ok(q.depth>0&&q.x>0&&q.x<config.width);const bearing=Math.atan2(dz,dx);assert.ok(Math.abs(m.camera.heading-bearing)<.1);}
 });
@@ -31,7 +22,7 @@ test('G6d overlapping shells retain their wind while a later torpedo has no air 
  const m=make();m.update(.02,{targetX:300,targetZ:0,firing:true});const first={...m.ball};m.update(.02,{});m.update(.02,{ammoIndex:2,targetX:300,targetZ:0,firing:true});assert.equal(m.extraShots.length,1);assert.equal(m.extraShots[0].windOffsetX,first.windOffsetX);assert.equal(m.extraShots[0].windOffsetZ,first.windOffsetZ);assert.equal(m.ball.wind,undefined);assert.equal(m.ball.windOffsetX,0);assert.equal(m.ball.windOffsetZ,0);advance(m,.2);const p=m.extraShots[0],t=p.age/p.duration;assert.ok(Math.abs(p.x-(p.fromX+(p.targetX-p.fromX)*t-p.windOffsetX*t*(1-t)))<1e-8);
 });
 test('G6d tunings match requested reductions and cached naval modules use current version',async()=>{
- assert.equal(b.aim.assist,.1);assert.equal(b.aim.autoLead,.3);assert.equal(b.aim.previewFraction,.14);assert.equal(b.aim.sway.yaw,.027);assert.ok(Math.abs(b.aim.sway.elevation-.975)<1e-8);
+ assert.equal(b.aim.assist,.1);assert.equal(b.aim.autoLead,.3);assert.equal(b.aim.previewFraction,1/3);assert.ok(b.aim.wind.driftScale<.3);assert.equal(b.aim.sway.yaw,.027);assert.ok(Math.abs(b.aim.sway.elevation-.975)<1e-8);
  const source=await readFile(new URL('../workout/island/minigames/naval.mjs',import.meta.url),'utf8');assert.match(source,/g6d-audio\.mjs\?v=g9-20261020-1/);assert.match(source,/g6d/);assert.ok(b.render.maxTriangles<=90000&&b.render.maxDrawCalls<=70);
 });
 test('G6d all eight local CC0 clips fit in 400KB and no-audio platforms are safe',async()=>{

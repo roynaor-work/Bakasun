@@ -1,0 +1,4 @@
+/* Icon-only charge feedback beside the existing fire control. */
+.game-screen[data-game=navalDuel] #shoot:before{content:"";position:absolute;width:18px;height:106px;right:calc(100% + 18px);bottom:0;border:2px solid #d9f9ef;border-radius:12px;background:linear-gradient(to top,#74efae 0%,#ffdc79 65%,#ff855d 100%) bottom/100% var(--naval-power,0%) no-repeat #10374add;box-shadow:0 2px 8px #10374a88;pointer-events:none;opacity:0;transition:opacity .1s}
+.game-screen[data-game=navalDuel] [data-charging=true] #shoot:before{opacity:1}
+.game-screen[data-game=navalDuel] [data-charging=true] #shoot:after{background:conic-gradient(#ffdc79 var(--naval-power,0%),transparent 0)}

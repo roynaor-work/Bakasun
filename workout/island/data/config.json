@@ -3581,7 +3581,7 @@
      "elevation": 0.975,
      "frequency": 1.3
     },
-    "previewFraction": 0.14,
+    "previewFraction": 0.3333333333333333,
     "previewSegments": 12,
     "torpedoSecondsMultiplier": 1.8,
     "torpedoBob": 0.75,
@@ -3637,10 +3637,19 @@
     "wind": {
      "minStrength": 30,
      "maxStrength": 88,
-     "driftScale": 1,
+     "driftScale": 0.22,
      "difficultyMin": 0.78,
      "difficultyStep": 0.045
     }
+   },
+   "charge": {
+    "seconds": 1.5,
+    "minRange": 28,
+    "maxRange": 340,
+    "goodRadius": 190,
+    "spreadEasy": 42,
+    "spreadStep": 0.2,
+    "outsideSpread": 0.7
    }
   },
   "art": {
