@@ -253,8 +253,12 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   }
   function readyRestart(input){
     const r=s.restart,p=players[r.player],human=r.team===0&&(role!=='keeper'||p.role==='keeper');r.age+=step;
-    s.aim=Math.hypot(input.moveX||0,input.moveZ||0)>aiConfig.idleThreshold?{x:input.moveX,z:input.moveZ}:{x:direction(r.team),z:r.type==='throwIn'?-Math.sign(r.z):r.type==='corner'?-Math.sign(r.z):0};
-    s.passAim=input.passAim;s.moving=Math.hypot(input.moveX||0,input.moveZ||0)>aiConfig.idleThreshold;s.chargeKind='pass';s.charging=!!input.passHeld;if(s.charging)s.charge=Math.min(config.passing.chargeSeconds,s.charge+step);
+    const moving=Math.hypot(input.moveX||0,input.moveZ||0)>aiConfig.idleThreshold;
+    const aim=moving?{x:input.moveX,z:input.moveZ}:r.type==='corner'?{x:direction(r.team)*(hx-config.pitch.penaltyDepth/2)-r.x,z:-r.z}:{x:direction(r.team),z:r.type==='throwIn'?-Math.sign(r.z):0},length=Math.hypot(aim.x,aim.z)||1;
+    s.aim={x:aim.x/length,z:aim.z/length};
+    // Automatic button aim belongs to the freely moving controlled teammate.
+    // The reserved taker aims from the restart spot; a drag still wins.
+    s.passAim=input.passAim?.manual?input.passAim:null;s.moving=moving;s.chargeKind='pass';s.charging=!!input.passHeld;if(s.charging)s.charge=Math.min(config.passing.chargeSeconds,s.charge+step);
     p.throwTime=r.type==='throwIn'?config.restarts.throwSeconds:0;
     if(r.age<config.restarts.readySeconds)return;
     if(human?!(pendingPass||pendingPassRelease)&&r.age<config.restarts.idleReleaseSeconds:r.age<config.restarts.aiReleaseSeconds)return;

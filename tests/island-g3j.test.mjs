@@ -84,3 +84,11 @@ test('G3j goal delivers whistle, net rustle and 2-second cheer through actual We
  assert.equal(playerAnimation(s.players[goal.player],s,c).mode,'celebrate');
  assert.deepEqual(soccerAudioCues({type:'restart',restart:'throwIn'}),['whistle']);audio.dispose();
 });
+
+for(const kind of ['goalKick','corner'])test(`G3j ${kind} automatic aim belongs to the taker, independent of the controlled teammate`,()=>{
+ const g=setup(),s=g.getState(),side=kind==='corner'?1:-1;
+ Object.assign(s.ball,{owner:null,x:side*17.95,z:6,vx:side*30,vz:0,vy:0,lastTeam:1});g.update(dt);assert.equal(s.restart.type,kind);
+ let elapsed=0;while(s.phase.startsWith('restart')&&elapsed<2){g.update(dt,{passAim:{x:1,z:0,manual:false}});elapsed+=dt;}
+ assert.equal(s.phase,'playing');
+ if(kind==='goalKick')assert.ok(s.ball.vx>0);else{assert.ok(s.ball.flight);assert.ok(s.ball.flight.x<c.pitch.length/2);assert.ok(Math.abs(s.ball.flight.z)<c.pitch.width/2);}
+});
