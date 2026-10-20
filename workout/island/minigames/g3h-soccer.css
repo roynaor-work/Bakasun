@@ -1,0 +1,20 @@
+@import url('./soccer-controls.css?v=g9-20261020-1');
+/* Soccer overrides stay here; the shell owns the only pause glyph. */
+.game-screen[data-game=soccer] .game-header .game-pause { flex-direction:row; }
+.game-screen[data-game=soccer] .game-header .game-pause::before { content:''; font-size:0; width:12px; height:18px; box-sizing:content-box; }
+.game-screen[data-game=soccer][data-paused=true] .game-header .game-pause::before { width:0; height:0; }
+.game-screen[data-game=soccer] .soccer-rotate .shell-icon svg { width:32px; height:32px; animation:none; }
+.game-screen[data-game=soccer] .shell-pause-symbol svg { width:32px; height:32px; aspect-ratio:1; }
+.game-screen[data-game=soccer] .soccer-scoreboard { height:38px; padding:0 9px; gap:9px; border:0; border-radius:3px; background:#102335f2; box-shadow:0 3px 12px #0005; font-variant-numeric:tabular-nums; }
+.game-screen[data-game=soccer] .soccer-kit { display:block; width:18px; height:18px; flex:none; border:0; border-bottom:4px solid; border-radius:0; box-shadow:0 0 0 1px #ffffff55; box-sizing:border-box; }
+.game-screen[data-game=soccer] .soccer-score { display:flex; gap:1px; font-size:26px; font-weight:900; }
+.game-screen[data-game=soccer] .soccer-score bdi { display:block; min-width:26px; text-align:center; padding:1px 3px; background:#edf7ff; color:#102335; }
+.game-screen[data-game=soccer] .soccer-clock { font-size:17px; padding-left:10px; min-width:61px; }
+.game-screen[data-game=soccer] .soccer-controls #shoot { --action-color:#e97516; background:var(--action-color); border-color:#ffd5a8; }
+.game-screen[data-game=soccer] .soccer-controls #pass { --action-color:#1769c7; background:var(--action-color); border-color:#bbddff; }
+.game-screen[data-game=soccer] .soccer-controls #sprint { --action-color:#18824e; background:var(--action-color); border-color:#b2ffd3; }
+.game-screen[data-game=soccer] .soccer-controls #soccer-switch { --action-color:#42546a; background:var(--action-color); border-color:#d3dfef; }
+.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #shoot { --action-color:#bc384e; background:var(--action-color); border-color:#ffbfca; }
+.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #pass { --action-color:#7844ba; background:var(--action-color); border-color:#e1c6ff; }
+.game-screen[data-game=soccer] .soccer-controls button.held { filter:brightness(1.2); box-shadow:0 0 0 4px #fff7,inset 0 2px 9px #0003; }
+.game-screen[data-game=soccer] .soccer-controls[data-mode] button.held { background:var(--action-color)!important; color:#fff!important; }

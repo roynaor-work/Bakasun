@@ -1,0 +1,47 @@
+import {verify} from './night-browser.mjs';
+await verify('g3h',[{width:844,height:390},{width:740,height:360}],async({page,viewport,tick,snap,tap,start,exit,shot,assert})=>{
+ await page.evaluate(()=>{const {engine,data}=window.__island;engine.state.team.colors=['#2868ee','#ffcf69'];data.config.minigames.soccer.opponents.teams[0].colors=['#e94d51','#fff4d9'];});
+ await start('soccer');await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics.assetStatus==='ready');await tick(80);
+ await page.waitForFunction(()=>window.__island.games.current.session.snapshot.audio.loaded.length===4);
+ const c=await page.evaluate(()=>window.__island.data.config.minigames.soccer),budgets=[];
+ const budget=async()=>{const m=(await snap()).renderMetrics;assert.ok(m.triangles<=130000&&m.drawCalls<=90);budgets.push({triangles:m.triangles,drawCalls:m.drawCalls});return m;};await budget();
+ const visiblePause=page.locator('[data-action=game-pause]:visible');assert.equal(await visiblePause.count(),1);
+ const pauseGlyph=await visiblePause.evaluate(n=>{const p=getComputedStyle(n,'::before'),b=n.getBoundingClientRect();return {content:p.content,width:parseFloat(p.width),height:parseFloat(p.height),left:parseFloat(p.borderLeftWidth),right:parseFloat(p.borderRightWidth),button:{width:b.width,height:b.height}};});
+ assert.ok(pauseGlyph.content==='""'||pauseGlyph.content==="''");assert.equal(pauseGlyph.width,12);assert.equal(pauseGlyph.height,18);assert.equal(pauseGlyph.left,4);assert.equal(pauseGlyph.right,4);assert.equal(pauseGlyph.button.width,pauseGlyph.button.height);
+ const kitColors=await page.locator('.soccer-kit').evaluateAll(nodes=>nodes.map(n=>{const s=getComputedStyle(n),b=n.getBoundingClientRect();return {background:s.backgroundColor,trim:s.borderBottomColor,width:b.width,height:b.height};}));
+ assert.deepEqual(kitColors.map(r=>r.background),['rgb(40, 104, 238)','rgb(233, 77, 81)']);for(const k of kitColors)assert.equal(k.width,k.height);
+ assert.equal((await page.locator('.soccer-scoreboard').innerText()).replace(/\s/g,''),'0000:00');await shot('scoreboard');
+ const scenario=async(defense=false)=>page.evaluate(defense=>{
+  const q=window.__island.games.current.session,s=q.debug.model.getState(),c=window.__island.data.config.minigames.soccer;q.debug.model.clearInput();q.debug.model.drainEvents();q.setPaused(false);q.debug.poseCamera(null);
+  Object.assign(s,{phase:'playing',phaseTime:0,half:1,halfElapsed:12,elapsed:12,score:[0,0],controlled:0,attackDir:1,passTarget:null,restart:null,event:null,mode:defense?'defense':'attack',switchCooldown:0});
+  for(const p of s.players)Object.assign(p,{x:p.team?13:-13,z:p.id%2?8:-8,vx:0,vz:0,recover:0,cooldown:100,think:100,kickTime:0,slideTime:0,stealTime:0,headerTime:0,diveTime:0,throwTime:0,catchTime:0,hands:false,fx:p.team?-1:1,fz:0});
+  Object.assign(s.players[0],{x:0,z:0,cooldown:0});Object.assign(s.players[3],{x:3,z:1});Object.assign(s.ball,{owner:defense?3:0,x:defense?2.5:c.physics.dribbleOffset,z:defense?1:0,y:c.physics.ballRadius,vx:0,vz:0,vy:0,grace:100,lastPlayer:defense?3:0,lastTeam:defense?1:0,flight:null,thrower:null,curve:0});
+ },defense);
+ const colors=async()=>page.locator('.soccer-actions button').evaluateAll(nodes=>nodes.map(n=>({id:n.id,color:getComputedStyle(n).backgroundColor,icon:n.querySelector('svg')?.dataset.soccerIcon,box:{x:n.getBoundingClientRect().x,y:n.getBoundingClientRect().y,width:n.getBoundingClientRect().width,height:n.getBoundingClientRect().height}})));
+ await scenario();await tick(160);const attack=await colors();assert.equal(new Set(attack.map(r=>r.color)).size,4);assert.equal(attack.find(r=>r.id==='shoot').icon,'shoot');assert.equal(attack.find(r=>r.id==='pass').icon,'pass');assert.equal(attack.find(r=>r.id==='sprint').icon,'sprint');
+ for(const r of attack){assert.ok(r.box.width>=48&&r.box.height>=48);assert.ok(r.box.x>=0&&r.box.y>=0&&r.box.x+r.box.width<=viewport.width&&r.box.y+r.box.height<=viewport.height);}await shot('attack-controls');await shot('740-attack-controls',740);
+ const beforeClock=await page.locator('.soccer-clock').innerText();await tick(1100);assert.notEqual(await page.locator('.soccer-clock').innerText(),beforeClock);
+ // Real directional contacts, natural braking, and a body turn during a run.
+ const zone=page.locator('.soccer-stick-zone'),box=await zone.boundingBox(),origin={clientX:box.x+box.width*.5,clientY:box.y+box.height*.7};
+ await zone.dispatchEvent('pointerdown',{pointerId:11,button:0,...origin});await zone.dispatchEvent('pointermove',{pointerId:11,clientX:origin.clientX+35,clientY:origin.clientY});await tick(250);const moving=await snap();assert.ok(moving.players[0].vx>1);
+ await zone.dispatchEvent('pointermove',{pointerId:11,clientX:origin.clientX,clientY:origin.clientY-35});await tick(32);const turning=await snap();assert.ok(turning.players[0].fz<0&&turning.players[0].vx>0);assert.ok(turning.renderMetrics.poses.find(p=>p.id===0).footDistance<.8);
+ await zone.dispatchEvent('pointerup',{pointerId:11,...origin});await tick(16);const braking=await snap();assert.ok(Math.hypot(braking.players[0].vx,braking.players[0].vz)>0);await budget();
+ // Exercise the new bank through real releases, in addition to decoding it.
+ await scenario();await tick(32);await page.keyboard.down('Space');await tick(120);await page.keyboard.up('Space');await tick(48);assert.ok((await snap()).audio.counts.kick>0);
+ await scenario();await tick(32);await page.keyboard.down('KeyX');await tick(32);await page.keyboard.up('KeyX');await tick(48);assert.ok((await snap()).audio.counts.pass>0);
+ await scenario(true);await tick(160);const defense=await colors();assert.equal(defense.find(r=>r.id==='shoot').icon,'slide');assert.equal(defense.find(r=>r.id==='pass').icon,'steal');assert.notEqual(defense.find(r=>r.id==='shoot').color,attack.find(r=>r.id==='shoot').color);assert.notEqual(defense.find(r=>r.id==='pass').color,attack.find(r=>r.id==='pass').color);assert.equal(new Set(defense.map(r=>r.color)).size,4);await shot('defense-controls');await shot('740-defense-controls',740);
+ await tap('[data-action=game-pause]');const frozen=await snap();await tick(1000);const afterPause=await snap();assert.deepEqual(afterPause.players,frozen.players);assert.equal(afterPause.elapsed,frozen.elapsed);assert.ok(afterPause.audio.paused);await shot('pause');
+ await tap('[data-action=game-pause-sound]');assert.equal(await page.evaluate(()=>localStorage.getItem('island.sound')),'off');await tap('[data-action=game-resume]');await tick(32);assert.ok((await snap()).audio.muted);await tap('[data-action=game-pause]');await tap('[data-action=game-pause-sound]');await tap('[data-action=game-resume]');await tick(32);assert.equal((await snap()).audio.muted,false);
+ // The real simulation reaches an attack with no input, then renders that state.
+ await page.evaluate(async()=>{const {createSoccer}=await import('./minigames/soccer.mjs?v=g9-20261020-1'),q=window.__island.games.current.session,c=window.__island.data.config.minigames.soccer,m=createSoccer({config:c,difficulty:'normal',seed:9});let found=false;
+  for(let i=0;i<5400;i++){m.update(1/60);const s=m.getState(),p=s.ball.owner===null?null:s.players[s.ball.owner];if(p?.team===1&&p.x<-7&&p.x>-13&&Math.hypot(p.vx,p.vz)>1){found=true;break;}}
+  if(!found)throw Error('No autonomous rival attack');Object.assign(q.debug.model.getState(),m.snapshot());q.debug.model.clearInput();q.setPaused(true);
+ });await tick(32);const attacking=await snap();assert.equal(attacking.players[attacking.ball.owner].team,1);assert.ok(attacking.players[attacking.ball.owner].x<0);await shot('computer-attacks');await budget();
+ await scenario();const whistles=(await snap()).audio.counts.whistle||0;
+ await page.evaluate(()=>{const q=window.__island.games.current.session,s=q.debug.model.getState();for(const p of s.players)p.cooldown=100;Object.assign(s.ball,{owner:null,x:17.95,z:0,y:.3,vx:30,vz:0,vy:0,grace:100,lastTeam:0,lastPlayer:0});q.setPaused(false);});await tick(160);const goal=await snap();assert.equal(goal.phase,'goal');assert.deepEqual(goal.score,[1,0]);assert.ok(goal.audio.counts.whistle>whistles);assert.ok(goal.audio.counts.cheer>0);assert.ok(goal.audio.crowd&&goal.audio.excitement===1);await shot('goal');await budget();
+ const afterGoal=goal.audio.counts.whistle;
+ await scenario();await page.evaluate(()=>{const s=window.__island.games.current.session.debug.model.getState();Object.assign(s.ball,{owner:null,x:0,z:10.95,y:.22,vx:0,vz:30,grace:100,lastTeam:1});});await tick(160);assert.equal((await snap()).restart.type,'throwIn');assert.ok((await snap()).audio.counts.whistle>afterGoal);
+ const text=await page.locator('.game-screen').evaluate(n=>{const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT),found=[];while(w.nextNode()){const t=w.currentNode;if(!/[א-תa-z]/i.test(t.textContent))continue;const r=document.createRange();r.selectNodeContents(t);const s=getComputedStyle(t.parentElement);if(r.getBoundingClientRect().width>0&&s.visibility!=='hidden'&&s.display!=='none')found.push(t.textContent.trim());}return found;});assert.deepEqual(text,[]);
+ const audio=(await snap()).audio;await exit();assert.ok(await page.locator('.game-screen').count()===0);
+ return {pauseGlyph,kitColors,attack,defense,budgets,clockCountsUp:true,turningFootDistance:turning.renderMetrics.poses.find(p=>p.id===0).footDistance,autonomousAttack:{owner:attacking.ball.owner,x:attacking.players[attacking.ball.owner].x},audio,noLiveText:true};
+});
