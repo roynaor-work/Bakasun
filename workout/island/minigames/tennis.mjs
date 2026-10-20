@@ -47,7 +47,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
   const attributes = { speed: p.speedByRank[safeRanks.speed - 1], hitPower: p.hitPowerByRank[safeRanks.hit - 1], servePower: p.servePowerByRank[safeRanks.serve - 1], reach: p.reach * (d.reach || 1) };
   const score = createScore();
   const state = { stage, seed, ranks: safeRanks, attributes, timingWindow: level.timingWindow, faults:0,serveMeter:0,serveZone:'red',serveSide:1,phase: 'serve', elapsed: 0, phaseTime: 0, server: 0, score, pointLabels: [0, 0], players: [{ x: 0, z: p.readyZ, swing: 0, running: false }, { x: 0, z: -p.readyZ, swing: 0, running: false }], ball: { x: 0, y: c.serveHeight, z: p.readyZ, vx: 0, vy: 0, vz: 0, bounces: 0, lastHitter: 0 }, landing: null, contact: null, charge: 0, rallyHits: 0, pointNumber: 0, event: { id: 0, type: 'ready' }, result: null, shot: null };
-  let lob=false,aim=null,serveWasDown=false,serveHeld=0,pendingShot=null;let accumulator = 0, inputWasSwing = false, pendingTap = null, cooldown = 0, rallyTime = 0, shotTime = 0, aiMiss = false, aiOffset = 0;
+  let lob=false,drop=false,aim=null,serveWasDown=false,serveHeld=0,pendingShot=null;let accumulator = 0, inputWasSwing = false, pendingTap = null, cooldown = 0, rallyTime = 0, shotTime = 0, aiMiss = false, aiOffset = 0;
   function emit(type, details = {}) { state.event = { id: state.event.id + 1, type, ...details }; }
   function prepareServe() {
     state.phase = 'serve'; state.phaseTime = 0; state.charge = 0; state.rallyHits = 0; pendingTap = null;pendingShot=null; rallyTime = 0;
@@ -74,18 +74,21 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
   function planContact() {
     const b = state.ball, landing = predictLanding(b, config);
     const downSpeed = b.vy - c.gravity * landing.seconds;
-    const upSpeed = -downSpeed * c.bounce;
+    const upSpeed = -downSpeed * (state.shot?.drop ? config.drop.bounce : c.bounce);
     const discriminant = upSpeed ** 2 - 2 * c.gravity * (c.hitHeight - c.radius);
     const afterBounce = (upSpeed - Math.sqrt(Math.max(0, discriminant))) / c.gravity;
     state.landing = { ...landing, valid: Math.abs(landing.x) <= court.halfWidth + court.lineTolerance && Math.abs(landing.z) <= court.halfLength + court.lineTolerance };
+    const damping=state.shot?.drop?config.drop.horizontalBounce:1;
     const time = landing.seconds + afterBounce;
-    state.contact = { x: b.x + b.vx * time, z: b.z + b.vz * time, at: state.elapsed + time, eta: time, side: 1 - b.lastHitter };
+    state.contact = { x: landing.x + b.vx * afterBounce*damping, z: landing.z + b.vz * afterBounce*damping, at: state.elapsed + time, eta: time, side: 1 - b.lastHitter };
   }
   function shoot(side, timing = 0, charge = 0) {
     const b = state.ball, serving = ['serve','toss'].includes(state.phase);
-    if(side===0&&pendingShot){lob=pendingShot.lob;aim=pendingShot.aim;pendingShot=null;}
-    const serveZone=side===0?state.serveZone:'green',quality=side===0?1-Math.abs(state.serveMeter-.5)*2:1;
-    const power = side === 0 ? (serving ? attributes.servePower + quality * config.serve.centerPowerBonus : attributes.hitPower - Math.abs(timing) * p.timingPowerPenalty) : level.power;
+    if(side===0&&pendingShot){({lob,drop,aim,charge}=pendingShot);pendingShot=null;}
+    const serveZone=side===0?state.serveZone:'green';
+    const perfect=serving&&side===0&&serveZone==='green'&&Math.abs(state.serveMeter-.5)<=config.serve.perfectWidth/2+1e-9;
+    const isDrop=!serving&&side===0&&drop,overpowered=!serving&&side===0&&charge>config.shotPower.safeMax[difficulty];
+    const power = side === 0 ? (serving ? attributes.servePower + (perfect?config.serve.centerPowerBonus:0) : attributes.hitPower + charge*p.chargeBonus - Math.abs(timing) * p.timingPowerPenalty) : level.power;
     let targetX = 0;
     if (side === 0) {
       targetX=aim?.manual?clamp(aim.x,-1,1)*c.spread:(state.players[1].x>=0?-1:1)*c.spread;targetX+=timing*c.spread*p.timingPowerPenalty;
@@ -95,12 +98,36 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
       targetX += (rng() - 0.5) * (1 - level.accuracy) * c.spread;
     }
     const direction = side === 0 ? -1 : 1;
-    let targetZ=direction*(serving?court.serviceLength-c.outMargin:side===0&&lob?config.lob.depth:c.depth);
-    if(serving){const sign=-Math.sign(state.players[side].x);targetX=sign*court.halfWidth/2*(1+clamp(aim?.manual?aim.x:0,-1,1)*config.serve.aimFraction);if(serveZone==='red')targetZ=direction*(court.serviceLength+config.serve.missDepth);}
+    let targetZ=direction*(serving?court.serviceLength-c.outMargin:isDrop?config.drop.depth:side===0&&lob?config.lob.depth:c.depth+charge*config.shotPower.depthBonus);
+    if(!serving&&side===0&&!isDrop&&!lob&&aim?.manual)targetZ-=direction*clamp(aim.z||0,-1,1)*1.5;
+    let serveFault=null;
+    const serviceSign=serving?Math.sign(state.players[side].x):0;
+    if(serving){
+      targetX=-serviceSign*court.halfWidth/2*(1+(side===0&&!perfect?clamp(aim?.manual?aim.x:0,-1,1):0)*config.serve.aimFraction);
+      if(side===1){
+        // Decide an intended landing, then let the same net and line physics judge it.
+        if(rng()>=config.serve.computerInRate[difficulty]){
+          serveFault=rng()<.45?'net':'out';
+          if(serveFault==='out'){
+            if(rng()<.5)targetZ=direction*(court.serviceLength+.16+rng()*.18);
+            else targetX=-serviceSign*(court.halfWidth+.16+rng()*.18);
+          }
+        }else{targetX=-serviceSign*(.7+rng()*(court.halfWidth-1.4));targetZ=direction*(1.9+rng()*1.8);}
+      }else if(serveZone==='red')targetZ=direction*(court.serviceLength+config.serve.missDepth);
+    }
+    if(overpowered)targetZ=direction*(court.halfLength+config.shotPower.outMargin+charge-config.shotPower.safeMax[difficulty]);
     const pace = power + (serving ? 0 : Math.min(c.rallyPowerLimit, state.rallyHits * c.rallyPowerPerHit));
-    const flight = serving ? Math.max(config.serve.minimumFlight,config.serve.flightSeconds-pace*config.serve.powerFlightFactor) : Math.max(c.minimumFlight,c.flightSeconds-pace*c.powerFlightFactor)*(side===0&&lob?config.lob.flightMultiplier:1);
+    let flight = serving ? Math.max(config.serve.minimumFlight,config.serve.flightSeconds-pace*config.serve.powerFlightFactor)/(perfect?config.serve.perfectSpeedMultiplier:1) : Math.max(c.minimumFlight,c.flightSeconds-pace*c.powerFlightFactor)*(side===0&&lob&&!isDrop?config.lob.flightMultiplier:1);
     if (serving) { b.x = state.players[side].x; b.z = state.players[side].z - (side === 0 ? 1 : -1) * p.contactOffsetZ; }
-    b.y = serving ? c.serveHeight : Math.max(c.hitHeight, b.y);
+    b.y = serving ? c.serveHeight*(serveFault==='net'?.8:1) : Math.max(c.hitHeight, b.y);
+    // Solve clearance at the net for short balls, including a drop from the baseline.
+    const fraction=-b.z/(targetZ-b.z);
+    if(fraction>0&&fraction<1){
+      const base=b.y*(1-fraction)+c.radius*fraction,arc=.5*c.gravity*fraction*(1-fraction);
+      const clearance=Math.sqrt(Math.max(0,(court.netHeight+c.radius+config.drop.netClearance-base)/arc));
+      if(serveFault==='net')flight=Math.sqrt(Math.max(.02,(court.netHeight-base)/arc));
+      else flight=Math.max(flight,clearance);
+    }
     b.vx = (targetX - b.x) / flight; b.vz = (targetZ - b.z) / flight;
     b.vy = (c.radius - b.y + 0.5 * c.gravity * flight ** 2) / flight;
     b.bounces = 0; b.lastHitter = side;
@@ -115,10 +142,11 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     player.swing=player.swingDuration*(1-config.animation.contactFraction);
     const fatigue = Math.max(0, state.rallyHits - config.opponent.fatigueAfterHits) * config.opponent.fatigueMissPerHit;
     aiMiss = rng() < Math.min(config.opponent.maximumMissChance, level.missChance + fatigue); aiOffset = (rng() - 0.5) * (1 - level.accuracy) * c.spread;
-    state.shot = { side, serving, power, targetX, targetZ, flight, timing, lob:!serving&&side===0&&lob,serveZone };
+    state.shot = { side, serving, power, charge, overpowered, drop:isDrop, serviceSign, serveFault, perfect, targetX, targetZ, flight, timing, lob:!serving&&side===0&&lob&&!isDrop,serveZone };
+    state.charge=0;
     planContact(); emit('hit', { side, serving, timing, power }); pendingTap = null;
   }
-  function faultOrPoint(reason){if(!state.shot?.serving){point(1-state.ball.lastHitter,reason);return;}const mark={x:state.ball.x,z:state.ball.z,reason};state.faults++;if(state.faults>=2)point(1-state.server,'doubleFault');else{prepareServe();emit('fault',{reason});}state.faultMark=mark;state.event.impact=reason;}
+  function faultOrPoint(reason){const mark={x:state.ball.x,z:state.ball.z,reason};if(!state.shot?.serving){point(1-state.ball.lastHitter,reason);state.faultMark=mark;return;}state.faults++;if(state.faults>=2)point(1-state.server,'doubleFault');else{prepareServe();emit('fault',{reason});}state.faultMark=mark;state.event.impact=reason;}
   function serve(){if(state.server!==0)return;if(state.phase==='serve'){state.phase='toss';state.phaseTime=0;emit('toss');}else if(state.phase==='toss')shoot(0);}
   function swing() {
     if (cooldown > 0) return;
@@ -127,12 +155,13 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     if (state.phase !== 'rally' || state.ball.lastHitter !== 1 || !state.contact) return;
     const b=state.ball,player=state.players[0];
     const volley=!state.shot?.serving&&b.z>p.contactOffsetZ&&b.bounces===0&&b.y>=p.volleyMinHeight&&b.y<=p.volleyMaxHeight&&Math.hypot(player.x-b.x,player.z-b.z)<=attributes.reach;
-    if(volley){shoot(0);return;}
+    if(volley){shoot(0,0,state.charge);return;}
     const difference = state.elapsed - state.contact.at;
     const half = level.timingWindow / 2;
     if (Math.abs(difference) <= half) {
       pendingTap = difference / half;
-      pendingShot={lob,aim:aim?{...aim}:null};
+      pendingShot={lob,drop,aim:aim?{...aim}:null,charge:state.charge};
+      state.charge=0;
       player.preparing=true;
       if (difference >= 0) tryHumanHit();
     } else { player.contactPoint=null;player.swingDuration=p.swingSeconds;player.swing=p.swingSeconds;player.serving=false;player.stroke=(b.x-player.x)*-1>=0?'forehand':'backhand';emit('timing'); }
@@ -167,6 +196,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
       }else{b.y=config.serve.handHeight;if(state.server===1&&state.phaseTime>=rules.serveWait)shoot(1);}
       return;
     }
+    if(input.prepare)state.charge=clamp(state.charge+dt/p.chargeSeconds,0,1);else state.charge=0;
     const contact=state.contact;if(contact)contact.eta=contact.at-state.elapsed;
     const length=Math.hypot(input.move||0,input.moveZ||0),hasManual=length>0;
     if(hasManual)state.manualMovement=true;
@@ -190,9 +220,12 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
       b.y = c.radius; b.bounces++;
       if (b.bounces === 1) {
         const wrongSide = b.z * (b.lastHitter === 0 ? -1 : 1) < 0;
-        const serveOut = state.shot.serving && (Math.abs(b.z)>court.serviceLength+court.lineTolerance||b.x*Math.sign(state.players[b.lastHitter].x)>court.lineTolerance);
+        // The server may already be running through the centre line after contact.
+        const serviceSign=state.shot.serviceSign??Math.sign(state.players[b.lastHitter].x);
+        const serveOut = state.shot.serving && (Math.abs(b.z)>court.serviceLength+court.lineTolerance||b.x*serviceSign>court.lineTolerance);
         if (Math.abs(b.x) > court.halfWidth + court.lineTolerance || Math.abs(b.z) > court.halfLength + court.lineTolerance || wrongSide || serveOut) { faultOrPoint('out'); return; }
-        b.vy = -b.vy * c.bounce;
+        b.vy = -b.vy * (state.shot.drop?config.drop.bounce:c.bounce);
+        if(state.shot.drop){b.vx*=config.drop.horizontalBounce;b.vz*=config.drop.horizontalBounce;}
         emit('bounce');
       } else { point(b.lastHitter, 'doubleBounce'); return; }
     }
@@ -206,7 +239,8 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
   function update(dt, input = {}) {
     if (!Number.isFinite(dt) || dt < 0 || state.phase === 'complete') return state;
     // A tap is an edge; held charge is continuous. Consume taps even below one tick.
-    lob=Boolean(input.lob);aim=input.aim;const down=Boolean(input.serve),serveTap=down&&!serveWasDown,released=!down&&serveWasDown;serveWasDown=down;if(serveTap){serveHeld=0;serve();}if(down)serveHeld+=Math.max(0,Math.min(dt,config.simulation.maxDelta));if(released&&serveHeld>=config.serve.holdSeconds&&state.phase==='toss')serve();const tap = Boolean(input.swing) && !inputWasSwing; inputWasSwing = Boolean(input.swing);
+    lob=Boolean(input.lob);drop=Boolean(input.drop);aim=input.aim;const down=Boolean(input.serve),serveTap=down&&!serveWasDown,released=!down&&serveWasDown;serveWasDown=down;if(serveTap){serveHeld=0;serve();}if(down)serveHeld+=Math.max(0,Math.min(dt,config.simulation.maxDelta));if(released&&serveHeld>=config.serve.holdSeconds&&state.phase==='toss')serve();const tap = Boolean(input.swing) && !inputWasSwing; inputWasSwing = Boolean(input.swing);
+    if(input.cancelCharge){state.charge=0;pendingShot=null;pendingTap=null;}
     if (tap) swing();
     accumulator += Math.min(dt, config.simulation.maxDelta);
     while (accumulator + 1e-10 >= config.simulation.step && state.phase !== 'complete') { step(config.simulation.step, input); accumulator -= config.simulation.step; }

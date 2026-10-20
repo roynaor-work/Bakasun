@@ -45,5 +45,5 @@ test('G3h movement eases up/down, turns the body ahead of momentum and keeps the
 });
 test('G3h the CC0 bank is local, versioned OGG under 400 KB and the shared mute key suppresses playback',async()=>{
  let bytes=0;for(const url of Object.values(G3H_AUDIO_FILES)){const u=new URL(url);assert.equal(u.searchParams.get('v'),'g9-20261020-1');assert.match(u.pathname,/assets\/audio\/g3h\/.*\.ogg$/);u.search='';bytes+=(await stat(u)).size;}assert.ok(bytes<=400000,bytes);
- let muted='off';const audio=createG3hAudio({storage:{getItem:key=>{assert.equal(key,'island.sound');return muted;}},AudioContext:null});audio.play('kick');assert.deepEqual(audio.snapshot.counts,{});muted='on';audio.event({type:'goal'});assert.deepEqual(audio.snapshot.counts,{whistle:1,cheer:1});audio.setPaused(true);audio.play('pass');assert.equal(audio.snapshot.counts.pass,undefined);audio.dispose();assert.equal(audio.snapshot.disposed,true);
+ let muted='off';const audio=createG3hAudio({storage:{getItem:key=>{assert.equal(key,'island.sound');return muted;}},AudioContext:null});audio.play('kick');assert.deepEqual(audio.snapshot.counts,{});muted='on';audio.event({type:'goal'});assert.deepEqual(audio.snapshot.counts,{whistle:1,net:1,cheer:1});audio.setPaused(true);audio.play('pass');assert.equal(audio.snapshot.counts.pass,undefined);audio.dispose();assert.equal(audio.snapshot.disposed,true);
 });

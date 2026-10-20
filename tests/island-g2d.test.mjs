@@ -29,7 +29,7 @@ test('G2d the sea target clamps within configured range without firing',()=>{
 });
 for(let index=0;index<4;index++)test(`G2d ammunition ${index} is available without purchases, finite with no reload`,()=>{
   const m=make('navalDuel'),b=config.navalDuel,supply=m.ammo[index];assert.ok(supply>0);m.update(.02,{ammoIndex:index});assert.equal(m.ammoIndex,index);assert.equal(m.phase,'aim');
-  m.update(.02,{firing:true,ammoIndex:index});assert.equal(m.ball.ammo,index);assert.equal(m.ammo[index],supply-1);assert.equal(m.cooldowns[index],0);m.update(.02,{ammoIndex:(index+1)%4});assert.equal(m.ammoIndex,(index+1)%4);assert.equal(m.cooldowns[index],0);assert.equal(m.cooldowns[(index+1)%4],0);
+  m.update(.02,{firing:true,ammoIndex:index});if(index===3)assert.equal(m.mines.length,1);else assert.equal(m.ball.ammo,index);assert.equal(m.ammo[index],supply-1);assert.equal(m.cooldowns[index],0);m.update(.02,{ammoIndex:(index+1)%4});assert.equal(m.ammoIndex,(index+1)%4);assert.equal(m.cooldowns[index],0);assert.equal(m.cooldowns[(index+1)%4],0);
 });
 test('G2d enemies move in distance and position at stage one; several living ships share high stages',()=>{
   const m=make('navalDuel'),x=m.enemyX,z=m.enemies[0].z;advance(m,.8);assert.notEqual(m.enemyX,x);assert.notEqual(m.enemies[0].z,z);
@@ -49,7 +49,8 @@ test('G2d three distinct random upgrades pause combat; a valid choice stacks and
   assert.equal(m.chooseUpgrade(-1),false);assert.equal(m.chooseUpgrade(99),false);assert.equal(m.chooseUpgrade(.5),false);const id=m.choices[1],wave=m.wave;assert.equal(m.chooseUpgrade(1),true);assert.equal(m.upgrades[id],1);assert.equal(m.wave,wave+1);assert.equal(m.chooseUpgrade(1),false);
 });
 test('G2d formation geometry progresses through rows, V, circle and dive',()=>{
-  const m=make('alienDefense',4),patterns=[];const memory={};
+  // Isolate wave progression from the difficulty calibration covered elsewhere.
+  const m=make('alienDefense',4,{power:2}),patterns=[];const memory={};
   for(let i=0;i<30000&&!m.result;i++){if(!patterns.includes(m.pattern))patterns.push(m.pattern);m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));}assert.deepEqual(patterns,config.alienDefense.campaign.patterns);assert.equal(m.result?.outcome,'win');
 });
 test('G2d wing companions follow the ship and fire their own energy shots',()=>{

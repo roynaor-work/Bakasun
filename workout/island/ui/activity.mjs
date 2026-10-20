@@ -1,3 +1,4 @@
+import {navalUpgradePanel} from '../minigames/naval-upgrades.mjs?v=g9-20261020-1';
 import {hangarAction} from '../activity/hangar.mjs?v=g9-20261020-1';
 import {hangarPreview} from './hangar-preview.mjs?v=g9-20261020-1';
 import {createSound} from '../minigames/sound.mjs?v=g9-20261020-1';
@@ -112,6 +113,7 @@ export class ActivityInterface {
     dialog.append(cards);
   }
   equipment(id) {
+    if(id==='navalDuel')return this.stages(id);
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'equipment.hint');dialog.dataset.equipment=id;
     dialog.append(el('p','',this.t('minigame.totalStars',{stars:this.engine.state.minigameProgress[id].stars.reduce((sum,n)=>sum+n,0)})));
     const list=el('div','equipment-list');
@@ -140,6 +142,7 @@ export class ActivityInterface {
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
     const dialog=this.modal(game.title,'minigame.progressHint');dialog.dataset.stageMap=id;if(id==='fireRescue')dialog.append(button(this.t('fire.certificates'),'open-certificates',()=>this.certificates()));if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
     dialog.append(el('p','',this.t('minigame.totalStars',{stars:p.stars.reduce((sum,n)=>sum+n,0)})));
+    if(id==='navalDuel')dialog.append(navalUpgradePanel({engine:this.engine,activity:this.activity,data:this.data,t:this.t,refresh:()=>this.stages(id)}));
     if(id==='tennis'){const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));for(const key of Object.keys(this.data.config.minigames.tennis.difficulties)){const choose=button(this.t('soccer.difficulty.'+key),'tennis-difficulty',()=>{const r=this.engine.setTennisDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.tennisDifficulty===key));choices.append(choose);}dialog.append(choices,this.soccerHandedness('tennis'));}
     if(id==='soccer'){
       dialog.append(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t));
@@ -262,7 +265,7 @@ export class ActivityInterface {
     if(id==='soccer')this.outdoorPrompt(dialog);
     if(id==='soccer')dialog.insertBefore(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t,{starsAdded:result.trainingStars}),summary);
     dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(id)));
-    if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage)dialog.append(button(this.t('minigame.continue'),'game-next-stage',()=>this.start(id,undefined,result.stage+1),'primary-button'));
+    if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage)dialog.append(button(this.t('minigame.continue'),'game-next-stage',()=>id==='navalDuel'?this.stages(id):this.start(id,undefined,result.stage+1),'primary-button'));
     if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
     this.engine.narration.announce('minigame.result',result);

@@ -1,0 +1,366 @@
+{
+  "sourceCommit": "18b1d3a2625e4ddcc67eef99208cbe402f8ac8d6",
+  "originMain": "1f058267c554bf523698bee1a9af5c42139391d8",
+  "server": {
+    "command": "python3 -m http.server 8765 --bind 127.0.0.1",
+    "cwd": "repository root",
+    "oldServerStopped": true,
+    "portBindCheckedBeforeStart": true
+  },
+  "browser": "Chromium 151 / SwiftShader; simulated touch",
+  "files": 33,
+  "processRuns": 34,
+  "helperOnly": "night-browser.mjs",
+  "allPassed": true,
+  "runs": [
+    {
+      "file": "g2f-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 98,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2f-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g2g-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 101,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2g-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g2f-browser.mjs",
+      "width": 390,
+      "height": 844,
+      "code": 0,
+      "seconds": 107,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2f-browser.mjs-390x844.log"
+    },
+    {
+      "file": "g2i-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 10,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2i-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g2h-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 18,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2h-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g2j-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 23,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2j-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g2k-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 27,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2k-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g2l-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 57,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2l-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g2m-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 50,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2m-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g2o-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 20,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2o-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g2n-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 89,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g2n-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g3b-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 67,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g3b-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g3c-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 73,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g3c-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g3e-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 38,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g3e-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g3d-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 87,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g3d-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g3g-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 42,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g3g-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g3h-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 29,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g3h-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g3f-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 90,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g3f-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g3i-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 39,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g3i-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g4b-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 24,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g4b-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g4c-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 26,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g4c-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g6-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 28,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g6-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g6b-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 19,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g6b-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g5-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 125,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g5-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g6c-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 78,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g6c-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g6d-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 52,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g6d-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g6e-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 79,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g6e-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g7-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 86,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g7-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g8b-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 39,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g8b-browser.mjs-844x390.log"
+    },
+    {
+      "file": "night-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 0,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/night-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g8-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 106,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g8-browser.mjs-844x390.log"
+    },
+    {
+      "file": "task017-pilot-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 22,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/task017-pilot-browser.mjs-844x390.log"
+    },
+    {
+      "file": "task016-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 44,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/task016-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g4d-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 587,
+      "server": "python 127.0.0.1:8765",
+      "log": "logs/g4d-browser.mjs-844x390.log"
+    }
+  ],
+  "finalSourceRechecks": [
+    {
+      "file": "g2f-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "seconds": 69,
+      "server": "python 127.0.0.1:8765",
+      "sourceCommit": "18b1d3a",
+      "log": "logs/final-g2f-browser.mjs-844x390.log"
+    },
+    {
+      "file": "g2f-browser.mjs",
+      "width": 390,
+      "height": 844,
+      "code": 0,
+      "seconds": 59,
+      "server": "python 127.0.0.1:8765",
+      "sourceCommit": "18b1d3a",
+      "log": "logs/final-g2f-browser.mjs-390x844.log"
+    },
+    {
+      "file": "g6e-browser.mjs",
+      "width": 844,
+      "height": 390,
+      "code": 0,
+      "sourceCommit": "18b1d3a",
+      "log": "logs/g6e-final-browser.log"
+    }
+  ],
+  "physicalPhone": false,
+  "screenshots": [
+    "01-upgrades.jpg",
+    "02-player-no-triangle.jpg",
+    "03-locked-jitter.jpg",
+    "04-outside-ring-shot.jpg",
+    "05-ship-inside-ring.jpg",
+    "06-hit.jpg",
+    "07-guided-missile.jpg",
+    "08-mine.jpg",
+    "09-three-shell-salvo.jpg",
+    "10-repair.jpg"
+  ]
+}

@@ -74,5 +74,4 @@ await verify('g4e',[{width:844,height:390},{width:740,height:360},{width:1440,he
 });
 
 // Keep the requested screenshot directory at exactly fourteen image files.
-const resultFile=process.env.G4E_WIDTH?`${Number(process.env.G4E_WIDTH)}-verification.json`:'verification.json';
-await rename(directory+resultFile,fileURLToPath(new URL('../notes/g4e-browser-results.json',import.meta.url)));
+await rename(directory+(process.env.G4E_WIDTH?`${process.env.G4E_WIDTH}-verification.json`:'verification.json'),fileURLToPath(new URL('../notes/g4e-browser-results.json',import.meta.url)));

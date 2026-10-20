@@ -22,11 +22,11 @@ await verify('g2k',[{width:844,height:390},{width:740,height:360},{width:1440,he
  assert.equal((await snap()).shots.length,0);await tick(1800);assert.equal((await snap()).shots.length,0);await shot('wide-formation');
  const first=await snap();assert.equal(first.aliens.length,18);assert.equal(new Set(first.aliens.map(a=>a.kind)).size,2);assert.ok(first.aliens.every(a=>a.facing===1));
  await tap('#shoot');await tick(32);assert.equal((await snap()).shots.length,1);await tick(500);assert.ok((await snap()).shots.length<=1);
- // A floating stick actually moves the ship and resets on touch end.
- const zone=await page.locator('.soccer-stick-zone').boundingBox(),cdp=await context.newCDPSession(page),x=zone.x+zone.width/2,y=zone.y+zone.height/2;
+ // The fixed visible stick moves the ship and recenters on touch end.
+ const zone=await page.locator('#joystick').boundingBox(),cdp=await context.newCDPSession(page),x=zone.x+zone.width/2,y=zone.y+zone.height/2;
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{id:1,x,y}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{id:1,x:x+45,y}]});
  const beforeMove=(await snap()).player.x;await tick(150);const afterMove=(await snap()).player.x;assert.ok(afterMove>beforeMove);assert.equal(await page.locator('#joystick').isVisible(),true);
- await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await tick(32);assert.equal(await page.locator('#joystick').isVisible(),false);
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await tick(32);assert.equal(await page.locator('#joystick').isVisible(),true);
  // Buttons are above the ship's entire horizontal lane, including both edges.
  const bounds=await page.locator('canvas.minigame-canvas').boundingBox();
  for(const selector of ['#shoot','#pass']){const box=await page.locator(selector).boundingBox();const shipTop=bounds.y+first.player.y/480*bounds.height-40;assert.ok(box.y+box.height<shipTop,JSON.stringify({selector,box,shipTop}));}
