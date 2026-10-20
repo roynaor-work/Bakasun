@@ -13,13 +13,14 @@
         {
           "kind": "fire",
           "index": 1,
-          "x": 28,
-          "y": 146.71680560580367,
+          "x": 36,
+          "y": 147.43530086456408,
           "world": [
             -12,
             1.8,
             14.95
           ],
+          "edge": "left",
           "angle": -3.0520210638769094,
           "distance": 30.154643091902113,
           "size": 19.710402571792496,
@@ -39,6 +40,7 @@
             2.6,
             2.95
           ],
+          "edge": "top",
           "angle": -2.513119960922189,
           "distance": 23.462789689207888,
           "size": 20.440422942995504,
@@ -51,13 +53,14 @@
         {
           "kind": "fire",
           "index": 4,
-          "x": 280.2847099640786,
-          "y": 123.03376794578244,
+          "x": 330.00950009707316,
+          "y": 76,
           "world": [
             -12,
             1.6,
             -9.05
           ],
+          "edge": "top",
           "angle": -2.498921986588935,
           "distance": 40.394337474453025,
           "size": 18.593345002786943,
@@ -70,13 +73,14 @@
         {
           "kind": "fire",
           "index": 5,
-          "x": 344.15579540475454,
-          "y": 75.99999999999999,
+          "x": 438.00950009707316,
+          "y": 76,
           "world": [
             0,
             5.3,
             -9.05
           ],
+          "edge": "top",
           "angle": -2.2037630697157287,
           "distance": 32.491575831282795,
           "size": 19.45546445476915,
@@ -89,13 +93,14 @@
         {
           "kind": "fire",
           "index": 6,
-          "x": 394.3467730342604,
+          "x": 600.0095000970732,
           "y": 76,
           "world": [
             12,
             2.6,
             -9.05
           ],
+          "edge": "top",
           "angle": -1.8257515883046949,
           "distance": 27.70744484791046,
           "size": 19.977369652955222,
@@ -108,13 +113,14 @@
         {
           "kind": "fire",
           "index": 7,
-          "x": 443.5566595347599,
+          "x": 492.00950009707316,
           "y": 76,
           "world": [
             12,
             2.4,
             2.95
           ],
+          "edge": "top",
           "angle": -2.004085475740119,
           "distance": 16.20192889751094,
           "size": 21.23251684754426,
@@ -127,13 +133,14 @@
         {
           "kind": "rescue",
           "index": 1,
-          "x": 491.3847122907393,
+          "x": 384.00950009707316,
           "y": 76,
           "world": [
             -12,
             2.2,
             -9.02
           ],
+          "edge": "top",
           "angle": -2.492304899921811,
           "distance": 40.374254172677915,
           "size": 18.59553590843514,
@@ -146,13 +153,14 @@
         {
           "kind": "rescue",
           "index": 2,
-          "x": 539.2158046725413,
+          "x": 546.0095000970732,
           "y": 76,
           "world": [
             12,
             3.2,
             2.98
           ],
+          "edge": "top",
           "angle": -1.991972277715781,
           "distance": 16.174065660804025,
           "size": 21.235556473366834,
@@ -170,12 +178,14 @@
         "844-rescue-arrow.png"
       ],
       "errors": [],
-      "checks": {
-        "fixed140pxBase": true,
+      "touchChecks": {
         "deadzone": true,
         "quadraticThrottle": true,
         "gradualTurn": true,
-        "releaseCenters": true,
+        "releaseCenters": true
+      },
+      "checks": {
+        "fixed140pxBase": true,
         "everyOffscreenObjective": true,
         "noVisibleObjectiveArrow": true,
         "canvasFallback": true,
@@ -192,13 +202,14 @@
         {
           "kind": "fire",
           "index": 1,
-          "x": 28,
-          "y": 401.04175728961343,
+          "x": 36,
+          "y": 403.34644360165134,
           "world": [
             -12,
             1.8,
             14.95
           ],
+          "edge": "left",
           "angle": -3.0520210638769094,
           "distance": 30.154643091902113,
           "size": 19.710402571792496,
@@ -211,13 +222,14 @@
         {
           "kind": "fire",
           "index": 4,
-          "x": 28,
-          "y": 291.00690439176157,
+          "x": 36,
+          "y": 349.34644360165134,
           "world": [
             -12,
             1.6,
             -9.05
           ],
+          "edge": "left",
           "angle": -2.498921986588935,
           "distance": 40.394337474453025,
           "size": 18.593345002786943,
@@ -230,13 +242,14 @@
         {
           "kind": "rescue",
           "index": 1,
-          "x": 28,
-          "y": 336.1957853029836,
+          "x": 36,
+          "y": 295.34644360165134,
           "world": [
             -12,
             2.2,
             -9.02
           ],
+          "edge": "left",
           "angle": -2.492304899921811,
           "distance": 40.374254172677915,
           "size": 18.59553590843514,
@@ -252,12 +265,9 @@
         "390-fire-and-rescue-arrows.png"
       ],
       "errors": [],
+      "touchChecks": null,
       "checks": {
         "fixed140pxBase": true,
-        "deadzone": true,
-        "quadraticThrottle": true,
-        "gradualTurn": true,
-        "releaseCenters": true,
         "everyOffscreenObjective": true,
         "noVisibleObjectiveArrow": true,
         "canvasFallback": true,

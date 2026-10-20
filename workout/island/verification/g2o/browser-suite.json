@@ -1,0 +1,403 @@
+{
+  "base": "70239cd",
+  "server": "python3 -m http.server 8765 --bind 127.0.0.1",
+  "serverCwd": "repository root",
+  "viewport": [
+    844,
+    390
+  ],
+  "playwright": "Chromium / SwiftShader",
+  "loaderSource": "export async function load(url,context,nextLoad){\n const result=await nextLoad(url,context);\n if(url.endsWith('/tests/helpers/island-browser.mjs')){\n  const source=String(result.source),start=source.indexOf('export async function serveIsland(');\n  return {...result,source:source.slice(0,start)+`export async function serveIsland(){return {url:'http://127.0.0.1:8765/workout/island/',async close(){}};}\\n`};\n }\n return result;\n}\n",
+  "originalResults": [
+    {
+      "script": "g2f-browser.mjs",
+      "exitCode": 1,
+      "seconds": 9.2
+    },
+    {
+      "script": "g2g-browser.mjs",
+      "exitCode": 0,
+      "seconds": 30.89
+    },
+    {
+      "script": "g2h-browser.mjs",
+      "exitCode": 0,
+      "seconds": 9.16
+    },
+    {
+      "script": "g2i-browser.mjs",
+      "exitCode": 0,
+      "seconds": 8.4
+    },
+    {
+      "script": "g2j-browser.mjs",
+      "exitCode": 0,
+      "seconds": 13.64
+    },
+    {
+      "script": "g2k-browser.mjs",
+      "exitCode": 0,
+      "seconds": 15.07
+    },
+    {
+      "script": "g2l-browser.mjs",
+      "exitCode": 1,
+      "seconds": 7.16
+    },
+    {
+      "script": "g2n-browser.mjs",
+      "exitCode": 0,
+      "seconds": 36.32
+    },
+    {
+      "script": "g2o-browser.mjs",
+      "exitCode": 0,
+      "seconds": 9.16
+    },
+    {
+      "script": "g3b-browser.mjs",
+      "exitCode": 1,
+      "seconds": 1.02
+    },
+    {
+      "script": "g3c-browser.mjs",
+      "exitCode": 1,
+      "seconds": 0.82
+    },
+    {
+      "script": "g3d-browser.mjs",
+      "exitCode": 1,
+      "seconds": 0.87
+    },
+    {
+      "script": "g3e-browser.mjs",
+      "exitCode": 0,
+      "seconds": 16.68
+    },
+    {
+      "script": "g3f-browser.mjs",
+      "exitCode": 0,
+      "seconds": 32.26
+    },
+    {
+      "script": "g3g-browser.mjs",
+      "exitCode": 0,
+      "seconds": 25.52
+    },
+    {
+      "script": "g3h-browser.mjs",
+      "exitCode": 0,
+      "seconds": 11.98
+    },
+    {
+      "script": "g4b-browser.mjs",
+      "exitCode": 0,
+      "seconds": 9.62
+    },
+    {
+      "script": "g4c-browser.mjs",
+      "exitCode": 0,
+      "seconds": 9.99
+    },
+    {
+      "script": "g4d-browser.mjs",
+      "exitCode": 0,
+      "seconds": 110.05
+    },
+    {
+      "script": "g5-browser.mjs",
+      "exitCode": 1,
+      "seconds": 2.41
+    },
+    {
+      "script": "g6-browser.mjs",
+      "exitCode": 0,
+      "seconds": 20.14
+    },
+    {
+      "script": "g6b-browser.mjs",
+      "exitCode": 0,
+      "seconds": 17.89
+    },
+    {
+      "script": "g6c-browser.mjs",
+      "exitCode": 0,
+      "seconds": 47.53
+    },
+    {
+      "script": "g6d-browser.mjs",
+      "exitCode": 0,
+      "seconds": 30.4
+    },
+    {
+      "script": "g7-browser.mjs",
+      "exitCode": 0,
+      "seconds": 32.49
+    },
+    {
+      "script": "g8-browser.mjs",
+      "exitCode": 0,
+      "seconds": 40.1
+    },
+    {
+      "script": "night-browser.mjs",
+      "exitCode": 0,
+      "seconds": 0.21
+    },
+    {
+      "script": "task016-browser.mjs",
+      "exitCode": 0,
+      "seconds": 14.2
+    },
+    {
+      "script": "task017-pilot-browser.mjs",
+      "exitCode": 0,
+      "seconds": 46.54
+    }
+  ],
+  "finalResults": [
+    {
+      "script": "g2f-browser.mjs",
+      "exitCode": 1,
+      "seconds": 9.2,
+      "reason": "Unchanged naval section: enemyFleetHp < initial.enemyFleetHp, line 34; fire section not reached."
+    },
+    {
+      "script": "g2g-browser.mjs",
+      "exitCode": 0,
+      "seconds": 59.5
+    },
+    {
+      "script": "g2h-browser.mjs",
+      "exitCode": 0,
+      "seconds": 8.91
+    },
+    {
+      "script": "g2i-browser.mjs",
+      "exitCode": 0,
+      "seconds": 8.4
+    },
+    {
+      "script": "g2j-browser.mjs",
+      "exitCode": 0,
+      "seconds": 11.61
+    },
+    {
+      "script": "g2k-browser.mjs",
+      "exitCode": 0,
+      "seconds": 15.07
+    },
+    {
+      "script": "g2l-browser.mjs",
+      "exitCode": 0,
+      "seconds": 26.28
+    },
+    {
+      "script": "g2n-browser.mjs",
+      "exitCode": 0,
+      "seconds": 36.91
+    },
+    {
+      "script": "g2o-browser.mjs",
+      "exitCode": 0,
+      "seconds": 9.16,
+      "viewports": [
+        [
+          844,
+          390
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "evidence": "verification.json"
+    },
+    {
+      "script": "g3b-browser.mjs",
+      "exitCode": 1,
+      "seconds": 1.02,
+      "reason": "Root Python serves /codex-lab/island-soccer/ as 200; isolation assertion expects 404."
+    },
+    {
+      "script": "g3c-browser.mjs",
+      "exitCode": 1,
+      "seconds": 0.82,
+      "reason": "Root Python serves lab route as 200; isolation assertion expects 404."
+    },
+    {
+      "script": "g3d-browser.mjs",
+      "exitCode": 1,
+      "seconds": 0.87,
+      "reason": "Root Python serves lab route as 200; isolation assertion expects 404."
+    },
+    {
+      "script": "g3e-browser.mjs",
+      "exitCode": 0,
+      "seconds": 16.68
+    },
+    {
+      "script": "g3f-browser.mjs",
+      "exitCode": 0,
+      "seconds": 32.26
+    },
+    {
+      "script": "g3g-browser.mjs",
+      "exitCode": 0,
+      "seconds": 25.52
+    },
+    {
+      "script": "g3h-browser.mjs",
+      "exitCode": 0,
+      "seconds": 11.98
+    },
+    {
+      "script": "g4b-browser.mjs",
+      "exitCode": 0,
+      "seconds": 9.62
+    },
+    {
+      "script": "g4c-browser.mjs",
+      "exitCode": 0,
+      "seconds": 9.99
+    },
+    {
+      "script": "g4d-browser.mjs",
+      "exitCode": 0,
+      "seconds": 110.05
+    },
+    {
+      "script": "g5-browser.mjs",
+      "exitCode": 1,
+      "seconds": 2.41,
+      "reason": "Root Python serves lab route as 200; isolation assertion expects 404."
+    },
+    {
+      "script": "g6-browser.mjs",
+      "exitCode": 0,
+      "seconds": 20.14
+    },
+    {
+      "script": "g6b-browser.mjs",
+      "exitCode": 0,
+      "seconds": 17.89
+    },
+    {
+      "script": "g6c-browser.mjs",
+      "exitCode": 0,
+      "seconds": 47.53
+    },
+    {
+      "script": "g6d-browser.mjs",
+      "exitCode": 0,
+      "seconds": 30.4
+    },
+    {
+      "script": "g7-browser.mjs",
+      "exitCode": 0,
+      "seconds": 23.15
+    },
+    {
+      "script": "g8-browser.mjs",
+      "exitCode": 0,
+      "seconds": 33.67
+    },
+    {
+      "script": "night-browser.mjs",
+      "exitCode": 0,
+      "seconds": 0.21
+    },
+    {
+      "script": "task016-browser.mjs",
+      "exitCode": 0,
+      "seconds": 14.2
+    },
+    {
+      "script": "task017-pilot-browser.mjs",
+      "exitCode": 0,
+      "seconds": 46.54
+    }
+  ],
+  "rechecks": [
+    {
+      "script": "g2g-browser.mjs",
+      "exitCode": 0,
+      "seconds": 59.5
+    },
+    {
+      "script": "g2h-browser.mjs",
+      "exitCode": 0,
+      "seconds": 8.91
+    },
+    {
+      "script": "g2j-browser.mjs",
+      "exitCode": 0,
+      "seconds": 11.61
+    },
+    {
+      "script": "g2l-browser.mjs",
+      "exitCode": 0,
+      "seconds": 26.28
+    },
+    {
+      "script": "g2n-browser.mjs",
+      "exitCode": 0,
+      "seconds": 36.91
+    },
+    {
+      "script": "g7-browser.mjs",
+      "exitCode": 0,
+      "seconds": 23.15
+    },
+    {
+      "script": "g8-browser.mjs",
+      "exitCode": 0,
+      "seconds": 33.67
+    }
+  ],
+  "originalServerSupplement": [
+    {
+      "script": "g3b-browser.mjs",
+      "exitCode": 0,
+      "server": "original serveIsland",
+      "viewport": [
+        844,
+        390
+      ]
+    },
+    {
+      "script": "g3c-browser.mjs",
+      "exitCode": 0,
+      "server": "original serveIsland",
+      "viewport": [
+        844,
+        390
+      ]
+    },
+    {
+      "script": "g3d-browser.mjs",
+      "exitCode": 0,
+      "server": "original serveIsland",
+      "viewport": [
+        844,
+        390
+      ]
+    },
+    {
+      "script": "g5-browser.mjs",
+      "exitCode": 0,
+      "server": "original serveIsland",
+      "viewport": [
+        844,
+        390
+      ]
+    }
+  ],
+  "passedFiles": 24,
+  "failedFiles": 5,
+  "notes": [
+    "night-browser.mjs is a helper module with no standalone scenario.",
+    "G2l updated assertions follow continuous driving, braking and camera behavior.",
+    "Portrait G2o verifies the guard and inspects paused layout; screenshot-only styles expose the underlying controls."
+  ]
+}
