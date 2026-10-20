@@ -1,3 +1,4 @@
+import {fireScreenMovement} from './fire-navigation.mjs?v=g9-20261020-1';
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {palette} from '../view/environment.mjs?v=g9-20261020-1';
@@ -20,7 +21,7 @@ export function createFireScene(ctx,model,adapters={}) {
   scene.add(new T.HemisphereLight(r.sun,palette.teal,r.hemisphereIntensity));
   const sun=new T.DirectionalLight(r.sun,r.sunIntensity);sun.position.set(-12,30,20);scene.add(sun);
   const camera=new T.OrthographicCamera(-balance.city.extent/2,balance.city.extent/2,20,-20,.1,180);
-  const focus=new T.Vector3(0,0,6);let lastAnimate=model.time;
+  const focus=new T.Vector3(model.truck.x,0,model.truck.z);let lastAnimate=model.time;
   camera.position.fromArray(r.camera);camera.lookAt(...r.lookAt);camera.updateMatrixWorld();
   const fixed=new T.Group(),truckBase=new T.Group();scene.add(fixed,truckBase);let defaultParent=fixed;
   function part(g,color,x,y,z,sx=1,sy=1,sz=1,parent=defaultParent){
@@ -143,8 +144,8 @@ export function createFireScene(ctx,model,adapters={}) {
     if(disposed)return;
     hydrantHose.visible=model.atHydrant;for(let i=0;i<windows.length;i++)windows[i]?.position.fromArray(model.ladder.targets[i].world);for(let i=0;i<rescuePoints.length;i++)rescuePoints[i].fromArray(model.rescues[i].world);const hp=[...city.hydrants].sort((a,b)=>Math.hypot(a[0]-model.truck.x,a[2]-model.truck.z)-Math.hypot(b[0]-model.truck.x,b[2]-model.truck.z))[0];for(let i=0;i<12;i++){const t=i/11,u=1-t,x=hp[0]*u+model.truck.x*t,z=hp[2]*u+model.truck.z*t+Math.sin(t*Math.PI)*.7,y=.7-Math.sin(t*Math.PI)*.5;for(let j=0;j<6;j++){const at=(i*6+j)*3,angle=j/6*Math.PI*2;hoseArray[at]=x;hoseArray[at+1]=y+Math.cos(angle)*.09;hoseArray[at+2]=z+Math.sin(angle)*.09;}}hoseGeometry.attributes.position.needsUpdate=true;
     const elapsed=Math.max(0,model.time-lastAnimate);lastAnimate=model.time;
-    const ladderFocus=model.ladder.engaged||model.ladder.extension>0,targetX=ladderFocus?model.truck.x:Math.max(-city.cameraLimit,Math.min(city.cameraLimit,model.truck.x)),targetZ=ladderFocus?(model.truck.z+(model.ladder.target?.world[2]??model.truck.z))/2:Math.max(-city.cameraLimit,Math.min(city.cameraLimit,model.truck.z-city.cameraLead));
-    const blend=1-Math.exp(-city.cameraFollow*elapsed);focus.x+=(targetX-focus.x)*blend;focus.z+=(targetZ-focus.z)*blend;
+    const ladderFocus=model.ladder.engaged||model.ladder.extension>0,targetX=ladderFocus?model.truck.x:model.camera.x,targetZ=ladderFocus?(model.truck.z+(model.ladder.target?.world[2]??model.truck.z))/2:model.camera.z;
+    const blend=1-Math.exp(-city.cameraFollow*elapsed);if(ladderFocus){focus.x+=(targetX-focus.x)*blend;focus.z+=(targetZ-focus.z)*blend;}else{focus.x=targetX;focus.z=targetZ;}
     camera.zoom+=((ladderFocus?1.45:1)-camera.zoom)*blend;camera.updateProjectionMatrix();
     camera.position.set(focus.x,city.cameraHeight,focus.z+city.cameraBack);camera.lookAt(focus);camera.updateMatrixWorld();
     truckBase.position.set(model.truck.x,0,model.truck.z);truckBase.rotation.y=Math.PI/2+model.truck.yaw;
@@ -249,6 +250,7 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
     projectTarget(x,y){if(disposed)return null;world.worldPoint(x,y,point);world.project(point,screen);return {x:screen.x,y:screen.y};},
     truckScreen(){if(disposed)return null;point.set(model.truck.x,1.5,model.truck.z);world.project(point,screen);return {x:screen.x,y:screen.y};},
     isTruckAt(x,y){if(disposed)return undefined;const pos=view.truckScreen();return Math.hypot(x-pos.x,y-pos.y)<ctx.balance.vehicle.hitRadius;},
+    movementAt(x,z){return fireScreenMovement(x,z,ctx.balance.city.cameraHeight/Math.hypot(ctx.balance.city.cameraHeight,ctx.balance.city.cameraBack));},
     truckTargetAt(x,y){if(disposed)return null;pointer.set(x/ctx.config.width*2-1,1-y/ctx.config.height*2);ray.setFromCamera(pointer,world.camera);if(!ray.ray.intersectPlane(ground,hit))return null;return {x:hit.x,z:hit.z};},
     targetAt(x,y){
       if(disposed)return null;

@@ -1,0 +1,268 @@
+{
+  "browser": "Chromium / SwiftShader",
+  "pythonServer": "http://127.0.0.1:8765/workout/island/?dev=1",
+  "physicalPhone": false,
+  "reports": [
+    {
+      "width": 844,
+      "height": 390,
+      "turnSeconds": 0.7840000000000006,
+      "portraitGuard": false,
+      "portraitCapture": "live touch",
+      "indicators": [
+        {
+          "kind": "fire",
+          "index": 1,
+          "x": 28,
+          "y": 146.71680560580367,
+          "world": [
+            -12,
+            1.8,
+            14.95
+          ],
+          "angle": -3.0520210638769094,
+          "distance": 30.154643091902113,
+          "size": 19.710402571792496,
+          "color": "hsl(30 96% 62%)",
+          "targetScreen": {
+            "x": -38.36363636363633,
+            "y": 140.75656084563207
+          }
+        },
+        {
+          "kind": "fire",
+          "index": 2,
+          "x": 276.00950009707316,
+          "y": 76,
+          "world": [
+            0,
+            2.6,
+            2.95
+          ],
+          "angle": -2.513119960922189,
+          "distance": 23.462789689207888,
+          "size": 20.440422942995504,
+          "color": "hsl(33 96% 63%)",
+          "targetScreen": {
+            "x": 145.78181818181818,
+            "y": -18.646626304075053
+          }
+        },
+        {
+          "kind": "fire",
+          "index": 4,
+          "x": 280.2847099640786,
+          "y": 123.03376794578244,
+          "world": [
+            -12,
+            1.6,
+            -9.05
+          ],
+          "angle": -2.498921986588935,
+          "distance": 40.394337474453025,
+          "size": 18.593345002786943,
+          "color": "hsl(25 96% 60%)",
+          "targetScreen": {
+            "x": -38.36363636363633,
+            "y": -162.57304997348703
+          }
+        },
+        {
+          "kind": "fire",
+          "index": 5,
+          "x": 344.15579540475454,
+          "y": 75.99999999999999,
+          "world": [
+            0,
+            5.3,
+            -9.05
+          ],
+          "angle": -2.2037630697157287,
+          "distance": 32.491575831282795,
+          "size": 19.45546445476915,
+          "color": "hsl(29 96% 61%)",
+          "targetScreen": {
+            "x": 145.78181818181818,
+            "y": -194.38639712742713
+          }
+        },
+        {
+          "kind": "fire",
+          "index": 6,
+          "x": 394.3467730342604,
+          "y": 76,
+          "world": [
+            12,
+            2.6,
+            -9.05
+          ],
+          "angle": -1.8257515883046949,
+          "distance": 27.70744484791046,
+          "size": 19.977369652955222,
+          "color": "hsl(31 96% 62%)",
+          "targetScreen": {
+            "x": 329.92727272727274,
+            "y": -171.17125190698428
+          }
+        },
+        {
+          "kind": "fire",
+          "index": 7,
+          "x": 443.5566595347599,
+          "y": 76,
+          "world": [
+            12,
+            2.4,
+            2.95
+          ],
+          "angle": -2.004085475740119,
+          "distance": 16.20192889751094,
+          "size": 21.23251684754426,
+          "color": "hsl(36 96% 64%)",
+          "targetScreen": {
+            "x": 329.92727272727274,
+            "y": -16.92698591737558
+          }
+        },
+        {
+          "kind": "rescue",
+          "index": 1,
+          "x": 491.3847122907393,
+          "y": 76,
+          "world": [
+            -12,
+            2.2,
+            -9.02
+          ],
+          "angle": -2.492304899921811,
+          "distance": 40.374254172677915,
+          "size": 18.59553590843514,
+          "color": "#8df2d7",
+          "targetScreen": {
+            "x": -38.36363636363633,
+            "y": -167.3506595695781
+          }
+        },
+        {
+          "kind": "rescue",
+          "index": 2,
+          "x": 539.2158046725413,
+          "y": 76,
+          "world": [
+            12,
+            3.2,
+            2.98
+          ],
+          "angle": -1.991972277715781,
+          "distance": 16.174065660804025,
+          "size": 21.235556473366834,
+          "color": "#8df2d7",
+          "targetScreen": {
+            "x": 329.92727272727274,
+            "y": -23.424235900166153
+          }
+        }
+      ],
+      "shots": [
+        "844-joystick.png",
+        "844-driving-turn.png",
+        "844-fire-arrows.png",
+        "844-rescue-arrow.png"
+      ],
+      "errors": [],
+      "checks": {
+        "fixed140pxBase": true,
+        "deadzone": true,
+        "quadraticThrottle": true,
+        "gradualTurn": true,
+        "releaseCenters": true,
+        "everyOffscreenObjective": true,
+        "noVisibleObjectiveArrow": true,
+        "canvasFallback": true,
+        "noGameText": true
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "turnSeconds": null,
+      "portraitGuard": true,
+      "portraitCapture": "rotation overlay hidden for paused layout inspection",
+      "indicators": [
+        {
+          "kind": "fire",
+          "index": 1,
+          "x": 28,
+          "y": 401.04175728961343,
+          "world": [
+            -12,
+            1.8,
+            14.95
+          ],
+          "angle": -3.0520210638769094,
+          "distance": 30.154643091902113,
+          "size": 19.710402571792496,
+          "color": "hsl(30 96% 62%)",
+          "targetScreen": {
+            "x": -17.727272727272712,
+            "y": 396.9349037082897
+          }
+        },
+        {
+          "kind": "fire",
+          "index": 4,
+          "x": 28,
+          "y": 291.00690439176157,
+          "world": [
+            -12,
+            1.6,
+            -9.05
+          ],
+          "angle": -2.498921986588935,
+          "distance": 40.394337474453025,
+          "size": 18.593345002786943,
+          "color": "hsl(25 96% 60%)",
+          "targetScreen": {
+            "x": -17.727272727272712,
+            "y": 256.77074705016594
+          }
+        },
+        {
+          "kind": "rescue",
+          "index": 1,
+          "x": 28,
+          "y": 336.1957853029836,
+          "world": [
+            -12,
+            2.2,
+            -9.02
+          ],
+          "angle": -2.492304899921811,
+          "distance": 40.374254172677915,
+          "size": 18.59553590843514,
+          "color": "#8df2d7",
+          "targetScreen": {
+            "x": -17.727272727272712,
+            "y": 254.56308384818072
+          }
+        }
+      ],
+      "shots": [
+        "390-joystick.png",
+        "390-fire-and-rescue-arrows.png"
+      ],
+      "errors": [],
+      "checks": {
+        "fixed140pxBase": true,
+        "deadzone": true,
+        "quadraticThrottle": true,
+        "gradualTurn": true,
+        "releaseCenters": true,
+        "everyOffscreenObjective": true,
+        "noVisibleObjectiveArrow": true,
+        "canvasFallback": true,
+        "noGameText": true
+      }
+    }
+  ]
+}

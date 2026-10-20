@@ -2609,7 +2609,10 @@
      2.22
     ],
     "width": 2.65,
-    "turnRate": 6,
+    "turnRate": 2.5,
+    "accelerationSeconds": 0.3,
+    "brakeSeconds": 0.3,
+    "turnResponse": 12,
     "turnEpsilon": 0.05,
     "wheelRadius": 0.52,
     "wheelSide": 0.95,
@@ -2645,8 +2648,8 @@
     "wasteFraction": 0.22
    },
    "controls": {
-    "deadzone": 0.12,
-    "joystickRadius": 48,
+    "deadzone": 0.15,
+    "joystickRadius": 70,
     "rightHanded": true,
     "kickKey": "Space",
     "passKey": "KeyX",
@@ -2683,7 +2686,10 @@
     "cameraHeight": 34,
     "cameraBack": 23,
     "cameraFollow": 3.8,
-    "cameraLead": 4,
+    "cameraLead": 3,
+    "lanePull": 1.1,
+    "laneAlign": 0.25,
+    "laneAngle": 0.4,
     "buildings": [
      {
       "x": -12,
@@ -2840,7 +2846,7 @@
    "ui": {
     "actionSize": 80,
     "smallActionSize": 54,
-    "stickSize": 104,
+    "stickSize": 140,
     "clockSize": 46,
     "lowPressureRatio": 0.2,
     "arrowInset": 0.12,

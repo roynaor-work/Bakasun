@@ -1,3 +1,4 @@
+import {fireIndicators} from './fire-navigation.mjs?v=g9-20261020-1';
 import {createG2nAudio} from './g2n-audio.mjs?v=g9-20261020-1';
 import {createControls} from './controls.mjs?v=g9-20261020-1';
 import {installFireUI,updateFireUI} from './fire-ui.mjs?v=g9-20261020-1';
@@ -31,7 +32,7 @@ export function runFireSession(source,createModel,draw,createView){
     dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(frame);events.abort();observer.disconnect();shared.dispose();audio.dispose();view?.dispose();ui.dispose();canvas.width=canvas.height=0;},
     cancel:ctx.cancel,
     setPaused(value){paused=Boolean(value);audio.setPaused(paused);shared.setEnabled(!paused);clear();last=undefined;},
-    get snapshot(){const s=model.snapshot(),project=(x,y)=>view?.mode==='three'?view.projectTarget(x,y):drawFireCity.project(x,y,model,ctx);return {...s,audio:audio.snapshot(),paused,viewport:{scale:width/config.width,scaleY:height/config.height,offsetX:0,offsetY:0,width:config.width,height:config.height,modelWidth:config.width,modelHeight:config.height},flameScreens:model.flames.map(f=>({...project(f.x,f.y),heat:f.heat,active:f.active})),rescueScreens:model.rescues.map(r=>({...project(r.x,r.y),rescued:r.rescued,expired:r.expired})),truckScreen:view?.mode==='three'?view.truckScreen():drawFireCity.projectWorld(model.truck,model,ctx),aimScreen:project(model.aim.x,model.aim.y),impactScreen:project(model.impact.x,model.impact.y),renderMode:view?.mode||'canvas',renderMetrics:view?.metrics(),ui:{textFree:true}};}
+    get snapshot(){const s=model.snapshot(),project=(x,y)=>view?.mode==='three'?view.projectTarget(x,y):drawFireCity.project(x,y,model,ctx);const truckScreen=()=>view?.mode==='three'?view.truckScreen():drawFireCity.projectWorld(model.truck,model,ctx);return {...s,indicators:fireIndicators(model,ctx,project,truckScreen),audio:audio.snapshot(),paused,viewport:{scale:width/config.width,scaleY:height/config.height,offsetX:0,offsetY:0,width:config.width,height:config.height,modelWidth:config.width,modelHeight:config.height},flameScreens:model.flames.map(f=>({...project(f.x,f.y),heat:f.heat,active:f.active})),rescueScreens:model.rescues.map(r=>({...project(r.x,r.y),rescued:r.rescued,expired:r.expired})),truckScreen:view?.mode==='three'?view.truckScreen():drawFireCity.projectWorld(model.truck,model,ctx),aimScreen:project(model.aim.x,model.aim.y),impactScreen:project(model.impact.x,model.impact.y),renderMode:view?.mode||'canvas',renderMetrics:view?.metrics(),ui:{textFree:true}};}
   };
   if(new URLSearchParams(location.search).get('dev')==='1')session.debug={model,view,audio};
   function tick(now){
@@ -39,7 +40,7 @@ export function runFireSession(source,createModel,draw,createView){
     const elapsed=last===undefined?0:now-last,dt=paused||document.hidden?0:Math.min(config.maxFrameSeconds,elapsed/1000);last=now;
     if(dt>0){samples++;frameMs+=elapsed;if(samples>=balance.render.fallbackSampleFrames){if(frameMs/samples>balance.render.fallbackFrameMs){if(!quality.low){quality.low=true;view?.degrade();resize();}else view?.degrade(true);}samples=frameMs=0;}}
     try{
-      const sample=shared.sample();input.moveX=sample.moveX;input.moveZ=sample.moveZ;input.firing=sample.kickHeld||keyboardActions.has('fire');input.rescue=sample.passHeld||keyboardActions.has('rescue');input.refill=refill;input.charge=!input.firing&&!input.rescue&&model.pressure<model.maxPressure; // pump handles idle pressure automatically
+      const sample=shared.sample();const movement=view?.mode==='three'?view.movementAt(sample.moveX,sample.moveZ):{moveX:sample.moveX,moveZ:sample.moveZ};input.moveX=movement.moveX;input.moveZ=movement.moveZ;input.firing=sample.kickHeld||keyboardActions.has('fire');input.rescue=sample.passHeld||keyboardActions.has('rescue');input.refill=refill;input.charge=!input.firing&&!input.rescue&&model.pressure<model.maxPressure; // pump handles idle pressure automatically
       if(input.rescue){const r=model.ladder.target;if(r){input.x=r.x;input.y=r.y;}}
       else if(input.firing){
         if(sample.kickAim.manual){input.x=model.nozzle.x+sample.kickAim.x*model.range;input.y=model.nozzle.y+sample.kickAim.z*model.range;}
