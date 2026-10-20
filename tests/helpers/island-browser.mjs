@@ -13,6 +13,11 @@ export async function islandChromium() {
 
 // Mirror the published subtree; missing lab and other application paths are 404.
 export async function serveIsland(prefix = '/Bakasun/workout/island/') {
+  if (process.env.ISLAND_URL) {
+    const target = new URL(process.env.ISLAND_URL);
+    target.search = ''; target.hash = '';
+    return { url: target.href, async close() {} };
+  }
   const root = path.resolve(fileURLToPath(new URL('../../workout/island/', import.meta.url)));
   const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.glb': 'model/gltf-binary' };
   const server = createServer(async (request, response) => {

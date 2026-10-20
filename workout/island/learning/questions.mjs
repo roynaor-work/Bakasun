@@ -31,7 +31,7 @@ function language(level,r,index) {
     if(type==='sentence'){
       const child=pick(['נועה','אורי','מיה','איתי','תמר','רון'],r),other=pick(WORDS.filter(x=>x.word!==w.word),r);
       const where=pick(['ליד הבית','בגינה','ליד הספרייה','בדרך לבית הספר'],r);
-      q=choice(`${child} ראה ${w.word} ${where}. אחר כך צייר ${other.word}. מה ראה ${child}?`,{symbols:'📖 🖍️'},w.word,WORDS.filter(x=>x.word!==other.word).map(x=>x.word),'חזרו לתחילת הסיפור: מה הופיע אחרי המילה ״ראה״?',r);
+      q=choice(`${child} ראה ${w.word} ${where}. אחר כך צייר ${other.word}. מה ראה ${child}?`,{},w.word,WORDS.filter(x=>x.word!==other.word).map(x=>x.word),'חזרו לתחילת הסיפור: מה הופיע אחרי המילה ״ראה״?',r);
     }else{
       const bank=type==='opposite'?OPPOSITES:SYNONYMS,[a,b]=pick(bank,r);
       q=choice(type==='opposite'?`מה ההפך של ״${a}״?`:`איזו מילה דומה במשמעותה ל״${a}״?`,{symbols:type==='opposite'?'↔️':'🟰'},b,bank.filter(x=>x[0]!==a).map(x=>x[1]),type==='opposite'?'דמיינו שני מצבים מנוגדים.':'חפשו מילה שאפשר להשתמש בה במקום המילה שבשאלה.',r);

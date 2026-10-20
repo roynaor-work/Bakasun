@@ -1,105 +1,407 @@
 {
-  "base": "995e285",
-  "configuredViewport": {
+  "originalBase": "995e285",
+  "mergedMain": "70239cdbbaad00bca8e54608e4b1c20c79762971",
+  "mergeCommit": "a47de936f39e875cb3d737f2ea7449b848a825cf",
+  "server": {
+    "url": "http://127.0.0.1:8765/workout/island/",
+    "workingDirectory": "/workspace/Bakasun",
+    "oldListenerStopped": 24451,
+    "freshListenerVerified": true,
+    "appSHA256": "6832460dd7c271e90d273e3db5218751f2e4cb12406f7f24503d077c8e8ab3ad",
+    "unpublishedLabReturns404": true,
+    "externalServerEnvironment": "ISLAND_URL"
+  },
+  "translationMerge": {
+    "L1Keys": 890,
+    "mainKeys": 878,
+    "mergedKeys": 891,
+    "allKeysAndValuesPreserved": true
+  },
+  "requestedViewport": {
     "width": 844,
     "height": 390
   },
-  "existingBrowserSuites": [
+  "L1AdditionalViewport": {
+    "width": 390,
+    "height": 844
+  },
+  "functionalSuites": 28,
+  "passed": 27,
+  "failed": 1,
+  "scriptsExecuted": [
     {
       "script": "g2f-browser.mjs",
-      "exitCode": 0
+      "exitCode": 1,
+      "seconds": 21.38,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": []
     },
     {
       "script": "g2g-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 72.95,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": []
     },
     {
       "script": "g2h-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 25.52,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g2h verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g2i-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 13.84,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g2i verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g2j-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 27.23,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g2j verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g2k-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 42.41,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g2k verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g2l-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 72.9,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g2l verified { width: 844, height: 390 }"
+      ]
+    },
+    {
+      "script": "g2n-browser.mjs",
+      "exitCode": 0,
+      "seconds": 136.63,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g2n verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g3b-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 64.05,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "G3b verified 844"
+      ]
     },
     {
       "script": "g3c-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 29.9,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "G3c verified 844 390"
+      ]
     },
     {
       "script": "g3d-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 56.14,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "G3d verified 844 390"
+      ]
     },
     {
       "script": "g3e-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 24.99,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g3e verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g3f-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 83.49,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g3f verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g3g-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 51.66,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g3g verified { width: 844, height: 390 }"
+      ]
+    },
+    {
+      "script": "g3h-browser.mjs",
+      "exitCode": 0,
+      "seconds": 28.61,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g3h verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g4b-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 27.42,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g4b verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g4c-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 19.01,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g4c verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g4d-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 237.51,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g4d verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g5-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 153.34,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "G5 verified 844 390"
+      ]
     },
     {
       "script": "g6-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 22.04,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g6 verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g6b-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 13.46,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g6b verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g6c-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 60.4,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g6c verified { width: 844, height: 390 }"
+      ]
+    },
+    {
+      "script": "g6d-browser.mjs",
+      "exitCode": 0,
+      "seconds": 35.49,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g6d verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g7-browser.mjs",
-      "exitCode": 0
+      "exitCode": 0,
+      "seconds": 52.99,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "g7 verified { width: 844, height: 390 }"
+      ]
     },
     {
       "script": "g8-browser.mjs",
-      "exitCode": 0
-    },
-    {
-      "script": "task016-browser.mjs",
-      "exitCode": 0
-    },
-    {
-      "script": "task017-pilot-browser.mjs",
       "exitCode": 0,
+      "seconds": 80.78,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": []
+    },
+    {
+      "script": "l1-browser.mjs",
+      "exitCode": 0,
+      "seconds": 160.53,
       "viewports": [
         {
           "width": 390,
@@ -109,10 +411,59 @@
           "width": 844,
           "height": 390
         }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "L1 verified { width: 390, height: 844 }",
+        "L1 verified { width: 844, height: 390 }"
+      ]
+    },
+    {
+      "script": "night-browser.mjs",
+      "exitCode": 0,
+      "seconds": 0.53,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": true,
+      "passLines": []
+    },
+    {
+      "script": "task016-browser.mjs",
+      "exitCode": 0,
+      "seconds": 31.37,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": []
+    },
+    {
+      "script": "task017-pilot-browser.mjs",
+      "exitCode": 0,
+      "seconds": 21.16,
+      "viewports": [
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "helperOnly": false,
+      "passLines": [
+        "TASK-017 844 390 none PASS",
+        "TASK-017 844 390 car PASS",
+        "TASK-017 844 390 walker PASS",
+        "TASK-017 844 390 both PASS"
       ]
     }
   ],
-  "existingBrowserSourcesMatchBase": {
+  "existingBrowserSourcesMatchMergedMain": {
     "workout/island/tests/g2f-browser.mjs": true,
     "workout/island/tests/g2g-browser.mjs": true,
     "workout/island/tests/g2h-browser.mjs": true,
@@ -120,12 +471,14 @@
     "workout/island/tests/g2j-browser.mjs": true,
     "workout/island/tests/g2k-browser.mjs": true,
     "workout/island/tests/g2l-browser.mjs": true,
+    "workout/island/tests/g2n-browser.mjs": true,
     "workout/island/tests/g3b-browser.mjs": true,
     "workout/island/tests/g3c-browser.mjs": true,
     "workout/island/tests/g3d-browser.mjs": true,
     "workout/island/tests/g3e-browser.mjs": true,
     "workout/island/tests/g3f-browser.mjs": true,
     "workout/island/tests/g3g-browser.mjs": true,
+    "workout/island/tests/g3h-browser.mjs": true,
     "workout/island/tests/g4b-browser.mjs": true,
     "workout/island/tests/g4c-browser.mjs": true,
     "workout/island/tests/g4d-browser.mjs": true,
@@ -133,21 +486,33 @@
     "workout/island/tests/g6-browser.mjs": true,
     "workout/island/tests/g6b-browser.mjs": true,
     "workout/island/tests/g6c-browser.mjs": true,
+    "workout/island/tests/g6d-browser.mjs": true,
     "workout/island/tests/g7-browser.mjs": true,
     "workout/island/tests/g8-browser.mjs": true,
+    "workout/island/tests/night-browser.mjs": true,
     "workout/island/tests/task016-browser.mjs": true,
     "workout/island/tests/task017-pilot-browser.mjs": false
   },
-  "baselinePortraitFailure": {
-    "script": "g2h-browser.mjs",
-    "viewport": {
-      "width": 390,
-      "height": 844
+  "baselineFailure": {
+    "script": "g2f-browser.mjs",
+    "line": 34,
+    "assertion": "m.enemyFleetHp < initial.enemyFleetHp",
+    "baselineCommit": "70239cdbbaad00bca8e54608e4b1c20c79762971",
+    "baselineViewport": {
+      "width": 844,
+      "height": 390
     },
+    "baselineServer": "http://127.0.0.1:8766/workout/island/",
     "baselineExitCode": 1,
     "branchExitCode": 1,
-    "step": "tap game-pause after 3D/canvas fallback checks",
-    "reason": "G8 portrait rotation overlay hides ordinary game controls"
+    "reason": "The stationary-target fixture removes enemy movement but still assumes a guaranteed hit despite the new G6d wind."
+  },
+  "versionAssertionUpdate": {
+    "script": "task017-pilot-browser.mjs",
+    "previousExpected": 15,
+    "expected": 16,
+    "actual": 16,
+    "onlyExpectedVersionLiteralChanged": true
   },
   "G8": {
     "checks": {
@@ -164,28 +529,28 @@
     "cold": [
       {
         "id": "soccer",
-        "cityBytes": 5898907,
-        "additionalBytes": 1475577
+        "cityBytes": 5777242,
+        "additionalBytes": 57402
       },
       {
         "id": "navalDuel",
-        "cityBytes": 5881419,
-        "additionalBytes": 301292
+        "cityBytes": 5777242,
+        "additionalBytes": 283794
       },
       {
         "id": "tennis",
-        "cityBytes": 5881419,
-        "additionalBytes": 2993043
+        "cityBytes": 5759759,
+        "additionalBytes": 2993003
       },
       {
         "id": "fireRescue",
-        "cityBytes": 5881419,
-        "additionalBytes": 3318213
+        "cityBytes": 5777242,
+        "additionalBytes": 2731315
       },
       {
         "id": "alienDefense",
-        "cityBytes": 5898907,
-        "additionalBytes": 3644157
+        "cityBytes": 5759759,
+        "additionalBytes": 2030871
       }
     ],
     "fallback": [
@@ -207,131 +572,13 @@
       }
     ]
   },
-  "physicalPhone": false,
-  "versionAssertionUpdate": {
-    "script": "task017-pilot-browser.mjs",
-    "line": 83,
-    "previousExpected": 15,
-    "expected": 16,
-    "actual": 16,
-    "onlyExpectedVersionLiteralChanged": true
-  },
   "Task017": {
-    "command": "node workout/island/tests/task017-pilot-browser.mjs",
-    "exitCode": 0,
     "cases": [
       {
-        "width": 390,
-        "height": 844,
-        "failure": "none",
-        "saveVersion": 16,
-        "download": {
-          "bodyBytes": 5870005,
-          "transferBytes": 5753220,
-          "models": [
-            {
-              "name": "/workout/island/assets/models/car-a-512.glb",
-              "bytes": 327664
-            },
-            {
-              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
-              "bytes": 1218676
-            }
-          ],
-          "limitBytes": 8000000
-        },
-        "errors": [],
-        "outside": []
-      },
-      {
-        "width": 390,
-        "height": 844,
-        "failure": "car",
-        "saveVersion": 16,
-        "download": {
-          "bodyBytes": 5542364,
-          "transferBytes": 5585864,
-          "models": [
-            {
-              "name": "/workout/island/assets/models/car-a-512.glb",
-              "bytes": 23
-            },
-            {
-              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
-              "bytes": 1218676
-            }
-          ],
-          "limitBytes": 8000000
-        },
-        "errors": [],
-        "outside": []
-      },
-      {
-        "width": 390,
-        "height": 844,
-        "failure": "walker",
-        "saveVersion": 16,
-        "download": {
-          "bodyBytes": 4634058,
-          "transferBytes": 4677258,
-          "models": [
-            {
-              "name": "/workout/island/assets/models/car-a-512.glb",
-              "bytes": 327664
-            },
-            {
-              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
-              "bytes": 23
-            }
-          ],
-          "limitBytes": 8000000
-        },
-        "errors": [],
-        "outside": []
-      },
-      {
-        "width": 390,
-        "height": 844,
-        "failure": "both",
-        "saveVersion": 16,
-        "download": {
-          "bodyBytes": 4323711,
-          "transferBytes": 4367211,
-          "models": [
-            {
-              "name": "/workout/island/assets/models/car-a-512.glb",
-              "bytes": 23
-            },
-            {
-              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
-              "bytes": 23
-            }
-          ],
-          "limitBytes": 8000000
-        },
-        "errors": [],
-        "outside": []
-      },
-      {
         "width": 844,
         "height": 390,
         "failure": "none",
         "saveVersion": 16,
-        "download": {
-          "bodyBytes": 5870005,
-          "transferBytes": 5753220,
-          "models": [
-            {
-              "name": "/workout/island/assets/models/car-a-512.glb",
-              "bytes": 327664
-            },
-            {
-              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
-              "bytes": 1218676
-            }
-          ],
-          "limitBytes": 8000000
-        },
         "errors": [],
         "outside": []
       },
@@ -340,21 +587,6 @@
         "height": 390,
         "failure": "car",
         "saveVersion": 16,
-        "download": {
-          "bodyBytes": 5525070,
-          "transferBytes": 5568270,
-          "models": [
-            {
-              "name": "/workout/island/assets/models/car-a-512.glb",
-              "bytes": 23
-            },
-            {
-              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
-              "bytes": 1218676
-            }
-          ],
-          "limitBytes": 8000000
-        },
         "errors": [],
         "outside": []
       },
@@ -363,21 +595,6 @@
         "height": 390,
         "failure": "walker",
         "saveVersion": 16,
-        "download": {
-          "bodyBytes": 4651352,
-          "transferBytes": 4694852,
-          "models": [
-            {
-              "name": "/workout/island/assets/models/car-a-512.glb",
-              "bytes": 327664
-            },
-            {
-              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
-              "bytes": 23
-            }
-          ],
-          "limitBytes": 8000000
-        },
         "errors": [],
         "outside": []
       },
@@ -386,24 +603,12 @@
         "height": 390,
         "failure": "both",
         "saveVersion": 16,
-        "download": {
-          "bodyBytes": 4323711,
-          "transferBytes": 4367211,
-          "models": [
-            {
-              "name": "/workout/island/assets/models/car-a-512.glb",
-              "bytes": 23
-            },
-            {
-              "name": "/workout/island/assets/models/adult-man-rigged-512.glb",
-              "bytes": 23
-            }
-          ],
-          "limitBytes": 8000000
-        },
         "errors": [],
         "outside": []
       }
     ]
-  }
+  },
+  "comprehensionHasUnrelatedIllustrations": false,
+  "L1Screenshots": 14,
+  "physicalPhone": false
 }
