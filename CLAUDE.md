@@ -32,6 +32,7 @@
 ## מצב הקוד (28/09/2026)
 - האפליקציה חיה: https://roynaor-work.github.io/Bakasun/ (GitHub Pages מהריפו הזה, כל push עולה לבד).
 - ענן: Supabase, פרויקט ckfezrtrmfyqepozdzzp (הגדרות ב-`js/data/cloudcfg.js`, מבנה ב-`supabase/`).
+- Supabase, מ-30/10/2026: טבלה חדשה בסכמה public לא נגישה מהאפליקציה בלי GRANT מפורש. כל קובץ SQL ב-`supabase/` שיוצר טבלה חייב לכלול באותו קובץ GRANT לאותם תפקידים שהקוד משתמש בהם (anon ו/או authenticated, ו-service_role לפונקציות ענן), בהתאם לכללי ה-RLS של הטבלה. הנוסח: `grant select, insert, update, delete on public.<table> to authenticated;` ולצמצם לפי הצורך (אם anon רק מוסיף, `grant insert` בלבד). קבצים קיימים לא משתנים.
 - בדיקות: `node --test tests/*.mjs`. הרצה מקומית: `python3 -m http.server 8765`.
 - הקלטה: `js/voice.js` מקליט בקטעים קצרים (לא רציף, בגלל חזרות באנדרואיד), נעצר לבד אחרי שקט ומריץ את הפקודה. מסך "פנייה חדשה" מפרק הקלטה ארוכה לתיק + ספקים נדרשים + משימות (`js/logic/brief.js`).
 - מילות סיום בהקלטה: "סיימתי" מבצע, "מחקי" מוחק (סל לשעה, `js/logic/trash.js`), שם מסך לבד עובר מסך (`js/logic/nav.js`). שאלות: "מה יש לי מחר" (`js/logic/agenda.js`), "מה חסר לי לשוב״ל" (`js/logic/openItems.js`). מסך עזרה: `#/help` מתוך `js/data/helpText.js`, לעדכן כשמוסיפים פקודה.
