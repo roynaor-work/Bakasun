@@ -1,5 +1,5 @@
-import {DATA_VERSION,dataURL} from '../release.mjs?v=naval-art-20261022-1';
-import { configureBuilding } from './registry.mjs?v=naval-art-20261022-1';
+import {DATA_VERSION,dataURL} from '../release.mjs?v=naval-art-20261022-2';
+import { configureBuilding } from './registry.mjs?v=naval-art-20261022-2';
 
 const FILES = ['config', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 

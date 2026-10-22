@@ -1,17 +1,17 @@
-import {navalUpgradePanel} from '../minigames/naval-upgrades.mjs?v=naval-art-20261022-1';
-import {hangarAction} from '../activity/hangar.mjs?v=naval-art-20261022-1';
-import {hangarPreview} from './hangar-preview.mjs?v=naval-art-20261022-1';
-import {createSound} from '../minigames/sound.mjs?v=naval-art-20261022-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=naval-art-20261022-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=naval-art-20261022-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=naval-art-20261022-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=naval-art-20261022-1';
-import {gameContext} from '../minigames/context.mjs?v=naval-art-20261022-1';
-import {gameAvailability} from '../activity/availability.mjs?v=naval-art-20261022-1';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=naval-art-20261022-1';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=naval-art-20261022-1';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=naval-art-20261022-1';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=naval-art-20261022-1';
+import {navalUpgradePanel} from '../minigames/naval-upgrades.mjs?v=naval-art-20261022-2';
+import {hangarAction} from '../activity/hangar.mjs?v=naval-art-20261022-2';
+import {hangarPreview} from './hangar-preview.mjs?v=naval-art-20261022-2';
+import {createSound} from '../minigames/sound.mjs?v=naval-art-20261022-2';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=naval-art-20261022-2';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=naval-art-20261022-2';
+import {createAmmoVisual} from '../minigames/art.mjs?v=naval-art-20261022-2';
+import {equipmentOffer} from '../activity/equipment.mjs?v=naval-art-20261022-2';
+import {gameContext} from '../minigames/context.mjs?v=naval-art-20261022-2';
+import {gameAvailability} from '../activity/availability.mjs?v=naval-art-20261022-2';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=naval-art-20261022-2';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=naval-art-20261022-2';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=naval-art-20261022-2';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=naval-art-20261022-2';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -178,6 +178,7 @@ export class ActivityInterface {
   }
   intro(id,eventId,stage) {
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
+    dialog.dataset.intro=id;
     if(['soccer','tennis'].includes(id))dialog.append(this.soccerHandedness(id));
     dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
     this.narrateHelp(id);

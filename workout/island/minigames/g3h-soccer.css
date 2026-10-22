@@ -1,4 +1,4 @@
-@import url('./soccer-controls.css?v=naval-art-20261022-1');
+@import url('./soccer-controls.css?v=naval-art-20261022-2');
 /* Soccer overrides stay here; the shell owns the only pause glyph. */
 .game-screen[data-game=soccer] .game-header .game-pause { flex-direction:row; }
 .game-screen[data-game=soccer] .game-header .game-pause::before { content:''; font-size:0; width:12px; height:18px; box-sizing:content-box; }

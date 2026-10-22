@@ -1,4 +1,4 @@
-import {dataURL} from '../release.mjs?v=naval-art-20261022-1';
+import {dataURL} from '../release.mjs?v=naval-art-20261022-2';
 
 const paths={fire:'m14 2-9 12h6l-1 8 9-13h-6Z',nova:'M12 2C8 5 8 9 8 16h8c0-7 0-11-4-14ZM8 10l-4 7 4-1m8-6 4 7-4-1M10 19l2 3 2-3M10.5 8h3',pause:'M8 4v16M16 4v16',repair:'m14 4 2 4 4 2-5 5-4-4-7 7-2-2 7-7-4-4 5-5',upgrade:'m12 3 8 9h-5v9H9v-9H4Z',paint:'M12 3C10 6 5 10 5 15a7 7 0 0 0 14 0c0-5-5-9-7-12Z',hand:'M4 12h16m-5-5 5 5-5 5M4 5v14',play:'m7 3 14 9-14 9Z',shield:'m12 3 9 4-2 9-7 5-7-5-2-9Z'};
 export function alienIcon(kind){
@@ -21,7 +21,7 @@ export function alienHandedness(c){try{const hand=localStorage.getItem(c.handedn
 // These preflight screens belong to the shared UI. Decorate only alien-owned
 // nodes, so parallel games need no edits to that UI or the shared stylesheet.
 if(typeof document!=='undefined'){
- for(const file of ['./alien.css','./g2p-alien.css?v=naval-art-20261022-1']){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL(file,import.meta.url).href;document.head.append(link);}
+ for(const file of ['./alien.css','./g2p-alien.css?v=naval-art-20261022-2']){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL(file,import.meta.url).href;document.head.append(link);}
  void Promise.all([fetch(dataURL('data/config.json')).then(r=>r.json()),fetch(dataURL('data/strings.he.json')).then(r=>r.json())]).then(([config,strings])=>{
   const c=config.minigames.alienDefense.controls;
   const decorate=()=>{

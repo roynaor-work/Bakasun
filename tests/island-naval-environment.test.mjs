@@ -39,3 +39,20 @@ test('naval low quality retains the existing lightweight sea and releases new re
   assert.deepEqual(released,{geometry:1,material:1,normals:1,skyGeometry:1,skyMaterial:1});
   assert.equal(environment.metrics().disposed,true);assert.deepEqual(scene.children,[fallback,sun]);
 });
+
+test('the detailed approved normal map replaces the placeholder and is owned by the environment',()=>{
+  const scene=new THREE.Scene(),fallback=new THREE.Object3D(),sun=new THREE.Object3D();let complete,requested;
+  const environment=createNavalEnvironment(scene,{},fallback,sun,{normalLoader:{load(url,onLoad){requested=url;complete=onLoad;}}});
+  assert.match(requested,/assets\/textures\/naval-waternormals\.jpg$/);
+  const texture=new THREE.Texture();let releases=0;texture.addEventListener('dispose',()=>releases++);complete(texture);
+  const water=scene.children.find(node=>node.isWater);
+  assert.equal(water.material.uniforms.normalSampler.value,texture);assert.equal(environment.metrics().detailedNormals,true);
+  assert.equal(texture.wrapS,THREE.RepeatWrapping);assert.equal(texture.wrapT,THREE.RepeatWrapping);
+  environment.dispose();environment.dispose();assert.equal(releases,1);
+});
+
+test('a normal map finishing after exit is released without reviving a disposed round',()=>{
+  let complete;const scene=new THREE.Scene(),environment=createNavalEnvironment(scene,{},new THREE.Object3D(),new THREE.Object3D(),{normalLoader:{load(url,onLoad){complete=onLoad;}}});
+  environment.dispose();const texture=new THREE.Texture();let releases=0;texture.addEventListener('dispose',()=>releases++);complete(texture);
+  assert.equal(releases,1);assert.equal(environment.metrics().detailedNormals,false);assert.equal(scene.children.length,0);
+});

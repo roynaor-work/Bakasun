@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {navalWorldPoint} from './naval-camera.mjs?v=naval-art-20261022-1';
+import {navalWorldPoint} from './naval-camera.mjs?v=naval-art-20261022-2';
 /** All scenery/effect instances are allocated once; six fixed batches at most. */
 export function createNavalEffects(scene,seaMaterial,model,balance){
  const r=balance.render,objects=[],resources=[],dummy=new THREE.Object3D(),color=new THREE.Color();
@@ -16,20 +16,14 @@ export function createNavalEffects(scene,seaMaterial,model,balance){
    diffuseColor.rgb+=vec3(.42,.65,.67)*glint*.65;`);
  };
  seaMaterial.customProgramCacheKey=()=> 'g6d-water-1';
- const islands=batch(new THREE.SphereGeometry(1,10,6),new THREE.MeshStandardMaterial({color:'#c1ba8c',roughness:.95}),3);
- const trees=batch(new THREE.ConeGeometry(1,1,5),new THREE.MeshStandardMaterial({color:'#397756',roughness:1}),45);
- for(let i=0;i<3;i++){const x=-49+i*49,z=-78-i*8;dummy.position.set(x,-1,z);dummy.scale.set(11+i,4,8);dummy.rotation.set(0,0,0);dummy.updateMatrix();islands.setMatrixAt(i,dummy.matrix);
-  for(let j=0;j<15;j++){const a=j*2.4,dist=1+Math.sqrt(j)*1.7;dummy.position.set(x+Math.cos(a)*dist,2.3+(j%3)*.3,z+Math.sin(a)*dist*.65);dummy.scale.set(1.1,2.8+j%3,1.1);dummy.updateMatrix();trees.setMatrixAt(i*15+j,dummy.matrix);}}
- const clouds=batch(new THREE.SphereGeometry(1,8,5),new THREE.MeshBasicMaterial({color:'#f2f9fb',transparent:true,opacity:.85,depthWrite:false}),24);
  const texture=document.createElement('canvas');texture.width=texture.height=64;const p=texture.getContext('2d'),g=p.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'#ffffffcc');g.addColorStop(.4,'#ffffff77');g.addColorStop(1,'#ffffff00');p.fillStyle=g;p.fillRect(0,0,64,64);const map=new THREE.CanvasTexture(texture);resources.push(map);
  const foam=batch(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map,color:r.foam,transparent:true,opacity:.85,depthWrite:false}),64);foam.count=0;
  const smoke=batch(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map,color:r.smoke,transparent:true,opacity:.65,depthWrite:false}),40);smoke.count=0;
  let lastFoam=0,damaged=0;
  return {update(camera){time.value=model.time;
-  for(let i=0;i<24;i++){const cluster=Math.floor(i/4),puff=i%4;dummy.position.set(-73+cluster*28+Math.sin(model.time*.025+cluster)*3+puff*3,16+cluster%3*2+(puff%2),-88-cluster%2*8);dummy.scale.set(4.5,1.2+puff*.25,2.5);dummy.rotation.set(0,0,0);dummy.updateMatrix();clouds.setMatrixAt(i,dummy.matrix);}clouds.instanceMatrix.needsUpdate=true;
   let n=0;for(const point of model.trail){const age=model.time-point.time,u=age/2.8,w=navalWorldPoint(point.x,point.z,balance);dummy.position.set(w.x-Math.sin(point.heading)*5.8,.18,w.z+Math.cos(point.heading)*5.8);dummy.rotation.set(-Math.PI/2,0,point.heading);dummy.scale.set((1.7+u*5)*(point.speed/32),1.6+u*3,1);dummy.updateMatrix();foam.setMatrixAt(n++,dummy.matrix);}
   if(model.moving&&model.playerShip.speed>1){const ship=model.playerShip,w=navalWorldPoint(ship.x,ship.z,balance);for(let i=0;i<12;i++){const side=i%2?1:-1,j=Math.floor(i/2),forward=5.6-j*.28,lateral=side*(.5+j*.28),a=ship.heading;dummy.position.set(w.x+Math.sin(a)*forward+Math.cos(a)*lateral,.25+Math.sin(model.time*8+j)*.04,w.z-Math.cos(a)*forward+Math.sin(a)*lateral);dummy.rotation.set(-Math.PI/2,0,a);dummy.scale.set(.65+j*.08,1.1,1);dummy.updateMatrix();foam.setMatrixAt(n++,dummy.matrix);}}
   foam.count=n;foam.instanceMatrix.needsUpdate=true;lastFoam=n;
   n=0;damaged=0;for(const ship of [model.playerShip,...model.enemies]){if(ship.hp>=ship.maxHp||ship.active===false||ship.hp<=0&&model.sinkProgress>.8)continue;damaged++;const w=navalWorldPoint(ship.x,ship.z,balance);for(let i=0;i<8;i++){const age=(model.time*.45+i/8)%1;dummy.position.set(w.x+Math.sin(age*5+i)*age*.8,2.8+age*8.5,w.z+1+age*1.4);dummy.quaternion.copy(camera.quaternion);dummy.scale.setScalar(1.2+age*3.5);dummy.updateMatrix();smoke.setMatrixAt(n,dummy.matrix);color.setScalar(.38+age*.5);smoke.setColorAt(n++,color);}}smoke.count=n;smoke.instanceMatrix.needsUpdate=true;if(smoke.instanceColor)smoke.instanceColor.needsUpdate=true;
- },metrics(){return {foamInstances:lastFoam,smokeInstances:smoke.count,damagedShips:damaged,cloudPuffs:clouds.count,trees:trees.count,waterTime:time.value};},dispose(){for(const object of objects)scene.remove(object);for(const resource of resources)resource.dispose();}};
+ },metrics(){return {foamInstances:lastFoam,smokeInstances:smoke.count,damagedShips:damaged,cloudPuffs:0,trees:0,waterTime:time.value};},dispose(){for(const object of objects)scene.remove(object);for(const resource of resources)resource.dispose();}};
 }
