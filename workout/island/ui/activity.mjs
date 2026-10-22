@@ -1,4 +1,4 @@
-import {navalUpgradePanel} from '../minigames/naval-upgrades.mjs?v=naval-art-20261022-2';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=naval-art-20261022-2';
 import {hangarAction} from '../activity/hangar.mjs?v=naval-art-20261022-2';
 import {hangarPreview} from './hangar-preview.mjs?v=naval-art-20261022-2';
 import {createSound} from '../minigames/sound.mjs?v=naval-art-20261022-2';
@@ -177,6 +177,7 @@ export class ActivityInterface {
     toggle.onchange=()=>{right=toggle.checked;try{localStorage.setItem(c.handednessKey,right?'right':'left');}catch{}render();};render();label.append(toggle,text);return label;
   }
   intro(id,eventId,stage) {
+    if(id==='navalDuel')ensureNavalTheme();
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
     dialog.dataset.intro=id;
     if(['soccer','tennis'].includes(id))dialog.append(this.soccerHandedness(id));
@@ -188,6 +189,7 @@ export class ActivityInterface {
     if(!this.engine.state.instructionsSeen.includes(id))this.intro(id,eventId,stage);else this.launch(id,eventId,stage);
   }
   launch(id,eventId,stageNumber,drill) {
+    if(id==='navalDuel')ensureNavalTheme();
     if(this.requireBuilding(id))return;
     // Switching from instructions must retain the event's playing state.
     this.ui.modalCleanup=null;

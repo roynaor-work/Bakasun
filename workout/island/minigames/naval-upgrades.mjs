@@ -5,8 +5,11 @@ export const NAVAL_TRACKS=Object.freeze({hull:'hull',cannon:'damage',aim:'rate',
 export function navalUpgradeRanks(state){const saved=state?.minigameEquipment?.navalDuel||{};return Object.fromEntries(Object.entries(NAVAL_TRACKS).map(([name,key])=>[name,Math.max(0,Math.min(3,Number.isInteger(saved[key])?saved[key]:0))]));}
 const choices=new WeakMap();
 export const navalDifficulty=engine=>choices.get(engine)||'normal';
-export function navalUpgradePanel({engine,activity,data,t,refresh}){
+export function ensureNavalTheme(){
  if(!document.querySelector('[data-naval-upgrade-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-upgrades.css?v=naval-art-20261022-2',import.meta.url).href;link.dataset.navalUpgradeStyle='';document.head.append(link);}
+}
+export function navalUpgradePanel({engine,activity,data,t,refresh}){
+ ensureNavalTheme();
  const node=(tag,text,cls)=>{const n=document.createElement(tag);n.textContent=text||'';if(cls)n.className=cls;return n;},panel=node('section','','naval-prep');panel.dataset.navalUpgrades='';
  const stars=engine.state.minigameProgress.navalDuel.stars.reduce((a,b)=>a+b,0);panel.append(node('h3',t('naval.upgrades.title')),node('p',`${Math.floor(engine.state.money)} 🪙 · ${stars} ★`));
  const grid=node('div','','naval-upgrade-grid'),ranks=navalUpgradeRanks(engine.state);

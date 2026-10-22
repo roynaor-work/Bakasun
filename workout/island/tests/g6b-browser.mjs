@@ -2,7 +2,7 @@ import {verify} from './night-browser.mjs';
 await verify('g6b',[{width:844,height:390},{width:740,height:360},{width:1440,height:1000}],async({page,tick,snap,tap,start,exit,shot,assert,context})=>{
  await start('navalDuel');await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(50);
  const initial=await snap();assert.equal(await page.locator('.ammo-rack button').count(),6);
- for(const b of await page.locator('.ammo-rack button, #shoot').all()){const q=await b.boundingBox();assert.ok(q.y>=0&&q.y+q.height<=await page.evaluate(()=>innerHeight));}
+ await tap('.naval-weapon-picker');await tick(200);for(const b of await page.locator('.ammo-rack button, #shoot').all()){const q=await b.boundingBox();assert.ok(q.y>=0&&q.y+q.height<=await page.evaluate(()=>innerHeight));}await tap('.naval-weapon-picker');
  await tap('#shoot');await tick(40);await tick(40);assert.equal((await snap()).ammo[0],initial.ammo[0]-1);assert.deepEqual((await snap()).playerShip.x,initial.playerShip.x);await shot('aim-cannon-health');
  const fire=await page.locator('#shoot').boundingBox(),client=await context.newCDPSession(page),x=fire.x+fire.width/2,y=fire.y+fire.height/2;
  await client.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});await client.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-55,y:y-85}]});await tick(32);const aim=(await snap()).aim;await client.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await tick(32);assert.notDeepEqual(aim,initial.aim);await shot('manual-reticle');
