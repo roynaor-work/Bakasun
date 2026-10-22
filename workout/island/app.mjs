@@ -1,15 +1,15 @@
-import './view/learning-buildings.mjs?v=g9-20261020-1';
-import {LearningInterface} from './learning/interface.mjs?v=g9-20261020-1';
-import {dataURL} from './release.mjs?v=g9-20261020-1';
-import {createTranslator} from './ui/translate.mjs?v=g9-20261020-1';
-import { loadData } from './engine/load-data.mjs?v=g9-20261020-1';
-import { createEngine } from './engine/engine.mjs?v=g9-20261020-1';
-import { IslandView } from './view/island-view.mjs?v=g9-20261020-1';
-import { IslandInterface } from './ui/interface.mjs?v=g9-20261020-1';
-import {createActivity} from './activity/runtime.mjs?v=g9-20261020-1';
-import {ActivityInterface} from './ui/activity.mjs?v=g9-20261020-1';
-import {installPressFeedback} from './ui/press.mjs?v=g9-20261020-1';
-import {installGameShell} from './ui/game-shell.mjs?v=g9-20261020-1';
+import './view/learning-buildings.mjs?v=naval-art-20261022-1';
+import {LearningInterface} from './learning/interface.mjs?v=naval-art-20261022-1';
+import {dataURL} from './release.mjs?v=naval-art-20261022-1';
+import {createTranslator} from './ui/translate.mjs?v=naval-art-20261022-1';
+import { loadData } from './engine/load-data.mjs?v=naval-art-20261022-1';
+import { createEngine } from './engine/engine.mjs?v=naval-art-20261022-1';
+import { IslandView } from './view/island-view.mjs?v=naval-art-20261022-1';
+import { IslandInterface } from './ui/interface.mjs?v=naval-art-20261022-1';
+import {createActivity} from './activity/runtime.mjs?v=naval-art-20261022-1';
+import {ActivityInterface} from './ui/activity.mjs?v=naval-art-20261022-1';
+import {installPressFeedback} from './ui/press.mjs?v=naval-art-20261022-1';
+import {installGameShell} from './ui/game-shell.mjs?v=naval-art-20261022-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

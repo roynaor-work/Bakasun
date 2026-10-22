@@ -1,11 +1,11 @@
-import {fireScreenMovement} from './fire-navigation.mjs?v=g9-20261020-1';
+import {fireScreenMovement} from './fire-navigation.mjs?v=naval-art-20261022-1';
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {palette} from '../view/environment.mjs?v=g9-20261020-1';
-import {loadFireTruck} from './fire-truck.mjs?v=g9-20261020-1';
-import {drawWaterDrop,drawFireArrow} from './fire-canvas.mjs?v=g9-20261020-1';
-import {LocalModels,fitModel} from '../view/local-models.mjs?v=g9-20261020-1';
-import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=g9-20261020-1';
+import {palette} from '../view/environment.mjs?v=naval-art-20261022-1';
+import {loadFireTruck} from './fire-truck.mjs?v=naval-art-20261022-1';
+import {drawWaterDrop,drawFireArrow} from './fire-canvas.mjs?v=naval-art-20261022-1';
+import {LocalModels,fitModel} from '../view/local-models.mjs?v=naval-art-20261022-1';
+import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=naval-art-20261022-1';
 
 /** Own everything in this round. Static colored parts share a material and are
  * merged at setup; particles, stream vertices and scratch vectors are fixed. */

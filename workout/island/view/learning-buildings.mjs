@@ -1,5 +1,5 @@
-import {registerBuildingVisual} from './buildings.mjs?v=g9-20261020-1';
-import {primitive as part} from './environment.mjs?v=g9-20261020-1';
+import {registerBuildingVisual} from './buildings.mjs?v=naval-art-20261022-1';
+import {primitive as part} from './environment.mjs?v=naval-art-20261022-1';
 const block=(g,c,p,s)=>part(g,'box',c,p,s);
 for(const kind of ['library','mathLab','zoo','puzzleRoom'])registerBuildingVisual(kind,(g,v,w,d,h)=>{
   block(g,'#fff4dc',[0,.07,0],[w*.96,.14,d*.96]);

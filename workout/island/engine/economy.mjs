@@ -1,4 +1,4 @@
-import { levelFactor, population } from './metrics.mjs?v=g9-20261020-1';
+import { levelFactor, population } from './metrics.mjs?v=naval-art-20261022-1';
 
 /** All income sources are records in config.json or explicit registry extensions. Amounts are per minute. */
 export function calculateIncome(state, registry, config) {
