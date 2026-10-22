@@ -24,7 +24,7 @@ await verify('g6c',[{width:844,height:390},{width:740,height:360},{width:1440,he
  // A movement finger can steer while a second finger holds the fire control.
  const stick=await page.locator('.soccer-stick-zone').boundingBox(),sx=stick.x+stick.width*.4,sy=stick.y+stick.height*.6;
  const beforeMove=await snap();await touch('touchStart',[{x:sx,y:sy,id:1},{x,y,id:2}]);await touch('touchMove',[{x:sx+25,y:sy-28,id:1},{x,y,id:2}]);await tick(450);const moved=await snap();await up();assert.ok(moved.playerShip.heading>beforeMove.playerShip.heading);assert.ok(moved.camera.heading>beforeMove.camera.heading);assert.ok(moved.aiming);
- for(const node of await page.locator('.ammo-rack button,#shoot,[data-action=game-pause]').all()){const b=await node.boundingBox();assert.ok(b.x>=0&&b.y>=0&&b.x+b.width<=viewport.width+1&&b.y+b.height<=viewport.height+1,JSON.stringify(b));assert.ok(b.width>=48&&b.height>=48);}
+ await tap('.naval-weapon-picker');await tick(200);for(const node of await page.locator('.ammo-rack button,#shoot,[data-action=game-pause]').all()){const b=await node.boundingBox();assert.ok(b.x>=0&&b.y>=0&&b.x+b.width<=viewport.width+1&&b.y+b.height<=viewport.height+1,JSON.stringify(b));assert.ok(b.width>=48&&b.height>=48);}await tap('.naval-weapon-picker');
  assert.equal(await page.locator('.game-status').isVisible(),false);assert.equal(await page.locator('#shoot').evaluate(n=>getComputedStyle(n).fontSize),'0px');
  const metrics=(await snap()).renderMetrics;assert.ok(metrics.triangles<=90000&&metrics.drawCalls<=70,JSON.stringify(metrics));
  await page.evaluate(()=>window.__island.games.current.session.debug.view.degrade());await tick(32);assert.equal((await snap()).renderMetrics.quality,'low');

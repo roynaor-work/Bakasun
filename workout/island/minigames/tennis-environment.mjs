@@ -1,12 +1,12 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {seededRandom} from './tennis.mjs?v=naval-art-20261022-1';
-import {tennisSeats,seatedVertex} from './tennis-crowd.mjs?v=naval-art-20261022-1';
+import {seededRandom} from './tennis.mjs?v=naval-art-20261022-2';
+import {tennisSeats,seatedVertex} from './tennis-crowd.mjs?v=naval-art-20261022-2';
 
 export async function createTennisEnvironment(scene,config,keep,renderer,camera){
  const e=config.render.environment,rand=seededRandom(config.seed),seats=tennisSeats(config),trees=[],near=[],loaded=[],failures=[],people=[];
  const results=await Promise.allSettled(config.environment.models.map(async path=>{
-  const gltf=await new GLTFLoader().loadAsync(new URL('../'+path+'?v=naval-art-20261022-1',import.meta.url).href);
+  const gltf=await new GLTFLoader().loadAsync(new URL('../'+path+'?v=naval-art-20261022-2',import.meta.url).href);
   gltf.scene.updateMatrixWorld(true);let source;gltf.scene.traverse(o=>{if(o.isMesh&&!source)source=o;});if(!source)throw Error(path);
   const name=path.split('/').at(-1),geometry=keep(source.geometry);geometry.applyMatrix4(source.matrixWorld);geometry.computeBoundingBox();
   const b=geometry.boundingBox,height=name.startsWith('adult')?e.crowdHeight:e.treeHeight,scale=height/(b.max.y-b.min.y);

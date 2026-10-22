@@ -1,9 +1,9 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=naval-art-20261022-1';
-import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=naval-art-20261022-1';
-import {cardEffects} from '../activity/soccer-card.mjs?v=naval-art-20261022-1';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=naval-art-20261022-1';
-import {fieldTarget,separatePlayers} from './soccer-tactics.mjs?v=naval-art-20261022-1';
-import {shotLift,safeShotAim} from './soccer-shot.mjs?v=naval-art-20261022-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=naval-art-20261022-2';
+import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=naval-art-20261022-2';
+import {cardEffects} from '../activity/soccer-card.mjs?v=naval-art-20261022-2';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=naval-art-20261022-2';
+import {fieldTarget,separatePlayers} from './soccer-tactics.mjs?v=naval-art-20261022-2';
+import {shotLift,safeShotAim} from './soccer-shot.mjs?v=naval-art-20261022-2';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);

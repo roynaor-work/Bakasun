@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {Water} from './naval-water.mjs?v=naval-art-20261022-1';
+import {Water} from './naval-water.mjs?v=naval-art-20261022-2';
 
 const SUN=new THREE.Vector3(-.58,.52,-.64).normalize();
 
@@ -22,10 +22,10 @@ export function navalWaterNormals(size=128){
 }
 
 /** Presentation only. Simulation time/camera remain owned by the existing model. */
-export function createNavalEnvironment(scene,renderer,fallbackSea,sunDisk){
+export function createNavalEnvironment(scene,renderer,fallbackSea,sunDisk,adapters={}){
   let disposed=false,reflecting=true,captures=0,lastCapture=-Infinity,clock=0;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
-  scene.background=new THREE.Color('#8fc7df');scene.fog=new THREE.Fog('#8fc7df',65,160);
+  scene.background=new THREE.Color('#8fc7df');scene.fog=new THREE.FogExp2('#9fc9d8',.0018);
   const hemisphere=new THREE.HemisphereLight('#dff5ff','#426b7e',1.45);
   const sunlight=new THREE.DirectionalLight('#ffe4b0',2.3);sunlight.position.copy(SUN).multiplyScalar(60);
   const rim=new THREE.DirectionalLight('#a9e5ff',.85);rim.position.set(24,9,14);
@@ -42,7 +42,8 @@ export function createNavalEnvironment(scene,renderer,fallbackSea,sunDisk){
         #include <colorspace_fragment>
       }`});
   const sky=new THREE.Mesh(new THREE.SphereGeometry(185,24,12),skyMaterial);scene.add(sky);
-  const normals=navalWaterNormals();
+  const normals=navalWaterNormals();let detailedNormals=null;
+  const normalLoader=adapters.normalLoader||(typeof document==='undefined'?null:new THREE.TextureLoader());
   const water=new Water(new THREE.PlaneGeometry(900,900),{
     textureWidth:256,textureHeight:256,waterNormals:normals,sunDirection:SUN,
     sunColor:'#ffe9c4',waterColor:'#008b9f',distortionScale:2.8,fog:true,
@@ -56,10 +57,15 @@ export function createNavalEnvironment(scene,renderer,fallbackSea,sunDisk){
   const capture=water.onBeforeRender;
   water.onBeforeRender=function(...args){if(clock-lastCapture<1/12&&clock>=lastCapture)return;lastCapture=clock;capture.apply(this,args);captures++;};
   scene.add(water);fallbackSea.visible=false;sunDisk.visible=false;
+  normalLoader?.load(new URL('../assets/textures/naval-waternormals.jpg',import.meta.url).href,texture=>{
+    if(disposed){texture.dispose();return;}
+    texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.needsUpdate=true;
+    detailedNormals=texture;water.material.uniforms.normalSampler.value=texture;
+  },undefined,()=>{});
   return {
     update(time,camera){if(disposed)return;clock=time;water.material.uniforms.time.value=time*.45;sky.position.copy(camera.position);},
     degrade(){if(disposed||!reflecting)return;reflecting=false;water.visible=false;fallbackSea.visible=true;},
-    metrics(){return {revision:'naval-art-1',water:reflecting?'reflective':'light',reflectionSize:256,reflectionCaptures:captures,waterTime:water.material.uniforms.time.value,disposed};},
-    dispose(){if(disposed)return;disposed=true;scene.remove(water,sky,hemisphere,sunlight,rim);normals.dispose();water.dispose();sky.geometry.dispose();skyMaterial.dispose();},
+    metrics(){return {revision:'naval-art-2',detailedNormals:Boolean(detailedNormals),water:reflecting?'reflective':'light',reflectionSize:256,reflectionCaptures:captures,waterTime:water.material.uniforms.time.value,disposed};},
+    dispose(){if(disposed)return;disposed=true;scene.remove(water,sky,hemisphere,sunlight,rim);normals.dispose();detailedNormals?.dispose();water.dispose();sky.geometry.dispose();skyMaterial.dispose();},
   };
 }

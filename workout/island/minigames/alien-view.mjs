@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from '../view/local-models.mjs?v=naval-art-20261022-1';
+import {LocalModels} from '../view/local-models.mjs?v=naval-art-20261022-2';
 import {alienModelSpecs,alienAppearance} from './alien-assets.mjs';
 /** Presentation-only depth view; all collisions and timing remain on the original plane. */
 export function createAlienView(ctx,model,adapters={}){

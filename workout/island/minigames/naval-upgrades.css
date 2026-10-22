@@ -1,1 +1,23 @@
 .naval-prep{padding:12px;border:1px solid #75bdcf;border-radius:18px;background:#e8f7f9;color:#123c50;margin:10px 0}.naval-prep>h3,.naval-prep>p{margin:3px 0 8px}.naval-upgrade-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.naval-upgrade-card{display:flex;flex-direction:column;gap:5px;padding:9px;background:#fff;border-radius:12px}.naval-upgrade-card p{margin:0;color:#b87323;letter-spacing:3px}.naval-upgrade-card button{min-height:44px;margin-top:auto}.naval-difficulties{display:flex;gap:8px;justify-content:center;margin-top:10px}.naval-difficulties button{min-height:44px}.naval-difficulties [aria-pressed=true]{background:#206d83;color:white}@media(max-width:520px){.naval-upgrade-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.modal[data-stage-map=navalDuel],.modal[data-intro=navalDuel],.modal[data-result=navalDuel]{background:radial-gradient(ellipse at 10% 0,#24647888,transparent 65%),linear-gradient(145deg,#173e55,#0d2d42);color:#edf6ed;border:1px solid #9bd8cf66;border-radius:24px;box-shadow:0 18px 70px #061f38aa;padding:26px}
+.modal[data-stage-map=navalDuel] h2,.modal[data-intro=navalDuel] h2,.modal[data-result=navalDuel] h2{color:#fff1cb;font-size:26px;margin-bottom:8px}
+.modal[data-stage-map=navalDuel] .modal-subtitle,.modal[data-result=navalDuel] .modal-subtitle,.modal[data-intro=navalDuel] .modal-subtitle{color:#b8d8dc}
+.modal[data-stage-map=navalDuel]>p,.modal[data-result=navalDuel]>p,.modal[data-intro=navalDuel]>p{color:#c5e2df}
+.modal[data-stage-map=navalDuel],.modal[data-result=navalDuel],.modal[data-intro=navalDuel]{scrollbar-width:thin;scrollbar-color:#80b9b5 #11384c}
+.modal[data-stage-map=navalDuel] button,.modal[data-intro=navalDuel] button,.modal[data-result=navalDuel] button{border:1px solid #b7e2d94d;background:#e3f4ea12;color:#eef8ed;border-radius:12px;box-shadow:none}
+.modal[data-stage-map=navalDuel] .naval-prep{padding:16px;margin:20px 0;background:#082b3a55;border:1px solid #a6dcd74d;border-radius:18px;color:#e5f4ec}
+.modal[data-stage-map=navalDuel] .naval-prep>h3{font-size:16px;color:#fff1cb}
+.modal[data-stage-map=navalDuel] .naval-upgrade-card{background:#bededb0d;border:1px solid #a6dcd733;padding:13px;border-radius:14px;gap:8px}
+.modal[data-stage-map=navalDuel] .naval-upgrade-card p{color:#ffcf79}
+.modal[data-stage-map=navalDuel] .naval-upgrade-card button{background:#fff0cd;color:#173e55;font-weight:700;font-size:12px}
+.modal[data-stage-map=navalDuel] .naval-difficulties [aria-pressed=true]{border-color:#ffcf79;background:#ffcf7922;color:#fff1cb}
+.modal[data-stage-map=navalDuel] .stage-map{gap:10px}
+.modal[data-stage-map=navalDuel] .stage-map button{min-height:88px;background:#b6dfd719;color:#fff1cb;font-size:17px;border-color:#99d8ce55}
+.modal[data-stage-map=navalDuel] .stage-map button:disabled{opacity:.4;filter:none;background:#082b3a44}
+.modal[data-stage-map=navalDuel] .stage-feature{color:#c1dfe2;font-size:11px;line-height:1.5;margin-top:7px}
+.modal[data-intro=navalDuel] .game-help-lines{line-height:1.8;color:#c7e1e1}
+.modal[data-result=navalDuel] .game-result{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+.modal[data-result=navalDuel] .result-row{display:flex;flex-direction:column-reverse;align-items:center;justify-content:center;gap:7px;padding:17px 10px;margin:0;background:#b3e0d912;border:1px solid #a6dcd733;border-radius:16px;color:#c6e2df;font-size:12px}
+.modal[data-result=navalDuel] .result-row bdi{color:#fff1cb;font-size:32px;font-weight:800}
+.modal[data-intro=navalDuel] .primary-button,.modal[data-result=navalDuel] .primary-button{background:linear-gradient(135deg,#ff9870,#ff7554);color:#fff5dc;border-color:#ffdc9e;font-weight:800}
+@media(max-height:500px) and (orientation:landscape){.modal[data-result=navalDuel]{padding:18px 24px}.modal[data-result=navalDuel] .game-result{grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.modal[data-result=navalDuel] .result-row{padding:11px}.modal[data-result=navalDuel] .result-row bdi{font-size:26px}}

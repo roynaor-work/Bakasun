@@ -1,3 +1,3 @@
-import {startTennis} from '../minigames/tennis-session.mjs?v=naval-art-20261022-1';
-import {tennisResult} from '../minigames/tennis-result.mjs?v=naval-art-20261022-1';
+import {startTennis} from '../minigames/tennis-session.mjs?v=naval-art-20261022-2';
+import {tennisResult} from '../minigames/tennis-result.mjs?v=naval-art-20261022-2';
 export function install(registry,data){const balance=data.config.minigames.tennis;registry.registerMinigame({...data.extensions.tennis,start:ctx=>startTennis({...ctx,balance}),onResult:(raw,ctx)=>tennisResult(raw,ctx,balance)});}
