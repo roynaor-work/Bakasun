@@ -1,4 +1,4 @@
-import {equipmentOffer} from '../activity/equipment.mjs?v=g9-20261020-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=naval-art-20261022-1';
 // Keep the five established save slots valid, including legacy shield purchases.
 // The four visible tracks reuse hull/damage/rate/ammo, so v15 saves need no migration.
 export const NAVAL_TRACKS=Object.freeze({hull:'hull',cannon:'damage',aim:'rate',speed:'ammo'});
@@ -6,7 +6,7 @@ export function navalUpgradeRanks(state){const saved=state?.minigameEquipment?.n
 const choices=new WeakMap();
 export const navalDifficulty=engine=>choices.get(engine)||'normal';
 export function navalUpgradePanel({engine,activity,data,t,refresh}){
- if(!document.querySelector('[data-naval-upgrade-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-upgrades.css?v=g9-20261020-1',import.meta.url).href;link.dataset.navalUpgradeStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-upgrade-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-upgrades.css?v=naval-art-20261022-1',import.meta.url).href;link.dataset.navalUpgradeStyle='';document.head.append(link);}
  const node=(tag,text,cls)=>{const n=document.createElement(tag);n.textContent=text||'';if(cls)n.className=cls;return n;},panel=node('section','','naval-prep');panel.dataset.navalUpgrades='';
  const stars=engine.state.minigameProgress.navalDuel.stars.reduce((a,b)=>a+b,0);panel.append(node('h3',t('naval.upgrades.title')),node('p',`${Math.floor(engine.state.money)} 🪙 · ${stars} ★`));
  const grid=node('div','','naval-upgrade-grid'),ranks=navalUpgradeRanks(engine.state);

@@ -1,9 +1,9 @@
-import {soccerCrowd} from './soccer-crowd.mjs?v=g9-20261020-1';
+import {soccerCrowd} from './soccer-crowd.mjs?v=naval-art-20261022-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig} from './soccer-rig.mjs?v=g9-20261020-1';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=g9-20261020-1';
+import {cloneSoccerRig} from './soccer-rig.mjs?v=naval-art-20261022-1';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=naval-art-20261022-1';
 import {shotHeight,safeShotAim} from './soccer-shot.mjs';
 import {holdSoccerBall} from './soccer-poses.mjs';
 

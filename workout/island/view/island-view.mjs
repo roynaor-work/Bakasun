@@ -1,14 +1,14 @@
 import * as T from '../vendor/three.module.js';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=g9-20261020-1';
-import { Avatar, Citizens } from './avatar.mjs?v=g9-20261020-1';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=g9-20261020-1';
-import { levelValue } from '../engine/metrics.mjs?v=g9-20261020-1';
-import { LocalModels } from './local-models.mjs?v=g9-20261020-1';
-import {MeshyPilot} from './meshy-pilot.mjs?v=g9-20261020-1';
-import {cityPaths} from '../engine/paths.mjs?v=g9-20261020-1';
-import {shoreDirection} from '../engine/placement-help.mjs?v=g9-20261020-1';
-import {pathMesh,beachDetails} from './city-life.mjs?v=g9-20261020-1';
-import {batchMeshes} from './batch.mjs?v=g9-20261020-1';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=naval-art-20261022-1';
+import { Avatar, Citizens } from './avatar.mjs?v=naval-art-20261022-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=naval-art-20261022-1';
+import { levelValue } from '../engine/metrics.mjs?v=naval-art-20261022-1';
+import { LocalModels } from './local-models.mjs?v=naval-art-20261022-1';
+import {MeshyPilot} from './meshy-pilot.mjs?v=naval-art-20261022-1';
+import {cityPaths} from '../engine/paths.mjs?v=naval-art-20261022-1';
+import {shoreDirection} from '../engine/placement-help.mjs?v=naval-art-20261022-1';
+import {pathMesh,beachDetails} from './city-life.mjs?v=naval-art-20261022-1';
+import {batchMeshes} from './batch.mjs?v=naval-art-20261022-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.

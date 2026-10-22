@@ -1,6 +1,6 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=g9-20261020-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=g9-20261020-1';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=g9-20261020-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=naval-art-20261022-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=naval-art-20261022-1';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=naval-art-20261022-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);

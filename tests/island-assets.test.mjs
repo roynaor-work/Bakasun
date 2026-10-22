@@ -72,7 +72,7 @@ test('island bundles only referenced game models and preserves their audited byt
   }
   const bundled = (await filesIn(new URL('assets/models/', root)))
     .filter(file => file.pathname.endsWith('.glb'))
-    .map(file => path.relative(fileURLToPath(root), fileURLToPath(file)));
+    .map(file => path.relative(fileURLToPath(root), fileURLToPath(file)).split(path.sep).join('/'));
   assert.deepEqual(bundled.sort(), [...referenced].sort(), 'unconnected models must stay out of the deployable folder');
   assert.deepEqual(Object.keys(manifest).sort(), bundled);
   for (const model of bundled) {
