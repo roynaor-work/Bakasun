@@ -1,0 +1,2020 @@
+{
+  "source": {
+    "title": "Car Concept",
+    "creator": "Eric Chadwick",
+    "owner": "Darmstadt Graphics Group GmbH",
+    "year": 2024,
+    "url": "https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CarConcept",
+    "license": "CC-BY-4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "bytes": 11778688,
+    "sha256": "c272098089d78c5cd9fd9f24ff50ee8acf8d932c55f2d55fc10adb6c8998966b",
+    "triangles": 213347,
+    "primitives": 109,
+    "meshes": 97,
+    "materials": 29,
+    "textures": [
+      {
+        "dimensions": [
+          512,
+          512
+        ],
+        "format": "image/png",
+        "bytes": 358161
+      },
+      {
+        "dimensions": [
+          512,
+          512
+        ],
+        "format": "image/png",
+        "bytes": 106027
+      },
+      {
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "format": "image/png",
+        "bytes": 1567628
+      },
+      {
+        "dimensions": [
+          512,
+          128
+        ],
+        "format": "image/png",
+        "bytes": 8177
+      },
+      {
+        "dimensions": [
+          64,
+          32
+        ],
+        "format": "image/png",
+        "bytes": 3528
+      },
+      {
+        "dimensions": [
+          32,
+          32
+        ],
+        "format": "image/png",
+        "bytes": 198
+      },
+      {
+        "dimensions": [
+          1024,
+          256
+        ],
+        "format": "image/png",
+        "bytes": 31201
+      },
+      {
+        "dimensions": [
+          128,
+          128
+        ],
+        "format": "image/png",
+        "bytes": 46314
+      },
+      {
+        "dimensions": [
+          128,
+          128
+        ],
+        "format": "image/png",
+        "bytes": 343
+      },
+      {
+        "dimensions": [
+          128,
+          128
+        ],
+        "format": "image/png",
+        "bytes": 8500
+      },
+      {
+        "dimensions": [
+          1024,
+          1024
+        ],
+        "format": "image/png",
+        "bytes": 23370
+      },
+      {
+        "dimensions": [
+          1024,
+          1024
+        ],
+        "format": "image/png",
+        "bytes": 475684
+      },
+      {
+        "dimensions": [
+          512,
+          128
+        ],
+        "format": "image/png",
+        "bytes": 53752
+      },
+      {
+        "dimensions": [
+          512,
+          512
+        ],
+        "format": "image/png",
+        "bytes": 240363
+      }
+    ],
+    "bounds": {
+      "min": [
+        -1.2714082958559834,
+        -0.00024107342268636645,
+        -1.940231204032898
+      ],
+      "max": [
+        1.2709126970853442,
+        1.1486550569534302,
+        2.4171547889709473
+      ],
+      "size": [
+        2.5423209929413275,
+        1.1488961303761165,
+        4.357385993003845
+      ]
+    },
+    "nodes": [
+      {
+        "name": "BodyUnderside",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          -0.7071067811865475,
+          0,
+          0,
+          0.7071067811865476
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyWindshield",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyWindshieldGasket",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyWindshieldWipers",
+        "translation": [
+          0.6815395355224609,
+          -1.427220721244812,
+          0.8494512438774109
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyWindshieldWipersBase",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "Engine",
+        "translation": [
+          0,
+          -2.0756940841674805,
+          0.13999998569488523
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorCage",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDashMid",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDashSides",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorFloor",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorFloormats",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorMid",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "InteriorPedalAccel",
+        "translation": [
+          -0.07489284873008728,
+          -1.4588344097137451,
+          0.12920790910720825
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorPedalAccelArm",
+        "translation": [
+          -0.07625855505466461,
+          -1.4588344097137451,
+          0.12920790910720825
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorPedalBrake",
+        "translation": [
+          0.07622051239013672,
+          -1.52258038520813,
+          0.20979906618595123
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorPedalBrakeArm",
+        "translation": [
+          0.0762585699558258,
+          -1.427202582359314,
+          0.12869864702224731
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorPillar",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSeatsColor1",
+        "translation": [
+          0.5086424946784973,
+          -0.133467435836792,
+          -0.15975713729858398
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSeatsColor2",
+        "translation": [
+          0,
+          -0.8046443462371826,
+          -0.19285500049591064
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSeatsFrame1",
+        "translation": [
+          -4.521004249095274e-25,
+          0.6064264178276062,
+          -0.1804433166980743
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSeatsFrame2",
+        "translation": [
+          0,
+          -0.8046443462371826,
+          -0.19285500049591064
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringBase",
+        "translation": [
+          9.313225746154783e-10,
+          -0.9291374683380128,
+          0.6415594220161438
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringCylinder",
+        "translation": [
+          0.000921505969017744,
+          -1.1625407934188845,
+          0.5512652397155762
+        ],
+        "rotation": [
+          0.18644075360245363,
+          -0.1281974228636622,
+          -0.024545383206007704,
+          0.9737570489595775
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringEmblem",
+        "translation": [
+          0,
+          0.2502490282058716,
+          -0.0021872520446777344
+        ],
+        "rotation": [
+          -0.18804951629239622,
+          3.792957935079349e-9,
+          -3.4373685933464566e-9,
+          0.9821595488627068
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringWheel04",
+        "translation": [
+          0,
+          0.19733786582946777,
+          -0.0006372928619384766
+        ],
+        "rotation": [
+          -0.18804951629239622,
+          3.792957935079349e-9,
+          -3.4373685933464566e-9,
+          0.9821595488627068
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringWheel01",
+        "translation": [
+          0,
+          0.2502490282058716,
+          -0.0021872520446777344
+        ],
+        "rotation": [
+          -0.18804951629239622,
+          3.792957935079349e-9,
+          -3.4373685933464566e-9,
+          0.9821595488627068
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringWheel02",
+        "translation": [
+          0,
+          0.2502490282058716,
+          -0.0021872520446777344
+        ],
+        "rotation": [
+          -0.18804951629239622,
+          3.792957935079349e-9,
+          -3.4373685933464566e-9,
+          0.9821595488627068
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringWheel03",
+        "translation": [
+          0,
+          0.2502490282058716,
+          -0.0021872520446777344
+        ],
+        "rotation": [
+          -0.18804951629239622,
+          3.792957935079349e-9,
+          -3.4373685933464566e-9,
+          0.9821595488627068
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringDash",
+        "translation": [
+          -0.005831281654536724,
+          -1.0221848487854004,
+          0.6130815744400024
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringDashColumn",
+        "translation": [
+          -0.005831281654536724,
+          -1.0221848487854004,
+          0.6130815744400024
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringHandleL",
+        "translation": [
+          0.07221660017967224,
+          -1.1995973587036133,
+          0.5295243263244629
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorSteeringHandleR",
+        "translation": [
+          -0.07025431096553802,
+          -1.1995973587036133,
+          0.5295243263244629
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "License Plate",
+        "translation": [
+          0,
+          1.8854050636291504,
+          0.25537848472595215
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyRoofPanel",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyRearPanelsColor1",
+        "translation": [
+          0,
+          1.9285271167755127,
+          0.4230137765407562
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          -1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorRearHatch",
+        "translation": [
+          0,
+          -1.9270389080047607,
+          -0.42974305152893066
+        ],
+        "rotation": [
+          -2.3841857910154217e-7,
+          0,
+          0,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorRearPanels",
+        "translation": [
+          0,
+          -1.9270389080047607,
+          -0.42974305152893066
+        ],
+        "rotation": [
+          -2.3841857910154217e-7,
+          0,
+          0,
+          0.9999999999999716
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "BodyWindowsRearSides",
+        "translation": [
+          0,
+          -1.9270389080047607,
+          -0.42974305152893066
+        ],
+        "rotation": [
+          -2.3841857910154217e-7,
+          0,
+          0,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyTurnsignalsRear",
+        "translation": [
+          0,
+          -1.927039623260498,
+          -0.4297434091567993
+        ],
+        "rotation": [
+          -2.3841857910154217e-7,
+          0,
+          0,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyTaillightsPanels",
+        "translation": [
+          0,
+          -1.927039623260498,
+          -0.4297434091567993
+        ],
+        "rotation": [
+          -2.3841857910154217e-7,
+          0,
+          0,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyTaillights",
+        "translation": [
+          0,
+          -1.927039623260498,
+          -0.4297434091567993
+        ],
+        "rotation": [
+          -2.3841857910154217e-7,
+          0,
+          0,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyRearwindow",
+        "translation": [
+          0,
+          -1.9270389080047607,
+          -0.42974305152893066
+        ],
+        "rotation": [
+          -2.3841857910154217e-7,
+          0,
+          0,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyPillars",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyPanelsColor2",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyHood",
+        "translation": [
+          -1.0882532652800592e-9,
+          -2.3793885707855225,
+          0.17601461708545685
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          -1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyHoodInterior01",
+        "translation": [
+          1.0882532652800592e-9,
+          2.378434181213379,
+          -0.1884706020355225
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyHoodInterior02",
+        "translation": [
+          1.0882532652800592e-9,
+          2.378434181213379,
+          -0.1884706020355225
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyHoodTopgrill",
+        "translation": [
+          1.0882532652800592e-9,
+          2.378434181213379,
+          -0.1884706020355225
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyHoodUnder",
+        "translation": [
+          1.0882532652800592e-9,
+          2.378434181213379,
+          -0.1884706020355225
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyHeadlights",
+        "translation": [
+          1.0882532652800592e-9,
+          2.378434181213379,
+          -0.1884706020355225
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorRColor1",
+        "translation": [
+          -1.0871999263763428,
+          -0.997542679309845,
+          0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          -1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorRColor2",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorRHandle01",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorRHandle02",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorRMirror",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorRMirrorColor1",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorRMirrorColor2",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorRWindow",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorRWindowGasket",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDoorR01",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "InteriorDoorR02",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDoorR03",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDoorR04",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDoorR05",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDoorR06",
+        "translation": [
+          1.0906753540039065,
+          0.993742287158966,
+          -0.6429661512374878
+        ],
+        "rotation": [
+          0,
+          0,
+          4.470348358154284e-8,
+          0.999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorLColor1",
+        "translation": [
+          1.0886822938919067,
+          -0.9975706934928894,
+          0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          -1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDoorL04",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDoorL01",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "InteriorDoorL02",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDoorL03",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDoorL05",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "InteriorDoorL06",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorLColor2",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorLHandle01",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorLHandle02",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorLMirror",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorLMirrorColor1",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorLWindowGasket",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorLWindow",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "BodyDoorLMirrorColor2",
+        "translation": [
+          -1.0921578407287598,
+          0.9937649965286256,
+          -0.6430185437202454
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.3841857910154217e-7,
+          0.9999999999999716
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "WheelFrontLRim",
+        "translation": [
+          -0.001214742660522461,
+          0,
+          -0.00003740191459655762
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "WheelFrontLBrakePad",
+        "translation": [
+          -0.001214742660522461,
+          0,
+          -0.000037044286727905273
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "WheelFrontLBrakeDisc",
+        "translation": [
+          -0.001214742660522461,
+          0,
+          -0.000037044286727905273
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "WheelFrontRRim",
+        "translation": [
+          -0.00029081106185913086,
+          -0.001422584056854248,
+          1.1920928955078125e-7
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          0.9999999999999999
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "WheelFrontRBrakePad",
+        "translation": [
+          -0.00029087066650390625,
+          -0.0014224648475646973,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          0.9999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "WheelFrontRBrakeDisc",
+        "translation": [
+          -0.00029087066650390625,
+          -0.0014224648475646973,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          0.9999999999999999
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "WheelRearLBrakeDisc",
+        "translation": [
+          -3.576278686523438e-7,
+          -0.00005602836608886719,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "WheelRearLBrakePad",
+        "translation": [
+          -3.576278686523438e-7,
+          -0.00005602836608886719,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "WheelRearLRim",
+        "translation": [
+          -3.576278686523438e-7,
+          -0.00005602836608886719,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "WheelRearRBrakeDisc",
+        "translation": [
+          -0.0008093118667602539,
+          -0.00005263090133666992,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "WheelRearRBrakePad",
+        "translation": [
+          -0.0008093118667602539,
+          -0.00005263090133666992,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      },
+      {
+        "name": "WheelRearRRim",
+        "translation": [
+          -0.0008093118667602539,
+          -0.00005218386650085449,
+          1.1920928955078125e-7
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "",
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 2
+      },
+      {
+        "name": "Axles",
+        "translation": [
+          -0.00016111135482788086,
+          -0.09066951274871826,
+          0.38386812806129456
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "primitives": 1
+      }
+    ],
+    "extensions": [
+      "KHR_materials_clearcoat",
+      "KHR_materials_emissive_strength",
+      "KHR_materials_iridescence",
+      "KHR_materials_transmission",
+      "KHR_materials_variants",
+      "KHR_texture_transform"
+    ]
+  },
+  "normalization": {
+    "up": "Y",
+    "forward": "+Z",
+    "rendererYawRadians": 0,
+    "rendererUniformLengthMetres": 4.6,
+    "wheelSpinAxis": "X",
+    "forwardSpinSign": 1,
+    "wheelRadiusSourceMetres": 0.384
+  },
+  "modifications": [
+    "Removed every Interior* mesh, engine, axles, hidden hood internals and wipers.",
+    "Removed all variants and unused materials.",
+    "Replaced license plate, tire sidewall/tread and all wheel metals with unbranded PBR materials; logo-bearing color, normal and trim emissive maps are absent.",
+    "Opaque dark PBR glass replaces transmission.",
+    "Preserved exterior body PBR paint, clearcoat, normal maps, lights and original proportions.",
+    "Baked original world orientation; front wheels straightened; four separate centered X-axis wheel nodes.",
+    "Joined by material within body/wheel groups, welded, simplified and converted retained textures to WebP no larger than512×512."
+  ],
+  "outputs": {
+    "sport-coupe.glb": {
+      "bytes": 1301692,
+      "sha256": "09d9aa471d03a026fb08b8addceef8a66229a8e1441935bdf883c22496172fa2",
+      "triangles": 35268,
+      "primitives": 16,
+      "meshes": 5,
+      "materials": 10,
+      "textures": [
+        {
+          "dimensions": [
+            512,
+            512
+          ],
+          "format": "image/webp",
+          "bytes": 68436
+        },
+        {
+          "dimensions": [
+            128,
+            128
+          ],
+          "format": "image/webp",
+          "bytes": 7754
+        },
+        {
+          "dimensions": [
+            512,
+            512
+          ],
+          "format": "image/webp",
+          "bytes": 27974
+        }
+      ],
+      "bounds": {
+        "min": [
+          -1.168515682220459,
+          -0.00024107098579378983,
+          -1.9401699304580688
+        ],
+        "max": [
+          1.168515682220459,
+          1.1484339237213135,
+          2.4168717861175537
+        ],
+        "size": [
+          2.337031364440918,
+          1.1486749947071073,
+          4.357041716575623
+        ]
+      },
+      "nodes": [
+        {
+          "name": "Body",
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "primitives": 8
+        },
+        {
+          "name": "WheelFrontL",
+          "translation": [
+            0.9754931926727296,
+            0.38375902175903287,
+            1.4856805801391602
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "primitives": 2
+        },
+        {
+          "name": "WheelFrontR",
+          "translation": [
+            -0.9766749143600464,
+            0.3837589621543881,
+            1.4839684963226318
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "primitives": 2
+        },
+        {
+          "name": "WheelRearL",
+          "translation": [
+            0.982513666152954,
+            0.3837589621543887,
+            -1.3140623569488523
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "primitives": 2
+        },
+        {
+          "name": "WheelRearR",
+          "translation": [
+            -0.981704831123352,
+            0.3837589621543887,
+            -1.3140623569488523
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "primitives": 2
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_materials_clearcoat",
+        "KHR_materials_emissive_strength",
+        "KHR_materials_iridescence",
+        "KHR_texture_transform"
+      ],
+      "wheelPivots": {
+        "WheelFrontL": {
+          "center": [
+            0.9754931926727296,
+            0.38375902175903287,
+            1.4856805801391602
+          ],
+          "straightenYawRadians": 0.5235987785944411
+        },
+        "WheelFrontR": {
+          "center": [
+            -0.9766749143600464,
+            0.3837589621543881,
+            1.4839684963226318
+          ],
+          "straightenYawRadians": 0.5235987843015453
+        },
+        "WheelRearL": {
+          "center": [
+            0.982513666152954,
+            0.3837589621543887,
+            -1.3140623569488523
+          ],
+          "straightenYawRadians": 0
+        },
+        "WheelRearR": {
+          "center": [
+            -0.981704831123352,
+            0.3837589621543887,
+            -1.3140623569488523
+          ],
+          "straightenYawRadians": 0
+        }
+      }
+    },
+    "sport-coupe-low.glb": {
+      "bytes": 538012,
+      "sha256": "fe6a427dc380f776a14c61647d1470b605c38072d7eabdd0589d19939b0cccb6",
+      "triangles": 9838,
+      "primitives": 16,
+      "meshes": 5,
+      "materials": 10,
+      "textures": [
+        {
+          "dimensions": [
+            512,
+            512
+          ],
+          "format": "image/webp",
+          "bytes": 68436
+        },
+        {
+          "dimensions": [
+            128,
+            128
+          ],
+          "format": "image/webp",
+          "bytes": 7754
+        },
+        {
+          "dimensions": [
+            512,
+            512
+          ],
+          "format": "image/webp",
+          "bytes": 27974
+        }
+      ],
+      "bounds": {
+        "min": [
+          -1.168352484703064,
+          -0.00024101138114962506,
+          -1.9395564794540405
+        ],
+        "max": [
+          1.1673002243041992,
+          1.1479934453964233,
+          2.41483736038208
+        ],
+        "size": [
+          2.335652709007263,
+          1.148234456777573,
+          4.354393839836121
+        ]
+      },
+      "nodes": [
+        {
+          "name": "Body",
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "primitives": 8
+        },
+        {
+          "name": "WheelFrontL",
+          "translation": [
+            0.9754931926727296,
+            0.38375902175903287,
+            1.4856805801391602
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "primitives": 2
+        },
+        {
+          "name": "WheelFrontR",
+          "translation": [
+            -0.9766749143600464,
+            0.3837589621543881,
+            1.4839684963226318
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "primitives": 2
+        },
+        {
+          "name": "WheelRearL",
+          "translation": [
+            0.982513666152954,
+            0.3837589621543887,
+            -1.3140623569488523
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "primitives": 2
+        },
+        {
+          "name": "WheelRearR",
+          "translation": [
+            -0.981704831123352,
+            0.3837589621543887,
+            -1.3140623569488523
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "primitives": 2
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_materials_clearcoat",
+        "KHR_materials_emissive_strength",
+        "KHR_materials_iridescence",
+        "KHR_texture_transform"
+      ],
+      "wheelPivots": {
+        "WheelFrontL": {
+          "center": [
+            0.9754931926727296,
+            0.38375902175903287,
+            1.4856805801391602
+          ],
+          "straightenYawRadians": 0.5235987785944411
+        },
+        "WheelFrontR": {
+          "center": [
+            -0.9766749143600464,
+            0.3837589621543881,
+            1.4839684963226318
+          ],
+          "straightenYawRadians": 0.5235987843015453
+        },
+        "WheelRearL": {
+          "center": [
+            0.982513666152954,
+            0.3837589621543887,
+            -1.3140623569488523
+          ],
+          "straightenYawRadians": 0
+        },
+        "WheelRearR": {
+          "center": [
+            -0.981704831123352,
+            0.3837589621543887,
+            -1.3140623569488523
+          ],
+          "straightenYawRadians": 0
+        }
+      }
+    }
+  },
+  "removedMeshes": [
+    "Axles",
+    "BodyHoodInterior01",
+    "BodyHoodInterior02",
+    "BodyHoodUnder",
+    "BodyWindshieldWipers",
+    "BodyWindshieldWipersBase",
+    "Engine",
+    "InteriorCage",
+    "InteriorDashMid",
+    "InteriorDashSides",
+    "InteriorDoorL01",
+    "InteriorDoorL02",
+    "InteriorDoorL03",
+    "InteriorDoorL04",
+    "InteriorDoorL05",
+    "InteriorDoorL06",
+    "InteriorDoorR01",
+    "InteriorDoorR02",
+    "InteriorDoorR03",
+    "InteriorDoorR04",
+    "InteriorDoorR05",
+    "InteriorDoorR06",
+    "InteriorFloor",
+    "InteriorFloormats",
+    "InteriorMid",
+    "InteriorPedalAccel",
+    "InteriorPedalAccelArm",
+    "InteriorPedalBrake",
+    "InteriorPedalBrakeArm",
+    "InteriorPillar",
+    "InteriorRearHatch",
+    "InteriorRearPanels",
+    "InteriorSeatsColor1",
+    "InteriorSeatsColor2",
+    "InteriorSeatsFrame1",
+    "InteriorSeatsFrame2",
+    "InteriorSteeringBase",
+    "InteriorSteeringCylinder",
+    "InteriorSteeringDash",
+    "InteriorSteeringDashColumn",
+    "InteriorSteeringEmblem",
+    "InteriorSteeringHandleL",
+    "InteriorSteeringHandleR",
+    "InteriorSteeringWheel01",
+    "InteriorSteeringWheel02",
+    "InteriorSteeringWheel03",
+    "InteriorSteeringWheel04"
+  ]
+}

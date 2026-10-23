@@ -88,6 +88,27 @@ test('drift builds charge while turning and releases a finite boost',()=>{
   advance(race,3,{autoAccelerate:false,brake:true});assert.equal(p.boostTime,0);
 });
 
+test('drift slip changes actual movement smoothly and tyre grip returns after release',()=>{
+  const race=createRacing({config:{countdown:0,steeringAssist:false,stage:{opponents:0}}});const p=place(race,18,0,25);
+  for(let n=0;n<12&&!p.drifting;n++)race.step(1/60,{steer:.35,drift:true});
+  assert.equal(p.drifting,true);assert.ok(p.slipAngle>0&&p.slipAngle<p.steer*.29);
+  advance(race,.5,{steer:.35,drift:true});const heldSlip=p.slipAngle;
+  assert.ok(heldSlip>.04&&heldSlip<.29);const previous={x:p.x,z:p.z};
+  race.step(1/60,{steer:.35,drift:true});
+  const movementHeading=Math.atan2(p.x-previous.x,p.z-previous.z);
+  assert.ok(Math.abs(racingAngle(p.heading-movementHeading)-p.slipAngle)<.000001,'slip affects velocity, not only the rendered car');
+  const releaseSlip=p.slipAngle;race.step(1/60,{steer:.35});
+  assert.ok(p.slipAngle>releaseSlip*.9&&p.slipAngle<releaseSlip,'release preserves momentum without a snap');
+  advance(race,1,{autoAccelerate:false,brake:true});assert.ok(p.slipAngle<releaseSlip*.03);
+});
+
+test('ordinary steering has no slip and recovery clears existing drift momentum',()=>{
+  const race=createRacing({config:{countdown:0,steeringAssist:false,stage:{opponents:0}}});const p=place(race,18,0,25);
+  const before={x:p.x,z:p.z};race.step(1/60,{steer:.6});
+  assert.equal(p.slipAngle,0);assert.ok(Math.abs(racingAngle(Math.atan2(p.x-before.x,p.z-before.z)-p.heading))<.000001);
+  p.slipAngle=.2;race.recover();assert.equal(p.slipAngle,0);
+});
+
 test('nitro consumes its meter and improves acceleration without becoming unlimited',()=>{
   const boosted=createRacing({config:{countdown:0}}),plain=createRacing({config:{countdown:0}});
   place(boosted,10,0,15);place(plain,10,0,15);
