@@ -1,8 +1,9 @@
+import {surfaceTexture} from '../presentation/surfaces.mjs?v=island-art-20261022-3';
 import * as T from '../vendor/three.module.js';
-import { batchMeshes } from './batch.mjs?v=naval-art-20261022-2';
+import { batchMeshes } from './batch.mjs?v=island-art-20261022-3';
 
 export const GROUND = .34;
-export const palette = { grass:'#91c75c', sand:'#f6d99a', sea:'#53cbd1', stone:'#dfb988', cream:'#fff4dc', teal:'#287a83', coral:'#ec9279' };
+export const palette = { grass:'#69a35a', sand:'#f6d99a', sea:'#249bae', stone:'#dfb988', cream:'#fff4dc', teal:'#287a83', coral:'#ec9279' };
 const geometries = new Map(), materials = new Map();
 export function material(color, options = {}) {
   const key = `${color}:${JSON.stringify(options)}`;
@@ -71,7 +72,8 @@ function makeScenery(scene,neighbors=[],style) {
 export class Environment {
   constructor(scene,world={}) {
     this.scene=scene;this.size=0;this.root=new T.Group();scene.add(this.root);this.style=world.viewConfig;
-    const sea=new T.Mesh(new T.PlaneGeometry(300,300),material(palette.sea,{roughness:.32}));sea.rotation.x=-Math.PI/2;sea.position.y=-1;sea.receiveShadow=true;scene.add(sea);this.sea=sea;
+    this.grassMap=surfaceTexture('grass',8);this.grassMaterial=new T.MeshStandardMaterial({map:this.grassMap,color:'#c0d5a4',roughness:1});
+    this.waterMap=surfaceTexture('water',22);this.waterMaterial=new T.MeshStandardMaterial({map:this.waterMap,color:'#9de4df',roughness:.27,metalness:.2});const sea=new T.Mesh(new T.PlaneGeometry(300,300),this.waterMaterial);sea.rotation.x=-Math.PI/2;sea.position.y=-1;sea.receiveShadow=true;scene.add(sea);this.sea=sea;
     const shimmer=new T.InstancedMesh(new T.PlaneGeometry(1,.07),new T.MeshBasicMaterial({color:'#c3f7eb',transparent:true,opacity:.36,depthWrite:false}),80);
     const rand=rng(21),dummy=new T.Object3D();
     for(let i=0;i<80;i++) { dummy.position.set((rand()-.5)*100,-.98,(rand()-.5)*80);dummy.rotation.x=-Math.PI/2;dummy.scale.set(.6+rand()*1.4,1,1);dummy.updateMatrix();shimmer.setMatrixAt(i,dummy.matrix); }
@@ -98,13 +100,21 @@ export class Environment {
     // A little beach on the front corner leaves the whole building grid open.
     for(let i=0;i<7;i++)primitive(land,'sphere','#eee4c2',[size/2+1+(i%2)*.4,-.03,-size/2+1+i*.48],[.5,.3,.45]);
     batchMeshes(land);
-    const grid=new T.GridHelper(size,size,'#5d9e70','#aad58a');grid.position.set(0,GROUND+.006,0);grid.material.transparent=true;grid.material.opacity=.34;grid.material.depthWrite=false;land.add(grid);this.grid=grid;
+    const lawn=new T.Mesh(new T.PlaneGeometry(size,size),this.grassMaterial);lawn.rotation.x=-Math.PI/2;lawn.position.y=GROUND+.002;lawn.receiveShadow=true;lawn.userData.ownedGeometry=true;land.add(lawn);
+    const grid=new T.GridHelper(size,size,'#5d9e70','#aad58a');grid.position.set(0,GROUND+.006,0);grid.material.transparent=true;grid.material.opacity=.28;grid.visible=Boolean(this.placementGrid);grid.material.depthWrite=false;land.add(grid);this.grid=grid;
   }
+  showPlacementGrid(visible){this.placementGrid=visible;if(this.grid)this.grid.visible=visible;}
   tick(time) {
+    this.waterMap.offset.set(time*.003,time*.0015);
     for(const cloud of this.clouds)cloud.root.position.x=cloud.x+Math.sin(time*.035+cloud.phase)*.8;
     const dummy=this.dummy,beach=this.style?.beach;
     for(let i=0;i<this.waves.count;i++){const age=(time*beach.waveSpeed+i/this.waves.count)%1;dummy.position.set(this.size/2+3.4-age*.6,-.9,-this.size/2+i*1.6);dummy.rotation.set(-Math.PI/2,0,0);dummy.scale.set(.08,beach.waveWidth*(1-age*.3),1);dummy.updateMatrix();this.waves.setMatrixAt(i,dummy.matrix);}this.waves.instanceMatrix.needsUpdate=true;
     for(let i=0;i<this.smoke.count;i++){const age=(time*(this.style?.neighbors.smokeSpeed||.35)+i/3)%1,base=this.smokeBases[Math.floor(i/3)];dummy.position.set(base[0]+.3+age*.5,base[1]+1.5+age*1.7,base[2]-1.6);dummy.rotation.set(0,0,0);dummy.scale.setScalar(.4+age);dummy.updateMatrix();this.smoke.setMatrixAt(i,dummy.matrix);}this.smoke.instanceMatrix.needsUpdate=true;
   }
-  dispose() {this.sea.geometry.dispose();this.shimmer.geometry.dispose();for(const mesh of [this.waves,this.smoke]){mesh.geometry.dispose();mesh.material.dispose();}}
+  dispose() {
+    if(this.disposed)return;this.disposed=true;
+    for(const root of [this.land,this.root]){root?.traverse(o=>{if(o.geometry&&(o.userData.ownedGeometry||o.isGridHelper))o.geometry.dispose();if(o.isGridHelper)o.material.dispose();});if(root)this.scene.remove(root);}
+    for(const resource of [this.grassMap,this.grassMaterial,this.waterMap,this.waterMaterial,this.sea.geometry])resource.dispose();this.scene.remove(this.sea);
+    for(const mesh of [this.shimmer,this.waves,this.smoke]){mesh.dispose();mesh.geometry.dispose();mesh.material.dispose();this.scene.remove(mesh);}
+  }
 }

@@ -1,0 +1,9 @@
+/* Shared presentation for every game in the workout catalogue. */
+.gamewrap{padding:12px;border:1px solid #c5dedc42;border-radius:26px;background:radial-gradient(ellipse at 0 0,#28687877,transparent 65%),#12364b;box-shadow:0 14px 40px #09293f33;color:#fff0cf}
+.gamehud{gap:8px;padding:2px 0 10px}.gamehud .gname{color:#fff0cf;font-size:17px}.gamehud .gscore{color:#ffd58a;background:#d4ecea10;border:1px solid #a0d8d333;border-radius:14px;padding:5px 10px;min-width:44px}.gamehud .gtime{color:#bce5dc;background:#0e2c40;box-shadow:none;border:1px solid #9bd5d333}
+.gamehud .btn{background:#eaf2df15;border:1px solid #b7ddd44d;color:#fff1d1;border-radius:15px}
+.gcanvas canvas{border-radius:20px;box-shadow:0 5px 24px #06263d55}.goverlay{background:#092b40b8;border-radius:20px;backdrop-filter:blur(7px)}
+.goverlay .gmsg{background:radial-gradient(ellipse at top left,#296d7b66,transparent),linear-gradient(145deg,#1b4a60,#103247);border:1px solid #b7ddd480;border-radius:24px;box-shadow:0 16px 50px #031e3780;padding:24px;color:#fff1d2;max-width:min(320px,94%)}
+.gmsg span{color:#bfded6}.gmsg .btn{background:linear-gradient(135deg,#ff9d75,#f07856);border:1px solid #ffdcaa;border-radius:15px;color:#fff8e6;min-height:48px;font-weight:800;box-shadow:0 4px 12px #09263744}.gstars span.on{color:#ffdc86;text-shadow:0 0 16px #ffba6155}
+.gcard{border-radius:20px;border-color:#cbded6;background:linear-gradient(135deg,#fff9eb,#f0f6e9);box-shadow:0 5px 16px #1a4b5e0f}.gcard .e{background:#dceae2;border-radius:16px;padding:8px}
+@media(max-width:400px){.gamewrap{padding:8px;border-radius:22px}.gamehud .gname{font-size:14px}.gamehud .gscore{font-size:21px}.gamehud .gtime{font-size:17px;padding:5px 9px}}

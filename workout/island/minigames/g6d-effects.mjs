@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {navalWorldPoint} from './naval-camera.mjs?v=naval-art-20261022-2';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-art-20261022-3';
 /** All scenery/effect instances are allocated once; six fixed batches at most. */
 export function createNavalEffects(scene,seaMaterial,model,balance){
  const r=balance.render,objects=[],resources=[],dummy=new THREE.Object3D(),color=new THREE.Color();

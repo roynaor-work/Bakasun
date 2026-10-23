@@ -54,7 +54,7 @@ test('G6c lead uses the actual flight time and manual assistance decreases by di
 });
 test('G6e a quick release locks and fires at the visible reticle',()=>{const m=make();m.beginAim();const aim={...m.aim};m.update(.02,{fireRelease:true});assert.equal(m.fired,1);assert.equal(m.ball.targetX,aim.x);assert.equal(m.ball.targetZ,aim.z);});
 test('G6c overlapping cannon fire preserves the older torpedo weapon',()=>{
- const m=make();m.update(.02,{ammoIndex:2,targetX:300,targetZ:0,firing:true});m.update(.02,{});m.update(.02,{ammoIndex:0,targetX:65,targetZ:180,firing:true});assert.equal(m.extraShots[0].ammo,2);assert.equal(m.ball.ammo,0);advance(m,2);assert.ok(m.snapshot().hits>0);
+ const m=make();m.update(.02,{ammoIndex:2,targetX:b.enemyX,targetZ:0,firing:true});m.update(.02,{});m.update(.02,{ammoIndex:0,targetX:65,targetZ:180,firing:true});assert.equal(m.extraShots[0].ammo,2);assert.equal(m.ball.ammo,0);advance(m,2);assert.ok(m.snapshot().hits>0);
 });
 test('G6c a touching torpedo contacts the hull before its distant aim point',()=>{
  const nearBalance={...b,enemyX:140},m=createNavalModel({config,balance:nearBalance,level:1,seed:0,random:seededRandom(0)});m.playerShip.x=140-b.aim.hullLength/2;const hp=m.enemyShip.hp;m.update(.02,{ammoIndex:2,targetX:420,targetZ:0,firing:true});advance(m,.1);assert.ok(m.enemyShip.hp<hp);assert.ok(m.ball.age<m.ball.duration||m.blast.hit);

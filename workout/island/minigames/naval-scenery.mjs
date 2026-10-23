@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {disposeBoat} from './patrol-boat.mjs?v=naval-art-20261022-2';
+import {disposeBoat} from './patrol-boat.mjs?v=island-art-20261022-3';
 
 /** The approved scene's rocks, palms, soft clouds and moving wake, in the real arena. */
 export function createNavalScenery(scene,model,balance,adapters={}){

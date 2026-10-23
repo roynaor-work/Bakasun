@@ -1,10 +1,10 @@
-import {followFireCamera} from './fire-navigation.mjs?v=naval-art-20261022-2';
-import {createFireLadder} from './fire-ladder.mjs?v=naval-art-20261022-2';
-import {fireCertificate} from '../activity/fire-certificates.mjs?v=naval-art-20261022-2';
-import {runFireSession} from './fire-session.mjs?v=naval-art-20261022-2';
-import {createFireDriver} from './fire-roads.mjs?v=naval-art-20261022-2';
-import {drawFireCity} from './fire-canvas.mjs?v=naval-art-20261022-2';
-import {createFireView} from './fire-view.mjs?v=naval-art-20261022-2';
+import {followFireCamera} from './fire-navigation.mjs?v=island-art-20261022-3';
+import {createFireLadder} from './fire-ladder.mjs?v=island-art-20261022-3';
+import {fireCertificate} from '../activity/fire-certificates.mjs?v=island-art-20261022-3';
+import {runFireSession} from './fire-session.mjs?v=island-art-20261022-3';
+import {createFireDriver} from './fire-roads.mjs?v=island-art-20261022-3';
+import {drawFireCity} from './fire-canvas.mjs?v=island-art-20261022-3';
+import {createFireView} from './fire-view.mjs?v=island-art-20261022-3';
 export function fireHydrantDistance(truck,balance){return Math.min(...(balance.city?.hydrants||[balance.hydrant.position]).map(p=>Math.hypot(truck.x-p[0],truck.z-p[2])));}
 const EMPTY=Object.freeze({});
 export function createFireEntity(site,type,active,heat,index){return {x:site.x,y:site.y,kind:site.kind,type,active,heat,phase:index*1.7,spreadAge:0,warning:0,coolingAge:0,damaged:false,reignitions:0};}

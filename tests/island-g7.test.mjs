@@ -19,21 +19,27 @@ function pressHarness(){
  const stop=installPressFeedback({target,compatibilityClickMs:data.config.ui.compatibilityClickMs,now:()=>time,scheduleFrame:fn=>fn()});
  return {dispatch,button,stop,at:ms=>{time=ms;}};
 }
-for(const release of ['pointerup','pointercancel'])for(const detail of [0,1])test(`G7 one touch cannot activate a newly opened card after ${release}, click detail ${detail}`,()=>{
- const h=pressHarness();let open=false,selected=null,calls=0;const card=h.button('select-building',()=>{calls++;selected='fireStation';}),opener=h.button('toggle-build',()=>{open=true;});
- h.dispatch('pointerdown',opener,{clientX:100,clientY:100});assert.equal(open,true,'panel opens immediately before release');assert.equal(selected,null);
- h.dispatch(release,card);h.at(20);h.dispatch('click',card,{pointerId:99,detail,clientX:100,clientY:100});
- h.at(399);h.dispatch('click',card,{pointerId:undefined,detail});assert.equal(calls,0,'even repeated compatibility clicks cannot reach catalog onclick');assert.equal(selected,null);
- h.at(401);h.dispatch('click',card,{pointerId:101,detail});assert.equal(calls,1,'a later click reaches the new button');h.at(410);h.dispatch('pointerdown',card);assert.equal(calls,2);h.dispatch('pointerup',card);h.dispatch('click',card,{pointerId:102});assert.equal(calls,2);h.stop();
+test('G7 an ordinary tap activates on release once; a compatibility click cannot enter the next screen',()=>{
+ const h=pressHarness();let open=0,entered=0;const opener=h.button('open-games',()=>open++),card=h.button('game-enter',()=>entered++);
+ h.dispatch('pointerdown',opener,{clientX:40,clientY:50});assert.equal(open,0);assert.equal(opener.dataset.pressed,'true');
+ h.dispatch('pointerup',opener,{clientX:40,clientY:50});assert.equal(open,1);assert.equal(opener.dataset.pressed,undefined);
+ h.at(20);h.dispatch('click',card,{pointerId:99,detail:0});assert.equal(entered,0);
+ h.at(30);h.dispatch('pointerdown',card,{pointerId:8,clientX:40,clientY:50});h.dispatch('pointerup',card,{pointerId:8,clientX:40,clientY:50});assert.equal(entered,1);h.stop();
 });
-test('G7 retargeted releases and long holds are guarded while new touches and keyboard remain independent',()=>{
- const h=pressHarness();let count=0,ups=0;const a=h.button('open',()=>count++),b=h.button('new',()=>count++);b.onpointerup=()=>ups++;
- h.dispatch('pointerdown',a);h.dispatch('pointerup',b);assert.equal(ups,0);h.at(30);h.dispatch('pointerdown',b,{pointerId:8});assert.equal(count,2);h.dispatch('pointerup',b,{pointerId:8});
- h.at(40);h.dispatch('keydown',b,{key:'Enter'});h.dispatch('click',b,{detail:0,pointerId:-1});assert.equal(count,3,'a fresh keyboard gesture remains accessible inside the window');h.at(50);h.dispatch('click',b,{detail:0});assert.equal(count,3,'keyboard intent cannot authorize a later touch click');
- h.dispatch('click',{closest:()=>null,onclick:()=>count++},{detail:0});assert.equal(count,3,'a non-button click is not mistaken for keyboard intent');
- h.at(431);h.dispatch('click',b,{detail:0,pointerId:-1});assert.equal(count,4);
- h.at(500);h.dispatch('pointerdown',a);assert.equal(count,5);h.at(1001);h.dispatch('pointerup',b);h.dispatch('click',b,{pointerId:99});assert.equal(count,5,'holding beyond 400ms cannot leak the release click');
- h.at(1402);h.dispatch('click',b);assert.equal(count,6);h.stop();h.dispatch('click',b);assert.equal(count,7,'cleanup removes the guard');
+for(const end of ['pointerup','pointercancel'])test('G7 scrolling from a button never opens a game: '+end,()=>{
+ const h=pressHarness();let count=0;const node=h.button('game-enter',()=>count++);
+ const down=h.dispatch('pointerdown',node,{clientX:80,clientY:100});assert.equal(down.defaultPrevented,undefined,'browser scrolling must remain available');
+ h.dispatch('pointermove',node,{clientX:81,clientY:150});h.dispatch(end,node,{clientX:81,clientY:150});h.at(20);h.dispatch('click',node,{detail:0});assert.equal(count,0);assert.equal(node.dataset.pressed,undefined);h.stop();
+});
+test('G7 scrolling a container and retargeted releases both cancel activation',()=>{
+ const h=pressHarness();let count=0;const a=h.button('game-enter',()=>count++),b=h.button('other',()=>count++),scroller={scrollHeight:1000,clientHeight:300,scrollTop:0,scrollLeft:0};a.parentElement=scroller;
+ h.dispatch('pointerdown',a);scroller.scrollTop=30;h.dispatch('pointerup',a);h.dispatch('click',a);assert.equal(count,0);
+ h.at(500);h.dispatch('pointerdown',a);h.dispatch('pointerup',b);h.dispatch('click',b);assert.equal(count,0);h.stop();
+});
+test('G7 keyboard and trusted fullscreen entry remain available after a cancelled drag',()=>{
+ const h=pressHarness();let count=0;const normal=h.button('game-enter',()=>count++),native=h.button('stage-play',()=>count++);
+ h.dispatch('pointerdown',normal);h.dispatch('pointercancel',normal);h.dispatch('keydown',normal,{key:'Enter'});h.dispatch('click',normal,{detail:0});assert.equal(count,1);
+ h.at(30);h.dispatch('pointerdown',native);h.dispatch('pointerup',native);assert.equal(count,1,'fullscreen entry waits for the browser trusted click');h.dispatch('click',native);assert.equal(count,2);h.dispatch('click',normal);assert.equal(count,2);h.stop();h.dispatch('click',normal);assert.equal(count,3);
 });
 test('G7 each of the five playable games declares landscape in the shared shell config',()=>{for(const id of ['soccer','tennis','navalDuel','fireRescue','alienDefense'])assert.equal(gamePresentation(data.config,id).orientation,'landscape');});
 test('G7 action drag is independent of movement and short taps use automatic intent',()=>{

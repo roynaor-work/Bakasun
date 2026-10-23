@@ -1,6 +1,6 @@
-import {initialAlienUpgrades,validAlienUpgrades} from './alien-upgrades.mjs?v=naval-art-20261022-2';
-import {initialEquipment,validEquipment} from './equipment.mjs?v=naval-art-20261022-2';
-import {initialProgress,validProgress,applyStarEquipment} from './progress.mjs?v=naval-art-20261022-2';
+import {initialAlienUpgrades,validAlienUpgrades} from './alien-upgrades.mjs?v=island-art-20261022-3';
+import {initialEquipment,validEquipment} from './equipment.mjs?v=island-art-20261022-3';
+import {initialProgress,validProgress,applyStarEquipment} from './progress.mjs?v=island-art-20261022-3';
 const object = value => value && typeof value==='object' && !Array.isArray(value);
 const count = value => Number.isSafeInteger(value) && value>=0;
 const time = value => Number.isFinite(value) && value>=0;

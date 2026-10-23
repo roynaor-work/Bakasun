@@ -1,4 +1,4 @@
-import {pointLabels} from './tennis.mjs?v=naval-art-20261022-2';
+import {pointLabels} from './tennis.mjs?v=island-art-20261022-3';
 // Broadcast-style point cells: 40/40 at deuce, AD beside the leader only.
 export function tennisScoreCells(score,rules){return pointLabels(score,rules).map(v=>v==='deuce'?'40':v==='advantage'?'AD':String(v));}
 export function tennisIcon(kind){

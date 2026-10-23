@@ -1,11 +1,11 @@
-import {moveAlienPlayer} from './g2m-motion.mjs?v=naval-art-20261022-2';
-import {drawAlienEffects,drawAlienBolts,drawAlienShots} from './g2m-effects.mjs?v=naval-art-20261022-2';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=naval-art-20261022-2';
-import {createAlienView} from './alien-view.mjs?v=naval-art-20261022-2';
+import {moveAlienPlayer} from './g2m-motion.mjs?v=island-art-20261022-3';
+import {drawAlienEffects,drawAlienBolts,drawAlienShots} from './g2m-effects.mjs?v=island-art-20261022-3';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-art-20261022-3';
+import {createAlienView} from './alien-view.mjs?v=island-art-20261022-3';
 import {runAlienSession} from './alien-session.mjs';
 import './alien-ui.mjs';
-import {createPool,releaseAt} from './pool.mjs?v=naval-art-20261022-2';
-import {oval,drawHealthBar} from './art.mjs?v=naval-art-20261022-2';
+import {createPool,releaseAt} from './pool.mjs?v=island-art-20261022-3';
+import {oval,drawHealthBar} from './art.mjs?v=island-art-20261022-3';
 export function alienStack(campaign,id,rank){return (campaign.stackCurve[id]||[]).slice(0,rank).reduce((n,v)=>n+v,0);}
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 

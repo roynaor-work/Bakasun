@@ -9,7 +9,7 @@ const celebrateGoal = (cv, opts) => { try { return celebrate3d(cv, opts); } catc
 import { player as drawPlayer, crowd as drawCrowd, crowdGen } from './sprites.js?v=20261010-camera-1';
 export const W = 360, H = 560;
 
-const PAL = { bg: '#1B1740', ink: '#F5F2FF', muted: '#9C96C4', accent: '#8B72FF', ok: '#22C55E', hot: '#FF7A3D', pink: '#FF4D8D', sky: '#38BDF8', gold: '#FFB84D', red: '#EF4444', teal: '#1FB6C9', lime: '#A3E635' };
+const PAL = { bg: '#12364B', ink: '#FFF2D5', muted: '#A5C9C6', accent: '#FF9C73', ok: '#22C55E', hot: '#FF7A3D', pink: '#FF4D8D', sky: '#38BDF8', gold: '#FFB84D', red: '#EF4444', teal: '#1FB6C9', lime: '#A3E635' };
 const rnd = (a = 1, b) => b == null ? Math.random() * a : a + Math.random() * (b - a);
 const rint = (a, b) => Math.floor(rnd(a, b + 1));
 const pick = arr => arr[Math.floor(Math.random() * arr.length)];
@@ -82,6 +82,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
   let musicEl = null, musicName = null, musicFade = 0; const defaultMusic = def.music || pickMusic(); /* טראק שונה בכל משחק */
   function setMusic(name, vol = .28) { if (!music || !sound || !OGG_OK) return; if (name === musicName) return; const old = musicEl; if (old) { clearInterval(musicFade); let v = old.volume; musicFade = setInterval(() => { v -= .04; if (v <= 0) { old.pause(); clearInterval(musicFade); } else old.volume = v; }, 40); } musicEl = null; musicName = name; if (!name) return; try { const a = new Audio(MUSIC_URL(name)); a.loop = true; a.volume = vol; a.play().catch(() => {}); musicEl = a; } catch { musicEl = null; } }
   function stopMusic() { if (musicEl) { try { musicEl.pause(); } catch { /* */ } } musicEl = null; musicName = null; clearInterval(musicFade); }
+  const backdrop=ctx.createLinearGradient(0,0,W,H);backdrop.addColorStop(0,'#1f586a');backdrop.addColorStop(.5,PAL.bg);backdrop.addColorStop(1,'#0b263d');
   const r = {
     W, H, ctx, cv, C: PAL, rnd, rint, pick, shuffle, clamp, /* cv: קנבס המשחק (לשכבת תלת-ממד מאחוריו, layer3d.js) */
     img(key, x, y, w, h, o = {}) { let im = getImg(key); if (!im || !im.complete || !im.naturalWidth) return false; if (o.tint) { im = tinted(key, o.tint) || im; } const iw = im.naturalWidth || im.width, ih = im.naturalHeight || im.height; if (h == null) h = w * ih / iw; if (w == null) w = h * iw / ih; const ax = o.ax ?? .5, ay = o.ay ?? .5; ctx.save(); ctx.translate(x, y); if (o.rot) ctx.rotate(o.rot); if (o.flip) ctx.scale(-1, 1); if (o.sx || o.sy) ctx.scale(o.sx ?? 1, o.sy ?? 1); if (o.alpha != null) ctx.globalAlpha = o.alpha; ctx.drawImage(im, -w * ax, -h * ay, w, h); ctx.restore(); return true; },
@@ -110,7 +111,7 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
     // שלב הושלם: הודעה קצרה וממשיכים עם אותו משחק (הרמה נשמרת). במשחק עם זמן שנגמר: סיום
     win(msg = 'כל הכבוד!', bonus = 0) { if (!running) return; running = false; SFX.win(); r.burst(W / 2, H / 2, PAL.gold, 30, 320); if (bonus) r.addScore(bonus); flash(msg, unlimited || timeLeft > 6 ? 'ממשיכים!' : ''); if (unlimited || timeLeft > 6) { pauseUntil = performance.now() + 900; resumeOnPause = true; } else setTimeout(() => end(true), 900); saveProgress(); },
     // ציור
-    clear(color = PAL.bg) { ctx.fillStyle = color; ctx.fillRect(0, 0, W, H); },
+    clear(color = PAL.bg) { ctx.fillStyle = color===PAL.bg?backdrop:color; ctx.fillRect(0, 0, W, H); },
     rect(x, y, w, h, color, rad = 0) { ctx.fillStyle = color; if (rad) { ctx.beginPath(); ctx.roundRect(x, y, w, h, rad); ctx.fill(); } else ctx.fillRect(x, y, w, h); },
     circle(x, y, rad, color) { ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI * 2); ctx.fill(); },
     line(x1, y1, x2, y2, color, w = 2) { ctx.strokeStyle = color; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); },
