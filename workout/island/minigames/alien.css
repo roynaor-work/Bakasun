@@ -1,35 +1,71 @@
+/* Alien-owned cockpit and preflight surfaces. Other game palettes stay local. */
 .game-screen[data-game=alienDefense] .game-status{display:none!important}
-.game-screen[data-game=alienDefense] .game-header .game-pause{width:52px;min-width:52px;height:52px;min-height:52px;border-radius:50%;padding:13px;background:#132f49bb;color:#dcfff8;border:1px solid #8bd9d899}
+.game-screen[data-game=alienDefense] .game-header .game-pause{width:48px;min-width:48px;height:48px;min-height:48px;border-radius:12px;padding:13px;background:#091422bd;color:#d8edf7;border:1px solid #9ec3df59;box-shadow:inset 0 1px #d8edff18,0 5px 20px #0004;backdrop-filter:blur(6px)}
+.game-screen[data-game=alienDefense] .game-header .game-pause::before{display:none}
 .game-screen[data-game=alienDefense] .game-header svg{width:100%;height:100%}
-.game-screen[data-game=alienDefense] .alien-controls.alien-controls #shoot,.game-screen[data-game=alienDefense] .alien-controls.alien-controls #pass{width:72px;height:72px;min-height:72px;padding:17px;bottom:max(112px,15vh,env(safe-area-inset-bottom));border:2px solid #a2f4e2;box-shadow:0 3px 20px #0007;background-color:#16354ed9;color:#d9fff4}
-.game-screen[data-game=alienDefense] .alien-controls.alien-controls #shoot{right:18px;background:#217f82df}
-.game-screen[data-game=alienDefense] .alien-controls.alien-controls #pass{right:102px;background-image:conic-gradient(#8ef2de var(--charge,100%),#16384e 0);box-shadow:inset 0 0 0 7px #16354e}
-.game-screen[data-game=alienDefense] .alien-controls button svg{width:100%;height:100%;filter:drop-shadow(0 2px 2px #0009)}
-.game-screen[data-game=alienDefense] .alien-ammo{position:absolute;right:6px;bottom:3px;min-width:18px;color:#eafff9;font:700 13px sans-serif;background:#0a243c;border-radius:50%}
-.game-screen[data-game=alienDefense] .alien-controls button:disabled{opacity:.65}
+.game-screen[data-game=alienDefense] .alien-controls button svg{width:100%;height:100%;filter:drop-shadow(0 1px 3px #0008)}
 .game-screen[data-game=alienDefense] .alien-controls .soccer-stick-zone{top:20%;bottom:0;width:40%}
 .game-screen[data-game=alienDefense] .alien-controls.left-handed .soccer-stick-zone{left:auto;right:0}
-.game-screen[data-game=alienDefense] .alien-controls.left-handed #shoot{right:auto;left:18px}
-.game-screen[data-game=alienDefense] .alien-controls.left-handed #pass{right:auto;left:102px}
 .game-screen[data-game=alienDefense] .alien-controls .soccer-joystick[hidden]{display:none}
-.game-screen[data-game=alienDefense] .alien-controls .soccer-joystick{width:96px;height:96px;background:#87dbe61a;border:2px solid #b6fff166;box-shadow:0 0 0 9px #102b4544}
-.game-screen[data-game=alienDefense] .alien-controls .soccer-knob{background:#a5f0e299;box-shadow:0 0 16px #8ee7ed44}
-.alien-hand{display:flex;gap:12px;align-items:center;justify-content:center;padding:12px;border:1px solid #9ac6cd;border-radius:12px;margin-top:12px}
-.alien-hand svg{width:25px;height:25px}.alien-hand button{min-width:48px;min-height:48px;padding:9px;display:flex;align-items:center;justify-content:center}.alien-hand button[aria-checked=false]{transform:scaleX(-1)}
-[data-hangar=true] .hangar-actions button,[data-hangar=true] .hangar-choices button,[data-hangar=true] [data-action=hangar-play]{min-width:64px;min-height:56px;display:inline-flex;align-items:center;justify-content:center}
-[data-hangar=true] button[data-alien-icon] svg{width:30px;height:30px}
+.game-screen[data-game=alienDefense] .game-pause-sheet{background:#03091185;backdrop-filter:blur(8px)}
+.game-screen[data-game=alienDefense] .game-pause-card{background:linear-gradient(135deg,#15283eeb,#091422f7);border:1px solid #94bed343;border-radius:16px;color:#e6f2fb;box-shadow:0 20px 80px #0008}
+.game-screen[data-game=alienDefense] .game-pause-actions button{border-radius:10px;background:#14283b;border:1px solid #80a9c448;color:#d5e7f6}
+.game-screen[data-game=alienDefense] .game-pause-actions [data-action=game-resume]{background:#c8dce8;color:#102236;border-color:#e9f7ff}
+.game-screen[data-game=alienDefense] .soccer-rotate{background:radial-gradient(ellipse at 50% 40%,#193550,#070f1d 75%);color:#dceaf7;font-size:23px;font-weight:500;gap:28px}
+.game-screen[data-game=alienDefense] .soccer-rotate svg{width:110px;height:110px;color:#9bc8df;filter:drop-shadow(0 0 20px #67afd42b)}
+.game-screen[data-game=alienDefense] .soccer-rotate h3{font-size:25px;font-weight:500;margin:0;letter-spacing:-.4px}
+.game-screen[data-game=alienDefense] .soccer-rotate p{font-size:14px;font-weight:400;line-height:1.7;color:#91abc1;max-width:260px;margin:-16px 0 0}
+.game-screen[data-game=alienDefense] .soccer-rotate [data-action=game-rotate-pause]{display:flex;gap:10px;align-items:center;justify-content:center;min-height:48px;min-width:152px;padding:10px 16px;border-radius:10px;border:1px solid #7296b64d;background:#14263b;color:#d4e5f3;font-size:13px;font-weight:500;box-shadow:inset 0 1px #ffffff0d;margin-top:8px}
+.game-screen[data-game=alienDefense] .soccer-rotate [data-action=game-rotate-pause] svg{width:19px;height:19px;animation:none;filter:none}
+.modal[data-alien-presentation=true]{background:radial-gradient(ellipse at 90% 0,#22415c5c,transparent 60%),linear-gradient(145deg,#111f32,#080f1d);border:1px solid #90b3d23b;border-radius:18px;color:#e0ecf7;box-shadow:0 28px 100px #0009;scrollbar-color:#456980 #0d1b2b}
+.modal[data-alien-presentation=true] h2{font-weight:600;letter-spacing:-.3px;color:#edf4fb}
+.modal[data-alien-presentation=true]>.modal-subtitle,.modal[data-alien-presentation=true]>p{color:#92abc1}
+.modal[data-alien-presentation=true] button{border-radius:10px;background:#14263a;border:1px solid #7597b64a;color:#deebf5;box-shadow:inset 0 1px #ffffff08}
+.modal[data-alien-presentation=true] button:focus-visible{outline:2px solid #bbdeef;outline-offset:3px}
+.modal[data-alien-presentation=true] button:disabled{opacity:.4}
+.modal[data-alien-presentation=true] .stage-map button{border-radius:10px;background:linear-gradient(145deg,#1b3046,#102236);border:1px solid #6f95b34d;color:#dcecf8;box-shadow:inset 0 1px #ffffff08}
+.modal[data-alien-presentation=true] .stage-feature{color:#8ba7be}
+.alien-hand{display:flex;gap:10px;align-items:center;justify-content:center;padding:8px 10px;border:1px solid #7396af30;background:#07121d66;border-radius:10px;margin-top:12px;color:#94afc5;font-size:12px}
+.alien-hand svg{width:22px;height:22px}.alien-hand button{min-width:44px;min-height:44px;padding:10px;display:flex;align-items:center;justify-content:center}.alien-hand button[aria-checked=false]{transform:scaleX(-1)}
+.modal[data-hangar=true][data-alien-presentation=true]{width:min(940px,calc(100vw - 32px));padding:24px;display:grid;grid-template-columns:minmax(240px,1fr) minmax(280px,1.45fr);gap:12px 24px;align-items:center;overflow:hidden}
+.modal[data-hangar=true][data-alien-presentation=true]>h2{grid-column:1;grid-row:1;font-size:26px;margin:0;padding:0}
+.modal[data-hangar=true][data-alien-presentation=true]>.modal-subtitle{grid-column:1;grid-row:2;font-size:12px;margin:0}
+.modal[data-hangar=true][data-alien-presentation=true]>.hangar-preview{grid-column:2;grid-row:1/8;width:100%;height:380px;max-height:none;margin:0;border-radius:12px;border:1px solid #7fa3c02e;background:#050b15}
+.modal[data-hangar=true][data-alien-presentation=true]>.modal-close{position:absolute;top:34px;left:34px;right:auto;float:none;min-width:44px;width:44px;height:44px;min-height:44px;margin:0;background:#091726a8;backdrop-filter:blur(6px)}
+.modal[data-hangar=true][data-alien-presentation=true]>.sound-toggle{position:absolute;top:34px;left:84px;right:auto;width:44px;min-width:44px;height:44px;min-height:44px;padding:7px;margin:0;background:#091726a8;z-index:3;backdrop-filter:blur(6px)}
+.modal[data-hangar=true]>.sound-toggle span{display:none}
+.modal[data-hangar=true]>.sound-toggle svg{width:22px;height:22px}
+.modal[data-hangar=true][data-alien-presentation=true]>[data-alien-stats]{grid-column:1;grid-row:3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:4px 0;padding:13px 0;border-block:1px solid #7698b32e;text-align:center}
+[data-alien-stats]>span{display:flex;flex-direction:column;gap:6px;padding:0 4px}
+[data-alien-stats]>span+span{border-inline-start:1px solid #7698b326}
+[data-alien-stats] small{font-size:10px;line-height:1.2;color:#8fa9bd}
+[data-alien-stats] bdi{font-size:23px;font-weight:600;line-height:1;color:#e8f4fc;font-variant-numeric:tabular-nums}
+.modal[data-hangar=true]>.hangar-actions{grid-column:1;grid-row:4;display:flex;gap:8px;justify-content:stretch}
+.modal[data-hangar=true]>.hangar-choices{grid-column:1;grid-row:5;display:flex;gap:8px;justify-content:stretch}
+.modal[data-hangar=true]>.hangar-choices[hidden]{display:none}
+.modal[data-hangar=true] .hangar-actions button,.modal[data-hangar=true] .hangar-choices button{flex:1;min-width:0;min-height:58px;padding:8px 5px;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;font-size:12px;font-weight:500}
+.modal[data-hangar=true] button[data-alien-icon] svg{width:23px;height:23px;flex:none;color:#a0c8e1}
+.modal[data-hangar=true]>.alien-hand{grid-column:1;grid-row:6;margin:0;padding:0 8px}
+.modal[data-hangar=true][data-alien-presentation=true]>[data-action=hangar-play]{grid-column:1;grid-row:7;margin:0;min-height:54px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#bed9e8,#8eb4ca);border:1px solid #e0eff8;color:#10263a;font-size:15px;box-shadow:inset 0 1px #fff6,0 4px 20px #74b1d31a}
+.modal[data-hangar=true][data-alien-presentation=true]>[data-action=hangar-play] svg{width:18px;color:inherit}
 @media(min-width:640px) and (max-height:600px){
- [data-hangar=true].modal{display:grid;grid-template-columns:minmax(220px,1.4fr) minmax(150px,1fr);gap:6px 12px;padding:16px;align-items:center}
- [data-hangar=true]>h2{grid-column:1/-1;grid-row:1;margin:0 0 0 120px;min-height:34px}
- [data-hangar=true]>.modal-subtitle{grid-column:1/-1;grid-row:2;margin:0}
- [data-hangar=true]>.sound-toggle{position:absolute;top:16px;left:76px;right:auto;width:48px;height:48px;padding:10px;margin:0}
- [data-hangar=true]>.sound-toggle span{display:none}
- [data-hangar=true]>.modal-close{position:absolute;top:16px;left:16px;right:auto;margin:0}
- [data-hangar=true]>.hangar-preview{grid-column:2;grid-row:3/6;justify-self:center;width:140px!important;height:140px!important;margin:0}
- [data-hangar=true]>p:not(.modal-subtitle){grid-column:1;grid-row:3;margin:0}
- [data-hangar=true]>.hangar-actions{grid-column:1;grid-row:4;display:flex;gap:8px;justify-content:center}
- [data-hangar=true]>.hangar-choices{grid-column:1;grid-row:5;display:flex;gap:8px;justify-content:center}
- [data-hangar=true]>.hangar-choices[hidden]{display:none}
- [data-hangar=true]>.alien-hand{grid-column:1;grid-row:6;margin:0;padding:4px;gap:8px}
- [data-hangar=true]>[data-action=hangar-play]{grid-column:2;grid-row:6;margin:0}
+ .modal[data-hangar=true][data-alien-presentation=true]{width:calc(100vw - 24px);max-height:calc(100dvh - 16px);padding:14px;gap:6px 18px;grid-template-columns:minmax(250px,1fr) minmax(280px,1.35fr)}
+ .modal[data-hangar=true][data-alien-presentation=true]>h2{font-size:23px}
+ .modal[data-hangar=true][data-alien-presentation=true]>.hangar-preview{height:calc(100dvh - 52px)}
+ .modal[data-hangar=true][data-alien-presentation=true]>[data-alien-stats]{margin:0;padding:8px 0}
+ [data-alien-stats]>span{gap:4px}[data-alien-stats] bdi{font-size:20px}
+ .modal[data-hangar=true] .hangar-actions button,.modal[data-hangar=true] .hangar-choices button{min-height:44px;flex-direction:row;gap:7px;padding:6px 8px;font-size:11px}
+ .modal[data-hangar=true] button[data-alien-icon] svg{width:20px;height:20px}
+ .modal[data-hangar=true][data-alien-presentation=true]>[data-action=hangar-play]{min-height:44px}
+ .modal[data-hangar=true][data-alien-presentation=true]>.modal-close{top:22px;left:22px}
+ .modal[data-hangar=true][data-alien-presentation=true]>.sound-toggle{top:22px;left:72px}
+}
+@media(max-width:639px){
+ .modal[data-hangar=true][data-alien-presentation=true]{width:calc(100vw - 24px);padding:16px;grid-template-columns:1fr;gap:12px;overflow:auto}
+ .modal[data-hangar=true][data-alien-presentation=true]>h2{grid-column:1;grid-row:1;font-size:23px;margin-inline-end:54px}
+ .modal[data-hangar=true][data-alien-presentation=true]>.modal-subtitle{grid-column:1;grid-row:2}
+ .modal[data-hangar=true][data-alien-presentation=true]>.hangar-preview{grid-column:1;grid-row:3;height:220px;max-height:28dvh}
+ .modal[data-hangar=true][data-alien-presentation=true]>[data-alien-stats]{grid-row:4}
+ .modal[data-hangar=true]>.hangar-actions{grid-row:5}.modal[data-hangar=true]>.hangar-choices{grid-row:6}.modal[data-hangar=true]>.alien-hand{grid-row:7}.modal[data-hangar=true][data-alien-presentation=true]>[data-action=hangar-play]{grid-row:8}
+ .modal[data-hangar=true][data-alien-presentation=true]>.modal-close{top:12px;left:12px}.modal[data-hangar=true][data-alien-presentation=true]>.sound-toggle{top:98px;left:24px}
 }

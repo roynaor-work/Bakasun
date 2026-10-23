@@ -85,7 +85,8 @@ class Water extends Mesh {
 					'sunColor': { value: new Color( 0x7F7F7F ) },
 					'sunDirection': { value: new Vector3( 0.70707, 0.70707, 0 ) },
 					'eye': { value: new Vector3() },
-					'waterColor': { value: new Color( 0x555555 ) }
+					'waterColor': { value: new Color( 0x555555 ) },
+					'shores': { value: [new Vector4(10000,10000,1,1),new Vector4(10000,10000,1,1),new Vector4(10000,10000,1,1)] }
 				}
 			] ),
 
@@ -126,6 +127,7 @@ class Water extends Mesh {
 				uniform vec3 sunDirection;
 				uniform vec3 eye;
 				uniform vec3 waterColor;
+				uniform vec4 shores[3];
 
 				varying vec4 mirrorCoord;
 				varying vec4 worldPosition;
@@ -162,14 +164,16 @@ class Water extends Mesh {
 
 					#include <logdepthbuf_fragment>
 					vec4 noise = getNoise( worldPosition.xz * size );
-					vec3 surfaceNormal = normalize( noise.xzy * vec3( 1.5, 1.0, 1.5 ) );
+					vec3 surfaceNormal = normalize( noise.xzy * vec3( 1.48, 1.0, 1.48 ) );
+					vec2 swellSlope=vec2(cos(worldPosition.x*.19+worldPosition.z*.12-time*.62),sin(worldPosition.z*.23-worldPosition.x*.08+time*.48))*.038;
+					surfaceNormal=normalize(surfaceNormal+vec3(swellSlope.x,0.,swellSlope.y));
 
 					vec3 diffuseLight = vec3(0.0);
 					vec3 specularLight = vec3(0.0);
 
 					vec3 worldToEye = eye-worldPosition.xyz;
 					vec3 eyeDirection = normalize( worldToEye );
-					sunLight( surfaceNormal, eyeDirection, 100.0, 2.0, 0.5, diffuseLight, specularLight );
+					sunLight( surfaceNormal, eyeDirection, 145.0, 1.7, 0.5, diffuseLight, specularLight );
 
 					float distance = length(worldToEye);
 
@@ -177,10 +181,20 @@ class Water extends Mesh {
 					vec3 reflectionSample = vec3( texture2D( mirrorSampler, mirrorCoord.xy / mirrorCoord.w + distortion ) );
 
 					float theta = max( dot( eyeDirection, surfaceNormal ), 0.0 );
-					float rf0 = 0.3;
+					float rf0 = 0.065;
 					float reflectance = rf0 + ( 1.0 - rf0 ) * pow( ( 1.0 - theta ), 5.0 );
-					vec3 scatter = max( 0.0, dot( surfaceNormal, eyeDirection ) ) * waterColor;
-					vec3 albedo = mix( ( sunColor * diffuseLight * 0.3 + scatter ) * getShadowMask(), ( vec3( 0.1 ) + reflectionSample * 0.9 + reflectionSample * specularLight ), reflectance);
+					float shoal=0.;
+					for(int i=0;i<3;i++){
+						float bank=length((worldPosition.xz-shores[i].xy)/shores[i].zw);
+						shoal=max(shoal,exp(-max(0.,bank-.82)*3.2));
+					}
+					float depthColor=.5+.5*sin(worldPosition.x*.027+sin(worldPosition.z*.041)*1.7);
+					vec3 deep=mix(vec3(.006,.135,.205),vec3(.012,.24,.29),depthColor*.56);
+					vec3 lagoon=mix(deep,vec3(.035,.36,.33),shoal*.77);
+					float facing=max(0.,dot(surfaceNormal,eyeDirection));
+					vec3 scatter=lagoon*(.16+facing*1.65)+sunColor*diffuseLight*.018;
+					float glitter=pow(max(0.,dot(normalize(reflect(-sunDirection,surfaceNormal)),eyeDirection)),48.);
+					vec3 albedo=mix(scatter*getShadowMask(),reflectionSample,reflectance*.36)+specularLight*.32+sunColor*glitter*.075;
 					vec3 outgoingLight = albedo;
 					gl_FragColor = vec4( outgoingLight, alpha );
 

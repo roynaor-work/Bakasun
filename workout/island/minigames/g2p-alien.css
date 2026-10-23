@@ -1,14 +1,19 @@
+/* Touch targets keep the existing safe firing lane; restrained cockpit metal
+ * and independent charge ring replace opaque toy-like controls. */
 .game-screen[data-game=alienDefense] .alien-controls.alien-controls #shoot,
-.game-screen[data-game=alienDefense] .alien-controls.alien-controls #pass{bottom:max(112px,15vh,env(safe-area-inset-bottom));border-radius:50%;color:#fff;opacity:1;box-shadow:0 5px 0 #071426,0 7px 22px #0008}
-.game-screen[data-game=alienDefense] .alien-controls.alien-controls #shoot{width:88px;height:88px;min-height:88px;right:22px;padding:22px;background:#cf3446;border:3px solid #ff9c9f}
-.game-screen[data-game=alienDefense] .alien-controls.alien-controls #pass{width:76px;height:76px;min-height:76px;right:126px;padding:15px;background:#dd7528;border:3px solid #ffc681}
-.game-screen[data-game=alienDefense] .alien-controls #shoot svg path{fill:#fff4be;stroke:#fff4be}
-.game-screen[data-game=alienDefense] .alien-controls #pass svg{stroke-width:2;overflow:visible}
-.game-screen[data-game=alienDefense] .alien-ammo{right:-5px;bottom:-4px;width:28px;height:28px;display:grid;place-items:center;border:2px solid #ffd29b;font:800 17px sans-serif;background:#32223c;color:#fff}
-.game-screen[data-game=alienDefense] .alien-controls button:disabled{filter:saturate(.5);opacity:.65}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls #pass{bottom:max(112px,15vh,env(safe-area-inset-bottom));border-radius:50%;color:#e8f4fc;opacity:1;border:1px solid #a5c7dd88;box-shadow:inset 0 1px #ffffff24,inset 0 0 0 5px #0b15284d,0 5px 24px #0006;backdrop-filter:blur(4px);transition:filter .15s,box-shadow .15s}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls #shoot{width:88px;height:88px;min-height:88px;right:22px;padding:24px;background:radial-gradient(circle at 40% 20%,#30536bea,#112437ed 72%);border-color:#acd9ec99}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls #pass{width:76px;height:76px;min-height:76px;right:126px;padding:21px;background:radial-gradient(circle,#182738f2 60%,transparent 63%),conic-gradient(#dfbb84 var(--charge,100%),#263544 0);border:1px solid #d4b58980;box-shadow:inset 0 0 0 4px #0a15277d,0 5px 24px #0006;color:#efd5ae}
+.game-screen[data-game=alienDefense] .alien-controls #shoot svg path{fill:#cae7f3;stroke:#cae7f3;stroke-width:1.2}
+.game-screen[data-game=alienDefense] .alien-controls #pass svg{overflow:visible}
+.game-screen[data-game=alienDefense] .alien-controls .held{filter:brightness(1.4);box-shadow:inset 0 0 22px #acd9ec38,0 0 25px #75c6ea33!important}
+.game-screen[data-game=alienDefense] .alien-ammo{position:absolute;right:-1px;bottom:-3px;width:24px;height:24px;display:grid;place-items:center;border:1px solid #d2ba9473;border-radius:7px;font:600 13px sans-serif;background:#102032;color:#f7e1bc;font-variant-numeric:tabular-nums;box-shadow:0 2px 6px #0008}
+.game-screen[data-game=alienDefense] .alien-controls button:disabled{filter:saturate(.45);opacity:.54}
 .game-screen[data-game=alienDefense] .alien-controls .action-direction{display:none}
-.game-screen[data-game=alienDefense] .alien-controls .soccer-joystick{left:78px;top:auto;bottom:24px;transform:none;width:100px;height:100px;background:#17364cdd;border:3px solid #a5e9ed;box-shadow:inset 0 0 0 9px #87dbe620,0 4px 20px #0008}
-.game-screen[data-game=alienDefense] .alien-controls .soccer-knob{background:#c9f5f6;border:3px solid #5eacbd;box-shadow:0 3px 10px #0008}
+.game-screen[data-game=alienDefense] .alien-controls .soccer-joystick{left:78px;top:auto;bottom:24px;transform:none;width:100px;height:100px;background:radial-gradient(circle,#17314929 45%,#718eaa26 46%,transparent 48%);border:1px solid #b7d3e344;box-shadow:inset 0 0 0 7px #0411213d,0 4px 20px #0004}
+.game-screen[data-game=alienDefense] .alien-controls .soccer-joystick:before,.game-screen[data-game=alienDefense] .alien-controls .soccer-joystick:after{content:'';position:absolute;background:#b9d7e43b;pointer-events:none}
+.game-screen[data-game=alienDefense] .alien-controls .soccer-joystick:before{width:1px;height:76px;top:11px;left:49px}.game-screen[data-game=alienDefense] .alien-controls .soccer-joystick:after{height:1px;width:76px;left:11px;top:49px}
+.game-screen[data-game=alienDefense] .alien-controls .soccer-knob{background:radial-gradient(circle at 40% 25%,#9bbbcbd1,#49677bcc);border:1px solid #d3e6ed80;box-shadow:inset 0 1px #ffffff4d,0 3px 12px #0007;z-index:1}
 .game-screen[data-game=alienDefense] .alien-controls.left-handed .soccer-joystick{left:auto;right:78px}
 .game-screen[data-game=alienDefense] .alien-controls.alien-controls.left-handed #shoot{left:22px;right:auto}
 .game-screen[data-game=alienDefense] .alien-controls.alien-controls.left-handed #pass{left:126px;right:auto}

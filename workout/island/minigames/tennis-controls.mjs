@@ -1,4 +1,4 @@
-import {createControls,createActionGesture} from './controls.mjs?v=island-art-20261022-3';
+import {createControls,createActionGesture} from './controls.mjs?v=island-ultra-20261023-1';
 /** G7 lifecycle and movement, with an independent lob drag. */
 export function createTennisControls({root,config,onCancel=()=>{}}){
  const abort=new AbortController(),options={signal:abort.signal},lob=root.querySelector('#sprint'),drop=root.querySelector('#drop'),gesture=createActionGesture(config);let pointer=null,dropPointer=null,dropPulse=false,enabled=false,dropKey=false,releaseAim=null;

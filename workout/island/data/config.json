@@ -4147,10 +4147,10 @@
     "aimArrowLength": 2,
     "aimArrowWidth": 0.2,
     "camera": {
-     "elevationDegrees": 30,
+     "elevationDegrees": 28,
      "fovDegrees": 42,
-     "nearDistance": 15,
-     "speedZoom": 7,
+     "nearDistance": 19,
+     "speedZoom": 5,
      "fastBallSpeed": 25,
      "leadSeconds": 0.14,
      "maxLead": 2,
@@ -4208,7 +4208,7 @@
     "teamAbbreviationLength": 3,
     "farModelDistance": 6,
     "crowd": {
-     "count": 96,
+      "count": 96,
      "lowDivisor": 3,
      "headRadius": 0.13,
      "bodyWidth": 0.28,
@@ -5313,11 +5313,11 @@
      0
     ],
     "shadowEnabled": [
-     false,
+     true,
      false,
      false
     ],
-    "shadowMapSize": 512,
+    "shadowMapSize": 1024,
     "particles": 72,
     "particleSeconds": 1.8,
     "hudInterval": 0.08,
@@ -5332,13 +5332,13 @@
     ],
     "cameraLandscape": [
      0,
-     15,
-     26
+     12.8,
+     25
     ],
     "cameraTarget": [
      0,
-     0,
-     0
+     0.4,
+     -0.7
     ],
     "characterScale": 1.08,
     "colors": {

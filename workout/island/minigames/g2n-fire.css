@@ -1,13 +1,16 @@
-.game-screen.fire-play #shoot{width:80px;height:80px;background:#087cf0;color:#fff;box-shadow:0 0 0 3px #d8f6ff,0 5px 22px #004d9c80;padding:22px;border-radius:50%}
-.game-screen.fire-play #shoot>svg:not(.fire-ring){width:35px;height:39px;fill:#fff;stroke:#fff;stroke-width:1}
-.game-screen.fire-play #shoot.low-water{animation:g2n-water-pulse 1.25s ease-in-out infinite}
-.game-screen.fire-play #pass{right:114px;bottom:20px;background:#be4d24}
-.game-screen.fire-play #fire-refill{bottom:114px;color:#fff;background:#b53530}
-.game-screen.fire-play #pass.wind{background:#236473}
-.game-screen.fire-play #pass.unstable{outline:3px solid #ffb657}
-.fire-play .fire-ladder-balance{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:#163e50ec;border-radius:30px;padding:9px 13px;color:#bcecff;pointer-events:none}
-.fire-play .fire-balance-track{position:relative;width:76px;height:12px;border-radius:8px;background:linear-gradient(90deg,#e9a053 30%,#80e2b9 30%,#80e2b9 70%,#e9a053 70%)}
-.fire-play .fire-balance-marker{position:absolute;top:-3px;left:50%;width:6px;height:18px;border-radius:3px;background:white;box-shadow:0 1px 3px #102d42}
-@keyframes g2n-water-pulse{50%{box-shadow:0 0 0 6px #a5e8ff90,0 5px 24px #004d9c80;filter:brightness(1.15)}}
-@media(prefers-reduced-motion:reduce){.game-screen.fire-play #shoot.low-water{animation:none;outline:4px solid #a5e8ff}}
+/* Water, pressure and ladder state use restrained instrument lighting. */
+.game-screen.fire-play #shoot>svg:not(.fire-ring){width:29px;height:32px;fill:#b6dce51a;stroke:#e0f0ec;stroke-width:1.55}
+.game-screen.fire-play #shoot.low-water .fire-ring[data-meter=water] circle:not(.fire-ring-track){stroke:#e0ac7b;animation:g2n-water-pulse 1.5s ease-in-out infinite}
+.game-screen.fire-play #pass{color:#dfc6a2}
+.game-screen.fire-play #fire-refill{color:#c3d4df}
+.game-screen.fire-play #pass.wind{color:#b4d5de}
+.game-screen.fire-play #pass.unstable{border-color:#dcaf75;box-shadow:0 0 0 3px #dcaf751c,0 7px 22px #050b1540}
+.game-screen.fire-play[data-fire-action=rescuing] #pass{color:#e3f1de;border-color:#afccab;background:linear-gradient(150deg,#385246ed,#1c3029ed)}
+.fire-play .fire-ladder-balance{position:absolute;z-index:2;left:50%;bottom:max(28px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:11px;padding:11px 14px;border:1px solid #d4e2e42b;border-radius:14px;background:var(--fire-glass);box-shadow:0 5px 20px #050b1538,inset 0 1px #ffffff0b;backdrop-filter:blur(8px);color:#c4d7d9;pointer-events:none}
+.fire-play .fire-ladder-balance>svg{width:20px;height:20px}
+.fire-play .fire-balance-track{position:relative;width:92px;height:6px;border:1px solid #e0ebdf18;border-radius:8px;background:linear-gradient(90deg,#987952 0 30%,#86ad94 30% 70%,#987952 70% 100%);box-shadow:inset 0 1px 3px #06101966}
+.fire-play .fire-balance-track:after{content:'';position:absolute;inset:-4px 30%;border-inline:1px solid #c7e4cd7d;pointer-events:none}
+.fire-play .fire-balance-marker{position:absolute;top:-5px;left:50%;width:4px;height:14px;transform:translateX(-50%);border:1px solid #f5f8ef;border-radius:3px;background:#e9eee4;box-shadow:0 1px 4px #06101999}
+@keyframes g2n-water-pulse{50%{opacity:.48}}
+@media(prefers-reduced-motion:reduce){.game-screen.fire-play #shoot.low-water .fire-ring[data-meter=water] circle:not(.fire-ring-track){animation:none}}
 @media(max-width:500px){.fire-play .fire-ladder-balance{bottom:126px}}

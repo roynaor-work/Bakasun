@@ -1,18 +1,18 @@
-import {installLearning} from '../learning/runtime.mjs?v=island-art-20261022-3';
-import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-art-20261022-3';
-import {recordStageWin} from '../activity/progress.mjs?v=island-art-20261022-3';
-import {gameAvailability} from '../activity/availability.mjs?v=island-art-20261022-3';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-art-20261022-3';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=island-art-20261022-3';
-import {repairHarbors} from './placement-help.mjs?v=island-art-20261022-3';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-art-20261022-3';
-import { createRegistry } from './registry.mjs?v=island-art-20261022-3';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=island-art-20261022-3';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-art-20261022-3';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=island-art-20261022-3';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-art-20261022-3';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-art-20261022-3';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-art-20261022-3';
+import {installLearning} from '../learning/runtime.mjs?v=island-ultra-20261023-1';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-ultra-20261023-1';
+import {recordStageWin} from '../activity/progress.mjs?v=island-ultra-20261023-1';
+import {gameAvailability} from '../activity/availability.mjs?v=island-ultra-20261023-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-ultra-20261023-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=island-ultra-20261023-1';
+import {repairHarbors} from './placement-help.mjs?v=island-ultra-20261023-1';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-ultra-20261023-1';
+import { createRegistry } from './registry.mjs?v=island-ultra-20261023-1';
+import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=island-ultra-20261023-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-ultra-20261023-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=island-ultra-20261023-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-ultra-20261023-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-ultra-20261023-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-ultra-20261023-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 

@@ -1,20 +1,46 @@
-@import url('./soccer-controls.css?v=island-art-20261022-3');
-/* Soccer overrides stay here; the shell owns the only pause glyph. */
-.game-screen[data-game=soccer] .game-header .game-pause { flex-direction:row; }
-.game-screen[data-game=soccer] .game-header .game-pause::before { content:''; font-size:0; width:12px; height:18px; box-sizing:content-box; }
-.game-screen[data-game=soccer][data-paused=true] .game-header .game-pause::before { width:0; height:0; }
-.game-screen[data-game=soccer] .soccer-rotate .shell-icon svg { width:32px; height:32px; animation:none; }
-.game-screen[data-game=soccer] .shell-pause-symbol svg { width:32px; height:32px; aspect-ratio:1; }
-.game-screen[data-game=soccer] .soccer-scoreboard { height:38px; padding:0 9px; gap:9px; border:0; border-radius:3px; background:#102335f2; box-shadow:0 3px 12px #0005; font-variant-numeric:tabular-nums; }
-.game-screen[data-game=soccer] .soccer-kit { display:block; width:18px; height:18px; flex:none; border:0; border-bottom:4px solid; border-radius:0; box-shadow:0 0 0 1px #ffffff55; box-sizing:border-box; }
-.game-screen[data-game=soccer] .soccer-score { display:flex; gap:1px; font-size:26px; font-weight:900; }
-.game-screen[data-game=soccer] .soccer-score bdi { display:block; min-width:26px; text-align:center; padding:1px 3px; background:#edf7ff; color:#102335; }
-.game-screen[data-game=soccer] .soccer-clock { font-size:17px; padding-left:10px; min-width:61px; }
-.game-screen[data-game=soccer] .soccer-controls #shoot { --action-color:#e97516; background:var(--action-color); border-color:#ffd5a8; }
-.game-screen[data-game=soccer] .soccer-controls #pass { --action-color:#1769c7; background:var(--action-color); border-color:#bbddff; }
-.game-screen[data-game=soccer] .soccer-controls #sprint { --action-color:#18824e; background:var(--action-color); border-color:#b2ffd3; }
-.game-screen[data-game=soccer] .soccer-controls #soccer-switch { --action-color:#42546a; background:var(--action-color); border-color:#d3dfef; }
-.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #shoot { --action-color:#bc384e; background:var(--action-color); border-color:#ffbfca; }
-.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #pass { --action-color:#7844ba; background:var(--action-color); border-color:#e1c6ff; }
-.game-screen[data-game=soccer] .soccer-controls button.held { filter:brightness(1.2); box-shadow:0 0 0 4px #fff7,inset 0 2px 9px #0003; }
-.game-screen[data-game=soccer] .soccer-controls[data-mode] button.held { background:var(--action-color)!important; color:#fff!important; }
+@import url('./soccer-controls.css?v=island-ultra-20261023-1');
+/* Soccer broadcast layer; the shell continues to own pause and navigation. */
+.game-screen[data-game=soccer]{--soccer-navy:#101f2d;--soccer-ivory:#f3f2df;--soccer-teal:#78cfbd;--soccer-line:#cde2dc42;color:var(--soccer-ivory)}
+.game-screen[data-game=soccer] .game-header .game-pause{flex-direction:row;width:56px;height:56px;padding:0;gap:0;border:1px solid #d2e7df5c;border-radius:16px;background:#102331e8;color:var(--soccer-ivory);box-shadow:0 4px 18px #03111740,inset 0 1px 0 #ffffff14;backdrop-filter:none}
+.game-screen[data-game=soccer] .game-header .game-pause::before { content:''; font-size:0; width:10px; height:16px; box-sizing:content-box; border-width:3px; }
+.game-screen[data-game=soccer][data-paused=true] .game-header .game-pause::before{width:0;height:0}
+.game-screen[data-game=soccer] .game-header .game-pause > *{display:none}
+.game-screen[data-game=soccer] .soccer-scoreboard{top:max(12px,env(safe-area-inset-top));left:max(14px,env(safe-area-inset-left));height:42px;max-width:calc(100vw - 100px);padding:0 12px 0 10px;gap:10px;border:1px solid #cfe5de38;border-left:3px solid var(--soccer-teal);border-radius:5px;background:linear-gradient(105deg,#132733f7,#0f1e2cf5);box-shadow:0 5px 18px #03111740,inset 0 1px 0 #ffffff0d;font-variant-numeric:tabular-nums}
+.game-screen[data-game=soccer] .soccer-kit{display:block;width:21px;height:24px;flex:none;border:0;border-bottom:5px solid;border-radius:1px;clip-path:polygon(27% 0,39% 6%,61% 6%,73% 0,100% 20%,85% 43%,73% 34%,73% 100%,27% 100%,27% 34%,15% 43%,0 20%);box-shadow:inset 0 0 0 1px #ffffff80,inset 0 4px 6px #ffffff26;box-sizing:border-box}
+.game-screen[data-game=soccer] .soccer-score{display:flex;gap:1px;font-size:25px;font-weight:800;letter-spacing:-.5px}
+.game-screen[data-game=soccer] .soccer-score bdi{display:block;min-width:33px;padding:4px 5px;text-align:center;background:var(--soccer-ivory);color:#132733;line-height:1}
+.game-screen[data-game=soccer] .soccer-score bdi:first-child{border-radius:2px 0 0 2px}
+.game-screen[data-game=soccer] .soccer-score bdi:last-child{border-radius:0 2px 2px 0}
+.game-screen[data-game=soccer] .soccer-clock{font-size:16px;font-weight:700;padding-left:11px;min-width:60px;color:#e3e8de;border-color:#b9d1ca38;letter-spacing:.4px}
+.game-screen[data-game=soccer] .soccer-phase-banner{top:max(66px,calc(env(safe-area-inset-top) + 58px));left:max(14px,env(safe-area-inset-left));transform:none;width:auto;min-width:48px;min-height:40px;max-width:calc(100% - 100px);padding:5px 12px;border:1px solid var(--soccer-line);border-radius:5px;background:#132733ef;color:var(--soccer-ivory);box-shadow:0 3px 12px #03111733;font-size:23px;font-variant-numeric:tabular-nums}
+.game-screen[data-game=soccer] .soccer-edge-arrow{color:#f1edc8;text-shadow:0 2px 5px #08151d;font-size:28px}
+/* The pause card leaves the stadium visible and keeps every native shell action. */
+.game-screen[data-game=soccer] .game-pause-sheet{padding:24px;background:linear-gradient(120deg,#08151de8,#0d2028b8);backdrop-filter:blur(5px)}
+.game-screen[data-game=soccer] .game-pause-card{width:min(398px,100%);padding:30px 24px;border:1px solid #bdd4cb4d;border-top:3px solid var(--soccer-teal);border-radius:12px;background:linear-gradient(145deg,#1a303b,#112430);color:var(--soccer-ivory);box-shadow:0 22px 65px #020d1566,inset 0 1px 0 #ffffff0a}
+.game-screen[data-game=soccer] .game-pause-actions{gap:12px;align-items:center}
+.game-screen[data-game=soccer] .game-pause-actions .shell-icon{flex:0 0 80px;min-height:80px;border:1px solid #d6e6db55;border-radius:12px;background:#243c46;color:#eff1df;box-shadow:0 4px 13px #04151f38,inset 0 1px 0 #ffffff0b}
+.game-screen[data-game=soccer] .game-pause-actions [data-action=game-resume]{flex-basis:112px;width:112px;height:104px;border-color:#bfe6d3;background:#bbdecd;color:#132b33}
+.game-screen[data-game=soccer] .game-pause-actions [data-action=game-exit]{background:#3c3037;border-color:#d5b4b35c;color:#f2d4cc}
+.game-screen[data-game=soccer] .game-pause-actions [data-action=game-pause-sound][aria-pressed=true]{background:#182b35;color:#8eaaa9;box-shadow:none}
+.game-screen[data-game=soccer] .shell-pause-symbol svg,.game-screen[data-game=soccer] .soccer-rotate .shell-icon svg{width:32px;height:32px;aspect-ratio:1;animation:none}
+.game-screen[data-game=soccer] :is(.game-pause-actions button,.game-header .game-pause):focus-visible{outline:3px solid #dcebd7;outline-offset:4px}
+.game-screen[data-game=soccer] .soccer-rotate{gap:32px;background:radial-gradient(ellipse at 50% 37%,#284d50 0,#162d38 42%,#0d1e2b 80%);color:#e8ecda}
+.game-screen[data-game=soccer] .soccer-rotate > svg{width:112px;height:112px;padding:22px;box-sizing:content-box;border:1px solid #a8ccc14d;border-radius:28px;background:#dbead708;color:#9ed7c5;animation:none}
+.game-screen[data-game=soccer] .soccer-rotate > button{border:1px solid #b8d2c750;border-radius:14px;background:#28414a;color:#edf0df}
+.game-screen[data-game=soccer] .shell-countdown{gap:20px;background:#10232cc9}
+.game-screen[data-game=soccer] .shell-countdown i{width:20px;height:20px;border:2px solid #d5e8d8;box-shadow:0 0 0 6px #87c9b90d}
+.game-screen[data-game=soccer] .shell-countdown i.done{background:#8bcdb9;border-color:#8bcdb9}
+@media(max-height:380px) and (orientation:landscape){
+ .game-screen[data-game=soccer] .soccer-scoreboard{top:max(9px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));height:38px}
+ .game-screen[data-game=soccer] .soccer-score{font-size:23px}
+ .game-screen[data-game=soccer] .soccer-phase-banner{top:57px;min-height:36px;font-size:21px}
+ .game-screen[data-game=soccer] .game-pause-sheet{padding:12px}
+ .game-screen[data-game=soccer] .game-pause-card{padding:22px}
+}
+@media(max-width:420px){
+ .game-screen[data-game=soccer] .game-pause-card{padding:22px 16px}
+ .game-screen[data-game=soccer] .game-pause-actions{gap:10px}
+ .game-screen[data-game=soccer] .game-pause-actions .shell-icon{flex-basis:64px;width:64px;height:72px;min-height:72px;padding:14px}
+ .game-screen[data-game=soccer] .game-pause-actions [data-action=game-resume]{flex-basis:88px;width:88px;height:96px}
+}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=soccer] *{animation-duration:.01ms!important;transition-duration:.01ms!important}}

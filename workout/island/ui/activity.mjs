@@ -1,18 +1,18 @@
-import {gameEmblem} from './adventure-emblems.mjs?v=island-art-20261022-3';
-import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-art-20261022-3';
-import {hangarAction} from '../activity/hangar.mjs?v=island-art-20261022-3';
-import {hangarPreview} from './hangar-preview.mjs?v=island-art-20261022-3';
-import {createSound} from '../minigames/sound.mjs?v=island-art-20261022-3';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-art-20261022-3';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-art-20261022-3';
-import {createAmmoVisual} from '../minigames/art.mjs?v=island-art-20261022-3';
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-art-20261022-3';
-import {gameContext} from '../minigames/context.mjs?v=island-art-20261022-3';
-import {gameAvailability} from '../activity/availability.mjs?v=island-art-20261022-3';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-art-20261022-3';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=island-art-20261022-3';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-art-20261022-3';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=island-art-20261022-3';
+import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-ultra-20261023-1';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-ultra-20261023-1';
+import {hangarAction} from '../activity/hangar.mjs?v=island-ultra-20261023-1';
+import {hangarPreview} from './hangar-preview.mjs?v=island-ultra-20261023-1';
+import {createSound} from '../minigames/sound.mjs?v=island-ultra-20261023-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-ultra-20261023-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-ultra-20261023-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=island-ultra-20261023-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-ultra-20261023-1';
+import {gameContext} from '../minigames/context.mjs?v=island-ultra-20261023-1';
+import {gameAvailability} from '../activity/availability.mjs?v=island-ultra-20261023-1';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-ultra-20261023-1';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=island-ultra-20261023-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-ultra-20261023-1';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=island-ultra-20261023-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -95,17 +95,20 @@ export class ActivityInterface {
 
   menu() {
     const dialog=this.modal('minigame.title','minigame.subtitle');dialog.dataset.gameLibrary='true';
-    const cards=el('div','adventure-game-grid');
+    const heading=dialog.querySelector?.('h2'),subtitle=dialog.querySelector?.('.modal-subtitle');
+    if(heading)heading.textContent='משחקי האי';if(subtitle)subtitle.textContent='בחרו משחק כדי להתחיל.';
+    const cards=el('div','adventure-game-grid');cards.setAttribute('aria-label','משחקי האי');
     for(const game of this.enabledGames()){
       const card=el('article','adventure-game-card');card.dataset.game=game.id;
-      card.append(gameEmblem(game.id),el('h3','',this.t(game.title)));
+      card.append(gameEmblem(game.id),el('p','adventure-game-category',gameArtwork(game.id).category),el('h3','',this.t(game.title)));
       const enter=button('כניסה','game-enter',()=>this.gameHome(game.id),'adventure-enter');enter.dataset.gameId=game.id;enter.setAttribute('aria-label','כניסה · '+this.t(game.title));card.append(enter);cards.append(card);
     }
     dialog.append(cards);
   }
   gameHome(id){
-    const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle');dialog.dataset.gameHome=id;
-    const hero=el('div','adventure-game-hero');hero.append(gameEmblem(id));dialog.append(hero);
+    const game=this.engine.registry.minigames.get(id),art=gameArtwork(id),dialog=this.modal(game.title,'minigame.subtitle');dialog.dataset.gameHome=id;
+    const subtitle=dialog.querySelector?.('.modal-subtitle');if(subtitle)subtitle.textContent=art.description;
+    const hero=el('div','adventure-game-hero');hero.append(gameEmblem(id),el('p','adventure-game-category',art.category));dialog.append(hero);
     const actions=el('div','adventure-home-actions');
     actions.append(this.playButton(id,'game-play',()=>this.stages(id)),button('איך לשחק','game-help',()=>this.intro(id)),button('שדרוגים','equipment-shop',()=>this.gameUpgrades(id)));
     dialog.append(actions,button('כל המשחקים','game-library-back',()=>this.menu(),'adventure-back'));

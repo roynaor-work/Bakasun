@@ -1,12 +1,12 @@
-import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-art-20261022-3';
-import {createNavalImpacts} from './naval-impacts.mjs?v=island-art-20261022-3';
+import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-ultra-20261023-1';
+import {createNavalImpacts} from './naval-impacts.mjs?v=island-ultra-20261023-1';
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-art-20261022-3';
-import {createNavalEffects} from './g6d-effects.mjs?v=island-art-20261022-3';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-art-20261022-3';
-import {createNavalScenery} from './naval-scenery.mjs?v=island-art-20261022-3';
-import {createNavalEnvironment} from './naval-environment.mjs?v=island-art-20261022-3';
+import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-ultra-20261023-1';
+import {createNavalEffects} from './g6d-effects.mjs?v=island-ultra-20261023-1';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-ultra-20261023-1';
+import {createNavalScenery} from './naval-scenery.mjs?v=island-ultra-20261023-1';
+import {createNavalEnvironment} from './naval-environment.mjs?v=island-ultra-20261023-1';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */
@@ -48,21 +48,38 @@ export function createVessel(THREE, colors, equipment={},variant={},playerModel=
   for(const part of staticParts.children){part.updateMatrix();const baked=part.geometry.index?part.geometry.toNonIndexed():part.geometry.clone();baked.applyMatrix4(part.matrix);baked.deleteAttribute('uv');if(!batches.has(part.material))batches.set(part.material,[]);batches.get(part.material).push(baked);geometries.delete(part.geometry);part.geometry.dispose();}
   staticParts.clear();
   for(const [mat,parts]of batches){const combined=mergeGeometries(parts);for(const part of parts)part.dispose();geometries.add(combined);staticParts.add(new THREE.Mesh(combined,mat));}
+  // While the full GLB loads, omit only the temporary fallback hull from
+  // the low-resolution mirror. It remains visible in the main camera.
+  if(playerModel)staticParts.traverse(node=>{if(node.isMesh)node.layers.set(1);});
+  // Each articulated turret keeps its moving barrel. All remaining metal
+  // retains the same triangles and normals in one draw per material.
+  function batchTurret(){const turretBatches=new Map();
+  for(const part of [...turret.children]){if(part===barrel||!part.isMesh)continue;part.updateMatrix();const baked=part.geometry.index?part.geometry.toNonIndexed():part.geometry.clone();baked.applyMatrix4(part.matrix);baked.deleteAttribute('uv');if(!turretBatches.has(part.material))turretBatches.set(part.material,[]);turretBatches.get(part.material).push(baked);geometries.delete(part.geometry);part.geometry.dispose();part.removeFromParent();}
+  for(const [mat,parts]of turretBatches){const combined=mergeGeometries(parts);parts.forEach(g=>g.dispose());geometries.add(combined);turret.add(new THREE.Mesh(combined,mat));}}
+  if(playerModel)batchTurret();
   const shield=mesh(new THREE.SphereGeometry(4,12,8),colors.glass,0,1,0,root);shield.material=new THREE.MeshBasicMaterial({color:colors.glass,wireframe:true,transparent:true,opacity:.1});shield.visible=(equipment.shield||0)>0;
   const foam=mesh(new THREE.RingGeometry(2.2,2.35,20),colors.foam,0,-.12,1,root);foam.rotation.x=-Math.PI/2;foam.scale.set(.7,2.7,1);
   const reflection=mesh(new THREE.PlaneGeometry(2.5,7),colors.hull,0,-.15,0,root);reflection.rotation.x=-Math.PI/2;reflection.material=new THREE.MeshBasicMaterial({color:colors.hull,transparent:true,opacity:.18});
+  // Reflective water supplies the real hull reflection; the old rectangular
+  // decal only added an underwater draw and a dark straight edge.
+  reflection.visible=false;
   const shadow=mesh(new THREE.CircleGeometry(2.5,16),colors.metal,0,-.13,.1,root);shadow.rotation.x=-Math.PI/2;shadow.scale.set(.65,1.6,1);shadow.material=new THREE.MeshBasicMaterial({color:colors.metal,transparent:true,opacity:.18});
-  // Smoke was a growing faceted balloon. Fire and soft water effects carry damage feedback.
+  // A narrow, soft flame preserves the silhouette and the original deck texture.
   const smoke=new THREE.Group();root.add(smoke);
-  const flame=mesh(new THREE.SphereGeometry(.32,8,6),colors.flame,.7,.85,.9,root);flame.material=new THREE.MeshBasicMaterial({color:colors.flame});flame.visible=false;
+  const flameMap=typeof document==='undefined'?null:(()=>{const c=document.createElement('canvas');c.width=64;c.height=128;const b=c.getContext('2d'),g=b.createRadialGradient(32,92,2,32,77,48);g.addColorStop(0,'#ffeab5');g.addColorStop(.2,'#ffd46bea');g.addColorStop(.5,'#ff8b2dd6');g.addColorStop(1,'#e5702300');b.fillStyle=g;b.beginPath();b.moveTo(32,4);b.bezierCurveTo(27,55,5,75,13,103);b.bezierCurveTo(18,126,50,125,53,100);b.bezierCurveTo(59,79,38,60,32,4);b.fill();return new THREE.CanvasTexture(c);})();
+  const flameGeometry=new THREE.PlaneGeometry(1,1);geometries.add(flameGeometry);const flame=new THREE.Mesh(flameGeometry,new THREE.MeshBasicMaterial({map:flameMap,color:'#ffffff',transparent:true,depthWrite:false,side:THREE.DoubleSide,forceSinglePass:true,blending:THREE.NormalBlending,toneMapped:false}));flame.position.set(.7,.85,.9);flame.scale.set(.48,1.1,1);root.add(flame);flame.visible=false;
   let model,modelLength,disposed=false;const modelStatus={requested:Boolean(playerModel),loaded:false,failed:false};
   const ready=playerModel?loadPatrolBoat(playerModel,adapters).then(loaded=>{
     if(disposed){if(loaded)disposeBoat(loaded);return;}
     if(!loaded){modelStatus.failed=true;return;}
-    model=loaded;root.add(model);staticParts.visible=false;modelStatus.loaded=true;modelLength=playerModel.length*playerModel.scale*root.scale.x;
+    model=loaded;
+    // Keep every Meshy vertex, UV and source texel. The finish only controls
+    // how the existing paint responds to daylight; it does not recolor it.
+    model.traverse(node=>{if(!node.isMesh)return;for(const mat of Array.isArray(node.material)?node.material:[node.material]){mat.roughness=.62;mat.metalness=.12;if(mat.map)mat.map.anisotropy=4;mat.needsUpdate=true;}});
+    root.add(model);staticParts.visible=false;modelStatus.loaded=true;modelLength=playerModel.length*playerModel.scale*root.scale.x;
     turret.position.fromArray(playerModel.cannonPivot);
   }).catch(()=>{if(!disposed)modelStatus.failed=true;}):Promise.resolve();
-  return {root,turret,barrel,flag,funnel,shield,foam,smoke,flame,ready,modelStatus,get modelLength(){return modelLength;},dispose(){if(disposed)return;disposed=true;if(model){disposeBoat(model);model=null;}for(const g of geometries)g.dispose();const all=new Set(materials.values());root.traverse(o=>{if(o.material)all.add(o.material);});for(const m of all)m.dispose();}};
+  return {root,turret,barrel,flag,funnel,shield,foam,smoke,flame,ready,modelStatus,get modelLength(){return modelLength;},dispose(){if(disposed)return;disposed=true;if(model){disposeBoat(model);model=null;}flameMap?.dispose();for(const g of geometries)g.dispose();const all=new Set(materials.values());root.traverse(o=>{if(o.material)all.add(o.material);});for(const m of all)m.dispose();}};
 }
 
 /** Both Meshy boats have a -X bow, normalized to -Z by the same rotation.
@@ -74,17 +91,21 @@ export function vesselHeading(v,x,z,time) {
 
 export function createNavalView(ctx,model,adapters={}) {
   const {config,balance}=ctx,r=balance.render;
-  let renderer,failed=false,disposed=false,low=false;
+  let renderer,failed=false,disposed=false,low=false,peakTriangles=0,peakDrawCalls=0;
   const canvas=adapters.canvas||document.createElement('canvas');
   try{renderer=(adapters.createRenderer||((options)=>new THREE.WebGLRenderer(options)))({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});}
   catch{return null;}
+  renderer.info.autoReset=false;
   renderer.setSize(r.width,r.height,false);renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio||1,1.5));renderer.outputColorSpace=THREE.SRGBColorSpace;
   const scene=new THREE.Scene();scene.background=new THREE.Color(r.sky);scene.fog=new THREE.Fog(r.sky,r.fogNear,r.fogFar);
   const camera=new THREE.PerspectiveCamera(r.follow.fov,r.width/r.height,r.follow.near,r.follow.far);
+  // Preserve full Meshy palms in the main view. Their distant reflection is
+  // omitted from the 256px mirror; islands and all vessels still reflect.
+  camera.layers.enable(1);
   function syncCamera(){const c=model.camera;camera.position.set(c.position.x,c.position.y,c.position.z);camera.lookAt(c.focus.x,c.focus.y,c.focus.z);camera.fov=c.fov;camera.updateProjectionMatrix();camera.updateMatrixWorld();}
   syncCamera();
   const seaGeometry=new THREE.PlaneGeometry(r.seaSize,r.seaSize,r.waterSegments,r.waterSegments);seaGeometry.rotateX(-Math.PI/2);
-  const seaMaterial=new THREE.MeshStandardMaterial({color:r.sea,roughness:.8,metalness:.05,flatShading:true});const sea=new THREE.Mesh(seaGeometry,seaMaterial);sea.position.set(0,-.25,-35);scene.add(sea);
+  const seaMaterial=new THREE.MeshStandardMaterial({color:r.sea,roughness:.8,metalness:.05,flatShading:true});const sea=new THREE.Mesh(seaGeometry,seaMaterial);sea.position.set(0,-.25,-35);sea.scale.set(900/r.seaSize,1,900/r.seaSize);scene.add(sea);
   const sunGeometry=new THREE.SphereGeometry(7,16,8),sunMaterial=new THREE.MeshBasicMaterial({color:r.sun}),sun=new THREE.Mesh(sunGeometry,sunMaterial);sun.position.set(-22,12,-95);scene.add(sun);
   const environment=createNavalEnvironment(scene,renderer,sea,sun);
   const player=createVessel(THREE,r,model.equipment,{},balance.playerModel);player.root.scale.setScalar(r.playerScale);scene.add(player.root);
@@ -95,10 +116,10 @@ export function createNavalView(ctx,model,adapters={}) {
   const projected=new THREE.Vector3(),raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),seaPlane=new THREE.Plane(new THREE.Vector3(0,1,0),0),intersection=new THREE.Vector3();camera.updateMatrixWorld();const positions=seaGeometry.attributes.position;
 
   const fx=r.effects,flashGeometry=new THREE.PlaneGeometry(fx.flashSize*2.4,fx.flashSize*2.4),flashMaterial=new THREE.MeshBasicMaterial({color:r.flame,transparent:true,depthWrite:false}),flash=new THREE.Mesh(flashGeometry,flashMaterial);scene.add(flash);
-  const smokeCanvas=document.createElement('canvas');smokeCanvas.width=smokeCanvas.height=64;const brush=smokeCanvas.getContext('2d'),gradient=brush.createRadialGradient(32,32,0,32,32,32);gradient.addColorStop(0,'#e0e3dfaa');gradient.addColorStop(1,'#e0e3df00');brush.fillStyle=gradient;brush.fillRect(0,0,64,64);const smokeTexture=new THREE.CanvasTexture(smokeCanvas),smokeMaterial=new THREE.SpriteMaterial({map:smokeTexture,transparent:true,depthWrite:false}),muzzleSmoke=new THREE.Sprite(smokeMaterial);scene.add(muzzleSmoke);
+  const smokeCanvas=document.createElement('canvas');smokeCanvas.width=smokeCanvas.height=64;const brush=smokeCanvas.getContext('2d'),gradient=brush.createRadialGradient(32,32,0,32,32,32);gradient.addColorStop(0,'#e0e3dfaa');gradient.addColorStop(1,'#e0e3df00');brush.fillStyle=gradient;brush.fillRect(0,0,64,64);const smokeTexture=new THREE.CanvasTexture(smokeCanvas),smokeMaterial=new THREE.MeshBasicMaterial({map:smokeTexture,transparent:true,depthWrite:false,side:THREE.DoubleSide,forceSinglePass:true}),muzzleSmokeGeometry=new THREE.PlaneGeometry(1,1),muzzleSmoke=new THREE.Mesh(muzzleSmokeGeometry,smokeMaterial);scene.add(muzzleSmoke);
   flashMaterial.map=smokeTexture;flashMaterial.blending=THREE.AdditiveBlending;flashMaterial.toneMapped=false;
   const gatling=new THREE.Group(),gatlingGeometry=new THREE.CylinderGeometry(fx.subTube/3,fx.subTube/3,fx.salvoLength,6),gatlingMaterial=new THREE.MeshStandardMaterial({color:r.metal});
-  for(let i=0;i<3;i++){const barrel=new THREE.Mesh(gatlingGeometry,gatlingMaterial),a=i*Math.PI*2/fx.salvoBarrels;barrel.rotation.x=Math.PI/2;barrel.position.set(Math.cos(a)*fx.salvoRadius,Math.sin(a)*fx.salvoRadius,0);gatling.add(barrel);}gatling.position.set(0,.18,-1);player.turret.add(gatling);
+  const salvoParts=[];for(let i=0;i<3;i++){const g=gatlingGeometry.clone(),a=i*Math.PI*2/fx.salvoBarrels;g.rotateX(Math.PI/2);g.translate(Math.cos(a)*fx.salvoRadius,Math.sin(a)*fx.salvoRadius,0);salvoParts.push(g);}const salvoGeometry=mergeGeometries(salvoParts);salvoParts.forEach(g=>g.dispose());gatling.add(new THREE.Mesh(salvoGeometry,gatlingMaterial));gatling.position.set(0,.18,-1);player.turret.add(gatling);
   const muzzle=new THREE.Vector3();let lastFire=-Infinity,lastFired=0;
 
   const onLost=event=>{event.preventDefault();failed=true;};canvas.addEventListener('webglcontextlost',onLost);
@@ -107,30 +128,30 @@ export function createNavalView(ctx,model,adapters={}) {
     const sink=e.hp<=0?model.sinkProgress:0;v.root.position.set(x,Math.sin(model.time*1.6+(e.index||0))*.12-sink*4,z);v.root.rotation.z=Math.sin(model.time*1.9+x)*.035+sink*.3;
     const target=enemy?navalWorldPoint(model.playerShip.x,model.playerShip.z,balance):navalWorldPoint(model.aim.x,model.aim.z,balance);v.turret.rotation.y=Math.atan2(x-target.x,z-target.z)-v.root.rotation.y;v.barrel.rotation.x=model.ammoIndex===2?0:.35;v.barrel.position.z=-.85+e.recoil;
     v.flag.visible=false;v.flag.rotation.y=Math.sin(model.time*4)*.2;v.shield.visible=e.shield>0;v.smoke.visible=e.hp<e.maxHp;v.flame.visible=e.hp<e.maxHp;
-    v.smoke.position.y=3+(model.time%2);v.smoke.scale.setScalar(.6+(model.time%2)*.5);v.flame.position.set(.7,.85,.9);v.flame.scale.y=1.4+Math.sin(model.time*12)*.3;v.foam.visible=false;
+    v.smoke.position.y=3+(model.time%2);v.smoke.scale.setScalar(.6+(model.time%2)*.5);v.flame.position.set(.95,e.hp<e.maxHp?2.6:.85,1.35);v.flame.quaternion.copy(v.root.quaternion).invert().multiply(camera.quaternion);v.flame.scale.set(.6+Math.sin(model.time*17)*.05,1.6+Math.sin(model.time*12)*.18,1);v.foam.visible=false;
   }
-  function dispose(){if(disposed)return;disposed=true;canvas.removeEventListener('webglcontextlost',onLost);environment.dispose();adventure.dispose();player.dispose();for(const v of vessels)v.dispose();projectiles.dispose();impacts.dispose();scenery.dispose();smokeTexture.dispose();smokeMaterial.dispose();flashMaterial.dispose();gatlingMaterial.dispose();for(const g of [seaGeometry,sunGeometry,aimGeometry,flashGeometry,gatlingGeometry])g.dispose();for(const m of [seaMaterial,sunMaterial,aimMaterial])m.dispose();renderer.dispose();renderer.forceContextLoss();canvas.width=canvas.height=0;}
-  return {get mode(){return failed?'perspective':'three';},metrics(){return {triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,playerModel:{...player.modelStatus},disposed,
+  function dispose(){if(disposed)return;disposed=true;canvas.removeEventListener('webglcontextlost',onLost);environment.dispose();adventure.dispose();player.dispose();for(const v of vessels)v.dispose();projectiles.dispose();impacts.dispose();scenery.dispose();smokeTexture.dispose();smokeMaterial.dispose();flashMaterial.dispose();gatlingMaterial.dispose();for(const g of [seaGeometry,sunGeometry,aimGeometry,flashGeometry,gatlingGeometry,salvoGeometry,muzzleSmokeGeometry])g.dispose();for(const m of [seaMaterial,sunMaterial,aimMaterial])m.dispose();renderer.dispose();renderer.forceContextLoss();canvas.width=canvas.height=0;}
+  return {get mode(){return failed?'perspective':'three';},capturePreview(){if(failed||disposed)return null;renderer.info.reset();renderer.render(scene,camera);return canvas.toDataURL('image/png');},metrics(){return {triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,peak:{triangles:peakTriangles,drawCalls:peakDrawCalls},playerModel:{...player.modelStatus},disposed,
     environment:environment.metrics(),models:{requested:Number(Boolean(balance.playerModel))+Number(vessels.some(v=>v.modelStatus.requested)),loaded:Number(player.modelStatus.loaded)+Number(vessels.some(v=>v.modelStatus.loaded)),failed:Number(player.modelStatus.failed)+Number(vessels.some(v=>v.modelStatus.failed))},
-    playerMarkers:{flag:player.flag.visible,flame:player.flame.visible,flameY:player.flame.position.y},effects:scenery.metrics(),projectiles:projectiles.metrics(),impacts:impacts.metrics(),scenery:adventure.metrics(),camera:JSON.parse(JSON.stringify(model.camera)),quality:low?'low':'full',playerLoaded:player.modelStatus.loaded,enemiesLoaded:vessels.filter(v=>v.modelStatus.loaded).length,playerLength:player.modelLength,enemyLengths:vessels.map(v=>v.modelLength),headings:vessels.map(v=>v.root.rotation.y),periscopes:vessels.map(v=>Boolean(v.periscope?.visible))};},degrade(fallback=false){if(fallback){failed=true;dispose();}else if(!low){low=true;environment.degrade();renderer.setSize(r.width*.75,r.height*.75,false);}},dispose,
+    playerMarkers:{flag:player.flag.visible,flame:player.flame.visible,flameY:player.flame.position.y},effects:scenery.metrics(),projectiles:projectiles.metrics(),impacts:impacts.metrics(),scenery:adventure.metrics(),camera:JSON.parse(JSON.stringify(model.camera)),gpu:{geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,programs:renderer.info.programs?.length||0},quality:low?'low':'full',playerLoaded:player.modelStatus.loaded,enemiesLoaded:vessels.filter(v=>v.modelStatus.loaded).length,playerLength:player.modelLength,enemyLengths:vessels.map(v=>v.modelLength),headings:vessels.map(v=>v.root.rotation.y),periscopes:vessels.map(v=>Boolean(v.periscope?.visible))};},degrade(fallback=false){if(fallback){failed=true;dispose();}else if(!low){low=true;environment.degrade();renderer.setSize(r.width*.75,r.height*.75,false);}},dispose,
     resize(){if(failed||disposed)return;camera.aspect=config.width/config.height;camera.updateProjectionMatrix();renderer.setSize(Math.min(config.width,1280)*(low?.75:1),Math.min(config.width,r.width)*config.height/config.width*(low?.75:1),false);},
     projectTarget(x,z,y=0){if(failed||disposed)return null;return model.screenPoint(x,z,y);},
     targetAt(x,y){if(failed||disposed)return null;pointer.set(x/config.width*2-1,1-y/config.height*2);raycaster.setFromCamera(pointer,camera);if(!raycaster.ray.intersectPlane(seaPlane,intersection))return null;return {x:balance.shipX-intersection.z/r.worldScale,z:intersection.x/r.enemySpacing*balance.combat.laneSpacing};},
     draw(p){
       if(failed||disposed)return false;
       try{
-        for(let i=0;i<positions.count;i++){const x=positions.getX(i),z=positions.getZ(i);positions.setY(i,Math.sin(x*.32+model.time*r.waveSpeed)*Math.cos(z*.2+model.time)*r.waveHeight);}positions.needsUpdate=true;seaGeometry.computeVertexNormals();
-        const px=model.playerShip.z*r.enemySpacing/balance.combat.laneSpacing,pz=-(model.playerShip.x-balance.shipX)*r.worldScale;animateVessel(player,model.playerShip,px,pz,false);syncCamera();environment.update(model.time,camera);scenery.update(camera);adventure.update(player.root);
+        if(sea.visible){for(let i=0;i<positions.count;i++){const x=positions.getX(i),z=positions.getZ(i);positions.setY(i,Math.sin(x*.32+model.time*r.waveSpeed)*Math.cos(z*.2+model.time)*r.waveHeight);}positions.needsUpdate=true;seaGeometry.computeVertexNormals();}
+        const px=model.playerShip.z*r.enemySpacing/balance.combat.laneSpacing,pz=-(model.playerShip.x-balance.shipX)*r.worldScale;animateVessel(player,model.playerShip,px,pz,false);syncCamera();environment.update(model.time,camera);scenery.update(camera);adventure.update(player.root,camera);
         if(model.fired!==lastFired){lastFired=model.fired;lastFire=['mine','repair'].includes(model.lastAction?.type)?-Infinity:model.time;}const fireAge=model.time-lastFire;
         gatling.visible=model.ammoIndex===4;player.barrel.visible=!gatling.visible;gatling.rotation.z=0;
         player.root.updateMatrixWorld(true);muzzle.set(0,.18,-fx.muzzleForward);player.turret.localToWorld(muzzle);
         flash.visible=fireAge<fx.flashSeconds;flash.position.copy(muzzle);flash.quaternion.copy(camera.quaternion);flash.scale.setScalar(1+fireAge/fx.flashSeconds);flashMaterial.opacity=Math.max(0,1-fireAge/fx.flashSeconds);
-        muzzleSmoke.visible=fireAge<fx.smokeSeconds;muzzleSmoke.position.copy(muzzle);muzzleSmoke.position.y+=fireAge*fx.smokeSize;smokeMaterial.opacity=Math.max(0,1-fireAge/fx.smokeSeconds);muzzleSmoke.scale.setScalar(fx.smokeSize+fireAge*fx.smokeSize*4);
+        muzzleSmoke.visible=fireAge<fx.smokeSeconds;muzzleSmoke.quaternion.copy(camera.quaternion);muzzleSmoke.position.copy(muzzle);muzzleSmoke.position.y+=fireAge*fx.smokeSize;smokeMaterial.opacity=Math.max(0,1-fireAge/fx.smokeSeconds);muzzleSmoke.scale.setScalar(fx.smokeSize+fireAge*fx.smokeSize*4);
 
         for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];v.root.visible=e.active;if(e.active){animateVessel(v,e,e.z*r.enemySpacing/balance.combat.laneSpacing,-(e.x-balance.shipX)*r.worldScale,true);if(balance.shipTypes[e.kind].submarine){v.root.position.y-=e.depth*fx.submergedY;v.periscope.visible=e.hp>0;}}}
-        projectiles.update(camera);impacts.update();
+        projectiles.update(camera);impacts.update(camera);
         aimLine.visible=false;
-        renderer.render(scene,camera);p.drawImage(canvas,0,0,config.width,config.height);
+        renderer.info.reset();renderer.render(scene,camera);peakTriangles=Math.max(peakTriangles,renderer.info.render.triangles);peakDrawCalls=Math.max(peakDrawCalls,renderer.info.render.calls);p.drawImage(canvas,0,0,config.width,config.height);
         return true;
       }catch{failed=true;dispose();return false;}
     }
@@ -139,8 +160,17 @@ export function createNavalView(ctx,model,adapters={}) {
 
 function createSubmarine(r,fx){
  const root=new THREE.Group(),turret=new THREE.Group(),barrel=new THREE.Object3D(),flag=new THREE.Object3D(),smoke=new THREE.Group(),flame=new THREE.Object3D(),foam=new THREE.Object3D(),shield=new THREE.Object3D();turret.add(barrel);root.add(turret,flag,smoke,flame,foam,shield);
- const material=new THREE.MeshStandardMaterial({color:r.metal,roughness:.55}),hullGeometry=new THREE.CapsuleGeometry(fx.subBeam,fx.subLength-fx.subBeam*2,4,8),hull=new THREE.Mesh(hullGeometry,material);hull.rotation.x=Math.PI/2;root.add(hull);
+ const material=new THREE.MeshStandardMaterial({color:'#344b53',roughness:.48,metalness:.35}),hullGeometry=new THREE.CapsuleGeometry(fx.subBeam,fx.subLength-fx.subBeam*2,6,12),hull=new THREE.Mesh(hullGeometry,material);hull.rotation.x=Math.PI/2;root.add(hull);
  const towerGeometry=new THREE.CylinderGeometry(fx.subBeam*.6,fx.subBeam,fx.subBeam*2,8),tower=new THREE.Mesh(towerGeometry,material);tower.position.y=fx.subBeam;root.add(tower);
  const scopeGeometry=new THREE.CylinderGeometry(fx.periscopeBeam,fx.periscopeBeam,fx.periscopeHeight,6),scopeMaterial=new THREE.MeshStandardMaterial({color:r.foam,roughness:.4}),periscope=new THREE.Group(),stem=new THREE.Mesh(scopeGeometry,scopeMaterial),head=new THREE.Mesh(scopeGeometry,scopeMaterial);stem.position.y=fx.periscopeHeight/2;head.rotation.z=Math.PI/2;head.scale.y=fx.periscopeBeam;head.position.set(fx.periscopeBeam,fx.periscopeHeight,0);periscope.add(stem,head);root.add(periscope);
- return {root,turret,barrel,flag,smoke,flame,foam,shield,periscope,ready:Promise.resolve(),modelStatus:{requested:false,loaded:false,failed:false},dispose(){for(const g of [hullGeometry,towerGeometry,scopeGeometry])g.dispose();material.dispose();scopeMaterial.dispose();}};
+ // The existing code-built submarine has no Meshy asset. Add casing seams,
+ // hydroplanes and launch tubes as one batch rather than replacing any vessel.
+ const detailParts=[],detailMaterial=new THREE.MeshStandardMaterial({color:'#607b7d',roughness:.52,metalness:.32});
+ function detail(geometry,x,y,z,rotation=0){geometry.rotateY(rotation);geometry.translate(x,y,z);detailParts.push(geometry.toNonIndexed());geometry.dispose();}
+ detail(new THREE.BoxGeometry(.82,.14,4.7),0,fx.subBeam*.83,.15);
+ for(const side of [-1,1]){detail(new THREE.BoxGeometry(.95,.075,.65),side*.84,0,-2.5,.18*side);detail(new THREE.BoxGeometry(.82,.065,.62),side*.75,.05,2.9,-.2*side);for(const z of [-1.65,-.75,.15,1.05,1.95])detail(new THREE.BoxGeometry(.05,.045,.25),side*.44,fx.subBeam*.96,z);}
+ for(const x of [-.27,.27]){const tube=new THREE.CylinderGeometry(.12,.12,1.2,10);tube.rotateX(Math.PI/2);detail(tube,x,-.16,-2.45);}
+ detail(new THREE.BoxGeometry(.07,.7,.72),0,.48,2.9);
+ const detailGeometry=mergeGeometries(detailParts);detailParts.forEach(g=>g.dispose());root.add(new THREE.Mesh(detailGeometry,detailMaterial));
+ return {root,turret,barrel,flag,smoke,flame,foam,shield,periscope,ready:Promise.resolve(),modelStatus:{requested:false,loaded:false,failed:false},dispose(){for(const g of [hullGeometry,towerGeometry,scopeGeometry,detailGeometry])g.dispose();material.dispose();scopeMaterial.dispose();detailMaterial.dispose();}};
 }

@@ -1,34 +1,82 @@
+/* Naval presentation only: scoped to the live game and its own screens. */
+.game-screen[data-game=navalDuel]{--naval-ink:#092a3c;--naval-ivory:#f3f1e6;--naval-brass:#d8bd7a;--naval-line:#d3e4df36}
 .game-screen[data-game=navalDuel] .game-status,
 .game-screen[data-game=navalDuel] .game-header h2,
 .game-screen[data-game=navalDuel] .naval-heat,
 .game-screen[data-game=navalDuel] .game-warning{display:none}
 .game-screen[data-game=navalDuel] .game-header.game-header{inset:0 0 auto;padding:0;min-height:0;pointer-events:none}
 .game-screen[data-game=navalDuel] .game-header .game-pause,
-.game-screen[data-game=navalDuel] .game-header .sound-toggle{position:fixed;top:max(16px,env(safe-area-inset-top));left:auto;right:max(16px,env(safe-area-inset-right));width:48px;height:48px;min-width:48px;min-height:48px;padding:12px;border:1px solid #d9f3ee55;border-radius:50%;background:#123e55cc;color:#fff4d9;box-shadow:0 4px 16px #10384928;backdrop-filter:blur(6px);font-size:0;pointer-events:auto;margin:0}
+.game-screen[data-game=navalDuel] .game-header .sound-toggle{position:fixed;top:max(16px,env(safe-area-inset-top));left:auto;right:max(16px,env(safe-area-inset-right));width:48px;height:48px;min-width:48px;min-height:48px;padding:12px;border:1px solid var(--naval-line);border-top-color:#d8bd7a66;border-radius:12px;background:#092a3cdb;color:var(--naval-ivory);box-shadow:0 6px 18px #071d302b,inset 0 1px #ffffff09;backdrop-filter:blur(8px);font-size:0;pointer-events:auto;margin:0}
 .game-screen[data-game=navalDuel] .game-header .sound-toggle{right:calc(max(16px,env(safe-area-inset-right)) + 56px);padding:11px}
-.game-screen[data-game=navalDuel] .game-header .game-pause::before{width:13px;height:17px;border-left:4px solid currentColor;border-right:4px solid currentColor}
+.game-screen[data-game=navalDuel] .game-header .game-pause::before{width:12px;height:17px;border-left:3px solid currentColor;border-right:3px solid currentColor}
 .game-screen[data-game=navalDuel][data-paused=true] .game-header .game-pause::before{width:0;height:0;border-right:0;border-left:13px solid currentColor;border-top:8px solid transparent;border-bottom:8px solid transparent}
 .game-screen[data-game=navalDuel] .game-header .game-icon{width:24px;height:24px}
-.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot{right:max(22px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));width:88px;height:88px;min-width:88px;min-height:88px;font-size:0;gap:0;background:linear-gradient(145deg,#ffa477,#ff7554 65%,#ee634e);border:3px solid #ffe5a8;border-radius:50%;box-shadow:0 0 0 5px #123e55c9,0 7px 20px #10384940,inset 0 2px 0 #fff2ce80;color:#fff5dc}
-.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot .game-icon{width:40px;height:40px}
-.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot::after{content:'אש';position:absolute;font-size:10px;font-weight:700;color:#fff5dc;background:none;mask:none;inset:auto auto 10px}
+.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot{right:max(22px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));width:88px;height:88px;min-width:88px;min-height:88px;font-size:0;gap:0;background:radial-gradient(ellipse at 36% 20%,#f4ac86,#df775c 67%,#bb5849);border:2px solid #f1d7a3;border-radius:50%;box-shadow:0 0 0 5px #092a3cdb,0 0 0 6px #d8bd7a70,0 8px 24px #071d3040,inset 0 2px 0 #ffe9c15c;color:#fff2dc;transition:filter .15s,box-shadow .15s}
+.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot .game-icon{width:39px;height:39px;filter:drop-shadow(0 1px 0 #74332d60)}
+.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot::after{content:'אש';position:absolute;font-size:10px;font-weight:700;letter-spacing:.5px;color:#fff2dc;background:none;mask:none;inset:auto auto 10px}
 .game-screen[data-game=navalDuel] .game-controls.game-controls #shoot::before{content:none}
-.game-screen[data-game=navalDuel] .game-controls.game-controls[data-aiming=true] #shoot{box-shadow:0 0 0 5px #123e55c9,0 0 0 7px #78edbf,0 5px 22px #10384940}
-.game-screen[data-game=navalDuel] .naval-weapon-picker{position:absolute;right:128px;bottom:max(29px,env(safe-area-inset-bottom));width:82px;height:48px;min-height:48px;min-width:82px;display:flex;align-items:center;justify-content:center;gap:4px;padding:5px 7px;border:1px solid #d5f3e855;border-bottom:2px solid var(--naval-weapon,#ffcf79);border-radius:17px;background:#123e55d9;box-shadow:0 4px 15px #10384922;color:#fff6db;pointer-events:auto;direction:ltr;backdrop-filter:blur(6px)}
-.naval-picked-icon{display:flex}.naval-picked-icon .game-icon{width:27px;height:32px}.naval-picked-count{font-size:15px;font-weight:800}.naval-picker-arrow{font-size:15px;color:#b3d5dc;margin-left:2px}
-.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack{position:absolute;inset:auto 22px 126px auto;width:auto;display:flex;flex-direction:row;gap:6px;padding:9px;border:1px solid #d5f3e855;border-radius:18px;background:#123e55e8;backdrop-filter:blur(10px);box-shadow:0 6px 24px #10384940;pointer-events:auto;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .15s,transform .15s,visibility .15s}
+.game-screen[data-game=navalDuel] .game-controls.game-controls[data-aiming=true] #shoot{box-shadow:0 0 0 5px #092a3ce6,0 0 0 7px #a4ecd8,0 0 24px #86cfb841,inset 0 2px 0 #ffe9c15c;filter:brightness(1.08)}
+.game-screen[data-game=navalDuel] .naval-weapon-picker{position:absolute;right:128px;bottom:max(28px,env(safe-area-inset-bottom));width:128px;height:54px;min-height:54px;min-width:128px;display:flex;align-items:center;justify-content:center;gap:10px;padding:5px 10px;border:1px solid #d3e4df36;border-top-color:#d8bd7a66;border-bottom:2px solid var(--naval-weapon,#d8bd7a);border-radius:11px;background:#092a3ce0;box-shadow:0 5px 18px #071d302b,inset 0 1px #ffffff09;color:#f3f1e6;pointer-events:auto;direction:ltr;backdrop-filter:blur(8px);font-variant-numeric:tabular-nums}
+.naval-picked-icon{display:flex}.naval-picked-icon .game-icon{width:28px;height:36px}.naval-picked-copy{display:flex;flex-direction:column;align-items:flex-end;gap:0;min-width:34px}.naval-picked-name{font-size:10px;font-weight:500;color:#c5d4d6;line-height:14px;white-space:nowrap}.naval-picked-count{font-size:18px;line-height:21px;font-weight:700}.naval-picker-arrow{font-size:15px;color:#d8bd7a;transition:transform .15s}.naval-adventure-controls[data-weapon-menu=true] .naval-picker-arrow{transform:rotate(180deg)}
+.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack{position:absolute;inset:auto max(22px,env(safe-area-inset-right)) 126px auto;width:auto;max-width:calc(100vw - 44px);display:flex;flex-direction:row;flex-wrap:nowrap;gap:6px;padding:10px;border:1px solid #d3e4df36;border-top-color:#d8bd7a66;border-radius:13px;background:#092a3cee;backdrop-filter:blur(10px);box-shadow:0 8px 30px #071d304d;pointer-events:auto;opacity:0;visibility:hidden;transform:translateY(7px);transition:opacity .15s,transform .15s,visibility .15s}
 .game-screen[data-game=navalDuel] .naval-adventure-controls[data-weapon-menu=true] .ammo-rack{opacity:1;visibility:visible;transform:translateY(0)}
-.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack button{width:48px;height:53px;min-width:48px;min-height:53px;padding:3px;flex:none;display:flex;flex-direction:column;gap:0;border:1px solid #bfdfde40;border-bottom:2px solid var(--naval-weapon);border-radius:10px;background:#d7efeb12;color:#effbec;box-shadow:none}
-.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack button[aria-pressed=true]{background:#e1f4e826;box-shadow:inset 0 0 0 1px var(--naval-weapon)}
-.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack .game-icon{width:27px;height:29px}
-.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-copy{font-size:11px;line-height:15px;flex:none}
+.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack button{position:relative;width:62px;height:74px;min-width:62px;min-height:74px;padding:4px 3px;flex:none;display:flex;flex-direction:column;gap:0;border:1px solid #c5d4d62b;border-bottom:2px solid var(--naval-weapon);border-radius:7px;background:#d7efeb07;color:#f3f1e6;box-shadow:none;font-variant-numeric:tabular-nums}
+.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack button[aria-pressed=true]{background:#d8bd7a1f;border-top-color:#d8bd7a99;box-shadow:inset 0 0 0 1px #d8bd7a33}
+.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack .game-icon{width:29px;height:32px;order:0}
+.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-copy{font-size:14px;line-height:16px;flex:none;font-weight:700;order:1}
+.game-screen[data-game=navalDuel] .naval-ammo-name{font-size:9px;line-height:13px;font-weight:500;color:#b4cbd0;order:2;white-space:nowrap}
 .game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack button:disabled{opacity:.35;filter:grayscale(1);background:transparent}
 .game-screen[data-game=navalDuel] .naval-stick-zone{top:90px;bottom:0}
-.game-screen[data-game=navalDuel] .soccer-joystick{background:#e0f6ee15;border-color:#e6faf066;box-shadow:0 4px 20px #10384920}
-.game-screen[data-game=navalDuel] .soccer-knob{background:#def6ed80}
-@media(max-height:350px){.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot{bottom:15px;width:76px;height:76px;min-width:76px;min-height:76px}.game-screen[data-game=navalDuel] .naval-weapon-picker{right:115px;bottom:24px}.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack{bottom:108px}}
-@media(prefers-reduced-motion:reduce){.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack{transition:none}}
-.game-screen[data-game=navalDuel] .game-pause-sheet{background:#092c4155;backdrop-filter:blur(5px)}
-.game-screen[data-game=navalDuel] .game-pause-card{border:1px solid #a6dcd780;border-radius:24px;background:linear-gradient(145deg,#1b5269ed,#10374dec);color:#fff1cb;box-shadow:0 18px 60px #06243f66}
-.game-screen[data-game=navalDuel] .game-pause-actions button{background:#d9f3e612;border:1px solid #c3e5d866;color:#fff1cb;box-shadow:none;border-radius:16px}
-.game-screen[data-game=navalDuel] .game-pause-actions [data-action=game-resume]{background:linear-gradient(135deg,#ff9870,#ff7554);border-color:#ffdc9e;color:#fff5dc}
+.game-screen[data-game=navalDuel] .soccer-joystick{background:#092a3c36;border:1px solid #e3d2a588;box-shadow:0 0 0 6px #092a3c15,0 4px 20px #071d3020}
+.game-screen[data-game=navalDuel] .soccer-knob{background:#d4e4dfad;border:1px solid #e9e6cd66;box-shadow:0 3px 10px #071d3030}
+.game-screen[data-game=navalDuel] button:focus-visible{outline:2px solid #e7d4a7;outline-offset:4px}
+.game-screen[data-game=navalDuel] .game-pause-sheet{background:#061e3080;backdrop-filter:blur(8px)}
+.game-screen[data-game=navalDuel] .game-pause-card{border:1px solid #d3e4df36;border-top-color:#d8bd7a88;border-radius:16px;background:linear-gradient(145deg,#123d50f5,#08283cf5);color:#f3f1e6;box-shadow:0 20px 70px #05162780;padding:26px}
+.game-screen[data-game=navalDuel] .game-pause-actions button{background:#e3e9dd0b;border:1px solid #c5d4d640;color:#e6eadd;box-shadow:none;border-radius:9px;min-height:48px}
+.game-screen[data-game=navalDuel] .game-pause-actions [data-action=game-resume]{background:#d8bd7a;border-color:#ead9ad;color:#0b2c3d;font-weight:700}
+.game-screen[data-game=navalDuel] .soccer-rotate{background:radial-gradient(ellipse at 50% 30%,#1c4a5c,#061f32);color:#ead9ad}
+.game-screen[data-game=navalDuel] .soccer-rotate svg{filter:drop-shadow(0 6px 14px #0003);order:0}
+.game-screen[data-game=navalDuel] .soccer-rotate::after{content:'סובבו את המכשיר להפלגה';order:1;font-size:18px;line-height:1.5;font-weight:500;color:#e8e6d7}
+.game-screen[data-game=navalDuel] .soccer-rotate button{border:1px solid #d8bd7a66;background:#e3e9dd0b;border-radius:10px;color:#f3f1e6;order:2}
+/* Shipyard, briefing and result use the same materials before the game starts. */
+.modal[data-stage-map=navalDuel].modal,.modal[data-intro=navalDuel].modal,.modal[data-result=navalDuel].modal{background:radial-gradient(ellipse at 95% 0,#24546855,transparent 60%),linear-gradient(145deg,#12384b,#072438);color:#d9e4df;border:1px solid #b4cac72e;border-top-color:#d8bd7a77;border-radius:18px;box-shadow:0 24px 80px #04172b88;padding:26px 28px;scrollbar-color:#8ba9aa #0b2b3d}
+.modal[data-stage-map=navalDuel].modal h2,.modal[data-intro=navalDuel].modal h2,.modal[data-result=navalDuel].modal h2{font-size:27px;font-weight:750;letter-spacing:-.4px;color:#f3f1e6;margin-bottom:6px}
+.modal[data-stage-map=navalDuel].modal .modal-subtitle,.modal[data-intro=navalDuel].modal .modal-subtitle,.modal[data-result=navalDuel].modal .modal-subtitle{color:#a6bfc6;font-size:12px}
+.modal[data-stage-map=navalDuel].modal button,.modal[data-intro=navalDuel].modal button,.modal[data-result=navalDuel].modal button{border:1px solid #bed3ce38;border-radius:9px;background:#d7e4dc09;color:#e8eee4;box-shadow:none}
+.modal[data-stage-map=navalDuel].modal>p{font-size:12px;color:#a6bfc6;margin:8px 0}
+.naval-prep.naval-prep{padding:18px;margin:18px 0;background:#051e303d;border:1px solid #adc5c12e;border-radius:12px;color:#d9e4df}
+.naval-prep.naval-prep .naval-prep-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.naval-prep.naval-prep h3{font-size:16px;line-height:1.4;margin:0;color:#f0ead6;font-weight:600}
+.naval-prep.naval-prep .naval-resources{display:flex;gap:6px;font-size:12px;direction:ltr;font-variant-numeric:tabular-nums}
+.naval-resources span{padding:4px 8px;border:1px solid #d8bd7a2e;border-radius:5px;color:#dcc999;background:#d8bd7a08}
+.naval-prep.naval-prep .naval-upgrade-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.naval-prep.naval-prep .naval-upgrade-card{position:relative;min-width:0;display:flex;flex-direction:column;gap:8px;padding:13px 12px;background:linear-gradient(145deg,#b9d5d60b,#8bb0bd03);border:1px solid #aec8c428;border-radius:8px;overflow:hidden}
+.naval-prep.naval-prep .naval-upgrade-card::after{content:'';position:absolute;top:0;inset-inline:12px;height:1px;background:linear-gradient(90deg,transparent,#d8bd7a66,transparent)}
+.naval-upgrade-mark{width:34px;height:34px;color:#c8bc95;align-self:flex-start;margin-bottom:2px}
+.naval-prep.naval-prep .naval-upgrade-card strong{font-size:13px;color:#e8eee4;font-weight:650}
+.naval-prep.naval-prep .naval-upgrade-card small{font-size:10px;line-height:1.6;color:#a9c0c5;min-height:30px}
+.naval-prep.naval-prep .naval-upgrade-card .naval-upgrade-rank{display:flex;gap:4px;direction:ltr;margin:0;min-height:5px;line-height:0;letter-spacing:0}
+.naval-upgrade-rank i{height:4px;flex:1;border-radius:1px;background:#a7bdb91a;border:1px solid #a7bdb917}
+.naval-upgrade-rank i[data-earned=true]{background:#d8bd7a;border-color:#ead9ad88;box-shadow:0 0 5px #d8bd7a18}
+.naval-prep.naval-prep .naval-upgrade-card button{min-height:44px;padding:7px 4px;font-size:11px;margin-top:auto;background:#d8bd7a;color:#0b2c3d;border-color:#ead9ad;font-weight:700;border-radius:5px}
+.naval-prep.naval-prep .naval-upgrade-card button:disabled{opacity:.42;background:#b8c9c117;color:#c3d0ca;border-color:#adc5c130;filter:none}
+.naval-prep.naval-prep .naval-difficulty-wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:16px;margin-top:16px;border-top:1px solid #b9d2cc1a}
+.naval-difficulty-label{font-size:11px;color:#a6bfc6}
+.naval-prep.naval-prep .naval-difficulties{display:flex;gap:3px;justify-content:center;margin:0;padding:3px;border:1px solid #abc4bd2b;background:#041b2b33;border-radius:8px}
+.naval-prep.naval-prep .naval-difficulties button{min-height:42px;min-width:70px;border:1px solid transparent;border-radius:5px;padding:6px 16px;font-size:12px;color:#a6bfc6;background:transparent}
+.naval-prep.naval-prep .naval-difficulties [aria-pressed=true]{background:#d8bd7a1c;border-color:#d8bd7a66;color:#f0dfb7}
+.modal[data-stage-map=navalDuel].modal .stage-map{gap:8px;margin-top:16px}
+.modal[data-stage-map=navalDuel].modal .stage-map button{position:relative;min-height:84px;padding:12px 8px;background:#a3c8c20a;border:1px solid #abc4bd38;border-top-color:#d8bd7a66;color:#e5d5b1;font-size:15px;line-height:1.5;border-radius:7px}
+.modal[data-stage-map=navalDuel].modal .stage-map button:disabled{opacity:.34;background:#071d2c55;border-top-color:#abc4bd26;filter:none}
+.modal[data-stage-map=navalDuel].modal .stage-feature{font-size:10px;color:#aec4c8;line-height:1.5;margin-top:5px}
+.modal[data-intro=navalDuel].modal .game-help-lines{margin:20px 0;color:#b5cdd0;line-height:1.9}
+.modal[data-intro=navalDuel].modal .game-help-lines p{padding:12px 14px;border-inline-start:2px solid #d8bd7a66;background:#a3c8c208;border-radius:0 6px 6px 0;font-size:13px}
+.modal[data-intro=navalDuel].modal .primary-button,.modal[data-result=navalDuel].modal .primary-button{background:#d8bd7a;border-color:#ead9ad;color:#0b2c3d;font-weight:700}
+.modal[data-result=navalDuel].modal .game-result{gap:10px;margin:22px 0}
+.modal[data-result=navalDuel].modal .result-row{border:1px solid #aec8c428;border-radius:8px;background:#b9d5d60a;color:#a9c0c5;font-size:12px;padding:18px 10px}
+.modal[data-result=navalDuel].modal .result-row bdi{font-size:30px;color:#ece4c9;font-variant-numeric:tabular-nums}
+@media(max-width:650px){.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack{gap:5px;padding:8px}.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack button{width:52px;min-width:52px}}
+@media(max-height:400px){.modal[data-stage-map=navalDuel].modal,.modal[data-intro=navalDuel].modal,.modal[data-result=navalDuel].modal{padding:20px 24px}.naval-prep.naval-prep{padding:14px;margin:14px 0}.naval-prep.naval-prep .naval-upgrade-card{padding:10px}.naval-upgrade-mark{width:28px;height:28px}.naval-prep.naval-prep .naval-difficulty-wrap{padding-top:10px;margin-top:10px}}
+@media(max-width:520px){.naval-prep.naval-prep .naval-upgrade-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.naval-prep.naval-prep .naval-prep-heading{gap:8px}.naval-prep.naval-prep .naval-difficulty-wrap{align-items:stretch;flex-direction:column;gap:8px}.naval-prep.naval-prep .naval-difficulties button{flex:1;min-width:0;padding:6px 10px}.modal[data-stage-map=navalDuel].modal,.modal[data-intro=navalDuel].modal,.modal[data-result=navalDuel].modal{padding:22px 18px}}
+@media(max-height:350px){.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot{bottom:15px;width:76px;height:76px;min-width:76px;min-height:76px}.game-screen[data-game=navalDuel] .naval-weapon-picker{right:115px;bottom:24px;height:50px;min-height:50px}.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack{bottom:108px}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack,.game-screen[data-game=navalDuel] #shoot,.naval-picker-arrow{transition:none}}

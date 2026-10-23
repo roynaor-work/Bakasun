@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import { GLTFLoader } from '../vendor/GLTFLoader.js';
-import { GROUND, primitive, material } from './environment.mjs?v=island-art-20261022-3';
+import { GROUND, primitive, material } from './environment.mjs?v=island-ultra-20261023-1';
 
 const MODEL_URL=new URL('../assets/kid-full.glb',import.meta.url).href;
 const color=new T.Color();
