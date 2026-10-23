@@ -41,6 +41,22 @@
 .game-screen[data-game=tennis] .soccer-stick-zone:has(.soccer-joystick:not([hidden])) .tennis-stick-home{visibility:hidden}
 .game-screen[data-game=tennis] .left-handed .tennis-stick-home{left:auto;right:58px}
 
+/* Brief, game-owned coaching is readable while leaving the central rally clear. */
+.game-screen[data-game=tennis] .tennis-feedback{position:absolute;z-index:3;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(338px,calc(100% - 350px));box-sizing:border-box;display:grid;gap:2px;padding:7px 12px 8px;border:1px solid #f5efdc60;border-top:2px solid var(--tennis-brass);border-radius:5px;background:#173f36e8;box-shadow:0 4px 16px #102e2924;backdrop-filter:blur(5px);pointer-events:none;text-align:center;line-height:1.35;color:var(--tennis-cream)}
+.game-screen[data-game=tennis] .tennis-stage-label{font-size:10px;font-weight:500;color:#dfd7b9}
+.game-screen[data-game=tennis] .tennis-feedback-text{font-size:13px;font-weight:650}
+.game-screen[data-game=tennis] .tennis-feedback-detail{font-size:11px;color:#f5efdcce}
+.game-screen[data-game=tennis] .tennis-feedback-detail[hidden]{display:none}
+.game-screen[data-game=tennis] .tennis-feedback[data-mode=hit]{border-top-color:#cddd95}
+.game-screen[data-game=tennis] .tennis-feedback[data-mode=miss]{border-top-color:#e5a07f}
+.game-screen[data-game=tennis] .tennis-feedback[data-mode=incoming],.game-screen[data-game=tennis] .tennis-feedback[data-mode=prepare]{border-top-color:#ece7ad}
+.game-screen[data-game=tennis] .soccer-actions button{padding:6px}
+.game-screen.game-screen[data-game=tennis] .soccer-actions [data-game-control] .tennis-control-caption{display:block;font-size:10px!important;line-height:12px;font-weight:600;letter-spacing:0;white-space:nowrap}
+.game-screen[data-game=tennis] .soccer-actions #shoot.hit-ready{border-color:#fff4c9;box-shadow:0 0 0 3px #ece7ad60,0 5px 16px #482d2235}
+.game-screen[data-game=tennis] .soccer-actions .action-direction{position:absolute;inset:4px;border:1px solid #f5efdcaa;border-radius:inherit;transform:rotate(var(--aim-angle));pointer-events:none}
+.game-screen[data-game=tennis] .soccer-actions .action-direction::after{content:'';position:absolute;right:-5px;top:calc(50% - 4px);width:7px;height:7px;border-top:2px solid var(--tennis-cream);border-right:2px solid var(--tennis-cream);transform:rotate(45deg)}
+.game-screen[data-game=tennis][data-paused=true] .tennis-feedback,.game-screen[data-game=tennis][data-orientation-blocked=true] .tennis-feedback,.game-screen[data-game=tennis][data-starting=true] .tennis-feedback{visibility:hidden}
+
 /* Specificity keeps the later power-meter stylesheet in the tournament palette. */
 .game-screen[data-game=tennis] .game-stage .tennis-serve-meter{top:auto;left:auto;right:calc(max(24px,env(safe-area-inset-right)) + 184px);bottom:94px;height:104px;width:10px;z-index:3;border:2px solid var(--tennis-cream);border-radius:4px;box-shadow:0 3px 12px #102e294d}
 .game-screen[data-game=tennis]:has(.left-handed) .game-stage .tennis-serve-meter{right:auto;left:calc(max(16px,env(safe-area-inset-left)) + 184px)}

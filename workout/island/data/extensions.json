@@ -11,9 +11,18 @@
     "extensions/island-events.mjs",
     "extensions/activity-income.mjs",
     "extensions/soccer.mjs",
-    "extensions/tennis.mjs"
+    "extensions/tennis.mjs",
+    "extensions/racing.mjs"
   ],
   "records": {
+    "islandRacing": {
+      "id": "islandRacing",
+      "title": "minigame.islandRacing.title",
+      "featureFlag": "islandRacing",
+      "difficulty": "stage",
+      "helpId": "minigame.islandRacing.help",
+      "icon": "🏎️"
+    },
     "building": {
       "id": "flowerGarden",
       "title": "building.flowerGarden",

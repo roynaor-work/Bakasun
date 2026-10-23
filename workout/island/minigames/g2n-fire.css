@@ -1,6 +1,7 @@
 /* Water, pressure and ladder state use restrained instrument lighting. */
 .game-screen.fire-play #shoot>svg:not(.fire-ring){width:29px;height:32px;fill:#b6dce51a;stroke:#e0f0ec;stroke-width:1.55}
 .game-screen.fire-play #shoot.low-water .fire-ring[data-meter=water] circle:not(.fire-ring-track){stroke:#e0ac7b;animation:g2n-water-pulse 1.5s ease-in-out infinite}
+.game-screen.fire-play #shoot.effective{border-color:#a6dfe2;box-shadow:0 0 0 3px #a6d8e323,0 8px 24px #020a154d,inset 0 1px #e7ffff20}
 .game-screen.fire-play #pass{color:#dfc6a2}
 .game-screen.fire-play #fire-refill{color:#c3d4df}
 .game-screen.fire-play #pass.wind{color:#b4d5de}

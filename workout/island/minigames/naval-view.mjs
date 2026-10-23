@@ -1,12 +1,12 @@
-import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-ultra-20261023-1';
-import {createNavalImpacts} from './naval-impacts.mjs?v=island-ultra-20261023-1';
+import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-play-20261024-1';
+import {createNavalImpacts} from './naval-impacts.mjs?v=island-play-20261024-1';
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-ultra-20261023-1';
-import {createNavalEffects} from './g6d-effects.mjs?v=island-ultra-20261023-1';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-ultra-20261023-1';
-import {createNavalScenery} from './naval-scenery.mjs?v=island-ultra-20261023-1';
-import {createNavalEnvironment} from './naval-environment.mjs?v=island-ultra-20261023-1';
+import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-play-20261024-1';
+import {createNavalEffects} from './g6d-effects.mjs?v=island-play-20261024-1';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-play-20261024-1';
+import {createNavalScenery} from './naval-scenery.mjs?v=island-play-20261024-1';
+import {createNavalEnvironment} from './naval-environment.mjs?v=island-play-20261024-1';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */
@@ -125,7 +125,7 @@ export function createNavalView(ctx,model,adapters={}) {
   const onLost=event=>{event.preventDefault();failed=true;};canvas.addEventListener('webglcontextlost',onLost);
   function animateVessel(v,e,x,z,enemy){
     if(enemy)vesselHeading(v,x,z,model.time);else v.root.rotation.y=-model.playerShip.heading;
-    const sink=e.hp<=0?model.sinkProgress:0;v.root.position.set(x,Math.sin(model.time*1.6+(e.index||0))*.12-sink*4,z);v.root.rotation.z=Math.sin(model.time*1.9+x)*.035+sink*.3;
+    const sink=e.hp<=0?Math.min(1,(model.time-(e.sunkAt??model.time))/balance.sinkSeconds):0;v.root.position.set(x,Math.sin(model.time*1.6+(e.index||0))*.12-sink*4,z);v.root.rotation.z=Math.sin(model.time*1.9+x)*.035+sink*.3;
     const target=enemy?navalWorldPoint(model.playerShip.x,model.playerShip.z,balance):navalWorldPoint(model.aim.x,model.aim.z,balance);v.turret.rotation.y=Math.atan2(x-target.x,z-target.z)-v.root.rotation.y;v.barrel.rotation.x=model.ammoIndex===2?0:.35;v.barrel.position.z=-.85+e.recoil;
     v.flag.visible=false;v.flag.rotation.y=Math.sin(model.time*4)*.2;v.shield.visible=e.shield>0;v.smoke.visible=e.hp<e.maxHp;v.flame.visible=e.hp<e.maxHp;
     v.smoke.position.y=3+(model.time%2);v.smoke.scale.setScalar(.6+(model.time%2)*.5);v.flame.position.set(.95,e.hp<e.maxHp?2.6:.85,1.35);v.flame.quaternion.copy(v.root.quaternion).invert().multiply(camera.quaternion);v.flame.scale.set(.6+Math.sin(model.time*17)*.05,1.6+Math.sin(model.time*12)*.18,1);v.foam.visible=false;

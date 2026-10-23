@@ -29,11 +29,19 @@ test('G2g holding Rescue at a window awards existing score and water once, witho
  advance(m,r.descentSeconds+1,{rescue:true,x:r.x,y:r.y});assert.equal(r.descent,1);assert.equal(m.score,r.points);assert.equal(m.reserve,reserve+r.waterReward);assert.equal(events.filter(e=>e==='ladder').length,1);assert.equal(events.filter(e=>e==='rescue').length,1);
  assert.equal(make().rescue.rescued,false);
 });
-test('G2g aim, spray and pump cannot rescue; releasing or missing resets the continuous hold',()=>{
- const m=parkRescue(make()),r=m.rescue;advance(m,.3,{firing:true,x:r.x,y:r.y});assert.equal(r.progress,0);
- advance(m,.4,{rescue:true,x:r.x,y:r.y});assert.ok(r.progress>0);advance(m,.01,{});assert.equal(r.progress,0);
- advance(m,.5,{rescue:true,charge:true,x:r.x,y:r.y});assert.equal(r.progress,0);
- advance(m,r.seconds+.1,{rescue:true,x:350,y:470});assert.equal(r.rescued,false);
+test('G2g rescue forgives a short release and reticle placement but still requires a safe nearby window',()=>{
+ for(const action of [{},{firing:true},{charge:true},{rescue:true,charge:true}]){
+  const m=parkRescue(make()),r=m.rescue;advance(m,.3,{...action,x:r.x,y:r.y});assert.equal(r.progress,0);assert.equal(r.rescued,false);
+ }
+ const m=parkRescue(make()),r=m.rescue;advance(m,.5,{rescue:true,x:r.x,y:r.y});const held=r.progress;assert.ok(held>0&&held<r.seconds);
+ advance(m,.12);assert.equal(r.progress,held,'a brief finger release keeps the existing ladder progress');
+ advance(m,.3);assert.ok(r.progress>0&&r.progress<held,'a longer interruption first decays the progress rather than discarding it at once');
+ advance(m,1);assert.equal(r.progress,0);
+ advance(m,r.seconds+.1,{rescue:true,x:-10000,y:-10000});assert.equal(r.rescued,true,'a safe nearby rescue locks to the window independently of the reticle');
+ const unsafe=parkRescue(make()),u=unsafe.rescue;unsafe.flames[u.fireIndex].heat=config.fireRescue.rescue.safeHeat+.2;
+ advance(unsafe,u.seconds+.1,{rescue:true,x:u.x,y:u.y});assert.equal(u.progress,0);assert.equal(u.rescued,false);
+ const distant=make(),d=distant.rescue;distant.flames[d.fireIndex].heat=0;assert.ok(Math.hypot(distant.truck.x-d.world[0],distant.truck.z-d.world[2])>config.fireRescue.rescue.truckRadius);
+ advance(distant,d.seconds+.1,{rescue:true,x:d.x,y:d.y});assert.equal(d.progress,0);assert.equal(d.rescued,false);
 });
 test('G2g timeout hides the civilian in smoke, loses only its bonus, and cannot later award it',()=>{
  const balance=structuredClone(config.fireRescue),events=[];Object.assign(balance.levels[2],{growthPerSecond:0,spreadSeconds:0,eruptionSeconds:999});
@@ -50,7 +58,7 @@ test('G2g optional rescue remains available after extinguishing and finishing pr
   if(!m.result){assert.ok(m.firesOut);m.update(.02,{finish:true});}assert.equal(m.result.outcome,'win');assert.deepEqual(m.result.summary,{out:config.fireRescue.levels[2].flames,rescued:Number(rescueFirst),water:Math.floor(m.water)});
   const engine=createEngine(data,{storage:null});engine.state.minigameProgress.fireRescue.stage=3;let finish,disposed=0,result;
   const game=engine.registry.minigames.get('fireRescue');engine.registry.minigames.set('fireRescue',{...game,start:ctx=>{finish=ctx.finish;return {dispose(){disposed++;}};}});
-  engine.state.buildings.push({id:'fire-station-test',typeId:'fireStation',x:12,z:0,level:1});const money=engine.state.money;assert.equal(engine.startMinigame('fireRescue',{level:3,onFinish:r=>{result=r;}}).ok,true);assert.equal(finish(m.result).ok,true);assert.ok(result.stars>=1&&result.stars<=3);assert.equal(result.money,Math.floor(m.score/config.fireRescue.pointsPerCoin)+m.settings.winMoney);assert.equal(engine.state.money,money+result.money);assert.equal(disposed,1);assert.equal(finish(m.result).ok,false);assert.equal(CURRENT_VERSION,16);
+  engine.state.buildings.push({id:'fire-station-test',typeId:'fireStation',x:12,z:0,level:1});const money=engine.state.money;assert.equal(engine.startMinigame('fireRescue',{level:3,onFinish:r=>{result=r;}}).ok,true);assert.equal(finish(m.result).ok,true);assert.ok(result.stars>=1&&result.stars<=3);assert.equal(result.money,Math.floor(m.score/config.fireRescue.pointsPerCoin)+m.settings.winMoney);assert.equal(engine.state.money,money+result.money);assert.equal(disposed,1);assert.equal(finish(m.result).ok,false);assert.equal(CURRENT_VERSION,17);
  }
 });
 test('G2g all ten scene variants remain within triangle/draw budgets with fixed pools and finite vertices',()=>{
@@ -111,7 +119,7 @@ test('G2g unsupported WebGL preserves procedural model sprites and reports faile
  const {art,draws}=sprites();await loadOptionalArt(art,config.alienDefense,()=>false,{createRenderer(){throw Error('no WebGL');}});assert.equal(art.modelArt.failed,6);assert.equal(draws.length,0);
 });
 test('G2g release and new sounds are present; all runtime versioned imports use the same release',async()=>{
- assert.equal(DATA_VERSION,'island-ultra-20261023-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
+ assert.equal(DATA_VERSION,'island-play-20261024-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
  async function walk(url){for(const entry of await readdir(url,{withFileTypes:true})){if(['vendor','verification'].includes(entry.name))continue;const next=new URL(entry.name+(entry.isDirectory()?'/':''),url);if(entry.isDirectory())await walk(next);else if(/\.(mjs|html)$/.test(entry.name)){const source=await readFile(next,'utf8');for(const [,v]of source.matchAll(/(?:\.mjs|\.css)\?v=([^'"\s]+)/g))assert.equal(v,DATA_VERSION,next.pathname);}}}await walk(root);
 });
 

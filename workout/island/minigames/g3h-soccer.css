@@ -1,4 +1,4 @@
-@import url('./soccer-controls.css?v=island-ultra-20261023-1');
+@import url('./soccer-controls.css?v=island-play-20261024-1');
 /* Soccer broadcast layer; the shell continues to own pause and navigation. */
 .game-screen[data-game=soccer]{--soccer-navy:#101f2d;--soccer-ivory:#f3f2df;--soccer-teal:#78cfbd;--soccer-line:#cde2dc42;color:var(--soccer-ivory)}
 .game-screen[data-game=soccer] .game-header .game-pause{flex-direction:row;width:56px;height:56px;padding:0;gap:0;border:1px solid #d2e7df5c;border-radius:16px;background:#102331e8;color:var(--soccer-ivory);box-shadow:0 4px 18px #03111740,inset 0 1px 0 #ffffff14;backdrop-filter:none}
@@ -15,6 +15,11 @@
 .game-screen[data-game=soccer] .soccer-phase-banner{top:max(66px,calc(env(safe-area-inset-top) + 58px));left:max(14px,env(safe-area-inset-left));transform:none;width:auto;min-width:48px;min-height:40px;max-width:calc(100% - 100px);padding:5px 12px;border:1px solid var(--soccer-line);border-radius:5px;background:#132733ef;color:var(--soccer-ivory);box-shadow:0 3px 12px #03111733;font-size:23px;font-variant-numeric:tabular-nums}
 .game-screen[data-game=soccer] .soccer-edge-arrow{color:#f1edc8;text-shadow:0 2px 5px #08151d;font-size:28px}
 /* The pause card leaves the stadium visible and keeps every native shell action. */
+.game-screen[data-game=soccer] .soccer-fixture{position:absolute;top:max(13px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:3px;max-width:36%;padding:5px 10px;border-radius:5px;background:#10232ce8;font-size:12px;text-align:center;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.game-screen[data-game=soccer] .soccer-fixture[hidden],.game-screen[data-game=soccer] .soccer-action-feedback[hidden]{display:none}
+.game-screen[data-game=soccer] .soccer-objective{font-size:11px;color:#c3d4cf}
+.game-screen[data-game=soccer] .soccer-objective[data-complete=true]{color:#a5e9bd}
+.game-screen[data-game=soccer] .soccer-action-feedback{position:absolute;left:50%;top:74px;transform:translateX(-50%);padding:6px 14px;border:1px solid #d5e8d859;border-radius:18px;background:#132733e8;color:#f3f2df;font-size:15px;font-weight:700;pointer-events:none}
 .game-screen[data-game=soccer] .game-pause-sheet{padding:24px;background:linear-gradient(120deg,#08151de8,#0d2028b8);backdrop-filter:blur(5px)}
 .game-screen[data-game=soccer] .game-pause-card{width:min(398px,100%);padding:30px 24px;border:1px solid #bdd4cb4d;border-top:3px solid var(--soccer-teal);border-radius:12px;background:linear-gradient(145deg,#1a303b,#112430);color:var(--soccer-ivory);box-shadow:0 22px 65px #020d1566,inset 0 1px 0 #ffffff0a}
 .game-screen[data-game=soccer] .game-pause-actions{gap:12px;align-items:center}
@@ -31,6 +36,8 @@
 .game-screen[data-game=soccer] .shell-countdown i{width:20px;height:20px;border:2px solid #d5e8d8;box-shadow:0 0 0 6px #87c9b90d}
 .game-screen[data-game=soccer] .shell-countdown i.done{background:#8bcdb9;border-color:#8bcdb9}
 @media(max-height:380px) and (orientation:landscape){
+ .game-screen[data-game=soccer] .soccer-fixture{top:9px;font-size:11px;padding:3px 8px}
+ .game-screen[data-game=soccer] .soccer-action-feedback{top:65px;font-size:13px}
  .game-screen[data-game=soccer] .soccer-scoreboard{top:max(9px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));height:38px}
  .game-screen[data-game=soccer] .soccer-score{font-size:23px}
  .game-screen[data-game=soccer] .soccer-phase-banner{top:57px;min-height:36px;font-size:21px}

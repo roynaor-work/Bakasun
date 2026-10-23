@@ -1,3 +1,4 @@
+import {expectedGameField,expectedGameContent} from './helpers/legacy-game-content.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -55,10 +56,10 @@ test('L1 ages 4–5 need just one five-question round; incomplete/repeated submi
 test('L1 fresh retries teach an answer, cancelled rounds retain level but no daily credit, recent questions reload',()=>{
  const f=fixture(),e=f.engine;e.startLearning('language');const q=e.learningRound().question;assert.equal(e.answerLearning('__wrong__').answer,null);const reveal=e.answerLearning('__wrong__');assert.equal(reveal.answer,q.answer);assert.equal(e.answerLearning(q.answer).ok,false);e.cancelLearning();const reloaded=createEngine(data,{storage:f.storage});assert.deepEqual(reloaded.state.learning,e.state.learning);assert.ok(validLearning(reloaded.state.learning));assert.ok(reloaded.state.learning.stations.language.recent.includes(q.id));
 });
-test('L1 authentic v15 fixture migrates additively to v16 and round-trips without losing any old field',async()=>{
+test('L1 authentic v15 fixture migrates additively to v17 and round-trips without losing any old field',async()=>{
  const old=JSON.parse(await readFile(new URL('./fixtures/save-v15.json',import.meta.url),'utf8')),before=structuredClone(old),f=fixture(),e=f.engine;
- assert.equal(old.version,15);assert.equal(CURRENT_VERSION,16);const result=migrateSave(old,data,e.registry);assert.ok(result.ok);assert.deepEqual(old,before);assert.deepEqual(result.state,{...old,version:16,learning:initialLearning(old.createdAt||old.updatedAt)});assert.ok(validateSave(result.state,data,e.registry).ok);
- f.storage.setItem(STORAGE_KEY,JSON.stringify(old));const reload=createEngine(data,{storage:f.storage});assert.equal(reload.state.version,16);assert.ok(reload.save().ok);const again=createEngine(data,{storage:f.storage});assert.deepEqual(again.state,reload.state);assert.ok(again.importJSON(old).ok);
+ assert.equal(old.version,15);assert.equal(CURRENT_VERSION,17);const result=migrateSave(old,data,e.registry);assert.ok(result.ok);assert.deepEqual(old,before);assert.deepEqual(result.state,expectedGameContent({...old,version:17,learning:initialLearning(old.createdAt||old.updatedAt)},data));assert.ok(validateSave(result.state,data,e.registry).ok);
+ f.storage.setItem(STORAGE_KEY,JSON.stringify(old));const reload=createEngine(data,{storage:f.storage});assert.equal(reload.state.version,17);assert.ok(reload.save().ok);const again=createEngine(data,{storage:f.storage});assert.deepEqual(again.state,reload.state);assert.ok(again.importJSON(old).ok);
  for(const change of [l=>l.age=11,l=>l.stations.math.level=8,l=>l.required='true',l=>l.roundsToday=-1,l=>l.missionDate='2026-02-30']){const s=structuredClone(result.state);change(s.learning);assert.equal(validateSave(s,data,e.registry).ok,false);}
 });
 test('L1 learning buildings have road access, costs, one-instance limits and opening order',()=>{

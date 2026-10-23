@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import * as SkeletonUtils from './skeleton-utils.mjs?v=island-ultra-20261023-1';
-import {localModelURL,modelSpec,disposeObject} from '../minigames/model-art.mjs?v=island-ultra-20261023-1';
+import * as SkeletonUtils from './skeleton-utils.mjs?v=island-play-20261024-1';
+import {localModelURL,modelSpec,disposeObject} from '../minigames/model-art.mjs?v=island-play-20261024-1';
 
 /** Local GLBs share geometry, materials and clips across instances. Clones get
  * independent skeletons; callers own their mixers and skeleton disposal. The

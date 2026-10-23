@@ -7,8 +7,8 @@ import {G6D_AUDIO_FILES,createNavalAudio} from '../workout/island/minigames/g6d-
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,b=config.navalDuel;
 const make=(level=5,seed=0)=>createNavalModel({config,balance:b,level,seed,random:seededRandom(seed)});
 const advance=(m,t,input={})=>{for(let i=0;i<Math.ceil(t/.02);i++)m.update(.02,input);};
-test('G6d joystick release aligns the nearest broadside in .6s and restores enemy view in 1s',()=>{
- for(const direction of [-1,1]){const m=make();advance(m,1,{moveX:direction,moveZ:-.6});const released={...m.playerShip};advance(m,.3);assert.notEqual(m.playerShip.heading,released.heading);assert.deepEqual({x:m.playerShip.x,z:m.playerShip.z},{x:released.x,z:released.z});advance(m,.3);const e=m.enemyShip,dx=e.x-m.playerShip.x,dz=e.z-m.playerShip.z;assert.ok(Math.abs((Math.cos(m.playerShip.heading)*dx+Math.sin(m.playerShip.heading)*dz)/Math.hypot(dx,dz))<.02);advance(m,.4);const q=m.screenPoint(e.x,e.z);assert.ok(q.depth>0&&q.x>0&&q.x<config.width);const bearing=Math.atan2(dz,dx);assert.ok(Math.abs(m.camera.heading-bearing)<.1);}
+test('G6d joystick release brakes promptly without turning the hull and keeps the fleet visible',()=>{
+ for(const direction of [-1,1]){const m=make();advance(m,1,{moveX:direction,moveZ:-.6});const released={...m.playerShip};advance(m,.3);assert.equal(m.playerShip.heading,released.heading);assert.ok(Math.hypot(m.playerShip.x-released.x,m.playerShip.z-released.z)<released.speed*.13);advance(m,.7);assert.ok(m.playerShip.speed<.03);const e=m.enemyShip,q=m.screenPoint(e.x,e.z);assert.ok(q.depth>0&&q.x>0&&q.x<config.width);}
 });
 test('G6d broadside takes the shortest turn across angle wrap',()=>{for(const heading of [-6,-3.13,0,3.13,6])assert.ok(Math.abs(navalBroadsideHeading({x:0,z:0,heading},{x:200,z:10})-heading)<=Math.PI/2+.001);});
 test('G6d wind changes physical landing; a new salvo changes strength and direction',()=>{
@@ -23,7 +23,7 @@ test('G6d overlapping shells retain their wind while a later torpedo has no air 
 });
 test('G6d tunings match requested reductions and cached naval modules use current version',async()=>{
  assert.equal(b.aim.assist,.1);assert.equal(b.aim.autoLead,.3);assert.equal(b.aim.previewFraction,1/3);assert.ok(b.aim.wind.driftScale<.3);assert.equal(b.aim.sway.yaw,.027);assert.ok(Math.abs(b.aim.sway.elevation-.975)<1e-8);
- const source=await readFile(new URL('../workout/island/minigames/naval.mjs',import.meta.url),'utf8');assert.match(source,/g6d-audio\.mjs\?v=island-ultra-20261023-1/);assert.match(source,/g6d/);assert.ok(b.render.maxTriangles<=90000&&b.render.maxDrawCalls<=70);
+ const source=await readFile(new URL('../workout/island/minigames/naval.mjs',import.meta.url),'utf8');assert.match(source,/g6d-audio\.mjs\?v=island-play-20261024-1/);assert.match(source,/g6d/);assert.ok(b.render.maxTriangles<=90000&&b.render.maxDrawCalls<=70);
 });
 test('G6d all eight local CC0 clips fit in 400KB and no-audio platforms are safe',async()=>{
  const root=new URL('../workout/island/assets/audio/g6d/',import.meta.url);let bytes=0;for(const name of G6D_AUDIO_FILES){const path=new URL(name+'.ogg',root),data=await readFile(path);assert.equal(data.subarray(0,4).toString(),'OggS');bytes+=(await stat(path)).size;}assert.ok(bytes<=400000,bytes);assert.match(await readFile(new URL('LICENSE.txt',root),'utf8'),/CC0 1.0 Universal/);const a=createNavalAudio({AudioContext:null,storage:{getItem:()=> 'off'}});a.unlock();a.play('cannon');a.update(32);assert.equal(a.metrics().muted,true);a.setPaused(true);a.dispose();assert.equal(a.metrics().disposed,true);

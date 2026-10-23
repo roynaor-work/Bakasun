@@ -1,4 +1,4 @@
-import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-ultra-20261023-1';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-play-20261024-1';
 /** Pure presentation decisions; the simulation never imports this module. */
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 export function slideWeight(player,config){
@@ -20,6 +20,7 @@ export function passReceiver(state,config){
   return state.charging&&state.chargeKind==='pass'&&state.ball.owner===state.controlled?passDestination(state,config,state.charge/config.passing.chargeSeconds).target:null;
 }
 export function soccerShotIcon(state,config){
+ if(state.role==='keeper'&&state.ball.owner!==state.controlled)return 'slide';
  return canHead(state.players[state.controlled],state.ball,config)?'header':state.mode==='defense'?'slide':'shoot';
 }
 /** Preview and flight share the exact same endpoint, height and parabola. */

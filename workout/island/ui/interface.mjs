@@ -1,6 +1,6 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-ultra-20261023-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-ultra-20261023-1';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-ultra-20261023-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-play-20261024-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-play-20261024-1';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-play-20261024-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);

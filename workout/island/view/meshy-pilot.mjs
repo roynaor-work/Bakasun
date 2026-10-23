@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from './local-models.mjs?v=island-ultra-20261023-1';
-import {GROUND} from './environment.mjs?v=island-ultra-20261023-1';
+import {LocalModels} from './local-models.mjs?v=island-play-20261024-1';
+import {GROUND} from './environment.mjs?v=island-play-20261024-1';
 
 /** One cosmetic walker. Each instance owns its mixer and cloned skeleton;
  * geometry, materials and clips remain owned by LocalModels. */

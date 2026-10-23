@@ -32,7 +32,7 @@ test('G6c Space release cannot be counted again as a keyboard compatibility clic
 });
 test('G6e the shared controller cannot overwrite the bearing selected on the water',t=>{
  const h=navalInputHarness(t),point={clientX:620,clientY:215};h.canvas.emit('pointerdown',point);h.frame({yaw:.8});const selected=h.model.yaw;h.win.emit('pointerup',point);h.frame({yaw:.8});h.frame({yaw:.8});near(h.model.yaw,selected);assert.notEqual(selected,.8);
- h.canvas.emit('pointerdown',point);h.win.emit('pointermove',{clientX:700,clientY:0});h.frame({yaw:.8});const horizon=h.model.yaw;assert.notEqual(horizon,selected);h.win.emit('pointerup',{clientX:700,clientY:0});h.frame({yaw:.8});h.frame({yaw:.8});near(h.model.yaw,horizon);
+ h.canvas.emit('pointerdown',point);h.win.emit('pointermove',{clientX:700,clientY:-2000});h.frame({yaw:.8});const horizon=h.model.yaw;near(horizon,selected);h.win.emit('pointerup',{clientX:700,clientY:-2000});h.frame({yaw:.8});h.frame({yaw:.8});near(h.model.yaw,horizon);
 });
 test('G6c camera is behind and above the bow at every ship heading',()=>{
  for(let i=0;i<24;i++){const heading=i*Math.PI/12,ship={x:100,z:12,heading},aim={x:300,z:0},c=navalCameraPose(ship,aim,false,b),p=navalWorldPoint(ship.x,ship.z,b),forward={x:Math.sin(heading),z:-Math.cos(heading)};
@@ -41,10 +41,10 @@ test('G6c camera is behind and above the bow at every ship heading',()=>{
 });
 test('G6c follow turns smoothly through the shortest wrap and follows simulated movement',()=>{
  const ship={x:60,z:0,heading:Math.PI-.02},aim={x:300,z:0},before=navalCameraPose(ship,aim,false,b);ship.heading=-Math.PI+.02;const after=navalCameraPose(ship,aim,false,b,before,.02);assert.ok(after.heading>before.heading&&after.heading-before.heading<.04);
- const m=make();advance(m,1,{moveX:.5,moveZ:-.5});assert.ok(m.camera.heading>0&&m.camera.heading<m.playerShip.heading);assert.notEqual(m.camera.position.z,before.position.z);
+ const m=make(),position={...m.playerShip};advance(m,1,{moveX:.5,moveZ:-.5});assert.ok(Math.hypot(m.playerShip.x-position.x,m.playerShip.z-position.z)>1);assert.ok(Math.abs(m.camera.heading-m.playerShip.heading)>.05);for(const e of [m.playerShip,...m.enemies.filter(e=>e.active)]){const q=m.screenPoint(e.x,e.z);assert.ok(q.depth>0&&q.x>0&&q.x<config.width&&q.y>0&&q.y<config.height);}
 });
-test('G6c aiming narrows the field, approaches the bow and returns after release',()=>{
- const m=make(),before=m.camera;advance(m,.8,{aimHeld:true,autoAim:true});const aimed=m.camera;assert.ok(m.aiming);assert.equal(m.fired,0);assert.ok(aimed.fov<before.fov-15);assert.ok(aimed.position.y<before.position.y);assert.ok(aimed.position.z<before.position.z-8);advance(m,1);assert.equal(m.aiming,false);assert.ok(m.camera.fov>aimed.fov+15);
+test('G6c aiming gives a modest lens change while retaining the player and targets',()=>{
+ const m=make(),before=m.camera;advance(m,.8,{aimHeld:true,autoAim:true});const aimed=m.camera;assert.ok(m.aiming);assert.equal(m.fired,0);assert.ok(aimed.fov<before.fov&&aimed.fov>=before.fov-3);for(const e of [m.playerShip,...m.enemies.filter(e=>e.active)]){const q=m.screenPoint(e.x,e.z);assert.ok(q.depth>0&&q.x>0&&q.x<config.width&&q.y>0&&q.y<config.height);}advance(m,1);assert.equal(m.aiming,false);assert.ok(m.camera.fov>aimed.fov);
 });
 test('G6c screen/water mapping roundtrips at zoom, normal and turned views',()=>{
  for(const heading of [0,.5,-.6])for(const aiming of [true,false]){const ship={x:90,z:20,heading},c=navalCameraPose(ship,{x:300,z:0},aiming,b);for(const size of [[844,390],[740,360],[1440,1000]]){const point={x:260,z:30},q=projectNavalPoint(navalWorldPoint(point.x,point.z,b),c,...size),actual=navalWaterAt(q.x,q.y,c,...size,b);near(actual.x,point.x);near(actual.z,point.z);}}
@@ -60,7 +60,7 @@ test('G6c a touching torpedo contacts the hull before its distant aim point',()=
  const nearBalance={...b,enemyX:140},m=createNavalModel({config,balance:nearBalance,level:1,seed:0,random:seededRandom(0)});m.playerShip.x=140-b.aim.hullLength/2;const hp=m.enemyShip.hp;m.update(.02,{ammoIndex:2,targetX:420,targetZ:0,firing:true});advance(m,.1);assert.ok(m.enemyShip.hp<hp);assert.ok(m.ball.age<m.ball.duration||m.blast.hit);
 });
 test('G6c submerged hull rejects quick shells while guided missile selects it',()=>{
- const m=make(1,3);advance(m,b.combat.submarineSurface+.2);const hp=m.enemyShip.hp;m.update(.02,{autoAim:true,firing:true});advance(m,1);assert.equal(m.enemyShip.hp,hp);m.update(.02,{ammoIndex:1,autoAim:true,firing:true});advance(m,1);assert.ok(m.enemyShip.hp<hp);
+ const m=make(11,0),sub=m.enemies.find(e=>e.active&&b.shipTypes[e.kind].submarine);assert.ok(sub);advance(m,b.combat.submarineSurface+.2);const hp=sub.hp;m.update(.02,{targetX:sub.x,targetZ:sub.z,firing:true});advance(m,1);assert.equal(sub.hp,hp);m.update(.02,{ammoIndex:1});m.beginAim(sub.index);m.update(.02,{fireRelease:true});advance(m,1);assert.ok(sub.hp<hp);
 });
 test('G6c calibration is finite, local, monotonic and under the requested render budget',()=>{
  assert.equal(b.aim.difficulty.length,10);for(let i=0;i<10;i++){const d=b.aim.difficulty[i];assert.ok(d.assist>0&&d.assist<=1&&d.radius>0);if(i)assert.ok(d.assist<b.aim.difficulty[i-1].assist&&d.radius<b.aim.difficulty[i-1].radius);}

@@ -25,7 +25,7 @@ test('G2c v4 → v5 adds only equipment and leaves input, city, stars, event and
   const f=fixture(),old=JSON.parse(f.engine.exportJSON());old.version=4;delete old.minigameEquipment;
   old.money=321;old.minigameLevels.alienDefense=3;recordStageWin(old,data,'alienDefense',1,3);
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:42,phase:'playing',warningUntil:0,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,16);assert.equal(r.state.version,16);assert.equal(STORAGE_KEY,'island.v1');
+  const before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(r.ok,true);assert.equal(CURRENT_VERSION,17);assert.equal(r.state.version,17);assert.equal(STORAGE_KEY,'island.v1');
   for(const key of Object.keys(old).filter(k=>k!=='version'))assert.deepEqual(r.state[key],old[key],key);
   assert.deepEqual(old,before);for(const tracks of Object.values(r.state.minigameEquipment))assert.ok(Object.values(tracks).every(n=>n===0));
   f.storage.setItem(STORAGE_KEY,JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.equal(loaded.state.money,321);assert.equal(loaded.state.minigameProgress.alienDefense.stars[0],3);assert.equal(f.values.get('other-app'),'keep');
@@ -66,13 +66,29 @@ test('G2c five aliens have distinct speed/health and real zigzag, circle and div
   assert.ok(config.alienDefense.enemyTypes[1].hp>config.alienDefense.enemyTypes[0].hp);assert.ok(config.alienDefense.enemyTypes[1].speed<config.alienDefense.enemyTypes[0].speed);
 });
 test('G2c splitter children are bounded, weaker, and do not inflate island rewards',()=>{
-  const m=make('alienDefense',8);m.update(.001,{});const splitter=m.aliens.find(a=>a.kind===3),before=m.aliens.length,maxHp=splitter.maxHp;
-  shotAt(m,splitter,1);m.update(.001,{});assert.equal(m.aliens.length,before+1);const children=m.aliens.filter(a=>a.child);assert.equal(children.length,2);assert.ok(children.every(a=>a.reward===0&&a.maxHp<maxHp));assert.equal(m.score,m.settings.points);
+  // The first splitter sector has no shield; later shield absorption is a separate contract.
+  const m=make('alienDefense',6);advance(m,2);const splitter=m.aliens.find(a=>a.kind===3),before=m.aliens.length,maxHp=splitter.maxHp,parentId=splitter.id;
+  assert.equal(splitter.shield,0);shotAt(m,splitter,1);m.update(.00001,{});assert.equal(m.aliens.length,before+1);assert.ok(m.aliens.every(a=>a.id!==parentId));
+  const children=m.aliens.filter(a=>a.child);assert.equal(children.length,2);assert.ok(children.every(a=>a.reward===0&&a.maxHp<maxHp));assert.ok(Math.hypot(children[0].x-children[1].x,children[0].y-children[1].y)>=children[0].radius+children[1].radius);assert.equal(m.score,m.settings.points);
+  const score=m.score;for(const child of children){shotAt(m,child,1);m.update(.00001,{});}assert.equal(m.aliens.filter(a=>a.child).length,0);assert.equal(m.score,score,'children neither split again nor add island score');
 });
 test('G2c carriers launch a finite budget of mini-ships, and bosses arrive at the final wave',()=>{
-  const m=make('alienDefense',10),carrier=m.aliens.find(a=>a.kind===4);carrier.launchTime=.01;m.update(.02,{});assert.ok(m.aliens.some(a=>a.child));
-  const born=m.aliens.filter(a=>a.child).length;for(const a of m.aliens)if(a.kind===4)a.launchTime=0;m.update(.02,{});assert.ok(m.aliens.filter(a=>a.child).length<=m.settings.spawnBudget);assert.ok(born>0);
-  const boss=make('alienDefense',10,{equipment:{damage:1.8,rate:1.5,weapon:2,shield:3},permanentUpgrades:{damage:3,rapid:3,laser:3,wing:3,shield:3}}),memory={};for(let i=0;i<20000&&boss.wave<boss.settings.waves&&!boss.result;i++)boss.update(.04,pilotInput('alienDefense',boss,config.alienDefense,memory));assert.equal(boss.wave,boss.settings.waves);assert.equal(boss.aliens.filter(a=>a.boss).length,1);
+  const m=make('alienDefense',10),carriers=m.aliens.filter(a=>a.kind===4);for(const a of carriers)a.launchTime=.001;
+  m.update(.02,{});assert.ok(carriers.every(a=>a.entry>0));assert.equal(m.aliens.filter(a=>a.child).length,0,'carriers cannot launch during entry');
+  advance(m,config.alienDefense.formation.entrySeconds+.02);const born=m.aliens.filter(a=>a.child).length;assert.equal(born,m.settings.spawnBudget);assert.ok(born>0);
+  for(let i=0;i<4;i++){for(const a of carriers)a.launchTime=0;m.update(.02,{});}assert.equal(m.aliens.filter(a=>a.child).length,born);assert.equal(carriers.reduce((sum,a)=>sum+a.launched,0),born);assert.ok(carriers.every(a=>a.launched<=config.alienDefense.enemyTypes[4].launchLimit));
+  const boss=make('alienDefense',10,{completion:'waves',roundChoices:false,equipment:{damage:1.8,rate:1.5,weapon:2,shield:3},permanentUpgrades:{damage:3,rapid:3,laser:3,wing:3,shield:3}}),memory={};
+  for(let i=0;i<20000&&boss.wave<boss.settings.waves&&!boss.result;i++){assert.ok(boss.aliens.every(a=>!a.boss));boss.update(.04,pilotInput('alienDefense',boss,config.alienDefense,memory));}assert.equal(boss.wave,boss.settings.waves);assert.equal(boss.aliens.filter(a=>a.boss).length,1);
+});
+test('G2c a full alien pool preserves carrier launch budgets and retries when real damage frees a slot',()=>{
+  const balance=structuredClone(config.alienDefense);Object.assign(balance.levels[6],{rows:6,columns:8,waves:1,enemyRoster:[4],formations:['rows'],spawnBudget:2,seconds:600});balance.stageBehaviors[6].shoots=false;
+  const m=make('alienDefense',7,{balance,equipment:{shield:20},roundChoices:false,completion:'waves'}),limit=balance.enemyTypes[4].launchLimit;
+  assert.equal(m.aliens.length,balance.maxAliens);for(const a of m.aliens)a.launchTime=.001;advance(m,balance.formation.entrySeconds+.1);
+  assert.equal(m.aliens.length,balance.maxAliens);assert.ok(m.aliens.every(a=>!a.child&&a.entry===0&&a.launched===0),'failed pool allocations consume neither launch allowance nor wave budget');
+  const freeSlot=()=>{const victim=m.aliens.find(a=>!a.child&&a.launched===0),id=victim.id;shotAt(m,victim,1);m.update(.00001,{});assert.ok(m.aliens.every(a=>a.id!==id));assert.equal(m.aliens.length,balance.maxAliens-1);};
+  freeSlot();m.update(.02,{});assert.equal(m.aliens.length,balance.maxAliens);assert.equal(m.aliens.filter(a=>a.child).length,1);const mother=m.aliens.find(a=>!a.child&&a.launched===1);assert.ok(mother);
+  for(const a of m.aliens)if(!a.child)a.launchTime=0;freeSlot();m.update(.02,{});assert.equal(m.aliens.filter(a=>a.child).length,m.settings.spawnBudget);assert.equal(mother.launched,limit);
+  freeSlot();for(let i=0;i<4;i++){for(const a of m.aliens)if(!a.child)a.launchTime=0;m.update(.02,{});}assert.equal(m.aliens.length,balance.maxAliens-1);assert.equal(m.aliens.filter(a=>a.child).length,2);assert.equal(m.aliens.filter(a=>!a.child).reduce((sum,a)=>sum+a.launched,0),2);assert.ok(m.aliens.every(a=>a.child||a.launched<=limit));
 });
 for(let kind=0;kind<4;kind++)test(`G2c temporary ${config.alienDefense.pickups.kinds[kind]} collects, changes play and expires`,()=>{
   const m=make('alienDefense',1);m.pickups.push({x:m.player.x,y:m.player.y,vx:0,vy:0,kind});m.update(.001,{});if(kind===0){assert.equal(m.spreadTime,config.alienDefense.spread.seconds);assert.equal(m.spreadCooldown,config.alienDefense.spread.seconds+config.alienDefense.spread.cooldownSeconds);}else{assert.equal(m.powerup,kind);assert.equal(m.powerTime,config.alienDefense.pickups.seconds);}
@@ -90,10 +106,10 @@ test('G2c straight nova preserves distant enemies, shows a local light wave and 
   advance(m,config.alienDefense.nova.seconds+.02);m.update(.001,{nova:true});assert.equal(m.novaCharges,0);advance(m,2);assert.equal(m.nova.life,0);m.update(.001,{nova:true});assert.equal(m.novaCharges,0);
 });
 test('G2c permanent weapon, damage and rate affect actual projectiles rather than just labels',()=>{
-  const base=make('alienDefense'),strong=make('alienDefense',1,{equipment:{weapon:2,damage:1.8,rate:1.5}});
-  base.update(.02,{firing:true});strong.update(.02,{firing:true});assert.equal(strong.shots.length,1);assert.equal(strong.shots.filter(s=>s.vx!==0).length,0);assert.equal(strong.shots[0].kind,1);
+  const base=make('alienDefense'),strong=make('alienDefense',1,{equipment:{weapon:2,damage:1.8,rate:1.5}}),sameWeapon=make('alienDefense',1,{equipment:{weapon:2,damage:1.8,rate:1}});
+  for(const m of [base,strong,sameWeapon])m.update(.02,{firing:true});assert.equal(base.shots.length,1);assert.equal(strong.shots.length,3);assert.equal(strong.shots.filter(s=>s.wing).length,2);assert.equal(strong.shots.filter(s=>s.vx!==0).length,0);assert.ok(strong.shots.every(s=>s.kind===1));assert.equal(strong.spreadTime,0);
   const a=strong.aliens[0];a.hp=2;shotAt(strong,a,2);strong.update(.001,{});assert.ok(a.hp<1);
-  advance(base,.6,{firing:true});advance(strong,.6,{firing:true});assert.ok(strong.shots.length>base.shots.length);
+  for(const m of [base,strong,sameWeapon])advance(m,.6,{firing:true});assert.ok(strong.shots.length>base.shots.length);assert.ok(strong.snapshot().fired>sameWeapon.snapshot().fired,'rate comparison keeps laser and wing equipment identical');
 });
 test('G2c fires occupy homes, roof, tree, car and warehouse; high stages add resistant and spreading fire',()=>{
   const m=make('fireRescue',10);assert.equal(new Set(m.flames.map(f=>f.kind)).size,5);assert.equal(new Set(m.flames.map(f=>f.type)).size,3);assert.equal(make('fireRescue').settings.fireKinds,1);
@@ -130,7 +146,7 @@ test('G2c shields absorb real hits, upgraded hull survives longer, and bosses ha
 });
 for(const id of Object.keys(models))for(const level of [1,10])test(`G2c ${id} stage ${level} remains winnable, repeatable, and settles fair bounded rewards`,()=>{
   const run=()=>{const m=make(id,level,{power:level===1?1:1.45}),memory={};for(let i=0;i<40000&&!m.result;i++)m.update(.04,pilotInput(id,m,config[id],memory));return m;};
-  const m=run();assert.equal(m.result?.outcome,level===10&&id!=='navalDuel'?'lose':'win');assert.deepEqual(m.snapshot(),run().snapshot());const f=fixture(),r=f.engine.registry.minigames.get(id).onResult(m.result,{engine:f.engine,level,config});assert.ok(r);assert.ok(m.result.outcome==='win'?r.money>=config[id].levels[level-1].winMoney:r.money===Math.floor(Math.min(m.result.score,config[id].levels[level-1].rewardScoreLimit??Infinity)/config[id].pointsPerCoin));assert.ok(m.result.outcome==='win'?r.stars>=1&&r.stars<=3:r.stars===0);
+  const m=run();assert.equal(m.result?.outcome,level===10&&id==='fireRescue'?'lose':'win');assert.deepEqual(m.snapshot(),run().snapshot());const f=fixture(),r=f.engine.registry.minigames.get(id).onResult(m.result,{engine:f.engine,level,config});assert.ok(r);assert.ok(m.result.outcome==='win'?r.money>=config[id].levels[level-1].winMoney:r.money===Math.floor(Math.min(m.result.score,config[id].levels[level-1].rewardScoreLimit??Infinity)/config[id].pointsPerCoin));assert.ok(m.result.outcome==='win'?r.stars>=1&&r.stars<=3:r.stars===0);
 });
 
 test('G2c a piercing beam hits two spaced enemies once each along its flight',()=>{
@@ -147,7 +163,7 @@ test('G2c stubborn fire resists water and spreading fire grows faster at equal s
 });
 test('G2c depleted selected ammunition does not fire or silently switch, and enemy fire follows its own timer',()=>{
   const b=config.navalDuel,m=make('navalDuel',10,{equipment:{ammo:1}});m.update(.001,{ammo:true});m.ammo[1]=0;m.update(.001,{firing:true});assert.equal(m.phase,'aim');assert.equal(m.ammoIndex,1);assert.equal(m.ammo[1],0);const supply=m.ammo[0];m.update(.001,{firing:false,ammoIndex:0});m.update(.001,{firing:true});assert.equal(m.phase,'shot');assert.equal(m.ammo[0],supply-1);
-  const idle=make('navalDuel',10);advance(idle,b.combat.enemyFireSeconds+.1);assert.ok(idle.enemyFired>0);assert.equal(idle.ammo[0],b.levels[9].ammunition[0]);
+  const idle=make('navalDuel',10),tactics=idle.settings.enemyTactics;advance(idle,tactics.fireSeconds+tactics.telegraphSeconds+.1);assert.ok(idle.enemyFired>0);assert.equal(idle.ammo[0],b.levels[9].ammunition[0]);
 });
 for(const id of Object.keys(models))test(`G2c ${id} stage-10 threat and rewards exceed stage 1 with identical equipment`,()=>{
   const low=make(id,1),high=make(id,10);assert.ok(high.settings.winMoney>low.settings.winMoney);assert.ok(high.settings.winParts>low.settings.winParts);

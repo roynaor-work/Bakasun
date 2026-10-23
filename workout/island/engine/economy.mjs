@@ -1,4 +1,4 @@
-import { levelFactor, population } from './metrics.mjs?v=island-ultra-20261023-1';
+import { levelFactor, population } from './metrics.mjs?v=island-play-20261024-1';
 
 /** All income sources are records in config.json or explicit registry extensions. Amounts are per minute. */
 export function calculateIncome(state, registry, config) {

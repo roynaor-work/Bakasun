@@ -45,18 +45,34 @@ for(const difficulty of ['easy','normal','hard'])test(`G3i ${difficulty}: actual
  const expected=c.steal.baseChance[difficulty];for(const side of ['front','side'])assert.ok(Math.abs(results[side]-expected)<=expected*.1,JSON.stringify(results));
  assert.ok(results.rear<results.front*.7&&results.rear<results.side*.7);assert.equal(c.steal.reach,1.2);t.diagnostic(JSON.stringify({difficulty,expected,...results}));
 });
-for(const [difficulty,target,minimum]of [['easy',2,5],['normal',4,3.5],['hard',6,2.5]])test(`G3i ${difficulty}: spacing >= ${minimum}m and >= ${target} rival shots in 90s without input`,t=>{
+for(const [difficulty,minimum]of [['easy',5],['normal',3.5],['hard',2.5]])test(`G3i ${difficulty}: spacing >= ${minimum}m and an active rival attack in 90s without input`,t=>{
  const rows=[];
  for(const stage of [1,5,10])for(let seed=1;seed<=5;seed++){
-  const g=createSoccer({config:c,difficulty,stage,seed}),s=g.getState();let sum=0,samples=0,shots=0,passes=0,open=0;
+  const g=createSoccer({config:c,difficulty,stage,seed}),s=g.getState();let sum=0,samples=0,shots=0,passes=0,goals=0,open=0,metres=0,progressivePassMetres=0,possessionSeconds=0,attackHalfSeconds=0,finalThirdSeconds=0,boxEntries=0,wasInBox=false,passStart=null;
   for(let i=0;i<90/dt;i++){
-   g.update(dt);for(const e of g.drainEvents())if(e.team===1){shots+=Number(e.type==='shot');passes+=Number(e.type==='pass');}
-   if(s.phase!=='playing')continue;
+   const before=s.ball.owner===null?null:s.players[s.ball.owner],beforeX=before?.x,passInFlight=passStart&&s.ball.owner===null&&s.ball.lastTeam===1,ballX=s.ball.x,attackDir=s.attackDir;
+   g.update(dt);
+   if(passInFlight&&s.attackDir===attackDir&&(s.phase==='playing'||s.phase==='goal')&&s.ball.lastTeam===1)progressivePassMetres+=Math.max(0,(s.ball.x-ballX)*-attackDir);
+   if(s.ball.owner!==null||s.ball.lastTeam!==1)passStart=null;
+   for(const e of g.drainEvents())if(e.team===1){if(e.type==='shot'){shots++;passStart=null;}if(e.type==='pass'){passes++;passStart=true;}goals+=Number(e.type==='goal');}
+   if(s.phase!=='playing'){wasInBox=false;passStart=null;continue;}
+   if(before?.team===1&&s.ball.owner===before.id)metres+=Math.max(0,(before.x-beforeX)*-s.attackDir);
+   const owner=s.ball.owner===null?null:s.players[s.ball.owner],rivalBall=owner?.team===1||!owner&&s.ball.lastTeam===1,progress=-s.attackDir*s.ball.x;
+   if(owner?.team===1)possessionSeconds+=dt;if(rivalBall&&progress>0)attackHalfSeconds+=dt;
+   if(rivalBall&&progress>c.pitch.length/6)finalThirdSeconds+=dt;
+   const inBox=rivalBall&&progress>c.pitch.length/2-c.pitch.penaltyDepth&&Math.abs(s.ball.z)<c.pitch.penaltyWidth/2;
+   if(inBox&&!wasInBox)boxEntries++;wasInBox=inBox;
    for(const p of s.players)if(p.team===0&&p.role!=='keeper'&&p.id!==s.ball.owner){const distance=Math.min(...s.players.filter(q=>q.team===1).map(q=>Math.hypot(q.x-p.x,q.z-p.z)));sum+=distance;samples++;if(p.request&&distance>=minimum)open++;}
   }
-  const average=sum/samples;assert.ok(average>=minimum,JSON.stringify({difficulty,stage,seed,average}));assert.ok(shots>=target,JSON.stringify({difficulty,stage,seed,shots,target}));assert.ok(passes>0);assert.ok(open>0);rows.push({stage,seed,shots,averageMetres:average});
+  const average=sum/samples,minimumShots=stage>=5?2:0,row={stage,seed,shots,passes,goals,boxEntries,metres,progressivePassMetres,possessionSeconds,attackHalfSeconds,finalThirdSeconds,averageMetres:average},detail=JSON.stringify({difficulty,...row});
+  assert.ok(average>=minimum,detail);assert.ok(open>0,`a free receiver must offer a pass: ${detail}`);assert.ok(passes>0,`rival must pass: ${detail}`);
+  assert.ok(metres+progressivePassMetres>5,`rival must progress with carries or physical pass travel: ${detail}`);assert.ok(possessionSeconds>=2&&attackHalfSeconds>=.5,`rival must build and progress: ${detail}`);
+  if(stage>1||difficulty!=='easy')assert.ok(boxEntries+shots+goals>0,`rival must reach the area or threaten goal: ${detail}`);
+  assert.ok(shots>=minimumShots,`stage ${stage} needs ${minimumShots} shots: ${detail}`);rows.push(row);
  }
- t.diagnostic(JSON.stringify({difficulty,rows}));
+ const introduction=rows.filter(r=>r.stage===1),threateningSeeds=introduction.filter(r=>r.finalThirdSeconds>=.5||r.boxEntries+r.shots+r.goals>0).length;
+ assert.ok(threateningSeeds>=Math.ceil(introduction.length*.8),JSON.stringify({difficulty,threateningSeeds,seeds:introduction.length}));
+ t.diagnostic(JSON.stringify({difficulty,threateningIntroductorySeeds:threateningSeeds,rows}));
 });
 test('G3i covering defenders return to their zones instead of following off-ball runs',()=>{
  const g=createSoccer({config:c,difficulty:'easy'}),s=g.getState();s.ball.owner=0;

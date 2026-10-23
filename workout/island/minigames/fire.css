@@ -4,6 +4,7 @@
 .game-screen.fire-play .game-header .game-pause{top:max(14px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));width:48px;min-width:48px;height:48px;min-height:48px;border:1px solid var(--fire-line);border-radius:14px;background:var(--fire-glass);color:var(--fire-ink);padding:13px;box-shadow:0 6px 22px #050b1538,inset 0 1px #ffffff0b;backdrop-filter:blur(8px)}
 .fire-play svg:not(.fire-ring){width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .fire-play .game-pause::before,.fire-play .game-pause::after{display:none}
+.game-screen.fire-play .soccer-rotate>svg{width:130px;height:130px}
 .game-screen.fire-play .game-controls{direction:ltr}
 .game-screen.fire-play[data-game=fireRescue] .game-controls>[data-game-control]{width:var(--fire-small-size);height:var(--fire-small-size);min-width:56px;min-height:56px;padding:15px;border:1px solid var(--fire-line);background:var(--fire-glass);color:var(--fire-ink);box-shadow:0 7px 22px #050b1540,inset 0 1px #ffffff0d;touch-action:none;backdrop-filter:blur(8px);transition:background 150ms ease,border-color 150ms ease,box-shadow 150ms ease,color 150ms ease}
 .game-screen.fire-play #shoot{right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));width:84px;height:84px;border-radius:50%;border:1px solid #c2e8e331;padding:25px;background:radial-gradient(circle at 38% 24%,#385264e6,#162837ee 72%);color:#d8eef0;box-shadow:0 8px 24px #020a154d,inset 0 1px #e7ffff1c}
@@ -28,9 +29,23 @@
 .fire-play .fire-counter[data-counter=clock]>svg:not(.fire-ring){width:12px;height:12px;opacity:.72}
 .fire-play .fire-counter[data-counter=clock]:before{left:-8px}
 .fire-play .fire-counter[data-grace=true] .fire-ring circle:not(.fire-ring-track){stroke:#b2ccbc}
+.game-screen.fire-play .game-controls [data-game-control] span.fire-control-label{display:block;position:absolute;left:2px;right:2px;bottom:6px;color:inherit;font-size:10px!important;font-weight:600;line-height:1.1;pointer-events:none}
+.game-screen.fire-play .game-controls>[data-game-control]>svg:not(.fire-ring){transform:translateY(-4px)}
+.fire-play #shoot .fire-control-label{bottom:14px;font-size:11px!important;letter-spacing:.2px}
+.fire-play .fire-coach{position:absolute;z-index:2;top:max(14px,env(safe-area-inset-top));left:calc(max(16px,env(safe-area-inset-left)) + 244px);right:calc(max(16px,env(safe-area-inset-right)) + 64px);display:flex;align-items:center;gap:10px;min-height:50px;max-width:540px;padding:6px 11px;overflow:hidden;border:1px solid var(--fire-line);border-radius:13px;background:var(--fire-glass);box-shadow:0 5px 18px #050b1529,inset 0 1px #ffffff0b;backdrop-filter:blur(8px);color:var(--fire-ink);pointer-events:none;direction:rtl;box-sizing:border-box}
+.fire-play .fire-coach-text{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}
+.fire-play .fire-mission-title{color:#b7c8cd;font-size:10px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fire-play .fire-instruction{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:13px;font-weight:600;line-height:1.2;overflow:hidden}
+.fire-play .fire-coach-distance{flex:none;color:#b5dce0;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fire-play .fire-navigation-cancel{flex:none;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:1px solid #d4e2e426;border-radius:9px;background:#52616b25;color:#d3dfdf;font:24px/1 sans-serif;pointer-events:auto;touch-action:manipulation}
+.fire-play .fire-coach-progress{position:absolute;bottom:0;left:0;right:0;height:2px;background:#9bd7df;transform-origin:right;pointer-events:none}
+.fire-play .fire-coach[data-kind=rescue] .fire-coach-progress{background:#b2ccbc}
+.game-screen.fire-play[data-orientation-blocked=true] .fire-coach{visibility:hidden}
 .game-screen.fire-play[data-fire-action=driving] #shoot{color:#b0c1c9}
 .game-screen.fire-play[data-fire-action=spraying] #shoot{color:#f0ffff;background:radial-gradient(circle at 38% 24%,#426c7ae8,#1c3a48ed 72%);box-shadow:0 0 0 4px #a6d8e30c,0 8px 24px #020a154d,inset 0 1px #e7ffff20}
 .game-screen.fire-play[data-fire-action=refilling] #fire-refill{color:#d5f0e5;border-color:#a6cfb6b3}
 .game-screen.fire-play[data-orientation-blocked=true] .fire-hud,.game-screen.fire-play[data-orientation-blocked=true] .fire-ladder-balance{visibility:hidden}
 @media(max-height:380px){.fire-play .fire-hud{top:10px;left:max(12px,env(safe-area-inset-left));padding:3px 5px}.game-screen.fire-play .game-header .game-pause{top:10px;right:max(12px,env(safe-area-inset-right))}.game-screen.fire-play #shoot{right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom))}.game-screen.fire-play #pass{right:calc(max(16px,env(safe-area-inset-right)) + 100px);bottom:max(16px,env(safe-area-inset-bottom))}.game-screen.fire-play #fire-refill{right:max(16px,env(safe-area-inset-right));bottom:calc(max(16px,env(safe-area-inset-bottom)) + 100px)}}
+@media(max-height:380px){.fire-play .fire-coach{top:10px;left:calc(max(12px,env(safe-area-inset-left)) + 244px);right:calc(max(12px,env(safe-area-inset-right)) + 64px);min-height:48px;padding:5px 9px;gap:7px}.fire-play .fire-instruction{font-size:12px}}
+@media(max-width:620px){.fire-play .fire-coach{top:74px;left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));max-width:none}}
 @media(prefers-reduced-motion:reduce){.game-screen.fire-play [data-game-control]{transition:none}}

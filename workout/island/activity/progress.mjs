@@ -10,14 +10,23 @@ export function validProgress(progress,data) {
   if(Object.keys(progress).length!==ids.length)return false;
   return ids.every(id=>{
     const p=progress[id],count=data.config.minigames[id].levels.length;
-    if(!p||!Number.isInteger(p.stage)||p.stage<1||p.stage>count||!Array.isArray(p.stars)||p.stars.length!==count)return false;
-    return p.stars.every((n,i)=>{
-      if(!Number.isInteger(n)||n<0||n>3)return false;
-      if(i<p.stage-1)return n>0; // Every preceding stage must have been won.
-      if(i>=p.stage)return n===0; // Later stages cannot carry stars.
-      return p.stage===count||n===0; // A won stage unlocks the next one immediately.
-    });
+    return validStageProgress(p,count);
   });
+}
+function validStageProgress(p,count){
+  if(!p||!Number.isInteger(p.stage)||p.stage<1||p.stage>count||!Array.isArray(p.stars)||p.stars.length!==count)return false;
+  return p.stars.every((n,i)=>{
+    if(!Number.isInteger(n)||n<0||n>3)return false;
+    if(i<p.stage-1)return n>0;
+    if(i>=p.stage)return n===0;
+    return p.stage===count||n===0;
+  });
+}
+/** Expand only an already valid historical campaign. A won former final stage
+ * unlocks the first new stage; malformed or truncated rows remain invalid. */
+export function extendStageProgress(progress,fromCount,toCount){
+  if(!Number.isInteger(toCount)||toCount<=fromCount||!validStageProgress(progress,fromCount))return progress;
+  return {...progress,stage:progress.stage===fromCount&&progress.stars[fromCount-1]>0?fromCount+1:progress.stage,stars:[...progress.stars,...Array(toCount-fromCount).fill(0)]};
 }
 export function applyStarEquipment(state,data,id) {
   const total=state.minigameProgress[id].stars.reduce((sum,n)=>sum+n,0);

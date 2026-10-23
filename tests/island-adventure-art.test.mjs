@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import * as T from '../workout/island/vendor/three.module.js';
 import {loadData} from '../workout/island/engine/load-data.mjs';
 import {createEngine} from '../workout/island/engine/engine.mjs';
-import {createNavalModel} from '../workout/island/minigames/naval.mjs';
+import {createNavalModel,navalHullContact} from '../workout/island/minigames/naval.mjs';
 import {seededRandom} from '../workout/island/minigames/context.mjs';
 import {createNavalProjectiles} from '../workout/island/minigames/naval-projectiles.mjs';
 import {createNavalImpacts} from '../workout/island/minigames/naval-impacts.mjs';
@@ -29,8 +29,54 @@ test('impact art follows actual hit state and expires, with finite transforms an
  Object.assign(model.blast,{life:config.visuals.blastSeconds*.65,x:340,z:12,hit:true});const before=JSON.stringify(model.snapshot());art.update();assert.equal(art.metrics().particles,32);assert.equal(JSON.stringify(model.snapshot()),before);
  model.blast.life=0;art.update();assert.equal(art.metrics().particles,0);art.dispose();art.dispose();assert.equal(scene.children.length,0);
 });
-test('farther starting fleet stays targetable; real shells still land at the calculated point',()=>{
- const model=make();assert.equal(balance.enemyX-balance.shipX,280);assert.ok(balance.enemyX<balance.targeting.maxX);model.update(.01,{firing:true});assert.ok(model.ball.active);const target={x:model.ball.targetX,z:model.ball.targetZ};for(let i=0;i<200&&model.ball.active;i++)model.update(.01,{});assert.equal(model.blast.x,target.x);assert.equal(model.blast.z,target.z);
+test('farther starting fleet stays visible, targetable and lockable',()=>{
+ const model=make(),enemy=model.enemies[0];
+ assert.equal(balance.enemyX-balance.shipX,280);assert.ok(balance.enemyX<balance.targeting.maxX);
+ const point=model.screenPoint(enemy.x,enemy.z),water=model.targetAt(point.x,point.y);
+ assert.ok(point.depth>0&&point.x>0&&point.x<config.width&&point.y>0&&point.y<config.height);
+ assert.ok(Math.abs(water.x-enemy.x)<1e-9&&Math.abs(water.z-enemy.z)<1e-9);
+ model.beginAim(enemy.index);assert.equal(model.lockedTargetIndex,enemy.index);assert.ok(model.lockedTarget.hp>0);
+});
+
+test('real shells that miss every hull land exactly at the calculated wind-adjusted water point',()=>{
+ for(const seed of [0,17,93])for(const dt of [.01,.02,.05]){
+  const model=createNavalModel({config,balance,level:1,seed,random:seededRandom(seed)}),point={x:65,z:150};
+  const flight=balance.targeting.flightSeconds+Math.hypot(point.x-model.playerShip.x,point.z-model.playerShip.z)*balance.targeting.secondsPerRange;
+  const drift=balance.aim.wind.driftScale*balance.aim.wind.difficultyMin*flight*flight;
+  const expected={x:point.x+model.wind.x*drift,z:point.z+model.wind.z*drift},hp=model.enemies.map(e=>e.hp);
+  model.update(dt,{targetX:point.x,targetZ:point.z,firing:true});
+  assert.ok(model.ball.active);assert.equal(model.ball.duration,flight);
+  assert.equal(model.ball.targetX,expected.x);assert.equal(model.ball.targetZ,expected.z);
+  for(let i=0;i<200&&model.ball.active;i++)model.update(dt,{});
+  assert.equal(model.ball.active,false);assert.equal(model.ball.age,flight);
+  assert.equal(model.ball.x,expected.x);assert.equal(model.ball.z,expected.z);
+  assert.equal(model.blast.x,expected.x);assert.equal(model.blast.z,expected.z);
+  assert.equal(model.blast.hit,false);assert.equal(model.snapshot().hits,0);assert.equal(model.fired,1);
+  assert.deepEqual(model.enemies.map(e=>e.hp),hp);
+ }
+});
+
+test('real shells hitting a hull explode at the calculated contact point and apply damage once',()=>{
+ for(const dt of [.01,.02,.05]){
+  const model=make(),enemy=model.enemies[0],hp=enemy.hp;
+  model.update(dt,{firing:true});assert.ok(model.ball.active);const launched={...model.ball};let previous;
+  // Freeze the ballistic endpoint: a hull collision replaces the live target
+  // with its earlier contact point so the rendered blast follows the impact.
+  for(let i=0;i<200&&model.ball.active;i++){previous={x:model.ball.x,z:model.ball.z};model.update(dt,{});}
+  assert.equal(model.ball.active,false);assert.ok(model.ball.age>launched.duration*.8&&model.ball.age<launched.duration);
+  const u=model.ball.age/launched.duration;
+  const expected={x:launched.fromX+(launched.targetX-launched.fromX)*u-launched.windOffsetX*u*(1-u),z:launched.fromZ+(launched.targetZ-launched.fromZ)*u-launched.windOffsetZ*u*(1-u)};
+  assert.equal(model.ball.x,expected.x);assert.equal(model.ball.z,expected.z);
+  assert.equal(model.blast.x,expected.x);assert.equal(model.blast.z,expected.z);
+  assert.notEqual(model.blast.x,launched.targetX);assert.equal(model.ball.victim,enemy.index);
+  assert.equal(navalHullContact(previous,previous,enemy,balance),false);
+  assert.equal(navalHullContact(previous,model.ball,enemy,balance),true);
+  assert.equal(model.blast.hit,true);assert.equal(model.snapshot().hits,1);assert.equal(model.fired,1);
+  const damage=model.settings.damage*balance.ammo[0].damage*(1+(model.settings.weaponLevel-1)*.1);
+  assert.equal(enemy.hp,hp-damage);
+  for(let i=0;i<20;i++)model.update(.01,{});
+  assert.equal(enemy.hp,hp-damage);assert.equal(model.snapshot().hits,1);
+ }
 });
 test('shared material textures are deterministic, nonuniform and bounded; backdrop disposes',()=>{
  for(const kind of ['grass','sand','clay','asphalt','water']){const a=surfaceTexture(kind,4),b=surfaceTexture(kind,4);assert.deepEqual(a.image.data,b.image.data);assert.equal(a.image.data.length,128*128*4);assert.ok(new Set(a.image.data).size>30);a.dispose();b.dispose();}

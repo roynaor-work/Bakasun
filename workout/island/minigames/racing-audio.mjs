@@ -1,0 +1,7 @@
+/** Quiet continuous engine voice; the shared app mute preference remains authoritative. */
+export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext}={}){
+ let context,voice,filter,gain,paused=false,disposed=false,muted=false;
+ function unlock(){if(disposed||paused||!AudioContext)return;try{if(!context){context=new AudioContext();voice=context.createOscillator();voice.type='sawtooth';filter=context.createBiquadFilter();filter.type='lowpass';filter.frequency.value=260;gain=context.createGain();gain.gain.value=0;voice.connect(filter);filter.connect(gain);gain.connect(context.destination);voice.start();}void context.resume().catch(()=>{});}catch{}}
+ function sync(speed=0,boost=false){try{muted=storage?.getItem('island.sound')==='off';if(!gain||!context)return;gain.gain.setTargetAtTime(paused||muted||disposed?0:.009+Math.min(speed/50,1)*.012,context.currentTime,.08);voice.frequency.setTargetAtTime(38+speed*2.4+(boost?20:0),context.currentTime,.08);}catch{}}
+ return {unlock,sync,setPaused(value){paused=!!value;sync();if(paused&&context?.state==='running')void context.suspend().catch(()=>{});else if(!paused&&context?.state==='suspended')void context.resume().catch(()=>{});},metrics:()=>({unlocked:!!context,paused,muted,disposed}),dispose(){if(disposed)return;disposed=true;voice?.stop();voice?.disconnect();filter?.disconnect();gain?.disconnect();if(context)void context.close().catch(()=>{});}};
+}

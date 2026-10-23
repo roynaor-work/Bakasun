@@ -7,6 +7,7 @@ import {inPenaltyArea} from '../workout/island/minigames/soccer-physics.mjs';
 import {slideWeight} from '../workout/island/minigames/soccer-presentation.mjs';
 import {bot} from '../workout/island/tests/g3c-bot.mjs';
 import {separatePlayers} from '../workout/island/minigames/soccer-tactics.mjs';
+import {campaignConfig} from '../workout/island/minigames/soccer-campaign.mjs';
 const c=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames.soccer,dt=c.match.fixedStep;
 const advance=(g,seconds,input={})=>{for(let i=0;i<Math.round(seconds/dt);i++)g.update(dt,input);};
 function isolated(role='field',attackDir=1){
@@ -21,7 +22,8 @@ test('G3g measured movement starts on the first fixed tick; a low speed 90 degre
  advance(g,.3,{moveX:.3});let length=0,angle=0,previous={x:p.x,z:p.z};
  for(let i=0;i<60&&angle<Math.PI/2-.08;i++){g.update(dt,{moveZ:.3});length+=Math.hypot(p.x-previous.x,p.z-previous.z);angle=Math.atan2(p.vz,p.vx);previous={x:p.x,z:p.z};}
  const radius=length/angle;assert.ok(radius<.7,`${radius}m`);
- assert.ok(Math.abs(Math.hypot(g.getState().ball.x-p.x,g.getState().ball.z-p.z)-c.physics.dribbleOffset)<1e-6);
+ const s=g.getState(),touch=Math.hypot(s.ball.x-p.x,s.ball.z-p.z);assert.equal(s.ball.owner,p.id);assert.ok(touch<c.assistance.dribble.releaseDistance,'a tight turn keeps the ball within local contact');
+ const initialError=Math.hypot(s.ball.x-p.x-p.fx*c.physics.dribbleOffset,s.ball.z-p.z-p.fz*c.physics.dribbleOffset);advance(g,.6);const finalError=Math.hypot(s.ball.x-p.x-p.fx*c.physics.dribbleOffset,s.ball.z-p.z-p.fz*c.physics.dribbleOffset);assert.ok(finalError<initialError&&finalError<.08,'the ball settles toward the foot after turning rather than snapping instantly');
  t.diagnostic(JSON.stringify({responseSeconds:dt,turnRadiusMetres:radius,dribbleCentreMetres:c.physics.dribbleOffset}));
 });
 test('G3g actual shots have three increasing apex heights and a long hold can clear the crossbar',t=>{
@@ -44,7 +46,7 @@ test('G3g upward aiming preserves charge height, and only an explicit backward d
  const heights=[0,.8].map(height=>{const g=isolated(),s=g.getState(),kickAim={manual:true,x:1,z:0,height};advance(g,1.1,{kickHeld:true,kickAim});g.update(dt,{kickAim});return s.ball.vy;});assert.ok(heights[1]>heights[0]);
 });
 test('G3g sprint drains, refuses empty use, recovers slowly, and switching does not refill it',()=>{
- const g=isolated(),s=g.getState();advance(g,c.sprint.capacity/c.sprint.drainPerSecond+.1,{moveZ:1,sprintHeld:true});assert.ok(s.sprint.locked);assert.equal(s.sprint.active,false);
+ const g=isolated(),s=g.getState();Object.assign(s.ball,{owner:null,y:1000});advance(g,c.sprint.capacity/c.sprint.drainPerSecond+.1,{moveZ:1,sprintHeld:true});assert.equal(s.phase,'playing','stamina is measured without a sideline stoppage');assert.ok(s.sprint.locked);assert.equal(s.sprint.active,false);
  const value=s.sprint.value;g.update(dt,{switchPlayer:true,sprintHeld:true,moveX:1});assert.ok(s.sprint.value<=value+1e-6);assert.equal(s.sprint.active,false);
  advance(g,c.sprint.regenDelaySeconds/2);assert.equal(s.sprint.value,0);advance(g,2);assert.ok(s.sprint.value>0&&s.sprint.value<s.sprint.capacity);
 });
@@ -71,10 +73,15 @@ for(const seed of [1,9,41])test(`G3g every field player is active and teammates 
   }
   for(const p of s.players)previous[p.id]={...p};
  }
- const fields=s.players.filter(p=>p.role!=='keeper').map(p=>({id:p.id,metres:travel[p.id],speed:travel[p.id]/playing}));
- assert.ok(fields.every(p=>p.metres>=c.tactics.minTravel30Seconds&&p.speed>=c.tactics.minAverageSpeed),JSON.stringify(fields));
+ // Home activity keeps the original floor. Early rivals use their campaign
+ // pace, while all six players must still cover real distance during live play.
+ // Collision duration and team width retain their independent original limits.
+ const tuned=campaignConfig(c,1),rivalPace=tuned.opponents.minSpeedRatio/c.opponents.minSpeedRatio*tuned.ai.attack.normal.speed/c.ai.attack.normal.speed;
+ const fields=s.players.filter(p=>p.role!=='keeper').map(p=>({id:p.id,team:p.team,metres:travel[p.id],speed:travel[p.id]/playing}));
+ assert.ok(playing>=15,'enough actual play is sampled, excluding restart and goal time');
+ assert.ok(fields.every(p=>p.metres>=c.tactics.minTravel30Seconds*(p.team?rivalPace:1)&&p.speed>=c.tactics.minAverageSpeed*(p.team?rivalPace:1)),JSON.stringify(fields));
  assert.ok(maxOverlap<=c.tactics.maxOverlapSeconds,`${maxOverlap}s`);assert.ok(width/(samples*2)>=c.tactics.minTeamWidth,`${width/(samples*2)}m`);
- t.diagnostic(JSON.stringify({seed,fields,maxOverlapSeconds:maxOverlap,averageTeamWidth:width/(samples*2)}));
+ t.diagnostic(JSON.stringify({seed,playingSeconds:playing,fields,minimumTravel:{home:c.tactics.minTravel30Seconds,rival:c.tactics.minTravel30Seconds*rivalPace},minimumAverageSpeed:{home:c.tactics.minAverageSpeed,rival:c.tactics.minAverageSpeed*rivalPace},maxOverlapSeconds:maxOverlap,averageTeamWidth:width/(samples*2)}));
 });
 test('G3g nearest-player switching clears charge and automatic switching has a settling interval',()=>{
  const g=isolated(),s=g.getState();Object.assign(s.players[1],{x:0,z:1,recover:0});Object.assign(s.ball,{owner:3,x:0,z:0});s.charging=true;s.charge=.5;g.update(dt,{switchPlayer:true});assert.equal(s.controlled,1);assert.equal(s.charging,false);assert.ok(s.switchCooldown>0);
