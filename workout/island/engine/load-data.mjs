@@ -1,5 +1,5 @@
-import {DATA_VERSION,dataURL} from '../release.mjs?v=island-art-20261022-3';
-import { configureBuilding } from './registry.mjs?v=island-art-20261022-3';
+import {DATA_VERSION,dataURL} from '../release.mjs?v=island-ultra-20261023-1';
+import { configureBuilding } from './registry.mjs?v=island-ultra-20261023-1';
 
 const FILES = ['config', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 

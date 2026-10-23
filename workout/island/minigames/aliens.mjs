@@ -1,11 +1,12 @@
-import {moveAlienPlayer} from './g2m-motion.mjs?v=island-art-20261022-3';
-import {drawAlienEffects,drawAlienBolts,drawAlienShots} from './g2m-effects.mjs?v=island-art-20261022-3';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-art-20261022-3';
-import {createAlienView} from './alien-view.mjs?v=island-art-20261022-3';
+import {moveAlienPlayer} from './g2m-motion.mjs?v=island-ultra-20261023-1';
+import {drawAlienEffects,drawAlienBolts,drawAlienShots} from './g2m-effects.mjs?v=island-ultra-20261023-1';
+import {drawUltraAlienEffects} from './ultra-alien-effects.mjs';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-ultra-20261023-1';
+import {createAlienView} from './alien-view.mjs?v=island-ultra-20261023-1';
 import {runAlienSession} from './alien-session.mjs';
 import './alien-ui.mjs';
-import {createPool,releaseAt} from './pool.mjs?v=island-art-20261022-3';
-import {oval,drawHealthBar} from './art.mjs?v=island-art-20261022-3';
+import {createPool,releaseAt} from './pool.mjs?v=island-ultra-20261023-1';
+import {oval,drawHealthBar} from './art.mjs?v=island-ultra-20261023-1';
 export function alienStack(campaign,id,rank){return (campaign.stackCurve[id]||[]).slice(0,rank).reduce((n,v)=>n+v,0);}
 const EMPTY=Object.freeze({}),TAU=Math.PI*2;
 
@@ -197,7 +198,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   };return model;
 }
 export function drawAliens(p,m,{config,balance,art,quality,view,pixelAspect=1}) {
-  if(view?.draw(p)){drawAlienShots(p,m.shots,pixelAspect);drawAlienBolts(p,m.bolts,balance,pixelAspect);drawAlienEffects(p,m,balance,pixelAspect);return;}
+  if(view?.draw(p)){drawUltraAlienEffects(p,m,balance,pixelAspect,config);return;}
   const palette=config.visuals.palette;
   const {width:w,height:h,art:a,visuals:v}=config;
   p.drawImage(art.backdrop,0,0);p.fillStyle=a.creamColor;

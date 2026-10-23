@@ -1,9 +1,9 @@
 // Soccer owns this bank and ambience. The existing shell still owns island.sound.
 export const G3H_AUDIO_FILES=Object.freeze({
- kick:new URL('../assets/audio/g3h/kick.ogg?v=island-art-20261022-3',import.meta.url).href,
- pass:new URL('../assets/audio/g3h/pass.ogg?v=island-art-20261022-3',import.meta.url).href,
- whistle:new URL('../assets/audio/g3h/whistle.ogg?v=island-art-20261022-3',import.meta.url).href,
- crowd:new URL('../assets/audio/g3h/crowd.ogg?v=island-art-20261022-3',import.meta.url).href
+ kick:new URL('../assets/audio/g3h/kick.ogg?v=island-ultra-20261023-1',import.meta.url).href,
+ pass:new URL('../assets/audio/g3h/pass.ogg?v=island-ultra-20261023-1',import.meta.url).href,
+ whistle:new URL('../assets/audio/g3h/whistle.ogg?v=island-ultra-20261023-1',import.meta.url).href,
+ crowd:new URL('../assets/audio/g3h/crowd.ogg?v=island-ultra-20261023-1',import.meta.url).href
 });
 export function soccerAudioCues(event){
  return {goal:['whistle','net','cheer'],restart:['whistle'],halftime:['whistle'],fulltime:['whistle','whistle','whistle'],play:['whistle'],shot:['kick'],header:['kick'],volley:['kick'],pass:['pass'],loft:['pass'],throw:['pass'],post:['kick'],slide:['slide']}[event?.type]||[];

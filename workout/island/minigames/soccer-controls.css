@@ -1,17 +1,33 @@
-.game-screen[data-game=soccer] .soccer-live-status,
-.game-screen[data-game=soccer] .soccer-energy { display:none; }
-.game-screen[data-game=soccer] .game-header .game-pause { font-size:0; gap:0; }
-.game-screen[data-game=soccer] .game-header .game-pause > * { display:none; }
-.game-screen[data-game=soccer] .game-pause::before { content:'Ⅱ'; font-size:28px; }
-.game-screen[data-game=soccer] .game-pause svg { display:none; }
-.game-screen[data-game=soccer] .soccer-actions button { isolation:isolate; }
-.game-screen[data-game=soccer] .soccer-actions button > svg { width:30px; height:30px; }
-.game-screen[data-game=soccer] .soccer-actions button > span:not(.action-direction):not(.soccer-stamina-ring) { display:none; }
-.game-screen[data-game=soccer] #sprint { background:#1d605ca3; border-color:#edffff99; }
-.game-screen[data-game=soccer] #soccer-switch { position:absolute; right:104px; bottom:106px; width:52px; height:52px; min-width:48px; min-height:48px; border-radius:50%; padding:5px; pointer-events:auto; }
-.game-screen[data-game=soccer] .soccer-controls.left-handed #soccer-switch { right:auto; left:104px; }
-.soccer-stamina-ring { position:absolute; inset:-5px; border-radius:50%; background:conic-gradient(#a3ffca var(--stamina,100%),#234955a8 0); mask:radial-gradient(transparent 62%,#000 65%); pointer-events:none; }
-.game-screen[data-game=soccer] #sprint[data-exhausted=true] .soccer-stamina-ring { background:conic-gradient(#ffab70 var(--stamina,0%),#234955a8 0); }
-.game-screen[data-game=soccer] .soccer-phase-banner { font-size:25px; width:auto; min-width:48px; padding:4px 10px; }
-.game-screen[data-game=soccer] .soccer-goal-banner { font-size:48px; }
-.game-screen[data-game=soccer] .soccer-scoreboard .soccer-team-name { width:12px; min-width:12px; height:12px; padding:0; border-radius:50%; }
+/* Touch geometry and input ownership stay with the existing soccer controls. */
+.game-screen[data-game=soccer] .soccer-live-status,.game-screen[data-game=soccer] .soccer-energy{display:none}
+.game-screen[data-game=soccer] .game-header .game-pause{font-size:0;gap:0}
+.game-screen[data-game=soccer] .game-pause svg{display:none}
+.game-screen[data-game=soccer] .soccer-actions{right:max(24px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom))}
+.game-screen[data-game=soccer] .soccer-actions button{--action-color:#1b3541;isolation:isolate;border:1px solid #e1eee39c;background:radial-gradient(circle at 35% 20%,#ffffff13,transparent 65%),var(--action-color);color:#f0f2e3;box-shadow:0 5px 15px #0310185c,inset 0 1px 0 #ffffff1a,inset 0 -3px 7px #06141b33;text-shadow:none;backdrop-filter:none;transition:filter 100ms ease,box-shadow 100ms ease}
+.game-screen[data-game=soccer] .soccer-actions button > svg{width:30px;height:30px;filter:drop-shadow(0 1px 1px #06131a40)}
+.game-screen[data-game=soccer] .soccer-actions button > span:not(.action-direction):not(.soccer-stamina-ring){display:none}
+.game-screen[data-game=soccer] .soccer-controls #shoot{--action-color:#326b66e8;background-color:var(--action-color);border-color:#c6e5d9}
+.game-screen[data-game=soccer] .soccer-controls #shoot > svg{width:36px;height:36px}
+.game-screen[data-game=soccer] .soccer-controls #pass{--action-color:#203e54e8;background-color:var(--action-color);border-color:#b9d0dcad}
+.game-screen[data-game=soccer] .soccer-controls #sprint{--action-color:#203a36e8;background-color:var(--action-color);border-color:#bfd9c5a6}
+.game-screen[data-game=soccer] .soccer-controls #soccer-switch{--action-color:#263946e8;background-color:var(--action-color);border-color:#c5d6dc99}
+.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #shoot{--action-color:#844d45eb;background-color:var(--action-color);border-color:#ebc5b4}
+.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #pass{--action-color:#51566ee8;background-color:var(--action-color);border-color:#cdd0e3c2}
+.game-screen[data-game=soccer] .soccer-controls button.held{filter:brightness(1.14);box-shadow:0 0 0 3px #d9efdc85,0 4px 14px #0310184d,inset 0 3px 8px #03131a4d}
+.game-screen[data-game=soccer] .soccer-controls[data-mode] button.held{background:var(--action-color)!important;color:#fff!important}
+.game-screen[data-game=soccer] .soccer-actions button:focus-visible{outline:3px solid #f1efce;outline-offset:4px}
+.game-screen[data-game=soccer] #shoot::after{content:'';position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(#dfd9ae var(--charge,0%),#112a3400 0);mask:radial-gradient(transparent 64%,#000 66% 70%,transparent 72%);pointer-events:none}
+.game-screen[data-game=soccer] #soccer-switch{position:absolute;right:104px;bottom:106px;width:52px;height:52px;min-width:48px;min-height:48px;border-radius:50%;padding:5px;pointer-events:auto}
+.game-screen[data-game=soccer] .soccer-controls.left-handed #soccer-switch{right:auto;left:104px}
+.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions{left:max(24px,env(safe-area-inset-left))}
+.game-screen[data-game=soccer] .soccer-stamina-ring{position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(#a4d8b7 var(--stamina,100%),#203c4180 0);mask:radial-gradient(transparent 64%,#000 66% 70%,transparent 72%);pointer-events:none}
+.game-screen[data-game=soccer] #sprint[data-exhausted=true]{opacity:.75}
+.game-screen[data-game=soccer] #sprint[data-exhausted=true] .soccer-stamina-ring{background:conic-gradient(#d9a16e var(--stamina,0%),#203c4180 0)}
+.game-screen[data-game=soccer] .soccer-joystick{width:108px;height:108px;background:radial-gradient(circle,#dce9da08 35%,#112b34a6 36% 66%,#dce9da1f 67% 69%,#142e36bd 70%);border:1px solid #dce9daa6;box-shadow:0 5px 18px #06171e40,inset 0 1px 0 #e5f4df1a}
+.game-screen[data-game=soccer] .soccer-knob{background:radial-gradient(circle at 35% 28%,#d7e2d5,#8baea6);border:1px solid #e3eed9a6;box-shadow:0 3px 7px #06171e59,inset 0 1px 0 #f7ffe54d}
+.game-screen[data-game=soccer] .action-direction{border:1px solid #e1dab5ad;inset:-12px}
+.game-screen[data-game=soccer] .action-direction:after{border-left-color:#e1dab5}
+@media(max-height:380px) and (orientation:landscape){
+ .game-screen[data-game=soccer] .soccer-actions{right:max(20px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom))}
+ .game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions{left:max(20px,env(safe-area-inset-left))}
+}

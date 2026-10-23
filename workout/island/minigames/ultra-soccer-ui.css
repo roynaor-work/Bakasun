@@ -1,0 +1,99 @@
+/* Scoped soccer menus, independent of shared island and tennis presentation. */
+.modal:is([data-game-home=soccer],[data-stage-map=soccer],[data-game-upgrades=soccer],[data-result=soccer],[data-team=soccer],[data-soccer-training],[data-drill-result],[data-rosters]) {
+  --ink:#edf0df;
+  --cream:#142a35;
+  --line:#b1c9bf38;
+  width:min(640px,100%);
+  padding:26px;
+  border:1px solid #c2d4c74d;
+  border-radius:14px;
+  background:radial-gradient(ellipse at 100% 0,#29464766,transparent 65%),#142a35;
+  color:#edf0df;
+  box-shadow:0 20px 70px #06171e66,inset 0 1px 0 #d9e8d50d;
+}
+.modal:is([data-game-home=soccer],[data-stage-map=soccer],[data-game-upgrades=soccer],[data-result=soccer],[data-team=soccer],[data-soccer-training],[data-drill-result],[data-rosters]) h2 { font-size:25px; font-weight:800; letter-spacing:-.3px; }
+.modal:is([data-game-home=soccer],[data-stage-map=soccer],[data-game-upgrades=soccer],[data-result=soccer],[data-team=soccer],[data-soccer-training],[data-drill-result],[data-rosters]) > :is(p,small) { color:#b6c7bf; }
+.modal:is([data-game-home=soccer],[data-stage-map=soccer],[data-game-upgrades=soccer],[data-result=soccer],[data-team=soccer],[data-soccer-training],[data-drill-result],[data-rosters]) button { border:1px solid #c5d7ce42; border-radius:9px; background:#27424b; color:#f0f1e1; box-shadow:inset 0 1px 0 #ffffff08; }
+.modal:is([data-game-home=soccer],[data-stage-map=soccer],[data-game-upgrades=soccer],[data-result=soccer],[data-team=soccer],[data-soccer-training],[data-drill-result],[data-rosters]) button.primary-button { border-color:#b4d6c5; background:#bad7c7; color:#17313a; }
+.modal:is([data-game-home=soccer],[data-stage-map=soccer],[data-game-upgrades=soccer],[data-result=soccer],[data-team=soccer],[data-soccer-training],[data-drill-result],[data-rosters]) button:focus-visible { outline:3px solid #dfe9c9; outline-offset:2px; }
+.modal:is([data-game-home=soccer],[data-stage-map=soccer],[data-game-upgrades=soccer],[data-result=soccer],[data-team=soccer],[data-soccer-training],[data-drill-result],[data-rosters]) button:disabled { opacity:.43; box-shadow:none; }
+.modal[data-game-home=soccer] .adventure-game-hero { border:1px solid #abcbb83d; border-radius:10px; background:radial-gradient(ellipse at 50% 30%,#42665e,#1d3a3e 65%); box-shadow:inset 0 0 60px #06191e40; }
+.modal[data-game-home=soccer] .adventure-home-actions { gap:10px; }
+.modal[data-game-home=soccer] .adventure-home-actions button { background:#24424a; }
+.modal[data-game-home=soccer] .adventure-home-actions button:first-child { background:#bad7c7; color:#17313a; border-color:#d3e6d6; }
+.modal[data-stage-map=soccer] .stage-map { grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+.modal[data-stage-map=soccer] .stage-map button { min-height:82px; padding:10px 6px; font-size:15px; background:linear-gradient(130deg,#2a464a,#1b343e); border-color:#b4cbb645; }
+.modal[data-stage-map=soccer] .stage-map button:not(:disabled):first-child { border-color:#a6cfb6; box-shadow:inset 0 3px 0 #a6cfb6; }
+.modal[data-stage-map=soccer] .stage-feature { color:#abbeb5; font-size:11px; line-height:1.5; }
+.modal[data-stage-map=soccer] :is(.soccer-difficulties,.soccer-role-choice) { gap:8px; padding:12px 0; border:0; margin:8px 0; }
+.modal[data-stage-map=soccer] :is(.soccer-difficulties,.soccer-role-choice) legend { color:#cad7cc; font-size:13px; font-weight:700; }
+.modal[data-stage-map=soccer] :is(.soccer-difficulties,.soccer-role-choice) button { min-height:52px; flex:1; font-size:14px; background:#1d343e; }
+.modal[data-stage-map=soccer] :is(.soccer-difficulties,.soccer-role-choice) button[aria-pressed=true] { border-color:#9bd1b7; outline:0; background:#315b55; color:#f0f3e3; box-shadow:inset 0 -3px 0 #9bd1b7; }
+.modal[data-stage-map=soccer] .soccer-hand-setting { border-block:1px solid #bdcfc029; font-size:13px; padding:4px 0; margin:8px 0 14px; color:#cbd9ce; }
+.modal[data-stage-map=soccer] .soccer-hand-setting input { accent-color:#86bfa9; }
+.modal[data-stage-map=soccer] > button { margin:4px 0; padding-inline:16px; }
+
+.soccer-player-card.soccer-player-card {
+  --card-accent:#bea17a;
+  position:relative;
+  display:grid;
+  grid-template-columns:88px minmax(0,1fr) 58px;
+  column-gap:14px;
+  row-gap:4px;
+  width:100%;
+  max-width:520px;
+  min-height:178px;
+  margin:18px auto;
+  padding:18px;
+  overflow:hidden;
+  direction:ltr;
+  border:1px solid #b3c5b44d;
+  border-top:3px solid var(--card-accent);
+  border-radius:9px;
+  background:linear-gradient(120deg,#243c44,#192f3b);
+  color:#edf0df;
+  text-align:start;
+  box-shadow:0 8px 22px #06171e26,inset 0 1px 0 #ffffff08;
+}
+.soccer-player-card.silver { --card-accent:#aebfc3; }
+.soccer-player-card.gold { --card-accent:#cebd81; }
+.soccer-player-card .soccer-overall { position:static; grid-column:3; grid-row:1/3; align-self:start; font-size:42px; font-weight:700; line-height:1; color:var(--card-accent); text-align:center; }
+.soccer-player-card .soccer-card-name { grid-column:2; grid-row:1; margin:0; padding:0; font-size:18px; line-height:1.3; direction:rtl; text-align:start; align-self:center; }
+.soccer-player-card .soccer-shirt-number { grid-column:2; grid-row:2; color:#b9ccc3; font-size:12px; direction:rtl; text-align:start; }
+.soccer-player-card .soccer-portrait { grid-column:1; grid-row:1/6; width:88px; height:132px; margin:0; align-self:end; border:1px solid #c3d4bf26; border-radius:7px; background:radial-gradient(ellipse at 50% 40%,#66857b59,#142c3555); padding-top:10px; }
+.soccer-player-card .soccer-card-attributes { grid-column:2/4; grid-row:3; width:100%; margin:5px 0; gap:3px 12px; direction:rtl; font-size:12px; }
+.soccer-player-card .soccer-card-attributes div { border-color:#b8cabc26; padding:4px 0; color:#b9cbc1; }
+.soccer-player-card .soccer-card-attributes dd { font-size:17px; font-weight:700; color:#eff1df; font-variant-numeric:tabular-nums; }
+.soccer-player-card :is(.soccer-wallet,.soccer-stars-added) { grid-column:2/4; margin:3px 0 0; color:#cfdbc7; font-size:12px; direction:rtl; text-align:start; }
+.soccer-player-card .soccer-stars-added { color:#badabf; }
+.modal[data-rosters] { width:min(900px,calc(100vw - 16px)); }
+.modal[data-rosters] select { border:1px solid #b3c9bf59; border-radius:7px; background:#1d3742; color:#edf0df; padding:8px; }
+.modal[data-rosters] .soccer-roster-grid { grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; margin-block:12px 20px; }
+.modal[data-rosters] .soccer-roster-card { padding:16px; border:1px solid #aacabd4d; border-top:3px solid #79b9b5; border-radius:8px; background:linear-gradient(130deg,#25414a,#1a323d); color:#e8eddf; }
+.modal[data-rosters] .soccer-roster-card[data-team="1"] { border-top-color:#c58f7b; background:linear-gradient(130deg,#3a3d46,#26313b); }
+.modal[data-rosters] .soccer-roster-card h3 { font-size:15px; padding-left:36px; margin-bottom:8px; }
+.modal[data-rosters] .soccer-roster-card p { color:#b2c7be; font-size:12px; }
+.modal[data-rosters] .soccer-roster-card .soccer-overall { color:#d5e2cd; font-size:27px; }
+.modal[data-rosters] .soccer-card-attributes div { border-color:#bad0bf26; color:#c2d1c8; }
+.modal[data-rosters] .soccer-card-attributes dd { color:#eff2df; font-size:17px; font-variant-numeric:tabular-nums; }
+.modal[data-team=soccer] .soccer-name-editor { border-color:#b8cbbb33; border-radius:8px; background:#1b343d; padding:12px; gap:10px; }
+.modal[data-team=soccer] .soccer-name-editor label { color:#bdcec3; font-size:12px; }
+.modal[data-team=soccer] .soccer-name-editor input { min-height:52px; border:1px solid #bfd0bf52; border-radius:7px; background:#102731; color:#eff2df; padding:8px; margin-top:6px; }
+.modal[data-soccer-training] .soccer-drill-choices { margin-block:18px; gap:12px; }
+.modal[data-soccer-training] .soccer-drill-choices article { padding:16px; border:1px solid #bdd0be38; border-radius:9px; background:#1e3942; }
+.modal[data-soccer-training] .soccer-drill-choices p { color:#bacdc2; font-size:12px; margin-block:12px; line-height:1.6; }
+.modal[data-soccer-training] .soccer-drill-choices button { width:100%; }
+.modal[data-soccer-training] .soccer-drill-choices progress { height:9px; accent-color:#91cdb1; }
+.modal[data-result=soccer] .game-result { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; padding:12px 0; border-block:1px solid #b3c7b536; }
+.modal[data-result=soccer] .result-row { display:flex; justify-content:space-between; align-items:center; padding:12px; border-radius:7px; background:#24404a; color:#bfd0c2; font-size:13px; }
+.modal[data-result=soccer] .result-row bdi { color:#edf1d9; font-size:26px; font-weight:700; font-variant-numeric:tabular-nums; }
+.modal:is([data-result=soccer],[data-drill-result]) .soccer-outdoor-message { padding:12px 14px; border-inline-start:2px solid #88bca2; background:#8ab8a00d; color:#c1d0bd; }
+@media(max-width:420px) {
+  .modal:is([data-game-home=soccer],[data-stage-map=soccer],[data-game-upgrades=soccer],[data-result=soccer],[data-team=soccer],[data-soccer-training],[data-drill-result],[data-rosters]) { padding:18px; }
+  .soccer-player-card.soccer-player-card { grid-template-columns:66px minmax(0,1fr) 44px; column-gap:10px; padding:14px; }
+  .soccer-player-card .soccer-portrait { width:66px; height:118px; }
+  .soccer-player-card .soccer-overall { font-size:34px; }
+  .soccer-player-card .soccer-card-name { font-size:16px; }
+  .soccer-player-card .soccer-card-attributes { gap:3px 9px; font-size:11px; }
+  .modal[data-stage-map=soccer] .stage-map { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}

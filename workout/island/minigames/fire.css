@@ -1,25 +1,36 @@
+/* Fire owns its HUD; the city and all aiming space stay exposed. */
 .fire-play .game-status,.fire-play .game-warning{display:none!important}
-.game-screen.fire-play .game-header .game-pause{width:48px;min-width:48px;height:48px;min-height:48px;border-radius:50%;background:#173e4be6;color:#fff;padding:12px;box-shadow:0 3px 12px #173b4b40}
-.fire-play svg:not(.fire-ring){width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.game-screen.fire-play{--fire-glass:linear-gradient(150deg,#202c35ed,#111b25e8);--fire-line:#d4e2e42b;--fire-ink:#eef1e9;--fire-water:#89cfdb;--fire-amber:#d6bd87}
+.game-screen.fire-play .game-header .game-pause{top:max(14px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));width:48px;min-width:48px;height:48px;min-height:48px;border:1px solid var(--fire-line);border-radius:14px;background:var(--fire-glass);color:var(--fire-ink);padding:13px;box-shadow:0 6px 22px #050b1538,inset 0 1px #ffffff0b;backdrop-filter:blur(8px)}
+.fire-play svg:not(.fire-ring){width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .fire-play .game-pause::before,.fire-play .game-pause::after{display:none}
 .game-screen.fire-play .game-controls{direction:ltr}
-.game-screen.fire-play .soccer-stick-zone{left:20px;top:auto;bottom:22px;width:var(--fire-stick-size);height:var(--fire-stick-size);border-radius:50%;touch-action:none}
-.game-screen.fire-play .soccer-joystick{left:50%;top:50%;width:var(--fire-stick-size);height:var(--fire-stick-size);background:#214e6466;border:2px solid #f1f8e59c;box-shadow:inset 0 0 20px #142e4f25,0 2px 12px #16344025}
-.game-screen.fire-play .soccer-knob{background:#e8f6e9cc;box-shadow:0 3px 10px #14344744}
-.game-screen.fire-play [data-game-control]{width:var(--fire-small-size);height:var(--fire-small-size);min-width:48px;min-height:48px;padding:12px;background:#214e64ed;color:#e8f8ef;box-shadow:0 3px 14px #102d4240;border:2px solid #d8f2e785;touch-action:none}
-.game-screen.fire-play #shoot{right:18px;bottom:20px;width:var(--fire-action-size);height:var(--fire-action-size);background:#143e50ed;border:0;padding:19px}
-.game-screen.fire-play #pass{right:calc(var(--fire-action-size) + 34px);bottom:20px}
-.game-screen.fire-play #fire-refill{right:18px;bottom:calc(var(--fire-action-size) + 34px)}
-.game-screen.fire-play [data-action=fire-certificate]{right:calc(var(--fire-action-size) + var(--fire-small-size) + 48px);bottom:20px;width:var(--fire-small-size);min-height:48px;background:#b77c2d}
+.game-screen.fire-play[data-game=fireRescue] .game-controls>[data-game-control]{width:var(--fire-small-size);height:var(--fire-small-size);min-width:56px;min-height:56px;padding:15px;border:1px solid var(--fire-line);background:var(--fire-glass);color:var(--fire-ink);box-shadow:0 7px 22px #050b1540,inset 0 1px #ffffff0d;touch-action:none;backdrop-filter:blur(8px);transition:background 150ms ease,border-color 150ms ease,box-shadow 150ms ease,color 150ms ease}
+.game-screen.fire-play #shoot{right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));width:84px;height:84px;border-radius:50%;border:1px solid #c2e8e331;padding:25px;background:radial-gradient(circle at 38% 24%,#385264e6,#162837ee 72%);color:#d8eef0;box-shadow:0 8px 24px #020a154d,inset 0 1px #e7ffff1c}
+.game-screen.fire-play #pass{right:calc(max(20px,env(safe-area-inset-right)) + 100px);bottom:max(20px,env(safe-area-inset-bottom))}
+.game-screen.fire-play #fire-refill{right:max(20px,env(safe-area-inset-right));bottom:calc(max(20px,env(safe-area-inset-bottom)) + 100px)}
+.game-screen.fire-play #fire-finish{right:calc(max(20px,env(safe-area-inset-right)) + 180px);bottom:max(20px,env(safe-area-inset-bottom));width:var(--fire-small-size);min-height:56px;color:#eed6a4;background:linear-gradient(150deg,#665333ed,#30291fee);border:1px solid #d6bd8766}
 .fire-play [hidden]{display:none!important}
-.fire-play .fire-ring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform:rotate(-90deg)}
-.fire-play .held,.fire-play .available{filter:brightness(1.2);outline:2px solid #a1f3cf;outline-offset:3px}
-.fire-play .empty{color:#ffb69a}
-.fire-play button:focus-visible{outline:3px solid #fff0a6;outline-offset:4px}
-.fire-play .fire-hud{position:absolute;left:16px;top:max(12px,env(safe-area-inset-top));display:flex;gap:10px;align-items:center;pointer-events:none;direction:ltr}
-.fire-play .fire-counter{position:relative;display:flex;gap:5px;align-items:center;justify-content:center;min-width:52px;height:42px;padding:6px 10px;color:#fff5dd;background:#163e50d9;border-radius:22px;font-size:13px;box-shadow:0 2px 12px #14374920}
-.fire-play .fire-counter:nth-child(1){color:#ffbc75}.fire-play .fire-counter:nth-child(2){color:#bcf6dc}
-.fire-play .fire-counter:last-child{width:46px;height:46px;padding:4px;gap:1px;flex-direction:column;font-size:11px}
-.fire-play .fire-counter:last-child svg:not(.fire-ring){width:17px;height:17px}
-.fire-play .fire-counter[data-grace=true]{background:#28725bd9}
-@media(max-height:380px){.game-screen.fire-play .soccer-stick-zone{bottom:16px;left:16px}.fire-play .fire-hud{top:8px;left:12px;gap:6px}}
+.game-screen.fire-play svg.fire-ring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform:rotate(-90deg)}
+.fire-play .fire-ring-track{stroke:#d5e4e21c}
+.fire-play .fire-ring[data-meter=pressure]{opacity:.88}
+.game-screen.fire-play[data-game=fireRescue] .game-controls>[data-game-control].available{border-color:#a6cfb6b3;box-shadow:0 0 0 3px #a6cfb612,0 7px 22px #050b1540,inset 0 1px #ffffff12;color:#d4eddb}
+.game-screen.fire-play[data-game=fireRescue] .game-controls>[data-game-control].held,.game-screen.fire-play #shoot.held{background:linear-gradient(150deg,#35515ee8,#1a313ce8);border-color:#bde4e2c4;box-shadow:0 0 0 3px #a6d8e31c,0 5px 18px #050b1540}
+.game-screen.fire-play #shoot.empty{color:#bda398;border-color:#c791744d}
+.fire-play button:focus-visible{outline:3px solid #e6cf98;outline-offset:5px}
+.fire-play .fire-hud{position:absolute;z-index:2;left:max(16px,env(safe-area-inset-left));top:max(14px,env(safe-area-inset-top));display:flex;gap:3px;align-items:center;padding:4px 6px;border:1px solid var(--fire-line);border-radius:16px;background:var(--fire-glass);box-shadow:0 5px 22px #050b1538,inset 0 1px #ffffff0b;backdrop-filter:blur(8px);pointer-events:none;direction:ltr;color:var(--fire-ink)}
+.fire-play .fire-counter{position:relative;display:flex;gap:9px;align-items:center;justify-content:center;min-width:62px;height:40px;padding:4px 10px;border-radius:11px;font-size:20px;font-weight:650;font-variant-numeric:tabular-nums;line-height:1}
+.fire-play .fire-counter>svg:not(.fire-ring){width:23px;height:23px;opacity:.95}
+.fire-play .fire-counter+ .fire-counter:before{content:'';position:absolute;left:-2px;top:10px;bottom:10px;width:1px;background:#d5e4e21c}
+.fire-play .fire-counter[data-counter=flames]>svg{color:#dfaa82}
+.fire-play .fire-counter[data-counter=rescues]>svg{color:#b2ccbc}
+.fire-play .fire-counter[data-counter=clock]{width:44px;min-width:44px;height:44px;padding:0;margin-left:6px;gap:2px;flex-direction:column;font-size:13px}
+.fire-play .fire-counter[data-counter=clock]>svg:not(.fire-ring){width:12px;height:12px;opacity:.72}
+.fire-play .fire-counter[data-counter=clock]:before{left:-8px}
+.fire-play .fire-counter[data-grace=true] .fire-ring circle:not(.fire-ring-track){stroke:#b2ccbc}
+.game-screen.fire-play[data-fire-action=driving] #shoot{color:#b0c1c9}
+.game-screen.fire-play[data-fire-action=spraying] #shoot{color:#f0ffff;background:radial-gradient(circle at 38% 24%,#426c7ae8,#1c3a48ed 72%);box-shadow:0 0 0 4px #a6d8e30c,0 8px 24px #020a154d,inset 0 1px #e7ffff20}
+.game-screen.fire-play[data-fire-action=refilling] #fire-refill{color:#d5f0e5;border-color:#a6cfb6b3}
+.game-screen.fire-play[data-orientation-blocked=true] .fire-hud,.game-screen.fire-play[data-orientation-blocked=true] .fire-ladder-balance{visibility:hidden}
+@media(max-height:380px){.fire-play .fire-hud{top:10px;left:max(12px,env(safe-area-inset-left));padding:3px 5px}.game-screen.fire-play .game-header .game-pause{top:10px;right:max(12px,env(safe-area-inset-right))}.game-screen.fire-play #shoot{right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom))}.game-screen.fire-play #pass{right:calc(max(16px,env(safe-area-inset-right)) + 100px);bottom:max(16px,env(safe-area-inset-bottom))}.game-screen.fire-play #fire-refill{right:max(16px,env(safe-area-inset-right));bottom:calc(max(16px,env(safe-area-inset-bottom)) + 100px)}}
+@media(prefers-reduced-motion:reduce){.game-screen.fire-play [data-game-control]{transition:none}}

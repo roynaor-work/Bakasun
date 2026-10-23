@@ -1,14 +1,15 @@
 import * as T from '../vendor/three.module.js';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-art-20261022-3';
-import { Avatar, Citizens } from './avatar.mjs?v=island-art-20261022-3';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-art-20261022-3';
-import { levelValue } from '../engine/metrics.mjs?v=island-art-20261022-3';
-import { LocalModels } from './local-models.mjs?v=island-art-20261022-3';
-import {MeshyPilot} from './meshy-pilot.mjs?v=island-art-20261022-3';
-import {cityPaths} from '../engine/paths.mjs?v=island-art-20261022-3';
-import {shoreDirection} from '../engine/placement-help.mjs?v=island-art-20261022-3';
-import {pathMesh,beachDetails} from './city-life.mjs?v=island-art-20261022-3';
-import {batchMeshes} from './batch.mjs?v=island-art-20261022-3';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-ultra-20261023-1';
+import { Avatar, Citizens } from './avatar.mjs?v=island-ultra-20261023-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-ultra-20261023-1';
+import { levelValue } from '../engine/metrics.mjs?v=island-ultra-20261023-1';
+import { LocalModels } from './local-models.mjs?v=island-ultra-20261023-1';
+import {MeshyPilot} from './meshy-pilot.mjs?v=island-ultra-20261023-1';
+import {cityPaths} from '../engine/paths.mjs?v=island-ultra-20261023-1';
+import {shoreDirection} from '../engine/placement-help.mjs?v=island-ultra-20261023-1';
+import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-ultra-20261023-1';
+import {batchMeshes} from './batch.mjs?v=island-ultra-20261023-1';
+import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-ultra-20261023-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -16,15 +17,16 @@ export class IslandView {
   constructor({canvas,data={},onCell=()=>{},onHover=()=>{},onSelect=()=>{},onReady=()=>{},onError=()=>{}}) {
     Object.assign(this,{canvas,data,onCell,onHover,onSelect,onReady,onError});this.state=null;this.size=16;this.groups=new Map();this.pointers=new Map();this.route=[];this.disposed=false;
     this.angle=.69;this.elevation=.76;this.zoom=1;this.target=new T.Vector3(0,.4,0);this.ray=new T.Raycaster();this.pointer=new T.Vector2();this.plane=new T.Plane(new T.Vector3(0,1,0),-GROUND);this.hit=new T.Vector3();
-    this.scene=new T.Scene();this.scene.background=new T.Color('#b0dce0');this.scene.fog=new T.Fog('#c5edf0',65,150);
+    this.scene=new T.Scene();this.scene.background=new T.Color('#b2d9dc');this.scene.fog=new T.Fog('#b2d9dc',72,155);
     try {this.renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});}catch(error){onError('error.webgl');return;}
-    this.renderer.outputColorSpace=T.SRGBColorSpace;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=.98;
+    this.renderer.outputColorSpace=T.SRGBColorSpace;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.03;
     this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.PCFSoftShadowMap;
     this.quality='high';this.started=performance.now();this.qualityCheckedAt=this.started;
     this.camera=new T.OrthographicCamera(-14,14,14,-14,.1,180);
-    this.scene.add(new T.HemisphereLight('#fcf5da','#628b82',1.7));
-    const sun=new T.DirectionalLight('#fff0d1',2.5);sun.position.set(-17,30,15);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-24;sun.shadow.camera.right=24;sun.shadow.camera.top=24;sun.shadow.camera.bottom=-24;sun.shadow.camera.near=1;sun.shadow.camera.far=85;sun.shadow.bias=-.00035;sun.shadow.normalBias=.07;this.scene.add(sun);this.sun=sun;
-    this.environment=new Environment(this.scene,{...data.world,viewConfig:data.config.cityView});this.environment.rebuild(this.size);this.decorateBeach();this.buildingRoot=new T.Group();this.scene.add(this.buildingRoot);
+    this.scene.add(new T.HemisphereLight('#e5f2ec','#4d7167',1.5));
+    const sun=new T.DirectionalLight('#fff0d1',2.8);sun.position.set(-17,30,15);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-24;sun.shadow.camera.right=24;sun.shadow.camera.top=24;sun.shadow.camera.bottom=-24;sun.shadow.camera.near=1;sun.shadow.camera.far=100;sun.shadow.bias=-.00035;sun.shadow.normalBias=.035;this.scene.add(sun);this.sun=sun;
+    this.contactShadows=this.createContactShadows();this.scene.add(this.contactShadows);
+    this.environment=new Environment(this.scene,{...data.world,viewConfig:data.config.cityView});this.environment.rebuild(this.size);this.decorateBeach();this.buildingRoot=new T.Group();this.scene.add(this.buildingRoot);this.roadBatch=new IslandRoadBatch(this.scene);
     this.models=new LocalModels();
     const records=data.buildings instanceof Map?[...data.buildings.values()]:data.buildings||[];
     this.modelsReady=Promise.all(records.flatMap(record=>[record.model,...(record.levels||[]).map(level=>level.model)]).filter(Boolean).map(spec=>this.models.load(spec))).then(()=>{if(!this.disposed&&this.state)this.setWorld(this.state,true);});
@@ -35,6 +37,23 @@ export class IslandView {
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(canvas);this.handlers={};this.bindEvents();this.resize();this.last=performance.now();this.samples=[];this.animate=this.animate.bind(this);this.frame=requestAnimationFrame(this.animate);
   }
   definition(id) {const registered=this.data.registry?.buildings?.get(id);if(registered)return registered;const b=this.data.buildings;return b instanceof Map?b.get(id):Array.isArray(b)?b.find(r=>r.id===id):b?.[id];}
+  createContactShadows(){
+    const size=64,bytes=new Uint8Array(size*size*4);
+    for(let y=0;y<size;y++)for(let x=0;x<size;x++){
+      const radius=Math.hypot((x/(size-1)-.5)*2,(y/(size-1)-.5)*2),i=(y*size+x)*4;
+      bytes[i]=25;bytes[i+1]=43;bytes[i+2]=35;bytes[i+3]=Math.round(Math.pow(Math.max(0,1-radius),1.5)*150);
+    }
+    const map=new T.DataTexture(bytes,size,size);map.needsUpdate=true;
+    const material=new T.MeshBasicMaterial({map,transparent:true,depthWrite:false,toneMapped:false});
+    const mesh=new T.InstancedMesh(new T.PlaneGeometry(1,1),material,1024);mesh.count=0;mesh.renderOrder=1;mesh.frustumCulled=false;return mesh;
+  }
+  updateContactShadows(buildings){
+    const dummy=new T.Object3D(),mesh=this.contactShadows;let count=0;
+    for(const building of buildings){const record=this.definition(building.typeId||building.type);if(!record||record.isRoad||count>=1024)continue;
+      const footprint=record.footprint||[1,1];dummy.position.copy(this.worldPosition(building.x,building.z,footprint));dummy.position.y=GROUND+.008;dummy.rotation.set(-Math.PI/2,0,0);dummy.scale.set(footprint[0]+1.2,footprint[1]+1.2,1);dummy.updateMatrix();mesh.setMatrixAt(count++,dummy.matrix);
+    }
+    mesh.count=count;mesh.instanceMatrix.needsUpdate=true;
+  }
   decorateBeach(){const group=new T.Group();beachDetails(group,this.size,this.data.config.cityView.beach);batchMeshes(group);this.environment.land.add(group);}
   worldPosition(x,z,footprint=[1,1]) {return new T.Vector3(x+(footprint[0]-1)/2-(this.size-1)/2,GROUND,z+(footprint[1]-1)/2-(this.size-1)/2);}
   makeBuilding(record,level=1) {return createBuilding(record,level,this.models);}
@@ -64,12 +83,14 @@ export class IslandView {
       if(item.repairMarker)item.repairMarker.visible=Boolean(repairing);
     }
     if(previousSize!==this.size)this.resize();
-    this.setAvatar(state.avatar||state.character||{});this.refreshWalkers(buildings);
+    this.roadBatch.rebuild([...this.groups.values()],id=>Boolean(this.definition(id)?.isRoad),force);
+    const shadowExtent=Math.max(24,this.size*.85+8);Object.assign(this.sun.shadow.camera,{left:-shadowExtent,right:shadowExtent,top:shadowExtent,bottom:-shadowExtent});this.sun.shadow.camera.updateProjectionMatrix();
+    this.updateContactShadows(buildings);this.setAvatar(state.avatar||state.character||{});this.refreshWalkers(buildings);
   }
   refreshWalkers(buildings) {
     const signature=JSON.stringify([this.size,this.quality,buildings.map(b=>[b.id,b.x,b.z,b.level])]);if(signature===this.pathSignature)return;this.pathSignature=signature;
     const paths=this.paths=cityPaths(this.state,this.data.registry),settings=this.data.config.cityView;
-    if(this.pathsMesh){this.scene.remove(this.pathsMesh);this.pathsMesh.geometry.dispose();}this.pathsMesh=pathMesh(paths.cells,this.size,settings.paths);this.scene.add(this.pathsMesh);
+    if(this.pathsMesh){this.scene.remove(this.pathsMesh);disposePath(this.pathsMesh);}this.pathsMesh=pathMesh(paths.cells,this.size,settings.paths);this.scene.add(this.pathsMesh);
     const points=paths.cells.map(p=>Object.assign(this.worldPosition(p.x,p.z),{neighbors:p.neighbors}));
     this.pilot.sync(buildings,paths,id=>this.definition(id),(x,z)=>this.worldPosition(x,z));
     if(this.data.featureFlags?.citizens===false&&this.pilot.walker)this.pilot.walker.root.visible=false;
@@ -121,8 +142,13 @@ export class IslandView {
     const compact=width>height&&height<=500;
     const c=this.data.config.cityView.camera;
     if(this.compact!==compact){this.elevation=compact?c.landscapeElevation:c.elevation;this.compact=compact;}
-    const span=Math.max(this.size*(compact?c.landscapeSpanRatio:c.spanRatio),this.size*c.aspectRatio/aspect)/this.zoom,offset=compact?span*aspect*c.panelOffset:0;
+    // Frame the coast as well as the building grid. The margin stays in world
+    // units so expanded islands retain a useful scale in the available space.
+    const span=Math.max(this.size*(compact?c.landscapeSpanRatio:c.spanRatio)+2.8,this.size*c.aspectRatio/aspect)/this.zoom,offset=compact?span*aspect*c.panelOffset:0;
     this.camera.left=-span*aspect+offset;this.camera.right=span*aspect+offset;this.camera.top=span;this.camera.bottom=-span;this.camera.updateProjectionMatrix();this.updateCamera();
+    // Resizing clears the canvas. A paused library keeps a still frame of the
+    // world behind it without advancing citizens, routes or game state.
+    if(this.paused)this.renderer.render(this.scene,this.camera);
   }
   updateCamera() {if(!this.camera)return;const r=45;this.camera.position.set(this.target.x+Math.sin(this.angle)*Math.cos(this.elevation)*r,this.target.y+Math.sin(this.elevation)*r,this.target.z+Math.cos(this.angle)*Math.cos(this.elevation)*r);this.camera.lookAt(this.target);this.camera.updateMatrixWorld();}
   home() {const c=this.data.config.cityView.camera;this.angle=c.angle;this.compact=undefined;this.zoom=1;this.target.set(0,.4,0);this.resize();}
@@ -170,11 +196,11 @@ export class IslandView {
       this.renderAvatarPreview();this.samples.push(now);while(this.samples[0]<now-1000)this.samples.shift();
       if(!this.preview&&now-this.started>5000&&now-this.qualityCheckedAt>2000){
         this.qualityCheckedAt=now;
-        if(this.quality==='high'&&this.samples.length<27){this.quality='low';this.renderer.shadowMap.enabled=false;this.resize();this.refreshWalkers(this.state.buildings);}
+        if(this.quality==='high'&&this.samples.length<27){this.quality='low';this.renderer.shadowMap.enabled=false;this.environment.setQuality?.('low');this.resize();this.refreshWalkers(this.state.buildings);}
       }
     }
     this.frame=requestAnimationFrame(this.animate);
   }
-  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,paths:this.paths?.routes.map(r=>({id:r.id,connected:r.connected})),pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,models:this.models?.metrics(),pilot:this.pilot?.metrics(),renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
-  dispose() {this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();this.pathsMesh?.geometry.dispose();for(const item of this.groups.values())disposeBuilding(item.group);this.pilot?.dispose();this.models?.dispose();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.renderer?.dispose();}
+  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,paths:this.paths?.routes.map(r=>({id:r.id,connected:r.connected})),roads:this.roadBatch?.metrics(),pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,models:this.models?.metrics(),pilot:this.pilot?.metrics(),renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
+  dispose() {if(this.disposed)return;this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();disposePath(this.pathsMesh);this.roadBatch?.dispose();this.contactShadows?.dispose();this.contactShadows?.geometry.dispose();this.contactShadows?.material.map.dispose();this.contactShadows?.material.dispose();this.radius?.geometry.dispose();this.radius?.material.dispose();for(const item of this.groups.values())disposeBuilding(item.group);for(const mesh of this.citizens?.meshes||[]){mesh.dispose();mesh.geometry.dispose();}this.citizens?.root.removeFromParent();this.pilot?.dispose();this.models?.dispose();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.sun?.shadow.dispose();this.renderer?.dispose();}
 }

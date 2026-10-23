@@ -1,4 +1,4 @@
-import {equipmentValues} from '../activity/equipment.mjs?v=island-art-20261022-3';
+import {equipmentValues} from '../activity/equipment.mjs?v=island-ultra-20261023-1';
 /** Stable seeded generator; every game uses ctx.random rather than Math.random. */
 export function seededRandom(seed) {
   let value = Number(seed) >>> 0;

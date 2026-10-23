@@ -1,8 +1,5 @@
-/* Keep the scorer visible throughout the short celebration. */
-.game-screen[data-game=soccer] .soccer-goal-banner {
-  top: 10px;
-  left: auto;
-  right: max(86px, calc(env(safe-area-inset-right) + 86px));
-  transform: none;
-  font-size: 32px;
-}
+/* The camera carries the celebration; a compact marker leaves the scorer clear. */
+.game-screen[data-game=soccer] .soccer-goal-banner{top:max(12px,env(safe-area-inset-top));left:50%;right:auto;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;min-width:54px;height:42px;padding:4px 12px;border:1px solid #c6e1d3a6;border-radius:5px;background:linear-gradient(120deg,#193b3af2,#16302df2);color:#f1f0dc;box-shadow:0 5px 20px #04171d45;font-size:27px;font-weight:800;line-height:1;text-shadow:none;animation:ultra-soccer-goal-in 220ms ease-out both}
+@keyframes ultra-soccer-goal-in{from{opacity:0;margin-top:-8px}to{opacity:1;margin-top:0}}
+@media(max-height:380px) and (orientation:landscape){.game-screen[data-game=soccer] .soccer-goal-banner{top:max(9px,env(safe-area-inset-top));height:38px;font-size:25px}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-goal-banner{animation:none}}
