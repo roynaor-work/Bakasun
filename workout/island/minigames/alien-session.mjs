@@ -1,7 +1,7 @@
-import {createG2mAudio} from './g2m-audio.mjs?v=naval-art-20261022-2';
-import {createControls} from './controls.mjs?v=naval-art-20261022-2';
-import {createGameArt} from './art.mjs?v=naval-art-20261022-2';
-import {loadOptionalArt} from './model-art.mjs?v=naval-art-20261022-2';
+import {createG2mAudio} from './g2m-audio.mjs?v=island-art-20261022-3';
+import {createControls} from './controls.mjs?v=island-art-20261022-3';
+import {createGameArt} from './art.mjs?v=island-art-20261022-3';
+import {loadOptionalArt} from './model-art.mjs?v=island-art-20261022-3';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienBakeSettings} from './alien-assets.mjs';
 

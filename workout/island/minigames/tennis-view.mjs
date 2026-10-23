@@ -1,11 +1,12 @@
+import {surfaceTexture} from '../presentation/surfaces.mjs?v=island-art-20261022-3';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {seededRandom} from './tennis.mjs?v=naval-art-20261022-2';
-import {tennisPose} from './tennis-pose.mjs?v=naval-art-20261022-2';
-import {createTennisEnvironment} from './tennis-environment.mjs?v=naval-art-20261022-2';
+import {seededRandom} from './tennis.mjs?v=island-art-20261022-3';
+import {tennisPose} from './tennis-pose.mjs?v=island-art-20261022-3';
+import {createTennisEnvironment} from './tennis-environment.mjs?v=island-art-20261022-3';
 
-export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=naval-art-20261022-2',import.meta.url)}={}) {
+export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-art-20261022-3',import.meta.url)}={}) {
   const r=config.render, colors=r.colors, scene=new T.Scene();
   scene.background=new T.Color(colors.sky);scene.fog=new T.Fog(colors.sky,r.environment.fogNear,r.environment.fogFar);
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
@@ -22,9 +23,9 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
     if(!groups.has(mat))groups.set(mat,[]);groups.get(mat).push(geometry);
   }
   const box=(mat,x,y,z,w,h,d)=>bake(new T.BoxGeometry(w,h,d),mat,x,y,z);
-  const ground=material(colors.island),apron=material(colors.apron),court=material(colors.court),white=material(colors.line),dark=material(colors.dark),wood=material('#bc8356'),metal=material('#3f6064'),seat=material('#f5bc69');
-  scene.add(new T.HemisphereLight('#fff6d5','#6c9c98',2.5));
-  const sun=new T.DirectionalLight('#fff0ca',3.2);sun.position.set(-9,18,8);sun.castShadow=true;
+  const grassMap=keep(surfaceTexture('grass',32)),clayMap=keep(surfaceTexture('clay',6)),ground=material('#d4e6b7',{map:grassMap}),apron=material('#cbd9bc',{map:grassMap}),court=material('#ffffff',{map:clayMap}),white=material(colors.line),dark=material(colors.dark),wood=material('#bc8356'),metal=material('#3f6064'),seat=material('#f5bc69');
+  scene.add(new T.HemisphereLight('#fff6d5','#426b62',1.65));
+  const sun=new T.DirectionalLight('#fff0ca',2.8);sun.position.set(-9,18,8);sun.castShadow=true;
   sun.shadow.mapSize.set(r.shadowMapSize,r.shadowMapSize);Object.assign(sun.shadow.camera,{left:-12,right:12,top:14,bottom:-14,near:1,far:50});sun.shadow.bias=-0.001;scene.add(sun);
   box(ground,0,-.2,0,500,.35,500);
   box(apron,0,-0.02,0,13.2,0.12,23.6);box(court,0,0.05,0,courtWidth(),0.05,config.court.halfLength*2);

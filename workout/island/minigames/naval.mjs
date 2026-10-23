@@ -1,12 +1,12 @@
-import {NAVAL_WEAPON_COLORS} from './naval-icons.mjs?v=naval-art-20261022-2';
-import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=naval-art-20261022-2';
-import {runCanvasGame} from './canvas-session.mjs?v=naval-art-20261022-2';
-import {oval,drawHealthBar} from './art.mjs?v=naval-art-20261022-2';
-import {createNavalInput} from './naval-controls.mjs?v=naval-art-20261022-2';
-import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt,navalProjectileHeight} from './naval-camera.mjs?v=naval-art-20261022-2';
-import {createNavalAudio} from './g6d-audio.mjs?v=naval-art-20261022-2';
-import {drawNavalHud,mountNavalWeaponPicker} from './naval-hud.mjs?v=naval-art-20261022-2';
-import {createNavalView} from './naval-view.mjs?v=naval-art-20261022-2';
+import {NAVAL_WEAPON_COLORS} from './naval-icons.mjs?v=island-art-20261022-3';
+import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-art-20261022-3';
+import {runCanvasGame} from './canvas-session.mjs?v=island-art-20261022-3';
+import {oval,drawHealthBar} from './art.mjs?v=island-art-20261022-3';
+import {createNavalInput} from './naval-controls.mjs?v=island-art-20261022-3';
+import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt,navalProjectileHeight} from './naval-camera.mjs?v=island-art-20261022-3';
+import {createNavalAudio} from './g6d-audio.mjs?v=island-art-20261022-3';
+import {drawNavalHud,mountNavalWeaponPicker} from './naval-hud.mjs?v=island-art-20261022-3';
+import {createNavalView} from './naval-view.mjs?v=island-art-20261022-3';
 export function healthPercent(hp,maxHp){return Math.round(Math.max(0,Math.min(1,hp/maxHp))*100);}
 export function navalSway(seed,time,balance){const a=balance.aim.sway,phase=(seed>>>0)%997;return {yaw:Math.sin(time*a.frequency+phase)*a.yaw,elevation:Math.cos(time*a.frequency*.73+phase)*a.elevation};}
 export function navalTrajectory(ship,yaw,elevation,balance){const range=balance.aim.minRange+(elevation-balance.aim.minElevation)*balance.aim.rangePerDegree;return {x:ship.x+Math.cos(yaw)*range,z:(ship.z||0)+Math.sin(yaw)*range};}
@@ -159,21 +159,21 @@ export function drawNaval(p,m,{config,balance,art,quality,view}){
     for(const projectile of [...m.extraShots,...(m.ball.active?[m.ball]:[])]){const q=project(projectile.x,projectile.z,navalProjectileHeight(projectile.ammo,projectile.age/projectile.duration,m.time,balance));oval(p,q.x,q.y,projectile.ammo===2?3:4,projectile.ammo===2?10:4,palette.shell);}
     if(m.blast.life>0){const q=project(m.blast.x,m.blast.z),t=1-m.blast.life/v.blastSeconds;p.globalAlpha=1-t;oval(p,q.x,q.y,10+t*40,6+t*25,m.blast.hit?palette.blast:v.foam);p.globalAlpha=1;}
   }
-  for(const e of m.enemyShots){const q=project(e.x,e.z,navalProjectileHeight(e.kind,e.age/e.duration,m.time,balance));oval(p,q.x,q.y,e.kind===2?4:3,e.kind===2?8:3,palette.shell);}
+  if(!full3d)for(const e of m.enemyShots){const q=project(e.x,e.z,navalProjectileHeight(e.kind,e.age/e.duration,m.time,balance));oval(p,q.x,q.y,e.kind===2?4:3,e.kind===2?8:3,palette.shell);}
   if(!full3d&&m.playerShip.recoil>0){const q=project(m.playerShip.x,m.playerShip.z),life=m.playerShip.recoil/config.visuals.recoilSeconds;p.globalAlpha=life;oval(p,q.x,q.y-16,8+life*12,5+life*10,palette.blast);p.globalAlpha=1;}
   drawNavalHud(p,m,{config,balance,art},project);
   const target=project(m.aim.x,m.aim.z);
   for(const mine of m.mines){const q=project(mine.x,mine.z,.2);if(q.depth<=0)continue;p.strokeStyle='#51396b';p.fillStyle=NAVAL_WEAPON_COLORS[3];p.lineWidth=3;p.beginPath();p.arc(q.x,q.y,8,0,TAU);p.fill();p.stroke();for(let i=0;i<8;i++){const a=i*TAU/8;p.beginPath();p.moveTo(q.x+Math.cos(a)*7,q.y+Math.sin(a)*7);p.lineTo(q.x+Math.cos(a)*12,q.y+Math.sin(a)*12);p.stroke();}}
   if(m.repairLife>0){const q=project(m.playerShip.x,m.playerShip.z,1),u=m.repairLife/balance.weapons.repairSeconds;p.save();p.globalAlpha=u;p.strokeStyle=NAVAL_WEAPON_COLORS[5];p.lineWidth=4;p.beginPath();p.ellipse(q.x,q.y,30+(1-u)*22,14+(1-u)*10,0,0,TAU);p.stroke();for(let i=0;i<6;i++){const x=q.x+Math.cos(i*TAU/6)*28,y=q.y-15-(1-u)*45+i%2*12;p.beginPath();p.moveTo(x-5,y);p.lineTo(x+5,y);p.moveTo(x,y-5);p.lineTo(x,y+5);p.stroke();}p.restore();}
-  const projectiles=[...m.extraShots,...(m.ball.active?[m.ball]:[])];for(const b of projectiles)if(b.ammo===1||b.ammo===4){const q=project(b.x,b.z,navalProjectileHeight(b.ammo,b.age/b.duration,m.time,balance));if(q.depth>0){p.fillStyle=NAVAL_WEAPON_COLORS[b.ammo];p.beginPath();p.ellipse(q.x,q.y,b.ammo===1?4:5,b.ammo===1?9:5,0,0,TAU);p.fill();}}
+  const projectiles=full3d?[]:[...m.extraShots,...(m.ball.active?[m.ball]:[])];for(const b of projectiles)if(b.ammo===1||b.ammo===4){const q=project(b.x,b.z,navalProjectileHeight(b.ammo,b.age/b.duration,m.time,balance));if(q.depth>0){p.fillStyle=NAVAL_WEAPON_COLORS[b.ammo];p.beginPath();p.ellipse(q.x,q.y,b.ammo===1?4:5,b.ammo===1?9:5,0,0,TAU);p.fill();}}
   if(m.aiming&&target.depth>0){const color=NAVAL_WEAPON_COLORS[m.ammoIndex];p.strokeStyle=color;p.lineWidth=2.5;p.beginPath();p.ellipse(target.x,target.y,13,7,0,0,TAU);p.moveTo(target.x-22,target.y);p.lineTo(target.x-7,target.y);p.moveTo(target.x+7,target.y);p.lineTo(target.x+22,target.y);p.moveTo(target.x,target.y-17);p.lineTo(target.x,target.y-5);p.moveTo(target.x,target.y+5);p.lineTo(target.x,target.y+17);p.stroke();
    p.strokeStyle=color;p.lineWidth=2;p.setLineDash([5,6]);p.beginPath();for(let i=0;i<=balance.aim.previewSegments;i++){const u=i/balance.aim.previewSegments*balance.aim.previewFraction,q=project(m.playerShip.x+(m.aim.x-m.playerShip.x)*u-(m.reticle?.windX||0)*u*(1-u),m.playerShip.z+(m.aim.z-m.playerShip.z)*u-(m.reticle?.windZ||0)*u*(1-u),navalProjectileHeight(m.ammoIndex,u,m.time,balance));if(i)p.lineTo(q.x,q.y);else p.moveTo(q.x,q.y);}p.stroke();p.setLineDash([]);
   }
 
 }
 export function startNaval(ctx){
- if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=naval-art-20261022-2',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
- if(!document.querySelector('[data-g6e-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g6e-naval.css?v=naval-art-20261022-2',import.meta.url).href;link.dataset.g6eStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=island-art-20261022-3',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-g6e-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g6e-naval.css?v=island-art-20261022-3',import.meta.url).href;link.dataset.g6eStyle='';document.head.append(link);}
  let model,view,storage;const picker=mountNavalWeaponPicker(ctx,()=>model);try{storage=globalThis.localStorage;}catch{}const audio=createNavalAudio({storage});const audioEvents=new AbortController();for(const type of ['pointerdown','keydown'])document.addEventListener(type,()=>audio.unlock(),{signal:audioEvents.signal});const input=createNavalInput(ctx,()=>model,()=>view);
  try{
   const session=runCanvasGame({...ctx,config:{...ctx.config,height:ctx.balance.render.height}},args=>{model=createNavalModel({...args,sound:audio.play});const update=model.update;model.update=(dt,raw)=>{update(dt,input.sample(raw));audio.update(model.playerShip.speed||0,model.time);picker.update();};return model;},drawNaval,(args,m)=>view=createNavalView(args,m));

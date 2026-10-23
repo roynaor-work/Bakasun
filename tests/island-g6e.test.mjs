@@ -40,7 +40,7 @@ test('G6e guided missile follows a moving enemy, expends one scarce unit and dam
  const m=make(),ammo=m.ammo[1],hp=m.enemyShip.hp;m.update(.02,{ammoIndex:1});m.beginAim();m.update(.02,{fireRelease:true});const initial=m.ball.targetX;advance(m,.3);assert.equal(m.ball.targetX,m.enemyShip.x);assert.notEqual(m.ball.targetX,initial);advance(m,1);assert.ok(m.enemyShip.hp<hp);assert.equal(m.ammo[1],ammo-1);assert.ok(ammo<=4);
 });
 test('G6e mine drops behind the ship, arms, and only damages an enemy that enters its radius',()=>{
- const m=make(),hp=m.enemyShip.hp;m.playerShip.x=368;m.playerShip.z=m.enemyShip.z;m.playerShip.heading=0;m.update(.02,{ammoIndex:3,fireRelease:true});assert.equal(m.mines.length,1);assert.equal(m.mines[0].x,320);assert.equal(m.fired,1);advance(m,.2);assert.equal(m.enemyShip.hp,hp);advance(m,.6);assert.equal(m.mines.length,0);assert.ok(m.enemyShip.hp<hp);
+ const m=make(),hp=m.enemyShip.hp;m.playerShip.x=b.enemyX+68;m.playerShip.z=m.enemyShip.z;m.playerShip.heading=0;m.update(.02,{ammoIndex:3,fireRelease:true});assert.equal(m.mines.length,1);assert.equal(m.mines[0].x,b.enemyX+20);assert.equal(m.fired,1);advance(m,.2);assert.equal(m.enemyShip.hp,hp);advance(m,.6);assert.equal(m.mines.length,0);assert.ok(m.enemyShip.hp<hp);
  const n=make();n.update(.02,{ammoIndex:3,fireRelease:true});advance(n,1);assert.equal(n.enemyShip.hp,n.enemyShip.maxHp);assert.equal(n.mines.length,1);
 });
 test('G6e salvo launches three distinct shells over an area for one ammunition unit',()=>{

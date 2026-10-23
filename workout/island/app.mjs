@@ -1,15 +1,16 @@
-import './view/learning-buildings.mjs?v=naval-art-20261022-2';
-import {LearningInterface} from './learning/interface.mjs?v=naval-art-20261022-2';
-import {dataURL} from './release.mjs?v=naval-art-20261022-2';
-import {createTranslator} from './ui/translate.mjs?v=naval-art-20261022-2';
-import { loadData } from './engine/load-data.mjs?v=naval-art-20261022-2';
-import { createEngine } from './engine/engine.mjs?v=naval-art-20261022-2';
-import { IslandView } from './view/island-view.mjs?v=naval-art-20261022-2';
-import { IslandInterface } from './ui/interface.mjs?v=naval-art-20261022-2';
-import {createActivity} from './activity/runtime.mjs?v=naval-art-20261022-2';
-import {ActivityInterface} from './ui/activity.mjs?v=naval-art-20261022-2';
-import {installPressFeedback} from './ui/press.mjs?v=naval-art-20261022-2';
-import {installGameShell} from './ui/game-shell.mjs?v=naval-art-20261022-2';
+import {watchRelease} from './ui/release-watch.mjs?v=island-art-20261022-3';
+import './view/learning-buildings.mjs?v=island-art-20261022-3';
+import {LearningInterface} from './learning/interface.mjs?v=island-art-20261022-3';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-art-20261022-3';
+import {createTranslator} from './ui/translate.mjs?v=island-art-20261022-3';
+import { loadData } from './engine/load-data.mjs?v=island-art-20261022-3';
+import { createEngine } from './engine/engine.mjs?v=island-art-20261022-3';
+import { IslandView } from './view/island-view.mjs?v=island-art-20261022-3';
+import { IslandInterface } from './ui/interface.mjs?v=island-art-20261022-3';
+import {createActivity} from './activity/runtime.mjs?v=island-art-20261022-3';
+import {ActivityInterface} from './ui/activity.mjs?v=island-art-20261022-3';
+import {installPressFeedback} from './ui/press.mjs?v=island-art-20261022-3';
+import {installGameShell} from './ui/game-shell.mjs?v=island-art-20261022-3';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -40,6 +41,12 @@ try {
   const stopShell=installGameShell({games,ui,t,countdownStepMs:data.config.ui.economyTickMs});
   const pressSamples=[];
   const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});
+  const releaseWatch=watchRelease({version:DATA_VERSION,
+    check:async()=>{const response=await fetch(new URL('./release.json?check='+Date.now(),import.meta.url),{cache:'no-store'});if(!response.ok)return null;return (await response.json()).version;},
+    canRefresh:()=>!document.hidden&&!engine.isMinigameActive()&&!ui.modalRoot.children.length&&!ui.selected,
+    save:()=>engine.save(),refresh:version=>{const url=new URL(location.href);url.searchParams.set('release',version);location.replace(url.href);},
+    listen:check=>{const resume=()=>{if(!document.hidden)check();};document.addEventListener('visibilitychange',resume);return ()=>document.removeEventListener('visibilitychange',resume);}
+  });
   let openedGames=false;
   const requestedGames=new URLSearchParams(location.search).get('games')==='1';
   const openRequestedGames=()=>{
@@ -54,12 +61,12 @@ try {
     onNarrate: null
   });
   const tick = setInterval(() => {
-    if (!document.hidden) {activity.tick();games.render();engine.tick(data.config.ui.economyTickMs / 1000);}
+    if (!document.hidden) {activity.tick();games.render();engine.tick(data.config.ui.economyTickMs / 1000);releaseWatch.apply();}
   }, data.config.ui.economyTickMs);
   const persist = () => engine.save();
   document.addEventListener('visibilitychange', persist);
   window.addEventListener('pagehide', persist);
-  window.addEventListener('beforeunload', () => { clearInterval(tick);stopShell();stopPress();stopGameShortcut();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
+  window.addEventListener('beforeunload', () => { clearInterval(tick);releaseWatch.dispose();stopShell();stopPress();stopGameShortcut();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
   if (new URLSearchParams(location.search).get('dev') === '1') {
     window.__island = { engine, view, ui, data, activity, games,learning,pressSamples };
   }

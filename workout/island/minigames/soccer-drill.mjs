@@ -1,5 +1,5 @@
-import {createSoccer} from './soccer.mjs?v=naval-art-20261022-2';
-import {drillAttribute} from '../activity/soccer-roster.mjs?v=naval-art-20261022-2';
+import {createSoccer} from './soccer.mjs?v=island-art-20261022-3';
+import {drillAttribute} from '../activity/soccer-roster.mjs?v=island-art-20261022-3';
 /** Three short, playable practices use the actual match controls and ball. */
 export function createSoccerDrill(options){
  const {config:c,kind}=options;if(!Object.hasOwn(drillAttribute,kind))throw Error('Invalid practice');

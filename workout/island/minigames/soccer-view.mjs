@@ -1,28 +1,29 @@
-import {soccerCrowd} from './soccer-crowd.mjs?v=naval-art-20261022-2';
+import {surfaceTexture,adventureRenderer} from '../presentation/surfaces.mjs?v=island-art-20261022-3';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-art-20261022-3';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig} from './soccer-rig.mjs?v=naval-art-20261022-2';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=naval-art-20261022-2';
+import {cloneSoccerRig} from './soccer-rig.mjs?v=island-art-20261022-3';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=island-art-20261022-3';
 import {shotHeight,safeShotAim} from './soccer-shot.mjs';
 import {holdSoccerBall} from './soccer-poses.mjs';
 
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   const roster=config.players.roster;let poseFocus=null,poseMode=null,poses=[];
   const renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'high-performance'});
-  renderer.setPixelRatio(Math.min(devicePixelRatio||1,config.view.maxPixelRatio));renderer.outputColorSpace=T.SRGBColorSpace;
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,config.view.maxPixelRatio));adventureRenderer(renderer,1.02);
   const scene=new T.Scene();scene.background=new T.Color('#92c5cc');
   const camera=new T.PerspectiveCamera(config.view.camera.fovDegrees,1,config.view.camera.nearPlane,config.view.camera.farPlane),target=new T.Vector3(),dummy=new T.Object3D(),color=new T.Color();
   const resources=new Set(),track=o=>(resources.add(o),o);
   const mat=(c,extra={})=>track(new T.MeshLambertMaterial({color:c,...extra}));
-  scene.add(new T.HemisphereLight('#ffefda','#536f70',2.3));const sun=new T.DirectionalLight('#fff2c7',2.3);sun.position.set(-12,24,8);scene.add(sun);
+  scene.add(new T.HemisphereLight('#ffefda','#365f59',1.7));const sun=new T.DirectionalLight('#fff2c7',2.6);sun.position.set(-12,24,8);scene.add(sun);
   // One geometry per material for all static scenery. No per-frame construction.
   const batches=new Map();
   function addStatic(geometry,material,x=0,y=0,z=0,rx=0,ry=0,rz=0) {
     dummy.position.set(x,y,z);dummy.rotation.set(rx,ry,rz);dummy.scale.set(1,1,1);dummy.updateMatrix();geometry.applyMatrix4(dummy.matrix);
     if(!batches.has(material))batches.set(material,[]);batches.get(material).push(geometry);
   }
-  const grass=mat('#428757'),stripe=mat('#489260'),white=mat('#fff7de'),dark=mat('#234a50'),sand=mat('#d6c49b'),concrete=mat('#688c8a'),seat=mat('#325c67'),blue=mat('#2868ee'),red=mat('#e94d51');
+  const turfMap=track(surfaceTexture('grass',12)),grass=mat('#ffffff',{map:turfMap}),stripe=mat('#a9c897',{map:turfMap}),white=mat('#fff7de'),dark=mat('#234a50'),sand=mat('#d6c49b'),concrete=mat('#688c8a'),seat=mat('#325c67'),blue=mat('#2868ee'),red=mat('#e94d51');
   const hx=config.pitch.length/2,hz=config.pitch.width/2,gw=config.pitch.goalWidth,gh=config.pitch.goalHeight,gd=config.pitch.goalDepth;
   addStatic(new T.BoxGeometry(39,.65,29),dark,0,-.55,0);addStatic(new T.BoxGeometry(37,.12,27),sand,0,-.17,0);
   addStatic(new T.PlaneGeometry(config.pitch.length,config.pitch.width),grass,0,0,0,-Math.PI/2);

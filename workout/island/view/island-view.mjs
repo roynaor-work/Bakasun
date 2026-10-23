@@ -1,14 +1,14 @@
 import * as T from '../vendor/three.module.js';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=naval-art-20261022-2';
-import { Avatar, Citizens } from './avatar.mjs?v=naval-art-20261022-2';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=naval-art-20261022-2';
-import { levelValue } from '../engine/metrics.mjs?v=naval-art-20261022-2';
-import { LocalModels } from './local-models.mjs?v=naval-art-20261022-2';
-import {MeshyPilot} from './meshy-pilot.mjs?v=naval-art-20261022-2';
-import {cityPaths} from '../engine/paths.mjs?v=naval-art-20261022-2';
-import {shoreDirection} from '../engine/placement-help.mjs?v=naval-art-20261022-2';
-import {pathMesh,beachDetails} from './city-life.mjs?v=naval-art-20261022-2';
-import {batchMeshes} from './batch.mjs?v=naval-art-20261022-2';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-art-20261022-3';
+import { Avatar, Citizens } from './avatar.mjs?v=island-art-20261022-3';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-art-20261022-3';
+import { levelValue } from '../engine/metrics.mjs?v=island-art-20261022-3';
+import { LocalModels } from './local-models.mjs?v=island-art-20261022-3';
+import {MeshyPilot} from './meshy-pilot.mjs?v=island-art-20261022-3';
+import {cityPaths} from '../engine/paths.mjs?v=island-art-20261022-3';
+import {shoreDirection} from '../engine/placement-help.mjs?v=island-art-20261022-3';
+import {pathMesh,beachDetails} from './city-life.mjs?v=island-art-20261022-3';
+import {batchMeshes} from './batch.mjs?v=island-art-20261022-3';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -16,14 +16,14 @@ export class IslandView {
   constructor({canvas,data={},onCell=()=>{},onHover=()=>{},onSelect=()=>{},onReady=()=>{},onError=()=>{}}) {
     Object.assign(this,{canvas,data,onCell,onHover,onSelect,onReady,onError});this.state=null;this.size=16;this.groups=new Map();this.pointers=new Map();this.route=[];this.disposed=false;
     this.angle=.69;this.elevation=.76;this.zoom=1;this.target=new T.Vector3(0,.4,0);this.ray=new T.Raycaster();this.pointer=new T.Vector2();this.plane=new T.Plane(new T.Vector3(0,1,0),-GROUND);this.hit=new T.Vector3();
-    this.scene=new T.Scene();this.scene.background=new T.Color('#c5edf0');this.scene.fog=new T.Fog('#c5edf0',65,150);
-    try {this.renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'low-power'});}catch(error){onError('error.webgl');return;}
-    this.renderer.outputColorSpace=T.SRGBColorSpace;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.2;
+    this.scene=new T.Scene();this.scene.background=new T.Color('#b0dce0');this.scene.fog=new T.Fog('#c5edf0',65,150);
+    try {this.renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});}catch(error){onError('error.webgl');return;}
+    this.renderer.outputColorSpace=T.SRGBColorSpace;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=.98;
     this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.PCFSoftShadowMap;
     this.quality='high';this.started=performance.now();this.qualityCheckedAt=this.started;
     this.camera=new T.OrthographicCamera(-14,14,14,-14,.1,180);
-    this.scene.add(new T.HemisphereLight('#fcf5da','#8eaead',2.5));
-    const sun=new T.DirectionalLight('#fff0d1',3);sun.position.set(-17,30,15);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-24;sun.shadow.camera.right=24;sun.shadow.camera.top=24;sun.shadow.camera.bottom=-24;sun.shadow.camera.near=1;sun.shadow.camera.far=85;sun.shadow.bias=-.00035;sun.shadow.normalBias=.07;this.scene.add(sun);this.sun=sun;
+    this.scene.add(new T.HemisphereLight('#fcf5da','#628b82',1.7));
+    const sun=new T.DirectionalLight('#fff0d1',2.5);sun.position.set(-17,30,15);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-24;sun.shadow.camera.right=24;sun.shadow.camera.top=24;sun.shadow.camera.bottom=-24;sun.shadow.camera.near=1;sun.shadow.camera.far=85;sun.shadow.bias=-.00035;sun.shadow.normalBias=.07;this.scene.add(sun);this.sun=sun;
     this.environment=new Environment(this.scene,{...data.world,viewConfig:data.config.cityView});this.environment.rebuild(this.size);this.decorateBeach();this.buildingRoot=new T.Group();this.scene.add(this.buildingRoot);
     this.models=new LocalModels();
     const records=data.buildings instanceof Map?[...data.buildings.values()]:data.buildings||[];
@@ -105,10 +105,10 @@ export class IslandView {
     group.traverse(o=>{if(o.isMesh||o.isLineSegments){if(o.userData.ownedMaterial)o.material.dispose();o.material=o.isLineSegments?new T.LineBasicMaterial({color,transparent:true,opacity:.65,depthWrite:false}):new T.MeshBasicMaterial({color,transparent:true,opacity:.42,depthWrite:false});o.userData.ownedMaterial=false;o.userData.ghostMaterial=true;o.castShadow=false;o.receiveShadow=false;}});
     const floor=new T.Mesh(new T.PlaneGeometry(w-.04,d-.04),new T.MeshBasicMaterial({color,transparent:true,opacity:.48,side:T.DoubleSide,depthWrite:false}));floor.rotation.x=-Math.PI/2;floor.position.y=.025;floor.userData.ownedGeometry=true;floor.userData.ghostMaterial=true;group.add(floor);
     const box=new T.BoxGeometry(w,.055,d),border=new T.LineSegments(new T.EdgesGeometry(box),new T.LineBasicMaterial({color,linewidth:2}));box.dispose();border.position.y=.035;border.userData.ownedGeometry=true;border.userData.ghostMaterial=true;group.add(border);
-    group.position.copy(this.worldPosition(x,z,[w,d]));this.scene.add(group);this.ghost=group;this.canvas.dataset.ghost=valid?'valid':'invalid';
+    group.position.copy(this.worldPosition(x,z,[w,d]));this.scene.add(group);this.ghost=group;this.environment.showPlacementGrid(true);this.canvas.dataset.ghost=valid?'valid':'invalid';
     if(record.requiresShore){const outward=shoreDirection(this.state,record,x,z);group.rotation.y=outward?Math.atan2(outward.x,outward.z):0;}
   }
-  clearGhost() {if(this.ghost){this.scene.remove(this.ghost);this.ghost.traverse(o=>{if(o.userData.ghostMaterial)o.material.dispose();});disposeBuilding(this.ghost);this.ghost=null;}this.ghostKey=null;delete this.canvas.dataset.ghost;}
+  clearGhost() {if(this.ghost){this.scene.remove(this.ghost);this.ghost.traverse(o=>{if(o.userData.ghostMaterial)o.material.dispose();});disposeBuilding(this.ghost);this.ghost=null;}this.ghostKey=null;this.environment?.showPlacementGrid(false);delete this.canvas.dataset.ghost;}
   showRadius(record,instance) {
     if(this.radius){this.scene.remove(this.radius);this.radius.geometry.dispose();this.radius.material.dispose();this.radius=null;}
     if(!record||!instance||!record.radius)return;

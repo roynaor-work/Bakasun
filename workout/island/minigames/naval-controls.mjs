@@ -1,5 +1,5 @@
-import {navalWaterAt} from './naval-camera.mjs?v=naval-art-20261022-2';
-import {navalWeaponIcons} from './naval-icons.mjs?v=naval-art-20261022-2';
+import {navalWaterAt} from './naval-camera.mjs?v=island-art-20261022-3';
+import {navalWeaponIcons} from './naval-icons.mjs?v=island-art-20261022-3';
 /** A press locks immediately. Release carries the last rendered reticle point. */
 export function createNavalInput(ctx,getModel,getView){
  navalWeaponIcons(ctx.controls);

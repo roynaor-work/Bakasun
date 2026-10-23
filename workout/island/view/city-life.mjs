@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {GROUND,primitive,material} from './environment.mjs?v=naval-art-20261022-2';
+import {GROUND,primitive,material} from './environment.mjs?v=island-art-20261022-3';
 /** One instanced draw for the complete cosmetic path network. */
 export function pathMesh(cells,size,config){
   const edges=cells.flatMap((p,i)=>p.neighbors.filter(j=>j>i).map(j=>[p,cells[j]])),mesh=new T.InstancedMesh(new T.PlaneGeometry(1,1),material(config.color),cells.length+edges.length),dummy=new T.Object3D();let at=0;

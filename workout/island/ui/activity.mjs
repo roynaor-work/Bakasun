@@ -1,17 +1,18 @@
-import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=naval-art-20261022-2';
-import {hangarAction} from '../activity/hangar.mjs?v=naval-art-20261022-2';
-import {hangarPreview} from './hangar-preview.mjs?v=naval-art-20261022-2';
-import {createSound} from '../minigames/sound.mjs?v=naval-art-20261022-2';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=naval-art-20261022-2';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=naval-art-20261022-2';
-import {createAmmoVisual} from '../minigames/art.mjs?v=naval-art-20261022-2';
-import {equipmentOffer} from '../activity/equipment.mjs?v=naval-art-20261022-2';
-import {gameContext} from '../minigames/context.mjs?v=naval-art-20261022-2';
-import {gameAvailability} from '../activity/availability.mjs?v=naval-art-20261022-2';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=naval-art-20261022-2';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=naval-art-20261022-2';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=naval-art-20261022-2';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=naval-art-20261022-2';
+import {gameEmblem} from './adventure-emblems.mjs?v=island-art-20261022-3';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-art-20261022-3';
+import {hangarAction} from '../activity/hangar.mjs?v=island-art-20261022-3';
+import {hangarPreview} from './hangar-preview.mjs?v=island-art-20261022-3';
+import {createSound} from '../minigames/sound.mjs?v=island-art-20261022-3';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-art-20261022-3';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-art-20261022-3';
+import {createAmmoVisual} from '../minigames/art.mjs?v=island-art-20261022-3';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-art-20261022-3';
+import {gameContext} from '../minigames/context.mjs?v=island-art-20261022-3';
+import {gameAvailability} from '../activity/availability.mjs?v=island-art-20261022-3';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-art-20261022-3';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=island-art-20261022-3';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-art-20261022-3';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=island-art-20261022-3';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -93,24 +94,29 @@ export class ActivityInterface {
   }
 
   menu() {
-    const dialog=this.modal('minigame.title','minigame.subtitle');
-    const cards=el('div','game-cards');
-    for(const game of this.enabledGames()) {
-      const card=el('article','game-card');card.dataset.game=game.id;
-      const context=gameContext(this.engine,this.data.config.minigames,this.now(),game.id),level=this.engine.state.minigameLevels[game.id];
-      card.append(el('h3','',`${game.icon} ${this.t(game.title)}`),el('p','',this.t('minigame.level',{level,difficulty:context.level})),el('p','',this.t('minigame.power',{power:Math.round(context.power*this.data.config.minigames.percentScale)})),el('p','',this.t('minigame.best',{score:this.engine.state.highScores[game.id]||0})));
-      if(['soccer','tennis'].includes(game.id))card.append(el('p','team-rank',this.teamLabel()));
-      const actions=el('div','game-card-actions');
-      actions.append(this.playButton(game.id,'game-play',()=>this.stages(game.id)),button(this.t('minigame.help'),'game-help',()=>this.intro(game.id)));
-      if(game.id==='soccer')actions.append(button(this.t('soccer.training'),'soccer-training',()=>this.training()));
-      const available=this.availability(game.id);
-      if(this.engine.learningStatus().locked){card.dataset.dailyLocked='true';card.dataset.locked='true';card.append(el('p','game-locked','🔒 📚 קודם משלימים את משימת היום'));}
-      else if(!available.ok){card.dataset.locked='true';card.append(el('p','game-locked',this.t(available.reason)));}
-      const next=this.data.config.minigameLevels[game.id]?.[level];
-      const upgrade=button(next?this.t('minigame.upgrade',{cost:next.cost}):this.t('app.maxLevel'),'game-upgrade',()=>{const result=this.activity.upgrade(game.id);if(result.ok)this.menu();else this.ui.result(result);});
-      upgrade.disabled=!next;actions.append(upgrade,button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(game.id)));card.append(actions);cards.append(card);
+    const dialog=this.modal('minigame.title','minigame.subtitle');dialog.dataset.gameLibrary='true';
+    const cards=el('div','adventure-game-grid');
+    for(const game of this.enabledGames()){
+      const card=el('article','adventure-game-card');card.dataset.game=game.id;
+      card.append(gameEmblem(game.id),el('h3','',this.t(game.title)));
+      const enter=button('כניסה','game-enter',()=>this.gameHome(game.id),'adventure-enter');enter.dataset.gameId=game.id;enter.setAttribute('aria-label','כניסה · '+this.t(game.title));card.append(enter);cards.append(card);
     }
     dialog.append(cards);
+  }
+  gameHome(id){
+    const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle');dialog.dataset.gameHome=id;
+    const hero=el('div','adventure-game-hero');hero.append(gameEmblem(id));dialog.append(hero);
+    const actions=el('div','adventure-home-actions');
+    actions.append(this.playButton(id,'game-play',()=>this.stages(id)),button('איך לשחק','game-help',()=>this.intro(id)),button('שדרוגים','equipment-shop',()=>this.gameUpgrades(id)));
+    dialog.append(actions,button('כל המשחקים','game-library-back',()=>this.menu(),'adventure-back'));
+  }
+  gameUpgrades(id){
+    const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'equipment.hint');dialog.dataset.gameUpgrades=id;
+    const level=this.engine.state.minigameLevels[id],next=this.data.config.minigameLevels[id]?.[level];
+    dialog.append(gameEmblem(id),el('p','',this.t('minigame.level',{level,difficulty:gameContext(this.engine,this.data.config.minigames,this.now(),id).level})));
+    const upgrade=button(next?this.t('minigame.upgrade',{cost:next.cost}):this.t('app.maxLevel'),'game-upgrade',()=>{const result=this.activity.upgrade(id);if(result.ok)this.gameUpgrades(id);else this.ui.result(result);},'primary-button');upgrade.disabled=!next;
+    dialog.append(upgrade,button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(id)),button('חזרה למשחק','game-home-back',()=>this.gameHome(id)));
+    if(id==='soccer')dialog.append(button(this.t('soccer.training'),'soccer-training',()=>this.training()));
   }
   equipment(id) {
     if(id==='navalDuel')return this.stages(id);
@@ -158,7 +164,7 @@ export class ActivityInterface {
       const stage=i+1,locked=stage>p.stage;
       const node=button(`${this.t('minigame.stage',{stage})} ${locked?'🔒':'★'.repeat(stars)+'☆'.repeat(3-stars)}`,'stage-play',()=>this.start(id,undefined,stage));
       node.title=this.t(this.data.config.minigames[id].levels[i].feature);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
-    });dialog.append(map);
+    });dialog.append(map,button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
   }
   autoLaunch(choice) {
     if(this.requireDaily(choice.gameId)){this.activity.cancel(choice.eventId);return;}

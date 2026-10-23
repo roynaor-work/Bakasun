@@ -1,5 +1,5 @@
-import {gameResult} from '../minigames/result.mjs?v=naval-art-20261022-2';
-import { startAliens } from '../minigames/aliens.mjs?v=naval-art-20261022-2';
+import {gameResult} from '../minigames/result.mjs?v=island-art-20261022-3';
+import { startAliens } from '../minigames/aliens.mjs?v=island-art-20261022-3';
 
 export function install(registry,data) {
   const balance=data.config.minigames.alienDefense;

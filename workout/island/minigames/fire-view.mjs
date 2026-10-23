@@ -1,11 +1,12 @@
-import {fireScreenMovement} from './fire-navigation.mjs?v=naval-art-20261022-2';
+import {surfaceTexture,adventureRenderer} from '../presentation/surfaces.mjs?v=island-art-20261022-3';
+import {fireScreenMovement} from './fire-navigation.mjs?v=island-art-20261022-3';
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {palette} from '../view/environment.mjs?v=naval-art-20261022-2';
-import {loadFireTruck} from './fire-truck.mjs?v=naval-art-20261022-2';
-import {drawWaterDrop,drawFireArrow} from './fire-canvas.mjs?v=naval-art-20261022-2';
-import {LocalModels,fitModel} from '../view/local-models.mjs?v=naval-art-20261022-2';
-import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=naval-art-20261022-2';
+import {palette} from '../view/environment.mjs?v=island-art-20261022-3';
+import {loadFireTruck} from './fire-truck.mjs?v=island-art-20261022-3';
+import {drawWaterDrop,drawFireArrow} from './fire-canvas.mjs?v=island-art-20261022-3';
+import {LocalModels,fitModel} from '../view/local-models.mjs?v=island-art-20261022-3';
+import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=island-art-20261022-3';
 
 /** Own everything in this round. Static colored parts share a material and are
  * merged at setup; particles, stream vertices and scratch vectors are fixed. */
@@ -18,8 +19,8 @@ export function createFireScene(ctx,model,adapters={}) {
   const ownG=g=>(geometries.add(g),g),ownM=m=>(materials.add(m),m);
   const solid=ownM(new T.MeshStandardMaterial({vertexColors:true,roughness:.82}));
   scene.background=new T.Color(r.sky);scene.fog=new T.Fog(r.sky,r.fogNear,r.fogFar);
-  scene.add(new T.HemisphereLight(r.sun,palette.teal,r.hemisphereIntensity));
-  const sun=new T.DirectionalLight(r.sun,r.sunIntensity);sun.position.set(-12,30,20);scene.add(sun);
+  scene.add(new T.HemisphereLight('#fff2d9','#4b7774',1.6));
+  const sun=new T.DirectionalLight(r.sun,2.4);sun.position.set(-12,30,20);scene.add(sun);
   const camera=new T.OrthographicCamera(-balance.city.extent/2,balance.city.extent/2,20,-20,.1,180);
   const focus=new T.Vector3(model.truck.x,0,model.truck.z);let lastAnimate=model.time;
   camera.position.fromArray(r.camera);camera.lookAt(...r.lookAt);camera.updateMatrixWorld();
@@ -38,6 +39,14 @@ export function createFireScene(ctx,model,adapters={}) {
     root.clear();const g=ownG(mergeGeometries(parts));for(const p of parts)p.dispose();root.add(new T.Mesh(g,solid));
   }
   const city=balance.city,cityColors=city.colors;
+  const grassMap=surfaceTexture('grass',18),roadMap=surfaceTexture('asphalt',1);textures.add(grassMap);textures.add(roadMap);
+  const lawn=new T.Mesh(ownG(new T.PlaneGeometry(city.extent+city.cameraLimit*2,city.extent+city.cameraLimit*2)),ownM(new T.MeshStandardMaterial({map:grassMap,roughness:1})));lawn.rotation.x=-Math.PI/2;lawn.position.y=-.085;scene.add(lawn);
+  const roadMaterial=ownM(new T.MeshStandardMaterial({map:roadMap,roughness:.92})),roadParts=[];
+  const asphalt=(w,d,x,z)=>{const g=new T.PlaneGeometry(w,d);g.rotateX(-Math.PI/2);g.translate(x,.083,z);const uv=g.attributes.uv;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)*w/4,uv.getY(i)*d/4);roadParts.push(g);};
+  for(const x of city.roadsX)asphalt(city.roadWidth,city.extent,x,0);
+  const roadEdges=[-city.extent/2,...[...city.roadsX].sort((a,b)=>a-b).flatMap(x=>[x-city.roadWidth/2,x+city.roadWidth/2]),city.extent/2];
+  for(const z of city.roadsZ)for(let i=0;i<roadEdges.length-1;i+=2){const left=Math.max(-city.extent/2,roadEdges[i]),right=Math.min(city.extent/2,roadEdges[i+1]);if(right>left)asphalt(right-left,city.roadWidth,(left+right)/2,z);}
+  const roadGeometry=ownG(mergeGeometries(roadParts));roadParts.forEach(g=>g.dispose());scene.add(new T.Mesh(roadGeometry,roadMaterial));
   box(city.extent+city.cameraLimit*2,.4,city.extent+city.cameraLimit*2,cityColors.grass,0,-.3,0);
   // Continuous streets meet at all sixteen nodes. Lots begin beyond the full
   // truck turning envelope; the same bounds are used by the pure simulation.
@@ -234,7 +243,7 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
   const onLost=event=>{event.preventDefault();failed=true;dispose();};
   function dispose(){if(disposed)return;disposed=true;surface.removeEventListener('webglcontextlost',onLost);world?.dispose();renderer.dispose();renderer.forceContextLoss();surface.width=surface.height=0;}
   try{
-    renderer.setPixelRatio(r.dpr);renderer.setSize(r.width,r.height,false);renderer.outputColorSpace=T.SRGBColorSpace;
+    renderer.setPixelRatio(r.dpr);renderer.setSize(r.width,r.height,false);adventureRenderer(renderer);
     world=createFireScene(ctx,model);surface.addEventListener('webglcontextlost',onLost);
     if(globalThis.document){
       void loadFireTruck(ctx.balance).then(visual=>{if(visual)world.setTruck(visual);}).catch(()=>{});

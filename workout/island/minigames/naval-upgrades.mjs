@@ -1,4 +1,4 @@
-import {equipmentOffer} from '../activity/equipment.mjs?v=naval-art-20261022-2';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-art-20261022-3';
 // Keep the five established save slots valid, including legacy shield purchases.
 // The four visible tracks reuse hull/damage/rate/ammo, so v15 saves need no migration.
 export const NAVAL_TRACKS=Object.freeze({hull:'hull',cannon:'damage',aim:'rate',speed:'ammo'});
@@ -6,7 +6,7 @@ export function navalUpgradeRanks(state){const saved=state?.minigameEquipment?.n
 const choices=new WeakMap();
 export const navalDifficulty=engine=>choices.get(engine)||'normal';
 export function ensureNavalTheme(){
- if(!document.querySelector('[data-naval-upgrade-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-upgrades.css?v=naval-art-20261022-2',import.meta.url).href;link.dataset.navalUpgradeStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-upgrade-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-upgrades.css?v=island-art-20261022-3',import.meta.url).href;link.dataset.navalUpgradeStyle='';document.head.append(link);}
 }
 export function navalUpgradePanel({engine,activity,data,t,refresh}){
  ensureNavalTheme();
