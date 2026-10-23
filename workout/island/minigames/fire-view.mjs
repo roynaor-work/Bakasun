@@ -1,14 +1,14 @@
 import {createUltraFireCity} from './ultra-fire-city.mjs';
 import {createUltraFireEffects} from './ultra-fire-effects.mjs';
 import {createUltraFireScenery} from './ultra-fire-scenery.mjs';
-import {fireScreenMovement} from './fire-navigation.mjs?v=island-ultra-20261023-1';
+import {fireScreenMovement} from './fire-navigation.mjs?v=island-play-20261024-1';
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {palette} from '../view/environment.mjs?v=island-ultra-20261023-1';
-import {loadFireTruck} from './fire-truck.mjs?v=island-ultra-20261023-1';
-import {drawWaterDrop,drawFireArrow} from './fire-canvas.mjs?v=island-ultra-20261023-1';
-import {LocalModels,fitModel} from '../view/local-models.mjs?v=island-ultra-20261023-1';
-import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=island-ultra-20261023-1';
+import {palette} from '../view/environment.mjs?v=island-play-20261024-1';
+import {loadFireTruck} from './fire-truck.mjs?v=island-play-20261024-1';
+import {drawWaterDrop,drawFireArrow,drawFireFeedback,pickFireObjective} from './fire-canvas.mjs?v=island-play-20261024-1';
+import {LocalModels,fitModel} from '../view/local-models.mjs?v=island-play-20261024-1';
+import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=island-play-20261024-1';
 
 /** Own everything in this round. Static colored parts share a material and are
  * merged at setup; particles, stream vertices and scratch vectors are fixed. */
@@ -205,6 +205,8 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
     degrade(fallback=false){if(disposed)return;if(fallback){failed=true;dispose();}else if(!low){low=true;renderer.setSize(r.width*r.resolutionScale,r.height*r.resolutionScale,false);}},dispose,
     resize(w=ctx.config.width,h=ctx.config.height){if(disposed)return;renderer.setSize(w*(low?r.resolutionScale:1),h*(low?r.resolutionScale:1),false);world.resize(w,h);},
     projectTarget(x,y){if(disposed)return null;world.worldPoint(x,y,point);world.project(point,screen);return {x:screen.x,y:screen.y};},
+    projectWorld(worldPosition){if(disposed)return null;point.fromArray(worldPosition);world.project(point,screen);return {x:screen.x,y:screen.y};},
+    pickObjectiveAt(x,y){if(disposed)return null;return pickFireObjective(x,y,model,ctx,w=>view.projectWorld(w),(x,y)=>view.projectTarget(x,y),()=>view.truckScreen());},
     truckScreen(){if(disposed)return null;point.set(model.truck.x,1.5,model.truck.z);world.project(point,screen);return {x:screen.x,y:screen.y};},
     isTruckAt(x,y){if(disposed)return undefined;const pos=view.truckScreen();return Math.hypot(x-pos.x,y-pos.y)<ctx.balance.vehicle.hitRadius;},
     movementAt(x,z){return fireScreenMovement(x,z,ctx.balance.city.cameraHeight*.82/Math.hypot(ctx.balance.city.cameraHeight*.82,ctx.balance.city.cameraBack*1.3+2.4));},
@@ -226,13 +228,12 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
         const {palette:colors}=ctx.config.visuals;p.font=r.markerFont;p.textAlign='center';
         for(const f of model.flames){if(!f.active)continue;world.worldPoint(f.x,f.y,point);point.y+=1.8;world.project(point,screen);
           if(f.warning>0){p.globalAlpha=.4+.6*Math.abs(Math.sin(model.time*14));p.strokeStyle=colors.embers;p.lineWidth=3;p.beginPath();p.arc(screen.x,screen.y+15,16,0,Math.PI*2);p.stroke();p.globalAlpha=1;}
-          else if(f.heat>0){p.fillStyle=palette.teal;p.fillRect(screen.x-r.barWidth/2,screen.y,r.barWidth,r.barHeight);p.fillStyle=f.heat>r.heatThresholds[1]?ctx.balance.fireTypes[0].color:colors.gold;p.fillRect(screen.x-r.barWidth/2,screen.y,r.barWidth*f.heat,r.barHeight);}
         }
         for(const rescue of model.rescues){if(rescue.expired||rescue.rescued)continue;point.fromArray(rescue.world);point.y+=2;world.project(point,screen);p.strokeStyle=rescue.safe?r.success:colors.embers;p.lineWidth=3;p.beginPath();p.arc(screen.x,screen.y,12,-Math.PI/2,-Math.PI/2+Math.PI*2*rescue.remaining/rescue.timeoutSeconds);p.stroke();p.fillStyle=colors.white;p.beginPath();p.arc(screen.x,screen.y-3,3,0,Math.PI*2);p.fill();p.fillRect(screen.x-3,screen.y+1,6,7);}
         for(const hp of ctx.balance.city.hydrants){point.fromArray(hp);point.y+=ctx.balance.hydrant.height+1.2+Math.sin(model.time*3)*.18;world.project(point,screen);drawWaterDrop(p,screen.x,screen.y,12);}
 
         drawFireArrow(p,model,ctx,(x,y)=>view.projectTarget(x,y),()=>view.truckScreen());
-        world.worldPoint(model.aim.x,model.aim.y,point);world.project(point,screen);p.strokeStyle=model.rescuing?r.success:colors.streamSpray;p.lineWidth=2;p.beginPath();p.arc(screen.x,screen.y,13,0,Math.PI*2);p.stroke();p.fillStyle=colors.pearl;p.fillRect(screen.x-2,screen.y-2,4,4);
+        drawFireFeedback(p,model,ctx,w=>view.projectWorld(w),(x,y)=>view.projectTarget(x,y),()=>view.truckScreen());
         return true;
       }catch{failed=true;dispose();return false;}
     }

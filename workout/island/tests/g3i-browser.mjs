@@ -57,7 +57,7 @@ await verify('g3i',[{width:844,height:390},{width:740,height:360}],async({page,v
  await scenario('steal');await tick(32);await page.locator('#pass').tap();await tick(32);const stolen=await snap();assert.equal(stolen.ball.owner,0);assert.equal(stolen.event.type,'steal');assert.ok(stolen.event.won);assert.ok(stolen.players[0].stealTime>0);await shot(`${viewport.width}-successful-steal`,viewport.width);
  // Every level reaches its quota using unmodified simulation, no controller.
  const attack=await page.evaluate(async()=>{
-  const {createSoccer}=await import('../island/minigames/soccer.mjs?v=island-ultra-20261023-1'),c=window.__island.data.config.minigames.soccer,rows=[];
+  const {createSoccer}=await import('../island/minigames/soccer.mjs?v=island-play-20261024-1'),c=window.__island.data.config.minigames.soccer,rows=[];
   for(const [difficulty,target]of [['easy',2],['normal',4],['hard',6]]){const m=createSoccer({config:c,seed:9,difficulty});let shots=0;for(let i=0;i<5400;i++){m.update(1/60);shots+=m.drainEvents().filter(e=>e.type==='shot'&&e.team===1).length;}rows.push({difficulty,shots,target});}return rows;
  });for(const r of attack)assert.ok(r.shots>=r.target,JSON.stringify(r));
  const text=await page.locator('.game-screen').evaluate(n=>{const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT),found=[];while(w.nextNode()){const t=w.currentNode;if(!/[א-תa-z]/i.test(t.textContent))continue;const r=document.createRange();r.selectNodeContents(t);const s=getComputedStyle(t.parentElement);if(r.getBoundingClientRect().width>0&&s.visibility!=='hidden'&&s.display!=='none')found.push(t.textContent.trim());}return found;});assert.deepEqual(text,[]);

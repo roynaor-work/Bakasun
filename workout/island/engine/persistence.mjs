@@ -1,18 +1,18 @@
-import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-ultra-20261023-1';
-import {initialFireCertificates,validFireCertificates} from '../activity/fire-certificates.mjs?v=island-ultra-20261023-1';
-import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-ultra-20261023-1';
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-ultra-20261023-1';
-import {withCityHall} from './city-hall.mjs?v=island-ultra-20261023-1';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-ultra-20261023-1';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-ultra-20261023-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=island-ultra-20261023-1';
-import {initialProgress} from '../activity/progress.mjs?v=island-ultra-20261023-1';
-import { cellsFor } from './rules.mjs?v=island-ultra-20261023-1';
-import {repairHarbors} from './placement-help.mjs?v=island-ultra-20261023-1';
-import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-ultra-20261023-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-ultra-20261023-1';
+import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-play-20261024-1';
+import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-play-20261024-1';
+import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-play-20261024-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-play-20261024-1';
+import {withCityHall} from './city-hall.mjs?v=island-play-20261024-1';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-play-20261024-1';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-play-20261024-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=island-play-20261024-1';
+import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-play-20261024-1';
+import { cellsFor } from './rules.mjs?v=island-play-20261024-1';
+import {repairHarbors} from './placement-help.mjs?v=island-play-20261024-1';
+import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-play-20261024-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-play-20261024-1';
 
-export const CURRENT_VERSION = 16;
+export const CURRENT_VERSION = 17;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -37,6 +37,22 @@ export function createInitialState(data, now = Date.now()) {
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  16(old,data){
+    const state={...old,version:17};
+    if(isObject(old.minigameProgress)){
+      state.minigameProgress={...old.minigameProgress};
+      for(const id of ['alienDefense','fireRescue','navalDuel','soccer','tennis'])if(id in state.minigameProgress)state.minigameProgress[id]=extendStageProgress(state.minigameProgress[id],10,data.config.minigames[id]?.levels?.length);
+    }
+    // This game did not exist in v16. Missing tracks of older games still fail.
+    if(data.config.minigameLevels?.islandRacing){
+      if(isObject(old.minigameLevels)&&!Object.hasOwn(old.minigameLevels,'islandRacing'))state.minigameLevels={...old.minigameLevels,islandRacing:1};
+      if(isObject(state.minigameProgress)&&!Object.hasOwn(state.minigameProgress,'islandRacing'))state.minigameProgress={...state.minigameProgress,islandRacing:initialProgress(data).islandRacing};
+      if(isObject(old.minigameEquipment)&&!Object.hasOwn(old.minigameEquipment,'islandRacing'))state.minigameEquipment={...old.minigameEquipment,islandRacing:initialEquipment(data).islandRacing};
+    }
+    const fireCount=data.config.minigames.fireRescue.levels.length;
+    if(fireCount>10&&Array.isArray(old.fireCertificates)&&old.fireCertificates.length===10&&old.fireCertificates.every(c=>c===null||validCertificate(c)))state.fireCertificates=[...old.fireCertificates,...Array(fireCount-10).fill(null)];
+    return state;
+  },
   15(old){return {...old,version:16,learning:initialLearning(old.createdAt||old.updatedAt||Date.now())};},
   14(old,data){return {...old,version:15,fireCertificates:initialFireCertificates(data)};},
   13(old){return {...old,version:14,hangar:initialHangar()};},

@@ -25,9 +25,10 @@ test('G2k idle movement never fires; first press creates exactly one ordinary sh
  const fired=m.shots[0].slot;advance(m,.1,{});assert.equal(m.shots.length,1);assert.equal(m.shots[0].slot,fired);
  advance(m,1,{});assert.equal(m.shots.length,0);
 });
-test('G2k three enemy roles enter from above, face down, descend, dive and return while shooting in stage three',()=>{
+test('G2k the short authored fleet introduces weavers in stage three and three roles in stage four',()=>{
  const specs=alienModelSpecs(balance);assert.equal(specs.player.rotationY,90);assert.ok(specs.enemies.every(s=>s.rotationY===270));
- const m=make({level:3});assert.equal(m.aliens.length,18);assert.equal(new Set(m.aliens.map(a=>a.kind)).size,3);assert.ok(m.aliens.every(a=>a.facing===1&&a.y+a.radius<0));
+ const introduction=make({level:3});assert.equal(introduction.aliens.length,12);assert.deepEqual([...new Set(introduction.aliens.map(a=>a.kind))].sort(),[0,2]);
+ const m=make({level:4});assert.equal(m.aliens.length,12);assert.equal(new Set(m.aliens.map(a=>a.kind)).size,3);assert.ok(m.aliens.every(a=>a.facing===1&&a.y+a.radius<0));
  const base=m.aliens[0].baseY;let diver,peak=0,returned=false,enemyFire=false;
  for(let i=0;i<1100&&!m.result;i++){
   m.update(.01,{});enemyFire||=m.bolts.length>0;
@@ -50,7 +51,7 @@ test('G2k small earned rate and delayed double-shot preserve a single starting p
  for(const rapid of [0,1,2]){const m=make({hangar:{rapid}});m.update(.01,{firing:true});assert.equal(m.shots.length,1);}
  const m=make();m.aliens.splice(0);advance(m,.4);assert.ok(m.choosing);assert.ok(!m.choices.includes('wing'));
 });
-test('G2k ten seeded two-button pilots react every 240 ms, win at least seven and take real damage',()=>{
+test('G2k ten seeded two-button pilots learn the static tutorial safely while incoming bolts still cause real damage',()=>{
  const c=balance.calibration,results=[];
  for(let seed=1;seed<=c.seeds;seed++){
   const m=make({random:seededRandom(seed),roundChoices:false}),memory={};let input={};
@@ -60,5 +61,8 @@ test('G2k ten seeded two-button pilots react every 240 ms, win at least seven an
   }
   results.push({seed,outcome:m.result?.outcome,lives:m.lives,seconds:+m.time.toFixed(2)});
  }
- console.log('G2k two-button easy calibration',JSON.stringify(results));assert.ok(results.filter(r=>r.outcome==='win').length>=c.minimumWins);assert.ok(results.filter(r=>r.outcome==='win').some(r=>r.lives<balance.levels[0].lives));
+ console.log('G2k two-button easy calibration',JSON.stringify(results));assert.ok(results.filter(r=>r.outcome==='win').length>=c.minimumWins);
+ assert.equal(balance.stageBehaviors[0].motion,'static');assert.equal(balance.stageBehaviors[0].diveEverySeconds,0);assert.ok(results.filter(r=>r.outcome==='win').every(r=>r.lives===balance.levels[0].lives));
+ const incoming=make({level:2}),lives=incoming.lives;incoming.bolts.push({x:incoming.player.x,y:incoming.player.y-35,vx:0,vy:1000});incoming.update(.04,{});
+ assert.equal(incoming.lives,lives-1);assert.ok(incoming.invulnerable>0);assert.equal(incoming.feedback.kind,'player-hit');
 });

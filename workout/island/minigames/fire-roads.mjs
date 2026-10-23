@@ -113,26 +113,43 @@ export function slideFireTruck(truck,dx,dz,buildings,vehicle){
 }
 export function createFireDriver(truck,balance){
   const route=createRouteDriver(truck,balance),roads=route.roads,v=balance.vehicle,city=balance.city;
-  let routed=false;
+  let routed=false,blockedSeconds=0,assistedUntil=0,clock=0;
   return {roads,update(dt,input={}){
     if(dt<=0)return 0;
+    clock+=dt;
     const dx=Number(input.moveX)||Number(Boolean(input.right))-Number(Boolean(input.left)),dz=Number(input.moveZ)||0;
     const throttle=fireThrottle(dx,dz,balance.controls);
     // Point navigation remains available for the existing deterministic pilots.
     // Live touch/keyboard input always uses continuous steering below.
     if(!throttle&&(Number.isFinite(input.truckX)||Number.isFinite(input.truckZ))){routed=true;return route.update(dt,input);}
     if(routed){truck.speed=0;routed=false;}
-    const before=truck.speed,targetSpeed=v.speed*throttle;
-    truck.speed+=clamp(targetSpeed-truck.speed,-v.speed/v.brakeSeconds*dt,v.speed/v.accelerationSeconds*dt);
     const road=projectFireRoad(roads,truck),horizontal=road.edge.a.z===road.edge.b.z;
-    let lane=0;
+    let lane=0,heading=truck.heading;
     if(throttle){
-      let heading=Math.atan2(-dx,-dz),axis=horizontal?(dx>=0?-Math.PI/2:Math.PI/2):(dz<=0?0:Math.PI);
+      heading=Math.atan2(-dx,-dz);let axis=horizontal?(dx>=0?-Math.PI/2:Math.PI/2):(dz<=0?0:Math.PI);
+      // A blocked perpendicular turn is buffered until the next intersection.
+      // This is opt-in assistance; the low-level continuous steering API stays
+      // available to deterministic callers without changing its response.
+      if(input.assisted&&blockedSeconds>.16)assistedUntil=clock+.8;
+      if(input.assisted&&clock<assistedUntil){
+        const junction=roads.nodes.reduce((best,n)=>distance(n,truck)<distance(best,truck)?n:best,roads.nodes[0]);
+        if(distance(junction,truck)>1.25){
+          const along=horizontal?(-Math.sin(truck.yaw)||1):(-Math.cos(truck.yaw)||-1);
+          const candidates=[road.edge.a,road.edge.b],forward=candidates.find(n=>horizontal?(n.x-truck.x)*along>0:(n.z-truck.z)*along>0)||junction;
+          heading=Math.atan2(truck.x-forward.x,truck.z-forward.z);axis=heading;
+        }else{assistedUntil=0;blockedSeconds=0;}
+      }
       const alignment=Math.abs(angleTo(heading,axis));
       // Deliberate turns override assistance. No position or heading snapping.
       lane=road.distance<city.roadWidth/2?Math.max(0,1-alignment/city.laneAngle):0;
       heading+=angleTo(heading,axis)*city.laneAlign*lane;
       truck.heading=heading;
+    }
+    const before=truck.speed,turn=Math.abs(angleTo(truck.yaw,heading));
+    const corner=Boolean(input.assisted&&throttle&&turn>.28);
+    const targetSpeed=corner?Math.min(v.speed*throttle,4.8+Math.max(0,Math.cos(turn))*2.4):v.speed*throttle;
+    truck.speed+=clamp(targetSpeed-truck.speed,-v.speed/(corner?.16:v.brakeSeconds)*dt,v.speed/v.accelerationSeconds*dt);
+    if(throttle){
       const delta=angleTo(truck.yaw,heading),step=clamp(delta*(1-Math.exp(-v.turnResponse*dt)),-v.turnRate*dt,v.turnRate*dt);
       truck.yaw+=step;
     }
@@ -146,9 +163,10 @@ export function createFireDriver(truck,balance){
     const limit=city.extent/2-Math.hypot(v.length/2,v.width/2);
     truck.x=clamp(truck.x,-limit,limit);truck.z=clamp(truck.z,-limit,limit);
     const moved=Math.hypot(truck.x-oldX,truck.z-oldZ);
+    if(input.assisted){blockedSeconds=throttle&&travel>.01&&moved<travel*.2?blockedSeconds+dt:Math.max(0,blockedSeconds-dt*2);if(!throttle){blockedSeconds=0;assistedUntil=0;}}
     truck.velocityX=(truck.x-oldX)/dt;truck.velocityZ=(truck.z-oldZ)/dt;
     truck.targetX=truck.x+dx;truck.targetZ=truck.z+dz;
-    truck.driving=truck.speed>EPS;truck.wheelRotation+=moved/v.wheelRadius;
+    truck.driving=input.assisted?moved/dt>.06:truck.speed>EPS;truck.blocked=Boolean(input.assisted&&blockedSeconds>.12);truck.wheelRotation+=moved/v.wheelRadius;
     return moved;
   }};
 }

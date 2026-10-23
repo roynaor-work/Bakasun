@@ -6,10 +6,10 @@ export function createFireLadder(settings,rescues,flames,balance){
   const ladder={mode,sway:0,wind:0,stable:true,engaged:false,extension:0,target:null,available:false,completed:0,targets:[...rescues,...access]};
   let heldTarget=null;
   const pending=r=>r.kind==='access'?flames[r.fireIndex].active&&flames[r.fireIndex].heat>0&&!r.accessed:!r.rescued&&!r.expired;
-  function select(truck){return ladder.targets.filter(pending).sort((a,b)=>Math.hypot(a.world[0]-truck.x,a.world[2]-truck.z)-Math.hypot(b.world[0]-truck.x,b.world[2]-truck.z))[0];}
+  function select(truck){const people=rescues.filter(pending),targets=people.length?people:ladder.targets.filter(pending);return targets.sort((a,b)=>Math.hypot(a.world[0]-truck.x,a.world[2]-truck.z)-Math.hypot(b.world[0]-truck.x,b.world[2]-truck.z))[0];}
   return {state:ladder,
     prepare(dt,time,input,truck){
-      if(!input.rescue)heldTarget=null;
+      if(!input.rescue||heldTarget&&(!pending(heldTarget)&&mode!=='wind'||Math.hypot(truck.x-heldTarget.world[0],truck.z-heldTarget.world[2])>balance.rescue.truckRadius))heldTarget=null;
       ladder.target=heldTarget||select(truck);if(input.rescue&&!heldTarget&&ladder.target&&Math.hypot(truck.x-ladder.target.world[0],truck.z-ladder.target.world[2])<=balance.rescue.truckRadius)heldTarget=ladder.target;ladder.available=Boolean(ladder.target);ladder.engaged=Boolean(input.rescue&&ladder.target&&Math.hypot(truck.x-ladder.target.world[0],truck.z-ladder.target.world[2])<=balance.rescue.truckRadius);
       ladder.wind=mode==='wind'?.7+Math.sin(time*1.7)*.24:0;
       ladder.sway=mode==='wind'&&ladder.engaged?Math.max(-1,Math.min(1,ladder.sway+(ladder.wind+(input.moveX||0)*rules.stabilizePower)*dt)):ladder.sway*Math.exp(-dt*4);

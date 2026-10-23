@@ -1,5 +1,5 @@
-import {DATA_VERSION} from '../release.mjs?v=island-ultra-20261023-1';
-/** Frames captured from the real game scenes. Replace the five WebP files to
+import {DATA_VERSION} from '../release.mjs?v=island-play-20261024-1';
+/** Frames captured from the real game scenes. Replace the WebP files to
  * update the library after a game-art delivery; no UI changes are needed. */
 const ARTWORK=Object.freeze({
   navalDuel:{file:'naval.webp',category:'ים פתוח',description:'קרב ספינות בין איים, מול צי היריב.'},
@@ -7,6 +7,7 @@ const ARTWORK=Object.freeze({
   alienDefense:{file:'space.webp',category:'חלל',description:'טיסת הגנה מול טייסת החייזרים.'},
   soccer:{file:'football.webp',category:'ספורט',description:'הקבוצה שלך, המגרש והדרך לאליפות.'},
   tennis:{file:'tennis.webp',category:'ספורט',description:'משחק טניס במגרש של האי.'},
+  islandRacing:{file:'racing.webp',category:'מרוצים',description:'מרוץ תלת־ממדי בין חופים, ג׳ונגלים ופסגות מול ארבעה נהגים.'},
 });
 
 export function gameArtwork(id){return ARTWORK[id]||ARTWORK.navalDuel;}

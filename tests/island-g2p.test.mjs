@@ -41,14 +41,22 @@ test('G2p stage one settles in the upper quarter, and all stages begin far above
 });
 test('G2p entry arcs remain continuous on the first frame and across the settling boundary',()=>{
  for(const level of [1,5,10]){
-  const m=make(level),first=m.aliens[0],mid=[];let maxStep=0;
+  const m=make(level),first=m.aliens[0],reference=make(level),referenceFirst=reference.aliens[0],mid=[];let maxStep=0;
+  // Isolate the entry arc from the authored sway/phase motion shared by a fleet
+  // already in position. Measuring against baseX conflates those two motions.
+  for(const a of reference.aliens){a.entry=0;a.entrySide=0;}
   for(let i=0;i<200;i++){
-   const previous=new Map(m.aliens.map(a=>[a.id,{x:a.x,y:a.y}]));m.update(.01);
-   for(const a of m.aliens){const p=previous.get(a.id);if(p){const step=Math.hypot(a.x-p.x,a.y-p.y);maxStep=Math.max(maxStep,step);assert.ok(step<3,`${level}/${a.id}: ${step}`);}}
-   if(i===80)mid.push(first.x-first.baseX);
+   const previous=new Map(m.aliens.map(a=>[a.id,{x:a.x,y:a.y,radius:a.radius,kind:a.kind}]));m.update(.01);reference.update(.01);
+   for(const a of m.aliens){const p=previous.get(a.id);if(p){const step=Math.hypot(a.x-p.x,a.y-p.y);maxStep=Math.max(maxStep,step);if(!(step<3)){
+    const pairs=m.aliens.filter(other=>other.id!==a.id).map(other=>{const before=previous.get(other.id),need=a.radius+other.radius+b.formation.collisionGap;return {id:other.id,need,before:before?Math.hypot(p.x-before.x,p.y-before.y):null,after:Math.hypot(a.x-other.x,a.y-other.y)};}).filter(pair=>pair.before!==null&&Math.min(pair.before,pair.after)<pair.need+10);
+    assert.fail(JSON.stringify({level,id:a.id,time:m.time,step,formation:a.formation,kind:a.kind,phase:a.phase,base:{x:a.baseX,y:a.baseY},previous:p,current:{x:a.x,y:a.y},entry:a.entry,pairs}));
+   }}}
+   if(i===80)mid.push(first.x-referenceFirst.x);
   }
-  assert.ok(Math.abs(mid[0])>b.tactics.entrySway*.9,'visible curved entry');assert.ok(maxStep>0);
-  const y=first.baseY;advance(m,1);assert.ok(first.baseY>y);
+  assert.ok(Math.abs(mid[0])>b.tactics.entrySway*.9,JSON.stringify({level,entryArc:mid[0],minimum:b.tactics.entrySway*.9}));assert.ok(maxStep>0);
+  const x=first.x,y=first.baseY;advance(m,1);
+  if(level===1){assert.equal(m.behavior.motion,'static');assert.equal(first.baseY,y);assert.equal(first.x,x);}
+  else{assert.notEqual(m.behavior.motion,'static');assert.ok(first.baseY>y);}
  }
 });
 test('G2p dive follows a continuous arc and rejoins the moving formation',()=>{

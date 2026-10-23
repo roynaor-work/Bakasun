@@ -1,7 +1,9 @@
+import {expectedGameField,expectedGameContent} from './helpers/legacy-game-content.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {createSoccer,opponentSettings} from '../workout/island/minigames/soccer.mjs';
+import {createSoccer,opponentSettings,passDestination} from '../workout/island/minigames/soccer.mjs';
+import {campaignConfig} from '../workout/island/minigames/soccer-campaign.mjs';
 import {soccerResult} from '../workout/island/minigames/soccer-result.mjs';
 import {attributes,initialSoccerCard,cardEffects,cardRating} from '../workout/island/activity/soccer-card.mjs';
 import {createEngine} from '../workout/island/engine/engine.mjs';
@@ -40,14 +42,23 @@ test('G3c assist works only in opposing half and within the goal cone, targeting
  assert.equal(shot({x:-2,moveX:1}).getState().event.assisted,false);
  assert.equal(shot({x:7,moveZ:1}).getState().event.assisted,false);
 });
-test('G3c pass compatibility uses the G3d endpoint and transfers control at departure',()=>{
- const g=setup(),s=g.getState();Object.assign(s.players[1],{x:6,z:.4});Object.assign(s.players[2],{x:3,z:1});g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,2);assert.equal(s.controlled,s.event.target);assert.equal(s.ball.owner,null);
+test('G3c a local forward pass uses bounded assistance and selects its real outfield receiver',()=>{
+ const g=setup(),s=g.getState();Object.assign(s.players[1],{x:6,z:.4});Object.assign(s.players[2],{x:3,z:1});
+ const origin={x:s.ball.x,z:s.ball.z},destination=passDestination({...s,aim:{x:1,z:0}},c);
+ assert.equal(destination.target,1);assert.ok(Math.abs(destination.correctionRadians)<=18*Math.PI/180);
+ g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,1);assert.equal(s.controlled,1);assert.equal(s.ball.owner,null);
+ near(s.event.x,destination.x);near(s.event.z,destination.z);assert.deepEqual({x:s.passTarget.startX,z:s.passTarget.startZ},origin);
+ assert.ok(Math.hypot(s.ball.x-origin.x,s.ball.z-origin.z)<=Math.hypot(s.ball.vx,s.ball.vz)*dt+.02,'release is physical flight from the existing ball');
 });
-test('G3c short pass compatibility targets the nearest teammate to its endpoint',()=>{
- const g=setup(),s=g.getState();Object.assign(s.players[1],{x:10,z:1});Object.assign(s.players[2],{x:2,z:.3});g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.target,2);assert.equal(s.controlled,s.event.target);
+test('G3c a local pass may reach the keeper without selecting him in field mode',()=>{
+ const g=setup(),s=g.getState();Object.assign(s.players[1],{x:12,z:9});Object.assign(s.players[2],{x:3,z:.3});
+ g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,2);assert.equal(s.controlled,0);assert.equal(s.players[s.controlled].role,'striker');assert.equal(s.ball.owner,null);
+ assert.ok(Math.hypot(s.event.x-s.players[2].x,s.event.z-s.players[2].z)<1,'the actual pass still reaches the keeper area');
 });
-test('G3c pass to open space preserves its direction and transfers control at departure',()=>{
- const g=setup(),s=g.getState();g.update(dt,{passPressed:true,moveZ:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,1);assert.equal(s.controlled,s.event.target);near(s.event.x,-12);near(s.event.z,7);assert.ok(s.ball.vx<0&&s.ball.vz>0);
+test('G3c pass to open space preserves its ray without assigning a remote receiver',()=>{
+ const g=setup(),s=g.getState(),origin={x:s.ball.x,z:s.ball.z};g.update(dt,{passPressed:true,moveZ:1});
+ assert.equal(s.event.type,'pass');assert.equal(s.event.target,null);assert.equal(s.controlled,0);assert.equal(s.passTarget,null);assert.equal(s.ball.owner,null);
+ near(s.event.x,origin.x);near(s.event.z,origin.z+c.passing.minDistance);near(s.ball.vx,0);assert.ok(s.ball.vz>0);
 });
 test('G3c fixed-tick input retains short pass/switch/kick edges at 120Hz',()=>{
  const g=setup(),s=g.getState();g.update(dt/2,{kickHeld:true,moveZ:1});g.update(dt/2,{moveZ:1});assert.equal(s.charging,false);
@@ -64,13 +75,13 @@ test('G3c exhaustion stops sprint until minToStart; regeneration waits for delay
  advance(g,1.4,{});assert.ok(s.sprint.value>=c.sprint.minToStart);g.update(dt,{moveX:1,sprintHeld:true});assert.equal(s.sprint.active,true);
 });
 test('G3c defense is opposing possession; loose ball and home possession are attack',()=>{
- const g=setup(),s=g.getState();for(const owner of [3,null,1]){Object.assign(s.ball,{owner,y:2,grace:2});g.update(dt,{});assert.equal(s.mode,owner===3?'defense':'attack');}
+ const g=setup(),s=g.getState();for(const owner of [3,null,1]){const p=owner===null?null:s.players[owner];Object.assign(s.ball,{owner,x:p?p.x+p.fx*c.physics.dribbleOffset:0,z:p?p.z+p.fz*c.physics.dribbleOffset:0,y:p?c.physics.ballRadius:2,grace:2,lastTeam:p?.team??0,lastPlayer:p?.id??0});g.update(dt,{});assert.equal(s.mode,owner===3?'defense':'attack');if(p)assert.equal(s.ball.owner,p.id,'the fixture starts with real local possession');}
 });
 function defend(random=()=>0,extra={}){const g=setup({random,...extra}),s=g.getState();Object.assign(s.players[3],{x:.5,z:0});Object.assign(s.ball,{owner:3,x:.7,z:0,y:.22,grace:0});return g;}
 test('G3c steal success, failure, reach and cooldown are explicit',()=>{
  const g=defend(),s=g.getState();g.update(dt,{passPressed:true});assert.equal(s.ball.owner,0);near(s.players[0].stealCooldown,c.steal.cooldownSeconds);g.update(dt,{});s.ball.owner=3;g.update(dt,{passPressed:true});assert.equal(s.ball.owner,3);
  const miss=defend(()=>.99);miss.update(dt,{passPressed:true});assert.equal(miss.getState().event.won,false);assert.equal(miss.getState().ball.owner,3);
- const far=defend();far.getState().ball.x=5;far.update(dt,{passPressed:true});assert.equal(far.getState().ball.owner,3);
+ const far=defend(),f=far.getState();f.players[3].x=5;Object.assign(f.ball,{x:5.2,z:0,lastTeam:1,lastPlayer:3});const origin={x:f.ball.x,z:f.ball.z};far.update(dt,{passPressed:true});assert.equal(f.ball.owner,3);assert.ok(Math.hypot(f.ball.x-origin.x,f.ball.z-origin.z)<.2,'a failed distant tackle cannot teleport the owned ball');
 });
 test('G3c slide lunges, succeeds on contact and misses recover on grass before moving',()=>{
  const hit=defend(),s=hit.getState();hit.update(dt,{kickHeld:true,moveX:1});assert.ok(s.players[0].slideTime>0);assert.equal(s.ball.owner,0);near(s.players[0].slideCooldown,c.slide.cooldownSeconds);
@@ -112,7 +123,7 @@ test('G3f individual shot strength, controlled pace and enemy speed floor follow
   near(bb[controlled].vx/aa[controlled].vx,pace(bb[controlled])/pace(aa[controlled]));
   for(let i=0;i<aa.length;i++)if(i!==controlled){
    let ratio=pace(bb[i])/pace(aa[i]);
-   if(aa[i].team){const base=opponentSettings(c,3,'normal').speed,reference=players=>Math.max(...players.filter(p=>!p.team).map(p=>(c.players.speed+(p.speed-1)*c.players.speedPerRank)*pace(p)))*c.opponents.minSpeedRatio;ratio=Math.max(base*pace(bb[i]),reference(bb))/Math.max(base*pace(aa[i]),reference(aa));}
+   if(aa[i].team){const tuned=campaignConfig(c,3),base=opponentSettings(tuned,3,'normal').speed*(aa[i].role==='keeper'?c.ai.keeperSpeedScale:1),reference=players=>Math.max(...players.filter(p=>!p.team).map(p=>(c.players.speed+(p.speed-1)*c.players.speedPerRank)*pace(p)))*tuned.opponents.minSpeedRatio*tuned.ai.attack.normal.speed;ratio=Math.max(base*pace(bb[i]),reference(bb))/Math.max(base*pace(aa[i]),reference(aa));}
    near(bb[i].vx,aa[i].vx*ratio);near(bb[i].vz,aa[i].vz*ratio);
   }
  }
@@ -153,10 +164,10 @@ test('G3c no training or difficulty changes during any active game; no spending 
  const {engine:e}=fixture();pitch(e);e.state.soccerCard.stars=10;const {response}=round(e),before=structuredClone(e.state.soccerCard);assert.equal(e.trainSoccer('power').reason,'reason.gameBusy');assert.equal(e.setSoccerDifficulty('hard').reason,'reason.gameBusy');assert.deepEqual(e.state.soccerCard,before);response.cancel();assert.ok(e.trainSoccer('power').ok);
 });
 for(const version of [8,9])test(`G3c authentic v${version} fixture migrates through explicit steps without losing existing state`,async()=>{
- const f=fixture(),path=version===8?new URL('./fixtures/save-v8.json',import.meta.url):new URL('tests/fixtures/save-v9.json',root),old=JSON.parse(await readFile(path,'utf8')),before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(old.version,version);assert.ok(r.ok);assert.equal(r.state.version,16);assert.deepEqual(old,before);
+ const f=fixture(),path=version===8?new URL('./fixtures/save-v8.json',import.meta.url):new URL('tests/fixtures/save-v9.json',root),old=JSON.parse(await readFile(path,'utf8')),before=structuredClone(old),r=migrateSave(old,data,f.engine.registry);assert.equal(old.version,version);assert.ok(r.ok);assert.equal(r.state.version,17);assert.deepEqual(old,before);
  assert.equal(r.state.soccerCard.stars,old.minigameProgress.soccer.stars.reduce((a,b)=>a+b,0));for(const n of Object.values(r.state.soccerCard.attributes))assert.equal(n,50);assert.equal(r.state.soccerCard.difficulty,'easy');
- for(const key of Object.keys(old).filter(key=>!['version','buildings'].includes(key)))assert.deepEqual(r.state[key],key==='players'?[...old.players,...data.players.filter(p=>!old.players.some(old=>old.id===p.id))]:key==='team'?{...old.team,sportWins:{soccer:old.team.wins,tennis:0}}:key==='minigameEquipment'?{...old[key],tennis:{speed:0,hit:0,serve:0}}:key==='minigameProgress'?{...old[key],tennis:{stage:1,stars:Array(10).fill(0)}}:key==='minigameLevels'?{...old[key],tennis:1}:old[key],key);assert.deepEqual(r.state.buildings.filter(b=>b.typeId!=='cityHall'),old.buildings.filter(b=>b.typeId!=='cityHall'));
- if(version===9)assert.deepEqual(migrations[15](migrations[14](migrations[13](migrations[12](migrations[11](migrations[10](migrations[9](old,data),data),data),data),data),data),data),r.state);
+ for(const key of Object.keys(old).filter(key=>!['version','buildings'].includes(key)))assert.deepEqual(r.state[key],expectedGameField(key,key==='players'?[...old.players,...data.players.filter(p=>!old.players.some(old=>old.id===p.id))]:key==='team'?{...old.team,sportWins:{soccer:old.team.wins,tennis:0}}:key==='minigameEquipment'?{...old[key],tennis:{speed:0,hit:0,serve:0}}:key==='minigameProgress'?{...old[key],tennis:{stage:1,stars:Array(10).fill(0)}}:key==='minigameLevels'?{...old[key],tennis:1}:old[key],data),key);assert.deepEqual(r.state.buildings.filter(b=>b.typeId!=='cityHall'),old.buildings.filter(b=>b.typeId!=='cityHall'));
+ if(version===9)assert.deepEqual(migrations[16](migrations[15](migrations[14](migrations[13](migrations[12](migrations[11](migrations[10](migrations[9](old,data),data),data),data),data),data),data),data),r.state);
  f.storage.setItem('island.v1',JSON.stringify(old));const loaded=createEngine(data,{storage:f.storage});assert.ok(loaded.storageStatus.ok);assert.deepEqual(loaded.state.soccerCard,r.state.soccerCard);assert.ok(loaded.importJSON(old).ok);
 });
 test('G3c malformed legacy card sources reject cleanly rather than throwing in migration',async()=>{

@@ -1,3 +1,4 @@
+import {expectedGameField,expectedGameContent} from './helpers/legacy-game-content.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -11,11 +12,21 @@ import {loadData} from '../workout/island/engine/load-data.mjs';
 import {migrations,migrateSave,validateSave,CURRENT_VERSION} from '../workout/island/engine/persistence.mjs';
 import {soccerResult} from '../workout/island/minigames/soccer-result.mjs';
 import {bot} from '../workout/island/tests/g3c-bot.mjs';
+import {campaignConfig} from '../workout/island/minigames/soccer-campaign.mjs';
 
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames.soccer;
 const dt=config.match.fixedStep,hx=config.pitch.length/2,hz=config.pitch.width/2,r=config.physics.ballRadius;
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} != ${b}`);
 const root=new URL('../workout/island/',import.meta.url),data=await loadData(root,async u=>({ok:true,json:async()=>JSON.parse(await readFile(u,'utf8'))}));
+function walkRestart(game,input={}){
+ const s=game.getState(),r={...s.restart},p=s.players[r.player],budget=(r.walkSeconds??config.restarts.walkSeconds)+config.match.restartSeconds+Math.max(config.restarts.idleReleaseSeconds,config.restarts.aiReleaseSeconds)+.5;
+ let previous={x:p.x,z:p.z},elapsed=0;
+ while(s.phase.startsWith('restart')&&elapsed<budget){
+  assert.equal(s.restart.player,r.player);game.update(dt,input);elapsed+=dt;
+  assert.ok(Math.hypot(p.x-previous.x,p.z-previous.z)<=config.players.speed*1.15*dt+1e-6,'restart taker cannot teleport to its spot');previous={x:p.x,z:p.z};
+ }
+ assert.equal(s.phase,'playing','a reserved taker eventually releases after walking to the spot');return r;
+}
 function city(){return createEngine(data,{storage:{getItem:()=>null,setItem(){}},now:()=>1_000_000});}
 function advance(g,seconds,input={}){for(let i=0;i<Math.ceil(seconds/dt);i++)g.update(dt,input);}
 function setup(ball={}){
@@ -116,10 +127,16 @@ test('G3f a keeper cannot catch an airborne ball outside the area but can handle
 });
 for(const lastTeam of [0,1])for(const side of [-1,1])test(`G3f goal-line restart uses last touch ${lastTeam} on end ${side}`,()=>{const g=setup({x:side*(hx+.1),z:hz-2,vx:side*30,lastTeam}),s=g.getState();g.update(dt);assert.equal(s.restart.type,lastTeam===(side>0?1:0)?'corner':'goalKick');assert.equal(s.restart.team,lastTeam===(side>0?1:0)?1-lastTeam:side>0?1:0);if(s.restart.type==='goalKick')assert.ok(Math.abs(Math.abs(s.restart.x)-(hx-config.pitch.goalAreaDepth))<1e-8);});
 test('G3f human throw waits for a pass release, raises both hands and throws inward independently of running',()=>{
- const g=setup({x:0,z:hz+.1,vz:30,lastTeam:1}),s=g.getState();g.update(dt);advance(g,config.match.restartSeconds+.1);assert.equal(s.phase,'restartReady');assert.ok(s.players[s.restart.player].throwTime>0);assert.equal(s.ball.y,config.restarts.throwHeight);advance(g,.6,{passHeld:true,moveX:-1,moveZ:-1});g.update(dt,{moveX:-1,moveZ:-1});assert.equal(s.phase,'playing');assert.equal(s.ball.owner,null);assert.ok(s.ball.vx<0&&s.ball.vz<0);assert.equal(s.event.type,'throw');
+ const g=setup({x:0,z:hz+.1,vz:30,lastTeam:1}),s=g.getState();Object.assign(s.players[1],{x:0,z:hz-1});g.update(dt);
+ const taker=s.restart.player,spot={x:s.restart.x,z:s.restart.z};let previous={...s.players[taker]};
+ for(let i=0;i<Math.ceil((config.match.restartSeconds+.1)/dt);i++){g.update(dt);assert.ok(Math.hypot(s.players[taker].x-previous.x,s.players[taker].z-previous.z)<=config.players.speed*1.15*dt+1e-6);previous={...s.players[taker]};}
+ assert.equal(s.phase,'restartReady');near(s.players[taker].x,spot.x);near(s.players[taker].z,spot.z);assert.ok(s.players[taker].throwTime>0);assert.equal(s.ball.y,config.restarts.throwHeight);
+ advance(g,.4,{passHeld:true,moveX:-1,moveZ:-1});assert.equal(s.phase,'restartReady','a held action within the ready window does not throw prematurely');g.update(dt,{moveX:-1,moveZ:-1});assert.equal(s.phase,'playing');assert.equal(s.ball.owner,null);assert.ok(s.ball.vx<0&&s.ball.vz<0);assert.equal(s.event.type,'throw');
 });
 test('G3f human corner creates a headable loft and landing marker, without a queued stoppage kick',()=>{
- const g=setup({x:hx+.1,z:hz-1,vx:30,lastTeam:1}),s=g.getState();g.update(dt,{kickHeld:true});advance(g,config.match.restartSeconds+.6);assert.equal(s.phase,'restartReady');assert.equal(s.charging,false);advance(g,.7,{passHeld:true,moveX:-1,moveZ:-1});g.update(dt,{moveX:-1,moveZ:-1});assert.equal(s.phase,'playing');assert.ok(s.ball.flight);assert.ok(s.ball.flight.height>=config.aerial.minHeight);assert.ok(s.passTarget);
+ const g=setup({x:hx+.1,z:hz-1,vx:30,lastTeam:1}),s=g.getState();g.update(dt,{kickHeld:true});walkRestart(g,{passAim:{x:-1,z:-1,manual:true}});
+ assert.equal(s.charging,false);assert.ok(s.ball.flight);assert.ok(s.ball.flight.height>=config.aerial.minHeight);assert.ok(s.ball.flight.x<s.ball.flight.fromX&&s.ball.flight.z<s.ball.flight.fromZ);
+ if(s.passTarget)assert.ok(Math.hypot(s.players[s.passTarget.player].x-s.passTarget.x,s.players[s.passTarget.player].z-s.passTarget.z)<=config.assistance.passing.maxLeadDistance+2.2,'only a local landing receiver is selected');
 });
 test('G3f grass rolling decays gradually, converges to the analytic range, and has no destination clamp',()=>{
  const b={x:0,z:0,y:r,vx:5,vz:0,vy:0,curve:0},speeds=[];for(let i=0;i<600;i++){rollBall(b,dt,config);speeds.push(b.vx);}for(let i=1;i<200;i++)assert.ok(speeds[i]>0&&speeds[i]<speeds[i-1]);assert.equal(b.vx,0);assert.ok(b.x>5/config.ball.grassFriction-.2&&b.x<5/config.ball.grassFriction+.2);
@@ -133,11 +150,12 @@ test('G3f manual shot goes against movement and body faces the strike, while a s
 test('G3f save probability is monotonic in keeper and shooter cards and shot quality, with strong corner/weak centre extremes',()=>{
  const card=n=>({reactions:n,catching:n,shot:n}),shot={speed:17,aim:.5,distance:7};assert.ok(keeperSaveChance(card(90),card(60),shot,config)>keeperSaveChance(card(30),card(60),shot,config));assert.ok(keeperSaveChance(card(60),card(30),shot,config)>keeperSaveChance(card(60),card(90),shot,config));assert.ok(keeperSaveChance(card(25),card(90),{speed:28,aim:.95,distance:4},config)<=.05);assert.ok(keeperSaveChance(card(90),card(25),{speed:8,aim:0,distance:4},config)>=.95);
 });
-for(const difficulty of ['easy','normal','hard'])test(`G3f enemy running speed has the ninety percent floor on ${difficulty}`,()=>{
- const g=createSoccer({config,difficulty}),s=g.getState();Object.assign(s.ball,{owner:null,x:0,z:0,y:50});for(const p of s.players)Object.assign(p,{x:-15,z:p.team?0:-5,cooldown:100});s.ball.x=12;s.ball.z=9;for(let i=0;i<45;i++)g.update(dt,{moveX:1});for(const p of s.players.filter(p=>p.team===1))assert.ok(Math.hypot(p.vx,p.vz)>=config.players.speed*config.opponents.minSpeedRatio*.99);
+for(const difficulty of ['easy','normal','hard'])test(`G3f enemy running retains the current campaign pace floor on ${difficulty}`,()=>{
+ const g=createSoccer({config,difficulty}),s=g.getState(),tuned=campaignConfig(config,1);Object.assign(s.ball,{owner:null,x:0,z:0,y:50});for(const p of s.players)Object.assign(p,{x:-15,z:p.team?0:-5,cooldown:100});s.ball.x=12;s.ball.z=9;for(let i=0;i<45;i++)g.update(dt,{moveX:1});
+ for(const p of s.players.filter(p=>p.team===1)){const floor=config.players.speed*tuned.opponents.minSpeedRatio*tuned.ai.attack[difficulty].speed*(p.role==='keeper'?config.ai.keeperSpeedScale:1)*.98;assert.ok(Math.hypot(p.vx,p.vz)>=floor,`${p.role} keeps an active stage-appropriate pace`);}
 });
-test('G3f keeper mode never switches to a field player, moves on its line, dives and distributes',()=>{
- const g=createSoccer({config,role:'keeper'}),s=g.getState();assert.equal(s.controlled,2);Object.assign(s.ball,{owner:3,x:0,z:1,grace:100});advance(g,.2,{moveZ:1,kickHeld:true,switchPlayer:true,kickAim:{x:0,z:1,manual:true}});assert.equal(s.controlled,2);assert.ok(s.players[2].diveTime>0);assert.ok(s.players[2].z>0);near(s.players[2].x,-hx+config.ai.keeperInset);Object.assign(s.ball,{owner:2,x:s.players[2].x,z:s.players[2].z});s.players[2].cooldown=0;g.update(dt,{passPressed:true});assert.equal(s.ball.owner,null);assert.equal(s.event.type,'pass');assert.equal(s.controlled,2);
+test('G3f keeper mode keeps selection, moves continuously within its area, dives and distributes',()=>{
+ const g=createSoccer({config,role:'keeper'}),s=g.getState(),keeper=s.players[2],before={x:keeper.x,z:keeper.z};assert.equal(s.controlled,2);Object.assign(s.ball,{owner:3,x:s.players[3].x-config.physics.dribbleOffset,z:s.players[3].z,grace:100});advance(g,.2,{moveZ:1,kickHeld:true,switchPlayer:true,kickAim:{x:0,z:1,manual:true}});assert.equal(s.controlled,2);assert.ok(keeper.diveTime>0);assert.ok(keeper.z>0);assert.ok(Math.abs(keeper.x-before.x)<=config.players.speed*.2*1.2);assert.ok(inPenaltyArea(keeper,keeper,s,config));Object.assign(s.ball,{owner:2,x:keeper.x,z:keeper.z});keeper.cooldown=0;g.update(dt,{passPressed:true});assert.equal(s.ball.owner,null);assert.equal(s.event.type,'pass');assert.equal(s.controlled,2);
 });
 test('G3f local short first names and shirt numbers are sanitized, resettable and persist through import',()=>{
  const e=city(),id=e.state.players[1].id;assert.equal(cleanFirstName('<script> דני 123',config),'script');assert.ok(e.editSoccerPlayer(id,{name:'דני! כהן 123',number:11}).ok);assert.equal(e.state.soccerRoster.players[1].name,'דני');assert.equal(e.editSoccerPlayer(id,{name:'x',number:100}).ok,false);const other=city();assert.ok(other.importJSON(e.exportJSON()).ok);assert.equal(other.state.soccerRoster.players[1].number,11);assert.equal(other.state.soccerRoster.players[1].name,'דני');assert.ok(other.editSoccerPlayer(id,{name:'',number:8}).ok);assert.equal(other.state.soccerRoster.players[1].name,'');
@@ -149,7 +167,7 @@ test('G3f practice daily cap, outdoor once/day, rollback and slow week/month pro
  const e=city(),s=e.state,start=0;for(let i=0;i<3;i++)assert.ok(awardSoccerPractice(s,config,'targets',start).ok);assert.equal(awardSoccerPractice(s,config,'targets',start).ok,false);assert.ok(awardSoccerPractice(s,config,'outdoor',start).ok);assert.equal(awardSoccerPractice(s,config,'outdoor',start).ok,false);assert.equal(s.soccerRoster.players[0].attributes.shot,50);for(let day=1;day<7;day++)for(const kind of ['targets','penalties','cones'])awardSoccerPractice(s,config,kind,day*config.training.dayMilliseconds);assert.equal(awardSoccerPractice(s,config,'targets',0).ok,false);assert.ok(s.soccerRoster.players[0].attributes.shot<=54);assert.equal(s.soccerCard.attributes.power,s.soccerRoster.players[0].attributes.shot);for(let day=7;day<30;day++)for(const kind of ['targets','penalties','cones'])awardSoccerPractice(s,config,kind,day*config.training.dayMilliseconds);assert.ok(s.soccerRoster.players[0].attributes.shot<=66);assert.ok(validateSave(s,data,e.registry).ok);
 });
 for(const version of [7,8,9,10,11,12,13])test(`G3f authentic v${version} reaches schema 13 with tennis, fourth player and training intact`,async()=>{
- const url=version===8||version>=12?new URL(`./fixtures/save-v${version}.json`,import.meta.url):new URL(`tests/fixtures/save-v${version}.json`,root),old=JSON.parse(await readFile(url,'utf8')),before=structuredClone(old),e=city(),r=migrateSave(old,data,e.registry);assert.ok(r.ok);assert.equal(CURRENT_VERSION,16);assert.equal(r.state.version,16);assert.deepEqual(old,before);assert.equal(r.state.players.length,4);assert.ok(r.state.minigameProgress.tennis);if(old.minigameProgress?.tennis)assert.deepEqual(r.state.minigameProgress.tennis,old.minigameProgress.tennis);assert.ok(validateSave(r.state,data,e.registry).ok);assert.ok(e.importJSON(old).ok);assert.ok(validateSave(e.state,data,e.registry).ok);if(version===12)assert.deepEqual(migrations[15](migrations[14](migrations[13](migrations[12](old,data),data),data),data),r.state);if(version===13){assert.deepEqual(r.state.soccerRoster,old.soccerRoster);assert.ok(r.state.soccerRoster.players[0].attributes.shot>50);assert.equal(r.state.soccerCard.attributes.power,r.state.soccerRoster.players[0].attributes.shot);}
+ const url=version===8||version>=12?new URL(`./fixtures/save-v${version}.json`,import.meta.url):new URL(`tests/fixtures/save-v${version}.json`,root),old=JSON.parse(await readFile(url,'utf8')),before=structuredClone(old),e=city(),r=migrateSave(old,data,e.registry);assert.ok(r.ok);assert.equal(CURRENT_VERSION,17);assert.equal(r.state.version,17);assert.deepEqual(old,before);assert.equal(r.state.players.length,4);assert.ok(r.state.minigameProgress.tennis);if(old.minigameProgress?.tennis)assert.deepEqual(r.state.minigameProgress.tennis,expectedGameField('minigameProgress',{tennis:old.minigameProgress.tennis},data).tennis);assert.ok(validateSave(r.state,data,e.registry).ok);assert.ok(e.importJSON(old).ok);assert.ok(validateSave(e.state,data,e.registry).ok);if(version===12)assert.deepEqual(migrations[16](migrations[15](migrations[14](migrations[13](migrations[12](old,data),data),data),data),data),r.state);if(version===13){assert.deepEqual(r.state.soccerRoster,old.soccerRoster);assert.ok(r.state.soccerRoster.players[0].attributes.shot>50);assert.equal(r.state.soccerCard.attributes.power,r.state.soccerRoster.players[0].attributes.shot);}
 });
 test('G3f explicit full 1 through 13 chain is additive for every prior migration',()=>{
  const e=city(),old={version:1,createdAt:1_000_000,updatedAt:1_000_000,money:200,buildings:e.state.buildings,world:e.state.world,avatar:e.state.avatar,players:e.state.players,team:{...e.state.team}};let s=old;for(let v=1;v<CURRENT_VERSION;v++){s=migrations[v](s,data,e.registry);assert.equal(s.version,v+1);}assert.ok(validateSave(s,data,e.registry).ok);assert.deepEqual(migrateSave(old,data,e.registry).state,s);
@@ -163,8 +181,8 @@ test('G3f malformed roster fields and legacy null players reject without throwin
 test('G3f practice finish is single-award and never grants match money, wins, stages or stars',()=>{
  const e=city();e.state.money=100000;e.skipTutorial();let placed=false;for(let z=0;z<16&&!placed;z++)for(let x=0;x<16&&!placed;x++)placed=e.place('soccer',x,z).ok;let ctx;e.registry.minigames.set('soccer',{...e.registry.minigames.get('soccer'),start:c=>(ctx=c,{dispose(){}})});assert.ok(e.startMinigame('soccer',{drill:'targets',seed:42,level:1}).ok);const before=structuredClone(e.state);assert.equal(e.editSoccerPlayer(e.state.players[0].id,{name:'x',number:5}).ok,false);assert.equal(e.setSoccerRole('keeper').ok,false);assert.equal(e.soccerOutdoorPractice().ok,false);const raw={drill:{kind:'targets',attempts:3,hits:1,elapsed:9}};assert.ok(ctx.finish(raw).ok);assert.equal(ctx.finish(raw).ok,false);assert.equal(e.state.soccerRoster.training.awarded,1);for(const key of ['money','team','minigameProgress','minigameWins','soccerCard'])assert.deepEqual(e.state[key],before[key]);
 });
-test('G3f an AI corner is an inward loft, leaves a landing marker and never transfers human control to the enemy',()=>{
- const g=setup({x:-hx-.1,z:hz-1,vx:-30,lastTeam:0}),s=g.getState();g.update(dt);assert.equal(s.restart.team,1);assert.equal(s.restart.type,'corner');const controlled=s.controlled;advance(g,config.match.restartSeconds+config.restarts.aiReleaseSeconds+.1);assert.equal(s.phase,'playing');assert.ok(s.ball.flight);assert.ok(s.ball.flight.x>-hx);assert.equal(s.controlled,controlled);assert.ok(s.passTarget);
+test('G3f an AI corner walks to release, lofts inward and never transfers human control to the enemy',()=>{
+ const g=setup({x:-hx-.1,z:hz-1,vx:-30,lastTeam:0}),s=g.getState();g.update(dt);assert.equal(s.restart.team,1);assert.equal(s.restart.type,'corner');const controlled=s.controlled;walkRestart(g);assert.ok(s.ball.flight);assert.ok(s.ball.flight.x>-hx);assert.equal(s.controlled,controlled);assert.ok(Number.isFinite(s.ball.flight.x)&&Number.isFinite(s.ball.flight.z),'the physical flight retains a landing point even without a receiver');
 });
 for(const side of [-1,1])test(`G3f a direct throw into goal ${side} cannot score and awards the correct restart`,()=>{const g=setup({x:side*(hx-.1),z:0,vx:side*30,lastTeam:0,thrower:0}),s=g.getState();g.update(dt);assert.deepEqual(s.score,[0,0]);assert.equal(s.restart.type,side>0?'goalKick':'corner');assert.equal(s.restart.team,1);assert.equal(s.ball.thrower,null);});
 test('G3f the actual keeper uses both cards: a powerful corner beats weak hands, a weak centre is caught by strong hands',()=>{

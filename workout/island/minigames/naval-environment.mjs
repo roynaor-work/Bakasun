@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {Water} from './naval-water.mjs?v=island-ultra-20261023-1';
+import {Water} from './naval-water.mjs?v=island-play-20261024-1';
 import {NAVAL_SHORES} from './ultra-naval-environment-layout.mjs';
 
 const SUN=new THREE.Vector3(-.58,.52,-.64).normalize();

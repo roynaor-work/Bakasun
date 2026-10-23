@@ -14,6 +14,7 @@ const data=await loadData(new URL('../workout/island/',import.meta.url),async ur
 const config=data.config.minigames,strings=JSON.parse(await readFile(new URL('../workout/island/data/strings.he.json',import.meta.url),'utf8'));
 const make=(id,level=1,extra={})=>({navalDuel:createNavalModel,alienDefense:createAlienModel,fireRescue:createFireModel}[id])({config,balance:config[id],level,random:seededRandom(12),...extra});
 function advance(m,seconds,input={}){for(let i=0;i<Math.ceil(seconds/.02)&&!m.result;i++)m.update(.02,input);}
+function until(m,predicate,seconds,input={}){for(let i=0;i<Math.ceil(seconds/.02)&&!predicate()&&!m.result;i++)m.update(.02,input);return predicate();}
 function nextChoice(m){const memory={};for(let i=0;i<12000&&!m.choosing&&!m.result;i++)m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));assert.equal(m.choosing,true);}
 
 test('G2d naval touch moves the circle; explicit firing alone consumes stage ammunition',()=>{
@@ -27,31 +28,37 @@ test('G2d the sea target clamps within configured range without firing',()=>{
   applyCanvasGesture(input,'navalDuel',anchor,b,true);m.update(.01,input);assert.deepEqual(m.aim,{x:b.targeting.maxX,z:b.targeting.maxZ});
   input.x=input.y=-9999;applyCanvasGesture(input,'navalDuel',anchor,b);m.update(.01,input);assert.deepEqual(m.aim,{x:b.targeting.minX,z:b.targeting.minZ});assert.equal(input.firing,false);assert.deepEqual(m.ammo,ammo);
 });
-for(let index=0;index<4;index++)test(`G2d ammunition ${index} is available without purchases, finite with no reload`,()=>{
+for(let index=0;index<4;index++)test(`G2d ammunition ${index} is available without purchases and honors brief recovery`,()=>{
   const m=make('navalDuel'),b=config.navalDuel,supply=m.ammo[index];assert.ok(supply>0);m.update(.02,{ammoIndex:index});assert.equal(m.ammoIndex,index);assert.equal(m.phase,'aim');
-  m.update(.02,{firing:true,ammoIndex:index});if(index===3)assert.equal(m.mines.length,1);else assert.equal(m.ball.ammo,index);assert.equal(m.ammo[index],supply-1);assert.equal(m.cooldowns[index],0);m.update(.02,{ammoIndex:(index+1)%4});assert.equal(m.ammoIndex,(index+1)%4);assert.equal(m.cooldowns[index],0);assert.equal(m.cooldowns[(index+1)%4],0);
+  m.update(.02,{firing:true,ammoIndex:index,targetX:200,targetZ:120});assert.equal(m.ball.ammo,index);assert.equal(m.ammo[index],supply-1);assert.ok(m.cooldowns[index]>0&&m.cooldowns[index]<=1.2);
+  m.update(.02,{});m.update(.02,{firing:true});assert.equal(m.ammo[index],supply-1,'rapid taps during recovery cannot consume a second round');
+  m.update(.02,{ammoIndex:(index+1)%4});assert.equal(m.ammoIndex,(index+1)%4);assert.ok(m.cooldowns[index]>0);assert.equal(m.cooldowns[(index+1)%4],0);
+  if(index===3){assert.equal(m.mines.length,0);advance(m,m.ball.duration+.02);assert.equal(m.mines.length,1);assert.equal(m.mines[0].x,200);assert.equal(m.mines[0].z,120);assert.ok(m.mines[0].armed,'mine deploys at its actual flight endpoint');}
 });
 test('G2d enemies move in distance and position at stage one; several living ships share high stages',()=>{
   const m=make('navalDuel'),x=m.enemyX,z=m.enemies[0].z;advance(m,.8);assert.notEqual(m.enemyX,x);assert.notEqual(m.enemies[0].z,z);
-  const high=make('navalDuel',10);high.update(.02,{});assert.equal(high.enemies.filter(e=>e.active&&e.hp>0).length,3);assert.equal(new Set(high.enemies.map(e=>e.kind)).size,4);
+  const high=make('navalDuel',10);high.update(.02,{});assert.equal(high.enemies.filter(e=>e.active&&e.hp>0).length,3);assert.equal(new Set(high.enemies.map(e=>e.kind)).size,3);assert.ok(high.enemies.every(e=>!config.navalDuel.shipTypes[e.kind].submarine));assert.ok(make('navalDuel',11).enemies.some(e=>config.navalDuel.shipTypes[e.kind].submarine));
 });
-test('G2d ammunition needs no reload at either firing rank and later encounters have longer budgets',()=>{
-  const a=make('navalDuel'),b=make('navalDuel',1,{equipment:{rate:1.6}});for(const m of [a,b])m.update(.02,{firing:true});assert.equal(a.cooldowns[0],0);assert.equal(b.cooldowns[0],0);
+test('G2d firing upgrades shorten recovery while both ranks still block rapid spam; later encounters have longer budgets',()=>{
+  const a=make('navalDuel'),b=make('navalDuel',1,{equipment:{rate:1.6}});for(const m of [a,b]){const supply=m.ammo[0];m.update(.02,{firing:true,targetX:200,targetZ:120});assert.ok(m.cooldowns[0]>0);m.update(.02,{});m.update(.02,{firing:true});assert.equal(m.ammo[0],supply-1);}
+  assert.ok(b.cooldowns[0]<a.cooldowns[0]);for(const m of [a,b]){const supply=m.ammo[0];advance(m,.5);m.update(.02,{firing:true});assert.equal(m.ammo[0],supply-1);}
   for(const id of ['navalDuel','alienDefense','fireRescue'])for(let i=1;i<10;i++)assert.ok(config[id].levels[i].seconds>config[id].levels[i-1].seconds);
 });
-test('G2d alien stage one has a sixty-second budget with early clear, and the moving boss arrives at stage ten',()=>{
+test('G2d alien stage one has a sixty-second budget with early clear, and every fifth sector has a final-wave boss',()=>{
   const m=make('alienDefense'),memory={};assert.ok(m.settings.seconds>=60);
   for(let i=0;i<8000&&!m.result;i++)m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));assert.equal(m.result?.outcome,'win');assert.ok(m.time<=m.settings.seconds+config.maxFrameSeconds);assert.ok(m.result.score<=m.settings.scoreLimit);
-  for(const [i,s] of config.alienDefense.levels.entries())assert.equal(s.boss,i===9);
+  assert.equal(config.alienDefense.levels.length,30);for(const [i,s] of config.alienDefense.levels.entries()){assert.equal(s.boss,(i+1)%5===0);assert.equal(s.bossLives>0,s.boss);}
 });
 test('G2d three distinct random upgrades pause combat; a valid choice stacks and resumes exactly once',()=>{
   const m=make('alienDefense',4);nextChoice(m);assert.equal(m.choices.length,3);assert.equal(new Set(m.choices).size,3);const before=m.snapshot();advance(m,2,{firing:true});assert.deepEqual(m.snapshot(),before);
   assert.equal(m.chooseUpgrade(-1),false);assert.equal(m.chooseUpgrade(99),false);assert.equal(m.chooseUpgrade(.5),false);const id=m.choices[1],wave=m.wave;assert.equal(m.chooseUpgrade(1),true);assert.equal(m.upgrades[id],1);assert.equal(m.wave,wave+1);assert.equal(m.chooseUpgrade(1),false);
 });
-test('G2d formation geometry progresses through rows, V, circle and dive',()=>{
+test('G2d authored sector formations progress in order through rows, V, circle and escort',()=>{
   // Isolate wave progression from the difficulty calibration covered elsewhere.
-  const m=make('alienDefense',4,{power:2}),patterns=[];const memory={};
-  for(let i=0;i<30000&&!m.result;i++){if(!patterns.includes(m.pattern))patterns.push(m.pattern);m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));}assert.deepEqual(patterns,config.alienDefense.campaign.patterns);assert.equal(m.result?.outcome,'win');
+  const seen=new Set();for(const level of [3,4,10]){const m=make('alienDefense',level,{power:2,completion:'waves',roundChoices:false}),patterns=[],memory={};let wave=0;
+    for(let i=0;i<30000&&!m.result;i++){if(m.wave!==wave){wave=m.wave;patterns.push(m.pattern);seen.add(m.pattern);}m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));}
+    assert.deepEqual(patterns,m.settings.formations,`sector ${level} keeps its authored wave order`);assert.equal(m.result?.outcome,'win');
+  }assert.deepEqual([...seen].sort(),[...config.alienDefense.campaign.patterns].sort());
 });
 test('G2d wing companions follow the ship and fire their own energy shots',()=>{
   const m=make('alienDefense',1,{equipment:{weapon:1}});m.pickups.push({x:m.player.x,y:m.player.y,vy:0,kind:4});m.update(.001,{});m.update(.02,{firing:true});assert.equal(m.wings.filter(w=>w.active).length,1);assert.ok(m.shots.some(s=>s.damage===config.alienDefense.campaign.wingDamage));const before=m.wings[0].x;m.update(.02,{x:300});m.update(.02,{x:300});assert.ok(m.wings[0].x>before);
@@ -73,13 +80,14 @@ test('G2d extra hose uses more water, cools faster and rescue walks to the truck
 test('G2d v5 → v7 adds hose and permanent alien ranks and preserves city, event, currency, avatar and all earned upgrades',()=>{
   const e=createEngine(data,{storage:null,now:()=>1234}),old=JSON.parse(e.exportJSON());old.version=5;delete old.minigameEquipment.fireRescue.hose;old.minigameEquipment.navalDuel.damage=2;old.money=432;
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:22,phase:'playing',warningUntil:100,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,16);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=16;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
+  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,17);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=17;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
 });
 for(const rank of [-1,1.5,99,'1'])test(`G2d v6 rejects invalid hose rank ${rank}`,()=>{
   const e=createEngine(data,{storage:null}),save=JSON.parse(e.exportJSON());save.minigameEquipment.fireRescue.hose=rank;assert.equal(migrateSave(save,data,e.registry).ok,false);
 });
-test('G2d all ten stages name a distinct addition in Hebrew, and upgrade/weapon labels are localized',()=>{
-  for(const id of ['navalDuel','alienDefense','fireRescue']){const features=config[id].levels.map(s=>s.feature);assert.equal(new Set(features).size,10);for(const key of features)assert.ok(strings[key]);}
+test('G2d every stage names a distinct addition in Hebrew, and upgrade/weapon labels are localized',()=>{
+  assert.equal(config.alienDefense.levels.length,30);
+  for(const id of ['navalDuel','alienDefense','fireRescue']){const features=config[id].levels.map(s=>s.feature);assert.equal(new Set(features).size,config[id].levels.length);for(const key of features)assert.ok(strings[key]);}
   for(const a of config.navalDuel.ammo)assert.ok(strings[a.title]);for(const id of config.alienDefense.campaign.choiceIds)assert.ok(strings['runUpgrade.'+id]);
 });
 
@@ -98,10 +106,18 @@ test('G2d naval round/time limits cannot silently award undefeated ships',()=>{
 test('G2d later fire stages add a second/third civilian and wind affects the actual spray impact',()=>{
   assert.equal(make('fireRescue',1).rescues.length,0);assert.equal(make('fireRescue',2).rescues.length,0);assert.equal(make('fireRescue',3).rescues.length,1);assert.equal(make('fireRescue',6).rescues.length,2);const m=make('fireRescue',10);assert.equal(m.rescues.length,3);assert.equal(m.rescue,m.rescues[0]);advance(m,.4,{x:180,y:250,firing:true});assert.notEqual(m.impact.x,m.aim.x);assert.ok(Math.hypot(m.impact.x-config.fireRescue.nozzleX,m.impact.y-config.fireRescue.nozzleY)<=m.range+.001);
 });
-test('G2d late bosses fire a separate moving three-bolt fan',()=>{
-  const balance=structuredClone(config.alienDefense);Object.assign(balance.levels[0],{waves:1,boss:true,bossShots:2});const m=make('alienDefense',1,{balance,random:()=>.999});advance(m,balance.formation.entrySeconds+.02);assert.equal(m.bolts.length,3);assert.ok(m.bolts.some(b=>b.vx!==0));
+test('G2d a late boss warns before its moving three-bolt fan and survives until its minimum active time',()=>{
+  const balance=structuredClone(config.alienDefense);balance.levels[9].waves=1;
+  const m=make('alienDefense',10,{balance,completion:'waves',roundChoices:false,equipment:{shield:20}}),boss=m.aliens.find(a=>a.boss);m.aliens.splice(0,m.aliens.length,boss);
+  advance(m,1.98);assert.ok(boss.entry>0);assert.equal(m.bolts.length,0);advance(m,.04);assert.equal(boss.entry,0);const enteredX=boss.x;
+  assert.ok(until(m,()=>boss.tellTime>0,3));assert.equal(m.bolts.length,0);assert.ok(m.telegraphs.some(t=>t.kind==='boss'&&t.life>0));const warnedAt=m.time,warning=boss.tellMax;
+  assert.ok(until(m,()=>m.bolts.length>0,warning+.04));assert.ok(m.time-warnedAt>=warning-.02);assert.equal(m.bolts.length,3);assert.equal(new Set(m.bolts.map(b=>b.vx)).size,3);assert.ok(m.bolts.some(b=>b.vx!==0));assert.notEqual(boss.x,enteredX);assert.ok(m.bolts.length<=m.behavior.bulletCap);
+  const hit=()=>{m.shots.push({x:boss.x,y:boss.y,vx:0,vy:0,hp:1,damage:10000,kind:0});m.update(.00001,{});},minimum=balance.balance.minBossSeconds;
+  hit();assert.ok(boss.hp>=boss.maxHp*2/3);assert.equal(m.result,undefined);
+  assert.ok(until(m,()=>boss.age>=2+minimum*2/3+.02,minimum));hit();assert.equal(boss.hp,1);assert.ok(boss.age<2+minimum);assert.equal(m.result,undefined);
+  assert.ok(until(m,()=>boss.age>=2+minimum+.02,minimum));hit();assert.equal(m.result?.outcome,'win');assert.ok(m.time>=2+minimum);
 });
-test('G2d concurrently visible naval enemies fire on independent timers',()=>{const b=config.navalDuel,m=make('navalDuel',10),supply=[...m.ammo];advance(m,b.combat.enemyFireSeconds+b.combat.enemyStagger*2+.1);for(const e of m.enemies.filter(e=>e.active))assert.ok(e.fired>=1);assert.deepEqual(m.ammo,supply);assert.ok(m.enemyFired>=3);});
+test('G2d concurrently visible naval enemies fire on independent telegraphed timers',()=>{const b=config.navalDuel,m=make('navalDuel',10),supply=[...m.ammo],tactics=m.settings.enemyTactics;advance(m,tactics.fireSeconds+tactics.telegraphSeconds+b.combat.enemyStagger*2+.1);for(const e of m.enemies.filter(e=>e.active))assert.ok(e.fired>=1);assert.deepEqual(m.ammo,supply);assert.ok(m.enemyFired>=3);});
 test('G2d longer alien rounds preserve earned score while bounding their coin payout',()=>{
   const e=createEngine(data,{storage:null}),b=config.alienDefense,s=b.levels[0],result=e.registry.minigames.get('alienDefense').onResult({outcome:'win',score:s.scoreLimit,performance:1},{engine:e,config,level:1});assert.ok(result);assert.equal(result.score,s.scoreLimit);assert.equal(result.money,Math.floor(s.rewardScoreLimit/b.pointsPerCoin)+s.winMoney);assert.equal(result.stars,3);
 });

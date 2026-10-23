@@ -1,14 +1,15 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-ultra-20261023-1';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-play-20261024-1';
 import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs';
 import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-ultra-20261023-1';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-play-20261024-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig} from './soccer-rig.mjs?v=island-ultra-20261023-1';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=island-ultra-20261023-1';
+import {cloneSoccerRig} from './soccer-rig.mjs?v=island-play-20261024-1';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=island-play-20261024-1';
 import {shotHeight,safeShotAim} from './soccer-shot.mjs';
 import {holdSoccerBall} from './soccer-poses.mjs';
+import {passDestination} from './soccer.mjs?v=island-play-20261024-1';
 
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   const roster=config.players.roster;let poseFocus=null,poseMode=null,poses=[];
@@ -203,8 +204,9 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     for(let i=0;i<arcDots.count;i++){const u=i/(arcDots.count-1);dummy.position.set(arc.fromX+(arc.x-arc.fromX)*u,config.physics.ballRadius+4*arc.height*u*(1-u),arc.fromZ+(arc.z-arc.fromZ)*u);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();arcDots.setMatrixAt(i,dummy.matrix);}arcDots.instanceMatrix.needsUpdate=true;
     turfG.attributes.position.needsUpdate=true;turf.visible=s.players.some(p=>p.slideTime>0);requests.count=s.players.some(p=>p.request||receiver===p.id)?roster.length:0;landing.visible=Boolean(arc);if(arc)landing.position.set(arc.x,.04,arc.z);
     boxes.count=boxIndex;spheres.count=sphereIndex;boxes.instanceMatrix.needsUpdate=true;spheres.instanceMatrix.needsUpdate=true;if(boxes.instanceColor)boxes.instanceColor.needsUpdate=true;if(spheres.instanceColor)spheres.instanceColor.needsUpdate=true;requests.instanceMatrix.needsUpdate=true;
-    const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);
-    const aim=s.chargeKind==='pass'?s.passAim||s.aim:safeShotAim(s.actionAim||s.kickAim||s.aim,s.kickAim,s.attackDir,s.charge/config.physics.chargeSeconds,config);
+    const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);
+    const destination=s.chargeKind==='pass'&&s.charging?passDestination(s,config,s.charge/config.passing.chargeSeconds):null;
+    const aim=destination?{x:destination.x-controlled.x,z:destination.z-controlled.z}:safeShotAim(s.actionAim||s.kickAim||s.aim,s.kickAim,s.attackDir,s.charge/config.physics.chargeSeconds,config);
     aimArrow.visible=s.charging;aimArrow.position.set(controlled.x,.065,controlled.z);aimArrow.rotation.y=Math.atan2(aim.x,aim.z);
     const chargeLimit=s.chargeKind==='pass'?config.passing.chargeSeconds:config.physics.chargeSeconds;aimArrow.scale.z=(config.view.aimArrowMinLength+(config.view.aimArrowMaxLength-config.view.aimArrowMinLength)*s.charge/chargeLimit)/config.view.aimArrowLength;
     const height=shotHeight(s.charge/config.physics.chargeSeconds,s.kickAim?.height,config);aimMaterial.color.set(s.chargeKind==='pass'?config.passing.landingColor:height>config.pitch.goalHeight?config.shooting.arrowHighColor:height>config.aerial.minHeight?config.shooting.arrowMidColor:config.shooting.arrowLowColor);
