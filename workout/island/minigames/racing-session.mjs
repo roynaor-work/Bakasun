@@ -1,7 +1,8 @@
-import {createRacing} from './racing-physics.mjs?v=island-play-20261024-1';
-import {createRacingView} from './racing-view.mjs?v=island-play-20261024-1';
-import {createRacingControls} from './racing-controls.mjs?v=island-play-20261024-1';
-import {createRacingAudio} from './racing-audio.mjs?v=island-play-20261024-1';
+import {createRacing} from './racing-physics.mjs?v=island-ultra-20261023-1';
+import {createRacingView} from './racing-view.mjs?v=island-ultra-20261023-1';
+import {createRacingControls} from './racing-controls.mjs?v=island-ultra-20261023-1';
+import {createRacingAudio} from './racing-audio.mjs?v=island-ultra-20261023-1';
+import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-ultra-20261023-1';
 
 export function runRacingSession(ctx){
  const model=createRacing({stage:ctx.level||1,seed:ctx.seed,difficulty:typeof ctx.difficulty==='string'?ctx.difficulty:'easy',config:{equipment:ctx.equipment}});
@@ -9,12 +10,12 @@ export function runRacingSession(ctx){
  const abort=new AbortController();let audio;try{audio=createRacingAudio();}catch{audio=createRacingAudio({storage:null});}
  const session={setPaused(value){paused=!!value;last=0;input?.setEnabled(!paused);audio.setPaused(paused);if(paused)model.pause();else model.resume();},dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();input?.dispose();audio.dispose();view?.dispose();model.dispose();},get snapshot(){return {stage:model.state.stage,phase:model.state.phase,time:model.state.time,paused,disposed,player:{...model.state.player},cars:model.state.cars.map(c=>({...c})),result:model.state.result,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),error:renderError};}};
  if(!canvas)return session;
- const screen=canvas.closest('.game-screen'),stage=canvas.parentElement,css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./racing.css?v=island-play-20261024-1',import.meta.url).href;screen.append(css);
+ const screen=canvas.closest('.game-screen'),stage=canvas.parentElement,css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./racing.css?v=island-ultra-20261023-1',import.meta.url).href;screen.append(css);
  const node=(tag,cls,text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
  const hud=node('div','racing-hud'),rank=node('bdi','racing-rank','3'),of=node('small','racing-of','/ 5'),lap=node('span','racing-lap'),clock=node('bdi','racing-clock','0:00'),trackName=node('strong','racing-track',model.track.name);rank.append(of);const position=node('div','racing-position');position.append(rank,node('span','racing-position-label','מקום'));const info=node('div','racing-race-info');info.append(trackName,lap,clock);hud.append(position,info);stage.append(hud);
  lap.style.direction='rtl';
  const mini=node('canvas','racing-minimap');mini.width=180;mini.height=120;mini.setAttribute('aria-label','מפת המסלול');stage.append(mini);const mc=mini.getContext('2d');
- const speed=node('bdi','racing-speed','0'),unit=node('small','racing-speed-unit','קמ״ש'),readout=node('div','racing-readout');readout.append(speed,unit);stage.append(readout);
+ const speedometer=createRacingSpeedometer({parent:stage,document:canvas.ownerDocument});
  const energy=node('div','racing-energy'),energyFill=node('span','racing-energy-fill');energy.setAttribute('role','meter');energy.setAttribute('aria-label',t('racing.energy'));energy.setAttribute('aria-valuemin','0');energy.setAttribute('aria-valuemax','100');energy.append(energyFill);stage.append(energy);
  const drift=node('div','racing-drift-meter'),driftFill=node('span','racing-drift-fill');drift.append(driftFill);stage.append(drift);
  const countdown=node('div','racing-countdown'),toast=node('div','racing-toast'),hint=node('p','racing-hint','היגוי משמאל · החזיקו דריפט בפנייה ושחררו לבוסט · ניטרו מימין');stage.append(countdown,toast,hint);
@@ -31,7 +32,7 @@ export function runRacingSession(ctx){
  function tick(at){if(disposed)return;const dt=last?Math.min(.1,(at-last)/1000):0,ms=last?at-last:0;last=at;
   if(!paused&&!document.hidden){model.step(dt,input.sample());view.observeFrame(ms);}const s=model.state,p=s.player;
   audio.sync(paused?0:p.speed,p.boosting,{drifting:p.drifting,offroad:p.offroad,steer:p.steer});view.render(s,paused?0:dt);minimap();
-  rank.firstChild.textContent=String(s.rank);lap.textContent=t('racing.lap',{lap:'\u2066'+p.lap,total:s.laps+'\u2069'});clock.textContent=`${Math.floor(s.time/60)}:${String(Math.floor(s.time%60)).padStart(2,'0')}`;speed.textContent=String(Math.round(p.speed*3.6));energyFill.style.transform=`scaleX(${Math.min(1,p.nitro/100)})`;energy.setAttribute('aria-valuenow',String(Math.round(p.nitro)));drift.hidden=!p.drifting;driftFill.style.transform=`scaleX(${p.driftCharge/2.7})`;
+  rank.firstChild.textContent=String(s.rank);lap.textContent=t('racing.lap',{lap:'\u2066'+p.lap,total:s.laps+'\u2069'});clock.textContent=`${Math.floor(s.time/60)}:${String(Math.floor(s.time%60)).padStart(2,'0')}`;speedometer.update(p.speed);energyFill.style.transform=`scaleX(${Math.min(1,p.nitro/100)})`;energy.setAttribute('aria-valuenow',String(Math.round(p.nitro)));drift.hidden=!p.drifting;driftFill.style.transform=`scaleX(${p.driftCharge/2.7})`;
   countdown.hidden=s.phase!=='countdown';countdown.textContent=Math.ceil(s.countdown)||'';hint.hidden=s.time>4.5;screen.dataset.boosting=String(p.boosting);screen.dataset.offroad=String(p.offroad);
   for(const e of s.events){if(e.car!=='player')continue;if(e.type==='pickup'){ctx.sound?.('bonus');toastText='אנרגיית ניטרו +31';messageUntil=s.time+1.4;}else if(['driftBoost','boostPad'].includes(e.type)){ctx.sound?.('upgrade');toastText=e.type==='driftBoost'?'דריפט מעולה · בוסט!':'מסלול בוסט!';messageUntil=s.time+1.1;}else if(e.type==='recovery'){toastText=t('racing.recover');messageUntil=s.time+2;}else if(e.type==='lap'){ctx.sound?.('bonus');status.textContent=t('racing.lap',{lap:p.lap,total:s.laps});}}
   toast.hidden=!(p.offroad||s.time<messageUntil);toast.textContent=p.offroad?t('racing.offroad'):toastText;

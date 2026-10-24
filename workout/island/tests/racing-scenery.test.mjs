@@ -76,21 +76,40 @@ for(const stage of [1,2,3,4,5,6])test(`roadside architecture keeps the racing co
   const details=f.scenery.metrics().roadside;
   assert.ok(details.buildings>=3,'each circuit needs substantial roadside architecture');
   assert.ok(details.lamps>=20,'road lighting must repeat along the course');
-  assert.ok(details.guardrailSections>=30,'corners need substantial route protection');
   assert.ok(details.cornerSigns>=1,'each circuit needs readable advance corner signs');
   assert.equal(details.galleries,['summit','volcano','ruins'].includes(f.track.theme)?1:0);
-  const matrix=new T.Matrix4(),point=new T.Vector3();let inspected=0;
+  const matrix=new T.Matrix4(),point=new T.Vector3(),scale=new T.Vector3(),quaternion=new T.Quaternion(),position=new T.Vector3(),railStations=new Map(),lampStations=[];let inspected=0;
   f.scene.traverse(object=>{
    if(!object.isInstancedMesh||!object.name.startsWith('racing-roadside-')||object.name==='racing-roadside-pool')return;
    object.geometry.computeBoundingBox();const b=object.geometry.boundingBox;
    for(let i=0;i<object.count;i++){
-    object.getMatrixAt(i,matrix);assert.ok(matrix.elements.every(Number.isFinite));
+    object.getMatrixAt(i,matrix);assert.ok(matrix.elements.every(Number.isFinite));matrix.decompose(position,quaternion,scale);
+    // Read the actual long, thin barrier beams and tall lampposts from the
+    // scene, rather than trusting the implementation's counters.
+    if(object.name==='racing-roadside-metal'&&scale.x<.3&&scale.y<.3&&scale.z>5.5&&scale.z<7.5){
+     const key=`${position.x.toFixed(2)},${position.z.toFixed(2)}`;railStations.set(key,{s:f.track.project(position.x,position.z).s,length:scale.z});
+    }
+    if(object.name==='racing-roadside-round'&&scale.y>7&&scale.x>.15&&scale.x<.23)lampStations.push(f.track.project(position.x,position.z).s);
     for(const x of [b.min.x,b.max.x])for(const y of [b.min.y,b.max.y])for(const z of [b.min.z,b.max.z]){
      point.set(x,y,z).applyMatrix4(matrix);const road=f.track.project(point.x,point.z);inspected++;
      assert.ok(road.distance>f.track.width/2+.5||point.y>road.y+5.8,`${object.name} obstructs the road or chase-camera clearance`);
     }
    }
   });assert.ok(inspected>1000);
+  const rails=[...railStations.values()],protectedLength=rails.reduce((sum,rail)=>sum+rail.length,0);
+  assert.ok(protectedLength>=f.track.length*.05,'guardrail coverage must span at least 5% of this circuit');
+  for(let s=0;s<f.track.length;s+=6){
+   const turn=f.track.sample(s+24).heading-f.track.sample(s).heading;
+   if(Math.abs(Math.atan2(Math.sin(turn),Math.cos(turn)))<=.30)continue;
+   const nearest=Math.min(...rails.map(rail=>{const d=Math.abs(rail.s-s);return Math.min(d,f.track.length-d);}));
+   assert.ok(nearest<=16,`a sharp bend at ${Math.round(s)}m lacks nearby route protection`);
+  }
+  assert.equal(lampStations.length,32,'the enlarged circuit keeps exactly 32 actual lampposts');
+  lampStations.sort((a,b)=>a-b);const interval=f.track.length/32;
+  for(let i=0;i<lampStations.length;i++){
+   const gap=(lampStations[(i+1)%32]-lampStations[i]+f.track.length)%f.track.length;
+   assert.ok(gap>=interval*.85&&gap<=interval*1.15,'lamps must cover the entire loop at uniform spacing');
+  }
  }finally{f.close();}
 });
 

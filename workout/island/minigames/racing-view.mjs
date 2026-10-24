@@ -54,8 +54,11 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1}={
  ribbon(-track.width/2,track.width/2,trackMat);
  ribbon(-track.width/2+.15,-track.width/2+.30,ivory,.055);ribbon(track.width/2-.30,track.width/2-.15,ivory,.055);
  const sea=mesh(new T.PlaneGeometry(2400,2400),mat(colors.sea,{roughness:.3,metalness:.22}),center.x,-2.2,center.z);sea.rotation.x=-Math.PI/2;
- const shore=mesh(new T.CylinderGeometry(190,205,6,80),mat(colors.sand),center.x,-4,center.z);shore.scale.z=.85;
- const inland=mesh(new T.CylinderGeometry(170,189,4,80),scenery.grassMaterial,center.x,-2.5,center.z);inland.scale.z=.82;
+ // Keep the island under the complete longer circuit, including its verges
+ // and roadside buildings; the road width and car scale stay in real metres.
+ const shoreRadius=Math.max(190,...track.points.map(p=>Math.hypot(p.x-center.x,(p.z-center.z)/.85)+50)),inlandRadius=Math.max(170,...track.points.map(p=>Math.hypot(p.x-center.x,(p.z-center.z)/.82)+26));
+ const shore=mesh(new T.CylinderGeometry(shoreRadius,shoreRadius+15,6,80),mat(colors.sand),center.x,-4,center.z);shore.scale.z=.85;
+ const inland=mesh(new T.CylinderGeometry(inlandRadius,inlandRadius+19,4,80),scenery.grassMaterial,center.x,-2.5,center.z);inland.scale.z=.82;
  const terrainGeometry=new T.PlaneGeometry(bounds.max.x-bounds.min.x+100,bounds.max.z-bounds.min.z+100,64,64);terrainGeometry.rotateX(-Math.PI/2);terrainGeometry.translate(center.x,0,center.z);const terrainPosition=terrainGeometry.attributes.position;
  for(let i=0;i<terrainPosition.count;i++){const x=terrainPosition.getX(i),z=terrainPosition.getZ(i),p=track.project(x,z);terrainPosition.setY(i,vergeHeight(p.y,p.distance)-.08);}terrainGeometry.computeVertexNormals();const terrain=mesh(terrainGeometry,scenery.grassMaterial);
  const dummy=new T.Object3D();

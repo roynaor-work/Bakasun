@@ -72,7 +72,8 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
   for(const x of [-1.55,0,1.55])for(const arm of [-1,1])box('light',site,x+side*.2,3.8+arm*.28,-.16,.19,1.02,.07,'#f2d28b',0,arm*-side*Math.PI/4);
  }
  // Repeated lampposts provide near-road motion and a useful night-time silhouette.
- const night=track.stage?.timeOfDay==='night';for(let s=18,index=0;s<track.length&&index<32;s+=32,index++){
+ const night=track.stage?.timeOfDay==='night';for(let index=0;index<32;index++){
+  const s=(index+.5)*track.length/32;
   const side=index%2?1:-1,site=siteAt(s,side*(track.width/2+3.6));if(!valid(site,.5))continue;site.y=site.p.y;lamps++;
   const detail=index%2?1:0,base=ground(site.x,site.z)-site.y,height=7.2-base;
   round(site,0,base+height/2,0,.19,height,palette.trim,detail);round(site,0,base+.23,0,.55,.46,palette.barrier,detail);

@@ -26,5 +26,11 @@ export function createRacingControls({root,canvas,t}){
  win.addEventListener('keyup',e=>{keys.delete(e.code);},options);
  function cancel(){keys.clear();held.clear();for(const group of pointers.values())group.clear();resetSteer();for(const b of Object.values(buttons))b.classList.remove('held');}
  win.addEventListener('blur',cancel,options);doc.addEventListener('visibilitychange',()=>{if(doc.hidden)cancel();},options);
- return {sample(){const direction=(keys.has('ArrowRight')||keys.has('KeyD')?1:0)-(keys.has('ArrowLeft')||keys.has('KeyA')?1:0),drift=held.has('drift')||keys.has('Space'),brake=keys.has('ArrowDown')||keys.has('KeyS');return {steer:enabled?(direction||steer):0,throttle:enabled&&(held.has('accelerate')||keys.has('ArrowUp')||keys.has('KeyW'))?1:0,autoAccelerate:automatic,brake:enabled&&(brake||drift),drift:enabled&&drift,nitro:enabled&&(held.has('nitro')||keys.has('ShiftLeft')||keys.has('ShiftRight'))};},cancel,setEnabled(value){enabled=!!value;slider.disabled=auto.disabled=!enabled;for(const b of Object.values(buttons))b.disabled=!enabled;cancel();},dispose(){enabled=false;cancel();abort.abort();},get enabled(){return enabled;}};
+ return {sample(){
+  const direction=(keys.has('ArrowRight')||keys.has('KeyD')?1:0)-(keys.has('ArrowLeft')||keys.has('KeyA')?1:0),rawSteer=direction||steer;
+  const drift=held.has('drift')||keys.has('Space'),brake=keys.has('ArrowDown')||keys.has('KeyS');
+  // The chase camera follows +Z from behind. Its screen-right points toward -X,
+  // so driver-right input needs negative world yaw; UI labels/arc stay clockwise.
+  return {steer:enabled&&rawSteer?-rawSteer:0,throttle:enabled&&(held.has('accelerate')||keys.has('ArrowUp')||keys.has('KeyW'))?1:0,autoAccelerate:automatic,brake:enabled&&(brake||drift),drift:enabled&&drift,nitro:enabled&&(held.has('nitro')||keys.has('ShiftLeft')||keys.has('ShiftRight'))};
+ },cancel,setEnabled(value){enabled=!!value;slider.disabled=auto.disabled=!enabled;for(const b of Object.values(buttons))b.disabled=!enabled;cancel();},dispose(){enabled=false;cancel();abort.abort();},get enabled(){return enabled;}};
 }
