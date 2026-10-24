@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createRacing} from '../minigames/racing-physics.mjs';
-import {TRACKS,RACING_STAGES,createTrack,getRacingStage,racingAngle} from '../minigames/racing-tracks.mjs';
+import {TRACKS,RACING_STAGES,RACING_TRACK_SCALE,createTrack,getRacingStage,racingAngle} from '../minigames/racing-tracks.mjs';
 import {racingResult} from '../minigames/racing-result.mjs';
 
 const balance=JSON.parse(readFileSync(new URL('../data/config.json',import.meta.url),'utf8')).minigames.islandRacing;
@@ -26,7 +26,7 @@ function drivingInput(race) {
 }
 function driveToResult(stage,seed) {
   const race=createRacing({stage,seed,config:{countdown:0,steeringAssist:false}});
-  for(let n=0;n<15000&&race.state.phase!=='finished';n++)race.step(1/60,drivingInput(race));
+  for(let n=0;n<=Math.ceil(race.stage.timeLimit*60)&&race.state.phase!=='finished';n++)race.step(1/60,drivingInput(race));
   return race;
 }
 
@@ -34,7 +34,7 @@ test('30 deliberate stage variations use six genuinely distinct closed circuits'
   assert.equal(TRACKS.length,6);assert.equal(RACING_STAGES.length,30);
   assert.equal(new Set(TRACKS.map(t=>JSON.stringify(t.points))).size,6);
   assert.deepEqual([...new Set(RACING_STAGES.map(s=>s.trackId))],TRACKS.map(t=>t.id));
-  assert.equal(getRacingStage(1).laps,1);assert.equal(getRacingStage(13).laps,2);assert.equal(getRacingStage(30).laps,3);
+  assert.equal(getRacingStage(1).laps,2);assert.equal(getRacingStage(12).laps,2);assert.equal(getRacingStage(13).laps,3);assert.equal(getRacingStage(30).laps,3);
   assert.equal(getRacingStage(19).reverse,true);assert.equal(getRacingStage(25).timeOfDay,'night');
   assert.ok(getRacingStage(30).aiSpeed>getRacingStage(1).aiSpeed);
 });
@@ -42,7 +42,7 @@ test('30 deliberate stage variations use six genuinely distinct closed circuits'
 test('closed 3D centre lines have gentle elevation and no crossing at road level',()=>{
   for(const definition of TRACKS) {
     const track=createTrack(definition.id);
-    assert.ok(track.length>650&&track.length<1100,definition.id);
+    assert.ok(track.length>1300&&track.length<1900,definition.id);
     assert.deepEqual(track.sample(0),track.sample(track.length));
     for(let s=0;s<track.length;s+=5) {
       const p=track.sample(s),ahead=track.sample(s+1);
@@ -58,6 +58,42 @@ test('closed 3D centre lines have gentle elevation and no crossing at road level
       if(a===0&&b===159)continue;
       const p=sampled[a],q=sampled[(a+1)%160],r=sampled[b],s=sampled[(b+1)%160];
       assert.ok(!(cross(p,q,r)*cross(p,q,s)<0&&cross(r,s,p)*cross(r,s,q)<0),`${definition.id}: crossover`);
+    }
+  }
+});
+
+test('longer circuits scale horizontal distance by 65% while preserving road widths and elevations',()=>{
+  // Measured from the original, unscaled circuits with 40 samples per curve.
+  const original={
+    coast:{length:843.5964000725697,horizontal:843.5108765661502,width:16,y:[1,2,3,4,5,4,2,1,1,2,2]},
+    jungle:{length:894.6503590768627,horizontal:894.2645965871109,width:14.5,y:[2,3,6,9,11,8,5,3,4,6,4]},
+    volcano:{length:814.6516391859807,horizontal:814.0934869626604,width:15,y:[4,7,11,15,18,15,11,8,5,4]},
+    harbor:{length:832.5300455631814,horizontal:832.4806346558165,width:14,y:[2,2,3,4,4,3,3,2,2,3,3,2]},
+    summit:{length:884.7916026337554,horizontal:883.8201068009035,width:14.5,y:[3,7,13,18,21,18,12,8,5,4,3]},
+    ruins:{length:951.2478403920353,horizontal:951.1354258313588,width:14,y:[2,3,4,5,7,8,6,4,3,3,2,2]}
+  };
+  assert.equal(RACING_TRACK_SCALE,1.65);
+  for(const definition of TRACKS){
+    const track=createTrack(definition.id),old=original[definition.id];
+    const horizontal=track.points.reduce((sum,p,index)=>{const q=track.points[(index+1)%track.points.length];return sum+Math.hypot(q.x-p.x,q.z-p.z);},0);
+    assert.ok(Math.abs(horizontal/old.horizontal-1.65)<1e-9,definition.id+' horizontal scale');
+    assert.ok(track.length/old.length>1.648&&track.length/old.length<=1.65,definition.id+' actual 3D length grows about 65%');
+    assert.equal(track.width,old.width);assert.deepEqual(definition.points.map(p=>p[1]),old.y);
+  }
+});
+
+test('every stage has at least two laps, a distance-based generous clock and sparse, separated boosts',()=>{
+  for(const stage of RACING_STAGES){
+    const track=createTrack(stage),items=[...track.boostPads,...track.pickups];
+    assert.equal(stage.laps,stage.tier<2?2:3);assert.ok(stage.laps>=2);
+    assert.ok(stage.timeLimit>=track.length*stage.laps/18+24.9);
+    assert.ok(stage.timeLimit<balance.maximumSeconds,'the complete race and timeout remain accepted by the app');
+    assert.equal(track.checkpoints.length,16);assert.equal(track.boostPads.length,1);assert.equal(track.pickups.length,2);
+    assert.equal(track.boostPads[0].length,10,'boost pad length remains metres, not scaled with the circuit');
+    for(let a=0;a<items.length;a++)for(let b=a+1;b<items.length;b++){
+      const apart=Math.abs(items[a].s-items[b].s),routeDistance=Math.min(apart,track.length-apart);
+      assert.ok(routeDistance>=track.length*.26,'items cannot form a dense cluster');
+      assert.ok(Math.hypot(items[a].x-items[b].x,items[a].z-items[b].z)>50,'items also remain separated in world space');
     }
   }
 });
@@ -86,6 +122,27 @@ test('drift builds charge while turning and releases a finite boost',()=>{
   race.step(1/60,{steer:0});assert.equal(p.driftCharge,0);assert.ok(p.boostTime>0);
   assert.ok(race.state.events.some(e=>e.type==='driftBoost'));
   advance(race,3,{autoAccelerate:false,brake:true});assert.equal(p.boostTime,0);
+});
+
+test('drift slip changes actual movement smoothly and tyre grip returns after release',()=>{
+  const race=createRacing({config:{countdown:0,steeringAssist:false,stage:{opponents:0}}});const p=place(race,18,0,25);
+  for(let n=0;n<12&&!p.drifting;n++)race.step(1/60,{steer:.35,drift:true});
+  assert.equal(p.drifting,true);assert.ok(p.slipAngle>0&&p.slipAngle<p.steer*.29);
+  advance(race,.5,{steer:.35,drift:true});const heldSlip=p.slipAngle;
+  assert.ok(heldSlip>.04&&heldSlip<.29);const previous={x:p.x,z:p.z};
+  race.step(1/60,{steer:.35,drift:true});
+  const movementHeading=Math.atan2(p.x-previous.x,p.z-previous.z);
+  assert.ok(Math.abs(racingAngle(p.heading-movementHeading)-p.slipAngle)<.000001,'slip affects velocity, not only the rendered car');
+  const releaseSlip=p.slipAngle;race.step(1/60,{steer:.35});
+  assert.ok(p.slipAngle>releaseSlip*.9&&p.slipAngle<releaseSlip,'release preserves momentum without a snap');
+  advance(race,1,{autoAccelerate:false,brake:true});assert.ok(p.slipAngle<releaseSlip*.03);
+});
+
+test('ordinary steering has no slip and recovery clears existing drift momentum',()=>{
+  const race=createRacing({config:{countdown:0,steeringAssist:false,stage:{opponents:0}}});const p=place(race,18,0,25);
+  const before={x:p.x,z:p.z};race.step(1/60,{steer:.6});
+  assert.equal(p.slipAngle,0);assert.ok(Math.abs(racingAngle(Math.atan2(p.x-before.x,p.z-before.z)-p.heading))<.000001);
+  p.slipAngle=.2;race.recover();assert.equal(p.slipAngle,0);
 });
 
 test('nitro consumes its meter and improves acceleration without becoming unlimited',()=>{
@@ -141,9 +198,9 @@ test('simulation is deterministic for equal seeds and fixed versus grouped frame
 
 test('four AI steer through the physical course, change passing lanes and finish',()=>{
   const race=createRacing({stage:13,seed:70,config:{countdown:0}});let passes=0;
-  for(let n=0;n<7200&&race.state.phase!=='finished';n++){race.step(1/60,{autoAccelerate:false});passes+=race.state.events.filter(e=>e.type==='overtake').length;}
+  for(let n=0;n<Math.ceil(race.stage.timeLimit*60)&&!race.state.cars.slice(1).every(car=>car.finished);n++){race.step(1/60,{autoAccelerate:false});passes+=race.state.events.filter(e=>e.type==='overtake').length;}
   assert.equal(race.state.cars.length,5);assert.ok(passes>0);
-  for(const ai of race.state.cars.slice(1)){assert.equal(ai.finished,true);assert.equal(ai.checkpoints,32);assert.equal(ai.recoveries,0);}
+  for(const ai of race.state.cars.slice(1)){assert.equal(ai.finished,true);assert.equal(ai.checkpoints,16*race.stage.laps);assert.equal(ai.recoveries,0);}
   assert.ok(new Set(race.state.cars.slice(1).map(ai=>ai.finishTime)).size>1);
 });
 

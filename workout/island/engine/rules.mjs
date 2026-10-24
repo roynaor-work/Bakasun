@@ -1,4 +1,4 @@
-import { levelValue, population } from './metrics.mjs?v=island-play-20261024-1';
+import { levelValue, population } from './metrics.mjs?v=island-racing-20261024-1';
 
 // These checks apply only to a new instance. Saves, undo and moves keep the
 // existing city intact, including cities built before limits were introduced.

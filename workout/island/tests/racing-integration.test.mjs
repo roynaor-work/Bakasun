@@ -45,10 +45,19 @@ test('racing stage entries cover 30 stages and six original track layouts',async
   const strings=JSON.parse(await readFile(new URL('data/strings.he.json',root),'utf8'));
   for(const [index,row]of balance.levels.entries()){
     const stage=getRacingStage(index+1);assert.equal(row.stage,index+1);assert.equal(row.trackId,stage.trackId);
-    assert.equal(row.laps,stage.laps);assert.ok(strings[row.feature]);assert.ok(row.winMoney>0);
+    assert.equal(row.laps,stage.laps);assert.ok(strings[row.feature]);assert.ok(strings[row.feature].includes(`${stage.laps} הקפות`));assert.ok(row.winMoney>0);
   }
   assert.deepEqual(new Set(balance.levels.map(row=>row.trackId)),new Set(TRACKS.map(row=>row.id)));
   assert.ok(RACING_STAGES.some(row=>row.reverse));assert.ok(RACING_STAGES.some(row=>row.timeOfDay==='night'));
+});
+
+test('every registered race requires multiple laps and a single-lap summary cannot award a win',()=>{
+  for(const stage of RACING_STAGES){
+    assert.ok(stage.laps>=2);assert.equal(balance.levels[stage.id-1].laps,stage.laps);
+    assert.ok(stage.timeLimit<balance.maximumSeconds,'distance-based timeout fits the app result envelope');
+    const forged={...result(stage.id),laps:1,checkpoints:16};
+    assert.equal(racingResult(envelope(forged),context(stage.id),balance),null,'one lap cannot complete stage'+stage.id);
+  }
 });
 
 for(const stage of [1,6,7,15,19,24,30])test(`racing stage ${stage} accepts only completed ordered laps for a win`,()=>{

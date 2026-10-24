@@ -1,4 +1,4 @@
-import { createTrack, getRacingStage, racingAngle, wrapRacingDistance } from './racing-tracks.mjs?v=island-play-20261024-1';
+import { createTrack, getRacingStage, racingAngle, wrapRacingDistance } from './racing-tracks.mjs?v=island-racing-20261024-1';
 
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);
@@ -28,7 +28,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     return {id:index===0?'player':`ai-${index}`,name:names[index]||`רוכב ${index}`,isPlayer:index===0,
       x:p.x+p.normal.x*lane,y:p.y,z:p.z+p.normal.z*lane,heading:p.heading,speed:0,steer:0,
       s:p.s,routeS:start,previousS:start,progress:start,checkpoints:0,nextCheckpoint:1,lap:1,rank:1,
-      nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,offroad:false,
+      nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
       lateral:lane,offroadTime:0,recoveryTime:0,recoveries:0,finished:false,finishTime:null,
       distanceDriven:0,pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
       maxSpeed:stage.aiSpeed*skill*(.96+random()*.075),collisionCooldown:0};
@@ -45,7 +45,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const p=track.sample(safeS), lane=car.isPlayer?0:car.targetLane;
     car.x=p.x+p.normal.x*lane; car.y=p.y; car.z=p.z+p.normal.z*lane; car.heading=p.heading;
     car.s=p.s;car.routeS=safeS;car.previousS=safeS;car.progress=safeS;car.speed=Math.max(8,Math.min(car.speed*.45,15));
-    car.steer=0;car.offroadTime=0;car.offroad=false;car.lateral=lane;car.recoveryTime=1.8;car.driftCharge=0;car.drifting=false;car.recoveries++;
+    car.steer=0;car.offroadTime=0;car.offroad=false;car.lateral=lane;car.recoveryTime=1.8;car.driftCharge=0;car.drifting=false;car.slipAngle=0;car.recoveries++;
     event('recovery',car,{manual});
   }
   function aiInput(car) {
@@ -115,7 +115,11 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       yaw+=clamp(error*.65,-.26,.26);
     }
     car.heading=racingAngle(car.heading+yaw*dt);
-    const motionHeading=car.heading-(drifting?car.steer*.12:0);
+    // Heading is the physical body orientation; slip is its angle to the velocity.
+    // Tyre grip builds and returns progressively instead of snapping on button release.
+    const targetSlip=drifting?car.steer*.29:0;
+    car.slipAngle+=(targetSlip-car.slipAngle)*(1-Math.exp(-dt*(drifting?5.5:3.8)));
+    const motionHeading=car.heading-car.slipAngle;
     car.x+=Math.sin(motionHeading)*car.speed*dt;car.z+=Math.cos(motionHeading)*car.speed*dt;
     car.distanceDriven+=car.speed*dt;
     const after=track.project(car.x,car.z,before.s);

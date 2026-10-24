@@ -2,6 +2,7 @@
 const TAU = Math.PI * 2;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const wrap = (v, length) => ((v % length) + length) % length;
+export const RACING_TRACK_SCALE = 1.65;
 
 export const TRACKS = Object.freeze([
   { id: 'coast', name: 'מפרץ הדקלים', theme: 'coast', width: 16, landmark: 'lighthouse',
@@ -16,17 +17,19 @@ export const TRACKS = Object.freeze([
     points: [[0,3,0],[80,7,40],[160,13,5],[175,18,-65],[120,21,-115],[155,18,-185],[90,12,-240],[10,8,-215],[-60,5,-165],[-85,4,-80],[-50,3,-25]] },
   { id: 'ruins', name: 'גני העתיקות', theme: 'ruins', width: 14, landmark: 'temple',
     points: [[0,2,0],[75,3,30],[145,4,-5],[125,5,-70],[200,7,-110],[195,8,-185],[115,6,-225],[35,4,-195],[-35,3,-220],[-75,3,-150],[-35,2,-80],[-65,2,-30]] }
-].map((track) => Object.freeze({ ...track, points: Object.freeze(track.points.map((point) => Object.freeze(point))) })));
+].map((track) => Object.freeze({ ...track, points: Object.freeze(track.points.map(([x,y,z]) => Object.freeze([x*RACING_TRACK_SCALE,y,z*RACING_TRACK_SCALE]))) })));
 
 const TIMES = ['day', 'golden', 'day', 'sunset', 'night'];
+const TRACK_LENGTHS = new Map(TRACKS.map(track => [track.id, sampleCircuit(track.points).length]));
 export const RACING_STAGES = Object.freeze(Array.from({ length: 30 }, (_, index) => {
   const tier = Math.floor(index / 6), circuit = TRACKS[index % 6];
-  const laps = tier === 0 ? 1 : tier < 3 ? 2 : 3;
+  const laps = tier < 2 ? 2 : 3;
   return Object.freeze({ id: index + 1, trackId: circuit.id, name: circuit.name, tier, laps,
     timeOfDay: TIMES[tier], reverse: tier === 3, widthScale: 1 - tier * 0.025,
     aiSpeed: 28.5 + tier * 2.2 + (index % 6) * 0.18,
     playerSpeed: 40 + tier * 0.75, targetRank: tier === 0 ? 3 : tier < 3 ? 2 : 1,
-    timeLimit: laps * (circuit.id === 'jungle' || circuit.id === 'summit' ? 62 : 57) + 22,
+    // Allow an average 18 m/s plus recovery/learning margin; the clock is not a speed trap.
+    timeLimit: Math.ceil(TRACK_LENGTHS.get(circuit.id) * laps / 18 + 25),
     opponents: 4, pickupOffset: tier * 0.055, grid: tier === 4 ? 5 : 3 });
 }));
 
@@ -40,11 +43,7 @@ function catmull(a, b, c, d, t) {
     (2*a[axis] - 5*b[axis] + 4*c[axis] - d[axis]) * t2 + (-a[axis] + 3*b[axis] - 3*c[axis] + d[axis]) * t3));
 }
 
-/** A closed, arc-length sampled track. sample() accepts unwrapped race metres. */
-export function createTrack(value = 1) {
-  const stage = typeof value === 'object' && value.trackId ? value : typeof value === 'number' ? getRacingStage(value) : null;
-  const definition = TRACKS.find((item) => item.id === (stage?.trackId || value)) || TRACKS[0];
-  const controls = stage?.reverse ? [definition.points[0], ...definition.points.slice(1).reverse()] : definition.points;
+function sampleCircuit(controls) {
   const points = [], distances = [];
   let length = 0, previous;
   for (let index = 0; index < controls.length; index++) {
@@ -56,6 +55,15 @@ export function createTrack(value = 1) {
     }
   }
   length += Math.hypot(points[0].x - previous.x, points[0].y - previous.y, points[0].z - previous.z);
+  return {points,distances,length};
+}
+
+/** A closed, arc-length sampled track. sample() accepts unwrapped race metres. */
+export function createTrack(value = 1) {
+  const stage = typeof value === 'object' && value.trackId ? value : typeof value === 'number' ? getRacingStage(value) : null;
+  const definition = TRACKS.find((item) => item.id === (stage?.trackId || value)) || TRACKS[0];
+  const controls = stage?.reverse ? [definition.points[0], ...definition.points.slice(1).reverse()] : definition.points;
+  const {points,distances,length}=sampleCircuit(controls);
   const width = definition.width * (stage?.widthScale ?? 1);
   function sample(distance) {
     const s = wrap(distance, length);
@@ -83,10 +91,10 @@ export function createTrack(value = 1) {
     const p=sample(best.s), lateral=(x-p.x)*p.normal.x+(z-p.z)*p.normal.z;
     return {...p,lateral,distance:Math.sqrt(best.dist2)};
   }
-  const offset = stage?.pickupOffset || 0;
+  const offset = (stage?.pickupOffset || 0) * .35;
   const checkpoints=Array.from({length:16},(_,index)=>({...sample(index*length/16),index}));
-  const boostPads=[0.19,0.53,0.81].map((fraction,index)=>({...sample((fraction+offset*0.3)%1*length),id:`pad-${index}`,length:10}));
-  const pickups=Array.from({length:9},(_,index)=>({...sample(((0.09+index*0.104+offset)%1)*length),id:`cell-${index}`,lane:index%3===0?0:index%2?3:-3}));
+  const boostPads=[0.46].map((fraction,index)=>({...sample((fraction+offset)%1*length),id:`pad-${index}`,length:10}));
+  const pickups=[0.16,0.73].map((fraction,index)=>({...sample((fraction+offset)%1*length),id:`cell-${index}`,lane:index===0?0:3}));
   return { ...definition, width, length, points, stage, sample, project, checkpoints, boostPads, pickups };
 }
 

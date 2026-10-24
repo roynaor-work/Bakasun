@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalProjectileHeight} from './naval-camera.mjs?v=island-play-20261024-1';
-import {navalEffectAtlas,navalParticleGeometry,navalParticleMaterial,writeNavalParticle,finishNavalParticles} from './ultra-naval-effects.mjs?v=island-play-20261024-1';
+import {navalProjectileHeight} from './naval-camera.mjs?v=island-racing-20261024-1';
+import {navalEffectAtlas,navalParticleGeometry,navalParticleMaterial,writeNavalParticle,finishNavalParticles} from './ultra-naval-effects.mjs?v=island-racing-20261024-1';
 
 const FORWARD=new T.Vector3(0,0,-1);
 function projectileGeometry(kind){

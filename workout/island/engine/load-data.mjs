@@ -1,5 +1,5 @@
-import {DATA_VERSION,dataURL} from '../release.mjs?v=island-play-20261024-1';
-import { configureBuilding } from './registry.mjs?v=island-play-20261024-1';
+import {DATA_VERSION,dataURL} from '../release.mjs?v=island-racing-20261024-1';
+import { configureBuilding } from './registry.mjs?v=island-racing-20261024-1';
 
 const FILES = ['config', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 
