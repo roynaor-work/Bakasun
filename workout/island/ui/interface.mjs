@@ -1,9 +1,10 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-cityplan-20261025-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-cityplan-20261025-1';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-cityplan-20261025-1';
-import {CityManagementInterface} from './city-management.mjs?v=island-cityplan-20261025-1';
-import {nearestCityZone} from '../engine/city-management.mjs?v=island-cityplan-20261025-1';
-import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-cityplan-20261025-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-c2-20261025-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-c2-20261025-1';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-c2-20261025-1';
+import {CityDepthInterface} from './city-depth.mjs?v=island-c2-20261025-1';
+import {CityManagementInterface} from './city-management.mjs?v=island-c2-20261025-1';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-c2-20261025-1';
+import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-c2-20261025-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -40,6 +41,7 @@ export class IslandInterface {
     root.replaceChildren();
     root.className = 'island-ui';
     this.buildShell();
+    this.cityInterface = engine.city ? new CityDepthInterface(this) : null;
     this.cityManagement=new CityManagementInterface(this);
     this.cityManagement.addEntry(this.cityDetails);
     this.unsubscribe = engine.subscribe((state,event) => {if(event.type==='tutorial'&&state.tutorial.step===0&&!state.tutorial.skipped)this.cityHallIntro=true;this.refresh();if(event.developed?.length)this.cityManagement.onGrowth(event.developed);});
@@ -221,6 +223,7 @@ export class IslandInterface {
   refresh() {
     const s = this.engine.state;
     this.view.setWorld(s);
+    this.view.setCityReport?.(this.engine.city?.report(), this.infoId);
     const activeStep = this.tutorialStep() ?? this.engine.nextObjective?.();
     if (activeStep && this.activeStepId !== activeStep.id) {
       this.activeStepId = activeStep.id;
@@ -461,17 +464,18 @@ export class IslandInterface {
     this.infoId = id;
     this.drawInfo();
   }
-  closeInfo() { this.infoId = null; this.infoSignature = null; this.info.hidden = true; this.view.showRadius(null); }
+  closeInfo() { this.infoId = null; this.infoSignature = null; this.info.hidden = true; this.view.showRadius(null); this.view.setCityReport?.(this.engine.city?.report(), null); }
   currentInfoSignature() {
     const state = this.engine.state;
     const instance=state.buildings.find(row=>row.id===this.infoId);
-    return JSON.stringify([instance, state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null,this.engine.learningStatus().locked]);
+    return JSON.stringify([instance, this.engine.city?.report(), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null,this.engine.learningStatus().locked]);
   }
   drawInfo() {
     const instance = this.engine.state.buildings.find(b => b.id === this.infoId);
     if (!instance) { this.closeInfo(); return; }
     this.infoSignature = this.currentInfoSignature();
     const record = this.getBuilding(instance.typeId);
+    const cityReport = this.engine.city?.report(), cityBuilding = cityReport?.buildings.find(row=>row.id===instance.id), summary = cityBuilding?.summary;
     this.info.dataset.type=record.id;
     const factor = levelFactor(instance, this.data.config);
     const amount = value => Number((value * factor).toFixed(1)).toLocaleString('he-IL');
@@ -482,19 +486,19 @@ export class IslandInterface {
     const currentLevel = record.levels[instance.level - 1];
     this.info.append(title, el('span', 'level-badge', `${currentLevel.title ? this.t(currentLevel.title) + ' · ' : ''}${this.t('app.level')} ${instance.level}`));
     const effects = el('div', 'info-effects');
-    for (const [id, value] of Object.entries(record.effects ?? record.metrics ?? {})) effects.append(el('span', '', `${this.t(`metric.${id}`)} +${amount(value)}`));
-    const residents = levelValue(instance, record, 'population', this.data.config);
+    for (const [id, value] of Object.entries(summary?.effects ?? record.effects ?? record.metrics ?? {})) effects.append(el('span', '', `${this.t(`metric.${id}`)} +${summary ? value.toLocaleString('he-IL') : amount(value)}`));
+    const residents = summary?.population ?? levelValue(instance, record, 'population', this.data.config);
     if (residents) effects.append(el('span', '', `♟ ${residents.toLocaleString('he-IL')} ${this.t('app.population')}`));
     if (record.supply) {
-      const supply = levelValue(instance, record, 'supply', this.data.config), population = this.engine.population();
-      effects.append(el('span', 'service-supply', this.t('app.serves', { supply: Math.min(supply, population), population })), el('span', '', this.t('app.supply', { supply })));
+      const supply = summary?.supply ?? levelValue(instance, record, 'supply', this.data.config), population = this.engine.population();
+      effects.append(el('span', 'service-supply', this.t('app.serves', { supply: cityBuilding?.service?.used ?? Math.min(supply, population), population })), el('span', '', this.t('app.supply', { supply })));
     }
-    if (record.income) effects.append(el('span', '', `● +${amount(record.income)} ${this.t('app.income')}`));
-    for (const [key, value] of Object.entries(record.resources ?? {})) effects.append(el('span', '', `${this.t(`app.${key}`)} +${amount(value)}`));
-    if (record.capacity) effects.append(el('span', '', `${this.t('app.capacity')} ${amount(record.capacity)}`));
+    if (record.income) effects.append(el('span', '', `● +${summary ? summary.income.toLocaleString('he-IL') : amount(record.income)} ${this.t('app.income')}`));
+    for (const [key, value] of Object.entries(summary?.resources ?? record.resources ?? {})) effects.append(el('span', '', `${this.t(`app.${key}`)} +${summary ? value.toLocaleString('he-IL') : amount(value)}`));
+    if (record.capacity) effects.append(el('span', '', `${this.t('app.capacity')} ${summary ? summary.capacity.toLocaleString('he-IL') : amount(record.capacity)}`));
     if (!effects.children.length) effects.append(el('span', '', this.t('app.explore')));
     const actions = el('div', 'info-actions');
-    const upgradeStatus = upgradeAvailability(this.engine.state, this.engine.registry, instance.id);
+    const upgradeStatus = cityBuilding?.upgrade ?? upgradeAvailability(this.engine.state, this.engine.registry, instance.id);
     const nextLevel = upgradeStatus.nextLevel;
     const upgrade = button('', 'upgrade', 'primary-button');
     upgrade.append(el('span', '', `✦ ${this.t('app.upgrade')}`), el('small', '', nextLevel ? `● ${nextLevel.cost}` : this.t('app.maxLevel')));
@@ -518,6 +522,7 @@ export class IslandInterface {
     };
     actions.append(move);if(record.id!=='cityHall')actions.append(upgrade);if(record.removable!==false)actions.append(remove);this.info.append(actions);
     this.activityInterface?.decorateInfo(instance,actions);
+    this.cityInterface?.decorate(instance,actions);
     if(record.learningStation){const learn=button(`${record.icon} לומדים`,'building-learn','primary-button');learn.onclick=()=>this.learningInterface.start(record.learningStation);actions.append(learn);}
     if(record.id==='cityHall'){this.cityManagement.addEntry(this.info);this.view.showRadius(null);return;}
     if (nextLevel) {
@@ -525,15 +530,15 @@ export class IslandInterface {
       const details = el('p', 'upgrade-details');
       if (nextLevel.title) details.append(el('strong', '', this.t(nextLevel.title)));
       for (const [field, label] of [['population', 'app.upgradePopulation'], ['supply', 'app.upgradeSupply']]) {
-        const delta = levelValue(nextInstance, record, field, this.data.config) - levelValue(instance, record, field, this.data.config);
+        const delta = summary?.next?.[field] ?? levelValue(nextInstance, record, field, this.data.config) - levelValue(instance, record, field, this.data.config);
         if (delta) details.append(el('span', '', this.t(label, { amount: delta })));
       }
-      if (record.income) details.append(el('span', '', this.t('app.upgradeReward', { before: amount(record.income), after: Number((record.income * levelFactor(nextInstance, this.data.config)).toFixed(1)) })));
+      if (record.income) details.append(el('span', '', this.t('app.upgradeReward', { before: summary?.income ?? amount(record.income), after: summary?.next?.income ?? Number((record.income * levelFactor(nextInstance, this.data.config)).toFixed(1)) })));
       if (record.radius) details.append(el('span', '', this.t('app.upgradeEffects')));
       this.info.append(details);
     }
-    this.info.append(el('h3', '', this.t('app.gives')), effects, el('p', 'radius-label', `◯ ${amount(record.radius ?? 0)} ${this.t('app.radius')}`));
-    this.view.showRadius({ ...record, radius: (record.radius ?? 0) * factor }, instance);
+    this.info.append(el('h3', '', this.t('app.gives')), effects, el('p', 'radius-label', `◯ ${summary?.radius ?? amount(record.radius ?? 0)} ${this.t('app.radius')}`));
+    if (record.id !== 'waterTower' || !this.engine.city) this.view.showRadius({ ...record, radius: summary?.radius ?? (record.radius ?? 0) * factor }, instance);
   }
   setupParentGate(node) {
     let timer;

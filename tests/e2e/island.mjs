@@ -516,15 +516,15 @@ async function checkCityViewport(width, height) {
       assert.equal(result.level, level); levels.push(result);
       assertLayout(await measureLayout(page), null, `${width} house level ${level}`);
       await shot(`house-level-${level}`);
-      if (level === 4) { assert.equal(await page.locator('[data-action="upgrade"]').isDisabled(), true); break; }
+      if (level === 4) { assert.equal(await page.locator('[data-action="city-upgrade"]').isDisabled(), true); break; }
       if (level > 1) {
-        assert.equal(await page.locator('[data-action="upgrade"]').isDisabled(), true);
-        assert.match(await page.locator('[data-action="upgrade"]').textContent(), /כשהאי יתרחב/);
+        assert.equal(await page.locator('[data-action="city-upgrade"]').isDisabled(), true);
+        assert.match(await page.locator('[data-action="city-upgrade"]').textContent(), /כשהאי יתרחב/);
         await page.evaluate(stage => { const { engine, data } = window.__island; engine.grantParts(data.world.partGroup, data.config.worldStages[stage].requiredParts - engine.state.parts[data.world.partGroup]); }, level - 1);
         await page.locator('[data-action="home"]').tap();
       }
-      assert.equal(await page.locator('[data-action="upgrade"]').isDisabled(), false);
-      await page.locator('[data-action="upgrade"]').tap();
+      assert.equal(await page.locator('[data-action="city-upgrade"]').isDisabled(), false);
+      await page.locator('[data-action="city-upgrade"]').tap();
     }
     assert.deepEqual(levels.map(item => item.population), [4, 8, 16, 24]);
     assert.equal(new Set(levels.map(item => item.visualId)).size, 4, 'each upgrade replaces the visible model');
@@ -546,7 +546,7 @@ async function checkCityViewport(width, height) {
     await shot('catalog-no-need');
     await page.locator('[data-action="toggle-build"]').tap();
     const secondHome = await place('house', 6, 5);
-    await inspect(secondHome, 6, 5); await page.locator('[data-action="upgrade"]').tap();
+    await inspect(secondHome, 6, 5); await page.locator('[data-action="city-upgrade"]').tap();
     await page.locator('[data-action="close-info"]').tap();
     await page.locator('[data-category="services"]').tap();
     assert.equal(await page.locator('[data-building="school"] .building-hint').textContent(), 'מומלץ');
@@ -571,8 +571,8 @@ async function checkCityViewport(width, height) {
     await page.locator('[data-action="move"]').tap();
     await cell(1, 1); await page.locator('[data-action="place"]').tap();
     await inspect(tower, 1, 1);
-    const actions = await page.locator('.info-actions button').evaluateAll(nodes => nodes.map(node => ({ action: node.dataset.action, text: node.textContent, width: node.getBoundingClientRect().width, height: node.getBoundingClientRect().height })));
-    assert.deepEqual(actions.map(item => item.action), ['move', 'upgrade', 'remove']);
+    const actions = await page.locator('.info-actions button:visible').evaluateAll(nodes => nodes.map(node => ({ action: node.dataset.action, text: node.textContent, width: node.getBoundingClientRect().width, height: node.getBoundingClientRect().height })));
+    assert.deepEqual(actions.map(item => item.action), ['move', 'city-upgrade', 'remove']);
     assert.ok(actions.every(item => item.width >= 56 && item.height >= 56));
     await shot('actions'); await page.locator('[data-action="move"]').tap();
     assert.match(await page.locator('#ghost-status').textContent(), /ללא עלות/);

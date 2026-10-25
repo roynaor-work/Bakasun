@@ -1,6 +1,6 @@
-import {buildingCenter,levelFactor,levelValue,population} from './metrics.mjs?v=island-cityplan-20261025-1';
-import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-cityplan-20261025-1';
-import {cityConnections} from './city-connections.mjs?v=island-cityplan-20261025-1';
+import {buildingCenter,levelFactor,levelValue,population} from './metrics.mjs?v=island-c2-20261025-1';
+import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-c2-20261025-1';
+import {cityConnections} from './city-connections.mjs?v=island-c2-20261025-1';
 export {cityConnections};
 
 export const CITY_DEPARTMENTS=['water','health','education','safety'];
@@ -79,21 +79,21 @@ function serviceCoverage(state,registry,config,connections){
       const supply=levelValue(row,type,'supply',config)*funding,radius=type.radius*levelFactor(row,config)*Math.sqrt(funding),center=buildingCenter(row,registry);
       capacity+=supply;
       const covered=homes.filter(home=>{const target=buildingCenter(home,registry);return connections.hasAccess(home)&&Math.hypot(target.x-center.x,target.z-center.z)<=radius;});
-      providers.push({supply,homes:covered.map(home=>home.id)});
+      providers.push({id:row.id,radius,supply,homes:covered.map(home=>home.id)});
     }
     const supplied=allocateCoverage(providers,homes.map(home=>({id:home.id,population:levelValue(home,registry.buildings.get(home.typeId),'population',config)})));
     const covered=homes.reduce((sum,home)=>sum+Math.min(supplied.get(home.id),levelValue(home,registry.buildings.get(home.typeId),'population',config)),0);
-    result[department]={capacity,covered,total,coverage:total?clamp(covered/total*100):100,homes:Object.fromEntries(homes.map(home=>[home.id,clamp(supplied.get(home.id)/levelValue(home,registry.buildings.get(home.typeId),'population',config)*100)]))};
+    result[department]={capacity,covered,total,coverage:total?clamp(covered/total*100):100,homes:Object.fromEntries(homes.map(home=>[home.id,clamp(supplied.get(home.id)/levelValue(home,registry.buildings.get(home.typeId),'population',config)*100)])),supplied:Object.fromEntries(supplied),providers:supplied.providers};
   }
   return result;
 }
 
 /** Route finite capacity through overlapping service areas without counting a resident twice. */
 function allocateCoverage(providers,homes){
-  const sink=1+providers.length+homes.length,graph=Array.from({length:sink+1},()=>[]),homeEdges=new Map(),homeNodes=new Map(homes.map((home,index)=>[home.id,1+providers.length+index]));
+  const sink=1+providers.length+homes.length,graph=Array.from({length:sink+1},()=>[]),homeEdges=new Map(),providerEdges=[],homeNodes=new Map(homes.map((home,index)=>[home.id,1+providers.length+index]));
   const edge=(from,to,capacity)=>{const forward={to,capacity,reverse:graph[to].length},backward={to:from,capacity:0,reverse:graph[from].length};graph[from].push(forward);graph[to].push(backward);return forward;};
   homes.forEach(home=>homeEdges.set(home.id,edge(homeNodes.get(home.id),sink,home.population)));
-  providers.forEach((provider,index)=>{edge(0,index+1,provider.supply);for(const id of provider.homes)edge(index+1,homeNodes.get(id),Number.MAX_SAFE_INTEGER);});
+  providers.forEach((provider,index)=>{edge(0,index+1,provider.supply);const edges=[];for(const id of provider.homes){const forward=edge(index+1,homeNodes.get(id),Number.MAX_SAFE_INTEGER);edges.push({id,forward});}providerEdges.push(edges);});
   while(true){
     const parent=Array(sink+1).fill(null),queue=[0];parent[0]=[-1,-1];
     for(let i=0;i<queue.length&&!parent[sink];i++)for(const [index,item]of graph[queue[i]].entries())if(item.capacity>1e-8&&!parent[item.to]){parent[item.to]=[queue[i],index];queue.push(item.to);}
@@ -101,7 +101,12 @@ function allocateCoverage(providers,homes){
     let flow=Infinity;for(let at=sink;at!==0;){const [from,index]=parent[at];flow=Math.min(flow,graph[from][index].capacity);at=from;}
     for(let at=sink;at!==0;){const [from,index]=parent[at],item=graph[from][index];item.capacity-=flow;graph[at][item.reverse].capacity+=flow;at=from;}
   }
-  return new Map(homes.map(home=>[home.id,home.population-homeEdges.get(home.id).capacity]));
+  const supplied=new Map(homes.map(home=>[home.id,home.population-homeEdges.get(home.id).capacity]));
+  supplied.providers=providers.map((provider,index)=>{
+    const allocations=Object.fromEntries(providerEdges[index].map(({id,forward})=>[id,graph[forward.to][forward.reverse].capacity]));
+    return {id:provider.id,radius:provider.radius,capacity:provider.supply,used:Object.values(allocations).reduce((sum,n)=>sum+n,0),serves:Object.keys(allocations).filter(id=>allocations[id]>1e-8),inRange:provider.homes,allocations};
+  });
+  return supplied;
 }
 
 export function cityReport(state,registry,config,income={money:0},{includeZones=true}={}){

@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {localModelURL} from './model-art.mjs?v=island-cityplan-20261025-1';
+import {localModelURL} from './model-art.mjs?v=island-c2-20261025-1';
 
 export function disposeBoat(root) {
   const resources=new Set();

@@ -1,8 +1,8 @@
-import {equipmentOffer} from './equipment.mjs?v=island-cityplan-20261025-1';
-import {gameAvailability} from './availability.mjs?v=island-cityplan-20261025-1';
-import {eventEligible} from './eligibility.mjs?v=island-cityplan-20261025-1';
-import {seededRandom} from '../minigames/context.mjs?v=island-cityplan-20261025-1';
-import {buildingCenter,levelFactor} from '../engine/metrics.mjs?v=island-cityplan-20261025-1';
+import {equipmentOffer} from './equipment.mjs?v=island-c2-20261025-1';
+import {gameAvailability} from './availability.mjs?v=island-c2-20261025-1';
+import {eventEligible} from './eligibility.mjs?v=island-c2-20261025-1';
+import {seededRandom} from '../minigames/context.mjs?v=island-c2-20261025-1';
+import {buildingCenter,levelFactor} from '../engine/metrics.mjs?v=island-c2-20261025-1';
 
 export function createActivity(engine,{now=Date.now,random=seededRandom(now()),blocked=()=>false,onLaunch}={}) {
   const {state,data,registry}=engine,config=data.config.events,listeners=new Set();
@@ -10,7 +10,7 @@ export function createActivity(engine,{now=Date.now,random=seededRandom(now()),b
   // Reloads never resume a half-created canvas or award an unfinished result.
   if(state.events.active?.phase==='playing'){state.events.active.phase='ready';engine.save();}
   const emit=()=>{for(const listener of listeners)listener();};
-  const save=()=>{const saved=engine.save();emit();return saved;};
+  const save=()=>{const saved=engine.save();engine.city?.emergency();emit();return saved;};
   const busy=()=>blocked()||engine.isMinigameActive()||(!state.tutorial.completed&&!state.tutorial.skipped)||!state.avatar.created;
   const enabled=id=>data.featureFlags.events&&data.featureFlags[config.types[id]?.featureFlag]&&data.featureFlags.minigames&&data.featureFlags[config.types[id]?.gameId];
   function bonuses(event=state.events.active) {

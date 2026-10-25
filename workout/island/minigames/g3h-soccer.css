@@ -1,4 +1,4 @@
-@import url('./soccer-controls.css?v=island-cityplan-20261025-1');
+@import url('./soccer-controls.css?v=island-c2-20261025-1');
 /* Soccer broadcast layer; the shell continues to own pause and navigation. */
 .game-screen[data-game=soccer]{--soccer-navy:#101f2d;--soccer-ivory:#f3f2df;--soccer-teal:#78cfbd;--soccer-line:#cde2dc42;color:var(--soccer-ivory)}
 .game-screen[data-game=soccer] .game-header .game-pause{flex-direction:row;width:56px;height:56px;padding:0;gap:0;border:1px solid #d2e7df5c;border-radius:16px;background:#102331e8;color:var(--soccer-ivory);box-shadow:0 4px 18px #03111740,inset 0 1px 0 #ffffff14;backdrop-filter:none}
