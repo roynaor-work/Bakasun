@@ -1,13 +1,13 @@
-import {createG3hAudio} from './g3h-audio.mjs?v=island-cityplay-20261025-1';
-import {actionIcon} from './soccer-icons.mjs?v=island-cityplay-20261025-1';
-import {createSoccer} from './soccer.mjs?v=island-cityplay-20261025-1';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-cityplay-20261025-1';
-import {stageObjective} from './soccer-campaign.mjs?v=island-cityplay-20261025-1';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-cityplay-20261025-1';
-import {createSoccerView} from './soccer-view.mjs?v=island-cityplay-20261025-1';
-import {createControls} from './controls.mjs?v=island-cityplay-20261025-1';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-cityplay-20261025-1';
-import {gameContext} from './context.mjs?v=island-cityplay-20261025-1';
+import {createG3hAudio} from './g3h-audio.mjs?v=island-cityplan-20261025-1';
+import {actionIcon} from './soccer-icons.mjs?v=island-cityplan-20261025-1';
+import {createSoccer} from './soccer.mjs?v=island-cityplan-20261025-1';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-cityplan-20261025-1';
+import {stageObjective} from './soccer-campaign.mjs?v=island-cityplan-20261025-1';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-cityplan-20261025-1';
+import {createSoccerView} from './soccer-view.mjs?v=island-cityplan-20261025-1';
+import {createControls} from './controls.mjs?v=island-cityplan-20261025-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-cityplan-20261025-1';
+import {gameContext} from './context.mjs?v=island-cityplan-20261025-1';
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
@@ -25,9 +25,9 @@ export function startSoccer(ctx) {
   if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={model,qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-cityplay-20261025-1',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-cityplan-20261025-1',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-cityplay-20261025-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-cityplan-20261025-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
     document.addEventListener('pointerdown',()=>void audio.unlock(),options);

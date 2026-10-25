@@ -1,5 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-cityplay-20261025-1';
+import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-cityplan-20261025-1';
+import {streetFront} from '../engine/city-sites.mjs?v=island-cityplan-20261025-1';
 
 /** Paving and street furniture are derived visuals inside existing footprints.
  * No saved building, authored GLB, construction rule or ground plane is changed. */
@@ -15,10 +16,10 @@ export class CityStreets{
   rebuild(buildings,size,definition,force=false){
     if(this.disposed)return;const signature=JSON.stringify([size,this.quality,buildings.map(b=>[b.id,b.typeId,b.x,b.z,b.level])]);
     if(!force&&this.signature===signature)return;this.signature=signature;this.clear();
-    const network=cityRoadNetwork(buildings,size,definition),planes=[],boxes=[],shrubs=[],palms=[],offset=(size-1)/2;
+    const network=cityRoadNetwork(buildings,size,definition),planes=[],boxes=[],shrubs=[],palms=[],offset=(size-1)/2,roadCells=new Set(buildings.filter(b=>definition(b.typeId)?.isRoad).map(b=>`${b.x},${b.z}`));
     const plane=(x,z,w,d,color,y=.124)=>planes.push({x,y:this.ground+y,z,w,h:d,d:1,color,flat:true});
     const box=(x,y,z,w,h,d,color)=>boxes.push({x,y:this.ground+y,z,w,h,d,color});
-    let lamps=0,crossings=0,plots=0;
+    let lamps=0,crossings=0,plots=0,entrances=0;
     for(const p of network.nodes){
       plane(p.x,p.z,.84,.84,'#45545b');
       for(const [dx,dz]of [[1,0],[0,1],[-1,0],[0,-1]]){
@@ -53,12 +54,13 @@ export class CityStreets{
       const type=definition(b.typeId||b.type);if(!type||type.isRoad||type.requiresShore||type.category==='defense')continue;
       const [w,d]=type.footprint||[1,1],x=b.x+(w-1)/2,z=b.z+(d-1)/2;plots++;
       const green=type.visual?.kind==='park'||type.visual?.kind==='farm';
-      plane(x,z,w-.035,d-.035,green?'#7b9b70':'#c0c5b8',.004);
+      const residential=type.id==='house',commercial=type.id==='shop';
+      plane(x,z,w-.035,d-.035,green||residential?'#7f9d73':commercial?'#c5bdac':'#b6c0b5',.012);
       // A narrow perimeter and planted corners leave every original model intact.
-      if(w>=2&&d>=2&&type.category!=='sport'){
+      if(w>=2&&d>=2&&type.category!=='sports'){
         for(const side of [-1,1]){
-          plane(x+side*(w/2-.12),z,.12,d-.18,'#e3dfcb',.006);
-          plane(x,z+side*(d/2-.12),w-.18,.12,'#e3dfcb',.007);
+          plane(x+side*(w/2-.12),z,.12,d-.18,'#e3dfcb',.025);
+          plane(x,z+side*(d/2-.12),w-.18,.12,'#e3dfcb',.026);
         }
         if(this.quality!=='low')for(const sx of [-1,1]){
           const px=x+sx*(w/2-.21),pz=z-d/2+.2;
@@ -66,6 +68,18 @@ export class CityStreets{
         }
         if(type.category==='services'||type.category==='learning'||type.id==='cityHall'){
           box(x-w/2+.3,.15,z+d/2-.2,.45,.055,.14,'#a87f55');box(x-w/2+.3,.24,z+d/2-.27,.45,.14,.035,'#a87f55');
+        }
+        if(type.requiresRoad){
+          const {angle,dx,dz,access}=streetFront(b,type,buildings,definition,roadCells);if(!access)continue;
+          const edge=(dx?w:d)/2;
+          // An entrance apron meets the existing curb. Cross-joints give plazas
+          // scale, while the original model keeps its own authored doorstep.
+          plane(x+dx*(edge-.24),z+dz*(edge-.24),dx?.46:.58,dz?.46:.58,'#ded7c3',.12);entrances++;
+          if(!residential&&!green)for(let joint=1;joint<Math.max(w,d)*3;joint++){
+            const shift=-Math.max(w,d)/2+joint/3;
+            if(Math.abs(shift)<(dx?d:w)/2-.14)plane(x+dx*(edge-.12)+(dz?shift:0),z+dz*(edge-.12)+(dx?shift:0),dx?.14:.015,dz?.14:.015,'#a8b4aa',.121);
+          }
+          if(residential&&palms.length<(this.quality==='low'?5:16))palms.push({x:x-dx*.68-dz*.72-offset,y:this.ground+.13,z:z-dz*.68+dx*.72-offset,angle,scale:.13});
         }
       }
     }
@@ -80,7 +94,7 @@ export class CityStreets{
       for(const [i,p]of palms.entries()){dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(0,p.angle,0);dummy.scale.setScalar(p.scale);dummy.updateMatrix();matrix.multiplyMatrices(dummy.matrix,source.matrixWorld);mesh.setMatrixAt(i,matrix);}
       mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();this.palms.push(mesh);this.scene.add(mesh);
     });}
-    this.stats={roads:network.nodes.length,plots,lamps,crossings,streetTrees:this.palms.length?palms.length:0,draws:this.batches.length+this.palms.length};
+    this.stats={roads:network.nodes.length,plots,entrances,lamps,crossings,streetTrees:this.palms.length?palms.length:0,draws:this.batches.length+this.palms.length};
   }
   clear(){for(const mesh of [...this.batches,...this.palms]){mesh.removeFromParent();mesh.dispose();}this.batches=[];this.palms=[];}
   metrics(){return {...this.stats,draws:this.batches.length+this.palms.length,disposed:this.disposed};}

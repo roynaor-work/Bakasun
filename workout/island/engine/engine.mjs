@@ -1,19 +1,19 @@
-import {installLearning} from '../learning/runtime.mjs?v=island-cityplay-20261025-1';
-import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-cityplay-20261025-1';
-import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-cityplay-20261025-1';
-import {recordStageWin} from '../activity/progress.mjs?v=island-cityplay-20261025-1';
-import {gameAvailability} from '../activity/availability.mjs?v=island-cityplay-20261025-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-cityplay-20261025-1';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=island-cityplay-20261025-1';
-import {repairHarbors} from './placement-help.mjs?v=island-cityplay-20261025-1';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-cityplay-20261025-1';
-import { createRegistry } from './registry.mjs?v=island-cityplay-20261025-1';
-import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-cityplay-20261025-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-cityplay-20261025-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=island-cityplay-20261025-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-cityplay-20261025-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-cityplay-20261025-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-cityplay-20261025-1';
+import {installLearning} from '../learning/runtime.mjs?v=island-cityplan-20261025-1';
+import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-cityplan-20261025-1';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-cityplan-20261025-1';
+import {recordStageWin} from '../activity/progress.mjs?v=island-cityplan-20261025-1';
+import {gameAvailability} from '../activity/availability.mjs?v=island-cityplan-20261025-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-cityplan-20261025-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=island-cityplan-20261025-1';
+import {repairHarbors} from './placement-help.mjs?v=island-cityplan-20261025-1';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-cityplan-20261025-1';
+import { createRegistry } from './registry.mjs?v=island-cityplan-20261025-1';
+import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-cityplan-20261025-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-cityplan-20261025-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=island-cityplan-20261025-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-cityplan-20261025-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-cityplan-20261025-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-cityplan-20261025-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
