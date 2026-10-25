@@ -1,15 +1,18 @@
 import * as T from '../vendor/three.module.js';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-nitro-20261025-1';
-import { Avatar, Citizens } from './avatar.mjs?v=island-nitro-20261025-1';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-nitro-20261025-1';
-import { levelValue } from '../engine/metrics.mjs?v=island-nitro-20261025-1';
-import { LocalModels } from './local-models.mjs?v=island-nitro-20261025-1';
-import {MeshyPilot} from './meshy-pilot.mjs?v=island-nitro-20261025-1';
-import {cityPaths} from '../engine/paths.mjs?v=island-nitro-20261025-1';
-import {shoreDirection} from '../engine/placement-help.mjs?v=island-nitro-20261025-1';
-import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-nitro-20261025-1';
-import {batchMeshes} from './batch.mjs?v=island-nitro-20261025-1';
-import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-nitro-20261025-1';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-cityscape-20261025-1';
+import { Avatar, Citizens } from './avatar.mjs?v=island-cityscape-20261025-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-cityscape-20261025-1';
+import { levelValue } from '../engine/metrics.mjs?v=island-cityscape-20261025-1';
+import { LocalModels } from './local-models.mjs?v=island-cityscape-20261025-1';
+import {MeshyPilot} from './meshy-pilot.mjs?v=island-cityscape-20261025-1';
+import {cityPaths} from '../engine/paths.mjs?v=island-cityscape-20261025-1';
+import {shoreDirection} from '../engine/placement-help.mjs?v=island-cityscape-20261025-1';
+import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-cityscape-20261025-1';
+import {batchMeshes} from './batch.mjs?v=island-cityscape-20261025-1';
+import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-cityscape-20261025-1';
+import {CityStreets} from './city-streets.mjs?v=island-cityscape-20261025-1';
+import {CityTraffic} from './city-traffic.mjs?v=island-cityscape-20261025-1';
+import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-cityscape-20261025-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -32,7 +35,10 @@ export class IslandView {
     this.modelsReady=Promise.all(records.flatMap(record=>[record.model,...(record.levels||[]).map(level=>level.model)]).filter(Boolean).map(spec=>this.models.load(spec))).then(()=>{if(!this.disposed&&this.state)this.setWorld(this.state,true);});
     this.avatar=new Avatar(this.scene);this.citizens=new Citizens(this.scene,data.config.cityView.citizens.max);
     this.pilot=new MeshyPilot(this.scene,data.config.cityView.meshyPilot);
-    this.pilotReady=this.pilot.load().then(()=>{if(!this.disposed&&this.state){this.pathSignature=null;this.refreshWalkers(this.state.buildings);}});
+    this.cityStreets=new CityStreets(this.scene,GROUND,this.environment.flora.models);
+    this.cityTraffic=new CityTraffic(this.scene,this.pilot.models,data.config.cityView.meshyPilot.car,GROUND);
+    this.cityReady=this.environment.modelsReady.then(()=>{if(!this.disposed&&this.state)this.syncCity(this.state.buildings,true);});
+    this.pilotReady=this.pilot.load().then(()=>{if(!this.disposed&&this.state){this.pathSignature=null;this.refreshWalkers(this.state.buildings);this.syncCity(this.state.buildings,true);}});
     this.avatar.load({}).then(()=>{if(!this.disposed){if(!this.avatarPositioned)this.avatar.holder.position.set(0,GROUND,0);this.onReady(this);}}).catch(()=>this.onError('error.avatar'));
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(canvas);this.handlers={};this.bindEvents();this.resize();this.last=performance.now();this.samples=[];this.animate=this.animate.bind(this);this.frame=requestAnimationFrame(this.animate);
   }
@@ -85,17 +91,28 @@ export class IslandView {
     if(previousSize!==this.size)this.resize();
     this.roadBatch.rebuild([...this.groups.values()],id=>Boolean(this.definition(id)?.isRoad),force);
     const shadowExtent=Math.max(24,this.size*.85+8);Object.assign(this.sun.shadow.camera,{left:-shadowExtent,right:shadowExtent,top:shadowExtent,bottom:-shadowExtent});this.sun.shadow.camera.updateProjectionMatrix();
-    this.updateContactShadows(buildings);this.setAvatar(state.avatar||state.character||{});this.refreshWalkers(buildings);
+    this.updateContactShadows(buildings);this.setAvatar(state.avatar||state.character||{});this.refreshWalkers(buildings);this.syncCity(buildings);
+  }
+  syncCity(buildings,force=false){
+    if(!this.cityStreets||!this.cityTraffic)return;
+    this.cityStreets.quality=this.cityTraffic.quality=this.quality;
+    const definition=id=>this.definition(id);
+    this.cityStreets.rebuild(buildings,this.size,definition,force);this.cityTraffic.sync(buildings,this.size,definition,force);
+    // The same original model now drives on the road network. Retain the
+    // existing parked-car fallback when a small village has too few roads.
+    if(this.pilot.car&&this.cityTraffic.batches.length)this.pilot.car.visible=false;
   }
   refreshWalkers(buildings) {
     const signature=JSON.stringify([this.size,this.quality,buildings.map(b=>[b.id,b.x,b.z,b.level])]);if(signature===this.pathSignature)return;this.pathSignature=signature;
     const paths=this.paths=cityPaths(this.state,this.data.registry),settings=this.data.config.cityView;
     if(this.pathsMesh){this.scene.remove(this.pathsMesh);disposePath(this.pathsMesh);}this.pathsMesh=pathMesh(paths.cells,this.size,settings.paths);this.scene.add(this.pathsMesh);
     const points=paths.cells.map(p=>Object.assign(this.worldPosition(p.x,p.z),{neighbors:p.neighbors}));
+    const roadNetwork=cityRoadNetwork(buildings,this.size,id=>this.definition(id));
+    const sidewalks=paths.cells.map(cell=>{const p=citySidewalkPoint(cell,roadNetwork),v=this.worldPosition(p.x,p.z);v.y+=p.height;return Object.assign(v,{neighbors:p.neighbors});});
     this.pilot.sync(buildings,paths,id=>this.definition(id),(x,z)=>this.worldPosition(x,z));
     if(this.data.featureFlags?.citizens===false&&this.pilot.walker)this.pilot.walker.root.visible=false;
     const count=Math.min(this.quality==='low'?settings.citizens.lowMax:settings.citizens.max,settings.citizens.minimum+buildings.filter(b=>!this.definition(b.typeId)?.isRoad).length*settings.citizens.perBuilding);
-    this.walkPoints=points;this.citizens.setPoints(points,this.data.featureFlags?.citizens===false?0:count-(this.pilot.walker?.root.visible?1:0));
+    this.walkPoints=points;this.citizens.setPoints(sidewalks,this.data.featureFlags?.citizens===false?0:count-(this.pilot.walker?.root.visible?1:0));
     if(points.length&&!this.avatarPositioned){this.avatar.holder.position.copy(points[Math.floor(points.length/2)]);this.avatarPositioned=true;}
   }
   setAvatar(record) {const key=JSON.stringify(record);if(record&&this.avatarKey!==key){this.avatarKey=key;this.avatar?.setRecord(record);}}
@@ -189,18 +206,18 @@ export class IslandView {
   animate(now) {
     if(this.disposed)return;const delta=Math.min((now-this.last)/1000,.05),time=now/1000;this.last=now;
     if(!document.hidden&&!this.paused){
-      this.environment.tick(time);this.citizens.tick(delta,time);this.pilot.tick(delta);
+      this.environment.tick(time);this.citizens.tick(delta,time);this.pilot.tick(delta);this.cityTraffic?.update(delta);
       if(!this.route.length&&this.walkPoints?.length>1&&now>(this.nextWalk||0)){const here=this.avatar.holder.position;let nearest=0;for(let i=0;i<this.walkPoints.length;i++)if(here.distanceTo(this.walkPoints[i])<here.distanceTo(this.walkPoints[nearest]))nearest=i;const p=this.walkPoints[nearest],next=this.walkPoints[p.neighbors?.[Math.floor(time)%p.neighbors.length]??nearest];this.route.push({x:p.x,z:p.z},{x:next.x,z:next.z});this.nextWalk=now+1500;}
       this.avatar.tick(delta,time,this.preview?[]:this.route);
       if(!this.preview||now-(this.lastWorldRender||0)>500){this.renderer.render(this.scene,this.camera);this.lastWorldRender=now;}
       this.renderAvatarPreview();this.samples.push(now);while(this.samples[0]<now-1000)this.samples.shift();
       if(!this.preview&&now-this.started>5000&&now-this.qualityCheckedAt>2000){
         this.qualityCheckedAt=now;
-        if(this.quality==='high'&&this.samples.length<27){this.quality='low';this.renderer.shadowMap.enabled=false;this.environment.setQuality?.('low');this.resize();this.refreshWalkers(this.state.buildings);}
+        if(this.quality==='high'&&this.samples.length<27){this.quality='low';this.renderer.shadowMap.enabled=false;this.environment.setQuality?.('low');this.resize();this.refreshWalkers(this.state.buildings);this.syncCity(this.state.buildings,true);}
       }
     }
     this.frame=requestAnimationFrame(this.animate);
   }
-  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,paths:this.paths?.routes.map(r=>({id:r.id,connected:r.connected})),roads:this.roadBatch?.metrics(),pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,models:this.models?.metrics(),pilot:this.pilot?.metrics(),renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
-  dispose() {if(this.disposed)return;this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();disposePath(this.pathsMesh);this.roadBatch?.dispose();this.contactShadows?.dispose();this.contactShadows?.geometry.dispose();this.contactShadows?.material.map.dispose();this.contactShadows?.material.dispose();this.radius?.geometry.dispose();this.radius?.material.dispose();for(const item of this.groups.values())disposeBuilding(item.group);for(const mesh of this.citizens?.meshes||[]){mesh.dispose();mesh.geometry.dispose();}this.citizens?.root.removeFromParent();this.pilot?.dispose();this.models?.dispose();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.sun?.shadow.dispose();this.renderer?.dispose();}
+  metrics() {return {triangles:this.renderer?.info.render.triangles||0,calls:this.renderer?.info.render.calls||0,fps:this.samples?.length||0,citizens:this.citizens?.people.length||0,paths:this.paths?.routes.map(r=>({id:r.id,connected:r.connected})),roads:this.roadBatch?.metrics(),streets:this.cityStreets?.metrics(),traffic:this.cityTraffic?.metrics(),pixelRatio:this.renderer?.getPixelRatio()||0,quality:this.quality,avatarLoaded:!!this.avatar?.root,models:this.models?.metrics(),pilot:this.pilot?.metrics(),renderer:this.renderer?.getContext().getParameter(this.renderer.getContext().VERSION)};}
+  dispose() {if(this.disposed)return;this.disposed=true;cancelAnimationFrame(this.frame);this.detachAvatarPreview();this.clearGhost();disposePath(this.pathsMesh);this.roadBatch?.dispose();this.cityStreets?.dispose();this.cityTraffic?.dispose();this.contactShadows?.dispose();this.contactShadows?.geometry.dispose();this.contactShadows?.material.map.dispose();this.contactShadows?.material.dispose();this.radius?.geometry.dispose();this.radius?.material.dispose();for(const item of this.groups.values())disposeBuilding(item.group);for(const mesh of this.citizens?.meshes||[]){mesh.dispose();mesh.geometry.dispose();}this.citizens?.root.removeFromParent();this.pilot?.dispose();this.models?.dispose();this.resizeObserver?.disconnect();for(const [type,handler]of Object.entries(this.handlers||{}))this.canvas.removeEventListener(type,handler);this.avatar?.dispose();this.environment?.dispose();this.sun?.shadow.dispose();this.renderer?.dispose();}
 }

@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import { GLTFLoader } from '../vendor/GLTFLoader.js';
-import { GROUND, primitive, material } from './environment.mjs?v=island-nitro-20261025-1';
+import { GROUND, primitive, material } from './environment.mjs?v=island-cityscape-20261025-1';
 
 const MODEL_URL=new URL('../assets/kid-full.glb',import.meta.url).href;
 const color=new T.Color();
@@ -80,7 +80,7 @@ export class Citizens {
   setPoints(points,count) {
     this.points=points;count=Math.max(0,Math.min(this.max,count,points.length>1?this.max:0));
     this.people=[];
-    while(this.people.length<count){const i=this.people.length,p=points[i%points.length];this.people.push({x:p.x,z:p.z,node:i%points.length,target:p.neighbors?.[0]??(i+1)%points.length,phase:i*1.7,speed:.32+(i%4)*.04});this.body.setColorAt(i,new T.Color(['#f8cc75','#eaa19b','#83bdb8','#b4a3d6','#e8eee0'][i%5]));}
+    while(this.people.length<count){const i=this.people.length,p=points[i%points.length];this.people.push({x:p.x,y:p.y??GROUND,z:p.z,node:i%points.length,target:p.neighbors?.[0]??(i+1)%points.length,phase:i*1.7,speed:.32+(i%4)*.04});this.body.setColorAt(i,new T.Color(['#f8cc75','#eaa19b','#83bdb8','#b4a3d6','#e8eee0'][i%5]));}
     this.people.length=count;for(const mesh of this.meshes)mesh.count=count;
     if(this.body.instanceColor)this.body.instanceColor.needsUpdate=true;
   }
@@ -88,11 +88,12 @@ export class Citizens {
     if(!this.points?.length)return;const dummy=this.dummy;
     for(let i=0;i<this.people.length;i++) {
       const p=this.people[i],target=this.points[p.target%this.points.length],dx=target.x-p.x,dz=target.z-p.z,len=Math.hypot(dx,dz);
+      p.y+=((target.y??GROUND)-p.y)*(1-Math.exp(-delta*8));
       if(len<.12){const next=target.neighbors?.filter(n=>n!==p.node);p.node=p.target;p.target=next?.length?next[(i+Math.floor(time))%next.length]:target.neighbors?.[0]??(p.target+1+i%3)%this.points.length;}
       else {p.x+=dx/len*Math.min(len,delta*p.speed);p.z+=dz/len*Math.min(len,delta*p.speed);}
       const bob=Math.sin(time*6+p.phase)*.015;
-      for(const [mesh,y,scale] of [[this.body,.24,1],[this.head,.47,1],[this.hair,.525,1]]) {dummy.position.set(p.x,GROUND+y+bob,p.z);dummy.rotation.set(0,Math.atan2(dx,dz),0);dummy.scale.setScalar(scale);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}
-      for(const [mesh,side]of [[this.leftLeg,-1],[this.rightLeg,1]]){dummy.position.set(p.x+side*.043,GROUND+.08,p.z);dummy.rotation.set(Math.sin(time*7+p.phase)*.4*side,Math.atan2(dx,dz),0);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}
+      for(const [mesh,y,scale] of [[this.body,.24,1],[this.head,.47,1],[this.hair,.525,1]]) {dummy.position.set(p.x,p.y+y+bob,p.z);dummy.rotation.set(0,Math.atan2(dx,dz),0);dummy.scale.setScalar(scale);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}
+      for(const [mesh,side]of [[this.leftLeg,-1],[this.rightLeg,1]]){dummy.position.set(p.x+side*.043,p.y+.08,p.z);dummy.rotation.set(Math.sin(time*7+p.phase)*.4*side,Math.atan2(dx,dz),0);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}
     }
     for(const mesh of this.meshes)mesh.instanceMatrix.needsUpdate=true;
   }
