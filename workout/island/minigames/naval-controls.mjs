@@ -63,10 +63,11 @@ export function createNavalInput(ctx,getModel,getView){
  window.addEventListener('pointercancel',e=>{if(gesture?.id===e.pointerId){gesture=null;queue.push({type:'cancel'});show(false);}},options);
  cancel.addEventListener('click',e=>{if(e.detail===0&&gesture===null&&keyboard){keyboard=null;queue.push({type:'cancel'});show(false);}},options);
  window.addEventListener('keydown',e=>{
-  if(e.code==='Escape'&&(gesture||keyboard)){e.preventDefault();gesture=keyboard=null;queue.push({type:'cancel'});show(false);return;}
   if(e.code==='Space'&&!e.repeat&&!e.target.matches('input,textarea,select,[contenteditable=true]')&&(!e.target.matches('button')||e.target===fire)){e.preventDefault();if(!gesture&&!keyboard){getModel()?.beginAim?.(getModel().selectedTargetIndex);keyboard={x:0,y:0,dx:0,dy:0,moved:0,start:startState()};show(true);}}
   if(keyboard&&['KeyA','KeyD','KeyW','KeyS'].includes(e.code)){e.preventDefault();const step=12;if(e.code==='KeyA')keyboard.dx-=step;if(e.code==='KeyD')keyboard.dx+=step;if(e.code==='KeyW')keyboard.dy-=step;if(e.code==='KeyS')keyboard.dy+=step;keyboard.moved=99;}
  },options);
+ // Escape while aiming cancels only the aim; it must not also open the pause sheet.
+ window.addEventListener('keydown',e=>{if(e.code==='Escape'&&(gesture||keyboard)){e.preventDefault();e.stopImmediatePropagation?.();gesture=keyboard=null;queue.push({type:'cancel'});show(false);}},{signal:abort.signal,capture:true});
  window.addEventListener('keyup',e=>{if(e.code==='Space'&&keyboard){const s=state(keyboard);queue.push(keyboard.moved?{type:'fire',...s}:{type:'quick'});keyboard=null;show(false);}},options);
  // Keyboard activation of the Fire button: Enter on the button, then its detail-zero click.
  fire.addEventListener('keydown',e=>{if(!e.repeat&&e.code==='Enter'&&e.target===fire)keyboardClick=true;},options);
