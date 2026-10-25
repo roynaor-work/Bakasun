@@ -1,16 +1,16 @@
-import {watchRelease} from './ui/release-watch.mjs?v=island-cityscape-20261025-1';
-import './view/learning-buildings.mjs?v=island-cityscape-20261025-1';
-import {LearningInterface} from './learning/interface.mjs?v=island-cityscape-20261025-1';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-cityscape-20261025-1';
-import {createTranslator} from './ui/translate.mjs?v=island-cityscape-20261025-1';
-import { loadData } from './engine/load-data.mjs?v=island-cityscape-20261025-1';
-import { createEngine } from './engine/engine.mjs?v=island-cityscape-20261025-1';
-import { IslandView } from './view/island-view.mjs?v=island-cityscape-20261025-1';
-import { IslandInterface } from './ui/interface.mjs?v=island-cityscape-20261025-1';
-import {createActivity} from './activity/runtime.mjs?v=island-cityscape-20261025-1';
-import {ActivityInterface} from './ui/activity.mjs?v=island-cityscape-20261025-1';
-import {installPressFeedback} from './ui/press.mjs?v=island-cityscape-20261025-1';
-import {installGameShell} from './ui/game-shell.mjs?v=island-cityscape-20261025-1';
+import {watchRelease} from './ui/release-watch.mjs?v=island-management-20261025-1';
+import './view/learning-buildings.mjs?v=island-management-20261025-1';
+import {LearningInterface} from './learning/interface.mjs?v=island-management-20261025-1';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-management-20261025-1';
+import {createTranslator} from './ui/translate.mjs?v=island-management-20261025-1';
+import { loadData } from './engine/load-data.mjs?v=island-management-20261025-1';
+import { createEngine } from './engine/engine.mjs?v=island-management-20261025-1';
+import { IslandView } from './view/island-view.mjs?v=island-management-20261025-1';
+import { IslandInterface } from './ui/interface.mjs?v=island-management-20261025-1';
+import {createActivity} from './activity/runtime.mjs?v=island-management-20261025-1';
+import {ActivityInterface} from './ui/activity.mjs?v=island-management-20261025-1';
+import {installPressFeedback} from './ui/press.mjs?v=island-management-20261025-1';
+import {installGameShell} from './ui/game-shell.mjs?v=island-management-20261025-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -66,7 +66,7 @@ try {
   const persist = () => engine.save();
   document.addEventListener('visibilitychange', persist);
   window.addEventListener('pagehide', persist);
-  window.addEventListener('beforeunload', () => { clearInterval(tick);releaseWatch.dispose();stopShell();stopPress();stopGameShortcut();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
+  window.addEventListener('beforeunload', () => { clearInterval(tick);releaseWatch.dispose();stopShell();stopPress();stopGameShortcut();ui.cityManagement.dispose();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
   if (new URLSearchParams(location.search).get('dev') === '1') {
     window.__island = { engine, view, ui, data, activity, games,learning,pressSamples };
   }

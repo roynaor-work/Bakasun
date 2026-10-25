@@ -137,7 +137,7 @@ test('a synthetic version-16 save gains racing while preserving currency, buildi
     assert.deepEqual(current.stars.slice(0,progress.stars.length),progress.stars,id+' earned stars remain intact');
     assert.ok(current.stars.slice(progress.stars.length).every(stars=>stars===0),id+' new stages begin unearned');
   }
-  assert.equal(loaded.state.version,17);
+  assert.equal(loaded.state.version,18);
   assert.deepEqual(loaded.state.fireCertificates,[...before.fireCertificates,...Array(data.config.minigames.fireRescue.levels.length-before.fireCertificates.length).fill(null)]);
   for(const key of Object.keys(before)){
     if(['minigameProgress','version','fireCertificates'].includes(key))continue;

@@ -40,14 +40,14 @@ test('an unfinished final stage stays locked at ten and an earlier stage stays w
 
 test('v16 world migration preserves learning, city, money, gear and records while adding racing',()=>{
   const {old,next,engine}=fixture(),before=structuredClone(old),r=migrateSave(old,next,engine.registry);
-  assert.equal(CURRENT_VERSION,17);assert.equal(r.ok,true);assert.equal(r.migrated,true);assert.deepEqual(old,before);assert.equal(r.state.version,17);
+  assert.equal(CURRENT_VERSION,18);assert.equal(r.ok,true);assert.equal(r.migrated,true);assert.deepEqual(old,before);assert.equal(r.state.version,18);
   for(const key of ['learning','money','resources','buildings','world','avatar','team','players','soccerRoster','soccerCard','hangar','alienUpgrades','highScores','minigameWins'])assert.deepEqual(r.state[key],old[key],key);
   assert.deepEqual(r.state.fireCertificates.slice(0,10),old.fireCertificates);assert.deepEqual(r.state.fireCertificates.slice(10),Array(20).fill(null));
   for(const id of oldIds){assert.deepEqual(r.state.minigameEquipment[id],old.minigameEquipment[id]);assert.deepEqual(r.state.minigameProgress[id].stars.slice(0,10),old.minigameProgress[id].stars);}
   assert.equal(r.state.minigameProgress.navalDuel.stage,11);assert.equal(r.state.minigameProgress.tennis.stage,5);
   assert.deepEqual(r.state.minigameEquipment.islandRacing,{engine:0,grip:0});assert.equal(r.state.minigameLevels.islandRacing,1);assert.deepEqual(r.state.minigameProgress.islandRacing,{stage:1,stars:Array(30).fill(0)});
   assert.equal(validateSave(r.state,next,engine.registry).ok,true);
-  assert.deepEqual(migrations[16](old,next),r.state);
+  assert.deepEqual(migrations[17](migrations[16](old,next)),r.state);
   assert.deepEqual(migrateSave(r.state,next,engine.registry).state,r.state);
 });
 

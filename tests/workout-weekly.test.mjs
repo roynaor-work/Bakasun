@@ -120,7 +120,7 @@ test('calendar weeks cross year and daylight-saving boundaries and date-only val
 test('changed entrypoints and upload modules use the current version; other assets retain theirs', async () => {
   const version = '20261010-camera-1', videoVersion = '20261011-vids-signed-1';
   const finishVersion = '20261014-w2g-1';
-  const gameArtVersion = 'island-cityscape-20261025-1';
+  const gameArtVersion = 'island-management-20261025-1';
   const finishModules = new Set(['app.js', 'belts.js', 'camera-demo.mjs', 'camera-screen.mjs',
     'dad-test.js', 'engine.js', 'logic.js', 'outdoors.js', 'parent.js', 'rest-days.js',
     'speech.js', 'store.js', 'together.js', 'voice-lines.js', 'voice-player.js', 'weekly.js']);

@@ -1,3 +1,4 @@
+import {initialCityManagement} from '../../workout/island/engine/city-management.mjs';
 /** Expected additive content changes for authentic historical fixture assertions.
  * Values already earned are copied; only new content receives empty defaults.
  * Corrupt/current-format saves are tested independently, without this helper. */
@@ -16,5 +17,5 @@ export function expectedGameField(key,value,data){
   return copy;
 }
 export function expectedGameContent(world,data){
-  const result={...world};for(const key of ['minigameProgress','minigameLevels','minigameEquipment','fireCertificates'])if(key in result)result[key]=expectedGameField(key,result[key],data);return result;
+  const result={...world,cityManagement:world.cityManagement||initialCityManagement()};for(const key of ['minigameProgress','minigameLevels','minigameEquipment','fireCertificates'])if(key in result)result[key]=expectedGameField(key,result[key],data);return result;
 }

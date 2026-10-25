@@ -11394,5 +11394,74 @@
    "houses": 4,
    "smokeSpeed": 0.35
   }
+ },
+ "cityManagement": {
+  "taxRates": [
+   5,
+   9,
+   13
+  ],
+  "fundingLevels": [
+   50,
+   100,
+   150
+  ],
+  "growthInterval": 30,
+  "maxZones": 128,
+  "bootstrapResidents": 8,
+  "jobsPerResident": 0.45,
+  "taxPerResident": 6,
+  "taxPerJob": 8,
+  "zones": {
+   "residential": {
+    "typeId": "house",
+    "color": "#58c68b"
+   },
+   "commercial": {
+    "typeId": "shop",
+    "color": "#529cdb"
+   },
+   "industrial": {
+    "typeId": "factory",
+    "color": "#e4b451"
+   }
+  },
+  "jobs": {
+   "shop": 6,
+   "factory": 8,
+   "farm": 4,
+   "harbor": 6,
+   "hospital": 4,
+   "school": 3,
+   "fireStation": 3,
+   "police": 3
+  },
+  "services": {
+   "waterTower": {
+    "department": "water",
+    "upkeep": 4
+   },
+   "hospital": {
+    "department": "health",
+    "upkeep": 9
+   },
+   "school": {
+    "department": "education",
+    "upkeep": 7
+   },
+   "fireStation": {
+    "department": "safety",
+    "upkeep": 5
+   },
+   "police": {
+    "department": "safety",
+    "upkeep": 5
+   }
+  },
+  "maintenance": {
+   "road": 0.08,
+   "cityHall": 2,
+   "park": 1
+  }
  }
 }

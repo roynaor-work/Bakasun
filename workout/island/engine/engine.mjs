@@ -1,18 +1,19 @@
-import {installLearning} from '../learning/runtime.mjs?v=island-cityscape-20261025-1';
-import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-cityscape-20261025-1';
-import {recordStageWin} from '../activity/progress.mjs?v=island-cityscape-20261025-1';
-import {gameAvailability} from '../activity/availability.mjs?v=island-cityscape-20261025-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-cityscape-20261025-1';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=island-cityscape-20261025-1';
-import {repairHarbors} from './placement-help.mjs?v=island-cityscape-20261025-1';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-cityscape-20261025-1';
-import { createRegistry } from './registry.mjs?v=island-cityscape-20261025-1';
-import { validatePlacement, canRemove, upgradeAvailability } from './rules.mjs?v=island-cityscape-20261025-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-cityscape-20261025-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=island-cityscape-20261025-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-cityscape-20261025-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-cityscape-20261025-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-cityscape-20261025-1';
+import {installLearning} from '../learning/runtime.mjs?v=island-management-20261025-1';
+import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-management-20261025-1';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-management-20261025-1';
+import {recordStageWin} from '../activity/progress.mjs?v=island-management-20261025-1';
+import {gameAvailability} from '../activity/availability.mjs?v=island-management-20261025-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-management-20261025-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=island-management-20261025-1';
+import {repairHarbors} from './placement-help.mjs?v=island-management-20261025-1';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-management-20261025-1';
+import { createRegistry } from './registry.mjs?v=island-management-20261025-1';
+import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-management-20261025-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-management-20261025-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=island-management-20261025-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-management-20261025-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-management-20261025-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-management-20261025-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -131,8 +132,32 @@ export function createEngine(data, options = {}) {
   engine.coverage = id => coverageForBuilding(state, registry, id, config);
   engine.income = () => flags.economy ? calculateIncome(state, registry, config) : { money: 0, food: 0, materials: 0, energy: 0, sources: [] };
   engine.incomePerMinute = () => engine.income().money;
+  engine.cityReport = () => cityReport(state,registry,config,engine.income());
+  engine.setCityPolicy = input => {
+    if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(key=>!['enabled','taxRate','funding'].includes(key)))return {ok:false,reason:'reason.invalid'};
+    if(input.enabled!==undefined&&typeof input.enabled!=='boolean'||input.taxRate!==undefined&&!config.cityManagement.taxRates.includes(input.taxRate))return {ok:false,reason:'reason.invalid'};
+    if(input.funding&&(!Object.keys(input.funding).length||Object.keys(input.funding).some(id=>!Object.hasOwn(state.cityManagement.funding,id)||!config.cityManagement.fundingLevels.includes(input.funding[id]))))return {ok:false,reason:'reason.invalid'};
+    if(input.funding!==undefined&&(!input.funding||typeof input.funding!=='object'||Array.isArray(input.funding)))return {ok:false,reason:'reason.invalid'};
+    const policy=state.cityManagement;
+    remember({kind:'city-policy',previous:{enabled:policy.enabled,taxRate:policy.taxRate,funding:{...policy.funding}},moneyDelta:0});
+    if(input.enabled!==undefined)policy.enabled=input.enabled;
+    if(input.taxRate!==undefined)policy.taxRate=input.taxRate;
+    Object.assign(policy.funding,input.funding);
+    changed('city-policy');return {ok:true};
+  };
+  engine.validateZone = (kind,x,z) => zoneAvailability(state,registry,kind,x,z);
+  engine.zone = (kind,x,z) => {
+    if(state.cityManagement.zones.length>=config.cityManagement.maxZones)return {ok:false,reason:'city.reason.maxZones'};
+    const result=engine.validateZone(kind,x,z);if(!result.ok)return result;
+    let id;do{id=`zone-${state.cityManagement.nextZoneId++}`;}while(state.cityManagement.zones.some(row=>row.id===id));
+    state.cityManagement.zones.push({id,kind,x,z});remember({kind:'city-zone',id,moneyDelta:0});changed('city-zone',{id});return {ok:true,id};
+  };
+  engine.removeZone = id => {
+    const index=state.cityManagement.zones.findIndex(row=>row.id===id);if(index<0)return {ok:false,reason:'reason.invalid'};
+    const [zone]=state.cityManagement.zones.splice(index,1);remember({kind:'city-unzone',zone,index,moneyDelta:0});changed('city-unzone',{id});return {ok:true};
+  };
   engine.canUndo = () => Boolean(history.length);
-  engine.place = (typeId, x, z) => {
+  const placeBuilding = (typeId, x, z, automatic=false) => {
     const validation = check(typeId, x, z);
     if (!validation.ok) return validation;
     const type = registry.buildings.get(typeId);
@@ -141,12 +166,13 @@ export function createEngine(data, options = {}) {
     state.money -= type.cost;
     const building = { id, typeId, x, z, level: 1 };
     state.buildings.push(building);
-    remember({ kind: 'place', id, moneyDelta: -type.cost });
+    if(!automatic)remember({ kind: 'place', id, moneyDelta: -type.cost });
     const reward = onPlaced(typeId);
-    changed('place', { id, reward });
+    if(!automatic)changed('place', { id, reward });
     if (reward) narration.announce(reward.title, { reward: reward.reward });
     return { ok: true, reason: 'reason.placed', id, reward };
   };
+  engine.place = (typeId,x,z) => placeBuilding(typeId,x,z);
   engine.move = (id, x, z) => {
     const building = state.buildings.find(row => row.id === id);
     if (!building) return { ok: false, reason: 'reason.invalid' };
@@ -181,9 +207,16 @@ export function createEngine(data, options = {}) {
     return { ok: true, reason: 'reason.upgraded', id };
   };
   engine.undo = () => {
-    const action = history.pop();
+    const action = history.at(-1);
     if (!action) return { ok: false, reason: 'reason.noUndo' };
+    if(state.money-action.moneyDelta<0)return {ok:false,reason:'reason.money'};
+    const restored=action.kind==='remove'?action.building:action.kind==='move'?{...state.buildings.find(row=>row.id===action.id),...action.previous}:null;
+    if(restored){const keys=new Set(cellsFor(registry.buildings.get(restored.typeId),restored.x,restored.z).map(cell=>cell.join(',')));if(state.buildings.some(row=>row.id!==restored.id&&cellsFor(registry.buildings.get(row.typeId),row.x,row.z).some(cell=>keys.has(cell.join(',')))))return {ok:false,reason:'reason.occupied'};}
+    history.pop();
     const building = state.buildings.find(row => row.id === action.id);
+    if(action.kind==='city-policy')Object.assign(state.cityManagement,action.previous);
+    if(action.kind==='city-zone')state.cityManagement.zones=state.cityManagement.zones.filter(row=>row.id!==action.id);
+    if(action.kind==='city-unzone')state.cityManagement.zones.splice(action.index,0,action.zone);
     if (action.kind === 'place') state.buildings.splice(state.buildings.findIndex(row => row.id === action.id), 1);
     if (action.kind === 'move' && building) Object.assign(building, action.previous);
     if (action.kind === 'upgrade' && building) building.level = action.previousLevel;
@@ -197,10 +230,21 @@ export function createEngine(data, options = {}) {
     if (!Number.isFinite(seconds) || seconds <= 0) return { ok: false, reason: 'reason.invalid' };
     const duration = Math.min(seconds, config.maxTickSeconds);
     state.updatedAt = now();
-    const gained = flags.economy ? accrueIncome(state, registry, config, duration) : {};
+    let gained={},developed=[];
+    if(flags.economy){
+      if(!state.cityManagement.enabled)gained=accrueIncome(state,registry,config,duration);
+      else{
+        let remaining=duration;
+        while(remaining>0){
+          const seconds=Math.min(remaining,config.cityManagement.growthInterval-state.cityManagement.growthSeconds),step=accrueIncome(state,registry,config,seconds);
+          for(const [resource,value]of Object.entries(step))gained[resource]=(gained[resource]||0)+value;
+          developed.push(...advanceCity(state,registry,config,seconds,(typeId,x,z)=>placeBuilding(typeId,x,z,true)));remaining-=seconds;
+        }
+      }
+    }
     state.playSeconds += duration;
-    changed('tick', { gained });
-    return { ok: true, gained };
+    changed('tick', { gained,developed });
+    return { ok: true, gained,developed };
   };
   engine.setAvatar = input => {
     if (!input || typeof input !== 'object') return { ok: false, reason: 'reason.invalid' };
