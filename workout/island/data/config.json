@@ -7313,6 +7313,47 @@
     "salvoSpread": 22,
     "repairFraction": 0.25,
     "repairSeconds": 1.2
+   },
+   "ballistics": {
+    "gravity": 300,
+    "maxSpeed": 318,
+    "minPower": 0.35,
+    "muzzleHeight": 19,
+    "hullTop": 15,
+    "pivotForward": 20,
+    "barrelLength": 17,
+    "minElevation": 3,
+    "maxElevation": 42,
+    "defaultElevation": 6,
+    "windAccel": 0.55,
+    "salvoYawDegrees": 3.2,
+    "torpedoSpeed": 125,
+    "torpedoMinRange": 90,
+    "torpedoMaxRange": 380,
+    "weakSpot": 0.42,
+    "criticalMultiplier": 1.75,
+    "criticalPoints": 20,
+    "maxFlight": 4,
+    "quickAssist": {"easy": 0.8, "normal": 0, "hard": 0},
+    "previewSamples": 28
+   },
+   "aimControls": {
+    "yawPerPixel": 0.0042,
+    "elevationPerPixel": 0.11,
+    "chargeSeconds": 0.9,
+    "tapSeconds": 0.22,
+    "tapPixels": 10,
+    "handednessKey": "island.naval.hand",
+    "zoomEase": 7,
+    "returnSeconds": 0.45
+   },
+   "aimCamera": {
+    "distance": 17,
+    "height": 7.4,
+    "side": 2.6,
+    "lookHeight": 1.2,
+    "focusMix": 0.55,
+    "fov": 42
    }
   },
   "art": {

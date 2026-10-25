@@ -1,6 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {navalProjectileHeight} from './naval-camera.mjs?v=island-ready-plots-20261026-1';
+import {navalBallisticPoint,navalBallisticVelocity} from './naval-ballistics.mjs?v=island-ready-plots-20261026-1';
 import {navalEffectAtlas,navalParticleGeometry,navalParticleMaterial,writeNavalParticle,finishNavalParticles} from './ultra-naval-effects.mjs?v=island-ready-plots-20261026-1';
 
 const FORWARD=new T.Vector3(0,0,-1);
@@ -40,19 +41,26 @@ export function createNavalProjectiles(scene,model,balance){
   let disposed=false,trailCount=0,total=0;
   function add(shot,ammo,camera){
     if(total>=capacity)return;const kind=ammo===2?2:ammo===1?1:0,r=balance.render;
-    const t=Math.min(1,Math.max(0,shot.age/shot.duration)),height=navalProjectileHeight(ammo,t,model.time,balance);
-    position.set(shot.z*r.enemySpacing/balance.combat.laneSpacing,height,-(shot.x-balance.shipX)*r.worldScale);
-    // Tangent follows the actual visual arc. Simulation and projectile positions are untouched.
-    direction.set((shot.targetZ-shot.fromZ)*r.enemySpacing/balance.combat.laneSpacing,(navalProjectileHeight(ammo,Math.min(1,t+.002),model.time,balance)-height)/.002,-(shot.targetX-shot.fromX)*r.worldScale);
+    const lane=r.enemySpacing/balance.combat.laneSpacing;
+    if(shot.launch){
+     // Live shells read the shared ballistic model; the body points along its velocity.
+     const q=navalBallisticPoint(shot.launch,shot.age),v=navalBallisticVelocity(shot.launch,shot.age);
+     position.set(q.z*lane,q.h*r.worldScale+(ammo===2?r.effects.torpedoHeight:0),-(q.x-balance.shipX)*r.worldScale);
+     direction.set(v.z*lane,v.h*r.worldScale,-v.x*r.worldScale);
+    }else{
+     const t=Math.min(1,Math.max(0,shot.age/shot.duration)),height=navalProjectileHeight(ammo,t,model.time,balance);
+     position.set(shot.z*lane,height,-(shot.x-balance.shipX)*r.worldScale);
+     direction.set((shot.targetZ-shot.fromZ)*lane,(navalProjectileHeight(ammo,Math.min(1,t+.002),model.time,balance)-height)/.002,-(shot.targetX-shot.fromX)*r.worldScale);
+    }
     if(direction.lengthSq()<.00001)direction.copy(FORWARD);else direction.normalize();
     // Optical size only: tiny tail-on ammunition must remain legible at 390px high.
     // Cross-section scales independently, keeping missile length and trails restrained.
     viewPosition.copy(position).applyMatrix4(camera.matrixWorldInverse);
     const depth=Math.max(1,-viewPosition.z),worldPerPixel=2*depth*Math.tan(camera.fov*Math.PI/360)/390;
-    const baseScale=ammo===4?.82:kind===1?1.42:1.12,diameter=kind===1?.27:kind===2?.38:.23,minPixels=kind===1?5.5:kind===2?6:4.5;
+    const baseScale=ammo===4?.82:kind===1?1.42:1.12,diameter=kind===1?.27:kind===2?.38:.23,minPixels=kind===1?5.5:kind===2?6:6.5;
     const optical=Math.min(kind===0?4.2:kind===1?3.6:3.2,Math.max(1,minPixels*worldPerPixel/(diameter*baseScale))),bodyScaleZ=baseScale*Math.min(1.8,Math.sqrt(optical));
     dummy.position.copy(position);dummy.quaternion.setFromUnitVectors(FORWARD,direction);dummy.scale.set(baseScale*optical,baseScale*optical,bodyScaleZ);dummy.updateMatrix();bodies[kind].setMatrixAt(counts[kind]++,dummy.matrix);total++;
-    const length=kind===0?3:10;
+    const length=kind===0?6:10;
     for(let i=0;i<length&&trailCount<trailCapacity;i++){
       const fade=1-i/length,offset=(kind===1?1.1:kind===2?1.2:.5)*bodyScaleZ+i*(kind===1?.32:kind===2?.43:.24);
       dummy.position.copy(position).addScaledVector(direction,-offset);let style=0,opacity=fade*.7;

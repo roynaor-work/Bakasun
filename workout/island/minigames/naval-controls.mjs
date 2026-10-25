@@ -15,32 +15,72 @@ export function navalVisibleTarget(model,project,width,height,point,preferred=mo
  candidates.sort((a,b)=>Math.hypot(a.point.x-center.x,a.point.y-center.y)-Math.hypot(b.point.x-center.x,b.point.y-center.y));
  const candidate=candidates[0];return candidate&&(!point||Math.hypot(candidate.point.x-center.x,candidate.point.y-center.y)<=44)?candidate.enemy.index:null;
 }
-/** A press locks immediately. Release carries the last rendered reticle point. */
+/** Archery-style turret control. Hold (the Fire button or the aim pad) enters
+ * aiming; horizontal drag turns the turret, vertical drag raises the barrel,
+ * the ring charges power, release fires exactly once. A short tap is a quick
+ * shot. Releasing on the cancel chip, a cancelled pointer, blur or a hidden
+ * tab never fires. Movement keeps its own pointer, so two thumbs work. */
+export function navalAimFromDrag(start,dx,dy,config){
+ const c=config.aimControls||{},b=config.ballistics||{};
+ return {yaw:start.yaw+dx*(c.yawPerPixel??.0042),elevation:Math.max(b.minElevation??3,Math.min(b.maxElevation??42,start.elevation-dy*(c.elevationPerPixel??.11)))};
+}
+export function navalChargePower(seconds,config){
+ const c=config.aimControls||{},min=config.ballistics?.minPower??.35;
+ return min+(1-min)*Math.max(0,Math.min(1,seconds/Math.max(.05,c.chargeSeconds??.9)));
+}
+export function navalHanded(config,storage=globalThis.localStorage){
+ const c=config.aimControls||{};let right=config.controls?.rightHanded!==false;
+ try{const saved=storage?.getItem(c.handednessKey);if(saved==='left'||saved==='right')right=saved==='right';}catch{}
+ return right;
+}
 export function createNavalInput(ctx,getModel,getView){
  navalWeaponIcons(ctx.controls);
- const abort=new AbortController(),options={signal:abort.signal},fire=ctx.controls.querySelector('#shoot'),canvas=ctx.canvas;
- let gesture=null,release=null,queue=[],keyboard=false,keyboardClick=false,pendingSelection=null,selected=null;
+ const abort=new AbortController(),options={signal:abort.signal},controls=ctx.controls,fire=controls.querySelector('#shoot'),canvas=ctx.canvas,balance=ctx.balance,c=balance.aimControls||{};
+ // Headless harnesses provide no DOM factory; the input logic itself still runs.
+ const element=tag=>typeof document.createElement==='function'?document.createElement(tag):{tag,hidden:false,dataset:{},style:{setProperty(){},removeProperty(){}},className:'',innerHTML:'',type:'',setAttribute(){},addEventListener(){},setPointerCapture(){},getBoundingClientRect:()=>({left:-1e4,right:-1e4,top:-1e4,bottom:-1e4}),remove(){}};
+ const pad=element('div'),cancel=element('button'),gauge=element('div');
+ pad.className='naval-aim-zone';pad.setAttribute('aria-hidden','true');
+ cancel.type='button';cancel.className='naval-aim-cancel';cancel.hidden=true;cancel.setAttribute('aria-label',ctx.t?.('naval.aim.cancel')||'ביטול כיוון');cancel.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
+ gauge.className='naval-aim-gauge';gauge.setAttribute('aria-hidden','true');gauge.innerHTML='<span class="naval-aim-arc"></span><span class="naval-aim-needle"></span>';
+ controls.prepend?.(pad);controls.append?.(cancel,gauge);
+ const applyHand=()=>{const right=navalHanded(balance);controls.dataset.movementSide=right?'left':'right';controls.dataset.actionSide=right?'right':'left';controls.classList?.toggle('left-handed',!right);return right;};applyHand();
+ fire?.setAttribute?.('aria-describedby','naval-weapon-hint');
+ let gesture=null,keyboard=null,queue=[],pendingSelection=null,keyboardClick=false;
  const project=(m,x,z,y=0)=>getView()?.projectTarget(x,z,y)||m.screenPoint(x,z,y);
- const choose=(point,preferred)=>{const m=getModel(),r=canvas.getBoundingClientRect();return m&&navalVisibleTarget(m,(x,z,y)=>project(m,x,z,y),r.width,r.height,point,preferred??selected??m.selectedTargetIndex);};
- const reset=()=>{gesture=release=null;queue=[];keyboard=keyboardClick=false;pendingSelection=null;getModel()?.cancelAim?.();ctx.controls.dataset.aiming='false';};
- const aimNow=()=>{const m=getModel(),index=choose();if(index!==null)selected=index;m?.beginAim?.(index??undefined);};
- const enqueue=()=>{const m=getModel();if(!m)return;if(!m.aiming)aimNow();queue.push({x:m.aim.x,z:m.aim.z,target:m.lockedTargetIndex});};
- const begin=(e,sea=false)=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();if(!sea)aimNow();const r=canvas.getBoundingClientRect(),point=sea?{x:e.clientX-r.left,y:e.clientY-r.top}:project(m,m.aim.x,m.aim.z),target=sea?choose(point):null;gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,sea,bearing:m.yaw,point,camera:m.camera,width:r.width,height:r.height,target};if(target!==null)selected=pendingSelection=target;};
+ const choose=point=>{const m=getModel(),r=canvas.getBoundingClientRect();return m&&navalVisibleTarget(m,(x,z,y)=>project(m,x,z,y),r.width,r.height,point,m.selectedTargetIndex);};
+ const show=held=>{controls.dataset.aiming=String(held);cancel.hidden=!held;};
+ const reset=()=>{gesture=keyboard=null;queue=[];pendingSelection=null;keyboardClick=false;getModel()?.cancelAim?.();show(false);controls.style?.removeProperty?.('--naval-power');};
+ const startState=()=>{const m=getModel(),t=m?.turret||{yaw:0,elevation:6,power:1};return {yaw:t.yaw,elevation:t.elevation,time:m?.time??0};};
+ const settle=(g,x,y)=>{g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));};
+ const state=g=>{const m=getModel(),aim=navalAimFromDrag(g.start,g.dx,g.dy,balance),held=Math.max(0,(m?.time??0)-g.start.time);return {...aim,power:navalChargePower(held,balance),held};};
+ const overCancel=(x,y)=>{if(cancel.hidden)return false;const r=cancel.getBoundingClientRect();return x>=r.left-8&&x<=r.right+8&&y>=r.top-8&&y<=r.bottom+8;};
+ const finish=(g,x,y)=>{settle(g,x,y);const s=state(g);if(overCancel(x,y))queue.push({type:'cancel'});else if(s.held<=(c.tapSeconds??.22)&&g.moved<=(c.tapPixels??10))queue.push({type:'quick',target:getModel()?.lockedTargetIndex});else queue.push({type:'fire',...s,target:getModel()?.lockedTargetIndex});};
+ const begin=e=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();m.beginAim?.(m.selectedTargetIndex);gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start:startState()};show(true);};
+ fire.addEventListener('pointerdown',begin,options);pad.addEventListener('pointerdown',e=>{try{pad.setPointerCapture(e.pointerId);}catch{}begin(e);},options);
+ canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),index=choose({x:e.clientX-r.left,y:e.clientY-r.top});if(index!==null)pendingSelection=index;},options);
+ window.addEventListener('pointermove',e=>{if(gesture?.id===e.pointerId){settle(gesture,e.clientX,e.clientY);cancel.dataset.hot=String(overCancel(e.clientX,e.clientY));}},options);
+ window.addEventListener('pointerup',e=>{if(gesture?.id!==e.pointerId)return;finish(gesture,e.clientX,e.clientY);gesture=null;show(false);cancel.dataset.hot='false';},options);
+ window.addEventListener('pointercancel',e=>{if(gesture?.id===e.pointerId){gesture=null;queue.push({type:'cancel'});show(false);}},options);
+ cancel.addEventListener('click',e=>{if(e.detail===0&&gesture===null&&keyboard){keyboard=null;queue.push({type:'cancel'});show(false);}},options);
+ window.addEventListener('keydown',e=>{
+  if(e.code==='Escape'&&(gesture||keyboard)){e.preventDefault();gesture=keyboard=null;queue.push({type:'cancel'});show(false);return;}
+  if(e.code==='Space'&&!e.repeat&&!e.target.matches('input,textarea,select,[contenteditable=true]')&&(!e.target.matches('button')||e.target===fire)){e.preventDefault();if(!gesture&&!keyboard){getModel()?.beginAim?.(getModel().selectedTargetIndex);keyboard={x:0,y:0,dx:0,dy:0,moved:0,start:startState()};show(true);}}
+  if(keyboard&&['KeyA','KeyD','KeyW','KeyS'].includes(e.code)){e.preventDefault();const step=12;if(e.code==='KeyA')keyboard.dx-=step;if(e.code==='KeyD')keyboard.dx+=step;if(e.code==='KeyW')keyboard.dy-=step;if(e.code==='KeyS')keyboard.dy+=step;keyboard.moved=99;}
+ },options);
+ window.addEventListener('keyup',e=>{if(e.code==='Space'&&keyboard){const s=state(keyboard);queue.push(keyboard.moved?{type:'fire',...s}:{type:'quick'});keyboard=null;show(false);}},options);
+ // Keyboard activation of the Fire button: Enter on the button, then its detail-zero click.
  fire.addEventListener('keydown',e=>{if(!e.repeat&&e.code==='Enter'&&e.target===fire)keyboardClick=true;},options);
- fire.addEventListener('click',e=>{const valid=keyboardClick&&e.detail===0&&!['touch','mouse','pen'].includes(e.pointerType);keyboardClick=false;if(valid)enqueue();},options);
+ fire.addEventListener('click',e=>{const valid=keyboardClick&&e.detail===0&&!['touch','mouse','pen'].includes(e.pointerType);keyboardClick=false;if(valid)queue.push({type:'quick'});},options);
  window.addEventListener('pointerdown',()=>{keyboardClick=false;},options);
- fire.addEventListener('pointerdown',e=>begin(e),options);canvas.addEventListener('pointerdown',e=>begin(e,true),options);
- window.addEventListener('pointermove',e=>{if(gesture?.id===e.pointerId){gesture.dx=e.clientX-gesture.x;gesture.dy=e.clientY-gesture.y;if(!gesture.sea&&Math.hypot(gesture.dx,gesture.dy)>ctx.balance.controls.aimDragThreshold){const index=choose({x:gesture.point.x+gesture.dx,y:gesture.point.y+gesture.dy});if(index!==null&&index!==selected){selected=pendingSelection=index;getModel()?.beginAim?.(index);}}}},options);
- window.addEventListener('pointerup',e=>{if(gesture?.id!==e.pointerId)return;gesture.dx=e.clientX-gesture.x;gesture.dy=e.clientY-gesture.y;release=gesture;if(!gesture.sea)enqueue();gesture=null;},options);
- for(const type of ['pointercancel','lostpointercapture'])window.addEventListener(type,e=>{if(gesture?.id===e.pointerId)reset();},options);
- window.addEventListener('keydown',e=>{if(e.code==='Space'&&!e.repeat&&!e.target.matches('input,textarea,select,[contenteditable=true]')&&(!e.target.matches('button')||e.target===fire)){e.preventDefault();keyboard=true;aimNow();}},options);
- window.addEventListener('keyup',e=>{if(e.code==='Space'&&keyboard){enqueue();keyboard=keyboardClick=false;}},options);
  window.addEventListener('blur',reset,options);document.addEventListener('visibilitychange',reset,options);
- return {reset,dispose(){reset();abort.abort();},sample(input){
-   const m=getModel(),g=gesture||release,c=ctx.balance.controls,held=Boolean(gesture&&!gesture.sea||keyboard),target=queue.shift();
-   const out={...input,firing:false,fireRelease:Boolean(target),releaseTarget:target,aimHeld:held,angularAim:false,autoAim:false,assistAim:false,yaw:undefined,targetX:undefined,targetZ:undefined,selectTargetIndex:pendingSelection};
-   if(g?.sea&&(g.target===null||Math.hypot(g.dx,g.dy)>c.aimDragThreshold)){const point=navalWaterAt(g.point.x+g.dx,g.point.y+g.dy,g.camera,g.width,g.height,ctx.balance);if(point){out.targetX=point.x;out.targetZ=point.z;}}
+ return {reset,applyHand,dispose(){reset();abort.abort();pad.remove();cancel.remove();gauge.remove();controls.classList?.remove('left-handed');},sample(input){
+   const m=getModel(),g=gesture||keyboard,event=queue.shift(),live=g?state(g):null;
+   const out={...input,firing:false,fireRelease:event?.type==='fire',quickShot:event?.type==='quick',aimCancel:event?.type==='cancel',releaseTarget:Number.isInteger(event?.target)?{target:event.target}:undefined,releaseCurrent:true,aimHeld:Boolean(g),angularAim:false,autoAim:false,assistAim:false,yaw:undefined,targetX:undefined,targetZ:undefined,selectTargetIndex:pendingSelection};
+   const s=event?.type==='fire'?event:live;if(s){out.aimYaw=s.yaw;out.aimElevation=s.elevation;out.aimPower=s.power;}
    pendingSelection=null;
-   ctx.controls.dataset.aiming=String(held);ctx.controls.dataset.weapon=String(m.ammoIndex);release=null;return out;
+   const b=balance.ballistics||{},power=s?.power??m?.power??1,elev=m?((s?.elevation??m.elevation)-(b.minElevation??3))/((b.maxElevation??42)-(b.minElevation??3)):0;
+   controls.style?.setProperty?.('--naval-power',String(g?power:0));gauge.style.setProperty('--naval-elev',String(Math.max(0,Math.min(1,elev))));gauge.dataset.visible=String(Boolean(g));
+   if(m){controls.dataset.weapon=String(m.ammoIndex);fire.setAttribute?.('aria-valuetext',`${Math.round((s?.elevation??m.elevation))}° · ${Math.round(power*100)}%`);}
+   return out;
  }};
 }

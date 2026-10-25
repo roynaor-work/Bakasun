@@ -6,6 +6,8 @@ import {navalCampaignStage,navalMissionState,navalAmmoBudget,extendNavalProgress
 import {seededRandom} from '../workout/island/minigames/context.mjs';
 import {gameResult} from '../workout/island/minigames/result.mjs';
 import {navalCameraPose,navalWorldPoint,projectNavalPoint} from '../workout/island/minigames/naval-camera.mjs';
+import {navalSolveLaunch,navalLaunch} from '../workout/island/minigames/naval-ballistics.mjs';
+import {navalStagePressure} from '../workout/island/minigames/naval-campaign.mjs';
 
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames,b=config.navalDuel;
 const make=(level=1,seed=0,extra={})=>createNavalModel({config,balance:b,level,seed,random:seededRandom(seed),...extra});
@@ -17,7 +19,10 @@ function pilot(m,memory={}){
  const kind=heal?5:[1,2,0,4].find(i=>m.ammo[i]>0)??0;
  const input={ammoIndex:kind};
  if(m.playerShip.x<145){input.moveZ=-1;input.moveX=0;}
+ // A skilled player turns and elevates the turret by hand onto the lead point
+ // (25/10/2026: there is no lock reticle any more; the same physics flies the shell).
  const cycle=m.time%1.04;
+ if(kind!==5&&kind!==1){const options={power:1,wind:m.wind,ammo:kind,pressure:navalStagePressure(m.settings.difficulty??1)},first=navalSolveLaunch(m.playerShip,target,options,b),flight=navalLaunch({ship:m.playerShip,...options,...first},b).duration,s=navalSolveLaunch(m.playerShip,{x:target.x+(target.vx||0)*flight,z:target.z+(target.vz||0)*flight},options,b);Object.assign(input,{aimYaw:s.yaw,aimElevation:s.elevation,aimPower:s.power});}
  if(cycle<.58)input.aimHeld=true;
  else if(!memory.released){input.fireRelease=true;memory.released=true;}
  if(cycle<.06)memory.released=false;

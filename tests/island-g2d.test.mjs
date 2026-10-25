@@ -17,23 +17,25 @@ function advance(m,seconds,input={}){for(let i=0;i<Math.ceil(seconds/.02)&&!m.re
 function until(m,predicate,seconds,input={}){for(let i=0;i<Math.ceil(seconds/.02)&&!predicate()&&!m.result;i++)m.update(.02,input);return predicate();}
 function nextChoice(m){const memory={};for(let i=0;i<12000&&!m.choosing&&!m.result;i++)m.update(.04,pilotInput('alienDefense',m,config.alienDefense,memory));assert.equal(m.choosing,true);}
 
+// 25/10/2026 archery aiming: a sea point solves real turret settings; the aim is the predicted landing.
+const near=(a,b,eps=.5)=>assert.ok(Math.hypot(a.x-b.x,a.z-b.z)<eps,JSON.stringify({a,b}));
 test('G2d naval touch moves the circle; explicit firing alone consumes stage ammunition',()=>{
   const b=config.navalDuel,m=make('navalDuel'),input={x:120,y:30,firing:false},anchor={},supply=m.ammo[0];
   applyCanvasGesture(input,'navalDuel',anchor,b,true);m.update(.02,input);assert.equal(m.phase,'aim');assert.equal(supply,m.settings.ammunition[0]);
-  input.x+=20;input.y-=20;applyCanvasGesture(input,'navalDuel',anchor,b);m.update(.02,input);assert.deepEqual(m.aim,{x:140,z:10});assert.equal(m.phase,'aim');assert.equal(m.ammo[0],supply);
+  input.x+=20;input.y-=20;applyCanvasGesture(input,'navalDuel',anchor,b);m.update(.02,input);near(m.aim,{x:140,z:10});assert.equal(m.phase,'aim');assert.equal(m.ammo[0],supply);
   input.firing=true;m.update(.02,input);assert.equal(m.phase,'shot');assert.equal(m.ammo[0],supply-1);
 });
 test('G2d the sea target clamps within configured range without firing',()=>{
   const b=config.navalDuel,m=make('navalDuel'),input={x:9999,y:9999,firing:false},anchor={},ammo=[...m.ammo];
-  applyCanvasGesture(input,'navalDuel',anchor,b,true);m.update(.01,input);assert.deepEqual(m.aim,{x:b.targeting.maxX,z:b.targeting.maxZ});
-  input.x=input.y=-9999;applyCanvasGesture(input,'navalDuel',anchor,b);m.update(.01,input);assert.deepEqual(m.aim,{x:b.targeting.minX,z:b.targeting.minZ});assert.equal(input.firing,false);assert.deepEqual(m.ammo,ammo);
+  applyCanvasGesture(input,'navalDuel',anchor,b,true);m.update(.01,input);near(m.aim,{x:b.targeting.maxX,z:b.targeting.maxZ},15);
+  input.x=input.y=-9999;applyCanvasGesture(input,'navalDuel',anchor,b);m.update(.01,input);near(m.aim,{x:b.targeting.minX,z:b.targeting.minZ},15);assert.equal(input.firing,false);assert.deepEqual(m.ammo,ammo);
 });
 for(let index=0;index<4;index++)test(`G2d ammunition ${index} is available without purchases and honors brief recovery`,()=>{
   const m=make('navalDuel'),b=config.navalDuel,supply=m.ammo[index];assert.ok(supply>0);m.update(.02,{ammoIndex:index});assert.equal(m.ammoIndex,index);assert.equal(m.phase,'aim');
   m.update(.02,{firing:true,ammoIndex:index,targetX:200,targetZ:120});assert.equal(m.ball.ammo,index);assert.equal(m.ammo[index],supply-1);assert.ok(m.cooldowns[index]>0&&m.cooldowns[index]<=1.2);
   m.update(.02,{});m.update(.02,{firing:true});assert.equal(m.ammo[index],supply-1,'rapid taps during recovery cannot consume a second round');
   m.update(.02,{ammoIndex:(index+1)%4});assert.equal(m.ammoIndex,(index+1)%4);assert.ok(m.cooldowns[index]>0);assert.equal(m.cooldowns[(index+1)%4],0);
-  if(index===3){assert.equal(m.mines.length,0);advance(m,m.ball.duration+.02);assert.equal(m.mines.length,1);assert.equal(m.mines[0].x,200);assert.equal(m.mines[0].z,120);assert.ok(m.mines[0].armed,'mine deploys at its actual flight endpoint');}
+  if(index===3){assert.equal(m.mines.length,0);advance(m,m.ball.duration+.02);assert.equal(m.mines.length,1);near(m.mines[0],{x:200,z:120});assert.ok(m.mines[0].armed,'mine deploys at its actual flight endpoint');}
 });
 test('G2d enemies move in distance and position at stage one; several living ships share high stages',()=>{
   const m=make('navalDuel'),x=m.enemyX,z=m.enemies[0].z;advance(m,.8);assert.notEqual(m.enemyX,x);assert.notEqual(m.enemies[0].z,z);
