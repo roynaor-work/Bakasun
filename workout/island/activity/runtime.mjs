@@ -1,8 +1,8 @@
-import {equipmentOffer} from './equipment.mjs?v=island-c2-20261025-1';
-import {gameAvailability} from './availability.mjs?v=island-c2-20261025-1';
-import {eventEligible} from './eligibility.mjs?v=island-c2-20261025-1';
-import {seededRandom} from '../minigames/context.mjs?v=island-c2-20261025-1';
-import {buildingCenter,levelFactor} from '../engine/metrics.mjs?v=island-c2-20261025-1';
+import {equipmentOffer} from './equipment.mjs?v=island-citydetail-20261025-2';
+import {gameAvailability} from './availability.mjs?v=island-citydetail-20261025-2';
+import {eventEligible} from './eligibility.mjs?v=island-citydetail-20261025-2';
+import {seededRandom} from '../minigames/context.mjs?v=island-citydetail-20261025-2';
+import {buildingCenter,levelFactor} from '../engine/metrics.mjs?v=island-citydetail-20261025-2';
 
 export function createActivity(engine,{now=Date.now,random=seededRandom(now()),blocked=()=>false,onLaunch}={}) {
   const {state,data,registry}=engine,config=data.config.events,listeners=new Set();
