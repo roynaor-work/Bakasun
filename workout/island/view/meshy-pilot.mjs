@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from './local-models.mjs?v=island-nitro-20261025-1';
-import {GROUND} from './environment.mjs?v=island-nitro-20261025-1';
+import {LocalModels} from './local-models.mjs?v=island-cityscape-20261025-1';
+import {GROUND} from './environment.mjs?v=island-cityscape-20261025-1';
 
 /** One cosmetic walker. Each instance owns its mixer and cloned skeleton;
  * geometry, materials and clips remain owned by LocalModels. */
@@ -59,7 +59,7 @@ export function pilotSegment(buildings,paths,definition) {
   const cells=paths.cells.filter(p=>p.neighbors.length).sort((a,b)=>Math.hypot(a.x-center.x,a.z-center.z)-Math.hypot(b.x-center.x,b.z-center.z));
   const a=cells[0];if(!a)return null;
   const b=paths.cells[a.neighbors[0]],roadAt=p=>buildings.some(b=>{const type=definition(b.typeId||b.type),[w,d]=type?.footprint||[1,1];return type?.isRoad&&p.x>=b.x&&p.x<b.x+w&&p.z>=b.z&&p.z<b.z+d;});
-  return {a,b,house:center,surface:roadAt(a)&&roadAt(b) ? .1175 : .018};
+  return {a,b,house:center,surface:roadAt(a)&&roadAt(b) ? .158 : .018};
 }
 
 export class MeshyPilot {

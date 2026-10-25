@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import { primitive as part, material, makeTree } from './environment.mjs?v=island-nitro-20261025-1';
-import { batchMeshes } from './batch.mjs?v=island-nitro-20261025-1';
+import { primitive as part, material, makeTree } from './environment.mjs?v=island-cityscape-20261025-1';
+import { batchMeshes } from './batch.mjs?v=island-cityscape-20261025-1';
 
 // A visual kind is an independent extension point. Building IDs never select
 // geometry; two data records can share a visual, or register their own renderer.
@@ -277,7 +277,8 @@ registerBuildingVisual('airbase',(g,v,w,d,h)=>{
 });
 registerBuildingVisual('park',park);
 registerBuildingVisual('waterTower',waterTower);
-registerBuildingVisual('road',(g,v,w,d)=>{base(g,w,d,'#c2b79d');block(g,v.color,[0,.08,0],[w*.88,.075,d*.88]);for(const x of [-.22,.22])block(g,v.roofColor,[x,.12,0],[.17,.01,.035]);});
+// Connected lane markings, sidewalks and crossings belong to CityStreets.
+registerBuildingVisual('road',(g,v,w,d)=>{base(g,w,d,'#bbc4bb');block(g,'#45545b',[0,.08,0],[w*.88,.075,d*.88]);});
 for(const kind of ['fireStation','hospital','school','police','prison'])registerBuildingVisual(kind,(g,v,w,d,h)=>civic(g,v,w,d,h,kind));
 registerBuildingVisual('shop',(g,v,w,d,h)=>{civic(g,v,w,d,h,'shop');block(g,v.roofColor,[0,h*.58,d*.43],[w*.88,.1,.4]);});
 for(const kind of ['soccer','tennis','basketball'])registerBuildingVisual(kind,(g,v,w,d)=>field(g,v,w,d,kind));
