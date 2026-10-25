@@ -1,6 +1,7 @@
 import * as T from '../vendor/three.module.js';
-import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-cityplan-20261025-1';
-import {streetFront} from '../engine/city-sites.mjs?v=island-cityplan-20261025-1';
+import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-citydetail-20261025-1';
+import {streetFront} from '../engine/city-sites.mjs?v=island-citydetail-20261025-1';
+import {plotLandscape} from './plot-landscape.mjs?v=island-citydetail-20261025-1';
 
 /** Paving and street furniture are derived visuals inside existing footprints.
  * No saved building, authored GLB, construction rule or ground plane is changed. */
@@ -19,7 +20,7 @@ export class CityStreets{
     const network=cityRoadNetwork(buildings,size,definition),planes=[],boxes=[],shrubs=[],palms=[],offset=(size-1)/2,roadCells=new Set(buildings.filter(b=>definition(b.typeId)?.isRoad).map(b=>`${b.x},${b.z}`));
     const plane=(x,z,w,d,color,y=.124)=>planes.push({x,y:this.ground+y,z,w,h:d,d:1,color,flat:true});
     const box=(x,y,z,w,h,d,color)=>boxes.push({x,y:this.ground+y,z,w,h,d,color});
-    let lamps=0,crossings=0,plots=0,entrances=0;
+    let lamps=0,crossings=0,plots=0,entrances=0,gardens=0,plazas=0,parking=0;
     for(const p of network.nodes){
       plane(p.x,p.z,.84,.84,'#45545b');
       for(const [dx,dz]of [[1,0],[0,1],[-1,0],[0,-1]]){
@@ -56,21 +57,21 @@ export class CityStreets{
       const green=type.visual?.kind==='park'||type.visual?.kind==='farm';
       const residential=type.id==='house',commercial=type.id==='shop';
       plane(x,z,w-.035,d-.035,green||residential?'#7f9d73':commercial?'#c5bdac':'#b6c0b5',.012);
+      const front=streetFront(b,type,buildings,definition,roadCells,true),landscape=plotLandscape(b,type,front,this.quality);
+      for(const [target,items]of [[planes,landscape.planes],[boxes,landscape.boxes],[shrubs,landscape.shrubs]])for(const piece of items)target.push({...piece,y:this.ground+piece.y});
+      gardens+=landscape.gardens;plazas+=landscape.plazas;parking+=landscape.parking;
       // A narrow perimeter and planted corners leave every original model intact.
       if(w>=2&&d>=2&&type.category!=='sports'){
         for(const side of [-1,1]){
           plane(x+side*(w/2-.12),z,.12,d-.18,'#e3dfcb',.025);
           plane(x,z+side*(d/2-.12),w-.18,.12,'#e3dfcb',.026);
         }
-        if(this.quality!=='low')for(const sx of [-1,1]){
+        if(!landscape.gardens&&!landscape.plazas&&this.quality!=='low')for(const sx of [-1,1]){
           const px=x+sx*(w/2-.21),pz=z-d/2+.2;
           box(px,.08,pz,.21,.12,.26,'#a3977c');shrubs.push({x:px,y:this.ground+.19,z:pz,w:.21,h:.23,d:.24,color:'#507d5e'});
         }
-        if(type.category==='services'||type.category==='learning'||type.id==='cityHall'){
-          box(x-w/2+.3,.15,z+d/2-.2,.45,.055,.14,'#a87f55');box(x-w/2+.3,.24,z+d/2-.27,.45,.14,.035,'#a87f55');
-        }
         if(type.requiresRoad){
-          const {angle,dx,dz,access}=streetFront(b,type,buildings,definition,roadCells);if(!access)continue;
+          const {angle,dx,dz,access}=front;if(!access)continue;
           const edge=(dx?w:d)/2;
           // An entrance apron meets the existing curb. Cross-joints give plazas
           // scale, while the original model keeps its own authored doorstep.
@@ -94,7 +95,7 @@ export class CityStreets{
       for(const [i,p]of palms.entries()){dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(0,p.angle,0);dummy.scale.setScalar(p.scale);dummy.updateMatrix();matrix.multiplyMatrices(dummy.matrix,source.matrixWorld);mesh.setMatrixAt(i,matrix);}
       mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();this.palms.push(mesh);this.scene.add(mesh);
     });}
-    this.stats={roads:network.nodes.length,plots,entrances,lamps,crossings,streetTrees:this.palms.length?palms.length:0,draws:this.batches.length+this.palms.length};
+    this.stats={roads:network.nodes.length,plots,entrances,lamps,crossings,gardens,plazas,parking,streetTrees:this.palms.length?palms.length:0,draws:this.batches.length+this.palms.length};
   }
   clear(){for(const mesh of [...this.batches,...this.palms]){mesh.removeFromParent();mesh.dispose();}this.batches=[];this.palms=[];}
   metrics(){return {...this.stats,draws:this.batches.length+this.palms.length,disposed:this.disposed};}

@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from '../view/local-models.mjs?v=island-cityplan-20261025-1';
+import {LocalModels} from '../view/local-models.mjs?v=island-citydetail-20261025-1';
 
 const TREE=Object.freeze({path:'assets/ultra-fire/tree-a-512.glb',rotationY:0,scale:1});
 const POSITIONS=Object.freeze([[24,0,6],[24,0,18]]);
