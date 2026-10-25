@@ -1,11 +1,11 @@
-import {createG2mAudio} from './g2m-audio.mjs?v=island-citydetail-20261025-1';
-import {createControls} from './controls.mjs?v=island-citydetail-20261025-1';
-import {createGameArt} from './art.mjs?v=island-citydetail-20261025-1';
-import {loadOptionalArt} from './model-art.mjs?v=island-citydetail-20261025-1';
+import {createG2mAudio} from './g2m-audio.mjs?v=island-citydetail-20261025-2';
+import {createControls} from './controls.mjs?v=island-citydetail-20261025-2';
+import {createGameArt} from './art.mjs?v=island-citydetail-20261025-2';
+import {loadOptionalArt} from './model-art.mjs?v=island-citydetail-20261025-2';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienBakeSettings} from './alien-assets.mjs';
-import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-citydetail-20261025-1';
-import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-citydetail-20261025-1';
+import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-citydetail-20261025-2';
+import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-citydetail-20261025-2';
 
 /** Keep action pulses until a simulation frame can consume them. A touch which
  * starts and ends between RAFs must still launch exactly one missile. */

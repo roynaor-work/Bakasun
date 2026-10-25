@@ -1,0 +1,191 @@
+{
+  "environment": "Chromium / ANGLE SwiftShader; simulated touch; fresh synthetic local saves",
+  "worldScreenshots": "HUD hidden only during capture to expose every world marker; C1 captures the full application UI",
+  "physicalPhone": false,
+  "reports": [
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "coverage": {
+        "service": {
+          "radius": 5,
+          "capacity": 32,
+          "used": 32,
+          "serves": [
+            "building-1",
+            "building-2"
+          ]
+        },
+        "radius": 5.05,
+        "highlighted": [
+          "building-1",
+          "building-2"
+        ]
+      },
+      "managedCoverage": {
+        "provider": {
+          "id": "building-4",
+          "radius": 3.5355339059327378,
+          "capacity": 16,
+          "used": 16,
+          "serves": [
+            "building-1"
+          ],
+          "inRange": [
+            "building-1"
+          ],
+          "allocations": {
+            "building-1": 16
+          }
+        },
+        "service": {
+          "radius": 3.5355339059327378,
+          "capacity": 16,
+          "used": 16,
+          "serves": [
+            "building-1"
+          ]
+        },
+        "radius": 3.5855339059327376,
+        "highlighted": [
+          "building-1"
+        ]
+      },
+      "oneTapOneUndo": true,
+      "slowActionMs": 550,
+      "keyboardUndo": true,
+      "dragCancellation": true,
+      "reportAuthoritative": true,
+      "events": [
+        "city-emergency",
+        "city-repair",
+        "move",
+        "undo",
+        "parts",
+        "upgrade",
+        "city-invest",
+        "city-port",
+        "city-deliver",
+        "city-skip",
+        "city-goal",
+        "place",
+        "city-policy",
+        "remove"
+      ],
+      "errors": [],
+      "shots": [
+        "844x390-damage-before.png",
+        "844x390-damage-after.png",
+        "844x390-range-before.png",
+        "844x390-range-after.png",
+        "844x390-capacity-before.png",
+        "844x390-capacity-after.png",
+        "844x390-coverage-before.png",
+        "844x390-coverage-after.png",
+        "844x390-factory-tier-before.png",
+        "844x390-factory-tier-after.png",
+        "844x390-farm-tier-before.png",
+        "844x390-farm-tier-after.png",
+        "844x390-tower-tier-before.png",
+        "844x390-tower-tier-after.png",
+        "844x390-port-before.png",
+        "844x390-port-after.png",
+        "844x390-port-closed.png"
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "coverage": {
+        "service": {
+          "radius": 5,
+          "capacity": 32,
+          "used": 32,
+          "serves": [
+            "building-1",
+            "building-2"
+          ]
+        },
+        "radius": 5.05,
+        "highlighted": [
+          "building-1",
+          "building-2"
+        ]
+      },
+      "managedCoverage": {
+        "provider": {
+          "id": "building-4",
+          "radius": 3.5355339059327378,
+          "capacity": 16,
+          "used": 16,
+          "serves": [
+            "building-1"
+          ],
+          "inRange": [
+            "building-1"
+          ],
+          "allocations": {
+            "building-1": 16
+          }
+        },
+        "service": {
+          "radius": 3.5355339059327378,
+          "capacity": 16,
+          "used": 16,
+          "serves": [
+            "building-1"
+          ]
+        },
+        "radius": 3.5855339059327376,
+        "highlighted": [
+          "building-1"
+        ]
+      },
+      "oneTapOneUndo": true,
+      "slowActionMs": 550,
+      "keyboardUndo": true,
+      "dragCancellation": true,
+      "reportAuthoritative": true,
+      "events": [
+        "city-emergency",
+        "city-repair",
+        "move",
+        "undo",
+        "parts",
+        "upgrade",
+        "city-invest",
+        "city-port",
+        "city-deliver",
+        "city-skip",
+        "city-goal",
+        "place",
+        "city-policy",
+        "remove"
+      ],
+      "errors": [],
+      "shots": [
+        "390x844-damage-before.png",
+        "390x844-damage-after.png",
+        "390x844-range-before.png",
+        "390x844-range-after.png",
+        "390x844-capacity-before.png",
+        "390x844-capacity-after.png",
+        "390x844-coverage-before.png",
+        "390x844-coverage-after.png",
+        "390x844-factory-tier-before.png",
+        "390x844-factory-tier-after.png",
+        "390x844-farm-tier-before.png",
+        "390x844-farm-tier-after.png",
+        "390x844-tower-tier-before.png",
+        "390x844-tower-tier-after.png",
+        "390x844-port-before.png",
+        "390x844-port-after.png",
+        "390x844-port-closed.png"
+      ]
+    }
+  ]
+}

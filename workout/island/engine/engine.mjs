@@ -1,19 +1,20 @@
-import {installLearning} from '../learning/runtime.mjs?v=island-citydetail-20261025-1';
-import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-citydetail-20261025-1';
-import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-citydetail-20261025-1';
-import {recordStageWin} from '../activity/progress.mjs?v=island-citydetail-20261025-1';
-import {gameAvailability} from '../activity/availability.mjs?v=island-citydetail-20261025-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-citydetail-20261025-1';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=island-citydetail-20261025-1';
-import {repairHarbors} from './placement-help.mjs?v=island-citydetail-20261025-1';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-citydetail-20261025-1';
-import { createRegistry } from './registry.mjs?v=island-citydetail-20261025-1';
-import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-citydetail-20261025-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-citydetail-20261025-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=island-citydetail-20261025-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-citydetail-20261025-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-citydetail-20261025-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-citydetail-20261025-1';
+import {installCity} from './city-runtime.mjs?v=island-citydetail-20261025-2';
+import {installLearning} from '../learning/runtime.mjs?v=island-citydetail-20261025-2';
+import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-citydetail-20261025-2';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-citydetail-20261025-2';
+import {recordStageWin} from '../activity/progress.mjs?v=island-citydetail-20261025-2';
+import {gameAvailability} from '../activity/availability.mjs?v=island-citydetail-20261025-2';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-citydetail-20261025-2';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=island-citydetail-20261025-2';
+import {repairHarbors} from './placement-help.mjs?v=island-citydetail-20261025-2';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-citydetail-20261025-2';
+import { createRegistry } from './registry.mjs?v=island-citydetail-20261025-2';
+import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-citydetail-20261025-2';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-citydetail-20261025-2';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=island-citydetail-20261025-2';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-citydetail-20261025-2';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-citydetail-20261025-2';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-citydetail-20261025-2';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -45,11 +46,14 @@ export function createEngine(data, options = {}) {
     return result;
   }
   function changed(type, detail = {}) {
+    engine.city?.sync();
     const saved = save();
     notify(type, { ...detail, saved });
     return saved;
   }
   function remember(action) {
+    action.city = clone(state.city);
+    if (action.kind === 'remove' && state.events.repairs[action.building.id] != null) action.repairs = {id:action.building.id, until:state.events.repairs[action.building.id]};
     history.push(action);
     if (history.length > config.maxUndo) history.shift();
   }
@@ -130,7 +134,7 @@ export function createEngine(data, options = {}) {
     return values;
   };
   engine.coverage = id => coverageForBuilding(state, registry, id, config);
-  engine.income = () => flags.economy ? calculateIncome(state, registry, config) : { money: 0, food: 0, materials: 0, energy: 0, sources: [] };
+  engine.income = () => flags.economy ? calculateIncome(state, registry, config, data.city) : { money: 0, food: 0, materials: 0, energy: 0, sources: [] };
   engine.incomePerMinute = () => engine.income().money;
   engine.cityReport = options => cityReport(state,registry,config,engine.income(),options);
   engine.setCityPolicy = input => {
@@ -221,6 +225,9 @@ export function createEngine(data, options = {}) {
     if (action.kind === 'move' && building) Object.assign(building, action.previous);
     if (action.kind === 'upgrade' && building) building.level = action.previousLevel;
     if (action.kind === 'remove') state.buildings.splice(action.index, 0, action.building);
+    if (action.city) state.city = clone(action.city);
+    if (action.repairs) state.events.repairs[action.repairs.id] = action.repairs.until;
+    for (const [key, delta] of Object.entries(action.resourcesDelta || {})) state.resources[key] -= delta;
     // Only reverse the action delta: earned income and once-only rewards remain intact.
     state.money -= action.moneyDelta;
     changed('undo', { action: action.kind });
@@ -232,11 +239,11 @@ export function createEngine(data, options = {}) {
     state.updatedAt = now();
     let gained={},developed=[];
     if(flags.economy){
-      if(!state.cityManagement.enabled)gained=accrueIncome(state,registry,config,duration);
+      if(!state.cityManagement.enabled)gained=accrueIncome(state,registry,config,duration,data.city);
       else{
         let remaining=duration;
         while(remaining>0){
-          const seconds=Math.min(remaining,config.cityManagement.growthInterval-state.cityManagement.growthSeconds),step=accrueIncome(state,registry,config,seconds);
+          const seconds=Math.min(remaining,config.cityManagement.growthInterval-state.cityManagement.growthSeconds),step=accrueIncome(state,registry,config,seconds,data.city);
           for(const [resource,value]of Object.entries(step))gained[resource]=(gained[resource]||0)+value;
           developed.push(...advanceCity(state,registry,config,seconds,(typeId,x,z)=>placeBuilding(typeId,x,z,true)));remaining-=seconds;
         }
@@ -402,5 +409,6 @@ export function createEngine(data, options = {}) {
   };
   for (const name of ['registerBuilding', 'registerSport', 'registerMinigame', 'registerEventType', 'registerMetric', 'registerIncomeSource']) engine[name] = record => { const result = registry[name](record); notify('registry', { id: record.id }); return result; };
   installLearning(engine,changed);
+  installCity(engine,{changed,notify,remember});
   return engine;
 }

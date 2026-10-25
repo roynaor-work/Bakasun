@@ -1,0 +1,24 @@
+{
+  "production": {
+    "types": ["farm", "factory", "waterTower"],
+    "tiers": [
+      {"multiplier": 1, "cost": 0},
+      {"multiplier": 1.5, "cost": 120},
+      {"multiplier": 2, "cost": 220}
+    ]
+  },
+  "port": {
+    "slots": 2,
+    "cooldownSeconds": 60,
+    "orders": [
+      {"resource": "food", "amount": 20, "reward": 45},
+      {"resource": "materials", "amount": 16, "reward": 55},
+      {"resource": "energy", "amount": 12, "reward": 40}
+    ]
+  },
+  "goals": [
+    {"id": "water", "title": "מים לבית הראשון", "kind": "served", "target": 1, "reward": 50},
+    {"id": "production", "title": "משקיעים בייצור", "kind": "invested", "target": 1, "reward": 60},
+    {"id": "deliveries", "title": "שלושה משלוחים מהנמל", "kind": "delivered", "target": 3, "reward": 100}
+  ]
+}

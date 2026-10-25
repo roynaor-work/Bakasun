@@ -1,12 +1,12 @@
 /** Feedback starts on contact. Actions wait for a release without scrolling. */
 export function installPressFeedback({target=document,onFrame=()=>{},compatibilityClickMs=400,now=()=>performance.now(),scheduleFrame=callback=>requestAnimationFrame(callback)}={}){
   const abort=new AbortController(),options={capture:true,signal:abort.signal},pressed=new Map();
-  let suppressUntil=-Infinity,keyboardTarget=null,nativeTarget=null;
+  let suppressUntil=-Infinity,keyboardTarget=null,nativeTarget=null,pendingClick=null;
   const button=event=>event.target.closest?.('button');
   const cancel=()=>{suppressUntil=now()+compatibilityClickMs;nativeTarget=null;};
-  target.addEventListener('keydown',event=>{if(event.isTrusted&&['Enter',' '].includes(event.key))keyboardTarget=button(event);},options);
+  target.addEventListener('keydown',event=>{if(event.isTrusted&&['Enter',' '].includes(event.key)){keyboardTarget=button(event);pendingClick=null;}},options);
   target.addEventListener('pointerdown',event=>{
-    keyboardTarget=nativeTarget=null;const node=button(event);
+    keyboardTarget=nativeTarget=null;pendingClick=null;const node=button(event);
     if(!node||node.disabled||node.closest('[inert]')||event.button>0)return;
     // A fresh finger is independent of a previous compatibility click.
     suppressUntil=-Infinity;node.dataset.pressed='true';
@@ -22,13 +22,17 @@ export function installPressFeedback({target=document,onFrame=()=>{},compatibili
     if(type==='pointercancel'||moved||button(event)!==press.node){cancel();event.preventDefault();event.stopImmediatePropagation();return;}
     if(press.native){nativeTarget=press.node;return;}
     if(!press.node.onclick&&!press.node.dataset.action)return;
-    cancel();event.preventDefault();event.stopImmediatePropagation();press.node.click();
+    cancel();pendingClick={node:press.node,pointerId:event.pointerId};event.preventDefault();event.stopImmediatePropagation();press.node.click();
   },options);
   target.addEventListener('click',event=>{
     const node=button(event),keyboard=keyboardTarget&&event.detail===0&&keyboardTarget===node;keyboardTarget=null;
     const native=event.isTrusted&&nativeTarget&&nativeTarget===node;nativeTarget=null;
     if(keyboard)return;
     if(native){suppressUntil=now()+compatibilityClickMs;return;}
+    // A slow action can outlast compatibilityClickMs before the browser emits
+    // the trusted click for this release. Consume that gesture once even then.
+    // The next pointerdown or keyboard activation starts an independent action.
+    if(event.isTrusted&&pendingClick&&(event.pointerId===pendingClick.pointerId||node===pendingClick.node)){pendingClick=null;event.preventDefault();event.stopImmediatePropagation();return;}
     if(event.isTrusted&&now()<suppressUntil){event.preventDefault();event.stopImmediatePropagation();}
   },options);
   return ()=>{abort.abort();for(const {node}of pressed.values())delete node.dataset.pressed;pressed.clear();};

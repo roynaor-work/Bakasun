@@ -1,7 +1,7 @@
-import {DATA_VERSION,dataURL} from '../release.mjs?v=island-citydetail-20261025-1';
-import { configureBuilding } from './registry.mjs?v=island-citydetail-20261025-1';
+import {DATA_VERSION,dataURL} from '../release.mjs?v=island-citydetail-20261025-2';
+import { configureBuilding } from './registry.mjs?v=island-citydetail-20261025-2';
 
-const FILES = ['config', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
+const FILES = ['config', 'city', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 
 /** Reads only local, bundled content. No CDN, analytics, account, or remote request. */
 export async function loadData(base = new URL('../', import.meta.url), fetcher = globalThis.fetch) {

@@ -1,18 +1,18 @@
-import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-citydetail-20261025-1';
-import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-citydetail-20261025-1';
-import {hangarAction} from '../activity/hangar.mjs?v=island-citydetail-20261025-1';
-import {hangarPreview} from './hangar-preview.mjs?v=island-citydetail-20261025-1';
-import {createSound} from '../minigames/sound.mjs?v=island-citydetail-20261025-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-citydetail-20261025-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-citydetail-20261025-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=island-citydetail-20261025-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-citydetail-20261025-1';
-import {gameContext} from '../minigames/context.mjs?v=island-citydetail-20261025-1';
-import {gameAvailability} from '../activity/availability.mjs?v=island-citydetail-20261025-1';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-citydetail-20261025-1';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=island-citydetail-20261025-1';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-citydetail-20261025-1';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=island-citydetail-20261025-1';
+import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-citydetail-20261025-2';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-citydetail-20261025-2';
+import {hangarAction} from '../activity/hangar.mjs?v=island-citydetail-20261025-2';
+import {hangarPreview} from './hangar-preview.mjs?v=island-citydetail-20261025-2';
+import {createSound} from '../minigames/sound.mjs?v=island-citydetail-20261025-2';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-citydetail-20261025-2';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-citydetail-20261025-2';
+import {createAmmoVisual} from '../minigames/art.mjs?v=island-citydetail-20261025-2';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-citydetail-20261025-2';
+import {gameContext} from '../minigames/context.mjs?v=island-citydetail-20261025-2';
+import {gameAvailability} from '../activity/availability.mjs?v=island-citydetail-20261025-2';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-citydetail-20261025-2';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=island-citydetail-20261025-2';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-citydetail-20261025-2';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=island-citydetail-20261025-2';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -322,7 +322,7 @@ export class ActivityInterface {
       this.ui.info.append(metrics,el('p','team-rank',this.teamLabel()));
       actions.append(button(this.t('minigame.open'),'city-hall-games',()=>this.menu(),'primary-button'),button(this.t('minigame.soccer.teamCard'),'city-hall-team',()=>this.team()));
     }
-    if(!(this.engine.state.events.repairs[instance.id]>this.now()))return;
+    if(this.engine.city||!(this.engine.state.events.repairs[instance.id]>this.now()))return;
     this.ui.info.append(el('p','repair-status',this.t('event.repair')));
     actions.append(button(this.t('event.repairNow',{cost:this.data.config.events.repairCost}),'repair-building',()=>{const result=this.activity.repair(instance.id);if(result.ok){this.ui.drawInfo();this.ui.toast('event.repaired');}else this.ui.result(result);}));
   }

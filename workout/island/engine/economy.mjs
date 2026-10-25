@@ -1,8 +1,9 @@
-import { levelFactor, population } from './metrics.mjs?v=island-citydetail-20261025-1';
-import {municipalBudget} from './city-management.mjs?v=island-citydetail-20261025-1';
+import { levelFactor, population } from './metrics.mjs?v=island-citydetail-20261025-2';
+import {productionMultiplier} from './city-depth.mjs?v=island-citydetail-20261025-2';
+import {municipalBudget} from './city-management.mjs?v=island-citydetail-20261025-2';
 
 /** All income sources are records in config.json or explicit registry extensions. Amounts are per minute. */
-export function calculateIncome(state, registry, config) {
+export function calculateIncome(state, registry, config, city) {
   const active = state.buildings.filter(row => !(state.events?.repairs?.[row.id] > state.updatedAt));
   const result = { money: 0, food: 0, materials: 0, energy: 0, sources: [] };
   const add = (id, resource, amount) => {
@@ -20,7 +21,7 @@ export function calculateIncome(state, registry, config) {
     } else if (source.kind === 'buildingIncome') {
       for (const row of active) add(source.id, source.resource, (registry.buildings.get(row.typeId)?.income || 0) * levelFactor(row, config));
     } else if (source.kind === 'production') {
-      for (const row of active) for (const [resource, amount] of Object.entries(registry.buildings.get(row.typeId)?.resources || {})) add(source.id, resource, amount * levelFactor(row, config));
+      for (const row of active) for (const [resource, amount] of Object.entries(registry.buildings.get(row.typeId)?.resources || {})) add(source.id, resource, amount * levelFactor(row, config) * productionMultiplier(state, row.id, city));
     } else if (source.kind === 'constant') {
       add(source.id, source.resource, source.perMinute);
     }
@@ -33,10 +34,10 @@ export function calculateIncome(state, registry, config) {
   return result;
 }
 
-export function accrueIncome(state, registry, config, seconds) {
+export function accrueIncome(state, registry, config, seconds, city) {
   if (!Number.isFinite(seconds) || seconds <= 0) return { money: 0, food: 0, materials: 0, energy: 0 };
   const duration = Math.min(seconds, config.maxTickSeconds);
-  const income = calculateIncome(state, registry, config);
+  const income = calculateIncome(state, registry, config, city);
   const gained = {};
   for (const resource of ['money', 'food', 'materials', 'energy']) {
     gained[resource] = income[resource] * duration / 60;
