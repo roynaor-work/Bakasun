@@ -1,16 +1,16 @@
-import {watchRelease} from './ui/release-watch.mjs?v=island-cityplay-20261025-1';
-import './view/learning-buildings.mjs?v=island-cityplay-20261025-1';
-import {LearningInterface} from './learning/interface.mjs?v=island-cityplay-20261025-1';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-cityplay-20261025-1';
-import {createTranslator} from './ui/translate.mjs?v=island-cityplay-20261025-1';
-import { loadData } from './engine/load-data.mjs?v=island-cityplay-20261025-1';
-import { createEngine } from './engine/engine.mjs?v=island-cityplay-20261025-1';
-import { IslandView } from './view/island-view.mjs?v=island-cityplay-20261025-1';
-import { IslandInterface } from './ui/interface.mjs?v=island-cityplay-20261025-1';
-import {createActivity} from './activity/runtime.mjs?v=island-cityplay-20261025-1';
-import {ActivityInterface} from './ui/activity.mjs?v=island-cityplay-20261025-1';
-import {installPressFeedback} from './ui/press.mjs?v=island-cityplay-20261025-1';
-import {installGameShell} from './ui/game-shell.mjs?v=island-cityplay-20261025-1';
+import {watchRelease} from './ui/release-watch.mjs?v=island-cityplan-20261025-1';
+import './view/learning-buildings.mjs?v=island-cityplan-20261025-1';
+import {LearningInterface} from './learning/interface.mjs?v=island-cityplan-20261025-1';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-cityplan-20261025-1';
+import {createTranslator} from './ui/translate.mjs?v=island-cityplan-20261025-1';
+import { loadData } from './engine/load-data.mjs?v=island-cityplan-20261025-1';
+import { createEngine } from './engine/engine.mjs?v=island-cityplan-20261025-1';
+import { IslandView } from './view/island-view.mjs?v=island-cityplan-20261025-1';
+import { IslandInterface } from './ui/interface.mjs?v=island-cityplan-20261025-1';
+import {createActivity} from './activity/runtime.mjs?v=island-cityplan-20261025-1';
+import {ActivityInterface} from './ui/activity.mjs?v=island-cityplan-20261025-1';
+import {installPressFeedback} from './ui/press.mjs?v=island-cityplan-20261025-1';
+import {installGameShell} from './ui/game-shell.mjs?v=island-cityplan-20261025-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

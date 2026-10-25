@@ -35,11 +35,16 @@
           "color": "#f7e8c4",
           "roofColor": "#488c99",
           "windowColor": "#5d9f7d",
-          "design": "balcony"
+          "design": "balcony",
+          "height": 1.4
         }
       },
       {
-        "model": null,
+        "model": {
+          "path": "assets/models/apartment-block-512.glb",
+          "rotationY": 0,
+          "scale": 1.06
+        },
         "title": "level.house.3",
         "visual": {
           "tier": 3,
@@ -57,7 +62,8 @@
           "color": "#dca3b6",
           "roofColor": "#527b86",
           "windowColor": "#f6d385",
-          "design": "gardenTower"
+          "design": "gardenTower",
+          "height": 3.1
         }
       }
     ]
@@ -289,7 +295,11 @@
     "title": "building.fireStation",
     "icon": "🚒",
     "category": "services",
-    "model": null,
+    "model": {
+      "path": "assets/models/fire-station-512.glb",
+      "rotationY": 0,
+      "scale": 0.91
+    },
     "requiresRoad": true,
     "visual": {
       "kind": "fireStation",

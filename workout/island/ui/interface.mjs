@@ -1,8 +1,9 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-cityplay-20261025-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-cityplay-20261025-1';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-cityplay-20261025-1';
-import {CityManagementInterface} from './city-management.mjs?v=island-cityplay-20261025-1';
-import {nearestCityZone} from '../engine/city-management.mjs?v=island-cityplay-20261025-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-cityplan-20261025-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-cityplan-20261025-1';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-cityplan-20261025-1';
+import {CityManagementInterface} from './city-management.mjs?v=island-cityplan-20261025-1';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-cityplan-20261025-1';
+import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-cityplan-20261025-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -137,7 +138,7 @@ export class IslandInterface {
     const cancel = this.cancelButton = button('×', 'cancel', 'round-button'); cancel.setAttribute('aria-label', this.t('app.cancel')); cancel.onclick = () => {const zoning=Boolean(this.zoneKind);this.cancelPlacement();if(zoning)this.cityManagement.open('zones');};
     this.placeHelp=button('', 'help-placement', 'secondary-button placement-help');
     this.placeHelp.innerHTML='<span aria-hidden="true">☝ ✦</span>';this.placeHelp.append(el('span','',this.t('placement.help')));this.placeHelp.setAttribute('aria-label',this.t('placement.help'));
-    this.placeHelp.onclick=()=>{const cell=this.findCell(this.selected,this.movingId);this.updateGhost(cell,false);this.view.focusCell(cell.x,cell.z);this.placeHelp.classList.remove('placement-cue');this.placeButton.classList.add('placement-confirm-cue');};
+    this.placeHelp.onclick=()=>{this.refreshSiteSuggestions();const rows=this.siteSuggestions||[],index=rows.findIndex(row=>row.x===this.currentGhost?.x&&row.z===this.currentGhost?.z),cell=rows.length?rows[(index+1)%rows.length]:this.findCell(this.selected,this.movingId);this.updateGhost(cell,false);this.view.focusCell(cell.x,cell.z);this.placeHelp.classList.remove('placement-cue');this.placeButton.classList.add('placement-confirm-cue');};
     this.placement.append(this.ghostStatus,this.placeHelp, this.placeButton, cancel);
 
     this.info = el('aside', 'info-card panel'); this.info.hidden = true;
@@ -261,6 +262,7 @@ export class IslandInterface {
     this.saveBadge.classList.toggle('save-error', saveFailed);
     this.root.dataset.saveStatus = saveFailed ? 'error' : 'saved';
     this.drawMission();
+    if(this.selected)this.refreshSiteSuggestions();
     if (this.currentGhost) this.updateGhost(this.currentGhost);
     if (this.infoId && this.infoSignature !== this.currentInfoSignature()) this.drawInfo();
     this.updateCatalogState();
@@ -364,6 +366,7 @@ export class IslandInterface {
     this.drawCatalog();
     this.placement.hidden = false;
     this.syncPlacementLayout();
+    this.siteSignature=null;this.refreshSiteSuggestions();
     let cell = this.currentGhost;
     if (!cell || !this.engine.validatePlacement(id, cell.x, cell.z).ok) cell = this.findCell(id);
     this.updateGhost(cell);
@@ -387,10 +390,17 @@ export class IslandInterface {
     if(this.zoneKind){
       return nearestCityZone(state,this.engine.registry,this.zoneKind,this.currentGhost??undefined)??{x:0,z:0};
     }
-    return nearestPlacement(state,this.engine.registry,id,{x:state.world.size/2,z:state.world.size/2},ignoreId,this.data.featureFlags)??{x:1,z:1};
+    const suggestion=citySites(state,this.engine.registry,id,{limit:1,ignoreId,flags:this.data.featureFlags})[0];
+    return suggestion?{x:suggestion.x,z:suggestion.z}:nearestPlacement(state,this.engine.registry,id,{x:state.world.size/2,z:state.world.size/2},ignoreId,this.data.featureFlags)??{x:1,z:1};
+  }
+  refreshSiteSuggestions(){
+    const state=this.engine.state,signature=JSON.stringify([this.selected,this.zoneKind,this.movingId,citySitesSignature(state)]);
+    if(this.siteSignature===signature)return;this.siteSignature=signature;
+    this.siteSuggestions=this.zoneKind?[]:citySites(state,this.engine.registry,this.selected,{ignoreId:this.movingId,flags:this.data.featureFlags});
+    this.view.setCitySites?.(this.siteSuggestions);
   }
   onHover(cell) { if (this.selected) this.updateGhost(cell); }
-  onCell(cell) { if (this.selected) this.updateGhost(cell); else this.closeInfo(); }
+  onCell(cell) { if (this.selected) this.updateGhost(cell); else if(!this.cityManagement?.selectSiteAt(cell))this.closeInfo(); }
   updateGhost(cell,snap=true) {
     if (!this.selected) return;
     this.currentGhost = { x: Math.floor(cell.x), z: Math.floor(cell.z) };
@@ -404,6 +414,8 @@ export class IslandInterface {
     this.ghostStatus.textContent = `${this.movingId ? this.t('app.moveHint', { building: this.label(building, 'building') }) + ' ' : ''}${result.ok ? '✓' : result.reason === 'reason.money' ? '●' : result.reason === 'reason.road' ? '🛣️' : '✕'} ${this.t(result.ok ? this.movingId ? 'app.moveAllowed' : 'reason.ok' : result.reason)}`;
     if(this.zoneKind&&result.ok)this.ghostStatus.textContent=this.t('city.zonePlacement',{kind:this.t(`city.${this.zoneKind}`),cost:building.cost});
     if(this.zoneKind&&this.zoneSessionCount)this.ghostStatus.textContent+=` · ${this.t('city.plannedCount',{count:this.zoneSessionCount})}`;
+    const site=this.siteSuggestions?.find(row=>row.x===this.currentGhost.x&&row.z===this.currentGhost.z);
+    if(site&&result.ok&&!this.zoneKind)this.ghostStatus.textContent+=` · ${this.t('city.site.choice',{number:site.number})} · ${this.t(site.reason)}`;
     this.placeButton.disabled = !result.ok;
     this.placeButton.textContent = `✓ ${this.t(this.movingId ? 'app.moveHere' : 'app.place')}`;
     if(this.zoneKind)this.placeButton.textContent=`✓ ${this.t('city.plan')}`;
@@ -426,6 +438,7 @@ export class IslandInterface {
   }
   cancelPlacement() {
     this.selected = null; this.movingId = null; this.currentGhost = null;this.zoneKind=null;
+    this.siteSuggestions=[];this.siteSignature=null;this.view.setCitySites?.([]);
     delete this.root.dataset.cityZoning;
     this.placement.hidden = true; this.syncPlacementLayout(); this.view.clearGhost(); this.updateCatalogState(); this.drawMission();
   }
@@ -433,7 +446,7 @@ export class IslandInterface {
   startZone(kind){
     this.cancelPlacement();this.cityManagement.hideOverlay();
     const typeId=this.data.config.cityManagement.zones[kind].typeId;
-    this.selectBuilding(typeId);this.zoneKind=kind;this.zoneSessionCount=0;this.root.dataset.cityZoning=kind;this.updateGhost(this.findCell(typeId),false);
+    this.selectBuilding(typeId);this.zoneKind=kind;this.zoneSessionCount=0;this.root.dataset.cityZoning=kind;this.refreshSiteSuggestions();this.updateGhost(this.findCell(typeId),false);
   }
   showInfo(id, {manage=false}={}) {
     if(this.cityManagement?.panel)this.closeModal();
