@@ -74,7 +74,7 @@ test('tennis tour: existing v16 save keeps money, equipment, results and every o
  old.minigameProgress.tennis={stage:10,stars:[1,2,3,1,2,3,1,2,3,2]};old.minigameWins.tennis=12;old.highScores.tennis=4;old.team.wins=12;old.team.rank=teamRank(12,data.config.minigames.soccer);old.team.sportWins.tennis=12;
  const saved=JSON.parse(oldEngine.exportJSON());saved.version=16;
  const before=structuredClone(saved),newEngine=makeEngine();
- assert.equal(saved.version,before.version);assert.equal(CURRENT_VERSION,17);
+ assert.equal(saved.version,before.version);assert.equal(CURRENT_VERSION,18);
  assert.ok(validateSave({...saved,version:CURRENT_VERSION},legacyData,oldEngine.registry).ok);
  const adapted=saved;
  const loaded=migrateSave(adapted,data,newEngine.registry);assert.ok(loaded.ok);

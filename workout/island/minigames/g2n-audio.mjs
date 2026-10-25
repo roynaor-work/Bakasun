@@ -1,4 +1,4 @@
-const VERSION='island-cityscape-20261025-1';
+const VERSION='island-management-20261025-1';
 export const G2N_SAMPLES=Object.freeze(['engine','fire','ladder','rescue']);
 /** Fire-only mix: CC0 samples, filtered noise and harmonic envelopes. */
 export function createG2nAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){

@@ -1,4 +1,5 @@
-import { levelFactor, population } from './metrics.mjs?v=island-cityscape-20261025-1';
+import { levelFactor, population } from './metrics.mjs?v=island-management-20261025-1';
+import {municipalBudget} from './city-management.mjs?v=island-management-20261025-1';
 
 /** All income sources are records in config.json or explicit registry extensions. Amounts are per minute. */
 export function calculateIncome(state, registry, config) {
@@ -24,6 +25,11 @@ export function calculateIncome(state, registry, config) {
       add(source.id, source.resource, source.perMinute);
     }
   }
+  if(state.cityManagement?.enabled){
+    const municipal=municipalBudget(state,registry,config);
+    result.municipal=municipal;result.money+=municipal.net;
+    result.sources.push({id:'municipalTaxes',resource:'money',amount:municipal.taxes},{id:'municipalServices',resource:'money',amount:-municipal.expenses});
+  }
   return result;
 }
 
@@ -34,7 +40,11 @@ export function accrueIncome(state, registry, config, seconds) {
   const gained = {};
   for (const resource of ['money', 'food', 'materials', 'energy']) {
     gained[resource] = income[resource] * duration / 60;
-    if (resource === 'money') state.money += gained[resource];
+    if (resource === 'money') {
+      const before=state.money,available=before+(income.money+(income.municipal?.expenses||0))*duration/60,expense=(income.municipal?.expenses||0)*duration/60;
+      const paid=Math.min(available,expense);state.money=Math.max(0,available-paid);gained.money=state.money-before;
+      if(state.cityManagement?.enabled)state.cityManagement.operatingRatio=expense>0?paid/expense:1;
+    }
     else state.resources[resource] += gained[resource];
   }
   return gained;

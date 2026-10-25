@@ -1,6 +1,7 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-cityscape-20261025-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-cityscape-20261025-1';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-cityscape-20261025-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-management-20261025-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-management-20261025-1';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-management-20261025-1';
+import {CityManagementInterface} from './city-management.mjs?v=island-management-20261025-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -37,6 +38,8 @@ export class IslandInterface {
     root.replaceChildren();
     root.className = 'island-ui';
     this.buildShell();
+    this.cityManagement=new CityManagementInterface(this);
+    this.cityManagement.addEntry(this.cityDetails);
     this.unsubscribe = engine.subscribe((state,event) => {if(event.type==='tutorial'&&state.tutorial.step===0&&!state.tutorial.skipped)this.cityHallIntro=true;this.refresh();});
     this.refresh();
     if (!engine.state.avatar.created) this.showAvatar();
@@ -348,6 +351,7 @@ export class IslandInterface {
     }
   }
   selectBuilding(id) {
+    this.zoneKind=null;
     const building = this.getBuilding(id);
     if (!building) return;
     if (building.locked) { this.toast('reason.locked'); return; }
@@ -379,6 +383,10 @@ export class IslandInterface {
   }
   findCell(id, ignoreId) {
     const state=this.engine.state;
+    if(this.zoneKind){
+      const cells=[];for(let z=0;z<state.world.size;z++)for(let x=0;x<state.world.size;x++)if(this.engine.validateZone(this.zoneKind,x,z).ok)cells.push({x,z});
+      return cells.sort((a,b)=>Math.hypot(a.x-state.world.size/2,a.z-state.world.size/2)-Math.hypot(b.x-state.world.size/2,b.z-state.world.size/2))[0]??{x:0,z:0};
+    }
     return nearestPlacement(state,this.engine.registry,id,{x:state.world.size/2,z:state.world.size/2},ignoreId,this.data.featureFlags)??{x:1,z:1};
   }
   onHover(cell) { if (this.selected) this.updateGhost(cell); }
@@ -386,16 +394,18 @@ export class IslandInterface {
   updateGhost(cell,snap=true) {
     if (!this.selected) return;
     this.currentGhost = { x: Math.floor(cell.x), z: Math.floor(cell.z) };
-    if(snap)this.currentGhost=nearestPlacement(this.engine.state,this.engine.registry,this.selected,this.currentGhost,this.movingId,this.data.featureFlags)||this.currentGhost;
-    const result = this.engine.validatePlacement(this.selected, this.currentGhost.x, this.currentGhost.z, this.movingId);
+    if(snap&&!this.zoneKind)this.currentGhost=nearestPlacement(this.engine.state,this.engine.registry,this.selected,this.currentGhost,this.movingId,this.data.featureFlags)||this.currentGhost;
+    const result = this.zoneKind?this.engine.validateZone(this.zoneKind,this.currentGhost.x,this.currentGhost.z):this.engine.validatePlacement(this.selected, this.currentGhost.x, this.currentGhost.z, this.movingId);
     const building = this.getBuilding(this.selected);
     const moving = this.engine.state.buildings.find(row => row.id === this.movingId);
     this.view.setGhost({ ...building, previewLevel: moving?.level ?? 1 }, this.currentGhost.x, this.currentGhost.z, result.ok);
     this.ghostStatus.dataset.valid = String(result.ok);
     this.ghostStatus.dataset.reason = result.reason ?? 'reason.ok';
     this.ghostStatus.textContent = `${this.movingId ? this.t('app.moveHint', { building: this.label(building, 'building') }) + ' ' : ''}${result.ok ? '✓' : result.reason === 'reason.money' ? '●' : result.reason === 'reason.road' ? '🛣️' : '✕'} ${this.t(result.ok ? this.movingId ? 'app.moveAllowed' : 'reason.ok' : result.reason)}`;
+    if(this.zoneKind&&result.ok)this.ghostStatus.textContent=this.t('city.zonePlacement',{kind:this.t(`city.${this.zoneKind}`),cost:building.cost});
     this.placeButton.disabled = !result.ok;
     this.placeButton.textContent = `✓ ${this.t(this.movingId ? 'app.moveHere' : 'app.place')}`;
+    if(this.zoneKind)this.placeButton.textContent=`✓ ${this.t('city.plan')}`;
     this.cancelButton.textContent = this.movingId ? this.t('app.cancelMove') : '×';
     this.cancelButton.setAttribute('aria-label', this.t(this.movingId ? 'app.cancelMove' : 'app.cancel'));
   }
@@ -403,18 +413,25 @@ export class IslandInterface {
     if (!this.currentGhost || !this.selected) return;
     const { x, z } = this.currentGhost;
     const before = this.engine.state.tutorial.step;
-    const result = this.movingId ? this.engine.move(this.movingId, x, z) : this.engine.place(this.selected, x, z);
+    const zoning=Boolean(this.zoneKind);
+    const result = zoning?this.engine.zone(this.zoneKind,x,z):this.movingId ? this.engine.move(this.movingId, x, z) : this.engine.place(this.selected, x, z);
     if (result.ok) {
       this.cancelPlacement();
+      if(zoning){this.toast('city.zonePlaced');this.cityManagement.open('zones');return;}
       if (this.engine.state.tutorial.step > before && result.reward?.paid) this.toast('tutorial.reward', { money: this.steps()[before].reward.money });
       if (this.engine.state.tutorial.completed && before < this.steps().length) this.toast('tutorial.complete');
     } else this.result(result);
   }
   cancelPlacement() {
-    this.selected = null; this.movingId = null; this.currentGhost = null;
+    this.selected = null; this.movingId = null; this.currentGhost = null;this.zoneKind=null;
     this.placement.hidden = true; this.syncPlacementLayout(); this.view.clearGhost(); this.updateCatalogState(); this.drawMission();
   }
   result(result) { if (result && !result.ok) this.toast(result.reason); return result; }
+  startZone(kind){
+    this.cancelPlacement();this.cityManagement.hideOverlay();
+    const typeId=this.data.config.cityManagement.zones[kind].typeId;
+    this.selectBuilding(typeId);this.zoneKind=kind;this.updateGhost(this.findCell(typeId),false);
+  }
   showInfo(id, {manage=false}={}) {
     const instance=this.engine.state.buildings.find(b=>b.id===id),station=this.getBuilding(instance?.typeId)?.learningStation;
     if(!this.selected&&station&&!manage&&this.learningInterface){this.learningInterface.start(station);return;}
@@ -485,7 +502,7 @@ export class IslandInterface {
     actions.append(move);if(record.id!=='cityHall')actions.append(upgrade);if(record.removable!==false)actions.append(remove);this.info.append(actions);
     this.activityInterface?.decorateInfo(instance,actions);
     if(record.learningStation){const learn=button(`${record.icon} לומדים`,'building-learn','primary-button');learn.onclick=()=>this.learningInterface.start(record.learningStation);actions.append(learn);}
-    if(record.id==='cityHall'){this.view.showRadius(null);return;}
+    if(record.id==='cityHall'){this.cityManagement.addEntry(this.info);this.view.showRadius(null);return;}
     if (nextLevel) {
       const nextInstance = { ...instance, level: instance.level + 1 };
       const details = el('p', 'upgrade-details');

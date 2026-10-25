@@ -1,18 +1,19 @@
-import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-cityscape-20261025-1';
-import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-cityscape-20261025-1';
-import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-cityscape-20261025-1';
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-cityscape-20261025-1';
-import {withCityHall} from './city-hall.mjs?v=island-cityscape-20261025-1';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-cityscape-20261025-1';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-cityscape-20261025-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=island-cityscape-20261025-1';
-import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-cityscape-20261025-1';
-import { cellsFor } from './rules.mjs?v=island-cityscape-20261025-1';
-import {repairHarbors} from './placement-help.mjs?v=island-cityscape-20261025-1';
-import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-cityscape-20261025-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-cityscape-20261025-1';
+import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-management-20261025-1';
+import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-management-20261025-1';
+import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-management-20261025-1';
+import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-management-20261025-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-management-20261025-1';
+import {withCityHall} from './city-hall.mjs?v=island-management-20261025-1';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-management-20261025-1';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-management-20261025-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=island-management-20261025-1';
+import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-management-20261025-1';
+import { cellsFor } from './rules.mjs?v=island-management-20261025-1';
+import {repairHarbors} from './placement-help.mjs?v=island-management-20261025-1';
+import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-management-20261025-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-management-20261025-1';
 
-export const CURRENT_VERSION = 17;
+export const CURRENT_VERSION = 18;
 export const STORAGE_KEY = 'island.v1';
 const clone = value => JSON.parse(JSON.stringify(value));
 const finitePositive = value => Number.isFinite(value) && value >= 0;
@@ -26,7 +27,7 @@ export function createInitialState(data, now = Date.now()) {
   const buildings = [];
   for (let x = road.startX; x <= road.endX; x++) buildings.push({ id: `seed-road-${x}`, typeId: 'road', x, z: road.z, level: 1 });
   return withCityHall({
-    learning:initialLearning(now),fireCertificates:initialFireCertificates(data),hangar:initialHangar(),version: CURRENT_VERSION, money: data.config.startingMoney, resources: clone(data.config.startingResources),
+    cityManagement:initialCityManagement(),learning:initialLearning(now),fireCertificates:initialFireCertificates(data),hangar:initialHangar(),version: CURRENT_VERSION, money: data.config.startingMoney, resources: clone(data.config.startingResources),
     buildings, world: { size: data.config.worldStages[0].size, stage: 0 }, parts: { [data.world.partGroup]: 0 },
     avatar: clone(data.avatar.defaults), team: {...clone(data.team),wins:0,rank:0,sportWins:{soccer:0,tennis:0}}, players,
     tutorial: { step: 0, completed: false, skipped: false }, claimedRewards: [], completedMissions: [], completedEpisodes: [],
@@ -37,6 +38,7 @@ export function createInitialState(data, now = Date.now()) {
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
+  17(old){return {...old,version:18,cityManagement:initialCityManagement()};},
   16(old,data){
     const state={...old,version:17};
     if(isObject(old.minigameProgress)){
@@ -115,6 +117,7 @@ export function migrateSave(value, data, registry) {
 
 export function validateSave(state, data, registry) {
   const invalid = () => ({ ok: false, reason: 'reason.invalid' });
+  if(!validCityManagement(state?.cityManagement,state,registry))return invalid();
   if(!validLearning(state?.learning))return invalid();
   if(!validFireCertificates(state?.fireCertificates,data))return invalid();
   if(!validHangar(state?.hangar,data.config.minigames.alienDefense.hangar))return invalid();
@@ -202,6 +205,18 @@ export function importWorld(raw, current, data, registry) {
   if (!migrated.ok) return migrated;
   const incoming = migrated.state;
   const merged = clone(current);
+  // Current policy wins. Restoring a backup adds plans without silently starting new charges.
+  for(const zone of incoming.cityManagement.zones){
+    const plans=merged.cityManagement.zones;
+    if(plans.length>=data.config.cityManagement.maxZones)break;
+    if(plans.some(row=>row.kind===zone.kind&&row.x===zone.x&&row.z===zone.z))continue;
+    const type=registry.buildings.get(data.config.cityManagement.zones[zone.kind].typeId),keys=new Set(cellsFor(type,zone.x,zone.z).map(cell=>cell.join(',')));
+    if(plans.some(row=>cellsFor(registry.buildings.get(data.config.cityManagement.zones[row.kind].typeId),row.x,row.z).some(cell=>keys.has(cell.join(',')))))continue;
+    let id=zone.id;while(plans.some(row=>row.id===id))id=`zone-${merged.cityManagement.nextZoneId++}`;
+    plans.push({...zone,id});
+  }
+  merged.cityManagement.nextZoneId=Math.max(merged.cityManagement.nextZoneId,incoming.cityManagement.nextZoneId);
+  merged.cityManagement.developed=Math.max(merged.cityManagement.developed,incoming.cityManagement.developed);
   if (incoming.world.size > merged.world.size) merged.world = clone(incoming.world);
   const occupied = new Set(merged.buildings.flatMap(row => cellsFor(registry.buildings.get(row.typeId), row.x, row.z).map(cell => cell.join(','))));
   const ids = new Set(merged.buildings.map(row => row.id));
