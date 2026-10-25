@@ -83,6 +83,6 @@ export class CityStreets{
     this.stats={roads:network.nodes.length,plots,lamps,crossings,streetTrees:this.palms.length?palms.length:0,draws:this.batches.length+this.palms.length};
   }
   clear(){for(const mesh of [...this.batches,...this.palms]){mesh.removeFromParent();mesh.dispose();}this.batches=[];this.palms=[];}
-  metrics(){return {...this.stats,disposed:this.disposed};}
+  metrics(){return {...this.stats,draws:this.batches.length+this.palms.length,disposed:this.disposed};}
   dispose(){if(this.disposed)return;this.clear();this.disposed=true;for(const resource of [this.planeGeometry,this.boxGeometry,this.shrubGeometry,this.material,this.texture])resource.dispose();}
 }

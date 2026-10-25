@@ -36,13 +36,16 @@ export function createCityTraffic(network,{maxCars=8,speed=.62,seed=73}={}){
   const cars=Array.from({length:count},(_,id)=>{
     const from=usable[Math.floor(id*usable.length/count)],to=network.byCell.get(from.neighbors[id%from.neighbors.length]);
     const dx=to.x-from.x,dz=to.z-from.z;
-    return {id,from:from.id,to:to.id,x:from.x+dz*.16,z:from.z-dx*.16,heading:Math.atan2(dx,dz),speed:0,wait:id*.12,travelled:0,turns:0};
+    return {id,from:from.id,to:to.id,x:from.x+dz*.2,z:from.z-dx*.2,heading:Math.atan2(dx,dz),speed:0,wait:id*.12,travelled:0,turns:0};
   });
-  function target(car){const a=network.byCell.get(car.from),b=network.byCell.get(car.to);return {x:b.x+(b.z-a.z)*.16,z:b.z-(b.x-a.x)*.16};}
+  function target(car){const a=network.byCell.get(car.from),b=network.byCell.get(car.to);return {x:b.x+(b.z-a.z)*.2,z:b.z-(b.x-a.x)*.2};}
   function tick(dt){
     const junctions=new Map();
+    // A driver already crossing keeps priority until its rear clears the
+    // junction. A newly arriving driver cannot steal that reservation.
+    for(const c of cars)if(c.travelled<c.turnUntil)junctions.set(c.from,{id:c.id,active:true});
     for(const c of cars){const p=target(c),distance=Math.hypot(p.x-c.x,p.z-c.z),node=network.byCell.get(c.to);
-      if(node.neighbors.length>2&&distance<.65){const prior=junctions.get(c.to);if(!prior||distance<prior.distance)junctions.set(c.to,{id:c.id,distance});}
+      if(node.neighbors.length>2&&distance<.65){const prior=junctions.get(c.to);if(!prior||!prior.active&&distance<prior.distance)junctions.set(c.to,{id:c.id,distance});}
     }
     for(const c of cars){
       if(c.wait>0){c.wait=Math.max(0,c.wait-dt);c.speed=0;continue;}

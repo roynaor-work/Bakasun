@@ -39,7 +39,7 @@ test('traffic negotiates junctions and dead ends for four minutes without perman
     for(const c of model.cars){assert.ok(n.nodes.some(p=>Math.abs(p.x-c.x)<=.5&&Math.abs(p.z-c.z)<=.5),'car remains inside a real road cell');assert.ok(Number.isFinite(c.heading+c.speed));}
     for(let a=0;a<model.cars.length;a++)for(let b=a+1;b<model.cars.length;b++)minGap=Math.min(minGap,Math.hypot(model.cars[a].x-model.cars[b].x,model.cars[a].z-model.cars[b].z));
   }
-  assert.ok(minGap>.16,'vehicles do not stack at a junction');
+  assert.ok(minGap>.2,'vehicles retain separation at a junction');
   for(const c of model.cars){assert.ok(c.travelled>100,'every vehicle continues beyond repeated junctions and U-turns');assert.ok(c.turns>50);}
   assert.ok(model.metrics().moving>0);model.dispose();
 });
@@ -82,7 +82,7 @@ test('street decoration follows topology, changes quality without changing place
   streets.quality='low';streets.rebuild(b,24,definition);assert.ok(streets.metrics().lamps<=lamps);assert.ok(streets.batches.every(m=>!m.castShadow));assert.deepEqual(b,before);
   let releases=0;for(const resource of [streets.planeGeometry,streets.boxGeometry,streets.shrubGeometry,streets.material,streets.texture])resource.addEventListener('dispose',()=>releases++);
   streets.rebuild([],16,definition);assert.equal(streets.metrics().roads,0);assert.equal(scene.children.length,0);
-  streets.dispose();streets.dispose();assert.equal(releases,5);assert.equal(streets.metrics().disposed,true);
+  streets.dispose();streets.dispose();assert.equal(releases,5);assert.equal(streets.metrics().disposed,true);assert.equal(streets.metrics().draws,0);
 });
 
 test('street trees share the original Meshy geometry and material and leave their owner responsible for disposal',()=>{
