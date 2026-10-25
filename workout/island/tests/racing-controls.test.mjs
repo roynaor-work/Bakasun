@@ -55,6 +55,86 @@ function driverSideMovement(input,heading,stage){
   const movement=delta.x*right.x+delta.z*right.z;driven.dispose();straight.dispose();return movement;
 }
 
+function straightRace(t,speed=0){
+  const race=createRacing({seed:17,config:{countdown:0,steeringAssist:false,stage:{opponents:0}}});
+  const distance=race.track.length-2,point=race.track.sample(distance),checkpoints=15;
+  Object.assign(race.state.player,{x:point.x,y:point.y,z:point.z,heading:point.heading,speed,
+    s:point.s,routeS:distance,previousS:distance,progress:distance,lateral:0,offroad:false,checkpoints,nextCheckpoint:checkpoints+1});
+  t.after(()=>race.dispose());return race;
+}
+function driveControls(race,controls,seconds){
+  for(let frame=0;frame<Math.round(seconds*60);frame++)race.step(1/60,controls.sample());
+  assert.equal(race.state.player.offroad,false,'speed is measured on the road');
+  assert.equal(race.state.player.recoveries,0,'recovery must not supply acceleration');
+  return race.state.player;
+}
+function holdNitro(f,source){
+  if(source==='touch')fire(f.buttons.nitro,'pointerdown',{pointerId:20});else f.keyDown(source);
+}
+function releaseNitro(f,source){
+  if(source==='touch')fire(f.buttons.nitro,'pointerup',{pointerId:20});else f.keyUp(source);
+}
+
+for(const source of ['touch','ShiftLeft','ShiftRight']){
+  test(`manual ${source} nitro starts from rest, boosts physical speed, keeps driving on empty and coasts on release`,t=>{
+    const f=controlsFixture(t),race=straightRace(t),plain=straightRace(t);fire(f.auto,'click');
+    driveControls(race,f.controls,.3);assert.equal(race.state.player.speed,0);
+    holdNitro(f,source);
+    assert.equal(f.controls.sample().autoAccelerate,false);assert.equal(f.controls.sample().throttle,1);
+    const p=driveControls(race,f.controls,1);
+    for(let frame=0;frame<60;frame++)plain.step(1/60,{autoAccelerate:false,throttle:1});
+    assert.ok(p.speed>plain.state.player.speed+2,'real nitro input accelerates faster than ordinary gas');
+    assert.ok(p.nitro<65);assert.equal(p.boosting,true);
+    driveControls(race,f.controls,1.7);assert.equal(p.nitro,0);assert.equal(p.boosting,false);
+    const emptySpeed=p.speed;driveControls(race,f.controls,.2);
+    assert.ok(p.speed>=Math.min(emptySpeed,race.stage.playerSpeed)-1e-9,'empty nitro continues ordinary gas');
+    releaseNitro(f,source);assert.equal(f.controls.sample().throttle,0);
+    const releasedSpeed=p.speed;driveControls(race,f.controls,.2);assert.ok(p.speed<releasedSpeed);
+  });
+
+  test(`manual ${source} nitro increases moving speed and explicit braking still wins`,t=>{
+    const f=controlsFixture(t),race=straightRace(t,20);fire(f.auto,'click');holdNitro(f,source);
+    const p=driveControls(race,f.controls,.3);assert.ok(p.speed>24,'holding turbo must increase speed on a straight');
+    for(const code of ['ArrowDown','KeyS']){
+      const before=p.speed;f.keyDown(code);assert.equal(f.controls.sample().brake,true);
+      driveControls(race,f.controls,.2);assert.ok(p.speed<before,'brake overcomes nitro acceleration');f.keyUp(code);
+    }
+    driveControls(race,f.controls,.2);assert.ok(p.speed>20,'releasing brake restores the still-held turbo');
+  });
+}
+
+for(const accelerator of ['touch','ArrowUp','KeyW'])test(`releasing turbo retains independently held ${accelerator} acceleration`,t=>{
+  const f=controlsFixture(t),race=straightRace(t,15);fire(f.auto,'click');holdNitro(f,'ShiftLeft');
+  if(accelerator==='touch')fire(f.buttons.accelerate,'pointerdown',{pointerId:21});else f.keyDown(accelerator);
+  releaseNitro(f,'ShiftLeft');assert.equal(f.controls.sample().nitro,false);assert.equal(f.controls.sample().throttle,1);
+  assert.ok(driveControls(race,f.controls,.3).speed>18);
+  if(accelerator==='touch')fire(f.buttons.accelerate,'pointerup',{pointerId:21});else f.keyUp(accelerator);
+  assert.equal(f.controls.sample().throttle,0);
+});
+
+test('both Shift keys and touch retain turbo until the last independent source is released',t=>{
+  const f=controlsFixture(t);fire(f.auto,'click');holdNitro(f,'ShiftLeft');holdNitro(f,'ShiftRight');holdNitro(f,'touch');
+  releaseNitro(f,'ShiftLeft');releaseNitro(f,'touch');assert.equal(f.controls.sample().throttle,1);assert.equal(f.controls.sample().nitro,true);
+  releaseNitro(f,'ShiftRight');assert.equal(f.controls.sample().throttle,0);assert.equal(f.controls.sample().nitro,false);
+});
+
+for(const reason of ['pointercancel','lostpointercapture','blur','visibility','pause','dispose'])test(`manual turbo ${reason} releases gas and boost in the real driving model`,t=>{
+  const f=controlsFixture(t),race=straightRace(t,20);fire(f.auto,'click');holdNitro(f,'touch');
+  driveControls(race,f.controls,.2);
+  if(reason==='pointercancel'||reason==='lostpointercapture')fire(f.buttons.nitro,reason,{pointerId:20});
+  if(reason==='blur')fire(f.doc.defaultView,'blur');
+  if(reason==='visibility'){f.doc.hidden=true;fire(f.doc,'visibilitychange');}
+  if(reason==='pause'){
+    f.controls.setEnabled(false);race.pause();const frozen=JSON.stringify(race.state);
+    race.step(.2,f.controls.sample());assert.equal(JSON.stringify(race.state),frozen);
+    holdNitro(f,'touch');holdNitro(f,'ShiftRight');f.controls.setEnabled(true);race.resume();
+  }
+  if(reason==='dispose')f.controls.dispose();
+  assert.equal(f.controls.sample().throttle,0);assert.equal(f.controls.sample().nitro,false);
+  const speed=race.state.player.speed,energy=race.state.player.nitro;
+  const p=driveControls(race,f.controls,.2);assert.ok(p.speed<speed);assert.equal(p.nitro,energy);assert.equal(p.boosting,false);
+});
+
 for(const [code,direction]of [['ArrowRight',1],['KeyD',1],['ArrowLeft',-1],['KeyA',-1]]){
   test(`real ${code} input turns ${direction>0?'right':'left'} in the driver frame, including a reversed circuit`,t=>{
     const f=controlsFixture(t);f.keyDown(code);const input=f.controls.sample();
@@ -89,12 +169,12 @@ for(const type of ['pointerup','pointercancel','lostpointercapture','blur'])test
 });
 
 test('drift and nitro remain independent with multiple pointers, including two fingers on nitro',t=>{
-  const f=controlsFixture(t),{drift,nitro}=f.buttons;
+  const f=controlsFixture(t),{drift,nitro}=f.buttons;fire(f.auto,'click');
   fire(nitro,'pointerdown',{pointerId:10});fire(drift,'pointerdown',{pointerId:11});fire(nitro,'pointerdown',{pointerId:12});
   assert.equal(f.controls.sample().nitro,true);assert.equal(f.controls.sample().drift,true);assert.equal(f.controls.sample().brake,true);
-  fire(nitro,'pointerup',{pointerId:10});assert.equal(f.controls.sample().nitro,true);
+  fire(nitro,'pointerup',{pointerId:10});assert.equal(f.controls.sample().nitro,true);assert.equal(f.controls.sample().throttle,1);
   fire(drift,'pointercancel',{pointerId:11});assert.equal(f.controls.sample().drift,false);assert.equal(f.controls.sample().nitro,true);
-  fire(nitro,'lostpointercapture',{pointerId:12});assert.equal(f.controls.sample().nitro,false);
+  fire(nitro,'lostpointercapture',{pointerId:12});assert.equal(f.controls.sample().nitro,false);assert.equal(f.controls.sample().throttle,0);
 });
 
 test('pause clears physical inputs and prevents new keyboard, touch and auto-toggle actions until resumed',t=>{

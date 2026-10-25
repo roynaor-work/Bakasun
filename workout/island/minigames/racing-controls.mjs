@@ -29,8 +29,11 @@ export function createRacingControls({root,canvas,t}){
  return {sample(){
   const direction=(keys.has('ArrowRight')||keys.has('KeyD')?1:0)-(keys.has('ArrowLeft')||keys.has('KeyA')?1:0),rawSteer=direction||steer;
   const drift=held.has('drift')||keys.has('Space'),brake=keys.has('ArrowDown')||keys.has('KeyS');
+  // Holding turbo also holds gas, including at rest and after the energy runs out.
+  // Keep this player-input mapping here so AI throttle decisions stay independent.
+  const nitro=held.has('nitro')||keys.has('ShiftLeft')||keys.has('ShiftRight');
   // The chase camera follows +Z from behind. Its screen-right points toward -X,
   // so driver-right input needs negative world yaw; UI labels/arc stay clockwise.
-  return {steer:enabled&&rawSteer?-rawSteer:0,throttle:enabled&&(held.has('accelerate')||keys.has('ArrowUp')||keys.has('KeyW'))?1:0,autoAccelerate:automatic,brake:enabled&&(brake||drift),drift:enabled&&drift,nitro:enabled&&(held.has('nitro')||keys.has('ShiftLeft')||keys.has('ShiftRight'))};
+  return {steer:enabled&&rawSteer?-rawSteer:0,throttle:enabled&&(nitro||held.has('accelerate')||keys.has('ArrowUp')||keys.has('KeyW'))?1:0,autoAccelerate:automatic,brake:enabled&&(brake||drift),drift:enabled&&drift,nitro:enabled&&nitro};
  },cancel,setEnabled(value){enabled=!!value;slider.disabled=auto.disabled=!enabled;for(const b of Object.values(buttons))b.disabled=!enabled;cancel();},dispose(){enabled=false;cancel();abort.abort();},get enabled(){return enabled;}};
 }
