@@ -8,6 +8,7 @@ const ARTWORK=Object.freeze({
   soccer:{file:'football.webp',category:'ספורט',description:'הקבוצה שלך, המגרש והדרך לאליפות.'},
   tennis:{file:'tennis.webp',category:'ספורט',description:'משחק טניס במגרש של האי.'},
   islandRacing:{file:'racing.webp',category:'מרוצים',description:'מרוץ תלת־ממדי בין חופים, ג׳ונגלים ופסגות מול ארבעה נהגים.'},
+  streetSlam:{file:'slam.webp',category:'ספורט',description:'כדורסל רחוב שניים נגד שניים במגרש של השכונה.'},
 });
 
 export function gameArtwork(id){return ARTWORK[id]||ARTWORK.navalDuel;}

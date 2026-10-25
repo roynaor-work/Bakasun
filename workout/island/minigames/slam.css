@@ -1,0 +1,99 @@
+/* Street Slam (Sunset Court). Every rule stays inside this game's screen. */
+.game-screen[data-game=streetSlam]{
+ --slam-ink:#172c35;--slam-paper:#f2f0e8;--slam-home:#3ea7b2;--slam-away:#e77f43;--slam-action:#ed7338;--slam-energy:#eec17a;
+ position:relative;width:100%;max-width:none;height:100%;padding:0;margin:0;border:0;border-radius:0;display:block;overflow:hidden;
+ background:#8daeb0;color:#fff;isolation:isolate;
+}
+.game-screen[data-game=streetSlam] .game-stage{position:absolute;inset:0;border-radius:0;background:#8daeb0}
+.game-screen[data-game=streetSlam] .game-stage::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(#08222b8c,transparent 30%,transparent 62%,#0a263bb8)}
+.game-screen[data-game=streetSlam] .minigame-canvas{position:absolute;inset:0;width:100%;height:100%}
+.game-screen[data-game=streetSlam] .game-header{position:absolute;inset:max(14px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) auto max(16px,env(safe-area-inset-left));z-index:6;pointer-events:none;display:flex;justify-content:flex-end;gap:10px}
+.game-screen[data-game=streetSlam] .game-header h2{display:none}
+.game-screen[data-game=streetSlam] .game-header>button{pointer-events:auto;width:48px;min-width:48px;height:48px;min-height:48px;padding:10px;border:1px solid #fff6;border-radius:50%;background:#13333b70;color:#fff;box-shadow:none}
+.game-screen[data-game=streetSlam] .game-status{position:absolute!important;width:1px!important;height:1px!important;margin:0!important;padding:0!important;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* Compact board: home | clock | away, numbers left-to-right. */
+.game-screen[data-game=streetSlam] .slam-board{position:absolute;z-index:4;top:max(14px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:grid;grid-template-columns:64px auto 64px;align-items:center;height:58px;min-width:206px;
+ direction:ltr;background:#102b34e6;border:1px solid #ffffff29;border-radius:16px;box-shadow:0 7px 20px #0002;overflow:hidden;pointer-events:none;font-variant-numeric:tabular-nums}
+.game-screen[data-game=streetSlam] .slam-score{display:block;text-align:center;font-size:32px;font-weight:900;line-height:58px;color:#fff}
+.game-screen[data-game=streetSlam] .slam-score.home{border-left:4px solid #53c4c1}
+.game-screen[data-game=streetSlam] .slam-score.away{border-right:4px solid #ff9149}
+.game-screen[data-game=streetSlam] .slam-clock-wrap{display:flex;align-items:center;justify-content:center;gap:6px;padding:0 12px}
+.game-screen[data-game=streetSlam] .slam-clock{font-size:24px;font-weight:800;letter-spacing:1px;color:#fff}
+.game-screen[data-game=streetSlam] .slam-ot{font-size:12px;font-weight:800;color:var(--slam-energy)}
+.game-screen[data-game=streetSlam] .slam-board[data-buzzer=true] .slam-clock{color:#ffb388}
+
+/* Controls: stick left, actions right (design: 106 / 86 / 61 px). */
+.game-screen[data-game=streetSlam] .game-controls.slam-controls{position:absolute;z-index:5;left:max(20px,env(safe-area-inset-left));right:max(20px,env(safe-area-inset-right));bottom:max(46px,calc(30px + env(safe-area-inset-bottom)));display:flex;direction:ltr;justify-content:space-between;align-items:flex-end;gap:0;flex-wrap:nowrap;pointer-events:none;background:none;width:auto;top:auto;max-height:none;padding:0;border-radius:0;overflow:visible;align-content:normal}
+.game-screen[data-game=streetSlam] .slam-stick-zone{pointer-events:auto;width:150px;height:150px;display:grid;place-items:center;margin:-22px;touch-action:none}
+.game-screen[data-game=streetSlam] .slam-stick{width:106px;height:106px;border-radius:50%;background:#f7faf815;border:1px solid #fff5;display:grid;place-items:center;box-shadow:inset 0 0 30px #0002}
+.game-screen[data-game=streetSlam] .slam-knob{display:block;width:49px;height:49px;border-radius:50%;background:linear-gradient(135deg,#f1ffff8c,#b5dbd74d);border:2px solid #efffff7a;transition:transform .06s linear}
+.game-screen[data-game=streetSlam] .slam-stick-zone.active .slam-stick{border-color:#fffb}
+.game-screen[data-game=streetSlam] .slam-actions{pointer-events:auto;display:flex;align-items:flex-end;gap:13px}
+.game-screen[data-game=streetSlam] .slam-action{display:grid;place-items:center;border-radius:50%;border:2px solid #fff6;color:#fff;padding:0;min-width:48px;min-height:48px;box-shadow:0 6px 0 #09232c55,0 8px 25px #0003;touch-action:none;font-size:0}
+.game-screen[data-game=streetSlam] .slam-action svg{width:34px;height:34px}
+.game-screen[data-game=streetSlam] .slam-primary{width:86px;height:86px;background:var(--slam-action);transform:translateY(-8px)}
+.game-screen[data-game=streetSlam] .slam-primary svg{width:42px;height:42px}
+.game-screen[data-game=streetSlam] .slam-secondary{width:61px;height:61px;background:#234f5ce6}
+.game-screen[data-game=streetSlam] .slam-action.held{filter:brightness(1.18);transform:translateY(-4px) scale(.96)}
+.game-screen[data-game=streetSlam] .slam-secondary.held{transform:scale(.94)}
+.game-screen[data-game=streetSlam] .slam-primary.dunk-ready{background:#ff5b2e;box-shadow:0 0 0 4px #ffd39c,0 0 26px #ffb36b,0 6px 0 #09232c55}
+.game-screen[data-game=streetSlam] .slam-action[data-action=block],.game-screen[data-game=streetSlam] .slam-action[data-action=rebound]{background:#2f7d86}
+.game-screen[data-game=streetSlam] .slam-action[data-action=steal]{background:#7a3f2c}
+
+/* Energy for dunks, bottom strip. */
+.game-screen[data-game=streetSlam] .slam-energy{position:absolute;z-index:4;left:max(26px,env(safe-area-inset-left));right:max(26px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px;height:20px;color:#fff;pointer-events:none;direction:ltr}
+.game-screen[data-game=streetSlam] .slam-energy svg{width:18px;height:18px;flex:none;opacity:.85}
+.game-screen[data-game=streetSlam] .slam-energy-fill{flex:1;height:4px;border-radius:6px;background:var(--slam-energy);transform-origin:left center;box-shadow:0 0 12px #ffd39c77}
+.game-screen[data-game=streetSlam] .slam-energy[data-ready=false] .slam-energy-fill{background:#c9cfc9;box-shadow:none}
+
+/* Release window above the controlled player. */
+.game-screen[data-game=streetSlam] .slam-charge{position:absolute;z-index:4;left:-48px;top:-14px;width:96px;height:12px;border-radius:7px;background:#0c242dd0;border:2px solid #fff9;overflow:hidden;pointer-events:none;will-change:transform}
+.game-screen[data-game=streetSlam] .slam-charge-window{position:absolute;top:0;bottom:0;background:#67d398}
+.game-screen[data-game=streetSlam] .slam-charge-fill{position:absolute;left:0;top:3px;bottom:3px;width:0;background:#fff;border-radius:3px;mix-blend-mode:difference}
+.game-screen[data-game=streetSlam] .slam-charge[data-zone=perfect]{border-color:#9ff0bd;box-shadow:0 0 12px #67d398}
+.game-screen[data-game=streetSlam] .slam-charge[data-zone=late]{border-color:#ff9a7a}
+
+.game-screen[data-game=streetSlam] .slam-toast{position:absolute;z-index:4;left:50%;top:36%;transform:translate(-50%,-50%);display:grid;place-items:center;min-width:92px;height:92px;padding:0 18px;border-radius:46px;background:#102b34d9;border:2px solid #ffffff4d;color:#fff;font-size:44px;font-weight:900;direction:ltr;pointer-events:none;animation:slam-pop .3s ease-out}
+.game-screen[data-game=streetSlam] .slam-toast[data-kind=home]{background:#1f6f78e6;border-color:#9fe4e2}
+.game-screen[data-game=streetSlam] .slam-toast[data-kind=away]{background:#9a4a24d9;font-size:32px;height:72px;min-width:72px}
+.game-screen[data-game=streetSlam] .slam-toast svg{width:52px;height:52px}
+@keyframes slam-pop{from{transform:translate(-50%,-50%) scale(.6);opacity:.2}to{transform:translate(-50%,-50%) scale(1);opacity:1}}
+
+.game-screen[data-game=streetSlam] .slam-loading{position:absolute;inset:0;z-index:8;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:16px;padding:24px;background:#103e59e6;text-align:center}
+.game-screen[data-game=streetSlam] .slam-loading[hidden]{display:none}
+.game-screen[data-game=streetSlam] .slam-spinner{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffb57a,#f28a35 60%,#b75a1d);box-shadow:0 0 0 3px #fff3;animation:slam-bounce .7s ease-in-out infinite alternate}
+@keyframes slam-bounce{from{transform:translateY(-18px)}to{transform:translateY(14px) scaleY(.9)}}
+.game-screen[data-game=streetSlam] .slam-error-text{flex-basis:100%;margin:0;font-size:18px;font-weight:700;color:#fff}
+.game-screen[data-game=streetSlam] .slam-retry,.game-screen[data-game=streetSlam] .slam-back{width:72px;height:72px;border-radius:20px;border:2px solid #fff8;color:#fff;display:grid;place-items:center;padding:0}
+.game-screen[data-game=streetSlam] .slam-retry{background:#238650}
+.game-screen[data-game=streetSlam] .slam-back{background:#b53e46}
+.game-screen[data-game=streetSlam] .slam-retry svg,.game-screen[data-game=streetSlam] .slam-back svg{width:34px;height:34px}
+
+/* First-run practice: three step icons and a skip button; the control for the
+   current step pulses. No reward and no clock. */
+.game-screen[data-game=streetSlam] .slam-practice{position:absolute;z-index:5;top:calc(max(14px,env(safe-area-inset-top)) + 70px);left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;direction:ltr}
+.game-screen[data-game=streetSlam] .slam-practice[hidden]{display:none}
+.game-screen[data-game=streetSlam] .slam-practice-steps{display:flex;gap:6px;padding:6px;border-radius:30px;background:#102b34cc}
+.game-screen[data-game=streetSlam] .slam-practice-step{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;color:#fff;background:#ffffff1a}
+.game-screen[data-game=streetSlam] .slam-practice-step svg{width:24px;height:24px}
+.game-screen[data-game=streetSlam] .slam-practice-step[data-state=now]{background:var(--slam-action);box-shadow:0 0 0 3px #ffd39c}
+.game-screen[data-game=streetSlam] .slam-practice-step[data-state=done]{background:#2c8a5a}
+.game-screen[data-game=streetSlam] .slam-skip{width:52px;height:52px;min-width:48px;min-height:48px;border-radius:50%;border:1px solid #fff8;background:#13333bcc;color:#fff;display:grid;place-items:center;padding:0}
+.game-screen[data-game=streetSlam] .slam-skip svg{width:24px;height:24px}
+.game-screen[data-game=streetSlam] .slam-controls[data-practice-step="0"] .slam-stick,
+.game-screen[data-game=streetSlam] .slam-controls[data-practice-step="1"] .slam-secondary,
+.game-screen[data-game=streetSlam] .slam-controls[data-practice-step="2"] .slam-primary{animation:slam-pulse 1s ease-in-out infinite}
+@keyframes slam-pulse{50%{box-shadow:0 0 0 8px #ffd39c99,0 0 30px #ffd39c}}
+
+@media (orientation:landscape) and (max-height:520px){
+ .game-screen[data-game=streetSlam] .slam-energy{left:calc(max(26px,env(safe-area-inset-left)) + 150px);right:calc(max(26px,env(safe-area-inset-right)) + 190px)}
+ .game-screen[data-game=streetSlam] .slam-board{height:46px;grid-template-columns:52px auto 52px;min-width:170px}
+ .game-screen[data-game=streetSlam] .slam-score{font-size:26px;line-height:46px}
+ .game-screen[data-game=streetSlam] .slam-clock{font-size:19px}
+ .game-screen[data-game=streetSlam] .game-controls.slam-controls{bottom:max(28px,calc(14px + env(safe-area-inset-bottom)))}
+ .game-screen[data-game=streetSlam] .slam-practice{top:auto;bottom:max(16px,env(safe-area-inset-bottom))}
+}
+@media (prefers-reduced-motion:reduce){
+ .game-screen[data-game=streetSlam] .slam-toast,.game-screen[data-game=streetSlam] .slam-spinner,.game-screen[data-game=streetSlam] *{animation:none!important}
+}
