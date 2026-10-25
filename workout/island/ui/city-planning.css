@@ -1,6 +1,6 @@
 /* Keep the live city visible while making municipal decisions. */
 .city-planning-overlay{display:block;background:transparent;padding:0;pointer-events:none}
-.city-planning-overlay .city-management-modal{position:absolute;top:12px;bottom:12px;right:12px;left:auto;width:390px;max-width:calc(100vw - 24px);max-height:none;min-height:0;display:flex;flex-direction:column;padding:16px;overflow:hidden;pointer-events:auto;background:#f7f4e9;box-shadow:0 12px 36px #123f4840;border:1px solid #fffc;border-radius:18px}
+.city-planning-overlay .city-management-modal{position:absolute;top:max(12px,env(safe-area-inset-top));bottom:max(12px,env(safe-area-inset-bottom));right:max(12px,env(safe-area-inset-right));left:auto;width:390px;max-width:calc(100vw - 24px);max-height:none;min-height:0;display:flex;flex-direction:column;padding:16px;overflow:hidden;pointer-events:auto;background:#f7f4e9;box-shadow:0 12px 36px #123f4840;border:1px solid #fffc;border-radius:18px}
 .city-planning-overlay .city-management-modal>h2{font-size:21px;line-height:40px;min-height:40px;flex:none;margin:0 0 0 140px}
 .city-planning-overlay .city-management-modal>.modal-subtitle{font-size:11px;line-height:1.5;margin:2px 0 10px;flex:none}
 .city-planning-overlay .modal.city-management-modal>.modal-close{position:absolute;inset-inline-end:auto;left:12px;right:auto;top:12px;float:none;min-width:44px;min-height:44px;width:44px;height:44px;border-radius:10px;background:#e6e9dc}
@@ -20,15 +20,15 @@
 .city-planning-overlay .city-management-modal[data-collapsed=true]{height:78px;bottom:auto}.city-management-modal[data-collapsed=true]>:not(h2):not(.modal-close):not(.city-panel-tools):not(.city-mini-status){display:none!important}.city-management-modal[data-collapsed=true]>.city-mini-status{display:block}
 .island-ui[data-city-planning=true] .hud,.island-ui[data-city-planning=true] .build-dock,.island-ui[data-city-planning=true] .camera-controls,.island-ui[data-city-planning=true] .city-command-button,.island-ui[data-city-zoning] .city-command-button{visibility:hidden}
 .island-ui:has(.build-dock[data-open=true]) .city-command-button,.island-ui:has(.build-dock[data-placing=true]) .city-command-button,.island-ui:has(.info-card:not([hidden])) .city-command-button{visibility:hidden}
-.island-ui[data-city-planning=true] .city-growth-notice{top:16px;bottom:auto;inset-inline-start:auto;left:16px}
+.island-ui[data-city-planning=true] .city-growth-notice{top:max(16px,env(safe-area-inset-top));bottom:auto;inset-inline-start:auto;left:max(16px,env(safe-area-inset-left))}
 .island-ui[data-city-zoning] .placement [data-action=cancel]{min-width:92px;padding-inline:10px;font-size:12px}.island-ui[data-city-zoning] .placement-help{min-height:44px}.island-ui[data-city-zoning] .placement-cue{animation:none}
 @media(max-width:600px) and (min-height:501px){
- .city-planning-overlay .city-management-modal{right:8px;left:8px;top:auto;bottom:8px;width:auto;height:54dvh;padding:12px;border-radius:18px}
+ .city-planning-overlay .city-management-modal{right:max(8px,env(safe-area-inset-right));left:max(8px,env(safe-area-inset-left));top:auto;bottom:max(8px,env(safe-area-inset-bottom));width:auto;height:54dvh;padding:12px;border-radius:18px}
  .city-planning-overlay .city-management-modal>.modal-subtitle{display:none}.city-planning-overlay .city-management-modal>h2{font-size:19px;margin-bottom:4px}
- .city-planning-overlay .city-management-modal[data-collapsed=true]{top:auto;bottom:8px;height:78px}
+ .city-planning-overlay .city-management-modal[data-collapsed=true]{top:auto;bottom:max(8px,env(safe-area-inset-bottom));height:78px}
  .city-planning-overlay .city-instructions:not([open]){display:none}.city-planning-overlay .city-mode{margin-bottom:8px;padding:6px 8px}
  .island-ui[data-city-zoning] .placement{grid-template-columns:minmax(0,1fr) 104px}.island-ui[data-city-zoning] .ghost-status{font-size:11px}
- .city-command-button{gap:8px;padding:6px 12px;bottom:90px}.city-command-button strong{font-size:11px}.city-command-icon{font-size:18px}
+ .city-command-button{gap:8px;padding:6px 12px;bottom:calc(90px + env(safe-area-inset-bottom))}.city-command-button strong{font-size:11px}.city-command-icon{font-size:18px}
 }
-@media(max-height:500px){.city-planning-overlay .city-management-modal{top:8px;bottom:8px;right:8px;width:min(340px,44vw);padding:12px}.city-planning-overlay .city-management-modal>.modal-subtitle{display:none}.city-planning-overlay .city-instructions:not([open]){display:none}.city-planning-overlay .city-management-modal>h2{font-size:18px}.city-command-button{bottom:16px}}
+@media(max-height:500px){.city-planning-overlay .city-management-modal{top:max(8px,env(safe-area-inset-top));bottom:max(8px,env(safe-area-inset-bottom));right:max(8px,env(safe-area-inset-right));width:min(340px,44vw);padding:12px}.city-planning-overlay .city-management-modal>.modal-subtitle{display:none}.city-planning-overlay .city-instructions:not([open]){display:none}.city-planning-overlay .city-management-modal>h2{font-size:18px}.city-command-button{bottom:max(16px,env(safe-area-inset-bottom))}}
 @media(prefers-reduced-motion:reduce){.city-command-button,.city-growth-notice{animation:none;transition:none}}
