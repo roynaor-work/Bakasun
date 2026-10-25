@@ -3,6 +3,7 @@ import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?
 import {nearestPlacement} from '../engine/placement-help.mjs?v=island-c2-20261025-1';
 import {CityDepthInterface} from './city-depth.mjs?v=island-c2-20261025-1';
 import {CityManagementInterface} from './city-management.mjs?v=island-c2-20261025-1';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-c2-20261025-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -42,7 +43,7 @@ export class IslandInterface {
     this.cityInterface = engine.city ? new CityDepthInterface(this) : null;
     this.cityManagement=new CityManagementInterface(this);
     this.cityManagement.addEntry(this.cityDetails);
-    this.unsubscribe = engine.subscribe((state,event) => {if(event.type==='tutorial'&&state.tutorial.step===0&&!state.tutorial.skipped)this.cityHallIntro=true;this.refresh();});
+    this.unsubscribe = engine.subscribe((state,event) => {if(event.type==='tutorial'&&state.tutorial.step===0&&!state.tutorial.skipped)this.cityHallIntro=true;this.refresh();if(event.developed?.length)this.cityManagement.onGrowth(event.developed);});
     this.refresh();
     if (!engine.state.avatar.created) this.showAvatar();
   }
@@ -135,7 +136,7 @@ export class IslandInterface {
     this.ghostStatus.setAttribute('role', 'status');
     this.placeButton = button(this.t('app.place'), 'place', 'primary-button');
     this.placeButton.onclick = () => this.commitPlacement();
-    const cancel = this.cancelButton = button('×', 'cancel', 'round-button'); cancel.setAttribute('aria-label', this.t('app.cancel')); cancel.onclick = () => this.cancelPlacement();
+    const cancel = this.cancelButton = button('×', 'cancel', 'round-button'); cancel.setAttribute('aria-label', this.t('app.cancel')); cancel.onclick = () => {const zoning=Boolean(this.zoneKind);this.cancelPlacement();if(zoning)this.cityManagement.open('zones');};
     this.placeHelp=button('', 'help-placement', 'secondary-button placement-help');
     this.placeHelp.innerHTML='<span aria-hidden="true">☝ ✦</span>';this.placeHelp.append(el('span','',this.t('placement.help')));this.placeHelp.setAttribute('aria-label',this.t('placement.help'));
     this.placeHelp.onclick=()=>{const cell=this.findCell(this.selected,this.movingId);this.updateGhost(cell,false);this.view.focusCell(cell.x,cell.z);this.placeHelp.classList.remove('placement-cue');this.placeButton.classList.add('placement-confirm-cue');};
@@ -182,7 +183,7 @@ export class IslandInterface {
       const target = event.target.closest('button') ?? event.target;
       if (target !== origin) { event.preventDefault(); event.stopImmediatePropagation(); }
     }, true);
-    document.addEventListener('keydown', event => { if (event.key === 'Escape') this.closeDetails(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape'){if(this.zoneKind){this.cancelPlacement();this.cityManagement.open('zones');}else this.closeDetails();} });
     this.hudObserver = new ResizeObserver(() => {
       const height=hud.getBoundingClientRect().height;
       const details=[...hud.querySelectorAll('.city-details,.mission-details,.event-details')].reduce((sum,node)=>sum+node.getBoundingClientRect().height,0);
@@ -387,8 +388,7 @@ export class IslandInterface {
   findCell(id, ignoreId) {
     const state=this.engine.state;
     if(this.zoneKind){
-      const cells=[];for(let z=0;z<state.world.size;z++)for(let x=0;x<state.world.size;x++)if(this.engine.validateZone(this.zoneKind,x,z).ok)cells.push({x,z});
-      return cells.sort((a,b)=>Math.hypot(a.x-state.world.size/2,a.z-state.world.size/2)-Math.hypot(b.x-state.world.size/2,b.z-state.world.size/2))[0]??{x:0,z:0};
+      return nearestCityZone(state,this.engine.registry,this.zoneKind,this.currentGhost??undefined)??{x:0,z:0};
     }
     return nearestPlacement(state,this.engine.registry,id,{x:state.world.size/2,z:state.world.size/2},ignoreId,this.data.featureFlags)??{x:1,z:1};
   }
@@ -406,11 +406,13 @@ export class IslandInterface {
     this.ghostStatus.dataset.reason = result.reason ?? 'reason.ok';
     this.ghostStatus.textContent = `${this.movingId ? this.t('app.moveHint', { building: this.label(building, 'building') }) + ' ' : ''}${result.ok ? '✓' : result.reason === 'reason.money' ? '●' : result.reason === 'reason.road' ? '🛣️' : '✕'} ${this.t(result.ok ? this.movingId ? 'app.moveAllowed' : 'reason.ok' : result.reason)}`;
     if(this.zoneKind&&result.ok)this.ghostStatus.textContent=this.t('city.zonePlacement',{kind:this.t(`city.${this.zoneKind}`),cost:building.cost});
+    if(this.zoneKind&&this.zoneSessionCount)this.ghostStatus.textContent+=` · ${this.t('city.plannedCount',{count:this.zoneSessionCount})}`;
     this.placeButton.disabled = !result.ok;
     this.placeButton.textContent = `✓ ${this.t(this.movingId ? 'app.moveHere' : 'app.place')}`;
     if(this.zoneKind)this.placeButton.textContent=`✓ ${this.t('city.plan')}`;
     this.cancelButton.textContent = this.movingId ? this.t('app.cancelMove') : '×';
     this.cancelButton.setAttribute('aria-label', this.t(this.movingId ? 'app.cancelMove' : 'app.cancel'));
+    if(this.zoneKind){this.cancelButton.textContent=this.t('city.finishPlanning');this.cancelButton.setAttribute('aria-label',this.t('city.finishPlanning'));}
   }
   commitPlacement() {
     if (!this.currentGhost || !this.selected) return;
@@ -419,23 +421,25 @@ export class IslandInterface {
     const zoning=Boolean(this.zoneKind);
     const result = zoning?this.engine.zone(this.zoneKind,x,z):this.movingId ? this.engine.move(this.movingId, x, z) : this.engine.place(this.selected, x, z);
     if (result.ok) {
+      if(zoning){this.zoneSessionCount++;this.updateGhost(this.findCell(this.selected),false);this.placeButton.focus();return;}
       this.cancelPlacement();
-      if(zoning){this.toast('city.zonePlaced');this.cityManagement.open('zones');return;}
       if (this.engine.state.tutorial.step > before && result.reward?.paid) this.toast('tutorial.reward', { money: this.steps()[before].reward.money });
       if (this.engine.state.tutorial.completed && before < this.steps().length) this.toast('tutorial.complete');
     } else this.result(result);
   }
   cancelPlacement() {
     this.selected = null; this.movingId = null; this.currentGhost = null;this.zoneKind=null;
+    delete this.root.dataset.cityZoning;
     this.placement.hidden = true; this.syncPlacementLayout(); this.view.clearGhost(); this.updateCatalogState(); this.drawMission();
   }
   result(result) { if (result && !result.ok) this.toast(result.reason); return result; }
   startZone(kind){
     this.cancelPlacement();this.cityManagement.hideOverlay();
     const typeId=this.data.config.cityManagement.zones[kind].typeId;
-    this.selectBuilding(typeId);this.zoneKind=kind;this.updateGhost(this.findCell(typeId),false);
+    this.selectBuilding(typeId);this.zoneKind=kind;this.zoneSessionCount=0;this.root.dataset.cityZoning=kind;this.updateGhost(this.findCell(typeId),false);
   }
   showInfo(id, {manage=false}={}) {
+    if(this.cityManagement?.panel)this.closeModal();
     const instance=this.engine.state.buildings.find(b=>b.id===id),station=this.getBuilding(instance?.typeId)?.learningStation;
     if(!this.selected&&station&&!manage&&this.learningInterface){this.learningInterface.start(station);return;}
     if (this.selected) {
@@ -542,24 +546,24 @@ export class IslandInterface {
     for(let z=0;z<size;z++)for(let x=0;x<size;x++)if((x!==instance.x||z!==instance.z)&&this.engine.validatePlacement(typeId,x,z,instance.id).ok)return {x,z};
     return null;
   }
-  openModal(titleId, subtitleId) {
+  openModal(titleId, subtitleId,{blocking=true}={}) {
     this.modalCleanup?.(); this.modalCleanup = null;
     this.modalRoot.replaceChildren();
     const overlay = el('div', 'modal-overlay');
-    const modal = el('section', 'modal panel'); modal.setAttribute('role', 'dialog'); modal.setAttribute('aria-modal', 'true');
+    const modal = el('section', 'modal panel'); modal.setAttribute('role', 'dialog'); modal.setAttribute('aria-modal', String(blocking));
     const heading = el('h2', '', this.t(titleId)); heading.id = 'modal-title'; modal.setAttribute('aria-labelledby', heading.id);
     const close = button('×', 'close-modal', 'round-button modal-close'); close.setAttribute('aria-label', this.t('app.close'));
     close.onclick = () => this.closeModal();
     modal.append(close, heading, el('p', 'modal-subtitle', this.t(subtitleId)));
     overlay.append(modal); this.modalRoot.append(overlay);
     this.previousFocus = document.activeElement;
-    this.root.inert = true;
+    this.root.inert = blocking;
     this.modalKeyHandler = event => {
       if (event.key === 'Escape' && this.engine.state.avatar.created) {
         if(modal.classList.contains('game-screen')){event.preventDefault();this.activityInterface?.shell?.pause('exit');}
         else this.closeModal();
       }
-      if (event.key !== 'Tab') return;
+      if (event.key !== 'Tab'||!blocking) return;
       const focusable = [...modal.querySelectorAll('button,input')].filter(n => !n.disabled && !n.hidden && !n.closest('[inert]') && n.getClientRects().length);
       if (!focusable.length) return;
       if (event.shiftKey && document.activeElement === focusable[0]) { focusable.at(-1).focus(); event.preventDefault(); }

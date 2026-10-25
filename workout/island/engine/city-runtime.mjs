@@ -4,7 +4,7 @@ import {cityReport} from './city-depth.mjs?v=island-c2-20261025-1';
 export function installCity(engine, {changed, notify, remember}) {
   if (!engine.data.city) return;
   const {state, data, registry} = engine, config = data.city;
-  const report = () => cityReport(state, registry, data.config, config, state.cityManagement?.enabled ? engine.cityReport() : null);
+  const report = () => cityReport(state, registry, data.config, config, state.cityManagement?.enabled ? engine.cityReport({includeZones:false}) : null);
   const fail = reason => ({ok: false, reason: `city.reason.${reason}`});
   function sync() {
     const ids = new Set(state.buildings.map(b => b.id));

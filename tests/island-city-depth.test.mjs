@@ -90,6 +90,7 @@ test('published PR170 v18 saves gain the city extension once without losing muni
 test('opt-in municipal water uses the existing flow allocation, funded radius and capacity without a second set of rules',()=>{
   const {engine:e}=fixture(),a=e.place('house',4,5).id,b=e.place('house',6,5).id,tower=e.place('waterTower',8,5).id;
   assert.ok(e.setCityPolicy({enabled:true,funding:{water:50}}).ok);
+  const municipalReport=e.cityReport;let options;e.cityReport=input=>{options=input;return municipalReport(input);};e.city.report();assert.deepEqual(options,{includeZones:false});e.cityReport=municipalReport;
   const water=e.cityReport().services.water,provider=water.providers.find(row=>row.id===tower),report=e.city.report(),service=report.buildings.find(row=>row.id===tower).service;
   assert.deepEqual(service,{radius:provider.radius,capacity:provider.capacity,used:provider.used,serves:provider.serves});assert.equal(row(e,a).water.reason,'out-of-range');assert.equal(row(e,b).water.served,true);
   assert.equal(provider.used,Object.values(provider.allocations).reduce((sum,n)=>sum+n,0));assert.equal(provider.used,water.covered);

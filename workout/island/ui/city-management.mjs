@@ -10,12 +10,21 @@ export class CityManagementInterface{
   constructor(ui){
     this.ui=ui;this.engine=ui.engine;this.t=ui.t;
     this.legend=node('aside','city-map-legend panel');this.legend.hidden=true;ui.root.append(this.legend);
-    this.overlayUnsubscribe=this.engine.subscribe(()=>{if(this.overlay)this.updateOverlay();});
+    this.pulse=button('','city-command',()=>this.open(),'city-command-button');
+    this.pulse.append(node('span','city-command-icon','🏙'),node('strong','',this.t('city.open')));this.pulseBalance=node('span','city-command-balance');this.pulseBars=node('span','city-command-bars');
+    for(const id of CITY_ZONES){const bar=node('i');bar.style.setProperty('--zone-color',ui.data.config.cityManagement.zones[id].color);this.pulseBars.append(bar);}
+    this.pulse.append(this.pulseBalance,this.pulseBars);ui.root.append(this.pulse);
+    this.growthNotice=node('aside','city-growth-notice panel');this.growthNotice.hidden=true;this.growthNotice.setAttribute('role','status');this.growthNotice.setAttribute('aria-live','polite');ui.root.append(this.growthNotice);
+    this.overlayUnsubscribe=this.engine.subscribe(()=>{if(this.overlay)this.updateOverlay();this.updatePulse();});this.updatePulse();
   }
   addEntry(parent){parent.append(button(this.t('city.open'),'city-management',()=>this.open(),'primary-button city-management-entry'));}
   open(tab='overview'){
     const {ui,engine,t}=this;ui.cancelPlacement();ui.closeInfo();
-    const modal=ui.openModal('city.title','city.subtitle');modal.classList.add('city-management-modal');
+    const modal=ui.openModal('city.title','city.subtitle',{blocking:false});modal.classList.add('city-management-modal');modal.parentElement.classList.add('city-planning-overlay');ui.root.dataset.cityPlanning='true';this.panel=modal;
+    const tools=node('div','city-panel-tools');
+    const center=button('⌂','city-center',()=>ui.view.home(),'round-button');center.setAttribute('aria-label',t('city.center'));
+    const collapse=button('⌄','city-collapse',()=>{const collapsed=modal.dataset.collapsed!=='true';modal.dataset.collapsed=String(collapsed);collapse.textContent=collapsed?'⌃':'⌄';collapse.setAttribute('aria-expanded',String(!collapsed));collapse.setAttribute('aria-label',t(collapsed?'city.expand':'city.collapse'));},'round-button');collapse.setAttribute('aria-label',t('city.collapse'));collapse.setAttribute('aria-expanded','true');tools.append(center,collapse);
+    const mini=node('div','city-mini-status');modal.append(tools,mini);
     const navigation=node('nav','city-tabs');navigation.setAttribute('aria-label',t('city.open'));
     const pages={};
     for(const id of ['overview','budget','zones']){
@@ -25,7 +34,8 @@ export class CityManagementInterface{
     }
     const select=id=>{tab=id;for(const [key,page]of Object.entries(pages))page.hidden=key!==id;for(const control of navigation.children)control.setAttribute('aria-pressed',String(control.dataset.action===`city-tab-${id}`));};
     const mode=node('div','city-mode'),modeText=node('strong'),toggle=button('', 'city-toggle-management',()=>engine.setCityPolicy({enabled:!engine.state.cityManagement.enabled}),'primary-button');
-    mode.append(modeText,toggle);modal.append(mode,node('p','city-explanation',t('city.explanation')),navigation,...Object.values(pages));
+    const instructions=node('details','city-instructions');instructions.append(node('summary','',t('city.instructions')),node('p','city-explanation',t('city.explanation')));
+    mode.append(modeText,toggle);modal.append(mode,instructions,navigation,...Object.values(pages));
     const stats=node('div','city-summary'),statValues={};
     for(const id of ['residents','jobs','balance']){const card=node('div','city-stat'),value=node('strong');card.append(node('span','',t(`city.${id}`)),value);stats.append(card);statValues[id]=value;}
     const demand=node('div','city-demand'),demandValues={};demand.append(node('h3','',t('city.demand')));
@@ -34,13 +44,13 @@ export class CityManagementInterface{
       meter.min=0;meter.max=100;meter.setAttribute('aria-label',t(`city.${id}`));meter.style.setProperty('--zone-color',ui.data.config.cityManagement.zones[id].color);row.append(label,meter,value);demand.append(row);demandValues[id]={meter,value};
     }
     demand.append(node('p','city-hint',t('city.demandHint')));
-    const advice=node('div','city-advice');advice.append(node('h3','',t('city.advice')));const adviceText=node('p');advice.append(adviceText);
+    const advice=node('div','city-advice');advice.append(node('h3','',t('city.advice')));const adviceText=node('p'),adviceAction=button('','city-advice-action',()=>{},'secondary-button');advice.append(adviceText,adviceAction);
     const services=node('div','city-services'),serviceValues={};
     for(const id of CITY_DEPARTMENTS){
       const card=node('article','city-service'),heading=node('h4','',t(`city.${id}`)),value=node('b'),meter=node('meter'),description=node('span','city-service-amount');
       meter.min=0;meter.max=100;meter.setAttribute('aria-label',t(`city.${id}`));
       const actions=node('div','city-service-actions');
-      actions.append(button(t('city.showCoverage'),`city-map-${id}`,()=>{ui.closeModal();this.showOverlay(id);}),button(t('city.buildService'),`city-build-${id}`,()=>{ui.closeModal();ui.openBuildingCatalog(serviceTypes[id]);}));
+      const map=button(t('city.mapShort'),`city-map-${id}`,()=>{ui.closeModal();this.showOverlay(id);}),build=button(t('city.buildShort'),`city-build-${id}`,()=>{ui.closeModal();ui.openBuildingCatalog(serviceTypes[id]);});map.setAttribute('aria-label',`${t('city.showCoverage')} · ${t(`city.${id}`)}`);build.setAttribute('aria-label',`${t('city.buildService')} · ${t(`city.${id}`)}`);actions.append(map,build);
       card.append(heading,value,meter,description,actions);services.append(card);serviceValues[id]={value,meter,description};
     }
     pages.overview.append(stats,advice,demand,node('h3','',t('city.coverage')),services);
@@ -69,14 +79,19 @@ export class CityManagementInterface{
     let queueSignature;
     const update=()=>{
       const report=engine.cityReport(),policy=engine.state.cityManagement;
+      mini.textContent=`${report.residents} ${t('city.residents')} · ${t('city.perMinute',{amount:amount(report.budget.net)})}`;
       modeText.textContent=t(policy.enabled?'city.active':'city.inactive');mode.dataset.enabled=String(policy.enabled);
       toggle.textContent=t(policy.enabled?'city.pause':policy.developed?'city.resume':'city.start');toggle.setAttribute('aria-pressed',String(policy.enabled));
       statValues.residents.textContent=report.residents;statValues.jobs.textContent=report.jobs;statValues.balance.textContent=`${report.budget.net>=0?'+':''}${amount(report.budget.net)}`;statValues.balance.dataset.negative=String(report.budget.net<0);
       for(const id of CITY_ZONES){demandValues[id].meter.value=report.demand[id];demandValues[id].value.textContent=`${report.demand[id]}%`;}
-      let adviceId='grow';if(!policy.enabled)adviceId='start';else if(report.disconnected.length)adviceId='roads';else if(report.residents>=8&&report.services.water.coverage<80)adviceId='water';else if(report.residents>=8&&report.jobs<report.residents*.45)adviceId='jobs';
+      const cfg=ui.data.config.cityManagement;
+      let adviceId='grow';if(!policy.enabled)adviceId='start';else if(report.disconnected.length)adviceId='roads';else if(report.residents>=cfg.bootstrapResidents&&report.services.water.coverage<80)adviceId='water';else if(report.residents>=cfg.bootstrapResidents&&report.jobs<report.residents*cfg.jobsPerResident)adviceId='jobs';
       const missing=CITY_DEPARTMENTS.find(id=>report.services[id].coverage<70);
       if(adviceId==='grow'&&report.residents>=8&&missing)adviceId='service';
       adviceText.textContent=t(`city.advice.${adviceId}`,{department:missing?t(`city.${missing}`):''});
+      const department=adviceId==='water'?'water':missing;
+      adviceAction.textContent=t(adviceId==='start'?'city.start':adviceId==='roads'?'city.action.roads':adviceId==='jobs'?'city.action.jobs':adviceId==='grow'?'city.action.plan':'city.action.coverage',{department:department?t(`city.${department}`):''});
+      adviceAction.onclick=()=>{if(adviceId==='start')engine.setCityPolicy({enabled:true});else if(adviceId==='grow')select('zones');else{ui.closeModal();if(adviceId==='roads')ui.selectBuilding('road');else if(adviceId==='jobs')ui.startZone('commercial');else this.showOverlay(department);}};
       for(const id of CITY_DEPARTMENTS){const service=report.services[id],target=serviceValues[id];target.value.textContent=`${service.coverage}%`;target.meter.value=service.coverage;target.description.textContent=`${t('city.coverageAmount',{covered:amount(service.covered),total:service.total})} · ${t('city.capacity',{capacity:amount(service.capacity)})}`;}
       ledgerValues.existingIncome.textContent=amount(report.budget.income-report.budget.taxes);ledgerValues.taxIncome.textContent=`+${amount(report.budget.taxes)}`;ledgerValues.expenses.textContent=`−${amount(report.budget.expenses)}`;ledgerValues.net.textContent=amount(report.budget.net);
       for(const [index,control]of taxButtons.entries())control.setAttribute('aria-pressed',String(policy.taxRate===ui.data.config.cityManagement.taxRates[index]));
@@ -93,13 +108,30 @@ export class CityManagementInterface{
         }
       }
     };
-    const unsubscribe=engine.subscribe(update);ui.modalCleanup=unsubscribe;select(tab);update();
+    const unsubscribe=engine.subscribe(update),resize=new ResizeObserver(()=>this.updateViewport());resize.observe(modal);
+    ui.modalCleanup=()=>{unsubscribe();resize.disconnect();this.panel=null;delete ui.root.dataset.cityPlanning;ui.view.setPlanningViewport?.(null);};select(tab);update();this.updateViewport();
+  }
+  updateViewport(){
+    if(!this.panel)return;const rect=this.panel.getBoundingClientRect(),canvas=this.ui.view.canvas.getBoundingClientRect(),portrait=canvas.width<=600&&canvas.height>500;
+    this.ui.view.setPlanningViewport?.(portrait?{left:0,right:0,top:0,bottom:Math.ceil(canvas.bottom-rect.top+8)}:{left:0,right:this.panel.dataset.collapsed==='true'?0:Math.ceil(canvas.right-rect.left+8),top:0,bottom:0});
+  }
+  updatePulse(){
+    const report=this.engine.cityReport({includeZones:false});this.pulseBalance.textContent=`${report.budget.net>=0?'+':''}${amount(report.budget.net)}`;this.pulseBalance.dataset.negative=String(report.budget.net<0);
+    for(const [index,bar]of [...this.pulseBars.children].entries())bar.style.height=`${Math.max(3,report.demand[CITY_ZONES[index]]*.22)}px`;
+    this.pulse.setAttribute('aria-label',`${this.t('city.open')} · ${this.t('city.perMinute',{amount:amount(report.budget.net)})}`);
+  }
+  onGrowth(developed){
+    const buildings=developed.map(row=>this.engine.state.buildings.find(b=>b.id===row.buildingId)).filter(Boolean);if(!buildings.length)return;
+    this.ui.view.highlightCityBuildings?.(buildings.map(row=>row.id));
+    const names=[...new Set(buildings.map(row=>this.t(`building.${row.typeId}`)))].join(' · '),residents=buildings.reduce((sum,row)=>sum+(this.engine.registry.buildings.get(row.typeId).levels[0].population||0),0);
+    this.growthNotice.replaceChildren(node('strong','',this.t(buildings.length===1?'city.growthTitleOne':'city.growthTitle',{count:buildings.length})),node('span','',`${names}${residents?' · '+this.t('city.growthResidents',{count:residents}):''}`),button(this.t('city.viewGrowth'),'city-view-growth',()=>{const row=buildings.at(-1);this.ui.view.focusCell(row.x,row.z);}));this.growthNotice.hidden=false;
+    clearTimeout(this.noticeTimer);this.noticeTimer=setTimeout(()=>{this.growthNotice.hidden=true;},7000);
   }
   showOverlay(id){
     this.overlay=id;this.legend.hidden=false;this.legend.replaceChildren(node('span','',this.t('city.mapLegend',{department:this.t(`city.${id}`)})),button('×','city-close-map',()=>this.hideOverlay(),'round-button'));
     this.legend.querySelector('button').setAttribute('aria-label',this.t('city.closeMap'));this.updateOverlay();
   }
-  updateOverlay(){this.ui.view.setCityOverlay?.(this.overlay,this.engine.cityReport());}
+  updateOverlay(){this.ui.view.setCityOverlay?.(this.overlay,this.engine.cityReport({includeZones:false}));}
   hideOverlay(){this.overlay=null;this.legend.hidden=true;this.ui.view.setCityOverlay?.(null);}
-  dispose(){this.overlayUnsubscribe?.();this.hideOverlay();this.legend.remove();}
+  dispose(){if(this.panel)this.ui.closeModal();clearTimeout(this.noticeTimer);this.overlayUnsubscribe?.();this.hideOverlay();this.legend.remove();this.pulse.remove();this.growthNotice.remove();}
 }

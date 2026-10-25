@@ -1,10 +1,11 @@
 {
   "command": "node --test tests/*.mjs",
   "node": "v24.19.0",
-  "base": "b1c5d09",
+  "base": "63fe748",
   "includesMunicipalManagement": true,
-  "tests": 2557,
-  "pass": 2519,
+  "includesContinuousPlanning": true,
+  "tests": 2567,
+  "pass": 2529,
   "fail": 0,
   "skipped": 38
 }

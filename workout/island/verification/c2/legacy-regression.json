@@ -1,6 +1,6 @@
 {
   "baseline": "ee372eb7b534c87d2716542a51e4462d5e7a1626",
-  "integrationBase": "b1c5d09c3f65b67d3091eb563f4c8a4d71a41087",
+  "integrationBase": "63fe748c5a9d9676de27ffc6aefc1731e96b3c20",
   "inventory": "36 standalone *-browser.mjs scenarios; night-browser.mjs is a helper",
   "environment": "Chromium / ANGLE SwiftShader, same local checkout server, at most two concurrent scenarios",
   "baselineTimeoutSeconds": 240,
@@ -340,19 +340,19 @@
       "name": "g4c-browser.mjs",
       "code": 0,
       "timeout": false,
-      "seconds": 122
+      "seconds": 167
     },
     {
       "name": "g6-browser.mjs",
       "code": 0,
       "timeout": false,
-      "seconds": 89
+      "seconds": 133
     },
     {
       "name": "g8-browser.mjs",
       "code": 0,
       "timeout": false,
-      "seconds": 173
+      "seconds": 91
     }
   ],
   "e2eCityBaseline": {
@@ -381,5 +381,26 @@
       "seconds": 173
     }
   ],
-  "retryPolicy": "Two concurrent trials hit the 240s process deadline; g4c and g6 were rerun serially with a 600s process ceiling and finished successfully in 122s and 89s."
+  "retryPolicy": "The final three scenarios ran serially with a 600s process ceiling on the PR171 integration and passed in 167s, 133s and 91s.",
+  "previousIntegrationResults": [
+    {
+      "name": "g4c-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 122
+    },
+    {
+      "name": "g6-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 89
+    },
+    {
+      "name": "g8-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 173
+    }
+  ],
+  "concurrentTrialBase": "b1c5d09"
 }

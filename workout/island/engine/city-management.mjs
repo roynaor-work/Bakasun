@@ -20,6 +20,20 @@ export function zoneAvailability(state,registry,kind,x,z,ignoreId){
   return {ok:true,reason:'reason.allowed'};
 }
 
+/** Prefer a free lot on the city's road network, then the nearest lot to the pointer. */
+export function nearestCityZone(state,registry,kind,origin={x:state.world.size/2,z:state.world.size/2}){
+  const typeId=registry.config.cityManagement.zones[kind]?.typeId;if(!typeId)return null;
+  const [w,d]=registry.buildings.get(typeId).footprint,connections=cityConnections(state,registry),occupied=new Set();
+  for(const row of [...state.buildings,...state.cityManagement.zones.map(zone=>({...zone,typeId:registry.config.cityManagement.zones[zone.kind].typeId}))])for(const cell of cellsFor(registry.buildings.get(row.typeId),row.x,row.z))occupied.add(cell.join(','));
+  let best;
+  for(let z=0;z<=state.world.size-d;z++)for(let x=0;x<=state.world.size-w;x++){
+    if(cellsFor({footprint:[w,d]},x,z).some(cell=>occupied.has(cell.join(','))))continue;
+    const candidate={x,z,connected:connections.hasAccess({typeId,x,z}),distance:Math.hypot(x-origin.x,z-origin.z)};
+    if(!best||Number(candidate.connected)>Number(best.connected)||candidate.connected===best.connected&&candidate.distance<best.distance)best=candidate;
+  }
+  return best?{x:best.x,z:best.z}:null;
+}
+
 export function validCityManagement(value,state,registry){
   const config=registry.config.cityManagement;
   if(!config||!state?.world||!Number.isInteger(state.world.size))return false;
@@ -95,13 +109,13 @@ function allocateCoverage(providers,homes){
   return supplied;
 }
 
-export function cityReport(state,registry,config,income={money:0}){
+export function cityReport(state,registry,config,income={money:0},{includeZones=true}={}){
   const policy=state.cityManagement,cfg=config.cityManagement,connections=cityConnections(state,registry),residents=population(state,registry,config),budget=municipalBudget(state,registry,config),services=serviceCoverage(state,registry,config,connections);
   const jobs=budget.jobs,commercialJobs=state.buildings.filter(row=>row.typeId==='shop'&&active(state,row)&&connections.hasAccess(row)).reduce((sum,row)=>sum+cfg.jobs.shop*levelFactor(row,config),0),industrialJobs=state.buildings.filter(row=>row.typeId==='factory'&&active(state,row)&&connections.hasAccess(row)).reduce((sum,row)=>sum+cfg.jobs.factory*levelFactor(row,config),0);
   const quality=CITY_DEPARTMENTS.reduce((sum,id)=>sum+services[id].coverage,0)/CITY_DEPARTMENTS.length,taxPenalty=(policy.taxRate-9)*5;
   const demand={residential:clamp(50+jobs*3-residents*2+(quality-50)*.35-taxPenalty),commercial:clamp(residents*5-commercialJobs*6+15-taxPenalty),industrial:clamp(residents*3-industrialJobs*3+20-taxPenalty*.5)};
   const context={connections,residents,jobs,services,demand};
-  const zones=policy.zones.map(zone=>({...zone,...zoneStatus(state,registry,config,zone,context)}));
+  const zones=includeZones?policy.zones.map(zone=>({...zone,...zoneStatus(state,registry,config,zone,context)})):[];
   const disconnected=state.buildings.filter(row=>!registry.buildings.get(row.typeId)?.isRoad&&registry.buildings.get(row.typeId)?.requiresRoad&&!connections.hasAccess(row)).map(row=>row.id);
   return {enabled:policy.enabled,residents,jobs:Math.round(jobs),employed:Math.min(residents,Math.floor(jobs)),demand,services,budget:{...budget,income:income.money+budget.expenses,net:income.money},zones,disconnected,connectedRoads:connections.connected.size,totalRoads:connections.roads.size,growthIn:Math.ceil(cfg.growthInterval-policy.growthSeconds)};
 }

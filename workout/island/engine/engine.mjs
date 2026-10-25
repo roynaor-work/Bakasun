@@ -136,7 +136,7 @@ export function createEngine(data, options = {}) {
   engine.coverage = id => coverageForBuilding(state, registry, id, config);
   engine.income = () => flags.economy ? calculateIncome(state, registry, config, data.city) : { money: 0, food: 0, materials: 0, energy: 0, sources: [] };
   engine.incomePerMinute = () => engine.income().money;
-  engine.cityReport = () => cityReport(state,registry,config,engine.income());
+  engine.cityReport = options => cityReport(state,registry,config,engine.income(),options);
   engine.setCityPolicy = input => {
     if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(key=>!['enabled','taxRate','funding'].includes(key)))return {ok:false,reason:'reason.invalid'};
     if(input.enabled!==undefined&&typeof input.enabled!=='boolean'||input.taxRate!==undefined&&!config.cityManagement.taxRates.includes(input.taxRate))return {ok:false,reason:'reason.invalid'};
