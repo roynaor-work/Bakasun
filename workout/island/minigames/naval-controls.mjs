@@ -52,7 +52,7 @@ export function createNavalInput(ctx,getModel,getView){
  const reset=()=>{gesture=keyboard=null;queue=[];pendingSelection=null;keyboardClick=false;getModel()?.cancelAim?.();show(false);controls.style?.removeProperty?.('--naval-power');};
  const startState=()=>{const m=getModel(),t=m?.turret||{yaw:0,elevation:6,power:1};return {yaw:t.yaw,elevation:t.elevation,time:m?.time??0};};
  const settle=(g,x,y)=>{g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));};
- const state=g=>{const m=getModel(),aim=navalAimFromDrag(g.start,g.dx,g.dy,balance),held=Math.max(0,(m?.time??0)-g.start.time);return {...aim,power:navalChargePower(held,balance),held};};
+ const state=g=>{const m=getModel(),aim=navalAimFromDrag(g.start,g.dx,g.dy,balance),held=Math.max(0,(m?.time??0)-g.start.time);return {...aim,power:navalChargePower(held*Math.max(1,m?.equipment?.rate||1),balance),held};};
  const overCancel=(x,y)=>{if(cancel.hidden)return false;const r=cancel.getBoundingClientRect();return x>=r.left-8&&x<=r.right+8&&y>=r.top-8&&y<=r.bottom+8;};
  const finish=(g,x,y)=>{settle(g,x,y);const s=state(g);if(overCancel(x,y))queue.push({type:'cancel'});else if(s.held<=(c.tapSeconds??.22)&&g.moved<=(c.tapPixels??10))queue.push({type:'quick',target:getModel()?.lockedTargetIndex});else queue.push({type:'fire',...s,target:getModel()?.lockedTargetIndex});};
  const begin=e=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();m.beginAim?.(m.selectedTargetIndex);gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start:startState()};show(true);};

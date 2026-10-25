@@ -7334,7 +7334,7 @@
     "criticalMultiplier": 1.75,
     "criticalPoints": 20,
     "maxFlight": 4,
-    "quickAssist": {"easy": 0.8, "normal": 0, "hard": 0},
+    "quickAssist": {"easy": {"pull": 0.92, "pullPerStage": 0.014, "minPull": 0.5, "wind": 0.5}, "normal": null, "hard": null},
     "previewSamples": 28
    },
    "aimControls": {

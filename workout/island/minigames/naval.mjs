@@ -94,10 +94,16 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   let best;for(const p of [turret.power,1,.85,.7,.58,.47,ballistic.minPower]){const s=navalSolveLaunch(playerShip,point,options(p),balance);if(!best||s.reachable&&!best.reachable)best={...s,power:kind===2?s.power:p};if(s.reachable)break;}
   turret.yaw=best.yaw;turret.elevation=best.elevation;turret.power=best.power;return best;
  }
+ /** Easy-mode quick shot: moves the landing most of the way from where the
+  * turret points now onto the hull, with part of the wind corrected. The share
+  * shrinks with the stage, so later taps need a manual finish. Normal and hard
+  * fire the player's own turret settings at full power. All of it is a real
+  * solution flown by the same physics; nothing is guaranteed. */
  function quickAim(kind){
-  const assist=ballistic.quickAssist?.[mode]??0;turret.power=1;if(assist<=0||kind===1||kind===5)return;
+  const assist=ballistic.quickAssist?.[mode];turret.power=1;if(!assist||kind===1||kind===5)return;
   const e=enemies.find(e=>e.index===selectedTargetIndex&&targetable(e))||enemies.find(targetable);if(!e)return;
-  solveTo(e,kind,assist);const flight=launchFor(kind).duration,point={x:e.x+(e.vx||0)*flight*assist,z:e.z+(e.vz||0)*flight*assist};solveTo(point,kind,assist);quickShots++;
+  predict();const from=prediction?.landing||e,pull=Math.max(assist.minPull??.5,(assist.pull??.9)-(assist.pullPerStage??0)*(Math.min(30,level)-1));
+  solveTo({x:from.x+(e.x-from.x)*pull,z:from.z+(e.z-from.z)*pull},kind,assist.wind??0);quickShots++;
  }
  function damage(victim,p){
   if(p.owner==='player'){
