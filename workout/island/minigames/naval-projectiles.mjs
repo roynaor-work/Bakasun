@@ -33,7 +33,7 @@ function projectileGeometry(kind){
 /** Read-only presentation. Three body batches and one atlas batch, warmed once. */
 export function createNavalProjectiles(scene,model,balance){
   const capacity=balance.render.effects.maxProjectiles+9,trailCapacity=capacity*10;
-  const material=new T.MeshStandardMaterial({vertexColors:true,roughness:.34,metalness:.55}),geometries=[0,1,2].map(projectileGeometry);
+  const material=new T.MeshStandardMaterial({vertexColors:true,roughness:.34,metalness:.55,emissive:'#4a3210',emissiveIntensity:1}),geometries=[0,1,2].map(projectileGeometry);
   const bodies=geometries.map(geometry=>{const mesh=new T.InstancedMesh(geometry,material,capacity);mesh.count=0;mesh.frustumCulled=false;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);scene.add(mesh);return mesh;});
   const map=navalEffectAtlas(),trailGeometry=navalParticleGeometry(trailCapacity),trailMaterial=navalParticleMaterial(map),trails=new T.InstancedMesh(trailGeometry,trailMaterial,trailCapacity);
   trails.count=0;trails.frustumCulled=false;trails.instanceMatrix.setUsage(T.DynamicDrawUsage);scene.add(trails);
@@ -71,7 +71,7 @@ export function createNavalProjectiles(scene,model,balance){
       }else{
         dummy.quaternion.copy(camera.quaternion);
         if(kind===1&&i>1){const drift=Math.sin(i*2.17+model.time*2)*.018*i,width=Math.max(.34+i*.03,Math.min(.68,worldPerPixel*3.8));dummy.position.x+=drift;dummy.position.y+=i*.018;dummy.scale.set(width,width*1.35,1);style=1;opacity=fade*.65;color.set('#d5ded5');}
-        else{const width=Math.max(kind===1?.24:.16,Math.min(.48,worldPerPixel*(kind===1?3.2:2)));dummy.scale.set(width,kind===1?.55:.3,1);color.set(kind===1?(i===0?'#fff1c3':'#ffbd57'):'#ffe0a1');opacity=fade*.88;}
+        else{const width=Math.max(kind===1?.24:.22,Math.min(.6,worldPerPixel*(kind===1?3.2:3.4)));dummy.scale.set(width,kind===1?.55:.5,1);color.set(kind===1?(i===0?'#fff1c3':'#ffbd57'):'#ffe0a1');opacity=fade*.88;}
       }
       writeNavalParticle(trails,trailCount++,dummy,color,style,opacity);
     }
