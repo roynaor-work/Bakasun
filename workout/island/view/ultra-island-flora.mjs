@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from './local-models.mjs?v=island-management-20261025-1';
+import {LocalModels} from './local-models.mjs?v=island-c2-20261025-1';
 
 const PALM='assets/models/palm-tree-512.glb';
 /** Preserve the supplied Meshy geometry, maps and material. All palms share a draw. */

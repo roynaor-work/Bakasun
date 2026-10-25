@@ -1,0 +1,385 @@
+{
+  "baseline": "ee372eb7b534c87d2716542a51e4462d5e7a1626",
+  "integrationBase": "b1c5d09c3f65b67d3091eb563f4c8a4d71a41087",
+  "inventory": "36 standalone *-browser.mjs scenarios; night-browser.mjs is a helper",
+  "environment": "Chromium / ANGLE SwiftShader, same local checkout server, at most two concurrent scenarios",
+  "baselineTimeoutSeconds": 240,
+  "summary": {
+    "passed": 3,
+    "failed": 26,
+    "timed-out": 7
+  },
+  "baselineScenarios": [
+    {
+      "name": "g2f-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 30,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g2f-browser.mjs:33",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "g2g-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 8,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g2g-browser.mjs:28",
+      "error": "Error: fixture import"
+    },
+    {
+      "name": "g2h-browser.mjs",
+      "code": 1,
+      "timeout": true,
+      "seconds": 240,
+      "status": "timed-out",
+      "failureLocation": "workout/island/tests/g2h-browser.mjs:2",
+      "error": null
+    },
+    {
+      "name": "g2i-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 17,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g2i-browser.mjs:5",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "g2j-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 62,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g2j-browser.mjs:9",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "g2k-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 47,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g2k-browser.mjs:17",
+      "error": "AssertionError [ERR_ASSERTION]: only missile count is visible: 2"
+    },
+    {
+      "name": "g2l-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 41,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g2l-browser.mjs:5",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    },
+    {
+      "name": "g2m-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 50,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g2m-browser.mjs:6",
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /^\\d+$/. Input:"
+    },
+    {
+      "name": "g2n-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 14,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g2n-browser.mjs:6",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    },
+    {
+      "name": "g2o-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 101,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g2o-browser.mjs:46",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    },
+    {
+      "name": "g2p-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 16,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g2p-browser.mjs:7",
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /^\\d+$/. Input:"
+    },
+    {
+      "name": "g3b-browser.mjs",
+      "code": 1,
+      "timeout": true,
+      "seconds": 240,
+      "status": "timed-out",
+      "failureLocation": "workout/island/tests/g3b-browser.mjs:19",
+      "error": null
+    },
+    {
+      "name": "g3c-browser.mjs",
+      "code": 1,
+      "timeout": true,
+      "seconds": 240,
+      "status": "timed-out",
+      "failureLocation": "workout/island/tests/g3c-browser.mjs:40",
+      "error": null
+    },
+    {
+      "name": "g3d-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 47,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g3d-browser.mjs:39",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    },
+    {
+      "name": "g3e-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 50,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g3e-browser.mjs:7",
+      "error": "Error: Cannot read properties of null (reading 'player')"
+    },
+    {
+      "name": "g3f-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 51,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g3f-browser.mjs:18",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "g3g-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 195,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g3g-browser.mjs:32",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "g3h-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 13,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g3h-browser.mjs:10",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    },
+    {
+      "name": "g3i-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 185,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g3i-browser.mjs:51",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "g3j-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 45,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g3j-browser.mjs:26",
+      "error": "Error: Cannot read properties of null (reading 'player')"
+    },
+    {
+      "name": "g4b-browser.mjs",
+      "code": 1,
+      "timeout": true,
+      "seconds": 240,
+      "status": "timed-out",
+      "failureLocation": "workout/island/tests/g4b-browser.mjs:3",
+      "error": null
+    },
+    {
+      "name": "g4c-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 138,
+      "status": "passed",
+      "failureLocation": null,
+      "error": null
+    },
+    {
+      "name": "g4d-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 14,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g4d-browser.mjs:17",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    },
+    {
+      "name": "g4f-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 13,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g4f-browser.mjs:16",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    },
+    {
+      "name": "g5-browser.mjs",
+      "code": 1,
+      "timeout": true,
+      "seconds": 240,
+      "status": "timed-out",
+      "failureLocation": "workout/island/tests/g5-browser.mjs:38",
+      "error": null
+    },
+    {
+      "name": "g6-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 177,
+      "status": "passed",
+      "failureLocation": null,
+      "error": null
+    },
+    {
+      "name": "g6b-browser.mjs",
+      "code": 1,
+      "timeout": true,
+      "seconds": 240,
+      "status": "timed-out",
+      "failureLocation": "workout/island/tests/g6b-browser.mjs:9",
+      "error": null
+    },
+    {
+      "name": "g6c-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 18,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g6c-browser.mjs:16",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "g6d-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 26,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g6d-browser.mjs:11",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    },
+    {
+      "name": "g6e-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 6,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g6e-browser.mjs:10",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    },
+    {
+      "name": "g7-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 12,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g7-browser.mjs:22",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "g8-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 91,
+      "status": "passed",
+      "failureLocation": null,
+      "error": null
+    },
+    {
+      "name": "g8b-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 18,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/g8b-browser.mjs:44",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "l1-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 98,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/l1-browser.mjs:47",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    },
+    {
+      "name": "task016-browser.mjs",
+      "code": 1,
+      "timeout": true,
+      "seconds": 240,
+      "status": "timed-out",
+      "failureLocation": "workout/island/tests/task016-browser.mjs:17",
+      "error": null
+    },
+    {
+      "name": "task017-pilot-browser.mjs",
+      "code": 1,
+      "timeout": false,
+      "seconds": 48,
+      "status": "failed",
+      "failureLocation": "workout/island/tests/task017-pilot-browser.mjs:83",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    }
+  ],
+  "finalPreviouslyPassingScenarios": [
+    {
+      "name": "g4c-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 122
+    },
+    {
+      "name": "g6-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 89
+    },
+    {
+      "name": "g8-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 173
+    }
+  ],
+  "e2eCityBaseline": {
+    "baseline": "af25ba7",
+    "command": "ISLAND_ONLY=city node tests/e2e/island.mjs",
+    "failure": "daily-mission button is 48px high; test requires 56px; same failure reproduced on the C2 branch before integrating PR170"
+  },
+  "allPreviouslyPassingScenariosStillPass": true,
+  "concurrentTrial": [
+    {
+      "name": "g4c-browser.mjs",
+      "code": 1,
+      "timeout": true,
+      "seconds": 240
+    },
+    {
+      "name": "g6-browser.mjs",
+      "code": 1,
+      "timeout": true,
+      "seconds": 241
+    },
+    {
+      "name": "g8-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 173
+    }
+  ],
+  "retryPolicy": "Two concurrent trials hit the 240s process deadline; g4c and g6 were rerun serially with a 600s process ceiling and finished successfully in 122s and 89s."
+}

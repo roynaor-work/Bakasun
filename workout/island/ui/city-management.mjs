@@ -1,4 +1,4 @@
-import {CITY_DEPARTMENTS,CITY_ZONES} from '../engine/city-management.mjs?v=island-management-20261025-1';
+import {CITY_DEPARTMENTS,CITY_ZONES} from '../engine/city-management.mjs?v=island-c2-20261025-1';
 
 const node=(tag,className='',text='')=>{const item=document.createElement(tag);item.className=className;item.textContent=text;return item;};
 const button=(text,action,handler,className='secondary-button')=>{const item=node('button',className,text);item.type='button';item.dataset.action=action;item.onclick=handler;return item;};

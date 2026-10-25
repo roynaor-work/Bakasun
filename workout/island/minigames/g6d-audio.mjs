@@ -5,7 +5,7 @@ export function createNavalAudio({storage,AudioContext=globalThis.AudioContext||
  const sync=()=>{try{muted=storage?.getItem('island.sound')==='off';}catch{}const level=paused||muted?0:.22;if(master&&level!==masterLevel){masterLevel=level;master.gain.setTargetAtTime(level,context.currentTime,.025);}};
  async function load(){
   if(loaded)return;loaded=true;
-  await Promise.all(G6D_AUDIO_FILES.map(async name=>{try{const response=await fetcher(new URL(`../assets/audio/g6d/${name}.ogg?v=island-management-20261025-1`,import.meta.url));if(!response.ok)return;const bytes=await response.arrayBuffer();const decoded=await context.decodeAudioData(bytes);if(!disposed)buffers.set(name,decoded);}catch{}}));
+  await Promise.all(G6D_AUDIO_FILES.map(async name=>{try{const response=await fetcher(new URL(`../assets/audio/g6d/${name}.ogg?v=island-c2-20261025-1`,import.meta.url));if(!response.ok)return;const bytes=await response.arrayBuffer();const decoded=await context.decodeAudioData(bytes);if(!disposed)buffers.set(name,decoded);}catch{}}));
   if(!disposed)ambience();
  }
  function source(name,{loop=false,gain=1,rate=1,lowpass}={}){
