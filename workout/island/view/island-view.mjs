@@ -1,15 +1,15 @@
 import * as T from '../vendor/three.module.js';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-racing-20261024-1';
-import { Avatar, Citizens } from './avatar.mjs?v=island-racing-20261024-1';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-racing-20261024-1';
-import { levelValue } from '../engine/metrics.mjs?v=island-racing-20261024-1';
-import { LocalModels } from './local-models.mjs?v=island-racing-20261024-1';
-import {MeshyPilot} from './meshy-pilot.mjs?v=island-racing-20261024-1';
-import {cityPaths} from '../engine/paths.mjs?v=island-racing-20261024-1';
-import {shoreDirection} from '../engine/placement-help.mjs?v=island-racing-20261024-1';
-import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-racing-20261024-1';
-import {batchMeshes} from './batch.mjs?v=island-racing-20261024-1';
-import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-racing-20261024-1';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-nitro-20261025-1';
+import { Avatar, Citizens } from './avatar.mjs?v=island-nitro-20261025-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-nitro-20261025-1';
+import { levelValue } from '../engine/metrics.mjs?v=island-nitro-20261025-1';
+import { LocalModels } from './local-models.mjs?v=island-nitro-20261025-1';
+import {MeshyPilot} from './meshy-pilot.mjs?v=island-nitro-20261025-1';
+import {cityPaths} from '../engine/paths.mjs?v=island-nitro-20261025-1';
+import {shoreDirection} from '../engine/placement-help.mjs?v=island-nitro-20261025-1';
+import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-nitro-20261025-1';
+import {batchMeshes} from './batch.mjs?v=island-nitro-20261025-1';
+import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-nitro-20261025-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
