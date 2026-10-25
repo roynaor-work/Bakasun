@@ -49,7 +49,7 @@ export function startStreetSlam(ctx){
  const steps=node('div','slam-practice-steps');steps.setAttribute('aria-hidden','true');for(const icon of ['move','pass','shoot']){const s=node('span','slam-practice-step');s.append(slamIcon(icon,doc));steps.append(s);}practice.append(steps,skip);
  stageEl.append(board,charge,toast,energy,practice,loading);
  screenEl.dataset.slamMode=engine.snapshot().mode;
- controls=createSlamControls({root,doc,icons:name=>slamIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:-1}});
+ controls=createSlamControls({root,doc,onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>slamIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:-1}});
  root.classList.add('slam-controls');controls.setEnabled(!paused);
  screenEl.addEventListener('pointerdown',()=>audio.unlock(),{...on,capture:true});doc.defaultView.addEventListener('keydown',()=>audio.unlock(),on);
  const statusEl=ctx.status;

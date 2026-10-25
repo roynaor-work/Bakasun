@@ -2,7 +2,7 @@
  * buttons (right), keyboard (WASD/arrows, Space, E). Every touch is locked to
  * its pointerId. Edges are queued and handed to the engine one per fixed step,
  * so 30/60/120 Hz rendering delivers the same commands. */
-export function createSlamControls({root,doc=root.ownerDocument,icons,labels,basis}){
+export function createSlamControls({root,doc=root.ownerDocument,icons,labels,basis,onEscape}){
  const win=doc.defaultView,abort=new AbortController(),on={signal:abort.signal};
  const edges=[],keys=new Set();let enabled=true,stick={x:0,y:0},stickPointer=null,primaryPointer=null,secondaryPointer=null,primaryKey=false;
  const node=(tag,cls)=>{const n=doc.createElement(tag);n.className=cls;return n;};
@@ -27,7 +27,9 @@ export function createSlamControls({root,doc=root.ownerDocument,icons,labels,bas
 
  function press(which){edges.push({type:which});}
  primary.addEventListener('pointerdown',e=>{if(!enabled||primaryPointer!==null)return;e.preventDefault();primaryPointer=e.pointerId;primary.setPointerCapture?.(e.pointerId);primary.classList.add('held');press('primaryPressed');},on);
- for(const type of ['pointerup','pointercancel','lostpointercapture'])primary.addEventListener(type,e=>{if(e.pointerId!==primaryPointer)return;primaryPointer=null;primary.classList.remove('held');press('primaryReleased');},on);
+ // Lifting the finger shoots, wherever it is; a cancelled touch only drops the charge.
+ primary.addEventListener('pointerup',e=>{if(e.pointerId!==primaryPointer)return;primaryPointer=null;primary.classList.remove('held');press('primaryReleased');},on);
+ for(const type of ['pointercancel','lostpointercapture'])primary.addEventListener(type,e=>{if(e.pointerId!==primaryPointer)return;primaryPointer=null;primary.classList.remove('held');press('primaryCancelled');},on);
  secondary.addEventListener('pointerdown',e=>{if(!enabled||secondaryPointer!==null)return;e.preventDefault();secondaryPointer=e.pointerId;secondary.setPointerCapture?.(e.pointerId);secondary.classList.add('held');press('secondaryPressed');},on);
  for(const type of ['pointerup','pointercancel','lostpointercapture'])secondary.addEventListener(type,e=>{if(e.pointerId!==secondaryPointer)return;secondaryPointer=null;secondary.classList.remove('held');},on);
  // Keyboard or assistive activation of a focused button arrives as a click
@@ -38,10 +40,12 @@ export function createSlamControls({root,doc=root.ownerDocument,icons,labels,bas
 
  const MOVE=new Set(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight']);
  win.addEventListener('keydown',e=>{
-  if(!enabled||e.target?.closest?.('input,textarea,select'))return;
+  if(e.target?.closest?.('input,textarea,select'))return;
+  if(!enabled)return;
   if(MOVE.has(e.code)){e.preventDefault();keys.add(e.code);return;}
   if(e.code==='Space'){e.preventDefault();if(!e.repeat&&!primaryKey){primaryKey=true;press('primaryPressed');}return;}
-  if(e.code==='KeyE'||e.code==='KeyQ'){e.preventDefault();if(!e.repeat)press('secondaryPressed');}
+  if(e.code==='KeyE'||e.code==='KeyQ'){e.preventDefault();if(!e.repeat)press('secondaryPressed');return;}
+  if(e.code==='Escape'&&!e.repeat){e.preventDefault();onEscape?.();}
  },{...on,capture:true});
  win.addEventListener('keyup',e=>{keys.delete(e.code);if(e.code==='Space'&&primaryKey){e.preventDefault();primaryKey=false;press('primaryReleased');}},{...on,capture:true});
 
@@ -52,7 +56,7 @@ export function createSlamControls({root,doc=root.ownerDocument,icons,labels,bas
  function cancel(){
   const wasPrimary=primaryPointer!==null||primaryKey;
   releaseStick();keys.clear();primaryPointer=secondaryPointer=null;primaryKey=false;primary.classList.remove('held');secondary.classList.remove('held');
-  edges.length=0;if(wasPrimary)edges.push({type:'primaryReleased'});
+  edges.length=0;if(wasPrimary)edges.push({type:'primaryCancelled'});
  }
  win.addEventListener('blur',cancel,on);doc.addEventListener('visibilitychange',()=>{if(doc.hidden)cancel();},on);
 
@@ -61,7 +65,7 @@ export function createSlamControls({root,doc=root.ownerDocument,icons,labels,bas
   /** One InputFrame per engine step: current stick, at most one queued edge. */
   consume(){
    const s=keyStick()||stick,b=basis();
-   const frame={move:{x:s.x*b.rx+s.y*b.ux,z:s.x*b.rz+s.y*b.uz},primaryPressed:false,primaryReleased:false,secondaryPressed:false};
+   const frame={move:{x:s.x*b.rx+s.y*b.ux,z:s.x*b.rz+s.y*b.uz},primaryPressed:false,primaryReleased:false,primaryCancelled:false,secondaryPressed:false};
    if(!enabled){frame.move={x:0,z:0};return frame;}
    const e=edges.shift();if(e)frame[e.type]=true;
    // A press and its release never share a step: the engine sees a 1-step tap.

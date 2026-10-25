@@ -108,7 +108,7 @@ function cameraFor(width,height,config,insets){
  const dirP=new THREE.Vector3(10.8,16.4,20.9).normalize(),dirL=new THREE.Vector3(17,15.5,3.2).normalize();
  const dir=dirP.clone().lerp(dirL,t).normalize(),fov=lerp(config.render.fov,36,t);
  const cam=new THREE.PerspectiveCamera(fov,aspect,.1,140);
- const hw=lerp(c.width*.36,c.width/2+.2,t),dz=lerp(c.length*.27,c.length*.34,t);
+ const hw=lerp(c.width*.36,c.width/2+.2,t),dz=lerp(c.length*.27,c.length*.3,t);
  const pts=[[-hw,0,-dz],[hw,0,-dz],[-hw,0,dz],[hw,0,dz],[0,1.9,-dz],[0,1.9,dz]].map(p=>new THREE.Vector3(...p));
  const top=1-2*insets.top/height,bottom=-1+2*insets.bottom/height,side=1-2*insets.side/width,mid=(top+bottom)/2;
  const target=new THREE.Vector3();
@@ -197,7 +197,7 @@ export async function createSlamView(canvas,config,{quality='high',insets=()=>({
   let fz=Math.max(-rig.follow,Math.min(rig.follow,bz*.8+attack*.8)),fx=Math.max(-rig.followX,Math.min(rig.followX,bx*.5));
   if(inspect){const a=actors.get(inspect.id||cur.controlledPlayerId);if(a){fx=a.wrap.position.x;fz=a.wrap.position.z;}}
   const ease=dt?1-Math.exp(-dt*(reduced?1.5:3)):1;focus.x+=(fx-focus.x)*ease;focus.z+=(fz-focus.z)*ease;
-  camera.position.copy(focus).add(inspect?rig.offset.clone().multiplyScalar(inspect.zoom||.35):rig.offset);camera.lookAt(focus.x,inspect?1:0,focus.z);
+  camera.position.copy(focus).add(inspect?rig.offset.clone().multiplyScalar(inspect.zoom||.35):rig.offset);camera.lookAt(focus.x,inspect?(inspect.y??1):0,focus.z);
   const base=camera.position.clone();
   if(shake>0&&!reduced)camera.position.add(new THREE.Vector3(Math.sin(cur.tick*1.7)*.08*shake,Math.cos(cur.tick*2.3)*.06*shake,0));
   renderer.render(scene,camera);camera.position.copy(base);frames++;

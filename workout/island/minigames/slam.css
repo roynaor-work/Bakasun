@@ -60,7 +60,7 @@
 .game-screen[data-game=streetSlam] .slam-toast svg{width:52px;height:52px}
 @keyframes slam-pop{from{transform:translate(-50%,-50%) scale(.6);opacity:.2}to{transform:translate(-50%,-50%) scale(1);opacity:1}}
 
-.game-screen[data-game=streetSlam] .slam-loading{position:absolute;inset:0;z-index:8;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:16px;padding:24px;background:#103e59e6;text-align:center}
+.game-screen[data-game=streetSlam] .slam-loading{position:absolute;inset:0;z-index:12;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:16px;padding:24px;background:#103e59e6;text-align:center}
 .game-screen[data-game=streetSlam] .slam-loading[hidden]{display:none}
 .game-screen[data-game=streetSlam] .slam-spinner{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffb57a,#f28a35 60%,#b75a1d);box-shadow:0 0 0 3px #fff3;animation:slam-bounce .7s ease-in-out infinite alternate}
 @keyframes slam-bounce{from{transform:translateY(-18px)}to{transform:translateY(14px) scaleY(.9)}}
@@ -92,7 +92,7 @@
  .game-screen[data-game=streetSlam] .slam-score{font-size:26px;line-height:46px}
  .game-screen[data-game=streetSlam] .slam-clock{font-size:19px}
  .game-screen[data-game=streetSlam] .game-controls.slam-controls{bottom:max(28px,calc(14px + env(safe-area-inset-bottom)))}
- .game-screen[data-game=streetSlam] .slam-practice{top:auto;bottom:max(16px,env(safe-area-inset-bottom))}
+ .game-screen[data-game=streetSlam] .slam-practice{top:max(10px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));transform:none}
 }
 @media (prefers-reduced-motion:reduce){
  .game-screen[data-game=streetSlam] .slam-toast,.game-screen[data-game=streetSlam] .slam-spinner,.game-screen[data-game=streetSlam] *{animation:none!important}

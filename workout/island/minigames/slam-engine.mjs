@@ -9,7 +9,7 @@ export const SLAM_DT=1/60;
 const TEAMS=['home','away'];
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const len=(x,z)=>Math.hypot(x,z);
-const NO_INPUT=Object.freeze({move:{x:0,z:0},primaryPressed:false,primaryReleased:false,secondaryPressed:false});
+const NO_INPUT=Object.freeze({move:{x:0,z:0},primaryPressed:false,primaryReleased:false,primaryCancelled:false,secondaryPressed:false});
 
 export function mulberry32(seed){let a=seed>>>0;return {next(){a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;},get state(){return a;}};}
 
@@ -49,7 +49,7 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
   place('tip','home');
   if(mode==='practice'){
    // Opponents rest on the sideline; they never touch the ball in practice.
-   const [a1,a2]=[state.players[2],state.players[3]];a1.x=6.2;a1.z=-1;a2.x=6.2;a2.z=1;a1.inactive=a2.inactive=true;
+   const [a1,a2]=[state.players[2],state.players[3]];a1.x=7.15;a1.z=-1.2;a2.x=7.15;a2.z=1.2;a1.yaw=a2.yaw=-Math.PI/2;a1.inactive=a2.inactive=true;
   }
  }
 
@@ -207,7 +207,8 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
  function applyInput(p,input){
   const acts=actionsFor(p),ok=canAct(p);
   if(input.primaryPressed)p.primaryDown=true;
-  if(input.primaryReleased)p.primaryDown=false;
+  if(input.primaryReleased||input.primaryCancelled)p.primaryDown=false;
+  if(input.primaryCancelled&&p.charge>=0){p.charge=-1;emit({type:'chargeCancelled',playerId:p.id});}
   if(!ok){if(input.primaryReleased&&p.charge>=0)p.charge=-1;return;}
   if(input.primaryPressed){
    if(acts.primary==='shoot'){if(dunkEligible(p))startDunk(p);else if(p.charge<0&&!airborne(p)){p.charge=0;emit({type:'charge',playerId:p.id});}}
