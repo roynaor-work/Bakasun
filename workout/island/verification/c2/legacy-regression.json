@@ -1,6 +1,6 @@
 {
   "baseline": "ee372eb7b534c87d2716542a51e4462d5e7a1626",
-  "integrationBase": "63fe748c5a9d9676de27ffc6aefc1731e96b3c20",
+  "integrationBase": "5da26ba7e915faee10301ad25cd2e67b0027627c",
   "inventory": "36 standalone *-browser.mjs scenarios; night-browser.mjs is a helper",
   "environment": "Chromium / ANGLE SwiftShader, same local checkout server, at most two concurrent scenarios",
   "baselineTimeoutSeconds": 240,
@@ -340,19 +340,19 @@
       "name": "g4c-browser.mjs",
       "code": 0,
       "timeout": false,
-      "seconds": 167
+      "seconds": 162
     },
     {
       "name": "g6-browser.mjs",
       "code": 0,
       "timeout": false,
-      "seconds": 133
+      "seconds": 141
     },
     {
       "name": "g8-browser.mjs",
       "code": 0,
       "timeout": false,
-      "seconds": 91
+      "seconds": 142
     }
   ],
   "e2eCityBaseline": {
@@ -381,7 +381,7 @@
       "seconds": 173
     }
   ],
-  "retryPolicy": "The final three scenarios ran serially with a 600s process ceiling on the PR171 integration and passed in 167s, 133s and 91s.",
+  "retryPolicy": "After integrating PR172, g4c and g6 passed serially; g8 initially exceeded the city download budget by 2868 bytes. After lossless JSON compaction, g8 passed with the original budget assertion. The process ceiling was 600s.",
   "previousIntegrationResults": [
     {
       "name": "g4c-browser.mjs",
@@ -402,5 +402,31 @@
       "seconds": 173
     }
   ],
-  "concurrentTrialBase": "b1c5d09"
+  "concurrentTrialBase": "b1c5d09",
+  "previousPlanningIntegrationResults": [
+    {
+      "name": "g4c-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 167
+    },
+    {
+      "name": "g6-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 133
+    },
+    {
+      "name": "g8-browser.mjs",
+      "code": 0,
+      "timeout": false,
+      "seconds": 91
+    }
+  ],
+  "downloadBudgetTrial": {
+    "test": "g8-browser.mjs",
+    "cityBytes": 8002868,
+    "budget": 8000000,
+    "fix": "Lossless building JSON whitespace compaction saves 8330 bytes; parsed data equals main. Original browser assertion unchanged."
+  }
 }

@@ -16,8 +16,16 @@ function roof(g,color,w,d,y,h=.55) {
   const mesh=new T.Mesh(roofGeometry,material(color,{flatShading:true}));mesh.position.y=y;mesh.scale.set(w,h,d);mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);return mesh;
 }
 function windows(g,w,d,y,count=2,color=C.glass) {
-  for(let i=0;i<count;i++){const x=(i-(count-1)/2)*w/(count+.5);block(g,C.cream,[x,y,d/2+.012],[.3,.36,.055]);block(g,color,[x,y,d/2+.045],[.23,.27,.02]);}
-  for(let i=0;i<count;i++)block(g,color,[-w/2-.015,y,(i-(count-1)/2)*d/(count+.5)],[.035,.27,.24]);
+  for(let i=0;i<count;i++){
+    const x=(i-(count-1)/2)*w/(count+.5);
+    block(g,'#3d5e62',[x,y,d/2+.012],[.32,.38,.055]);block(g,C.cream,[x,y,d/2+.045],[.28,.34,.025]);block(g,color,[x,y,d/2+.063],[.22,.27,.02]);
+    block(g,C.cream,[x,y,d/2+.077],[.025,.28,.02]);block(g,C.cream,[x,y-.19,d/2+.07],[.36,.045,.13]);
+    block(g,'#c4e2da',[x-.05,y+.07,d/2+.077],[.065,.08,.012]);
+  }
+  for(let i=0;i<count;i++){
+    const z=(i-(count-1)/2)*d/(count+.5);
+    block(g,C.cream,[-w/2-.015,y,z],[.055,.34,.29]);block(g,color,[-w/2-.05,y,z],[.025,.27,.23]);block(g,C.cream,[-w/2-.07,y-.18,z],[.14,.04,.34]);
+  }
 }
 function base(g,w,d,color=C.cream){block(g,color,[0,.055,0],[w*.96,.11,d*.96]);}
 function parapet(g,w,d,y,color) {
@@ -62,7 +70,7 @@ function house(g,v,w,d,h) {
 function civic(g,v,w,d,h,variant) {
   base(g,w,d);const bw=w*.82,bd=d*.78;block(g,v.color,[0,h/2+.1,0],[bw,h,bd]);
   block(g,v.roofColor,[0,h+.15,0],[bw+.18,.22,bd+.18]);windows(g,bw,bd,h*.58,Math.max(2,Math.floor(w)));
-  block(g,C.cream,[0,.12,bd/2+.2],[bw*.6,.16,.45]);block(g,C.ink,[0,.36,bd/2+.04],[.38,.58,.07]);
+  block(g,C.cream,[0,.12,bd/2+.09],[bw*.6,.16,.24]);block(g,C.ink,[0,.36,bd/2+.04],[.38,.58,.07]);
   if(variant==='fireStation') {
     for(const x of [-bw*.25,bw*.25]) {block(g,'#fff0d6',[x,.42,bd/2+.06],[bw*.33,.67,.06]);for(let i=0;i<4;i++)block(g,'#c7dedb',[x,.19+i*.13,bd/2+.1],[bw*.29,.035,.02]);}
     part(g,'sphere','#ffbf63',[0,h+.35,0],[.32,.28,.32]);
@@ -256,6 +264,33 @@ function levelDetails(g,v,w,d,h) {
     }
   }
 }
+function architecture(g,v,w,d,h){
+  if(!['house','school','police','prison','cityHall','factory'].includes(v.kind))return;
+  const bw=w*(v.kind==='house'?(v.design==='gardenTower'?.68:.83):.82),bd=d*(v.kind==='house'?(v.design==='balcony'?.62:.73):.78);
+  // Fine facade joints, a shaded base and coping give the retained building kit
+  // a common architectural scale. These pieces join its existing single batch.
+  block(g,'#a99e84',[0,.16,0],[bw+.035,.12,bd+.035]);
+  if(v.kind!=='factory')for(const side of [-1,1])block(g,C.cream,[side*(bw/2-.045),h/2+.1,bd/2+.022],[.075,h,.06]);
+  if(v.kind==='house'&&v.design==='balcony'){
+    for(let i=-4;i<=4;i++)block(g,v.roofColor,[i*bw*.085,h*.65,bd/2+.4],[.018,.43,.025]);
+    for(const side of [-1,1])block(g,'#c6b79a',[side*(bw/2+.065),h+.08,0],[.055,.075,bd+.24]);
+  }
+  if(v.kind==='house'&&v.design==='gardenTower'){
+    for(const x of [-bw*.21,bw*.21])for(const z of [-bd*.25,0]){
+      block(g,'#405c71',[x,h+.29,z],[bw*.31,.035,bd*.2]);
+      for(const stripe of [-1,0,1])block(g,'#7892a0',[x+stripe*bw*.075,h+.311,z],[.012,.008,bd*.18]);
+    }
+  }
+  if(['school','police','prison'].includes(v.kind)){
+    for(const side of [-1,1]){block(g,C.cream,[side*bw*.28,h+.29,-bd*.22],[bw*.2,.2,bd*.23]);for(let i=-1;i<=1;i++)block(g,'#6d8b89',[side*bw*.28+i*bw*.05,h+.397,-bd*.22],[.022,.018,bd*.19]);}
+    block(g,C.cream,[0,.86,bd/2+.07],[.65,.065,.26]);
+  }
+  if(v.kind==='factory'){
+    block(g,'#708b94',[w*.23,.38,d*.4],[w*.3,.6,.06]);
+    for(let i=0;i<5;i++)block(g,'#a9bbc1',[w*.23,.15+i*.1,d*.44],[w*.28,.018,.025]);
+    block(g,'#ccbb97',[w*.23,.1,d*.43],[w*.38,.12,.22]);
+  }
+}
 registerBuildingVisual('house',house);
 registerBuildingVisual('factory',factory);
 registerBuildingVisual('farm',farm);
@@ -291,6 +326,7 @@ export function createBuilding(record,level=1,models) {
   const visual={kind:'house',color:'#efb99c',roofColor:'#d97e70',height:.85,...record.visual,...levelVisual},[w,d]=record.footprint||[1,1],group=new T.Group();
   const height=visual.height*(levelVisual?.height?1:1+(Math.max(1,level)-1)*.13);
   group.name=record.id;const factory=visuals.get(visual.kind)||house;factory(group,visual,w,d,height);
+  architecture(group,visual,w,d,height);
   levelDetails(group,visual,w,d,height);
   for(let tier=0;tier<(visual.stands||0);tier++)for(const side of [-1,1])block(group,visual.roofColor,[side*w*.45,.22+tier*.2,0],[w*.09,.18,d*.65]);
   if(level>1){for(let i=0;i<Math.min(level-1,3);i++)part(group,'sphere','#f4d17d',[w*.36,.18+i*.16,d*.36],[.12,.12,.12]);}
