@@ -1,4 +1,4 @@
-import {nativeShellAction} from './press.mjs?v=island-ready-plots-20261026-1';
+import {nativeShellAction} from './press.mjs?v=island-clean-ui-20261026-1';
 
 const entries=new WeakMap();
 export function installedShell(target=window){

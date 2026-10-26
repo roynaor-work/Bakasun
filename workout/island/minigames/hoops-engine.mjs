@@ -2,9 +2,9 @@
  * Deterministic fixed step (1/60 s): same seed + same inputs = same game. No DOM, no Three.js.
  * The engine is the only source of truth for positions, possession, clocks, fouls, scoring and
  * the result. The view, the replay and the sound only read snapshots and ordered events. */
-import {createCourt} from './hoops-court.mjs?v=island-ready-plots-20261026-1';
-import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-ready-plots-20261026-1';
-import {teamThink} from './hoops-ai.mjs?v=island-ready-plots-20261026-1';
+import {createCourt} from './hoops-court.mjs?v=island-clean-ui-20261026-1';
+import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-clean-ui-20261026-1';
+import {teamThink} from './hoops-ai.mjs?v=island-clean-ui-20261026-1';
 
 export const HOOPS_DT=1/60;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));

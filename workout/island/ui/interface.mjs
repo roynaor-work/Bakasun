@@ -1,11 +1,11 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-ready-plots-20261026-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-ready-plots-20261026-1';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-ready-plots-20261026-1';
-import {CityDepthInterface} from './city-depth.mjs?v=island-ready-plots-20261026-1';
-import {CityManagementInterface} from './city-management.mjs?v=island-ready-plots-20261026-1';
-import {nearestCityZone} from '../engine/city-management.mjs?v=island-ready-plots-20261026-1';
-import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-ready-plots-20261026-1';
-import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-ready-plots-20261026-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-clean-ui-20261026-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-clean-ui-20261026-1';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-clean-ui-20261026-1';
+import {CityDepthInterface} from './city-depth.mjs?v=island-clean-ui-20261026-1';
+import {CityManagementInterface} from './city-management.mjs?v=island-clean-ui-20261026-1';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-clean-ui-20261026-1';
+import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-clean-ui-20261026-1';
+import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-clean-ui-20261026-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -41,7 +41,7 @@ export class IslandInterface {
     this.dev = new URLSearchParams(location.search).get('dev') === '1';
     this.modalRoot = document.querySelector('#modal-root');
     root.replaceChildren();
-    root.className = 'island-ui';
+    root.className = 'island-ui clean-hud';
     this.readyPlots=new ReadyPlotsInterface(this);
     this.buildShell();
     this.cityInterface = engine.city ? new CityDepthInterface(this) : null;
@@ -116,23 +116,29 @@ export class IslandInterface {
     this.cityDetails.append(header, cityTitle, this.metricsNode, this.resourcesNode);
     this.city.append(this.cityToggle, this.cityDetails);
 
-    this.mission = el('aside', 'mission panel');
+    this.mission = el('aside', 'mission panel');this.mission.hidden=true;
     this.missionToggle = button('', 'toggle-mission', 'mission-strip');
     this.missionToggle.setAttribute('aria-expanded', 'false');
     this.missionToggle.setAttribute('aria-live', 'polite');
     this.missionToggle.setAttribute('aria-controls', 'mission-details');
     this.missionToggle.onclick = () => this.toggleDetails('mission');
     this.missionDetails = el('div', 'mission-details'); this.missionDetails.id = 'mission-details'; this.missionDetails.hidden = true;
-    this.mission.append(this.missionToggle, this.missionDetails);
+    this.tasksContent=el('div','tasks-content');
+    this.mission.append(this.missionToggle, this.missionDetails,this.tasksContent);
+    this.tasksToggle=button(this.t('hud.tasks'),'toggle-tasks','hud-tasks-toggle');
+    this.tasksToggle.setAttribute('aria-expanded','false');this.tasksToggle.setAttribute('aria-controls','mission-details');this.tasksToggle.onclick=()=>this.toggleDetails('mission');
+    const summary=el('div','hud-summary');summary.append(this.city,this.tasksToggle);
 
-    const camera = el('div', 'camera-controls');
-    const home = button(`⌂ ${this.t('app.home')}`, 'home', 'home-button'); home.onclick = () => this.view.home();
-    home.title = this.t('app.home');
-    camera.append(utilities);
-    const edit = button('☺', 'avatar-edit', 'round-button'); edit.setAttribute('aria-label', this.t('avatar.edit')); edit.onclick = () => this.showAvatar();
+    const camera = this.cameraControls = el('div', 'camera-controls');
+    const home = button('', 'home', 'home-button hud-icon-button');home.append(el('span','hud-control-face','⌂'));home.onclick = () => {this.view.home();this.view.setReadyPlotSelection?.(null);if(this.readyPlots)this.readyPlots.focusedId=null;this.setMoreOpen(false);};
+    home.title = this.t('app.home');home.setAttribute('aria-label',this.t('app.home'));
+    this.moreToggle=button('','toggle-more','hud-icon-button');this.moreToggle.append(el('span','hud-control-face','⋯'));this.moreToggle.setAttribute('aria-label',this.t('hud.more'));this.moreToggle.setAttribute('aria-expanded','false');this.moreToggle.setAttribute('aria-controls','hud-more-controls');this.moreToggle.onclick=()=>this.setMoreOpen(this.morePanel.hidden);
+    const cameraPrimary=el('div','camera-primary');cameraPrimary.append(home,this.moreToggle);
+    this.morePanel=el('div','hud-more-controls panel');this.morePanel.id='hud-more-controls';this.morePanel.hidden=true;this.morePanel.setAttribute('role','group');this.morePanel.setAttribute('aria-label',this.t('hud.more'));this.morePanel.append(utilities);
+    const edit = button('☺', 'avatar-edit', 'round-button'); edit.setAttribute('aria-label', this.t('avatar.edit'));edit.title=this.t('avatar.edit'); edit.onclick = () => this.showAvatar();
     const cityHall=button('🏛', 'open-city-hall', 'round-button');cityHall.setAttribute('aria-label',this.t('building.cityHall'));cityHall.title=this.t('building.cityHall');
     cityHall.onclick=()=>{this.cancelPlacement();const hall=this.engine.state.buildings.find(b=>b.typeId==='cityHall');if(hall){this.showInfo(hall.id);this.view.focusCell(hall.x,hall.z);}};
-    camera.append(cityHall,edit, home);
+    this.morePanel.append(cityHall,edit);camera.append(cameraPrimary,this.morePanel);
 
     this.placement = el('div', 'placement panel');
     this.placement.hidden = true;
@@ -150,8 +156,8 @@ export class IslandInterface {
     const dock = this.dock = el('section', 'build-dock');
     dock.dataset.open = 'false';
     const dockTop = el('div', 'dock-top');
-    this.dockToggle = button('⌃', 'toggle-build', 'dock-handle');
-    this.dockToggle.setAttribute('aria-label', this.t('app.choose'));
+    this.dockToggle = button(this.t('hud.build'), 'toggle-build', 'dock-handle');
+    this.dockToggle.setAttribute('aria-label', this.t('hud.build'));
     this.dockToggle.setAttribute('aria-expanded', 'false');
     this.dockToggle.setAttribute('aria-controls', 'building-catalog');
     this.dockToggle.onclick = () => this.setDockOpen(dock.dataset.open !== 'true');
@@ -171,14 +177,15 @@ export class IslandInterface {
     this.catalogHint.append(el('strong', '', this.t('app.choose')), el('span', '', this.t('app.cameraHint')));
     dock.append(dockTop, this.catalogHint, this.catalog, this.placement);
     this.saveBadge = el('div', 'save-badge', `✓ ${this.t('app.saved')}`);
-    hud.append(this.city, this.mission, document.querySelector('#toast'), this.saveBadge);
+    hud.append(summary, this.mission, document.querySelector('#toast'), this.saveBadge);
     this.root.append(hud, camera, this.info, dock);
     // A world tap opens a card on pointerup. Chromium can then retarget its
     // compatibility click to a new button under the finger. Only the control
     // where this gesture started may receive that click; keyboard clicks pass.
     document.addEventListener('pointerdown', event => {
       this.pointerOrigin = event.target.closest('button') ?? event.target;
-      if (!this.city.contains(event.target) && !this.mission.contains(event.target)) this.closeDetails();
+      if (!this.city.contains(event.target) && !this.mission.contains(event.target)&&!this.tasksToggle.contains(event.target)) this.closeDetails();
+      if(!this.cameraControls.contains(event.target))this.setMoreOpen(false);
     }, true);
     document.addEventListener('pointercancel', () => { this.pointerOrigin = null; }, true);
     document.addEventListener('click', event => {
@@ -188,7 +195,7 @@ export class IslandInterface {
       const target = event.target.closest('button') ?? event.target;
       if (target !== origin) { event.preventDefault(); event.stopImmediatePropagation(); }
     }, true);
-    document.addEventListener('keydown', event => { if (event.key === 'Escape'){if(this.zoneKind){this.cancelPlacement();this.cityManagement.open('zones');}else this.closeDetails();} });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape'){if(this.zoneKind){this.cancelPlacement();this.cityManagement.open('zones');}else{this.closeDetails();this.setDockOpen(false);this.setMoreOpen(false,true);}} });
     this.hudObserver = new ResizeObserver(() => {
       const height=hud.getBoundingClientRect().height;
       const details=[...hud.querySelectorAll('.city-details,.mission-details,.event-details')].reduce((sum,node)=>sum+node.getBoundingClientRect().height,0);
@@ -204,6 +211,8 @@ export class IslandInterface {
       this[`${name}Details`].hidden = true;
       this[`${name}Toggle`].setAttribute('aria-expanded', 'false');
     }
+    if(this.tasksToggle){this.mission.hidden=true;this.tasksToggle.setAttribute('aria-expanded','false');}
+    if(this.root?.dataset)delete this.root.dataset.hudPanel;
   }
   toggleDetails(name) {
     const open = this[`${name}Details`].hidden;
@@ -211,15 +220,20 @@ export class IslandInterface {
     this.dock.hidden = open;
     this[`${name}Details`].hidden = !open;
     this[`${name}Toggle`].setAttribute('aria-expanded', String(open));
+    if(this.tasksToggle){if(name==='mission'){this.mission.hidden=!open;this.tasksToggle.setAttribute('aria-expanded',String(open));}if(open)this.root.dataset.hudPanel=name;}
+    this.setMoreOpen(false);
   }
+  setMoreOpen(open,restoreFocus=false){if(!this.morePanel)return;const wasOpen=!this.morePanel.hidden;if(open){this.closeDetails();this.setDockOpen(false);}this.morePanel.hidden=!open;this.moreToggle.setAttribute('aria-expanded',String(open));if(!open&&wasOpen&&restoreFocus)this.moreToggle.focus();}
   setDockOpen(open) {
     this.dock.dataset.open = String(open);
     this.dockToggle.setAttribute('aria-expanded', String(open));
-    this.dockToggle.textContent = open ? '⌄' : '⌃';
+    this.dockToggle.textContent = open ? '×' : this.t('hud.build');
+    this.dockToggle.setAttribute('aria-label',this.t(open?'app.close':'hud.build'));
     this.catalog.hidden = !open;
     this.catalogHint.hidden = !open;
-    if (open) this.closeInfo();
+    if (open) {this.closeDetails();this.closeInfo();this.setMoreOpen(false);}
   }
+  drawCityToggle(money){this.cityToggle.replaceChildren(compactStat('●',Math.floor(money).toLocaleString('he-IL'),this.t('app.money')));this.cityToggle.setAttribute('aria-label',`${this.t('app.city')} · ${Math.floor(money).toLocaleString('he-IL')} ${this.t('app.money')}`);}
   syncPlacementLayout() {
     this.dock.dataset.placing = String(Boolean(this.selected));
     if (this.selected) { this.closeDetails(); this.setDockOpen(false); }
@@ -233,7 +247,6 @@ export class IslandInterface {
     if (activeStep && this.activeStepId !== activeStep.id) {
       this.activeStepId = activeStep.id;
       if (activeStep.buildType) this.category = this.getBuilding(activeStep.buildType).category;
-      if(this.readyPlots?.active&&activeStep.buildType)this.readyPlots.focusType(activeStep.buildType);
       this.drawCatalog();
     }
     this.wallet.replaceChildren();
@@ -242,16 +255,12 @@ export class IslandInterface {
     const population = this.engine.population?.() ?? s.buildings.reduce((sum, b) => sum + (this.getBuilding(b.typeId)?.population ?? 0) * b.level, 0);
     const pop = el('div', 'population', `♟ ${Math.round(population)} ${this.t('app.population')}`);
     this.wallet.append(money, pop);
-    this.cityToggle.replaceChildren();
-    const balance = compactStat('●', Math.floor(s.money).toLocaleString('he-IL'), this.t('app.money'));
-    this.cityToggle.append(balance);
+    this.drawCityToggle(s.money);
     this.metricsNode.replaceChildren();
     const values = this.engine.metrics();
     for (const metric of this.engine.registry.metrics.values()) {
       if (!this.data.featureFlags.metrics || (metric.featureFlag && !this.data.featureFlags[metric.featureFlag])) continue;
       const value = Math.round(values[metric.id]?.value ?? values[metric.id] ?? 0);
-      const compact = compactStat(metric.icon, String(value), this.label(metric, 'metric'));
-      this.cityToggle.append(compact);
       const row = el('div', 'metric');
       const label = el('div', 'metric-label');
       label.append(el('span', '', `${metric.icon} ${this.label(metric, 'metric')}`), el('b', '', value));
@@ -263,7 +272,7 @@ export class IslandInterface {
     for (const [key, icon] of [['food', '🌽'], ['materials', '🧱'], ['energy', '⚡']]) {
       const cell = el('span', 'resource', `${icon} ${Math.floor(s.resources[key])}`);
       cell.title = this.t(`app.${key}`); cell.setAttribute('aria-label', `${this.t(`app.${key}`)} ${Math.floor(s.resources[key])}`);
-      this.resourcesNode.append(cell); this.cityToggle.append(compactStat(icon, String(Math.floor(s.resources[key])), this.t(`app.${key}`)));
+      this.resourcesNode.append(cell);
     }
     const saveFailed = !this.engine.storageStatus.ok;
     const saveReason = this.engine.storageStatus.reason === 'reason.invalid' ? 'error.saveInvalid' : this.engine.storageStatus.reason ?? 'reason.storage';
@@ -575,6 +584,7 @@ export class IslandInterface {
     return null;
   }
   openModal(titleId, subtitleId,{blocking=true}={}) {
+    this.setMoreOpen(false);
     this.modalCleanup?.(); this.modalCleanup = null;
     this.modalRoot.replaceChildren();
     const overlay = el('div', 'modal-overlay');
@@ -656,7 +666,7 @@ export class IslandInterface {
       field.append(choices); content.append(field);
     }
     const start = button(this.t('avatar.start'), 'avatar-start', 'primary-button avatar-start');
-    start.onclick = () => { this.engine.setAvatar({ ...draft, created: true }); this.closeModal();if(this.readyPlots?.active)this.readyPlots.focusType((this.tutorialStep()??this.engine.nextObjective?.())?.buildType);this.toast('tutorial.welcome'); };
+    start.onclick = () => { this.engine.setAvatar({ ...draft, created: true }); this.closeModal();this.toast('tutorial.welcome'); };
     const footer = el('footer', 'avatar-footer'); footer.append(start); modal.append(footer);
   }
   exportBackup() {

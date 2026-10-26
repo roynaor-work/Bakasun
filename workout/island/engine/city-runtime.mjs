@@ -1,4 +1,4 @@
-import {cityReport} from './city-depth.mjs?v=island-ready-plots-20261026-1';
+import {cityReport} from './city-depth.mjs?v=island-clean-ui-20261026-1';
 
 /** City commands share the engine's save/event/undo transaction boundary. */
 export function installCity(engine, {changed, notify, remember}) {
