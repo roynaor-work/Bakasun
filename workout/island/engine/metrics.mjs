@@ -1,4 +1,4 @@
-import {cityConnections} from './city-connections.mjs?v=island-ready-plots-20261026-1';
+import {cityConnections} from './city-connections.mjs?v=island-clean-ui-20261026-1';
 
 export function buildingCenter(building, registry) {
   const type = registry.buildings.get(building.typeId);

@@ -1,5 +1,5 @@
-import {gameResult} from '../minigames/result.mjs?v=island-ready-plots-20261026-1';
-import { startAliens } from '../minigames/aliens.mjs?v=island-ready-plots-20261026-1';
+import {gameResult} from '../minigames/result.mjs?v=island-clean-ui-20261026-1';
+import { startAliens } from '../minigames/aliens.mjs?v=island-clean-ui-20261026-1';
 
 export function install(registry,data) {
   const balance=data.config.minigames.alienDefense;

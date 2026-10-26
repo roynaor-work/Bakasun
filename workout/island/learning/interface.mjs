@@ -1,6 +1,6 @@
-import {createLearningVoice} from './voice.mjs?v=island-ready-plots-20261026-1';
-import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-ready-plots-20261026-1';
-import {unpoint} from './questions.mjs?v=island-ready-plots-20261026-1';
+import {createLearningVoice} from './voice.mjs?v=island-clean-ui-20261026-1';
+import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-clean-ui-20261026-1';
+import {unpoint} from './questions.mjs?v=island-clean-ui-20261026-1';
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='learning-answer')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
 const phrase=(text,q)=>q.level<=4?text:unpoint(text);
@@ -15,7 +15,7 @@ export class LearningInterface {
     Object.assign(this,{ui,engine});ui.learningInterface=this;this.voice=createLearningVoice();
     this.stopVoiceListener=this.voice.subscribe(available=>{const q=this.engine.learningRound()?.question;if(this.dialog&&q){if(this.visualNode)this.visualNode.replaceWith(this.visualNode=this.visual(q));if(available)this.voice.speak(q.voice);}});
     this.panel=el('aside','learning-daily-panel panel');
-    this.mapButton=button('','daily-mission',()=>this.daily(),'learning-daily-toggle');this.panel.append(this.mapButton);ui.root.querySelector('.hud').append(this.panel);
+    this.mapButton=button('','daily-mission',()=>this.daily(),'learning-daily-toggle');this.panel.append(this.mapButton);(ui.tasksContent||ui.root.querySelector('.hud')).append(this.panel);
     this.unsubscribe=engine.subscribe(()=>this.render());this.render();
     this.dayTimer=setInterval(()=>this.render(),1000);
   }

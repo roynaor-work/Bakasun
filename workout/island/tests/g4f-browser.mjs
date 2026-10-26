@@ -35,7 +35,7 @@ await verify('g4f',[{width:844,height:390}],async({page,context,tick,snap,tap,st
  // The source buffer is decoded by Chromium and passed through the runtime filter.
  await pause(false);await tap('#pass');await page.waitForFunction(()=>window.__island.games.current.session.snapshot.audioMetrics.loaded.length===4);
  await page.clock.resume();const audioEvidence=await page.evaluate(async()=>{
-  const {createTennisAudio}=await import('../island/minigames/g4e-audio.mjs?v=island-ready-plots-20261026-1');
+  const {createTennisAudio}=await import('../island/minigames/g4e-audio.mjs?v=island-clean-ui-20261026-1');
   let context,recorder,chunks=[];
   class RecordingContext extends AudioContext{constructor(){super();context=this;const destination=this.createMediaStreamDestination(),masterConnect=AudioNode.prototype.connect;const actual=this.destination;AudioNode.prototype.connect=function(target,...args){if(target===actual)masterConnect.call(this,destination);return masterConnect.call(this,target,...args);};recorder=new MediaRecorder(destination.stream);recorder.ondataavailable=e=>chunks.push(e.data);}}
   const a=createTennisAudio({config:window.__island.data.config.minigames.tennis.audio,storage:localStorage,AudioContext:RecordingContext});a.unlock();await context.resume();
