@@ -12,6 +12,27 @@ import {createNavalDressing} from './naval-dressing.mjs?v=island-ready-plots-202
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */
+/** Shading-only separation of hull, waterline and deck on the existing GLB
+ * material: a cooler, darker lower hull, a thin dark waterline and a slightly
+ * warmer deck, by height in the boat's own upright frame. No new geometry,
+ * texture or draw call; the mesh and its UVs are untouched. */
+function hullBands(node,mat,model){
+ if(!node.geometry?.attributes?.position||mat.userData.hullBands)return;
+ const toBoat=new THREE.Matrix4();for(let o=node;o;o=o.parent){o.updateMatrix();toBoat.premultiply(o.matrix);if(o===model)break;}
+ node.geometry.computeBoundingBox();const box=node.geometry.boundingBox.clone().applyMatrix4(toBoat),range=new THREE.Vector2(box.min.y,box.max.y);
+ mat.userData.hullBands=true;mat.customProgramCacheKey=()=>'naval-hull-bands';
+ mat.onBeforeCompile=shader=>{
+  shader.uniforms.uToBoat={value:toBoat};shader.uniforms.uHullRange={value:range};
+  shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nuniform mat4 uToBoat;uniform vec2 uHullRange;varying float vHullY;').replace('#include <begin_vertex>','#include <begin_vertex>\nvHullY=clamp(((uToBoat*vec4(transformed,1.)).y-uHullRange.x)/max(1e-4,uHullRange.y-uHullRange.x),0.,1.);');
+  shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying float vHullY;').replace('#include <map_fragment>',`#include <map_fragment>
+ float hullBand=1.-smoothstep(.27,.36,vHullY);
+ float waterline=smoothstep(.25,.27,vHullY)*(1.-smoothstep(.30,.32,vHullY));
+ float deckBand=smoothstep(.38,.46,vHullY)*(1.-smoothstep(.62,.72,vHullY));
+ diffuseColor.rgb*=mix(vec3(1.),vec3(.52,.61,.74),hullBand*.9);
+ diffuseColor.rgb*=1.-.42*waterline;
+ diffuseColor.rgb*=mix(vec3(1.),vec3(1.07,1.,.88),deckBand);`);
+ };
+}
 export function createVessel(THREE, colors, equipment={},variant={},playerModel=null,adapters={}) {
   const root=new THREE.Group(),staticParts=new THREE.Group(),turret=new THREE.Group();root.add(staticParts,turret);
   const materials=new Map(),geometries=new Set();
@@ -76,18 +97,20 @@ export function createVessel(THREE, colors, equipment={},variant={},playerModel=
   const smoke=new THREE.Group();root.add(smoke);
   const flameMap=typeof document==='undefined'?null:(()=>{const c=document.createElement('canvas');c.width=64;c.height=128;const b=c.getContext('2d'),g=b.createRadialGradient(32,92,2,32,77,48);g.addColorStop(0,'#ffeab5');g.addColorStop(.2,'#ffd46bea');g.addColorStop(.5,'#ff8b2dd6');g.addColorStop(1,'#e5702300');b.fillStyle=g;b.beginPath();b.moveTo(32,4);b.bezierCurveTo(27,55,5,75,13,103);b.bezierCurveTo(18,126,50,125,53,100);b.bezierCurveTo(59,79,38,60,32,4);b.fill();return new THREE.CanvasTexture(c);})();
   const flameGeometry=new THREE.PlaneGeometry(1,1);geometries.add(flameGeometry);const flame=new THREE.Mesh(flameGeometry,new THREE.MeshBasicMaterial({map:flameMap,color:'#ffffff',transparent:true,depthWrite:false,side:THREE.DoubleSide,forceSinglePass:true,blending:THREE.NormalBlending,toneMapped:false}));flame.position.set(.7,.85,.9);flame.scale.set(.48,1.1,1);root.add(flame);flame.visible=false;
-  let model,modelLength,disposed=false;const modelStatus={requested:Boolean(playerModel),loaded:false,failed:false};
+  let model,modelLength,disposed=false;const tinted=[],scorched=new THREE.Color('#2f2b28');
+  for(const [color,mat] of materials)if(color===colors.metal){mat.roughness=.36;mat.metalness=.58;}const modelStatus={requested:Boolean(playerModel),loaded:false,failed:false};
   const ready=playerModel?loadPatrolBoat(playerModel,adapters).then(loaded=>{
     if(disposed){if(loaded)disposeBoat(loaded);return;}
     if(!loaded){modelStatus.failed=true;return;}
     model=loaded;
     // Keep every Meshy vertex, UV and source texel. The finish only controls
     // how the existing paint responds to daylight; it does not recolor it.
-    model.traverse(node=>{if(!node.isMesh)return;for(const mat of Array.isArray(node.material)?node.material:[node.material]){mat.roughness=.62;mat.metalness=.12;if(mat.map)mat.map.anisotropy=4;mat.needsUpdate=true;}});
+    // Slightly warmer paint and a little more sheen separate hull, deck and the gunmetal turret.
+    model.traverse(node=>{if(!node.isMesh)return;for(const mat of Array.isArray(node.material)?node.material:[node.material]){mat.roughness=.55;mat.metalness=.14;if(mat.color)mat.color.set(variant.paint||'#f6efe2');if(mat.map)mat.map.anisotropy=4;hullBands(node,mat,model);mat.needsUpdate=true;tinted.push({mat,base:mat.color?.clone()});}});
     root.add(model);staticParts.visible=false;modelStatus.loaded=true;modelLength=playerModel.length*playerModel.scale*root.scale.x;
     turret.position.fromArray(playerModel.cannonPivot);
   }).catch(()=>{if(!disposed)modelStatus.failed=true;}):Promise.resolve();
-  return {root,turret,barrel,flag,funnel,shield,foam,smoke,flame,ready,modelStatus,get modelLength(){return modelLength;},dispose(){if(disposed)return;disposed=true;if(model){disposeBoat(model);model=null;}flameMap?.dispose();for(const g of geometries)g.dispose();const all=new Set(materials.values());root.traverse(o=>{if(o.material)all.add(o.material);});for(const m of all)m.dispose();}};
+  return {root,turret,barrel,flag,funnel,shield,foam,smoke,flame,ready,modelStatus,get body(){return model||staticParts;},setDamage(amount){for(const {mat,base} of tinted)if(base)mat.color.copy(base).lerp(scorched,Math.max(0,Math.min(1,amount))*.42);},get modelLength(){return modelLength;},dispose(){if(disposed)return;disposed=true;if(model){disposeBoat(model);model=null;}flameMap?.dispose();for(const g of geometries)g.dispose();const all=new Set(materials.values());root.traverse(o=>{if(o.material)all.add(o.material);});for(const m of all)m.dispose();}};
 }
 
 /** Both Meshy boats have a -X bow, normalized to -Z by the same rotation.
@@ -134,7 +157,11 @@ export function createNavalView(ctx,model,adapters={}) {
   const onLost=event=>{event.preventDefault();failed=true;};canvas.addEventListener('webglcontextlost',onLost);
   function animateVessel(v,e,x,z,enemy){
     if(enemy)vesselHeading(v,x,z,model.time);else v.root.rotation.y=-model.playerShip.heading;
-    const sink=e.hp<=0?Math.min(1,(model.time-(e.sunkAt??model.time))/balance.sinkSeconds):0;v.root.position.set(x,Math.sin(model.time*1.6+(e.index||0))*.12-sink*4,z);v.root.rotation.z=Math.sin(model.time*1.9+x)*.035+sink*.3;
+    const sink=e.hp<=0?Math.min(1,(model.time-(e.sunkAt??model.time))/balance.sinkSeconds):0;
+    // Presentation-only hit reaction: a short shove away from the shooter and a roll that settles.
+    if(enemy){if(v.lastHp!==undefined&&e.hp<v.lastHp){const p=navalWorldPoint(model.playerShip.x,model.playerShip.z,balance),dx=x-p.x,dz=z-p.z,len=Math.hypot(dx,dz)||1;v.hitAt=model.time;v.hitX=dx/len;v.hitZ=dz/len;}v.lastHp=e.hp;v.setDamage?.(1-Math.max(0,e.hp)/e.maxHp);}
+    const age=v.hitAt===undefined?9:model.time-v.hitAt,kick=age<1.2?Math.exp(-age*4.5):0;
+    v.root.position.set(x+(v.hitX||0)*.55*kick*Math.min(1,age*12),Math.sin(model.time*1.6+(e.index||0))*.12-sink*4-kick*.12,z+(v.hitZ||0)*.55*kick*Math.min(1,age*12));v.root.rotation.z=Math.sin(model.time*1.9+x)*.035+sink*.3+Math.sin(age*16)*.16*kick;
     // The player's turret shows the real firing yaw and barrel elevation; enemies face the player.
     if(enemy){const target=navalWorldPoint(model.playerShip.x,model.playerShip.z,balance);v.turret.rotation.y=Math.atan2(x-target.x,z-target.z)-v.root.rotation.y;v.barrel.rotation.x=.3;}
     else{v.turret.rotation.y=-((model.yaw??0)-(model.playerShip.heading||0));v.barrel.rotation.x=model.ammoIndex===2?0:(model.elevation??10)*Math.PI/180;}
@@ -143,9 +170,13 @@ export function createNavalView(ctx,model,adapters={}) {
     v.smoke.position.y=3+(model.time%2);v.smoke.scale.setScalar(.6+(model.time%2)*.5);v.flame.position.set(.95,e.hp<e.maxHp?2.6:.85,1.35);v.flame.quaternion.copy(v.root.quaternion).invert().multiply(camera.quaternion);v.flame.scale.set(.6+Math.sin(model.time*17)*.05,1.6+Math.sin(model.time*12)*.18,1);v.foam.visible=false;
   }
   function dispose(){if(disposed)return;disposed=true;canvas.removeEventListener('webglcontextlost',onLost);arc.dispose();dressing.dispose();environment.dispose();adventure.dispose();player.dispose();for(const v of vessels)v.dispose();projectiles.dispose();impacts.dispose();scenery.dispose();smokeTexture.dispose();smokeMaterial.dispose();flashMaterial.dispose();gatlingMaterial.dispose();for(const g of [seaGeometry,sunGeometry,aimGeometry,flashGeometry,gatlingGeometry,salvoGeometry,muzzleSmokeGeometry])g.dispose();for(const m of [seaMaterial,sunMaterial,aimMaterial])m.dispose();renderer.dispose();renderer.forceContextLoss();canvas.width=canvas.height=0;}
+  /** Share of the screen height the player's hull occupies (aim framing target). */
+  const frameBox=new THREE.Box3(),corner=new THREE.Vector3();
+  // Measured from the hull's actual vertices (every 4th), not its bounding box.
+  function playerBox(){if(failed||disposed)return null;let min=Infinity,max=-Infinity,minX=Infinity,maxX=-Infinity;player.root.updateMatrixWorld(true);player.body.traverse(node=>{if(!node.isMesh||!node.geometry?.attributes?.position)return;const pos=node.geometry.attributes.position;for(let i=0;i<pos.count;i+=4){corner.fromBufferAttribute(pos,i).applyMatrix4(node.matrixWorld).project(camera);min=Math.min(min,corner.y);max=Math.max(max,corner.y);minX=Math.min(minX,corner.x);maxX=Math.max(maxX,corner.x);}});if(!Number.isFinite(min))return null;return {height:(Math.min(1,max)-Math.max(-1,min))/2,top:(1-Math.min(1,max))/2,bottom:(1-Math.max(-1,min))/2,left:(Math.max(-1,minX)+1)/2,right:(Math.min(1,maxX)+1)/2};}
   return {get mode(){return failed?'perspective':'three';},capturePreview(){if(failed||disposed)return null;renderer.info.reset();renderer.render(scene,camera);return canvas.toDataURL('image/png');},metrics(){return {triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,peak:{triangles:peakTriangles,drawCalls:peakDrawCalls},playerModel:{...player.modelStatus},disposed,
     environment:environment.metrics(),models:{requested:Number(Boolean(balance.playerModel))+Number(vessels.some(v=>v.modelStatus.requested)),loaded:Number(player.modelStatus.loaded)+Number(vessels.some(v=>v.modelStatus.loaded)),failed:Number(player.modelStatus.failed)+Number(vessels.some(v=>v.modelStatus.failed))},
-    playerMarkers:{flag:player.flag.visible,flame:player.flame.visible,flameY:player.flame.position.y},effects:scenery.metrics(),aimArc:arc.metrics(),dressing:dressing.metrics(),projectiles:projectiles.metrics(),impacts:impacts.metrics(),scenery:adventure.metrics(),camera:JSON.parse(JSON.stringify(model.camera)),gpu:{geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,programs:renderer.info.programs?.length||0},quality:low?'low':'full',playerLoaded:player.modelStatus.loaded,enemiesLoaded:vessels.filter(v=>v.modelStatus.loaded).length,playerLength:player.modelLength,enemyLengths:vessels.map(v=>v.modelLength),headings:vessels.map(v=>v.root.rotation.y),periscopes:vessels.map(v=>Boolean(v.periscope?.visible))};},degrade(fallback=false){if(fallback){failed=true;dispose();}else if(!low){low=true;environment.degrade();dressing.degrade();renderer.setSize(r.width*.75,r.height*.75,false);}},dispose,
+    playerMarkers:{flag:player.flag.visible,flame:player.flame.visible,flameY:player.flame.position.y},effects:scenery.metrics(),playerBox:playerBox(),aimArc:arc.metrics(),dressing:dressing.metrics(),projectiles:projectiles.metrics(),impacts:impacts.metrics(),scenery:adventure.metrics(),camera:JSON.parse(JSON.stringify(model.camera)),gpu:{geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,programs:renderer.info.programs?.length||0},quality:low?'low':'full',playerLoaded:player.modelStatus.loaded,enemiesLoaded:vessels.filter(v=>v.modelStatus.loaded).length,playerLength:player.modelLength,enemyLengths:vessels.map(v=>v.modelLength),headings:vessels.map(v=>v.root.rotation.y),periscopes:vessels.map(v=>Boolean(v.periscope?.visible))};},degrade(fallback=false){if(fallback){failed=true;dispose();}else if(!low){low=true;environment.degrade();dressing.degrade();renderer.setSize(r.width*.75,r.height*.75,false);}},dispose,
     resize(){if(failed||disposed)return;camera.aspect=config.width/config.height;camera.updateProjectionMatrix();renderer.setSize(Math.min(config.width,1280)*(low?.75:1),Math.min(config.width,r.width)*config.height/config.width*(low?.75:1),false);},
     projectTarget(x,z,y=0){if(failed||disposed)return null;return model.screenPoint(x,z,y);},
     targetAt(x,y){if(failed||disposed)return null;pointer.set(x/config.width*2-1,1-y/config.height*2);raycaster.setFromCamera(pointer,camera);if(!raycaster.ray.intersectPlane(seaPlane,intersection))return null;return {x:balance.shipX-intersection.z/r.worldScale,z:intersection.x/r.enemySpacing*balance.combat.laneSpacing};},

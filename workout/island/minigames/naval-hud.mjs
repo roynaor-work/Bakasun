@@ -31,6 +31,16 @@ function drawDanger(p,marks,time,width,height){
   }
 }
 
+function shieldMark(p,x,y,fill){p.save();p.translate(x,y);p.beginPath();p.moveTo(0,-11);p.lineTo(9,-7);p.quadraticCurveTo(9,6,0,11);p.quadraticCurveTo(-9,6,-9,-7);p.closePath();p.fillStyle=fill>0?'#7fc7e8':'#2a4652';p.fill();p.strokeStyle='#e3d2a5';p.lineWidth=1.4;p.stroke();if(fill>0&&fill<1){p.clip();p.fillStyle='#2a4652';p.fillRect(-10,-11,20,22*(1-fill));}p.restore();}
+function targetMark(p,x,y){p.save();p.translate(x,y);p.strokeStyle='#f3e2b3';p.lineWidth=1.6;p.beginPath();p.arc(0,0,12,0,TAU);for(const [a,b]of [[0,-15],[0,15],[-15,0],[15,0]]){p.moveTo(a*.55,b*.55);p.lineTo(a,b);}p.stroke();enemyMark(p,0,-2);p.restore();}
+function checkMark(p,x,y){p.save();p.strokeStyle='#8edcc7';p.lineWidth=2;p.beginPath();p.moveTo(x-3,y);p.lineTo(x-1,y+2.5);p.lineTo(x+3.5,y-3);p.stroke();p.restore();}
+function windMark(p,x,y,angle,bars,wide){
+ // Pill: windsock + arrow on the left, 1-3 rising strength bars on the right. Narrow fallback keeps the bars under the sock.
+ p.save();p.fillStyle='#092a3cc0';if(wide)panel(p,x-16,y-15,58,30,15);else{p.beginPath();p.arc(x,y,15,0,TAU);p.fill();}
+ p.translate(x,y);p.strokeStyle='#e0e8df';p.lineWidth=1.4;p.beginPath();p.moveTo(-9,9);p.lineTo(-9,-10);p.stroke();
+ p.save();p.rotate(angle);p.fillStyle='#ffb36b';p.beginPath();p.moveTo(-8,-4.5);p.lineTo(6,-2.4);p.lineTo(6,2.4);p.lineTo(-8,4.5);p.closePath();p.fill();p.fillStyle='#fff3df';p.beginPath();p.moveTo(12,0);p.lineTo(6,-5);p.lineTo(6,5);p.closePath();p.fill();p.restore();
+ p.fillStyle='#f3f1e6';for(let i=0;i<3;i++){p.globalAlpha=i<bars?1:.25;const h=6+i*4;if(wide)p.fillRect(18+i*6,7-h,4,h);else p.fillRect(-5+i*4,17,3,2+i*1.5);}
+ p.globalAlpha=1;p.restore();}
 function enemyMark(p,x,y,color='#e39b88'){p.save();p.translate(x,y);p.fillStyle=color;p.strokeStyle='#f5dccf';p.lineWidth=1;p.beginPath();p.moveTo(-9,2);p.lineTo(9,2);p.lineTo(6,7);p.lineTo(-6,7);p.closePath();p.fill();p.stroke();p.fillRect(-4,-3,6,5);p.beginPath();p.moveTo(0,-3);p.lineTo(7,-6);p.stroke();p.restore();}
 /** Feedback is an icon at the actual impact point: burst, gold star, ripple, cross. */
 function feedbackIcon(p,kind,q,u){
@@ -51,16 +61,19 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
   const marks=navalDangerMarks(m,balance,project,width,height),mission=m.mission||{id:'fleet'},missionState=m.missionState||{completed:0,total:m.enemies.length},shown={marks:marks.length,icons:[],selected:selected?.index??null,feedback:null,texts:[]};
   const text=(value,x,y,maxWidth)=>{shown.texts.push(String(value));if(maxWidth)clippedText(p,value,x,y,maxWidth);else p.fillText(value,x,y);};
   drawDanger(p,marks,m.time,width,height);
-  p.save();glass(p,16,16,204,58,12);vesselMark(p,41,38);
-  p.direction='ltr';p.textAlign='right';p.font='bold 17px sans-serif';p.fillStyle='#f3f1e6';text(percent(m.lives,m.maxLives)+'%',207,44);bar(p,66,36,92,5,m.lives,m.maxLives,m.lives/m.maxLives<.35?'#e4a184':'#8edcc7');
-  enemyMark(p,74,60);bar(p,90,58,117,4,m.enemyFleetHp,m.maxEnemyFleet,'#d5b77d');shown.icons.push('hull','fleet');
+  // Health: our hull silhouette, a shield and a thick bar; the percentage is secondary.
+  p.save();glass(p,16,16,196,50,12);p.save();p.translate(40,38);p.scale(1.15,1.15);vesselMark(p,0,0);p.restore();
+  const shield=m.playerShip?.maxShield>0?m.playerShip.shield/m.playerShip.maxShield:0;shieldMark(p,72,40,shield);
+  bar(p,88,34,104,8,m.lives,m.maxLives,m.lives/m.maxLives<.35?'#e4a184':'#8edcc7');
+  p.direction='ltr';p.textAlign='right';p.font='11px sans-serif';p.fillStyle='#c5d4d6';text(percent(m.lives,m.maxLives)+'%',192,58);shown.icons.push('hull','shield');
   let missionRect;
   if(width>=620){
     const w=Math.min(250,width-420),x=(width+96-w)/2;missionRect={x,y:16,w,h:58};glass(p,x,16,w,58,12);
-    p.direction='rtl';p.textAlign='right';p.fillStyle='#f3f1e6';p.font='bold 14px sans-serif';text(translated(t,mission.title,'קרב ספינות'),x+w-14,38,w-70);
-    // Objective as hull icons: sunk targets dim, remaining ones bright.
-    const total=Math.max(1,missionState.total),step=Math.min(24,(w-84)/total);for(let i=0;i<total;i++)enemyMark(p,x+w-24-i*step,58,i<missionState.completed?'#5d6f74':'#e39b88');shown.icons.push('objective');
-    p.direction='ltr';p.textAlign='left';p.fillStyle='#d8bd7a';p.font='bold 15px sans-serif';text(`${missionState.completed}/${missionState.total}`,x+14,59);p.fillStyle='#abc5cb';p.font='10px sans-serif';const seconds=Math.max(0,Math.ceil(m.remaining));text(`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`,x+14,36);
+    p.direction='rtl';p.textAlign='right';p.fillStyle='#e9eee6';p.font='bold 12px sans-serif';text(translated(t,mission.title,'קרב ספינות'),x+w-12,33,w-110);
+    // Objective: an enemy hull inside a crosshair and the counter; sunk targets dim and get a check.
+    targetMark(p,x+26,42);p.direction='ltr';p.textAlign='left';p.fillStyle='#f3e2b3';p.font='bold 18px sans-serif';text(`${missionState.completed}/${missionState.total}`,x+46,49);
+    const total=Math.max(1,missionState.total),step=Math.min(22,(w-150)/total);for(let i=0;i<total;i++){const done=i<missionState.completed,cx=x+w-22-i*step;enemyMark(p,cx,52,done?'#56676b':'#e39b88');if(done)checkMark(p,cx+6,47);}shown.icons.push('objective');
+    p.fillStyle='#abc5cb';p.font='10px sans-serif';p.textAlign='left';const seconds=Math.max(0,Math.ceil(m.remaining));text(`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`,x+46,30);
   }
   const targets=[];
   for(const enemy of m.enemies){
@@ -78,8 +91,9 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
   const feedback=m.lastFeedback,age=feedback?m.time-feedback.time:Infinity;
   if(m.resupplyTime>0){const u=Math.min(1,m.resupplyTime/2),q={x:width/2,y:height-70};p.save();p.strokeStyle='#e7cf9e';p.lineWidth=3;p.beginPath();p.arc(q.x,q.y,14,-Math.PI/2,-Math.PI/2+u*TAU);p.stroke();feedbackIcon(p,'resupply',{x:q.x,y:q.y+18},0);p.restore();shown.feedback='resupplying';}
   else if(feedback&&age>=0&&age<1.1){const q=feedback.x===undefined?{x:width/2,y:height/2,depth:1}:project(feedback.x,feedback.z,1.2);if(q.depth>0){feedbackIcon(p,feedback.kind,q,age/1.1);shown.feedback=feedback.kind;}}
-  const target=project(m.aim.x,m.aim.z),end=project(m.aim.x+m.wind.x,m.aim.z+m.wind.z),angle=Math.atan2(end.y-target.y,end.x-target.x);
-  if(!missionRect||missionRect.x>258){p.translate(239,35);p.fillStyle='#092a3ca6';p.beginPath();p.arc(0,0,13,0,TAU);p.fill();p.rotate(angle);p.strokeStyle='#e0e8df';p.lineWidth=1.6;const len=4+8*Math.min(1,Math.hypot(m.wind.x,m.wind.z)/90);p.beginPath();p.moveTo(-len,0);p.lineTo(len,0);p.lineTo(len-4,-3);p.moveTo(len,0);p.lineTo(len-4,3);p.stroke();shown.icons.push('wind');}p.restore();
+  // Wind: a windsock pointing downwind with one to three strength bars.
+  const target=project(m.aim.x,m.aim.z),end=project(m.aim.x+m.wind.x,m.aim.z+m.wind.z),angle=Math.atan2(end.y-target.y,end.x-target.x),strength=Math.hypot(m.wind.x,m.wind.z),bars=strength>70?3:strength>45?2:1;
+  if(!missionRect||missionRect.x>262){windMark(p,240,40,angle,bars,!missionRect||missionRect.x>292);shown.icons.push('wind');shown.windBars=bars;}p.restore();
   return shown;
 }
 

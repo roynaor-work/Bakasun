@@ -7340,20 +7340,36 @@
    "aimControls": {
     "yawPerPixel": 0.0042,
     "elevationPerPixel": 0.11,
-    "chargeSeconds": 0.9,
+    "chargeSeconds": 1.2,
     "tapSeconds": 0.22,
     "tapPixels": 10,
     "handednessKey": "island.naval.hand",
     "zoomEase": 7,
-    "returnSeconds": 0.45
+    "enterSeconds": 0.22,
+    "exitSeconds": 0.3,
+    "returnSeconds": 0.25
    },
    "aimCamera": {
-    "distance": 17,
-    "height": 7.4,
-    "side": 2.6,
+    "distance": 24,
+    "height": 10,
+    "side": 3.6,
     "lookHeight": 1.2,
     "focusMix": 0.55,
-    "fov": 42
+    "fov": 46,
+    "frameTarget": [0.28, 0.32]
+   },
+   "aimLook": {
+    "arc": "#B8F6FF",
+    "arcOutline": "#103847",
+    "arcPixels": 3,
+    "outlinePixels": 5,
+    "arcOpacity": 0.9,
+    "movers": 3,
+    "water": {"color": "#D8EDF2", "ring": 24, "diamond": 10},
+    "hull": {"color": "#62E6AA", "ring": 30, "diamond": 12},
+    "critical": {"color": "#FFD166", "ring": 34, "diamond": 14},
+    "markOutline": 2,
+    "shell": {"core": 6, "halo": 14, "haloOpacity": 0.35, "trailSeconds": 0.12, "trailMin": 60, "trailMax": 90}
    }
   },
   "art": {

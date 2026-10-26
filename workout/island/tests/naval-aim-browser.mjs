@@ -12,7 +12,7 @@ await verify('naval-aim',sizes,async({page,context,viewport,tick,snap,start,exit
  const fresh=async(stage=3)=>{await start('navalDuel',stage);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(400);};
  const center=async selector=>{const b=await page.locator(selector).boundingBox();return {x:b.x+b.width/2,y:b.y+b.height/2};};
  const report={};
- await fresh();let s=await snap();assert.equal(s.renderMode,'three');assert.equal(s.aiming,false);assert.equal(s.renderMetrics.aimArc.dots,0);
+ await fresh();let s=await snap();assert.equal(s.renderMode,'three');assert.equal(s.aiming,false);assert.equal(s.renderMetrics.aimArc.points,0);
  report.models=s.renderMetrics.models;assert.equal(s.renderMetrics.models.failed,0);assert.ok(s.renderMetrics.playerLoaded);
  assert.equal(await page.locator('.naval-weapon-hint').isVisible(),false,'no explanatory line in battle');
  await capture('1-sea');
@@ -22,7 +22,7 @@ await verify('naval-aim',sizes,async({page,context,viewport,tick,snap,start,exit
   const before=held.turret,aimBefore=held.aimScreen;
   for(let i=1;i<=6;i++){await touch('touchMove',[{x:fire.x+i*5,y:fire.y-i*8}]);await tick(50);}await tick(800);
   const aimed=await snap();assert.ok(aimed.turret.yaw>before.yaw,'drag right turns the turret right');assert.ok(aimed.turret.elevation>before.elevation,'drag up raises the barrel');assert.ok(aimed.turret.power>.99,'the ring charges to full');
-  assert.ok(aimed.aimScreen.x>aimBefore.x-1,'the landing moves to the right on screen');assert.ok(aimed.camera.zoom>.9,'the camera zooms behind the turret');assert.ok(aimed.renderMetrics.aimArc.dots>10&&aimed.renderMetrics.aimArc.ring);assert.equal(aimed.fired,0);
+  assert.ok(aimed.aimScreen.x>aimBefore.x-1,'the landing moves to the right on screen');assert.ok(aimed.camera.zoom>.9,'the camera zooms behind the turret');assert.ok(aimed.renderMetrics.aimArc.points>10&&aimed.renderMetrics.aimArc.visible);assert.equal(aimed.fired,0);
   assert.equal(await page.locator('.naval-aim-cancel').isVisible(),true);
   await capture('2-aim');
   await touch('touchEnd');await tick(40);const launched=await snap();assert.equal(launched.fired,1,'release fires once');assert.deepEqual(launched.ball.predicted.end,{x:aimed.prediction.end.x,z:aimed.prediction.end.z,t:aimed.prediction.end.t});
@@ -45,7 +45,7 @@ await verify('naval-aim',sizes,async({page,context,viewport,tick,snap,start,exit
   await page.locator('.naval-weapon-picker').tap();await tick(200);await page.locator('[data-ammo-index="2"]').tap();await tick(100);await touch('touchStart',[fire]);await tick(600);await touch('touchEnd');await tick(60);s=await snap();assert.equal(s.ball.launch.kind,'water');assert.equal(s.ball.launch.origin.h,0);await tick(2500);
  }else{
   // Mouse: press, drag, release. Keyboard: Space hold and release.
-  const fire=await center('#shoot');await page.mouse.move(fire.x,fire.y);await page.mouse.down();await tick(150);await page.mouse.move(fire.x+30,fire.y-60,{steps:6});await tick(800);const aimed=await snap();assert.ok(aimed.aiming&&aimed.camera.zoom>.9&&aimed.renderMetrics.aimArc.dots>10);await capture('2-aim');
+  const fire=await center('#shoot');await page.mouse.move(fire.x,fire.y);await page.mouse.down();await tick(150);await page.mouse.move(fire.x+30,fire.y-60,{steps:6});await tick(800);const aimed=await snap();assert.ok(aimed.aiming&&aimed.camera.zoom>.9&&aimed.renderMetrics.aimArc.points>10);await capture('2-aim');
   await page.mouse.up();await tick(40);let fired=(await snap()).fired;assert.equal(fired,1);await tick(Math.round(aimed.prediction.flight*450));await capture('3-shot');await tick(2000);
   await page.locator('canvas.minigame-canvas').focus();await page.keyboard.down('Space');await tick(500);assert.ok((await snap()).aiming);await page.keyboard.up('Space');await tick(40);assert.equal((await snap()).fired,2,'Space release fires once');await tick(1500);
   await page.keyboard.down('Space');await tick(300);await page.keyboard.press('Escape');await page.keyboard.up('Space');await tick(300);assert.equal((await snap()).fired,2,'Escape cancels the keyboard aim');assert.equal((await snap()).paused,false,'Escape while aiming does not open the pause sheet');
@@ -56,7 +56,7 @@ await verify('naval-aim',sizes,async({page,context,viewport,tick,snap,start,exit
  await tick(Math.round(hitAt*1000)+40);await capture('4-impact');await tick(1200);s=await snap();report.hit=s.lastShot;if(s.lastShot.actual.victim===null)console.log('LEDSHOT',JSON.stringify({last:s.lastShot,enemies:s.enemies.map(e=>({i:e.index,a:e.active,hp:e.hp,x:e.x,z:e.z,vx:e.vx,vz:e.vz})),sel:s.selectedTargetIndex,ship:s.playerShip}));assert.ok(s.lastShot.actual.victim!==null,'the led shot hits the moving hull');
  // Performance at a larger fleet, then light quality keeps aiming.
  await exit();await fresh(10);await tick(600);s=await snap();report.peak=s.renderMetrics.peak;report.dressing=s.renderMetrics.dressing;assert.ok(s.renderMetrics.peak.triangles<=90000,'triangle budget');assert.ok(s.renderMetrics.peak.drawCalls<=70,'draw-call budget');
- await page.evaluate(()=>window.__island.games.current.session.debug.view.degrade());await tick(200);s=await snap();assert.equal(s.renderMetrics.quality,'low');const lowFire=await center('#shoot');if(phone)await touch('touchStart',[lowFire]);else{await page.mouse.move(lowFire.x,lowFire.y);await page.mouse.down();}await tick(400);s=await snap();assert.ok(s.aiming&&s.renderMetrics.aimArc.dots>0,'light quality keeps the arc');await capture('6-light-quality');if(phone)await touch('touchEnd');else await page.mouse.up();await tick(1500);
+ await page.evaluate(()=>window.__island.games.current.session.debug.view.degrade());await tick(200);s=await snap();assert.equal(s.renderMetrics.quality,'low');const lowFire=await center('#shoot');if(phone)await touch('touchStart',[lowFire]);else{await page.mouse.move(lowFire.x,lowFire.y);await page.mouse.down();}await tick(400);s=await snap();assert.ok(s.aiming&&s.renderMetrics.aimArc.points>0,'light quality keeps the arc');await capture('6-light-quality');if(phone)await touch('touchEnd');else await page.mouse.up();await tick(1500);
  await exit();
  // Exit keeps the save valid and unchanged in shape.
  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('island.v1')));assert.equal(saved.version,18);report.saveVersion=saved.version;

@@ -10,7 +10,7 @@ function canvasTexture(size,paint){
 }
 function foamRing(g,s){
  const h=s/2;g.clearRect(0,0,s,s);
- for(let i=0;i<220;i++){const a=i/220*Math.PI*2,r=h*(.74+.08*Math.sin(a*7)+.05*Math.sin(a*17+1.3)),w=h*(.05+.05*Math.abs(Math.sin(a*11)));
+ for(let i=0;i<220;i++){const a=i/220*Math.PI*2;if(Math.sin(a*5+1.1)+.6*Math.sin(a*13)>.55)continue;const r=h*(.74+.08*Math.sin(a*7)+.05*Math.sin(a*17+1.3)),w=h*(.05+.05*Math.abs(Math.sin(a*11)));
   const grad=g.createRadialGradient(h+Math.cos(a)*r,h+Math.sin(a)*r,0,h+Math.cos(a)*r,h+Math.sin(a)*r,w*2.2);grad.addColorStop(0,'rgba(255,255,255,.55)');grad.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=grad;g.beginPath();g.arc(h+Math.cos(a)*r,h+Math.sin(a)*r,w*2.2,0,Math.PI*2);g.fill();}
 }
 function bowWave(g,s){
@@ -39,8 +39,8 @@ export function createNavalDressing(scene,balance,{maxShips=8}={}){
   update(hulls,time,blast,life){
    if(disposed)return;let f=0,w=0;
    for(const h of hulls){if(!h.visible||f>=maxShips)continue;const pulse=1+Math.sin(time*2.3+h.x)*.04,beam=h.length*.36;
-    dummy.position.set(h.x,.05,h.z);dummy.rotation.set(0,h.yaw,0);dummy.scale.set(beam*1.22*pulse,1,h.length*1.02*pulse);dummy.updateMatrix();foam.setMatrixAt(f,dummy.matrix);color.setScalar(.17+Math.min(.25,h.speed*.05));foam.setColorAt(f,color);f++;
-    const strength=Math.min(1,h.speed/4.5);if(strength>.08){const dx=-Math.sin(h.yaw),dz=-Math.cos(h.yaw);dummy.position.set(h.x+dx*h.length*.28,.06,h.z+dz*h.length*.28);dummy.scale.set(beam*(1.6+strength*1.4),1,h.length*(.55+strength*.55));dummy.updateMatrix();waves.setMatrixAt(w,dummy.matrix);color.setScalar(.25+strength*.5);waves.setColorAt(w,color);w++;}
+    dummy.position.set(h.x,.05,h.z);dummy.rotation.set(0,h.yaw+Math.sin(time*.7+h.x)*.18,0);dummy.scale.set(beam*1.22*pulse,1,h.length*1.02*pulse);dummy.updateMatrix();foam.setMatrixAt(f,dummy.matrix);color.setScalar((.17+Math.min(.25,h.speed*.05))*.8);foam.setColorAt(f,color);f++;
+    const strength=.2+.8*Math.min(1,h.speed/4.5);{const dx=-Math.sin(h.yaw),dz=-Math.cos(h.yaw);dummy.position.set(h.x+dx*h.length*.28,.06,h.z+dz*h.length*.28);dummy.scale.set(beam*(1.6+strength*1.4),1,h.length*(.55+strength*.55));dummy.updateMatrix();waves.setMatrixAt(w,dummy.matrix);color.setScalar(.75*1.15*strength);waves.setColorAt(w,color);w++;}
    }
    foam.count=f;waves.count=w;for(const m of [foam,waves]){m.instanceMatrix.needsUpdate=true;if(m.instanceColor)m.instanceColor.needsUpdate=true;}
    const u=blast&&blast.life>0&&blast.critical?1-blast.life/life:-1;burst.visible=u>=0;

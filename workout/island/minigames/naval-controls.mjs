@@ -43,7 +43,7 @@ export function createNavalInput(ctx,getModel,getView){
  cancel.type='button';cancel.className='naval-aim-cancel';cancel.hidden=true;cancel.setAttribute('aria-label',ctx.t?.('naval.aim.cancel')||'ביטול כיוון');cancel.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
  gauge.className='naval-aim-gauge';gauge.setAttribute('aria-hidden','true');gauge.innerHTML='<span class="naval-aim-arc"></span><span class="naval-aim-needle"></span>';
  controls.prepend?.(pad);controls.append?.(cancel,gauge);
- const applyHand=()=>{const right=navalHanded(balance);controls.dataset.movementSide=right?'left':'right';controls.dataset.actionSide=right?'right':'left';controls.classList?.toggle('left-handed',!right);return right;};applyHand();
+ let side=1;const applyHand=()=>{const right=navalHanded(balance);side=right?1:-1;controls.dataset.movementSide=right?'left':'right';controls.dataset.actionSide=right?'right':'left';controls.classList?.toggle('left-handed',!right);return right;};applyHand();
  fire?.setAttribute?.('aria-describedby','naval-weapon-hint');
  let gesture=null,keyboard=null,queue=[],pendingSelection=null,keyboardClick=false;
  const project=(m,x,z,y=0)=>getView()?.projectTarget(x,z,y)||m.screenPoint(x,z,y);
@@ -78,7 +78,7 @@ export function createNavalInput(ctx,getModel,getView){
    const m=getModel(),g=gesture||keyboard,event=queue.shift(),live=g?state(g):null;
    const out={...input,firing:false,fireRelease:event?.type==='fire',quickShot:event?.type==='quick',aimCancel:event?.type==='cancel',releaseTarget:Number.isInteger(event?.target)?{target:event.target}:undefined,releaseCurrent:true,aimHeld:Boolean(g),angularAim:false,autoAim:false,assistAim:false,yaw:undefined,targetX:undefined,targetZ:undefined,selectTargetIndex:pendingSelection};
    const s=event?.type==='fire'?event:live;if(s){out.aimYaw=s.yaw;out.aimElevation=s.elevation;out.aimPower=s.power;}
-   pendingSelection=null;
+   out.aimSide=side;pendingSelection=null;
    const b=balance.ballistics||{},power=s?.power??m?.power??1,elev=m?((s?.elevation??m.elevation)-(b.minElevation??3))/((b.maxElevation??42)-(b.minElevation??3)):0;
    controls.style?.setProperty?.('--naval-power',String(g?power:0));gauge.style.setProperty('--naval-elev',String(Math.max(0,Math.min(1,elev))));gauge.dataset.visible=String(Boolean(g));
    if(m){controls.dataset.weapon=String(m.ammoIndex);fire.setAttribute?.('aria-valuetext',`${Math.round((s?.elevation??m.elevation))}° · ${Math.round(power*100)}%`);}

@@ -19,6 +19,10 @@ export function createNavalImpacts(scene,model,config,balance){
   drops.frustumCulled=false;drops.count=0;drops.instanceMatrix.setUsage(T.DynamicDrawUsage);scene.add(drops);
   // A small elongated diamond, rather than an expanding opaque fireball.
   const glowG=new T.OctahedronGeometry(.48,0),glowM=new T.MeshBasicMaterial({color:'#ffe6aa',transparent:true,opacity:0,depthWrite:false,depthTest:false,blending:T.AdditiveBlending,toneMapped:false}),glow=new T.Mesh(glowG,glowM);glow.renderOrder=6;scene.add(glow);
+  // A real hit leaves a local smoke plume that outlives the flash (about 1.4 s).
+  const smokeMap=typeof document==='undefined'?null:(()=>{const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d'),r=g.createRadialGradient(32,32,2,32,32,31);r.addColorStop(0,'rgba(70,66,62,.85)');r.addColorStop(.6,'rgba(90,86,80,.45)');r.addColorStop(1,'rgba(110,105,98,0)');g.fillStyle=r;g.fillRect(0,0,64,64);return new T.CanvasTexture(c);})();
+  const puffG=new T.PlaneGeometry(1,1),puffM=new T.MeshBasicMaterial({map:smokeMap,color:'#ffffff',transparent:true,depthWrite:false,toneMapped:false}),puffs=new T.InstancedMesh(puffG,puffM,8);puffs.count=0;puffs.frustumCulled=false;puffs.instanceMatrix.setUsage(T.DynamicDrawUsage);scene.add(puffs);
+  let plume=null,lastKey='';
   const dummy=new T.Object3D(),color=new T.Color();let disposed=false;
   return {
     update(camera){
@@ -37,8 +41,12 @@ export function createNavalImpacts(scene,model,config,balance){
         color.set(spark?(i%8===0?'#ffe2a0':'#efb75e'):(i%3===0?'#f0fff8':'#c5ede6'));drops.setColorAt(i,color);
       }
       drops.instanceMatrix.needsUpdate=true;if(drops.instanceColor)drops.instanceColor.needsUpdate=true;
+      const key=blast.hit&&alive?blast.x+':'+blast.z:'';if(key&&key!==lastKey)plume={x,z,start:model.time};lastKey=key||lastKey;
+      const age=plume?model.time-plume.start:9;puffs.count=age<1.4?8:0;
+      for(let i=0;i<puffs.count;i++){const u=Math.min(1,age/1.4),k=(i+1)/8;dummy.position.set(plume.x+Math.sin(i*2.1)*.5*u,1.4+u*(2.2+k*1.6),plume.z+Math.cos(i*1.7)*.4*u);if(camera)dummy.quaternion.copy(camera.quaternion);const size=.9+u*(1.6+k);dummy.scale.set(size,size,1);dummy.updateMatrix();puffs.setMatrixAt(i,dummy.matrix);}
+      puffM.opacity=age<1.4?Math.min(1,age*6)*(1-age/1.4)*.85:0;puffs.instanceMatrix.needsUpdate=true;
     },
-    metrics(){return {particles:drops.count,capacity:32,disposed};},
-    dispose(){if(disposed)return;disposed=true;scene.remove(foam,drops,glow);drops.dispose();foamG.dispose();foamM.dispose();dropG.dispose();dropM.dispose();glowG.dispose();glowM.dispose();},
+    metrics(){return {particles:drops.count,capacity:32,smoke:puffs.count,disposed};},
+    dispose(){if(disposed)return;disposed=true;scene.remove(foam,drops,glow,puffs);puffs.dispose();puffG.dispose();puffM.dispose();smokeMap?.dispose();drops.dispose();foamG.dispose();foamM.dispose();dropG.dispose();dropM.dispose();glowG.dispose();glowM.dispose();},
   };
 }

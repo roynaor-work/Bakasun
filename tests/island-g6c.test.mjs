@@ -45,7 +45,7 @@ test('G6c follow turns smoothly through the shortest wrap and follows simulated 
 });
 // Superseded 25/10/2026 (archery-style aiming): holding now zooms behind the turret.
 test('Naval aiming zooms behind the turret while retaining the player and targets',()=>{
- const m=make(),before=m.camera;advance(m,.8,{aimHeld:true,autoAim:true});const aimed=m.camera;assert.ok(m.aiming);assert.equal(m.fired,0);assert.ok(aimed.fov<=before.fov-6,`${aimed.fov} vs ${before.fov}`);assert.ok(aimed.zoom>.95);for(const e of [m.playerShip,...m.enemies.filter(e=>e.active)]){const q=m.screenPoint(e.x,e.z);assert.ok(q.depth>0&&q.x>0&&q.x<config.width&&q.y>0&&q.y<config.height);}advance(m,1);assert.equal(m.aiming,false);assert.ok(m.camera.fov>aimed.fov+5);
+ const m=make(),before=m.camera;advance(m,.8,{aimHeld:true,autoAim:true});const aimed=m.camera;assert.ok(m.aiming);assert.equal(m.fired,0);assert.ok(aimed.fov<=before.fov-4,`${aimed.fov} vs ${before.fov}`);assert.ok(aimed.zoom>.95);for(const e of [m.playerShip,...m.enemies.filter(e=>e.active)]){const q=m.screenPoint(e.x,e.z);assert.ok(q.depth>0&&q.x>0&&q.x<config.width&&q.y>0&&q.y<config.height);}advance(m,1);assert.equal(m.aiming,false);assert.ok(m.camera.fov>aimed.fov+4);
 });
 test('G6c screen/water mapping roundtrips at zoom, normal and turned views',()=>{
  for(const heading of [0,.5,-.6])for(const aiming of [true,false]){const ship={x:90,z:20,heading},c=navalCameraPose(ship,{x:300,z:0},aiming,b);for(const size of [[844,390],[740,360],[1440,1000]]){const point={x:260,z:30},q=projectNavalPoint(navalWorldPoint(point.x,point.z,b),c,...size),actual=navalWaterAt(q.x,q.y,c,...size,b);near(actual.x,point.x);near(actual.z,point.z);}}

@@ -83,7 +83,7 @@ export function createNavalEnvironment(scene,renderer,fallbackSea,sunDisk,adapte
         float seaFresnel=.065+.935*pow(1.-seaFacing,5.);
         vec3 seaColor=mix(seaLagoon*(.22+seaFacing*1.52),vec3(.13,.29,.35),seaFresnel*.29);
         float seaSun=max(0.,dot(normalize(reflect(-ultraSeaSun,seaNormal)),seaEye));
-        outgoingLight=seaColor+vec3(1.,.88,.69)*(pow(seaSun,88.)*.105+pow(seaSun,18.)*.012);
+        outgoingLight=seaColor+vec3(1.,.88,.69)*(pow(seaSun,88.)*.079+pow(seaSun,18.)*.009);
         #include <opaque_fragment>`);
     };
     fallbackMaterial.customProgramCacheKey=()=> 'ultra-naval-fallback-sea-2';fallbackMaterial.needsUpdate=true;

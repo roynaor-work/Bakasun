@@ -83,3 +83,41 @@ test('Naval aim step and render budget stay inside the repository limits',()=>{
  for(const key of ['gravity','maxSpeed','minPower','muzzleHeight','hullTop','minElevation','maxElevation','weakSpot','criticalMultiplier'])assert.ok(Number.isFinite(b.ballistics[key]),key);
  assert.ok(b.ballistics.maxElevation<45,'raising the barrel always lengthens the range');
 });
+
+// Round 2 (26/10/2026): marks, tracers, camera timing and the optional buzz.
+import {drawNavalAimMarks,drawNavalShellTracers,navalMarkKind,navalPixelUnit} from '../workout/island/minigames/naval-marks.mjs';
+import {navalCameraPose} from '../workout/island/minigames/naval-camera.mjs';
+import {navalBuzz} from '../workout/island/minigames/naval.mjs';
+function recorder(scale=1){const calls=[];let dash=[];const state={lineWidth:1};const p=new Proxy(state,{get(t,k){if(k==='setLineDash')return d=>{dash=d;};if(k==='getTransform')return ()=>({a:scale});if(k==='canvas')return {width:844*scale,clientWidth:844*scale};if(k in t)return t[k];return (...args)=>calls.push({k,args,dash:[...dash],stroke:state.strokeStyle,fill:state.fillStyle,width:state.lineWidth});},set(t,k,v){t[k]=v;return true;}});return {p,calls};}
+test('Naval landing marks differ by shape: dashed ring (water), solid ring with filled diamond (hull), double ring with centre dot (weak centre)',()=>{
+ const project=(x,z,y=0)=>({x:400+z,y:250-(x-60)*.4-y,depth:5}),base={aiming:true,ammoIndex:0};
+ const water=recorder(),hull=recorder(),centre=recorder();
+ const w=drawNavalAimMarks(water.p,{...base,prediction:{landing:{x:300,z:0},contact:null}},project,b);
+ const h=drawNavalAimMarks(hull.p,{...base,prediction:{landing:{x:330,z:0},contact:{x:310,z:0,h:8,critical:false}}},project,b);
+ const c=drawNavalAimMarks(centre.p,{...base,prediction:{landing:{x:340,z:0},contact:{x:312,z:0,h:8,critical:true}}},project,b);
+ assert.deepEqual([w.kind,h.kind,c.kind],['water','hull','critical']);assert.deepEqual([w.ring,h.ring,c.ring],[24,30,34]);assert.deepEqual([w.diamond,h.diamond,c.diamond],[10,12,14]);
+ const ellipses=r=>r.calls.filter(x=>x.k==='ellipse');assert.ok(ellipses(water).some(e=>e.dash.length>0),'water ring is dashed');assert.ok(ellipses(hull).every(e=>e.dash.length===0));assert.equal(ellipses(centre).length/2,2,'double ring, each with its dark outline');
+ assert.equal(water.calls.filter(x=>x.k==='fill').length,0,'hollow diamond on water');assert.ok(hull.calls.some(x=>x.k==='fill'&&x.fill===b.aimLook.hull.color));assert.ok(centre.calls.some(x=>x.k==='arc'),'centre dot');
+ assert.equal(navalMarkKind(null),'water');assert.equal(drawNavalAimMarks(water.p,{...base,aiming:false,prediction:{landing:{x:1,z:1}}},project,b),null);
+});
+test('Naval marks keep their pixel size on a scaled canvas',()=>{
+ const small=recorder(1),large=recorder(2);assert.equal(navalPixelUnit(small.p),1);assert.equal(navalPixelUnit(large.p),.5);
+ const project=()=>({x:100,y:100,depth:3}),m={aiming:true,prediction:{landing:{x:300,z:0},contact:null}};drawNavalAimMarks(small.p,m,project,b);drawNavalAimMarks(large.p,m,project,b);
+ const rx=r=>r.calls.find(x=>x.k==='ellipse').args[2];assert.ok(Math.abs(rx(large)*2-rx(small))<1e-9);
+});
+test('Naval shell tracer follows the shared path and draws once per live shell',()=>{
+ const m=make();m.update(.02,{aimYaw:0,aimElevation:12,aimPower:1,fireRelease:true});for(let i=0;i<10;i++)m.update(.02,{});
+ const r=recorder();assert.equal(drawNavalShellTracers(r.p,m,b),1);const cores=r.calls.filter(x=>x.k==='arc');assert.equal(cores.length,2,'halo and core');
+ const n=make();n.update(.02,{ammoIndex:4,aimYaw:0,aimElevation:12,aimPower:1,fireRelease:true});n.update(.02,{});assert.equal(drawNavalShellTracers(recorder().p,n,b),3,'the salvo draws three smaller tracers');
+});
+test('Naval aim camera enters in 0.22 s, returns in 0.3 s and its shoulder flips with the hand',()=>{
+ const ship={x:60,z:0,heading:0},aim={x:300,z:0},framing=side=>({battle:true,enemies:[],width:844,height:390,aimYaw:0,aimSide:side,landing:aim});
+ let c=navalCameraPose(ship,aim,false,b,undefined,0,framing(1));for(let i=0;i<11;i++)c=navalCameraPose(ship,aim,true,b,c,.02,framing(1));assert.ok(c.zoom>.99&&c.progress===1);
+ let half=navalCameraPose(ship,aim,false,b,undefined,0,framing(1));for(let i=0;i<5;i++)half=navalCameraPose(ship,aim,true,b,half,.02,framing(1));assert.ok(half.zoom>.3&&half.zoom<.75);
+ let out=c;for(let i=0;i<15;i++)out=navalCameraPose(ship,aim,false,b,out,.02,framing(1));assert.ok(out.zoom<1e-3);
+ const right=c,left=(()=>{let l=navalCameraPose(ship,aim,false,b,undefined,0,framing(-1));for(let i=0;i<12;i++)l=navalCameraPose(ship,aim,true,b,l,.02,framing(-1));return l;})();assert.ok(Math.sign(right.position.x-left.position.x)!==0&&Math.abs(right.position.x+left.position.x)<1e-6,'mirrored shoulder');
+});
+test('Naval weak-centre buzz is optional, short and respects the off setting',()=>{
+ const calls=[],nav={vibrate:ms=>{calls.push(ms);return true;}},store=v=>({getItem:()=>v});
+ assert.equal(navalBuzz(store(null),nav),true);assert.equal(navalBuzz(store('off'),nav),false);assert.equal(navalBuzz(store(null),{}),false);assert.deepEqual(calls,[30]);assert.equal(b.aimControls.chargeSeconds,1.2);
+});

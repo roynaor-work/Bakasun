@@ -24,5 +24,9 @@ export function navalUpgradePanel({engine,activity,data,t,refresh}){
  let right=data.config.minigames.navalDuel.controls?.rightHanded!==false;try{const saved=localStorage.getItem(key);if(saved==='left'||saved==='right')right=saved==='right';}catch{}
  const render=()=>{hand.textContent=t(right?'naval.hand.right':'naval.hand.left');hand.setAttribute('aria-pressed',String(!right));hand.dataset.side=right?'right':'left';};
  hand.onclick=()=>{right=!right;try{localStorage.setItem(key,right?'right':'left');}catch{}render();};render();handWrap.append(node('span',t('naval.hand.title'),'naval-difficulty-label'),hand);
- panel.append(grid,difficultyWrap,handWrap);return panel;
+ const buzzWrap=node('div','','naval-difficulty-wrap naval-hand-wrap'),buzz=node('button','','secondary-button naval-hand');buzz.type='button';buzz.dataset.navalVibration='';
+ let buzzOn=true;try{buzzOn=localStorage.getItem('island.naval.vibration')!=='off';}catch{}
+ const renderBuzz=()=>{buzz.textContent=t(buzzOn?'naval.vibration.on':'naval.vibration.off');buzz.setAttribute('aria-pressed',String(buzzOn));};
+ buzz.onclick=()=>{buzzOn=!buzzOn;try{localStorage.setItem('island.naval.vibration',buzzOn?'on':'off');}catch{}renderBuzz();};renderBuzz();buzzWrap.append(node('span',t('naval.vibration.title'),'naval-difficulty-label'),buzz);
+ panel.append(grid,difficultyWrap,handWrap,buzzWrap);return panel;
 }
