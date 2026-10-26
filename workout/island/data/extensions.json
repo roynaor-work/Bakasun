@@ -12,7 +12,8 @@
     "extensions/activity-income.mjs",
     "extensions/soccer.mjs",
     "extensions/tennis.mjs",
-    "extensions/racing.mjs"
+    "extensions/racing.mjs",
+    "extensions/street-slam.mjs"
   ],
   "records": {
     "islandRacing": {
@@ -102,6 +103,14 @@
       "difficulty": "stage",
       "helpId": "minigame.tennis.help",
       "icon": "🎾"
+    },
+    "streetSlam": {
+      "id": "streetSlam",
+      "title": "minigame.streetSlam.title",
+      "featureFlag": "streetSlam",
+      "difficulty": "stage",
+      "helpId": "minigame.streetSlam.help",
+      "icon": "🏀"
     }
   }
 }
