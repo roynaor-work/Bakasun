@@ -285,11 +285,11 @@ export class ActivityInterface {
     this.engine.narration.announce('minigame.result',result);
   }
   alpineResult(dialog,summary,a){
-    // Design result card: rank medal, time, peak speed and the course record.
+    // Design result card: rank medal, time, peak speed, trick score, coins and the course record.
     const time=ms=>{const c=Math.round(ms/10);return `${String(Math.floor(c/6000)).padStart(2,'0')}:${String(Math.floor(c/100)%60).padStart(2,'0')}.${String(c%100).padStart(2,'0')}`;};
     const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-alpine-20261026-1',import.meta.url).href;dialog.append(css);
     dialog.classList.add('alpine-result');const medal=el('div','alpine-medal',String(a.rank).padStart(2,'0'));medal.setAttribute('aria-label',this.t('alpine.result.rank')+' '+a.rank);dialog.append(medal);
-    const rows=[['rank',`${a.rank} / ${a.totalRiders}`],['time',time(a.elapsedMs)],['peak',String(a.peakKmh)]];
+    const rows=[['rank',`${a.rank} / ${a.totalRiders}`],['time',time(a.elapsedMs)],['peak',String(a.peakKmh)],['trickScore',(a.trickScore||0).toLocaleString('en-US')],['coins',`${a.coins||0} / ${a.coinTotal??'-'}`]];
     if(a.bestMs)rows.push([a.newBest?'newBest':'best',time(a.bestMs)]);
     for(const [key,value]of rows){const row=el('p','result-row');row.dataset.alpineSummary=key;const v=el('bdi','',value);v.dir='ltr';row.append(el('span','',this.t(`alpine.result.${key}`)),v);summary.append(row);}
   }

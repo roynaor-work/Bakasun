@@ -6,7 +6,7 @@ import {createEngine} from '../workout/island/engine/engine.mjs';
 import {migrateSave,validateSave,STORAGE_KEY,CURRENT_VERSION} from '../workout/island/engine/persistence.mjs';
 import {gameContext} from '../workout/island/minigames/context.mjs';
 import {createAlpineEngine,alpineReward,RIDER_IDS} from '../workout/island/minigames/alpine-engine.mjs';
-import {generateCourse,rockClearance} from '../workout/island/minigames/alpine-track.mjs';
+import {generateCourse,rockClearance,pipeProfile,surfaceHeight} from '../workout/island/minigames/alpine-track.mjs';
 import {alpineResult} from '../workout/island/minigames/alpine-result.mjs';
 import {loadRecords,recordRun,formatRaceTime} from '../workout/island/minigames/alpine-records.mjs';
 import {createAlpineControls} from '../workout/island/minigames/alpine-controls.mjs';
@@ -17,7 +17,7 @@ import {ActivityInterface} from '../workout/island/ui/activity.mjs';
 const root=new URL('../workout/island/',import.meta.url);
 const data=await loadData(root,async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))}));
 const strings=JSON.parse(await readFile(new URL('data/strings.he.json',root),'utf8'));
-const balance=data.config.minigames.alpineRush,P=balance.physics;
+const balance=data.config.minigames.alpineRush,P=balance.physics,PIPE=pipeProfile(P);
 const memory=(entries=new Map())=>({entries,getItem:key=>entries.has(key)?entries.get(key):null,setItem(key,value){entries.set(key,String(value));},removeItem(key){entries.delete(key);}});
 
 /** Scripted player: same lane logic for every test, steering in simulation time only. */
@@ -37,10 +37,10 @@ function race(stage,seed,{pilot=lanePilot,dt=1/60,maxFrames=30000}={}){
   return {engine:e,result:e.snapshot().result,events};
 }
 /** A tiny hand-made course for rule tests. Riders 2..6 are parked far behind on the grid. */
-function ruleEngine(objects,{length=400,stage=1,ai=null,grid=null}={}){
+function ruleEngine(objects,{length=400,stage=1,ai=null,grid=null,path=null}={}){
   const b=structuredClone(balance);b.physics.grid=grid||[{s:0,x:0},...Array.from({length:5},(_,i)=>({s:-200-i*5,x:i*2-4}))];
   if(ai)b.levels[stage-1].ai=b.levels[stage-1].ai.map(r=>({...r,...ai}));
-  const course={id:'test',length,objects:objects.map((o,i)=>({id:o.id||`t-${i}`,...o})).sort((a,c)=>a.s-c.s),rows:[]};
+  const course={id:'test',length,objects:objects.map((o,i)=>({id:o.id||`t-${i}`,...o})).sort((a,c)=>a.s-c.s),rows:[],path,coins:objects.filter(o=>o.type==='coin').length};
   const e=createAlpineEngine({balance:b,stage,seed:9,course});e.command({type:'start'});while(e.phase==='countdown')e.step(1/60);e.drainEvents();return e;
 }
 const run=(e,seconds,steer=0)=>{const events=[];for(let i=0;i<Math.round(seconds*60);i++){e.command({type:'steer',value:steer});e.step(1/60);events.push(...e.drainEvents());}return events;};
@@ -65,7 +65,9 @@ test('1. complete races are decided by distance and finish times: a known win an
     const ahead=r.engine.debug().slice(1).filter(d=>d.finished).length;assert.equal(r.result.rank,ahead+1);
     assert.ok(ranked.length===6);assert.ok(r.result.elapsedMs>=60000&&r.result.elapsedMs<=100000,`${r.result.elapsedMs} ms`);
   }
-  assert.equal(win.result.reward,alpineReward(balance,1,win.result.rank).money);assert.equal(loss.result.reward,0);
+  // Coins pay whatever the placing; the placing prize only for a win.
+  assert.equal(win.result.reward,alpineReward(balance,1,win.result.rank,true,win.result.coins).money);assert.equal(loss.result.reward,loss.result.coins*P.coins.value);
+  assert.ok(win.result.coins>0,'the pilot picks up coins on its lines');
 });
 
 test('1b. the opening is gentle: the first obstacle is at least 100 m down the slope on every course',()=>{
@@ -87,7 +89,7 @@ test('fairness: every course row leaves a free board corridor reachable from the
   }
 });
 
-test('2. controls: drag, keys and boost are separate; every release path clears steering',()=>{
+test('2. controls: joystick, drag, keys, boost and tricks are separate; every release path clears steering',()=>{
   const doc=new EventTarget(),win=new EventTarget();doc.defaultView=win;doc.hidden=false;
   const canvas=new EventTarget(),button=new EventTarget();let captured=new Set();
   Object.assign(canvas,{ownerDocument:doc,dataset:{},style:{},getBoundingClientRect:()=>({width:400}),setPointerCapture:id=>captured.add(id),hasPointerCapture:id=>captured.has(id),releasePointerCapture:id=>captured.delete(id)});
@@ -106,10 +108,28 @@ test('2. controls: drag, keys and boost are separate; every release path clears 
   fire(win,'keydown',{code:'Space',target:{closest:()=>null}});assert.equal(c.sample(player).boost,true);
   fire(win,'keydown',{code:'Space',repeat:true,target:{closest:()=>null}});assert.equal(c.sample(player).boost,false,'key repeat does not queue boosts');
   fire(button,'click',{detail:0});assert.equal(c.sample(player).boost,true,'keyboard activation of the button');
-  c.setEnabled(false);fire(win,'keydown',{code:'ArrowRight'});assert.deepEqual(c.sample(player),{steer:0,boost:false});
+  c.setEnabled(false);fire(win,'keydown',{code:'ArrowRight'});assert.deepEqual(c.sample(player),{steer:0,boost:false,trick:null});
   c.dispose();fire(canvas,'pointerdown',{pointerId:3,clientX:0});assert.equal(c.dragging,false);
-  // Steering past either edge stops at the track boundary.
-  const e=ruleEngine([]);run(e,3,1);assert.equal(e.debug()[0].x,P.trackHalfWidth);run(e,4,-1);assert.equal(e.debug()[0].x,-P.trackHalfWidth);
+  // Joystick: analog, sideways only, released on every end path; trick buttons and keys queue one trick.
+  {const doc2=new EventTarget(),win2=new EventTarget();doc2.defaultView=win2;doc2.hidden=false;
+    const cv=new EventTarget(),joy=new EventTarget(),knob={style:{}},tb=[...['grab','spin','flip','combo']].map(id=>Object.assign(new EventTarget(),{dataset:{trick:id},disabled:false}));let cap=new Set();
+    Object.assign(cv,{ownerDocument:doc2,dataset:{},style:{},getBoundingClientRect:()=>({width:400}),setPointerCapture:id=>cap.add(id),hasPointerCapture:id=>cap.has(id),releasePointerCapture:id=>cap.delete(id)});
+    Object.assign(joy,{dataset:{},style:{},setAttribute(){},querySelector:()=>knob,getBoundingClientRect:()=>({left:0,width:120}),setPointerCapture:id=>cap.add(id),hasPointerCapture:id=>cap.has(id),releasePointerCapture:id=>cap.delete(id)});
+    const k=createAlpineControls({canvas:cv,boostButton:null,joystick:joy,trickButtons:tb,config:{trackHalfWidth:10}});
+    let canvasDown=0;cv.addEventListener('pointerdown',()=>canvasDown++);
+    const jd=fire(joy,'pointerdown',{pointerId:4,clientX:60+26,button:0,pointerType:'touch'});assert.equal(jd.defaultPrevented,true);
+    assert.ok(Math.abs(k.sample(player).steer-.5)<.01,'half deflection = half steer');assert.equal(k.dragging,true);assert.equal(canvasDown,0,'the joystick never starts a slope drag');
+    fire(joy,'pointermove',{pointerId:4,clientX:-30});assert.equal(k.sample(player).steer,-1,'clamped full left');assert.ok(knob.style.transform.includes('-70'));
+    fire(joy,'pointerup',{pointerId:4});assert.equal(k.sample(player).steer,0);
+    for(const end of ['pointerup','pointercancel','lostpointercapture']){fire(joy,'pointerdown',{pointerId:5,clientX:110,pointerType:'touch'});assert.ok(k.sample(player).steer>.9);fire(joy,end,{pointerId:5});assert.equal(k.sample(player).steer,0,`joystick ${end}`);}
+    fire(joy,'pointerdown',{pointerId:6,clientX:110,pointerType:'touch'});fire(win2,'blur');assert.equal(k.sample(player).steer,0,'blur releases the joystick');
+    fire(tb[1],'pointerdown',{pointerId:8});let q=k.sample(player);assert.equal(q.trick,'spin');assert.equal(q.steer,0);assert.equal(k.sample(player).trick,null,'tricks are one-shot');
+    fire(win2,'keydown',{code:'Digit4'});assert.equal(k.sample(player).trick,'combo');fire(win2,'keydown',{code:'KeyJ'});assert.equal(k.sample(player).trick,'grab');
+    fire(win2,'keydown',{code:'Digit3',repeat:true});assert.equal(k.sample(player).trick,null,'key repeat does not queue tricks');
+    k.setEnabled(false);assert.equal(tb.every(b=>b.disabled),true);fire(tb[2],'pointerdown',{pointerId:9});assert.equal(k.sample(player).trick,null);k.dispose();}
+  // Holding a direction climbs the wall and may launch from the lip, but never leaves the pipe.
+  for(const dir of [1,-1]){const e=ruleEngine([]);let maxX=0,wall=false;for(let i=0;i<300;i++){run(e,1/60,dir);const d=e.debug()[0];maxX=Math.max(maxX,Math.abs(d.x));wall||=Math.abs(d.x)>PIPE.F+1;}
+    assert.ok(wall,`climbs the ${dir>0?'right':'left'} wall`);assert.ok(maxX<=PIPE.lip+1e-9,`stays inside the lip (${maxX})`);}
   // A slower rival straight ahead can be passed on either side with the same control.
   for(const side of [-1,1]){const g=[{s:0,x:0},{s:12,x:0},...Array.from({length:4},(_,i)=>({s:-200-i*5,x:i*2-4}))];
     const o=ruleEngine([],{grid:g,ai:{speed:.7,boostChance:0}});const evs=run(o,8,side*.6);
@@ -196,7 +216,7 @@ test('8. island settlement: one result per run, strict validation, records reloa
   const first=finish(raw),second=finish(raw);assert.equal(first.ok,true);assert.equal(second.reason,'reason.duplicate');
   assert.equal(engine.state.money,before+first.result.money);assert.equal(engine.state.minigameProgress.alpineRush.stage,2);
   assert.equal(engine.state.minigameWins.alpineRush,1);assert.equal(engine.state.highScores.alpineRush,won.score);
-  for(const bad of [{...raw,alpine:{...won,rank:1,won:true,reward:999}},{...raw,alpine:{...won,stage:2}},{...raw,alpine:{...won,seed:1}},{...raw,outcome:'lose'},{...raw,alpine:{...won,extra:1}},{...raw,alpine:{...won,elapsedMs:-1}},{...raw,alpine:{...won,runId:'x'}}])
+  for(const bad of [{...raw,alpine:{...won,rank:1,won:true,reward:999}},{...raw,alpine:{...won,stage:2}},{...raw,alpine:{...won,seed:1}},{...raw,outcome:'lose'},{...raw,alpine:{...won,extra:1}},{...raw,alpine:{...won,elapsedMs:-1}},{...raw,alpine:{...won,runId:'x'}},{...raw,alpine:{...won,coins:100000,reward:won.reward-won.coins*P.coins.value+100000*P.coins.value}},{...raw,alpine:{...won,trickScore:P.maxTrickScore+1}},{...raw,alpine:{...won,crashes:-1}},{...raw,alpine:{...won,coins:won.coins+1}},{...raw,alpine:(({coins,...rest})=>rest)(won)}])
     assert.equal(alpineResult(bad,{level:1,seed:42},balance),null);
   assert.deepEqual(alpineResult(raw,{level:1,seed:42},balance),{outcome:'win',score:won.score,stars:won.stars,money:won.reward});
   const reloaded=createEngine(data,{storage});assert.equal(reloaded.state.minigameProgress.alpineRush.stage,2);
@@ -265,4 +285,65 @@ test('snapshot follows the contract: player-relative z, bounded obstacle ids, no
   a.player.x=99;assert.notEqual(e.snapshot().player.x,99);
   const ids=new Set();for(let i=0;i<60*120&&e.phase!=='finished';i++){e.step(1/60);for(const o of e.snapshot().obstacles)ids.add(o.id);}
   assert.ok(ids.size<=e.course.objects.length+1,'render ids are the course ids plus the finish arch');
+});
+
+test('halfpipe: riders climb the walls on the surface, launch from the lip, stay at the lip in the air and drop back in',()=>{
+  const e=ruleEngine([]),log=[];let launched=null,landed=false;
+  for(let i=0;i<360&&!landed;i++){e.command({type:'steer',value:launched?0:1});e.step(1/60);const evs=e.drainEvents(),d=e.debug()[0];log.push(d);
+    if(!d.airborne&&!launched)assert.ok(Math.abs(d.alt-surfaceHeight(d.x,PIPE))<1e-9,'the board follows the wall profile');
+    const off=evs.find(x=>x.type==='takeoff'&&x.riderId==='player');if(off){assert.equal(off.objectId,'lip');launched=d;}
+    if(launched&&d.airborne){assert.equal(d.airKind,'pipe');assert.equal(Math.abs(d.x),PIPE.lip,'pipe air goes straight up from the lip');}
+    if(launched&&evs.some(x=>x.type==='land'&&x.riderId==='player'))landed=true;}
+  assert.ok(launched,'a fast run at the wall launches from the lip');assert.ok(landed,'and lands back in the pipe');
+  assert.ok(Math.max(...log.map(d=>d.alt))>PIPE.lipHeight+2,'pipe air rises well above the lip');
+  run(e,.5);assert.ok(e.debug()[0].x<PIPE.lip-1,'after landing the rider rides back down the wall');
+  // A slow drift up the wall never launches: wall gravity brings the rider back to the floor.
+  const slow=ruleEngine([]);let air=false;for(let i=0;i<300;i++){slow.command({type:'steer',value:i<40?.35:0});slow.step(1/60);air||=slow.debug()[0].airborne;}
+  assert.equal(air,false);assert.ok(Math.abs(slow.debug()[0].x)<PIPE.F+1);
+});
+
+test('turns: the centreline is continuous, turns go both ways, and a turn pushes a rider out unless it steers into it',()=>{
+  for(const level of balance.levels){const t={...balance.tracks[level.trackId],id:level.trackId},c=generateCourse(t,P),p=c.path;
+    let right=0,left=0;for(let i=1;i<p.count;i++){assert.ok(Math.abs(Math.hypot(p.px[i]-p.px[i-1],p.pz[i]-p.pz[i-1])-1)<1e-6,'one metre per sample');
+      assert.ok(Math.abs(p.theta[i]-p.theta[i-1]-(p.kappa[i]+p.kappa[i-1])/2)<1e-9);assert.ok(Math.abs(p.kappa[i])<=1/t.turns.radius[0]+1e-9);assert.ok(p.py[i]<p.py[i-1],'always downhill');
+      if(p.kappa[i]>.002)right++;if(p.kappa[i]<-.002)left++;}
+    assert.ok(right>40&&left>40,`${level.trackId} turns both ways (${right}/${left})`);
+    for(let i=0;i<t.calmStart&&i<p.count;i++)assert.ok(Math.abs(p.kappa[i])<.002||i>=t.turns.firstStraight[0],'the start is straight');}
+  const n=1200,path={count:n,kappa:new Float64Array(n).fill(1/90)};
+  const drift=ruleEngine([],{path});run(drift,5);const dx=drift.debug()[0].x;assert.ok(dx<-2.5,`no steering: pushed toward the outer wall (${dx})`);assert.ok(dx>=-PIPE.lip);
+  const hold=ruleEngine([],{path});for(let i=0;i<240;i++){const d=hold.debug()[0];const lean=d.speed*d.speed/90*P.turnPush/(P.lateralResponse*P.lateralSpeed);hold.command({type:'steer',value:Math.max(-1,Math.min(1,(0-d.x)*.7+lean))});hold.step(1/60);}
+  assert.ok(Math.abs(hold.debug()[0].x)<1,'steering into the turn holds the line');
+});
+
+test('tricks: only in the air, finished tricks score and fill the tank, chains multiply, an unfinished trick is a crash',()=>{
+  const ramp=(extra={})=>ruleEngine([{id:'r',type:'ramp',x:0,s:60}],extra);
+  const ground=ramp();ground.command({type:'trick',id:'spin'});run(ground,.2);assert.equal(ground.debug()[0].trick,null,'no trick on the ground');assert.equal(ground.snapshot().trickReady,false);
+  // A grab straight after the ramp lip: completes, scores its points and charges the tank.
+  const g=ramp();let evs=[];for(let i=0;i<600;i++){const d=g.debug()[0];if(d.airborne&&!d.trick&&!evs.some(x=>x.type==='trick-start'))g.command({type:'trick',id:'grab'});g.step(1/60);evs.push(...g.drainEvents());if(evs.some(x=>x.type==='trick'||x.type==='crash'))break;}
+  const done=evs.find(x=>x.type==='trick');assert.ok(done,'grab lands');assert.equal(done.value,P.tricks.grab.points);assert.equal(done.count,1);assert.equal(g.snapshot().score,P.tricks.grab.points);
+  assert.equal(evs.some(x=>x.type==='crash'),false);
+  // Started too late before touchdown: a crash, no points, a big slowdown.
+  const late=ramp();evs=[];let before=0;for(let i=0;i<600;i++){const d=late.debug()[0];if(d.airborne&&d.vy<-4&&!d.trick&&!evs.some(x=>x.type==='trick-start')){late.command({type:'trick',id:'combo'});before=d.speed;}late.step(1/60);evs.push(...late.drainEvents());if(evs.some(x=>x.type==='crash'))break;}
+  const crash=evs.find(x=>x.type==='crash');assert.ok(crash,'unfinished combo crashes');assert.equal(crash.objectId,'combo');const after=late.debug()[0];
+  assert.equal(after.crashes,1);assert.equal(after.trickScore,0);assert.ok(after.speed<before*(1-P.crashSpeedLoss)+1,'crash slows hard');assert.equal(late.snapshot().player.crashed,true);
+  // Two tricks in one pipe air: the combo bonus applies to their sum.
+  const pipe=ruleEngine([]);evs=[];let queue=['grab','spin'];
+  for(let i=0;i<600;i++){const d=pipe.debug()[0];pipe.command({type:'steer',value:d.airborne||evs.some(x=>x.type==='takeoff')?0:1});if(d.airborne&&!d.trick&&queue.length)pipe.command({type:'trick',id:queue.shift()});pipe.step(1/60);evs.push(...pipe.drainEvents());if(evs.some(x=>x.type==='trick'||x.type==='crash'))break;}
+  const chain=evs.find(x=>x.type==='trick');assert.ok(chain,'chained pipe tricks land');assert.equal(chain.count,2);
+  assert.equal(chain.value,Math.round((P.tricks.grab.points+P.tricks.spin.points)*(1+P.comboBonus)));
+  // Rivals trick and crash under the same rules during a real race.
+  const all=[1,2,3].flatMap(stage=>race(stage,11,{pilot:lanePilot}).events).filter(x=>x.riderId!=='player');
+  assert.ok(all.filter(x=>x.type==='trick').length>20,'rivals land tricks');assert.ok(all.some(x=>x.type==='crash'),'rivals can crash');
+});
+
+test('coins: collected once within reach and height, counted in the result and paid whatever the placing',()=>{
+  const C=P.coins,objs=[{id:'c1',type:'coin',x:0,s:50,h:C.centre},{id:'c2',type:'coin',x:C.reach+.1,s:58,h:C.centre},{id:'c3',type:'coin',x:0,s:66,h:C.centre+C.height+.4}];
+  const e=ruleEngine(objs);const evs=run(e,5).filter(x=>x.type==='coin'&&x.riderId==='player');
+  assert.deepEqual(evs.map(x=>x.objectId),['c1'],'only the coin in reach and at board height');
+  const snap=e.snapshot();assert.equal(snap.coins,1);assert.equal(snap.coinTotal,3);assert.equal(snap.obstacles.some(o=>o.id==='c1'),false,'a collected coin is gone from the frame');
+  // Air coins over a ramp are collected only by riders who jump.
+  for(const level of balance.levels){const c=generateCourse({...balance.tracks[level.trackId],id:level.trackId},P);assert.equal(c.coins,c.objects.filter(o=>o.type==='coin').length);assert.ok(c.coins>=60,`${level.trackId} has coin lines (${c.coins})`);
+    for(const coin of c.objects.filter(o=>o.type==='coin')){assert.ok(Math.abs(coin.x)<=PIPE.lip,'coins stay inside the pipe');assert.ok(coin.h>=surfaceHeight(coin.x,PIPE)+C.centre-.02,'never under the snow');}}
+  const r=race(1,42);assert.equal(r.result.coins,r.engine.snapshot().coins);assert.equal(r.result.coins,new Set(r.events.filter(x=>x.type==='coin'&&x.riderId==='player').map(x=>x.objectId)).size);
+  assert.equal(alpineReward(balance,1,6,true,7).money,7*C.value,'a loss still pays its coins');
 });

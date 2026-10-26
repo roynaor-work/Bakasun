@@ -111,6 +111,41 @@
 .game-screen[data-game=alpineRush] .alpine-boost small{font-size:8px;color:#8fbacb;margin-top:3px;letter-spacing:2px;pointer-events:none}
 .game-screen[data-game=alpineRush] .alpine-boost.active{background:var(--a-orange);box-shadow:0 0 0 6px #fff9,0 0 0 10px #ff673b55,0 0 60px #ff673b88}
 .game-screen[data-game=alpineRush] .alpine-boost:focus-visible{outline:3px solid var(--a-orange);outline-offset:12px}
+.game-screen[data-game=alpineRush] .alpine-tally{display:flex;flex-direction:column;gap:7px;direction:ltr}
+.game-screen[data-game=alpineRush] .alpine-tally>span{display:flex;align-items:center;gap:7px;background:#ffffffc4;border-radius:999px;padding:5px 13px 5px 6px;font-weight:900;font-size:18px;color:#112d40;box-shadow:0 4px 14px #12394f1a;font-variant-numeric:tabular-nums;min-width:86px;transition:transform .15s}
+.game-screen[data-game=alpineRush] .alpine-tally svg{width:24px;height:24px;flex:none}
+.game-screen[data-game=alpineRush] .alpine-score svg{fill:var(--a-orange)}
+.game-screen[data-game=alpineRush] .alpine-coins svg{fill:#ffc21a;stroke:#b46f00;stroke-width:1.6}
+.game-screen[data-game=alpineRush] .alpine-coins.pulse{transform:scale(1.14)}
+.game-screen[data-game=alpineRush] .alpine-center{position:absolute;left:0;bottom:142px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+/* Joystick: visible analog stick, sideways only */
+.game-screen[data-game=alpineRush] .alpine-joystick{position:relative;width:128px;height:128px;flex:none;border-radius:50%;pointer-events:auto;touch-action:none;cursor:grab;
+ background:radial-gradient(circle,#ffffff55 0 38%,#ffffff2e 39% 100%);box-shadow:inset 0 0 0 3px #ffffffb0,0 0 0 2px #143d5626,0 10px 30px #123b5326;backdrop-filter:blur(4px)}
+.game-screen[data-game=alpineRush] .alpine-joystick[data-active=true]{cursor:grabbing;box-shadow:inset 0 0 0 3px #ff673b,0 0 0 2px #ff673b40,0 10px 30px #123b5326}
+.game-screen[data-game=alpineRush] .alpine-joy-arrow{position:absolute;top:50%;width:13px;height:13px;border:solid #123b53aa;border-width:3px 3px 0 0;pointer-events:none}
+.game-screen[data-game=alpineRush] .alpine-joy-arrow.left{left:14px;transform:translateY(-50%) rotate(-135deg)}
+.game-screen[data-game=alpineRush] .alpine-joy-arrow.right{right:14px;transform:translateY(-50%) rotate(45deg)}
+.game-screen[data-game=alpineRush] .alpine-knob{position:absolute;left:50%;top:50%;width:54px;height:54px;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;
+ background:radial-gradient(circle at 35% 30%,#2f6a8d,#123b53 70%);box-shadow:0 0 0 4px #ffffffcc,0 8px 18px #0d2c4140;transition:transform .08s}
+/* Action cluster: boost with four trick buttons on an arc around it */
+.game-screen[data-game=alpineRush] .alpine-actions{position:relative;width:210px;height:210px;flex:none}
+.game-screen[data-game=alpineRush] .alpine-actions .alpine-boost{position:absolute;right:0;bottom:0}
+.game-screen[data-game=alpineRush] .alpine-trick{position:absolute;width:54px;min-width:54px;height:54px;min-height:54px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;
+ background:#ffffffcc;color:#123b53;pointer-events:auto;touch-action:none;cursor:pointer;box-shadow:0 0 0 3px #ffffff80,0 6px 16px #123b5326;opacity:.6;transition:transform .12s,background .12s,opacity .12s}
+.game-screen[data-game=alpineRush] .alpine-trick svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.game-screen[data-game=alpineRush] .alpine-trick[data-trick=combo] svg{fill:currentColor;stroke:none}
+.game-screen[data-game=alpineRush] .alpine-trick[data-ready=true]{opacity:1;background:var(--a-orange);color:#fff;box-shadow:0 0 0 3px #fff,0 0 26px #ff673b99}
+.game-screen[data-game=alpineRush] .alpine-trick:active{transform:scale(.92)}
+.game-screen[data-game=alpineRush] .alpine-trick:focus-visible{outline:3px solid var(--a-orange);outline-offset:5px}
+.game-screen[data-game=alpineRush] .alpine-trick[data-slot="0"]{left:137px;top:29px}
+.game-screen[data-game=alpineRush] .alpine-trick[data-slot="1"]{left:83px;top:43.5px}
+.game-screen[data-game=alpineRush] .alpine-trick[data-slot="2"]{left:43.5px;top:83px}
+.game-screen[data-game=alpineRush] .alpine-trick[data-slot="3"]{left:29px;top:137px}
+.game-screen[data-game=alpineRush][data-crashed=true] .alpine-vignette{opacity:.55;background:radial-gradient(circle,transparent 45%,#ff673b55)}
+.game-screen[data-game=alpineRush][data-alpine-dusk=true] .alpine-hud{color:#fff;text-shadow:0 1px 8px #0d1d3366}
+.game-screen[data-game=alpineRush][data-alpine-dusk=true] :is(.alpine-of,.alpine-track-line,.alpine-time small,.alpine-distance small){color:#e3e9f4}
+.game-screen[data-game=alpineRush][data-alpine-dusk=true] .alpine-brand{color:#fff}
+.game-screen[data-game=alpineRush][data-alpine-dusk=true] .alpine-brand svg{fill:#fff}
 /* Phase visibility */
 .game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-intro,
 .game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-world-label,
@@ -162,7 +197,20 @@
  .game-screen[data-game=alpineRush] .alpine-boost{width:76px;min-width:76px;height:76px;min-height:76px}
  .game-screen[data-game=alpineRush] .alpine-steer-hint{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;gap:20px;margin:0}
  .game-screen[data-game=alpineRush] .alpine-steer-hint span:first-child,.game-screen[data-game=alpineRush] .alpine-steer-hint span:last-child{font-size:20px}
- .game-screen[data-game=alpineRush] .alpine-callout{top:29%;width:90%}
+ .game-screen[data-game=alpineRush] .alpine-callout{top:23%;width:90%}
+ .game-screen[data-game=alpineRush] .alpine-tally{position:absolute;right:0;top:78px;flex-direction:row;gap:6px}
+ .game-screen[data-game=alpineRush] .alpine-tally>span{font-size:14px;min-width:0;padding:4px 10px 4px 5px}
+ .game-screen[data-game=alpineRush] .alpine-tally svg{width:19px;height:19px}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:124px}
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:112px;height:112px}
+ .game-screen[data-game=alpineRush] .alpine-knob{width:48px;height:48px}
+ .game-screen[data-game=alpineRush] .alpine-actions{width:180px;height:180px}
+ .game-screen[data-game=alpineRush] .alpine-trick{width:48px;min-width:48px;height:48px;min-height:48px}
+ .game-screen[data-game=alpineRush] .alpine-trick svg{width:23px;height:23px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="0"]{left:118px;top:26px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="1"]{left:72px;top:38.3px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="2"]{left:38.3px;top:72px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="3"]{left:26px;top:118px}
  .game-screen[data-game=alpineRush] .alpine-callout b{font-size:26px}.game-screen[data-game=alpineRush] .alpine-callout span{font-size:10px}
 }
 /* Short landscape screens (phone held sideways) */
@@ -186,7 +234,20 @@
  .game-screen[data-game=alpineRush] .alpine-boost{width:66px;min-width:66px;height:66px;min-height:66px}
  .game-screen[data-game=alpineRush] .alpine-boost svg{width:22px;height:22px}
  .game-screen[data-game=alpineRush] .alpine-boost small{display:none}
- .game-screen[data-game=alpineRush] .alpine-callout{top:44%}
+ .game-screen[data-game=alpineRush] .alpine-callout{top:37%}
+ .game-screen[data-game=alpineRush] .alpine-tally{flex-direction:row}
+ .game-screen[data-game=alpineRush] .alpine-tally>span{font-size:15px;min-width:0}
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:100px;height:100px}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:108px;gap:2px}
+ .game-screen[data-game=alpineRush] .alpine-speed-bars{display:none}
+ .game-screen[data-game=alpineRush] .alpine-knob{width:44px;height:44px}
+ .game-screen[data-game=alpineRush] .alpine-actions{width:160px;height:160px}
+ .game-screen[data-game=alpineRush] .alpine-trick{width:44px;min-width:44px;height:44px;min-height:44px}
+ .game-screen[data-game=alpineRush] .alpine-trick svg{width:21px;height:21px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="0"]{left:105px;top:25px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="1"]{left:65px;top:35.7px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="2"]{left:35.7px;top:65px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="3"]{left:25px;top:105px}
  .game-screen[data-game=alpineRush] .alpine-callout b{font-size:24px}
 }
 @media(prefers-reduced-motion:reduce){

@@ -7,6 +7,15 @@ const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
 const BOLT = '<path d="m14 2-9 12h6l-1 8 9-13h-6l1-7Z"/>';
 const CHEVRON = '<path d="m15 5-7 7 7 7"/>';
+const COIN = '<circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/>';
+const STAR = '<path d="m12 3 2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4l-5.3 3 1.2-6-4.5-4.1 6-.7Z"/>';
+const TRICK_ICONS = {
+  grab: '<path d="M8 13V6a1.5 1.5 0 0 1 3 0v5m0 0V4.5a1.5 1.5 0 0 1 3 0V11m0 0V6a1.5 1.5 0 0 1 3 0v7a6 6 0 0 1-6 6h-1a5 5 0 0 1-4.6-3L4 12.5a1.5 1.5 0 0 1 2.6-1.4L8 13"/>',
+  spin: '<path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/>',
+  flip: '<path d="M7 19V10a5 5 0 0 1 10 0v3m-3-2 3 3 3-3"/>',
+  combo: STAR,
+};
+const TRICK_NAMES = {grab: 'GRAB', spin: 'SPIN 360', flip: 'BACKFLIP', combo: 'COMBO'};
 
 /** Controller for one Alpine Rush session: owns the engine, the view, requestAnimationFrame,
  * input, audio and the HUD. The island engine owns rewards; this file only reports the
@@ -61,7 +70,11 @@ export function runAlpineSession(ctx) {
   const distance = el('b', 'alpine-distance'), distanceValue = ltr('0'); distance.append(distanceValue, ' ', el('small', '', t('alpine.toFinish')));
   const progress = el('div', 'alpine-progress'), progressFill = el('span'); progress.append(progressFill); info.append(trackLine, distance, progress);
   const time = el('div', 'alpine-time'), timer = ltr('00:00.00'); time.append(el('small', '', t('alpine.raceTime')), timer);
-  hud.append(position, info, time);
+  // Trick score and coins collected.
+  const tally = el('div', 'alpine-tally'), scoreBox = el('span', 'alpine-score'), scoreValue = ltr('0'), coinBox = el('span', 'alpine-coins'), coinValue = ltr('0');
+  scoreBox.append(svg(STAR), scoreValue); scoreBox.setAttribute('aria-label', t('alpine.score')); coinBox.append(svg(COIN), coinValue); coinBox.setAttribute('aria-label', t('alpine.coins'));
+  tally.append(scoreBox, coinBox);
+  hud.append(position, info, time, tally);
   // Opening card
   const intro = el('section', 'alpine-intro'); intro.setAttribute('aria-label', t('alpine.opening'));
   const title = el('h1', 'alpine-title'); title.dir = 'ltr'; title.append('ALPINE', el('br'), el('em', '', 'RUSH.'));
@@ -87,15 +100,27 @@ export function runAlpineSession(ctx) {
   const boostButton = el('button', 'alpine-boost'); boostButton.type = 'button'; boostButton.dataset.gameControl = 'boost'; boostButton.dataset.action = 'alpine-boost';
   boostButton.setAttribute('aria-label', t('alpine.boost')); boostButton.setAttribute('aria-keyshortcuts', 'Space');
   boostButton.append(svg(BOLT), el('b', '', t('alpine.boost')), el('small', '', 'SPACE'));
-  footer.append(speed, hint, boostButton);
+  // Joystick (left) and the action cluster: boost with four trick buttons around it (right).
+  const joystick = el('div', 'alpine-joystick'); joystick.dataset.gameControl = 'joystick'; joystick.setAttribute('role', 'slider'); joystick.setAttribute('aria-label', t('alpine.joystick')); joystick.setAttribute('aria-valuemin', '-1'); joystick.setAttribute('aria-valuemax', '1'); joystick.setAttribute('aria-valuenow', '0');
+  const knob = el('span', 'alpine-knob'); knob.dataset.joystickKnob = ''; joystick.append(el('i', 'alpine-joy-arrow left'), el('i', 'alpine-joy-arrow right'), knob);
+  const actions = el('div', 'alpine-actions'), trickButtons = [];
+  ['grab', 'spin', 'flip', 'combo'].forEach((id, i) => {
+    const b = el('button', 'alpine-trick'); b.type = 'button'; b.dataset.trick = id; b.dataset.action = 'alpine-trick'; b.dataset.slot = String(3 - i); b.dataset.ready = 'false';
+    b.setAttribute('aria-label', t(`alpine.trick.${id}`)); b.setAttribute('aria-keyshortcuts', String(i + 1)); b.title = t(`alpine.trick.${id}`);
+    b.append(svg(TRICK_ICONS[id])); trickButtons.push(b); actions.append(b);
+  });
+  actions.append(boostButton);
+  const center = el('div', 'alpine-center'); center.append(speed, hint);
+  footer.append(joystick, center, actions);
   stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading);
   controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css); stage.append(app);
   dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, app]};
+  screen.dataset.alpineDusk = String(!!track.visual?.dusk);
   const setPhase = phase => { app.dataset.phase = phase; screen.dataset.alpinePhase = phase; };
   setPhase('menu');
   canvas.setAttribute('aria-label', t('alpine.canvas'));
 
-  input = createAlpineControls({canvas, boostButton, config: {...balance.controls, trackHalfWidth: balance.physics.trackHalfWidth}});
+  input = createAlpineControls({canvas, boostButton, joystick, trickButtons, config: {...balance.controls, trackHalfWidth: engine.pipe.lip - .3}});
   input.setEnabled(!paused);
   startButton.addEventListener('click', () => { if (session.start()) { setPhase('countdown'); canvas.focus({preventScroll: true}); } }, {signal: abort.signal});
   screen.addEventListener('pointerdown', () => audio.unlock(), {capture: true, signal: abort.signal});
@@ -110,7 +135,7 @@ export function runAlpineSession(ctx) {
   if (params.get('quality') === 'low') quality = 'low';
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; fail(t('alpine.loadSlow')); } }, 25000);
-  import('./alpine-view.mjs?v=island-alpine-20261026-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(loaded => {
+  import('./alpine-view.mjs?v=island-alpine-20261026-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(loaded => {
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
     clearTimeout(loadTimer); view = loaded; loading.hidden = true; startButton.disabled = false; app.dataset.render = loaded.mode;
@@ -122,7 +147,8 @@ export function runAlpineSession(ctx) {
   });
 
   const CALLOUTS = {takeoff: 'air', collision: 'hit', boost: 'boost', pad: 'pad', overtake: 'overtake', gate: 'gate'};
-  function showCallout(kind, now) { calloutKicker.textContent = t(`alpine.callout.${kind}.kicker`); calloutLine.textContent = t(`alpine.callout.${kind}`); callout.hidden = false; callout.dataset.kind = kind; calloutUntil = now + (kind === 'gate' ? .8 : 1.3); }
+  function showCallout(kind, now, kicker, line) { calloutKicker.textContent = kicker ?? t(`alpine.callout.${kind}.kicker`); calloutLine.textContent = line ?? t(`alpine.callout.${kind}`); callout.hidden = false; callout.dataset.kind = kind; calloutUntil = now + (kind === 'gate' ? .8 : 1.3); }
+  let coinPulse = 0;
   function handleEvents(snap, now) {
     for (const e of engine.drainEvents()) {
       if (e.type === 'countdown') { audio.cue(e.value > 0 ? 'countdown' : 'go'); if (e.value > 0) ctx.sound?.('button'); continue; }
@@ -131,12 +157,16 @@ export function runAlpineSession(ctx) {
       else if (e.type === 'collision') { audio.cue('hit'); showCallout(CALLOUTS.collision, now); }
       else if (e.type === 'takeoff') { audio.cue('takeoff'); showCallout(CALLOUTS.takeoff, now); }
       else if (e.type === 'land') audio.cue('land');
+      else if (e.type === 'trick-start') audio.cue('trickStart');
+      else if (e.type === 'trick') { audio.cue('trick'); showCallout('trick', now, TRICK_NAMES[e.objectId] + (e.count > 1 ? ` ×${e.count}` : ''), t('alpine.callout.trick', {points: e.value})); status.textContent = t('alpine.status.trick', {points: e.value}); }
+      else if (e.type === 'crash') { audio.cue('crash'); showCallout('crash', now); status.textContent = t('alpine.callout.crash'); }
+      else if (e.type === 'coin') { audio.cue('coin'); coinPulse = now + .25; }
       else if (e.type === 'gate') { audio.cue('gate'); if (now > calloutUntil) showCallout(CALLOUTS.gate, now); }
       else if (e.type === 'overtake') { audio.cue('overtake'); if (now > calloutUntil) showCallout(CALLOUTS.overtake, now); status.textContent = t('alpine.status.rank', {rank: snap.rank}); }
       else if (e.type === 'finish') audio.cue('finish');
     }
   }
-  let shownRank = '', shownSpeed = '', shownTime = '', shownCount = '';
+  let shownRank = '', shownSpeed = '', shownTime = '', shownCount = '', shownScore = '', shownCoins = '';
   function updateHud(snap) {
     const r = String(snap.rank).padStart(2, '0'); if (r !== shownRank) { shownRank = r; rank.textContent = r; }
     distanceValue.textContent = Math.round(snap.remainingM).toLocaleString('en-US');
@@ -150,6 +180,11 @@ export function runAlpineSession(ctx) {
     const count = snap.phase === 'countdown' ? String(snap.countdown) : ''; if (count !== shownCount) { shownCount = count; countdown.textContent = count; countdown.hidden = !count; }
     screen.dataset.boosting = String(!!snap.player.boosting); screen.dataset.hit = String(!!snap.player.hit);
     hint.hidden = snap.timeMs > 6000;
+    const score = (snap.score ?? 0).toLocaleString('en-US'); if (score !== shownScore) { shownScore = score; scoreValue.textContent = score; }
+    const coinText = String(snap.coins ?? 0); if (coinText !== shownCoins) { shownCoins = coinText; coinValue.textContent = coinText; }
+    coinBox.classList.toggle('pulse', snap.timeMs / 1000 < coinPulse);
+    const ready = String(!!snap.trickReady); for (const b of trickButtons) if (b.dataset.ready !== ready) b.dataset.ready = ready;
+    screen.dataset.crashed = String(!!snap.player.crashed);
   }
 
   function tick(at) {
@@ -160,6 +195,7 @@ export function runAlpineSession(ctx) {
       const sample = input.sample(lastSnapshot.player);
       engine.command({type: 'steer', value: sample.steer});
       if (sample.boost) engine.command({type: 'boost'});
+      if (sample.trick) engine.command({type: 'trick', id: sample.trick});
       engine.step(dt);
       if (ms > 0 && engine.phase === 'racing') { frames++; frameMs += ms; if (frames >= balance.render.qualitySampleFrames) { if (quality === 'high' && frameMs / frames > balance.render.slowFrameMs) { quality = 'low'; view.setQuality('low'); } frames = 0; frameMs = 0; } }
     }
@@ -173,7 +209,7 @@ export function runAlpineSession(ctx) {
       finished = true;
       const r = snap.result;
       recordOutcome = recordRun(storage, balance.records, records, r);
-      const summary = {...r, trackName, bestMs: recordOutcome.best?.ms ?? null, newBest: recordOutcome.newBest};
+      const summary = {...r, trackName, coinTotal: engine.course.coins, bestMs: recordOutcome.best?.ms ?? null, newBest: recordOutcome.newBest};
       ctx.onAlpineSummary?.(summary);
       const settled = ctx.finish({outcome: r.won ? 'win' : 'lose', score: r.score, alpine: {...r}});
       if (settled && settled.ok === false && !disposed) { ctx.onError?.(settled.reason); ctx.cancel(); }

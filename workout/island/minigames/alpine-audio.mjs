@@ -8,6 +8,7 @@ export function createAlpineAudio({storage = globalThis.localStorage, AudioConte
     countdown: [660, 660, .12, 'sine', .5], go: [880, 1320, .3, 'triangle', .55], boost: [380, 1400, .5, 'noise', .7], gate: [990, 1480, .16, 'sine', .45],
     takeoff: [500, 900, .18, 'triangle', .35], land: [180, 70, .2, 'noise', .7], hit: [140, 55, .28, 'square', .45], overtake: [740, 990, .14, 'sine', .35],
     finish: [523, 1046, .7, 'triangle', .6],
+    trickStart: [420, 640, .12, 'sine', .25], trick: [660, 1320, .38, 'triangle', .5], crash: [240, 55, .5, 'noise', .85], coin: [1320, 1980, .09, 'sine', .3],
   };
   function readMute() { try { muted = storage?.getItem('island.sound') === 'off'; } catch {} }
   function set(param, value, time, constant = .06) { try { param.setTargetAtTime(value, time, constant); } catch { try { param.value = value; } catch {} } }

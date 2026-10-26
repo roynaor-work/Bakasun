@@ -11160,7 +11160,6 @@
     "lateralSpeed": 8.5,
     "lateralResponse": 9,
     "airControl": 0.4,
-    "trackHalfWidth": 8.4,
     "hitSpeedLoss": 0.35,
     "recoverySeconds": 1,
     "hitGraceSeconds": 0.35,
@@ -11198,6 +11197,54 @@
     },
     "viewAhead": 230,
     "viewBehind": 20,
+    "pipe": {
+     "flatHalf": 6.5,
+     "radius": 4.2,
+     "maxAngle": 70
+    },
+    "pathRunout": 340,
+    "wallGravity": 9,
+    "wallSpeedFactor": 0.95,
+    "turnPush": 2.5,
+    "lipLaunchSpeed": 2.5,
+    "lipLaunchFactor": 1.0,
+    "lipKick": 2.6,
+    "pipeReturnSpeed": 6,
+    "aiWallCost": 1.2,
+    "tricks": {
+     "grab": {
+      "seconds": 0.45,
+      "points": 150
+     },
+     "spin": {
+      "seconds": 0.7,
+      "points": 300
+     },
+     "flip": {
+      "seconds": 0.85,
+      "points": 450
+     },
+     "combo": {
+      "seconds": 1.05,
+      "points": 700
+     }
+    },
+    "trickLandWindow": 0.8,
+    "crashSpeedLoss": 0.55,
+    "crashSeconds": 1.4,
+    "comboBonus": 0.5,
+    "trickCharge": 0.12,
+    "maxTrickScore": 60000,
+    "coins": {
+     "perLine": 5,
+     "spacing": 2.8,
+     "lineStart": 13,
+     "centre": 0.85,
+     "reach": 1.1,
+     "depth": 0.9,
+     "height": 1.2,
+     "value": 1
+    },
     "grid": [
      {
       "s": 0,
@@ -11243,7 +11290,7 @@
       7
      ],
      "reachFactor": 0.75,
-     "corridorLimit": 5.5,
+     "corridorLimit": 4.2,
      "rockPitch": 3.4,
      "rockDensity": 0.7,
      "rockRadius": [
@@ -11254,6 +11301,40 @@
      "slalomStep": 14,
      "rampRockDistance": 7,
      "landingClearance": 46,
+     "turns": {
+      "firstStraight": [
+       120,
+       150
+      ],
+      "radius": [
+       110,
+       170
+      ],
+      "length": [
+       50,
+       95
+      ],
+      "straight": [
+       45,
+       90
+      ],
+      "transition": 18,
+      "alternate": 0.7
+     },
+     "grade": [
+      0.1,
+      0.17
+     ],
+     "wallCoins": 0.45,
+     "visual": {
+      "sky": "#a9dcf2",
+      "fog": "#c5e4ef",
+      "fogNear": 65,
+      "fogFar": 250,
+      "snow": 0.35,
+      "light": 1,
+      "trees": 1
+     },
      "opening": [
       "gate",
       "pad",
@@ -11285,7 +11366,7 @@
       5.6
      ],
      "reachFactor": 0.75,
-     "corridorLimit": 5.8,
+     "corridorLimit": 4.3,
      "rockPitch": 3.2,
      "rockDensity": 0.75,
      "rockRadius": [
@@ -11296,6 +11377,40 @@
      "slalomStep": 14,
      "rampRockDistance": 7,
      "landingClearance": 48,
+     "turns": {
+      "firstStraight": [
+       90,
+       120
+      ],
+      "radius": [
+       85,
+       140
+      ],
+      "length": [
+       55,
+       110
+      ],
+      "straight": [
+       35,
+       75
+      ],
+      "transition": 16,
+      "alternate": 0.75
+     },
+     "grade": [
+      0.12,
+      0.2
+     ],
+     "wallCoins": 0.5,
+     "visual": {
+      "sky": "#9fcde3",
+      "fog": "#bfdbe7",
+      "fogNear": 50,
+      "fogFar": 220,
+      "snow": 0.6,
+      "light": 0.92,
+      "trees": 1.7
+     },
      "opening": [
       "gate",
       "rocks"
@@ -11326,7 +11441,7 @@
       5
      ],
      "reachFactor": 0.72,
-     "corridorLimit": 5.8,
+     "corridorLimit": 4.3,
      "rockPitch": 3,
      "rockDensity": 0.85,
      "rockRadius": [
@@ -11337,6 +11452,43 @@
      "slalomStep": 14,
      "rampRockDistance": 7,
      "landingClearance": 50,
+     "turns": {
+      "firstStraight": [
+       90,
+       120
+      ],
+      "radius": [
+       70,
+       120
+      ],
+      "length": [
+       60,
+       120
+      ],
+      "straight": [
+       30,
+       70
+      ],
+      "transition": 15,
+      "alternate": 0.8
+     },
+     "grade": [
+      0.14,
+      0.24
+     ],
+     "wallCoins": 0.55,
+     "visual": {
+      "sky": "#4d5f80",
+      "fog": "#a3949f",
+      "horizon": "#e7a47f",
+      "sun": "#ffb07a",
+      "dusk": true,
+      "fogNear": 32,
+      "fogFar": 185,
+      "snow": 1,
+      "light": 0.72,
+      "trees": 1.2
+     },
      "opening": [
       "pad",
       "ramp"
@@ -11372,7 +11524,9 @@
        "boostTank": 0.9,
        "padDesire": 4,
        "rampDesire": 2,
-       "gateDesire": 0
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
       },
       {
        "speed": 0.96,
@@ -11385,7 +11539,9 @@
        "boostTank": 0.9,
        "padDesire": 4,
        "rampDesire": 2,
-       "gateDesire": 0
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
       },
       {
        "speed": 0.95,
@@ -11398,7 +11554,9 @@
        "boostTank": 0.9,
        "padDesire": 4,
        "rampDesire": 2,
-       "gateDesire": 0
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
       },
       {
        "speed": 0.94,
@@ -11411,7 +11569,9 @@
        "boostTank": 0.9,
        "padDesire": 4,
        "rampDesire": 2,
-       "gateDesire": 0
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
       },
       {
        "speed": 0.93,
@@ -11424,7 +11584,9 @@
        "boostTank": 0.9,
        "padDesire": 4,
        "rampDesire": 2,
-       "gateDesire": 0
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
       }
      ]
     },
@@ -11448,7 +11610,9 @@
        "boostTank": 0.9,
        "padDesire": 4,
        "rampDesire": 2,
-       "gateDesire": 0
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
       },
       {
        "speed": 0.995,
@@ -11461,7 +11625,9 @@
        "boostTank": 0.9,
        "padDesire": 4,
        "rampDesire": 2,
-       "gateDesire": 0
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
       },
       {
        "speed": 0.99,
@@ -11474,7 +11640,9 @@
        "boostTank": 0.9,
        "padDesire": 4,
        "rampDesire": 2,
-       "gateDesire": 0
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
       },
       {
        "speed": 0.98,
@@ -11487,7 +11655,9 @@
        "boostTank": 0.9,
        "padDesire": 4,
        "rampDesire": 2,
-       "gateDesire": 0
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
       },
       {
        "speed": 0.97,
@@ -11500,7 +11670,9 @@
        "boostTank": 0.9,
        "padDesire": 4,
        "rampDesire": 2,
-       "gateDesire": 0
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
       }
      ]
     },
@@ -11520,63 +11692,73 @@
        "error": 0.3,
        "mistakeRate": 0.03,
        "margin": 0.35,
-       "boostChance": 0.6,
-       "boostTank": 0.95,
+       "boostChance": 0.65,
+       "boostTank": 0.9,
        "padDesire": 6,
        "rampDesire": 4,
-       "gateDesire": 1.5
+       "gateDesire": 1.5,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
       },
       {
-       "speed": 0.98,
+       "speed": 0.985,
        "reaction": 0.24,
        "lookahead": 52,
        "error": 0.35,
        "mistakeRate": 0.035,
        "margin": 0.35,
-       "boostChance": 0.6,
-       "boostTank": 0.95,
+       "boostChance": 0.65,
+       "boostTank": 0.9,
        "padDesire": 6,
        "rampDesire": 4,
-       "gateDesire": 1.5
+       "gateDesire": 1.5,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
       },
       {
-       "speed": 0.975,
+       "speed": 0.98,
        "reaction": 0.26,
        "lookahead": 50,
        "error": 0.4,
        "mistakeRate": 0.04,
        "margin": 0.3,
-       "boostChance": 0.55,
-       "boostTank": 0.95,
+       "boostChance": 0.6,
+       "boostTank": 0.9,
        "padDesire": 5,
        "rampDesire": 3,
-       "gateDesire": 1.5
+       "gateDesire": 1.5,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
       },
       {
-       "speed": 0.97,
+       "speed": 0.975,
        "reaction": 0.28,
        "lookahead": 48,
        "error": 0.45,
        "mistakeRate": 0.045,
        "margin": 0.3,
-       "boostChance": 0.5,
-       "boostTank": 0.95,
+       "boostChance": 0.55,
+       "boostTank": 0.9,
        "padDesire": 5,
        "rampDesire": 3,
-       "gateDesire": 1
+       "gateDesire": 1,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
       },
       {
-       "speed": 0.965,
+       "speed": 0.97,
        "reaction": 0.3,
        "lookahead": 46,
        "error": 0.5,
        "mistakeRate": 0.05,
        "margin": 0.25,
-       "boostChance": 0.5,
-       "boostTank": 0.95,
+       "boostChance": 0.55,
+       "boostTank": 0.9,
        "padDesire": 5,
        "rampDesire": 3,
-       "gateDesire": 1
+       "gateDesire": 1,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
       }
      ]
     }
