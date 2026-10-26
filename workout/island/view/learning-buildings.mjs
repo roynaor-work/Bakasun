@@ -1,5 +1,5 @@
-import {registerBuildingVisual} from './buildings.mjs?v=island-clean-ui-20261026-1';
-import {primitive as part} from './environment.mjs?v=island-clean-ui-20261026-1';
+import {registerBuildingVisual} from './buildings.mjs?v=island-city-finish-20261027-1';
+import {primitive as part} from './environment.mjs?v=island-city-finish-20261027-1';
 const block=(g,c,p,s)=>part(g,'box',c,p,s);
 for(const kind of ['library','mathLab','zoo','puzzleRoom'])registerBuildingVisual(kind,(g,v,w,d,h)=>{
   block(g,'#fff4dc',[0,.07,0],[w*.96,.14,d*.96]);
