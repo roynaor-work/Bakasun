@@ -1,12 +1,12 @@
-import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-citydetail-20261025-2';
-import {createNavalImpacts} from './naval-impacts.mjs?v=island-citydetail-20261025-2';
+import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-people-scale-20261026-1';
+import {createNavalImpacts} from './naval-impacts.mjs?v=island-people-scale-20261026-1';
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-citydetail-20261025-2';
-import {createNavalEffects} from './g6d-effects.mjs?v=island-citydetail-20261025-2';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-citydetail-20261025-2';
-import {createNavalScenery} from './naval-scenery.mjs?v=island-citydetail-20261025-2';
-import {createNavalEnvironment} from './naval-environment.mjs?v=island-citydetail-20261025-2';
+import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-people-scale-20261026-1';
+import {createNavalEffects} from './g6d-effects.mjs?v=island-people-scale-20261026-1';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-people-scale-20261026-1';
+import {createNavalScenery} from './naval-scenery.mjs?v=island-people-scale-20261026-1';
+import {createNavalEnvironment} from './naval-environment.mjs?v=island-people-scale-20261026-1';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */
