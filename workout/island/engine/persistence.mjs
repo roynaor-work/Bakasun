@@ -1,18 +1,19 @@
-import {initialCity, validCity, productionTier} from './city-depth.mjs?v=island-people-scale-20261026-1';
-import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-people-scale-20261026-1';
-import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-people-scale-20261026-1';
-import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-people-scale-20261026-1';
-import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-people-scale-20261026-1';
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-people-scale-20261026-1';
-import {withCityHall} from './city-hall.mjs?v=island-people-scale-20261026-1';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-people-scale-20261026-1';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-people-scale-20261026-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=island-people-scale-20261026-1';
-import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-people-scale-20261026-1';
-import { cellsFor } from './rules.mjs?v=island-people-scale-20261026-1';
-import {repairHarbors} from './placement-help.mjs?v=island-people-scale-20261026-1';
-import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-people-scale-20261026-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-people-scale-20261026-1';
+import {initialCity, validCity, productionTier} from './city-depth.mjs?v=island-ready-plots-20261026-1';
+import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-ready-plots-20261026-1';
+import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-ready-plots-20261026-1';
+import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-ready-plots-20261026-1';
+import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-ready-plots-20261026-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-ready-plots-20261026-1';
+import {withCityHall} from './city-hall.mjs?v=island-ready-plots-20261026-1';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-ready-plots-20261026-1';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-ready-plots-20261026-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=island-ready-plots-20261026-1';
+import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-ready-plots-20261026-1';
+import { cellsFor } from './rules.mjs?v=island-ready-plots-20261026-1';
+import {repairHarbors} from './placement-help.mjs?v=island-ready-plots-20261026-1';
+import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-ready-plots-20261026-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-ready-plots-20261026-1';
+import {validReadyPlan,prepareReadyPlan} from './ready-plots.mjs?v=island-ready-plots-20261026-1';
 
 export const CURRENT_VERSION = 18;
 export const STORAGE_KEY = 'island.v1';
@@ -96,6 +97,8 @@ export const migrations = {
 
 export function migrateSave(value, data, registry) {
   if (!isObject(value)) return { ok: false, reason: 'reason.invalid' };
+  // A present damaged optional subformat cannot disappear through JSON cloning.
+  if (Object.hasOwn(value,'readyPlan') && value.readyPlan === undefined) return {ok:false,reason:'reason.invalid'};
   let state;
   try { state = clone(value); } catch { return { ok: false, reason: 'reason.invalid' }; }
   if (state.version == null && Array.isArray(state.buildings)) state.version = 1;
@@ -130,7 +133,10 @@ export function validateSave(state, data, registry) {
   if(!validHangar(state?.hangar,data.config.minigames.alienDefense.hangar))return invalid();
   if (!isObject(state) || state.version !== CURRENT_VERSION || !finitePositive(state.money) || !isObject(state.resources)) return invalid();
   if (!Object.keys(data.config.startingResources).every(key => finitePositive(state.resources[key]))) return invalid();
-  if (!isObject(state.world) || !data.config.worldStages.some(row => row.size === state.world.size) || !Number.isInteger(state.world.stage) || state.world.stage < 0 || state.world.stage >= data.config.worldStages.length || data.config.worldStages[state.world.stage].size !== state.world.size) return invalid();
+  const ready=Object.hasOwn(state,'readyPlan');
+  if (!isObject(state.world) || !Number.isInteger(state.world.stage) || state.world.stage < 0 || state.world.stage >= data.config.worldStages.length) return invalid();
+  const ordinarySize=data.config.worldStages[state.world.stage].size,readySize=ready?data.config.readyWorldStages?.[state.world.stage]?.size:undefined;
+  if (state.world.size!==ordinarySize && (!ready || !Number.isInteger(readySize) || state.world.size!==readySize)) return invalid();
   if (!Array.isArray(state.buildings) || state.buildings.length > data.config.maxSaveBuildings) return invalid();
   if (state.buildings.filter(row=>row?.typeId==='cityHall').length!==1) return invalid();
   const ids = new Set(), occupied = new Set();
@@ -144,6 +150,7 @@ export function validateSave(state, data, registry) {
       occupied.add(key);
     }
   }
+  if (ready && (state.readyPlan === undefined || !validReadyPlan(state.readyPlan,state,registry))) return invalid();
   if (!isObject(state.avatar) || typeof state.avatar.created !== 'boolean' || !data.avatar.genders.some(row => row.id === state.avatar.gender) || !data.avatar.hairstyles.some(row => row.id === state.avatar.hairstyle)) return invalid();
   if (!['skinColor', 'hairColor', 'shirtColor', 'pantsColor'].every(key => validColor(state.avatar[key]))) return invalid();
   if (typeof state.avatar.nameId !== 'string' || (state.avatar.name != null && (typeof state.avatar.name !== 'string' || state.avatar.name.length > 30))) return invalid();
@@ -224,7 +231,12 @@ export function importWorld(raw, current, data, registry) {
   }
   merged.cityManagement.nextZoneId=Math.max(merged.cityManagement.nextZoneId,incoming.cityManagement.nextZoneId);
   merged.cityManagement.developed=Math.max(merged.cityManagement.developed,incoming.cityManagement.developed);
-  if (incoming.world.size > merged.world.size) merged.world = clone(incoming.world);
+  if (incoming.world.size > merged.world.size) {
+    merged.world = clone(incoming.world);
+    // Importing a larger prepared city needs its land, but its lot layout must
+    // not overwrite the local city. Prepare local reservations after buildings.
+    if (!Object.hasOwn(merged,'readyPlan') && Object.hasOwn(incoming,'readyPlan')) merged.readyPlan={version:1,lots:[]};
+  }
   const occupied = new Set(merged.buildings.flatMap(row => cellsFor(registry.buildings.get(row.typeId), row.x, row.z).map(cell => cell.join(','))));
   const ids = new Set(merged.buildings.map(row => row.id));
   let added = 0, conflicts = 0;
@@ -245,9 +257,10 @@ export function importWorld(raw, current, data, registry) {
   merged.money = Math.max(merged.money, incoming.money);
   for (const resource of Object.keys(merged.resources)) merged.resources[resource] = Math.max(merged.resources[resource], incoming.resources[resource]);
   for (const [group, count] of Object.entries(incoming.parts)) merged.parts[group] = Math.max(merged.parts[group] || 0, count);
-  data.config.worldStages.forEach((stage, index) => {
-    if (index > merged.world.stage && (merged.parts[data.world.partGroup] || 0) >= stage.requiredParts) merged.world = { size: stage.size, stage: index };
-  });
+  const stages=Object.hasOwn(merged,'readyPlan')?(data.config.readyWorldStages||data.config.worldStages):data.config.worldStages;
+  let stage=Math.max(merged.world.stage,current.world.stage,incoming.world.stage);
+  stages.forEach((row,index)=>{if(index>stage && (merged.parts[data.world.partGroup]||0)>=row.requiredParts)stage=index;});
+  merged.world={...merged.world,stage,size:stages[stage].size};
   for (const key of ['claimedRewards', 'completedMissions', 'completedEpisodes']) merged[key] = [...new Set([...merged[key], ...incoming[key]])];
   if (incoming.tutorial.step > merged.tutorial.step) merged.tutorial = clone(incoming.tutorial);
   merged.tutorial.completed ||= incoming.tutorial.completed;
@@ -274,6 +287,13 @@ export function importWorld(raw, current, data, registry) {
   mergeLearning(merged.learning,incoming.learning,{restoreSettings:Object.hasOwn(parsed,'learning')});
   for(let i=0;i<merged.fireCertificates.length;i++)if(incoming.fireCertificates[i]&&(!merged.fireCertificates[i]||incoming.fireCertificates[i].stars>merged.fireCertificates[i].stars))merged.fireCertificates[i]=clone(incoming.fireCertificates[i]);
   for(const key of ['rapid','shield','coins'])merged.hangar[key]=Math.max(current.hangar[key],incoming.hangar[key]);merged.hangar.spent=merged.hangar.rapid+merged.hangar.shield;merged.hangar.credits=Math.max(0,Math.max(current.hangar.credits+current.hangar.spent,incoming.hangar.credits+incoming.hangar.spent)-merged.hangar.spent);
+
+  if(Object.hasOwn(merged,'readyPlan')){
+    // Reservations never remove imported buildings. Blocked lots keep their
+    // identity and coordinates; append-only preparation offers a free option.
+    repairHarbors(merged,registry,data.featureFlags);
+    prepareReadyPlan(merged,registry,data.featureFlags);
+  }
 
   merged.updatedAt = Date.now();
   const validation = validateSave(merged, data, registry);

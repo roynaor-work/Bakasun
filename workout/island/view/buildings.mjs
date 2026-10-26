@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import { primitive as part, material, makeTree } from './environment.mjs?v=island-people-scale-20261026-1';
-import { batchMeshes } from './batch.mjs?v=island-people-scale-20261026-1';
+import { primitive as part, material, makeTree } from './environment.mjs?v=island-ready-plots-20261026-1';
+import { batchMeshes } from './batch.mjs?v=island-ready-plots-20261026-1';
 
 // A visual kind is an independent extension point. Building IDs never select
 // geometry; two data records can share a visual, or register their own renderer.
@@ -391,6 +391,30 @@ registerBuildingVisual('airbase',(g,v,w,d,h)=>{
 });
 registerBuildingVisual('park',park);
 registerBuildingVisual('waterTower',waterTower);
+registerBuildingVisual('powerPlant',(g,v,w,d,h)=>{
+  base(g,w,d,'#bdc6bc');
+  const room=new T.Group();room.position.set(-w*.2,0,-d*.06);g.add(room);
+  block(room,v.color,[0,h*.36,0],[w*.42,h*.72,d*.63]);
+  block(room,v.roofColor,[0,h*.76,0],[w*.46,.09,d*.68]);
+  windows(room,w*.42,d*.63,h*.42,2,C.glass,{doorX:0});
+  // Transformers, ceramic insulators and solar collectors give the utility a
+  // distinct silhouette while sharing the existing architectural mesh batch.
+  for(const z of [-d*.22,d*.19]){
+    block(g,'#6b8290',[w*.22,.35,z],[w*.3,.55,d*.27]);
+    for(let i=-2;i<=2;i++)block(g,'#b3c0bb',[w*.22+i*w*.045,.35,z+d*.15],[.035,.43,.055]);
+    for(const x of [w*.15,w*.3]){
+      part(g,'cylinder','#e2e4cf',[x,.72,z],[.085,.25,.085]);
+      for(const y of [.65,.72,.79])part(g,'cylinder','#a4b8bb',[x,y,z],[.12,.028,.12]);
+    }
+  }
+  for(let i=0;i<2+(v.tier||1);i++){
+    const x=-w*.38+i*w*.065;
+    block(g,'#33556e',[x,h*.84,-d*.06],[w*.055,.035,d*.49]);
+    for(const z of [-d*.2,0,d*.17])block(g,'#829fad',[x,h*.862,z],[w*.053,.009,.014]);
+  }
+  block(g,C.cream,[-w*.2,.34,d*.27],[.28,.49,.045]);
+  block(g,'#d4b861',[-w*.2,.36,d*.3],[.16,.16,.02]);
+});
 // Connected lane markings, sidewalks and crossings belong to CityStreets.
 registerBuildingVisual('road',(g,v,w,d)=>{base(g,w,d,'#bbc4bb');block(g,'#45545b',[0,.08,0],[w*.88,.075,d*.88]);});
 for(const kind of ['fireStation','hospital','school','police','prison'])registerBuildingVisual(kind,(g,v,w,d,h)=>civic(g,v,w,d,h,kind));

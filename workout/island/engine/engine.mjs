@@ -1,20 +1,21 @@
-import {installCity} from './city-runtime.mjs?v=island-people-scale-20261026-1';
-import {installLearning} from '../learning/runtime.mjs?v=island-people-scale-20261026-1';
-import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-people-scale-20261026-1';
-import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-people-scale-20261026-1';
-import {recordStageWin} from '../activity/progress.mjs?v=island-people-scale-20261026-1';
-import {gameAvailability} from '../activity/availability.mjs?v=island-people-scale-20261026-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-people-scale-20261026-1';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=island-people-scale-20261026-1';
-import {repairHarbors} from './placement-help.mjs?v=island-people-scale-20261026-1';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-people-scale-20261026-1';
-import { createRegistry } from './registry.mjs?v=island-people-scale-20261026-1';
-import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-people-scale-20261026-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-people-scale-20261026-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=island-people-scale-20261026-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-people-scale-20261026-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-people-scale-20261026-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-people-scale-20261026-1';
+import {installCity} from './city-runtime.mjs?v=island-ready-plots-20261026-1';
+import {installLearning} from '../learning/runtime.mjs?v=island-ready-plots-20261026-1';
+import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-ready-plots-20261026-1';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-ready-plots-20261026-1';
+import {recordStageWin} from '../activity/progress.mjs?v=island-ready-plots-20261026-1';
+import {gameAvailability} from '../activity/availability.mjs?v=island-ready-plots-20261026-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-ready-plots-20261026-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=island-ready-plots-20261026-1';
+import {repairHarbors} from './placement-help.mjs?v=island-ready-plots-20261026-1';
+import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-ready-plots-20261026-1';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-ready-plots-20261026-1';
+import { createRegistry } from './registry.mjs?v=island-ready-plots-20261026-1';
+import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-ready-plots-20261026-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-ready-plots-20261026-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=island-ready-plots-20261026-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-ready-plots-20261026-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-ready-plots-20261026-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-ready-plots-20261026-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -60,10 +61,11 @@ export function createEngine(data, options = {}) {
   function expand() {
     const parts = state.parts[data.world.partGroup] || 0;
     let expanded = false;
-    config.worldStages.forEach((stage, index) => {
+    const stages=state.readyPlan?(config.readyWorldStages||config.worldStages):config.worldStages;
+    stages.forEach((stage, index) => {
       if (index > state.world.stage && parts >= stage.requiredParts) { state.world = { size: stage.size, stage: index }; expanded = true; }
     });
-    if(expanded)repairHarbors(state,registry,flags);
+    if(expanded){repairHarbors(state,registry,flags);if(state.readyPlan)prepareReadyPlan(state,registry,flags);}
     return expanded;
   }
   function grantReward(id, reward) {
@@ -113,9 +115,31 @@ export function createEngine(data, options = {}) {
 
   engine.subscribe = listener => { listeners.add(listener); return () => listeners.delete(listener); };
   engine.save = save;
+  function prepareIsland(target) {
+    const stage=config.readyWorldStages?.[target.world.stage];
+    if(!stage)return {ok:false,reason:'reason.invalid'};
+    const enlarged=target.world.size<stage.size;
+    if(enlarged)target.world={...target.world,size:stage.size};
+    const repaired=repairHarbors(target,registry,flags);
+    const result=prepareReadyPlan(target,registry,flags);
+    return {...result,changed:result.changed||enlarged||repaired.length>0};
+  }
+  engine.enableReadyBuilding = () => {
+    if(!flags.readyPlots)return {ok:false,reason:'reason.locked'};
+    if(saveBlocked)return {ok:false,reason:engine.storageStatus.reason};
+    if(activeMinigame)return {ok:false,reason:'reason.gameActive'};
+    const previous=clone(state),result=prepareIsland(state);
+    if(!result.ok){for(const key of Object.keys(state))delete state[key];Object.assign(state,previous);return result;}
+    if(result.changed)changed('ready-island',{size:state.world.size});
+    return {...result,size:state.world.size};
+  };
+  engine.readyPlots = () => listReadyPlots(state,registry,flags);
+  engine.readyPlotForType = typeId => findReadyType(state,registry,typeId,flags);
+  engine.readyPlotAt = (x,z) => {const cell=typeof x==='object'?x:{x,z};return cell?findReadyCell(state,registry,cell.x,cell.z,flags):null;};
   engine.reset = ({ keepAvatar = false } = {}) => {
     const fresh = createInitialState(data, now());
     if (keepAvatar) fresh.avatar = clone(state.avatar);
+    if(state.readyPlan&&flags.readyPlots){const prepared=prepareIsland(fresh);if(!prepared.ok)return prepared;}
     const result = resetWorld(storage, fresh);
     engine.storageStatus = result;
     if (!result.ok) { notify('storage', result); return result; }
@@ -177,9 +201,24 @@ export function createEngine(data, options = {}) {
     return { ok: true, reason: 'reason.placed', id, reward };
   };
   engine.place = (typeId,x,z) => placeBuilding(typeId,x,z);
+  engine.buildReadyPlot = id => {
+    if(typeof id!=='string'||!state.readyPlan)return {ok:false,reason:'reason.invalid'};
+    const site=engine.readyPlots().find(row=>row.id===id);
+    if(!site)return {ok:false,reason:'reason.occupied'};
+    if(!site.ok)return {ok:false,reason:site.reason||'reason.invalid'};
+    const result=engine.place(site.typeId,site.x,site.z);
+    if(!result.ok)return result;
+    // The pre-laid streets fulfil the road tutorial; the child never has to
+    // position a redundant road just to continue the guided building sequence.
+    if(tutorialObjective()?.buildType==='road'&&state.buildings.some(row=>registry.buildings.get(row.typeId)?.isRoad)){
+      const reward=onPlaced('road');changed('ready-roads',{reward});
+    }
+    return {...result,plotId:id};
+  };
   engine.move = (id, x, z) => {
     const building = state.buildings.find(row => row.id === id);
     if (!building) return { ok: false, reason: 'reason.invalid' };
+    if(state.readyPlan&&registry.buildings.get(building.typeId)?.isRoad)return {ok:false,reason:'ready.fixedRoad'};
     const validation = check(building.typeId, x, z, id);
     if (!validation.ok) return validation;
     remember({ kind: 'move', id, previous: { x: building.x, z: building.z }, moneyDelta: 0 });
@@ -188,6 +227,7 @@ export function createEngine(data, options = {}) {
     return { ok: true, reason: 'reason.moved', id };
   };
   engine.remove = id => {
+    if(state.readyPlan&&registry.buildings.get(state.buildings.find(row=>row.id===id)?.typeId)?.isRoad)return {ok:false,reason:'ready.fixedRoad'};
     const validation = canRemove(state, registry, id);
     if (!validation.ok) return validation;
     const index = state.buildings.findIndex(row => row.id === id);
