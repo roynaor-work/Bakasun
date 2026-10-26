@@ -8,15 +8,17 @@ export function createCoastalDetails(size,ground){
   const rockGeometry=new T.DodecahedronGeometry(.5,1),rockMaterial=new T.MeshStandardMaterial({color:'#c0bfa5',roughness:.98});
   const rocks=new T.InstancedMesh(rockGeometry,rockMaterial,54);rocks.castShadow=rocks.receiveShadow=true;rocks.userData.ownedGeometry=true;rocks.userData.ownedMaterial=true;
   for(let i=0;i<54;i++){
-    const cluster=(Math.floor(i/3)*7)%18,a=cluster/18*Math.PI*2+(rand()-.5)*.13,r=coastline(a,size)+.1+(rand()-.5)*.9,h=.2+rand()*.7;
-    dummy.position.set(Math.cos(a)*r,SEA_LEVEL+h*.26,Math.sin(a)*r);dummy.rotation.set(rand()*.6,rand()*6.28,rand()*.4);dummy.scale.set(.6+rand()*1.1,h,.5+rand()*.9);dummy.updateMatrix();rocks.setMatrixAt(i,dummy.matrix);rocks.setColorAt(i,new T.Color().setHSL(.13,.08+rand()*.07,.47+rand()*.15));
+    const cluster=Math.floor(i/9),a=cluster/6*Math.PI*2+.27+(rand()-.5)*.17,r=coastline(a,size)+.1+(rand()-.5)*.7,h=.18+rand()*.5;
+    dummy.position.set(Math.cos(a)*r,SEA_LEVEL+h*.22,Math.sin(a)*r);dummy.rotation.set(rand()*.6,rand()*6.28,rand()*.4);dummy.scale.set(.35+rand()*.9,h,.3+rand()*.7);dummy.updateMatrix();rocks.setMatrixAt(i,dummy.matrix);rocks.setColorAt(i,new T.Color().setHSL(.13,.08+rand()*.07,.47+rand()*.15));
   }
   group.add(rocks);
   const shrubGeometry=new T.IcosahedronGeometry(.5,1),shrubMaterial=new T.MeshStandardMaterial({color:'#ffffff',roughness:1});
   const shrubs=new T.InstancedMesh(shrubGeometry,shrubMaterial,66);shrubs.castShadow=shrubs.receiveShadow=true;shrubs.userData.ownedGeometry=true;shrubs.userData.ownedMaterial=true;
   for(let i=0;i<66;i++){
-    const a=rand()*Math.PI*2,r=coastline(a,size,'grass')-.18-rand()*.25;
-    dummy.position.set(Math.cos(a)*r,ground+.13,Math.sin(a)*r);dummy.rotation.set(0,rand()*6.28,0);dummy.scale.set(.4+rand()*.6,.2+rand()*.25,.4+rand()*.5);dummy.updateMatrix();shrubs.setMatrixAt(i,dummy.matrix);shrubs.setColorAt(i,new T.Color().setHSL(.22+rand()*.07,.25+rand()*.12,.24+rand()*.1));
+    const a=[-.32,-1.02,-1.9,-2.6,2.65,1.85,.86][i%7]+(rand()-.5)*.26;
+    const square=size*.5/Math.max(Math.abs(Math.cos(a)),Math.abs(Math.sin(a)));
+    const r=Math.max(square+.65,coastline(a,size,'grass')-.18-rand()*.5);
+    dummy.position.set(Math.cos(a)*r,ground+.09,Math.sin(a)*r);dummy.rotation.set(0,rand()*6.28,0);dummy.scale.set(.25+rand()*.32,.18+rand()*.22,.25+rand()*.32);dummy.updateMatrix();shrubs.setMatrixAt(i,dummy.matrix);shrubs.setColorAt(i,new T.Color().setHSL(.22+rand()*.07,.25+rand()*.12,.24+rand()*.1));
   }
   group.add(shrubs);
   const palms=[];

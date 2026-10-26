@@ -4,6 +4,7 @@ import {groundTexture,islandTerrain,releaseTerrain} from './ultra-island-terrain
 import {createIslandWater} from './ultra-island-water.mjs?v=island-clean-ui-20261026-1';
 import {IslandFlora} from './ultra-island-flora.mjs?v=island-clean-ui-20261026-1';
 import {createCoastalDetails,createNeighborScenery} from './ultra-island-scenery.mjs?v=island-clean-ui-20261026-1';
+import {loadCoastalSurfaces} from './coastal-surfaces.mjs?v=island-clean-ui-20261026-1';
 
 // All placement, walking and building code shares this unchanged ground plane.
 export const GROUND=.34;
@@ -35,7 +36,7 @@ export class Environment{
     this.sandMaterial=new T.MeshStandardMaterial({map:this.sandMap,vertexColors:true,roughness:.98});
     this.water=createIslandWater(scene);this.sea=this.water.sea;
     this.scenery=createNeighborScenery(scene,world.neighbors||[],this.style?.neighbors,{primitive,material,batchMeshes});this.landmarks=this.scenery.landmarks;
-    this.flora=new IslandFlora(this.root);this.modelsReady=this.flora.ready;
+    this.flora=new IslandFlora(this.root);this.surfacesReady=loadCoastalSurfaces(this);this.modelsReady=Promise.all([this.flora.ready,this.surfacesReady]);
   }
   rebuild(size){
     if(this.disposed||this.size===size)return;this.size=size;releaseTerrain(this.land);

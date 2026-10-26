@@ -27,8 +27,9 @@ export class CityStreets{
         const connected=network.byCell.has(`${p.x+dx},${p.z+dz}`);
         if(connected){plane(p.x+dx*.46,p.z+dz*.46,dx?.18:.84,dz?.18:.84,'#45545b');}
         else{
-          box(p.x+dx*.46,.125,p.z+dz*.46,dx?.075:1,.06,dz?.075:1,'#c7c9bd');
-          plane(p.x+dx*.43,p.z+dz*.43,dx?.12:.9,dz?.12:.9,'#cbd2c9',.158);
+          box(p.x+dx*.46,.125,p.z+dz*.46,dx?.075:1,.06,dz?.075:1,'#a7b2a9');
+          plane(p.x+dx*.42,p.z+dz*.42,dx?.14:.9,dz?.14:.9,'#c2c8ba',.158);
+          plane(p.x+dx*.42,p.z+dz*.42,dx?.14:.014,dz?.14:.014,'#8f9f95',.159);
         }
       }
       const horizontal=p.neighbors.some(id=>network.byCell.get(id).x!==p.x),vertical=p.neighbors.some(id=>network.byCell.get(id).z!==p.z);
@@ -46,7 +47,7 @@ export class CityStreets{
         box(x,.67,z,.035,1.05,.035,'#355665');box(x-side[0]*.065,1.21,z-side[1]*.065,.18,.045,.1,'#e5dfc2');
         box(x-side[0]*.065,1.183,z-side[1]*.065,.13,.012,.075,'#fff4be');lamps++;
       }
-      if((p.x*3+p.z)%7===0&&palms.length<(this.quality==='low'?4:10)){
+      if((p.x*3+p.z)%7===0&&palms.length<(this.quality==='low'?6:16)){
         const side=!network.byCell.has(`${p.x-1},${p.z}`)?[-1,0]:!network.byCell.has(`${p.x},${p.z+1}`)?[0,1]:null;
         if(side){const x=p.x+side[0]*.42,z=p.z+side[1]*.42;box(x,.18,z,.16,.12,.16,'#a9957d');palms.push({x:x-offset,y:this.ground+.21,z:z-offset,angle:(p.x+p.z)*1.3,scale:.17});}
       }
