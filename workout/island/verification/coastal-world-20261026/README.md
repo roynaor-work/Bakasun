@@ -61,7 +61,7 @@ This is a concrete coastal-world improvement, not a claim that the city has
 reached SimCity quality. Urban density, building variety and further street
 detail still need art direction and device testing.
 
-Keep this PR a draft until the separate clean-interface work has landed. Rebase
-onto that version and apply one shared release/cache stamp before merging; this
-world-only branch intentionally does not churn UI or global version references.
-It does not change placement rules, saves, construction costs or progression.
+This is the historical first pass. The clean-interface work has since landed in
+PR179. The next review, `../city-finish-20261027/README.md`, documents the rebase
+onto that version, the shared release/cache stamp and the second visual pass.
+Placement rules, saves, construction costs and progression remain unchanged.
