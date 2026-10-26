@@ -1,0 +1,223 @@
+{
+ "version": 3,
+ "updated": "2026-10-26",
+ "packageType": "requirements-only",
+ "reference": "https://play.google.com/store/apps/details?id=com.ea.gp.nbanext",
+ "target": {
+  "visuals": "realistic adult athletes and professional arena",
+  "playersPerSide": 5,
+  "platform": "existing island integration; engine choice pending measured feasibility",
+  "originalAthletesAndTeams": true,
+  "measuredParityWithReference": false
+ },
+ "supersedesVisualTarget": [
+  "V1",
+  "V2"
+ ],
+ "systems": [
+  {
+   "id": "realistic-athletes",
+   "requirement": "דמויות בוגרות מציאותיות ומדי כדורסל",
+   "milestone": "A",
+   "status": "in-progress",
+   "implementationEvidence": [
+    "assets/models/hoops-{guard,wing,forward,big}.glb",
+    "minigames/hoops-players.mjs",
+    "tools/hoops-pipeline/"
+   ],
+   "verificationEvidence": [
+    "verification/hoops/*.jpg",
+    "tests/island-hoops.test.mjs (גודל ותקציב)"
+   ],
+   "note": "גופים בוגרים של MakeHuman ב־4 מבנים (1.88–2.09 מ׳), 52 עצמות עם אצבעות, 4 גווני עור ו־4 תספורות, מדים עם שם ומספר. חסר: פנים מפורטות ברמת הרפרנס, בד עם קפלים, חיתוך הכתף בגופייה עדיין לא נקי, גרביים ונעלי כדורסל מותאמות."
+  },
+  {
+   "id": "basketball-animation",
+   "requirement": "אנימציות, התאמת שלד ומגעי ידיים/רגליים",
+   "milestone": "A",
+   "status": "in-progress",
+   "implementationEvidence": [
+    "assets/models/hoops-anim.glb",
+    "minigames/hoops-players.mjs",
+    "tools/hoops-pipeline/retarget.py",
+    "tools/hoops-pipeline/clips_lib.json"
+   ],
+   "verificationEvidence": [
+    "verification/hoops/*.jpg"
+   ],
+   "note": "24 קליפים מ־CMU mocap מותאמים לשלד; זמן הזריקה מסונכרן לזמן השחרור במנוע; הכדור עוקב אחרי היד בכדרור. חסר: קליפ דאנק ייעודי (משתמש בלייאפ), מסירה ותפיסה מאנימציה אמיתית (כרגע זרועות פרוצדורליות), IK לרגליים, ריבאונד וחסימה ייעודיים, החלקת רגליים במעברים."
+  },
+  {
+   "id": "arena-rendering",
+   "requirement": "אולם, פרקט, תאורה, קהל ומצלמה",
+   "milestone": "A",
+   "status": "implemented",
+   "implementationEvidence": [
+    "minigames/hoops-arena.mjs",
+    "minigames/hoops-textures.mjs",
+    "minigames/hoops-view.mjs"
+   ],
+   "verificationEvidence": [
+    "verification/hoops/1280x720-*.jpg",
+    "verification/hoops/844x390-*.jpg",
+    "verification/hoops/390x844-*.jpg"
+   ],
+   "note": "אולם מלא: פרקט, קווים במידות אמיתיות, סלים עם רשת שזזה, שעוני 24, שולחן, יציע תחתון ועליון עם 4,992 צופים, לוח תוצאות תלוי, תאורה עם סביבת השתקפות. חסר: השתקפות פרקט מישורית, ספסלים עם שחקני ספסל, שופטים."
+  },
+  {
+   "id": "device-feasibility",
+   "requirement": "רינדור עשרה שחקנים ומדידת מכשיר",
+   "milestone": "A",
+   "status": "in-progress",
+   "implementationEvidence": [
+    "minigames/hoops-view.mjs (metrics)"
+   ],
+   "verificationEvidence": [
+    "verification/hoops/verification.json"
+   ],
+   "note": "נמדד רק ב־Chromium עם רינדור תוכנה (SwiftShader) בשרת: עשרה שחקנים, כ־316 אלף משולשים, 96–112 קריאות ציור, 8–18 מ״ש לפריים ב־844×390. לא נמדד בטלפון פיזי."
+  },
+  {
+   "id": "live-action-slice",
+   "requirement": "מהלך משחק בשליטה עם כדור ופיזיקה",
+   "milestone": "B",
+   "status": "verified",
+   "implementationEvidence": [
+    "minigames/hoops-engine.mjs",
+    "minigames/hoops-controls.mjs",
+    "minigames/hoops-session.mjs"
+   ],
+   "verificationEvidence": [
+    "workout/island/tests/hoops-browser.mjs",
+    "tests/island-hoops.test.mjs"
+   ],
+   "note": "תנועה, ספרינט, כדרור והטעיה, מסירה (ישירה, הקפצה, לוב), זריקה בלחיצה ושחרור עם ציון תזמון, לייאפ, דאנק, ניתור לריבאונד, חסימה, חטיפה, החלפת שחקן. נבדק במקלדת ובמגע בשלושה גדלי מסך."
+  },
+  {
+   "id": "5v5-match",
+   "requirement": "משחק 5 נגד 5 וחילופים",
+   "milestone": "C",
+   "status": "verified",
+   "implementationEvidence": [
+    "minigames/hoops-engine.mjs"
+   ],
+   "verificationEvidence": [
+    "tests/island-hoops.test.mjs: a full game",
+    "workout/island/tests/hoops-browser.mjs"
+   ],
+   "note": "5 על 5 במגרש מלא, ספסל של 7, חילופים ידניים ואוטומטיים, עייפות, פסקי זמן, הארכה, הילוך חוזר מהיסטוריה."
+  },
+  {
+   "id": "rules-and-refereeing",
+   "requirement": "שעונים, עבירות, עונשין וסיום",
+   "milestone": "C",
+   "status": "implemented",
+   "implementationEvidence": [
+    "minigames/hoops-engine.mjs",
+    "data/config.json → minigames.streetSlam.rules"
+   ],
+   "verificationEvidence": [
+    "tests/island-hoops.test.mjs: shot clock, fouls, free throws, substitutions"
+   ],
+   "note": "שעון 24/14, 8 שניות, חצי, 3 שניות בהתקפה, חוץ, goaltending, עבירות אישיות וקבוצתיות, עונשין, סל ועבירה, עונשין בבונוס מהעבירה החמישית ברבע, הרחקה בעבירה שישית, הארכה. לא מומש: צעדים וכדרור כפול (הקלט לא מאפשר אותם), 5 שניות בשמירה צמודה, 3 שניות בהגנה, עבירות טכניות וחמורות, כדור תפוס (held ball)."
+  },
+  {
+   "id": "team-ai",
+   "requirement": "תנועה קבוצתית, תרגילים ושמירה",
+   "milestone": "C",
+   "status": "implemented",
+   "implementationEvidence": [
+    "minigames/hoops-ai.mjs"
+   ],
+   "verificationEvidence": [
+    "tests/island-hoops.test.mjs",
+    "tools/hoops-sim.mjs"
+   ],
+   "note": "פיזור חמישה בחוץ, פיק אנד רול, חיתוכים, give-and-go, מעבר, הגנה אישית עם עזרה והחלפות, אזורית 2-3, box-out, סבלנות לפי שעון ההתקפה. 8 משחקים מדומים באורך רגיל: 45% מהשדה, 36% לשלוש, 38% מהזריקות משלוש. קצב גבוה בערך פי 1.5 מ־NBA, חסימות רבות מדי (8 למשחק של 12 דקות), כמעט אין חטיפות."
+  },
+  {
+   "id": "roster-management",
+   "requirement": "סגל, תפקידים, חמישייה וספסל",
+   "milestone": "D",
+   "status": "implemented",
+   "implementationEvidence": [
+    "minigames/hoops-franchise.mjs",
+    "minigames/hoops-league.mjs",
+    "ui/hoops-club.mjs"
+   ],
+   "verificationEvidence": [
+    "tests/island-hoops.test.mjs: lineup",
+    "verification/hoops/390x844-club-*.jpg"
+   ],
+   "note": "סגל של 12 עם תפקידים ודירוגים, בחירת חמישייה במסך המועדון, החמישייה נכנסת למשחק. חסר: השוואת שחקנים זה לצד זה, דקות מתוכננות לרוטציה."
+  },
+  {
+   "id": "training-progression",
+   "requirement": "אימונים, יכולות, שדרוגים וכימיה",
+   "milestone": "D",
+   "status": "implemented",
+   "implementationEvidence": [
+    "minigames/hoops-franchise.mjs",
+    "minigames/hoops-league.mjs",
+    "ui/hoops-club.mjs"
+   ],
+   "verificationEvidence": [
+    "tests/island-hoops.test.mjs: training",
+    "verification/hoops/390x844-club-mid.jpg"
+   ],
+   "note": "5 סוגי אימון, מחיר ותוצאה צפויה לפני רכישה, קבלה לכל הוצאה, תקרה לפי פוטנציאל, כימיה מהרכב ומשחקים יחד, ציוד מהחנות של האי. היכולות נקראות במנוע."
+  },
+  {
+   "id": "season-challenges",
+   "requirement": "עונה, לוח משחקים, תוצאות ואתגרים",
+   "milestone": "D",
+   "status": "in-progress",
+   "implementationEvidence": [
+    "minigames/hoops-franchise.mjs",
+    "ui/hoops-club.mjs"
+   ],
+   "verificationEvidence": [
+    "tests/island-hoops.test.mjs: season"
+   ],
+   "note": "עונה של 14 מחזורים מול 7 מועדונים, טבלה, תוצאות שאר המחזור, אליפות ובונוס, עונה חדשה, סטטיסטיקה לשחקן, זיכוי פעם אחת לכל משחק. חסר: אתגרים, פלייאוף, פתיחת שחקנים."
+  },
+  {
+   "id": "online-services",
+   "requirement": "שמירה מסונכרנת, ליגות ודירוג מאומת",
+   "milestone": "E",
+   "status": "planned",
+   "implementationEvidence": [],
+   "verificationEvidence": [],
+   "note": "לא התחיל: שמירה מסונכרנת, ליגות, דירוג ואימות בשרת."
+  },
+  {
+   "id": "integration-quality",
+   "requirement": "שילוב באי, סאונד, UX ואופטימיזציה",
+   "milestone": "F",
+   "status": "in-progress",
+   "implementationEvidence": [
+    "extensions/street-slam.mjs",
+    "engine/engine.mjs",
+    "engine/persistence.mjs",
+    "minigames/hoops-audio.mjs"
+   ],
+   "verificationEvidence": [
+    "כל 2,614 הבדיקות עוברות",
+    "workout/island/tests/hoops-browser.mjs"
+   ],
+   "note": "מחובר לאי, לשמירה (מועדון עם גרסה משלו והגירה), לכלכלה ולציוד. ממשק משחק באייקונים בלבד. לא נבדק בטלפון פיזי, לא נבדקה איכות נמוכה במכשיר חלש."
+  }
+ ],
+ "unconfirmed": [
+  {
+   "id": "synchronous-pvp",
+   "note": "Not verified from store listing; do not equate online modes or leaderboards with synchronous PvP."
+  }
+ ],
+ "evidenceRules": {
+  "implementedRequires": "code link and runnable build",
+  "verifiedRequires": "recorded test evidence",
+  "aiImageIsRuntimeEvidence": false
+ },
+ "branch": "claude/street-slam"
+}

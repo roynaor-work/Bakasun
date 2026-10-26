@@ -1,5 +1,6 @@
 import {initialCity} from '../../workout/island/engine/city-depth.mjs';
 import {initialCityManagement} from '../../workout/island/engine/city-management.mjs';
+import {initialHoops} from '../../workout/island/minigames/hoops-franchise.mjs';
 /** Expected additive content changes for authentic historical fixture assertions.
  * Values already earned are copied; only new content receives empty defaults.
  * Corrupt/current-format saves are tested independently, without this helper. */
@@ -18,5 +19,5 @@ export function expectedGameField(key,value,data){
   return copy;
 }
 export function expectedGameContent(world,data){
-  const result={...world,cityDepthVersion:1,city:world.city||initialCity(),cityManagement:world.cityManagement||initialCityManagement()};for(const key of ['minigameProgress','minigameLevels','minigameEquipment','fireCertificates'])if(key in result)result[key]=expectedGameField(key,result[key],data);return result;
+  const result={...world,cityDepthVersion:1,city:world.city||initialCity(),cityManagement:world.cityManagement||initialCityManagement(),hoops:world.hoops||initialHoops(data.config.minigames.streetSlam)};for(const key of ['minigameProgress','minigameLevels','minigameEquipment','fireCertificates'])if(key in result)result[key]=expectedGameField(key,result[key],data);return result;
 }

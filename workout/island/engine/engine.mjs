@@ -8,6 +8,7 @@ import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-citydetail-202
 import {trainingOffer} from '../activity/soccer-card.mjs?v=island-citydetail-20261025-2';
 import {repairHarbors} from './placement-help.mjs?v=island-citydetail-20261025-2';
 import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-citydetail-20261025-2';
+import {nextGame as hoopsNextGame,applyResult as hoopsApply,setLineup as hoopsSetLineup,train as hoopsTrain,trainingOffer as hoopsOffer,newSeason as hoopsNewSeason,hoopsSummary} from '../minigames/hoops-franchise.mjs?v=island-citydetail-20261025-2';
 import { createRegistry } from './registry.mjs?v=island-citydetail-20261025-2';
 import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-citydetail-20261025-2';
 import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-citydetail-20261025-2';
@@ -329,6 +330,23 @@ export function createEngine(data, options = {}) {
     const attribute={power:'shot',pace:'pace',accuracy:'pass',defense:'defense'}[key];if(attribute)state.soccerRoster.players[0].attributes[attribute]=Math.max(state.soccerRoster.players[0].attributes[attribute],card.attributes[key]);
     card.trainings=Math.min(Number.MAX_SAFE_INTEGER,card.trainings+1);card.lastTrainingAt=Math.floor(now());changed('soccer-training');return {ok:true,cost:offer.cost};
   };
+  // Island Pro Basketball club: every change is validated, saved and refused while a game runs.
+  const hoopsBusy=()=>activeMinigame?{ok:false,reason:'reason.gameBusy'}:null;
+  const hoopsC=()=>config.minigames.streetSlam;
+  engine.hoops={
+    summary:()=>hoopsSummary(state.hoops,hoopsC()),
+    setLineup:ids=>hoopsBusy()||((r=>{if(r.ok)changed('hoops-lineup');return r;})(hoopsSetLineup(state.hoops,ids))),
+    offer:(id,drill)=>hoopsOffer(state.hoops,id,drill,hoopsC()),
+    train:(id,drill)=>hoopsBusy()||((r=>{if(r.ok)changed('hoops-train');return r;})(hoopsTrain(state.hoops,id,drill,hoopsC(),now()))),
+    newSeason:()=>hoopsBusy()||((r=>{if(r.ok)changed('hoops-season');return r;})(hoopsNewSeason(state.hoops))),
+    settings:patch=>{const b=hoopsBusy();if(b)return b;const h=state.hoops;
+      if(patch.profile!==undefined){if(!['quick','standard','pro'].includes(patch.profile))return {ok:false,reason:'reason.invalid'};h.profile=patch.profile;}
+      if(patch.difficulty!==undefined){if(!['easy','normal','hard'].includes(patch.difficulty))return {ok:false,reason:'reason.invalid'};h.difficulty=patch.difficulty;}
+      if(patch.autoSub!==undefined)h.autoSub=!!patch.autoSub;
+      if(patch.offense!==undefined){if(!['motion','pnr','iso'].includes(patch.offense))return {ok:false,reason:'reason.invalid'};h.tactics.offense=patch.offense;}
+      if(patch.defense!==undefined){if(!['man','zone'].includes(patch.defense))return {ok:false,reason:'reason.invalid'};h.tactics.defense=patch.defense;}
+      changed('hoops-settings');return {ok:true};},
+  };
   engine.setTennisDifficulty=difficulty=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};if(!Object.hasOwn(config.minigames.tennis.difficulties,difficulty))return {ok:false,reason:'reason.invalid'};state.tennisDifficulty=difficulty;changed('tennis-difficulty');return {ok:true};};
   engine.startMinigame = (id, context = {}) => {
     const minigame = registry.minigames.get(id);
@@ -345,6 +363,7 @@ export function createEngine(data, options = {}) {
     let ended = false, session;
     const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
     if(id==='tennis')ctx.difficulty=state.tennisDifficulty;
+    if(id==='streetSlam'){ctx.hoops=clone(state.hoops);const g=hoopsNextGame(state.hoops);ctx.hoopsGame=g?{id:g.id,home:g.home,away:g.away,round:g.round}:null;}
     if(id==='soccer'){if(ctx.drill&&!['targets','penalties','cones'].includes(ctx.drill))return {ok:false,reason:'reason.invalid'};ctx.difficulty=state.soccerCard.difficulty;ctx.soccerCard=clone(state.soccerCard);ctx.role=state.soccerRoster.role;}
     const finish = (raw, cancelled = false) => {
       if (ended) return { ok: false, reason: 'reason.duplicate' };
@@ -360,7 +379,8 @@ export function createEngine(data, options = {}) {
         const parts=periodicParts+(won?(settings?.winParts||0):0);
         result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts,stars,stage,
           ...(result.drill?{drill:result.drill}:{}),...(id==='fireRescue'&&validCertificate(raw?.certificate)?{certificate:{...raw.certificate}}:{}),
-          ...(id==='soccer'?{difficulty:ctx.difficulty,trainingStars:won?stars+config.minigames.soccer.difficulties[ctx.difficulty].bonusStars:0}:{}) });
+          ...(id==='soccer'?{difficulty:ctx.difficulty,trainingStars:won?stars+config.minigames.soccer.difficulties[ctx.difficulty].bonusStars:0}:{}),
+          ...(id==='streetSlam'&&result.hoops?{hoops:result.hoops}:{}) });
       }
       ended = true; activeMinigame = null;
       session?.dispose?.();
@@ -369,6 +389,7 @@ export function createEngine(data, options = {}) {
         if(result.drill){const practice=result.drill.attempts>=config.minigames.soccer.training.drillAttempts?awardSoccerPractice(state,config.minigames.soccer,result.drill.kind,now()):{ok:false,reason:'soccer.practice.tryAgain'};result={...result,practice};changed('soccer-practice',{result});context.onFinish?.(result);return {ok:true,result};}
         if(id==='fireRescue'&&result.certificate)recordFireCertificate(state.fireCertificates,stage,result.certificate);
         if(id==='alienDefense'){const h=config.minigames.alienDefense.hangar;state.hangar.damage=Number.isSafeInteger(raw?.damage)?Math.max(0,Math.min(h.maxDamage,raw.damage)):state.hangar.damage;state.hangar.coins=Math.min(h.maxCoins,state.hangar.coins+(result.outcome==='win'?h.winCoins:h.lossCoins));if(result.outcome==='win')state.hangar.credits=Math.min(h.maxCoins,state.hangar.credits+1);}
+        if(id==='streetSlam'&&result.hoops){const credited=hoopsApply(state.hoops,result.hoops,config.minigames.streetSlam,now());result={...result,hoopsCredit:credited};}
         state.money += result.money;
         // Only shipped game IDs are persisted; third-party contract examples remain compatible.
         if (config.minigameLevels?.[id]) {

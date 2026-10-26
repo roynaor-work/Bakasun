@@ -12,6 +12,7 @@ import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=is
 import { cellsFor } from './rules.mjs?v=island-citydetail-20261025-2';
 import {repairHarbors} from './placement-help.mjs?v=island-citydetail-20261025-2';
 import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-citydetail-20261025-2';
+import {initialHoops,validHoops,migrateHoops,mergeHoops} from '../minigames/hoops-franchise.mjs?v=island-citydetail-20261025-2';
 import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-citydetail-20261025-2';
 
 export const CURRENT_VERSION = 18;
@@ -34,6 +35,7 @@ export function createInitialState(data, now = Date.now()) {
     tutorial: { step: 0, completed: false, skipped: false }, claimedRewards: [], completedMissions: [], completedEpisodes: [],
     nextId: 1, playSeconds: 0, createdAt: now, updatedAt: now,
     ...initialActivity(data,now),tennisDifficulty:'easy',soccerCard,soccerRoster:initialSoccerRoster(players,soccerCard,data.config.minigames.soccer),
+    hoops:initialHoops(data.config.minigames.streetSlam),
   },data);
 }
 
@@ -52,7 +54,7 @@ function addNewGame(state,old,data,id){
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
-  17(old,data) {return GAMES_AFTER_18.reduce((state,id)=>addNewGame(state,old,data,id),{...old,version:18,cityDepthVersion:1,city:initialCity(),cityManagement:initialCityManagement()});},
+  17(old,data) {return GAMES_AFTER_18.reduce((state,id)=>addNewGame(state,old,data,id),{...old,version:18,cityDepthVersion:1,city:initialCity(),cityManagement:initialCityManagement(),hoops:old.hoops??initialHoops(data.config.minigames.streetSlam)});},
   16(old,data){
     const state={...old,version:17};
     if(isObject(old.minigameProgress)){
@@ -130,6 +132,10 @@ export function migrateSave(value, data, registry) {
   if (isObject(state.minigameProgress)) for (const [id,p] of Object.entries(initialProgress(data))) if (!(id in state.minigameProgress)) state.minigameProgress[id] = p;
   // Only games shipped after schema 18 may be missing; missing tracks of any other game stay invalid.
   if (isObject(state.minigameEquipment)) for (const [id,tracks] of Object.entries(initialEquipment(data))) if (!(id in state.minigameEquipment) && GAMES_AFTER_18.includes(id)) state.minigameEquipment[id] = tracks;
+  // The basketball club is its own versioned object inside schema 18 (hoops.v); a save
+  // without it starts the default club, an older club version is migrated in place.
+  if (!Object.hasOwn(state,'hoops')) state.hoops = initialHoops(data.config.minigames.streetSlam);
+  else { const club=migrateHoops(state.hoops,data.config.minigames.streetSlam); if(!club) return { ok: false, reason: 'reason.invalid' }; state.hoops=club; }
   const validation = validateSave(state, data, registry);
   if(!validation.ok)return validation;
   const repairedHarbors=repairHarbors(state,registry,data.featureFlags);
@@ -173,6 +179,7 @@ export function validateSave(state, data, registry) {
   for (const key of ['claimedRewards', 'completedMissions', 'completedEpisodes']) if (!Array.isArray(state[key]) || !state[key].every(value => typeof value === 'string')) return invalid();
   if (!Number.isSafeInteger(state.nextId) || state.nextId < 1 || !finitePositive(state.playSeconds)) return invalid();
   if (!validActivity(state,data,registry)) return invalid();
+  if (!validHoops(state.hoops,data.config.minigames.streetSlam)) return invalid();
   return { ok: true };
 }
 
@@ -275,6 +282,7 @@ export function importWorld(raw, current, data, registry) {
   merged.tennisDifficulty=incoming.tennisDifficulty;
   mergeSoccerCard(merged.soccerCard,incoming.soccerCard);
   mergeSoccerRoster(merged.soccerRoster,incoming.soccerRoster,data.config.minigames.soccer);
+  merged.hoops=mergeHoops(merged.hoops,incoming.hoops);
   mergeActivity(merged,incoming,data);
   // City import follows the existing additive policy. Local live orders win;
   // imported orders cannot be fulfilled again for a second reward.

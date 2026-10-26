@@ -11138,208 +11138,214 @@
    }
   },
   "streetSlam": {
-   "version": 1,
+   "version": 2,
    "requiresBuilding": "basketball",
-   "maximumScore": 200,
-   "maximumSeconds": 1500,
-   "practiceKey": "island.streetSlam.practice.v1",
+   "maximumScore": 250,
+   "maximumSeconds": 5400,
+   "practiceKey": "island.hoops.practice.v1",
    "simulation": {
-    "hz": 60,
     "maxFrameSeconds": 0.25,
     "maxStepsPerFrame": 8
    },
-   "match": {
-    "seconds": 180,
-    "overtimeSeconds": 30,
-    "readySeconds": 1.2,
-    "scoreResetSeconds": 1.6
-   },
    "court": {
-    "width": 13.3,
-    "length": 17.3,
-    "hoopZ": 7.6,
-    "hoopHeight": 3.22,
-    "ringRadius": 0.43,
-    "ringTube": 0.045,
-    "ballRadius": 0.25,
-    "boardZ": 8.1,
-    "boardWidth": 2.1,
-    "boardBottom": 3.15,
-    "boardTop": 4.45,
-    "boardThickness": 0.1,
-    "poleZ": 9.5,
-    "poleRadius": 0.12,
-    "poleTop": 4.4,
-    "threeCenterZ": 7.3,
-    "threeRadius": 5.65,
-    "paintWidth": 5.6,
-    "paintLength": 6,
-    "freeThrowZ": 3.4,
-    "keyRadius": 1.4,
-    "centerRadius": 1.5,
-    "netDepth": 0.56,
-    "fence": {
-     "x": 7.6,
-     "z": 10.2
-    },
-    "playerBounds": {
-     "x": 6.4,
-     "z": 8.4
-    }
+    "length": 28.65,
+    "width": 15.24,
+    "rimFromBaseline": 1.575,
+    "rimHeight": 3.05,
+    "rimRadius": 0.2286,
+    "ballRadius": 0.12,
+    "boardFromBaseline": 1.22,
+    "boardWidth": 1.83,
+    "boardHeight": 1.07,
+    "boardBottom": 2.9,
+    "boardThickness": 0.05,
+    "threeRadius": 7.24,
+    "threeCornerZ": 6.71,
+    "keyWidth": 4.88,
+    "freeThrowFromBaseline": 5.8,
+    "restrictedRadius": 1.22,
+    "centerRadius": 1.83,
+    "stanchionBehind": 1.4,
+    "stanchionRadius": 0.4,
+    "stanchionTop": 2.1
    },
    "physics": {
-    "gravity": 9.8,
+    "gravity": 9.81,
     "substeps": 4,
-    "airDrag": 0,
-    "floorRestitution": 0.7,
-    "floorFriction": 0.88,
-    "rollSpeed": 0.55,
-    "rollFriction": 1.4,
-    "rimRestitution": 0.5,
-    "boardRestitution": 0.58,
-    "fenceRestitution": 0.45,
-    "netDamping": 0.86,
-    "netMaxDrop": 4.5,
-    "scoreSlack": 0.55,
-    "missDrop": 0.35,
-    "stuckSpeed": 0.35,
-    "stuckSeconds": 1.2
+    "rimTube": 0.012,
+    "rimRestitution": 0.55,
+    "rimTangent": 0.9,
+    "boardRestitution": 0.62,
+    "floorRestitution": 0.78,
+    "floorFriction": 0.9,
+    "rollSpeed": 0.6,
+    "rollFriction": 1.6,
+    "scoreSlack": 0.45,
+    "netDepth": 0.42,
+    "netDamping": 0.82,
+    "netMaxDrop": 5.0,
+    "wallGap": 3.6
+   },
+   "rules": {
+    "profiles": {
+     "pro": {
+      "quarterSeconds": 720,
+      "overtimeSeconds": 300
+     },
+     "standard": {
+      "quarterSeconds": 180,
+      "overtimeSeconds": 60
+     },
+     "quick": {
+      "quarterSeconds": 90,
+      "overtimeSeconds": 45
+     }
+    },
+    "shotClock": 24,
+    "shotClockReset": 14,
+    "personalFoulLimit": 6,
+    "teamFoulBonus": 5,
+    "backcourtSeconds": 8,
+    "laneSeconds": 3,
+    "timeouts": 7,
+    "inboundDelay": 1.2,
+    "inboundSeconds": 5
+   },
+   "timing": {
+    "afterScore": 1.3,
+    "afterFoul": 1.4,
+    "afterViolation": 1.4,
+    "quarterBreak": 2.5,
+    "timeout": 3.0,
+    "freeThrowSetup": 1.1,
+    "assistTicks": 150
+   },
+   "anim": {
+    "jumpshot": {
+     "release": 0.77,
+     "duration": 1.45
+    },
+    "pullup": {
+     "release": 0.87,
+     "duration": 1.4
+    },
+    "layup": {
+     "release": 1.03,
+     "duration": 1.7
+    },
+    "freethrow": {
+     "release": 1.1,
+     "duration": 2.0
+    }
    },
    "player": {
-    "radius": 0.38,
-    "speed": 5.4,
-    "ballSpeed": 4.9,
-    "accel": 14,
-    "turnRate": 11,
-    "chargeSpeed": 0.35,
-    "stumbleSpeed": 0.45,
-    "pickupRadius": 0.72,
-    "catchRadius": 1.0,
-    "pickupHeight": 1.9,
-    "jumpReach": 2.95,
-    "dribbleHz": 2.2,
-    "actionSeconds": 0.42,
-    "landSeconds": 0.18
+    "radius": 0.36,
+    "speed": 6.0,
+    "sprintFactor": 1.22,
+    "dribbleFactor": 0.9,
+    "accel": 11,
+    "decel": 15,
+    "turnRate": 9
+   },
+   "fatigue": {
+    "drain": 0.0105,
+    "sprint": 2.2,
+    "recover": 0.004,
+    "deadRecover": 0.01,
+    "breakRecover": 0.12,
+    "timeoutRecover": 0.08,
+    "subBelow": 0.42,
+    "readyAbove": 0.7
    },
    "shot": {
-    "maxHold": 0.8,
-    "tapMax": 0.16,
-    "perfectFrom": 0.46,
-    "perfectTo": 0.66,
-    "tapQuality": 0.3,
-    "lowQuality": 0.15,
-    "windup": 0.26,
-    "jumpHeight": 0.45,
-    "jumpSeconds": 0.62,
-    "angle": 52,
-    "closeAngle": 62,
-    "closeRange": 2.2,
-    "baseError": 0.06,
-    "distanceError": 0.55,
-    "timingSpread": 1.45,
-    "contestError": 1.1,
-    "contestRange": 2.0,
-    "depthBias": 1.25,
-    "pickupCooldown": 0.5,
-    "dunkDrop": 0.3
-   },
-   "dunk": {
-    "range": 2.8,
-    "minRange": 0.45,
-    "coneDegrees": 110,
-    "laneWidth": 0.62,
-    "cost": 0.55,
-    "cooldown": 1.2,
-    "takeoff": 0.62,
-    "jumpTravel": 0.9,
-    "gatherSpeed": 5.6,
-    "minGather": 0.16,
-    "airSeconds": 0.62,
-    "jumpHeight": 1.2,
-    "releaseAt": 0.56,
-    "stuffRange": 1.05,
-    "stuffSlack": 0.45
+    "dunkRange": 2.3,
+    "dunkMinRating": 72,
+    "dunkEnergy": 0.25,
+    "layupRange": 3.0,
+    "layupCarry": 3.2,
+    "window": 0.28,
+    "contestWeight": 0.5,
+    "pullupFactor": 0.9,
+    "timingBase": 0.7,
+    "timingWeight": 0.45,
+    "makeError": 0.09,
+    "assistBonus": 0.12
    },
    "pass": {
-    "speed": 11,
-    "minTime": 0.22,
-    "maxTime": 0.95,
-    "lead": 0.6,
-    "catchHeight": 1.3,
-    "interceptRadius": 0.5,
-    "cooldown": 0.32
+    "speed": 11.5,
+    "bounceSpeed": 8.5,
+    "lobSpeed": 9.0,
+    "windup": 0.16,
+    "interceptRadius": 0.55,
+    "interceptBase": 0.22,
+    "catchRadius": 1.05
+   },
+   "jump": {
+    "duration": 0.72,
+    "height": 0.62,
+    "cooldown": 0.9,
+    "shotAir": 0.62
    },
    "steal": {
-    "range": 1.3,
-    "coneDegrees": 120,
-    "chance": 0.5,
-    "chargeBonus": 1.4,
-    "farSide": 0.6,
+    "range": 1.35,
+    "reachAt": 0.14,
+    "duration": 0.4,
     "cooldown": 1.0,
-    "missStumble": 0.45,
-    "victimStumble": 0.35,
-    "victimPickup": 0.4
+    "base": 0.22,
+    "foulBase": 0.12
    },
    "block": {
-    "height": 0.7,
-    "seconds": 0.56,
-    "cooldown": 0.85,
-    "reach": 2.42,
-    "handRadius": 0.44,
-    "window": 0.34,
-    "deflect": 4.2,
-    "aiRange": 2.1,
-    "aiTiming": 0.55,
-    "frontDot": 0.2
+    "radius": 0.55,
+    "vertical": 0.6,
+    "base": 0.08,
+    "goaltendRadius": 0.12
    },
-   "energy": {
-    "start": 1,
-    "regen": 0.09,
-    "stealBonus": 0.2,
-    "blockBonus": 0.2
+   "move": {
+    "cooldown": 1.1,
+    "cross": 0.55,
+    "spin": 0.75,
+    "burst": 1.08
+   },
+   "rebound": {
+    "radius": 0.75
+   },
+   "contact": {
+    "minSpeed": 3.0,
+    "setSpeed": 0.9,
+    "chargeChance": 0.08,
+    "blockChance": 0.1,
+    "shotContact": 0.75,
+    "shootingFoul": 0.12
+   },
+   "replay": {
+    "seconds": 6,
+    "hz": 30
+   },
+   "ai": {
+    "difficulty": {
+     "easy": {
+      "reaction": 0.55,
+      "aiTiming": 0.85,
+      "stealRate": 0.04,
+      "blockRate": 0.1
+     },
+     "normal": {
+      "reaction": 0.38,
+      "aiTiming": 1.0,
+      "stealRate": 0.07,
+      "blockRate": 0.16
+     },
+     "hard": {
+      "reaction": 0.26,
+      "aiTiming": 1.12,
+      "stealRate": 0.1,
+      "blockRate": 0.22
+     }
+    }
    },
    "stars": {
     "two": 4,
     "three": 8
-   },
-   "practice": {
-    "targetRadius": 0.9,
-    "returnSeconds": 0.7,
-    "fetchDistance": 5
-   },
-   "ai": {
-    "base": {
-     "reaction": 0.45,
-     "aimError": 1.2,
-     "speed": 0.9,
-     "decision": 0.6,
-     "stealRate": 0.2,
-     "blockRate": 0.45,
-     "timingNoise": 0.14,
-     "dunkRate": 0.6,
-     "passRate": 0.6,
-     "reboundRate": 0.6,
-     "shootRange": 5.6,
-     "openNeeded": 1.35,
-     "patience": 7,
-     "minHold": 0.5,
-     "guardDistance": 1.15,
-     "sag": 0.42,
-     "threeRate": 0.25
-    },
-    "teammate": {
-     "reaction": 0.32,
-     "aimError": 1.0,
-     "speed": 0.93,
-     "decision": 0.8,
-     "stealRate": 0.18,
-     "blockRate": 0.35,
-     "timingNoise": 0.1,
-     "dunkRate": 0.75,
-     "passRate": 0.75,
-     "reboundRate": 0.7,
-     "threeRate": 0.3
-    }
    },
    "levels": [
     {
@@ -11543,70 +11549,6 @@
      }
     }
    ],
-   "render": {
-    "dprCap": 1.75,
-    "mobileDprCap": 1.5,
-    "shadowMap": 2048,
-    "mobileShadowMap": 1024,
-    "exposure": 1.15,
-    "fov": 42,
-    "colors": {
-     "court": "#387f80",
-     "paint": "#d36d44",
-     "courtLines": "#f2ead4",
-     "home": "#3ea7b2",
-     "away": "#e77f43",
-     "ink": "#172c35",
-     "paper": "#f2f0e8",
-     "action": "#ed7338",
-     "energy": "#eec17a",
-     "shortsHome": "#fff6dd",
-     "shortsAway": "#192e3c"
-    },
-    "numbers": {
-     "h1": "7",
-     "h2": "11",
-     "a1": "3",
-     "a2": "9"
-    },
-    "slowFrameMs": 40,
-    "qualitySampleFrames": 90
-   },
-   "audio": {
-    "volume": 0.42,
-    "samples": {
-     "bounce": "assets/audio/g4e/bounce.ogg",
-     "rim": "assets/audio/g6d/metal.ogg",
-     "board": "assets/audio/g3h/kick.ogg",
-     "pass": "assets/audio/g3h/pass.ogg",
-     "swish": "assets/audio/g4e/net.ogg",
-     "whistle": "assets/audio/g3h/whistle.ogg",
-     "crowd": "assets/audio/g3h/crowd.ogg"
-    }
-   },
-   "heat": {
-    "streak": 2,
-    "seconds": 20,
-    "windowBonus": 0.12,
-    "errorFactor": 0.75,
-    "dunkCostFactor": 0.6
-   },
-   "oop": {
-    "cost": 0.3,
-    "minRange": 1.0,
-    "range": 5.5,
-    "minGather": 0.16,
-    "catchAt": 0.45,
-    "minFlight": 0.6,
-    "maxFlight": 1.25,
-    "maxPassDistance": 11,
-    "catchRadius": 0.95
-   },
-   "assist": {
-    "autoGuard": true,
-    "guardDistance": 1.2,
-    "guardSpeed": 0.85
-   },
    "equipment": {
     "shoes": {
      "title": "equipment.streetSlam.shoes",
@@ -11689,6 +11631,74 @@
       }
      ]
     }
+   },
+   "audio": {
+    "volume": 0.42,
+    "samples": {
+     "bounce": "assets/audio/g4e/bounce.ogg",
+     "rim": "assets/audio/g6d/metal.ogg",
+     "board": "assets/audio/g3h/kick.ogg",
+     "pass": "assets/audio/g3h/pass.ogg",
+     "swish": "assets/audio/g4e/net.ogg",
+     "whistle": "assets/audio/g3h/whistle.ogg",
+     "crowd": "assets/audio/g3h/crowd.ogg"
+    }
+   },
+   "view": {
+    "fov": 27,
+    "height": 6.5,
+    "distance": 6.5,
+    "lookY": 1.1,
+    "lookZ": 0.3,
+    "followX": 0.92,
+    "edgeX": 4.5,
+    "followRate": 2.4,
+    "portraitFov": 52,
+    "portraitBack": 9.5,
+    "portraitHeight": 6.0,
+    "exposure": 1.05,
+    "envIntensity": 0.5,
+    "dprCap": 2,
+    "mobileDprCap": 1.6,
+    "dribblePeriod": 0.52,
+    "leadToRim": 0.45,
+    "leadMax": 4.5,
+    "followZ": 0.45,
+    "maxZ": 3.5,
+    "dollyZ": 0.5
+   },
+   "assets": {
+    "models": {
+     "guard": "assets/models/hoops-guard.glb",
+     "wing": "assets/models/hoops-wing.glb",
+     "forward": "assets/models/hoops-forward.glb",
+     "big": "assets/models/hoops-big.glb"
+    },
+    "animations": "assets/models/hoops-anim.glb",
+    "crowd": "assets/textures/hoops-crowd.webp",
+    "crowdGrid": [
+     8,
+     6
+    ],
+    "baseHeights": {
+     "guard": 188,
+     "wing": 198,
+     "forward": 203,
+     "big": 209
+    }
+   },
+   "league": {
+    "baseLevel": 72,
+    "userLevel": 68,
+    "chemistryBonus": 3,
+    "stageLevel": 0.6
+   },
+   "economy": {
+    "startCredits": 6,
+    "winCredits": 3,
+    "lossCredits": 1,
+    "championCredits": 10,
+    "drillCost": 2
    }
   }
  },

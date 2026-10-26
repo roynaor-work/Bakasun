@@ -1,0 +1,179 @@
+[
+{
+"name": "idle_ball",
+"src": "06_15",
+"start": 2,
+"end": 62,
+"loop": true
+},
+{
+"name": "idle",
+"src": "124_04",
+"start": 2,
+"end": 42,
+"loop": true
+},
+{
+"name": "walk",
+"src": "06_01",
+"start": 162,
+"end": 290,
+"loop": true
+},
+{
+"name": "jog",
+"src": "35_17",
+"start": 18,
+"end": 106,
+"loop": true
+},
+{
+"name": "run",
+"src": "09_01",
+"start": 6,
+"end": 94,
+"loop": true
+},
+{
+"name": "sprint",
+"src": "78_12",
+"start": 14,
+"end": 90,
+"loop": true
+},
+{
+"name": "slide_l",
+"src": "78_29",
+"start": 70,
+"end": 130,
+"loop": true
+},
+{
+"name": "slide_r",
+"src": "78_29",
+"start": 70,
+"end": 130,
+"loop": true,
+"mirror": true
+},
+{
+"name": "def_hold",
+"src": "78_30",
+"start": 106,
+"end": 138
+},
+{
+"name": "dribble_stand",
+"src": "06_12",
+"start": 466,
+"end": 586,
+"loop": true
+},
+{
+"name": "dribble_walk",
+"src": "06_02",
+"start": 438,
+"end": 558,
+"loop": true
+},
+{
+"name": "dribble_jog",
+"src": "06_13",
+"start": 1890,
+"end": 1986,
+"loop": true
+},
+{
+"name": "crossover",
+"src": "06_12",
+"start": 506,
+"end": 602
+},
+{
+"name": "jumpshot",
+"src": "124_05",
+"start": 322,
+"end": 514,
+"events": {
+"release": 0.7666666666666667
+}
+},
+{
+"name": "pullup",
+"src": "06_15",
+"start": 250,
+"end": 422,
+"events": {
+"release": 0.8666666666666667
+}
+},
+{
+"name": "freethrow",
+"src": "124_04",
+"start": 402,
+"end": 662,
+"events": {
+"release": 1.1
+}
+},
+{
+"name": "layup",
+"src": "124_06",
+"start": 290,
+"end": 514,
+"events": {
+"release": 1.0333333333333334
+}
+},
+{
+"name": "jump",
+"src": "124_11",
+"start": 154,
+"end": 290,
+"events": {
+"apex": 0.5
+}
+},
+{
+"name": "pumpfake",
+"src": "78_22",
+"start": 202,
+"end": 322,
+"events": {
+"fake": 0.5666666666666667
+}
+},
+{
+"name": "pivot",
+"src": "78_31",
+"start": 34,
+"end": 242
+},
+{
+"name": "drive",
+"src": "78_32",
+"start": 2,
+"end": 214
+},
+{
+"name": "spin",
+"src": "78_13",
+"start": 2,
+"end": 174
+},
+{
+"name": "stop",
+"src": "16_57",
+"start": 2,
+"end": 162
+},
+{
+"name": "runjump",
+"src": "75_02",
+"start": 22,
+"end": 162,
+"events": {
+"apex": 0.5
+}
+}
+]

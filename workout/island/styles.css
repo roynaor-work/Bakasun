@@ -326,3 +326,28 @@ button[data-pressed=true]{scale:.95;filter:brightness(.82)}
 .island-ui [data-action=open-games]{background:#2e655e;color:#fff9e5;border:1px solid #5f8c7a;box-shadow:none;border-radius:9px}
 .island-ui .primary-button,.island-ui .secondary-button{border-radius:9px;box-shadow:none}
 @media(orientation:landscape) and (max-height:600px){.island-ui .build-dock{padding:6px}.island-ui .build-dock .category-button{min-height:42px}.island-ui .hud{gap:6px}.island-ui .build-dock .dock-handle{width:42px;flex-basis:42px}}
+
+/* Island Pro Basketball club (menu screen) */
+.hoops-club{display:grid;gap:14px;margin:10px 0;text-align:right}
+.hoops-club h4{margin:6px 0}
+.hoops-club-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.hoops-club-head h3{margin:0 0 0 auto}
+.hoops-club-crest{width:28px;height:28px;border-radius:50%;background:conic-gradient(var(--team) 0 50%,var(--team2) 0);border:2px solid #fff}
+.hoops-club-stat{padding:4px 10px;border-radius:999px;background:#0001;font-weight:700;font-size:14px}
+.hoops-club-table{width:100%;border-collapse:collapse;font-size:14px}
+.hoops-club-table th,.hoops-club-table td{padding:5px 6px;border-bottom:1px solid #0002;text-align:right}
+.hoops-club-table tr.mine{font-weight:800;background:#ffd84a33}
+.hoops-club-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.hoops-club-card{display:grid;grid-template-columns:auto 1fr auto;gap:2px 8px;align-items:center;min-height:56px;padding:8px 10px;border-radius:12px;text-align:right;background:#f4f6fb;color:#13203a;border:1px solid #c8d2e6}
+.hoops-club-card[aria-pressed=true]{background:#1f5fbf;color:#fff;border-color:#9cc3ff;outline:2px solid #9cc3ff}
+.hoops-club-num{font-size:20px;font-weight:900;grid-row:span 2}
+.hoops-club-name{font-weight:700}
+.hoops-club-pos{font-size:12px;opacity:.75;grid-column:2}
+.hoops-club-ovr{font-size:18px;font-weight:900;grid-column:3;grid-row:1/span 2}
+.hoops-club-line{grid-column:1/-1;font-size:12px;opacity:.8}
+.hoops-club-drills,.hoops-club-choice{display:flex;flex-wrap:wrap;gap:8px;border:0;padding:0;margin:6px 0}
+.hoops-club-drills button,.hoops-club-choice button{min-height:48px;flex:1 1 30%}
+.hoops-club-drills button[aria-pressed=true],.hoops-club-choice button[aria-pressed=true]{outline:3px solid #2f7de1}
+.hoops-club-select{min-height:48px;width:100%;font-size:16px}
+.hoops-club-preview{min-height:1.4em;font-weight:700}
+.hoops-club-toggle{display:flex;gap:10px;align-items:center;min-height:48px}

@@ -13,6 +13,7 @@ import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=isla
 import {playerCard,rosterCard} from './soccer-card.mjs?v=island-citydetail-20261025-2';
 import {rosterCards} from '../activity/soccer-roster.mjs?v=island-citydetail-20261025-2';
 import {soccerTeam} from '../activity/soccer-team.mjs?v=island-citydetail-20261025-2';
+import {hoopsClubPanel} from './hoops-club.mjs?v=island-citydetail-20261025-2';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -151,6 +152,7 @@ export class ActivityInterface {
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
     const dialog=this.modal(game.title,'minigame.progressHint');dialog.dataset.stageMap=id;if(id==='fireRescue')dialog.append(button(this.t('fire.certificates'),'open-certificates',()=>this.certificates()));if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
     dialog.append(el('p','',this.t('minigame.totalStars',{stars:p.stars.reduce((sum,n)=>sum+n,0)})));
+    if(id==='streetSlam'&&this.engine.hoops)dialog.append(hoopsClubPanel({engine:this.engine,t:this.t,refresh:()=>this.stages(id),result:r=>this.ui.result(r)}));
     if(id==='navalDuel')dialog.append(navalUpgradePanel({engine:this.engine,activity:this.activity,data:this.data,t:this.t,refresh:()=>this.stages(id)}));
     if(id==='tennis'){const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));for(const key of Object.keys(this.data.config.minigames.tennis.difficulties)){const choose=button(this.t('soccer.difficulty.'+key),'tennis-difficulty',()=>{const r=this.engine.setTennisDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.tennisDifficulty===key));choices.append(choose);}dialog.append(choices,this.soccerHandedness('tennis'));}
     if(id==='soccer'){
