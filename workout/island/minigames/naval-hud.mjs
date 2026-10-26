@@ -1,3 +1,4 @@
+import {navalLostHealth} from './naval-marks.mjs?v=island-ready-plots-20261026-1';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
@@ -34,19 +35,22 @@ function drawDanger(p,marks,time,width,height){
 function shieldMark(p,x,y,fill){p.save();p.translate(x,y);p.beginPath();p.moveTo(0,-11);p.lineTo(9,-7);p.quadraticCurveTo(9,6,0,11);p.quadraticCurveTo(-9,6,-9,-7);p.closePath();p.fillStyle=fill>0?'#7fc7e8':'#2a4652';p.fill();p.strokeStyle='#e3d2a5';p.lineWidth=1.4;p.stroke();if(fill>0&&fill<1){p.clip();p.fillStyle='#2a4652';p.fillRect(-10,-11,20,22*(1-fill));}p.restore();}
 function targetMark(p,x,y){p.save();p.translate(x,y);p.strokeStyle='#f3e2b3';p.lineWidth=1.6;p.beginPath();p.arc(0,0,12,0,TAU);for(const [a,b]of [[0,-15],[0,15],[-15,0],[15,0]]){p.moveTo(a*.55,b*.55);p.lineTo(a,b);}p.stroke();enemyMark(p,0,-2);p.restore();}
 function checkMark(p,x,y){p.save();p.strokeStyle='#8edcc7';p.lineWidth=2;p.beginPath();p.moveTo(x-3,y);p.lineTo(x-1,y+2.5);p.lineTo(x+3.5,y-3);p.stroke();p.restore();}
-function windMark(p,x,y,angle,bars,wide){
- // Pill: windsock + arrow on the left, 1-3 rising strength bars on the right. Narrow fallback keeps the bars under the sock.
- p.save();p.fillStyle='#092a3cc0';if(wide)panel(p,x-16,y-15,58,30,15);else{p.beginPath();p.arc(x,y,15,0,TAU);p.fill();}
- p.translate(x,y);p.strokeStyle='#e0e8df';p.lineWidth=1.4;p.beginPath();p.moveTo(-9,9);p.lineTo(-9,-10);p.stroke();
- p.save();p.rotate(angle);p.fillStyle='#ffb36b';p.beginPath();p.moveTo(-8,-4.5);p.lineTo(6,-2.4);p.lineTo(6,2.4);p.lineTo(-8,4.5);p.closePath();p.fill();p.fillStyle='#fff3df';p.beginPath();p.moveTo(12,0);p.lineTo(6,-5);p.lineTo(6,5);p.closePath();p.fill();p.restore();
- p.fillStyle='#f3f1e6';for(let i=0;i<3;i++){p.globalAlpha=i<bars?1:.25;const h=6+i*4;if(wide)p.fillRect(18+i*6,7-h,4,h);else p.fillRect(-5+i*4,17,3,2+i*1.5);}
- p.globalAlpha=1;p.restore();}
+function windMark(p,x,y,angle,lines){
+ // A 26 px windsock, a 22 px arrow along the wind's push on the shell, and one to three curling wind lines.
+ p.save();p.fillStyle='#092a3cc0';panel(p,x-16,y-16,84,32,16);p.translate(x,y);
+ p.strokeStyle='#e0e8df';p.lineWidth=1.6;p.beginPath();p.moveTo(-6,13);p.lineTo(-6,-13);p.stroke();
+ p.fillStyle='#ffb36b';p.beginPath();p.moveTo(-6,-12);p.lineTo(8,-9);p.lineTo(8,-4);p.lineTo(-6,-1);p.closePath();p.fill();p.fillStyle='#f3f1e6';p.fillRect(0,-10.4,2.6,7.9);
+ p.save();p.translate(19,0);p.rotate(angle);p.lineCap='round';p.strokeStyle='#103847';p.lineWidth=4.6;p.beginPath();p.moveTo(-11,0);p.lineTo(7,0);p.stroke();p.strokeStyle='#fff3df';p.lineWidth=2.4;p.beginPath();p.moveTo(-11,0);p.lineTo(7,0);p.stroke();
+ p.fillStyle='#fff3df';p.strokeStyle='#103847';p.lineWidth=1.2;p.beginPath();p.moveTo(11,0);p.lineTo(4,-5);p.lineTo(4,5);p.closePath();p.fill();p.stroke();p.restore();
+ const n=Math.max(1,Math.min(3,lines)),wave=(oy)=>{p.beginPath();p.moveTo(36,oy);p.bezierCurveTo(41,oy-4,45,oy+4,50,oy);p.quadraticCurveTo(55,oy-3.5,52,oy-6);};
+ p.lineCap='round';for(let i=0;i<n;i++){const oy=(i-(n-1)/2)*7+2;p.strokeStyle='#103847';p.lineWidth=4;wave(oy);p.stroke();p.strokeStyle='#D8EDF2';p.lineWidth=2;wave(oy);p.stroke();}
+ p.restore();}
 function enemyMark(p,x,y,color='#e39b88'){p.save();p.translate(x,y);p.fillStyle=color;p.strokeStyle='#f5dccf';p.lineWidth=1;p.beginPath();p.moveTo(-9,2);p.lineTo(9,2);p.lineTo(6,7);p.lineTo(-6,7);p.closePath();p.fill();p.stroke();p.fillRect(-4,-3,6,5);p.beginPath();p.moveTo(0,-3);p.lineTo(7,-6);p.stroke();p.restore();}
 /** Feedback is an icon at the actual impact point: burst, gold star, ripple, cross. */
 function feedbackIcon(p,kind,q,u){
   p.save();p.translate(q.x,q.y-18-u*16);p.globalAlpha=Math.max(0,Math.min(1,(1-u)*2.4));p.lineWidth=2.4;p.lineJoin='round';
-  if(kind==='critical'){p.fillStyle='#ffe27a';p.strokeStyle='#7a4a12';p.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?6:14;p.lineTo(Math.cos(a)*r,Math.sin(a)*r);}p.closePath();p.fill();p.stroke();}
-  else if(kind==='hit'){p.fillStyle='#ffb35c';p.strokeStyle='#6b2c16';p.beginPath();for(let i=0;i<16;i++){const a=i*Math.PI/8,r=i%2?5:11;p.lineTo(Math.cos(a)*r,Math.sin(a)*r);}p.closePath();p.fill();p.stroke();}
+  // Gold star for the weak centre (22 px); an ordinary hit is the flash and sparks at the contact point.
+  if(kind==='critical'){p.fillStyle='#ffe27a';p.strokeStyle='#7a4a12';p.lineWidth=1.8;p.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?4.6:11;p.lineTo(Math.cos(a)*r,Math.sin(a)*r);}p.closePath();p.fill();p.stroke();}
   else if(kind==='miss'||kind==='evaded'){p.strokeStyle='#e9fbff';for(const r of [5,10])p.beginPath(),p.ellipse(0,0,r+u*6,(r+u*6)*.45,0,0,TAU),p.stroke();}
   else if(kind==='damage'){p.strokeStyle='#ff8d74';p.beginPath();p.moveTo(-8,-8);p.lineTo(8,8);p.moveTo(8,-8);p.lineTo(-8,8);p.stroke();}
   else if(kind==='repair'||kind==='full'){p.strokeStyle='#73e7aa';p.beginPath();p.moveTo(-8,0);p.lineTo(8,0);p.moveTo(0,-8);p.lineTo(0,8);p.stroke();}
@@ -68,12 +72,10 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
   p.direction='ltr';p.textAlign='right';p.font='11px sans-serif';p.fillStyle='#c5d4d6';text(percent(m.lives,m.maxLives)+'%',192,58);shown.icons.push('hull','shield');
   let missionRect;
   if(width>=620){
-    const w=Math.min(250,width-420),x=(width+96-w)/2;missionRect={x,y:16,w,h:58};glass(p,x,16,w,58,12);
-    p.direction='rtl';p.textAlign='right';p.fillStyle='#e9eee6';p.font='bold 12px sans-serif';text(translated(t,mission.title,'קרב ספינות'),x+w-12,33,w-110);
-    // Objective: an enemy hull inside a crosshair and the counter; sunk targets dim and get a check.
-    targetMark(p,x+26,42);p.direction='ltr';p.textAlign='left';p.fillStyle='#f3e2b3';p.font='bold 18px sans-serif';text(`${missionState.completed}/${missionState.total}`,x+46,49);
-    const total=Math.max(1,missionState.total),step=Math.min(22,(w-150)/total);for(let i=0;i<total;i++){const done=i<missionState.completed,cx=x+w-22-i*step;enemyMark(p,cx,52,done?'#56676b':'#e39b88');if(done)checkMark(p,cx+6,47);}shown.icons.push('objective');
-    p.fillStyle='#abc5cb';p.font='10px sans-serif';p.textAlign='left';const seconds=Math.max(0,Math.ceil(m.remaining));text(`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`,x+46,30);
+    // One objective icon, the counter and the clock. The title and duplicate hull pips are gone.
+    const w=112,x=(width+96-w)/2;missionRect={x,y:16,w,h:50};glass(p,x,16,w,50,12);
+    targetMark(p,x+26,41);p.direction='ltr';p.textAlign='left';p.fillStyle='#f3e2b3';p.font='bold 18px sans-serif';text(`${missionState.completed}/${missionState.total}`,x+50,49);shown.icons.push('objective');
+    p.fillStyle='#abc5cb';p.font='10px sans-serif';p.textAlign='left';const seconds=Math.max(0,Math.ceil(m.remaining));text(`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`,x+50,30);
   }
   const targets=[];
   for(const enemy of m.enemies){
@@ -85,15 +87,16 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
   for(const {enemy,q} of targets){
     const chosen=enemy===selected,priority=mission.id==='flagship'?enemy.boss:mission.id==='subhunt'?enemy.behavior==='dive':mission.id==='intercept'?enemy.behavior==='flank':false,x=Math.max(30,Math.min(width-30,q.x)),y=Math.max(90,q.y-8);
     p.fillStyle=chosen?'#092a3cee':'#092638c0';panel(p,x-28,y-6,56,10,5);bar(p,x-25,y-3,50,4,enemy.hp,enemy.maxHp,enemy.boss?'#ddbd78':chosen?'#a4ecd8':'#91bcb3');
+    const lost=navalLostHealth(enemy,m.time,balance.aimLook?.hit);if(lost){const a=x-25+50*Math.max(0,lost.from/enemy.maxHp),b=x-25+50*Math.min(1,lost.to/enemy.maxHp);p.save();p.globalAlpha=lost.alpha;p.fillStyle=balance.aimLook.hit.lost;p.fillRect(a,y-3,Math.max(1,b-a),4);p.restore();shown.lost=(shown.lost||0)+1;}
     if(priority){p.fillStyle='#e7c77f';p.beginPath();p.moveTo(x-36,y-5);p.lineTo(x-32,y-1);p.lineTo(x-36,y+3);p.lineTo(x-40,y-1);p.closePath();p.fill();}
     if(chosen){const aim=project(enemy.x,enemy.z,1.1);if(aim.depth>0){p.strokeStyle=m.aiming?'#a4ecd8':'#e7c77f';p.lineWidth=1.6;p.beginPath();for(const [sx,sy]of [[-1,-1],[1,-1],[-1,1],[1,1]]){p.moveTo(aim.x+sx*18,aim.y+sy*6);p.lineTo(aim.x+sx*18,aim.y+sy*11);p.lineTo(aim.x+sx*11,aim.y+sy*11);}p.stroke();}}
   }
   const feedback=m.lastFeedback,age=feedback?m.time-feedback.time:Infinity;
   if(m.resupplyTime>0){const u=Math.min(1,m.resupplyTime/2),q={x:width/2,y:height-70};p.save();p.strokeStyle='#e7cf9e';p.lineWidth=3;p.beginPath();p.arc(q.x,q.y,14,-Math.PI/2,-Math.PI/2+u*TAU);p.stroke();feedbackIcon(p,'resupply',{x:q.x,y:q.y+18},0);p.restore();shown.feedback='resupplying';}
-  else if(feedback&&age>=0&&age<1.1){const q=feedback.x===undefined?{x:width/2,y:height/2,depth:1}:project(feedback.x,feedback.z,1.2);if(q.depth>0){feedbackIcon(p,feedback.kind,q,age/1.1);shown.feedback=feedback.kind;}}
-  // Wind: a windsock pointing downwind with one to three strength bars.
+  else if(feedback&&age>=0&&age<(feedback.kind==='critical'?(balance.aimLook?.hit?.starSeconds??.45):1.1)){const span=feedback.kind==='critical'?(balance.aimLook?.hit?.starSeconds??.45):1.1,q=feedback.x===undefined?{x:width/2,y:height/2,depth:1}:project(feedback.x,feedback.z,1.2);if(q.depth>0){feedbackIcon(p,feedback.kind,q,age/span);shown.feedback=feedback.kind;}}
+  // Wind: a windsock, an arrow along the wind's push and one to three wind lines.
   const target=project(m.aim.x,m.aim.z),end=project(m.aim.x+m.wind.x,m.aim.z+m.wind.z),angle=Math.atan2(end.y-target.y,end.x-target.x),strength=Math.hypot(m.wind.x,m.wind.z),bars=strength>70?3:strength>45?2:1;
-  if(!missionRect||missionRect.x>262){windMark(p,240,40,angle,bars,!missionRect||missionRect.x>292);shown.icons.push('wind');shown.windBars=bars;}p.restore();
+  if(!missionRect||missionRect.x>314){windMark(p,240,40,angle,bars);shown.icons.push('wind');shown.windLines=bars;}p.restore();
   return shown;
 }
 

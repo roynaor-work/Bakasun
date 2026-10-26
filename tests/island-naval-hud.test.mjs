@@ -20,8 +20,9 @@ const project=(x,z,y=0)=>({x:370+z*1.3,y:250-(x-80)*.4-y*3,depth:2});
 const allowed=(text,extra=[])=>text.every(value=>[strings['feature.naval.10'],'1/4','2:00','100%',...extra].includes(value)||/^[!↓] \d+\.\ds$/.test(value));
 for(const [width,height]of [[844,390],[740,360],[1366,768]])test(`naval HUD shows live objective, readable clock and selected target at ${width}x${height}`,()=>{
  const record=paint(),shown=drawNavalHud(record.p,fixture(),{config:{...config,width,height},balance,art:{enemyNames:['first','second']},t},project);
- assert.ok(record.text().includes(strings['feature.naval.10']));assert.ok(record.text().includes('1/4'));assert.ok(record.text().includes('2:00'));assert.equal(record.text().includes('1:60'),false);
- assert.equal(shown.selected,1);assert.ok(shown.icons.includes('objective')&&shown.icons.includes('hull')&&shown.icons.includes('shield'));assert.equal(shown.icons.includes('fleet'),false,'the fleet bar repeated the objective counter');if(width>=1000)assert.ok(shown.windBars>=1&&shown.windBars<=3);assert.ok(allowed(record.text()),JSON.stringify(record.text()));assert.equal(record.text().includes('second'),false);
+ // 26/10/2026 (design round 3): the mission title line is gone; one objective icon, the counter and the clock remain.
+ assert.equal(record.text().includes(strings['feature.naval.10']),false);assert.ok(record.text().includes('1/4'));assert.ok(record.text().includes('2:00'));assert.equal(record.text().includes('1:60'),false);
+ assert.equal(shown.selected,1);assert.ok(shown.icons.includes('objective')&&shown.icons.includes('hull')&&shown.icons.includes('shield'));assert.equal(shown.icons.includes('fleet'),false,'the fleet bar repeated the objective counter');assert.ok(shown.icons.includes('wind')&&shown.windLines>=1&&shown.windLines<=3);assert.ok(allowed(record.text()),JSON.stringify(record.text()));assert.equal(record.text().includes('second'),false);
  const paths=record.calls.filter(call=>['moveTo','lineTo','roundRect'].includes(call.type));assert.ok(paths.every(call=>call.args.every(arg=>Number.isFinite(arg))));
 });
 test('naval lock temporarily overrides selection and never paints the former giant world range circle',()=>{

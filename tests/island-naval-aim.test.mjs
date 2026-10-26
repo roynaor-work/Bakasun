@@ -121,3 +121,29 @@ test('Naval weak-centre buzz is optional, short and respects the off setting',()
  const calls=[],nav={vibrate:ms=>{calls.push(ms);return true;}},store=v=>({getItem:()=>v});
  assert.equal(navalBuzz(store(null),nav),true);assert.equal(navalBuzz(store('off'),nav),false);assert.equal(navalBuzz(store(null),{}),false);assert.deepEqual(calls,[30]);assert.equal(b.aimControls.chargeSeconds,1.2);
 });
+
+// Round 3 (26/10/2026): the hit moment, the lost-health trail and our ship's paint.
+import {drawNavalHitFeedback,navalLostHealth} from '../workout/island/minigames/naval-marks.mjs';
+import {PLAYER_PAINT} from '../workout/island/minigames/naval-view.mjs';
+function painter(){const calls=[];const state={};const p=new Proxy(state,{get(t,k){if(k==='getTransform')return ()=>({a:1});if(k==='canvas')return {width:844,clientWidth:844};if(k==='createRadialGradient')return (...args)=>({addColorStop(){calls.push({k:'stop'});},args});if(k in t)return t[k];return (...args)=>calls.push({k,args});},set(t,k,v){t[k]=v;return true;}});return {p,calls};}
+test('Naval hit flash and sparks run only after a real hit, in display pixels, and end within 0.18 s',()=>{
+ const look=b.aimLook.hit,project=()=>({x:300,y:120,depth:4}),blast={x:320,z:0,h:8,at:10,hit:true,critical:false,owner:'player'};
+ assert.equal(look.flash,'#FFE1A3');assert.equal(look.flashPixels,22);assert.equal(look.criticalFlashPixels,30);assert.equal(look.flashSeconds,.08);assert.equal(look.sparkSeconds,.18);assert.equal(look.smoke,'#58636A');assert.equal(look.starPixels,22);assert.equal(look.starSeconds,.45);
+ const at=(age,extra={})=>drawNavalHitFeedback(painter().p,{time:10+age,blast:{...blast,...extra}},project,b);
+ const now=at(0);assert.ok(now.flash);assert.equal(now.diameter,22);assert.ok(now.sparks>=4&&now.sparks<=6);
+ assert.equal(at(0,{critical:true}).diameter,30);assert.equal(at(0,{critical:true,owner:'enemy'}).diameter,22,'only our weak-centre hit is a critical flash');
+ const later=at(.1);assert.equal(later.flash,false);assert.ok(later.sparks>=4);assert.equal(at(.2),null);
+ assert.equal(at(0,{hit:false}),null,'a splash shows no hit flash');assert.equal(drawNavalHitFeedback(painter().p,{time:10,blast:{...blast,at:undefined}},project,b),null);
+});
+test('Naval enemy bar shows the new health at once; the lost part holds 0.15 s and fades over 0.3 s',()=>{
+ const look=b.aimLook.hit,e={hp:3,maxHp:5,lostFrom:4.5,lostAt:2};
+ assert.equal(navalLostHealth(e,2.1,look).alpha,1);assert.ok(Math.abs(navalLostHealth(e,2.3,look).alpha-.5)<1e-9);assert.equal(navalLostHealth(e,2.5,look),null);
+ assert.deepEqual([navalLostHealth(e,2.1,look).from,navalLostHealth(e,2.1,look).to],[3,4.5]);assert.equal(navalLostHealth({hp:3,maxHp:5},2.1,look),null);
+ const m=make(3,0);m.update(.02,{autoAim:true,fireRelease:true});run(m,1.6);const victim=m.enemies.find(x=>x.lostAt!==undefined);
+ assert.ok(victim,'a real hit records the lost part');assert.ok(victim.lostFrom>victim.hp);assert.ok(Number.isFinite(m.blast.at)&&m.blast.hit&&m.blast.h>0,'the blast keeps the contact time and height');
+});
+test('Naval player paint keeps the specified palette and accent colour; enemies are not repainted',async()=>{
+ assert.deepEqual([PLAYER_PAINT.low,PLAYER_PAINT.deck,PLAYER_PAINT.accent,PLAYER_PAINT.contrast],['#536F80','#B9C9CC','#E07843',.8]);
+ const view=await readFile(new URL('../workout/island/minigames/naval-view.mjs',import.meta.url),'utf8');
+ assert.ok(view.includes("createVessel(THREE,r,model.equipment,{player:true},balance.playerModel)"));assert.ok(view.includes("if(variant.player)mat.color.set('#DDE6E5')"));assert.ok(view.includes('else hullBands(node,mat,model)'));
+});

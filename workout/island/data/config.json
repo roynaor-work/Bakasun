@@ -7369,7 +7369,8 @@
     "hull": {"color": "#62E6AA", "ring": 30, "diamond": 12},
     "critical": {"color": "#FFD166", "ring": 34, "diamond": 14},
     "markOutline": 2,
-    "shell": {"core": 6, "halo": 14, "haloOpacity": 0.35, "trailSeconds": 0.12, "trailMin": 60, "trailMax": 90}
+    "shell": {"core": 6, "halo": 14, "haloOpacity": 0.35, "trailSeconds": 0.12, "trailMin": 60, "trailMax": 90},
+    "hit": {"flash": "#FFE1A3", "flashPixels": 22, "flashSeconds": 0.08, "criticalFlashPixels": 30, "sparksMin": 4, "sparksMax": 6, "sparkMin": 12, "sparkMax": 20, "sparkSeconds": 0.18, "smoke": "#58636A", "smokeSeconds": 1, "starPixels": 22, "starSeconds": 0.45, "lost": "#F3B36B", "lostHold": 0.15, "lostFade": 0.3}
    }
   },
   "art": {

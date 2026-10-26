@@ -47,3 +47,25 @@ export function drawNavalShellTracers(p,m,balance){
  }
  p.restore();return drawn;
 }
+/** A real hit, in display pixels at the contact point: a short local flash,
+ * four to six sparks, and for the weak centre a larger flash (the gold star
+ * is the HUD feedback icon). Nothing here runs for a miss or a splash. */
+export function drawNavalHitFeedback(p,m,project,balance){
+ const b=m.blast,look=balance.aimLook?.hit;if(!look||!b?.hit||!Number.isFinite(b.at))return null;
+ const age=m.time-b.at;if(!(age>=0)||age>Math.max(look.flashSeconds,look.sparkSeconds))return null;
+ const q=project(b.x,b.z,(b.h||0)*balance.render.worldScale+.3);if(!(q.depth>0))return null;
+ const u=navalPixelUnit(p),critical=Boolean(b.critical&&b.owner==='player'),seed=Math.abs(Math.sin(b.at*12.9898+b.x*.078)*43758.5453)%1,n=look.sparksMin+Math.floor(seed*(look.sparksMax-look.sparksMin+1));
+ const out={flash:false,sparks:0,critical,diameter:critical?look.criticalFlashPixels:look.flashPixels};
+ p.save();
+ if(age<look.flashSeconds){const k=1-age/look.flashSeconds,r=out.diameter/2*u;p.globalAlpha=.35+.65*k;const g=p.createRadialGradient(q.x,q.y,0,q.x,q.y,r);g.addColorStop(0,'#fffaf0');g.addColorStop(.45,look.flash);g.addColorStop(1,'rgba(255,225,163,0)');p.fillStyle=g;p.beginPath();p.arc(q.x,q.y,r,0,TAU);p.fill();out.flash=true;}
+ if(age<look.sparkSeconds){const k=age/look.sparkSeconds;p.lineCap='round';p.globalAlpha=1-k;
+  for(let i=0;i<n;i++){const a=seed*TAU+i*TAU/n+Math.sin(i*7.1+seed*9)*.35,len=(look.sparkMin+(look.sparkMax-look.sparkMin)*((Math.sin(i*3.7+seed*5)+1)/2))*u,r0=(3+k*14)*u,r1=r0+len*(1-.35*k);
+   p.strokeStyle=i%2?look.flash:'#ffb35c';p.lineWidth=Math.max(1,2.2*(1-k))*u;p.beginPath();p.moveTo(q.x+Math.cos(a)*r0,q.y+Math.sin(a)*r0*.8);p.lineTo(q.x+Math.cos(a)*r1,q.y+Math.sin(a)*r1*.8);p.stroke();}
+  out.sparks=n;}
+ p.restore();return out;
+}
+/** The part of an enemy bar that a hit just removed: held, then faded. */
+export function navalLostHealth(enemy,time,look){
+ if(!look||enemy.lostAt===undefined||!(enemy.lostFrom>enemy.hp))return null;const age=time-enemy.lostAt;if(age<0||age>look.lostHold+look.lostFade)return null;
+ return {from:enemy.hp,to:enemy.lostFrom,alpha:age<look.lostHold?1:1-(age-look.lostHold)/look.lostFade};
+}

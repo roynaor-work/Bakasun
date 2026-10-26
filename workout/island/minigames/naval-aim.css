@@ -31,3 +31,6 @@
 .game-screen[data-game=navalDuel] .game-controls.left-handed .naval-aim-gauge{right:auto;left:max(118px,calc(env(safe-area-inset-left) + 96px));transform:scaleX(-1)}
 @media(max-height:350px){.game-screen[data-game=navalDuel] .naval-aim-cancel{top:72px}.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot .game-icon{width:44px;height:44px}.game-screen[data-game=navalDuel] .naval-aim-gauge{bottom:84px;right:104px}.game-screen[data-game=navalDuel] .game-controls.left-handed .naval-weapon-picker{left:115px}}
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=navalDuel] .naval-aim-gauge,.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot::before{transition:none}}
+/* Ammo panel: weapon icon, count and the swap arrow; the name lives in the picker's accessible label, the weapon menu and the help. */
+.game-screen[data-game=navalDuel] .naval-weapon-picker .naval-picked-name{display:none}
+.game-screen[data-game=navalDuel] .naval-weapon-picker{width:104px;min-width:104px}
