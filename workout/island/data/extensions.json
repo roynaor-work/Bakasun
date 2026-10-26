@@ -12,7 +12,8 @@
     "extensions/activity-income.mjs",
     "extensions/soccer.mjs",
     "extensions/tennis.mjs",
-    "extensions/racing.mjs"
+    "extensions/racing.mjs",
+    "extensions/alpine-rush.mjs"
   ],
   "records": {
     "islandRacing": {
@@ -102,6 +103,14 @@
       "difficulty": "stage",
       "helpId": "minigame.tennis.help",
       "icon": "🎾"
+    },
+    "alpineRush": {
+      "id": "alpineRush",
+      "title": "minigame.alpineRush.title",
+      "featureFlag": "alpineRush",
+      "difficulty": "stage",
+      "helpId": "minigame.alpineRush.help",
+      "icon": "🏂"
     }
   }
 }

@@ -1,26 +1,26 @@
 import * as T from '../vendor/three.module.js';
-import {CityDepthView} from './city-depth.mjs?v=island-citydetail-20261025-2';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-citydetail-20261025-2';
-import { Avatar } from './avatar.mjs?v=island-citydetail-20261025-2';
-import { Citizens } from './city-citizens.mjs?v=island-citydetail-20261025-2';
-import {cityLighting} from './city-lighting.mjs?v=island-citydetail-20261025-2';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-citydetail-20261025-2';
-import { levelValue } from '../engine/metrics.mjs?v=island-citydetail-20261025-2';
-import { LocalModels } from './local-models.mjs?v=island-citydetail-20261025-2';
-import {MeshyPilot} from './meshy-pilot.mjs?v=island-citydetail-20261025-2';
-import {cityPaths} from '../engine/paths.mjs?v=island-citydetail-20261025-2';
-import {shoreDirection} from '../engine/placement-help.mjs?v=island-citydetail-20261025-2';
-import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-citydetail-20261025-2';
-import {batchMeshes} from './batch.mjs?v=island-citydetail-20261025-2';
-import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-citydetail-20261025-2';
-import {CityStreets} from './city-streets.mjs?v=island-citydetail-20261025-2';
-import {CityTraffic} from './city-traffic.mjs?v=island-citydetail-20261025-2';
-import {CityOverlay} from './city-overlay.mjs?v=island-citydetail-20261025-2';
-import {CityGrowth} from './city-growth.mjs?v=island-citydetail-20261025-2';
-import {planningFrame} from './planning-frame.mjs?v=island-citydetail-20261025-2';
-import {CitySites} from './city-sites.mjs?v=island-citydetail-20261025-2';
-import {streetFacing} from '../engine/city-sites.mjs?v=island-citydetail-20261025-2';
-import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-citydetail-20261025-2';
+import {CityDepthView} from './city-depth.mjs?v=island-alpine-20261026-1';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-alpine-20261026-1';
+import { Avatar } from './avatar.mjs?v=island-alpine-20261026-1';
+import { Citizens } from './city-citizens.mjs?v=island-alpine-20261026-1';
+import {cityLighting} from './city-lighting.mjs?v=island-alpine-20261026-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-alpine-20261026-1';
+import { levelValue } from '../engine/metrics.mjs?v=island-alpine-20261026-1';
+import { LocalModels } from './local-models.mjs?v=island-alpine-20261026-1';
+import {MeshyPilot} from './meshy-pilot.mjs?v=island-alpine-20261026-1';
+import {cityPaths} from '../engine/paths.mjs?v=island-alpine-20261026-1';
+import {shoreDirection} from '../engine/placement-help.mjs?v=island-alpine-20261026-1';
+import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-alpine-20261026-1';
+import {batchMeshes} from './batch.mjs?v=island-alpine-20261026-1';
+import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-alpine-20261026-1';
+import {CityStreets} from './city-streets.mjs?v=island-alpine-20261026-1';
+import {CityTraffic} from './city-traffic.mjs?v=island-alpine-20261026-1';
+import {CityOverlay} from './city-overlay.mjs?v=island-alpine-20261026-1';
+import {CityGrowth} from './city-growth.mjs?v=island-alpine-20261026-1';
+import {planningFrame} from './planning-frame.mjs?v=island-alpine-20261026-1';
+import {CitySites} from './city-sites.mjs?v=island-alpine-20261026-1';
+import {streetFacing} from '../engine/city-sites.mjs?v=island-alpine-20261026-1';
+import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-alpine-20261026-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.

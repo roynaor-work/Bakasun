@@ -1,0 +1,185 @@
+import {createAlpineEngine} from './alpine-engine.mjs?v=island-alpine-20261026-1';
+import {createAlpineControls} from './alpine-controls.mjs?v=island-alpine-20261026-1';
+import {createAlpineAudio} from './alpine-audio.mjs?v=island-alpine-20261026-1';
+import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-alpine-20261026-1';
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
+const BOLT = '<path d="m14 2-9 12h6l-1 8 9-13h-6l1-7Z"/>';
+const CHEVRON = '<path d="m15 5-7 7 7 7"/>';
+
+/** Controller for one Alpine Rush session: owns the engine, the view, requestAnimationFrame,
+ * input, audio and the HUD. The island engine owns rewards; this file only reports the
+ * finished race once through ctx.finish. Without a canvas it runs headless (tests). */
+export function runAlpineSession(ctx) {
+  const balance = ctx.balance, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
+  const engine = createAlpineEngine({balance, stage: stageNumber, seed: ctx.seed, equipment: ctx.equipment, power: ctx.power});
+  const level = engine.level, track = engine.track;
+  let storage = null; try { storage = ctx.storage === undefined ? globalThis.localStorage : ctx.storage; } catch {}
+  const records = loadRecords(storage, balance.records);
+  let audio; try { audio = createAlpineAudio({storage}); } catch { audio = createAlpineAudio({storage: null, AudioContext: null}); }
+  let view = null, input = null, frame, last = 0, paused = false, disposed = false, finished = false, renderError = null, loadTimer, quality = 'high';
+  let frames = 0, frameMs = 0, lastSnapshot = engine.snapshot(), recordOutcome = null, calloutUntil = 0, dom = null;
+  const abort = new AbortController();
+  const session = {
+    setPaused(value) {
+      paused = !!value; last = 0; input?.setEnabled(!paused); audio.setPaused(paused);
+      engine.command({type: paused ? 'pause' : 'resume'});
+    },
+    /** Same action as the opening button; also used by tests. */
+    start() { if (disposed || !ready() || engine.phase !== 'menu') return false; audio.unlock(); engine.command({type: 'start'}); last = 0; return true; },
+    dispose() {
+      if (disposed) return; disposed = true; clearTimeout(loadTimer);
+      if (frame !== undefined) cancelAnimationFrame(frame); abort.abort(); input?.dispose(); audio.dispose(); view?.dispose(); engine.dispose();
+      dom?.nodes.forEach(n => n.remove());
+    },
+    get snapshot() {
+      return {phase: engine.phase, paused, disposed, loaded: Boolean(view), error: renderError, quality, stage: stageNumber, trackId: track.id,
+        frame: disposed ? null : engine.snapshot(), records: {status: records.status, best: records.data.best[track.id] || null}, recordOutcome,
+        renderMetrics: view?.metrics(), audioMetrics: audio.metrics(), input: input ? {enabled: input.enabled, dragging: input.dragging} : null};
+    },
+  };
+  const ready = () => !ctx.canvas || Boolean(view);
+  if (new URLSearchParams(globalThis.location?.search || '').get('dev') === '1' || ctx.debug) session.debug = {engine, step: dt => engine.step(dt), view: () => view, input: () => input};
+  if (!ctx.canvas) return session;
+
+  // ---------- DOM (design package markup, scoped to the island game screen) ----------
+  const {canvas, controls, status} = ctx, doc = canvas.ownerDocument, stage = canvas.parentElement, screen = canvas.closest('.game-screen');
+  const el = (tag, cls = '', text = '') => { const n = doc.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
+  const svg = (paths, viewBox = '0 0 24 24') => { const s = doc.createElementNS(SVG_NS, 'svg'); s.setAttribute('viewBox', viewBox); s.setAttribute('aria-hidden', 'true'); s.innerHTML = paths; return s; };
+  const ltr = text => { const b = el('bdi', 'alpine-ltr', text); b.dir = 'ltr'; return b; };
+  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-alpine-20261026-1', import.meta.url).href;
+  const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
+  const vignette = el('div', 'alpine-vignette');
+  const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
+  const trackName = t(track.name), trackNumber = String(track.number).padStart(2, '0'), km = (track.length / 1000).toLocaleString('he-IL', {maximumFractionDigits: 2});
+  // HUD
+  const hud = el('section', 'alpine-hud'); hud.setAttribute('aria-label', t('alpine.hud'));
+  const rank = el('strong', 'alpine-rank', '06'), position = el('div', 'alpine-position'), of = el('span', 'alpine-of'); of.append(ltr('/ 06'), el('small', '', t('alpine.position')));
+  position.append(rank, of);
+  const info = el('div', 'alpine-race-info'), trackLine = el('span', 'alpine-track-line'); trackLine.append(t('alpine.trackLabel', {number: trackNumber}), el('i'), trackName);
+  const distance = el('b', 'alpine-distance'), distanceValue = ltr('0'); distance.append(distanceValue, ' ', el('small', '', t('alpine.toFinish')));
+  const progress = el('div', 'alpine-progress'), progressFill = el('span'); progress.append(progressFill); info.append(trackLine, distance, progress);
+  const time = el('div', 'alpine-time'), timer = ltr('00:00.00'); time.append(el('small', '', t('alpine.raceTime')), timer);
+  hud.append(position, info, time);
+  // Opening card
+  const intro = el('section', 'alpine-intro'); intro.setAttribute('aria-label', t('alpine.opening'));
+  const title = el('h1', 'alpine-title'); title.dir = 'ltr'; title.append('ALPINE', el('br'), el('em', '', 'RUSH.'));
+  const startButton = el('button', 'alpine-primary'); startButton.type = 'button'; startButton.dataset.action = 'alpine-start'; startButton.disabled = true;
+  startButton.append(el('span', '', t('alpine.start')), svg(CHEVRON));
+  const card = el('div', 'alpine-track-card'), cardText = el('div');
+  cardText.append(el('b', '', trackName), el('small', '', t('alpine.trackMeta', {riders: balance.riders, km})));
+  const dots = el('span', 'alpine-difficulty', '●'.repeat(track.difficulty) + '○'.repeat(3 - track.difficulty)); dots.setAttribute('aria-label', t('alpine.difficulty', {level: track.difficulty}));
+  card.append(el('span', 'alpine-track-number', trackNumber), cardText, dots);
+  const best = records.data.best[track.id], bestLine = el('p', 'alpine-best');
+  if (best) bestLine.append(t('alpine.best') + ' ', ltr(formatRaceTime(best.ms))); else bestLine.textContent = t('alpine.goal', {rank: level.targetRank});
+  intro.append(el('span', 'alpine-eyebrow', 'THE MOUNTAIN IS YOURS'), title, el('p', 'alpine-tagline', t('alpine.tagline')), startButton, el('span', 'alpine-start-note', t('alpine.startNote')), card, bestLine);
+  const worldLabel = el('div', 'alpine-world-label'); worldLabel.setAttribute('aria-hidden', 'true'); worldLabel.append(el('span', '', '46°35′ N   08°02′ E'), el('b', '', 'ABOVE THE ORDINARY.'), el('span', '', '2,840 M / ALPINE CIRCUIT'));
+  const countdown = el('div', 'alpine-countdown'); countdown.setAttribute('aria-live', 'assertive');
+  const callout = el('div', 'alpine-callout'), calloutKicker = el('span'), calloutLine = el('b'); callout.append(calloutKicker, calloutLine); callout.hidden = true;
+  const loading = el('div', 'alpine-loading'), loadingText = el('p', '', t('alpine.loading')); loading.append(el('span', 'alpine-spinner'), loadingText);
+  // Footer controls (inside the island controls region)
+  const footer = el('div', 'alpine-footer');
+  const speed = el('div', 'alpine-speed'), speedValue = el('b', '', '0'), bars = el('div', 'alpine-speed-bars'); bars.setAttribute('aria-hidden', 'true');
+  for (let i = 0; i < 6; i++) bars.append(el('i'));
+  speed.append(speedValue, el('span', '', t('alpine.kmh')), bars);
+  const hint = el('div', 'alpine-steer-hint'); hint.append(el('span', '', '‹'), el('span', '', t('alpine.dragHint')), el('span', '', '›')); hint.setAttribute('aria-hidden', 'true');
+  const boostButton = el('button', 'alpine-boost'); boostButton.type = 'button'; boostButton.dataset.gameControl = 'boost'; boostButton.dataset.action = 'alpine-boost';
+  boostButton.setAttribute('aria-label', t('alpine.boost')); boostButton.setAttribute('aria-keyshortcuts', 'Space');
+  boostButton.append(svg(BOLT), el('b', '', t('alpine.boost')), el('small', '', 'SPACE'));
+  footer.append(speed, hint, boostButton);
+  stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading);
+  controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css); stage.append(app);
+  dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, app]};
+  const setPhase = phase => { app.dataset.phase = phase; screen.dataset.alpinePhase = phase; };
+  setPhase('menu');
+  canvas.setAttribute('aria-label', t('alpine.canvas'));
+
+  input = createAlpineControls({canvas, boostButton, config: {...balance.controls, trackHalfWidth: balance.physics.trackHalfWidth}});
+  input.setEnabled(!paused);
+  startButton.addEventListener('click', () => { if (session.start()) { setPhase('countdown'); canvas.focus({preventScroll: true}); } }, {signal: abort.signal});
+  screen.addEventListener('pointerdown', () => audio.unlock(), {capture: true, signal: abort.signal});
+  doc.addEventListener('keydown', () => audio.unlock(), {signal: abort.signal});
+  canvas.addEventListener('webglcontextlost', event => { if (disposed) return; event.preventDefault(); renderError = 'webgl-context-lost'; fail(t('alpine.contextLost')); }, {signal: abort.signal});
+
+  function fail(message) {
+    session.setPaused(true); loading.hidden = false; loading.dataset.error = 'true'; loadingText.textContent = message;
+    if (!loading.querySelector('button')) { const back = el('button', 'alpine-primary alpine-back', t('alpine.backIsland')); back.type = 'button'; back.dataset.action = 'alpine-back'; back.onclick = () => ctx.cancel(); loading.append(back); back.focus(); }
+  }
+  const params = new URLSearchParams(globalThis.location?.search || '');
+  if (params.get('quality') === 'low') quality = 'low';
+  const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
+  loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; fail(t('alpine.loadSlow')); } }, 25000);
+  import('./alpine-view.mjs?v=island-alpine-20261026-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(loaded => {
+    // A view that arrives after exit is released at once and never attached.
+    if (disposed || renderError) { loaded.dispose(); return; }
+    clearTimeout(loadTimer); view = loaded; loading.hidden = true; startButton.disabled = false; app.dataset.render = loaded.mode;
+    if (!paused) startButton.focus({preventScroll: true});
+    last = 0; frame = requestAnimationFrame(tick);
+  }).catch(error => {
+    if (disposed || error?.disposed) return;
+    clearTimeout(loadTimer); renderError = String(error?.message || error); fail(t('alpine.unavailable')); ctx.onError?.('alpine.unavailable');
+  });
+
+  const CALLOUTS = {takeoff: 'air', collision: 'hit', boost: 'boost', pad: 'pad', overtake: 'overtake', gate: 'gate'};
+  function showCallout(kind, now) { calloutKicker.textContent = t(`alpine.callout.${kind}.kicker`); calloutLine.textContent = t(`alpine.callout.${kind}`); callout.hidden = false; callout.dataset.kind = kind; calloutUntil = now + (kind === 'gate' ? .8 : 1.3); }
+  function handleEvents(snap, now) {
+    for (const e of engine.drainEvents()) {
+      if (e.type === 'countdown') { audio.cue(e.value > 0 ? 'countdown' : 'go'); if (e.value > 0) ctx.sound?.('button'); continue; }
+      if (e.riderId !== 'player') { if (e.type === 'overtake' && e.objectId === 'player') status.textContent = t('alpine.status.overtaken', {rank: snap.rank}); continue; }
+      if (e.type === 'boost-start') { audio.cue('boost'); showCallout(e.objectId ? CALLOUTS.pad : CALLOUTS.boost, now); }
+      else if (e.type === 'collision') { audio.cue('hit'); showCallout(CALLOUTS.collision, now); }
+      else if (e.type === 'takeoff') { audio.cue('takeoff'); showCallout(CALLOUTS.takeoff, now); }
+      else if (e.type === 'land') audio.cue('land');
+      else if (e.type === 'gate') { audio.cue('gate'); if (now > calloutUntil) showCallout(CALLOUTS.gate, now); }
+      else if (e.type === 'overtake') { audio.cue('overtake'); if (now > calloutUntil) showCallout(CALLOUTS.overtake, now); status.textContent = t('alpine.status.rank', {rank: snap.rank}); }
+      else if (e.type === 'finish') audio.cue('finish');
+    }
+  }
+  let shownRank = '', shownSpeed = '', shownTime = '', shownCount = '';
+  function updateHud(snap) {
+    const r = String(snap.rank).padStart(2, '0'); if (r !== shownRank) { shownRank = r; rank.textContent = r; }
+    distanceValue.textContent = Math.round(snap.remainingM).toLocaleString('en-US');
+    progressFill.style.width = `${Math.min(100, snap.distanceM / snap.trackLength * 100).toFixed(1)}%`;
+    const clock = formatRaceTime(snap.timeMs); if (clock !== shownTime) { shownTime = clock; timer.textContent = clock; }
+    const kmh = String(snap.speedKmh); if (kmh !== shownSpeed) { shownSpeed = kmh; speedValue.textContent = kmh; }
+    const fraction = Math.min(1, snap.speedKmh / (balance.physics.boostSpeed * 3.6));
+    [...bars.children].forEach((bar, i) => bar.classList.toggle('on', fraction > i / 6 + .02));
+    boostButton.classList.toggle('active', !!snap.player.boosting); boostButton.dataset.ready = String(!!snap.boostReady);
+    boostButton.style.setProperty('--tank', String(snap.boostFraction ?? 0));
+    const count = snap.phase === 'countdown' ? String(snap.countdown) : ''; if (count !== shownCount) { shownCount = count; countdown.textContent = count; countdown.hidden = !count; }
+    screen.dataset.boosting = String(!!snap.player.boosting); screen.dataset.hit = String(!!snap.player.hit);
+    hint.hidden = snap.timeMs > 6000;
+  }
+
+  function tick(at) {
+    if (disposed) return;
+    const dt = last ? Math.min(balance.physics.maxCatchUpSeconds, (at - last) / 1000) : 0, ms = last ? at - last : 0; last = at;
+    const blocked = paused || doc.hidden;
+    if (!blocked && view) {
+      const sample = input.sample(lastSnapshot.player);
+      engine.command({type: 'steer', value: sample.steer});
+      if (sample.boost) engine.command({type: 'boost'});
+      engine.step(dt);
+      if (ms > 0 && engine.phase === 'racing') { frames++; frameMs += ms; if (frames >= balance.render.qualitySampleFrames) { if (quality === 'high' && frameMs / frames > balance.render.slowFrameMs) { quality = 'low'; view.setQuality('low'); } frames = 0; frameMs = 0; } }
+    }
+    const snap = lastSnapshot = engine.snapshot(), now = snap.timeMs / 1000;
+    if (snap.phase !== app.dataset.phase && snap.phase !== 'paused') setPhase(snap.phase);
+    handleEvents(snap, now);
+    if (now > calloutUntil) callout.hidden = true;
+    audio.sync(blocked ? 0 : snap.speedKmh, {boosting: snap.player.boosting, carving: Math.abs(snap.player.lean || 0), airborne: snap.player.airborne});
+    view.render(snap); updateHud(snap);
+    if (snap.result && !finished) {
+      finished = true;
+      const r = snap.result;
+      recordOutcome = recordRun(storage, balance.records, records, r);
+      const summary = {...r, trackName, bestMs: recordOutcome.best?.ms ?? null, newBest: recordOutcome.newBest};
+      ctx.onAlpineSummary?.(summary);
+      const settled = ctx.finish({outcome: r.won ? 'win' : 'lose', score: r.score, alpine: {...r}});
+      if (settled && settled.ok === false && !disposed) { ctx.onError?.(settled.reason); ctx.cancel(); }
+      return;
+    }
+    frame = requestAnimationFrame(tick);
+  }
+  return session;
+}

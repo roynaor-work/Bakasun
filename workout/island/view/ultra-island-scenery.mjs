@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {coastline,outcropGeometry,SEA_LEVEL} from './ultra-island-terrain.mjs?v=island-citydetail-20261025-2';
+import {coastline,outcropGeometry,SEA_LEVEL} from './ultra-island-terrain.mjs?v=island-alpine-20261026-1';
 
 export function seeded(seed){return()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};}
 
