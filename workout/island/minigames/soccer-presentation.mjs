@@ -1,4 +1,4 @@
-import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-citydetail-20261025-2';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-ready-plots-20261026-1';
 /** Pure presentation decisions; the simulation never imports this module. */
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 export function slideWeight(player,config){

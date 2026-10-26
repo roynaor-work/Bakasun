@@ -1,10 +1,11 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-citydetail-20261025-2';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-citydetail-20261025-2';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-citydetail-20261025-2';
-import {CityDepthInterface} from './city-depth.mjs?v=island-citydetail-20261025-2';
-import {CityManagementInterface} from './city-management.mjs?v=island-citydetail-20261025-2';
-import {nearestCityZone} from '../engine/city-management.mjs?v=island-citydetail-20261025-2';
-import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-citydetail-20261025-2';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-ready-plots-20261026-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-ready-plots-20261026-1';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-ready-plots-20261026-1';
+import {CityDepthInterface} from './city-depth.mjs?v=island-ready-plots-20261026-1';
+import {CityManagementInterface} from './city-management.mjs?v=island-ready-plots-20261026-1';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-ready-plots-20261026-1';
+import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-ready-plots-20261026-1';
+import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-ready-plots-20261026-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -29,6 +30,7 @@ const list = value => Array.isArray(value) ? value : Object.values(value ?? {});
 export class IslandInterface {
   constructor({ root, engine, view, data, t }) {
     Object.assign(this, { root, engine, view, data, t });
+    if(data.featureFlags?.readyPlots!==false)engine.enableReadyBuilding?.();
     this.category = 'basic';
     this.selected = null;
     this.currentGhost = null;
@@ -40,6 +42,7 @@ export class IslandInterface {
     this.modalRoot = document.querySelector('#modal-root');
     root.replaceChildren();
     root.className = 'island-ui';
+    this.readyPlots=new ReadyPlotsInterface(this);
     this.buildShell();
     this.cityInterface = engine.city ? new CityDepthInterface(this) : null;
     this.cityManagement=new CityManagementInterface(this);
@@ -88,7 +91,7 @@ export class IslandInterface {
     const utilities = el('div', 'utilities');
     const help = button('?', 'help', 'round-button');
     help.title = this.t('app.help'); help.setAttribute('aria-label', this.t('app.help'));
-    help.onclick = () => this.toast(this.movingId ? 'help.move' : this.infoId ? 'help.info' : this.selected ? 'help.build' : 'help.world');
+    help.onclick = () => this.toast(this.movingId ? 'help.move' : this.infoId ? 'help.info' : this.selected ? 'help.build' : this.readyPlots?.active ? 'ready.help' : 'help.world');
     const undo = button('↶', 'undo', 'round-button');
     undo.title = this.t('app.undo'); undo.setAttribute('aria-label', this.t('app.undo'));
     undo.onclick = () => this.result(this.engine.undo());
@@ -163,6 +166,7 @@ export class IslandInterface {
     this.catalog = el('div', 'catalog');
     this.catalog.id = 'building-catalog'; this.catalog.hidden = true;
     dockTop.append(this.dockToggle, this.categories);
+    this.readyPlots?.addEntry(dockTop);
     this.catalogHint = el('div', 'catalog-caption'); this.catalogHint.hidden = true;
     this.catalogHint.append(el('strong', '', this.t('app.choose')), el('span', '', this.t('app.cameraHint')));
     dock.append(dockTop, this.catalogHint, this.catalog, this.placement);
@@ -223,11 +227,13 @@ export class IslandInterface {
   refresh() {
     const s = this.engine.state;
     this.view.setWorld(s);
+    this.readyPlots?.refresh();
     this.view.setCityReport?.(this.engine.city?.report(), this.infoId);
     const activeStep = this.tutorialStep() ?? this.engine.nextObjective?.();
     if (activeStep && this.activeStepId !== activeStep.id) {
       this.activeStepId = activeStep.id;
       if (activeStep.buildType) this.category = this.getBuilding(activeStep.buildType).category;
+      if(this.readyPlots?.active&&activeStep.buildType)this.readyPlots.focusType(activeStep.buildType);
       this.drawCatalog();
     }
     this.wallet.replaceChildren();
@@ -312,11 +318,12 @@ export class IslandInterface {
       for (let i = 0; i < this.steps().length; i++) dots.append(el('span', i < this.engine.state.tutorial.step ? 'done' : i === this.engine.state.tutorial.step ? 'current' : ''));
       const skip = button(this.t('tutorial.skip'), 'skip-tutorial', 'text-button');
       skip.onclick = event => { event.stopPropagation(); this.engine.skipTutorial(); };
-      this.missionDetails.append(count, dots, el('p', 'mission-hint', this.t(this.selected === step.buildType ? 'tutorial.place' : 'tutorial.select')), skip);
+      this.missionDetails.append(count, dots, el('p', 'mission-hint', this.t(this.readyPlots?.active?'ready.tutorialHint':this.selected === step.buildType ? 'tutorial.place' : 'tutorial.select')), skip);
     } else {
       this.missionDetails.append(el('p', 'mission-hint', this.t('app.explore')));
       if (objective?.reward?.money) this.missionDetails.append(el('b', 'reward', `${this.t('app.reward')} ● +${objective.reward.money}`));
     }
+    if(this.readyPlots?.active&&objective?.buildType&&objective.buildType!=='road')this.missionDetails.append(Object.assign(button(this.t('ready.objective'),'ready-objective','primary-button'),{onclick:()=>this.selectBuilding(objective.buildType)}));
   }
   drawCatalog() {
     this.catalog.replaceChildren();
@@ -356,10 +363,11 @@ export class IslandInterface {
       b.title = !record.locked && !availability.ok ? this.t(availability.reason) : '';
     }
   }
-  selectBuilding(id) {
+  selectBuilding(id,{manual=false}={}) {
     this.zoneKind=null;
     const building = this.getBuilding(id);
     if (!building) return;
+    if(this.readyPlots?.active&&!manual){this.category=building.category;this.readyPlots.chooseType(id);return;}
     if (building.locked) { this.toast('reason.locked'); return; }
     if(placementAvailability(this.engine.state,this.engine.registry,id).reason==='reason.learningOrder'){this.toast('reason.learningOrder');return;}
     this.closeInfo();
@@ -384,6 +392,7 @@ export class IslandInterface {
   }
   openBuildingCatalog(id){
     const building=this.getBuilding(id);if(!building)return;
+    if(this.readyPlots?.active){this.selectBuilding(id);return;}
     this.cancelPlacement();this.closeDetails();this.category=building.category;this.drawCatalog();this.setDockOpen(true);
     const card=[...this.catalog.children].find(node=>node.dataset.building===id);
     if(card){card.classList.add('required-building');card.scrollIntoView({block:'nearest',inline:'center'});card.focus();}
@@ -403,7 +412,7 @@ export class IslandInterface {
     this.view.setCitySites?.(this.siteSuggestions);
   }
   onHover(cell) { if (this.selected) this.updateGhost(cell); }
-  onCell(cell) { if (this.selected) this.updateGhost(cell); else if(!this.cityManagement?.selectSiteAt(cell))this.closeInfo(); }
+  onCell(cell) { if (this.selected) this.updateGhost(cell); else if(!this.readyPlots?.selectCell(cell)&&!this.cityManagement?.selectSiteAt(cell))this.closeInfo(); }
   updateGhost(cell,snap=true) {
     if (!this.selected) return;
     this.currentGhost = { x: Math.floor(cell.x), z: Math.floor(cell.z) };
@@ -449,7 +458,7 @@ export class IslandInterface {
   startZone(kind){
     this.cancelPlacement();this.cityManagement.hideOverlay();
     const typeId=this.data.config.cityManagement.zones[kind].typeId;
-    this.selectBuilding(typeId);this.zoneKind=kind;this.zoneSessionCount=0;this.root.dataset.cityZoning=kind;this.refreshSiteSuggestions();this.updateGhost(this.findCell(typeId),false);
+    this.selectBuilding(typeId,{manual:true});this.zoneKind=kind;this.zoneSessionCount=0;this.root.dataset.cityZoning=kind;this.refreshSiteSuggestions();this.updateGhost(this.findCell(typeId),false);
   }
   showInfo(id, {manage=false}={}) {
     if(this.cityManagement?.panel)this.closeModal();
@@ -514,6 +523,7 @@ export class IslandInterface {
     const [width,depth]=record.footprint;
     if(record.id==='soccer'&&!this.findMoveCell(record.id,instance))this.info.append(el('p','move-space-reason',this.t('app.noMoveSpace',{width,depth})));
     const remove = button(`↩ ${this.t('app.remove')}`, 'remove', 'secondary-button');
+    if(this.engine.state.readyPlan&&record.isRoad){move.disabled=true;remove.disabled=true;move.title=remove.title=this.t('ready.fixedRoad');this.info.append(el('p','',this.t('ready.fixedRoad')));}
     remove.onclick = () => {
       remove.textContent = this.t('app.removeYes');
       remove.dataset.action = 'remove-yes';
@@ -524,7 +534,12 @@ export class IslandInterface {
     this.activityInterface?.decorateInfo(instance,actions);
     this.cityInterface?.decorate(instance,actions);
     if(record.learningStation){const learn=button(`${record.icon} לומדים`,'building-learn','primary-button');learn.onclick=()=>this.learningInterface.start(record.learningStation);actions.append(learn);}
-    if(record.id==='cityHall'){this.cityManagement.addEntry(this.info);this.view.showRadius(null);return;}
+    if(record.id==='cityHall'){
+      this.cityManagement.addEntry(this.info);this.view.showRadius(null);
+      const objective=this.tutorialStep()??this.engine.nextObjective?.();
+      if(this.readyPlots?.active&&objective?.buildType&&objective.buildType!=='road')this.info.append(Object.assign(button(this.t('ready.objective'),'ready-next-building','primary-button'),{onclick:()=>this.selectBuilding(objective.buildType)}));
+      return;
+    }
     if (nextLevel) {
       const nextInstance = { ...instance, level: instance.level + 1 };
       const details = el('p', 'upgrade-details');
@@ -641,7 +656,7 @@ export class IslandInterface {
       field.append(choices); content.append(field);
     }
     const start = button(this.t('avatar.start'), 'avatar-start', 'primary-button avatar-start');
-    start.onclick = () => { this.engine.setAvatar({ ...draft, created: true }); this.closeModal(); this.toast('tutorial.welcome'); };
+    start.onclick = () => { this.engine.setAvatar({ ...draft, created: true }); this.closeModal();if(this.readyPlots?.active)this.readyPlots.focusType((this.tutorialStep()??this.engine.nextObjective?.())?.buildType);this.toast('tutorial.welcome'); };
     const footer = el('footer', 'avatar-footer'); footer.append(start); modal.append(footer);
   }
   exportBackup() {

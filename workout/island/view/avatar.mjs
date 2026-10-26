@@ -1,8 +1,13 @@
 import * as T from '../vendor/three.module.js';
 import { GLTFLoader } from '../vendor/GLTFLoader.js';
-import { GROUND, primitive, material } from './environment.mjs?v=island-citydetail-20261025-2';
+import { GROUND, primitive, material } from './environment.mjs?v=island-ready-plots-20261026-1';
 
 const MODEL_URL=new URL('../assets/kid-full.glb',import.meta.url).href;
+// The authored child is 2.66 model units tall; the original adult rigs are
+// 1.70 units at .32 city scale. Keep a child below adult/door height, while
+// the character editor continues to show the unscaled original rig.
+export const CITY_AVATAR_SCALE=.16;
+const CITY_CITIZEN_SCALE=.88;
 const color=new T.Color();
 function recolor(mesh,record) {
   const attr=mesh.geometry.attributes.color;if(!attr)return;
@@ -24,7 +29,7 @@ function recolor(mesh,record) {
   attr.needsUpdate=true;
 }
 export class Avatar {
-  constructor(scene) { this.holder=new T.Group();this.holder.position.y=GROUND;this.holder.scale.setScalar(.64);scene.add(this.holder);this.record={};this.root=null;this.moving=false; }
+  constructor(scene) { this.holder=new T.Group();this.holder.position.y=GROUND;this.holder.scale.setScalar(CITY_AVATAR_SCALE);this.speed=.85*CITY_AVATAR_SCALE/.64;scene.add(this.holder);this.record={};this.root=null;this.moving=false; }
   async load(record) {
     const gltf=await new GLTFLoader().loadAsync(MODEL_URL);this.root=gltf.scene;
     this.root.getObjectByName('Ball')?.traverse(o=>{o.visible=false;});
@@ -59,7 +64,8 @@ export class Avatar {
     if(!this.root)return;const target=route?.[0];let moving=false;
     if(target) {
       const dx=target.x-this.holder.position.x,dz=target.z-this.holder.position.z,len=Math.hypot(dx,dz);
-      if(len<.08)route.shift();else {const step=Math.min(len,delta*.85);this.holder.position.x+=dx/len*step;this.holder.position.z+=dz/len*step;const angle=Math.atan2(dx,dz);this.holder.rotation.y+=Math.atan2(Math.sin(angle-this.holder.rotation.y),Math.cos(angle-this.holder.rotation.y))*Math.min(1,delta*8);moving=true;}
+      this.holder.position.y+=((target.y??GROUND)-this.holder.position.y)*(1-Math.exp(-delta*8));
+      if(len<.025){this.holder.position.y=target.y??GROUND;route.shift();}else {const step=Math.min(len,delta*this.speed);this.holder.position.x+=dx/len*step;this.holder.position.z+=dz/len*step;const angle=Math.atan2(dx,dz);this.holder.rotation.y+=Math.atan2(Math.sin(angle-this.holder.rotation.y),Math.cos(angle-this.holder.rotation.y))*Math.min(1,delta*8);moving=true;}
     }
     this.play(moving);this.mixer?.update(delta);this.root.getObjectByName('Ball')?.traverse(o=>{o.visible=false;});
   }
@@ -92,8 +98,8 @@ export class Citizens {
       if(len<.12){const next=target.neighbors?.filter(n=>n!==p.node);p.node=p.target;p.target=next?.length?next[(i+Math.floor(time))%next.length]:target.neighbors?.[0]??(p.target+1+i%3)%this.points.length;}
       else {p.x+=dx/len*Math.min(len,delta*p.speed);p.z+=dz/len*Math.min(len,delta*p.speed);}
       const bob=Math.sin(time*6+p.phase)*.015;
-      for(const [mesh,y,scale] of [[this.body,.24,1],[this.head,.47,1],[this.hair,.525,1]]) {dummy.position.set(p.x,p.y+y+bob,p.z);dummy.rotation.set(0,Math.atan2(dx,dz),0);dummy.scale.setScalar(scale);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}
-      for(const [mesh,side]of [[this.leftLeg,-1],[this.rightLeg,1]]){dummy.position.set(p.x+side*.043,p.y+.08,p.z);dummy.rotation.set(Math.sin(time*7+p.phase)*.4*side,Math.atan2(dx,dz),0);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}
+      for(const [mesh,y] of [[this.body,.24],[this.head,.47],[this.hair,.525]]) {dummy.position.set(p.x,p.y+(y+bob)*CITY_CITIZEN_SCALE,p.z);dummy.rotation.set(0,Math.atan2(dx,dz),0);dummy.scale.setScalar(CITY_CITIZEN_SCALE);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}
+      for(const [mesh,side]of [[this.leftLeg,-1],[this.rightLeg,1]]){dummy.position.set(p.x+side*.043*CITY_CITIZEN_SCALE,p.y+.08*CITY_CITIZEN_SCALE,p.z);dummy.rotation.set(Math.sin(time*7+p.phase)*.4*side,Math.atan2(dx,dz),0);dummy.scale.setScalar(CITY_CITIZEN_SCALE);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);}
     }
     for(const mesh of this.meshes)mesh.instanceMatrix.needsUpdate=true;
   }

@@ -1,16 +1,16 @@
-import {watchRelease} from './ui/release-watch.mjs?v=island-citydetail-20261025-2';
-import './view/learning-buildings.mjs?v=island-citydetail-20261025-2';
-import {LearningInterface} from './learning/interface.mjs?v=island-citydetail-20261025-2';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-citydetail-20261025-2';
-import {createTranslator} from './ui/translate.mjs?v=island-citydetail-20261025-2';
-import { loadData } from './engine/load-data.mjs?v=island-citydetail-20261025-2';
-import { createEngine } from './engine/engine.mjs?v=island-citydetail-20261025-2';
-import { IslandView } from './view/island-view.mjs?v=island-citydetail-20261025-2';
-import { IslandInterface } from './ui/interface.mjs?v=island-citydetail-20261025-2';
-import {createActivity} from './activity/runtime.mjs?v=island-citydetail-20261025-2';
-import {ActivityInterface} from './ui/activity.mjs?v=island-citydetail-20261025-2';
-import {installPressFeedback} from './ui/press.mjs?v=island-citydetail-20261025-2';
-import {installGameShell} from './ui/game-shell.mjs?v=island-citydetail-20261025-2';
+import {watchRelease} from './ui/release-watch.mjs?v=island-ready-plots-20261026-1';
+import './view/learning-buildings.mjs?v=island-ready-plots-20261026-1';
+import {LearningInterface} from './learning/interface.mjs?v=island-ready-plots-20261026-1';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-ready-plots-20261026-1';
+import {createTranslator} from './ui/translate.mjs?v=island-ready-plots-20261026-1';
+import { loadData } from './engine/load-data.mjs?v=island-ready-plots-20261026-1';
+import { createEngine } from './engine/engine.mjs?v=island-ready-plots-20261026-1';
+import { IslandView } from './view/island-view.mjs?v=island-ready-plots-20261026-1';
+import { IslandInterface } from './ui/interface.mjs?v=island-ready-plots-20261026-1';
+import {createActivity} from './activity/runtime.mjs?v=island-ready-plots-20261026-1';
+import {ActivityInterface} from './ui/activity.mjs?v=island-ready-plots-20261026-1';
+import {installPressFeedback} from './ui/press.mjs?v=island-ready-plots-20261026-1';
+import {installGameShell} from './ui/game-shell.mjs?v=island-ready-plots-20261026-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

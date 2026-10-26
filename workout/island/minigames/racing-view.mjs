@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {createRacingScenery} from './racing-scenery.mjs?v=island-citydetail-20261025-2';
-import {createRacingEffects} from './racing-effects.mjs?v=island-citydetail-20261025-2';
+import {createRacingScenery} from './racing-scenery.mjs?v=island-ready-plots-20261026-1';
+import {createRacingEffects} from './racing-effects.mjs?v=island-ready-plots-20261026-1';
 
 const PALETTES={
  coast:{sky:'#b7dfed',fog:'#b9dfe7',sea:'#1eafa9',land:'#68a879',sand:'#e4cda1',curb:'#e77950',rock:'#b8a98a'},
@@ -93,7 +93,7 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1}={
  }
  // Reuse GLB meshes with instancing: texture/material identity is retained.
  function ownAsset(root){root.updateMatrixWorld(true);root.traverse(o=>{if(o.isMesh){keep(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material]){keep(m);for(const v of Object.values(m))if(v?.isTexture)keep(v);}}});}
- async function loadAsset(path){const asset=await new GLTFLoader().loadAsync(new URL(path+'?v=island-citydetail-20261025-2',import.meta.url).href);ownAsset(asset.scene);return asset.scene;}
+ async function loadAsset(path){const asset=await new GLTFLoader().loadAsync(new URL(path+'?v=island-ready-plots-20261026-1',import.meta.url).href);ownAsset(asset.scene);return asset.scene;}
  function plant(source,rows,height){const bounds=new T.Box3().setFromObject(source),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3()),scale=height/size.y,base=new T.Matrix4().makeTranslation(-center.x,-bounds.min.y,-center.z);source.traverse(o=>{if(!o.isMesh)return;const inst=new T.InstancedMesh(o.geometry,o.material,rows.length),part=o.matrixWorld.clone(),matrices=[];for(let i=0;i<rows.length;i++){const p=rows[i];dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(0,p.heading,0);dummy.scale.setScalar(1);dummy.updateMatrix();const fit=new T.Matrix4().makeScale(scale*p.size,scale*p.size,scale*p.size).multiply(base).multiply(part);matrices.push(dummy.matrix.clone().multiply(fit));}inst.count=0;inst.frustumCulled=false;inst.castShadow=true;inst.receiveShadow=true;foliageParts.push({inst,matrices});scene.add(inst);});}
  const treeRows=[];for(let s=14;s<track.length;s+=17){const p=track.sample(s);for(const sign of [-1,1]){const lane=sign*(track.width/2+5+rnd()*10);treeRows.push({x:p.x+p.normal.x*lane,y:p.y-1.6,z:p.z+p.normal.z*lane,heading:rnd()*6.28,size:.7+rnd()*.6});}}
  const failures=[];
