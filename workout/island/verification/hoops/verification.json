@@ -1,0 +1,105 @@
+{
+ "browser": "153.0.8010.12",
+ "renderer": "SwiftShader (software WebGL)",
+ "physicalPhone": false,
+ "viewports": [
+  {
+   "width": 1280,
+   "height": 720,
+   "checks": [
+    "basketball court built through the island engine",
+    "10 players rendered after 5128 ms",
+    "6 controls at least 48 px, icons only, labelled",
+    "no words on the game screen (digits and icons only)",
+    "keyboard input moves the controlled player (2.95 m)",
+    "play reached 0-2 in quarter 1",
+    "pause freezes the clock",
+    "leaving the game releases the session, listeners and audio",
+    "no console errors, no outside requests"
+   ],
+   "loadMs": 5128,
+   "metrics": {
+    "calls": 96,
+    "triangles": 316233,
+    "frameMs": 12669.9,
+    "players": 10,
+    "crowd": 4992,
+    "quality": 2,
+    "textures": 133,
+    "geometries": 72,
+    "landscape": true
+   },
+   "score": [
+    0,
+    2
+   ],
+   "quarter": 1
+  },
+  {
+   "width": 844,
+   "height": 390,
+   "checks": [
+    "basketball court built through the island engine",
+    "10 players rendered after 4581 ms",
+    "6 controls at least 48 px, icons only, labelled",
+    "no words on the game screen (digits and icons only)",
+    "keyboard input moves the controlled player (2.72 m)",
+    "touch on stick and action button accepted",
+    "play reached 3-5 in quarter 1",
+    "pause freezes the clock",
+    "leaving the game releases the session, listeners and audio",
+    "no console errors, no outside requests"
+   ],
+   "loadMs": 4581,
+   "metrics": {
+    "calls": 100,
+    "triangles": 316241,
+    "frameMs": 13688.7,
+    "players": 10,
+    "crowd": 4992,
+    "quality": 2,
+    "textures": 133,
+    "geometries": 76,
+    "landscape": true
+   },
+   "score": [
+    3,
+    5
+   ],
+   "quarter": 1
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "checks": [
+    "basketball court built through the island engine",
+    "10 players rendered after 4837 ms",
+    "6 controls at least 48 px, icons only, labelled",
+    "no words on the game screen (digits and icons only)",
+    "keyboard input moves the controlled player (1.74 m)",
+    "touch on stick and action button accepted",
+    "play reached 0-6 in quarter 1",
+    "pause freezes the clock",
+    "leaving the game releases the session, listeners and audio",
+    "no console errors, no outside requests"
+   ],
+   "loadMs": 4837,
+   "metrics": {
+    "calls": 112,
+    "triangles": 315848,
+    "frameMs": 11689.4,
+    "players": 10,
+    "crowd": 4992,
+    "quality": 2,
+    "textures": 133,
+    "geometries": 84,
+    "landscape": false
+   },
+   "score": [
+    0,
+    6
+   ],
+   "quarter": 1
+  }
+ ]
+}

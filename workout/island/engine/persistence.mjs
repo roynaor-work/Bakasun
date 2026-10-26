@@ -14,6 +14,7 @@ import {repairHarbors} from './placement-help.mjs?v=island-clean-ui-20261026-1';
 import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-clean-ui-20261026-1';
 import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-clean-ui-20261026-1';
 import {validReadyPlan,prepareReadyPlan} from './ready-plots.mjs?v=island-clean-ui-20261026-1';
+import {initialHoops,validHoops,migrateHoops,mergeHoops} from '../minigames/hoops-franchise.mjs?v=island-clean-ui-20261026-1';
 
 export const CURRENT_VERSION = 18;
 export const STORAGE_KEY = 'island.v1';
@@ -35,12 +36,26 @@ export function createInitialState(data, now = Date.now()) {
     tutorial: { step: 0, completed: false, skipped: false }, claimedRewards: [], completedMissions: [], completedEpisodes: [],
     nextId: 1, playSeconds: 0, createdAt: now, updatedAt: now,
     ...initialActivity(data,now),tennisDifficulty:'easy',soccerCard,soccerRoster:initialSoccerRoster(players,soccerCard,data.config.minigames.soccer),
+    hoops:initialHoops(data.config.minigames.streetSlam),
   },data);
+}
+
+/** Games added while the schema stayed at 18. */
+const GAMES_AFTER_18=['streetSlam'];
+
+/** A game added after a save was written starts at stage one with empty
+ * equipment, the same way islandRacing joined in 16 -> 17. Additive only. */
+function addNewGame(state,old,data,id){
+  if(!data?.config?.minigameLevels?.[id])return state;
+  if(isObject(old.minigameLevels)&&!Object.hasOwn(old.minigameLevels,id))state.minigameLevels={...old.minigameLevels,[id]:1};
+  if(isObject(old.minigameProgress)&&!Object.hasOwn(old.minigameProgress,id))state.minigameProgress={...old.minigameProgress,[id]:initialProgress(data)[id]};
+  if(isObject(old.minigameEquipment)&&!Object.hasOwn(old.minigameEquipment,id))state.minigameEquipment={...old.minigameEquipment,[id]:initialEquipment(data)[id]};
+  return state;
 }
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
-  17(old) {return {...old,version:18,cityDepthVersion:1,city:initialCity(),cityManagement:initialCityManagement()};},
+  17(old,data) {return GAMES_AFTER_18.reduce((state,id)=>addNewGame(state,old,data,id),{...old,version:18,cityDepthVersion:1,city:initialCity(),cityManagement:initialCityManagement(),hoops:old.hoops??initialHoops(data.config.minigames.streetSlam)});},
   16(old,data){
     const state={...old,version:17};
     if(isObject(old.minigameProgress)){
@@ -118,6 +133,12 @@ export function migrateSave(value, data, registry) {
   // New content IDs can start at level one without changing the save schema.
   if (isObject(state.minigameLevels)) for (const id of Object.keys(data.config.minigameLevels || {})) if (!(id in state.minigameLevels)) state.minigameLevels[id] = 1;
   if (isObject(state.minigameProgress)) for (const [id,p] of Object.entries(initialProgress(data))) if (!(id in state.minigameProgress)) state.minigameProgress[id] = p;
+  // Only games shipped after schema 18 may be missing; missing tracks of any other game stay invalid.
+  if (isObject(state.minigameEquipment)) for (const [id,tracks] of Object.entries(initialEquipment(data))) if (!(id in state.minigameEquipment) && GAMES_AFTER_18.includes(id)) state.minigameEquipment[id] = tracks;
+  // The basketball club is its own versioned object inside schema 18 (hoops.v); a save
+  // without it starts the default club, an older club version is migrated in place.
+  if (!Object.hasOwn(state,'hoops')) state.hoops = initialHoops(data.config.minigames.streetSlam);
+  else { const club=migrateHoops(state.hoops,data.config.minigames.streetSlam); if(!club) return { ok: false, reason: 'reason.invalid' }; state.hoops=club; }
   const validation = validateSave(state, data, registry);
   if(!validation.ok)return validation;
   const repairedHarbors=repairHarbors(state,registry,data.featureFlags);
@@ -165,6 +186,7 @@ export function validateSave(state, data, registry) {
   for (const key of ['claimedRewards', 'completedMissions', 'completedEpisodes']) if (!Array.isArray(state[key]) || !state[key].every(value => typeof value === 'string')) return invalid();
   if (!Number.isSafeInteger(state.nextId) || state.nextId < 1 || !finitePositive(state.playSeconds)) return invalid();
   if (!validActivity(state,data,registry)) return invalid();
+  if (!validHoops(state.hoops,data.config.minigames.streetSlam)) return invalid();
   return { ok: true };
 }
 
@@ -273,6 +295,7 @@ export function importWorld(raw, current, data, registry) {
   merged.tennisDifficulty=incoming.tennisDifficulty;
   mergeSoccerCard(merged.soccerCard,incoming.soccerCard);
   mergeSoccerRoster(merged.soccerRoster,incoming.soccerRoster,data.config.minigames.soccer);
+  merged.hoops=mergeHoops(merged.hoops,incoming.hoops);
   mergeActivity(merged,incoming,data);
   // City import follows the existing additive policy. Local live orders win;
   // imported orders cannot be fulfilled again for a second reward.

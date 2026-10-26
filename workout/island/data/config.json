@@ -11177,6 +11177,570 @@
      "assets/models/palm-tree-512.glb"
     ]
    }
+  },
+  "streetSlam": {
+   "version": 2,
+   "requiresBuilding": "basketball",
+   "maximumScore": 250,
+   "maximumSeconds": 5400,
+   "practiceKey": "island.hoops.practice.v1",
+   "simulation": {
+    "maxFrameSeconds": 0.25,
+    "maxStepsPerFrame": 8
+   },
+   "court": {
+    "length": 28.65,
+    "width": 15.24,
+    "rimFromBaseline": 1.575,
+    "rimHeight": 3.05,
+    "rimRadius": 0.2286,
+    "ballRadius": 0.12,
+    "boardFromBaseline": 1.22,
+    "boardWidth": 1.83,
+    "boardHeight": 1.07,
+    "boardBottom": 2.9,
+    "boardThickness": 0.05,
+    "threeRadius": 7.24,
+    "threeCornerZ": 6.71,
+    "keyWidth": 4.88,
+    "freeThrowFromBaseline": 5.8,
+    "restrictedRadius": 1.22,
+    "centerRadius": 1.83,
+    "stanchionBehind": 1.4,
+    "stanchionRadius": 0.4,
+    "stanchionTop": 2.1
+   },
+   "physics": {
+    "gravity": 9.81,
+    "substeps": 4,
+    "rimTube": 0.012,
+    "rimRestitution": 0.55,
+    "rimTangent": 0.9,
+    "boardRestitution": 0.62,
+    "floorRestitution": 0.78,
+    "floorFriction": 0.9,
+    "rollSpeed": 0.6,
+    "rollFriction": 1.6,
+    "scoreSlack": 0.45,
+    "netDepth": 0.42,
+    "netDamping": 0.82,
+    "netMaxDrop": 5.0,
+    "wallGap": 3.6
+   },
+   "rules": {
+    "profiles": {
+     "pro": {
+      "quarterSeconds": 720,
+      "overtimeSeconds": 300
+     },
+     "standard": {
+      "quarterSeconds": 180,
+      "overtimeSeconds": 60
+     },
+     "quick": {
+      "quarterSeconds": 90,
+      "overtimeSeconds": 45
+     }
+    },
+    "shotClock": 24,
+    "shotClockReset": 14,
+    "personalFoulLimit": 6,
+    "teamFoulBonus": 5,
+    "backcourtSeconds": 8,
+    "laneSeconds": 3,
+    "timeouts": 7,
+    "inboundDelay": 1.2,
+    "inboundSeconds": 5
+   },
+   "timing": {
+    "afterScore": 1.3,
+    "afterFoul": 1.4,
+    "afterViolation": 1.4,
+    "quarterBreak": 2.5,
+    "timeout": 3.0,
+    "freeThrowSetup": 1.1,
+    "assistTicks": 150
+   },
+   "anim": {
+    "jumpshot": {
+     "release": 0.77,
+     "duration": 1.45
+    },
+    "pullup": {
+     "release": 0.87,
+     "duration": 1.4
+    },
+    "layup": {
+     "release": 1.03,
+     "duration": 1.7
+    },
+    "freethrow": {
+     "release": 1.1,
+     "duration": 2.0
+    }
+   },
+   "player": {
+    "radius": 0.36,
+    "speed": 6.0,
+    "sprintFactor": 1.22,
+    "dribbleFactor": 0.9,
+    "accel": 11,
+    "decel": 15,
+    "turnRate": 9
+   },
+   "fatigue": {
+    "drain": 0.0105,
+    "sprint": 2.2,
+    "recover": 0.004,
+    "deadRecover": 0.01,
+    "breakRecover": 0.12,
+    "timeoutRecover": 0.08,
+    "subBelow": 0.42,
+    "readyAbove": 0.7
+   },
+   "shot": {
+    "dunkRange": 2.3,
+    "dunkMinRating": 72,
+    "dunkEnergy": 0.25,
+    "layupRange": 3.0,
+    "layupCarry": 3.2,
+    "window": 0.28,
+    "contestWeight": 0.5,
+    "pullupFactor": 0.9,
+    "timingBase": 0.7,
+    "timingWeight": 0.45,
+    "makeError": 0.09,
+    "assistBonus": 0.12
+   },
+   "pass": {
+    "speed": 11.5,
+    "bounceSpeed": 8.5,
+    "lobSpeed": 9.0,
+    "windup": 0.16,
+    "interceptRadius": 0.55,
+    "interceptBase": 0.22,
+    "catchRadius": 1.05
+   },
+   "jump": {
+    "duration": 0.72,
+    "height": 0.62,
+    "cooldown": 0.9,
+    "shotAir": 0.62
+   },
+   "steal": {
+    "range": 1.35,
+    "reachAt": 0.14,
+    "duration": 0.4,
+    "cooldown": 1.0,
+    "base": 0.22,
+    "foulBase": 0.12
+   },
+   "block": {
+    "radius": 0.55,
+    "vertical": 0.6,
+    "base": 0.08,
+    "goaltendRadius": 0.12
+   },
+   "move": {
+    "cooldown": 1.1,
+    "cross": 0.55,
+    "spin": 0.75,
+    "burst": 1.08
+   },
+   "rebound": {
+    "radius": 0.75
+   },
+   "contact": {
+    "minSpeed": 3.0,
+    "setSpeed": 0.9,
+    "chargeChance": 0.08,
+    "blockChance": 0.1,
+    "shotContact": 0.75,
+    "shootingFoul": 0.12
+   },
+   "replay": {
+    "seconds": 6,
+    "hz": 30
+   },
+   "ai": {
+    "difficulty": {
+     "easy": {
+      "reaction": 0.55,
+      "aiTiming": 0.85,
+      "stealRate": 0.04,
+      "blockRate": 0.1
+     },
+     "normal": {
+      "reaction": 0.38,
+      "aiTiming": 1.0,
+      "stealRate": 0.07,
+      "blockRate": 0.16
+     },
+     "hard": {
+      "reaction": 0.26,
+      "aiTiming": 1.12,
+      "stealRate": 0.1,
+      "blockRate": 0.22
+     }
+    }
+   },
+   "stars": {
+    "two": 4,
+    "three": 8
+   },
+   "levels": [
+    {
+     "stage": 1,
+     "feature": "feature.streetSlam.1",
+     "winMoney": 30,
+     "winParts": 0,
+     "ai": {
+      "reaction": 0.62,
+      "aimError": 1.32,
+      "speed": 0.8,
+      "decision": 0.35,
+      "stealRate": 0.08,
+      "blockRate": 0.18,
+      "timingNoise": 0.22,
+      "dunkRate": 0.35,
+      "passRate": 0.35,
+      "reboundRate": 0.3,
+      "guardDistance": 1.85,
+      "threeRate": 0.1
+     }
+    },
+    {
+     "stage": 2,
+     "feature": "feature.streetSlam.2",
+     "winMoney": 38,
+     "winParts": 0,
+     "ai": {
+      "reaction": 0.587,
+      "aimError": 1.273,
+      "speed": 0.82,
+      "decision": 0.411,
+      "stealRate": 0.099,
+      "blockRate": 0.216,
+      "timingNoise": 0.204,
+      "dunkRate": 0.406,
+      "passRate": 0.4,
+      "reboundRate": 0.356,
+      "guardDistance": 1.783,
+      "threeRate": 0.139
+     }
+    },
+    {
+     "stage": 3,
+     "feature": "feature.streetSlam.3",
+     "winMoney": 46,
+     "winParts": 0,
+     "ai": {
+      "reaction": 0.553,
+      "aimError": 1.227,
+      "speed": 0.84,
+      "decision": 0.472,
+      "stealRate": 0.118,
+      "blockRate": 0.251,
+      "timingNoise": 0.189,
+      "dunkRate": 0.461,
+      "passRate": 0.45,
+      "reboundRate": 0.411,
+      "guardDistance": 1.717,
+      "threeRate": 0.178
+     }
+    },
+    {
+     "stage": 4,
+     "feature": "feature.streetSlam.4",
+     "winMoney": 54,
+     "winParts": 0,
+     "ai": {
+      "reaction": 0.52,
+      "aimError": 1.18,
+      "speed": 0.86,
+      "decision": 0.533,
+      "stealRate": 0.137,
+      "blockRate": 0.287,
+      "timingNoise": 0.173,
+      "dunkRate": 0.517,
+      "passRate": 0.5,
+      "reboundRate": 0.467,
+      "guardDistance": 1.65,
+      "threeRate": 0.217
+     }
+    },
+    {
+     "stage": 5,
+     "feature": "feature.streetSlam.5",
+     "winMoney": 62,
+     "winParts": 1,
+     "ai": {
+      "reaction": 0.487,
+      "aimError": 1.133,
+      "speed": 0.88,
+      "decision": 0.594,
+      "stealRate": 0.156,
+      "blockRate": 0.322,
+      "timingNoise": 0.158,
+      "dunkRate": 0.572,
+      "passRate": 0.55,
+      "reboundRate": 0.522,
+      "guardDistance": 1.583,
+      "threeRate": 0.256
+     }
+    },
+    {
+     "stage": 6,
+     "feature": "feature.streetSlam.6",
+     "winMoney": 70,
+     "winParts": 0,
+     "ai": {
+      "reaction": 0.453,
+      "aimError": 1.087,
+      "speed": 0.9,
+      "decision": 0.656,
+      "stealRate": 0.174,
+      "blockRate": 0.358,
+      "timingNoise": 0.142,
+      "dunkRate": 0.628,
+      "passRate": 0.6,
+      "reboundRate": 0.578,
+      "guardDistance": 1.517,
+      "threeRate": 0.294
+     }
+    },
+    {
+     "stage": 7,
+     "feature": "feature.streetSlam.7",
+     "winMoney": 78,
+     "winParts": 0,
+     "ai": {
+      "reaction": 0.42,
+      "aimError": 1.04,
+      "speed": 0.92,
+      "decision": 0.717,
+      "stealRate": 0.193,
+      "blockRate": 0.393,
+      "timingNoise": 0.127,
+      "dunkRate": 0.683,
+      "passRate": 0.65,
+      "reboundRate": 0.633,
+      "guardDistance": 1.45,
+      "threeRate": 0.333
+     }
+    },
+    {
+     "stage": 8,
+     "feature": "feature.streetSlam.8",
+     "winMoney": 86,
+     "winParts": 0,
+     "ai": {
+      "reaction": 0.387,
+      "aimError": 0.993,
+      "speed": 0.94,
+      "decision": 0.778,
+      "stealRate": 0.212,
+      "blockRate": 0.429,
+      "timingNoise": 0.111,
+      "dunkRate": 0.739,
+      "passRate": 0.7,
+      "reboundRate": 0.689,
+      "guardDistance": 1.383,
+      "threeRate": 0.372
+     }
+    },
+    {
+     "stage": 9,
+     "feature": "feature.streetSlam.9",
+     "winMoney": 94,
+     "winParts": 0,
+     "ai": {
+      "reaction": 0.353,
+      "aimError": 0.947,
+      "speed": 0.96,
+      "decision": 0.839,
+      "stealRate": 0.231,
+      "blockRate": 0.464,
+      "timingNoise": 0.096,
+      "dunkRate": 0.794,
+      "passRate": 0.75,
+      "reboundRate": 0.744,
+      "guardDistance": 1.317,
+      "threeRate": 0.411
+     }
+    },
+    {
+     "stage": 10,
+     "feature": "feature.streetSlam.10",
+     "winMoney": 102,
+     "winParts": 1,
+     "ai": {
+      "reaction": 0.32,
+      "aimError": 0.9,
+      "speed": 0.98,
+      "decision": 0.9,
+      "stealRate": 0.25,
+      "blockRate": 0.5,
+      "timingNoise": 0.08,
+      "dunkRate": 0.85,
+      "passRate": 0.8,
+      "reboundRate": 0.8,
+      "guardDistance": 1.25,
+      "threeRate": 0.45
+     }
+    }
+   ],
+   "equipment": {
+    "shoes": {
+     "title": "equipment.streetSlam.shoes",
+     "description": "equipment.streetSlam.shoes.hint",
+     "base": 1,
+     "levels": [
+      {
+       "value": 1.03,
+       "cost": 50,
+       "stars": 0
+      },
+      {
+       "value": 1.06,
+       "cost": 100,
+       "stars": 6
+      },
+      {
+       "value": 1.09,
+       "cost": 165,
+       "stars": 18
+      },
+      {
+       "value": 1.12,
+       "cost": 240,
+       "stars": 36
+      }
+     ]
+    },
+    "touch": {
+     "title": "equipment.streetSlam.touch",
+     "description": "equipment.streetSlam.touch.hint",
+     "base": 0,
+     "levels": [
+      {
+       "value": 0.03,
+       "cost": 50,
+       "stars": 0
+      },
+      {
+       "value": 0.06,
+       "cost": 100,
+       "stars": 6
+      },
+      {
+       "value": 0.09,
+       "cost": 165,
+       "stars": 18
+      },
+      {
+       "value": 0.12,
+       "cost": 240,
+       "stars": 36
+      }
+     ]
+    },
+    "spring": {
+     "title": "equipment.streetSlam.spring",
+     "description": "equipment.streetSlam.spring.hint",
+     "base": 1,
+     "levels": [
+      {
+       "value": 0.92,
+       "cost": 50,
+       "stars": 0
+      },
+      {
+       "value": 0.84,
+       "cost": 100,
+       "stars": 6
+      },
+      {
+       "value": 0.76,
+       "cost": 165,
+       "stars": 18
+      },
+      {
+       "value": 0.68,
+       "cost": 240,
+       "stars": 36
+      }
+     ]
+    }
+   },
+   "audio": {
+    "volume": 0.42,
+    "samples": {
+     "bounce": "assets/audio/g4e/bounce.ogg",
+     "rim": "assets/audio/g6d/metal.ogg",
+     "board": "assets/audio/g3h/kick.ogg",
+     "pass": "assets/audio/g3h/pass.ogg",
+     "swish": "assets/audio/g4e/net.ogg",
+     "whistle": "assets/audio/g3h/whistle.ogg",
+     "crowd": "assets/audio/g3h/crowd.ogg"
+    }
+   },
+   "view": {
+    "fov": 27,
+    "height": 6.5,
+    "distance": 6.5,
+    "lookY": 1.1,
+    "lookZ": 0.3,
+    "followX": 0.92,
+    "edgeX": 4.5,
+    "followRate": 2.4,
+    "portraitFov": 52,
+    "portraitBack": 9.5,
+    "portraitHeight": 6.0,
+    "exposure": 1.05,
+    "envIntensity": 0.5,
+    "dprCap": 2,
+    "mobileDprCap": 1.6,
+    "dribblePeriod": 0.52,
+    "leadToRim": 0.45,
+    "leadMax": 4.5,
+    "followZ": 0.45,
+    "maxZ": 3.5,
+    "dollyZ": 0.5
+   },
+   "assets": {
+    "models": {
+     "guard": "assets/models/hoops-guard.glb",
+     "wing": "assets/models/hoops-wing.glb",
+     "forward": "assets/models/hoops-forward.glb",
+     "big": "assets/models/hoops-big.glb"
+    },
+    "animations": "assets/models/hoops-anim.glb",
+    "crowd": "assets/textures/hoops-crowd.webp",
+    "crowdGrid": [
+     8,
+     6
+    ],
+    "baseHeights": {
+     "guard": 188,
+     "wing": 198,
+     "forward": 203,
+     "big": 209
+    }
+   },
+   "league": {
+    "baseLevel": 72,
+    "userLevel": 68,
+    "chemistryBonus": 3,
+    "stageLevel": 0.6
+   },
+   "economy": {
+    "startCredits": 6,
+    "winCredits": 3,
+    "lossCredits": 1,
+    "championCredits": 10,
+    "drillCost": 2
+   }
   }
  },
  "minigameLevels": {
@@ -11262,6 +11826,20 @@
    {
     "cost": 240,
     "power": 1.45
+   }
+  ],
+  "streetSlam": [
+   {
+    "cost": 0,
+    "power": 1
+   },
+   {
+    "cost": 130,
+    "power": 1.05
+   },
+   {
+    "cost": 260,
+    "power": 1.1
    }
   ]
  },
@@ -11373,6 +11951,9 @@
    },
    "alienDefense": {
     "orientation": "landscape"
+   },
+   "streetSlam": {
+    "orientation": "any"
    }
   }
  },
