@@ -1,15 +1,15 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-citydetail-20261025-2';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-people-scale-20261026-1';
 import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs';
 import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-citydetail-20261025-2';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-people-scale-20261026-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig} from './soccer-rig.mjs?v=island-citydetail-20261025-2';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=island-citydetail-20261025-2';
+import {cloneSoccerRig} from './soccer-rig.mjs?v=island-people-scale-20261026-1';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=island-people-scale-20261026-1';
 import {shotHeight,safeShotAim} from './soccer-shot.mjs';
 import {holdSoccerBall} from './soccer-poses.mjs';
-import {passDestination} from './soccer.mjs?v=island-citydetail-20261025-2';
+import {passDestination} from './soccer.mjs?v=island-people-scale-20261026-1';
 
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   const roster=config.players.roster;let poseFocus=null,poseMode=null,poses=[];

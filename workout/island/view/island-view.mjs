@@ -1,26 +1,26 @@
 import * as T from '../vendor/three.module.js';
-import {CityDepthView} from './city-depth.mjs?v=island-citydetail-20261025-2';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-citydetail-20261025-2';
-import { Avatar } from './avatar.mjs?v=island-citydetail-20261025-2';
-import { Citizens } from './city-citizens.mjs?v=island-citydetail-20261025-2';
-import {cityLighting} from './city-lighting.mjs?v=island-citydetail-20261025-2';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-citydetail-20261025-2';
-import { levelValue } from '../engine/metrics.mjs?v=island-citydetail-20261025-2';
-import { LocalModels } from './local-models.mjs?v=island-citydetail-20261025-2';
-import {MeshyPilot} from './meshy-pilot.mjs?v=island-citydetail-20261025-2';
-import {cityPaths} from '../engine/paths.mjs?v=island-citydetail-20261025-2';
-import {shoreDirection} from '../engine/placement-help.mjs?v=island-citydetail-20261025-2';
-import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-citydetail-20261025-2';
-import {batchMeshes} from './batch.mjs?v=island-citydetail-20261025-2';
-import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-citydetail-20261025-2';
-import {CityStreets} from './city-streets.mjs?v=island-citydetail-20261025-2';
-import {CityTraffic} from './city-traffic.mjs?v=island-citydetail-20261025-2';
-import {CityOverlay} from './city-overlay.mjs?v=island-citydetail-20261025-2';
-import {CityGrowth} from './city-growth.mjs?v=island-citydetail-20261025-2';
-import {planningFrame} from './planning-frame.mjs?v=island-citydetail-20261025-2';
-import {CitySites} from './city-sites.mjs?v=island-citydetail-20261025-2';
-import {streetFacing} from '../engine/city-sites.mjs?v=island-citydetail-20261025-2';
-import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-citydetail-20261025-2';
+import {CityDepthView} from './city-depth.mjs?v=island-people-scale-20261026-1';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-people-scale-20261026-1';
+import { Avatar } from './avatar.mjs?v=island-people-scale-20261026-1';
+import { Citizens } from './city-citizens.mjs?v=island-people-scale-20261026-1';
+import {cityLighting} from './city-lighting.mjs?v=island-people-scale-20261026-1';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-people-scale-20261026-1';
+import { levelValue } from '../engine/metrics.mjs?v=island-people-scale-20261026-1';
+import { LocalModels } from './local-models.mjs?v=island-people-scale-20261026-1';
+import {MeshyPilot} from './meshy-pilot.mjs?v=island-people-scale-20261026-1';
+import {cityPaths} from '../engine/paths.mjs?v=island-people-scale-20261026-1';
+import {shoreDirection} from '../engine/placement-help.mjs?v=island-people-scale-20261026-1';
+import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-people-scale-20261026-1';
+import {batchMeshes} from './batch.mjs?v=island-people-scale-20261026-1';
+import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-people-scale-20261026-1';
+import {CityStreets} from './city-streets.mjs?v=island-people-scale-20261026-1';
+import {CityTraffic} from './city-traffic.mjs?v=island-people-scale-20261026-1';
+import {CityOverlay} from './city-overlay.mjs?v=island-people-scale-20261026-1';
+import {CityGrowth} from './city-growth.mjs?v=island-people-scale-20261026-1';
+import {planningFrame} from './planning-frame.mjs?v=island-people-scale-20261026-1';
+import {CitySites} from './city-sites.mjs?v=island-people-scale-20261026-1';
+import {streetFacing} from '../engine/city-sites.mjs?v=island-people-scale-20261026-1';
+import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-people-scale-20261026-1';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -122,14 +122,13 @@ export class IslandView {
     const signature=JSON.stringify([this.size,this.quality,buildings.map(b=>[b.id,b.x,b.z,b.level])]);if(signature===this.pathSignature)return;this.pathSignature=signature;
     const paths=this.paths=cityPaths(this.state,this.data.registry),settings=this.data.config.cityView;
     if(this.pathsMesh){this.scene.remove(this.pathsMesh);disposePath(this.pathsMesh);}this.pathsMesh=pathMesh(paths.cells,this.size,settings.paths);this.scene.add(this.pathsMesh);
-    const points=paths.cells.map(p=>Object.assign(this.worldPosition(p.x,p.z),{neighbors:p.neighbors}));
     const roadNetwork=cityRoadNetwork(buildings,this.size,id=>this.definition(id));
     const sidewalks=paths.cells.map(cell=>{const p=citySidewalkPoint(cell,roadNetwork),v=this.worldPosition(p.x,p.z);v.y+=p.height;return Object.assign(v,{neighbors:p.neighbors});});
     this.pilot.sync(buildings,paths,id=>this.definition(id),(x,z)=>this.worldPosition(x,z));
     if(this.data.featureFlags?.citizens===false&&this.pilot.walker)this.pilot.walker.root.visible=false;
     const count=Math.min(this.quality==='low'?settings.citizens.lowMax:settings.citizens.max,settings.citizens.minimum+buildings.filter(b=>!this.definition(b.typeId)?.isRoad).length*settings.citizens.perBuilding);
-    this.walkPoints=points;this.citizens.setQuality(this.quality);this.citizens.setPoints(sidewalks,this.data.featureFlags?.citizens===false?0:count-(this.pilot.walker?.root.visible?1:0));
-    if(points.length&&!this.avatarPositioned){this.avatar.holder.position.copy(points[Math.floor(points.length/2)]);this.avatarPositioned=true;}
+    this.walkPoints=sidewalks;this.citizens.setQuality(this.quality);this.citizens.setPoints(sidewalks,this.data.featureFlags?.citizens===false?0:count-(this.pilot.walker?.root.visible?1:0));
+    if(sidewalks.length&&!this.avatarPositioned){this.avatar.holder.position.copy(sidewalks[Math.floor(sidewalks.length/2)]);this.avatarPositioned=true;}
   }
   setAvatar(record) {const key=JSON.stringify(record);if(record&&this.avatarKey!==key){this.avatarKey=key;this.avatar?.setRecord(record);}}
   attachAvatarPreview(canvas) {
@@ -228,7 +227,7 @@ export class IslandView {
     if(this.disposed)return;const delta=Math.min((now-this.last)/1000,.05),time=now/1000;this.last=now;
     if(!document.hidden&&!this.paused){
       this.environment.tick(time);this.citizens.tick(delta,time);this.pilot.tick(delta);this.cityTraffic?.update(delta);this.cityGrowth?.update(delta);
-      if(!this.route.length&&this.walkPoints?.length>1&&now>(this.nextWalk||0)){const here=this.avatar.holder.position;let nearest=0;for(let i=0;i<this.walkPoints.length;i++)if(here.distanceTo(this.walkPoints[i])<here.distanceTo(this.walkPoints[nearest]))nearest=i;const p=this.walkPoints[nearest],next=this.walkPoints[p.neighbors?.[Math.floor(time)%p.neighbors.length]??nearest];this.route.push({x:p.x,z:p.z},{x:next.x,z:next.z});this.nextWalk=now+1500;}
+      if(!this.route.length&&this.walkPoints?.length>1&&now>(this.nextWalk||0)){const here=this.avatar.holder.position;let nearest=0;for(let i=0;i<this.walkPoints.length;i++)if(here.distanceTo(this.walkPoints[i])<here.distanceTo(this.walkPoints[nearest]))nearest=i;const p=this.walkPoints[nearest],next=this.walkPoints[p.neighbors?.[Math.floor(time)%p.neighbors.length]??nearest];this.route.push({x:p.x,y:p.y,z:p.z},{x:next.x,y:next.y,z:next.z});this.nextWalk=now+1500;}
       this.avatar.tick(delta,time,this.preview?[]:this.route);
       if(!this.preview||now-(this.lastWorldRender||0)>500){this.renderer.render(this.scene,this.camera);this.lastWorldRender=now;}
       this.renderAvatarPreview();this.samples.push(now);while(this.samples[0]<now-1000)this.samples.shift();
