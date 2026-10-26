@@ -1,5 +1,5 @@
-import {DATA_VERSION,dataURL} from '../release.mjs?v=island-ready-plots-20261026-1';
-import { configureBuilding } from './registry.mjs?v=island-ready-plots-20261026-1';
+import {DATA_VERSION,dataURL} from '../release.mjs?v=island-naval-aim-20261026-3';
+import { configureBuilding } from './registry.mjs?v=island-naval-aim-20261026-3';
 
 const FILES = ['config', 'city', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 

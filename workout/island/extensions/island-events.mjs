@@ -1,5 +1,5 @@
-import {eventEligible} from '../activity/eligibility.mjs?v=island-ready-plots-20261026-1';
-import {seededRandom} from '../minigames/context.mjs?v=island-ready-plots-20261026-1';
+import {eventEligible} from '../activity/eligibility.mjs?v=island-naval-aim-20261026-3';
+import {seededRandom} from '../minigames/context.mjs?v=island-naval-aim-20261026-3';
 export function install(registry,data) {
   for(const [id,record]of Object.entries(data.config.events.types))registry.registerEventType({id,...record,
     prepare({state,random=seededRandom(state.events.sequence)}){

@@ -1,4 +1,4 @@
-import {DATA_VERSION} from '../release.mjs?v=island-ready-plots-20261026-1';
+import {DATA_VERSION} from '../release.mjs?v=island-naval-aim-20261026-3';
 /** Frames captured from the real game scenes. Replace the WebP files to
  * update the library after a game-art delivery; no UI changes are needed. */
 const ARTWORK=Object.freeze({

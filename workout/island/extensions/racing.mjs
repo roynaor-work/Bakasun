@@ -1,5 +1,5 @@
-import {runRacingSession} from '../minigames/racing-session.mjs?v=island-ready-plots-20261026-1';
-import {racingResult} from '../minigames/racing-result.mjs?v=island-ready-plots-20261026-1';
+import {runRacingSession} from '../minigames/racing-session.mjs?v=island-naval-aim-20261026-3';
+import {racingResult} from '../minigames/racing-result.mjs?v=island-naval-aim-20261026-3';
 
 /** Uses the same lifecycle and reward contract as the other island games. */
 export function install(registry,data) {

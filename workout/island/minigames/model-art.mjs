@@ -1,6 +1,6 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {dataURL} from '../release.mjs?v=island-ready-plots-20261026-1';
+import {dataURL} from '../release.mjs?v=island-naval-aim-20261026-3';
 
 export function localModelURL(path) {
   if(typeof path!=='string'||!path.endsWith('.glb')||/^(?:[a-z]+:|\/\/)/i.test(path)||path.includes('\\'))return null;
