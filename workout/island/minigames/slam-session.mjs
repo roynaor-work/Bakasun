@@ -17,7 +17,8 @@ export function startStreetSlam(ctx){
  const storage=(()=>{try{return globalThis.localStorage;}catch{return null;}})();
  const practiceDone=()=>{try{return storage?.getItem(balance.practiceKey)==='done';}catch{return true;}};
  const wantPractice=params.get('slamPractice')==='1'||params.get('slamPractice')!=='0'&&!practiceDone();
- let engine=createSlamEngine({config:balance,seed,stage,mode:wantPractice?'practice':'match'});
+ const gear={equipment:ctx.equipment||{},power:ctx.power||1};
+ let engine=createSlamEngine({config:balance,seed,stage,mode:wantPractice?'practice':'match',...gear});
  let view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,toastUntil=0,stepsRun=0;
  const loop=createFixedLoop({dt:SLAM_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
  const abort=new AbortController(),on={signal:abort.signal};let audio;
@@ -42,12 +43,14 @@ export function startStreetSlam(ctx){
  board.dir='ltr';board.setAttribute('role','status');board.append(homeScore,node('span','slam-clock-wrap'),awayScore);board.children[1].append(clock,ot);ot.hidden=true;
  const energy=node('div','slam-energy'),energyFill=node('span','slam-energy-fill');energy.append(slamIcon('dunk',doc),energyFill);energy.setAttribute('role','meter');energy.setAttribute('aria-label',t('slam.energy'));energy.setAttribute('aria-valuemin','0');energy.setAttribute('aria-valuemax','100');
  const charge=node('div','slam-charge'),chargeWin=node('span','slam-charge-window'),chargeFill=node('span','slam-charge-fill');charge.append(chargeWin,chargeFill);charge.hidden=true;charge.setAttribute('aria-hidden','true');
- const w=balance.shot;chargeWin.style.left=`${w.perfectFrom/w.maxHold*100}%`;chargeWin.style.width=`${(w.perfectTo-w.perfectFrom)/w.maxHold*100}%`;
+ const w=balance.shot;let windowKey='';
+ const grade=node('div','slam-grade');grade.hidden=true;grade.setAttribute('aria-hidden','true');let gradeUntil=0;
+ const heat=node('div','slam-heat');heat.hidden=true;heat.setAttribute('role','status');heat.setAttribute('aria-label',t('slam.heat'));heat.append(slamIcon('fire',doc));
  const toast=node('div','slam-toast');toast.hidden=true;toast.setAttribute('aria-live','polite');
  const loading=node('div','slam-loading');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('slam.loading'));loading.append(node('span','slam-spinner'));
  const practice=node('div','slam-practice');practice.hidden=true;const skip=node('button','slam-skip');skip.type='button';skip.dataset.action='slam-skip';skip.setAttribute('aria-label',t('slam.skipPractice'));skip.title=t('slam.skipPractice');skip.append(slamIcon('skip',doc));
  const steps=node('div','slam-practice-steps');steps.setAttribute('aria-hidden','true');for(const icon of ['move','pass','shoot']){const s=node('span','slam-practice-step');s.append(slamIcon(icon,doc));steps.append(s);}practice.append(steps,skip);
- stageEl.append(board,charge,toast,energy,practice,loading);
+ stageEl.append(board,charge,grade,toast,energy,heat,practice,loading);
  screenEl.dataset.slamMode=engine.snapshot().mode;
  controls=createSlamControls({root,doc,onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>slamIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:-1}});
  root.classList.add('slam-controls');controls.setEnabled(!paused);
@@ -56,7 +59,7 @@ export function startStreetSlam(ctx){
 
  function startMatch(){
   try{storage?.setItem(balance.practiceKey,'done');}catch{}
-  engine.dispose();engine=createSlamEngine({config:balance,seed,stage,mode:'match'});prev=cur=engine.snapshot();loop.reset();screenEl.dataset.slamMode='match';practice.hidden=true;
+  engine.dispose();engine=createSlamEngine({config:balance,seed,stage,mode:'match',...gear});prev=cur=engine.snapshot();loop.reset();screenEl.dataset.slamMode='match';practice.hidden=true;
   controls.cancel();
  }
  skip.addEventListener('click',()=>{if(cur.mode==='practice')startMatch();canvas.focus();},on);
@@ -95,7 +98,10 @@ export function startStreetSlam(ctx){
  function handleEvents(events){
   if(!events.length)return;view?.effects(events);audio.events(events);
   for(const e of events){
-   if(e.type==='score'&&e.team==='home')showToast(e.kind==='dunk'?slamIcon('dunk',doc):doc.createTextNode('+'+e.points),'home');
+   if(e.type==='shotStart'&&e.playerId===cur.controlledPlayerId&&e.grade!=='tap'){grade.hidden=false;grade.dataset.grade=e.grade;grade.replaceChildren(slamIcon(e.grade,doc));gradeUntil=performance.now()+800;}
+   if(e.type==='heatUp'&&e.team==='home')showToast(slamIcon('fire',doc),'heat',1100);
+   else if(e.type==='alleyOop'&&e.playerId[0]==='h')showToast(slamIcon('oop',doc),'oop',800);
+   else if(e.type==='score'&&e.team==='home')showToast(e.oop?slamIcon('oop',doc):e.kind==='dunk'?slamIcon('dunk',doc):doc.createTextNode('+'+e.points),'home');
    else if(e.type==='score')showToast(doc.createTextNode('+'+e.points),'away',700);
    else if(e.type==='steal'&&e.playerId[0]==='h')showToast(slamIcon('steal',doc),'steal',700);
    else if(e.type==='block'&&e.playerId[0]==='h')showToast(slamIcon('block',doc),'block',700);
@@ -112,9 +118,12 @@ export function startStreetSlam(ctx){
   board.dataset.buzzer=String(s.buzzer);board.setAttribute('aria-label',t('slam.board',{home:s.score.home,away:s.score.away,clock:c}));
   const me=s.players.find(p=>p.id===s.controlledPlayerId);
   controls.setActions(s.availableActions,{dunkReady:s.dunkReady});
-  const e=Math.round((me?.stamina||0)*100);energyFill.style.transform=`scaleX(${(me?.stamina||0).toFixed(3)})`;energy.setAttribute('aria-valuenow',String(e));energy.dataset.ready=String((me?.stamina||0)>=balance.dunk.cost);
+  const e=Math.round((me?.stamina||0)*100);energyFill.style.transform=`scaleX(${(me?.stamina||0).toFixed(3)})`;energy.setAttribute('aria-valuenow',String(e));energy.dataset.ready=String((me?.stamina||0)>=s.dunkCost);
+  const sw=s.shotWindow,key=sw.perfectFrom+':'+sw.perfectTo;if(key!==windowKey){windowKey=key;chargeWin.style.left=`${sw.perfectFrom/sw.maxHold*100}%`;chargeWin.style.width=`${(sw.perfectTo-sw.perfectFrom)/sw.maxHold*100}%`;}
+  heat.hidden=!(me?.heat>0);screenEl.dataset.slamHeat=String(me?.heat>0);screenEl.dataset.slamGuard=String(!!s.guarding);
+  if(!grade.hidden){if(now>gradeUntil)grade.hidden=true;else if(view){const p=view.actorScreen(s.controlledPlayerId,2.9);if(p)grade.style.transform=`translate(${Math.round(p.x)}px,${Math.round(p.y)}px)`;}}
   const charging=me&&me.charge>=0;charge.hidden=!charging;
-  if(charging&&view){const p=view.actorScreen(me.id,2.6);if(p){charge.style.transform=`translate(${Math.round(p.x)}px,${Math.round(p.y)}px)`;}chargeFill.style.width=`${Math.min(1,me.charge/w.maxHold)*100}%`;charge.dataset.zone=me.charge>=w.perfectFrom&&me.charge<=w.perfectTo?'perfect':me.charge>w.perfectTo?'late':'early';}
+  if(charging&&view){const p=view.actorScreen(me.id,2.6);if(p){charge.style.transform=`translate(${Math.round(p.x)}px,${Math.round(p.y)}px)`;}chargeFill.style.width=`${Math.min(1,me.charge/w.maxHold)*100}%`;charge.dataset.zone=me.charge>=sw.perfectFrom&&me.charge<=sw.perfectTo?'perfect':me.charge>sw.perfectTo?'late':'early';}
   if(!toast.hidden&&now>toastUntil)toast.hidden=true;
   if(s.mode==='practice'){practice.hidden=false;practice.dataset.step=String(s.practice?.step??0);root.dataset.practiceStep=String(s.practice?.step??0);[...steps.children].forEach((n,i)=>{n.dataset.state=i<s.practice.step?'done':i===s.practice.step?'now':'next';});}
   else {delete root.dataset.practiceStep;practice.hidden=true;}

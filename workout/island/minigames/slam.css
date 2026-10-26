@@ -47,6 +47,20 @@
 .game-screen[data-game=streetSlam] .slam-energy-fill{flex:1;height:4px;border-radius:6px;background:var(--slam-energy);transform-origin:left center;box-shadow:0 0 12px #ffd39c77}
 .game-screen[data-game=streetSlam] .slam-energy[data-ready=false] .slam-energy-fill{background:#c9cfc9;box-shadow:none}
 
+/* Release grade and heat. */
+.game-screen[data-game=streetSlam] .slam-grade{position:absolute;z-index:4;left:-22px;top:-44px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;pointer-events:none;background:#102b34d9;border:2px solid #fff8;animation:slam-pop .25s ease-out}
+.game-screen[data-game=streetSlam] .slam-grade svg{width:28px;height:28px}
+.game-screen[data-game=streetSlam] .slam-grade[data-grade=perfect]{background:#2c9a5f;border-color:#b9f5cf;box-shadow:0 0 18px #67d398}
+.game-screen[data-game=streetSlam] .slam-grade[data-grade=early]{background:#c79a23;border-color:#ffe39a}
+.game-screen[data-game=streetSlam] .slam-grade[data-grade=late]{background:#c2482e;border-color:#ffb39a}
+.game-screen[data-game=streetSlam] .slam-heat{position:absolute;z-index:4;right:calc(50% + 112px);top:calc(max(14px,env(safe-area-inset-top)) + 9px);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;background:radial-gradient(circle at 50% 70%,#ffd36b,#ff6a2b 55%,#b8321a);box-shadow:0 0 18px #ff8a3c;pointer-events:none;animation:slam-flicker .5s ease-in-out infinite alternate}
+.game-screen[data-game=streetSlam] .slam-heat[hidden]{display:none}
+.game-screen[data-game=streetSlam] .slam-heat svg{width:24px;height:24px}
+@keyframes slam-flicker{to{transform:scale(1.08);box-shadow:0 0 26px #ffb36b}}
+.game-screen[data-game=streetSlam][data-slam-heat=true] .slam-primary{box-shadow:0 0 0 3px #ffb36b,0 0 24px #ff8a3c,0 6px 0 #09232c55}
+.game-screen[data-game=streetSlam] .slam-toast[data-kind=heat]{background:radial-gradient(circle at 50% 70%,#ffd36b,#ff6a2b 60%,#b8321a);border-color:#ffe2b0}
+.game-screen[data-game=streetSlam] .slam-toast[data-kind=oop]{background:#5b3fa8e6;border-color:#d7c8ff}
+
 /* Release window above the controlled player. */
 .game-screen[data-game=streetSlam] .slam-charge{position:absolute;z-index:4;left:-48px;top:-14px;width:96px;height:12px;border-radius:7px;background:#0c242dd0;border:2px solid #fff9;overflow:hidden;pointer-events:none;will-change:transform}
 .game-screen[data-game=streetSlam] .slam-charge-window{position:absolute;top:0;bottom:0;background:#67d398}
@@ -95,5 +109,5 @@
  .game-screen[data-game=streetSlam] .slam-practice{top:max(10px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));transform:none}
 }
 @media (prefers-reduced-motion:reduce){
- .game-screen[data-game=streetSlam] .slam-toast,.game-screen[data-game=streetSlam] .slam-spinner,.game-screen[data-game=streetSlam] *{animation:none!important}
+ .game-screen[data-game=streetSlam] .slam-toast,.game-screen[data-game=streetSlam] .slam-spinner,.game-screen[data-game=streetSlam] .slam-heat,.game-screen[data-game=streetSlam] *{animation:none!important}
 }

@@ -11,6 +11,11 @@ const PATHS={
  move:'<circle cx="16" cy="16" r="5"/><path d="M16 3v5m-3-2 3-3 3 3M16 29v-5m-3 2 3 3 3-3M3 16h5m-2-3-3 3 3 3M29 16h-5m2-3 3 3-3 3"/>',
  retry:'<path d="M26 16a10 10 0 1 1-3-7"/><path d="M26 4v6h-6"/>',
  back:'<path d="M10 4H4v24h6m4-18 6 6-6 6m-6-6h18"/>',
+ fire:'<path d="M16 29c-6 0-9-4-9-9 0-6 5-8 5-14 3 2 5 5 5 8 1-2 2-3 2-5 4 3 6 7 6 11 0 5-3 9-9 9Z"/><path d="M16 29c-2 0-4-2-4-4 0-3 3-4 3-7 2 2 5 4 5 7 0 2-2 4-4 4Z"/>',
+ perfect:'<path d="m16 3 3.8 8 8.7 1.1-6.4 6 1.7 8.6L16 22.4l-7.8 4.3 1.7-8.6-6.4-6L12.2 11Z"/>',
+ early:'<circle cx="16" cy="16" r="12"/><path d="M16 9v7l-5 4"/>',
+ late:'<circle cx="16" cy="16" r="12"/><path d="M16 9v7l5 4"/>',
+ oop:'<path d="M5 27C9 12 18 6 27 6"/><path d="M21 4l6 2-2 6"/><circle cx="9" cy="24" r="3"/><path d="M20 22h9M22 22l2 5h1l2-5"/>',
 };
 export function slamIcon(name,doc=document){
  const svg=doc.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 32 32');svg.setAttribute('aria-hidden','true');svg.setAttribute('fill','none');svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','2.4');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');

@@ -23,17 +23,19 @@ function formation(kind,team,attacking){
  return rows.map(([x,z])=>[x*s,z*s]);
 }
 
-export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}={}){
+export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty,equipment={},power=1}={}){
  const court=slamCourt(config),colliders=slamColliders(court);
  const level=config.levels[clamp(stage,1,config.levels.length)-1];
  const ai={away:{...config.ai.base,...level.ai,...(difficulty||{})},home:{...config.ai.base,...config.ai.teammate}};
+ // The child's team gets the purchased equipment; values are frozen per match.
+ const gear={shoes:equipment.shoes??config.equipment?.shoes?.base??1,touch:equipment.touch??config.equipment?.touch?.base??0,spring:equipment.spring??config.equipment?.spring?.base??1,power:power||1};
  let rng,state,seq=0,queue=[],disposed=false;
 
  function makePlayer(id,team,index){
   return {id,team,index,x:0,z:0,y:0,vx:0,vz:0,yaw:team==='home'?Math.PI:0,
    state:'idle',stateT:0,anim:'idle',animT:0,jumpT:-1,jumpDur:0,jumpHeight:0,charge:-1,shootT:-1,shotHold:0,dunk:null,
    cd:{steal:0,block:0,dunk:0,pickup:0,pass:0},stumble:0,energy:config.energy.start,
-   think:0,plan:null,blockAt:-1,primaryDown:false,celebrate:0,stats:{points:0,steals:0,blocks:0,dunks:0}};
+   think:0,plan:null,blockAt:-1,primaryDown:false,celebrate:0,streak:0,heat:0,stats:{points:0,steals:0,blocks:0,dunks:0,oops:0}};
  }
 
  function emit(event){const e={seq:++seq,tick:state.tick,...event};queue.push(e);return e;}
@@ -111,7 +113,7 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
 
  function dunkEligible(p){
   const c=config.dunk,ring=court.ring(p.team),dx=ring.x-p.x,dz=ring.z-p.z,d=len(dx,dz);
-  if(state.mode==='practice'||airborne(p)||p.cd.dunk>0||p.energy<c.cost||d<c.minRange||d>c.range)return false;
+  if(state.mode==='practice'||airborne(p)||p.cd.dunk>0||p.energy<dunkCost(p)||d<c.minRange||d>c.range)return false;
   const fx=Math.sin(p.yaw),fz=Math.cos(p.yaw);if((fx*dx+fz*dz)/d<Math.cos(c.coneDegrees*Math.PI/360))return false;
   for(const q of opponents(p)){
    const t=((q.x-p.x)*dx+(q.z-p.z)*dz)/(d*d);if(t<.1||t>1.05)continue;
@@ -120,11 +122,17 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
   return true;
  }
 
+ function dunkCost(p){return config.dunk.cost*(p.heat>0?config.heat.dunkCostFactor:1)*(p.team==='home'?gear.spring:1);}
+ function laneClearTo(p,tx,tz,width){
+  const dx=tx-p.x,dz=tz-p.z,d2=dx*dx+dz*dz||1;
+  for(const q of opponents(p)){const t=((q.x-p.x)*dx+(q.z-p.z)*dz)/d2;if(t<.05||t>1.05)continue;if(len(p.x+dx*t-q.x,p.z+dz*t-q.z)<width)return false;}
+  return true;
+ }
  function startDunk(p){
   const c=config.dunk,ring=court.ring(p.team),dx=ring.x-p.x,dz=ring.z-p.z,d=len(dx,dz),ux=dx/d,uz=dz/d;
   const take={x:ring.x-ux*c.takeoff,z:ring.z-uz*c.takeoff},gatherDist=Math.max(0,d-c.takeoff-c.jumpTravel);
   const gather=Math.max(c.minGather,gatherDist/c.gatherSpeed);
-  p.state='dunk';p.stateT=0;p.energy-=c.cost;p.cd.dunk=c.cooldown;p.charge=-1;
+  p.state='dunk';p.stateT=0;p.energy-=dunkCost(p);p.cd.dunk=c.cooldown;p.charge=-1;
   p.dunk={t:0,gather,sx:p.x,sz:p.z,mx:take.x-ux*c.jumpTravel,mz:take.z-uz*c.jumpTravel,tx:take.x,tz:take.z,ux,uz,released:false};
   p.yaw=Math.atan2(ux,uz);
  }
@@ -138,7 +146,8 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
    b.x=ring.x-p.dunk.ux*.06;b.z=ring.z-p.dunk.uz*.06;b.y=ring.y+cfg.dunkDrop;vel={vx:p.dunk.ux*.4,vy:-3.2,vz:p.dunk.uz*.4};
   } else {
    const d=len(ring.x-p.x,ring.z-p.z),contest=contestOf(p),skill=p.id===state.controlledId?1:ai[p.team].aimError;
-   const q=timingQuality(p.shotHold),err=cfg.baseError*(1+d*cfg.distanceError)*(cfg.timingSpread-q)*(1+contest*cfg.contestError)*skill;
+   const q=timingQuality(p.shotHold,p),hot=p.heat>0?config.heat.errorFactor:1,own=p.team==='home'?1/gear.power:1;
+   const err=cfg.baseError*(1+d*cfg.distanceError)*(cfg.timingSpread-q)*(1+contest*cfg.contestError)*skill*hot*own;
    const ang=rng.next()*Math.PI*2,mag=err*Math.sqrt(-2*Math.log(1-rng.next()*.999)),ux=(ring.x-p.x)/(d||1),uz=(ring.z-p.z)/(d||1);
    const along=Math.cos(ang)*mag*cfg.depthBias,side=Math.sin(ang)*mag;
    target={x:ring.x+ux*along+uz*side,y:ring.y,z:ring.z+uz*along-ux*side};
@@ -147,21 +156,27 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
    b.shotQuality=q;b.shotInfo={distance:Math.round(d*100)/100,contest:Math.round(contest*100)/100,error:Math.round(err*1000)/1000};
   }
   b.vx=vel.vx;b.vy=vel.vy;b.vz=vel.vz;
-  const shot={id,shooterId:p.id,team:p.team,releasedAtTick:state.tick,origin:{x:p.x,y:b.y,z:p.z},pointsIfMade:points,resolved:false,kind,flight:0,result:null,apex:false};
+  const shot={id,shooterId:p.id,team:p.team,releasedAtTick:state.tick,origin:{x:p.x,y:b.y,z:p.z},pointsIfMade:points,resolved:false,kind,flight:0,result:null,apex:false,oop:kind==='dunk'&&!!p.dunk?.oop};
   b.ownerId=null;b.shot=shot;b.pass=null;b.stuck=0;p.cd.pickup=cfg.pickupCooldown;state.shots.push(shot);
   emit({type:'possession',playerId:null,reason:'shot'});
   emit({type:'shotReleased',shotId:id,playerId:p.id,points,kind,quality:kind==='dunk'?1:b.shotQuality,...(kind==='dunk'?{}:b.shotInfo)});
-  if(kind==='dunk'){p.stats.dunks++;emit({type:'dunk',playerId:p.id,shotId:id});}
+  if(kind==='dunk'){p.stats.dunks++;if(shot.oop)p.stats.oops++;emit({type:'dunk',playerId:p.id,shotId:id,oop:shot.oop});}
   return true;
  }
 
- function timingQuality(h){
-  const c=config.shot;
-  if(h<c.tapMax)return c.tapQuality;
-  if(h>=c.perfectFrom&&h<=c.perfectTo)return 1;
-  if(h<c.perfectFrom)return c.lowQuality+(1-c.lowQuality)*(h-c.tapMax)/(c.perfectFrom-c.tapMax);
-  return 1-(1-c.lowQuality)*clamp((h-c.perfectTo)/(c.maxHold-c.perfectTo),0,1);
+ /** The green release window of this player: wider when heated up or with the shooting gear. */
+ function windowOf(p){
+  const c=config.shot,extra=(p?.heat>0?config.heat.windowBonus:0)+(p?.team==='home'?gear.touch:0);
+  return {tapMax:c.tapMax,perfectFrom:Math.max(c.tapMax+.02,c.perfectFrom-extra/2),perfectTo:Math.min(c.maxHold-.02,c.perfectTo+extra/2),maxHold:c.maxHold};
  }
+ function timingQuality(h,p){
+  const c=config.shot,w=windowOf(p);
+  if(h<c.tapMax)return c.tapQuality;
+  if(h>=w.perfectFrom&&h<=w.perfectTo)return 1;
+  if(h<w.perfectFrom)return c.lowQuality+(1-c.lowQuality)*(h-c.tapMax)/(w.perfectFrom-c.tapMax);
+  return 1-(1-c.lowQuality)*clamp((h-w.perfectTo)/(c.maxHold-w.perfectTo),0,1);
+ }
+ function gradeOf(h,p){const w=windowOf(p);return h<w.tapMax?'tap':h<w.perfectFrom?'early':h<=w.perfectTo?'perfect':'late';}
 
  function contestOf(p){
   const ring=court.ring(p.team);let best=0;
@@ -173,8 +188,34 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
   return best;
  }
 
+ /** Alley-oop: a teammate cutting to an open rim gets a lob he catches in the
+  * air and dunks. Same dunk path, timing and stuff rules as a normal dunk. */
+ function oopPlan(p,r){
+  const c=config.oop,dc=config.dunk,ring=court.ring(r.team),dx=ring.x-r.x,dz=ring.z-r.z,d=len(dx,dz);
+  if(!c||state.mode==='practice'||airborne(r)||r.inactive||r.cd.dunk>0||r.stumble>0||r.energy<c.cost||d<c.minRange||d>c.range)return null;
+  if(['dunk','shoot'].includes(r.state)||!laneClearTo(r,ring.x,ring.z,dc.laneWidth))return null;
+  const ux=dx/d,uz=dz/d,take={x:ring.x-ux*dc.takeoff,z:ring.z-uz*dc.takeoff},m={x:take.x-ux*dc.jumpTravel,z:take.z-uz*dc.jumpTravel};
+  const hp=heldBall(p);let gather=Math.max(c.minGather,len(m.x-r.x,m.z-r.z)/dc.gatherSpeed);
+  let flight=gather+dc.airSeconds*c.catchAt;if(flight<c.minFlight){gather+=c.minFlight-flight;flight=c.minFlight;}
+  if(flight>c.maxFlight||len(take.x-hp.x,take.z-hp.z)>c.maxPassDistance)return null;
+  const u=c.catchAt,k=Math.min(1,u*1.6),hand={x:m.x+(take.x-m.x)*k+ux*.45,y:4*dc.jumpHeight*u*(1-u)+2.35,z:m.z+(take.z-m.z)*k+uz*.45};
+  return {ux,uz,take,m,gather,flight,hand};
+ }
+
  function pass(p){
   const r=teammate(p);if(!r||r.inactive)return false;
+  const oop=oopPlan(p,r);
+  if(oop){
+   const b=state.ball,hp=heldBall(p),T=oop.flight;
+   b.ownerId=null;b.x=hp.x;b.y=Math.max(1.3,hp.y);b.z=hp.z;
+   b.vx=(oop.hand.x-b.x)/T;b.vz=(oop.hand.z-b.z)/T;b.vy=(oop.hand.y-b.y+.5*config.physics.gravity*T*T)/T;
+   b.pass={from:p.id,to:r.id,team:p.team,t:0,oop:true};b.shot=null;b.stuck=0;
+   p.state='pass';p.stateT=0;p.cd.pickup=config.pass.cooldown;p.charge=-1;
+   r.state='dunk';r.stateT=0;r.charge=-1;r.energy-=config.oop.cost;r.cd.dunk=config.dunk.cooldown;r.yaw=Math.atan2(oop.ux,oop.uz);r.plan=null;
+   r.dunk={t:0,gather:oop.gather,sx:r.x,sz:r.z,mx:oop.m.x,mz:oop.m.z,tx:oop.take.x,tz:oop.take.z,ux:oop.ux,uz:oop.uz,released:false,oop:true,caught:false};
+   emit({type:'possession',playerId:null,reason:'pass'});emit({type:'pass',playerId:p.id,to:r.id,oop:true});emit({type:'alleyOop',playerId:p.id,to:r.id});
+   return true;
+  }
   const b=state.ball,c=config.pass,hp=heldBall(p),lead=clamp(len(r.x-p.x,r.z-p.z)/c.speed,c.minTime,c.maxTime);
   const tx=r.x+r.vx*lead*c.lead,tz=r.z+r.vz*lead*c.lead,ty=c.catchHeight;
   b.ownerId=null;b.x=hp.x;b.y=Math.max(1.1,hp.y);b.z=hp.z;
@@ -225,12 +266,12 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
  function beginShot(p){
   p.shotHold=p.charge;p.charge=-1;p.state='shoot';p.stateT=0;p.shootT=0;
   startJump(p,config.shot.jumpHeight,config.shot.jumpSeconds);
-  emit({type:'shotStart',playerId:p.id,hold:p.shotHold,quality:timingQuality(p.shotHold)});
+  emit({type:'shotStart',playerId:p.id,hold:p.shotHold,quality:timingQuality(p.shotHold,p),grade:gradeOf(p.shotHold,p)});
  }
 
  function movePlayer(p,move,dt){
   const c=config.player,team=ai[p.team];
-  let speed=(owner()===p?c.ballSpeed:c.speed)*(p.id===state.controlledId?1:team.speed);
+  let speed=(owner()===p?c.ballSpeed:c.speed)*(p.id===state.controlledId?1:team.speed)*(p.team==='home'?gear.shoes:1);
   if(p.charge>=0)speed*=c.chargeSpeed;
   if(p.stumble>0)speed*=c.stumbleSpeed;
   if(['shoot','pass','steal'].includes(p.state)||airborne(p)&&p.state!=='rebound'&&p.state!=='block')speed*=p.state==='steal'?.5:0;
@@ -243,6 +284,17 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
   if(v>.4&&!['shoot','dunk'].includes(p.state)&&p.charge<0)p.yaw=turn(p.yaw,Math.atan2(p.vx,p.vz),c.turnRate*dt);
   else if(owner()===p&&p.state!=='dunk')p.yaw=turn(p.yaw,faceAngle(p,court.target(p.team)),c.turnRate*dt*.6);
   else if(owner()&&owner().team!==p.team&&v<.4)p.yaw=turn(p.yaw,faceAngle(p,owner()),c.turnRate*dt*.6);
+ }
+
+ /** Kid assist: on defense with the stick released, the child's player keeps
+  * himself between his man and the basket at a normal pace. */
+ function guardMove(p){
+  const o=owner(),a=config.assist;if(!a?.autoGuard||!o||o.team===p.team||p.inactive)return null;
+  const mate=teammate(p),other=opponents(p).find(q=>q!==o);let man=o;
+  if(mate&&!mate.inactive&&other&&len(mate.x-o.x,mate.z-o.z)<len(p.x-o.x,p.z-o.z))man=other;
+  const hoop=court.ring(o.team),hx=hoop.x-man.x,hz=hoop.z-man.z,dh=len(hx,hz)||1;
+  const gap=man===o?a.guardDistance:Math.min(dh*.42+.9,dh-.6),tx=man.x+hx/dh*gap,tz=man.z+hz/dh*gap,dx=tx-p.x,dz=tz-p.z,d=len(dx,dz);
+  if(d<.15)return {x:0,z:0};const k=Math.min(1,d/1.2)*a.guardSpeed;return {x:dx/d*k,z:dz/d*k};
  }
 
  function turn(a,b,max){let d=((b-a+Math.PI*3)%(Math.PI*2))-Math.PI;return a+clamp(d,-max,max);}
@@ -260,6 +312,7 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
   for(const k of Object.keys(p.cd))p.cd[k]=Math.max(0,p.cd[k]-dt);
   p.stumble=Math.max(0,p.stumble-dt);p.stateT+=dt;p.celebrate=Math.max(0,p.celebrate-dt);
   p.energy=Math.min(1,p.energy+config.energy.regen*dt);
+  if(p.heat>0&&state.phase!=='scoreReset'){p.heat=Math.max(0,p.heat-dt);if(!p.heat){p.streak=0;emit({type:'heatOff',playerId:p.id});}}
   if(p.jumpT>=0){p.jumpT+=dt;const u=p.jumpT/p.jumpDur;if(u>=1){p.jumpT=-1;p.y=0;if(['block','rebound','shoot'].includes(p.state)){p.state='land';p.stateT=0;}}else p.y=4*p.jumpHeight*u*(1-u);}
   if(p.charge>=0){p.charge+=dt;if(p.charge>=config.shot.maxHold&&owner()===p)beginShot(p);}
   if(p.state==='shoot'&&p.shootT>=0){p.shootT+=dt;if(p.shootT>=config.shot.windup){p.shootT=-1;if(owner()===p)releaseShot(p,'jump');}}
@@ -273,6 +326,10 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
   if(p.jumpT<0&&!d.jumped){d.jumped=true;startJump(p,c.jumpHeight,c.airSeconds);}
   const u=clamp((d.t-d.gather)/c.airSeconds,0,1);
   p.x=d.mx+(d.tx-d.mx)*Math.min(1,u*1.6);p.z=d.mz+(d.tz-d.mz)*Math.min(1,u*1.6);
+  if(d.oop&&!d.caught&&!d.released){
+   const b=state.ball,h=heldBall(p);
+   if(!owner()&&b.pass&&b.pass.to===p.id&&Math.hypot(b.x-h.x,b.y-h.y,b.z-h.z)<config.oop.catchRadius){d.caught=true;setOwner(p,'oop');}
+  }
   // Stuffed: an airborne defender reaching the ball before release.
   if(!d.released&&owner()===p){
    for(const q of opponents(p)){
@@ -284,13 +341,15 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
    }
   }
   if(!d.released&&u>=c.releaseAt&&owner()===p){d.released=true;if(!releaseShot(p,'dunk'))setOwner(null,'buzzer');}
+  // A lob that never reached the hands: the cutter comes down empty-handed.
+  else if(!d.released&&u>=c.releaseAt&&d.oop&&!d.caught){d.released=true;emit({type:'oopMissed',playerId:p.id});}
   if(u>=1&&p.jumpT<0){p.state='land';p.stateT=0;p.dunk=null;}
  }
 
  function resolveShot(result,extra={}){
   const shot=state.ball.shot;if(!shot||shot.resolved)return;
   shot.resolved=true;shot.result=result;
-  if(result!=='made')emit({type:'miss',shotId:shot.id,reason:result,...extra});
+  if(result!=='made'){emit({type:'miss',shotId:shot.id,reason:result,...extra});const shooter=byId(shot.shooterId);if(shooter&&shooter.heat<=0)shooter.streak=0;}
  }
 
  function updateBall(dt){
@@ -305,7 +364,10 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
     if(x.team!==shot.team)continue;
     shot.resolved=true;shot.result='made';
     state.score[shot.team]+=shot.pointsIfMade;const shooter=byId(shot.shooterId);shooter.stats.points+=shot.pointsIfMade;
-    emit({type:'score',shotId:shot.id,team:shot.team,points:shot.pointsIfMade,playerId:shot.shooterId,kind:shot.kind});
+    if(state.mode!=='practice'){shooter.streak++;if(shooter.heat<=0&&shooter.streak>=config.heat.streak){shooter.heat=config.heat.seconds;emit({type:'heatUp',playerId:shooter.id,team:shooter.team});}
+     // A basket cools the other team down.
+     for(const q of state.players)if(q.team!==shooter.team){q.streak=0;if(q.heat>0){q.heat=0;emit({type:'heatOff',playerId:q.id});}}}
+    emit({type:'score',shotId:shot.id,team:shot.team,points:shot.pointsIfMade,playerId:shot.shooterId,kind:shot.kind,oop:shot.oop});
     for(const p of state.players)if(p.team===shot.team)p.celebrate=config.match.scoreResetSeconds;
     if(state.phase!=='practice'){state.resume=state.phase;state.phase='scoreReset';state.timer=config.match.scoreResetSeconds;state.conceded=shot.team==='home'?'away':'home';}
     else advancePractice();
@@ -439,7 +501,10 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
   }
   state.playedTicks++;
   // Controlled player: exactly one input frame per step.
-  if(human&&!human.inactive){applyInput(human,input);if(human.state!=='dunk')movePlayer(human,input.move||NO_INPUT.move,dt);}
+  if(human&&!human.inactive){
+   applyInput(human,input);const m=input.move||NO_INPUT.move,idle=len(m.x,m.z)<.1,guard=idle&&state.mode!=='practice'?guardMove(human):null;
+   state.guarding=!!guard;if(human.state!=='dunk')movePlayer(human,guard||m,dt);
+  }
   stepAI(dt);
   for(const p of state.players){if(p.state==='dunk'&&p.dunk)updateDunk(p,dt);updatePlayerTimers(p,dt);}
   separate();
@@ -466,14 +531,14 @@ export function createSlamEngine({config,seed=1,stage=1,mode='match',difficulty}
    controlledPlayerId:state.controlledId,attackTeam:state.attackTeam,score:{...state.score},
    overtimes:state.overtimes,buzzer:state.buzzer,mode:state.mode,
    players:state.players.map(p=>({id:p.id,team:p.team,position:{x:p.x,y:p.y,z:p.z},yaw:p.yaw,animation:animationOf(p),animationT:p.stateT,
-    stamina:p.energy,hasBall:o===p,charge:p.charge,stumble:p.stumble,speed:len(p.vx,p.vz),inactive:!!p.inactive,
+    stamina:p.energy,hasBall:o===p,charge:p.charge,heat:p.heat,streak:p.streak,stumble:p.stumble,speed:len(p.vx,p.vz),inactive:!!p.inactive,
     cooldowns:{...p.cd},dunk:p.dunk?{t:p.dunk.t,gather:p.dunk.gather,released:p.dunk.released}:null,stats:{...p.stats}})),
    ball:{position:{x:b.x,y:b.y,z:b.z},velocity:{x:b.vx,y:b.vy,z:b.vz},ownerId:b.ownerId,dribble:b.dribble||0,
     shot:b.shot?{id:b.shot.id,shooterId:b.shot.shooterId,releasedAtTick:b.shot.releasedAtTick,origin:{...b.shot.origin},pointsIfMade:b.shot.pointsIfMade,resolved:b.shot.resolved,kind:b.shot.kind,result:b.shot.result}:null,
     pass:b.pass?{...b.pass}:null},
    availableActions:ctrl?actionsFor(ctrl):{primary:'rebound',secondary:'switch'},
    dunkReady:!!(ctrl&&o===ctrl&&dunkEligible(ctrl)),
-   shotWindow:{tapMax:config.shot.tapMax,perfectFrom:config.shot.perfectFrom,perfectTo:config.shot.perfectTo,maxHold:config.shot.maxHold},
+   shotWindow:windowOf(ctrl),guarding:!!state.guarding,dunkCost:ctrl?dunkCost(ctrl):config.dunk.cost,
    practice:state.practice?{step:state.practice.step,target:{...state.practice.target}}:null,
    result:state.result?{...state.result}:null,
   };

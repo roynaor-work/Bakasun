@@ -37,6 +37,9 @@ export function createInitialState(data, now = Date.now()) {
   },data);
 }
 
+/** Games added while the schema stayed at 18. */
+const GAMES_AFTER_18=['streetSlam'];
+
 /** A game added after a save was written starts at stage one with empty
  * equipment, the same way islandRacing joined in 16 -> 17. Additive only. */
 function addNewGame(state,old,data,id){
@@ -49,7 +52,7 @@ function addNewGame(state,old,data,id){
 
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
-  17(old,data) {return addNewGame({...old,version:18,cityDepthVersion:1,city:initialCity(),cityManagement:initialCityManagement()},old,data,'streetSlam');},
+  17(old,data) {return GAMES_AFTER_18.reduce((state,id)=>addNewGame(state,old,data,id),{...old,version:18,cityDepthVersion:1,city:initialCity(),cityManagement:initialCityManagement()});},
   16(old,data){
     const state={...old,version:17};
     if(isObject(old.minigameProgress)){
@@ -125,8 +128,8 @@ export function migrateSave(value, data, registry) {
   // New content IDs can start at level one without changing the save schema.
   if (isObject(state.minigameLevels)) for (const id of Object.keys(data.config.minigameLevels || {})) if (!(id in state.minigameLevels)) state.minigameLevels[id] = 1;
   if (isObject(state.minigameProgress)) for (const [id,p] of Object.entries(initialProgress(data))) if (!(id in state.minigameProgress)) state.minigameProgress[id] = p;
-  // A game without purchasable tracks has nothing to lose; missing tracks of any other game stay invalid.
-  if (isObject(state.minigameEquipment)) for (const [id,tracks] of Object.entries(initialEquipment(data))) if (!(id in state.minigameEquipment) && !Object.keys(tracks).length) state.minigameEquipment[id] = tracks;
+  // Only games shipped after schema 18 may be missing; missing tracks of any other game stay invalid.
+  if (isObject(state.minigameEquipment)) for (const [id,tracks] of Object.entries(initialEquipment(data))) if (!(id in state.minigameEquipment) && GAMES_AFTER_18.includes(id)) state.minigameEquipment[id] = tracks;
   const validation = validateSave(state, data, registry);
   if(!validation.ok)return validation;
   const repairedHarbors=repairHarbors(state,registry,data.featureFlags);

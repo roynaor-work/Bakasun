@@ -11583,6 +11583,112 @@
      "whistle": "assets/audio/g3h/whistle.ogg",
      "crowd": "assets/audio/g3h/crowd.ogg"
     }
+   },
+   "heat": {
+    "streak": 2,
+    "seconds": 20,
+    "windowBonus": 0.12,
+    "errorFactor": 0.75,
+    "dunkCostFactor": 0.6
+   },
+   "oop": {
+    "cost": 0.3,
+    "minRange": 1.0,
+    "range": 5.5,
+    "minGather": 0.16,
+    "catchAt": 0.45,
+    "minFlight": 0.6,
+    "maxFlight": 1.25,
+    "maxPassDistance": 11,
+    "catchRadius": 0.95
+   },
+   "assist": {
+    "autoGuard": true,
+    "guardDistance": 1.2,
+    "guardSpeed": 0.85
+   },
+   "equipment": {
+    "shoes": {
+     "title": "equipment.streetSlam.shoes",
+     "description": "equipment.streetSlam.shoes.hint",
+     "base": 1,
+     "levels": [
+      {
+       "value": 1.03,
+       "cost": 50,
+       "stars": 0
+      },
+      {
+       "value": 1.06,
+       "cost": 100,
+       "stars": 6
+      },
+      {
+       "value": 1.09,
+       "cost": 165,
+       "stars": 18
+      },
+      {
+       "value": 1.12,
+       "cost": 240,
+       "stars": 36
+      }
+     ]
+    },
+    "touch": {
+     "title": "equipment.streetSlam.touch",
+     "description": "equipment.streetSlam.touch.hint",
+     "base": 0,
+     "levels": [
+      {
+       "value": 0.03,
+       "cost": 50,
+       "stars": 0
+      },
+      {
+       "value": 0.06,
+       "cost": 100,
+       "stars": 6
+      },
+      {
+       "value": 0.09,
+       "cost": 165,
+       "stars": 18
+      },
+      {
+       "value": 0.12,
+       "cost": 240,
+       "stars": 36
+      }
+     ]
+    },
+    "spring": {
+     "title": "equipment.streetSlam.spring",
+     "description": "equipment.streetSlam.spring.hint",
+     "base": 1,
+     "levels": [
+      {
+       "value": 0.92,
+       "cost": 50,
+       "stars": 0
+      },
+      {
+       "value": 0.84,
+       "cost": 100,
+       "stars": 6
+      },
+      {
+       "value": 0.76,
+       "cost": 165,
+       "stars": 18
+      },
+      {
+       "value": 0.68,
+       "cost": 240,
+       "stars": 36
+      }
+     ]
+    }
    }
   }
  },

@@ -236,8 +236,58 @@ test('saves from before Street Slam load without reset and gain only its default
  const loaded=migrateSave(structuredClone(old),data,createRegistry(data));
  assert.equal(loaded.ok,true,JSON.stringify(loaded).slice(0,300));const s=loaded.state;
  assert.equal(s.money,4321);assert.equal(s.minigameLevels.tennis,2);assert.equal(s.minigameProgress.soccer.stage,4);assert.equal(s.minigameProgress.soccer.stars[0],3);
- assert.equal(s.minigameLevels.streetSlam,1);assert.deepEqual(s.minigameProgress.streetSlam,{stage:1,stars:Array(10).fill(0)});assert.deepEqual(s.minigameEquipment.streetSlam,{});
+ assert.equal(s.minigameLevels.streetSlam,1);assert.deepEqual(s.minigameProgress.streetSlam,{stage:1,stars:Array(10).fill(0)});assert.deepEqual(s.minigameEquipment.streetSlam,{shoes:0,touch:0,spring:0});
  for(const id of Object.keys(old.minigameEquipment))assert.deepEqual(s.minigameEquipment[id],old.minigameEquipment[id]);
  // Older fixtures still migrate through the existing chain.
  for(const v of [7,9,10,11]){const fixture=JSON.parse(await readFile(new URL(`tests/fixtures/save-v${v}.json`,root),'utf8'));const r=migrateSave(fixture,data,createRegistry(data));assert.equal(r.ok,true,'v'+v);assert.equal(r.state.minigameLevels.streetSlam,1);}
+});
+
+test('heat up: two baskets in a row widen the window and cool off after the timer or an answer',()=>{
+ const t=solo('home',{seed:31,place:p=>{p.x=0;p.z=-5;}}),h=t.shooter,b=t.s.ball,base=t.e.snapshot().shotWindow;
+ const make=()=>{t.s.phase='playing';t.s.ball.ownerId=h.id;t.s.ball.shot=null;Object.assign(h,{x:0,z:-5,state:'idle',charge:-1,jumpT:-1,y:0});shoot(t.e,.56);for(let i=0;i<20;i++)t.e.step(NONE);
+  Object.assign(b,{x:0,y:3.9,z:-7.6,vx:0,vy:-1,vz:0});for(let i=0;i<40;i++)t.e.step(NONE);};
+ make();assert.equal(h.heat,0);make();
+ const ev=events(t.e);assert.ok(ev.some(e=>e.type==='heatUp'&&e.playerId===h.id));assert.ok(h.heat>0);
+ const hot=t.e.snapshot().shotWindow;assert.ok(hot.perfectTo-hot.perfectFrom>base.perfectTo-base.perfectFrom+.1,'wider green window');
+ // The other team scoring cools the shooter down at once.
+ const a=t.s.players.find(p=>p.id==='a1');a.inactive=false;t.s.phase='playing';t.s.ball.ownerId='a1';Object.assign(a,{x:0,z:5,state:'idle',charge:-1});
+ a.think=99;a.plan={action:{type:'shoot',hold:.5}};for(let i=0;i<60;i++){t.e.step(NONE);a.think=99;}
+ Object.assign(b,{x:0,y:3.9,z:7.6,vx:0,vy:-1,vz:0});for(let i=0;i<40;i++)t.e.step(NONE);
+ assert.equal(h.heat,0);assert.ok(events(t.e).some(e=>e.type==='heatOff'&&e.playerId===h.id));
+});
+
+test('alley-oop: a pass to a teammate cutting to an open rim is caught in the air and dunked for 2',()=>{
+ const e=createSlamEngine({config:cfg,seed:41,stage:1}),s=e.debugState;s.phase='playing';
+ const [h1,h2,a1,a2]=s.players;for(const q of [a1,a2]){q.inactive=true;q.x=6.5;}
+ Object.assign(h1,{x:-2,z:-1,yaw:Math.PI});Object.assign(h2,{x:1.5,z:-4.6,energy:1});s.ball.ownerId='h1';s.controlledId='h1';
+ e.step(input({secondaryPressed:true}));let ev=events(e);assert.ok(ev.some(x=>x.type==='alleyOop'));assert.equal(h2.state,'dunk');
+ const path=[];for(let i=0;i<140;i++){e.step(NONE);path.push([h2.x,h2.z]);}ev=events(e);
+ for(let i=1;i<path.length;i++)assert.ok(Math.hypot(path[i][0]-path[i-1][0],path[i][1]-path[i-1][1])<6.5/60,'no teleport');
+ assert.ok(ev.some(x=>x.type==='possession'&&x.reason==='oop'),'caught in the air');
+ const score=ev.find(x=>x.type==='score');assert.ok(score&&score.oop&&score.points===2&&score.playerId==='h2');
+ // A defender standing in the lane turns the same press into an ordinary pass.
+ const f=createSlamEngine({config:cfg,seed:42,stage:1}),g=f.debugState;g.phase='playing';const [p1,p2,q1,q2]=g.players;
+ Object.assign(p1,{x:-2,z:-1});Object.assign(p2,{x:1.5,z:-4.6,energy:1});Object.assign(q1,{x:1.2,z:-6.2,think:99,plan:null});q2.inactive=true;q2.x=6.5;g.ball.ownerId='h1';g.controlledId='h1';
+ f.step(input({secondaryPressed:true}));assert.ok(!f.drainEvents().some(x=>x.type==='alleyOop'));assert.notEqual(p2.state,'dunk');
+});
+
+test('auto guard: with the stick released the child stays between the handler and the basket',()=>{
+ const e=createSlamEngine({config:cfg,seed:51,stage:1}),s=e.debugState;s.phase='playing';
+ const [h1,h2,a1,a2]=s.players;h2.inactive=true;h2.x=-6.5;a2.inactive=true;a2.x=6.5;
+ Object.assign(a1,{x:0,z:0,think:99,plan:null});Object.assign(h1,{x:-4,z:-2});s.ball.ownerId='a1';s.controlledId='h1';
+ for(let i=0;i<120;i++){e.step(NONE);a1.think=99;a1.plan=null;}
+ const hoop={x:0,z:cfg.court.hoopZ},snap=e.snapshot();assert.equal(snap.guarding,true);
+ const between=((h1.x-a1.x)*(hoop.x-a1.x)+(h1.z-a1.z)*(hoop.z-a1.z))>0;assert.ok(between,'on the basket side');
+ assert.ok(Math.abs(Math.hypot(h1.x-a1.x,h1.z-a1.z)-cfg.assist.guardDistance)<.35,'at guarding distance');
+ // Touching the stick always wins over the assist.
+ const x0=h1.x;for(let i=0;i<20;i++)e.step(input({move:{x:-1,z:0}}));assert.ok(h1.x<x0-.5);assert.equal(e.snapshot().guarding,false);
+});
+
+test('equipment from the island shop changes the child team only, within its bounds',()=>{
+ const run=eq=>{const e=createSlamEngine({config:cfg,seed:61,stage:1,equipment:eq}),s=e.debugState;s.phase='playing';const h=s.players[0],a=s.players[2];s.ball.ownerId=null;
+  for(let i=0;i<60;i++)e.step(input({move:{x:1,z:0}}));return {x:h.x,window:e.snapshot().shotWindow,cost:e.snapshot().dunkCost,away:a.x};};
+ const base=run({}),max=run({shoes:1.12,touch:.12,spring:.68});
+ assert.ok(max.x>base.x,'faster');assert.ok(max.window.perfectTo-max.window.perfectFrom>base.window.perfectTo-base.window.perfectFrom+.1,'wider window');
+ assert.ok(Math.abs(max.cost-cfg.dunk.cost*.68)<1e-9);
+ for(const [k,t] of Object.entries(cfg.equipment)){assert.equal(t.levels.length,4);assert.ok(t.title&&t.description,k);}
 });

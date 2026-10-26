@@ -138,6 +138,13 @@ export async function createSlamView(canvas,config,{quality='high',insets=()=>({
  const target=new THREE.Mesh(new THREE.RingGeometry(.7,.9,48),new THREE.MeshBasicMaterial({color:col.energy,side:THREE.DoubleSide,transparent:true,opacity:.95,depthWrite:false}));target.rotation.x=-Math.PI/2;target.position.y=.16;target.visible=false;scene.add(target);
  const burst=new THREE.Mesh(new THREE.RingGeometry(.4,.5,40),new THREE.MeshBasicMaterial({color:'#fff3c4',side:THREE.DoubleSide,transparent:true,opacity:0,depthWrite:false}));burst.rotation.x=-Math.PI/2;scene.add(burst);
 
+ // Heat up: a ring of flame tongues at the feet (additive, no lights, 2 draws).
+ const flameMat=new THREE.MeshBasicMaterial({color:'#ff7a2a',transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false});
+ const flameRingMat=new THREE.MeshBasicMaterial({color:'#ffb347',transparent:true,opacity:.6,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide});
+ const tongue=new THREE.ConeGeometry(.12,.55,6);tongue.translate(0,.27,0);
+ function flameRing(){const g=new THREE.Group(),ring=new THREE.Mesh(new THREE.RingGeometry(.5,.82,40),flameRingMat);ring.rotation.x=-Math.PI/2;g.add(ring);
+  const tongues=new THREE.InstancedMesh(tongue,flameMat,8);tongues.frustumCulled=false;g.add(tongues);g.userData.tongues=tongues;g.visible=false;scene.add(g);return g;}
+ const m4=new THREE.Matrix4(),q4=new THREE.Quaternion(),s4=new THREE.Vector3(),p4=new THREE.Vector3(),up=new THREE.Vector3(0,1,0);
  // Characters: the shared Kenney rig, team colour and number on the back.
  const actors=new Map();
  const ids=['h1','h2','a1','a2'];
@@ -145,7 +152,7 @@ export async function createSlamView(canvas,config,{quality='high',insets=()=>({
   return loadCharacter({shirt,shirt2:shirt,shorts:home?col.shortsHome:col.shortsAway,number:r.numbers[id],numberColor:home?'#ffffff':'#fff6dd',face:false});}));
  loaded.forEach((ch,i)=>{const wrap=new THREE.Group();wrap.scale.setScalar(.019);wrap.add(ch.model);scene.add(wrap);ch.outline.visible=false;
   const map=ch.mesh.material.map;ch.mesh.material.dispose();ch.mesh.material=new THREE.MeshStandardMaterial({map,roughness:.8});ch.mesh.castShadow=true;
-  actors.set(ids[i],{ch,wrap,pose:null,phase:i*.25,hand:ch.rig.b.LeftHand,other:ch.rig.b.RightHand});});
+  actors.set(ids[i],{ch,wrap,pose:null,phase:i*.25,hand:ch.rig.b.LeftHand,other:ch.rig.b.RightHand,flame:flameRing()});});
 
  let inspect=null,camera,rig=null,focus=new THREE.Vector3(),width=1,height=1,dpr=1,shake=0,frames=0,slow=0,lowered=quality!=='high';
  const seen=new Set(),pending=[];
@@ -170,6 +177,10 @@ export async function createSlamView(canvas,config,{quality='high',insets=()=>({
    const target=slamPose(p.animation,{t:p.animationT,phase:a.phase,speed:p.speed,dribble:cur.ball.dribble,defending:defendingTeam===p.team,airborne:p.position.y>.02,hasBall:p.hasBall});
    a.pose=blendPose(a.pose,target,p.animation==='dribble'||p.animation==='run'?Math.min(1,k*1.6):k);
    poseActor(a,a.pose);
+   const f=a.flame;f.visible=p.heat>0;
+   if(f.visible){f.position.set(x,.16,z);const tt=cur.tick/60,tg=f.userData.tongues;
+    for(let k=0;k<8;k++){const ang=k/8*Math.PI*2+tt*1.6,h=reduced?.8:.7+.45*Math.abs(Math.sin(tt*9+k*1.7));p4.set(Math.cos(ang)*.62,0,Math.sin(ang)*.62);q4.setFromAxisAngle(up,ang);s4.set(1,h,1);m4.compose(p4,q4,s4);tg.setMatrixAt(k,m4);}
+    tg.instanceMatrix.needsUpdate=true;}
   }
   // Ball: physics position when free, the hand when held.
   const owner=cur.ball.ownerId&&actors.get(cur.ball.ownerId);

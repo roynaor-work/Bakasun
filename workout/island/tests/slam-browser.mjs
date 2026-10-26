@@ -105,7 +105,7 @@ for(const viewport of only){
    await touch('touchStart',[{...st,id:1}]);await touch('touchMove',[{x:st.x+30,y:st.y,id:1}]);await touch('touchStart',[{x:st.x+30,y:st.y,id:1},{...pr,id:2}]);
    await page.waitForFunction(()=>{const s=window.__island.games.current.session.snapshot,m=s.players.find(p=>p.id===s.controlledPlayerId);return m.charge>.1&&m.speed>0;});// charging and moving with two fingers
    await touch('touchMove',[{x:st.x+30,y:st.y,id:1},{x:pr.x-160,y:pr.y-140,id:2}]);await wait(200);await touch('touchEnd',[{x:st.x+30,y:st.y,id:1}]);await wait(120);await touch('touchEnd',[]);
-   await steps(40);let ev=await events();assert.equal(ev.filter(e=>e.type==='shotStart').length,1,'one shot from the outside release');
+   await steps(40);let ev=await events();assert.equal(ev.filter(e=>e.type==='shotStart').length,1,'one shot from the outside release');assert.ok(['early','perfect','late','tap'].includes(ev.find(e=>e.type==='shotStart').grade));
    const after=await page.evaluate(()=>window.__island.games.current.session.snapshot.input);assert.deepEqual([after.primary,after.secondary,after.stick],[false,false,false]);
    // Cancel: a cancelled touch drops the charge and fires nothing.
    await eng(e=>{const s=e.debugState,h=s.players.find(p=>p.id===s.controlledId);s.ball.ownerId=h.id;s.ball.shot=null;h.state='idle';h.charge=-1;h.jumpT=-1;h.y=0;});await events();
@@ -129,6 +129,16 @@ for(const viewport of only){
   await page.waitForFunction(()=>{const s=window.__island.games.current.session.snapshot,m=s.players.find(p=>p.id===s.controlledPlayerId);if(m.animation==='dunk'&&m.position.y>.75){window.__island.games.current.session.setPaused(true);return true;}return false;});
   await wait(400);await shot('04-dunk');await page.evaluate(()=>window.__island.games.current.session.setPaused(false));await steps(80);ev=await events();
   assert.ok(ev.some(e=>e.type==='dunk'),'dunk from the UI');assert.ok(ev.some(e=>e.type==='score'&&e.kind==='dunk'));
+  // Alley-oop from the pass control, frozen at the catch for the picture.
+  await eng(e=>{const s=e.debugState;s.phase='playing';s.ball.shot=null;s.ball.pass=null;const [h1,h2,a1,a2]=s.players;Object.assign(h1,{x:-2.2,z:-1,vx:0,vz:0,yaw:Math.PI,state:'idle',charge:-1,jumpT:-1,y:0,stumble:0});Object.assign(h2,{x:1.4,z:-4.4,vx:0,vz:0,energy:1,state:'idle',jumpT:-1,y:0,think:99,plan:null,cd:{...h2.cd,dunk:0}});s.ball.ownerId='h1';s.controlledId='h1';for(const p of [a1,a2]){p.x=5.8;p.z=4+p.index;p.think=99;p.plan=null;}});await events();
+  await wait(1200);if(phone)await press('.slam-secondary');else await page.keyboard.press('KeyE');
+  await page.waitForFunction(()=>{const s=window.__island.games.current.session.snapshot,m=s.players.find(p=>p.id==='h2');if(s.ball.ownerId==='h2'&&m.position.y>.7){window.__island.games.current.session.setPaused(true);return true;}return false;},null,{timeout:60000});
+  await wait(400);await shot('04b-alley-oop');await page.evaluate(()=>window.__island.games.current.session.setPaused(false));await steps(90);ev=await events();
+  assert.ok(ev.some(e=>e.type==='alleyOop'));assert.ok(ev.some(e=>e.type==='score'&&e.oop),'alley-oop dunk scored');
+  // Heat up shows on the child's player and on the HUD.
+  await eng(e=>{const s=e.debugState;s.phase='playing';s.ball.shot=null;s.ball.pass=null;const h=s.players.find(p=>p.id===s.controlledId);h.heat=15;s.ball.ownerId=h.id;Object.assign(h,{x:.5,z:-3,state:'idle',jumpT:-1,y:0});for(const p of s.players)if(p.team==='away'){p.x=5.8;p.z=4+p.index;p.think=99;p.plan=null;}});
+  await page.waitForSelector('.slam-heat:not([hidden])');await wait(900);await shot('04c-heat');
+  assert.ok((await snap()).shotWindow.perfectTo-(await snap()).shotWindow.perfectFrom>.25,'heated window');
   // Steal: defend a still handler in range (the chance is real; a few tries).
   let stole=false;
   for(let i=0;i<10&&!stole;i++){
@@ -145,7 +155,7 @@ for(const viewport of only){
    if(phone)await press('.slam-primary',40);else await page.keyboard.press('Space');await steps(50);blocked=(await events()).some(e=>e.type==='block'&&e.playerId==='h1');
   }
   const sound=(await snap()).audioMetrics;row.audio=sound;if(phone){assert.equal(sound.buffers,7,'all seven local samples decoded');assert.ok(Object.values(sound.played).reduce((a,b)=>a+b,0)>0,'sounds played after a gesture');}
-  check('10 pass, dunk and steal from the interface'+(blocked?', block landed':', block jump fired (timing-dependent landing)'));
+  check('10 pass, dunk, alley-oop, heat and steal from the interface'+(blocked?', block landed':', block jump fired (timing-dependent landing)'));
   row.blockLanded=blocked;
 
   // 7. Pause button and a hidden tab freeze the match.
