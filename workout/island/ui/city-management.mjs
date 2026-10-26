@@ -1,5 +1,5 @@
-import {CITY_DEPARTMENTS,CITY_ZONES} from '../engine/city-management.mjs?v=island-people-scale-20261026-1';
-import {cityBlueprint,citySitesSignature} from '../engine/city-sites.mjs?v=island-people-scale-20261026-1';
+import {CITY_DEPARTMENTS,CITY_ZONES} from '../engine/city-management.mjs?v=island-ready-plots-20261026-1';
+import {cityBlueprint,citySitesSignature} from '../engine/city-sites.mjs?v=island-ready-plots-20261026-1';
 
 const node=(tag,className='',text='')=>{const item=document.createElement(tag);item.className=className;item.textContent=text;return item;};
 const button=(text,action,handler,className='secondary-button')=>{const item=node('button',className,text);item.type='button';item.dataset.action=action;item.onclick=handler;return item;};
@@ -55,21 +55,21 @@ export class CityManagementInterface{
       card.append(heading,value,meter,description,actions);services.append(card);serviceValues[id]={value,meter,description};
     }
     pages.overview.append(stats,advice,demand,node('h3','',t('city.coverage')),services);
-    const blueprintIntro=node('div','city-blueprint-intro');blueprintIntro.append(node('strong','',t('city.blueprintTitle')),node('p','city-hint',t('city.blueprintHint')));
+    const blueprintIntro=node('div','city-blueprint-intro');blueprintIntro.append(node('strong','',t('city.blueprintTitle')),node('p','city-hint',t(ui.readyPlots?.active?'ready.listHint':'city.blueprintHint')));
     const blueprintList=node('div','city-blueprint-list');pages.blueprint.append(blueprintIntro,blueprintList);
     let blueprintSignature;
     const updateBlueprint=()=>{
-      const signature=citySitesSignature(engine.state);
+      const prepared=ui.readyPlots?.active,readyRows=prepared?engine.readyPlots():null,signature=prepared?JSON.stringify(readyRows):citySitesSignature(engine.state);
       if(signature!==blueprintSignature){
-        blueprintSignature=signature;this.blueprint=cityBlueprint(engine.state,engine.registry,ui.data.featureFlags);blueprintList.replaceChildren();
+        blueprintSignature=signature;this.blueprint=prepared?readyRows:cityBlueprint(engine.state,engine.registry,ui.data.featureFlags);blueprintList.replaceChildren();
         for(const site of this.blueprint){
           const type=engine.registry.buildings.get(site.typeId),control=button('',`city-site-${site.number}`,()=>this.chooseSite(site),'city-blueprint-site');control.style.setProperty('--site-color',site.color);
-          const badge=node('b','city-site-number',String(site.number)),details=node('span','city-site-details');details.append(node('strong','',`${type.icon} ${ui.label(type,'building')}`),node('small','',t(site.reason)));
+          const badge=node('b','city-site-number',String(site.number)),details=node('span','city-site-details');details.append(node('strong','',`${type.icon} ${ui.label(type,'building')}`),node('small','',prepared?ui.readyPlots.reason(site):t(site.reason)));
           control.append(badge,details,node('span','city-site-cost',`● ${type.cost}`));blueprintList.append(control);
         }
         if(!this.blueprint.length)blueprintList.append(node('p','city-hint',t('city.noSites')));
       }
-      if(tab==='blueprint')ui.view.setCitySites?.(this.blueprint);
+      if(tab==='blueprint')ui.view.setCitySites?.(prepared?[]:this.blueprint);
     };
 
     const ledger=node('dl','city-ledger'),ledgerValues={};
@@ -129,7 +129,7 @@ export class CityManagementInterface{
     const unsubscribe=engine.subscribe(update),resize=new ResizeObserver(()=>this.updateViewport());resize.observe(modal);
     ui.modalCleanup=()=>{unsubscribe();resize.disconnect();this.panel=null;this.activeTab=null;this.blueprint=[];ui.view.setCitySites?.([]);delete ui.root.dataset.cityPlanning;ui.view.setPlanningViewport?.(null);};select(tab);update();this.updateViewport();
   }
-  chooseSite(site){this.ui.closeModal();this.ui.selectBuilding(site.typeId);this.ui.updateGhost(site,false);this.ui.view.focusCell(site.x,site.z);}
+  chooseSite(site){this.ui.closeModal();if(this.ui.readyPlots?.active){this.ui.readyPlots.show(site.id);return;}this.ui.selectBuilding(site.typeId);this.ui.updateGhost(site,false);this.ui.view.focusCell(site.x,site.z);}
   selectSiteAt(cell){const site=this.panel&&this.activeTab==='blueprint'&&this.blueprint?.find(row=>cell.x>=row.x&&cell.x<row.x+row.w&&cell.z>=row.z&&cell.z<row.z+row.d);if(!site)return false;this.chooseSite(site);return true;}
   updateViewport(){
     if(!this.panel)return;const rect=this.panel.getBoundingClientRect(),canvas=this.ui.view.canvas.getBoundingClientRect(),portrait=canvas.width<=600&&canvas.height>500;

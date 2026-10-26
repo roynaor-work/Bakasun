@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
-import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-people-scale-20261026-1';
-import {streetFront} from '../engine/city-sites.mjs?v=island-people-scale-20261026-1';
-import {plotLandscape} from './plot-landscape.mjs?v=island-people-scale-20261026-1';
+import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-ready-plots-20261026-1';
+import {streetFront} from '../engine/city-sites.mjs?v=island-ready-plots-20261026-1';
+import {plotLandscape} from './plot-landscape.mjs?v=island-ready-plots-20261026-1';
 
 /** Paving and street furniture are derived visuals inside existing footprints.
  * No saved building, authored GLB, construction rule or ground plane is changed. */

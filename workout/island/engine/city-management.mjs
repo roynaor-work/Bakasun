@@ -1,6 +1,6 @@
-import {buildingCenter,levelFactor,levelValue,population} from './metrics.mjs?v=island-people-scale-20261026-1';
-import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-people-scale-20261026-1';
-import {cityConnections} from './city-connections.mjs?v=island-people-scale-20261026-1';
+import {buildingCenter,levelFactor,levelValue,population} from './metrics.mjs?v=island-ready-plots-20261026-1';
+import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-ready-plots-20261026-1';
+import {cityConnections} from './city-connections.mjs?v=island-ready-plots-20261026-1';
 export {cityConnections};
 
 export const CITY_DEPARTMENTS=['water','health','education','safety'];
@@ -58,6 +58,9 @@ export function municipalBudget(state,registry,config){
   if(!policy?.enabled||!cfg)return {taxes:0,expenses:0,net:0,jobs,departments:{}};
   const departments=Object.fromEntries(CITY_DEPARTMENTS.map(id=>[id,0]));let maintenance=0;
   for(const row of state.buildings){
+    // Prepared public infrastructure is free to keep as well as to build.
+    // Player-built roads and every other building retain their ordinary bill.
+    if(state.readyPlan&&row.typeId==='road'&&row.id.startsWith('ready-road-'))continue;
     const service=cfg.services[row.typeId];
     if(service)departments[service.department]+=service.upkeep*levelFactor(row,config)*policy.funding[service.department]/100;
     else maintenance+=(cfg.maintenance[row.typeId]||0)*levelFactor(row,config);

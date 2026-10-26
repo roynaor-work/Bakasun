@@ -1153,6 +1153,47 @@
     ],
     "reason": "reason.limit.cityHall"
    }
+  },
+  "powerPlant": {
+   "footprint": [
+    3,
+    2
+   ],
+   "cost": 140,
+   "radius": 0,
+   "income": 0,
+   "resources": {
+    "energy": 14
+   },
+   "effects": {},
+   "levels": [
+    {
+     "cost": 0
+    },
+    {
+     "cost": 140
+    },
+    {
+     "cost": 220
+    }
+   ],
+   "visual": {
+    "height": 1.1
+   },
+   "limit": {
+    "kind": "stageCap",
+    "maxCount": [
+     1,
+     2,
+     3
+    ],
+    "reason": "reason.limit.powerPlant"
+   },
+   "maxLevelByStage": [
+    2,
+    3,
+    3
+   ]
   }
  },
  "minigames": {
@@ -11463,5 +11504,19 @@
    "cityHall": 2,
    "park": 1
   }
- }
+ },
+ "readyWorldStages": [
+  {
+   "size": 32,
+   "requiredParts": 0
+  },
+  {
+   "size": 40,
+   "requiredParts": 5
+  },
+  {
+   "size": 48,
+   "requiredParts": 12
+  }
+ ]
 }
