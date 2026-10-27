@@ -41,7 +41,7 @@ export function createInitialState(data, now = Date.now()) {
 }
 
 /** Games added while the schema stayed at 18. */
-const GAMES_AFTER_18=['streetSlam'];
+const GAMES_AFTER_18=['streetSlam','alpineRush'];
 
 /** A game added after a save was written starts at stage one with empty
  * equipment, the same way islandRacing joined in 16 -> 17. Additive only. */

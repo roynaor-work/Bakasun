@@ -11741,6 +11741,695 @@
     "championCredits": 10,
     "drillCost": 2
    }
+  },
+  "alpineRush": {
+   "version": 1,
+   "requiresBuilding": null,
+   "maximumScore": 6,
+   "maximumSeconds": 240,
+   "riders": 6,
+   "aiCaps": {
+    "maxSpeed": 1.0,
+    "minReaction": 0.12,
+    "maxLookahead": 70,
+    "note": "AI rivals share the player's physics; speed factor never above 1.0 of the base speed."
+   },
+   "physics": {
+    "fixedStep": 0.016666666666666666,
+    "maxCatchUpSeconds": 0.25,
+    "countdownSeconds": 3,
+    "baseSpeed": 20,
+    "boostSpeed": 31,
+    "acceleration": 6.5,
+    "deceleration": 5,
+    "lateralSpeed": 8.5,
+    "lateralResponse": 9,
+    "airControl": 0.4,
+    "hitSpeedLoss": 0.35,
+    "recoverySeconds": 1,
+    "hitGraceSeconds": 0.35,
+    "hitFlashSeconds": 0.45,
+    "boostSeconds": 2.5,
+    "boostStartTank": 0.5,
+    "boostMinimum": 0.3,
+    "boostRechargePerSecond": 0.075,
+    "gateCharge": 0.2,
+    "padSeconds": 1.2,
+    "padCharge": 0.1,
+    "gravity": 15,
+    "rampLaunch": 2.6,
+    "landSeconds": 0.28,
+    "board": {
+     "halfWidth": 0.85,
+     "halfDepth": 0.22
+    },
+    "rockHitScale": 0.9,
+    "gateHalfWidth": 2.2,
+    "gatePostHeight": 2.2,
+    "postHalf": [
+     0.09,
+     0.1
+    ],
+    "riderSeparation": 1.6,
+    "ramp": {
+     "width": 4,
+     "length": 6,
+     "height": 1.2
+    },
+    "pad": {
+     "width": 3.3,
+     "length": 5.5
+    },
+    "viewAhead": 230,
+    "viewBehind": 20,
+    "pipe": {
+     "flatHalf": 6.5,
+     "radius": 4.2,
+     "maxAngle": 70
+    },
+    "pathRunout": 340,
+    "wallGravity": 9,
+    "wallSpeedFactor": 0.95,
+    "turnPush": 2.5,
+    "lipLaunchSpeed": 2.5,
+    "lipLaunchFactor": 1.0,
+    "lipKick": 2.6,
+    "pipeReturnSpeed": 6,
+    "aiWallCost": 1.2,
+    "tricks": {
+     "grab": {
+      "seconds": 0.45,
+      "points": 150
+     },
+     "spin": {
+      "seconds": 0.7,
+      "points": 300
+     },
+     "flip": {
+      "seconds": 0.85,
+      "points": 450
+     },
+     "combo": {
+      "seconds": 1.05,
+      "points": 700
+     }
+    },
+    "trickLandWindow": 0.8,
+    "crashSpeedLoss": 0.55,
+    "crashSeconds": 1.4,
+    "comboBonus": 0.5,
+    "trickCharge": 0.12,
+    "maxTrickScore": 60000,
+    "coins": {
+     "perLine": 5,
+     "spacing": 2.8,
+     "lineStart": 13,
+     "centre": 0.85,
+     "reach": 1.1,
+     "depth": 0.9,
+     "height": 1.2,
+     "value": 1
+    },
+    "grid": [
+     {
+      "s": 0,
+      "x": 0
+     },
+     {
+      "s": 9,
+      "x": -3.4
+     },
+     {
+      "s": 9,
+      "x": 3.4
+     },
+     {
+      "s": 5,
+      "x": -6
+     },
+     {
+      "s": 4.5,
+      "x": 6
+     },
+     {
+      "s": 4,
+      "x": -0.6
+     }
+    ]
+   },
+   "tracks": {
+    "ice-peak": {
+     "name": "alpine.track.icePeak",
+     "number": 1,
+     "difficulty": 1,
+     "length": 1600,
+     "seed": 1201,
+     "calmStart": 150,
+     "finishRunout": 70,
+     "rowSpacing": [
+      38,
+      50
+     ],
+     "gap": [
+      5.6,
+      7
+     ],
+     "reachFactor": 0.75,
+     "corridorLimit": 4.2,
+     "rockPitch": 3.4,
+     "rockDensity": 0.7,
+     "rockRadius": [
+      0.65,
+      0.95
+     ],
+     "slalomOffset": 1.5,
+     "slalomStep": 14,
+     "rampRockDistance": 7,
+     "landingClearance": 46,
+     "turns": {
+      "firstStraight": [
+       120,
+       150
+      ],
+      "radius": [
+       110,
+       170
+      ],
+      "length": [
+       50,
+       95
+      ],
+      "straight": [
+       45,
+       90
+      ],
+      "transition": 18,
+      "alternate": 0.7
+     },
+     "grade": [
+      0.1,
+      0.17
+     ],
+     "wallCoins": 0.45,
+     "visual": {
+      "sky": "#a9dcf2",
+      "fog": "#c5e4ef",
+      "fogNear": 65,
+      "fogFar": 250,
+      "snow": 0.35,
+      "light": 1,
+      "trees": 1
+     },
+     "opening": [
+      "gate",
+      "pad",
+      "rocks"
+     ],
+     "patterns": {
+      "rocks": 4,
+      "gate": 3,
+      "pad": 2,
+      "ramp": 1,
+      "rampRocks": 0,
+      "slalom": 0
+     }
+    },
+    "frost-forest": {
+     "name": "alpine.track.frostForest",
+     "number": 2,
+     "difficulty": 2,
+     "length": 1750,
+     "seed": 2417,
+     "calmStart": 110,
+     "finishRunout": 60,
+     "rowSpacing": [
+      28,
+      35
+     ],
+     "gap": [
+      4.6,
+      5.6
+     ],
+     "reachFactor": 0.75,
+     "corridorLimit": 4.3,
+     "rockPitch": 3.2,
+     "rockDensity": 0.75,
+     "rockRadius": [
+      0.7,
+      1.05
+     ],
+     "slalomOffset": 1.5,
+     "slalomStep": 14,
+     "rampRockDistance": 7,
+     "landingClearance": 48,
+     "turns": {
+      "firstStraight": [
+       90,
+       120
+      ],
+      "radius": [
+       85,
+       140
+      ],
+      "length": [
+       55,
+       110
+      ],
+      "straight": [
+       35,
+       75
+      ],
+      "transition": 16,
+      "alternate": 0.75
+     },
+     "grade": [
+      0.12,
+      0.2
+     ],
+     "wallCoins": 0.5,
+     "visual": {
+      "sky": "#9fcde3",
+      "fog": "#bfdbe7",
+      "fogNear": 50,
+      "fogFar": 220,
+      "snow": 0.6,
+      "light": 0.92,
+      "trees": 1.7
+     },
+     "opening": [
+      "gate",
+      "rocks"
+     ],
+     "patterns": {
+      "rocks": 5,
+      "gate": 1,
+      "pad": 1.5,
+      "ramp": 1,
+      "rampRocks": 1,
+      "slalom": 2
+     }
+    },
+    "storm-ridge": {
+     "name": "alpine.track.stormRidge",
+     "number": 3,
+     "difficulty": 3,
+     "length": 1900,
+     "seed": 3307,
+     "calmStart": 110,
+     "finishRunout": 60,
+     "rowSpacing": [
+      28,
+      36
+     ],
+     "gap": [
+      4,
+      5
+     ],
+     "reachFactor": 0.72,
+     "corridorLimit": 4.3,
+     "rockPitch": 3,
+     "rockDensity": 0.85,
+     "rockRadius": [
+      0.7,
+      1.05
+     ],
+     "slalomOffset": 1.5,
+     "slalomStep": 14,
+     "rampRockDistance": 7,
+     "landingClearance": 50,
+     "turns": {
+      "firstStraight": [
+       90,
+       120
+      ],
+      "radius": [
+       70,
+       120
+      ],
+      "length": [
+       60,
+       120
+      ],
+      "straight": [
+       30,
+       70
+      ],
+      "transition": 15,
+      "alternate": 0.8
+     },
+     "grade": [
+      0.14,
+      0.24
+     ],
+     "wallCoins": 0.55,
+     "visual": {
+      "sky": "#4d5f80",
+      "fog": "#a3949f",
+      "horizon": "#e7a47f",
+      "sun": "#ffb07a",
+      "dusk": true,
+      "fogNear": 32,
+      "fogFar": 185,
+      "snow": 1,
+      "light": 0.72,
+      "trees": 1.2
+     },
+     "opening": [
+      "pad",
+      "ramp"
+     ],
+     "patterns": {
+      "rocks": 3,
+      "gate": 1,
+      "pad": 3,
+      "ramp": 2,
+      "rampRocks": 3,
+      "slalom": 1
+     }
+    }
+   },
+   "levels": [
+    {
+     "stage": 1,
+     "trackId": "ice-peak",
+     "targetRank": 3,
+     "feature": "feature.alpineRush.1",
+     "winMoney": 40,
+     "winParts": 0,
+     "difficulty": 1,
+     "ai": [
+      {
+       "speed": 0.97,
+       "reaction": 0.4,
+       "lookahead": 34,
+       "error": 0.7,
+       "mistakeRate": 0.1,
+       "margin": 0.2,
+       "boostChance": 0.4,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
+      },
+      {
+       "speed": 0.96,
+       "reaction": 0.42,
+       "lookahead": 32,
+       "error": 0.75,
+       "mistakeRate": 0.11,
+       "margin": 0.2,
+       "boostChance": 0.35,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
+      },
+      {
+       "speed": 0.95,
+       "reaction": 0.45,
+       "lookahead": 30,
+       "error": 0.8,
+       "mistakeRate": 0.12,
+       "margin": 0.15,
+       "boostChance": 0.35,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
+      },
+      {
+       "speed": 0.94,
+       "reaction": 0.48,
+       "lookahead": 30,
+       "error": 0.85,
+       "mistakeRate": 0.13,
+       "margin": 0.15,
+       "boostChance": 0.3,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
+      },
+      {
+       "speed": 0.93,
+       "reaction": 0.5,
+       "lookahead": 28,
+       "error": 0.9,
+       "mistakeRate": 0.14,
+       "margin": 0.1,
+       "boostChance": 0.3,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
+      }
+     ]
+    },
+    {
+     "stage": 2,
+     "trackId": "frost-forest",
+     "targetRank": 2,
+     "feature": "feature.alpineRush.2",
+     "winMoney": 55,
+     "winParts": 0,
+     "difficulty": 2,
+     "ai": [
+      {
+       "speed": 1,
+       "reaction": 0.28,
+       "lookahead": 44,
+       "error": 0.45,
+       "mistakeRate": 0.05,
+       "margin": 0.3,
+       "boostChance": 0.6,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
+      },
+      {
+       "speed": 0.995,
+       "reaction": 0.3,
+       "lookahead": 42,
+       "error": 0.5,
+       "mistakeRate": 0.055,
+       "margin": 0.3,
+       "boostChance": 0.55,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
+      },
+      {
+       "speed": 0.99,
+       "reaction": 0.32,
+       "lookahead": 40,
+       "error": 0.55,
+       "mistakeRate": 0.06,
+       "margin": 0.25,
+       "boostChance": 0.55,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
+      },
+      {
+       "speed": 0.98,
+       "reaction": 0.35,
+       "lookahead": 38,
+       "error": 0.6,
+       "mistakeRate": 0.07,
+       "margin": 0.25,
+       "boostChance": 0.5,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
+      },
+      {
+       "speed": 0.97,
+       "reaction": 0.38,
+       "lookahead": 36,
+       "error": 0.6,
+       "mistakeRate": 0.08,
+       "margin": 0.2,
+       "boostChance": 0.5,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
+      }
+     ]
+    },
+    {
+     "stage": 3,
+     "trackId": "storm-ridge",
+     "targetRank": 1,
+     "feature": "feature.alpineRush.3",
+     "winMoney": 75,
+     "winParts": 1,
+     "difficulty": 3,
+     "ai": [
+      {
+       "speed": 0.985,
+       "reaction": 0.22,
+       "lookahead": 55,
+       "error": 0.3,
+       "mistakeRate": 0.03,
+       "margin": 0.35,
+       "boostChance": 0.65,
+       "boostTank": 0.9,
+       "padDesire": 6,
+       "rampDesire": 4,
+       "gateDesire": 1.5,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
+      },
+      {
+       "speed": 0.985,
+       "reaction": 0.24,
+       "lookahead": 52,
+       "error": 0.35,
+       "mistakeRate": 0.035,
+       "margin": 0.35,
+       "boostChance": 0.65,
+       "boostTank": 0.9,
+       "padDesire": 6,
+       "rampDesire": 4,
+       "gateDesire": 1.5,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
+      },
+      {
+       "speed": 0.98,
+       "reaction": 0.26,
+       "lookahead": 50,
+       "error": 0.4,
+       "mistakeRate": 0.04,
+       "margin": 0.3,
+       "boostChance": 0.6,
+       "boostTank": 0.9,
+       "padDesire": 5,
+       "rampDesire": 3,
+       "gateDesire": 1.5,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
+      },
+      {
+       "speed": 0.975,
+       "reaction": 0.28,
+       "lookahead": 48,
+       "error": 0.45,
+       "mistakeRate": 0.045,
+       "margin": 0.3,
+       "boostChance": 0.55,
+       "boostTank": 0.9,
+       "padDesire": 5,
+       "rampDesire": 3,
+       "gateDesire": 1,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
+      },
+      {
+       "speed": 0.97,
+       "reaction": 0.3,
+       "lookahead": 46,
+       "error": 0.5,
+       "mistakeRate": 0.05,
+       "margin": 0.25,
+       "boostChance": 0.55,
+       "boostTank": 0.9,
+       "padDesire": 5,
+       "rampDesire": 3,
+       "gateDesire": 1,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
+      }
+     ]
+    }
+   ],
+   "render": {
+    "maxDpr": 1.7,
+    "lowDpr": 1,
+    "qualitySampleFrames": 90,
+    "slowFrameMs": 30
+   },
+   "controls": {
+    "dragMetresPerWidth": 22,
+    "keyboardSteer": 1,
+    "steerResponse": 10
+   },
+   "records": {
+    "storageKey": "island.alpine.v1",
+    "version": 1,
+    "runHistory": 20
+   },
+   "equipment": {
+    "wax": {
+     "title": "equipment.alpineRush.wax",
+     "description": "equipment.alpineRush.wax.hint",
+     "base": 1,
+     "levels": [
+      {
+       "value": 1.02,
+       "cost": 60,
+       "stars": 0
+      },
+      {
+       "value": 1.04,
+       "cost": 120,
+       "stars": 3
+      },
+      {
+       "value": 1.06,
+       "cost": 200,
+       "stars": 6
+      }
+     ]
+    },
+    "tank": {
+     "title": "equipment.alpineRush.tank",
+     "description": "equipment.alpineRush.tank.hint",
+     "base": 1,
+     "levels": [
+      {
+       "value": 1.1,
+       "cost": 60,
+       "stars": 0
+      },
+      {
+       "value": 1.2,
+       "cost": 120,
+       "stars": 3
+      },
+      {
+       "value": 1.3,
+       "cost": 200,
+       "stars": 6
+      }
+     ]
+    }
+   }
   }
  },
  "minigameLevels": {
@@ -11840,6 +12529,20 @@
    {
     "cost": 260,
     "power": 1.1
+   }
+  ],
+  "alpineRush": [
+   {
+    "cost": 0,
+    "power": 1
+   },
+   {
+    "cost": 140,
+    "power": 1.06
+   },
+   {
+    "cost": 280,
+    "power": 1.12
    }
   ]
  },
@@ -11953,6 +12656,9 @@
     "orientation": "landscape"
    },
    "streetSlam": {
+    "orientation": "any"
+   },
+   "alpineRush": {
     "orientation": "any"
    }
   }
