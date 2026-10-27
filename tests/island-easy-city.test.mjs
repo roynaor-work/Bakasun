@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import * as T from '../workout/island/vendor/three.module.js';
 import {loadData} from '../workout/island/engine/load-data.mjs';
 import {createEngine} from '../workout/island/engine/engine.mjs';
-import {validReadyPlan} from '../workout/island/engine/ready-plots.mjs';
+import {validReadyPlan,airportSpaceReason} from '../workout/island/engine/ready-plots.mjs';
 import {cellsFor,isAdjacent,placementAvailability} from '../workout/island/engine/rules.mjs';
 import {validateSave} from '../workout/island/engine/persistence.mjs';
 import {walkingRoute,cityCenter,navigationActive} from '../workout/island/view/city-navigation.mjs';
@@ -13,6 +13,7 @@ import {IslandView} from '../workout/island/view/island-view.mjs';
 import {createBuilding,disposeBuilding} from '../workout/island/view/buildings.mjs';
 import {achievementRows} from '../workout/island/ui/city-access.mjs';
 import {IslandInterface} from '../workout/island/ui/interface.mjs';
+import {ReadyPlotsInterface} from '../workout/island/ui/ready-plots.mjs';
 
 const data=await loadData(new URL('../workout/island/',import.meta.url),async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))}));
 const fixture=()=>createEngine(data,{storage:{getItem:()=>null,setItem(){}},now:()=>1e6});
@@ -89,6 +90,46 @@ test('an emergency waits while touring, panning or flying the camera, then resum
 
 test('the future airport card explains its expansion requirement and does not claim an absent lot or reached limit',()=>{
   const e=fixture(),hint={},classes=new Set(),card={dataset:{building:'airport'},classList:{toggle(){},add:name=>classes.add(name)},setAttribute(){},querySelector:()=>hint},messages=[];
-  const ui=Object.assign(Object.create(IslandInterface.prototype),{engine:e,catalog:{children:[card]},categories:{children:[]},getBuilding:id=>e.registry.buildings.get(id),tutorialStep:()=>null,t:id=>id,readyPlots:{active:true,chooseType(){assert.fail('no airport lot exists yet');}},toast:id=>messages.push(id)});
-  ui.updateCatalogState();assert.equal(hint.textContent,'reason.futureDistrict');assert.equal(hint.hidden,false);assert.ok(classes.has('locked'));ui.selectBuilding('airport');assert.deepEqual(messages,['reason.futureDistrict']);
+  const ui=Object.assign(Object.create(IslandInterface.prototype),{engine:e,data,catalog:{children:[card]},categories:{children:[]},getBuilding:id=>e.registry.buildings.get(id),tutorialStep:()=>null,t:id=>id,readyPlots:{active:true,chooseType(){assert.fail('no airport lot exists yet');}},toast:id=>messages.push(id)});
+  e.enableReadyBuilding();ui.updateCatalogState();assert.equal(hint.textContent,'ready.airportNoSpaceNext');assert.equal(hint.hidden,false);assert.ok(classes.has('locked'));ui.selectBuilding('airport');assert.deepEqual(messages,['ready.airportNoSpaceNext']);
+});
+
+test('tour drag and arrows release follow without clearing the route, and follow can be resumed',()=>{
+  const v=cameraView();Object.assign(v,{walkPoints:[{x:0,y:.5,z:0,neighbors:[1]},{x:1,y:.5,z:0,neighbors:[0]}],avatar:{holder:new T.Group(),speed:.2},scene:new T.Scene()});v.bindEvents();v.setTour(true);v.goWalk({x:1,z:0});const route=v.route,destination=v.tourDestination;
+  v.handlers.pointerdown({pointerId:1,clientX:600,clientY:360,pointerType:'mouse'});v.handlers.pointermove({pointerId:1,clientX:620,clientY:360,pointerType:'mouse'});v.handlers.pointerup({pointerId:1,clientX:620,clientY:360});
+  assert.equal(v.touring,true);assert.equal(v.following,false);assert.equal(v.route,route);assert.ok(v.route.length);assert.equal(v.tourDestination,destination);assert.equal(navigationActive(v),true);
+  v.followTour();assert.equal(v.following,true);v.handlers.keydown({key:'ArrowRight',preventDefault(){}});assert.equal(v.following,false);assert.equal(v.route,route);v.setTour(false);
+});
+
+test('pinch, wheel and zoom buttons preserve both the tour and its current follow choice',()=>{
+  const v=cameraView();Object.assign(v,{walkPoints:[{x:0,y:.5,z:0,neighbors:[1]},{x:1,y:.5,z:0,neighbors:[0]}],avatar:{holder:new T.Group(),speed:.2},scene:new T.Scene()});v.bindEvents();v.setTour(true);v.goWalk({x:1,z:0});const route=v.route;
+  v.handlers.pointerdown({pointerId:1,clientX:600,clientY:360});v.handlers.pointerdown({pointerId:2,clientX:680,clientY:360});v.handlers.pointermove({pointerId:2,clientX:700,clientY:360});assert.equal(v.touring,true);assert.equal(v.following,true);assert.equal(v.route,route);
+  v.handlers.pointerup({pointerId:1,clientX:600,clientY:360});v.handlers.pointerup({pointerId:2,clientX:700,clientY:360});v.handlers.wheel({deltaY:80,clientX:600,clientY:360,preventDefault(){}});v.zoomCenter(1.25);assert.equal(v.touring,true);assert.equal(v.following,true);assert.equal(v.route,route);v.setTour(false);
+});
+
+test('a touch moving ten pixels is a destination tap while a mouse moving ten pixels pans',()=>{
+  for(const pointerType of ['touch','mouse']){const v=cameraView();let destinations=0;v.touring=true;v.following=true;v.goWalk=()=>{destinations++;return true;};v.bindEvents();v.handlers.pointerdown({pointerId:1,clientX:600,clientY:360,pointerType});v.handlers.pointermove({pointerId:1,clientX:610,clientY:360,pointerType});v.handlers.pointerup({pointerId:1,clientX:610,clientY:360,pointerType});assert.equal(destinations,pointerType==='touch'?1:0);assert.equal(v.following,pointerType==='touch');assert.equal(v.touring,true);}
+});
+
+function legacyGrid(size,stage){
+  const e=fixture();e.skipTutorial();e.state.world={size,stage};e.state.parts[data.world.partGroup]=data.config.readyWorldStages[stage].requiredParts;e.state.readyPlan={version:1,lots:[{id:'old-home',typeId:'house',x:8,z:8}]};e.state.buildings.push({id:'earned-home',typeId:'house',x:8,z:8,level:2});
+  const occupied=new Set(e.state.buildings.flatMap(b=>cellsFor(e.registry.buildings.get(b.typeId),b.x,b.z).map(p=>p.join(','))));
+  for(let z=0;z<size;z++)for(let x=0;x<size;x++)if((x%5===0||z%5===0)&&!occupied.has(`${x},${z}`)){e.state.buildings.push({id:`ready-road-${x}-${z}`,typeId:'road',x,z,level:1});occupied.add(`${x},${z}`);}
+  return e;
+}
+
+test('legacy full grids at 40 and 48 keep all saved objects and explain the missing airport in catalog, selection and chooseType',t=>{
+  for(const [size,stage,reason]of [[40,1,'ready.airportNoSpaceNext'],[48,2,'ready.airportNoSpaceFinal']]){
+    const e=legacyGrid(size,stage),old=structuredClone(e.state);assert.equal(e.enableReadyBuilding().ok,true);assert.equal(e.state.world.size,size);assert.equal(e.readyPlotForType('airport'),null);assert.equal(airportSpaceReason(e.state,e.registry,data.featureFlags),reason);
+    for(const b of old.buildings)assert.deepEqual(e.state.buildings.find(row=>row.id===b.id),b);for(const lot of old.readyPlan.lots)assert.deepEqual(e.state.readyPlan.lots.find(row=>row.id===lot.id),lot);for(const key of ['money','resources','parts','avatar','minigameProgress','highScores'])assert.deepEqual(e.state[key],old[key]);
+    t.diagnostic(JSON.stringify({size,stage,airport:null,reason,existingBuildings:old.buildings.length,existingPlots:old.readyPlan.lots.length,preserved:true}));
+    const messages=[],hint={},card={dataset:{building:'airport'},classList:{toggle(){},add(){}},setAttribute(){},querySelector:()=>hint},ui=Object.assign(Object.create(IslandInterface.prototype),{engine:e,data,t:id=>id,getBuilding:id=>e.registry.buildings.get(id),label:t=>t.id,catalog:{children:[card]},categories:{children:[]},tutorialStep:()=>null,toast:id=>messages.push(id),view:{},readyPlots:{active:true,chooseType(){assert.fail('selection must explain space first');}}});
+    ui.updateCatalogState();assert.equal(hint.textContent,reason);assert.equal(card.dataset.availability,'no-space');ui.selectBuilding('airport');assert.equal(messages.at(-1),reason);new ReadyPlotsInterface(ui).chooseType('airport');assert.equal(messages.at(-1),reason);assert.equal(validateSave(e.state,data,e.registry).ok,true);
+  }
+});
+
+test('the next expansion reserves the airport in new land without changing saved roads, buildings or plots',t=>{
+  for(const [size,stage,parts]of [[32,0,5],[40,1,7]]){const e=legacyGrid(size,stage);e.enableReadyBuilding();const before=structuredClone(e.state);e.grantParts(data.world.partGroup,parts);assert.equal(e.state.world.size,size+8);const airport=e.readyPlotForType('airport');assert.ok(airport);assert.ok(airport.x>=size||airport.z>=size);assert.ok(airport.x+7<=size+8&&airport.z+4<=size+8);
+    for(const b of before.buildings)assert.deepEqual(e.state.buildings.find(row=>row.id===b.id),b);for(const lot of before.readyPlan.lots)assert.deepEqual(e.state.readyPlan.lots.find(row=>row.id===lot.id),lot);assert.equal(validateSave(e.state,data,e.registry).ok,true);t.diagnostic(JSON.stringify({from:size,to:e.state.world.size,airport:{x:airport.x,z:airport.z,w:airport.w,d:airport.d},inNewStrip:true,preserved:true}));
+  }
 });

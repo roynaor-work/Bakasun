@@ -32,12 +32,14 @@ export class CityAccess{
     this.canvas.onkeydown=e=>{const delta={ArrowLeft:[-2,0],ArrowRight:[2,0],ArrowUp:[0,-2],ArrowDown:[0,2]}[e.key],size=engine.state.world.size;if(delta){e.preventDefault();this.mapCursor={x:Math.max(0,Math.min(size-1,(this.mapCursor?.x??size/2)+delta[0])),z:Math.max(0,Math.min(size-1,(this.mapCursor?.z??size/2)+delta[1]))};this.drawMap();}if(e.key==='Enter'&&this.mapCursor){e.preventDefault();this.goTo(this.mapCursor.x,this.mapCursor.z);}};
     this.destinations=node('div','city-map-destinations');
     this.mapPanel.append(heading,this.canvas,node('p','city-map-hint','לחצו במפה או בחרו מקום בעיר'),this.destinations,button('כל האי','city-overview',()=>{ui.view.overview();this.toggleMap(false);}));ui.root.append(this.mapPanel);
-    this.tourHint=node('div','city-tour-hint');this.tourHint.hidden=true;this.tourHint.setAttribute('role','status');this.tourText=node('span','','נוגעים ברחוב כדי לבחור לאן ללכת');this.tourHint.append(this.tourText,button('סיום טיול','city-tour-stop',()=>{ui.view.setTour(false);this.render();}));ui.root.append(this.tourHint);
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!this.mapPanel.hidden){this.toggleMap(false);this.mapButton.focus();}},{signal:this.events.signal});
+    this.tourHint=node('div','city-tour-hint');this.tourHint.hidden=true;this.tourHint.setAttribute('role','status');this.tourText=node('span','','נוגעים ברחוב כדי לבחור לאן ללכת');this.followButton=button('חזרה לדמות','city-tour-follow',()=>{ui.view.followTour();this.render();});this.followButton.hidden=true;this.tourHint.append(this.tourText,this.followButton,button('סיום טיול','city-tour-stop',()=>{ui.view.setTour(false);this.render();}));ui.root.append(this.tourHint);
+    ui.view.canvas.addEventListener('pointerdown',()=>this.toggleMap(false),{signal:this.events.signal});
+    document.addEventListener('pointerdown',()=>{this.keyboardInput=false;},{capture:true,signal:this.events.signal});
+    document.addEventListener('keydown',e=>{this.keyboardInput=true;if(e.key==='Escape'){if(!this.mapPanel.hidden)this.toggleMap(false);if(ui.view.touring){ui.view.setTour(false);this.render();}}},{signal:this.events.signal});
     this.unsubscribe=engine.subscribe(()=>this.render());this.timer=setInterval(()=>this.render(),350);this.render();
   }
   prepare(){this.ui.cancelPlacement();this.ui.closeInfo();this.ui.closeDetails();this.ui.setDockOpen(false);this.ui.setMoreOpen(false);this.toggleMap(false);this.ui.view.setTour(false);}
-  toggleMap(open=this.mapPanel.hidden){this.mapPanel.hidden=!open;this.mapButton.setAttribute('aria-expanded',String(open));if(open){this.ui.closeDetails();this.ui.setMoreOpen(false);this.ui.setDockOpen(false);this.render();}}
+  toggleMap(open=this.mapPanel.hidden){const wasOpen=!this.mapPanel.hidden;this.mapPanel.hidden=!open;this.mapButton.setAttribute('aria-expanded',String(open));if(open){this.ui.closeDetails();this.ui.setMoreOpen(false);this.ui.setDockOpen(false);this.render();}else if(wasOpen&&this.keyboardInput)this.mapButton.focus();}
   goTo(x,z){this.ui.view.flyToCell(x,z,3.3);this.toggleMap(false);}
   training(){
     const dialog=this.ui.openModal('access.training','access.trainingHint');dialog.dataset.trainingHub='true';
@@ -55,6 +57,7 @@ export class CityAccess{
     this.controls.hidden=!this.ui.morePanel.hidden;
     const orbit=this.ui.view.cameraMode==='orbit';this.panButton.hidden=!orbit;this.rotateButton.setAttribute('aria-pressed',String(orbit));this.rotateButton.textContent=orbit?'תנועה במפה בגרירה':'סיבוב המפה בגרירה';
     const touring=Boolean(this.ui.view.touring),tourLabel=touring?'בטיול':'לטיול';if(this.tourButton.textContent!==tourLabel)this.tourButton.textContent=tourLabel;if(this.tourButton.getAttribute('aria-pressed')!==String(touring))this.tourButton.setAttribute('aria-pressed',String(touring));this.tourHint.hidden=!touring||this.ui.modalRoot.children.length>0;
+    this.followButton.hidden=!touring||this.ui.view.following;
     const message=this.ui.view.tourDestination?(this.ui.view.route.length?'בדרך! אפשר לגעת ברחוב ולשנות יעד':'הגענו! בחרו יעד נוסף בעיר'):'נוגעים ברחוב כדי לבחור לאן ללכת';if(this.tourText.textContent!==message)this.tourText.textContent=message;
     if(this.mapPanel.hidden)return;
     const state=this.engine.state,signature=JSON.stringify([state.world.size,state.buildings.map(b=>[b.id,b.typeId,b.x,b.z])]);

@@ -1,88 +1,44 @@
-# Easy city access and navigation — 27 October 2026
+# PR181 — תיקונים לפני מיזוג בעקבות בקרה עצמאית
 
-Base: main `08f351c` after PR180. Release: `island-easy-city-20261027-1`.
+בסיס: `08f351c`. ראש לפני התיקונים: `54f8bb0`.
+חותמת הגרסה נשארת `island-easy-city-20261027-1`. הבקשה לא מוזגה ולא פורסמה.
 
-## Player behavior
+## ההתנהגות העדכנית
 
-- A persistent bottom bar exposes Games, My ranking, Training and Learning with
-  visible names and icons. Games and personal results receive visual emphasis.
-  Existing game availability, learning prerequisites and saved results still
-  control access. The ranking screen is explicitly local, per-game progress;
-  it does not invent opponents or compare unrelated game scoring systems.
-- Training links save the island before entering the existing daily workout,
-  free exercise selector or exercise library. Soccer practice remains available.
-- Map, tour and zoom controls remain beside the map. A miniature map shows actual
-  roads, footprints, player location and camera extent; named destinations fly
-  the camera to built facilities. Rotation is a deliberate More action, with a
-  visible return to pan. Map keyboard controls are scoped to its focused canvas.
-- A single drag pans instead of orbiting. Pinch and wheel retain anchored zoom.
-  The camera starts at the inhabited core; the whole-island overview remains
-  one action away in Map. Camera flights respect reduced motion and reuse the
-  drawing buffer rather than resizing it on each animation frame.
-- Tour mode begins by the city hall, follows the original child rig, uses the
-  connected sidewalk graph and displays a ground route. The player can change
-  destination, drag to leave follow mode, or stop. It never cuts through a
-  building or jumps between disconnected roads. Game updates wait during a tour,
-  pointer gesture or camera flight. Automatic emergencies also wait during map
-  interaction and resume normally afterwards. GPU route/ground-marker resources
-  are freed on leaving the tour.
-- New cities use 102 roads instead of the prior 352 in the standard initial
-  fixture, with the same 37 initial reservations. Short legal links replace the
-  island-wide five-cell lattice. Unequal neighborhoods sit near the original
-  center, while first-home water coverage, access and future growth stay valid.
-- A later civilian airport has an actual 7×4 footprint, a long runway and offset
-  terminal. It opens at expansion stage 1. The original 2×2 military airbase and
-  previously earned construction retain their dimensions and positions.
+- הטיול מתחיל מהמקום הנוכחי של הדמות. רק המיקום הראשוני בטעינת העיר נבחר ליד העירייה; הפעלת טיול אינה מזיזה את הדמות.
+- `touring` מציין טיול פעיל ו-`following` מציין מעקב מצלמה. גרירה בעכבר, גרירה באצבע אחת וחצים בקנבס משחררים רק את המעקב. המסלול, היעד וההליכה נשמרים, ו-`navigationActive` נשאר פעיל.
+- צביטה, גלגלת וכפתורי הזום משנים זום בלי לסיים טיול ובלי לשנות את בחירת המעקב. בבועת הטיול מופיע **חזרה לדמות** רק כשהמעקב משוחרר; הוא מחזיר את המעקב.
+- סף הקשה הוא 12 פיקסלים במגע ו-7 בעכבר. הקשת מגע עם תזוזה של 10 פיקסלים עדיין בוחרת יעד.
+- סיום טיול נשאר מפורש: סיום טיול, Escape, פתיחת מחסן הבנייה, הבית, כל האי ובחירת יעד במפה.
+- מפה נסגרת בנגיעה בקנבס העולם, בפתיחת כרטיס מבנה ובפתיחת חלון. הפוקוס חוזר לכפתור מפה רק בסגירה באמצעות המקלדת. אירועים ורענון עדיין ממתינים בזמן טיול, מחווה או מפה פתוחה, וחוזרים לפעול אחרי שהחסימה הסתיימה.
+- מגן הלחיצות מזהה קישור עם ילדיו כיחידת פעולה אחת. הוא ממשיך לחסום הקשה שהתחילה בעולם והופנתה לכפתור חדש שהופיע מתחת לאצבע.
 
-## Save compatibility
+## שדה תעופה ושמירות קיימות
 
-Existing towns keep every building, road, reservation identity/coordinate,
-currency, resource, level and game result. The compact plan applies to newly
-prepared towns. Existing towns gain the new controls and inhabited-core camera,
-and receive the later airport slot when eligible. There is no automatic reset,
-relocation, deletion, new save version or cloud synchronization.
+שדה התעופה נשאר 7×4, ללא שינוי בסיס חיל האוויר הישן. בערים ותיקות עם רשת מלאה כל חמישה תאים **לא מובטח מגרש פנוי**:
 
-## Validation
-
-- 124 focused tests pass, including 13 new cases covering compact planning,
-  legacy grid preservation, airport unlock/footprint/geometry, walking graph
-  routing, single-drag pan, focused keyboard input, gesture cancellation, tour
-  resources, camera framing, real personal results and drawing-buffer reuse.
-- Full run: 2,707 tests, 2,664 pass, 38 skip, 5 fail. The same five known Windows
-  baseline failures remain: squat calibration, camera/exercise voice docs and
-  original tennis/soccer lab hashes. No unrelated test is weakened. Old planner
-  expectations were updated where the requested compact layout replaces sprawl;
-  connections, coverage, immutability and save validation remain asserted.
-  The final automatic-emergency interlock and UI refinements were followed by
-  the focused 124-test run; the full-suite snapshot predates those extra cases.
-- Browser: all four frequent actions opened their real flows. Free training
-  reached `/workout/#/free`; learning reached the daily station selector.
-  A house built through the production UI changed 25 available lots to 24 and
-  survived reload. The unopened airport card explains its expansion requirement
-  rather than reporting a reached limit or a missing plot.
-  Ranking fits a 390×700 frame. Map destinations closed the panel and moved the
-  camera. Single dragging moved the map in an 844×390 frame without opening a
-  building. A tour selected a 26-point route, progressed to 17 remaining points,
-  and moved the avatar/camera along the connected streets. Direct game console
-  checks were clean. Responsive checks are not physical-phone/touch tests.
-  The iframe wrapper logged MutationObserver errors, also seen in the prior
-  review; they did not reproduce in a fresh direct game tab. Source unconfirmed.
-- Screenshots use a synthetic local test city and the production app. No personal
-  save or name is read. The later-airport capture uses earned stage 1 in that
-  fixture. All original character, car, palm and building art is retained.
-
-| View | Image |
+| מקרה | תוצאה צפויה ומכוסה בבדיקה |
 | --- | --- |
-| Main map and frequent actions | [desktop](desktop.jpg) |
-| Map and destinations | [map](map-desktop.jpg) |
-| Tour route | [tour](tour.jpg) |
-| Later airport | [airport](airport.jpg) |
-| Portrait map | [phone](phone.jpg) |
-| Portrait map panel | [map panel](map-phone.jpg) |
-| Portrait results | [results](scores-phone.jpg) |
-| Landscape map | [landscape](landscape.jpg) |
-| Building and reloading | [saved house](build-reloaded.jpg) |
+| שלב 1, גודל 40, רשת ישנה מלאה | אין מגרש. הקטלוג, בחירת המבנה ו-chooseType מסבירים: אין מקום פנוי בגודל 7 על 4. שדה התעופה ייפתח בהרחבה הבאה של האי |
+| שלב 2, גודל 48, רשת ישנה מלאה | אין מגרש. מוצגת ההודעה: אין מקום פנוי בגודל 7 על 4 באי |
+| הרחבת העיר הישנה מ-40 ל-48 | התכנון מנסה קודם את הרצועה החדשה, x או z בין 40 ל-47, ושומר שם מגרש אם יש מקום וקישור חוקי |
+| הרחבת העיר הישנה מ-32 ל-40 | אותו עיקרון ברצועה החדשה בין 32 ל-39 |
 
-Prepared for review; not yet merged or published. Next: review the four visible
-actions and tour/map interaction, then test a physical phone before merging.
-No Claude handoff is needed. This chat stays open for that review.
+אין הרחבת שטח אוטומטית נוספת. אין הזזה, מחיקה או שינוי של מבנה, דרך או מגרש שמור. מגרשים ודרכים חדשים מתווספים בלבד. אין שינוי CURRENT_VERSION או מעבר שמירה.
+
+## אימות ומגבלות
+
+- בדיקות הטיול, המחוות, סף ההקשה, שימור השמירה והודעות שדה התעופה: `tests/island-easy-city.test.mjs`.
+- בועת הטיול, חזרה לדמות, סגירת המפה, פוקוס וחידוש אירוע ממתין: `tests/island-city-access-review.test.mjs`.
+- מגן הלחיצות וההגנה מפני העברת הקשה: `tests/island-clean-hud.test.mjs`.
+- בדיקת ממשק הבנייה הותאמה לתלות קיימת ב-registry, בלי להחליש את בדיקת החיוב והבחירה: `tests/island-ready-plots-ui.test.mjs`.
+- ההרצה המלאה נעשית על הראש הסופי, ומושווית להרצה נפרדת על 08f351c באותה סביבת Windows. המספרים ושמות הכשלים מופיעים בתיאור ה-PR ובדוח המסירה.
+- בדיקות דפדפן ב-390×700, 390×844 ו-844×390, בשמירות מלאכותיות מקומיות בלבד. **לא נבדק טלפון אמיתי**. מחוות מגע מכוסות באירועים בבדיקות אוטומטיות; אין כאן טענת בדיקה בחומרת מגע.
+
+| מידה | בועת הטיול אחרי שחרור המעקב | הודעת שדה התעופה |
+| --- | --- | --- |
+| 390×700 | [חזרה לדמות](review-tour-390x700.png) | [אין מקום בשלב האחרון](review-airport-390x700.png) |
+| 390×844 | [חזרה לדמות](review-tour-390x844.png) | [אין מקום לפני ההרחבה](review-airport-390x844.png) |
+| 844×390 | [חזרה לדמות](review-tour-844x390.png) | [אין מקום בשלב האחרון](review-airport-844x390.png) |
+
+הצילומים הקודמים בתיקייה מתעדים את סבב הבנייה המקורי. ששת הצילומים בטבלה מתעדים רק את השינויים מהבקרה. לא שונו קובצי המשחקים הקטנים ולא נוצרו דירוג או יריבים חדשים.

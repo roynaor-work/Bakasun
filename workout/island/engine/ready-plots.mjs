@@ -69,6 +69,12 @@ export function readyPlotForType(state,registry,typeId,flags={}){
   const lots=readyPlots(state,registry,flags).filter(lot=>lot.typeId===typeId);
   return lots.find(lot=>lot.ok)||lots[0]||null;
 }
+/** Explain a missing airport reservation without conflating space and limits. */
+export function airportSpaceReason(state,registry,flags={}){
+  if(!state.readyPlan||state.buildings.some(b=>b.typeId==='airport')||readyPlotForType(state,registry,'airport',flags))return null;
+  const last=(registry.config.readyWorldStages||registry.config.worldStages).length-1;
+  return state.world.stage>=last?'ready.airportNoSpaceFinal':'ready.airportNoSpaceNext';
+}
 
 function targetCount(type,stage){
   const configured=type.limit?.maxCount?.[stage];
@@ -164,6 +170,8 @@ export function prepareReadyPlan(state,registry,flags={}){
       if(!beforeGrid&&type.requiresRoad&&!access&&newRoads.size>=roadBudget)continue;
       // The fixed north/west shoreline survives every positive-axis expansion.
       let score=(!beforeGrid&&type.requiresRoad&&!access?3:0)+Math.hypot(x+type.footprint[0]/2-anchor.x,z+type.footprint[1]/2-anchor.z);
+      const previousSize=(registry.config.readyWorldStages||[])[stage-1]?.size;
+      if(type.id==='airport'&&previousSize&&x<previousSize&&z<previousSize)score+=size*4;
       if(type.id==='waterTower'&&!lots.some(lot=>lot.typeId==='waterTower'))for(const home of [...state.buildings,...lots].filter(row=>row.typeId==='house')){
         const [w,d]=registry.buildings.get('house').footprint;
         if(Math.hypot(x+(type.footprint[0]-1)/2-home.x-(w-1)/2,z+(type.footprint[1]-1)/2-home.z-(d-1)/2)<=type.radius)score-=2;
@@ -217,7 +225,7 @@ export function prepareReadyPlan(state,registry,flags={}){
     connected=flood([root],roads,size);return true;
   };
   for(const lot of coastal){if(connect(lot))append(lot);else for(const cell of cellKeys(lot,registry,size))hard.delete(cell);}
-  for(const type of types.filter(type=>!type.requiresShore)){
+  for(const type of types.filter(type=>!type.requiresShore).sort((a,b)=>Number(b.id==='airport')-Number(a.id==='airport'))){
     for(let n=deficit(type);n>0;n--){
       let placed=false;
       for(const lot of candidates(type)){
