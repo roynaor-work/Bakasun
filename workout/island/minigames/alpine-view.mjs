@@ -1,41 +1,43 @@
-import * as THREE from '../vendor/three.module.js?v=island-alpine-20261026-1';
+import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-alpine-20261026-1';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-alpine-20261026-1';
+import {createProRider} from './athlete.mjs';
+import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
 import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-alpine-20261026-1';
 
 /** Alpine Rush presentation (Codex design package view, rebuilt for the curved halfpipe).
  * Renders a SkiFrame only: positions, collisions, tricks and results belong to the engine.
  * Everything is placed in world space through the course centreline: s along the path,
- * x across the pipe, height above the floor. The pipe, its decks, netting and side
- * terrain are static chunk meshes (culled by distance); trees, flags, coins and obstacles
- * are bounded pools. Riders keep the island kid-full.glb with a primitive fallback. */
-export async function createSkiView(host, {canvas, modelUrl = new URL('../assets/kid-full.glb?v=island-alpine-20261026-1', import.meta.url).href, quality: initialQuality = 'high', maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}} = {}) {
+ * x across the pipe, height above the floor. Version 6 keeps the original collision
+ * profile, with procedural snow, 3D fir branches, granite/snow cliffs, a close chase
+ * camera and grooves recording engine positions. Mixamo rider attribution is in ASSETS.md.
+ * Engine rules are unchanged. This is an art-direction review, not a released build. */
+export async function createSkiView(host, {canvas, modelUrl = new URL('../assets/alpine-rush/athlete.glb', import.meta.url).href, quality: initialQuality = 'high', maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}} = {}) {
   if (!course?.path || !physics) throw new Error('alpine.view.course');
   const renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: false, powerPreference: 'high-performance'});
-  let quality = initialQuality, disposed = false;
+  let quality = initialQuality, disposed = false, ro = null;
   renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, quality === 'low' ? lowDpr : maxDpr));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.12;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
   renderer.shadowMap.enabled = quality !== 'low'; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   if (!canvas) host.append(renderer.domElement);
-  const look = {sky: '#a9dcf2', fog: '#c5e4ef', fogNear: 65, fogFar: 250, snow: .35, light: 1, trees: 1, ...visual};
+  const look = {sky: '#85a9b9', fog: '#b5c9d1', fogNear: 85, fogFar: 300, snow: .10, light: 1, trees: 1, ...visual}; look.fog='#b5c9d1';look.fogNear=105;look.fogFar=330;look.snow=.09;
   const dusk = !!look.dusk;
   const scene = new THREE.Scene(); scene.fog = new THREE.Fog(look.fog, look.fogNear, look.fogFar);
   const camera = new THREE.PerspectiveCamera(50, 1, .1, 900);
-  const hemi = new THREE.HemisphereLight(dusk ? '#c9c4e6' : '#e2f8ff', dusk ? '#5f5874' : '#8094a8', 2.5 * look.light); scene.add(hemi);
-  const sun = new THREE.DirectionalLight(look.sun || '#fff3db', 3.4 * look.light); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+  const hemi = new THREE.HemisphereLight(dusk ? '#9da3ca' : '#bbd4e4', '#3c5368', 1.25 * look.light); scene.add(hemi);
+  const sun = new THREE.DirectionalLight(dusk ? '#f0c5b1' : '#ffe2ba', 2.65 * look.light); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
   Object.assign(sun.shadow.camera, {left: -26, right: 26, top: 26, bottom: -26, near: 1, far: 120}); sun.shadow.bias = -.0005; scene.add(sun, sun.target);
   const mat = (c, roughness = .8) => new THREE.MeshStandardMaterial({color: c, roughness});
-  const snow = mat('#effaff'), ice = mat('#88d7f1', .3), navy = mat('#123d59'), orange = mat('#ff643b'), white = mat('#ffffff'), stone = mat('#7590a1'), green = mat('#254e60'), red = mat('#e8392f', .55), gold = new THREE.MeshStandardMaterial({color: '#ffc21a', emissive: '#b86e00', emissiveIntensity: .45, roughness: .28, metalness: .65});
+  const snow=snowMaterial(),ice=mat('#90b5c4',.5),navy=mat('#263f4a'),orange=mat('#c97550'),white=mat('#e4e3d7'),stone=rockMaterial(),green=mat('#254e40'),red=mat('#b65e48',.8),gold=new THREE.MeshStandardMaterial({color:'#f3cb77',emissive:'#9c6f23',emissiveIntensity:.15,roughness:.28,metalness:.55});
   function mesh(geo, material, parent, x = 0, y = 0, z = 0) { const m = new THREE.Mesh(geo, material); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; parent.add(m); return m; }
   const box = (w, h, d, m, p, x, y, z) => mesh(new THREE.BoxGeometry(w, h, d), m, p, x, y, z);
   const placed = (geo, x = 0, y = 0, z = 0, rx = 0, ry = 0, s = 1) => geo.applyMatrix4(new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromEuler(new THREE.Euler(rx, ry, 0)), new THREE.Vector3(s, s, s)));
   const canvasTexture = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; return tex; };
 
-  // ---------- Sky: a vertical gradient behind everything; dusk adds a warm horizon band ----------
-  const skyTop = new THREE.Color(look.sky).multiplyScalar(dusk ? .55 : .78).getStyle();
-  scene.background = canvasTexture(4, 256, (ctx, w, h) => { const g = ctx.createLinearGradient(0, 0, 0, h); g.addColorStop(0, skyTop); g.addColorStop(.5, look.sky); if (dusk) g.addColorStop(.78, look.horizon || '#e3a27f'); g.addColorStop(1, look.fog); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); });
-
+  scene.background=new THREE.Color(look.fog);
+  const granite=await new THREE.TextureLoader().loadAsync(new URL('../assets/alpine-rush/granite-v5.png',import.meta.url).href);
+  granite.colorSpace=THREE.SRGBColorSpace;granite.wrapS=granite.wrapT=THREE.RepeatWrapping;granite.anisotropy=8;stone.userData.granite=granite;
   // ---------- Course frame: centreline position, heading and grade at any s ----------
   const path = course.path, N = path.count, pipe = pipeProfile(physics), DECK = 3, deckEdge = pipe.lip + DECK;
   function frameAt(s, o) {
@@ -58,35 +60,9 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   const profile = [...right.slice(1).reverse().map(p => ({x: -p.x, y: p.y, nx: -p.nx, ny: p.ny})), ...right];
   let arc = 0; profile.forEach((p, i) => { if (i) arc += Math.hypot(p.x - profile[i - 1].x, p.y - profile[i - 1].y); p.arc = arc; }); profile.forEach(p => { p.u = p.arc / arc; });
   const xAtU = u => { const a = u * arc; for (let i = 1; i < profile.length; i++) if (profile[i].arc >= a) { const p = profile[i - 1], q = profile[i], f = (a - p.arc) / Math.max(1e-6, q.arc - p.arc); return p.x + (q.x - p.x) * f; } return deckEdge; };
-  const pipeTex = canvasTexture(1024, 128, (ctx, w, h) => {
-    const img = ctx.createImageData(w, h), hex = c => [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
-    const C = {floor: hex('#edf7fc'), wallA: hex('#e3f2fa'), wallB: hex('#cfe8f6'), stripe: hex('#2a7fdb'), soft: hex('#86bdec'), coping: hex('#1d4f7a'), deck: hex('#f7fbff'), redLine: hex('#e2463a')};
-    for (let px = 0; px < w; px++) {
-      const x = xAtU((px + .5) / w), ax = Math.abs(x); let c;
-      if (ax < pipe.F) c = Math.abs(ax - pipe.F) < .16 ? C.stripe : Math.abs(ax - (pipe.F - 1)) < .06 || ax < .05 ? C.soft : C.floor;
-      else if (ax < pipe.lip - .07) { const f = (ax - pipe.F) / pipe.wall; c = Math.abs(f - .55) < .025 ? C.soft : C.wallA.map((v, i) => v + (C.wallB[i] - v) * f); }
-      else if (ax < pipe.lip + .3) c = C.coping;
-      else c = Math.abs(ax - (deckEdge - .35)) < .12 ? C.redLine : C.deck;
-      for (let py = 0; py < h; py++) {
-        const n = ((px * 73856093 ^ py * 19349663) >>> 0) % 9 - 4, groove = ax < pipe.lip && px % 4 === 0 ? -5 : 0, o = (py * w + px) * 4;
-        img.data[o] = c[0] + n + groove; img.data[o + 1] = c[1] + n + groove; img.data[o + 2] = c[2] + n * .6 + groove; img.data[o + 3] = 255;
-      }
-    }
-    ctx.putImageData(img, 0, 0);
-  });
-  pipeTex.wrapT = THREE.RepeatWrapping; pipeTex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
-  const pipeMat = new THREE.MeshStandardMaterial({map: pipeTex, roughness: .5});
-  const terrainMat = new THREE.MeshStandardMaterial({color: '#f3f9fd', roughness: .92});
-  const netTex = canvasTexture(128, 64, (ctx, w, h) => {
-    ctx.clearRect(0, 0, w, h); ctx.strokeStyle = '#ef3b2c'; ctx.lineWidth = 2.2;
-    for (let i = -h; i < w + h; i += 11) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i + h, h); ctx.stroke(); ctx.beginPath(); ctx.moveTo(i + h, 0); ctx.lineTo(i, h); ctx.stroke(); }
-    ctx.fillStyle = '#c8261c'; ctx.fillRect(0, 0, w, 7); ctx.fillRect(0, h - 4, w, 4); ctx.fillStyle = '#26323f'; ctx.fillRect(0, 0, 5, h);
-  });
-  netTex.wrapS = THREE.RepeatWrapping;
-  const netMat = new THREE.MeshStandardMaterial({map: netTex, alphaTest: .45, side: THREE.DoubleSide, roughness: .7});
-
+  const pipeMat=snow,terrainMat=snow;
   // Side terrain: deck level near the pipe, a bumpy bank, then a long fall away into fog.
-  const TX = [0, 4, 9, 15, 22, 30, 42, 60], TY = [0, 0, 0, 0, 1.2, 1.6, -9, -42];
+  const TX=[0,2,5,10,18,30,50,90],TY=[0,.5,2,6,11,19,9,-35];
   function terrainY(s, ax, side) {
     const d = ax - deckEdge;
     if (d <= 0) return pipe.lipHeight;
@@ -98,7 +74,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   }
   function terrainAt(s, k, side) {
     if (k === 0) return pipe.lipHeight;
-    const x = TX[k], bump = k < 6 ? .7 * Math.sin(s * .045 + x * .31 + side * 1.7) + .45 * Math.sin(s * .013 + x * .12 + side * 4.1) : 0;
+    const x = TX[k], bump = k < 7 ? 1.5*Math.sin(s*.047+x*.31+side*1.7)+1.8*Math.sin(s*.023+x*.12+side*4.1) : 0;
     return pipe.lipHeight + TY[k] + bump * Math.min(1, k / 2);
   }
   function strip(s0, s1, K, sample, vScale, normals) {
@@ -121,78 +97,25 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     const surface = mesh(strip(s0, s1, profile.length, (s, k, o) => Object.assign(o, profile[k]), 8, false), pipeMat, group); surface.castShadow = false;
     const sides = [-1, 1].map(side => strip(s0, s1, TX.length, (s, k, o) => { const kk = side < 0 ? TX.length - 1 - k : k; o.x = side * (deckEdge + TX[kk]); o.y = terrainAt(s, kk, side); o.nx = 0; o.ny = 1; o.u = 0; }, 8, true));
     const land = mesh(mergeGeometries(sides), terrainMat, group); land.castShadow = false; sides.forEach(g => g.dispose());
-    const nets = [-1, 1].map(side => strip(s0, s1, 2, (s, k, o) => { o.x = side * (deckEdge - .25); o.y = pipe.lipHeight + k * 1.15; o.nx = -side; o.ny = 0; o.u = k; }, 3, false));
-    nets.forEach(g => { const uv = g.attributes.uv; for (let i = 0; i < uv.count; i++) { const v = uv.getY(i), u = uv.getX(i); uv.setXY(i, v, u); } });
-    const net = mesh(mergeGeometries(nets), netMat, group); net.castShadow = false; nets.forEach(g => g.dispose());
+
     group.userData = {s0, s1}; scene.add(group); chunks.push(group);
   }
-  // A low snowfield under everything keeps the far view from showing empty sky below the horizon.
-  const field = mesh(new THREE.CircleGeometry(900, 40), mat('#e9f4fa', 1), scene); field.rotation.x = -Math.PI / 2; field.castShadow = field.receiveShadow = false;
-
-  // Distant mountains ride with the camera (no fog) so the horizon always has a skyline.
-  const ridge = {a: [], b: [], cap: []};
-  for (let i = 0; i < 26; i++) {
-    const ang = i / 26 * Math.PI * 2 + (i % 3) * .07, dist = 330 + (i * 37 % 90), h = 38 + (i * 53 % 50);
-    const x = Math.cos(ang) * dist, z = Math.sin(ang) * dist;
-    ridge[i % 2 ? 'a' : 'b'].push(placed(new THREE.ConeGeometry(h * 1.5, h, 5, 1), x, h * .5, z, 0, i * .7));
-    ridge.cap.push(placed(new THREE.ConeGeometry(h * .6, h * .4, 5, 1), x, h * .8 + .3, z, 0, i * .7));
-  }
-  const tint = (c, k) => new THREE.Color(c).lerp(new THREE.Color(look.fog), k);
-  const mountains = new THREE.Group(); scene.add(mountains);
-  for (const [key, list] of Object.entries(ridge)) {
-    const m = new THREE.Mesh(mergeGeometries(list), new THREE.MeshBasicMaterial({color: key === 'cap' ? tint('#ffffff', dusk ? .35 : .2) : tint(key === 'a' ? '#8fb0c4' : '#a9c4d4', dusk ? .45 : .35), fog: false}));
-    m.renderOrder = -1; mountains.add(m); for (const g of list) g.dispose();
-  }
-
-  // ---------- Pools along the course: pines and deck flags ----------
-  const trunkParts = [placed(new THREE.BoxGeometry(.16, 1, .16), 0, .5, 0)], needleParts = [], snowParts = [];
-  for (let k = 0; k < 4; k++) { const h = 1.1 - k * .12, y = .9 + k * .52, r = .88 - k * .16; needleParts.push(placed(new THREE.ConeGeometry(r, h, 7), 0, y, 0)); snowParts.push(placed(new THREE.ConeGeometry(r * .96, h * .7, 7), 0, y + .19, 0)); }
-  const TREE_POOL = 280;
-  const treeMeshes = [[trunkParts, stone], [needleParts, green], [snowParts, snow]].map(([parts, material]) => {
-    const geo = mergeGeometries(parts); for (const g of parts) g.dispose();
-    const m = new THREE.InstancedMesh(geo, material, TREE_POOL); m.castShadow = true; m.receiveShadow = true; m.frustumCulled = false; m.count = 0; scene.add(m); return m;
-  });
-  let seed = (course.length * 7919) >>> 0; const rnd = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
-  const trees = [];
-  for (let s = sFirst; s < sLast; s += 5) for (const side of [-1, 1]) {
-    if (rnd() < .42 * look.trees) trees.push({s: s + rnd() * 4, x: side * (deckEdge + 3 + rnd() * 9), k: 1.1 + rnd() * .9});
-    if (rnd() < .55 * look.trees) trees.push({s: s + rnd() * 4, x: side * (deckEdge + 12 + rnd() * 30), k: 1.4 + rnd() * 1.4});
-  }
-  for (const t of trees) t.y = terrainY(t.s, Math.abs(t.x), Math.sign(t.x)) - .1;
-  trees.sort((a, b) => a.s - b.s);
-  const FLAG_POOL = 30, flagPole = new THREE.InstancedMesh(placed(new THREE.CylinderGeometry(.04, .04, 3.2, 6), 0, 1.6, 0), white, FLAG_POOL);
-  const flagGeo = new THREE.BufferGeometry(); flagGeo.setAttribute('position', new THREE.Float32BufferAttribute([0, 3.15, 0, 0, 2.15, 0, 0, 2.65, -1.05], 3)); flagGeo.computeVertexNormals();
-  const flagCloth = new THREE.InstancedMesh(flagGeo, new THREE.MeshStandardMaterial({color: '#ffffff', side: THREE.DoubleSide, roughness: .7}), FLAG_POOL);
-  for (const m of [flagPole, flagCloth]) { m.castShadow = true; m.frustumCulled = false; m.count = 0; scene.add(m); }
-  const flags = []; for (let s = 20, i = 0; s < course.length; s += 24, i++) flags.push({s, x: (i % 2 ? -1 : 1) * (pipe.lip + 1.1), color: new THREE.Color(i % 4 < 2 ? '#e8392f' : '#2a6fd6')});
+  const art=createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,snow,stone,dusk});
+  const scenery={update(){},dispose(){}};
+  const mountains=new THREE.Group(),field=new THREE.Group();
+  const treeMeshes=[],flagPole=new THREE.Group(),flagCloth=new THREE.Group();
   const matrix = new THREE.Matrix4(), quat = new THREE.Quaternion(), vec = new THREE.Vector3(), vec2 = new THREE.Vector3(), scl = new THREE.Vector3(), euler = new THREE.Euler(0, 0, 0, 'YXZ');
-  const lowerBound = (list, s) => { let lo = 0, hi = list.length; while (lo < hi) { const mid = (lo + hi) >> 1; if (list[mid].s < s) lo = mid + 1; else hi = mid; } return lo; };
-  function placeScenery(ps, t) {
-    let n = 0;
-    for (let i = lowerBound(trees, ps - 30); i < trees.length && n < TREE_POOL; i++) {
-      const tr = trees[i]; if (tr.s > ps + look.fogFar + 10) break;
-      worldPoint(tr.s, tr.x, tr.y, vec); matrix.compose(vec, quat.setFromEuler(euler.set(0, tr.s, 0)), scl.setScalar(tr.k));
-      for (const m of treeMeshes) m.setMatrixAt(n, matrix); n++;
-    }
-    for (const m of treeMeshes) { m.count = n; m.instanceMatrix.needsUpdate = true; }
-    n = 0;
-    for (let i = lowerBound(flags, ps - 20); i < flags.length && n < FLAG_POOL; i++) {
-      const f = flags[i]; if (f.s > ps + look.fogFar) break;
-      worldPoint(f.s, f.x, pipe.lipHeight, vec); frameAt(f.s, FR);
-      matrix.compose(vec, quat.setFromEuler(euler.set(0, -FR.theta, 0)), scl.setScalar(1)); flagPole.setMatrixAt(n, matrix);
-      matrix.compose(vec, quat.setFromEuler(euler.set(0, -FR.theta + Math.sin(t * 3 + i) * .25, 0)), scl.setScalar(1)); flagCloth.setMatrixAt(n, matrix); flagCloth.setColorAt(n, f.color); n++;
-    }
-    flagPole.count = flagCloth.count = n; flagPole.instanceMatrix.needsUpdate = flagCloth.instanceMatrix.needsUpdate = true; if (flagCloth.instanceColor) flagCloth.instanceColor.needsUpdate = true;
-  }
+  function placeScenery(){};
+  let seed=92317;const rnd=()=>((seed=Math.imul(seed,1664525)+1013904223)>>>0)/4294967296;
 
   // ---------- Coins: one instanced mesh, spinning ----------
-  const COIN_POOL = 90, coinGeo = placed(new THREE.CylinderGeometry(.42, .42, .09, 20), 0, 0, 0, Math.PI / 2);
+  const COIN_POOL = 90, coinGeo = new THREE.TorusGeometry(.32,.065,8,24);
   const coins = new THREE.InstancedMesh(coinGeo, gold, COIN_POOL); coins.castShadow = true; coins.frustumCulled = false; coins.count = 0; scene.add(coins);
 
   // ---------- Obstacles: bounded pools per type ----------
-  const boostMat = new THREE.MeshStandardMaterial({color: '#26d8e5', emissive: '#06c8dc', emissiveIntensity: .6, roughness: .3});
+  const boostMat = new THREE.MeshStandardMaterial({color:'#a9dbd5',emissive:'#477875',emissiveIntensity:.25,roughness:.55});
   function pad() { const g = new THREE.Group(); box(3.3, .08, 5.5, ice, g, 0, .07, 0); for (let i = 0; i < 3; i++) for (const side of [-1, 1]) { const a = box(1.22, .04, .25, boostMat, g, side * .39, .14, i * 1.25 - 1.5); a.rotation.y = side * .6; } return g; }
-  function ramp() { const g = new THREE.Group(), geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute([-2, 0, 3, 2, 0, 3, -2, 1.2, -3, 2, 0, 3, 2, 1.2, -3, -2, 1.2, -3], 3)); geo.computeVertexNormals(); mesh(geo, ice, g); for (const x of [-2, 2]) { const edge = box(.12, .08, 6.12, orange, g, x, .6, 0); edge.rotation.x = .197; } box(4.1, 1.2, .14, navy, g, 0, .6, -3); return g; }
+  function ramp() { const g = new THREE.Group(), geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute([-2, 0, 3, 2, 0, 3, -2, 1.2, -3, 2, 0, 3, 2, 1.2, -3, -2, 1.2, -3], 3)); geo.computeVertexNormals(); mesh(geo, snow, g); for (const x of [-2, 2]) { const edge = box(.12, .08, 6.12, orange, g, x, .6, 0); edge.rotation.x = .197; } box(4.1, 1.2, .14, navy, g, 0, .6, -3); return g; }
   function gate() {
     // Slalom gate: striped poles, red flag panels and the banner bar riders pass under.
     const g = new THREE.Group(), gw = physics.gateHalfWidth, top = physics.gatePostHeight;
@@ -203,7 +126,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     box(gw * 2, .5, .12, navy, g, 0, top, 0); box(gw * 2, .08, .14, red, g, 0, top + .29, 0); box(gw * 2, .08, .14, red, g, 0, top - .29, 0);
     return g;
   }
-  function rock() { const g = new THREE.Group(), r = mesh(new THREE.DodecahedronGeometry(.7, 0), stone, g, 0, .4, 0); r.scale.set(1, .65, 1); mesh(new THREE.SphereGeometry(.6, 8, 5), snow, g, 0, .68, 0).scale.y = .35; return g; }
+  function rock(){const g=new THREE.Group(),geo=new THREE.SphereGeometry(.7,24,16),p=geo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i),n=1+.10*Math.sin(x*13+z*3)*Math.cos(y*9);p.setXYZ(i,x*n,y*n,z*n);}geo.computeVertexNormals();const r=mesh(geo,stone,g,0,.39,0);r.scale.set(1,.67,1);return g;}
   const makers = {rock, gate, boost: pad, ramp}, pools = {rock: [], gate: [], boost: [], ramp: []};
   function prop(type, used) { const list = pools[type], i = used[type]++; if (!list[i]) { const g = makers[type](); scene.add(g); list.push(g); } list[i].visible = true; return list[i]; }
   function textTexture(label, bg = '#ff643b', fg = '#ffffff') {
@@ -220,8 +143,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   }
 
   // ---------- Riders ----------
-  let gltf = null, modelError = null;
-  try { gltf = await new GLTFLoader().loadAsync(modelUrl); } catch (error) { modelError = String(error?.message || error); }
+  const contactTex=canvasTexture(128,128,(ctx,w,h)=>{const g=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);g.addColorStop(0,'rgba(25,45,65,.55)');g.addColorStop(1,'rgba(25,45,65,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);});
+  let gltf=null,modelError=null;try{gltf=await new GLTFLoader().loadAsync(modelUrl);}catch(error){modelError=String(error.message);}
   if (isDisposed()) { disposeAll(); throw Object.assign(new Error('alpine.disposed'), {disposed: true}); }
   function primitiveBody(color) {
     const g = new THREE.Group(), coat = mat(color, .6);
@@ -233,9 +156,15 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   const riders = new Map();
   // Clone skeletons without importing an additional runtime dependency.
   function cloneSkinned(source) { const clone = source.clone(true), orig = [], copies = [], boneMap = new Map(); source.traverse(n => orig.push(n)); clone.traverse(n => copies.push(n)); for (let i = 0; i < orig.length; i++) if (orig[i].isBone) boneMap.set(orig[i], copies[i]); for (let i = 0; i < orig.length; i++) if (orig[i].isSkinnedMesh) { copies[i].skeleton = orig[i].skeleton.clone(); copies[i].skeleton.bones = orig[i].skeleton.bones.map(b => boneMap.get(b)); copies[i].bindMatrix.copy(orig[i].bindMatrix); } return clone; }
+  const riderMaterials=new Set(),riderGeo=g=>g;
+  const riderMat=(color,opts={})=>{const m=new THREE.MeshStandardMaterial({color,roughness:.8,...opts});riderMaterials.add(m);return m;};
+  const riderMesh=(g,m,parent,x=0,y=0,z=0)=>mesh(g,m,parent,x,y,z),riderBox=(a,b,c,m,p,x,y,z)=>box(a,b,c,m,p,x,y,z);
+ function boardTexture(color){return canvasTexture(256,1024,(c,w,h)=>{c.fillStyle='#dbd2b7';c.fillRect(0,0,w,h);c.fillStyle='#b75c43';c.beginPath();c.moveTo(0,0);c.lineTo(w,0);c.lineTo(w,200);c.lineTo(0,360);c.fill();c.fillStyle='#203b45';c.fillRect(0,720,w,304);c.fillStyle='#b75c43';c.fillRect(24,470,12,165);c.fillStyle='#ecdfbf';c.font='bold 48px Arial';c.save();c.translate(145,930);c.rotate(-Math.PI/2);c.fillText('AR / 06',0,0);c.restore();});}
+ function snowboard(color,parent){const shape=new THREE.Shape();shape.moveTo(0,-1.1);shape.bezierCurveTo(.3,-1.1,.24,-.63,.21,-.35);shape.bezierCurveTo(.185,0,.185,.4,.22,.7);shape.bezierCurveTo(.3,1.23,-.3,1.23,-.22,.7);shape.bezierCurveTo(-.185,.4,-.185,0,-.21,-.35);shape.bezierCurveTo(-.24,-.63,-.3,-1.1,0,-1.1);const g=new THREE.ExtrudeGeometry(shape,{depth:.045,bevelEnabled:true,bevelThickness:.012,bevelSize:.015,bevelSegments:3,steps:1,curveSegments:14});g.rotateX(Math.PI/2);const a=g.attributes.position;for(let i=0;i<a.count;i++)a.setY(i,a.getY(i)+Math.pow(Math.max(0,Math.abs(a.getZ(i))-.68),2)*.64);g.computeVertexNormals();const uv=g.attributes.uv;for(let i=0;i<a.count;i++)uv.setXY(i,(a.getX(i)+.3)/.6,(a.getZ(i)+1.1)/2.2);g.scale(.8,1,.77);const m=new THREE.MeshPhysicalMaterial({color:'#ffffff',map:boardTexture(color),roughness:.24,clearcoat:.85,clearcoatRoughness:.18});riderMaterials.add(m);riderMesh(g,m,parent,0,.105,0);for(const z of [-.31,.31]){const n=riderBox(.32,.07,.19,navy,parent,0,.155,z);n.rotation.y=z<0?-.22:.22;riderBox(.11,.12,.24,white,parent,-.11,.2,z);}}
   const POSE = {upperLeg: -.33, lowerLeg: .68, foot: -.35, upperArm: .65, lowerArm: -.5};
   const PIVOT = .85;
   function rider(id, color) {
+    if(gltf){const root=new THREE.Group(),pivot=new THREE.Group(),inner=new THREE.Group();root.add(pivot);pivot.add(inner);pivot.position.y=PIVOT;inner.position.y=-PIVOT;scene.add(root);const actor=createProRider(gltf,id,color,scene,{cloneSkinned,mesh:riderMesh,geo:riderGeo,mat:riderMat,basic:opts=>new THREE.MeshBasicMaterial(opts),box:riderBox,dark:navy,silver:white,snowboard,contactTex,profile:{slope:.11},materials:riderMaterials});scene.remove(actor.root);inner.add(actor.root);const r={root,pivot,inner,body:actor.body,shadow:actor.shadow,actor,bones:{},air:0,squash:0,grab:0,roll:0,crashAt:-1};riders.set(id,r);return r;} 
     // root sits on the board contact point; pivot turns tricks around the rider's centre.
     const root = new THREE.Group(), pivot = new THREE.Group(), inner = new THREE.Group(); root.add(pivot); pivot.add(inner); pivot.position.y = PIVOT; inner.position.y = -PIVOT;
     const body = gltf ? cloneSkinned(gltf.scene) : primitiveBody(color); inner.add(body); body.rotation.y = Math.PI / 2; body.position.y = .14;
@@ -249,9 +178,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     const helmet = mesh(new THREE.SphereGeometry(.55 * k, 24, 16, 0, Math.PI * 2, 0, Math.PI * .6), mat(color, .35), head, 0, .53 * k + hy * .2, -.01); helmet.scale.set(1, 1, .99);
     const goggles = mesh(new THREE.SphereGeometry(.48 * k, 20, 10, 0, Math.PI), mat('#193b54', .13), head, 0, .4 * k + hy * .2, .18 * k); goggles.scale.set(.97, .28, .91);
     box(1.03 * k, .095, .22 * k, navy, head, 0, .4 * k + hy * .2, -.03).rotation.y = .04;
-    const board = mesh(new THREE.CapsuleGeometry(.21, 1.45, 6, 12), navy, inner, 0, .14, 0); board.rotation.z = Math.PI / 2; board.scale.z = .25; board.rotation.y = .12;
-    box(1.5, .025, .29, mat(color, .4), inner, 0, .195, 0).rotation.y = .12;
-    for (const x of [-.35, .35]) box(.18, .1, .28, navy, inner, x, .25, 0);
+    snowboard(color,inner);
     const scarf = new THREE.Group(); inner.add(scarf); scarf.position.set(.1, 1.48, .12);
     const sf = mesh(new THREE.PlaneGeometry(.18, 1.3, 1, 10), new THREE.MeshStandardMaterial({color: '#ff593d', side: THREE.DoubleSide}), scarf); sf.rotation.x = -Math.PI / 2; sf.position.z = .6;
     const shadow = mesh(new THREE.CircleGeometry(.8, 24), new THREE.MeshBasicMaterial({color: '#386483', transparent: true, opacity: .17, depthWrite: false}), scene); shadow.castShadow = false;
@@ -271,14 +198,14 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     }
     b.Hips.position.y = r.hipsY - squash * .1 + air * .05 - grab * .16; if (b.Spine) b.Spine.rotation.x = .18 + squash * .12 + grab * .45;
   }
-  for (const [id, color] of [['player', '#ff6b3d'], ['rival-1', '#ffc540'], ['rival-2', '#59cad5'], ['rival-3', '#ab8cdb'], ['rival-4', '#df5368'], ['rival-5', '#a7d54d']]) rider(id, color);
+  for (const [id, color] of [['player', '#ce6545'], ['rival-1', '#ffc540'], ['rival-2', '#59cad5'], ['rival-3', '#ab8cdb'], ['rival-4', '#df5368'], ['rival-5', '#a7d54d']]) rider(id, color);
 
   // ---------- Weather and effects ----------
   const dot = canvasTexture(32, 32, (ctx, w) => { const g = ctx.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2); g.addColorStop(0, '#ffffffff'); g.addColorStop(.45, '#ffffffcc'); g.addColorStop(1, '#ffffff00'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, w); });
-  const SNOW_MAX = Math.round(1100 * Math.max(.2, look.snow)), snowOffsets = new Float32Array(SNOW_MAX * 3), snowPos = new Float32Array(SNOW_MAX * 3);
+  const SNOW_MAX = Math.round(450 * Math.max(.2, look.snow)), snowOffsets = new Float32Array(SNOW_MAX * 3), snowPos = new Float32Array(SNOW_MAX * 3);
   for (let i = 0; i < SNOW_MAX; i++) { const a = rnd() * Math.PI * 2, d = 3 + rnd() * 27; snowOffsets[i * 3] = Math.cos(a) * d; snowOffsets[i * 3 + 1] = rnd() * 24 - 5; snowOffsets[i * 3 + 2] = Math.sin(a) * d; }
   const snowGeo = new THREE.BufferGeometry(); snowGeo.setAttribute('position', new THREE.BufferAttribute(snowPos, 3));
-  const snowfall = new THREE.Points(snowGeo, new THREE.PointsMaterial({color: '#ffffff', map: dot, size: .12 + look.snow * .1, transparent: true, opacity: .95, depthWrite: false})); snowfall.frustumCulled = false; scene.add(snowfall);
+  const snowfall = new THREE.Points(snowGeo, new THREE.PointsMaterial({color: '#ffffff', map: dot, size: .045 + look.snow * .1, transparent: true, opacity: .95, depthWrite: false})); snowfall.frustumCulled = false; scene.add(snowfall);
   const snowSpeed = 1.6 + look.snow * 2.6, wind = look.snow > .8 ? 3.2 : .6;
   const trailGeo = new THREE.BufferGeometry(), trailPositions = new Float32Array(140 * 3); trailGeo.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));
   const spray = new THREE.Points(trailGeo, new THREE.PointsMaterial({color: '#ffffff', map: dot, size: .2, transparent: true, opacity: .85, depthWrite: false})); spray.frustumCulled = false; scene.add(spray);
@@ -304,9 +231,15 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   }
 
   const target = new THREE.Vector3(), camAt = new THREE.Vector3(), P = new THREE.Vector3();
+  // Board grooves record actual engine positions, including the deterministic review replay.
+  const trackCapacity=4200,trackVertices=new Float32Array(trackCapacity*18),trackGeo=new THREE.BufferGeometry();trackGeo.setAttribute('position',new THREE.BufferAttribute(trackVertices,3));trackGeo.setDrawRange(0,0);
+  const trackMesh=new THREE.Mesh(trackGeo,new THREE.MeshBasicMaterial({color:'#547b91',transparent:true,opacity:.15,depthWrite:false,side:THREE.DoubleSide}));trackMesh.frustumCulled=false;scene.add(trackMesh);let trackCount=0,trackNext=0;const previousTracks=new Map();
+  function rememberTracks(state){for(const r of [state.player,...(state.rivals||[])]){const id=r.id||'player',s=r.s??state.player.s-r.z,old=previousTracks.get(id);if(r.airborne){previousTracks.delete(id);continue;}if(old&&s>old.s+.18&&s-old.s<5){const p=[],out=new THREE.Vector3();for(const [ss,xx] of [[old.s,old.x-.055],[s,r.x-.055],[old.s,old.x+.055],[s,r.x-.055],[s,r.x+.055],[old.s,old.x+.055]]){worldPoint(ss,xx,surfaceHeight(xx,pipe)+.013,out);p.push(out.x,out.y,out.z);}trackVertices.set(p,trackNext*18);trackNext=(trackNext+1)%trackCapacity;trackCount=Math.min(trackCapacity,trackCount+1);trackGeo.setDrawRange(0,trackCount*6);trackGeo.attributes.position.needsUpdate=true;}if(!old||s>old.s+.18)previousTracks.set(id,{s,x:r.x});}}
+  function seedTracks(frames){previousTracks.clear();trackCount=trackNext=0;for(const state of frames)rememberTracks(state);}
+  let lastTrackS=0;
   const reduced = globalThis.matchMedia?.('(prefers-reduced-motion:reduce)').matches ?? false;
-  function resize() { if (disposed) return; const w = Math.max(1, host.clientWidth), h = Math.max(1, host.clientHeight); renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
-  const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
+  function resize(){if(disposed)return;const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+  ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
   let lastT = 0, fov = 50, camLat = 0, camRise = 0, lastCoins = new Map(), snowAt = 0;
   const ease = p => p < .5 ? 2 * p * p : 1 - (2 - 2 * p) ** 2 / 2;
   const crashSeconds = physics.crashSeconds ?? 1.4;
@@ -316,7 +249,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     const t = state.timeMs / 1000, playing = state.phase !== 'menu', portrait = camera.aspect < .9, dt = Math.min(.1, Math.max(0, t - lastT)), wall = performance.now() / 1000, wdt = Math.min(.1, Math.max(0, wall - snowAt));
     lastT = t; snowAt = wall;
     const player = state.player, ps = player.s ?? 0;
-    placeScenery(ps, wall);
+    if(ps<lastTrackS-2)seedTracks([]);lastTrackS=ps;rememberTracks(state);
+    placeScenery(ps, wall);scenery.update(ps,look.fogFar);
     for (const c of chunks) c.visible = c.userData.s1 > ps - 70 && c.userData.s0 < ps + look.fogFar + 30;
     for (const [id, r] of riders) {
       const s = id === 'player' ? player : state.rivals?.find(x => x.id === id), z = id === 'player' ? 0 : s?.z ?? 0;
@@ -339,10 +273,10 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
       else r.crashAt = -1;
       r.pivot.rotation.set(flip, yaw, roll, 'YXZ'); r.pivot.position.y = PIVOT - drop;
       if (s.hit && !s.crashed && !reduced) r.pivot.rotation.x += Math.sin(t * 40) * .12;
-      r.body.position.y = .14 + Math.sin(t * 5 + (id === 'player' ? 0 : 3)) * .018;
+      if(r.actor)r.actor.pose(t,lean,height,r.squash,r.grab);else r.body.position.y = .14 + Math.sin(t * 5 + (id === 'player' ? 0 : 3)) * .018;
       place(r.shadow, s.s ?? ps - z, s.x, surf + .05, s.airborne ? 0 : side * wallAngle(s.x, pipe)); r.shadow.rotateX(-Math.PI / 2);
       r.shadow.material.opacity = .2 / (1 + height * .7); r.shadow.scale.set(.75 / (1 + height * .15), 1.4 / (1 + height * .15), 1);
-      const a = r.sf.geometry.attributes.position; for (let i = 0; i < a.count; i++) a.setZ(i, Math.sin(i * .9 + t * 10) * .05 * (i % 11 / 10)); a.needsUpdate = true;
+      if(r.sf){const a = r.sf.geometry.attributes.position; for (let i = 0; i < a.count; i++) a.setZ(i, Math.sin(i * .9 + t * 10) * .05 * (i % 11 / 10)); a.needsUpdate = true;}
     }
     // Obstacles and coins from the frame.
     const used = {rock: 0, gate: 0, boost: 0, ramp: 0};
@@ -351,7 +285,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     for (const o of state.obstacles ?? []) {
       const os = o.s ?? ps - o.z;
       // Anything already behind the player would sit between it and the chase camera.
-      if (os < ps - 1.5 && o.type !== 'coin') continue;
+      if (os < ps - 1.5) continue;
       if (o.type === 'coin') {
         if (coinCount >= COIN_POOL) continue;
         worldPoint(os, o.x, (o.h ?? .85) + Math.sin(wall * 3 + os) * .06, vec); frameAt(os, FR);
@@ -371,16 +305,16 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     // Camera: a chase rig along the path that rises with the rider on walls and in the air.
     const px = player.x, boost = !!player.boosting, absY = surfaceHeight(px, pipe) + Math.max(0, player.height ?? 0);
     // Narrow screens sit higher with a wider lens and follow the rider almost fully sideways.
-    const wide = Math.min(1, Math.max(0, (camera.aspect - .45) / 1.3)), baseFov = 62 - wide * 12;
+    const wide=Math.min(1,Math.max(0,(camera.aspect-.45)/1.3)),baseFov=67-wide*7;
     const wantFov = baseFov + (boost && !reduced ? 6 : 0); fov += (wantFov - fov) * Math.min(1, dt * 4 || 1); camera.fov = fov; camera.updateProjectionMatrix();
-    const follow = .92 - wide * .4;
+    const follow=.98;
     if (playing) {
       const k = Math.min(1, (wdt || 1 / 60) * 5); camLat += (px * follow - camLat) * k; camRise += (absY * .75 - camRise) * Math.min(1, (wdt || 1 / 60) * 3.5);
-      worldPoint(ps - (10.8 - wide * .8) - (boost && !reduced ? .6 : 0), camLat, 5.6 - wide * 1.4 + camRise, camera.position);
-      worldPoint(ps + 14, px * (1 - wide * .25), .9 + camRise * .8, target);
+      worldPoint(ps-(portrait?5.2:5.8)-(boost&&!reduced?.3:0),camLat+(portrait?.2:.65),2.45+camRise,camera.position);
+      worldPoint(ps+16,px*.8,2.0+camRise*.8,target);
     } else {
-      worldPoint(portrait ? -8 : -8.2, portrait ? 4 : 8.5, portrait ? 3 : 3.4, camera.position); worldPoint(portrait ? 8 : 8, portrait ? 0 : -4, .7, target);
-      const pr = riders.get('player'); pr.root.visible = pr.shadow.visible = true; place(pr.root, portrait ? 4 : .4, portrait ? 1.8 : 3.8, .03, 0, -.38); pr.pivot.rotation.set(0, 0, 0); pr.pivot.position.y = PIVOT; place(pr.shadow, portrait ? 4 : .4, portrait ? 1.8 : 3.8, .05); pr.shadow.rotateX(-Math.PI / 2);
+      worldPoint(portrait ? -4.8 : -5.5, portrait ? 4 : 7, portrait ? 2.6 : 2.7, camera.position); worldPoint(portrait ? 8 : 8, portrait ? 0 : -4, .7, target);
+      const pr = riders.get('player'); pr.root.visible = pr.shadow.visible = true; place(pr.root, portrait ? 2 : .4, portrait ? 1.8 : 3.8, .03, 0, -.38); pr.pivot.rotation.set(0, 0, 0); pr.pivot.position.y = PIVOT; place(pr.shadow, portrait ? 2 : .4, portrait ? 1.8 : 3.8, .05); pr.shadow.rotateX(-Math.PI / 2);
       for (const [id, r] of riders) if (id !== 'player') r.root.visible = r.shadow.visible = false;
     }
     if (player.hit && !reduced) camera.position.y += Math.sin(t * 65) * .07;
@@ -388,7 +322,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     if (playing && !reduced) camera.rotateZ(-(player.lean ?? 0) * .025);
     camAt.copy(camera.position);
     mountains.position.set(camAt.x, camAt.y - 48, camAt.z); field.position.set(camAt.x, camAt.y - 78, camAt.z);
-    worldPoint(ps, px, 0, P); sun.target.position.copy(P); sun.position.set(P.x - 18, P.y + 32, P.z + 14);
+    worldPoint(ps, px, 0, P); sun.target.position.copy(P); sun.position.set(P.x-32,P.y+25,P.z-38);art.update(ps,look.fogFar,camera,quality);
     // Board spray and falling snow.
     frameAt(ps, FR); const dx = Math.sin(FR.theta), dz = -Math.cos(FR.theta), rx = Math.cos(FR.theta), rz = Math.sin(FR.theta);
     worldPoint(ps, px, absY, P);
@@ -410,16 +344,16 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     const materials = new Set(), geometries = new Set();
     scene.traverse(o => { if (o.geometry) geometries.add(o.geometry); if (o.material) for (const m of [].concat(o.material)) materials.add(m); });
     geometries.forEach(g => g.dispose()); materials.forEach(m => { for (const v of Object.values(m)) if (v?.isTexture) v.dispose(); m.dispose(); });
-    scene.background?.dispose?.();
+    scene.background?.dispose?.();scenery.dispose();art.dispose();contactTex.dispose();granite.dispose();
     for (const m of [...treeMeshes, flagPole, flagCloth, coins]) m.dispose?.();
-    sun.shadow.map?.dispose(); renderer.renderLists.dispose(); renderer.dispose();
+    sun.shadow.map?.dispose(); renderer.renderLists.dispose(); renderer.dispose();renderer.forceContextLoss();
     if (!canvas) renderer.domElement.remove();
   }
   return {
-    render, setQuality, dispose: disposeAll, canvas: renderer.domElement,
+    render, seedTracks, setQuality, dispose: disposeAll, canvas: renderer.domElement,
     get quality() { return quality; },
     get modelError() { return modelError; },
-    mode: gltf ? 'model' : 'primitive',
-    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, trees: treeMeshes[0].count, quality, disposed, mode: gltf ? 'model' : 'primitive'}; },
+    mode: 'mixamo-rider-procedural-world-v6',
+    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, trees: art.metrics().trees, quality, disposed, mode: gltf ? 'model' : 'primitive'}; },
   };
 }
