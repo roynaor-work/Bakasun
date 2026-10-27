@@ -174,8 +174,10 @@ SHA־256 של ה־GLB: `8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2
 
 ## מרוץ סנובורד (Alpine Rush) · 26.10.2026
 
-- הדמות: `assets/kid-full.glb` הקיים, ללא שינוי בבייטים (SHA-256 `8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2a9ae673a`, זהה ל־`rider.glb` בחבילת העיצוב). הלבוש, הקסדה, המשקפיים, הקרש והצעיף מותאמים בזיכרון בלבד.
+- גרפיקה 5 (27.10.2026, Codex): הדמות היא `assets/alpine-rush/athlete.glb` (2,160,468 בתים, ללא שינוי בבייטים), Soldier/Vanguard של Mixamo מדוגמת Three.js (https://threejs.org/examples/webgl_animation_skinning_blending.html). זה לא CC0 ולא בהכרח תחת MIT; תנאי Adobe ל־Mixamo: https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html . `minigames/athlete.mjs` מסיר בזיכרון ציוד מותן וראש, צובע את הלבוש ומוסיף קסדה, מסכה ומשקפיים מגאומטריה מקורית.
+- תמונות (`assets/alpine-rush/`): `alpine-panorama.webp` ו־`snow-fir.webp` (ImageGen, גרפיקה 2), `granite-v5.webp` ו־`alpine-dusk-v5.webp` (ImageGen, גרפיקה 5; הפרומפטים בחבילת Codex). המקור PNG (כ־15MB) הומר ל־WebP בשילוב: 326,326, 516,162, 443,746 ו־313,734 בתים; הגרניט הוקטן מ־1254 ל־1024 פיקסלים.
+- `assets/kid-full.glb` כבר לא נטען במשחק הזה, ונשאר לשאר האי.
 - Three.js r160, `GLTFLoader` ו־`BufferGeometryUtils` מ־`vendor/` הקיים (MIT). לא נוספו ספריות.
 - הסביבה נוצרת בקוד: חצי הצינור (טקסטורת קנבס של פסים כחולים), השפות, הרשתות האדומות, השטח שבצדדים, העצים, ההרים, הדגלים, הרמפה, שערי הסלאלום, משטחי האצה, המטבעות, השלג היורד וקשת הסיום. ה־HUD, הג׳ויסטיק וסמלי הטריקים הם SVG ו־CSS (עיצוב Codex, `docs-development/alpine-rush/`). הסאונד מסונתז ב־WebAudio; אין קבצי שמע.
-- `assets/ultra-hub/alpine.webp` (57,878 בתים, 960×600): צילום מתוך המשחק הפעיל, מסלול 2, סיבוב באוויר מעל שפת חצי הצינור, בלי HUD.
-- הרפרנס החזותי Ski Master נצפה בידי Codex בלבד; לא הורדו ממנו קוד או נכסים.
+- `assets/ultra-hub/alpine.webp` (87,554 בתים, 960×600): צילום מתוך המשחק הפעיל בגרפיקה 5, מסלול 2, סיבוב באוויר מעל שפת חצי הצינור, בלי HUD.
+- הרפרנסים החזותיים (Ski Master, Snowboard Master 3D, SSX 3) נצפו בידי Codex בלבד; לא הועתקו מהם קוד, סאונד או נכסים.
