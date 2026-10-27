@@ -12,6 +12,7 @@ import {createActivity} from '../workout/island/activity/runtime.mjs';
 import {IslandView} from '../workout/island/view/island-view.mjs';
 import {createBuilding,disposeBuilding} from '../workout/island/view/buildings.mjs';
 import {achievementRows} from '../workout/island/ui/city-access.mjs';
+import {IslandInterface} from '../workout/island/ui/interface.mjs';
 
 const data=await loadData(new URL('../workout/island/',import.meta.url),async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))}));
 const fixture=()=>createEngine(data,{storage:{getItem:()=>null,setItem(){}},now:()=>1e6});
@@ -84,4 +85,10 @@ test('an emergency waits while touring, panning or flying the camera, then resum
     const view={pointers:new Map()};let now=1e6,launched=0;const activity=createActivity(e,{now:()=>now,random:()=>0,blocked:()=>navigationActive(view),onLaunch:()=>launched++});
     assert.equal(activity.prepare('fire').ok,true);Object.assign(view,busy);now+=data.config.events.warningMs+1;activity.tick();assert.equal(launched,0);assert.equal(e.state.events.active.phase,'warning');Object.assign(view,{touring:false,pointers:new Map(),cameraFlight:null});activity.tick();assert.equal(launched,1);assert.equal(e.state.events.active.phase,'playing');activity.dispose();
   }
+});
+
+test('the future airport card explains its expansion requirement and does not claim an absent lot or reached limit',()=>{
+  const e=fixture(),hint={},classes=new Set(),card={dataset:{building:'airport'},classList:{toggle(){},add:name=>classes.add(name)},setAttribute(){},querySelector:()=>hint},messages=[];
+  const ui=Object.assign(Object.create(IslandInterface.prototype),{engine:e,catalog:{children:[card]},categories:{children:[]},getBuilding:id=>e.registry.buildings.get(id),tutorialStep:()=>null,t:id=>id,readyPlots:{active:true,chooseType(){assert.fail('no airport lot exists yet');}},toast:id=>messages.push(id)});
+  ui.updateCatalogState();assert.equal(hint.textContent,'reason.futureDistrict');assert.equal(hint.hidden,false);assert.ok(classes.has('locked'));ui.selectBuilding('airport');assert.deepEqual(messages,['reason.futureDistrict']);
 });

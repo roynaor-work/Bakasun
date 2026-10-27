@@ -361,9 +361,9 @@ export class IslandInterface {
       b.classList.toggle('locked', !!record.locked);
       b.setAttribute('aria-pressed', String(b.dataset.building === this.selected));
       const availability = placementAvailability(this.engine.state, this.engine.registry, record.id);
-      if(availability.reason==='reason.learningOrder')b.classList.add('locked');
+      if(['reason.learningOrder','reason.futureDistrict'].includes(availability.reason))b.classList.add('locked');
       const hint = b.querySelector('.building-hint');
-      const label = record.locked ? null : !availability.ok ? record.limit.kind === 'capacity' && availability.reason === record.limit.reason ? 'app.noNeed' : 'app.atLimit' : availability.recommended ? 'app.recommended' : null;
+      const label = record.locked ? null : !availability.ok ? availability.reason==='reason.futureDistrict' ? availability.reason : record.limit.kind === 'capacity' && availability.reason === record.limit.reason ? 'app.noNeed' : 'app.atLimit' : availability.recommended ? 'app.recommended' : null;
       hint.textContent = availability.reason==='reason.learningOrder'?`${this.t('reason.learningOrder')}: ${this.label(this.getBuilding(record.unlockAfter),'building')}`:label?this.t(label):'';
       if (!record.locked && !availability.ok && availability.reason!=='reason.learningOrder' && record.limit.kind === 'unique' && record.levels.length>1) hint.textContent += ` · ${this.t('app.upgradeExisting')}`;
       hint.hidden = !label;
@@ -376,9 +376,11 @@ export class IslandInterface {
     this.zoneKind=null;
     const building = this.getBuilding(id);
     if (!building) return;
+    const availability=placementAvailability(this.engine.state,this.engine.registry,id);
+    if(availability.reason==='reason.futureDistrict'){this.toast(availability.reason);return;}
     if(this.readyPlots?.active&&!manual){this.category=building.category;this.readyPlots.chooseType(id);return;}
     if (building.locked) { this.toast('reason.locked'); return; }
-    if(placementAvailability(this.engine.state,this.engine.registry,id).reason==='reason.learningOrder'){this.toast('reason.learningOrder');return;}
+    if(availability.reason==='reason.learningOrder'){this.toast('reason.learningOrder');return;}
     this.closeInfo();
     this.movingId = null;
     this.selected = id;

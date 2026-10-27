@@ -44,7 +44,7 @@ relocation, deletion, new save version or cloud synchronization.
 
 ## Validation
 
-- 123 focused tests pass, including 12 new cases covering compact planning,
+- 124 focused tests pass, including 13 new cases covering compact planning,
   legacy grid preservation, airport unlock/footprint/geometry, walking graph
   routing, single-drag pan, focused keyboard input, gesture cancellation, tour
   resources, camera framing, real personal results and drawing-buffer reuse.
@@ -54,9 +54,12 @@ relocation, deletion, new save version or cloud synchronization.
   expectations were updated where the requested compact layout replaces sprawl;
   connections, coverage, immutability and save validation remain asserted.
   The final automatic-emergency interlock and UI refinements were followed by
-  the focused 123-test run; the full-suite snapshot predates that extra case.
+  the focused 124-test run; the full-suite snapshot predates those extra cases.
 - Browser: all four frequent actions opened their real flows. Free training
   reached `/workout/#/free`; learning reached the daily station selector.
+  A house built through the production UI changed 25 available lots to 24 and
+  survived reload. The unopened airport card explains its expansion requirement
+  rather than reporting a reached limit or a missing plot.
   Ranking fits a 390×700 frame. Map destinations closed the panel and moved the
   camera. Single dragging moved the map in an 844×390 frame without opening a
   building. A tour selected a 26-point route, progressed to 17 remaining points,
@@ -78,6 +81,7 @@ relocation, deletion, new save version or cloud synchronization.
 | Portrait map panel | [map panel](map-phone.jpg) |
 | Portrait results | [results](scores-phone.jpg) |
 | Landscape map | [landscape](landscape.jpg) |
+| Building and reloading | [saved house](build-reloaded.jpg) |
 
 Prepared for review; not yet merged or published. Next: review the four visible
 actions and tour/map interaction, then test a physical phone before merging.
