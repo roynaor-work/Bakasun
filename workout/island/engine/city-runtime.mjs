@@ -1,4 +1,4 @@
-import {cityReport} from './city-depth.mjs?v=island-naval-aim-20261026-3';
+import {cityReport} from './city-depth.mjs?v=island-naval-aim-20261027-1';
 
 /** City commands share the engine's save/event/undo transaction boundary. */
 export function installCity(engine, {changed, notify, remember}) {

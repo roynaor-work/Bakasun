@@ -1,4 +1,4 @@
-import {cellsFor} from './rules.mjs?v=island-naval-aim-20261026-3';
+import {cellsFor} from './rules.mjs?v=island-naval-aim-20261027-1';
 const key=(x,z)=>`${x},${z}`;
 /** Free cosmetic footpaths are derived from the city; they never spend money,
  * occupy construction cells or change the saved road/access rules. */

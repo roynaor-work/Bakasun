@@ -1,11 +1,11 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-naval-aim-20261026-3';
-import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-naval-aim-20261026-3';
-import {cardEffects} from '../activity/soccer-card.mjs?v=island-naval-aim-20261026-3';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-naval-aim-20261026-3';
-import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint} from './soccer-tactics.mjs?v=island-naval-aim-20261026-3';
-import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-naval-aim-20261026-3';
-import {campaignConfig,createCampaignStats,recordCampaignEvent} from './soccer-campaign.mjs?v=island-naval-aim-20261026-3';
-import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-naval-aim-20261026-3';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-naval-aim-20261027-1';
+import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-naval-aim-20261027-1';
+import {cardEffects} from '../activity/soccer-card.mjs?v=island-naval-aim-20261027-1';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-naval-aim-20261027-1';
+import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint} from './soccer-tactics.mjs?v=island-naval-aim-20261027-1';
+import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-naval-aim-20261027-1';
+import {campaignConfig,createCampaignStats,recordCampaignEvent} from './soccer-campaign.mjs?v=island-naval-aim-20261027-1';
+import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-naval-aim-20261027-1';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);
