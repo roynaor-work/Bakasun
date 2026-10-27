@@ -11,11 +11,11 @@ export function cityLighting(renderer,scene){
     varying vec3 direction;
     void main(){
       vec3 n=normalize(direction);
-      vec3 horizon=vec3(.76,.85,.84),zenith=vec3(.31,.53,.69),ground=vec3(.24,.31,.22);
+      vec3 horizon=vec3(.78,.87,.91),zenith=vec3(.28,.48,.69),ground=vec3(.24,.30,.21);
       vec3 color=n.y>0.?mix(horizon,zenith,pow(n.y,.6)):mix(horizon,ground,pow(-n.y,.45));
       float sun=pow(max(0.,dot(n,normalize(vec3(-17.,30.,15.)))),96.);
       color+=vec3(1.,.82,.55)*sun*1.1;
-      gl_FragColor=vec4(color*.24,1.);
+      gl_FragColor=vec4(color*.34,1.);
     }
   `});
   sky.add(new T.Mesh(geometry,material));

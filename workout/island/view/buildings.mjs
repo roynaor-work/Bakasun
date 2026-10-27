@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import { primitive as part, material, makeTree } from './environment.mjs?v=island-clean-ui-20261026-1';
-import { batchMeshes } from './batch.mjs?v=island-clean-ui-20261026-1';
+import { primitive as part, material } from './environment.mjs?v=island-city-finish-20261027-1';
+import { batchMeshes } from './batch.mjs?v=island-city-finish-20261027-1';
 
 // A visual kind is an independent extension point. Building IDs never select
 // geometry; two data records can share a visual, or register their own renderer.
@@ -152,8 +152,8 @@ function harbor(g,v,w,d,h) {
   block(boat,C.wood,[0,.45,0],[.06,.95,.06]);const sail=part(boat,'cone',v.color,[.18,.68,0],[.62,.7,.04]);sail.rotation.z=-.2;
 }
 function park(g,v,w,d,h) {
-  base(g,w,d,v.color);block(g,C.path,[0,.12,0],[w*.18,.04,d*.9]);block(g,C.path,[0,.125,0],[w*.9,.04,d*.18]);
-  for(const [x,z]of [[-w*.3,-d*.28],[w*.3,-d*.28],[-w*.3,d*.28]]) {const tree=makeTree(g,x,z,.5);tree.position.y=0;}
+  base(g,w,d,'#6f925f');block(g,'#d5ceba',[0,.12,0],[w*.18,.04,d*.9]);block(g,'#d5ceba',[0,.125,0],[w*.9,.04,d*.18]);
+  // Original instanced palms are planted by CityStreets after their GLB loads.
   part(g,'cylinder','#e9e1c8',[w*.21,.2,d*.23],[w*.32,.22,w*.32]);part(g,'cylinder','#82d5d4',[w*.21,.32,d*.23],[w*.26,.04,w*.26]);
   part(g,'cylinder',C.cream,[w*.21,.5,d*.23],[.09,.48,.09]);part(g,'sphere','#a5e8df',[w*.21,.74,d*.23],[.16,.18,.16]);
   for(const x of [-w*.25,w*.25]) {block(g,C.wood,[x,.24,d*.39],[.46,.09,.18]);block(g,C.wood,[x,.38,d*.46],[.46,.25,.05]);}

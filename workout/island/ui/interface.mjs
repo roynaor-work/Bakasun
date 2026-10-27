@@ -1,11 +1,11 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-clean-ui-20261026-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-clean-ui-20261026-1';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-clean-ui-20261026-1';
-import {CityDepthInterface} from './city-depth.mjs?v=island-clean-ui-20261026-1';
-import {CityManagementInterface} from './city-management.mjs?v=island-clean-ui-20261026-1';
-import {nearestCityZone} from '../engine/city-management.mjs?v=island-clean-ui-20261026-1';
-import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-clean-ui-20261026-1';
-import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-clean-ui-20261026-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-city-finish-20261027-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-city-finish-20261027-1';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-city-finish-20261027-1';
+import {CityDepthInterface} from './city-depth.mjs?v=island-city-finish-20261027-1';
+import {CityManagementInterface} from './city-management.mjs?v=island-city-finish-20261027-1';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-city-finish-20261027-1';
+import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-city-finish-20261027-1';
+import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-city-finish-20261027-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);

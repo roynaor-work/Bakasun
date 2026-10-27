@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {GROUND} from './environment.mjs?v=island-clean-ui-20261026-1';
+import {GROUND} from './environment.mjs?v=island-city-finish-20261027-1';
 
 /** Geometry only: the report supplies every status, assignment and radius. */
 export class CityDepthView {
