@@ -2,8 +2,8 @@ import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 
 /** Presentation only: waterline foam and bow waves for every hull, hazy far
- * islands for depth, and a gold ring that marks a critical hit. Four fixed
- * draws; nothing here reads or writes simulation state. */
+ * islands for depth, stern wakes along the enemies' real paths, and a gold
+ * ring that marks a critical hit. Five fixed draws; nothing here reads or writes simulation state. */
 function canvasTexture(size,paint){
  if(typeof document==='undefined')return null;
  const c=document.createElement('canvas');c.width=c.height=size;const g=c.getContext('2d');paint(g,size);const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;return t;
@@ -18,12 +18,19 @@ function bowWave(g,s){
  for(let k=0;k<3;k++){g.strokeStyle=`rgba(255,255,255,${.62-k*.17})`;g.lineWidth=s*(.05-k*.012);g.beginPath();g.moveTo(s*.5,s*(.06+k*.08));g.quadraticCurveTo(s*(.32-k*.04),s*(.4+k*.05),s*(.06+k*.02),s*.97);g.moveTo(s*.5,s*(.06+k*.08));g.quadraticCurveTo(s*(.68+k*.04),s*(.4+k*.05),s*(.94-k*.02),s*.97);g.stroke();}
  const grad=g.createRadialGradient(s*.5,s*.12,0,s*.5,s*.12,s*.22);grad.addColorStop(0,'rgba(255,255,255,.7)');grad.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=grad;g.fillRect(0,0,s,s);
 }
+function wakeStripe(g,s){
+ g.clearRect(0,0,s,s);
+ for(let x=0;x<s;x++){const u=x/(s-1),edge=Math.pow(Math.sin(u*Math.PI),.55),a=.5*edge*(.75+.25*Math.sin(u*37));g.fillStyle=`rgba(255,255,255,${a.toFixed(3)})`;g.fillRect(x,0,1,s);}
+ for(let i=0;i<90;i++){const y=(i*53)%s,x=s*(.15+.7*((i*29)%97)/97);g.fillStyle='rgba(255,255,255,.35)';g.fillRect(x,y,2,3);}
+}
 export function createNavalDressing(scene,balance,{maxShips=8}={}){
  const flat=new T.PlaneGeometry(1,1);flat.rotateX(-Math.PI/2);
- const ringMap=canvasTexture(128,foamRing),waveMap=canvasTexture(128,bowWave);
+ const ringMap=canvasTexture(128,foamRing),waveMap=canvasTexture(128,bowWave),stripeMap=canvasTexture(64,wakeStripe);
  const foamMaterial=new T.MeshBasicMaterial({map:ringMap,color:'#ffffff',transparent:true,depthWrite:false,blending:T.AdditiveBlending,toneMapped:false}),waveMaterial=foamMaterial.clone();waveMaterial.map=waveMap;
  const foam=new T.InstancedMesh(flat,foamMaterial,maxShips),waves=new T.InstancedMesh(flat,waveMaterial,maxShips);
- for(const mesh of [foam,waves]){mesh.count=0;mesh.frustumCulled=false;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);mesh.renderOrder=1;mesh.setColorAt(0,new T.Color(1,1,1));scene.add(mesh);}
+ // Stern wakes for the enemy hulls: short fading segments laid along the path actually sailed, so the heading reads at a glance.
+ const TRAIL=12,trailMaterial=foamMaterial.clone();trailMaterial.map=stripeMap;const trails=new T.InstancedMesh(flat,trailMaterial,maxShips*TRAIL),history=new Map();
+ for(const mesh of [foam,waves,trails]){mesh.count=0;mesh.frustumCulled=false;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);mesh.renderOrder=1;mesh.setColorAt(0,new T.Color(1,1,1));scene.add(mesh);}
  // Far islands: low hazy silhouettes beyond the play area give the sea a horizon.
  const hills=[];let seed=91;const rnd=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
  for(const [x,z,w,h] of [[-190,-250,46,10],[-120,-282,30,7],[40,-292,58,13],[150,-262,40,9],[230,-210,34,7],[-250,-170,30,6]]){
@@ -33,7 +40,7 @@ export function createNavalDressing(scene,balance,{maxShips=8}={}){
  const hillMaterial=new T.MeshBasicMaterial({color:'#86aeb9',fog:false}),horizon=new T.Mesh(hillGeometry,hillMaterial);scene.add(horizon);
  const burstGeometry=new T.RingGeometry(.86,1,48);burstGeometry.rotateX(-Math.PI/2);
  const burstMaterial=new T.MeshBasicMaterial({color:'#ffd768',transparent:true,depthWrite:false,blending:T.AdditiveBlending,side:T.DoubleSide,depthTest:false,toneMapped:false}),burst=new T.Mesh(burstGeometry,burstMaterial);burst.visible=false;burst.renderOrder=6;scene.add(burst);
- const dummy=new T.Object3D(),color=new T.Color();let disposed=false,shown={foam:0,waves:0,critical:false};
+ const dummy=new T.Object3D(),color=new T.Color();let disposed=false,shown={foam:0,waves:0,trails:0,critical:false};
  return {
   /** hulls: [{x,z,yaw,length,speed,visible}] in world units. */
   update(hulls,time,blast,life){
@@ -42,13 +49,23 @@ export function createNavalDressing(scene,balance,{maxShips=8}={}){
     dummy.position.set(h.x,.05,h.z);dummy.rotation.set(0,h.yaw+Math.sin(time*.7+h.x)*.18,0);dummy.scale.set(beam*1.22*pulse,1,h.length*1.02*pulse);dummy.updateMatrix();foam.setMatrixAt(f,dummy.matrix);color.setScalar((.17+Math.min(.25,h.speed*.05))*.8);foam.setColorAt(f,color);f++;
     const strength=.2+.8*Math.min(1,h.speed/4.5);{const dx=-Math.sin(h.yaw),dz=-Math.cos(h.yaw);dummy.position.set(h.x+dx*h.length*.28,.06,h.z+dz*h.length*.28);dummy.scale.set(beam*(1.6+strength*1.4),1,h.length*(.55+strength*.55));dummy.updateMatrix();waves.setMatrixAt(w,dummy.matrix);color.setScalar(.75*1.15*strength);waves.setColorAt(w,color);w++;}
    }
-   foam.count=f;waves.count=w;for(const m of [foam,waves]){m.instanceMatrix.needsUpdate=true;if(m.instanceColor)m.instanceColor.needsUpdate=true;}
+   let n=0;
+   hulls.forEach((h,k)=>{if(k===0)return;let path=history.get(k);if(!h.visible||h.speed<.05){history.delete(k);return;}if(!path){path=[];history.set(k,path);}
+    const dx=-Math.sin(h.yaw),dz=-Math.cos(h.yaw),sx=h.x-dx*h.length*.42,sz=h.z-dz*h.length*.42;
+    if(!path.length||time-path.at(-1).t>=.12||time<path.at(-1).t){path.push({x:sx,z:sz,t:time});if(path.length>TRAIL+1)path.shift();}
+    const live=[...path.slice(0,-1),{x:sx,z:sz,t:time}],beam=h.length*.3,strength=Math.min(1,h.speed/2.2);
+    for(let i=live.length-1;i>0&&n<maxShips*TRAIL;i--){const a=live[i-1],b=live[i],len=Math.hypot(b.x-a.x,b.z-a.z);if(len<1e-3)continue;const age=Math.min(1,(time-b.t)/1.5);
+     dummy.position.set((a.x+b.x)/2,.055,(a.z+b.z)/2);dummy.rotation.set(0,Math.atan2(b.x-a.x,b.z-a.z),0);dummy.scale.set(beam*(.8+age*1.6),1,len*1.08);dummy.updateMatrix();trails.setMatrixAt(n,dummy.matrix);color.setScalar(.55*strength*Math.pow(1-age,1.4));trails.setColorAt(n,color);n++;}
+   });
+   for(const k of [...history.keys()])if(k>=hulls.length)history.delete(k);
+   trails.count=n;
+   foam.count=f;waves.count=w;for(const m of [foam,waves,trails]){m.instanceMatrix.needsUpdate=true;if(m.instanceColor)m.instanceColor.needsUpdate=true;}
    const u=blast&&blast.life>0&&blast.critical?1-blast.life/life:-1;burst.visible=u>=0;
    if(burst.visible){burst.position.set(blast.wx,.12,blast.wz);burst.scale.setScalar(2+u*12);burstMaterial.opacity=Math.pow(1-u,1.1);}
-   shown={foam:f,waves:w,critical:burst.visible};
+   shown={foam:f,waves:w,trails:n,critical:burst.visible};
   },
-  degrade(){horizon.visible=true;waves.visible=false;},
+  degrade(){horizon.visible=true;waves.visible=false;trails.visible=false;},
   metrics(){return {...shown,horizonIslands:6,disposed};},
-  dispose(){if(disposed)return;disposed=true;scene.remove(foam,waves,horizon,burst);foam.dispose();waves.dispose();for(const g of [flat,hillGeometry,burstGeometry])g.dispose();for(const m of [foamMaterial,waveMaterial,hillMaterial,burstMaterial])m.dispose();ringMap?.dispose();waveMap?.dispose();},
+  dispose(){if(disposed)return;disposed=true;scene.remove(foam,waves,trails,horizon,burst);foam.dispose();waves.dispose();trails.dispose();trailMaterial.dispose();stripeMap?.dispose();for(const g of [flat,hillGeometry,burstGeometry])g.dispose();for(const m of [foamMaterial,waveMaterial,hillMaterial,burstMaterial])m.dispose();ringMap?.dispose();waveMap?.dispose();},
  };
 }

@@ -1,5 +1,5 @@
-import {gameResult} from '../minigames/result.mjs?v=island-naval-aim-20261027-1';
-import { startAliens } from '../minigames/aliens.mjs?v=island-naval-aim-20261027-1';
+import {gameResult} from '../minigames/result.mjs?v=island-naval-aim-20261027-2';
+import { startAliens } from '../minigames/aliens.mjs?v=island-naval-aim-20261027-2';
 
 export function install(registry,data) {
   const balance=data.config.minigames.alienDefense;

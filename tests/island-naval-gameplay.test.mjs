@@ -98,7 +98,7 @@ test('Naval brief weapon recovery blocks rapid taps without consuming their ammu
 });
 
 test('Naval torpedo collision catches a nearby hull before its distant endpoint',()=>{
- const m=make(1,0),e=m.enemies[0],hp=e.hp;m.playerShip.x=e.x-b.aim.hullLength*.5;m.playerShip.z=e.z;
+ const m=make(1,0),e=m.enemies[0],hp=e.hp;/* 27/10: patrolling hulls sail broadside to the player, so an adjacent launch starts just short of the beam. */m.playerShip.x=e.x-(b.aim.hullBeam/2+b.ballistics.pivotForward+b.ballistics.barrelLength+3);m.playerShip.z=e.z;
  m.update(.02,{ammoIndex:2,targetX:e.x+80,targetZ:e.z,firing:true});advance(m,.12);
  assert.ok(e.hp<hp,'crossing the actual hull must hit even before the chosen sea endpoint');
  assert.equal(m.lastFeedback.kind,'hit');

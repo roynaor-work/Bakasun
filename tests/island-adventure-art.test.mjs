@@ -65,7 +65,9 @@ test('real shells hitting a hull explode at the calculated contact point and app
   const expected=navalBallisticPoint(launched.launch,model.ball.age);
   assert.equal(model.ball.x,expected.x);assert.equal(model.ball.z,expected.z);
   assert.equal(model.blast.x,expected.x);assert.equal(model.blast.z,expected.z);
-  assert.notEqual(model.blast.x,launched.targetX);assert.equal(model.ball.victim,enemy.index);
+  // 27/10: a patrolling hull slides along its own length, so the shell can meet it exactly at the predicted contact;
+  // the hit still has to come before the water landing (asserted above) and land on that hull.
+  assert.ok(model.ball.age<launched.launch.duration);assert.equal(model.ball.victim,enemy.index);
   assert.ok(model.ball.h<=balance.ballistics.hullTop&&navalHullContact(model.ball,model.ball,enemy,balance),'contact is on the hull, at deck height');
   assert.equal(navalHullContact(previous,model.ball,enemy,balance),true);
   assert.equal(model.blast.hit,true);assert.equal(model.snapshot().hits,1);assert.equal(model.fired,1);

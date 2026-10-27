@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
-import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-naval-aim-20261027-1';
-import {streetFront} from '../engine/city-sites.mjs?v=island-naval-aim-20261027-1';
-import {plotLandscape} from './plot-landscape.mjs?v=island-naval-aim-20261027-1';
+import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-naval-aim-20261027-2';
+import {streetFront} from '../engine/city-sites.mjs?v=island-naval-aim-20261027-2';
+import {plotLandscape} from './plot-landscape.mjs?v=island-naval-aim-20261027-2';
 
 /** Paving and street furniture are derived visuals inside existing footprints.
  * No saved building, authored GLB, construction rule or ground plane is changed. */

@@ -7347,7 +7347,28 @@
     "zoomEase": 7,
     "enterSeconds": 0.22,
     "exitSeconds": 0.3,
-    "returnSeconds": 0.25
+    "returnSeconds": 0.25,
+    "gain": {
+     "yawSlow": 0.08,
+     "yawFast": 0.2,
+     "elevationSlow": 0.06,
+     "elevationFast": 0.12,
+     "slowSpeed": 80,
+     "fastSpeed": 240,
+     "smoothSeconds": 0.05,
+     "startPixels": 2
+    }
+   },
+   "patrol": {
+    "table": [[1, 5, 12], [3, 8, 24], [10, 14, 48], [20, 18, 65]],
+    "turnSeconds": 0.3,
+    "trackShare": 0.4,
+    "maxTrack": 9,
+    "legShare": [0.72, 1],
+    "steadyUntilStage": 5,
+    "depthStagger": 64,
+    "arena": {"minZ": -185, "maxZ": 185, "back": 75, "front": 75},
+    "avoid": {"distance": 46, "hard": 30}
    },
    "aimCamera": {
     "distance": 24,

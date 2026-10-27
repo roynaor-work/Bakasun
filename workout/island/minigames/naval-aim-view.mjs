@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import {navalWorldPoint} from './naval-camera.mjs?v=island-naval-aim-20261027-1';
-import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-naval-aim-20261027-1';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-naval-aim-20261027-2';
+import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-naval-aim-20261027-2';
 
 /** The archery-style arc, drawn from the model's own prediction: a continuous
  * camera-facing ribbon with a dark outline, stopping at the first predicted

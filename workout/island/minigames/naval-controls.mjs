@@ -1,5 +1,5 @@
-import {navalWaterAt} from './naval-camera.mjs?v=island-naval-aim-20261027-1';
-import {navalWeaponIcons} from './naval-icons.mjs?v=island-naval-aim-20261027-1';
+import {navalWaterAt} from './naval-camera.mjs?v=island-naval-aim-20261027-2';
+import {navalWeaponIcons} from './naval-icons.mjs?v=island-naval-aim-20261027-2';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
 export function navalSteeringInput(moveX=0,moveZ=0,cameraHeading=0,deadzone=.12){
@@ -23,6 +23,23 @@ export function navalVisibleTarget(model,project,width,height,point,preferred=mo
 export function navalAimFromDrag(start,dx,dy,config){
  const c=config.aimControls||{},b=config.ballistics||{};
  return {yaw:start.yaw+dx*(c.yawPerPixel??.0042),elevation:Math.max(b.minElevation??3,Math.min(b.maxElevation??42,start.elevation-dy*(c.elevationPerPixel??.11)))};
+}
+/** Aim gain in degrees per CSS pixel, blended by drag speed: slow drags for
+ * small steady corrections, fast drags to swing onto the target. The blend
+ * is a smoothstep between `slowSpeed` and `fastSpeed`, so there is no step. */
+export function navalAimGain(speed,config){
+ const g=config.aimControls?.gain||{},lo=g.slowSpeed??80,hi=g.fastSpeed??240,t=Math.max(0,Math.min(1,((speed||0)-lo)/Math.max(1,hi-lo))),s=t*t*(3-2*t);
+ return {yaw:(g.yawSlow??.08)+((g.yawFast??.2)-(g.yawSlow??.08))*s,elevation:(g.elevationSlow??.06)+((g.elevationFast??.12)-(g.elevationSlow??.06))*s,blend:s};
+}
+/** One pointer step of the accumulated aim. `track` keeps the smoothed drag
+ * speed between steps; `ms` is the time since the previous step. Every pixel
+ * moves the aim: there is no dead zone after the drag has begun, no jitter
+ * and no correction toward a target. */
+export function navalAimStep(aim,dx,dy,ms,track,config){
+ const b=config.ballistics||{},g=config.aimControls?.gain||{},dt=Math.max(1,ms||16)/1000,instant=Math.hypot(dx,dy)/dt;
+ track.speed=(track.speed??instant)+(instant-(track.speed??instant))*(1-Math.exp(-dt/(g.smoothSeconds??.05)));
+ const k=navalAimGain(track.speed,config),DEG=Math.PI/180;
+ return {yaw:aim.yaw+dx*k.yaw*DEG,elevation:Math.max(b.minElevation??3,Math.min(b.maxElevation??42,aim.elevation-dy*k.elevation))};
 }
 export function navalChargePower(seconds,config){
  const c=config.aimControls||{},min=config.ballistics?.minPower??.35;
@@ -51,20 +68,26 @@ export function createNavalInput(ctx,getModel,getView){
  const show=held=>{controls.dataset.aiming=String(held);cancel.hidden=!held;};
  const reset=()=>{gesture=keyboard=null;queue=[];pendingSelection=null;keyboardClick=false;getModel()?.cancelAim?.();show(false);controls.style?.removeProperty?.('--naval-power');};
  const startState=()=>{const m=getModel(),t=m?.turret||{yaw:0,elevation:6,power:1};return {yaw:t.yaw,elevation:t.elevation,time:m?.time??0};};
- const settle=(g,x,y)=>{g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));};
- const state=g=>{const m=getModel(),aim=navalAimFromDrag(g.start,g.dx,g.dy,balance),held=Math.max(0,(m?.time??0)-g.start.time);return {...aim,power:navalChargePower(held*Math.max(1,m?.equipment?.rate||1),balance),held};};
+ const startPixels=c.gain?.startPixels??2;
+ // The aim moves from the first 2 pixels on, pixel for pixel, with the gain set by drag speed.
+ const settle=(g,x,y,t)=>{const px=g.lastX??g.x,py=g.lastY??g.y,ms=Math.max(1,(t??performance.now())-(g.lastT??t??0));g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));
+  if(!g.engaged&&g.moved>=startPixels){g.engaged=true;g.aim=navalAimStep(g.aim,g.dx,g.dy,ms,g.track,balance);}
+  else if(g.engaged)g.aim=navalAimStep(g.aim,x-px,y-py,ms,g.track,balance);
+  g.lastX=x;g.lastY=y;g.lastT=t??performance.now();};
+ const moveTo=(g,e)=>{const list=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():null;if(list?.length)for(const p of list)settle(g,p.clientX,p.clientY,p.timeStamp);else settle(g,e.clientX,e.clientY,e.timeStamp);};
+ const state=g=>{const m=getModel(),aim=g.aim||navalAimFromDrag(g.start,g.dx,g.dy,balance),held=Math.max(0,(m?.time??0)-g.start.time);return {...aim,power:navalChargePower(held*Math.max(1,m?.equipment?.rate||1),balance),held};};
  const overCancel=(x,y)=>{if(cancel.hidden)return false;const r=cancel.getBoundingClientRect();return x>=r.left-8&&x<=r.right+8&&y>=r.top-8&&y<=r.bottom+8;};
- const finish=(g,x,y)=>{settle(g,x,y);const s=state(g);if(overCancel(x,y))queue.push({type:'cancel'});else if(s.held<=(c.tapSeconds??.22)&&g.moved<=(c.tapPixels??10))queue.push({type:'quick',target:getModel()?.lockedTargetIndex});else queue.push({type:'fire',...s,target:getModel()?.lockedTargetIndex});};
- const begin=e=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();m.beginAim?.(m.selectedTargetIndex);gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start:startState()};show(true);};
+ const finish=(g,x,y,t)=>{settle(g,x,y,t);const s=state(g);if(overCancel(x,y))queue.push({type:'cancel'});else if(s.held<=(c.tapSeconds??.22)&&g.moved<=(c.tapPixels??10))queue.push({type:'quick',target:getModel()?.lockedTargetIndex});else queue.push({type:'fire',...s,target:getModel()?.lockedTargetIndex});};
+ const begin=e=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();m.beginAim?.(m.selectedTargetIndex);const start=startState();gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start,aim:{yaw:start.yaw,elevation:start.elevation},track:{},engaged:false,lastX:e.clientX,lastY:e.clientY,lastT:e.timeStamp};show(true);};
  fire.addEventListener('pointerdown',begin,options);pad.addEventListener('pointerdown',e=>{try{pad.setPointerCapture(e.pointerId);}catch{}begin(e);},options);
  canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),index=choose({x:e.clientX-r.left,y:e.clientY-r.top});if(index!==null)pendingSelection=index;},options);
- window.addEventListener('pointermove',e=>{if(gesture?.id===e.pointerId){settle(gesture,e.clientX,e.clientY);cancel.dataset.hot=String(overCancel(e.clientX,e.clientY));}},options);
- window.addEventListener('pointerup',e=>{if(gesture?.id!==e.pointerId)return;finish(gesture,e.clientX,e.clientY);gesture=null;show(false);cancel.dataset.hot='false';},options);
+ window.addEventListener('pointermove',e=>{if(gesture?.id===e.pointerId){moveTo(gesture,e);cancel.dataset.hot=String(overCancel(e.clientX,e.clientY));}},options);
+ window.addEventListener('pointerup',e=>{if(gesture?.id!==e.pointerId)return;finish(gesture,e.clientX,e.clientY,e.timeStamp);gesture=null;show(false);cancel.dataset.hot='false';},options);
  window.addEventListener('pointercancel',e=>{if(gesture?.id===e.pointerId){gesture=null;queue.push({type:'cancel'});show(false);}},options);
  cancel.addEventListener('click',e=>{if(e.detail===0&&gesture===null&&keyboard){keyboard=null;queue.push({type:'cancel'});show(false);}},options);
  window.addEventListener('keydown',e=>{
-  if(e.code==='Space'&&!e.repeat&&!e.target.matches('input,textarea,select,[contenteditable=true]')&&(!e.target.matches('button')||e.target===fire)){e.preventDefault();if(!gesture&&!keyboard){getModel()?.beginAim?.(getModel().selectedTargetIndex);keyboard={x:0,y:0,dx:0,dy:0,moved:0,start:startState()};show(true);}}
-  if(keyboard&&['KeyA','KeyD','KeyW','KeyS'].includes(e.code)){e.preventDefault();const step=12;if(e.code==='KeyA')keyboard.dx-=step;if(e.code==='KeyD')keyboard.dx+=step;if(e.code==='KeyW')keyboard.dy-=step;if(e.code==='KeyS')keyboard.dy+=step;keyboard.moved=99;}
+  if(e.code==='Space'&&!e.repeat&&!e.target.matches('input,textarea,select,[contenteditable=true]')&&(!e.target.matches('button')||e.target===fire)){e.preventDefault();if(!gesture&&!keyboard){getModel()?.beginAim?.(getModel().selectedTargetIndex);const start=startState();keyboard={x:0,y:0,dx:0,dy:0,moved:0,start,aim:{yaw:start.yaw,elevation:start.elevation},track:{}};show(true);}}
+  if(keyboard&&['KeyA','KeyD','KeyW','KeyS'].includes(e.code)){e.preventDefault();const step=12,dx=e.code==='KeyA'?-step:e.code==='KeyD'?step:0,dy=e.code==='KeyW'?-step:e.code==='KeyS'?step:0;keyboard.dx+=dx;keyboard.dy+=dy;keyboard.track.speed=0;keyboard.aim=navalAimStep(keyboard.aim,dx,dy,1000,keyboard.track,balance);keyboard.moved=99;}
  },options);
  // Escape while aiming cancels only the aim; it must not also open the pause sheet.
  window.addEventListener('keydown',e=>{if(e.code==='Escape'&&(gesture||keyboard)){e.preventDefault();e.stopImmediatePropagation?.();gesture=keyboard=null;queue.push({type:'cancel'});show(false);}},{signal:abort.signal,capture:true});

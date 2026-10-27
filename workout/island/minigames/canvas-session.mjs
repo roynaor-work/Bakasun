@@ -1,8 +1,8 @@
-import {createControls} from './controls.mjs?v=island-naval-aim-20261027-1';
-import {upgradeCard} from './icons.mjs?v=island-naval-aim-20261027-1';
-import {loadOptionalArt} from './model-art.mjs?v=island-naval-aim-20261027-1';
-import {createGameArt} from './art.mjs?v=island-naval-aim-20261027-1';
-import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=island-naval-aim-20261027-1';
+import {createControls} from './controls.mjs?v=island-naval-aim-20261027-2';
+import {upgradeCard} from './icons.mjs?v=island-naval-aim-20261027-2';
+import {loadOptionalArt} from './model-art.mjs?v=island-naval-aim-20261027-2';
+import {createGameArt} from './art.mjs?v=island-naval-aim-20261027-2';
+import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=island-naval-aim-20261027-2';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   // Each adapter keeps its model coordinates; viewport changes never mutate shared game data.

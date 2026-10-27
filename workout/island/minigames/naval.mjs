@@ -1,15 +1,16 @@
-import {NAVAL_WEAPON_COLORS} from './naval-icons.mjs?v=island-naval-aim-20261027-1';
-import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-naval-aim-20261027-1';
-import {runCanvasGame} from './canvas-session.mjs?v=island-naval-aim-20261027-1';
-import {oval,drawHealthBar} from './art.mjs?v=island-naval-aim-20261027-1';
-import {createNavalInput,navalSteeringInput} from './naval-controls.mjs?v=island-naval-aim-20261027-1';
-import {navalCampaignStage,navalMissionState,navalStagePressure} from './naval-campaign.mjs?v=island-naval-aim-20261027-1';
-import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt,navalProjectileHeight} from './naval-camera.mjs?v=island-naval-aim-20261027-1';
-import {createNavalAudio} from './g6d-audio.mjs?v=island-naval-aim-20261027-1';
-import {drawNavalHud,mountNavalWeaponPicker} from './naval-hud.mjs?v=island-naval-aim-20261027-1';
-import {createNavalView} from './naval-view.mjs?v=island-naval-aim-20261027-1';
-import {drawNavalAimMarks,drawNavalShellTracers,drawNavalHitFeedback} from './naval-marks.mjs?v=island-naval-aim-20261027-1';
-import {navalLaunch,navalPredict,navalAdvanceShot,navalBallisticPoint,navalSolveLaunch,navalBallisticConfig,navalLanding,navalMuzzle} from './naval-ballistics.mjs?v=island-naval-aim-20261027-1';
+import {NAVAL_WEAPON_COLORS} from './naval-icons.mjs?v=island-naval-aim-20261027-2';
+import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-naval-aim-20261027-2';
+import {runCanvasGame} from './canvas-session.mjs?v=island-naval-aim-20261027-2';
+import {oval,drawHealthBar} from './art.mjs?v=island-naval-aim-20261027-2';
+import {createNavalInput,navalSteeringInput} from './naval-controls.mjs?v=island-naval-aim-20261027-2';
+import {navalCampaignStage,navalMissionState,navalStagePressure} from './naval-campaign.mjs?v=island-naval-aim-20261027-2';
+import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt,navalProjectileHeight} from './naval-camera.mjs?v=island-naval-aim-20261027-2';
+import {createNavalAudio} from './g6d-audio.mjs?v=island-naval-aim-20261027-2';
+import {drawNavalHud,mountNavalWeaponPicker} from './naval-hud.mjs?v=island-naval-aim-20261027-2';
+import {createNavalView} from './naval-view.mjs?v=island-naval-aim-20261027-2';
+import {drawNavalAimMarks,drawNavalShellTracers,drawNavalHitFeedback} from './naval-marks.mjs?v=island-naval-aim-20261027-2';
+import {createNavalPatrol,stepNavalPatrol} from './naval-patrol.mjs?v=island-naval-aim-20261027-2';
+import {navalLaunch,navalPredict,navalAdvanceShot,navalBallisticPoint,navalSolveLaunch,navalBallisticConfig,navalLanding,navalMuzzle} from './naval-ballistics.mjs?v=island-naval-aim-20261027-2';
 export function healthPercent(hp,maxHp){return Math.round(Math.max(0,Math.min(1,hp/maxHp))*100);}
 export function navalSway(seed,time,balance){const a=balance.aim.sway,phase=(seed>>>0)%997;return {yaw:Math.sin(time*a.frequency+phase)*a.yaw,elevation:Math.cos(time*a.frequency*.73+phase)*a.elevation};}
 export function navalTrajectory(ship,yaw,elevation,balance){const range=balance.aim.minRange+(elevation-balance.aim.minElevation)*balance.aim.rangePerDegree;return {x:ship.x+Math.cos(yaw)*range,z:(ship.z||0)+Math.sin(yaw)*range};}
@@ -186,12 +187,19 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    e.recoil=Math.max(0,e.recoil-dt);
    if(e.hp<=0){e.active=time-(e.sunkAt??time)<balance.sinkSeconds;continue;}
    if(!e.active)continue;
-   const oldX=e.x,oldZ=e.z,age=time-e.spawnTime,type=balance.shipTypes[e.kind],a=age*(e.behavior==='flank'?.5:.3)*tactics.speedScale+e.index+(seed%7)*.14,lane=(e.slot-(Math.min(settings.concurrent,fleet.length)-1)/2)*balance.combat.laneSpacing;
+   const oldX=e.x,oldZ=e.z,age=time-e.spawnTime,type=balance.shipTypes[e.kind],lane=(e.slot-(Math.min(settings.concurrent,fleet.length)-1)/2)*balance.combat.laneSpacing;
    const flank=e.behavior==='flank',guard=e.behavior==='guard'||e.behavior==='flagship';
-   e.x=balance.enemyX+Math.sin(a)*settings.drift*(guard?.5:1)-(flank?(1-Math.cos(age*.3))*Math.min(55,settings.drift*2):0);
-   e.z=lane+Math.sin(a*.8)*settings.drift*(flank?1.2:.4);
-   e.vx=age<=dt?0:(e.x-oldX)/dt;e.vz=age<=dt?0:(e.z-oldZ)/dt;
-   if(Math.hypot(e.vx,e.vz)>.01)e.heading=Math.atan2(e.vz,e.vx);
+   // Flankers still close in over time; the patrol itself sails a readable route around the station.
+   // Stations are staggered in range as well as lane, so overlapping patrol widths never share a track.
+   const spacing=balance.patrol?.depthStagger??64,station=balance.enemyX+spacing*(e.slot-(Math.min(settings.concurrent,fleet.length)-1)/2);
+   // A flanker closes in, but never onto the track of a nearer station.
+   let centreX=station-(flank?(1-Math.cos(age*.3))*Math.min(55,settings.drift*2):0);
+   if(flank)for(const o of enemies)if(o!==e&&o.active&&o.hp>0&&o.patrol&&o.patrol.cx<station-1)centreX=Math.max(centreX,o.patrol.cx+spacing);
+   if(!e.patrol||e.patrolSpawn!==e.spawnTime){e.patrol=createNavalPatrol({x:centreX,z:lane,index:e.index,seed,stage:level,behavior:e.behavior,scale:e.hullScale||1},balance);e.patrolSpawn=e.spawnTime;e.x=e.patrol.x;e.z=e.patrol.z;}
+   const obstacles=[{x:playerShip.x,z:playerShip.z},...enemies.filter(o=>o!==e&&o.active&&o.hp>0).map(o=>({x:o.x,z:o.z}))];
+   stepNavalPatrol(e.patrol,dt,{obstacles,shellAirborne:ball.active||extraShots.length>0,centreX},balance);
+   e.x=e.patrol.x;e.z=e.patrol.z;
+   e.vx=age<=dt?Math.cos(e.patrol.heading)*e.patrol.speed:(e.x-oldX)/dt;e.vz=age<=dt?Math.sin(e.patrol.heading)*e.patrol.speed:(e.z-oldZ)/dt;e.heading=e.patrol.heading;
    e.depth=type.submarine&&age%balance.combat.submarineCycle>balance.combat.submarineSurface?1:0;
    if(!e.attack&&time>=e.fireAt){
     const error=settings.enemyAimError*60;
@@ -280,9 +288,9 @@ export function drawNaval(p,m,{config,balance,art,quality,view,t}){
 /** Optional 30 ms buzz on a weak-centre hit, on devices that support it, unless turned off. */
 export function navalBuzz(storage,nav=globalThis.navigator){try{if(storage?.getItem('island.naval.vibration')==='off')return false;if(typeof nav?.vibrate!=='function')return false;return nav.vibrate(30)!==false;}catch{return false;}}
 export function startNaval(ctx){
- if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=island-naval-aim-20261027-1',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
- if(!document.querySelector('[data-g6e-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g6e-naval.css?v=island-naval-aim-20261027-1',import.meta.url).href;link.dataset.g6eStyle='';document.head.append(link);}
- if(!document.querySelector('[data-naval-aim-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-aim.css?v=island-naval-aim-20261027-1',import.meta.url).href;link.dataset.navalAimStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=island-naval-aim-20261027-2',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-g6e-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g6e-naval.css?v=island-naval-aim-20261027-2',import.meta.url).href;link.dataset.g6eStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-aim-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-aim.css?v=island-naval-aim-20261027-2',import.meta.url).href;link.dataset.navalAimStyle='';document.head.append(link);}
  let model,view,storage,rawUpdate=null;const picker=mountNavalWeaponPicker(ctx,()=>model);try{storage=globalThis.localStorage;}catch{}const audio=createNavalAudio({storage});let soundLog=null;const audioEvents=new AbortController();for(const type of ['pointerdown','keydown'])document.addEventListener(type,()=>audio.unlock(),{signal:audioEvents.signal});const input=createNavalInput(ctx,()=>model,()=>view);
  try{
   const session=runCanvasGame({...ctx,config:{...ctx.config,height:ctx.balance.render.height}},args=>{model=createNavalModel({...args,sound:name=>{if(soundLog&&soundLog.length<2000)soundLog.push({name,t:model?model.time:0});audio.play(name);}});const update=model.update;rawUpdate=update;let buzzed=-1;model.update=(dt,raw)=>{update(dt,input.sample(raw));const f=model.lastFeedback;if(f?.kind==='critical'&&f.time!==buzzed){buzzed=f.time;navalBuzz(storage);}audio.update(model.playerShip.speed||0,model.time);picker.update();};return model;},drawNaval,(args,m)=>view=createNavalView(args,m));

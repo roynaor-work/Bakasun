@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from './local-models.mjs?v=island-naval-aim-20261027-1';
+import {LocalModels} from './local-models.mjs?v=island-naval-aim-20261027-2';
 
 const PALM='assets/models/palm-tree-512.glb';
 /** Preserve the supplied Meshy geometry, maps and material. All palms share a draw. */
