@@ -78,16 +78,15 @@ function targetCount(type,stage){
 }
 function districtAnchor(type,state,ordinal){
   const size=state.world.size,hall=state.buildings.find(row=>row.typeId==='cityHall'),home=hall?{x:hall.x+.5,z:hall.z+.5}:{x:size*.27,z:size*.3};
-  const normalized={
-    harbor:[.03,.48],factory:[.8,.15],farm:[.65,.16],powerPlant:[.86,.28],
-    soccer:[.73,.54],tennis:[.87,.68],basketball:[.69,.76],pool:[.88,.87],athletics:[.62,.9],
-    wall:[.93,.12],watchtower:[.93,.5],shield:[.92,.93],embassy:[.08,.91],airbase:[.42,.92],
-  }[type.id];
-  if(normalized)return {x:normalized[0]*size,z:normalized[1]*size};
-  if(type.category==='learning')return {x:size*.28,z:size*.79};
+  if(type.id==='harbor')return {x:0,z:home.z+1};
+  // Adjacent, unequal neighborhoods grow from the existing town rather than
+  // scaling every destination towards the far corners of a larger island.
+  const offsets={factory:[8,-3],farm:[6,-6],powerPlant:[11,-1],soccer:[6,4],tennis:[9,5],basketball:[5,8],pool:[9,9],athletics:[3,11],wall:[12,2],watchtower:[12,6],shield:[12,10],embassy:[-3,8],airbase:[7,12],airport:[21,9]}[type.id];
+  if(offsets)return {x:Math.max(1,Math.min(size-2,home.x+offsets[0])),z:Math.max(1,Math.min(size-2,home.z+offsets[1]))};
+  if(type.category==='learning')return {x:home.x-2,z:home.z+5};
   // The first water tower and civic services still cover the older homes.
   // Further water slots join the utilities district, with industry away from it.
-  if(type.id==='waterTower')return ordinal===0?{x:home.x+3,z:home.z-2}:{x:size*.62,z:size*.23};
+  if(type.id==='waterTower')return ordinal===0?{x:home.x+3,z:home.z-2}:{x:home.x+8,z:home.z-2};
   if(type.category==='services')return {x:home.x+3,z:home.z+2};
   return home;
 }
@@ -132,7 +131,7 @@ export function prepareReadyPlan(state,registry,flags={}){
   for(const row of state.buildings){const set=registry.buildings.get(row.typeId)?.isRoad?originalRoads:hard;for(const cell of cellKeys(row,registry,size))set.add(cell);}
   for(const row of zones(state,registry))for(const cell of cellKeys(row,registry,size))hard.add(cell);
   const reserved=new Set();for(const lot of lots)for(const cell of cellKeys(lot,registry,size)){hard.add(cell);reserved.add(cell);}
-  const types=[...registry.buildings.values()].filter(type=>eligible(type,flags));
+  const types=[...registry.buildings.values()].filter(type=>eligible(type,flags)&&stage>=(type.minWorldStage||0));
   const append=lot=>{
     let number=1,id;do{id=`ready-${lot.typeId}-${number++}`;}while(lotIds.has(id));
     const row={id,typeId:lot.typeId,x:lot.x,z:lot.z};lots.push(row);lotIds.add(id);
@@ -164,7 +163,12 @@ export function prepareReadyPlan(state,registry,flags={}){
       const access=[...adjacentCells(lot,type,size)].some(cell=>connected.has(cell));
       if(!beforeGrid&&type.requiresRoad&&!access&&newRoads.size>=roadBudget)continue;
       // The fixed north/west shoreline survives every positive-axis expansion.
-      const score=(!beforeGrid&&type.requiresRoad&&!access?100000:0)+Math.hypot(x+type.footprint[0]/2-anchor.x,z+type.footprint[1]/2-anchor.z);
+      let score=(!beforeGrid&&type.requiresRoad&&!access?3:0)+Math.hypot(x+type.footprint[0]/2-anchor.x,z+type.footprint[1]/2-anchor.z);
+      if(type.id==='waterTower'&&!lots.some(lot=>lot.typeId==='waterTower'))for(const home of [...state.buildings,...lots].filter(row=>row.typeId==='house')){
+        const [w,d]=registry.buildings.get('house').footprint;
+        if(Math.hypot(x+(type.footprint[0]-1)/2-home.x-(w-1)/2,z+(type.footprint[1]-1)/2-home.z-(d-1)/2)<=type.radius)score-=2;
+        else if(home===[...state.buildings,...lots].find(row=>row.typeId==='house'))score+=30;
+      }
       result.push({lot,score});
     }
     return result.sort((a,b)=>a.score-b.score||a.lot.z-b.lot.z||a.lot.x-b.lot.x).map(row=>row.lot);
@@ -174,7 +178,8 @@ export function prepareReadyPlan(state,registry,flags={}){
   for(const type of types.filter(type=>type.requiresShore))for(let n=deficit(type);n>0;n--){
     const lot=candidates(type,true)[0];if(!lot)break;coastal.push(lot);for(const cell of cellKeys(lot,registry,size))hard.add(cell);
   }
-  for(let z=0;z<size;z++)for(let x=0;x<size;x++)if(x>0&&x%5===0||z>0&&z%5===0){const cell=z*size+x;if(!hard.has(cell)&&!roads.has(cell)){roads.add(cell);newRoads.add(cell);}}
+  // Keep existing streets, then add only the legal links needed by each plot.
+  // There is no island-wide lattice and no uniform block size to force.
   let root=[...originalRoads].sort((a,b)=>distance(a)-distance(b)||a-b)[0];
   if(root===undefined){
     const hallType=hall&&registry.buildings.get(hall.typeId),beside=hallType?[...adjacentCells(hall,hallType,size)].filter(cell=>!hard.has(cell)):[];

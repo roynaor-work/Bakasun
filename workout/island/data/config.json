@@ -1194,6 +1194,36 @@
     3,
     3
    ]
+  },
+  "airport": {
+   "footprint": [
+    7,
+    4
+   ],
+   "cost": 420,
+   "radius": 8,
+   "income": 10,
+   "effects": {
+    "economy": 12
+   },
+   "minWorldStage": 1,
+   "levels": [
+    {
+     "cost": 0
+    }
+   ],
+   "visual": {
+    "height": 1.25
+   },
+   "limit": {
+    "kind": "unique",
+    "maxCount": [
+     1,
+     1,
+     1
+    ],
+    "reason": "reason.limit.airport"
+   }
   }
  },
  "minigames": {

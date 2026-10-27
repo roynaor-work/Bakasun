@@ -5,6 +5,7 @@ import { levelValue, population } from './metrics.mjs?v=island-city-finish-20261
 export function placementAvailability(state, registry, typeId) {
   const type = registry.buildings.get(typeId);
   if (!type) return { ok: false, reason: 'reason.invalid' };
+  if((state.world.stage||0)<(type.minWorldStage||0))return {ok:false,reason:'reason.futureDistrict'};
   if(type.unlockAfter&&!state.buildings.some(b=>b.typeId===type.unlockAfter))return {ok:false,reason:'reason.learningOrder'};
   const limit = type.limit;
   if (!limit || limit.kind === 'free') return { ok: true, reason: 'reason.allowed' };

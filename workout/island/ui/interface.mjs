@@ -231,7 +231,7 @@ export class IslandInterface {
     this.dockToggle.setAttribute('aria-label',this.t(open?'app.close':'hud.build'));
     this.catalog.hidden = !open;
     this.catalogHint.hidden = !open;
-    if (open) {this.closeDetails();this.closeInfo();this.setMoreOpen(false);}
+    if (open) {this.view.setTour?.(false);this.closeDetails();this.closeInfo();this.setMoreOpen(false);}
   }
   drawCityToggle(money){this.cityToggle.replaceChildren(compactStat('●',Math.floor(money).toLocaleString('he-IL'),this.t('app.money')));this.cityToggle.setAttribute('aria-label',`${this.t('app.city')} · ${Math.floor(money).toLocaleString('he-IL')} ${this.t('app.money')}`);}
   syncPlacementLayout() {
