@@ -47,9 +47,10 @@ const GAMES_AFTER_18=['streetSlam','alpineRush'];
  * equipment, the same way islandRacing joined in 16 -> 17. Additive only. */
 function addNewGame(state,old,data,id){
   if(!data?.config?.minigameLevels?.[id])return state;
-  if(isObject(old.minigameLevels)&&!Object.hasOwn(old.minigameLevels,id))state.minigameLevels={...old.minigameLevels,[id]:1};
-  if(isObject(old.minigameProgress)&&!Object.hasOwn(old.minigameProgress,id))state.minigameProgress={...old.minigameProgress,[id]:initialProgress(data)[id]};
-  if(isObject(old.minigameEquipment)&&!Object.hasOwn(old.minigameEquipment,id))state.minigameEquipment={...old.minigameEquipment,[id]:initialEquipment(data)[id]};
+  // Spread the state being built (not old): with several new games each one keeps the previous additions.
+  if(isObject(old.minigameLevels)&&!Object.hasOwn(old.minigameLevels,id))state.minigameLevels={...state.minigameLevels,[id]:1};
+  if(isObject(old.minigameProgress)&&!Object.hasOwn(old.minigameProgress,id))state.minigameProgress={...state.minigameProgress,[id]:initialProgress(data)[id]};
+  if(isObject(old.minigameEquipment)&&!Object.hasOwn(old.minigameEquipment,id))state.minigameEquipment={...state.minigameEquipment,[id]:initialEquipment(data)[id]};
   return state;
 }
 
