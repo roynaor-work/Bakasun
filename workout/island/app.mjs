@@ -1,16 +1,16 @@
-import {watchRelease} from './ui/release-watch.mjs?v=island-city-finish-20261027-1';
-import './view/learning-buildings.mjs?v=island-city-finish-20261027-1';
-import {LearningInterface} from './learning/interface.mjs?v=island-city-finish-20261027-1';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-city-finish-20261027-1';
-import {createTranslator} from './ui/translate.mjs?v=island-city-finish-20261027-1';
-import { loadData } from './engine/load-data.mjs?v=island-city-finish-20261027-1';
-import { createEngine } from './engine/engine.mjs?v=island-city-finish-20261027-1';
-import { IslandView } from './view/island-view.mjs?v=island-city-finish-20261027-1';
-import { IslandInterface } from './ui/interface.mjs?v=island-city-finish-20261027-1';
-import {createActivity} from './activity/runtime.mjs?v=island-city-finish-20261027-1';
-import {ActivityInterface} from './ui/activity.mjs?v=island-city-finish-20261027-1';
-import {installPressFeedback} from './ui/press.mjs?v=island-city-finish-20261027-1';
-import {installGameShell} from './ui/game-shell.mjs?v=island-city-finish-20261027-1';
+import {watchRelease} from './ui/release-watch.mjs?v=island-alpine-20261027-1';
+import './view/learning-buildings.mjs?v=island-alpine-20261027-1';
+import {LearningInterface} from './learning/interface.mjs?v=island-alpine-20261027-1';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-alpine-20261027-1';
+import {createTranslator} from './ui/translate.mjs?v=island-alpine-20261027-1';
+import { loadData } from './engine/load-data.mjs?v=island-alpine-20261027-1';
+import { createEngine } from './engine/engine.mjs?v=island-alpine-20261027-1';
+import { IslandView } from './view/island-view.mjs?v=island-alpine-20261027-1';
+import { IslandInterface } from './ui/interface.mjs?v=island-alpine-20261027-1';
+import {createActivity} from './activity/runtime.mjs?v=island-alpine-20261027-1';
+import {ActivityInterface} from './ui/activity.mjs?v=island-alpine-20261027-1';
+import {installPressFeedback} from './ui/press.mjs?v=island-alpine-20261027-1';
+import {installGameShell} from './ui/game-shell.mjs?v=island-alpine-20261027-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

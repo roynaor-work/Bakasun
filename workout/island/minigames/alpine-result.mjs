@@ -1,5 +1,5 @@
-import {alpineReward, alpineTrack} from './alpine-engine.mjs?v=island-city-finish-20261027-1';
-import {generateCourse} from './alpine-track.mjs?v=island-city-finish-20261027-1';
+import {alpineReward, alpineTrack} from './alpine-engine.mjs?v=island-alpine-20261027-1';
+import {generateCourse} from './alpine-track.mjs?v=island-alpine-20261027-1';
 
 /** Island reward contract for Alpine Rush. The settlement is recomputed from the
  * validated race summary; any field that disagrees rejects the whole result. */

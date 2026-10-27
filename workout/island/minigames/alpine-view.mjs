@@ -1,9 +1,9 @@
 import * as THREE from '../vendor/three.module.js';
-import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-city-finish-20261027-1';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-city-finish-20261027-1';
-import {createProRider} from './athlete.mjs?v=island-city-finish-20261027-1';
-import {createAlpineScenery} from './alpine-scenery.mjs?v=island-city-finish-20261027-1';
-import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-city-finish-20261027-1';
+import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-alpine-20261027-1';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-alpine-20261027-1';
+import {createProRider} from './athlete.mjs?v=island-alpine-20261027-1';
+import {createAlpineScenery} from './alpine-scenery.mjs?v=island-alpine-20261027-1';
+import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-alpine-20261027-1';
 
 /** Alpine Rush presentation (Codex design package view, rebuilt for the curved halfpipe).
  * Renders a SkiFrame only: positions, collisions, tricks and results belong to the engine.
@@ -12,7 +12,7 @@ import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island
  * terrain are static chunk meshes (culled by distance); trees, flags, coins and obstacles
  * are bounded pools. Graphics v5 uses an adapted adult Mixamo model with authored
  * sports headgear, articulated poses and a primitive fallback. Engine rules are unchanged. */
-export async function createSkiView(host, {canvas, modelUrl = new URL('../assets/alpine-rush/athlete.glb?v=island-city-finish-20261027-1', import.meta.url).href, quality: initialQuality = 'high', maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}} = {}) {
+export async function createSkiView(host, {canvas, modelUrl = new URL('../assets/alpine-rush/athlete.glb?v=island-alpine-20261027-1', import.meta.url).href, quality: initialQuality = 'high', maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}} = {}) {
   if (!course?.path || !physics) throw new Error('alpine.view.course');
   const renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: false, powerPreference: 'high-performance'});
   let quality = initialQuality, disposed = false, ro = null;
@@ -41,7 +41,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
 
   const textureLoader=new THREE.TextureLoader();
   // Textures ship as WebP (3.4 MB with the rider instead of 15 MB of PNG); only the stage's own sky loads.
-  const asset=name=>new URL(`../assets/alpine-rush/${name}?v=island-city-finish-20261027-1`,import.meta.url).href;
+  const asset=name=>new URL(`../assets/alpine-rush/${name}?v=island-alpine-20261027-1`,import.meta.url).href;
   const [granite,treePhoto,backdrop]=await Promise.all([textureLoader.loadAsync(asset('granite-v5.webp')),textureLoader.loadAsync(asset('snow-fir.webp')),textureLoader.loadAsync(asset(dusk?'alpine-dusk-v5.webp':'alpine-panorama.webp'))]);
   const panorama=backdrop,panoramaDusk=backdrop;
   for(const tex of [granite,treePhoto,backdrop])tex.colorSpace=THREE.SRGBColorSpace;granite.wrapS=granite.wrapT=THREE.RepeatWrapping;granite.anisotropy=8;stone.map=granite;stone.color.set('#d9e2e7');stone.needsUpdate=true;
