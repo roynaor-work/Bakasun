@@ -1,6 +1,6 @@
-import {moveAlienPlayer} from './g2m-motion.mjs?v=island-city-finish-20261027-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-city-finish-20261027-1';
-import {createPool,releaseAt} from './pool.mjs?v=island-city-finish-20261027-1';
+import {moveAlienPlayer} from './g2m-motion.mjs?v=island-easy-city-20261027-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-easy-city-20261027-1';
+import {createPool,releaseAt} from './pool.mjs?v=island-easy-city-20261027-1';
 import {createAlienEntity,separateAliens,alienStack,segmentContact} from './alien-flight-combat.mjs';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2,clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
