@@ -1,16 +1,18 @@
-import {watchRelease} from './ui/release-watch.mjs?v=island-city-finish-20261027-1';
-import './view/learning-buildings.mjs?v=island-city-finish-20261027-1';
-import {LearningInterface} from './learning/interface.mjs?v=island-city-finish-20261027-1';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-city-finish-20261027-1';
-import {createTranslator} from './ui/translate.mjs?v=island-city-finish-20261027-1';
-import { loadData } from './engine/load-data.mjs?v=island-city-finish-20261027-1';
-import { createEngine } from './engine/engine.mjs?v=island-city-finish-20261027-1';
-import { IslandView } from './view/island-view.mjs?v=island-city-finish-20261027-1';
-import { IslandInterface } from './ui/interface.mjs?v=island-city-finish-20261027-1';
-import {createActivity} from './activity/runtime.mjs?v=island-city-finish-20261027-1';
-import {ActivityInterface} from './ui/activity.mjs?v=island-city-finish-20261027-1';
-import {installPressFeedback} from './ui/press.mjs?v=island-city-finish-20261027-1';
-import {installGameShell} from './ui/game-shell.mjs?v=island-city-finish-20261027-1';
+import {watchRelease} from './ui/release-watch.mjs?v=island-easy-city-20261027-1';
+import './view/learning-buildings.mjs?v=island-easy-city-20261027-1';
+import {LearningInterface} from './learning/interface.mjs?v=island-easy-city-20261027-1';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-easy-city-20261027-1';
+import {createTranslator} from './ui/translate.mjs?v=island-easy-city-20261027-1';
+import { loadData } from './engine/load-data.mjs?v=island-easy-city-20261027-1';
+import { createEngine } from './engine/engine.mjs?v=island-easy-city-20261027-1';
+import { IslandView } from './view/island-view.mjs?v=island-easy-city-20261027-1';
+import { IslandInterface } from './ui/interface.mjs?v=island-easy-city-20261027-1';
+import {createActivity} from './activity/runtime.mjs?v=island-easy-city-20261027-1';
+import {ActivityInterface} from './ui/activity.mjs?v=island-easy-city-20261027-1';
+import {installPressFeedback} from './ui/press.mjs?v=island-easy-city-20261027-1';
+import {installGameShell} from './ui/game-shell.mjs?v=island-easy-city-20261027-1';
+import {CityAccess} from './ui/city-access.mjs?v=island-easy-city-20261027-1';
+import {navigationActive} from './view/city-navigation.mjs?v=island-easy-city-20261027-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -35,15 +37,17 @@ try {
     onError: id => { if (ui) ui.toast(id); else root.textContent = t(id); }
   });
   ui = new IslandInterface({ root, engine, view, data, t });
-  const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length),onLaunch:choice=>games.autoLaunch(choice)});
+  const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length||navigationActive(view)||ui.cityAccess?.mapPanel?.hidden===false),onLaunch:choice=>games.autoLaunch(choice)});
   const learning=new LearningInterface({ui,engine});
   const games=new ActivityInterface({ui,engine,activity,data,t});
+  const cityAccess=new CityAccess({ui,engine,games,learning});
+  ui.cityAccess=cityAccess;
   const stopShell=installGameShell({games,ui,t,countdownStepMs:data.config.ui.economyTickMs});
   const pressSamples=[];
   const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});
   const releaseWatch=watchRelease({version:DATA_VERSION,
     check:async()=>{const response=await fetch(new URL('./release.json?check='+Date.now(),import.meta.url),{cache:'no-store'});if(!response.ok)return null;return (await response.json()).version;},
-    canRefresh:()=>!document.hidden&&!engine.isMinigameActive()&&!ui.modalRoot.children.length&&!ui.selected,
+    canRefresh:()=>!document.hidden&&!engine.isMinigameActive()&&!ui.modalRoot.children.length&&!ui.selected&&!navigationActive(view)&&ui.cityAccess?.mapPanel?.hidden!==false,
     save:()=>engine.save(),refresh:version=>{const url=new URL(location.href);url.searchParams.set('release',version);location.replace(url.href);},
     listen:check=>{const resume=()=>{if(!document.hidden)check();};document.addEventListener('visibilitychange',resume);return ()=>document.removeEventListener('visibilitychange',resume);}
   });
@@ -66,7 +70,7 @@ try {
   const persist = () => engine.save();
   document.addEventListener('visibilitychange', persist);
   window.addEventListener('pagehide', persist);
-  window.addEventListener('beforeunload', () => { clearInterval(tick);releaseWatch.dispose();stopShell();stopPress();stopGameShortcut();ui.cityManagement.dispose();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
+  window.addEventListener('beforeunload', () => { clearInterval(tick);releaseWatch.dispose();stopShell();stopPress();stopGameShortcut();cityAccess.dispose();ui.cityManagement.dispose();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
   if (new URLSearchParams(location.search).get('dev') === '1') {
     window.__island = { engine, view, ui, data, activity, games,learning,pressSamples };
   }

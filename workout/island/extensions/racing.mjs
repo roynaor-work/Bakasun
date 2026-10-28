@@ -1,5 +1,5 @@
-import {runRacingSession} from '../minigames/racing-session.mjs?v=island-city-finish-20261027-1';
-import {racingResult} from '../minigames/racing-result.mjs?v=island-city-finish-20261027-1';
+import {runRacingSession} from '../minigames/racing-session.mjs?v=island-easy-city-20261027-1';
+import {racingResult} from '../minigames/racing-result.mjs?v=island-easy-city-20261027-1';
 
 /** Uses the same lifecycle and reward contract as the other island games. */
 export function install(registry,data) {

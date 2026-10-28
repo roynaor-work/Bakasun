@@ -14,7 +14,7 @@ class Element{
   getAttribute(key){return this.attributes[key];}
   addEventListener(type,handler){(this.events[type]||=[]).push(handler);}
   contains(item){for(let n=item;n;n=n.parentElement)if(n===this)return true;return false;}
-  closest(selector){for(let n=this;n;n=n.parentElement)if(selector==='button'&&n.tagName==='BUTTON')return n;return null;}
+  closest(selector){for(let n=this;n;n=n.parentElement)if(selector.split(',').some(s=>s==='button'&&n.tagName==='BUTTON'||s==='a'&&n.tagName==='A'||s==='[role="button"]'&&n.attributes.role==='button'))return n;return null;}
   querySelectorAll(selector){const matches=item=>selector.startsWith('.')?item.className?.split(' ').includes(selector.slice(1)):selector.startsWith('[data-action=')?item.dataset.action===selector.slice(13,-1):item.tagName===selector.toUpperCase();return this.children.flatMap(child=>[...(matches(child)?[child]:[]),...child.querySelectorAll(selector)]);}
   querySelector(selector){return this.querySelectorAll(selector)[0]||null;}
   getBoundingClientRect(){return {width:390,height:44};}
@@ -56,4 +56,11 @@ test('Home clears the selected prepared lot before returning to the overview wit
 
 test('daily learning remains reachable inside Tasks and retains its own daily action',()=>{
   const f=fixture();let learning;try{const {ui}=f;let daily=0;ui.modalRoot=new Element('div');ui.engine.refreshLearningDay=()=>{};ui.engine.learningRound=()=>null;ui.engine.learningStatus=()=>({complete:true,target:1,rounds:1});ui.engine.subscribe=()=>()=>{};learning=new LearningInterface({ui,engine:ui.engine});learning.daily=()=>{daily++;};assert.equal(learning.panel.parentElement,ui.tasksContent);assert.equal(ui.mission.hidden,true);ui.tasksToggle.onclick();assert.equal(ui.mission.hidden,false);learning.mapButton.onclick();assert.equal(daily,1);assert.match(learning.mapButton.textContent,/1\/1/);}finally{learning?.dispose();f.restore();}
+});
+
+test('the trusted click guard accepts a workout link across its children and still blocks world-to-new-button retargeting',()=>{
+  const f=fixture();try{const link=new Element('a'),strong=new Element('strong'),span=new Element('span');link.append(strong,span);let blocked=false;
+    for(const handle of f.events.pointerdown)handle({target:strong});for(const handle of f.events.click)handle({target:link,isTrusted:true,detail:1,preventDefault(){blocked=true;},stopImmediatePropagation(){}});assert.equal(blocked,false);
+    for(const handle of f.events.pointerdown)handle({target:new Element('canvas')});for(const handle of f.events.click)handle({target:new Element('button'),isTrusted:true,detail:1,preventDefault(){blocked=true;},stopImmediatePropagation(){}});assert.equal(blocked,true);
+  }finally{f.restore();}
 });

@@ -1,11 +1,12 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-city-finish-20261027-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-city-finish-20261027-1';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-city-finish-20261027-1';
-import {CityDepthInterface} from './city-depth.mjs?v=island-city-finish-20261027-1';
-import {CityManagementInterface} from './city-management.mjs?v=island-city-finish-20261027-1';
-import {nearestCityZone} from '../engine/city-management.mjs?v=island-city-finish-20261027-1';
-import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-city-finish-20261027-1';
-import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-city-finish-20261027-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-easy-city-20261027-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-easy-city-20261027-1';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-easy-city-20261027-1';
+import {CityDepthInterface} from './city-depth.mjs?v=island-easy-city-20261027-1';
+import {CityManagementInterface} from './city-management.mjs?v=island-easy-city-20261027-1';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-easy-city-20261027-1';
+import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-easy-city-20261027-1';
+import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-easy-city-20261027-1';
+import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-easy-city-20261027-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -63,6 +64,7 @@ export class IslandInterface {
   toast(id, values) {
     const node = document.querySelector('#toast');
     node.textContent = this.t(id, values);
+    node.dataset.airportSpace=String(id==='ready.airportNoSpaceNext'||id==='ready.airportNoSpaceFinal');
     node.classList.add('visible');
     // The HUD is inert behind a modal. Keep modal feedback in its own flow
     // below the subtitle, so errors remain visible and announced there too.
@@ -183,7 +185,7 @@ export class IslandInterface {
     // compatibility click to a new button under the finger. Only the control
     // where this gesture started may receive that click; keyboard clicks pass.
     document.addEventListener('pointerdown', event => {
-      this.pointerOrigin = event.target.closest('button') ?? event.target;
+      this.pointerOrigin = event.target.closest('button,a,[role="button"]') ?? event.target;
       if (!this.city.contains(event.target) && !this.mission.contains(event.target)&&!this.tasksToggle.contains(event.target)) this.closeDetails();
       if(!this.cameraControls.contains(event.target))this.setMoreOpen(false);
     }, true);
@@ -192,7 +194,7 @@ export class IslandInterface {
       const origin = this.pointerOrigin;
       if (!event.isTrusted || event.detail === 0 || !origin) return;
       this.pointerOrigin = null;
-      const target = event.target.closest('button') ?? event.target;
+      const target = event.target.closest('button,a,[role="button"]') ?? event.target;
       if (target !== origin) { event.preventDefault(); event.stopImmediatePropagation(); }
     }, true);
     document.addEventListener('keydown', event => { if (event.key === 'Escape'){if(this.zoneKind){this.cancelPlacement();this.cityManagement.open('zones');}else{this.closeDetails();this.setDockOpen(false);this.setMoreOpen(false,true);}} });
@@ -231,7 +233,7 @@ export class IslandInterface {
     this.dockToggle.setAttribute('aria-label',this.t(open?'app.close':'hud.build'));
     this.catalog.hidden = !open;
     this.catalogHint.hidden = !open;
-    if (open) {this.closeDetails();this.closeInfo();this.setMoreOpen(false);}
+    if (open) {this.view.setTour?.(false);this.closeDetails();this.closeInfo();this.setMoreOpen(false);}
   }
   drawCityToggle(money){this.cityToggle.replaceChildren(compactStat('●',Math.floor(money).toLocaleString('he-IL'),this.t('app.money')));this.cityToggle.setAttribute('aria-label',`${this.t('app.city')} · ${Math.floor(money).toLocaleString('he-IL')} ${this.t('app.money')}`);}
   syncPlacementLayout() {
@@ -361,24 +363,29 @@ export class IslandInterface {
       b.classList.toggle('locked', !!record.locked);
       b.setAttribute('aria-pressed', String(b.dataset.building === this.selected));
       const availability = placementAvailability(this.engine.state, this.engine.registry, record.id);
-      if(availability.reason==='reason.learningOrder')b.classList.add('locked');
+      const noSpace=record.id==='airport'?airportSpaceReason(this.engine.state,this.engine.registry,this.data.featureFlags):null;
+      if(['reason.learningOrder','reason.futureDistrict'].includes(availability.reason))b.classList.add('locked');
       const hint = b.querySelector('.building-hint');
-      const label = record.locked ? null : !availability.ok ? record.limit.kind === 'capacity' && availability.reason === record.limit.reason ? 'app.noNeed' : 'app.atLimit' : availability.recommended ? 'app.recommended' : null;
+      const label = noSpace || (record.locked ? null : !availability.ok ? availability.reason==='reason.futureDistrict' ? availability.reason : record.limit.kind === 'capacity' && availability.reason === record.limit.reason ? 'app.noNeed' : 'app.atLimit' : availability.recommended ? 'app.recommended' : null);
       hint.textContent = availability.reason==='reason.learningOrder'?`${this.t('reason.learningOrder')}: ${this.label(this.getBuilding(record.unlockAfter),'building')}`:label?this.t(label):'';
       if (!record.locked && !availability.ok && availability.reason!=='reason.learningOrder' && record.limit.kind === 'unique' && record.levels.length>1) hint.textContent += ` · ${this.t('app.upgradeExisting')}`;
       hint.hidden = !label;
       b.dataset.limit = record.limit?.kind ?? 'free';
-      b.dataset.availability = !availability.ok ? 'limited' : availability.recommended ? 'recommended' : 'available';
-      b.title = !record.locked && !availability.ok ? this.t(availability.reason) : '';
+      b.dataset.availability = noSpace?'no-space':!availability.ok ? 'limited' : availability.recommended ? 'recommended' : 'available';
+      b.title = noSpace?this.t(noSpace):!record.locked && !availability.ok ? this.t(availability.reason) : '';
     }
   }
   selectBuilding(id,{manual=false}={}) {
     this.zoneKind=null;
     const building = this.getBuilding(id);
     if (!building) return;
+    const noSpace=id==='airport'?airportSpaceReason(this.engine.state,this.engine.registry,this.data.featureFlags):null;
+    if(noSpace){this.toast(noSpace);return;}
+    const availability=placementAvailability(this.engine.state,this.engine.registry,id);
+    if(availability.reason==='reason.futureDistrict'){this.toast(availability.reason);return;}
     if(this.readyPlots?.active&&!manual){this.category=building.category;this.readyPlots.chooseType(id);return;}
     if (building.locked) { this.toast('reason.locked'); return; }
-    if(placementAvailability(this.engine.state,this.engine.registry,id).reason==='reason.learningOrder'){this.toast('reason.learningOrder');return;}
+    if(availability.reason==='reason.learningOrder'){this.toast('reason.learningOrder');return;}
     this.closeInfo();
     this.movingId = null;
     this.selected = id;
@@ -470,6 +477,7 @@ export class IslandInterface {
     this.selectBuilding(typeId,{manual:true});this.zoneKind=kind;this.zoneSessionCount=0;this.root.dataset.cityZoning=kind;this.refreshSiteSuggestions();this.updateGhost(this.findCell(typeId),false);
   }
   showInfo(id, {manage=false}={}) {
+    this.cityAccess?.toggleMap(false);
     if(this.cityManagement?.panel)this.closeModal();
     const instance=this.engine.state.buildings.find(b=>b.id===id),station=this.getBuilding(instance?.typeId)?.learningStation;
     if(!this.selected&&station&&!manage&&this.learningInterface){this.learningInterface.start(station);return;}
@@ -584,6 +592,7 @@ export class IslandInterface {
     return null;
   }
   openModal(titleId, subtitleId,{blocking=true}={}) {
+    this.cityAccess?.toggleMap(false);
     this.setMoreOpen(false);
     this.modalCleanup?.(); this.modalCleanup = null;
     this.modalRoot.replaceChildren();
