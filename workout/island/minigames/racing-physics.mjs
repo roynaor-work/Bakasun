@@ -1,4 +1,4 @@
-import { createTrack, getRacingStage, racingAngle, wrapRacingDistance } from './racing-tracks.mjs?v=island-alpine-20261027-1';
+import { createTrack, getRacingStage, racingAngle, wrapRacingDistance } from './racing-tracks.mjs?v=island-hoops-feel-20261027-1';
 
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);

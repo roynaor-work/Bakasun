@@ -1,7 +1,7 @@
 # City finish visual review — 27 October 2026
 
 Base: `12177da` (main after PR179). Prior world pass: `b8a87b2`.
-Release/cache stamp: `island-city-finish-20261027-1`.
+Release/cache stamp: `island-hoops-feel-20261027-1`.
 
 ## Like-for-like captures
 

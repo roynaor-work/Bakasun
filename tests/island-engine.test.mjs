@@ -29,7 +29,8 @@ function finishTutorial(engine) {
 
 test('island bundled data loads through local file URLs and joins balance values for the view', () => {
   assert.ok(requested.every(url => url.startsWith('file:')));
-  assert.equal(base.buildings.filter(b => !b.locked).length, 25);
+  assert.equal(base.buildings.filter(b => !b.locked).length, 26);
+  assert.equal(base.buildings.find(b=>b.id==='airport').minWorldStage,1);
   assert.equal(base.buildings.find(b=>b.id==='powerPlant').resources.energy,14);
   assert.equal(base.buildings.find(b => b.id === 'house').cost, base.config.buildings.house.cost);
   assert.deepEqual(base.buildings.find(b => b.id === 'soccer').footprint, [3, 2]);

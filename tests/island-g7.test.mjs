@@ -60,7 +60,7 @@ test('G7 nearest legal placement snaps occupied anchors and is deterministic wit
  assert.deepEqual(e.state,before);assert.deepEqual(nearestPlacement(e.state,e.registry,'soccer',point,undefined,data.featureFlags),cell);
 });
 for(const type of data.buildings.filter(b=>!b.locked&&!b.featureFlag))test(`G7 placement help finds an allowed anchor for ${type.id}`,()=>{
- const e=engine();const prerequisites=[];let prior=type.unlockAfter;while(prior){prerequisites.unshift(prior);prior=e.registry.buildings.get(prior).unlockAfter;}for(const id of prerequisites){const cell=nearestPlacement(e.state,e.registry,id,{x:8,z:8},undefined,data.featureFlags);assert.ok(e.place(id,cell.x,cell.z).ok);}
+ const e=engine();if(type.minWorldStage)e.grantParts(data.world.partGroup,data.config.worldStages[type.minWorldStage].requiredParts);const prerequisites=[];let prior=type.unlockAfter;while(prior){prerequisites.unshift(prior);prior=e.registry.buildings.get(prior).unlockAfter;}for(const id of prerequisites){const cell=nearestPlacement(e.state,e.registry,id,{x:8,z:8},undefined,data.featureFlags);assert.ok(e.place(id,cell.x,cell.z).ok);}
  const ignoreId=type.id==='cityHall'?e.state.buildings.find(b=>b.typeId==='cityHall').id:undefined,cell=nearestPlacement(e.state,e.registry,type.id,{x:8,z:8},ignoreId,data.featureFlags);assert.ok(cell,type.id);assert.ok(e.validatePlacement(type.id,cell.x,cell.z,ignoreId).ok,type.id);
 });
 test('G7 harbor help stays on shore and reports the outward direction; inland is rejected',()=>{

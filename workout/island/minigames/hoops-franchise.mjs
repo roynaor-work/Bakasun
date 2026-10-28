@@ -2,7 +2,7 @@
  * chemistry, the season and its rewards. Pure functions over the saved `hoops` object; the
  * island engine calls them and persists the result. Every grant or spend leaves a receipt, and
  * a finished game is credited once by its id. */
-import {TEAMS,generateRoster,overall,chemistry,seasonSchedule,standings,quickResult,teamRating,DRILLS,drillPreview,RATING_KEYS} from './hoops-league.mjs?v=island-alpine-20261027-1';
+import {TEAMS,generateRoster,overall,chemistry,seasonSchedule,standings,quickResult,teamRating,DRILLS,drillPreview,RATING_KEYS} from './hoops-league.mjs?v=island-hoops-feel-20261027-1';
 
 export const HOOPS_VERSION=1;
 const USER_TEAM='waves';
@@ -15,7 +15,7 @@ export function initialHoops(c){
  const base=generateRoster(USER_TEAM,c?.league?.userLevel??68);
  const ids=TEAMS.map(t=>t.id);
  return {v:HOOPS_VERSION,team:USER_TEAM,roster:base.map(p=>({id:p.id,ratings:{...p.ratings},potential:p.potential,gp:0,pts:0,reb:0,ast:0,stl:0,blk:0})),
-  lineup:base.slice(0,5).map(p=>p.id),tactics:{offense:'motion',defense:'man'},autoSub:true,profile:'standard',difficulty:'normal',
+  lineup:base.slice(0,5).map(p=>p.id),tactics:{offense:'motion',defense:'man'},autoSub:true,profile:'quick',difficulty:'normal',
   season:{n:1,schedule:seasonSchedule(ids,1),champion:null},credits:c?.economy?.startCredits??6,together:0,receipts:[],rewarded:[]};
 }
 

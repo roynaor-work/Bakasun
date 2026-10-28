@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import { primitive as part, material } from './environment.mjs?v=island-alpine-20261027-1';
-import { batchMeshes } from './batch.mjs?v=island-alpine-20261027-1';
+import { primitive as part, material } from './environment.mjs?v=island-hoops-feel-20261027-1';
+import { batchMeshes } from './batch.mjs?v=island-hoops-feel-20261027-1';
 
 // A visual kind is an independent extension point. Building IDs never select
 // geometry; two data records can share a visual, or register their own renderer.
@@ -388,6 +388,23 @@ registerBuildingVisual('airbase',(g,v,w,d,h)=>{
   block(g,'#355464',[-w*.18,h*.22,d*.17],[w*.36,h*.42,.04]);
   block(g,v.color,[w*.3,h*.55,-d*.25],[w*.18,h*1.1,d*.2]);
   block(g,C.glass,[w*.3,h*1.05,-d*.25],[w*.25,.2,d*.27]);
+});
+registerBuildingVisual('airport',(g,v,w,d,h)=>{
+  base(g,w,d,'#879b92');
+  // A long runway and an offset terminal give this later district a different
+  // scale and silhouette, without changing the original military airbase.
+  block(g,'#4a6065',[0,.125,-d*.22],[w*.91,.035,d*.33]);
+  for(const end of [-1,1])for(let stripe=-2;stripe<=2;stripe++)block(g,C.white,[end*w*.38,.147,-d*.22+stripe*d*.045],[w*.07,.009,d*.022]);
+  for(let i=-3;i<=3;i++)block(g,'#f4dfb2',[i*w*.09,.148,-d*.22],[w*.045,.01,d*.017]);
+  block(g,'#bcb8a0',[0,.11,d*.15],[w*.86,.04,d*.34]);
+  const terminal=new T.Group();terminal.position.set(-w*.12,0,d*.26);g.add(terminal);
+  block(terminal,v.color,[0,h*.32,0],[w*.48,h*.6,d*.28]);
+  block(terminal,v.roofColor,[0,h*.66,0],[w*.53,.09,d*.34]);
+  windows(terminal,w*.48,d*.28,h*.32,5,C.glass);
+  block(g,v.color,[w*.31,h*.52,d*.23],[w*.09,h,d*.13]);
+  block(g,C.glass,[w*.31,h*1.05,d*.23],[w*.15,.27,d*.22]);
+  block(g,v.roofColor,[w*.31,h*1.22,d*.23],[w*.17,.07,d*.24]);
+  for(const x of [-w*.29,-w*.12,w*.05])block(g,C.cream,[x,.16,d*.45],[w*.12,.13,d*.05]);
 });
 registerBuildingVisual('park',park);
 registerBuildingVisual('waterTower',waterTower);

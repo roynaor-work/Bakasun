@@ -1,10 +1,11 @@
-import { levelValue, population } from './metrics.mjs?v=island-alpine-20261027-1';
+import { levelValue, population } from './metrics.mjs?v=island-hoops-feel-20261027-1';
 
 // These checks apply only to a new instance. Saves, undo and moves keep the
 // existing city intact, including cities built before limits were introduced.
 export function placementAvailability(state, registry, typeId) {
   const type = registry.buildings.get(typeId);
   if (!type) return { ok: false, reason: 'reason.invalid' };
+  if((state.world.stage||0)<(type.minWorldStage||0))return {ok:false,reason:'reason.futureDistrict'};
   if(type.unlockAfter&&!state.buildings.some(b=>b.typeId===type.unlockAfter))return {ok:false,reason:'reason.learningOrder'};
   const limit = type.limit;
   if (!limit || limit.kind === 'free') return { ok: true, reason: 'reason.allowed' };
