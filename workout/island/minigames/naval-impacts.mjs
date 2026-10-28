@@ -14,14 +14,14 @@ export function createNavalImpacts(scene,model,config,balance){
       float broken=.5+.5*sin(angle*27.0+sin(angle*11.0)*1.4+radius*47.0-impactPhase*6.0);
       diffuseColor.a*=ridge*(.24+.76*broken);`);
   };
-  foamM.customProgramCacheKey=()=> 'ultra-naval-impact-rings-1';foam.rotation.x=-Math.PI/2;scene.add(foam);
+  foamM.customProgramCacheKey=()=> 'ultra-naval-impact-rings-1';foam.rotation.x=-Math.PI/2;foam.userData.noReflect=true;scene.add(foam);
   const dropG=new T.ConeGeometry(.12,.7,4),dropM=new T.MeshBasicMaterial({transparent:true,opacity:1,depthWrite:false,toneMapped:false}),drops=new T.InstancedMesh(dropG,dropM,32);
-  drops.frustumCulled=false;drops.count=0;drops.instanceMatrix.setUsage(T.DynamicDrawUsage);scene.add(drops);
+  drops.frustumCulled=false;drops.count=0;drops.instanceMatrix.setUsage(T.DynamicDrawUsage);drops.userData.noReflect=true;scene.add(drops);
   // A small elongated diamond, rather than an expanding opaque fireball.
-  const glowG=new T.OctahedronGeometry(.48,0),glowM=new T.MeshBasicMaterial({color:'#ffe6aa',transparent:true,opacity:0,depthWrite:false,depthTest:false,blending:T.AdditiveBlending,toneMapped:false}),glow=new T.Mesh(glowG,glowM);glow.renderOrder=6;scene.add(glow);
+  const glowG=new T.OctahedronGeometry(.48,0),glowM=new T.MeshBasicMaterial({color:'#ffe6aa',transparent:true,opacity:0,depthWrite:false,depthTest:false,blending:T.AdditiveBlending,toneMapped:false}),glow=new T.Mesh(glowG,glowM);glow.renderOrder=6;glow.userData.noReflect=true;scene.add(glow);
   // A real hit leaves a local grey smoke plume (#58636A) that outlives the flash (about 1 s).
   const smokeMap=typeof document==='undefined'?null:(()=>{const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d'),r=g.createRadialGradient(32,32,2,32,32,31);r.addColorStop(0,'rgba(255,255,255,.9)');r.addColorStop(.6,'rgba(255,255,255,.45)');r.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=r;g.fillRect(0,0,64,64);return new T.CanvasTexture(c);})();
-  const puffG=new T.PlaneGeometry(1,1),puffM=new T.MeshBasicMaterial({map:smokeMap,color:balance.aimLook?.hit?.smoke||'#58636A',transparent:true,depthWrite:false,toneMapped:false}),puffs=new T.InstancedMesh(puffG,puffM,8);puffs.count=0;puffs.frustumCulled=false;puffs.instanceMatrix.setUsage(T.DynamicDrawUsage);scene.add(puffs);
+  const puffG=new T.PlaneGeometry(1,1),puffM=new T.MeshBasicMaterial({map:smokeMap,color:balance.aimLook?.hit?.smoke||'#58636A',transparent:true,depthWrite:false,toneMapped:false}),puffs=new T.InstancedMesh(puffG,puffM,8);puffs.count=0;puffs.frustumCulled=false;puffs.instanceMatrix.setUsage(T.DynamicDrawUsage);puffs.userData.noReflect=true;scene.add(puffs);
   let plume=null,lastKey='';
   const dummy=new T.Object3D(),color=new T.Color();let disposed=false;
   return {

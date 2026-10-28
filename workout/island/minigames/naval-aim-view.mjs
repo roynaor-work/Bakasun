@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import {navalWorldPoint} from './naval-camera.mjs?v=island-naval-aim-20261028-1';
-import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-naval-aim-20261028-1';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-naval-aim-20261028-2';
+import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-naval-aim-20261028-2';
 
 /** The archery-style arc, drawn from the model's own prediction: a continuous
  * camera-facing ribbon with a dark outline, stopping at the first predicted
@@ -14,11 +14,11 @@ export function createNavalAimArc(scene,model,balance){
   for(let i=0;i<samples-1;i++){const a=i*2;index.push(a,a+1,a+2,a+1,a+3,a+2);}
   geometry.setAttribute('position',new T.BufferAttribute(positions,3).setUsage(T.DynamicDrawUsage));geometry.setIndex(index);geometry.setDrawRange(0,0);
   const material=new T.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false,side:T.DoubleSide,toneMapped:false}),mesh=new T.Mesh(geometry,material);
-  mesh.frustumCulled=false;mesh.renderOrder=order;mesh.visible=false;scene.add(mesh);return {geometry,material,mesh,positions};
+  mesh.frustumCulled=false;mesh.renderOrder=order;mesh.visible=false;mesh.userData.noReflect=true;scene.add(mesh);return {geometry,material,mesh,positions};
  }
  const outline=ribbon(look.arcOutline||'#103847',look.arcOpacity??.9,5),core=ribbon(look.arc||'#B8F6FF',look.arcOpacity??.9,6);
  const moverGeometry=new T.SphereGeometry(1,8,6),moverMaterial=new T.MeshBasicMaterial({color:'#ffffff',transparent:true,opacity:.95,depthWrite:false,toneMapped:false}),movers=new T.InstancedMesh(moverGeometry,moverMaterial,Math.max(1,look.movers??3));
- movers.count=0;movers.frustumCulled=false;movers.instanceMatrix.setUsage(T.DynamicDrawUsage);movers.renderOrder=7;scene.add(movers);
+ movers.count=0;movers.frustumCulled=false;movers.instanceMatrix.setUsage(T.DynamicDrawUsage);movers.renderOrder=7;movers.userData.noReflect=true;scene.add(movers);
  const points=Array.from({length:samples},()=>new T.Vector3()),view=new T.Vector3(),tangent=new T.Vector3(),side=new T.Vector3(),toCamera=new T.Vector3(),dummy=new T.Object3D();
  let disposed=false,shown=0,visible=false;
  const world=p=>navalWorldPoint(p.x,p.z,balance,(p.h||0)*r.worldScale+.05);

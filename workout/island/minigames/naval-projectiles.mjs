@@ -1,8 +1,8 @@
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalProjectileHeight} from './naval-camera.mjs?v=island-naval-aim-20261028-1';
-import {navalBallisticPoint,navalBallisticVelocity} from './naval-ballistics.mjs?v=island-naval-aim-20261028-1';
-import {navalEffectAtlas,navalParticleGeometry,navalParticleMaterial,writeNavalParticle,finishNavalParticles} from './ultra-naval-effects.mjs?v=island-naval-aim-20261028-1';
+import {navalProjectileHeight} from './naval-camera.mjs?v=island-naval-aim-20261028-2';
+import {navalBallisticPoint,navalBallisticVelocity} from './naval-ballistics.mjs?v=island-naval-aim-20261028-2';
+import {navalEffectAtlas,navalParticleGeometry,navalParticleMaterial,writeNavalParticle,finishNavalParticles} from './ultra-naval-effects.mjs?v=island-naval-aim-20261028-2';
 
 const FORWARD=new T.Vector3(0,0,-1);
 function projectileGeometry(kind){
@@ -34,9 +34,9 @@ function projectileGeometry(kind){
 export function createNavalProjectiles(scene,model,balance){
   const capacity=balance.render.effects.maxProjectiles+9,trailCapacity=capacity*10;
   const material=new T.MeshStandardMaterial({vertexColors:true,roughness:.34,metalness:.55,emissive:'#4a3210',emissiveIntensity:1}),geometries=[0,1,2].map(projectileGeometry);
-  const bodies=geometries.map(geometry=>{const mesh=new T.InstancedMesh(geometry,material,capacity);mesh.count=0;mesh.frustumCulled=false;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);scene.add(mesh);return mesh;});
+  const bodies=geometries.map(geometry=>{const mesh=new T.InstancedMesh(geometry,material,capacity);mesh.count=0;mesh.frustumCulled=false;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);mesh.userData.noReflect=true;scene.add(mesh);return mesh;});
   const map=navalEffectAtlas(),trailGeometry=navalParticleGeometry(trailCapacity),trailMaterial=navalParticleMaterial(map),trails=new T.InstancedMesh(trailGeometry,trailMaterial,trailCapacity);
-  trails.count=0;trails.frustumCulled=false;trails.instanceMatrix.setUsage(T.DynamicDrawUsage);scene.add(trails);
+  trails.count=0;trails.frustumCulled=false;trails.instanceMatrix.setUsage(T.DynamicDrawUsage);trails.userData.noReflect=true;scene.add(trails);
   const dummy=new T.Object3D(),position=new T.Vector3(),viewPosition=new T.Vector3(),direction=new T.Vector3(),color=new T.Color(),counts=[0,0,0];
   let disposed=false,trailCount=0,total=0;
   function add(shot,ammo,camera){

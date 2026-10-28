@@ -30,7 +30,7 @@ export function createNavalDressing(scene,balance,{maxShips=8}={}){
  const foam=new T.InstancedMesh(flat,foamMaterial,maxShips),waves=new T.InstancedMesh(flat,waveMaterial,maxShips);
  // Stern wakes for the enemy hulls: short fading segments laid along the path actually sailed, so the heading reads at a glance.
  const TRAIL=12,trailMaterial=foamMaterial.clone();trailMaterial.map=stripeMap;const trails=new T.InstancedMesh(flat,trailMaterial,maxShips*TRAIL),history=new Map();
- for(const mesh of [foam,waves,trails]){mesh.count=0;mesh.frustumCulled=false;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);mesh.renderOrder=1;mesh.setColorAt(0,new T.Color(1,1,1));scene.add(mesh);}
+ for(const mesh of [foam,waves,trails]){mesh.userData.noReflect=true;mesh.count=0;mesh.frustumCulled=false;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);mesh.renderOrder=1;mesh.setColorAt(0,new T.Color(1,1,1));scene.add(mesh);}
  // Far islands: low hazy silhouettes beyond the play area give the sea a horizon.
  const hills=[];let seed=91;const rnd=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
  for(const [x,z,w,h] of [[-190,-250,46,10],[-120,-282,30,7],[40,-292,58,13],[150,-262,40,9],[230,-210,34,7],[-250,-170,30,6]]){
@@ -39,7 +39,7 @@ export function createNavalDressing(scene,balance,{maxShips=8}={}){
  const hillGeometry=mergeGeometries(hills);hills.forEach(g=>g.dispose());
  const hillMaterial=new T.MeshBasicMaterial({color:'#86aeb9',fog:false}),horizon=new T.Mesh(hillGeometry,hillMaterial);scene.add(horizon);
  const burstGeometry=new T.RingGeometry(.86,1,48);burstGeometry.rotateX(-Math.PI/2);
- const burstMaterial=new T.MeshBasicMaterial({color:'#ffd768',transparent:true,depthWrite:false,blending:T.AdditiveBlending,side:T.DoubleSide,depthTest:false,toneMapped:false}),burst=new T.Mesh(burstGeometry,burstMaterial);burst.visible=false;burst.renderOrder=6;scene.add(burst);
+ const burstMaterial=new T.MeshBasicMaterial({color:'#ffd768',transparent:true,depthWrite:false,blending:T.AdditiveBlending,side:T.DoubleSide,depthTest:false,toneMapped:false}),burst=new T.Mesh(burstGeometry,burstMaterial);burst.visible=false;burst.renderOrder=6;burst.userData.noReflect=true;scene.add(burst);
  const dummy=new T.Object3D(),color=new T.Color();let disposed=false,shown={foam:0,waves:0,trails:0,critical:false};
  return {
   /** hulls: [{x,z,yaw,length,speed,visible}] in world units. */

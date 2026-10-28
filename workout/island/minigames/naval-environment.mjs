@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {Water} from './naval-water.mjs?v=island-naval-aim-20261028-1';
+import {Water} from './naval-water.mjs?v=island-naval-aim-20261028-2';
 import {NAVAL_SHORES} from './ultra-naval-environment-layout.mjs';
 
 const SUN=new THREE.Vector3(-.58,.52,-.64).normalize();
@@ -24,7 +24,7 @@ export function navalWaterNormals(size=128){
 
 /** Presentation only. Simulation time/camera remain owned by the existing model. */
 export function createNavalEnvironment(scene,renderer,fallbackSea,sunDisk,adapters={}){
-  let disposed=false,reflecting=true,captures=0,lastCapture=-Infinity,clock=0;
+  let disposed=false,reflecting=true,captures=0,lastCapture=-Infinity,clock=0;const mirror={calls:0,triangles:0,peakCalls:0,peakTriangles:0};
   renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
   scene.background=new THREE.Color('#8fc7df');scene.fog=new THREE.FogExp2('#9cc7d7',.00115);
   const hemisphere=new THREE.HemisphereLight('#dcf1fb','#507b7c',1.65);
@@ -90,7 +90,10 @@ export function createNavalEnvironment(scene,renderer,fallbackSea,sunDisk,adapte
   }
   // Refresh reflections at up to 12 Hz; animate the surface every model frame.
   const capture=water.onBeforeRender;
-  water.onBeforeRender=function(...args){if(clock-lastCapture<1/12&&clock>=lastCapture)return;lastCapture=clock;capture.apply(this,args);captures++;};
+  water.onBeforeRender=function(...args){if(clock-lastCapture<1/12&&clock>=lastCapture)return;lastCapture=clock;const info=args[0]?.info?.render,c0=info?.calls??0,t0=info?.triangles??0;
+    // Aim marks, shells, hit effects, smoke and foam are left out of the 12 Hz reflection pass: they read in the main view, and drawing them twice broke the stage-10 budget when aiming over a live hit (28/10).
+    const hidden=[];for(const child of args[1]?.children||[])if(child.userData?.noReflect&&child.visible){child.visible=false;hidden.push(child);}
+    try{capture.apply(this,args);}finally{for(const child of hidden)child.visible=true;}captures++;if(info){mirror.calls=info.calls-c0;mirror.triangles=info.triangles-t0;mirror.peakCalls=Math.max(mirror.peakCalls,mirror.calls);mirror.peakTriangles=Math.max(mirror.peakTriangles,mirror.triangles);}};
   scene.add(water);fallbackSea.visible=false;sunDisk.visible=false;
   normalLoader?.load(new URL('../assets/textures/naval-waternormals.jpg',import.meta.url).href,texture=>{
     if(disposed){texture.dispose();return;}
@@ -100,7 +103,7 @@ export function createNavalEnvironment(scene,renderer,fallbackSea,sunDisk,adapte
   return {
     update(time,camera){if(disposed)return;clock=time;fallbackTime.value=time;fallbackEye.value.copy(camera.position);water.material.uniforms.time.value=time*.45;sky.position.copy(camera.position);},
     degrade(){if(disposed||!reflecting)return;reflecting=false;water.visible=false;fallbackSea.visible=true;},
-    metrics(){return {revision:'ultra-naval-3',detailedNormals:Boolean(detailedNormals),water:reflecting?'reflective':'light',reflectionSize:256,reflectionCaptures:captures,waterTime:water.material.uniforms.time.value,shallowBanks:NAVAL_SHORES.length,fallbackRipples:Boolean(fallbackMaterial),disposed};},
+    metrics(){return {revision:'ultra-naval-3',detailedNormals:Boolean(detailedNormals),water:reflecting?'reflective':'light',reflectionSize:256,reflectionCaptures:captures,mirror:{...mirror},waterTime:water.material.uniforms.time.value,shallowBanks:NAVAL_SHORES.length,fallbackRipples:Boolean(fallbackMaterial),disposed};},
     dispose(){if(disposed)return;disposed=true;scene.remove(water,sky,hemisphere,sunlight,rim);normals.dispose();detailedNormals?.dispose();water.dispose();sky.geometry.dispose();skyMaterial.dispose();if(fallbackMaterial){fallbackMaterial.onBeforeCompile=previousCompile;fallbackMaterial.customProgramCacheKey=previousKey;}},
   };
 }

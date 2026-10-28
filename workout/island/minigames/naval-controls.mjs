@@ -1,5 +1,5 @@
-import {navalWaterAt} from './naval-camera.mjs?v=island-naval-aim-20261028-1';
-import {navalWeaponIcons} from './naval-icons.mjs?v=island-naval-aim-20261028-1';
+import {navalWaterAt} from './naval-camera.mjs?v=island-naval-aim-20261028-2';
+import {navalWeaponIcons} from './naval-icons.mjs?v=island-naval-aim-20261028-2';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
 export function navalSteeringInput(moveX=0,moveZ=0,cameraHeading=0,deadzone=.12){
@@ -47,12 +47,15 @@ export function navalAimStep(aim,dx,dy,ms,track,config){
  * `lowAngle` and power falls toward the minimum, so short shots stay
  * possible. Dragging back always undoes it; holding still changes nothing. */
 export function navalReachRange(config){const r=config.aimControls?.reach||{},b=config.ballistics||{},low=r.lowAngle??10;return {low,min:low-(r.powerSpan??14),max:b.maxElevation??42,minPower:b.minPower??.35};}
-export function navalReachAim(v,config){
+export function navalReachAim(v,config,ammo=0){
  const R=navalReachRange(config),x=Math.max(R.min,Math.min(R.max,v));
+ // A torpedo ignores elevation: its run length follows power alone, so the whole drag maps onto power (28/10 audit).
+ if(ammo===2)return {elevation:R.low,power:R.minPower+(1-R.minPower)*(x-R.min)/Math.max(1e-6,R.max-R.min)};
  return x>=R.low?{elevation:x,power:1}:{elevation:R.low,power:R.minPower+(1-R.minPower)*(x-R.min)/Math.max(1e-6,R.low-R.min)};
 }
-export function navalReachOf(turret,config){
+export function navalReachOf(turret,config,ammo=0){
  const R=navalReachRange(config),power=turret?.power??1,elevation=turret?.elevation??R.low;
+ if(ammo===2)return R.min+(R.max-R.min)*Math.max(0,Math.min(1,(power-R.minPower)/Math.max(1e-6,1-R.minPower)));
  return power>=.999?Math.max(R.min,Math.min(R.max,elevation)):R.min+(R.low-R.min)*Math.max(0,Math.min(1,(power-R.minPower)/Math.max(1e-6,1-R.minPower)));
 }
 export function navalChargePower(seconds,config){
@@ -82,7 +85,7 @@ export function createNavalInput(ctx,getModel,getView){
  const show=held=>{controls.dataset.aiming=String(held);cancel.hidden=!held;};
  const reset=()=>{gesture=keyboard=null;queue=[];pendingSelection=null;keyboardClick=false;getModel()?.cancelAim?.();show(false);controls.style?.removeProperty?.('--naval-power');};
  const reachConfig={...balance,ballistics:{...(balance.ballistics||{}),minElevation:navalReachRange(balance).min}};
- const startState=()=>{const m=getModel(),t=m?.turret||{yaw:0,elevation:14,power:1};return {yaw:t.yaw,elevation:navalReachOf(t,balance),time:m?.time??0};};
+ const startState=()=>{const m=getModel(),t=m?.turret||{yaw:0,elevation:14,power:1};return {yaw:t.yaw,elevation:navalReachOf(t,balance,m?.ammoIndex),time:m?.time??0};};
  const startPixels=c.gain?.startPixels??2;
  // The aim moves from the first 2 pixels on, pixel for pixel, with the gain set by drag speed.
  const settle=(g,x,y,t)=>{const px=g.lastX??g.x,py=g.lastY??g.y,ms=Math.max(1,(t??performance.now())-(g.lastT??t??0));g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));
@@ -90,9 +93,9 @@ export function createNavalInput(ctx,getModel,getView){
   else if(g.engaged)g.aim=navalAimStep(g.aim,x-px,y-py,ms,g.track,reachConfig);
   g.lastX=x;g.lastY=y;g.lastT=t??performance.now();};
  const moveTo=(g,e)=>{const list=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():null;if(list?.length)for(const p of list)settle(g,p.clientX,p.clientY,p.timeStamp);else settle(g,e.clientX,e.clientY,e.timeStamp);};
- const state=g=>{const m=getModel(),reach=g.aim?.elevation??g.start.elevation,shot=navalReachAim(reach,balance),held=Math.max(0,(m?.time??0)-g.start.time),R=navalReachRange(balance);return {yaw:g.aim?.yaw??g.start.yaw,elevation:shot.elevation,power:shot.power,reach:(reach-R.min)/(R.max-R.min),held};};
+ const state=g=>{const m=getModel(),reach=g.aim?.elevation??g.start.elevation,shot=navalReachAim(reach,balance,m?.ammoIndex),held=Math.max(0,(m?.time??0)-g.start.time),R=navalReachRange(balance);return {yaw:g.aim?.yaw??g.start.yaw,elevation:shot.elevation,power:shot.power,reach:(reach-R.min)/(R.max-R.min),held};};
  const overCancel=(x,y)=>{if(cancel.hidden)return false;const r=cancel.getBoundingClientRect();return x>=r.left-8&&x<=r.right+8&&y>=r.top-8&&y<=r.bottom+8;};
- const finish=(g,x,y,t)=>{settle(g,x,y,t);const s=state(g);if(overCancel(x,y))queue.push({type:'cancel'});else if(s.held<=(c.tapSeconds??.22)&&g.moved<=(c.tapPixels??10))queue.push({type:'quick',target:getModel()?.lockedTargetIndex});else queue.push({type:'fire',...s,target:getModel()?.lockedTargetIndex});};
+ const finish=(g,x,y,t)=>{settle(g,x,y,t);const s=state(g);if(overCancel(x,y))queue.push({type:'cancel'});else if(!g.engaged&&s.held<=(c.tapSeconds??.22)&&g.moved<=(c.tapPixels??10))queue.push({type:'quick',target:getModel()?.lockedTargetIndex});else queue.push({type:'fire',...s,target:getModel()?.lockedTargetIndex});};
  const begin=e=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();m.beginAim?.(m.selectedTargetIndex);const start=startState();gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start,aim:{yaw:start.yaw,elevation:start.elevation},track:{},engaged:false,lastX:e.clientX,lastY:e.clientY,lastT:e.timeStamp};show(true);};
  fire.addEventListener('pointerdown',begin,options);pad.addEventListener('pointerdown',e=>{try{pad.setPointerCapture(e.pointerId);}catch{}begin(e);},options);
  canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),index=choose({x:e.clientX-r.left,y:e.clientY-r.top});if(index!==null)pendingSelection=index;},options);

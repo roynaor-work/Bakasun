@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {waitForGameStart,waitForGameNavigation,prepareGameBuildings} from './shell-ready.mjs?v=island-naval-aim-20261028-1';
+import {waitForGameStart,waitForGameNavigation,prepareGameBuildings} from './shell-ready.mjs?v=island-naval-aim-20261028-2';
 
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const directory=fileURLToPath(new URL('../verification/g8b/',import.meta.url));await mkdir(directory,{recursive:true});

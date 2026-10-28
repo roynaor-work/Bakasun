@@ -1,14 +1,14 @@
-import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-naval-aim-20261028-1';
-import {createNavalImpacts} from './naval-impacts.mjs?v=island-naval-aim-20261028-1';
+import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-naval-aim-20261028-2';
+import {createNavalImpacts} from './naval-impacts.mjs?v=island-naval-aim-20261028-2';
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-naval-aim-20261028-1';
-import {createNavalEffects} from './g6d-effects.mjs?v=island-naval-aim-20261028-1';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-naval-aim-20261028-1';
-import {createNavalScenery} from './naval-scenery.mjs?v=island-naval-aim-20261028-1';
-import {createNavalEnvironment} from './naval-environment.mjs?v=island-naval-aim-20261028-1';
-import {createNavalAimArc} from './naval-aim-view.mjs?v=island-naval-aim-20261028-1';
-import {createNavalDressing} from './naval-dressing.mjs?v=island-naval-aim-20261028-1';
+import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-naval-aim-20261028-2';
+import {createNavalEffects} from './g6d-effects.mjs?v=island-naval-aim-20261028-2';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-naval-aim-20261028-2';
+import {createNavalScenery} from './naval-scenery.mjs?v=island-naval-aim-20261028-2';
+import {createNavalEnvironment} from './naval-environment.mjs?v=island-naval-aim-20261028-2';
+import {createNavalAimArc} from './naval-aim-view.mjs?v=island-naval-aim-20261028-2';
+import {createNavalDressing} from './naval-dressing.mjs?v=island-naval-aim-20261028-2';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */
@@ -176,12 +176,12 @@ export function createNavalView(ctx,model,adapters={}) {
   const vessels=model.enemies.map(e=>{const type=balance.shipTypes[e.kind],variant=e.boss?balance.boss:type,scale=type.scale*(e.boss?balance.boss.scale:1),spec=variant.modelSpec||(balance.enemyModel&&{...balance.enemyModel,length:(balance.playerModel?.length??balance.enemyModel.length)*r.playerScale/scale});const v=type.submarine?createSubmarine(r,r.effects):createVessel(THREE,{...r,hull:variant.hull},{},variant,spec);v.root.rotation.y=Math.PI;v.root.scale.setScalar(scale);scene.add(v.root);return v;});
   const scenery=createNavalEffects(scene,seaMaterial,model,balance),adventure=createNavalScenery(scene,model,balance,adapters);
   const projectiles=createNavalProjectiles(scene,model,balance),impacts=createNavalImpacts(scene,model,config,balance);
-  const aimGeometry=new THREE.BufferGeometry(),aimArray=new Float32Array(18*3);aimGeometry.setAttribute('position',new THREE.BufferAttribute(aimArray,3));const aimMaterial=new THREE.LineBasicMaterial({color:r.foam}),aimLine=new THREE.LineSegments(aimGeometry,aimMaterial);scene.add(aimLine);
+  const aimGeometry=new THREE.BufferGeometry(),aimArray=new Float32Array(18*3);aimGeometry.setAttribute('position',new THREE.BufferAttribute(aimArray,3));const aimMaterial=new THREE.LineBasicMaterial({color:r.foam}),aimLine=new THREE.LineSegments(aimGeometry,aimMaterial);aimLine.userData.noReflect=true;scene.add(aimLine);
   const arc=createNavalAimArc(scene,model,balance),dressing=createNavalDressing(scene,balance,{maxShips:model.enemies.length+1});
   const projected=new THREE.Vector3(),raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),seaPlane=new THREE.Plane(new THREE.Vector3(0,1,0),0),intersection=new THREE.Vector3();camera.updateMatrixWorld();const positions=seaGeometry.attributes.position;
 
-  const fx=r.effects,flashGeometry=new THREE.PlaneGeometry(fx.flashSize*2.4,fx.flashSize*2.4),flashMaterial=new THREE.MeshBasicMaterial({color:r.flame,transparent:true,depthWrite:false}),flash=new THREE.Mesh(flashGeometry,flashMaterial);scene.add(flash);
-  const smokeCanvas=document.createElement('canvas');smokeCanvas.width=smokeCanvas.height=64;const brush=smokeCanvas.getContext('2d'),gradient=brush.createRadialGradient(32,32,0,32,32,32);gradient.addColorStop(0,'#e0e3dfaa');gradient.addColorStop(1,'#e0e3df00');brush.fillStyle=gradient;brush.fillRect(0,0,64,64);const smokeTexture=new THREE.CanvasTexture(smokeCanvas),smokeMaterial=new THREE.MeshBasicMaterial({map:smokeTexture,transparent:true,depthWrite:false,side:THREE.DoubleSide,forceSinglePass:true}),muzzleSmokeGeometry=new THREE.PlaneGeometry(1,1),muzzleSmoke=new THREE.Mesh(muzzleSmokeGeometry,smokeMaterial);scene.add(muzzleSmoke);
+  const fx=r.effects,flashGeometry=new THREE.PlaneGeometry(fx.flashSize*2.4,fx.flashSize*2.4),flashMaterial=new THREE.MeshBasicMaterial({color:r.flame,transparent:true,depthWrite:false}),flash=new THREE.Mesh(flashGeometry,flashMaterial);flash.userData.noReflect=true;scene.add(flash);
+  const smokeCanvas=document.createElement('canvas');smokeCanvas.width=smokeCanvas.height=64;const brush=smokeCanvas.getContext('2d'),gradient=brush.createRadialGradient(32,32,0,32,32,32);gradient.addColorStop(0,'#e0e3dfaa');gradient.addColorStop(1,'#e0e3df00');brush.fillStyle=gradient;brush.fillRect(0,0,64,64);const smokeTexture=new THREE.CanvasTexture(smokeCanvas),smokeMaterial=new THREE.MeshBasicMaterial({map:smokeTexture,transparent:true,depthWrite:false,side:THREE.DoubleSide,forceSinglePass:true}),muzzleSmokeGeometry=new THREE.PlaneGeometry(1,1),muzzleSmoke=new THREE.Mesh(muzzleSmokeGeometry,smokeMaterial);muzzleSmoke.userData.noReflect=true;scene.add(muzzleSmoke);
   flashMaterial.map=smokeTexture;flashMaterial.blending=THREE.AdditiveBlending;flashMaterial.toneMapped=false;
   const gatling=new THREE.Group(),gatlingGeometry=new THREE.CylinderGeometry(fx.subTube/3,fx.subTube/3,fx.salvoLength,6),gatlingMaterial=new THREE.MeshStandardMaterial({color:r.metal});
   const salvoParts=[];for(let i=0;i<3;i++){const g=gatlingGeometry.clone(),a=i*Math.PI*2/fx.salvoBarrels;g.rotateX(Math.PI/2);g.translate(Math.cos(a)*fx.salvoRadius,Math.sin(a)*fx.salvoRadius,0);salvoParts.push(g);}const salvoGeometry=mergeGeometries(salvoParts);salvoParts.forEach(g=>g.dispose());gatling.add(new THREE.Mesh(salvoGeometry,gatlingMaterial));gatling.position.set(0,.18,-1);player.turret.add(gatling);
@@ -207,7 +207,7 @@ export function createNavalView(ctx,model,adapters={}) {
   const frameBox=new THREE.Box3(),corner=new THREE.Vector3();
   // Measured from the hull's actual vertices (every 4th), not its bounding box.
   function playerBox(){if(failed||disposed)return null;let min=Infinity,max=-Infinity,minX=Infinity,maxX=-Infinity;player.root.updateMatrixWorld(true);player.body.traverse(node=>{if(!node.isMesh||!node.geometry?.attributes?.position)return;const pos=node.geometry.attributes.position;for(let i=0;i<pos.count;i+=4){corner.fromBufferAttribute(pos,i).applyMatrix4(node.matrixWorld).project(camera);min=Math.min(min,corner.y);max=Math.max(max,corner.y);minX=Math.min(minX,corner.x);maxX=Math.max(maxX,corner.x);}});if(!Number.isFinite(min))return null;return {height:(Math.min(1,max)-Math.max(-1,min))/2,top:(1-Math.min(1,max))/2,bottom:(1-Math.max(-1,min))/2,left:(Math.max(-1,minX)+1)/2,right:(Math.min(1,maxX)+1)/2};}
-  return {get mode(){return failed?'perspective':'three';},capturePreview(){if(failed||disposed)return null;renderer.info.reset();renderer.render(scene,camera);return canvas.toDataURL('image/png');},metrics(){return {triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,peak:{triangles:peakTriangles,drawCalls:peakDrawCalls},playerModel:{...player.modelStatus},disposed,
+  return {get mode(){return failed?'perspective':'three';},resetPeak(){peakTriangles=0;peakDrawCalls=0;},capturePreview(){if(failed||disposed)return null;renderer.info.reset();renderer.render(scene,camera);return canvas.toDataURL('image/png');},metrics(){return {triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,peak:{triangles:peakTriangles,drawCalls:peakDrawCalls},playerModel:{...player.modelStatus},disposed,
     environment:environment.metrics(),models:{requested:Number(Boolean(balance.playerModel))+Number(vessels.some(v=>v.modelStatus.requested)),loaded:Number(player.modelStatus.loaded)+Number(vessels.some(v=>v.modelStatus.loaded)),failed:Number(player.modelStatus.failed)+Number(vessels.some(v=>v.modelStatus.failed))},
     playerMarkers:{flag:player.flag.visible,flame:player.flame.visible,flameY:player.flame.position.y},effects:scenery.metrics(),playerBox:playerBox(),playerPaint:player.paint,aimArc:arc.metrics(),dressing:dressing.metrics(),projectiles:projectiles.metrics(),impacts:impacts.metrics(),scenery:adventure.metrics(),camera:JSON.parse(JSON.stringify(model.camera)),gpu:{geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,programs:renderer.info.programs?.length||0},quality:low?'low':'full',playerLoaded:player.modelStatus.loaded,enemiesLoaded:vessels.filter(v=>v.modelStatus.loaded).length,playerLength:player.modelLength,enemyLengths:vessels.map(v=>v.modelLength),headings:vessels.map(v=>v.root.rotation.y),periscopes:vessels.map(v=>Boolean(v.periscope?.visible))};},degrade(fallback=false){if(fallback){failed=true;dispose();}else if(!low){low=true;environment.degrade();dressing.degrade();renderer.setSize(r.width*.75,r.height*.75,false);}},dispose,
     resize(){if(failed||disposed)return;camera.aspect=config.width/config.height;camera.updateProjectionMatrix();renderer.setSize(Math.min(config.width,1280)*(low?.75:1),Math.min(config.width,r.width)*config.height/config.width*(low?.75:1),false);},

@@ -119,7 +119,7 @@ test('G2g unsupported WebGL preserves procedural model sprites and reports faile
  const {art,draws}=sprites();await loadOptionalArt(art,config.alienDefense,()=>false,{createRenderer(){throw Error('no WebGL');}});assert.equal(art.modelArt.failed,6);assert.equal(draws.length,0);
 });
 test('G2g release and new sounds are present; all runtime versioned imports use the same release',async()=>{
- assert.equal(DATA_VERSION,'island-naval-aim-20261028-1');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
+ assert.equal(DATA_VERSION,'island-naval-aim-20261028-2');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
  async function walk(url){for(const entry of await readdir(url,{withFileTypes:true})){if(['vendor','verification'].includes(entry.name))continue;const next=new URL(entry.name+(entry.isDirectory()?'/':''),url);if(entry.isDirectory())await walk(next);else if(/\.(mjs|html)$/.test(entry.name)){const source=await readFile(next,'utf8');for(const [,v]of source.matchAll(/(?:\.mjs|\.css)\?v=([^'"\s]+)/g))assert.equal(v,DATA_VERSION,next.pathname);}}}await walk(root);
 });
 
