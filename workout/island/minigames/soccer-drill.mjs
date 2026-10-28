@@ -1,5 +1,5 @@
-import {createSoccer} from './soccer.mjs?v=island-hoops-feel-20261027-1';
-import {drillAttribute} from '../activity/soccer-roster.mjs?v=island-hoops-feel-20261027-1';
+import {createSoccer} from './soccer.mjs?v=island-alpine-20261028-1';
+import {drillAttribute} from '../activity/soccer-roster.mjs?v=island-alpine-20261028-1';
 /** Three short, playable practices use the actual match controls and ball. */
 export function createSoccerDrill(options){
  const {config:c,kind}=options;if(!Object.hasOwn(drillAttribute,kind))throw Error('Invalid practice');

@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {mergeGeometries,mergeVertices} from '../vendor/BufferGeometryUtils.js?v=island-alpine-20261026-1';
+import {mergeGeometries,mergeVertices} from '../vendor/BufferGeometryUtils.js?v=island-alpine-20261028-1';
 
 // Original, real-time art. Every solid surface has depth; no photo cards or scenery colliders.
 const noiseGLSL=`
