@@ -30,9 +30,9 @@ export function createProRider(gltf,id,color,scene,kit){
  // Keep the source's detailed fabric shading while replacing the military palette.
  body.traverse(n=>{if(!n.isMesh)return;n.castShadow=true;n.receiveShadow=true;n.frustumCulled=false;const original=n.material;
   if(original.name.toLowerCase().includes('visor')){n.visible=false;return;}
-  n.geometry=geo(n.geometry.clone());removeUtilityGear(n.geometry);const p=n.geometry.attributes.position,j=n.geometry.attributes.skinIndex,w=n.geometry.attributes.skinWeight,c=new Float32Array(p.count*3),coat=new T.Color(color),white=new T.Color('#dde8eb'),pants=new T.Color('#192733'),helmet=new T.Color('#203743'),gloves=new T.Color('#101b28');
+  n.geometry=geo(n.geometry.clone());removeUtilityGear(n.geometry);const p=n.geometry.attributes.position,j=n.geometry.attributes.skinIndex,w=n.geometry.attributes.skinWeight,c=new Float32Array(p.count*3),coat=new T.Color(color),white=new T.Color('#dfd3b7'),pants=new T.Color('#1e3441'),helmet=new T.Color('#203743'),gloves=new T.Color('#101b28');
   for(let i=0;i<p.count;i++){let k=0;for(let t=1;t<4;t++)if(read(w,i,t)>read(w,i,k))k=t;const b=n.skeleton.bones[read(j,i,k)]?.name??'';let v=coat;if(/Leg|Foot|Toe|Hips/.test(b))v=pants;else if(/Hand|Thumb|Index|Middle|Ring|Pinky/.test(b))v=gloves;else if(/Head|Neck/.test(b))v=helmet;else if(/Spine2|Shoulder|Arm/.test(b)&&!/ForeArm/.test(b))v=white;c.set([v.r,v.g,v.b],i*3);}n.geometry.setAttribute('color',new T.BufferAttribute(c,3));
-  const material=mat('#ffffff',{map:original.map,normalMap:original.normalMap,vertexColors:true,roughness:.8,metalness:.02});material.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`#ifdef USE_MAP
+  const material=mat('#ffffff',{map:null,normalMap:original.normalMap,vertexColors:true,roughness:.8,metalness:.02});material.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`#ifdef USE_MAP
  vec4 winterTexel=texture2D(map,vMapUv);
  float winterDetail=dot(winterTexel.rgb,vec3(.2126,.7152,.0722));
  diffuseColor*=vec4(vec3(.62+.55*winterDetail),winterTexel.a);
@@ -40,7 +40,7 @@ export function createProRider(gltf,id,color,scene,kit){
  });
  snowboard(color,root);const shadow=mesh(new T.PlaneGeometry(1.3,2.7),basic({map:contactTex,transparent:true,depthWrite:false,opacity:.55}),scene);shadow.rotation.x=-Math.PI/2-Math.atan(profile.slope);shadow.castShadow=false;shadow.receiveShadow=false;scene.add(root);
  const chestBase=chest.quaternion.clone(),head=find('Head'),headBase=head.quaternion.clone(),helmetRig=new T.Group();root.add(helmetRig);helmetRig.position.copy(wp(head));
- const shell=mat('#e5ecee',{roughness:.28,metalness:.12}),rubber=mat('#13202c',{roughness:.8}),lens=mat('#f5bd54',{metalness:.4,roughness:.14,emissive:'#c27a1b',emissiveIntensity:.35});
+ const shell=mat('#243944',{roughness:.48,metalness:.12}),rubber=mat('#13202c',{roughness:.8}),lens=mat('#d4a766',{metalness:.4,roughness:.14,emissive:'#c27a1b',emissiveIntensity:.35});
  const mask=mesh(new T.SphereGeometry(1,20,14),rubber,helmetRig,.005,.065,0);mask.scale.set(.105,.12,.10);
  const helmet=mesh(new T.SphereGeometry(.145,28,18,0,Math.PI*2,0,Math.PI*.68),shell,helmetRig,0,.13,0);helmet.scale.set(.94,1,.81);
  const band=mesh(new T.TorusGeometry(.124,.012,6,36),rubber,helmetRig,0,.14,0);band.rotation.x=Math.PI/2;
