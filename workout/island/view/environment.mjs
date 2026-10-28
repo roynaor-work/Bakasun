@@ -1,9 +1,9 @@
 import * as T from '../vendor/three.module.js';
-import {batchMeshes} from './batch.mjs?v=island-naval-aim-20261027-2';
-import {groundTexture,islandTerrain,releaseTerrain} from './ultra-island-terrain.mjs?v=island-naval-aim-20261027-2';
-import {createIslandWater} from './ultra-island-water.mjs?v=island-naval-aim-20261027-2';
-import {IslandFlora} from './ultra-island-flora.mjs?v=island-naval-aim-20261027-2';
-import {createCoastalDetails,createNeighborScenery} from './ultra-island-scenery.mjs?v=island-naval-aim-20261027-2';
+import {batchMeshes} from './batch.mjs?v=island-naval-aim-20261028-1';
+import {groundTexture,islandTerrain,releaseTerrain} from './ultra-island-terrain.mjs?v=island-naval-aim-20261028-1';
+import {createIslandWater} from './ultra-island-water.mjs?v=island-naval-aim-20261028-1';
+import {IslandFlora} from './ultra-island-flora.mjs?v=island-naval-aim-20261028-1';
+import {createCoastalDetails,createNeighborScenery} from './ultra-island-scenery.mjs?v=island-naval-aim-20261028-1';
 
 // All placement, walking and building code shares this unchanged ground plane.
 export const GROUND=.34;

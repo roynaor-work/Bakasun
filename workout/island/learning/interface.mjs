@@ -1,6 +1,6 @@
-import {createLearningVoice} from './voice.mjs?v=island-naval-aim-20261027-2';
-import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-naval-aim-20261027-2';
-import {unpoint} from './questions.mjs?v=island-naval-aim-20261027-2';
+import {createLearningVoice} from './voice.mjs?v=island-naval-aim-20261028-1';
+import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-naval-aim-20261028-1';
+import {unpoint} from './questions.mjs?v=island-naval-aim-20261028-1';
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='learning-answer')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
 const phrase=(text,q)=>q.level<=4?text:unpoint(text);

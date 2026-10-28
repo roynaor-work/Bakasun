@@ -1,4 +1,4 @@
-import {fireRoadRoute,projectFireRoad} from './fire-roads.mjs?v=island-naval-aim-20261027-2';
+import {fireRoadRoute,projectFireRoad} from './fire-roads.mjs?v=island-naval-aim-20261028-1';
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 

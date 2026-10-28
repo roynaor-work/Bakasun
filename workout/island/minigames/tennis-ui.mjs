@@ -1,4 +1,4 @@
-import {pointLabels} from './tennis.mjs?v=island-naval-aim-20261027-2';
+import {pointLabels} from './tennis.mjs?v=island-naval-aim-20261028-1';
 // Broadcast-style point cells: 40/40 at deuce, AD beside the leader only.
 export function tennisScoreCells(score,rules){return pointLabels(score,rules).map(v=>v==='deuce'?'40':v==='advantage'?'AD':String(v));}
 /** Event feedback describes the actual outcome; proximity alone is never a hit. */

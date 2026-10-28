@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import { primitive as part, material, makeTree } from './environment.mjs?v=island-naval-aim-20261027-2';
-import { batchMeshes } from './batch.mjs?v=island-naval-aim-20261027-2';
+import { primitive as part, material, makeTree } from './environment.mjs?v=island-naval-aim-20261028-1';
+import { batchMeshes } from './batch.mjs?v=island-naval-aim-20261028-1';
 
 // A visual kind is an independent extension point. Building IDs never select
 // geometry; two data records can share a visual, or register their own renderer.

@@ -5,7 +5,7 @@ import {readFile} from 'node:fs/promises';
 import {createNavalModel} from '../workout/island/minigames/naval.mjs';
 import {seededRandom} from '../workout/island/minigames/context.mjs';
 import {navalPatrolSpec,createNavalPatrol,stepNavalPatrol} from '../workout/island/minigames/naval-patrol.mjs';
-import {navalAimGain,navalAimStep,navalChargePower} from '../workout/island/minigames/naval-controls.mjs';
+import {navalAimGain,navalAimStep,navalReachAim,navalReachOf,navalReachRange} from '../workout/island/minigames/naval-controls.mjs';
 import {navalLaunch,navalPredict,navalLanding} from '../workout/island/minigames/naval-ballistics.mjs';
 
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames,b=config.navalDuel;
@@ -72,15 +72,15 @@ test('Every pixel of a drag moves the aim, slow drags finely and fast drags far,
  const one=navalAimStep(start,0,-1,40,{},b);near(one.elevation,20.06);
  assert.deepEqual(drag(3,20,40),drag(3,20,40));
  assert.equal(navalAimStep({yaw:0,elevation:b.ballistics.maxElevation},0,-50,16,{},b).elevation,b.ballistics.maxElevation);
- assert.equal(b.aimControls.gain.startPixels,2);assert.equal(b.ballistics.defaultElevation,14);assert.equal(b.aimControls.chargeSeconds,1.2);
+ assert.equal(b.aimControls.gain.startPixels,2);assert.equal(b.ballistics.defaultElevation,14);
 });
 
-test('Charging to full power moves the predicted landing continuously and then stops',()=>{
- const ship={x:60,z:0,heading:0};let last=null;
- for(let t=0;t<=2;t+=1/120){const power=navalChargePower(t,b),l=navalLaunch({ship,yaw:0,elevation:14,power},b),x=navalLanding(l).x;if(last!==null){assert.ok(x>=last-1e-9);assert.ok(x-last<2.5,`no jump at ${t.toFixed(3)} s`);}last=x;}
- const full=navalLanding(navalLaunch({ship,yaw:0,elevation:14,power:1},b)).x;near(last,full,1e-9);
+test('Vertical drag sets the distance in one reversible control, with no time charge (28/10, Roy)',()=>{
+ const ship={x:60,z:0,heading:0},R=navalReachRange(b);assert.equal(R.low,10);let last=null;
+ for(let v=R.min;v<=R.max+1e-9;v+=.25){const a=navalReachAim(v,b),x=navalLanding(navalLaunch({ship,yaw:0,...a},b)).x;if(last!==null){assert.ok(x>=last-1e-9,'farther as the drag goes up');assert.ok(x-last<4,`no jump at ${v}`);}last=x;assert.ok(Math.abs(navalReachOf(a,b)-v)<1e-9,'the turret maps back to the same reach');}
+ assert.ok(navalLanding(navalLaunch({ship,yaw:0,...navalReachAim(R.min,b)},b)).x-60<100,'short shots stay possible');assert.deepEqual(navalReachAim(14,b),{elevation:14,power:1});
+ const up=navalAimStep({yaw:0,elevation:14},0,-30,40,{},{...b,ballistics:{...b.ballistics,minElevation:R.min}}),back=navalAimStep(up,0,30,40,{speed:0},{...b,ballistics:{...b.ballistics,minElevation:R.min}});near(back.elevation,14,1e-9);
 });
-
 test('A shell fired while sailing at full speed lands on the point shown at release',()=>{
  const m=make(3,5);for(let i=0;i<60;i++)m.update(.02,{moveX:1,moveZ:-.4});assert.ok(m.playerShip.speed>45,'sailing near 48');
  const input={moveX:1,moveZ:-.4,aimHeld:true,aimYaw:-.9,aimElevation:18,aimPower:1};for(let i=0;i<20;i++)m.update(.02,input);

@@ -21,7 +21,8 @@ await verify('naval-feel',[{width:844,height:390}],async({page,context,viewport,
  s=await snap();const slow=Math.abs(s.turret.yaw-startYaw)*DEG/40;
  const fastStart=s.turret.yaw;for(let i=0;i<15;i++){x+=16*dir;await touch('touchMove',[{x,y:pad.y}]);await tick(16);}
  s=await snap();const fast=Math.abs(s.turret.yaw-fastStart)*DEG/240;
- const elevStart=s.turret.elevation;let y=pad.y;for(let i=0;i<30;i++){y-=1;await touch('touchMove',[{x,y}]);await tick(40);}s=await snap();const slowUp=(s.turret.elevation-elevStart)/30;
+ // The drag speed is smoothed over 0.05 s, so the first few slow pixels after a fast swing still carry part of the fast gain; measure after they settle.
+ let y=pad.y;for(let i=0;i<5;i++){y-=1;await touch('touchMove',[{x,y}]);await tick(40);}s=await snap();const elevStart=s.turret.elevation;for(let i=0;i<30;i++){y-=1;await touch('touchMove',[{x,y}]);await tick(40);}s=await snap();const slowUp=(s.turret.elevation-elevStart)/30;
  report.gain={slowYaw:+slow.toFixed(4),fastYaw:+fast.toFixed(4),slowElevation:+slowUp.toFixed(4),elevation:[+elevStart.toFixed(2),+s.turret.elevation.toFixed(2)]};
  assert.ok(Math.abs(slow-.08)<.004,'slow horizontal gain near 0.08°/px');assert.ok(fast>.17&&fast<=.2001,'fast horizontal gain near 0.20°/px');assert.ok(Math.abs(slowUp-.06)<.004,'slow vertical gain near 0.06°/px');
  // Two pixels start the aim; one more pixel after that still moves it.

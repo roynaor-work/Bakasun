@@ -1,7 +1,7 @@
 /** Island Pro Basketball club screen (menu, not the court): next game and table, the starting
  * five, training with its cost and result shown before buying, and match settings. Every
  * change goes through engine.hoops, which saves and refuses while a game is running. */
-import {DRILLS} from '../minigames/hoops-league.mjs?v=island-naval-aim-20261027-2';
+import {DRILLS} from '../minigames/hoops-league.mjs?v=island-naval-aim-20261028-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;if(text!=='')n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};

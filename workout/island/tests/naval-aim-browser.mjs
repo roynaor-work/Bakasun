@@ -20,9 +20,10 @@ await verify('naval-aim',sizes,async({page,context,viewport,tick,snap,start,exit
   // Hold, drag right and up: turret turns right, barrel rises, ring charges, arc appears.
   const fire=await center('#shoot');await touch('touchStart',[fire]);await tick(120);const held=await snap();assert.ok(held.aiming);assert.equal(held.fired,0);
   const before=held.turret,aimBefore=held.aimScreen;
-  for(let i=1;i<=6;i++){await touch('touchMove',[{x:fire.x+i*5,y:fire.y-i*8}]);await tick(50);}await tick(800);
+  // 28/10/2026: distance is now set by the vertical drag at full power from the start, so a longer drag up pulls the far landing toward the horizon; drag mostly sideways to check the turn.
+  for(let i=1;i<=6;i++){await touch('touchMove',[{x:fire.x+i*12,y:fire.y-i*4}]);await tick(50);}await tick(800);
   const aimed=await snap();assert.ok(aimed.turret.yaw>before.yaw,'drag right turns the turret right');assert.ok(aimed.turret.elevation>before.elevation,'drag up raises the barrel');assert.ok(aimed.turret.power>.99,'the ring charges to full');
-  assert.ok(aimed.aimScreen.x>aimBefore.x-1,'the landing moves to the right on screen');assert.ok(aimed.camera.zoom>.9,'the camera zooms behind the turret');assert.ok(aimed.renderMetrics.aimArc.points>10&&aimed.renderMetrics.aimArc.visible);assert.equal(aimed.fired,0);
+  assert.ok(aimed.prediction.end.z>held.prediction.end.z,'the landing moves to the right of the bow (the camera turns with the turret, so its screen x stays near the centre)');void aimBefore;assert.ok(aimed.camera.zoom>.9,'the camera zooms behind the turret');assert.ok(aimed.renderMetrics.aimArc.points>10&&aimed.renderMetrics.aimArc.visible);assert.equal(aimed.fired,0);
   assert.equal(await page.locator('.naval-aim-cancel').isVisible(),true);
   await capture('2-aim');
   await touch('touchEnd');await tick(40);const launched=await snap();assert.equal(launched.fired,1,'release fires once');assert.deepEqual(launched.ball.predicted.end,{x:aimed.prediction.end.x,z:aimed.prediction.end.z,t:aimed.prediction.end.t});

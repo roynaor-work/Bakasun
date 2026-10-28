@@ -1,5 +1,5 @@
-import {navalWaterAt} from './naval-camera.mjs?v=island-naval-aim-20261027-2';
-import {navalWeaponIcons} from './naval-icons.mjs?v=island-naval-aim-20261027-2';
+import {navalWaterAt} from './naval-camera.mjs?v=island-naval-aim-20261028-1';
+import {navalWeaponIcons} from './naval-icons.mjs?v=island-naval-aim-20261028-1';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
 export function navalSteeringInput(moveX=0,moveZ=0,cameraHeading=0,deadzone=.12){
@@ -16,8 +16,8 @@ export function navalVisibleTarget(model,project,width,height,point,preferred=mo
  const candidate=candidates[0];return candidate&&(!point||Math.hypot(candidate.point.x-center.x,candidate.point.y-center.y)<=44)?candidate.enemy.index:null;
 }
 /** Archery-style turret control. Hold (the Fire button or the aim pad) enters
- * aiming; horizontal drag turns the turret, vertical drag raises the barrel,
- * the ring charges power, release fires exactly once. A short tap is a quick
+ * aiming; horizontal drag turns the turret, vertical drag sets the distance
+ * (reversible, see navalReachAim), release fires exactly once. A short tap is a quick
  * shot. Releasing on the cancel chip, a cancelled pointer, blur or a hidden
  * tab never fires. Movement keeps its own pointer, so two thumbs work. */
 export function navalAimFromDrag(start,dx,dy,config){
@@ -40,6 +40,20 @@ export function navalAimStep(aim,dx,dy,ms,track,config){
  track.speed=(track.speed??instant)+(instant-(track.speed??instant))*(1-Math.exp(-dt/(g.smoothSeconds??.05)));
  const k=navalAimGain(track.speed,config),DEG=Math.PI/180;
  return {yaw:aim.yaw+dx*k.yaw*DEG,elevation:Math.max(b.minElevation??3,Math.min(b.maxElevation??42,aim.elevation-dy*k.elevation))};
+}
+/** 28/10/2026 (Roy): one reversible control for distance instead of a time
+ * charge. Vertical drag moves a single reach value: above `lowAngle` it is
+ * the barrel elevation at full power; below it the barrel stays at
+ * `lowAngle` and power falls toward the minimum, so short shots stay
+ * possible. Dragging back always undoes it; holding still changes nothing. */
+export function navalReachRange(config){const r=config.aimControls?.reach||{},b=config.ballistics||{},low=r.lowAngle??10;return {low,min:low-(r.powerSpan??14),max:b.maxElevation??42,minPower:b.minPower??.35};}
+export function navalReachAim(v,config){
+ const R=navalReachRange(config),x=Math.max(R.min,Math.min(R.max,v));
+ return x>=R.low?{elevation:x,power:1}:{elevation:R.low,power:R.minPower+(1-R.minPower)*(x-R.min)/Math.max(1e-6,R.low-R.min)};
+}
+export function navalReachOf(turret,config){
+ const R=navalReachRange(config),power=turret?.power??1,elevation=turret?.elevation??R.low;
+ return power>=.999?Math.max(R.min,Math.min(R.max,elevation)):R.min+(R.low-R.min)*Math.max(0,Math.min(1,(power-R.minPower)/Math.max(1e-6,1-R.minPower)));
 }
 export function navalChargePower(seconds,config){
  const c=config.aimControls||{},min=config.ballistics?.minPower??.35;
@@ -67,15 +81,16 @@ export function createNavalInput(ctx,getModel,getView){
  const choose=point=>{const m=getModel(),r=canvas.getBoundingClientRect();return m&&navalVisibleTarget(m,(x,z,y)=>project(m,x,z,y),r.width,r.height,point,m.selectedTargetIndex);};
  const show=held=>{controls.dataset.aiming=String(held);cancel.hidden=!held;};
  const reset=()=>{gesture=keyboard=null;queue=[];pendingSelection=null;keyboardClick=false;getModel()?.cancelAim?.();show(false);controls.style?.removeProperty?.('--naval-power');};
- const startState=()=>{const m=getModel(),t=m?.turret||{yaw:0,elevation:6,power:1};return {yaw:t.yaw,elevation:t.elevation,time:m?.time??0};};
+ const reachConfig={...balance,ballistics:{...(balance.ballistics||{}),minElevation:navalReachRange(balance).min}};
+ const startState=()=>{const m=getModel(),t=m?.turret||{yaw:0,elevation:14,power:1};return {yaw:t.yaw,elevation:navalReachOf(t,balance),time:m?.time??0};};
  const startPixels=c.gain?.startPixels??2;
  // The aim moves from the first 2 pixels on, pixel for pixel, with the gain set by drag speed.
  const settle=(g,x,y,t)=>{const px=g.lastX??g.x,py=g.lastY??g.y,ms=Math.max(1,(t??performance.now())-(g.lastT??t??0));g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));
-  if(!g.engaged&&g.moved>=startPixels){g.engaged=true;g.aim=navalAimStep(g.aim,g.dx,g.dy,ms,g.track,balance);}
-  else if(g.engaged)g.aim=navalAimStep(g.aim,x-px,y-py,ms,g.track,balance);
+  if(!g.engaged&&g.moved>=startPixels){g.engaged=true;g.aim=navalAimStep(g.aim,g.dx,g.dy,ms,g.track,reachConfig);}
+  else if(g.engaged)g.aim=navalAimStep(g.aim,x-px,y-py,ms,g.track,reachConfig);
   g.lastX=x;g.lastY=y;g.lastT=t??performance.now();};
  const moveTo=(g,e)=>{const list=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():null;if(list?.length)for(const p of list)settle(g,p.clientX,p.clientY,p.timeStamp);else settle(g,e.clientX,e.clientY,e.timeStamp);};
- const state=g=>{const m=getModel(),aim=g.aim||navalAimFromDrag(g.start,g.dx,g.dy,balance),held=Math.max(0,(m?.time??0)-g.start.time);return {...aim,power:navalChargePower(held*Math.max(1,m?.equipment?.rate||1),balance),held};};
+ const state=g=>{const m=getModel(),reach=g.aim?.elevation??g.start.elevation,shot=navalReachAim(reach,balance),held=Math.max(0,(m?.time??0)-g.start.time),R=navalReachRange(balance);return {yaw:g.aim?.yaw??g.start.yaw,elevation:shot.elevation,power:shot.power,reach:(reach-R.min)/(R.max-R.min),held};};
  const overCancel=(x,y)=>{if(cancel.hidden)return false;const r=cancel.getBoundingClientRect();return x>=r.left-8&&x<=r.right+8&&y>=r.top-8&&y<=r.bottom+8;};
  const finish=(g,x,y,t)=>{settle(g,x,y,t);const s=state(g);if(overCancel(x,y))queue.push({type:'cancel'});else if(s.held<=(c.tapSeconds??.22)&&g.moved<=(c.tapPixels??10))queue.push({type:'quick',target:getModel()?.lockedTargetIndex});else queue.push({type:'fire',...s,target:getModel()?.lockedTargetIndex});};
  const begin=e=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();m.beginAim?.(m.selectedTargetIndex);const start=startState();gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start,aim:{yaw:start.yaw,elevation:start.elevation},track:{},engaged:false,lastX:e.clientX,lastY:e.clientY,lastT:e.timeStamp};show(true);};
@@ -87,7 +102,7 @@ export function createNavalInput(ctx,getModel,getView){
  cancel.addEventListener('click',e=>{if(e.detail===0&&gesture===null&&keyboard){keyboard=null;queue.push({type:'cancel'});show(false);}},options);
  window.addEventListener('keydown',e=>{
   if(e.code==='Space'&&!e.repeat&&!e.target.matches('input,textarea,select,[contenteditable=true]')&&(!e.target.matches('button')||e.target===fire)){e.preventDefault();if(!gesture&&!keyboard){getModel()?.beginAim?.(getModel().selectedTargetIndex);const start=startState();keyboard={x:0,y:0,dx:0,dy:0,moved:0,start,aim:{yaw:start.yaw,elevation:start.elevation},track:{}};show(true);}}
-  if(keyboard&&['KeyA','KeyD','KeyW','KeyS'].includes(e.code)){e.preventDefault();const step=12,dx=e.code==='KeyA'?-step:e.code==='KeyD'?step:0,dy=e.code==='KeyW'?-step:e.code==='KeyS'?step:0;keyboard.dx+=dx;keyboard.dy+=dy;keyboard.track.speed=0;keyboard.aim=navalAimStep(keyboard.aim,dx,dy,1000,keyboard.track,balance);keyboard.moved=99;}
+  if(keyboard&&['KeyA','KeyD','KeyW','KeyS'].includes(e.code)){e.preventDefault();const step=12,dx=e.code==='KeyA'?-step:e.code==='KeyD'?step:0,dy=e.code==='KeyW'?-step:e.code==='KeyS'?step:0;keyboard.dx+=dx;keyboard.dy+=dy;keyboard.track.speed=0;keyboard.aim=navalAimStep(keyboard.aim,dx,dy,1000,keyboard.track,reachConfig);keyboard.moved=99;}
  },options);
  // Escape while aiming cancels only the aim; it must not also open the pause sheet.
  window.addEventListener('keydown',e=>{if(e.code==='Escape'&&(gesture||keyboard)){e.preventDefault();e.stopImmediatePropagation?.();gesture=keyboard=null;queue.push({type:'cancel'});show(false);}},{signal:abort.signal,capture:true});
@@ -103,7 +118,7 @@ export function createNavalInput(ctx,getModel,getView){
    const s=event?.type==='fire'?event:live;if(s){out.aimYaw=s.yaw;out.aimElevation=s.elevation;out.aimPower=s.power;}
    out.aimSide=side;pendingSelection=null;
    const b=balance.ballistics||{},power=s?.power??m?.power??1,elev=m?((s?.elevation??m.elevation)-(b.minElevation??3))/((b.maxElevation??42)-(b.minElevation??3)):0;
-   controls.style?.setProperty?.('--naval-power',String(g?power:0));gauge.style.setProperty('--naval-elev',String(Math.max(0,Math.min(1,elev))));gauge.dataset.visible=String(Boolean(g));
+   controls.style?.setProperty?.('--naval-power',String(g?(s?.reach??power):0));gauge.style.setProperty('--naval-elev',String(Math.max(0,Math.min(1,elev))));gauge.dataset.visible=String(Boolean(g));
    if(m){controls.dataset.weapon=String(m.ammoIndex);fire.setAttribute?.('aria-valuetext',`${Math.round((s?.elevation??m.elevation))}° · ${Math.round(power*100)}%`);}
    return out;
  }};
