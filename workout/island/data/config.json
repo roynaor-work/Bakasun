@@ -11316,7 +11316,10 @@
     "dribbleFactor": 0.9,
     "accel": 11,
     "decel": 15,
-    "turnRate": 9
+    "turnRate": 9,
+    "userAccel": 1.6,
+    "userTurn": 18,
+    "autoSwitch": true
    },
    "fatigue": {
     "drain": 0.0105,
@@ -11340,7 +11343,10 @@
     "timingBase": 0.7,
     "timingWeight": 0.45,
     "makeError": 0.09,
-    "assistBonus": 0.12
+    "assistBonus": 0.12,
+    "green": 0.35,
+    "yellow": 0.8,
+    "minHold": 0.12
    },
    "pass": {
     "speed": 11.5,
@@ -11349,13 +11355,24 @@
     "windup": 0.16,
     "interceptRadius": 0.55,
     "interceptBase": 0.22,
-    "catchRadius": 1.05
+    "catchRadius": 1.05,
+    "shortWeight": 0.32,
+    "longWeight": 0.06,
+    "dirWeight": 3.2,
+    "laneRadius": 0.9,
+    "lanePenalty": 1.6,
+    "lobAbove": 11
    },
    "jump": {
     "duration": 0.72,
     "height": 0.62,
-    "cooldown": 0.9,
-    "shotAir": 0.62
+    "cooldown": 0.5,
+    "shotAir": 0.62,
+    "airControl": 0.55,
+    "airDrag": 2.5,
+    "queueSeconds": 1.0,
+    "queueReach": 1.7,
+    "reboundLunge": 2.6
    },
    "steal": {
     "range": 1.35,
@@ -11363,13 +11380,17 @@
     "duration": 0.4,
     "cooldown": 1.0,
     "base": 0.22,
-    "foulBase": 0.12
+    "foulBase": 0.05
    },
    "block": {
     "radius": 0.55,
     "vertical": 0.6,
-    "base": 0.08,
-    "goaltendRadius": 0.12
+    "base": 0.2,
+    "goaltendRadius": 0.12,
+    "userBase": 0.28,
+    "userTimed": 0.5,
+    "userRadius": 0.85,
+    "userVertical": 0.8
    },
    "move": {
     "cooldown": 1.1,
@@ -11378,15 +11399,20 @@
     "burst": 1.08
    },
    "rebound": {
-    "radius": 0.75
+    "radius": 0.75,
+    "airRadius": 1.0,
+    "userBonus": 0.25
    },
    "contact": {
     "minSpeed": 3.0,
     "setSpeed": 0.9,
-    "chargeChance": 0.08,
-    "blockChance": 0.1,
-    "shotContact": 0.75,
-    "shootingFoul": 0.12
+    "chargeChance": 0.05,
+    "blockChance": 0.06,
+    "shotContact": 0.6,
+    "shootingFoul": 0.5,
+    "intoSpeed": 1.2,
+    "userScale": 0.6,
+    "cooldownTicks": 90
    },
    "replay": {
     "seconds": 6,
@@ -11770,6 +11796,13 @@
     "lossCredits": 1,
     "championCredits": 10,
     "drillCost": 2
+   },
+   "controls": {
+    "deadZone": 0.1,
+    "curve": 1.15,
+    "fullTilt": 0.78,
+    "autoSprint": 0.93,
+    "longPass": 0.32
    }
   }
  },

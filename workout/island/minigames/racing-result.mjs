@@ -1,4 +1,4 @@
-import {getRacingStage} from './racing-tracks.mjs?v=island-easy-city-20261027-1';
+import {getRacingStage} from './racing-tracks.mjs?v=island-hoops-feel-20261027-1';
 
 /** Rewards depend on the selected race and a complete, ordered checkpoint run. */
 export function racingResult(raw,ctx,balance) {

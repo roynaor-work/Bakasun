@@ -19,5 +19,6 @@ console.log('profile',profile,'games',games,'scores',scores.join(', '));
 for(const [k,s] of Object.entries(shots))console.log(k,s.n,'made',s.made,(100*s.made/s.n).toFixed(0)+'%');
 const per=k=>(Object.entries(agg).filter(([x])=>x===k||x.startsWith(k+':')).reduce((a,[,v])=>a+v,0)/games).toFixed(1);
 console.log('per game: passes',per('pass'),'steals',per('steal'),'blocks',per('block'),'fouls',per('foul'),'FT trips',per('freeThrows'),'rebounds',per('rebound'),'subs',per('sub'),'timeouts',per('timeout'));
+console.log('fouls by kind',JSON.stringify(Object.fromEntries(Object.entries(agg).filter(([k])=>k.startsWith('foul')))));
 console.log('violations',JSON.stringify(Object.fromEntries(Object.entries(agg).filter(([k])=>k.startsWith('violation')))));
 console.log('sim speed',(steps/((Date.now()-t0)/1000)/60).toFixed(0),'x realtime');

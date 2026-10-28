@@ -1,10 +1,10 @@
-import {drawAlienEffects,drawAlienBolts} from './g2m-effects.mjs?v=island-easy-city-20261027-1';
+import {drawAlienEffects,drawAlienBolts} from './g2m-effects.mjs?v=island-hoops-feel-20261027-1';
 import {drawUltraAlienEffects,drawAlienFallbackFeedback} from './ultra-alien-effects.mjs';
-import {createAlienView} from './alien-view.mjs?v=island-easy-city-20261027-1';
+import {createAlienView} from './alien-view.mjs?v=island-hoops-feel-20261027-1';
 import {runAlienSession} from './alien-session.mjs';
 import {createAlienModel} from './alien-flight-model.mjs';
 import './alien-ui.mjs';
-import {oval,drawHealthBar} from './art.mjs?v=island-easy-city-20261027-1';
+import {oval,drawHealthBar} from './art.mjs?v=island-hoops-feel-20261027-1';
 export {createAlienModel};
 export {createAlienEntity,separateAliens,alienStack} from './alien-flight-combat.mjs';
 const TAU=Math.PI*2;

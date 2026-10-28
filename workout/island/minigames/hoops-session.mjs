@@ -1,14 +1,14 @@
 /** Island Pro Basketball session: connects the 5 on 5 engine, the arena view, input, sound
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
-import {gameContext} from './context.mjs?v=island-easy-city-20261027-1';
-import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-easy-city-20261027-1';
-import {createHoopsControls} from './hoops-controls.mjs?v=island-easy-city-20261027-1';
-import {createHoopsAudio} from './hoops-audio.mjs?v=island-easy-city-20261027-1';
-import {hoopsIcon} from './hoops-icons.mjs?v=island-easy-city-20261027-1';
-import {createFixedLoop} from './hoops-loop.mjs?v=island-easy-city-20261027-1';
-import {createCourt} from './hoops-court.mjs?v=island-easy-city-20261027-1';
-import {matchTeams} from './hoops-franchise.mjs?v=island-easy-city-20261027-1';
+import {gameContext} from './context.mjs?v=island-hoops-feel-20261027-1';
+import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-hoops-feel-20261027-1';
+import {createHoopsControls} from './hoops-controls.mjs?v=island-hoops-feel-20261027-1';
+import {createHoopsAudio} from './hoops-audio.mjs?v=island-hoops-feel-20261027-1';
+import {hoopsIcon} from './hoops-icons.mjs?v=island-hoops-feel-20261027-1';
+import {createFixedLoop} from './hoops-loop.mjs?v=island-hoops-feel-20261027-1';
+import {createCourt} from './hoops-court.mjs?v=island-hoops-feel-20261027-1';
+import {matchTeams} from './hoops-franchise.mjs?v=island-hoops-feel-20261027-1';
 
 const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor((s*10)%10)}`;const m=Math.floor(s/60);return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
 
@@ -34,7 +34,7 @@ export function startHoops(ctx){
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
- const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-easy-city-20261027-1',import.meta.url).href;screenEl.append(css);
+ const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-hoops-feel-20261027-1',import.meta.url).href;screenEl.append(css);
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
  const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
 
@@ -46,14 +46,14 @@ export function startHoops(ctx){
  const mid=node('div','hoops-mid'),pips=node('span','hoops-pips');for(let k=0;k<4;k++)pips.append(node('i'));
  const clock=node('bdi','hoops-clock','0:00'),shotc=node('bdi','hoops-shotclock','24');mid.append(pips,clock,shotc);
  bug.append(home.s,mid,away.s);
- const meter=node('div','hoops-meter');meter.hidden=true;meter.setAttribute('aria-hidden','true');const meterWin=node('span','hoops-meter-win'),meterFill=node('span','hoops-meter-fill');meter.append(meterWin,meterFill);
+ const meter=node('div','hoops-meter');meter.hidden=true;meter.setAttribute('aria-hidden','true');const meterYellow=node('span','hoops-meter-yellow'),meterWin=node('span','hoops-meter-win'),meterFill=node('span','hoops-meter-fill');meter.append(meterYellow,meterWin,meterFill);
  const grade=node('div','hoops-grade');grade.hidden=true;let gradeUntil=0;
  const toast=node('div','hoops-toast');toast.hidden=true;toast.setAttribute('aria-live','polite');let toastUntil=0;
  const replayBtn=node('button','hoops-replay');replayBtn.type='button';replayBtn.dataset.action='hoops-replay';replayBtn.setAttribute('aria-label',labels.replay);replayBtn.title=labels.replay;replayBtn.append(hoopsIcon('replay',doc));replayBtn.hidden=true;
  const benchPanel=node('div','hoops-bench');benchPanel.hidden=true;benchPanel.setAttribute('role','dialog');benchPanel.setAttribute('aria-label',labels.bench);
  const loading=node('div','hoops-loading');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));const ringEl=node('span','hoops-progress');loading.append(ringEl);
  stageEl.append(bug,meter,grade,toast,replayBtn,benchPanel,loading);
- controls=createHoopsControls({root,doc,onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>hoopsIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:1}});
+ controls=createHoopsControls({root,doc,config:balance.controls,onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>hoopsIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:1}});
  root.classList.add('hoops-controls');controls.setEnabled(!paused);
  screenEl.addEventListener('pointerdown',()=>audio.unlock(),{...on,capture:true});doc.defaultView.addEventListener('keydown',()=>audio.unlock(),on);
  const statusEl=ctx.status;
@@ -73,7 +73,7 @@ export function startHoops(ctx){
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
   const quality=Number(params.get('hoopsQuality')||setup.quality||2);
-  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-easy-city-20261027-1');
+  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-hoops-feel-20261027-1');
   viewModule.then(m=>m.createHoopsView(canvas,{...balance,view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onProgress:p=>ringEl.style.setProperty('--p',String(p))})).then(loaded=>{
    if(disposed){loaded.dispose();return;}
    view=loaded;const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();
@@ -92,7 +92,7 @@ export function startHoops(ctx){
  function handleEvents(events){
   if(!events.length)return;view?.effects(events);audio.events(events);
   for(const e of events){
-   if(e.type==='timing'&&e.playerId===cur.controlled){const g=e.quality>0.8?'perfect':e.early?'early':'late';grade.hidden=false;grade.dataset.grade=g;grade.replaceChildren(hoopsIcon(g,doc));gradeUntil=performance.now()+800;}
+   if(e.type==='timing'&&e.playerId===cur.controlled){const g=e.zone==='green'?'perfect':e.zone==='yellow'?'good':e.early?'early':'late';grade.hidden=false;grade.dataset.grade=g;grade.replaceChildren(hoopsIcon(g,doc));gradeUntil=performance.now()+800;}
    if(e.type==='score'){if(statusEl)statusEl.textContent=t('hoops.scoreStatus',{home:e.score[0],away:e.score[1]});replayOffer=performance.now()+4500;showToast(doc.createTextNode('+'+e.points),e.team===0?'home':'away',900);}
    if(e.type==='foul'||e.type==='violation'){showToast(hoopsIcon('whistle',doc),'whistle',900);}
    if(e.type==='block'&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('block',doc),'home',700);
@@ -121,14 +121,17 @@ export function startHoops(ctx){
   bug.setAttribute('aria-label',t('hoops.board',{home:s.score[0],away:s.score[1],clock:c,quarter:s.quarter}));
   const me=s.players.find(p=>p.id===s.controlled);
   const mode=me?.hasBall?'ball':s.possession===0&&s.ball.state!=='loose'?'offense':'defense';
-  controls.setMode(mode,{call:s.call[0],defense:engine.debug.state.teams[0].tactics.defense});
-  // shot meter above the shooter while the button is held
-  const shooting=me&&me.act==='shoot'&&me.hasBall;
+  controls.setMode(mode);
+  // shot meter above the shooter while a timed shot is held: red, yellow, green, yellow, red
+  const shooting=me&&me.act==='shoot'&&me.hasBall&&me.shotHeld;
   meter.hidden=!shooting;
   if(shooting&&view){
-   const rel=balance.anim[me.shotType==='dunk'?'layup':me.shotType==='ft'?'freethrow':me.shotType]?.release||0.8,w=balance.shot.window,max=rel+w*1.2;
-   const p=view.project(me.x,2.5,me.z);meter.style.transform=`translate(${Math.round(p.x)}px,${Math.round(p.y)}px)`;
-   meterWin.style.bottom=`${Math.max(0,(rel-w*0.35)/max*100)}%`;meterWin.style.height=`${w*0.7/max*100}%`;meterFill.style.height=`${Math.min(1,me.actT/max)*100}%`;
+   const rel=balance.anim[me.shotType==='ft'?'freethrow':me.shotType]?.release||0.8,w=balance.shot.window,max=rel+w;
+   const g=w*(balance.shot.green??0.35),y=w*(balance.shot.yellow??0.8),pct=v=>`${Math.max(0,v/max*100)}%`;
+   // above the shooter, but never on top of the score bug
+   const p=view.project(me.x,2.5,me.z),floor=bug.offsetTop+bug.offsetHeight+104;meter.style.transform=`translate(${Math.round(p.x)}px,${Math.round(Math.max(p.y,floor))}px)`;
+   meterYellow.style.bottom=pct(rel-y);meterYellow.style.height=pct(2*y);
+   meterWin.style.bottom=pct(rel-g);meterWin.style.height=pct(2*g);meterFill.style.height=`${Math.min(1,me.actT/max)*100}%`;
   }
   if(!grade.hidden&&now>gradeUntil)grade.hidden=true;
   if(!toast.hidden&&now>toastUntil)toast.hidden=true;

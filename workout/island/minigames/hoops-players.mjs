@@ -5,7 +5,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
-import {jerseyTexture,shortsTexture} from './hoops-textures.mjs?v=island-easy-city-20261027-1';
+import {jerseyTexture,shortsTexture} from './hoops-textures.mjs?v=island-hoops-feel-20261027-1';
 
 const BODY_FOR_POS={PG:'guard',SG:'guard',SF:'wing',PF:'forward',C:'big'};
 const HAIR=/short0|afro|long0|bob0|braid|pony/i;

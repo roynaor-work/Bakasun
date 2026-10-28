@@ -1,6 +1,6 @@
-import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-easy-city-20261027-1';
-import {cityConnections} from './city-connections.mjs?v=island-easy-city-20261027-1';
-import {buildingCenter,levelFactor} from './metrics.mjs?v=island-easy-city-20261027-1';
+import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-hoops-feel-20261027-1';
+import {cityConnections} from './city-connections.mjs?v=island-hoops-feel-20261027-1';
+import {buildingCenter,levelFactor} from './metrics.mjs?v=island-hoops-feel-20261027-1';
 
 export const siteColor=id=>id==='house'?'#49ba85':id==='shop'?'#579fdb':id==='factory'?'#d9ad58':id==='road'?'#a4bac3':id==='park'?'#77bdaa':'#a69cdb';
 const key=(x,z)=>`${x},${z}`;
