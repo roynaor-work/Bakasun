@@ -211,7 +211,7 @@ export function runAlpineSession(ctx) {
     handleEvents(snap, now);
     if (now > calloutUntil) callout.hidden = true;
     audio.sync(blocked ? 0 : snap.speedKmh, {boosting: snap.player.boosting, carving: Math.abs(snap.player.lean || 0), airborne: snap.player.airborne});
-    view.render(snap); updateHud(snap);
+    view.render(snap, engine.presentation()); updateHud(snap);
     if (snap.result && !finished) {
       finished = true;
       const r = snap.result;
