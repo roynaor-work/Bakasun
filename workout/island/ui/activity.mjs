@@ -1,19 +1,19 @@
-import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-boar-20261029-1';
-import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-boar-20261029-1';
-import {hangarAction} from '../activity/hangar.mjs?v=island-boar-20261029-1';
-import {hangarPreview} from './hangar-preview.mjs?v=island-boar-20261029-1';
-import {createSound} from '../minigames/sound.mjs?v=island-boar-20261029-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-boar-20261029-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-boar-20261029-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=island-boar-20261029-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-boar-20261029-1';
-import {gameContext} from '../minigames/context.mjs?v=island-boar-20261029-1';
-import {gameAvailability} from '../activity/availability.mjs?v=island-boar-20261029-1';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-boar-20261029-1';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=island-boar-20261029-1';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-boar-20261029-1';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=island-boar-20261029-1';
-import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-boar-20261029-1';
+import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-hoops-r3-20261029-1';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-hoops-r3-20261029-1';
+import {hangarAction} from '../activity/hangar.mjs?v=island-hoops-r3-20261029-1';
+import {hangarPreview} from './hangar-preview.mjs?v=island-hoops-r3-20261029-1';
+import {createSound} from '../minigames/sound.mjs?v=island-hoops-r3-20261029-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-hoops-r3-20261029-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-hoops-r3-20261029-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=island-hoops-r3-20261029-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-hoops-r3-20261029-1';
+import {gameContext} from '../minigames/context.mjs?v=island-hoops-r3-20261029-1';
+import {gameAvailability} from '../activity/availability.mjs?v=island-hoops-r3-20261029-1';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-hoops-r3-20261029-1';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=island-hoops-r3-20261029-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-hoops-r3-20261029-1';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=island-hoops-r3-20261029-1';
+import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-hoops-r3-20261029-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -298,7 +298,7 @@ export class ActivityInterface {
   alpineResult(dialog,summary,a){
     // Design result card: rank medal, time, peak speed, trick score, coins and the course record.
     const time=ms=>{const c=Math.round(ms/10);return `${String(Math.floor(c/6000)).padStart(2,'0')}:${String(Math.floor(c/100)%60).padStart(2,'0')}.${String(c%100).padStart(2,'0')}`;};
-    const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-boar-20261029-1',import.meta.url).href;dialog.append(css);
+    const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-hoops-r3-20261029-1',import.meta.url).href;dialog.append(css);
     dialog.classList.add('alpine-result');const medal=el('div','alpine-medal',String(a.rank).padStart(2,'0'));medal.setAttribute('aria-label',this.t('alpine.result.rank')+' '+a.rank);dialog.append(medal);
     const rows=[['rank',`${a.rank} / ${a.totalRiders}`],['time',time(a.elapsedMs)],['peak',String(a.peakKmh)],['trickScore',(a.trickScore||0).toLocaleString('en-US')],['coins',`${a.coins||0} / ${a.coinTotal??'-'}`]];
     if(a.bestMs)rows.push([a.newBest?'newBest':'best',time(a.bestMs)]);

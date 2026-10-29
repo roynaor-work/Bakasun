@@ -129,9 +129,9 @@ for(const viewport of only){
   const inp=o=>({move:{x:0,z:0},sprint:false,shootDown:false,shootUp:false,passPress:false,passLong:false,passDir:null,altPress:false,switchPress:false,timeoutPress:false,call:null,...o});
   const me=a.onCourt(0)[0],side=a.side(0),rim=e.court.rim(side);e.debug.give(me.id);S.controlled=me.id;e.debug.place(me.id,rim.x-side*6.2,0.4);S.shotClock=24;
   for(const p of a.onCourt(1))e.debug.place(p.id,-side*12,p.z);
-  d.step(1,inp({shootDown:true}));d.step(30,inp({}));
+  d.step(1,inp({shootDown:true}));const dbg={phase:e.snapshot().phase,act:me.act,ctl:S.controlled===me.id,own:S.ball.owner===me.id,ball:S.ball.state,auto:S.autopilot,user:S.userTeam};d.step(30,inp({}));
   const m=document.querySelector('.hoops-meter'),y=m.querySelector('.hoops-meter-yellow').getBoundingClientRect(),g=m.querySelector('.hoops-meter-win').getBoundingClientRect();
-  return {shown:!m.hidden,held:e.snapshot().players.find(p=>p.id===me.id).shotHeld,yH:y.height,gH:g.height,yTop:y.top,gTop:g.top,yBottom:y.bottom,gBottom:g.bottom};});
+  return {dbg,shown:!m.hidden,held:e.snapshot().players.find(p=>p.id===me.id).shotHeld,yH:y.height,gH:g.height,yTop:y.top,gTop:g.top,yBottom:y.bottom,gBottom:g.bottom};});
  assert.ok(meter.shown&&meter.held,'meter shows while the shot is held: '+JSON.stringify(meter));
  assert.ok(meter.yH>meter.gH*1.6&&meter.yTop<meter.gTop&&meter.yBottom>meter.gBottom,'yellow wraps the green zone: '+JSON.stringify(meter));
  // software WebGL needs a moment after the burst of steps

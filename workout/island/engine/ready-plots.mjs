@@ -1,5 +1,5 @@
-import {cellsFor,validatePlacement} from './rules.mjs?v=island-boar-20261029-1';
-import {siteColor} from './city-sites.mjs?v=island-boar-20261029-1';
+import {cellsFor,validatePlacement} from './rules.mjs?v=island-hoops-r3-20261029-1';
+import {siteColor} from './city-sites.mjs?v=island-hoops-r3-20261029-1';
 
 const neighbors=[[1,0],[0,1],[-1,0],[0,-1]];
 const object=value=>value&&typeof value==='object'&&!Array.isArray(value);

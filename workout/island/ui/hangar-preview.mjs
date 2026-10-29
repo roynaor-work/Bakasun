@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from '../view/local-models.mjs?v=island-boar-20261029-1';
+import {LocalModels} from '../view/local-models.mjs?v=island-hoops-r3-20261029-1';
 
 /** Local studio for the authored Meshy ship. Original materials, texture sizes
  * and geometry stay intact; selected paint is the docking-bay accent. */

@@ -1,14 +1,14 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {seededRandom} from './tennis.mjs?v=island-boar-20261029-1';
-import {tennisSeats,seatedVertex} from './tennis-crowd.mjs?v=island-boar-20261029-1';
-import {createUltraTennisVenue} from './ultra-tennis-environment.mjs?v=island-boar-20261029-1';
+import {seededRandom} from './tennis.mjs?v=island-hoops-r3-20261029-1';
+import {tennisSeats,seatedVertex} from './tennis-crowd.mjs?v=island-hoops-r3-20261029-1';
+import {createUltraTennisVenue} from './ultra-tennis-environment.mjs?v=island-hoops-r3-20261029-1';
 
 export async function createTennisEnvironment(scene,config,keep,renderer,camera){
  const e=config.render.environment,rand=seededRandom(config.seed),seats=tennisSeats(config),trees=[],near=[],loaded=[],failures=[],people=[];
  const venue=createUltraTennisVenue(scene,config,keep,seats),crowdPalette=['#586b75','#d8d0b9','#68816c','#b8a489','#6d8987','#b08a77'];
  const results=await Promise.allSettled(config.environment.models.map(async path=>{
-  const gltf=await new GLTFLoader().loadAsync(new URL('../'+path+'?v=island-boar-20261029-1',import.meta.url).href);
+  const gltf=await new GLTFLoader().loadAsync(new URL('../'+path+'?v=island-hoops-r3-20261029-1',import.meta.url).href);
   gltf.scene.updateMatrixWorld(true);let source;gltf.scene.traverse(o=>{if(o.isMesh&&!source)source=o;});if(!source)throw Error(path);
   const name=path.split('/').at(-1),geometry=keep(source.geometry);geometry.applyMatrix4(source.matrixWorld);geometry.computeBoundingBox();
   const b=geometry.boundingBox,height=name.startsWith('adult')?e.crowdHeight:e.treeHeight,scale=height/(b.max.y-b.min.y);

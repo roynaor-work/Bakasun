@@ -1,4 +1,4 @@
-import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-boar-20261029-1';
+import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-hoops-r3-20261029-1';
 const node=(tag,className='',text='')=>{const item=document.createElement(tag);item.className=className;item.textContent=text;return item;};
 const button=(text,action,handler,className='secondary-button')=>{const item=node('button',className,text);item.type='button';item.dataset.action=action;item.onclick=handler;return item;};
 export const plotCanBuild=row=>Boolean(row&&(row.ok===true||row.status==='available'||row.status==='ready'));
