@@ -1,4 +1,4 @@
-import {WORDS,RHYMES,ANIMALS,OPPOSITES,SYNONYMS,FACTS,SOUNDS} from './banks.mjs?v=island-alpine-20261028-1';
+import {WORDS,RHYMES,ANIMALS,OPPOSITES,SYNONYMS,FACTS,SOUNDS} from './banks.mjs?v=island-soccer-athlete-20261029-1';
 export const unpoint = s=>String(s).replace(/[\u0591-\u05c7]/g,'');
 export function shuffled(items,rng=Math.random) {
   const result=[...items];for(let i=result.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[result[i],result[j]]=[result[j],result[i]];}return result;

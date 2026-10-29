@@ -1,9 +1,9 @@
 import * as THREE from '../vendor/three.module.js';
-import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-alpine-20261028-1';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-alpine-20261028-1';
+import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-soccer-athlete-20261029-1';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-soccer-athlete-20261029-1';
 import {createProRider} from './athlete.mjs';
 import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
-import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-alpine-20261028-1';
+import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-soccer-athlete-20261029-1';
 
 /** Alpine Rush presentation (Codex design package view, rebuilt for the curved halfpipe).
  * Renders a SkiFrame only: positions, collisions, tricks and results belong to the engine.

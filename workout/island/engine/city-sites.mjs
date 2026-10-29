@@ -1,6 +1,6 @@
-import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-alpine-20261028-1';
-import {cityConnections} from './city-connections.mjs?v=island-alpine-20261028-1';
-import {buildingCenter,levelFactor} from './metrics.mjs?v=island-alpine-20261028-1';
+import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-soccer-athlete-20261029-1';
+import {cityConnections} from './city-connections.mjs?v=island-soccer-athlete-20261029-1';
+import {buildingCenter,levelFactor} from './metrics.mjs?v=island-soccer-athlete-20261029-1';
 
 export const siteColor=id=>id==='house'?'#49ba85':id==='shop'?'#579fdb':id==='factory'?'#d9ad58':id==='road'?'#a4bac3':id==='park'?'#77bdaa':'#a69cdb';
 const key=(x,z)=>`${x},${z}`;

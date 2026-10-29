@@ -1,0 +1,631 @@
+{
+ "asset": "athlete.glb",
+ "builtDate": "2026-10-27",
+ "bytes": 1280272,
+ "sha256": "ca4bed47cba1b8cea7334514936d1723c1fb046d6c97c99ab1776255b020bdd7",
+ "compacted": {
+  "date": "2026-10-29",
+  "from": {
+   "bytes": 3656364,
+   "sha256": "3c3ce6cb17e54b400e62a188d273aa584626e80a52d73e3b359b3931bc3513ba"
+  },
+  "method": "tools/athlete-build/src/compact-glb.py: sparse morph targets, uint16 indices, uint8 joints, normalised uint16 weights, zopfli PNG, textures as files next to the GLB; renders pixel-identical in the motion lab",
+  "textures": {
+   "textures/ball-albedo.jpg": {
+    "bytes": 47579,
+    "sha256": "15462b2b211483d073199c340ac4eb7505608d95d2fae0627504946188bf64a6"
+   },
+   "textures/ball-normal.png": {
+    "bytes": 63265,
+    "sha256": "f2aede2924ae3b802d5ceaceeb6b0b3b57738f7204b96b459f0d968d3d99b3b5"
+   },
+   "textures/kit-detail.png": {
+    "bytes": 471737,
+    "sha256": "2a8ce18003055f3e9d3400881ab06c2181efdce24e2618813e65883d1f82ad1f"
+   },
+   "textures/kit-mask.png": {
+    "bytes": 37444,
+    "sha256": "82f2aa60ca53e5aab03cd8393c8ffe9e9ab3b101ebb856fd31e071e882f6f130"
+   },
+   "textures/kit-normal.jpg": {
+    "bytes": 90808,
+    "sha256": "e905d9ded06e0716a6c8c1f7ae172868e22afc9a3669ecb7273414eca0c5531c"
+   },
+   "textures/kit-orm.jpg": {
+    "bytes": 68721,
+    "sha256": "861ebdea202b093aececc1df53e80ca770dba7e4aea0ea2cf29bb493db0caa76"
+   },
+   "textures/skin-albedo.jpg": {
+    "bytes": 148130,
+    "sha256": "104bd8c4c0606b9175955fbb074f701418bc7c383274a40cab87ce6550cdb1b9"
+   },
+   "textures/skin-mask.png": {
+    "bytes": 101122,
+    "sha256": "fcefaf531be909d56fae25fdae0748ffa4a48dda25659be751145ba135bf1d0d"
+   },
+   "textures/skin-normal.jpg": {
+    "bytes": 164342,
+    "sha256": "ffad085256b508beb89ade931512a059683a132b9762993fa65d6ae7addccdb5"
+   },
+   "textures/skin-orm.jpg": {
+    "bytes": 210180,
+    "sha256": "b1d6995057e33cb38b6442db2c6c231cab6c3f50116ada40b79a70adb4f15b04"
+   }
+  }
+ },
+ "license": "CC0-1.0 for the model, rig, weights and morph targets (MakeHuman, released CC0 in September 2020); motion data from the CMU Graphics Lab Motion Capture Database (free for research and commercial use, no restrictions), BVH conversion by Bruce Hahne (no additional restrictions); textures, kit, hair shell, boots, ball and all processing authored for this project (CC0)",
+ "licenseSources": [
+  "https://github.com/makehumancommunity/makehuman/blob/master/LICENSE.ASSETS.md",
+  "https://github.com/makehumancommunity/mpfb2",
+  "http://mocap.cs.cmu.edu/",
+  "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/READMEFIRST.txt"
+ ],
+ "attributionRequested": "The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217.",
+ "makehuman": [
+  {
+   "file": "3dobjs/base.obj",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/3dobjs/base.obj",
+   "bytes": 1749303,
+   "sha256": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c"
+  },
+  {
+   "file": "rigs/standard/rig.cmu_mb.json",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/rigs/standard/rig.cmu_mb.json",
+   "bytes": 23803,
+   "sha256": "a751d730091304de2a7f7407a57976e86f71f75125e21fa2626ca5c661a6ad68"
+  },
+  {
+   "file": "rigs/standard/weights.cmu_mb.json",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/rigs/standard/weights.cmu_mb.json",
+   "bytes": 3024572,
+   "sha256": "e349f27b120b848858fca21c386b257de0b93e7ec26113f6dd2e8caa8ce11e9b"
+  },
+  {
+   "file": "targets/target.json",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/target.json",
+   "bytes": 160626,
+   "sha256": "ef93e754554f8ac0cc783802522e1dcc2a2efd9203aa449ada216d23927f939b"
+  }
+ ],
+ "makehumanTargets": [
+  {
+   "file": "targets/arms/l-lowerarm-muscle-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/arms/l-lowerarm-muscle-incr.target.gz",
+   "bytes": 1613,
+   "sha256": "29077b022632174656b8404ae12f68f62059f2fbc774b24885ec5b7460b72992"
+  },
+  {
+   "file": "targets/arms/l-upperarm-muscle-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/arms/l-upperarm-muscle-incr.target.gz",
+   "bytes": 2078,
+   "sha256": "2b1ae2af00eabddadc298fd22b8af17966f13e65931636b36c2d77d2b9540dcd"
+  },
+  {
+   "file": "targets/arms/l-upperarm-shoulder-muscle-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/arms/l-upperarm-shoulder-muscle-incr.target.gz",
+   "bytes": 1648,
+   "sha256": "1e72cedbf6d72bcc70dcf360444f2c1f8aa214d49839e4fefcfa9a9320febd9d"
+  },
+  {
+   "file": "targets/arms/r-lowerarm-muscle-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/arms/r-lowerarm-muscle-incr.target.gz",
+   "bytes": 1598,
+   "sha256": "84777a42af2cefbabcea15820c61dfd23a800d9a2583b23d063a1566052da226"
+  },
+  {
+   "file": "targets/arms/r-upperarm-muscle-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/arms/r-upperarm-muscle-incr.target.gz",
+   "bytes": 2089,
+   "sha256": "24f3486b3fe48bb8127f48c2eae53e48930c32b7ae2a221ec2c9afafc60b453d"
+  },
+  {
+   "file": "targets/arms/r-upperarm-shoulder-muscle-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/arms/r-upperarm-shoulder-muscle-incr.target.gz",
+   "bytes": 1698,
+   "sha256": "eefa8f598b81959bc8ee4b4a9ef7678c5e3a56fcf5333d13e26500047e9796b0"
+  },
+  {
+   "file": "targets/buttocks/buttocks-volume-decr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/buttocks/buttocks-volume-decr.target.gz",
+   "bytes": 2081,
+   "sha256": "e7752ede368fb2b16c2a61fb1a2c57d70493e8cd5689574e3dc2dc22bd74ca1f"
+  },
+  {
+   "file": "targets/cheek/l-cheek-bones-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/cheek/l-cheek-bones-incr.target.gz",
+   "bytes": 305,
+   "sha256": "ea5aa60abcc2926e61cdabf5d40701c2b23b3f8027f949cea0b80bcbc55df301"
+  },
+  {
+   "file": "targets/cheek/r-cheek-bones-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/cheek/r-cheek-bones-incr.target.gz",
+   "bytes": 310,
+   "sha256": "c608528b9e5e1c670179cfb502dab3d9478a77bb942f7c8186cd072a7369e9b9"
+  },
+  {
+   "file": "targets/chin/chin-jaw-drop-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/chin/chin-jaw-drop-incr.target.gz",
+   "bytes": 288,
+   "sha256": "b750b941a75badd7281db378356438dd8647ef043e3470f9e34bbf873e711e71"
+  },
+  {
+   "file": "targets/chin/chin-prominent-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/chin/chin-prominent-incr.target.gz",
+   "bytes": 565,
+   "sha256": "e0d5ec5e213b88719def0f43ddaa7107796fc02f7447e2b2f140d9fe513a6ac8"
+  },
+  {
+   "file": "targets/chin/chin-width-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/chin/chin-width-incr.target.gz",
+   "bytes": 1110,
+   "sha256": "68764b6ec7c923597beaaf643f71c41f00c93639d9bb522c169c279db2ad299e"
+  },
+  {
+   "file": "targets/eyebrows/eyebrows-trans-down.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/eyebrows/eyebrows-trans-down.target.gz",
+   "bytes": 1574,
+   "sha256": "9f5bbb848e40d3a320492dd08ef8d1a926b50c7fd1ca279cf8f573e0f0cdd589"
+  },
+  {
+   "file": "targets/head/head-oval.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/head/head-oval.target.gz",
+   "bytes": 9625,
+   "sha256": "057eea7c5535c325493b9107228052b03c78fac1bcb24905313fae6351179cb8"
+  },
+  {
+   "file": "targets/head/head-square.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/head/head-square.target.gz",
+   "bytes": 3350,
+   "sha256": "94b484ae145970e5368706d4f42711f50e18fcbf7d9f1ee800572c3fa69f855a"
+  },
+  {
+   "file": "targets/legs/l-lowerleg-muscle-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/legs/l-lowerleg-muscle-incr.target.gz",
+   "bytes": 2146,
+   "sha256": "3b88ac764ddc456ce242ece72f7d24a0037c0eef448359b06d0327fa79a4b29c"
+  },
+  {
+   "file": "targets/legs/r-lowerleg-muscle-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/legs/r-lowerleg-muscle-incr.target.gz",
+   "bytes": 2075,
+   "sha256": "f8b7d141649b12b4cd8c37c7606d14daac692e7abfa72cea66b79f1672d4ab2a"
+  },
+  {
+   "file": "targets/macrodetails/african-male-young.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/african-male-young.target.gz",
+   "bytes": 132860,
+   "sha256": "05ed84d6df36e788cdfa8da0be15376850524b960cf2f17f3e592b9cf7d21c85"
+  },
+  {
+   "file": "targets/macrodetails/asian-male-young.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/asian-male-young.target.gz",
+   "bytes": 130005,
+   "sha256": "0928ed8b9f08f60afb9884cf9e9f33a939ed3a85d7f136de9ccc88a76981d6d7"
+  },
+  {
+   "file": "targets/macrodetails/caucasian-male-young.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/caucasian-male-young.target.gz",
+   "bytes": 127922,
+   "sha256": "ffe69537e53148edff2776204ba48cf3bf1f3cbc72966592c8a562ab80b07333"
+  },
+  {
+   "file": "targets/macrodetails/height/male-young-averagemuscle-averageweight-maxheight.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/height/male-young-averagemuscle-averageweight-maxheight.target.gz",
+   "bytes": 147116,
+   "sha256": "d9cfea6360e29628fdcaeb1991ba1fb11f64e4ae5067cd7d0ebc494e393d83e5"
+  },
+  {
+   "file": "targets/macrodetails/height/male-young-averagemuscle-minweight-maxheight.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/height/male-young-averagemuscle-minweight-maxheight.target.gz",
+   "bytes": 147112,
+   "sha256": "361f80104cf63d28c35465452b6bfca6ec9fe7888d7593a1b432ceb681c5dd99"
+  },
+  {
+   "file": "targets/macrodetails/height/male-young-maxmuscle-averageweight-maxheight.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/height/male-young-maxmuscle-averageweight-maxheight.target.gz",
+   "bytes": 147112,
+   "sha256": "76258b59bd6d0230f012054bf8d7c1294e57cb5fdb4ebeae3dbcfd974b0e6ed4"
+  },
+  {
+   "file": "targets/macrodetails/height/male-young-maxmuscle-minweight-maxheight.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/height/male-young-maxmuscle-minweight-maxheight.target.gz",
+   "bytes": 147108,
+   "sha256": "21d42eeea3cb2bc1db61fd6dc78c0bdb31243a5634e3db54ee93cb5908da6287"
+  },
+  {
+   "file": "targets/macrodetails/proportions/male-young-averagemuscle-averageweight-idealproportions.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/proportions/male-young-averagemuscle-averageweight-idealproportions.target.gz",
+   "bytes": 39334,
+   "sha256": "b6cccc61b5f5af2e7c668b0a18013e5f3fa8ff082bf8513dcb9578c41275baeb"
+  },
+  {
+   "file": "targets/macrodetails/proportions/male-young-averagemuscle-minweight-idealproportions.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/proportions/male-young-averagemuscle-minweight-idealproportions.target.gz",
+   "bytes": 40700,
+   "sha256": "e6cdfe84dfa8599a9be59466833356b70fe994b494165fd74d92e0abe06c0351"
+  },
+  {
+   "file": "targets/macrodetails/proportions/male-young-maxmuscle-averageweight-idealproportions.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/proportions/male-young-maxmuscle-averageweight-idealproportions.target.gz",
+   "bytes": 38091,
+   "sha256": "6a6dee42f9acddd3cf4c29eb498757e4cde1b694ade455298d38ee56dbe7f25a"
+  },
+  {
+   "file": "targets/macrodetails/proportions/male-young-maxmuscle-minweight-idealproportions.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/proportions/male-young-maxmuscle-minweight-idealproportions.target.gz",
+   "bytes": 38087,
+   "sha256": "f12e767c9ebe5d87c312b2c086e64fb53e57e5caf3eed3b7b51b89ed6c5d3a02"
+  },
+  {
+   "file": "targets/macrodetails/universal-male-young-averagemuscle-averageweight.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/universal-male-young-averagemuscle-averageweight.target.gz",
+   "bytes": 76,
+   "sha256": "e814651195c53971503d9823d6841216718a561951ef064f81d132297f4fa494"
+  },
+  {
+   "file": "targets/macrodetails/universal-male-young-averagemuscle-minweight.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/universal-male-young-averagemuscle-minweight.target.gz",
+   "bytes": 42696,
+   "sha256": "e4a993057e265088e082ee2aeccc860505e759b27251dc63a78314e1f8c78a16"
+  },
+  {
+   "file": "targets/macrodetails/universal-male-young-maxmuscle-averageweight.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/universal-male-young-maxmuscle-averageweight.target.gz",
+   "bytes": 45597,
+   "sha256": "833caafc302bd9306de494f32ee1bc51d3a2e6641183329b031ac06ef0f4277e"
+  },
+  {
+   "file": "targets/macrodetails/universal-male-young-maxmuscle-minweight.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/macrodetails/universal-male-young-maxmuscle-minweight.target.gz",
+   "bytes": 47278,
+   "sha256": "0323cb5c604d13207d1a10ade8ce165df1cbf14d91de48ad959a082297669905"
+  },
+  {
+   "file": "targets/mouth/mouth-lowerlip-volume-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/mouth/mouth-lowerlip-volume-incr.target.gz",
+   "bytes": 896,
+   "sha256": "6eefdf010318ac86aa59aeefffdf1f7e566f280a04e9843003b0543b4dc99179"
+  },
+  {
+   "file": "targets/mouth/mouth-scale-horiz-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/mouth/mouth-scale-horiz-incr.target.gz",
+   "bytes": 3925,
+   "sha256": "3bd6ff8195f77f0bcb586f3efec0eea1ae615eecba516e4d121025e40ed0ead2"
+  },
+  {
+   "file": "targets/neck/neck-scale-horiz-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/neck/neck-scale-horiz-incr.target.gz",
+   "bytes": 2830,
+   "sha256": "8428be2a7c0e1554dbf6bb516e6ffbdfa564a8cc94d6a9ff08580c0127e44aeb"
+  },
+  {
+   "file": "targets/nose/nose-hump-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/nose/nose-hump-incr.target.gz",
+   "bytes": 1368,
+   "sha256": "ca6649d78752cca02fdb37f10804e021713b4fbfe2f85136e12b5787cc654aa6"
+  },
+  {
+   "file": "targets/nose/nose-scale-horiz-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/nose/nose-scale-horiz-incr.target.gz",
+   "bytes": 1802,
+   "sha256": "ba550cc15c894a4412bb368acc92bd6ad94bbb63d0135c561fe30230ef6344bd"
+  },
+  {
+   "file": "targets/nose/nose-scale-vert-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/nose/nose-scale-vert-incr.target.gz",
+   "bytes": 1580,
+   "sha256": "63d297c237e7054a1ea700b83454ef508bf5f42ba8f2eb6bc1eb747ad261f34b"
+  },
+  {
+   "file": "targets/stomach/stomach-pregnant-decr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/stomach/stomach-pregnant-decr.target.gz",
+   "bytes": 1274,
+   "sha256": "1667a6f0a54a7102e3dc21e991051441558a7dfc74e30baa1c04e9831ffecebf"
+  },
+  {
+   "file": "targets/torso/torso-muscle-dorsi-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/torso/torso-muscle-dorsi-incr.target.gz",
+   "bytes": 5003,
+   "sha256": "db0e47dd5138a0b397cc4304c529e1ad6ed704f13f9ee5c24aa91c0798c4382f"
+  },
+  {
+   "file": "targets/torso/torso-muscle-pectoral-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/torso/torso-muscle-pectoral-incr.target.gz",
+   "bytes": 5271,
+   "sha256": "83831fd65509c729bc0b5b3311b5f63bf35a37728e7c22d4425a3c620f2e4069"
+  },
+  {
+   "file": "targets/torso/torso-vshape-incr.target.gz",
+   "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/master/src/mpfb/data/targets/torso/torso-vshape-incr.target.gz",
+   "bytes": 19019,
+   "sha256": "e1fb879d1a59229f0127af161f7dcdb6a476b734ed3bcf84bea2b379590ce371"
+  }
+ ],
+ "mocap": [
+  {
+   "take": "10_01",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/010/10_01.bvh",
+   "bytes": 608740,
+   "sha256": "eae9408ca4e979439700a537ab488e95dfef6b9804936af792c6daafd1ad497d"
+  },
+  {
+   "take": "10_02",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/010/10_02.bvh",
+   "bytes": 449876,
+   "sha256": "b1ab89efaaaed74bc9a74a73a3f37227dd471a67c0d035eb6f88d95ca226a136"
+  },
+  {
+   "take": "10_05",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/010/10_05.bvh",
+   "bytes": 334720,
+   "sha256": "0bd83cf7231eb631bf07117ba7fd9c9007afdf13ea8ab4ac9ce7e90e8501e15f"
+  },
+  {
+   "take": "111_06",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/111/111_06.bvh",
+   "bytes": 1165039,
+   "sha256": "4875cdda65849c2a993611c3f77225c64edcfd4502aa143832b922bd343ce40c"
+  },
+  {
+   "take": "111_33",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/111/111_33.bvh",
+   "bytes": 1568927,
+   "sha256": "51da8c633a24b371f686db38f344e34141ee450190c5be3b7bf2821844da567c"
+  },
+  {
+   "take": "127_06",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/127/127_06.bvh",
+   "bytes": 136165,
+   "sha256": "593b94f246912ad5fd488bd6a9753c04844f4010c3ac83152e2925fc10214c80"
+  },
+  {
+   "take": "13_10",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/013/13_10.bvh",
+   "bytes": 1807887,
+   "sha256": "0cae88c2ae622232040f4ea7a8251ea9b2c02f4c9e0d88610f6f5e05368a838d"
+  },
+  {
+   "take": "13_39",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/013/13_39.bvh",
+   "bytes": 267476,
+   "sha256": "1810dec74cf72839042dde67425c53773c910803415e945f3ffd747a55a8ee78"
+  },
+  {
+   "take": "16_35",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/016/16_35.bvh",
+   "bytes": 125846,
+   "sha256": "d20d54a9ccebd7aaf4aa6c4d7662c4905d47009401895de216a914edecf287be"
+  },
+  {
+   "take": "35_22",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/035/35_22.bvh",
+   "bytes": 130458,
+   "sha256": "335c86754e24df60f8d39c55c7d9d293768b55f628825f496e7f61fb07da9801"
+  },
+  {
+   "take": "77_02",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/077/77_02.bvh",
+   "bytes": 705155,
+   "sha256": "d6eef8f4ab182bef1bb5db0c46cbec0261b81a63ce1720b8a19777b7e79887a9"
+  },
+  {
+   "take": "78_29",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/078/78_29.bvh",
+   "bytes": 136628,
+   "sha256": "e290d70ef33f028502ef057bcc0c9f84357a8ce9d923bf0b8bb211ce59300134"
+  },
+  {
+   "take": "79_69",
+   "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/master/data/079/79_69.bvh",
+   "bytes": 617575,
+   "sha256": "35c5a46c0d1042b4eb4c0c0d5e71319abb39b50b4587b10202127ee1cb1ef579"
+  }
+ ],
+ "clips": {
+  "idle": {
+   "source": "77_02",
+   "range": [
+    1,
+    4
+   ],
+   "duration": 2.967,
+   "contact": null,
+   "groundShift": 0
+  },
+  "ready": {
+   "source": "78_29",
+   "range": [
+    0.02,
+    0.34
+   ],
+   "duration": 0.3,
+   "contact": null,
+   "groundShift": -0.092
+  },
+  "jog": {
+   "source": "16_35",
+   "range": [
+    0.142,
+    0.925
+   ],
+   "duration": 0.767,
+   "contact": null,
+   "groundShift": -0.002
+  },
+  "run": {
+   "source": "35_22",
+   "range": [
+    0.533,
+    1.217
+   ],
+   "duration": 0.667,
+   "contact": null,
+   "groundShift": -0.017
+  },
+  "sprint": {
+   "source": "127_06",
+   "range": [
+    0.633,
+    1.275
+   ],
+   "duration": 0.633,
+   "contact": null,
+   "groundShift": -0.185
+  },
+  "shot": {
+   "source": "10_01",
+   "range": [
+    4.55,
+    5.55
+   ],
+   "duration": 0.967,
+   "contact": 0.467,
+   "groundShift": -0.037
+  },
+  "shot-b": {
+   "source": "10_02",
+   "range": [
+    2.48,
+    3.48
+   ],
+   "duration": 0.967,
+   "contact": 0.467,
+   "groundShift": -0.034
+  },
+  "pass": {
+   "source": "10_05",
+   "range": [
+    2.15,
+    2.95
+   ],
+   "duration": 0.767,
+   "contact": 0.4,
+   "groundShift": -0.04
+  },
+  "header": {
+   "source": "13_39",
+   "range": [
+    0.75,
+    1.95
+   ],
+   "duration": 1.167,
+   "contact": null,
+   "groundShift": -0.05
+  },
+  "throw": {
+   "source": "111_33",
+   "range": [
+    12.9,
+    14.4
+   ],
+   "duration": 1.467,
+   "contact": null,
+   "groundShift": -0.029
+  },
+  "reach": {
+   "source": "13_10",
+   "range": [
+    0.95,
+    2.15
+   ],
+   "duration": 1.167,
+   "contact": null,
+   "groundShift": -0.046
+  },
+  "celebrate": {
+   "source": "79_69",
+   "range": [
+    0.45,
+    2.05
+   ],
+   "duration": 1.567,
+   "contact": null,
+   "groundShift": -0.006
+  },
+  "sit": {
+   "source": "111_06",
+   "range": [
+    3.15,
+    3.55
+   ],
+   "duration": 0.367,
+   "contact": null,
+   "groundShift": -0.887
+  }
+ },
+ "stats": {
+  "lod0:skin": {
+   "verts": 4808,
+   "tris": 8546,
+   "fullTris": 18640
+  },
+  "lod0:kit": {
+   "verts": 1891,
+   "tris": 3068,
+   "fullTris": 9292
+  },
+  "lod1:skin": {
+   "verts": 2403,
+   "tris": 4046,
+   "fullTris": 18640
+  },
+  "lod1:kit": {
+   "verts": 944,
+   "tris": 1290,
+   "fullTris": 9292
+  }
+ },
+ "images": [
+  {
+   "name": "skin-albedo.jpg",
+   "mimeType": "image/jpeg",
+   "bytes": 148130
+  },
+  {
+   "name": "skin-orm.jpg",
+   "mimeType": "image/jpeg",
+   "bytes": 210180
+  },
+  {
+   "name": "skin-normal.jpg",
+   "mimeType": "image/jpeg",
+   "bytes": 164342
+  },
+  {
+   "name": "skin-mask.png",
+   "mimeType": "image/png",
+   "bytes": 111397
+  },
+  {
+   "name": "kit-detail.png",
+   "mimeType": "image/png",
+   "bytes": 516793
+  },
+  {
+   "name": "kit-orm.jpg",
+   "mimeType": "image/jpeg",
+   "bytes": 68721
+  },
+  {
+   "name": "kit-normal.jpg",
+   "mimeType": "image/jpeg",
+   "bytes": 90808
+  },
+  {
+   "name": "kit-mask.png",
+   "mimeType": "image/png",
+   "bytes": 47188
+  },
+  {
+   "name": "ball-albedo.jpg",
+   "mimeType": "image/jpeg",
+   "bytes": 47579
+  },
+  {
+   "name": "ball-normal.png",
+   "mimeType": "image/png",
+   "bytes": 67011
+  }
+ ],
+ "reproducible": "sh fetch-sources.sh && sh build-all.sh in tools/athlete-build rebuilds this file byte for byte (checked 2026-10-27)"
+}

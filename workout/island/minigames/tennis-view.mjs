@@ -1,12 +1,12 @@
-import {createUltraTennisCourt,createUltraTennisEffects} from './ultra-tennis-court.mjs?v=island-alpine-20261028-1';
+import {createUltraTennisCourt,createUltraTennisEffects} from './ultra-tennis-court.mjs?v=island-soccer-athlete-20261029-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {seededRandom} from './tennis.mjs?v=island-alpine-20261028-1';
-import {tennisPose} from './tennis-pose.mjs?v=island-alpine-20261028-1';
-import {createTennisEnvironment} from './tennis-environment.mjs?v=island-alpine-20261028-1';
+import {seededRandom} from './tennis.mjs?v=island-soccer-athlete-20261029-1';
+import {tennisPose} from './tennis-pose.mjs?v=island-soccer-athlete-20261029-1';
+import {createTennisEnvironment} from './tennis-environment.mjs?v=island-soccer-athlete-20261029-1';
 
-export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-alpine-20261028-1',import.meta.url)}={}) {
+export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-soccer-athlete-20261029-1',import.meta.url)}={}) {
   const r=config.render, colors=r.colors, scene=new T.Scene();
   scene.background=new T.Color('#c4dcdf');scene.fog=new T.Fog('#c4dcdf',r.environment.fogNear,r.environment.fogFar);
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
