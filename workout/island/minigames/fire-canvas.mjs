@@ -1,4 +1,4 @@
-import {fireIndicators,drawFireIndicators} from './fire-navigation.mjs?v=island-hoops-cam-20261029-1';
+import {fireIndicators,drawFireIndicators} from './fire-navigation.mjs?v=island-boar-20261029-1';
 export function drawWaterDrop(p,x,y,size=12){p.save();p.translate(x,y);p.scale(size/12,size/12);p.fillStyle='#087cf0';p.strokeStyle='#e6f8ff';p.lineWidth=2;p.beginPath();p.moveTo(0,-16);p.bezierCurveTo(-3,-9,-10,-2,-10,4);p.bezierCurveTo(-10,17,10,17,10,4);p.bezierCurveTo(10,-2,3,-9,0,-16);p.fill();p.stroke();p.restore();}
 /** Simple GPU-free city. It uses the same streets, targets, crew and hose state. */
 function transform(m,ctx){const b=ctx.balance,c=ctx.config,scale=c.width/b.city.extent,focus=m.camera||m.truck;return {scale,x:c.width/2-focus.x*scale,y:c.height/2-focus.z*scale};}
