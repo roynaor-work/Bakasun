@@ -1,5 +1,5 @@
-import {STATIONS,levelForAge,questionsForAge,syncLearningDay,dailyStatus,recordAnswer,roundReward,completeDailyRound} from './state.mjs?v=island-alpine-20261029-1';
-import {createQuestion} from './questions.mjs?v=island-alpine-20261029-1';
+import {STATIONS,levelForAge,questionsForAge,syncLearningDay,dailyStatus,recordAnswer,roundReward,completeDailyRound} from './state.mjs?v=island-hoops-cam-20261029-1';
+import {createQuestion} from './questions.mjs?v=island-hoops-cam-20261029-1';
 
 /** One in-memory round owns answers and pays once, only after all eight questions. */
 export function installLearning(engine,changed) {
