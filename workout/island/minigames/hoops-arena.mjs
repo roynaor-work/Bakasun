@@ -4,7 +4,7 @@
  * scoreboard and the light rig. Built once from the court geometry; nothing here decides play. */
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-naval-aim-20261028-2';
+import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-naval-aim-20261029-1';
 
 const LINE=0.05;
 

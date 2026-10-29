@@ -1,5 +1,5 @@
-import {navalAdvanceShot,navalBallisticPoint,navalBallisticConfig,navalHullDistance,navalLanding} from './naval-ballistics.mjs?v=island-naval-aim-20261028-2';
-import {stepNavalPatrol,navalPatrolCentre,navalPatrolObstacles,navalPatrolConfig} from './naval-patrol.mjs?v=island-naval-aim-20261028-2';
+import {navalAdvanceShot,navalBallisticPoint,navalBallisticConfig,navalHullDistance,navalLanding} from './naval-ballistics.mjs?v=island-naval-aim-20261029-1';
+import {stepNavalPatrol,navalPatrolCentre,navalPatrolObstacles,navalPatrolConfig} from './naval-patrol.mjs?v=island-naval-aim-20261029-1';
 /** Honest aim (29/10/2026). Where a shot really goes: the shell flies its
  * fixed launch while every hull sails on under the same patrol rules as the
  * live fleet (naval-patrol: station, flank drift, yielding, the early-stage

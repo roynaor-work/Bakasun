@@ -1,14 +1,14 @@
 import {createUltraFireCity} from './ultra-fire-city.mjs';
 import {createUltraFireEffects} from './ultra-fire-effects.mjs';
 import {createUltraFireScenery} from './ultra-fire-scenery.mjs';
-import {fireScreenMovement} from './fire-navigation.mjs?v=island-naval-aim-20261028-2';
+import {fireScreenMovement} from './fire-navigation.mjs?v=island-naval-aim-20261029-1';
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {palette} from '../view/environment.mjs?v=island-naval-aim-20261028-2';
-import {loadFireTruck} from './fire-truck.mjs?v=island-naval-aim-20261028-2';
-import {drawWaterDrop,drawFireArrow,drawFireFeedback,pickFireObjective} from './fire-canvas.mjs?v=island-naval-aim-20261028-2';
-import {LocalModels,fitModel} from '../view/local-models.mjs?v=island-naval-aim-20261028-2';
-import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=island-naval-aim-20261028-2';
+import {palette} from '../view/environment.mjs?v=island-naval-aim-20261029-1';
+import {loadFireTruck} from './fire-truck.mjs?v=island-naval-aim-20261029-1';
+import {drawWaterDrop,drawFireArrow,drawFireFeedback,pickFireObjective} from './fire-canvas.mjs?v=island-naval-aim-20261029-1';
+import {LocalModels,fitModel} from '../view/local-models.mjs?v=island-naval-aim-20261029-1';
+import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=island-naval-aim-20261029-1';
 
 /** Own everything in this round. Static colored parts share a material and are
  * merged at setup; particles, stream vertices and scratch vectors are fixed. */

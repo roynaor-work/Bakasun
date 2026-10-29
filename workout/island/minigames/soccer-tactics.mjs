@@ -1,5 +1,5 @@
-import {passLaneClearance,teamFormation,teamPresser} from './soccer-teamplay.mjs?v=island-naval-aim-20261028-2';
-export {selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint} from './soccer-teamplay.mjs?v=island-naval-aim-20261028-2';
+import {passLaneClearance,teamFormation,teamPresser} from './soccer-teamplay.mjs?v=island-naval-aim-20261029-1';
+export {selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint} from './soccer-teamplay.mjs?v=island-naval-aim-20261029-1';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 /** One ball press; everyone else returns to a zone or finds a passing lane. */
