@@ -181,3 +181,29 @@ SHA־256 של ה־GLB: `8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2
 - הסביבה נוצרת בקוד: חצי הצינור (טקסטורת קנבס של פסים כחולים), השפות, הרשתות האדומות, השטח שבצדדים, העצים, ההרים, הדגלים, הרמפה, שערי הסלאלום, משטחי האצה, המטבעות, השלג היורד וקשת הסיום. ה־HUD, הג׳ויסטיק וסמלי הטריקים הם SVG ו־CSS (עיצוב Codex, `docs-development/alpine-rush/`). הסאונד מסונתז ב־WebAudio; אין קבצי שמע.
 - `assets/ultra-hub/alpine.webp` (87,554 בתים, 960×600): צילום מתוך המשחק הפעיל בגרפיקה 5, מסלול 2, סיבוב באוויר מעל שפת חצי הצינור, בלי HUD.
 - הרפרנסים החזותיים (Ski Master, Snowboard Master 3D, SSX 3) נצפו בידי Codex בלבד; לא הועתקו מהם קוד, סאונד או נכסים.
+## Soccer athlete integration · 2026-10-29
+
+The approved `soccer-integration.zip` source (reported head `910ea28`, independently
+reconstructed tree `9b124bed98b7805bb4cc9d975eb62c074b0cc008`) adds
+`assets/athlete/athlete.glb` and ten local files in `assets/athlete/textures/`.
+The GLB is 1,280,272 bytes; the ten textures total 1,403,328 bytes. Together the
+family is 2,683,600 bytes. Every file is below the existing 2,000,000-byte limit.
+The model, clip attribution and individual texture hashes are retained verbatim
+in `assets/athlete/README.md` and `assets/athlete/provenance.json`; the compacted
+texture inventory is `provenance.compacted.textures`. The older `images` entries
+in the provenance describe the pre-compaction bake sizes.
+
+The runtime model has 31 CMU/MotionBuilder bones, 13 retargeted clips, eight
+identity morph targets and two geometry detail levels. MakeHuman geometry/rig
+and weights are identified as CC0 in the supplied source documentation; motion
+comes from the CMU database under its own terms, with requested acknowledgement:
+The data used in this project was obtained from mocap.cs.cmu.edu. The database
+was created with funding from NSF EIA-0196217. CMU motion is not relicensed as CC0.
+
+`assets/models/manifest.json` indexes the separate `assets/models/*.glb`
+inventory and intentionally does not include this family. The athlete's source
+provenance lists all eleven runtime files. Pages copies this directory and its
+textures recursively. `kid-full.glb` remains the existing load-failure fallback.
+The turf and audio attributions below remain applicable. No EA/club assets or
+real-player likenesses are included. Codex graphics v3 is excluded from this
+integration; it requires separate visual approval.

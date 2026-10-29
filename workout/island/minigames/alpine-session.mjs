@@ -58,6 +58,7 @@ export function runAlpineSession(ctx) {
   const svg = (paths, viewBox = '0 0 24 24') => { const s = doc.createElementNS(SVG_NS, 'svg'); s.setAttribute('viewBox', viewBox); s.setAttribute('aria-hidden', 'true'); s.innerHTML = paths; return s; };
   const ltr = text => { const b = el('bdi', 'alpine-ltr', text); b.dir = 'ltr'; return b; };
   const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-hoops-cam-20261029-1', import.meta.url).href;
+  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-hoops-cam-20261029-1', import.meta.url).href;
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
   const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
@@ -86,7 +87,13 @@ export function runAlpineSession(ctx) {
   card.append(el('span', 'alpine-track-number', trackNumber), cardText, dots);
   const best = records.data.best[track.id], bestLine = el('p', 'alpine-best');
   if (best) bestLine.append(t('alpine.best') + ' ', ltr(formatRaceTime(best.ms))); else bestLine.textContent = t('alpine.goal', {rank: level.targetRank});
-  intro.append(el('span', 'alpine-eyebrow', 'THE MOUNTAIN IS YOURS'), title, el('p', 'alpine-tagline', t('alpine.tagline')), startButton, el('span', 'alpine-start-note', t('alpine.startNote')), card, bestLine);
+  // Colour choice on the opening card: the design's classic colours or Codex's graphics 5 colours.
+  const THEME_KEY = 'island.alpine.theme', themes = el('div', 'alpine-themes'); themes.setAttribute('role', 'radiogroup'); themes.setAttribute('aria-label', t('alpine.theme'));
+  let theme = 'classic'; try { theme = storage?.getItem(THEME_KEY) === 'codex' ? 'codex' : 'classic'; } catch {}
+  const themeButtons = ['classic', 'codex'].map(id => { const b = el('button', 'alpine-theme'); b.type = 'button'; b.dataset.theme = id; b.dataset.action = 'alpine-theme'; b.setAttribute('role', 'radio'); b.setAttribute('aria-label', t(`alpine.theme.${id}`)); b.title = t(`alpine.theme.${id}`); b.append(el('i'), el('i')); themes.append(b); return b; });
+  const setTheme = id => { theme = id; screen.dataset.alpineTheme = id; for (const b of themeButtons) b.setAttribute('aria-checked', String(b.dataset.theme === id)); };
+  for (const b of themeButtons) b.addEventListener('click', () => { setTheme(b.dataset.theme); try { storage?.setItem(THEME_KEY, theme); } catch {} }, {signal: abort.signal});
+  intro.append(el('span', 'alpine-eyebrow', 'THE MOUNTAIN IS YOURS'), title, el('p', 'alpine-tagline', t('alpine.tagline')), startButton, el('span', 'alpine-start-note', t('alpine.startNote')), card, bestLine, themes);
   const worldLabel = el('div', 'alpine-world-label'); worldLabel.setAttribute('aria-hidden', 'true'); worldLabel.append(el('span', '', '46°35′ N   08°02′ E'), el('b', '', 'ABOVE THE ORDINARY.'), el('span', '', '2,840 M / ALPINE CIRCUIT'));
   const countdown = el('div', 'alpine-countdown'); countdown.setAttribute('aria-live', 'assertive');
   const callout = el('div', 'alpine-callout'), calloutKicker = el('span'), calloutLine = el('b'); callout.append(calloutKicker, calloutLine); callout.hidden = true;
@@ -113,8 +120,8 @@ export function runAlpineSession(ctx) {
   const center = el('div', 'alpine-center'); center.append(speed, hint);
   footer.append(joystick, center, actions);
   stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading);
-  controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css); stage.append(app);
-  dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, app]};
+  controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish); stage.append(app); setTheme(theme);
+  dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, app]};
   screen.dataset.alpineDusk = String(!!track.visual?.dusk);
   const setPhase = phase => { app.dataset.phase = phase; screen.dataset.alpinePhase = phase; };
   setPhase('menu');

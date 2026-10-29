@@ -24,6 +24,18 @@ export function passLaneClearance(point,from,to){
  return u<0||u>1?Infinity:distance(point,{x:from.x+u*dx,z:from.z+u*dz});
 }
 
+/** Closest approach during a ground pass, using observed defender velocity.
+ * A short, bounded prediction sees a defender running across an empty corridor;
+ * it never reads the human's movement command or any future simulation state. */
+export function passInterceptionClearance(point,from,to,seconds){
+ const duration=Math.max(0,Number.isFinite(seconds)?seconds:0);
+ if(!duration)return passLaneClearance(point,from,to);
+ const dx=point.x-from.x,dz=point.z-from.z;
+ const vx=(point.vx||0)-(to.x-from.x)/duration,vz=(point.vz||0)-(to.z-from.z)/duration,speed2=vx*vx+vz*vz;
+ const at=speed2?clamp(-(dx*vx+dz*vz)/speed2,0,duration):0;
+ return Math.hypot(dx+vx*at,dz+vz*at);
+}
+
 /** A carrier must see a real corridor past field defenders before shooting. */
 export function hasShootingLane(p,s,c){
  const d=s.attackDir*(p.team===0?1:-1),goalX=d*c.pitch.length/2;
@@ -48,9 +60,10 @@ export function selectTeamPass(p,s,c){
   const destination=teamPassPoint(member,c);
   const range=distance(p,destination),clearance=Math.min(6,...opponents.map(o=>distance(o,destination)));
   const lane=Math.min(5,...opponents.map(o=>passLaneClearance(o,p,destination)));
+  const movingLane=Math.min(5,...opponents.map(o=>passInterceptionClearance(o,p,destination,c.passing.groundTravelSeconds)));
   const advance=clamp((destination.x-p.x)*d,-6,10);
   const tooClose=Math.max(0,c.ai.requestDistance-range),tooFar=Math.max(0,range-maxDistance);
-  const value=lane*2.7+clearance*1.15+advance*c.ai.passSelectionAdvanceWeight-range*.09-tooClose*3-tooFar*2;
+  const value=lane*2.7+clearance*1.15+advance*c.ai.passSelectionAdvanceWeight-range*.09-tooClose*3-tooFar*2-Math.max(0,lane-movingLane)*.8;
   if(value>best||value===best&&member.id<target.id){target=member;best=value;}
  }
  return target;

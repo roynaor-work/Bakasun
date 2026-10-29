@@ -55,6 +55,15 @@ for(const {width,height} of viewports){
     await ready(page);await page.waitForTimeout(400);await shot('opening');
     const opening=await session(page);assert.equal(opening.phase,'menu');assert.equal(opening.loaded,true);assert.equal(opening.renderMetrics.mode,'model');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'no horizontal scroll');
+    // Colour choice: classic by default; graphics 5 colours apply at once and are remembered; back to classic for the rest.
+    // The boost colour has a short transition, so colour checks wait for it.
+    const boostBg=()=>page.locator('.alpine-boost').evaluate(n=>getComputedStyle(n).backgroundColor);
+    assert.equal(await page.locator('.game-screen').getAttribute('data-alpine-theme'),'classic');const classicBg=await boostBg();
+    await page.locator('[data-action=alpine-theme][data-theme=codex]').click();assert.equal(await page.locator('.game-screen').getAttribute('data-alpine-theme'),'codex');
+    await page.waitForFunction(bg=>getComputedStyle(document.querySelector('.alpine-boost')).backgroundColor!==bg,classicBg,{timeout:5000});assert.equal(await page.evaluate(()=>localStorage.getItem('island.alpine.theme')),'codex');
+    await page.waitForTimeout(300);await shot('opening-codex');
+    await page.locator('[data-action=alpine-theme][data-theme=classic]').click();assert.equal(await page.locator('.game-screen').getAttribute('data-alpine-theme'),'classic');
+    await page.waitForFunction(bg=>getComputedStyle(document.querySelector('.alpine-boost')).backgroundColor===bg,classicBg,{timeout:5000});
     // Keyboard reaches the start button.
     await page.locator('[data-action=alpine-start]').focus();await page.keyboard.press('Enter');
     await page.waitForFunction(()=>window.__island.ui.activityInterface.current.session.snapshot.phase==='countdown');

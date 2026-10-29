@@ -83,5 +83,7 @@ test('G3i covering defenders return to their zones instead of following off-ball
 });
 test('G3i support opens a clear passing lane away from a nearby defender',()=>{
  const g=createSoccer({config:c}),s=g.getState();Object.assign(s.players[0],{x:0,z:0});s.ball.owner=0;Object.assign(s.players[1],{x:3,z:-7});Object.assign(s.players[4],{x:-3,z:-7});
+ // Keep this receiving-lane case unpressed; outlet behavior is tested separately.
+ Object.assign(s.players[3],{x:12,z:0});assert.ok(Math.hypot(s.players[3].x,s.players[3].z)>c.tactics.outlet.pressure);
  const target=fieldTarget(s.players[1],s,c);assert.equal(target.duty,'support');assert.ok(Math.hypot(target.x-s.players[4].x,target.z-s.players[4].z)>c.tactics.markDistance.normal);
 });
