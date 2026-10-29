@@ -1,19 +1,19 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-soccer-athlete-20261029-1';
-import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-soccer-athlete-20261029-1';
-import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-soccer-athlete-20261029-1';
-import {createSoccerLighting} from './soccer-lighting.mjs?v=island-soccer-athlete-20261029-1';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-soccer-athlete-20261029-1';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-alpine-20261029-1';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-alpine-20261029-1';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-alpine-20261029-1';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-alpine-20261029-1';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-alpine-20261029-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-soccer-athlete-20261029-1';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=island-soccer-athlete-20261029-1';
-import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-soccer-athlete-20261029-1';
-import {holdSoccerBall} from './soccer-poses.mjs?v=island-soccer-athlete-20261029-1';
-import {passDestination} from './soccer.mjs?v=island-soccer-athlete-20261029-1';
-import {setupAthletes} from './soccer-athlete.mjs?v=island-soccer-athlete-20261029-1';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES} from './soccer-athlete-motion.mjs?v=island-soccer-athlete-20261029-1';
-import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-soccer-athlete-20261029-1';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-alpine-20261029-1';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=island-alpine-20261029-1';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-alpine-20261029-1';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-alpine-20261029-1';
+import {passDestination} from './soccer.mjs?v=island-alpine-20261029-1';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-alpine-20261029-1';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES} from './soccer-athlete-motion.mjs?v=island-alpine-20261029-1';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-alpine-20261029-1';
 
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   const roster=config.players.roster;let poseFocus=null,poseMode=null,poses=[];

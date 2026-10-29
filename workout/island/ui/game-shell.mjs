@@ -1,4 +1,4 @@
-import {nativeShellAction} from './press.mjs?v=island-soccer-athlete-20261029-1';
+import {nativeShellAction} from './press.mjs?v=island-alpine-20261029-1';
 
 const entries=new WeakMap();
 export function installedShell(target=window){

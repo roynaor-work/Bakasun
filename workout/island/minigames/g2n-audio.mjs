@@ -1,4 +1,4 @@
-const VERSION='island-soccer-athlete-20261029-1';
+const VERSION='island-alpine-20261029-1';
 export const G2N_SAMPLES=Object.freeze(['engine','fire','ladder','rescue']);
 /** Fire-only mix: CC0 samples, filtered noise and harmonic envelopes. */
 export function createG2nAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){
