@@ -1,0 +1,42 @@
+{
+  "asset": "Grass005",
+  "publisher": "ambientCG",
+  "retrievedDate": "2026-10-27",
+  "sourcePage": "https://ambientcg.com/view?id=Grass005",
+  "license": "CC0-1.0",
+  "licenseSource": "https://docs.ambientcg.com/license/",
+  "creationMethod": "Procedural with Bitmap Elements",
+  "sourceArchive": {
+    "url": "https://ambientcg.com/get?file=Grass005_1K-JPG.zip",
+    "bytes": 10442657,
+    "sha256": "58a7fb7f32c44a86879483325b62781d04e0ab8f70b0f70ede36c8f1726f8a22"
+  },
+  "runtimeBytes": 835010,
+  "maps": [
+    {
+      "file": "turf-albedo-1k.jpg",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 356383,
+      "sha256": "72761bb3c2461114ed56fa60b9a0cf1d59e890a43dfb4eb30d1b46e5fac5883f",
+      "sourceFile": "Grass005_1K-JPG_Color.jpg",
+      "sourceBytes": 1875015,
+      "sourceSha256": "5fd8edc1a04e2b9b093229dd0ec41f29668dda9fc698f6610b12cdd83b7690cb",
+      "processing": "JPEG recompression quality 88, no rescaling",
+      "colorSpace": "sRGB"
+    },
+    {
+      "file": "turf-normal-gl-1k.jpg",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 478627,
+      "sha256": "5bb2d6667a419374cff39dcb604d14fa5847b6ed678d4c940c7919eee8c8b230",
+      "sourceFile": "Grass005_1K-JPG_NormalGL.jpg",
+      "sourceBytes": 2137845,
+      "sourceSha256": "f89e3a1701511d379a9772774ec6b9d7b7ccf3e944fdcc2b98c09dee4cfd804f",
+      "processing": "JPEG recompression quality 92, no rescaling or channel inversion",
+      "colorSpace": "linear",
+      "normalConvention": "OpenGL tangent space, +Y"
+    }
+  ]
+}

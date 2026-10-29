@@ -11,7 +11,7 @@ export function createActionGesture(config){
   return {start(action,x,y){actions.set(action,{x,y,dx:0,dy:0});},move(action,x,y){const g=actions.get(action);if(g){g.dx=x-g.x;g.dy=y-g.y;}},direction(action,automatic,direction=1){return actionDirection(actions.get(action),automatic,config,direction);},reset(){actions.clear();}};
 }
 export function controlSides(right){return {movement:right?'left':'right',actions:right?'right':'left'};}
-export function createControls({root,config,onGesture=()=>{},onCancel=()=>{},autoAim}={}) {
+export function createControls({root,config,onGesture=()=>{},onCancel=()=>{},autoAim,keyboardFromButtons=false}={}) {
   const abort=new AbortController(),options={signal:abort.signal};
   const stick=root.querySelector('#joystick'),knob=root.querySelector('#knob'),shoot=root.querySelector('#shoot'),swap=root.querySelector('#switch'),pass=root.querySelector('#pass'),sprint=root.querySelector('#sprint');
   const stickZone=root.querySelector('.soccer-stick-zone')||stick;
@@ -41,7 +41,11 @@ export function createControls({root,config,onGesture=()=>{},onCancel=()=>{},aut
   for(const [node,action]of [[swap,()=>switchPulse=true]])node?.addEventListener('click',()=>{if(enabled){onGesture();action();node.blur();}},options);
   const actionKeys=[config.kickKey,config.passKey,config.switchKey,...config.sprintKeys];
   window.addEventListener('keydown',event=>{
-    if(!enabled||event.target.matches('input,select,textarea,button'))return;
+    if(!enabled||event.target.matches('input,select,textarea,[contenteditable=true]'))return;
+    // Soccer opts in to movement/action shortcuts while its own controls have
+    // focus. Space/Enter retain native focused-button activation; other games
+    // and controls outside this round keep the previous keyboard behavior.
+    if(event.target.matches('button')&&(!keyboardFromButtons||!root.contains(event.target)||['Space','Enter'].includes(event.code)))return;
     if(event.code.startsWith('Arrow')||actionKeys.includes(event.code))event.preventDefault();
     if(event.repeat)return;
     onGesture();keys.add(event.code);if(event.code===config.kickKey){gestures.start('kick',0,0);pulses.kick=true;}if(event.code===config.passKey){gestures.start('pass',0,0);pulses.pass=true;}if(config.sprintKeys.includes(event.code))pulses.sprint=true;
