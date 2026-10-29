@@ -1,14 +1,14 @@
 /** Island Pro Basketball session: connects the 5 on 5 engine, the arena view, input, sound
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
-import {gameContext} from './context.mjs?v=island-boar-20261029-1';
-import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-boar-20261029-1';
-import {createHoopsControls} from './hoops-controls.mjs?v=island-boar-20261029-1';
-import {createHoopsAudio} from './hoops-audio.mjs?v=island-boar-20261029-1';
-import {hoopsIcon} from './hoops-icons.mjs?v=island-boar-20261029-1';
-import {createFixedLoop} from './hoops-loop.mjs?v=island-boar-20261029-1';
-import {createCourt} from './hoops-court.mjs?v=island-boar-20261029-1';
-import {matchTeams} from './hoops-franchise.mjs?v=island-boar-20261029-1';
+import {gameContext} from './context.mjs?v=island-boar-20261029-2';
+import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-boar-20261029-2';
+import {createHoopsControls} from './hoops-controls.mjs?v=island-boar-20261029-2';
+import {createHoopsAudio} from './hoops-audio.mjs?v=island-boar-20261029-2';
+import {hoopsIcon} from './hoops-icons.mjs?v=island-boar-20261029-2';
+import {createFixedLoop} from './hoops-loop.mjs?v=island-boar-20261029-2';
+import {createCourt} from './hoops-court.mjs?v=island-boar-20261029-2';
+import {matchTeams} from './hoops-franchise.mjs?v=island-boar-20261029-2';
 
 const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor((s*10)%10)}`;const m=Math.floor(s/60);return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
 
@@ -34,7 +34,7 @@ export function startHoops(ctx){
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
- const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-boar-20261029-1',import.meta.url).href;screenEl.append(css);
+ const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-boar-20261029-2',import.meta.url).href;screenEl.append(css);
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
  const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
 
@@ -73,7 +73,7 @@ export function startHoops(ctx){
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
   const quality=Number(params.get('hoopsQuality')||setup.quality||2);
-  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-boar-20261029-1');
+  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-boar-20261029-2');
   viewModule.then(m=>m.createHoopsView(canvas,{...balance,view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onProgress:p=>ringEl.style.setProperty('--p',String(p))})).then(loaded=>{
    if(disposed){loaded.dispose();return;}
    view=loaded;const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();

@@ -1,5 +1,5 @@
-import {registerBuildingVisual} from './buildings.mjs?v=island-boar-20261029-1';
-import {primitive as part} from './environment.mjs?v=island-boar-20261029-1';
+import {registerBuildingVisual} from './buildings.mjs?v=island-boar-20261029-2';
+import {primitive as part} from './environment.mjs?v=island-boar-20261029-2';
 const block=(g,c,p,s)=>part(g,'box',c,p,s);
 for(const kind of ['library','mathLab','zoo','puzzleRoom'])registerBuildingVisual(kind,(g,v,w,d,h)=>{
   block(g,'#fff4dc',[0,.07,0],[w*.96,.14,d*.96]);

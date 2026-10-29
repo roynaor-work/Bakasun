@@ -1,8 +1,8 @@
-import {attributes,cardRating} from '../activity/soccer-card.mjs?v=island-boar-20261029-1';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-boar-20261029-1';
+import {attributes,cardRating} from '../activity/soccer-card.mjs?v=island-boar-20261029-2';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-boar-20261029-2';
 // Menu presentation is ready on first entry, before a match creates its renderer.
 if(typeof document!=='undefined'&&!document.querySelector('link[data-ultra-soccer-ui]')){
-  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('../minigames/ultra-soccer-ui.css?v=island-boar-20261029-1',import.meta.url).href;link.dataset.ultraSoccerUi='';document.head.append(link);
+  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('../minigames/ultra-soccer-ui.css?v=island-boar-20261029-2',import.meta.url).href;link.dataset.ultraSoccerUi='';document.head.append(link);
 }
 const node=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls;n.textContent=text??'';return n;};
 /** Local SVG portrait uses only the validated avatar palette; names remain text. */
