@@ -171,3 +171,13 @@ SHA־256 של ה־GLB: `8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2
 הצלילים ממוחזרים מהמשחקים הקיימים באי (ראו G3h, G4e, G6d): כדרור, רשת, טבעת, מסירה, שריקה, קהל.
 
 שימו לב: הצהרת CC0 של MakeHuman חלה על נכסי הליבה של הפרויקט. לא נבדקה תעודת רישיון נפרדת לכל אחד מהבגדים, השיער והנעליים ששימשו; לפני פרסום מסחרי מחוץ לאי כדאי לאמת מול `makehuman.org/license` ומול קובצי הרישיון של כל חבילה.
+
+## מרוץ סנובורד (Alpine Rush) · 26.10.2026
+
+- גרפיקה 5 (27.10.2026, Codex): הדמות היא `assets/alpine-rush/athlete.glb` (1,843,180 בתים, SHA-256 `4691ea5166840b5225b17f5fb121ae66b0d61fd73b34e41ac0942aba4f2ea42a`), Soldier/Vanguard של Mixamo מדוגמת Three.js (https://threejs.org/examples/webgl_animation_skinning_blending.html). זה לא CC0 ולא בהכרח תחת MIT; תנאי Adobe ל־Mixamo: https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html . `minigames/athlete.mjs` מסיר בזיכרון ציוד מותן וראש, צובע את הלבוש ומוסיף קסדה, מסכה ומשקפיים מגאומטריה מקורית. בשילוב הוסרו מקובץ המקור (2,160,468 בתים) שלוש האנימציות שהמשחק לא משתמש בהן (Idle, Run, Walk) כדי לעמוד במגבלת 2MB לקובץ GLB באי; כל הצמתים, השלד, הרשתות והטקסטורות נשארו.
+- תמונות (`assets/alpine-rush/`): `alpine-panorama.webp` ו־`snow-fir.webp` (ImageGen, גרפיקה 2), `granite-v5.webp` ו־`alpine-dusk-v5.webp` (ImageGen, גרפיקה 5; הפרומפטים בחבילת Codex). המקור PNG (כ־15MB) הומר ל־WebP בשילוב: 326,326, 516,162, 443,746 ו־313,734 בתים; הגרניט הוקטן מ־1254 ל־1024 פיקסלים.
+- `assets/kid-full.glb` כבר לא נטען במשחק הזה, ונשאר לשאר האי.
+- Three.js r160, `GLTFLoader` ו־`BufferGeometryUtils` מ־`vendor/` הקיים (MIT). לא נוספו ספריות.
+- הסביבה נוצרת בקוד: חצי הצינור (טקסטורת קנבס של פסים כחולים), השפות, הרשתות האדומות, השטח שבצדדים, העצים, ההרים, הדגלים, הרמפה, שערי הסלאלום, משטחי האצה, המטבעות, השלג היורד וקשת הסיום. ה־HUD, הג׳ויסטיק וסמלי הטריקים הם SVG ו־CSS (עיצוב Codex, `docs-development/alpine-rush/`). הסאונד מסונתז ב־WebAudio; אין קבצי שמע.
+- `assets/ultra-hub/alpine.webp` (87,554 בתים, 960×600): צילום מתוך המשחק הפעיל בגרפיקה 5, מסלול 2, סיבוב באוויר מעל שפת חצי הצינור, בלי HUD.
+- הרפרנסים החזותיים (Ski Master, Snowboard Master 3D, SSX 3) נצפו בידי Codex בלבד; לא הועתקו מהם קוד, סאונד או נכסים.

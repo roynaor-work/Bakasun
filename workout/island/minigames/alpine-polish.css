@@ -1,0 +1,11 @@
+/* Optional UI finish for the existing island controller; no gameplay or state changes. */
+.game-screen[data-game=alpineRush]{--a-orange:#f26b3a;--a-snow:#ecf3fa}
+.game-screen[data-game=alpineRush] .alpine-primary{border-radius:4px;background:linear-gradient(120deg,#f47b43,#ed5832);box-shadow:0 5px 0 #973a2580,0 12px 25px #102d3d33}
+.game-screen[data-game=alpineRush] .alpine-title{letter-spacing:-.06em;font-style:italic;font-weight:900}
+.game-screen[data-game=alpineRush] .alpine-rank{font-style:italic;letter-spacing:-.065em;text-shadow:0 2px 12px #15344933}
+.game-screen[data-game=alpineRush] .alpine-boost{background:#dceb89;color:#193643;border-radius:8px;border-color:#e6efb1;box-shadow:0 6px 25px #12324744}
+.game-screen[data-game=alpineRush] .alpine-boost.active{background:#f2f7b5;box-shadow:0 0 28px #d9f77d66}
+.game-screen[data-game=alpineRush] .alpine-trick[data-ready=true]{border-color:#dbe993;color:#edf5b6;background:#244452dd}
+.game-screen[data-game=alpineRush] .alpine-progress>span{background:#ddeb91}
+.game-screen[data-game=alpineRush] .alpine-joystick{border-color:#d4e5f066;background:#102d4544}
+.game-screen[data-game=alpineRush] .alpine-knob{background:#dbe98b99;border-color:#e8f4bbaa}

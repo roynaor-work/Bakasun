@@ -1,5 +1,5 @@
-import {DATA_VERSION,dataURL} from '../release.mjs?v=island-hoops-feel-20261027-1';
-import { configureBuilding } from './registry.mjs?v=island-hoops-feel-20261027-1';
+import {DATA_VERSION,dataURL} from '../release.mjs?v=island-alpine-20261028-1';
+import { configureBuilding } from './registry.mjs?v=island-alpine-20261028-1';
 
 const FILES = ['config', 'city', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 

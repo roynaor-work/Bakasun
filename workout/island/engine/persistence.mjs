@@ -1,20 +1,20 @@
-import {initialCity, validCity, productionTier} from './city-depth.mjs?v=island-hoops-feel-20261027-1';
-import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-hoops-feel-20261027-1';
-import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-hoops-feel-20261027-1';
-import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-hoops-feel-20261027-1';
-import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-hoops-feel-20261027-1';
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-hoops-feel-20261027-1';
-import {withCityHall} from './city-hall.mjs?v=island-hoops-feel-20261027-1';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-hoops-feel-20261027-1';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-hoops-feel-20261027-1';
-import {initialEquipment} from '../activity/equipment.mjs?v=island-hoops-feel-20261027-1';
-import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-hoops-feel-20261027-1';
-import { cellsFor } from './rules.mjs?v=island-hoops-feel-20261027-1';
-import {repairHarbors} from './placement-help.mjs?v=island-hoops-feel-20261027-1';
-import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-hoops-feel-20261027-1';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-hoops-feel-20261027-1';
-import {validReadyPlan,prepareReadyPlan} from './ready-plots.mjs?v=island-hoops-feel-20261027-1';
-import {initialHoops,validHoops,migrateHoops,mergeHoops} from '../minigames/hoops-franchise.mjs?v=island-hoops-feel-20261027-1';
+import {initialCity, validCity, productionTier} from './city-depth.mjs?v=island-alpine-20261028-1';
+import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-alpine-20261028-1';
+import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-alpine-20261028-1';
+import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-alpine-20261028-1';
+import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-alpine-20261028-1';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-alpine-20261028-1';
+import {withCityHall} from './city-hall.mjs?v=island-alpine-20261028-1';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-alpine-20261028-1';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-alpine-20261028-1';
+import {initialEquipment} from '../activity/equipment.mjs?v=island-alpine-20261028-1';
+import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-alpine-20261028-1';
+import { cellsFor } from './rules.mjs?v=island-alpine-20261028-1';
+import {repairHarbors} from './placement-help.mjs?v=island-alpine-20261028-1';
+import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-alpine-20261028-1';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-alpine-20261028-1';
+import {validReadyPlan,prepareReadyPlan} from './ready-plots.mjs?v=island-alpine-20261028-1';
+import {initialHoops,validHoops,migrateHoops,mergeHoops} from '../minigames/hoops-franchise.mjs?v=island-alpine-20261028-1';
 
 export const CURRENT_VERSION = 18;
 export const STORAGE_KEY = 'island.v1';
@@ -41,15 +41,16 @@ export function createInitialState(data, now = Date.now()) {
 }
 
 /** Games added while the schema stayed at 18. */
-const GAMES_AFTER_18=['streetSlam'];
+const GAMES_AFTER_18=['streetSlam','alpineRush'];
 
 /** A game added after a save was written starts at stage one with empty
  * equipment, the same way islandRacing joined in 16 -> 17. Additive only. */
 function addNewGame(state,old,data,id){
   if(!data?.config?.minigameLevels?.[id])return state;
-  if(isObject(old.minigameLevels)&&!Object.hasOwn(old.minigameLevels,id))state.minigameLevels={...old.minigameLevels,[id]:1};
-  if(isObject(old.minigameProgress)&&!Object.hasOwn(old.minigameProgress,id))state.minigameProgress={...old.minigameProgress,[id]:initialProgress(data)[id]};
-  if(isObject(old.minigameEquipment)&&!Object.hasOwn(old.minigameEquipment,id))state.minigameEquipment={...old.minigameEquipment,[id]:initialEquipment(data)[id]};
+  // Spread the state being built (not old): with several new games each one keeps the previous additions.
+  if(isObject(old.minigameLevels)&&!Object.hasOwn(old.minigameLevels,id))state.minigameLevels={...state.minigameLevels,[id]:1};
+  if(isObject(old.minigameProgress)&&!Object.hasOwn(old.minigameProgress,id))state.minigameProgress={...state.minigameProgress,[id]:initialProgress(data)[id]};
+  if(isObject(old.minigameEquipment)&&!Object.hasOwn(old.minigameEquipment,id))state.minigameEquipment={...state.minigameEquipment,[id]:initialEquipment(data)[id]};
   return state;
 }
 

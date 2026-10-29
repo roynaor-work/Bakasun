@@ -1,0 +1,80 @@
+{
+  "engineCommit": "5bedb77129324ccc16435fe3a2f09815ab28f4b1",
+  "engineUnchanged": true,
+  "pausePassed": true,
+  "results": [
+    {
+      "stage": 1,
+      "result": {
+        "runId": "alpine-ice-peak-92317-1",
+        "rank": 5,
+        "elapsedMs": 76055,
+        "peakKmh": 112,
+        "reward": 17,
+        "won": false,
+        "stars": 0,
+        "score": 2,
+        "completed": true,
+        "stage": 1,
+        "trackId": "ice-peak",
+        "seed": 92317,
+        "totalRiders": 6,
+        "collisions": 4,
+        "trickScore": 0,
+        "coins": 17,
+        "crashes": 2
+      }
+    },
+    {
+      "stage": 2,
+      "result": {
+        "runId": "alpine-frost-forest-92317-1",
+        "rank": 6,
+        "elapsedMs": 88042,
+        "peakKmh": 112,
+        "reward": 19,
+        "won": false,
+        "stars": 0,
+        "score": 1,
+        "completed": true,
+        "stage": 2,
+        "trackId": "frost-forest",
+        "seed": 92317,
+        "totalRiders": 6,
+        "collisions": 13,
+        "trickScore": 0,
+        "coins": 19,
+        "crashes": 2
+      }
+    },
+    {
+      "stage": 3,
+      "result": {
+        "runId": "alpine-storm-ridge-92317-1",
+        "rank": 6,
+        "elapsedMs": 96655,
+        "peakKmh": 106,
+        "reward": 4,
+        "won": false,
+        "stars": 0,
+        "score": 1,
+        "completed": true,
+        "stage": 3,
+        "trackId": "storm-ridge",
+        "seed": 92317,
+        "totalRiders": 6,
+        "collisions": 12,
+        "trickScore": 150,
+        "coins": 4,
+        "crashes": 3
+      }
+    }
+  ],
+  "hashes": {
+    "alpine-engine.mjs": "b56d3199587b4663b1319e89df0bebcdbb9ba45722923f0a74e34305b2403fb9",
+    "alpine-track.mjs": "e9bd628de986b45fc6b5e782bf9da76bf01749f8b5e994ca2d45ec8cff5a955c",
+    "alpine-controls.mjs": "fcfaf82c5c43031f7cb536eaf357393d11cc845ff698a07f72cb7dcb0d12ad8e",
+    "alpine-audio.mjs": "da653d24d7eee8a313797253a278c501eabb1364e56251bd3b353e235f26e7f5",
+    "alpine-records.mjs": "443df510c8a99568a59b9ec0864e8213f952758f5b2dfc130ffb29b177bb768d"
+  }
+}
