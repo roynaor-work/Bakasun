@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Basketball camera round 29/10/2026: apply on main ef5ea8b. Run from the repo root.
+# Basketball camera round, refreshed 29/10/2026: apply on main cefbacb. Run from the repo root.
 set -euo pipefail
 git apply --index <<'HOOPS_A_END'
 diff --git a/workout/island/data/config.json b/workout/island/data/config.json
-index 7eb4432..d0db5cd 100644
+index dc59dad..19981fc 100644
 --- a/workout/island/data/config.json
 +++ b/workout/island/data/config.json
-@@ -11764,3 +11764,19 @@
+@@ -11946,3 +11946,19 @@
      "maxZ": 3.5,
 -    "dollyZ": 0.5
 +    "dollyZ": 0.5,
@@ -28,7 +28,7 @@ index 7eb4432..d0db5cd 100644
 +    "sideFov": 36
     },
 diff --git a/workout/island/minigames/hoops-engine.mjs b/workout/island/minigames/hoops-engine.mjs
-index f1bcc79..74a0810 100644
+index c0f2556..4bffd63 100644
 --- a/workout/island/minigames/hoops-engine.mjs
 +++ b/workout/island/minigames/hoops-engine.mjs
 @@ -947,3 +947,3 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
@@ -37,7 +37,7 @@ index f1bcc79..74a0810 100644
 +    controlled:S.controlled,ball:{x:+b.x.toFixed(3),y:+b.y.toFixed(3),z:+b.z.toFixed(3),state:b.state,owner:b.owner,passTo:b.state==='pass'?b.pass?.to??null:null,shotId:b.shot?.id||null,dribbleT:+b.dribbleT.toFixed(3)},
      players:snapshotPlayers(),ft:S.ft?{shooter:S.ft.shooter,left:S.ft.left,total:S.ft.total}:null,inbound:S.inbound?{team:S.inbound.team,inbounder:S.inbound.inbounder}:null,
 diff --git a/workout/island/minigames/hoops-players.mjs b/workout/island/minigames/hoops-players.mjs
-index bb5a6eb..778edb0 100644
+index 8a3d020..3947599 100644
 --- a/workout/island/minigames/hoops-players.mjs
 +++ b/workout/island/minigames/hoops-players.mjs
 @@ -114,3 +114,7 @@ export function createAvatar(assets,card,teamLook,opts={}){
@@ -50,7 +50,7 @@ index bb5a6eb..778edb0 100644
 +  if(ctx.catching&&!p.hasBall&&lArm&&rArm&&!p.air){lArm.rotateX(-0.9);rArm.rotateX(-0.9);lFore&&lFore.rotateX(-0.5);rFore&&rFore.rotateX(-0.5);}
   };
 diff --git a/workout/island/minigames/hoops-view.mjs b/workout/island/minigames/hoops-view.mjs
-index 2f0b46e..d26a610 100644
+index b30b514..e735f5a 100644
 --- a/workout/island/minigames/hoops-view.mjs
 +++ b/workout/island/minigames/hoops-view.mjs
 @@ -43,4 +43,5 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
@@ -108,15 +108,12 @@ index 2f0b46e..d26a610 100644
 +   if(e.type==='shotStart'&&(e.shotType==='dunk'||e.shotType==='layup'))state.punch=e.shotType==='dunk'?1:0.6;
     if(e.type==='score'){const n=dyn.nets.find(n=>Math.sign(n.side)===Math.sign((e.side)??1));for(const n2 of dyn.nets)n2.swing=1;state.cheer=1;if(e.shotType==='dunk')state.shake=1;}
 HOOPS_A_END
-OLD=island-alpine-20261028-1; NEW=island-hoops-cam-20261029-1
-git grep -l "$OLD" -- workout tests ':!workout/island/verification' | xargs sed -i "s/$OLD/$NEW/g"
-git add -A workout tests
 git apply --index <<'HOOPS_B_END'
 diff --git a/workout/island/data/config.json b/workout/island/data/config.json
-index d0db5cd..bd508fe 100644
+index 19981fc..eb20725 100644
 --- a/workout/island/data/config.json
 +++ b/workout/island/data/config.json
-@@ -11767,6 +11767,6 @@
+@@ -11949,6 +11949,6 @@
      "behindBack": 7.5,
 -    "behindHeight": 3.8,
 +    "behindHeight": 3.6,
@@ -126,7 +123,7 @@ index d0db5cd..bd508fe 100644
 +    "behindLookY": 2.0,
      "behindZ": 0.55,
 diff --git a/workout/island/minigames/hoops-view.mjs b/workout/island/minigames/hoops-view.mjs
-index 2f02fee..1e115ef 100644
+index e735f5a..bea49bc 100644
 --- a/workout/island/minigames/hoops-view.mjs
 +++ b/workout/island/minigames/hoops-view.mjs
 @@ -81,3 +81,3 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
@@ -142,4 +139,7 @@ index 2f02fee..1e115ef 100644
 +   camera.fov=lerp(V.behindFov??50,V.sideFov??36,state.bW)-8*punch;camera.position.set(cx,(V.behindHeight??3.8)+state.bW*(V.sideExtraHeight??1.6)+Math.min(3,over*0.55),cz);camera.lookAt(lx,lerp(V.behindLookY??1.4,1.1,state.bW),lz);
    } else if(state.landscape){
 HOOPS_B_END
+OLD=island-soccer-athlete-20261029-1; NEW=island-hoops-cam-20261029-1
+git grep -l "$OLD" -- workout tests ':!workout/island/verification' | xargs sed -i "s/$OLD/$NEW/g"
+git add -A workout tests
 echo "tree: $(git write-tree)"
