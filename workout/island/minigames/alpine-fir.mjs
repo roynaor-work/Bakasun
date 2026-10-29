@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-hoops-cam-20261029-1';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-boar-20261029-1';
 
 const hash=(a,b,c=0)=>{const q=Math.sin(a*127.1+b*311.7+c*57.3)*43758.5453;return q-Math.floor(q);};
 function tint(g,snow,bark,variant){g.deleteAttribute('uv');const p=g.attributes.position,c=new Float32Array(p.count*3),base=new T.Color(snow?'#ffffff':bark?'#554a3a':'#305449');for(let i=0;i<p.count;i++){const variation=.88+.16*hash(Math.round(p.getX(i)*13),Math.round(p.getZ(i)*11),variant);c.set([base.r*variation,base.g*variation,base.b*variation],i*3);}g.setAttribute('color',new T.BufferAttribute(c,3));return g;}

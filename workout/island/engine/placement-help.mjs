@@ -1,4 +1,4 @@
-import {validatePlacement,cellsFor} from './rules.mjs?v=island-hoops-cam-20261029-1';
+import {validatePlacement,cellsFor} from './rules.mjs?v=island-boar-20261029-1';
 /** Deterministic nearest legal anchor, bounded by the island grid. Invalid money,
  * limits and shore/road requirements remain visible when no legal cell exists. */
 export function nearestPlacement(state,registry,typeId,point,ignoreId,flags={}){
