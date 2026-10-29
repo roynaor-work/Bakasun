@@ -1,12 +1,12 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-alpine-20261028-1';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-alpine-20261028-1';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-alpine-20261028-1';
-import {CityDepthInterface} from './city-depth.mjs?v=island-alpine-20261028-1';
-import {CityManagementInterface} from './city-management.mjs?v=island-alpine-20261028-1';
-import {nearestCityZone} from '../engine/city-management.mjs?v=island-alpine-20261028-1';
-import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-alpine-20261028-1';
-import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-alpine-20261028-1';
-import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-alpine-20261028-1';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-alpine-20261029-1';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-alpine-20261029-1';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-alpine-20261029-1';
+import {CityDepthInterface} from './city-depth.mjs?v=island-alpine-20261029-1';
+import {CityManagementInterface} from './city-management.mjs?v=island-alpine-20261029-1';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-alpine-20261029-1';
+import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-alpine-20261029-1';
+import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-alpine-20261029-1';
+import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-alpine-20261029-1';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);

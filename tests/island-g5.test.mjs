@@ -101,7 +101,7 @@ test('G5 rapid close/reopen and reload with a stale game guard settle correctly 
  const target=historyTarget();let nav=new GameNavigation({target});nav.game();nav.menu();nav.leave();nav.menu();target.flush();assert.equal(nav.depth,1);assert.equal(nav.desired,1);nav.game();nav.dispose();nav=new GameNavigation({target});target.flush();assert.equal(nav.depth,0);assert.equal(target.index,1);assert.equal(target.history.length,4);nav.dispose();
 });
 test('G5 release and shell modules import from the island with one synchronized version',async()=>{
- assert.equal(DATA_VERSION,'island-alpine-20261028-1');for(const path of ['ui/game-shell.mjs','ui/activity.mjs','minigames/canvas-session.mjs','minigames/soccer-session.mjs','activity/availability.mjs','engine/city-hall.mjs']){const source=await readFile(new URL(path,root),'utf8');for(const version of source.matchAll(/\?v=([\w-]+)/g))assert.equal(version[1],DATA_VERSION,path);assert.doesNotMatch(source,/https?:\/\//);}
+ assert.equal(DATA_VERSION,'island-alpine-20261029-1');for(const path of ['ui/game-shell.mjs','ui/activity.mjs','minigames/canvas-session.mjs','minigames/soccer-session.mjs','activity/availability.mjs','engine/city-hall.mjs']){const source=await readFile(new URL(path,root),'utf8');for(const version of source.matchAll(/\?v=([\w-]+)/g))assert.equal(version[1],DATA_VERSION,path);assert.doesNotMatch(source,/https?:\/\//);}
 });
 test('G5 paused audio stays silent through global pointer unlocks and mute changes, then resumes only when requested',()=>{
  let audio,created=0,resumes=0,starts=0;const gains=[],param=()=>({value:0,setValueAtTime(){},exponentialRampToValueAtTime(){}}),node=()=>({gain:param(),frequency:param(),connect(){},disconnect(){},start(){starts++;},stop(){}});

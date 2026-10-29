@@ -1,9 +1,9 @@
 import * as T from '../vendor/three.module.js';
-import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-alpine-20261028-1';
-import {streetFront} from '../engine/city-sites.mjs?v=island-alpine-20261028-1';
-import {plotLandscape} from './plot-landscape.mjs?v=island-alpine-20261028-1';
-import {streetSurfaces,STREET_SURFACE} from './street-surfaces.mjs?v=island-alpine-20261028-1';
-import {distributedStreetSites} from './street-distribution.mjs?v=island-alpine-20261028-1';
+import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-alpine-20261029-1';
+import {streetFront} from '../engine/city-sites.mjs?v=island-alpine-20261029-1';
+import {plotLandscape} from './plot-landscape.mjs?v=island-alpine-20261029-1';
+import {streetSurfaces,STREET_SURFACE} from './street-surfaces.mjs?v=island-alpine-20261029-1';
+import {distributedStreetSites} from './street-distribution.mjs?v=island-alpine-20261029-1';
 
 /** Paving and street furniture are derived visuals inside existing footprints.
  * No saved building, authored GLB, construction rule or ground plane is changed. */
