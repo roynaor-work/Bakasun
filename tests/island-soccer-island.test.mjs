@@ -19,7 +19,8 @@ import * as T from '../workout/island/vendor/three.module.js';
 const root=new URL('../workout/island/',import.meta.url),data=await loadData(root,async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))})),balance=data.config.minigames.soccer;
 const fixture=()=>{const values=new Map(),storage={getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,String(v))},engine=createEngine(data,{storage,now:()=>123456});engine.setSoccerDifficulty('normal');return {engine,storage,values,activity:createActivity(engine,{now:()=>123456})};};
 function pitch(engine){engine.state.buildings.push({id:'soccer-test',typeId:'soccer',x:1,z:0,level:1});}
-const payload=(extra={})=>({won:true,goalsFor:3,goalsAgainst:0,stage:1,stars:3,seed:42,durationSeconds:150,difficulty:'normal',...extra});
+// League ladder (29/10/2026): match 1 is played at the first league's difficulty.
+const payload=(extra={})=>({won:true,goalsFor:3,goalsAgainst:0,stage:1,stars:3,seed:42,durationSeconds:150,difficulty:balance.league.leagues[0].difficulty,...extra});
 const envelope=r=>({outcome:r.won?'win':'lose',score:r.goalsFor,performance:1,soccer:r});
 function round(f){let ctx;const game=f.engine.registry.minigames.get('soccer'),start=game.start;f.engine.registry.minigames.set('soccer',{...game,start:c=>{ctx=c;return start(c);}});const response=f.engine.startMinigame('soccer',gameContext(f.engine,data.config.minigames,42,'soccer',1));return {ctx,response};}
 
@@ -40,7 +41,7 @@ test('G3b view receives city colors and stage-cycled opponents from data, includ
 test('G3b single session, one payment, stage unlocking and neutral cancellation use the island lifecycle',()=>{
  const f=fixture();pitch(f.engine);const money=f.engine.state.money,parts=structuredClone(f.engine.state.parts),r=round(f);assert.equal(r.response.ok,true);assert.equal(f.engine.startMinigame('navalDuel').reason,'reason.gameBusy');
  r.response.session.setPaused(true);assert.equal(r.response.session.snapshot.paused,true);r.response.session.setPaused(false);
- assert.equal(r.ctx.finish(envelope(payload())).ok,true);assert.equal(f.engine.state.money,money+balance.levels[0].winMoney+1);assert.equal(f.engine.state.minigameProgress.soccer.stage,2);assert.equal(f.engine.state.minigameProgress.soccer.stars[0],3);assert.equal(f.engine.state.team.wins,1);assert.equal(r.response.session.snapshot.disposed,true);assert.equal(r.ctx.finish(envelope(payload())).ok,false);assert.equal(f.engine.state.team.wins,1);
+ assert.equal(r.ctx.finish(envelope(payload())).ok,true);assert.equal(f.engine.state.money,money+Math.floor((balance.levels[0].winMoney+1)*balance.difficulties[balance.league.leagues[0].difficulty].coinMultiplier));assert.equal(f.engine.state.minigameProgress.soccer.stage,2);assert.equal(f.engine.state.minigameProgress.soccer.stars[0],3);assert.equal(f.engine.state.team.wins,1);assert.equal(r.response.session.snapshot.disposed,true);assert.equal(r.ctx.finish(envelope(payload())).ok,false);assert.equal(f.engine.state.team.wins,1);
  const before=f.engine.exportJSON(),next=round(f);assert.equal(next.response.cancel().cancelled,true);assert.equal(next.response.cancel().ok,false);assert.equal(f.engine.exportJSON(),before);assert.deepEqual(f.engine.state.parts,parts);
 });
 for(const score of [[0,1],[1,1]])test(`G3b ${score[0]}:${score[1]} receives no coins, stars, wins or next stage`,()=>{
@@ -50,7 +51,7 @@ for(const [field,value]of [['won',false],['goalsFor',1.5],['goalsAgainst',-1],['
  const f=fixture();pitch(f.engine);const r=round(f),before=f.engine.exportJSON();assert.equal(r.ctx.finish(envelope(payload({[field]:value}))).ok,false);assert.equal(f.engine.exportJSON(),before);assert.equal(f.engine.isMinigameActive(),true);r.response.cancel();
 });
 test('G3b result requires exactly the eight G3c fields and agrees with the envelope',()=>{
- const ctx={level:1,seed:42,difficulty:'normal'};for(const r of [payload({unknown:1}),Object.fromEntries(Object.entries(payload()).filter(([key])=>key!=='seed')),null])assert.equal(soccerResult({soccer:r},ctx,balance),null);assert.equal(soccerResult({...envelope(payload()),outcome:'lose'},ctx,balance),null);
+ const ctx={level:1,seed:42,difficulty:balance.league.leagues[0].difficulty};for(const r of [payload({unknown:1}),Object.fromEntries(Object.entries(payload()).filter(([key])=>key!=='seed')),null])assert.equal(soccerResult({soccer:r},ctx,balance),null);assert.equal(soccerResult({...envelope(payload()),outcome:'lose'},ctx,balance),null);
  for(const r of [payload({goalsFor:1}),payload({goalsFor:3,goalsAgainst:1,stars:2}),payload({goalsFor:2,goalsAgainst:1,stars:1})])assert.equal(soccerResult(envelope(r),ctx,balance).stars,r.stars);
 });
 test('G3b all three equipment tracks spend coins, require stars from their second purchase and merge max',()=>{

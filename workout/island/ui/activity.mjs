@@ -1,19 +1,20 @@
-import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-hoops-cam-20261029-1';
-import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-hoops-cam-20261029-1';
-import {hangarAction} from '../activity/hangar.mjs?v=island-hoops-cam-20261029-1';
-import {hangarPreview} from './hangar-preview.mjs?v=island-hoops-cam-20261029-1';
-import {createSound} from '../minigames/sound.mjs?v=island-hoops-cam-20261029-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-hoops-cam-20261029-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-hoops-cam-20261029-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=island-hoops-cam-20261029-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-hoops-cam-20261029-1';
-import {gameContext} from '../minigames/context.mjs?v=island-hoops-cam-20261029-1';
-import {gameAvailability} from '../activity/availability.mjs?v=island-hoops-cam-20261029-1';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-hoops-cam-20261029-1';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=island-hoops-cam-20261029-1';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-hoops-cam-20261029-1';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=island-hoops-cam-20261029-1';
-import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-hoops-cam-20261029-1';
+import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-soccer-league-20261029-1';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-soccer-league-20261029-1';
+import {hangarAction} from '../activity/hangar.mjs?v=island-soccer-league-20261029-1';
+import {hangarPreview} from './hangar-preview.mjs?v=island-soccer-league-20261029-1';
+import {createSound} from '../minigames/sound.mjs?v=island-soccer-league-20261029-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-soccer-league-20261029-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-soccer-league-20261029-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=island-soccer-league-20261029-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-soccer-league-20261029-1';
+import {gameContext} from '../minigames/context.mjs?v=island-soccer-league-20261029-1';
+import {gameAvailability} from '../activity/availability.mjs?v=island-soccer-league-20261029-1';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-soccer-league-20261029-1';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=island-soccer-league-20261029-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-soccer-league-20261029-1';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-soccer-league-20261029-1';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=island-soccer-league-20261029-1';
+import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-soccer-league-20261029-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -71,7 +72,7 @@ export class ActivityInterface {
     dialog.append(button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));
   }
   rosters(stage=this.engine.state.minigameProgress.soccer.stage){
-    const c=this.data.config.minigames.soccer,state=this.engine.state,ctx={...gameContext(this.engine,this.data.config.minigames,this.now(),'soccer',stage),state},cards=rosterCards(c,soccerTeam(ctx,c),state.soccerCard,stage,state.soccerCard.difficulty),dialog=this.modal('soccer.rosters','soccer.rostersHint');
+    const c=this.data.config.minigames.soccer,state=this.engine.state,ctx={...gameContext(this.engine,this.data.config.minigames,this.now(),'soccer',stage),state},lm=leagueMatch(c,stage),cards=rosterCards(c,soccerTeam(ctx,c),state.soccerCard,lm.leagues?lm.tuning:stage,lm.difficulty||state.soccerCard.difficulty),dialog=this.modal('soccer.rosters','soccer.rostersHint');
     dialog.dataset.rosters='true';const choose=el('select');choose.setAttribute('aria-label',this.t('minigame.stages'));for(let i=1;i<=c.levels.length;i++){const option=el('option','',this.t('minigame.stage',{stage:i}));option.value=i;option.selected=i===stage;choose.append(option);}choose.onchange=()=>this.rosters(Number(choose.value));dialog.append(choose);
     for(const team of [0,1]){dialog.append(el('h3','',this.t(team?'soccer.awayCards':'soccer.homeCards')));const grid=el('div','soccer-roster-grid');for(const card of cards.filter(p=>p.team===team))grid.append(rosterCard(card,this.t));dialog.append(grid);}dialog.append(button(this.t('soccer.editTeam'),'soccer-edit-team',()=>this.team()));
   }
@@ -147,6 +148,24 @@ export class ActivityInterface {
     for(const key of ['repair','upgrade','paint']){const choose=button(this.t('hangar.'+key),'hangar-'+key,()=>{if(key==='upgrade'){choices.hidden=false;return;}if(hangarAction(h,key,c.hangar)){this.engine.save();this.hangar();}});if(key==='repair')choose.disabled=!h.damage||h.coins<h.damage*c.hangar.repairCost;actions.append(choose);}
     const choices=el('div','hangar-choices');choices.hidden=true;for(const key of ['rapid','shield']){const choose=button(this.t('hangar.'+key),'hangar-'+key,()=>{if(hangarAction(h,key,c.hangar)){this.engine.save();this.hangar();}});choose.disabled=!h.credits||h[key]>=c.hangar.maxRank;choices.append(choose);}dialog.append(actions,choices,this.playButton('alienDefense','hangar-play',()=>this.stages('alienDefense')));
   }
+  /** Three leagues of five matches. Chips switch between opened leagues; only one
+   * league's five matches are on screen. Saved progress keeps its 30-stage arrays. */
+  soccerLeague(id,p){
+    const c=this.data.config.minigames.soccer,L=c.league,per=L.matchesPerLeague,total=L.leagues.length*per,open=Math.min(total,p.stage);
+    const current=Math.floor((open-1)/per);let shown=Number.isInteger(this.soccerLeagueShown)&&this.soccerLeagueShown<=current?this.soccerLeagueShown:current;
+    const box=el('section','soccer-league');box.dataset.league=String(shown+1);
+    const chips=el('div','soccer-league-chips');chips.setAttribute('role','tablist');
+    L.leagues.forEach((row,i)=>{const done=p.stars.slice(i*per,i*per+per).every(n=>n>0),locked=i>current;
+      const chip=button(`${this.t(row.nameId)} ${locked?'🔒':done?'✓':''}`.trim(),'soccer-league-chip',()=>{this.soccerLeagueShown=i;this.stages(id);});
+      chip.classList.add('soccer-league-chip');chip.dataset.league=String(i+1);chip.disabled=locked;chip.setAttribute('role','tab');chip.setAttribute('aria-selected',String(i===shown));chips.append(chip);});
+    const matches=el('div','stage-map soccer-league-matches');
+    for(let m=1;m<=per;m++){const stage=shown*per+m,stars=p.stars[stage-1]||0,locked=stage>open;
+      const node=button(`${this.t('soccer.league.match',{match:m})} ${locked?'🔒':'★'.repeat(stars)+'☆'.repeat(3-stars)}`,'stage-play',()=>this.start(id,undefined,stage));
+      node.dataset.stage=String(stage);node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));matches.append(node);}
+    box.append(chips,matches);
+    if(p.stars.slice(0,total).every(n=>n>0))box.append(el('p','soccer-league-champion',this.t('soccer.league.champion')));
+    return box;
+  }
   stages(id) {
     if(this.requireBuilding(id))return;
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
@@ -165,12 +184,18 @@ export class ActivityInterface {
     if(id==='soccer'){
       dialog.append(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t));
       const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));
+      // League ladder (29/10/2026): no difficulty or keeper choice; the league is the difficulty.
+      const league=this.data.config.minigames.soccer.league;
+      if(league?.leagues?.length){dialog.append(this.soccerLeague(id,p),this.soccerHandedness(),button(this.t('soccer.training'),'soccer-training',()=>this.training()),button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));}
+      else{
       for(const key of Object.keys(this.data.config.minigames.soccer.difficulties)){
         const choose=button(this.t(`soccer.difficulty.${key}`),'soccer-difficulty',()=>{const r=this.engine.setSoccerDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.soccerCard.difficulty===key));choices.append(choose);
       }dialog.append(choices,this.soccerHandedness(),button(this.t('soccer.training'),'soccer-training',()=>this.training()),button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));
       const roles=el('fieldset','soccer-role-choice');roles.append(el('legend','',this.t('soccer.chooseRole')));for(const role of ['field','keeper']){const choice=button(this.t('soccer.playRole.'+role),'soccer-role',()=>{this.engine.setSoccerRole(role);this.stages(id);});choice.dataset.role=role;choice.setAttribute('aria-pressed',String(this.engine.state.soccerRoster.role===role));roles.append(choice);}dialog.append(roles);
+      }
     }
     for(const bonus of this.data.config.minigames.starBonuses)dialog.append(el('p','',this.t('minigame.starBonus',{stars:bonus.stars,level:bonus.upgradeLevel})));
+    if(id==='soccer'&&this.data.config.minigames.soccer.league?.leagues?.length){outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));return;}
     const map=el('div','stage-map');
     p.stars.forEach((stars,i)=>{
       const stage=i+1,locked=stage>p.stage;
@@ -287,8 +312,9 @@ export class ActivityInterface {
       },'primary-button'),button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal()));
     if(id==='soccer')this.outdoorPrompt(dialog);
     if(id==='soccer')dialog.insertBefore(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t,{starsAdded:result.trainingStars}),summary);
+    if(id==='soccer'&&result.penalties){const line=el('p','soccer-penalty-result',this.t('soccer.penalties.result',{hits:result.penalties.hits,attempts:result.penalties.attempts,money:result.penalties.money}));line.dataset.penalties=`${result.penalties.hits}/${result.penalties.attempts}`;dialog.insertBefore(line,summary);}
     dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(id)));
-    if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage)dialog.append(button(this.t('minigame.continue'),'game-next-stage',()=>id==='navalDuel'?this.stages(id):this.start(id,undefined,result.stage+1),'primary-button'));
+    if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage&&!(id==='soccer'&&this.data.config.minigames.soccer.league&&result.stage>=this.data.config.minigames.soccer.league.leagues.length*this.data.config.minigames.soccer.league.matchesPerLeague))dialog.append(button(this.t('minigame.continue'),'game-next-stage',()=>id==='navalDuel'?this.stages(id):this.start(id,undefined,result.stage+1),'primary-button'));
     if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
     this.engine.narration.announce('minigame.result',result);
@@ -296,7 +322,7 @@ export class ActivityInterface {
   alpineResult(dialog,summary,a){
     // Design result card: rank medal, time, peak speed, trick score, coins and the course record.
     const time=ms=>{const c=Math.round(ms/10);return `${String(Math.floor(c/6000)).padStart(2,'0')}:${String(Math.floor(c/100)%60).padStart(2,'0')}.${String(c%100).padStart(2,'0')}`;};
-    const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-hoops-cam-20261029-1',import.meta.url).href;dialog.append(css);
+    const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-soccer-league-20261029-1',import.meta.url).href;dialog.append(css);
     dialog.classList.add('alpine-result');const medal=el('div','alpine-medal',String(a.rank).padStart(2,'0'));medal.setAttribute('aria-label',this.t('alpine.result.rank')+' '+a.rank);dialog.append(medal);
     const rows=[['rank',`${a.rank} / ${a.totalRiders}`],['time',time(a.elapsedMs)],['peak',String(a.peakKmh)],['trickScore',(a.trickScore||0).toLocaleString('en-US')],['coins',`${a.coins||0} / ${a.coinTotal??'-'}`]];
     if(a.bestMs)rows.push([a.newBest?'newBest':'best',time(a.bestMs)]);

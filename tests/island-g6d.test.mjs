@@ -23,7 +23,7 @@ test('G6d overlapping shells retain their wind while a later torpedo has no air 
 });
 test('G6d tunings match requested reductions and cached naval modules use current version',async()=>{
  assert.equal(b.aim.assist,.1);assert.equal(b.aim.autoLead,.3);assert.equal(b.aim.previewFraction,1/3);assert.ok(b.aim.wind.driftScale<.3);assert.equal(b.aim.sway.yaw,.027);assert.ok(Math.abs(b.aim.sway.elevation-.975)<1e-8);
- const source=await readFile(new URL('../workout/island/minigames/naval.mjs',import.meta.url),'utf8');assert.match(source,/g6d-audio\.mjs\?v=island-hoops-cam-20261029-1/);assert.match(source,/g6d/);assert.ok(b.render.maxTriangles<=90000&&b.render.maxDrawCalls<=70);
+ const source=await readFile(new URL('../workout/island/minigames/naval.mjs',import.meta.url),'utf8');assert.match(source,/g6d-audio\.mjs\?v=island-soccer-league-20261029-1/);assert.match(source,/g6d/);assert.ok(b.render.maxTriangles<=90000&&b.render.maxDrawCalls<=70);
 });
 test('G6d all eight local CC0 clips fit in 400KB and no-audio platforms are safe',async()=>{
  const root=new URL('../workout/island/assets/audio/g6d/',import.meta.url);let bytes=0;for(const name of G6D_AUDIO_FILES){const path=new URL(name+'.ogg',root),data=await readFile(path);assert.equal(data.subarray(0,4).toString(),'OggS');bytes+=(await stat(path)).size;}assert.ok(bytes<=400000,bytes);assert.match(await readFile(new URL('LICENSE.txt',root),'utf8'),/CC0 1.0 Universal/);const a=createNavalAudio({AudioContext:null,storage:{getItem:()=> 'off'}});a.unlock();a.play('cannon');a.update(32);assert.equal(a.metrics().muted,true);a.setPaused(true);a.dispose();assert.equal(a.metrics().disposed,true);

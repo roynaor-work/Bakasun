@@ -74,7 +74,8 @@ export function campaignConfig(config,stage=1){
   // A session may pass its already tuned view config to the pure model. Always
   // derive tuning from its original values rather than multiplying it twice.
   config=config[campaignBase]||config;
-  const profile=campaignStage(stage,config),n=profile.stage,style=styles[profile.formation],early=clamp((n-1)/9,0,1),late=clamp((n-10)/20,0,1);
+  // Fractional league tuning keeps every continuous curve continuous; labels round.
+  const profile=campaignStage(stage,config),n=clamp(finite(stage)||1,1,SOCCER_CAMPAIGN_STAGES),style=styles[profile.formation],early=clamp((n-1)/9,0,1),late=clamp((n-10)/20,0,1);
   const ai={...config.ai,attack:{}};
   for(const [key,value] of Object.entries(config.ai.attack)){
     ai.attack[key]={...value,
@@ -98,6 +99,17 @@ export function campaignConfig(config,stage=1){
     opponents:{...config.opponents,minSpeedRatio:round(lerp(.4,config.opponents.minSpeedRatio,early)*lerp(1,1.08,late))}
   };
   Object.defineProperty(result,campaignBase,{value:config});return result;
+}
+
+/** Simple league ladder: three leagues of five matches. The saved stage number is
+ * the match number (1..15); each match borrows the measured tuning of an older
+ * campaign stage and one difficulty profile, so keeper, defence and decisions rise
+ * in small steps. Without config.league the stage is its own tuning (legacy). */
+export function leagueMatch(config,stage=1){
+  const league=config?.league,per=league?.matchesPerLeague||5,rows=league?.leagues||[];
+  if(!rows.length)return {stage,tuning:stage,difficulty:null,league:0,match:stage,leagues:0,per};
+  const total=rows.length*per,n=clamp(Math.round(finite(stage))||1,1,total),index=Math.floor((n-1)/per),row=rows[index],match=(n-1)%per+1;
+  return {stage:n,tuning:row.tuning[match-1],keeper:row.keeper?.[match-1],difficulty:row.difficulty,league:index+1,match,leagues:rows.length,per,total,nameId:row.nameId};
 }
 
 export function createCampaignStats(){

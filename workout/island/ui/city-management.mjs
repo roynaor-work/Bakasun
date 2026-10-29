@@ -1,5 +1,5 @@
-import {CITY_DEPARTMENTS,CITY_ZONES} from '../engine/city-management.mjs?v=island-hoops-cam-20261029-1';
-import {cityBlueprint,citySitesSignature} from '../engine/city-sites.mjs?v=island-hoops-cam-20261029-1';
+import {CITY_DEPARTMENTS,CITY_ZONES} from '../engine/city-management.mjs?v=island-soccer-league-20261029-1';
+import {cityBlueprint,citySitesSignature} from '../engine/city-sites.mjs?v=island-soccer-league-20261029-1';
 
 const node=(tag,className='',text='')=>{const item=document.createElement(tag);item.className=className;item.textContent=text;return item;};
 const button=(text,action,handler,className='secondary-button')=>{const item=node('button',className,text);item.type='button';item.dataset.action=action;item.onclick=handler;return item;};

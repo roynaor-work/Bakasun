@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {navalEffectAtlas,navalParticleGeometry,navalParticleMaterial,writeNavalParticle,finishNavalParticles} from './ultra-naval-effects.mjs?v=island-hoops-cam-20261029-1';
+import {navalEffectAtlas,navalParticleGeometry,navalParticleMaterial,writeNavalParticle,finishNavalParticles} from './ultra-naval-effects.mjs?v=island-soccer-league-20261029-1';
 
 /** Persistent V wakes follow the recorded course; narrow damage smoke leaves hulls readable.
  * Two fixed atlas batches. Water shading belongs to the naval environment. */

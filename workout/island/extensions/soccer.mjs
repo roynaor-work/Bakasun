@@ -1,5 +1,5 @@
-import {startSoccer} from '../minigames/soccer-session.mjs?v=island-hoops-cam-20261029-1';
-import {soccerResult} from '../minigames/soccer-result.mjs?v=island-hoops-cam-20261029-1';
+import {startSoccer} from '../minigames/soccer-session.mjs?v=island-soccer-league-20261029-1';
+import {soccerResult} from '../minigames/soccer-result.mjs?v=island-soccer-league-20261029-1';
 
 export function install(registry,data) {
   const balance=data.config.minigames.soccer;

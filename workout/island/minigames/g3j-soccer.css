@@ -3,3 +3,9 @@
 @keyframes ultra-soccer-goal-in{from{opacity:0;margin-top:-8px}to{opacity:1;margin-top:0}}
 @media(max-height:380px) and (orientation:landscape){.game-screen[data-game=soccer] .soccer-goal-banner{top:max(9px,env(safe-area-inset-top));height:38px;font-size:25px}}
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-goal-banner{animation:none}}
+/* Athlete loading: the pitch waits behind a ring, no text and no placeholder figures. */
+.soccer-loading{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:#102b43cc;pointer-events:none}
+.soccer-loading[hidden]{display:none}
+.soccer-loading::after{content:'';width:44px;height:44px;border:5px solid #fff4dc55;border-top-color:#fff4dc;border-radius:50%;animation:soccer-loading-spin .8s linear infinite}
+@keyframes soccer-loading-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.soccer-loading::after{animation-duration:2.4s}}
