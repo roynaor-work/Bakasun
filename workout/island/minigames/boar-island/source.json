@@ -1,0 +1,74 @@
+{
+  "title": "אי החזירים — הגנת החווה",
+  "sourceVersion": 5,
+  "commit": "4d6674b9ceebc63b08886009cf9ae727bd0cfed3",
+  "integration": "Local copy of the existing game. game.js and style.css add only island lifecycle hooks; other source files are preserved.",
+  "originalFiles": {
+    "world.js": {
+      "sha256": "36a87cfeaf9275708f680118afdfab81289d20985ad056837b386d9654c9c968",
+      "bytes": 23262
+    },
+    "style.css": {
+      "sha256": "5a8cf8d8c22cbfa7b272d63932cb6f4f955f8a9902cfde49141966c9820d609d",
+      "bytes": 21016
+    },
+    "guns.js": {
+      "sha256": "14a972a0df710e2b458fce4aee0b767aec2a382f5b6416e192d8ae947f939bab",
+      "bytes": 18509
+    },
+    "kit.js": {
+      "sha256": "5eb913afd656067c1542383deee97ec0c068511084afa657e1ca23a5efe9acac",
+      "bytes": 15476
+    },
+    "creatures.js": {
+      "sha256": "df07c43bbb162f6204c83a3cf7e31f1b56eff938883a61e11002ea6179125f0e",
+      "bytes": 20402
+    },
+    "weapon-polish.mjs": {
+      "sha256": "9b1bf530eb7211c6e19a6b77c9fdd4e3245947c03af4e35f08ed18dfa03f0c77",
+      "bytes": 10161
+    },
+    "index.html": {
+      "sha256": "0699efe7b528cc147dfc2e10e5760ac370ec8274d2a07c1d09e2313b0cb902a3",
+      "bytes": 8756
+    },
+    "weather.js": {
+      "sha256": "c532f8727f5b02c87cfb9f5bed140f092a7be159365ab55e6677e5dce496bbec",
+      "bytes": 5635
+    },
+    "game.js": {
+      "sha256": "f164b631e7ba70f6272e3ab930c303abe29e6fda791730880b3ff4963995f363",
+      "bytes": 109340
+    },
+    "core.mjs": {
+      "sha256": "877bc7679bd38cd13de0c854a3e6b1c73aca56727c2f39a9b9ca948615336137",
+      "bytes": 13274
+    },
+    "vendor/LICENSE": {
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    "vendor/RoundedBoxGeometry.js": {
+      "sha256": "c13ec51ca1dfa2a584e6e6898e5f45e754d7b8093314b3db89b726c044259531",
+      "bytes": 6488
+    },
+    "vendor/three.core.js": {
+      "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20",
+      "bytes": 1403455
+    },
+    "vendor/three.module.js": {
+      "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a",
+      "bytes": 603113
+    },
+    "vendor/BufferGeometryUtils.js": {
+      "sha256": "248b3e8420bd3de805ca01845c1b0cc62aa2766f3c56bdcead265e306f8e715c",
+      "bytes": 35551
+    }
+  },
+  "localFont": {
+    "name": "Heebo",
+    "source": "https://github.com/google/fonts/tree/main/ofl/heebo",
+    "license": "OFL-1.1",
+    "sha256": "18f930b583fa8fe6b40b2f8263b7ac6afbac07adc91a12467874e7467d3ace30"
+  }
+}
