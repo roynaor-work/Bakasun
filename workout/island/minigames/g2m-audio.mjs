@@ -1,5 +1,5 @@
 const EVENTS=['shot','hit','explosion','missileLaunch','missileExplosion','bonus','stageEnd'];
-export const G2M_SAMPLES=Object.freeze(Object.fromEntries(EVENTS.map(id=>[id,new URL(`../assets/audio/g2m/${id}.ogg?v=island-alpine-20261028-1`,import.meta.url).href])));
+export const G2M_SAMPLES=Object.freeze(Object.fromEntries(EVENTS.map(id=>[id,new URL(`../assets/audio/g2m/${id}.ogg?v=island-hoops-cam-20261029-1`,import.meta.url).href])));
 export const G2M_LEVELS=Object.freeze({shot:.07,hit:.145,explosion:.21,missileLaunch:.22,missileExplosion:.36,bonus:.195,stageEnd:.235});
 /** Alien-only sample bank. The shared shell owns the existing island.sound switch. */
 export function createG2mAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){

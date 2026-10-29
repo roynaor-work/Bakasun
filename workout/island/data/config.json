@@ -7597,7 +7597,7 @@
     "speedPerRank": 0.28,
     "kickPerRank": 0.06,
     "defensePerRank": 0.12,
-    "acceleration": 19,
+    "acceleration": 12,
     "radius": 0.42,
     "roles": [
      "striker",
@@ -7647,11 +7647,12 @@
       "template": 3
      }
     ],
-    "deceleration": 14,
-    "turnRate": 18,
+    "deceleration": 10,
+    "turnRate": 14,
     "turnLean": 0.1,
     "maxTurnLean": 0.2,
-    "lowSpeedTurnBoost": 1.5,
+    "lowSpeedTurnBoost": 2.5,
+    "keeperMotion": {"acceleration": 19, "deceleration": 14, "turnRate": 18, "lowSpeedTurnBoost": 1.5},
     "turnDrive": 0.4
    },
    "team": {
@@ -8005,7 +8006,7 @@
     "camera": {
      "elevationDegrees": 28,
      "fovDegrees": 42,
-     "nearDistance": 19,
+     "nearDistance": 17,
      "speedZoom": 5,
      "fastBallSpeed": 25,
      "leadSeconds": 0.14,
@@ -8141,7 +8142,178 @@
      }
     ],
     "ballShadowScale": 0.7,
-    "ballShadowHeightScale": 0.08
+    "ballShadowHeightScale": 0.08,
+    "athlete": {
+     "enabled": true,
+     "url": "../assets/athlete/athlete.glb",
+     "keeperColors": [
+      "#cf9d2e",
+      "#167b72"
+     ],
+     "motion": {
+      "idleSpeed": 0.25,
+      "moveSpeed": 0.9,
+      "jogSpeed": 2.4,
+      "runSpeed": 4.2,
+      "sprintSpeed": 6.2,
+      "clipSpeeds": {
+       "jog": 2.8,
+       "run": 3.35,
+       "sprint": 4.25
+      },
+      "contacts": {
+       "shot": 0.467,
+       "shot-b": 0.467,
+       "pass": 0.4
+      },
+      "minRate": 0.75,
+      "maxRate": 1.5,
+      "strideShare": 0.45,
+      "maxStride": 1.28,
+      "contactLead": 0.03,
+      "shotBallSpeed": 14,
+      "headerTakeoff": 0.3,
+      "throwStart": 0.25,
+      "throwRate": 1.6,
+      "reachStart": 0.2,
+      "fadeIn": 0.1,
+      "fadeOut": 0.2,
+      "slideRollScale": 0.3,
+      "turnLeanScale": 0.6,
+      "headNod": 0.5,
+      "markDistance": 3.2,
+      "lookMaxYaw": 1.05,
+      "lookMaxPitch": 0.55,
+      "lookRestPitch": 0.12,
+      "lookEase": 0.14,
+      "diveLift": 0.32,
+      "rollEase": 0.09,
+      "turnStiffness": 13,
+      "quickTurnStiffness": 32,
+      "turnLean": 0.9,
+      "maxRoll": 0.22,
+      "accelLean": 0.02,
+      "maxPushPitch": 0.12,
+      "maxBrakePitch": 0.1,
+      "accelEase": 0.12,
+      "leanEase": 0.1,
+      "plantHeight": 0.12,
+      "plantRelease": 0.05,
+      "maxSlip": 0.3,
+      "plantIn": 0.04,
+      "plantOut": 0.1,
+      "turnStepFrom": 1.2,
+      "turnStepRange": 3,
+      "turnStepWeight": 0.6,
+      "turnStepRate": 1.3,
+      "dribbleReach": 0.3,
+      "dribbleGap": 0.24,
+      "dribbleRamp": 1.5,
+      "dribbleFullSpeed": 5,
+      "dribbleMinSpeed": 1.2,
+      "dribbleEase": 0.1,
+      "kickFadeIn": 0.025
+     },
+     "profiles": [
+      {
+       "skin": "#c08a68",
+       "hair": "#1f1712",
+       "beard": 0.55,
+       "boots": "#1b1d22",
+       "bootAccent": "#e9eef2",
+       "shape": {
+        "caucasian": 0.25,
+        "jaw": 0.4,
+        "hairVolume": 0.15
+       }
+      },
+      {
+       "skin": "#8a5a40",
+       "hair": "#120e0c",
+       "beard": 0.3,
+       "boots": "#3a3f47",
+       "bootAccent": "#2a6df4",
+       "shape": {
+        "african": 0.75,
+        "narrow": 0.25,
+        "hairVolume": 0.0
+       }
+      },
+      {
+       "skin": "#ddb090",
+       "hair": "#5a3a22",
+       "beard": 0.7,
+       "boots": "#141414",
+       "bootAccent": "#ff4d2e",
+       "shape": {
+        "caucasian": 0.7,
+        "jaw": 0.7,
+        "hairVolume": 0.5
+       }
+      },
+      {
+       "skin": "#a8714f",
+       "hair": "#18120f",
+       "beard": 0.65,
+       "boots": "#2d2f36",
+       "bootAccent": "#c7f43a",
+       "shape": {
+        "nose": 0.5,
+        "brow": 0.5,
+        "hairVolume": 0.3
+       }
+      },
+      {
+       "skin": "#e6bd9c",
+       "hair": "#a07246",
+       "beard": 0.2,
+       "boots": "#1b1d22",
+       "bootAccent": "#ffd166",
+       "shape": {
+        "caucasian": 0.8,
+        "narrow": 0.5,
+        "hairVolume": 0.6
+       }
+      },
+      {
+       "skin": "#5e3b2a",
+       "hair": "#0d0b0a",
+       "beard": 0.25,
+       "boots": "#3a3f47",
+       "bootAccent": "#111111",
+       "shape": {
+        "african": 1.0,
+        "jaw": 0.5,
+        "hairVolume": 0.05
+       }
+      },
+      {
+       "skin": "#c99a78",
+       "hair": "#2b1e15",
+       "beard": 0.4,
+       "boots": "#141414",
+       "bootAccent": "#3fd0c9",
+       "shape": {
+        "asian": 0.6,
+        "hairVolume": 0.35
+       }
+      },
+      {
+       "skin": "#9a6448",
+       "hair": "#1a1411",
+       "beard": 0.8,
+       "boots": "#2d2f36",
+       "bootAccent": "#ff8fb1",
+       "shape": {
+        "brow": 0.6,
+        "jaw": 0.3,
+        "nose": 0.3,
+        "hairVolume": 0.2
+       }
+      }
+     ],
+     "lodFromQuality": 2
+    }
    },
    "controls": {
     "deadzone": 0.12,
@@ -9327,7 +9499,17 @@
     "maxOverlapSeconds": 0.12,
     "minTeamWidth": 7,
     "switchCooldownSeconds": 0.45,
-    "evadeWidth": 2.2
+    "evadeWidth": 2.2,
+    "coverLane": {
+     "fraction": 0.55,
+     "goalSide": 0.9,
+     "blend": 0.65
+    },
+    "outlet": {
+     "pressure": 2.4,
+     "back": 3.0,
+     "wide": 3.6
+    }
    },
    "shooting": {
     "lowLift": 1.1,
@@ -11762,7 +11944,23 @@
     "leadMax": 4.5,
     "followZ": 0.45,
     "maxZ": 3.5,
-    "dollyZ": 0.5
+    "dollyZ": 0.5,
+    "mode": "behind",
+    "behindBack": 7.5,
+    "behindHeight": 3.6,
+    "behindFov": 48,
+    "behindLook": 0.45,
+    "behindLookY": 2.0,
+    "behindZ": 0.55,
+    "behindLookZ": 0.25,
+    "behindRate": 2.2,
+    "behindSwing": 1.6,
+    "behindWall": 2,
+    "behindNear": 12,
+    "behindFar": 19,
+    "sideExtraBack": 2.5,
+    "sideExtraHeight": 1.2,
+    "sideFov": 36
    },
    "assets": {
     "models": {

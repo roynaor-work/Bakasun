@@ -1,4 +1,4 @@
-import {DATA_VERSION} from '../release.mjs?v=island-alpine-20261028-1';
+import {DATA_VERSION} from '../release.mjs?v=island-hoops-cam-20261029-1';
 /** Frames captured from the real game scenes. Replace the WebP files to
  * update the library after a game-art delivery; no UI changes are needed. */
 const ARTWORK=Object.freeze({

@@ -1,5 +1,5 @@
-import {buildingCenter, levelFactor, levelValue} from './metrics.mjs?v=island-alpine-20261028-1';
-import {upgradeAvailability} from './rules.mjs?v=island-alpine-20261028-1';
+import {buildingCenter, levelFactor, levelValue} from './metrics.mjs?v=island-hoops-cam-20261029-1';
+import {upgradeAvailability} from './rules.mjs?v=island-hoops-cam-20261029-1';
 
 export const initialCity = () => ({investments: {}, claimedGoals: [], delivered: 0, port: {cycle: 0, readyAt: 0, slots: []}});
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);

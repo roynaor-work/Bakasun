@@ -1,0 +1,5233 @@
+{
+  "physicalPhone": false,
+  "physical120Hz": false,
+  "approvedSource": "910ea28d90f8e16e23dc1ff92ffc435b591a2fa8",
+  "graphicsV3": false,
+  "budgets": {
+    "city": 8000000,
+    "gameAdditional": 6000000
+  },
+  "cases": [
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "setup": {
+        "valid": true,
+        "building": "building-1",
+        "dailyLocked": false
+      },
+      "cityBytes": 9714686,
+      "initialMetrics": {
+        "triangles": 102193,
+        "drawCalls": 41,
+        "geometries": 34,
+        "textures": 35,
+        "quality": 0,
+        "pixelRatio": 1,
+        "crowdCount": 96,
+        "shadows": true,
+        "lighting": {
+          "sunShadows": true,
+          "shadowSize": 2048,
+          "quality": 0
+        },
+        "turf": {
+          "turfStatus": "ready",
+          "turfMaps": 2
+        },
+        "stadium": "The Island Ground",
+        "effects": {
+          "impactCues": 0,
+          "flightRibbon": false,
+          "scuffs": 0
+        },
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete",
+          "triangles": 11614,
+          "sourceTriangles": 12894,
+          "meshes": 2,
+          "sixCharacterTriangles": 69684,
+          "sharedTeamMaterials": 2,
+          "perPlayerMaterials": 16,
+          "independentSkeletons": true,
+          "eightCharacterTriangles": 92912,
+          "economyCharacterTriangles": 5336,
+          "lod": 0,
+          "clips": [
+            "idle",
+            "ready",
+            "jog",
+            "run",
+            "sprint",
+            "shot",
+            "shot-b",
+            "pass",
+            "header",
+            "throw",
+            "reach",
+            "celebrate",
+            "sit"
+          ]
+        },
+        "modelCount": 8,
+        "fallbackCount": 0,
+        "shirtNumbers": [
+          9,
+          8,
+          1,
+          9,
+          8,
+          1,
+          7,
+          7
+        ],
+        "appearances": {
+          "skin": [
+            "#efba91",
+            "#c99168",
+            "#875a43",
+            "#dca17b",
+            "#b47c59",
+            "#f4c9a5",
+            "#a76c4d",
+            "#6c4738"
+          ],
+          "hair": [
+            "#382921",
+            "#bd8349",
+            "#171b23",
+            "#78442c",
+            "#d4ac66",
+            "#51352a",
+            "#97613b",
+            "#29202a"
+          ],
+          "socks": [
+            "#fff5db",
+            "#273d63",
+            "#d5e4ee",
+            "#f5d99c",
+            "#b9d7e0",
+            "#efc7ba",
+            "#ebe8d9",
+            "#638b9a"
+          ]
+        },
+        "aimVisible": false,
+        "aimColor": "9bffbe",
+        "crowd3D": true,
+        "animations": [
+          "idle",
+          "run",
+          "run",
+          "run",
+          "run",
+          "run",
+          "run",
+          "run"
+        ],
+        "poses": [
+          {
+            "id": 0,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.0578639866842956,
+            "footAlong": 0.00396230236327666,
+            "headHeight": 1.63879131907017,
+            "lean": 0,
+            "feet": [
+              [
+                -0.7967309274641603,
+                0.10206410511382419,
+                -0.19985302046991354
+              ],
+              [
+                -0.7960376976367234,
+                0.08745633529003849,
+                0.19807559337887704
+              ]
+            ],
+            "yaw": 1.5707963267948966,
+            "footDistance": 0.6232435785892254,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.6209169618966012,
+              "ready": 0,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 1,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.24678323401618912,
+            "footAlong": -0.07318361282036853,
+            "headHeight": 1.587816672454282,
+            "lean": 0,
+            "feet": [
+              [
+                -6.994879275967329,
+                0.11034624940068516,
+                -5.197673335281477
+              ],
+              [
+                -6.9579478315857894,
+                0.18131496479558568,
+                -4.859599750727079
+              ]
+            ],
+            "yaw": 1.6913918272065454,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.03694737332999068,
+              "ready": 0,
+              "jog": 0.4968457393261405,
+              "run": 0.10287150232618991,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 2,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": -0.0452445600971972,
+            "footAlong": -0.04376706259419519,
+            "headHeight": 1.5642367653439868,
+            "lean": 0,
+            "feet": [
+              [
+                -16.297270041450723,
+                0.07496558621163307,
+                -0.19906818460871775
+              ],
+              [
+                -16.311262021304184,
+                0.1472981037169549,
+                0.18949799389716818
+              ]
+            ],
+            "yaw": 0.9016902421228958,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0.1622368433928218,
+              "jog": 0.5037183724917927,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 3,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.3034079852462177,
+            "footAlong": -0.06584193332857381,
+            "headHeight": 1.531814550863544,
+            "lean": 0,
+            "feet": [
+              [
+                1.9917840327166325,
+                0.07930106317856728,
+                0.19528242211622332
+              ],
+              [
+                1.987981280736849,
+                0.16120139300827607,
+                -0.19738156627640707
+              ]
+            ],
+            "yaw": -1.5707963267948966,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0.18330296134876783,
+              "jog": 0.48201198480074486,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 4,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.221891973179457,
+            "footAlong": -0.0482778689434869,
+            "headHeight": 1.5955525402500703,
+            "lean": 0,
+            "feet": [
+              [
+                6.996771875237401,
+                0.1062760351012556,
+                5.1924404505367265
+              ],
+              [
+                6.991172335214195,
+                0.148877372447057,
+                4.804216656120882
+              ]
+            ],
+            "yaw": -1.5954985907359758,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.18343694114169848,
+              "ready": 0,
+              "jog": 0.48188868428998355,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 5,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": -0.04821604606188358,
+            "footAlong": -0.008199466669008462,
+            "headHeight": 1.5448695493019666,
+            "lean": 0,
+            "feet": [
+              [
+                16.309521402664572,
+                0.06097824869271512,
+                0.18763294596620295
+              ],
+              [
+                16.28635801788773,
+                0.15034154455805143,
+                -0.19722036174820104
+              ]
+            ],
+            "yaw": -0.9017140886611839,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0.23751613505437133,
+              "jog": 0.4394640862191969,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 6,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.25475998049527393,
+            "footAlong": -0.03450972536216097,
+            "headHeight": 1.5867949443474825,
+            "lean": 0,
+            "feet": [
+              [
+                -4.993166554502722,
+                0.11903171602578322,
+                4.816187734812498
+              ],
+              [
+                -4.973743829064255,
+                0.17002100114070973,
+                5.212720838645676
+              ]
+            ],
+            "yaw": 1.4331395386688,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.03694737332999068,
+              "ready": 0,
+              "jog": 0.4974453820814461,
+              "run": 0.10209803048259879,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 7,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.15825047708191572,
+            "footAlong": 0.1164155234162413,
+            "headHeight": 1.6002118825098282,
+            "lean": 0,
+            "feet": [
+              [
+                4.999280926923126,
+                0.10512542479926223,
+                -4.80963119846
+              ],
+              [
+                5.001072637848749,
+                0.14021536951915764,
+                -5.1984955420070165
+              ]
+            ],
+            "yaw": -1.8858173997981535,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.19020715166001073,
+              "ready": 0,
+              "jog": 0.4822073477677094,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          }
+        ],
+        "landingVisible": false,
+        "arcDots": 0,
+        "framing": {
+          "ball": {
+            "x": 0.02390066597791627,
+            "y": 0.029607827402890995,
+            "depth": 17.091242773813946
+          },
+          "controlled": {
+            "x": -0.016967202433921996,
+            "y": 0,
+            "depth": 17.19452651762684
+          },
+          "camera": {
+            "x": -0.557642911609249,
+            "z": 0,
+            "distance": 17.19452651762684,
+            "direction": 1
+          },
+          "elevationDegrees": 28
+        },
+        "pitchBounds": {
+          "width": 2444.195868927576,
+          "height": 448.11679962807506
+        },
+        "width": 844,
+        "height": 390
+      },
+      "movement": 4.39244605745318,
+      "pause": {
+        "posesStable": true,
+        "ballStable": true,
+        "elapsedStable": true,
+        "canvasPngIdentical": true,
+        "screenshot": "844-paused.png"
+      },
+      "resumed": true,
+      "metrics": {
+        "triangles": 100135,
+        "drawCalls": 42,
+        "geometries": 35,
+        "textures": 35,
+        "quality": 1,
+        "pixelRatio": 1,
+        "crowdCount": 32,
+        "shadows": true,
+        "lighting": {
+          "sunShadows": true,
+          "shadowSize": 1024,
+          "quality": 1
+        },
+        "turf": {
+          "turfStatus": "ready",
+          "turfMaps": 2
+        },
+        "stadium": "The Island Ground",
+        "effects": {
+          "impactCues": 0,
+          "flightRibbon": false,
+          "scuffs": 0
+        },
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete",
+          "triangles": 11614,
+          "sourceTriangles": 12894,
+          "meshes": 2,
+          "sixCharacterTriangles": 69684,
+          "sharedTeamMaterials": 2,
+          "perPlayerMaterials": 16,
+          "independentSkeletons": true,
+          "eightCharacterTriangles": 92912,
+          "economyCharacterTriangles": 5336,
+          "lod": 0,
+          "clips": [
+            "idle",
+            "ready",
+            "jog",
+            "run",
+            "sprint",
+            "shot",
+            "shot-b",
+            "pass",
+            "header",
+            "throw",
+            "reach",
+            "celebrate",
+            "sit"
+          ]
+        },
+        "modelCount": 8,
+        "fallbackCount": 0,
+        "shirtNumbers": [
+          9,
+          8,
+          1,
+          9,
+          8,
+          1,
+          7,
+          7
+        ],
+        "appearances": {
+          "skin": [
+            "#efba91",
+            "#c99168",
+            "#875a43",
+            "#dca17b",
+            "#b47c59",
+            "#f4c9a5",
+            "#a76c4d",
+            "#6c4738"
+          ],
+          "hair": [
+            "#382921",
+            "#bd8349",
+            "#171b23",
+            "#78442c",
+            "#d4ac66",
+            "#51352a",
+            "#97613b",
+            "#29202a"
+          ],
+          "socks": [
+            "#fff5db",
+            "#273d63",
+            "#d5e4ee",
+            "#f5d99c",
+            "#b9d7e0",
+            "#efc7ba",
+            "#ebe8d9",
+            "#638b9a"
+          ]
+        },
+        "aimVisible": false,
+        "aimColor": "9bffbe",
+        "crowd3D": true,
+        "animations": [
+          "idle",
+          "idle",
+          "idle",
+          "run",
+          "run",
+          "idle",
+          "run",
+          "idle"
+        ],
+        "poses": [
+          {
+            "id": 0,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.08275200568945706,
+            "footAlong": -0.053114333430329466,
+            "headHeight": 1.6315176607391664,
+            "lean": 0,
+            "feet": [
+              [
+                4.02876695203272,
+                0.12004945961511865,
+                -0.1762199725230233
+              ],
+              [
+                3.771608847323622,
+                0.12989370945790402,
+                0.05453122938659844
+              ]
+            ],
+            "yaw": 1.5707963267948966,
+            "footDistance": 0.5796695354115735,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.9999999435165523,
+              "ready": 0,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 1,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.12123578722662934,
+            "footAlong": -0.07263887295149905,
+            "headHeight": 1.635944009320978,
+            "lean": 0,
+            "feet": [
+              [
+                -2.0848760341820936,
+                0.1622051567698587,
+                -6.58352669605515
+              ],
+              [
+                -1.8574965926385096,
+                0.1314929173770581,
+                -6.4118602967703895
+              ]
+            ],
+            "yaw": 2.5776921834006226,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.5467822471930849,
+              "ready": 0,
+              "jog": 0.5529098164630591,
+              "run": 0.002987825472003328,
+              "sprint": 0.0014031142311053894,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 2,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.4732245136551017,
+            "footAlong": 0.09157681258729024,
+            "headHeight": 1.063136301125693,
+            "lean": 0,
+            "feet": [
+              [
+                -16.89157681259135,
+                0.11744878233005396,
+                0.30365913586843124
+              ],
+              [
+                -16.76079768657915,
+                0.13844688941287792,
+                -0.34230370515318304
+              ]
+            ],
+            "yaw": -1.5707963268086156,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0.9999999999999997,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 3,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.22566994801961027,
+            "footAlong": 0.038823383786589,
+            "headHeight": 1.5779134221330358,
+            "lean": 0,
+            "feet": [
+              [
+                5.18325199695472,
+                0.17581986107520753,
+                0.07054889377115177
+              ],
+              [
+                4.883057901676461,
+                0.20318066151479375,
+                -0.10042452137699043
+              ]
+            ],
+            "yaw": -1.5707963164465653,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0.05804028117202542,
+              "jog": 0.942160393482925,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 4,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.18130289878705852,
+            "footAlong": 0.1598963998693987,
+            "headHeight": 1.6265211509091175,
+            "lean": 0,
+            "feet": [
+              [
+                6.1810868239945,
+                0.26327224430220936,
+                4.941367354143026
+              ],
+              [
+                6.133521175481691,
+                0.15983945245506787,
+                5.600895760373992
+              ]
+            ],
+            "yaw": 0.14698349611704298,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0.9999874596070804,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 5,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.4738821567423767,
+            "footAlong": -0.022853670255454706,
+            "headHeight": 1.0627754488024592,
+            "lean": 0,
+            "feet": [
+              [
+                16.777135988361426,
+                0.11744906131985344,
+                -0.27477445626287117
+              ],
+              [
+                16.686108557830995,
+                0.1384469218269771,
+                0.3322305162130676
+              ]
+            ],
+            "yaw": 1.570796326794895,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0.9999999999999997,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 6,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.03909639503334092,
+            "footAlong": 0.537553393378079,
+            "headHeight": 1.6380525345575925,
+            "lean": 0,
+            "feet": [
+              [
+                2.6835583640118963,
+                0.16929713553669418,
+                9.669924017362622
+              ],
+              [
+                2.4728107074676062,
+                0.1840626720137749,
+                9.090647836022528
+              ]
+            ],
+            "yaw": -0.18088047152347997,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.21571037187767683,
+              "ready": 0,
+              "jog": 0.7546896519709558,
+              "run": 0.22029082094548869,
+              "sprint": 0.10808057874268262,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 7,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.0520667380152729,
+            "footAlong": -0.06932124927221331,
+            "headHeight": 1.6416774844861781,
+            "lean": 0,
+            "feet": [
+              [
+                9.492213324331141,
+                0.12849818827360382,
+                -7.097041560457956
+              ],
+              [
+                9.322404110745419,
+                0.10684256415116666,
+                -6.810294719807406
+              ]
+            ],
+            "yaw": 1.5768841688738273,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.9598472047618234,
+              "ready": 0,
+              "jog": 0.17978042067562525,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          }
+        ],
+        "landingVisible": false,
+        "arcDots": 0,
+        "framing": {
+          "ball": {
+            "x": 0.017458504375904474,
+            "y": 0.029948485154048892,
+            "depth": 16.896833464031744
+          },
+          "controlled": {
+            "x": -0.017344322697988614,
+            "y": 1.0792623196721099e-18,
+            "depth": 17.00011720784464
+          },
+          "camera": {
+            "x": 4.326823998873006,
+            "z": 1.500192754464241e-17,
+            "distance": 17.00011720784464,
+            "direction": 1
+          },
+          "elevationDegrees": 28
+        },
+        "pitchBounds": {
+          "width": 2509.3981746635736,
+          "height": 458.17961932040714
+        },
+        "width": 844,
+        "height": 390
+      },
+      "playViewport": {
+        "width": 844,
+        "height": 390
+      },
+      "playScreenshot": "844-playing.png",
+      "gameAdditionalBytes": 4094641,
+      "reopened": true,
+      "closed": true,
+      "reopenBytes": 3225841,
+      "downloads": [
+        {
+          "url": "http://127.0.0.1:56449/workout/island/?dev=1",
+          "phase": "city",
+          "bytes": 2302
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/styles.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 60362
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-management.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7404
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/ready-plots.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3200
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-planning.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9019
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/game-shell.css",
+          "phase": "city",
+          "bytes": 4704
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-depth.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 892
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/presentation/adventure.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11227
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-access.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6027
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/clean-hud.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8783
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/learning.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 10264
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/app.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5863
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/release-watch.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1073
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/learning-buildings.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2173
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/release.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 488
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/translate.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 589
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/load-data.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2395
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/interface.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 20731
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/engine.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 33123
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/press.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4104
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/island-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 35361
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/runtime.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8702
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/interface.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 53997
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/activity.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 40035
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-access.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12237
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/game-shell.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 15031
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-navigation.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2071
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/environment.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5182
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/registry.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3009
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/buildings.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 29608
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/voice.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1642
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/state.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4195
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-runtime.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4268
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/questions.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 15623
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/runtime.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3672
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-management.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 14585
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/fire-certificates.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1351
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/progress.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2279
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/availability.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 539
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/soccer-team.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1980
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/soccer-card.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3019
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/placement-help.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2750
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/soccer-roster.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6519
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/ready-plots.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 17127
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/metrics.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4134
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/rules.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5908
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/economy.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3585
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/episodes.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1042
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/persistence.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 26216
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/hooks.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 698
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-franchise.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9419
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-depth.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7393
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-lighting.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1624
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/avatar.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8641
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-citizens.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5719
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-occlusion.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4382
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/local-models.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3179
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/paths.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2316
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/meshy-pilot.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5983
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/batch.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1924
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-life.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3644
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ultra-island-roads.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3131
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-streets.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11404
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-traffic.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2530
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-overlay.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2716
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/planning-frame.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1028
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-growth.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2105
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/vendor/three.module.js",
+          "phase": "city",
+          "bytes": 670882
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-sites.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5043
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ready-plots.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2939
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-sites.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6346
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-traffic-model.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5351
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/equipment.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1920
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/eligibility.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 556
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/context.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1498
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-depth.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5290
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-management.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 18454
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/ready-plots.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6853
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/adventure-emblems.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2476
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-upgrades.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4788
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/hangar.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1129
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/hangar-preview.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6525
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/icons.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4000
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/sound.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3866
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/alien-upgrades.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 999
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/art.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 13025
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/soccer-card.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4361
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/hoops-club.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8746
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ultra-island-terrain.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5718
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ultra-island-water.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4956
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ultra-island-scenery.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8003
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/coastal-surfaces.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1902
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ultra-island-flora.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3627
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/banks.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5850
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-depth.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8870
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-connections.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1588
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-hall.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1817
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/state.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4823
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-league.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9775
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/vendor/GLTFLoader.js",
+          "phase": "city",
+          "bytes": 108728
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/skeleton-utils.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1445
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/model-art.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5452
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/vendor/BufferGeometryUtils.js",
+          "phase": "city",
+          "bytes": 32118
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/presentation/surfaces.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3263
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/plot-landscape.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4246
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/street-surfaces.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2795
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/street-distribution.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 917
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-soccer-ui.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9745
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/strings.he.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 106478
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/config.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 254515
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/categories.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 582
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/city.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1025
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/buildings.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 13636
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/metrics.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 577
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/icons/island.svg",
+          "phase": "city",
+          "bytes": 2425
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/avatar.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1729
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/team.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 274
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/world.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 483
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/players.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 541
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/tutorial.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 573
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/featureFlags.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 762
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/sports.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 599
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/missions.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 966
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/episodes/index.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 241
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/extensions.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3559
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/episodes/example-first-visit.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 590
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/example-building.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 377
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/example-sport.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 291
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/example-minigame.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 581
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/example-event.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 473
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/example-metric.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 340
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/alien-defense.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1106
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 828
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/aliens.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4740
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-alien-effects.mjs",
+          "phase": "city",
+          "bytes": 6084
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8695
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g2m-effects.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3069
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-session.mjs",
+          "phase": "city",
+          "bytes": 8256
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-flight-combat.mjs",
+          "phase": "city",
+          "bytes": 1937
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-ui.mjs",
+          "phase": "city",
+          "bytes": 6085
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-flight-model.mjs",
+          "phase": "city",
+          "bytes": 22618
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-assets.mjs",
+          "phase": "city",
+          "bytes": 1058
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8359
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-alien-feedback.mjs",
+          "phase": "city",
+          "bytes": 11537
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-alien-environment.mjs",
+          "phase": "city",
+          "bytes": 3038
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-alien-fleet.mjs",
+          "phase": "city",
+          "bytes": 3397
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g2m-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4516
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-flight-input-hud.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4349
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g2m-motion.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1723
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-flight-input.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6169
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/pool.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1008
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g2p-alien.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4090
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien.css",
+          "phase": "city",
+          "bytes": 11573
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/fire-rescue.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 607
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/strings.he.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 106478
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/config.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 254515
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 16304
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-campaign.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4999
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-ladder.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3601
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-navigation.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5837
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-assistance.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6550
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-roads.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11368
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9281
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-canvas.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12232
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 28973
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g2n-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6463
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-ui.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9841
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-fire-scenery.mjs",
+          "phase": "city",
+          "bytes": 1809
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-fire-effects.mjs",
+          "phase": "city",
+          "bytes": 14820
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-truck.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4610
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-fire-city.mjs",
+          "phase": "city",
+          "bytes": 9383
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-crew.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2792
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/naval-duel.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 748
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 29869
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-icons.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2662
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-campaign.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3794
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-lock.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2809
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6003
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-camera.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6476
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/canvas-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 20643
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g6d-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3846
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-hud.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 16437
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 24258
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-projectiles.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7496
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-impacts.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4469
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/patrol-boat.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2186
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g6d-effects.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4218
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-scenery.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12082
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-environment.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8308
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-naval-environment-layout.mjs",
+          "phase": "city",
+          "bytes": 1040
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-naval-effects.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3210
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-water.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12622
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/island-events.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 992
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/activity-income.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 563
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/soccer.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 643
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2149
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 16633
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g3h-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5900
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-icons.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1304
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-drill.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2819
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-presentation.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5614
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-campaign.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8568
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 39744
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 46628
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-lighting.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2266
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-soccer-stadium.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11229
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-crowd.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6686
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-shot.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 884
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-rig.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1363
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-soccer-effects.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4136
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-poses.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1776
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-athlete.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9483
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-athlete-motion.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11120
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-physics.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1626
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-boundary.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2767
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-athlete-body.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7551
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-tactics.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5910
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-assistance.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12087
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-teamplay.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6302
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/tennis.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 624
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1668
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 10518
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g4e-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2715
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-ui.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2569
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11958
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 25094
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 25839
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-pose.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1409
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-tennis-court.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7436
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-environment.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9432
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-crowd.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2214
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-tennis-environment.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12259
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/racing.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 750
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1865
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8408
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-tracks.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7171
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6159
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5736
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-speedometer.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2819
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-physics.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 13848
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 27675
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-effects.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4500
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-scenery.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6802
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-roadside.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9995
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/street-slam.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 801
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2844
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 15780
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-loop.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 836
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3413
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-icons.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3189
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-court.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1888
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9239
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-engine.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 51788
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-ball.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4793
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-ai.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 13958
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/alpine-rush.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 765
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3030
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 20199
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-records.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3590
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5329
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6480
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-track.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 10129
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-engine.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 25962
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/textures/naval-waternormals.jpg",
+          "phase": "city",
+          "bytes": 249023
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/textures/coastal-sand.jpg",
+          "phase": "city",
+          "bytes": 71735
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/textures/coastal-grass.jpg",
+          "phase": "city",
+          "bytes": 150678
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/textures/city-asphalt.jpg",
+          "phase": "city",
+          "bytes": 266227
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/textures/city-pavers.jpg",
+          "phase": "city",
+          "bytes": 183110
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/palm-tree-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 299375
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/house-a-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 331339
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/apartment-block-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 328907
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/fire-station-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 290671
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/shop-corner-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 296343
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/hospital-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 265555
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/adult-man-rigged-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1218880
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/adult-woman-rigged-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 552783
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/car-a-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 327867
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/kid-full.glb",
+          "phase": "city",
+          "bytes": 1473572
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/space.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 27077
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/football.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 66906
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/fire.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 40183
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/racing.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 59743
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/naval.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 47129
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/tennis.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 92298
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/hoops.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 66176
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/alpine.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 87764
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/icons/apple-touch-icon.png",
+          "phase": "soccer",
+          "bytes": 17488
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g3h-soccer.css?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 7667
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g3j-soccer.css?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 1140
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/soccer-realism/turf-albedo-1k.jpg",
+          "phase": "soccer",
+          "bytes": 356593
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/soccer-realism/turf-normal-gl-1k.jpg",
+          "phase": "soccer",
+          "bytes": 478837
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-controls.css?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 6828
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/athlete.glb",
+          "phase": "soccer",
+          "bytes": 1280476
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-albedo.jpg",
+          "phase": "soccer",
+          "bytes": 148340
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-orm.jpg",
+          "phase": "soccer",
+          "bytes": 210390
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-mask.png",
+          "phase": "soccer",
+          "bytes": 101317
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-normal.jpg",
+          "phase": "soccer",
+          "bytes": 164552
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-detail.png",
+          "phase": "soccer",
+          "bytes": 471932
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-normal.jpg",
+          "phase": "soccer",
+          "bytes": 91018
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-orm.jpg",
+          "phase": "soccer",
+          "bytes": 68931
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-mask.png",
+          "phase": "soccer",
+          "bytes": 37638
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-normal.png",
+          "phase": "soccer",
+          "bytes": 63459
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-albedo.jpg",
+          "phase": "soccer",
+          "bytes": 47788
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/kick.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 6779
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/whistle.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 7473
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/pass.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 5715
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/crowd.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 32757
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/release.json?check=1793257191695",
+          "phase": "soccer",
+          "bytes": 247
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/space.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 27077
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/fire.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 40183
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/naval.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 47129
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/football.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 66906
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/tennis.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 92298
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/racing.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 59743
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/hoops.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 66176
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/alpine.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 87764
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/athlete.glb",
+          "phase": "reopen",
+          "bytes": 1280476
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-albedo.jpg",
+          "phase": "reopen",
+          "bytes": 148340
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-mask.png",
+          "phase": "reopen",
+          "bytes": 101317
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-normal.jpg",
+          "phase": "reopen",
+          "bytes": 164552
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-orm.jpg",
+          "phase": "reopen",
+          "bytes": 210390
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-detail.png",
+          "phase": "reopen",
+          "bytes": 471932
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-orm.jpg",
+          "phase": "reopen",
+          "bytes": 68931
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-normal.jpg",
+          "phase": "reopen",
+          "bytes": 91018
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-mask.png",
+          "phase": "reopen",
+          "bytes": 37638
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-albedo.jpg",
+          "phase": "reopen",
+          "bytes": 47788
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-normal.png",
+          "phase": "reopen",
+          "bytes": 63459
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/pass.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 5715
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/kick.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 6779
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/whistle.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 7473
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/crowd.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 32757
+        }
+      ],
+      "gameWithinBudget": true,
+      "athleteUrls": [
+        "http://127.0.0.1:56449/workout/island/assets/athlete/athlete.glb",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-albedo.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-orm.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-mask.png",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-normal.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-detail.png",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-normal.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-orm.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-mask.png",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-normal.png",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-albedo.jpg"
+      ],
+      "errors": [],
+      "warnings": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "setup": {
+        "valid": true,
+        "building": "building-1",
+        "dailyLocked": false
+      },
+      "cityBytes": 9714686,
+      "initialMetrics": {
+        "triangles": 102001,
+        "drawCalls": 40,
+        "geometries": 34,
+        "textures": 36,
+        "quality": 0,
+        "pixelRatio": 1,
+        "crowdCount": 96,
+        "shadows": true,
+        "lighting": {
+          "sunShadows": true,
+          "shadowSize": 2048,
+          "quality": 0
+        },
+        "turf": {
+          "turfStatus": "ready",
+          "turfMaps": 2
+        },
+        "stadium": "The Island Ground",
+        "effects": {
+          "impactCues": 0,
+          "flightRibbon": false,
+          "scuffs": 0
+        },
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete",
+          "triangles": 11614,
+          "sourceTriangles": 12894,
+          "meshes": 2,
+          "sixCharacterTriangles": 69684,
+          "sharedTeamMaterials": 2,
+          "perPlayerMaterials": 16,
+          "independentSkeletons": true,
+          "eightCharacterTriangles": 92912,
+          "economyCharacterTriangles": 5336,
+          "lod": 0,
+          "clips": [
+            "idle",
+            "ready",
+            "jog",
+            "run",
+            "sprint",
+            "shot",
+            "shot-b",
+            "pass",
+            "header",
+            "throw",
+            "reach",
+            "celebrate",
+            "sit"
+          ]
+        },
+        "modelCount": 8,
+        "fallbackCount": 0,
+        "shirtNumbers": [
+          9,
+          8,
+          1,
+          9,
+          8,
+          1,
+          7,
+          7
+        ],
+        "appearances": {
+          "skin": [
+            "#efba91",
+            "#c99168",
+            "#875a43",
+            "#dca17b",
+            "#b47c59",
+            "#f4c9a5",
+            "#a76c4d",
+            "#6c4738"
+          ],
+          "hair": [
+            "#382921",
+            "#bd8349",
+            "#171b23",
+            "#78442c",
+            "#d4ac66",
+            "#51352a",
+            "#97613b",
+            "#29202a"
+          ],
+          "socks": [
+            "#fff5db",
+            "#273d63",
+            "#d5e4ee",
+            "#f5d99c",
+            "#b9d7e0",
+            "#efc7ba",
+            "#ebe8d9",
+            "#638b9a"
+          ]
+        },
+        "aimVisible": false,
+        "aimColor": "9bffbe",
+        "crowd3D": true,
+        "animations": [
+          "idle",
+          "idle",
+          "idle",
+          "idle",
+          "idle",
+          "idle",
+          "idle",
+          "idle"
+        ],
+        "poses": [
+          {
+            "id": 0,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.0464130991049021,
+            "footAlong": 0.012205574808928366,
+            "headHeight": 1.644055291217909,
+            "lean": 0,
+            "feet": [
+              [
+                -0.7877944251910717,
+                0.0884476869570352,
+                -0.19952233127087976
+              ],
+              [
+                -0.7877944251910719,
+                0.0884476869570352,
+                0.19952233127087976
+              ]
+            ],
+            "yaw": 1.5707963267948966,
+            "footDistance": 0.8232467601544824,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 1,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.04641309910490232,
+            "footAlong": 0.012205574808928255,
+            "headHeight": 1.644055291217909,
+            "lean": 0,
+            "feet": [
+              [
+                -6.987794425191072,
+                0.0884476869570352,
+                -5.199522331270879
+              ],
+              [
+                -6.987794425191072,
+                0.0884476869570352,
+                -4.800477668729121
+              ]
+            ],
+            "yaw": 1.5707963267948966,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 2,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.04641309910490321,
+            "footAlong": 0.012205574808930919,
+            "headHeight": 1.644055291217909,
+            "lean": 0,
+            "feet": [
+              [
+                -16.28779442519107,
+                0.0884476869570352,
+                -0.19952233127087976
+              ],
+              [
+                -16.28779442519107,
+                0.0884476869570352,
+                0.19952233127087976
+              ]
+            ],
+            "yaw": 1.5707963267948966,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 3,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.04641309910490232,
+            "footAlong": 0.012205574808928255,
+            "headHeight": 1.644055291217909,
+            "lean": 0,
+            "feet": [
+              [
+                1.9877944251910717,
+                0.0884476869570352,
+                0.19952233127087976
+              ],
+              [
+                1.9877944251910717,
+                0.0884476869570352,
+                -0.19952233127087976
+              ]
+            ],
+            "yaw": -1.5707963267948966,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 4,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.04641309910490232,
+            "footAlong": 0.012205574808928255,
+            "headHeight": 1.644055291217909,
+            "lean": 0,
+            "feet": [
+              [
+                6.987794425191072,
+                0.0884476869570352,
+                5.199522331270879
+              ],
+              [
+                6.987794425191072,
+                0.0884476869570352,
+                4.800477668729121
+              ]
+            ],
+            "yaw": -1.5707963267948966,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 5,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.04641309910490321,
+            "footAlong": 0.012205574808930919,
+            "headHeight": 1.644055291217909,
+            "lean": 0,
+            "feet": [
+              [
+                16.28779442519107,
+                0.0884476869570352,
+                0.19952233127087976
+              ],
+              [
+                16.28779442519107,
+                0.0884476869570352,
+                -0.19952233127087976
+              ]
+            ],
+            "yaw": -1.5707963267948966,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 6,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.04641309910490232,
+            "footAlong": 0.012205574808928255,
+            "headHeight": 1.644055291217909,
+            "lean": 0,
+            "feet": [
+              [
+                -4.987794425191072,
+                0.0884476869570352,
+                4.800477668729121
+              ],
+              [
+                -4.987794425191072,
+                0.0884476869570352,
+                5.199522331270879
+              ]
+            ],
+            "yaw": 1.5707963267948966,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 7,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.04641309910490232,
+            "footAlong": 0.012205574808928255,
+            "headHeight": 1.644055291217909,
+            "lean": 0,
+            "feet": [
+              [
+                4.987794425191072,
+                0.0884476869570352,
+                -4.800477668729121
+              ],
+              [
+                4.987794425191072,
+                0.0884476869570352,
+                -5.199522331270879
+              ]
+            ],
+            "yaw": -1.5707963267948966,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          }
+        ],
+        "landingVisible": false,
+        "arcDots": 0,
+        "framing": {
+          "ball": {
+            "x": 0.13346214351099248,
+            "y": 0.029948692898402404,
+            "depth": 16.896716256187105
+          },
+          "controlled": {
+            "x": -0.13265129234398607,
+            "y": 0,
+            "depth": 17
+          },
+          "camera": {
+            "x": -0.4,
+            "z": 0,
+            "distance": 17,
+            "direction": 1
+          },
+          "elevationDegrees": 28
+        },
+        "pitchBounds": {
+          "width": 5430.682365709172,
+          "height": 991.5611506424275
+        },
+        "width": 390,
+        "height": 844
+      },
+      "portrait": {
+        "rotationRequired": true,
+        "paused": true,
+        "screenshot": "390-portrait-rotation.png"
+      },
+      "movement": 4.481210561304792,
+      "pause": {
+        "posesStable": true,
+        "ballStable": true,
+        "elapsedStable": true,
+        "canvasPngIdentical": true,
+        "screenshot": "390-paused.png"
+      },
+      "resumed": true,
+      "metrics": {
+        "triangles": 102197,
+        "drawCalls": 47,
+        "geometries": 37,
+        "textures": 36,
+        "quality": 0,
+        "pixelRatio": 1,
+        "crowdCount": 96,
+        "shadows": true,
+        "lighting": {
+          "sunShadows": true,
+          "shadowSize": 2048,
+          "quality": 0
+        },
+        "turf": {
+          "turfStatus": "ready",
+          "turfMaps": 2
+        },
+        "stadium": "The Island Ground",
+        "effects": {
+          "impactCues": 1,
+          "flightRibbon": true,
+          "scuffs": 9
+        },
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete",
+          "triangles": 11614,
+          "sourceTriangles": 12894,
+          "meshes": 2,
+          "sixCharacterTriangles": 69684,
+          "sharedTeamMaterials": 2,
+          "perPlayerMaterials": 16,
+          "independentSkeletons": true,
+          "eightCharacterTriangles": 92912,
+          "economyCharacterTriangles": 5336,
+          "lod": 0,
+          "clips": [
+            "idle",
+            "ready",
+            "jog",
+            "run",
+            "sprint",
+            "shot",
+            "shot-b",
+            "pass",
+            "header",
+            "throw",
+            "reach",
+            "celebrate",
+            "sit"
+          ]
+        },
+        "modelCount": 8,
+        "fallbackCount": 0,
+        "shirtNumbers": [
+          9,
+          8,
+          1,
+          9,
+          8,
+          1,
+          7,
+          7
+        ],
+        "appearances": {
+          "skin": [
+            "#efba91",
+            "#c99168",
+            "#875a43",
+            "#dca17b",
+            "#b47c59",
+            "#f4c9a5",
+            "#a76c4d",
+            "#6c4738"
+          ],
+          "hair": [
+            "#382921",
+            "#bd8349",
+            "#171b23",
+            "#78442c",
+            "#d4ac66",
+            "#51352a",
+            "#97613b",
+            "#29202a"
+          ],
+          "socks": [
+            "#fff5db",
+            "#273d63",
+            "#d5e4ee",
+            "#f5d99c",
+            "#b9d7e0",
+            "#efc7ba",
+            "#ebe8d9",
+            "#638b9a"
+          ]
+        },
+        "aimVisible": false,
+        "aimColor": "9bffbe",
+        "crowd3D": true,
+        "animations": [
+          "idle",
+          "run",
+          "run",
+          "kick",
+          "run",
+          "run",
+          "run",
+          "idle"
+        ],
+        "poses": [
+          {
+            "id": 0,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.1574599068246636,
+            "footAlong": 0.10635671943338029,
+            "headHeight": 1.5951121160570758,
+            "lean": 0,
+            "feet": [
+              [
+                4.27700413601615,
+                0.10577365304556852,
+                -0.34082766518383
+              ],
+              [
+                4.005619716602109,
+                0.12076184917781863,
+                0.39874832729714416
+              ]
+            ],
+            "yaw": 1.5707963267948966,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.9740088712212447,
+              "ready": 0.1611993331021395,
+              "jog": 0.0014477581004326235,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 1,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.34561091737575383,
+            "footAlong": 0.236814606923472,
+            "headHeight": 1.5726542843614095,
+            "lean": 0,
+            "feet": [
+              [
+                -0.10598572352786423,
+                0.45148058653644574,
+                -7.221588477316644
+              ],
+              [
+                0.7591873350998352,
+                0.10233234904209909,
+                -7.417059437243269
+              ]
+            ],
+            "yaw": 1.9054016317619589,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0.2003908197635683,
+              "run": 0.7997215477823302,
+              "sprint": 0.16833983453989698,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 2,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.38096988574658586,
+            "footAlong": 0.020897681917762374,
+            "headHeight": 1.547149584307758,
+            "lean": 0,
+            "feet": [
+              [
+                -16.944534163708255,
+                0.17665940124656326,
+                -1.126351137127455
+              ],
+              [
+                -16.73364171549262,
+                0.23459743883207684,
+                -0.6752462674412061
+              ]
+            ],
+            "yaw": -3.14159129823,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0.20039944802318127,
+              "jog": 0.2046303189841536,
+              "run": 0.8541105368003804,
+              "sprint": 0.03210872255561078,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 3,
+            "mode": "kick",
+            "clip": "shot",
+            "headAlong": 0.04727801149853676,
+            "footAlong": 0.25885836683275165,
+            "headHeight": 1.5317868495969131,
+            "lean": 0,
+            "feet": [
+              [
+                5.360899587263811,
+                0.09176299875719046,
+                -0.3080524605698304
+              ],
+              [
+                5.112052161007084,
+                0.21887642463693174,
+                -0.7542198209430877
+              ]
+            ],
+            "yaw": 2.9293249803751635,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0.16121764030768126,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0.9999995436473632,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 4,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.2251100421397379,
+            "footAlong": -0.035756992228548834,
+            "headHeight": 1.5311841626857416,
+            "lean": 0,
+            "feet": [
+              [
+                7.338981802251135,
+                0.07560456205876354,
+                5.677708315259644
+              ],
+              [
+                7.092642355973235,
+                0.3990569854047314,
+                5.94529348931032
+              ]
+            ],
+            "yaw": 2.029121891879356,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0.9999999999863574,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 5,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.3663431620693761,
+            "footAlong": -0.27639448953123097,
+            "headHeight": 1.477156897767037,
+            "lean": 0,
+            "feet": [
+              [
+                16.62427943190867,
+                0.3587518599009503,
+                -0.31877605895770833
+              ],
+              [
+                17.10072747989939,
+                0.109502525226022,
+                -0.31925355691998114
+              ]
+            ],
+            "yaw": 3.1290029689219985,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0.2152462318455414,
+              "jog": 0.9536353793314718,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 6,
+            "mode": "run",
+            "clip": "locomotion",
+            "headAlong": 0.43519292551489286,
+            "footAlong": -0.021174451947843564,
+            "headHeight": 1.4931665543514305,
+            "lean": 0,
+            "feet": [
+              [
+                0.9270298320021818,
+                0.12153739412723169,
+                3.9838162751788206
+              ],
+              [
+                1.1838149718538569,
+                0.43082584115656014,
+                3.832040747120515
+              ]
+            ],
+            "yaw": -2.676691416013773,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0,
+              "ready": 0,
+              "jog": 0.1222566273380038,
+              "run": 0.9434681335562642,
+              "sprint": 0.04810136259209211,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          },
+          {
+            "id": 7,
+            "mode": "idle",
+            "clip": "locomotion",
+            "headAlong": 0.0678529972199356,
+            "footAlong": 0.014178025293974075,
+            "headHeight": 1.6368843854072928,
+            "lean": 0,
+            "feet": [
+              [
+                6.230297783600389,
+                0.1124512844031062,
+                -9.549800742061029
+              ],
+              [
+                6.49459828251162,
+                0.09882647975247388,
+                -9.505138957089628
+              ]
+            ],
+            "yaw": 2.4888559248220075,
+            "footDistance": null,
+            "handRadii": null,
+            "weights": {
+              "idle": 0.9740409267780002,
+              "ready": 0,
+              "jog": 0.1505941723813432,
+              "run": 0,
+              "sprint": 0,
+              "shot": 0,
+              "shot-b": 0,
+              "pass": 0,
+              "header": 0,
+              "throw": 0,
+              "reach": 0,
+              "celebrate": 0,
+              "sit": 0
+            }
+          }
+        ],
+        "landingVisible": false,
+        "arcDots": 0,
+        "framing": {
+          "ball": {
+            "x": 0.04184880618886269,
+            "y": 0.18990168251324469,
+            "depth": 22.614635325185848
+          },
+          "controlled": {
+            "x": -0.06308847087550228,
+            "y": -0.2571631605580607,
+            "depth": 16.853792583444246
+          },
+          "camera": {
+            "x": 5.053936595078248,
+            "z": -3.543843483095361,
+            "distance": 19.98282065631209,
+            "direction": 1
+          },
+          "elevationDegrees": 28
+        },
+        "pitchBounds": {
+          "width": 2560.8150307581172,
+          "height": 552.6303989308325
+        },
+        "width": 844,
+        "height": 390
+      },
+      "playViewport": {
+        "width": 844,
+        "height": 390
+      },
+      "playScreenshot": "390-playing.png",
+      "gameAdditionalBytes": 4094641,
+      "reopened": true,
+      "closed": true,
+      "reopenBytes": 3225841,
+      "downloads": [
+        {
+          "url": "http://127.0.0.1:56449/workout/island/?dev=1",
+          "phase": "city",
+          "bytes": 2302
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/styles.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 60362
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-management.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7404
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-planning.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9019
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/ready-plots.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3200
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/game-shell.css",
+          "phase": "city",
+          "bytes": 4704
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-depth.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 892
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/presentation/adventure.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11227
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/learning.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 10264
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/clean-hud.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8783
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-access.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6027
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/app.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5863
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/load-data.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2395
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/release-watch.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1073
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/learning-buildings.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2173
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/release.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 488
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/translate.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 589
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/interface.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 20731
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/runtime.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8702
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/press.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4104
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/engine.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 33123
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/island-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 35361
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/activity.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 40035
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/interface.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 53997
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-navigation.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2071
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/registry.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3009
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/environment.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5182
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/game-shell.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 15031
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-access.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12237
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/buildings.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 29608
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/equipment.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1920
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/state.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4195
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/availability.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 539
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/voice.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1642
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/questions.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 15623
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/eligibility.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 556
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/context.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1498
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/runtime.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3672
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/fire-certificates.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1351
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-runtime.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4268
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-management.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 14585
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/metrics.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4134
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/progress.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2279
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/soccer-team.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1980
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/placement-help.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2750
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/soccer-card.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3019
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/ready-plots.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 17127
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/soccer-roster.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6519
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/rules.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5908
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/episodes.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1042
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/hooks.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 698
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/economy.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3585
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/persistence.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 26216
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-franchise.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9419
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-citizens.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5719
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-lighting.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1624
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/avatar.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8641
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-depth.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7393
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-occlusion.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4382
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/local-models.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3179
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-life.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3644
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/paths.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2316
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/batch.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1924
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/meshy-pilot.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5983
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ultra-island-roads.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3131
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-traffic.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2530
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-growth.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2105
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-overlay.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2716
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/planning-frame.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1028
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-streets.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11404
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-sites.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5043
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/vendor/three.module.js",
+          "phase": "city",
+          "bytes": 670882
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/city-traffic-model.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5351
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ready-plots.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2939
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/adventure-emblems.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2476
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/hangar.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1129
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-sites.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6346
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-upgrades.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4788
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/icons.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4000
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/sound.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3866
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/alien-upgrades.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 999
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/hangar-preview.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6525
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/art.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 13025
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/soccer-card.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4361
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-depth.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5290
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/ready-plots.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6853
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/hoops-club.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8746
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ultra-island-terrain.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5718
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ultra-island-water.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4956
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/ui/city-management.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 18454
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ultra-island-flora.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3627
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/coastal-surfaces.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1902
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-depth.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8870
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/learning/banks.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5850
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-connections.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1588
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/ultra-island-scenery.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8003
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/engine/city-hall.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1817
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/activity/state.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4823
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/skeleton-utils.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1445
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/model-art.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5452
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-league.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9775
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/vendor/GLTFLoader.js",
+          "phase": "city",
+          "bytes": 108728
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/presentation/surfaces.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3263
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/street-distribution.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 917
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/street-surfaces.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2795
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/view/plot-landscape.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4246
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/vendor/BufferGeometryUtils.js",
+          "phase": "city",
+          "bytes": 32118
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/strings.he.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 106478
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-soccer-ui.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9745
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/city.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1025
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/categories.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 582
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/buildings.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 13636
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/config.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 254515
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/metrics.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 577
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/avatar.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1729
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/icons/island.svg",
+          "phase": "city",
+          "bytes": 2425
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/players.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 541
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/team.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 274
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/tutorial.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 573
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/world.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 483
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/featureFlags.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 762
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/sports.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 599
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/missions.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 966
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/episodes/index.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 241
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/extensions.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3559
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/episodes/example-first-visit.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 590
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/example-building.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 377
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/example-sport.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 291
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/example-minigame.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 581
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/example-event.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 473
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/example-metric.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 340
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/alien-defense.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1106
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 828
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/aliens.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4740
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g2m-effects.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3069
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-ui.mjs",
+          "phase": "city",
+          "bytes": 6085
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-alien-effects.mjs",
+          "phase": "city",
+          "bytes": 6084
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-session.mjs",
+          "phase": "city",
+          "bytes": 8256
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-flight-model.mjs",
+          "phase": "city",
+          "bytes": 22618
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8695
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-flight-combat.mjs",
+          "phase": "city",
+          "bytes": 1937
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-assets.mjs",
+          "phase": "city",
+          "bytes": 1058
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g2m-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4516
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8359
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-flight-input.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6169
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien-flight-input-hud.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4349
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-alien-feedback.mjs",
+          "phase": "city",
+          "bytes": 11537
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-alien-environment.mjs",
+          "phase": "city",
+          "bytes": 3038
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g2m-motion.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1723
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/pool.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1008
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-alien-fleet.mjs",
+          "phase": "city",
+          "bytes": 3397
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alien.css",
+          "phase": "city",
+          "bytes": 11573
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g2p-alien.css?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4090
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/fire-rescue.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 607
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/config.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 254515
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/data/strings.he.json?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 106478
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 16304
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-campaign.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4999
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-assistance.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6550
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-ladder.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3601
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-navigation.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5837
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9281
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-roads.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11368
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-canvas.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12232
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 28973
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g2n-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6463
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-fire-scenery.mjs",
+          "phase": "city",
+          "bytes": 1809
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-ui.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9841
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-truck.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4610
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-fire-city.mjs",
+          "phase": "city",
+          "bytes": 9383
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-fire-effects.mjs",
+          "phase": "city",
+          "bytes": 14820
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/fire-crew.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2792
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/naval-duel.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 748
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 29869
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-lock.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2809
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-icons.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2662
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-camera.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6476
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-campaign.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3794
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6003
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/canvas-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 20643
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g6d-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3846
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-hud.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 16437
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 24258
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-impacts.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4469
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/patrol-boat.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2186
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g6d-effects.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4218
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-environment.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8308
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-projectiles.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7496
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-scenery.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12082
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-naval-effects.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3210
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-naval-environment-layout.mjs",
+          "phase": "city",
+          "bytes": 1040
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/naval-water.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12622
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/island-events.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 992
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/activity-income.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 563
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/soccer.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 643
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2149
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 16633
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-icons.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1304
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-drill.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2819
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-presentation.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5614
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g3h-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5900
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-campaign.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8568
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 46628
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 39744
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-shot.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 884
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-physics.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1626
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-boundary.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2767
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-tactics.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5910
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-soccer-stadium.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11229
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-assistance.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12087
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-soccer-effects.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4136
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-rig.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1363
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-lighting.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2266
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-poses.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1776
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-crowd.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6686
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-athlete.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9483
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-teamplay.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6302
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-athlete-motion.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11120
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-athlete-body.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7551
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/tennis.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 624
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1668
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 10518
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g4e-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2715
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-ui.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2569
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 11958
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 25839
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 25094
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-pose.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1409
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-tennis-court.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7436
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-environment.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9432
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/tennis-crowd.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2214
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/ultra-tennis-environment.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 12259
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/racing.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 750
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1865
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 8408
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-speedometer.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2819
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5736
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-tracks.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 7171
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6159
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-physics.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 13848
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-view.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 27675
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-effects.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4500
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-scenery.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6802
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/racing-roadside.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9995
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/street-slam.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 801
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 2844
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 15780
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3413
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-icons.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3189
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 9239
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-loop.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 836
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-court.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1888
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-engine.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 51788
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-ball.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 4793
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/hoops-ai.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 13958
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/extensions/alpine-rush.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 765
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-result.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3030
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-session.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 20199
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-records.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 3590
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-controls.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 6480
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-audio.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 5329
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-track.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 10129
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/alpine-engine.mjs?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 25962
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/textures/naval-waternormals.jpg",
+          "phase": "city",
+          "bytes": 249023
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/textures/coastal-sand.jpg",
+          "phase": "city",
+          "bytes": 71735
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/textures/coastal-grass.jpg",
+          "phase": "city",
+          "bytes": 150678
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/textures/city-pavers.jpg",
+          "phase": "city",
+          "bytes": 183110
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/textures/city-asphalt.jpg",
+          "phase": "city",
+          "bytes": 266227
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/palm-tree-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 299375
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/apartment-block-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 328907
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/house-a-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 331339
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/shop-corner-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 296343
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/fire-station-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 290671
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/hospital-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 265555
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/adult-man-rigged-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 1218880
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/adult-woman-rigged-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 552783
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/models/car-a-512.glb?v=island-soccer-athlete-20261029-1",
+          "phase": "city",
+          "bytes": 327867
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/kid-full.glb",
+          "phase": "city",
+          "bytes": 1473572
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/space.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 27077
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/fire.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 40183
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/football.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 66906
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/tennis.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 92298
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/racing.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 59743
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/naval.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 47129
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/hoops.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 66176
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/alpine.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 87764
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/icons/apple-touch-icon.png",
+          "phase": "soccer",
+          "bytes": 17488
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g3h-soccer.css?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 7667
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/g3j-soccer.css?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 1140
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/soccer-realism/turf-albedo-1k.jpg",
+          "phase": "soccer",
+          "bytes": 356593
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/soccer-realism/turf-normal-gl-1k.jpg",
+          "phase": "soccer",
+          "bytes": 478837
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/minigames/soccer-controls.css?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 6828
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/athlete.glb",
+          "phase": "soccer",
+          "bytes": 1280476
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-mask.png",
+          "phase": "soccer",
+          "bytes": 101317
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-normal.jpg",
+          "phase": "soccer",
+          "bytes": 164552
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-orm.jpg",
+          "phase": "soccer",
+          "bytes": 210390
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-albedo.jpg",
+          "phase": "soccer",
+          "bytes": 148340
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-detail.png",
+          "phase": "soccer",
+          "bytes": 471932
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-orm.jpg",
+          "phase": "soccer",
+          "bytes": 68931
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-mask.png",
+          "phase": "soccer",
+          "bytes": 37638
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-normal.jpg",
+          "phase": "soccer",
+          "bytes": 91018
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-albedo.jpg",
+          "phase": "soccer",
+          "bytes": 47788
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-normal.png",
+          "phase": "soccer",
+          "bytes": 63459
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/pass.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 5715
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/kick.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 6779
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/whistle.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 7473
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/crowd.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "soccer",
+          "bytes": 32757
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/release.json?check=1793257331755",
+          "phase": "soccer",
+          "bytes": 247
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/space.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 27077
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/football.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 66906
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/fire.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 40183
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/tennis.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 92298
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/naval.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 47129
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/racing.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 59743
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/hoops.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 66176
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/ultra-hub/alpine.webp?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 87764
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/athlete.glb",
+          "phase": "reopen",
+          "bytes": 1280476
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-albedo.jpg",
+          "phase": "reopen",
+          "bytes": 148340
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-normal.jpg",
+          "phase": "reopen",
+          "bytes": 164552
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-orm.jpg",
+          "phase": "reopen",
+          "bytes": 210390
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-detail.png",
+          "phase": "reopen",
+          "bytes": 471932
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-mask.png",
+          "phase": "reopen",
+          "bytes": 101317
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-orm.jpg",
+          "phase": "reopen",
+          "bytes": 68931
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-normal.jpg",
+          "phase": "reopen",
+          "bytes": 91018
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-albedo.jpg",
+          "phase": "reopen",
+          "bytes": 47788
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-mask.png",
+          "phase": "reopen",
+          "bytes": 37638
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-normal.png",
+          "phase": "reopen",
+          "bytes": 63459
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/kick.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 6779
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/pass.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 5715
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/crowd.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 32757
+        },
+        {
+          "url": "http://127.0.0.1:56449/workout/island/assets/audio/g3h/whistle.ogg?v=island-soccer-athlete-20261029-1",
+          "phase": "reopen",
+          "bytes": 7473
+        }
+      ],
+      "gameWithinBudget": true,
+      "athleteUrls": [
+        "http://127.0.0.1:56449/workout/island/assets/athlete/athlete.glb",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-mask.png",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-normal.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-orm.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/skin-albedo.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-detail.png",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-orm.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-mask.png",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/kit-normal.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-albedo.jpg",
+        "http://127.0.0.1:56449/workout/island/assets/athlete/textures/ball-normal.png"
+      ],
+      "errors": [],
+      "warnings": [],
+      "pass": true
+    }
+  ]
+}

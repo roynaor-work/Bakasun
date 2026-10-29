@@ -2,7 +2,7 @@
  * chemistry, the season and its rewards. Pure functions over the saved `hoops` object; the
  * island engine calls them and persists the result. Every grant or spend leaves a receipt, and
  * a finished game is credited once by its id. */
-import {TEAMS,generateRoster,overall,chemistry,seasonSchedule,standings,quickResult,teamRating,DRILLS,drillPreview,RATING_KEYS} from './hoops-league.mjs?v=island-alpine-20261028-1';
+import {TEAMS,generateRoster,overall,chemistry,seasonSchedule,standings,quickResult,teamRating,DRILLS,drillPreview,RATING_KEYS} from './hoops-league.mjs?v=island-hoops-cam-20261029-1';
 
 export const HOOPS_VERSION=1;
 const USER_TEAM='waves';

@@ -1,6 +1,6 @@
-import {moveAlienPlayer} from './g2m-motion.mjs?v=island-alpine-20261028-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-alpine-20261028-1';
-import {createPool,releaseAt} from './pool.mjs?v=island-alpine-20261028-1';
+import {moveAlienPlayer} from './g2m-motion.mjs?v=island-hoops-cam-20261029-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-hoops-cam-20261029-1';
+import {createPool,releaseAt} from './pool.mjs?v=island-hoops-cam-20261029-1';
 import {createAlienEntity,separateAliens,alienStack,segmentContact} from './alien-flight-combat.mjs';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2,clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 

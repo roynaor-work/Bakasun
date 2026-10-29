@@ -2,9 +2,9 @@
  * Deterministic fixed step (1/60 s): same seed + same inputs = same game. No DOM, no Three.js.
  * The engine is the only source of truth for positions, possession, clocks, fouls, scoring and
  * the result. The view, the replay and the sound only read snapshots and ordered events. */
-import {createCourt} from './hoops-court.mjs?v=island-alpine-20261028-1';
-import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-alpine-20261028-1';
-import {teamThink} from './hoops-ai.mjs?v=island-alpine-20261028-1';
+import {createCourt} from './hoops-court.mjs?v=island-hoops-cam-20261029-1';
+import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-hoops-cam-20261029-1';
+import {teamThink} from './hoops-ai.mjs?v=island-hoops-cam-20261029-1';
 
 export const HOOPS_DT=1/60;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -945,7 +945,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    const b=S.ball;
    return {tick:S.tick,phase:S.phase,phaseT:+S.phaseT.toFixed(3),quarter:S.quarter,overtime:S.overtime,clock:+Math.max(0,S.clock).toFixed(2),shotClock:+Math.max(0,S.shotClock).toFixed(2),shotClockOn:S.shotClockOn,
     score:[team(0).score,team(1).score],teamFouls:[team(0).fouls,team(1).fouls],timeouts:[team(0).timeouts,team(1).timeouts],possession:S.possession,dir:[...S.dir],userTeam:S.userTeam,
-    controlled:S.controlled,ball:{x:+b.x.toFixed(3),y:+b.y.toFixed(3),z:+b.z.toFixed(3),state:b.state,owner:b.owner,shotId:b.shot?.id||null,dribbleT:+b.dribbleT.toFixed(3)},
+    controlled:S.controlled,ball:{x:+b.x.toFixed(3),y:+b.y.toFixed(3),z:+b.z.toFixed(3),state:b.state,owner:b.owner,passTo:b.state==='pass'?b.pass?.to??null:null,shotId:b.shot?.id||null,dribbleT:+b.dribbleT.toFixed(3)},
     players:snapshotPlayers(),ft:S.ft?{shooter:S.ft.shooter,left:S.ft.left,total:S.ft.total}:null,inbound:S.inbound?{team:S.inbound.team,inbounder:S.inbound.inbounder}:null,
     call:[team(0).call,team(1).call],lastScore:S.lastScore,result:S.result,profile:S.profile,mode:S.mode};
   },

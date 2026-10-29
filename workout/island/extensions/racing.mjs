@@ -1,5 +1,5 @@
-import {runRacingSession} from '../minigames/racing-session.mjs?v=island-alpine-20261028-1';
-import {racingResult} from '../minigames/racing-result.mjs?v=island-alpine-20261028-1';
+import {runRacingSession} from '../minigames/racing-session.mjs?v=island-hoops-cam-20261029-1';
+import {racingResult} from '../minigames/racing-result.mjs?v=island-hoops-cam-20261029-1';
 
 /** Uses the same lifecycle and reward contract as the other island games. */
 export function install(registry,data) {
