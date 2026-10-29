@@ -23,7 +23,9 @@ test('Naval holding locks a live enemy, the preview stays still and release flie
  advance(m,m.ball.duration+.05);assert.equal(m.fired,1);const shot=m.lastShot;assert.ok(Math.abs(shot.actual.x-preview.end.x)<1e-9&&Math.abs(shot.actual.z-preview.end.z)<1e-9||shot.targetMoved>0);assert.ok(m.enemyFleetHp<hp);
 });
 test('G6e an immediate tap fires once; cancelling a hold spends nothing',()=>{
- const m=make();m.beginAim();const point={...m.aim};m.update(.02,{fireRelease:true});assert.equal(m.fired,1);assert.equal(m.ball.targetX,point.x);assert.equal(m.ball.targetZ,point.z);
+ // 29/10/2026 (honest aim): the shot goes to the end the mark shows, now forecast on the moving hull, not to the still-hull camera point.
+ const m=make();m.beginAim();m.update(.02,{aimHeld:true});const shown={...m.prediction.end};m.update(.02,{fireRelease:true});assert.equal(m.fired,1);
+ assert.equal(m.ball.targetX,m.ball.predicted.end.x);assert.equal(m.ball.targetZ,m.ball.predicted.end.z);assert.ok(Math.hypot(m.ball.targetX-shown.x,m.ball.targetZ-shown.z)<1,'one frame after the mark, the same end');
  const n=make();advance(n,.3,{aimHeld:true});n.cancelAim();advance(n,.3);assert.equal(n.fired,0);
 });
 test('G6e jitter rises with stage and difficulty, falls inside the ring, and falls further with aim upgrades',()=>{

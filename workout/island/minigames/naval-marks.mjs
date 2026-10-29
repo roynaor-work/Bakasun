@@ -4,20 +4,38 @@ const TAU=Math.PI*2;
 export function navalPixelUnit(p){
  try{const t=p.getTransform?.(),c=p.canvas;if(!t||!c?.clientWidth)return 1;const ratio=c.width/c.clientWidth;return ratio>0&&t.a>0?ratio/t.a:1;}catch{return 1;}
 }
-/** Which mark a prediction gets: water, hull or the weak centre. */
-export function navalMarkKind(prediction){return !prediction?.contact?'water':prediction.contact.critical?'critical':'hull';}
+/** Which mark a prediction gets: water, hull or the weak centre. With the
+ * forecast (29/10/2026) "hull" needs a safe hit: the shell strikes the same
+ * hull if released now and after the reaction margin. A forecast hit that a
+ * short reaction would lose stays a water mark, drawn at the contact. */
+export function navalMarkKind(prediction){const c=prediction?.contact;if(!c||prediction.safe===false)return 'water';return c.critical&&prediction.safeCritical!==false?'critical':'hull';}
+/** The arc wears the mark's colour, so the whole path says hit or miss. */
+export function navalArcColor(kind,look={}){return kind==='hull'?look.hull?.color||'#62E6AA':kind==='critical'?look.critical?.color||'#FFD166':look.arc||'#B8F6FF';}
 function ring(p,x,y,d,u,dashed){p.setLineDash(dashed?[4*u,3*u]:[]);p.beginPath();p.ellipse(x,y,d/2*u,d/2*u*.46,0,0,TAU);p.stroke();p.setLineDash([]);}
 function diamond(p,x,y,s,u){const h=s/2*u;p.beginPath();p.moveTo(x,y-h*1.25);p.lineTo(x+h,y);p.lineTo(x,y+h*1.25);p.lineTo(x-h,y);p.closePath();}
 /** Landing ring and diamond in screen pixels. Shapes differ without colour:
  * dashed ring + hollow diamond (water), solid ring + filled diamond (hull),
- * double ring + diamond with a centre dot (weak centre). */
+ * double ring + diamond with a centre dot (weak centre). From the forecast
+ * (29/10/2026): a faint dashed line and ring show where the aimed hull will
+ * be when the shot ends (lead, from stage 3), and a shell that passes over a
+ * hull too high to touch gets a double chevron above that hull instead of a
+ * landing mark: in the aim camera such a landing would sit on the hull's own
+ * picture and read as a hit. */
 export function drawNavalAimMarks(p,m,project,balance){
  const pr=m.prediction;if(!m.aiming||!pr||pr.guided)return null;
- const look=balance.aimLook||{},kind=navalMarkKind(pr),spec=look[kind]||{color:'#ffffff',ring:24,diamond:10},u=navalPixelUnit(p),outline=(look.markOutline??2),dark=look.arcOutline||'#103847';
- const water=project(kind==='water'?pr.landing.x:pr.contact.x,kind==='water'?pr.landing.z:pr.contact.z,0),tip=kind==='water'?water:project(pr.contact.x,pr.contact.z,(pr.contact.h||0)*balance.render.worldScale);
- if(!(water.depth>0))return null;
+ const look=balance.aimLook||{},kind=navalMarkKind(pr),spec=look[kind]||{color:'#ffffff',ring:24,diamond:10},u=navalPixelUnit(p),outline=(look.markOutline??2),dark=look.arcOutline||'#103847',green=look.hull?.color||'#62E6AA';
+ const out={kind,ring:spec.ring,diamond:spec.diamond};
  p.save();p.lineJoin='round';
- const stroke=(width,draw)=>{p.strokeStyle=dark;p.lineWidth=(width+outline*2)*u;draw();p.strokeStyle=spec.color;p.lineWidth=width*u;draw();};
+ const stroke=(width,draw,color=spec.color)=>{p.strokeStyle=dark;p.lineWidth=(width+outline*2)*u;draw();p.strokeStyle=color;p.lineWidth=width*u;draw();};
+ const lead=pr.lead,ls=look.lead;
+ if(lead&&ls){const a=project(lead.from.x,lead.from.z,0),b=project(lead.to.x,lead.to.z,0);
+  if(a.depth>0&&b.depth>0&&Math.hypot(b.x-a.x,b.y-a.y)>=ls.minPixels*u){p.globalAlpha=ls.opacity;p.setLineDash([3*u,3*u]);stroke(1.4,()=>{p.beginPath();p.moveTo(a.x,a.y);p.lineTo(b.x,b.y);p.stroke();},green);p.setLineDash([]);stroke(1.6,()=>ring(p,b.x,b.y,ls.ring,u,false),green);p.globalAlpha=1;out.lead={x:b.x,y:b.y,fromX:a.x,fromY:a.y};}}
+ const overShip=kind==='water'&&!pr.contact&&pr.over?(m.enemies||[]).find(e=>e.index===pr.over.index&&e.active&&e.hp>0):null;
+ if(overShip){const q=project(overShip.x,overShip.z,(look.over?.lift??7.4)*(overShip.hullScale||1)),s=look.over?.size??9;
+  if(q.depth>0){p.lineCap='round';for(const k of [0,1]){const y=q.y-(s*.5+s*.95*k)*u;stroke(2.2,()=>{p.beginPath();p.moveTo(q.x-s*u,y+s*.5*u);p.lineTo(q.x,y-s*.45*u);p.lineTo(q.x+s*u,y+s*.5*u);p.stroke();});}out.over={index:overShip.index,x:q.x,y:q.y};}
+  p.restore();return out;}
+ const at=pr.contact||pr.landing,water=project(at.x,at.z,0),tip=pr.contact?project(pr.contact.x,pr.contact.z,(pr.contact.h||0)*balance.render.worldScale):water;
+ if(!(water.depth>0)){p.restore();return out.lead?out:null;}
  stroke(2,()=>ring(p,water.x,water.y,spec.ring,u,kind==='water'));
  if(kind==='critical')stroke(1.6,()=>ring(p,water.x,water.y,spec.ring-9,u,false));
  if(tip.depth>0){
@@ -25,7 +43,7 @@ export function drawNavalAimMarks(p,m,project,balance){
   if(kind==='water'){p.strokeStyle=spec.color;p.lineWidth=1.8*u;p.stroke();}
   else{p.fillStyle=spec.color;p.fill();if(kind==='critical'){p.fillStyle=dark;p.beginPath();p.arc(tip.x,tip.y,1.8*u,0,TAU);p.fill();}}
  }
- p.restore();return {kind,ring:spec.ring,diamond:spec.diamond,x:water.x,y:water.y};
+ p.restore();return {...out,x:water.x,y:water.y};
 }
 /** White-hot core, orange halo and a tapered trail that is the shell's own
  * path over the last trailSeconds (from the shared ballistic launch). Display

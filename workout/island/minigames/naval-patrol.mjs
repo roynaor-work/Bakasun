@@ -38,9 +38,21 @@ export function createNavalPatrol({x,z,index=0,seed=0,stage=1,behavior,scale=1},
  const p={x,z,cx:x,cz:z,heading:side*Math.PI/2,turn:0,speed,range,track,turnRate,side,loop,leg:0,index,seed,stage,scale,traveled:0,minZ:0,maxZ:0,held:0,pace:1,legs:0};
  legEnd(p,c);return p;
 }
-/** Advance one step. `obstacles`: [{x,z}] other hulls and the player. `shellAirborne`: a player shell is in flight. */
-export function stepNavalPatrol(p,dt,{obstacles=[],shellAirborne=false,centreX}={},balance){
- if(!(dt>0))return p;const c=navalPatrolConfig(balance);
+/** The station line a hull patrols around this step: its depth-staggered
+ * slot, a flanker's slow closing drift, and never onto the track of a nearer
+ * station. One rule for the live fleet and for the aim forecast. */
+export function navalPatrolCentre(e,enemies,{time,concurrent,fleetLength,drift},balance){
+ const spacing=balance.patrol?.depthStagger??64,station=balance.enemyX+spacing*(e.slot-(Math.min(concurrent,fleetLength)-1)/2),flank=e.behavior==='flank';
+ let centreX=station-(flank?(1-Math.cos((time-e.spawnTime)*.3))*Math.min(55,drift*2):0);
+ if(flank)for(const o of enemies)if(o!==e&&o.active&&o.hp>0&&o.patrol&&o.patrol.cx<station-1)centreX=Math.max(centreX,o.patrol.cx+spacing);
+ return centreX;
+}
+/** What a hull yields to: the player and every other live hull, as they stand now. */
+export function navalPatrolObstacles(e,enemies,player){return [{x:player.x,z:player.z},...enemies.filter(o=>o!==e&&o.active&&o.hp>0).map(o=>({x:o.x,z:o.z}))];}
+/** Advance one step. `obstacles`: [{x,z}] other hulls and the player. `shellAirborne`: a player shell is in flight.
+ * `config`: an optional navalPatrolConfig(balance) computed once by a caller that steps many times (the aim forecast). */
+export function stepNavalPatrol(p,dt,{obstacles=[],shellAirborne=false,centreX,config}={},balance){
+ if(!(dt>0))return p;const c=config||navalPatrolConfig(balance);
  if(Number.isFinite(centreX))p.cx=centreX;
  // The outbound track sits on one side of the station line and the return track on the other.
  const offset=(p.z-p.cz)*p.side,lead=p.track+p.speed*c.turnSeconds*2;

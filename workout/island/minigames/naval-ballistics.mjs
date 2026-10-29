@@ -53,8 +53,8 @@ export function navalHullDistance(from,to,ship,balance){
 }
 /** Contact on one fixed grid step k. Prediction and the live shell both test
  * exactly these segments, so their contact time cannot depend on frame rate. */
-export function navalStepContact(l,k,targets,balance){
- const c=navalBallisticConfig(balance),t0=k*NAVAL_STEP;if(t0>=l.duration)return null;
+export function navalStepContact(l,k,targets,balance,config){
+ const c=config||navalBallisticConfig(balance),t0=k*NAVAL_STEP;if(t0>=l.duration)return null;
  const t1=Math.min(l.duration,(k+1)*NAVAL_STEP),a=navalBallisticPoint(l,t0),b=navalBallisticPoint(l,t1);
  if(l.kind==='arc'&&Math.min(a.h,b.h)>c.hullTop)return null;
  let best=null;
@@ -72,9 +72,9 @@ export function navalPredict(l,targets,balance,samples=28){
  return {points,landing,contact,end,flight:end.t};
 }
 /** Advance a live shell from age a to age b over the same grid. */
-export function navalAdvanceShot(l,from,to,targets,balance){
+export function navalAdvanceShot(l,from,to,targets,balance,config){
  const first=Math.floor(from/NAVAL_STEP+1e-9),last=Math.ceil(Math.min(to,l.duration)/NAVAL_STEP-1e-9);
- for(let k=first;k<last;k++){const contact=navalStepContact(l,k,targets,balance);if(contact&&contact.t>=from-1e-9)return contact;}
+ for(let k=first;k<last;k++){const contact=navalStepContact(l,k,targets,balance,config);if(contact&&contact.t>=from-1e-9)return contact;}
  return null;
 }
 /** Exact turret settings for a water point. Used for the easy-mode quick shot
