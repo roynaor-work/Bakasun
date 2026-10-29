@@ -61,7 +61,7 @@ export class ActivityInterface {
   }
   enabledGames(){return [...this.engine.registry.minigames.values()].filter(g=>this.data.featureFlags.minigames&&(!g.featureFlag||this.data.featureFlags[g.featureFlag]));}
   availability(id){return gameAvailability(this.engine.state,this.data.config,id);}
-  requireDaily(id){if(['soccer','tennis','navalDuel','fireRescue','alienDefense','islandRacing','streetSlam','alpineRush'].includes(id)&&this.engine.learningStatus().locked){this.ui.learningInterface.daily();return true;}return false;}
+  requireDaily(id){if(['soccer','tennis','navalDuel','fireRescue','alienDefense','islandRacing','streetSlam','alpineRush','boarDefense'].includes(id)&&this.engine.learningStatus().locked){this.ui.learningInterface.daily();return true;}return false;}
   requireBuilding(id){if(this.requireDaily(id))return true;const available=this.availability(id);if(available.ok)return false;this.ui.closeModal();this.ui.openBuildingCatalog(available.buildingId);return true;}
   playButton(id,action,play){const available=this.availability(id),locked=this.engine.learningStatus().locked;return button(locked?'🔒 📚 משימת היום':this.t(available.ok?'minigame.play':available.reason),action,()=>{if(this.requireDaily(id))return;available.ok?play():this.requireBuilding(id);},'primary-button');}
   teamLabel(){const team=this.engine.state.team;return this.t('minigame.soccer.teamRank',{team:this.t(team.nameId),wins:team.wins,rank:this.t(this.data.config.minigames.soccer.teamRanks[team.rank].title)});}
@@ -108,6 +108,7 @@ export class ActivityInterface {
     dialog.append(cards);
   }
   gameHome(id){
+    if(this.data?.config?.minigames?.[id]?.embeddedCampaign)return this.launch(id,undefined,1);
     const game=this.engine.registry.minigames.get(id),art=gameArtwork(id),dialog=this.modal(game.title,'minigame.subtitle');dialog.dataset.gameHome=id;
     const subtitle=dialog.querySelector?.('.modal-subtitle');if(subtitle)subtitle.textContent=art.description;
     const hero=el('div','adventure-game-hero');hero.append(gameEmblem(id),el('p','adventure-game-category',art.category));dialog.append(hero);
@@ -167,6 +168,7 @@ export class ActivityInterface {
     return box;
   }
   stages(id) {
+    if(this.data.config.minigames[id]?.embeddedCampaign)return this.launch(id,undefined,1);
     if(this.requireBuilding(id))return;
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
     const outer=this.modal(game.title,'minigame.progressHint');outer.dataset.stageMap=id;let dialog=outer;
@@ -264,7 +266,7 @@ export class ActivityInterface {
     if(id==='soccer'&&drill){context.drill=drill;dialog.dataset.drill=drill;}
     if(id==='navalDuel')context.previousFleet=this.lastNavalFleet;
     if(id==='fireRescue')controls.querySelector('[data-game-control=rescue]').disabled=context.level<3;
-    heading.textContent=this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
+    heading.textContent=balance.embeddedCampaign?this.t(game.title):this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
     dialog.dataset.stage=context.level;
     this.navigation.game();
     this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:gamePresentation(this.data.config,id).orientation==='landscape'});

@@ -42,7 +42,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
   const course = courseOverride || generateCourse(track, physics);
   const objects = course.objects;
   let phase = 'menu', countdownShown = 0, resumePhase = null, accumulator = 0, ticks = 0, countdownTicks = 0, run = 0, disposed = false;
-  let riders = [], events = [], eventSeq = 0, result = null, steerInput = 0, boostRequest = false, trickRequest = null, order = [];
+  let riders = [], events = [], eventSeq = 0, result = null, steerInput = 0, boostRequest = false, trickRequest = null, order = [], previousPresentation = null;
   const aiRandom = { value: null };
 
   function emit(type, extra = {}) { events.push({ id: `e${++eventSeq}`, type, ...extra }); }
@@ -67,6 +67,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     accumulator = 0; ticks = 0; countdownTicks = Math.round(physics.countdownSeconds / step);
     result = null; steerInput = 0; boostRequest = false; trickRequest = null; resumePhase = null;
     order = riders.map(r => r.id);
+    previousPresentation = null;
     phase = 'countdown';
     countdownShown = Math.ceil(physics.countdownSeconds);
     emit('countdown', { value: countdownShown });
@@ -156,10 +157,33 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     return true;
   }
 
+  /** A course rock remains solid after its one damage event. Move the board completely
+   * clear on the nearest available side, choosing the inward side near a pipe boundary. */
+  function separateRock(r, object) {
+    const reach = object.radius * physics.rockHitScale + physics.board.halfWidth + .04;
+    const preferred = Math.sign(r.x - object.x) || Math.sign(r.vx) || (r.index % 2 ? -1 : 1);
+    const sides = [preferred, -preferred].map(side => ({side, x: object.x + side * reach}));
+    const clear = sides.find(p => p.x >= -pipe.lip && p.x <= pipe.lip);
+    if (clear) {
+      r.x = clear.x;
+      const rebound = Math.min(physics.lateralSpeed * .3, physics.lipLaunchSpeed * .75, Math.max(1.25, Math.abs(r.vx) * .35 + r.speed * .04));
+      r.vx = clear.side * rebound;
+      if (!r.airborne && !r.ramp) r.alt = surfaceHeight(r.x, pipe);
+      return clear.side;
+    }
+    // Defensive fallback for a hand-authored rock wider than the pipe: do not push a
+    // rider outside the course or let it pass through an obstacle that has no side exit.
+    r.s = Math.min(r.s, object.s - object.radius * physics.rockHitScale - physics.board.halfDepth - .04);
+    r.vx *= -.25;
+    return 0;
+  }
+
   function collide(r, object) {
+    const speedBefore = r.speed;
     r.hits.add(object.id); r.collisions++;
     r.speed *= 1 - physics.hitSpeedLoss; r.hitTime = physics.recoverySeconds; r.grace = physics.hitGraceSeconds;
-    emit('collision', { riderId: r.id, objectId: object.id });
+    const impactSide = object.type === 'rock' ? separateRock(r, object) : 0;
+    emit('collision', { riderId: r.id, objectId: object.id, objectType: object.type, impactSide, impactStrength: clamp(speedBefore / physics.boostSpeed, 0, 1) });
   }
 
   function takeoff(r, kind, vy, objectId) {
@@ -197,8 +221,9 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
           r.coins.add(o.id); emit('coin', { riderId: r.id, objectId: o.id });
         }
       } else if (o.type === 'rock') {
-        if (r.hits.has(o.id) || r.grace > 0 || r.alt >= rockClearance(o.radius)) continue;
-        if (boardHitsCircle(dx, ds, board.halfWidth, board.halfDepth, o.radius * physics.rockHitScale)) collide(r, o);
+        if (r.alt >= rockClearance(o.radius) || !boardHitsCircle(dx, ds, board.halfWidth, board.halfDepth, o.radius * physics.rockHitScale)) continue;
+        if (r.hits.has(o.id)) { separateRock(r, o); continue; }
+        if (r.grace <= 0) collide(r, o);
       } else if (o.type === 'gate') {
         if (r.alt < physics.gatePostHeight && !r.hits.has(o.id) && r.grace <= 0) {
           for (const side of [-1, 1]) {
@@ -249,7 +274,10 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     const boosted = r.boostTime > 0 || r.padTime > 0;
     const skill = r.ai ? r.ai.speed : wax;
     const target = (boosted ? physics.boostSpeed : physics.baseSpeed) * skill * (onWall ? physics.wallSpeedFactor : 1);
-    if (r.speed < target) r.speed = Math.min(target, r.speed + physics.acceleration * dt);
+    // A boost must help below cruising speed too; use the same acceleration rule for
+    // the player, rivals and boost pads without changing their configured speed caps.
+    const acceleration = physics.acceleration * (boosted ? 2 : 1);
+    if (r.speed < target) r.speed = Math.min(target, r.speed + acceleration * dt);
     else r.speed = Math.max(target, r.speed - physics.deceleration * dt);
     if (r.boostTime > 0) { r.boostTime = Math.max(0, r.boostTime - dt); if (r.boostTime === 0) emit('boost-end', { riderId: r.id }); }
     else r.tank = Math.min(1, r.tank + physics.boostRechargePerSecond * (r.ai ? 1 : recharge) * dt);
@@ -363,6 +391,17 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     };
   }
 
+  const copyFrame = value => ({...value, trick: value.trick ? {...value.trick} : null});
+  function presentationFrames(player, rivals) {
+    const active = !disposed && phase === 'racing' && riders.length > 0;
+    const previous = active && previousPresentation;
+    return {
+      alpha: active ? clamp(accumulator / step, 0, 1) : 1,
+      previousPlayer: copyFrame(previous ? previous.player : player),
+      previousRivals: (previous ? previous.rivals : rivals).map(copyFrame),
+    };
+  }
+
   const engine = {
     course, level, track, pipe,
     command(cmd) {
@@ -372,10 +411,10 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
         case 'steer': steerInput = clamp(Number(cmd.value) || 0, -1, 1); break;
         case 'boost': if (phase === 'racing') boostRequest = true; break;
         case 'trick': if (phase === 'racing' && TRICK_IDS.includes(cmd.id)) trickRequest = cmd.id; break;
-        case 'pause': if (phase === 'countdown' || phase === 'racing') { resumePhase = phase; phase = 'paused'; accumulator = 0; steerInput = 0; boostRequest = false; trickRequest = null; } break;
-        case 'resume': if (phase === 'paused') { phase = resumePhase; resumePhase = null; accumulator = 0; } break;
+        case 'pause': if (phase === 'countdown' || phase === 'racing') { resumePhase = phase; phase = 'paused'; accumulator = 0; steerInput = 0; boostRequest = false; trickRequest = null; previousPresentation = null; } break;
+        case 'resume': if (phase === 'paused') { phase = resumePhase; resumePhase = null; accumulator = 0; previousPresentation = null; } break;
         case 'retry': if (phase !== 'menu') reset(); break;
-        case 'exit': phase = 'menu'; steerInput = 0; boostRequest = false; trickRequest = null; break;
+        case 'exit': phase = 'menu'; steerInput = 0; boostRequest = false; trickRequest = null; previousPresentation = null; break;
       }
     },
     step(dtSeconds) {
@@ -385,17 +424,23 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       let count = Math.floor((accumulator + 1e-7) / step);
       accumulator = Math.max(0, accumulator - count * step);
       let done = 0;
-      while (count-- > 0 && (phase === 'countdown' || phase === 'racing')) { tick(); done++; }
+      while (count-- > 0 && (phase === 'countdown' || phase === 'racing')) {
+        previousPresentation = {player: frame(riders[0]), rivals: riders.slice(1).map(frame)};
+        tick(); done++;
+      }
       if (phase === 'finished') accumulator = 0;
       return done;
     },
     snapshot() {
       const p = riders[0];
-      if (!p) return {
+      if (!p) {
+        const player = { id: 'player', x: 0, z: 0, s: 0, height: 0, lean: 0, boosting: false, hit: false, trick: null };
+        return {
         schemaVersion: 1, phase, timeMs: 0, distanceM: 0, remainingM: course.length, rank: RIDER_IDS.length, totalRiders: RIDER_IDS.length,
-        speedKmh: 0, player: { id: 'player', x: 0, z: 0, s: 0, height: 0, lean: 0, boosting: false, hit: false, trick: null }, rivals: [], obstacles: [],
+        speedKmh: 0, player, rivals: [], obstacles: [],
         countdown: Math.ceil(physics.countdownSeconds), boostFraction: physics.boostStartTank, trackLength: course.length, score: 0, coins: 0, coinTotal: course.coins || 0,
-      };
+        };
+      }
       const ranked = standings();
       const ahead = physics.viewAhead, behind = physics.viewBehind, obstacles = [];
       for (const o of objects) {
@@ -404,10 +449,11 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
         obstacles.push(o.type === 'rock' ? { id: o.id, type: o.type, x: o.x, z: p.s - o.s, s: o.s, radius: o.radius } : { id: o.id, type: o.type, x: o.x, z: p.s - o.s, s: o.s });
       }
       if (course.length - p.s < ahead) obstacles.push({ id: 'finish', type: 'finish', x: 0, z: p.s - course.length, s: course.length });
+      const player = frame(p), rivals = riders.slice(1).map(frame);
       return {
         schemaVersion: 1, phase, timeMs: Math.round(ticks * step * 1000), distanceM: p.s, remainingM: Math.max(0, course.length - p.s),
         rank: ranked.indexOf(p) + 1, totalRiders: riders.length, speedKmh: Math.round(p.speed * 3.6),
-        player: frame(p), rivals: riders.slice(1).map(frame), obstacles,
+        player, rivals, obstacles,
         countdown: phase === 'countdown' ? Math.max(1, Math.ceil(countdownTicks * step - 1e-9)) : 0,
         boostFraction: p.boostTime > 0 ? Math.min(1, p.boostTime / (physics.boostSeconds * tankSize)) : p.tank,
         boostReady: p.boostTime <= 0 && p.tank >= physics.boostMinimum,
@@ -417,8 +463,13 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
         ...(result ? { result: { ...result } } : {}),
       };
     },
+    /** Read-only render timing, deliberately separate from the canonical SkiFrame. */
+    presentation() {
+      const player = riders[0] ? frame(riders[0]) : { id: 'player', x: 0, z: 0, s: 0, height: 0, lean: 0, boosting: false, hit: false, trick: null };
+      return presentationFrames(player, riders.slice(1).map(frame));
+    },
     drainEvents() { const out = events; events = []; return out; },
-    dispose() { disposed = true; events = []; riders = []; },
+    dispose() { disposed = true; events = []; riders = []; previousPresentation = null; },
     /** Read-only diagnostics for tests; never used to render or score. */
     debug() { return riders.map(r => ({ id: r.id, s: r.s, x: r.x, vx: r.vx, speed: r.speed, tank: r.tank, boostTime: r.boostTime, padTime: r.padTime, hitTime: r.hitTime, height: heightOf(r), alt: r.alt, vy: r.vy, airborne: r.airborne, airKind: r.airKind, trick: r.trick ? {...r.trick} : null, trickScore: r.trickScore, crashes: r.crashes, coins: r.coins.size, finished: r.finished, collisions: r.collisions, hits: [...r.hits], pads: [...r.pads], gates: [...r.gates] })); },
     get phase() { return phase; },

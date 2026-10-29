@@ -1,4 +1,5 @@
 import * as T from '../vendor/three.module.js';
+import {createTechnicalSuit} from './technical-suit.mjs';
 
 // Remove disconnected utility-belt geometry from the source outfit, retaining the cloth body.
 function removeUtilityGear(g){const p=g.attributes.position,index=g.index;if(!index)return;const parents=Array.from({length:p.count},(_,i)=>i),seen=new Map();const root=i=>parents[i]===i?i:parents[i]=root(parents[i]);const join=(a,b)=>parents[root(a)]=root(b);
@@ -31,8 +32,8 @@ export function createProRider(gltf,id,color,scene,kit){
  body.traverse(n=>{if(!n.isMesh)return;n.castShadow=true;n.receiveShadow=true;n.frustumCulled=false;const original=n.material;
   if(original.name.toLowerCase().includes('visor')){n.visible=false;return;}
   n.geometry=geo(n.geometry.clone());removeUtilityGear(n.geometry);const p=n.geometry.attributes.position,j=n.geometry.attributes.skinIndex,w=n.geometry.attributes.skinWeight,c=new Float32Array(p.count*3),coat=new T.Color(color),white=new T.Color('#dfd3b7'),pants=new T.Color('#1e3441'),helmet=new T.Color('#203743'),gloves=new T.Color('#101b28');
-  for(let i=0;i<p.count;i++){let k=0;for(let t=1;t<4;t++)if(read(w,i,t)>read(w,i,k))k=t;const b=n.skeleton.bones[read(j,i,k)]?.name??'';let v=coat;if(/Leg|Foot|Toe|Hips/.test(b))v=pants;else if(/Hand|Thumb|Index|Middle|Ring|Pinky/.test(b))v=gloves;else if(/Head|Neck/.test(b))v=helmet;else if(/Spine2|Shoulder|Arm/.test(b)&&!/ForeArm/.test(b))v=white;c.set([v.r,v.g,v.b],i*3);}n.geometry.setAttribute('color',new T.BufferAttribute(c,3));
-  const material=mat('#ffffff',{map:null,normalMap:original.normalMap,vertexColors:true,roughness:.8,metalness:.02});material.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`#ifdef USE_MAP
+  for(let i=0;i<p.count;i++){let k=0;for(let t=1;t<4;t++)if(read(w,i,t)>read(w,i,k))k=t;const b=n.skeleton.bones[read(j,i,k)]?.name??'';let v=coat;if(/Leg|Foot|Toe|Hips/.test(b))v=pants;else if(/Hand|Thumb|Index|Middle|Ring|Pinky/.test(b))v=gloves;else if(/Head|Neck/.test(b))v=helmet;else if(/Spine2|Shoulder|Arm/.test(b)&&!/ForeArm/.test(b))v=white;c.set([v.r,v.g,v.b],i*3);}n.geometry.setAttribute('color',new T.BufferAttribute(c,3));const idx=n.geometry.index,kept=[];if(idx){for(let f=0;f<idx.count;f+=3){let keep=false;for(let q=0;q<3;q++){const vi=idx.getX(f+q);let slot=0;for(let u=1;u<4;u++)if(read(w,vi,u)>read(w,vi,slot))slot=u;const bone=n.skeleton.bones[read(j,vi,slot)]?.name||'';if(/Leg|Foot|Toe|Hips|Hand|Thumb|Index|Middle|Ring|Pinky/.test(bone))keep=true;}if(keep)kept.push(idx.getX(f),idx.getX(f+1),idx.getX(f+2));}n.geometry.setIndex(kept);}
+  const material=mat('#ffffff',{map:null,normalMap:null,vertexColors:true,roughness:.8,metalness:.02});material.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`#ifdef USE_MAP
  vec4 winterTexel=texture2D(map,vMapUv);
  float winterDetail=dot(winterTexel.rgb,vec3(.2126,.7152,.0722));
  diffuseColor*=vec4(vec3(.62+.55*winterDetail),winterTexel.a);
@@ -48,14 +49,22 @@ export function createProRider(gltf,id,color,scene,kit){
  const glass=mesh(new T.CylinderGeometry(.132,.132,.060,24,1,true,Math.PI/2-.85,1.7),lens,helmetRig,0,.145,0);glass.material.side=T.DoubleSide;
  for(const z of [-.065,-.022,.022,.065]){const vent=box(.065,.007,.011,rubber,helmetRig,-.015,.271,z);vent.rotation.z=.04;}
  root.updateMatrixWorld(true);head.attach(helmetRig);
- const chestRest=chest.quaternion.clone(),spineRest=spine.quaternion.clone(),hipsRest=hips.position.clone(),footQ={L:legs.L[2].getWorldQuaternion(new T.Quaternion()),R:legs.R[2].getWorldQuaternion(new T.Quaternion())},worldTarget=new T.Vector3(),worldPole=new T.Vector3(),qRoot=new T.Quaternion();let lastPose=-Infinity;
- const localWorld=(x,y,z)=>root.localToWorld(new T.Vector3(x,y,z));
- return {root,body,shadow,pose(time,lean,air,impact=0,grab=0){
+ const chestRest=chest.quaternion.clone(),spineRest=spine.quaternion.clone(),hipsRest=hips.position.clone(),footQ={L:legs.L[2].getWorldQuaternion(new T.Quaternion()),R:legs.R[2].getWorldQuaternion(new T.Quaternion())},worldTarget=new T.Vector3(),worldPole=new T.Vector3(),qRoot=new T.Quaternion(),qFoot=new T.Quaternion(),qTurn=new T.Quaternion(),turnAxis=new T.Vector3(0,1,0);let lastPose=-Infinity,lastLean=NaN,lastAir=NaN,lastImpact=NaN,lastGrab=NaN;
+ const suit=createTechnicalSuit(root,{hips,chest,neck:find('Neck'),arms},kit,color);
+ const localWorld=(x,y,z,out)=>root.localToWorld(out.set(x,y,z));
+ // The third argument is an animation weight, not a physical height. The view
+ // supplies its eased airborne weight; feet remain planted on the snowboard.
+ return {root,body,shadow,pose(time,lean,airWeight,impact=0,grab=0){
   if(id!=='player'&&time>=lastPose&&time-lastPose<1/30)return;lastPose=time;
-  const tuck=air>0?.18:0,compression=Math.max(0,impact)*.13+Math.abs(lean)*.055;
+  lean=T.MathUtils.clamp(Number(lean)||0,-1,1);airWeight=T.MathUtils.clamp(Number(airWeight)||0,0,1);impact=T.MathUtils.clamp(Number(impact)||0,0,1);grab=T.MathUtils.clamp(Number(grab)||0,0,1);
+  if(lean===lastLean&&airWeight===lastAir&&impact===lastImpact&&grab===lastGrab)return;
+  lastLean=lean;lastAir=airWeight;lastImpact=impact;lastGrab=grab;
+  const tuck=airWeight*.18,compression=impact*.13+Math.abs(lean)*.055;
   body.position.y=.12;hips.position.copy(hipsRest);chest.quaternion.copy(chestRest);spine.quaternion.copy(spineRest);root.updateMatrixWorld(true);
-  hips.position.copy(hips.parent.worldToLocal(localWorld(.02,.93-compression-tuck*.35-grab*.15,0)));root.updateMatrixWorld(true);qRoot.copy(root.getWorldQuaternion(new T.Quaternion()));
-  for(const side of ['L','R']){const z=sign[side];ik(legs[side],localWorld(.015,.24+tuck*.15,z*.33),localWorld(.7,.55-compression,z*.3));setWorldQ(legs[side][2],qRoot.clone().multiply(footQ[side]));const reach=z>0?grab:0;ik(arms[side],localWorld((.3+Math.abs(lean)*.09)*(1-reach)+.13*reach,(air>0?1.23:1.03+z*lean*.14)*(1-reach)+.30*reach,z*(air>0?.62:.46)*(1-reach)+.24*reach),localWorld(.7,1.15-reach*.36,z*.4));}
-  chest.quaternion.multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),lean*.2));head.quaternion.copy(headBase).multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),-.4+lean*.12));
+  hips.position.copy(hips.parent.worldToLocal(localWorld(.02,.93-compression-tuck*.35-grab*.15,0,worldTarget)));
+  // Apply torso turn before solving arms so their targets survive the turn.
+  chest.quaternion.multiply(qTurn.setFromAxisAngle(turnAxis,lean*.2));head.quaternion.copy(headBase).multiply(qTurn.setFromAxisAngle(turnAxis,-.4+lean*.12));root.updateMatrixWorld(true);qRoot.copy(root.getWorldQuaternion(qRoot));
+  for(const side of ['L','R']){const z=sign[side];ik(legs[side],localWorld(.015,.24,z*.33,worldTarget),localWorld(.7,.55-compression,z*.3,worldPole));setWorldQ(legs[side][2],qFoot.copy(qRoot).multiply(footQ[side]));const reach=z>0?grab:0,armHeight=T.MathUtils.lerp(1.03+z*lean*.14,1.23,airWeight),armSpread=T.MathUtils.lerp(.46,.62,airWeight);ik(arms[side],localWorld((.3+Math.abs(lean)*.09)*(1-reach)+.13*reach,armHeight*(1-reach)+.30*reach,z*armSpread*(1-reach)+.24*reach,worldTarget),localWorld(.7,1.15-reach*.36,z*.4,worldPole));}
+  suit.update();
  }};
 }

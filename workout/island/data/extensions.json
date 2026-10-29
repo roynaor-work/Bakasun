@@ -14,7 +14,8 @@
     "extensions/tennis.mjs",
     "extensions/racing.mjs",
     "extensions/street-slam.mjs",
-    "extensions/alpine-rush.mjs"
+    "extensions/alpine-rush.mjs",
+    "extensions/boar-defense.mjs"
   ],
   "records": {
     "islandRacing": {
@@ -120,6 +121,14 @@
       "difficulty": "stage",
       "helpId": "minigame.alpineRush.help",
       "icon": "🏂"
+    },
+    "boarDefense": {
+      "id": "boarDefense",
+      "title": "minigame.boarDefense.title",
+      "featureFlag": "boarDefense",
+      "difficulty": "campaign",
+      "helpId": "minigame.boarDefense.help",
+      "icon": "🐗"
     }
   }
 }
