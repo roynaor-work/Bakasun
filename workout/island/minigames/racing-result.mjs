@@ -1,4 +1,4 @@
-import {getRacingStage} from './racing-tracks.mjs?v=island-alpine-20261028-1';
+import {getRacingStage} from './racing-tracks.mjs?v=island-hoops-cam-20261029-1';
 
 /** Rewards depend on the selected race and a complete, ordered checkpoint run. */
 export function racingResult(raw,ctx,balance) {
