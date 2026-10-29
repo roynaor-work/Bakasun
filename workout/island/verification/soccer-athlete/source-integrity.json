@@ -1,0 +1,711 @@
+{
+  "base": "ef5ea8be0341a05f7eb300e9283c14c51db7ecdb",
+  "branch": "codex/soccer-athlete-integration",
+  "sourceZipSha256": "b0f8b28a52e3140ee0fa4e62b6ba8994308418be431bb2ff9ccc94ea4eb898c5",
+  "sourceZipBytes": 8829990,
+  "reportedSourceHead": "910ea28d90f8e16e23dc1ff92ffc435b591a2fa8",
+  "independentlyReconstructedSourceTree": "9b124bed98b7805bb4cc9d975eb62c074b0cc008",
+  "sourceFiles": [
+    {
+      "path": "codex-lab/soccer-realism/index.html",
+      "status": "byte-identical",
+      "packetSha256": "a89d0476a210d3e158328535447053845c762611e04072c69f6a1bea40940134",
+      "integrationSha256": "8ea1f2166220835d48712fcc7a743e966bb41acecd383f6485b690d3121c37c9"
+    },
+    {
+      "path": "codex-lab/soccer-realism/motion.html",
+      "status": "byte-identical",
+      "packetSha256": "20f4adac998f01e02f07224a6740ed8f4d8442acd2450648c5929bda74e8850c",
+      "integrationSha256": "5b1b815a54049bbaf74809e77b6ea8a2c01455dc01b4ec953ddc0716933baef4"
+    },
+    {
+      "path": "codex-lab/soccer-realism/motion.mjs",
+      "status": "byte-identical",
+      "packetSha256": "aba03a74be8fc6afbf93e75aa7e986cbb78d90e4eefb483b7e2907da089f0cbf",
+      "integrationSha256": "97b00322e7a4971ca14a316e2cc766eb0315d8937d81c3234b1e6c8098e5a8c2"
+    },
+    {
+      "path": "codex-lab/soccer-realism/review.css",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "e0e2fd9f9d3033fa59d799ae1166faa0dcef62f6dbb63476238bc8d34f0ba891",
+      "integrationSha256": "e0e2fd9f9d3033fa59d799ae1166faa0dcef62f6dbb63476238bc8d34f0ba891"
+    },
+    {
+      "path": "codex-lab/soccer-realism/review.mjs",
+      "status": "byte-identical",
+      "packetSha256": "4c0f30d94c556248157971aec49d8c5f9af77fd017ef53406d49dbfe3de25415",
+      "integrationSha256": "12b6f48ed5d663a7595160de311db48c2b69049b2d7b6bd89a9f391d5e29b6b9"
+    },
+    {
+      "path": "package.json",
+      "status": "packet-wrapper-excluded",
+      "packetSha256": "768c9c7d2a68c634f01195307d655f610d66d8d0aebd54e5d819a150fa518d09",
+      "integrationSha256": "e5123a5195ceabf96f8d39d1a73a9dc9a56991518e8b58efaf957338a602b9c0"
+    },
+    {
+      "path": "serve.mjs",
+      "status": "packet-wrapper-excluded",
+      "packetSha256": "d8e614a87e5adae0bf365a5a20f155f4035cc51bc1279434697bf376c475d9b9",
+      "integrationSha256": null
+    },
+    {
+      "path": "tests/island-soccer-athlete-body.test.mjs",
+      "status": "byte-identical",
+      "packetSha256": "0580e3866bd8ffc76636e0648ae12639b6e039d3632fdaf2438f107cccfd7556",
+      "integrationSha256": "488d8e47bacd8d84e4077e170bedaa42be0c4c3c6b61b99ee7156744a41f8c9f"
+    },
+    {
+      "path": "tests/island-soccer-athlete-pause.test.mjs",
+      "status": "byte-identical",
+      "packetSha256": "d178395b67d7d4b7687a9ca2de6f9ea5aef8f62ccdd10d4e154d58f9030df804",
+      "integrationSha256": "1b59a114393091274005ba86535d082a81fc9324b394323cc18e95067da43670"
+    },
+    {
+      "path": "tests/island-soccer-athlete.test.mjs",
+      "status": "byte-identical",
+      "packetSha256": "d88079bb6694e5d221a79dbb64848443ac0710856a802dee0caeeb892c40e8d6",
+      "integrationSha256": "d3e4085b4ca4b9c605a968f3d57b6353765af8dd3291486c7e326b3ae2939fd3"
+    },
+    {
+      "path": "tests/island-soccer-context-controls.test.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "c277d440820c5e6841d0e2155906c2f279e71800b9b41c85fc6637e89676171f",
+      "integrationSha256": "c277d440820c5e6841d0e2155906c2f279e71800b9b41c85fc6637e89676171f"
+    },
+    {
+      "path": "tests/island-soccer-realism.test.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "f03060bb854730b5c6f92c45aaf6b78a097a47be3f3cf597e678e0348eab519d",
+      "integrationSha256": "f03060bb854730b5c6f92c45aaf6b78a097a47be3f3cf597e678e0348eab519d"
+    },
+    {
+      "path": "tests/island-soccer-teamshape.test.mjs",
+      "status": "byte-identical",
+      "packetSha256": "5356a4f639ad73b0bff040c6fea95ec781b3e104ccae91d618aa1b97dd8d2262",
+      "integrationSha256": "56c440446dcce5762c6a8ec81666de6e444ddf8d2dfaa04fad781e311fb3c6c1"
+    },
+    {
+      "path": "workout/island/activity/equipment.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "d138a6a1a2614a969703be606368f302e337d125cee6dac17b0042b27aa1f5e6",
+      "integrationSha256": "102afa77d9cac53c87df629a5825291127cdefc9267105c11e96737290abf7e2"
+    },
+    {
+      "path": "workout/island/activity/soccer-card.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "37df89058336ebe065d7533b3f32f4fc50eb820457dadac8b9e5d6e0725721bc",
+      "integrationSha256": "5cca2e53ea17554884c26518b21c2d9345b132bc843977194e7500f3e5610d69"
+    },
+    {
+      "path": "workout/island/activity/soccer-roster.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "b01cecd2b04d1bf3bb546c8d1fd2a87e6546cf44b227bac22aeb634b117d1a11",
+      "integrationSha256": "49b15febdea6ec49fb1767d747c244ffb9d5c629b450e740cd1f3241a47f4d44"
+    },
+    {
+      "path": "workout/island/activity/soccer-team.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "e197ac6678e60ff63ec6d81485b0da4d1db5a4e821e64947b9fcb91b42a72de6",
+      "integrationSha256": "f9001e99df65703a08a537bda279b078efd44018175c646576eb658aaa0911b0"
+    },
+    {
+      "path": "workout/island/assets/athlete/athlete.glb",
+      "status": "byte-identical",
+      "packetSha256": "ca4bed47cba1b8cea7334514936d1723c1fb046d6c97c99ab1776255b020bdd7",
+      "integrationSha256": "ca4bed47cba1b8cea7334514936d1723c1fb046d6c97c99ab1776255b020bdd7"
+    },
+    {
+      "path": "workout/island/assets/athlete/provenance.json",
+      "status": "byte-identical",
+      "packetSha256": "f39aefbf3da072672d9917b83a2ad207ddc140dc6bf978652381a2ae34820f6d",
+      "integrationSha256": "93fd995b0e53c9fc707c89fe49e09d729321ef849fe82ef6de9e661f604b7090"
+    },
+    {
+      "path": "workout/island/assets/athlete/README.md",
+      "status": "byte-identical",
+      "packetSha256": "11850c1ba17855699385559e2a0b1f813f7b9807aad120f1ae2e5e030a8de534",
+      "integrationSha256": "e2548e7baab5490ed8bb193012cb329fa2c56b662eab93cc911a70cb2c45c597"
+    },
+    {
+      "path": "workout/island/assets/athlete/textures/ball-albedo.jpg",
+      "status": "byte-identical",
+      "packetSha256": "15462b2b211483d073199c340ac4eb7505608d95d2fae0627504946188bf64a6",
+      "integrationSha256": "15462b2b211483d073199c340ac4eb7505608d95d2fae0627504946188bf64a6"
+    },
+    {
+      "path": "workout/island/assets/athlete/textures/ball-normal.png",
+      "status": "byte-identical",
+      "packetSha256": "f2aede2924ae3b802d5ceaceeb6b0b3b57738f7204b96b459f0d968d3d99b3b5",
+      "integrationSha256": "f2aede2924ae3b802d5ceaceeb6b0b3b57738f7204b96b459f0d968d3d99b3b5"
+    },
+    {
+      "path": "workout/island/assets/athlete/textures/kit-detail.png",
+      "status": "byte-identical",
+      "packetSha256": "2a8ce18003055f3e9d3400881ab06c2181efdce24e2618813e65883d1f82ad1f",
+      "integrationSha256": "2a8ce18003055f3e9d3400881ab06c2181efdce24e2618813e65883d1f82ad1f"
+    },
+    {
+      "path": "workout/island/assets/athlete/textures/kit-mask.png",
+      "status": "byte-identical",
+      "packetSha256": "82f2aa60ca53e5aab03cd8393c8ffe9e9ab3b101ebb856fd31e071e882f6f130",
+      "integrationSha256": "82f2aa60ca53e5aab03cd8393c8ffe9e9ab3b101ebb856fd31e071e882f6f130"
+    },
+    {
+      "path": "workout/island/assets/athlete/textures/kit-normal.jpg",
+      "status": "byte-identical",
+      "packetSha256": "e905d9ded06e0716a6c8c1f7ae172868e22afc9a3669ecb7273414eca0c5531c",
+      "integrationSha256": "e905d9ded06e0716a6c8c1f7ae172868e22afc9a3669ecb7273414eca0c5531c"
+    },
+    {
+      "path": "workout/island/assets/athlete/textures/kit-orm.jpg",
+      "status": "byte-identical",
+      "packetSha256": "861ebdea202b093aececc1df53e80ca770dba7e4aea0ea2cf29bb493db0caa76",
+      "integrationSha256": "861ebdea202b093aececc1df53e80ca770dba7e4aea0ea2cf29bb493db0caa76"
+    },
+    {
+      "path": "workout/island/assets/athlete/textures/skin-albedo.jpg",
+      "status": "byte-identical",
+      "packetSha256": "104bd8c4c0606b9175955fbb074f701418bc7c383274a40cab87ce6550cdb1b9",
+      "integrationSha256": "104bd8c4c0606b9175955fbb074f701418bc7c383274a40cab87ce6550cdb1b9"
+    },
+    {
+      "path": "workout/island/assets/athlete/textures/skin-mask.png",
+      "status": "byte-identical",
+      "packetSha256": "fcefaf531be909d56fae25fdae0748ffa4a48dda25659be751145ba135bf1d0d",
+      "integrationSha256": "fcefaf531be909d56fae25fdae0748ffa4a48dda25659be751145ba135bf1d0d"
+    },
+    {
+      "path": "workout/island/assets/athlete/textures/skin-normal.jpg",
+      "status": "byte-identical",
+      "packetSha256": "ffad085256b508beb89ade931512a059683a132b9762993fa65d6ae7addccdb5",
+      "integrationSha256": "ffad085256b508beb89ade931512a059683a132b9762993fa65d6ae7addccdb5"
+    },
+    {
+      "path": "workout/island/assets/athlete/textures/skin-orm.jpg",
+      "status": "byte-identical",
+      "packetSha256": "b1d6995057e33cb38b6442db2c6c231cab6c3f50116ada40b79a70adb4f15b04",
+      "integrationSha256": "b1d6995057e33cb38b6442db2c6c231cab6c3f50116ada40b79a70adb4f15b04"
+    },
+    {
+      "path": "workout/island/assets/audio/g3h/crowd.ogg",
+      "status": "byte-identical",
+      "packetSha256": "8fc297641cce528b4da2148060feb5d12d16121bfbb00f147562b6811015abb3",
+      "integrationSha256": "8fc297641cce528b4da2148060feb5d12d16121bfbb00f147562b6811015abb3"
+    },
+    {
+      "path": "workout/island/assets/audio/g3h/kick.ogg",
+      "status": "byte-identical",
+      "packetSha256": "49e7ca88743fca974bb8676ea138b751cfd8f9033b5e7af8736c2a215d6edbc1",
+      "integrationSha256": "49e7ca88743fca974bb8676ea138b751cfd8f9033b5e7af8736c2a215d6edbc1"
+    },
+    {
+      "path": "workout/island/assets/audio/g3h/pass.ogg",
+      "status": "byte-identical",
+      "packetSha256": "7642a4fd43e547afe4f7adfadb3dabb681c0ff512f52c1674bae30a726841faf",
+      "integrationSha256": "7642a4fd43e547afe4f7adfadb3dabb681c0ff512f52c1674bae30a726841faf"
+    },
+    {
+      "path": "workout/island/assets/audio/g3h/whistle.ogg",
+      "status": "byte-identical",
+      "packetSha256": "e24dda0448ae00d4ed32d5cad0baa377ed7d11e4230d0ce5dfe925798807a47e",
+      "integrationSha256": "e24dda0448ae00d4ed32d5cad0baa377ed7d11e4230d0ce5dfe925798807a47e"
+    },
+    {
+      "path": "workout/island/assets/kid-full.glb",
+      "status": "byte-identical",
+      "packetSha256": "8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2a9ae673a",
+      "integrationSha256": "8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2a9ae673a"
+    },
+    {
+      "path": "workout/island/assets/soccer-realism/provenance.json",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "91381b7b821f9f9cda1388988b63dcb4dc22213d1192fb779d15d75613dbd444",
+      "integrationSha256": "91381b7b821f9f9cda1388988b63dcb4dc22213d1192fb779d15d75613dbd444"
+    },
+    {
+      "path": "workout/island/assets/soccer-realism/README.md",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "3157299a9f525c6fd40caa867e5801fee689fdd939d4a5cac6790d232b81630a",
+      "integrationSha256": "3157299a9f525c6fd40caa867e5801fee689fdd939d4a5cac6790d232b81630a"
+    },
+    {
+      "path": "workout/island/assets/soccer-realism/turf-albedo-1k.jpg",
+      "status": "byte-identical",
+      "packetSha256": "72761bb3c2461114ed56fa60b9a0cf1d59e890a43dfb4eb30d1b46e5fac5883f",
+      "integrationSha256": "72761bb3c2461114ed56fa60b9a0cf1d59e890a43dfb4eb30d1b46e5fac5883f"
+    },
+    {
+      "path": "workout/island/assets/soccer-realism/turf-normal-gl-1k.jpg",
+      "status": "byte-identical",
+      "packetSha256": "5bb2d6667a419374cff39dcb604d14fa5847b6ed678d4c940c7919eee8c8b230",
+      "integrationSha256": "5bb2d6667a419374cff39dcb604d14fa5847b6ed678d4c940c7919eee8c8b230"
+    },
+    {
+      "path": "workout/island/data/config.json",
+      "status": "shared-main-content-retained",
+      "packetSha256": "cd63489a749d17283530f01c65a026a8eab461a02eb231b326deab408aa7d0aa",
+      "integrationSha256": "c30101f10de46f49164228437690f830b8b21f706608ca91be5f7f005b10a719"
+    },
+    {
+      "path": "workout/island/data/players.json",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "bdd2bcc4543013a4da427e9c46a3df7b74d6833cb4c87142566b5282db45436e",
+      "integrationSha256": "d02fbdfe218e457fec0064932cae235ce3149527002434c6e9f4a4df01909d2b"
+    },
+    {
+      "path": "workout/island/data/strings.he.json",
+      "status": "shared-main-content-retained",
+      "packetSha256": "0cd5bbdb5d57edfe3275bbf3d0fe30d6c6d5a6cd95643469de4b0a161dc7150c",
+      "integrationSha256": "c237d5d6385db632afb867abc8040c17394e2e85a952908569e20969a7ca6fd8"
+    },
+    {
+      "path": "workout/island/data/team.json",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "ecc95433862a60223e4ed7d3444cf1e41115e4e1e4bb32044bdee9f5fcb45373",
+      "integrationSha256": "82a4168feca9f02a88185f790ad5099a85e292abd6c731a6830ede8a0ce95d8d"
+    },
+    {
+      "path": "workout/island/minigames/context.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "a20a9c2869131e3e90daf447159bb71232b48f2276315b29f33a38eeb261cf80",
+      "integrationSha256": "70f41ff409150f21722b741be162376f0db624fa0cce751ac159effaf8d3a7ad"
+    },
+    {
+      "path": "workout/island/minigames/controls.mjs",
+      "status": "byte-identical",
+      "packetSha256": "862f16302a1d698d270e0f4fdfe8e3aad6498eca78dd5d73054360123301374d",
+      "integrationSha256": "02e0b7077daae320ded2d54f2591f6e4afe8342ab238f812f6b973c1ae4b4753"
+    },
+    {
+      "path": "workout/island/minigames/g3h-audio.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "6a0563083b91aa1f51125543c667533f458f817618cf46bc72ea1368c44ad964",
+      "integrationSha256": "6445751cfe0855512ad8622eb89c274bded88616479cbf69dbad41ad62570b06"
+    },
+    {
+      "path": "workout/island/minigames/g3h-soccer.css",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "a7846748f600d87c76d23222586a12047f8e2245fd5f712c25a58af7ca824077",
+      "integrationSha256": "141e911d61df86435ad27184699ab888347a9b27da61d27e9333306d11c8016e"
+    },
+    {
+      "path": "workout/island/minigames/g3j-soccer.css",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "7ae7091ef250f57ac0c80761eac756576f07c2c4d797529d42f7835b09cd4cd4",
+      "integrationSha256": "33ef6f188de4a3ccbabb7ac00b7c4cb4ef2404c1494ceeafd3096c151c8f8e0e"
+    },
+    {
+      "path": "workout/island/minigames/soccer-assistance.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "74cab21cf7820100fb8d7478fe7e23a7c71c62a6e44f4190ce45f402b2774d94",
+      "integrationSha256": "fe4b73eb2d6b41dbd9fdadc74738dda338c9567ebeb612e36cc8fd928b62c300"
+    },
+    {
+      "path": "workout/island/minigames/soccer-athlete-body.mjs",
+      "status": "byte-identical",
+      "packetSha256": "285f2f750bb38e241249c67c0726361b620bef2ee53884e796be01010734610e",
+      "integrationSha256": "cd00aa61df3670bcd36a55dd9607aecb7f4e4c79ae717da70ab52946701faec0"
+    },
+    {
+      "path": "workout/island/minigames/soccer-athlete-motion.mjs",
+      "status": "byte-identical",
+      "packetSha256": "13e2cf4f47e724e62ead60fb3d1d625c239a88b865f762ea4d3191466c42c372",
+      "integrationSha256": "13663f631403b38506cf3fd509642b18996ac710f755b48ee0061e4e37b46cef"
+    },
+    {
+      "path": "workout/island/minigames/soccer-athlete.mjs",
+      "status": "byte-identical",
+      "packetSha256": "fcddece7ccf12d718f0d2f7ef6abb440a1b8e7bac0a5b69a17ee3ae9890cd768",
+      "integrationSha256": "96c1a2c726f59922bd7fb742496fe621ba4309dee5139d6f75aad8aa1c6a1b93"
+    },
+    {
+      "path": "workout/island/minigames/soccer-boundary.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "4d541667156e786e8d1fcf678ffa59128d9c5f283252b6417ff37f22dda2aca5",
+      "integrationSha256": "7df794793fd91075df792460fdee8fe938f3178136bf69ebe09676800a50cc2b"
+    },
+    {
+      "path": "workout/island/minigames/soccer-campaign.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "981bcdae0985baf50dc8f4336a6f5015ca77b0000dc60cb530ebea7450b00e1d",
+      "integrationSha256": "9440dac27e362382ea1a50dc51aef5bef0a38ef22706b8d9b631dc86515f0c5c"
+    },
+    {
+      "path": "workout/island/minigames/soccer-controls.css",
+      "status": "byte-identical",
+      "packetSha256": "ff867236dcb267247aa5aaee205183a9ae8facfb195726274fa4e316a0f3066c",
+      "integrationSha256": "ff70d995fa5fb2695833f3c95259566b57ad383b94692bbdebe0a944dcc65de4"
+    },
+    {
+      "path": "workout/island/minigames/soccer-crowd.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "cfeacddb6b1efddbd6c0c5d3e31fa53406d3e68bd8105a416730c6eaa2f70029",
+      "integrationSha256": "bbef6145493b00da66b9fc23190d7e6f270cd83b2fa418677b1ee8989084c3ba"
+    },
+    {
+      "path": "workout/island/minigames/soccer-drill.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "f73d20678f6eb400a1da8b58ecf1bdb11c5658ef62bc80d9d2ee63f9d23cbcad",
+      "integrationSha256": "bc1c670e7c2a5525b03db8a0a2cb22ed5c16d1dc8090590496f630c710c470b7"
+    },
+    {
+      "path": "workout/island/minigames/soccer-icons.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "606555038e5e52bd74cda0a724753ab58e40fd8230439f44ca77605cd534b719",
+      "integrationSha256": "6de682b3f4c0d0e8a585a02dfc6d0e57f187c34e3dcb5c6713d1e2f6e7b35114"
+    },
+    {
+      "path": "workout/island/minigames/soccer-lighting.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "efc0331f26fe4049749239cdbe35ae0bde1a115ae26c1ff5db3851473e2829e8",
+      "integrationSha256": "efc0331f26fe4049749239cdbe35ae0bde1a115ae26c1ff5db3851473e2829e8"
+    },
+    {
+      "path": "workout/island/minigames/soccer-physics.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "2e3f93d194cefcab405c3c6159f90fc1405a77b31b48c639a030f1a17856d381",
+      "integrationSha256": "5105e80b54a2889c98ffb39e04a176898eba022b9112bf9b8531f134f163845f"
+    },
+    {
+      "path": "workout/island/minigames/soccer-poses.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "392e3c5e0bbefbf23fce36efd2a6e88b29121d3bcbb65ab74599530d7b926781",
+      "integrationSha256": "018ec34a9399964bd0f98168b001f23857be63d8fb3c4d82f6fc68d8820cb9ff"
+    },
+    {
+      "path": "workout/island/minigames/soccer-presentation.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "441a63ff9c5d50ee6066a8ab39d48abfb3e6805e59348f156077f44a8345105c",
+      "integrationSha256": "4c69d0aa65ea8f8d77b1e26d21691c042f8b8042108293cb23d8c44d18c83df0"
+    },
+    {
+      "path": "workout/island/minigames/soccer-rig.mjs",
+      "status": "byte-identical",
+      "packetSha256": "d95936cd7a3e33bac2a4bb1c731d573c01852a31ec9542e4e48dc3030622d30b",
+      "integrationSha256": "852e91f26a183462ea2e9309a5927d59f602d5336f09c05fe63c020206d3e8ad"
+    },
+    {
+      "path": "workout/island/minigames/soccer-session.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "c3fd668276c3b24774b1a91d2eb54605c50967fc84fe5d356d598c7e074b37f4",
+      "integrationSha256": "128b44ddd5ccc03e005be546831ea804fd63b2e3cadb036bf76daecd07198af3"
+    },
+    {
+      "path": "workout/island/minigames/soccer-shot.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "dc59818e6502f09090f8e2e562c15ad0ba5187eb11ea4a0727f1d3de0e6c8d46",
+      "integrationSha256": "eac60656cb0ab90c43250e12e1b906b7bae5b806614c91a5b911b8fa2cd1cbaa"
+    },
+    {
+      "path": "workout/island/minigames/soccer-tactics.mjs",
+      "status": "user-approved-presser-fix",
+      "packetSha256": "90ddd0494351f75e644b8a0724e1c0b8cfc15b024e8d5b6596a201c174dea13e",
+      "integrationSha256": "3f4a08594cf0439e112bc959e918d8cc214a0d4be167e73f5b72545bf51ca5ed"
+    },
+    {
+      "path": "workout/island/minigames/soccer-teamplay.mjs",
+      "status": "byte-identical",
+      "packetSha256": "e0ab8f99d5030fd090c7fe2ab7569f5632326cfc2e21f6cd6a652be91db1c43a",
+      "integrationSha256": "69ab2fa4725afa58a87884cfe7e7f34fa0814e5fa61c89f76b4e261dab0ec573"
+    },
+    {
+      "path": "workout/island/minigames/soccer-view.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "327f100873bdc1ace2ba18a8aea3e501dddd85b7dfe958852516a0e645b6c22e",
+      "integrationSha256": "063ee4c03f24e7a1a40ef3c87b16c99f99f68bd627e190efa4e7684086de80b0"
+    },
+    {
+      "path": "workout/island/minigames/soccer.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "617868392608b3c981719ff1806a389cb75492769628c9f1d0c97c92cb0d8408",
+      "integrationSha256": "624ecbaf3831351bc6bf7de5869f9a7862ca9daad125fdf202b3cbfc57cd59ae"
+    },
+    {
+      "path": "workout/island/minigames/ultra-soccer-effects.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "84bb462a50c469da9cb715d4bc93924b67e4389e4e2e056fc72ebc0bc4166cdf",
+      "integrationSha256": "2627abc58d9257f25bd0756c9c6af08cc5540b1c24e6b5a4406eec27d12d744a"
+    },
+    {
+      "path": "workout/island/minigames/ultra-soccer-stadium.mjs",
+      "status": "byte-identical",
+      "packetSha256": "455e343d1b54326d67adeb937fbbcf8f7fd37a556b8e4ed9191645474248cb12",
+      "integrationSha256": "731f3d3ff4e51e2c6a639da754ab9e4aba1465cac8c69a2a0f88b0b6f19eaffa"
+    },
+    {
+      "path": "workout/island/presentation/surfaces.mjs",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "bd2071f2b78d846bc262eab1fc1b8154da57a8a169edafb2ae12371c6f6fe6fe",
+      "integrationSha256": "e0ebe9b2b749dd91db34798d4271cbf42a6f7a80a43f27b7d4edbb07cefe6982"
+    },
+    {
+      "path": "workout/island/styles.css",
+      "status": "shared-main-content-retained",
+      "packetSha256": "c88548d868c9457d06e44b7bfed48d0d05f36cd260b82851a2766149ff2b50fd",
+      "integrationSha256": "f1a0aff5f2f46460db6490646a7b5258fd9da8e91dfb20a108f6934eeac2ec78"
+    },
+    {
+      "path": "workout/island/ui/game-shell.css",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "ebbf218528b6388de7bf97f59194a50bb95b8bf79fde0c0cbbd460c1329e45bb",
+      "integrationSha256": "5ea8558dcc4bb103a76d0c8429322c77a22705a093a8e03c685c4bd6c3b3e6d0"
+    },
+    {
+      "path": "workout/island/vendor/BufferGeometryUtils.js",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "e553534b080c1c1914dc9fde838b72b1138c3e2d026157251c67c21db8d9ead4",
+      "integrationSha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+    },
+    {
+      "path": "workout/island/vendor/GLTFLoader.js",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "683e3c4c5db357119776a4c6009eb3295459114584c765fb2805899ad988a301",
+      "integrationSha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    {
+      "path": "workout/island/vendor/three.module.js",
+      "status": "same-content-except-query-and-line-endings",
+      "packetSha256": "8acd07f8038b419c68744d1a94d24b26e3a203479b59640b08e557864ce928d6",
+      "integrationSha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/athlete/athlete.glb",
+      "bytes": 1280272,
+      "sha256": "ca4bed47cba1b8cea7334514936d1723c1fb046d6c97c99ab1776255b020bdd7"
+    },
+    {
+      "path": "assets/athlete/textures/ball-albedo.jpg",
+      "bytes": 47579,
+      "sha256": "15462b2b211483d073199c340ac4eb7505608d95d2fae0627504946188bf64a6"
+    },
+    {
+      "path": "assets/athlete/textures/ball-normal.png",
+      "bytes": 63265,
+      "sha256": "f2aede2924ae3b802d5ceaceeb6b0b3b57738f7204b96b459f0d968d3d99b3b5"
+    },
+    {
+      "path": "assets/athlete/textures/kit-detail.png",
+      "bytes": 471737,
+      "sha256": "2a8ce18003055f3e9d3400881ab06c2181efdce24e2618813e65883d1f82ad1f"
+    },
+    {
+      "path": "assets/athlete/textures/kit-mask.png",
+      "bytes": 37444,
+      "sha256": "82f2aa60ca53e5aab03cd8393c8ffe9e9ab3b101ebb856fd31e071e882f6f130"
+    },
+    {
+      "path": "assets/athlete/textures/kit-normal.jpg",
+      "bytes": 90808,
+      "sha256": "e905d9ded06e0716a6c8c1f7ae172868e22afc9a3669ecb7273414eca0c5531c"
+    },
+    {
+      "path": "assets/athlete/textures/kit-orm.jpg",
+      "bytes": 68721,
+      "sha256": "861ebdea202b093aececc1df53e80ca770dba7e4aea0ea2cf29bb493db0caa76"
+    },
+    {
+      "path": "assets/athlete/textures/skin-albedo.jpg",
+      "bytes": 148130,
+      "sha256": "104bd8c4c0606b9175955fbb074f701418bc7c383274a40cab87ce6550cdb1b9"
+    },
+    {
+      "path": "assets/athlete/textures/skin-mask.png",
+      "bytes": 101122,
+      "sha256": "fcefaf531be909d56fae25fdae0748ffa4a48dda25659be751145ba135bf1d0d"
+    },
+    {
+      "path": "assets/athlete/textures/skin-normal.jpg",
+      "bytes": 164342,
+      "sha256": "ffad085256b508beb89ade931512a059683a132b9762993fa65d6ae7addccdb5"
+    },
+    {
+      "path": "assets/athlete/textures/skin-orm.jpg",
+      "bytes": 210180,
+      "sha256": "b1d6995057e33cb38b6442db2c6c231cab6c3f50116ada40b79a70adb4f15b04"
+    }
+  ],
+  "nonSoccerConfigurationUnchanged": true,
+  "otherRuntimeChangesAreOnlyReleaseTags": [
+    "workout/island/activity/runtime.mjs",
+    "workout/island/activity/state.mjs",
+    "workout/island/app.mjs",
+    "workout/island/engine/city-depth.mjs",
+    "workout/island/engine/city-management.mjs",
+    "workout/island/engine/city-runtime.mjs",
+    "workout/island/engine/city-sites.mjs",
+    "workout/island/engine/economy.mjs",
+    "workout/island/engine/engine.mjs",
+    "workout/island/engine/load-data.mjs",
+    "workout/island/engine/metrics.mjs",
+    "workout/island/engine/paths.mjs",
+    "workout/island/engine/persistence.mjs",
+    "workout/island/engine/placement-help.mjs",
+    "workout/island/engine/ready-plots.mjs",
+    "workout/island/engine/rules.mjs",
+    "workout/island/extensions/alien-defense.mjs",
+    "workout/island/extensions/alpine-rush.mjs",
+    "workout/island/extensions/fire-rescue.mjs",
+    "workout/island/extensions/island-events.mjs",
+    "workout/island/extensions/naval-duel.mjs",
+    "workout/island/extensions/racing.mjs",
+    "workout/island/extensions/soccer.mjs",
+    "workout/island/extensions/street-slam.mjs",
+    "workout/island/extensions/tennis.mjs",
+    "workout/island/index.html",
+    "workout/island/learning/interface.mjs",
+    "workout/island/learning/questions.mjs",
+    "workout/island/learning/runtime.mjs",
+    "workout/island/minigames/alien-flight-model.mjs",
+    "workout/island/minigames/alien-session.mjs",
+    "workout/island/minigames/alien-ui.mjs",
+    "workout/island/minigames/alien-view.mjs",
+    "workout/island/minigames/aliens.mjs",
+    "workout/island/minigames/alpine-art.mjs",
+    "workout/island/minigames/alpine-engine.mjs",
+    "workout/island/minigames/alpine-result.mjs",
+    "workout/island/minigames/alpine-session.mjs",
+    "workout/island/minigames/alpine-view.mjs",
+    "workout/island/minigames/canvas-session.mjs",
+    "workout/island/minigames/context.mjs",
+    "workout/island/minigames/fire-assistance.mjs",
+    "workout/island/minigames/fire-canvas.mjs",
+    "workout/island/minigames/fire-session.mjs",
+    "workout/island/minigames/fire-truck.mjs",
+    "workout/island/minigames/fire-ui.mjs",
+    "workout/island/minigames/fire-view.mjs",
+    "workout/island/minigames/fire.mjs",
+    "workout/island/minigames/g2m-audio.mjs",
+    "workout/island/minigames/g2n-audio.mjs",
+    "workout/island/minigames/g3h-audio.mjs",
+    "workout/island/minigames/g3h-soccer.css",
+    "workout/island/minigames/g4e-audio.mjs",
+    "workout/island/minigames/g6d-audio.mjs",
+    "workout/island/minigames/g6d-effects.mjs",
+    "workout/island/minigames/hoops-arena.mjs",
+    "workout/island/minigames/hoops-engine.mjs",
+    "workout/island/minigames/hoops-franchise.mjs",
+    "workout/island/minigames/hoops-players.mjs",
+    "workout/island/minigames/hoops-session.mjs",
+    "workout/island/minigames/hoops-view.mjs",
+    "workout/island/minigames/model-art.mjs",
+    "workout/island/minigames/naval-controls.mjs",
+    "workout/island/minigames/naval-environment.mjs",
+    "workout/island/minigames/naval-projectiles.mjs",
+    "workout/island/minigames/naval-scenery.mjs",
+    "workout/island/minigames/naval-upgrades.mjs",
+    "workout/island/minigames/naval-view.mjs",
+    "workout/island/minigames/naval.mjs",
+    "workout/island/minigames/patrol-boat.mjs",
+    "workout/island/minigames/racing-physics.mjs",
+    "workout/island/minigames/racing-result.mjs",
+    "workout/island/minigames/racing-scenery.mjs",
+    "workout/island/minigames/racing-session.mjs",
+    "workout/island/minigames/racing-view.mjs",
+    "workout/island/minigames/tennis-environment.mjs",
+    "workout/island/minigames/tennis-session.mjs",
+    "workout/island/minigames/tennis-ui.mjs",
+    "workout/island/minigames/tennis-view.mjs",
+    "workout/island/minigames/ultra-fire-scenery.mjs",
+    "workout/island/release.json",
+    "workout/island/release.mjs",
+    "workout/island/tests/g2l-browser.mjs",
+    "workout/island/tests/g2o-browser.mjs",
+    "workout/island/tests/g3h-browser.mjs",
+    "workout/island/tests/g3i-browser.mjs",
+    "workout/island/tests/g4f-browser.mjs",
+    "workout/island/tests/g8b-browser.mjs",
+    "workout/island/ui/activity.mjs",
+    "workout/island/ui/adventure-emblems.mjs",
+    "workout/island/ui/city-management.mjs",
+    "workout/island/ui/game-shell.mjs",
+    "workout/island/ui/hangar-preview.mjs",
+    "workout/island/ui/hoops-club.mjs",
+    "workout/island/ui/interface.mjs",
+    "workout/island/ui/ready-plots.mjs",
+    "workout/island/ui/soccer-card.mjs",
+    "workout/island/view/avatar.mjs",
+    "workout/island/view/buildings.mjs",
+    "workout/island/view/city-citizens.mjs",
+    "workout/island/view/city-depth.mjs",
+    "workout/island/view/city-life.mjs",
+    "workout/island/view/city-streets.mjs",
+    "workout/island/view/city-traffic.mjs",
+    "workout/island/view/environment.mjs",
+    "workout/island/view/island-view.mjs",
+    "workout/island/view/learning-buildings.mjs",
+    "workout/island/view/local-models.mjs",
+    "workout/island/view/meshy-pilot.mjs",
+    "workout/island/view/ultra-island-flora.mjs",
+    "workout/island/view/ultra-island-scenery.mjs",
+    "workout/island/view/ultra-island-water.mjs"
+  ],
+  "saveVersion": 18,
+  "release": "island-soccer-athlete-20261029-1",
+  "graphicsV3Included": false,
+  "deletedFiles": false,
+  "testChangesUserApproved": true,
+  "presserFixUserApproved": true,
+  "tests": {
+    "main": {
+      "tests": 2745,
+      "pass": 2706,
+      "fail": 1,
+      "skipped": 38
+    },
+    "branch": {
+      "tests": 2795,
+      "pass": 2756,
+      "fail": 1,
+      "skipped": 38
+    },
+    "soccer": {
+      "tests": 242,
+      "pass": 242,
+      "fail": 0,
+      "skipped": 0
+    },
+    "island": {
+      "tests": 199,
+      "pass": 199,
+      "fail": 0,
+      "skipped": 0
+    },
+    "focusedPause": {
+      "tests": 2,
+      "pass": 2,
+      "fail": 0,
+      "skipped": 0
+    }
+  },
+  "existingG3b": "Unmodified harness: main844 and branch844/390 timed out on stale .game-card selector.",
+  "g8CityBytes": {
+    "main": 9636804,
+    "branch": 9732353,
+    "budget": 8000000,
+    "increase": 95549
+  },
+  "physicalPhone": false,
+  "physical120Hz": false,
+  "newApprovedSourceAssets": [
+    "workout/island/assets/athlete/athlete.glb",
+    "workout/island/assets/athlete/provenance.json",
+    "workout/island/assets/athlete/README.md",
+    "workout/island/assets/athlete/textures/ball-albedo.jpg",
+    "workout/island/assets/athlete/textures/ball-normal.png",
+    "workout/island/assets/athlete/textures/kit-detail.png",
+    "workout/island/assets/athlete/textures/kit-mask.png",
+    "workout/island/assets/athlete/textures/kit-normal.jpg",
+    "workout/island/assets/athlete/textures/kit-orm.jpg",
+    "workout/island/assets/athlete/textures/skin-albedo.jpg",
+    "workout/island/assets/athlete/textures/skin-mask.png",
+    "workout/island/assets/athlete/textures/skin-normal.jpg",
+    "workout/island/assets/athlete/textures/skin-orm.jpg",
+    "workout/island/assets/soccer-realism/provenance.json",
+    "workout/island/assets/soccer-realism/README.md",
+    "workout/island/assets/soccer-realism/turf-albedo-1k.jpg",
+    "workout/island/assets/soccer-realism/turf-normal-gl-1k.jpg"
+  ],
+  "integrationDigestScope": "SHA256 of staged Git blob bytes; packet hashes refer to the original ZIP bytes. CRLF/LF content comparisons are separate."
+}

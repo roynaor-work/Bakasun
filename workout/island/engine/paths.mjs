@@ -1,4 +1,4 @@
-import {cellsFor} from './rules.mjs?v=island-alpine-20261028-1';
+import {cellsFor} from './rules.mjs?v=island-soccer-athlete-20261029-1';
 const key=(x,z)=>`${x},${z}`;
 /** Free cosmetic footpaths are derived from the city; they never spend money,
  * occupy construction cells or change the saved road/access rules. */

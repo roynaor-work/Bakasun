@@ -1,5 +1,10 @@
 /** SkeletonUtils-style clone: share geometry/materials, remap every bone to the
  * corresponding cloned node. Each player owns its skeleton and animation mixer. */
+export function playerSoccerClip(clip){
+  // The ball has its own physics mesh and is removed from each cloned player.
+  // Strip only its tracks; the source asset and the player's tracks stay intact.
+  const result=clip.clone();result.tracks=result.tracks.filter(track=>!/^Ball\./.test(track.name));return result;
+}
 export function cloneSoccerRig(source){
   const clone=source.clone(true),originals=[],copies=[],map=new Map();
   source.traverse(node=>originals.push(node));clone.traverse(node=>copies.push(node));
