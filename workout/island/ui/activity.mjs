@@ -1,19 +1,19 @@
-import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-easy-city-20261027-1';
-import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-easy-city-20261027-1';
-import {hangarAction} from '../activity/hangar.mjs?v=island-easy-city-20261027-1';
-import {hangarPreview} from './hangar-preview.mjs?v=island-easy-city-20261027-1';
-import {createSound} from '../minigames/sound.mjs?v=island-easy-city-20261027-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-easy-city-20261027-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-easy-city-20261027-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=island-easy-city-20261027-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-easy-city-20261027-1';
-import {gameContext} from '../minigames/context.mjs?v=island-easy-city-20261027-1';
-import {gameAvailability} from '../activity/availability.mjs?v=island-easy-city-20261027-1';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-easy-city-20261027-1';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=island-easy-city-20261027-1';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-easy-city-20261027-1';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=island-easy-city-20261027-1';
-import {hoopsClubPanel} from './hoops-club.mjs?v=island-easy-city-20261027-1';
+import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-hoops-feel-20261027-1';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-hoops-feel-20261027-1';
+import {hangarAction} from '../activity/hangar.mjs?v=island-hoops-feel-20261027-1';
+import {hangarPreview} from './hangar-preview.mjs?v=island-hoops-feel-20261027-1';
+import {createSound} from '../minigames/sound.mjs?v=island-hoops-feel-20261027-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-hoops-feel-20261027-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-hoops-feel-20261027-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=island-hoops-feel-20261027-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-hoops-feel-20261027-1';
+import {gameContext} from '../minigames/context.mjs?v=island-hoops-feel-20261027-1';
+import {gameAvailability} from '../activity/availability.mjs?v=island-hoops-feel-20261027-1';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-hoops-feel-20261027-1';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=island-hoops-feel-20261027-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-hoops-feel-20261027-1';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=island-hoops-feel-20261027-1';
+import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-hoops-feel-20261027-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -150,7 +150,14 @@ export class ActivityInterface {
   stages(id) {
     if(this.requireBuilding(id))return;
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
-    const dialog=this.modal(game.title,'minigame.progressHint');dialog.dataset.stageMap=id;if(id==='fireRescue')dialog.append(button(this.t('fire.certificates'),'open-certificates',()=>this.certificates()));if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
+    const outer=this.modal(game.title,'minigame.progressHint');outer.dataset.stageMap=id;let dialog=outer;
+    // basketball: one card and one button; the club, the stages and the stars fold away
+    if(id==='streetSlam'&&this.engine.hoops){
+      const play=()=>this.start(id,undefined,p.stage);play.refresh=()=>this.stages(id);
+      const more=el('details','hoops-more');more.dataset.hoopsMore='true';more.append(el('summary','',this.t('hoops.start.manage')));
+      outer.append(hoopsStartCard({engine:this.engine,t:this.t,play}),more);dialog=more;
+    }
+    if(id==='fireRescue')dialog.append(button(this.t('fire.certificates'),'open-certificates',()=>this.certificates()));if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
     dialog.append(el('p','',this.t('minigame.totalStars',{stars:p.stars.reduce((sum,n)=>sum+n,0)})));
     if(id==='streetSlam'&&this.engine.hoops)dialog.append(hoopsClubPanel({engine:this.engine,t:this.t,refresh:()=>this.stages(id),result:r=>this.ui.result(r)}));
     if(id==='navalDuel')dialog.append(navalUpgradePanel({engine:this.engine,activity:this.activity,data:this.data,t:this.t,refresh:()=>this.stages(id)}));
@@ -169,7 +176,7 @@ export class ActivityInterface {
       const stage=i+1,locked=stage>p.stage;
       const node=button(`${this.t('minigame.stage',{stage})} ${locked?'🔒':'★'.repeat(stars)+'☆'.repeat(3-stars)}`,'stage-play',()=>this.start(id,undefined,stage));
       node.title=this.t(this.data.config.minigames[id].levels[i].feature);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
-    });dialog.append(map,button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
+    });dialog.append(map);outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
   }
   autoLaunch(choice) {
     if(this.requireDaily(choice.gameId)){this.activity.cancel(choice.eventId);return;}

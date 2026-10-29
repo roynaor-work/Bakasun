@@ -16,6 +16,7 @@ const PATHS={
  zone:'<rect x="5" y="9" width="22" height="16" rx="3"/><path d="M5 17h22M16 9v16"/>',
  replay:'<path d="M6 16a10 10 0 1 0 3-7"/><path d="M6 4v6h6"/><path d="m14 12 6 4-6 4z"/>',
  perfect:'<path d="m16 3 3.8 8 8.7 1.1-6.4 6 1.7 8.6L16 22.4l-7.8 4.3 1.7-8.6-6.4-6L12.2 11Z"/>',
+ good:'<path d="M6 17l6 6L26 9"/>',
  early:'<circle cx="16" cy="16" r="12"/><path d="M16 9v7l-5 4"/>',
  late:'<circle cx="16" cy="16" r="12"/><path d="M16 9v7l5 4"/>',
  move:'<circle cx="16" cy="16" r="5"/><path d="M16 3v5m-3-2 3-3 3 3M16 29v-5m-3 2 3 3 3-3M3 16h5m-2-3-3 3 3 3M29 16h-5m2-3 3 3-3 3"/>',

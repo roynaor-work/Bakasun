@@ -351,3 +351,14 @@ button[data-pressed=true]{scale:.95;filter:brightness(.82)}
 .hoops-club-select{min-height:48px;width:100%;font-size:16px}
 .hoops-club-preview{min-height:1.4em;font-weight:700}
 .hoops-club-toggle{display:flex;gap:10px;align-items:center;min-height:48px}
+
+/* Start card before a game (menu, not the court): the next match and one big button. */
+.hoops-start{display:grid;gap:10px;justify-items:center;text-align:center;padding:14px 12px;border-radius:14px;background:#10192a0d;border:1px solid #10192a1f}
+.hoops-start-matchup{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.hoops-start-team{display:grid;justify-items:center;gap:6px;min-width:96px}
+.hoops-start-team .hoops-club-crest{width:44px;height:44px}
+.hoops-start-vs{font-weight:800;opacity:.7}
+.hoops-start-line,.hoops-start-place{margin:0}
+.hoops-start-play{min-height:56px;min-width:min(260px,100%);font-size:1.15rem}
+.hoops-more{margin-top:10px}
+.hoops-more>summary{cursor:pointer;min-height:44px;padding-block:10px;font-weight:700;box-sizing:border-box}
