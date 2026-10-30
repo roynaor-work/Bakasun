@@ -5,8 +5,8 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
-import {jerseyTexture,shortsTexture} from './hoops-textures.mjs?v=island-naval-aim-20261030-1';
-import {shareSkeletons} from './hoops-perf.mjs?v=island-naval-aim-20261030-1';
+import {jerseyTexture,shortsTexture} from './hoops-textures.mjs?v=island-perf-20261030-1';
+import {shareSkeletons} from './hoops-perf.mjs?v=island-perf-20261030-1';
 
 const BODY_FOR_POS={PG:'guard',SG:'guard',SF:'wing',PF:'forward',C:'big'};
 const HAIR=/short0|afro|long0|bob0|braid|pony/i;

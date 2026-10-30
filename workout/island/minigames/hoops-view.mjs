@@ -2,10 +2,10 @@
  * it never decides points, possession or time. Broadcast side camera in landscape, a closer
  * half-court camera in portrait. Instant replay plays back recorded snapshots only. */
 import * as THREE from '../vendor/three.module.js';
-import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-naval-aim-20261030-1';
-import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-naval-aim-20261030-1';
-import {ballTexture} from './hoops-textures.mjs?v=island-naval-aim-20261030-1';
-import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-naval-aim-20261030-1';
+import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-perf-20261030-1';
+import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-perf-20261030-1';
+import {ballTexture} from './hoops-textures.mjs?v=island-perf-20261030-1';
+import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-perf-20261030-1';
 
 const lerp=(a,b,t)=>a+(b-a)*t;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));

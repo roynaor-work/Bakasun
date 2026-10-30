@@ -1,4 +1,4 @@
-import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-naval-aim-20261030-1';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-perf-20261030-1';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Pure presentation decisions; the simulation never imports this module. */
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
