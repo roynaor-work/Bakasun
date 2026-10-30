@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {DRACOLoader} from '../vendor/DRACOLoader.js';
+import {AlpineDracoLoader as DRACOLoader} from './alpine-draco.mjs';
 import {mergeGeometries, mergeVertices} from '../vendor/BufferGeometryUtils.js';
 import {surfaceHeight} from './alpine-track.mjs';
 
