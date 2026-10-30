@@ -6,12 +6,15 @@ export function playerSoccerClip(clip){
   const result=clip.clone();result.tracks=result.tracks.filter(track=>!/^Ball\./.test(track.name));return result;
 }
 export function cloneSoccerRig(source){
-  const clone=source.clone(true),originals=[],copies=[],map=new Map();
+  const clone=source.clone(true),originals=[],copies=[],map=new Map(),skeletons=new Map();
   source.traverse(node=>originals.push(node));clone.traverse(node=>copies.push(node));
   originals.forEach((node,i)=>map.set(node,copies[i]));
   clone.traverse(node=>{if(!node.isSkinnedMesh)return;const original=originals[copies.indexOf(node)];
-    node.skeleton=original.skeleton.clone();node.bindMatrix.copy(original.bindMatrix);
-    node.skeleton.bones=original.skeleton.bones.map(bone=>{const copy=map.get(bone);if(!copy)throw Error('Soccer bone outside cloned rig');return copy;});
-    node.bind(node.skeleton,node.bindMatrix);
+    // Meshes that share one source skin (skin + kit, both LOD levels) share one cloned skeleton:
+    // one bone-matrix update and one bone texture per player per frame instead of one per mesh.
+    let skeleton=skeletons.get(original.skeleton);
+    if(!skeleton){skeleton=original.skeleton.clone();skeleton.bones=original.skeleton.bones.map(bone=>{const copy=map.get(bone);if(!copy)throw Error('Soccer bone outside cloned rig');return copy;});skeletons.set(original.skeleton,skeleton);}
+    node.bindMatrix.copy(original.bindMatrix);
+    node.bind(skeleton,node.bindMatrix);
   });return clone;
 }

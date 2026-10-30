@@ -1,0 +1,266 @@
+{
+ "seconds": 30,
+ "date": "2026-10-30T14:03:38.621Z",
+ "results": [
+  {
+   "width": 844,
+   "height": 390,
+   "pixelRatio": 1,
+   "mobileProfile": true,
+   "small": false,
+   "stage": 1,
+   "seed": 7,
+   "seconds": 30.7,
+   "loadMs": 8377,
+   "frames": 23,
+   "allFrames": 25,
+   "avgFps": 0.8,
+   "warmupMs": 2000,
+   "firstRacingFrames": [
+    {
+     "frameMs": 14.9,
+     "render": 13.4,
+     "step": 0.4
+    },
+    {
+     "frameMs": 18.7,
+     "render": 17.4,
+     "step": 0.7
+    },
+    {
+     "frameMs": 24.1,
+     "render": 23.4,
+     "step": 0.3
+    },
+    {
+     "frameMs": 13.9,
+     "render": 7.5,
+     "step": 6.2
+    }
+   ],
+   "frameMs": {
+    "p50": 816.6,
+    "p95": 1816.6,
+    "p99": 4783.2,
+    "max": 4783.2
+   },
+   "over33": 20,
+   "over50": 19,
+   "tickMs": {
+    "avg": 8.717,
+    "p95": 20,
+    "max": 24.1
+   },
+   "parts": {
+    "step": 0.552,
+    "snapshot": 0.009,
+    "presentation": 0.004,
+    "render": 7.809,
+    "other": 0.38
+   },
+   "allocKB": {
+    "median": 486.7,
+    "p90": 1450.6
+   },
+   "audit": {
+    "categories": {
+     "track": {
+      "objects": 21,
+      "tris": 42720,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 6,
+      "tris": 76476,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesDistant": {
+      "objects": 6,
+      "tris": 1120,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 12,
+      "tris": 8640,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "poles": {
+      "objects": 1,
+      "tris": 616,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "ridge": {
+      "objects": 2,
+      "tris": 37800,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "sky": {
+      "objects": 1,
+      "tris": 960,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 5760,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "finish": {
+      "objects": 0,
+      "tris": 0,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "riders": {
+      "objects": 22,
+      "tris": 10542,
+      "shadowTris": 10540,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 286,
+      "shadowTris": 0,
+      "points": 151
+     },
+     "props": {
+      "objects": 27,
+      "tris": 4064,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 512,
+    "shadowsEnabled": true,
+    "programs": 25
+   },
+   "auditHigh": {
+    "categories": {
+     "track": {
+      "objects": 21,
+      "tris": 42720,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesNear": {
+      "objects": 12,
+      "tris": 399546,
+      "shadowTris": 124134,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 6,
+      "tris": 63072,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesDistant": {
+      "objects": 6,
+      "tris": 7728,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 19,
+      "tris": 13680,
+      "shadowTris": 5040,
+      "points": 0
+     },
+     "poles": {
+      "objects": 1,
+      "tris": 1008,
+      "shadowTris": 1008,
+      "points": 0
+     },
+     "ridge": {
+      "objects": 2,
+      "tris": 37800,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "sky": {
+      "objects": 1,
+      "tris": 960,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 1920,
+      "shadowTris": 1920,
+      "points": 0
+     },
+     "finish": {
+      "objects": 0,
+      "tris": 0,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "riders": {
+      "objects": 132,
+      "tris": 63252,
+      "shadowTris": 63240,
+      "points": 0
+     },
+     "effects": {
+      "objects": 4,
+      "tris": 36,
+      "shadowTris": 0,
+      "points": 350
+     },
+     "props": {
+      "objects": 23,
+      "tris": 1184,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 1024,
+    "shadowsEnabled": true,
+    "programs": 25
+   },
+   "switchMetrics": {
+    "quality": "low",
+    "shadowMs": 4775.8,
+    "resizeMs": 7.2,
+    "totalMs": 4783
+   },
+   "qualitySwitches": [
+    {
+     "to": "low",
+     "costMs": 4783,
+     "frameIndex": 11,
+     "atSecond": 21.3,
+     "frameMs": 783.3,
+     "over50Around": 17,
+     "maxAround": 4783.2
+    }
+   ],
+   "render": {
+    "calls": 104,
+    "triangles": 189270,
+    "trees": 78,
+    "chunks": 51,
+    "visibleChunks": 11,
+    "quality": "low",
+    "mode": "model",
+    "geometries": 222,
+    "textures": 23
+   },
+   "finalPhase": "racing",
+   "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+   "mode": "full",
+   "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ]
+  }
+ ]
+}

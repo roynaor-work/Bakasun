@@ -1,4 +1,5 @@
-import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-naval-aim-20261030-1';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-perf-20261030-1';
+const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Pure presentation decisions; the simulation never imports this module. */
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 export function slideWeight(player,config){
@@ -8,7 +9,7 @@ export function slideWeight(player,config){
  return keys.at(-1).weight;
 }
 export function playerAnimation(player,state,config){
-  const a=config.view.animation,speed=Math.hypot(player.vx,player.vz),celebrating=state.phase==='goal'&&state.ball.lastPlayer===player.id,sprinting=player.id===state.controlled?state.sprint.active:player.sprinting;
+  const a=config.view.animation,speed=hypot2(player.vx,player.vz),celebrating=state.phase==='goal'&&state.ball.lastPlayer===player.id,sprinting=player.id===state.controlled?state.sprint.active:player.sprinting;
   const mode=celebrating?'celebrate':player.throwTime>0?'throw':player.hands?'catch':player.diveTime>0?'dive':player.catchTime>0?'catch':player.headerTime>0?'header':player.slideTime>0?'slide':player.recover>0?'recover':player.stealTime>0?'steal':player.kickTime>0?'kick':speed<=a.idleSpeed?'idle':sprinting?'sprint':'run';
   const clip=mode==='catch'&&player.hands&&speed>a.idleSpeed?'run':{idle:'stand',run:'run',sprint:'run',kick:'kick',steal:'stand',throw:'stand',dive:'stand',catch:'stand',slide:'stand',recover:'stand',header:'stand',celebrate:'jumping-jacks'}[mode];
   const recovery=mode==='slide'||mode==='recover'?slideWeight(player,config):1,header=mode==='header'?Math.sin((1-player.headerTime/config.aerial.seconds)*Math.PI):0,steal=mode==='steal'?Math.sin((1-player.stealTime/config.steal.animationSeconds)*Math.PI):0;
@@ -39,7 +40,7 @@ export function projectSoccerPoint(point,camera,aspect,config){
 /** Smooth tracking with velocity lead and zoom, then a hard fit for ball + player.
  * The fit is solved after smoothing, including the player's head and airborne ball. */
 export function soccerCamera(state,aspect,config,previous,dt=0){
-  const c=config.view.camera,b=state.ball,p=state.players[state.controlled],speed=Math.hypot(b.vx,b.vz),lead=Math.min(c.maxLead,speed*c.leadSeconds),length=speed||1;
+  const c=config.view.camera,b=state.ball,p=state.players[state.controlled],speed=hypot2(b.vx,b.vz),lead=Math.min(c.maxLead,speed*c.leadSeconds),length=speed||1;
   const wanted={x:(b.x+p.x)/2+b.vx/length*lead,z:(b.z+p.z)/2+b.vz/length*lead,distance:c.nearDistance+clamp(speed/c.fastBallSpeed,0,1)*c.speedZoom,direction:state.attackDir};
   const blend=previous?1-Math.exp(-c.smoothing*dt):1;
   const next={x:previous?previous.x+(wanted.x-previous.x)*blend:wanted.x,z:previous?previous.z+(wanted.z-previous.z)*blend:wanted.z,distance:previous?previous.distance+(wanted.distance-previous.distance)*blend:wanted.distance,direction:wanted.direction};
@@ -50,4 +51,22 @@ export function soccerCamera(state,aspect,config,previous,dt=0){
     const dx=point.x-next.x,dz=(point.z-next.z)*next.direction,y=point.y||0;
     next.distance=Math.max(next.distance,y*sin+dz*cos+Math.max(Math.abs(dx)/(tan*aspect*c.safeX),Math.abs(y*cos-dz*sin)/(tan*c.safeY)));
   }return next;
+}
+/** Adaptive-quality policy on wall-clock frame times (pure, unit-tested). sample() returns true when
+ * the view should step one tier down: either the average over `qualityWindowSeconds` is above
+ * `slowFrameMs`, or the last `qualityQuickFrames` frames average more than `qualityQuickFactor` times
+ * the budget. After a step (or at start) `qualityGraceSeconds` of frames are ignored, so compiles,
+ * resizes and the first frames of a match do not trigger a second step. */
+export function createQualityMonitor(view){
+  let frameSum=0,frameCount=0,seconds=0,quickSum=0,quickCount=0,grace=0;
+  const reset=()=>{frameSum=frameCount=seconds=quickSum=quickCount=grace=0;};
+  return {reset,sample(frameMs){
+    if(!Number.isFinite(frameMs)||frameMs<=0)return false;grace+=frameMs/1000;
+    if(grace<(view.qualityGraceSeconds??0))return false;
+    frameSum+=frameMs;frameCount++;seconds+=frameMs/1000;quickSum+=frameMs;quickCount++;
+    const quick=view.qualityQuickFrames||0;
+    if(quick&&quickCount>=quick){const slow=quickSum/quickCount>view.slowFrameMs*(view.qualityQuickFactor||1.8);quickSum=quickCount=0;if(slow){reset();return true;}}
+    if(seconds>=view.qualityWindowSeconds){const slow=frameSum/frameCount>view.slowFrameMs;seconds=frameSum=frameCount=0;if(slow){reset();return true;}}
+    return false;
+  }};
 }

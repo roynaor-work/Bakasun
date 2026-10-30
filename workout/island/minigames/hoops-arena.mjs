@@ -4,7 +4,7 @@
  * scoreboard and the light rig. Built once from the court geometry; nothing here decides play. */
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-naval-aim-20261030-1';
+import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-perf-20261030-1';
 
 const LINE=0.05;
 
@@ -73,7 +73,10 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
  // ---------- baskets ----------
  const padMat=new THREE.MeshStandardMaterial({color:new THREE.Color(home.primary).multiplyScalar(0.8),roughness:0.75});
  const steel=new THREE.MeshStandardMaterial({color:0x2a2e36,roughness:0.35,metalness:0.7});
- const glass=new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:0.05,metalness:0,transparent:true,opacity:0.18,clearcoat:1,side:THREE.DoubleSide,depthWrite:false});
+ // transparent + DoubleSide makes three.js draw the glass in two passes and rebuild its program
+ // key twice per board per frame (measured: the only material changing version every frame);
+ // one pass keeps both faces and the same look
+ const glass=new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:0.05,metalness:0,transparent:true,opacity:0.18,clearcoat:1,side:THREE.DoubleSide,depthWrite:false,forceSinglePass:true});
  const white=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.4});
  const orange=new THREE.MeshStandardMaterial({color:0xe2541a,roughness:0.35,metalness:0.55});
  dyn.nets=[];dyn.shotClocks=[];

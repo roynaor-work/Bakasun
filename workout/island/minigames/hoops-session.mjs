@@ -1,14 +1,15 @@
 /** Island Pro Basketball session: connects the 5 on 5 engine, the arena view, input, sound
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
-import {gameContext} from './context.mjs?v=island-naval-aim-20261030-1';
-import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-naval-aim-20261030-1';
-import {createHoopsControls} from './hoops-controls.mjs?v=island-naval-aim-20261030-1';
-import {createHoopsAudio} from './hoops-audio.mjs?v=island-naval-aim-20261030-1';
-import {hoopsIcon} from './hoops-icons.mjs?v=island-naval-aim-20261030-1';
-import {createFixedLoop} from './hoops-loop.mjs?v=island-naval-aim-20261030-1';
-import {createCourt} from './hoops-court.mjs?v=island-naval-aim-20261030-1';
-import {matchTeams} from './hoops-franchise.mjs?v=island-naval-aim-20261030-1';
+import {gameContext} from './context.mjs?v=island-perf-20261030-1';
+import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-perf-20261030-1';
+import {createHoopsControls} from './hoops-controls.mjs?v=island-perf-20261030-1';
+import {createHoopsAudio} from './hoops-audio.mjs?v=island-perf-20261030-1';
+import {hoopsIcon} from './hoops-icons.mjs?v=island-perf-20261030-1';
+import {createFixedLoop} from './hoops-loop.mjs?v=island-perf-20261030-1';
+import {createCourt} from './hoops-court.mjs?v=island-perf-20261030-1';
+import {matchTeams} from './hoops-franchise.mjs?v=island-perf-20261030-1';
+import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-perf-20261030-1';
 
 const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor((s*10)%10)}`;const m=Math.floor(s/60);return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
 
@@ -34,7 +35,7 @@ export function startHoops(ctx){
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
- const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-naval-aim-20261030-1',import.meta.url).href;screenEl.append(css);
+ const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-perf-20261030-1',import.meta.url).href;screenEl.append(css);
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
  const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
 
@@ -73,7 +74,7 @@ export function startHoops(ctx){
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
   const quality=Number(params.get('hoopsQuality')||setup.quality||2);
-  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-naval-aim-20261030-1');
+  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-perf-20261030-1');
   viewModule.then(m=>m.createHoopsView(canvas,{...balance,view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onProgress:p=>ringEl.style.setProperty('--p',String(p))})).then(loaded=>{
    if(disposed){loaded.dispose();return;}
    view=loaded;const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();
@@ -111,20 +112,22 @@ export function startHoops(ctx){
   const close=node('button','hoops-bench-close');close.type='button';close.setAttribute('aria-label',t('hoops.close'));close.append(hoopsIcon('back',doc));close.onclick=()=>{benchPanel.hidden=true;};benchPanel.append(close);
  }
 
+ const foulDots=[[...home.fouls.children],[...away.fouls.children]],pipDots=[...pips.children];let boardKey='';
  function hud(s,now){
-  home.sc.textContent=String(s.score[0]);away.sc.textContent=String(s.score[1]);
-  [...home.fouls.children].forEach((n,i)=>n.classList.toggle('on',i<s.teamFouls[0]));[...away.fouls.children].forEach((n,i)=>n.classList.toggle('on',i<s.teamFouls[1]));
+  setText(home.sc,String(s.score[0]));setText(away.sc,String(s.score[1]));
+  markFirst(foulDots[0],s.teamFouls[0]);markFirst(foulDots[1],s.teamFouls[1]);
   home.poss.classList.toggle('on',s.possession===0);away.poss.classList.toggle('on',s.possession===1);
-  [...pips.children].forEach((n,i)=>n.classList.toggle('on',i<Math.min(4,s.quarter)));pips.dataset.ot=String(s.overtime);
-  const c=fmtClock(s.clock);if(clock.textContent!==c)clock.textContent=c;
-  const sc=String(Math.ceil(s.shotClock));if(shotc.textContent!==sc)shotc.textContent=sc;shotc.dataset.low=String(s.shotClock<=5);shotc.hidden=!s.shotClockOn&&s.phase==='live';
-  bug.setAttribute('aria-label',t('hoops.board',{home:s.score[0],away:s.score[1],clock:c,quarter:s.quarter}));
-  const me=s.players.find(p=>p.id===s.controlled);
+  markFirst(pipDots,Math.min(4,s.quarter));setData(pips,'ot',String(s.overtime));
+  const c=fmtClock(s.clock);setText(clock,c);
+  const sc=String(Math.ceil(s.shotClock));setText(shotc,sc);setData(shotc,'low',String(s.shotClock<=5));setHidden(shotc,!s.shotClockOn&&s.phase==='live');
+  // the spoken board changes with the score, the clock and the quarter only
+  const bk=`${s.score[0]}|${s.score[1]}|${c}|${s.quarter}`;if(bk!==boardKey){boardKey=bk;setAttr(bug,'aria-label',t('hoops.board',{home:s.score[0],away:s.score[1],clock:c,quarter:s.quarter}));}
+  let me=null;for(const p of s.players)if(p.id===s.controlled){me=p;break;}
   const mode=me?.hasBall?'ball':s.possession===0&&s.ball.state!=='loose'?'offense':'defense';
   controls.setMode(mode);
   // shot meter above the shooter while a timed shot is held: red, yellow, green, yellow, red
-  const shooting=me&&me.act==='shoot'&&me.hasBall&&me.shotHeld;
-  meter.hidden=!shooting;
+  const shooting=!!(me&&me.act==='shoot'&&me.hasBall&&me.shotHeld);
+  setHidden(meter,!shooting);
   if(shooting&&view){
    const rel=balance.anim[me.shotType==='ft'?'freethrow':me.shotType]?.release||0.8,w=balance.shot.window,max=rel+w;
    const g=w*(balance.shot.green??0.35),y=w*(balance.shot.yellow??0.8),pct=v=>`${Math.max(0,v/max*100)}%`;
@@ -135,9 +138,9 @@ export function startHoops(ctx){
   }
   if(!grade.hidden&&now>gradeUntil)grade.hidden=true;
   if(!toast.hidden&&now>toastUntil)toast.hidden=true;
-  replayBtn.hidden=!(now<replayOffer&&!view?.replaying);
+  setHidden(replayBtn,!(now<replayOffer&&!view?.replaying));
   if(s.phase!=='timeout'&&!benchPanel.hidden&&s.phase==='live')benchPanel.hidden=true;
-  screenEl.dataset.hoopsPhase=s.phase;
+  setData(screenEl,'hoopsPhase',s.phase);
  }
 
  function tick(now){
@@ -148,7 +151,7 @@ export function startHoops(ctx){
   if(!paused&&!doc.hidden&&!view.replaying){
    loop.advance(dt,()=>{prev=cur;engine.step(controls.consume());cur=engine.snapshot();stepsRun++;handleEvents(engine.drainEvents());return cur.phase!=='final';});
   }
-  const holder=cur.players.find(p=>p.hasBall);
+  let holder=null;for(const p of cur.players)if(p.hasBall){holder=p;break;}
   if(holder&&cur.phase==='live'&&!paused){dribbleClock+=dt;const per=balance.view.dribblePeriod;if(dribbleClock>per){dribbleClock=0;audio.dribble(Math.hypot(holder.vx,holder.vz));}}
   const alpha=paused?1:loop.alpha;
   view.render(prev,cur,alpha,paused?0:dt);hud(cur,now);

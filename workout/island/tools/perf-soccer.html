@@ -1,0 +1,41 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>מדידת ביצועים: כדורגל</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    html,body{margin:0;height:100%;background:#0f2a24;color:#f5f8fa;direction:rtl;text-align:right;unicode-bidi:embed;font-family:system-ui,sans-serif}
+    .perf-shell{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:6px;padding:6px;box-sizing:border-box}
+    .perf-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;min-height:28px}
+    .perf-bar button{min-height:40px;padding-inline:14px;border-radius:10px;border:0;background:#b8f65b;color:#09131c;font-weight:700}
+    .perf-bar button[disabled]{opacity:.5}
+    .game-screen{width:100%;height:100%;padding:0}
+    .game-stage{border-radius:12px}
+    .perf-report{font-size:13px;line-height:1.4;max-height:42vh;overflow:auto;background:#091826;border-radius:10px;padding:8px}
+    .perf-report[hidden]{display:none}
+    .perf-report table{border-collapse:collapse;width:100%;max-width:520px}
+    .perf-report td,.perf-report th{padding:3px 8px;border-bottom:1px solid #22424c;text-align:right}
+    .perf-report td:last-child{direction:ltr;text-align:left;font-variant-numeric:tabular-nums}
+    .perf-report pre{direction:ltr;text-align:left;font-size:11px;white-space:pre-wrap;word-break:break-all;color:#c8d3dd}
+    .ltr{direction:ltr;display:inline-block}
+  </style>
+</head>
+<body>
+  <div class="perf-shell">
+    <div class="perf-bar">
+      <button id="perf-start" type="button">התחלת מדידה</button>
+      <span id="perf-status">לפני המדידה. המשחק רץ 30 שניות עם בוט, ואז מופיע הדוח.</span>
+    </div>
+    <section class="game-screen" data-game="soccer">
+      <div class="game-status" id="perf-live"></div>
+      <div class="game-stage"><canvas class="minigame-canvas" id="perf-canvas" tabindex="-1"></canvas></div>
+      <div class="game-controls" id="perf-controls"></div>
+    </section>
+    <section class="perf-report" id="perf-report" hidden></section>
+  </div>
+  <script type="module" src="./perf-soccer.mjs"></script>
+</body>
+</html>

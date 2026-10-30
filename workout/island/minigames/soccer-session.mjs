@@ -1,14 +1,14 @@
-import {createG3hAudio} from './g3h-audio.mjs?v=island-naval-aim-20261030-1';
-import {actionIcon} from './soccer-icons.mjs?v=island-naval-aim-20261030-1';
-import {createSoccer} from './soccer.mjs?v=island-naval-aim-20261030-1';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-naval-aim-20261030-1';
-import {stageObjective} from './soccer-campaign.mjs?v=island-naval-aim-20261030-1';
-import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-naval-aim-20261030-1';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-naval-aim-20261030-1';
-import {createSoccerView} from './soccer-view.mjs?v=island-naval-aim-20261030-1';
-import {createControls} from './controls.mjs?v=island-naval-aim-20261030-1';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-naval-aim-20261030-1';
-import {gameContext} from './context.mjs?v=island-naval-aim-20261030-1';
+import {createG3hAudio} from './g3h-audio.mjs?v=island-perf-20261030-1';
+import {actionIcon} from './soccer-icons.mjs?v=island-perf-20261030-1';
+import {createSoccer} from './soccer.mjs?v=island-perf-20261030-1';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-perf-20261030-1';
+import {stageObjective} from './soccer-campaign.mjs?v=island-perf-20261030-1';
+import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-perf-20261030-1';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-perf-20261030-1';
+import {createSoccerView} from './soccer-view.mjs?v=island-perf-20261030-1';
+import {createControls} from './controls.mjs?v=island-perf-20261030-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-perf-20261030-1';
+import {gameContext} from './context.mjs?v=island-perf-20261030-1';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -62,12 +62,12 @@ export function startSoccer(ctx) {
   function dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);events.abort();buttonInput?.reset();audio.dispose({finish:Boolean(model.result&&!context.drill)});input?.dispose();model.clearInput();view?.dispose();if(canvas)canvas.width=canvas.height=0;}
   function setPaused(value){paused=Boolean(value);audio.setPaused(paused);pendingSwap=false;last=0;buttonInput?.reset();input?.setEnabled(!paused&&(typeof document==='undefined'||!document.hidden));model.clearInput();if(!paused)canvas?.focus();}
   const session={dispose,setPaused,get snapshot(){return {...model.snapshot(),team,opponent,paused,disposed,audio:audio.snapshot,renderMetrics:view?.metrics()};}};
-  if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
+  if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-naval-aim-20261030-1',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-perf-20261030-1',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-naval-aim-20261030-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-perf-20261030-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
     document.addEventListener('pointerdown',()=>void audio.unlock(),options);
@@ -134,7 +134,7 @@ export function startSoccer(ctx) {
     function tick(at){
       if(disposed)return;
       const dt=last?Math.min((at-last)/1000,balance.rules.maxUpdateSeconds):0,frameMs=last?at-last:0;last=at;
-      const loading=view.metrics().assetStatus==='loading';loader.hidden=!loading;
+      const loading=view.loading();loader.hidden=!loading; // metrics() builds a large report; the loop only needs this flag
       if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.play('whistle');}if(dt>0){const sample=buttonInput.sample(input.sample(model.getState().attackDir));if(pendingSwap)sample.switchPlayer=true;pendingSwap=false;model.update(dt,sample);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else view.render(model.renderState?.()??model.getState(),0);
       banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();

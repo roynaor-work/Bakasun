@@ -21,7 +21,7 @@ export function passLaneClearance(point,from,to){
  const dx=to.x-from.x,dz=to.z-from.z,length=dx*dx+dz*dz;
  if(!length)return distance(point,from);
  const u=((point.x-from.x)*dx+(point.z-from.z)*dz)/length;
- return u<0||u>1?Infinity:distance(point,{x:from.x+u*dx,z:from.z+u*dz});
+ return u<0||u>1?Infinity:Math.hypot(point.x-(from.x+u*dx),point.z-(from.z+u*dz));
 }
 
 /** Closest approach during a ground pass, using observed defender velocity.
@@ -39,8 +39,9 @@ export function passInterceptionClearance(point,from,to,seconds){
 /** A carrier must see a real corridor past field defenders before shooting. */
 export function hasShootingLane(p,s,c){
  const d=s.attackDir*(p.team===0?1:-1),goalX=d*c.pitch.length/2;
- const defenders=s.players.filter(q=>q.team!==p.team&&q.role!=='keeper'),clearance=c.players.radius+c.physics.ballRadius+.2;
- return [-.35,0,.35].some(corner=>defenders.every(q=>passLaneClearance(q,s.ball,{x:goalX,z:corner*c.pitch.goalWidth})>=clearance));
+ const clearance=c.players.radius+c.physics.ballRadius+.2,target={x:goalX,z:0};
+ for(const corner of [-.35,0,.35]){target.z=corner*c.pitch.goalWidth;let open=true;for(const q of s.players)if(q.team!==p.team&&q.role!=='keeper'&&passLaneClearance(q,s.ball,target)<clearance){open=false;break;}if(open)return true;}
+ return false;
 }
 
 /** Selection and release share one bounded prediction, including at a touchline. */
@@ -51,16 +52,15 @@ export function teamPassPoint(member,c){
 
 /** Score only visible positions and motion: an open lateral pass can beat a marked runner. */
 export function selectTeamPass(p,s,c){
- const mates=s.players.filter(q=>q.team===p.team&&q.id!==p.id),fields=mates.filter(q=>q.role!=='keeper');
- const available=fields.filter(q=>!(q.recover>0)&&!(q.slideTime>0)),pool=available.length?available:fields.length?fields:mates;
- const opponents=s.players.filter(q=>q.team!==p.team),d=s.attackDir*(p.team===0?1:-1);
+ const mates=[],fields=[],available=[],opponents=[];
+ for(const q of s.players){if(q.team!==p.team){opponents.push(q);continue;}if(q.id===p.id)continue;mates.push(q);if(q.role==='keeper')continue;fields.push(q);if(!(q.recover>0)&&!(q.slideTime>0))available.push(q);}
+ const pool=available.length?available:fields.length?fields:mates,d=s.attackDir*(p.team===0?1:-1);
  const maxDistance=c.passing.maxDistance;
  let target=null,best=-Infinity;
  for(const member of pool){
   const destination=teamPassPoint(member,c);
-  const range=distance(p,destination),clearance=Math.min(6,...opponents.map(o=>distance(o,destination)));
-  const lane=Math.min(5,...opponents.map(o=>passLaneClearance(o,p,destination)));
-  const movingLane=Math.min(5,...opponents.map(o=>passInterceptionClearance(o,p,destination,c.passing.groundTravelSeconds)));
+  const range=distance(p,destination);let clearance=6,lane=5,movingLane=5;
+  for(const o of opponents){clearance=Math.min(clearance,distance(o,destination));lane=Math.min(lane,passLaneClearance(o,p,destination));movingLane=Math.min(movingLane,passInterceptionClearance(o,p,destination,c.passing.groundTravelSeconds));}
   const advance=clamp((destination.x-p.x)*d,-6,10);
   const tooClose=Math.max(0,c.ai.requestDistance-range),tooFar=Math.max(0,range-maxDistance);
   const value=lane*2.7+clearance*1.15+advance*c.ai.passSelectionAdvanceWeight-range*.09-tooClose*3-tooFar*2-Math.max(0,lane-movingLane)*.8;
@@ -71,8 +71,9 @@ export function selectTeamPass(p,s,c){
 
 /** A small incumbent advantage prevents two equally close teammates swapping duties every tick. */
 export function teamPresser(team,s,c){
- const b=s.ball,mates=s.players.filter(q=>q.team===team&&q.role!=='keeper');
- const active=mates.filter(q=>!(q.recover>0)&&!(q.slideTime>0)),pool=active.length?active:mates;
+ const b=s.ball,mates=[],active=[];
+ for(const q of s.players)if(q.team===team&&q.role!=='keeper'){mates.push(q);if(!(q.recover>0)&&!(q.slideTime>0))active.push(q);}
+ const pool=active.length?active:mates;
  const lead=c.tactics.interceptSeconds,point={x:b.x+(b.vx||0)*lead,z:b.z+(b.vz||0)*lead};
  let chaser=null,best=Infinity;
  for(const q of pool){
@@ -94,7 +95,7 @@ export function keeperTarget(p,s,c){
   const time=(goalLine-b.x)/b.vx;
   if(time>0&&time<.8)z=b.z+b.vz*time;
  }
- const ballDistance=distance(p,b),opposition=Math.min(Infinity,...s.players.filter(q=>q.team!==p.team).map(q=>distance(q,b)));
+ const ballDistance=distance(p,b);let opposition=Infinity;for(const q of s.players)if(q.team!==p.team)opposition=Math.min(opposition,distance(q,b));
  if(!owner&&b.y<=c.rules.pickupHeight&&Math.hypot(b.vx,b.vz)<a.keeperFastBall&&b.x*d<-hx+a.keeperChaseDistance&&Math.abs(b.z)<c.pitch.penaltyWidth/2-k.areaInset&&ballDistance<a.keeperChaseRadius&&opposition>ballDistance+.6){x=b.x;z=b.z;duty='keeper-sweep';}
  const limit=duty==='keeper-sweep'?c.pitch.penaltyWidth/2-k.areaInset:c.pitch.goalWidth/2-a.keeperPostInset;
  return {x:d*clamp(x*d,-hx+k.areaInset,-hx+c.pitch.penaltyDepth-k.areaInset),z:clamp(z,-limit,limit),duty};
