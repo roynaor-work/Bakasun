@@ -100,8 +100,11 @@ export class ActivityInterface {
     const heading=dialog.querySelector?.('h2'),subtitle=dialog.querySelector?.('.modal-subtitle');
     if(heading)heading.textContent='משחקי האי';if(subtitle)subtitle.textContent='בחרו משחק כדי להתחיל.';
     const cards=el('div','adventure-game-grid');cards.setAttribute('aria-label','משחקי האי');
-    for(const game of this.enabledGames()){
+    // The newest game leads the list with a badge, so a phone shows it without scrolling.
+    const games=this.enabledGames(),ordered=[...games.filter(g=>gameArtwork(g.id).isNew),...games.filter(g=>!gameArtwork(g.id).isNew)];
+    for(const game of ordered){
       const card=el('article','adventure-game-card');card.dataset.game=game.id;
+      if(gameArtwork(game.id).isNew){card.dataset.new='true';card.append(el('span','adventure-new','חדש'));}
       card.append(gameEmblem(game.id),el('p','adventure-game-category',gameArtwork(game.id).category),el('h3','',this.t(game.title)));
       const enter=button('כניסה','game-enter',()=>this.gameHome(game.id),'adventure-enter');enter.dataset.gameId=game.id;enter.setAttribute('aria-label','כניסה · '+this.t(game.title));card.append(enter);cards.append(card);
     }
