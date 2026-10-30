@@ -111,7 +111,7 @@ function inputHarness(t){
  const fire=node(),canvas={...node(),getBoundingClientRect:()=>({left:0,top:0,width:844,height:390})},win=node(),doc=node(),controls={querySelector:s=>s==='#shoot'?fire:null,dataset:{},style:{setProperty(){}}};
  const saved=new Map(['window','document'].map(key=>[key,Object.getOwnPropertyDescriptor(globalThis,key)]));Object.defineProperty(globalThis,'window',{configurable:true,value:win});Object.defineProperty(globalThis,'document',{configurable:true,value:doc});
  const model={ammoIndex:0,enemies:[{index:0,x:300,z:100,hp:1,active:true},{index:1,x:500,z:100,hp:1,active:true}],aim:{x:300,z:100},yaw:0,aiming:false,lockedTargetIndex:null,selectedTargetIndex:0,screenPoint:(x,z)=>({x,y:z,depth:1}),beginAim(index=0){this.aiming=true;this.lockedTargetIndex=index;this.aim={x:this.enemies[index].x,z:this.enemies[index].z};},cancelAim(){this.aiming=false;}};
- model.camera=navalCameraPose({x:60,z:0,heading:0},{x:340,z:0},false,balance);
+ model.camera=navalCameraPose({x:60,z:0,heading:0},{x:340,z:0},false,balance);model.turret={yaw:0,elevation:6,power:1};model.time=0;
  const input=createNavalInput({canvas,controls,balance},()=>model,()=>null);
  t.after(()=>{input.dispose();for(const [key,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}});
  return {model,fire,canvas,win,input};
@@ -120,7 +120,9 @@ test('naval tapping an enemy selects it without spending a shot, then fire locks
  const {model,fire,canvas,win,input}=inputHarness(t);canvas.emit('pointerdown',{clientX:500,clientY:100});win.emit('pointerup',{clientX:500,clientY:100});
  const tap=input.sample({});assert.equal(tap.selectTargetIndex,1);assert.equal(tap.fireRelease,false);assert.equal(tap.targetX,undefined);
  model.selectedTargetIndex=tap.selectTargetIndex;fire.emit('pointerdown');assert.equal(model.lockedTargetIndex,1);const held=input.sample({});assert.equal(held.aimHeld,true);assert.equal(held.fireRelease,false);
- win.emit('pointerup');const shot=input.sample({});assert.equal(shot.fireRelease,true);assert.deepEqual(shot.releaseTarget,{x:500,z:100,target:1});assert.equal(input.sample({}).fireRelease,false);
+ // 25/10/2026: a short press is a quick shot; a hold releases the turret's own settings, never a reticle point.
+ win.emit('pointerup');const shot=input.sample({});assert.equal(shot.quickShot,true);assert.equal(shot.fireRelease,false);assert.deepEqual(shot.releaseTarget,{target:1});assert.equal(input.sample({}).quickShot,false);
+ model.time=0;fire.emit("pointerdown");model.time=1.3;win.emit('pointermove',{clientX:720,clientY:280});const aimed=input.sample({});assert.equal(aimed.aimHeld,true);assert.ok(aimed.aimYaw>0);assert.ok(aimed.aimElevation>model.turret?.elevation||aimed.aimElevation>6);win.emit('pointerup',{clientX:720,clientY:280});const release=input.sample({});assert.equal(release.fireRelease,true);assert.equal(release.quickShot,false);assert.equal(release.aimYaw,aimed.aimYaw);assert.equal(release.aimElevation,aimed.aimElevation);assert.ok(release.aimPower>.9);assert.equal(input.sample({}).fireRelease,false);
 });
 test('naval cancellation, blur and disposal never release a held shot',t=>{
  const {fire,win,input}=inputHarness(t);

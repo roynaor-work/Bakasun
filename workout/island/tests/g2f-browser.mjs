@@ -45,21 +45,21 @@ try{for(const width of (process.env.G2F_WIDTH?[Number(process.env.G2F_WIDTH)]:[3
   await page.evaluate(()=>{window.__g2fNow=window.__island.games.now;window.__island.games.now=()=>0;});
   await start('navalDuel');assert.equal(await page.locator('[data-game-input]').count(),0);let m=await snap(),initial=m;
   const navalButton=await page.locator('#shoot').boundingBox(),navalFire={x:navalButton.x+navalButton.width/2,y:navalButton.y+navalButton.height/2};
-  // Holding locks the enemy; time changes the visible water point, never ammunition.
-  await touch('touchStart',navalFire);await tick(250);const locked=await snap();assert.ok(locked.aiming);assert.equal(locked.lockedTargetIndex,locked.enemyShip.index);assert.equal(locked.fired,0);await tick(250);assert.notDeepEqual((await snap()).aim,locked.aim);await cdp.send('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});await tick(32);assert.equal((await snap()).fired,0);
+  // 25/10/2026 archery aiming: holding locks the enemy and shows a still preview; a cancelled touch never fires.
+  await touch('touchStart',navalFire);await tick(1000);const locked=await snap();assert.ok(locked.aiming);assert.ok(locked.power>.99,'the power ring is full');assert.equal(locked.lockedTargetIndex,locked.enemyShip.index);assert.equal(locked.fired,0);await tick(250);assert.deepEqual((await snap()).prediction.landing,locked.prediction.landing);await cdp.send('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});await tick(32);assert.equal((await snap()).fired,0);
   const navalStick=await page.locator('.soccer-stick-zone').boundingBox(),navalSx=navalStick.x+navalStick.width*.4,navalSy=navalStick.y+navalStick.height*.6;
   await touch('touchStart',{x:navalSx,y:navalSy});await touch('touchMove',{x:navalSx,y:navalSy-38});await tick(2800);await touch('touchEnd');await tick(700);
   const insideRing=await snap();assert.equal(initial.rangeState.inside,false);assert.equal(insideRing.rangeState.inside,true);assert.ok(insideRing.rangeState.spread<initial.rangeState.spread);
   let calculated,aimed,landed;const navalShots=[];
-  for(let attempt=0;attempt<6;attempt++){
-   const before=await snap();await touch('touchStart',navalFire);await tick(300+attempt*90);const held=await snap();assert.equal(held.fired,before.fired);assert.ok(held.aiming);
-   // The reticle already includes gentle wind. Freeze exactly the visible point.
-   calculated={...held.aim};await touch('touchEnd');await tick(32);const launch=await snap();aimed=launch.ball;assert.equal(launch.fired,before.fired+1);assert.equal(launch.ammo[0],before.ammo[0]-1);assert.equal(aimed.targetX,calculated.x);assert.equal(aimed.targetZ,calculated.z);
-   await tick(Math.ceil(aimed.duration*1000)+20);landed=await snap();assert.equal(landed.blast.x,calculated.x);assert.equal(landed.blast.z,calculated.z);navalShots.push({calculated,shot:aimed,blast:landed.blast});if(landed.blast.hit)break;
+  for(let attempt=0;attempt<8;attempt++){
+   // Each attempt raises the barrel a little by dragging up; the release flies the previewed arc.
+   const before=await snap();await touch('touchStart',navalFire);await tick(120);await touch('touchMove',{x:navalFire.x,y:navalFire.y-14});await tick(900);const held=await snap();assert.equal(held.fired,before.fired);assert.ok(held.aiming);
+   calculated={...held.prediction.end};await touch('touchEnd');await tick(32);const launch=await snap();aimed=launch.ball;assert.equal(launch.fired,before.fired+1);assert.equal(launch.ammo[0],before.ammo[0]-1);assert.equal(aimed.predicted.end.x,calculated.x);assert.equal(aimed.predicted.end.z,calculated.z);
+   await tick(Math.ceil(aimed.duration*1000)+20);landed=await snap();if(!landed.blast.hit){assert.equal(landed.blast.x,aimed.predicted.landing.x);assert.equal(landed.blast.z,aimed.predicted.landing.z);}navalShots.push({calculated,shot:aimed,blast:landed.blast});if(landed.blast.hit)break;await tick(400);
   }
   assert.ok(landed.blast.hit);assert.ok(landed.enemyFleetHp<initial.enemyFleetHp);assert.ok(landed.cooldowns.every(n=>n===0));
   const navalAudio=await page.evaluate(()=>window.__island.games.current.session.debug.audio.metrics());assert.ok(navalAudio.counts.cannon>0);assert.ok(navalAudio.counts.explosion>0);
-  await writeFile(new URL(`../verification/g6e/g2f-${width}x${Number(process.env.G2F_HEIGHT)||(width===390?844:740)}-verification.json`,import.meta.url),JSON.stringify({entryWidth:width,portraitGuard,gameplayViewport:page.viewportSize(),insideRing:insideRing.rangeState,outsideRing:initial.rangeState,locked,navalShots,navalAudio,checks:{ring:true,releaseOnly:true,enemyLock:true,jitter:true,calculatedLanding:true,actualHit:true}})+'\n');
+  await writeFile(new URL(`../verification/g6e/g2f-${width}x${Number(process.env.G2F_HEIGHT)||(width===390?844:740)}-verification.json`,import.meta.url),JSON.stringify({entryWidth:width,portraitGuard,gameplayViewport:page.viewportSize(),insideRing:insideRing.rangeState,outsideRing:initial.rangeState,locked,navalShots,navalAudio,checks:{ring:true,releaseOnly:true,enemyLock:true,stillPreview:true,calculatedLanding:true,actualHit:true}})+'\n');
   const ratio=await page.locator('.game-stage').evaluate(n=>n.getBoundingClientRect().height/innerHeight);assert.ok(ratio>.6);await exit();
   await page.evaluate(()=>{const {engine}=window.__island,s=JSON.parse(engine.exportJSON());s.minigameProgress.navalDuel={stage:10,stars:[1,1,1,1,1,1,1,1,1,0]};if(!engine.importJSON(s).ok)throw Error('stage fixture');});await start('navalDuel',10);m=await snap();assert.equal(m.enemies.filter(e=>e.active).length,3);for(const point of m.enemyScreens.filter((_,i)=>m.enemies[i].active))assert.ok(point.x>0&&point.x<m.viewport.modelWidth&&point.y>0&&point.y<m.viewport.modelHeight);await shot('naval');await exit();
   // One finite locked shot loses, then Retry restores the six-weapon allocation.
