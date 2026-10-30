@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' file: data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'">
+<title>האי שלי · עומק אפוי</title>
+<style>
+:root{color-scheme:dark;font-family:Arial,sans-serif;background:#101d27;color:#eaf3f3;--mint:#5fe1be}*{box-sizing:border-box}body{margin:0}header,main,footer{max-width:1120px;margin:auto;padding:24px}header{padding-top:46px}a{color:var(--mint)}.eyebrow{color:var(--mint);font-size:13px;letter-spacing:2px}h1{font-size:clamp(34px,6vw,68px);margin:12px 0;line-height:1.05}header p{color:#b4c7ce;max-width:680px;line-height:1.7}nav{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 0}button{border:1px solid #526773;background:#1d303e;color:inherit;padding:12px 16px;border-radius:30px;font:inherit;cursor:pointer;min-height:44px}button[aria-pressed=true]{background:var(--mint);color:#11252a;border-color:var(--mint)}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ffd58a;outline-offset:4px}.controls{display:flex;gap:18px;flex-wrap:wrap;align-items:center;position:sticky;top:0;background:#101d2aee;padding:14px 0;z-index:5;border-bottom:1px solid #354b5a}.controlgroup{display:flex;gap:6px}section{padding:28px 0;border-bottom:1px solid #354b5a}.sectionhead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}h2{font-size:26px;margin:0 0 14px}.note,.caption,footer{color:#b4c7ce;font-size:14px;line-height:1.65}.tag{color:var(--mint);font-size:12px;border:1px solid #386459;padding:6px 10px;border-radius:30px}.compare{position:relative;overflow:hidden;border-radius:18px;background:#3e5260;direction:ltr;margin:0;aspect-ratio:844/390;isolation:isolate}.compare img{position:absolute;width:100%;height:100%;inset:0;object-fit:contain}.after{clip-path:inset(0 calc(100% - var(--split,50%)) 0 0)}.divider{position:absolute;left:var(--split,50%);height:100%;top:0;border-left:2px solid #f6ebcb;pointer-events:none}.divider:after{content:'↔';position:absolute;top:50%;left:-20px;background:#f6ebcb;color:#193340;border-radius:25px;width:38px;height:38px;text-align:center;line-height:38px}.label{position:absolute;top:12px;background:#10242bdf;padding:7px 12px;border-radius:20px;font-size:12px;z-index:2;direction:rtl}.label.left{left:12px}.label.right{right:12px}.range{display:block;width:100%;accent-color:var(--mint);margin:16px 0;height:28px;direction:ltr}.sliderlabel{display:flex;justify-content:space-between;font-size:13px}.caption{margin:8px 0 0}.portrait .compare{aspect-ratio:390/844;max-width:390px;margin:auto}.portrait .stage{background:#162832;border-radius:18px;padding:0 14px}.maps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.mapcard{background:#1b2e3b;border-radius:14px;padding:14px;min-width:0}.mapcard img{width:100%;aspect-ratio:1;object-fit:contain;border-radius:8px;background:white}.mapcard p{margin:8px 0;font-size:13px;line-height:1.6}.maprow{display:flex;gap:8px}.maprow a{width:50%;display:block}details{margin-top:28px}summary{cursor:pointer;padding:15px 0}footer{padding-bottom:42px}@media(max-width:600px){header,main,footer{padding:18px}header{padding-top:30px}.controls{gap:10px}.controls button{padding:10px 12px;font-size:14px}.maps{grid-template-columns:1fr}.mapcard{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center}.mapcard .maprow{grid-column:1}.mapcard>div:last-child{grid-column:2;grid-row:1}.tag{font-size:11px}.portrait .stage{padding:0}h2{font-size:23px}}
+</style>
+<style>@media(max-height:500px){.controls{position:static}}</style>
+<header><div class="eyebrow">האי שלי / חבילת סביבה 03</div><h1>יותר עומק.<br>אותה גאומטריה.</h1><p>הצללה אפויה סביב מדרגות, קורות ושולי מסלול. השוו את אותם מודלים, באותה מצלמה ובאותה חשיפה, לפני האפייה ואחריה. כל התמונות נטענות מהתיקייה — גם ללא חיבור.</p><nav><a href="#soccer-stadium">אצטדיון</a> · <a href="#basketball-arena">אולם</a> · <a href="#ski-slope">מדרון</a> · <a href="README.md">הוראות שילוב</a></nav></header>
+<main>
+<div class="controls"><div class="controlgroup" aria-label="כיוון טלפון"><button type="button" data-orientation="landscape" aria-pressed="true">רוחב</button><button type="button" data-orientation="portrait" aria-pressed="false">אורך</button></div><div class="controlgroup" aria-label="מפות מוצגות"><button type="button" data-state="ao" aria-pressed="true">AO בלבד</button><button type="button" data-state="light" aria-pressed="false">AO + תאורה</button></div></div>
+<div id="scenes"></div>
+<details><summary>המפות עצמן · נתונים ליניאריים בגווני אפור</summary><div class="maps" id="maps"></div></details>
+<p class="note">זו תצוגת רינדורים מה־GLB הסופיים ומה־WebP המסופקים. אין כאן AO, צללים או תאורה מחושבים בזמן ריצה. הרינדורים אינם משחק פעיל; הנכסים עדיין אינם מחוברים למשחק.</p>
+<noscript>כדי להזיז את ההשוואה יש להפעיל JavaScript מקומי. אפשר לפתוח ישירות את תמונות לפני/אחרי בתיקיית previews.</noscript>
+</main><footer>יצירה מקורית עבור המאגר · 30.10.2026 · <a href="LICENSES.md">מקורות ורישיונות</a> · <a href="manifest.json">נתוני אפייה</a></footer>
+<script>
+const assets=[
+ ['soccer-stadium','אצטדיון הכדורגל','UV שני בעותק','בדקו את העומק בין שורות היציעים, מתחת לגג ובסביבת השערים. הדשא הוא מרקם הסביבה הקיים.'],
+ ['basketball-arena','אולם הכדורסל','UV מקורי','בדקו את מדרגות היציעים, מפגש הקורות והגג ובסיסי הסלים. הפרקט הוא מרקם הסביבה הקיים.'],
+ ['ski-slope','מקטע המדרון','UV מקורי','בדקו את החיבור בין שולי השלג למסלול, את דפנות המקטע ואת מגע מוטות הסלאלום. השלג הוא מרקם הסביבה הקיים.']];
+let orientation='landscape',state='ao';
+const container=document.getElementById('scenes');
+for(const [id,title,uv,note] of assets){
+ const section=document.createElement('section');section.id=id;
+ section.innerHTML=`<div class="sectionhead"><h2>${title}</h2><span class="tag">${uv}</span></div><div class="stage"><figure class="compare" style="--split:50%"><img class="before" alt="${title} לפני אפייה" width="844" height="390"><img class="after" alt="${title} אחרי אפייה" width="844" height="390"><span class="label left">אחרי</span><span class="label right">לפני</span><div class="divider"></div></figure></div><label class="sliderlabel" for="split-${id}"><span>השוואת לפני ואחרי</span><output>50%</output></label><input id="split-${id}" class="range" aria-label="השוואת לפני ואחרי: ${title}" type="range" min="0" max="100" value="50"><p class="caption">${note}</p>`;
+ section.querySelector('input').addEventListener('input',e=>{section.querySelector('figure').style.setProperty('--split',e.target.value+'%');section.querySelector('output').textContent=e.target.value+'%'});
+ container.append(section);
+ document.getElementById('maps').insertAdjacentHTML('beforeend',`<div class="mapcard"><div class="maprow"><a href="${id}-ao.webp"><img src="${id}-ao.webp" alt="מפת AO: ${title}" width="512" height="512"></a><a href="${id}-light.webp"><img src="${id}-light.webp" alt="מפת תאורה: ${title}" width="256" height="256"></a></div><div><strong>${title}</strong><p>AO: ‏512×512<br>תאורה: ‏256×256<br>WebP ללא אובדן · אפור</p></div></div>`);
+}
+function update(){
+ document.body.classList.toggle('portrait',orientation==='portrait');
+ for(const [id] of assets){const s=document.getElementById(id);s.querySelector('.before').src=`previews/${id}-${orientation}-before.webp`;s.querySelector('.after').src=`previews/${id}-${orientation}-${state}.webp`;}
+ document.querySelectorAll('[data-orientation]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.orientation===orientation)));
+ document.querySelectorAll('[data-state]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.state===state)));
+}
+document.querySelectorAll('[data-orientation]').forEach(b=>b.addEventListener('click',()=>{orientation=b.dataset.orientation;update()}));
+document.querySelectorAll('[data-state]').forEach(b=>b.addEventListener('click',()=>{state=b.dataset.state;update()}));
+update();
+</script>
+</html>

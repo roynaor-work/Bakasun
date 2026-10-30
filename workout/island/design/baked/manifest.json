@@ -1,0 +1,187 @@
+{
+  "source_main": "039419a2182d40f12d9acbfe0451e18118394d41",
+  "generator": "Blender 5.2.2 LTS / Cycles CPU",
+  "linear_data": true,
+  "ao_size": [
+    512,
+    512
+  ],
+  "light_size": [
+    256,
+    256
+  ],
+  "light_clamp": [
+    0.35,
+    1
+  ],
+  "preview": "Emission-only; no runtime shadows or AO. Same camera, surface textures, exposure in all states.",
+  "assets": [
+    {
+      "id": "soccer-stadium",
+      "source_sha256": "51cdd93d182affb042a4cdf13d02538af5ba84f83721e1fed438741baf9bcc0a",
+      "original_uv_audit": {
+        "raster_size": 1024,
+        "covered_pixels": 1047733,
+        "overlap_pixels": 88871,
+        "out_of_range_triangles": 0,
+        "degenerate_uv_triangles": 0
+      },
+      "bake_uv_audit": {
+        "raster_size": 1024,
+        "covered_pixels": 96499,
+        "overlap_pixels": 0,
+        "out_of_range_triangles": 0,
+        "degenerate_uv_triangles": 0
+      },
+      "uv_set": 1,
+      "ao_distance_m": 4.0,
+      "samples": 64,
+      "occluders": [
+        "soccer-goal at y=+/-52.5m, z=.04m, inward facing"
+      ],
+      "coordinates": "Blender Z-up metres; glTF is Y-up",
+      "maps": {
+        "ao": {
+          "file": "soccer-stadium-ao.webp",
+          "bytes": 37496,
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "66ebe4dc0e82212100574e2a6a1a3d0570dade8dfdc41b11a889dea680e26ad5",
+          "min": 0,
+          "max": 255,
+          "mean": 190.424,
+          "grayscale": true
+        },
+        "light": {
+          "file": "soccer-stadium-light.webp",
+          "bytes": 9662,
+          "size": [
+            256,
+            256
+          ],
+          "sha256": "f3ea7e4dfe2df64f03fa920a2cb8bc0396165092e757068fea36c0dc41984385",
+          "min": 89,
+          "max": 255,
+          "mean": 189.425,
+          "grayscale": true
+        }
+      }
+    },
+    {
+      "id": "basketball-arena",
+      "source_sha256": "af8132875dcdef22c61828fd48d7549fbb98d82b55ae654abdd26dcd100fc556",
+      "original_uv_audit": {
+        "raster_size": 1024,
+        "covered_pixels": 250182,
+        "overlap_pixels": 0,
+        "out_of_range_triangles": 0,
+        "degenerate_uv_triangles": 0
+      },
+      "bake_uv_audit": {
+        "raster_size": 1024,
+        "covered_pixels": 250182,
+        "overlap_pixels": 0,
+        "out_of_range_triangles": 0,
+        "degenerate_uv_triangles": 0
+      },
+      "uv_set": 0,
+      "ao_distance_m": 1.4,
+      "samples": 64,
+      "occluders": [
+        "built-in basket frames"
+      ],
+      "coordinates": "Blender Z-up metres; glTF is Y-up",
+      "maps": {
+        "ao": {
+          "file": "basketball-arena-ao.webp",
+          "bytes": 45000,
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "b8b48cc49b4eb1bb15ebd602870f25940833afa14545f8b7358ca20686bb6f1f",
+          "min": 0,
+          "max": 255,
+          "mean": 175.665,
+          "grayscale": true
+        },
+        "light": {
+          "file": "basketball-arena-light.webp",
+          "bytes": 14244,
+          "size": [
+            256,
+            256
+          ],
+          "sha256": "26dc464348c3414cd50a33deb7d9d11798b37dfac994c409f9c564424879e25b",
+          "min": 89,
+          "max": 255,
+          "mean": 168.66,
+          "grayscale": true
+        }
+      }
+    },
+    {
+      "id": "ski-slope",
+      "source_sha256": "baafa97d96757d5c48f1f5439e0a5360adaebc211c4e19e65f2d284e82093a77",
+      "original_uv_audit": {
+        "raster_size": 1024,
+        "covered_pixels": 710011,
+        "overlap_pixels": 0,
+        "out_of_range_triangles": 0,
+        "degenerate_uv_triangles": 0
+      },
+      "bake_uv_audit": {
+        "raster_size": 1024,
+        "covered_pixels": 710011,
+        "overlap_pixels": 0,
+        "out_of_range_triangles": 0,
+        "degenerate_uv_triangles": 0
+      },
+      "uv_set": 0,
+      "ao_distance_m": 1.8,
+      "samples": 64,
+      "occluders": [
+        "slalom-gate at (0,0,3.25)m"
+      ],
+      "coordinates": "Blender Z-up metres; glTF is Y-up",
+      "maps": {
+        "ao": {
+          "file": "ski-slope-ao.webp",
+          "bytes": 12086,
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "89ac08f5376ab7d36b7385bc6dffbd8a80c877e8f3b5fa00be99a8a5d6b726d8",
+          "min": 0,
+          "max": 255,
+          "mean": 246.51,
+          "grayscale": true
+        },
+        "light": {
+          "file": "ski-slope-light.webp",
+          "bytes": 8080,
+          "size": [
+            256,
+            256
+          ],
+          "sha256": "147bc2289a82f851c6ae4d4c4098a8ead2bec272802cb69ef6dd88d080a088c8",
+          "min": 89,
+          "max": 255,
+          "mean": 200.163,
+          "grayscale": true
+        }
+      }
+    }
+  ],
+  "context_sources_sha256": {
+    "models/soccer-goal.glb": "d3254bc4386dd68c8016a1ce1e2dace8bd9cf43bee96d1bc4838ebfa0f18f7c4",
+    "models/slalom-gate.glb": "854106e16f811ee009bcbab5215abba5d7e9b10045946e152b8e4a3f6d89b76b",
+    "models/basketball-hoop.glb": "be3985a93134befa940a44b583741683782032193a650db81f2b612b08f0fc35",
+    "environment/textures/grass-mown.webp": "97f43fdc80259fb8b8942849287fb4e416783fbb6950f303fe1d602f9e139699",
+    "environment/textures/parquet.webp": "59dc1c9a3565211c024a2001c4bdbec1eb74c0b5ab2039664a9f4b0e9de1b7cd",
+    "environment/textures/snow.webp": "da1fd1ca5ee934daf7221007a3a3f506edb966e9f88997281629348b60456b0f"
+  }
+}

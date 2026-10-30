@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "limit_bytes": 1200000,
+  "whole_folder_bytes": 562878,
+  "file_count": 39,
+  "maps_count": 6,
+  "maps_bytes": 126568,
+  "previews_count": 18,
+  "source_hashes_unchanged": true,
+  "grayscale_linear_webp": true,
+  "preview_differences": [
+    {
+      "asset": "soccer-stadium",
+      "orientation": "portrait",
+      "size": [
+        390,
+        844
+      ],
+      "mean_rgb_change_ao": 2.969,
+      "mean_rgb_change_light": 3.157
+    },
+    {
+      "asset": "soccer-stadium",
+      "orientation": "landscape",
+      "size": [
+        844,
+        390
+      ],
+      "mean_rgb_change_ao": 3.615,
+      "mean_rgb_change_light": 3.07
+    },
+    {
+      "asset": "basketball-arena",
+      "orientation": "portrait",
+      "size": [
+        390,
+        844
+      ],
+      "mean_rgb_change_ao": 3.808,
+      "mean_rgb_change_light": 3.47
+    },
+    {
+      "asset": "basketball-arena",
+      "orientation": "landscape",
+      "size": [
+        844,
+        390
+      ],
+      "mean_rgb_change_ao": 3.144,
+      "mean_rgb_change_light": 3.138
+    },
+    {
+      "asset": "ski-slope",
+      "orientation": "portrait",
+      "size": [
+        390,
+        844
+      ],
+      "mean_rgb_change_ao": 1.935,
+      "mean_rgb_change_light": 5.502
+    },
+    {
+      "asset": "ski-slope",
+      "orientation": "landscape",
+      "size": [
+        844,
+        390
+      ],
+      "mean_rgb_change_ao": 1.377,
+      "mean_rgb_change_light": 3.349
+    }
+  ],
+  "geometry_status": "PASS",
+  "browser_status": "PASS",
+  "gpu_rgba8_per_scene_bytes": 1310720,
+  "gpu_rgba8_all_scenes_bytes": 3932160,
+  "gpu_uv1_stadium_bytes": 82112
+}
