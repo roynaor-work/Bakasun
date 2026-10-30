@@ -38,25 +38,52 @@ export function soccerCrowd(T,scene,config,track){
  const sections=sectionSizes.map((size,section)=>Array.from({length:size},(_,i)=>{
   const row=i%3,column=Math.floor(i/3),columns=Math.ceil((size-row)/3),fraction=(column+.5)/Math.max(1,columns),span=(section<2?hx:hz)-.6;
   const along=(fraction*2-1)*span,offset=.035*Math.sin(i*2.17+section);
-  return section===0?{x:along,z:-hz-3.2-row*1.15,y:.24+row*.65,yaw:0,offset}:
+  const position=section===0?{x:along,z:-hz-3.2-row*1.15,y:.24+row*.65,yaw:0,offset}:
    section===1?{x:along,z:hz+3.2+row*1.15,y:.24+row*.65,yaw:Math.PI,offset}:
    {x:(section===2?-1:1)*(hx+4.5+row*1.1),z:along,y:.24+row*.65,yaw:section===2?Math.PI/2:-Math.PI/2,offset};
+  return {...position,section,sectionIndex:i,sectionSize:size};
  }));
  const supporters=[];
  for(let i=0;supporters.length<capacity;i++)for(let section=0;section<sections.length;section++)if(sections[section][i])supporters.push(sections[section][i]);
  for(let i=0;i<capacity;i++){
   const supporter=supporters[i],shirt=shirts[(i*7+Math.floor(i/9))%shirts.length];
   supporter.cos=Math.cos(supporter.yaw);supporter.sin=Math.sin(supporter.yaw);supporter.scale=.91+(i%7)*.025;
+  supporter.fallbackPosition={x:supporter.x,y:supporter.y,z:supporter.z};
+  // The imported 68x105m venue has seven .375m-scaled tiers. Occupy four
+  // alternating rows so seated bodies remain above the model rather than
+  // inside its concrete. This changes placement only, never crowd capacity.
+  const section=supporter.section,slot=supporter.sectionIndex%4,row=slot*2,column=Math.floor(supporter.sectionIndex/4);
+  const columns=Math.max(1,Math.ceil((supporter.sectionSize-slot)/4)),fraction=(column+.5)/columns;
+  const sx=config.pitch.length/105,sz=config.pitch.width/68,sy=Math.min(sx,sz);
+  const span=section<2?(50.3+row*.8)*sx*.93:(31.3+row*.8)*sz*.90,designAlong=(fraction*2-1)*span;
+  const height=(1.42+row*1.16)*sy-.26*supporter.scale;
+  supporter.designPosition=section<2?{x:designAlong,y:height,z:(section===0?-1:1)*(36.21+row*1.35)*sz}:
+   {x:(section===2?-1:1)*(55.21+row*1.35)*sx,y:height,z:designAlong};
+  supporter.hidden=false;
   parts.body.setColorAt(i,color.set(shirt));parts.head.setColorAt(i,color.set(skins[(i*5+Math.floor(i/8))%skins.length]));parts.hair.setColorAt(i,color.set(hairs[(i*3+Math.floor(i/5))%hairs.length]));
   parts.arms.setColorAt(i*2,color.set(shirt));parts.arms.setColorAt(i*2+1,color.set(shirt));
   if(i%flagEvery===0)parts.flags.setColorAt(i/flagEvery,color.set(i%24===0?'#d0b97b':'#3b7191'));
  }
  for(const mesh of Object.values(parts))if(mesh.instanceColor)mesh.instanceColor.needsUpdate=true;
- let count=capacity,lastFrame=-1,lastCheering=false;
+ let count=capacity,lastFrame=-1,lastCheering=false,designStadium=false,nearSide=1;
+ function setNearSide(direction){
+  const next=direction<0?-1:1;if(next===nearSide)return;nearSide=next;
+  if(designStadium){for(const supporter of supporters)supporter.hidden=supporter.section===(nearSide<0?0:1);lastFrame=-1;}
+ }
+ function setDesignStadium(enabled){
+  const next=Boolean(enabled);if(next===designStadium)return;designStadium=next;
+  for(const supporter of supporters){
+   const position=designStadium?supporter.designPosition:supporter.fallbackPosition;
+   supporter.x=position.x;supporter.y=position.y;supporter.z=position.z;
+   supporter.hidden=designStadium&&supporter.section===(nearSide<0?0:1);
+  }
+  lastFrame=-1;
+ }
  const put=(mesh,i,p,x,y,z,rz=0,sx=1,sy=1,sz=1)=>{
-  const scale=p.scale;dummy.position.set(p.x+(x*p.cos+z*p.sin)*scale,p.y+y*scale,p.z+(z*p.cos-x*p.sin)*scale);dummy.rotation.set(0,p.yaw,rz);dummy.scale.set(scale*sx,scale*sy,scale*sz);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);
+  const scale=p.hidden?0:p.scale;dummy.position.set(p.x+(x*p.cos+z*p.sin)*scale,p.y+y*scale,p.z+(z*p.cos-x*p.sin)*scale);dummy.rotation.set(0,p.yaw,rz);dummy.scale.set(scale*sx,scale*sy,scale*sz);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);
  };
- function update(time,cheering){
+ function update(time,cheering,direction=nearSide){
+  setNearSide(direction);
   // Supporters do not require the simulation's frame rate. Twenty updates per
   // second keep calm rows still and celebration waves smooth on mobile.
   const frame=Math.floor(time*(cheering?24:12));if(frame===lastFrame&&cheering===lastCheering)return;lastFrame=frame;lastCheering=cheering;
@@ -76,5 +103,5 @@ export function soccerCrowd(T,scene,config,track){
   for(const mesh of Object.values(parts))mesh.instanceMatrix.needsUpdate=true;
  }
  update(0,false);
- return {get count(){return count;},set count(value){const next=Number.isFinite(value)?Math.min(capacity,Math.max(0,Math.floor(value))):0;if(next===count)return;count=next;for(const key of ['body','head','hair'])parts[key].count=count;parts.arms.count=count*2;parts.flags.count=Math.ceil(count/flagEvery);lastFrame=-1;},update};
+ return {get count(){return count;},set count(value){const next=Number.isFinite(value)?Math.min(capacity,Math.max(0,Math.floor(value))):0;if(next===count)return;count=next;for(const key of ['body','head','hair'])parts[key].count=count;parts.arms.count=count*2;parts.flags.count=Math.ceil(count/flagEvery);lastFrame=-1;},setDesignStadium,update};
 }

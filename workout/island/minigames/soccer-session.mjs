@@ -1,4 +1,4 @@
-import {createG3hAudio} from './g3h-audio.mjs?v=island-perf-20261030-1';
+import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
 import {actionIcon} from './soccer-icons.mjs?v=island-perf-20261030-1';
 import {createSoccer} from './soccer.mjs?v=island-perf-20261030-1';
 import {soccerShotIcon} from './soccer-presentation.mjs?v=island-perf-20261030-1';
@@ -54,7 +54,7 @@ export function startSoccer(ctx) {
   const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=soccerViewConfig(context,balance),{team,opponent}=viewConfig;
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});
   let storage;try{storage=globalThis.localStorage;}catch{}
-  const audio=createG3hAudio({storage});
+  const audio=createSoccerDesignAudio({storage,pitchLength:balance.pitch.length});
   // Bonus penalties follow every league match; the match result is kept untouched.
   let shootout=null,shootoutWait=0;const penaltiesOn=!context.drill&&!!balance.league?.penalties&&!!balance.league?.leagues?.length;
   let view,input,buttonInput,frame,last=0,hud=0,paused=false,disposed=false,handed=balance.controls.rightHanded,hudSignature='',mode='',started=false,pendingSwap=false;
@@ -138,7 +138,7 @@ export function startSoccer(ctx) {
       if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.play('whistle');}if(dt>0){const sample=buttonInput.sample(input.sample(model.getState().attackDir));if(pendingSwap)sample.switchPlayer=true;pendingSwap=false;model.update(dt,sample);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else view.render(model.renderState?.()??model.getState(),0);
       banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
-      const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅'}[s.restart.type]:s.phase==='halftime'?'↔':'';
+      const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅'}[s.restart.type]:s.phase==='halftime'?'↔':s.phase==='goal'&&view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':'';
       phaseBanner.hidden=!phaseText;if(phaseBanner.textContent!==phaseText)phaseBanner.textContent=phaseText;
       audio.update(s);
       for(const event of model.drainEvents?.()||[]){audio.event(event);actionFeedback(event);}

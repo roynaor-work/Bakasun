@@ -1,0 +1,21 @@
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-intro{display:block;width:min(28vh,210px);height:min(28vh,210px);max-width:100%;object-fit:contain;flex:none;margin-inline:auto;filter:drop-shadow(0 8px 18px #0004)}
+.modal[data-game-home="soccer"]>.adventure-game-hero{position:relative;isolation:isolate;align-self:start;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:0;overflow:hidden;pointer-events:none;padding:8px}
+.modal[data-game-home="soccer"] .soccer-design-intro{position:static;inset:auto;pointer-events:none}
+.modal[data-game-home="soccer"]>.soccer-design-kits{grid-column:1/-1;grid-row:5;position:relative;z-index:1;min-width:0;min-height:min-content;height:max-content;align-self:start}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kits{direction:rtl;box-sizing:border-box;width:100%;margin-block:12px;border:1px solid #7494a3;border-radius:14px;background:#132a36;color:#f1f4e9;text-align:start;overflow:hidden}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kits-summary{min-height:48px;box-sizing:border-box;padding:13px 16px;cursor:pointer;font-size:16px;font-weight:700;line-height:1.4}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kits-summary:focus-visible{outline:3px solid #dfff8a;outline-offset:-4px}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;border:0;padding:10px;margin:0;min-width:0}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-grid legend{font-size:15px;padding-inline:5px;line-height:1.5}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-choice{display:grid;grid-template-columns:24px minmax(0,1fr);gap:4px;align-items:center;position:relative;box-sizing:border-box;min-width:0;min-height:124px;padding:7px;border:2px solid #547581;border-radius:10px;background:#203d49;color:#fff;cursor:pointer;font-size:14px;line-height:1.35}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-choice:has(input:checked){border-color:#d8f58b;background:#2a493e}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-choice:focus-within{outline:3px solid #e5fcb7;outline-offset:1px}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-radio{width:20px;height:20px;min-height:20px;padding:0;margin:0;accent-color:#b8f65b}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-preview{display:flex;justify-content:center;align-items:center;gap:0;min-width:0;grid-column:2;grid-row:1}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-preview img{display:block;width:50%;height:auto;max-height:72px;object-fit:contain;transform:none}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-name{grid-column:1/-1;font-size:14px}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-mark{grid-column:1/-1;visibility:hidden;font-size:14px;color:#e1f9b2}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) input:checked~.soccer-design-kit-mark{visibility:visible}
+:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-current{display:block;min-height:20px;padding:0 12px 10px;font-size:14px;line-height:1.5}
+@media(max-width:520px){:is([data-game-home="soccer"],[data-stage-map="soccer"]) .soccer-design-kit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-height:440px) and (orientation:landscape){[data-game-home="soccer"] .soccer-design-intro{width:124px;height:124px}}
