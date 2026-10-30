@@ -1,134 +1,57 @@
-/** Island Pro Basketball — player avatars: adult MakeHuman (CC0) bodies with a full rig,
- * uniforms cut from the body, motion-capture clips (CMU, retargeted) and the ball hand.
- * An avatar only shows the engine state it is given; clip time of shots, jumps and moves is
- * taken from the engine action time, so the release in the animation is the engine release. */
+/** Design basketball avatar: one local Draco GLB, one mesh and one shared cached clip set. */
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
+import {HoopsDRACOLoader as DRACOLoader} from './hoops-draco.mjs';
 import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
-import {jerseyTexture,shortsTexture} from './hoops-textures.mjs?v=island-perf-20261030-1';
-import {shareSkeletons} from './hoops-perf.mjs?v=island-perf-20261030-1';
-
-const BODY_FOR_POS={PG:'guard',SG:'guard',SF:'wing',PF:'forward',C:'big'};
-const HAIR=/short0|afro|long0|bob0|braid|pony/i;
+import {bakeHoopsMotion,createMotionMachine} from './hoops-motion.mjs';
 
 export async function loadPlayerAssets(cfg,base,onProgress){
- const loader=new GLTFLoader();
- const names=Object.keys(cfg.models);let done=0;
- const tick=()=>{done++;onProgress?.(done/(names.length+1));};
- const bodies={};
- await Promise.all(names.map(async k=>{const g=await loader.loadAsync(new URL(cfg.models[k],base).href);bodies[k]=g;tick();}));
- const anim=await loader.loadAsync(new URL(cfg.animations,base).href);tick();
- const clips=new Map(anim.animations.map(c=>[c.name,c]));
- // skin textures of all bodies share the MakeHuman UV layout: any skin fits any body
- const skins=[];
- for(const k of names)bodies[k].scene.traverse(o=>{if(o.isMesh&&/^Human_x/.test(o.name)&&o.material.map&&!skins.includes(o.material.map))skins.push(o.material.map);});
- return {bodies,clips,skins};
+ const decoder=new DRACOLoader().setDecoderPath(new URL('vendor/draco/',base).href).setDecoderConfig({type:'wasm'});decoder.setWorkerLimit(1);
+ const loader=new GLTFLoader().setDRACOLoader(decoder);
+ const json=async path=>{const r=await fetch(new URL(path,base));if(!r.ok)throw Error('Hoops asset '+path+': '+r.status);return r.json();};
+ let body;
+ try{
+  const loaded=await Promise.allSettled([loader.loadAsync(new URL('design/characters/basketball-player.glb',base).href),json('design/characters/rig.json'),json('design/motion/hoops.json'),json('design/viewer/retarget-map.json')]);
+  body=loaded[0].status==='fulfilled'?loaded[0].value:null;const failed=loaded.find(r=>r.status==='rejected');if(failed)throw failed.reason;
+  const [,rig,motion,map]=loaded.map(r=>r.value);
+  onProgress?.(.25);
+  const baked=await bakeHoopsMotion(body.scene,rig,motion,map);onProgress?.(1);
+  return {...baked,body,rig,base,dispose(){body.scene.traverse(o=>{if(o.isMesh){o.geometry.dispose();o.material.dispose();}});}};
+ }catch(error){body?.scene.traverse(o=>{if(o.isMesh){o.geometry.dispose();o.material.dispose();}});throw error;}finally{decoder.dispose();}
 }
-
-/** Bone lookup that ignores the "mixamorig:" prefix variants the exporter may write. */
-function bone(root,name){let found=null;root.traverse(o=>{if(!found&&o.isBone&&o.name.replace(/^mixamorig:?/,'')===name)found=o;});return found;}
-
-const trimShader=(trimColor,waistColor)=>sh=>{
- sh.uniforms.uTrim={value:new THREE.Color(trimColor)};sh.uniforms.uWaist={value:new THREE.Color(waistColor)};
- sh.vertexShader=sh.vertexShader.replace('#include <color_pars_vertex>','#include <color_pars_vertex>\nattribute vec4 trim;\nvarying vec2 vTrim;').replace('#include <color_vertex>','#include <color_vertex>\nvTrim=trim.rg;');
- sh.fragmentShader=sh.fragmentShader.replace('#include <color_pars_fragment>','#include <color_pars_fragment>\nvarying vec2 vTrim;uniform vec3 uTrim;uniform vec3 uWaist;')
-  .replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.rgb=mix(diffuseColor.rgb,uTrim,smoothstep(0.42,0.52,vTrim.x));diffuseColor.rgb=mix(diffuseColor.rgb,uWaist,smoothstep(0.4,0.6,vTrim.y));');
-};
-
-/** Shorts carry no number: one texture per team look, shared by every avatar of the team. */
-function teamShorts(assets,teamLook){
- const cache=assets.shorts||(assets.shorts=new Map()),key=JSON.stringify([teamLook.primary,teamLook.secondary,teamLook.trim,teamLook.mark]);
- let t=cache.get(key);if(!t){t=shortsTexture(teamLook);cache.set(key,t);}
- return t;
-}
-
-export function createAvatar(assets,card,teamLook,opts={}){
- const kind=card.look?.body||BODY_FOR_POS[card.pos]||'wing';
- const src=assets.bodies[kind]||Object.values(assets.bodies)[0];
- const root=cloneSkinned(src.scene);root.name='player-'+card.id;
- // the clone gives every skinned mesh its own Skeleton over the same bones: share one
- const skinned=[];root.traverse(o=>{if(o.isSkinnedMesh)skinned.push(o);});shareSkeletons(skinned);
- const mats=[];
- const skin=assets.skins[(card.look?.skin??0)%Math.max(1,assets.skins.length)];
- root.traverse(o=>{
-  if(!o.isMesh)return;
-  o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;
-  const name=o.name;
-  if(/Jersey|Shorts/.test(name)){
-   const ga=o.geometry.attributes;
-   if(!ga.trim&&(ga.color_1||ga.color))o.geometry.setAttribute('trim',ga.color_1||ga.color);
-   const isJ=/Jersey/.test(name);
-   const map=isJ?jerseyTexture({primary:teamLook.primary,secondary:teamLook.secondary,trim:teamLook.trim,number:card.number,wordmark:teamLook.wordmark,name:card.shortName||card.name,dark:teamLook.darkText}):teamShorts(assets,teamLook);
-   const m=new THREE.MeshStandardMaterial({map,roughness:0.78,metalness:0,side:THREE.DoubleSide});if(!isJ)m.userData.sharedMap=true;
-   m.onBeforeCompile=trimShader(teamLook.trim,isJ?teamLook.secondary:new THREE.Color(teamLook.primary).multiplyScalar(0.55));
-   m.customProgramCacheKey=()=>'hoops-uniform';
-   o.material=m;mats.push(m);return;
-  }
-  const m=o.material.clone();m.transparent=false;m.depthWrite=true;
-  if(HAIR.test(name)||/eyebrow|eyelash/i.test(name)){m.alphaTest=/eyelash|eyebrow/i.test(name)?0.3:0.45;m.side=THREE.DoubleSide;if(card.look?.hairTint)m.color=new THREE.Color(card.look.hairTint);}
-  else m.alphaTest=0;
-  if(/^Human_x/.test(name)){if(skin)m.map=skin;m.roughness=0.62;m.metalness=0;}
-  if(/shoes/i.test(name)){m.color=new THREE.Color(teamLook.shoe||'#f2f2f2');m.roughness=0.55;}
-  o.material=m;mats.push(m);
+function bone(root,name){return root.getObjectByName(name)||null;}
+export function createAvatar(assets,card,teamLook){
+ const root=cloneSkinned(assets.body.scene);root.name='player-'+card.id;
+ const kitUniforms={uHoopsBase:{value:new THREE.Color(teamLook.primary)},uHoopsAccent:{value:new THREE.Color(teamLook.trim||teamLook.secondary)},uHoopsPattern:{value:-1}};
+ const mats=[];root.traverse(o=>{if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;
+  o.material=o.material.clone();o.material.roughness=.75;mats.push(o.material);
+  // Original purple/amber garment vertex colours become each club's colours. Skin stays intact.
+  const geometry=o.geometry.clone(),src=geometry.getAttribute('color');o.geometry=geometry;
+  const primary=new THREE.Color(teamLook.primary),trim=new THREE.Color(teamLook.trim||teamLook.secondary);
+  const garment=new Float32Array(src?.count||0);
+  if(src)for(let i=0;i<src.count;i++){const r=src.getX(i),g=src.getY(i),b=src.getZ(i);if(b>.12&&b>r*1.25&&b>g*1.3){garment[i]=1;src.setXYZ(i,primary.r,primary.g,primary.b);}else if(r>.4&&g>.12&&b<g*.65){garment[i]=2;src.setXYZ(i,trim.r,trim.g,trim.b);}}
+  geometry.setAttribute('hoopsGarment',new THREE.BufferAttribute(garment,1));
+  o.material.onBeforeCompile=shader=>{
+   Object.assign(shader.uniforms,kitUniforms);
+   shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nattribute float hoopsGarment;varying float vHoopsGarment;varying vec2 vHoopsUv;').replace('#include <begin_vertex>','#include <begin_vertex>\nvHoopsGarment=hoopsGarment;vHoopsUv=position.xy;');
+   shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying float vHoopsGarment;varying vec2 vHoopsUv;uniform vec3 uHoopsBase;uniform vec3 uHoopsAccent;uniform float uHoopsPattern;').replace('#include <color_fragment>',`#include <color_fragment>
+    if(uHoopsPattern>=0.0&&vHoopsGarment>0.5){
+     float x=vHoopsUv.x,y=vHoopsUv.y,mark=0.0;
+     if(uHoopsPattern<0.5)mark=step(0.18,abs(x));
+     else if(uHoopsPattern<1.5)mark=step(0.35,abs(x)/max(0.1,y-0.55));
+     else if(uHoopsPattern<2.5)mark=step(0.55,fract(y*8.0+abs(fract(x*5.0)*2.0-1.0)*0.45));
+     else if(uHoopsPattern<3.5)mark=1.0-smoothstep(0.15,0.23,length(fract(vec2(x*10.0,y*9.0))-0.5));
+     else if(uHoopsPattern<4.5)mark=step(0.3,fract(y*5.0+step(0.0,x)*0.4));
+     else mark=step(0.65,fract(y*7.0+0.2*sin(x*20.0)));
+     diffuseColor.rgb=mix(uHoopsBase,uHoopsAccent,max(mark,step(1.5,vHoopsGarment)));
+    }`);
+  };
+  o.material.customProgramCacheKey=()=>'hoops-design-kit-patterns';
  });
- if(card.look?.hidden)for(const h of card.look.hidden)root.traverse(o=>{if(o.isMesh&&o.name.includes(h))o.visible=false;});
- const scale=(card.ratings?.height||200)/(opts.baseHeights?.[kind]||(kind==='guard'?188:kind==='wing'?198:kind==='forward'?203:209));
- root.scale.setScalar(scale);
- const mixer=new THREE.AnimationMixer(root);
- const actions={};
- for(const [name,clip] of assets.clips){const a=mixer.clipAction(clip);a.enabled=true;a.setEffectiveWeight(0);a.play();actions[name]=a;}
- const hands={r:bone(root,'RightHand'),l:bone(root,'LeftHand'),rIdx:bone(root,'RightHandMiddle1'),lIdx:bone(root,'LeftHandMiddle1')};
- const spine=bone(root,'Spine2'),rArm=bone(root,'RightArm'),lArm=bone(root,'LeftArm'),rFore=bone(root,'RightForeArm'),lFore=bone(root,'LeftForeArm');
- const av={root,mixer,actions,hands,kind,scale,cur:null,weights:{},card,mats,
-  dispose(){mixer.stopAllAction();for(const m of mats){if(!m.userData.sharedMap)m.map?.dispose?.();m.dispose();}},
- };
- // locomotion state
- let baseClip='idle',baseT=0,lastSync=null;
- const W={};for(const k in actions)W[k]=0;
- function want(name,dt,fade=0.18){
-  for(const k in W){const target=k===name?1:0,step=dt/Math.max(0.001,fade);W[k]+=(target-W[k])*Math.min(1,step*3);if(W[k]<0.003)W[k]=0;}
- }
- av.pose=function(p,ctx,dt){
-  const sp=Math.hypot(p.vx,p.vz),fx=Math.sin(p.face),fz=Math.cos(p.face);
-  const fwd=(p.vx*fx+p.vz*fz),lat=(p.vx*fz-p.vz*fx);   // lat>0 = to the player's left
-  let name='idle',rate=1,sync=null;
-  const defending=ctx.defending;
-  if(p.act==='shoot'){
-   const t=p.shotType==='dunk'?'layup':p.shotType==='ft'?'freethrow':p.shotType;
-   name=t;sync=p.actT*(p.shotType==='dunk'?1.08:1);
-  } else if(p.act==='cross'||p.act==='spin'){name=p.act==='spin'?'spin':'crossover';sync=p.actT*(p.act==='spin'?1.9:1.45);}
-  else if(p.air&&(p.act==='block'||p.act==='rebound')){name='jump';sync=0.28+ctx.airU*0.62;}
-  else if(p.stumble){name='stop';sync=0.55;}
-  else if(p.hasBall){
-   if(sp<0.45){name=ctx.dribbling?'dribble_stand':'idle_ball';}
-   else if(sp<2.4){name='dribble_walk';rate=sp/1.84;}
-   else {name='jog';rate=sp/4.0;}
-  } else if(defending&&sp>0.45&&Math.abs(lat)>Math.abs(fwd)*0.9){name=lat>0?'slide_l':'slide_r';rate=Math.abs(lat)/3.0;}
-  else if(defending&&sp<=0.6){name='def_hold';}
-  else if(sp<0.35)name='idle';
-  else if(fwd<-0.8&&sp<4){name='jog';rate=-sp/4.0;}
-  else if(sp<1.9){name='walk';rate=sp/1.37;}
-  else if(sp<4.4){name='jog';rate=sp/4.0;}
-  else if(sp<5.7){name='run';rate=sp/4.77;}
-  else {name='sprint';rate=sp/6.47;}
-  if(!actions[name])name='idle';
-  want(name,dt,sync!=null?0.08:0.2);
-  for(const k in actions){const a=actions[k];a.setEffectiveWeight(W[k]);
-   if(W[k]===0)continue;
-   if(k===name&&sync!=null){a.time=Math.min(sync,a.getClip().duration-0.001);a.setEffectiveTimeScale(0);}
-   else if(k===name){a.setEffectiveTimeScale(clamp(rate,-2.2,2.2));}
-  }
-  mixer.update(dt);
-  // procedural layers on top of the clip: pass push, steal reach, ball carry
-  if(p.act==='pass'&&rArm&&lArm){const u=Math.min(1,p.actT/0.16);const k=Math.sin(u*Math.PI)*0.9;rArm.rotateX(-k);lArm.rotateX(-k);rFore&&rFore.rotateX(-k*0.6);lFore&&lFore.rotateX(-k*0.6);}
-  if(p.act==='steal'&&rArm){const u=Math.min(1,p.actT/0.4);const k=Math.sin(u*Math.PI)*1.1;rArm.rotateX(-k);spine&&spine.rotateX(k*0.25);}
-  if(ctx.contest&&lArm&&rArm&&!p.hasBall&&p.act!=='shoot'&&!p.air){lArm.rotateZ(-0.9*ctx.contest);rArm.rotateZ(0.9*ctx.contest);}
-  // block and rebound: both arms reach straight up through the jump
-  if(p.air&&(p.act==='block'||p.act==='rebound')&&lArm&&rArm){const k=Math.min(1,0.35+ctx.airU*1.4);lArm.rotateZ(-2.6*k);rArm.rotateZ(2.6*k);lFore&&lFore.rotateZ(-1.6*k);rFore&&rFore.rotateZ(1.6*k);}
-  // a pass on its way: hands up in front of the chest, ready to catch
-  if(ctx.catching&&!p.hasBall&&lArm&&rArm&&!p.air){lArm.rotateX(-0.9);rArm.rotateX(-0.9);lFore&&lFore.rotateX(-0.5);rFore&&rFore.rotateX(-0.5);}
- };
- return av;
+ root.scale.setScalar((card.ratings?.height||200)/160);
+ const machine=createMotionMachine(root,assets);
+ const hands={r:bone(root,'RightHand'),l:bone(root,'LeftHand')};
+ return {root,hands,applyKit(kit){kitUniforms.uHoopsBase.value.set(kit.base);kitUniforms.uHoopsAccent.value.set(kit.accent);kitUniforms.uHoopsPattern.value=['sides','rays','zigzag','dots','step','wave'].indexOf(kit.pattern);},mixer:machine.mixer,actions:machine.actions,mats,kind:'design',pose(p,ctx,dt){machine.step(p,ctx,dt);},event:machine.event,
+  get motionState(){return machine.state;},dispose(){machine.dispose();root.traverse(o=>{if(o.isMesh)o.geometry.dispose();if(o.isSkinnedMesh)o.skeleton.dispose();});for(const m of mats)m.dispose();}};
 }
-const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export {bone};
