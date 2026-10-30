@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "burning-ball-glow",
+  "image": "burning-ball-glow.webp",
+  "atlasSize": {
+    "width": 512,
+    "height": 512
+  },
+  "frameSize": {
+    "width": 128,
+    "height": 128
+  },
+  "columns": 4,
+  "rows": 4,
+  "frameCount": 16,
+  "fps": 20,
+  "frameOrder": "row-major-left-to-right-top-to-bottom",
+  "indexBase": 0,
+  "loop": true,
+  "durationSeconds": 0.8,
+  "paddingPixels": 8,
+  "pivot": {
+    "x": 0.5,
+    "y": 0.5
+  },
+  "alphaMode": "straight",
+  "colorSpace": "srgb",
+  "blendMode": "additive",
+  "depthWrite": false,
+  "sampling": {
+    "minFilter": "linear",
+    "magFilter": "linear",
+    "wrap": "clamp-to-edge",
+    "mipmaps": false,
+    "uvInsetPixels": 0.5
+  },
+  "opacityEnvelope": [
+    {
+      "time": 0,
+      "opacity": 1
+    },
+    {
+      "time": 0.8,
+      "opacity": 1
+    }
+  ],
+  "envelopeInterpolation": "smoothstep",
+  "loopSeam": "same-source-phase-first-and-last-frame",
+  "lowEnd": {
+    "maxInstances": 1,
+    "maxScreenFractionPerInstance": 0.025,
+    "residentTextureBytes": 1048576,
+    "drawCallsPerInstanceUpperBound": 1,
+    "trianglesPerInstance": 2,
+    "postprocessing": false
+  },
+  "fileBytes": 120744,
+  "sha256": "bd18fe3072163ac2323b139dee9afa3a30cdeed82d7de9c14ea856b2a717ca13"
+}

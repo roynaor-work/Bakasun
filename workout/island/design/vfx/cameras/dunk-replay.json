@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "id": "dunk-replay",
+  "anchor": "rim-ground-center",
+  "coordinateSpace": "anchor-local-meters",
+  "up": [
+    0,
+    1,
+    0
+  ],
+  "fovAxis": "vertical",
+  "fovUnit": "degrees",
+  "timeUnit": "seconds",
+  "durationSeconds": 6.6,
+  "pathDurationSeconds": 5.4,
+  "entry": {
+    "durationSeconds": 0.6,
+    "from": "captured-current-camera",
+    "easing": "smootherstep"
+  },
+  "exit": {
+    "durationSeconds": 0.6,
+    "to": "live-gameplay-camera",
+    "easing": "smootherstep"
+  },
+  "easing": {
+    "type": "smootherstep",
+    "formula": "6*u^5 - 15*u^4 + 10*u^3",
+    "scope": "whole-path-timeline-once",
+    "uRange": [
+      0,
+      1
+    ]
+  },
+  "interpolation": {
+    "type": "cubic-hermite",
+    "tangentUnit": "value-per-second",
+    "channels": [
+      "position",
+      "target",
+      "fov"
+    ],
+    "continuity": "C1"
+  },
+  "points": [
+    {
+      "time": 0.0,
+      "position": [
+        5.5,
+        3.3,
+        8
+      ],
+      "target": [
+        0,
+        1.8,
+        3
+      ],
+      "fov": 54,
+      "positionTangent": [
+        0,
+        0,
+        0
+      ],
+      "targetTangent": [
+        0,
+        0,
+        0
+      ],
+      "fovTangent": 0
+    },
+    {
+      "time": 1.35,
+      "position": [
+        5,
+        3.5,
+        6.8
+      ],
+      "target": [
+        0,
+        2.3,
+        1.8
+      ],
+      "fov": 53,
+      "positionTangent": [
+        -0.407407407,
+        0.185185185,
+        -0.888888889
+      ],
+      "targetTangent": [
+        0.0,
+        0.462962963,
+        -1.111111111
+      ],
+      "fovTangent": -0.740740741
+    },
+    {
+      "time": 2.7,
+      "position": [
+        4.4,
+        3.8,
+        5.6
+      ],
+      "target": [
+        0,
+        3.05,
+        0
+      ],
+      "fov": 52,
+      "positionTangent": [
+        -0.444444444,
+        0.074074074,
+        -0.592592593
+      ],
+      "targetTangent": [
+        0.0,
+        0.037037037,
+        -0.481481481
+      ],
+      "fovTangent": 0.0
+    },
+    {
+      "time": 4.05,
+      "position": [
+        3.8,
+        3.7,
+        5.2
+      ],
+      "target": [
+        0,
+        2.4,
+        0.5
+      ],
+      "fov": 53,
+      "positionTangent": [
+        -0.37037037,
+        -0.148148148,
+        -0.074074074
+      ],
+      "targetTangent": [
+        0.0,
+        -0.611111111,
+        0.37037037
+      ],
+      "fovTangent": 1.111111111
+    },
+    {
+      "time": 5.4,
+      "position": [
+        3.4,
+        3.4,
+        5.4
+      ],
+      "target": [
+        0,
+        1.4,
+        1
+      ],
+      "fov": 55,
+      "positionTangent": [
+        0,
+        0,
+        0
+      ],
+      "targetTangent": [
+        0,
+        0,
+        0
+      ],
+      "fovTangent": 0
+    }
+  ],
+  "cuts": [],
+  "rollDegrees": 0,
+  "shake": false,
+  "loop": false,
+  "replayContactPathTime": 2.7,
+  "reducedMotion": "skip-track-retain-gameplay-camera",
+  "onSkip": "blend-to-live-gameplay-camera-using-exit-duration"
+}
