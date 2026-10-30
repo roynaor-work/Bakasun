@@ -46,7 +46,16 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const placed = (geo, x = 0, y = 0, z = 0, rx = 0, ry = 0, s = 1) => geo.applyMatrix4(new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromEuler(new THREE.Euler(rx, ry, 0)), new THREE.Vector3(s, s, s)));
   const canvasTexture = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; return tex; };
 
-  const designWorld=await loadAlpineWorld({isDisposed});
+  let designWorld;
+  try { designWorld=await loadAlpineWorld({isDisposed}); }
+  catch(error) {
+    // This await precedes course/actor construction. The complete scene
+    // disposer below is not initialized yet, so release the boot resources.
+    for(const m of [snow,ice,navy,orange,white,stone,green,red,gold])m.dispose();
+    envTarget.dispose();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();
+    if(!canvas)renderer.domElement.remove();
+    throw error;
+  }
   snow.map=designWorld.snowTexture; snow.color.set('#ffffff'); snow.onBeforeCompile=()=>{}; snow.customProgramCacheKey=()=> 'alpine-design-snow';
   scene.background=new THREE.Color(look.fog);
   let granite=new THREE.Texture(),rockTextureError=null;try{granite=await new THREE.TextureLoader().loadAsync(rockTextureUrl);}catch(error){rockTextureError=String(error?.message||'rock-texture-unavailable');}
@@ -227,7 +236,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   function seedTracks(frames){previousTracks.clear();trackCount=trackNext=0;for(const state of frames)rememberTracks(state,true);trackFull=true;}
   let lastTrackS=0;
   const reduced = globalThis.matchMedia?.('(prefers-reduced-motion:reduce)').matches ?? false;
-  vfx=await createAlpineVfx({scene,worldPoint,surfaceHeight:x=>surfaceHeight(x,pipe),frameAt,reducedMotion:reduced,crashSeconds:physics.crashSeconds});
+  try { vfx=await createAlpineVfx({scene,worldPoint,surfaceHeight:x=>surfaceHeight(x,pipe),frameAt,reducedMotion:reduced,crashSeconds:physics.crashSeconds}); }
+  catch(error) { disposeAll(); throw error; }
   function resize(){if(disposed)return;const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
   ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
   // Warm the shader cache while the loading card is up: every material in the scene, including the
