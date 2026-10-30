@@ -1,4 +1,5 @@
 import * as T from '../vendor/three.module.js';
+const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
 /** Bounded presentation cues driven only by the live state and event id. */
 export function createUltraSoccerEffects(scene,config,track){
@@ -20,7 +21,7 @@ export function createUltraSoccerEffects(scene,config,track){
     const item=nodes[cursor++%nodes.length];item.age=0;item.mesh.position.set(x,.045,z);item.scale=scale;item.mesh.material.color.set(tint);item.mesh.visible=true;
   }
   return {update(s,dt,quality){
-    const b=s.ball,speed=Math.hypot(b.vx,b.vz),event=s.event;
+    const b=s.ball,speed=hypot2(b.vx,b.vz),event=s.event;
     if(s.eventId!==lastEvent){lastEvent=s.eventId;
       if(['shot','pass','header','save','post','steal'].includes(event?.type)){const p=s.players[event.player??b.lastPlayer];cue(p?.x??b.x,p?.z??b.z,event.type==='shot'?1.2:.8,event.type==='save'?'#b3e0df':'#e7dfbd');}
     }
@@ -38,7 +39,7 @@ export function createUltraSoccerEffects(scene,config,track){
       geometry.attributes.position.needsUpdate=geometry.attributes.color.needsUpdate=true;
     }
     let count=0;
-    for(const p of s.players){const running=Math.hypot(p.vx,p.vz)>3.8||p.slideTime>0;if(!running)continue;for(let k=0;k<3;k++){
+    for(const p of s.players){const running=hypot2(p.vx,p.vz)>3.8||p.slideTime>0;if(!running)continue;for(let k=0;k<3;k++){
       const u=((s.elapsed*4+p.id*.21+k/3)%1),spread=p.slideTime>0?.25:.13;
       dummy.position.set(p.x-p.fx*u*.65+Math.sin(k*5)*spread,.028,p.z-p.fz*u*.65+Math.cos(k*5)*spread);dummy.rotation.set(-Math.PI/2,0,Math.atan2(p.fx,p.fz));dummy.scale.setScalar(1-u);dummy.updateMatrix();scuffs.setMatrixAt(count++,dummy.matrix);
     }}scuffs.count=quality<2?count:0;scuffs.instanceMatrix.needsUpdate=true;

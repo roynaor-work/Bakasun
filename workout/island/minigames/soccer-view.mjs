@@ -7,14 +7,16 @@ import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-naval-aim-20261030-1';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=island-naval-aim-20261030-1';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor} from './soccer-presentation.mjs?v=island-naval-aim-20261030-1';
 import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-naval-aim-20261030-1';
 import {holdSoccerBall} from './soccer-poses.mjs?v=island-naval-aim-20261030-1';
 import {passDestination} from './soccer.mjs?v=island-naval-aim-20261030-1';
 import {setupAthletes} from './soccer-athlete.mjs?v=island-naval-aim-20261030-1';
 import {createAthleteMotion,athleteLook,ATHLETE_BONES} from './soccer-athlete-motion.mjs?v=island-naval-aim-20261030-1';
 import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-naval-aim-20261030-1';
+const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
+const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   const roster=config.players.roster;let poseFocus=null,poseMode=null,poses=[];
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
@@ -61,7 +63,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   }
   const count=config.view.crowd.count,crowd=soccerCrowd(T,scene,config,track);
   const numberCanvas=document.createElement('canvas');numberCanvas.width=512;numberCanvas.height=64;const numberContext=numberCanvas.getContext('2d'),numberTexture=track(new T.CanvasTexture(numberCanvas));numberTexture.colorSpace=T.SRGBColorSpace;
-  let numberSignature='';
+  let numberSignature='';const numbersShown=[],framingShown={ball:null,controlled:null,camera:{},elevationDegrees:0},edgeShown={x:0,y:0,angle:0};
   const practiceTarget=new T.Mesh(track(new T.RingGeometry(.55,.7,20)),mat('#ffdc70',{side:T.DoubleSide}));scene.add(practiceTarget);
   const practiceCones=new T.InstancedMesh(track(new T.ConeGeometry(.22,.6,6)),mat('#f0a947'),2);scene.add(practiceCones);
   const boxes=new T.InstancedMesh(track(new T.BoxGeometry(1,1,1)),track(new T.MeshLambertMaterial()),108);
@@ -80,11 +82,13 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   const particleCount=config.view.confettiCount,particles=Array.from({length:particleCount},()=>({x:0,y:-10,z:0,vx:0,vy:0,vz:0,life:0,rotation:0}));
   const confetti=new T.InstancedMesh(track(new T.PlaneGeometry(.12,.23)),track(new T.MeshBasicMaterial({side:T.DoubleSide})),particleCount);confetti.frustumCulled=false;scene.add(confetti);
   const trailConfig=config.view.trail,trail=new T.InstancedMesh(track(new T.SphereGeometry(trailConfig.radius,trailConfig.radialSegments,trailConfig.heightSegments)),track(new T.MeshBasicMaterial({color:'#fff8d6',transparent:true,opacity:trailConfig.opacity,depthWrite:false})),trailConfig.count);trail.frustumCulled=false;scene.add(trail);
-  let disposed=false,lastEvent=0,time=0,goalPulse=0,goalTeam=0,quality=0,qualitySeconds=0,frameSum=0,frameCount=0,lastWidth=0,lastHeight=0,assetStatus='loading',assetStats=null,cameraState=null,framing=null;
+  let disposed=false,lastEvent=0,time=0,goalPulse=0,goalTeam=0,quality=0,lastWidth=0,lastHeight=0,assetStatus='loading',assetStats=null,cameraState=null,framing=null;
   const characters=[],kitMaterials=[],keeperGeometries=new Map(),bounds=new T.Box3(),size=new T.Vector3();
   // Realistic CC0 athlete first; the original illustrated kid stays as the verified fallback.
   const kidUrl=new URL('../assets/kid-full.glb',import.meta.url).href,athleteUrl=config.view.athlete&&config.view.athlete.enabled!==false?new URL(config.view.athlete.url,import.meta.url).href:null;let athleteMode=false;
-  const ready=(athleteUrl?new GLTFLoader().loadAsync(athleteUrl).then(data=>(athleteMode=true,data)).catch(()=>(athleteMode=false,new GLTFLoader().loadAsync(kidUrl))):new GLTFLoader().loadAsync(kidUrl)).then(data=>{
+  // Kickoff waits for the turf maps too: a texture arriving mid-match recompiled the pitch shader.
+  const model=athleteUrl?new GLTFLoader().loadAsync(athleteUrl).then(data=>(athleteMode=true,data)).catch(()=>(athleteMode=false,new GLTFLoader().loadAsync(kidUrl))):new GLTFLoader().loadAsync(kidUrl);
+  const ready=Promise.all([model,stadium.ready.catch(()=>null)]).then(([data])=>{
     if(disposed){disposeObject(data.scene);return;}
     const source=data.scene,embeddedBall=source.getObjectByName('Ball');
     if(embeddedBall){
@@ -100,7 +104,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
       }
       const ballTriangles=embeddedBall?(embeddedBall.geometry.index?.count||embeddedBall.geometry.attributes.position.count)/3:0;
       assetStats={kind:'athlete',triangles,sourceTriangles:triangles+ballTriangles,meshes,sixCharacterTriangles:triangles*6,sharedTeamMaterials:2,perPlayerMaterials:roster.length*2,independentSkeletons:true,eightCharacterTriangles:triangles*roster.length,economyCharacterTriangles:lowTriangles,lod:0,clips:data.animations.map(a=>a.name)};
-      if(quality>=config.view.athlete.lodFromQuality)assetStats.lod=1;assetStatus='ready';onAsset('ready');return;
+      if(quality>=config.view.athlete.lodFromQuality)assetStats.lod=1;warm();assetStatus='ready';onAsset('ready');return;
     }
     let faceMap=null,triangles=0,meshes=0;
     source.traverse(o=>{if(!o.isMesh)return;track(o.geometry);triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;meshes++;
@@ -144,34 +148,49 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
       actions.kick.setLoop(T.LoopOnce,1);actions.kick.clampWhenFinished=true;actions.stand.play();const bones=Object.fromEntries(['UpperLeg_R','LowerLeg_R','UpperLeg_L','LowerLeg_L','Head','Neck','Chest','Hips','Spine','UpperArm_L','UpperArm_R','LowerArm_L','LowerArm_R','Hand_L','Hand_R','Foot_L','Foot_R'].map(name=>{const bone=root.getObjectByName(name);return [name,{bone,rest:bone?.quaternion.clone()}];}));characters.push({root,pivot,mixer,actions,bones,headPoint:new T.Vector3(),chestPoint:new T.Vector3(),feetPoints:[new T.Vector3(),new T.Vector3()],active:'stand',mode:'idle',kickTime:0,stealTime:0,yaw:null});
     }
     const sourceTriangles=triangles+(embeddedBall?(embeddedBall.geometry.index?.count||embeddedBall.geometry.attributes.position.count)/3:0);
-    assetStats={triangles,sourceTriangles,meshes,sixCharacterTriangles:triangles*6,sharedTeamMaterials:kitMaterials.length,independentSkeletons:true,eightCharacterTriangles:triangles*roster.length};assetStatus='ready';onAsset('ready');
+    assetStats={triangles,sourceTriangles,meshes,sixCharacterTriangles:triangles*6,sharedTeamMaterials:kitMaterials.length,independentSkeletons:true,eightCharacterTriangles:triangles*roster.length};warm();assetStatus='ready';onAsset('ready');
   }).catch(()=>{if(!disposed){assetStatus='fallback';onAsset('fallback');}});
+  /** Compile every program variant the match can need (with and without shadows, both LOD meshes,
+   * hidden cues such as confetti and the aim arrow) and upload every texture while the loading
+   * panel is still up. A quality step or the first goal then switches programs without a compile stall. */
+  let warmed=null;
+  function warm(){
+    if(disposed||warmed)return;const hidden=[];scene.traverse(o=>{if((o.isMesh||o.isPoints||o.isLine)&&!o.visible){o.visible=true;hidden.push(o);}});
+    const level=quality,shadowless=Math.max(level,config.view.athlete.lodFromQuality),t0=performance.now();let programs=0;
+    try{
+      for(const tier of [shadowless,level]){lighting.setQuality(tier);renderer.compile(scene,camera);programs=renderer.info.programs?.length||0;}
+      scene.traverse(o=>{for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])for(const key of ['map','normalMap','roughnessMap','emissiveMap','alphaMap'])if(m[key]?.isTexture)renderer.initTexture(m[key]);});
+    }catch{/* warming is an optimisation only; the match still starts */}
+    finally{for(const o of hidden)o.visible=false;lighting.setQuality(level);}
+    warmed={programs,ms:Math.round(performance.now()-t0)};
+  }
   function disposeObject(root){root.traverse(o=>{o.geometry?.dispose();o.skeleton?.dispose();for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[]){m.map?.dispose();m.dispose();}});}
   const observer=new ResizeObserver(resize);for(const node of [canvas,...layoutNodes])observer.observe(node);
   function resize(){if(disposed)return;const rect=canvas.getBoundingClientRect(),area=playArea?.()||{x:0,y:0,width:rect.width,height:rect.height};lastWidth=area.width;lastHeight=area.height;renderer.setSize(rect.width,rect.height,false);renderer.setViewport(area.x,rect.height-area.y-area.height,area.width,area.height);camera.aspect=lastWidth/Math.max(1,lastHeight);camera.updateProjectionMatrix();}
   resize();
-  function qualitySample(frameMs,dt) {
-    if(!Number.isFinite(frameMs)||frameMs<=0)return;frameSum+=frameMs;frameCount++;qualitySeconds+=dt;
-    if(qualitySeconds>=config.view.qualityWindowSeconds){if(frameSum/frameCount>config.view.slowFrameMs&&quality<3)lowerQuality();qualitySeconds=frameSum=frameCount=0;}
-  }
+  // Adaptive quality measures wall-clock frame time (not the capped simulation dt): a long window
+  // decides on the average; a short one steps down at once when frames stay far over budget.
+  const qualityMonitor=createQualityMonitor(config.view);
+  function qualitySample(frameMs) {if(qualityMonitor.sample(frameMs)&&quality<3)lowerQuality();}
   function lowerQuality(){
     // Realistic athletes switch to their economy mesh from tier 2; the illustrated fallback keeps one mesh.
     if(quality+1>=config.view.athlete.lodFromQuality)for(const c of characters)if(c.athlete&&assetStats)assetStats.lod=c.setLod(1);
-    if(quality>=3)return;quality++;lighting.setQuality(quality);stadium.setQuality(quality);renderer.setPixelRatio(quality===1?1:config.view.lowPixelRatio);crowd.count=Math.floor(count/config.view.crowd.lowDivisor**Math.min(quality,2));confetti.visible=quality<2;resize();
+    if(quality>=3)return;quality++;qualityMonitor.reset();lighting.setQuality(quality);stadium.setQuality(quality);renderer.setPixelRatio(quality===1?1:config.view.lowPixelRatio);crowd.count=Math.floor(count/config.view.crowd.lowDivisor**Math.min(quality,2));confetti.visible=quality<2;resize();
   }
   function render(s,dt=0,frameMs=0) {
     if(disposed)return;time+=dt;qualitySample(frameMs,dt);
     crowd.update(time,s.phase==='goal');effects.update(s,dt,quality);
-    const signature=s.players.map(p=>p.card.number).join(',');if(signature!==numberSignature){numberSignature=signature;numberContext.clearRect(0,0,512,64);numberContext.font='bold 46px sans-serif';numberContext.textAlign='center';numberContext.textBaseline='middle';numberContext.fillStyle='#fff7da';numberContext.strokeStyle='#243d59';numberContext.lineWidth=3;for(const p of s.players){numberContext.strokeText(String(p.card.number),p.id*64+32,32);numberContext.fillText(String(p.card.number),p.id*64+32,32);}numberTexture.needsUpdate=true;}
+    let changed=numbersShown.length!==s.players.length;for(let i=0;i<s.players.length&&!changed;i++)changed=numbersShown[i]!==s.players[i].card.number;
+    if(changed){numbersShown.length=s.players.length;for(let i=0;i<s.players.length;i++)numbersShown[i]=s.players[i].card.number;numberSignature=numbersShown.join(',');numberContext.clearRect(0,0,512,64);numberContext.font='bold 46px sans-serif';numberContext.textAlign='center';numberContext.textBaseline='middle';numberContext.fillStyle='#fff7da';numberContext.strokeStyle='#243d59';numberContext.lineWidth=3;for(const p of s.players){numberContext.strokeText(String(p.card.number),p.id*64+32,32);numberContext.fillText(String(p.card.number),p.id*64+32,32);}numberTexture.needsUpdate=true;}
     const c=config.view.camera,angle=c.elevationDegrees*Math.PI/180;
     cameraState=soccerCamera(s,camera.aspect,config,cameraState,dt);
     camera.position.set(cameraState.x,cameraState.distance*Math.sin(angle),cameraState.z+s.attackDir*cameraState.distance*Math.cos(angle));camera.lookAt(cameraState.x,0,cameraState.z);camera.updateMatrixWorld();if(poseFocus!==null){const p=s.players[poseFocus];camera.position.set(p.x,1.9,p.z+5.5);camera.lookAt(p.x,.8,p.z);camera.updateMatrixWorld();}
     stadium.update(-Math.sign(camera.getWorldDirection(target).z)||s.attackDir);
     const ballProjection=projectSoccerPoint(s.ball,cameraState,camera.aspect,config),playerProjection=projectSoccerPoint(s.players[s.controlled],cameraState,camera.aspect,config);
-    framing={ball:ballProjection,controlled:playerProjection,camera:{...cameraState},elevationDegrees:c.elevationDegrees};
+    framing=framingShown;framing.ball=ballProjection;framing.controlled=playerProjection;Object.assign(framing.camera,cameraState);framing.elevationDegrees=c.elevationDegrees;
     if(Math.abs(playerProjection.x)>1||Math.abs(playerProjection.y)>1){
       const x=playerProjection.x,y=-playerProjection.y,r=Math.max(Math.abs(x),Math.abs(y));
-      onEdge({x:Math.max(c.edgeInset,Math.min(lastWidth-c.edgeInset,(x/r+1)*lastWidth/2)),y:Math.max(c.edgeInset,Math.min(lastHeight-c.edgeInset,(y/r+1)*lastHeight/2)),angle:Math.atan2(y,x)});
+      edgeShown.x=Math.max(c.edgeInset,Math.min(lastWidth-c.edgeInset,(x/r+1)*lastWidth/2));edgeShown.y=Math.max(c.edgeInset,Math.min(lastHeight-c.edgeInset,(y/r+1)*lastHeight/2));edgeShown.angle=Math.atan2(y,x);onEdge(edgeShown);
     }else onEdge(null);
     if(s.eventId!==lastEvent){lastEvent=s.eventId;if(s.event?.type==='goal'){
       goalPulse=1;goalTeam=s.event.team;
@@ -181,7 +200,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     let boxIndex=0,sphereIndex=0;
     function box(x,y,z,sx,sy,sz,c,angle=0){dummy.position.set(x,y,z);dummy.rotation.set(0,angle,0);dummy.scale.set(sx,sy,sz);dummy.updateMatrix();boxes.setMatrixAt(boxIndex,dummy.matrix);boxes.setColorAt(boxIndex++,color.set(c));}
     function sphere(x,y,z,sx,sy,sz,c){dummy.position.set(x,y,z);dummy.rotation.set(0,0,0);dummy.scale.set(sx,sy,sz);dummy.updateMatrix();spheres.setMatrixAt(sphereIndex,dummy.matrix);spheres.setColorAt(sphereIndex++,color.set(c));}
-    const receiver=passReceiver(s,config);poses=[];let turfAt=0;
+    const receiver=passReceiver(s,config);poses.length=s.players.length;let turfAt=0;
     for(const p of s.players){
       // The original detailed models stay visible at every performance tier.
       // Resolution, spectators and decoration absorb reductions first.
@@ -195,17 +214,22 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
         const ease=1-Math.exp(-dt/ad.rollEase);character.roll+=(roll-character.roll)*ease;character.lift+=(lift-character.lift)*ease;
         pivot.position.set(p.x,character.lift,p.z);pivot.rotation.set(0,character.yaw,0);pivot.rotateZ(character.roll);if(!sliding&&animation.mode!=='dive')pivot.rotateX(bodyState.pitch);
         const owner=s.ball.owner===null||s.ball.owner===undefined?null:s.players[s.ball.owner],charge=s.charging&&s.controlled===p.id&&s.ball.owner===p.id?Math.min(1,s.charge/(s.chargeKind==='pass'?config.passing.chargeSeconds:config.physics.chargeSeconds)):0;
-        const marking=Boolean(owner&&owner.team!==p.team&&Math.hypot(s.ball.x-p.x,s.ball.z-p.z)<ad.markDistance);
+        const marking=Boolean(owner&&owner.team!==p.team&&hypot2(s.ball.x-p.x,s.ball.z-p.z)<ad.markDistance);
         const motion=character.motion.update(p,s,animation.mode,dt*(s.phase==='goal'&&animation.mode!=='celebrate'?config.rules.goalSlowMotion:1),{charge,chargeKind:s.chargeKind,slide:sliding?slideWeight(p,config):0,marking,turnRate:bodyState.rate});
         character.mode=animation.mode;character.active=motion.oneShot||'locomotion';
         character.lookWeight+=((['celebrate','slide','recover','dive','throw'].includes(animation.mode)||p.hands?0:1)-character.lookWeight)*(1-Math.exp(-dt/ad.lookEase));athleteLook(T,character,s.ball,dt,ad);
         if(p.hands)holdSoccerBall(T,character,p,config);
         if(animation.head&&bones.Head.bone)bones.Head.bone.rotation.x+=animation.head*ad.headNod;
         body.plant(pivot,dt,motion.oneShot||sliding||charge>0||p.hands||!['idle','run','sprint','steal'].includes(animation.mode)?0:1,motion.warp);
-        pivot.updateMatrixWorld(true);const headWorld=bones.Head.bone.getWorldPosition(character.headPoint),feet=character.feetPoints;bones.Foot_L.bone.getWorldPosition(feet[0]);bones.Foot_R.bone.getWorldPosition(feet[1]);const along=v=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz;
-        character.dribbleOffset=body.dribble(p,s.ball.owner===p.id&&!p.hands,dt,along(feet[1]),motion.rate>0?1/motion.rate:.7,!motion.oneShot&&!charge&&(animation.mode==='run'||animation.mode==='sprint'),along(s.ball));
-        const ballDistance=v=>Math.hypot(v.x-s.ball.x,v.y-s.ball.y,v.z-s.ball.z),handRadii=p.hands?['L','R'].map(side=>ballDistance(bones['Hand_'+side].bone.getWorldPosition(target))):null;
-        poses.push({id:p.id,mode:animation.mode,clip:character.active,headAlong:along(headWorld),footAlong:Math.max(...feet.map(along)),headHeight:headWorld.y,lean:0,feet:feet.map(v=>[v.x,v.y,v.z]),yaw:character.yaw,footDistance:s.ball.owner===p.id&&!p.hands?Math.min(...feet.map(ballDistance)):null,handRadii,weights:{...character.motion.weights}});
+        pivot.updateMatrixWorld(true);const headWorld=bones.Head.bone.getWorldPosition(character.headPoint),feet=character.feetPoints;bones.Foot_L.bone.getWorldPosition(feet[0]);bones.Foot_R.bone.getWorldPosition(feet[1]);
+        character.dribbleOffset=body.dribble(p,s.ball.owner===p.id&&!p.hands,dt,along(feet[1],p),motion.rate>0?1/motion.rate:.7,!motion.oneShot&&!charge&&(animation.mode==='run'||animation.mode==='sprint'),along(s.ball,p));
+        // Metrics for tests and the dev overlay, written into one record per player (no per-frame garbage).
+        const pose=poses[p.id]||(poses[p.id]={id:p.id,feet:[[0,0,0],[0,0,0]],handRadii:[0,0],weights:{}});
+        pose.mode=animation.mode;pose.clip=character.active;pose.headAlong=along(headWorld,p);pose.footAlong=Math.max(along(feet[0],p),along(feet[1],p));pose.headHeight=headWorld.y;pose.lean=0;pose.yaw=character.yaw;
+        for(let i=0;i<2;i++){const f=pose.feet[i];f[0]=feet[i].x;f[1]=feet[i].y;f[2]=feet[i].z;}
+        pose.footDistance=s.ball.owner===p.id&&!p.hands?Math.min(ballDistance(feet[0],s.ball),ballDistance(feet[1],s.ball)):null;
+        if(p.hands){pose.handRadii=pose.handRadii||[0,0];pose.handRadii[0]=ballDistance(bones.Hand_L.bone.getWorldPosition(target),s.ball);pose.handRadii[1]=ballDistance(bones.Hand_R.bone.getWorldPosition(target),s.ball);}else pose.handRadii=null;
+        Object.assign(pose.weights,character.motion.weights);
       }else{
         const {pivot,actions,mixer,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz);if(character.yaw===null||['slide','kick','throw'].includes(animation.mode))character.yaw=wanted;else character.yaw+=Math.atan2(Math.sin(wanted-character.yaw),Math.cos(wanted-character.yaw))*(1-Math.exp(-config.view.animation.turnSmoothing*dt));
         pivot.position.set(p.x,animation.height,p.z);pivot.rotation.set(0,character.yaw,0);pivot.rotateX(animation.lean);pivot.rotateZ(animation.roll);
@@ -221,19 +245,19 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
         if(animation.mode==='dive'||animation.mode==='catch'){for(const side of ['L','R'])rotate('UpperArm_'+side,'x',a.catchArm);}
         if(p.hands)holdSoccerBall(T,character,p,config);
         if(animation.head)bones.Head.bone.rotation.x-=animation.head;
-        pivot.updateMatrixWorld(true);const headWorld=bones.Head.bone.getWorldPosition(character.headPoint),feet=character.feetPoints;bones.Foot_L.bone.getWorldPosition(feet[0]);bones.Foot_R.bone.getWorldPosition(feet[1]);const along=v=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz;
-        const ballDistance=v=>Math.hypot(v.x-s.ball.x,v.y-s.ball.y,v.z-s.ball.z),handRadii=p.hands?['L','R'].map(side=>ballDistance(bones['Hand_'+side].bone.getWorldPosition(target))):null;
-        poses.push({id:p.id,mode:animation.mode,clip:animation.clip,headAlong:along(headWorld),footAlong:Math.max(...feet.map(along)),headHeight:headWorld.y,lean:animation.lean,footDistance:s.ball.owner===p.id&&!p.hands?Math.min(...feet.map(ballDistance)):null,handRadii});
+        pivot.updateMatrixWorld(true);const headWorld=bones.Head.bone.getWorldPosition(character.headPoint),feet=character.feetPoints;bones.Foot_L.bone.getWorldPosition(feet[0]);bones.Foot_R.bone.getWorldPosition(feet[1]);
+        const handRadii=p.hands?[ballDistance(bones.Hand_L.bone.getWorldPosition(target),s.ball),ballDistance(bones.Hand_R.bone.getWorldPosition(target),s.ball)]:null;
+        poses[p.id]={id:p.id,mode:animation.mode,clip:animation.clip,headAlong:along(headWorld,p),footAlong:Math.max(along(feet[0],p),along(feet[1],p)),headHeight:headWorld.y,lean:animation.lean,footDistance:s.ball.owner===p.id&&!p.hands?Math.min(ballDistance(feet[0],s.ball),ballDistance(feet[1],s.ball)):null,handRadii};
       }}else if(assetStatus==='fallback'){
         // The block figures are only the failure fallback, never a loading placeholder.
         const angle=Math.atan2(p.fx,p.fz),cos=Math.cos(angle),sin=Math.sin(angle),kit=p.team===0?config.team.colors:config.opponent.colors,shirt=p.role==='keeper'?kit[1]:kit[0];
         const point=(x,z)=>({x:p.x+x*cos+z*sin,z:p.z-x*sin+z*cos});
-        const speed=Math.hypot(p.vx,p.vz),swing=Math.sin(time*12+p.id)*Math.min(.18,speed*.045);
+        const speed=hypot2(p.vx,p.vz),swing=Math.sin(time*12+p.id)*Math.min(.18,speed*.045);
         box(p.x,.99,p.z,.58,.63,.34,shirt,angle);sphere(p.x,1.55,p.z,.29,.33,.28,config.view.appearance.skin[p.id]);sphere(p.x,1.74,p.z-.02,.3,.16,.28,config.view.appearance.hair[p.id]);
         for(const side of [-1,1]){let q=point(side*.17,swing*side);box(q.x,.48,q.z,.21,.48,.24,config.view.appearance.socks[p.id],angle);q=point(side*.17,.1+swing*side);box(q.x,.13,q.z,.24,.18,.42,'#293b54',angle);q=point(side*.38,-swing*side);box(q.x,.93,q.z,.16,.55,.18,config.view.appearance.skin[p.id],angle);q=point(side*.11,.265);box(q.x,1.6,q.z,.065,.065,.035,'#273345',angle);}
         const number=point(0,.176);box(number.x,1.02,number.z,.065,.22,.018,kit[1],angle);
       }
-      for(let i=0;i<config.view.animation.turfPerPlayer;i++){const moving=p.slideTime>0,age=(time*3+i/config.view.animation.turfPerPlayer)%1;turfPositions.set([p.x-p.fx*age*.8+Math.sin(i*4)*.2,moving?.08+age*.2:-10,p.z-p.fz*age*.8+Math.cos(i*4)*.2],turfAt);turfAt+=3;}
+      for(let i=0;i<config.view.animation.turfPerPlayer;i++){const moving=p.slideTime>0,age=(time*3+i/config.view.animation.turfPerPlayer)%1;turfPositions[turfAt]=p.x-p.fx*age*.8+Math.sin(i*4)*.2;turfPositions[turfAt+1]=moving?.08+age*.2:-10;turfPositions[turfAt+2]=p.z-p.fz*age*.8+Math.cos(i*4)*.2;turfAt+=3;}
       dummy.position.set(p.x+.18,.03,p.z-.12);dummy.rotation.set(-Math.PI/2,0,-.6);dummy.scale.set(.85,.58,1);if(assetStatus==='loading')dummy.scale.setScalar(0);dummy.updateMatrix();shadows.setMatrixAt(p.id,dummy.matrix);
       dummy.position.set(p.x,2.15,p.z);dummy.rotation.set(Math.PI/2-.6,0,0);dummy.scale.setScalar(p.request||receiver===p.id?1:0);dummy.updateMatrix();requests.setMatrixAt(p.id,dummy.matrix);
     }
@@ -265,9 +289,9 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     const points=[];for(const x of [-hx,hx])for(const z of [-hz,hz]){target.set(x,0,z).project(camera);points.push({x:(target.x+1)*lastWidth/2,y:(1-target.y)*lastHeight/2});}
     return {width:Math.max(...points.map(p=>p.x))-Math.min(...points.map(p=>p.x)),height:Math.max(...points.map(p=>p.y))-Math.min(...points.map(p=>p.y))};
   }
-  return {ready,render,qualitySample,
+  return {ready,render,qualitySample,loading:()=>assetStatus==='loading',get renderer(){return renderer;},
     poseCamera(id,mode){poseFocus=id;poseMode=mode;},
-    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:stadium.metrics(),stadium:stadium.identity,effects:effects.metrics(),assetStatus,assetStats,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
+    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:stadium.metrics(),stadium:stadium.identity,effects:effects.metrics(),assetStatus,assetStats,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
     dispose(){if(disposed)return;disposed=true;stadium.dispose();lighting.dispose();observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);for(const c of characters){c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);c.root.traverse(o=>o.skeleton?.dispose());}characters.length=0;for(const resource of resources)resource.dispose();resources.clear();scene.clear();renderer.dispose();renderer.forceContextLoss();}
   };
 }
