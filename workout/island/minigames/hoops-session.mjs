@@ -1,6 +1,7 @@
 /** Island Pro Basketball session: connects the 5 on 5 engine, the arena view, input, sound
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
+import {createHoopsScreens} from './hoops-screens.mjs';
 import {gameContext} from './context.mjs?v=island-perf-20261030-1';
 import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-perf-20261030-1';
 import {createHoopsControls} from './hoops-controls.mjs?v=island-perf-20261030-1';
@@ -22,13 +23,13 @@ export function startHoops(ctx){
  const profile=params.get('hoopsProfile')||setup.profile||'standard';
  const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1'});
  engine.setAutoSub(setup.autoSub!==false);
- let view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
+ let screens=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
  const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
  const abort=new AbortController(),on={signal:abort.signal};let audio;
  try{audio=createHoopsAudio({config:balance.audio,storage});}catch{audio=createHoopsAudio({config:balance.audio,storage:null});}
  const session={
-  setPaused(value){paused=!!value;last=0;loop.reset();controls?.setEnabled(!paused);audio.setPaused(paused);},
-  dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
+  setPaused(value){paused=!!value;last=0;loop.reset();const hidden=!!ctx.canvas?.ownerDocument?.hidden;controls?.setEnabled(!paused&&!hidden&&!view?.replaying);audio.setPaused(paused||hidden);},
+  dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();screens?.dispose();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
    try{if(document.fullscreenElement)void screen.orientation?.lock?.('landscape')?.catch(()=>{});}catch{}},
   get snapshot(){return {...engine.snapshot(),paused,disposed,stepsRun,error,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),input:controls?.held,replaying:!!view?.replaying};},
  };
@@ -54,8 +55,12 @@ export function startHoops(ctx){
  const benchPanel=node('div','hoops-bench');benchPanel.hidden=true;benchPanel.setAttribute('role','dialog');benchPanel.setAttribute('aria-label',labels.bench);
  const loading=node('div','hoops-loading');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));const ringEl=node('span','hoops-progress');loading.append(ringEl);
  stageEl.append(bug,meter,grade,toast,replayBtn,benchPanel,loading);
+ screens=createHoopsScreens({stageEl,loading,teams:setup.teams,
+  onOpen(){kitPaused=paused;session.setPaused(true);},onClose(){if(!disposed)session.setPaused(kitPaused);},
+  onKit(kit,team){selectedKit={kit,team};view?.setKit(team,kit);}});
  controls=createHoopsControls({root,doc,config:balance.controls,onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>hoopsIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:1}});
  root.classList.add('hoops-controls');controls.setEnabled(!paused);
+ doc.addEventListener('visibilitychange',()=>{last=0;loop.reset();controls.setEnabled(!doc.hidden&&!paused&&!view?.replaying);audio.setPaused(paused||doc.hidden);},on);
  screenEl.addEventListener('pointerdown',()=>audio.unlock(),{...on,capture:true});doc.defaultView.addEventListener('keydown',()=>audio.unlock(),on);
  const statusEl=ctx.status;
 
@@ -65,7 +70,7 @@ export function startHoops(ctx){
   loading.setAttribute('aria-label',t('hoops.unavailable'));loading.append(hoopsIcon('warning',doc));
   const retry=node('button','hoops-retry');retry.type='button';retry.dataset.action='hoops-retry';retry.setAttribute('aria-label',t('hoops.retry'));retry.append(hoopsIcon('retry',doc));
   const back=node('button','hoops-back');back.type='button';back.dataset.action='hoops-back';back.setAttribute('aria-label',t('hoops.back'));back.append(hoopsIcon('back',doc));
-  retry.onclick=()=>{loading.classList.remove('failed');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));loading.replaceChildren(ringEl);error=null;load();};back.onclick=()=>ctx.cancel();
+  retry.onclick=()=>{loading.classList.remove('failed');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));loading.replaceChildren(screens.elements.intro,ringEl);error=null;load();};back.onclick=()=>ctx.cancel();
   loading.append(retry,back);ctx.onError?.('hoops.unavailable');
  }
  const dev=params.get('dev')==='1';
@@ -77,14 +82,14 @@ export function startHoops(ctx){
   const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-perf-20261030-1');
   viewModule.then(m=>m.createHoopsView(canvas,{...balance,view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onProgress:p=>ringEl.style.setProperty('--p',String(p))})).then(loaded=>{
    if(disposed){loaded.dispose();return;}
-   view=loaded;const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();
+   view=loaded;if(selectedKit)view.setKit(selectedKit.team,selectedKit.kit);const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();
    if(frame===undefined)frame=requestAnimationFrame(tick);
   }).catch(e=>fail(String(e?.message||e)));
  }
  const ro=new ResizeObserver(()=>{if(!view)return;const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);});ro.observe(stageEl);abort.signal.addEventListener('abort',()=>ro.disconnect());
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();if(disposed)return;view?.dispose();view=null;session.setPaused(true);fail('webgl-context-lost');},on);
  replayBtn.addEventListener('click',()=>{if(!view||view.replaying)return;const frames=engine.replay();replayBtn.hidden=true;controls.setEnabled(false);view.startReplay(frames,()=>{controls.setEnabled(!paused);last=0;loop.reset();});},on);
- if(dev)session.debug={engine,controls,get view(){return view;},
+ if(dev)session.debug={engine,controls,get screens(){return screens;},get view(){return view;},
   step(n=1,input){for(let i=0;i<n;i++){prev=cur;engine.step(input||controls.consume());cur=engine.snapshot();handleEvents(engine.drainEvents());}if(view){if(n>1)view.snapCamera();view.render(prev,cur,1,1/60);}hud(cur,performance.now());return cur;},
   render(){if(view){view.render(prev,cur,1,1/60);hud(cur,performance.now());}}};
  load();
@@ -152,9 +157,9 @@ export function startHoops(ctx){
    loop.advance(dt,()=>{prev=cur;engine.step(controls.consume());cur=engine.snapshot();stepsRun++;handleEvents(engine.drainEvents());return cur.phase!=='final';});
   }
   let holder=null;for(const p of cur.players)if(p.hasBall){holder=p;break;}
-  if(holder&&cur.phase==='live'&&!paused){dribbleClock+=dt;const per=balance.view.dribblePeriod;if(dribbleClock>per){dribbleClock=0;audio.dribble(Math.hypot(holder.vx,holder.vz));}}
+  if(holder&&cur.phase==='live'&&!paused&&!doc.hidden&&!view.replaying){dribbleClock+=dt;const per=balance.view.dribblePeriod;if(dribbleClock>per){dribbleClock=0;audio.dribble(Math.hypot(holder.vx,holder.vz));}}
   const alpha=paused?1:loop.alpha;
-  view.render(prev,cur,alpha,paused?0:dt);hud(cur,now);
+  view.render(prev,cur,alpha,paused||doc.hidden?0:dt);hud(cur,now);
   if(cur.phase==='final'&&!finished){
    if(!paused&&!doc.hidden)finalDisplay+=Math.min(dt,.1);
    if(finalDisplay<(view.celebrationSeconds||0))return;

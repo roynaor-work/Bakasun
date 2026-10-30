@@ -107,3 +107,37 @@
  .game-screen[data-game=streetSlam] .hoops-toast{top:max(118px,calc(112px + env(safe-area-inset-top)))}
  .game-screen[data-game=streetSlam] .hoops-grade{top:max(172px,26%)}
 }
+
+/* Authored basketball intro and optional uniform previews. */
+.game-screen[data-game=streetSlam] .hoops-intro-art{display:block;width:min(48vh,220px);height:min(48vh,220px);object-fit:contain;pointer-events:none}
+.game-screen[data-game=streetSlam] .hoops-kit-trigger{position:absolute;z-index:5;right:max(12px,env(safe-area-inset-right));top:max(72px,calc(64px + env(safe-area-inset-top)));width:48px;min-width:48px;height:48px;min-height:48px;padding:10px;border-radius:50%;border:1px solid var(--h-line);background:var(--h-glass);color:#fff;display:grid;place-items:center;touch-action:manipulation}
+.game-screen[data-game=streetSlam] .hoops-kit-trigger svg{width:28px;height:28px}
+.game-screen[data-game=streetSlam] .hoops-kit-trigger[hidden],.game-screen[data-game=streetSlam] .hoops-kit-overlay[hidden]{display:none}
+.game-screen[data-game=streetSlam] .hoops-kit-overlay{position:absolute;inset:0;z-index:9;display:grid;place-items:center;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));background:#03060de8;overflow:auto;overscroll-behavior:contain;color:#fff}
+.game-screen[data-game=streetSlam] .hoops-kit-dialog{box-sizing:border-box;direction:rtl;width:min(100%,600px);max-height:100%;overflow:auto;padding:16px;border:1px solid #ffffff40;border-radius:18px;background:#101828;box-shadow:0 18px 60px #0008;font-family:inherit}
+.game-screen[data-game=streetSlam] .hoops-kit-head{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.game-screen[data-game=streetSlam] .hoops-kit-title{margin:0;font-size:20px;line-height:1.35;font-weight:800}
+.game-screen[data-game=streetSlam] .hoops-kit-team{margin:0 0 12px;color:#d7e1f2;font-size:16px;line-height:1.5}
+.game-screen[data-game=streetSlam] .hoops-kit-close{width:48px;min-width:48px;height:48px;min-height:48px;display:grid;place-items:center;padding:0;border:1px solid #ffffff55;border-radius:50%;background:#ffffff12;color:#fff;font-size:30px;line-height:1;touch-action:manipulation}
+.game-screen[data-game=streetSlam] .hoops-kit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.game-screen[data-game=streetSlam] .hoops-kit-option{box-sizing:border-box;min-width:48px;min-height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;padding:8px;border:2px solid #ffffff30;border-radius:12px;background:#1b2940;color:#fff;font:inherit;touch-action:manipulation}
+.game-screen[data-game=streetSlam] .hoops-kit-option[aria-pressed=true]{border-color:var(--h-gold);background:#34324c}
+.game-screen[data-game=streetSlam] .hoops-kit-option:focus-visible,.game-screen[data-game=streetSlam] .hoops-kit-close:focus-visible,.game-screen[data-game=streetSlam] .hoops-kit-trigger:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.game-screen[data-game=streetSlam] .hoops-kit-preview{display:flex;align-items:center;justify-content:center;width:100%;height:72px;gap:0;direction:ltr;pointer-events:none}
+.game-screen[data-game=streetSlam] .hoops-kit-preview img{display:block;object-fit:contain;width:50%;height:100%;min-width:0}
+.game-screen[data-game=streetSlam] .hoops-kit-label{font-size:14px;line-height:1.4;font-weight:700;text-align:center;overflow-wrap:anywhere}
+@media(orientation:portrait){
+ .game-screen[data-game=streetSlam] .hoops-kit-trigger{top:max(116px,calc(108px + env(safe-area-inset-top)))}
+ .game-screen[data-game=streetSlam] .hoops-kit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .game-screen[data-game=streetSlam] .hoops-kit-dialog{padding:12px}
+}
+@media(orientation:landscape) and (max-height:450px){
+ .game-screen[data-game=streetSlam] .hoops-intro-art{width:150px;height:150px}
+ .game-screen[data-game=streetSlam] .hoops-kit-dialog{padding:10px 14px}
+ .game-screen[data-game=streetSlam] .hoops-kit-team{margin-bottom:6px}
+ .game-screen[data-game=streetSlam] .hoops-kit-grid{gap:6px}
+ .game-screen[data-game=streetSlam] .hoops-kit-option{min-height:100px;padding:5px}
+ .game-screen[data-game=streetSlam] .hoops-kit-preview{height:58px}
+}
+
+.game-screen[data-game=streetSlam] .hoops-loading{flex-direction:column;gap:12px}

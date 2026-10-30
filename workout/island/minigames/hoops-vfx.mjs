@@ -135,5 +135,3 @@ export async function createHoopsVfx(scene,assetBase,{quality=2,court,reducedMot
   get celebrationSeconds(){return confetti.data.durationSeconds;},
   metrics(){return {sprites:(fire.sprite.visible?1:0)+(confetti.sprite.visible?1:0),residentAtlases:2,reducedMotion:reduced};}};
 }
-
-
