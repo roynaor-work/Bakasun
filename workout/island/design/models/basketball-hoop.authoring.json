@@ -1,0 +1,63 @@
+{
+  "id": "basketball-hoop",
+  "category": "equipment",
+  "notes": "Rim centre 3.05m, clear rim diameter .45m; backboard 1.80 \u00d7 1.05m.",
+  "view": [
+    1.15,
+    -1.8,
+    1
+  ],
+  "bounds_blender": [
+    [
+      -0.9124999642372131,
+      -0.95250004529953,
+      0.0
+    ],
+    [
+      0.9125000238418579,
+      0.9524999856948853,
+      3.9549999237060547
+    ]
+  ],
+  "anchors": {
+    "anchor_rim_center": [
+      -0.0,
+      3.05,
+      0.7075
+    ],
+    "anchor_backboard_center": [
+      -0.0,
+      3.425,
+      0.3325
+    ],
+    "anchor_ball_spot": [
+      -0.0,
+      0.12,
+      4.9075
+    ],
+    "anchor_mount": [
+      -0.0,
+      0.0,
+      -0.5625
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "base",
+    "base_pad",
+    "support_post",
+    "post_pad",
+    "backboard_arm",
+    "backboard",
+    "backboard_frame",
+    "backboard_target",
+    "rim",
+    "rim_mount",
+    "net"
+  ],
+  "triangles": 1332
+}

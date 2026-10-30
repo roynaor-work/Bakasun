@@ -1,0 +1,56 @@
+{
+  "id": "soccer-goal",
+  "category": "equipment",
+  "notes": "Inner opening 7.32 \u00d7 2.44m. Ball spot is a conventional penalty spot 11m in front of the goal line.",
+  "view": [
+    1.05,
+    -1.7,
+    0.85
+  ],
+  "bounds_blender": [
+    [
+      -3.7799999713897705,
+      -0.986000120639801,
+      0.0
+    ],
+    [
+      3.7799999713897705,
+      0.9860000610351562,
+      2.56000018119812
+    ]
+  ],
+  "anchors": {
+    "anchor_goal_center": [
+      0.0,
+      1.22,
+      0.926
+    ],
+    "anchor_ball_spot": [
+      0.0,
+      0.11,
+      11.926
+    ],
+    "anchor_goal_line_left": [
+      -3.66,
+      0.0,
+      0.926
+    ],
+    "anchor_goal_line_right": [
+      3.66,
+      0.0,
+      0.926
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "goal_post",
+    "crossbar",
+    "goal_support",
+    "net"
+  ],
+  "triangles": 1376
+}
