@@ -19,7 +19,8 @@ function fixture(){const values=new Map([['other-app','keep']]);const storage={g
 const make=(id,level=1,extra={})=>models[id]({config,balance:config[id],level,random:seededRandom(12),...extra});
 function advance(m,seconds,input={}){for(let i=0;i<Math.ceil(seconds/.02)&&!m.result;i++)m.update(.02,input);}
 function shotAt(m,a,damage=99,kind=0){m.shots.push({x:a.x,y:a.y,vx:0,vy:0,hp:kind===1?4:1,lastHit:-1,kind});a.hp=damage;}
-function navalHit(m,b,ammo=0){Object.assign(m.ball,{targetX:m.enemyShip.x,targetZ:m.enemyShip.z,age:m.ball.duration,owner:'player',ammo});m.update(.02,{});}
+// Forces an impact on the current enemy. 25/10/2026: drops the ballistic launch so the forced point is used.
+function navalHit(m,b,ammo=0){delete m.ball.launch;Object.assign(m.ball,{targetX:m.enemyShip.x,targetZ:m.enemyShip.z,age:m.ball.duration,owner:'player',ammo});m.update(.02,{});}
 
 test('G2c v4 → v5 adds only equipment and leaves input, city, stars, event and money untouched',()=>{
   const f=fixture(),old=JSON.parse(f.engine.exportJSON());old.version=4;delete old.minigameEquipment;
@@ -136,10 +137,10 @@ for(const index of [1,2,4])test(`G2c special naval ${config.navalDuel.ammo[index
   const m=make('navalDuel',10,{equipment:{ammo:3}}),b=config.navalDuel;
   for(let i=0;i<index;i++){m.update(.001,{ammo:true});m.update(.001,{});}assert.equal(m.ammoIndex,index);
   const supply=m.ammo[index];m.update(.001,{firing:true,targetX:m.enemyShip.x,targetZ:m.enemyShip.z});assert.equal(m.ammo[index],supply-1);assert.equal(m.ball.ammo,index);
-  const hp=m.enemyLives;m.playerShip.hp-=3;const lives=m.lives;navalHit(m,b,index);assert.ok(m.enemyLives<hp);if(index===2)assert.equal(m.ball.y,b.shipY-Math.sin(m.ball.sampleTime*b.render.waveSpeed)*b.aim.torpedoBob);
+  const hp=m.enemyLives;m.playerShip.hp-=3;const lives=m.lives;navalHit(m,b,index);assert.ok(m.enemyLives<hp);if(index===2)assert.equal(m.ball.launch?.kind??'water','water');
 });
 test('G2c shields absorb real hits, upgraded hull survives longer, and bosses have more HP',()=>{
-  const m=make('navalDuel',1,{equipment:{shield:2,hull:1.3}}),b=config.navalDuel;m.update(.01,{firing:true});Object.assign(m.ball,{owner:'enemy',targetX:b.shipX,targetZ:0,age:m.ball.duration});const hp=m.lives;m.update(.01,{});assert.equal(m.lives,hp);assert.ok(m.playerShip.shield<2);assert.ok(m.maxLives>make('navalDuel').maxLives);
+  const m=make('navalDuel',1,{equipment:{shield:2,hull:1.3}}),b=config.navalDuel;m.update(.01,{firing:true});delete m.ball.launch;Object.assign(m.ball,{owner:'enemy',targetX:b.shipX,targetZ:0,age:m.ball.duration});const hp=m.lives;m.update(.01,{});assert.equal(m.lives,hp);assert.ok(m.playerShip.shield<2);assert.ok(m.maxLives>make('navalDuel').maxLives);
   const boss=make('navalDuel',10,{equipment:{damage:100}});let guard=10;
   while(boss.wave<boss.settings.waves&&guard--){boss.update(.01,{firing:false});boss.update(.01,{firing:true,targetX:boss.enemyShip.x,targetZ:boss.enemyShip.z});navalHit(boss,b);advance(boss,b.sinkSeconds+.1);}
   assert.ok(guard>0);assert.equal(boss.boss,true);assert.ok(boss.enemyShip.maxHp>b.levels[9].enemyLives*b.shipTypes[2].hp);

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#091826">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>האי שלי · מסכים ותלבושות</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<a class="skip" href="#screens">דילוג לתצוגה</a>
+<!-- Native radios select static art studies. No game or storage code runs here. -->
+<input class="state" type="radio" name="screen" id="soccer" aria-label="כדורגל" aria-controls="soccer-panel" checked>
+<input class="state" type="radio" name="screen" id="hoops" aria-label="כדורסל" aria-controls="hoops-panel">
+<input class="state" type="radio" name="screen" id="alpine" aria-label="סקי" aria-controls="alpine-panel">
+<input class="state" type="radio" name="screen" id="awards" aria-label="פרסים" aria-controls="awards-panel">
+<input class="state" type="radio" name="screen" id="player" aria-label="שחקן" aria-controls="player-panel">
+<input class="state" type="radio" name="screen" id="result" aria-label="תוצאה" aria-controls="result-panel">
+<input class="state" type="radio" name="screen" id="soccer-kits" aria-label="מדי כדורגל" aria-controls="soccer-kits-panel">
+<input class="state" type="radio" name="screen" id="hoops-kits" aria-label="מדי כדורסל" aria-controls="hoops-kits-panel">
+<nav class="studio-nav" aria-label="בחירת תצוגה">
+  <label for="soccer">כדורגל</label>
+  <label for="hoops">כדורסל</label>
+  <label for="alpine">סקי</label>
+  <label for="awards">פרסים</label>
+  <label for="player">שחקן</label>
+  <label for="result">תוצאה</label>
+  <label for="soccer-kits">מדי כדורגל</label>
+  <label for="hoops-kits">מדי כדורסל</label>
+</nav>
+<main id="screens" tabindex="-1">
+<section class="screen intro soccer-screen" id="soccer-panel" aria-labelledby="soccer-title">
+  <div class="intro-copy">
+    <p class="eyebrow">האי שלי · על הדשא</p>
+    <h1 id="soccer-title">כדורגל</h1>
+    <p class="lede">הדשא קורא לך.</p>
+    <p class="description">צבעים משלך. משחק בקצב שלך.</p>
+    <div class="actions"><a class="action primary" href="../soccer/hud.html">לתצוגת המגרש</a><a class="action" href="kits/soccer/01-shirt.svg">החולצה שלי</a></div>
+  </div>
+  <img class="intro-art" src="intro/soccer.svg" width="512" height="512" alt="מגרש כדורגל באי וכדור גדול בקדמת האיור">
+</section>
+<section class="screen intro hoops-screen" id="hoops-panel" aria-labelledby="hoops-title">
+  <div class="intro-copy">
+    <p class="eyebrow">האי שלי · על הפרקט</p>
+    <h1 id="hoops-title">כדורסל</h1>
+    <p class="lede">זה הרגע שלך לזרוח.</p>
+    <p class="description">מהמגרש הקטן לרגע הגדול.</p>
+    <div class="actions"><a class="action primary" href="../hoops/hud.html">לתצוגת המגרש</a><a class="action" href="kits/hoops/01-shirt.svg">החולצה שלי</a></div>
+  </div>
+  <img class="intro-art" src="intro/hoops.svg" width="512" height="512" alt="מגרש כדורסל, סל וכדור כתום בקדמת האיור">
+</section>
+<section class="screen intro alpine-screen" id="alpine-panel" aria-labelledby="alpine-title">
+  <div class="intro-copy">
+    <p class="eyebrow">האי שלי · על ההר</p>
+    <h1 id="alpine-title">סקי</h1>
+    <p class="lede">הפסגה היא רק ההתחלה.</p>
+    <p class="description">אוויר צלול. פנייה חדשה. מסלול משלך.</p>
+    <div class="actions"><a class="action primary" href="../alpine/hud.html">לתצוגת המסלול</a></div>
+  </div>
+  <img class="intro-art" src="intro/alpine.svg" width="512" height="512" alt="מסלול שלג בהרים וזוג מגלשיים בצבעי תכלת וקורל">
+</section>
+<section class="screen awards-screen" id="awards-panel" aria-labelledby="awards-title">
+  <div class="award-lead">
+    <img class="trophy" src="awards/trophy.svg" width="512" height="512" alt="גביע זהוב עם כוכב">
+    <div class="section-heading"><p class="eyebrow">האי שלי · רגע של גאווה</p><h1 id="awards-title">כל הישג מקבל מקום.</h1><p>שלוש מדליות. שלוש צורות של הצלחה.</p></div>
+  </div>
+  <div class="medals">
+    <figure><img src="awards/medal-gold.svg" width="512" height="512" alt=""><figcaption>זהב<small>סמל כוכב</small></figcaption></figure>
+    <figure><img src="awards/medal-silver.svg" width="512" height="512" alt=""><figcaption>כסף<small>סמל מעוין</small></figcaption></figure>
+    <figure><img src="awards/medal-bronze.svg" width="512" height="512" alt=""><figcaption>ארד<small>סמל משושה</small></figcaption></figure>
+  </div>
+</section>
+<section class="screen player-screen" id="player-panel" aria-labelledby="player-title">
+  <div class="player-copy"><p class="eyebrow">האי שלי · כרטיס שחקן</p><h1 id="player-title">הסגנון שלך.<br>המגרש שלך.</h1><p class="muted">כרטיס בדוי עם נתונים להמחשה בלבד.</p></div>
+  <article class="player-card" aria-label="כרטיס שחקן בדוי">
+    <p class="player-tag">כרטיס לדוגמה</p>
+    <h2 class="player-name">שחקן לדוגמה</h2>
+    <dl class="player-stats"><div><dt>דירוג</dt><dd><bdi dir="ltr">74</bdi></dd></div><div><dt>קצב</dt><dd><bdi dir="ltr">81</bdi></dd></div><div><dt>דיוק</dt><dd><bdi dir="ltr">68</bdi></dd></div></dl>
+    <p class="footnote">תלבושת <bdi dir="ltr">01</bdi></p>
+  </article>
+</section>
+<section class="screen result-screen" id="result-panel" aria-labelledby="result-title">
+  <p class="eyebrow">האי שלי · סיום משחק</p>
+  <div class="result-frame">
+    <h1 id="result-title">כל הכבוד!</h1>
+    <p class="result-score" dir="ltr" aria-label="שלוש מול שתיים">3 : 2</p>
+    <p class="result-caption">תוצאה בדויה להמחשה</p>
+  </div>
+  <div class="actions"><a class="action primary" href="../soccer/hud.html">עוד משחק</a><a class="action" href="../README.md">חזרה לחבילת העיצוב</a></div>
+</section>
+<section class="screen soccer-kits-screen" id="soccer-kits-panel" aria-labelledby="soccer-kits-title">
+  <header class="kit-heading"><div><p class="eyebrow">האי שלי · חדר התלבושות</p><h1 id="soccer-kits-title">מדי כדורגל</h1><p class="muted">8 סטים בדויים · לכל תלבושת צבע ודפוס משלה</p></div><a class="action" href="../soccer/hud.html">לתצוגת המגרש</a></header>
+  <div class="kit-grid">
+    <figure class="kit" id="soccer-01"><div class="kit-pieces"><img src="kits/soccer/01-shirt.svg" width="256" height="256" alt="חולצת כדורגל, תלבושת 01, פס אלכסוני"><img src="kits/soccer/01-shorts.svg" width="256" height="256" alt="מכנסי כדורגל תואמים, תלבושת 01, פס אלכסוני"></div><figcaption><strong>תלבושת <bdi dir="ltr">01</bdi></strong><span>פס אלכסוני</span></figcaption></figure>
+    <figure class="kit" id="soccer-02"><div class="kit-pieces"><img src="kits/soccer/02-shirt.svg" width="256" height="256" alt="חולצת כדורגל, תלבושת 02, שני פסים אופקיים"><img src="kits/soccer/02-shorts.svg" width="256" height="256" alt="מכנסי כדורגל תואמים, תלבושת 02, שני פסים אופקיים"></div><figcaption><strong>תלבושת <bdi dir="ltr">02</bdi></strong><span>שני פסים אופקיים</span></figcaption></figure>
+    <figure class="kit" id="soccer-03"><div class="kit-pieces"><img src="kits/soccer/03-shirt.svg" width="256" height="256" alt="חולצת כדורגל, תלבושת 03, פס מרכזי"><img src="kits/soccer/03-shorts.svg" width="256" height="256" alt="מכנסי כדורגל תואמים, תלבושת 03, פס מרכזי"></div><figcaption><strong>תלבושת <bdi dir="ltr">03</bdi></strong><span>פס מרכזי</span></figcaption></figure>
+    <figure class="kit" id="soccer-04"><div class="kit-pieces"><img src="kits/soccer/04-shirt.svg" width="256" height="256" alt="חולצת כדורגל, תלבושת 04, חץ רחב"><img src="kits/soccer/04-shorts.svg" width="256" height="256" alt="מכנסי כדורגל תואמים, תלבושת 04, חץ רחב"></div><figcaption><strong>תלבושת <bdi dir="ltr">04</bdi></strong><span>חץ רחב</span></figcaption></figure>
+    <figure class="kit" id="soccer-05"><div class="kit-pieces"><img src="kits/soccer/05-shirt.svg" width="256" height="256" alt="חולצת כדורגל, תלבושת 05, חצאים"><img src="kits/soccer/05-shorts.svg" width="256" height="256" alt="מכנסי כדורגל תואמים, תלבושת 05, חצאים"></div><figcaption><strong>תלבושת <bdi dir="ltr">05</bdi></strong><span>חצאים</span></figcaption></figure>
+    <figure class="kit" id="soccer-06"><div class="kit-pieces"><img src="kits/soccer/06-shirt.svg" width="256" height="256" alt="חולצת כדורגל, תלבושת 06, חגורה רחבה"><img src="kits/soccer/06-shorts.svg" width="256" height="256" alt="מכנסי כדורגל תואמים, תלבושת 06, חגורה רחבה"></div><figcaption><strong>תלבושת <bdi dir="ltr">06</bdi></strong><span>חגורה רחבה</span></figcaption></figure>
+    <figure class="kit" id="soccer-07"><div class="kit-pieces"><img src="kits/soccer/07-shirt.svg" width="256" height="256" alt="חולצת כדורגל, תלבושת 07, שלושה פסים אנכיים"><img src="kits/soccer/07-shorts.svg" width="256" height="256" alt="מכנסי כדורגל תואמים, תלבושת 07, שלושה פסים אנכיים"></div><figcaption><strong>תלבושת <bdi dir="ltr">07</bdi></strong><span>שלושה פסים אנכיים</span></figcaption></figure>
+    <figure class="kit" id="soccer-08"><div class="kit-pieces"><img src="kits/soccer/08-shirt.svg" width="256" height="256" alt="חולצת כדורגל, תלבושת 08, ריבועים מדורגים"><img src="kits/soccer/08-shorts.svg" width="256" height="256" alt="מכנסי כדורגל תואמים, תלבושת 08, ריבועים מדורגים"></div><figcaption><strong>תלבושת <bdi dir="ltr">08</bdi></strong><span>ריבועים מדורגים</span></figcaption></figure>
+  </div>
+</section>
+<section class="screen hoops-kits-screen" id="hoops-kits-panel" aria-labelledby="hoops-kits-title">
+  <header class="kit-heading"><div><p class="eyebrow">האי שלי · חדר התלבושות</p><h1 id="hoops-kits-title">מדי כדורסל</h1><p class="muted">6 סטים בדויים · לכל תלבושת צבע ודפוס משלה</p></div><a class="action" href="../hoops/hud.html">לתצוגת המגרש</a></header>
+  <div class="kit-grid">
+    <figure class="kit" id="hoops-01"><div class="kit-pieces"><img src="kits/hoops/01-shirt.svg" width="256" height="256" alt="חולצת כדורסל, תלבושת 01, לוחות צד"><img src="kits/hoops/01-shorts.svg" width="256" height="256" alt="מכנסי כדורסל תואמים, תלבושת 01, לוחות צד"></div><figcaption><strong>תלבושת <bdi dir="ltr">01</bdi></strong><span>לוחות צד</span></figcaption></figure>
+    <figure class="kit" id="hoops-02"><div class="kit-pieces"><img src="kits/hoops/02-shirt.svg" width="256" height="256" alt="חולצת כדורסל, תלבושת 02, קרניים"><img src="kits/hoops/02-shorts.svg" width="256" height="256" alt="מכנסי כדורסל תואמים, תלבושת 02, קרניים"></div><figcaption><strong>תלבושת <bdi dir="ltr">02</bdi></strong><span>קרניים</span></figcaption></figure>
+    <figure class="kit" id="hoops-03"><div class="kit-pieces"><img src="kits/hoops/03-shirt.svg" width="256" height="256" alt="חולצת כדורסל, תלבושת 03, זיגזג"><img src="kits/hoops/03-shorts.svg" width="256" height="256" alt="מכנסי כדורסל תואמים, תלבושת 03, זיגזג"></div><figcaption><strong>תלבושת <bdi dir="ltr">03</bdi></strong><span>זיגזג</span></figcaption></figure>
+    <figure class="kit" id="hoops-04"><div class="kit-pieces"><img src="kits/hoops/04-shirt.svg" width="256" height="256" alt="חולצת כדורסל, תלבושת 04, נקודות גדולות"><img src="kits/hoops/04-shorts.svg" width="256" height="256" alt="מכנסי כדורסל תואמים, תלבושת 04, נקודות גדולות"></div><figcaption><strong>תלבושת <bdi dir="ltr">04</bdi></strong><span>נקודות גדולות</span></figcaption></figure>
+    <figure class="kit" id="hoops-05"><div class="kit-pieces"><img src="kits/hoops/05-shirt.svg" width="256" height="256" alt="חולצת כדורסל, תלבושת 05, מדרגה"><img src="kits/hoops/05-shorts.svg" width="256" height="256" alt="מכנסי כדורסל תואמים, תלבושת 05, מדרגה"></div><figcaption><strong>תלבושת <bdi dir="ltr">05</bdi></strong><span>מדרגה</span></figcaption></figure>
+    <figure class="kit" id="hoops-06"><div class="kit-pieces"><img src="kits/hoops/06-shirt.svg" width="256" height="256" alt="חולצת כדורסל, תלבושת 06, גלים"><img src="kits/hoops/06-shorts.svg" width="256" height="256" alt="מכנסי כדורסל תואמים, תלבושת 06, גלים"></div><figcaption><strong>תלבושת <bdi dir="ltr">06</bdi></strong><span>גלים</span></figcaption></figure>
+  </div>
+</section>
+</main>
+</body>
+</html>
