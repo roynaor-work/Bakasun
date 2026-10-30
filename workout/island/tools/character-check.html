@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>בדיקת דמות ותנועה</title>
+<style>html,body{margin:0;background:#102B24;color:#F5F8FA;font:14px system-ui;direction:rtl}canvas{display:block;width:100vw;height:70vh}pre{margin:8px;white-space:pre-wrap;direction:ltr;text-align:left}</style>
+<script type="importmap">{"imports":{"three":"../vendor/three.module.js"}}</script></head>
+<body><canvas id="c"></canvas><pre id="out">loading</pre>
+<script type="module">
+import * as THREE from '../vendor/three.module.js';
+import {GLTFLoader} from '../vendor/GLTFLoader.js';
+import {DRACOLoader} from '../vendor/DRACOLoader.js';
+const q=new URLSearchParams(location.search),who=q.get('who')||'soccer-player',game=q.get('game')||'soccer',clipName=q.get('clip')||'run';
+const out=document.getElementById('out'),canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x287748);
+const cam=new THREE.PerspectiveCamera(35,1,.1,50);cam.position.set(2.6,1.3,3.2);cam.lookAt(0,.85,0);
+scene.add(new THREE.HemisphereLight(0xffffff,0x336644,2.2));const sun=new THREE.DirectionalLight(0xffffff,1.6);sun.position.set(3,6,4);scene.add(sun);
+function resize(){const w=innerWidth,h=Math.round(innerHeight*.7);renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}resize();addEventListener('resize',resize);
+const draco=new DRACOLoader();draco.setDecoderPath('../vendor/draco/');draco.setDecoderConfig({type:'wasm'});
+const loader=new GLTFLoader();loader.setDRACOLoader(draco);
+const [gltf,motion]=await Promise.all([loader.loadAsync(`../design/characters/${who}.glb`),fetch(`../design/motion/${game}.json`).then(r=>r.json())]);
+const root=gltf.scene;scene.add(root);
+const bones={};root.traverse(o=>{if(o.isBone)bones[o.name]=o;});
+const skinned=[];root.traverse(o=>{if(o.isSkinnedMesh)skinned.push(o);});
+root.updateMatrixWorld(true);
+const rest={};for(const n in bones)rest[n]=bones[n].position.clone();
+const hipsRestY=bones.Hips.getWorldPosition(new THREE.Vector3()).y;
+const scale=hipsRestY/(motion.skeleton.bones.find(b=>b.name==='Hips').restTranslationMeters[1]); // GLB hips height / canonical 0.86
+const clip=motion.states[clipName];
+const qa=new THREE.Quaternion(),qb=new THREE.Quaternion(),qc=new THREE.Quaternion();
+// Retarget: canonical rotations are parent-local on an identity-rest T-pose; the GLB bind pose has
+// its own bone axes. newWorld = canonicalWorld * bindWorld, local = inverse(parentNewWorld) * newWorld.
+const canonParent={};for(const b of motion.skeleton.bones)canonParent[b.name]=b.parent;
+const order=[];root.traverse(o=>{if(o.isBone)order.push(o.name);});
+const bindWorld={};for(const n of order)bindWorld[n]=bones[n].getWorldQuaternion(new THREE.Quaternion());
+// Per-bone rest correction Q: swings the GLB rest direction (T-pose arms) onto the canonical rest direction (arms hanging).
+const canonRest={};for(const b of motion.skeleton.bones)canonRest[b.name]=new THREE.Vector3(...b.restTranslationMeters);
+const firstChild={};for(const b of motion.skeleton.bones)if(b.parent&&!firstChild[b.parent])firstChild[b.parent]=b.name;
+const restQ={},wp=n=>bones[n].getWorldPosition(new THREE.Vector3());
+for(const b of motion.skeleton.bones){const c=firstChild[b.name];
+  if(c&&bones[b.name]&&bones[c]&&b.name!=='Root'&&b.name!=='Hips'){const dg=wp(c).sub(wp(b.name)).normalize(),dc=canonRest[c].clone().normalize();restQ[b.name]=new THREE.Quaternion().setFromUnitVectors(dg,dc);}
+  else restQ[b.name]=(b.parent&&restQ[b.parent])?restQ[b.parent]:new THREE.Quaternion();}
+const bindRootParent=bones.Root.parent.getWorldQuaternion(new THREE.Quaternion());
+function pose(u){ // u 0..1 of the clip
+  const k=clip.keyframes;let i=0;while(i<k.length-2&&k[i+1].time<=u)i++;
+  const a=k[i],b=k[i+1],t=Math.min(1,Math.max(0,(u-a.time)/(b.time-a.time))),w=t*t*(3-2*t);
+  const canon={},nw={};
+  for(const n of order){ // order = scene traversal, parents first
+    let local=null;
+    if(a.rotations[n]){qa.fromArray(a.rotations[n]);qb.fromArray(b.rotations[n]);local=new THREE.Quaternion().copy(qa).slerp(qb,w);}
+    const cp=canonParent[n]!==undefined?canonParent[n]:bones[n].parent?.name;
+    const parentCanon=cp&&canon[cp]?canon[cp]:new THREE.Quaternion();
+    canon[n]=local?parentCanon.clone().multiply(local):parentCanon.clone(); // bones outside the canon (shoulders) inherit
+    nw[n]=canon[n].clone().multiply(restQ[n]||new THREE.Quaternion()).multiply(bindWorld[n]);
+    const par=bones[n].parent&&bones[n].parent.isBone?nw[bones[n].parent.name]:bindRootParent;
+    bones[n].quaternion.copy(qc.copy(par).invert().multiply(nw[n]));
+  }
+  const ha=a.hipsOffsetMeters||[0,0,0],hb=b.hipsOffsetMeters||[0,0,0];
+  bones.Hips.position.set(rest.Hips.x+(ha[0]+(hb[0]-ha[0])*w)*scale,rest.Hips.y+(ha[1]+(hb[1]-ha[1])*w)*scale,rest.Hips.z+(ha[2]+(hb[2]-ha[2])*w)*scale);
+}
+// measure over one full clip: lowest foot, loop seam, and frame cost
+const feet=['LeftFoot','RightFoot'].map(n=>bones[n]),v=new THREE.Vector3();
+let minFoot=1e9,maxJump=0,prev=null;const N=96;
+for(let i=0;i<=N;i++){pose(i/N);root.updateMatrixWorld(true);
+  for(const f of feet){f.getWorldPosition(v);minFoot=Math.min(minFoot,v.y);}
+  const p=bones.Head.getWorldPosition(new THREE.Vector3());if(prev)maxJump=Math.max(maxJump,p.distanceTo(prev));prev=p;}
+pose(0);root.updateMatrixWorld(true);const a0=bones.Head.getWorldPosition(new THREE.Vector3());pose(1);root.updateMatrixWorld(true);const seam=bones.Head.getWorldPosition(new THREE.Vector3()).distanceTo(a0);
+const box=new THREE.Box3().setFromObject(root);
+let t0=performance.now(),frames=0,costs=[];
+function tick(now){const s=performance.now();pose(((now/1000)/clip.durationSeconds)%1);renderer.render(scene,cam);costs.push(performance.now()-s);frames++;requestAnimationFrame(tick);}
+requestAnimationFrame(tick);
+setTimeout(()=>{costs.sort((a,b)=>a-b);const rep={who,game,clip:clipName,bones:Object.keys(bones).length,skinnedMeshes:skinned.length,bonesInSkin:skinned[0]?.skeleton.bones.length,heightM:+(box.max.y-box.min.y).toFixed(3),hipsRestY:+hipsRestY.toFixed(3),scale:+scale.toFixed(3),minFootYm:+minFoot.toFixed(3),loopSeamM:+seam.toFixed(4),maxHeadStepM:+maxJump.toFixed(3),frames,cpuMsP50:+costs[costs.length>>1].toFixed(2),cpuMsP95:+costs[Math.floor(costs.length*.95)].toFixed(2),missingBones:Object.keys(clip.keyframes[0].rotations).filter(n=>!bones[n])};
+  window.__check=rep;out.textContent=JSON.stringify(rep,null,1);},2500);
+</script></body></html>
