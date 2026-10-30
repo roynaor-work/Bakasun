@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="he" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>האי שלי · האזנת קול</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#122326;color:#edf7ef;font:17px/1.7 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:32px 20px 70px}h1{font-size:clamp(30px,5vw,48px);margin-bottom:8px}header p{max-width:760px;color:#c4d6d0}h2{margin-top:44px;color:#e6c88b}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:14px}article{background:#1b3437;border:1px solid #355355;border-radius:14px;padding:18px}h3{margin:0 0 4px}article p{margin:4px 0 16px;color:#b3ccc4;font-size:14px}audio{width:100%;height:42px}small{display:block;color:#a8bdb7;font-size:12px;margin-top:14px;overflow-wrap:anywhere}button{background:#e6c88b;border:0;border-radius:8px;padding:12px 18px;font:inherit;font-weight:600;color:#122326;cursor:pointer;margin-top:12px;min-height:44px}button:focus-visible{outline:3px solid #fff;outline-offset:4px}button:disabled{opacity:.6}output{display:block;min-height:28px;font-size:14px;color:#c8ded5}a{color:#e6c88b}#status{min-height:32px}footer{margin-top:44px;color:#a8bdb7}
+</style><main><header><p>חבילת נכסים · קול</p><h1>האי שלי, נשמע קרוב.</h1><p>25 אפקטים מקוריים ושלוש לולאות רקע. ללא מוזיקה או הקלטות חיצוניות. כל הצלילים במונו, בעוצמה מנורמלת.</p><p>נגני הקבצים פועלים גם בפתיחה ישירה. כפתורי הלולאה הרציפה דורשים שרת מקומי, לפי README. הם מנגנים את ה־buffer המפוענח ברצף, ללא תזמון חוזר.</p><button id="stop">עצירת כל הצלילים</button><p id="status" role="status"></p></header><section><h2>כדורגל</h2><div class="grid"><article><h3>בעיטה</h3><p>0.55 שניות · -23.01 LUFS</p><audio controls preload="none" src="soccer/kick.ogg"></audio><small dir="ltr">soccer/kick.ogg</small></article><article><h3>כדור ברשת</h3><p>0.6 שניות · -23.08 LUFS</p><audio controls preload="none" src="soccer/net.ogg"></audio><small dir="ltr">soccer/net.ogg</small></article><article><h3>שריקה</h3><p>0.7 שניות · -23.03 LUFS</p><audio controls preload="none" src="soccer/whistle.ogg"></audio><small dir="ltr">soccer/whistle.ogg</small></article><article><h3>מסירה</h3><p>0.5 שניות · -22.85 LUFS</p><audio controls preload="none" src="soccer/pass.ogg"></audio><small dir="ltr">soccer/pass.ogg</small></article><article><h3>קהל רגוע</h3><p>1.8 שניות · -22.97 LUFS</p><audio controls preload="none" src="soccer/crowd-calm.ogg"></audio><small dir="ltr">soccer/crowd-calm.ogg</small></article><article><h3>קהל מתרגש</h3><p>2 שניות · -22.99 LUFS</p><audio controls preload="none" src="soccer/crowd-excited.ogg"></audio><small dir="ltr">soccer/crowd-excited.ogg</small></article><article><h3>שאגת שער</h3><p>2.8 שניות · -23.01 LUFS</p><audio controls preload="none" src="soccer/crowd-goal.ogg"></audio><small dir="ltr">soccer/crowd-goal.ogg</small></article><article><h3>רקע אצטדיון</h3><p>24 שניות · -22.99 LUFS</p><audio controls preload="none" src="soccer/ambience-loop.ogg"></audio><button class="loop" data-file="soccer/ambience-loop.ogg">הפעלת לולאה רציפה</button><output aria-live="off"></output><small dir="ltr">soccer/ambience-loop.ogg</small></article></div></section><section><h2>כדורסל</h2><div class="grid"><article><h3>כדור על פרקט</h3><p>0.6 שניות · -23.06 LUFS</p><audio controls preload="none" src="basketball/bounce.ogg"></audio><small dir="ltr">basketball/bounce.ogg</small></article><article><h3>סוויש</h3><p>0.55 שניות · -22.96 LUFS</p><audio controls preload="none" src="basketball/swish.ogg"></audio><small dir="ltr">basketball/swish.ogg</small></article><article><h3>פגיעה בטבעת</h3><p>0.75 שניות · -23.0 LUFS</p><audio controls preload="none" src="basketball/rim.ogg"></audio><small dir="ltr">basketball/rim.ogg</small></article><article><h3>נעליים על פרקט</h3><p>0.65 שניות · -23.03 LUFS</p><audio controls preload="none" src="basketball/shoes.ogg"></audio><small dir="ltr">basketball/shoes.ogg</small></article><article><h3>זמזם</h3><p>0.7 שניות · -23.02 LUFS</p><audio controls preload="none" src="basketball/buzzer.ogg"></audio><small dir="ltr">basketball/buzzer.ogg</small></article><article><h3>קהל רגוע באולם</h3><p>1.7 שניות · -23.0 LUFS</p><audio controls preload="none" src="basketball/crowd-calm.ogg"></audio><small dir="ltr">basketball/crowd-calm.ogg</small></article><article><h3>קהל נרגש באולם</h3><p>2.1 שניות · -22.99 LUFS</p><audio controls preload="none" src="basketball/crowd-excited.ogg"></audio><small dir="ltr">basketball/crowd-excited.ogg</small></article><article><h3>רקע אולם</h3><p>24 שניות · -22.99 LUFS</p><audio controls preload="none" src="basketball/ambience-loop.ogg"></audio><button class="loop" data-file="basketball/ambience-loop.ogg">הפעלת לולאה רציפה</button><output aria-live="off"></output><small dir="ltr">basketball/ambience-loop.ogg</small></article></div></section><section><h2>סקי</h2><div class="grid"><article><h3>שלג איטי</h3><p>1.1 שניות · -23.0 LUFS</p><audio controls preload="none" src="ski/scrape-slow.ogg"></audio><small dir="ltr">ski/scrape-slow.ogg</small></article><article><h3>שלג בינוני</h3><p>1.1 שניות · -23.0 LUFS</p><audio controls preload="none" src="ski/scrape-medium.ogg"></audio><small dir="ltr">ski/scrape-medium.ogg</small></article><article><h3>שלג מהיר</h3><p>1.1 שניות · -23.0 LUFS</p><audio controls preload="none" src="ski/scrape-fast.ogg"></audio><small dir="ltr">ski/scrape-fast.ogg</small></article><article><h3>משב רוח</h3><p>2.4 שניות · -22.97 LUFS</p><audio controls preload="none" src="ski/wind.ogg"></audio><small dir="ltr">ski/wind.ogg</small></article><article><h3>קפיצה</h3><p>0.6 שניות · -23.02 LUFS</p><audio controls preload="none" src="ski/jump.ogg"></audio><small dir="ltr">ski/jump.ogg</small></article><article><h3>נחיתה</h3><p>0.7 שניות · -23.06 LUFS</p><audio controls preload="none" src="ski/landing.ogg"></audio><small dir="ltr">ski/landing.ogg</small></article><article><h3>נפילה</h3><p>0.95 שניות · -23.04 LUFS</p><audio controls preload="none" src="ski/fall.ogg"></audio><small dir="ltr">ski/fall.ogg</small></article><article><h3>שער סלאלום</h3><p>0.55 שניות · -22.99 LUFS</p><audio controls preload="none" src="ski/slalom-gate.ogg"></audio><small dir="ltr">ski/slalom-gate.ogg</small></article><article><h3>רקע הרים ורוח</h3><p>24 שניות · -23.0 LUFS</p><audio controls preload="none" src="ski/ambience-loop.ogg"></audio><button class="loop" data-file="ski/ambience-loop.ogg">הפעלת לולאה רציפה</button><output aria-live="off"></output><small dir="ltr">ski/ambience-loop.ogg</small></article></div></section><section><h2>סצנות</h2><div class="grid"><article><h3>פתיחה</h3><p>0.9 שניות · -22.99 LUFS</p><audio controls preload="none" src="scenes/opening.ogg"></audio><small dir="ltr">scenes/opening.ogg</small></article><article><h3>ניצחון</h3><p>1.4 שניות · -23.0 LUFS</p><audio controls preload="none" src="scenes/victory.ogg"></audio><small dir="ltr">scenes/victory.ogg</small></article><article><h3>הפסד</h3><p>0.9 שניות · -23.01 LUFS</p><audio controls preload="none" src="scenes/defeat.ogg"></audio><small dir="ltr">scenes/defeat.ogg</small></article></div></section><footer><a href="mix.json">רמזי ערבוב</a> · <a href="README.md">הוראות</a> · <a href="LICENSES.md">מקור ורישיון</a></footer></main>
+<script>
+let context, current, clockTimer;
+const status = document.querySelector('#status');
+function stopAll() {
+  document.querySelectorAll('audio').forEach(a => { a.pause(); a.currentTime = 0; });
+  if (current) {
+    const old = current;
+    current = null;
+    const now = context.currentTime;
+    old.gain.gain.cancelScheduledValues(now);
+    old.gain.gain.setValueAtTime(old.gain.gain.value, now);
+    old.gain.gain.linearRampToValueAtTime(0, now + .04);
+    old.source.stop(now + .045);
+    old.source.onended = () => { old.source.disconnect(); old.gain.disconnect(); };
+  }
+  clearInterval(clockTimer);
+  document.querySelectorAll('.loop').forEach(b => { b.disabled = false; b.textContent = 'הפעלת לולאה רציפה'; b.nextElementSibling.textContent = ''; });
+}
+document.querySelector('#stop').onclick = () => { stopAll(); status.textContent = 'הניגון נעצר'; };
+document.querySelectorAll('audio').forEach(a => a.addEventListener('play', () => {
+  document.querySelectorAll('audio').forEach(other => { if (other !== a) other.pause(); });
+}));
+let requestId = 0;
+document.querySelectorAll('.loop').forEach(button => button.onclick = async () => {
+  stopAll();
+  const id = ++requestId;
+  button.disabled = true;
+  status.textContent = 'טוען את הלולאה…';
+  try {
+    context ??= new AudioContext({sampleRate:48000});
+    await context.resume();
+    const response = await fetch(button.dataset.file);
+    if (!response.ok) throw new Error('load failed');
+    const buffer = await context.decodeAudioData(await response.arrayBuffer());
+    if (id !== requestId) return;
+    const source = context.createBufferSource(), gain = context.createGain();
+    source.buffer = buffer; source.loop = true;
+    source.loopStart = 0; source.loopEnd = buffer.duration;
+    source.connect(gain).connect(context.destination);
+    const start = context.currentTime;
+    gain.gain.setValueAtTime(0,start); gain.gain.linearRampToValueAtTime(.7,start+.04);
+    source.start(start);
+    current = {source,gain};
+    button.textContent = 'הלולאה מתנגנת';
+    status.textContent = 'הלולאה חוזרת כל 24 שניות. לעצירה לחצו למעלה.';
+    clockTimer = setInterval(() => { button.nextElementSibling.textContent = ((context.currentTime-start)%buffer.duration).toFixed(1)+' / '+buffer.duration.toFixed(0)+' שניות'; },100);
+  } catch(error) {
+    button.disabled = false;
+    status.textContent = 'יש לפתוח דרך שרת מקומי לפי README כדי להפעיל לולאה רציפה.';
+  }
+});
+document.querySelector('#stop').addEventListener('click',()=>{ requestId++; });
+window.addEventListener('pagehide',stopAll);
+</script></html>
