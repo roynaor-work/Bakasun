@@ -22,7 +22,7 @@ export function startHoops(ctx){
  const profile=params.get('hoopsProfile')||setup.profile||'standard';
  const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1'});
  engine.setAutoSub(setup.autoSub!==false);
- let view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0;
+ let view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
  const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
  const abort=new AbortController(),on={signal:abort.signal};let audio;
  try{audio=createHoopsAudio({config:balance.audio,storage});}catch{audio=createHoopsAudio({config:balance.audio,storage:null});}
@@ -91,7 +91,7 @@ export function startHoops(ctx){
 
  function showToast(content,kind,ms=900){toast.hidden=false;toast.dataset.kind=kind;toast.replaceChildren(content);toastUntil=performance.now()+ms;}
  function handleEvents(events){
-  if(!events.length)return;view?.effects(events);audio.events(events);
+  if(!events.length)return;view?.effects(events,cur);audio.events(events);
   for(const e of events){
    if(e.type==='timing'&&e.playerId===cur.controlled){const g=e.zone==='green'?'perfect':e.zone==='yellow'?'good':e.early?'early':'late';grade.hidden=false;grade.dataset.grade=g;grade.replaceChildren(hoopsIcon(g,doc));gradeUntil=performance.now()+800;}
    if(e.type==='score'){if(statusEl)statusEl.textContent=t('hoops.scoreStatus',{home:e.score[0],away:e.score[1]});replayOffer=performance.now()+4500;showToast(doc.createTextNode('+'+e.points),e.team===0?'home':'away',900);}
@@ -148,7 +148,7 @@ export function startHoops(ctx){
   const dt=last?(now-last)/1000:0;last=now;
   if(!view)return;
   if(session.debug?.hold)return; // dev only: keeps the last frame for a screenshot
-  if(!paused&&!doc.hidden&&!view.replaying){
+  if(!paused&&!doc.hidden&&!view.replaying&&cur.phase!=='final'){
    loop.advance(dt,()=>{prev=cur;engine.step(controls.consume());cur=engine.snapshot();stepsRun++;handleEvents(engine.drainEvents());return cur.phase!=='final';});
   }
   let holder=null;for(const p of cur.players)if(p.hasBall){holder=p;break;}
@@ -156,6 +156,8 @@ export function startHoops(ctx){
   const alpha=paused?1:loop.alpha;
   view.render(prev,cur,alpha,paused?0:dt);hud(cur,now);
   if(cur.phase==='final'&&!finished){
+   if(!paused&&!doc.hidden)finalDisplay+=Math.min(dt,.1);
+   if(finalDisplay<(view.celebrationSeconds||0))return;
    finished=true;const r=engine.result;cancelAnimationFrame(frame);frame=undefined;
    const sc=r.score,won=sc[0]>sc[1];
    const box=r.box[0].map(p=>({id:p.id,pts:p.pts,reb:p.reb,ast:p.ast,stl:p.stl,blk:p.blk,sec:p.sec,fgm:p.fgm,fga:p.fga,tpm:p.tpm,tpa:p.tpa,ftm:p.ftm,fta:p.fta,pf:p.pf,tov:p.tov}));

@@ -5,6 +5,7 @@ import * as THREE from '../vendor/three.module.js';
 import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-perf-20261030-1';
 import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-perf-20261030-1';
 import {replaceArenaAssets} from './hoops-models.mjs';
+import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
 import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-perf-20261030-1';
 
 const lerp=(a,b,t)=>a+(b-a)*t;
@@ -57,6 +58,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
 
  const state={camX:0,camZ:0,shake:0,replay:null,lastFrameMs:16,frames:0,slow:0,landscape:true,w:1,h:1,portraitT:1,ballVis:null};
  const v=new THREE.Vector3(),v2=new THREE.Vector3();
+ const vfx=await createHoopsVfx(scene,assetBase,{quality,court});
+ const replayCam=new THREE.PerspectiveCamera(),replayTarget=new THREE.Vector3();
 
  function resize(w,h,dpr){
   state.w=w;state.h=h;state.landscape=w>=h*1.05;
@@ -132,7 +135,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
 
  const seen=new Set();
  function render(prev,cur,alpha,dt){
-  const s=state.replay?replayFrame(dt):cur,p0=state.replay?s:prev;
+  const s=state.replay?replayFrame(dt):cur,p0=state.replay?s:prev;state.lastSnapshot=cur;
   const t0=performance.now();
   interp.index(p0?.players);
   seen.clear();
@@ -186,21 +189,43 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   drawDisplays(dyn,s,looks.map(l=>l.primary));
   if(crowd)crowd.update(dt,state.cheer||0);state.cheer=Math.max(0,(state.cheer||0)-dt*0.5);
   if(state.override){camera.position.copy(state.override.pos);camera.fov=state.override.fov||camera.fov;camera.updateProjectionMatrix();camera.lookAt(state.override.look);}else cameraFor(s,dt);
+  if(state.replay?.dunk&&!vfx.reducedMotion&&!state.override)replayCamera(state.replay,cur,dt);
+  vfx.update(dt,{ball,camera,snapshot:s,replaying:!!state.replay});
   renderer.render(scene,camera);
+  if(state.replay?.complete){const done=state.replay.done;state.replay=null;done?.();}
   state.lastFrameMs=performance.now()-t0;state.frames++;
  }
 
  function replayFrame(dt){
-  const r=state.replay;r.t+=dt*r.speed;const i=Math.min(r.frames.length-1,Math.floor(r.t*config.replay.hz));
-  if(i>=r.frames.length-1){const done=r.done;state.replay=null;done?.();}
-  return r.frames[Math.max(0,i)];
+  const r=state.replay;r.elapsed+=dt;
+  let i;
+  if(r.dunk){
+   const contact=vfx.cameraTrack.entry.durationSeconds+vfx.cameraTrack.replayContactPathTime;
+   const end=vfx.cameraTrack.durationSeconds;
+   i=r.elapsed<=contact?lerp(r.first,r.contact,clamp(r.elapsed/contact,0,1)):lerp(r.contact,r.frames.length-1,clamp((r.elapsed-contact)/(end-contact),0,1));
+   r.complete=r.elapsed>=end;
+  }else{r.t+=dt*r.speed;i=r.t*config.replay.hz;r.complete=i>=r.frames.length-1;}
+  return r.frames[clamp(Math.floor(i),0,r.frames.length-1)];
+ }
+ function replayCamera(r,live,dt){
+  cameraFor(live,dt);
+  const track=vfx.cameraTrack,entry=track.entry.durationSeconds,exit=track.exit.durationSeconds;
+  const pose=vfx.sampleDunkCamera(clamp(r.elapsed-entry,0,track.pathDurationSeconds),r.side);
+  replayCam.position.fromArray(pose.position);replayTarget.fromArray(pose.target);replayCam.lookAt(replayTarget);
+  const fov=state.landscape?pose.fov:Math.max(62,pose.fov);
+  if(r.elapsed<entry){const w=smootherstep(r.elapsed/entry);camera.position.copy(r.entry.position).lerp(replayCam.position,w);camera.quaternion.copy(r.entry.quaternion).slerp(replayCam.quaternion,w);camera.fov=lerp(r.entry.fov,fov,w);}
+  else if(r.elapsed>track.durationSeconds-exit){const w=smootherstep((r.elapsed-track.durationSeconds+exit)/exit);camera.position.lerp(replayCam.position,1-w);camera.quaternion.slerp(replayCam.quaternion,1-w);camera.fov=lerp(fov,camera.fov,w);}
+  else{camera.position.copy(replayCam.position);camera.quaternion.copy(replayCam.quaternion);camera.fov=fov;}
+  camera.updateProjectionMatrix();
  }
 
- function effects(events){
+ function effects(events,snapshot){
+  vfx.effects(events,snapshot||state.lastSnapshot);
   for(const e of events){
-   if(e.type==='shotStart'&&(e.shotType==='dunk'||e.shotType==='layup'))state.punch=e.shotType==='dunk'?1:0.6;
-   if(e.type==='score'){const n=dyn.nets.find(n=>Math.sign(n.side)===Math.sign((e.side)??1));for(const n2 of dyn.nets)n2.swing=1;state.cheer=1;if(e.shotType==='dunk')state.shake=1;}
-   if(e.type==='block'||e.type==='contact'&&e.what==='rim'&&e.speed>3)state.shake=Math.max(state.shake,0.4);
+   if(e.type==='final'&&snapshot){const winner=e.won?0:1;for(const p of snapshot.players)if(p.team===winner)avatars.get(p.id)?.event('result_success');}
+   if(!vfx.reducedMotion&&e.type==='shotStart'&&(e.shotType==='dunk'||e.shotType==='layup'))state.punch=e.shotType==='dunk'?1:0.6;
+   if(e.type==='score'){const n=dyn.nets.find(n=>Math.sign(n.side)===Math.sign((e.side)??1));for(const n2 of dyn.nets)n2.swing=1;state.cheer=1;if(e.shotType==='dunk'&&!vfx.reducedMotion)state.shake=1;}
+   if(!vfx.reducedMotion&&(e.type==='block'||e.type==='contact'&&e.what==='rim'&&e.speed>3))state.shake=Math.max(state.shake,0.4);
   }
  }
 
@@ -212,17 +237,22 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z){v.set(x,y,z).project(camera);return {x:(v.x+1)/2*state.w,y:(1-v.y)/2*state.h,visible:v.z<1};}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape};}
- function startReplay(frames,done,speed=0.6){if(!frames?.length)return false;state.replay={frames,t:0,speed,done};return true;}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function startReplay(frames,done,speed=0.6){
+  if(!frames?.length)return false;
+  let shooter=null,side=1,start=0,contact=0,best=Infinity;
+  for(let i=0;i<frames.length;i++)for(const p of frames[i].players)if(p.act==='shoot'&&p.shotType==='dunk'){if(shooter!==p.id){shooter=p.id;start=i;best=Infinity;}side=frames[i].dir[p.team];const b=frames[i].ball,d=Math.hypot(b.x-side*court.rimX,b.y-court.rimY,b.z);if(d<best){best=d;contact=i;}}
+  state.replay={frames,t:0,elapsed:0,speed,done,dunk:!!shooter&&!vfx.reducedMotion,contact,first:Math.max(start,contact-90),side,entry:{position:camera.position.clone(),quaternion:camera.quaternion.clone(),fov:camera.fov}};return true;
+ }
  function dispose(){
-  for(const av of avatars.values())av.dispose();assets.dispose();models.dispose();
+  for(const av of avatars.values())av.dispose();assets.dispose();models.dispose();vfx.dispose();
   const geometries=new Set(),materials=new Set(),textures=new Set();
   scene.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of (o.material?Array.isArray(o.material)?o.material:[o.material]:[])){materials.add(m);for(const x of Object.values(m))if(x?.isTexture)textures.add(x);}});
   for(const x of geometries)x.dispose();for(const x of materials)x.dispose();for(const x of textures)x.dispose();
   scene.environment?.dispose();renderer.dispose();pm.dispose();
  }
  function setCameraOverride(pos,look,fov){state.override=pos?{pos:new THREE.Vector3(pos.x,pos.y,pos.z),look:new THREE.Vector3(look.x,look.y,look.z),fov}:null;}
- return {snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,dispose,get replaying(){return !!state.replay;},renderer,scene,camera,avatars};
+ return {snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,dispose,get replaying(){return !!state.replay;},renderer,scene,camera,avatars,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
 }
 
 async function buildCrowd(spots,url,grid,quality){
