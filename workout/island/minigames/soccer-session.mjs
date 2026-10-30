@@ -1,4 +1,4 @@
-import {createG3hAudio} from './g3h-audio.mjs?v=island-perf-20261030-1';
+import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
 import {actionIcon} from './soccer-icons.mjs?v=island-perf-20261030-1';
 import {createSoccer} from './soccer.mjs?v=island-perf-20261030-1';
 import {soccerShotIcon} from './soccer-presentation.mjs?v=island-perf-20261030-1';
@@ -54,7 +54,7 @@ export function startSoccer(ctx) {
   const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=soccerViewConfig(context,balance),{team,opponent}=viewConfig;
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});
   let storage;try{storage=globalThis.localStorage;}catch{}
-  const audio=createG3hAudio({storage});
+  const audio=createSoccerDesignAudio({storage,pitchLength:balance.pitch.length});
   // Bonus penalties follow every league match; the match result is kept untouched.
   let shootout=null,shootoutWait=0;const penaltiesOn=!context.drill&&!!balance.league?.penalties&&!!balance.league?.leagues?.length;
   let view,input,buttonInput,frame,last=0,hud=0,paused=false,disposed=false,handed=balance.controls.rightHanded,hudSignature='',mode='',started=false,pendingSwap=false;
