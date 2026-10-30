@@ -1,4 +1,4 @@
-import {DATA_VERSION} from '../release.mjs?v=island-naval-aim-20261030-1';
+import {DATA_VERSION} from '../release.mjs?v=island-perf-20261030-1';
 
 /** A local frame preserves the original game's CSS, Three.js and campaign.
  * The island still owns fullscreen, Back, visibility, pause, mute and exit. */

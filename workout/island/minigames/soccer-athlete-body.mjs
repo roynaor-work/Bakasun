@@ -1,3 +1,4 @@
+const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Body layer for the realistic athlete, applied around the mocap mixer.
  * - orientation: a critically damped yaw spring (no snaps, no spinning tops);
  * - lean: into turns (centripetal) and with acceleration (push-off / braking);
@@ -39,7 +40,7 @@ const LEGS = [['UpperLeg_L', 'LowerLeg_L', 'Foot_L'], ['UpperLeg_R', 'LowerLeg_R
 
 export function createAthleteBody(T, character, m) {
   const V = () => new T.Vector3(), Q = () => new T.Quaternion();
-  const h = V(), k = V(), a = V(), t = V(), u = V(), v = V(), n = V(), right = V(), q = Q(), pq = Q(), fq = Q();
+  const h = V(), k = V(), a = V(), t = V(), u = V(), v = V(), n = V(), right = V(), q = Q(), pq = Q(), fq = Q(), rq = Q();
   const legs = LEGS.map(([up, low, foot]) => ({up: character.bones[up]?.bone, low: character.bones[low]?.bone, foot: character.bones[foot]?.bone, planted: false, lock: V(), weight: 0, rest: null}));
   const state = {yaw: null, rate: 0, roll: 0, pitch: 0, speed: 0, accel: 0, dribble: {weight: 0, since: 9, last: 0, prev: 0, rising: false, offset: 0}};
   const rotateWorld = (bone, quat) => {
@@ -56,9 +57,9 @@ export function createAthleteBody(T, character, m) {
     const cur = u.angleTo(v), want = Math.acos(clamp((l1 * l1 + l2 * l2 - d * d) / (2 * l1 * l2), -1, 1));
     n.crossVectors(u, v);
     if (n.lengthSq() < 1e-8) n.copy(right); else n.normalize();
-    if (Math.abs(want - cur) > 1e-4) { rotateWorld(leg.low, Q().setFromAxisAngle(n, want - cur)); leg.foot.getWorldPosition(a); }
+    if (Math.abs(want - cur) > 1e-4) { rotateWorld(leg.low, rq.setFromAxisAngle(n, want - cur)); leg.foot.getWorldPosition(a); }
     u.subVectors(a, h).normalize(); v.subVectors(target, h).normalize();
-    rotateWorld(leg.up, Q().setFromUnitVectors(u, v));
+    rotateWorld(leg.up, rq.setFromUnitVectors(u, v));
     // keep the animated foot orientation in world space
     leg.foot.parent.getWorldQuaternion(pq);
     leg.foot.quaternion.copy(pq.invert().multiply(fq));
@@ -70,7 +71,7 @@ export function createAthleteBody(T, character, m) {
     orient(p, wanted, dt, quick) {
       if (state.yaw === null) { state.yaw = wanted; state.rate = 0; }
       yawSpring(state, wanted, dt, quick ? m.quickTurnStiffness : m.turnStiffness);
-      const speed = Math.hypot(p.vx, p.vz), along = p.vx * Math.sin(state.yaw) + p.vz * Math.cos(state.yaw);
+      const speed = hypot2(p.vx, p.vz), along = p.vx * Math.sin(state.yaw) + p.vz * Math.cos(state.yaw);
       const accel = dt > 0 ? (along - state.speed) / dt : 0;
       state.accel += (accel - state.accel) * (1 - Math.exp(-dt / m.accelEase));
       state.speed = along;
@@ -92,7 +93,7 @@ export function createAthleteBody(T, character, m) {
         const low = a.y < leg.rest, high = a.y > leg.rest + m.plantRelease;
         if (!leg.planted && low && weight > 0.5) { leg.planted = true; leg.lock.copy(a); }
         if (leg.planted) {
-          const slip = Math.hypot(a.x - leg.lock.x, a.z - leg.lock.z);
+          const slip = hypot2(a.x - leg.lock.x, a.z - leg.lock.z);
           if (high || slip > m.maxSlip || weight <= 0.5) leg.planted = false;
         }
         const goal = leg.planted ? weight : 0;
@@ -108,7 +109,7 @@ export function createAthleteBody(T, character, m) {
     },
     /** Dribble touch timing from the right foot reaching forward. Returns the visual offset (m, along facing). */
     dribble(p, owns, dt, footAlong, period, active, ballAlong) {
-      const d = state.dribble, speed = Math.hypot(p.vx, p.vz);
+      const d = state.dribble, speed = hypot2(p.vx, p.vz);
       if (!(dt > 0)) return d.offset; // paused: no touch, no change
       const rising = footAlong > d.prev + 1e-4;
       if (d.rising && !rising) { d.since = 0; d.touch = d.prev; } // right foot reached its forward-most point: touch
