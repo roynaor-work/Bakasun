@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "id": "island-vfx-20261030",
+  "created": "2026-10-30",
+  "repository": "roynaor-work/Bakasun",
+  "baseCommit": "331994eb8e310a12422f8f27e37faf723d8de478",
+  "license": "CC0-1.0",
+  "runtimeIntegration": "not-connected",
+  "limits": {
+    "packageBytes": 1500000,
+    "atlasBytes": 150000,
+    "atlasMaxWidth": 512,
+    "atlasMaxHeight": 512,
+    "cameraSecondsIncludingTransitions": 8
+  },
+  "atlases": [
+    "atlases/goal-burst.json",
+    "atlases/confetti.json",
+    "atlases/snow-dust.json",
+    "atlases/ski-scrape.json",
+    "atlases/landing-dust.json",
+    "atlases/speed-lines.json",
+    "atlases/net-spark.json",
+    "atlases/burning-ball-glow.json"
+  ],
+  "cameras": [
+    "cameras/dunk-replay.json",
+    "cameras/goal-replay-behind.json",
+    "cameras/goal-replay-left.json",
+    "cameras/goal-replay-right.json",
+    "cameras/ski-fall.json",
+    "cameras/victory-celebration.json"
+  ],
+  "documentation": [
+    "README.md",
+    "CAMERAS.md",
+    "LICENSES.md",
+    "PROMPTS.md",
+    "VALIDATION.md"
+  ],
+  "gamePreloadGroups": {
+    "soccer": [
+      "goal-burst",
+      "net-spark",
+      "speed-lines"
+    ],
+    "hoops": [
+      "landing-dust",
+      "net-spark",
+      "burning-ball-glow"
+    ],
+    "alpine": [
+      "snow-dust",
+      "ski-scrape",
+      "speed-lines"
+    ],
+    "results": [
+      "confetti"
+    ]
+  },
+  "loadPolicy": "Only load the active group. Dispose previous textures before switching. Max 3 resident atlases and 3 active instances; load confetti after evicting gameplay textures.",
+  "files": [
+    {
+      "path": "atlases/burning-ball-glow.json",
+      "bytes": 1313,
+      "sha256": "6ea5777b1afb0734e7f14459f75a02271ac263b96b786de0d7efc5bd1de84cb7"
+    },
+    {
+      "path": "atlases/burning-ball-glow.webp",
+      "bytes": 120744,
+      "sha256": "bd18fe3072163ac2323b139dee9afa3a30cdeed82d7de9c14ea856b2a717ca13"
+    },
+    {
+      "path": "atlases/confetti.json",
+      "bytes": 1413,
+      "sha256": "7f37b87da169a25cdb32c4c51ca94b5d14c13ee883f7d99298f74bdcfe2ec284"
+    },
+    {
+      "path": "atlases/confetti.webp",
+      "bytes": 90786,
+      "sha256": "92fdc5f8665f01b268cad1192b5e3722462be064a0028c27c5970c345c3ba93f"
+    },
+    {
+      "path": "atlases/goal-burst.json",
+      "bytes": 1423,
+      "sha256": "ee977444ba39b6d6305a59cddc52d543fc6cd33cea631b8d57189e6757987dda"
+    },
+    {
+      "path": "atlases/goal-burst.webp",
+      "bytes": 110040,
+      "sha256": "a92aee026f91c8912788a9d9a0e5e10683eddc0bd38dc438ca90d6eada96834e"
+    },
+    {
+      "path": "atlases/landing-dust.json",
+      "bytes": 1378,
+      "sha256": "be104a6d25d384776b603d6603651eab6e25fd90fa53aa59f533b1c65fc732c7"
+    },
+    {
+      "path": "atlases/landing-dust.webp",
+      "bytes": 85306,
+      "sha256": "448733187d976ce4b56253aeb4c06ad07f973cd72511e6841ae6817bffe5c65e"
+    },
+    {
+      "path": "atlases/net-spark.json",
+      "bytes": 1379,
+      "sha256": "505f8601c67e01953129d76adbc5f5e7c94af735aedb90a4d69374477a20da2b"
+    },
+    {
+      "path": "atlases/net-spark.webp",
+      "bytes": 50834,
+      "sha256": "3a409723cbb18e69343a9fb2d84cbef10f0a0fe6d2df5e85508924179330a35c"
+    },
+    {
+      "path": "atlases/ski-scrape.json",
+      "bytes": 1420,
+      "sha256": "faac995348f169a268352b4f1d778e50b725b03717d28969e44064c9f300786a"
+    },
+    {
+      "path": "atlases/ski-scrape.webp",
+      "bytes": 93372,
+      "sha256": "f226e5cf45184306333b31fd7bb57d3969361e363f2075472c91ef5936ee039a"
+    },
+    {
+      "path": "atlases/snow-dust.json",
+      "bytes": 1373,
+      "sha256": "34d5bf7be5bb66809a2c6a24180d5f5d824a8594f86f4e657a1d67d58df60d81"
+    },
+    {
+      "path": "atlases/snow-dust.webp",
+      "bytes": 120988,
+      "sha256": "20ce434b91529ac707dfe5e0ce369b4dc9392345a3f0ece0211f98c597b6ef29"
+    },
+    {
+      "path": "atlases/speed-lines.json",
+      "bytes": 1421,
+      "sha256": "fa20293c8c2cf036c4b84bf2c524e7587b94434a692ff60156c993c12440f301"
+    },
+    {
+      "path": "atlases/speed-lines.webp",
+      "bytes": 71104,
+      "sha256": "5d683c0191018b5cca9a075dd4be0c2cd668fc3695c45b530124df078c54cc9a"
+    },
+    {
+      "path": "cameras/dunk-replay.json",
+      "bytes": 3143,
+      "sha256": "c766ca5426342e111e4058105831b8e8abe20b2a2f759f3145a89445d66bfa3b"
+    },
+    {
+      "path": "cameras/goal-replay-behind.json",
+      "bytes": 3142,
+      "sha256": "5775960eb11e115e3ba4c16f0c40e01e407b5e517f6ac613feec9918d74227aa"
+    },
+    {
+      "path": "cameras/goal-replay-left.json",
+      "bytes": 3143,
+      "sha256": "6ce4e93ddd56073f27d0d5b20bde0153adb0f6bb48b529457b3c95b74a905187"
+    },
+    {
+      "path": "cameras/goal-replay-right.json",
+      "bytes": 3142,
+      "sha256": "fb4071375707ce743dbb3f861a8877a16a92adca9e499dd100b8e73294756f6b"
+    },
+    {
+      "path": "cameras/ski-fall.json",
+      "bytes": 3109,
+      "sha256": "843a858aa731ca4c406aa8780b900aef43607d4e08c5bd5ad5977a592a8c825c"
+    },
+    {
+      "path": "cameras/victory-celebration.json",
+      "bytes": 3070,
+      "sha256": "3b670fd6ecc520b3dca0edd9081a8f6032ef2c10da22de197eee1d4cbb3d367a"
+    }
+  ]
+}

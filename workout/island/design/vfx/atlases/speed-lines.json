@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-lines",
+  "image": "speed-lines.webp",
+  "atlasSize": {
+    "width": 512,
+    "height": 512
+  },
+  "frameSize": {
+    "width": 128,
+    "height": 128
+  },
+  "columns": 4,
+  "rows": 4,
+  "frameCount": 16,
+  "fps": 24,
+  "frameOrder": "row-major-left-to-right-top-to-bottom",
+  "indexBase": 0,
+  "loop": false,
+  "durationSeconds": 0.6666666666666666,
+  "paddingPixels": 8,
+  "pivot": {
+    "x": 0.5,
+    "y": 0.5
+  },
+  "alphaMode": "straight",
+  "colorSpace": "srgb",
+  "blendMode": "alpha",
+  "depthWrite": false,
+  "sampling": {
+    "minFilter": "linear",
+    "magFilter": "linear",
+    "wrap": "clamp-to-edge",
+    "mipmaps": false,
+    "uvInsetPixels": 0.5
+  },
+  "opacityEnvelope": [
+    {
+      "time": 0,
+      "opacity": 0
+    },
+    {
+      "time": 0.041666666666666664,
+      "opacity": 1
+    },
+    {
+      "time": 0.5,
+      "opacity": 0.65
+    },
+    {
+      "time": 0.6666666666666666,
+      "opacity": 0
+    }
+  ],
+  "envelopeInterpolation": "smoothstep",
+  "loopSeam": null,
+  "lowEnd": {
+    "maxInstances": 1,
+    "maxScreenFractionPerInstance": 0.15,
+    "residentTextureBytes": 1048576,
+    "drawCallsPerInstanceUpperBound": 1,
+    "trianglesPerInstance": 2,
+    "postprocessing": false
+  },
+  "fileBytes": 71104,
+  "sha256": "5d683c0191018b5cca9a075dd4be0c2cd668fc3695c45b530124df078c54cc9a"
+}
