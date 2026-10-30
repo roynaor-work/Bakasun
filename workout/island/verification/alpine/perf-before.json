@@ -1,0 +1,332 @@
+{
+ "seconds": 30,
+ "date": "2026-10-30T13:50:30.089Z",
+ "results": [
+  {
+   "width": 844,
+   "height": 390,
+   "pixelRatio": 1,
+   "mobileProfile": true,
+   "small": false,
+   "stage": 1,
+   "seed": 7,
+   "seconds": 30.3,
+   "loadMs": 2982,
+   "frames": 18,
+   "allFrames": 19,
+   "avgFps": 0.7,
+   "warmupMs": 2000,
+   "firstRacingFrames": [
+    {
+     "frameMs": 5585.5,
+     "render": 5583.4,
+     "step": 0.9
+    },
+    {
+     "frameMs": 13.6,
+     "render": 12.2,
+     "step": 1.2
+    },
+    {
+     "frameMs": 13.2,
+     "render": 12.5,
+     "step": 0.3
+    },
+    {
+     "frameMs": 21.6,
+     "render": 18.7,
+     "step": 2.4
+    }
+   ],
+   "frameMs": {
+    "p50": 883.3,
+    "p95": 7399.7,
+    "p99": 7399.7,
+    "max": 7399.7
+   },
+   "over33": 15,
+   "over50": 14,
+   "tickMs": {
+    "avg": 81.556,
+    "p95": 1317.1,
+    "max": 1317.1
+   },
+   "parts": {
+    "step": 0.656,
+    "snapshot": 0.028,
+    "presentation": 0.006,
+    "render": 80.339,
+    "other": 0.563
+   },
+   "allocKB": {
+    "median": 538.2,
+    "p90": 747.4
+   },
+   "audit": {
+    "categories": {
+     "track": {
+      "objects": 23,
+      "tris": 46880,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 6,
+      "tris": 102852,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 11,
+      "tris": 7920,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "poles": {
+      "objects": 1,
+      "tris": 616,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "ridge": {
+      "objects": 2,
+      "tris": 37800,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "sky": {
+      "objects": 1,
+      "tris": 960,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 3840,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "finish": {
+      "objects": 0,
+      "tris": 0,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "riders": {
+      "objects": 22,
+      "tris": 10542,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 202,
+      "shadowTris": 0,
+      "points": 151
+     },
+     "props": {
+      "objects": 27,
+      "tris": 4064,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 1024,
+    "shadowsEnabled": false,
+    "programs": 45
+   },
+   "qualitySwitches": [
+    {
+     "to": "low",
+     "costMs": 6087.3,
+     "frameIndex": 10,
+     "atSecond": 22.7,
+     "frameMs": 16.7,
+     "over50Around": 14,
+     "maxAround": 7399.7
+    }
+   ],
+   "render": {
+    "calls": 99,
+    "triangles": 215878,
+    "trees": 78,
+    "chunks": 51,
+    "visibleChunks": 12,
+    "quality": "low",
+    "mode": "model",
+    "geometries": 212,
+    "textures": 23
+   },
+   "finalPhase": "racing",
+   "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+   "mode": "full",
+   "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ]
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "pixelRatio": 1,
+   "mobileProfile": true,
+   "small": false,
+   "stage": 1,
+   "seed": 7,
+   "seconds": 30.3,
+   "loadMs": 3064,
+   "frames": 27,
+   "allFrames": 28,
+   "avgFps": 1,
+   "warmupMs": 2000,
+   "firstRacingFrames": [
+    {
+     "frameMs": 4031.2,
+     "render": 4029.2,
+     "step": 0.8
+    },
+    {
+     "frameMs": 17.7,
+     "render": 15.2,
+     "step": 1.8
+    },
+    {
+     "frameMs": 11.8,
+     "render": 11.1,
+     "step": 0.3
+    },
+    {
+     "frameMs": 7,
+     "render": 6.4,
+     "step": 0.1
+    }
+   ],
+   "frameMs": {
+    "p50": 666.5,
+    "p95": 1533.3,
+    "p99": 4766.5,
+    "max": 4766.5
+   },
+   "over33": 26,
+   "over50": 24,
+   "tickMs": {
+    "avg": 68.215,
+    "p95": 24.3,
+    "max": 1622.5
+   },
+   "parts": {
+    "step": 0.493,
+    "snapshot": 0.019,
+    "presentation": 0.019,
+    "render": 67.126,
+    "other": 0.579
+   },
+   "allocKB": {
+    "median": 491.7,
+    "p90": 846.7
+   },
+   "audit": {
+    "categories": {
+     "track": {
+      "objects": 22,
+      "tris": 43840,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 6,
+      "tris": 101646,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 11,
+      "tris": 7920,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "poles": {
+      "objects": 1,
+      "tris": 560,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "ridge": {
+      "objects": 2,
+      "tris": 37800,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "sky": {
+      "objects": 1,
+      "tris": 960,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 7296,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "finish": {
+      "objects": 0,
+      "tris": 0,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "riders": {
+      "objects": 22,
+      "tris": 10542,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 288,
+      "shadowTris": 0,
+      "points": 151
+     },
+     "props": {
+      "objects": 31,
+      "tris": 4102,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 1024,
+    "shadowsEnabled": false,
+    "programs": 45
+   },
+   "qualitySwitches": [
+    {
+     "to": "low",
+     "costMs": 3147.8,
+     "frameIndex": 11,
+     "atSecond": 19,
+     "frameMs": 33.3,
+     "over50Around": 18,
+     "maxAround": 4766.5
+    }
+   ],
+   "render": {
+    "calls": 102,
+    "triangles": 215242,
+    "trees": 77,
+    "chunks": 51,
+    "visibleChunks": 12,
+    "quality": "low",
+    "mode": "model",
+    "geometries": 214,
+    "textures": 21
+   },
+   "finalPhase": "racing",
+   "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+   "mode": "full",
+   "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ]
+  }
+ ]
+}

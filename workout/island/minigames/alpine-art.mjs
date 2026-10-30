@@ -32,13 +32,13 @@ export function createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,sno
  const rawRock=new T.IcosahedronGeometry(1,5);rawRock.deleteAttribute('uv');const rockGeo=mergeVertices(rawRock);rawRock.dispose();const rp=rockGeo.attributes.position;
  for(let i=0;i<rp.count;i++){const x=rp.getX(i),y=rp.getY(i),z=rp.getZ(i),n=1+.09*Math.sin(x*12+z*5)*Math.cos(y*7-z*3),skirt=y<0?1/Math.max(.08,Math.sqrt(Math.max(0,1-y*y))):1;rp.setXYZ(i,x*n*skirt,y*(y<0?8:1)*n,z*n*skirt);}rockGeo.computeVertexNormals();
  // Rock mass and snow cornices start beyond the lip and deck, never over the rideable pipe.
- for(let s=-20,i=0;s<course.length+100;s+=17,i++){const side=i%2?1:-1,h=3+rnd()*7,wx=3+rnd()*4,wz=5+rnd()*5,yaw=rnd()*2,footprint=Math.hypot(wx*Math.cos(yaw),wz*Math.sin(yaw))*1.23,x=side*(deckEdge+footprint+1+rnd()*3);const rock=new T.Mesh(rockGeo,stone);rock.scale.set(wx,h,wz);upright(rock,s,x,terrainY(s,Math.abs(x),side)+h*.05,0,yaw);rock.castShadow=rock.receiveShadow=true;scene.add(rock);rocks.push({s,mesh:rock});}
+ for(let s=-20,i=0;s<course.length+100;s+=17,i++){const side=i%2?1:-1,h=3+rnd()*7,wx=3+rnd()*4,wz=5+rnd()*5,yaw=rnd()*2,footprint=Math.hypot(wx*Math.cos(yaw),wz*Math.sin(yaw))*1.23,x=side*(deckEdge+footprint+1+rnd()*3);const rock=new T.Mesh(rockGeo,stone);rock.scale.set(wx,h,wz);upright(rock,s,x,terrainY(s,Math.abs(x),side)+h*.05,0,yaw);rock.castShadow=rock.receiveShadow=true;rock.userData.perf='rocks';scene.add(rock);rocks.push({s,mesh:rock});}
  // Sparse rope markers replace the continuous red safety net, retaining clear boundary cues.
  const poleMat=new T.MeshStandardMaterial({color:'#c87550',roughness:.8});
- const poleGeo=new T.CylinderGeometry(.045,.075,1.6,7).translate(0,.8,0),poles=new T.InstancedMesh(poleGeo,poleMat,70);scene.add(poles);poles.frustumCulled=false;poles.castShadow=true;
+ const poleGeo=new T.CylinderGeometry(.045,.075,1.6,7).translate(0,.8,0),poles=new T.InstancedMesh(poleGeo,poleMat,70);scene.add(poles);poles.frustumCulled=false;poles.castShadow=true;poles.userData.perf='poles';
  for(let s=-20;s<course.length+80;s+=17)for(const side of [-1,1])posts.push({s,x:side*(deckEdge-.4)});
  const matrix=new T.Matrix4(),dummy=new T.Object3D();let count=0;
- const ridge=new T.Group();scene.add(ridge);
+ const ridge=new T.Group();ridge.userData.perf='ridge';scene.add(ridge);
  const distantStone=worldShader(new T.MeshStandardMaterial({color:'#a0b9c8',roughness:1,fog:false,envMapIntensity:.1}),`
  float n=fbm(artWorld*.028),cover=smoothstep(.76,.88,artNormal.y+(n-.5)*.25);
  float gully=smoothstep(.61,.75,fbm(vec3(artWorld.x*.045,artWorld.y*.008,artWorld.z*.045)))*smoothstep(.38,.65,artNormal.y);cover=max(cover,gully*.86);
@@ -52,10 +52,13 @@ export function createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,sno
   for(let j=0;j<NZ;j++)for(let i=0;i<NX;i++){const a=j*(NX+1)+i,b=a+NX+1;ix.push(a,a+1,b,b,a+1,b+1);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(p,3));g.setIndex(ix);g.computeVertexNormals();const material=distantStone.clone();material.onBeforeCompile=distantStone.onBeforeCompile;material.customProgramCacheKey=distantStone.customProgramCacheKey;material.color.lerp(new T.Color('#c2d4dc'),k*.27);const m=new T.Mesh(g,material);ridge.add(m);
  }
  ridge.scale.y=.95;
- const sky=new T.Mesh(new T.SphereGeometry(850,32,16),new T.ShaderMaterial({side:T.BackSide,depthWrite:false,uniforms:{dusk:{value:dusk?1:0}},vertexShader:'varying vec3 dir;void main(){dir=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`varying vec3 dir;uniform float dusk;${noiseGLSL}void main(){vec3 d=normalize(dir);float h=max(0.,d.y);vec3 c=mix(mix(vec3(.79,.83,.82),vec3(.67,.57,.62),dusk),mix(vec3(.22,.46,.59),vec3(.15,.23,.37),dusk),pow(h,.42));float cloud=smoothstep(.50,.72,fbm(vec3(d.x*5.,d.y*16.,d.z*5.)));c=mix(c,vec3(.85,.85,.80),cloud*.38*(1.-smoothstep(.05,.8,h)));vec3 sun=normalize(vec3(-.48,.33,-.71));float disk=dot(d,sun);c+=vec3(.6,.35,.13)*pow(max(0.,disk),24.)*.35;c=mix(c,c*vec3(.85,.88,1.),dusk*.22);gl_FragColor=vec4(c,1.);}` }));sky.renderOrder=-10;scene.add(sky);
+ const sky=new T.Mesh(new T.SphereGeometry(850,32,16),new T.ShaderMaterial({side:T.BackSide,depthWrite:false,uniforms:{dusk:{value:dusk?1:0}},vertexShader:'varying vec3 dir;void main(){dir=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`varying vec3 dir;uniform float dusk;${noiseGLSL}void main(){vec3 d=normalize(dir);float h=max(0.,d.y);vec3 c=mix(mix(vec3(.79,.83,.82),vec3(.67,.57,.62),dusk),mix(vec3(.22,.46,.59),vec3(.15,.23,.37),dusk),pow(h,.42));float cloud=smoothstep(.50,.72,fbm(vec3(d.x*5.,d.y*16.,d.z*5.)));c=mix(c,vec3(.85,.85,.80),cloud*.38*(1.-smoothstep(.05,.8,h)));vec3 sun=normalize(vec3(-.48,.33,-.71));float disk=dot(d,sun);c+=vec3(.6,.35,.13)*pow(max(0.,disk),24.)*.35;c=mix(c,c*vec3(.85,.88,1.),dusk*.22);gl_FragColor=vec4(c,1.);}` }));sky.renderOrder=-10;sky.userData.perf='sky';scene.add(sky);
  return {update(ps,far,camera,quality){forest.update(ps,far,quality);far=Math.min(far,quality==='low'?165:285);let n=0;
   for(const r of rocks)r.mesh.visible=r.s>ps-55&&r.s<ps+far;
   n=0;for(const p of posts){if(p.s<ps-20||p.s>ps+far||n>=70)continue;upright(dummy,p.s,p.x,terrainY(p.s,Math.abs(p.x),Math.sign(p.x)));dummy.scale.setScalar(1);dummy.updateMatrix();poles.setMatrixAt(n++,dummy.matrix);}poles.count=n;poles.instanceMatrix.needsUpdate=true;
-  sky.position.copy(camera.position);ridge.position.set(camera.position.x,camera.position.y-14,camera.position.z);const f={};frameAt(ps,f);ridge.rotation.y=-f.theta;
- },metrics(){return {...forest.metrics(),rocks:rocks.length};},dispose(){forest.dispose();}};
+  sky.position.copy(camera.position);ridge.position.set(camera.position.x,camera.position.y-14,camera.position.z);frameAt(ps,uprightFrame);ridge.rotation.y=-uprightFrame.theta;
+ },
+ /** Low preset: scenery stops casting shadows (the forest already drops to its far tier); no shader changes. */
+ setQuality(quality){const cast=quality!=='low';for(const r of rocks)r.mesh.castShadow=cast;poles.castShadow=cast;},
+ metrics(){return {...forest.metrics(),rocks:rocks.length};},dispose(){forest.dispose();}};
 }

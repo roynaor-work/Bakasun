@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>מדידת ביצועים · סקי</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    html,body{margin:0;height:100%;background:#0d1b26;color:#f2f6f8;font-family:system-ui,sans-serif}
+    body{direction:rtl;text-align:right;unicode-bidi:embed;display:grid;grid-template-rows:minmax(0,1fr) auto;height:100dvh;overflow:hidden}
+    .perf-screen{height:100%;max-height:100%;width:100%;background:#173d54;color:#fff;border:0;padding:8px}
+    .perf-screen.small{width:220px;height:160px;position:absolute;inset:auto 0 auto auto}
+    .perf-panel{position:fixed;inset:auto 0 0 0;z-index:60;padding:8px 12px;background:#102b41f2;color:#f5f8fa;font-size:13px;display:grid;gap:6px;max-height:46dvh;overflow:auto;border-top:1px solid #ffffff22}
+    .perf-panel.collapsed{max-height:44px;overflow:hidden}
+    .perf-panel.collapsed>*:not(h1){display:none}
+    .perf-panel h1{cursor:pointer}
+    .perf-panel h1{font-size:15px;margin:0}
+    .perf-line{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .perf-table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+    .perf-table td,.perf-table th{padding:3px 6px;border-bottom:1px solid #ffffff22;text-align:right}
+    .perf-table td.n{direction:ltr;text-align:left;display:inline-block;min-width:0}
+    .perf-panel button{min-height:40px;padding:0 14px;border-radius:10px;border:0;background:#72e9f6;color:#09131c;font-weight:700;font-size:14px}
+    .perf-panel pre{direction:ltr;text-align:left;font-size:11px;white-space:pre-wrap;word-break:break-all;background:#091826;padding:8px;border-radius:8px;max-height:140px;overflow:auto}
+    .perf-status{color:#c8d3dd}
+    .ltr{direction:ltr;display:inline-block;unicode-bidi:isolate}
+  </style>
+</head>
+<body>
+  <div class="perf-screen game-screen modal" id="screen"></div>
+  <section class="perf-panel" aria-live="polite">
+    <h1 id="toggle" title="הקשה מקפלת או פותחת את הלוח">מדידת ביצועים לסקי</h1>
+    <p class="perf-status" id="status">טוענים</p>
+    <div class="perf-line" id="controls">
+      <button type="button" id="again">הרצה מחדש</button>
+      <button type="button" id="copy">העתק תוצאה</button>
+      <label>שניות <input id="seconds" type="number" min="5" max="120" value="30" style="width:60px"></label>
+      <label><input id="switch" type="checkbox"> החלפת איכות באמצע</label>
+      <label><input id="small" type="checkbox"> קנבס קטן (עלות JS בלבד)</label>
+    </div>
+    <table class="perf-table" id="table"></table>
+    <pre id="json" hidden></pre>
+  </section>
+  <script type="module" src="./perf-alpine.mjs"></script>
+</body>
+</html>
