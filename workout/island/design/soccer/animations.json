@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "kind": "design-contract-not-runtime",
+  "game": "soccer",
+  "units": "seconds",
+  "initialState": "idle",
+  "states": {
+    "idle": {
+      "clip": "idle",
+      "durationSeconds": 1.8,
+      "loop": true,
+      "rootMotion": false,
+      "notes": "נשימה, משקל על שתי רגליים",
+      "events": []
+    },
+    "run": {
+      "clip": "run",
+      "durationSeconds": 0.72,
+      "loop": true,
+      "rootMotion": false,
+      "notes": "מחזור שני צעדים, מגעים ב-0 וב-0.36",
+      "events": []
+    },
+    "decelerate": {
+      "clip": "decelerate",
+      "durationSeconds": 0.42,
+      "loop": false,
+      "rootMotion": false,
+      "notes": "צעדים מתקצרים, מרכז כובד יורד",
+      "events": []
+    },
+    "turn_left": {
+      "clip": "turn_left",
+      "durationSeconds": 0.36,
+      "loop": false,
+      "rootMotion": false,
+      "notes": "פנייה שמאלה 45°, רגל חיצונית תומכת",
+      "events": []
+    },
+    "turn_right": {
+      "clip": "turn_right",
+      "durationSeconds": 0.36,
+      "loop": false,
+      "rootMotion": false,
+      "notes": "פנייה ימינה 45°, שיקוף אנטומי",
+      "events": []
+    },
+    "kick": {
+      "clip": "kick",
+      "durationSeconds": 0.68,
+      "loop": false,
+      "rootMotion": false,
+      "notes": "בעיטה: רגל תמיכה ננעלת לצד הכדור, אגן מסתובב 20°, רגל בועטת חוזרת לאחור ואז משחררת במגע ב-0",
+      "events": [
+        {
+          "atSeconds": 0.24,
+          "name": "visual_contact"
+        }
+      ]
+    },
+    "catch": {
+      "clip": "catch",
+      "durationSeconds": 0.46,
+      "loop": false,
+      "rootMotion": false,
+      "notes": "ספיגת תנע בגפיים כפופות",
+      "events": [
+        {
+          "atSeconds": 0.18,
+          "name": "visual_receive"
+        }
+      ]
+    },
+    "celebrate": {
+      "clip": "celebrate",
+      "durationSeconds": 1.8,
+      "loop": false,
+      "rootMotion": false,
+      "notes": "הרמת ידיים וצעד קטן",
+      "events": []
+    },
+    "fall": {
+      "clip": "fall",
+      "durationSeconds": 0.85,
+      "loop": false,
+      "rootMotion": false,
+      "notes": "נפילה רכה לצד",
+      "events": []
+    },
+    "recover": {
+      "clip": "recover",
+      "durationSeconds": 1.1,
+      "loop": false,
+      "rootMotion": false,
+      "notes": "יד תומכת, ברך מתחת לאגן, קימה",
+      "events": []
+    }
+  },
+  "transitions": [
+    {
+      "source": "idle",
+      "target": "run",
+      "on": "moving",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "run",
+      "target": "decelerate",
+      "on": "slowing",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "decelerate",
+      "target": "idle",
+      "on": "stopped",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "decelerate",
+      "target": "run",
+      "on": "moving",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "run",
+      "target": "turn_left",
+      "on": "turn_left",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "run",
+      "target": "turn_right",
+      "on": "turn_right",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "turn_left",
+      "target": "run",
+      "on": "clip_finished",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "turn_left",
+      "target": "idle",
+      "on": "stopped",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "turn_right",
+      "target": "run",
+      "on": "clip_finished",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "turn_right",
+      "target": "idle",
+      "on": "stopped",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "idle",
+      "target": "kick",
+      "on": "action",
+      "priority": 30,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "run",
+      "target": "kick",
+      "on": "action",
+      "priority": 30,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "kick",
+      "target": "run",
+      "on": "clip_finished_and_moving",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "kick",
+      "target": "idle",
+      "on": "clip_finished_and_stopped",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "idle",
+      "target": "catch",
+      "on": "receive",
+      "priority": 40,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "run",
+      "target": "catch",
+      "on": "receive",
+      "priority": 40,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "catch",
+      "target": "run",
+      "on": "clip_finished_and_moving",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "catch",
+      "target": "idle",
+      "on": "clip_finished_and_stopped",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "*",
+      "target": "fall",
+      "on": "fall_confirmed",
+      "priority": 100,
+      "crossfadeSeconds": 0.06
+    },
+    {
+      "source": "fall",
+      "target": "recover",
+      "on": "recovery_allowed",
+      "priority": 90,
+      "crossfadeSeconds": 0.18
+    },
+    {
+      "source": "recover",
+      "target": "idle",
+      "on": "clip_finished",
+      "priority": 90,
+      "crossfadeSeconds": 0.18
+    },
+    {
+      "source": "*",
+      "target": "celebrate",
+      "on": "result_success",
+      "priority": 80,
+      "crossfadeSeconds": 0.2
+    },
+    {
+      "source": "celebrate",
+      "target": "idle",
+      "on": "clip_finished",
+      "priority": 10,
+      "crossfadeSeconds": 0.12
+    },
+    {
+      "source": "*",
+      "target": "idle",
+      "on": "reset",
+      "priority": 110,
+      "crossfadeSeconds": 0
+    }
+  ],
+  "semantics": {
+    "priority": "Evaluate highest priority first; equal priority uses array order. First eligible transition wins. * matches every state except target. fall_confirmed is ignored while fall/recover; result_success is ignored while fall/recover/celebrate. reset always wins.",
+    "events": "Events are presentation markers only. Never apply physics, score, ownership or rewards from clip time. clip_finished is emitted once for non-looping clips; moving/stopped come from the authoritative snapshot.",
+    "pause": "Freeze mixer time and pending presentation events; resume without elapsed wall-clock catch-up.",
+    "reducedMotion": "Keep contact poses and durations; suppress camera shake, FOV pulse and celebration bounce.",
+    "interrupt": "fall may interrupt action or receive. Reset clears queued markers; no duplicate contact events.",
+    "turn": "Left/right are anatomical, never RTL mirrored. World rotation comes from simulation; clips stay in place."
+  },
+  "eventInputs": [
+    "moving",
+    "slowing",
+    "stopped",
+    "turn_left",
+    "turn_right",
+    "action",
+    "receive",
+    "clip_finished",
+    "clip_finished_and_moving",
+    "clip_finished_and_stopped",
+    "fall_confirmed",
+    "recovery_allowed",
+    "result_success",
+    "reset"
+  ]
+}
