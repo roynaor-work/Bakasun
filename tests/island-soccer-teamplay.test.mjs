@@ -33,7 +33,11 @@ test('teamplay a close incumbent keeps the press, then releases it to a clearly 
 for(const team of [0,1])test(`teamplay team ${team}: a marked support player moves to an open receiving lane`,()=>{
  const s=fixture(),owner=s.players[team===0?0:3],support=s.players[team===0?1:4],blocker=s.players[team===0?4:1],d=team===0?1:-1;
  Object.assign(owner,{x:0,z:0});s.ball.owner=owner.id;
+ // Isolate the original unpressed-carrier receiving-lane case.
+ // The new pressure/outlet behavior has separate teamshape coverage.
+ for(const opponent of s.players.filter(p=>p.team!==team&&p.id!==blocker.id))Object.assign(opponent,{x:-d*12,z:0});
  Object.assign(support,{x:3*d,z:-7*d});Object.assign(blocker,{x:-3*d,z:-7*d});
+ assert.ok(s.players.filter(p=>p.team!==team).every(p=>distance(p,owner)>config.tactics.outlet.pressure));
  const target=fieldTarget(support,s,config);
  assert.equal(target.duty,'support');assert.ok(distance(target,blocker)>config.tactics.markDistance.normal);
  assert.ok(distance(target,owner)>=config.ai.requestDistance,'receiving option stays outside the carrier’s feet');

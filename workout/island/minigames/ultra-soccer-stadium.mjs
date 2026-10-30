@@ -5,7 +5,7 @@ import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
  * Original character/ball assets and all pitch dimensions remain authoritative. */
 export function createUltraSoccerStadium(scene,config,track){
   const hx=config.pitch.length/2,hz=config.pitch.width/2;
-  const dummy=new T.Object3D(),batches=new Map(),roofs=[];let roofSide=0;
+  const dummy=new T.Object3D(),batches=new Map(),roofs=[];let roofSide=0,disposed=false,turfStatus='loading',quality=0;
   const material=(color,extra={})=>track(new T.MeshStandardMaterial({color,roughness:.85,metalness:.05,...extra}));
   const finishes={stone:material('#7c8d89'),navy:material('#163c49'),seat:material('#436b76'),cream:material('#d8dbce'),steel:material('#6d8589',{metalness:.5,roughness:.4}),leaf:material('#355b4b'),light:material('#eff7e9',{emissive:'#e6f7df',emissiveIntensity:1.4})};
   function queue(g,m){const key=m.uuid+':'+roofSide;if(!batches.has(key))batches.set(key,{material:m,side:roofSide,geometries:[]});batches.get(key).geometries.push(g);}
@@ -93,7 +93,7 @@ export function createUltraSoccerStadium(scene,config,track){
   const signMap=track(new T.CanvasTexture(sign));signMap.colorSpace=T.SRGBColorSpace;signMap.anisotropy=4;
   const signMat=track(new T.MeshBasicMaterial({map:signMap}));
   for(const d of [-1,1])plane(signMat,0,.39,d*(hz+1.8),35,.55,0,d<0?0:Math.PI);
-  for(const {material,side,geometries}of batches.values()){const geometry=track(mergeGeometries(geometries));const mesh=new T.Mesh(geometry,material);scene.add(mesh);if(side)roofs.push({mesh,side});geometries.forEach(g=>g.dispose());}
+  for(const {material,side,geometries}of batches.values()){const geometry=track(mergeGeometries(geometries));const mesh=new T.Mesh(geometry,material);mesh.receiveShadow=true;scene.add(mesh);if(side)roofs.push({mesh,side});geometries.forEach(g=>g.dispose());}
   // One bounded texture covers the pitch. Fine fibers are mipmapped; mowing is
   // a luminance change of only a few percent, not separate saturated planes.
   const width=512,height=256,bytes=new Uint8Array(width*height*4);let seed=9127;
@@ -105,11 +105,35 @@ export function createUltraSoccerStadium(scene,config,track){
     const at=(y*width+x)*4;bytes[at]=70*shade;bytes[at+1]=112*shade;bytes[at+2]=65*shade;bytes[at+3]=255;
   }
   const map=track(new T.DataTexture(bytes,width,height));map.colorSpace=T.SRGBColorSpace;map.generateMipmaps=true;map.minFilter=T.LinearMipmapLinearFilter;map.magFilter=T.LinearFilter;map.anisotropy=8;map.needsUpdate=true;
-  const pitchMaterial=material('#ffffff',{map,roughness:1,metalness:0});
-  const pitch=new T.Mesh(track(new T.PlaneGeometry(config.pitch.length,config.pitch.width)),pitchMaterial);pitch.rotation.x=-Math.PI/2;scene.add(pitch);
+  const pitchMaterial=material('#ffffff',{map,roughness:.94,metalness:0});
+  // UVs repeat at the scale of the grass, while mowing direction and foot wear
+  // use world metres. The image therefore remains detailed in a player closeup.
+  pitchMaterial.onBeforeCompile=shader=>{
+    shader.vertexShader='varying vec2 vTurfWorld;\n'+shader.vertexShader;
+    shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvTurfWorld=vec2(position.x,-position.y);');
+    shader.fragmentShader='varying vec2 vTurfWorld;\n'+shader.fragmentShader;
+    shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
+      float stripe=sin((vTurfWorld.x+${hx.toFixed(2)})*3.14159265/3.0);
+      float mowing=mix(.88,1.04,smoothstep(-.04,.04,stripe));
+      float centre=exp(-dot(vTurfWorld/vec2(3.2,2.4),vTurfWorld/vec2(3.2,2.4)));
+      vec2 goalDelta=vec2((abs(vTurfWorld.x)-${(hx-1.1).toFixed(2)})/1.6,vTurfWorld.y/2.0);
+      float goals=exp(-dot(goalDelta,goalDelta));
+      diffuseColor.rgb*=mowing;diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*vec3(1.15,.94,.74),min(.2,centre*.06+goals*.2));`);
+  };
+  pitchMaterial.customProgramCacheKey=()=> 'soccer-turf-world-mowing-v1';
+  const pitch=new T.Mesh(track(new T.PlaneGeometry(config.pitch.length,config.pitch.width)),pitchMaterial);pitch.rotation.x=-Math.PI/2;pitch.receiveShadow=true;scene.add(pitch);
+  const loader=new T.TextureLoader(),maps=[];
+  const ready=Promise.all(['turf-albedo-1k.jpg','turf-normal-gl-1k.jpg'].map(file=>loader.loadAsync(new URL('../assets/soccer-realism/'+file,import.meta.url).href).then(texture=>{
+    // An exited session must never upload a late texture to a disposed renderer.
+    if(disposed){texture.dispose();return null;}maps.push(texture);track(texture);texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.repeat.set(config.pitch.length/2,config.pitch.width/2);texture.anisotropy=8;return texture;
+  }))).then(([albedo,normal])=>{
+    if(disposed)return;if(!albedo||!normal)return;
+    albedo.colorSpace=T.SRGBColorSpace;normal.colorSpace=T.NoColorSpace;
+    pitchMaterial.map=albedo;pitchMaterial.normalMap=normal;pitchMaterial.normalScale.setScalar(quality>=2?.12:.28);pitchMaterial.color.set('#b5d2b7');pitchMaterial.needsUpdate=true;turfStatus='ready';
+  }).catch(()=>{if(!disposed)turfStatus='fallback';});
   // Gradient contact-shadow texture shared by all eight original characters.
   const shadowBytes=new Uint8Array(64*64*4);
   for(let y=0;y<64;y++)for(let x=0;x<64;x++){const r=Math.hypot((x-31.5)/31.5,(y-31.5)/31.5),at=(y*64+x)*4;shadowBytes[at]=12;shadowBytes[at+1]=27;shadowBytes[at+2]=21;shadowBytes[at+3]=Math.round(Math.max(0,1-r)**2*210);}
   const shadowMap=track(new T.DataTexture(shadowBytes,64,64));shadowMap.needsUpdate=true;
-  return {shadowMap,finishCount:batches.size,identity:'The Island Ground',update(direction){for(const {mesh,side}of roofs)mesh.visible=side!==direction;}};
+  return {shadowMap,ready,finishCount:batches.size,identity:'The Island Ground',metrics:()=>({turfStatus,turfMaps:maps.length}),setQuality(level){quality=level;pitchMaterial.normalScale.setScalar(quality>=2?.12:.28);},update(direction){for(const {mesh,side}of roofs)mesh.visible=side!==direction;},dispose(){disposed=true;}};
 }

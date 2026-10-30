@@ -2,14 +2,14 @@
  * Deterministic fixed step (1/60 s): same seed + same inputs = same game. No DOM, no Three.js.
  * The engine is the only source of truth for positions, possession, clocks, fouls, scoring and
  * the result. The view, the replay and the sound only read snapshots and ordered events. */
-import {createCourt} from './hoops-court.mjs?v=island-naval-aim-20261029-1';
-import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-naval-aim-20261029-1';
-import {teamThink} from './hoops-ai.mjs?v=island-naval-aim-20261029-1';
+import {createCourt} from './hoops-court.mjs?v=island-naval-aim-20261030-1';
+import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-naval-aim-20261030-1';
+import {teamThink} from './hoops-ai.mjs?v=island-naval-aim-20261030-1';
 
 export const HOOPS_DT=1/60;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const hyp=Math.hypot;
-export const NO_INPUT=Object.freeze({move:{x:0,z:0},sprint:false,shootDown:false,shootUp:false,passPress:false,passDir:null,altPress:false,switchPress:false,timeoutPress:false,call:null});
+export const NO_INPUT=Object.freeze({move:{x:0,z:0},sprint:false,shootDown:false,shootUp:false,passPress:false,passLong:false,passDir:null,altPress:false,switchPress:false,timeoutPress:false,call:null});
 
 export function mulberry32(seed){let a=seed>>>0;return {next(){a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;},get state(){return a;}};}
 
@@ -72,12 +72,27 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   b.state='held';b.owner=p.id;b.shot=null;b.pass=null;b.vx=b.vy=b.vz=0;b.lastTouch=p.team;b.dribbleT=0;
   p.cd.pickup=0;
   if(reason==='rebound'||reason==='interception'){S.frontcourtSet=court.frontcourt(side(p.team),p.x);S.backcourtT=0;}
-  if(S.possession!==p.team){
+  const changed=S.possession!==p.team;
+  if(changed){
    S.possession=p.team;S.frontcourtSet=court.frontcourt(side(p.team),p.x);S.backcourtT=0;
    if(reason!=='inbound-ready'){S.shotClock=R.shotClock;S.shotClockOn=true;}
   }
   emit({type:'possession',playerId:p.id,team:p.team,reason});
   autoControl();
+  // defence: the child takes over the defender closest to the new ball handler
+  if(changed&&p.team!==S.userTeam&&C.player.autoSwitch&&!S.autopilot){const n=nearestTo(onCourt(S.userTeam),p);if(n)setControlled(n);}
+ }
+
+ /** After a miss the child takes the teammate clearly closest to the rim. */
+ function reboundSwitch(sideIdx){
+  if(!C.player.autoSwitch||S.autopilot)return;
+  const me=byId(S.controlled),spot=court.rim(sideIdx),n=nearestTo(onCourt(S.userTeam),spot);
+  if(me&&n&&n!==me&&hyp(me.x-spot.x,me.z-spot.z)-hyp(n.x-spot.x,n.z-spot.z)>3)setControlled(n);
+ }
+ /** Where a rebound will come down: the rim of a shot in the air, or just ahead of a loose ball. */
+ function reboundSpot(b){
+  if(b.state==='shot'&&b.shot){const r=court.rim(b.shot.side);return {x:r.x-Math.sign(r.x)*0.9,z:r.z};}
+  return {x:b.x+b.vx*0.25,z:b.z+b.vz*0.25};
  }
 
  function ballLoose(vx,vy,vz,touchTeam){
@@ -278,7 +293,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   else if(d<C.shot.layupRange&&(driving||d<1.6))type='layup';
   else if(speed>1.6)type='pullup';
   const meta=A[type==='dunk'?'layup':type];
-  p.act='shoot';p.actT=0;p.shot={type,human:!!human,held:human,releaseAt:meta.release*(type==='dunk'?0.92:1),duration:meta.duration,quality:null,released:false,
+  p.act='shoot';p.actT=0;p.shot={type,human:!!human,held:!!human&&(type==='jumpshot'||type==='pullup'),releaseAt:meta.release*(type==='dunk'?0.92:1),duration:meta.duration,quality:null,released:false,
    gatherX:p.x,gatherZ:p.z,toRim,drive:driving?Math.min(speed,C.shot.layupCarry):0,contact:null};
   p.face=Math.atan2(toRim.x,toRim.z);
   emit({type:'shotStart',playerId:p.id,shotType:type});
@@ -290,7 +305,23 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   if(sh.quality!=null)return sh.quality;
   // AI: rating-based timing with difficulty noise; human without release = slightly late
   if(!sh.human){const sk=eff(p,'release')*diff.aiTiming;return clamp(1-Math.abs(rand()-0.5)*(1.2-sk),0,1);}
-  return 0.55;
+  // a child's layup or dunk is not timed: a sure hand, short of a perfect jump shot
+  return sh.held?0.35:0.8;
+ }
+
+ /** Shot meter zones, one rule for the meter, the grade and the chance:
+  * green around the ideal release, yellow on both sides of it, red beyond. */
+ function timingQuality(e){
+  const w=C.shot.window,g=w*(C.shot.green??0.35),y=w*(C.shot.yellow??0.8);
+  if(e<=g)return {quality:1,zone:'green'};
+  if(e<=y)return {quality:0.62-0.12*(e-g)/Math.max(1e-6,y-g),zone:'yellow'};
+  return {quality:clamp(0.35*(1-(e-y)/Math.max(1e-6,w-y)),0,0.35),zone:'red'};
+ }
+ function gradeRelease(p){
+  const sh=p.shot;if(!sh||sh.released||sh.quality!=null)return;
+  const t=p.actT,ideal=sh.releaseAt,{quality,zone}=timingQuality(Math.abs(t-ideal));
+  sh.quality=quality;sh.zone=zone;sh.early=t<ideal;
+  emit({type:'timing',playerId:p.id,quality:+quality.toFixed(3),zone,early:t<ideal});
  }
 
  function contestOf(p){
@@ -365,14 +396,20 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   S.replayMark={tick:S.tick,shotId:id};
  }
 
- function choosePassTarget(p,dir){
-  const mates=onCourt(p.team).filter(q=>q!==p);
+ /** Short pass (default): the nearest open mate in the stick's direction. Long pass: the open
+  * man far away. A defender standing in the passing lane counts against a target. */
+ function choosePassTarget(p,dir,long){
+  const mates=onCourt(p.team).filter(q=>q!==p),opp=onCourt(1-p.team);
   let best=null,bs=-1e9;
   for(const q of mates){
    const dx=q.x-p.x,dz=q.z-p.z,dd=hyp(dx,dz)||1;
-   let score=-dd*0.08;
-   if(dir&&(dir.x||dir.z)){const dl=hyp(dir.x,dir.z)||1;score+=((dx*dir.x+dz*dir.z)/(dd*dl))*3;}
-   const open=Math.min(...onCourt(1-p.team).map(o=>dist(o,q)));score+=Math.min(open,3)*0.5;
+   let score=long?dd*C.pass.longWeight:-dd*C.pass.shortWeight;
+   if(dir&&(dir.x||dir.z)){const dl=hyp(dir.x,dir.z)||1;score+=((dx*dir.x+dz*dir.z)/(dd*dl))*C.pass.dirWeight;}
+   const open=Math.min(...opp.map(o=>dist(o,q)));score+=Math.min(open,3)*(long?0.6:0.35);
+   for(const o of opp){
+    const t=((o.x-p.x)*dx+(o.z-p.z)*dz)/(dd*dd);if(t<=0.05||t>=0.95)continue;
+    if(hyp(p.x+dx*t-o.x,p.z+dz*t-o.z)<C.pass.laneRadius)score-=C.pass.lanePenalty*(long?0.5:1);
+   }
    if(score>bs){bs=score;best=q;}
   }
   return best;
@@ -380,7 +417,8 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
 
  function startPass(p,target,kind){
   if(p.act||S.ball.owner!==p.id||S.ball.state!=='held'||!target)return false;
-  p.act='pass';p.actT=0;p.act2={target:target.id,kind:kind||(dist(p,target)>9?'lob':'chest')};
+  const far=dist(p,target);
+  p.act='pass';p.actT=0;p.act2={target:target.id,kind:kind==='long'?(far>9?'lob':'chest'):kind||(far>C.pass.lobAbove?'lob':'chest')};
   p.face=Math.atan2(target.x-p.x,target.z-p.z);
   emit({type:'passStart',playerId:p.id,targetId:target.id});
   return true;
@@ -433,7 +471,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    ballLoose(toP.x*2.2+(rand()-0.5),1.2,toP.z*2.2+(rand()-0.5),p.team);
    h.stumble=0.25;return;
   }
-  const foulChance=C.steal.foulBase*(frontal<-0.2?2.2:1)*(1.3-eff(p,'steal'))*(d<0.75?1.6:1);
+  const foulChance=C.steal.foulBase*(frontal<-0.2?1.6:1)*(1.3-eff(p,'steal'))*(d<0.75?1.3:1)*(p.team===S.userTeam?C.contact.userScale:1);
   if(rand()<foulChance)foul(p,h,'reach',null);
  }
 
@@ -446,6 +484,41 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
  }
 
  // ---------- per-tick ----------
+ /** The child's jump. A block is a straight-up jump (no lunge into the shooter, so no foul for
+  * verticality). A rebound jump far from the ball first runs there and jumps on arrival. */
+ function humanJump(p,kind){
+  const b=S.ball;
+  if(kind==='rebound'&&(b.state==='shot'||b.state==='loose')){
+   const land=reboundSpot(b),d=hyp(land.x-p.x,land.z-p.z);
+   if(d>C.jump.queueReach&&p.air<0){p.jumpQueue={until:S.tick+Math.round(C.jump.queueSeconds/HOOPS_DT)};return;}
+   if(startJump(p,kind)&&d>0.2){const l=C.jump.reboundLunge*Math.min(1,d/1.5);p.vx=(land.x-p.x)/d*l;p.vz=(land.z-p.z)/d*l;}
+   return;
+  }
+  const h=holder();
+  if(startJump(p,kind)&&h&&h.team!==p.team){p.face=Math.atan2(h.x-p.x,h.z-p.z);p.vx*=0.35;p.vz*=0.35;}
+ }
+ function followJumpQueue(p,ml){
+  const b=S.ball;
+  if(S.tick>p.jumpQueue.until||p.air>=0||!(b.state==='shot'||b.state==='loose')){p.jumpQueue=null;return;}
+  const land=reboundSpot(b),d=hyp(land.x-p.x,land.z-p.z);
+  if(ml<0.05&&d>0.3){p.intent.x=(land.x-p.x)/d;p.intent.z=(land.z-p.z)/d;p.intent.speed=1;p.intent.sprint=true;}
+  if(d<=C.jump.queueReach&&(b.state==='loose'||b.vy<0)){p.jumpQueue=null;humanJump(p,'rebound');}
+ }
+
+ /** Defence help for the child: with the stick released his player guards his man (between the
+  * man and the basket, closer on the ball), sprinting back in transition; while he steers, the
+  * player keeps facing the ball handler so he slides instead of turning his back. */
+ function defendAssist(p,ml){
+  const h=holder();if(!h)return;
+  if(ml>=0.05){if(dist(p,h)<7)p.intent.face=Math.atan2(h.x-p.x,h.z-p.z);return;}
+  const T=team(p.team),o=byId(T.ai?.assign?.[p.id])||h,rim=court.rim(side(o.team));
+  const onBall=o.id===h.id,gap=onBall?C.player.assistGapBall??1.0:C.player.assistGapOff??1.8;
+  const k=Math.min(gap/Math.max(0.6,dist(o,rim)),0.85),pt={x:o.x+(rim.x-o.x)*k,z:o.z+(rim.z-o.z)*k};
+  const dx=pt.x-p.x,dz=pt.z-p.z,d=hyp(dx,dz);
+  if(d>0.25){p.intent.x=dx/d;p.intent.z=dz/d;p.intent.speed=clamp(d/1.2,0.3,1);p.intent.sprint=d>3;}
+  p.intent.face=Math.atan2(h.x-p.x,h.z-p.z);
+ }
+
  function humanInput(p,inp){
   const m=inp.move||{x:0,z:0},ml=hyp(m.x,m.z);
   p.intent.x=ml>0.05?m.x/Math.max(1,ml):0;p.intent.z=ml>0.05?m.z/Math.max(1,ml):0;p.intent.speed=Math.min(1,ml);
@@ -453,22 +526,21 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   const offense=S.possession===p.team&&S.ball.state!=='loose';
   const hasBall=S.ball.owner===p.id&&S.ball.state==='held';
   if(hasBall){
+   p.jumpQueue=null;
    if(inp.shootDown)startShot(p,true);
-   if(inp.passPress)startPass(p,choosePassTarget(p,inp.passDir||(ml>0.2?{x:m.x,z:m.z}:null)),null);
+   if(inp.passPress)startPass(p,choosePassTarget(p,inp.passDir||(ml>0.2?{x:m.x,z:m.z}:null),!!inp.passLong),inp.passLong?'long':null);
    if(inp.altPress)startMove(p);
   } else if(!offense||S.ball.state==='loose'||S.ball.state==='shot'){
-   if(inp.shootDown)startJump(p,S.ball.state==='shot'||S.ball.state==='loose'?'rebound':'block');
+   if(inp.shootDown)humanJump(p,S.ball.state==='shot'||S.ball.state==='loose'?'rebound':'block');
    if(inp.passPress)startSteal(p);
   } else {
    // off-ball offense: pass button asks for the ball, shoot button jumps (alley/oop is not modelled)
    if(inp.passPress){const h=holder();if(h&&h.team===p.team&&h.id!==p.id)h.intent.wantPass=p.id;}
-   if(inp.shootDown)startJump(p,'rebound');
+   if(inp.shootDown)humanJump(p,'rebound');
   }
-  if(p.act==='shoot'&&p.shot&&p.shot.human&&!p.shot.released&&inp.shootUp&&p.shot.quality==null){
-   const t=p.actT,ideal=p.shot.releaseAt,w=C.shot.window;
-   const e=Math.abs(t-ideal);p.shot.quality=clamp(1-e/w,0,1);p.shot.early=t<ideal;
-   emit({type:'timing',playerId:p.id,quality:+p.shot.quality.toFixed(3),early:t<ideal});
-  }
+  if(p.jumpQueue)followJumpQueue(p,ml);
+  if(!hasBall&&S.ball.state==='held'&&S.possession!==p.team&&C.player.defenseAssist)defendAssist(p,ml);
+  if(p.act==='shoot'&&p.shot&&p.shot.held&&inp.shootUp)gradeRelease(p);
   if((inp.switchPress||inp.altPress)&&!hasBall){
    const list=onCourt(p.team).filter(q=>q!==p).sort((a,b)=>dist(a,S.ball)-dist(b,S.ball));
    if(list[0])setControlled(list[0]);
@@ -489,19 +561,24 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    }
    if(p.act==='pass'||p.act==='steal'){tx*=0.5;tz*=0.5;}
    if(p.stumble>0){tx*=0.2;tz*=0.2;}
-   if(p.air>=0&&p.act!=='shoot'){tx*=0.15;tz*=0.15;}
+   const airborne=p.air>=0&&p.act!=='shoot',user=p.id===S.controlled&&!S.autopilot;
    let wantVx=tx*maxS,wantVz=tz*maxS;
    if(p.act==='cross'||p.act==='spin'){const burst=C.move.burst*(p.act==='spin'?1.1:1);const l=hyp(p.vx,p.vz)||1;wantVx=p.vx/l*maxS*burst*(p.actT<0.3?0.7:1.15);wantVz=p.vz/l*maxS*burst*(p.actT<0.3?0.7:1.15);if(p.actT<0.3&&p.act==='cross'){const sideX=-p.vz/l,sideZ=p.vx/l,sgn=(S.tick>>4)%2?1:-1;wantVx+=sideX*1.8*sgn;wantVz+=sideZ*1.8*sgn;}}
-   const acc=(hyp(wantVx,wantVz)>hyp(p.vx,p.vz)?C.player.accel:C.player.decel)*(0.75+0.35*eff(p,'speed'));
-   const dvx=wantVx-p.vx,dvz=wantVz-p.vz,dl=hyp(dvx,dvz),step=acc*dt;
-   if(dl<=step){p.vx=wantVx;p.vz=wantVz;}else{p.vx+=dvx/dl*step;p.vz+=dvz/dl*step;}
+   if(airborne){
+    // in the air the body keeps its run-up and steers only a little
+    const k=Math.min(1,C.jump.airDrag*dt),ac=C.jump.airControl;p.vx+=(wantVx*ac-p.vx)*k;p.vz+=(wantVz*ac-p.vz)*k;
+   } else {
+    const acc=(hyp(wantVx,wantVz)>hyp(p.vx,p.vz)?C.player.accel:C.player.decel)*(0.75+0.35*eff(p,'speed'))*(user?C.player.userAccel:1);
+    const dvx=wantVx-p.vx,dvz=wantVz-p.vz,dl=hyp(dvx,dvz),step=acc*dt;
+    if(dl<=step){p.vx=wantVx;p.vz=wantVz;}else{p.vx+=dvx/dl*step;p.vz+=dvz/dl*step;}
+   }
    p.x+=p.vx*dt;p.z+=p.vz*dt;
    // facing: towards movement, or the intent's facing (defence faces the man / ball)
    const sp=hyp(p.vx,p.vz);
    let fx=null;
    if(it.face!=null&&p.act!=='shoot')fx=it.face;
    else if(sp>0.6&&p.act!=='shoot')fx=Math.atan2(p.vx,p.vz);
-   if(fx!=null){let d=((fx-p.face+Math.PI*3)%(Math.PI*2))-Math.PI;p.face+=clamp(d,-C.player.turnRate*dt,C.player.turnRate*dt);}
+   if(fx!=null){const tr=user?C.player.userTurn:C.player.turnRate;let d=((fx-p.face+Math.PI*3)%(Math.PI*2))-Math.PI;p.face+=clamp(d,-tr*dt,tr*dt);}
    // fatigue
    const load=(sp/C.player.speed)**2*(it.sprint?C.fatigue.sprint:1);
    p.energy=clamp(p.energy-(C.fatigue.drain*load-C.fatigue.recover*(1-Math.min(1,sp/2)))*dt,0,1);
@@ -528,14 +605,15 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   const h=holder();if(!h||(a!==h&&b!==h))return;
   const def=a===h?b:a;if(def.team===h.team)return;
   const rel=hyp(h.vx-def.vx,h.vz-def.vz);if(rel<C.contact.minSpeed)return;
-  if((h.contactCd||0)>S.tick)return;h.contactCd=S.tick+40;
+  if((h.contactCd||0)>S.tick)return;h.contactCd=S.tick+C.contact.cooldownTicks;
   // charge: the defender was set (slow) and in the handler's path; block: the defender was still moving in
   const hv=hyp(h.vx,h.vz)||1,toD={x:(def.x-h.x)/d,z:(def.z-h.z)/d},inPath=(h.vx*toD.x+h.vz*toD.z)/hv;
   const defMoving=hyp(def.vx,def.vz);
   if(inPath<0.5)return;
   const restricted=court.distToRim(side(h.team),def.x,def.z)<court.restrictedR;
-  if(defMoving<C.contact.setSpeed&&!restricted){if(rand()<C.contact.chargeChance*(0.5+eff(def,'perimD')))foul(h,def,'offensive',null);}
-  else if(rand()<C.contact.blockChance){
+  const us=C.contact.userScale;
+  if(defMoving<C.contact.setSpeed&&!restricted){if(rand()<C.contact.chargeChance*(0.5+eff(def,'perimD'))*(h.team===S.userTeam?us:1))foul(h,def,'offensive',null);}
+  else if(rand()<C.contact.blockChance*(def.team===S.userTeam?us:1)){
    const shooting=h.act==='shoot'&&!h.shot?.released?{count:court.points(side(h.team),h.x,h.z),andOne:false}:null;
    foul(def,h,'block',shooting);
   }
@@ -555,11 +633,21 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
      // shooters leave the floor shortly before release: the jump follows the clip
      const lift=sh.type==='ft'?0.08:sh.type==='layup'||sh.type==='dunk'?0.32:0.22;
      if(p.air<0&&p.actT>=sh.releaseAt-lift-0.12&&sh.type!=='ft'){p.air=0;p.airDur=C.jump.shotAir*(sh.type==='dunk'?1.35:sh.type==='layup'?1.2:1);p.jumpMax=sh.type==='dunk'?0.8:sh.type==='layup'?0.6:0.42;}
-     if(p.actT>=sh.releaseAt){
+     // a held jump shot leaves the hand when the child lets go (or, held too long, late and red)
+     if(sh.held&&sh.quality==null&&p.actT>=sh.releaseAt+C.shot.window)gradeRelease(p);
+     const due=sh.held?sh.quality!=null&&p.actT>=C.shot.minHold:p.actT>=sh.releaseAt;
+     if(due){
       if(S.ball.owner===p.id&&S.ball.state==='held')release(p);else{p.act=null;p.shot=null;}
      }
-     // contact during the shot from a defender who jumps into the shooter
-     for(const d of onCourt(1-p.team)){if(!sh.contact&&d.air>=0&&dist(d,p)<C.contact.shotContact&&S.phase==='live'){if(rand()<C.contact.shootingFoul)sh.contact={by:d.id};}}
+     // contact: only a defender who jumps INTO the shooter, judged once per defender and shot
+     if(!sh.released&&!sh.contact&&S.phase==='live')for(const d of onCourt(1-p.team)){
+      if(d.air<0||(sh.judged&&sh.judged.includes(d.id)))continue;
+      const dd=dist(d,p);if(dd>=C.contact.shotContact)continue;
+      (sh.judged||(sh.judged=[])).push(d.id);
+      const into=(d.vx*(p.x-d.x)+d.vz*(p.z-d.z))/Math.max(dd,1e-3);
+      if(into<C.contact.intoSpeed)continue;
+      if(rand()<C.contact.shootingFoul*(d.team===S.userTeam?C.contact.userScale:1)){sh.contact={by:d.id};break;}
+     }
     }
     if(p.actT>=sh.duration){p.act=null;p.shot=null;}
    } else if(p.act==='pass'){
@@ -630,14 +718,18 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
     for(const d of onCourt(1-sh.team)){
      if(d.air<0)continue;
      const reach=(d.r.height||200)/100*1.33+d.jumpH;
-     const dd=hyp(d.x-b.x,d.z-b.z);
-     if(dd<C.block.radius&&Math.abs(b.y-reach)<C.block.vertical){
+     const dd=hyp(d.x-b.x,d.z-b.z),user=d.id===S.controlled&&!S.autopilot;
+     const rad=user?C.block.userRadius:C.block.radius,vert=user?C.block.userVertical:C.block.vertical;
+     if(dd<rad&&Math.abs(b.y-reach)<vert){
       const rim=court.rim(sh.side),toRim=hyp(b.x-rim.x,b.z-rim.z);
-      if(b.vy<0&&b.y>rim.y&&toRim<court.rimR+C.block.goaltendRadius){
+      if(dd<C.block.radius&&b.vy<0&&b.y>rim.y&&toRim<court.rimR+C.block.goaltendRadius){
        // goaltending: the basket counts
        sh.goaltend=d.id;emit({type:'goaltending',playerId:d.id});score(sh,true);return;
       }
-      const chance=C.block.base*(0.4+eff(d,'block'))*(sh.type==='dunk'?0.35:1);
+      if(sh.tried&&sh.tried.includes(d.id))continue;(sh.tried||(sh.tried=[])).push(d.id);
+      // one try per defender and shot; the child's jump counts more when it peaks at the ball
+      const u=d.air/Math.max(d.airDur,1e-3),timed=u>0.25&&u<0.75;
+      const chance=(user?(timed?C.block.userTimed:C.block.userBase):C.block.base*(0.4+eff(d,'block')))*(sh.type==='dunk'?0.35:1);
       if(rand()<chance){
        sh.blocked=true;d.stats.blk++;
        emit({type:'block',playerId:d.id,shooterId:sh.shooter});
@@ -664,6 +756,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
      if(sh.foul&&!sh.foulDone){sh.foulDone=true;const shooter=byId(sh.shooter),f=byId(sh.foul.by);if(shooter&&f){foul(f,shooter,'shooting',{count:sh.points,andOne:false});return;}}
      if(sh.type==='ft'){b.state='loose';b.shot=null;afterFreeThrowMiss(sh);return;}
      b.state='loose';b.missShot=sh;b.shot=null;emit({type:'miss',shotId:sh.id,playerId:sh.shooter});
+     reboundSwitch(sh.side);
      if(S.clock<=0){endPeriodAfterShot();return;}
     }
    }
@@ -677,9 +770,9 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
     for(const p of all()){
      if(p.stumble>0||p.cd.pickup>0)continue;
      const reach=(p.r.height||200)/100*1.25+p.jumpH+(p.air>=0?0.25:0);
-     const dd=hyp(p.x-b.x,p.z-b.z);
-     if(dd<C.rebound.radius&&b.y<reach){
-      const w=eff(p,'rebound')+(p.air>=0?0.35:0)+rand()*0.35-(dd/C.rebound.radius)*0.3;
+     const dd=hyp(p.x-b.x,p.z-b.z),rad=p.air>=0?C.rebound.airRadius:C.rebound.radius;
+     if(dd<rad&&b.y<reach){
+      const w=eff(p,'rebound')+(p.air>=0?0.35:0)+(p.air>=0&&p.id===S.controlled&&!S.autopilot?C.rebound.userBonus:0)+rand()*0.35-(dd/rad)*0.3;
       if(w>bs){bs=w;best=p;}
      }
     }
@@ -809,11 +902,11 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    ft.t+=dt;
    if(ft.state==='setup'&&ft.t>=C.timing.freeThrowSetup){
     ft.state='shoot';ft.t=0;S.ball.state='held';S.ball.owner=sh.id;
-    sh.act='shoot';sh.actT=0;sh.shot={type:'ft',human:sh.team===S.userTeam,held:true,releaseAt:A.freethrow.release,duration:A.freethrow.duration,quality:null,released:false,gatherX:sh.x,gatherZ:sh.z,toRim:{x:side(sh.team),z:0},drive:0,contact:null};
+    sh.act='shoot';sh.actT=0;sh.shot={type:'ft',human:sh.team===S.userTeam&&!S.autopilot,held:sh.team===S.userTeam&&!S.autopilot,releaseAt:A.freethrow.release,duration:A.freethrow.duration,quality:null,released:false,gatherX:sh.x,gatherZ:sh.z,toRim:{x:side(sh.team),z:0},drive:0,contact:null};
     emit({type:'shotStart',playerId:sh.id,shotType:'ft'});
    }
    if(ft.state==='shoot'){
-    if(sh.team===S.userTeam&&inp&&inp.shootUp&&sh.shot&&sh.shot.quality==null&&!sh.shot.released){const e=Math.abs(sh.actT-sh.shot.releaseAt);sh.shot.quality=clamp(1-e/C.shot.window,0,1);emit({type:'timing',playerId:sh.id,quality:+sh.shot.quality.toFixed(3),early:sh.actT<sh.shot.releaseAt});}
+    if(sh.team===S.userTeam&&inp&&inp.shootUp&&sh.shot&&sh.shot.held&&!S.autopilot)gradeRelease(sh);
     updateActs(dt,inp);
     if(S.ball.state==='shot'){ft.state='flight';}
    }
@@ -835,7 +928,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
 
  function snapshotPlayers(){
   return all().map(p=>({id:p.id,team:p.team,pos:p.pos,number:p.number,x:+p.x.toFixed(3),z:+p.z.toFixed(3),y:+p.jumpH.toFixed(3),vx:+p.vx.toFixed(3),vz:+p.vz.toFixed(3),
-   face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,air:p.air>=0,energy:+p.energy.toFixed(3),fouls:p.fouls,
+   face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,shotHeld:!!(p.shot&&p.shot.held&&!p.shot.released&&p.shot.quality==null),air:p.air>=0,energy:+p.energy.toFixed(3),fouls:p.fouls,
    hasBall:S.ball.owner===p.id&&S.ball.state==='held',controlled:p.id===S.controlled,stumble:p.stumble>0,look:p.look,role:p.role}));
  }
 
@@ -867,7 +960,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    const b=S.ball;
    return {tick:S.tick,phase:S.phase,phaseT:+S.phaseT.toFixed(3),quarter:S.quarter,overtime:S.overtime,clock:+Math.max(0,S.clock).toFixed(2),shotClock:+Math.max(0,S.shotClock).toFixed(2),shotClockOn:S.shotClockOn,
     score:[team(0).score,team(1).score],teamFouls:[team(0).fouls,team(1).fouls],timeouts:[team(0).timeouts,team(1).timeouts],possession:S.possession,dir:[...S.dir],userTeam:S.userTeam,
-    controlled:S.controlled,ball:{x:+b.x.toFixed(3),y:+b.y.toFixed(3),z:+b.z.toFixed(3),state:b.state,owner:b.owner,shotId:b.shot?.id||null,dribbleT:+b.dribbleT.toFixed(3)},
+    controlled:S.controlled,ball:{x:+b.x.toFixed(3),y:+b.y.toFixed(3),z:+b.z.toFixed(3),state:b.state,owner:b.owner,passTo:b.state==='pass'?b.pass?.to??null:null,shotId:b.shot?.id||null,dribbleT:+b.dribbleT.toFixed(3)},
     players:snapshotPlayers(),ft:S.ft?{shooter:S.ft.shooter,left:S.ft.left,total:S.ft.total}:null,inbound:S.inbound?{team:S.inbound.team,inbounder:S.inbound.inbounder}:null,
     call:[team(0).call,team(1).call],lastScore:S.lastScore,result:S.result,profile:S.profile,mode:S.mode};
   },

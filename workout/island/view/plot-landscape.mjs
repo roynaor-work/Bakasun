@@ -9,7 +9,7 @@ export function plotLandscape(building,type,front={dx:0,dz:1},quality='high'){
   const dx=front.dx||0,dz=front.dz||(!dx?1:0),width=dx?d:w,depth=dx?w:d,cx=building.x+(w-1)/2,cz=building.z+(d-1)/2;
   const point=(u,v)=>({x:cx+dz*u+dx*v,z:cz-dx*u+dz*v});
   const dimensions=(a,b)=>({w:Math.abs(dz)*a+Math.abs(dx)*b,d:Math.abs(dx)*a+Math.abs(dz)*b});
-  const plane=(u,v,a,b,color,y)=>{const p=point(u,v),size=dimensions(a,b);result.planes.push({...p,y,w:size.w,h:size.d,d:1,color,flat:true});};
+  const plane=(u,v,a,b,color,y,surface='stone')=>{const p=point(u,v),size=dimensions(a,b);result.planes.push({...p,y,w:size.w,h:size.d,d:1,color,flat:true,surface});};
   const box=(u,y,v,a,h,b,color)=>result.boxes.push({...point(u,v),y,...dimensions(a,b),h,color});
   const shrub=(u,y,v,a,h,b,color)=>result.shrubs.push({...point(u,v),y,...dimensions(a,b),h,color});
   const frontEdge=depth/2-.09,sideEdge=width/2-.09,opening=.74;
@@ -17,8 +17,14 @@ export function plotLandscape(building,type,front={dx:0,dz:1},quality='high'){
     result.gardens=1;
     // Limestone garden walls frame the land without covering the facade.
     box(0,.115,-frontEdge,width-.12,.19,.065,'#b5b198');
+    box(0,.225,-frontEdge,width-.1,.035,.085,'#dfd4bb');
+    if(quality!=='low'){
+      box(0,.055,-frontEdge+.13,width-.27,.07,.17,'#736b4c');
+      shrub(0,.22,-frontEdge+.13,width-.3,.27,.16,'#43674b');
+    }
     for(const side of [-1,1]){
       box(side*sideEdge,.115,0,.065,.19,depth-.12,'#b5b198');
+      box(side*sideEdge,.225,0,.085,.035,depth-.1,'#dfd4bb');
       const span=(width-.12-opening)/2,u=side*(opening/2+span/2);
       box(u,.115,frontEdge,span,.19,.065,'#b5b198');
       if(quality!=='low'){
@@ -32,6 +38,7 @@ export function plotLandscape(building,type,front={dx:0,dz:1},quality='high'){
     }
     // The pale path meets the street apron and passes through the open gate.
     plane(0,depth/2-.29,.48,.52,'#d6c7a6',.112);
+    for(const shift of [-.13,.02,.17])plane(0,depth/2-.29+shift,.44,.012,'#a6a48d',.114,'plain');
   }else{
     result.plazas=1;
     // Expansion joints and inset pavers read at city-camera scale, while the
@@ -48,11 +55,12 @@ export function plotLandscape(building,type,front={dx:0,dz:1},quality='high'){
         box(u,.255,v-.06,.34,.15,.035,'#9a7656');
         for(const foot of [-.11,.11])box(u+foot,.085,v,.035,.13,.1,'#48615f');
       }else{
-        // Compact painted bays add an asphalt scale cue without spawning cars
-        // or claiming road space; the central doorway remains unobstructed.
-        plane(u,v,.35,.28,'#697772',.114);result.parking++;
-        for(const edge of [-1,1])plane(u+edge*.155,v,.018,.26,'#e6dfc8',.116);
-        plane(u,v-.13,.32,.018,'#e6dfc8',.117);
+        // Compact painted bays provide optional original-car instance sites
+        // inside the plot; the central doorway and road remain unobstructed.
+        plane(u,v,.35,.28,'#596862',.114,'asphalt');result.parking++;
+        (result.parkingBays||=[]).push({...point(u,v),heading:Math.atan2(dx,dz)+Math.PI});
+        for(const edge of [-1,1])plane(u+edge*.155,v,.018,.26,'#e6dfc8',.116,'plain');
+        plane(u,v-.13,.32,.018,'#e6dfc8',.117,'plain');
       }
     }
   }

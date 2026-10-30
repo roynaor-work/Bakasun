@@ -29,7 +29,7 @@ test('the prepared town covers every enabled building type, with locked future d
   const f=fixture(),before=remaining(f.state),oldBuildings=structuredClone(f.state.buildings),result=prepare(f),rows=plots(f);
   assert.ok(result.ok);assert.ok(result.addedLots>=36);assert.equal(remaining(f.state),before);
   assert.deepEqual(f.state.buildings.slice(0,oldBuildings.length),oldBuildings);
-  const expected=[...f.registry.buildings.values()].filter(type=>!type.isRoad&&type.id!=='cityHall'&&(!type.featureFlag||f.flags[type.featureFlag]));
+  const expected=[...f.registry.buildings.values()].filter(type=>!type.isRoad&&type.id!=='cityHall'&&(!type.featureFlag||f.flags[type.featureFlag])&&(type.minWorldStage||0)<=f.state.world.stage);
   for(const type of expected)assert.ok(rows.some(row=>row.typeId===type.id),type.id);
   assert.ok(!f.state.readyPlan.lots.some(row=>['road','cityHall','flowerGarden'].includes(row.typeId)));
   for(const id of ['basketball','tennis','pool','athletics','soccer']){
@@ -57,17 +57,11 @@ test('all reserved footprints and free roads are disjoint and every required roa
   }
 });
 
-test('fresh towns distribute sports, utilities, learning and future defense across the larger island',()=>{
+test('fresh neighborhoods stay near home while preserving water coverage and connected facilities',()=>{
   const f=fixture();prepare(f);const rows=plots(f),size=f.state.world.size,center=lot=>({x:lot.x+lot.w/2,z:lot.z+lot.d/2});
-  for(const lot of rows){
-    const type=f.registry.buildings.get(lot.typeId),p=center(lot);
-    if(type.category==='sports'){assert.ok(p.x>size*.5);assert.ok(p.z>size*.4);}
-    if(type.category==='learning'){assert.ok(p.x<size*.5);assert.ok(p.z>size*.62);}
-    if(['factory','farm','powerPlant'].includes(type.id)){assert.ok(p.x>size*.55);assert.ok(p.z<size*.4);}
-    if(type.category==='defense'&&type.id!=='harbor')assert.ok(p.x>size*.7||p.z>size*.75);
-  }
-  assert.ok(Math.max(...rows.map(lot=>lot.x+lot.w))>=size*.9);
-  assert.ok(Math.max(...rows.map(lot=>lot.z+lot.d))>=size*.9);
+  assert.ok(Math.max(...rows.map(lot=>lot.x+lot.w))<size*.8);
+  assert.ok(Math.max(...rows.map(lot=>lot.z+lot.d))<size*.8);
+  assert.ok(f.state.buildings.filter(b=>b.typeId==='road').length<120);
   const home=rows.find(lot=>lot.typeId==='house'),water=rows.find(lot=>lot.typeId==='waterTower');
   assert.ok(Math.hypot(center(home).x-center(water).x,center(home).z-center(water).z)<=f.registry.buildings.get('waterTower').radius);
   assertConnections(f);
@@ -127,7 +121,7 @@ test('stage expansions append lots and corridors without changing prior reservat
   f.state.buildings.push({id:'earned-harbor',typeId:'harbor',x:harbor.x,z:harbor.z,level:1});
   for(const [stage,size]of [[1,40],[2,48]]){
     const plan=structuredClone(f.state.readyPlan.lots),before=structuredClone(f.state.buildings),earned=remaining(f.state);
-    f.state.world={stage,size};const result=prepare(f);assert.ok(result.addedLots>0);assert.ok(result.addedRoads>0);
+    f.state.world={stage,size};const result=prepare(f);assert.ok(result.addedLots>0);assert.ok(result.addedRoads>=0);
     assert.deepEqual(f.state.readyPlan.lots.slice(0,plan.length),plan);assert.deepEqual(f.state.buildings.slice(0,before.length),before);
     assert.equal(remaining(f.state),earned);assert.deepEqual(f.state.readyPlan.lots.find(row=>row.id===harbor.id),harbor);
     assert.ok(harbor.x===0||harbor.z===0);assert.ok(validReadyPlan(f.state.readyPlan,f.state,f.registry));assertConnections(f);

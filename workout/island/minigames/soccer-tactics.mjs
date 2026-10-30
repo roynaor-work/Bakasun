@@ -1,5 +1,5 @@
-import {passLaneClearance,teamFormation,teamPresser} from './soccer-teamplay.mjs?v=island-naval-aim-20261029-1';
-export {selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint} from './soccer-teamplay.mjs?v=island-naval-aim-20261029-1';
+import {passLaneClearance,teamFormation,teamPresser} from './soccer-teamplay.mjs?v=island-naval-aim-20261030-1';
+export {selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance} from './soccer-teamplay.mjs?v=island-naval-aim-20261030-1';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 /** One ball press; everyone else returns to a zone or finds a passing lane. */
@@ -14,6 +14,18 @@ export function fieldTarget(p,s,c){
   const advance=a.advance[role]*formation.advance;
   x=owner.x+d*advance;z=lane+owner.z*a.ballWidth;duty='support';
   if(p.role==='striker')x+=d*a.strikerRun*formation.advance;
+  // Wide carrier in the final third: one runner attacks the box for a header,
+  // another comes square and central for the lateral pass (29/10/2026 sim: 0 headers in 12 matches).
+  const w=a.wideAttack,wide=w&&Math.abs(owner.z)>=w.width&&hx-owner.x*d<=w.range;
+  if(wide){
+   const runner=mates.filter(q=>q.id!==owner.id).sort((u,v)=>(v.role==='striker')-(u.role==='striker')||(v.x-u.x)*d||u.id-v.id)[0];
+   if(runner?.id===p.id){x=d*(hx-c.pitch.penaltySpot-w.boxDepth);z=-Math.sign(owner.z)*w.farPost;duty='box-run';}
+   else{x=owner.x-d*w.squareBack;z=owner.z*w.squareInside;duty='square';}
+  }
+  // A pressed carrier gets a safe outlet: the support player drops diagonally behind,
+  // on the side away from the nearest presser, instead of running further ahead.
+  const o=a.outlet,presser=o&&p.role==='support'?opponents.filter(q=>q.role!=='keeper').sort((u,v)=>distance(u,owner)-distance(v,owner))[0]:null;
+  if(presser&&duty==='support'&&distance(presser,owner)<o.pressure){const side=owner.z>=presser.z?1:-1,wide=Math.abs(owner.z+side*o.wide)<hz-a.sideInset?side:-side;x=owner.x-d*o.back;z=owner.z+wide*o.wide;duty='outlet';}
   // Search nearby space, rewarding both room to receive and a clear pass lane.
   const ideal={x:clamp(x,-hx+a.goalInset,hx-a.goalInset),z:clamp(z,-hz+a.sideInset,hz-a.sideInset)};
   let best=-Infinity;
@@ -32,13 +44,21 @@ export function fieldTarget(p,s,c){
   const stagger=(c.ai.kickoffX[role]-c.ai.kickoffX[0])*.25;
   x=d*(b.x*d-depth+stagger)+(b.vx||0)*a.interceptSeconds;
   z=lane+b.z*a.ballWidth+(b.vz||0)*a.interceptSeconds;duty='cover';
+  // Screen the most dangerous pass: goal-side on the line from the carrier to the
+  // most advanced visible attacker, so one presser and one cover never both chase.
+  const k=a.coverLane,threat=owner&&owner.team!==p.team&&k?opponents.filter(q=>q.id!==owner.id&&q.role!=='keeper').sort((u,v)=>u.x*d-v.x*d||u.id-v.id)[0]:null;
+  if(threat){const lx=owner.x+(threat.x-owner.x)*k.fraction-d*k.goalSide,lz=owner.z+(threat.z-owner.z)*k.fraction,point={x:lx,z:lz};
+   // Only the nearest non-pressing team-mate takes the lane; the rest hold their zones and width.
+   const screen=mates.filter(q=>q.id!==chaser?.id&&!(q.recover>0)).sort((u,v)=>distance(u,point)-distance(v,point)||u.id-v.id)[0];
+   if(screen?.id===p.id){x+=(lx-x)*k.blend;z+=(lz-z)*k.blend;}}
  }
  // Avoid off-ball opponents, including on the presser's route to the ball.
  // This steers AI only: the child can cross every pitch/penalty-area line.
  if(owner&&owner.team!==p.team)for(let pass=0;pass<a.separationIterations;pass++)for(const q of opponents){
   if(q.id===b.owner||q.role==='keeper')continue;
   const dx=x-q.x,dz=z-q.z,l=Math.hypot(dx,dz);
-  if(l<minimum){x=q.x+(l?dx/l:-d)*minimum;z=q.z+(l?dz/l:0)*minimum;}
+  const clearance=duty==='press'?c.players.radius*2:minimum;
+  if(l<clearance){x=q.x+(l?dx/l:-d)*clearance;z=q.z+(l?dz/l:0)*clearance;}
  }
  return {x:clamp(x,-hx+a.goalInset,hx-a.goalInset),z:clamp(z,-hz+a.sideInset,hz-a.sideInset),duty};
 }

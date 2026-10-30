@@ -2,7 +2,9 @@
 // Serves the workout/ subtree, builds a basketball court through the real island UI
 // engine, opens the game, and checks per viewport: assets load, 5 on 5 renders, touch and
 // keyboard reach the engine, controls are at least 48 px, the game screen carries no words,
-// pause freezes the clock, leaving releases WebGL, listeners and audio.
+// pause freezes the clock, leaving releases WebGL, listeners and audio. Feel round (27/10):
+// one-button start card, floating stick with dead zone and auto sprint, tap/hold passes,
+// a shot meter with green and yellow zones.
 // Usage: CHROMIUM_PATH=... PLAYWRIGHT_MODULE=... node workout/island/tests/hoops-browser.mjs
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
@@ -51,8 +53,16 @@ for(const viewport of only){
   for(let z=0;z<e.state.world.size;z++)for(let x=0;x<e.state.world.size;x++)if(e.place('basketball',x,z).ok)return true;return false;});
  assert.ok(placed);check('basketball court built through the island engine');
 
+ // the start is one card and one button; the club, settings and stages are folded away
+ await page.evaluate(()=>window.__island.games.stages('streetSlam'));await page.waitForTimeout(300);
+ const start=await page.evaluate(()=>{const vis=el=>!!el&&!el.closest('details:not([open])')&&(el.checkVisibility?.()??true)&&!!el.offsetParent&&el.getBoundingClientRect().height>0;const go=document.querySelector('[data-action=hoops-play-next]'),more=document.querySelector('[data-hoops-more]');
+  return {card:vis(document.querySelector('[data-hoops-start]')),go:vis(go),goH:go?.getBoundingClientRect().height||0,more:!!more,open:!!more?.open,club:vis(document.querySelector('[data-hoops-club]')),stage:vis(document.querySelector('[data-action=stage-play]')),
+   visibleButtons:[...document.querySelectorAll('[data-stage-map] button')].filter(vis).map(b=>b.dataset.action||b.textContent.trim())};});
+ assert.ok(start.card&&start.go&&start.goH>=48,JSON.stringify(start));assert.ok(start.more&&!start.open&&!start.club&&!start.stage,'club and stages folded: '+JSON.stringify(start));
+ assert.ok(start.visibleButtons.length<=5,'a few buttons only: '+start.visibleButtons);console.log(tag,'start buttons',start.visibleButtons.join(' | '));
+ await page.screenshot({path:path.join(out,`${tag}-00-start.jpg`),type:'jpeg',quality:84});check(`start card: one play button, ${start.visibleButtons.length} visible buttons, club folded`);
  const t0=Date.now();
- await page.evaluate(()=>window.__island.games.start('streetSlam',undefined,1));await page.waitForTimeout(400);
+ await page.locator('[data-action=hoops-play-next]').click();await page.waitForTimeout(400);
  if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
  await page.waitForFunction(()=>window.__island.games.current?.session?.snapshot?.renderMetrics?.calls>0,null,{timeout:240000});
  row.loadMs=Date.now()-t0;let s=await snap();
@@ -61,7 +71,7 @@ for(const viewport of only){
 
  // controls: touch targets and icons only
  const controls=await page.evaluate(()=>[...document.querySelectorAll('[data-hoops-control]')].filter(b=>!b.hidden&&b.offsetParent).map(b=>{const r=b.getBoundingClientRect();return {key:b.dataset.hoopsControl,w:r.width,h:r.height,text:b.textContent.trim(),svg:!!b.querySelector('svg'),label:b.getAttribute('aria-label')};}));
- assert.ok(controls.length>=6,JSON.stringify(controls));
+ assert.deepEqual(controls.map(c=>c.key).sort(),['alt','pass','shoot','timeout'],'three actions and a timeout: '+JSON.stringify(controls));
  for(const c of controls){assert.ok(c.w>=48&&c.h>=48,`${c.key} ${c.w}x${c.h}`);assert.equal(c.text,'',`${c.key} has no words`);assert.ok(c.svg,`${c.key} has an icon`);assert.ok(c.label,`${c.key} is labelled for screen readers`);}
  const stick=await page.locator('.hoops-stick-zone').boundingBox();assert.ok(stick.width>=96&&stick.height>=96);
  check(`${controls.length} controls at least 48 px, icons only, labelled`);
@@ -92,6 +102,42 @@ for(const viewport of only){
   const shootBox=await page.locator('[data-hoops-control=shoot]').boundingBox();await page.touchscreen.tap(shootBox.x+shootBox.width/2,shootBox.y+shootBox.height/2);
   await page.evaluate(()=>window.__island.games.current.session.debug.step(30));check('touch on stick and action button accepted');
  }
+
+ // floating stick, dead zone, soft curve and sprint at full tilt; tap = short pass, hold = long pass
+ await page.evaluate(()=>{window.__island.games.current.session.debug.hold=true;});
+ const zoneBox=await page.locator('.hoops-stick-zone').boundingBox(),P={x:zoneBox.x+zoneBox.width*0.62,y:zoneBox.y+zoneBox.height*0.42};
+ const readStick=()=>page.evaluate(()=>{const c=window.__island.games.current.session.debug.controls,r=c.elements.ring.getBoundingClientRect(),f=c.consume();return {ring:{x:r.x+r.width/2,y:r.y+r.height/2},held:c.held.stick,m:Math.hypot(f.move.x,f.move.z),sprint:f.sprint};});
+ await page.mouse.move(P.x,P.y);await page.mouse.down();
+ const s0=await readStick();assert.ok(s0.held&&Math.hypot(s0.ring.x-P.x,s0.ring.y-P.y)<3,'the stick appears under the thumb: '+JSON.stringify(s0));assert.equal(s0.m,0,'dead zone at the touch point');
+ await page.mouse.move(P.x+14,P.y);const s1=await readStick();assert.ok(s1.m>0.05&&s1.m<0.45&&!s1.sprint,'a small push is a slow walk: '+JSON.stringify(s1));
+ await page.mouse.move(P.x+70,P.y);const s2=await readStick();assert.ok(s2.m>0.97&&s2.sprint,'full tilt sprints: '+JSON.stringify(s2));
+ await page.mouse.up();const s3=await readStick();assert.ok(!s3.held&&s3.m===0);
+ check(`floating stick: under the thumb, dead zone, ${s1.m.toFixed(2)} at a small push, sprint at full tilt`);
+ const passBox=await page.locator('[data-hoops-control=pass]').boundingBox(),PC={x:passBox.x+passBox.width/2,y:passBox.y+passBox.height/2};
+ const passRead=async(mode,ms)=>{await page.evaluate(m=>{const c=window.__island.games.current.session.debug.controls;c.setMode(m);while(c.held.queued)c.consume();},mode);
+  await page.mouse.move(PC.x,PC.y);await page.mouse.down();const during=await page.evaluate(()=>window.__island.games.current.session.debug.controls.held.queued);await page.waitForTimeout(ms);await page.mouse.up();
+  return page.evaluate(d=>{const f=window.__island.games.current.session.debug.controls.consume();return {during:d,press:f.passPress,long:f.passLong};},during);};
+ const tap=await passRead('ball',60),long=await passRead('ball',480),steal=await passRead('defense',60);
+ assert.ok(tap.press&&!tap.long&&tap.during===0,'tap = short pass on release: '+JSON.stringify(tap));
+ assert.ok(long.press&&long.long,'hold = long pass: '+JSON.stringify(long));
+ assert.ok(steal.press&&!steal.long&&steal.during===1,'on defence the button steals at once: '+JSON.stringify(steal));
+ await page.evaluate(()=>{window.__island.games.current.session.debug.hold=false;});check('pass: tap short, hold long, steal at once on defence');
+
+ // shot meter: red, yellow and green zones above the shooter while the shot is held
+ const meter=await page.evaluate(()=>{const d=window.__island.games.current.session.debug,e=d.engine,S=e.debug.state,a=e.debug.api;
+  for(let i=0;i<900&&e.snapshot().phase!=='live';i++)d.step(1);
+  const inp=o=>({move:{x:0,z:0},sprint:false,shootDown:false,shootUp:false,passPress:false,passLong:false,passDir:null,altPress:false,switchPress:false,timeoutPress:false,call:null,...o});
+  const me=a.onCourt(0)[0],side=a.side(0),rim=e.court.rim(side);e.debug.give(me.id);S.controlled=me.id;e.debug.place(me.id,rim.x-side*6.2,0.4);S.shotClock=24;
+  for(const p of a.onCourt(1))e.debug.place(p.id,-side*12,p.z);
+  d.step(1,inp({shootDown:true}));const dbg={phase:e.snapshot().phase,act:me.act,ctl:S.controlled===me.id,own:S.ball.owner===me.id,ball:S.ball.state,auto:S.autopilot,user:S.userTeam};d.step(30,inp({}));
+  const m=document.querySelector('.hoops-meter'),y=m.querySelector('.hoops-meter-yellow').getBoundingClientRect(),g=m.querySelector('.hoops-meter-win').getBoundingClientRect();
+  return {dbg,shown:!m.hidden,held:e.snapshot().players.find(p=>p.id===me.id).shotHeld,yH:y.height,gH:g.height,yTop:y.top,gTop:g.top,yBottom:y.bottom,gBottom:g.bottom};});
+ assert.ok(meter.shown&&meter.held,'meter shows while the shot is held: '+JSON.stringify(meter));
+ assert.ok(meter.yH>meter.gH*1.6&&meter.yTop<meter.gTop&&meter.yBottom>meter.gBottom,'yellow wraps the green zone: '+JSON.stringify(meter));
+ // software WebGL needs a moment after the burst of steps
+ await page.waitForTimeout(1500);await shot('04-meter');
+ await page.evaluate(()=>{const d=window.__island.games.current.session.debug;d.step(1,{move:{x:0,z:0},sprint:false,shootDown:false,shootUp:true,passPress:false,passLong:false,passDir:null,altPress:false,switchPress:false,timeoutPress:false,call:null});});
+ check(`shot meter: yellow ${meter.yH.toFixed(0)} px around green ${meter.gH.toFixed(0)} px`);
 
  // play on and take the broadcast shots
  await page.evaluate(()=>window.__island.games.current.session.debug.step(900));await page.waitForTimeout(300);await shot('02-halfcourt');

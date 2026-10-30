@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {SEA_LEVEL} from './ultra-island-terrain.mjs?v=island-naval-aim-20261029-1';
+import {SEA_LEVEL} from './ultra-island-terrain.mjs?v=island-naval-aim-20261030-1';
 
 function fallbackNormals(){
   const n=64,bytes=new Uint8Array(n*n*4);
@@ -24,16 +24,24 @@ export function createIslandWater(scene){
     float shore(vec2 p){float a=atan(p.y,p.x),c=abs(cos(a)),s=abs(sin(a));float r=(islandSize*.5*1.19+.9)/pow(pow(c,4.)+pow(s,4.),.25);r+=1.35+.62*sin(a*3.+.5)+.38*sin(a*7.-1.1);return length(p)-r;}
     void main(){
       vec2 p=seaPosition.xz;float t=clock;vec3 a=texture2D(normalMap,p*.075+vec2(t*.012,-t*.008)).xyz*2.-1.;vec3 b=texture2D(normalMap,p.yx*.13+vec2(-t*.009,t*.006)).xyz*2.-1.;
-      vec3 n=normalize(vec3((a.x+b.x)*.23,1.,(a.y+b.y)*.23));vec3 viewDir=normalize(eyeVector);float fresnel=pow(1.-max(dot(n,viewDir),0.),3.);
+      vec3 n=normalize(vec3((a.x+b.x)*.105,1.,(a.y+b.y)*.105));vec3 viewDir=normalize(eyeVector);float fresnel=pow(1.-max(dot(n,viewDir),0.),4.);
       float distanceToShore=shore(p);
       for(int i=0;i<3;i++){vec2 q=(p-neighbors[i].xy)/neighbors[i].zw;float theta=atan(q.y,q.x);float rr=1.+.12*sin(theta*3.+float(i))+.08*cos(theta*5.-float(i));distanceToShore=min(distanceToShore,(length(q)-rr*1.16)*min(neighbors[i].z,neighbors[i].w));}
-      float depth=smoothstep(.0,10.,distanceToShore);vec3 color=mix(vec3(.09,.53,.47),vec3(.025,.24,.31),depth);
-      float ripple=dot(a.xy,b.yx)*.5+.5;color*=.88+ripple*.18;
-      float caustic=pow(max(0.,sin(p.x*5.+a.y*2.+t*.4)*sin(p.y*4.+b.x*2.-t*.3)),8.);color+=vec3(.12,.28,.18)*caustic*(1.-depth)*.38;
-      color=mix(color,vec3(.48,.68,.68),fresnel*.48);
-      vec3 light=normalize(vec3(-.46,.81,.33));float spec=pow(max(0.,dot(n,normalize(light+viewDir))),130.);color+=vec3(1.,.87,.62)*spec*.5;
-      float foamBand=1.-smoothstep(.06,.22,abs(distanceToShore-.12-sin(t*.7+p.x*.65+p.y*.55)*.12));float breaker=pow(max(0.,sin(distanceToShore*5.-t*1.4+a.x*1.8)),10.)*(1.-smoothstep(.5,1.8,distanceToShore))*smoothstep(-.1,.1,distanceToShore);
-      float foam=(foamBand*.48+breaker*.19)*(.62+ripple*.38);color=mix(color,vec3(.79,.91,.82),foam);
+      // Beer-Lambert style attenuation reads as a clear lagoon, then open sea.
+      // Both samples reuse the supplied normal image; there is no extra pass.
+      float depth=1.-exp(-max(0.,distanceToShore)*.22);
+      vec3 color=mix(vec3(.035,.38,.29),vec3(.008,.075,.135),depth);
+      float ripple=dot(a.xy,b.yx)*.5+.5;color*=.96+ripple*.07;
+      float caustic=pow(max(0.,sin(p.x*3.+a.y*3.+t*.3)*sin(p.y*3.5+b.x*3.-t*.24)),10.);
+      color+=vec3(.10,.19,.10)*caustic*(1.-depth)*.22;
+      color=mix(color,vec3(.37,.56,.64),fresnel*.32);
+      vec3 light=normalize(vec3(-.46,.81,.33));float spec=pow(max(0.,dot(n,normalize(light+viewDir))),180.);color+=vec3(1.,.87,.62)*spec*.32;
+      // Broken, receding surf replaces the continuous bright outline.
+      float edge=distanceToShore-.035-sin(t*.65+p.x*.55+p.y*.43)*.07;
+      float foamBand=1.-smoothstep(.025,.14,abs(edge));
+      float breaker=pow(max(0.,sin(distanceToShore*5.-t*.95+a.x*2.4)),12.)*(1.-smoothstep(.25,1.5,distanceToShore))*smoothstep(.0,.15,distanceToShore);
+      float breakup=smoothstep(-.28,.58,a.x+b.y*.6);
+      float foam=(foamBand*.43+breaker*.14)*(.25+breakup*.75);color=mix(color,vec3(.75,.87,.78),foam);
       gl_FragColor=vec4(color,1.);
       #include <tonemapping_fragment>
       #include <colorspace_fragment>

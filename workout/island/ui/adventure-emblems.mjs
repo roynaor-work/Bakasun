@@ -1,7 +1,8 @@
-import {DATA_VERSION} from '../release.mjs?v=island-naval-aim-20261029-1';
+import {DATA_VERSION} from '../release.mjs?v=island-naval-aim-20261030-1';
 /** Frames captured from the real game scenes. Replace the WebP files to
  * update the library after a game-art delivery; no UI changes are needed. */
 const ARTWORK=Object.freeze({
+  boarDefense:{isNew:true,file:'boars.webp',category:'הגנת החוף',description:'אי החזירים — הגנת החווה: עמדת ירי בגוף ראשון מול פלישת חזירים רובוטיים, נשקים, בוסים ומוסך.'},
   navalDuel:{file:'naval.webp',category:'ים פתוח',description:'קרב ספינות בין איים, מול צי היריב.'},
   fireRescue:{file:'fire.webp',category:'חילוץ והצלה',description:'צוות כיבוי, רחובות העיר ומשימת הצלה.'},
   alienDefense:{file:'space.webp',category:'חלל',description:'טיסת הגנה מול טייסת החייזרים.'},
@@ -9,6 +10,7 @@ const ARTWORK=Object.freeze({
   tennis:{file:'tennis.webp',category:'ספורט',description:'משחק טניס במגרש של האי.'},
   islandRacing:{file:'racing.webp',category:'מרוצים',description:'מרוץ תלת־ממדי בין חופים, ג׳ונגלים ופסגות מול ארבעה נהגים.'},
   streetSlam:{file:'hoops.webp',category:'ספורט',description:'כדורסל מקצועי חמישה נגד חמישה באולם, עם קבוצה, אימונים ועונה.'},
+  alpineRush:{file:'alpine.webp',category:'ספורט חורף',description:'מרוץ סנובורד בתלת־ממד מול חמישה גולשים, בשלושה מסלולים בהר.'},
 });
 
 export function gameArtwork(id){return ARTWORK[id]||ARTWORK.navalDuel;}

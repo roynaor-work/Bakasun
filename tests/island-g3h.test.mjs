@@ -17,7 +17,8 @@ for(const difficulty of ['easy','normal','hard'])for(const stage of [1,5,10])tes
    // Restart placement and halftime changes never contribute to progression.
    if(passInFlight&&s.attackDir===attackDir&&(s.phase==='playing'||s.phase==='goal')&&s.ball.lastTeam===1)progressivePassMetres+=Math.max(0,(s.ball.x-ballX)*-attackDir);
    if(s.ball.owner!==null||s.ball.lastTeam!==1)passStart=null;
-   for(const e of game.drainEvents())if(e.team===1){if(e.type==='shot'){shots++;passStart=null;}if(e.type==='pass'){passes++;passStart=true;}if(e.type==='goal')goals++;}
+   // A header from a cross is a shot at goal too (wide play, 29/10/2026).
+   for(const e of game.drainEvents())if(e.team===1){if(e.type==='shot'||e.type==='header'){shots++;passStart=null;}if(e.type==='pass'){passes++;passStart=true;}if(e.type==='goal')goals++;}
    if(s.phase!=='playing'){wasInBox=false;passStart=null;continue;}
    if(owner?.team===1&&s.ball.owner===owner.id)metres+=Math.max(0,(owner.x-before)*-s.attackDir);
    const carrier=s.ball.owner===null?null:s.players[s.ball.owner],rivalBall=carrier?.team===1||!carrier&&s.ball.lastTeam===1,progress=-s.attackDir*s.ball.x;
@@ -57,7 +58,7 @@ test('G3h an unattended home restart resumes; an early human pass still releases
 });
 test('G3h soccer delegates its single pause element and glyph to the shell',async()=>{
  const session=await readFile(new URL('minigames/soccer-session.mjs',root),'utf8'),css=await readFile(new URL('minigames/g3h-soccer.css',root),'utf8'),host=await readFile(new URL('ui/activity.mjs',root),'utf8');
- assert.equal((host.match(/pause=button\([^\n]*?'game-pause'/g)||[]).length,1);assert.doesNotMatch(session,/element\([^\n]*(?:game-pause|pause-button)|actionIcon\('pause'\)/);assert.match(css,/game-pause::before\s*\{\s*content:'';/);assert.doesNotMatch(css,/content:\s*['"](?:Ⅱ|❚❚|⏸)/);assert.match(session,/g3h-soccer\.css\?v=island-naval-aim-20261029-1/);
+ assert.equal((host.match(/pause=button\([^\n]*?'game-pause'/g)||[]).length,1);assert.doesNotMatch(session,/element\([^\n]*(?:game-pause|pause-button)|actionIcon\('pause'\)/);assert.match(css,/game-pause::before\s*\{\s*content:'';/);assert.doesNotMatch(css,/content:\s*['"](?:Ⅱ|❚❚|⏸)/);assert.match(session,/g3h-soccer\.css\?v=island-naval-aim-20261030-1/);
 });
 test('G3h movement eases up/down, turns the body ahead of momentum and keeps the dribble within a footstep',()=>{
  const game=createSoccer({config:c}),s=game.getState(),p=s.players[0];for(const other of s.players)if(other!==p)other.recover=100;s.ball.grace=100;
@@ -71,6 +72,6 @@ test('G3h movement eases up/down, turns the body ahead of momentum and keeps the
  for(let i=0;i<60;i++)move();assert.ok(footError()<.02&&footError()<turnError,'the touch must settle at the stationary foot');
 });
 test('G3h the CC0 bank is local, versioned OGG under 400 KB and the shared mute key suppresses playback',async()=>{
- let bytes=0;for(const url of Object.values(G3H_AUDIO_FILES)){const u=new URL(url);assert.equal(u.searchParams.get('v'),'island-naval-aim-20261029-1');assert.match(u.pathname,/assets\/audio\/g3h\/.*\.ogg$/);u.search='';bytes+=(await stat(u)).size;}assert.ok(bytes<=400000,bytes);
+ let bytes=0;for(const url of Object.values(G3H_AUDIO_FILES)){const u=new URL(url);assert.equal(u.searchParams.get('v'),'island-naval-aim-20261030-1');assert.match(u.pathname,/assets\/audio\/g3h\/.*\.ogg$/);u.search='';bytes+=(await stat(u)).size;}assert.ok(bytes<=400000,bytes);
  let muted='off';const audio=createG3hAudio({storage:{getItem:key=>{assert.equal(key,'island.sound');return muted;}},AudioContext:null});audio.play('kick');assert.deepEqual(audio.snapshot.counts,{});muted='on';audio.event({type:'goal'});assert.deepEqual(audio.snapshot.counts,{whistle:1,net:1,cheer:1});audio.setPaused(true);audio.play('pass');assert.equal(audio.snapshot.counts.pass,undefined);audio.dispose();assert.equal(audio.snapshot.disposed,true);
 });

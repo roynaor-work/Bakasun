@@ -39,7 +39,7 @@ test('G8 a fresh entry touch keeps its native click inside a previous UI compati
 test('G8 the game constructor, input, rotation, resume and disposal cannot request fullscreen',async()=>{
  const source=await readFile(new URL('../workout/island/ui/game-shell.mjs',import.meta.url),'utf8');
  assert.doesNotMatch(GameShell.toString(),/requestFullscreen|orientation\??\.lock|exitFullscreen/);
- assert.match(source,/event\.isTrusted&&nativeShellAction/);assert.match(source,/if\(entryGesture\?\.eventPhase\)entry\.enter\(\)/);
+ assert.match(source,/event\.isTrusted&&nativeShellAction/);assert.match(source,/if\(entryGesture\?\.eventPhase\)entry\.enter\(orientationOf\(args\[0\]\)\)/);
  assert.match(source,/this\.paused\|\|this\.orientationBlocked\|\|this\.starting/);
  const press=await readFile(new URL('../workout/island/ui/press.mjs',import.meta.url),'utf8');assert.doesNotMatch(press,/requestFullscreen/);
 });

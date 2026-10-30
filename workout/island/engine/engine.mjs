@@ -1,22 +1,23 @@
-import {installCity} from './city-runtime.mjs?v=island-naval-aim-20261029-1';
-import {installLearning} from '../learning/runtime.mjs?v=island-naval-aim-20261029-1';
-import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-naval-aim-20261029-1';
-import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-naval-aim-20261029-1';
-import {recordStageWin} from '../activity/progress.mjs?v=island-naval-aim-20261029-1';
-import {gameAvailability} from '../activity/availability.mjs?v=island-naval-aim-20261029-1';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-naval-aim-20261029-1';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=island-naval-aim-20261029-1';
-import {repairHarbors} from './placement-help.mjs?v=island-naval-aim-20261029-1';
-import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-naval-aim-20261029-1';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-naval-aim-20261029-1';
-import { createRegistry } from './registry.mjs?v=island-naval-aim-20261029-1';
-import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-naval-aim-20261029-1';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-naval-aim-20261029-1';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=island-naval-aim-20261029-1';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-naval-aim-20261029-1';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-naval-aim-20261029-1';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-naval-aim-20261029-1';
-import {nextGame as hoopsNextGame,applyResult as hoopsApply,setLineup as hoopsSetLineup,train as hoopsTrain,trainingOffer as hoopsOffer,newSeason as hoopsNewSeason,hoopsSummary} from '../minigames/hoops-franchise.mjs?v=island-naval-aim-20261029-1';
+import {installCity} from './city-runtime.mjs?v=island-naval-aim-20261030-1';
+import {installLearning} from '../learning/runtime.mjs?v=island-naval-aim-20261030-1';
+import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-naval-aim-20261030-1';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-naval-aim-20261030-1';
+import {recordStageWin} from '../activity/progress.mjs?v=island-naval-aim-20261030-1';
+import {gameAvailability} from '../activity/availability.mjs?v=island-naval-aim-20261030-1';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-naval-aim-20261030-1';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-naval-aim-20261030-1';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=island-naval-aim-20261030-1';
+import {repairHarbors} from './placement-help.mjs?v=island-naval-aim-20261030-1';
+import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-naval-aim-20261030-1';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-naval-aim-20261030-1';
+import { createRegistry } from './registry.mjs?v=island-naval-aim-20261030-1';
+import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-naval-aim-20261030-1';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-naval-aim-20261030-1';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=island-naval-aim-20261030-1';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-naval-aim-20261030-1';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-naval-aim-20261030-1';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-naval-aim-20261030-1';
+import {nextGame as hoopsNextGame,applyResult as hoopsApply,setLineup as hoopsSetLineup,train as hoopsTrain,trainingOffer as hoopsOffer,newSeason as hoopsNewSeason,hoopsSummary} from '../minigames/hoops-franchise.mjs?v=island-naval-aim-20261030-1';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -404,7 +405,9 @@ export function createEngine(data, options = {}) {
     const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
     if(id==='tennis')ctx.difficulty=state.tennisDifficulty;
     if(id==='streetSlam'){ctx.hoops=clone(state.hoops);const g=hoopsNextGame(state.hoops);ctx.hoopsGame=g?{id:g.id,home:g.home,away:g.away,round:g.round}:null;}
-    if(id==='soccer'){if(ctx.drill&&!['targets','penalties','cones'].includes(ctx.drill))return {ok:false,reason:'reason.invalid'};ctx.difficulty=state.soccerCard.difficulty;ctx.soccerCard=clone(state.soccerCard);ctx.role=state.soccerRoster.role;}
+    if(id==='soccer'){if(ctx.drill&&!['targets','penalties','cones'].includes(ctx.drill))return {ok:false,reason:'reason.invalid'};ctx.difficulty=state.soccerCard.difficulty;ctx.soccerCard=clone(state.soccerCard);ctx.role=state.soccerRoster.role;
+      // League ladder (29/10/2026): the match number decides the difficulty, the child always plays in the field.
+      const league=leagueMatch(data.config.minigames.soccer,ctx.level);if(league.leagues&&!ctx.drill){if(ctx.level>league.total)ctx.level=league.total;ctx.difficulty=league.difficulty;ctx.role='field';}}
     const finish = (raw, cancelled = false) => {
       if (ended) return { ok: false, reason: 'reason.duplicate' };
       let result;
@@ -419,7 +422,7 @@ export function createEngine(data, options = {}) {
         const parts=periodicParts+(won?(settings?.winParts||0):0);
         result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts,stars,stage,
           ...(result.drill?{drill:result.drill}:{}),...(id==='fireRescue'&&validCertificate(raw?.certificate)?{certificate:{...raw.certificate}}:{}),
-          ...(id==='soccer'?{difficulty:ctx.difficulty,trainingStars:won?stars+config.minigames.soccer.difficulties[ctx.difficulty].bonusStars:0}:{}),
+          ...(id==='soccer'&&result.penalties?{penalties:{...result.penalties}}:{}),...(id==='soccer'?{difficulty:ctx.difficulty,trainingStars:won?stars+config.minigames.soccer.difficulties[ctx.difficulty].bonusStars:0}:{}),
           ...(id==='streetSlam'&&result.hoops?{hoops:result.hoops}:{}) });
       }
       ended = true; activeMinigame = null;

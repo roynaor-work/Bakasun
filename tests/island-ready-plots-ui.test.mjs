@@ -25,6 +25,7 @@ function fixture(){
   const lots=[{id:'home-1',typeId:'house',x:2,z:3,w:2,d:2,color:'#57a97b',number:1,status:'available',ok:true},{id:'basket-1',typeId:'basketball',x:6,z:3,w:3,d:2,color:'#4f9bc4',number:2,status:'locked',reason:'reason.locked',ok:false},{id:'tennis-1',typeId:'tennis',x:11,z:3,w:3,d:2,color:'#adbf70',number:3,status:'unavailable',reason:'reason.money',ok:false}];
   let charges=0;const drawn=[],focus=[],selection=[];
   const engine={state:{readyPlan:{version:1,lots:structuredClone(lots)},buildings:[],money:100},readyPlots:()=>lots.filter(row=>!engine.state.buildings.some(b=>b.plot===row.id)).map(row=>({...row})),buildReadyPlot(id){const row=engine.readyPlots().find(row=>row.id===id);if(!row?.ok)return {ok:false,reason:row?.reason||'reason.invalid'};charges++;engine.state.money-=types.get(row.typeId).cost;const building={id:'built-'+id,typeId:row.typeId,plot:id,x:row.x,z:row.z};engine.state.buildings.push(building);return {ok:true,id:building.id};},readyPlotForType:id=>engine.readyPlots().find(row=>row.typeId===id)};
+  engine.registry={buildings:types};engine.state.world={size:32,stage:0};
   const ui={engine,data:{featureFlags:{readyPlots:true}},t:createTranslator(strings,id=>assert.fail('missing translation '+id)),getBuilding:id=>types.get(id),label:type=>strings[type.title],view:{setReadyPlots:rows=>drawn.push(structuredClone(rows)),setReadyPlotSelection:id=>selection.push(id),focusReadyPlot:row=>focus.push(row.id),highlightCityBuildings(){}},cancelPlacement(){},closeDetails(){},closeInfo(){},setDockOpen(){},showInfo(){},toast(){},result(){},openModal(){this.modalCleanup?.();this.modalCleanup=null;const overlay=new Element('div');this.modal=new Element('section');overlay.append(this.modal);return this.modal;},closeModal(){this.modalCleanup?.();this.modalCleanup=null;this.modal=null;}};
   const ready=new ReadyPlotsInterface(ui);ui.readyPlots=ready;ready.refresh();return {ui,ready,engine,lots,drawn,focus,selection,get charges(){return charges;}};
 }
@@ -69,37 +70,58 @@ test('real prepared-city confirmation uses the engine once and leaves every othe
   }finally{restore();}
 });
 
-function canvas(){const labels=[],context={clearRect(){},fillRect(){},strokeRect(){},fillText(text){labels.push(text);}};return {labels,getContext:()=>context};}
-test('all permanent outlines fit their saved footprints and remain in three draws as lots are occupied',()=>{
-  const scene=new T.Scene(),atlas=canvas(),view=new ReadyPlotsView(scene,.34,{canvas:atlas}),rows=Array.from({length:100},(_,i)=>({id:'lot-'+i,typeId:i%2?'basketball':'tennis',x:i%10*4,z:Math.floor(i/10)*4,w:3,d:2,number:i+1,status:i%3?'available':'locked',color:'#64aa86',label:i%2?'כדורסל':'טניס',icon:i%2?'🏀':'🎾'})),before=structuredClone(rows);
-  view.show(rows,48);assert.equal(view.fill.count,100);assert.equal(view.border.count,400);assert.equal(view.metrics().draws,3);assert.equal(view.labelGeometry.drawRange.count,600);assert.ok(atlas.labels.some(text=>text.includes('כדורסל')));assert.ok(atlas.labels.some(text=>text.includes('טניס')));
-  const matrix=new T.Matrix4(),position=new T.Vector3(),rotation=new T.Quaternion(),scale=new T.Vector3();view.fill.getMatrixAt(99,matrix);matrix.decompose(position,rotation,scale);assert.ok(Math.abs(position.x-(rows[99].x+1-23.5))<1e-6);assert.ok(Math.abs(scale.x-2.86)<1e-6);assert.ok(Math.abs(scale.y-1.86)<1e-6);
-  view.setSelection('lot-99');view.show(rows.slice(1),48);assert.equal(view.fill.count,99);assert.deepEqual(rows,before);assert.equal(view.rows[98].number,100);
-  let released=0;for(const resource of [view.geometry,view.fillMaterial,view.borderMaterial,view.texture,view.labelGeometry,view.labelMaterial])resource.addEventListener('dispose',()=>released++);view.dispose();view.dispose();assert.equal(released,6);assert.equal(scene.children.length,0);
+function viewRows(count=100){return Array.from({length:count},(_,i)=>({id:'lot-'+i,typeId:i%2?'basketball':'tennis',x:i%10*4,z:Math.floor(i/10)*4,w:3,d:2,number:i+1,status:i%3?'available':'locked',color:'#64aa86',label:i%2?'כדורסל':'טניס',icon:i%2?'🏀':'🎾'}));}
+
+test('vacant lots have no badges, label atlas, persistent wash or outlines at any camera zoom',()=>{
+  const scene=new T.Scene(),view=new ReadyPlotsView(scene,.34,{capacity:1,canvas:{getContext(){assert.fail('an atlas must never be created');}}}),rows=viewRows();
+  view.show(rows,48);assert.equal(view.rows.length,100);assert.equal(view.metrics().plots,100);assert.equal(view.metrics().labels,0);assert.equal(view.metrics().draws,0);
+  assert.ok(scene.children.every(mark=>!mark.visible));assert.equal(view.canvas,undefined);assert.equal(view.texture,undefined);assert.equal(view.labels,undefined);assert.equal(view.fillMaterial.map,null);
+  const camera=new T.OrthographicCamera(-32,32,32,-32,.1,100),rect={left:0,top:0,width:360,height:740};
+  camera.position.set(0,30,0);camera.up.set(0,0,-1);camera.lookAt(0,0,0);camera.updateMatrixWorld();
+  for(const extent of [32,8,2]){Object.assign(camera,{left:-extent,right:extent,top:extent,bottom:-extent});camera.updateProjectionMatrix();view.resize(360,740);view.update(camera,rect);assert.equal(view.pick(180,370,camera,rect),null);assert.equal(view.metrics().draws,0);assert.equal(view.metrics().labels,0);}
+  view.dispose();
 });
 
-test('label picking follows the same compact/full dimensions as drawing and selection keeps its saved ID',()=>{
-  const scene=new T.Scene(),view=new ReadyPlotsView(scene,.34,{canvas:canvas()}),row={id:'tennis-a',typeId:'tennis',x:15,z:15,w:2,d:2,number:8,label:'טניס',icon:'🎾',status:'available'},camera=new T.OrthographicCamera(-10,10,10,-10,.1,100),rect={left:0,top:0,width:1000,height:800};
-  camera.position.set(0,30,0);camera.up.set(0,0,-1);camera.lookAt(0,0,0);camera.updateMatrixWorld();view.resize(1000,800);view.show([row],32);assert.equal(view.pick(545,400,camera,rect)?.readyPlotId,row.id);
-  Object.assign(camera,{left:-40,right:40,top:40,bottom:-40});camera.updateProjectionMatrix();assert.equal(view.pick(520,400,camera,rect),null);view.setSelection(row.id);assert.equal(view.pick(545,400,camera,rect)?.readyPlotId,row.id);view.dispose();
+test('only the selected lot receives a faint flat wash and thin ground outline within its actual footprint',()=>{
+  const scene=new T.Scene(),view=new ReadyPlotsView(scene,.34),rows=viewRows(),before=structuredClone(rows),row=rows[99];
+  view.show(rows,48);view.setSelection(row.id);scene.updateMatrixWorld(true);
+  assert.equal(view.metrics().draws,2);assert.equal(view.metrics().selected,1);assert.equal(view.metrics().labels,0);assert.equal(scene.children.filter(mark=>mark.visible).length,2);
+  assert.equal(view.border.isLineLoop,true);assert.equal(view.borderMaterial.linewidth,1);assert.ok(view.fillMaterial.opacity<=.12);assert.ok(view.borderMaterial.opacity<=.55);
+  const offset=23.5;
+  for(const mark of [view.fill,view.border]){
+    const positions=mark.geometry.attributes.position,point=new T.Vector3();let minY=Infinity,maxY=-Infinity;
+    for(let i=0;i<positions.count;i++){
+      point.fromBufferAttribute(positions,i).applyMatrix4(mark.matrixWorld);minY=Math.min(minY,point.y);maxY=Math.max(maxY,point.y);
+      assert.ok(point.x>row.x-.5-offset&&point.x<row.x+row.w-.5-offset);assert.ok(point.z>row.z-.5-offset&&point.z<row.z+row.d-.5-offset);
+    }
+    assert.ok(Math.abs(maxY-minY)<1e-6,'selection contains no upright sign or pole');assert.ok(minY>.34&&maxY<.39);
+  }
+  assert.equal(view.pick(0,0),null,'even a selected plot has no floating hit target');view.show(rows.slice(1),48);assert.equal(view.metrics().draws,2);assert.equal(view.rows.at(-1).number,100);assert.deepEqual(rows,before);
+  view.setSelection(null);assert.equal(view.metrics().draws,0);assert.ok(scene.children.every(mark=>!mark.visible));
+  view.setSelection(row.id);view.show(rows.slice(0,-1),48);assert.equal(view.metrics().draws,0,'building/removing the selected reservation clears its ground mark');view.dispose();
 });
 
-test('phone overview badges never overlap, selected guidance wins, and zoom reveals more labels without hiding plots',()=>{
-  const scene=new T.Scene(),view=new ReadyPlotsView(scene,.34,{canvas:canvas()}),rows=Array.from({length:36},(_,i)=>({id:'lot-'+i,typeId:'house',x:10+i%6*2,z:10+Math.floor(i/6)*2,w:2,d:2,number:i+1,label:'בית',icon:'🏠',status:'available'})),camera=new T.OrthographicCamera(-32,32,32,-32,.1,100),rect={left:0,top:0,width:360,height:740};
-  camera.position.set(0,30,0);camera.up.set(0,0,-1);camera.lookAt(0,0,0);camera.updateMatrixWorld();view.resize(360,740);view.show(rows,32);view.update(camera,rect);const overview=view.visibleIds.size;assert.ok(overview>0&&overview<rows.length);
-  const centers=[...view.visibleIds].map(id=>new T.Vector3(...(()=>{const row=rows.find(row=>row.id===id);return [row.x+.5-15.5,.51,row.z+.5-15.5];})()).project(camera)).map(p=>({x:(p.x+1)*180,y:(1-p.y)*370}));
-  for(let i=0;i<centers.length;i++)for(let j=i+1;j<centers.length;j++)assert.ok(Math.abs(centers[i].x-centers[j].x)>=38||Math.abs(centers[i].y-centers[j].y)>=30,'compact label rectangles retain their margin');
-  view.setSelection('lot-35');assert.ok(view.visibleIds.has('lot-35'));assert.equal(view.fill.count,36);assert.equal(view.border.count,144);
-  view.setSelection(null);Object.assign(camera,{left:-8,right:8,top:8,bottom:-8});camera.updateProjectionMatrix();view.update(camera,rect);assert.ok(view.visibleIds.size>overview);assert.equal(view.fill.count,36);view.dispose();
+test('every saved footprint remains clickable without marks, including lots beyond the former atlas capacity',()=>{
+  const scene=new T.Scene(),view=new ReadyPlotsView(scene,.34,{capacity:1}),rows=viewRows(160);view.show(rows,64);
+  for(const row of rows)for(let z=row.z;z<row.z+row.d;z++)for(let x=row.x;x<row.x+row.w;x++)assert.deepEqual(view.pickCell({x,z}),{x:row.x,z:row.z,readyPlotId:row.id});
+  assert.equal(view.pickCell(null),null);assert.equal(view.pickCell({x:-1,z:-1}),null);assert.equal(view.metrics().draws,0);assert.equal(view.metrics().labels,0);
+  view.dispose();assert.equal(view.pickCell({x:rows[0].x,z:rows[0].z}),null);
 });
 
-test('pointer taps prioritize a ready badge and every vacant footprint cell over roads and overhanging roofs',()=>{
+test('selection resources release once and a disposed view cannot recreate markings',()=>{
+  const scene=new T.Scene(),view=new ReadyPlotsView(scene,.34),rows=viewRows(1);view.show(rows,32);view.setSelection(rows[0].id);
+  let released=0;for(const resource of [view.geometry,view.borderGeometry,view.fillMaterial,view.borderMaterial])resource.addEventListener('dispose',()=>released++);
+  view.dispose();view.dispose();view.show(rows,32);view.setSelection(rows[0].id);view.update();view.resize();
+  assert.equal(released,4);assert.equal(scene.children.length,0);assert.equal(view.metrics().draws,0);assert.equal(view.metrics().plots,0);assert.equal(view.metrics().disposed,true);
+});
+
+test('vacant footprint taps take precedence over adjacent roads and overhanging roofs without any floating target',()=>{
   const events={},calls=[],canvas={style:{},addEventListener:(name,handler)=>{events[name]=handler;},setPointerCapture(){},getBoundingClientRect:()=>({left:0,top:0,width:390,height:844})},view=Object.create(IslandView.prototype),lot={id:'saved-tennis',x:11,z:12,w:3,d:2};
-  let badge={x:lot.x,z:lot.z,readyPlotId:lot.id},cell={x:10,z:12};
-  Object.assign(view,{canvas,handlers:{},pointers:new Map(),groups:new Map(),camera:{},state:{buildings:[]},cellAt:()=>cell,readyPlots:{rows:[lot],pick:()=>badge,pickCell:ReadyPlotsView.prototype.pickCell},ray:{intersectObjects(){calls.push('building-ray');return [{object:{userData:{buildingId:'road-or-roof'}}}];}},onCell:row=>calls.push(row),onSelect:id=>calls.push(id)});
+  let cell={x:10,z:12};
+  Object.assign(view,{canvas,handlers:{},pointers:new Map(),groups:new Map(),camera:{},state:{buildings:[]},cellAt:()=>cell,readyPlots:{rows:[lot],pick:ReadyPlotsView.prototype.pick,pickCell:ReadyPlotsView.prototype.pickCell},ray:{intersectObjects(){calls.push('building-ray');return [{object:{userData:{buildingId:'road-or-roof'}}}];}},onCell:row=>calls.push(row),onSelect:id=>calls.push(id)});
   view.bindEvents();const tap=()=>{events.pointerdown({pointerId:1,clientX:150,clientY:300});events.pointerup({pointerId:1,clientX:150,clientY:300});};
-  tap();assert.deepEqual(calls,[badge],'a visible badge wins even when ground points at a road');calls.length=0;badge=null;
+  tap();assert.deepEqual(calls,['building-ray','road-or-roof'],'a road cell can no longer trigger an invisible floating badge');calls.length=0;
   for(let z=lot.z;z<lot.z+lot.d;z++)for(let x=lot.x;x<lot.x+lot.w;x++){cell={x,z};tap();assert.equal(calls.at(-1).readyPlotId,lot.id);}
   assert.equal(calls.includes('building-ray'),false,'an overhanging roof cannot steal any vacant lot cell');calls.length=0;cell={x:0,z:0};tap();assert.deepEqual(calls,['building-ray','road-or-roof'],'ordinary built areas keep normal selection');
-  calls.length=0;view.ghost={};badge={x:lot.x,z:lot.z,readyPlotId:lot.id};tap();assert.deepEqual(calls,[cell],'advanced manual placement still uses the ground grid');
+  calls.length=0;view.ghost={};cell={x:lot.x,z:lot.z};tap();assert.deepEqual(calls,[cell],'advanced manual placement still uses the ground grid');
 });

@@ -1,3 +1,4 @@
+import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-naval-aim-20261030-1';
 const node=(tag,className='',text='')=>{const item=document.createElement(tag);item.className=className;item.textContent=text;return item;};
 const button=(text,action,handler,className='secondary-button')=>{const item=node('button',className,text);item.type='button';item.dataset.action=action;item.onclick=handler;return item;};
 export const plotCanBuild=row=>Boolean(row&&(row.ok===true||row.status==='available'||row.status==='ready'));
@@ -21,6 +22,7 @@ export class ReadyPlotsInterface{
   chooseType(typeId){
     this.refresh();const row=this.ui.engine.readyPlotForType?.(typeId)||this.rows.find(row=>row.typeId===typeId);
     if(row){this.show(row.id);return true;}
+    if(typeId==='airport'){const reason=airportSpaceReason(this.ui.engine.state,this.ui.engine.registry,this.ui.data.featureFlags);if(reason){this.ui.toast(reason);return true;}}
     if(typeId==='road'){this.openList();return true;}
     const built=this.ui.engine.state.buildings.find(row=>row.typeId===typeId);
     if(built){this.ui.showInfo(built.id);return true;}

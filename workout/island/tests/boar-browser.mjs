@@ -1,0 +1,91 @@
+import assert from 'node:assert/strict';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
+
+const server=await serveIsland(),chromium=await islandChromium();
+const qaDirectory=process.env.BOAR_QA_DIR||join(tmpdir(),'island-boar-qa');
+const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
+const context=await browser.newContext({viewport:{width:844,height:390},deviceScaleFactor:1,hasTouch:true});
+await context.addInitScript(()=>{localStorage.setItem('boar-island-quality','normal');localStorage.setItem('island.sound','off');});
+const page=await context.newPage(),errors=[],outside=[];page.setDefaultTimeout(120000);
+page.on('pageerror',e=>errors.push(e.message));
+page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&u.origin!==new URL(server.url).origin)outside.push(r.url());});
+await page.route('**/data/featureFlags.json*',async route=>{const response=await route.fetch();await route.fulfill({response,json:{...await response.json(),events:false}});});
+const snapshot=()=>page.evaluate(()=>window.__island.ui.activityInterface.current.session.snapshot);
+let campaign;
+const launch=async()=>{
+  await page.evaluate(()=>window.__island.ui.activityInterface.menu());
+  await page.locator('[data-action=game-enter][data-game-id=boarDefense]').click();
+  await page.waitForFunction(()=>window.__island.ui.activityInterface.current?.session?.snapshot.ready);
+  await page.waitForFunction(()=>document.querySelector('.game-screen')?.dataset.starting!=='true');
+  campaign=page.frames().find(f=>f.url().includes('/boar-island/index.html'));
+  assert.ok(campaign,'campaign is served from the local island subtree');
+};
+try{
+  await page.goto(server.url+'?dev=1&games=1',{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
+  await page.locator('[data-action=avatar-start]').click();
+  await page.evaluate(()=>{const e=window.__island.engine;e.skipTutorial();e.tick=()=>({ok:true});window.__island.ui.activityInterface.requireDaily=()=>false;});
+  await launch();
+  console.log('local library entry: ok');
+  if(process.env.BOAR_CAPTURE_PREVIEW==='1'){
+    const preview=await campaign.evaluate(()=>{const {renderer,scene,camera}=window.__three;renderer.render(scene,camera);return document.querySelector('#scene').toDataURL('image/webp',.85).split(',')[1];});
+    await writeFile(new URL('../assets/ultra-hub/boars.webp',import.meta.url),Buffer.from(preview,'base64'));
+  }
+  assert.equal((await snapshot()).campaign.mode,'menu');
+  assert.equal((await snapshot()).campaign.muted,true);
+  await campaign.locator('#garage').click();
+  await campaign.waitForFunction(()=>document.querySelector('#game').dataset.mode==='shop');
+  assert.equal(await campaign.locator('#shop').isVisible(),true);
+  await campaign.locator('#shop-back').click();
+  await campaign.locator('#start').click();
+  console.log('garage and start: ok');
+  await campaign.waitForFunction(()=>window.__boarIsland.snapshot.mode==='battle');
+  await campaign.locator('#scene').dispatchEvent('pointerdown',{pointerId:1,pointerType:'touch',clientX:380,clientY:160,isPrimary:true});
+  await campaign.locator('#scene').dispatchEvent('pointerup',{pointerId:1,pointerType:'touch',clientX:380,clientY:160,isPrimary:true});
+  await page.locator('[data-action=game-pause]').click();
+  const paused=await snapshot();assert.equal(paused.paused,true);
+  await page.waitForTimeout(700);assert.deepEqual((await snapshot()).campaign,paused.campaign,'pause freezes the original campaign and currency');
+  await page.locator('[data-action=game-resume]').click();
+  assert.equal((await snapshot()).paused,false);
+  console.log('touch input and native pause/resume: ok');
+  await page.locator('[data-action=game-pause]').click();
+  await page.locator('[data-action=game-pause-sound]').click();
+  await page.waitForFunction(()=>window.__island.ui.activityInterface.current.session.snapshot.campaign.muted===false);
+  await page.locator('[data-action=game-pause-sound]').click();
+  await page.waitForFunction(()=>window.__island.ui.activityInterface.current.session.snapshot.campaign.muted===true);
+  await page.locator('[data-action=game-resume]').click();
+  console.log('shared mute: ok');
+  // Use the source game's dev-only simulator to complete a real first wave.
+  const outcome=await campaign.evaluate(()=>{
+    __boar.bot(true,{error:0,reaction:0,abilities:true});
+    for(let i=0;i<180&&__boar.state.mode==='battle';i++)__boar.sim(1);
+    __boar.bot(false);return window.__boarIsland.snapshot;
+  });
+  assert.equal(outcome.mode,'shop');assert.equal(outcome.bestWave,1);assert.equal(outcome.nextWave,2);
+  console.log('first wave won: ok');
+  const islandBefore=await page.evaluate(()=>window.__island.engine.exportJSON());
+  await page.locator('[data-action=game-pause]').click();
+  await page.locator('[data-action=game-exit]').click();
+  await page.waitForFunction(()=>!document.querySelector('.boar-game-frame'));
+  assert.equal(await page.evaluate(()=>window.__island.engine.isMinigameActive()),false);
+  assert.equal(await page.evaluate(()=>window.__island.engine.exportJSON()),islandBefore);
+  await launch();assert.equal((await snapshot()).campaign.nextWave,2,'campaign save survives exit and re-entry');
+  console.log('save and re-entry: ok');
+  await campaign.locator('#help').click();assert.equal(await campaign.locator('#help-screen').isVisible(),true);
+  await campaign.locator('#help-close').click();
+  await page.setViewportSize({width:390,height:844});await page.waitForTimeout(300);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  assert.equal(await campaign.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  await page.setViewportSize({width:844,height:390});await page.waitForTimeout(300);
+  await mkdir(qaDirectory,{recursive:true});
+  await page.screenshot({path:join(qaDirectory,'island-menu.png')});
+  await campaign.locator('#game').screenshot({path:join(qaDirectory,'boar-menu.png')});
+  await campaign.locator('#island-back').click();
+  await page.waitForFunction(()=>!document.querySelector('.boar-game-frame'));
+  assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);
+  await writeFile(join(qaDirectory,'report.json'),JSON.stringify({checks:['library entry','local assets','garage','touch input','native pause/resume','shared mute','first-wave win','save/re-entry','portrait and landscape','exit releases session'],errors,outside,outcome},null,2)+'\n');
+  console.log('Boar Island integration browser: all checks passed');
+}finally{await browser.close();await server.close();}

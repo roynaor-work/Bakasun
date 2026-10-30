@@ -171,3 +171,39 @@ SHA־256 של ה־GLB: `8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2
 הצלילים ממוחזרים מהמשחקים הקיימים באי (ראו G3h, G4e, G6d): כדרור, רשת, טבעת, מסירה, שריקה, קהל.
 
 שימו לב: הצהרת CC0 של MakeHuman חלה על נכסי הליבה של הפרויקט. לא נבדקה תעודת רישיון נפרדת לכל אחד מהבגדים, השיער והנעליים ששימשו; לפני פרסום מסחרי מחוץ לאי כדאי לאמת מול `makehuman.org/license` ומול קובצי הרישיון של כל חבילה.
+
+## מרוץ סנובורד (Alpine Rush) · 26.10.2026
+
+- גרפיקה 5 (27.10.2026, Codex): הדמות היא `assets/alpine-rush/athlete.glb` (1,843,180 בתים, SHA-256 `4691ea5166840b5225b17f5fb121ae66b0d61fd73b34e41ac0942aba4f2ea42a`), Soldier/Vanguard של Mixamo מדוגמת Three.js (https://threejs.org/examples/webgl_animation_skinning_blending.html). זה לא CC0 ולא בהכרח תחת MIT; תנאי Adobe ל־Mixamo: https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html . `minigames/athlete.mjs` מסיר בזיכרון ציוד מותן וראש, צובע את הלבוש ומוסיף קסדה, מסכה ומשקפיים מגאומטריה מקורית. בשילוב הוסרו מקובץ המקור (2,160,468 בתים) שלוש האנימציות שהמשחק לא משתמש בהן (Idle, Run, Walk) כדי לעמוד במגבלת 2MB לקובץ GLB באי; כל הצמתים, השלד, הרשתות והטקסטורות נשארו.
+- תמונות (`assets/alpine-rush/`): `alpine-panorama.webp` ו־`snow-fir.webp` (ImageGen, גרפיקה 2), `granite-v5.webp` ו־`alpine-dusk-v5.webp` (ImageGen, גרפיקה 5; הפרומפטים בחבילת Codex). המקור PNG (כ־15MB) הומר ל־WebP בשילוב: 326,326, 516,162, 443,746 ו־313,734 בתים; הגרניט הוקטן מ־1254 ל־1024 פיקסלים.
+- `assets/kid-full.glb` כבר לא נטען במשחק הזה, ונשאר לשאר האי.
+- Three.js r160, `GLTFLoader` ו־`BufferGeometryUtils` מ־`vendor/` הקיים (MIT). לא נוספו ספריות.
+- הסביבה נוצרת בקוד: חצי הצינור (טקסטורת קנבס של פסים כחולים), השפות, הרשתות האדומות, השטח שבצדדים, העצים, ההרים, הדגלים, הרמפה, שערי הסלאלום, משטחי האצה, המטבעות, השלג היורד וקשת הסיום. ה־HUD, הג׳ויסטיק וסמלי הטריקים הם SVG ו־CSS (עיצוב Codex, `docs-development/alpine-rush/`). הסאונד מסונתז ב־WebAudio; אין קבצי שמע.
+- `assets/ultra-hub/alpine.webp` (87,554 בתים, 960×600): צילום מתוך המשחק הפעיל בגרפיקה 5, מסלול 2, סיבוב באוויר מעל שפת חצי הצינור, בלי HUD.
+- הרפרנסים החזותיים (Ski Master, Snowboard Master 3D, SSX 3) נצפו בידי Codex בלבד; לא הועתקו מהם קוד, סאונד או נכסים.
+## Soccer athlete integration · 2026-10-29
+
+The approved `soccer-integration.zip` source (reported head `910ea28`, independently
+reconstructed tree `9b124bed98b7805bb4cc9d975eb62c074b0cc008`) adds
+`assets/athlete/athlete.glb` and ten local files in `assets/athlete/textures/`.
+The GLB is 1,280,272 bytes; the ten textures total 1,403,328 bytes. Together the
+family is 2,683,600 bytes. Every file is below the existing 2,000,000-byte limit.
+The model, clip attribution and individual texture hashes are retained verbatim
+in `assets/athlete/README.md` and `assets/athlete/provenance.json`; the compacted
+texture inventory is `provenance.compacted.textures`. The older `images` entries
+in the provenance describe the pre-compaction bake sizes.
+
+The runtime model has 31 CMU/MotionBuilder bones, 13 retargeted clips, eight
+identity morph targets and two geometry detail levels. MakeHuman geometry/rig
+and weights are identified as CC0 in the supplied source documentation; motion
+comes from the CMU database under its own terms, with requested acknowledgement:
+The data used in this project was obtained from mocap.cs.cmu.edu. The database
+was created with funding from NSF EIA-0196217. CMU motion is not relicensed as CC0.
+
+`assets/models/manifest.json` indexes the separate `assets/models/*.glb`
+inventory and intentionally does not include this family. The athlete's source
+provenance lists all eleven runtime files. Pages copies this directory and its
+textures recursively. `kid-full.glb` remains the existing load-failure fallback.
+The turf and audio attributions below remain applicable. No EA/club assets or
+real-player likenesses are included. Codex graphics v3 is excluded from this
+integration; it requires separate visual approval.

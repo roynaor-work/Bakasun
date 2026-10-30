@@ -1,4 +1,4 @@
-import {nativeShellAction} from './press.mjs?v=island-naval-aim-20261029-1';
+import {nativeShellAction} from './press.mjs?v=island-naval-aim-20261030-1';
 
 const entries=new WeakMap();
 export function installedShell(target=window){
@@ -9,15 +9,17 @@ export function installedShell(target=window){
  * document stays fullscreen when a game dialog is replaced or closed. */
 export class FullscreenEntry {
   constructor({doc=document,target=window}={}){Object.assign(this,{doc,target});this.ready=Promise.resolve();}
-  enter(){
-    const {doc,target}=this;
+  enter(orientation='landscape'){
+    const {doc,target}=this;this.orientation=orientation;
+    // A game that supports both orientations releases a lock left by a landscape game.
+    if(orientation!=='landscape'&&doc.fullscreenElement){try{target.screen.orientation?.unlock?.();}catch{}}
     if(this.requesting||doc.fullscreenElement||installedShell(target))return this.ready;
     if(!doc.documentElement.requestFullscreen)return this.ready;
     this.requesting=true;
     let request;try{request=doc.documentElement.requestFullscreen({navigationUI:'hide'});}catch{request=Promise.reject();}
     this.ready=Promise.resolve(request).catch(()=>{}).then(()=>{
       this.requesting=false;
-      if(doc.fullscreenElement){try{void target.screen.orientation?.lock?.('landscape')?.catch(()=>{});}catch{}}
+      if(doc.fullscreenElement&&this.orientation==='landscape'){try{void target.screen.orientation?.lock?.('landscape')?.catch(()=>{});}catch{}}
     });
     return this.ready;
   }
@@ -29,13 +31,13 @@ function iconButton(action,label,icon){const b=document.createElement('button');
 
 /** Wire the existing adapters at the application boundary, without changing any
  * game. A programmatic/event launch may count down, but cannot request fullscreen. */
-export function installGameShell({games,ui,t,countdownStepMs}){
+export function installGameShell({games,ui,t,countdownStepMs,orientationOf=()=>'landscape'}){
   const entry=new FullscreenEntry(),abort=new AbortController(),options={capture:true,signal:abort.signal};
   entry.countdownStepMs=countdownStepMs;entries.set(document,entry);
   let entryGesture=null,prompt=null,appInstalled=false;
   document.addEventListener('click',event=>{entryGesture=event.isTrusted&&nativeShellAction(event.target.closest?.('button')?.dataset.action)?event:null;},options);
   const launch=games.launch;
-  games.launch=function(...args){if(entryGesture?.eventPhase)entry.enter();return launch.apply(this,args);};
+  games.launch=function(...args){if(entryGesture?.eventPhase)entry.enter(orientationOf(args[0]));return launch.apply(this,args);};
   window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();prompt=event;}, {signal:abort.signal});
   window.addEventListener('appinstalled',()=>{prompt=null;appInstalled=true;for(const b of ui.modalRoot.querySelectorAll('[data-action=shell-install]'))b.remove();},{signal:abort.signal});
   const help=modal=>{

@@ -5,7 +5,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
-import {jerseyTexture,shortsTexture} from './hoops-textures.mjs?v=island-naval-aim-20261029-1';
+import {jerseyTexture,shortsTexture} from './hoops-textures.mjs?v=island-naval-aim-20261030-1';
 
 const BODY_FOR_POS={PG:'guard',SG:'guard',SF:'wing',PF:'forward',C:'big'};
 const HAIR=/short0|afro|long0|bob0|braid|pony/i;
@@ -112,7 +112,11 @@ export function createAvatar(assets,card,teamLook,opts={}){
   // procedural layers on top of the clip: pass push, steal reach, ball carry
   if(p.act==='pass'&&rArm&&lArm){const u=Math.min(1,p.actT/0.16);const k=Math.sin(u*Math.PI)*0.9;rArm.rotateX(-k);lArm.rotateX(-k);rFore&&rFore.rotateX(-k*0.6);lFore&&lFore.rotateX(-k*0.6);}
   if(p.act==='steal'&&rArm){const u=Math.min(1,p.actT/0.4);const k=Math.sin(u*Math.PI)*1.1;rArm.rotateX(-k);spine&&spine.rotateX(k*0.25);}
-  if(ctx.contest&&lArm&&rArm&&!p.hasBall&&p.act!=='shoot'){lArm.rotateZ(-0.9*ctx.contest);rArm.rotateZ(0.9*ctx.contest);}
+  if(ctx.contest&&lArm&&rArm&&!p.hasBall&&p.act!=='shoot'&&!p.air){lArm.rotateZ(-0.9*ctx.contest);rArm.rotateZ(0.9*ctx.contest);}
+  // block and rebound: both arms reach straight up through the jump
+  if(p.air&&(p.act==='block'||p.act==='rebound')&&lArm&&rArm){const k=Math.min(1,0.35+ctx.airU*1.4);lArm.rotateZ(-2.6*k);rArm.rotateZ(2.6*k);lFore&&lFore.rotateZ(-1.6*k);rFore&&rFore.rotateZ(1.6*k);}
+  // a pass on its way: hands up in front of the chest, ready to catch
+  if(ctx.catching&&!p.hasBall&&lArm&&rArm&&!p.air){lArm.rotateX(-0.9);rArm.rotateX(-0.9);lFore&&lFore.rotateX(-0.5);rFore&&rFore.rotateX(-0.5);}
  };
  return av;
 }

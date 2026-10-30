@@ -1,11 +1,34 @@
 /** Island Pro Basketball club screen (menu, not the court): next game and table, the starting
  * five, training with its cost and result shown before buying, and match settings. Every
  * change goes through engine.hoops, which saves and refuses while a game is running. */
-import {DRILLS} from '../minigames/hoops-league.mjs?v=island-naval-aim-20261029-1';
+import {DRILLS} from '../minigames/hoops-league.mjs?v=island-naval-aim-20261030-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;if(text!=='')n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
 const POS=['PG','SG','SF','PF','C'];
+
+/** The simple start: who we play next, where we stand, and one big button. Everything else
+ * (lineup, training, settings, stages) waits behind "manage the team". */
+export function hoopsStartCard({engine,t,play}){
+ const h=engine.state.hoops,sum=engine.hoops.summary(),root=el('section','hoops-start');root.dataset.hoopsStart='true';
+ const teamName=id=>sum.teams.find(x=>x.id===id)?.name||id;
+ const crest=(id,team)=>{const c=el('span','hoops-club-crest');const look=sum.teams.find(x=>x.id===id)||team;if(look?.primary){c.style.setProperty('--team',look.primary);c.style.setProperty('--team2',look.secondary);}return c;};
+ const matchup=el('div','hoops-start-matchup');
+ const me=el('div','hoops-start-team');me.append(crest(h.team,sum.team),el('strong','',sum.team.name));
+ matchup.append(me);
+ if(sum.next){
+  const opp=sum.next.home===h.team?sum.next.away:sum.next.home;
+  const them=el('div','hoops-start-team');them.append(crest(opp),el('strong','',teamName(opp)));
+  matchup.append(el('span','hoops-start-vs','מול'),them);
+  root.append(matchup,el('p','hoops-start-line',t(sum.next.home===h.team?'hoops.club.nextHome':'hoops.club.nextAway',{round:sum.next.round,opponent:teamName(opp)})));
+ } else root.append(matchup,el('p','hoops-start-line',t('hoops.club.seasonOver',{champion:teamName(h.season.champion)})));
+ const place=sum.table.findIndex(r=>r.id===h.team)+1;
+ if(place)root.append(el('p','hoops-start-place',t('hoops.start.place',{place,teams:sum.table.length})));
+ const go=button(t('hoops.start.play'),'hoops-play-next',play,'primary-button hoops-start-play');
+ if(!sum.next){go.textContent=t('hoops.club.newSeason');go.dataset.action='hoops-new-season';go.onclick=()=>{const r=engine.hoops.newSeason();if(r?.ok)play.refresh?.();};}
+ root.append(go);
+ return root;
+}
 
 export function hoopsClubPanel({engine,t,refresh,result=()=>{}}){
  const h=engine.state.hoops,sum=engine.hoops.summary(),root=el('section','hoops-club');root.dataset.hoopsClub='true';

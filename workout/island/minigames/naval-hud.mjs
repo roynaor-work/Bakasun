@@ -1,4 +1,4 @@
-import {navalLostHealth} from './naval-marks.mjs?v=island-naval-aim-20261029-1';
+import {navalLostHealth} from './naval-marks.mjs?v=island-naval-aim-20261030-1';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));

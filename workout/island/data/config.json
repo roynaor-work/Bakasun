@@ -1194,6 +1194,36 @@
     3,
     3
    ]
+  },
+  "airport": {
+   "footprint": [
+    7,
+    4
+   ],
+   "cost": 420,
+   "radius": 8,
+   "income": 10,
+   "effects": {
+    "economy": 12
+   },
+   "minWorldStage": 1,
+   "levels": [
+    {
+     "cost": 0
+    }
+   ],
+   "visual": {
+    "height": 1.25
+   },
+   "limit": {
+    "kind": "unique",
+    "maxCount": [
+     1,
+     1,
+     1
+    ],
+    "reason": "reason.limit.airport"
+   }
   }
  },
  "minigames": {
@@ -7664,7 +7694,7 @@
     "speedPerRank": 0.28,
     "kickPerRank": 0.06,
     "defensePerRank": 0.12,
-    "acceleration": 19,
+    "acceleration": 12,
     "radius": 0.42,
     "roles": [
      "striker",
@@ -7714,11 +7744,12 @@
       "template": 3
      }
     ],
-    "deceleration": 14,
-    "turnRate": 18,
+    "deceleration": 10,
+    "turnRate": 14,
     "turnLean": 0.1,
     "maxTurnLean": 0.2,
-    "lowSpeedTurnBoost": 1.5,
+    "lowSpeedTurnBoost": 2.5,
+    "keeperMotion": {"acceleration": 19, "deceleration": 14, "turnRate": 18, "lowSpeedTurnBoost": 1.5},
     "turnDrive": 0.4
    },
    "team": {
@@ -8072,7 +8103,7 @@
     "camera": {
      "elevationDegrees": 28,
      "fovDegrees": 42,
-     "nearDistance": 19,
+     "nearDistance": 15,
      "speedZoom": 5,
      "fastBallSpeed": 25,
      "leadSeconds": 0.14,
@@ -8208,7 +8239,178 @@
      }
     ],
     "ballShadowScale": 0.7,
-    "ballShadowHeightScale": 0.08
+    "ballShadowHeightScale": 0.08,
+    "athlete": {
+     "enabled": true,
+     "url": "../assets/athlete/athlete.glb",
+     "keeperColors": [
+      "#cf9d2e",
+      "#167b72"
+     ],
+     "motion": {
+      "idleSpeed": 0.25,
+      "moveSpeed": 0.9,
+      "jogSpeed": 2.4,
+      "runSpeed": 4.2,
+      "sprintSpeed": 6.2,
+      "clipSpeeds": {
+       "jog": 2.8,
+       "run": 3.35,
+       "sprint": 4.25
+      },
+      "contacts": {
+       "shot": 0.467,
+       "shot-b": 0.467,
+       "pass": 0.4
+      },
+      "minRate": 0.75,
+      "maxRate": 1.5,
+      "strideShare": 0.45,
+      "maxStride": 1.28,
+      "contactLead": 0.03,
+      "shotBallSpeed": 14,
+      "headerTakeoff": 0.3,
+      "throwStart": 0.25,
+      "throwRate": 1.6,
+      "reachStart": 0.2,
+      "fadeIn": 0.1,
+      "fadeOut": 0.2,
+      "slideRollScale": 0.3,
+      "turnLeanScale": 0.6,
+      "headNod": 0.5,
+      "markDistance": 3.2,
+      "lookMaxYaw": 1.05,
+      "lookMaxPitch": 0.55,
+      "lookRestPitch": 0.12,
+      "lookEase": 0.14,
+      "diveLift": 0.32,
+      "rollEase": 0.09,
+      "turnStiffness": 13,
+      "quickTurnStiffness": 32,
+      "turnLean": 0.9,
+      "maxRoll": 0.22,
+      "accelLean": 0.02,
+      "maxPushPitch": 0.12,
+      "maxBrakePitch": 0.1,
+      "accelEase": 0.12,
+      "leanEase": 0.1,
+      "plantHeight": 0.12,
+      "plantRelease": 0.05,
+      "maxSlip": 0.3,
+      "plantIn": 0.04,
+      "plantOut": 0.1,
+      "turnStepFrom": 1.2,
+      "turnStepRange": 3,
+      "turnStepWeight": 0.6,
+      "turnStepRate": 1.3,
+      "dribbleReach": 0.3,
+      "dribbleGap": 0.24,
+      "dribbleRamp": 1.5,
+      "dribbleFullSpeed": 5,
+      "dribbleMinSpeed": 1.2,
+      "dribbleEase": 0.1,
+      "kickFadeIn": 0.025
+     },
+     "profiles": [
+      {
+       "skin": "#c08a68",
+       "hair": "#1f1712",
+       "beard": 0.55,
+       "boots": "#1b1d22",
+       "bootAccent": "#e9eef2",
+       "shape": {
+        "caucasian": 0.25,
+        "jaw": 0.4,
+        "hairVolume": 0.15
+       }
+      },
+      {
+       "skin": "#8a5a40",
+       "hair": "#120e0c",
+       "beard": 0.3,
+       "boots": "#3a3f47",
+       "bootAccent": "#2a6df4",
+       "shape": {
+        "african": 0.75,
+        "narrow": 0.25,
+        "hairVolume": 0.0
+       }
+      },
+      {
+       "skin": "#ddb090",
+       "hair": "#5a3a22",
+       "beard": 0.7,
+       "boots": "#141414",
+       "bootAccent": "#ff4d2e",
+       "shape": {
+        "caucasian": 0.7,
+        "jaw": 0.7,
+        "hairVolume": 0.5
+       }
+      },
+      {
+       "skin": "#a8714f",
+       "hair": "#18120f",
+       "beard": 0.65,
+       "boots": "#2d2f36",
+       "bootAccent": "#c7f43a",
+       "shape": {
+        "nose": 0.5,
+        "brow": 0.5,
+        "hairVolume": 0.3
+       }
+      },
+      {
+       "skin": "#e6bd9c",
+       "hair": "#a07246",
+       "beard": 0.2,
+       "boots": "#1b1d22",
+       "bootAccent": "#ffd166",
+       "shape": {
+        "caucasian": 0.8,
+        "narrow": 0.5,
+        "hairVolume": 0.6
+       }
+      },
+      {
+       "skin": "#5e3b2a",
+       "hair": "#0d0b0a",
+       "beard": 0.25,
+       "boots": "#3a3f47",
+       "bootAccent": "#111111",
+       "shape": {
+        "african": 1.0,
+        "jaw": 0.5,
+        "hairVolume": 0.05
+       }
+      },
+      {
+       "skin": "#c99a78",
+       "hair": "#2b1e15",
+       "beard": 0.4,
+       "boots": "#141414",
+       "bootAccent": "#3fd0c9",
+       "shape": {
+        "asian": 0.6,
+        "hairVolume": 0.35
+       }
+      },
+      {
+       "skin": "#9a6448",
+       "hair": "#1a1411",
+       "beard": 0.8,
+       "boots": "#2d2f36",
+       "bootAccent": "#ff8fb1",
+       "shape": {
+        "brow": 0.6,
+        "jaw": 0.3,
+        "nose": 0.3,
+        "hairVolume": 0.2
+       }
+      }
+     ],
+     "lodFromQuality": 2
+    }
    },
    "controls": {
     "deadzone": 0.12,
@@ -8296,6 +8498,11 @@
     "sprintSeconds": 0.65,
     "sprintRestSeconds": 3.8,
     "sprintMultiplier": 1.1,
+    "crossRange": 11,
+    "crossWidth": 4.5,
+    "crossFromStage": 3,
+    "crossPower": 0.55,
+    "wingWidth": 6,
     "sprintDistance": 3,
     "wingWidth": 6.5,
     "wingAdvance": 3,
@@ -9345,15 +9552,23 @@
     "maxHoldSeconds": 3,
     "carrySpeedMultiplier": 0.65,
     "holdForward": 0.34,
-    "areaInset": 0.6
+    "areaInset": 0.6,
+    "throwMinSpeed": 6,
+    "throwMaxSpeed": 9.5,
+    "throwTravelSeconds": 1.05
    },
    "restarts": {
     "walkSeconds": 0.4,
     "readySeconds": 0.5,
     "aiReleaseSeconds": 0.8,
     "throwHeight": 2.1,
-    "throwSpeed": 10,
-    "throwLift": 3.2,
+    "throwSpeed": 8.5,
+    "throwLift": 2.6,
+    "throwMinSpeed": 4.5,
+    "catchHeight": 1,
+    "throwReach": 7,
+    "opponentSpace": 3.5,
+    "supportOffsets": [[2.5, 3.5], [-2, 2.5]],
     "throwSeconds": 0.6,
     "defaultCornerPower": 0.65,
     "inwardMinimum": 0.18,
@@ -9378,7 +9593,7 @@
     "interceptSeconds": 0.16,
     "defenseDepth": 4,
     "markDistance": {
-     "easy": 5,
+     "easy": 6,
      "normal": 3.5,
      "hard": 2.5
     },
@@ -9394,7 +9609,25 @@
     "maxOverlapSeconds": 0.12,
     "minTeamWidth": 7,
     "switchCooldownSeconds": 0.45,
-    "evadeWidth": 2.2
+    "evadeWidth": 2.2,
+    "coverLane": {
+     "fraction": 0.55,
+     "goalSide": 0.9,
+     "blend": 0.65
+    },
+    "outlet": {
+     "pressure": 2.4,
+     "back": 3.0,
+     "wide": 3.6
+    },
+    "wideAttack": {
+     "width": 4.5,
+     "range": 12,
+     "boxDepth": 0.3,
+     "farPost": 1.2,
+     "squareBack": 1,
+     "squareInside": 0.2
+    }
    },
    "shooting": {
     "lowLift": 1.1,
@@ -9475,6 +9708,36 @@
      "maxCorrectionSpeed": 7,
      "velocityResponse": 24,
      "heightResponse": 20
+    }
+   },
+   "league": {
+    "matchesPerLeague": 5,
+    "leagues": [
+     {
+      "id": "c",
+      "nameId": "soccer.league.c",
+      "difficulty": "easy",
+      "tuning": [1, 2, 3, 4.25, 5.5],
+      "keeper": [0.05, 0.1, 0.15, 0.2, 0.25]
+     },
+     {
+      "id": "b",
+      "nameId": "soccer.league.b",
+      "difficulty": "normal",
+      "tuning": [3, 3.5, 4, 4.5, 5],
+      "keeper": [0.3, 0.33, 0.36, 0.4, 0.43]
+     },
+     {
+      "id": "a",
+      "nameId": "soccer.league.a",
+      "difficulty": "hard",
+      "tuning": [2.4, 2.65, 2.9, 3.15, 3.4],
+      "keeper": [0.46, 0.5, 0.54, 0.58, 0.62]
+     }
+    ],
+    "penalties": {
+     "kicks": 3,
+     "coinsPerGoal": 10
     }
    }
   },
@@ -11383,7 +11646,13 @@
     "dribbleFactor": 0.9,
     "accel": 11,
     "decel": 15,
-    "turnRate": 9
+    "turnRate": 9,
+    "userAccel": 1.6,
+    "userTurn": 18,
+    "autoSwitch": true,
+    "defenseAssist": true,
+    "assistGapBall": 1.0,
+    "assistGapOff": 1.8
    },
    "fatigue": {
     "drain": 0.0105,
@@ -11407,7 +11676,10 @@
     "timingBase": 0.7,
     "timingWeight": 0.45,
     "makeError": 0.09,
-    "assistBonus": 0.12
+    "assistBonus": 0.12,
+    "green": 0.35,
+    "yellow": 0.8,
+    "minHold": 0.12
    },
    "pass": {
     "speed": 11.5,
@@ -11416,13 +11688,24 @@
     "windup": 0.16,
     "interceptRadius": 0.55,
     "interceptBase": 0.22,
-    "catchRadius": 1.05
+    "catchRadius": 1.05,
+    "shortWeight": 0.32,
+    "longWeight": 0.06,
+    "dirWeight": 3.2,
+    "laneRadius": 0.9,
+    "lanePenalty": 1.6,
+    "lobAbove": 11
    },
    "jump": {
     "duration": 0.72,
     "height": 0.62,
-    "cooldown": 0.9,
-    "shotAir": 0.62
+    "cooldown": 0.5,
+    "shotAir": 0.62,
+    "airControl": 0.55,
+    "airDrag": 2.5,
+    "queueSeconds": 1.0,
+    "queueReach": 1.7,
+    "reboundLunge": 2.6
    },
    "steal": {
     "range": 1.35,
@@ -11430,13 +11713,17 @@
     "duration": 0.4,
     "cooldown": 1.0,
     "base": 0.22,
-    "foulBase": 0.12
+    "foulBase": 0.05
    },
    "block": {
     "radius": 0.55,
     "vertical": 0.6,
-    "base": 0.08,
-    "goaltendRadius": 0.12
+    "base": 0.2,
+    "goaltendRadius": 0.12,
+    "userBase": 0.28,
+    "userTimed": 0.5,
+    "userRadius": 0.85,
+    "userVertical": 0.8
    },
    "move": {
     "cooldown": 1.1,
@@ -11445,15 +11732,20 @@
     "burst": 1.08
    },
    "rebound": {
-    "radius": 0.75
+    "radius": 0.75,
+    "airRadius": 1.0,
+    "userBonus": 0.25
    },
    "contact": {
     "minSpeed": 3.0,
     "setSpeed": 0.9,
-    "chargeChance": 0.08,
-    "blockChance": 0.1,
-    "shotContact": 0.75,
-    "shootingFoul": 0.12
+    "chargeChance": 0.05,
+    "blockChance": 0.06,
+    "shotContact": 0.6,
+    "shootingFoul": 0.5,
+    "intoSpeed": 1.2,
+    "userScale": 0.6,
+    "cooldownTicks": 90
    },
    "replay": {
     "seconds": 6,
@@ -11803,7 +12095,36 @@
     "leadMax": 4.5,
     "followZ": 0.45,
     "maxZ": 3.5,
-    "dollyZ": 0.5
+    "dollyZ": 0.5,
+    "mode": "broadcast",
+    "behindBack": 7.5,
+    "behindHeight": 3.6,
+    "behindFov": 48,
+    "behindLook": 0.45,
+    "behindLookY": 2.0,
+    "behindZ": 0.55,
+    "behindLookZ": 0.25,
+    "behindRate": 2.2,
+    "behindSwing": 1.6,
+    "behindWall": 2,
+    "behindNear": 12,
+    "behindFar": 19,
+    "sideExtraBack": 2.5,
+    "sideExtraHeight": 1.2,
+    "sideFov": 36,
+    "bLead": 0.5,
+    "bLeadMax": 4,
+    "bEdge": 1.2,
+    "bRate": 2.4,
+    "bSpan": 8.6,
+    "bFovMin": 16,
+    "bFovMax": 40,
+    "bHeight": 7,
+    "bDist": 7,
+    "bLookY": 1.7,
+    "bLookZ": 0,
+    "bFollowZ": 0.75,
+    "bNearZ": 3
    },
    "assets": {
     "models": {
@@ -11837,7 +12158,707 @@
     "lossCredits": 1,
     "championCredits": 10,
     "drillCost": 2
+   },
+   "controls": {
+    "deadZone": 0.1,
+    "curve": 1.15,
+    "fullTilt": 0.78,
+    "autoSprint": 0.93,
+    "longPass": 0.32
    }
+  },
+  "alpineRush": {
+   "version": 1,
+   "requiresBuilding": null,
+   "maximumScore": 6,
+   "maximumSeconds": 240,
+   "riders": 6,
+   "aiCaps": {
+    "maxSpeed": 1.0,
+    "minReaction": 0.12,
+    "maxLookahead": 70,
+    "note": "AI rivals share the player's physics; speed factor never above 1.0 of the base speed."
+   },
+   "physics": {
+    "fixedStep": 0.016666666666666666,
+    "maxCatchUpSeconds": 0.25,
+    "countdownSeconds": 3,
+    "baseSpeed": 20,
+    "boostSpeed": 31,
+    "acceleration": 6.5,
+    "deceleration": 5,
+    "lateralSpeed": 8.5,
+    "lateralResponse": 9,
+    "airControl": 0.4,
+    "hitSpeedLoss": 0.35,
+    "recoverySeconds": 1,
+    "hitGraceSeconds": 0.35,
+    "hitFlashSeconds": 0.45,
+    "boostSeconds": 2.5,
+    "boostStartTank": 0.5,
+    "boostMinimum": 0.3,
+    "boostRechargePerSecond": 0.075,
+    "gateCharge": 0.2,
+    "padSeconds": 1.2,
+    "padCharge": 0.1,
+    "gravity": 15,
+    "rampLaunch": 2.6,
+    "landSeconds": 0.28,
+    "board": {
+     "halfWidth": 0.85,
+     "halfDepth": 0.22
+    },
+    "rockHitScale": 0.9,
+    "gateHalfWidth": 2.2,
+    "gatePostHeight": 2.2,
+    "postHalf": [
+     0.09,
+     0.1
+    ],
+    "riderSeparation": 1.6,
+    "ramp": {
+     "width": 4,
+     "length": 6,
+     "height": 1.2
+    },
+    "pad": {
+     "width": 3.3,
+     "length": 5.5
+    },
+    "viewAhead": 230,
+    "viewBehind": 20,
+    "pipe": {
+     "flatHalf": 6.5,
+     "radius": 4.2,
+     "maxAngle": 70
+    },
+    "pathRunout": 340,
+    "wallGravity": 9,
+    "wallSpeedFactor": 0.95,
+    "turnPush": 2.5,
+    "lipLaunchSpeed": 2.5,
+    "lipLaunchFactor": 1.0,
+    "lipKick": 2.6,
+    "pipeReturnSpeed": 6,
+    "aiWallCost": 1.2,
+    "tricks": {
+     "grab": {
+      "seconds": 0.45,
+      "points": 150
+     },
+     "spin": {
+      "seconds": 0.7,
+      "points": 300
+     },
+     "flip": {
+      "seconds": 0.85,
+      "points": 450
+     },
+     "combo": {
+      "seconds": 1.05,
+      "points": 700
+     }
+    },
+    "trickLandWindow": 0.8,
+    "crashSpeedLoss": 0.55,
+    "crashSeconds": 1.4,
+    "comboBonus": 0.5,
+    "trickCharge": 0.12,
+    "maxTrickScore": 60000,
+    "coins": {
+     "perLine": 5,
+     "spacing": 2.8,
+     "lineStart": 13,
+     "centre": 0.85,
+     "reach": 1.1,
+     "depth": 0.9,
+     "height": 1.2,
+     "value": 1
+    },
+    "grid": [
+     {
+      "s": 0,
+      "x": 0
+     },
+     {
+      "s": 9,
+      "x": -3.4
+     },
+     {
+      "s": 9,
+      "x": 3.4
+     },
+     {
+      "s": 5,
+      "x": -6
+     },
+     {
+      "s": 4.5,
+      "x": 6
+     },
+     {
+      "s": 4,
+      "x": -0.6
+     }
+    ]
+   },
+   "tracks": {
+    "ice-peak": {
+     "name": "alpine.track.icePeak",
+     "number": 1,
+     "difficulty": 1,
+     "length": 1600,
+     "seed": 1201,
+     "calmStart": 150,
+     "finishRunout": 70,
+     "rowSpacing": [
+      38,
+      50
+     ],
+     "gap": [
+      5.6,
+      7
+     ],
+     "reachFactor": 0.75,
+     "corridorLimit": 4.2,
+     "rockPitch": 3.4,
+     "rockDensity": 0.7,
+     "rockRadius": [
+      0.65,
+      0.95
+     ],
+     "slalomOffset": 1.5,
+     "slalomStep": 14,
+     "rampRockDistance": 7,
+     "landingClearance": 46,
+     "turns": {
+      "firstStraight": [
+       120,
+       150
+      ],
+      "radius": [
+       110,
+       170
+      ],
+      "length": [
+       50,
+       95
+      ],
+      "straight": [
+       45,
+       90
+      ],
+      "transition": 18,
+      "alternate": 0.7
+     },
+     "grade": [
+      0.1,
+      0.17
+     ],
+     "wallCoins": 0.45,
+     "visual": {
+      "sky": "#a9dcf2",
+      "fog": "#c5e4ef",
+      "fogNear": 65,
+      "fogFar": 250,
+      "snow": 0.35,
+      "light": 1,
+      "trees": 1
+     },
+     "opening": [
+      "gate",
+      "pad",
+      "rocks"
+     ],
+     "patterns": {
+      "rocks": 4,
+      "gate": 3,
+      "pad": 2,
+      "ramp": 1,
+      "rampRocks": 0,
+      "slalom": 0
+     }
+    },
+    "frost-forest": {
+     "name": "alpine.track.frostForest",
+     "number": 2,
+     "difficulty": 2,
+     "length": 1750,
+     "seed": 2417,
+     "calmStart": 110,
+     "finishRunout": 60,
+     "rowSpacing": [
+      28,
+      35
+     ],
+     "gap": [
+      4.6,
+      5.6
+     ],
+     "reachFactor": 0.75,
+     "corridorLimit": 4.3,
+     "rockPitch": 3.2,
+     "rockDensity": 0.75,
+     "rockRadius": [
+      0.7,
+      1.05
+     ],
+     "slalomOffset": 1.5,
+     "slalomStep": 14,
+     "rampRockDistance": 7,
+     "landingClearance": 48,
+     "turns": {
+      "firstStraight": [
+       90,
+       120
+      ],
+      "radius": [
+       85,
+       140
+      ],
+      "length": [
+       55,
+       110
+      ],
+      "straight": [
+       35,
+       75
+      ],
+      "transition": 16,
+      "alternate": 0.75
+     },
+     "grade": [
+      0.12,
+      0.2
+     ],
+     "wallCoins": 0.5,
+     "visual": {
+      "sky": "#9fcde3",
+      "fog": "#bfdbe7",
+      "fogNear": 50,
+      "fogFar": 220,
+      "snow": 0.6,
+      "light": 0.92,
+      "trees": 1.7
+     },
+     "opening": [
+      "gate",
+      "rocks"
+     ],
+     "patterns": {
+      "rocks": 5,
+      "gate": 1,
+      "pad": 1.5,
+      "ramp": 1,
+      "rampRocks": 1,
+      "slalom": 2
+     }
+    },
+    "storm-ridge": {
+     "name": "alpine.track.stormRidge",
+     "number": 3,
+     "difficulty": 3,
+     "length": 1900,
+     "seed": 3307,
+     "calmStart": 110,
+     "finishRunout": 60,
+     "rowSpacing": [
+      28,
+      36
+     ],
+     "gap": [
+      4,
+      5
+     ],
+     "reachFactor": 0.72,
+     "corridorLimit": 4.3,
+     "rockPitch": 3,
+     "rockDensity": 0.85,
+     "rockRadius": [
+      0.7,
+      1.05
+     ],
+     "slalomOffset": 1.5,
+     "slalomStep": 14,
+     "rampRockDistance": 7,
+     "landingClearance": 50,
+     "turns": {
+      "firstStraight": [
+       90,
+       120
+      ],
+      "radius": [
+       70,
+       120
+      ],
+      "length": [
+       60,
+       120
+      ],
+      "straight": [
+       30,
+       70
+      ],
+      "transition": 15,
+      "alternate": 0.8
+     },
+     "grade": [
+      0.14,
+      0.24
+     ],
+     "wallCoins": 0.55,
+     "visual": {
+      "sky": "#4d5f80",
+      "fog": "#a3949f",
+      "horizon": "#e7a47f",
+      "sun": "#ffb07a",
+      "dusk": true,
+      "fogNear": 32,
+      "fogFar": 185,
+      "snow": 1,
+      "light": 0.72,
+      "trees": 1.2
+     },
+     "opening": [
+      "pad",
+      "ramp"
+     ],
+     "patterns": {
+      "rocks": 3,
+      "gate": 1,
+      "pad": 3,
+      "ramp": 2,
+      "rampRocks": 3,
+      "slalom": 1
+     }
+    }
+   },
+   "levels": [
+    {
+     "stage": 1,
+     "trackId": "ice-peak",
+     "targetRank": 3,
+     "feature": "feature.alpineRush.1",
+     "winMoney": 40,
+     "winParts": 0,
+     "difficulty": 1,
+     "ai": [
+      {
+       "speed": 0.97,
+       "reaction": 0.4,
+       "lookahead": 34,
+       "error": 0.7,
+       "mistakeRate": 0.1,
+       "margin": 0.2,
+       "boostChance": 0.4,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
+      },
+      {
+       "speed": 0.96,
+       "reaction": 0.42,
+       "lookahead": 32,
+       "error": 0.75,
+       "mistakeRate": 0.11,
+       "margin": 0.2,
+       "boostChance": 0.35,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
+      },
+      {
+       "speed": 0.95,
+       "reaction": 0.45,
+       "lookahead": 30,
+       "error": 0.8,
+       "mistakeRate": 0.12,
+       "margin": 0.15,
+       "boostChance": 0.35,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
+      },
+      {
+       "speed": 0.94,
+       "reaction": 0.48,
+       "lookahead": 30,
+       "error": 0.85,
+       "mistakeRate": 0.13,
+       "margin": 0.15,
+       "boostChance": 0.3,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
+      },
+      {
+       "speed": 0.93,
+       "reaction": 0.5,
+       "lookahead": 28,
+       "error": 0.9,
+       "mistakeRate": 0.14,
+       "margin": 0.1,
+       "boostChance": 0.3,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.3,
+       "trickMargin": 0.35
+      }
+     ]
+    },
+    {
+     "stage": 2,
+     "trackId": "frost-forest",
+     "targetRank": 2,
+     "feature": "feature.alpineRush.2",
+     "winMoney": 55,
+     "winParts": 0,
+     "difficulty": 2,
+     "ai": [
+      {
+       "speed": 1,
+       "reaction": 0.28,
+       "lookahead": 44,
+       "error": 0.45,
+       "mistakeRate": 0.05,
+       "margin": 0.3,
+       "boostChance": 0.6,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
+      },
+      {
+       "speed": 0.995,
+       "reaction": 0.3,
+       "lookahead": 42,
+       "error": 0.5,
+       "mistakeRate": 0.055,
+       "margin": 0.3,
+       "boostChance": 0.55,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
+      },
+      {
+       "speed": 0.99,
+       "reaction": 0.32,
+       "lookahead": 40,
+       "error": 0.55,
+       "mistakeRate": 0.06,
+       "margin": 0.25,
+       "boostChance": 0.55,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
+      },
+      {
+       "speed": 0.98,
+       "reaction": 0.35,
+       "lookahead": 38,
+       "error": 0.6,
+       "mistakeRate": 0.07,
+       "margin": 0.25,
+       "boostChance": 0.5,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
+      },
+      {
+       "speed": 0.97,
+       "reaction": 0.38,
+       "lookahead": 36,
+       "error": 0.6,
+       "mistakeRate": 0.08,
+       "margin": 0.2,
+       "boostChance": 0.5,
+       "boostTank": 0.9,
+       "padDesire": 4,
+       "rampDesire": 2,
+       "gateDesire": 0,
+       "trickChance": 0.5,
+       "trickMargin": 0.25
+      }
+     ]
+    },
+    {
+     "stage": 3,
+     "trackId": "storm-ridge",
+     "targetRank": 1,
+     "feature": "feature.alpineRush.3",
+     "winMoney": 75,
+     "winParts": 1,
+     "difficulty": 3,
+     "ai": [
+      {
+       "speed": 0.985,
+       "reaction": 0.22,
+       "lookahead": 55,
+       "error": 0.3,
+       "mistakeRate": 0.03,
+       "margin": 0.35,
+       "boostChance": 0.65,
+       "boostTank": 0.9,
+       "padDesire": 6,
+       "rampDesire": 4,
+       "gateDesire": 1.5,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
+      },
+      {
+       "speed": 0.985,
+       "reaction": 0.24,
+       "lookahead": 52,
+       "error": 0.35,
+       "mistakeRate": 0.035,
+       "margin": 0.35,
+       "boostChance": 0.65,
+       "boostTank": 0.9,
+       "padDesire": 6,
+       "rampDesire": 4,
+       "gateDesire": 1.5,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
+      },
+      {
+       "speed": 0.98,
+       "reaction": 0.26,
+       "lookahead": 50,
+       "error": 0.4,
+       "mistakeRate": 0.04,
+       "margin": 0.3,
+       "boostChance": 0.6,
+       "boostTank": 0.9,
+       "padDesire": 5,
+       "rampDesire": 3,
+       "gateDesire": 1.5,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
+      },
+      {
+       "speed": 0.975,
+       "reaction": 0.28,
+       "lookahead": 48,
+       "error": 0.45,
+       "mistakeRate": 0.045,
+       "margin": 0.3,
+       "boostChance": 0.55,
+       "boostTank": 0.9,
+       "padDesire": 5,
+       "rampDesire": 3,
+       "gateDesire": 1,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
+      },
+      {
+       "speed": 0.97,
+       "reaction": 0.3,
+       "lookahead": 46,
+       "error": 0.5,
+       "mistakeRate": 0.05,
+       "margin": 0.25,
+       "boostChance": 0.55,
+       "boostTank": 0.9,
+       "padDesire": 5,
+       "rampDesire": 3,
+       "gateDesire": 1,
+       "trickChance": 0.7,
+       "trickMargin": 0.15
+      }
+     ]
+    }
+   ],
+   "render": {
+    "maxDpr": 1.7,
+    "lowDpr": 1,
+    "qualitySampleFrames": 90,
+    "slowFrameMs": 30
+   },
+   "controls": {
+    "dragMetresPerWidth": 22,
+    "keyboardSteer": 1,
+    "steerResponse": 10
+   },
+   "records": {
+    "storageKey": "island.alpine.v1",
+    "version": 1,
+    "runHistory": 20
+   },
+   "equipment": {
+    "wax": {
+     "title": "equipment.alpineRush.wax",
+     "description": "equipment.alpineRush.wax.hint",
+     "base": 1,
+     "levels": [
+      {
+       "value": 1.02,
+       "cost": 60,
+       "stars": 0
+      },
+      {
+       "value": 1.04,
+       "cost": 120,
+       "stars": 3
+      },
+      {
+       "value": 1.06,
+       "cost": 200,
+       "stars": 6
+      }
+     ]
+    },
+    "tank": {
+     "title": "equipment.alpineRush.tank",
+     "description": "equipment.alpineRush.tank.hint",
+     "base": 1,
+     "levels": [
+      {
+       "value": 1.1,
+       "cost": 60,
+       "stars": 0
+      },
+      {
+       "value": 1.2,
+       "cost": 120,
+       "stars": 3
+      },
+      {
+       "value": 1.3,
+       "cost": 200,
+       "stars": 6
+      }
+     ]
+    }
+   }
+  },
+  "boarDefense": {
+   "embeddedCampaign": true,
+   "requiresBuilding": null
   }
  },
  "minigameLevels": {
@@ -11937,6 +12958,20 @@
    {
     "cost": 260,
     "power": 1.1
+   }
+  ],
+  "alpineRush": [
+   {
+    "cost": 0,
+    "power": 1
+   },
+   {
+    "cost": 140,
+    "power": 1.06
+   },
+   {
+    "cost": 280,
+    "power": 1.12
    }
   ]
  },
@@ -12051,6 +13086,12 @@
    },
    "streetSlam": {
     "orientation": "any"
+   },
+   "alpineRush": {
+    "orientation": "any"
+   },
+   "boarDefense": {
+    "orientation": "any"
    }
   }
  },
@@ -12079,7 +13120,7 @@
    "spanRatio": 0.86,
    "landscapeSpanRatio": 0.66,
    "aspectRatio": 0.81,
-   "panelOffset": 0.18
+   "panelOffset": 0
   },
   "citizens": {
    "max": 40,

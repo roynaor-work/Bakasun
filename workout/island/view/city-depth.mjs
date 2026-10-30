@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {GROUND} from './environment.mjs?v=island-naval-aim-20261029-1';
+import {GROUND} from './environment.mjs?v=island-naval-aim-20261030-1';
 
 /** Geometry only: the report supplies every status, assignment and radius. */
 export class CityDepthView {
@@ -50,11 +50,13 @@ export class CityDepthView {
         item.repairMarker.position.y = item.cityHeight + style.offset; item.repairMarker.rotation.z = Math.PI; item.group.add(item.repairMarker);
       }
       if (item.repairMarker) item.repairMarker.visible = row.status === 'damaged';
-      if (row.status === 'unserved') {
+      // Routine helper badges belong to the selected building's inspection;
+      // unselected homes and industry keep the city free of floating signs.
+      if (row.id === selectedId && row.status === 'unserved') {
         const marker = this.icon('water',row.water.reason); marker.position.copy(position); marker.position.y += item.cityHeight + .65;
         marker.userData = {cityKind:'water', buildingId:row.id, reason:row.water.reason}; this.root.add(marker);
       }
-      if (row.production) {
+      if (row.id === selectedId && row.production) {
         const marker = this.icon('production',row.production.tier); marker.position.copy(position); marker.position.y += item.cityHeight + .65;
         marker.position.x += .85; marker.scale.set(.65,.65,1);
         marker.userData = {cityKind:'production', buildingId:row.id, tier:row.production.tier}; this.root.add(marker);
