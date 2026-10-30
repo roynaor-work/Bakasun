@@ -1,0 +1,1100 @@
+{
+  "schema_version": 1,
+  "relative_to": "this JSON file",
+  "normalization": {
+    "integrated_target_lufs": -23,
+    "tolerance_lu": 0.3,
+    "true_peak_ceiling_dbtp": -3
+  },
+  "master": {
+    "recommended_gain_db": -3,
+    "max_simultaneous_beds": 1,
+    "max_simultaneous_events": 3,
+    "suggested_limiter_ceiling_dbtp": -1,
+    "duck_attack_ms": 35,
+    "duck_release_ms": 350
+  },
+  "playback": {
+    "background_player": "decoded AudioBufferSourceNode with loop=true",
+    "start_stop_fade_ms": 40,
+    "loop_crossfade_ms": 0,
+    "note": "Use the full decoded buffer; never pad, trim, or resample individual loop ends. HTML audio is for audition only."
+  },
+  "exclusive_groups": {
+    "soccer_crowd": [
+      "soccer/crowd-calm",
+      "soccer/crowd-excited",
+      "soccer/crowd-goal"
+    ],
+    "basketball_crowd": [
+      "basketball/crowd-calm",
+      "basketball/crowd-excited"
+    ],
+    "ski_scrape": [
+      "ski/scrape-slow",
+      "ski/scrape-medium",
+      "ski/scrape-fast"
+    ],
+    "scene": [
+      "scenes/opening",
+      "scenes/victory",
+      "scenes/defeat"
+    ]
+  },
+  "assets": {
+    "soccer/kick": {
+      "file": "soccer/kick.ogg",
+      "label_he": "בעיטה",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.55,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -3,
+      "recommended_gain_linear": 0.707946,
+      "filters": {
+        "highpass_hz": 55,
+        "lowpass_hz": 8500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "kick",
+        "seed": 20261030,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.01,
+      "measured_true_peak_dbtp": -5.57,
+      "bytes": 4656,
+      "sha256": "5c49286d8dd00c9c5fe765a6a339367d829cdf588b39659d6079c89fc2a09021"
+    },
+    "soccer/net": {
+      "file": "soccer/net.ogg",
+      "label_he": "כדור ברשת",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.6,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -5,
+      "recommended_gain_linear": 0.562341,
+      "filters": {
+        "highpass_hz": 250,
+        "lowpass_hz": 9500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "net",
+        "seed": 20261031,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.08,
+      "measured_true_peak_dbtp": -9.25,
+      "bytes": 5139,
+      "sha256": "b9afbe5e4b555f0c2f66f3ad1f77a11f385b7f63de6f0e1a01e5eecf5e5660f0"
+    },
+    "soccer/whistle": {
+      "file": "soccer/whistle.ogg",
+      "label_he": "שריקה",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.7,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -10,
+      "recommended_gain_linear": 0.316228,
+      "filters": {
+        "highpass_hz": 1200,
+        "lowpass_hz": 6500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "whistle",
+        "seed": 20261032,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.03,
+      "measured_true_peak_dbtp": -17.13,
+      "bytes": 5944,
+      "sha256": "e9a8cfa8bc3660875fa507d216830fc1c261b24137b943c2d8b81cc852f1e50b"
+    },
+    "soccer/pass": {
+      "file": "soccer/pass.ogg",
+      "label_he": "מסירה",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.5,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -5,
+      "recommended_gain_linear": 0.562341,
+      "filters": {
+        "highpass_hz": 80,
+        "lowpass_hz": 7500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "pass",
+        "seed": 20261033,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -22.85,
+      "measured_true_peak_dbtp": -8.39,
+      "bytes": 4334,
+      "sha256": "4429fdf733454e76c8d8dee33410ab7639dad619d29bbc73914de818d1b44090"
+    },
+    "soccer/crowd-calm": {
+      "file": "soccer/crowd-calm.ogg",
+      "label_he": "קהל רגוע",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 1.8,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -14,
+      "recommended_gain_linear": 0.199526,
+      "filters": {
+        "highpass_hz": 180,
+        "lowpass_hz": 4500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 1,
+      "cooldown_ms": 900,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "crowd-calm",
+        "seed": 20261034,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -22.97,
+      "measured_true_peak_dbtp": -13.87,
+      "bytes": 14826,
+      "sha256": "88c92968d600e9cf2c695acf8c39b4ea03755490e451011e9358ccd40b2845c2"
+    },
+    "soccer/crowd-excited": {
+      "file": "soccer/crowd-excited.ogg",
+      "label_he": "קהל מתרגש",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 2,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -9,
+      "recommended_gain_linear": 0.354813,
+      "filters": {
+        "highpass_hz": 180,
+        "lowpass_hz": 6000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 1,
+      "cooldown_ms": 900,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "crowd-excited",
+        "seed": 20261035,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -22.99,
+      "measured_true_peak_dbtp": -12.1,
+      "bytes": 16463,
+      "sha256": "2e5ad15059140a295ccae8673db1cb9d477198b42367bf37f0b0f5dd0af57d69"
+    },
+    "soccer/crowd-goal": {
+      "file": "soccer/crowd-goal.ogg",
+      "label_he": "שאגת שער",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 2.8,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -5,
+      "recommended_gain_linear": 0.562341,
+      "filters": {
+        "highpass_hz": 140,
+        "lowpass_hz": 7000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 1,
+      "cooldown_ms": 900,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "crowd-goal",
+        "seed": 20261036,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.01,
+      "measured_true_peak_dbtp": -12.39,
+      "bytes": 22903,
+      "sha256": "519600f9f9bb6ff33f30d6b034d11a5dc2de1e464997e8eafae44b75182e17d6"
+    },
+    "soccer/ambience-loop": {
+      "file": "soccer/ambience-loop.ogg",
+      "label_he": "רקע אצטדיון",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 24,
+      "loop": true,
+      "loop_start_seconds": 0,
+      "loop_end_seconds": 24,
+      "recommended_gain_db": -18,
+      "recommended_gain_linear": 0.125893,
+      "filters": {
+        "highpass_hz": 150,
+        "lowpass_hz": 5000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 1,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "soccer-loop",
+        "seed": 20261037,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -22.99,
+      "measured_true_peak_dbtp": -11.49,
+      "bytes": 146117,
+      "sha256": "95f548902f010826714ef3625815ffa36d2ab645e54c21e2527955a389ff8f32"
+    },
+    "basketball/bounce": {
+      "file": "basketball/bounce.ogg",
+      "label_he": "כדור על פרקט",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.6,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -4,
+      "recommended_gain_linear": 0.630957,
+      "filters": {
+        "highpass_hz": 65,
+        "lowpass_hz": 8000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "bounce",
+        "seed": 20261038,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.06,
+      "measured_true_peak_dbtp": -8.91,
+      "bytes": 5139,
+      "sha256": "49ff05fd12a02c429b86b6694f8d33e1252dd3fcde2352e450ef68085915e3f9"
+    },
+    "basketball/swish": {
+      "file": "basketball/swish.ogg",
+      "label_he": "סוויש",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.55,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -4,
+      "recommended_gain_linear": 0.630957,
+      "filters": {
+        "highpass_hz": 950,
+        "lowpass_hz": 10000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "swish",
+        "seed": 20261039,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -22.96,
+      "measured_true_peak_dbtp": -9.96,
+      "bytes": 4656,
+      "sha256": "e5c2c8e0118edaf44bb3f784ee373f5f4bcf25e40df4ee5f5f5939c2fd8ef419"
+    },
+    "basketball/rim": {
+      "file": "basketball/rim.ogg",
+      "label_he": "פגיעה בטבעת",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.75,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -6,
+      "recommended_gain_linear": 0.501187,
+      "filters": {
+        "highpass_hz": 180,
+        "lowpass_hz": 8000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "rim",
+        "seed": 20261040,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.0,
+      "measured_true_peak_dbtp": -9.03,
+      "bytes": 6266,
+      "sha256": "be5b46ff3a6e488d1e1acc943d564e13746d499a44f5beede424bb3bc12aa57c"
+    },
+    "basketball/shoes": {
+      "file": "basketball/shoes.ogg",
+      "label_he": "נעליים על פרקט",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.65,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -10,
+      "recommended_gain_linear": 0.316228,
+      "filters": {
+        "highpass_hz": 650,
+        "lowpass_hz": 7000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "shoes",
+        "seed": 20261041,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.03,
+      "measured_true_peak_dbtp": -12.15,
+      "bytes": 5461,
+      "sha256": "d8f463a5f435d381a330afc36e7ae2a486605668d52ae9b7c82b2aa43aef93a3"
+    },
+    "basketball/buzzer": {
+      "file": "basketball/buzzer.ogg",
+      "label_he": "זמזם",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.7,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -11,
+      "recommended_gain_linear": 0.281838,
+      "filters": {
+        "highpass_hz": 140,
+        "lowpass_hz": 4500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "buzzer",
+        "seed": 20261042,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.02,
+      "measured_true_peak_dbtp": -17.91,
+      "bytes": 5944,
+      "sha256": "fc3f958885316e8b79574bdb4605c235a5b02f5be72f14a9403b4702d247e934"
+    },
+    "basketball/crowd-calm": {
+      "file": "basketball/crowd-calm.ogg",
+      "label_he": "קהל רגוע באולם",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 1.7,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -15,
+      "recommended_gain_linear": 0.177828,
+      "filters": {
+        "highpass_hz": 200,
+        "lowpass_hz": 5000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 1,
+      "cooldown_ms": 900,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "crowd-calm",
+        "seed": 20261043,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.0,
+      "measured_true_peak_dbtp": -13.28,
+      "bytes": 14021,
+      "sha256": "1b507637c6594b4c08a390c4ded8b72b5f0da57074446c6a0ff02ffd6467ba2a"
+    },
+    "basketball/crowd-excited": {
+      "file": "basketball/crowd-excited.ogg",
+      "label_he": "קהל נרגש באולם",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 2.1,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -9,
+      "recommended_gain_linear": 0.354813,
+      "filters": {
+        "highpass_hz": 200,
+        "lowpass_hz": 6500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 1,
+      "cooldown_ms": 900,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "crowd-excited",
+        "seed": 20261044,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -22.99,
+      "measured_true_peak_dbtp": -11.63,
+      "bytes": 17268,
+      "sha256": "0538211d0239f5787e6ae773536741caf4348703ccbac10acd32520191dc13bc"
+    },
+    "basketball/ambience-loop": {
+      "file": "basketball/ambience-loop.ogg",
+      "label_he": "רקע אולם",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 24,
+      "loop": true,
+      "loop_start_seconds": 0,
+      "loop_end_seconds": 24,
+      "recommended_gain_db": -18,
+      "recommended_gain_linear": 0.125893,
+      "filters": {
+        "highpass_hz": 180,
+        "lowpass_hz": 5000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 1,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "basketball-loop",
+        "seed": 20261045,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -22.99,
+      "measured_true_peak_dbtp": -12.16,
+      "bytes": 146117,
+      "sha256": "bc2c3c4f3fa305614e7d218785caaff84ac132a5e95ffe8c059a09c56e543b59"
+    },
+    "ski/scrape-slow": {
+      "file": "ski/scrape-slow.ogg",
+      "label_he": "שלג איטי",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 1.1,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -12,
+      "recommended_gain_linear": 0.251189,
+      "filters": {
+        "highpass_hz": 350,
+        "lowpass_hz": 5500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "scrape-slow",
+        "seed": 20261046,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.0,
+      "measured_true_peak_dbtp": -13.33,
+      "bytes": 9191,
+      "sha256": "ff22dfe7d3c4cd03a35020eb54b7b85aaf6acf98011f227f337dc3bc9abf1ea0"
+    },
+    "ski/scrape-medium": {
+      "file": "ski/scrape-medium.ogg",
+      "label_he": "שלג בינוני",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 1.1,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -10,
+      "recommended_gain_linear": 0.316228,
+      "filters": {
+        "highpass_hz": 450,
+        "lowpass_hz": 7000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "scrape-medium",
+        "seed": 20261047,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.0,
+      "measured_true_peak_dbtp": -13.58,
+      "bytes": 9191,
+      "sha256": "26311d02b25de40965c846f689a97e2c389254ee49dae9299b2af26f3bbf7e47"
+    },
+    "ski/scrape-fast": {
+      "file": "ski/scrape-fast.ogg",
+      "label_he": "שלג מהיר",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 1.1,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -8,
+      "recommended_gain_linear": 0.398107,
+      "filters": {
+        "highpass_hz": 650,
+        "lowpass_hz": 9000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "scrape-fast",
+        "seed": 20261048,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.0,
+      "measured_true_peak_dbtp": -13.76,
+      "bytes": 9191,
+      "sha256": "f9ef1cd13bb2588041f9a9403e25512a16ddf64d4053bb9fda2fb406eddaf190"
+    },
+    "ski/wind": {
+      "file": "ski/wind.ogg",
+      "label_he": "משב רוח",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 2.4,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -15,
+      "recommended_gain_linear": 0.177828,
+      "filters": {
+        "highpass_hz": 100,
+        "lowpass_hz": 3000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "wind",
+        "seed": 20261049,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -22.97,
+      "measured_true_peak_dbtp": -11.57,
+      "bytes": 19683,
+      "sha256": "e973ea4b29fd6885d2b710137d97e703abbae02ff3ee221543e6df2b48e598e4"
+    },
+    "ski/jump": {
+      "file": "ski/jump.ogg",
+      "label_he": "קפיצה",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.6,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -6,
+      "recommended_gain_linear": 0.501187,
+      "filters": {
+        "highpass_hz": 180,
+        "lowpass_hz": 7500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "jump",
+        "seed": 20261050,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.02,
+      "measured_true_peak_dbtp": -10.94,
+      "bytes": 5139,
+      "sha256": "7ad4e1567ffc103a60d5273d0be43e4245622e8563f229f934a94d937d7262ab"
+    },
+    "ski/landing": {
+      "file": "ski/landing.ogg",
+      "label_he": "נחיתה",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.7,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -4,
+      "recommended_gain_linear": 0.630957,
+      "filters": {
+        "highpass_hz": 55,
+        "lowpass_hz": 7000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "landing",
+        "seed": 20261051,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.06,
+      "measured_true_peak_dbtp": -8.63,
+      "bytes": 5944,
+      "sha256": "2ea9375821e7ad060ab7030faecc8740b173672c135dc7af43c9b5b842a878f4"
+    },
+    "ski/fall": {
+      "file": "ski/fall.ogg",
+      "label_he": "נפילה",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.95,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -5,
+      "recommended_gain_linear": 0.562341,
+      "filters": {
+        "highpass_hz": 60,
+        "lowpass_hz": 6500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "fall",
+        "seed": 20261052,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.04,
+      "measured_true_peak_dbtp": -8.71,
+      "bytes": 7876,
+      "sha256": "fead61371703100541e269c1cc11e83a4e341618462c99cc650fc8989643413e"
+    },
+    "ski/slalom-gate": {
+      "file": "ski/slalom-gate.ogg",
+      "label_he": "שער סלאלום",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.55,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -6,
+      "recommended_gain_linear": 0.501187,
+      "filters": {
+        "highpass_hz": 180,
+        "lowpass_hz": 7500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "gate",
+        "seed": 20261053,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -22.99,
+      "measured_true_peak_dbtp": -10.88,
+      "bytes": 4656,
+      "sha256": "9de65012ec06e218f6df0d86eb45a267e0c6f9331790ee396c3ae9f59e296791"
+    },
+    "ski/ambience-loop": {
+      "file": "ski/ambience-loop.ogg",
+      "label_he": "רקע הרים ורוח",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 24,
+      "loop": true,
+      "loop_start_seconds": 0,
+      "loop_end_seconds": 24,
+      "recommended_gain_db": -18,
+      "recommended_gain_linear": 0.125893,
+      "filters": {
+        "highpass_hz": 100,
+        "lowpass_hz": 4000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 1,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "ski-loop",
+        "seed": 20261054,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.0,
+      "measured_true_peak_dbtp": -10.62,
+      "bytes": 146117,
+      "sha256": "d37c3424554a3fd8a7c417e666ee8184f00d1de24d74732e95be477f14b93c95"
+    },
+    "scenes/opening": {
+      "file": "scenes/opening.ogg",
+      "label_he": "פתיחה",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.9,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -6,
+      "recommended_gain_linear": 0.501187,
+      "filters": {
+        "highpass_hz": 150,
+        "lowpass_hz": 8000,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "opening",
+        "seed": 20261055,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -22.99,
+      "measured_true_peak_dbtp": -13.44,
+      "bytes": 7554,
+      "sha256": "35481b72824ae7334aca29373d408e032780ac3a045f2ef85edf03089437b474"
+    },
+    "scenes/victory": {
+      "file": "scenes/victory.ogg",
+      "label_he": "ניצחון",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 1.4,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -5,
+      "recommended_gain_linear": 0.562341,
+      "filters": {
+        "highpass_hz": 180,
+        "lowpass_hz": 7500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "victory",
+        "seed": 20261056,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.0,
+      "measured_true_peak_dbtp": -10.14,
+      "bytes": 11606,
+      "sha256": "985328f7cac5dd7e6807906e70300a067b1bfbaffafe30e5df64d16b823856b3"
+    },
+    "scenes/defeat": {
+      "file": "scenes/defeat.ogg",
+      "label_he": "הפסד",
+      "codec": "opus",
+      "container": "ogg",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "duration_seconds": 0.9,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -9,
+      "recommended_gain_linear": 0.354813,
+      "filters": {
+        "highpass_hz": 100,
+        "lowpass_hz": 3500,
+        "q": 0.7071,
+        "slope_db_octave": 12
+      },
+      "max_voices": 2,
+      "cooldown_ms": 100,
+      "source": {
+        "type": "original_procedural",
+        "script": "tools/generate.py",
+        "recipe": "defeat",
+        "seed": 20261057,
+        "license": "CC0-1.0"
+      },
+      "measured_lufs_i": -23.01,
+      "measured_true_peak_dbtp": -11.49,
+      "bytes": 7554,
+      "sha256": "ac758caac7ed7a0b9fff218b4f7a57702beb36577505d1bcd2844004c325f07a"
+    }
+  },
+  "layers": {
+    "soccer_play": {
+      "bed": "soccer/ambience-loop",
+      "events": [
+        "soccer/pass",
+        "soccer/kick",
+        "soccer/net"
+      ],
+      "max_concurrent_events": 2
+    },
+    "soccer_goal": {
+      "bed": "soccer/ambience-loop",
+      "timeline": [
+        {
+          "asset": "soccer/net",
+          "at_ms": 0
+        },
+        {
+          "asset": "soccer/crowd-goal",
+          "at_ms": 80
+        }
+      ],
+      "duck_bed_db": -6,
+      "duck_hold_ms": 2400
+    },
+    "soccer_restart": {
+      "bed": "soccer/ambience-loop",
+      "events": [
+        "soccer/whistle"
+      ],
+      "duck_bed_db": -6,
+      "duck_hold_ms": 700
+    },
+    "basketball_play": {
+      "bed": "basketball/ambience-loop",
+      "events": [
+        "basketball/bounce",
+        "basketball/shoes"
+      ],
+      "max_concurrent_events": 2
+    },
+    "basketball_score": {
+      "bed": "basketball/ambience-loop",
+      "timeline": [
+        {
+          "asset": "basketball/swish",
+          "at_ms": 0
+        },
+        {
+          "asset": "basketball/crowd-excited",
+          "at_ms": 100
+        }
+      ],
+      "duck_bed_db": -6,
+      "duck_hold_ms": 1900
+    },
+    "basketball_miss": {
+      "bed": "basketball/ambience-loop",
+      "events": [
+        "basketball/rim",
+        "basketball/bounce"
+      ],
+      "max_concurrent_events": 2
+    },
+    "ski_play": {
+      "bed": "ski/ambience-loop",
+      "alternatives": [
+        "ski/scrape-slow",
+        "ski/scrape-medium",
+        "ski/scrape-fast"
+      ],
+      "max_active_alternatives": 1,
+      "crossfade_ms": 100,
+      "events": [
+        "ski/slalom-gate",
+        "ski/wind"
+      ],
+      "max_concurrent_events": 1
+    },
+    "ski_air": {
+      "bed": "ski/ambience-loop",
+      "events": [
+        "ski/jump"
+      ],
+      "mute_group": "ski_scrape",
+      "resume_group_on": "ski/landing"
+    },
+    "ski_landing": {
+      "bed": "ski/ambience-loop",
+      "events": [
+        "ski/landing"
+      ],
+      "duck_bed_db": -4,
+      "duck_hold_ms": 500
+    },
+    "ski_fall": {
+      "bed": "ski/ambience-loop",
+      "events": [
+        "ski/fall"
+      ],
+      "mute_group": "ski_scrape",
+      "duck_bed_db": -6,
+      "duck_hold_ms": 900
+    },
+    "opening": {
+      "events": [
+        "scenes/opening"
+      ],
+      "duck_bed_db": -8,
+      "duck_hold_ms": 900
+    },
+    "victory": {
+      "events": [
+        "scenes/victory"
+      ],
+      "duck_bed_db": -8,
+      "duck_hold_ms": 1400,
+      "exclude": [
+        "soccer/crowd-goal",
+        "basketball/crowd-excited"
+      ]
+    },
+    "defeat": {
+      "events": [
+        "scenes/defeat"
+      ],
+      "duck_bed_db": -10,
+      "duck_hold_ms": 900
+    }
+  }
+}

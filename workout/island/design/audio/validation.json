@@ -1,0 +1,311 @@
+{
+  "status": "PASS",
+  "asset_count": 28,
+  "background_loops": 3,
+  "audio_bytes": 668956,
+  "package_bytes_at_validation": 771576,
+  "package_budget_bytes": 2000000,
+  "normalization_spread_lu": 0.23,
+  "worst_case_recommended_mix_bound_dbtp": -2.859,
+  "ffmpeg_version": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+  "assets": {
+    "soccer/kick": {
+      "duration_seconds": 0.55,
+      "bytes": 4656,
+      "integrated_lufs": -23.01,
+      "true_peak_dbtp": -5.57,
+      "sample_peak_dbfs": -5.582,
+      "dc_dbfs": -106.511,
+      "clipped_samples": 0,
+      "sha256": "5c49286d8dd00c9c5fe765a6a339367d829cdf588b39659d6079c89fc2a09021"
+    },
+    "soccer/net": {
+      "duration_seconds": 0.6,
+      "bytes": 5139,
+      "integrated_lufs": -23.08,
+      "true_peak_dbtp": -9.25,
+      "sample_peak_dbfs": -9.629,
+      "dc_dbfs": -105.696,
+      "clipped_samples": 0,
+      "sha256": "b9afbe5e4b555f0c2f66f3ad1f77a11f385b7f63de6f0e1a01e5eecf5e5660f0"
+    },
+    "soccer/whistle": {
+      "duration_seconds": 0.7,
+      "bytes": 5944,
+      "integrated_lufs": -23.03,
+      "true_peak_dbtp": -17.13,
+      "sample_peak_dbfs": -17.18,
+      "dc_dbfs": -124.871,
+      "clipped_samples": 0,
+      "sha256": "e9a8cfa8bc3660875fa507d216830fc1c261b24137b943c2d8b81cc852f1e50b"
+    },
+    "soccer/pass": {
+      "duration_seconds": 0.5,
+      "bytes": 4334,
+      "integrated_lufs": -22.85,
+      "true_peak_dbtp": -8.39,
+      "sample_peak_dbfs": -8.405,
+      "dc_dbfs": -89.687,
+      "clipped_samples": 0,
+      "sha256": "4429fdf733454e76c8d8dee33410ab7639dad619d29bbc73914de818d1b44090"
+    },
+    "soccer/crowd-calm": {
+      "duration_seconds": 1.8,
+      "bytes": 14826,
+      "integrated_lufs": -22.97,
+      "true_peak_dbtp": -13.87,
+      "sample_peak_dbfs": -13.899,
+      "dc_dbfs": -95.889,
+      "clipped_samples": 0,
+      "sha256": "88c92968d600e9cf2c695acf8c39b4ea03755490e451011e9358ccd40b2845c2"
+    },
+    "soccer/crowd-excited": {
+      "duration_seconds": 2.0,
+      "bytes": 16463,
+      "integrated_lufs": -22.99,
+      "true_peak_dbtp": -12.1,
+      "sample_peak_dbfs": -12.095,
+      "dc_dbfs": -93.197,
+      "clipped_samples": 0,
+      "sha256": "2e5ad15059140a295ccae8673db1cb9d477198b42367bf37f0b0f5dd0af57d69"
+    },
+    "soccer/crowd-goal": {
+      "duration_seconds": 2.8,
+      "bytes": 22903,
+      "integrated_lufs": -23.01,
+      "true_peak_dbtp": -12.39,
+      "sample_peak_dbfs": -12.403,
+      "dc_dbfs": -116.399,
+      "clipped_samples": 0,
+      "sha256": "519600f9f9bb6ff33f30d6b034d11a5dc2de1e464997e8eafae44b75182e17d6"
+    },
+    "soccer/ambience-loop": {
+      "duration_seconds": 24.0,
+      "bytes": 146117,
+      "integrated_lufs": -22.99,
+      "true_peak_dbtp": -11.49,
+      "sample_peak_dbfs": -11.508,
+      "dc_dbfs": -94.792,
+      "clipped_samples": 0,
+      "sha256": "95f548902f010826714ef3625815ffa36d2ab645e54c21e2527955a389ff8f32",
+      "loop_seam": {
+        "jump_dbfs": -85.736,
+        "slope_jump_dbfs": -111.876,
+        "100ms_energy_delta_db": -3.066,
+        "three_repeats_true_peak_dbtp": -11.49
+      }
+    },
+    "basketball/bounce": {
+      "duration_seconds": 0.6,
+      "bytes": 5139,
+      "integrated_lufs": -23.06,
+      "true_peak_dbtp": -8.91,
+      "sample_peak_dbfs": -8.919,
+      "dc_dbfs": -80.192,
+      "clipped_samples": 0,
+      "sha256": "49ff05fd12a02c429b86b6694f8d33e1252dd3fcde2352e450ef68085915e3f9"
+    },
+    "basketball/swish": {
+      "duration_seconds": 0.55,
+      "bytes": 4656,
+      "integrated_lufs": -22.96,
+      "true_peak_dbtp": -9.96,
+      "sample_peak_dbfs": -10.017,
+      "dc_dbfs": -127.218,
+      "clipped_samples": 0,
+      "sha256": "e5c2c8e0118edaf44bb3f784ee373f5f4bcf25e40df4ee5f5f5939c2fd8ef419"
+    },
+    "basketball/rim": {
+      "duration_seconds": 0.75,
+      "bytes": 6266,
+      "integrated_lufs": -23.0,
+      "true_peak_dbtp": -9.03,
+      "sample_peak_dbfs": -9.027,
+      "dc_dbfs": -98.779,
+      "clipped_samples": 0,
+      "sha256": "be5b46ff3a6e488d1e1acc943d564e13746d499a44f5beede424bb3bc12aa57c"
+    },
+    "basketball/shoes": {
+      "duration_seconds": 0.65,
+      "bytes": 5461,
+      "integrated_lufs": -23.03,
+      "true_peak_dbtp": -12.15,
+      "sample_peak_dbfs": -12.148,
+      "dc_dbfs": -99.767,
+      "clipped_samples": 0,
+      "sha256": "d8f463a5f435d381a330afc36e7ae2a486605668d52ae9b7c82b2aa43aef93a3"
+    },
+    "basketball/buzzer": {
+      "duration_seconds": 0.7,
+      "bytes": 5944,
+      "integrated_lufs": -23.02,
+      "true_peak_dbtp": -17.91,
+      "sample_peak_dbfs": -17.915,
+      "dc_dbfs": -89.972,
+      "clipped_samples": 0,
+      "sha256": "fc3f958885316e8b79574bdb4605c235a5b02f5be72f14a9403b4702d247e934"
+    },
+    "basketball/crowd-calm": {
+      "duration_seconds": 1.7,
+      "bytes": 14021,
+      "integrated_lufs": -23.0,
+      "true_peak_dbtp": -13.28,
+      "sample_peak_dbfs": -13.301,
+      "dc_dbfs": -132.026,
+      "clipped_samples": 0,
+      "sha256": "1b507637c6594b4c08a390c4ded8b72b5f0da57074446c6a0ff02ffd6467ba2a"
+    },
+    "basketball/crowd-excited": {
+      "duration_seconds": 2.1,
+      "bytes": 17268,
+      "integrated_lufs": -22.99,
+      "true_peak_dbtp": -11.63,
+      "sample_peak_dbfs": -11.706,
+      "dc_dbfs": -98.411,
+      "clipped_samples": 0,
+      "sha256": "0538211d0239f5787e6ae773536741caf4348703ccbac10acd32520191dc13bc"
+    },
+    "basketball/ambience-loop": {
+      "duration_seconds": 24.0,
+      "bytes": 146117,
+      "integrated_lufs": -22.99,
+      "true_peak_dbtp": -12.16,
+      "sample_peak_dbfs": -12.17,
+      "dc_dbfs": -100.173,
+      "clipped_samples": 0,
+      "sha256": "bc2c3c4f3fa305614e7d218785caaff84ac132a5e95ffe8c059a09c56e543b59",
+      "loop_seam": {
+        "jump_dbfs": -102.73,
+        "slope_jump_dbfs": -134.003,
+        "100ms_energy_delta_db": -3.308,
+        "three_repeats_true_peak_dbtp": -12.16
+      }
+    },
+    "ski/scrape-slow": {
+      "duration_seconds": 1.1,
+      "bytes": 9191,
+      "integrated_lufs": -23.0,
+      "true_peak_dbtp": -13.33,
+      "sample_peak_dbfs": -13.362,
+      "dc_dbfs": -102.212,
+      "clipped_samples": 0,
+      "sha256": "ff22dfe7d3c4cd03a35020eb54b7b85aaf6acf98011f227f337dc3bc9abf1ea0"
+    },
+    "ski/scrape-medium": {
+      "duration_seconds": 1.1,
+      "bytes": 9191,
+      "integrated_lufs": -23.0,
+      "true_peak_dbtp": -13.58,
+      "sample_peak_dbfs": -13.582,
+      "dc_dbfs": -109.013,
+      "clipped_samples": 0,
+      "sha256": "26311d02b25de40965c846f689a97e2c389254ee49dae9299b2af26f3bbf7e47"
+    },
+    "ski/scrape-fast": {
+      "duration_seconds": 1.1,
+      "bytes": 9191,
+      "integrated_lufs": -23.0,
+      "true_peak_dbtp": -13.76,
+      "sample_peak_dbfs": -13.842,
+      "dc_dbfs": -110.279,
+      "clipped_samples": 0,
+      "sha256": "f9ef1cd13bb2588041f9a9403e25512a16ddf64d4053bb9fda2fb406eddaf190"
+    },
+    "ski/wind": {
+      "duration_seconds": 2.4,
+      "bytes": 19683,
+      "integrated_lufs": -22.97,
+      "true_peak_dbtp": -11.57,
+      "sample_peak_dbfs": -11.566,
+      "dc_dbfs": -94.678,
+      "clipped_samples": 0,
+      "sha256": "e973ea4b29fd6885d2b710137d97e703abbae02ff3ee221543e6df2b48e598e4"
+    },
+    "ski/jump": {
+      "duration_seconds": 0.6,
+      "bytes": 5139,
+      "integrated_lufs": -23.02,
+      "true_peak_dbtp": -10.94,
+      "sample_peak_dbfs": -10.966,
+      "dc_dbfs": -90.854,
+      "clipped_samples": 0,
+      "sha256": "7ad4e1567ffc103a60d5273d0be43e4245622e8563f229f934a94d937d7262ab"
+    },
+    "ski/landing": {
+      "duration_seconds": 0.7,
+      "bytes": 5944,
+      "integrated_lufs": -23.06,
+      "true_peak_dbtp": -8.63,
+      "sample_peak_dbfs": -8.652,
+      "dc_dbfs": -75.083,
+      "clipped_samples": 0,
+      "sha256": "2ea9375821e7ad060ab7030faecc8740b173672c135dc7af43c9b5b842a878f4"
+    },
+    "ski/fall": {
+      "duration_seconds": 0.95,
+      "bytes": 7876,
+      "integrated_lufs": -23.04,
+      "true_peak_dbtp": -8.71,
+      "sample_peak_dbfs": -8.736,
+      "dc_dbfs": -83.275,
+      "clipped_samples": 0,
+      "sha256": "fead61371703100541e269c1cc11e83a4e341618462c99cc650fc8989643413e"
+    },
+    "ski/slalom-gate": {
+      "duration_seconds": 0.55,
+      "bytes": 4656,
+      "integrated_lufs": -22.99,
+      "true_peak_dbtp": -10.88,
+      "sample_peak_dbfs": -10.884,
+      "dc_dbfs": -93.89,
+      "clipped_samples": 0,
+      "sha256": "9de65012ec06e218f6df0d86eb45a267e0c6f9331790ee396c3ae9f59e296791"
+    },
+    "ski/ambience-loop": {
+      "duration_seconds": 24.0,
+      "bytes": 146117,
+      "integrated_lufs": -23.0,
+      "true_peak_dbtp": -10.62,
+      "sample_peak_dbfs": -10.619,
+      "dc_dbfs": -98.314,
+      "clipped_samples": 0,
+      "sha256": "d37c3424554a3fd8a7c417e666ee8184f00d1de24d74732e95be477f14b93c95",
+      "loop_seam": {
+        "jump_dbfs": -75.977,
+        "slope_jump_dbfs": -133.356,
+        "100ms_energy_delta_db": -1.88,
+        "three_repeats_true_peak_dbtp": -10.62
+      }
+    },
+    "scenes/opening": {
+      "duration_seconds": 0.9,
+      "bytes": 7554,
+      "integrated_lufs": -22.99,
+      "true_peak_dbtp": -13.44,
+      "sample_peak_dbfs": -13.437,
+      "dc_dbfs": -93.78,
+      "clipped_samples": 0,
+      "sha256": "35481b72824ae7334aca29373d408e032780ac3a045f2ef85edf03089437b474"
+    },
+    "scenes/victory": {
+      "duration_seconds": 1.4,
+      "bytes": 11606,
+      "integrated_lufs": -23.0,
+      "true_peak_dbtp": -10.14,
+      "sample_peak_dbfs": -10.138,
+      "dc_dbfs": -94.706,
+      "clipped_samples": 0,
+      "sha256": "985328f7cac5dd7e6807906e70300a067b1bfbaffafe30e5df64d16b823856b3"
+    },
+    "scenes/defeat": {
+      "duration_seconds": 0.9,
+      "bytes": 7554,
+      "integrated_lufs": -23.01,
+      "true_peak_dbtp": -11.49,
+      "sample_peak_dbfs": -11.493,
+      "dc_dbfs": -96.083,
+      "clipped_samples": 0,
+      "sha256": "ac758caac7ed7a0b9fff218b4f7a57702beb36577505d1bcd2844004c325f07a"
+    }
+  }
+}

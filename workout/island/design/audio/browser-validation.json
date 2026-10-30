@@ -1,0 +1,222 @@
+{
+  "status": "PASS",
+  "browser": "156.0.8078.74",
+  "asset_count": 28,
+  "decode": "Chrome OfflineAudioContext, 48 kHz mono",
+  "loop_test": "AudioBufferSourceNode.loop rendered for more than two full repeats; exact sample comparison at first repeat",
+  "preview": {
+    "audio_controls": 28,
+    "loop_buttons": 3,
+    "viewports": [
+      "390x844",
+      "844x390"
+    ],
+    "overflow": false,
+    "start_stop": "PASS",
+    "page_errors": []
+  },
+  "assets": [
+    {
+      "id": "soccer/kick",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 26400,
+      "duration_seconds": 0.55
+    },
+    {
+      "id": "soccer/net",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 28800,
+      "duration_seconds": 0.6
+    },
+    {
+      "id": "soccer/whistle",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 33600,
+      "duration_seconds": 0.7
+    },
+    {
+      "id": "soccer/pass",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 24000,
+      "duration_seconds": 0.5
+    },
+    {
+      "id": "soccer/crowd-calm",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 86400,
+      "duration_seconds": 1.8
+    },
+    {
+      "id": "soccer/crowd-excited",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 96000,
+      "duration_seconds": 2
+    },
+    {
+      "id": "soccer/crowd-goal",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 134400,
+      "duration_seconds": 2.8
+    },
+    {
+      "id": "soccer/ambience-loop",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 1152000,
+      "duration_seconds": 24,
+      "repeat_max_sample_error": 0,
+      "seam_jump_dbfs": -85.73571488799075
+    },
+    {
+      "id": "basketball/bounce",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 28800,
+      "duration_seconds": 0.6
+    },
+    {
+      "id": "basketball/swish",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 26400,
+      "duration_seconds": 0.55
+    },
+    {
+      "id": "basketball/rim",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 36000,
+      "duration_seconds": 0.75
+    },
+    {
+      "id": "basketball/shoes",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 31200,
+      "duration_seconds": 0.65
+    },
+    {
+      "id": "basketball/buzzer",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 33600,
+      "duration_seconds": 0.7
+    },
+    {
+      "id": "basketball/crowd-calm",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 81600,
+      "duration_seconds": 1.7
+    },
+    {
+      "id": "basketball/crowd-excited",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 100800,
+      "duration_seconds": 2.1
+    },
+    {
+      "id": "basketball/ambience-loop",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 1152000,
+      "duration_seconds": 24,
+      "repeat_max_sample_error": 0,
+      "seam_jump_dbfs": -102.7297550546745
+    },
+    {
+      "id": "ski/scrape-slow",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 52800,
+      "duration_seconds": 1.1
+    },
+    {
+      "id": "ski/scrape-medium",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 52800,
+      "duration_seconds": 1.1
+    },
+    {
+      "id": "ski/scrape-fast",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 52800,
+      "duration_seconds": 1.1
+    },
+    {
+      "id": "ski/wind",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 115200,
+      "duration_seconds": 2.4
+    },
+    {
+      "id": "ski/jump",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 28800,
+      "duration_seconds": 0.6
+    },
+    {
+      "id": "ski/landing",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 33600,
+      "duration_seconds": 0.7
+    },
+    {
+      "id": "ski/fall",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 45600,
+      "duration_seconds": 0.95
+    },
+    {
+      "id": "ski/slalom-gate",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 26400,
+      "duration_seconds": 0.55
+    },
+    {
+      "id": "ski/ambience-loop",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 1152000,
+      "duration_seconds": 24,
+      "repeat_max_sample_error": 0,
+      "seam_jump_dbfs": -75.97701430235473
+    },
+    {
+      "id": "scenes/opening",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 43200,
+      "duration_seconds": 0.9
+    },
+    {
+      "id": "scenes/victory",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 67200,
+      "duration_seconds": 1.4
+    },
+    {
+      "id": "scenes/defeat",
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "frames": 43200,
+      "duration_seconds": 0.9
+    }
+  ]
+}
