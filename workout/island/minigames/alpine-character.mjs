@@ -128,7 +128,8 @@ export function createAlpineMotionPlayer(baked, bones) {
     }
     if (!frame.airborne && lastAir || frame.landing && state === 'glide') events.push('ground_contact', 'receive');
     if (frame.boosting && !lastBoost) events.push('boost_confirmed', 'action');
-    if (moving) events.push('moving'); else events.push('stopped');
+    if (moving) { if (!(phase === 'menu' && context.previewRun)) events.push('moving'); }
+    else events.push('stopped');
     if ((moving && speed < lastSpeed - .8 || !moving) && !frame.hit) events.push('slowing');
     if (Math.abs(frame.lean || 0) > .2 && !frame.airborne) events.push(frame.lean < 0 ? 'turn_left' : 'turn_right');
     if (phase === 'menu' && context.previewRun) events.push('menu_run');
