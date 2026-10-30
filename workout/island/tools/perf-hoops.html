@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>מדידת ביצועים: כדורסל</title>
+<style>
+ html,body{margin:0;height:100%;background:#05060a;color:#eee;font-family:system-ui,sans-serif;direction:rtl;text-align:right;unicode-bidi:embed}
+ .game-screen{position:fixed;inset:0}
+ .game-header{position:absolute;inset:0 0 auto 0;z-index:6;display:flex;justify-content:flex-end;padding:8px}
+ .game-stage{position:absolute;inset:0}
+ .minigame-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+ .game-controls{position:absolute;inset:0}
+ #perf{position:fixed;z-index:50;left:8px;bottom:8px;max-width:min(92vw,420px);background:#0c111ce6;border:1px solid #ffffff2e;border-radius:10px;padding:8px 10px;font-size:13px;line-height:1.5;direction:rtl}
+ #perf table{border-collapse:collapse;width:100%}
+ #perf td{padding:1px 6px;border-bottom:1px solid #ffffff14}
+ #perf td:last-child{direction:ltr;text-align:left;font-variant-numeric:tabular-nums}
+ #perf button{margin-top:6px;min-height:40px;padding:0 14px;border-radius:8px;border:1px solid #ffffff55;background:#1b2130;color:#fff;font-size:14px}
+ #perf .live{color:#ffb020}
+ #perf[hidden]{display:none}
+</style>
+</head>
+<body>
+<div class="game-screen" data-game="streetSlam">
+ <header class="game-header"><button type="button" data-action="game-pause" aria-label="pause" hidden></button></header>
+ <p class="game-status" role="status" aria-live="polite"></p>
+ <div class="game-stage"><canvas class="minigame-canvas" tabindex="0" aria-label="basketball"></canvas></div>
+ <div class="game-controls"></div>
+</div>
+<div id="perf"><div class="live">טוען</div></div>
+<script type="module">
+/* Performance bench for Island Pro Basketball only. Runs one game on autopilot for N seconds
+ * and reports: average FPS, frame-time p50/p95/p99, frames over 33 ms and 50 ms, tick CPU
+ * (engine steps + render + HUD inside the RAF callback), view.render alone, JS heap growth
+ * (allocation rate, Chromium only) and GC count. Works on the phone and in Playwright
+ * (SwiftShader software WebGL, so render here is CPU cost). Results: window.__perf.
+ * URL: ?dur=30 (seconds) &quality=2 &profile=quick &replay=1 (play every instant replay) &dpr=0.15 (tiny backing store) &bench=1 (CPU only: synchronous steps, per-component times)
+ *      &portrait=1 is not needed: the viewport decides landscape or portrait. */
+import {startHoops} from '../minigames/hoops-session.mjs';
+import {initialHoops} from '../minigames/hoops-franchise.mjs';
+const q=new URLSearchParams(location.search);
+const DUR=Math.max(3,Number(q.get('dur')||30)),REPLAY=q.get('replay')==='1',BENCH=q.get('bench')==='1';
+// bench mode needs the session's dev hooks (debug.step) and freezes its own RAF loop
+if(BENCH&&q.get('dev')!=='1'){q.set('dev','1');history.replaceState(null,'',location.pathname+'?'+q.toString());}
+// the session reads these from the URL itself
+if(!q.has('hoopsAuto')||!q.has('hoopsQuality')||!q.has('hoopsProfile')){
+ q.set('hoopsAuto',q.get('hoopsAuto')||'1');q.set('hoopsQuality',q.get('quality')||q.get('hoopsQuality')||'2');q.set('hoopsProfile',q.get('profile')||q.get('hoopsProfile')||'quick');
+ history.replaceState(null,'',location.pathname+'?'+q.toString());
+}
+const perfEl=document.getElementById('perf');
+// Playwright / software WebGL: a tiny backing store takes the rasteriser out of the picture, so the
+// frame time is the CPU work of the engine, the view and the HUD (what we can measure here).
+// The phone keeps its real pixel ratio: the view decides the cap.
+if(q.get('dpr'))Object.defineProperty(window,'devicePixelRatio',{get:()=>Number(q.get('dpr')),configurable:true});
+const cfg=(await (await fetch('../data/config.json')).json()).minigames.streetSlam;
+const screen=document.querySelector('.game-screen'),canvas=screen.querySelector('canvas'),controls=screen.querySelector('.game-controls'),status=screen.querySelector('.game-status');
+
+// --- instrumentation: time every RAF callback the page schedules, and the gaps between frames
+const raw=window.requestAnimationFrame.bind(window);
+const M={frames:[],ticks:[],renders:[],heap:[],gcs:0,alloc:0,long:0,longMs:0,start:0,lastNow:0,replays:0};
+let session=null,running=false,lastHeap=null;
+window.requestAnimationFrame=cb=>raw(now=>{
+ const t0=performance.now();cb(now);const t1=performance.now();
+ if(!running)return;
+ if(now===M.lastNow){M.ticks[M.ticks.length-1]+=t1-t0;return;}
+ if(M.lastNow)M.frames.push(now-M.lastNow);M.lastNow=now;
+ M.ticks.push(t1-t0);
+ const rm=session?.snapshot?.renderMetrics;if(rm)M.renders.push(rm.frameMs);
+ const mem=performance.memory;if(mem){const h=mem.usedJSHeapSize;if(lastHeap!=null){const d=h-lastHeap;if(d<0)M.gcs++;else M.alloc+=d;}lastHeap=h;}
+});
+if('PerformanceObserver' in window){try{new PerformanceObserver(list=>{if(!running)return;for(const e of list.getEntries()){M.long++;M.longMs+=e.duration;}}).observe({type:'longtask',buffered:false});}catch{}}
+
+const pct=(arr,p)=>{if(!arr.length)return 0;const a=[...arr].sort((x,y)=>x-y);return a[Math.min(a.length-1,Math.floor(p*(a.length-1)))];};
+const avg=arr=>arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:0;
+const r2=v=>Math.round(v*100)/100;
+function summary(){
+ const secs=(M.lastNow-M.start)/1000||1;
+ return {
+  seconds:r2(secs),frames:M.frames.length,fps:r2(M.frames.length/secs),
+  frameMs:{avg:r2(avg(M.frames)),p50:r2(pct(M.frames,.5)),p95:r2(pct(M.frames,.95)),p99:r2(pct(M.frames,.99)),max:r2(Math.max(0,...M.frames))},
+  over33:M.frames.filter(f=>f>33.4).length,over50:M.frames.filter(f=>f>50).length,
+  tickMs:{avg:r2(avg(M.ticks)),p50:r2(pct(M.ticks,.5)),p95:r2(pct(M.ticks,.95)),max:r2(Math.max(0,...M.ticks))},
+  renderMs:{avg:r2(avg(M.renders)),p95:r2(pct(M.renders,.95))},
+  allocMBps:performance.memory?r2(M.alloc/1048576/secs):null,gcs:performance.memory?M.gcs:null,
+  longTasks:M.long,longTaskMs:r2(M.longMs),replays:M.replays,
+  viewport:{w:innerWidth,h:innerHeight,dpr:devicePixelRatio,landscape:innerWidth>=innerHeight*1.05},
+  render:session?.snapshot?.renderMetrics||null,steps:session?.snapshot?.stepsRun||0,
+  ua:navigator.userAgent,quality:Number(q.get('hoopsQuality')),profile:q.get('hoopsProfile'),
+ };
+}
+function show(s,done){
+ const rows=[['זמן',s.seconds+' s'],['FPS ממוצע',s.fps],['פריים p50 / p95 / p99',`${s.frameMs.p50} / ${s.frameMs.p95} / ${s.frameMs.p99} ms`],['פריימים מעל 33 ms',s.over33+' / '+s.frames],['פריימים מעל 50 ms',s.over50],
+  ['CPU לפריים ממוצע / p95',`${s.tickMs.avg} / ${s.tickMs.p95} ms`],['render ממוצע / p95',`${s.renderMs.avg} / ${s.renderMs.p95} ms`],
+  ['הקצאות',s.allocMBps==null?'אין נתון בדפדפן הזה':`${s.allocMBps} MB/s, ${s.gcs} GC`],['משימות ארוכות',`${s.longTasks} (${s.longTaskMs} ms)`],
+  ['draw calls / משולשים',s.render?`${s.render.calls} / ${s.render.triangles}`:'-'],['מסך',`${s.viewport.w}x${s.viewport.h} @${s.viewport.dpr} ${s.viewport.landscape?'רוחב':'אורך'}`]];
+ perfEl.replaceChildren();
+ const h=document.createElement('div');h.className='live';h.textContent=done?'סיום המדידה':'מודד...';perfEl.append(h);
+ const tb=document.createElement('table');for(const [k,v] of rows){const tr=document.createElement('tr');const a=document.createElement('td');a.textContent=k;const b=document.createElement('td');b.textContent=String(v);tr.append(a,b);tb.append(tr);}perfEl.append(tb);
+ if(done){const c=document.createElement('button');c.type='button';c.textContent='העתק תוצאה';c.onclick=()=>navigator.clipboard?.writeText(JSON.stringify(s,null,1)).then(()=>{c.textContent='הועתק';});const again=document.createElement('button');again.type='button';again.textContent='שוב';again.onclick=()=>location.reload();perfEl.append(c,document.createTextNode(' '),again);}
+}
+
+const ctx={balance:cfg,hoops:initialHoops(cfg),seed:(Number(q.get('seed'))||4242)>>>0,level:1,equipment:{},power:1,canvas,controls,status,t:k=>k,
+ finish(r){window.__perfFinish=r;},cancel(){},onError(reason){perfEl.textContent='שגיאה: '+reason;window.__perf={error:reason};}};
+session=startHoops(ctx);window.__session=session;
+// start measuring once the arena and the players are on the screen
+await new Promise(res=>{const wait=()=>{const s=session.snapshot;if(s.error){res();return;}if(s.renderMetrics?.calls>0&&s.stepsRun>30)res();else setTimeout(wait,100);};wait();});
+window.__perfLoadMs=Math.round(performance.now());
+if(session.snapshot.error){window.__perf={error:session.snapshot.error};}
+else if(BENCH){
+ // CPU only: one engine step + snapshot + events + view.render + HUD per call, as many as fit in
+ // DUR seconds, in short synchronous bursts so the page stays alive. No vsync, no rasteriser wait.
+ const d=session.debug,eng=d.engine,view=d.view;d.hold=true;
+ const T={step:0,snap:0,render:0,events:0},A={step:0,snap:0,render:0,events:0},heapNow=()=>performance.memory?.usedJSHeapSize||0;
+ const wrap=(obj,key,acc)=>{const f=obj[key];obj[key]=function(...a){const h0=heapNow(),t0=performance.now();const r=f.apply(this,a);T[acc]+=performance.now()-t0;const dh=heapNow()-h0;if(dh>0)A[acc]+=dh;return r;};};
+ wrap(eng,'step','step');wrap(eng,'snapshot','snap');wrap(eng,'drainEvents','events');wrap(view,'render','render');
+ const samples=[],parts={step:[],snap:[],render:[],events:[],rest:[]};let n=0,heap0=performance.memory?.usedJSHeapSize,alloc=0,gcs=0,last=heap0;
+ const t0=performance.now();
+ const chunk=()=>{
+  for(let i=0;i<6;i++){
+   const b={...T};const a0=performance.now();d.step(1);const total=performance.now()-a0;n++;samples.push(total);
+   let acc=0;for(const k in parts)if(k!=='rest'){const v=T[k]-b[k];parts[k].push(v);acc+=v;}parts.rest.push(total-acc);
+   const mem=performance.memory;if(mem){const h=mem.usedJSHeapSize;if(h<last)gcs++;else alloc+=h-last;last=h;}
+   if(REPLAY){const btn=screen.querySelector('.hoops-replay');if(btn&&!btn.hidden){btn.click();M.replays++;}}
+  }
+  const el=(performance.now()-t0)/1000;
+  if(el<DUR){perfEl.querySelector('.live').textContent=`מודד CPU... ${n} צעדים`;setTimeout(chunk,0);return;}
+  const st=arr=>({avg:r2(avg(arr)),p50:r2(pct(arr,.5)),p95:r2(pct(arr,.95)),p99:r2(pct(arr,.99)),max:r2(Math.max(0,...arr))});
+  const s={bench:true,seconds:r2(el),steps:n,stepsPerSec:r2(n/el),stepMs:st(samples),parts:Object.fromEntries(Object.entries(parts).map(([k,v])=>[k,st(v)])),
+   allocKBperStep:performance.memory?r2(alloc/1024/n):null,allocParts:performance.memory?Object.fromEntries(Object.entries(A).map(([k,v])=>[k,r2(v/1024/n)])):null,gcs:performance.memory?gcs:null,render:view.metrics(),
+   viewport:{w:innerWidth,h:innerHeight,dpr:devicePixelRatio,landscape:innerWidth>=innerHeight*1.05},ua:navigator.userAgent,quality:Number(q.get('hoopsQuality')),profile:q.get('hoopsProfile'),loadMs:window.__perfLoadMs,phase:eng.snapshot().phase,replays:M.replays};
+  window.__perf=s;
+  const rows=[['צעדים',`${s.steps} ב-${s.seconds} s (${s.stepsPerSec}/s)`],['צעד שלם ממוצע / p95 / p99',`${s.stepMs.avg} / ${s.stepMs.p95} / ${s.stepMs.p99} ms`],['מנוע step',`${s.parts.step.avg} / ${s.parts.step.p95} ms`],['snapshot',`${s.parts.snap.avg} / ${s.parts.snap.p95} ms`],['render',`${s.parts.render.avg} / ${s.parts.render.p95} ms`],['HUD ושאר',`${s.parts.rest.avg} / ${s.parts.rest.p95} ms`],['הקצאות לצעד',s.allocKBperStep==null?'אין נתון':`${s.allocKBperStep} KB, ${s.gcs} GC`],['draw calls / משולשים',`${s.render.calls} / ${s.render.triangles}`]];
+  perfEl.replaceChildren();const h=document.createElement('div');h.className='live';h.textContent='סיום מדידת CPU';perfEl.append(h);
+  const tb=document.createElement('table');for(const [k,v] of rows){const tr=document.createElement('tr');const a=document.createElement('td');a.textContent=k;const c=document.createElement('td');c.textContent=String(v);tr.append(a,c);tb.append(tr);}perfEl.append(tb);
+  const c=document.createElement('button');c.type='button';c.textContent='העתק תוצאה';c.onclick=()=>navigator.clipboard?.writeText(JSON.stringify(s,null,1)).then(()=>{c.textContent='הועתק';});perfEl.append(c);
+ };
+ chunk();
+}
+else{
+ running=true;M.start=performance.now();M.lastNow=0;lastHeap=null;
+ const ui=setInterval(()=>show(summary(),false),1000);
+ const rp=REPLAY?setInterval(()=>{const b=screen.querySelector('.hoops-replay');if(b&&!b.hidden){b.click();M.replays++;}},250):null;
+ setTimeout(()=>{running=false;clearInterval(ui);if(rp)clearInterval(rp);const s=summary();s.loadMs=window.__perfLoadMs;window.__perf=s;show(s,true);session.setPaused(true);},DUR*1000);
+}
+</script>
+</body>
+</html>
