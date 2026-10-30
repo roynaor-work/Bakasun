@@ -11501,7 +11501,10 @@
     "turnRate": 9,
     "userAccel": 1.6,
     "userTurn": 18,
-    "autoSwitch": true
+    "autoSwitch": true,
+    "defenseAssist": true,
+    "assistGapBall": 1.0,
+    "assistGapOff": 1.8
    },
    "fatigue": {
     "drain": 0.0105,
@@ -11945,7 +11948,7 @@
     "followZ": 0.45,
     "maxZ": 3.5,
     "dollyZ": 0.5,
-    "mode": "behind",
+    "mode": "broadcast",
     "behindBack": 7.5,
     "behindHeight": 3.6,
     "behindFov": 48,
@@ -11960,7 +11963,20 @@
     "behindFar": 19,
     "sideExtraBack": 2.5,
     "sideExtraHeight": 1.2,
-    "sideFov": 36
+    "sideFov": 36,
+    "bLead": 0.5,
+    "bLeadMax": 4,
+    "bEdge": 1.2,
+    "bRate": 2.4,
+    "bSpan": 8.6,
+    "bFovMin": 16,
+    "bFovMax": 40,
+    "bHeight": 7,
+    "bDist": 7,
+    "bLookY": 1.7,
+    "bLookZ": 0,
+    "bFollowZ": 0.75,
+    "bNearZ": 3
    },
    "assets": {
     "models": {
