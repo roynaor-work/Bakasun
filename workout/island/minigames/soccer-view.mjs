@@ -10,6 +10,7 @@ import {createSoccerDesignLoader} from './soccer-design-loader.mjs';
 import {createSoccerDesignScene} from './soccer-design-scene.mjs';
 import {createSoccerDesignVfx} from './soccer-design-vfx.mjs';
 import {createSoccerDesignReplay} from './soccer-design-replay.mjs';
+import {selectedSoccerKit} from './soccer-design-screens.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-perf-20261030-1';
 import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor} from './soccer-presentation.mjs?v=island-perf-20261030-1';
@@ -23,6 +24,12 @@ const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin t
 
 const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
+  const selectedKit=selectedSoccerKit();
+  if(selectedKit){
+    const home=new T.Color(selectedKit.primary),away=new T.Color(config.opponent.colors[0]);
+    const distance=(home.r-away.r)**2+(home.g-away.g)**2+(home.b-away.b)**2;
+    config={...config,team:{...config.team,colors:[...selectedKit.colors]},opponent:distance<.2?{...config.opponent,colors:['#18364f','#f4f0df']}:config.opponent};
+  }
   const roster=config.players.roster;let poseFocus=null,poseMode=null,poses=[];
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,config.view.maxPixelRatio));adventureRenderer(renderer,.98);
@@ -126,6 +133,12 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     if(athleteMode){
       let triangles=0,lowTriangles=0,meshes=0;source.traverse(o=>{if(!o.isMesh)return;track(o.geometry);const n=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;if(/LOD1/.test(o.parent?.name||''))lowTriangles+=n;else{triangles+=n;meshes++;}});
       for(const c of setupAthletes(T,{source,animations:data.animations,config,roster,numbers:numberTexture,track,cloneRig:cloneSoccerRig,scene,createMotion:createAthleteMotion})){
+        if(selectedKit&&c.team===0&&!c.keeper){
+          const uniforms=c.materials.kit.userData.athlete;
+          for(const key of ['primary','secondary','shorts','shortsTrim','socks','socksTrim']){
+            color.set(selectedKit[key]);uniforms['kit'+key[0].toUpperCase()+key.slice(1)].value.set(color.r,color.g,color.b);
+          }
+        }
         c.bones=Object.fromEntries(Object.entries(ATHLETE_BONES).map(([key,name])=>{const bone=c.root.getObjectByName(name);return [key,{bone,rest:bone?.quaternion.clone()}];}));
         if(quality>=config.view.athlete.lodFromQuality)c.setLod(1);
         characters.push(Object.assign(c,{lookWeight:1,roll:0,lift:0,headPoint:new T.Vector3(),chestPoint:new T.Vector3(),feetPoints:[new T.Vector3(),new T.Vector3()],active:'idle',mode:'idle',kickTime:0,stealTime:0,yaw:null}));
@@ -331,7 +344,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   }
   return {ready,render,qualitySample,loading:()=>assetStatus==='loading',get renderer(){return renderer;},get replaying(){return replay.active;},
     poseCamera(id,mode){poseFocus=id;poseMode=mode;},
-    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),stadium:designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),assetStatus,assetStats,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
+    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),stadium:designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),assetStatus,assetStats,kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
     dispose(){if(disposed)return;disposed=true;replay.dispose();designVfx.dispose();designScene?.dispose();designSceneLoader?.dispose();stadium.dispose();lighting.dispose();observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);canvas.removeEventListener('pointerdown',skipReplay);for(const c of characters){if(c.design)c.dispose();else{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);c.root.traverse(o=>o.skeleton?.dispose());}}characters.length=0;for(const resource of resources)resource.dispose();resources.clear();scene.clear();renderer.dispose();renderer.forceContextLoss();}
   };
 }
