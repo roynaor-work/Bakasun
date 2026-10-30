@@ -23,7 +23,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, quality === 'low' ? lowDpr : highDpr));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
-  renderer.shadowMap.enabled = quality !== 'low'; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   if (!canvas) host.append(renderer.domElement);
   const look = {sky: '#85a9b9', fog: '#b5c9d1', fogNear: 85, fogFar: 300, snow: .10, light: 1, trees: 1, ...visual}; const forestStage=(look.trees??1)>1.5;look.fog=look.dusk?'#aab2c5':forestStage?'#b6cbd0':'#b5c9d1';look.fogNear=look.dusk?75:forestStage?85:105;look.fogFar=look.dusk?245:forestStage?285:330;look.snow=look.dusk?.38:forestStage?.17:.09;
   const dusk = !!look.dusk;
@@ -33,7 +33,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   const pmrem=new THREE.PMREMGenerator(renderer),envTarget=pmrem.fromScene(envScene,.035,.1,100);scene.environment=envTarget.texture;pmrem.dispose();envScene.traverse(n=>{n.geometry?.dispose();n.material?.dispose();});
   const camera = new THREE.PerspectiveCamera(50, 1, .1, 900);
   const hemi = new THREE.HemisphereLight(dusk ? '#9da3ca' : '#bbd4e4', '#3c5368', 1.1 * look.light); scene.add(hemi);
-  const sun = new THREE.DirectionalLight(dusk ? '#f0c5b1' : '#ffe2ba', 2.65 * look.light); sun.castShadow = true; sun.shadow.mapSize.set(mobile?1024:2048, mobile?1024:2048);
+  const SHADOW_SIZE = mobile ? 1024 : 2048;
+  const sun = new THREE.DirectionalLight(dusk ? '#f0c5b1' : '#ffe2ba', 2.65 * look.light); sun.castShadow = true; sun.shadow.mapSize.set(SHADOW_SIZE, SHADOW_SIZE);
   Object.assign(sun.shadow.camera, {left: -26, right: 26, top: 26, bottom: -26, near: 1, far: 120}); sun.shadow.bias = -.0005; scene.add(sun, sun.target);
   const mat = (c, roughness = .8) => new THREE.MeshStandardMaterial({color: c, roughness,envMapIntensity:.2});
   const snow=snowMaterial(),ice=mat('#90b5c4',.5),navy=mat('#263f4a'),orange=mat('#c97550'),white=mat('#e4e3d7'),stone=rockMaterial(),green=mat('#254e40'),red=mat('#b65e48',.8),gold=new THREE.MeshStandardMaterial({color:'#f3cb77',emissive:'#9c6f23',emissiveIntensity:.15,roughness:.28,metalness:.55});
@@ -105,7 +106,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     const sides = [-1, 1].map(side => strip(s0, s1, TX.length, (s, k, o) => { const kk = side < 0 ? TX.length - 1 - k : k; o.x = side * (deckEdge + TX[kk]); o.y = terrainAt(s, kk, side); o.nx = 0; o.ny = 1; o.u = 0; }, 8, true));
     const land = mesh(mergeGeometries(sides), terrainMat, group); land.castShadow = false; sides.forEach(g => g.dispose());
 
-    group.userData = {s0, s1}; scene.add(group); chunks.push(group);
+    group.userData = {s0, s1, perf: 'track'}; scene.add(group); chunks.push(group);
   }
   const art=createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,snow,stone,dusk,mobile,density:look.trees});
   const scenery={update(){},dispose(){}};
@@ -117,7 +118,19 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
 
   // ---------- Coins: one instanced mesh, spinning ----------
   const COIN_POOL = 90, coinGeo = new THREE.TorusGeometry(.32,.065,8,24);
-  const coins = new THREE.InstancedMesh(coinGeo, gold, COIN_POOL); coins.castShadow = true; coins.frustumCulled = false; coins.count = 0; scene.add(coins);
+  const coins = new THREE.InstancedMesh(coinGeo, gold, COIN_POOL); coins.castShadow = true; coins.frustumCulled = false; coins.count = 0; coins.userData.perf = 'coins'; scene.add(coins);
+  /** Both presets keep the shadow map on, so a switch never recompiles a shader (recompiling every
+   * material was one multi-frame hitch). Low: quarter-size map, only riders and props cast, lower DPR. */
+  let lastSwitch = null;
+  function applyQuality() {
+    const t0 = performance.now();
+    renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, quality === 'low' ? lowDpr : highDpr));
+    const t1 = performance.now(), size = quality === 'low' ? Math.min(512, SHADOW_SIZE) : SHADOW_SIZE;
+    if (sun.shadow.mapSize.x !== size) { sun.shadow.mapSize.set(size, size); if (sun.shadow.map) { sun.shadow.map.dispose(); sun.shadow.map = null; } }
+    coins.castShadow = quality !== 'low'; art.setQuality(quality);
+    lastSwitch = {quality, pixelRatioMs: +(t1 - t0).toFixed(2), shadowMs: +(performance.now() - t1).toFixed(2), resizeMs: 0, totalMs: +(performance.now() - t0).toFixed(2)};
+  }
+  applyQuality();
 
   // ---------- Obstacles: bounded pools per type ----------
   const boostMat = new THREE.MeshStandardMaterial({color:'#a9dbd5',emissive:'#477875',emissiveIntensity:.25,roughness:.55});
@@ -135,7 +148,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   }
   function rock(){const g=new THREE.Group(),geo=new THREE.SphereGeometry(.7,24,16),p=geo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i),n=1+.10*Math.sin(x*13+z*3)*Math.cos(y*9);p.setXYZ(i,x*n,y*n,z*n);}geo.computeVertexNormals();const r=mesh(geo,stone,g,0,.39,0);r.scale.set(1,.67,1);return g;}
   const makers = {rock, gate, boost: pad, ramp}, pools = {rock: [], gate: [], boost: [], ramp: []};
-  function prop(type, used) { const list = pools[type], i = used[type]++; if (!list[i]) { const g = makers[type](); scene.add(g); list.push(g); } list[i].visible = true; return list[i]; }
+  function prop(type, used) { const list = pools[type], i = used[type]++; if (!list[i]) { const g = makers[type](); g.userData.perf = 'props'; scene.add(g); list.push(g); } list[i].visible = true; return list[i]; }
   function textTexture(label, bg = '#ff643b', fg = '#ffffff') {
     return canvasTexture(1024, 96, (ctx, w, h) => { ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h); ctx.fillStyle = fg; ctx.font = '900 64px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, w / 2, h / 2 + 3); ctx.fillStyle = '#ff643b'; ctx.fillRect(0, 0, w, 8); ctx.fillRect(0, h - 8, w, 8); });
   }
@@ -146,7 +159,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     const banner = new THREE.Mesh(new THREE.BoxGeometry(half * 2 + .6, 1.3, .22), new THREE.MeshStandardMaterial({map: textTexture('FINISH', '#123d59', '#ffffff'), roughness: .7}));
     banner.position.set(0, pipe.lipHeight + 5.7, 0); finish.add(banner);
     for (let i = 0; i < 26; i++) for (let j = 0; j < 2; j++) { const t = box(pipe.F * 2 / 26, .02, .6, (i + j) % 2 ? navy : white, finish, -pipe.F + (i + .5) * pipe.F * 2 / 26, .03, j * .6 - .3); t.castShadow = false; }
-    scene.add(finish); place(finish, course.length, 0, 0);
+    finish.userData.perf = 'finish'; scene.add(finish); place(finish, course.length, 0, 0);
   }
 
   // ---------- Riders ----------
@@ -165,6 +178,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   function rider(id,color){
     const root=new THREE.Group(),pivot=new THREE.Group(),inner=new THREE.Group();root.add(pivot);pivot.add(inner);pivot.position.y=PIVOT;inner.position.y=-PIVOT;scene.add(root);
     const maker=gltf?createProRider:createFallbackRider,actor=maker(gltf,id,color,scene,{cloneSkinned,mesh:riderMesh,geo:riderGeo,mat:riderMat,basic:opts=>new THREE.MeshBasicMaterial(opts),box:riderBox,dark:navy,silver:white,snowboard,contactTex,profile:{slope:.11},materials:riderMaterials});scene.remove(actor.root);inner.add(actor.root);
+    root.userData.perf=actor.shadow.userData.perf='riders';
     const r={root,pivot,inner,body:actor.body,shadow:actor.shadow,actor,bones:{},air:0,squash:0,grab:0,roll:0,crashAt:-1,hitAt:-10,wasHit:false};riders.set(id,r);return r;
   }
   for (const [id, color] of [['player', '#ce6545'], ['rival-1', '#bd974e'], ['rival-2', '#498b9d'], ['rival-3', '#746b96'], ['rival-4', '#a95d5b'], ['rival-5', '#7b8d5b']]) rider(id, color);
@@ -174,15 +188,15 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   const SNOW_MAX = Math.round(450 * Math.max(.2, look.snow)), snowOffsets = new Float32Array(SNOW_MAX * 3), snowPos = new Float32Array(SNOW_MAX * 3);
   for (let i = 0; i < SNOW_MAX; i++) { const a = rnd() * Math.PI * 2, d = 3 + rnd() * 27; snowOffsets[i * 3] = Math.cos(a) * d; snowOffsets[i * 3 + 1] = rnd() * 24 - 5; snowOffsets[i * 3 + 2] = Math.sin(a) * d; }
   const snowGeo = new THREE.BufferGeometry(); snowGeo.setAttribute('position', new THREE.BufferAttribute(snowPos, 3));
-  const snowfall = new THREE.Points(snowGeo, new THREE.PointsMaterial({color: '#ffffff', map: dot, size: .045 + look.snow * .1, transparent: true, opacity: .95, depthWrite: false})); snowfall.frustumCulled = false; scene.add(snowfall);
+  const snowfall = new THREE.Points(snowGeo, new THREE.PointsMaterial({color: '#ffffff', map: dot, size: .045 + look.snow * .1, transparent: true, opacity: .95, depthWrite: false})); snowfall.frustumCulled = false; snowfall.userData.perf = 'effects'; scene.add(snowfall);
   const snowSpeed = 1.6 + look.snow * 2.6, wind = look.snow > .8 ? 3.2 : .6;
   const trailGeo = new THREE.BufferGeometry(), trailPositions = new Float32Array(140 * 3),trailAge=new Float32Array(140); trailGeo.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));trailGeo.setAttribute('powderAge',new THREE.BufferAttribute(trailAge,1));
   const powderMat=new THREE.PointsMaterial({color:'#f2f7fa',map:dot,size:.23,transparent:true,opacity:.55,depthWrite:false});powderMat.onBeforeCompile=s=>{s.vertexShader='attribute float powderAge; varying float vPowderAge;\n'+s.vertexShader;s.vertexShader=s.vertexShader.replace('gl_PointSize = size;','vPowderAge=powderAge;gl_PointSize=size*(.55+powderAge*1.4);');s.fragmentShader='varying float vPowderAge;\n'+s.fragmentShader;s.fragmentShader=s.fragmentShader.replace('vec4 diffuseColor = vec4( diffuse, opacity );','vec4 diffuseColor=vec4(diffuse,opacity*pow(1.-vPowderAge,1.7));');};powderMat.customProgramCacheKey=()=> 'alpine-powder-v7';
-  const spray = new THREE.Points(trailGeo,powderMat); spray.frustumCulled = false; scene.add(spray);
+  const spray = new THREE.Points(trailGeo,powderMat); spray.frustumCulled = false; spray.userData.perf = 'effects'; scene.add(spray);
   // Short bursts: gold sparkles for coins, snow puffs for crashes.
   const BURST = 120, burstPos = new Float32Array(BURST * 3), burstCol = new Float32Array(BURST * 3), burstVel = new Float32Array(BURST * 3), burstLife = new Float32Array(BURST); let burstNext = 0;
   const burstGeo = new THREE.BufferGeometry(); burstGeo.setAttribute('position', new THREE.BufferAttribute(burstPos, 3)); burstGeo.setAttribute('color', new THREE.BufferAttribute(burstCol, 3));
-  const bursts = new THREE.Points(burstGeo, new THREE.PointsMaterial({size: .3, map: dot, vertexColors: true, transparent: true, depthWrite: false})); bursts.frustumCulled = false; scene.add(bursts);
+  const bursts = new THREE.Points(burstGeo, new THREE.PointsMaterial({size: .3, map: dot, vertexColors: true, transparent: true, depthWrite: false})); bursts.frustumCulled = false; bursts.userData.perf = 'effects'; scene.add(bursts);
   for (let i = 0; i < BURST; i++) burstPos[i * 3 + 1] = -1e5;
   const sparkleColor = new THREE.Color('#ffd34d'), puffColor = new THREE.Color('#ffffff');
   function burst(at, color, count, speed) {
@@ -203,18 +217,42 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   const target = new THREE.Vector3(), camAt = new THREE.Vector3(), P = new THREE.Vector3();
   // Board grooves record actual engine positions, including the deterministic review replay.
   const trackCapacity=4200,trackVertices=new Float32Array(trackCapacity*18),trackGeo=new THREE.BufferGeometry();trackGeo.setAttribute('position',new THREE.BufferAttribute(trackVertices,3));trackGeo.setDrawRange(0,0);
-  const trackMesh=new THREE.Mesh(trackGeo,new THREE.MeshBasicMaterial({color:'#6f8b99',transparent:true,opacity:.085,depthWrite:false,side:THREE.DoubleSide}));trackMesh.frustumCulled=false;scene.add(trackMesh);let trackCount=0,trackNext=0;const previousTracks=new Map();
-  function rememberTracks(state){for(const r of [state.player,...(state.rivals||[])]){const id=r.id||'player',s=r.s??state.player.s-r.z,old=previousTracks.get(id);if(r.airborne){previousTracks.delete(id);continue;}if(old&&s>old.s+.18&&s-old.s<5){const p=[],out=new THREE.Vector3();for(const [ss,xx] of [[old.s,old.x-.055],[s,r.x-.055],[old.s,old.x+.055],[s,r.x-.055],[s,r.x+.055],[old.s,old.x+.055]]){worldPoint(ss,xx,surfaceHeight(xx,pipe)+.013,out);p.push(out.x,out.y,out.z);}trackVertices.set(p,trackNext*18);trackNext=(trackNext+1)%trackCapacity;trackCount=Math.min(trackCapacity,trackCount+1);trackGeo.setDrawRange(0,trackCount*6);trackGeo.attributes.position.needsUpdate=true;}if(!old||s>old.s+.18)previousTracks.set(id,{s,x:r.x});}}
-  function seedTracks(frames){previousTracks.clear();trackCount=trackNext=0;for(const state of frames)rememberTracks(state);}
+  const trackMesh=new THREE.Mesh(trackGeo,new THREE.MeshBasicMaterial({color:'#6f8b99',transparent:true,opacity:.085,depthWrite:false,side:THREE.DoubleSide}));trackMesh.frustumCulled=false;trackMesh.userData.perf='effects';scene.add(trackMesh);let trackCount=0,trackNext=0,trackFull=false;const previousTracks=new Map(),trackAttr=trackGeo.attributes.position;
+  function rememberTracks(state,bulk=false){for(const r of [state.player,...(state.rivals||[])]){const id=r.id||'player',s=r.s??state.player.s-r.z,old=previousTracks.get(id);if(r.airborne){previousTracks.delete(id);continue;}if(old&&s>old.s+.18&&s-old.s<5){const p=[],out=new THREE.Vector3();for(const [ss,xx] of [[old.s,old.x-.055],[s,r.x-.055],[old.s,old.x+.055],[s,r.x-.055],[s,r.x+.055],[old.s,old.x+.055]]){worldPoint(ss,xx,surfaceHeight(xx,pipe)+.013,out);p.push(out.x,out.y,out.z);}trackVertices.set(p,trackNext*18);if(!bulk)trackAttr.addUpdateRange(trackNext*18,18);trackNext=(trackNext+1)%trackCapacity;trackCount=Math.min(trackCapacity,trackCount+1);trackGeo.setDrawRange(0,trackCount*6);trackAttr.needsUpdate=true;}if(!old||s>old.s+.18)previousTracks.set(id,{s,x:r.x});}}
+  function seedTracks(frames){previousTracks.clear();trackCount=trackNext=0;for(const state of frames)rememberTracks(state,true);trackFull=true;}
   let lastTrackS=0;
   const reduced = globalThis.matchMedia?.('(prefers-reduced-motion:reduce)').matches ?? false;
   function resize(){if(disposed)return;const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
   ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
+  // Warm the shader cache while the loading card is up: every material in the scene, including the
+  // props and coins that first appear mid-race, compiles now rather than on the first racing frame.
+  for (const type of Object.keys(makers)) prop(type, {rock: 0, gate: 0, boost: 0, ramp: 0});
+  for (const list of Object.values(pools)) for (const g of list) g.visible = false;
+  try { if (renderer.compileAsync) await renderer.compileAsync(scene, camera); else renderer.compile(scene, camera); } catch {}
+  if (isDisposed()) { disposeAll(); throw Object.assign(new Error('alpine.disposed'), {disposed: true}); }
+  warmUp();
   let canonicalPresentation=false;
   let lastT = 0, fov = 50, camLat = 0, camRise = 0, lastCoins = new Map(), snowAt = 0;
   const ease = p => p < .5 ? 2 * p * p : 1 - (2 - 2 * p) ** 2 / 2;
   const crashSeconds = physics.crashSeconds ?? 1.4;
 
+  /** One hidden frame under the loading card with every rider, coin, prop and particle system drawn
+   * inside the camera and the shadow box. Compiling programs is not enough: GPU drivers (and SwiftShader)
+   * finish pipeline state on the first draw, which used to land on the first racing frame as a long hitch. */
+  function warmUp() {
+    worldPoint(0, 0, 0, P); sun.target.position.copy(P); sun.position.set(P.x - 32, P.y + 25, P.z - 38);
+    worldPoint(-6, .4, 2.6, camera.position); worldPoint(12, 0, 1, target); camera.lookAt(target); camera.updateProjectionMatrix();
+    let i = 0; for (const r of riders.values()) { r.root.visible = r.shadow.visible = true; place(r.root, 4 + i * 1.5, (i % 3 - 1) * 2.4, .03); place(r.shadow, 4 + i * 1.5, (i % 3 - 1) * 2.4, .05); r.shadow.rotateX(-Math.PI / 2); if (r.actor) r.actor.pose(0, .3, .5, .2, .4); i++; }
+    const used = {rock: 0, gate: 0, boost: 0, ramp: 0}; let k = 0; for (const type of Object.keys(makers)) { const g = prop(type, used); place(g, 10 + k * 4, (k % 2 ? 1 : -1) * 3, 0); k++; }
+    for (let c = 0; c < COIN_POOL; c++) { worldPoint(6 + c * .2, (c % 5 - 2) * .8, .9, vec); matrix.compose(vec, quat.setFromEuler(euler.set(0, c, 0)), scl.setScalar(1)); coins.setMatrixAt(c, matrix); }
+    coins.count = COIN_POOL; coins.instanceMatrix.needsUpdate = true; worldPoint(4, 0, .4, P); burst(P, sparkleColor, 8, 1); burst(P, puffColor, 8, 1); stepBursts(1 / 60);
+    for (let n = 0; n < 140; n++) { worldPoint(4 - n * .02, 0, .1, vec); trailPositions.set([vec.x, vec.y, vec.z], n * 3); trailAge[n] = n / 140; }
+    trailGeo.attributes.position.needsUpdate = true; trailGeo.attributes.powderAge.needsUpdate = true; spray.visible = true;
+    art.update(0, look.fogFar, camera, quality); for (const c of chunks) c.visible = c.userData.s1 > -70 && c.userData.s0 < look.fogFar + 30;
+    renderer.render(scene, camera);
+    spray.visible = false; coins.count = 0; for (const list of Object.values(pools)) for (const g of list) g.visible = false;
+    for (const r of riders.values()) r.root.visible = r.shadow.visible = false;
+  }
   function render(canonicalState, presentation = canonicalState.presentation) {
     if (disposed) return;
     // Pausing preserves the exact scene pose; UI overlays are managed by the session.
@@ -226,6 +264,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     const player = state.player, ps = player.s ?? 0;
     if(ps<lastTrackS-2){seedTracks([]);for(const r of riders.values()){r.air=r.squash=r.grab=r.roll=0;r.wasHit=false;r.hitAt=-10;r.crashAt=-1;}camLat=player.x*.98;camRise=0;}
     lastTrackS=ps;rememberTracks(canonicalState);
+    if(trackFull){trackAttr.clearUpdateRanges();trackAttr.needsUpdate=true;trackFull=false;}
     placeScenery(ps, wall);scenery.update(ps,look.fogFar);
     for (const c of chunks) c.visible = c.userData.s1 > ps - 70 && c.userData.s0 < ps + look.fogFar + 30;
     for (const [id, r] of riders) {
@@ -276,7 +315,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
       const g = prop(o.type, used); place(g, os, o.x, 0);
       if (o.type === 'rock') g.scale.setScalar((o.radius ?? .7) / .7);
     }
-    coins.count = coinCount; coins.instanceMatrix.needsUpdate = true;
+    coins.count = coinCount; coins.instanceMatrix.clearUpdateRanges(); if (coinCount) { coins.instanceMatrix.addUpdateRange(0, coinCount * 16); coins.instanceMatrix.needsUpdate = true; }
     // A coin that vanishes beside the player was collected: sparkle where it was.
     for (const [id, c] of lastCoins) if (!seen.has(id) && Math.abs(c.s - ps) < 4 && playing) { worldPoint(c.s, c.x, c.h, P); burst(P, sparkleColor, 9, 2.4); }
     lastCoins = seen;
@@ -318,7 +357,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     snowGeo.setDrawRange(0, count); snowGeo.attributes.position.needsUpdate = true;
     renderer.render(scene, camera);
   }
-  function setQuality(value) { if (disposed) return; quality = value === 'low' ? 'low' : 'high'; renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, quality === 'low' ? lowDpr : highDpr)); renderer.shadowMap.enabled = quality !== 'low'; scene.traverse(o => { if (o.material) for (const m of [].concat(o.material)) m.needsUpdate = true; }); resize(); }
+  function setQuality(value) { if (disposed) return; const next = value === 'low' ? 'low' : 'high'; if (next === quality) return; quality = next; applyQuality(); const t0 = performance.now(); resize(); lastSwitch.resizeMs = +(performance.now() - t0).toFixed(2); lastSwitch.totalMs = +(lastSwitch.totalMs + lastSwitch.resizeMs).toFixed(2); }
   function disposeAll() {
     if (disposed) return; disposed = true; ro?.disconnect();
     const materials = new Set(), geometries = new Set();
@@ -329,12 +368,29 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     sun.shadow.map?.dispose();envTarget.dispose(); renderer.renderLists.dispose(); renderer.dispose();renderer.forceContextLoss();
     if (!canvas) renderer.domElement.remove();
   }
+  /** Dev/perf audit: triangles the GPU processes per frame by category (perf tags on objects),
+   * in the colour pass and in the shadow pass, with the renderer's own culling rules. */
+  function audit() {
+    const camFrustum = new THREE.Frustum().setFromProjectionMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
+    const shadowCam = sun.shadow.camera, shadowFrustum = new THREE.Frustum().setFromProjectionMatrix(new THREE.Matrix4().multiplyMatrices(shadowCam.projectionMatrix, shadowCam.matrixWorldInverse));
+    const out = {}, tagOf = o => { for (let n = o; n; n = n.parent) if (n.userData?.perf) return n.userData.perf; return 'other'; };
+    scene.traverseVisible(o => {
+      if (!o.isMesh && !o.isPoints) return;
+      const g = o.geometry, prims = g.index ? g.index.count : g.attributes.position?.count || 0, range = g.drawRange.count === Infinity ? prims : Math.min(prims, g.drawRange.count);
+      const tris = o.isPoints ? 0 : range / 3 * (o.isInstancedMesh ? o.count : 1), points = o.isPoints ? range : 0;
+      const row = out[tagOf(o)] ||= {objects: 0, tris: 0, shadowTris: 0, points: 0};
+      if (!o.frustumCulled || camFrustum.intersectsObject(o)) { row.objects++; row.tris += tris; row.points += points; }
+      if (renderer.shadowMap.enabled && o.castShadow && (!o.frustumCulled || shadowFrustum.intersectsObject(o))) row.shadowTris += tris;
+    });
+    for (const row of Object.values(out)) { row.tris = Math.round(row.tris); row.shadowTris = Math.round(row.shadowTris); }
+    return {categories: out, shadowMapSize: sun.shadow.mapSize.x, shadowsEnabled: renderer.shadowMap.enabled, programs: renderer.info.programs?.length ?? null};
+  }
   return {
-    render, seedTracks, setQuality, dispose: disposeAll, canvas: renderer.domElement,
+    render, seedTracks, setQuality, audit, dispose: disposeAll, canvas: renderer.domElement,
     get quality() { return quality; },
     get modelError() { return modelError; },
     get rockTextureError(){return rockTextureError;},
     mode: 'alpine-feel-v9',
-    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, ...art.metrics(),quality, disposed, mode: gltf ? 'model' : 'primitive',rockTexture:granite.image?'loaded':'procedural',mobileProfile:mobile,pixelRatio:renderer.getPixelRatio(),fov:+fov.toFixed(3),interpolation:!!canonicalPresentation}; },
+    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, ...art.metrics(),quality, disposed, mode: gltf ? 'model' : 'primitive',rockTexture:granite.image?'loaded':'procedural',mobileProfile:mobile,pixelRatio:renderer.getPixelRatio(),fov:+fov.toFixed(3),interpolation:!!canonicalPresentation,lastSwitch}; },
   };
 }

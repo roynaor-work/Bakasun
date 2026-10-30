@@ -2,6 +2,7 @@ import {createAlpineEngine} from './alpine-engine.mjs?v=island-naval-aim-2026103
 import {createAlpineControls} from './alpine-controls.mjs?v=island-naval-aim-20261030-1';
 import {createAlpineAudio} from './alpine-audio.mjs?v=island-naval-aim-20261030-1';
 import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-naval-aim-20261030-1';
+import {createQualityGovernor} from './alpine-quality.mjs';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
@@ -28,7 +29,7 @@ export function runAlpineSession(ctx) {
   const records = loadRecords(storage, balance.records);
   let audio; try { audio = createAlpineAudio({storage}); } catch { audio = createAlpineAudio({storage: null, AudioContext: null}); }
   let view = null, input = null, frame, last = 0, paused = false, disposed = false, finished = false, renderError = null, loadTimer, quality = 'high';
-  let frames = 0, frameMs = 0, lastSnapshot = engine.snapshot(), recordOutcome = null, calloutUntil = 0, dom = null;
+  let governor = null, lastSnapshot = engine.snapshot(), recordOutcome = null, calloutUntil = 0, dom = null;
   const abort = new AbortController();
   const session = {
     setPaused(value) {
@@ -45,7 +46,7 @@ export function runAlpineSession(ctx) {
     get snapshot() {
       return {phase: engine.phase, paused, disposed, loaded: Boolean(view), error: renderError, quality, stage: stageNumber, trackId: track.id,
         frame: disposed ? null : engine.snapshot(), records: {status: records.status, best: records.data.best[track.id] || null}, recordOutcome,
-        renderMetrics: view?.metrics(), audioMetrics: audio.metrics(), input: input ? {enabled: input.enabled, dragging: input.dragging} : null};
+        renderMetrics: view?.metrics(), audioMetrics: audio.metrics(), qualityGovernor: governor?.metrics() ?? null, input: input ? {enabled: input.enabled, dragging: input.dragging} : null};
     },
   };
   const ready = () => !ctx.canvas || Boolean(view);
@@ -140,6 +141,7 @@ export function runAlpineSession(ctx) {
   }
   const params = new URLSearchParams(globalThis.location?.search || '');
   if (params.get('quality') === 'low') quality = 'low';
+  governor = createQualityGovernor(balance.render, quality);
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; fail(t('alpine.loadSlow')); } }, 25000);
   import('./alpine-view.mjs?v=island-naval-aim-20261030-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(loaded => {
@@ -173,25 +175,26 @@ export function runAlpineSession(ctx) {
       else if (e.type === 'finish') audio.cue('finish');
     }
   }
-  let shownRank = '', shownSpeed = '', shownTime = '', shownCount = '', shownScore = '', shownCoins = '';
+  let shownRank = '', shownSpeed = '', shownTime = '', shownCount = '', shownScore = '', shownCoins = '', shownDistance = '', shownProgress = '', shownTank = '';
+  const barList = [...bars.children], setData = (key, value) => { if (screen.dataset[key] !== value) screen.dataset[key] = value; };
   function updateHud(snap) {
     const r = String(snap.rank).padStart(2, '0'); if (r !== shownRank) { shownRank = r; rank.textContent = r; }
-    distanceValue.textContent = Math.round(snap.remainingM).toLocaleString('en-US');
-    progressFill.style.width = `${Math.min(100, snap.distanceM / snap.trackLength * 100).toFixed(1)}%`;
+    const remaining = Math.round(snap.remainingM); if (remaining !== shownDistance) { shownDistance = remaining; distanceValue.textContent = remaining.toLocaleString('en-US'); }
+    const progressText = `${Math.min(100, snap.distanceM / snap.trackLength * 100).toFixed(1)}%`; if (progressText !== shownProgress) { shownProgress = progressText; progressFill.style.width = progressText; }
     const clock = formatRaceTime(snap.timeMs); if (clock !== shownTime) { shownTime = clock; timer.textContent = clock; }
     const kmh = String(snap.speedKmh); if (kmh !== shownSpeed) { shownSpeed = kmh; speedValue.textContent = kmh; }
     const fraction = Math.min(1, snap.speedKmh / (balance.physics.boostSpeed * 3.6));
-    [...bars.children].forEach((bar, i) => bar.classList.toggle('on', fraction > i / 6 + .02));
-    boostButton.classList.toggle('active', !!snap.player.boosting); boostButton.dataset.ready = String(!!snap.boostReady);
-    boostButton.style.setProperty('--tank', String(snap.boostFraction ?? 0));
+    barList.forEach((bar, i) => bar.classList.toggle('on', fraction > i / 6 + .02));
+    boostButton.classList.toggle('active', !!snap.player.boosting); const boostReady = String(!!snap.boostReady); if (boostButton.dataset.ready !== boostReady) boostButton.dataset.ready = boostReady;
+    const tank = (snap.boostFraction ?? 0).toFixed(3); if (tank !== shownTank) { shownTank = tank; boostButton.style.setProperty('--tank', tank); }
     const count = snap.phase === 'countdown' ? String(snap.countdown) : ''; if (count !== shownCount) { shownCount = count; countdown.textContent = count; countdown.hidden = !count; }
-    screen.dataset.boosting = String(!!snap.player.boosting); screen.dataset.hit = String(!!snap.player.hit);
+    setData('boosting', String(!!snap.player.boosting)); setData('hit', String(!!snap.player.hit));
     hint.hidden = snap.timeMs > 6000;
     const score = (snap.score ?? 0).toLocaleString('en-US'); if (score !== shownScore) { shownScore = score; scoreValue.textContent = score; }
     const coinText = String(snap.coins ?? 0); if (coinText !== shownCoins) { shownCoins = coinText; coinValue.textContent = coinText; }
     coinBox.classList.toggle('pulse', snap.timeMs / 1000 < coinPulse);
     const ready = String(!!snap.trickReady); for (const b of trickButtons) if (b.dataset.ready !== ready) b.dataset.ready = ready;
-    screen.dataset.crashed = String(!!snap.player.crashed);
+    setData('crashed', String(!!snap.player.crashed));
   }
 
   function tick(at) {
@@ -204,7 +207,7 @@ export function runAlpineSession(ctx) {
       if (sample.boost) engine.command({type: 'boost'});
       if (sample.trick) engine.command({type: 'trick', id: sample.trick});
       engine.step(dt);
-      if (ms > 0 && engine.phase === 'racing') { frames++; frameMs += ms; if (frames >= balance.render.qualitySampleFrames) { if (quality === 'high' && frameMs / frames > balance.render.slowFrameMs) { quality = 'low'; view.setQuality('low'); } frames = 0; frameMs = 0; } }
+      if (ms > 0 && engine.phase === 'racing' && governor.observe(ms) === 'low') { quality = 'low'; view.setQuality('low'); }
     }
     const snap = lastSnapshot = engine.snapshot(), now = snap.timeMs / 1000;
     if (snap.phase !== app.dataset.phase && snap.phase !== 'paused') setPhase(snap.phase);
