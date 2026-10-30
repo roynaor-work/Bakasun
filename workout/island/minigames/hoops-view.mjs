@@ -4,7 +4,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-perf-20261030-1';
 import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-perf-20261030-1';
-import {ballTexture} from './hoops-textures.mjs?v=island-perf-20261030-1';
+import {replaceArenaAssets} from './hoops-models.mjs';
 import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-perf-20261030-1';
 
 const lerp=(a,b,t)=>a+(b-a)*t;
@@ -19,6 +19,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const camera=new THREE.PerspectiveCamera(V.fov,1,0.1,200);
  const looks=teams.map(t=>t.look);
  const {root:arena,dyn}=buildArena(court,{home:looks[0],away:looks[1],quality,anisotropy:Math.min(8,renderer.capabilities.getMaxAnisotropy())});
+ const models=await replaceArenaAssets(arena,dyn,court,{assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())});
  scene.add(arena);
  // environment reflections from a dim copy of the arena lights
  const pm=new THREE.PMREMGenerator(renderer);
@@ -46,8 +47,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const interp=createInterpPool();
 
  // the ball
- const ballMat=new THREE.MeshStandardMaterial({map:ballTexture(512),roughness:0.62,metalness:0});
- const ball=new THREE.Mesh(new THREE.SphereGeometry(court.ballR,32,20),ballMat);ball.castShadow=true;scene.add(ball);
+ const ball=models.ball;scene.add(ball);
  const ballShadow=new THREE.Mesh(new THREE.CircleGeometry(court.ballR*1.2,24),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:0.35,depthWrite:false}));ballShadow.rotation.x=-Math.PI/2;scene.add(ballShadow);
  // controlled-player ring and pass target marker
  const ringMat=new THREE.MeshBasicMaterial({color:0xffd23f,transparent:true,opacity:0.9,depthWrite:false});
@@ -214,7 +214,13 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  function project(x,y,z){v.set(x,y,z).project(camera);return {x:(v.x+1)/2*state.w,y:(1-v.y)/2*state.h,visible:v.z<1};}
  function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape};}
  function startReplay(frames,done,speed=0.6){if(!frames?.length)return false;state.replay={frames,t:0,speed,done};return true;}
- function dispose(){for(const av of avatars.values())av.dispose();renderer.dispose();scene.traverse(o=>{o.geometry?.dispose?.();});pm.dispose();}
+ function dispose(){
+  for(const av of avatars.values())av.dispose();assets.dispose();models.dispose();
+  const geometries=new Set(),materials=new Set(),textures=new Set();
+  scene.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of (o.material?Array.isArray(o.material)?o.material:[o.material]:[])){materials.add(m);for(const x of Object.values(m))if(x?.isTexture)textures.add(x);}});
+  for(const x of geometries)x.dispose();for(const x of materials)x.dispose();for(const x of textures)x.dispose();
+  scene.environment?.dispose();renderer.dispose();pm.dispose();
+ }
  function setCameraOverride(pos,look,fov){state.override=pos?{pos:new THREE.Vector3(pos.x,pos.y,pos.z),look:new THREE.Vector3(look.x,look.y,look.z),fov}:null;}
  return {snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,dispose,get replaying(){return !!state.replay;},renderer,scene,camera,avatars};
 }

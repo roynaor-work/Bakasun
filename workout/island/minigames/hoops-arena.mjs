@@ -40,7 +40,7 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
  root.add(floor);
  const apronMap=wood.map.clone();apronMap.repeat.set(apronX*2/1.6,apronZ*2/1.6);apronMap.needsUpdate=true;
  const apron=new THREE.Mesh(new THREE.PlaneGeometry(apronX*2,apronZ*2),new THREE.MeshPhysicalMaterial({map:apronMap,color:new THREE.Color(home.secondaryDark||'#5a2f1a'),roughness:0.6,clearcoat:0.6,clearcoatRoughness:0.2}));
- apron.rotation.x=-Math.PI/2;apron.position.y=-0.004;apron.receiveShadow=true;root.add(apron);
+ apron.name='court-apron';apron.rotation.x=-Math.PI/2;apron.position.y=-0.004;apron.receiveShadow=true;root.add(apron);
 
  // painted areas (team colour, slightly glossy), centre logo
  const paintMat=new THREE.MeshPhysicalMaterial({color:new THREE.Color(home.primary),roughness:0.5,clearcoat:0.8,clearcoatRoughness:0.15,transparent:true,opacity:0.92});
@@ -81,7 +81,7 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
  const orange=new THREE.MeshStandardMaterial({color:0xe2541a,roughness:0.35,metalness:0.55});
  dyn.nets=[];dyn.shotClocks=[];
  for(const s of [1,-1]){
-  const g=new THREE.Group();
+  const g=new THREE.Group();g.name='basket-'+s;
   const baseX=s*(hx+1.6);
   const base=new THREE.Mesh(new THREE.BoxGeometry(1.4,1.05,1.5),padMat);base.position.set(baseX+s*0.3,0.52,0);base.castShadow=true;base.receiveShadow=true;g.add(base);
   const padFront=new THREE.Mesh(new THREE.BoxGeometry(0.35,1.0,1.4),padMat);padFront.position.set(baseX-s*0.5,0.5,0);padFront.castShadow=true;g.add(padFront);
@@ -128,7 +128,7 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
  for(const s of [1,-1]){const rb=new THREE.Mesh(new THREE.PlaneGeometry(apronZ*2,0.9),ledMat);rb.position.set(s*(apronX+0.2),0.45,0);rb.rotation.y=s>0?-Math.PI/2:Math.PI/2;root.add(rb);}
 
  // ---------- stands and crowd ----------
- const stands=new THREE.Group();
+ const stands=new THREE.Group();stands.name='stands';
  const stepMat=new THREE.MeshStandardMaterial({color:0x1b1e26,roughness:0.85});
  const seatMat=new THREE.MeshStandardMaterial({color:new THREE.Color(home.primary).multiplyScalar(0.55),roughness:0.7});
  // lower bowl plus an upper deck behind a fascia, so no dark wall shows above the crowd
@@ -155,14 +155,14 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
  dyn.crowdSpots=crowdSpots;
 
  // walls, ceiling, light rig, centre-hung scoreboard
- const shell=new THREE.Mesh(new THREE.CylinderGeometry(42,42,26,48,1,true),new THREE.MeshStandardMaterial({color:0x07080c,roughness:0.95,side:THREE.BackSide}));shell.position.y=12;shell.scale.set(1,1,0.72);root.add(shell);
- const ceil=new THREE.Mesh(new THREE.CircleGeometry(42,48),new THREE.MeshStandardMaterial({color:0x050608,roughness:1,side:THREE.BackSide}));ceil.rotation.x=-Math.PI/2;ceil.position.y=24;ceil.scale.set(1,0.72,1);root.add(ceil);
+ const shell=new THREE.Mesh(new THREE.CylinderGeometry(42,42,26,48,1,true),new THREE.MeshStandardMaterial({color:0x07080c,roughness:0.95,side:THREE.BackSide}));shell.name='arena-shell';shell.position.y=12;shell.scale.set(1,1,0.72);root.add(shell);
+ const ceil=new THREE.Mesh(new THREE.CircleGeometry(42,48),new THREE.MeshStandardMaterial({color:0x050608,roughness:1,side:THREE.BackSide}));ceil.name='arena-ceiling';ceil.rotation.x=-Math.PI/2;ceil.position.y=24;ceil.scale.set(1,0.72,1);root.add(ceil);
  const fixtureMat=new THREE.MeshBasicMaterial({color:0xfff6e8,toneMapped:false});
- const fixtures=new THREE.InstancedMesh(new THREE.BoxGeometry(1.2,0.15,0.5),fixtureMat,32);
+ const fixtures=new THREE.InstancedMesh(new THREE.BoxGeometry(1.2,0.15,0.5),fixtureMat,32);fixtures.name='arena-fixtures';
  for(let i=0;i<32;i++){const a=i/32*Math.PI*2;m4.makeTranslation(Math.cos(a)*16,19.5,Math.sin(a)*11);fixtures.setMatrixAt(i,m4);}
  root.add(fixtures);
  const sb=displayCanvas(512,256);dyn.scoreboard=sb;
- const cube=new THREE.Group();cube.position.set(0,13.5,0);
+ const cube=new THREE.Group();cube.name='arena-scoreboard';cube.position.set(0,13.5,0);
  const cubeBody=new THREE.Mesh(new THREE.BoxGeometry(4.8,2.8,4.8),new THREE.MeshStandardMaterial({color:0x101218,roughness:0.5,metalness:0.4}));cube.add(cubeBody);
  for(let i=0;i<4;i++){const f=new THREE.Mesh(new THREE.PlaneGeometry(4.4,2.2),new THREE.MeshBasicMaterial({map:sb.texture,toneMapped:false}));f.position.set(Math.sin(i*Math.PI/2)*2.42,0,Math.cos(i*Math.PI/2)*2.42);f.rotation.y=i*Math.PI/2;cube.add(f);}
  const ring=new THREE.Mesh(new THREE.CylinderGeometry(3.5,3.5,0.5,48,1,true),ledMat);ring.position.y=-1.8;cube.add(ring);
