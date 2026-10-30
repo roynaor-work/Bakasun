@@ -5,7 +5,7 @@ export function interpolateRider(previous, current, alpha) {
   if (!previous || previous.id !== current.id) return current;
   const a = Math.max(0, Math.min(1, alpha));
   const frame = {...current};
-  for (const key of ['s','x','z','height','lean']) if (Number.isFinite(previous[key]) && Number.isFinite(current[key])) frame[key] = previous[key] + (current[key] - previous[key]) * a;
+  for (const key of ['s','x','z','height','lean','bank']) if (Number.isFinite(previous[key]) && Number.isFinite(current[key])) frame[key] = previous[key] + (current[key] - previous[key]) * a;
   if (previous.trick?.id === current.trick?.id && current.trick) frame.trick = {...current.trick, progress: previous.trick.progress + (current.trick.progress - previous.trick.progress) * a};
   return frame;
 }

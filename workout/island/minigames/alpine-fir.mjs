@@ -1,10 +1,11 @@
 import * as T from '../vendor/three.module.js';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-soccer-league-20261029-1';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-alpine-sim-20261030-1';
 
 const hash=(a,b,c=0)=>{const q=Math.sin(a*127.1+b*311.7+c*57.3)*43758.5453;return q-Math.floor(q);};
 function tint(g,snow,bark,variant){g.deleteAttribute('uv');const p=g.attributes.position,c=new Float32Array(p.count*3),base=new T.Color(snow?'#ffffff':bark?'#554a3a':'#305449');for(let i=0;i<p.count;i++){const variation=.88+.16*hash(Math.round(p.getX(i)*13),Math.round(p.getZ(i)*11),variant);c.set([base.r*variation,base.g*variation,base.b*variation],i*3);}g.setAttribute('color',new T.BufferAttribute(c,3));return g;}
 function firGeometry(snow,variant,far){
- const parts=[],layers=far?7:10,branches=far?4:6,NX=far?3:5,NR=far?4:6;
+ // Near trees: about 2k triangles per mesh (was 3.7k); the branch silhouette and sag are kept.
+ const parts=[],layers=far?6:9,branches=far?4:6,NX=far?2:4,NR=far?3:5;
  if(!snow){const g=new T.CylinderGeometry(.035,.12,7,6);g.translate(0,3.5,0);parts.push(tint(g,false,true,variant));}
  for(let k=0;k<layers;k++)for(let b=0;b<branches;b++){
   if(hash(k,b,variant+1)<.10&&k>0)continue;
@@ -37,7 +38,9 @@ export function createFirForest(scene,{course,deckEdge,terrainY,place,density=1,
  for(const [lodIndex,tr] of trees.entries()){tr.lodIndex=lodIndex;place(dummy,tr.s,tr.x,terrainY(tr.s,Math.abs(tr.x),Math.sign(tr.x))-.25,tr.roll,tr.rot);dummy.scale.set(tr.k*tr.width,tr.k,tr.k*tr.width);dummy.updateMatrix();tr.matrix=dummy.matrix.clone();}
  for(const tr of trees)clearance=Math.min(clearance,Math.abs(tr.x)-deckEdge-(2.25*tr.k*tr.width+.35));
  return {update(ps,far,quality){const windowKey=Math.floor(ps/2)+':'+quality+':'+far;if(windowKey===lastWindow)return;lastWindow=windowKey;for(const p of pools)p.count=0;const limit=Math.min(far,quality==='low'?165:285);let index=0;
-  for(const tr of trees){if(tr.s<ps-35||tr.s>ps+limit)continue;if(quality==='low'&&tr.lodIndex%2)continue;const distant=quality==='low'||Math.abs(tr.s-ps)>(mobile?65:95),p=pools[(distant?3:0)+tr.variant];if(p.count>=360)continue;
+  // Only the near pool casts shadows, and an instanced mesh draws every instance in the shadow
+  // pass, so the detailed trees stay close (behind the camera only as far as shadows reach).
+  for(const tr of trees){if(tr.s<ps-24||tr.s>ps+limit)continue;if(quality==='low'&&tr.lodIndex%2)continue;const distant=quality==='low'||tr.s-ps>(mobile?40:55)||tr.s<ps-12,p=pools[(distant?3:0)+tr.variant];if(p.count>=360)continue;
    p.foliage.setMatrixAt(p.count,tr.matrix);p.snow.setMatrixAt(p.count,tr.matrix);p.count++;
   }
   nearCount=farCount=0;for(const p of pools){for(const m of [p.foliage,p.snow]){m.count=p.count;m.visible=p.count>0;m.instanceMatrix.needsUpdate=true;}if(p.far)farCount+=p.count;else nearCount+=p.count;}

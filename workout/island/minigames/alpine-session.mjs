@@ -1,7 +1,7 @@
-import {createAlpineEngine} from './alpine-engine.mjs?v=island-soccer-league-20261029-1';
-import {createAlpineControls} from './alpine-controls.mjs?v=island-soccer-league-20261029-1';
-import {createAlpineAudio} from './alpine-audio.mjs?v=island-soccer-league-20261029-1';
-import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-soccer-league-20261029-1';
+import {createAlpineEngine} from './alpine-engine.mjs?v=island-alpine-sim-20261030-1';
+import {createAlpineControls} from './alpine-controls.mjs?v=island-alpine-sim-20261030-1';
+import {createAlpineAudio} from './alpine-audio.mjs?v=island-alpine-sim-20261030-1';
+import {loadRecords,recordRun,formatRaceTime,missesOn} from './alpine-records.mjs?v=island-alpine-sim-20261030-1';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
@@ -22,10 +22,12 @@ const TRICK_NAMES = {grab: 'GRAB', spin: 'SPIN 360', flip: 'BACKFLIP', combo: 'C
  * finished race once through ctx.finish. Without a canvas it runs headless (tests). */
 export function runAlpineSession(ctx) {
   const balance = ctx.balance, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
-  const engine = createAlpineEngine({balance, stage: stageNumber, seed: ctx.seed, equipment: ctx.equipment, power: ctx.power});
-  const level = engine.level, track = engine.track;
   let storage = null; try { storage = ctx.storage === undefined ? globalThis.localStorage : ctx.storage; } catch {}
   const records = loadRecords(storage, balance.records);
+  // Each lost race in a row on this course adds catch-up help (rivals far ahead ease off).
+  const trackId = balance.levels[stageNumber - 1]?.trackId, assist = Math.min(1, missesOn(records, trackId) * (balance.physics.assist?.perMiss ?? 0));
+  const engine = createAlpineEngine({balance, stage: stageNumber, seed: ctx.seed, equipment: ctx.equipment, power: ctx.power, assist});
+  const level = engine.level, track = engine.track;
   let audio; try { audio = createAlpineAudio({storage}); } catch { audio = createAlpineAudio({storage: null, AudioContext: null}); }
   let view = null, input = null, frame, last = 0, paused = false, disposed = false, finished = false, renderError = null, loadTimer, quality = 'high';
   let frames = 0, frameMs = 0, lastSnapshot = engine.snapshot(), recordOutcome = null, calloutUntil = 0, dom = null;
@@ -43,7 +45,7 @@ export function runAlpineSession(ctx) {
       dom?.nodes.forEach(n => n.remove());
     },
     get snapshot() {
-      return {phase: engine.phase, paused, disposed, loaded: Boolean(view), error: renderError, quality, stage: stageNumber, trackId: track.id,
+      return {phase: engine.phase, paused, disposed, loaded: Boolean(view), error: renderError, quality, stage: stageNumber, trackId: track.id, assist,
         frame: disposed ? null : engine.snapshot(), records: {status: records.status, best: records.data.best[track.id] || null}, recordOutcome,
         renderMetrics: view?.metrics(), audioMetrics: audio.metrics(), input: input ? {enabled: input.enabled, dragging: input.dragging} : null};
     },
@@ -57,8 +59,8 @@ export function runAlpineSession(ctx) {
   const el = (tag, cls = '', text = '') => { const n = doc.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
   const svg = (paths, viewBox = '0 0 24 24') => { const s = doc.createElementNS(SVG_NS, 'svg'); s.setAttribute('viewBox', viewBox); s.setAttribute('aria-hidden', 'true'); s.innerHTML = paths; return s; };
   const ltr = text => { const b = el('bdi', 'alpine-ltr', text); b.dir = 'ltr'; return b; };
-  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-soccer-league-20261029-1', import.meta.url).href;
-  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-soccer-league-20261029-1', import.meta.url).href;
+  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-alpine-sim-20261030-1', import.meta.url).href;
+  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-alpine-sim-20261030-1', import.meta.url).href;
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
   const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
@@ -142,7 +144,7 @@ export function runAlpineSession(ctx) {
   if (params.get('quality') === 'low') quality = 'low';
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; fail(t('alpine.loadSlow')); } }, 25000);
-  import('./alpine-view.mjs?v=island-soccer-league-20261029-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(loaded => {
+  import('./alpine-view.mjs?v=island-alpine-sim-20261030-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(loaded => {
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
     clearTimeout(loadTimer); view = loaded; loading.hidden = true; startButton.disabled = false; app.dataset.render = loaded.mode;
@@ -170,6 +172,7 @@ export function runAlpineSession(ctx) {
       else if (e.type === 'coin') { audio.cue('coin'); coinPulse = now + .25; }
       else if (e.type === 'gate') { audio.cue('gate'); if (now > calloutUntil) showCallout(CALLOUTS.gate, now); }
       else if (e.type === 'overtake') { audio.cue('overtake'); if (now > calloutUntil) showCallout(CALLOUTS.overtake, now); status.textContent = t('alpine.status.rank', {rank: snap.rank}); }
+      else if (e.type === 'steep') { if (now > calloutUntil) showCallout('steep', now); }
       else if (e.type === 'finish') audio.cue('finish');
     }
   }

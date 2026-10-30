@@ -9,8 +9,13 @@ export function emptyRecords(cfg) { return {version: cfg.version, best: {}, runs
 
 export function validRecords(data, cfg) {
   return isObject(data) && data.version === cfg.version && isObject(data.best) && Object.entries(data.best).every(([id, row]) => /^[a-z][a-z-]*$/.test(id) && validBest(row)) &&
-    Array.isArray(data.runs) && data.runs.length <= cfg.runHistory && data.runs.every(id => typeof id === 'string' && id.length < 80);
+    Array.isArray(data.runs) && data.runs.length <= cfg.runHistory && data.runs.every(id => typeof id === 'string' && id.length < 80) &&
+    (data.misses === undefined || (isObject(data.misses) && Object.entries(data.misses).every(([id, n]) => /^[a-z][a-z-]*$/.test(id) && Number.isInteger(n) && n >= 0 && n <= MAX_MISSES)));
 }
+
+/** Losses in a row on one course (optional field, absent in older records); a win resets it. */
+const MAX_MISSES = 9;
+export function missesOn(state, trackId) { return state?.data?.misses?.[trackId] ?? 0; }
 
 /** Version 0 (no version field, best times only) is upgraded in memory. */
 function migrate(data, cfg) {
@@ -37,7 +42,8 @@ export function recordRun(storage, cfg, state, result) {
   const data = state.data;
   if (data.runs.includes(result.runId)) return {recorded: false, newBest: false, duplicate: true, best: data.best[result.trackId] || null};
   const previous = data.best[result.trackId], newBest = !previous || result.elapsedMs < previous.ms;
-  const next = {version: cfg.version, best: {...data.best, ...(newBest ? {[result.trackId]: {ms: result.elapsedMs, rank: result.rank}} : {})}, runs: [...data.runs, result.runId].slice(-cfg.runHistory)};
+  const misses = {...data.misses, [result.trackId]: result.won ? 0 : Math.min(MAX_MISSES, (data.misses?.[result.trackId] ?? 0) + 1)};
+  const next = {version: cfg.version, best: {...data.best, ...(newBest ? {[result.trackId]: {ms: result.elapsedMs, rank: result.rank}} : {})}, runs: [...data.runs, result.runId].slice(-cfg.runHistory), misses};
   try { storage.setItem(cfg.storageKey, JSON.stringify(next)); state.data = next; } catch { return {recorded: false, newBest: false, error: true, best: previous || null}; }
   return {recorded: true, newBest, previous: previous || null, best: next.best[result.trackId]};
 }

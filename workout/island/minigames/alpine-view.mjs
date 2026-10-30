@@ -1,11 +1,11 @@
 import * as THREE from '../vendor/three.module.js';
-import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-soccer-league-20261029-1';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-soccer-league-20261029-1';
+import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-alpine-sim-20261030-1';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-alpine-sim-20261030-1';
 import {createProRider} from './athlete.mjs';
-import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
+import {presentationFrame,dampWeight} from './alpine-presentation.mjs?v=island-alpine-sim-20261030-1';
 import {createProRider as createFallbackRider} from './rider-fallback.mjs';
-import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
-import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-soccer-league-20261029-1';
+import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs?v=island-alpine-sim-20261030-1';
+import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-alpine-sim-20261030-1';
 
 /** Alpine Rush presentation (Codex design package view, rebuilt for the curved halfpipe).
  * Renders a SkiFrame only: positions, collisions, tricks and results belong to the engine.
@@ -121,17 +121,27 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
 
   // ---------- Obstacles: bounded pools per type ----------
   const boostMat = new THREE.MeshStandardMaterial({color:'#a9dbd5',emissive:'#477875',emissiveIntensity:.25,roughness:.55});
-  function pad() { const g = new THREE.Group(); box(3.3, .08, 5.5, ice, g, 0, .07, 0); for (let i = 0; i < 3; i++) for (const side of [-1, 1]) { const a = box(1.22, .04, .25, boostMat, g, side * .39, .14, i * 1.25 - 1.5); a.rotation.y = side * .6; } return g; }
-  function ramp() { const g = new THREE.Group(), geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute([-2, 0, 3, 2, 0, 3, -2, 1.2, -3, 2, 0, 3, 2, 1.2, -3, -2, 1.2, -3], 3)); geo.computeVertexNormals(); mesh(geo, snow, g); for (const x of [-2, 2]) { const edge = box(.12, .08, 6.12, orange, g, x, .6, 0); edge.rotation.x = .197; } box(4.1, 1.2, .14, navy, g, 0, .6, -3); return g; }
+  // Props are merged into one mesh per material (a gate was 15 draw calls, now 3), and each
+  // merged geometry is built once and shared by every pooled copy.
+  const propGeometry = new Map();
+  function merged(key, build, parent) {
+    if (!propGeometry.has(key)) { const parts = new Map(); build((geo, material, x = 0, y = 0, z = 0, rx = 0, ry = 0) => { if (!parts.has(material)) parts.set(material, []); parts.get(material).push(placed(geo, x, y, z, rx, ry)); });
+      propGeometry.set(key, [...parts].map(([material, list]) => { const geo = mergeGeometries(list.map(g => g.index ? g.toNonIndexed() : g)); list.forEach(g => g.dispose()); return [geo, material]; })); }
+    for (const [geo, material] of propGeometry.get(key)) mesh(geo, material, parent);
+    return parent;
+  }
+  function pad() { return merged('pad', add => { add(new THREE.BoxGeometry(3.3, .08, 5.5), ice, 0, .07, 0); for (let i = 0; i < 3; i++) for (const side of [-1, 1]) add(new THREE.BoxGeometry(1.22, .04, .25), boostMat, side * .39, .14, i * 1.25 - 1.5, 0, side * .6); }, new THREE.Group()); }
+  function ramp() { return merged('ramp', add => { const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute([-2, 0, 3, 2, 0, 3, -2, 1.2, -3, 2, 0, 3, 2, 1.2, -3, -2, 1.2, -3], 3)); geo.setAttribute('uv', new THREE.Float32BufferAttribute(new Array(12).fill(0), 2)); geo.computeVertexNormals(); add(geo, snow); for (const x of [-2, 2]) add(new THREE.BoxGeometry(.12, .08, 6.12), orange, x, .6, 0, .197); add(new THREE.BoxGeometry(4.1, 1.2, .14), navy, 0, .6, -3); }, new THREE.Group()); }
   function gate() {
     // Slalom gate: striped poles, red flag panels and the banner bar riders pass under.
-    const g = new THREE.Group(), gw = physics.gateHalfWidth, top = physics.gatePostHeight;
-    for (const side of [-1, 1]) {
-      for (let k = 0; k < 5; k++) { const m = mesh(new THREE.CylinderGeometry(.09, .09, top * 1.2 / 5, 8), k % 2 ? white : red, g, side * gw, top * 1.2 * (k + .5) / 5, 0); m.castShadow = true; }
-      const cloth = box(.9, 1.15, .03, red, g, side * (gw + .5), top * 1.2 - .62, 0); cloth.castShadow = true;
-    }
-    box(gw * 2, .5, .12, navy, g, 0, top, 0); box(gw * 2, .08, .14, red, g, 0, top + .29, 0); box(gw * 2, .08, .14, red, g, 0, top - .29, 0);
-    return g;
+    const gw = physics.gateHalfWidth, top = physics.gatePostHeight;
+    return merged('gate', add => {
+      for (const side of [-1, 1]) {
+        for (let k = 0; k < 5; k++) add(new THREE.CylinderGeometry(.09, .09, top * 1.2 / 5, 8), k % 2 ? white : red, side * gw, top * 1.2 * (k + .5) / 5, 0);
+        add(new THREE.BoxGeometry(.9, 1.15, .03), red, side * (gw + .5), top * 1.2 - .62, 0);
+      }
+      add(new THREE.BoxGeometry(gw * 2, .5, .12), navy, 0, top, 0); add(new THREE.BoxGeometry(gw * 2, .08, .14), red, 0, top + .29, 0); add(new THREE.BoxGeometry(gw * 2, .08, .14), red, 0, top - .29, 0);
+    }, new THREE.Group());
   }
   function rock(){const g=new THREE.Group(),geo=new THREE.SphereGeometry(.7,24,16),p=geo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i),n=1+.10*Math.sin(x*13+z*3)*Math.cos(y*9);p.setXYZ(i,x*n,y*n,z*n);}geo.computeVertexNormals();const r=mesh(geo,stone,g,0,.39,0);r.scale.set(1,.67,1);return g;}
   const makers = {rock, gate, boost: pad, ramp}, pools = {rock: [], gate: [], boost: [], ramp: []};
@@ -145,7 +155,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     for (const x of [-half, half]) box(.55, 6.2, .55, navy, finish, x, pipe.lipHeight + 3.1, 0);
     const banner = new THREE.Mesh(new THREE.BoxGeometry(half * 2 + .6, 1.3, .22), new THREE.MeshStandardMaterial({map: textTexture('FINISH', '#123d59', '#ffffff'), roughness: .7}));
     banner.position.set(0, pipe.lipHeight + 5.7, 0); finish.add(banner);
-    for (let i = 0; i < 26; i++) for (let j = 0; j < 2; j++) { const t = box(pipe.F * 2 / 26, .02, .6, (i + j) % 2 ? navy : white, finish, -pipe.F + (i + .5) * pipe.F * 2 / 26, .03, j * .6 - .3); t.castShadow = false; }
+    const line = new THREE.Group(); merged('finish-line', add => { for (let i = 0; i < 26; i++) for (let j = 0; j < 2; j++) add(new THREE.BoxGeometry(pipe.F * 2 / 26, .02, .6), (i + j) % 2 ? navy : white, -pipe.F + (i + .5) * pipe.F * 2 / 26, .03, j * .6 - .3); }, line);
+    line.traverse(n => { n.castShadow = false; }); finish.add(line);
     scene.add(finish); place(finish, course.length, 0, 0);
   }
 
@@ -211,7 +222,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
   function resize(){if(disposed)return;const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
   ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
   let canonicalPresentation=false;
-  let lastT = 0, fov = 50, camLat = 0, camRise = 0, lastCoins = new Map(), snowAt = 0;
+  let lastT = 0, fov = 50, camLat = 0, camRise = 0, camAim = 0, camBack = 5.8, camBank = 0, lastCoins = new Map(), snowAt = 0;
   const ease = p => p < .5 ? 2 * p * p : 1 - (2 - 2 * p) ** 2 / 2;
   const crashSeconds = physics.crashSeconds ?? 1.4;
 
@@ -224,7 +235,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     const t = state.timeMs / 1000, playing = state.phase !== 'menu', portrait = camera.aspect < .9, dt = Math.min(.1, Math.max(0, t - lastT)), wall = performance.now() / 1000, wdt = Math.min(.1, Math.max(0, wall - snowAt));
     lastT = t; snowAt = wall;
     const player = state.player, ps = player.s ?? 0;
-    if(ps<lastTrackS-2){seedTracks([]);for(const r of riders.values()){r.air=r.squash=r.grab=r.roll=0;r.wasHit=false;r.hitAt=-10;r.crashAt=-1;}camLat=player.x*.98;camRise=0;}
+    if(ps<lastTrackS-2){seedTracks([]);for(const r of riders.values()){r.air=r.squash=r.grab=r.roll=0;r.wasHit=false;r.hitAt=-10;r.crashAt=-1;}camLat=player.x*.98;camAim=player.x*.8;camRise=0;camBank=0;}
     lastTrackS=ps;rememberTracks(canonicalState);
     placeScenery(ps, wall);scenery.update(ps,look.fogFar);
     for (const c of chunks) c.visible = c.userData.s1 > ps - 70 && c.userData.s0 < ps + look.fogFar + 30;
@@ -239,7 +250,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
       r.grab += (grabbing - r.grab) * dampWeight(18,wdt);
 
       // On a wall the rider stands square to the surface; in pipe air the body eases upright.
-      const rollTarget = s.airKind === 'pipe' ? side * wallAngle(pipe.lip, pipe) * .55 : s.airborne ? 0 : side * wallAngle(s.x, pipe);
+      // On the snow the body also leans into the carve (bank), the way a turning rider does.
+      const rollTarget = s.airKind === 'pipe' ? side * wallAngle(pipe.lip, pipe) * .55 : s.airborne ? 0 : side * wallAngle(s.x, pipe) - (s.bank ?? 0) * .55;
       r.roll += (rollTarget - r.roll) * dampWeight(11,wdt);
       place(r.root, s.s ?? ps - z, s.x, surf + height + .03, r.roll, lean * .24, s.airKind === 'ramp' ? r.air * .12 : 0);
       // Tricks spin, flip or both around the centre of mass; a crash tumbles onto the side.
@@ -286,12 +298,18 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     const px = player.x, boost = !!player.boosting, absY = surfaceHeight(px, pipe) + Math.max(0, player.height ?? 0);
     // Narrow screens sit higher with a wider lens and follow the rider almost fully sideways.
     const wide=Math.min(1,Math.max(0,(camera.aspect-.45)/1.3)),baseFov=67-wide*7;
-    const wantFov = baseFov + (boost && !reduced ? 6 : 0); fov += (wantFov - fov) * dampWeight(5,wdt); camera.fov = fov; camera.updateProjectionMatrix();
+    // Speed reads through the lens: faster riding widens the view and lets the rider pull a
+    // little ahead of the camera; slowing down brings the camera back in (all time-based damping).
+    const speed = (state.speedKmh ?? 72) / 3.6, rush = reduced ? 0 : Math.min(1, Math.max(0, (speed - physics.baseSpeed) / (physics.boostSpeed - physics.baseSpeed)));
+    const wantFov = baseFov + rush * 5 + (boost && !reduced ? 2 : 0); fov += (wantFov - fov) * dampWeight(5,wdt); camera.fov = fov; camera.updateProjectionMatrix();
     const follow=.98;
     if (playing) {
       const k = dampWeight(9,wdt); camLat += (px * follow - camLat) * k; camRise += (absY * .75 - camRise) * dampWeight(6,wdt);
-      worldPoint(ps-(portrait?5.2:5.8)-(boost&&!reduced?.3:0),camLat+(portrait?.2:.65),2.45+camRise,camera.position);
-      worldPoint(ps+16,px*.8,2.0+camRise*.8,target);
+      // The aim point is damped too, so a sideways shove (a rock) never snaps the view.
+      camAim += (px * .8 - camAim) * k; camBack += ((portrait ? 5.2 : 5.8) + rush * .55 - camBack) * dampWeight(3,wdt);
+      camBank += ((reduced ? 0 : player.bank ?? 0) - camBank) * dampWeight(4,wdt);
+      worldPoint(ps-camBack,camLat+(portrait?.2:.65),2.45+camRise,camera.position);
+      worldPoint(ps+16,camAim,2.0+camRise*.8,target);
     } else {
       worldPoint(portrait ? -4.8 : -5.5, portrait ? 4 : 7, portrait ? 2.6 : 2.7, camera.position); worldPoint(portrait ? 8 : 8, portrait ? 0 : -4, .7, target);
       const pr = riders.get('player'); pr.root.visible = pr.shadow.visible = true; place(pr.root, portrait ? 2 : .4, portrait ? 1.8 : 3.8, .03, 0, -.38); pr.pivot.rotation.set(0, 0, 0); pr.pivot.position.y = PIVOT; place(pr.shadow, portrait ? 2 : .4, portrait ? 1.8 : 3.8, .05); pr.shadow.rotateX(-Math.PI / 2);
@@ -299,7 +317,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../assets
     }
     if (player.hit && !reduced) {const impact=Math.max(0,1-(t-riders.get('player').hitAt)/.45);camera.position.y+=Math.sin(Math.min(1,(t-riders.get('player').hitAt)/.45)*Math.PI)*.055*impact;}
     camera.lookAt(target);
-    if (playing && !reduced) camera.rotateZ(-(player.lean ?? 0) * .025);
+    if (playing && !reduced) camera.rotateZ(-(player.lean ?? 0) * .02 - camBank * .06);
     camAt.copy(camera.position);
     mountains.position.set(camAt.x, camAt.y - 48, camAt.z); field.position.set(camAt.x, camAt.y - 78, camAt.z);
     worldPoint(ps, px, 0, P); sun.target.position.copy(P); sun.position.set(P.x-32,P.y+25,P.z-38);art.update(ps,look.fogFar,camera,quality);

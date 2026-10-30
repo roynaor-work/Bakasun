@@ -5,10 +5,10 @@ import {loadData} from '../workout/island/engine/load-data.mjs';
 import {createEngine} from '../workout/island/engine/engine.mjs';
 import {migrateSave,validateSave,STORAGE_KEY,CURRENT_VERSION} from '../workout/island/engine/persistence.mjs';
 import {gameContext} from '../workout/island/minigames/context.mjs';
-import {createAlpineEngine,alpineReward,RIDER_IDS} from '../workout/island/minigames/alpine-engine.mjs';
-import {generateCourse,rockClearance,pipeProfile,surfaceHeight} from '../workout/island/minigames/alpine-track.mjs';
+import {createAlpineEngine,alpineReward,RIDER_IDS,slopeFactor,rivalEase} from '../workout/island/minigames/alpine-engine.mjs';
+import {generateCourse,rockClearance,pipeProfile,surfaceHeight,gradeAt} from '../workout/island/minigames/alpine-track.mjs';
 import {alpineResult} from '../workout/island/minigames/alpine-result.mjs';
-import {loadRecords,recordRun,formatRaceTime} from '../workout/island/minigames/alpine-records.mjs';
+import {loadRecords,recordRun,formatRaceTime,missesOn} from '../workout/island/minigames/alpine-records.mjs';
 import {createAlpineControls} from '../workout/island/minigames/alpine-controls.mjs';
 import {createAlpineAudio} from '../workout/island/minigames/alpine-audio.mjs';
 import {gameArtwork} from '../workout/island/ui/adventure-emblems.mjs';
@@ -348,4 +348,42 @@ test('coins: collected once within reach and height, counted in the result and p
     for(const coin of c.objects.filter(o=>o.type==='coin')){assert.ok(Math.abs(coin.x)<=PIPE.lip,'coins stay inside the pipe');assert.ok(coin.h>=surfaceHeight(coin.x,PIPE)+C.centre-.02,'never under the snow');}}
   const r=race(1,42);assert.equal(r.result.coins,r.engine.snapshot().coins);assert.equal(r.result.coins,new Set(r.events.filter(x=>x.type==='coin'&&x.riderId==='player').map(x=>x.objectId)).size);
   assert.equal(alpineReward(balance,1,6,true,7).money,7*C.value,'a loss still pays its coins');
+});
+
+test('slope: steep pitches run faster than gentle ones, carving bleeds speed, a flat board keeps it',()=>{
+  const S=P.slope;assert.equal(slopeFactor(null,.15,S.range),1);assert.equal(slopeFactor(.15,.15,S.range),1);
+  assert.equal(slopeFactor(1,.15,S.range),1+S.range);assert.equal(slopeFactor(0,.15,S.range),1-S.range);assert.ok(slopeFactor(.17,.15,S.range)>slopeFactor(.13,.15,S.range));
+  const t={...balance.tracks['ice-peak'],id:'ice-peak'},path=generateCourse(t,P).path;let steep=0,gentle=0;
+  for(let s=200;s<1400;s++){if(gradeAt(path,s)>gradeAt(path,steep||200))steep=s;if(gradeAt(path,s)<gradeAt(path,gentle||200))gentle=s;}
+  assert.ok(gradeAt(path,steep)-gradeAt(path,gentle)>.04,'the course has steep and gentle stretches');
+  const cruise=at=>{const e=ruleEngine([],{length:1600,path,grid:[{s:at-120,x:0},...Array.from({length:5},(_,i)=>({s:-200-i*5,x:i*2-4}))]});let v=0;for(let i=0;i<60*12&&e.debug()[0].s<at;i++){e.command({type:'steer',value:0});e.step(1/60);v=e.debug()[0].speed;}return v;};
+  assert.ok(cruise(steep)>cruise(gentle)+2,`steep ${cruise(steep)} vs gentle ${cruise(gentle)}`);
+  // Hard carving on the floor costs speed; riding straight keeps cruising speed.
+  const flat=ruleEngine([]);run(flat,4,0);const carve=ruleEngine([]);for(let i=0;i<8;i++)run(carve,.5,i%2?1:-1);
+  assert.ok(carve.debug()[0].speed<flat.debug()[0].speed-.6,'carving costs speed');assert.ok(Math.abs(flat.debug()[0].speed-P.baseSpeed)<.01);
+  // A steep pitch is announced to the player once per pitch.
+  const r=race(1,42),steepEvents=r.events.filter(e=>e.type==='steep');assert.ok(steepEvents.length>=1&&steepEvents.length<=6,`${steepEvents.length} steep calls`);assert.ok(steepEvents.every(e=>e.riderId==='player'));
+});
+
+test('bank: the body leans into a held turn and stays level on a straight; air is level',()=>{
+  const n=1200,path={count:n,kappa:new Float64Array(n).fill(1/90)};
+  const hold=ruleEngine([],{path});for(let i=0;i<240;i++){const d=hold.debug()[0];const lean=d.speed*d.speed/90*P.turnPush/(P.lateralResponse*P.lateralSpeed);hold.command({type:'steer',value:Math.max(-1,Math.min(1,(0-d.x)*.7+lean))});hold.step(1/60);}
+  assert.ok(hold.snapshot().player.bank>.1,`leans into a right turn (${hold.snapshot().player.bank})`);
+  const left=ruleEngine([],{path:{count:n,kappa:new Float64Array(n).fill(-1/90)}});run(left,.2,-1);assert.ok(left.snapshot().player.bank<0);
+  const straight=ruleEngine([]);run(straight,2,0);assert.equal(straight.snapshot().player.bank,0);
+  const jump=ruleEngine([{id:'r',type:'ramp',x:0,s:60}]);let airBank=null;for(let i=0;i<300&&airBank===null;i++){jump.step(1/60);if(jump.debug()[0].airborne)airBank=jump.snapshot().player.bank;}assert.equal(airBank,0);
+});
+
+test('assist: after lost races, rivals far ahead ease off; close rivals and a fresh child are untouched',()=>{
+  const A=P.assist;assert.equal(rivalEase(200,0,A),1);assert.equal(rivalEase(A.near,1,A),1);assert.equal(rivalEase(-30,1,A),1);
+  assert.ok(Math.abs(rivalEase(A.far+50,1,A)-(1-A.maxSlow))<1e-12);assert.ok(rivalEase(A.far,.5,A)>rivalEase(A.far,1,A));
+  const lead=assist=>{const e=createAlpineEngine({balance,stage:1,seed:42,assist});e.command({type:'start'});for(let i=0;i<60*45;i++)e.step(1/60);const d=e.debug();return Math.max(...d.slice(1).map(x=>x.s))-d[0].s;};
+  assert.ok(lead(1)<lead(0)-8,`rivals stay closer with help (${lead(1)} vs ${lead(0)})`);
+  // The help comes from consecutive losses on the course in the records; a win resets it.
+  const rs=memory(),cfg=balance.records,state=loadRecords(rs,cfg),base=race(1,42).result;assert.equal(missesOn(state,'ice-peak'),0);
+  recordRun(rs,cfg,state,{...base,won:false,runId:base.runId+'a'});recordRun(rs,cfg,state,{...base,won:false,runId:base.runId+'b'});
+  assert.equal(missesOn(loadRecords(rs,cfg),'ice-peak'),2);recordRun(rs,cfg,state,{...base,runId:base.runId+'c'});assert.equal(missesOn(loadRecords(rs,cfg),'ice-peak'),0);
+  const bad=memory(new Map([[cfg.storageKey,JSON.stringify({version:cfg.version,best:{},runs:[],misses:{'ice-peak':-1}})]]));assert.equal(loadRecords(bad,cfg).status,'corrupt');
+  // Rivals never speed up: the AI cap holds with or without help.
+  assert.ok(rivalEase(1000,1,A)<=1&&A.maxSlow>0&&A.maxSlow<.2);
 });

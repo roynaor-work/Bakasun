@@ -12144,6 +12144,18 @@
     "lipKick": 2.6,
     "pipeReturnSpeed": 6,
     "aiWallCost": 1.2,
+    "slope": {
+     "range": 0.1,
+     "carveDrag": 0.06,
+     "note": "Cruising speed follows the local grade (sqrt of grade over the course mean, within +-range); carving on the floor costs carveDrag x steer^2 of it."
+    },
+    "assist": {
+     "perMiss": 0.35,
+     "maxSlow": 0.12,
+     "near": 15,
+     "far": 70,
+     "note": "After each lost race on a course, rivals far ahead of the player ease off (up to maxSlow); a win resets it."
+    },
     "tricks": {
      "grab": {
       "seconds": 0.45,
@@ -12533,7 +12545,7 @@
      "difficulty": 2,
      "ai": [
       {
-       "speed": 1,
+       "speed": 0.99,
        "reaction": 0.28,
        "lookahead": 44,
        "error": 0.45,
@@ -12548,7 +12560,7 @@
        "trickMargin": 0.25
       },
       {
-       "speed": 0.995,
+       "speed": 0.985,
        "reaction": 0.3,
        "lookahead": 42,
        "error": 0.5,
@@ -12563,7 +12575,7 @@
        "trickMargin": 0.25
       },
       {
-       "speed": 0.99,
+       "speed": 0.98,
        "reaction": 0.32,
        "lookahead": 40,
        "error": 0.55,
@@ -12578,7 +12590,7 @@
        "trickMargin": 0.25
       },
       {
-       "speed": 0.98,
+       "speed": 0.975,
        "reaction": 0.35,
        "lookahead": 38,
        "error": 0.6,

@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import {mergeVertices} from '../vendor/BufferGeometryUtils.js?v=island-soccer-league-20261029-1';
-import {createFirForest} from './alpine-fir.mjs?v=island-soccer-league-20261029-1';
+import {mergeVertices} from '../vendor/BufferGeometryUtils.js?v=island-alpine-sim-20261030-1';
+import {createFirForest} from './alpine-fir.mjs?v=island-alpine-sim-20261030-1';
 
 // Original, real-time art. Every solid surface has depth; no photo cards or scenery colliders.
 const noiseGLSL=`
@@ -29,7 +29,9 @@ export function createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,sno
  const rocks=[],posts=[];const uprightFrame={};
  const upright=(obj,s,x,y,roll=0,yaw=0)=>{frameAt(s,uprightFrame);place(obj,s,x,y,roll,yaw,Math.atan(uprightFrame.grade));};
  const forest=createFirForest(scene,{course,deckEdge,terrainY,place:upright,density,dusk,mobile});
- const rawRock=new T.IcosahedronGeometry(1,5);rawRock.deleteAttribute('uv');const rockGeo=mergeVertices(rawRock);rawRock.dispose();const rp=rockGeo.attributes.position;
+ // Detail 3 on phones (1,280 triangles) and 4 elsewhere (5,120) keep the noise relief of the
+ // cliffs; detail 5 was 20,480 per cliff, about twenty of them in view.
+ const rawRock=new T.IcosahedronGeometry(1,mobile?3:4);rawRock.deleteAttribute('uv');const rockGeo=mergeVertices(rawRock);rawRock.dispose();const rp=rockGeo.attributes.position;
  for(let i=0;i<rp.count;i++){const x=rp.getX(i),y=rp.getY(i),z=rp.getZ(i),n=1+.09*Math.sin(x*12+z*5)*Math.cos(y*7-z*3),skirt=y<0?1/Math.max(.08,Math.sqrt(Math.max(0,1-y*y))):1;rp.setXYZ(i,x*n*skirt,y*(y<0?8:1)*n,z*n*skirt);}rockGeo.computeVertexNormals();
  // Rock mass and snow cornices start beyond the lip and deck, never over the rideable pipe.
  for(let s=-20,i=0;s<course.length+100;s+=17,i++){const side=i%2?1:-1,h=3+rnd()*7,wx=3+rnd()*4,wz=5+rnd()*5,yaw=rnd()*2,footprint=Math.hypot(wx*Math.cos(yaw),wz*Math.sin(yaw))*1.23,x=side*(deckEdge+footprint+1+rnd()*3);const rock=new T.Mesh(rockGeo,stone);rock.scale.set(wx,h,wz);upright(rock,s,x,terrainY(s,Math.abs(x),side)+h*.05,0,yaw);rock.castShadow=rock.receiveShadow=true;scene.add(rock);rocks.push({s,mesh:rock});}
@@ -47,7 +49,7 @@ export function createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,sno
  `,'alpine-distant-v6');const distantCompile=distantStone.onBeforeCompile;distantStone.onBeforeCompile=s=>{distantCompile(s);s.vertexShader=s.vertexShader.replace('artWorld=(modelMatrix*vec4(transformed,1.)).xyz;','artWorld=transformed;');s.fragmentShader=s.fragmentShader.replace('#include <opaque_fragment>','outgoingLight=mix(outgoingLight,vec3(.43,.57,.65),.32);\n#include <opaque_fragment>');};
  const hash=(x,y)=>{const a=Math.sin(x*127.1+y*311.7)*43758.5453;return a-Math.floor(a);};
  const noise=(x,y)=>{const a=Math.floor(x),b=Math.floor(y),u=x-a,v=y-b,U=u*u*(3-2*u),V=v*v*(3-2*v);return (hash(a,b)*(1-U)+hash(a+1,b)*U)*(1-V)+(hash(a,b+1)*(1-U)+hash(a+1,b+1)*U)*V;};
- for(let k=0;k<2;k++){const p=[],ix=[],NX=mobile?210:420,NZ=mobile?45:90,peaks=[];for(let i=0;i<16;i++)peaks.push({x:-1450+i*190+hash(i,k)*100,z:-610-k*290+hash(i,k+2)*130,h:120+hash(i,k+5)*145});
+ for(let k=0;k<2;k++){const p=[],ix=[],NX=mobile?210:300,NZ=mobile?45:64,peaks=[];for(let i=0;i<16;i++)peaks.push({x:-1450+i*190+hash(i,k)*100,z:-610-k*290+hash(i,k+2)*130,h:120+hash(i,k+5)*145});
   for(let j=0;j<=NZ;j++)for(let i=0;i<=NX;i++){const x=-1600+i/NX*3200,z=-330-k*250-j/NZ*700;let y=-85;for(const q of peaks){const dx=x-q.x,dz=z-q.z,angle=Math.atan2(dz,dx),dist=Math.hypot(dx,dz);y=Math.max(y,q.h-dist*(1.12+.20*Math.sin(angle*5+q.x)+.10*Math.sin(angle*11)));}const texture=(1-Math.abs(noise(x*.012,z*.012)*2-1))*23+noise(x*.037,z*.037)*12+noise(x*.09,z*.09)*4;y+=texture;const edge=Math.min(1,j/12,(NZ-j)/12);y=y*edge-180*(1-edge);p.push(x,y-40,z);}
   for(let j=0;j<NZ;j++)for(let i=0;i<NX;i++){const a=j*(NX+1)+i,b=a+NX+1;ix.push(a,a+1,b,b,a+1,b+1);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(p,3));g.setIndex(ix);g.computeVertexNormals();const material=distantStone.clone();material.onBeforeCompile=distantStone.onBeforeCompile;material.customProgramCacheKey=distantStone.customProgramCacheKey;material.color.lerp(new T.Color('#c2d4dc'),k*.27);const m=new T.Mesh(g,material);ridge.add(m);
  }

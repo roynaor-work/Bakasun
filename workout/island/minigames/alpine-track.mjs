@@ -48,10 +48,18 @@ export function buildPath(track, physics) {
     theta[i] = theta[i - 1] + (kappa[i - 1] + kappa[i]) / 2;
     const h = (theta[i - 1] + theta[i]) / 2;
     px[i] = px[i - 1] + Math.sin(h); pz[i] = pz[i - 1] - Math.cos(h);
-    const grade = track.grade[0] + (track.grade[1] - track.grade[0]) * (.5 + .5 * Math.sin(i / 190 + track.seed));
-    py[i] = py[i - 1] - grade;
+    // A long swell plus shorter pitches (about every 360 m), so steep and gentle stretches alternate
+    // within one race; the weights sum to one, so the grade stays inside the configured range.
+    const swell = .65 * Math.sin(i / 190 + track.seed) + .35 * Math.sin(i / 57 + track.seed * 1.7);
+    py[i] = py[i - 1] - (track.grade[0] + (track.grade[1] - track.grade[0]) * (.5 + .5 * swell));
   }
   return Object.freeze({count, kappa, theta, px, pz, py});
+}
+/** Downhill drop per metre at s (the grade); null when the path has no elevation. */
+export function gradeAt(path, s) {
+  if (!path?.py) return null;
+  const i = Math.max(0, Math.min(path.count - 2, Math.floor(s)));
+  return path.py[i] - path.py[i + 1];
 }
 /** Curvature at s (1/m); positive turns right. */
 export function curvatureAt(path, s) {

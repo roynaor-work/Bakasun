@@ -1,4 +1,4 @@
-import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-soccer-league-20261029-1';
+import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt,gradeAt} from './alpine-track.mjs?v=island-alpine-sim-20261030-1';
 
 /** Alpine Rush race engine (CONTRACT.ts SkiEngine, extended). Pure: no DOM, Three.js, audio or Date.
  * Physics advance only in fixed 1/60 s ticks through an accumulator, so the same seed and the
@@ -33,7 +33,21 @@ function boardHitsCircle(dx, ds, hx, hs, r) {
   return (dx - nx) ** 2 + (ds - ns) ** 2 < r * r;
 }
 
-export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {}, power = 1, course: courseOverride = null }) {
+/** Speed factor of the local slope: terminal speed grows with the square root of the grade,
+ * so steep pitches run faster and gentle stretches slower, bounded by slope.range. */
+export function slopeFactor(grade, meanGrade, range) {
+  if (grade === null || !(meanGrade > 0) || !(range > 0)) return 1;
+  return clamp(Math.sqrt(Math.max(0, grade) / meanGrade), 1 - range, 1 + range);
+}
+
+/** Catch-up help for a child who keeps losing a course: a rival far ahead of the player eases
+ * off, up to assist.maxSlow of its speed. assist is 0 (none) to 1 (full); rivals never speed up. */
+export function rivalEase(gapAhead, assist, cfg) {
+  if (!cfg || !(assist > 0) || gapAhead <= cfg.near) return 1;
+  return 1 - Math.min(1, assist) * cfg.maxSlow * clamp((gapAhead - cfg.near) / (cfg.far - cfg.near), 0, 1);
+}
+
+export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {}, power = 1, assist = 0, course: courseOverride = null }) {
   // Purchased equipment and the game level apply to the player only, within configured tracks.
   const wax = clamp(Number(equipment.wax) || 1, 1, 1.1), tankSize = clamp(Number(equipment.tank) || 1, 1, 1.5), recharge = clamp(Number(power) || 1, 1, 1.2);
   const physics = balance.physics, step = physics.fixedStep, pipe = pipeProfile(physics), tricks = physics.tricks;
@@ -41,6 +55,9 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
   // courseOverride exists for rule tests only (hand-placed obstacles); the game always generates.
   const course = courseOverride || generateCourse(track, physics);
   const objects = course.objects;
+  const slope = physics.slope || null, meanGrade = track.grade ? (track.grade[0] + track.grade[1]) / 2 : 0;
+  const help = clamp(Number(assist) || 0, 0, 1);
+  const slopeAt = s => slope ? slopeFactor(gradeAt(course.path, s), meanGrade, slope.range) : 1;
   let phase = 'menu', countdownShown = 0, resumePhase = null, accumulator = 0, ticks = 0, countdownTicks = 0, run = 0, disposed = false;
   let riders = [], events = [], eventSeq = 0, result = null, steerInput = 0, boostRequest = false, trickRequest = null, order = [], previousPresentation = null;
   const aiRandom = { value: null };
@@ -56,7 +73,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       ramp: null, seen: new Map(), hits: new Set(), pads: new Set(), gates: new Set(), coins: new Set(), cursor: 0,
       trick: null, airScore: 0, airTricks: 0, lastTrick: null, trickScore: 0, crashes: 0, trickDecideIn: 0,
       finished: false, finishTicks: 0, peak: 0, collisions: 0,
-      decideIn: 0, targetX: grid.x,
+      decideIn: 0, targetX: grid.x, ax: 0, steep: false,
     };
   }
 
@@ -272,11 +289,19 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     }
     const angle = r.airborne ? 0 : wallAngle(r.x, pipe), onWall = angle > 0;
     const boosted = r.boostTime > 0 || r.padTime > 0;
-    const skill = r.ai ? r.ai.speed : wax;
-    const target = (boosted ? physics.boostSpeed : physics.baseSpeed) * skill * (onWall ? physics.wallSpeedFactor : 1);
+    const skill = r.ai ? r.ai.speed * rivalEase(r.s - riders[0].s, help, physics.assist) : wax;
+    // The slope sets the cruising speed (steep pitches run faster) and how hard gravity pulls
+    // toward it; carving across the fall line on the floor bleeds speed, a flat board keeps it.
+    const pitch = slopeAt(r.s), carve = r.airborne || onWall ? 0 : (slope?.carveDrag ?? 0) * r.steer * r.steer;
+    const target = (boosted ? physics.boostSpeed : physics.baseSpeed) * skill * pitch * (1 - carve) * (onWall ? physics.wallSpeedFactor : 1);
     // A boost must help below cruising speed too; use the same acceleration rule for
     // the player, rivals and boost pads without changing their configured speed caps.
-    const acceleration = physics.acceleration * (boosted ? 2 : 1);
+    const acceleration = physics.acceleration * (boosted ? 2 : 1) * pitch * pitch;
+    if (!r.ai && slope) {
+      const steep = pitch >= 1 + slope.range * .6;
+      if (steep && !r.steep) emit('steep', { riderId: r.id });
+      if (steep || pitch <= 1 + slope.range * .3) r.steep = steep;
+    }
     if (r.speed < target) r.speed = Math.min(target, r.speed + acceleration * dt);
     else r.speed = Math.max(target, r.speed - physics.deceleration * dt);
     if (r.boostTime > 0) { r.boostTime = Math.max(0, r.boostTime - dt); if (r.boostTime === 0) emit('boost-end', { riderId: r.id }); }
@@ -285,6 +310,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     r.hitTime = Math.max(0, r.hitTime - dt); r.grace = Math.max(0, r.grace - dt); r.landTime = Math.max(0, r.landTime - dt); r.crashTime = Math.max(0, r.crashTime - dt);
     // Lateral: steering sets a target lateral speed. Walls pull back toward the floor, turns push
     // toward the outer wall, and airborne riders have reduced (pipe air: no) control.
+    const vxBefore = r.vx;
     if (r.airKind !== 'pipe') {
       const control = r.airborne ? physics.airControl : Math.cos(angle);
       r.vx += (r.steer * physics.lateralSpeed - r.vx) * Math.min(1, physics.lateralResponse * control * dt);
@@ -294,6 +320,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       }
       r.x += r.vx * dt;
     }
+    r.ax = r.airborne ? 0 : (r.vx - vxBefore) / dt;
     if (Math.abs(r.x) >= pipe.lip) {
       const outward = r.vx * Math.sign(r.x);
       if (!r.airborne && outward > physics.lipLaunchSpeed) {
@@ -385,6 +412,9 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     return {
       id: r.id, x: r.x, z: p.s - r.s, s: r.s, height: heightOf(r),
       lean: clamp(r.vx / physics.lateralSpeed, -1, 1),
+      // Body lean into the carve (radians, + toward +x): the sideways force the edge holds,
+      // which is the steering change plus what a turn needs to keep the line.
+      bank: r.airborne ? 0 : clamp((r.ax + curvatureAt(course.path, r.s) * r.speed * r.speed * physics.turnPush) / (physics.gravity * 2.5), -.6, .6),
       boosting: r.boostTime > 0 || r.padTime > 0, hit: r.hitTime > physics.recoverySeconds - physics.hitFlashSeconds || r.crashTime > 0,
       crashed: r.crashTime > 0, landing: r.landTime > 0, airborne: r.airborne || r.ramp !== null, airKind: r.airKind,
       trick: r.trick ? { id: r.trick.id, progress: Math.min(1, r.trick.t / r.trick.duration) } : null,
