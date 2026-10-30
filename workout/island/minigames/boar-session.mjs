@@ -1,4 +1,4 @@
-import {DATA_VERSION} from '../release.mjs?v=island-hoops-r3-20261029-1';
+import {DATA_VERSION} from '../release.mjs?v=island-boar-20261029-2';
 
 /** A local frame preserves the original game's CSS, Three.js and campaign.
  * The island still owns fullscreen, Back, visibility, pause, mute and exit. */

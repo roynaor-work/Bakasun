@@ -1,18 +1,18 @@
-import {watchRelease} from './ui/release-watch.mjs?v=island-hoops-r3-20261029-1';
-import './view/learning-buildings.mjs?v=island-hoops-r3-20261029-1';
-import {LearningInterface} from './learning/interface.mjs?v=island-hoops-r3-20261029-1';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-hoops-r3-20261029-1';
-import {createTranslator} from './ui/translate.mjs?v=island-hoops-r3-20261029-1';
-import { loadData } from './engine/load-data.mjs?v=island-hoops-r3-20261029-1';
-import { createEngine } from './engine/engine.mjs?v=island-hoops-r3-20261029-1';
-import { IslandView } from './view/island-view.mjs?v=island-hoops-r3-20261029-1';
-import { IslandInterface } from './ui/interface.mjs?v=island-hoops-r3-20261029-1';
-import {createActivity} from './activity/runtime.mjs?v=island-hoops-r3-20261029-1';
-import {ActivityInterface} from './ui/activity.mjs?v=island-hoops-r3-20261029-1';
-import {installPressFeedback} from './ui/press.mjs?v=island-hoops-r3-20261029-1';
-import {installGameShell} from './ui/game-shell.mjs?v=island-hoops-r3-20261029-1';
-import {CityAccess} from './ui/city-access.mjs?v=island-hoops-r3-20261029-1';
-import {navigationActive} from './view/city-navigation.mjs?v=island-hoops-r3-20261029-1';
+import {watchRelease} from './ui/release-watch.mjs?v=island-boar-20261029-2';
+import './view/learning-buildings.mjs?v=island-boar-20261029-2';
+import {LearningInterface} from './learning/interface.mjs?v=island-boar-20261029-2';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-boar-20261029-2';
+import {createTranslator} from './ui/translate.mjs?v=island-boar-20261029-2';
+import { loadData } from './engine/load-data.mjs?v=island-boar-20261029-2';
+import { createEngine } from './engine/engine.mjs?v=island-boar-20261029-2';
+import { IslandView } from './view/island-view.mjs?v=island-boar-20261029-2';
+import { IslandInterface } from './ui/interface.mjs?v=island-boar-20261029-2';
+import {createActivity} from './activity/runtime.mjs?v=island-boar-20261029-2';
+import {ActivityInterface} from './ui/activity.mjs?v=island-boar-20261029-2';
+import {installPressFeedback} from './ui/press.mjs?v=island-boar-20261029-2';
+import {installGameShell} from './ui/game-shell.mjs?v=island-boar-20261029-2';
+import {CityAccess} from './ui/city-access.mjs?v=island-boar-20261029-2';
+import {navigationActive} from './view/city-navigation.mjs?v=island-boar-20261029-2';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

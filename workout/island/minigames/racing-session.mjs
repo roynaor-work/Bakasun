@@ -1,8 +1,8 @@
-import {createRacing} from './racing-physics.mjs?v=island-hoops-r3-20261029-1';
-import {createRacingView} from './racing-view.mjs?v=island-hoops-r3-20261029-1';
-import {createRacingControls} from './racing-controls.mjs?v=island-hoops-r3-20261029-1';
-import {createRacingAudio} from './racing-audio.mjs?v=island-hoops-r3-20261029-1';
-import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-hoops-r3-20261029-1';
+import {createRacing} from './racing-physics.mjs?v=island-boar-20261029-2';
+import {createRacingView} from './racing-view.mjs?v=island-boar-20261029-2';
+import {createRacingControls} from './racing-controls.mjs?v=island-boar-20261029-2';
+import {createRacingAudio} from './racing-audio.mjs?v=island-boar-20261029-2';
+import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-boar-20261029-2';
 
 export function runRacingSession(ctx){
  const model=createRacing({stage:ctx.level||1,seed:ctx.seed,difficulty:typeof ctx.difficulty==='string'?ctx.difficulty:'easy',config:{equipment:ctx.equipment}});
@@ -10,7 +10,7 @@ export function runRacingSession(ctx){
  const abort=new AbortController();let audio;try{audio=createRacingAudio();}catch{audio=createRacingAudio({storage:null});}
  const session={setPaused(value){paused=!!value;last=0;input?.setEnabled(!paused);audio.setPaused(paused);if(paused)model.pause();else model.resume();},dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();input?.dispose();audio.dispose();view?.dispose();model.dispose();},get snapshot(){return {stage:model.state.stage,phase:model.state.phase,time:model.state.time,paused,disposed,player:{...model.state.player},cars:model.state.cars.map(c=>({...c})),result:model.state.result,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),error:renderError};}};
  if(!canvas)return session;
- const screen=canvas.closest('.game-screen'),stage=canvas.parentElement,css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./racing.css?v=island-hoops-r3-20261029-1',import.meta.url).href;screen.append(css);
+ const screen=canvas.closest('.game-screen'),stage=canvas.parentElement,css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./racing.css?v=island-boar-20261029-2',import.meta.url).href;screen.append(css);
  const node=(tag,cls,text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
  const hud=node('div','racing-hud'),rank=node('bdi','racing-rank','3'),of=node('small','racing-of','/ 5'),lap=node('span','racing-lap'),clock=node('bdi','racing-clock','0:00'),trackName=node('strong','racing-track',model.track.name);rank.append(of);const position=node('div','racing-position');position.append(rank,node('span','racing-position-label','מקום'));const info=node('div','racing-race-info');info.append(trackName,lap,clock);hud.append(position,info);stage.append(hud);
  lap.style.direction='rtl';

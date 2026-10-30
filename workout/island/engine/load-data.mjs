@@ -1,5 +1,5 @@
-import {DATA_VERSION,dataURL} from '../release.mjs?v=island-hoops-r3-20261029-1';
-import { configureBuilding } from './registry.mjs?v=island-hoops-r3-20261029-1';
+import {DATA_VERSION,dataURL} from '../release.mjs?v=island-boar-20261029-2';
+import { configureBuilding } from './registry.mjs?v=island-boar-20261029-2';
 
 const FILES = ['config', 'city', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 
