@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>האי שלי · רכיבי HUD פעילים</title>
+  <link rel="stylesheet" href="hud.css">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body class="ih-kit" data-theme="soccer">
+  <nav class="demo-toolbar" aria-label="אפשרויות הדגמה">
+    <select id="theme" aria-label="ערכת עיצוב"><option value="soccer">כדורגל</option><option value="hoops">כדורסל</option><option value="alpine">סקי</option></select>
+    <select id="screen" aria-label="מסך לדוגמה"><option value="live">משחק</option><option value="pause">השהיה</option><option value="result">תוצאה</option></select>
+    <select id="event" aria-label="אירוע לדוגמה"><option value="goal">שער</option><option value="basket">קליעה</option><option value="fall">נפילה</option></select>
+    <button id="direction" type="button" aria-label="שינוי כיוון טקסט">LTR</button>
+  </nav>
+  <main class="ih-stage" aria-label="הדגמת רכיבים · נתונים מומצאים">
+    <div class="demo-world" aria-hidden="true"></div>
+    <div class="demo-note">האי שלי · נתוני דוגמה<br><span id="input-note">גוררים את הסטיק · מחזיקים פעולה לטעינה</span></div>
+    <div class="ih-layout">
+      <header class="ih-top"><div data-slot="pause"></div><div data-slot="score"></div></header>
+      <div class="ih-center"><div data-slot="event"></div></div>
+      <div class="ih-bottom">
+        <div data-slot="stick"></div>
+        <div class="ih-readouts"><div data-slot="power"></div><div data-slot="speed"></div></div>
+        <div class="ih-actions"><div data-slot="primary"></div><div data-slot="secondary"></div><div data-slot="third"></div></div>
+      </div>
+    </div>
+    <div data-slot="panels"></div>
+  </main>
+  <script type="module" src="demo.mjs"></script>
+</body>
+</html>

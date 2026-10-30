@@ -1,0 +1,11 @@
+html, body { height: 100%; margin: 0; }
+body { height: 100dvh; display: grid; grid-template-rows: auto minmax(0, 1fr); background: #091826; }
+.demo-toolbar { display: flex; justify-content: center; align-items: center; gap: 8px; padding: calc(4px + env(safe-area-inset-top, 0px)) calc(8px + env(safe-area-inset-right, 0px)) 4px calc(8px + env(safe-area-inset-left, 0px)); background: #091826; }
+.demo-toolbar select, .demo-toolbar button { font: inherit; color: #f5f8fa; border: 1px solid #8494a2; background: #172d3e; border-radius: 8px; min-width: 44px; height: 44px; max-width: 100%; }
+.demo-toolbar select { min-width: 0; width: 90px; }
+.demo-toolbar :focus-visible { outline: 3px solid white; outline-offset: 1px; }
+.demo-world { position: absolute; inset: 0; z-index: -1; background: linear-gradient(#07141daa, #07141d44), repeating-linear-gradient(90deg, #287748 0 10%, #36945b 10% 20%); }
+[data-theme="hoops"] .demo-world { background: linear-gradient(#211d35bb, #211d3544), repeating-linear-gradient(90deg, #b56e42 0 3%, #cd8751 3% 6%); }
+[data-theme="alpine"] .demo-world { background: linear-gradient(140deg, #5fbcd9, #bee8f3 45%, #ecf8fa 45%); }
+.demo-note { position: absolute; top: 43%; left: 50%; transform: translate(-50%, -50%); width: min(300px, 80%); text-align: center; font-size: 14px; color: #c8d3dd; background: #091826; padding: 12px; border: 1px solid #607588; border-radius: 10px; }
+@media (max-height: 430px) { .demo-note { display: none; } }
