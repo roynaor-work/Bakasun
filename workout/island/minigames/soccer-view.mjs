@@ -1,19 +1,19 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-boar-20261029-2';
-import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-boar-20261029-2';
-import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-boar-20261029-2';
-import {createSoccerLighting} from './soccer-lighting.mjs?v=island-boar-20261029-2';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-boar-20261029-2';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-soccer-league-20261029-1';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-soccer-league-20261029-1';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-soccer-league-20261029-1';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-soccer-league-20261029-1';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-soccer-league-20261029-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-boar-20261029-2';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=island-boar-20261029-2';
-import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-boar-20261029-2';
-import {holdSoccerBall} from './soccer-poses.mjs?v=island-boar-20261029-2';
-import {passDestination} from './soccer.mjs?v=island-boar-20261029-2';
-import {setupAthletes} from './soccer-athlete.mjs?v=island-boar-20261029-2';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES} from './soccer-athlete-motion.mjs?v=island-boar-20261029-2';
-import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-boar-20261029-2';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-soccer-league-20261029-1';
+import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc} from './soccer-presentation.mjs?v=island-soccer-league-20261029-1';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-soccer-league-20261029-1';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-soccer-league-20261029-1';
+import {passDestination} from './soccer.mjs?v=island-soccer-league-20261029-1';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-soccer-league-20261029-1';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES} from './soccer-athlete-motion.mjs?v=island-soccer-league-20261029-1';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-soccer-league-20261029-1';
 
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   const roster=config.players.roster;let poseFocus=null,poseMode=null,poses=[];
@@ -224,7 +224,8 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
         pivot.updateMatrixWorld(true);const headWorld=bones.Head.bone.getWorldPosition(character.headPoint),feet=character.feetPoints;bones.Foot_L.bone.getWorldPosition(feet[0]);bones.Foot_R.bone.getWorldPosition(feet[1]);const along=v=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz;
         const ballDistance=v=>Math.hypot(v.x-s.ball.x,v.y-s.ball.y,v.z-s.ball.z),handRadii=p.hands?['L','R'].map(side=>ballDistance(bones['Hand_'+side].bone.getWorldPosition(target))):null;
         poses.push({id:p.id,mode:animation.mode,clip:animation.clip,headAlong:along(headWorld),footAlong:Math.max(...feet.map(along)),headHeight:headWorld.y,lean:animation.lean,footDistance:s.ball.owner===p.id&&!p.hands?Math.min(...feet.map(ballDistance)):null,handRadii});
-      }}else{
+      }}else if(assetStatus==='fallback'){
+        // The block figures are only the failure fallback, never a loading placeholder.
         const angle=Math.atan2(p.fx,p.fz),cos=Math.cos(angle),sin=Math.sin(angle),kit=p.team===0?config.team.colors:config.opponent.colors,shirt=p.role==='keeper'?kit[1]:kit[0];
         const point=(x,z)=>({x:p.x+x*cos+z*sin,z:p.z-x*sin+z*cos});
         const speed=Math.hypot(p.vx,p.vz),swing=Math.sin(time*12+p.id)*Math.min(.18,speed*.045);
@@ -233,7 +234,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
         const number=point(0,.176);box(number.x,1.02,number.z,.065,.22,.018,kit[1],angle);
       }
       for(let i=0;i<config.view.animation.turfPerPlayer;i++){const moving=p.slideTime>0,age=(time*3+i/config.view.animation.turfPerPlayer)%1;turfPositions.set([p.x-p.fx*age*.8+Math.sin(i*4)*.2,moving?.08+age*.2:-10,p.z-p.fz*age*.8+Math.cos(i*4)*.2],turfAt);turfAt+=3;}
-      dummy.position.set(p.x+.18,.03,p.z-.12);dummy.rotation.set(-Math.PI/2,0,-.6);dummy.scale.set(.85,.58,1);dummy.updateMatrix();shadows.setMatrixAt(p.id,dummy.matrix);
+      dummy.position.set(p.x+.18,.03,p.z-.12);dummy.rotation.set(-Math.PI/2,0,-.6);dummy.scale.set(.85,.58,1);if(assetStatus==='loading')dummy.scale.setScalar(0);dummy.updateMatrix();shadows.setMatrixAt(p.id,dummy.matrix);
       dummy.position.set(p.x,2.15,p.z);dummy.rotation.set(Math.PI/2-.6,0,0);dummy.scale.setScalar(p.request||receiver===p.id?1:0);dummy.updateMatrix();requests.setMatrixAt(p.id,dummy.matrix);
     }
     practiceTarget.visible=!!s.practiceTarget;practiceCones.count=s.practiceTarget?.cones?2:0;if(s.practiceTarget){const p=s.practiceTarget;practiceTarget.position.set(p.x,p.cones ? .05 : 1,p.z);practiceTarget.rotation.set(p.cones?-Math.PI/2:0,p.cones?0:Math.PI/2,0);for(let i=0;i<practiceCones.count;i++){dummy.position.set(p.x,.3,p.z+(i?1:-1)*config.training.coneWidth/2);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();practiceCones.setMatrixAt(i,dummy.matrix);}practiceCones.instanceMatrix.needsUpdate=true;}

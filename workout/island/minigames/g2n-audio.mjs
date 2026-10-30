@@ -1,4 +1,4 @@
-const VERSION='island-boar-20261029-2';
+const VERSION='island-soccer-league-20261029-1';
 export const G2N_SAMPLES=Object.freeze(['engine','fire','ladder','rescue']);
 /** Fire-only mix: CC0 samples, filtered noise and harmonic envelopes. */
 export function createG2nAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){

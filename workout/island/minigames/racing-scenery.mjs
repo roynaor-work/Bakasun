@@ -1,4 +1,4 @@
-import {createRacingRoadside} from './racing-roadside.mjs?v=island-boar-20261029-2';
+import {createRacingRoadside} from './racing-roadside.mjs?v=island-soccer-league-20261029-1';
 /** Original, instanced roadside scenery. The view owns every registered resource. */
 export function createRacingScenery({T,scene,track,colors,keep,mat,seed=1,center}){
  let word=(seed>>>0)^0x734af21;const random=()=>((word=(Math.imul(word,1664525)+1013904223)>>>0)/4294967296);

@@ -14,5 +14,9 @@ export function soccerResult(raw,ctx,balance) {
   if(!Number.isInteger(r.stars)||r.stars!==stars)return null;
   const outcome=r.won?'win':'lose';
   if(raw.outcome!==outcome||raw.score!==r.goalsFor)return null;
-  return {outcome,score:r.goalsFor,money:r.won?Math.floor((balance.levels[r.stage-1].winMoney+Math.floor(r.goalsFor/balance.pointsPerCoin))*balance.difficulties[r.difficulty].coinMultiplier):0,stars:r.won?r.stars:0};
+  // Bonus penalties (league.penalties): optional, bounded, and paid even after a loss.
+  const rule=balance.league?.penalties,pen=raw.penalties;let penalties=null;
+  if(pen!==undefined){if(!rule||!pen||typeof pen!=='object'||Array.isArray(pen)||Object.keys(pen).length!==2||!Number.isInteger(pen.attempts)||!Number.isInteger(pen.hits)||pen.attempts<0||pen.attempts>rule.kicks||pen.hits<0||pen.hits>pen.attempts)return null;penalties={attempts:pen.attempts,hits:pen.hits,money:pen.hits*rule.coinsPerGoal};}
+  const money=(r.won?Math.floor((balance.levels[r.stage-1].winMoney+Math.floor(r.goalsFor/balance.pointsPerCoin))*balance.difficulties[r.difficulty].coinMultiplier):0)+(penalties?.money||0);
+  return {outcome,score:r.goalsFor,money,stars:r.won?r.stars:0,...(penalties?{penalties}:{})};
 }

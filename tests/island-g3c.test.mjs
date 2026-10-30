@@ -28,7 +28,9 @@ function fixture(){let time=1_000_000;const values=new Map(),storage={getItem:k=
 function pitch(e){assert.ok(e.place('soccer',4,8).ok);}
 const payload=(difficulty='easy',extra={})=>({won:true,goalsFor:3,goalsAgainst:0,stage:1,stars:3,seed:42,difficulty,durationSeconds:150,...extra});
 const envelope=r=>({outcome:r.won?'win':'lose',score:r.goalsFor,soccer:r});
-function round(e){let ctx;e.registry.minigames.set('soccer',{...e.registry.minigames.get('soccer'),start:c=>(ctx=c,{dispose(){}})});const response=e.startMinigame('soccer',{seed:42,level:1});assert.ok(response.ok);return {ctx,response};}
+// League ladder (29/10/2026): the match number decides the difficulty (first match of each league).
+const leagueStage=difficulty=>1+c.league.matchesPerLeague*c.league.leagues.findIndex(l=>l.difficulty===difficulty);
+function round(e,level=1){let ctx;e.registry.minigames.set('soccer',{...e.registry.minigames.get('soccer'),start:c=>(ctx=c,{dispose(){}})});e.state.minigameProgress.soccer.stage=Math.max(e.state.minigameProgress.soccer.stage,level);const response=e.startMinigame('soccer',{seed:42,level});assert.ok(response.ok);return {ctx,response};}
 
 test('G3c released joystick direction overrides charge direction; short touch shoots weakly',()=>{
  const g=setup();g.update(dt,{kickHeld:true,moveX:1});g.update(dt,{moveZ:1});const s=g.getState();assert.equal(s.event.type,'shot');assert.equal(s.event.assisted,false);near(s.ball.vx,0);assert.ok(s.ball.vz>0);assert.ok(s.event.power<.1);
@@ -137,12 +139,12 @@ test('G3c stamina enlarges capacity and regen; defense adds the configured chanc
  const low=defend(()=>.8,{card:card(50)}),high=defend(()=>.8,{card:card(99)});low.update(dt,{passPressed:true});high.update(dt,{passPressed:true});assert.equal(low.getState().ball.owner,3);assert.equal(high.getState().ball.owner,0);
 });
 for(const difficulty of ['easy','normal','hard'])test(`G3c ${difficulty} repeated wins credit training wallet independently of map stars`,()=>{
- const {engine:e}=fixture();pitch(e);e.setSoccerDifficulty(difficulty);const money=e.state.money,expected=Math.floor((c.levels[0].winMoney+1)*c.difficulties[difficulty].coinMultiplier);
- for(let i=1;i<=2;i++){const {ctx}=round(e),r=ctx.finish(envelope(payload(difficulty)));assert.ok(r.ok);assert.equal(r.result.money,expected);assert.equal(r.result.trainingStars,3+c.difficulties[difficulty].bonusStars);assert.equal(e.state.soccerCard.stars,i*(3+c.difficulties[difficulty].bonusStars));assert.equal(e.state.minigameProgress.soccer.stars[0],3);assert.equal(ctx.finish(envelope(payload(difficulty))).ok,false);}
+ const {engine:e}=fixture();pitch(e);const stage=leagueStage(difficulty),money=e.state.money,expected=Math.floor((c.levels[stage-1].winMoney+1)*c.difficulties[difficulty].coinMultiplier);
+ for(let i=1;i<=2;i++){const {ctx}=round(e,stage),r=ctx.finish(envelope(payload(difficulty,{stage})));assert.ok(r.ok);assert.equal(r.result.money,expected);assert.equal(r.result.trainingStars,3+c.difficulties[difficulty].bonusStars);assert.equal(e.state.soccerCard.stars,i*(3+c.difficulties[difficulty].bonusStars));assert.equal(e.state.minigameProgress.soccer.stars[stage-1],3);assert.equal(ctx.finish(envelope(payload(difficulty,{stage}))).ok,false);}
  assert.equal(e.state.money,money+2*expected);
 });
 for(const score of [[0,1],[1,1]])test(`G3c ${score.join(':')} awards no training currency`,()=>{
- const {engine:e}=fixture();pitch(e);e.setSoccerDifficulty('hard');const {ctx}=round(e);assert.ok(ctx.finish(envelope(payload('hard',{won:false,goalsFor:score[0],goalsAgainst:score[1],stars:1}))).ok);assert.equal(e.state.soccerCard.stars,0);
+ const {engine:e}=fixture();pitch(e);const stage=leagueStage('hard'),{ctx}=round(e,stage);assert.ok(ctx.finish(envelope(payload('hard',{stage,won:false,goalsFor:score[0],goalsAgainst:score[1],stars:1}))).ok);assert.equal(e.state.soccerCard.stars,0);
 });
 test('G3c result requires precisely eight fields, a valid difficulty and the captured start selection',()=>{
  const raw=payload('easy'),ctx={level:1,seed:42,difficulty:'easy'};assert.ok(soccerResult(envelope(raw),ctx,c));for(const key of Object.keys(raw)){const missing={...raw};delete missing[key];assert.equal(soccerResult(envelope(missing),ctx,c),null,key);}

@@ -1,4 +1,4 @@
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-boar-20261029-2';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-soccer-league-20261029-1';
 // Keep the five established save slots valid, including legacy shield purchases.
 // The four visible tracks reuse hull/damage/rate/ammo, so v15 saves need no migration.
 export const NAVAL_TRACKS=Object.freeze({hull:'hull',cannon:'damage',aim:'rate',speed:'ammo'});
@@ -6,8 +6,8 @@ export function navalUpgradeRanks(state){const saved=state?.minigameEquipment?.n
 const choices=new WeakMap();
 export const navalDifficulty=engine=>choices.get(engine)||'normal';
 export function ensureNavalTheme(){
- if(!document.querySelector('[data-naval-upgrade-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-upgrades.css?v=island-boar-20261029-2',import.meta.url).href;link.dataset.navalUpgradeStyle='';document.head.append(link);}
- if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=island-boar-20261029-2',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-upgrade-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-upgrades.css?v=island-soccer-league-20261029-1',import.meta.url).href;link.dataset.navalUpgradeStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=island-soccer-league-20261029-1',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
 }
 const upgradeMarks={hull:'M8 26h48l-8 17H18ZM19 26V16h23v10M26 16V9h10v7M7 51q8-6 16 0t16 0 17 0',cannon:'m15 35 31-18 4 7-31 18ZM22 39l9 11H11ZM40 15l5-3 8 13-5 3M7 53h46',aim:'M32 6v11M32 47v11M6 32h11M47 32h11M32 13a19 19 0 1 0 0 38 19 19 0 0 0 0-38ZM32 25a7 7 0 1 0 0 14 7 7 0 0 0 0-14Z',speed:'m27 13 16 19-16 19M12 17l13 15-13 15M43 21l10 11-10 11'};
 function upgradeMark(name){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 64 64');svg.setAttribute('aria-hidden','true');svg.classList.add('naval-upgrade-mark');const path=document.createElementNS(svg.namespaceURI,'path');path.setAttribute('d',upgradeMarks[name]);path.setAttribute('fill','none');path.setAttribute('stroke','currentColor');path.setAttribute('stroke-width','2');path.setAttribute('stroke-linejoin','round');path.setAttribute('stroke-linecap','round');svg.append(path);return svg;}

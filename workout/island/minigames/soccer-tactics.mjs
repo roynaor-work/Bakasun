@@ -1,5 +1,5 @@
-import {passLaneClearance,teamFormation,teamPresser} from './soccer-teamplay.mjs?v=island-boar-20261029-2';
-export {selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint} from './soccer-teamplay.mjs?v=island-boar-20261029-2';
+import {passLaneClearance,teamFormation,teamPresser} from './soccer-teamplay.mjs?v=island-soccer-league-20261029-1';
+export {selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance} from './soccer-teamplay.mjs?v=island-soccer-league-20261029-1';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 /** One ball press; everyone else returns to a zone or finds a passing lane. */
@@ -14,10 +14,18 @@ export function fieldTarget(p,s,c){
   const advance=a.advance[role]*formation.advance;
   x=owner.x+d*advance;z=lane+owner.z*a.ballWidth;duty='support';
   if(p.role==='striker')x+=d*a.strikerRun*formation.advance;
+  // Wide carrier in the final third: one runner attacks the box for a header,
+  // another comes square and central for the lateral pass (29/10/2026 sim: 0 headers in 12 matches).
+  const w=a.wideAttack,wide=w&&Math.abs(owner.z)>=w.width&&hx-owner.x*d<=w.range;
+  if(wide){
+   const runner=mates.filter(q=>q.id!==owner.id).sort((u,v)=>(v.role==='striker')-(u.role==='striker')||(v.x-u.x)*d||u.id-v.id)[0];
+   if(runner?.id===p.id){x=d*(hx-c.pitch.penaltySpot-w.boxDepth);z=-Math.sign(owner.z)*w.farPost;duty='box-run';}
+   else{x=owner.x-d*w.squareBack;z=owner.z*w.squareInside;duty='square';}
+  }
   // A pressed carrier gets a safe outlet: the support player drops diagonally behind,
   // on the side away from the nearest presser, instead of running further ahead.
   const o=a.outlet,presser=o&&p.role==='support'?opponents.filter(q=>q.role!=='keeper').sort((u,v)=>distance(u,owner)-distance(v,owner))[0]:null;
-  if(presser&&distance(presser,owner)<o.pressure){const side=owner.z>=presser.z?1:-1,wide=Math.abs(owner.z+side*o.wide)<hz-a.sideInset?side:-side;x=owner.x-d*o.back;z=owner.z+wide*o.wide;duty='outlet';}
+  if(presser&&duty==='support'&&distance(presser,owner)<o.pressure){const side=owner.z>=presser.z?1:-1,wide=Math.abs(owner.z+side*o.wide)<hz-a.sideInset?side:-side;x=owner.x-d*o.back;z=owner.z+wide*o.wide;duty='outlet';}
   // Search nearby space, rewarding both room to receive and a clear pass lane.
   const ideal={x:clamp(x,-hx+a.goalInset,hx-a.goalInset),z:clamp(z,-hz+a.sideInset,hz-a.sideInset)};
   let best=-Infinity;
