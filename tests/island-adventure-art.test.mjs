@@ -5,6 +5,7 @@ import * as T from '../workout/island/vendor/three.module.js';
 import {loadData} from '../workout/island/engine/load-data.mjs';
 import {createEngine} from '../workout/island/engine/engine.mjs';
 import {createNavalModel,navalHullContact} from '../workout/island/minigames/naval.mjs';
+import {navalLanding,navalBallisticPoint} from '../workout/island/minigames/naval-ballistics.mjs';
 import {seededRandom} from '../workout/island/minigames/context.mjs';
 import {createNavalProjectiles} from '../workout/island/minigames/naval-projectiles.mjs';
 import {createNavalImpacts} from '../workout/island/minigames/naval-impacts.mjs';
@@ -38,17 +39,15 @@ test('farther starting fleet stays visible, targetable and lockable',()=>{
  model.beginAim(enemy.index);assert.equal(model.lockedTargetIndex,enemy.index);assert.ok(model.lockedTarget.hp>0);
 });
 
-test('real shells that miss every hull land exactly at the calculated wind-adjusted water point',()=>{
+// 25/10/2026 archery aiming: shells fly one shared ballistic model; this test now checks that model.
+test('real shells that miss every hull land exactly at the previewed wind-adjusted water point',()=>{
  for(const seed of [0,17,93])for(const dt of [.01,.02,.05]){
-  const model=createNavalModel({config,balance,level:1,seed,random:seededRandom(seed)}),point={x:65,z:150};
-  const flight=balance.targeting.flightSeconds+Math.hypot(point.x-model.playerShip.x,point.z-model.playerShip.z)*balance.targeting.secondsPerRange;
-  const drift=balance.aim.wind.driftScale*balance.aim.wind.difficultyMin*flight*flight;
-  const expected={x:point.x+model.wind.x*drift,z:point.z+model.wind.z*drift},hp=model.enemies.map(e=>e.hp);
+  const model=createNavalModel({config,balance,level:1,seed,random:seededRandom(seed)}),point={x:65,z:150},hp=model.enemies.map(e=>e.hp);
   model.update(dt,{targetX:point.x,targetZ:point.z,firing:true});
-  assert.ok(model.ball.active);assert.equal(model.ball.duration,flight);
-  assert.equal(model.ball.targetX,expected.x);assert.equal(model.ball.targetZ,expected.z);
+  assert.ok(model.ball.active);const launch=model.ball.launch,expected=navalLanding(launch);assert.equal(model.ball.duration,launch.duration);assert.ok(Math.hypot(launch.ax,launch.az)>0,'wind is part of the launch');
+  assert.ok(Math.hypot(expected.x-point.x,expected.z-point.z)<.5,'the solved turret lands on the chosen sea point');assert.equal(model.ball.targetX,expected.x);assert.equal(model.ball.targetZ,expected.z);
   for(let i=0;i<200&&model.ball.active;i++)model.update(dt,{});
-  assert.equal(model.ball.active,false);assert.equal(model.ball.age,flight);
+  assert.equal(model.ball.active,false);assert.equal(model.ball.age,launch.duration);
   assert.equal(model.ball.x,expected.x);assert.equal(model.ball.z,expected.z);
   assert.equal(model.blast.x,expected.x);assert.equal(model.blast.z,expected.z);
   assert.equal(model.blast.hit,false);assert.equal(model.snapshot().hits,0);assert.equal(model.fired,1);
@@ -56,24 +55,24 @@ test('real shells that miss every hull land exactly at the calculated wind-adjus
  }
 });
 
+// 25/10/2026 archery aiming: shells fly one shared ballistic model; this test now checks that model.
 test('real shells hitting a hull explode at the calculated contact point and apply damage once',()=>{
  for(const dt of [.01,.02,.05]){
   const model=make(),enemy=model.enemies[0],hp=enemy.hp;
-  model.update(dt,{firing:true});assert.ok(model.ball.active);const launched={...model.ball};let previous;
-  // Freeze the ballistic endpoint: a hull collision replaces the live target
-  // with its earlier contact point so the rendered blast follows the impact.
-  for(let i=0;i<200&&model.ball.active;i++){previous={x:model.ball.x,z:model.ball.z};model.update(dt,{});}
-  assert.equal(model.ball.active,false);assert.ok(model.ball.age>launched.duration*.8&&model.ball.age<launched.duration);
-  const u=model.ball.age/launched.duration;
-  const expected={x:launched.fromX+(launched.targetX-launched.fromX)*u-launched.windOffsetX*u*(1-u),z:launched.fromZ+(launched.targetZ-launched.fromZ)*u-launched.windOffsetZ*u*(1-u)};
+  model.update(dt,{targetX:enemy.x,targetZ:enemy.z,firing:true});assert.ok(model.ball.active);const launched={...model.ball};let previous;
+  for(let i=0;i<200&&model.ball.active;i++){previous={x:model.ball.x,z:model.ball.z,h:model.ball.h};model.update(dt,{});}
+  assert.equal(model.ball.active,false);assert.ok(model.ball.age<launched.duration,'the hull stops the shell before its water landing');
+  const expected=navalBallisticPoint(launched.launch,model.ball.age);
   assert.equal(model.ball.x,expected.x);assert.equal(model.ball.z,expected.z);
   assert.equal(model.blast.x,expected.x);assert.equal(model.blast.z,expected.z);
-  assert.notEqual(model.blast.x,launched.targetX);assert.equal(model.ball.victim,enemy.index);
-  assert.equal(navalHullContact(previous,previous,enemy,balance),false);
+  // 27/10: a patrolling hull slides along its own length, so the shell can meet it exactly at the predicted contact;
+  // the hit still has to come before the water landing (asserted above) and land on that hull.
+  assert.ok(model.ball.age<launched.launch.duration);assert.equal(model.ball.victim,enemy.index);
+  assert.ok(model.ball.h<=balance.ballistics.hullTop&&navalHullContact(model.ball,model.ball,enemy,balance),'contact is on the hull, at deck height');
   assert.equal(navalHullContact(previous,model.ball,enemy,balance),true);
   assert.equal(model.blast.hit,true);assert.equal(model.snapshot().hits,1);assert.equal(model.fired,1);
-  const damage=model.settings.damage*balance.ammo[0].damage*(1+(model.settings.weaponLevel-1)*.1);
-  assert.equal(enemy.hp,hp-damage);
+  const damage=model.settings.damage*balance.ammo[0].damage*(1+(model.settings.weaponLevel-1)*.1)*(model.ball.critical?balance.ballistics.criticalMultiplier:1);
+  assert.equal(enemy.hp,Math.max(0,hp-damage));
   for(let i=0;i<20;i++)model.update(.01,{});
   assert.equal(enemy.hp,hp-damage);assert.equal(model.snapshot().hits,1);
  }

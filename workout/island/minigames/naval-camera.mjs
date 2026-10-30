@@ -4,7 +4,7 @@ export function navalWorldPoint(x,z,balance,y=0){
 }
 const mix=(a,b,t)=>a+(b-a)*t;
 export function navalCameraPose(ship,aim,aiming,balance,previous,dt=0,framing){
- if(framing?.battle)return battleCamera(ship,aim,aiming,balance,previous,dt,framing);
+ if(framing?.battle)return aimBlend(ship,aim,aiming,balance,previous,dt,framing);
  const c=balance.render.follow,desired=ship.heading||0;
  const ease=previous?1-Math.exp(-c.ease*Math.max(0,dt)):1;
  const heading=previous?previous.heading+Math.atan2(Math.sin(desired-previous.heading),Math.cos(desired-previous.heading))*ease:desired;
@@ -13,6 +13,24 @@ export function navalCameraPose(ship,aim,aiming,balance,previous,dt=0,framing){
  const ahead=(a.x-p.x)*Math.sin(heading)-(a.z-p.z)*Math.cos(heading),weight=ahead>c.aimForwardMin?zoom*c.aimFocus:0;
  const focus={x:mix(p.x+Math.sin(heading)*c.lookAhead,a.x,weight),y:c.lookHeight,z:mix(p.z-Math.cos(heading)*c.lookAhead,a.z,weight)};
  return {heading,zoom,fov:mix(c.fov,c.aimFov,zoom),position:{x:p.x-Math.sin(heading)*distance,y:height,z:p.z+Math.cos(heading)*distance},focus};
+}
+
+/** Aiming moves behind the turret along the real firing direction and leans
+ * toward the predicted landing. The battle framing returns when it ends. */
+function aimBlend(ship,aim,aiming,balance,previous,dt,framing){
+ // Timed transition: in over enterSeconds, out over exitSeconds, smoothstep eased.
+ const ctl=balance.aimControls||{},ac=balance.aimCamera,seconds=Math.max(0,Number.isFinite(dt)?dt:0);
+ let progress=previous?(previous.progress??previous.zoom??0):Number(aiming);
+ progress=aiming?Math.min(1,progress+seconds/Math.max(.01,ctl.enterSeconds??.22)):Math.max(0,progress-seconds/Math.max(.01,ctl.exitSeconds??.3));
+ const zoom=progress*progress*(3-2*progress),base=battleCamera(ship,aim,false,balance,previous?.base??previous,dt,framing);
+ if(!ac||zoom<1e-3||!Number.isFinite(framing.aimYaw))return {...base,zoom,progress,base};
+ const p=navalWorldPoint(ship.x,ship.z,balance),ahead=navalWorldPoint(ship.x+Math.cos(framing.aimYaw)*10,(ship.z||0)+Math.sin(framing.aimYaw)*10,balance),dx=ahead.x-p.x,dz=ahead.z-p.z,len=Math.hypot(dx,dz)||1,d={x:dx/len,z:dz/len};
+ const target=framing.landing||aim,l=navalWorldPoint(target.x,target.z,balance),reach=Math.max(8,Math.min(70,(l.x-p.x)*d.x+(l.z-p.z)*d.z));
+ const along={x:p.x+d.x*reach,z:p.z+d.z*reach},look={x:mix(p.x+d.x*10,along.x,ac.focusMix),z:mix(p.z+d.z*10,along.z,ac.focusMix)};
+ const side=(ac.side||0)*(framing.aimSide===-1?-1:1),rx=-d.z,rz=d.x;
+ const shot={heading:Math.atan2(d.x,-d.z),fov:ac.fov,position:{x:p.x-d.x*ac.distance+rx*side,y:ac.height,z:p.z-d.z*ac.distance+rz*side},focus:{x:look.x+rx*side*.35,y:ac.lookHeight,z:look.z+rz*side*.35}};
+ const heading=base.heading+Math.atan2(Math.sin(shot.heading-base.heading),Math.cos(shot.heading-base.heading))*zoom,mv=(a,b)=>({x:mix(a.x,b.x,zoom),y:mix(a.y,b.y,zoom),z:mix(a.z,b.z,zoom)});
+ return {heading,zoom,progress,fov:mix(base.fov,shot.fov,zoom),position:mv(base.position,shot.position),focus:mv(base.focus,shot.focus),frameDistance:base.frameDistance,frameHeight:base.frameHeight,base};
 }
 /** A battle camera keeps both hulls on the water while the player steers. The
  * fleet, rather than the turret or ship's turn, establishes the viewing axis.
