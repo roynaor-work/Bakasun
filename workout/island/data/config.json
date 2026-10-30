@@ -8093,7 +8093,10 @@
     "maxPixelRatio": 1.5,
     "lowPixelRatio": 0.85,
     "slowFrameMs": 25,
-    "qualityWindowSeconds": 4,
+    "qualityWindowSeconds": 2,
+    "qualityQuickFrames": 20,
+    "qualityQuickFactor": 1.8,
+    "qualityGraceSeconds": 1,
     "maxTriangles": 130000,
     "maxDrawCalls": 90,
     "confettiCount": 96,
@@ -12796,7 +12799,7 @@
    "render": {
     "maxDpr": 1.7,
     "lowDpr": 1,
-    "qualitySampleFrames": 90,
+    "qualitySampleFrames": 60,
     "slowFrameMs": 30
    },
    "controls": {

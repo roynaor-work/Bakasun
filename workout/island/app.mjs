@@ -1,18 +1,18 @@
-import {watchRelease} from './ui/release-watch.mjs?v=island-naval-aim-20261030-1';
-import './view/learning-buildings.mjs?v=island-naval-aim-20261030-1';
-import {LearningInterface} from './learning/interface.mjs?v=island-naval-aim-20261030-1';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-naval-aim-20261030-1';
-import {createTranslator} from './ui/translate.mjs?v=island-naval-aim-20261030-1';
-import { loadData } from './engine/load-data.mjs?v=island-naval-aim-20261030-1';
-import { createEngine } from './engine/engine.mjs?v=island-naval-aim-20261030-1';
-import { IslandView } from './view/island-view.mjs?v=island-naval-aim-20261030-1';
-import { IslandInterface } from './ui/interface.mjs?v=island-naval-aim-20261030-1';
-import {createActivity} from './activity/runtime.mjs?v=island-naval-aim-20261030-1';
-import {ActivityInterface} from './ui/activity.mjs?v=island-naval-aim-20261030-1';
-import {installPressFeedback} from './ui/press.mjs?v=island-naval-aim-20261030-1';
-import {installGameShell} from './ui/game-shell.mjs?v=island-naval-aim-20261030-1';
-import {CityAccess} from './ui/city-access.mjs?v=island-naval-aim-20261030-1';
-import {navigationActive} from './view/city-navigation.mjs?v=island-naval-aim-20261030-1';
+import {watchRelease} from './ui/release-watch.mjs?v=island-perf-20261030-1';
+import './view/learning-buildings.mjs?v=island-perf-20261030-1';
+import {LearningInterface} from './learning/interface.mjs?v=island-perf-20261030-1';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-perf-20261030-1';
+import {createTranslator} from './ui/translate.mjs?v=island-perf-20261030-1';
+import { loadData } from './engine/load-data.mjs?v=island-perf-20261030-1';
+import { createEngine } from './engine/engine.mjs?v=island-perf-20261030-1';
+import { IslandView } from './view/island-view.mjs?v=island-perf-20261030-1';
+import { IslandInterface } from './ui/interface.mjs?v=island-perf-20261030-1';
+import {createActivity} from './activity/runtime.mjs?v=island-perf-20261030-1';
+import {ActivityInterface} from './ui/activity.mjs?v=island-perf-20261030-1';
+import {installPressFeedback} from './ui/press.mjs?v=island-perf-20261030-1';
+import {installGameShell} from './ui/game-shell.mjs?v=island-perf-20261030-1';
+import {CityAccess} from './ui/city-access.mjs?v=island-perf-20261030-1';
+import {navigationActive} from './view/city-navigation.mjs?v=island-perf-20261030-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

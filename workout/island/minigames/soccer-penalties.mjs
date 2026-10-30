@@ -1,4 +1,4 @@
-import {createSoccer} from './soccer.mjs?v=island-naval-aim-20261030-1';
+import {createSoccer} from './soccer.mjs?v=island-perf-20261030-1';
 /** Bonus penalties after every league match (29/10/2026): the child takes
  * league.penalties.kicks shots from the spot against the rival keeper. Each goal
  * pays coinsPerGoal; the match result is already final and never changes here.

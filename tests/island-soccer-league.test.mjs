@@ -90,5 +90,5 @@ test('result: bonus penalties pay per goal after a win or a loss and never chang
 test('camera and loading: closer camera, and the old block figures are only a failure fallback',async()=>{
  assert.equal(c.view.camera.nearDistance,15);
  const view=await readFile(new URL('../workout/island/minigames/soccer-view.mjs',import.meta.url),'utf8'),session=await readFile(new URL('../workout/island/minigames/soccer-session.mjs',import.meta.url),'utf8');
- assert.match(view,/else if\(assetStatus==='fallback'\)\{/);assert.match(session,/const loading=view\.metrics\(\)\.assetStatus==='loading'/);assert.match(session,/!paused&&!document\.hidden&&!loading/);
+ assert.match(view,/else if\(assetStatus==='fallback'\)\{/);assert.match(session,/const loading=view\.loading\(\);/);assert.match(session,/!paused&&!document\.hidden&&!loading/);
 });
