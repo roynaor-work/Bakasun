@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "id": "snow-dust",
+  "image": "snow-dust.webp",
+  "atlasSize": {
+    "width": 512,
+    "height": 512
+  },
+  "frameSize": {
+    "width": 128,
+    "height": 128
+  },
+  "columns": 4,
+  "rows": 4,
+  "frameCount": 16,
+  "fps": 20,
+  "frameOrder": "row-major-left-to-right-top-to-bottom",
+  "indexBase": 0,
+  "loop": false,
+  "durationSeconds": 0.8,
+  "paddingPixels": 8,
+  "pivot": {
+    "x": 0.5,
+    "y": 0.5
+  },
+  "alphaMode": "straight",
+  "colorSpace": "srgb",
+  "blendMode": "alpha",
+  "depthWrite": false,
+  "sampling": {
+    "minFilter": "linear",
+    "magFilter": "linear",
+    "wrap": "clamp-to-edge",
+    "mipmaps": false,
+    "uvInsetPixels": 0.5
+  },
+  "opacityEnvelope": [
+    {
+      "time": 0,
+      "opacity": 0
+    },
+    {
+      "time": 0.05,
+      "opacity": 1
+    },
+    {
+      "time": 0.6,
+      "opacity": 0.65
+    },
+    {
+      "time": 0.8,
+      "opacity": 0
+    }
+  ],
+  "envelopeInterpolation": "smoothstep",
+  "loopSeam": null,
+  "lowEnd": {
+    "maxInstances": 2,
+    "maxScreenFractionPerInstance": 0.035,
+    "residentTextureBytes": 1048576,
+    "drawCallsPerInstanceUpperBound": 1,
+    "trianglesPerInstance": 2,
+    "postprocessing": false
+  },
+  "fileBytes": 120988,
+  "sha256": "20ce434b91529ac707dfe5e0ce369b4dc9392345a3f0ece0211f98c597b6ef29"
+}

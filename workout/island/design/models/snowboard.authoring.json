@@ -1,0 +1,49 @@
+{
+  "id": "snowboard",
+  "category": "equipment",
+  "notes": "Original 1.50m snowboard with two separately named bindings.",
+  "view": [
+    1.2,
+    -1.45,
+    2.4
+  ],
+  "bounds_blender": [
+    [
+      -0.14499999582767487,
+      -0.7463645339012146,
+      0.0
+    ],
+    [
+      0.14499999582767487,
+      0.7463645339012146,
+      0.10966044664382935
+    ]
+  ],
+  "anchors": {
+    "anchor_boot_rear": [
+      0.0,
+      0.11066,
+      0.23
+    ],
+    "anchor_boot_front": [
+      0.0,
+      0.11066,
+      -0.23
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "snowboard",
+    "nose_accent",
+    "tail_accent",
+    "binding_rear",
+    "strap_rear",
+    "binding_front",
+    "strap_front"
+  ],
+  "triangles": 324
+}

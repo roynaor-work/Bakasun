@@ -1,0 +1,2901 @@
+{
+  "schemaVersion": 1,
+  "toolVersions": {
+    "gltfValidator": "2.0.0-dev.3.10",
+    "gltfTransform": "4.5.1",
+    "draco": "1.5.9"
+  },
+  "convention": {
+    "units": "metres",
+    "up": "+Y",
+    "forward": "+Z",
+    "root": "asset_root",
+    "referencePlayerHeightMetres": 1.8
+  },
+  "expectedModelCount": 16,
+  "modelCount": 16,
+  "glbBytes": 332824,
+  "totalPackageBudgetBytes": 2000000,
+  "totalPackageBytes": 1981728,
+  "packageFileCount": 96,
+  "validationScope": {
+    "compressed": true,
+    "independentlyDecoded": true,
+    "uvDegeneracy": true,
+    "uvOverlap": {
+      "tested": true,
+      "scope": "Triangle interiors within each material atlas after independent Draco decoding",
+      "method": "Uniform-grid broad phase and convex polygon clipping; shared boundaries are excluded",
+      "areaEpsilon": 1e-12,
+      "boundaryEpsilon": 1e-14
+    },
+    "physicalPhonePerformance": false
+  },
+  "allPassed": true,
+  "globalIssues": [],
+  "models": [
+    {
+      "id": "basketball",
+      "file": "basketball.glb",
+      "bytes": 52904,
+      "budgetBytes": 60000,
+      "sha256": "f8634bad7cc872d801e3efb67c774de9864537b6b337cf72b1d441b86bb74b85",
+      "category": "equipment",
+      "triangles": 3600,
+      "vertices": 7248,
+      "primitives": 2,
+      "boundsMetres": [
+        [
+          -0.1235961,
+          0,
+          -0.1235961
+        ],
+        [
+          0.1235944,
+          0.2471981,
+          0.1235944
+        ]
+      ],
+      "sizeMetres": [
+        0.2471905,
+        0.2471981,
+        0.2471905
+      ],
+      "uvBounds": [
+        [
+          0.0060682,
+          0.0107636
+        ],
+        [
+          0.9939318,
+          0.9939392
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 3589,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_ball_center",
+        "anchor_ball_spot",
+        "anchor_origin",
+        "asset_root",
+        "basketball",
+        "seams"
+      ],
+      "anchors": {
+        "anchor_ball_center": [
+          0,
+          0.123599,
+          0
+        ],
+        "anchor_ball_spot": [
+          0,
+          0,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "objectBoundsMetres": {
+        "basketball": [
+          [
+            -0.12,
+            0.003599,
+            -0.12
+          ],
+          [
+            0.12,
+            0.243599,
+            0.12
+          ]
+        ],
+        "seams": [
+          [
+            -0.1235961,
+            0,
+            -0.1235961
+          ],
+          [
+            0.1235944,
+            0.2471981,
+            0.1235944
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 60687,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 8,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 5,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "basketball-arena",
+      "file": "basketball-arena.glb",
+      "bytes": 67588,
+      "budgetBytes": 250000,
+      "sha256": "af8132875dcdef22c61828fd48d7549fbb98d82b55ae654abdd26dcd100fc556",
+      "category": "large",
+      "triangles": 5330,
+      "vertices": 10020,
+      "primitives": 10,
+      "boundsMetres": [
+        [
+          -15.3999996,
+          0,
+          -22
+        ],
+        [
+          15.4001942,
+          7.1497664,
+          22
+        ]
+      ],
+      "sizeMetres": [
+        30.8001938,
+        7.1497664,
+        44
+      ],
+      "uvBounds": [
+        [
+          0.0046499,
+          0.0046498
+        ],
+        [
+          0.9896957,
+          0.9952334
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 3934,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_ball_spot",
+        "anchor_free_throw_north",
+        "anchor_free_throw_south",
+        "anchor_origin",
+        "anchor_rim_center_north",
+        "anchor_rim_center_south",
+        "anchor_scoreboard_center",
+        "arena_shell",
+        "asset_root",
+        "backboard",
+        "basket_frame",
+        "beams",
+        "court_markings",
+        "court_surface",
+        "rim",
+        "roof",
+        "scoreboard",
+        "seating"
+      ],
+      "anchors": {
+        "anchor_ball_spot": [
+          0,
+          0,
+          0
+        ],
+        "anchor_free_throw_north": [
+          0,
+          0,
+          -8.1999998
+        ],
+        "anchor_free_throw_south": [
+          0,
+          0,
+          8.1999998
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_rim_center_north": [
+          0,
+          3.05,
+          -12.4250002
+        ],
+        "anchor_rim_center_south": [
+          0,
+          3.05,
+          12.4250002
+        ],
+        "anchor_scoreboard_center": [
+          0,
+          5.3000002,
+          -19
+        ]
+      },
+      "objectBoundsMetres": {
+        "arena_shell": [
+          [
+            -15.3000002,
+            0,
+            -22
+          ],
+          [
+            15.3002596,
+            4.2002592,
+            22
+          ]
+        ],
+        "backboard": [
+          [
+            -0.9,
+            3.1500001,
+            -12.8999996
+          ],
+          [
+            0.8999175,
+            4.1999521,
+            12.8999996
+          ]
+        ],
+        "basket_frame": [
+          [
+            -0.6,
+            0,
+            -16.5499992
+          ],
+          [
+            0.6000547,
+            4.2986813,
+            16.5499992
+          ]
+        ],
+        "beams": [
+          [
+            -15.1385641,
+            0.3000002,
+            -19.3212433
+          ],
+          [
+            15.138608,
+            7.0779877,
+            19.3212433
+          ]
+        ],
+        "court_markings": [
+          [
+            -7.5250001,
+            0.0009977,
+            -14.0249996
+          ],
+          [
+            7.5248828,
+            0.0510755,
+            14.0249996
+          ]
+        ],
+        "court_surface": [
+          [
+            -7.5,
+            0,
+            -14
+          ],
+          [
+            7.4999847,
+            0,
+            14
+          ]
+        ],
+        "rim": [
+          [
+            -0.263,
+            3.0335455,
+            -12.6880007
+          ],
+          [
+            0.2628351,
+            3.0664587,
+            12.6879988
+          ]
+        ],
+        "roof": [
+          [
+            -15.3999996,
+            6.8499999,
+            -21.3999996
+          ],
+          [
+            15.4001942,
+            7.1497664,
+            21.3999996
+          ]
+        ],
+        "scoreboard": [
+          [
+            -2.5,
+            4.4000001,
+            -19.125
+          ],
+          [
+            2.5,
+            6.2000303,
+            -18.8150139
+          ]
+        ],
+        "seating": [
+          [
+            -14.0200005,
+            0.82,
+            -20.6200008
+          ],
+          [
+            14.0201797,
+            4.4799047,
+            20.6200008
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 73929,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 28,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 17,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "basketball-hoop",
+      "file": "basketball-hoop.glb",
+      "bytes": 30640,
+      "budgetBytes": 60000,
+      "sha256": "be3985a93134befa940a44b583741683782032193a650db81f2b612b08f0fc35",
+      "category": "equipment",
+      "triangles": 1332,
+      "vertices": 2560,
+      "primitives": 11,
+      "boundsMetres": [
+        [
+          -0.9125,
+          0,
+          -0.9525
+        ],
+        [
+          0.9125001,
+          3.9549956,
+          0.9525
+        ]
+      ],
+      "sizeMetres": [
+        1.825,
+        3.9549956,
+        1.905
+      ],
+      "uvBounds": [
+        [
+          0.0042174,
+          0.0042174
+        ],
+        [
+          0.9948241,
+          0.9957868
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 1080,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_backboard_center",
+        "anchor_ball_spot",
+        "anchor_mount",
+        "anchor_origin",
+        "anchor_rim_center",
+        "asset_root",
+        "backboard",
+        "backboard_arm",
+        "backboard_frame",
+        "backboard_target",
+        "base",
+        "base_pad",
+        "net",
+        "post_pad",
+        "rim",
+        "rim_mount",
+        "support_post"
+      ],
+      "anchors": {
+        "anchor_backboard_center": [
+          0,
+          3.425,
+          0.3325
+        ],
+        "anchor_ball_spot": [
+          0,
+          0.12,
+          4.9074998
+        ],
+        "anchor_mount": [
+          0,
+          0,
+          -0.5624999
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_rim_center": [
+          0,
+          3.05,
+          0.7075
+        ]
+      },
+      "objectBoundsMetres": {
+        "backboard": [
+          [
+            -0.9,
+            2.9000001,
+            0.2325
+          ],
+          [
+            0.9,
+            3.950007,
+            0.3325046
+          ]
+        ],
+        "backboard_arm": [
+          [
+            -0.065,
+            3.355,
+            -0.5624999
+          ],
+          [
+            0.0650038,
+            3.4850039,
+            0.2575001
+          ]
+        ],
+        "backboard_frame": [
+          [
+            -0.9125,
+            2.895,
+            0.3355
+          ],
+          [
+            0.9125001,
+            3.9549956,
+            0.3534897
+          ]
+        ],
+        "backboard_target": [
+          [
+            -0.3075,
+            3.0425,
+            0.3375
+          ],
+          [
+            0.3074999,
+            3.5075014,
+            0.3554991
+          ]
+        ],
+        "base": [
+          [
+            -0.5600001,
+            0,
+            -0.9525
+          ],
+          [
+            0.5599948,
+            0.1799982,
+            0.2675
+          ]
+        ],
+        "base_pad": [
+          [
+            -0.44,
+            0.17,
+            -0.8425
+          ],
+          [
+            0.440003,
+            0.289997,
+            0.1575
+          ]
+        ],
+        "net": [
+          [
+            -0.234252,
+            2.5971725,
+            0.4732481
+          ],
+          [
+            0.234252,
+            3.0365517,
+            0.9417521
+          ]
+        ],
+        "post_pad": [
+          [
+            -0.145,
+            0.29,
+            -0.6425
+          ],
+          [
+            0.144991,
+            1.8099999,
+            -0.3824984
+          ]
+        ],
+        "rim": [
+          [
+            -0.245,
+            3.0413396,
+            0.4625
+          ],
+          [
+            0.245,
+            3.0586636,
+            0.9525
+          ]
+        ],
+        "rim_mount": [
+          [
+            -0.06,
+            3.0325,
+            0.3375
+          ],
+          [
+            0.0599993,
+            3.0675006,
+            0.4975
+          ]
+        ],
+        "support_post": [
+          [
+            -0.075,
+            0.2900001,
+            -0.6374999
+          ],
+          [
+            0.0750165,
+            3.7800002,
+            -0.4874834
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 67710,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 28,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 16,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "fence",
+      "file": "fence.glb",
+      "bytes": 9340,
+      "budgetBytes": 60000,
+      "sha256": "3a891f9a1d936a3570b432d300c28f12657300d23604e0650b408b60d2aa0e97",
+      "category": "equipment",
+      "triangles": 488,
+      "vertices": 894,
+      "primitives": 3,
+      "boundsMetres": [
+        [
+          -1.54,
+          0,
+          -0.04
+        ],
+        [
+          1.54,
+          1.1999944,
+          0.0399902
+        ]
+      ],
+      "sizeMetres": [
+        3.0799999,
+        1.1999944,
+        0.0799902
+      ],
+      "uvBounds": [
+        [
+          0.0036277,
+          0.0036278
+        ],
+        [
+          0.8289061,
+          0.9963723
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 307,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_connect_left",
+        "anchor_connect_right",
+        "anchor_fence_center",
+        "anchor_origin",
+        "asset_root",
+        "fence_net",
+        "fence_posts",
+        "fence_rails"
+      ],
+      "anchors": {
+        "anchor_connect_left": [
+          -1.5,
+          0,
+          0
+        ],
+        "anchor_connect_right": [
+          1.5,
+          0,
+          0
+        ],
+        "anchor_fence_center": [
+          0,
+          0.6,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "objectBoundsMetres": {
+        "fence_net": [
+          [
+            -1.5133148,
+            0.1770557,
+            -0.015217
+          ],
+          [
+            1.5133148,
+            0.926012,
+            0.0152179
+          ]
+        ],
+        "fence_posts": [
+          [
+            -1.54,
+            0,
+            -0.04
+          ],
+          [
+            1.54,
+            1.1999944,
+            0.0399902
+          ]
+        ],
+        "fence_rails": [
+          [
+            -1.5,
+            0.1049999,
+            -0.0216507
+          ],
+          [
+            1.5,
+            1.0249816,
+            0.0216544
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 75620,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 11,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 7,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "fir-a",
+      "file": "fir-a.glb",
+      "bytes": 5112,
+      "budgetBytes": 60000,
+      "sha256": "5dd6db0e433bb0e9d9b545322819bb89296d447b94f92729e7e0b02fa3986b98",
+      "category": "equipment",
+      "triangles": 87,
+      "vertices": 231,
+      "primitives": 2,
+      "boundsMetres": [
+        [
+          -1.1975288,
+          0,
+          -1.2037408
+        ],
+        [
+          1.1975572,
+          4.408,
+          1.2037239
+        ]
+      ],
+      "sizeMetres": [
+        2.3950861,
+        4.408,
+        2.4074647
+      ],
+      "uvBounds": [
+        [
+          0.0027589,
+          0.0656222
+        ],
+        [
+          0.9972411,
+          0.9972411
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 406,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_origin",
+        "anchor_tree_tip",
+        "anchor_trunk_base",
+        "asset_root",
+        "foliage",
+        "trunk"
+      ],
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_tree_tip": [
+          -0.0079429,
+          4.4000001,
+          0.048201
+        ],
+        "anchor_trunk_base": [
+          -0.0479429,
+          0,
+          0.048201
+        ]
+      },
+      "objectBoundsMetres": {
+        "foliage": [
+          [
+            -1.1975288,
+            0.5264537,
+            -1.2037408
+          ],
+          [
+            1.1975572,
+            4.408,
+            1.2037239
+          ]
+        ],
+        "trunk": [
+          [
+            -0.1746836,
+            0,
+            -0.0689249
+          ],
+          [
+            0.0788024,
+            3.3,
+            0.1782163
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 69443,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 8,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 5,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "fir-b",
+      "file": "fir-b.glb",
+      "bytes": 5320,
+      "budgetBytes": 60000,
+      "sha256": "bc68437249873546f0c40089f0fc5c4b094212b67e806b8bcc3f1823f78c77d0",
+      "category": "equipment",
+      "triangles": 96,
+      "vertices": 258,
+      "primitives": 2,
+      "boundsMetres": [
+        [
+          -0.908247,
+          0,
+          -0.8405763
+        ],
+        [
+          0.9082744,
+          5.2080002,
+          0.8405613
+        ]
+      ],
+      "sizeMetres": [
+        1.8165214,
+        5.2080002,
+        1.6811376
+      ],
+      "uvBounds": [
+        [
+          0.0035736,
+          0.0035735
+        ],
+        [
+          0.9964226,
+          0.9964279
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 419,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_origin",
+        "anchor_tree_tip",
+        "anchor_trunk_base",
+        "asset_root",
+        "foliage",
+        "trunk"
+      ],
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_tree_tip": [
+          -0.0921092,
+          5.1999998,
+          -0.0444596
+        ],
+        "anchor_trunk_base": [
+          -0.0021092,
+          0,
+          -0.0144596
+        ]
+      },
+      "objectBoundsMetres": {
+        "foliage": [
+          [
+            -0.908247,
+            0.6510513,
+            -0.8405763
+          ],
+          [
+            0.9082744,
+            5.2080002,
+            0.8405613
+          ]
+        ],
+        "trunk": [
+          [
+            -0.1044766,
+            0,
+            -0.1090613
+          ],
+          [
+            0.1002384,
+            3.9000001,
+            0.0905358
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 71297,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 8,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 5,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "fir-c",
+      "file": "fir-c.glb",
+      "bytes": 5324,
+      "budgetBytes": 60000,
+      "sha256": "9984251a3cac074e315cec7f510ada2fd8f1738b40f5436506c47eb8d598cffb",
+      "category": "equipment",
+      "triangles": 96,
+      "vertices": 258,
+      "primitives": 2,
+      "boundsMetres": [
+        [
+          -1.2014486,
+          0,
+          -1.2366601
+        ],
+        [
+          1.2014312,
+          3.2579999,
+          1.2366608
+        ]
+      ],
+      "sizeMetres": [
+        2.4028797,
+        3.2579999,
+        2.473321
+      ],
+      "uvBounds": [
+        [
+          0.0035844,
+          0.003152
+        ],
+        [
+          0.9662639,
+          0.9967276
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 197,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_origin",
+        "anchor_tree_tip",
+        "anchor_trunk_base",
+        "asset_root",
+        "foliage",
+        "trunk"
+      ],
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_tree_tip": [
+          0.0590449,
+          3.25,
+          -0.0116448
+        ],
+        "anchor_trunk_base": [
+          0.0390449,
+          0,
+          -0.0516448
+        ]
+      },
+      "objectBoundsMetres": {
+        "foliage": [
+          [
+            -1.2014486,
+            0.3564537,
+            -1.2366601
+          ],
+          [
+            1.2014312,
+            3.2579999,
+            1.2366608
+          ]
+        ],
+        "trunk": [
+          [
+            -0.0876958,
+            0,
+            -0.1687708
+          ],
+          [
+            0.1657804,
+            2.4375,
+            0.0783453
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 68098,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 8,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 5,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "rock",
+      "file": "rock.glb",
+      "bytes": 3344,
+      "budgetBytes": 60000,
+      "sha256": "060850a578bdb2c61a39e4cd3b84b0454f01c5556566a18beaa1caaebc0f1e61",
+      "category": "equipment",
+      "triangles": 54,
+      "vertices": 154,
+      "primitives": 1,
+      "boundsMetres": [
+        [
+          -0.7503872,
+          0,
+          -0.5481202
+        ],
+        [
+          0.7503872,
+          1.3699905,
+          0.5481195
+        ]
+      ],
+      "sizeMetres": [
+        1.5007744,
+        1.3699905,
+        1.0962397
+      ],
+      "uvBounds": [
+        [
+          0.0017622,
+          0.0012763
+        ],
+        [
+          0.9987236,
+          0.9981313
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 107,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_origin",
+        "anchor_rock_top",
+        "asset_root",
+        "rock_body"
+      ],
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_rock_top": [
+          -0.0226542,
+          1.37,
+          0.0415345
+        ]
+      },
+      "objectBoundsMetres": {
+        "rock_body": [
+          [
+            -0.7503872,
+            0,
+            -0.5481202
+          ],
+          [
+            0.7503872,
+            1.3699905,
+            0.5481195
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 69066,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 5,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 3,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "ski-poles",
+      "file": "ski-poles.glb",
+      "bytes": 11424,
+      "budgetBytes": 60000,
+      "sha256": "527d56fc387f3d94db6fa77d60cf4a9bc8e039b3145124be424076d39faadf07",
+      "category": "equipment",
+      "triangles": 440,
+      "vertices": 840,
+      "primitives": 4,
+      "boundsMetres": [
+        [
+          -0.2454286,
+          0,
+          -0.055
+        ],
+        [
+          0.2454295,
+          1.2,
+          0.0549931
+        ]
+      ],
+      "sizeMetres": [
+        0.4908581,
+        1.2,
+        0.1099931
+      ],
+      "uvBounds": [
+        [
+          0.0035006,
+          0.0226274
+        ],
+        [
+          0.9964994,
+          0.9964957
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 9065,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_grip_left",
+        "anchor_grip_right",
+        "anchor_origin",
+        "asset_root",
+        "pole_left",
+        "pole_right",
+        "strap_left",
+        "strap_right"
+      ],
+      "anchors": {
+        "anchor_grip_left": [
+          -0.1904286,
+          1.13,
+          0
+        ],
+        "anchor_grip_right": [
+          0.1495714,
+          1.13,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "objectBoundsMetres": {
+        "pole_left": [
+          [
+            -0.2454286,
+            0,
+            -0.055
+          ],
+          [
+            -0.1354354,
+            1.2,
+            0.0549931
+          ]
+        ],
+        "pole_right": [
+          [
+            0.0945714,
+            0,
+            -0.055
+          ],
+          [
+            0.2045646,
+            1.2,
+            0.0549931
+          ]
+        ],
+        "strap_left": [
+          [
+            -0.1763318,
+            1.0357574,
+            -0.006
+          ],
+          [
+            -0.0945704,
+            1.1851449,
+            0.0059993
+          ]
+        ],
+        "strap_right": [
+          [
+            0.1636682,
+            1.0357574,
+            -0.006
+          ],
+          [
+            0.2454295,
+            1.1851449,
+            0.0059993
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 67571,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 12,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 7,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "ski-slope",
+      "file": "ski-slope.glb",
+      "bytes": 13604,
+      "budgetBytes": 250000,
+      "sha256": "baafa97d96757d5c48f1f5439e0a5360adaebc211c4e19e65f2d284e82093a77",
+      "category": "large",
+      "triangles": 822,
+      "vertices": 1376,
+      "primitives": 4,
+      "boundsMetres": [
+        [
+          -7,
+          0,
+          -12.0339546
+        ],
+        [
+          7.0000916,
+          6.6057558,
+          12.0339546
+        ]
+      ],
+      "sizeMetres": [
+        14.0000916,
+        6.6057558,
+        24.0679092
+      ],
+      "uvBounds": [
+        [
+          0.0018987,
+          0.0018916
+        ],
+        [
+          0.846132,
+          0.9976672
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 969,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_gate_center",
+        "anchor_origin",
+        "anchor_route_end",
+        "anchor_route_mid",
+        "anchor_route_start",
+        "asset_root",
+        "piste_edges",
+        "piste_markers",
+        "slope_body",
+        "slope_surface"
+      ],
+      "anchors": {
+        "anchor_gate_center": [
+          0,
+          3.25,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_route_end": [
+          0,
+          0.25,
+          12
+        ],
+        "anchor_route_mid": [
+          0,
+          3.25,
+          0
+        ],
+        "anchor_route_start": [
+          0,
+          6.25,
+          -12
+        ]
+      },
+      "objectBoundsMetres": {
+        "piste_edges": [
+          [
+            -6.771244,
+            0.3341802,
+            -12.0339546
+          ],
+          [
+            6.7712021,
+            6.6057558,
+            12.0339546
+          ]
+        ],
+        "piste_markers": [
+          [
+            -6.697,
+            1.09025,
+            -9.0470009
+          ],
+          [
+            6.6970067,
+            6.4501166,
+            9.0470009
+          ]
+        ],
+        "slope_body": [
+          [
+            -7,
+            0,
+            -12
+          ],
+          [
+            7.0000916,
+            6.3498282,
+            12
+          ]
+        ],
+        "slope_surface": [
+          [
+            -7,
+            0.25,
+            -12
+          ],
+          [
+            7.0000916,
+            6.3500686,
+            12
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 76167,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 14,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 9,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "skis",
+      "file": "skis.glb",
+      "bytes": 18100,
+      "budgetBytes": 60000,
+      "sha256": "f6320070db733bb9986b2e9084b2f837a9597a437ee59388c3cb3a1756096a87",
+      "category": "equipment",
+      "triangles": 560,
+      "vertices": 1152,
+      "primitives": 8,
+      "boundsMetres": [
+        [
+          -0.24,
+          0,
+          -0.8484957
+        ],
+        [
+          0.2399948,
+          0.0695176,
+          0.8484957
+        ]
+      ],
+      "sizeMetres": [
+        0.4799948,
+        0.0695176,
+        1.6969913
+      ],
+      "uvBounds": [
+        [
+          0.0029393,
+          0.0029393
+        ],
+        [
+          0.8775262,
+          0.9970607
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 312,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_boot_left",
+        "anchor_boot_right",
+        "anchor_mount_left",
+        "anchor_mount_right",
+        "anchor_origin",
+        "asset_root",
+        "binding_left",
+        "binding_right",
+        "ski_accent_left",
+        "ski_accent_right",
+        "ski_left",
+        "ski_right",
+        "ski_tip_accent_left",
+        "ski_tip_accent_right"
+      ],
+      "anchors": {
+        "anchor_boot_left": [
+          -0.18,
+          0.0555,
+          0
+        ],
+        "anchor_boot_right": [
+          0.18,
+          0.0555,
+          0
+        ],
+        "anchor_mount_left": [
+          -0.18,
+          0.0555,
+          0
+        ],
+        "anchor_mount_right": [
+          0.18,
+          0.0555,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "objectBoundsMetres": {
+        "binding_left": [
+          [
+            -0.226,
+            0.0025,
+            -0.17
+          ],
+          [
+            -0.134,
+            0.0565026,
+            0.17
+          ]
+        ],
+        "binding_right": [
+          [
+            0.134,
+            0.0025,
+            -0.17
+          ],
+          [
+            0.226,
+            0.0565026,
+            0.17
+          ]
+        ],
+        "ski_accent_left": [
+          [
+            -0.2325,
+            0,
+            0.42
+          ],
+          [
+            -0.1275002,
+            0.0090001,
+            0.64
+          ]
+        ],
+        "ski_accent_right": [
+          [
+            0.1275,
+            0,
+            0.42
+          ],
+          [
+            0.2324998,
+            0.0090001,
+            0.64
+          ]
+        ],
+        "ski_left": [
+          [
+            -0.24,
+            0.0205512,
+            -0.8484957
+          ],
+          [
+            -0.1200052,
+            0.0695176,
+            0.8484957
+          ]
+        ],
+        "ski_right": [
+          [
+            0.12,
+            0.0205512,
+            -0.8484957
+          ],
+          [
+            0.2399948,
+            0.0695176,
+            0.8484957
+          ]
+        ],
+        "ski_tip_accent_left": [
+          [
+            -0.2325,
+            0,
+            -0.61
+          ],
+          [
+            -0.1275009,
+            0.0089992,
+            -0.45
+          ]
+        ],
+        "ski_tip_accent_right": [
+          [
+            0.1275,
+            0,
+            -0.61
+          ],
+          [
+            0.2324992,
+            0.0089992,
+            -0.45
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 81987,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 22,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 13,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "slalom-gate",
+      "file": "slalom-gate.glb",
+      "bytes": 7748,
+      "budgetBytes": 60000,
+      "sha256": "854106e16f811ee009bcbab5215abba5d7e9b10045946e152b8e4a3f6d89b76b",
+      "category": "equipment",
+      "triangles": 220,
+      "vertices": 424,
+      "primitives": 4,
+      "boundsMetres": [
+        [
+          -1.59,
+          0,
+          -0.11
+        ],
+        [
+          1.5899998,
+          2.3500023,
+          0.1100064
+        ]
+      ],
+      "sizeMetres": [
+        3.1799998,
+        2.3500023,
+        0.2200064
+      ],
+      "uvBounds": [
+        [
+          0.0023156,
+          0.0023156
+        ],
+        [
+          0.9340973,
+          0.9976845
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 134,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_banner_center",
+        "anchor_gate_center",
+        "anchor_origin",
+        "anchor_pole_left",
+        "anchor_pole_right",
+        "asset_root",
+        "banner_stripes",
+        "gate_banner",
+        "gate_feet",
+        "gate_poles"
+      ],
+      "anchors": {
+        "anchor_banner_center": [
+          0,
+          1.6799999,
+          0
+        ],
+        "anchor_gate_center": [
+          0,
+          0,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_pole_left": [
+          -1.5,
+          0,
+          0
+        ],
+        "anchor_pole_right": [
+          1.5,
+          0,
+          0
+        ]
+      },
+      "objectBoundsMetres": {
+        "banner_stripes": [
+          [
+            -0.8,
+            1.29,
+            -0.019
+          ],
+          [
+            1.27,
+            2.069989,
+            0.0189982
+          ]
+        ],
+        "gate_banner": [
+          [
+            -1.475,
+            1.29,
+            -0.0175
+          ],
+          [
+            1.475,
+            2.0700045,
+            0.017521
+          ]
+        ],
+        "gate_feet": [
+          [
+            -1.59,
+            0,
+            -0.11
+          ],
+          [
+            1.5899998,
+            0.0700197,
+            0.1100064
+          ]
+        ],
+        "gate_poles": [
+          [
+            -1.5369999,
+            0,
+            -0.037
+          ],
+          [
+            1.5369999,
+            2.3500023,
+            0.037018
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 73497,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 14,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 9,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "snowboard",
+      "file": "snowboard.glb",
+      "bytes": 13324,
+      "budgetBytes": 60000,
+      "sha256": "640bf627d4a128828d01f32980f8ecf36d51796ad02ecb5832733a399e7762f5",
+      "category": "equipment",
+      "triangles": 324,
+      "vertices": 672,
+      "primitives": 7,
+      "boundsMetres": [
+        [
+          -0.145,
+          0,
+          -0.7463645
+        ],
+        [
+          0.1450042,
+          0.1096595,
+          0.7463645
+        ]
+      ],
+      "sizeMetres": [
+        0.2900042,
+        0.1096595,
+        1.4927291
+      ],
+      "uvBounds": [
+        [
+          0.0022568,
+          0.0022569
+        ],
+        [
+          0.8980978,
+          0.9977432
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 204,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_boot_front",
+        "anchor_boot_rear",
+        "anchor_origin",
+        "asset_root",
+        "binding_front",
+        "binding_rear",
+        "nose_accent",
+        "snowboard",
+        "strap_front",
+        "strap_rear",
+        "tail_accent"
+      ],
+      "anchors": {
+        "anchor_boot_front": [
+          0,
+          0.1106604,
+          -0.23
+        ],
+        "anchor_boot_rear": [
+          0,
+          0.1106604,
+          0.23
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "objectBoundsMetres": {
+        "binding_front": [
+          [
+            -0.0989373,
+            0.0176604,
+            -0.3254018
+          ],
+          [
+            0.0989373,
+            0.0856597,
+            -0.1345986
+          ]
+        ],
+        "binding_rear": [
+          [
+            -0.0989373,
+            0.0176604,
+            0.1345983
+          ],
+          [
+            0.0989373,
+            0.0856597,
+            0.3254015
+          ]
+        ],
+        "nose_accent": [
+          [
+            -0.1275,
+            0.0146604,
+            -0.51
+          ],
+          [
+            0.1275,
+            0.0266604,
+            -0.35
+          ]
+        ],
+        "snowboard": [
+          [
+            -0.145,
+            0,
+            -0.7463645
+          ],
+          [
+            0.1450042,
+            0.075166,
+            0.7463645
+          ]
+        ],
+        "strap_front": [
+          [
+            -0.075,
+            0.0836604,
+            -0.2575
+          ],
+          [
+            0.075,
+            0.1096595,
+            -0.2025011
+          ]
+        ],
+        "strap_rear": [
+          [
+            -0.075,
+            0.0836604,
+            0.2025
+          ],
+          [
+            0.075,
+            0.1096595,
+            0.2574989
+          ]
+        ],
+        "tail_accent": [
+          [
+            -0.1275,
+            0.0146604,
+            0.33
+          ],
+          [
+            0.1275,
+            0.0266604,
+            0.53
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 78971,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 18,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 10,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "soccer-ball",
+      "file": "soccer-ball.glb",
+      "bytes": 3564,
+      "budgetBytes": 60000,
+      "sha256": "a1fefe6f0cb4d75a6914ea945f157d07e9563f47331594e86c7f1ac90ad46b3d",
+      "category": "equipment",
+      "triangles": 116,
+      "vertices": 180,
+      "primitives": 1,
+      "boundsMetres": [
+        [
+          -0.107735,
+          0,
+          -0.1089474
+        ],
+        [
+          0.1077364,
+          0.22,
+          0.1089477
+        ]
+      ],
+      "sizeMetres": [
+        0.2154714,
+        0.2199999,
+        0.2178951
+      ],
+      "uvBounds": [
+        [
+          0.0013162,
+          0.0835792
+        ],
+        [
+          0.9986838,
+          0.9986889
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 244,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_ball_center",
+        "anchor_ball_spot",
+        "anchor_origin",
+        "asset_root",
+        "soccer_ball"
+      ],
+      "anchors": {
+        "anchor_ball_center": [
+          0,
+          0.11,
+          0
+        ],
+        "anchor_ball_spot": [
+          0,
+          0,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "objectBoundsMetres": {
+        "soccer_ball": [
+          [
+            -0.107735,
+            0,
+            -0.1089474
+          ],
+          [
+            0.1077364,
+            0.22,
+            0.1089477
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 71553,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 6,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 4,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "soccer-goal",
+      "file": "soccer-goal.glb",
+      "bytes": 19408,
+      "budgetBytes": 60000,
+      "sha256": "d3254bc4386dd68c8016a1ce1e2dace8bd9cf43bee96d1bc4838ebfa0f18f7c4",
+      "category": "equipment",
+      "triangles": 1376,
+      "vertices": 2676,
+      "primitives": 4,
+      "boundsMetres": [
+        [
+          -3.78,
+          0,
+          -0.9860001
+        ],
+        [
+          3.78,
+          2.559998,
+          0.9859979
+        ]
+      ],
+      "sizeMetres": [
+        7.5599999,
+        2.559998,
+        1.971998
+      ],
+      "uvBounds": [
+        [
+          0.003959,
+          0.0572806
+        ],
+        [
+          0.996038,
+          0.9960462
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 768,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "anchor_ball_spot",
+        "anchor_goal_center",
+        "anchor_goal_line_left",
+        "anchor_goal_line_right",
+        "anchor_origin",
+        "asset_root",
+        "crossbar",
+        "goal_post",
+        "goal_support",
+        "net"
+      ],
+      "anchors": {
+        "anchor_ball_spot": [
+          0,
+          0.11,
+          11.9259996
+        ],
+        "anchor_goal_center": [
+          0,
+          1.22,
+          0.9259999
+        ],
+        "anchor_goal_line_left": [
+          -3.6600001,
+          0,
+          0.9259999
+        ],
+        "anchor_goal_line_right": [
+          3.6600001,
+          0,
+          0.9259999
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "objectBoundsMetres": {
+        "crossbar": [
+          [
+            -3.72,
+            2.4399998,
+            0.8659998
+          ],
+          [
+            3.72,
+            2.559998,
+            0.9859979
+          ]
+        ],
+        "goal_post": [
+          [
+            -3.78,
+            0,
+            0.8659999
+          ],
+          [
+            3.78,
+            2.5000429,
+            0.9859725
+          ]
+        ],
+        "goal_support": [
+          [
+            -3.7477129,
+            0.0279998,
+            -0.9860001
+          ],
+          [
+            3.7477129,
+            2.5318506,
+            0.9294024
+          ]
+        ],
+        "net": [
+          [
+            -3.6690001,
+            0.0609999,
+            -0.9630002
+          ],
+          [
+            3.6690001,
+            2.4389217,
+            0.9267294
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 84547,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 14,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 9,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "id": "soccer-stadium",
+      "file": "soccer-stadium.glb",
+      "bytes": 66080,
+      "budgetBytes": 250000,
+      "sha256": "51cdd93d182affb042a4cdf13d02538af5ba84f83721e1fed438741baf9bcc0a",
+      "category": "large",
+      "triangles": 5246,
+      "vertices": 10204,
+      "primitives": 8,
+      "boundsMetres": [
+        [
+          -48.6999969,
+          -0.0000086,
+          -67.0999985
+        ],
+        [
+          48.6996918,
+          16.8494492,
+          67.0999985
+        ]
+      ],
+      "sizeMetres": [
+        97.3996887,
+        16.8494577,
+        134.1999969
+      ],
+      "uvBounds": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "degenerateGeometryTriangles": 0,
+      "degenerateUVTriangles": 0,
+      "overlappingUVTrianglePairs": 0,
+      "uvOverlap": {
+        "overlappingUVTrianglePairs": 0,
+        "totalOverlapArea": 0,
+        "broadPhaseCandidatePairs": 3037,
+        "diagnostics": []
+      },
+      "nodeNames": [
+        "aisles",
+        "anchor_ball_spot",
+        "anchor_ball_spot_north",
+        "anchor_ball_spot_south",
+        "anchor_field_center",
+        "anchor_goal_north",
+        "anchor_goal_south",
+        "anchor_origin",
+        "asset_root",
+        "beams",
+        "field_markings",
+        "floodlights",
+        "pitch_surface",
+        "roof",
+        "seating",
+        "stand_shell"
+      ],
+      "anchors": {
+        "anchor_ball_spot": [
+          0,
+          0.04,
+          0
+        ],
+        "anchor_ball_spot_north": [
+          0,
+          0.04,
+          -41.5
+        ],
+        "anchor_ball_spot_south": [
+          0,
+          0.04,
+          41.5
+        ],
+        "anchor_field_center": [
+          0,
+          0.04,
+          0
+        ],
+        "anchor_goal_north": [
+          0,
+          0.04,
+          -52.5
+        ],
+        "anchor_goal_south": [
+          0,
+          0.04,
+          52.5
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "objectBoundsMetres": {
+        "aisles": [
+          [
+            -45.0099983,
+            1.4400001,
+            -64.0099945
+          ],
+          [
+            45.0093346,
+            8.4802694,
+            64.0099945
+          ]
+        ],
+        "beams": [
+          [
+            -47.2078476,
+            0,
+            -59.2699966
+          ],
+          [
+            47.2081223,
+            16.0006828,
+            59.2699966
+          ]
+        ],
+        "field_markings": [
+          [
+            -34.0699997,
+            -0.0000086,
+            -52.5699997
+          ],
+          [
+            34.069252,
+            0.1395685,
+            52.5699997
+          ]
+        ],
+        "floodlights": [
+          [
+            -43.7999992,
+            15.1499996,
+            -59.3249969
+          ],
+          [
+            43.7995567,
+            16.8494492,
+            59.4100037
+          ]
+        ],
+        "pitch_surface": [
+          [
+            -34,
+            0.04,
+            -52.5
+          ],
+          [
+            34.0004578,
+            0.04,
+            52.5
+          ]
+        ],
+        "roof": [
+          [
+            -48.6999969,
+            11.3400002,
+            -67.0999985
+          ],
+          [
+            48.6996918,
+            11.6594505,
+            67.0999985
+          ]
+        ],
+        "seating": [
+          [
+            -44.7700005,
+            1.16,
+            -63.7700005
+          ],
+          [
+            44.7697563,
+            8.3801632,
+            63.7700005
+          ]
+        ],
+        "stand_shell": [
+          [
+            -48,
+            0,
+            -67
+          ],
+          [
+            47.9990845,
+            8.1093159,
+            67
+          ]
+        ]
+      },
+      "primitiveDiagnostics": [],
+      "previewBytes": 78871,
+      "validator": {
+        "compressed": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 24,
+          "numHints": 0
+        },
+        "decoded": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 15,
+          "numHints": 0
+        }
+      },
+      "issues": []
+    }
+  ],
+  "packageFiles": [
+    {
+      "path": "basketball-arena.authoring.json",
+      "bytes": 1177
+    },
+    {
+      "path": "basketball-arena.glb",
+      "bytes": 67588
+    },
+    {
+      "path": "basketball-arena.png",
+      "bytes": 73929
+    },
+    {
+      "path": "basketball-hoop.authoring.json",
+      "bytes": 1033
+    },
+    {
+      "path": "basketball-hoop.glb",
+      "bytes": 30640
+    },
+    {
+      "path": "basketball-hoop.png",
+      "bytes": 67710
+    },
+    {
+      "path": "basketball.authoring.json",
+      "bytes": 714
+    },
+    {
+      "path": "basketball.glb",
+      "bytes": 52904
+    },
+    {
+      "path": "basketball.png",
+      "bytes": 60687
+    },
+    {
+      "path": "fence.authoring.json",
+      "bytes": 803
+    },
+    {
+      "path": "fence.glb",
+      "bytes": 9340
+    },
+    {
+      "path": "fence.png",
+      "bytes": 75620
+    },
+    {
+      "path": "fir-a.authoring.json",
+      "bytes": 714
+    },
+    {
+      "path": "fir-a.glb",
+      "bytes": 5112
+    },
+    {
+      "path": "fir-a.png",
+      "bytes": 69443
+    },
+    {
+      "path": "fir-b.authoring.json",
+      "bytes": 711
+    },
+    {
+      "path": "fir-b.glb",
+      "bytes": 5320
+    },
+    {
+      "path": "fir-b.png",
+      "bytes": 71297
+    },
+    {
+      "path": "fir-c.authoring.json",
+      "bytes": 709
+    },
+    {
+      "path": "fir-c.glb",
+      "bytes": 5324
+    },
+    {
+      "path": "fir-c.png",
+      "bytes": 68098
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 8200
+    },
+    {
+      "path": "overview.png",
+      "bytes": 222502
+    },
+    {
+      "path": "README.md",
+      "bytes": 10569
+    },
+    {
+      "path": "rock.authoring.json",
+      "bytes": 627
+    },
+    {
+      "path": "rock.glb",
+      "bytes": 3344
+    },
+    {
+      "path": "rock.png",
+      "bytes": 69066
+    },
+    {
+      "path": "ski-poles.authoring.json",
+      "bytes": 759
+    },
+    {
+      "path": "ski-poles.glb",
+      "bytes": 11424
+    },
+    {
+      "path": "ski-poles.png",
+      "bytes": 67571
+    },
+    {
+      "path": "ski-slope.authoring.json",
+      "bytes": 943
+    },
+    {
+      "path": "ski-slope.glb",
+      "bytes": 13604
+    },
+    {
+      "path": "ski-slope.png",
+      "bytes": 76167
+    },
+    {
+      "path": "skis.authoring.json",
+      "bytes": 1007
+    },
+    {
+      "path": "skis.glb",
+      "bytes": 18100
+    },
+    {
+      "path": "skis.png",
+      "bytes": 81987
+    },
+    {
+      "path": "slalom-gate.authoring.json",
+      "bytes": 901
+    },
+    {
+      "path": "slalom-gate.glb",
+      "bytes": 7748
+    },
+    {
+      "path": "slalom-gate.png",
+      "bytes": 73497
+    },
+    {
+      "path": "snowboard.authoring.json",
+      "bytes": 810
+    },
+    {
+      "path": "snowboard.glb",
+      "bytes": 13324
+    },
+    {
+      "path": "snowboard.png",
+      "bytes": 78971
+    },
+    {
+      "path": "soccer-ball.authoring.json",
+      "bytes": 735
+    },
+    {
+      "path": "soccer-ball.glb",
+      "bytes": 3564
+    },
+    {
+      "path": "soccer-ball.png",
+      "bytes": 71553
+    },
+    {
+      "path": "soccer-goal.authoring.json",
+      "bytes": 935
+    },
+    {
+      "path": "soccer-goal.glb",
+      "bytes": 19408
+    },
+    {
+      "path": "soccer-goal.png",
+      "bytes": 84547
+    },
+    {
+      "path": "soccer-stadium.authoring.json",
+      "bytes": 1161
+    },
+    {
+      "path": "soccer-stadium.glb",
+      "bytes": 66080
+    },
+    {
+      "path": "soccer-stadium.png",
+      "bytes": 78871
+    },
+    {
+      "path": "source/build.py",
+      "bytes": 447
+    },
+    {
+      "path": "source/common.py",
+      "bytes": 6974
+    },
+    {
+      "path": "source/equipment.py",
+      "bytes": 11341
+    },
+    {
+      "path": "source/optimize-previews.mjs",
+      "bytes": 2141
+    },
+    {
+      "path": "source/package.json",
+      "bytes": 279
+    },
+    {
+      "path": "source/README.md",
+      "bytes": 3452
+    },
+    {
+      "path": "source/render.py",
+      "bytes": 4377
+    },
+    {
+      "path": "source/ski_environment.py",
+      "bytes": 10319
+    },
+    {
+      "path": "source/validate.mjs",
+      "bytes": 23218
+    },
+    {
+      "path": "source/venues.py",
+      "bytes": 8319
+    },
+    {
+      "path": "validation/compressed/basketball-arena.json",
+      "bytes": 5695
+    },
+    {
+      "path": "validation/compressed/basketball-hoop.json",
+      "bytes": 5749
+    },
+    {
+      "path": "validation/compressed/basketball.json",
+      "bytes": 2334
+    },
+    {
+      "path": "validation/compressed/fence.json",
+      "bytes": 2819
+    },
+    {
+      "path": "validation/compressed/fir-a.json",
+      "bytes": 2325
+    },
+    {
+      "path": "validation/compressed/fir-b.json",
+      "bytes": 2325
+    },
+    {
+      "path": "validation/compressed/fir-c.json",
+      "bytes": 2325
+    },
+    {
+      "path": "validation/compressed/rock.json",
+      "bytes": 1832
+    },
+    {
+      "path": "validation/compressed/ski-poles.json",
+      "bytes": 3023
+    },
+    {
+      "path": "validation/compressed/ski-slope.json",
+      "bytes": 3316
+    },
+    {
+      "path": "validation/compressed/skis.json",
+      "bytes": 4696
+    },
+    {
+      "path": "validation/compressed/slalom-gate.json",
+      "bytes": 3317
+    },
+    {
+      "path": "validation/compressed/snowboard.json",
+      "bytes": 4061
+    },
+    {
+      "path": "validation/compressed/soccer-ball.json",
+      "bytes": 1986
+    },
+    {
+      "path": "validation/compressed/soccer-goal.json",
+      "bytes": 3320
+    },
+    {
+      "path": "validation/compressed/soccer-stadium.json",
+      "bytes": 5000
+    },
+    {
+      "path": "validation/decoded/basketball-arena.json",
+      "bytes": 3735
+    },
+    {
+      "path": "validation/decoded/basketball-hoop.json",
+      "bytes": 3630
+    },
+    {
+      "path": "validation/decoded/basketball.json",
+      "bytes": 1638
+    },
+    {
+      "path": "validation/decoded/fence.json",
+      "bytes": 1964
+    },
+    {
+      "path": "validation/decoded/fir-a.json",
+      "bytes": 1629
+    },
+    {
+      "path": "validation/decoded/fir-b.json",
+      "bytes": 1629
+    },
+    {
+      "path": "validation/decoded/fir-c.json",
+      "bytes": 1629
+    },
+    {
+      "path": "validation/decoded/rock.json",
+      "bytes": 1293
+    },
+    {
+      "path": "validation/decoded/ski-poles.json",
+      "bytes": 2010
+    },
+    {
+      "path": "validation/decoded/ski-slope.json",
+      "bytes": 2303
+    },
+    {
+      "path": "validation/decoded/skis.json",
+      "bytes": 3051
+    },
+    {
+      "path": "validation/decoded/slalom-gate.json",
+      "bytes": 2304
+    },
+    {
+      "path": "validation/decoded/snowboard.json",
+      "bytes": 2575
+    },
+    {
+      "path": "validation/decoded/soccer-ball.json",
+      "bytes": 1447
+    },
+    {
+      "path": "validation/decoded/soccer-goal.json",
+      "bytes": 2307
+    },
+    {
+      "path": "validation/decoded/soccer-stadium.json",
+      "bytes": 3356
+    },
+    {
+      "path": "validation/repository-checks.md",
+      "bytes": 977
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 5633
+    }
+  ]
+}

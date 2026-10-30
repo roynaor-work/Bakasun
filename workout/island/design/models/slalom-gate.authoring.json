@@ -1,0 +1,56 @@
+{
+  "id": "slalom-gate",
+  "category": "equipment",
+  "notes": "3 m between pole centres; 2.35 m tall. Original unlettered gate banner.",
+  "view": [
+    1.2,
+    -2.8,
+    1.1
+  ],
+  "bounds_blender": [
+    [
+      -1.590000033378601,
+      -0.10999999940395355,
+      0.0
+    ],
+    [
+      1.5899999141693115,
+      0.10999999940395355,
+      2.3499999046325684
+    ]
+  ],
+  "anchors": {
+    "anchor_gate_center": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "anchor_pole_left": [
+      -1.5,
+      0.0,
+      -0.0
+    ],
+    "anchor_pole_right": [
+      1.5,
+      0.0,
+      -0.0
+    ],
+    "anchor_banner_center": [
+      0.0,
+      1.68,
+      -0.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "gate_poles",
+    "gate_feet",
+    "gate_banner",
+    "banner_stripes"
+  ],
+  "triangles": 220
+}

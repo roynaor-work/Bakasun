@@ -1,0 +1,46 @@
+{
+  "id": "ski-poles",
+  "category": "equipment",
+  "notes": "Pair of 1.20m poles with named pole_left/pole_right and grip anchors.",
+  "view": [
+    1.5,
+    -2,
+    0.9
+  ],
+  "bounds_blender": [
+    [
+      -0.24542856216430664,
+      -0.054999999701976776,
+      0.0
+    ],
+    [
+      0.24542854726314545,
+      0.054999999701976776,
+      1.2000000476837158
+    ]
+  ],
+  "anchors": {
+    "anchor_grip_left": [
+      -0.190429,
+      1.13,
+      -0.0
+    ],
+    "anchor_grip_right": [
+      0.149571,
+      1.13,
+      -0.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "pole_left",
+    "strap_left",
+    "pole_right",
+    "strap_right"
+  ],
+  "triangles": 440
+}

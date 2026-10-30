@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "id": "ski-fall",
+  "anchor": "fall-contact-ground-position",
+  "coordinateSpace": "anchor-local-meters",
+  "up": [
+    0,
+    1,
+    0
+  ],
+  "fovAxis": "vertical",
+  "fovUnit": "degrees",
+  "timeUnit": "seconds",
+  "durationSeconds": 5.6,
+  "pathDurationSeconds": 4.4,
+  "entry": {
+    "durationSeconds": 0.6,
+    "from": "captured-current-camera",
+    "easing": "smootherstep"
+  },
+  "exit": {
+    "durationSeconds": 0.6,
+    "to": "live-gameplay-camera",
+    "easing": "smootherstep"
+  },
+  "easing": {
+    "type": "smootherstep",
+    "formula": "6*u^5 - 15*u^4 + 10*u^3",
+    "scope": "whole-path-timeline-once",
+    "uRange": [
+      0,
+      1
+    ]
+  },
+  "interpolation": {
+    "type": "cubic-hermite",
+    "tangentUnit": "value-per-second",
+    "channels": [
+      "position",
+      "target",
+      "fov"
+    ],
+    "continuity": "C1"
+  },
+  "points": [
+    {
+      "time": 0.0,
+      "position": [
+        4,
+        3,
+        7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 55,
+      "positionTangent": [
+        0,
+        0,
+        0
+      ],
+      "targetTangent": [
+        0,
+        0,
+        0
+      ],
+      "fovTangent": 0
+    },
+    {
+      "time": 1.1,
+      "position": [
+        4.2,
+        2.8,
+        6.2
+      ],
+      "target": [
+        0,
+        0.7,
+        0
+      ],
+      "fov": 54,
+      "positionTangent": [
+        0.227272727,
+        -0.136363636,
+        -0.681818182
+      ],
+      "targetTangent": [
+        0.0,
+        -0.272727273,
+        0.0
+      ],
+      "fovTangent": -0.454545455
+    },
+    {
+      "time": 2.2,
+      "position": [
+        4.5,
+        2.7,
+        5.5
+      ],
+      "target": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 54,
+      "positionTangent": [
+        0.227272727,
+        0.0,
+        -0.272727273
+      ],
+      "targetTangent": [
+        0.0,
+        -0.090909091,
+        0.0
+      ],
+      "fovTangent": 0.454545455
+    },
+    {
+      "time": 3.3,
+      "position": [
+        4.7,
+        2.8,
+        5.6
+      ],
+      "target": [
+        0,
+        0.5,
+        0
+      ],
+      "fov": 55,
+      "positionTangent": [
+        0.136363636,
+        0.136363636,
+        0.227272727
+      ],
+      "targetTangent": [
+        0.0,
+        0.136363636,
+        0.0
+      ],
+      "fovTangent": 0.909090909
+    },
+    {
+      "time": 4.4,
+      "position": [
+        4.8,
+        3,
+        6
+      ],
+      "target": [
+        0,
+        0.7,
+        0
+      ],
+      "fov": 56,
+      "positionTangent": [
+        0,
+        0,
+        0
+      ],
+      "targetTangent": [
+        0,
+        0,
+        0
+      ],
+      "fovTangent": 0
+    }
+  ],
+  "cuts": [],
+  "rollDegrees": 0,
+  "shake": false,
+  "loop": false,
+  "replayContactPathTime": 1.2,
+  "reducedMotion": "skip-track-retain-gameplay-camera",
+  "onSkip": "blend-to-live-gameplay-camera-using-exit-duration"
+}

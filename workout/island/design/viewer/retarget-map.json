@@ -1,0 +1,898 @@
+{
+  "schemaVersion": 1,
+  "source": "../motion/{soccer,hoops,alpine}.json skeleton.bones",
+  "target": "../characters/rig.json joints",
+  "units": "metres",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "sourceBoneCount": 18,
+  "targetBoneCount": 20,
+  "motionScale": 0.6184251931233287,
+  "scaleDerivation": {
+    "targetLegChainMeters": [
+      0.4823715090751652,
+      0.4823717921972275
+    ],
+    "sourceLegChainMeters": 0.78,
+    "formula": "mean(target hip-knee + knee-ankle length) / source hip-knee-ankle length",
+    "appliesTo": [
+      "hipsOffsetMeters",
+      "referenceRootTranslationMeters",
+      "supportContacts.anchorMeters"
+    ],
+    "preserveTargetTranslations": true,
+    "preserveTargetScales": true
+  },
+  "rotationRule": {
+    "source": "S_world[b] = S_world[parent] * S_local[b]",
+    "target": "T_world[b] = characterWorldRotation * S_world[source] * targetBasisWorldQuaternion[b]; T_local[b] = inverse(T_world[parent]) * T_world[b]",
+    "calibration": "For nonterminal mapped bones, C is the shortest arc from target bind segment direction in character space to source canonical rest segment direction. targetBasis = C * targetBindWorld. Hand terminals inherit parent C; foot and head terminals retain target bind orientation.",
+    "extraBones": "Shoulder bones have no source track. They follow source Chest world rotation with their own target bind basis, keeping their local translations. Arm world orientation is solved against this actual extra parent; no duplicate arm rotation is applied.",
+    "contactRule": "Retarget rotations first; preserve all target segment lengths; use target sole centroids derived from lowest dominant-foot bind vertices, flat target bind foot orientation, and analytic world-space two-bone leg IK. Continuous pelvis projection makes weighted ankle goals reachable before IK. Released-foot collision IK preserves its current orientation and resolves local ground penetration before considering a whole-body lift. Full rendered skinned-mesh floor correction, pelvis correction and any resulting support residual are measured and exposed."
+  },
+  "bones": [
+    {
+      "source": "Root",
+      "target": "Root",
+      "sourceParent": null,
+      "targetParent": null,
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        0,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        0,
+        0,
+        0
+      ],
+      "targetBindLocalQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "targetBindWorldQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "targetBasisWorldQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "calibrationWorldQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "calibrationChild": null
+    },
+    {
+      "source": "Hips",
+      "target": "Hips",
+      "sourceParent": "Root",
+      "targetParent": "Root",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        0.86,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        0.00010250620834995061,
+        0.5279467701911926,
+        0.013277068734169006
+      ],
+      "targetBindLocalQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "targetBindWorldQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "targetBasisWorldQuaternion": [
+        -1.3259806006596478e-8,
+        0,
+        5.728300774876275e-10,
+        1
+      ],
+      "calibrationWorldQuaternion": [
+        -1.3259806006596478e-8,
+        0,
+        5.728300774876275e-10,
+        1
+      ],
+      "calibrationChild": "Spine"
+    },
+    {
+      "source": "Spine",
+      "target": "Spine",
+      "sourceParent": "Hips",
+      "targetParent": "Hips",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        0.2,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        1.5676071551951054e-10,
+        0.13683003187179565,
+        3.6286793569928477e-9
+      ],
+      "targetBindLocalQuaternion": [
+        -0.06104256212711334,
+        -5.28359827001168e-8,
+        -1.0193226707144731e-8,
+        0.9981351494789124
+      ],
+      "targetBindWorldQuaternion": [
+        -0.06104256301173191,
+        -5.2835983465807e-8,
+        -1.0193226854863262e-8,
+        0.9981351639437195
+      ],
+      "targetBasisWorldQuaternion": [
+        2.8900746525308244e-9,
+        -5.293375478978296e-8,
+        -1.5422371614750387e-11,
+        0.9999999999999987
+      ],
+      "calibrationWorldQuaternion": [
+        0.06104256589641641,
+        0,
+        1.3409045458345984e-8,
+        0.9981351637673033
+      ],
+      "calibrationChild": "Chest"
+    },
+    {
+      "source": "Chest",
+      "target": "Chest",
+      "sourceParent": "Spine",
+      "targetParent": "Spine",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        0.18,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        -3.762982980770602e-12,
+        0.12199633568525314,
+        -7.051570438676436e-10
+      ],
+      "targetBindLocalQuaternion": [
+        0.011894596740603447,
+        3.2298956398335577e-8,
+        1.0780783377128955e-8,
+        0.9999292492866516
+      ],
+      "targetBindWorldQuaternion": [
+        -0.049165829307611215,
+        -2.0056678967051367e-8,
+        -7.749750634674494e-10,
+        0.9987906293255331
+      ],
+      "targetBasisWorldQuaternion": [
+        -0.023120666299558335,
+        -2.007236809263703e-8,
+        -4.300187724680151e-10,
+        0.9997326816653862
+      ],
+      "calibrationWorldQuaternion": [
+        0.026059981536239278,
+        0,
+        8.68420020016563e-10,
+        0.9996603810106366
+      ],
+      "calibrationChild": "Neck"
+    },
+    {
+      "source": "Neck",
+      "target": "Neck",
+      "sourceParent": "Chest",
+      "targetParent": "Chest",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        0.1,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        1.671985813689325e-11,
+        0.2443045824766159,
+        0.011306037195026875
+      ],
+      "targetBindLocalQuaternion": [
+        0.12554442882537842,
+        5.9204200653084627e-8,
+        7.395223988737598e-9,
+        0.9920880198478699
+      ],
+      "targetBindWorldQuaternion": [
+        0.07661576719576958,
+        3.9500907582457095e-8,
+        6.224617494013157e-9,
+        0.9970606923437522
+      ],
+      "targetBasisWorldQuaternion": [
+        -1.4981418087906677e-7,
+        3.961698798949352e-8,
+        -4.7906798757984905e-12,
+        0.999999999999988
+      ],
+      "calibrationWorldQuaternion": [
+        -0.07661591656959979,
+        0,
+        -3.1941022460100938e-9,
+        0.9970606808656131
+      ],
+      "calibrationChild": "Head"
+    },
+    {
+      "source": "Head",
+      "target": "Head",
+      "sourceParent": "Neck",
+      "targetParent": "Neck",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        0.13,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        -1.1334821969910536e-12,
+        0.1181543841958046,
+        3.5402404563456e-8
+      ],
+      "targetBindLocalQuaternion": [
+        -0.07413533329963684,
+        -1.1881632566712597e-8,
+        -7.921094002938389e-9,
+        0.9972481727600098
+      ],
+      "targetBindWorldQuaternion": [
+        0.0024875071363566134,
+        2.7690916191979342e-8,
+        3.2776951159012257e-10,
+        0.999996906149337
+      ],
+      "targetBasisWorldQuaternion": [
+        0.0024875071363566134,
+        2.7690916191979342e-8,
+        3.2776951159012257e-10,
+        0.999996906149337
+      ],
+      "calibrationWorldQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "calibrationChild": null
+    },
+    {
+      "source": null,
+      "target": "LeftShoulder",
+      "sourceParent": null,
+      "targetParent": "Chest",
+      "inheritSource": "Chest",
+      "policy": "extra-shoulder-follow-chest",
+      "sourceRestTranslationMeters": null,
+      "targetBindTranslationMeters": [
+        0.037519220262765884,
+        0.24591463804244995,
+        0.03920765966176987
+      ],
+      "targetBindLocalQuaternion": [
+        -0.5649510025978088,
+        -0.38319942355155945,
+        -0.5678216814994812,
+        0.4599642753601074
+      ],
+      "targetBindWorldQuaternion": [
+        -0.5868822725382254,
+        -0.4106534198760278,
+        -0.5482946605865202,
+        0.4316317088639384
+      ],
+      "targetBasisWorldQuaternion": [
+        -0.5868822725382254,
+        -0.4106534198760278,
+        -0.5482946605865202,
+        0.4316317088639384
+      ],
+      "calibrationWorldQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "calibrationChild": null
+    },
+    {
+      "source": "LeftArm",
+      "target": "LeftArm",
+      "sourceParent": "Chest",
+      "targetParent": "LeftShoulder",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0.16,
+        0.06,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        -1.862645149230957e-9,
+        0.10999127477407455,
+        -7.408380042761564e-8
+      ],
+      "targetBindLocalQuaternion": [
+        0.08389001339673996,
+        0.7108126878738403,
+        0.06131020933389664,
+        0.6956644058227539
+      ],
+      "targetBindWorldQuaternion": [
+        -0.0075059628258767426,
+        0.011117755712842963,
+        -0.7376792497103072,
+        0.6750180594449339
+      ],
+      "targetBasisWorldQuaternion": [
+        -0.01017457669050749,
+        5.609464923811425e-9,
+        -0.9999482376548623,
+        3.2254938903131247e-7
+      ],
+      "calibrationWorldQuaternion": [
+        -0.017985196686005022,
+        0,
+        -0.6748697625731532,
+        0.7377176534858181
+      ],
+      "calibrationChild": "LeftForeArm"
+    },
+    {
+      "source": "LeftForeArm",
+      "target": "LeftForeArm",
+      "sourceParent": "LeftArm",
+      "targetParent": "LeftArm",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        -0.27,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        1.290877662540879e-7,
+        0.20008037984371185,
+        9.313225746154785e-10
+      ],
+      "targetBindLocalQuaternion": [
+        0.04676150903105736,
+        0.012573830783367157,
+        0.005446919705718756,
+        0.9988120794296265
+      ],
+      "targetBindWorldQuaternion": [
+        0.033403828678033064,
+        -0.014861999120034719,
+        -0.7337404456684813,
+        0.678445475776811
+      ],
+      "targetBasisWorldQuaternion": [
+        0.04547828999901971,
+        -1.2835275987888025e-8,
+        -0.9989653272955616,
+        1.9054501942949992e-7
+      ],
+      "calibrationWorldQuaternion": [
+        0.04570114612841823,
+        0,
+        -0.6770674690737887,
+        0.734500542930067
+      ],
+      "calibrationChild": "LeftHand"
+    },
+    {
+      "source": "LeftHand",
+      "target": "LeftHand",
+      "sourceParent": "LeftForeArm",
+      "targetParent": "LeftForeArm",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        -0.24,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        8.556526154279709e-8,
+        0.22407308220863342,
+        -1.862645149230957e-9
+      ],
+      "targetBindLocalQuaternion": [
+        -0.026546582579612732,
+        0.7247394919395447,
+        -0.02130851149559021,
+        0.6881816387176514
+      ],
+      "targetBindWorldQuaternion": [
+        0.5370648380622547,
+        0.5016585434656845,
+        -0.4955888089472981,
+        0.4629166209278409
+      ],
+      "targetBasisWorldQuaternion": [
+        0.7552869156472259,
+        0.02748831848302611,
+        -0.6545096637641648,
+        -0.020079029817107744
+      ],
+      "calibrationWorldQuaternion": [
+        0.04570114612841823,
+        0,
+        -0.6770674690737887,
+        0.734500542930067
+      ],
+      "calibrationChild": null
+    },
+    {
+      "source": null,
+      "target": "RightShoulder",
+      "sourceParent": null,
+      "targetParent": "Chest",
+      "inheritSource": "Chest",
+      "policy": "extra-shoulder-follow-chest",
+      "sourceRestTranslationMeters": null,
+      "targetBindTranslationMeters": [
+        -0.03751922771334648,
+        0.24591463804244995,
+        0.03920765966176987
+      ],
+      "targetBindLocalQuaternion": [
+        0.6729174852371216,
+        -0.5296130776405334,
+        0.4344802796840668,
+        0.27913981676101685
+      ],
+      "targetBindWorldQuaternion": [
+        0.6583794943955829,
+        -0.5076109753985374,
+        0.4599936873532973,
+        0.3118867528598791
+      ],
+      "targetBasisWorldQuaternion": [
+        0.6583794943955829,
+        -0.5076109753985374,
+        0.4599936873532973,
+        0.3118867528598791
+      ],
+      "calibrationWorldQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "calibrationChild": null
+    },
+    {
+      "source": "RightArm",
+      "target": "RightArm",
+      "sourceParent": "Chest",
+      "targetParent": "RightShoulder",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        -0.16,
+        0.06,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        5.587935447692871e-8,
+        0.10999127477407455,
+        2.6565976440906525e-7
+      ],
+      "targetBindLocalQuaternion": [
+        0.000935317191760987,
+        -0.9648764729499817,
+        0.1039024367928505,
+        0.24128155410289764
+      ],
+      "targetBindWorldQuaternion": [
+        0.5502416133986567,
+        -0.4913863519298234,
+        -0.49138632480375916,
+        -0.46293962869622385
+      ],
+      "targetBasisWorldQuaternion": [
+        0.7458708194074735,
+        -2.0417421059751311e-7,
+        -0.6660906250325735,
+        -3.1336028938344645e-7
+      ],
+      "calibrationWorldQuaternion": [
+        -0.017985245806975546,
+        0,
+        0.6748702212640536,
+        0.7377172326740578
+      ],
+      "calibrationChild": "RightForeArm"
+    },
+    {
+      "source": "RightForeArm",
+      "target": "RightForeArm",
+      "sourceParent": "RightArm",
+      "targetParent": "RightArm",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        -0.27,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        -2.2584572434425354e-8,
+        0.20008032023906708,
+        -1.4794932212680578e-7
+      ],
+      "targetBindLocalQuaternion": [
+        0.0007336680428124964,
+        -0.004767538048326969,
+        0.047071851789951324,
+        0.9988798499107361
+      ],
+      "targetBindWorldQuaternion": [
+        0.5238124525168186,
+        -0.5148902540565,
+        -0.514890112091208,
+        -0.4420370044879177
+      ],
+      "targetBasisWorldQuaternion": [
+        0.7131544328209176,
+        -9.742420865876959e-8,
+        -0.7010069578455383,
+        -9.911243464832968e-8
+      ],
+      "calibrationWorldQuaternion": [
+        0.04570100315259076,
+        0,
+        0.6770671808038848,
+        0.7345008175551108
+      ],
+      "calibrationChild": "RightHand"
+    },
+    {
+      "source": "RightHand",
+      "target": "RightHand",
+      "sourceParent": "RightForeArm",
+      "targetParent": "RightForeArm",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        -0.24,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        0,
+        0.2240729182958603,
+        -6.228219717741013e-8
+      ],
+      "targetBindLocalQuaternion": [
+        0.008206102065742016,
+        0.0003307684091851115,
+        -0.03303726017475128,
+        0.9994204044342041
+      ],
+      "targetBindWorldQuaternion": [
+        0.5370623102978695,
+        -0.5016579365960159,
+        -0.4955894763536459,
+        -0.46291949671110405
+      ],
+      "targetBasisWorldQuaternion": [
+        0.7129729454721904,
+        0.01780803600784493,
+        -0.7003647450726993,
+        -0.029011665541730347
+      ],
+      "calibrationWorldQuaternion": [
+        0.04570100315259076,
+        0,
+        0.6770671808038848,
+        0.7345008175551108
+      ],
+      "calibrationChild": null
+    },
+    {
+      "source": "LeftUpLeg",
+      "target": "LeftUpLeg",
+      "sourceParent": "Hips",
+      "targetParent": "Hips",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0.1,
+        0,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        0.08565034717321396,
+        0.024846969172358513,
+        3.942582793570182e-8
+      ],
+      "targetBindLocalQuaternion": [
+        -0.9972112774848938,
+        -0.06940319389104843,
+        0.021052762866020203,
+        0.017598401755094528
+      ],
+      "targetBindWorldQuaternion": [
+        -0.997211248648557,
+        -0.0694031918841178,
+        0.021052762257237918,
+        0.01759840124620193
+      ],
+      "targetBasisWorldQuaternion": [
+        -0.9997772238490009,
+        -2.4396855023397016e-9,
+        0.02110693423462588,
+        5.1505758425635095e-11
+      ],
+      "calibrationWorldQuaternion": [
+        -0.01905936924615552,
+        0,
+        -0.06901627977862718,
+        0.9974334532034992
+      ],
+      "calibrationChild": "LeftLeg"
+    },
+    {
+      "source": "LeftLeg",
+      "target": "LeftLeg",
+      "sourceParent": "LeftUpLeg",
+      "targetParent": "LeftUpLeg",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        -0.41,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        -1.0913936421275139e-9,
+        0.22362524271011353,
+        0
+      ],
+      "targetBindLocalQuaternion": [
+        0.11421696096658707,
+        0.032576337456703186,
+        0.042641300708055496,
+        0.9920055270195007
+      ],
+      "targetBindWorldQuaternion": [
+        -0.9908743094712313,
+        -0.02334809149177939,
+        -0.0029235932874995306,
+        0.13271933565193578
+      ],
+      "targetBasisWorldQuaternion": [
+        -0.9999956472475755,
+        -4.242394349934873e-9,
+        -0.0029505060416903364,
+        2.7320289065592483e-8
+      ],
+      "calibrationWorldQuaternion": [
+        -0.1326498422139478,
+        0,
+        -0.02373957478145472,
+        0.9908786262453191
+      ],
+      "calibrationChild": "LeftFoot"
+    },
+    {
+      "source": "LeftFoot",
+      "target": "LeftFoot",
+      "sourceParent": "LeftLeg",
+      "targetParent": "LeftLeg",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        -0.37,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        -2.153683453798294e-9,
+        0.25874626636505127,
+        -1.414446160197258e-8
+      ],
+      "targetBindLocalQuaternion": [
+        -0.554440975189209,
+        -0.04671486094594002,
+        -0.060193922370672226,
+        0.828727662563324
+      ],
+      "targetBindWorldQuaternion": [
+        -0.8934811859689619,
+        -0.08357282928211554,
+        0.022931657862676615,
+        -0.4406598366006922
+      ],
+      "targetBasisWorldQuaternion": [
+        -0.8934811859689621,
+        -0.08357282928211555,
+        0.02293165786267662,
+        -0.4406598366006923
+      ],
+      "calibrationWorldQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "calibrationChild": null
+    },
+    {
+      "source": "RightUpLeg",
+      "target": "RightUpLeg",
+      "sourceParent": "Hips",
+      "targetParent": "Hips",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        -0.1,
+        0,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        -0.08565033972263336,
+        0.024846969172358513,
+        3.2678901362714896e-8
+      ],
+      "targetBindLocalQuaternion": [
+        -0.997151792049408,
+        0.06854349374771118,
+        0.023704655468463898,
+        0.020694412291049957
+      ],
+      "targetBindWorldQuaternion": [
+        -0.997151754001369,
+        0.06854349113231648,
+        0.023704654563972062,
+        0.02069441150141912
+      ],
+      "targetBasisWorldQuaternion": [
+        -0.9997175570552025,
+        -3.065340500256042e-9,
+        0.02376564990860408,
+        1.1143291578103594e-9
+      ],
+      "calibrationWorldQuaternion": [
+        -0.01905958471331155,
+        0,
+        0.06901595067583652,
+        0.9974334718580816
+      ],
+      "calibrationChild": "RightLeg"
+    },
+    {
+      "source": "RightLeg",
+      "target": "RightLeg",
+      "sourceParent": "RightUpLeg",
+      "targetParent": "RightUpLeg",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        -0.41,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        -1.382431946694851e-9,
+        0.22362519800662994,
+        -4.656612873077393e-10
+      ],
+      "targetBindLocalQuaternion": [
+        0.11216980963945389,
+        0.011556903831660748,
+        -0.04776943847537041,
+        0.9924729466438293
+      ],
+      "targetBindWorldQuaternion": [
+        -0.9908730396393414,
+        0.023292290034466936,
+        0.0033251705066195455,
+        0.13272916703552542
+      ],
+      "targetBasisWorldQuaternion": [
+        -0.9999943693522826,
+        -5.962635968629303e-9,
+        0.003355780644040029,
+        -3.455528271699036e-10
+      ],
+      "calibrationWorldQuaternion": [
+        -0.13265025619086318,
+        0,
+        0.02373757476278884,
+        0.9908786187403983
+      ],
+      "calibrationChild": "RightFoot"
+    },
+    {
+      "source": "RightFoot",
+      "target": "RightFoot",
+      "sourceParent": "RightLeg",
+      "targetParent": "RightLeg",
+      "inheritSource": null,
+      "policy": "world-basis-retarget",
+      "sourceRestTranslationMeters": [
+        0,
+        -0.37,
+        0
+      ],
+      "targetBindTranslationMeters": [
+        -3.0850060284137726e-9,
+        0.25874659419059753,
+        1.8917489796876907e-10
+      ],
+      "targetBindLocalQuaternion": [
+        -0.5561161041259766,
+        0.07450290769338608,
+        0.04200611263513565,
+        0.8266920447349548
+      ],
+      "targetBindWorldQuaternion": [
+        -0.8922289783311809,
+        0.06891780150747064,
+        -0.05254537523125135,
+        -0.4431893166619441
+      ],
+      "targetBasisWorldQuaternion": [
+        -0.8922289783311809,
+        0.06891780150747064,
+        -0.05254537523125135,
+        -0.4431893166619441
+      ],
+      "calibrationWorldQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "calibrationChild": null
+    }
+  ],
+  "proofRequirements": [
+    "18 unique source bones covered exactly once",
+    "20 target bones covered exactly once",
+    "LeftShoulder and RightShoulder explicitly follow Chest",
+    "Loaded GLB bind translations, local rotations and inverse bind matrices agree with rig.json",
+    "Mapped segment direction equals source canonical segment direction at identity source pose; residual recorded in radians"
+  ],
+  "calibrationMaxDirectionErrorRadians": 0
+}
