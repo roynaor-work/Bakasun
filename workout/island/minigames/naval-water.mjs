@@ -194,7 +194,7 @@ class Water extends Mesh {
 					float facing=max(0.,dot(surfaceNormal,eyeDirection));
 					vec3 scatter=lagoon*(.16+facing*1.65)+sunColor*diffuseLight*.018;
 					float glitter=pow(max(0.,dot(normalize(reflect(-sunDirection,surfaceNormal)),eyeDirection)),48.);
-					vec3 albedo=mix(scatter*getShadowMask(),reflectionSample,reflectance*.36)+specularLight*.32+sunColor*glitter*.075;
+					vec3 albedo=mix(scatter*getShadowMask(),reflectionSample,reflectance*.36)+specularLight*.24+sunColor*glitter*.056;
 					vec3 outgoingLight = albedo;
 					gl_FragColor = vec4( outgoingLight, alpha );
 

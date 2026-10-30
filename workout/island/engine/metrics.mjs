@@ -1,4 +1,4 @@
-import {cityConnections} from './city-connections.mjs?v=island-soccer-league-20261029-1';
+import {cityConnections} from './city-connections.mjs?v=island-naval-aim-20261030-1';
 
 export function buildingCenter(building, registry) {
   const type = registry.buildings.get(building.typeId);
