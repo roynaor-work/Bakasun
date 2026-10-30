@@ -11,7 +11,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels,ba
  const K={...DEFAULTS,...config};
  const win=doc.defaultView,abort=new AbortController(),on={signal:abort.signal};
  const now=()=>win.performance?.now?.()??Date.now();
- const edges=[],keys=new Set();let enabled=true,stick={x:0,y:0},stickPointer=null,center=null;
+ const edges=[],keys=new Set();let enabled=true,stick={x:0,y:0},stickPointer=null,center=null,lockB=null;
  const held={shoot:null,pass:null,alt:null};let shootKey=false,sprintKey=false,passKeyAt=null,passAt=null;
  const node=(tag,cls)=>{const n=doc.createElement(tag);n.className=cls;return n;};
  const zone=node('div','hoops-stick-zone'),ring=node('div','hoops-stick'),knob=node('span','hoops-knob');
@@ -92,7 +92,10 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels,ba
  return {
   /** One input frame per engine step: the current stick and at most one queued edge. */
   consume(){
-   const ks=keyStick(),s=ks||stick,b=basis();
+   const ks=keyStick(),s=ks||stick;
+   // the screen directions are fixed when the thumb lands, so a camera move never bends a run
+   const active=!!ks||stickPointer!==null;if(active&&!lockB)lockB=basis();if(!active)lockB=null;
+   const b=lockB||basis();
    const tilt=Math.hypot(s.x,s.y),auto=!ks&&tilt>=K.autoSprint;
    const f={move:{x:s.x*b.rx+s.y*b.ux,z:s.x*b.rz+s.y*b.uz},sprint:auto||sprintKey,shootDown:false,shootUp:false,passPress:false,passLong:false,passDir:null,altPress:false,switchPress:false,timeoutPress:false,call:null};
    if(!enabled){f.move={x:0,z:0};f.sprint=false;return f;}
