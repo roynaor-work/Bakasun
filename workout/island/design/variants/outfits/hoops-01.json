@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "hoops-01",
+  "modelId": "basketball-player",
+  "label": "לוחות צד",
+  "pattern": "sides",
+  "source": {
+    "manifest": "../../screens/manifest.json",
+    "kitId": "hoops-01",
+    "shirt": "../../screens/kits/hoops/01-shirt.svg",
+    "shorts": "../../screens/kits/hoops/01-shorts.svg",
+    "hashEncoding": "utf8-lf",
+    "shirtSha256": "4713f8110c434d372c2cd62c11d3ece1d278bddc7f6687e71ac2417d5296c9fd",
+    "shortsSha256": "771aa50820ff934e7122a4db2414c81f9033dd0e12caccfc079e9888622e251f"
+  },
+  "colors": {
+    "shirt": "#FFD16A",
+    "shorts": "#FFD16A",
+    "accent": "#4B3568",
+    "socks": "#FFD16A",
+    "shoes": "#4B3568",
+    "soles": "#F1EDDA",
+    "gloves": "#4B3568",
+    "helmet": "#4B3568",
+    "equipment": "#4B3568"
+  },
+  "map": "../maps/hoops-01.png"
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-08",
+  "modelId": "soccer-player",
+  "label": "ריבועים מדורגים",
+  "pattern": "blocks",
+  "source": {
+    "manifest": "../../screens/manifest.json",
+    "kitId": "soccer-08",
+    "shirt": "../../screens/kits/soccer/08-shirt.svg",
+    "shorts": "../../screens/kits/soccer/08-shorts.svg",
+    "hashEncoding": "utf8-lf",
+    "shirtSha256": "794785b9b14c5ef1f6dfbe04e8a4bfeaf4012d89e56f38884873af0c84ecb0fd",
+    "shortsSha256": "30cead6619c96cb07d45f1e5275f6fb8f965de67a861a4f5d8bbcf3cc90e02a4"
+  },
+  "colors": {
+    "shirt": "#F6ABD1",
+    "shorts": "#F6ABD1",
+    "accent": "#573C60",
+    "socks": "#F6ABD1",
+    "shoes": "#573C60",
+    "soles": "#F1EDDA",
+    "gloves": "#573C60",
+    "helmet": "#573C60",
+    "equipment": "#573C60"
+  },
+  "map": "../maps/soccer-08.png"
+}

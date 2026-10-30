@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-04",
+  "modelId": "soccer-player",
+  "label": "חץ רחב",
+  "pattern": "chevron",
+  "source": {
+    "manifest": "../../screens/manifest.json",
+    "kitId": "soccer-04",
+    "shirt": "../../screens/kits/soccer/04-shirt.svg",
+    "shorts": "../../screens/kits/soccer/04-shorts.svg",
+    "hashEncoding": "utf8-lf",
+    "shirtSha256": "77d5007d0c3bcfe6db5e369ec97070db001499e98a2cfabbcb08493b0cc6f33a",
+    "shortsSha256": "7b07059f3a0284205c15ac2c75629ba29edd45e2374a992429dbfb13db4b6474"
+  },
+  "colors": {
+    "shirt": "#FFD16A",
+    "shorts": "#FFD16A",
+    "accent": "#4E396C",
+    "socks": "#FFD16A",
+    "shoes": "#4E396C",
+    "soles": "#F1EDDA",
+    "gloves": "#4E396C",
+    "helmet": "#4E396C",
+    "equipment": "#4E396C"
+  },
+  "map": "../maps/soccer-04.png"
+}

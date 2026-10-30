@@ -1,0 +1,430 @@
+{
+  "validator": "2.0.0-dev.3.10",
+  "baseCommit": "039419a2182d40f12d9acbfe0451e18118394d41",
+  "counts": {
+    "outfits": 22,
+    "skins": 6,
+    "hairColors": 6,
+    "appearanceApplications": 792
+  },
+  "characters": [
+    {
+      "id": "soccer-player",
+      "bytes": 44844,
+      "sha256": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+      "vertices": 1281,
+      "triangles": 1948,
+      "regionTriangleCounts": {
+        "preserve": 240,
+        "skin": 700,
+        "hair": 176,
+        "shirt": 208,
+        "soles": 160,
+        "shoes": 262,
+        "socks": 74,
+        "shorts": 128
+      },
+      "compressed": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "severity": 2,
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'."
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "severity": 2,
+            "message": "This object may be unused."
+          }
+        ]
+      },
+      "decoded": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "bytes": 44584,
+      "sha256": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f",
+      "vertices": 1259,
+      "triangles": 1948,
+      "regionTriangleCounts": {
+        "preserve": 240,
+        "skin": 320,
+        "hair": 176,
+        "gloves": 216,
+        "shirt": 372,
+        "soles": 160,
+        "shoes": 272,
+        "socks": 64,
+        "shorts": 128
+      },
+      "compressed": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "severity": 2,
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'."
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "severity": 2,
+            "message": "This object may be unused."
+          }
+        ]
+      },
+      "decoded": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "basketball-player",
+      "bytes": 44564,
+      "sha256": "a1b638f72c5e62d3a25d3fbd2f9e262907b87fd31992ce32c116cd3128568814",
+      "vertices": 1257,
+      "triangles": 1948,
+      "regionTriangleCounts": {
+        "preserve": 240,
+        "skin": 816,
+        "hair": 176,
+        "accent": 32,
+        "shirt": 124,
+        "soles": 170,
+        "shoes": 262,
+        "shorts": 128
+      },
+      "compressed": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "severity": 2,
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'."
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "severity": 2,
+            "message": "This object may be unused."
+          }
+        ]
+      },
+      "decoded": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "skier",
+      "bytes": 44476,
+      "sha256": "c6cc6ea9f01abbd25feb9660187de0fcdabec9b0156a3044254ef04651d895a3",
+      "vertices": 1260,
+      "triangles": 1920,
+      "regionTriangleCounts": {
+        "shoes": 374,
+        "equipment": 50,
+        "skin": 228,
+        "preserve": 140,
+        "helmet": 108,
+        "gloves": 208,
+        "shirt": 380,
+        "soles": 160,
+        "shorts": 272
+      },
+      "compressed": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "severity": 2,
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'."
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "severity": 2,
+            "message": "This object may be unused."
+          }
+        ]
+      },
+      "decoded": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    }
+  ],
+  "outfits": [
+    {
+      "id": "soccer-01",
+      "pngBytes": 1323,
+      "pngSha256": "a619523176fbc94e8faf05f1e567e1e1a3ddb34ac79bc0c48006501422b9438f",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "soccer-02",
+      "pngBytes": 405,
+      "pngSha256": "bc1696a00c9cb3f3559ed37729d61a675a229f04fdeb0fe30c4c8a3e73187f78",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "soccer-03",
+      "pngBytes": 454,
+      "pngSha256": "466e44d6e91ea6fc7a8e2086f44832d7439678c4ed9e284d8d4e6be163108b96",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "soccer-04",
+      "pngBytes": 1542,
+      "pngSha256": "631c4c9bd1f9a730389d418ba16cd12f3596ca7d17f3809056de74cec8c3ce64",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "soccer-05",
+      "pngBytes": 443,
+      "pngSha256": "fa974e7e40b449dd19136dd2650ac410ba8b0e300effe431b4630aebbbded264",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "soccer-06",
+      "pngBytes": 382,
+      "pngSha256": "238e00fb1e850d5d7d7e5725b882b0356c5e8d0ace5e707f172d211fed0dd900",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "soccer-07",
+      "pngBytes": 450,
+      "pngSha256": "84d6319c618f203d36fe12fde5c6f78ef14145adcb94d16f2cde38f0d8aed4c2",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "soccer-08",
+      "pngBytes": 486,
+      "pngSha256": "791677ebdc7819231cd3adedb98f938afdfc0326a5ccf197deb4c835a5e6762d",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "goalkeeper-01",
+      "pngBytes": 429,
+      "pngSha256": "ec6e298c91399b1f9dc54de2c5d38e46b53de5007a07251e873e63612c7887c8",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "goalkeeper-02",
+      "pngBytes": 444,
+      "pngSha256": "8a77f89ad82e9bf02cf3143f199fa0ec840c7fee648f7a5595ac4e6b245d6d0b",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "goalkeeper-03",
+      "pngBytes": 429,
+      "pngSha256": "395333055a555cb58bb9a0ac3fba7693928159754276ab1ade5bd63c2c052690",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "goalkeeper-04",
+      "pngBytes": 444,
+      "pngSha256": "249334e88f45043fef384d20720d898ef672e5e6d6e648959da30ef903abc476",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "hoops-01",
+      "pngBytes": 2846,
+      "pngSha256": "333240552d024c06a6841adf723c5b6ef8ba35e32b7145e3f43d0e606bfd7146",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "hoops-02",
+      "pngBytes": 3490,
+      "pngSha256": "2b3f79dac98f449db8681e8218678b580fb2182f3e4a5e613ef5de31f3bd1a5f",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "hoops-03",
+      "pngBytes": 964,
+      "pngSha256": "719a4cc2c856dcea84f7dce69a5933d0a57d344b443d66c01bc5e941ea49e562",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "hoops-04",
+      "pngBytes": 1344,
+      "pngSha256": "47d314b2b08c3fef1e3f9e58c1e28b6c1e77afc1a77f2089ae370ba14084a346",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "hoops-05",
+      "pngBytes": 445,
+      "pngSha256": "157bdaed744c41c694b49092866a8023c749b81ba3f8fd9f2fccca3c90e75752",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "hoops-06",
+      "pngBytes": 1951,
+      "pngSha256": "5c7ee0bafe1f7288f10924536bd2adf311eeffddfc04cad1c2c2d212c5af6096",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "skier-01",
+      "pngBytes": 2026,
+      "pngSha256": "2da43adea09e89b968bd9f9c76c1ebd43afb9bdd570fe3884b28ade2e73b55e0",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "skier-02",
+      "pngBytes": 1990,
+      "pngSha256": "7545744e4b771592329cec6c9e7072c784781979a69ed8644c227d92ba6d3fb1",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "skier-03",
+      "pngBytes": 1887,
+      "pngSha256": "57c2e7f3ad9dbcfb83e21a0a8e7450de723e7d5183725b907fb345986ffcc580",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    },
+    {
+      "id": "skier-04",
+      "pngBytes": 1943,
+      "pngSha256": "2b8faaeac345d3ec5aedee76327c8c27e86881b4c64986d16425ccda678ddab3",
+      "preparedGLTF": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    }
+  ],
+  "checks": {
+    "distinctOutfitMaps": true,
+    "allSourceColorsMatched": true,
+    "allTriangleRegionsAssigned": true,
+    "finiteColorsAndUV": true,
+    "sourceUnchanged": true,
+    "independentActors": true,
+    "repeatedApplicationStable": true,
+    "skinAndHairAppliedInLinearSpace": true,
+    "rejectsWrongCharacter": true,
+    "disposeRestoresSource": true
+  }
+}

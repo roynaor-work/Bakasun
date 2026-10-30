@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "hoops-03",
+  "modelId": "basketball-player",
+  "label": "זיגזג",
+  "pattern": "zigzag",
+  "source": {
+    "manifest": "../../screens/manifest.json",
+    "kitId": "hoops-03",
+    "shirt": "../../screens/kits/hoops/03-shirt.svg",
+    "shorts": "../../screens/kits/hoops/03-shorts.svg",
+    "hashEncoding": "utf8-lf",
+    "shirtSha256": "4763de3844f76f5829691f10b2a540d83b4123ec67ea87bf060f5cf163160651",
+    "shortsSha256": "5480bfa9a848e6d6f2bdb3789d0fbfb495cea6f54510ec72ee38e7c720fc14e4"
+  },
+  "colors": {
+    "shirt": "#FF987D",
+    "shorts": "#FF987D",
+    "accent": "#4F253B",
+    "socks": "#FF987D",
+    "shoes": "#4F253B",
+    "soles": "#F1EDDA",
+    "gloves": "#4F253B",
+    "helmet": "#4F253B",
+    "equipment": "#4F253B"
+  },
+  "map": "../maps/hoops-03.png"
+}

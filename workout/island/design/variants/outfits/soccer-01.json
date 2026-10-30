@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-01",
+  "modelId": "soccer-player",
+  "label": "פס אלכסוני",
+  "pattern": "slash",
+  "source": {
+    "manifest": "../../screens/manifest.json",
+    "kitId": "soccer-01",
+    "shirt": "../../screens/kits/soccer/01-shirt.svg",
+    "shorts": "../../screens/kits/soccer/01-shorts.svg",
+    "hashEncoding": "utf8-lf",
+    "shirtSha256": "3d79e0e3b7907d462fcbbd2da05439e48f6ff6dba01bd13bd3333d6c3725210e",
+    "shortsSha256": "d4a15d5be75660d19c622fe2709ad99fcc3e9ea4c44b5f522a34e9309b63b470"
+  },
+  "colors": {
+    "shirt": "#B8F65B",
+    "shorts": "#B8F65B",
+    "accent": "#173F32",
+    "socks": "#B8F65B",
+    "shoes": "#173F32",
+    "soles": "#F1EDDA",
+    "gloves": "#173F32",
+    "helmet": "#173F32",
+    "equipment": "#173F32"
+  },
+  "map": "../maps/soccer-01.png"
+}
