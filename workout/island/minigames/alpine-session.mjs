@@ -1,3 +1,4 @@
+import {enhanceAlpineOpening} from './alpine-screen.mjs';
 import {createAlpineEngine} from './alpine-engine.mjs?v=island-perf-20261030-1';
 import {createAlpineControls} from './alpine-controls.mjs?v=island-perf-20261030-1';
 import {createAlpineAudio} from './alpine-audio.mjs?v=island-perf-20261030-1';
@@ -60,6 +61,7 @@ export function runAlpineSession(ctx) {
   const ltr = text => { const b = el('bdi', 'alpine-ltr', text); b.dir = 'ltr'; return b; };
   const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-perf-20261030-1', import.meta.url).href;
   const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-perf-20261030-1', import.meta.url).href;
+  const screenCss=el('link');screenCss.rel='stylesheet';screenCss.href=new URL('./alpine-screen.css',import.meta.url).href;
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
   const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
@@ -95,6 +97,7 @@ export function runAlpineSession(ctx) {
   const setTheme = id => { theme = id; screen.dataset.alpineTheme = id; for (const b of themeButtons) b.setAttribute('aria-checked', String(b.dataset.theme === id)); };
   for (const b of themeButtons) b.addEventListener('click', () => { setTheme(b.dataset.theme); try { storage?.setItem(THEME_KEY, theme); } catch {} }, {signal: abort.signal});
   intro.append(el('span', 'alpine-eyebrow', 'THE MOUNTAIN IS YOURS'), title, el('p', 'alpine-tagline', t('alpine.tagline')), startButton, el('span', 'alpine-start-note', t('alpine.startNote')), card, bestLine, themes);
+  enhanceAlpineOpening({intro,doc});
   const worldLabel = el('div', 'alpine-world-label'); worldLabel.setAttribute('aria-hidden', 'true'); worldLabel.append(el('span', '', '46°35′ N   08°02′ E'), el('b', '', 'ABOVE THE ORDINARY.'), el('span', '', '2,840 M / ALPINE CIRCUIT'));
   const countdown = el('div', 'alpine-countdown'); countdown.setAttribute('aria-live', 'assertive');
   const callout = el('div', 'alpine-callout'), calloutKicker = el('span'), calloutLine = el('b'); callout.append(calloutKicker, calloutLine); callout.hidden = true;
@@ -121,8 +124,8 @@ export function runAlpineSession(ctx) {
   const center = el('div', 'alpine-center'); center.append(speed, hint);
   footer.append(joystick, center, actions);
   stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading);
-  controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish); stage.append(app); setTheme(theme);
-  dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, app]};
+  controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish, screenCss); stage.append(app); setTheme(theme);
+  dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, screenCss, app]};
   screen.dataset.alpineDusk = String(!!track.visual?.dusk);
   const setPhase = phase => { app.dataset.phase = phase; screen.dataset.alpinePhase = phase; };
   setPhase('menu');
