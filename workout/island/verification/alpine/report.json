@@ -1,142 +1,117 @@
 [
-  {
-    "width": 390,
-    "height": 844,
-    "result": {
-      "rows": [
-        [
-          "rank",
-          "4 / 6"
-        ],
-        [
-          "time",
-          "01:14.77"
-        ],
-        [
-          "peak",
-          "112"
-        ],
-        [
-          "trickScore",
-          "150"
-        ],
-        [
-          "coins",
-          "11 / 125"
-        ],
-        [
-          "newBest",
-          "01:14.77"
-        ]
-      ],
-      "medal": "04",
-      "money": 1213.0999999999997,
-      "progress": {
-        "stage": 1,
-        "stars": [
-          0,
-          0,
-          0
-        ]
-      },
-      "records": "{\"version\":1,\"best\":{\"ice-peak\":{\"ms\":74765,\"rank\":4}},\"runs\":[\"alpine-ice-peak-2256141668-1\"]}",
-      "canvases": 0,
-      "apps": 0
-    },
-    "shots": [
-      "390x844-opening.jpg",
-      "390x844-opening-codex.jpg",
-      "390x844-countdown.jpg",
-      "390x844-race.jpg",
-      "390x844-boost.jpg",
-      "390x844-jump.jpg",
-      "390x844-pipe.jpg",
-      "390x844-hit.jpg",
-      "390x844-pause.jpg",
-      "390x844-result.jpg"
+ {
+  "width": 844,
+  "height": 390,
+  "result": {
+   "rows": [
+    [
+     "rank",
+     "1 / 6"
+    ],
+    [
+     "time",
+     "01:09.22"
+    ],
+    [
+     "peak",
+     "112"
+    ],
+    [
+     "trickScore",
+     "150"
+    ],
+    [
+     "coins",
+     "20 / 125"
+    ],
+    [
+     "newBest",
+     "01:09.22"
     ]
-  },
-  {
-    "width": 844,
-    "height": 390,
-    "result": "passed in a separate run (log only, report not kept)"
-  },
-  {
-    "width": 1440,
-    "height": 900,
-    "result": {
-      "rows": [
-        [
-          "rank",
-          "3 / 6"
-        ],
-        [
-          "time",
-          "01:15.01"
-        ],
-        [
-          "peak",
-          "112"
-        ],
-        [
-          "trickScore",
-          "150"
-        ],
-        [
-          "coins",
-          "11 / 125"
-        ],
-        [
-          "newBest",
-          "01:15.01"
-        ]
-      ],
-      "medal": "03",
-      "money": 1258.2999999999995,
-      "progress": {
-        "stage": 2,
-        "stars": [
-          1,
-          0,
-          0
-        ]
-      },
-      "records": "{\"version\":1,\"best\":{\"ice-peak\":{\"ms\":75011,\"rank\":3}},\"runs\":[\"alpine-ice-peak-2255541209-1\"]}",
-      "canvases": 0,
-      "apps": 0
-    },
-    "shots": [
-      "1440x900-opening.jpg",
-      "1440x900-opening-codex.jpg",
-      "1440x900-countdown.jpg",
-      "1440x900-race.jpg",
-      "1440x900-boost.jpg",
-      "1440x900-jump.jpg",
-      "1440x900-pipe.jpg",
-      "1440x900-hit.jpg",
-      "1440x900-pause.jpg",
-      "1440x900-result.jpg"
+   ],
+   "medal": "01",
+   "money": 1267.7999999999997,
+   "progress": {
+    "stage": 2,
+    "stars": [
+     3,
+     0,
+     0
     ]
+   },
+   "records": "{\"version\":1,\"best\":{\"ice-peak\":{\"ms\":69217,\"rank\":1}},\"runs\":[\"alpine-ice-peak-2403063110-1\"]}",
+   "canvases": 0,
+   "apps": 0
   },
-  {
-    "mode": "low+primitive",
-    "metrics": {
-      "calls": 128,
-      "triangles": 831842,
-      "geometries": 119,
-      "textures": 6,
-      "props": 3,
-      "chunks": 51,
-      "visibleChunks": 11,
-      "coins": 5,
-      "trees": 99,
-      "quality": "low",
-      "disposed": false,
-      "mode": "primitive"
-    }
-  },
-  {
-    "mode": "no-webgl",
-    "ok": true
+  "shots": [
+   "844x390-opening.jpg",
+   "844x390-opening-codex.jpg",
+   "844x390-countdown.jpg",
+   "844x390-race.jpg",
+   "844x390-boost.jpg",
+   "844x390-jump.jpg",
+   "844x390-pipe.jpg",
+   "844x390-hit.jpg",
+   "844x390-pause.jpg",
+   "844x390-result.jpg"
+  ]
+ },
+ {
+  "mode": "low+primitive",
+  "metrics": {
+   "calls": 206,
+   "triangles": 141752,
+   "geometries": 252,
+   "textures": 15,
+   "props": 4,
+   "chunks": 51,
+   "visibleChunks": 11,
+   "coins": 5,
+   "trees": 56,
+   "nearTrees": 0,
+   "farTrees": 56,
+   "distantTrees": 0,
+   "shadowTrees": 0,
+   "treeVariants": 3,
+   "treeDeckClearance": 0.7,
+   "rocks": 6,
+   "fences": 28,
+   "designWorld": true,
+   "designModels": 7,
+   "designSurface": "ski-slope",
+   "background": "portrait",
+   "quality": "low",
+   "disposed": false,
+   "mode": "primitive",
+   "vfx": {
+    "active": 0,
+    "capacity": 3,
+    "textures": 3,
+    "textureBytes": 3145728,
+    "spawned": 0,
+    "cameraActive": false,
+    "cameraRuns": 0,
+    "cameraDuration": 1.4,
+    "sourceCameraDuration": 5.6,
+    "warmed": true,
+    "disposed": false
+   },
+   "rockTexture": "loaded",
+   "mobileProfile": true,
+   "pixelRatio": 1,
+   "fov": 66.935,
+   "interpolation": true,
+   "lastSwitch": {
+    "quality": "low",
+    "pixelRatioMs": 0,
+    "shadowMs": 0,
+    "resizeMs": 0,
+    "totalMs": 0
+   }
   }
+ },
+ {
+  "mode": "no-webgl",
+  "ok": true
+ }
 ]
