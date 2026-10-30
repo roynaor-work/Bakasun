@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "source": "../models/soccer-stadium.glb",
+  "copy": "soccer-stadium-uv2.glb",
+  "anchors_and_transforms_preserved": true,
+  "uv0_and_colors_preserved_within_recorded_tolerance": true,
+  "uv1_decoded_audit": {
+    "raster_size": 1024,
+    "covered_pixels": 96588,
+    "overlap_pixels": 0,
+    "out_of_range_triangles": 0,
+    "degenerate_uv_triangles": 0
+  },
+  "meshes": [
+    {
+      "mesh": "aisles",
+      "triangles": 1176,
+      "source_vertices": 2352,
+      "copy_vertices": 2352,
+      "max_position_error_m": 0,
+      "max_uv0_error": 0,
+      "max_color_error": 0
+    },
+    {
+      "mesh": "beams",
+      "triangles": 480,
+      "source_vertices": 864,
+      "copy_vertices": 872,
+      "max_position_error_m": 0,
+      "max_uv0_error": 0,
+      "max_color_error": 0
+    },
+    {
+      "mesh": "field_markings",
+      "triangles": 868,
+      "source_vertices": 1704,
+      "copy_vertices": 1756,
+      "max_position_error_m": 0,
+      "max_uv0_error": 0,
+      "max_color_error": 0
+    },
+    {
+      "mesh": "floodlights",
+      "triangles": 1584,
+      "source_vertices": 3456,
+      "copy_vertices": 3456,
+      "max_position_error_m": 0,
+      "max_uv0_error": 0,
+      "max_color_error": 0
+    },
+    {
+      "mesh": "pitch_surface",
+      "triangles": 2,
+      "source_vertices": 4,
+      "copy_vertices": 4,
+      "max_position_error_m": 0,
+      "max_uv0_error": 0,
+      "max_color_error": 0
+    },
+    {
+      "mesh": "roof",
+      "triangles": 176,
+      "source_vertices": 384,
+      "copy_vertices": 384,
+      "max_position_error_m": 0,
+      "max_uv0_error": 0,
+      "max_color_error": 0
+    },
+    {
+      "mesh": "seating",
+      "triangles": 448,
+      "source_vertices": 672,
+      "copy_vertices": 672,
+      "max_position_error_m": 0,
+      "max_uv0_error": 0,
+      "max_color_error": 0
+    },
+    {
+      "mesh": "stand_shell",
+      "triangles": 512,
+      "source_vertices": 768,
+      "copy_vertices": 768,
+      "max_position_error_m": 0,
+      "max_uv0_error": 0,
+      "max_color_error": 0
+    }
+  ],
+  "extra_uv_bytes_float32": 82112
+}
