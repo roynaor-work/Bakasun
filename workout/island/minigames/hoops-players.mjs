@@ -6,6 +6,7 @@ import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
 import {jerseyTexture,shortsTexture} from './hoops-textures.mjs?v=island-naval-aim-20261030-1';
+import {shareSkeletons} from './hoops-perf.mjs?v=island-naval-aim-20261030-1';
 
 const BODY_FOR_POS={PG:'guard',SG:'guard',SF:'wing',PF:'forward',C:'big'};
 const HAIR=/short0|afro|long0|bob0|braid|pony/i;
@@ -34,10 +35,19 @@ const trimShader=(trimColor,waistColor)=>sh=>{
   .replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.rgb=mix(diffuseColor.rgb,uTrim,smoothstep(0.42,0.52,vTrim.x));diffuseColor.rgb=mix(diffuseColor.rgb,uWaist,smoothstep(0.4,0.6,vTrim.y));');
 };
 
+/** Shorts carry no number: one texture per team look, shared by every avatar of the team. */
+function teamShorts(assets,teamLook){
+ const cache=assets.shorts||(assets.shorts=new Map()),key=JSON.stringify([teamLook.primary,teamLook.secondary,teamLook.trim,teamLook.mark]);
+ let t=cache.get(key);if(!t){t=shortsTexture(teamLook);cache.set(key,t);}
+ return t;
+}
+
 export function createAvatar(assets,card,teamLook,opts={}){
  const kind=card.look?.body||BODY_FOR_POS[card.pos]||'wing';
  const src=assets.bodies[kind]||Object.values(assets.bodies)[0];
  const root=cloneSkinned(src.scene);root.name='player-'+card.id;
+ // the clone gives every skinned mesh its own Skeleton over the same bones: share one
+ const skinned=[];root.traverse(o=>{if(o.isSkinnedMesh)skinned.push(o);});shareSkeletons(skinned);
  const mats=[];
  const skin=assets.skins[(card.look?.skin??0)%Math.max(1,assets.skins.length)];
  root.traverse(o=>{
@@ -48,8 +58,8 @@ export function createAvatar(assets,card,teamLook,opts={}){
    const ga=o.geometry.attributes;
    if(!ga.trim&&(ga.color_1||ga.color))o.geometry.setAttribute('trim',ga.color_1||ga.color);
    const isJ=/Jersey/.test(name);
-   const map=isJ?jerseyTexture({primary:teamLook.primary,secondary:teamLook.secondary,trim:teamLook.trim,number:card.number,wordmark:teamLook.wordmark,name:card.shortName||card.name,dark:teamLook.darkText}):shortsTexture(teamLook);
-   const m=new THREE.MeshStandardMaterial({map,roughness:0.78,metalness:0,side:THREE.DoubleSide});
+   const map=isJ?jerseyTexture({primary:teamLook.primary,secondary:teamLook.secondary,trim:teamLook.trim,number:card.number,wordmark:teamLook.wordmark,name:card.shortName||card.name,dark:teamLook.darkText}):teamShorts(assets,teamLook);
+   const m=new THREE.MeshStandardMaterial({map,roughness:0.78,metalness:0,side:THREE.DoubleSide});if(!isJ)m.userData.sharedMap=true;
    m.onBeforeCompile=trimShader(teamLook.trim,isJ?teamLook.secondary:new THREE.Color(teamLook.primary).multiplyScalar(0.55));
    m.customProgramCacheKey=()=>'hoops-uniform';
    o.material=m;mats.push(m);return;
@@ -70,7 +80,7 @@ export function createAvatar(assets,card,teamLook,opts={}){
  const hands={r:bone(root,'RightHand'),l:bone(root,'LeftHand'),rIdx:bone(root,'RightHandMiddle1'),lIdx:bone(root,'LeftHandMiddle1')};
  const spine=bone(root,'Spine2'),rArm=bone(root,'RightArm'),lArm=bone(root,'LeftArm'),rFore=bone(root,'RightForeArm'),lFore=bone(root,'LeftForeArm');
  const av={root,mixer,actions,hands,kind,scale,cur:null,weights:{},card,mats,
-  dispose(){mixer.stopAllAction();for(const m of mats){m.map?.dispose?.();m.dispose();}},
+  dispose(){mixer.stopAllAction();for(const m of mats){if(!m.userData.sharedMap)m.map?.dispose?.();m.dispose();}},
  };
  // locomotion state
  let baseClip='idle',baseT=0,lastSync=null;

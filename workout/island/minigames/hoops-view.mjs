@@ -5,10 +5,10 @@ import * as THREE from '../vendor/three.module.js';
 import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-naval-aim-20261030-1';
 import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-naval-aim-20261030-1';
 import {ballTexture} from './hoops-textures.mjs?v=island-naval-aim-20261030-1';
+import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-naval-aim-20261030-1';
 
 const lerp=(a,b,t)=>a+(b-a)*t;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-function lerpAngle(a,b,t){const d=((b-a+Math.PI*3)%(Math.PI*2))-Math.PI;return a+d*t;}
 
 export async function createHoopsView(canvas,config,{court,teams,quality=2,assetBase,insets,onProgress}){
  const V=config.view,mobile=/Android|iPhone|iPad|Mobile/i.test(globalThis.navigator?.userAgent||'');
@@ -32,8 +32,18 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  try{crowd=await buildCrowd(dyn.crowdSpots,new URL(config.assets.crowd,assetBase).href,config.assets.crowdGrid,quality);scene.add(crowd.mesh);}catch(e){crowd=null;}
 
  const assets=await loadPlayerAssets(config.assets,assetBase,onProgress);
- const avatars=new Map();
- for(const t of teams)for(const card of t.players){const av=createAvatar(assets,card,t.look,{baseHeights:config.assets.baseHeights});av.root.visible=false;scene.add(av.root);avatars.set(card.id,av);}
+ // avatars: the ten on the floor are built before the first frame; the bench is built one per
+ // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
+ const avatars=new Map(),cards=new Map(),pending=[];
+ for(const t of teams)for(const card of t.players){cards.set(card.id,{card,look:t.look});pending.push(card.id);}
+ function ensureAvatar(id){
+  let av=avatars.get(id);if(av||!cards.has(id))return av;
+  const {card,look}=cards.get(id);av=createAvatar(assets,card,look,{baseHeights:config.assets.baseHeights});av.root.visible=false;scene.add(av.root);avatars.set(id,av);
+  const i=pending.indexOf(id);if(i>=0)pending.splice(i,1);
+  return av;
+ }
+ for(const t of teams)for(const id of (t.lineup||t.players.slice(0,5).map(c=>c.id)))ensureAvatar(id);
+ const interp=createInterpPool();
 
  // the ball
  const ballMat=new THREE.MeshStandardMaterial({map:ballTexture(512),roughness:0.62,metalness:0});
@@ -105,10 +115,14 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   } else if(state.landscape){
    camera.fov=V.fov;camera.position.set(state.camX,V.height,-(court.hz+V.distance)+state.camZ*(V.dollyZ??0));camera.lookAt(state.camX*0.98,V.lookY,state.camZ+V.lookZ);
   } else {
-   // portrait: look along the court towards the active basket, from behind mid-court
-   const s0=Math.sign(b.x||1)||1,cx=s0*(court.hx-6.2);
+   // portrait: look along the court towards the active basket, from behind mid-court. The side
+   // swings over in V.portraitSwing seconds when the ball crosses half court (no cut).
+   const want=Math.sign(b.x||1)||1;
+   state.pS=state.snap||state.pS==null?want:approach(state.pS,want,dt,V.portraitSwing??0.65);
+   const s0=state.pS,w=smoothstep((s0+1)/2),ex=court.hx-6.2;
+   const cx=lerp(-ex,ex,w);
    state.pX=state.snap?cx:lerp(state.pX??cx,cx,k*0.6);
-   camera.fov=V.portraitFov;camera.position.set(state.pX-s0*V.portraitBack,V.portraitHeight,-court.hz*0.35+state.camZ*0.3);
+   camera.fov=V.portraitFov;camera.position.set(state.pX-s0*V.portraitBack,V.portraitHeight+Math.abs(1-Math.abs(s0))*(V.portraitSwingRise??1.5),-court.hz*0.35+state.camZ*0.3);
    camera.lookAt(state.pX+s0*2.4,V.lookY,state.camZ*0.5);
   }
   state.snap=false;
@@ -116,20 +130,19 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   camera.updateProjectionMatrix();
  }
 
- function playerInterp(a,b,alpha){
-  if(!a)return b;
-  return {...b,x:lerp(a.x,b.x,alpha),z:lerp(a.z,b.z,alpha),y:lerp(a.y,b.y,alpha),vx:lerp(a.vx,b.vx,alpha),vz:lerp(a.vz,b.vz,alpha),face:lerpAngle(a.face,b.face,alpha),actT:a.act===b.act?lerp(a.actT,b.actT,alpha):b.actT};
- }
-
+ const seen=new Set();
  function render(prev,cur,alpha,dt){
   const s=state.replay?replayFrame(dt):cur,p0=state.replay?s:prev;
   const t0=performance.now();
-  const prevById=new Map((p0?.players||[]).map(p=>[p.id,p]));
-  const seen=new Set();
-  const handler=s.players.find(p=>p.hasBall);
+  interp.index(p0?.players);
+  seen.clear();
+  let handler=null,me=null;for(const p of s.players){if(p.hasBall)handler=p;if(p.controlled)me=p;}
+  // stoppages build the bench one avatar per half second, so a substitute is usually ready
+  // before he appears and no live frame pays for it
+  if(pending.length){if(s.phase!=='live'&&(state.warm=(state.warm||0)+1)>=30){state.warm=0;ensureAvatar(pending[0]);}}
   for(const pp of s.players){
-   const p=state.replay?pp:playerInterp(prevById.get(pp.id),pp,alpha);
-   const av=avatars.get(p.id);if(!av)continue;seen.add(p.id);
+   const p=state.replay?pp:interp.get(pp,alpha);
+   const av=avatars.get(p.id)||ensureAvatar(p.id);if(!av)continue;seen.add(p.id);
    av.root.visible=true;av.root.position.set(p.x,p.y*0.85,p.z);av.root.rotation.y=p.face;
    const defending=s.possession!==p.team&&s.ball.state==='held';
    const contest=handler&&handler.team!==p.team&&handler.act==='shoot'&&Math.hypot(handler.x-p.x,handler.z-p.z)<1.8?1:0;
@@ -165,8 +178,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   ball.visible=b.state!=='dead'||!!handler||s.phase==='inbound'||s.phase==='freethrow';
   ballShadow.position.set(bx,0.006,bz);ballShadow.material.opacity=clamp(0.42-by*0.08,0.08,0.42);ballShadow.visible=ball.visible;
   // controlled player marker
-  const me=s.players.find(p=>p.controlled);
-  if(me&&!state.replay){const mi=playerInterp(prevById.get(me.id),me,alpha);ring.visible=true;ring.position.x=mi.x;ring.position.z=mi.z;glow.visible=true;glow.position.x=mi.x;glow.position.z=mi.z;const pulse=1+Math.sin(performance.now()*0.008)*0.06;ring.scale.setScalar(pulse);arrow.visible=true;arrow.position.set(mi.x,me.hasBall?2.75:2.6,mi.z);arrow.rotation.y+=dt*2;}
+  if(me&&!state.replay){const mi=interp.get(me,alpha);ring.visible=true;ring.position.x=mi.x;ring.position.z=mi.z;glow.visible=true;glow.position.x=mi.x;glow.position.z=mi.z;const pulse=1+Math.sin(performance.now()*0.008)*0.06;ring.scale.setScalar(pulse);arrow.visible=true;arrow.position.set(mi.x,me.hasBall?2.75:2.6,mi.z);arrow.rotation.y+=dt*2;}
   else {ring.visible=false;glow.visible=false;arrow.visible=false;}
   // nets, LED, displays
   for(const n of dyn.nets){if(n.swing>0){n.swing=Math.max(0,n.swing-dt*1.6);const a=n.mesh.geometry.attributes.position,base=n.base,k=n.swing;for(let i=0;i<a.count;i++){const y=base[i*3+1];const d=-y/0.42;a.setXYZ(i,base[i*3]*(1-0.25*k*d),y*(1+0.35*k*Math.sin(performance.now()*0.03+i)),base[i*3+2]*(1-0.25*k*d));}a.needsUpdate=true;}}
@@ -200,7 +212,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z){v.set(x,y,z).project(camera);return {x:(v.x+1)/2*state.w,y:(1-v.y)/2*state.h,visible:v.z<1};}
- function metrics(){const i=renderer.info.render;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:[...avatars.values()].filter(a=>a.root.visible).length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape};}
  function startReplay(frames,done,speed=0.6){if(!frames?.length)return false;state.replay={frames,t:0,speed,done};return true;}
  function dispose(){for(const av of avatars.values())av.dispose();renderer.dispose();scene.traverse(o=>{o.geometry?.dispose?.();});pm.dispose();}
  function setCameraOverride(pos,look,fov){state.override=pos?{pos:new THREE.Vector3(pos.x,pos.y,pos.z),look:new THREE.Vector3(look.x,look.y,look.z),fov}:null;}

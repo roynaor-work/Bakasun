@@ -1,0 +1,129 @@
+{
+ "date": "2026-10-30",
+ "renderer": "SwiftShader (software WebGL) in headless Chromium; frame time not meaningful, CPU-side proxies only",
+ "tool": "tools/perf-hoops.html (bench=1&dpr=0.05&quality=2&dev=1), scratchpad measure script",
+ "rows": [
+  {
+   "label": "after",
+   "viewport": "844x390",
+   "loadWallMs": 13400,
+   "atLoad": {
+    "avatars": 10,
+    "textures": 56,
+    "geometries": 88
+   },
+   "glPerFrame": 1910,
+   "texSub": 13,
+   "texParam": 52,
+   "draw": 268,
+   "domPerFrame": 0.1,
+   "frames": 54,
+   "allocKBperFrame": {
+    "total": 142.63,
+    "render": 119.51,
+    "engine": 18.33,
+    "hud": 0.25
+   },
+   "cpuMsPerFrame": {
+    "js": 4.85,
+    "gc": 0.549,
+    "glBlocked": 210.3,
+    "native": 3
+   }
+  },
+  {
+   "label": "after",
+   "viewport": "390x844",
+   "loadWallMs": 11098,
+   "atLoad": {
+    "avatars": 10,
+    "textures": 55,
+    "geometries": 84
+   },
+   "glPerFrame": 1655,
+   "texSub": 12,
+   "texParam": 46,
+   "draw": 237,
+   "domPerFrame": 0.1,
+   "frames": 30,
+   "allocKBperFrame": {
+    "total": 136.05,
+    "render": 115.22,
+    "engine": 13.27,
+    "hud": 0.12
+   },
+   "cpuMsPerFrame": {
+    "js": 5.67,
+    "gc": 0.843,
+    "glBlocked": 445.8,
+    "native": 5.9
+   },
+   "camera": {
+    "maxStepJumpM": 2.28,
+    "meanStepM": 0.061
+   }
+  },
+  {
+   "label": "before",
+   "viewport": "844x390",
+   "loadWallMs": 12962,
+   "atLoad": {
+    "avatars": 25,
+    "textures": 134,
+    "geometries": 88,
+    "note": "old metrics had no avatar count; all 25 roster avatars were built at load (scene held 728,744 player triangles)"
+   },
+   "glPerFrame": 2689,
+   "texSub": 92,
+   "texParam": 368,
+   "draw": 217,
+   "domPerFrame": 9.3,
+   "frames": 60,
+   "allocKBperFrame": {
+    "total": 185.02,
+    "render": 158.26,
+    "engine": 21.13,
+    "hud": 1.12
+   },
+   "cpuMsPerFrame": {
+    "js": 7.64,
+    "gc": 1.078,
+    "glBlocked": 692.5,
+    "native": 2.8
+   }
+  },
+  {
+   "label": "before",
+   "viewport": "390x844",
+   "loadWallMs": 12689,
+   "atLoad": {
+    "avatars": 25,
+    "textures": 135,
+    "geometries": 106,
+    "note": "old metrics had no avatar count; all 25 roster avatars were built at load (scene held 728,744 player triangles)"
+   },
+   "glPerFrame": 3168,
+   "texSub": 104,
+   "texParam": 416,
+   "draw": 268,
+   "domPerFrame": 10.4,
+   "frames": 60,
+   "allocKBperFrame": {
+    "total": 194.77,
+    "render": 164.88,
+    "engine": 24.46,
+    "hud": 0.72
+   },
+   "cpuMsPerFrame": {
+    "js": 8.37,
+    "gc": 0.802,
+    "glBlocked": 701.4,
+    "native": 3.4
+   },
+   "camera": {
+    "maxStepJumpM": 18.72,
+    "meanStepM": 0.207
+   }
+  }
+ ]
+}
