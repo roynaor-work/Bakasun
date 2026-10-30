@@ -1,0 +1,36 @@
+/* Turret aiming: hold pad, power ring on the Fire button, elevation dial, cancel chip. */
+.game-screen[data-game=navalDuel] .naval-aim-zone{position:absolute;right:0;top:96px;bottom:0;width:38%;z-index:0;pointer-events:auto;touch-action:none}
+.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot,
+.game-screen[data-game=navalDuel] .naval-weapon-picker,
+.game-screen[data-game=navalDuel] .naval-adventure-controls .ammo-rack{z-index:2}
+.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot{touch-action:none;overflow:visible}
+/* The ring fills while the hold charges power; empty when not aiming. */
+.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot::before{content:'';position:absolute;inset:-11px;border-radius:50%;pointer-events:none;background:conic-gradient(from -90deg,var(--naval-weapon,#ffd36e) calc(var(--naval-power,0)*360deg),#ffffff1f 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 6px),#000 calc(100% - 5px));mask:radial-gradient(farthest-side,transparent calc(100% - 6px),#000 calc(100% - 5px));opacity:0;transition:opacity .12s}
+.game-screen[data-game=navalDuel] .game-controls.game-controls[data-aiming=true] #shoot::before{opacity:1}
+.game-screen[data-game=navalDuel] .naval-aim-cancel{position:absolute;z-index:3;right:max(24px,calc(env(safe-area-inset-right) + 8px));top:max(78px,calc(env(safe-area-inset-top) + 62px));bottom:auto;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px;border-radius:50%;border:1px solid #f2c2a855;background:#3a1f1fcc;color:#ffd9c7;box-shadow:0 4px 16px #0004}
+.game-screen[data-game=navalDuel] .naval-aim-cancel svg{width:22px;height:22px}
+/* Fire button: a large cannon icon, no tiny caption. */
+.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot::after{content:none}
+.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot .game-icon{width:52px;height:52px}
+.game-screen[data-game=navalDuel] .naval-aim-cancel[data-hot=true]{background:#c3533f;border-color:#ffd9c7;transform:scale(1.12)}
+.game-screen[data-game=navalDuel] .naval-aim-cancel[hidden]{display:none}
+/* Elevation dial: a quarter arc with a needle at the current barrel angle. */
+.game-screen[data-game=navalDuel] .naval-aim-gauge{position:absolute;z-index:1;pointer-events:none;right:max(118px,calc(env(safe-area-inset-right) + 96px));bottom:max(96px,calc(env(safe-area-inset-bottom) + 74px));width:46px;height:46px;opacity:0;transition:opacity .12s}
+.game-screen[data-game=navalDuel] .naval-aim-gauge[data-visible=true]{opacity:1}
+.naval-aim-arc{position:absolute;inset:0;border-radius:0 100% 0 0;border-top:3px solid #e9e2c8bb;border-right:3px solid #e9e2c8bb;border-left:0;border-bottom:0;box-sizing:border-box}
+.naval-aim-needle{position:absolute;left:0;bottom:0;width:44px;height:3px;border-radius:2px;background:var(--naval-weapon,#ffd36e);transform-origin:0 50%;transform:rotate(calc(var(--naval-elev,0)*-90deg));box-shadow:0 0 6px #0006}
+/* Battle text is replaced by icons: the per-weapon hint line is not shown in battle. */
+.game-screen[data-game=navalDuel] .naval-weapon-hint{display:none}
+/* Swapped sides keep every aiming element under the action thumb. */
+.game-screen[data-game=navalDuel] .game-controls.left-handed .naval-stick-zone{left:auto;right:0}
+.game-screen[data-game=navalDuel] .game-controls.left-handed .naval-aim-zone{right:auto;left:0}
+.game-screen[data-game=navalDuel] .game-controls.game-controls.left-handed #shoot{right:auto;left:max(22px,env(safe-area-inset-left))}
+.game-screen[data-game=navalDuel] .game-controls.left-handed .naval-weapon-picker{right:auto;left:128px}
+.game-screen[data-game=navalDuel] .game-controls.left-handed .ammo-rack{inset:auto auto 126px max(22px,env(safe-area-inset-left))}
+.game-screen[data-game=navalDuel] .game-controls.left-handed .naval-aim-cancel{right:auto;left:max(24px,calc(env(safe-area-inset-left) + 8px))}
+.game-screen[data-game=navalDuel] .game-controls.left-handed .naval-aim-gauge{right:auto;left:max(118px,calc(env(safe-area-inset-left) + 96px));transform:scaleX(-1)}
+@media(max-height:350px){.game-screen[data-game=navalDuel] .naval-aim-cancel{top:72px}.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot .game-icon{width:44px;height:44px}.game-screen[data-game=navalDuel] .naval-aim-gauge{bottom:84px;right:104px}.game-screen[data-game=navalDuel] .game-controls.left-handed .naval-weapon-picker{left:115px}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=navalDuel] .naval-aim-gauge,.game-screen[data-game=navalDuel] .game-controls.game-controls #shoot::before{transition:none}}
+/* Ammo panel: weapon icon, count and the swap arrow; the name lives in the picker's accessible label, the weapon menu and the help. */
+.game-screen[data-game=navalDuel] .naval-weapon-picker .naval-picked-name{display:none}
+.game-screen[data-game=navalDuel] .naval-weapon-picker{width:104px;min-width:104px}

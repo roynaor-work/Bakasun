@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>האי שלי · חבילת סביבה</title>
+<style>
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #0c1624; color: #f5f8fa; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 1160px; margin: auto; padding: 28px max(16px, env(safe-area-inset-right)) 48px max(16px, env(safe-area-inset-left)); }
+h1 { font-size: clamp(27px, 5vw, 42px); margin: 0 0 12px; }
+h2 { margin: 40px 0 16px; font-size: 24px; }
+h3 { margin: 0; font-size: 18px; }
+p { line-height: 1.65; color: #c8d3dd; max-width: 70ch; }
+a { color: #ffd16a; text-underline-offset: 4px; }
+a:focus-visible { outline: 3px solid #ffd16a; outline-offset: 5px; }
+nav { display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 24px 0; }
+nav a { padding: 10px 0; }
+.textures { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+figure { margin: 0; min-width: 0; }
+.texture, .scene { border: 1px solid #344457; border-radius: 16px; background: #152235; overflow: hidden; }
+.sample { width: 100%; aspect-ratio: 1; background-repeat: repeat; background-size: 50% 50%; }
+figcaption { padding: 14px 16px; }
+figcaption p { margin: 8px 0 0; font-size: 14px; }
+.scene { margin-bottom: 24px; padding: 18px; }
+.views { display: grid; grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.75fr); align-items: center; gap: 20px; margin-top: 18px; }
+.portrait { max-width: 240px; margin: auto; }
+.frame { border-radius: 10px; overflow: hidden; background: #09131c; border: 1px solid #415168; }
+.portrait .frame { aspect-ratio: 390 / 844; }
+.landscape .frame { aspect-ratio: 844 / 390; }
+.frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.views figcaption { text-align: center; padding: 12px 0 0; font-size: 14px; color: #c8d3dd; }
+.note { padding: 16px 20px; border-inline-start: 4px solid #ffd16a; background: #152235; border-radius: 8px; }
+bdi { font-variant-numeric: tabular-nums; }
+@media (max-width: 620px) {
+  main { padding-top: 22px; }
+  .views { grid-template-columns: minmax(0, 1fr); }
+  .portrait { width: 72%; max-width: 220px; }
+  .scene { padding: 14px; }
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+<p>האי שלי · ספריית סביבה · 30.10.2026</p>
+<h1>משטח, אור ואווירה</h1>
+<p>שישה מרקמים חוזרים וחמש סצנות בשני כיווני מסך. התמונות מקוריות וללא טקסט או מיתוג; הכותרות כאן שייכות לדף הסקירה.</p>
+<nav aria-label="ניווט בחבילת הסביבה"><a href="#textures">מרקמים</a><a href="#backgrounds">רקעים</a><a href="README.md">הוראות החבילה</a><a href="LICENSES.md">מקורות ורישיונות</a></nav>
+</header>
+<section id="textures" aria-labelledby="textures-title">
+<h2 id="textures-title">מרקמים · תפירה בשני הצירים</h2>
+<p>כל משטח מציג אותו אריח ארבע פעמים, בחזרה של <bdi>2×2</bdi>. לחיצה על שם המרקם פותחת את קובץ ה־WebP בגודל <bdi>512×512</bdi>.</p>
+<div class="textures">
+<figure class="texture">
+<div class="sample" role="img" aria-label="דשא עם פסי כיסוח, חזרה של שניים על שניים" style="background-image: url('textures/grass-mown.webp')"></div>
+<figcaption><h3><a href="textures/grass-mown.webp">דשא עם פסי כיסוח</a></h3><p>משטח כדורגל; פסים רוחביים</p></figcaption>
+</figure>
+<figure class="texture">
+<div class="sample" role="img" aria-label="פרקט, חזרה של שניים על שניים" style="background-image: url('textures/parquet.webp')"></div>
+<figcaption><h3><a href="textures/parquet.webp">פרקט</a></h3><p>לוחות מייפל ענבריים ללא קווי מגרש</p></figcaption>
+</figure>
+<figure class="texture">
+<div class="sample" role="img" aria-label="שלג, חזרה של שניים על שניים" style="background-image: url('textures/snow.webp')"></div>
+<figcaption><h3><a href="textures/snow.webp">שלג</a></h3><p>שלג לבן עם אדוות כחולות עדינות</p></figcaption>
+</figure>
+<figure class="texture">
+<div class="sample" role="img" aria-label="אספלט מגרש, חזרה של שניים על שניים" style="background-image: url('textures/court-asphalt.webp')"></div>
+<figcaption><h3><a href="textures/court-asphalt.webp">אספלט מגרש</a></h3><p>אגרגט כחול־אפור ללא סימוני מגרש</p></figcaption>
+</figure>
+<figure class="texture">
+<div class="sample" role="img" aria-label="בטון יציע, חזרה של שניים על שניים" style="background-image: url('textures/stand-concrete.webp')"></div>
+<figcaption><h3><a href="textures/stand-concrete.webp">בטון יציע</a></h3><p>בטון אפור בהיר עם נקבוביות עדינות</p></figcaption>
+</figure>
+<figure class="texture">
+<div class="sample" role="img" aria-label="קהל בנקודות צבע, חזרה של שניים על שניים" style="background-image: url('textures/crowd-dots.webp')"></div>
+<figcaption><h3><a href="textures/crowd-dots.webp">קהל בנקודות צבע</a></h3><p>נקודות צבע על רקע נייבי, ללא פנים או דגלים</p></figcaption>
+</figure>
+</div>
+</section>
+<section id="backgrounds" aria-labelledby="backgrounds-title">
+<h2 id="backgrounds-title">רקעים · אורך ורוחב</h2>
+<p>קובצי אורך ביחס <bdi>9:16</bdi> וקובצי רוחב ביחס <bdi>16:9</bdi>. המסגרות הבאות מדגימות חיתוך מרכזי למסך טלפון ארוך או רחב יותר.</p>
+<article class="scene" aria-labelledby="stadium-day-title">
+<h3 id="stadium-day-title">שמיים לאצטדיון · יום</h3>
+<div class="views">
+<figure class="portrait"><div class="frame"><img src="backgrounds/stadium-day-portrait.webp" width="720" height="1280" alt="שמיים לאצטדיון · יום, גרסה אנכית"></div><figcaption>אורך · <bdi>390×844</bdi></figcaption></figure>
+<figure class="landscape"><div class="frame"><img src="backgrounds/stadium-day-landscape.webp" width="1280" height="720" alt="שמיים לאצטדיון · יום, גרסה אופקית"></div><figcaption>רוחב · <bdi>844×390</bdi></figcaption></figure>
+</div>
+</article>
+<article class="scene" aria-labelledby="stadium-sunset-title">
+<h3 id="stadium-sunset-title">שמיים לאצטדיון · שקיעה</h3>
+<div class="views">
+<figure class="portrait"><div class="frame"><img src="backgrounds/stadium-sunset-portrait.webp" width="720" height="1280" alt="שמיים לאצטדיון · שקיעה, גרסה אנכית"></div><figcaption>אורך · <bdi>390×844</bdi></figcaption></figure>
+<figure class="landscape"><div class="frame"><img src="backgrounds/stadium-sunset-landscape.webp" width="1280" height="720" alt="שמיים לאצטדיון · שקיעה, גרסה אופקית"></div><figcaption>רוחב · <bdi>844×390</bdi></figcaption></figure>
+</div>
+</article>
+<article class="scene" aria-labelledby="stadium-evening-title">
+<h3 id="stadium-evening-title">שמיים לאצטדיון · ערב</h3>
+<div class="views">
+<figure class="portrait"><div class="frame"><img src="backgrounds/stadium-evening-portrait.webp" width="720" height="1280" alt="שמיים לאצטדיון · ערב, גרסה אנכית"></div><figcaption>אורך · <bdi>390×844</bdi></figcaption></figure>
+<figure class="landscape"><div class="frame"><img src="backgrounds/stadium-evening-landscape.webp" width="1280" height="720" alt="שמיים לאצטדיון · ערב, גרסה אופקית"></div><figcaption>רוחב · <bdi>844×390</bdi></figcaption></figure>
+</div>
+</article>
+<article class="scene" aria-labelledby="basketball-indoor-title">
+<h3 id="basketball-indoor-title">אולם כדורסל פנימי עם אורות</h3>
+<div class="views">
+<figure class="portrait"><div class="frame"><img src="backgrounds/basketball-indoor-portrait.webp" width="720" height="1280" alt="אולם כדורסל פנימי עם אורות, גרסה אנכית"></div><figcaption>אורך · <bdi>390×844</bdi></figcaption></figure>
+<figure class="landscape"><div class="frame"><img src="backgrounds/basketball-indoor-landscape.webp" width="1280" height="720" alt="אולם כדורסל פנימי עם אורות, גרסה אופקית"></div><figcaption>רוחב · <bdi>844×390</bdi></figcaption></figure>
+</div>
+</article>
+<article class="scene" aria-labelledby="ski-mountains-title">
+<h3 id="ski-mountains-title">הרי שלג לסקי</h3>
+<div class="views">
+<figure class="portrait"><div class="frame"><img src="backgrounds/ski-mountains-portrait.webp" width="720" height="1280" alt="הרי שלג לסקי, גרסה אנכית"></div><figcaption>אורך · <bdi>390×844</bdi></figcaption></figure>
+<figure class="landscape"><div class="frame"><img src="backgrounds/ski-mountains-landscape.webp" width="1280" height="720" alt="הרי שלג לסקי, גרסה אופקית"></div><figcaption>רוחב · <bdi>844×390</bdi></figcaption></figure>
+</div>
+</article>
+</section>
+<footer class="note"><p>תמונות: <bdi>1,374,694 bytes</bdi> בסך הכול. כל רקע קטן מ־<bdi>200 KB</bdi>. מקור ורישיון לכל קובץ ב־<a href="LICENSES.md">LICENSES.md</a>. זו תצוגת נכסים סטטית; החיבור למשחקים ייעשה במימוש.</p></footer>
+</main>
+</body>
+</html>

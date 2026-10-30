@@ -1,3 +1,4 @@
+import {navalLostHealth} from './naval-marks.mjs?v=island-naval-aim-20261030-1';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
@@ -31,60 +32,72 @@ function drawDanger(p,marks,time,width,height){
   }
 }
 
-/** The actual mission, selected hull and incoming fire are readable without a range ring. */
+function shieldMark(p,x,y,fill){p.save();p.translate(x,y);p.beginPath();p.moveTo(0,-11);p.lineTo(9,-7);p.quadraticCurveTo(9,6,0,11);p.quadraticCurveTo(-9,6,-9,-7);p.closePath();p.fillStyle=fill>0?'#7fc7e8':'#2a4652';p.fill();p.strokeStyle='#e3d2a5';p.lineWidth=1.4;p.stroke();if(fill>0&&fill<1){p.clip();p.fillStyle='#2a4652';p.fillRect(-10,-11,20,22*(1-fill));}p.restore();}
+function targetMark(p,x,y){p.save();p.translate(x,y);p.strokeStyle='#f3e2b3';p.lineWidth=1.6;p.beginPath();p.arc(0,0,12,0,TAU);for(const [a,b]of [[0,-15],[0,15],[-15,0],[15,0]]){p.moveTo(a*.55,b*.55);p.lineTo(a,b);}p.stroke();enemyMark(p,0,-2);p.restore();}
+function checkMark(p,x,y){p.save();p.strokeStyle='#8edcc7';p.lineWidth=2;p.beginPath();p.moveTo(x-3,y);p.lineTo(x-1,y+2.5);p.lineTo(x+3.5,y-3);p.stroke();p.restore();}
+function windMark(p,x,y,angle,lines){
+ // A 26 px windsock, a 22 px arrow along the wind's push on the shell, and one to three curling wind lines.
+ p.save();p.fillStyle='#092a3cc0';panel(p,x-16,y-16,84,32,16);p.translate(x,y);
+ p.strokeStyle='#e0e8df';p.lineWidth=1.6;p.beginPath();p.moveTo(-6,13);p.lineTo(-6,-13);p.stroke();
+ p.fillStyle='#ffb36b';p.beginPath();p.moveTo(-6,-12);p.lineTo(8,-9);p.lineTo(8,-4);p.lineTo(-6,-1);p.closePath();p.fill();p.fillStyle='#f3f1e6';p.fillRect(0,-10.4,2.6,7.9);
+ p.save();p.translate(19,0);p.rotate(angle);p.lineCap='round';p.strokeStyle='#103847';p.lineWidth=4.6;p.beginPath();p.moveTo(-11,0);p.lineTo(7,0);p.stroke();p.strokeStyle='#fff3df';p.lineWidth=2.4;p.beginPath();p.moveTo(-11,0);p.lineTo(7,0);p.stroke();
+ p.fillStyle='#fff3df';p.strokeStyle='#103847';p.lineWidth=1.2;p.beginPath();p.moveTo(11,0);p.lineTo(4,-5);p.lineTo(4,5);p.closePath();p.fill();p.stroke();p.restore();
+ const n=Math.max(1,Math.min(3,lines)),wave=(oy)=>{p.beginPath();p.moveTo(36,oy);p.bezierCurveTo(41,oy-4,45,oy+4,50,oy);p.quadraticCurveTo(55,oy-3.5,52,oy-6);};
+ p.lineCap='round';for(let i=0;i<n;i++){const oy=(i-(n-1)/2)*7+2;p.strokeStyle='#103847';p.lineWidth=4;wave(oy);p.stroke();p.strokeStyle='#D8EDF2';p.lineWidth=2;wave(oy);p.stroke();}
+ p.restore();}
+function enemyMark(p,x,y,color='#e39b88'){p.save();p.translate(x,y);p.fillStyle=color;p.strokeStyle='#f5dccf';p.lineWidth=1;p.beginPath();p.moveTo(-9,2);p.lineTo(9,2);p.lineTo(6,7);p.lineTo(-6,7);p.closePath();p.fill();p.stroke();p.fillRect(-4,-3,6,5);p.beginPath();p.moveTo(0,-3);p.lineTo(7,-6);p.stroke();p.restore();}
+/** Feedback is an icon at the actual impact point: burst, gold star, ripple, cross. */
+function feedbackIcon(p,kind,q,u){
+  p.save();p.translate(q.x,q.y-18-u*16);p.globalAlpha=Math.max(0,Math.min(1,(1-u)*2.4));p.lineWidth=2.4;p.lineJoin='round';
+  // Gold star for the weak centre (22 px); an ordinary hit is the flash and sparks at the contact point.
+  if(kind==='critical'){p.fillStyle='#ffe27a';p.strokeStyle='#7a4a12';p.lineWidth=1.8;p.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?4.6:11;p.lineTo(Math.cos(a)*r,Math.sin(a)*r);}p.closePath();p.fill();p.stroke();}
+  else if(kind==='miss'||kind==='evaded'){p.strokeStyle='#e9fbff';for(const r of [5,10])p.beginPath(),p.ellipse(0,0,r+u*6,(r+u*6)*.45,0,0,TAU),p.stroke();}
+  else if(kind==='damage'){p.strokeStyle='#ff8d74';p.beginPath();p.moveTo(-8,-8);p.lineTo(8,8);p.moveTo(8,-8);p.lineTo(-8,8);p.stroke();}
+  else if(kind==='repair'||kind==='full'){p.strokeStyle='#73e7aa';p.beginPath();p.moveTo(-8,0);p.lineTo(8,0);p.moveTo(0,-8);p.lineTo(0,8);p.stroke();}
+  else if(kind==='mine'){p.strokeStyle='#d69bf4';p.beginPath();p.arc(0,0,6,0,TAU);p.stroke();for(let i=0;i<6;i++){const a=i*TAU/6;p.beginPath();p.moveTo(Math.cos(a)*7,Math.sin(a)*7);p.lineTo(Math.cos(a)*11,Math.sin(a)*11);p.stroke();}}
+  else if(kind==='resupply'){p.fillStyle='#ffd36e';p.beginPath();p.roundRect(-4,-9,8,15,3);p.fill();}
+  p.restore();
+}
+
+/** Mission, hulls and incoming fire read as icons, bars and rings: no explanatory lines in battle. */
 export function drawNavalHud(p,m,{config,balance,art,t},project){
   const width=config.width,height=config.height,index=m.aiming?m.lockedTargetIndex:m.selectedTargetIndex,selected=m.enemies.find(e=>e.index===index&&e.active&&e.hp>0)||m.enemies.find(e=>e.active&&e.hp>0);
-  const marks=navalDangerMarks(m,balance,project,width,height),mission=m.mission||{id:'fleet'},missionState=m.missionState||{completed:0,total:m.enemies.length};
+  const marks=navalDangerMarks(m,balance,project,width,height),mission=m.mission||{id:'fleet'},missionState=m.missionState||{completed:0,total:m.enemies.length},shown={marks:marks.length,icons:[],selected:selected?.index??null,feedback:null,texts:[]};
+  const text=(value,x,y,maxWidth)=>{shown.texts.push(String(value));if(maxWidth)clippedText(p,value,x,y,maxWidth);else p.fillText(value,x,y);};
   drawDanger(p,marks,m.time,width,height);
-  p.save();glass(p,16,16,204,68,12);vesselMark(p,41,40);
-  p.direction='rtl';p.textAlign='right';p.font='10px sans-serif';p.fillStyle='#c5d4d6';p.fillText('שלמות גוף הספינה',158,34);
-  p.direction='ltr';p.font='bold 17px sans-serif';p.fillStyle='#f3f1e6';p.fillText(percent(m.lives,m.maxLives)+'%',207,50);bar(p,69,44,88,4,m.lives,m.maxLives,m.lives/m.maxLives<.35?'#e4a184':'#8edcc7');
-  p.direction='rtl';p.font='10px sans-serif';p.fillStyle='#a6bdc4';p.fillText('צי היריב',112,71);bar(p,123,65,84,3,m.enemyFleetHp,m.maxEnemyFleet,'#d5b77d');
+  // Health: our hull silhouette, a shield and a thick bar; the percentage is secondary.
+  p.save();glass(p,16,16,196,50,12);p.save();p.translate(40,38);p.scale(1.15,1.15);vesselMark(p,0,0);p.restore();
+  const shield=m.playerShip?.maxShield>0?m.playerShip.shield/m.playerShip.maxShield:0;shieldMark(p,72,40,shield);
+  bar(p,88,34,104,8,m.lives,m.maxLives,m.lives/m.maxLives<.35?'#e4a184':'#8edcc7');
+  p.direction='ltr';p.textAlign='right';p.font='11px sans-serif';p.fillStyle='#c5d4d6';text(percent(m.lives,m.maxLives)+'%',192,58);shown.icons.push('hull','shield');
   let missionRect;
   if(width>=620){
-    const w=Math.min(300,width-370),x=(width+96-w)/2;missionRect={x,y:16,w,h:68};glass(p,x,16,w,68,12);
-    p.direction='rtl';p.textAlign='right';p.fillStyle='#f3f1e6';p.font='bold 14px sans-serif';clippedText(p,translated(t,mission.title,'קרב ספינות'),x+w-14,38,w-78);
-    p.font='10px sans-serif';p.fillStyle='#c2d5d4';clippedText(p,translated(t,'naval.objective.'+mission.id,objectiveCopy[mission.id]||objectiveCopy.fleet),x+w-14,58,w-78);
-    p.direction='ltr';p.textAlign='left';p.fillStyle='#d8bd7a';p.font='bold 15px sans-serif';p.fillText(`${missionState.completed}/${missionState.total}`,x+14,59);p.fillStyle='#abc5cb';p.font='10px sans-serif';const seconds=Math.max(0,Math.ceil(m.remaining));p.fillText(`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`,x+14,36);
+    // One objective icon, the counter and the clock. The title and duplicate hull pips are gone.
+    const w=112,x=(width+96-w)/2;missionRect={x,y:16,w,h:50};glass(p,x,16,w,50,12);
+    targetMark(p,x+26,41);p.direction='ltr';p.textAlign='left';p.fillStyle='#f3e2b3';p.font='bold 18px sans-serif';text(`${missionState.completed}/${missionState.total}`,x+50,49);shown.icons.push('objective');
+    p.fillStyle='#abc5cb';p.font='10px sans-serif';p.textAlign='left';const seconds=Math.max(0,Math.ceil(m.remaining));text(`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`,x+50,30);
   }
   const targets=[];
   for(const enemy of m.enemies){
     if(!enemy.active||enemy.hp<=0)continue;
     const q=project(enemy.x,enemy.z,balance.render.effects.healthLift),edge=22;
-    if(q.depth<=0||q.x<edge||q.x>width-edge||q.y<edge||q.y>config.height-edge){const x=q.depth<=0?width/2:Math.max(edge,Math.min(width-edge,q.x)),y=q.depth<=0?22:Math.max(96,Math.min(config.height-90,q.y));p.fillStyle='#ffcf79';p.beginPath();p.moveTo(x,y-5);p.lineTo(x-5,y+4);p.lineTo(x+5,y+4);p.closePath();p.fill();continue;}
+    if(q.depth<=0||q.x<edge||q.x>width-edge||q.y<edge||q.y>config.height-edge){const x=q.depth<=0?width/2:Math.max(edge,Math.min(width-edge,q.x)),y=q.depth<=0?22:Math.max(96,Math.min(config.height-90,q.y));p.fillStyle='#ffcf79';p.beginPath();p.moveTo(x,y-5);p.lineTo(x-5,y+4);p.lineTo(x+5,y+4);p.closePath();p.fill();shown.icons.push('offscreen');continue;}
     targets.push({enemy,q});
   }
-  // The selected ship keeps its natural label position. Nearby silhouettes get
-  // separate rows, including their HP strip, before any of the labels are drawn.
-  const labels=[],intersects=(a,b)=>a.x<b.x+b.w+6&&a.x+a.w+6>b.x&&a.y<b.y+b.h+4&&a.y+a.h+4>b.y;
-  const reserved=[{x:12,y:12,w:212,h:76},{x:width-124,y:12,w:112,h:76},...(missionRect?[missionRect]:[])];
-  targets.sort((a,b)=>Number(b.enemy===selected)-Number(a.enemy===selected)||a.q.x-b.q.x);
-  for(const target of targets){
-    const x=Math.max(12,Math.min(width-106,target.q.x-47)),baseY=Math.max(16,Math.min(config.height-104,target.q.y-19)),candidates=[];
-    for(let row=0;row<targets.length+4;row++)candidates.push(baseY-row*30);
-    for(let row=1;row<targets.length+4;row++)candidates.push(baseY+row*30);
-    let rect={x,y:baseY,w:94,h:26};
-    for(const y of candidates){const candidate={x,y,w:94,h:26};if(y<16||y+26>config.height-96||labels.some(label=>intersects(candidate,label.rect))||reserved.some(block=>intersects(candidate,block)))continue;rect=candidate;break;}
-    labels.push({...target,rect});
+  for(const {enemy,q} of targets){
+    const chosen=enemy===selected,priority=mission.id==='flagship'?enemy.boss:mission.id==='subhunt'?enemy.behavior==='dive':mission.id==='intercept'?enemy.behavior==='flank':false,x=Math.max(30,Math.min(width-30,q.x)),y=Math.max(90,q.y-8);
+    p.fillStyle=chosen?'#092a3cee':'#092638c0';panel(p,x-28,y-6,56,10,5);bar(p,x-25,y-3,50,4,enemy.hp,enemy.maxHp,enemy.boss?'#ddbd78':chosen?'#a4ecd8':'#91bcb3');
+    const lost=navalLostHealth(enemy,m.time,balance.aimLook?.hit);if(lost){const a=x-25+50*Math.max(0,lost.from/enemy.maxHp),b=x-25+50*Math.min(1,lost.to/enemy.maxHp);p.save();p.globalAlpha=lost.alpha;p.fillStyle=balance.aimLook.hit.lost;p.fillRect(a,y-3,Math.max(1,b-a),4);p.restore();shown.lost=(shown.lost||0)+1;}
+    if(priority){p.fillStyle='#e7c77f';p.beginPath();p.moveTo(x-36,y-5);p.lineTo(x-32,y-1);p.lineTo(x-36,y+3);p.lineTo(x-40,y-1);p.closePath();p.fill();}
+    if(chosen){const aim=project(enemy.x,enemy.z,1.1);if(aim.depth>0){p.strokeStyle=m.aiming?'#a4ecd8':'#e7c77f';p.lineWidth=1.6;p.beginPath();for(const [sx,sy]of [[-1,-1],[1,-1],[-1,1],[1,1]]){p.moveTo(aim.x+sx*18,aim.y+sy*6);p.lineTo(aim.x+sx*18,aim.y+sy*11);p.lineTo(aim.x+sx*11,aim.y+sy*11);}p.stroke();}}
   }
-  // Leaders sit below every label so an elevated label cannot cross its neighbour.
-  for(const {enemy,q,rect} of labels){
-    if(Math.abs(rect.y-(q.y-19))>3||Math.abs(rect.x+47-q.x)>3){p.strokeStyle=enemy===selected?'#d8bd7aa6':'#afc9cf88';p.lineWidth=1;p.beginPath();p.moveTo(Math.max(rect.x+8,Math.min(rect.x+86,q.x)),rect.y+26);p.lineTo(q.x,q.y+8);p.stroke();p.fillStyle=enemy===selected?'#e7c77f':'#bcd8d4';panel(p,q.x-1.5,q.y+6.5,3,3,1.5);}
-    if(enemy===selected){const aim=project(enemy.x,enemy.z,1.1);if(aim.depth>0){p.strokeStyle=m.rangeState?.inside?'#a4ecd8':'#e7c77f';p.lineWidth=1.4;p.beginPath();for(const [x,y]of [[-1,-1],[1,-1],[-1,1],[1,1]]){p.moveTo(aim.x+x*18,aim.y+y*6);p.lineTo(aim.x+x*18,aim.y+y*11);p.lineTo(aim.x+x*11,aim.y+y*11);}p.stroke();}}
-  }
-  for(const {enemy,rect} of [...labels].reverse()){
-    const chosen=enemy===selected,priority=mission.id==='flagship'?enemy.boss:mission.id==='subhunt'?enemy.behavior==='dive':mission.id==='intercept'?enemy.behavior==='flank':false;
-    p.textAlign='center';p.direction='rtl';p.font=(chosen?'bold ':'')+'10px sans-serif';p.fillStyle=chosen?'#092a3cee':'#092638d9';panel(p,rect.x,rect.y,94,18,5);if(chosen){p.strokeStyle='#d8bd7a99';p.lineWidth=.8;p.stroke();}p.fillStyle=chosen?'#fff3d5':'#d1e0dc';clippedText(p,art.enemyNames?.[enemy.index]||'ספינת יריב',rect.x+47,rect.y+13,priority?73:86);
-    if(priority){p.fillStyle='#e7c77f';p.beginPath();p.moveTo(rect.x+7,rect.y+5);p.lineTo(rect.x+10,rect.y+9);p.lineTo(rect.x+7,rect.y+13);p.lineTo(rect.x+4,rect.y+9);p.closePath();p.fill();}
-    bar(p,rect.x+22,rect.y+22,50,3,enemy.hp,enemy.maxHp,enemy.boss?'#ddbd78':chosen?'#a4ecd8':'#91bcb3');
-  }
-  p.textAlign='center';p.direction='rtl';
-  if(marks.length){p.fillStyle='#3d2c1fe8';panel(p,width/2-113,height-118,226,23,7);p.fillStyle='#ffd5a4';p.font='bold 10px sans-serif';p.fillText(translated(t,'naval.hud.evade','ירי בדרך · זוזו מהסימון'),width/2,height-103);}
   const feedback=m.lastFeedback,age=feedback?m.time-feedback.time:Infinity;
-  let message=m.resupplyTime>0?translated(t,'naval.feedback.resupplying','אספקה בדרך')+` · ${Math.max(0,2-m.resupplyTime).toFixed(1)}s`:age>=0&&age<1.35?translated(t,'naval.feedback.'+feedback.kind,feedbackCopy[feedback.kind]||''):'';
-  if(message){const accent=m.resupplyTime>0?'#e7cf9e':feedback?.kind==='damage'?'#f2ad90':feedback?.kind==='hit'||feedback?.kind==='repair'?'#a4ecd8':'#e7cf9e',w=Math.min(226,p.measureText(message).width+28);p.globalAlpha=m.resupplyTime>0?1:Math.min(1,(1.35-age)*5);glass(p,width/2-w/2,height-85,w,27,8);p.fillStyle=accent;p.font='bold 11px sans-serif';clippedText(p,message,width/2,height-67,w-16);p.globalAlpha=1;}
-  const target=project(m.aim.x,m.aim.z),end=project(m.aim.x+m.wind.x,m.aim.z+m.wind.z),angle=Math.atan2(end.y-target.y,end.x-target.x);
-  if(!missionRect||missionRect.x>258){p.translate(239,35);p.fillStyle='#092a3ca6';p.beginPath();p.arc(0,0,11,0,TAU);p.fill();p.rotate(angle);p.strokeStyle='#e0e8df';p.lineWidth=1.3;p.beginPath();p.moveTo(-6,0);p.lineTo(6,0);p.lineTo(2,-3);p.moveTo(6,0);p.lineTo(2,3);p.stroke();}p.restore();
+  if(m.resupplyTime>0){const u=Math.min(1,m.resupplyTime/2),q={x:width/2,y:height-70};p.save();p.strokeStyle='#e7cf9e';p.lineWidth=3;p.beginPath();p.arc(q.x,q.y,14,-Math.PI/2,-Math.PI/2+u*TAU);p.stroke();feedbackIcon(p,'resupply',{x:q.x,y:q.y+18},0);p.restore();shown.feedback='resupplying';}
+  else if(feedback&&age>=0&&age<(feedback.kind==='critical'?(balance.aimLook?.hit?.starSeconds??.45):1.1)){const span=feedback.kind==='critical'?(balance.aimLook?.hit?.starSeconds??.45):1.1,q=feedback.x===undefined?{x:width/2,y:height/2,depth:1}:project(feedback.x,feedback.z,1.2);if(q.depth>0){feedbackIcon(p,feedback.kind,q,age/span);shown.feedback=feedback.kind;}}
+  // Wind: a windsock, an arrow along the wind's push and one to three wind lines.
+  const target=project(m.aim.x,m.aim.z),end=project(m.aim.x+m.wind.x,m.aim.z+m.wind.z),angle=Math.atan2(end.y-target.y,end.x-target.x),strength=Math.hypot(m.wind.x,m.wind.z),bars=strength>70?3:strength>45?2:1;
+  if(!missionRect||missionRect.x>314){windMark(p,240,40,angle,bars);shown.icons.push('wind');shown.windLines=bars;}p.restore();
+  return shown;
 }
 
 /** All six original weapon buttons remain in an expandable dock. */

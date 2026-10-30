@@ -1,7 +1,7 @@
-import {createAlpineEngine} from './alpine-engine.mjs?v=island-soccer-league-20261029-1';
-import {createAlpineControls} from './alpine-controls.mjs?v=island-soccer-league-20261029-1';
-import {createAlpineAudio} from './alpine-audio.mjs?v=island-soccer-league-20261029-1';
-import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-soccer-league-20261029-1';
+import {createAlpineEngine} from './alpine-engine.mjs?v=island-naval-aim-20261030-1';
+import {createAlpineControls} from './alpine-controls.mjs?v=island-naval-aim-20261030-1';
+import {createAlpineAudio} from './alpine-audio.mjs?v=island-naval-aim-20261030-1';
+import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-naval-aim-20261030-1';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
@@ -57,8 +57,8 @@ export function runAlpineSession(ctx) {
   const el = (tag, cls = '', text = '') => { const n = doc.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
   const svg = (paths, viewBox = '0 0 24 24') => { const s = doc.createElementNS(SVG_NS, 'svg'); s.setAttribute('viewBox', viewBox); s.setAttribute('aria-hidden', 'true'); s.innerHTML = paths; return s; };
   const ltr = text => { const b = el('bdi', 'alpine-ltr', text); b.dir = 'ltr'; return b; };
-  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-soccer-league-20261029-1', import.meta.url).href;
-  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-soccer-league-20261029-1', import.meta.url).href;
+  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-naval-aim-20261030-1', import.meta.url).href;
+  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-naval-aim-20261030-1', import.meta.url).href;
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
   const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
@@ -142,7 +142,7 @@ export function runAlpineSession(ctx) {
   if (params.get('quality') === 'low') quality = 'low';
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; fail(t('alpine.loadSlow')); } }, 25000);
-  import('./alpine-view.mjs?v=island-soccer-league-20261029-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(loaded => {
+  import('./alpine-view.mjs?v=island-naval-aim-20261030-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(loaded => {
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
     clearTimeout(loadTimer); view = loaded; loading.hidden = true; startButton.disabled = false; app.dataset.render = loaded.mode;

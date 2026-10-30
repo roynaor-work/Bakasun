@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {localModelURL} from './model-art.mjs?v=island-soccer-league-20261029-1';
+import {localModelURL} from './model-art.mjs?v=island-naval-aim-20261030-1';
 
 /** Normalize the local Meshy model without changing its GLB. Meshy's single
  * textured mesh is partitioned once at the roof into body and rotating cannon;
