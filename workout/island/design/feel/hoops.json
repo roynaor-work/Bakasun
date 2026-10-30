@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "game": "hoops",
+  "base_commit": "039419a2182d40f12d9acbfe0451e18118394d41",
+  "integration": "not-connected",
+  "tuple": [
+    "value",
+    "min",
+    "max",
+    "cost"
+  ],
+  "sources": {
+    "audio": "../audio/mix.json",
+    "vfx": "../vfx/manifest.json"
+  },
+  "low_end": {
+    "max_audio_events": [3, 1, 3, 1],
+    "max_vfx_instances": [3, 1, 3, 2],
+    "max_resident_atlases": [3, 1, 3, 2],
+    "max_shakes": [1, 1, 1, 1],
+    "max_haptic_on_ms": [100, 50, 120, 1]
+  },
+  "preload": [
+    "net-spark",
+    "landing-dust",
+    "speed-lines"
+  ],
+  "speed": {
+    "normalized_by": "current-mode-max-player-speed",
+    "knots": [
+      {
+        "speed": [0, 0, 0, 0],
+        "fov_add_deg": [0, 0, 0, 1],
+        "line_opacity": [0, 0, 0, 2]
+      },
+      {
+        "speed": [0.55, 0.55, 0.55, 0],
+        "fov_add_deg": [0, 0, 1, 1],
+        "line_opacity": [0, 0, 0, 2]
+      },
+      {
+        "speed": [0.8, 0.8, 0.8, 0],
+        "fov_add_deg": [1.5, 0.5, 2.5, 1],
+        "line_opacity": [0.08, 0.03, 0.13, 2]
+      },
+      {
+        "speed": [1, 1, 1, 0],
+        "fov_add_deg": [3, 2, 4, 1],
+        "line_opacity": [0.16, 0.11, 0.21, 2]
+      }
+    ],
+    "fov_in_ms": [160, 120, 220, 1],
+    "fov_out_ms": [260, 180, 360, 1],
+    "lines": {
+      "asset": "speed-lines",
+      "on_speed": [0.82, 0.79, 0.85, 0],
+      "off_speed": [0.7, 0.67, 0.73, 0],
+      "burst_ms": [600, 400, 666, 2],
+      "cooldown_ms": [1200, 1000, 1800, 0],
+      "screen_fraction": [0.12, 0.08, 0.15, 2]
+    }
+  },
+  "easing": {
+    "player": {
+      "ease_in": {
+        "duration_ms": [140, 100, 220, 0],
+        "power": [1.2, 1, 1.5, 0]
+      },
+      "ease_out": {
+        "duration_ms": [100, 60, 180, 0],
+        "power": [1.7, 1.5, 2, 0]
+      }
+    },
+    "camera": {
+      "ease_in": {
+        "duration_ms": [190, 150, 270, 1],
+        "power": [1.4, 1.2, 1.7, 1]
+      },
+      "ease_out": {
+        "duration_ms": [280, 240, 360, 1],
+        "power": [1.8, 1.6, 2.1, 1]
+      }
+    }
+  },
+  "events": {
+    "three_pointer": {
+      "time_scope": "replay-only",
+      "priority": [5, 5, 5, 0],
+      "cooldown_ms": [1800, 1800, 2300, 0],
+      "hit_stop": {
+        "duration_ms": [45, 30, 60, 0],
+        "scale": [0, 0, 0.15, 0]
+      },
+      "slow_motion": {
+        "duration_ms": [200, 140, 280, 0],
+        "scale": [0.6, 0.5, 0.75, 0],
+        "recover_ms": [140, 100, 200, 0]
+      },
+      "shake": {
+        "amplitude": [0.002, 0.001, 0.003, 1],
+        "frequency_hz": [10, 6, 12, 1],
+        "decay_ms": [130, 90, 190, 1]
+      },
+      "haptics": {
+        "pattern_ms": [
+          [20, 15, 30, 1],
+          [25, 20, 35, 1],
+          [25, 20, 35, 1]
+        ],
+        "duration_ms": [70, 55, 100, 1]
+      },
+      "timeline": [
+        {
+          "kind": "audio",
+          "asset": "basketball/swish",
+          "at_ms": [0, 0, 20, 0],
+          "gain_db": [-4, -7, -4, 1]
+        },
+        {
+          "kind": "vfx",
+          "asset": "net-spark",
+          "at_ms": [0, 0, 25, 0],
+          "opacity": [0.75, 0.6, 0.85, 2],
+          "screen_fraction": [0.008, 0.004, 0.01, 2]
+        },
+        {
+          "kind": "audio",
+          "asset": "basketball/crowd-excited",
+          "at_ms": [100, 80, 120, 0],
+          "gain_db": [-9, -12, -9, 1]
+        }
+      ]
+    },
+    "dunk": {
+      "time_scope": "replay-only",
+      "priority": [5, 5, 5, 0],
+      "cooldown_ms": [1800, 1800, 2300, 0],
+      "hit_stop": {
+        "duration_ms": [65, 50, 80, 0],
+        "scale": [0, 0, 0.15, 0]
+      },
+      "slow_motion": {
+        "duration_ms": [260, 200, 340, 0],
+        "scale": [0.5, 0.4, 0.65, 0],
+        "recover_ms": [170, 130, 230, 0]
+      },
+      "shake": {
+        "amplitude": [0.004, 0.002, 0.006, 1],
+        "frequency_hz": [8, 6, 12, 1],
+        "decay_ms": [210, 170, 270, 1]
+      },
+      "haptics": {
+        "pattern_ms": [
+          [30, 25, 40, 1],
+          [25, 20, 35, 1],
+          [45, 40, 55, 1]
+        ],
+        "duration_ms": [100, 85, 130, 1]
+      },
+      "timeline": [
+        {
+          "kind": "audio",
+          "asset": "basketball/rim",
+          "at_ms": [0, 0, 20, 0],
+          "gain_db": [-6, -9, -6, 1]
+        },
+        {
+          "kind": "audio",
+          "asset": "basketball/swish",
+          "at_ms": [0, 0, 20, 0],
+          "gain_db": [-4, -7, -4, 1]
+        },
+        {
+          "kind": "vfx",
+          "asset": "net-spark",
+          "at_ms": [0, 0, 25, 0],
+          "opacity": [0.85, 0.7, 0.95, 2],
+          "screen_fraction": [0.009, 0.0045, 0.01, 2]
+        },
+        {
+          "kind": "audio",
+          "asset": "basketball/crowd-excited",
+          "at_ms": [100, 80, 120, 0],
+          "gain_db": [-9, -12, -9, 1]
+        }
+      ]
+    },
+    "block": {
+      "time_scope": "replay-only",
+      "priority": [3, 3, 3, 0],
+      "cooldown_ms": [300, 300, 800, 0],
+      "hit_stop": {
+        "duration_ms": [30, 15, 45, 0],
+        "scale": [0, 0, 0.15, 0]
+      },
+      "slow_motion": {
+        "duration_ms": [100, 40, 180, 0],
+        "scale": [0.75, 0.65, 0.9, 0],
+        "recover_ms": [110, 70, 170, 0]
+      },
+      "shake": {
+        "amplitude": [0.0025, 0.0013, 0.0037, 1],
+        "frequency_hz": [11, 6, 12, 1],
+        "decay_ms": [120, 80, 180, 1]
+      },
+      "haptics": {
+        "pattern_ms": [
+          [20, 15, 30, 1]
+        ],
+        "duration_ms": [20, 15, 30, 1]
+      },
+      "timeline": [
+        {
+          "kind": "audio",
+          "asset": "basketball/bounce",
+          "at_ms": [0, 0, 20, 0],
+          "gain_db": [-8, -11, -8, 1]
+        }
+      ]
+    },
+    "fall": {
+      "time_scope": "replay-only",
+      "priority": [4, 4, 4, 0],
+      "cooldown_ms": [800, 800, 1300, 0],
+      "hit_stop": {
+        "duration_ms": [35, 20, 50, 0],
+        "scale": [0, 0, 0.15, 0]
+      },
+      "slow_motion": {
+        "duration_ms": [150, 90, 230, 0],
+        "scale": [0.7, 0.6, 0.85, 0],
+        "recover_ms": [150, 110, 210, 0]
+      },
+      "shake": {
+        "amplitude": [0.003, 0.0015, 0.0045, 1],
+        "frequency_hz": [8, 6, 12, 1],
+        "decay_ms": [190, 150, 250, 1]
+      },
+      "haptics": {
+        "pattern_ms": [
+          [30, 25, 40, 1]
+        ],
+        "duration_ms": [30, 25, 40, 1]
+      },
+      "timeline": [
+        {
+          "kind": "audio",
+          "asset": "basketball/shoes",
+          "at_ms": [0, 0, 20, 0],
+          "gain_db": [-10, -13, -10, 1]
+        },
+        {
+          "kind": "vfx",
+          "asset": "landing-dust",
+          "at_ms": [0, 0, 25, 0],
+          "opacity": [0.45, 0.3, 0.55, 2],
+          "screen_fraction": [0.02, 0.01, 0.035, 2]
+        }
+      ]
+    },
+    "perfect_landing": {
+      "time_scope": "replay-only",
+      "priority": [2, 2, 2, 0],
+      "cooldown_ms": [500, 500, 1000, 0],
+      "hit_stop": {
+        "duration_ms": [20, 5, 35, 0],
+        "scale": [0, 0, 0.15, 0]
+      },
+      "slow_motion": {
+        "duration_ms": [90, 30, 170, 0],
+        "scale": [0.85, 0.75, 1, 0],
+        "recover_ms": [100, 60, 160, 0]
+      },
+      "shake": {
+        "amplitude": [0.0012, 0.0006, 0.0018, 1],
+        "frequency_hz": [10, 6, 12, 1],
+        "decay_ms": [100, 60, 160, 1]
+      },
+      "haptics": {
+        "pattern_ms": [
+          [12, 7, 22, 1],
+          [20, 15, 30, 1],
+          [12, 7, 22, 1]
+        ],
+        "duration_ms": [44, 29, 74, 1]
+      },
+      "timeline": [
+        {
+          "kind": "audio",
+          "asset": "basketball/shoes",
+          "at_ms": [0, 0, 20, 0],
+          "gain_db": [-10, -13, -10, 1]
+        },
+        {
+          "kind": "vfx",
+          "asset": "landing-dust",
+          "at_ms": [0, 0, 25, 0],
+          "opacity": [0.35, 0.2, 0.45, 2],
+          "screen_fraction": [0.015, 0.0075, 0.035, 2]
+        }
+      ]
+    }
+  }
+}
