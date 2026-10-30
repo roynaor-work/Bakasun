@@ -1,0 +1,134 @@
+/* Authored Alpine opening and legible overlays. All panels use flat translucent
+   fills: no new backdrop blur or continuous CSS animation in a racing frame. */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-intro.alpine-screen-opening{display:none!important}
+.game-screen[data-game=alpineRush] .alpine-intro.alpine-screen-opening{
+ position:absolute;inset:max(82px,calc(env(safe-area-inset-top) + 64px)) max(28px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(28px,env(safe-area-inset-left));
+ width:auto;max-width:1120px;margin-inline:auto;max-height:calc(100% - 106px);padding:clamp(22px,4vw,48px);box-sizing:border-box;
+ display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(20px,4vw,56px);align-items:center;
+ background:#102b41f7;border:1px solid #b9d5e23b;border-radius:26px;box-shadow:0 16px 48px #0617224d;
+ text-align:right;color:#f4f9fb;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;
+}
+.game-screen[data-game=alpineRush] .alpine-screen-copy{min-width:0;direction:rtl;text-align:right}
+.game-screen[data-game=alpineRush] .alpine-screen-art{min-width:0;display:grid;place-items:center;margin:0;pointer-events:none}
+.game-screen[data-game=alpineRush] .alpine-screen-art img{width:min(100%,420px);height:auto;max-height:calc(100dvh - 180px);object-fit:contain;display:block;border-radius:22px}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-eyebrow{font-size:14px;line-height:1.3;color:#9ed9ea;letter-spacing:2px;text-align:right}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-title{font-size:clamp(50px,6.4vw,84px);line-height:.96;letter-spacing:-4px;margin:15px 0 16px;color:#f4f9fb;transform:none;font-style:normal;text-align:left}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-title em{color:#ff987d}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-tagline{font-size:18px;line-height:1.5;margin:0 0 20px;max-width:none;color:#e0edf3;text-align:right}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-primary{width:100%;min-height:52px;margin:0;box-sizing:border-box;padding:14px 20px;border-radius:12px;background:#72e9f6;color:#102b41;box-shadow:0 4px 0 #3d91a4;font-size:17px;line-height:1.2;transform:none}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-primary svg{stroke:currentColor}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-primary:active{transform:translateY(2px);box-shadow:0 2px 0 #3d91a4}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-primary:focus-visible{outline:3px solid #f4fbff;outline-offset:5px}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-start-note{font-size:14px;line-height:1.35;color:#b8cfdb;text-align:right;margin:12px 0 18px}
+.game-screen[data-game=alpineRush] .alpine-screen-meta{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:16px;row-gap:14px}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-track-card{grid-column:1/-1;width:100%;max-width:none;margin:0;padding:14px 0 0;border-color:#d1e9f137;gap:14px}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-track-card small{font-size:14px;line-height:1.35;color:#c2d9e4}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-track-card b{font-size:16px;color:#f4fbff}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-track-number{color:#9ed9ea;font-size:24px}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-difficulty{font-size:14px;letter-spacing:2px;color:#ffb396}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-best{margin:0;font-size:14px;line-height:1.4;color:#d9e9f0;text-align:right}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-themes{justify-content:flex-start;gap:10px;margin:0;padding:4px;direction:ltr}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-theme{width:48px;min-width:48px;height:48px;min-height:48px;border-color:#ffffff7a;box-shadow:none}
+.game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-theme[aria-checked=true]{outline-color:#9eeaf6}
+.game-screen[data-game=alpineRush] .alpine-brand{padding:8px 12px;background:#f0f8f9f2;border:1px solid #ffffffa6;border-radius:12px;color:#123148;font-size:15px;line-height:1}
+.game-screen[data-game=alpineRush] .alpine-brand svg{width:30px;fill:#123148}
+.game-screen[data-game=alpineRush][data-alpine-dusk=true] .alpine-brand{color:#123148}
+.game-screen[data-game=alpineRush][data-alpine-dusk=true] .alpine-brand svg{fill:#123148}
+/* Independent compact panels leave the course visible between the metrics. */
+.game-screen[data-game=alpineRush] :is(.alpine-position,.alpine-race-info,.alpine-time,.alpine-speed){box-sizing:border-box;background:#f0f8f9f2;border:1px solid #ffffffad;border-radius:12px;box-shadow:0 3px 12px #071b2a1a;padding:9px 12px;color:#123148;text-shadow:none}
+.game-screen[data-game=alpineRush] .alpine-hud{gap:16px;color:#123148;text-shadow:none}
+.game-screen[data-game=alpineRush] :is(.alpine-of,.alpine-track-line,.alpine-time small,.alpine-distance small){color:#36586d;font-size:14px;line-height:1.25}
+.game-screen[data-game=alpineRush] .alpine-of small{font-size:14px;line-height:1.2;margin-top:3px}
+.game-screen[data-game=alpineRush] .alpine-rank{font-size:42px;letter-spacing:-2px}
+.game-screen[data-game=alpineRush] .alpine-race-info{width:250px}
+.game-screen[data-game=alpineRush] .alpine-distance{font-size:23px;line-height:1.15;margin:5px 0 7px}
+.game-screen[data-game=alpineRush] .alpine-time{border-left:1px solid #ffffffad;padding-left:12px}
+.game-screen[data-game=alpineRush] .alpine-time .alpine-ltr{font-size:21px;line-height:1.2;margin-top:4px;color:#123148}
+.game-screen[data-game=alpineRush] .alpine-progress{background:#36586d33}
+.game-screen[data-game=alpineRush] .alpine-speed{gap:0 7px;padding:8px 10px}
+.game-screen[data-game=alpineRush] .alpine-speed>span{font-size:14px;margin-bottom:4px;color:#36586d}
+.game-screen[data-game=alpineRush] .alpine-speed b{font-size:42px;letter-spacing:-2px}
+.game-screen[data-game=alpineRush] .alpine-steer-hint{font-size:14px;color:#123148;background:#f0f8f9eb;border-radius:8px;padding:2px 6px;gap:12px}
+.game-screen[data-game=alpineRush] .alpine-callout{background:#f0f8f9f5;border-radius:14px;padding:10px 18px;filter:none;transform:translate(-50%,-50%)}
+.game-screen[data-game=alpineRush] .alpine-callout span{font-size:14px;color:#a53d20;letter-spacing:2px}
+.game-screen[data-game=alpineRush] .alpine-callout b{color:#123148;font-size:26px}
+.game-screen[data-game=alpineRush] .alpine-trick{width:48px;min-width:48px;height:48px;min-height:48px}
+.game-screen[data-game=alpineRush][data-alpine-dusk=true] .alpine-hud{color:#123148;text-shadow:none}
+.game-screen[data-game=alpineRush][data-alpine-dusk=true] :is(.alpine-of,.alpine-track-line,.alpine-time small,.alpine-distance small){color:#36586d}
+@media(max-width:700px){
+ .game-screen[data-game=alpineRush] .alpine-intro.alpine-screen-opening{inset:max(88px,calc(env(safe-area-inset-top) + 70px)) max(16px,env(safe-area-inset-right)) max(18px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));max-height:calc(100% - 106px);padding:20px 22px;display:flex;flex-direction:column;justify-content:center;gap:18px;border-radius:22px}
+ .game-screen[data-game=alpineRush] .alpine-screen-copy{width:100%;max-width:420px;order:2}
+ .game-screen[data-game=alpineRush] .alpine-screen-art{width:100%;order:1;flex:0 0 auto}
+ .game-screen[data-game=alpineRush] .alpine-screen-art img{width:min(50vw,210px);height:auto;max-height:24dvh;border-radius:16px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-eyebrow{letter-spacing:1.2px;text-align:center}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-title{text-align:center;font-size:44px;letter-spacing:-2.5px;line-height:1.05;margin:10px 0 12px;white-space:nowrap}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-title br{display:none}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-title em::before{content:' '}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-tagline{font-size:16px;line-height:1.45;text-align:center;margin:0 0 16px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-start-note{text-align:center;margin:10px 0 14px}
+ .game-screen[data-game=alpineRush] .alpine-screen-meta{row-gap:12px;column-gap:8px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-track-card{display:flex;padding-top:12px;gap:10px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-track-card b{font-size:15px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-track-card small{font-size:14px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-difficulty{letter-spacing:0}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-themes{gap:8px}
+ .game-screen[data-game=alpineRush] .alpine-brand{font-size:14px;padding:8px 10px}
+ .game-screen[data-game=alpineRush] .alpine-brand svg{width:28px}
+ .game-screen[data-game=alpineRush] .alpine-hud{left:16px;right:16px;gap:10px}
+ .game-screen[data-game=alpineRush] .alpine-position{width:43%;min-height:72px;gap:6px;padding:8px}
+ .game-screen[data-game=alpineRush] .alpine-rank{font-size:38px;letter-spacing:-2px}
+ .game-screen[data-game=alpineRush] .alpine-of{font-size:14px;min-width:0}
+ .game-screen[data-game=alpineRush] .alpine-of small{max-width:68px;white-space:normal}
+ .game-screen[data-game=alpineRush] .alpine-race-info{width:55%;min-height:72px;padding:8px}
+ .game-screen[data-game=alpineRush] .alpine-track-line{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .game-screen[data-game=alpineRush] .alpine-distance{font-size:22px}
+ .game-screen[data-game=alpineRush] .alpine-distance small{font-size:14px}
+ .game-screen[data-game=alpineRush] .alpine-time{top:84px;left:0;width:43%;padding:7px 10px;min-height:54px}
+ .game-screen[data-game=alpineRush] .alpine-time small{font-size:14px}
+ .game-screen[data-game=alpineRush] .alpine-time .alpine-ltr{font-size:19px}
+ .game-screen[data-game=alpineRush] .alpine-tally{top:92px;right:0;gap:5px}
+ .game-screen[data-game=alpineRush] .alpine-tally>span{font-size:16px;padding:6px 10px 6px 5px;background:#f0f8f9f2}
+ .game-screen[data-game=alpineRush] .alpine-callout{top:32%;max-width:calc(100% - 32px);width:max-content}
+ .game-screen[data-game=alpineRush] .alpine-speed b{font-size:40px}
+}
+@media(max-height:600px) and (min-width:701px){
+ .game-screen[data-game=alpineRush] .alpine-intro.alpine-screen-opening{inset:max(64px,calc(env(safe-area-inset-top) + 54px)) max(22px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));max-height:calc(100% - 78px);padding:18px 26px;gap:28px;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);border-radius:20px}
+ .game-screen[data-game=alpineRush] .alpine-screen-art img{max-height:calc(100dvh - 118px);width:min(100%,272px);border-radius:16px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-eyebrow{font-size:14px;line-height:1.2;letter-spacing:1.2px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-title{font-size:42px;line-height:1.02;letter-spacing:-2px;margin:8px 0 9px;white-space:nowrap;text-align:left}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-title br{display:none}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-title em::before{content:' '}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-tagline{font-size:14px;line-height:1.4;margin:0 0 12px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-primary{min-height:48px;padding:12px 18px;font-size:16px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-start-note{font-size:14px;margin:8px 0 9px}
+ .game-screen[data-game=alpineRush] .alpine-screen-meta{gap:10px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-track-card{display:none}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-best{font-size:14px}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-themes{gap:10px;padding:3px}
+ .game-screen[data-game=alpineRush] .alpine-brand{top:max(10px,env(safe-area-inset-top));font-size:14px;padding:7px 10px}
+ .game-screen[data-game=alpineRush] .alpine-brand svg{width:25px}
+ .game-screen[data-game=alpineRush] .alpine-hud{gap:12px;align-items:flex-start}
+ .game-screen[data-game=alpineRush] .alpine-position{padding:7px 10px;gap:6px}
+ .game-screen[data-game=alpineRush] .alpine-rank{font-size:34px}
+ .game-screen[data-game=alpineRush] .alpine-of{font-size:14px}
+ .game-screen[data-game=alpineRush] .alpine-of small{font-size:14px}
+ .game-screen[data-game=alpineRush] .alpine-race-info{width:230px;padding:7px 10px}
+ .game-screen[data-game=alpineRush] .alpine-track-line{font-size:14px}
+ .game-screen[data-game=alpineRush] .alpine-distance{font-size:21px;margin:4px 0 5px}
+ .game-screen[data-game=alpineRush] .alpine-time{padding:7px 10px}
+ .game-screen[data-game=alpineRush] .alpine-time .alpine-ltr{font-size:19px}
+ .game-screen[data-game=alpineRush] .alpine-speed b{font-size:34px}
+ .game-screen[data-game=alpineRush] .alpine-speed>span{font-size:14px}
+ .game-screen[data-game=alpineRush] .alpine-tally>span{font-size:16px;background:#f0f8f9f2}
+ .game-screen[data-game=alpineRush] .alpine-steer-hint{font-size:14px;gap:10px}
+ .game-screen[data-game=alpineRush] .alpine-trick{width:48px;min-width:48px;height:48px;min-height:48px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="0"]{left:103px;top:7px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="1"]{left:55px;top:20px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="2"]{left:20px;top:55px}
+ .game-screen[data-game=alpineRush] .alpine-trick[data-slot="3"]{left:7px;top:103px}
+}
+@media(max-height:700px) and (max-width:700px){
+ .game-screen[data-game=alpineRush] .alpine-intro.alpine-screen-opening{justify-content:flex-start}
+ .game-screen[data-game=alpineRush] .alpine-screen-art img{width:116px;max-height:20dvh}
+ .game-screen[data-game=alpineRush] .alpine-screen-opening .alpine-title{font-size:36px}
+}
