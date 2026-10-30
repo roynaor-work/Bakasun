@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-02",
+  "modelId": "soccer-player",
+  "label": "שני פסים אופקיים",
+  "pattern": "double-band",
+  "source": {
+    "manifest": "../../screens/manifest.json",
+    "kitId": "soccer-02",
+    "shirt": "../../screens/kits/soccer/02-shirt.svg",
+    "shorts": "../../screens/kits/soccer/02-shorts.svg",
+    "hashEncoding": "utf8-lf",
+    "shirtSha256": "fbadf9318a0cc07c12f0195df7b6b2eff0edbaa1b2aab69c091dc12ba5097fea",
+    "shortsSha256": "46a6d0cc53a8f168581e18d86f6aa31f30f60470700cd1f7d291ed0b63b4f048"
+  },
+  "colors": {
+    "shirt": "#FF806C",
+    "shorts": "#FF806C",
+    "accent": "#442D46",
+    "socks": "#FF806C",
+    "shoes": "#442D46",
+    "soles": "#F1EDDA",
+    "gloves": "#442D46",
+    "helmet": "#442D46",
+    "equipment": "#442D46"
+  },
+  "map": "../maps/soccer-02.png"
+}

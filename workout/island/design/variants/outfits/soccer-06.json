@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-06",
+  "modelId": "soccer-player",
+  "label": "חגורה רחבה",
+  "pattern": "belt",
+  "source": {
+    "manifest": "../../screens/manifest.json",
+    "kitId": "soccer-06",
+    "shirt": "../../screens/kits/soccer/06-shirt.svg",
+    "shorts": "../../screens/kits/soccer/06-shorts.svg",
+    "hashEncoding": "utf8-lf",
+    "shirtSha256": "37c05af0e3929c144c8f39ba749aa028bd08cc60d091973075ac468a2487f849",
+    "shortsSha256": "7a6c7d49c2e8ef04cf487acb1b15a3a6f46e24e6d00162f0d07d177c8290b387"
+  },
+  "colors": {
+    "shirt": "#F1EDDA",
+    "shorts": "#F1EDDA",
+    "accent": "#2A6472",
+    "socks": "#F1EDDA",
+    "shoes": "#2A6472",
+    "soles": "#F1EDDA",
+    "gloves": "#2A6472",
+    "helmet": "#2A6472",
+    "equipment": "#2A6472"
+  },
+  "map": "../maps/soccer-06.png"
+}

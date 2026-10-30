@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-05",
+  "modelId": "soccer-player",
+  "label": "חצאים",
+  "pattern": "split",
+  "source": {
+    "manifest": "../../screens/manifest.json",
+    "kitId": "soccer-05",
+    "shirt": "../../screens/kits/soccer/05-shirt.svg",
+    "shorts": "../../screens/kits/soccer/05-shorts.svg",
+    "hashEncoding": "utf8-lf",
+    "shirtSha256": "3724493779ebc1111f8c826b9fa02d2d168a84abe76b91cfb9c01589ac757d4b",
+    "shortsSha256": "0b622ad2f639bc3e308c2ef17c1185a8a0fc85f2165c4e46a46540c9f6466b07"
+  },
+  "colors": {
+    "shirt": "#BDB0FF",
+    "shorts": "#BDB0FF",
+    "accent": "#352B5D",
+    "socks": "#BDB0FF",
+    "shoes": "#352B5D",
+    "soles": "#F1EDDA",
+    "gloves": "#352B5D",
+    "helmet": "#352B5D",
+    "equipment": "#352B5D"
+  },
+  "map": "../maps/soccer-05.png"
+}

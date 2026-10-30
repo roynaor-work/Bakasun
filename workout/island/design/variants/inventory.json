@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 1,
+  "budgetBytes": 400000,
+  "sharedCharacterBytes": 178468,
+  "variantsBytes": 193298,
+  "totalBytes": 371766,
+  "includes": "four referenced GLBs plus all files in variants/, including this inventory; shared engine/decoder and old character PNG previews excluded",
+  "shared": [
+    {
+      "path": "../characters/soccer-player.glb",
+      "bytes": 44844,
+      "sha256": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5"
+    },
+    {
+      "path": "../characters/goalkeeper.glb",
+      "bytes": 44584,
+      "sha256": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f"
+    },
+    {
+      "path": "../characters/basketball-player.glb",
+      "bytes": 44564,
+      "sha256": "a1b638f72c5e62d3a25d3fbd2f9e262907b87fd31992ce32c116cd3128568814"
+    },
+    {
+      "path": "../characters/skier.glb",
+      "bytes": 44476,
+      "sha256": "c6cc6ea9f01abbd25feb9660187de0fcdabec9b0156a3044254ef04651d895a3"
+    }
+  ],
+  "files": [
+    {
+      "path": "apply-variant.js",
+      "bytes": 4992,
+      "sha256": "7527e671a1f3189dd5fef8f66de04548bb2b9b8e25142ed7720099865c56656c"
+    },
+    {
+      "path": "browser-validation.json",
+      "bytes": 757,
+      "sha256": "9e3b05c03ec60a27f7624f34c3d95be57d86b9c13566c5b72d5e36f72a37e326"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 1705,
+      "sha256": "e19cb0f83bb615d947774fd6851de07f6516ed4305aa08cb5704ea563f988cca"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 3012,
+      "sha256": "56e42e6cb5c79509eb5d82f36b4dac0a014f500b8f9c314ea2aac42cfe0f431f"
+    },
+    {
+      "path": "maps/goalkeeper-01.png",
+      "bytes": 429,
+      "sha256": "ec6e298c91399b1f9dc54de2c5d38e46b53de5007a07251e873e63612c7887c8"
+    },
+    {
+      "path": "maps/goalkeeper-02.png",
+      "bytes": 444,
+      "sha256": "8a77f89ad82e9bf02cf3143f199fa0ec840c7fee648f7a5595ac4e6b245d6d0b"
+    },
+    {
+      "path": "maps/goalkeeper-03.png",
+      "bytes": 429,
+      "sha256": "395333055a555cb58bb9a0ac3fba7693928159754276ab1ade5bd63c2c052690"
+    },
+    {
+      "path": "maps/goalkeeper-04.png",
+      "bytes": 444,
+      "sha256": "249334e88f45043fef384d20720d898ef672e5e6d6e648959da30ef903abc476"
+    },
+    {
+      "path": "maps/hoops-01.png",
+      "bytes": 2846,
+      "sha256": "333240552d024c06a6841adf723c5b6ef8ba35e32b7145e3f43d0e606bfd7146"
+    },
+    {
+      "path": "maps/hoops-02.png",
+      "bytes": 3490,
+      "sha256": "2b3f79dac98f449db8681e8218678b580fb2182f3e4a5e613ef5de31f3bd1a5f"
+    },
+    {
+      "path": "maps/hoops-03.png",
+      "bytes": 964,
+      "sha256": "719a4cc2c856dcea84f7dce69a5933d0a57d344b443d66c01bc5e941ea49e562"
+    },
+    {
+      "path": "maps/hoops-04.png",
+      "bytes": 1344,
+      "sha256": "47d314b2b08c3fef1e3f9e58c1e28b6c1e77afc1a77f2089ae370ba14084a346"
+    },
+    {
+      "path": "maps/hoops-05.png",
+      "bytes": 445,
+      "sha256": "157bdaed744c41c694b49092866a8023c749b81ba3f8fd9f2fccca3c90e75752"
+    },
+    {
+      "path": "maps/hoops-06.png",
+      "bytes": 1951,
+      "sha256": "5c7ee0bafe1f7288f10924536bd2adf311eeffddfc04cad1c2c2d212c5af6096"
+    },
+    {
+      "path": "maps/skier-01.png",
+      "bytes": 2026,
+      "sha256": "2da43adea09e89b968bd9f9c76c1ebd43afb9bdd570fe3884b28ade2e73b55e0"
+    },
+    {
+      "path": "maps/skier-02.png",
+      "bytes": 1990,
+      "sha256": "7545744e4b771592329cec6c9e7072c784781979a69ed8644c227d92ba6d3fb1"
+    },
+    {
+      "path": "maps/skier-03.png",
+      "bytes": 1887,
+      "sha256": "57c2e7f3ad9dbcfb83e21a0a8e7450de723e7d5183725b907fb345986ffcc580"
+    },
+    {
+      "path": "maps/skier-04.png",
+      "bytes": 1943,
+      "sha256": "2b8faaeac345d3ec5aedee76327c8c27e86881b4c64986d16425ccda678ddab3"
+    },
+    {
+      "path": "maps/soccer-01.png",
+      "bytes": 1323,
+      "sha256": "a619523176fbc94e8faf05f1e567e1e1a3ddb34ac79bc0c48006501422b9438f"
+    },
+    {
+      "path": "maps/soccer-02.png",
+      "bytes": 405,
+      "sha256": "bc1696a00c9cb3f3559ed37729d61a675a229f04fdeb0fe30c4c8a3e73187f78"
+    },
+    {
+      "path": "maps/soccer-03.png",
+      "bytes": 454,
+      "sha256": "466e44d6e91ea6fc7a8e2086f44832d7439678c4ed9e284d8d4e6be163108b96"
+    },
+    {
+      "path": "maps/soccer-04.png",
+      "bytes": 1542,
+      "sha256": "631c4c9bd1f9a730389d418ba16cd12f3596ca7d17f3809056de74cec8c3ce64"
+    },
+    {
+      "path": "maps/soccer-05.png",
+      "bytes": 443,
+      "sha256": "fa974e7e40b449dd19136dd2650ac410ba8b0e300effe431b4630aebbbded264"
+    },
+    {
+      "path": "maps/soccer-06.png",
+      "bytes": 382,
+      "sha256": "238e00fb1e850d5d7d7e5725b882b0356c5e8d0ace5e707f172d211fed0dd900"
+    },
+    {
+      "path": "maps/soccer-07.png",
+      "bytes": 450,
+      "sha256": "84d6319c618f203d36fe12fde5c6f78ef14145adcb94d16f2cde38f0d8aed4c2"
+    },
+    {
+      "path": "maps/soccer-08.png",
+      "bytes": 486,
+      "sha256": "791677ebdc7819231cd3adedb98f938afdfc0326a5ccf197deb4c835a5e6762d"
+    },
+    {
+      "path": "outfits/goalkeeper-01.json",
+      "bytes": 461,
+      "sha256": "ce229aa8313208d692ba8ce1b4b2b1d156bfa34eb8f3ceeffc3127e4c643df01"
+    },
+    {
+      "path": "outfits/goalkeeper-02.json",
+      "bytes": 461,
+      "sha256": "3e537f6ceb5050584584b5d0b3314b5942d1c45869b5ffe19631588b38d916f7"
+    },
+    {
+      "path": "outfits/goalkeeper-03.json",
+      "bytes": 461,
+      "sha256": "50366d1ec8c3915f07ca09a4adad828e1c00244ce21b51bd51b15cd38cbcef39"
+    },
+    {
+      "path": "outfits/goalkeeper-04.json",
+      "bytes": 461,
+      "sha256": "2c57dd47df1b1332b93229e992970b3ce87f7dd80d6815a443d3bb69345ed833"
+    },
+    {
+      "path": "outfits/hoops-01.json",
+      "bytes": 812,
+      "sha256": "657a85f4fb1afc1d9fcfbcfaa57e1aa7c5ec2f0dbb66ac83e22e34b46a26cf3c"
+    },
+    {
+      "path": "outfits/hoops-02.json",
+      "bytes": 808,
+      "sha256": "448c6bf761fe7feffe300117aec79f56f24f81b88c68ee758be92ef2e1f796f4"
+    },
+    {
+      "path": "outfits/hoops-03.json",
+      "bytes": 808,
+      "sha256": "de649d25524f86cd40421437f82233be3e352674e279772d0356e58398785347"
+    },
+    {
+      "path": "outfits/hoops-04.json",
+      "bytes": 821,
+      "sha256": "b1fd5efd45c9895f64038a4526dd7896f6e1036f92cd0542c0a135bb245a1aa6"
+    },
+    {
+      "path": "outfits/hoops-05.json",
+      "bytes": 806,
+      "sha256": "6de93ac1dd14568d3209e84766b6b1716c573949363914f0e829425331537d19"
+    },
+    {
+      "path": "outfits/hoops-06.json",
+      "bytes": 804,
+      "sha256": "82ba60f618cfee185e394db207afbe1e0f96bc03a910e7061ed27530885d0429"
+    },
+    {
+      "path": "outfits/skier-01.json",
+      "bytes": 446,
+      "sha256": "fdaa0ef89f9fff5c3c2e026f6aee46316558907a1c7a8e6c6d4dcf076c232743"
+    },
+    {
+      "path": "outfits/skier-02.json",
+      "bytes": 446,
+      "sha256": "8dd3f6ffb530601a27ab73af8d91567712271b4632a25797f99f86e8ff554786"
+    },
+    {
+      "path": "outfits/skier-03.json",
+      "bytes": 446,
+      "sha256": "a73473482beee6bbbb6a69714e1f39bed697321bdb655fb50703edfa497daa7c"
+    },
+    {
+      "path": "outfits/skier-04.json",
+      "bytes": 446,
+      "sha256": "df985fe6a0ddcf85a85952fba90d0a685ed702081eb8580b747dbc903b8fa9ab"
+    },
+    {
+      "path": "outfits/soccer-01.json",
+      "bytes": 817,
+      "sha256": "67f5dfae537d683aa97bb0d2e76f1a30530f320fbe3fbdf8f163cb17c3e8044c"
+    },
+    {
+      "path": "outfits/soccer-02.json",
+      "bytes": 834,
+      "sha256": "a31af9e7fee54ee3edf80349bbc15c89c73568a7b4787e027f35fc3367737a3b"
+    },
+    {
+      "path": "outfits/soccer-03.json",
+      "bytes": 814,
+      "sha256": "9d430923d8b1756eaea60691bc5a9581569a315c60e93ef51f48141dfb7e536d"
+    },
+    {
+      "path": "outfits/soccer-04.json",
+      "bytes": 811,
+      "sha256": "8e08834f442ea6d29cd3127ec8eb6dd16ad9ea64bd0a56972cd3ebb85cd082b2"
+    },
+    {
+      "path": "outfits/soccer-05.json",
+      "bytes": 808,
+      "sha256": "34cc82c64d353222d16ab430e4438bfe3375be03243ba9c24f2bf8d8f83c3ee6"
+    },
+    {
+      "path": "outfits/soccer-06.json",
+      "bytes": 816,
+      "sha256": "3299dfc066256218a876cf8da903448cda9efe8493ce48582b3bffb214db80b1"
+    },
+    {
+      "path": "outfits/soccer-07.json",
+      "bytes": 832,
+      "sha256": "19205d498a9a682874d80a0520a007ff3f1411e7742bd9a79a0011b4d74da30a"
+    },
+    {
+      "path": "outfits/soccer-08.json",
+      "bytes": 828,
+      "sha256": "3882200e74ea3e37494d920a9910cbc8910909ce50faea254c03d649471e0298"
+    },
+    {
+      "path": "overview.webp",
+      "bytes": 59912,
+      "sha256": "67bb6e76498ac41c4286b44aed4a3e212e28f563c0c161ef882767bea5ce55b9"
+    },
+    {
+      "path": "palettes.json",
+      "bytes": 898,
+      "sha256": "dea918d621dcb76ec3b12c6bee2347f6cf0a5e9c880a8c020fb03d335027f4f7"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 2942,
+      "sha256": "07166cdf55c015dd7fb79a4c1caa76444f0e00fd933d44f7f4f1c87c1da56948"
+    },
+    {
+      "path": "preview.js",
+      "bytes": 5228,
+      "sha256": "56f31bd8ae32e1b4f3adbf8904afdbb87c68ffa887387c02841e295e04455c61"
+    },
+    {
+      "path": "README.md",
+      "bytes": 9622,
+      "sha256": "9a0f3cb5c0bbb54263ec1b3594595aa46717c8b8b7b668695c6904417bbc78fb"
+    },
+    {
+      "path": "regions.json",
+      "bytes": 12605,
+      "sha256": "c64884671e7c0ce0ad7ce5405560f05f71fc6a4dddade304c6baa1d8c6e08719"
+    },
+    {
+      "path": "tools/audit-package.mjs",
+      "bytes": 2390,
+      "sha256": "75bcbd1a0003966e26acb511609c42e8dbaf1eb43273cad76579bff25a339222"
+    },
+    {
+      "path": "tools/build.mjs",
+      "bytes": 8883,
+      "sha256": "cf8c4dfabb6e7ebe1746f5925dd72fbadcd3b349494aef7e0b8ced959278cb13"
+    },
+    {
+      "path": "tools/check-preview.mjs",
+      "bytes": 5909,
+      "sha256": "f7c7062e6e4231858779956e224abc232d650408be8b7e4f1dd2e6698a7f0eaf"
+    },
+    {
+      "path": "tools/package.json",
+      "bytes": 275,
+      "sha256": "85e596215aa50a9ea2460162bbee5e02f1630978a6d57c21eeea2ee3df89a51a"
+    },
+    {
+      "path": "tools/validate.mjs",
+      "bytes": 8087,
+      "sha256": "0b499b2d9ece4ebf7f89c26ab10ad40f740ada3e797aaace52e8d24f24ae1655"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 10621,
+      "sha256": "dd524126208308f450d7943d0c3a0dab1d22db70e2dc7f21e29de06ea6ebc6be"
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 3960,
+      "sha256": "170407a96a23ded33437c9c4e6a283508d7c208ad1903de00c3d00d8921a0247"
+    }
+  ]
+}

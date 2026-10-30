@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-07",
+  "modelId": "soccer-player",
+  "label": "שלושה פסים אנכיים",
+  "pattern": "stripes",
+  "source": {
+    "manifest": "../../screens/manifest.json",
+    "kitId": "soccer-07",
+    "shirt": "../../screens/kits/soccer/07-shirt.svg",
+    "shorts": "../../screens/kits/soccer/07-shorts.svg",
+    "hashEncoding": "utf8-lf",
+    "shirtSha256": "7424a8a9214d451e9e3339cc8a9968f9ad003ee83e1df98ceac918e2a2c596c0",
+    "shortsSha256": "07b86a7bc88d41c541db4b7d824bf357135e6467c8a993b60c302c83957597e8"
+  },
+  "colors": {
+    "shirt": "#59D4C3",
+    "shorts": "#59D4C3",
+    "accent": "#163D51",
+    "socks": "#59D4C3",
+    "shoes": "#163D51",
+    "soles": "#F1EDDA",
+    "gloves": "#163D51",
+    "helmet": "#163D51",
+    "equipment": "#163D51"
+  },
+  "map": "../maps/soccer-07.png"
+}

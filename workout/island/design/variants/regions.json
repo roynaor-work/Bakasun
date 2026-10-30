@@ -1,0 +1,628 @@
+{
+  "schemaVersion": 1,
+  "selection": "source-linear-rgb-and-bind-space-triangle-centroid",
+  "maxColorError": 0.000002,
+  "models": {
+    "soccer-player": {
+      "path": "../characters/soccer-player.glb",
+      "sha256": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+      "bytes": 44844,
+      "vertexCount": 1281,
+      "triangles": 1948,
+      "absentRegions": [],
+      "sources": [
+        {
+          "hex": "#714D46",
+          "linearRGB": [
+            0.16513219,
+            0.07421357,
+            0.06124605
+          ],
+          "rules": [
+            {
+              "region": "preserve"
+            }
+          ]
+        },
+        {
+          "hex": "#BF8054",
+          "linearRGB": [
+            0.52099556,
+            0.2158605,
+            0.08865558
+          ],
+          "rules": [
+            {
+              "region": "skin"
+            }
+          ]
+        },
+        {
+          "hex": "#25343F",
+          "linearRGB": [
+            0.01850022,
+            0.03433981,
+            0.04970657
+          ],
+          "rules": [
+            {
+              "region": "hair"
+            }
+          ]
+        },
+        {
+          "hex": "#263443",
+          "linearRGB": [
+            0.01938236,
+            0.03433981,
+            0.05612849
+          ],
+          "rules": [
+            {
+              "region": "preserve"
+            }
+          ]
+        },
+        {
+          "hex": "#F8FAEF",
+          "linearRGB": [
+            0.93868572,
+            0.95597333,
+            0.86315721
+          ],
+          "rules": [
+            {
+              "region": "preserve",
+              "yMin": 1.2
+            },
+            {
+              "region": "soles",
+              "yMax": 0.08
+            },
+            {
+              "region": "socks"
+            }
+          ]
+        },
+        {
+          "hex": "#FFF0B8",
+          "linearRGB": [
+            1,
+            0.8713671,
+            0.47932017
+          ],
+          "rules": [
+            {
+              "region": "shoes",
+              "yMax": 0.12
+            },
+            {
+              "region": "shorts",
+              "yMax": 0.77
+            },
+            {
+              "region": "shirt"
+            }
+          ]
+        },
+        {
+          "hex": "#27C9A0",
+          "linearRGB": [
+            0.02028856,
+            0.58407843,
+            0.35153261
+          ],
+          "rules": [
+            {
+              "region": "socks",
+              "yMax": 0.38
+            },
+            {
+              "region": "shorts",
+              "yMax": 0.77
+            },
+            {
+              "region": "shirt"
+            }
+          ]
+        },
+        {
+          "hex": "#FF795B",
+          "linearRGB": [
+            1,
+            0.19120169,
+            0.10461649
+          ],
+          "rules": [
+            {
+              "region": "shoes"
+            }
+          ]
+        },
+        {
+          "hex": "#173B50",
+          "linearRGB": [
+            0.00856813,
+            0.04373503,
+            0.08021982
+          ],
+          "rules": [
+            {
+              "region": "shorts"
+            }
+          ]
+        }
+      ]
+    },
+    "goalkeeper": {
+      "path": "../characters/goalkeeper.glb",
+      "sha256": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f",
+      "bytes": 44584,
+      "vertexCount": 1259,
+      "triangles": 1948,
+      "absentRegions": [],
+      "sources": [
+        {
+          "hex": "#714D46",
+          "linearRGB": [
+            0.16513219,
+            0.07421357,
+            0.06124605
+          ],
+          "rules": [
+            {
+              "region": "preserve"
+            }
+          ]
+        },
+        {
+          "hex": "#E4AC7E",
+          "linearRGB": [
+            0.77582222,
+            0.41254261,
+            0.20863687
+          ],
+          "rules": [
+            {
+              "region": "skin"
+            }
+          ]
+        },
+        {
+          "hex": "#563E3A",
+          "linearRGB": [
+            0.09305897,
+            0.04817183,
+            0.04231141
+          ],
+          "rules": [
+            {
+              "region": "hair"
+            }
+          ]
+        },
+        {
+          "hex": "#263443",
+          "linearRGB": [
+            0.01938236,
+            0.03433981,
+            0.05612849
+          ],
+          "rules": [
+            {
+              "region": "preserve"
+            }
+          ]
+        },
+        {
+          "hex": "#FFF7DB",
+          "linearRGB": [
+            1,
+            0.93011087,
+            0.70837575
+          ],
+          "rules": [
+            {
+              "region": "preserve",
+              "yMin": 1.2
+            },
+            {
+              "region": "soles"
+            }
+          ]
+        },
+        {
+          "hex": "#FF785D",
+          "linearRGB": [
+            1,
+            0.18782078,
+            0.10946171
+          ],
+          "rules": [
+            {
+              "region": "gloves",
+              "absXMin": 0.6
+            },
+            {
+              "region": "shorts",
+              "yMax": 0.77
+            },
+            {
+              "region": "shirt"
+            }
+          ]
+        },
+        {
+          "hex": "#343D69",
+          "linearRGB": [
+            0.03433981,
+            0.04666509,
+            0.14126329
+          ],
+          "rules": [
+            {
+              "region": "shoes",
+              "yMax": 0.12
+            },
+            {
+              "region": "socks",
+              "yMax": 0.38
+            },
+            {
+              "region": "shorts",
+              "yMax": 0.77
+            },
+            {
+              "region": "shirt"
+            }
+          ]
+        },
+        {
+          "hex": "#FFD35D",
+          "linearRGB": [
+            1,
+            0.65140563,
+            0.10946171
+          ],
+          "rules": [
+            {
+              "region": "socks",
+              "yMax": 0.38
+            },
+            {
+              "region": "shorts",
+              "yMax": 0.77
+            },
+            {
+              "region": "shirt"
+            }
+          ]
+        }
+      ]
+    },
+    "basketball-player": {
+      "path": "../characters/basketball-player.glb",
+      "sha256": "a1b638f72c5e62d3a25d3fbd2f9e262907b87fd31992ce32c116cd3128568814",
+      "bytes": 44564,
+      "vertexCount": 1257,
+      "triangles": 1948,
+      "absentRegions": [
+        "socks"
+      ],
+      "sources": [
+        {
+          "hex": "#714D46",
+          "linearRGB": [
+            0.16513219,
+            0.07421357,
+            0.06124605
+          ],
+          "rules": [
+            {
+              "region": "preserve"
+            }
+          ]
+        },
+        {
+          "hex": "#81513B",
+          "linearRGB": [
+            0.2195262,
+            0.08228271,
+            0.04373503
+          ],
+          "rules": [
+            {
+              "region": "skin"
+            }
+          ]
+        },
+        {
+          "hex": "#222B38",
+          "linearRGB": [
+            0.01599629,
+            0.02415763,
+            0.03954624
+          ],
+          "rules": [
+            {
+              "region": "hair"
+            }
+          ]
+        },
+        {
+          "hex": "#263443",
+          "linearRGB": [
+            0.01938236,
+            0.03433981,
+            0.05612849
+          ],
+          "rules": [
+            {
+              "region": "preserve"
+            }
+          ]
+        },
+        {
+          "hex": "#F8F1E5",
+          "linearRGB": [
+            0.93868572,
+            0.8796224,
+            0.78353781
+          ],
+          "rules": [
+            {
+              "region": "preserve",
+              "yMin": 1.2
+            },
+            {
+              "region": "soles"
+            }
+          ]
+        },
+        {
+          "hex": "#FFCB68",
+          "linearRGB": [
+            1,
+            0.59720176,
+            0.13843161
+          ],
+          "rules": [
+            {
+              "region": "shoes",
+              "yMax": 0.12
+            },
+            {
+              "region": "accent",
+              "absXMin": 0.48
+            },
+            {
+              "region": "shorts",
+              "yMax": 0.77
+            },
+            {
+              "region": "shirt"
+            }
+          ]
+        },
+        {
+          "hex": "#A68AF8",
+          "linearRGB": [
+            0.38132602,
+            0.25415209,
+            0.93868572
+          ],
+          "rules": [
+            {
+              "region": "socks",
+              "yMax": 0.38
+            },
+            {
+              "region": "shorts",
+              "yMax": 0.77
+            },
+            {
+              "region": "shirt"
+            }
+          ]
+        },
+        {
+          "hex": "#353455",
+          "linearRGB": [
+            0.03560131,
+            0.03433981,
+            0.09084171
+          ],
+          "rules": [
+            {
+              "region": "shorts"
+            }
+          ]
+        }
+      ]
+    },
+    "skier": {
+      "path": "../characters/skier.glb",
+      "sha256": "c6cc6ea9f01abbd25feb9660187de0fcdabec9b0156a3044254ef04651d895a3",
+      "bytes": 44476,
+      "vertexCount": 1260,
+      "triangles": 1920,
+      "absentRegions": [
+        "hair",
+        "socks"
+      ],
+      "sources": [
+        {
+          "hex": "#263D63",
+          "linearRGB": [
+            0.01938236,
+            0.04666509,
+            0.12477182
+          ],
+          "rules": [
+            {
+              "region": "preserve",
+              "yMin": 1.2
+            },
+            {
+              "region": "equipment",
+              "yMax": 0.033
+            },
+            {
+              "region": "shoes",
+              "yMax": 0.12
+            },
+            {
+              "region": "shorts",
+              "yMax": 0.77
+            },
+            {
+              "region": "shirt"
+            }
+          ]
+        },
+        {
+          "hex": "#FF8069",
+          "linearRGB": [
+            1,
+            0.2158605,
+            0.14126329
+          ],
+          "rules": [
+            {
+              "region": "helmet",
+              "yMin": 1.2
+            },
+            {
+              "region": "gloves",
+              "absXMin": 0.6
+            },
+            {
+              "region": "equipment",
+              "yMax": 0.052
+            },
+            {
+              "region": "shoes",
+              "yMax": 0.12
+            },
+            {
+              "region": "shorts",
+              "yMax": 0.77
+            },
+            {
+              "region": "shirt"
+            }
+          ]
+        },
+        {
+          "hex": "#DCA279",
+          "linearRGB": [
+            0.71569347,
+            0.36130679,
+            0.19120169
+          ],
+          "rules": [
+            {
+              "region": "skin"
+            }
+          ]
+        },
+        {
+          "hex": "#FFFFFF",
+          "linearRGB": [
+            1,
+            1,
+            1
+          ],
+          "rules": [
+            {
+              "region": "preserve"
+            }
+          ]
+        },
+        {
+          "hex": "#C5F8F3",
+          "linearRGB": [
+            0.55834037,
+            0.93868572,
+            0.89626938
+          ],
+          "rules": [
+            {
+              "region": "preserve"
+            }
+          ]
+        },
+        {
+          "hex": "#57D8E4",
+          "linearRGB": [
+            0.09530747,
+            0.68668532,
+            0.77582222
+          ],
+          "rules": [
+            {
+              "region": "shorts",
+              "yMax": 0.77
+            },
+            {
+              "region": "shirt"
+            }
+          ]
+        },
+        {
+          "hex": "#EDF9FF",
+          "linearRGB": [
+            0.84687322,
+            0.94730651,
+            1
+          ],
+          "rules": [
+            {
+              "region": "soles"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "atlas": {
+    "width": 256,
+    "height": 256,
+    "shirt": [
+      0,
+      0,
+      128,
+      128
+    ],
+    "shorts": [
+      128,
+      0,
+      128,
+      128
+    ],
+    "swatches": [
+      "socks",
+      "shoes",
+      "soles",
+      "gloves",
+      "helmet",
+      "equipment",
+      "white",
+      "accent"
+    ],
+    "uvProjection": {
+      "shirt": {
+        "xScale": 350,
+        "xOffset": 128,
+        "yScale": -480,
+        "yOffset": 586.8
+      },
+      "shorts": {
+        "xScale": 400,
+        "xOffset": 128,
+        "yScale": -450,
+        "yOffset": 381
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="he" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>האי שלי · וריאציות דמות</title>
+<link rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101f29;color:#edf4ef;font:16px/1.5 system-ui,sans-serif}header{padding:16px 24px;border-bottom:1px solid #45606b}h1{font-size:24px;margin:0}p{margin:6px 0}a{color:#c6f889}main{display:grid;grid-template-columns:300px 1fr;min-height:calc(100dvh - 130px)}aside{padding:20px;display:flex;flex-direction:column;gap:14px}label{display:grid;gap:5px}select,button{min-height:48px;border:1px solid #74909a;border-radius:10px;padding:8px;font:inherit;background:#213b47;color:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #b8f65b;outline-offset:3px}#stage{min-height:420px;position:relative;overflow:hidden}canvas{display:block;width:100%;height:100%;touch-action:none}#status{min-height:48px;font-size:14px;color:#c5e3d2}#details{font-size:14px;color:#bdcfd8}fieldset{border:1px solid #45606b;border-radius:12px}#outfit-id{direction:ltr;unicode-bidi:isolate}#stage button{position:absolute;bottom:16px;right:16px;background:#213b47dd}small{display:block;color:#bdcfd8}@media(max-width:650px){header{padding:12px 16px}main{display:flex;flex-direction:column}aside{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}#status,#details,fieldset{grid-column:1/-1}#stage{height:500px;min-height:350px;order:-1}h1{font-size:21px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+<header><h1>האי שלי · וריאציות דמות</h1><p>22 תלבושות · 6 גווני עור · 6 צבעי שיער</p><small>תצוגת נכסים בלבד. <a href="README.md">הוראות ותיעוד</a></small></header>
+<main><aside>
+<label>דמות<select id="character"><option value="soccer-player">כדורגל</option><option value="goalkeeper">שוער</option><option value="basketball-player">כדורסל</option><option value="skier">גולש סקי</option></select></label>
+<label>תלבושת<select id="outfit"></select></label>
+<label>גוון עור<select id="skin"></select></label><label>צבע שיער<select id="hair"></select></label>
+<fieldset><legend>זווית צפייה</legend><button id="front">חזית</button> <button id="back">גב</button></fieldset>
+<div id="details">צבעי שיער בלבד, ללא שינוי תסרוקת. בסקי השיער מכוסה בקסדה; בכדורסל הרגליים ללא גרביים. הדפוס מוקרן מלפנים ומאחור באותה שיטה.</div>
+<p id="status" role="status" aria-live="polite">טוען…</p><span id="outfit-id"></span>
+</aside><div id="stage"><button id="turn">סיבוב רבע</button></div></main>
+<script type="module" src="preview.js"></script></html>

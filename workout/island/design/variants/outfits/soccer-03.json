@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-03",
+  "modelId": "soccer-player",
+  "label": "פס מרכזי",
+  "pattern": "center",
+  "source": {
+    "manifest": "../../screens/manifest.json",
+    "kitId": "soccer-03",
+    "shirt": "../../screens/kits/soccer/03-shirt.svg",
+    "shorts": "../../screens/kits/soccer/03-shorts.svg",
+    "hashEncoding": "utf8-lf",
+    "shirtSha256": "1111b2c9b3d8ed34ea67061fd866a076779b98cef262dc6734f4a902e182af08",
+    "shortsSha256": "35896a33323aab5125845a7eb32675eea4abcfc70a96f8e9ba74c40e607dec31"
+  },
+  "colors": {
+    "shirt": "#78C9FF",
+    "shorts": "#78C9FF",
+    "accent": "#173653",
+    "socks": "#78C9FF",
+    "shoes": "#173653",
+    "soles": "#F1EDDA",
+    "gloves": "#173653",
+    "helmet": "#173653",
+    "equipment": "#173653"
+  },
+  "map": "../maps/soccer-03.png"
+}

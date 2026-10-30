@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "created": "2026-10-30",
+  "kind": "design-assets-not-runtime",
+  "license": "CC0-1.0",
+  "baseCommit": "039419a2182d40f12d9acbfe0451e18118394d41",
+  "budgetBytes": 400000,
+  "budgetScope": "all four referenced GLBs plus every file in variants/",
+  "application": "neutralized vertex colors multiplied by a 256px sRGB map; skin/hair are linear vertex colors sampling white",
+  "regionMap": "regions.json",
+  "palettes": "palettes.json",
+  "models": [
+    "soccer-player",
+    "goalkeeper",
+    "basketball-player",
+    "skier"
+  ],
+  "outfits": [
+    {
+      "id": "soccer-01",
+      "modelId": "soccer-player",
+      "path": "outfits/soccer-01.json"
+    },
+    {
+      "id": "soccer-02",
+      "modelId": "soccer-player",
+      "path": "outfits/soccer-02.json"
+    },
+    {
+      "id": "soccer-03",
+      "modelId": "soccer-player",
+      "path": "outfits/soccer-03.json"
+    },
+    {
+      "id": "soccer-04",
+      "modelId": "soccer-player",
+      "path": "outfits/soccer-04.json"
+    },
+    {
+      "id": "soccer-05",
+      "modelId": "soccer-player",
+      "path": "outfits/soccer-05.json"
+    },
+    {
+      "id": "soccer-06",
+      "modelId": "soccer-player",
+      "path": "outfits/soccer-06.json"
+    },
+    {
+      "id": "soccer-07",
+      "modelId": "soccer-player",
+      "path": "outfits/soccer-07.json"
+    },
+    {
+      "id": "soccer-08",
+      "modelId": "soccer-player",
+      "path": "outfits/soccer-08.json"
+    },
+    {
+      "id": "hoops-01",
+      "modelId": "basketball-player",
+      "path": "outfits/hoops-01.json"
+    },
+    {
+      "id": "hoops-02",
+      "modelId": "basketball-player",
+      "path": "outfits/hoops-02.json"
+    },
+    {
+      "id": "hoops-03",
+      "modelId": "basketball-player",
+      "path": "outfits/hoops-03.json"
+    },
+    {
+      "id": "hoops-04",
+      "modelId": "basketball-player",
+      "path": "outfits/hoops-04.json"
+    },
+    {
+      "id": "hoops-05",
+      "modelId": "basketball-player",
+      "path": "outfits/hoops-05.json"
+    },
+    {
+      "id": "hoops-06",
+      "modelId": "basketball-player",
+      "path": "outfits/hoops-06.json"
+    },
+    {
+      "id": "goalkeeper-01",
+      "modelId": "goalkeeper",
+      "path": "outfits/goalkeeper-01.json"
+    },
+    {
+      "id": "goalkeeper-02",
+      "modelId": "goalkeeper",
+      "path": "outfits/goalkeeper-02.json"
+    },
+    {
+      "id": "goalkeeper-03",
+      "modelId": "goalkeeper",
+      "path": "outfits/goalkeeper-03.json"
+    },
+    {
+      "id": "goalkeeper-04",
+      "modelId": "goalkeeper",
+      "path": "outfits/goalkeeper-04.json"
+    },
+    {
+      "id": "skier-01",
+      "modelId": "skier",
+      "path": "outfits/skier-01.json"
+    },
+    {
+      "id": "skier-02",
+      "modelId": "skier",
+      "path": "outfits/skier-02.json"
+    },
+    {
+      "id": "skier-03",
+      "modelId": "skier",
+      "path": "outfits/skier-03.json"
+    },
+    {
+      "id": "skier-04",
+      "modelId": "skier",
+      "path": "outfits/skier-04.json"
+    }
+  ]
+}
