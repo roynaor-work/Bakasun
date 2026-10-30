@@ -1,0 +1,45 @@
+{
+  "verifiedDate": "2026-10-30",
+  "threeRevision": "160",
+  "dracoVersion": "1.5.9",
+  "decoderBuild": "gltf",
+  "loaderChanges": [
+    "relative local Three import",
+    "application/javascript Blob MIME",
+    "ES module worker",
+    "explicit self.onmessage",
+    "native fetch full original response body; preserve HTTP/network errors and LoadingManager"
+  ],
+  "files": [
+    {
+      "path": "DRACOLoader.js",
+      "source": "https://raw.githubusercontent.com/mrdoob/three.js/r160/examples/jsm/loaders/DRACOLoader.js",
+      "bytes": 14279,
+      "sha256": "6b635ad5f27d2f9bc793fe187915a38d7aabd53b59919a15beee36d36d7d904e"
+    },
+    {
+      "path": "draco_wasm_wrapper.js",
+      "source": "https://www.gstatic.com/draco/versioned/decoders/1.5.9/draco_wasm_wrapper_gltf.js",
+      "bytes": 54804,
+      "sha256": "9927d2886d34906aec5258d091a162f3d9f59ab7e84fd6a81961987bca3c363f"
+    },
+    {
+      "path": "draco_decoder.wasm",
+      "source": "https://www.gstatic.com/draco/versioned/decoders/1.5.9/draco_decoder_gltf.wasm",
+      "bytes": 183697,
+      "sha256": "39b78cec9398af525d76f7eecf336ccf829891cec9524905e55fe686499834bf"
+    },
+    {
+      "path": "LICENSE.draco",
+      "source": "https://raw.githubusercontent.com/google/draco/1.5.9/LICENSE",
+      "bytes": 13898,
+      "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4"
+    },
+    {
+      "path": "LICENSE.three",
+      "source": "../../../vendor/LICENSE.three",
+      "bytes": 1102,
+      "sha256": "a70d6dc2d2a6464ee9ee503b1881d5aa884abdec63b4c7064f0c5ad827a7d2b4"
+    }
+  ]
+}
