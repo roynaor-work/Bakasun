@@ -83,29 +83,39 @@ export async function loadAlpineWorld({isDisposed = () => false} = {}) {
   /** Re-tessellate the real authored surface and project it onto the existing
    * halfpipe. Its 6m wedge is not added to the course elevation a second time.
    * The rideable surface and track physics therefore stay in the same frame. */
-  function slopeSurface(s0, s1, {pipe, worldPoint, deckEdge = pipe.lip + 3, subdivisions = 8} = {}) {
-    check(); const source = models.surface, p = source.attributes.position, ix = source.index, positions = [], uv = [], N = Math.max(2, Math.min(8, Math.floor(subdivisions))), out = new T.Vector3();
-    const vertex = new T.Vector3(), a = new T.Vector3(), b = new T.Vector3(), c = new T.Vector3();
-    function emit(u, v) {
-      vertex.copy(a).multiplyScalar(1 - u - v).addScaledVector(b, u).addScaledVector(c, v);
-      const x = Math.max(-1, Math.min(1, vertex.x / 7)) * deckEdge, s = s0 + Math.max(0, Math.min(1, (vertex.z + 12) / 24)) * (s1 - s0);
-      worldPoint(s, x, surfaceHeight(x, pipe), out); positions.push(out.x, out.y, out.z); uv.push(x / 5, s / 6);
-    }
-    const triangles = (ix?.count ?? p.count) / 3;
-    for (let t = 0; t < triangles; t++) {
-      a.fromBufferAttribute(p, ix ? ix.getX(t * 3) : t * 3); b.fromBufferAttribute(p, ix ? ix.getX(t * 3 + 1) : t * 3 + 1); c.fromBufferAttribute(p, ix ? ix.getX(t * 3 + 2) : t * 3 + 2);
-      for (let i = 0; i < N; i++) for (let j = 0; j < N - i; j++) {
-        emit(i / N, j / N); emit((i + 1) / N, j / N); emit(i / N, (j + 1) / N);
-        if (i + j < N - 1) { emit((i + 1) / N, j / N); emit((i + 1) / N, (j + 1) / N); emit(i / N, (j + 1) / N); }
+  function slopeSurface(s0, s1, {pipe, worldPoint, deckEdge = pipe.lip + 3} = {}) {
+    check(); const source = models.surface, p = source.attributes.position, colors = source.attributes.color, out = new T.Vector3();
+    // Preserve the delivered model's longitudinal rows, merging only Draco's
+    // sub-centimetre quantization noise. Insert one midpoint per authored row
+    // interval so curved course segments remain short enough for smooth joins.
+    const authoredRows = [...new Set(Array.from({length: p.count}, (_, i) => Math.round(p.getZ(i) * 100) / 100))].sort((a, b) => a - b);
+    const z0 = authoredRows[0], span = authoredRows.at(-1) - z0, rows = [];
+    for (let i = 0; i < authoredRows.length; i++) { if (i) rows.push((authoredRows[i - 1] + authoredRows[i]) / 2); rows.push(authoredRows[i]); }
+    // Uniform x subdivisions crossed the lip discontinuity, leaving long chords
+    // up to 43cm above the collider. Include the exact floor/lip/deck breaks and
+    // sample each circular wall by angle, independently of the source grid.
+    const right = [0, pipe.F / 2, pipe.F];
+    for (let i = 1; i <= 48; i++) right.push(i === 48 ? pipe.lip : pipe.F + pipe.R * Math.sin(pipe.angle * i / 48));
+    if (deckEdge > pipe.lip) right.push(deckEdge);
+    const profile = [...right.slice(1).reverse().map(x => -x), ...right], count = rows.length * profile.length;
+    const positions = new Float32Array(count * 3), uv = new Float32Array(count * 2), rgb = new Float32Array(count * 3), index = [];
+    // Retain the surface palette from the delivered asset. Color is available
+    // for vertex-color materials; the snow map can also be used on its own.
+    const color = new T.Vector3();
+    if (colors) { for (let i = 0; i < colors.count; i++) { color.x += colors.getX(i); color.y += colors.getY(i); color.z += colors.getZ(i); } color.divideScalar(colors.count); }
+    else color.set(1, 1, 1);
+    for (let j = 0; j < rows.length; j++) {
+      const s = s0 + (rows[j] - z0) / span * (s1 - s0);
+      for (let k = 0; k < profile.length; k++) {
+        const x = profile[k], vertex = j * profile.length + k;
+        worldPoint(s, x, surfaceHeight(x, pipe), out); out.toArray(positions, vertex * 3); color.toArray(rgb, vertex * 3); uv[vertex * 2] = x / 5; uv[vertex * 2 + 1] = s / 6;
+        if (j && k) { const d = vertex, b = d - profile.length, a = b - 1, c = d - 1; index.push(a, b, c, b, d, c); }
       }
     }
-    const raw = new T.BufferGeometry(); raw.setAttribute('position', new T.Float32BufferAttribute(positions, 3)); raw.setAttribute('uv', new T.Float32BufferAttribute(uv, 2));
-    const g = mergeVertices(raw, .0001); raw.dispose(); g.computeVertexNormals();
-    // The authored downhill +Z maps to the course's -Z, reversing winding.
-    // Repair it before lighting/backface culling: the riding face points up.
+    const g = new T.BufferGeometry(); g.setAttribute('position', new T.BufferAttribute(positions, 3)); g.setAttribute('uv', new T.BufferAttribute(uv, 2)); g.setAttribute('color', new T.BufferAttribute(rgb, 3)); g.setIndex(index); g.computeVertexNormals();
     let normalY = 0; for (let i = 0; i < g.attributes.normal.count; i++) normalY += g.attributes.normal.getY(i);
-    if (normalY < 0) { const index = g.index; for (let i = 0; i < index.count; i += 3) { const b = index.getX(i + 1); index.setX(i + 1, index.getX(i + 2)); index.setX(i + 2, b); } g.computeVertexNormals(); }
-    g.computeBoundingSphere(); g.userData.designModel = 'ski-slope/slope_surface'; return ownGeometry(g);
+    if (normalY < 0) { const ix = g.index; for (let i = 0; i < ix.count; i += 3) { const b = ix.getX(i + 1); ix.setX(i + 1, ix.getX(i + 2)); ix.setX(i + 2, b); } g.computeVertexNormals(); }
+    g.computeBoundingSphere(); g.userData.designModel = 'ski-slope/slope_surface'; g.userData.authoredRows = authoredRows.length; g.userData.adaptedRows = rows.length; g.userData.wallSegments = 48; return ownGeometry(g);
   }
   function createArtWorld(scene, {course, deckEdge, terrainY, place, frameAt, mobile = false, density = 1} = {}) {
     check(); const objects = [], pools = [], trees = [], rocks = [], fences = [], dummy = new T.Object3D(), frame = {};
