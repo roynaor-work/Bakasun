@@ -1,5 +1,5 @@
-import {passLaneClearance,teamFormation,teamPresser} from './soccer-teamplay.mjs?v=island-perf-20261030-1';
-export {selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance} from './soccer-teamplay.mjs?v=island-perf-20261030-1';
+import {passLaneClearance,teamFormation,teamPresser} from './soccer-teamplay.mjs?v=island-integration-20261030-1';
+export {selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance} from './soccer-teamplay.mjs?v=island-integration-20261030-1';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 /** First element under a comparator: the same choice as sort(compare)[0], without the sort or its copies. */
