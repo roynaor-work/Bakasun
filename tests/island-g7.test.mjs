@@ -41,7 +41,7 @@ test('G7 keyboard and trusted fullscreen entry remain available after a cancelle
  h.dispatch('pointerdown',normal);h.dispatch('pointercancel',normal);h.dispatch('keydown',normal,{key:'Enter'});h.dispatch('click',normal,{detail:0});assert.equal(count,1);
  h.at(30);h.dispatch('pointerdown',native);h.dispatch('pointerup',native);assert.equal(count,1,'fullscreen entry waits for the browser trusted click');h.dispatch('click',native);assert.equal(count,2);h.dispatch('click',normal);assert.equal(count,2);h.stop();h.dispatch('click',normal);assert.equal(count,3);
 });
-test('G7 each of the five playable games declares landscape in the shared shell config',()=>{for(const id of ['soccer','tennis','navalDuel','fireRescue','alienDefense'])assert.equal(gamePresentation(data.config,id).orientation,'landscape');});
+test('G7 four of the five playable games declare landscape and soccer supports both orientations in the shared shell config',()=>{for(const id of ['tennis','navalDuel','fireRescue','alienDefense'])assert.equal(gamePresentation(data.config,id).orientation,'landscape');assert.equal(gamePresentation(data.config,'soccer').orientation,'any');});
 test('G7 action drag is independent of movement and short taps use automatic intent',()=>{
  const gesture=createActionGesture(data.config.minigames.soccer.controls);
  gesture.start('kick',100,100);assert.deepEqual(gesture.direction('kick',{x:-1,z:0}),{x:-1,z:0,height:0,manual:false});
