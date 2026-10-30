@@ -144,7 +144,8 @@ export function runAlpineSession(ctx) {
   governor = createQualityGovernor(balance.render, quality);
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; fail(t('alpine.loadSlow')); } }, 25000);
-  import('./alpine-view.mjs?v=island-perf-20261030-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(loaded => {
+  import('./alpine-view.mjs?v=island-perf-20261030-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(async loaded => {
+    await audio.ready;
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
     clearTimeout(loadTimer); view = loaded; loading.hidden = true; startButton.disabled = false; app.dataset.render = loaded.mode;
@@ -213,7 +214,7 @@ export function runAlpineSession(ctx) {
     if (snap.phase !== app.dataset.phase && snap.phase !== 'paused') setPhase(snap.phase);
     handleEvents(snap, now);
     if (now > calloutUntil) callout.hidden = true;
-    audio.sync(blocked ? 0 : snap.speedKmh, {boosting: snap.player.boosting, carving: Math.abs(snap.player.lean || 0), airborne: snap.player.airborne});
+    audio.sync(blocked ? 0 : snap.speedKmh, {boosting: snap.player.boosting, carving: Math.abs(snap.player.lean || 0), airborne: snap.player.airborne, crashed:snap.player.crashed});
     view.render(snap, engine.presentation()); updateHud(snap);
     if (snap.result && !finished) {
       finished = true;
