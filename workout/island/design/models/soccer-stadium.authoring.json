@@ -1,0 +1,70 @@
+{
+  "id": "soccer-stadium",
+  "category": "large",
+  "notes": "Single open-roof stadium shell; 68 x 105 m flat pitch, no grass geometry or embedded grass image.",
+  "view": [
+    1.2,
+    -1.5,
+    1.35
+  ],
+  "bounds_blender": [
+    [
+      -48.69999694824219,
+      -67.0999984741211,
+      -8.553266525268555e-06
+    ],
+    [
+      48.69999694824219,
+      67.0999984741211,
+      16.850000381469727
+    ]
+  ],
+  "anchors": {
+    "anchor_goal_south": [
+      0.0,
+      0.04,
+      52.5
+    ],
+    "anchor_ball_spot_south": [
+      0.0,
+      0.04,
+      41.5
+    ],
+    "anchor_goal_north": [
+      0.0,
+      0.04,
+      -52.5
+    ],
+    "anchor_ball_spot_north": [
+      0.0,
+      0.04,
+      -41.5
+    ],
+    "anchor_ball_spot": [
+      0.0,
+      0.04,
+      -0.0
+    ],
+    "anchor_field_center": [
+      0.0,
+      0.04,
+      -0.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "pitch_surface",
+    "stand_shell",
+    "seating",
+    "aisles",
+    "roof",
+    "beams",
+    "floodlights",
+    "field_markings"
+  ],
+  "triangles": 5246
+}

@@ -1,0 +1,60 @@
+{
+  "id": "skis",
+  "category": "equipment",
+  "notes": "Pair of 1.70m skis with separate left/right meshes and bindings.",
+  "view": [
+    1.2,
+    -1.45,
+    2.4
+  ],
+  "bounds_blender": [
+    [
+      -0.23999999463558197,
+      -0.8484956622123718,
+      0.0
+    ],
+    [
+      0.23999999463558197,
+      0.8484956622123718,
+      0.06951241940259933
+    ]
+  ],
+  "anchors": {
+    "anchor_boot_left": [
+      -0.18,
+      0.0555,
+      -0.0
+    ],
+    "anchor_boot_right": [
+      0.18,
+      0.0555,
+      -0.0
+    ],
+    "anchor_mount_left": [
+      -0.18,
+      0.0555,
+      -0.0
+    ],
+    "anchor_mount_right": [
+      0.18,
+      0.0555,
+      -0.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "ski_left",
+    "ski_accent_left",
+    "ski_tip_accent_left",
+    "binding_left",
+    "ski_right",
+    "ski_accent_right",
+    "ski_tip_accent_right",
+    "binding_right"
+  ],
+  "triangles": 560
+}

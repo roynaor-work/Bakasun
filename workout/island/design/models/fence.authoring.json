@@ -1,0 +1,50 @@
+{
+  "id": "fence",
+  "category": "equipment",
+  "notes": "3 m between connection anchors; 1.2 m high original open safety fence.",
+  "view": [
+    1.15,
+    -3,
+    1.1
+  ],
+  "bounds_blender": [
+    [
+      -1.5399999618530273,
+      -0.03999999910593033,
+      0.0
+    ],
+    [
+      1.5399999618530273,
+      0.03999999910593033,
+      1.2000000476837158
+    ]
+  ],
+  "anchors": {
+    "anchor_connect_left": [
+      -1.5,
+      0.0,
+      -0.0
+    ],
+    "anchor_connect_right": [
+      1.5,
+      0.0,
+      -0.0
+    ],
+    "anchor_fence_center": [
+      0.0,
+      0.6,
+      -0.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "fence_posts",
+    "fence_net",
+    "fence_rails"
+  ],
+  "triangles": 488
+}

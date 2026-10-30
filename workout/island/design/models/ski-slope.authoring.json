@@ -1,0 +1,56 @@
+{
+  "id": "ski-slope",
+  "category": "large",
+  "notes": "14 x 24 m snow piste, 6 m descent. Clear central route; +Z glTF is downhill. Route anchors lie on the snow surface; base root is under the wedge.",
+  "view": [
+    1.25,
+    -1.55,
+    1.0
+  ],
+  "bounds_blender": [
+    [
+      -7.0,
+      -12.033954620361328,
+      0.0
+    ],
+    [
+      7.0,
+      12.033954620361328,
+      6.6058197021484375
+    ]
+  ],
+  "anchors": {
+    "anchor_route_start": [
+      0.0,
+      6.25,
+      -12.0
+    ],
+    "anchor_route_end": [
+      0.0,
+      0.25,
+      12.0
+    ],
+    "anchor_gate_center": [
+      0.0,
+      3.25,
+      -0.0
+    ],
+    "anchor_route_mid": [
+      0.0,
+      3.25,
+      -0.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "slope_surface",
+    "slope_body",
+    "piste_edges",
+    "piste_markers"
+  ],
+  "triangles": 822
+}

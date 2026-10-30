@@ -1,0 +1,44 @@
+{
+  "id": "basketball",
+  "category": "equipment",
+  "notes": "Faceted .24m ball with separate geometric dark seams; no image textures.",
+  "view": [
+    1.2,
+    -1.6,
+    1
+  ],
+  "bounds_blender": [
+    [
+      -0.12359614670276642,
+      -0.12359614670276642,
+      0.0
+    ],
+    [
+      0.12359613925218582,
+      0.12359613925218582,
+      0.24719807505607605
+    ]
+  ],
+  "anchors": {
+    "anchor_ball_center": [
+      0.0,
+      0.123599,
+      0.0
+    ],
+    "anchor_ball_spot": [
+      0.0,
+      -1e-06,
+      0.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "basketball",
+    "seams"
+  ],
+  "triangles": 3600
+}
