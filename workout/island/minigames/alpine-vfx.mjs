@@ -208,10 +208,12 @@ export async function createAlpineVfx({scene, worldPoint, surfaceHeight = () => 
   }
   return {
     update, applyCamera,
-    warmUp() {
+    warmUp(speedPass = false) {
       if (disposed) return;
       for (let i = 0; i < slots.length; i++) {
-        const slot = slots[i]; slot.type = i; slot.frame = -1; slot.mesh.material.map = layouts[i].texture;
+        const slot = slots[i]; const type = speedPass && i === 2 ? 3 : i;
+        slot.type = type; slot.frame = -1; slot.mesh.material.map = layouts[type].texture;
+        slot.mesh.material.depthTest = type !== 3;
         slot.mesh.material.opacity = .01; slot.mesh.visible = true; worldPoint(3 + i, 0, .5, slot.mesh.position); uvFrame(slot, 1);
       }
       warmed = true;

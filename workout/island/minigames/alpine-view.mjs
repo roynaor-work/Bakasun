@@ -237,7 +237,11 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   vfx.warmUp();
   try { if (renderer.compileAsync) await renderer.compileAsync(scene, camera); else renderer.compile(scene, camera); } catch {}
   if (isDisposed()) { disposeAll(); throw Object.assign(new Error('alpine.disposed'), {disposed: true}); }
-  warmUp(); vfx.reset();
+  warmUp();
+  // Screen-space speed lines use a different depth pipeline from contact puffs.
+  // Exercise that pipeline under the loading card as well, then wait only here
+  // for pending uploads/draw setup; racing frames never wait on the GPU.
+  vfx.warmUp(true); warmUp(); renderer.getContext().finish(); vfx.reset();
   let canonicalPresentation=false;
   let lastT = 0, fov = 50, camLat = 0, camRise = 0, lastCoins = new Map(), snowAt = 0;
   const ease = p => p < .5 ? 2 * p * p : 1 - (2 - 2 * p) ** 2 / 2;
