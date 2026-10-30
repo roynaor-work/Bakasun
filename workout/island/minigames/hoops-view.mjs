@@ -31,7 +31,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  let crowd=null;
  try{crowd=await buildCrowd(dyn.crowdSpots,new URL(config.assets.crowd,assetBase).href,config.assets.crowdGrid,quality);scene.add(crowd.mesh);}catch(e){crowd=null;}
 
- const assets=await loadPlayerAssets(config.assets,assetBase,onProgress);
+ const assets=await loadPlayerAssets(config.assets,assetBase,onProgress);assets.engineAnim=config.anim;
  // avatars: the ten on the floor are built before the first frame; the bench is built one per
  // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
  const avatars=new Map(),cards=new Map(),pending=[];
