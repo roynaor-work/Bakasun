@@ -13,6 +13,7 @@ try{
     await page.locator('[data-action=avatar-start]').click();
     await page.locator('[data-action=quick-games]').click();
     await page.waitForSelector('.modal[data-game-library] .adventure-game-card');
+    await page.locator('.modal[data-game-library] .adventure-emblem img').evaluateAll(images=>Promise.all(images.map(image=>image.decode())));
     await page.waitForTimeout(500);
     const library=await page.evaluate(()=>{const m=document.querySelector('.modal[data-game-library]'),box=m.getBoundingClientRect();
       return {overflow:m.scrollHeight-m.clientHeight,cards:[...m.querySelectorAll('.adventure-game-card')].map(c=>{const r=c.getBoundingClientRect();return {id:c.dataset.game,isNew:c.dataset.new==='true',inside:r.top>=box.top-1&&r.bottom<=box.bottom+1&&r.bottom<=innerHeight+1&&r.left>=0&&r.right<=innerWidth+1};})};});
