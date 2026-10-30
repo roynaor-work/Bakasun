@@ -113,13 +113,13 @@ export function createAlpineMotionPlayer(baked, bones) {
     const restarted = lastTime !== null && (now < lastTime - .01 || (lastS !== null && Number(frame.s) < lastS - 2) || phase === 'countdown' && lastPhase !== 'countdown');
     if (restarted) reset();
     const speed = context.speedKmh ?? (lastS !== null && dt > 0 ? Math.max(0, ((frame.s ?? lastS) - lastS) / dt * 3.6) : 0);
-    const moving = phase === 'racing' || phase === 'finished' ? speed > .5 || phase === 'racing' : false;
+    const moving = phase === 'menu' && !!context.previewRun || (phase === 'racing' || phase === 'finished') && (speed > .5 || phase === 'racing');
     time += dt;
     const clip = baked.clips[state];
     const events = [];
     if (frame.crashed && !lastCrash) events.push('fall_confirmed');
     if (!frame.crashed && state === 'fall') events.push('recovery_allowed');
-    if (phase === 'finished' && context.result?.won && !resultSeen) { events.push('result_success'); resultSeen = true; }
+    if (phase === 'finished' && context.result?.won && !resultSeen) events.push('result_success');
     if (frame.airborne && !lastAir) {
       // An authoritative jump can interrupt a short ground action before its
       // authored end. Resolve its return-to-glide edge before the takeoff edge.
@@ -136,6 +136,9 @@ export function createAlpineMotionPlayer(baked, bones) {
       events.push('clip_finished', moving ? 'clip_finished_and_moving' : 'clip_finished_and_stopped'); clipFinished = true;
     }
     event(events);
+    // A result can arrive during fall/recover, where its transition is masked.
+    // Keep it pending until the authored state machine actually accepts it.
+    if (state === 'celebrate') resultSeen = true;
     display(dt);
     lastTime = now; lastPhase = phase; lastS = frame.s ?? lastS; lastSpeed = speed;
     lastCrash = !!frame.crashed; lastAir = !!frame.airborne; lastBoost = !!frame.boosting;

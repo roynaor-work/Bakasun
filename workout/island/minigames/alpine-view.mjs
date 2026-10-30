@@ -1,6 +1,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-perf-20261030-1';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-perf-20261030-1';
+import {loadAlpineWorld} from './alpine-design-world.mjs';
 import {loadAlpineCharacters} from './alpine-character.mjs';
 import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
 import {createProRider as createFallbackRider} from './rider-fallback.mjs';
@@ -43,6 +44,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const placed = (geo, x = 0, y = 0, z = 0, rx = 0, ry = 0, s = 1) => geo.applyMatrix4(new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromEuler(new THREE.Euler(rx, ry, 0)), new THREE.Vector3(s, s, s)));
   const canvasTexture = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; return tex; };
 
+  const designWorld=await loadAlpineWorld({isDisposed});
+  snow.map=designWorld.snowTexture; snow.color.set('#ffffff'); snow.onBeforeCompile=()=>{}; snow.customProgramCacheKey=()=> 'alpine-design-snow';
   scene.background=new THREE.Color(look.fog);
   let granite=new THREE.Texture(),rockTextureError=null;try{granite=await new THREE.TextureLoader().loadAsync(rockTextureUrl);}catch(error){rockTextureError=String(error?.message||'rock-texture-unavailable');}
   granite.colorSpace=THREE.SRGBColorSpace;granite.wrapS=granite.wrapT=THREE.RepeatWrapping;granite.anisotropy=8;if(granite.image)stone.userData.granite=granite;
@@ -68,7 +71,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const profile = [...right.slice(1).reverse().map(p => ({x: -p.x, y: p.y, nx: -p.nx, ny: p.ny})), ...right];
   let arc = 0; profile.forEach((p, i) => { if (i) arc += Math.hypot(p.x - profile[i - 1].x, p.y - profile[i - 1].y); p.arc = arc; }); profile.forEach(p => { p.u = p.arc / arc; });
   const xAtU = u => { const a = u * arc; for (let i = 1; i < profile.length; i++) if (profile[i].arc >= a) { const p = profile[i - 1], q = profile[i], f = (a - p.arc) / Math.max(1e-6, q.arc - p.arc); return p.x + (q.x - p.x) * f; } return deckEdge; };
-  const pipeMat=snow,terrainMat=snowMaterial({powder:true});
+  const pipeMat=snow,terrainMat=new THREE.MeshStandardMaterial({color:'#f2f6f7',map:designWorld.snowTexture,roughness:.96,envMapIntensity:.16});
   // Side terrain: deck level near the pipe, a bumpy bank, then a long fall away into fog.
   const TX=[0,2,5,10,18,30,50,90],TY=[0,.5,2,6,11,19,9,-35];
   function terrainY(s, ax, side) {
@@ -102,13 +105,13 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const CHUNK = 40, chunks = [], sFirst = -60, sLast = N - 1;
   for (let s0 = sFirst; s0 < sLast; s0 += CHUNK) {
     const s1 = Math.min(sLast, s0 + CHUNK), group = new THREE.Group();
-    const surface = mesh(strip(s0, s1, profile.length, (s, k, o) => Object.assign(o, profile[k]), 8, false), pipeMat, group); surface.castShadow = false;
+    const surface = mesh(designWorld.slopeSurface(s0,s1,{pipe,worldPoint,deckEdge}), pipeMat, group); surface.castShadow = false;
     const sides = [-1, 1].map(side => strip(s0, s1, TX.length, (s, k, o) => { const kk = side < 0 ? TX.length - 1 - k : k; o.x = side * (deckEdge + TX[kk]); o.y = terrainAt(s, kk, side); o.nx = 0; o.ny = 1; o.u = 0; }, 8, true));
     const land = mesh(mergeGeometries(sides), terrainMat, group); land.castShadow = false; sides.forEach(g => g.dispose());
 
     group.userData = {s0, s1, perf: 'track'}; scene.add(group); chunks.push(group);
   }
-  const art=createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,snow,stone,dusk,mobile,density:look.trees});
+  const art=designWorld.createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,snow,stone,dusk,mobile,density:look.trees});
   const scenery={update(){},dispose(){}};
   const mountains=new THREE.Group(),field=new THREE.Group();
   const treeMeshes=[],flagPole=new THREE.Group(),flagCloth=new THREE.Group();
@@ -147,7 +150,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     return g;
   }
   function rock(){const g=new THREE.Group(),geo=new THREE.SphereGeometry(.7,24,16),p=geo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i),n=1+.10*Math.sin(x*13+z*3)*Math.cos(y*9);p.setXYZ(i,x*n,y*n,z*n);}geo.computeVertexNormals();const r=mesh(geo,stone,g,0,.39,0);r.scale.set(1,.67,1);return g;}
-  const makers = {rock, gate, boost: pad, ramp}, pools = {rock: [], gate: [], boost: [], ramp: []};
+  const makers = {rock:()=>designWorld.prop('rock',physics), gate:()=>designWorld.prop('gate',physics), boost: pad, ramp}, pools = {rock: [], gate: [], boost: [], ramp: []};
   function prop(type, used) { const list = pools[type], i = used[type]++; if (!list[i]) { const g = makers[type](); g.userData.perf = 'props'; scene.add(g); list.push(g); } list[i].visible = true; return list[i]; }
   function textTexture(label, bg = '#ff643b', fg = '#ffffff') {
     return canvasTexture(1024, 96, (ctx, w, h) => { ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h); ctx.fillStyle = fg; ctx.font = '900 64px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, w / 2, h / 2 + 3); ctx.fillStyle = '#ff643b'; ctx.fillRect(0, 0, w, 8); ctx.fillRect(0, h - 8, w, 8); });
@@ -291,8 +294,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       const impact=s.crashed?0:Math.max(0,1-(t-r.hitAt)/.65)**2;
       // A readable recoil and knee compression, including reduced-motion mode.
       flip-=impact*.28;roll+=side*impact*.16;drop+=impact*.1;
-      r.pivot.rotation.set(flip, yaw, r.actor?.update&&s.crashed?0:roll, 'YXZ'); r.pivot.position.y = PIVOT - (r.actor?.update&&s.crashed?0:drop);
-      if(r.actor?.update)r.actor.update(s,{phase:state.phase,time:t,dt,speedKmh:state.speedKmh,result:state.result});else if(r.actor)r.actor.pose(t,lean,r.air,Math.max(r.squash,impact*.8),r.grab);else r.body.position.y = .14 + Math.sin(t * 5 + (id === 'player' ? 0 : 3)) * .018;
+      r.pivot.rotation.set(flip, r.actor?.update&&s.crashed?0:yaw, r.actor?.update&&s.crashed?0:roll, 'YXZ'); r.pivot.position.y = PIVOT - (r.actor?.update&&s.crashed?0:drop);
+      if(r.actor?.update)r.actor.update(s,{phase:state.phase,time:t,dt:state.phase==='finished'?wdt:dt,speedKmh:state.speedKmh,result:state.result});else if(r.actor)r.actor.pose(t,lean,r.air,Math.max(r.squash,impact*.8),r.grab);else r.body.position.y = .14 + Math.sin(t * 5 + (id === 'player' ? 0 : 3)) * .018;
       place(r.shadow, s.s ?? ps - z, s.x, surf + .05, s.airborne ? 0 : side * wallAngle(s.x, pipe)); r.shadow.rotateX(-Math.PI / 2);
       r.shadow.material.opacity = .2 / (1 + height * .7); r.shadow.scale.set(.75 / (1 + height * .15), 1.4 / (1 + height * .15), 1);
       if(r.sf){const a = r.sf.geometry.attributes.position; for (let i = 0; i < a.count; i++) a.setZ(i, Math.sin(i * .9 + t * 10) * .05 * (i % 11 / 10)); a.needsUpdate = true;}
@@ -363,7 +366,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     const materials = new Set(), geometries = new Set();
     scene.traverse(o => { if (o.geometry) geometries.add(o.geometry); if (o.material) for (const m of [].concat(o.material)) materials.add(m); });
     geometries.forEach(g => g.dispose()); materials.forEach(m => { for (const v of Object.values(m)) if (v?.isTexture) v.dispose(); m.dispose(); });
-    gltf?.dispose();scene.background?.dispose?.();scenery.dispose();art.dispose();contactTex.dispose();granite.dispose();
+    gltf?.dispose();scene.background?.dispose?.();scenery.dispose();art.dispose();designWorld.dispose();contactTex.dispose();granite.dispose();
     for (const m of [...treeMeshes, flagPole, flagCloth, coins]) m.dispose?.();
     sun.shadow.map?.dispose();envTarget.dispose(); renderer.renderLists.dispose(); renderer.dispose();renderer.forceContextLoss();
     if (!canvas) renderer.domElement.remove();
