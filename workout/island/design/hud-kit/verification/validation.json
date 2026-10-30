@@ -1,0 +1,214 @@
+{
+  "args": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader"
+  ],
+  "cases": [
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "rtl",
+      "safe": 0,
+      "theme": "soccer"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "rtl",
+      "safe": 0,
+      "theme": "hoops"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "rtl",
+      "safe": 0,
+      "theme": "alpine"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "rtl",
+      "safe": 24,
+      "theme": "soccer"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "rtl",
+      "safe": 24,
+      "theme": "hoops"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "rtl",
+      "safe": 24,
+      "theme": "alpine"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "ltr",
+      "safe": 0,
+      "theme": "soccer"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "ltr",
+      "safe": 0,
+      "theme": "hoops"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "ltr",
+      "safe": 0,
+      "theme": "alpine"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "ltr",
+      "safe": 24,
+      "theme": "soccer"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "ltr",
+      "safe": 24,
+      "theme": "hoops"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dir": "ltr",
+      "safe": 24,
+      "theme": "alpine"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "rtl",
+      "safe": 0,
+      "theme": "soccer"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "rtl",
+      "safe": 0,
+      "theme": "hoops"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "rtl",
+      "safe": 0,
+      "theme": "alpine"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "rtl",
+      "safe": 24,
+      "theme": "soccer"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "rtl",
+      "safe": 24,
+      "theme": "hoops"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "rtl",
+      "safe": 24,
+      "theme": "alpine"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "ltr",
+      "safe": 0,
+      "theme": "soccer"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "ltr",
+      "safe": 0,
+      "theme": "hoops"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "ltr",
+      "safe": 0,
+      "theme": "alpine"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "ltr",
+      "safe": 24,
+      "theme": "soccer"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "ltr",
+      "safe": 24,
+      "theme": "hoops"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dir": "ltr",
+      "safe": 24,
+      "theme": "alpine"
+    }
+  ],
+  "checks": [
+    "1000 identical updates produce zero DOM mutations",
+    "label/icon swap preserves action target",
+    "reduced motion removes press transitions",
+    "zero shot clock remains visible",
+    "missing shot clock is hidden",
+    "disable cancels held action",
+    "native click activates once",
+    "destroy is idempotent and listeners are removed",
+    "keyboard diagonal normalized without RTL mirroring",
+    "blur releases stick",
+    "loss has appropriate heading",
+    "stars clamp to three",
+    "incomplete has appropriate heading",
+    "actionButton instances have independent lifetimes",
+    "actionButton updates after destroy are inert",
+    "eventBanner instances have independent lifetimes",
+    "eventBanner updates after destroy are inert",
+    "joystick instances have independent lifetimes",
+    "joystick updates after destroy are inert",
+    "pauseButton instances have independent lifetimes",
+    "pauseButton updates after destroy are inert",
+    "pausePanel instances have independent lifetimes",
+    "pausePanel updates after destroy are inert",
+    "powerMeter instances have independent lifetimes",
+    "powerMeter updates after destroy are inert",
+    "resultScreen instances have independent lifetimes",
+    "resultScreen updates after destroy are inert",
+    "scoreboard instances have independent lifetimes",
+    "scoreboard updates after destroy are inert",
+    "speedMeter instances have independent lifetimes",
+    "speedMeter updates after destroy are inert",
+    "real pointer drag and pointercancel release stick/action",
+    "modal traps focus and restores pause button",
+    "no external network requests or browser errors"
+  ],
+  "browser": "156.0.8078.74",
+  "passed": true
+}
