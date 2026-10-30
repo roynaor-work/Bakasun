@@ -52,11 +52,14 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   const s={role,league:ladder?.leagues?ladder:null,campaign:config.campaign,campaignStats:createCampaignStats(),bufferedAction:null,selectionTime:0,switchCooldown:0,actionAim:null,phase:'playing',half:1,halfElapsed:0,elapsed:0,phaseTime:0,score:[0,0],stage:leagueStage,seed,difficulty,mode:'attack',aim:{x:1,z:0},sprint:{value:config.sprint.capacity*effects.capacity,capacity:config.sprint.capacity*effects.capacity,active:false,locked:false,regenDelay:0},attackDir:1,controlled:0,players,ball:{x:0,z:0,y:ph.ballRadius,vx:0,vz:0,vy:0,curve:0,owner:0,lastTeam:0,lastPlayer:0,grace:0},charge:0,charging:false,chargeKind:null,idle:0,defenseIdle:0,autoSwitchCandidate:null,passTarget:null,restart:null,event:null,eventId:0,result:null};
   let events=[],rivalPasses=0,nextRivalShot=0,nextHomeShot=0;
   const before={valid:false,players:[],ball:[0,0,0]};
+  const shown={players:[],ball:{},state:{}};
   function remember(){const P=before.players;for(let i=0;i<s.players.length;i++){const p=s.players[i],b=P[i]||(P[i]=[0,0,0,0]);b[0]=p.x;b[1]=p.z;b[2]=p.fx;b[3]=p.fz;}P.length=s.players.length;before.ball[0]=s.ball.x;before.ball[1]=s.ball.y;before.ball[2]=s.ball.z;before.valid=true;}
-  let accumulator=0,held=false,previousSwitch=false,pendingSwitch=false,previousKick=false,pendingRelease=false,previousPass=false,pendingPass=false,pendingSlide=false,pendingKick=false,previousPassHeld=false,pendingPassStart=false,pendingPassRelease=false;
+  let tickCount=0,accumulator=0,held=false,previousSwitch=false,pendingSwitch=false,previousKick=false,pendingRelease=false,previousPass=false,pendingPass=false,pendingSlide=false,pendingKick=false,previousPassHeld=false,pendingPassStart=false,pendingPassRelease=false;
   function event(type,extra={}) { s.event={id:++s.eventId,type,...extra};recordCampaignEvent(s.campaignStats,s.event,s);events.push(s.event);if(events.length>256)events.shift(); }
   function direction(teamId) { return s.attackDir*(teamId===0?1:-1); }
-  function personal(p){return cardEffects({attributes:{power:p.card.shot,pace:p.card.pace,accuracy:p.card.pass,defense:p.card.defense}},config);}
+  // Card effects never change inside a match: one object per card instead of two allocations per call per tick.
+  const personalCache=new Map();
+  function personal(p){let e=personalCache.get(p.card);if(!e){e=cardEffects({attributes:{power:p.card.shot,pace:p.card.pace,accuracy:p.card.pass,defense:p.card.defense}},config);personalCache.set(p.card,e);}return e;}
   function positionKickoff(teamId=0) {
     rivalPasses=0;
     for (const p of players) {
@@ -144,8 +147,15 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     s.passTarget={player:mate.id,x:tx,z,startX:s.ball.x,startZ:s.ball.z,distance:len,time:config.passing.runSeconds,kind:'loft'};
     event('loft',{team:p.team,player:p.id,target:mate.id,x:tx,z,distance:len,power});
   }
-  function move(p,dx,dz,dt,multiplier=1) {const pm=p.role==='keeper'&&config.players.keeperMotion?{...config.players,...config.players.keeperMotion}:config.players;
-    const length=Math.hypot(dx,dz),reference=Math.max(...players.filter(q=>q.team===0).map(q=>(config.players.speed+(q.speed-1)*config.players.speedPerRank)*personal(q).pace)),speed=p.team===0?(config.players.speed+(p.speed-1)*config.players.speedPerRank)*multiplier*personal(p).pace:Math.max(opponent.speed*multiplier*personal(p).pace,reference*config.opponents.minSpeedRatio*attack.speed);
+  const keeperMotion=config.players.keeperMotion?{...config.players,...config.players.keeperMotion}:config.players;
+  let referenceTick=-1,referenceSpeed=0;
+  function teamReference(){
+    if(referenceTick===tickCount)return referenceSpeed;referenceTick=tickCount;let best=-Infinity;
+    for(const q of players)if(q.team===0){const v=(config.players.speed+(q.speed-1)*config.players.speedPerRank)*personal(q).pace;if(v>best)best=v;}
+    return referenceSpeed=best;
+  }
+  function move(p,dx,dz,dt,multiplier=1) {const pm=p.role==='keeper'?keeperMotion:config.players;
+    const length=Math.hypot(dx,dz),reference=teamReference(),speed=p.team===0?(config.players.speed+(p.speed-1)*config.players.speedPerRank)*multiplier*personal(p).pace:Math.max(opponent.speed*multiplier*personal(p).pace,reference*config.opponents.minSpeedRatio*attack.speed);
     const scale=length>1?1/length:1;
     // Turn the body toward intent before redirecting momentum. Reversals brake
     // first; low-speed changes remain responsive on the first fixed tick.
@@ -436,7 +446,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     }
   }
   function tick(input) {
-    if(s.result)return;
+    if(s.result)return;tickCount++;
     for(const p of players){p.cooldown=Math.max(0,p.cooldown-step);p.kickTime=Math.max(0,p.kickTime-step);p.stealTime=Math.max(0,p.stealTime-step);p.headerTime=Math.max(0,p.headerTime-step);p.diveTime=Math.max(0,p.diveTime-step);p.diveCooldown=Math.max(0,(p.diveCooldown||0)-step);p.throwTime=Math.max(0,p.throwTime-step);p.catchTime=Math.max(0,p.catchTime-step);p.think-=step;p.slideCooldown=Math.max(0,p.slideCooldown-step);p.stealCooldown=Math.max(0,p.stealCooldown-step);p.recover=Math.max(0,p.recover-step);}
     if(s.restart&&s.phase.startsWith('restart')){s.restart.elapsed+=step;moveRestart(input);if(s.phase==='restartReady'){readyRestart(input);return;}}
     if(s.phase!=='playing') {
@@ -542,9 +552,11 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     renderState(){
       if(!before.valid)return s;
       const a=Math.min(1,Math.max(0,accumulator/step)),lerp=(x,y)=>x+(y-x)*a;
-      const players=s.players.map((p,i)=>{const b=before.players[i];if(!b||Math.hypot(p.x-b[0],p.z-b[1])>1.5)return p;const fx=lerp(b[2],p.fx),fz=lerp(b[3],p.fz),l=Math.hypot(fx,fz)||1;return {...p,x:lerp(b[0],p.x),z:lerp(b[1],p.z),fx:fx/l,fz:fz/l};});
-      const B=before.ball,ball=Math.hypot(s.ball.x-B[0],s.ball.z-B[2])>3?s.ball:{...s.ball,x:lerp(B[0],s.ball.x),y:lerp(B[1],s.ball.y),z:lerp(B[2],s.ball.z)};
-      return {...s,players,ball};
+      // The copy is reused between frames (no per-frame garbage); it is overwritten in full on every call.
+      const players=shown.players;players.length=s.players.length;
+      for(let i=0;i<s.players.length;i++){const p=s.players[i],b=before.players[i],copy=Object.assign(players[i]||(players[i]={}),p);if(!b||Math.hypot(p.x-b[0],p.z-b[1])>1.5)continue;const fx=lerp(b[2],p.fx),fz=lerp(b[3],p.fz),l=Math.hypot(fx,fz)||1;copy.x=lerp(b[0],p.x);copy.z=lerp(b[1],p.z);copy.fx=fx/l;copy.fz=fz/l;}
+      const B=before.ball,ball=Object.assign(shown.ball,s.ball);if(!(Math.hypot(s.ball.x-B[0],s.ball.z-B[2])>3)){ball.x=lerp(B[0],s.ball.x);ball.y=lerp(B[1],s.ball.y);ball.z=lerp(B[2],s.ball.z);}
+      const out=Object.assign(shown.state,s);out.players=players;out.ball=ball;return out;
     },
     drainEvents(){const pending=events;events=[];return pending;},
     getState:()=>s,

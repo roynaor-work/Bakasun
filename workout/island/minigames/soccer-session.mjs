@@ -62,7 +62,7 @@ export function startSoccer(ctx) {
   function dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);events.abort();buttonInput?.reset();audio.dispose({finish:Boolean(model.result&&!context.drill)});input?.dispose();model.clearInput();view?.dispose();if(canvas)canvas.width=canvas.height=0;}
   function setPaused(value){paused=Boolean(value);audio.setPaused(paused);pendingSwap=false;last=0;buttonInput?.reset();input?.setEnabled(!paused&&(typeof document==='undefined'||!document.hidden));model.clearInput();if(!paused)canvas?.focus();}
   const session={dispose,setPaused,get snapshot(){return {...model.snapshot(),team,opponent,paused,disposed,audio:audio.snapshot,renderMetrics:view?.metrics()};}};
-  if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
+  if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
   const styleURL=new URL('./g3h-soccer.css?v=island-soccer-league-20261029-1',import.meta.url).href;
@@ -134,7 +134,7 @@ export function startSoccer(ctx) {
     function tick(at){
       if(disposed)return;
       const dt=last?Math.min((at-last)/1000,balance.rules.maxUpdateSeconds):0,frameMs=last?at-last:0;last=at;
-      const loading=view.metrics().assetStatus==='loading';loader.hidden=!loading;
+      const loading=view.loading();loader.hidden=!loading; // metrics() builds a large report; the loop only needs this flag
       if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.play('whistle');}if(dt>0){const sample=buttonInput.sample(input.sample(model.getState().attackDir));if(pendingSwap)sample.switchPlayer=true;pendingSwap=false;model.update(dt,sample);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else view.render(model.renderState?.()??model.getState(),0);
       banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();

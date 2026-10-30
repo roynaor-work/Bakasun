@@ -1,3 +1,4 @@
+const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Mocap-driven animation layer for the realistic athlete rig.
  * Locomotion clips (jog/run/sprint) share one phase so the feet stay in step while
  * they blend by speed; one-shot actions (shot, pass, header, throw, reach, slide)
@@ -10,25 +11,25 @@ export const ATHLETE_CLIPS = ['idle', 'ready', 'jog', 'run', 'sprint', 'shot', '
 const LOCO = ['jog', 'run', 'sprint'];
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x)), smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
 /** Pure weight solver (unit-tested): speed in m/s -> locomotion and idle weights. */
-export function locomotionWeights(speed, sprinting, m) {
+export function locomotionWeights(speed, sprinting, m, out = {}) {
   const moving = smooth(m.idleSpeed, m.moveSpeed, speed);
   let jog = 1 - smooth(m.jogSpeed, m.runSpeed, speed), sprint = smooth(m.runSpeed, m.sprintSpeed, speed);
   if (sprinting) sprint = Math.max(sprint, smooth(m.idleSpeed, m.runSpeed, speed));
   const run = Math.max(0, 1 - jog - sprint), sum = jog + run + sprint || 1;
-  return {still: 1 - moving, jog: moving * jog / sum, run: moving * run / sum, sprint: moving * sprint / sum};
+  out.still = 1 - moving; out.jog = moving * jog / sum; out.run = moving * run / sum; out.sprint = moving * sprint / sum; return out;
 }
 /** Phase rate (cycles per second) that keeps planted feet under the body, capped so
  * very fast arcade speeds do not turn into a blur of steps. */
 export function strideRate(speed, weights, clips, m) { return strideWarp(speed, weights, clips, m).rate; }
 /** Faster than the clip: share the difference between cadence and a longer stride (the
  * leg IK lengthens the step by `warp` along the facing), like stride warping in sports games. */
-export function strideWarp(speed, weights, clips, m) {
+export function strideWarp(speed, weights, clips, m, out = {rate: 0, warp: 1}) {
   let stride = 0, period = 0, total = 0;
   for (const c of LOCO) { const w = weights[c]; if (w <= 0) continue; stride += w * clips[c].speed * clips[c].duration; period += w * clips[c].duration; total += w; }
-  if (!total) return {rate: 1 / clips.jog.duration, warp: 1};
+  if (!total) { out.rate = 1 / clips.jog.duration; out.warp = 1; return out; }
   stride /= total; period /= total;
   const ratio = speed / stride * period, warp = clamp(Math.pow(Math.max(1, ratio), m.strideShare ?? 0), 1, m.maxStride ?? 1);
-  return {rate: clamp(speed / stride / warp, m.minRate / period, m.maxRate / period), warp};
+  out.rate = clamp(speed / stride / warp, m.minRate / period, m.maxRate / period); out.warp = warp; return out;
 }
 export function createAthleteMotion(T, mixer, clips, m) {
   const actions = {}, weights = {}, info = {};
@@ -49,20 +50,22 @@ export function createAthleteMotion(T, mixer, clips, m) {
   mixer.getRoot().traverse(o => { if (o.isBone) pose.push({bone: o, q: o.quaternion.clone(), p: o.position.clone()}); });
   let poseSaved = false;
   let phase = 0, shot = null, lastKick = 0, lastSteal = 0, lastHeader = 0, lastThrow = 0, lastDive = 0, shotIndex = 0;
+  // Reused every frame: the blend targets and the returned summary (no per-player garbage).
+  const target = Object.fromEntries(Object.keys(actions).map(k => [k, 0])), names = Object.keys(actions), result = {speed: 0, phase: 0, rate: 0, warp: 1, oneShot: null}, locoOut = {still: 0, jog: 0, run: 0, sprint: 0}, cadenceOut = {rate: 0, warp: 1};
   const start = (name, at, rate, weight = 1, fadeIn = m.fadeIn) => { const a = actions[name]; if (!a) return; a.reset(); a.time = clamp(at, 0, info[name].duration); a.timeScale = rate; a.play(); shot = {name, weight, rate, fadeIn}; };
   return {
     actions, weights,
     get oneShot() { return shot?.name || null; },
     /** p: simulated player, s: state, mode: playerAnimation mode, dt: animation seconds. */
     update(p, s, mode, dt, options = {}) {
-      const speed = Math.hypot(p.vx, p.vz), sprinting = p.id === s.controlled ? s.sprint?.active : p.sprinting;
+      const speed = hypot2(p.vx, p.vz), sprinting = p.id === s.controlled ? s.sprint?.active : p.sprinting;
       // --- one-shot triggers (edge detected on the simulation timers) ---
       // Throws and keeper releases also start a kick timer, so they are matched first.
       if (p.throwTime > lastThrow + 1e-6) start('throw', m.throwStart, m.throwRate);
       else if (p.headerTime > lastHeader + 1e-6) start('header', m.headerTakeoff, info.header.duration / Math.max(0.3, p.headerTime + 0.55));
       else if (p.diveTime > lastDive + 1e-6) start('reach', m.reachStart, 1.25);
       else if (p.kickTime > lastKick + 1e-6 && p.throwTime <= 0) {
-        const ball = Math.hypot(s.ball.vx, s.ball.vz), power = (s.ball.shot?.shooter === p.id && ball > m.shotBallSpeed * 0.6) || (s.ball.lastPlayer === p.id && ball > m.shotBallSpeed);
+        const ball = hypot2(s.ball.vx, s.ball.vz), power = (s.ball.shot?.shooter === p.id && ball > m.shotBallSpeed * 0.6) || (s.ball.lastPlayer === p.id && ball > m.shotBallSpeed);
         const name = power ? (shotIndex++ % 2 ? 'shot-b' : 'shot') : 'pass';
         start(name, info[name].contact - m.contactLead, power ? 1.1 : 1.2, 1, m.kickFadeIn);
       } else if (p.stealTime > lastSteal + 1e-6) start('pass', info.pass.contact - 0.14, 1.5, 0.85);
@@ -73,14 +76,14 @@ export function createAthleteMotion(T, mixer, clips, m) {
       if (shot && shot.name === 'throw' && p.throwTime <= 0 && actions.throw.time > m.throwStart + 0.75) shot = null;
       if (shot && shot.name === 'reach' && p.diveTime <= 0 && p.catchTime <= 0 && !p.hands) shot = null;
       // --- targets ---
-      const target = Object.fromEntries(Object.keys(actions).map(k => [k, 0]));
+      for (const k of names) target[k] = 0;
       let top = 0;
       if (mode === 'celebrate') { target.celebrate = 1; top = 1; }
       else if (mode === 'slide' || mode === 'recover') { target.sit = options.slide ?? 1; top = target.sit; }
       if (shot && !top) { target[shot.name] = shot.weight; top = shot.weight; }
       // Charging a kick: hold the back-swing of the coming pass/shot over the run.
       if (!top && options.charge > 0) { const name = options.chargeKind === 'pass' ? 'pass' : 'shot', a = actions[name]; a.timeScale = 0; a.time = info[name].contact * (0.35 + 0.5 * options.charge); target[name] = 0.3 + 0.55 * options.charge; top = target[name]; }
-      const loco = locomotionWeights(speed, sprinting, m), base = 1 - top;
+      const loco = locomotionWeights(speed, sprinting, m, locoOut), base = 1 - top;
       const ready = (p.role === 'keeper' || options.marking) && speed < m.runSpeed ? 1 : 0;
       target.idle = loco.still * base * (1 - ready); target.ready = loco.still * base * ready;
       for (const c of LOCO) target[c] = loco[c] * base;
@@ -89,11 +92,11 @@ export function createAthleteMotion(T, mixer, clips, m) {
       if (turnStep > 0) { target.jog += turnStep * base; target.idle *= 1 - turnStep; target.ready *= 1 - turnStep; }
       if (p.hands && speed <= m.idleSpeed) { target.idle = base; target.ready = 0; }
       // --- shared phase for locomotion ---
-      const cadence = strideWarp(Math.max(speed, m.idleSpeed), loco, info, m), rate = Math.max(cadence.rate, turnStep > 0 ? m.turnStepRate * Math.min(1, turnStep * 4) : 0);
+      const cadence = strideWarp(Math.max(speed, m.idleSpeed), loco, info, m, cadenceOut), rate = Math.max(cadence.rate, turnStep > 0 ? m.turnStepRate * Math.min(1, turnStep * 4) : 0);
       phase = (phase + dt * rate) % 1;
       for (const c of LOCO) actions[c].time = phase * info[c].duration;
       // --- smooth weights ---
-      for (const k of Object.keys(actions)) {
+      for (const k of names) {
         const tau = target[k] > weights[k] ? (shot?.name === k ? shot.fadeIn : m.fadeIn) : m.fadeOut, w = weights[k] + (target[k] - weights[k]) * (1 - Math.exp(-dt / tau));
         weights[k] = w < 1e-3 && target[k] === 0 ? 0 : w;
         actions[k].setEffectiveWeight(weights[k]);
@@ -102,7 +105,8 @@ export function createAthleteMotion(T, mixer, clips, m) {
       mixer.update(dt);
       for (const b of pose) { b.q.copy(b.bone.quaternion); b.p.copy(b.bone.position); }
       poseSaved = true;
-      return {speed, phase, rate, warp: cadence.warp * (1 - loco.still), oneShot: shot?.name || null};
+      result.speed = speed; result.phase = phase; result.rate = rate; result.warp = cadence.warp * (1 - loco.still); result.oneShot = shot?.name || null;
+      return result;
     },
   };
 }
@@ -113,24 +117,25 @@ const _q = [], _v = [];
 export function athleteLook(T, character, point, dt, m) {
   const head = character.bones.Head?.bone, neck = character.root.getObjectByName('Neck1');
   if (!head || !neck) return;
-  if (!_q.length) _q.push(new T.Quaternion(), new T.Quaternion(), new T.Quaternion()), _v.push(new T.Vector3(), new T.Vector3(), new T.Vector3());
-  const [qa, qb, qc] = _q, [eye, dir, fwd] = _v;
+  if (!_q.length) _q.push(new T.Quaternion(), new T.Quaternion(), new T.Quaternion(), new T.Quaternion()), _v.push(new T.Vector3(), new T.Vector3(), new T.Vector3());
+  const qa = _q[0], qb = _q[1], qc = _q[2], qd = _q[3], eye = _v[0], dir = _v[1], fwd = _v[2];
   character.pivot.updateMatrixWorld(true);
   head.getWorldPosition(eye); dir.set(point.x - eye.x, (point.y ?? 0) - eye.y, point.z - eye.z);
-  const yaw0 = character.yaw ?? 0, flat = Math.hypot(dir.x, dir.z) || 1;
+  const yaw0 = character.yaw ?? 0, flat = hypot2(dir.x, dir.z) || 1;
   let yaw = Math.atan2(dir.x, dir.z) - yaw0; yaw = Math.atan2(Math.sin(yaw), Math.cos(yaw));
   const pitch = Math.atan2(-dir.y, flat) - m.lookRestPitch;
   const want = {yaw: Math.abs(yaw) > m.lookMaxYaw * 1.6 ? 0 : clamp(yaw, -m.lookMaxYaw, m.lookMaxYaw), pitch: clamp(pitch, -m.lookMaxPitch, m.lookMaxPitch)};
   const look = character.look ||= {yaw: 0, pitch: 0}, k = 1 - Math.exp(-dt / m.lookEase);
   look.yaw += (want.yaw - look.yaw) * k; look.pitch += (want.pitch - look.pitch) * k;
   const weight = character.lookWeight ?? 1;
-  for (const [bone, share] of [[neck, 0.4], [head, 0.6]]) {
+  for (let i = 0; i < 2; i++) {
+    const bone = i ? head : neck, share = i ? 0.6 : 0.4;
     // world-space yaw about +Y and pitch about the body's side axis, converted into the bone's parent frame
     fwd.set(Math.cos(yaw0), 0, -Math.sin(yaw0));
     qa.setFromAxisAngle(fwd, look.pitch * share * weight); qb.setFromAxisAngle(_v[1].set(0, 1, 0), look.yaw * share * weight); qa.premultiply(qb);
     bone.parent.getWorldQuaternion(qc);
-    const local = qc.clone().invert().multiply(qa).multiply(qc);
-    bone.quaternion.premultiply(local);
+    qd.copy(qc).invert().multiply(qa).multiply(qc);
+    bone.quaternion.premultiply(qd);
     bone.updateMatrixWorld(true);
   }
 }
