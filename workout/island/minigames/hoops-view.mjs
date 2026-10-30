@@ -61,7 +61,24 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const focusX=clamp(b.x*V.followX+lead,-court.hx+V.edgeX,court.hx-V.edgeX);
   const k=state.snap?1:1-Math.exp(-dt*V.followRate);
   state.camX=lerp(state.camX,focusX,k);state.camZ=lerp(state.camZ,clamp(b.z*(V.followZ??0.2),-(V.maxZ??2),V.maxZ??2),k);
-  if(state.landscape&&(V.mode||'behind')==='behind'){
+  if(state.landscape&&(V.mode||'broadcast')==='broadcast'){
+   // TV sideline camera that never turns: right on the screen is always the same way on the
+   // court, so running back on defence feels the same as attacking. Closer than a wide shot,
+   // following the ball with a lead towards the basket being attacked.
+   const h=s.players.find(p=>p.hasBall),fx=h?h.x:b.x,fz=h?h.z:b.z,side=attack||0;
+   const lead2=side?clamp((side*court.rimX-fx)*(V.bLead??0.35),-(V.bLeadMax??4),V.bLeadMax??4):0;
+   const tx=clamp(fx+lead2,-court.hx+(V.bEdge??5),court.hx-(V.bEdge??5));
+   const kb=state.snap||state.bcX==null?1:1-Math.exp(-dt*(V.bRate??2.4));
+   state.bcX=state.bcX==null?tx:lerp(state.bcX,tx,kb);state.bcZ=lerp(state.bcZ??0,clamp(fz,-court.hz,court.hz),kb);
+   state.punch=Math.max(0,(state.punch||0)-dt/1.6);const pb=state.punch;
+   // fixed spot above the near sideline; the lens zooms so the players keep the same size
+   // wherever the ball is (near or far side), like a TV camera operator
+   const cz=-(court.hz+(V.bDist??7)),cy=V.bHeight??7,lz=clamp(state.bcZ*(V.bFollowZ??0.75)+(V.bLookZ??0),-court.hz+(V.bNearZ??3),court.hz-1);
+   const dist=Math.hypot(lz-cz,cy-(V.bLookY??1)),span=(V.bSpan??8)*(1-0.25*pb);
+   camera.fov=clamp(2*Math.atan(span/2/dist)*180/Math.PI,V.bFovMin??16,V.bFovMax??40);
+   camera.position.set(state.bcX,cy,cz);
+   camera.lookAt(state.bcX,V.bLookY??1,lz);
+  } else if(state.landscape&&V.mode==='behind'){
    // behind the play (2K / NBA Live mobile style): low behind the ball, facing the basket the
    // team with the ball attacks; it swings round smoothly when the ball changes hands
    const h=s.players.find(p=>p.hasBall),fx=h?h.x:b.x,fz=h?h.z:b.z;

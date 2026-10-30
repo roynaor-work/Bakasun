@@ -505,6 +505,20 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   if(d<=C.jump.queueReach&&(b.state==='loose'||b.vy<0)){p.jumpQueue=null;humanJump(p,'rebound');}
  }
 
+ /** Defence help for the child: with the stick released his player guards his man (between the
+  * man and the basket, closer on the ball), sprinting back in transition; while he steers, the
+  * player keeps facing the ball handler so he slides instead of turning his back. */
+ function defendAssist(p,ml){
+  const h=holder();if(!h)return;
+  if(ml>=0.05){if(dist(p,h)<7)p.intent.face=Math.atan2(h.x-p.x,h.z-p.z);return;}
+  const T=team(p.team),o=byId(T.ai?.assign?.[p.id])||h,rim=court.rim(side(o.team));
+  const onBall=o.id===h.id,gap=onBall?C.player.assistGapBall??1.0:C.player.assistGapOff??1.8;
+  const k=Math.min(gap/Math.max(0.6,dist(o,rim)),0.85),pt={x:o.x+(rim.x-o.x)*k,z:o.z+(rim.z-o.z)*k};
+  const dx=pt.x-p.x,dz=pt.z-p.z,d=hyp(dx,dz);
+  if(d>0.25){p.intent.x=dx/d;p.intent.z=dz/d;p.intent.speed=clamp(d/1.2,0.3,1);p.intent.sprint=d>3;}
+  p.intent.face=Math.atan2(h.x-p.x,h.z-p.z);
+ }
+
  function humanInput(p,inp){
   const m=inp.move||{x:0,z:0},ml=hyp(m.x,m.z);
   p.intent.x=ml>0.05?m.x/Math.max(1,ml):0;p.intent.z=ml>0.05?m.z/Math.max(1,ml):0;p.intent.speed=Math.min(1,ml);
@@ -525,6 +539,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    if(inp.shootDown)humanJump(p,'rebound');
   }
   if(p.jumpQueue)followJumpQueue(p,ml);
+  if(!hasBall&&S.ball.state==='held'&&S.possession!==p.team&&C.player.defenseAssist)defendAssist(p,ml);
   if(p.act==='shoot'&&p.shot&&p.shot.held&&inp.shootUp)gradeRelease(p);
   if((inp.switchPress||inp.altPress)&&!hasBall){
    const list=onCourt(p.team).filter(q=>q!==p).sort((a,b)=>dist(a,S.ball)-dist(b,S.ball));

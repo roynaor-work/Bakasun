@@ -143,3 +143,20 @@ test('defence: when the other team gets the ball the child takes the nearest def
  e.debug.give(mine[1].id);s.controlled=mine[0].id;e.debug.give(opp.id);
  assert.equal(s.controlled,mine[3].id);
 });
+
+test('defence: with the stick idle the child\'s defender runs back between his man and the rim',()=>{
+ assert.equal(cfg.player.defenseAssist,true);
+ const e=live(81),s=S(e),opp=api(e).onCourt(1),mine=api(e).onCourt(0);
+ const h=opp[0];e.debug.give(h.id);
+ const me=mine[0];s.controlled=me.id;if(s.teams[0].ai?.assign)s.teams[0].ai.assign[me.id]=h.id;
+ const rim=e.court.rim(api(e).side(1));
+ e.debug.place(h.id,rim.x-api(e).side(1)*7,0);e.debug.place(me.id,-rim.x*0.6,5);
+ const gap0=()=>{const k=Math.min(cfg.player.assistGapBall/Math.max(0.6,api(e).dist(h,rim)),0.85);return {x:h.x+(rim.x-h.x)*k,z:h.z+(rim.z-h.z)*k};};
+ const d0=Math.hypot(me.x-gap0().x,me.z-gap0().z);
+ for(let i=0;i<90;i++){h.vx=h.vz=0;e.step(NO_INPUT);if(s.ball.state!=='held'||s.possession!==1)break;}
+ const d1=Math.hypot(me.x-gap0().x,me.z-gap0().z);
+ assert.ok(d1<d0-3,`ran back towards the guarding spot: ${d0.toFixed(1)} -> ${d1.toFixed(1)}`);
+ // the stick still wins: pushing away moves him away
+ for(let i=0;i<60;i++)e.step(IN({move:{x:-Math.sign(rim.x),z:0}}));
+ assert.ok(Math.sign(rim.x)*me.vx<0,'the stick overrides the assist');
+});
