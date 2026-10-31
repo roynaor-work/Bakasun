@@ -75,3 +75,55 @@ test('sprint: exhausted requests grant no boost, and a held button at rest does 
  const t=setup(),p=t.mine[0];t.e.debug.place(p.id,0,0);p.energy=.4;const start=p.energy;ticks(t.e,60,input({sprint:true}));
  assert.equal(p.sprinting,false);assert.ok(p.energy>=start,'standing still recovers rather than paying a sprint multiplier');
 });
+
+function attack(seed=719,{timed=false,range=1.35}={}){
+ const t=setup({seed,steal:{base:0,foulBase:0}}),{e,s,mine,theirs,config}=t,p=mine[0],d=theirs[0];config.player.defenseAssist=false;
+ e.debug.place(p.id,0,0);p.face=0;p.r.handle=90;p.r.release=100;e.debug.give(p.id);s.controlled=p.id;
+ e.debug.place(d.id,0,range);d.r.perimD=90;d.act=timed?'steal':null;d.actT=timed?config.steal.reachAt:0;d.act2=null;e.drainEvents();return {...t,p,d};
+}
+test('attack: tap move and held move request explicit crossover and spin with cost and cooldown',()=>{
+ const cross=attack(811,{range:5}),spin=attack(811,{range:5});
+ const cx=ticks(cross.e,1,input({movePress:true})),sp=ticks(spin.e,1,input({spinPress:true}));
+ assert.equal(cross.p.act,'cross');assert.equal(spin.p.act,'spin');assert.ok(cx.some(e=>e.type==='move'&&e.kind==='cross'));assert.ok(sp.some(e=>e.type==='move'&&e.kind==='spin'));
+ assert.ok(cross.p.energy<.99);assert.ok(spin.p.energy<cross.p.energy);assert.ok(cross.p.cd.move>1);
+ const elapsed=cross.p.actT;ticks(cross.e,1,input({movePress:true}));assert.ok(cross.p.actT>elapsed,'repeat input does not restart the clip or resolution');
+ const tail=ticks(cross.e,40);assert.ok(tail.some(e=>e.type==='moveResult'&&e.reason==='space'));assert.equal(cross.p.act,null);assert.equal(cross.e.debug.api.startMove(cross.p,'spin'),false,'cooldown outlasts the move');
+});
+test('attack: timing a crossover against a committed reach beats more defenders than an uncommitted guard',()=>{
+ let good=0,late=0,goodFailures=0;
+ for(let seed=900;seed<964;seed++)for(const timed of [false,true]){
+  const t=attack(seed,{timed});const events=[...ticks(t.e,1,input({movePress:true})),...ticks(t.e,16)];
+  const result=events.filter(e=>e.type==='moveResult');assert.equal(result.length,1,'one resolution per move');
+  assert.equal(result[0].timed,timed);
+  if(result[0].success){if(timed)good++;else late++;assert.ok(t.d.stumble>0,'successful move slows the committed guard');}
+  else if(timed)goodFailures++;
+ }
+ assert.ok(good>late+8,`good timing ${good}, uncommitted guard ${late}`);assert.ok(goodFailures>0&&good>0,'timing improves the odds without guaranteeing success');
+});
+test('attack: a shot fake can draw a close defender into a jump, but never releases or scores the ball',()=>{
+ let baited=0;
+ for(let seed=1000;seed<1032;seed++){
+  const t=attack(seed,{range:1.4}),{p,d,e}=t;d.r.perimD=0;d.vz=-3;const owner=e.snapshot().ball.owner;
+  const events=[...ticks(e,1,input({fakePress:true})),...ticks(e,12)];
+  const result=events.find(x=>x.type==='fakeResult');assert.ok(result);if(result.success){baited++;assert.ok(d.air>=0);}
+  assert.equal(p.act,'fake');assert.equal(e.snapshot().ball.owner,owner);assert.equal(e.snapshot().ball.state,'held');assert.equal(e.snapshot().players.find(x=>x.id===p.id).shotHeld,false);
+  assert.equal(p.stats.fga,0);assert.ok(!events.some(x=>x.type==='release'||x.type==='score'));assert.ok(p.energy<.998);
+  assert.equal(e.debug.api.startFake(p),false,'fake cannot be spammed while it is active');
+ }
+ assert.ok(baited>0&&baited<32,'a fake is a risk, rather than a guaranteed defender jump');
+ const far=attack(1001,{range:5}),events=[...ticks(far.e,1,input({fakePress:true})),...ticks(far.e,12)];
+ assert.equal(events.find(e=>e.type==='fakeResult').success,false);assert.equal(far.d.air,-1);
+});
+test('attack: cancelling a consumed shot charge keeps possession without releasing the shot',()=>{
+ const t=setup(),{e,s,a,mine}=t,p=mine[0],side=a.side(0),rim=e.court.rim(side);e.debug.place(p.id,rim.x-side*6,0);s.controlled=p.id;
+ ticks(e,1,input({shootDown:true}));assert.equal(p.shot?.held,true);ticks(e,10);
+ const events=[...ticks(e,1,input({shootCancel:true,shootUp:true})),...ticks(e,70)];
+ assert.ok(events.some(e=>e.type==='shotCancel'));assert.equal(p.act,null);assert.equal(p.stats.fga,0);assert.equal(e.snapshot().ball.owner,p.id);assert.ok(!events.some(e=>e.type==='release'));
+});
+test('attack: new action inputs preserve deterministic replay for the same seed',()=>{
+ const one=attack(1171),two=attack(1171);
+ for(let i=0;i<210;i++){
+  const inp=input({move:{x:Math.sin(i/45)*.45,z:0},sprint:i%50<20,movePress:i===0||i===125,spinPress:i===80,fakePress:i===180});
+  one.e.step(inp);two.e.step(inp);assert.deepEqual(one.e.snapshot(),two.e.snapshot());assert.deepEqual(one.e.drainEvents(),two.e.drainEvents());
+ }
+});
