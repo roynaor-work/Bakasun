@@ -122,4 +122,3 @@ try{
  }
  report.passed=true;await writeFile(path.join(out,'verification.json'),JSON.stringify(report,null,2));console.log('hoops v2 browser: all requested viewports passed');
 }finally{try{await browser.close();}finally{await server.close();}}
-

@@ -1,0 +1,198 @@
+[
+  {
+    "width": 844,
+    "height": 390,
+    "errors": [],
+    "audio": {
+      "context": "suspended",
+      "buffers": 14,
+      "active": 0,
+      "events": 0,
+      "bed": null,
+      "played": {
+        "ambience": 1,
+        "opening": 1,
+        "whistle": 1,
+        "bounce": 17,
+        "shoes": 8,
+        "pass": 3,
+        "swish": 1,
+        "crowd": 1
+      },
+      "muted": false,
+      "paused": true,
+      "disposed": false,
+      "mix": true,
+      "duckGain": 1,
+      "scheduled": []
+    },
+    "perf": {
+      "seconds": 29.96,
+      "frames": 111,
+      "fps": 3.7,
+      "frameMs": {
+        "avg": 268.62,
+        "p50": 266.7,
+        "p95": 300,
+        "p99": 316.7,
+        "max": 550.1
+      },
+      "over33": 110,
+      "over50": 110,
+      "tickMs": {
+        "avg": 7.18,
+        "p50": 2.1,
+        "p95": 3.9,
+        "max": 550.4
+      },
+      "renderMs": {
+        "avg": 6.51,
+        "p95": 2.4
+      },
+      "allocMBps": 0.99,
+      "gcs": 16,
+      "longTasks": 1,
+      "longTaskMs": 551,
+      "replays": 1,
+      "viewport": {
+        "w": 844,
+        "h": 390,
+        "dpr": 1,
+        "landscape": true
+      },
+      "render": {
+        "calls": 32,
+        "triangles": 27889,
+        "frameMs": 1.2,
+        "players": 10,
+        "avatars": 11,
+        "pending": 13,
+        "crowd": 858,
+        "quality": 2,
+        "textures": 20,
+        "geometries": 56,
+        "landscape": true,
+        "vfx": {
+          "sprites": 0,
+          "residentAtlases": 2,
+          "reducedMotion": false
+        },
+        "motion": [
+          "turn_left",
+          "turn_right",
+          "run",
+          "run",
+          "run",
+          "run",
+          "turn_left",
+          "run",
+          "run",
+          "run"
+        ]
+      },
+      "steps": 634,
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "quality": 2,
+      "profile": "quick",
+      "loadMs": 4553
+    }
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "errors": [],
+    "audio": {
+      "context": "suspended",
+      "buffers": 14,
+      "active": 0,
+      "events": 0,
+      "bed": null,
+      "played": {
+        "ambience": 1,
+        "opening": 1,
+        "whistle": 1,
+        "bounce": 19,
+        "shoes": 12,
+        "pass": 4,
+        "swish": 1,
+        "crowd": 1
+      },
+      "muted": false,
+      "paused": true,
+      "disposed": false,
+      "mix": true,
+      "duckGain": 1,
+      "scheduled": []
+    },
+    "perf": {
+      "seconds": 29.84,
+      "frames": 130,
+      "fps": 4.36,
+      "frameMs": {
+        "avg": 228.59,
+        "p50": 233.3,
+        "p95": 266.6,
+        "p99": 400,
+        "max": 583.4
+      },
+      "over33": 128,
+      "over50": 128,
+      "tickMs": {
+        "avg": 10.22,
+        "p50": 2.2,
+        "p95": 3.9,
+        "max": 588.8
+      },
+      "renderMs": {
+        "avg": 9.55,
+        "p95": 2.5
+      },
+      "allocMBps": 1.15,
+      "gcs": 15,
+      "longTasks": 2,
+      "longTaskMs": 1040,
+      "replays": 1,
+      "viewport": {
+        "w": 390,
+        "h": 844,
+        "dpr": 1,
+        "landscape": false
+      },
+      "render": {
+        "calls": 44,
+        "triangles": 29619,
+        "frameMs": 1.6,
+        "players": 10,
+        "avatars": 11,
+        "pending": 13,
+        "crowd": 858,
+        "quality": 2,
+        "textures": 22,
+        "geometries": 60,
+        "landscape": false,
+        "vfx": {
+          "sprites": 0,
+          "residentAtlases": 2,
+          "reducedMotion": false
+        },
+        "motion": [
+          "run",
+          "run",
+          "turn_right",
+          "run",
+          "run",
+          "shoot",
+          "catch",
+          "run",
+          "idle",
+          "idle"
+        ]
+      },
+      "steps": 706,
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "quality": 2,
+      "profile": "quick",
+      "loadMs": 3032
+    }
+  }
+]
