@@ -29,6 +29,37 @@ export function soccerPitchUv(geometry,length,width){
   geometry.setAttribute('uv',new T.BufferAttribute(uv,2));return geometry;
 }
 
+/** Mobile-distance representation of the authored upper chairs. Each chair is
+ * still present: retain its exact top and field-facing pan/back faces. Omit
+ * undersides, outward faces and thin row ends; full quality keeps the source.
+ * This filters original faces, so there is no invented seat position or colour. */
+export function createSoccerStadiumSeatLod(source,{pitchLength=105,pitchWidth=68}={}){
+  soccerMetreScale(pitchLength,pitchWidth);
+  const position=source.getAttribute('position'),normal=source.getAttribute('normal');
+  if(!position||!normal)throw new TypeError('Soccer chair LOD needs source positions and normals');
+  const index=source.index,selected=[],vertices=new Map();
+  for(let first=0;first<(index?.count||position.count);first+=3){
+    const face=[0,1,2].map(offset=>index?index.getX(first+offset):first+offset);
+    let x=0,z=0,nx=0,ny=0,nz=0;
+    for(const vertex of face){x+=position.getX(vertex)/3;z+=position.getZ(vertex)/3;nx+=normal.getX(vertex)/3;ny+=normal.getY(vertex)/3;nz+=normal.getZ(vertex)/3;}
+    const sideBank=Math.abs(x)/pitchWidth>Math.abs(z)/pitchLength;
+    const fieldFacing=sideBank?nx*Math.sign(x)<-.5:nz*Math.sign(z)<-.5;
+    if(ny<=.5&&!fieldFacing)continue;
+    for(const vertex of face){if(!vertices.has(vertex))vertices.set(vertex,vertices.size);selected.push(vertices.get(vertex));}
+  }
+  if(!selected.length)throw new Error('Soccer chair LOD would remove every seat');
+  const result=new T.BufferGeometry();
+  for(const [name,input]of Object.entries(source.attributes)){
+    if(input.isInterleavedBufferAttribute)throw new TypeError('Soccer chair LOD expects decoded standalone attributes');
+    const array=new input.array.constructor(vertices.size*input.itemSize);
+    for(const [oldVertex,newVertex]of vertices)for(let axis=0;axis<input.itemSize;axis++)array[newVertex*input.itemSize+axis]=input.array[oldVertex*input.itemSize+axis];
+    result.setAttribute(name,new T.BufferAttribute(array,input.itemSize,input.normalized));
+  }
+  result.setIndex(selected);result.computeBoundingBox();result.computeBoundingSphere();
+  result.userData.soccerSeatLod={sourceTriangles:(index?.count||position.count)/3,triangles:selected.length/3,sourcePositionsPreserved:true,faces:'top-and-field-facing'};
+  return result;
+}
+
 /** A load-time LOD of the authored v2 mesh, retaining its skin and colour
  * boundaries. Weld only spatial neighbours with the same joint palette and
  * source colour; never discard arbitrary triangles (which would leave holes).

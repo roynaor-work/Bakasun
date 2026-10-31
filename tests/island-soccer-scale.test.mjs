@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import * as T from '../workout/island/vendor/three.module.js';
-import {SOCCER_BALL_DIAMETER_METRES,SOCCER_PLAYER_HEIGHT_METRES,soccerMetreScale,normalizeSoccerBallGeometry,createSoccerCharacterLod,soccerPitchUv} from '../workout/island/minigames/soccer-scale.mjs';
+import {mergeGeometries} from '../workout/island/vendor/BufferGeometryUtils.js';
+import {SOCCER_BALL_DIAMETER_METRES,SOCCER_PLAYER_HEIGHT_METRES,soccerMetreScale,normalizeSoccerBallGeometry,createSoccerCharacterLod,createSoccerStadiumSeatLod,soccerPitchUv} from '../workout/island/minigames/soccer-scale.mjs';
 
 const near=(actual,expected,tolerance=1e-6)=>assert.ok(Math.abs(actual-expected)<=tolerance,`${actual} differs from ${expected}`);
 const config=JSON.parse(readFileSync(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames.soccer;
@@ -86,5 +87,33 @@ test('normalized integer skin weights remain normalized after source LOD',()=>{
   const lod=createSoccerCharacterLod(source,.07),actual=lod.attributes.skinWeight;
   assert.equal(actual.normalized,true);
   for(let i=0;i<actual.count;i++)near(actual.getX(i)+actual.getY(i)+actual.getZ(i)+actual.getW(i),1,2/65535);
+  source.dispose();lod.dispose();
+});
+
+test('mobile actor geometry is smaller than medium geometry while retaining its full body height',()=>{
+  const source=skinnedSphere(),medium=createSoccerCharacterLod(source,.8/40),mobile=createSoccerCharacterLod(source,.8/28);
+  assert.ok(mobile.index.count<medium.index.count);near(mobile.boundingBox.max.y-mobile.boundingBox.min.y,.8);
+  for(const point of mobile.attributes.position.array)assert.ok(Number.isFinite(point));
+  source.dispose();medium.dispose();mobile.dispose();
+});
+
+test('mobile upper chairs keep exact top and inward source faces in every bank and near corners',()=>{
+  const parts=[];
+  for(const [x,z]of [[48,0],[-48,0],[0,67],[0,-67],[48,54],[-48,-54],[37,67],[-37,-67]]){
+    const sideBank=Math.abs(x)/68>Math.abs(z)/105;
+    parts.push(new T.BoxGeometry(.726,.165,.726).translate(x,9.4,z));
+    parts.push(new T.BoxGeometry(sideBank ? .1155 : .726,.7755,sideBank ? .726 : .1155).translate(x,9.8,z));
+  }
+  const source=mergeGeometries(parts);parts.forEach(part=>part.dispose());
+  const colors=new Float32Array(source.attributes.position.count*3);for(let i=0;i<colors.length;i++)colors[i]=(i%7)/7;source.setAttribute('color',new T.BufferAttribute(colors,3));source.computeBoundingBox();
+  const originalPositions=source.attributes.position.array.slice(),originalIndices=source.index.array.slice(),lod=createSoccerStadiumSeatLod(source);
+  assert.equal(lod.index.count,source.index.count/3,'each two-box chair keeps8 of24 triangles');
+  near(lod.boundingBox.min.distanceTo(source.boundingBox.min),0);near(lod.boundingBox.max.distanceTo(source.boundingBox.max),0);
+  assert.deepEqual(source.attributes.position.array,originalPositions);assert.deepEqual(source.index.array,originalIndices);
+  const vertices=new Set();
+  for(let i=0;i<source.attributes.position.count;i++)vertices.add(['position','normal','color'].flatMap(name=>Array.from({length:3},(_,axis)=>source.attributes[name][['getX','getY','getZ'][axis]](i))).join(','));
+  for(let i=0;i<lod.attributes.position.count;i++)assert.ok(vertices.has(['position','normal','color'].flatMap(name=>Array.from({length:3},(_,axis)=>lod.attributes[name][['getX','getY','getZ'][axis]](i))).join(',')),'LOD must not move or recolour source vertices');
+  const p=lod.attributes.position,n=lod.attributes.normal;
+  for(let first=0;first<lod.index.count;first+=3){let x=0,z=0,nx=0,ny=0,nz=0;for(let k=0;k<3;k++){const id=lod.index.getX(first+k);x+=p.getX(id)/3;z+=p.getZ(id)/3;nx+=n.getX(id)/3;ny+=n.getY(id)/3;nz+=n.getZ(id)/3;}assert.ok(ny>.5||(Math.abs(x)/68>Math.abs(z)/105?nx*Math.sign(x)<-.5:nz*Math.sign(z)<-.5));}
   source.dispose();lod.dispose();
 });

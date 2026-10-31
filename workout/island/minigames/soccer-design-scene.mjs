@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {normalizeSoccerBallGeometry,soccerPitchUv} from './soccer-scale.mjs';
+import {normalizeSoccerBallGeometry,soccerPitchUv,createSoccerStadiumSeatLod} from './soccer-scale.mjs';
 
 const modelUrl=name=>new URL('../design/'+(name==='soccer-stadium'?'models2/':'models/')+name+'.glb',import.meta.url).href;
 const environmentUrl=name=>new URL('../design/environment/'+name,import.meta.url).href;
@@ -13,7 +13,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   const root=new T.Group(),ball=new T.Group(),viewSides=[],meshes=[];
   root.name='soccer-design-scenery';ball.name='soccer-design-ball';root.visible=ball.visible=false;
   scene.add(root);ballRoot.add(ball);
-  let disposed=false,status='loading',textureCount=0,residentTriangles=0,lastWidth=0,lastHeight=0,viewDirection=1;
+  let disposed=false,status='loading',textureCount=0,residentTriangles=0,lastWidth=0,lastHeight=0,viewDirection=1,renderQuality=0,seatLodStats=null;
   let skyMaterial=null,skyLandscape=null,skyPortrait=null;
   const loadedTextures=[],loadedModels=[];
   const hx=config.pitch.length/2;
@@ -63,14 +63,18 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     }
     const part=geometry.clone();part.setIndex(indices);part.computeBoundingBox();part.computeBoundingSphere();return part;
   }
-  function sightlineMesh(geometry,material){
+  function refreshVisibility(){
+    const detail=renderQuality>=3?'mobile':'full';
+    for(const variant of viewSides)variant.mesh.visible=variant.side!==viewDirection&&(variant.detail==='all'||variant.detail===detail);
+  }
+  function sightlineMesh(geometry,material,detail='all'){
     // Each variant contains both end terraces plus only one side bank. Only
     // one variant renders: preserved end stands do not add a draw call.
     for(const side of [-1,1]){
-      const result=mesh(sideVariant(geometry,side),material);result.visible=side!==viewDirection;
-      viewSides.push({side,mesh:result});
+      const result=mesh(sideVariant(geometry,side),material);
+      viewSides.push({side,mesh:result,detail});
     }
-    geometry.dispose();
+    geometry.dispose();refreshVisibility();
   }
   function finish(texture,{repeat=null}={}){
     texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=4;
@@ -111,7 +115,12 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     const get=name=>stadiumSource.getObjectByName(name);
     sightlineMesh(merged(['aisles','beams','floodlights','upper_aisles','substitute_benches','advertising_boards','corner_flags'].map(get),stadiumTransform),palette);
     sightlineMesh(projectedUv(merged(['stand_shell','upper_stands'].map(get),stadiumTransform),3),concreteMaterial);
-    sightlineMesh(projectedUv(merged(['seating','upper_seats'].map(get),stadiumTransform),10),crowdMaterial);
+    sightlineMesh(projectedUv(merged(['seating','upper_seats'].map(get),stadiumTransform),10),crowdMaterial,'full');
+    const upperSource=merged([get('upper_seats')],new T.Matrix4()),upperMobile=createSoccerStadiumSeatLod(upperSource);
+    seatLodStats={...upperMobile.userData.soccerSeatLod};upperSource.dispose();upperMobile.applyMatrix4(stadiumTransform);
+    const lowerSeats=merged([get('seating')],stadiumTransform),mobileSeats=mergeGeometries([lowerSeats,upperMobile]);lowerSeats.dispose();upperMobile.dispose();
+    if(!mobileSeats)throw new Error('Incompatible soccer mobile seating geometry');
+    sightlineMesh(projectedUv(mobileSeats,10),crowdMaterial,'mobile');
     sightlineMesh(merged([get('roof')],stadiumTransform),palette);
     const pitchMaterial=track(new T.MeshStandardMaterial({color:'#a0b3a0',map:grass,roughness:.96,metalness:0}));
     // The 512px full-field tile has coarse high-contrast grass flecks. Bias
@@ -164,16 +173,17 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   });
   return {
     ready,root,ball,
-    metrics:()=>({status,source:'design/models2/soccer-stadium',ballDiameterMetres:config.physics.ballRadius*2,models:status==='ready'?3:0,textures:textureCount,
+    metrics:()=>({status,source:'design/models2/soccer-stadium',ballDiameterMetres:config.physics.ballRadius*2,seatDetail:renderQuality>=3?'mobile':'full',seatLod:seatLodStats,models:status==='ready'?3:0,textures:textureCount,
       triangles:status==='ready'?meshes.reduce((sum,mesh)=>sum+(mesh.visible?(mesh.geometry.index?.count||mesh.geometry.attributes.position.count)/3:0),0):0,
       drawCalls:status==='ready'?meshes.filter(mesh=>mesh.visible).length:0,residentTriangles}),
     update(direction,width=lastWidth,height=lastHeight){
       viewDirection=direction;
-      for(const variant of viewSides)variant.mesh.visible=variant.side!==direction;
+      refreshVisibility();
       if(!skyMaterial||width===lastWidth&&height===lastHeight)return;
       lastWidth=width;lastHeight=height;const texture=height>width?skyPortrait:skyLandscape;
       skyCrop(texture,width,height);skyMaterial.map=texture;
     },
+    setQuality(level){renderQuality=level;refreshVisibility();},
     dispose(){disposed=true;root.removeFromParent();ball.removeFromParent();}
   };
 }

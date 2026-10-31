@@ -105,7 +105,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   let designSceneReady=false;
   const designSceneLoader=config.view.designScene===false?null:createSoccerDesignLoader();
   const designScene=designSceneLoader?createSoccerDesignScene({scene,config,loader:designSceneLoader,track,ballRoot,onReady(){
-    if(disposed)return;designSceneReady=true;crowd.setDesignStadium(true);
+    if(disposed)return;designSceneReady=true;crowd.setDesignStadium(true);designScene?.setQuality(quality);
     // Detach successful replacements before shader warm-up. Hidden fallback
     // roofs would otherwise be re-enabled by their original visibility update.
     for(const object of fallbackStadiumObjects)object.removeFromParent();
@@ -114,7 +114,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     for(const child of [...ballRoot.children])if(child!==designScene.ball)child.removeFromParent();
   }}):null;
   const characters=[],kitMaterials=[],keeperGeometries=new Map(),bounds=new T.Box3(),size=new T.Vector3();
-  // Realistic CC0 athlete first; the original illustrated kid stays as the verified fallback.
+  // Authored v2 characters first, retaining the previous athlete and kid as fallbacks.
   const kidUrl=new URL('../assets/kid-full.glb',import.meta.url).href,athleteUrl=config.view.athlete&&config.view.athlete.enabled!==false?new URL(config.view.athlete.url,import.meta.url).href:null;let athleteMode=false;
   // Kickoff waits for the turf maps too: a texture arriving mid-match recompiled the pitch shader.
   let designCharacters=null;
@@ -127,7 +127,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
       designCharacters=data.design;
       if(disposed){designCharacters.dispose();return;}
       characters.push(...designCharacters.characters);assetStats=designCharacters.metrics;
-      if(quality>=config.view.athlete.lodFromQuality)for(const c of characters)assetStats.lod=c.setLod(1);
+      if(quality>=config.view.athlete.lodFromQuality)for(const c of characters)assetStats.lod=c.setLod(quality>=3?2:1);
       warm();assetStatus='ready';onAsset('ready');return;
     }
     if(disposed){disposeObject(data.scene);return;}
@@ -222,9 +222,9 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   const qualityMonitor=createQualityMonitor(config.view);
   function qualitySample(frameMs) {if(qualityMonitor.sample(frameMs)&&quality<3)lowerQuality();}
   function lowerQuality(){
-    // Realistic athletes switch to their economy mesh from tier 2; the illustrated fallback keeps one mesh.
-    if(quality+1>=config.view.athlete.lodFromQuality)for(const c of characters)if(c.setLod&&assetStats)assetStats.lod=c.setLod(1);
-    if(quality>=3)return;quality++;qualityMonitor.reset();lighting.setQuality(quality);stadium.setQuality(quality);renderer.setPixelRatio(quality===1?1:config.view.lowPixelRatio);crowd.count=Math.floor(count/config.view.crowd.lowDivisor**Math.min(quality,2));resize();
+    if(quality>=3)return;quality++;
+    if(quality>=config.view.athlete.lodFromQuality)for(const c of characters)if(c.setLod&&assetStats)assetStats.lod=c.setLod(c.design&&quality>=3?2:1);
+    qualityMonitor.reset();lighting.setQuality(quality);stadium.setQuality(quality);designScene?.setQuality(quality);renderer.setPixelRatio(quality===1?1:config.view.lowPixelRatio);crowd.count=Math.floor(count/config.view.crowd.lowDivisor**Math.min(quality,2));resize();
   }
   function render(s,dt=0,frameMs=0) {
     if(disposed)return;time+=dt;qualitySample(frameMs,dt);
@@ -261,13 +261,15 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     const receiver=passReceiver(s,config);poses.length=s.players.length;let turfAt=0;
     restartStrike=null;
     for(const p of s.players){
-      // The original detailed models stay visible at every performance tier.
-      // Resolution, spectators and decoration absorb reductions first.
+      // Authored characters remain visible. Foreground/actions retain their
+      // detail while distant geometry stays within the mobile triangle budget.
       const character=characters[p.id],useModel=Boolean(character);
       if(character)character.pivot.visible=Boolean(useModel);
       if(useModel){if(character.design){
+        const contactActor=p.id===s.controlled||p.id===s.ball.owner||p.restartMotion||p.kickTime>0||p.headerTime>0||p.slideTime>0||p.diveTime>0;
+        const actorLod=character.setLod(p.id===poseFocus?0:quality>=3?(contactActor?1:2):quality>=config.view.athlete.lodFromQuality?1:0);
         const animation=playerAnimation(p,s,config);character.update(p,s,animation,dt);
-        const pose=poses[p.id]||(poses[p.id]={id:p.id});pose.mode=character.mode;pose.clip=character.active;pose.yaw=character.yaw;
+        const pose=poses[p.id]||(poses[p.id]={id:p.id});pose.mode=character.mode;pose.clip=character.active;pose.yaw=character.yaw;pose.lod=actorLod;
       }else if(character.athlete){
         const {pivot,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz),ad=config.view.athlete.motion;
         const body=character.body||=createAthleteBody(T,character,ad),bodyState=body.orient(p,wanted,dt,Boolean(p.restartMotion)||['slide','kick','throw','dive'].includes(animation.mode));character.yaw=bodyState.yaw;

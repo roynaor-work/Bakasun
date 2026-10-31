@@ -214,12 +214,13 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
     sources.forEach((source,sourceIndex)=>source.traverse(o=>{
       if(!o.isMesh)return;
       const spec=regionMap.models[sourceIndex?'goalkeeper':'soccer-player'];assignRegions(o.geometry,spec,regionMap);
-      // 40 cells along the source body retain silhouette and source colour/skin
-      // boundaries. Full v2 remains available for close/high-quality comparison.
-      lodGeometry.set(o.geometry,own(createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/40)));
+      // Keep the medium mesh; a separate28-cell mobile mesh offsets the larger
+      // squad. Both retain source colour/skin boundaries and the same height.
+      // Full v2 remains available for close/high-quality comparison.
+      lodGeometry.set(o.geometry,[own(createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/40)),own(createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/28))]);
     }));
     for(const source of sources)source.traverse(o=>{if(o.isMesh){own(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material])own(m);}});
-    let triangles=0,lowTriangles=0;
+    let triangles=0,lowTriangles=0,mobileTriangles=0;
     for(let id=0;id<roster.length;id++) {
       const slot=roster[id],isKeeper=slot.role==='keeper',index=isKeeper?1:0,source=sources[index],root=cloneSoccerRig(source),pivot=new T.Group();
       root.scale.setScalar(soccerMetreScale(sourceHeights[index],height));pivot.add(root);scene.add(pivot);
@@ -227,21 +228,23 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
       const appearance=config.view.appearance||{},pick=(name,fallback)=>appearance[name]?.[id%(appearance[name]?.length||1)]||fallback;
       const kit=slot.team===0&&!isKeeper?selectedKit:null;
       const palette=Object.fromEntries(Object.entries({skin:pick('skin','#bf8054'),hair:pick('hair','#263443'),shirt:isKeeper?(config.view.athlete?.keeperColors?.[slot.team]||(slot.team===0?'#dfbb48':'#339d91')):(kit?.primary||team.colors[0]),shorts:kit?.shorts||team.colors[1],socks:kit?.socks||pick('socks','#f2f4ee')}).map(([name,hex])=>[name,new T.Color(hex)]));
-      const fullMeshes=[],lowMeshes=[];root.traverse(o=>{if(o.isMesh)fullMeshes.push(o);});
+      const fullMeshes=[],lowMeshes=[],mobileMeshes=[];root.traverse(o=>{if(o.isMesh)fullMeshes.push(o);});
       for(const o of fullMeshes){
         const originalGeometry=o.geometry,geometry=own(characterGeometry(originalGeometry,palette));
         const original=Array.isArray(o.material)?o.material[0]:o.material;
         o.geometry=geometry;o.material=own(original.clone());o.material.vertexColors=true;o.material.roughness=.88;o.material.metalness=0;
         o.frustumCulled=false;o.castShadow=o.receiveShadow=true;
         triangles+=(geometry.index?.count||geometry.attributes.position.count)/3;
-        const low=o.clone(false);low.name=o.name+'LOD1';low.geometry=own(characterGeometry(lodGeometry.get(originalGeometry),palette));low.visible=false;o.parent.add(low);lowMeshes.push(low);
+        const low=o.clone(false);low.name=o.name+'LOD1';low.geometry=own(characterGeometry(lodGeometry.get(originalGeometry)[0],palette));low.visible=false;o.parent.add(low);lowMeshes.push(low);
         lowTriangles+=(low.geometry.index?.count||low.geometry.attributes.position.count)/3;
+        const mobile=o.clone(false);mobile.name=o.name+'LOD2';mobile.geometry=own(characterGeometry(lodGeometry.get(originalGeometry)[1],palette));mobile.visible=false;o.parent.add(mobile);mobileMeshes.push(mobile);
+        mobileTriangles+=(mobile.geometry.index?.count||mobile.geometry.attributes.position.count)/3;
       }
       const mixer=new T.AnimationMixer(root),motion=createSoccerDesignMotion(mixer,clipSets[index],data,config);
       let characterDisposed=false;
       let lod=0;
       const character={design:true,root,pivot,mixer,motion,team:slot.team,keeper:isKeeper,active:data.initialState,mode:'idle',yaw:null,restartContactMap:map,
-        setLod(level){lod=level>0?1:0;fullMeshes.forEach(o=>o.visible=lod===0);lowMeshes.forEach(o=>o.visible=lod===1);return lod;},
+        setLod(level){const next=level>=2?2:level>0?1:0;if(next===lod)return lod;lod=next;fullMeshes.forEach(o=>o.visible=lod===0);lowMeshes.forEach(o=>o.visible=lod===1);mobileMeshes.forEach(o=>o.visible=lod===2);return lod;},
         update(p,s,animation,dt){
           if(characterDisposed)return;
           const wanted=Math.atan2(p.fx,p.fz);
@@ -255,6 +258,6 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
       mixer.update(0);characters.push(character);
     }
     loader.dispose();
-    return {characters,metrics:{kind:'design-glb-v2',source:'design/characters2',triangles:triangles/roster.length,eightCharacterTriangles:triangles,economyCharacterTriangles:lowTriangles/roster.length,meshes:1,lod:0,lodCount:2,independentSkeletons:true,clips:compiled.map(c=>c.name),retarget:'calibrated-world-basis',floor:'baked-at-load',referenceRootMotion:false,heightMetres:height},dispose};
+    return {characters,metrics:{kind:'design-glb-v2',source:'design/characters2',triangles:triangles/roster.length,eightCharacterTriangles:triangles,economyCharacterTriangles:lowTriangles/roster.length,mobileCharacterTriangles:mobileTriangles/roster.length,meshes:1,lod:0,lodCount:3,independentSkeletons:true,clips:compiled.map(c=>c.name),retarget:'calibrated-world-basis',floor:'baked-at-load',referenceRootMotion:false,heightMetres:height},dispose};
   }catch(error){dispose();throw error;}
 }
