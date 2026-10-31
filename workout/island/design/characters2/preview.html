@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>האי שלי · דמויות v2</title>
+<style>
+*{box-sizing:border-box}body{margin:0;color:#e4edf1;background:#111d27;font:16px system-ui}main{max-width:1200px;margin:auto;padding:24px}h1{font-size:24px;margin:0 0 8px}p{color:#b2c5ce;line-height:1.6}nav{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin:20px 0}label{display:grid;gap:5px;font-size:13px}select,button{font:inherit;background:#203643;border:1px solid #526a77;color:#fff;padding:10px 12px;border-radius:8px;min-height:44px}button{cursor:pointer}#stage{width:min(100%,768px);aspect-ratio:1;border-radius:16px;overflow:hidden;margin:auto;background:#182935}canvas{display:block;width:100%;height:100%}a{color:#8fe4cf}#status{min-height:25px}.angles{display:flex;gap:8px;justify-content:center;margin:12px}details{line-height:1.7}body.capture main{padding:0}body.capture h1,body.capture p,body.capture nav,body.capture .angles,body.capture details,body.capture #status{display:none}body.capture #stage{width:768px;border-radius:0}
+</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+<main>
+<h1>האי שלי · דמויות v2</h1>
+<p>ארבע דמויות ספורט בדויות · תלבושות, עור ושיער מתחלפים על אותו מודל.</p>
+<nav>
+<label>דמות<select id="character"><option value="soccer-player">שחקן כדורגל</option><option value="goalkeeper">שוער</option><option value="basketball-player">שחקן כדורסל</option><option value="skier">גולש סקי</option></select></label>
+<label>תלבושת<select id="outfit"></select></label><label>עור<select id="skin"></select></label><label>שיער<select id="hair"></select></label>
+<label>תנועה<select id="clip"></select></label><button id="play">ניגון</button>
+</nav>
+<div id="stage"></div>
+<div class="angles"><button data-angle="0">חזית</button><button data-angle="0.72">שלושה רבעים</button><button data-angle="3.141592653589793">גב</button><button id="face">פנים וידיים</button></div>
+<div id="status" role="status">טוען…</div>
+<details><summary>אימות ומקורות</summary><a href="README.md">הנחיות</a> · <a href="VALIDATION.md">דוח אימות</a> · <a href="LICENSES.md">מקור ורישיון</a></details>
+</main>
+<script type="module" src="preview.js"></script>
+</html>

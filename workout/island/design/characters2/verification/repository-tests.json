@@ -1,0 +1,38 @@
+{
+  "command": "npm test",
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "pass": false,
+  "counts": {
+    "tests": 2901,
+    "pass": 2862,
+    "fail": 1,
+    "skipped": 38,
+    "cancelled": 0
+  },
+  "baselineFailure": {
+    "test": "G7 each of the five playable games declares landscape in the shared shell config",
+    "file": "tests/island-g7.test.mjs",
+    "line": 44,
+    "expected": "landscape",
+    "actual": "any",
+    "confirmedOnUnchangedSources": {
+      "tests/island-g7.test.mjs": {
+        "sameAsBase": true,
+        "sha256": "baf489082fb681eaf9be1c356a245d7348c97782e2d57b9b58758288bbeb4aad"
+      },
+      "workout/island/ui/game-shell.mjs": {
+        "sameAsBase": true,
+        "sha256": "d7d962a247524643a5876d2e50c120cff881aebbdced20335c280d255494012c"
+      },
+      "workout/island/data/config.json": {
+        "sameAsBase": true,
+        "sha256": "fa91b90cf46a950696c371d29c81907a776428d15f3fb96213dee7311fb40762"
+      },
+      "workout/island/engine/load-data.mjs": {
+        "sameAsBase": true,
+        "sha256": "2c33b4f9e662894b61c876a732e09ccf34bd327ce1a72b76c4ae4480fdbf1bdd"
+      }
+    }
+  },
+  "scope": "Repository-wide existing tests. This baseline orientation assertion is unrelated to the new asset-only package."
+}

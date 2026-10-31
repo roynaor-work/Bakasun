@@ -1,0 +1,251 @@
+{
+  "applicationModule": "../variants/apply-variant.js",
+  "applicationModuleSha256": "7527e671a1f3189dd5fef8f66de04548bb2b9b8e25142ed7720099865c56656c",
+  "validator": "2.0.0-dev.3.10",
+  "outfits": 22,
+  "skins": 6,
+  "hairColors": 6,
+  "appearanceApplications": 792,
+  "characters": [
+    {
+      "id": "soccer-player",
+      "bytes": 101256,
+      "vertices": 13722,
+      "triangles": 26180,
+      "regionTriangles": {
+        "accent": 2840,
+        "soles": 872,
+        "preserve": 4104,
+        "shoes": 1760,
+        "skin": 9796,
+        "hair": 1528,
+        "socks": 1008,
+        "shirt": 3152,
+        "shorts": 1120
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "bytes": 100252,
+      "vertices": 13500,
+      "triangles": 25756,
+      "regionTriangles": {
+        "accent": 3224,
+        "soles": 872,
+        "preserve": 3464,
+        "shoes": 1760,
+        "gloves": 3096,
+        "hair": 1336,
+        "skin": 5764,
+        "socks": 1008,
+        "shirt": 4112,
+        "shorts": 1120
+      }
+    },
+    {
+      "id": "basketball-player",
+      "bytes": 100336,
+      "vertices": 13580,
+      "triangles": 25980,
+      "regionTriangles": {
+        "accent": 3104,
+        "soles": 872,
+        "preserve": 5544,
+        "shoes": 800,
+        "skin": 11252,
+        "hair": 1336,
+        "socks": 560,
+        "shorts": 1232,
+        "shirt": 1280
+      }
+    },
+    {
+      "id": "skier",
+      "bytes": 98116,
+      "vertices": 12892,
+      "triangles": 24598,
+      "regionTriangles": {
+        "accent": 3104,
+        "preserve": 4298,
+        "helmet": 532,
+        "equipment": 160,
+        "soles": 932,
+        "shoes": 480,
+        "gloves": 3096,
+        "hair": 1336,
+        "skin": 4308,
+        "shirt": 4112,
+        "shorts": 2240
+      }
+    }
+  ],
+  "preparedOutfits": [
+    {
+      "id": "soccer-01",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "a619523176fbc94e8faf05f1e567e1e1a3ddb34ac79bc0c48006501422b9438f",
+      "pngBytes": 1323
+    },
+    {
+      "id": "soccer-02",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "bc1696a00c9cb3f3559ed37729d61a675a229f04fdeb0fe30c4c8a3e73187f78",
+      "pngBytes": 405
+    },
+    {
+      "id": "soccer-03",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "466e44d6e91ea6fc7a8e2086f44832d7439678c4ed9e284d8d4e6be163108b96",
+      "pngBytes": 454
+    },
+    {
+      "id": "soccer-04",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "631c4c9bd1f9a730389d418ba16cd12f3596ca7d17f3809056de74cec8c3ce64",
+      "pngBytes": 1542
+    },
+    {
+      "id": "soccer-05",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "fa974e7e40b449dd19136dd2650ac410ba8b0e300effe431b4630aebbbded264",
+      "pngBytes": 443
+    },
+    {
+      "id": "soccer-06",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "238e00fb1e850d5d7d7e5725b882b0356c5e8d0ace5e707f172d211fed0dd900",
+      "pngBytes": 382
+    },
+    {
+      "id": "soccer-07",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "84d6319c618f203d36fe12fde5c6f78ef14145adcb94d16f2cde38f0d8aed4c2",
+      "pngBytes": 450
+    },
+    {
+      "id": "soccer-08",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "791677ebdc7819231cd3adedb98f938afdfc0326a5ccf197deb4c835a5e6762d",
+      "pngBytes": 486
+    },
+    {
+      "id": "goalkeeper-01",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "ec6e298c91399b1f9dc54de2c5d38e46b53de5007a07251e873e63612c7887c8",
+      "pngBytes": 429
+    },
+    {
+      "id": "goalkeeper-02",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "8a77f89ad82e9bf02cf3143f199fa0ec840c7fee648f7a5595ac4e6b245d6d0b",
+      "pngBytes": 444
+    },
+    {
+      "id": "goalkeeper-03",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "395333055a555cb58bb9a0ac3fba7693928159754276ab1ade5bd63c2c052690",
+      "pngBytes": 429
+    },
+    {
+      "id": "goalkeeper-04",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "249334e88f45043fef384d20720d898ef672e5e6d6e648959da30ef903abc476",
+      "pngBytes": 444
+    },
+    {
+      "id": "hoops-01",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "333240552d024c06a6841adf723c5b6ef8ba35e32b7145e3f43d0e606bfd7146",
+      "pngBytes": 2846
+    },
+    {
+      "id": "hoops-02",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "2b3f79dac98f449db8681e8218678b580fb2182f3e4a5e613ef5de31f3bd1a5f",
+      "pngBytes": 3490
+    },
+    {
+      "id": "hoops-03",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "719a4cc2c856dcea84f7dce69a5933d0a57d344b443d66c01bc5e941ea49e562",
+      "pngBytes": 964
+    },
+    {
+      "id": "hoops-04",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "47d314b2b08c3fef1e3f9e58c1e28b6c1e77afc1a77f2089ae370ba14084a346",
+      "pngBytes": 1344
+    },
+    {
+      "id": "hoops-05",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "157bdaed744c41c694b49092866a8023c749b81ba3f8fd9f2fccca3c90e75752",
+      "pngBytes": 445
+    },
+    {
+      "id": "hoops-06",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "5c7ee0bafe1f7288f10924536bd2adf311eeffddfc04cad1c2c2d212c5af6096",
+      "pngBytes": 1951
+    },
+    {
+      "id": "skier-01",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "2da43adea09e89b968bd9f9c76c1ebd43afb9bdd570fe3884b28ade2e73b55e0",
+      "pngBytes": 2026
+    },
+    {
+      "id": "skier-02",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "7545744e4b771592329cec6c9e7072c784781979a69ed8644c227d92ba6d3fb1",
+      "pngBytes": 1990
+    },
+    {
+      "id": "skier-03",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "57c2e7f3ad9dbcfb83e21a0a8e7450de723e7d5183725b907fb345986ffcc580",
+      "pngBytes": 1887
+    },
+    {
+      "id": "skier-04",
+      "errors": 0,
+      "warnings": 0,
+      "pngSha256": "2b8faaeac345d3ec5aedee76327c8c27e86881b4c64986d16425ccda678ddab3",
+      "pngBytes": 1943
+    }
+  ],
+  "pass": true,
+  "checks": {
+    "allTriangleRegionsMatched": true,
+    "all792AppearancesApplied": true,
+    "unchangedOriginalApplicationModule": true,
+    "facialDetailsPreserved": true,
+    "skeletonAttributesUnchanged": true,
+    "independentActors": true,
+    "repeatedApplicationStable": true,
+    "sourceUnchanged": true,
+    "disposeRestoresSource": true,
+    "preparedGLTFZeroErrors": true
+  }
+}
