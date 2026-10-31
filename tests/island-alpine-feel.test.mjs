@@ -35,6 +35,11 @@ test('landing feedback is edge-triggered, bounded, reuses storage and does not m
  const storage=f.update(a,.016);f.update(b,.016);assert.equal(storage,f.frame);assert.equal(f.frame.landings,1);
  for(let i=0;i<60;i++)f.update(b,1/60);assert.equal(f.frame.landings,1);assert.equal(f.frame.landingPulse,0);assert.deepEqual(b,before);
 });
+test('landing shake is a bounded screen-height fraction with authored decay and no time scaling',()=>{
+ const f=createAlpineFeel(data);f.update(frame(60,{airborne:true}),.01);f.update(frame(60,{landing:true}),.01);
+ assert.equal(f.frame.landingShakeFraction,0);let peak=0;for(let i=0;i<24;i++){f.update(frame(60,{landing:true}),.005);peak=Math.max(peak,Math.abs(f.frame.landingShakeFraction));}
+ assert.ok(peak>0&&peak<=data.events.perfect_landing.shake.amplitude[0]);assert.equal(f.frame.landingShakeFraction,0);
+});
 test('reduced motion keeps speed information with no FOV pulse, bank or lines',()=>{
  const f=createAlpineFeel(data,{maxSpeedKmh:100,reducedMotion:true});for(let i=0;i<60;i++)f.update(frame(100,{lean:1}),1/60);
  assert.equal(f.frame.speedFraction,1);assert.equal(f.frame.fovAdd,0);assert.equal(f.frame.bank,0);assert.equal(f.frame.lineOpacity,0);assert.equal(f.frame.lineVisible,false);

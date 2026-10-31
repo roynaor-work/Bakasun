@@ -230,7 +230,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     burstGeo.attributes.position.needsUpdate = true; burstGeo.attributes.color.needsUpdate = true;
   }
 
-  const target = new THREE.Vector3(), camAt = new THREE.Vector3(), P = new THREE.Vector3();
+  const target = new THREE.Vector3(), camAt = new THREE.Vector3(), P = new THREE.Vector3(),cameraUp=new THREE.Vector3();
   // Board grooves record actual engine positions, including the deterministic review replay.
   const trackCapacity=4200,trackVertices=new Float32Array(trackCapacity*18),trackGeo=new THREE.BufferGeometry();trackGeo.setAttribute('position',new THREE.BufferAttribute(trackVertices,3));trackGeo.setDrawRange(0,0);
   const trackMesh=new THREE.Mesh(trackGeo,new THREE.MeshBasicMaterial({color:'#6f8b99',transparent:true,opacity:.085,depthWrite:false,side:THREE.DoubleSide}));trackMesh.frustumCulled=false;trackMesh.userData.perf='effects';scene.add(trackMesh);let trackCount=0,trackNext=0,trackFull=false;const previousTracks=new Map(),trackAttr=trackGeo.attributes.position;
@@ -372,7 +372,6 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       const k = dampWeight(9,wdt); camLat += (px * follow - camLat) * k; camRise += (absY * .75 - camRise) * dampWeight(6,wdt);
       worldPoint(ps-(portrait?5.2:5.8)-feedback.speedFraction*.4,camLat+(portrait?.2:.65),2.45+camRise,camera.position);
       worldPoint(ps+feedback.lookAhead,px*.8+feedback.carve*.6,2.0+camRise*.8,target);
-      if(!reduced)camera.position.y+=Math.sin(feedback.landingPulse*Math.PI)*.025;
     } else {
       worldPoint(portrait ? -4.8 : -5.5, portrait ? 4 : 7, portrait ? 2.6 : 2.7, camera.position); worldPoint(portrait ? 8 : 8, portrait ? 0 : -4, .7, target);
       const pr = riders.get('player'); pr.actor?.update?.(player,{phase:'menu',time:wall,dt:wdt}); pr.root.visible = pr.shadow.visible = true; place(pr.root, portrait ? 2 : .4, portrait ? 1.8 : 3.8, .03, 0, -.38); pr.pivot.rotation.set(0, 0, 0); pr.pivot.position.y = PIVOT; place(pr.shadow, portrait ? 2 : .4, portrait ? 1.8 : 3.8, .05); pr.shadow.rotateX(-Math.PI / 2);
@@ -380,7 +379,13 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     }
     if (player.hit && !reduced) {const impact=Math.max(0,1-(t-riders.get('player').hitAt)/.45);camera.position.y+=Math.sin(Math.min(1,(t-riders.get('player').hitAt)/.45)*Math.PI)*.055*impact;}
     vfx.applyCamera(state,camera,target);
-    camera.lookAt(target); vfx.update(state,camera,feedback);
+    camera.lookAt(target);
+    if(playing&&feedback.landingShakeFraction){
+      worldPoint(ps,px,absY+.8,P);
+      const actionHeight=2*camera.position.distanceTo(P)*Math.tan(camera.fov*Math.PI/360);
+      cameraUp.set(0,1,0).applyQuaternion(camera.quaternion);camera.position.addScaledVector(cameraUp,actionHeight*feedback.landingShakeFraction);camera.lookAt(target);
+    }
+    vfx.update(state,camera,feedback);
     if (playing && !reduced) camera.rotateZ(feedback.bank);
     camAt.copy(camera.position);
     mountains.position.set(camAt.x, camAt.y - 48, camAt.z); field.position.set(camAt.x, camAt.y - 78, camAt.z);

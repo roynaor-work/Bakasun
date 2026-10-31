@@ -16,9 +16,10 @@ export function createAlpineFeel(data,{maxSpeedKmh=120,reducedMotion=false}={}){
   const cameraIn=value(data.easing.camera.ease_in.duration_ms,280)/1000,cameraOut=value(data.easing.camera.ease_out.duration_ms,420)/1000;
   const cameraInPower=value(data.easing.camera.ease_in.power,1.6),cameraOutPower=value(data.easing.camera.ease_out.power,2);
   const landingDuration=value(data.events.perfect_landing.shake.decay_ms,120)/1000;
-  const out={speedFraction:0,fovAdd:0,lineOpacity:0,lineVisible:false,lineTrigger:false,lineDuration:burst,lineFraction:value(lines.screen_fraction,.12),carve:0,lookAhead:10,bank:0,landingPulse:0,landings:0};
+  const landingAmplitude=value(data.events.perfect_landing.shake.amplitude,.0018),landingHz=value(data.events.perfect_landing.shake.frequency_hz,10);
+  const out={speedFraction:0,fovAdd:0,lineOpacity:0,lineVisible:false,lineTrigger:false,lineDuration:burst,lineFraction:value(lines.screen_fraction,.12),carve:0,lookAhead:10,bank:0,landingPulse:0,landingShakeFraction:0,landings:0};
   let time=0,gate=false,nextLine=0,lineUntil=-1,wasAir=false,wasLanding=false,lastS=null,carveFrom=0,carveSign=0,carveElapsed=0;
-  function reset(){time=0;gate=false;nextLine=0;lineUntil=-1;wasAir=wasLanding=false;lastS=null;carveFrom=carveSign=carveElapsed=0;out.fovAdd=out.carve=out.landingPulse=out.bank=out.landings=0;out.lineOpacity=0;out.lineVisible=out.lineTrigger=false;out.lookAhead=10;}
+  function reset(){time=0;gate=false;nextLine=0;lineUntil=-1;wasAir=wasLanding=false;lastS=null;carveFrom=carveSign=carveElapsed=0;out.fovAdd=out.carve=out.landingPulse=out.landingShakeFraction=out.bank=out.landings=0;out.lineOpacity=0;out.lineVisible=out.lineTrigger=false;out.lookAhead=10;}
   function update(state,seconds){
     if(state.phase==='paused')return out;
     const p=state.player||{},dt=clamp(seconds,0,.1),racing=state.phase==='racing';
@@ -43,7 +44,10 @@ export function createAlpineFeel(data,{maxSpeedKmh=120,reducedMotion=false}={}){
     out.bank=reducedMotion?0:-out.carve*.04;
     out.lookAhead=10+12*speed;
     out.landingPulse=Math.max(0,out.landingPulse-dt/landingDuration);
+    if(out.landingPulse<1e-9)out.landingPulse=0;
     if(racing&&!p.crashed&&((wasAir&&!p.airborne)||(p.landing&&!wasLanding))){out.landings++;out.landingPulse=1;}
+    const elapsed=1-out.landingPulse,fadeIn=clamp(elapsed*5),envelope=fadeIn*fadeIn*(3-2*fadeIn)*out.landingPulse*out.landingPulse;
+    out.landingShakeFraction=reducedMotion||out.landingPulse===0?0:Math.sin(2*Math.PI*landingHz*elapsed*landingDuration)*landingAmplitude*envelope;
     wasAir=!!p.airborne;wasLanding=!!p.landing;
     return out;
   }
