@@ -14,6 +14,14 @@ import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=is
 
 const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor((s*10)%10)}`;const m=Math.floor(s/60);return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
 
+function controlMode(snapshot){
+ let controlled=null;for(const p of snapshot.players)if(p.id===snapshot.controlled){controlled=p;break;}
+ return controlled?.hasBall?'ball':snapshot.possession===snapshot.userTeam&&snapshot.ball.state!=='loose'?'offense':'defense';
+}
+/** Ownership may change between two simulation steps in the same render frame.
+ * Change the action context before consuming another edge, preserving held sprint. */
+export function consumeHoopsInput(controls,snapshot){controls.setMode(controlMode(snapshot));return controls.consume();}
+
 export function startHoops(ctx){
  if(ctx.engine)ctx={...gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed>>>0,'streetSlam',ctx.level),...ctx};
  const balance=ctx.balance,t=ctx.t||(k=>k),seed=ctx.seed>>>0,stage=ctx.level||1;
@@ -92,7 +100,7 @@ export function startHoops(ctx){
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();if(disposed)return;view?.dispose();view=null;session.setPaused(true);fail('webgl-context-lost');},on);
  replayBtn.addEventListener('click',()=>{if(!view||view.replaying)return;const frames=engine.replay();replayBtn.hidden=true;controls.setEnabled(false);view.startReplay(frames,()=>{controls.setEnabled(!paused);last=0;loop.reset();});},on);
  if(dev)session.debug={engine,controls,get screens(){return screens;},get view(){return view;},
-  step(n=1,input){for(let i=0;i<n;i++){prev=cur;engine.step(input||controls.consume());cur=engine.snapshot();handleEvents(engine.drainEvents());}if(view){if(n>1)view.snapCamera();view.render(prev,cur,1,1/60);}hud(cur,performance.now());return cur;},
+  step(n=1,input){for(let i=0;i<n;i++){prev=cur;engine.step(input||consumeHoopsInput(controls,cur));cur=engine.snapshot();handleEvents(engine.drainEvents());}if(view){if(n>1)view.snapCamera();view.render(prev,cur,1,1/60);}hud(cur,performance.now());return cur;},
   render(){if(view){view.render(prev,cur,1,1/60);hud(cur,performance.now());}}};
  load();
 
@@ -131,8 +139,7 @@ export function startHoops(ctx){
   const bk=`${s.score[0]}|${s.score[1]}|${c}|${s.quarter}`;if(bk!==boardKey){boardKey=bk;setAttr(bug,'aria-label',t('hoops.board',{home:s.score[0],away:s.score[1],clock:c,quarter:s.quarter}));}
   let me=null;for(const p of s.players)if(p.id===s.controlled){me=p;break;}
   if(me){const value=Math.round(me.energy*100);setText(staminaValue,String(value));setAttr(stamina,'aria-valuenow',String(value));setData(stamina,'sprinting',String(!!me.sprinting));setData(stamina,'exhausted',String(!!me.exhausted));const width=value+'%';if(staminaFill.style.width!==width)staminaFill.style.width=width;}
-  const mode=me?.hasBall?'ball':s.possession===0&&s.ball.state!=='loose'?'offense':'defense';
-  controls.setMode(mode);
+  controls.setMode(controlMode(s));
   // shot meter above the shooter while a timed shot is held: red, yellow, green, yellow, red
   const shooting=!!(me&&me.act==='shoot'&&me.hasBall&&me.shotHeld);
   setHidden(meter,!shooting);
@@ -157,7 +164,7 @@ export function startHoops(ctx){
   if(!view)return;
   if(session.debug?.hold)return; // dev only: keeps the last frame for a screenshot
   if(!paused&&!doc.hidden&&!view.replaying&&cur.phase!=='final'){
-   loop.advance(dt,()=>{prev=cur;engine.step(controls.consume());cur=engine.snapshot();stepsRun++;handleEvents(engine.drainEvents());return cur.phase!=='final';});
+   loop.advance(dt,()=>{prev=cur;engine.step(consumeHoopsInput(controls,cur));cur=engine.snapshot();stepsRun++;handleEvents(engine.drainEvents());return cur.phase!=='final';});
   }
   let holder=null;for(const p of cur.players)if(p.hasBall){holder=p;break;}
   if(holder&&cur.phase==='live'&&!paused&&!doc.hidden&&!view.replaying){dribbleClock+=dt;const per=balance.view.dribblePeriod;if(dribbleClock>per){dribbleClock=0;audio.dribble(Math.hypot(holder.vx,holder.vz));}}

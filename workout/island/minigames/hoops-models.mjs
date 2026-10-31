@@ -89,7 +89,7 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
    const mesh=venue.getObjectByName(name);if(mesh)mesh.visible=false;
   }
   const floor=venue.getObjectByName('court_surface');
-  
+
   const originalFloor=arena.getObjectByName('court');
   const parquet=new THREE.MeshStandardMaterial({map:originalFloor.material.map,color:originalFloor.material.color.clone(),roughness:.38,metalness:.03,envMapIntensity:.7});floor.material=parquet;originalFloor.material.dispose();originalFloor.material=parquet;floor.visible=false;owned.materials.add(parquet);floor.receiveShadow=true;
   concrete.repeat.set(4,4);

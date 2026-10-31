@@ -178,10 +178,3 @@ assert.equal(digest(await readFile(index,'utf8')),sourceHash,'real index source 
 await writeFile(path.join(out,'verification.json'),JSON.stringify(report,null,2));
 }finally{await browser.close();server.close();}
 console.log('hoops gameplay browser: all requested viewports passed');
-
-
-
-
-
-
-
