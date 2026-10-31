@@ -6,6 +6,7 @@ const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const phaseNames=['build_up','attack','defensive_transition','defense','throw_in','corner','goal_kick','free_kick'];
 const restartNames={throwIn:'throw_in',corner:'corner',goalKick:'goal_kick',freeKick:'free_kick'};
 const metric=(record,key,fallback)=>Number.isFinite(record?.parameters?.[key]?.example)?record.parameters[key].example:fallback;
+const candidateOffsets=[0,-1,1];
 
 /** Compile the actual design package once per session. Six-a-side uses an
  * explicit subset of the full formation; it never creates eleven ghost roles.
@@ -61,7 +62,7 @@ export function compileSoccerTactics(data,c){
  const caches=new WeakMap();let plans=0;
 
  function createState(state){
-  const teams=[0,1].map(team=>({team,nodes:[],byId:new Map(),phase:'defense',possessionPhase:null,lastPossessionAt:-Infinity,transitionUntil:-Infinity,pressId:null,pressUntil:-Infinity,nextDecision:-Infinity,key:''}));
+  const teams=[0,1].map(team=>({team,nodes:[],byId:new Map(),phase:'defense',possessionPhase:null,lastPossessionAt:-Infinity,transitionUntil:-Infinity,pressId:null,pressUntil:-Infinity,nextDecision:-Infinity,key:'',observed:state.players.filter(player=>player.team!==team).map(player=>({player,x:0,z:0})),candidatePoint:{x:0,z:0},boundsPoint:{x:0,z:0},desiredPoint:{x:0,z:0},placed:[]}));
   for(const team of teams){
    const members=state.players.filter(p=>p.team===team.team).sort((a,b)=>a.id-b.id),used=new Set();
    if(members.length>selectedRoles.length)throw Error('The soccer tactics adapter supports at most six players per side');
@@ -83,12 +84,12 @@ export function compileSoccerTactics(data,c){
  }
  function memory(state){return caches.get(state)||createState(state);}
  function direction(team,state){return state.attackDir*(team===0?1:-1);}
- function inBounds(node,x,z,d){
+ function inBounds(node,x,z,d,out={}){
   x=clamp(x,-hx+boundary,hx-boundary);z=clamp(z,-hz+boundary,hz-boundary);
   if(node.role==='GK'){
    const inset=c.goalkeeping.areaInset;x=d*clamp(x*d,-hx+inset,-hx+c.pitch.penaltyDepth-inset);z=clamp(z,-c.pitch.penaltyWidth/2+inset,c.pitch.penaltyWidth/2-inset);
   }else if(Number.isFinite(node.maxDepth))x=d*Math.min(x*d,Math.max(-hx+boundary,node.maxDepth));
-  return {x,z};
+  out.x=x;out.z=z;return out;
  }
  function ownPass(team,state){
   const receiver=state.passTarget&&state.players.find(p=>p.id===state.passTarget.player);
@@ -140,36 +141,36 @@ export function compileSoccerTactics(data,c){
  }
  function candidate(node,team,state,placed,owner){
   if(node.fixed)return;
-  const desired={x:node.x,z:node.z},d=direction(team.team,state),step=parameters.candidateStep;
+  const desired=team.desiredPoint,d=direction(team.team,state),step=parameters.candidateStep;
+  desired.x=node.x;desired.z=node.z;
   // Keep a full 3x3 neighborhood even beside a line. The presser itself stays
   // free to reach that line; supporting players find a separate interior lane.
-  const center={x:clamp(desired.x,-hx+boundary+step,hx-boundary-step),z:clamp(desired.z,-hz+boundary+step,hz-boundary-step)};
-  let best=null,bestScore=-Infinity;
+  const centerX=clamp(desired.x,-hx+boundary+step,hx-boundary-step),centerZ=clamp(desired.z,-hz+boundary+step,hz-boundary-step);
+  let found=false,bestX=0,bestZ=0,bestScore=-Infinity;
   for(let index=0;index<parameters.candidateCount;index++){
-   const ox=[0,-1,1][Math.floor(index/3)],oz=[0,-1,1][index%3],point=avoidOpponents(node,team,state,inBounds(node,center.x+ox*step,center.z+oz*step,d),d);
+   const ox=candidateOffsets[Math.floor(index/3)],oz=candidateOffsets[index%3],point=avoidOpponents(node,team,state,inBounds(node,centerX+ox*step,centerZ+oz*step,d,team.candidatePoint),d);
    if(node.clearance&&distance(point,state.restart)<node.clearance-1e-8)continue;
    let separation=Infinity;for(const other of placed)separation=Math.min(separation,distance(point,other));
    if(separation<parameters.bodyClearance-1e-8)continue;
    let lane=parameters.laneClearance*2,opposition=parameters.spacing;
-   for(const other of state.players)if(other.team!==team.team){
-    const observed={x:other.x+finite(other.vx)*parameters.prediction,z:other.z+finite(other.vz)*parameters.prediction};
+   for(const observed of team.observed){
     opposition=Math.min(opposition,distance(point,observed));if(owner?.team===team.team)lane=Math.min(lane,passLaneClearance(observed,owner,point));
    }
    const score=Math.min(separation,parameters.spacing)*.65+lane*.9+opposition*.3-distance(point,desired)*.8;
-   if(score>bestScore){bestScore=score;best=point;}
+   if(score>bestScore){bestScore=score;found=true;bestX=point.x;bestZ=point.z;}
   }
-  if(best){node.x=best.x;node.z=best.z;}
+  if(found){node.x=bestX;node.z=bestZ;}
  }
  function avoidOpponents(node,team,state,point,d){
   if(!(node.opponentClearance>0))return point;
   let x=point.x,z=point.z;
   for(let iteration=0;iteration<c.tactics.separationIterations;iteration++){
    let moved=false;
-   for(const rival of state.players){
-    if(rival.team===team.team)continue;
+   for(const observed of team.observed){
+    const rival=observed.player;
     const dx=x-rival.x,dz=z-rival.z,length=Math.hypot(dx,dz);
     if(length>=node.opponentClearance-1e-8)continue;
-    const next=inBounds(node,rival.x+(length?dx/length:-d)*node.opponentClearance,rival.z+(length?dz/length:(node.player.id%2?1:-1)*.35)*node.opponentClearance,d);
+    const next=inBounds(node,rival.x+(length?dx/length:-d)*node.opponentClearance,rival.z+(length?dz/length:(node.player.id%2?1:-1)*.35)*node.opponentClearance,d,team.boundsPoint);
     if(Math.abs(next.x-x)+Math.abs(next.z-z)>1e-8)moved=true;
     x=next.x;z=next.z;
    }
@@ -179,6 +180,9 @@ export function compileSoccerTactics(data,c){
  }
  function plan(team,state,now,owner){
   plans++;const d=direction(team.team,state),b=state.ball,ours=owner?.team===team.team,freePass=ownPass(team.team,state),restart=state.restart&&String(state.phase).startsWith('restart');
+  // Every candidate in this synchronous plan sees the same observed rivals.
+  // Keep their order and arithmetic, but calculate predictions only once.
+  for(const observed of team.observed){const rival=observed.player;observed.x=rival.x+finite(rival.vx)*parameters.prediction;observed.z=rival.z+finite(rival.vz)*parameters.prediction;}
   const presser=!restart&&(!ours||freePass)?selectPresser(team,state,now):null;team.pressId=presser?.player.id??null;
   const fieldCount=team.nodes.filter(node=>node.role!=='GK').length,coverCount=Math.max(1,Math.ceil(parameters.restDefenders*fieldCount/10));
   const opponentClearance=Math.max(parameters.markDistance,finite(c.tactics.markDistance?.[state.difficulty])+finite(c.tactics.spacingBuffer));
@@ -216,10 +220,10 @@ export function compileSoccerTactics(data,c){
    }
   }
   for(const node of team.nodes)if(!node.fixed){const point=avoidOpponents(node,team,state,node,d);node.x=point.x;node.z=point.z;}
-  const placed=[];
+  const placed=team.placed;placed.length=0;
   for(const node of team.nodes)if(node.fixed)placed.push(node);
   for(const node of team.nodes)if(!node.fixed){candidate(node,team,state,placed,owner);placed.push(node);}
-  for(const node of team.nodes)Object.assign(node.result,{x:node.x,z:node.z,duty:node.duty,role:node.role,markId:node.markId});
+  for(const node of team.nodes){const result=node.result;result.x=node.x;result.z=node.z;result.duty=node.duty;result.role=node.role;result.markId=node.markId;}
  }
  function update(state){
   const cached=memory(state),elapsed=finite(state.elapsed),restartElapsed=finite(state.restart?.elapsed);

@@ -149,3 +149,29 @@ test('the single AI presser reaches balls at the legal pitch lines instead of st
   assert.ok(Math.hypot(target.x-state.ball.x,target.z-state.ball.z)<config.physics.pickupRadius);
  }
 });
+
+test('each player owns a stable target and querying other actors cannot overwrite it',()=>{
+ const state=fixture(),controller=compileSoccerTactics(source,config),saved=structuredClone(state);
+ const targets=new Map(state.players.map(player=>[player.id,controller.target(player,state)])),snapshot=targetCopy(controller,state);
+ assert.equal(new Set(targets.values()).size,state.players.length,'scratch candidates must never escape as shared player targets');
+ for(let repeat=0;repeat<20;repeat++)for(const player of [...state.players].reverse())assert.equal(controller.target(player,state),targets.get(player.id));
+ assert.deepEqual(targetCopy(controller,state),snapshot);assert.deepEqual(state,saved);
+ assert.equal(controller.diagnostics(state).plans,2);
+});
+
+test('committed plans hold repeated observations, then refresh opponent positions and velocity at the next decision',()=>{
+ for(const attackDir of [-1,1]){
+  const state=fixture(attackDir),controller=compileSoccerTactics(source,config),before=targetCopy(controller,state),plans=controller.diagnostics(state).plans;
+  const supports=before.filter(target=>target.team===0&&target.id!==state.controlled&&target.role!=='GK');
+  for(const [index,rival]of state.players.filter(player=>player.team===1).entries()){
+   const target=supports[index%supports.length];rival.x=target.x+.3;rival.z=target.z-.4;rival.vx=(index%2?1:-1)*5;rival.vz=(index%2?-1:1)*3;
+  }
+  state.elapsed=.1;
+  assert.deepEqual(targetCopy(controller,state),before,'positions and velocities do not bypass the design decision interval');
+  assert.equal(controller.diagnostics(state).plans,plans);
+  state.elapsed=.126;
+  const refreshed=targetCopy(controller,state).filter(target=>target.team===0),fresh=targetCopy(compileSoccerTactics(source,config),state).filter(target=>target.team===0);
+  assert.deepEqual(refreshed,fresh,'the next plan must read current rivals, including their observed motion');
+  assert.ok(refreshed.some(target=>Math.hypot(target.x-before[target.id].x,target.z-before[target.id].z)>.01),'refreshed opposition must affect at least one support target');
+ }
+});
