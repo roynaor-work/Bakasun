@@ -1,5 +1,5 @@
-import {eventEligible} from '../activity/eligibility.mjs?v=island-integration-20261030-1';
-import {seededRandom} from '../minigames/context.mjs?v=island-integration-20261030-1';
+import {eventEligible} from '../activity/eligibility.mjs?v=island-ski-20261031-1';
+import {seededRandom} from '../minigames/context.mjs?v=island-ski-20261031-1';
 export function install(registry,data) {
   for(const [id,record]of Object.entries(data.config.events.types))registry.registerEventType({id,...record,
     prepare({state,random=seededRandom(state.events.sequence)}){

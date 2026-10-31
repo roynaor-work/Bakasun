@@ -1,14 +1,14 @@
 import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
-import {actionIcon} from './soccer-icons.mjs?v=island-integration-20261030-1';
-import {createSoccer} from './soccer.mjs?v=island-integration-20261030-1';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-integration-20261030-1';
-import {stageObjective} from './soccer-campaign.mjs?v=island-integration-20261030-1';
-import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-integration-20261030-1';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-integration-20261030-1';
-import {createSoccerView} from './soccer-view.mjs?v=island-integration-20261030-1';
-import {createControls} from './controls.mjs?v=island-integration-20261030-1';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-integration-20261030-1';
-import {gameContext} from './context.mjs?v=island-integration-20261030-1';
+import {actionIcon} from './soccer-icons.mjs?v=island-ski-20261031-1';
+import {createSoccer} from './soccer.mjs?v=island-ski-20261031-1';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-ski-20261031-1';
+import {stageObjective} from './soccer-campaign.mjs?v=island-ski-20261031-1';
+import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-ski-20261031-1';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-ski-20261031-1';
+import {createSoccerView} from './soccer-view.mjs?v=island-ski-20261031-1';
+import {createControls} from './controls.mjs?v=island-ski-20261031-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-ski-20261031-1';
+import {gameContext} from './context.mjs?v=island-ski-20261031-1';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -65,9 +65,9 @@ export function startSoccer(ctx) {
   if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-integration-20261030-1',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-ski-20261031-1',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-integration-20261030-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-ski-20261031-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
     document.addEventListener('pointerdown',()=>void audio.unlock(),options);

@@ -151,12 +151,13 @@ test('4. rocks hit only on board overlap, once per object; recovery keeps contro
   const miss=ruleEngine([{id:'rock',type:'rock',x:clear+.05,s:60,radius:r}]);assert.equal(run(miss,5).filter(e=>e.type==='collision'&&e.riderId==='player').length,0,'just outside the board footprint');
   const h=ruleEngine([{id:'rock',type:'rock',x:clear-.05,s:60,radius:r}]);const events=run(h,6);
   const hits=events.filter(e=>e.type==='collision'&&e.riderId==='player');assert.equal(hits.length,1,'one event for one object');assert.equal(hits[0].objectId,'rock');
-  // Speed drops by the configured share and recovers within about a second; steering still works.
+  // A rock is a fall: speed drops by the crash share, steering is locked while the rider is down, then control returns.
   const k=ruleEngine([{id:'rock',type:'rock',x:0,s:80,radius:r}]);let speedBefore=0,speedAfter=0;
-  for(let i=0;i<600;i++){const d=k.debug()[0];k.step(1/60);const evs=k.drainEvents();if(evs.some(e=>e.type==='collision')){speedBefore=d.speed;speedAfter=k.debug()[0].speed;break;}}
-  assert.ok(speedAfter<speedBefore*(1-P.hitSpeedLoss)+.5&&speedAfter>speedBefore*(1-P.hitSpeedLoss)-.5);
-  const x0=k.debug()[0].x;run(k,.3,1);assert.ok(k.debug()[0].x>x0+1,'steering works during recovery');
-  run(k,1.3);assert.ok(k.debug()[0].speed>=P.baseSpeed-1.2,'recovered');
+  for(let i=0;i<600;i++){const d=k.debug()[0];k.step(1/60);const evs=k.drainEvents();if(evs.some(e=>e.type==='collision')){assert.ok(evs.some(e=>e.type==='crash'&&e.objectType==='rock'),'a rock hit emits a crash');speedBefore=d.speed;speedAfter=k.debug()[0].speed;break;}}
+  assert.ok(speedAfter<speedBefore*(1-P.crashSpeedLoss)+.5&&speedAfter>speedBefore*(1-P.crashSpeedLoss)-.5);
+  const x0=k.debug()[0].x;run(k,.3,1);assert.ok(Math.abs(k.debug()[0].x-x0)<.6,'no steering while the rider is down');
+  run(k,P.crashSeconds);const x1=k.debug()[0].x;run(k,.3,1);assert.ok(k.debug()[0].x>x1+1,'steering works after getting up');
+  run(k,3);assert.ok(k.debug()[0].speed>=P.baseSpeed-1.2,'recovered');
   // Rivals that never look use the very same collision test.
   const wall=[-6,-4,-2,0,2,4,6].map((x,i)=>({id:`wall-${i}`,type:'rock',x,s:150,radius:1.1}));
   const ai=ruleEngine(wall,{ai:{mistakeRate:1}});const evs=run(ai,30);
@@ -191,10 +192,10 @@ test('6. boost: starts, drains, ends, recharges; pads trigger once per pass; rep
   e.command({type:'boost'});e.step(1/60);assert.equal(e.drainEvents().filter(x=>x.type==='boost-start'&&x.riderId==='player').length,0,'not enough in the tank');
   const p=ruleEngine([{id:'pad',type:'boost',x:0,s:40}]);const pev=run(p,6);
   assert.equal(pev.filter(x=>x.type==='boost-start'&&x.objectId==='pad'&&x.riderId==='player').length,1,'pad fires once');
-  // Boost survives a collision and speed climbs back toward boost speed.
+  // A rock crash ends the boost; a gate post bump does not (covered by the gate tests).
   const h=ruleEngine([{id:'rock',type:'rock',x:0,s:14,radius:.8}]);run(h,1.2);h.command({type:'boost'});let atHit=null;
   for(let i=0;i<120;i++){h.step(1/60);const evs=h.drainEvents();if(evs.some(x=>x.type==='collision'&&x.riderId==='player'))atHit=h.debug()[0];}
-  assert.ok(atHit,'the boosted rider hit the rock');assert.ok(atHit.boostTime>0,'the boost keeps running through the hit');
+  assert.ok(atHit,'the boosted rider hit the rock');assert.equal(atHit.boostTime,0,'a fall on a rock ends the boost');
 });
 
 test('7. pause freezes time, distance, rivals, boost and events; long pauses do not jump ahead',()=>{
@@ -272,9 +273,10 @@ test('11. audio stays silent before a gesture and honours the island mute key',(
   a.setPaused(true);st.setItem('island.sound','on');assert.equal(a.cue('gate'),false);a.dispose();a.dispose();assert.equal(a.metrics().disposed,true);
 });
 
+// Lower bound 65 s -> 64 s: the shaped stick (expo + rate limit) trims about 1 s of wall time.
 test('calibration: scripted pilots finish 70-95 s; harder courses need better placings; AI caps hold',()=>{
   for(const [i,level] of balance.levels.entries())for(const ai of level.ai){assert.ok(ai.speed<=balance.aiCaps.maxSpeed);assert.ok(ai.reaction>=balance.aiCaps.minReaction);assert.ok(ai.lookahead<=balance.aiCaps.maxLookahead);void i;}
-  const times=[];for(const stage of [1,2,3])for(const seed of [11,12]){const r=race(stage,seed).result;times.push(r.elapsedMs);assert.ok(r.elapsedMs>=65000&&r.elapsedMs<=95000,`stage ${stage} ${r.elapsedMs}`);}
+  const times=[];for(const stage of [1,2,3])for(const seed of [11,12]){const r=race(stage,seed).result;times.push(r.elapsedMs);assert.ok(r.elapsedMs>=64000&&r.elapsedMs<=95000,`stage ${stage} ${r.elapsedMs}`);}
   assert.deepEqual(balance.levels.map(l=>l.targetRank),[3,2,1]);
   assert.deepEqual(RIDER_IDS,['player','rival-1','rival-2','rival-3','rival-4','rival-5']);
 });
