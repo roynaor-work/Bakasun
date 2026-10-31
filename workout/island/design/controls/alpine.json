@@ -1,0 +1,495 @@
+{
+  "schema_version": 1,
+  "kind": "design-contract-not-runtime",
+  "game": "alpine",
+  "label": "סקי",
+  "base_commit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "integration": "not-connected",
+  "direction": "rtl",
+  "interaction_contract": "interaction.json",
+  "sources": [
+    "../alpine/spec.md",
+    "../alpine/hud.html",
+    "../alpine/hud.css",
+    "../hud-kit/README.md",
+    "../feel/alpine.json",
+    "../feel/README.md"
+  ],
+  "controls": {
+    "pause": {
+      "label": "השהיה",
+      "aria_label": "השהיית המשחק",
+      "hud_kit": {
+        "module": "../hud-kit/pause-button.mjs",
+        "export": "create",
+        "options": {
+          "label": "השהיית המשחק"
+        },
+        "update": {
+          "label": "השהיית המשחק",
+          "disabled": false
+        },
+        "callbacks": "onPause; בהמשך pause-panel.mjs"
+      },
+      "gestures": {
+        "tap": "השהיה וביטול כל קלט פעיל לפני פתיחת הלוח"
+      },
+      "feedback": "פוקוס עובר ללוח, וחוזר לכפתור בסגירה"
+    },
+    "stick": {
+      "label": "היגוי",
+      "aria_label": "היגוי אופקי, מקשי החצים",
+      "hud_kit": {
+        "module": "../hud-kit/joystick.mjs",
+        "export": "create",
+        "options": {
+          "label": "היגוי אופקי, מקשי החצים",
+          "deadZone": 0.1
+        },
+        "update": {
+          "x": 0,
+          "y": 0,
+          "disabled": false
+        },
+        "callbacks": "onChange(x,y,active); ציר x בלבד להיגוי; y אינו מאיץ ואינו בולם"
+      },
+      "gestures": {
+        "drag": "ציר x בלבד להיגוי; y אינו מאיץ או בולם",
+        "swipe": "באצבע אחת ובאוויר בלבד: 24px לכיוון בארבעת הצירים בוחרים תרגיל; ההיגוי מוקפא עד שחרור והבקשה נשלחת פעם אחת"
+      },
+      "feedback": "כפתור סטיק קבוע; רק הפקק נע. ספרינט: טבעת כפולה ותווית ריצה"
+    },
+    "boost": {
+      "label": "האצה",
+      "aria_label": "האצה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": true,
+          "label": "האצה",
+          "icon": "boost"
+        },
+        "update": {
+          "label": "האצה",
+          "icon": "boost",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "בקשת boost חד-פעמית, לפי החוזה הקיים; אינה ספרינט נעול",
+        "hold": "לחיצה ארוכה יוצרת בקשה אחת בלבד ב-pointerdown, ללא חזרה"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "grab": {
+      "label": "אחיזה",
+      "aria_label": "אחיזה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "אחיזה",
+          "icon": "trick"
+        },
+        "update": {
+          "label": "אחיזה",
+          "icon": "trick",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "בקשת grab פעם אחת באוויר"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "spin": {
+      "label": "סיבוב",
+      "aria_label": "סיבוב",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "סיבוב",
+          "icon": "trick"
+        },
+        "update": {
+          "label": "סיבוב",
+          "icon": "trick",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "בקשת spin פעם אחת באוויר",
+        "double_tap": "שתי נגיעות הן שתי בקשות נפרדות; אין תרגיל חדש או הכפלת ניקוד"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "flip": {
+      "label": "היפוך",
+      "aria_label": "היפוך",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "היפוך",
+          "icon": "trick"
+        },
+        "update": {
+          "label": "היפוך",
+          "icon": "trick",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "בקשת flip פעם אחת באוויר"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "combo": {
+      "label": "שילוב",
+      "aria_label": "שילוב",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "שילוב",
+          "icon": "trick"
+        },
+        "update": {
+          "label": "שילוב",
+          "icon": "trick",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "בקשת combo פעם אחת באוויר"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    }
+  },
+  "layouts": {
+    "844x390": {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "units": "CSS px",
+      "safe_area_at_reference": 0,
+      "slots": {
+        "stick": {
+          "x": 12,
+          "y": 274,
+          "width": 104,
+          "height": 104,
+          "anchor_x": "left",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "pause": {
+          "x": 12,
+          "y": 12,
+          "width": 48,
+          "height": 48,
+          "anchor_x": "left",
+          "anchor_y": "top",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "primary": {
+          "x": 752,
+          "y": 298,
+          "width": 80,
+          "height": 80,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "secondary": {
+          "x": 680,
+          "y": 314,
+          "width": 64,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 100,
+          "offset_y": 12
+        },
+        "sprint": {
+          "x": 752,
+          "y": 226,
+          "width": 80,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 100
+        },
+        "trick": {
+          "x": 608,
+          "y": 314,
+          "width": 64,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 172,
+          "offset_y": 12
+        },
+        "support": {
+          "x": 680,
+          "y": 242,
+          "width": 64,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 100,
+          "offset_y": 84
+        }
+      }
+    },
+    "390x844": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "units": "CSS px",
+      "safe_area_at_reference": 0,
+      "slots": {
+        "stick": {
+          "x": 12,
+          "y": 736,
+          "width": 96,
+          "height": 96,
+          "anchor_x": "left",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "pause": {
+          "x": 12,
+          "y": 12,
+          "width": 48,
+          "height": 48,
+          "anchor_x": "left",
+          "anchor_y": "top",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "primary": {
+          "x": 314,
+          "y": 688,
+          "width": 64,
+          "height": 72,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 84
+        },
+        "secondary": {
+          "x": 250,
+          "y": 696,
+          "width": 56,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 84,
+          "offset_y": 84
+        },
+        "sprint": {
+          "x": 314,
+          "y": 768,
+          "width": 64,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "trick": {
+          "x": 250,
+          "y": 768,
+          "width": 56,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 84,
+          "offset_y": 12
+        },
+        "support": {
+          "x": 186,
+          "y": 768,
+          "width": 56,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 148,
+          "offset_y": 12
+        }
+      }
+    }
+  },
+  "states": {
+    "ground": {
+      "label": "על השלג",
+      "note": "ארבע פעולות האוויר נשארות גלויות ומסומנות באוויר",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "boost",
+          "slot": "primary",
+          "disabled": false
+        },
+        {
+          "id": "grab",
+          "slot": "secondary",
+          "disabled": true
+        },
+        {
+          "id": "spin",
+          "slot": "trick",
+          "disabled": true
+        },
+        {
+          "id": "flip",
+          "slot": "support",
+          "disabled": true
+        },
+        {
+          "id": "combo",
+          "slot": "sprint",
+          "disabled": true
+        }
+      ],
+      "one_finger": "גרירה על המסלול מכוונת; מרפים ולוחצים האצה. אין בלימה חדשה.",
+      "two_fingers": "שמאל גורר סטיק אופקי; ימין מבקש האצה אחת."
+    },
+    "air": {
+      "label": "באוויר",
+      "note": "ארבעה מזהי תרגיל קיימים · האצה מסומנת על השלג",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "boost",
+          "slot": "primary",
+          "disabled": true
+        },
+        {
+          "id": "grab",
+          "slot": "secondary",
+          "disabled": false
+        },
+        {
+          "id": "spin",
+          "slot": "trick",
+          "disabled": false
+        },
+        {
+          "id": "flip",
+          "slot": "support",
+          "disabled": false
+        },
+        {
+          "id": "combo",
+          "slot": "sprint",
+          "disabled": false
+        }
+      ],
+      "one_finger": "בחירה ישירה בכפתור תרגיל; אפשרות סטיק: החלקה ימינה spin, שמאלה grab, מעלה flip, מטה combo, בשחרור פעם אחת.",
+      "two_fingers": "סטיק משמאל להיגוי; ימין בוחר תרגיל אחד בכל לחיצה."
+    },
+    "recovery": {
+      "label": "התאוששות",
+      "note": "כל בקשות התנועה והתרגיל מבוטלות עד אישור התאוששות",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": true
+        },
+        {
+          "id": "boost",
+          "slot": "primary",
+          "disabled": true
+        },
+        {
+          "id": "grab",
+          "slot": "secondary",
+          "disabled": true
+        },
+        {
+          "id": "spin",
+          "slot": "trick",
+          "disabled": true
+        },
+        {
+          "id": "flip",
+          "slot": "support",
+          "disabled": true
+        },
+        {
+          "id": "combo",
+          "slot": "sprint",
+          "disabled": true
+        }
+      ],
+      "one_finger": "ממתינים לאישור המנוע; השהיה זמינה.",
+      "two_fingers": "ממתינים לאישור המנוע; אין תור פעולות שייצא בנחיתה."
+    }
+  },
+  "not_applicable": {
+    "attack": "לא חל על סקי",
+    "defense": "לא חל על סקי",
+    "restart": "לא חל על סקי",
+    "goalkeeper": "לא חל על סקי"
+  },
+  "feedback_source": {
+    "file": "../feel/alpine.json",
+    "speed": "speed.knots / speed.lines לפי מהירות מאומתת בלבד",
+    "events": "events רק לאחר אישור מנוע; לחיצה אינה מפעילה goal / block / fall",
+    "reduced_motion": "ללא רעידה, שינוי FOV, קווי מהירות או משובי זמן; משאירים תווית, מסגרת ומד"
+  }
+}
