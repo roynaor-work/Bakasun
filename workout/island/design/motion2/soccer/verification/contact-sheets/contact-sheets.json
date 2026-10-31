@@ -1,0 +1,704 @@
+{
+  "schemaVersion": 1,
+  "scope": "Supplemental visual evidence only; each cell is a screenshot of the existing viewer at the recorded source clip time. UI chrome hidden in browser only. No ball or gameplay simulation is added.",
+  "packs": [
+    {
+      "file": "kicks-locomotion.json",
+      "sha256": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+      "character": "soccer-player",
+      "screenshot": "kicks-locomotion-contact-sheet.png",
+      "poses": [
+        {
+          "clip": "pass_short",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "pass_short",
+          "normalizedTime": 0.08,
+          "seconds": 0.0464
+        },
+        {
+          "clip": "pass_short",
+          "normalizedTime": 0.2,
+          "seconds": 0.11599999999999999
+        },
+        {
+          "clip": "pass_short",
+          "normalizedTime": 1,
+          "seconds": 0.58
+        },
+        {
+          "clip": "pass_long",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "pass_long",
+          "normalizedTime": 0.08,
+          "seconds": 0.07200000000000001
+        },
+        {
+          "clip": "pass_long",
+          "normalizedTime": 0.2,
+          "seconds": 0.18000000000000002
+        },
+        {
+          "clip": "pass_long",
+          "normalizedTime": 1,
+          "seconds": 0.9
+        },
+        {
+          "clip": "corner_kick",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "corner_kick",
+          "normalizedTime": 0.08,
+          "seconds": 0.0736
+        },
+        {
+          "clip": "corner_kick",
+          "normalizedTime": 0.2,
+          "seconds": 0.18400000000000002
+        },
+        {
+          "clip": "corner_kick",
+          "normalizedTime": 1,
+          "seconds": 0.92
+        },
+        {
+          "clip": "goal_kick",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "goal_kick",
+          "normalizedTime": 0.08,
+          "seconds": 0.08800000000000001
+        },
+        {
+          "clip": "goal_kick",
+          "normalizedTime": 0.2,
+          "seconds": 0.22000000000000003
+        },
+        {
+          "clip": "goal_kick",
+          "normalizedTime": 1,
+          "seconds": 1.1
+        },
+        {
+          "clip": "kick_power",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "kick_power",
+          "normalizedTime": 0.08,
+          "seconds": 0.0688
+        },
+        {
+          "clip": "kick_power",
+          "normalizedTime": 0.2,
+          "seconds": 0.17200000000000001
+        },
+        {
+          "clip": "kick_power",
+          "normalizedTime": 1,
+          "seconds": 0.86
+        },
+        {
+          "clip": "kick_charge",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "kick_charge",
+          "normalizedTime": 0.25,
+          "seconds": 0.195
+        },
+        {
+          "clip": "kick_charge",
+          "normalizedTime": 0.5,
+          "seconds": 0.39
+        },
+        {
+          "clip": "kick_charge",
+          "normalizedTime": 1,
+          "seconds": 0.78
+        },
+        {
+          "clip": "dribble_run",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "dribble_run",
+          "normalizedTime": 0.24,
+          "seconds": 0.19679999999999997
+        },
+        {
+          "clip": "dribble_run",
+          "normalizedTime": 0.34,
+          "seconds": 0.2788
+        },
+        {
+          "clip": "dribble_run",
+          "normalizedTime": 1,
+          "seconds": 0.82
+        },
+        {
+          "clip": "corner_runup",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "corner_runup",
+          "normalizedTime": 0.12,
+          "seconds": 0.144
+        },
+        {
+          "clip": "corner_runup",
+          "normalizedTime": 0.25,
+          "seconds": 0.3
+        },
+        {
+          "clip": "corner_runup",
+          "normalizedTime": 1,
+          "seconds": 1.2
+        },
+        {
+          "clip": "turn_with_ball",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "turn_with_ball",
+          "normalizedTime": 0.07,
+          "seconds": 0.06160000000000001
+        },
+        {
+          "clip": "turn_with_ball",
+          "normalizedTime": 0.43,
+          "seconds": 0.3784
+        },
+        {
+          "clip": "turn_with_ball",
+          "normalizedTime": 1,
+          "seconds": 0.88
+        },
+        {
+          "clip": "goalkeeper_punt",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "goalkeeper_punt",
+          "normalizedTime": 0.27,
+          "seconds": 0.3672
+        },
+        {
+          "clip": "goalkeeper_punt",
+          "normalizedTime": 0.3,
+          "seconds": 0.40800000000000003
+        },
+        {
+          "clip": "goalkeeper_punt",
+          "normalizedTime": 1,
+          "seconds": 1.36
+        }
+      ]
+    },
+    {
+      "file": "tackles-reactions.json",
+      "sha256": "5a9b9143dbd38f438823e30c785c50511a161ced27d707c38cfec0bc5ce54e43",
+      "character": "soccer-player",
+      "screenshot": "tackles-reactions-contact-sheet.png",
+      "poses": [
+        {
+          "clip": "slide_straight_prepare",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_straight_prepare",
+          "normalizedTime": 0.25,
+          "seconds": 0.105
+        },
+        {
+          "clip": "slide_straight_prepare",
+          "normalizedTime": 0.52,
+          "seconds": 0.2184
+        },
+        {
+          "clip": "slide_straight_prepare",
+          "normalizedTime": 1,
+          "seconds": 0.42
+        },
+        {
+          "clip": "slide_straight",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_straight",
+          "normalizedTime": 0.22,
+          "seconds": 0.1716
+        },
+        {
+          "clip": "slide_straight",
+          "normalizedTime": 0.47,
+          "seconds": 0.3666
+        },
+        {
+          "clip": "slide_straight",
+          "normalizedTime": 1,
+          "seconds": 0.78
+        },
+        {
+          "clip": "slide_straight_fall",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_straight_fall",
+          "normalizedTime": 0.5,
+          "seconds": 0.23
+        },
+        {
+          "clip": "slide_straight_fall",
+          "normalizedTime": 0.82,
+          "seconds": 0.3772
+        },
+        {
+          "clip": "slide_straight_fall",
+          "normalizedTime": 1,
+          "seconds": 0.46
+        },
+        {
+          "clip": "slide_straight_recover",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_straight_recover",
+          "normalizedTime": 0.08,
+          "seconds": 0.096
+        },
+        {
+          "clip": "slide_straight_recover",
+          "normalizedTime": 0.28,
+          "seconds": 0.336
+        },
+        {
+          "clip": "slide_straight_recover",
+          "normalizedTime": 1,
+          "seconds": 1.2
+        },
+        {
+          "clip": "slide_lateral_prepare",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_lateral_prepare",
+          "normalizedTime": 0.25,
+          "seconds": 0.12
+        },
+        {
+          "clip": "slide_lateral_prepare",
+          "normalizedTime": 0.52,
+          "seconds": 0.2496
+        },
+        {
+          "clip": "slide_lateral_prepare",
+          "normalizedTime": 1,
+          "seconds": 0.48
+        },
+        {
+          "clip": "slide_lateral",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_lateral",
+          "normalizedTime": 0.22,
+          "seconds": 0.1848
+        },
+        {
+          "clip": "slide_lateral",
+          "normalizedTime": 0.47,
+          "seconds": 0.3948
+        },
+        {
+          "clip": "slide_lateral",
+          "normalizedTime": 1,
+          "seconds": 0.84
+        },
+        {
+          "clip": "slide_lateral_fall",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_lateral_fall",
+          "normalizedTime": 0.5,
+          "seconds": 0.26
+        },
+        {
+          "clip": "slide_lateral_fall",
+          "normalizedTime": 0.82,
+          "seconds": 0.4264
+        },
+        {
+          "clip": "slide_lateral_fall",
+          "normalizedTime": 1,
+          "seconds": 0.52
+        },
+        {
+          "clip": "slide_lateral_recover",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_lateral_recover",
+          "normalizedTime": 0.08,
+          "seconds": 0.10400000000000001
+        },
+        {
+          "clip": "slide_lateral_recover",
+          "normalizedTime": 0.28,
+          "seconds": 0.36400000000000005
+        },
+        {
+          "clip": "slide_lateral_recover",
+          "normalizedTime": 1,
+          "seconds": 1.3
+        },
+        {
+          "clip": "slide_fast_prepare",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_fast_prepare",
+          "normalizedTime": 0.25,
+          "seconds": 0.075
+        },
+        {
+          "clip": "slide_fast_prepare",
+          "normalizedTime": 0.52,
+          "seconds": 0.156
+        },
+        {
+          "clip": "slide_fast_prepare",
+          "normalizedTime": 1,
+          "seconds": 0.3
+        },
+        {
+          "clip": "slide_fast",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_fast",
+          "normalizedTime": 0.22,
+          "seconds": 0.1276
+        },
+        {
+          "clip": "slide_fast",
+          "normalizedTime": 0.47,
+          "seconds": 0.27259999999999995
+        },
+        {
+          "clip": "slide_fast",
+          "normalizedTime": 1,
+          "seconds": 0.58
+        },
+        {
+          "clip": "slide_fast_fall",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_fast_fall",
+          "normalizedTime": 0.5,
+          "seconds": 0.2
+        },
+        {
+          "clip": "slide_fast_fall",
+          "normalizedTime": 0.82,
+          "seconds": 0.328
+        },
+        {
+          "clip": "slide_fast_fall",
+          "normalizedTime": 1,
+          "seconds": 0.4
+        },
+        {
+          "clip": "slide_fast_recover",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_fast_recover",
+          "normalizedTime": 0.08,
+          "seconds": 0.084
+        },
+        {
+          "clip": "slide_fast_recover",
+          "normalizedTime": 0.28,
+          "seconds": 0.29400000000000004
+        },
+        {
+          "clip": "slide_fast_recover",
+          "normalizedTime": 1,
+          "seconds": 1.05
+        },
+        {
+          "clip": "defensive_jockey",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "defensive_jockey",
+          "normalizedTime": 0.2,
+          "seconds": 0.24
+        },
+        {
+          "clip": "defensive_jockey",
+          "normalizedTime": 0.3,
+          "seconds": 0.36
+        },
+        {
+          "clip": "defensive_jockey",
+          "normalizedTime": 1,
+          "seconds": 1.2
+        },
+        {
+          "clip": "slide_miss",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "slide_miss",
+          "normalizedTime": 0.14,
+          "seconds": 0.09100000000000001
+        },
+        {
+          "clip": "slide_miss",
+          "normalizedTime": 0.3,
+          "seconds": 0.195
+        },
+        {
+          "clip": "slide_miss",
+          "normalizedTime": 1,
+          "seconds": 0.65
+        },
+        {
+          "clip": "goal_celebration",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "goal_celebration",
+          "normalizedTime": 0.18,
+          "seconds": 0.324
+        },
+        {
+          "clip": "goal_celebration",
+          "normalizedTime": 0.2,
+          "seconds": 0.36000000000000004
+        },
+        {
+          "clip": "goal_celebration",
+          "normalizedTime": 1,
+          "seconds": 1.8
+        },
+        {
+          "clip": "disallowed",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "disallowed",
+          "normalizedTime": 0.2,
+          "seconds": 0.27999999999999997
+        },
+        {
+          "clip": "disallowed",
+          "normalizedTime": 0.45,
+          "seconds": 0.63
+        },
+        {
+          "clip": "disallowed",
+          "normalizedTime": 1,
+          "seconds": 1.4
+        }
+      ]
+    },
+    {
+      "file": "throws-receives.json",
+      "sha256": "c8f055cfe23c059c89c5c8de647df41e1a961f0473a228e870e415bd0d3c4fa2",
+      "character": "goalkeeper",
+      "screenshot": "throws-receives-contact-sheet.png",
+      "poses": [
+        {
+          "clip": "throw_in_prepare",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "throw_in_prepare",
+          "normalizedTime": 0.33,
+          "seconds": 0.29700000000000004
+        },
+        {
+          "clip": "throw_in_prepare",
+          "normalizedTime": 0.72,
+          "seconds": 0.648
+        },
+        {
+          "clip": "throw_in_prepare",
+          "normalizedTime": 1,
+          "seconds": 0.9
+        },
+        {
+          "clip": "throw_in_release",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "throw_in_release",
+          "normalizedTime": 0.33,
+          "seconds": 0.10560000000000001
+        },
+        {
+          "clip": "throw_in_release",
+          "normalizedTime": 0.68,
+          "seconds": 0.21760000000000002
+        },
+        {
+          "clip": "throw_in_release",
+          "normalizedTime": 1,
+          "seconds": 0.32
+        },
+        {
+          "clip": "throw_in_follow",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "throw_in_follow",
+          "normalizedTime": 0.14,
+          "seconds": 0.084
+        },
+        {
+          "clip": "throw_in_follow",
+          "normalizedTime": 0.28,
+          "seconds": 0.168
+        },
+        {
+          "clip": "throw_in_follow",
+          "normalizedTime": 1,
+          "seconds": 0.6
+        },
+        {
+          "clip": "goalkeeper_throw",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "goalkeeper_throw",
+          "normalizedTime": 0.56,
+          "seconds": 0.6608
+        },
+        {
+          "clip": "goalkeeper_throw",
+          "normalizedTime": 0.75,
+          "seconds": 0.885
+        },
+        {
+          "clip": "goalkeeper_throw",
+          "normalizedTime": 1,
+          "seconds": 1.18
+        },
+        {
+          "clip": "receive_chest",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "receive_chest",
+          "normalizedTime": 0.42,
+          "seconds": 0.3024
+        },
+        {
+          "clip": "receive_chest",
+          "normalizedTime": 0.66,
+          "seconds": 0.4752
+        },
+        {
+          "clip": "receive_chest",
+          "normalizedTime": 1,
+          "seconds": 0.72
+        },
+        {
+          "clip": "receive_thigh",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "receive_thigh",
+          "normalizedTime": 0.09,
+          "seconds": 0.0702
+        },
+        {
+          "clip": "receive_thigh",
+          "normalizedTime": 0.44,
+          "seconds": 0.3432
+        },
+        {
+          "clip": "receive_thigh",
+          "normalizedTime": 1,
+          "seconds": 0.78
+        },
+        {
+          "clip": "header",
+          "normalizedTime": 0,
+          "seconds": 0
+        },
+        {
+          "clip": "header",
+          "normalizedTime": 0.28,
+          "seconds": 0.19040000000000004
+        },
+        {
+          "clip": "header",
+          "normalizedTime": 0.52,
+          "seconds": 0.3536
+        },
+        {
+          "clip": "header",
+          "normalizedTime": 1,
+          "seconds": 0.68
+        }
+      ]
+    }
+  ],
+  "acceptanceProvenance": "../provenance.json",
+  "viewerSourceSha256": {
+    "design/viewer/viewer.html": "dca9e54d489000ffacadfd2308aeffece626a001351ca6263955be907b844de2",
+    "design/viewer/viewer.js": "d60967bfd3712dba7bf86b57b87517b274e89bffa23a03fc9678f2ee2f579060",
+    "design/viewer/animation.js": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe",
+    "design/viewer/retarget.js": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a",
+    "design/viewer/checks.js": "b7b95579e46de1b2693d5cb52f8558ed232066a8b087b5c420f46b7e7cc745b8",
+    "design/viewer/retarget-map.json": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+    "design/characters/rig.json": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+    "design/motion/soccer.json": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+    "design/characters/soccer-player.glb": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+    "design/characters/goalkeeper.glb": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f"
+  },
+  "sourceNotes": "Contact sheets stage baseline soccer plus authored states for direct clip selection. The acceptance fixture also includes authored transitions; source hashes and acceptance results are linked separately."
+}

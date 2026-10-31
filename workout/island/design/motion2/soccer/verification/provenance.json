@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-31T01:11:09.995Z",
+  "repositoryHead": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "mainAtRun": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "method": "Copy existing viewer, characters, vendor and motion into an isolated temporary directory; merge baseline soccer states/transitions with unmodified new pack states/transitions only in the temporary soccer.json; run the unchanged test-viewer.mjs. Baseline idle/run/kick remain available for its negative controls, CPU probe and screenshot. Every new state is enumerated by its existing runChecks.",
+  "fixture": {
+    "transientDirectory": "/tmp/bakasun-motion2-soccer-mUrWBq",
+    "baselineSoccerSha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+    "mergedSoccerSha256": "157855fee16407b922f83e7cb3f8d49783c2af9caa3e76479bf459609cc0c0f9",
+    "baselineStates": [
+      "idle",
+      "run",
+      "decelerate",
+      "turn_left",
+      "turn_right",
+      "kick",
+      "catch",
+      "celebrate",
+      "fall",
+      "recover"
+    ],
+    "authoredStates": [
+      "pass_short",
+      "pass_long",
+      "corner_kick",
+      "goal_kick",
+      "kick_power",
+      "kick_charge",
+      "dribble_run",
+      "corner_runup",
+      "turn_with_ball",
+      "goalkeeper_punt",
+      "slide_straight_prepare",
+      "slide_straight",
+      "slide_straight_fall",
+      "slide_straight_recover",
+      "slide_lateral_prepare",
+      "slide_lateral",
+      "slide_lateral_fall",
+      "slide_lateral_recover",
+      "slide_fast_prepare",
+      "slide_fast",
+      "slide_fast_fall",
+      "slide_fast_recover",
+      "defensive_jockey",
+      "slide_miss",
+      "goal_celebration",
+      "disallowed",
+      "throw_in_prepare",
+      "throw_in_release",
+      "throw_in_follow",
+      "goalkeeper_throw",
+      "receive_chest",
+      "receive_thigh",
+      "header"
+    ],
+    "stateCount": 43,
+    "transitionCountBeforeWildcardExpansion": 135
+  },
+  "packs": [
+    {
+      "path": "workout/island/design/motion2/soccer/kicks-locomotion.json",
+      "sha256": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+      "states": [
+        "pass_short",
+        "pass_long",
+        "corner_kick",
+        "goal_kick",
+        "kick_power",
+        "kick_charge",
+        "dribble_run",
+        "corner_runup",
+        "turn_with_ball",
+        "goalkeeper_punt"
+      ]
+    },
+    {
+      "path": "workout/island/design/motion2/soccer/tackles-reactions.json",
+      "sha256": "5a9b9143dbd38f438823e30c785c50511a161ced27d707c38cfec0bc5ce54e43",
+      "states": [
+        "slide_straight_prepare",
+        "slide_straight",
+        "slide_straight_fall",
+        "slide_straight_recover",
+        "slide_lateral_prepare",
+        "slide_lateral",
+        "slide_lateral_fall",
+        "slide_lateral_recover",
+        "slide_fast_prepare",
+        "slide_fast",
+        "slide_fast_fall",
+        "slide_fast_recover",
+        "defensive_jockey",
+        "slide_miss",
+        "goal_celebration",
+        "disallowed"
+      ]
+    },
+    {
+      "path": "workout/island/design/motion2/soccer/throws-receives.json",
+      "sha256": "c8f055cfe23c059c89c5c8de647df41e1a961f0473a228e870e415bd0d3c4fa2",
+      "states": [
+        "throw_in_prepare",
+        "throw_in_release",
+        "throw_in_follow",
+        "goalkeeper_throw",
+        "receive_chest",
+        "receive_thigh",
+        "header"
+      ]
+    }
+  ],
+  "originalSourceSha256": {
+    "design/viewer/README.md": "5ac3cd3e2fad417ce71955e025e7c1e3d50ed8743fc7b13cd5fadc7483fd8936",
+    "design/viewer/VALIDATION.md": "8c10367b76d7e749f88ebf00b5e5b5e9dcf0c7ad63f59d959001d4118cee9548",
+    "design/viewer/animation.js": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe",
+    "design/viewer/checks.js": "b7b95579e46de1b2693d5cb52f8558ed232066a8b087b5c420f46b7e7cc745b8",
+    "design/viewer/draco/DRACOLoader.js": "6b635ad5f27d2f9bc793fe187915a38d7aabd53b59919a15beee36d36d7d904e",
+    "design/viewer/draco/LICENSE.draco": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4",
+    "design/viewer/draco/LICENSE.three": "a70d6dc2d2a6464ee9ee503b1881d5aa884abdec63b4c7064f0c5ad827a7d2b4",
+    "design/viewer/draco/README.md": "b909a71146b41ec5c50425e34096ddcf01c6a6d717819a033fb0e3d131d0bbc8",
+    "design/viewer/draco/draco_decoder.wasm": "39b78cec9398af525d76f7eecf336ccf829891cec9524905e55fe686499834bf",
+    "design/viewer/draco/draco_wasm_wrapper.js": "9927d2886d34906aec5258d091a162f3d9f59ab7e84fd6a81961987bca3c363f",
+    "design/viewer/draco/provenance.json": "b07e5580fa4ea22677b590db5d858533ab9bf92e2ef194d8e8ff18a1d8dfafad",
+    "design/viewer/retarget-map.json": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+    "design/viewer/retarget.js": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a",
+    "design/viewer/test-retarget.mjs": "7dae54d59e509d97ce3a7a28bac83824143cc1c62f6e8d8a7bb31eeaa56a6c15",
+    "design/viewer/test-viewer.mjs": "c3ec3499bcf042120511ff1d2cb05fa691f6002e2d0c3f87d4a1ff4ac6ccb8c0",
+    "design/viewer/viewer.html": "dca9e54d489000ffacadfd2308aeffece626a001351ca6263955be907b844de2",
+    "design/viewer/viewer.js": "d60967bfd3712dba7bf86b57b87517b274e89bffa23a03fc9678f2ee2f579060",
+    "design/characters/LICENSES.md": "21155b93cf5777c539888d67a52e7f3531444b68dcc76b341b2753573146f913",
+    "design/characters/README.md": "32afad2f8b04e90c491cee0111a7c12738a2b0eebfbbc86e1743a6b1df456e03",
+    "design/characters/VALIDATION.md": "ac5571692b741fdff3b4916320aafd924ed0ea7ae4c518a06ceb407c674eb838",
+    "design/characters/basketball-player-back.png": "6a14df86c2c555ce72aa1e1e11e97cd2c5ec5541d7c34d8579776dc78df96d85",
+    "design/characters/basketball-player-front.png": "641d05de88c50ab914e4806db05599677bd3cef5604659d058eb8099e3bf239c",
+    "design/characters/basketball-player-three-quarter.png": "4a45a8356382e9ab00fb42e9f120404516d77c59e1bc334545a10629262d1b17",
+    "design/characters/basketball-player.glb": "a1b638f72c5e62d3a25d3fbd2f9e262907b87fd31992ce32c116cd3128568814",
+    "design/characters/goalkeeper-back.png": "057acc93d53f817ab0327b8b72fb8458eaaccacaf15da8f2741027908310931b",
+    "design/characters/goalkeeper-front.png": "c13c74a02b22b8ec89da202128348604620aa22a9b716f5ea1e2d2e67cfaf2b9",
+    "design/characters/goalkeeper-three-quarter.png": "32ba36a5047f53a27f103a6874e94ffca402ae9d9dd54c15eef4f010d82c1579",
+    "design/characters/goalkeeper.glb": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f",
+    "design/characters/rig.json": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+    "design/characters/skier-back.png": "e630d7a9616314062f6cfc510d119e72e8e5f311155fa6376cc22068f836e78d",
+    "design/characters/skier-front.png": "6ac7db56bf6dc127e6cce99d86b327a475d91f0ce13e53d4a644d02cfd4bef1a",
+    "design/characters/skier-three-quarter.png": "9d69d29fa5c83cff26a16771de0d78c16db5dcb8fa439b12508945d1f5e3849e",
+    "design/characters/skier.glb": "c6cc6ea9f01abbd25feb9660187de0fcdabec9b0156a3044254ef04651d895a3",
+    "design/characters/soccer-player-back.png": "6a2103d99c40bbba677a13a62e8b6ccaa8be80d83996fa9815e040123d4c49d7",
+    "design/characters/soccer-player-front.png": "88f82fd87ab9bdbb56b65c16632a6fcac39e0dd5b00f0d4feeb33261c17dd1c4",
+    "design/characters/soccer-player-three-quarter.png": "92019582444cc3cb79259c1d0882665b488dd537337f1e47dd47b14df0b542dd",
+    "design/characters/soccer-player.glb": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+    "design/motion/README.md": "1113d5308b0c17cd51a641fc7a7a861945655c22ad2412d78c8511942496c91f",
+    "design/motion/alpine.json": "c6fc39a0b465d0dc74607e9af391c0736148042204e44942068914538d29dc87",
+    "design/motion/hoops.json": "194cb62adf3469d044d738d11c064c86c8c5737792b4c83055b3d97906ebe9c5",
+    "design/motion/soccer.json": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+    "design/motion/validate-motion.mjs": "ce6cb3ae7c204d8c19bee3d718d17df9a266ee68dfb540bb51288bce7afc5c78",
+    "vendor/BufferGeometryUtils.js": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+    "vendor/DRACOLoader.js": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb",
+    "vendor/GLTFLoader.js": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+    "vendor/LICENSE.three": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+    "vendor/SkeletonUtils.js": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d",
+    "vendor/draco/README.md": "19c090806aff487faeeb303bd37d59a2c18a112470b5169f0dd24c074ac8f923",
+    "vendor/draco/draco_decoder.wasm": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac",
+    "vendor/draco/draco_wasm_wrapper.js": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6",
+    "vendor/three.module.js": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+  },
+  "invocations": [
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/tmp/bakasun-motion2-soccer-mUrWBq/design/viewer/test-viewer.mjs",
+        "--character",
+        "soccer-player",
+        "--game",
+        "soccer",
+        "--executable",
+        "/usr/bin/chromium",
+        "--out",
+        "/workspace/Bakasun/workout/island/design/motion2/soccer/verification/soccer-player"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "Checking soccer-player-soccer-844x390\nPASS soccer-player-soccer-844x390\nChecking soccer-player-soccer-390x844\nPASS soccer-player-soccer-390x844\nPASS: 2/2 cases; /workspace/Bakasun/workout/island/design/motion2/soccer/verification/soccer-player/report.json\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/tmp/bakasun-motion2-soccer-mUrWBq/design/viewer/test-viewer.mjs",
+        "--character",
+        "goalkeeper",
+        "--game",
+        "soccer",
+        "--executable",
+        "/usr/bin/chromium",
+        "--out",
+        "workout/island/design/motion2/soccer/verification/goalkeeper"
+      ],
+      "cwd": "/workspace/Bakasun",
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "Checking goalkeeper-soccer-844x390\nPASS goalkeeper-soccer-844x390\nChecking goalkeeper-soccer-390x844\nPASS goalkeeper-soccer-390x844\nPASS: 2/2 cases; /workspace/Bakasun/workout/island/design/motion2/soccer/verification/goalkeeper/report.json\n",
+      "stderr": "",
+      "retryOfFailedAttempt": 0
+    }
+  ],
+  "pass": true,
+  "changedOriginalInputs": [],
+  "changedPacksDuringRun": [],
+  "sourceInputsUnchanged": true,
+  "acceptanceSkipped": false,
+  "priorFailedAttempts": [
+    {
+      "character": "goalkeeper",
+      "reason": "Transient startup request abort in unchanged viewer; all measured case checks passed, but original runner correctly failed its infrastructure contract. Repeated both goalkeeper cases with the identical staged bytes and limits.",
+      "invocation": {
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "/tmp/bakasun-motion2-soccer-mUrWBq/design/viewer/test-viewer.mjs",
+          "--character",
+          "goalkeeper",
+          "--game",
+          "soccer",
+          "--executable",
+          "/usr/bin/chromium",
+          "--out",
+          "/workspace/Bakasun/workout/island/design/motion2/soccer/verification/goalkeeper"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "stdout": "Checking goalkeeper-soccer-844x390\nPASS goalkeeper-soccer-844x390\nChecking goalkeeper-soccer-390x844\nPASS goalkeeper-soccer-390x844\nFAIL: 2/2 cases; /workspace/Bakasun/workout/island/design/motion2/soccer/verification/goalkeeper/report.json\n",
+        "stderr": ""
+      },
+      "reportSha256": "f6f4336acb7edb9c922994248dd3476c90d51feff26d4a348858c316d4fc0cf9",
+      "infrastructureErrors": [
+        {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "pageErrors": [],
+          "consoleErrors": [],
+          "nonLocalRequests": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:38069/design/characters/soccer-player.glb",
+              "error": "net::ERR_ABORTED"
+            }
+          ],
+          "httpErrors": []
+        }
+      ]
+    }
+  ],
+  "finalizedAt": "2026-10-31T01:15:43.176761+00:00"
+}

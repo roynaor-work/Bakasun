@@ -1,0 +1,3672 @@
+{
+  "schemaVersion": 1,
+  "kind": "skeletal-motion-extension-manifest",
+  "game": "soccer",
+  "license": "CC0-1.0",
+  "baseMainCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "branch": "codex/island-motion2-soccer-20261031",
+  "timeUnits": "seconds; source JSON phase fields are normalized to [0,1]",
+  "composition": {
+    "baseline": "../../motion/soccer.json",
+    "statePolicy": "add unique state identifiers; preserve all baseline states and transitions",
+    "transitionPolicy": "append new transitions; simulation provides event inputs; retain baseline wildcard reset/fall/result behavior",
+    "rootMotion": false,
+    "events": "presentation only; never authoritative game outcomes"
+  },
+  "sourceReferences": [
+    {
+      "path": "workout/island/design/motion/soccer.json",
+      "sha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+      "gitBlobSha": "d7e7e0a6ba45da261feb3fead887b96b01cfc641"
+    },
+    {
+      "path": "workout/island/design/viewer/retarget-map.json",
+      "sha256": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+      "gitBlobSha": "15c4394d8937214ab5d2e3be04f39bc92b899a55"
+    },
+    {
+      "path": "workout/island/design/viewer/test-viewer.mjs",
+      "sha256": "c3ec3499bcf042120511ff1d2cb05fa691f6002e2d0c3f87d4a1ff4ac6ccb8c0",
+      "gitBlobSha": "3c0e11f63c8a6b41ea1b50941fcdc0c9999d946e"
+    },
+    {
+      "path": "workout/island/design/characters/rig.json",
+      "sha256": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+      "gitBlobSha": "dba266ca129de310b638494a28aee0e58ea0efd0"
+    }
+  ],
+  "packs": [
+    {
+      "path": "throws-receives.json",
+      "sha256": "c8f055cfe23c059c89c5c8de647df41e1a961f0473a228e870e415bd0d3c4fa2",
+      "clipCount": 7,
+      "transitionCount": 25,
+      "clips": [
+        {
+          "id": "throw_in_prepare",
+          "durationSeconds": 0.9,
+          "loop": false,
+          "notes": "Two hands bring the ball from chest behind and above the head. Both feet stay on the ground. Ends in exactly the release starting pose.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "presentation_ball_gather"
+            },
+            {
+              "atSeconds": 0,
+              "name": "presentation_LeftFoot_plant"
+            },
+            {
+              "atSeconds": 0,
+              "name": "presentation_RightFoot_plant"
+            },
+            {
+              "atSeconds": 0.648,
+              "name": "presentation_overhead_loaded"
+            },
+            {
+              "atSeconds": 0.9,
+              "name": "presentation_LeftFoot_release"
+            },
+            {
+              "atSeconds": 0.9,
+              "name": "presentation_RightFoot_release"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.0,
+              "bone": "LeftHand",
+              "event": "presentation_ball_gather"
+            },
+            {
+              "atSeconds": 0.0,
+              "bone": "RightHand",
+              "event": "presentation_ball_gather"
+            },
+            {
+              "atSeconds": 0.648,
+              "bone": "LeftHand",
+              "event": "presentation_overhead_loaded"
+            },
+            {
+              "atSeconds": 0.648,
+              "bone": "RightHand",
+              "event": "presentation_overhead_loaded"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.9,
+              "anchorMeters": [
+                0.12,
+                0,
+                0.035
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.9,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.045
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.9,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.9,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "throw_in_release",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.1
+            }
+          ]
+        },
+        {
+          "id": "throw_in_release",
+          "durationSeconds": 0.32,
+          "loop": false,
+          "notes": "Legal overhead two-hand release; both soles stay planted through release. Ball markers describe presentation only.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "presentation_LeftFoot_plant"
+            },
+            {
+              "atSeconds": 0,
+              "name": "presentation_RightFoot_plant"
+            },
+            {
+              "atSeconds": 0.2176,
+              "name": "presentation_throw_release"
+            },
+            {
+              "atSeconds": 0.32,
+              "name": "presentation_LeftFoot_release"
+            },
+            {
+              "atSeconds": 0.32,
+              "name": "presentation_RightFoot_release"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.2176,
+              "bone": "LeftHand",
+              "event": "presentation_throw_release"
+            },
+            {
+              "atSeconds": 0.2176,
+              "bone": "RightHand",
+              "event": "presentation_throw_release"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.32,
+              "anchorMeters": [
+                0.12,
+                0,
+                0.035
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.32,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.045
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.32,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.32,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "throw_in_follow",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.1
+            }
+          ]
+        },
+        {
+          "id": "throw_in_follow",
+          "durationSeconds": 0.6,
+          "loop": false,
+          "notes": "Arms follow the release, then return to a neutral balanced stance. The ball has left both hands.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "presentation_LeftFoot_plant"
+            },
+            {
+              "atSeconds": 0,
+              "name": "presentation_RightFoot_plant"
+            },
+            {
+              "atSeconds": 0.168,
+              "name": "presentation_throw_follow_through"
+            },
+            {
+              "atSeconds": 0.6,
+              "name": "presentation_ready"
+            },
+            {
+              "atSeconds": 0.6,
+              "name": "presentation_LeftFoot_release"
+            },
+            {
+              "atSeconds": 0.6,
+              "name": "presentation_RightFoot_release"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.6,
+              "anchorMeters": [
+                0.12,
+                0,
+                0.035
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.6,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.045
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.6,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.6,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "goalkeeper_throw",
+          "durationSeconds": 1.18,
+          "loop": false,
+          "notes": "Two-hand gather, dominant right-hand overarm distribution, follow-through and ready stance. Grounded step stance; hand release differs from the two-handed throw-in.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "presentation_keeper_gather"
+            },
+            {
+              "atSeconds": 0,
+              "name": "presentation_LeftFoot_plant"
+            },
+            {
+              "atSeconds": 0,
+              "name": "presentation_RightFoot_plant"
+            },
+            {
+              "atSeconds": 0.6608,
+              "name": "presentation_keeper_throw_release"
+            },
+            {
+              "atSeconds": 0.885,
+              "name": "presentation_keeper_follow"
+            },
+            {
+              "atSeconds": 1.18,
+              "name": "presentation_LeftFoot_release"
+            },
+            {
+              "atSeconds": 1.18,
+              "name": "presentation_RightFoot_release"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.0,
+              "bone": "LeftHand",
+              "event": "presentation_keeper_gather"
+            },
+            {
+              "atSeconds": 0.0,
+              "bone": "RightHand",
+              "event": "presentation_keeper_gather"
+            },
+            {
+              "atSeconds": 0.6608,
+              "bone": "RightHand",
+              "event": "presentation_keeper_throw_release"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.18,
+              "anchorMeters": [
+                0.12,
+                0,
+                0.035
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.18,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.045
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.18,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.18,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "receive_chest",
+          "durationSeconds": 0.72,
+          "loop": false,
+          "notes": "Open the chest before contact, then flex the torso and knees to cushion the ball downward. Arms balance outside the ball path.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "presentation_LeftFoot_plant"
+            },
+            {
+              "atSeconds": 0,
+              "name": "presentation_RightFoot_plant"
+            },
+            {
+              "atSeconds": 0.3024,
+              "name": "presentation_chest_contact"
+            },
+            {
+              "atSeconds": 0.4752,
+              "name": "presentation_chest_cushion"
+            },
+            {
+              "atSeconds": 0.72,
+              "name": "presentation_LeftFoot_release"
+            },
+            {
+              "atSeconds": 0.72,
+              "name": "presentation_RightFoot_release"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.3024,
+              "bone": "Chest",
+              "event": "presentation_chest_contact"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.72,
+              "anchorMeters": [
+                0.12,
+                0,
+                0.035
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.72,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.045
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.72,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.72,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "dribble_run",
+              "on": "control_and_move",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "pass_short",
+              "on": "control_and_pass",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "receive_thigh",
+          "durationSeconds": 0.78,
+          "loop": false,
+          "notes": "Balance on the left sole, lift the right thigh, cushion the ball by lowering the thigh after contact, then reacquire the right foot plant.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "presentation_LeftFoot_plant"
+            },
+            {
+              "atSeconds": 0,
+              "name": "presentation_RightFoot_plant"
+            },
+            {
+              "atSeconds": 0.0702,
+              "name": "presentation_RightFoot_release"
+            },
+            {
+              "atSeconds": 0.3432,
+              "name": "presentation_thigh_contact"
+            },
+            {
+              "atSeconds": 0.507,
+              "name": "presentation_thigh_cushion"
+            },
+            {
+              "atSeconds": 0.7332,
+              "name": "presentation_foot_plant"
+            },
+            {
+              "atSeconds": 0.7332,
+              "name": "presentation_RightFoot_plant"
+            },
+            {
+              "atSeconds": 0.78,
+              "name": "presentation_LeftFoot_release"
+            },
+            {
+              "atSeconds": 0.78,
+              "name": "presentation_RightFoot_release"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.3432,
+              "bone": "RightUpLeg",
+              "event": "presentation_thigh_contact"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.78,
+              "anchorMeters": [
+                0.12,
+                0,
+                0.035
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.0702,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.045
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.7332,
+              "endSeconds": 0.78,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.045
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.78,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.0702,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.7332,
+              "endSeconds": 0.78,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "dribble_run",
+              "on": "control_and_move",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "pass_short",
+              "on": "control_and_pass",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "header",
+          "durationSeconds": 0.68,
+          "loop": false,
+          "notes": "Grounded header: knees load, torso and neck drive forward through forehead contact, then settle. No hand-ball contact and no false aerial support.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "presentation_LeftFoot_plant"
+            },
+            {
+              "atSeconds": 0,
+              "name": "presentation_RightFoot_plant"
+            },
+            {
+              "atSeconds": 0.1904,
+              "name": "presentation_header_load"
+            },
+            {
+              "atSeconds": 0.3536,
+              "name": "presentation_head_contact"
+            },
+            {
+              "atSeconds": 0.4896,
+              "name": "presentation_header_follow"
+            },
+            {
+              "atSeconds": 0.68,
+              "name": "presentation_LeftFoot_release"
+            },
+            {
+              "atSeconds": 0.68,
+              "name": "presentation_RightFoot_release"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.3536,
+              "bone": "Head",
+              "event": "presentation_head_contact"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.68,
+              "anchorMeters": [
+                0.12,
+                0,
+                0.035
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.68,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.045
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.68,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.68,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "kicks-locomotion.json",
+      "sha256": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+      "clipCount": 10,
+      "transitionCount": 42,
+      "clips": [
+        {
+          "id": "pass_short",
+          "durationSeconds": 0.58,
+          "loop": false,
+          "notes": "Inside-foot short pass: compact backswing, ankle closes at ball contact, low follow-through and balanced recovery.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "visual_prepare"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.0464,
+              "name": "visual_ground_release_RightFoot"
+            },
+            {
+              "atSeconds": 0.116,
+              "name": "visual_backswing"
+            },
+            {
+              "atSeconds": 0.232,
+              "name": "visual_ball_strike"
+            },
+            {
+              "atSeconds": 0.3364,
+              "name": "visual_follow_through"
+            },
+            {
+              "atSeconds": 0.5452,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.58,
+              "name": "visual_ready"
+            },
+            {
+              "atSeconds": 0.58,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 0.58,
+              "name": "visual_ground_release_RightFoot"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.232,
+              "bone": "RightFoot",
+              "event": "visual_ball_strike"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.58,
+              "anchorMeters": [
+                0.12,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.0464,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.06
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.5452,
+              "endSeconds": 0.58,
+              "anchorMeters": [
+                -0.12,
+                0,
+                0.12
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.58,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.0464,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.5452,
+              "endSeconds": 0.58,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "pass_long",
+          "durationSeconds": 0.9,
+          "loop": false,
+          "notes": "Lofted long pass: larger hip/chest separation and raised follow-through; left sole remains the pivot.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "visual_prepare"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.072,
+              "name": "visual_ground_release_RightFoot"
+            },
+            {
+              "atSeconds": 0.18,
+              "name": "visual_backswing"
+            },
+            {
+              "atSeconds": 0.405,
+              "name": "visual_ball_strike"
+            },
+            {
+              "atSeconds": 0.567,
+              "name": "visual_follow_through"
+            },
+            {
+              "atSeconds": 0.846,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.9,
+              "name": "visual_ready"
+            },
+            {
+              "atSeconds": 0.9,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 0.9,
+              "name": "visual_ground_release_RightFoot"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.405,
+              "bone": "RightFoot",
+              "event": "visual_ball_strike"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.9,
+              "anchorMeters": [
+                0.12,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.072,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.06
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.846,
+              "endSeconds": 0.9,
+              "anchorMeters": [
+                -0.12,
+                0,
+                0.12
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.9,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.072,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.846,
+              "endSeconds": 0.9,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "corner_kick",
+          "durationSeconds": 0.92,
+          "loop": false,
+          "notes": "Corner delivery: opening hip, angled ankle at contact and across-body curl follow-through after the run-up.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "visual_prepare"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.0736,
+              "name": "visual_ground_release_RightFoot"
+            },
+            {
+              "atSeconds": 0.184,
+              "name": "visual_backswing"
+            },
+            {
+              "atSeconds": 0.3956,
+              "name": "visual_ball_strike"
+            },
+            {
+              "atSeconds": 0.5612,
+              "name": "visual_follow_through"
+            },
+            {
+              "atSeconds": 0.8648,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.92,
+              "name": "visual_ready"
+            },
+            {
+              "atSeconds": 0.92,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 0.92,
+              "name": "visual_ground_release_RightFoot"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.3956,
+              "bone": "RightFoot",
+              "event": "visual_ball_strike"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.92,
+              "anchorMeters": [
+                0.12,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.0736,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.06
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.8648,
+              "endSeconds": 0.92,
+              "anchorMeters": [
+                -0.12,
+                0,
+                0.12
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.92,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.0736,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.8648,
+              "endSeconds": 0.92,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "goal_kick",
+          "durationSeconds": 1.1,
+          "loop": false,
+          "notes": "Goalkeeper ground goal kick: measured load, instep ground-ball contact, long elevated follow-through, then recover.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "visual_prepare"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.088,
+              "name": "visual_ground_release_RightFoot"
+            },
+            {
+              "atSeconds": 0.22,
+              "name": "visual_backswing"
+            },
+            {
+              "atSeconds": 0.528,
+              "name": "visual_ball_strike"
+            },
+            {
+              "atSeconds": 0.726,
+              "name": "visual_follow_through"
+            },
+            {
+              "atSeconds": 1.034,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 1.1,
+              "name": "visual_ready"
+            },
+            {
+              "atSeconds": 1.1,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 1.1,
+              "name": "visual_ground_release_RightFoot"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.528,
+              "bone": "RightFoot",
+              "event": "visual_ball_strike"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.1,
+              "anchorMeters": [
+                0.12,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.088,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.06
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 1.034,
+              "endSeconds": 1.1,
+              "anchorMeters": [
+                -0.12,
+                0,
+                0.12
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.1,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.088,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 1.034,
+              "endSeconds": 1.1,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "kick_power",
+          "durationSeconds": 0.86,
+          "loop": false,
+          "notes": "Release from the charged stance: explosive hip/chest unwinding, instep impact, full swing and controlled landing.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "visual_prepare"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.0688,
+              "name": "visual_ground_release_RightFoot"
+            },
+            {
+              "atSeconds": 0.172,
+              "name": "visual_backswing"
+            },
+            {
+              "atSeconds": 0.3268,
+              "name": "visual_ball_strike"
+            },
+            {
+              "atSeconds": 0.4816,
+              "name": "visual_follow_through"
+            },
+            {
+              "atSeconds": 0.8084,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.86,
+              "name": "visual_ready"
+            },
+            {
+              "atSeconds": 0.86,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 0.86,
+              "name": "visual_ground_release_RightFoot"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.3268,
+              "bone": "RightFoot",
+              "event": "visual_ball_strike"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.86,
+              "anchorMeters": [
+                0.12,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.0688,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.22
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.8084,
+              "endSeconds": 0.86,
+              "anchorMeters": [
+                -0.12,
+                0,
+                0.12
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.86,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.0688,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.8084,
+              "endSeconds": 0.86,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "kick_charge",
+          "durationSeconds": 0.78,
+          "loop": true,
+          "notes": "Loaded strike stance held with a small breathing cycle; both soles planted, shoulders opposed to hips. Release to kick_power or ease back to idle on cancel.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "visual_charge_ready"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.39,
+              "name": "visual_charge_peak"
+            },
+            {
+              "atSeconds": 0.78,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 0.78,
+              "name": "visual_ground_release_RightFoot"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.78,
+              "anchorMeters": [
+                0.12,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.78,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.22
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.78,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.78,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "kick_power",
+              "on": "release_charge",
+              "visualBlendSeconds": 0.16
+            },
+            {
+              "target": "idle",
+              "on": "cancel_charge",
+              "visualBlendSeconds": 0.22
+            }
+          ]
+        },
+        {
+          "id": "dribble_run",
+          "durationSeconds": 0.82,
+          "loop": true,
+          "notes": "Two controlled running steps with alternating free-foot ball taps; lowered arm swing and gaze follow the ball. Reference trajectory validates each planted sole in world space.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0.1968,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 0.2788,
+              "name": "visual_dribble_touch_right"
+            },
+            {
+              "atSeconds": 0.41,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.6068,
+              "name": "visual_ground_release_RightFoot"
+            },
+            {
+              "atSeconds": 0.6888,
+              "name": "visual_dribble_touch_left"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.2788,
+              "bone": "RightFoot",
+              "event": "visual_dribble_touch_right"
+            },
+            {
+              "atSeconds": 0.6888,
+              "bone": "LeftFoot",
+              "event": "visual_dribble_touch_left"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.1968,
+              "anchorMeters": [
+                0.12,
+                0,
+                0.2
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.41,
+              "endSeconds": 0.6068,
+              "anchorMeters": [
+                -0.12,
+                0,
+                0.94
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.1968,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.41,
+              "endSeconds": 0.6068,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "turn_with_ball",
+              "on": "turn_with_ball",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "idle",
+              "on": "stopped",
+              "visualBlendSeconds": 0.2
+            },
+            {
+              "target": "run",
+              "on": "release_ball",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "corner_runup",
+          "durationSeconds": 1.2,
+          "loop": false,
+          "notes": "Four compact approach footfalls toward the corner ball, arms counter-swinging. Final left sole lands at .95 and holds for the corner_kick transition. End via corner_kick with world-space plant carry; simulation positions the corner ball.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "visual_runup_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0.144,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 0.3,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.444,
+              "name": "visual_ground_release_RightFoot"
+            },
+            {
+              "atSeconds": 0.6,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0.744,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 0.9,
+              "name": "visual_final_approach"
+            },
+            {
+              "atSeconds": 0.9,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 1.044,
+              "name": "visual_ground_release_RightFoot"
+            },
+            {
+              "atSeconds": 1.14,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 1.2,
+              "name": "visual_runup_complete"
+            },
+            {
+              "atSeconds": 1.2,
+              "name": "visual_ground_release_LeftFoot"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.144,
+              "anchorMeters": [
+                0.12,
+                0,
+                0.2
+              ]
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.6,
+              "endSeconds": 0.744,
+              "anchorMeters": [
+                0.12,
+                0,
+                1.52
+              ]
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 1.14,
+              "endSeconds": 1.2,
+              "anchorMeters": [
+                0.12,
+                0,
+                2.75
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.3,
+              "endSeconds": 0.444,
+              "anchorMeters": [
+                -0.12,
+                0,
+                0.86
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.9,
+              "endSeconds": 1.044,
+              "anchorMeters": [
+                -0.12,
+                0,
+                2.18
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.144,
+              "mode": "plant"
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.6,
+              "endSeconds": 0.744,
+              "mode": "plant"
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 1.14,
+              "endSeconds": 1.2,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.3,
+              "endSeconds": 0.444,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.9,
+              "endSeconds": 1.044,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "corner_kick",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.16
+            },
+            {
+              "target": "corner_kick",
+              "on": "visual_runup_complete",
+              "visualBlendSeconds": 0.16
+            }
+          ]
+        },
+        {
+          "id": "turn_with_ball",
+          "durationSeconds": 0.88,
+          "loop": false,
+          "notes": "Shield and inside-foot drag around the planted left pivot; hips turn 65 degrees then settle 45 degrees into the exit. Simulation owns the lasting entity yaw.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "visual_turn_prepare"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.0616,
+              "name": "visual_ground_release_RightFoot"
+            },
+            {
+              "atSeconds": 0.3784,
+              "name": "visual_ball_drag"
+            },
+            {
+              "atSeconds": 0.66,
+              "name": "visual_turn_exit"
+            },
+            {
+              "atSeconds": 0.8536,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.88,
+              "name": "visual_ready"
+            },
+            {
+              "atSeconds": 0.88,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 0.88,
+              "name": "visual_ground_release_RightFoot"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.3784,
+              "bone": "RightFoot",
+              "event": "visual_ball_drag"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.88,
+              "anchorMeters": [
+                0.12,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.0616,
+              "anchorMeters": [
+                -0.12,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.8536,
+              "endSeconds": 0.88,
+              "anchorMeters": [
+                -0.28,
+                0,
+                -0.03
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.88,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.0616,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.8536,
+              "endSeconds": 0.88,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "dribble_run",
+              "on": "resume_dribble",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        },
+        {
+          "id": "goalkeeper_punt",
+          "durationSeconds": 1.36,
+          "loop": false,
+          "notes": "Goalkeeper holds the ball in two hands, releases a controlled drop, swings the right leg through the falling ball, follows through high and regains balance.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "visual_ball_hold"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_LeftFoot"
+            },
+            {
+              "atSeconds": 0,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 0.3672,
+              "name": "visual_ground_release_RightFoot"
+            },
+            {
+              "atSeconds": 0.408,
+              "name": "visual_ball_drop"
+            },
+            {
+              "atSeconds": 0.5848,
+              "name": "visual_backswing"
+            },
+            {
+              "atSeconds": 0.8024,
+              "name": "visual_punt_strike"
+            },
+            {
+              "atSeconds": 0.9928,
+              "name": "visual_follow_through"
+            },
+            {
+              "atSeconds": 1.3192,
+              "name": "visual_ground_acquire_RightFoot"
+            },
+            {
+              "atSeconds": 1.36,
+              "name": "visual_ready"
+            },
+            {
+              "atSeconds": 1.36,
+              "name": "visual_ground_release_LeftFoot"
+            },
+            {
+              "atSeconds": 1.36,
+              "name": "visual_ground_release_RightFoot"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.0,
+              "bone": "LeftHand",
+              "event": "visual_ball_hold"
+            },
+            {
+              "atSeconds": 0.0,
+              "bone": "RightHand",
+              "event": "visual_ball_hold"
+            },
+            {
+              "atSeconds": 0.408,
+              "bone": "LeftHand",
+              "event": "visual_ball_drop"
+            },
+            {
+              "atSeconds": 0.408,
+              "bone": "RightHand",
+              "event": "visual_ball_drop"
+            },
+            {
+              "atSeconds": 0.8024,
+              "bone": "RightFoot",
+              "event": "visual_punt_strike"
+            }
+          ],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.36,
+              "anchorMeters": [
+                0.12,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.3672,
+              "anchorMeters": [
+                -0.12,
+                0,
+                -0.05
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 1.3192,
+              "endSeconds": 1.36,
+              "anchorMeters": [
+                -0.12,
+                0,
+                0.12
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.36,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.3672,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 1.3192,
+              "endSeconds": 1.36,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "tackles-reactions.json",
+      "sha256": "5a9b9143dbd38f438823e30c785c50511a161ced27d707c38cfec0bc5ce54e43",
+      "clipCount": 16,
+      "transitionCount": 44,
+      "clips": [
+        {
+          "id": "slide_straight_prepare",
+          "durationSeconds": 0.42,
+          "loop": false,
+          "notes": "straight: lower centre of mass, short plant, release the tackling leg before the slide.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.105,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 0.105,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.2184,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0.2184,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.2184,
+              "name": "presentation_tackle_ready"
+            },
+            {
+              "atSeconds": 0.294,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.3612,
+              "name": "presentation_commit_slide"
+            },
+            {
+              "atSeconds": 0.42,
+              "name": "ground_LeftFoot_end"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.105,
+              "anchorMeters": [
+                0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.2184,
+              "endSeconds": 0.42,
+              "anchorMeters": [
+                0.14,
+                0,
+                0.035
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.105,
+              "anchorMeters": [
+                -0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.2184,
+              "endSeconds": 0.294,
+              "anchorMeters": [
+                -0.13,
+                0,
+                -0.025
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.105,
+              "mode": "plant"
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.2184,
+              "endSeconds": 0.42,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.105,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.2184,
+              "endSeconds": 0.294,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "slide_straight",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.16
+            },
+            {
+              "target": "defensive_jockey",
+              "on": "cancel_tackle",
+              "visualBlendSeconds": 0.2
+            }
+          ]
+        },
+        {
+          "id": "slide_straight",
+          "durationSeconds": 0.78,
+          "loop": false,
+          "notes": "straight: forward extension with a bent trailing knee; sole and hip slide deliberately, no planted-foot lock.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0.1716,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.1716,
+              "name": "presentation_slide_begin"
+            },
+            {
+              "atSeconds": 0.3666,
+              "name": "presentation_ball_tackle"
+            },
+            {
+              "atSeconds": 0.4836,
+              "name": "ground_LeftHand_begin"
+            },
+            {
+              "atSeconds": 0.4836,
+              "name": "presentation_slide_drag"
+            },
+            {
+              "atSeconds": 0.78,
+              "name": "ground_LeftHand_end"
+            },
+            {
+              "atSeconds": 0.78,
+              "name": "ground_RightFoot_end"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.3666,
+              "bone": "RightFoot",
+              "event": "presentation_ball_tackle"
+            }
+          ],
+          "supportContacts": [],
+          "groundContacts": [
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.1716,
+              "endSeconds": 0.78,
+              "mode": "slide"
+            },
+            {
+              "bone": "LeftHand",
+              "startSeconds": 0.4836,
+              "endSeconds": 0.78,
+              "mode": "brace"
+            }
+          ],
+          "plantedFootSlipApplicability": "not applicable: no planted-foot interval; intentional slide/fall still receives complete mesh floor checks",
+          "recommendedTransitions": [
+            {
+              "target": "slide_straight_fall",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "slide_miss",
+              "on": "tackle_missed",
+              "visualBlendSeconds": 0.16
+            }
+          ]
+        },
+        {
+          "id": "slide_straight_fall",
+          "durationSeconds": 0.46,
+          "loop": false,
+          "notes": "straight: absorb the remaining slide into a side fall, both hands brace, keep legs above the ground.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftHand_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.23,
+              "name": "ground_Hips_begin"
+            },
+            {
+              "atSeconds": 0.23,
+              "name": "ground_RightHand_begin"
+            },
+            {
+              "atSeconds": 0.23,
+              "name": "presentation_body_landing"
+            },
+            {
+              "atSeconds": 0.3772,
+              "name": "presentation_landing_settled"
+            },
+            {
+              "atSeconds": 0.46,
+              "name": "ground_Hips_end"
+            },
+            {
+              "atSeconds": 0.46,
+              "name": "ground_LeftHand_end"
+            },
+            {
+              "atSeconds": 0.46,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.46,
+              "name": "ground_RightHand_end"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [],
+          "groundContacts": [
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.46,
+              "mode": "slide"
+            },
+            {
+              "bone": "LeftHand",
+              "startSeconds": 0.0,
+              "endSeconds": 0.46,
+              "mode": "brace"
+            },
+            {
+              "bone": "RightHand",
+              "startSeconds": 0.23,
+              "endSeconds": 0.46,
+              "mode": "brace"
+            },
+            {
+              "bone": "Hips",
+              "startSeconds": 0.23,
+              "endSeconds": 0.46,
+              "mode": "body_contact"
+            }
+          ],
+          "plantedFootSlipApplicability": "not applicable: no planted-foot interval; intentional slide/fall still receives complete mesh floor checks",
+          "recommendedTransitions": [
+            {
+              "target": "slide_straight_recover",
+              "on": "recovery_allowed",
+              "visualBlendSeconds": 0.2
+            }
+          ]
+        },
+        {
+          "id": "slide_straight_recover",
+          "durationSeconds": 1.2,
+          "loop": false,
+          "notes": "straight: side lying to hand push, knees under pelvis, transfer to both soles, rise and settle.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftHand_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightHand_begin"
+            },
+            {
+              "atSeconds": 0.096,
+              "name": "ground_LeftHand_end"
+            },
+            {
+              "atSeconds": 0.096,
+              "name": "ground_RightHand_end"
+            },
+            {
+              "atSeconds": 0.336,
+              "name": "presentation_push_up"
+            },
+            {
+              "atSeconds": 0.696,
+              "name": "presentation_knee_under_hip"
+            },
+            {
+              "atSeconds": 0.996,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0.996,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 0.996,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.996,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.996,
+              "name": "presentation_feet_set"
+            },
+            {
+              "atSeconds": 1.2,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 1.2,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 1.2,
+              "name": "presentation_recovered"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.996,
+              "endSeconds": 1.2,
+              "anchorMeters": [
+                0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.996,
+              "endSeconds": 1.2,
+              "anchorMeters": [
+                -0.1,
+                0,
+                0
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.996,
+              "endSeconds": 1.2,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.996,
+              "endSeconds": 1.2,
+              "mode": "plant"
+            },
+            {
+              "bone": "LeftHand",
+              "startSeconds": 0.0,
+              "endSeconds": 0.096,
+              "mode": "brace"
+            },
+            {
+              "bone": "RightHand",
+              "startSeconds": 0.0,
+              "endSeconds": 0.096,
+              "mode": "brace"
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.996,
+              "mode": "reposition"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.996,
+              "mode": "reposition"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.2
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.22
+            }
+          ]
+        },
+        {
+          "id": "slide_lateral_prepare",
+          "durationSeconds": 0.48,
+          "loop": false,
+          "notes": "lateral: lower centre of mass, short plant, release the tackling leg before the slide.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.12,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 0.12,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.2496,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0.2496,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.2496,
+              "name": "presentation_tackle_ready"
+            },
+            {
+              "atSeconds": 0.336,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.4128,
+              "name": "presentation_commit_slide"
+            },
+            {
+              "atSeconds": 0.48,
+              "name": "ground_LeftFoot_end"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.12,
+              "anchorMeters": [
+                0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.2496,
+              "endSeconds": 0.48,
+              "anchorMeters": [
+                0.14,
+                0,
+                0.035
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.12,
+              "anchorMeters": [
+                -0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.2496,
+              "endSeconds": 0.336,
+              "anchorMeters": [
+                -0.13,
+                0,
+                -0.025
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.12,
+              "mode": "plant"
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.2496,
+              "endSeconds": 0.48,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.12,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.2496,
+              "endSeconds": 0.336,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "slide_lateral",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.16
+            },
+            {
+              "target": "defensive_jockey",
+              "on": "cancel_tackle",
+              "visualBlendSeconds": 0.2
+            }
+          ]
+        },
+        {
+          "id": "slide_lateral",
+          "durationSeconds": 0.84,
+          "loop": false,
+          "notes": "lateral: diagonal body sweep with lateral reach; sole and hip slide deliberately, no planted-foot lock.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0.1848,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.1848,
+              "name": "presentation_slide_begin"
+            },
+            {
+              "atSeconds": 0.3948,
+              "name": "presentation_ball_tackle"
+            },
+            {
+              "atSeconds": 0.5208,
+              "name": "ground_LeftHand_begin"
+            },
+            {
+              "atSeconds": 0.5208,
+              "name": "presentation_slide_drag"
+            },
+            {
+              "atSeconds": 0.84,
+              "name": "ground_LeftHand_end"
+            },
+            {
+              "atSeconds": 0.84,
+              "name": "ground_RightFoot_end"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.3948,
+              "bone": "RightFoot",
+              "event": "presentation_ball_tackle"
+            }
+          ],
+          "supportContacts": [],
+          "groundContacts": [
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.1848,
+              "endSeconds": 0.84,
+              "mode": "slide"
+            },
+            {
+              "bone": "LeftHand",
+              "startSeconds": 0.5208,
+              "endSeconds": 0.84,
+              "mode": "brace"
+            }
+          ],
+          "plantedFootSlipApplicability": "not applicable: no planted-foot interval; intentional slide/fall still receives complete mesh floor checks",
+          "recommendedTransitions": [
+            {
+              "target": "slide_lateral_fall",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "slide_miss",
+              "on": "tackle_missed",
+              "visualBlendSeconds": 0.16
+            }
+          ]
+        },
+        {
+          "id": "slide_lateral_fall",
+          "durationSeconds": 0.52,
+          "loop": false,
+          "notes": "lateral: absorb the remaining slide into a side fall, both hands brace, keep legs above the ground.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftHand_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.26,
+              "name": "ground_Hips_begin"
+            },
+            {
+              "atSeconds": 0.26,
+              "name": "ground_RightHand_begin"
+            },
+            {
+              "atSeconds": 0.26,
+              "name": "presentation_body_landing"
+            },
+            {
+              "atSeconds": 0.4264,
+              "name": "presentation_landing_settled"
+            },
+            {
+              "atSeconds": 0.52,
+              "name": "ground_Hips_end"
+            },
+            {
+              "atSeconds": 0.52,
+              "name": "ground_LeftHand_end"
+            },
+            {
+              "atSeconds": 0.52,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.52,
+              "name": "ground_RightHand_end"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [],
+          "groundContacts": [
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.52,
+              "mode": "slide"
+            },
+            {
+              "bone": "LeftHand",
+              "startSeconds": 0.0,
+              "endSeconds": 0.52,
+              "mode": "brace"
+            },
+            {
+              "bone": "RightHand",
+              "startSeconds": 0.26,
+              "endSeconds": 0.52,
+              "mode": "brace"
+            },
+            {
+              "bone": "Hips",
+              "startSeconds": 0.26,
+              "endSeconds": 0.52,
+              "mode": "body_contact"
+            }
+          ],
+          "plantedFootSlipApplicability": "not applicable: no planted-foot interval; intentional slide/fall still receives complete mesh floor checks",
+          "recommendedTransitions": [
+            {
+              "target": "slide_lateral_recover",
+              "on": "recovery_allowed",
+              "visualBlendSeconds": 0.2
+            }
+          ]
+        },
+        {
+          "id": "slide_lateral_recover",
+          "durationSeconds": 1.3,
+          "loop": false,
+          "notes": "lateral: side lying to hand push, knees under pelvis, transfer to both soles, rise and settle.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftHand_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightHand_begin"
+            },
+            {
+              "atSeconds": 0.104,
+              "name": "ground_LeftHand_end"
+            },
+            {
+              "atSeconds": 0.104,
+              "name": "ground_RightHand_end"
+            },
+            {
+              "atSeconds": 0.364,
+              "name": "presentation_push_up"
+            },
+            {
+              "atSeconds": 0.754,
+              "name": "presentation_knee_under_hip"
+            },
+            {
+              "atSeconds": 1.079,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 1.079,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 1.079,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 1.079,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 1.079,
+              "name": "presentation_feet_set"
+            },
+            {
+              "atSeconds": 1.3,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 1.3,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 1.3,
+              "name": "presentation_recovered"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 1.079,
+              "endSeconds": 1.3,
+              "anchorMeters": [
+                0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 1.079,
+              "endSeconds": 1.3,
+              "anchorMeters": [
+                -0.1,
+                0,
+                0
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 1.079,
+              "endSeconds": 1.3,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 1.079,
+              "endSeconds": 1.3,
+              "mode": "plant"
+            },
+            {
+              "bone": "LeftHand",
+              "startSeconds": 0.0,
+              "endSeconds": 0.104,
+              "mode": "brace"
+            },
+            {
+              "bone": "RightHand",
+              "startSeconds": 0.0,
+              "endSeconds": 0.104,
+              "mode": "brace"
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.079,
+              "mode": "reposition"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.079,
+              "mode": "reposition"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.2
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.22
+            }
+          ]
+        },
+        {
+          "id": "slide_fast_prepare",
+          "durationSeconds": 0.3,
+          "loop": false,
+          "notes": "fast: lower centre of mass, short plant, release the tackling leg before the slide.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.075,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 0.075,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.156,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0.156,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.156,
+              "name": "presentation_tackle_ready"
+            },
+            {
+              "atSeconds": 0.21,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.258,
+              "name": "presentation_commit_slide"
+            },
+            {
+              "atSeconds": 0.3,
+              "name": "ground_LeftFoot_end"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.075,
+              "anchorMeters": [
+                0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.156,
+              "endSeconds": 0.3,
+              "anchorMeters": [
+                0.14,
+                0,
+                0.035
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.075,
+              "anchorMeters": [
+                -0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.156,
+              "endSeconds": 0.21,
+              "anchorMeters": [
+                -0.13,
+                0,
+                -0.025
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.075,
+              "mode": "plant"
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.156,
+              "endSeconds": 0.3,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.075,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.156,
+              "endSeconds": 0.21,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "slide_fast",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.16
+            },
+            {
+              "target": "defensive_jockey",
+              "on": "cancel_tackle",
+              "visualBlendSeconds": 0.2
+            }
+          ]
+        },
+        {
+          "id": "slide_fast",
+          "durationSeconds": 0.58,
+          "loop": false,
+          "notes": "fast: quick low extension and short deceleration; sole and hip slide deliberately, no planted-foot lock.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0.1276,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.1276,
+              "name": "presentation_slide_begin"
+            },
+            {
+              "atSeconds": 0.2726,
+              "name": "presentation_ball_tackle"
+            },
+            {
+              "atSeconds": 0.3596,
+              "name": "ground_LeftHand_begin"
+            },
+            {
+              "atSeconds": 0.3596,
+              "name": "presentation_slide_drag"
+            },
+            {
+              "atSeconds": 0.58,
+              "name": "ground_LeftHand_end"
+            },
+            {
+              "atSeconds": 0.58,
+              "name": "ground_RightFoot_end"
+            }
+          ],
+          "ballContacts": [
+            {
+              "atSeconds": 0.2726,
+              "bone": "RightFoot",
+              "event": "presentation_ball_tackle"
+            }
+          ],
+          "supportContacts": [],
+          "groundContacts": [
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.1276,
+              "endSeconds": 0.58,
+              "mode": "slide"
+            },
+            {
+              "bone": "LeftHand",
+              "startSeconds": 0.3596,
+              "endSeconds": 0.58,
+              "mode": "brace"
+            }
+          ],
+          "plantedFootSlipApplicability": "not applicable: no planted-foot interval; intentional slide/fall still receives complete mesh floor checks",
+          "recommendedTransitions": [
+            {
+              "target": "slide_fast_fall",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "slide_miss",
+              "on": "tackle_missed",
+              "visualBlendSeconds": 0.16
+            }
+          ]
+        },
+        {
+          "id": "slide_fast_fall",
+          "durationSeconds": 0.4,
+          "loop": false,
+          "notes": "fast: absorb the remaining slide into a side fall, both hands brace, keep legs above the ground.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftHand_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.2,
+              "name": "ground_Hips_begin"
+            },
+            {
+              "atSeconds": 0.2,
+              "name": "ground_RightHand_begin"
+            },
+            {
+              "atSeconds": 0.2,
+              "name": "presentation_body_landing"
+            },
+            {
+              "atSeconds": 0.328,
+              "name": "presentation_landing_settled"
+            },
+            {
+              "atSeconds": 0.4,
+              "name": "ground_Hips_end"
+            },
+            {
+              "atSeconds": 0.4,
+              "name": "ground_LeftHand_end"
+            },
+            {
+              "atSeconds": 0.4,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.4,
+              "name": "ground_RightHand_end"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [],
+          "groundContacts": [
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.4,
+              "mode": "slide"
+            },
+            {
+              "bone": "LeftHand",
+              "startSeconds": 0.0,
+              "endSeconds": 0.4,
+              "mode": "brace"
+            },
+            {
+              "bone": "RightHand",
+              "startSeconds": 0.2,
+              "endSeconds": 0.4,
+              "mode": "brace"
+            },
+            {
+              "bone": "Hips",
+              "startSeconds": 0.2,
+              "endSeconds": 0.4,
+              "mode": "body_contact"
+            }
+          ],
+          "plantedFootSlipApplicability": "not applicable: no planted-foot interval; intentional slide/fall still receives complete mesh floor checks",
+          "recommendedTransitions": [
+            {
+              "target": "slide_fast_recover",
+              "on": "recovery_allowed",
+              "visualBlendSeconds": 0.2
+            }
+          ]
+        },
+        {
+          "id": "slide_fast_recover",
+          "durationSeconds": 1.05,
+          "loop": false,
+          "notes": "fast: side lying to hand push, knees under pelvis, transfer to both soles, rise and settle.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftHand_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightHand_begin"
+            },
+            {
+              "atSeconds": 0.084,
+              "name": "ground_LeftHand_end"
+            },
+            {
+              "atSeconds": 0.084,
+              "name": "ground_RightHand_end"
+            },
+            {
+              "atSeconds": 0.294,
+              "name": "presentation_push_up"
+            },
+            {
+              "atSeconds": 0.609,
+              "name": "presentation_knee_under_hip"
+            },
+            {
+              "atSeconds": 0.8715,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0.8715,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 0.8715,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.8715,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.8715,
+              "name": "presentation_feet_set"
+            },
+            {
+              "atSeconds": 1.05,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 1.05,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 1.05,
+              "name": "presentation_recovered"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.8715,
+              "endSeconds": 1.05,
+              "anchorMeters": [
+                0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.8715,
+              "endSeconds": 1.05,
+              "anchorMeters": [
+                -0.1,
+                0,
+                0
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.8715,
+              "endSeconds": 1.05,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.8715,
+              "endSeconds": 1.05,
+              "mode": "plant"
+            },
+            {
+              "bone": "LeftHand",
+              "startSeconds": 0.0,
+              "endSeconds": 0.084,
+              "mode": "brace"
+            },
+            {
+              "bone": "RightHand",
+              "startSeconds": 0.0,
+              "endSeconds": 0.084,
+              "mode": "brace"
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.8715,
+              "mode": "reposition"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.8715,
+              "mode": "reposition"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished_and_stopped",
+              "visualBlendSeconds": 0.2
+            },
+            {
+              "target": "run",
+              "on": "clip_finished_and_moving",
+              "visualBlendSeconds": 0.22
+            }
+          ]
+        },
+        {
+          "id": "defensive_jockey",
+          "durationSeconds": 1.2,
+          "loop": true,
+          "notes": "Defensive jockey shuffle with a low, open stance; alternate foot plants, preserve facing and track the ball without touching it.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0.24,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 0.36,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.36,
+              "name": "presentation_defensive_cut_right"
+            },
+            {
+              "atSeconds": 0.84,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.96,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0.96,
+              "name": "presentation_defensive_cut_left"
+            },
+            {
+              "atSeconds": 1.2,
+              "name": "ground_LeftFoot_end"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.24,
+              "anchorMeters": [
+                0.2,
+                0,
+                0.025
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.36,
+              "endSeconds": 0.84,
+              "anchorMeters": [
+                -0.2,
+                0,
+                -0.025
+              ]
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.96,
+              "endSeconds": 1.2,
+              "anchorMeters": [
+                0.2,
+                0,
+                0.025
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.24,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.36,
+              "endSeconds": 0.84,
+              "mode": "plant"
+            },
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.96,
+              "endSeconds": 1.2,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "slide_straight_prepare",
+              "on": "tackle_straight",
+              "visualBlendSeconds": 0.06
+            },
+            {
+              "target": "slide_lateral_prepare",
+              "on": "tackle_lateral",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "slide_fast_prepare",
+              "on": "tackle_fast",
+              "visualBlendSeconds": 0.06
+            },
+            {
+              "target": "run",
+              "on": "moving",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "idle",
+              "on": "stopped",
+              "visualBlendSeconds": 0.18
+            },
+            {
+              "target": "goal_celebration",
+              "on": "result_success",
+              "visualBlendSeconds": 0.24
+            },
+            {
+              "target": "disallowed",
+              "on": "result_failure",
+              "visualBlendSeconds": 0.22
+            }
+          ]
+        },
+        {
+          "id": "slide_miss",
+          "durationSeconds": 0.65,
+          "loop": false,
+          "notes": "Missed slide: extend past the absent ball, lose balance to the side, brace and settle. There is deliberately no ball contact marker.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.091,
+              "name": "presentation_tackle_miss"
+            },
+            {
+              "atSeconds": 0.195,
+              "name": "ground_LeftHand_begin"
+            },
+            {
+              "atSeconds": 0.195,
+              "name": "presentation_balance_lost"
+            },
+            {
+              "atSeconds": 0.52,
+              "name": "ground_Hips_begin"
+            },
+            {
+              "atSeconds": 0.52,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.52,
+              "name": "presentation_miss_landing"
+            },
+            {
+              "atSeconds": 0.65,
+              "name": "ground_Hips_end"
+            },
+            {
+              "atSeconds": 0.65,
+              "name": "ground_LeftHand_end"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [],
+          "groundContacts": [
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.52,
+              "mode": "slide"
+            },
+            {
+              "bone": "LeftHand",
+              "startSeconds": 0.195,
+              "endSeconds": 0.65,
+              "mode": "brace"
+            },
+            {
+              "bone": "Hips",
+              "startSeconds": 0.52,
+              "endSeconds": 0.65,
+              "mode": "body_contact"
+            }
+          ],
+          "plantedFootSlipApplicability": "not applicable: no planted-foot interval; intentional slide/fall still receives complete mesh floor checks",
+          "recommendedTransitions": [
+            {
+              "target": "slide_straight_recover",
+              "on": "recovery_allowed",
+              "visualBlendSeconds": 0.2
+            }
+          ]
+        },
+        {
+          "id": "goal_celebration",
+          "durationSeconds": 1.8,
+          "loop": false,
+          "notes": "Confirmed-goal presentation: raise both arms overhead, open chest, lift one knee and settle to ready stance. No scoring or rewards originate from this clip.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.324,
+              "name": "presentation_goal_arms_up"
+            },
+            {
+              "atSeconds": 0.36,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 0.684,
+              "name": "presentation_goal_step"
+            },
+            {
+              "atSeconds": 1.116,
+              "name": "presentation_goal_hold"
+            },
+            {
+              "atSeconds": 1.494,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 1.8,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 1.8,
+              "name": "ground_RightFoot_end"
+            },
+            {
+              "atSeconds": 1.8,
+              "name": "presentation_celebration_settled"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.8,
+              "anchorMeters": [
+                0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.36,
+              "anchorMeters": [
+                -0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 1.494,
+              "endSeconds": 1.8,
+              "anchorMeters": [
+                -0.1,
+                0,
+                0
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.8,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 0.36,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 1.494,
+              "endSeconds": 1.8,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.24
+            }
+          ]
+        },
+        {
+          "id": "disallowed",
+          "durationSeconds": 1.4,
+          "loop": false,
+          "notes": "Authoritative failed/disallowed result: shoulders sink, palms open, small head shake, then regain stance. Visual reaction only; the clip does not determine fouls or results.",
+          "presentationEvents": [
+            {
+              "atSeconds": 0,
+              "name": "ground_LeftFoot_begin"
+            },
+            {
+              "atSeconds": 0,
+              "name": "ground_RightFoot_begin"
+            },
+            {
+              "atSeconds": 0.28,
+              "name": "presentation_disallowed_react"
+            },
+            {
+              "atSeconds": 0.63,
+              "name": "presentation_disallowed_hold"
+            },
+            {
+              "atSeconds": 1.12,
+              "name": "presentation_refocus"
+            },
+            {
+              "atSeconds": 1.4,
+              "name": "ground_LeftFoot_end"
+            },
+            {
+              "atSeconds": 1.4,
+              "name": "ground_RightFoot_end"
+            }
+          ],
+          "ballContacts": [],
+          "supportContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.4,
+              "anchorMeters": [
+                0.1,
+                0,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.4,
+              "anchorMeters": [
+                -0.1,
+                0,
+                0
+              ]
+            }
+          ],
+          "groundContacts": [
+            {
+              "bone": "LeftFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.4,
+              "mode": "plant"
+            },
+            {
+              "bone": "RightFoot",
+              "startSeconds": 0.0,
+              "endSeconds": 1.4,
+              "mode": "plant"
+            }
+          ],
+          "plantedFootSlipApplicability": "measured only within declared full-weight plants",
+          "recommendedTransitions": [
+            {
+              "target": "idle",
+              "on": "clip_finished",
+              "visualBlendSeconds": 0.24
+            },
+            {
+              "target": "defensive_jockey",
+              "on": "resume_defending",
+              "visualBlendSeconds": 0.22
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "clipCount": 33,
+  "transitionCount": 111
+}

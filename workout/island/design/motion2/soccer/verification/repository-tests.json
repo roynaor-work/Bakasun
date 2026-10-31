@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "nodeVersion": "v24.19.0",
+  "repositorySuite": {
+    "command": "npm test",
+    "exitCode": 1,
+    "pass": false,
+    "summary": {
+      "tests": 2901,
+      "suites": 0,
+      "pass": 2862,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 38,
+      "todo": 0,
+      "duration_ms": 107616.568662
+    },
+    "fullLogSha256": "5618ef09af6a9ab161da43e69a416fbab3df0063f68fe3ce26fbe7ae39f64606",
+    "fullLogBytes": 355679
+  },
+  "baselineReproduction": {
+    "command": "node --test tests/island-g7.test.mjs",
+    "fixtureMethod": "git archive 3853d282b6dd7719db49a864fec4286dc7b63cb0 package.json tests workout/island | tar -x into a fresh temporary directory; no untracked motion2 files included",
+    "motion2Present": false,
+    "exitCode": 1,
+    "summary": {
+      "tests": 39,
+      "suites": 0,
+      "pass": 38,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 327.199319
+    },
+    "logSha256": "c46c4469eede82d19bdd1dd7b93e0cd7c5c254cd2f04b96aa802bbf508e8d12e",
+    "logBytes": 4157,
+    "presentationOrientationByGame": {
+      "soccer": "any",
+      "tennis": "landscape",
+      "navalDuel": "landscape",
+      "fireRescue": "landscape",
+      "alienDefense": "landscape"
+    },
+    "matchedSourceFiles": {
+      "tests/island-g7.test.mjs": {
+        "sha256": "baf489082fb681eaf9be1c356a245d7348c97782e2d57b9b58758288bbeb4aad",
+        "matchesCurrentBranch": true
+      },
+      "workout/island/ui/game-shell.mjs": {
+        "sha256": "d7d962a247524643a5876d2e50c120cff881aebbdced20335c280d255494012c",
+        "matchesCurrentBranch": true
+      },
+      "workout/island/data/config.json": {
+        "sha256": "fa91b90cf46a950696c371d29c81907a776428d15f3fb96213dee7311fb40762",
+        "matchesCurrentBranch": true
+      }
+    }
+  },
+  "failure": {
+    "test": "G7 each of the five playable games declares landscape in the shared shell config",
+    "location": "tests/island-g7.test.mjs:44:1",
+    "code": "ERR_ASSERTION",
+    "operator": "strictEqual",
+    "actual": "any",
+    "expected": "landscape",
+    "reproducedOnCleanBase": true
+  },
+  "conclusion": "The sole repository-suite failure reproduces unchanged on clean base main. Motion2 assets and existing game logic were not modified to address this unrelated orientation assertion."
+}
