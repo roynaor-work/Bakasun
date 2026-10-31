@@ -69,3 +69,6 @@
 .game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally{gap:5px!important;opacity:.8}
 .game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally>span{font-size:11px!important;padding:2px 7px 2px 4px!important}
 .game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally svg{width:12px!important;height:12px!important}
+/* the dial's read-out must beat the kit's generic .ih-speed-value rules (these are SVG user units) */
+.game-screen[data-game=alpineRush] .alpine-kit-speed .alpine-dial .alpine-dial-value.ih-speed-value{font:800 27px system-ui,sans-serif;letter-spacing:0;color:inherit;display:inline;line-height:1}
+.game-screen[data-game=alpineRush] .alpine-kit-speed .ih-speed.alpine-dial{display:block;padding:4px 6px 2px}
