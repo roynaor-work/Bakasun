@@ -1,0 +1,429 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-31T01:10:47.983Z",
+  "scope": "Canonical FK before runtime IK and floor correction; soles, palms and joints. Browser report additionally scans all skinned vertices.",
+  "samplesPerSecond": 240,
+  "limits": {
+    "supportMeters": 0.02,
+    "floorMeters": 0.001,
+    "loopMeters": 0.000001,
+    "loopRadians": 0.00001,
+    "quaternionNorm": 0.00001,
+    "ballMeters": 0.000001,
+    "eventTime": 1e-9
+  },
+  "sourceSha256": {
+    "../../motion/hoops.json": "194cb62adf3469d044d738d11c064c86c8c5737792b4c83055b3d97906ebe9c5",
+    "celebration.json": "a497ea2dedc2f1200180bd8dfb20c049f7ff7ed8e1ff2c095af9bede1e1a8c4c",
+    "crossover.json": "79ba2e5a641099bf74418c53aa4a6de48fb3918eee5469cf26ddf341c6484966",
+    "defensive_run.json": "d68b36f326c234fde3a4aedd0beb73611874022c4fdb505d9dd4e7ac6a9ff33d",
+    "defensive_slide.json": "78f06043ab9a5e7f2413172c352a6c0767da1a45fc0d9d3164d9ef7996864261",
+    "defensive_slide_right.json": "ef9d7602335aa83203e190481e271934c42aecd35f9d89cc0c6a821574742c90",
+    "defensive_switch.json": "e80264deda204f70df413b86604e915abd662bac25ab8d3ced342a4abbd645fb",
+    "dribble_fast.json": "72019117f4527e37419d548d80d58a89b6a4d1ab445d35064562cc3e71973664",
+    "dribble_slow.json": "ecc561e2ef5053614342b9619b8b5bde6d67305a10849d485acb67c6b770321a",
+    "dunk.json": "68eef64d5846d33a61b97889502f2a267eefbe6d60200fb0ae804bb08f4cc0ff",
+    "free_throw.json": "94f3a80db6ce467174c1f431097caf47ef64681396bbabd7c46ab2a4a5a19e76",
+    "jump_block.json": "3c7280db206955a09d3f22109cfe70e0b9d5a44bf787b75b11b379375d619ec0",
+    "layup_left.json": "9cfe5a5951b6fa1041fe19d0caba6e0d168522c9c62882eff0907c2fdeae7b5e",
+    "layup_right.json": "dc36339ad1ebe2388c658e5e34a5c07a8105c6062af902eb837c3a21e1a0ec54",
+    "pass_chest.json": "6b836364693dedb8f052ce4614bdd6cd692581f8d206dbd0226b770282c32618",
+    "pass_overhead.json": "ceab184f12094295229007d913917d89352d4f9afa209a9dfe07b854848f3910",
+    "rebound.json": "25e98ba8cd13af7b1058839d260b7ee10e36c909fa8ad7ce3f0797881cc3d911",
+    "receive.json": "c7d43661469b999bfebcb8edea6bd38d55b9dc5b148ba40dc6ff32692d926a3a",
+    "screen.json": "bc4484771e12923eeab4d4ffa5c4070071bca3abc795edc6de3bf82cea78b385",
+    "shot_fake.json": "5e44021b24518082046ec14d5c0c1259f341ecb7acbd04d3a42c833ff20c748e",
+    "spin.json": "17e38cf559d571def2f0aa9c6cd7e6d71a78e4332e87921c3d0875357c0f5a4a",
+    "sprint.json": "540d71f56c8cf36e66edad2bf6f01dc7ae655e848853b57c5df89bf6c9e30e7e",
+    "sprint_ball.json": "bfb890b12e6ae760f472bec4e9087298cd2f1369f920934b39df72ed00f61c5d",
+    "steal_fail.json": "252e937a34c295109c8cedcf962ecf4a7fb71cd055cd7aa63858e41ee7c06638",
+    "steal_success.json": "128301ff83cbccaac22bf1fa81602215170f7b75bedc24c4ef726068229cf2e3",
+    "step_back.json": "b5fb815e3fdfffe6434a529e1409a856ace14fc32bfc6cef28ab8857546e0e4a"
+  },
+  "clips": [
+    {
+      "file": "celebration.json",
+      "clip": "celebration",
+      "keyframes": 215,
+      "samples": 625,
+      "minY": -1.6007288035357892e-7,
+      "maxSupportErrorMeters": 1.6415839050109055e-7,
+      "maxBallErrorMeters": 0,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "crossover.json",
+      "clip": "crossover",
+      "keyframes": 115,
+      "samples": 335,
+      "minY": -0.0000010530006975956185,
+      "maxSupportErrorMeters": 0.0000011186857243124098,
+      "maxBallErrorMeters": 1.590088673626516e-10,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "defensive_run.json",
+      "clip": "defensive_run",
+      "keyframes": 91,
+      "samples": 263,
+      "minY": -0.000035473505888228285,
+      "maxSupportErrorMeters": 0.000036180068775851546,
+      "maxBallErrorMeters": 0,
+      "loop": {
+        "positionMeters": 0,
+        "rotationRadians": 4.2146848510894035e-8
+      },
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "defensive_slide.json",
+      "clip": "defensive_slide",
+      "keyframes": 111,
+      "samples": 323,
+      "minY": -0.000004003742952687905,
+      "maxSupportErrorMeters": 0.000004033950664628526,
+      "maxBallErrorMeters": 0,
+      "loop": {
+        "positionMeters": 0,
+        "rotationRadians": 4.2146848510894035e-8
+      },
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "defensive_slide_right.json",
+      "clip": "defensive_slide_right",
+      "keyframes": 111,
+      "samples": 323,
+      "minY": -0.000004003742952687905,
+      "maxSupportErrorMeters": 0.000004033950664628526,
+      "maxBallErrorMeters": 0,
+      "loop": {
+        "positionMeters": 0,
+        "rotationRadians": 4.2146848510894035e-8
+      },
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "defensive_switch.json",
+      "clip": "defensive_switch",
+      "keyframes": 131,
+      "samples": 381,
+      "minY": -4.593337896152683e-8,
+      "maxSupportErrorMeters": 4.7416908275350503e-8,
+      "maxBallErrorMeters": 0,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "dribble_fast.json",
+      "clip": "dribble_fast",
+      "keyframes": 55,
+      "samples": 155,
+      "minY": -9.841769559454372e-7,
+      "maxSupportErrorMeters": 0.0000011661594282170773,
+      "maxBallErrorMeters": 8.210277183271728e-11,
+      "loop": {
+        "positionMeters": 0,
+        "rotationRadians": 4.2146848510894035e-8
+      },
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "dribble_slow.json",
+      "clip": "dribble_slow",
+      "keyframes": 119,
+      "samples": 349,
+      "minY": -1.907225810060531e-7,
+      "maxSupportErrorMeters": 2.2574720825608895e-7,
+      "maxBallErrorMeters": 8.210277183271728e-11,
+      "loop": {
+        "positionMeters": 0,
+        "rotationRadians": 4.2146848510894035e-8
+      },
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "dunk.json",
+      "clip": "dunk",
+      "keyframes": 215,
+      "samples": 627,
+      "minY": -0.000050773543216239836,
+      "maxSupportErrorMeters": 0.00005094268462722596,
+      "maxBallErrorMeters": 7.071598297277727e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "free_throw.json",
+      "clip": "free_throw",
+      "keyframes": 257,
+      "samples": 757,
+      "minY": -0.000004227062660774883,
+      "maxSupportErrorMeters": 0.0000042318690012805625,
+      "maxBallErrorMeters": 8.409285434225785e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "jump_block.json",
+      "clip": "jump_block",
+      "keyframes": 150,
+      "samples": 422,
+      "minY": -0.00008332379925450606,
+      "maxSupportErrorMeters": 0.0000836540402095459,
+      "maxBallErrorMeters": 1.966960131711722e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "layup_left.json",
+      "clip": "layup_left",
+      "keyframes": 185,
+      "samples": 539,
+      "minY": -0.00001878969688072496,
+      "maxSupportErrorMeters": 0.000019433209146011943,
+      "maxBallErrorMeters": 8.840543836529341e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "layup_right.json",
+      "clip": "layup_right",
+      "keyframes": 185,
+      "samples": 539,
+      "minY": -0.00001878969688072496,
+      "maxSupportErrorMeters": 0.000019433209146011943,
+      "maxBallErrorMeters": 8.840543836529341e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "pass_chest.json",
+      "clip": "pass_chest",
+      "keyframes": 103,
+      "samples": 299,
+      "minY": -1.0830642131753887e-7,
+      "maxSupportErrorMeters": 1.0834952839058794e-7,
+      "maxBallErrorMeters": 5.045072720758951e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "pass_overhead.json",
+      "clip": "pass_overhead",
+      "keyframes": 122,
+      "samples": 356,
+      "minY": -3.3176104745347157e-7,
+      "maxSupportErrorMeters": 3.3215433362810205e-7,
+      "maxBallErrorMeters": 4.517701800158442e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "rebound.json",
+      "clip": "rebound",
+      "keyframes": 166,
+      "samples": 482,
+      "minY": -0.000057370341723289586,
+      "maxSupportErrorMeters": 0.000057530620826706415,
+      "maxBallErrorMeters": 9.87389861978056e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "receive.json",
+      "clip": "receive",
+      "keyframes": 97,
+      "samples": 283,
+      "minY": -0.000008107695821296668,
+      "maxSupportErrorMeters": 0.00000811219899807156,
+      "maxBallErrorMeters": 4.403824754548732e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "screen.json",
+      "clip": "screen",
+      "keyframes": 172,
+      "samples": 500,
+      "minY": -3.0463427184990177e-7,
+      "maxSupportErrorMeters": 3.102418430351055e-7,
+      "maxBallErrorMeters": 0,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "shot_fake.json",
+      "clip": "shot_fake",
+      "keyframes": 134,
+      "samples": 384,
+      "minY": -0.0000011748098313058009,
+      "maxSupportErrorMeters": 0.00000117660039326679,
+      "maxBallErrorMeters": 5.91627501461861e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "spin.json",
+      "clip": "spin",
+      "keyframes": 147,
+      "samples": 429,
+      "minY": -0.00014467673481884102,
+      "maxSupportErrorMeters": 0.0003297123348351298,
+      "maxBallErrorMeters": 9.952243768430713e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "sprint.json",
+      "clip": "sprint",
+      "keyframes": 69,
+      "samples": 193,
+      "minY": -0.00019764844918725155,
+      "maxSupportErrorMeters": 0.00019969783655094596,
+      "maxBallErrorMeters": 0,
+      "loop": {
+        "positionMeters": 0,
+        "rotationRadians": 4.2146848510894035e-8
+      },
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "sprint_ball.json",
+      "clip": "sprint_ball",
+      "keyframes": 75,
+      "samples": 203,
+      "minY": -0.00012301119830693263,
+      "maxSupportErrorMeters": 0.00012450319322189013,
+      "maxBallErrorMeters": 7.57540397718342e-11,
+      "loop": {
+        "positionMeters": 0,
+        "rotationRadians": 2.9802322387695312e-8
+      },
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "steal_fail.json",
+      "clip": "steal_fail",
+      "keyframes": 129,
+      "samples": 251,
+      "minY": -7.09749301719409e-7,
+      "maxSupportErrorMeters": 8.133436313078335e-7,
+      "maxBallErrorMeters": 0,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "steal_success.json",
+      "clip": "steal_success",
+      "keyframes": 140,
+      "samples": 408,
+      "minY": -5.034976240519962e-7,
+      "maxSupportErrorMeters": 5.761390547726927e-7,
+      "maxBallErrorMeters": 5.907602186071287e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "file": "step_back.json",
+      "clip": "step_back",
+      "keyframes": 149,
+      "samples": 431,
+      "minY": -0.000005918805751292666,
+      "maxSupportErrorMeters": 0.000006014299036144607,
+      "maxBallErrorMeters": 5.1932182939594976e-11,
+      "loop": null,
+      "pass": true,
+      "errors": []
+    }
+  ],
+  "negativeControls": {
+    "pass": true,
+    "cases": [
+      {
+        "name": "quaternion",
+        "detected": true,
+        "expected": "Invalid quaternion",
+        "errors": [
+          "Invalid quaternion Chest"
+        ]
+      },
+      {
+        "name": "support-anchor",
+        "detected": true,
+        "expected": "Support drift",
+        "errors": [
+          "Support drift 0.1000000001567911"
+        ]
+      },
+      {
+        "name": "floor",
+        "detected": true,
+        "expected": "Floor penetration",
+        "errors": [
+          "Floor penetration -2.0000001600728803 LeftFoot sole@0.21666666666666667",
+          "Support drift 2.0000001600728807"
+        ]
+      },
+      {
+        "name": "ball-point",
+        "detected": true,
+        "expected": "Ball contact mismatch",
+        "errors": [
+          "Ball contact mismatch 0.10000000000369472"
+        ]
+      },
+      {
+        "name": "loop",
+        "detected": true,
+        "expected": "Loop endpoints discontinuous",
+        "errors": [
+          "Loop endpoints discontinuous"
+        ]
+      },
+      {
+        "name": "missing-marker-key",
+        "detected": true,
+        "expected": "Marker without exact key",
+        "errors": [
+          "Marker without exact key"
+        ]
+      },
+      {
+        "name": "missing-contact-timeline",
+        "detected": true,
+        "expected": "Missing contact timeline",
+        "errors": [
+          "Missing contact timeline"
+        ]
+      }
+    ]
+  },
+  "pass": true
+}

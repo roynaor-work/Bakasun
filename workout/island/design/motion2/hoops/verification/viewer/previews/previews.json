@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 1,
+  "character": "basketball-player",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "screenshotCamera": {
+    "verticalFovDegrees": 45,
+    "scope": "Supplemental previews only; measured CLI uses the original camera unchanged."
+  },
+  "meshFloor": {
+    "floorLimitMeters": 0.001,
+    "supportLimitMeters": 0.02,
+    "clips": [
+      {
+        "clip": "celebration",
+        "minY": -1.2170169386149787e-16,
+        "maxAnchorErrorMeters": 8.088071494250705e-8,
+        "samples": 425,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "crossover",
+        "minY": -8.055622141567298e-17,
+        "maxAnchorErrorMeters": 8.088035710768397e-8,
+        "samples": 225,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "defensive_run",
+        "minY": -7.367153762039003e-17,
+        "maxAnchorErrorMeters": 8.087981563228624e-8,
+        "samples": 177,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "defensive_slide",
+        "minY": -8.245357521752261e-17,
+        "maxAnchorErrorMeters": 8.088088246397972e-8,
+        "samples": 218,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "defensive_slide_right",
+        "minY": -7.936359902593892e-17,
+        "maxAnchorErrorMeters": 8.087957726845975e-8,
+        "samples": 218,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "defensive_switch",
+        "minY": -7.909254848281755e-17,
+        "maxAnchorErrorMeters": 8.088059773121314e-8,
+        "samples": 257,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "dribble_fast",
+        "minY": -8.066464163292153e-17,
+        "maxAnchorErrorMeters": 8.087971793974123e-8,
+        "samples": 105,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "dribble_slow",
+        "minY": -8.267041565201971e-17,
+        "maxAnchorErrorMeters": 8.087971799425687e-8,
+        "samples": 234,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "dunk",
+        "minY": -1.2939952928614495e-16,
+        "maxAnchorErrorMeters": 8.088060020472991e-8,
+        "samples": 421,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "free_throw",
+        "minY": -1.6338926739356552e-16,
+        "maxAnchorErrorMeters": 8.088013678729184e-8,
+        "samples": 509,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "jump_block",
+        "minY": -1.3818156688327754e-16,
+        "maxAnchorErrorMeters": 8.088059997630117e-8,
+        "samples": 291,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "layup_left",
+        "minY": -8.039359108980015e-17,
+        "maxAnchorErrorMeters": 0.000021593781701506857,
+        "samples": 362,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "layup_right",
+        "minY": -1.310258325448732e-16,
+        "maxAnchorErrorMeters": 0.00002153718445367006,
+        "samples": 362,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "pass_chest",
+        "minY": -8.310409652101391e-17,
+        "maxAnchorErrorMeters": 8.088009338655881e-8,
+        "samples": 201,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "pass_overhead",
+        "minY": -1.555288016430456e-16,
+        "maxAnchorErrorMeters": 8.08800374657723e-8,
+        "samples": 239,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "rebound",
+        "minY": -7.844202717932625e-17,
+        "maxAnchorErrorMeters": 8.088060019813489e-8,
+        "samples": 324,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "receive",
+        "minY": -1.550951207740514e-16,
+        "maxAnchorErrorMeters": 8.088014825942739e-8,
+        "samples": 190,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "screen",
+        "minY": -7.838781707070197e-17,
+        "maxAnchorErrorMeters": 8.087936097633969e-8,
+        "samples": 338,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "shot_fake",
+        "minY": -1.664792435851492e-16,
+        "maxAnchorErrorMeters": 8.088013261730419e-8,
+        "samples": 263,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "spin",
+        "minY": -7.247891523065597e-17,
+        "maxAnchorErrorMeters": 8.088001574251867e-8,
+        "samples": 288,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "sprint",
+        "minY": -6.011901046432122e-17,
+        "maxAnchorErrorMeters": 8.088061046532905e-8,
+        "samples": 133,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "sprint_ball",
+        "minY": -7.860465750519907e-17,
+        "maxAnchorErrorMeters": 8.088061962808162e-8,
+        "samples": 144,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "steal_fail",
+        "minY": -8.294146619514109e-17,
+        "maxAnchorErrorMeters": 8.088048376629658e-8,
+        "samples": 253,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "steal_success",
+        "minY": -8.033938098117588e-17,
+        "maxAnchorErrorMeters": 8.088048376629658e-8,
+        "samples": 274,
+        "floorPass": true,
+        "supportPass": true
+      },
+      {
+        "clip": "step_back",
+        "minY": -8.272462576064399e-17,
+        "maxAnchorErrorMeters": 0.00004430238608774205,
+        "samples": 290,
+        "floorPass": true,
+        "supportPass": true
+      }
+    ]
+  },
+  "screenshots": [
+    {
+      "clip": "celebration",
+      "atSeconds": 0.7000000000000001,
+      "file": "celebration.png"
+    },
+    {
+      "clip": "crossover",
+      "atSeconds": 0.4416,
+      "file": "crossover.png"
+    },
+    {
+      "clip": "defensive_run",
+      "atSeconds": 0.17279999999999998,
+      "file": "defensive_run.png"
+    },
+    {
+      "clip": "defensive_slide",
+      "atSeconds": 0.225,
+      "file": "defensive_slide.png"
+    },
+    {
+      "clip": "defensive_slide_right",
+      "atSeconds": 0.675,
+      "file": "defensive_slide_right.png"
+    },
+    {
+      "clip": "defensive_switch",
+      "atSeconds": 0.40950000000000003,
+      "file": "defensive_switch.png"
+    },
+    {
+      "clip": "dribble_fast",
+      "atSeconds": 0.063,
+      "file": "dribble_fast.png"
+    },
+    {
+      "clip": "dribble_slow",
+      "atSeconds": 0.144,
+      "file": "dribble_slow.png"
+    },
+    {
+      "clip": "dunk",
+      "atSeconds": 0.8428,
+      "file": "dunk.png"
+    },
+    {
+      "clip": "free_throw",
+      "atSeconds": 1.05,
+      "file": "free_throw.png"
+    },
+    {
+      "clip": "jump_block",
+      "atSeconds": 0.624,
+      "file": "jump_block.png"
+    },
+    {
+      "clip": "layup_left",
+      "atSeconds": 0.7696000000000001,
+      "file": "layup_left.png"
+    },
+    {
+      "clip": "layup_right",
+      "atSeconds": 0.7696000000000001,
+      "file": "layup_right.png"
+    },
+    {
+      "clip": "pass_chest",
+      "atSeconds": 0.38539999999999996,
+      "file": "pass_chest.png"
+    },
+    {
+      "clip": "pass_overhead",
+      "atSeconds": 0.5292,
+      "file": "pass_overhead.png"
+    },
+    {
+      "clip": "rebound",
+      "atSeconds": 0.6468,
+      "file": "rebound.png"
+    },
+    {
+      "clip": "receive",
+      "atSeconds": 0.21840000000000004,
+      "file": "receive.png"
+    },
+    {
+      "clip": "screen",
+      "atSeconds": 0.7,
+      "file": "screen.png"
+    },
+    {
+      "clip": "shot_fake",
+      "atSeconds": 0.4752,
+      "file": "shot_fake.png"
+    },
+    {
+      "clip": "spin",
+      "atSeconds": 0.59,
+      "file": "spin.png"
+    },
+    {
+      "clip": "sprint",
+      "atSeconds": 0.07020000000000001,
+      "file": "sprint.png"
+    },
+    {
+      "clip": "sprint_ball",
+      "atSeconds": 0.087,
+      "file": "sprint_ball.png"
+    },
+    {
+      "clip": "steal_fail",
+      "atSeconds": 0.4368,
+      "file": "steal_fail.png"
+    },
+    {
+      "clip": "steal_success",
+      "atSeconds": 0.47040000000000004,
+      "file": "steal_success.png"
+    },
+    {
+      "clip": "step_back",
+      "atSeconds": 0.9675999999999999,
+      "file": "step_back.png"
+    }
+  ],
+  "errors": [],
+  "pass": true
+}

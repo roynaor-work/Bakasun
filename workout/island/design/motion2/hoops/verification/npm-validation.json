@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "command": "npm test",
+  "baseMainCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "result": {
+    "pass": false,
+    "tests": 2901,
+    "passed": 2862,
+    "failed": 1,
+    "skipped": 38
+  },
+  "failures": [
+    {
+      "file": "tests/island-g7.test.mjs",
+      "line": 44,
+      "test": "G7 each of the five playable games declares landscape in the shared shell config",
+      "actual": "any",
+      "expected": "landscape",
+      "reproducedOnUnmodifiedMain": true
+    }
+  ],
+  "baseline": {
+    "method": "Export tracked files directly from origin/main to a separate temporary directory; run the same G7 file.",
+    "command": "node --test tests/island-g7.test.mjs",
+    "tests": 39,
+    "passed": 38,
+    "failed": 1,
+    "containsSameAssertion": true
+  },
+  "sourceFilesChanged": false,
+  "logSha256": "0f5fe7c1e52e86978ec34dc200c8634f92834b30600fba3b116416650af0d237",
+  "notes": "The first restricted-sandbox run also blocked child-process tests. Rerunning with the execution permissions used by browser validation removed those infrastructure failures; the single remaining assertion also fails on clean main."
+}

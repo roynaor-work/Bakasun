@@ -1,0 +1,751 @@
+{
+  "schemaVersion": 1,
+  "baseMainCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "newClipCount": 25,
+  "characterViewportCases": 8,
+  "newClipCaseCount": 200,
+  "sourceSamplesPerSecond": 240,
+  "viewerSamplesPerSecond": 120,
+  "viewerLimits": {
+    "supportMeters": 0.02,
+    "loopMeters": 0.001,
+    "transitionMeters": 0.001,
+    "rotationRadians": 0.01,
+    "floorMeters": 0.001,
+    "cpuMeanMs": 16.666666666666668
+  },
+  "sourceNegativeControls": {
+    "pass": true,
+    "cases": [
+      {
+        "name": "quaternion",
+        "detected": true,
+        "expected": "Invalid quaternion",
+        "errors": [
+          "Invalid quaternion Chest"
+        ]
+      },
+      {
+        "name": "support-anchor",
+        "detected": true,
+        "expected": "Support drift",
+        "errors": [
+          "Support drift 0.1000000001567911"
+        ]
+      },
+      {
+        "name": "floor",
+        "detected": true,
+        "expected": "Floor penetration",
+        "errors": [
+          "Floor penetration -2.0000001600728803 LeftFoot sole@0.21666666666666667",
+          "Support drift 2.0000001600728807"
+        ]
+      },
+      {
+        "name": "ball-point",
+        "detected": true,
+        "expected": "Ball contact mismatch",
+        "errors": [
+          "Ball contact mismatch 0.10000000000369472"
+        ]
+      },
+      {
+        "name": "loop",
+        "detected": true,
+        "expected": "Loop endpoints discontinuous",
+        "errors": [
+          "Loop endpoints discontinuous"
+        ]
+      },
+      {
+        "name": "missing-marker-key",
+        "detected": true,
+        "expected": "Marker without exact key",
+        "errors": [
+          "Marker without exact key"
+        ]
+      },
+      {
+        "name": "missing-contact-timeline",
+        "detected": true,
+        "expected": "Missing contact timeline",
+        "errors": [
+          "Missing contact timeline"
+        ]
+      }
+    ]
+  },
+  "clips": [
+    {
+      "clip": "celebration",
+      "file": "celebration.json",
+      "durationSeconds": 1.75,
+      "keyframes": 215,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 3.056338560952058e-12,
+        "maxAnchorErrorMeters": 2.738752617891194e-7,
+        "canonicalMaxAnchorErrorMeters": 1.6415839050109055e-7
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -1.6007288035357892e-7,
+        "basketballSkinnedMeshMinY": -1.2170169386149787e-16,
+        "basketballMeshSamples": 425,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "crossover",
+      "file": "crossover.json",
+      "durationSeconds": 0.92,
+      "keyframes": 115,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 2.761726647956677e-12,
+        "maxAnchorErrorMeters": 2.7388276037825884e-7,
+        "canonicalMaxAnchorErrorMeters": 0.0000011186857243124098
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.0000010530006975956185,
+        "basketballSkinnedMeshMinY": -8.055622141567298e-17,
+        "basketballMeshSamples": 225,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 1.590088673626516e-10,
+      "pass": true
+    },
+    {
+      "clip": "defensive_run",
+      "file": "defensive_run.json",
+      "durationSeconds": 0.72,
+      "keyframes": 91,
+      "loop": {
+        "pass": true,
+        "maxEndpointMeters": 4.0555445657848463e-16,
+        "maxAcrossWrapMeters": 1.1687521374148708e-7,
+        "maxRotationRadians": 2.5809568279517867e-7
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 4.950365201866308e-11,
+        "maxAnchorErrorMeters": 2.7388809345395184e-7,
+        "canonicalMaxAnchorErrorMeters": 0.000036180068775851546
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.000035473505888228285,
+        "basketballSkinnedMeshMinY": -7.367153762039003e-17,
+        "basketballMeshSamples": 177,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "defensive_slide",
+      "file": "defensive_slide.json",
+      "durationSeconds": 0.9,
+      "keyframes": 111,
+      "loop": {
+        "pass": true,
+        "maxEndpointMeters": 2.8339244640771165e-16,
+        "maxAcrossWrapMeters": 0.0000407100784970628,
+        "maxRotationRadians": 0.00011371440772065231
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 6.882523095122425e-12,
+        "maxAnchorErrorMeters": 2.738821755506991e-7,
+        "canonicalMaxAnchorErrorMeters": 0.000004033950664628526
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.000004003742952687905,
+        "basketballSkinnedMeshMinY": -8.245357521752261e-17,
+        "basketballMeshSamples": 218,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "defensive_slide_right",
+      "file": "defensive_slide_right.json",
+      "durationSeconds": 0.9,
+      "keyframes": 111,
+      "loop": {
+        "pass": true,
+        "maxEndpointMeters": 3.1432500083045447e-16,
+        "maxAcrossWrapMeters": 0.000040711153309361446,
+        "maxRotationRadians": 0.00011372655646911994
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 7.0139148720802115e-12,
+        "maxAnchorErrorMeters": 2.738866116253798e-7,
+        "canonicalMaxAnchorErrorMeters": 0.000004033950664628526
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.000004003742952687905,
+        "basketballSkinnedMeshMinY": -7.936359902593892e-17,
+        "basketballMeshSamples": 218,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "defensive_switch",
+      "file": "defensive_switch.json",
+      "durationSeconds": 1.05,
+      "keyframes": 131,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 5.666230813437621e-13,
+        "maxAnchorErrorMeters": 2.738804997125049e-7,
+        "canonicalMaxAnchorErrorMeters": 4.7416908275350503e-8
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -4.593337896152683e-8,
+        "basketballSkinnedMeshMinY": -7.909254848281755e-17,
+        "basketballMeshSamples": 257,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "dribble_fast",
+      "file": "dribble_fast.json",
+      "durationSeconds": 0.42,
+      "keyframes": 55,
+      "loop": {
+        "pass": true,
+        "maxEndpointMeters": 0,
+        "maxAcrossWrapMeters": 1.5317133618807414e-8,
+        "maxRotationRadians": 2.1490760299348777e-7
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 3.299553845635038e-12,
+        "maxAnchorErrorMeters": 2.738755965083316e-7,
+        "canonicalMaxAnchorErrorMeters": 0.0000011661594282170773
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -9.841769559454372e-7,
+        "basketballSkinnedMeshMinY": -8.066464163292153e-17,
+        "basketballMeshSamples": 105,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 8.210277183271728e-11,
+      "pass": true
+    },
+    {
+      "clip": "dribble_slow",
+      "file": "dribble_slow.json",
+      "durationSeconds": 0.96,
+      "keyframes": 119,
+      "loop": {
+        "pass": true,
+        "maxEndpointMeters": 0,
+        "maxAcrossWrapMeters": 6.682079687439686e-9,
+        "maxRotationRadians": 2.1490760299348777e-7
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 3.243080943433385e-12,
+        "maxAnchorErrorMeters": 2.7387559688298015e-7,
+        "canonicalMaxAnchorErrorMeters": 2.2574720825608895e-7
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -1.907225810060531e-7,
+        "basketballSkinnedMeshMinY": -8.267041565201971e-17,
+        "basketballMeshSamples": 234,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 8.210277183271728e-11,
+      "pass": true
+    },
+    {
+      "clip": "dunk",
+      "file": "dunk.json",
+      "durationSeconds": 1.72,
+      "keyframes": 215,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 7.832880630932778e-12,
+        "maxAnchorErrorMeters": 2.7388569299124117e-7,
+        "canonicalMaxAnchorErrorMeters": 0.00005094268462722596
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.000050773543216239836,
+        "basketballSkinnedMeshMinY": -1.2939952928614495e-16,
+        "basketballMeshSamples": 421,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 7.071598297277727e-11,
+      "pass": true
+    },
+    {
+      "clip": "free_throw",
+      "file": "free_throw.json",
+      "durationSeconds": 2.1,
+      "keyframes": 257,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 1.957078266610333e-11,
+        "maxAnchorErrorMeters": 2.738816159948563e-7,
+        "canonicalMaxAnchorErrorMeters": 0.0000042318690012805625
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.000004227062660774883,
+        "basketballSkinnedMeshMinY": -1.6338926739356552e-16,
+        "basketballMeshSamples": 509,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 8.409285434225785e-11,
+      "pass": true
+    },
+    {
+      "clip": "jump_block",
+      "file": "jump_block.json",
+      "durationSeconds": 1.2,
+      "keyframes": 150,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 7.466622864532481e-12,
+        "maxAnchorErrorMeters": 2.738853619466556e-7,
+        "canonicalMaxAnchorErrorMeters": 0.0000836540402095459
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.00008332379925450606,
+        "basketballSkinnedMeshMinY": -1.3818156688327754e-16,
+        "basketballMeshSamples": 291,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 1.966960131711722e-11,
+      "pass": true
+    },
+    {
+      "clip": "layup_left",
+      "file": "layup_left.json",
+      "durationSeconds": 1.48,
+      "keyframes": 185,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 1.1371244390204929e-11,
+        "maxAnchorErrorMeters": 0.00003800590595216532,
+        "canonicalMaxAnchorErrorMeters": 0.000019433209146011943
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.00001878969688072496,
+        "basketballSkinnedMeshMinY": -8.039359108980015e-17,
+        "basketballMeshSamples": 362,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 8.840543836529341e-11,
+      "pass": true
+    },
+    {
+      "clip": "layup_right",
+      "file": "layup_right.json",
+      "durationSeconds": 1.48,
+      "keyframes": 185,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 9.041875529586253e-12,
+        "maxAnchorErrorMeters": 0.00003800398549740932,
+        "canonicalMaxAnchorErrorMeters": 0.000019433209146011943
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.00001878969688072496,
+        "basketballSkinnedMeshMinY": -1.310258325448732e-16,
+        "basketballMeshSamples": 362,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 8.840543836529341e-11,
+      "pass": true
+    },
+    {
+      "clip": "pass_chest",
+      "file": "pass_chest.json",
+      "durationSeconds": 0.82,
+      "keyframes": 103,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 3.0584597155872114e-12,
+        "maxAnchorErrorMeters": 2.738736450540047e-7,
+        "canonicalMaxAnchorErrorMeters": 1.0834952839058794e-7
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -1.0830642131753887e-7,
+        "basketballSkinnedMeshMinY": -8.310409652101391e-17,
+        "basketballMeshSamples": 201,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 5.045072720758951e-11,
+      "pass": true
+    },
+    {
+      "clip": "pass_overhead",
+      "file": "pass_overhead.json",
+      "durationSeconds": 0.98,
+      "keyframes": 122,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 7.197240504533714e-12,
+        "maxAnchorErrorMeters": 2.738678650078696e-7,
+        "canonicalMaxAnchorErrorMeters": 3.3215433362810205e-7
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -3.3176104745347157e-7,
+        "basketballSkinnedMeshMinY": -1.555288016430456e-16,
+        "basketballMeshSamples": 239,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 4.517701800158442e-11,
+      "pass": true
+    },
+    {
+      "clip": "rebound",
+      "file": "rebound.json",
+      "durationSeconds": 1.32,
+      "keyframes": 166,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 7.045146485898203e-12,
+        "maxAnchorErrorMeters": 2.73884979971128e-7,
+        "canonicalMaxAnchorErrorMeters": 0.000057530620826706415
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.000057370341723289586,
+        "basketballSkinnedMeshMinY": -7.844202717932625e-17,
+        "basketballMeshSamples": 324,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 9.87389861978056e-11,
+      "pass": true
+    },
+    {
+      "clip": "receive",
+      "file": "receive.json",
+      "durationSeconds": 0.78,
+      "keyframes": 97,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 1.1660013081151505e-11,
+        "maxAnchorErrorMeters": 2.7387783711940735e-7,
+        "canonicalMaxAnchorErrorMeters": 0.00000811219899807156
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.000008107695821296668,
+        "basketballSkinnedMeshMinY": -1.550951207740514e-16,
+        "basketballMeshSamples": 190,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 4.403824754548732e-11,
+      "pass": true
+    },
+    {
+      "clip": "screen",
+      "file": "screen.json",
+      "durationSeconds": 1.4,
+      "keyframes": 172,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 2.6291343905198472e-12,
+        "maxAnchorErrorMeters": 2.738799184209391e-7,
+        "canonicalMaxAnchorErrorMeters": 3.102418430351055e-7
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -3.0463427184990177e-7,
+        "basketballSkinnedMeshMinY": -7.838781707070197e-17,
+        "basketballMeshSamples": 338,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "shot_fake",
+      "file": "shot_fake.json",
+      "durationSeconds": 1.08,
+      "keyframes": 134,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 1.4347915942045064e-11,
+        "maxAnchorErrorMeters": 2.7387385123293665e-7,
+        "canonicalMaxAnchorErrorMeters": 0.00000117660039326679
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.0000011748098313058009,
+        "basketballSkinnedMeshMinY": -1.664792435851492e-16,
+        "basketballMeshSamples": 263,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 5.91627501461861e-11,
+      "pass": true
+    },
+    {
+      "clip": "spin",
+      "file": "spin.json",
+      "durationSeconds": 1.18,
+      "keyframes": 147,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 9.571428312552831e-11,
+        "maxAnchorErrorMeters": 2.738806962448742e-7,
+        "canonicalMaxAnchorErrorMeters": 0.0003297123348351298
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.00014467673481884102,
+        "basketballSkinnedMeshMinY": -7.247891523065597e-17,
+        "basketballMeshSamples": 288,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 9.952243768430713e-11,
+      "pass": true
+    },
+    {
+      "clip": "sprint",
+      "file": "sprint.json",
+      "durationSeconds": 0.54,
+      "keyframes": 69,
+      "loop": {
+        "pass": true,
+        "maxEndpointMeters": 4.1633363423443365e-16,
+        "maxAcrossWrapMeters": 2.1518655017268698e-7,
+        "maxRotationRadians": 5.862806908162258e-7
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 4.055305985226846e-11,
+        "maxAnchorErrorMeters": 2.7388663181215555e-7,
+        "canonicalMaxAnchorErrorMeters": 0.00019969783655094596
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.00019764844918725155,
+        "basketballSkinnedMeshMinY": -6.011901046432122e-17,
+        "basketballMeshSamples": 133,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "sprint_ball",
+      "file": "sprint_ball.json",
+      "durationSeconds": 0.58,
+      "keyframes": 75,
+      "loop": {
+        "pass": true,
+        "maxEndpointMeters": 3.510833468576701e-16,
+        "maxAcrossWrapMeters": 1.8330237961838586e-7,
+        "maxRotationRadians": 4.786961795153931e-7
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 4.0307888197633065e-11,
+        "maxAnchorErrorMeters": 2.7388641225414957e-7,
+        "canonicalMaxAnchorErrorMeters": 0.00012450319322189013
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.00012301119830693263,
+        "basketballSkinnedMeshMinY": -7.860465750519907e-17,
+        "basketballMeshSamples": 144,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 7.57540397718342e-11,
+      "pass": true
+    },
+    {
+      "clip": "steal_fail",
+      "file": "steal_fail.json",
+      "durationSeconds": 1.04,
+      "keyframes": 129,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 3.929278439767207e-12,
+        "maxAnchorErrorMeters": 2.738842118362242e-7,
+        "canonicalMaxAnchorErrorMeters": 8.133436313078335e-7
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -7.09749301719409e-7,
+        "basketballSkinnedMeshMinY": -8.294146619514109e-17,
+        "basketballMeshSamples": 253,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "steal_success",
+      "file": "steal_success.json",
+      "durationSeconds": 1.12,
+      "keyframes": 140,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 3.929400879216364e-12,
+        "maxAnchorErrorMeters": 2.738842118778017e-7,
+        "canonicalMaxAnchorErrorMeters": 5.761390547726927e-7
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -5.034976240519962e-7,
+        "basketballSkinnedMeshMinY": -8.033938098117588e-17,
+        "basketballMeshSamples": 274,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 5.907602186071287e-11,
+      "pass": true
+    },
+    {
+      "clip": "step_back",
+      "file": "step_back.json",
+      "durationSeconds": 1.18,
+      "keyframes": 149,
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "reason": "One-shot clip; transition continuity is measured instead."
+      },
+      "footSliding": {
+        "pass": true,
+        "maxSlipMeters": 1.5451281771628786e-11,
+        "maxAnchorErrorMeters": 0.00007172946733060727,
+        "canonicalMaxAnchorErrorMeters": 0.000006014299036144607
+      },
+      "floor": {
+        "pass": true,
+        "canonicalMinY": -0.000005918805751292666,
+        "basketballSkinnedMeshMinY": -8.272462576064399e-17,
+        "basketballMeshSamples": 290,
+        "allCharacterMeshScope": "Original viewer checks every clip on all four characters and two viewports; per-clip minimum is additionally recorded for basketball-player here."
+      },
+      "maxBallContactErrorMeters": 5.1932182939594976e-11,
+      "pass": true
+    }
+  ],
+  "transitions": {
+    "edgeCountPerCase": 297,
+    "probesPerCase": 891,
+    "pass": true
+  },
+  "maxima": {
+    "footSlipMeters": 9.571428312552831e-11,
+    "anchorErrorMeters": 0.00007172946733060727,
+    "loopWrapMeters": 0.000040711153309361446,
+    "floorMinY": -1.664792435851492e-16,
+    "cpuMeanMs": 1.3689999999990687
+  },
+  "pass": true
+}

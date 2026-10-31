@@ -1,0 +1,3780 @@
+{
+  "schemaVersion": 1,
+  "kind": "hoops-motion-expansion-manifest",
+  "game": "hoops",
+  "authorship": {
+    "license": "CC0-1.0",
+    "method": "Original authored skeletal poses with baked two-bone IK; no motion capture."
+  },
+  "baseMainCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "sourceContract": {
+    "path": "workout/island/design/motion/hoops.json",
+    "gitBlobSha": "a386d18dddd0247f86d1cee26df9da583dfc13c6",
+    "sha256": "194cb62adf3469d044d738d11c064c86c8c5737792b4c83055b3d97906ebe9c5"
+  },
+  "rigReference": {
+    "path": "workout/island/design/characters/rig.json",
+    "sha256": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2"
+  },
+  "clips": [
+    {
+      "file": "celebration.json",
+      "clip": "celebration",
+      "durationSeconds": 1.75,
+      "loop": false,
+      "keyframes": 215,
+      "bytes": 213402,
+      "sha256": "a497ea2dedc2f1200180bd8dfb20c049f7ff7ed8e1ff2c095af9bede1e1a8c4c",
+      "ballContactStatus": "none",
+      "ballContactCount": 0,
+      "supportContactCount": 3,
+      "presentationEvents": [
+        {
+          "name": "visual_celebration_start",
+          "time": 0.13,
+          "atSeconds": 0.2275
+        },
+        {
+          "name": "visual_fist_pump",
+          "time": 0.4,
+          "atSeconds": 0.7
+        },
+        {
+          "name": "visual_celebration_step",
+          "time": 0.49,
+          "atSeconds": 0.8575
+        },
+        {
+          "name": "visual_foot_land",
+          "time": 0.72,
+          "atSeconds": 1.26
+        },
+        {
+          "name": "visual_celebration_settle",
+          "time": 0.93,
+          "atSeconds": 1.6275
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 0.2,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0.35000000000000003
+        },
+        {
+          "time": 0.4,
+          "bone": "RightHand",
+          "type": "fist-pump",
+          "contact": false,
+          "atSeconds": 0.7000000000000001,
+          "normalizedTime": 0.4,
+          "kind": "hand",
+          "phase": "fist-pump"
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0.72,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.26
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.75
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.75
+        }
+      ],
+      "transitionRecommendations": {
+        "entryFrom": [
+          "idle",
+          "free_throw",
+          "dunk",
+          "layup_left",
+          "layup_right"
+        ],
+        "exitTo": [
+          "idle",
+          "sprint"
+        ],
+        "visualBlendSeconds": 0.18,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "targetTime": 0,
+        "footLock": "carry-until-release",
+        "interrupt": "Snapshot the displayed pose and velocity; carry planted world anchors through the blend and release only at authored support end."
+      }
+    },
+    {
+      "file": "crossover.json",
+      "clip": "crossover",
+      "durationSeconds": 0.92,
+      "loop": false,
+      "keyframes": 115,
+      "bytes": 126967,
+      "sha256": "79ba2e5a641099bf74418c53aa4a6de48fb3918eee5469cf26ddf341c6484966",
+      "ballContactStatus": "authored",
+      "ballContactCount": 2,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "visual_right_push",
+          "time": 0.24,
+          "atSeconds": 0.2208
+        },
+        {
+          "name": "visual_ball_floor",
+          "time": 0.48,
+          "atSeconds": 0.4416
+        },
+        {
+          "name": "visual_left_gather",
+          "time": 0.73,
+          "atSeconds": 0.6716
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_right_push",
+          "bone": "RightHand",
+          "time": 0.24,
+          "atSeconds": 0.2208
+        },
+        {
+          "kind": "ball-ground",
+          "phase": "bounce",
+          "time": 0.48,
+          "pointMeters": [
+            0,
+            0,
+            0.39
+          ],
+          "ballCenterMeters": [
+            0,
+            0.12,
+            0.39
+          ],
+          "atSeconds": 0.4416
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_left_gather",
+          "bone": "LeftHand",
+          "time": 0.73,
+          "atSeconds": 0.6716
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "atSeconds": 0.92
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "atSeconds": 0.92
+        }
+      ],
+      "transitionRecommendations": {
+        "entry": {
+          "visualBlendSeconds": 0.18,
+          "blendCurve": "smoothstep",
+          "sourcePose": "current-displayed",
+          "sourceContinuation": "velocity-extrapolation",
+          "footLock": "carry-until-release"
+        },
+        "exit": [
+          {
+            "target": "dribble_fast",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "sprint_ball",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "step_back",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          }
+        ],
+        "interruption": "Snapshot displayed pose and velocities. Carry outgoing world foot anchors until release; do not hard cut or replay markers."
+      }
+    },
+    {
+      "file": "defensive_run.json",
+      "clip": "defensive_run",
+      "durationSeconds": 0.72,
+      "loop": true,
+      "keyframes": 91,
+      "bytes": 113424,
+      "sha256": "d68b36f326c234fde3a4aedd0beb73611874022c4fdb505d9dd4e7ac6a9ff33d",
+      "ballContactStatus": "none",
+      "ballContactCount": 0,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "presentation_left_foot_plant",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "presentation_left_toe_off",
+          "time": 0.34,
+          "atSeconds": 0.2448
+        },
+        {
+          "name": "presentation_right_foot_plant",
+          "time": 0.5,
+          "atSeconds": 0.36
+        },
+        {
+          "name": "presentation_right_toe_off",
+          "time": 0.84,
+          "atSeconds": 0.6048
+        }
+      ],
+      "contactTimeline": [
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0.34,
+          "atSeconds": 0.24480000000000002,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0.5,
+          "atSeconds": 0.36,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot"
+        },
+        {
+          "time": 0.84,
+          "atSeconds": 0.6048,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "RightFoot"
+        }
+      ],
+      "transitionRecommendations": {
+        "minimumVisualBlendSeconds": 0.16,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "footLock": "carry-until-release",
+        "entry": {
+          "from": [
+            "idle",
+            "defensive_run",
+            "defensive_slide",
+            "defensive_slide_right"
+          ],
+          "targetTime": 0,
+          "phaseMatch": "Choose the leading-foot strike; retain outgoing world foot anchors until release."
+        },
+        "exit": {
+          "to": [
+            "defensive_run",
+            "defensive_slide",
+            "defensive_slide_right",
+            "screen"
+          ],
+          "atNormalizedPhases": [
+            0,
+            0.5
+          ],
+          "visualBlendSeconds": 0.2
+        },
+        "notes": "World speed and facing come from the simulation. Match the reference gait velocity before blending; never apply the reference path as gameplay root motion."
+      }
+    },
+    {
+      "file": "defensive_slide.json",
+      "clip": "defensive_slide",
+      "durationSeconds": 0.9,
+      "loop": true,
+      "keyframes": 111,
+      "bytes": 131807,
+      "sha256": "78f06043ab9a5e7f2413172c352a6c0767da1a45fc0d9d3164d9ef7996864261",
+      "ballContactStatus": "none",
+      "ballContactCount": 0,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "presentation_LeftFoot_plant",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "presentation_LeftFoot_toe_off",
+          "time": 0.48,
+          "atSeconds": 0.432
+        },
+        {
+          "name": "presentation_RightFoot_plant",
+          "time": 0.5,
+          "atSeconds": 0.45
+        },
+        {
+          "name": "presentation_RightFoot_toe_off",
+          "time": 0.98,
+          "atSeconds": 0.882
+        }
+      ],
+      "contactTimeline": [
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0.48,
+          "atSeconds": 0.432,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0.5,
+          "atSeconds": 0.45,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot"
+        },
+        {
+          "time": 0.98,
+          "atSeconds": 0.882,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "RightFoot"
+        }
+      ],
+      "transitionRecommendations": {
+        "minimumVisualBlendSeconds": 0.16,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "footLock": "carry-until-release",
+        "entry": {
+          "from": [
+            "idle",
+            "defensive_run",
+            "defensive_slide",
+            "defensive_slide_right"
+          ],
+          "targetTime": 0,
+          "phaseMatch": "Choose the leading-foot strike; retain outgoing world foot anchors until release."
+        },
+        "exit": {
+          "to": [
+            "defensive_run",
+            "defensive_slide",
+            "defensive_slide_right",
+            "screen"
+          ],
+          "atNormalizedPhases": [
+            0,
+            0.5
+          ],
+          "visualBlendSeconds": 0.2
+        },
+        "notes": "World speed and facing come from the simulation. Match the reference gait velocity before blending; never apply the reference path as gameplay root motion."
+      }
+    },
+    {
+      "file": "defensive_slide_right.json",
+      "clip": "defensive_slide_right",
+      "durationSeconds": 0.9,
+      "loop": true,
+      "keyframes": 111,
+      "bytes": 131973,
+      "sha256": "ef9d7602335aa83203e190481e271934c42aecd35f9d89cc0c6a821574742c90",
+      "ballContactStatus": "none",
+      "ballContactCount": 0,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "presentation_LeftFoot_plant",
+          "time": 0.5,
+          "atSeconds": 0.45
+        },
+        {
+          "name": "presentation_LeftFoot_toe_off",
+          "time": 0.98,
+          "atSeconds": 0.882
+        },
+        {
+          "name": "presentation_RightFoot_plant",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "presentation_RightFoot_toe_off",
+          "time": 0.48,
+          "atSeconds": 0.432
+        }
+      ],
+      "contactTimeline": [
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot"
+        },
+        {
+          "time": 0.48,
+          "atSeconds": 0.432,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "RightFoot"
+        },
+        {
+          "time": 0.5,
+          "atSeconds": 0.45,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0.98,
+          "atSeconds": 0.882,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "LeftFoot"
+        }
+      ],
+      "transitionRecommendations": {
+        "minimumVisualBlendSeconds": 0.16,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "footLock": "carry-until-release",
+        "entry": {
+          "from": [
+            "idle",
+            "defensive_run",
+            "defensive_slide",
+            "defensive_slide_right"
+          ],
+          "targetTime": 0,
+          "phaseMatch": "Choose the leading-foot strike; retain outgoing world foot anchors until release."
+        },
+        "exit": {
+          "to": [
+            "defensive_run",
+            "defensive_slide",
+            "defensive_slide_right",
+            "screen"
+          ],
+          "atNormalizedPhases": [
+            0,
+            0.5
+          ],
+          "visualBlendSeconds": 0.2
+        },
+        "notes": "World speed and facing come from the simulation. Match the reference gait velocity before blending; never apply the reference path as gameplay root motion."
+      }
+    },
+    {
+      "file": "defensive_switch.json",
+      "clip": "defensive_switch",
+      "durationSeconds": 1.05,
+      "loop": false,
+      "keyframes": 131,
+      "bytes": 141259,
+      "sha256": "e80264deda204f70df413b86604e915abd662bac25ab8d3ced342a4abbd645fb",
+      "ballContactStatus": "none",
+      "ballContactCount": 0,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "visual_switch_scan",
+          "time": 0.14,
+          "atSeconds": 0.147
+        },
+        {
+          "name": "visual_point_teammate",
+          "time": 0.39,
+          "atSeconds": 0.4095
+        },
+        {
+          "name": "visual_point_assignment",
+          "time": 0.64,
+          "atSeconds": 0.672
+        },
+        {
+          "name": "visual_defense_ready",
+          "time": 0.9,
+          "atSeconds": 0.945
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "time": 0.39,
+          "bone": "LeftHand",
+          "type": "point-teammate",
+          "contact": false,
+          "atSeconds": 0.40950000000000003,
+          "normalizedTime": 0.39,
+          "kind": "hand",
+          "phase": "point-teammate"
+        },
+        {
+          "time": 0.64,
+          "bone": "LeftHand",
+          "type": "point-assignment",
+          "contact": false,
+          "atSeconds": 0.672,
+          "normalizedTime": 0.64,
+          "kind": "hand",
+          "phase": "point-assignment"
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.05
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.05
+        }
+      ],
+      "transitionRecommendations": {
+        "entryFrom": [
+          "idle",
+          "defensive_run"
+        ],
+        "exitTo": [
+          "idle",
+          "defensive_run"
+        ],
+        "visualBlendSeconds": 0.18,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "targetTime": 0,
+        "footLock": "carry-until-release",
+        "interrupt": "Snapshot the displayed pose and velocity; carry planted world anchors through the blend and release only at authored support end."
+      }
+    },
+    {
+      "file": "dribble_fast.json",
+      "clip": "dribble_fast",
+      "durationSeconds": 0.42,
+      "loop": true,
+      "keyframes": 55,
+      "bytes": 73292,
+      "sha256": "72019117f4527e37419d548d80d58a89b6a4d1ab445d35064562cc3e71973664",
+      "ballContactStatus": "authored",
+      "ballContactCount": 3,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "presentation_dribble_control",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "presentation_dribble_release",
+          "time": 0.15,
+          "atSeconds": 0.063
+        },
+        {
+          "name": "presentation_dribble_bounce",
+          "time": 0.5,
+          "atSeconds": 0.21
+        },
+        {
+          "name": "presentation_dribble_receive",
+          "time": 0.85,
+          "atSeconds": 0.357
+        }
+      ],
+      "contactTimeline": [
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot"
+        },
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "hand-ball",
+          "phase": "control",
+          "bone": "RightHand"
+        },
+        {
+          "time": 0.15,
+          "atSeconds": 0.063,
+          "kind": "hand-ball",
+          "phase": "release",
+          "bone": "RightHand"
+        },
+        {
+          "time": 0.5,
+          "atSeconds": 0.21,
+          "kind": "ball-ground",
+          "phase": "bounce",
+          "pointMeters": [
+            -0.32,
+            0,
+            0.32
+          ],
+          "ballCenterMeters": [
+            -0.32,
+            0.12,
+            0.32
+          ],
+          "ballRadiusMeters": 0.12
+        },
+        {
+          "time": 0.85,
+          "atSeconds": 0.357,
+          "kind": "hand-ball",
+          "phase": "receive",
+          "bone": "RightHand"
+        },
+        {
+          "time": 1,
+          "atSeconds": 0.42,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 1,
+          "atSeconds": 0.42,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "RightFoot"
+        }
+      ],
+      "transitionRecommendations": {
+        "minimumVisualBlendSeconds": 0.16,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "footLock": "carry-until-release",
+        "entry": {
+          "from": [
+            "dribble_slow",
+            "dribble_fast",
+            "sprint_ball"
+          ],
+          "targetTime": 0,
+          "phaseMatch": "Choose the leading-foot strike; retain outgoing world foot anchors until release."
+        },
+        "exit": {
+          "to": [
+            "dribble_slow",
+            "dribble_fast",
+            "crossover",
+            "layup_right"
+          ],
+          "atNormalizedPhases": [
+            0,
+            0.5
+          ],
+          "visualBlendSeconds": 0.2
+        },
+        "notes": "World speed and facing come from the simulation. Match the reference gait velocity before blending; never apply the reference path as gameplay root motion."
+      }
+    },
+    {
+      "file": "dribble_slow.json",
+      "clip": "dribble_slow",
+      "durationSeconds": 0.96,
+      "loop": true,
+      "keyframes": 119,
+      "bytes": 148082,
+      "sha256": "ecc561e2ef5053614342b9619b8b5bde6d67305a10849d485acb67c6b770321a",
+      "ballContactStatus": "authored",
+      "ballContactCount": 3,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "presentation_dribble_control",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "presentation_dribble_release",
+          "time": 0.15,
+          "atSeconds": 0.144
+        },
+        {
+          "name": "presentation_dribble_bounce",
+          "time": 0.5,
+          "atSeconds": 0.48
+        },
+        {
+          "name": "presentation_dribble_receive",
+          "time": 0.85,
+          "atSeconds": 0.816
+        }
+      ],
+      "contactTimeline": [
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot"
+        },
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "hand-ball",
+          "phase": "control",
+          "bone": "RightHand"
+        },
+        {
+          "time": 0.15,
+          "atSeconds": 0.144,
+          "kind": "hand-ball",
+          "phase": "release",
+          "bone": "RightHand"
+        },
+        {
+          "time": 0.5,
+          "atSeconds": 0.48,
+          "kind": "ball-ground",
+          "phase": "bounce",
+          "pointMeters": [
+            -0.32,
+            0,
+            0.32
+          ],
+          "ballCenterMeters": [
+            -0.32,
+            0.12,
+            0.32
+          ],
+          "ballRadiusMeters": 0.12
+        },
+        {
+          "time": 0.85,
+          "atSeconds": 0.816,
+          "kind": "hand-ball",
+          "phase": "receive",
+          "bone": "RightHand"
+        },
+        {
+          "time": 1,
+          "atSeconds": 0.96,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 1,
+          "atSeconds": 0.96,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "RightFoot"
+        }
+      ],
+      "transitionRecommendations": {
+        "minimumVisualBlendSeconds": 0.16,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "footLock": "carry-until-release",
+        "entry": {
+          "from": [
+            "dribble_slow",
+            "dribble_fast",
+            "sprint_ball"
+          ],
+          "targetTime": 0,
+          "phaseMatch": "Choose the leading-foot strike; retain outgoing world foot anchors until release."
+        },
+        "exit": {
+          "to": [
+            "dribble_slow",
+            "dribble_fast",
+            "crossover",
+            "layup_right"
+          ],
+          "atNormalizedPhases": [
+            0,
+            0.5
+          ],
+          "visualBlendSeconds": 0.2
+        },
+        "notes": "World speed and facing come from the simulation. Match the reference gait velocity before blending; never apply the reference path as gameplay root motion."
+      }
+    },
+    {
+      "file": "dunk.json",
+      "clip": "dunk",
+      "durationSeconds": 1.72,
+      "loop": false,
+      "keyframes": 215,
+      "bytes": 205202,
+      "sha256": "68eef64d5846d33a61b97889502f2a267eefbe6d60200fb0ae804bb08f4cc0ff",
+      "ballContactStatus": "authored",
+      "ballContactCount": 3,
+      "supportContactCount": 4,
+      "presentationEvents": [
+        {
+          "name": "visual_dunk_gather",
+          "time": 0.13,
+          "atSeconds": 0.2236
+        },
+        {
+          "name": "visual_takeoff",
+          "time": 0.24,
+          "atSeconds": 0.4128
+        },
+        {
+          "name": "visual_dunk_release",
+          "time": 0.49,
+          "atSeconds": 0.8428
+        },
+        {
+          "name": "visual_rim_touch",
+          "time": 0.53,
+          "atSeconds": 0.9116
+        },
+        {
+          "name": "visual_rim_release",
+          "time": 0.6,
+          "atSeconds": 1.032
+        },
+        {
+          "name": "visual_land",
+          "time": 0.82,
+          "atSeconds": 1.4104
+        },
+        {
+          "name": "visual_landing_settle",
+          "time": 0.92,
+          "atSeconds": 1.5824
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "atSeconds": 0.2236,
+          "normalizedTime": 0.13,
+          "bone": "LeftHand",
+          "event": "visual_dunk_gather",
+          "kind": "hand-ball",
+          "phase": "visual_dunk_gather",
+          "time": 0.13
+        },
+        {
+          "atSeconds": 0.2236,
+          "normalizedTime": 0.13,
+          "bone": "RightHand",
+          "event": "visual_dunk_gather",
+          "kind": "hand-ball",
+          "phase": "visual_dunk_gather",
+          "time": 0.13
+        },
+        {
+          "time": 0.13,
+          "bone": "LeftHand",
+          "type": "gather",
+          "contact": true,
+          "atSeconds": 0.2236,
+          "normalizedTime": 0.13,
+          "kind": "hand",
+          "phase": "gather"
+        },
+        {
+          "time": 0.13,
+          "bone": "RightHand",
+          "type": "gather",
+          "contact": true,
+          "atSeconds": 0.2236,
+          "normalizedTime": 0.13,
+          "kind": "hand",
+          "phase": "gather"
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 0.24,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0.4128
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 0.24,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0.4128
+        },
+        {
+          "atSeconds": 0.8428,
+          "normalizedTime": 0.49,
+          "bone": "RightHand",
+          "event": "visual_dunk_release",
+          "kind": "hand-ball",
+          "phase": "visual_dunk_release",
+          "time": 0.49
+        },
+        {
+          "time": 0.49,
+          "bone": "RightHand",
+          "type": "dunk-release",
+          "contact": true,
+          "atSeconds": 0.8428,
+          "normalizedTime": 0.49,
+          "kind": "hand",
+          "phase": "dunk-release"
+        },
+        {
+          "time": 0.53,
+          "bone": "RightHand",
+          "type": "rim",
+          "contact": true,
+          "releaseTime": 0.6,
+          "atSeconds": 0.9116000000000001,
+          "normalizedTime": 0.53,
+          "kind": "hand",
+          "phase": "rim",
+          "endTime": 0.6,
+          "endAtSeconds": 1.032
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0.82,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.4103999999999999
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0.82,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.4103999999999999
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.72
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.72
+        }
+      ],
+      "transitionRecommendations": {
+        "entryFrom": [
+          "sprint_ball",
+          "dribble_fast",
+          "receive"
+        ],
+        "exitTo": [
+          "idle",
+          "sprint",
+          "rebound"
+        ],
+        "visualBlendSeconds": 0.18,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "targetTime": 0,
+        "footLock": "carry-until-release",
+        "interrupt": "Snapshot the displayed pose and velocity; carry planted world anchors through the blend and release only at authored support end."
+      }
+    },
+    {
+      "file": "free_throw.json",
+      "clip": "free_throw",
+      "durationSeconds": 2.1,
+      "loop": false,
+      "keyframes": 257,
+      "bytes": 272841,
+      "sha256": "94f3a80db6ce467174c1f431097caf47ef64681396bbabd7c46ab2a4a5a19e76",
+      "ballContactStatus": "authored",
+      "ballContactCount": 7,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "visual_free_throw_set",
+          "time": 0.22,
+          "atSeconds": 0.462
+        },
+        {
+          "name": "visual_free_throw_set",
+          "time": 0.44,
+          "atSeconds": 0.924
+        },
+        {
+          "name": "visual_guide_release",
+          "time": 0.5,
+          "atSeconds": 1.05
+        },
+        {
+          "name": "visual_shot_release",
+          "time": 0.57,
+          "atSeconds": 1.197
+        },
+        {
+          "name": "visual_follow_through",
+          "time": 0.78,
+          "atSeconds": 1.638
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_free_throw_set",
+          "bone": "LeftHand",
+          "time": 0.22,
+          "atSeconds": 0.462
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_free_throw_set",
+          "bone": "RightHand",
+          "time": 0.22,
+          "atSeconds": 0.462
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_free_throw_set",
+          "bone": "LeftHand",
+          "time": 0.44,
+          "atSeconds": 0.924
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_free_throw_set",
+          "bone": "RightHand",
+          "time": 0.44,
+          "atSeconds": 0.924
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_guide_release",
+          "bone": "LeftHand",
+          "time": 0.5,
+          "atSeconds": 1.05
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_guide_release",
+          "bone": "RightHand",
+          "time": 0.5,
+          "atSeconds": 1.05
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_shot_release",
+          "bone": "RightHand",
+          "time": 0.57,
+          "atSeconds": 1.1969999999999998
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "atSeconds": 2.1
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "atSeconds": 2.1
+        }
+      ],
+      "transitionRecommendations": {
+        "entry": {
+          "visualBlendSeconds": 0.18,
+          "blendCurve": "smoothstep",
+          "sourcePose": "current-displayed",
+          "sourceContinuation": "velocity-extrapolation",
+          "footLock": "carry-until-release"
+        },
+        "exit": [
+          {
+            "target": "rebound",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "celebration",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          }
+        ],
+        "interruption": "Snapshot displayed pose and velocities. Carry outgoing world foot anchors until release; do not hard cut or replay markers."
+      }
+    },
+    {
+      "file": "jump_block.json",
+      "clip": "jump_block",
+      "durationSeconds": 1.2,
+      "loop": false,
+      "keyframes": 150,
+      "bytes": 139977,
+      "sha256": "3c7280db206955a09d3f22109cfe70e0b9d5a44bf787b75b11b379375d619ec0",
+      "ballContactStatus": "authored",
+      "ballContactCount": 1,
+      "supportContactCount": 4,
+      "presentationEvents": [
+        {
+          "name": "visual_block_crouch",
+          "time": 0.16,
+          "atSeconds": 0.192
+        },
+        {
+          "name": "visual_takeoff",
+          "time": 0.26,
+          "atSeconds": 0.312
+        },
+        {
+          "name": "visual_block_tip",
+          "time": 0.52,
+          "atSeconds": 0.624
+        },
+        {
+          "name": "visual_land",
+          "time": 0.8,
+          "atSeconds": 0.96
+        },
+        {
+          "name": "visual_defense_ready",
+          "time": 0.96,
+          "atSeconds": 1.152
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 0.26,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0.312
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 0.26,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0.312
+        },
+        {
+          "atSeconds": 0.624,
+          "normalizedTime": 0.52,
+          "bone": "RightHand",
+          "event": "visual_block_tip",
+          "kind": "hand-ball",
+          "phase": "visual_block_tip",
+          "time": 0.52
+        },
+        {
+          "time": 0.52,
+          "bone": "RightHand",
+          "type": "ball-tip",
+          "contact": true,
+          "atSeconds": 0.624,
+          "normalizedTime": 0.52,
+          "kind": "hand",
+          "phase": "ball-tip"
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0.8,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0.96
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0.8,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0.96
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.2
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.2
+        }
+      ],
+      "transitionRecommendations": {
+        "entryFrom": [
+          "idle",
+          "defensive_run"
+        ],
+        "exitTo": [
+          "defensive_run",
+          "rebound",
+          "idle"
+        ],
+        "visualBlendSeconds": 0.18,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "targetTime": 0,
+        "footLock": "carry-until-release",
+        "interrupt": "Snapshot the displayed pose and velocity; carry planted world anchors through the blend and release only at authored support end."
+      }
+    },
+    {
+      "file": "layup_left.json",
+      "clip": "layup_left",
+      "durationSeconds": 1.48,
+      "loop": false,
+      "keyframes": 185,
+      "bytes": 196497,
+      "sha256": "9cfe5a5951b6fa1041fe19d0caba6e0d168522c9c62882eff0907c2fdeae7b5e",
+      "ballContactStatus": "authored",
+      "ballContactCount": 3,
+      "supportContactCount": 4,
+      "presentationEvents": [
+        {
+          "name": "visual_layup_gather",
+          "time": 0.14,
+          "atSeconds": 0.2072
+        },
+        {
+          "name": "visual_takeoff",
+          "time": 0.3,
+          "atSeconds": 0.444
+        },
+        {
+          "name": "visual_layup_release",
+          "time": 0.52,
+          "atSeconds": 0.7696
+        },
+        {
+          "name": "visual_land",
+          "time": 0.78,
+          "atSeconds": 1.1544
+        },
+        {
+          "name": "visual_second_foot_land",
+          "time": 0.86,
+          "atSeconds": 1.2728
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "anchorMeters": [
+            -0.1,
+            0,
+            -0.07
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "anchorMeters": [
+            0.1,
+            0,
+            0.08
+          ],
+          "atSeconds": 0
+        },
+        {
+          "atSeconds": 0.20720000000000002,
+          "normalizedTime": 0.14,
+          "bone": "LeftHand",
+          "event": "visual_layup_gather",
+          "kind": "hand-ball",
+          "phase": "visual_layup_gather",
+          "time": 0.14
+        },
+        {
+          "atSeconds": 0.20720000000000002,
+          "normalizedTime": 0.14,
+          "bone": "RightHand",
+          "event": "visual_layup_gather",
+          "kind": "hand-ball",
+          "phase": "visual_layup_gather",
+          "time": 0.14
+        },
+        {
+          "time": 0.14,
+          "bone": "LeftHand",
+          "type": "gather",
+          "contact": true,
+          "atSeconds": 0.20720000000000002,
+          "normalizedTime": 0.14,
+          "kind": "hand",
+          "phase": "gather"
+        },
+        {
+          "time": 0.14,
+          "bone": "RightHand",
+          "type": "gather",
+          "contact": true,
+          "atSeconds": 0.20720000000000002,
+          "normalizedTime": 0.14,
+          "kind": "hand",
+          "phase": "gather"
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 0.18,
+          "anchorMeters": [
+            0.1,
+            0,
+            0.08
+          ],
+          "atSeconds": 0.26639999999999997
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 0.3,
+          "anchorMeters": [
+            -0.1,
+            0,
+            -0.07
+          ],
+          "atSeconds": 0.444
+        },
+        {
+          "atSeconds": 0.7696000000000001,
+          "normalizedTime": 0.52,
+          "bone": "LeftHand",
+          "event": "visual_layup_release",
+          "kind": "hand-ball",
+          "phase": "visual_layup_release",
+          "time": 0.52
+        },
+        {
+          "time": 0.52,
+          "bone": "LeftHand",
+          "type": "release",
+          "contact": true,
+          "atSeconds": 0.7696000000000001,
+          "normalizedTime": 0.52,
+          "kind": "hand",
+          "phase": "release"
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0.78,
+          "anchorMeters": [
+            -0.1,
+            0,
+            -0.07
+          ],
+          "atSeconds": 1.1544
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0.86,
+          "anchorMeters": [
+            0.1,
+            0,
+            0.08
+          ],
+          "atSeconds": 1.2728
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "anchorMeters": [
+            -0.1,
+            0,
+            -0.07
+          ],
+          "atSeconds": 1.48
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "anchorMeters": [
+            0.1,
+            0,
+            0.08
+          ],
+          "atSeconds": 1.48
+        }
+      ],
+      "transitionRecommendations": {
+        "entryFrom": [
+          "sprint_ball",
+          "dribble_fast",
+          "crossover",
+          "receive"
+        ],
+        "exitTo": [
+          "sprint",
+          "rebound",
+          "idle"
+        ],
+        "visualBlendSeconds": 0.18,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "targetTime": 0,
+        "footLock": "carry-until-release",
+        "interrupt": "Snapshot the displayed pose and velocity; carry planted world anchors through the blend and release only at authored support end."
+      }
+    },
+    {
+      "file": "layup_right.json",
+      "clip": "layup_right",
+      "durationSeconds": 1.48,
+      "loop": false,
+      "keyframes": 185,
+      "bytes": 196943,
+      "sha256": "dc36339ad1ebe2388c658e5e34a5c07a8105c6062af902eb837c3a21e1a0ec54",
+      "ballContactStatus": "authored",
+      "ballContactCount": 3,
+      "supportContactCount": 4,
+      "presentationEvents": [
+        {
+          "name": "visual_layup_gather",
+          "time": 0.14,
+          "atSeconds": 0.2072
+        },
+        {
+          "name": "visual_takeoff",
+          "time": 0.3,
+          "atSeconds": 0.444
+        },
+        {
+          "name": "visual_layup_release",
+          "time": 0.52,
+          "atSeconds": 0.7696
+        },
+        {
+          "name": "visual_land",
+          "time": 0.78,
+          "atSeconds": 1.1544
+        },
+        {
+          "name": "visual_second_foot_land",
+          "time": 0.86,
+          "atSeconds": 1.2728
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "anchorMeters": [
+            0.1,
+            0,
+            -0.07
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0.08
+          ],
+          "atSeconds": 0
+        },
+        {
+          "atSeconds": 0.20720000000000002,
+          "normalizedTime": 0.14,
+          "bone": "LeftHand",
+          "event": "visual_layup_gather",
+          "kind": "hand-ball",
+          "phase": "visual_layup_gather",
+          "time": 0.14
+        },
+        {
+          "atSeconds": 0.20720000000000002,
+          "normalizedTime": 0.14,
+          "bone": "RightHand",
+          "event": "visual_layup_gather",
+          "kind": "hand-ball",
+          "phase": "visual_layup_gather",
+          "time": 0.14
+        },
+        {
+          "time": 0.14,
+          "bone": "LeftHand",
+          "type": "gather",
+          "contact": true,
+          "atSeconds": 0.20720000000000002,
+          "normalizedTime": 0.14,
+          "kind": "hand",
+          "phase": "gather"
+        },
+        {
+          "time": 0.14,
+          "bone": "RightHand",
+          "type": "gather",
+          "contact": true,
+          "atSeconds": 0.20720000000000002,
+          "normalizedTime": 0.14,
+          "kind": "hand",
+          "phase": "gather"
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 0.18,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0.08
+          ],
+          "atSeconds": 0.26639999999999997
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 0.3,
+          "anchorMeters": [
+            0.1,
+            0,
+            -0.07
+          ],
+          "atSeconds": 0.444
+        },
+        {
+          "atSeconds": 0.7696000000000001,
+          "normalizedTime": 0.52,
+          "bone": "RightHand",
+          "event": "visual_layup_release",
+          "kind": "hand-ball",
+          "phase": "visual_layup_release",
+          "time": 0.52
+        },
+        {
+          "time": 0.52,
+          "bone": "RightHand",
+          "type": "release",
+          "contact": true,
+          "atSeconds": 0.7696000000000001,
+          "normalizedTime": 0.52,
+          "kind": "hand",
+          "phase": "release"
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0.78,
+          "anchorMeters": [
+            0.1,
+            0,
+            -0.07
+          ],
+          "atSeconds": 1.1544
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0.86,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0.08
+          ],
+          "atSeconds": 1.2728
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "anchorMeters": [
+            0.1,
+            0,
+            -0.07
+          ],
+          "atSeconds": 1.48
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0.08
+          ],
+          "atSeconds": 1.48
+        }
+      ],
+      "transitionRecommendations": {
+        "entryFrom": [
+          "sprint_ball",
+          "dribble_fast",
+          "crossover",
+          "receive"
+        ],
+        "exitTo": [
+          "sprint",
+          "rebound",
+          "idle"
+        ],
+        "visualBlendSeconds": 0.18,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "targetTime": 0,
+        "footLock": "carry-until-release",
+        "interrupt": "Snapshot the displayed pose and velocity; carry planted world anchors through the blend and release only at authored support end."
+      }
+    },
+    {
+      "file": "pass_chest.json",
+      "clip": "pass_chest",
+      "durationSeconds": 0.82,
+      "loop": false,
+      "keyframes": 103,
+      "bytes": 111505,
+      "sha256": "6b836364693dedb8f052ce4614bdd6cd692581f8d206dbd0226b770282c32618",
+      "ballContactStatus": "authored",
+      "ballContactCount": 4,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "visual_chest_load",
+          "time": 0.2,
+          "atSeconds": 0.164
+        },
+        {
+          "name": "visual_pass_release",
+          "time": 0.47,
+          "atSeconds": 0.3854
+        },
+        {
+          "name": "visual_follow_through",
+          "time": 0.72,
+          "atSeconds": 0.5904
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_chest_load",
+          "bone": "LeftHand",
+          "time": 0.2,
+          "atSeconds": 0.164
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_chest_load",
+          "bone": "RightHand",
+          "time": 0.2,
+          "atSeconds": 0.164
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_pass_release",
+          "bone": "LeftHand",
+          "time": 0.47,
+          "atSeconds": 0.38539999999999996
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_pass_release",
+          "bone": "RightHand",
+          "time": 0.47,
+          "atSeconds": 0.38539999999999996
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "atSeconds": 0.82
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "atSeconds": 0.82
+        }
+      ],
+      "transitionRecommendations": {
+        "entry": {
+          "visualBlendSeconds": 0.18,
+          "blendCurve": "smoothstep",
+          "sourcePose": "current-displayed",
+          "sourceContinuation": "velocity-extrapolation",
+          "footLock": "carry-until-release"
+        },
+        "exit": [
+          {
+            "target": "sprint",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "defensive_run",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          }
+        ],
+        "interruption": "Snapshot displayed pose and velocities. Carry outgoing world foot anchors until release; do not hard cut or replay markers."
+      }
+    },
+    {
+      "file": "pass_overhead.json",
+      "clip": "pass_overhead",
+      "durationSeconds": 0.98,
+      "loop": false,
+      "keyframes": 122,
+      "bytes": 130466,
+      "sha256": "ceab184f12094295229007d913917d89352d4f9afa209a9dfe07b854848f3910",
+      "ballContactStatus": "authored",
+      "ballContactCount": 4,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "visual_overhead_load",
+          "time": 0.3,
+          "atSeconds": 0.294
+        },
+        {
+          "name": "visual_pass_release",
+          "time": 0.54,
+          "atSeconds": 0.5292
+        },
+        {
+          "name": "visual_follow_through",
+          "time": 0.78,
+          "atSeconds": 0.7644
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_overhead_load",
+          "bone": "LeftHand",
+          "time": 0.3,
+          "atSeconds": 0.294
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_overhead_load",
+          "bone": "RightHand",
+          "time": 0.3,
+          "atSeconds": 0.294
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_pass_release",
+          "bone": "LeftHand",
+          "time": 0.54,
+          "atSeconds": 0.5292
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_pass_release",
+          "bone": "RightHand",
+          "time": 0.54,
+          "atSeconds": 0.5292
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "atSeconds": 0.98
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "atSeconds": 0.98
+        }
+      ],
+      "transitionRecommendations": {
+        "entry": {
+          "visualBlendSeconds": 0.18,
+          "blendCurve": "smoothstep",
+          "sourcePose": "current-displayed",
+          "sourceContinuation": "velocity-extrapolation",
+          "footLock": "carry-until-release"
+        },
+        "exit": [
+          {
+            "target": "sprint",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "defensive_run",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          }
+        ],
+        "interruption": "Snapshot displayed pose and velocities. Carry outgoing world foot anchors until release; do not hard cut or replay markers."
+      }
+    },
+    {
+      "file": "rebound.json",
+      "clip": "rebound",
+      "durationSeconds": 1.32,
+      "loop": false,
+      "keyframes": 166,
+      "bytes": 158034,
+      "sha256": "25e98ba8cd13af7b1058839d260b7ee10e36c909fa8ad7ce3f0797881cc3d911",
+      "ballContactStatus": "authored",
+      "ballContactCount": 4,
+      "supportContactCount": 4,
+      "presentationEvents": [
+        {
+          "name": "visual_rebound_prepare",
+          "time": 0.12,
+          "atSeconds": 0.1584
+        },
+        {
+          "name": "visual_takeoff",
+          "time": 0.24,
+          "atSeconds": 0.3168
+        },
+        {
+          "name": "visual_rebound_catch",
+          "time": 0.49,
+          "atSeconds": 0.6468
+        },
+        {
+          "name": "visual_rebound_secure",
+          "time": 0.66,
+          "atSeconds": 0.8712
+        },
+        {
+          "name": "visual_land",
+          "time": 0.79,
+          "atSeconds": 1.0428
+        },
+        {
+          "name": "visual_balance_ready",
+          "time": 0.94,
+          "atSeconds": 1.2408
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 0.24,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0.3168
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 0.24,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0.3168
+        },
+        {
+          "atSeconds": 0.6468,
+          "normalizedTime": 0.49,
+          "bone": "LeftHand",
+          "event": "visual_rebound_catch",
+          "kind": "hand-ball",
+          "phase": "visual_rebound_catch",
+          "time": 0.49
+        },
+        {
+          "atSeconds": 0.6468,
+          "normalizedTime": 0.49,
+          "bone": "RightHand",
+          "event": "visual_rebound_catch",
+          "kind": "hand-ball",
+          "phase": "visual_rebound_catch",
+          "time": 0.49
+        },
+        {
+          "time": 0.49,
+          "bone": "LeftHand",
+          "type": "catch",
+          "contact": true,
+          "atSeconds": 0.6468,
+          "normalizedTime": 0.49,
+          "kind": "hand",
+          "phase": "catch"
+        },
+        {
+          "time": 0.49,
+          "bone": "RightHand",
+          "type": "catch",
+          "contact": true,
+          "atSeconds": 0.6468,
+          "normalizedTime": 0.49,
+          "kind": "hand",
+          "phase": "catch"
+        },
+        {
+          "atSeconds": 0.8712000000000001,
+          "normalizedTime": 0.66,
+          "bone": "LeftHand",
+          "event": "visual_rebound_secure",
+          "kind": "hand-ball",
+          "phase": "visual_rebound_secure",
+          "time": 0.66
+        },
+        {
+          "atSeconds": 0.8712000000000001,
+          "normalizedTime": 0.66,
+          "bone": "RightHand",
+          "event": "visual_rebound_secure",
+          "kind": "hand-ball",
+          "phase": "visual_rebound_secure",
+          "time": 0.66
+        },
+        {
+          "time": 0.66,
+          "bone": "LeftHand",
+          "type": "secure",
+          "contact": true,
+          "atSeconds": 0.8712000000000001,
+          "normalizedTime": 0.66,
+          "kind": "hand",
+          "phase": "secure"
+        },
+        {
+          "time": 0.66,
+          "bone": "RightHand",
+          "type": "secure",
+          "contact": true,
+          "atSeconds": 0.8712000000000001,
+          "normalizedTime": 0.66,
+          "kind": "hand",
+          "phase": "secure"
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0.79,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.0428000000000002
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0.79,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.0428000000000002
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.32
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.32
+        }
+      ],
+      "transitionRecommendations": {
+        "entryFrom": [
+          "idle",
+          "defensive_run",
+          "jump_block",
+          "sprint"
+        ],
+        "exitTo": [
+          "pass_chest",
+          "pass_overhead",
+          "dribble_slow",
+          "idle"
+        ],
+        "visualBlendSeconds": 0.18,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "targetTime": 0,
+        "footLock": "carry-until-release",
+        "interrupt": "Snapshot the displayed pose and velocity; carry planted world anchors through the blend and release only at authored support end."
+      }
+    },
+    {
+      "file": "receive.json",
+      "clip": "receive",
+      "durationSeconds": 0.78,
+      "loop": false,
+      "keyframes": 97,
+      "bytes": 104557,
+      "sha256": "c7d43661469b999bfebcb8edea6bd38d55b9dc5b148ba40dc6ff32692d926a3a",
+      "ballContactStatus": "authored",
+      "ballContactCount": 6,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "visual_receive",
+          "time": 0.28,
+          "atSeconds": 0.2184
+        },
+        {
+          "name": "visual_secure",
+          "time": 0.58,
+          "atSeconds": 0.4524
+        },
+        {
+          "name": "visual_secure",
+          "time": 1,
+          "atSeconds": 0.78
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_receive",
+          "bone": "LeftHand",
+          "time": 0.28,
+          "atSeconds": 0.21840000000000004
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_receive",
+          "bone": "RightHand",
+          "time": 0.28,
+          "atSeconds": 0.21840000000000004
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_secure",
+          "bone": "LeftHand",
+          "time": 0.58,
+          "atSeconds": 0.45239999999999997
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_secure",
+          "bone": "RightHand",
+          "time": 0.58,
+          "atSeconds": 0.45239999999999997
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "atSeconds": 0.78
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "atSeconds": 0.78
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_secure",
+          "bone": "LeftHand",
+          "time": 1,
+          "atSeconds": 0.78
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_secure",
+          "bone": "RightHand",
+          "time": 1,
+          "atSeconds": 0.78
+        }
+      ],
+      "transitionRecommendations": {
+        "entry": {
+          "visualBlendSeconds": 0.18,
+          "blendCurve": "smoothstep",
+          "sourcePose": "current-displayed",
+          "sourceContinuation": "velocity-extrapolation",
+          "footLock": "carry-until-release"
+        },
+        "exit": [
+          {
+            "target": "dribble_slow",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "pass_chest",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "free_throw",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          }
+        ],
+        "interruption": "Snapshot displayed pose and velocities. Carry outgoing world foot anchors until release; do not hard cut or replay markers."
+      }
+    },
+    {
+      "file": "screen.json",
+      "clip": "screen",
+      "durationSeconds": 1.4,
+      "loop": false,
+      "keyframes": 172,
+      "bytes": 180985,
+      "sha256": "bc4484771e12923eeab4d4ffa5c4070071bca3abc795edc6de3bf82cea78b385",
+      "ballContactStatus": "none",
+      "ballContactCount": 0,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "visual_screen_set",
+          "time": 0.22,
+          "atSeconds": 0.308
+        },
+        {
+          "name": "visual_screen_brace",
+          "time": 0.5,
+          "atSeconds": 0.7
+        },
+        {
+          "name": "visual_screen_hold",
+          "time": 0.68,
+          "atSeconds": 0.952
+        },
+        {
+          "name": "visual_screen_release",
+          "time": 0.88,
+          "atSeconds": 1.232
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "anchorMeters": [
+            0.2,
+            0,
+            0.03
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "anchorMeters": [
+            -0.2,
+            0,
+            -0.03
+          ],
+          "atSeconds": 0
+        },
+        {
+          "time": 0.22,
+          "bone": "LeftHand",
+          "type": "protected-at-torso",
+          "contact": false,
+          "atSeconds": 0.308,
+          "normalizedTime": 0.22,
+          "kind": "hand",
+          "phase": "protected-at-torso"
+        },
+        {
+          "time": 0.22,
+          "bone": "RightHand",
+          "type": "protected-at-torso",
+          "contact": false,
+          "atSeconds": 0.308,
+          "normalizedTime": 0.22,
+          "kind": "hand",
+          "phase": "protected-at-torso"
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "anchorMeters": [
+            0.2,
+            0,
+            0.03
+          ],
+          "atSeconds": 1.4
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "anchorMeters": [
+            -0.2,
+            0,
+            -0.03
+          ],
+          "atSeconds": 1.4
+        }
+      ],
+      "transitionRecommendations": {
+        "entryFrom": [
+          "idle",
+          "defensive_run"
+        ],
+        "exitTo": [
+          "idle",
+          "sprint",
+          "defensive_slide"
+        ],
+        "visualBlendSeconds": 0.18,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "targetTime": 0,
+        "footLock": "carry-until-release",
+        "interrupt": "Snapshot the displayed pose and velocity; carry planted world anchors through the blend and release only at authored support end."
+      }
+    },
+    {
+      "file": "shot_fake.json",
+      "clip": "shot_fake",
+      "durationSeconds": 1.08,
+      "loop": false,
+      "keyframes": 134,
+      "bytes": 145251,
+      "sha256": "5e44021b24518082046ec14d5c0c1259f341ecb7acbd04d3a42c833ff20c748e",
+      "ballContactStatus": "authored",
+      "ballContactCount": 10,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "visual_fake_hold",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_fake_hold",
+          "time": 0.28,
+          "atSeconds": 0.3024
+        },
+        {
+          "name": "visual_fake_peak_hold",
+          "time": 0.44,
+          "atSeconds": 0.4752
+        },
+        {
+          "name": "visual_fake_hold",
+          "time": 0.44,
+          "atSeconds": 0.4752
+        },
+        {
+          "name": "visual_fake_return",
+          "time": 0.74,
+          "atSeconds": 0.7992
+        },
+        {
+          "name": "visual_fake_hold",
+          "time": 0.74,
+          "atSeconds": 0.7992
+        },
+        {
+          "name": "visual_fake_hold",
+          "time": 1,
+          "atSeconds": 1.08
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_fake_hold",
+          "bone": "LeftHand",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_fake_hold",
+          "bone": "RightHand",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand",
+          "phase": "continuous-hold-no-release",
+          "bone": "LeftHand",
+          "time": 0,
+          "endTime": 1,
+          "atSeconds": 0,
+          "endAtSeconds": 1.08
+        },
+        {
+          "kind": "hand",
+          "phase": "continuous-hold-no-release",
+          "bone": "RightHand",
+          "time": 0,
+          "endTime": 1,
+          "atSeconds": 0,
+          "endAtSeconds": 1.08
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_fake_hold",
+          "bone": "LeftHand",
+          "time": 0.28,
+          "atSeconds": 0.30240000000000006
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_fake_hold",
+          "bone": "RightHand",
+          "time": 0.28,
+          "atSeconds": 0.30240000000000006
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_fake_hold",
+          "bone": "LeftHand",
+          "time": 0.44,
+          "atSeconds": 0.4752
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_fake_hold",
+          "bone": "RightHand",
+          "time": 0.44,
+          "atSeconds": 0.4752
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_fake_hold",
+          "bone": "LeftHand",
+          "time": 0.74,
+          "atSeconds": 0.7992
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_fake_hold",
+          "bone": "RightHand",
+          "time": 0.74,
+          "atSeconds": 0.7992
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "atSeconds": 1.08
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "atSeconds": 1.08
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_fake_hold",
+          "bone": "LeftHand",
+          "time": 1,
+          "atSeconds": 1.08
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_fake_hold",
+          "bone": "RightHand",
+          "time": 1,
+          "atSeconds": 1.08
+        }
+      ],
+      "transitionRecommendations": {
+        "entry": {
+          "visualBlendSeconds": 0.18,
+          "blendCurve": "smoothstep",
+          "sourcePose": "current-displayed",
+          "sourceContinuation": "velocity-extrapolation",
+          "footLock": "carry-until-release"
+        },
+        "exit": [
+          {
+            "target": "pass_chest",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "sprint_ball",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "free_throw",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          }
+        ],
+        "interruption": "Snapshot displayed pose and velocities. Carry outgoing world foot anchors until release; do not hard cut or replay markers."
+      }
+    },
+    {
+      "file": "spin.json",
+      "clip": "spin",
+      "durationSeconds": 1.18,
+      "loop": false,
+      "keyframes": 147,
+      "bytes": 168565,
+      "sha256": "17e38cf559d571def2f0aa9c6cd7e6d71a78e4332e87921c3d0875357c0f5a4a",
+      "ballContactStatus": "authored",
+      "ballContactCount": 10,
+      "supportContactCount": 3,
+      "presentationEvents": [
+        {
+          "name": "visual_ball_protected",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_pivot_start",
+          "time": 0.08,
+          "atSeconds": 0.0944
+        },
+        {
+          "name": "visual_ball_protected",
+          "time": 0.24,
+          "atSeconds": 0.2832
+        },
+        {
+          "name": "visual_ball_protected",
+          "time": 0.5,
+          "atSeconds": 0.59
+        },
+        {
+          "name": "visual_ball_protected",
+          "time": 0.76,
+          "atSeconds": 0.8968
+        },
+        {
+          "name": "visual_pivot_finish",
+          "time": 0.92,
+          "atSeconds": 1.0856
+        },
+        {
+          "name": "visual_ball_protected",
+          "time": 1,
+          "atSeconds": 1.18
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_ball_protected",
+          "bone": "LeftHand",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_ball_protected",
+          "bone": "RightHand",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand",
+          "phase": "protected-hold",
+          "bone": "LeftHand",
+          "time": 0,
+          "endTime": 1,
+          "atSeconds": 0,
+          "endAtSeconds": 1.18
+        },
+        {
+          "kind": "hand",
+          "phase": "protected-hold",
+          "bone": "RightHand",
+          "time": 0,
+          "endTime": 1,
+          "atSeconds": 0,
+          "endAtSeconds": 1.18
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 0.08,
+          "atSeconds": 0.0944
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_ball_protected",
+          "bone": "LeftHand",
+          "time": 0.24,
+          "atSeconds": 0.28319999999999995
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_ball_protected",
+          "bone": "RightHand",
+          "time": 0.24,
+          "atSeconds": 0.28319999999999995
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_ball_protected",
+          "bone": "LeftHand",
+          "time": 0.5,
+          "atSeconds": 0.59
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_ball_protected",
+          "bone": "RightHand",
+          "time": 0.5,
+          "atSeconds": 0.59
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_ball_protected",
+          "bone": "LeftHand",
+          "time": 0.76,
+          "atSeconds": 0.8967999999999999
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_ball_protected",
+          "bone": "RightHand",
+          "time": 0.76,
+          "atSeconds": 0.8967999999999999
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0.92,
+          "atSeconds": 1.0856
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "atSeconds": 1.18
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "atSeconds": 1.18
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_ball_protected",
+          "bone": "LeftHand",
+          "time": 1,
+          "atSeconds": 1.18
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_ball_protected",
+          "bone": "RightHand",
+          "time": 1,
+          "atSeconds": 1.18
+        }
+      ],
+      "transitionRecommendations": {
+        "entry": {
+          "visualBlendSeconds": 0.18,
+          "blendCurve": "smoothstep",
+          "sourcePose": "current-displayed",
+          "sourceContinuation": "velocity-extrapolation",
+          "footLock": "carry-until-release"
+        },
+        "exit": [
+          {
+            "target": "sprint_ball",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "layup_left",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "layup_right",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          }
+        ],
+        "interruption": "Snapshot displayed pose and velocities. Carry outgoing world foot anchors until release; do not hard cut or replay markers."
+      }
+    },
+    {
+      "file": "sprint.json",
+      "clip": "sprint",
+      "durationSeconds": 0.54,
+      "loop": true,
+      "keyframes": 69,
+      "bytes": 79739,
+      "sha256": "540d71f56c8cf36e66edad2bf6f01dc7ae655e848853b57c5df89bf6c9e30e7e",
+      "ballContactStatus": "none",
+      "ballContactCount": 0,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "presentation_left_foot_plant",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "presentation_left_toe_off",
+          "time": 0.22,
+          "atSeconds": 0.1188
+        },
+        {
+          "name": "presentation_right_foot_plant",
+          "time": 0.5,
+          "atSeconds": 0.27
+        },
+        {
+          "name": "presentation_right_toe_off",
+          "time": 0.72,
+          "atSeconds": 0.3888
+        }
+      ],
+      "contactTimeline": [
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0.22,
+          "atSeconds": 0.1188,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0.5,
+          "atSeconds": 0.27,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot"
+        },
+        {
+          "time": 0.72,
+          "atSeconds": 0.38880000000000003,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "RightFoot"
+        }
+      ],
+      "transitionRecommendations": {
+        "minimumVisualBlendSeconds": 0.16,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "footLock": "carry-until-release",
+        "entry": {
+          "from": [
+            "idle",
+            "run",
+            "sprint"
+          ],
+          "targetTime": 0,
+          "phaseMatch": "Choose the leading-foot strike; retain outgoing world foot anchors until release."
+        },
+        "exit": {
+          "to": [
+            "run",
+            "idle",
+            "defensive_run"
+          ],
+          "atNormalizedPhases": [
+            0,
+            0.5
+          ],
+          "visualBlendSeconds": 0.2
+        },
+        "notes": "World speed and facing come from the simulation. Match the reference gait velocity before blending; never apply the reference path as gameplay root motion."
+      }
+    },
+    {
+      "file": "sprint_ball.json",
+      "clip": "sprint_ball",
+      "durationSeconds": 0.58,
+      "loop": true,
+      "keyframes": 75,
+      "bytes": 92125,
+      "sha256": "bfb890b12e6ae760f472bec4e9087298cd2f1369f920934b39df72ed00f61c5d",
+      "ballContactStatus": "authored",
+      "ballContactCount": 2,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "presentation_left_foot_plant",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "presentation_left_toe_off",
+          "time": 0.24,
+          "atSeconds": 0.1392
+        },
+        {
+          "name": "presentation_right_foot_plant",
+          "time": 0.5,
+          "atSeconds": 0.29
+        },
+        {
+          "name": "presentation_right_toe_off",
+          "time": 0.74,
+          "atSeconds": 0.4292
+        },
+        {
+          "name": "presentation_dribble_release",
+          "time": 0.15,
+          "atSeconds": 0.087
+        },
+        {
+          "name": "presentation_dribble_bounce",
+          "time": 0.5,
+          "atSeconds": 0.29
+        },
+        {
+          "name": "presentation_dribble_receive",
+          "time": 0.85,
+          "atSeconds": 0.493
+        }
+      ],
+      "contactTimeline": [
+        {
+          "time": 0,
+          "atSeconds": 0,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0.15,
+          "atSeconds": 0.087,
+          "kind": "hand-ball",
+          "phase": "release",
+          "bone": "RightHand"
+        },
+        {
+          "time": 0.24,
+          "atSeconds": 0.1392,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "LeftFoot"
+        },
+        {
+          "time": 0.5,
+          "atSeconds": 0.29,
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot"
+        },
+        {
+          "time": 0.5,
+          "atSeconds": 0.29,
+          "kind": "ball-ground",
+          "phase": "bounce",
+          "pointMeters": [
+            -0.32,
+            0,
+            0.32
+          ],
+          "ballCenterMeters": [
+            -0.32,
+            0.12,
+            0.32
+          ],
+          "ballRadiusMeters": 0.12
+        },
+        {
+          "time": 0.74,
+          "atSeconds": 0.42919999999999997,
+          "kind": "ground",
+          "phase": "toe-off",
+          "bone": "RightFoot"
+        },
+        {
+          "time": 0.85,
+          "atSeconds": 0.49299999999999994,
+          "kind": "hand-ball",
+          "phase": "receive",
+          "bone": "RightHand"
+        }
+      ],
+      "transitionRecommendations": {
+        "minimumVisualBlendSeconds": 0.16,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "footLock": "carry-until-release",
+        "entry": {
+          "from": [
+            "dribble_slow",
+            "dribble_fast",
+            "sprint_ball"
+          ],
+          "targetTime": 0,
+          "phaseMatch": "Choose the leading-foot strike; retain outgoing world foot anchors until release."
+        },
+        "exit": {
+          "to": [
+            "dribble_slow",
+            "dribble_fast",
+            "crossover",
+            "layup_right"
+          ],
+          "atNormalizedPhases": [
+            0,
+            0.5
+          ],
+          "visualBlendSeconds": 0.2
+        },
+        "notes": "World speed and facing come from the simulation. Match the reference gait velocity before blending; never apply the reference path as gameplay root motion."
+      }
+    },
+    {
+      "file": "steal_fail.json",
+      "clip": "steal_fail",
+      "durationSeconds": 1.04,
+      "loop": false,
+      "keyframes": 129,
+      "bytes": 137590,
+      "sha256": "252e937a34c295109c8cedcf962ecf4a7fb71cd055cd7aa63858e41ee7c06638",
+      "ballContactStatus": "none",
+      "ballContactCount": 0,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "visual_reach_start",
+          "time": 0.18,
+          "atSeconds": 0.1872
+        },
+        {
+          "name": "visual_steal_miss",
+          "time": 0.42,
+          "atSeconds": 0.4368
+        },
+        {
+          "name": "visual_recover_balance",
+          "time": 0.7,
+          "atSeconds": 0.728
+        },
+        {
+          "name": "visual_defense_ready",
+          "time": 0.92,
+          "atSeconds": 0.9568
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "time": 0.42,
+          "bone": "RightHand",
+          "type": "near-miss",
+          "contact": false,
+          "atSeconds": 0.4368,
+          "normalizedTime": 0.42,
+          "kind": "hand",
+          "phase": "near-miss"
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.04
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.04
+        }
+      ],
+      "transitionRecommendations": {
+        "entryFrom": [
+          "idle",
+          "defensive_run",
+          "defensive_slide"
+        ],
+        "exitTo": [
+          "defensive_run",
+          "defensive_slide",
+          "idle"
+        ],
+        "visualBlendSeconds": 0.18,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "targetTime": 0,
+        "footLock": "carry-until-release",
+        "interrupt": "Snapshot the displayed pose and velocity; carry planted world anchors through the blend and release only at authored support end."
+      }
+    },
+    {
+      "file": "steal_success.json",
+      "clip": "steal_success",
+      "durationSeconds": 1.12,
+      "loop": false,
+      "keyframes": 140,
+      "bytes": 151299,
+      "sha256": "128301ff83cbccaac22bf1fa81602215170f7b75bedc24c4ef726068229cf2e3",
+      "ballContactStatus": "authored",
+      "ballContactCount": 2,
+      "supportContactCount": 2,
+      "presentationEvents": [
+        {
+          "name": "visual_reach_start",
+          "time": 0.18,
+          "atSeconds": 0.2016
+        },
+        {
+          "name": "visual_steal_touch",
+          "time": 0.42,
+          "atSeconds": 0.4704
+        },
+        {
+          "name": "visual_steal_gather",
+          "time": 0.7,
+          "atSeconds": 0.784
+        },
+        {
+          "name": "visual_defense_ready",
+          "time": 0.92,
+          "atSeconds": 1.0304
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 0
+        },
+        {
+          "atSeconds": 0.47040000000000004,
+          "normalizedTime": 0.42,
+          "bone": "RightHand",
+          "event": "visual_steal_touch",
+          "kind": "hand-ball",
+          "phase": "visual_steal_touch",
+          "time": 0.42
+        },
+        {
+          "time": 0.42,
+          "bone": "RightHand",
+          "type": "ball",
+          "contact": true,
+          "atSeconds": 0.47040000000000004,
+          "normalizedTime": 0.42,
+          "kind": "hand",
+          "phase": "ball"
+        },
+        {
+          "atSeconds": 0.784,
+          "normalizedTime": 0.7,
+          "bone": "RightHand",
+          "event": "visual_steal_gather",
+          "kind": "hand-ball",
+          "phase": "visual_steal_gather",
+          "time": 0.7
+        },
+        {
+          "time": 0.7,
+          "bone": "RightHand",
+          "type": "ball",
+          "contact": true,
+          "atSeconds": 0.784,
+          "normalizedTime": 0.7,
+          "kind": "hand",
+          "phase": "ball"
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "anchorMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.12
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "anchorMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "atSeconds": 1.12
+        }
+      ],
+      "transitionRecommendations": {
+        "entryFrom": [
+          "idle",
+          "defensive_run",
+          "defensive_slide"
+        ],
+        "exitTo": [
+          "sprint_ball",
+          "dribble_fast",
+          "pass_chest"
+        ],
+        "visualBlendSeconds": 0.18,
+        "blendCurve": "smoothstep",
+        "sourcePose": "current-displayed",
+        "sourceContinuation": "velocity-extrapolation",
+        "targetTime": 0,
+        "footLock": "carry-until-release",
+        "interrupt": "Snapshot the displayed pose and velocity; carry planted world anchors through the blend and release only at authored support end."
+      }
+    },
+    {
+      "file": "step_back.json",
+      "clip": "step_back",
+      "durationSeconds": 1.18,
+      "loop": false,
+      "keyframes": 149,
+      "bytes": 157604,
+      "sha256": "b5fb815e3fdfffe6434a529e1409a856ace14fc32bfc6cef28ab8857546e0e4a",
+      "ballContactStatus": "authored",
+      "ballContactCount": 8,
+      "supportContactCount": 4,
+      "presentationEvents": [
+        {
+          "name": "visual_gather_hold",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_gather_hold",
+          "time": 0.14,
+          "atSeconds": 0.1652
+        },
+        {
+          "name": "visual_gather_hold",
+          "time": 0.32,
+          "atSeconds": 0.3776
+        },
+        {
+          "name": "visual_right_retreat_plant",
+          "time": 0.49,
+          "atSeconds": 0.5782
+        },
+        {
+          "name": "visual_left_retreat_plant",
+          "time": 0.82,
+          "atSeconds": 0.9676
+        },
+        {
+          "name": "visual_gather_hold",
+          "time": 0.82,
+          "atSeconds": 0.9676
+        },
+        {
+          "name": "visual_gather_hold",
+          "time": 1,
+          "atSeconds": 1.18
+        }
+      ],
+      "contactTimeline": [
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_gather_hold",
+          "bone": "LeftHand",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_gather_hold",
+          "bone": "RightHand",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 0.18,
+          "atSeconds": 0.21239999999999998
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_gather_hold",
+          "bone": "LeftHand",
+          "time": 0.32,
+          "atSeconds": 0.3776
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_gather_hold",
+          "bone": "RightHand",
+          "time": 0.32,
+          "atSeconds": 0.3776
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 0.48,
+          "atSeconds": 0.5663999999999999
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "RightFoot",
+          "time": 0.49,
+          "atSeconds": 0.5781999999999999
+        },
+        {
+          "kind": "ground",
+          "phase": "plant",
+          "bone": "LeftFoot",
+          "time": 0.82,
+          "atSeconds": 0.9675999999999999
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_gather_hold",
+          "bone": "LeftHand",
+          "time": 0.82,
+          "atSeconds": 0.9675999999999999
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_gather_hold",
+          "bone": "RightHand",
+          "time": 0.82,
+          "atSeconds": 0.9675999999999999
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "RightFoot",
+          "time": 1,
+          "atSeconds": 1.18
+        },
+        {
+          "kind": "ground",
+          "phase": "release",
+          "bone": "LeftFoot",
+          "time": 1,
+          "atSeconds": 1.18
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_gather_hold",
+          "bone": "LeftHand",
+          "time": 1,
+          "atSeconds": 1.18
+        },
+        {
+          "kind": "hand-ball",
+          "phase": "visual_gather_hold",
+          "bone": "RightHand",
+          "time": 1,
+          "atSeconds": 1.18
+        }
+      ],
+      "transitionRecommendations": {
+        "entry": {
+          "visualBlendSeconds": 0.18,
+          "blendCurve": "smoothstep",
+          "sourcePose": "current-displayed",
+          "sourceContinuation": "velocity-extrapolation",
+          "footLock": "carry-until-release"
+        },
+        "exit": [
+          {
+            "target": "free_throw",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "shot_fake",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          },
+          {
+            "target": "dribble_slow",
+            "visualBlendSeconds": 0.2,
+            "blendCurve": "smoothstep",
+            "sourcePose": "current-displayed",
+            "sourceContinuation": "velocity-extrapolation",
+            "footLock": "carry-until-release"
+          }
+        ],
+        "interruption": "Snapshot displayed pose and velocities. Carry outgoing world foot anchors until release; do not hard cut or replay markers."
+      }
+    }
+  ],
+  "clipCount": 25,
+  "totalKeyframes": 3443,
+  "totalClipBytes": 3709386
+}
