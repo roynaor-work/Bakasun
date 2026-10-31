@@ -123,9 +123,14 @@ export function runAlpineSession(ctx) {
   ['grab', 'spin', 'flip', 'combo'].forEach((id, i) => {
     const b = el('button', 'alpine-trick'); b.type = 'button'; b.dataset.trick = id; b.dataset.action = 'alpine-trick'; b.dataset.slot = String(3 - i); b.dataset.ready = 'false';
     b.setAttribute('aria-label', t(`alpine.trick.${id}`)); b.setAttribute('aria-keyshortcuts', String(i + 1)); b.title = t(`alpine.trick.${id}`);
-    b.append(svg(TRICK_ICONS[id])); trickButtons.push(b); actions.append(b);
+    b.append(svg(TRICK_ICONS[id]), el('span', 'alpine-trick-label', t(`alpine.trick.${id}`))); trickButtons.push(b); actions.append(b);
   });
   actions.append(boostButton);
+  // Blinking arrow beside the boost button while the tank is full and the boost is ready to press.
+  const boostArrow = el('span', 'alpine-boost-arrow'); boostArrow.setAttribute('aria-hidden', 'true'); boostArrow.hidden = true;
+  boostArrow.append(svg('<path d="M4 6l8 6-8 6M12 6l8 6-8 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'));
+  actions.append(boostArrow);
+  const trickCaption = el('span', 'alpine-trick-caption', t('alpine.tricks')); trickCaption.setAttribute('aria-hidden', 'true'); actions.append(trickCaption);
   const center = el('div', 'alpine-center'); center.append(speed, hint);
   footer.append(joystick, center, actions);
   stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading);
@@ -192,6 +197,8 @@ export function runAlpineSession(ctx) {
     const progressText = `${Math.min(100, snap.distanceM / snap.trackLength * 100).toFixed(1)}%`; if (progressText !== shownProgress) { shownProgress = progressText; progressFill.style.width = progressText; }
     const clock = formatRaceTime(snap.timeMs); if (clock !== shownTime) { shownTime = clock; timer.textContent = clock; }
     kitHud.update(snap);
+    boostArrow.hidden = !(snap.boostReady && snap.boostFraction >= .98 && !snap.player?.boosting);
+    trickCaption.dataset.ready = String(!!snap.trickReady);
     boostButton.classList.toggle('active', !!snap.player.boosting); const boostReady = String(!!snap.boostReady); if (boostButton.dataset.ready !== boostReady) boostButton.dataset.ready = boostReady;
     const tank = (snap.boostFraction ?? 0).toFixed(3); if (tank !== shownTank) { shownTank = tank; boostButton.style.setProperty('--tank', tank); }
     const count = snap.phase === 'countdown' ? String(snap.countdown) : ''; if (count !== shownCount) { shownCount = count; countdown.textContent = count; countdown.hidden = !count; }
