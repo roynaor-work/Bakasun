@@ -1,141 +1,77 @@
-/** Island Pro Basketball — player avatars: adult MakeHuman (CC0) bodies with a full rig,
- * uniforms cut from the body, motion-capture clips (CMU, retargeted) and the ball hand.
- * An avatar only shows the engine state it is given; clip time of shots, jumps and moves is
- * taken from the engine action time, so the release in the animation is the engine release. */
+/** Actual characters2 basketball athlete, its verified twenty-bone rig, and all
+ * authored motion2/hoops actions. The simulation remains authoritative. */
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
-import {jerseyTexture,shortsTexture} from './hoops-textures.mjs';
-import {shareSkeletons} from './hoops-perf.mjs';
-import {compactAvatar} from './hoops-lod.mjs';
-
-const BODY_FOR_POS={PG:'guard',SG:'guard',SF:'wing',PF:'forward',C:'big'};
-const HAIR=/short0|afro|long0|bob0|braid|pony/i;
-
+import {HoopsDRACOLoader} from './hoops-draco.mjs';
+import {bakeV2Motion,createV2MotionPlayer} from './hoops-motion-v2.mjs';
+import {applySparseSkinning,createSparseDepthMaterial} from './hoops-skin-shader.mjs';
+const SKINS=['#81513b','#b47c56','#d9a478','#68402c','#9d6548','#edc09b'];
+const HAIRS=['#222b38','#17191e','#422c22','#68462e','#28201b','#241c18'];
+async function json(path,base){const response=await fetch(new URL(path,base));if(!response.ok)throw Error('Basketball asset unavailable: '+path+' ('+response.status+')');return response.json();}
+function releaseScene(scene){const materials=new Set(),geometries=new Set();scene?.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])materials.add(m);});for(const g of geometries)g.dispose();for(const m of materials){for(const value of Object.values(m))if(value?.isTexture)value.dispose();m.dispose();}}
 export async function loadPlayerAssets(cfg,base,onProgress){
- const loader=new GLTFLoader();
- const paths=cfg.lodModels||cfg.models,names=Object.keys(paths);let done=0;
- const tick=()=>{done++;onProgress?.(done/(names.length+1));};
- const bodies={};
- await Promise.all(names.map(async k=>{const g=await loader.loadAsync(new URL(paths[k],base).href);bodies[k]=g;tick();}));
- const anim=await loader.loadAsync(new URL(cfg.animations,base).href);tick();
- const clips=new Map(anim.animations.map(c=>[c.name,c]));
- const r=await fetch(new URL('design/motion2/hoops.json',base));if(!r.ok)throw Error('Basketball action clips unavailable');const authored=await r.json();for(const clip of authored.clips){const c=THREE.AnimationClip.parse(clip);clips.set(c.name,c);}
- // skin textures of all bodies share the MakeHuman UV layout: any skin fits any body
- const skins=[];
- for(const k of names)bodies[k].scene.traverse(o=>{if(o.isMesh&&/^Human_x/.test(o.name)&&o.material.map&&!skins.includes(o.material.map))skins.push(o.material.map);});
- return {bodies,clips,skins,dispose(){const tex=new Set();for(const g of Object.values(bodies))g.scene.traverse(o=>{o.geometry?.dispose();if(o.material){for(const t of Object.values(o.material))if(t?.isTexture)tex.add(t);o.material.dispose();}});for(const t of tex)t.dispose();for(const t of this.shorts?.values()||[])t.dispose();}};
+ const draco=new HoopsDRACOLoader().setDecoderPath(new URL('vendor/draco/',base).href).setWorkerLimit(1),loader=new GLTFLoader().setDRACOLoader(draco);let character;
+ try{
+  const manifestPath=cfg.motionManifest||'design/motion2/hoops/manifest.json',manifestURL=new URL(manifestPath,base);
+  const pending=await Promise.allSettled([
+   loader.loadAsync(new URL(cfg.characterModel||'design/hoops/lod/hoops-player-v2-lod.glb',base).href).then(g=>(character=g)),
+   json('design/characters/rig.json',base),json('design/viewer/retarget-map.json',base),json('design/characters2/regions.json',base),json('design/motion/hoops.json',base),json(manifestPath,base)
+  ]);
+  const failure=pending.find(r=>r.status==='rejected');if(failure)throw failure.reason;
+  const [loaded,rig,map,regions,baseMotion,manifest]=pending.map(r=>r.value);
+  onProgress?.(.15);let loadedClips=0;
+  const packages=await Promise.all(manifest.clips.map(async entry=>{const p=await json(entry.file,manifestURL);if(!p.states[entry.clip])throw Error('Basketball manifest state mismatch: '+entry.clip);onProgress?.(.15+.35*++loadedClips/manifest.clips.length);return p;}));
+  const baked=await bakeV2Motion(loaded.scene,rig,baseMotion,packages,map,p=>onProgress?.(.5+p*.5));
+  let mesh;loaded.scene.traverse(o=>{if(o.isSkinnedMesh)mesh=o;});if(!mesh)throw Error('Basketball v2 has no skinned athlete');
+  const prepared=prepareV2Geometry(mesh.geometry,regions);mesh.geometry.dispose();mesh.geometry=prepared.geometry;
+  mesh.geometry.computeBoundingBox();const height=mesh.geometry.boundingBox.max.y-mesh.geometry.boundingBox.min.y;
+  return {...baked,character:loaded,regions:prepared.regions,sourceColors:prepared.colors,height,manifest,v2:true,dispose(){releaseScene(loaded.scene);draco.dispose();}};
+ }catch(error){releaseScene(character?.scene);throw error;}finally{draco.dispose();}
 }
-
-/** Bone lookup that ignores the "mixamorig:" prefix variants the exporter may write. */
-function bone(root,name){let found=null;root.traverse(o=>{if(!found&&o.isBone&&o.name.replace(/^mixamorig:?/,'')===name)found=o;});return found;}
-
-const trimShader=(trimColor,waistColor)=>sh=>{
- sh.uniforms.uTrim={value:new THREE.Color(trimColor)};sh.uniforms.uWaist={value:new THREE.Color(waistColor)};
- sh.vertexShader=sh.vertexShader.replace('#include <color_pars_vertex>','#include <color_pars_vertex>\nattribute vec4 trim;\nvarying vec2 vTrim;').replace('#include <color_vertex>','#include <color_vertex>\nvTrim=trim.rg;');
- sh.fragmentShader=sh.fragmentShader.replace('#include <color_pars_fragment>','#include <color_pars_fragment>\nvarying vec2 vTrim;uniform vec3 uTrim;uniform vec3 uWaist;')
-  .replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.rgb=mix(diffuseColor.rgb,uTrim,smoothstep(0.42,0.52,vTrim.x));diffuseColor.rgb=mix(diffuseColor.rgb,uWaist,smoothstep(0.4,0.6,vTrim.y));');
-};
-
-/** Shorts carry no number: one texture per team look, shared by every avatar of the team. */
-function teamShorts(assets,teamLook){
- const cache=assets.shorts||(assets.shorts=new Map()),key=JSON.stringify([teamLook.primary,teamLook.secondary,teamLook.trim,teamLook.mark]);
- let t=cache.get(key);if(!t){t=shortsTexture(teamLook);cache.set(key,t);}
- return t;
-}
-
-export function createAvatar(assets,card,teamLook,opts={}){
- const kind=card.look?.body||BODY_FOR_POS[card.pos]||'wing';
- const src=assets.bodies[kind]||Object.values(assets.bodies)[0];
- const root=cloneSkinned(src.scene);root.name='player-'+card.id;
- // the clone gives every skinned mesh its own Skeleton over the same bones: share one
- const skinned=[];root.traverse(o=>{if(o.isSkinnedMesh)skinned.push(o);});shareSkeletons(skinned);
- const mats=[];
- const skin=assets.skins[(card.look?.skin??0)%Math.max(1,assets.skins.length)];
- root.traverse(o=>{
-  if(!o.isMesh)return;
-  o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;
-  const name=o.name;
-  if(/Jersey|Shorts/.test(name)){
-   const ga=o.geometry.attributes;
-   if(!ga.trim&&(ga.color_1||ga.color))o.geometry.setAttribute('trim',ga.color_1||ga.color);
-   const isJ=/Jersey/.test(name);
-   const map=isJ?jerseyTexture({primary:teamLook.primary,secondary:teamLook.secondary,trim:teamLook.trim,number:card.number,wordmark:teamLook.wordmark,name:card.shortName||card.name,dark:teamLook.darkText}):teamShorts(assets,teamLook);
-   const m=new THREE.MeshStandardMaterial({map,roughness:0.78,metalness:0,side:THREE.DoubleSide});if(!isJ)m.userData.sharedMap=true;
-   m.userData.kitPart=isJ?'jersey':'shorts';m.onBeforeCompile=trimShader(teamLook.trim,isJ?teamLook.secondary:new THREE.Color(teamLook.primary).multiplyScalar(0.55));
-   m.customProgramCacheKey=()=>'hoops-uniform';
-   o.material=m;mats.push(m);return;
-  }
-  const m=o.material.clone();m.transparent=false;m.depthWrite=true;
-  if(HAIR.test(name)||/eyebrow|eyelash/i.test(name)){m.alphaTest=/eyelash|eyebrow/i.test(name)?0.3:0.45;m.side=THREE.DoubleSide;if(card.look?.hairTint)m.color=new THREE.Color(card.look.hairTint);}
-  else m.alphaTest=0;
-  m.userData.sourceMap=!!m.map;
-  if(/^Human_x/.test(name)){if(skin)m.map=skin;m.roughness=0.62;m.metalness=0;}
-  if(/shoes/i.test(name)){m.color=new THREE.Color(teamLook.shoe||'#f2f2f2');m.roughness=0.55;}
-  o.material=m;mats.push(m);
- });
- if(card.look?.hidden)for(const h of card.look.hidden)root.traverse(o=>{if(o.isMesh&&o.name.includes(h))o.visible=false;});
- const scale=(card.ratings?.height||200)/(opts.baseHeights?.[kind]||(kind==='guard'?188:kind==='wing'?198:kind==='forward'?203:209));
- root.scale.setScalar(scale);
- const mixer=new THREE.AnimationMixer(root);
- const actions={};
- for(const [name,clip] of assets.clips){const a=mixer.clipAction(clip);a.enabled=true;a.setEffectiveWeight(0);a.play();actions[name]=a;}
- const hands={r:bone(root,'RightHand'),l:bone(root,'LeftHand'),rIdx:bone(root,'RightHandMiddle1'),lIdx:bone(root,'LeftHandMiddle1')};
- const spine=bone(root,'Spine2'),rArm=bone(root,'RightArm'),lArm=bone(root,'LeftArm'),rFore=bone(root,'RightForeArm'),lFore=bone(root,'LeftForeArm');
- const packed=compactAvatar(root,{maxTriangles:4000,teamLook});
- const av={root,mixer,actions,hands,kind,scale,cur:null,weights:{},card,mats,packed,
-  applyKit(kit){for(const m of mats){if(m.userData.kitPart){if(!m.userData.sharedMap)m.map?.dispose();m.userData.sharedMap=false;m.map=m.userData.kitPart==='jersey'?jerseyTexture({primary:kit.base,secondary:kit.accent,trim:kit.accent,number:card.number,wordmark:teamLook.wordmark,name:card.shortName||card.name,dark:false}):shortsTexture({primary:kit.base,secondary:kit.accent,trim:kit.accent});}}packed.refreshMaps({}, {primary:kit.base,secondary:kit.accent,trim:kit.accent});},
-  event(){},get motionState(){return this.cur||'idle';},
-  dispose(){mixer.stopAllAction();mixer.uncacheRoot(root);packed.dispose();for(const m of mats){if(!m.userData.sharedMap&&!m.userData.sourceMap)m.map?.dispose?.();m.dispose();}},
- };
- // locomotion state
- let baseClip='idle',baseT=0,lastSync=null;
- const W={};for(const k in actions)W[k]=0;
- function want(name,dt,fade=0.18){
-  for(const k in W){const target=k===name?1:0,step=dt/Math.max(0.001,fade);W[k]+=(target-W[k])*Math.min(1,step*3);if(W[k]<0.003)W[k]=0;}
+/** Keep source topology indexed; the variant viewer's non-indexed preview
+ * would triple vertex skinning work in the actual game. */
+export function prepareV2Geometry(source,definition){
+ const geometry=source.clone(),color=geometry.attributes.color,position=geometry.attributes.position,uv=new Float32Array(position.count*2),regions=[],colors=Float32Array.from(color.array),model=definition.models['basketball-player'],atlas=definition.atlas;
+ for(let i=0;i<position.count;i++){
+  const rgb=[color.getX(i),color.getY(i),color.getZ(i)],entry=model.sources.find(s=>s.linearRGB.every((n,k)=>Math.abs(n-rgb[k])<(definition.maxColorError||.00001)*2)),region=entry?.rules[0].region||'preserve';regions.push(region);let px=208,py=192;
+  if(region==='shirt'||region==='shorts'){
+   const projection=atlas.uvProjection[region],x=position.getX(i),y=position.getY(i),shorts=region==='shorts';px=THREE.MathUtils.clamp(x*projection.xScale+projection.xOffset,2,253)/2;
+   if(position.getZ(i)<0)px=128-px;px+=shorts?128:0;py=THREE.MathUtils.clamp(y*projection.yScale+projection.yOffset,2,253)/2;
+  }else{const swatch=atlas.swatches.indexOf(region);if(swatch>=0){px=swatch*32+16;py=192;}}
+  uv[i*2]=px/256;uv[i*2+1]=1-py/256;
  }
- av.pose=function(p,ctx,dt){
-  const sp=Math.hypot(p.vx,p.vz),fx=Math.sin(p.face),fz=Math.cos(p.face);
-  const fwd=(p.vx*fx+p.vz*fz),lat=(p.vx*fz-p.vz*fx);   // lat>0 = to the player's left
-  let name='idle',rate=1,sync=null;
-  const defending=ctx.defending;
-  if(p.act==='fake'){name='fake_shot';sync=p.actT*(actions.fake_shot?.getClip().duration||.62)/.52;}
-  else if(p.act==='shoot'){
-   const t=p.shotType==='dunk'?'layup':p.shotType==='ft'?'freethrow':p.shotType;
-   name=t;sync=p.actT*(p.shotType==='dunk'?1.08:1);
-  } else if(p.act==='cross'||p.act==='spin'){name=p.act==='spin'?'spin':'crossover';sync=p.actT*(actions[name]?.getClip().duration||1)/(p.act==='spin'?.75:.55);}
-  else if(p.air&&(p.act==='block'||p.act==='rebound')){name='jump';sync=0.28+ctx.airU*0.62;}
-  else if(p.stumble){name='stop';sync=0.55;}
-  else if(p.hasBall){
-   if(sp<0.45){name=ctx.dribbling?'dribble_stand':'idle_ball';}
-   else if(sp<2.4){name='dribble_walk';rate=sp/1.84;}
-   else {name='jog';rate=sp/4.0;}
-  } else if(defending&&sp>0.45&&Math.abs(lat)>Math.abs(fwd)*0.9){name=lat>0?'slide_l':'slide_r';rate=Math.abs(lat)/3.0;}
-  else if(defending&&sp<=0.6){name='def_hold';}
-  else if(sp<0.35)name='idle';
-  else if(fwd<-0.8&&sp<4){name='jog';rate=-sp/4.0;}
-  else if(sp<1.9){name='walk';rate=sp/1.37;}
-  else if(sp<4.4){name='jog';rate=sp/4.0;}
-  else if(sp<5.7){name='run';rate=sp/4.77;}
-  else {name='sprint';rate=sp/6.47;}
-  if(!actions[name])name='idle';
-  want(name,dt,sync!=null?0.08:0.2);
-  for(const k in actions){const a=actions[k];a.setEffectiveWeight(W[k]);
-   if(W[k]===0)continue;
-   if(k===name&&sync!=null){a.time=Math.min(sync,a.getClip().duration-0.001);a.setEffectiveTimeScale(0);}
-   else if(k===name){a.setEffectiveTimeScale(clamp(rate,-2.2,2.2));}
-  }
-  mixer.update(dt);av.cur=name;
-  // procedural layers on top of the clip: pass push, steal reach, ball carry
-  if(p.act==='pass'&&rArm&&lArm){const u=Math.min(1,p.actT/0.16);const k=Math.sin(u*Math.PI)*0.9;rArm.rotateX(-k);lArm.rotateX(-k);rFore&&rFore.rotateX(-k*0.6);lFore&&lFore.rotateX(-k*0.6);}
-  if(p.act==='steal'&&rArm){const u=Math.min(1,p.actT/0.4);const k=Math.sin(u*Math.PI)*1.1;rArm.rotateX(-k);spine&&spine.rotateX(k*0.25);}
-  if(ctx.contest&&lArm&&rArm&&!p.hasBall&&p.act!=='shoot'&&!p.air){lArm.rotateZ(-0.9*ctx.contest);rArm.rotateZ(0.9*ctx.contest);}
-  // block and rebound: both arms reach straight up through the jump
-  if(p.air&&(p.act==='block'||p.act==='rebound')&&lArm&&rArm){const k=Math.min(1,0.35+ctx.airU*1.4);lArm.rotateZ(-2.6*k);rArm.rotateZ(2.6*k);lFore&&lFore.rotateZ(-1.6*k);rFore&&rFore.rotateZ(1.6*k);}
-  // a pass on its way: hands up in front of the chest, ready to catch
-  if(ctx.catching&&!p.hasBall&&lArm&&rArm&&!p.air){lArm.rotateX(-0.9);rArm.rotateX(-0.9);lFore&&lFore.rotateX(-0.5);rFore&&rFore.rotateX(-0.5);}
- };
- return av;
+ geometry.setAttribute('uv',new THREE.BufferAttribute(uv,2));return {geometry,regions,colors};
 }
-const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function uniformAtlas(card,look){
+ const canvas=typeof OffscreenCanvas!=='undefined'?new OffscreenCanvas(512,512):Object.assign(document.createElement('canvas'),{width:512,height:512}),context=canvas.getContext('2d'),texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=2;
+ function draw(kit={}){
+  const primary=kit.base||look.primary||'#5b38c9',accent=kit.accent||look.trim||'#f4d377',secondary=kit.accent||look.secondary||accent,g=context;
+  g.save();g.scale(2,2);g.fillStyle='#ffffff';g.fillRect(0,0,256,256);g.fillStyle=primary;g.fillRect(0,0,128,128);g.fillRect(128,0,128,128);
+  g.fillStyle=secondary;g.fillRect(0,0,23,128);g.fillRect(105,0,23,128);g.fillRect(128,0,20,128);g.fillRect(236,0,20,128);
+  g.fillStyle=accent;g.fillRect(20,0,3,128);g.fillRect(105,0,3,128);g.fillRect(128,3,128,5);g.fillRect(128,115,128,4);
+  if(kit.pattern==='stripes'){g.globalAlpha=.2;for(let x=29;x<104;x+=12)g.fillRect(x,0,3,128);g.globalAlpha=1;}
+  g.fillStyle=look.darkText?'#172136':'#ffffff';g.strokeStyle=primary;g.lineWidth=1.5;g.textAlign='center';g.textBaseline='middle';g.font='bold 12px sans-serif';g.fillText(String(look.wordmark||'ISLAND').slice(0,12),64,66,66);g.font='bold 38px sans-serif';g.strokeText(String(card.number??0),64,96,67);g.fillText(String(card.number??0),64,96,67);
+  const swatches=['#eee8de',look.shoe||'#eeeef3','#e4e7e8','#ffffff','#ffffff','#ffffff','#ffffff',accent];for(let i=0;i<8;i++){g.fillStyle=swatches[i];g.fillRect(i*32,128,32,128);}g.restore();texture.needsUpdate=true;
+ }
+ draw();return {texture,draw};
+}
+export function createAvatar(assets,card,teamLook,opts={}){
+ const root=cloneSkinned(assets.character.scene);root.name='player-'+card.id;root.userData.characterVersion=2;
+ const mats=[],geometries=[],variant=Math.abs(card.look?.skin??card.number??0),skin=new THREE.Color(SKINS[variant%SKINS.length]),hair=new THREE.Color(card.look?.hairTint||HAIRS[variant%HAIRS.length]),atlas=uniformAtlas(card,teamLook);
+ root.traverse(o=>{if(!o.isMesh)return;
+  const geometry=new THREE.BufferGeometry();for(const [name,attribute] of Object.entries(o.geometry.attributes))geometry.setAttribute(name,name==='color'?attribute.clone():attribute);geometry.setIndex(o.geometry.index);geometry.boundingBox=o.geometry.boundingBox?.clone();geometry.boundingSphere=o.geometry.boundingSphere?.clone();o.geometry=geometry;geometries.push(geometry);
+  const colors=geometry.attributes.color;
+  for(let i=0;i<colors.count;i++){const region=assets.regions[i];if(['shirt','shorts','socks','shoes','soles','accent'].includes(region))colors.setXYZ(i,1,1,1);else if(region==='skin')colors.setXYZ(i,skin.r,skin.g,skin.b);else if(region==='hair')colors.setXYZ(i,hair.r,hair.g,hair.b);}colors.needsUpdate=true;
+  // A matte cloth/skin BRDF keeps sculpted normals and all three arena lights
+  // while avoiding the environment-reflection work on every player fragment.
+  const material=applySparseSkinning(new THREE.MeshPhongMaterial({map:atlas.texture,vertexColors:true,shininess:18,specular:0x151a22,side:THREE.FrontSide}));material.shadowSide=THREE.FrontSide;o.material=material;mats.push(material);o.customDepthMaterial=createSparseDepthMaterial();mats.push(o.customDepthMaterial);o.castShadow=true;o.receiveShadow=true;
+  // Deliberately broad, fixed local bounds cover every authored pose (tested
+  // below) without CPU skinning bounds each frame or hiding a raised hand.
+  o.boundingSphere=new THREE.Sphere(new THREE.Vector3(0,assets.height/2,0),1.35);geometry.boundingSphere=o.boundingSphere.clone();o.frustumCulled=true;
+ });
+ const scale=(card.ratings?.height||200)/100/assets.height;root.scale.setScalar(scale);const motion=createV2MotionPlayer(root,assets),hands={r:bone(root,'RightHand'),l:bone(root,'LeftHand')};hands.rIdx=hands.r;hands.lIdx=hands.l;let disposed=false;
+ return {root,hands,mixer:motion.mixer,actions:motion.actions,mats,card,kind:'characters2',scale,pose(p,ctx,dt){motion.step(p,ctx,dt);},event(e){motion.event(e);},applyKit(kit){atlas.draw(kit);},get motionState(){return motion.state;},get motionTime(){return motion.time;},get motionPhase(){return motion.phase;},dispose(){if(disposed)return;disposed=true;motion.dispose();for(const m of mats)m.dispose();for(const g of geometries)g.dispose();atlas.texture.dispose();root.traverse(o=>{if(o.isSkinnedMesh)o.skeleton.dispose();});}};
+}
+function bone(root,name){let result=null;root.traverse(o=>{if(!result&&o.isBone&&o.name===name)result=o;});return result;}
 export {bone};
