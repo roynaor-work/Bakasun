@@ -1,3 +1,4 @@
+import {createAlpineHud} from './alpine-hud.mjs';
 import {enhanceAlpineOpening} from './alpine-screen.mjs';
 import {createAlpineEngine} from './alpine-engine.mjs?v=island-integration-20261030-1';
 import {createAlpineControls} from './alpine-controls.mjs?v=island-integration-20261030-1';
@@ -29,6 +30,7 @@ export function runAlpineSession(ctx) {
   let storage = null; try { storage = ctx.storage === undefined ? globalThis.localStorage : ctx.storage; } catch {}
   const records = loadRecords(storage, balance.records);
   let audio; try { audio = createAlpineAudio({storage}); } catch { audio = createAlpineAudio({storage: null, AudioContext: null}); }
+  let kitHud=null;
   let view = null, input = null, frame, last = 0, paused = false, disposed = false, finished = false, renderError = null, loadTimer, quality = 'high';
   let governor = null, lastSnapshot = engine.snapshot(), recordOutcome = null, calloutUntil = 0, dom = null;
   const abort = new AbortController();
@@ -41,7 +43,7 @@ export function runAlpineSession(ctx) {
     start() { if (disposed || !ready() || engine.phase !== 'menu') return false; audio.unlock(); engine.command({type: 'start'}); last = 0; return true; },
     dispose() {
       if (disposed) return; disposed = true; clearTimeout(loadTimer);
-      if (frame !== undefined) cancelAnimationFrame(frame); abort.abort(); input?.dispose(); audio.dispose(); view?.dispose(); engine.dispose();
+      if (frame !== undefined) cancelAnimationFrame(frame); abort.abort(); input?.dispose(); kitHud?.destroy(); audio.dispose(); view?.dispose(); engine.dispose();
       dom?.nodes.forEach(n => n.remove());
     },
     get snapshot() {
@@ -62,6 +64,8 @@ export function runAlpineSession(ctx) {
   const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-integration-20261030-1', import.meta.url).href;
   const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-integration-20261030-1', import.meta.url).href;
   const screenCss=el('link');screenCss.rel='stylesheet';screenCss.href=new URL('./alpine-screen.css',import.meta.url).href;
+  const kitCss=el('link');kitCss.rel='stylesheet';kitCss.href=new URL('../design/hud-kit/hud.css',import.meta.url).href;
+  const feelCss=el('link');feelCss.rel='stylesheet';feelCss.href=new URL('./alpine-feel.css',import.meta.url).href;
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
   const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
@@ -104,9 +108,9 @@ export function runAlpineSession(ctx) {
   const loading = el('div', 'alpine-loading'), loadingText = el('p', '', t('alpine.loading')); loading.append(el('span', 'alpine-spinner'), loadingText);
   // Footer controls (inside the island controls region)
   const footer = el('div', 'alpine-footer');
-  const speed = el('div', 'alpine-speed'), speedValue = el('b', '', '0'), bars = el('div', 'alpine-speed-bars'); bars.setAttribute('aria-hidden', 'true');
-  for (let i = 0; i < 6; i++) bars.append(el('i'));
-  speed.append(speedValue, el('span', '', t('alpine.kmh')), bars);
+  const speed=el('div','alpine-speed');
+  const maxPlayerSpeedKmh=balance.physics.boostSpeed*3.6*Math.max(1,Math.min(1.1,Number(ctx.equipment?.wax)||1));
+  kitHud=createAlpineHud({speed,callout,kicker:calloutKicker,line:calloutLine,maxSpeedKmh:maxPlayerSpeedKmh});
   const hint = el('div', 'alpine-steer-hint'); hint.append(el('span', '', '‹'), el('span', '', t('alpine.dragHint')), el('span', '', '›')); hint.setAttribute('aria-hidden', 'true');
   const boostButton = el('button', 'alpine-boost'); boostButton.type = 'button'; boostButton.dataset.gameControl = 'boost'; boostButton.dataset.action = 'alpine-boost';
   boostButton.setAttribute('aria-label', t('alpine.boost')); boostButton.setAttribute('aria-keyshortcuts', 'Space');
@@ -124,8 +128,8 @@ export function runAlpineSession(ctx) {
   const center = el('div', 'alpine-center'); center.append(speed, hint);
   footer.append(joystick, center, actions);
   stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading);
-  controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish, screenCss); stage.append(app); setTheme(theme);
-  dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, screenCss, app]};
+  controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish, screenCss, kitCss, feelCss); stage.append(app); setTheme(theme);
+  dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, screenCss, kitCss, feelCss, app]};
   screen.dataset.alpineDusk = String(!!track.visual?.dusk);
   const setPhase = phase => { app.dataset.phase = phase; screen.dataset.alpinePhase = phase; };
   setPhase('menu');
@@ -147,7 +151,7 @@ export function runAlpineSession(ctx) {
   governor = createQualityGovernor(balance.render, quality);
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; fail(t('alpine.loadSlow')); } }, 25000);
-  import('./alpine-view.mjs?v=island-integration-20261030-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(async loaded => {
+  import('./alpine-view.mjs?v=island-integration-20261030-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxPlayerSpeedKmh, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(async loaded => {
     await audio.ready;
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
@@ -160,7 +164,7 @@ export function runAlpineSession(ctx) {
   });
 
   const CALLOUTS = {takeoff: 'air', collision: 'hit', boost: 'boost', pad: 'pad', overtake: 'overtake', gate: 'gate'};
-  function showCallout(kind, now, kicker, line) { calloutKicker.textContent = kicker ?? t(`alpine.callout.${kind}.kicker`); calloutLine.textContent = line ?? t(`alpine.callout.${kind}`); callout.hidden = false; callout.dataset.kind = kind; calloutUntil = now + (kind === 'gate' ? .8 : 1.3); }
+  function showCallout(kind, now, kicker, line) { calloutKicker.textContent = kicker ?? t(`alpine.callout.${kind}.kicker`); calloutLine.textContent = line ?? t(`alpine.callout.${kind}`); callout.hidden = false; callout.dataset.kind = kind; kitHud.event(kind,calloutKicker.textContent,calloutLine.textContent); calloutUntil = now + (kind === 'gate' ? .8 : 1.3); }
   let coinPulse = 0;
   function handleEvents(snap, now) {
     for (const e of engine.drainEvents()) {
@@ -180,15 +184,13 @@ export function runAlpineSession(ctx) {
     }
   }
   let shownRank = '', shownSpeed = '', shownTime = '', shownCount = '', shownScore = '', shownCoins = '', shownDistance = '', shownProgress = '', shownTank = '';
-  const barList = [...bars.children], setData = (key, value) => { if (screen.dataset[key] !== value) screen.dataset[key] = value; };
+  const setData = (key, value) => { if (screen.dataset[key] !== value) screen.dataset[key] = value; };
   function updateHud(snap) {
     const r = String(snap.rank).padStart(2, '0'); if (r !== shownRank) { shownRank = r; rank.textContent = r; }
     const remaining = Math.round(snap.remainingM); if (remaining !== shownDistance) { shownDistance = remaining; distanceValue.textContent = remaining.toLocaleString('en-US'); }
     const progressText = `${Math.min(100, snap.distanceM / snap.trackLength * 100).toFixed(1)}%`; if (progressText !== shownProgress) { shownProgress = progressText; progressFill.style.width = progressText; }
     const clock = formatRaceTime(snap.timeMs); if (clock !== shownTime) { shownTime = clock; timer.textContent = clock; }
-    const kmh = String(snap.speedKmh); if (kmh !== shownSpeed) { shownSpeed = kmh; speedValue.textContent = kmh; }
-    const fraction = Math.min(1, snap.speedKmh / (balance.physics.boostSpeed * 3.6));
-    barList.forEach((bar, i) => bar.classList.toggle('on', fraction > i / 6 + .02));
+    kitHud.update(snap);
     boostButton.classList.toggle('active', !!snap.player.boosting); const boostReady = String(!!snap.boostReady); if (boostButton.dataset.ready !== boostReady) boostButton.dataset.ready = boostReady;
     const tank = (snap.boostFraction ?? 0).toFixed(3); if (tank !== shownTank) { shownTank = tank; boostButton.style.setProperty('--tank', tank); }
     const count = snap.phase === 'countdown' ? String(snap.countdown) : ''; if (count !== shownCount) { shownCount = count; countdown.textContent = count; countdown.hidden = !count; }
@@ -216,7 +218,7 @@ export function runAlpineSession(ctx) {
     const snap = lastSnapshot = engine.snapshot(), now = snap.timeMs / 1000;
     if (snap.phase !== app.dataset.phase && snap.phase !== 'paused') setPhase(snap.phase);
     handleEvents(snap, now);
-    if (now > calloutUntil) callout.hidden = true;
+    if(now>calloutUntil){callout.hidden=true;kitHud.hide();}
     audio.sync(blocked ? 0 : snap.speedKmh, {boosting: snap.player.boosting, carving: Math.abs(snap.player.lean || 0), airborne: snap.player.airborne, crashed:snap.player.crashed});
     view.render(snap, engine.presentation()); updateHud(snap);
     if (snap.result && !finished) {
