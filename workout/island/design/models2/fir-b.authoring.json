@@ -1,0 +1,32 @@
+{
+  "id": "fir-b",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "objects": [
+    "foliage",
+    "trunk"
+  ],
+  "anchors": {
+    "anchor_trunk_base": [
+      -0.002109,
+      0.0,
+      -0.01446
+    ],
+    "anchor_tree_tip": [
+      -0.092109,
+      5.2,
+      -0.04446
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "triangles": 96,
+  "drawCallsEstimate": 2,
+  "textures": 0,
+  "ao": "8-ray face AO in COLOR_0; bounded 0.68\u20131.0"
+}

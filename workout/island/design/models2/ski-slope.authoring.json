@@ -1,0 +1,86 @@
+{
+  "id": "ski-slope",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "objects": [
+    "course_gates",
+    "finish_gate",
+    "lift_cables",
+    "lift_tower",
+    "piste_edges",
+    "piste_markers",
+    "safety_fences",
+    "slope_body",
+    "slope_surface",
+    "slope_surface_upper",
+    "snow_banks",
+    "snow_signs",
+    "start_gate",
+    "upper_slope_body",
+    "winter_firs",
+    "winter_rocks"
+  ],
+  "anchors": {
+    "anchor_route_start": [
+      0.0,
+      6.25,
+      -12.0
+    ],
+    "anchor_route_end": [
+      0.0,
+      0.25,
+      12.0
+    ],
+    "anchor_gate_center": [
+      0.0,
+      3.25,
+      -0.0
+    ],
+    "anchor_route_mid": [
+      0.0,
+      3.25,
+      -0.0
+    ],
+    "anchor_route_start_v2": [
+      0.0,
+      12.25,
+      -36.0
+    ],
+    "anchor_segment_join": [
+      0.0,
+      6.25,
+      -12.0
+    ],
+    "anchor_route_end_v2": [
+      0.0,
+      0.25,
+      12.0
+    ],
+    "anchor_start_gate": [
+      0.0,
+      12.0,
+      -35.0
+    ],
+    "anchor_finish_gate": [
+      0.0,
+      0.5,
+      11.0
+    ],
+    "anchor_lift_tower": [
+      -10.3,
+      7.75,
+      -18.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "triangles": 8526,
+  "drawCallsEstimate": 16,
+  "textures": 0,
+  "ao": "8-ray face AO in COLOR_0; bounded 0.68\u20131.0"
+}

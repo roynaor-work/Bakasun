@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>האי שלי · סביבות 02</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#e0e8ed;color:#203947;font:15px system-ui,sans-serif}header{padding:14px 20px;background:#183b48;color:#fff;display:flex;align-items:center;gap:16px;min-height:72px}h1{margin:0;font-size:20px}header small{display:block;color:#a9d9cc;font-weight:400;font-size:12px;margin-top:3px}main{position:relative;height:calc(100dvh - 72px);min-height:240px}canvas{display:block;width:100%;height:100%;touch-action:none}.controls{display:flex;gap:8px;margin-inline-start:auto;align-items:center}select,button{font:inherit;min-height:42px;border:1px solid #91b6b6;border-radius:8px;background:#f5fcfa;color:#183b48;padding:5px 10px}button{cursor:pointer}.caption{position:absolute;bottom:16px;right:16px;background:#fbfffded;border:1px solid #bcced0;border-radius:10px;padding:10px 14px;pointer-events:none;font-size:12px;line-height:1.6;max-width:calc(100% - 32px)}#status{font-weight:600}.capture header,.capture .caption{display:none}.capture main{height:100dvh}@media(max-width:580px){header{padding:10px 12px;flex-wrap:wrap;gap:9px;min-height:126px}h1{font-size:18px}.controls{width:100%;margin:0}select{flex:1;max-width:calc(100% - 108px)}main{height:calc(100dvh - 126px)}}
+</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+<header><h1>האי שלי · סביבות 02<small>אולמות, מגרשים ושלג · חבילת נכסים</small></h1><div class="controls"><select id="asset" aria-label="בחירת מודל"></select><button id="reset">איפוס מבט</button></div></header>
+<main><canvas aria-label="תצוגת מודל תלת ממדי"></canvas><div class="caption"><div id="status" role="status">טוען מודל…</div>גרירה לסיבוב · גלגלת או צביטה לקירוב<br>המגרשים פתוחים למבט מוגבה בטלפון.</div></main>
+<script type="module" src="preview.js"></script>
+</html>

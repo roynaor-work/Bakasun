@@ -1,0 +1,86 @@
+{
+  "id": "basketball-arena",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "objects": [
+    "arena_shell",
+    "backboard",
+    "backboard_target",
+    "basket_frame",
+    "beams",
+    "court_markings",
+    "court_runoff",
+    "court_surface",
+    "floodlights",
+    "handrails",
+    "hanging_scoreboard",
+    "individual_seats",
+    "lighting_trusses",
+    "net",
+    "painted_keys",
+    "rim",
+    "roof",
+    "scoreboard",
+    "seating",
+    "stand_stairs",
+    "team_benches"
+  ],
+  "anchors": {
+    "anchor_rim_center_south": [
+      0.0,
+      3.05,
+      12.425
+    ],
+    "anchor_rim_center_north": [
+      0.0,
+      3.05,
+      -12.425
+    ],
+    "anchor_ball_spot": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "anchor_free_throw_north": [
+      0.0,
+      0.0,
+      -8.2
+    ],
+    "anchor_free_throw_south": [
+      0.0,
+      0.0,
+      8.2
+    ],
+    "anchor_scoreboard_center": [
+      0.0,
+      5.3,
+      -19.0
+    ],
+    "anchor_team_home": [
+      -8.8,
+      0.0,
+      5.8
+    ],
+    "anchor_team_away": [
+      8.8,
+      0.0,
+      -5.8
+    ],
+    "anchor_hanging_scoreboard_center": [
+      0.0,
+      6.15,
+      -0.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "triangles": 24840,
+  "drawCallsEstimate": 21,
+  "textures": 0,
+  "ao": "8-ray face AO in COLOR_0; bounded 0.68\u20131.0"
+}
