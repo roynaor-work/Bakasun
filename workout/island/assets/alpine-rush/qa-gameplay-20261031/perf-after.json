@@ -1,0 +1,883 @@
+{
+  "label": "after",
+  "base": "23d79d50",
+  "seconds": 30,
+  "results": [
+    {
+      "width": 844,
+      "height": 390,
+      "small": false,
+      "seconds": 30.2,
+      "seed": 7,
+      "stage": 1,
+      "pixelRatio": 1,
+      "mobileProfile": true,
+      "frames": 100,
+      "allFrames": 107,
+      "warmupMs": 2000,
+      "loadMs": 3047,
+      "firstRacingFrames": [
+        {
+          "frameMs": 4.3,
+          "render": 1.9,
+          "step": 0.5
+        },
+        {
+          "frameMs": 3.2,
+          "render": 2.4,
+          "step": 0.5
+        },
+        {
+          "frameMs": 2.5,
+          "render": 2,
+          "step": 0.1
+        },
+        {
+          "frameMs": 2.8,
+          "render": 1.8,
+          "step": 0.4
+        }
+      ],
+      "frameMs": {
+        "p50": 250,
+        "p95": 400,
+        "p99": 1433.4,
+        "max": 1433.4
+      },
+      "tickMs": {
+        "avg": 21.343,
+        "p95": 4.7,
+        "max": 1415.3
+      },
+      "parts": {
+        "step": 0.363,
+        "snapshot": 0.021,
+        "presentation": 0.006,
+        "render": 20.397,
+        "other": 0.56
+      },
+      "over33": 91,
+      "over50": 91,
+      "avgFps": 3.6,
+      "render": {
+        "calls": 66,
+        "triangles": 79458,
+        "trees": 52,
+        "chunks": 51,
+        "visibleChunks": 11,
+        "quality": "low",
+        "mode": "model",
+        "geometries": 91,
+        "textures": 15
+      },
+      "audit": {
+        "categories": {
+          "track": {
+            "objects": 21,
+            "tris": 44960,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesFar": {
+            "objects": 3,
+            "tris": 4848,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "rocks": {
+            "objects": 1,
+            "tris": 378,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "fence": {
+            "objects": 1,
+            "tris": 13664,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "coins": {
+            "objects": 1,
+            "tris": 5760,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "finish": {
+            "objects": 0,
+            "tris": 0,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "riders": {
+            "objects": 6,
+            "tris": 5766,
+            "shadowTris": 5760,
+            "points": 0
+          },
+          "effects": {
+            "objects": 3,
+            "tris": 1568,
+            "shadowTris": 0,
+            "points": 151
+          },
+          "other": {
+            "objects": 3,
+            "tris": 6,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "props": {
+            "objects": 22,
+            "tris": 932,
+            "shadowTris": 138,
+            "points": 0
+          }
+        },
+        "shadowMapSize": 512,
+        "shadowsEnabled": true,
+        "programs": 21
+      },
+      "auditHigh": {
+        "categories": {
+          "track": {
+            "objects": 21,
+            "tris": 44960,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesNear": {
+            "objects": 6,
+            "tris": 5868,
+            "shadowTris": 1935,
+            "points": 0
+          },
+          "treesFar": {
+            "objects": 3,
+            "tris": 4236,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesDistant": {
+            "objects": 3,
+            "tris": 11982,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "rocks": {
+            "objects": 2,
+            "tris": 756,
+            "shadowTris": 108,
+            "points": 0
+          },
+          "fence": {
+            "objects": 1,
+            "tris": 26352,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "coins": {
+            "objects": 1,
+            "tris": 1920,
+            "shadowTris": 1920,
+            "points": 0
+          },
+          "finish": {
+            "objects": 0,
+            "tris": 0,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "riders": {
+            "objects": 6,
+            "tris": 5766,
+            "shadowTris": 5760,
+            "points": 0
+          },
+          "effects": {
+            "objects": 3,
+            "tris": 172,
+            "shadowTris": 0,
+            "points": 210
+          },
+          "other": {
+            "objects": 2,
+            "tris": 4,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "props": {
+            "objects": 9,
+            "tris": 358,
+            "shadowTris": 0,
+            "points": 0
+          }
+        },
+        "shadowMapSize": 1024,
+        "shadowsEnabled": true,
+        "programs": 19
+      },
+      "finalPhase": "racing",
+      "errors": [],
+      "policy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "cspViolations": 0,
+      "policyErrors": 0
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "small": true,
+      "seconds": 30,
+      "seed": 7,
+      "stage": 1,
+      "pixelRatio": 1,
+      "mobileProfile": true,
+      "frames": 201,
+      "allFrames": 213,
+      "warmupMs": 2000,
+      "loadMs": 3560,
+      "firstRacingFrames": [
+        {
+          "frameMs": 3.6,
+          "render": 1.8,
+          "step": 0.3
+        },
+        {
+          "frameMs": 2.3,
+          "render": 1.7,
+          "step": 0.2
+        },
+        {
+          "frameMs": 3.3,
+          "render": 2.6,
+          "step": 0.6
+        },
+        {
+          "frameMs": 2.9,
+          "render": 2.4,
+          "step": 0.1
+        }
+      ],
+      "frameMs": {
+        "p50": 133.2,
+        "p95": 183.4,
+        "p99": 399.9,
+        "max": 416.6
+      },
+      "tickMs": {
+        "avg": 6.161,
+        "p95": 2.8,
+        "max": 423.6
+      },
+      "parts": {
+        "step": 0.206,
+        "snapshot": 0.014,
+        "presentation": 0.007,
+        "render": 5.566,
+        "other": 0.373
+      },
+      "over33": 198,
+      "over50": 197,
+      "avgFps": 7.2,
+      "render": {
+        "calls": 58,
+        "triangles": 87621,
+        "trees": 53,
+        "chunks": 51,
+        "visibleChunks": 12,
+        "quality": "low",
+        "mode": "model",
+        "geometries": 101,
+        "textures": 16
+      },
+      "audit": {
+        "categories": {
+          "track": {
+            "objects": 22,
+            "tris": 46080,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesFar": {
+            "objects": 3,
+            "tris": 4935,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "rocks": {
+            "objects": 1,
+            "tris": 378,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "fence": {
+            "objects": 1,
+            "tris": 14640,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "coins": {
+            "objects": 1,
+            "tris": 7680,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "finish": {
+            "objects": 2,
+            "tris": 24,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "riders": {
+            "objects": 4,
+            "tris": 3844,
+            "shadowTris": 3840,
+            "points": 0
+          },
+          "effects": {
+            "objects": 3,
+            "tris": 4560,
+            "shadowTris": 0,
+            "points": 151
+          },
+          "other": {
+            "objects": 3,
+            "tris": 6,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "props": {
+            "objects": 13,
+            "tris": 906,
+            "shadowTris": 274,
+            "points": 0
+          }
+        },
+        "shadowMapSize": 512,
+        "shadowsEnabled": true,
+        "programs": 21
+      },
+      "auditHigh": {
+        "categories": {
+          "track": {
+            "objects": 22,
+            "tris": 46080,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesNear": {
+            "objects": 6,
+            "tris": 6120,
+            "shadowTris": 1839,
+            "points": 0
+          },
+          "treesFar": {
+            "objects": 3,
+            "tris": 4035,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesDistant": {
+            "objects": 3,
+            "tris": 12297,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "rocks": {
+            "objects": 2,
+            "tris": 756,
+            "shadowTris": 108,
+            "points": 0
+          },
+          "fence": {
+            "objects": 1,
+            "tris": 26352,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "coins": {
+            "objects": 1,
+            "tris": 2688,
+            "shadowTris": 2688,
+            "points": 0
+          },
+          "finish": {
+            "objects": 0,
+            "tris": 0,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "riders": {
+            "objects": 2,
+            "tris": 1922,
+            "shadowTris": 1920,
+            "points": 0
+          },
+          "effects": {
+            "objects": 3,
+            "tris": 340,
+            "shadowTris": 0,
+            "points": 210
+          },
+          "other": {
+            "objects": 2,
+            "tris": 4,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "props": {
+            "objects": 11,
+            "tris": 466,
+            "shadowTris": 0,
+            "points": 0
+          }
+        },
+        "shadowMapSize": 1024,
+        "shadowsEnabled": true,
+        "programs": 19
+      },
+      "finalPhase": "racing",
+      "errors": [],
+      "policy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "cspViolations": 0,
+      "policyErrors": 0
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "small": false,
+      "seconds": 30.1,
+      "seed": 7,
+      "stage": 1,
+      "pixelRatio": 1,
+      "mobileProfile": true,
+      "frames": 128,
+      "allFrames": 136,
+      "warmupMs": 2000,
+      "loadMs": 2781,
+      "firstRacingFrames": [
+        {
+          "frameMs": 4.8,
+          "render": 2.6,
+          "step": 0.7
+        },
+        {
+          "frameMs": 3.6,
+          "render": 2.7,
+          "step": 0.6
+        },
+        {
+          "frameMs": 3.3,
+          "render": 2.5,
+          "step": 0.4
+        },
+        {
+          "frameMs": 2.9,
+          "render": 1.7,
+          "step": 0.7
+        }
+      ],
+      "frameMs": {
+        "p50": 200,
+        "p95": 300,
+        "p99": 466.6,
+        "max": 633.3
+      },
+      "tickMs": {
+        "avg": 9.637,
+        "p95": 4.3,
+        "max": 630.4
+      },
+      "parts": {
+        "step": 0.334,
+        "snapshot": 0.018,
+        "presentation": 0.005,
+        "render": 8.77,
+        "other": 0.51
+      },
+      "over33": 124,
+      "over50": 124,
+      "avgFps": 4.6,
+      "render": {
+        "calls": 106,
+        "triangles": 79413,
+        "trees": 53,
+        "chunks": 51,
+        "visibleChunks": 11,
+        "quality": "low",
+        "mode": "model",
+        "geometries": 154,
+        "textures": 16
+      },
+      "audit": {
+        "categories": {
+          "track": {
+            "objects": 21,
+            "tris": 44960,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesFar": {
+            "objects": 3,
+            "tris": 4935,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "rocks": {
+            "objects": 1,
+            "tris": 324,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "fence": {
+            "objects": 1,
+            "tris": 13664,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "coins": {
+            "objects": 1,
+            "tris": 7680,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "finish": {
+            "objects": 55,
+            "tris": 660,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "riders": {
+            "objects": 2,
+            "tris": 1922,
+            "shadowTris": 1920,
+            "points": 0
+          },
+          "effects": {
+            "objects": 3,
+            "tris": 2176,
+            "shadowTris": 0,
+            "points": 151
+          },
+          "other": {
+            "objects": 2,
+            "tris": 4,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "props": {
+            "objects": 13,
+            "tris": 906,
+            "shadowTris": 220,
+            "points": 0
+          }
+        },
+        "shadowMapSize": 512,
+        "shadowsEnabled": true,
+        "programs": 21
+      },
+      "auditHigh": {
+        "categories": {
+          "track": {
+            "objects": 22,
+            "tris": 46080,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesNear": {
+            "objects": 6,
+            "tris": 6312,
+            "shadowTris": 1926,
+            "points": 0
+          },
+          "treesFar": {
+            "objects": 3,
+            "tris": 4131,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesDistant": {
+            "objects": 3,
+            "tris": 12201,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "rocks": {
+            "objects": 2,
+            "tris": 756,
+            "shadowTris": 108,
+            "points": 0
+          },
+          "fence": {
+            "objects": 1,
+            "tris": 26352,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "coins": {
+            "objects": 1,
+            "tris": 2688,
+            "shadowTris": 2688,
+            "points": 0
+          },
+          "finish": {
+            "objects": 0,
+            "tris": 0,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "riders": {
+            "objects": 2,
+            "tris": 1922,
+            "shadowTris": 1920,
+            "points": 0
+          },
+          "effects": {
+            "objects": 3,
+            "tris": 236,
+            "shadowTris": 0,
+            "points": 210
+          },
+          "other": {
+            "objects": 2,
+            "tris": 4,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "props": {
+            "objects": 11,
+            "tris": 466,
+            "shadowTris": 0,
+            "points": 0
+          }
+        },
+        "shadowMapSize": 1024,
+        "shadowsEnabled": true,
+        "programs": 19
+      },
+      "finalPhase": "racing",
+      "errors": [],
+      "policy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "cspViolations": 0,
+      "policyErrors": 0
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "small": true,
+      "seconds": 30.1,
+      "seed": 7,
+      "stage": 1,
+      "pixelRatio": 1,
+      "mobileProfile": true,
+      "frames": 139,
+      "allFrames": 146,
+      "warmupMs": 2000,
+      "loadMs": 3409,
+      "firstRacingFrames": [
+        {
+          "frameMs": 4.4,
+          "render": 2.2,
+          "step": 0.9
+        },
+        {
+          "frameMs": 4.5,
+          "render": 3,
+          "step": 1.1
+        },
+        {
+          "frameMs": 3.2,
+          "render": 2.6,
+          "step": 0.2
+        },
+        {
+          "frameMs": 4.1,
+          "render": 2.6,
+          "step": 0.7
+        }
+      ],
+      "frameMs": {
+        "p50": 150.1,
+        "p95": 566.7,
+        "p99": 1183.4,
+        "max": 1200
+      },
+      "tickMs": {
+        "avg": 32.122,
+        "p95": 244.4,
+        "max": 1177.9
+      },
+      "parts": {
+        "step": 3.411,
+        "snapshot": 0.445,
+        "presentation": 0.008,
+        "render": 25.691,
+        "other": 2.473
+      },
+      "over33": 125,
+      "over50": 122,
+      "avgFps": 5,
+      "render": {
+        "calls": 109,
+        "triangles": 83446,
+        "trees": 52,
+        "chunks": 51,
+        "visibleChunks": 12,
+        "quality": "low",
+        "mode": "model",
+        "geometries": 150,
+        "textures": 16
+      },
+      "audit": {
+        "categories": {
+          "track": {
+            "objects": 22,
+            "tris": 46080,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesFar": {
+            "objects": 3,
+            "tris": 4812,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "rocks": {
+            "objects": 1,
+            "tris": 324,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "fence": {
+            "objects": 1,
+            "tris": 13664,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "coins": {
+            "objects": 1,
+            "tris": 9600,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "finish": {
+            "objects": 55,
+            "tris": 660,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "riders": {
+            "objects": 2,
+            "tris": 1922,
+            "shadowTris": 1920,
+            "points": 0
+          },
+          "effects": {
+            "objects": 3,
+            "tris": 2732,
+            "shadowTris": 0,
+            "points": 151
+          },
+          "other": {
+            "objects": 3,
+            "tris": 6,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "props": {
+            "objects": 13,
+            "tris": 906,
+            "shadowTris": 220,
+            "points": 0
+          }
+        },
+        "shadowMapSize": 512,
+        "shadowsEnabled": true,
+        "programs": 21
+      },
+      "auditHigh": {
+        "categories": {
+          "track": {
+            "objects": 23,
+            "tris": 49344,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesNear": {
+            "objects": 6,
+            "tris": 6225,
+            "shadowTris": 2013,
+            "points": 0
+          },
+          "treesFar": {
+            "objects": 3,
+            "tris": 4227,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "treesDistant": {
+            "objects": 3,
+            "tris": 11913,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "rocks": {
+            "objects": 2,
+            "tris": 702,
+            "shadowTris": 108,
+            "points": 0
+          },
+          "fence": {
+            "objects": 1,
+            "tris": 25376,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "coins": {
+            "objects": 1,
+            "tris": 1920,
+            "shadowTris": 1920,
+            "points": 0
+          },
+          "finish": {
+            "objects": 0,
+            "tris": 0,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "riders": {
+            "objects": 2,
+            "tris": 1922,
+            "shadowTris": 1920,
+            "points": 0
+          },
+          "effects": {
+            "objects": 3,
+            "tris": 216,
+            "shadowTris": 0,
+            "points": 210
+          },
+          "other": {
+            "objects": 2,
+            "tris": 4,
+            "shadowTris": 0,
+            "points": 0
+          },
+          "props": {
+            "objects": 11,
+            "tris": 466,
+            "shadowTris": 0,
+            "points": 0
+          }
+        },
+        "shadowMapSize": 1024,
+        "shadowsEnabled": true,
+        "programs": 19
+      },
+      "finalPhase": "racing",
+      "errors": [],
+      "policy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "cspViolations": 0,
+      "policyErrors": 0
+    }
+  ]
+}

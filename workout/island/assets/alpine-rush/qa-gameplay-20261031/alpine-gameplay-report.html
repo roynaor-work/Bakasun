@@ -1,0 +1,2146 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Alpine Rush · קלט, CSP וביצועים · 31.10.2026</title><style>
+ :root{font-family:Arial,"Segoe UI",sans-serif;color:#183443;background:#edf3f6;font-size:16px}*{box-sizing:border-box}body{margin:0}a{color:#155d7c;text-underline-offset:3px}a:focus-visible{outline:3px solid #d8613d;outline-offset:5px}header,main,footer{max-width:1160px;margin:auto}header{background:#123148;color:#f3fafc;padding:38px 32px 32px;border-radius:0 0 22px 22px}.eyebrow{font-size:14px;letter-spacing:.04em;color:#a4dceb;margin:0 0 12px}h1{font-size:clamp(30px,4vw,46px);line-height:1.15;margin:0 0 14px}h2{font-size:26px;line-height:1.25;margin:0 0 16px}h3{font-size:19px;margin:24px 0 12px}p{line-height:1.65;margin:0 0 14px}.lead{max-width:860px;color:#d8e9f1}main{padding:24px 16px}.panel{background:#fff;border:1px solid #d4e0e6;border-radius:18px;padding:26px;margin-bottom:20px}.meta,.raw{font-size:14px;color:#4e6878;line-height:1.6}.raw{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px}.notice{border-right:4px solid #6b90a6;border-radius:6px;padding:14px 16px;margin:18px 0;background:#edf4f7}.notice.bad{background:#fff0eb;border-color:#c2573b;color:#74311f}.notice.pending{background:#fff7e5;border-color:#a87824;color:#6d5428}.notice.neutral{background:#eaf4f5;border-color:#458191}.table-wrap{overflow-x:auto;border:1px solid #d6e1e7;border-radius:12px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{padding:12px 14px;border-bottom:1px solid #dce6eb;text-align:right;vertical-align:top}thead th{background:#edf3f6;font-weight:700}tbody th{font-weight:700;min-width:150px}th small{display:block;font-size:14px;font-weight:400;color:#526e7d;margin-top:5px}tr:last-child>th,tr:last-child>td{border-bottom:0}td bdi{font-variant-numeric:tabular-nums}.perf{min-width:1100px}.perf td{white-space:nowrap}.perf thead tr:nth-child(2)th{font-size:14px;font-weight:400}.worse{color:#9c341b;background:#fff0ea;font-weight:700}.badge{display:inline-block;padding:4px 9px;border-radius:6px;font-size:14px;font-weight:700}.badge.passed{color:#24574d;background:#e4f1eb}.badge.failed{color:#8c351e;background:#ffede6}.badge.pending{color:#6f582d;background:#fff3d7}.badge.findings{color:#48556d;background:#edf0f6}.pending-text{color:#7b623b}.policy{direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;background:#102b41;color:#e6f3f8;border-radius:10px;padding:16px;font:13px/1.6 Consolas,monospace}.gallery{display:grid;grid-template-columns:minmax(0,2.15fr) minmax(0,1fr);gap:18px;align-items:start}.gallery figure{margin:0;background:#edf3f6;border:1px solid #d1dfe6;border-radius:12px;overflow:hidden}.gallery img{display:block;width:100%;height:auto}.gallery figcaption{font-size:14px;padding:10px 12px;color:#436172}.columns{display:grid;grid-template-columns:1fr 1fr;gap:22px}.details{font-size:14px;line-height:1.6}.details pre{direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f5f7;padding:14px;border-radius:10px;max-height:420px;overflow:auto}ul,ol{padding-right:24px;line-height:1.7}li{margin-bottom:8px}footer{padding:6px 24px 30px;font-size:14px;color:#4e6878}code{direction:ltr;unicode-bidi:isolate;font-family:Consolas,monospace;font-size:.94em}header a{color:#b0ebf3}@media(max-width:700px){header{padding:28px 20px;border-radius:0}.panel{padding:20px 16px}.columns,.gallery{grid-template-columns:1fr}.gallery .portrait{max-width:390px;margin-inline:auto}h2{font-size:24px}th,td{padding:10px}main{padding:16px 10px}.policy{font-size:12px}.meta{font-size:14px}}
+ </style></head><body><header><p class="eyebrow">האי שלי · ALPINE RUSH · 31.10.2026</p><h1>קלט רציף יותר, עם מדידה ו־CSP אמיתי</h1><p class="lead">שמירת קלט קצר לפני המראה, החלפת מקור היגוי נקייה ופנייה מתמשכת. הדוח מפריד בין שינויי הסקי, ביצועים, אמינות הבדיקה וממצאים במשחקים האחרים.</p><p class="meta" style="color:#b6cfdb">בסיס ההשוואה: <code>23d79d50</code> · עברית RTL · שני כיווני טלפון · נתוני המסירה נטענו</p><p><a href="https://github.com/roynaor-work/Bakasun/pull/220">בקשת המיזוג של השינוי</a></p></header><main>
+ <section class="panel"><h2>מה השתנה בתחושת המשחק</h2><div class="table-wrap"><table><thead><tr><th>מדד</th><th>לפני</th><th>אחרי</th></tr></thead><tbody>
+ <tr><th scope="row">שני כיווני מקלדת, כשהג׳ויסטיק מוחזק</th><td><bdi dir="ltr">0.5</bdi></td><td><bdi dir="ltr">0</bdi> · ניטרלי</td></tr>
+ <tr><th scope="row">היגוי שנותר אחרי שחרור הג׳ויסטיק</th><td><bdi dir="ltr">1</bdi></td><td><bdi dir="ltr">0</bdi></td></tr>
+ <tr><th scope="row">המצביע הקודם נשאר פעיל בהחלפת מקור</th><td>כן</td><td>לא</td></tr>
+ <tr><th scope="row">חזרות לניטרלי במהלך 120 פריימים של פנייה מוחזקת</th><td><bdi dir="ltr">5</bdi></td><td><bdi dir="ltr">0</bdi></td></tr>
+ <tr><th scope="row">זמן קבלת החלפת צד בתנועה</th><td><bdi dir="ltr">250</bdi> ms</td><td><bdi dir="ltr">16.7</bdi> ms</td></tr>
+ </tbody></table></div><h3>קלט תרגיל לפני המראה</h3><p>זמן ההקדמה נמדד בטיק קבוע של הסימולציה. התרגיל מזכה בניקוד רק לאחר נחיתה תקינה; ערך התרגיל עצמו נשאר כפי שהיה.</p><div class="table-wrap"><table><thead><tr><th>הקדמה לפני המראה</th><th>התקבל לפני</th><th>מתקבל אחרי</th><th>ניקוד לאחר נחיתה · לפני → אחרי</th></tr></thead><tbody><tr><th scope="row"><bdi dir="ltr">16.7</bdi> ms</th><td>לא</td><td>כן</td><td><bdi dir="ltr">0</bdi> → <bdi dir="ltr">150</bdi></td></tr><tr><th scope="row"><bdi dir="ltr">66.7</bdi> ms</th><td>לא</td><td>כן</td><td><bdi dir="ltr">0</bdi> → <bdi dir="ltr">150</bdi></td></tr><tr><th scope="row"><bdi dir="ltr">116.7</bdi> ms</th><td>לא</td><td>כן</td><td><bdi dir="ltr">0</bdi> → <bdi dir="ltr">150</bdi></td></tr><tr><th scope="row"><bdi dir="ltr">133.3</bdi> ms</th><td>לא</td><td>לא</td><td><bdi dir="ltr">0</bdi> → <bdi dir="ltr">0</bdi></td></tr><tr><th scope="row"><bdi dir="ltr">500</bdi> ms</th><td>לא</td><td>לא</td><td><bdi dir="ltr">0</bdi> → <bdi dir="ltr">0</bdi></td></tr></tbody></table></div><p class="raw"><a href="gameplay-proof.json">הוכחת לפני/אחרי · JSON</a><a href="touch-gameplay-proof.json">בדיקת מגע במשחק · JSON</a></p><p class="meta">קבלת החלפת מצב בפריים אינה קפיצה חזותית: הפוזה עדיין מתמזגת לאורך המעבר. תוצאת מרוץ ללא קלט מוקדם נשארה זהה: <strong>כן</strong>.</p></section>
+ <section class="panel"><h2>ביצועים לפני ואחרי · ארבע תצורות</h2><p>אותו כלי <code>tools/perf-alpine.html</code>, Chrome עם SwiftShader, אותו seed ושלב, קנבס מלא וקנבס קטן בכל כיוון. ״פריים ראשון״ הוא זמן עבודת JS בקריאת המרוץ הראשונה; p95 זמן פריים הוא הפער בין פריימים. N הוא מספר הדגימות לאחר החימום.</p><p class="notice bad"><strong>ההשוואה הראשונית אינה מספיקה לסימון דרישת הביצועים כעוברת.</strong> 2 מתוך 12 השוואות עלו; הערכים נשארים מסומנים בטבלה. התאמת תנאי המדידה: כן. פריים ראשון עד 18ms: כן.</p><p class="notice neutral"><strong>פרופיל הטלפון בקנבס מלא:</strong> בשני הכיוונים הפריים הראשון, p95 זמן הפריים ו־p95 עלות ה־JS לא עלו ביחס לבסיס.</p><p><strong>אבחון ראשוני בקנבס קטן לאורך:</strong> p95 זמן פריים <bdi dir="ltr">316.7</bdi> → <bdi dir="ltr">566.7</bdi> ms; p95 עלות JS <bdi dir="ltr">11.3</bdi> → <bdi dir="ltr">244.4</bdi> ms. תוצאת האבחון נשמרת בטבלה; הסדרה המזווגת להלן אינה מחליפה אותה.</p><div class="table-wrap"><table class="perf"><thead><tr><th rowspan="2">תצורה</th><th colspan="2">פריים ראשון · עלות JS · ms</th><th colspan="2">p95 זמן פריים · ms</th><th colspan="2">p95 עלות JS · ms</th><th colspan="2">דגימות N</th><th colspan="2">קריאות ציור</th></tr><tr><th>לפני</th><th>אחרי</th><th>לפני</th><th>אחרי</th><th>לפני</th><th>אחרי</th><th>לפני</th><th>אחרי</th><th>לפני</th><th>אחרי</th></tr></thead><tbody><tr><th scope="row"><bdi dir="ltr">844×390</bdi><small>קנבס מלא</small></th><td><bdi dir="ltr">9.1</bdi></td><td class=""><bdi dir="ltr">4.3</bdi></td><td><bdi dir="ltr">483.3</bdi></td><td class=""><bdi dir="ltr">400</bdi></td><td><bdi dir="ltr">6.4</bdi></td><td class=""><bdi dir="ltr">4.7</bdi></td><td><bdi dir="ltr">88</bdi></td><td class=""><bdi dir="ltr">100</bdi></td><td><bdi dir="ltr">64</bdi></td><td class=""><bdi dir="ltr">66</bdi></td></tr><tr><th scope="row"><bdi dir="ltr">844×390</bdi><small>קנבס קטן 220×160</small></th><td><bdi dir="ltr">4.5</bdi></td><td class=""><bdi dir="ltr">3.6</bdi></td><td><bdi dir="ltr">216.7</bdi></td><td class=""><bdi dir="ltr">183.4</bdi></td><td><bdi dir="ltr">3.4</bdi></td><td class=""><bdi dir="ltr">2.8</bdi></td><td><bdi dir="ltr">167</bdi></td><td class=""><bdi dir="ltr">201</bdi></td><td><bdi dir="ltr">51</bdi></td><td class=""><bdi dir="ltr">58</bdi></td></tr><tr><th scope="row"><bdi dir="ltr">390×844</bdi><small>קנבס מלא</small></th><td><bdi dir="ltr">375.5</bdi></td><td class=""><bdi dir="ltr">4.8</bdi></td><td><bdi dir="ltr">483.4</bdi></td><td class=""><bdi dir="ltr">300</bdi></td><td><bdi dir="ltr">69</bdi></td><td class=""><bdi dir="ltr">4.3</bdi></td><td><bdi dir="ltr">99</bdi></td><td class=""><bdi dir="ltr">128</bdi></td><td><bdi dir="ltr">59</bdi></td><td class=""><bdi dir="ltr">106</bdi></td></tr><tr><th scope="row"><bdi dir="ltr">390×844</bdi><small>קנבס קטן 220×160</small></th><td><bdi dir="ltr">4.8</bdi></td><td class=""><bdi dir="ltr">4.4</bdi></td><td><bdi dir="ltr">316.7</bdi></td><td class="worse"><bdi dir="ltr">566.7</bdi></td><td><bdi dir="ltr">11.3</bdi></td><td class="worse"><bdi dir="ltr">244.4</bdi></td><td><bdi dir="ltr">143</bdi></td><td class=""><bdi dir="ltr">139</bdi></td><td><bdi dir="ltr">56</bdi></td><td class=""><bdi dir="ltr">109</bdi></td></tr></tbody></table></div><p class="meta">הטבלה מציגה את ערכי המקור, גם כשיש נסיגה. קנבס קטן מצמצם עלות רסטריזציה אך אינו מדידה על מכשיר אמיתי. פריים ראשון אחרי עד 18ms בכל התצורות: <strong>כן</strong>.</p><div class="raw"><a href="perf-before.json">כל נתוני לפני · JSON</a><a href="perf-after.json">כל נתוני אחרי · JSON</a></div></section>
+ <section class="panel"><h2>בדיקה חוזרת מזווגת · קנבס קטן לאורך</h2><p>שלושה זוגות של 30 שניות, בסדר <bdi dir="ltr">AB / BA / AB</bdi>: לפני–אחרי, אחרי–לפני, לפני–אחרי. מודולי ה״לפני״ מוגשים מהבסיס המדויק <code>23d79d50</code> באמצעות route, כשהנכסים ומדיניות השרת נשארים זהים. כל ששת הניסיונות נשמרים; לא נבחרת רק הריצה המהירה ביותר.</p><p class="notice neutral">בסדרה המזווגת חציוני שלושת המדדים לא עלו, והמדיניות נשארה זהה ללא שגיאות שנרשמו. זהו אימות חוזר של אבחון הקנבס הקטן; הוא אינו מוחק את הנסיגה שנרשמה בריצה הראשונית. ההכרעה הכוללת נשארת כפופה לסיכום הבדיקות הסופי.</p><div class="table-wrap"><table><thead><tr><th>סדר · זוג</th><th>גרסה</th><th>פריים ראשון JS · ms</th><th>p95 פריים · ms</th><th>p95 JS · ms</th><th>N</th><th>קריאות ציור</th><th>רישומי CSP</th></tr></thead><tbody><tr><th scope="row">1 · A</th><td>לפני</td><td><bdi dir="ltr">5</bdi></td><td><bdi dir="ltr">583.3</bdi></td><td><bdi dir="ltr">286.5</bdi></td><td><bdi dir="ltr">128</bdi></td><td><bdi dir="ltr">60</bdi></td><td><bdi dir="ltr">0</bdi></td></tr><tr><th scope="row">2 · A</th><td>אחרי</td><td><bdi dir="ltr">4.2</bdi></td><td><bdi dir="ltr">416.6</bdi></td><td><bdi dir="ltr">10.4</bdi></td><td><bdi dir="ltr">129</bdi></td><td><bdi dir="ltr">60</bdi></td><td><bdi dir="ltr">0</bdi></td></tr><tr><th scope="row">3 · B</th><td>אחרי</td><td><bdi dir="ltr">4</bdi></td><td><bdi dir="ltr">200.1</bdi></td><td><bdi dir="ltr">3.2</bdi></td><td><bdi dir="ltr">179</bdi></td><td><bdi dir="ltr">113</bdi></td><td><bdi dir="ltr">0</bdi></td></tr><tr><th scope="row">4 · B</th><td>לפני</td><td><bdi dir="ltr">4.4</bdi></td><td><bdi dir="ltr">216.7</bdi></td><td><bdi dir="ltr">3.4</bdi></td><td><bdi dir="ltr">174</bdi></td><td><bdi dir="ltr">59</bdi></td><td><bdi dir="ltr">0</bdi></td></tr><tr><th scope="row">5 · C</th><td>לפני</td><td><bdi dir="ltr">4.4</bdi></td><td><bdi dir="ltr">483.4</bdi></td><td><bdi dir="ltr">80.9</bdi></td><td><bdi dir="ltr">107</bdi></td><td><bdi dir="ltr">63</bdi></td><td><bdi dir="ltr">0</bdi></td></tr><tr><th scope="row">6 · C</th><td>אחרי</td><td><bdi dir="ltr">6.9</bdi></td><td><bdi dir="ltr">533.3</bdi></td><td><bdi dir="ltr">238</bdi></td><td><bdi dir="ltr">117</bdi></td><td><bdi dir="ltr">63</bdi></td><td><bdi dir="ltr">0</bdi></td></tr></tbody></table></div><h3>חציון של שלוש ריצות בכל גרסה</h3><div class="table-wrap"><table><thead><tr><th>מדד</th><th>לפני</th><th>אחרי</th></tr></thead><tbody><tr><th scope="row">פריים ראשון · עלות JS · ms</th><td><bdi dir="ltr">4.4</bdi></td><td class=""><bdi dir="ltr">4.2</bdi></td></tr><tr><th scope="row">p95 זמן פריים · ms</th><td><bdi dir="ltr">483.4</bdi></td><td class=""><bdi dir="ltr">416.6</bdi></td></tr><tr><th scope="row">p95 עלות JS · ms</th><td><bdi dir="ltr">80.9</bdi></td><td class=""><bdi dir="ltr">10.4</bdi></td></tr></tbody></table></div><p class="meta">החציונים מוצגים רק לאחר השלמת כל ששת הניסיונות. התאמת סדר הניסוי: כן; מדיניות זהה וללא שגיאות מדיניות/דף בסדרה: כן.</p><div class="raw"><a href="perf-paired-portrait-small.json">כל שש הריצות המזווגות · JSON</a></div></section><section class="panel"><h2>CSP כמו באפליקציה</h2><p>מדיניות המקור נקראת מ־<code>index.html</code> ונשלחת בכותרת HTTP לדפי HTML של הבדיקה. היא אינה מורחבת כדי להפעיל את כלי המדידה. התאמת המדיניות בכל שמונה ריצות הביצועים: <strong>כן</strong>; ריצות ביצועים ללא הפרות או שגיאות מדיניות: <strong>כן</strong>.</p><pre class="policy">default-src &#39;self&#39; blob:; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; img-src &#39;self&#39; data: blob:; connect-src &#39;self&#39; blob:; font-src &#39;self&#39;; object-src &#39;none&#39;; base-uri &#39;self&#39;; form-action &#39;none&#39;</pre><p>ה־monitor מותקן לפני הניווט, ומנטר מסגרות, console, אירועי מדיניות ו־workers. בדיקות נגד כוללות קוד inline, worker מסוג blob, הפרה בזמן startup של worker ומדיניות חסרה. ה־CI צריך להיכשל כשמקרה שלילי אינו מזוהה.</p><p class="notice neutral">הסיכום הסופי מאשר 9 תרחישי CSP, המתועדים ב־10 רשומות ראיה. ראיית ה־worker כוללת זיהוי הפרה בזמן startup; harness ללא תגובת HTML מוגנת נדחה אף שאין אירוע הפרת מדיניות.</p><div class="table-wrap"><table><thead><tr><th>תרחיש</th><th>רישומי הפרה</th><th>שגיאות מדיניות</th><th>ראיה</th></tr></thead><tbody><tr><th scope="row"><bdi dir="ltr">blank-unprotected-harness-is-failure</bdi></th><td><bdi dir="ltr">0</bdi></td><td><bdi dir="ltr">0</bdi></td><td class="">ה־harness נדחה כצפוי: לא נטען HTML מוגן</td></tr><tr><th scope="row"><bdi dir="ltr">blocked-inline</bdi></th><td><bdi dir="ltr">4</bdi></td><td><bdi dir="ltr">0</bdi></td><td class="">זוהה כשל כנדרש</td></tr><tr><th scope="row"><bdi dir="ltr">blocked-blob-worker</bdi></th><td><bdi dir="ltr">4</bdi></td><td><bdi dir="ltr">0</bdi></td><td class="">זוהה כשל כנדרש</td></tr><tr><th scope="row"><bdi dir="ltr">blocked-worker-startup-eval</bdi></th><td><bdi dir="ltr">1</bdi></td><td><bdi dir="ltr">0</bdi></td><td class="">זוהה כשל כנדרש</td></tr><tr><th scope="row"><bdi dir="ltr">blocked-child-frame-inline</bdi></th><td><bdi dir="ltr">4</bdi></td><td><bdi dir="ltr">0</bdi></td><td class="">זוהה כשל כנדרש</td></tr><tr><th scope="row"><bdi dir="ltr">report-only-is-failure</bdi></th><td><bdi dir="ltr">4</bdi></td><td><bdi dir="ltr">0</bdi></td><td class="">זוהה כשל כנדרש</td></tr><tr><th scope="row"><bdi dir="ltr">different-harness-policy-is-failure</bdi></th><td><bdi dir="ltr">0</bdi></td><td><bdi dir="ltr">1</bdi></td><td class="">זוהה כשל כנדרש</td></tr><tr><th scope="row"><bdi dir="ltr">static-alpine-draco</bdi></th><td><bdi dir="ltr">0</bdi></td><td><bdi dir="ltr">0</bdi></td><td class="">ללא הפרות בראיה</td></tr><tr><th scope="row"><bdi dir="ltr">alpine-session-start-result</bdi></th><td><bdi dir="ltr">0</bdi></td><td><bdi dir="ltr">0</bdi></td><td class="">סשן נטען: countdown · 12 קליפים</td></tr><tr><th scope="row"><bdi dir="ltr">alpine-session-start</bdi></th><td><bdi dir="ltr">0</bdi></td><td><bdi dir="ltr">0</bdi></td><td class="">ללא הפרות בראיה</td></tr></tbody></table></div><p class="meta">אותה הפרה עשויה להירשם בכמה ערוצים; מספר הרישומים אינו מספר הכשלים הייחודיים. הקביעה הסופית נשענת גם על סיכום הבדיקות.</p><div class="raw"><a href="csp-negative-fixtures.json">ראיות CSP · JSON</a><a href="test-summary.json">סיכום בדיקות סופי · JSON</a></div></section>
+ <section class="panel"><h2>מה קרה במשחקים האחרים</h2><p>תוצאות הסוויטות הקיימות נשמרות גם כשאינן עוברות. ממצאי הכדורגל ודף המדידה לא תוקנו במסגרת שינויי הסקי.</p><div class="table-wrap"><table><thead><tr><th>בדיקה</th><th>תוצאה בפועל</th><th>CSP</th></tr></thead><tbody>
+ <tr><th scope="row">כדורסל · סוויטה מלאה</th><td>כל שלושת הגדלים עברו: 1280×720, 844×390, 390×844</td><td>1280×720: 0 הפרות · 844×390: 0 הפרות · 390×844: 0 הפרות</td></tr>
+ <tr><th scope="row">כדורגל · סוויטת athlete</th><td class="worse">נכשל בפתיחה חוזרת: assetStatus היה loading במקום ready, בשורה 42 בקריאה משורה 91. ריצת האורך לא הושגה אחרי שהסוויטה נעצרה בכשל המקורי.</td><td>0 הפרות; הכשל הוא assertion של טעינה</td></tr>
+ <tr><th scope="row">G3h הישן</th><td>הופסק לפני השלמה; אינו נחשב כבדיקה שעברה</td><td>אין תוצאת מעבר</td></tr>
+ <tr><th scope="row">דף מדידת כדורסל</th><td class="worse">tools/perf-hoops.html:32 — מודול inline נחסם</td><td><code>script-src &#39;self&#39;</code><br>זהו כשל בדף המדידה, ולא כשל שהודגם במשחק הכדורסל</td></tr>
+ </tbody></table></div><div class="raw"><a href="crossgame-summary.json">סיכום משחקים אחרים · JSON</a></div></section>
+ <section class="panel"><h2>בדיקת מגע בשני הכיוונים</h2><p>סשן המשחק האמיתי נבדק באמצעות נגיעות דפדפן מסוג touch, מסלול שנוצר במשחק וטיקים קבועים, ללא שינוי איזון או מסלול. זו בדיקת דפדפן המדמה מגע, ולא בדיקה על טלפון פיזי. קלט מוקדם מדי צריך לפוג; תרגיל לא אמור לפעול כשהגולש עדיין על הקרקע.</p><div class="table-wrap"><table><thead><tr><th>כיוון</th><th>הקדמה</th><th>touch מסוג trusted</th><th>תוצאה</th><th>הפעלות על הקרקע</th><th>רישומי CSP</th></tr></thead><tbody><tr><th scope="row"><bdi dir="ltr">844×390</bdi></th><td><bdi dir="ltr">66.7</bdi> ms</td><td>כן</td><td>התקבל בהמראה</td><td><bdi dir="ltr">0</bdi></td><td><bdi dir="ltr">0</bdi></td></tr><tr><th scope="row"><bdi dir="ltr">844×390</bdi></th><td><bdi dir="ltr">200</bdi> ms</td><td>כן</td><td>פג לפני ההמראה</td><td><bdi dir="ltr">0</bdi></td><td><bdi dir="ltr">0</bdi></td></tr><tr><th scope="row"><bdi dir="ltr">390×844</bdi></th><td><bdi dir="ltr">66.7</bdi> ms</td><td>כן</td><td>התקבל בהמראה</td><td><bdi dir="ltr">0</bdi></td><td><bdi dir="ltr">0</bdi></td></tr><tr><th scope="row"><bdi dir="ltr">390×844</bdi></th><td><bdi dir="ltr">200</bdi> ms</td><td>כן</td><td>פג לפני ההמראה</td><td><bdi dir="ltr">0</bdi></td><td><bdi dir="ltr">0</bdi></td></tr></tbody></table></div><div class="raw"><a href="touch-gameplay-proof.json">אירועי מגע, HUD והראיות המלאות · JSON</a></div></section><section class="panel"><h2>בדיקות, מגע וגבולות השינוי</h2><div class="columns"><div class="table-wrap"><table><tbody><tr><th scope="row">בדיקות יחידה</th><td><span class="badge passed">עבר</span></td></tr><tr><th scope="row">CI ובדיקות תשתית</th><td><span class="badge passed">עבר</span> · <a href="https://github.com/roynaor-work/Bakasun/actions/runs/41156129522">ריצת CI המוצלחת</a><br><small>test · alpine-csp · <code>6e8cef14</code></small></td></tr><tr><th scope="row">בדיקות דפדפן</th><td><span class="badge passed">עבר</span></td></tr><tr><th scope="row">CSP, כולל worker בזמן startup</th><td><span class="badge passed">עבר</span></td></tr><tr><th scope="row">סיכום ביצועים</th><td><span class="badge findings">הסתיים עם ממצאים</span></td></tr><tr><th scope="row">גבולות השינוי</th><td><span class="badge passed">עבר</span></td></tr></tbody></table></div><div><p>תוצאת המרוץ, רשומות השיא, מבנה השמירה, ניקוד ותקרות נשמרים במסגרת השינוי. אימות היקף זה משווה את שינויי העבודה מול <code>23d79d50</code>, ראש התלות המקומית #212, ואינו השוואה מול origin/main. הראיה ההשוואתית בודקת שמרוץ ללא קלט מוקדם מפיק אותה תוצאה: <strong>כן</strong>. סיכום ההפרש הסופי הוא הסמכות לאימות גבולות הקבצים.</p><p>קובצי release.json, release.mjs ותגי ?v= לא שונו בשינויי העבודה מול הבסיס המקומי. עד מיזוג #212, ההפרש של בקשת המיזוג מול main כולל גם שינויי גרסה ותגים שהגיעו מהתלות. תשתית הבדיקה כוללת ניטור קשיח של CSP ושל ה־assertions.</p><div class="raw"><a href="touch-gameplay-proof.json">הוכחת מגע</a><a href="test-summary.json">תוצאות מלאות והיקף השינוי</a></div></div></div><details class="details"><summary>נתוני אימות המגע והיקף השינוי</summary><pre>{
+  &quot;touch&quot;: {
+    &quot;policy&quot;: &quot;default-src &#39;self&#39; blob:; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; img-src &#39;self&#39; data: blob:; connect-src &#39;self&#39; blob:; font-src &#39;self&#39;; object-src &#39;none&#39;; base-uri &#39;self&#39;; form-action &#39;none&#39;&quot;,
+    &quot;method&quot;: &quot;Real runAlpineSession controls and trusted touch, generated course, matched ghost/run replay, fixed simulation ticks; no balance/course overrides&quot;,
+    &quot;orientations&quot;: [
+      {
+        &quot;width&quot;: 844,
+        &quot;height&quot;: 390,
+        &quot;cases&quot;: [
+          {
+            &quot;leadTicks&quot;: 4,
+            &quot;leadMs&quot;: 66.66666666666667,
+            &quot;launchTick&quot;: 1102,
+            &quot;pressTick&quot;: 1098,
+            &quot;before&quot;: {
+              &quot;id&quot;: &quot;player&quot;,
+              &quot;s&quot;: 335.3972222222206,
+              &quot;x&quot;: -3.988970849611754,
+              &quot;vx&quot;: 0.6985189532760379,
+              &quot;speed&quot;: 20,
+              &quot;tank&quot;: 1,
+              &quot;boostTime&quot;: 0,
+              &quot;padTime&quot;: 0,
+              &quot;hitTime&quot;: 0,
+              &quot;height&quot;: 0.9714444444441143,
+              &quot;alt&quot;: 0.9714444444441143,
+              &quot;vy&quot;: 0,
+              &quot;airborne&quot;: false,
+              &quot;airKind&quot;: null,
+              &quot;trick&quot;: null,
+              &quot;trickScore&quot;: 0,
+              &quot;crashes&quot;: 0,
+              &quot;coins&quot;: 5,
+              &quot;finished&quot;: false,
+              &quot;collisions&quot;: 0,
+              &quot;hits&quot;: [],
+              &quot;pads&quot;: [],
+              &quot;gates&quot;: [
+                &quot;ice-peak-0&quot;
+              ]
+            },
+            &quot;control&quot;: {
+              &quot;steer&quot;: 0,
+              &quot;boost&quot;: false,
+              &quot;trick&quot;: &quot;spin&quot;
+            },
+            &quot;secondSample&quot;: {
+              &quot;steer&quot;: 0,
+              &quot;boost&quot;: false,
+              &quot;trick&quot;: null
+            },
+            &quot;touches&quot;: [
+              {
+                &quot;id&quot;: &quot;spin&quot;,
+                &quot;trusted&quot;: true,
+                &quot;pointerType&quot;: &quot;touch&quot;,
+                &quot;timeMs&quot;: 18300,
+                &quot;disabled&quot;: false
+              }
+            ],
+            &quot;atTakeoff&quot;: {
+              &quot;id&quot;: &quot;player&quot;,
+              &quot;s&quot;: 336.73055555555385,
+              &quot;x&quot;: -3.939387882070098,
+              &quot;vx&quot;: 0.7654790216468388,
+              &quot;speed&quot;: 20,
+              &quot;tank&quot;: 1,
+              &quot;boostTime&quot;: 0,
+              &quot;padTime&quot;: 0,
+              &quot;hitTime&quot;: 0,
+              &quot;height&quot;: 1.2,
+              &quot;alt&quot;: 1.2,
+              &quot;vy&quot;: 6.6,
+              &quot;airborne&quot;: true,
+              &quot;airKind&quot;: &quot;ramp&quot;,
+              &quot;trick&quot;: {
+                &quot;id&quot;: &quot;spin&quot;,
+                &quot;t&quot;: 0,
+                &quot;duration&quot;: 0.7
+              },
+              &quot;trickScore&quot;: 0,
+              &quot;crashes&quot;: 0,
+              &quot;coins&quot;: 5,
+              &quot;finished&quot;: false,
+              &quot;collisions&quot;: 0,
+              &quot;hits&quot;: [],
+              &quot;pads&quot;: [],
+              &quot;gates&quot;: [
+                &quot;ice-peak-0&quot;
+              ]
+            },
+            &quot;currentFrame&quot;: {
+              &quot;schemaVersion&quot;: 1,
+              &quot;phase&quot;: &quot;racing&quot;,
+              &quot;timeMs&quot;: 18617,
+              &quot;distanceM&quot;: 341.73055555555356,
+              &quot;remainingM&quot;: 1258.2694444444464,
+              &quot;rank&quot;: 6,
+              &quot;totalRiders&quot;: 6,
+              &quot;speedKmh&quot;: 72,
+              &quot;player&quot;: {
+                &quot;id&quot;: &quot;player&quot;,
+                &quot;x&quot;: -3.818521783255869,
+                &quot;z&quot;: 0,
+                &quot;s&quot;: 341.73055555555356,
+                &quot;height&quot;: 2.349999999999999,
+                &quot;lean&quot;: 0.03559853875053887,
+                &quot;boosting&quot;: false,
+                &quot;hit&quot;: false,
+                &quot;crashed&quot;: false,
+                &quot;landing&quot;: false,
+                &quot;airborne&quot;: true,
+                &quot;airKind&quot;: &quot;ramp&quot;,
+                &quot;trick&quot;: {
+                  &quot;id&quot;: &quot;spin&quot;,
+                  &quot;progress&quot;: 0.35714285714285715
+                }
+              },
+              &quot;rivals&quot;: [
+                {
+                  &quot;id&quot;: &quot;rival-1&quot;,
+                  &quot;x&quot;: -5.952515448142791,
+                  &quot;z&quot;: -59.913611111112345,
+                  &quot;s&quot;: 401.6441666666659,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.38733997302045287,
+                  &quot;boosting&quot;: true,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-2&quot;,
+                  &quot;x&quot;: -0.2188523910815297,
+                  &quot;z&quot;: -48.27036111111107,
+                  &quot;s&quot;: 390.00091666666464,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.06574464707200299,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-3&quot;,
+                  &quot;x&quot;: -3.5609723741282022,
+                  &quot;z&quot;: -21.17500000000058,
+                  &quot;s&quot;: 362.90555555555414,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: 0.02832796152059799,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-4&quot;,
+                  &quot;x&quot;: -1.4249227574735222,
+                  &quot;z&quot;: -14.728500000001816,
+                  &quot;s&quot;: 356.4590555555554,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: 0.276453666916624,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-5&quot;,
+                  &quot;x&quot;: -0.8678224593276547,
+                  &quot;z&quot;: -33.07561111111545,
+                  &quot;s&quot;: 374.806166666669,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.02661755613078026,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                }
+              ],
+              &quot;obstacles&quot;: [
+                {
+                  &quot;id&quot;: &quot;ice-peak-22&quot;,
+                  &quot;type&quot;: &quot;ramp&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: 8.190555555553544,
+                  &quot;s&quot;: 333.54
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-25&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -3.8094444444464557,
+                  &quot;s&quot;: 345.54,
+                  &quot;h&quot;: 3.5
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-26&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -6.809444444446456,
+                  &quot;s&quot;: 348.54,
+                  &quot;h&quot;: 3.31
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-27&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -9.809444444446456,
+                  &quot;s&quot;: 351.54,
+                  &quot;h&quot;: 2.78
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-28&quot;,
+                  &quot;type&quot;: &quot;gate&quot;,
+                  &quot;x&quot;: -0.12,
+                  &quot;z&quot;: -37.809444444446456,
+                  &quot;s&quot;: 379.54
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-29&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -6.9,
+                  &quot;z&quot;: -50.809444444446456,
+                  &quot;s&quot;: 392.54,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-30&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -8.91,
+                  &quot;z&quot;: -53.60944444444641,
+                  &quot;s&quot;: 395.34,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-31&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -9.75,
+                  &quot;z&quot;: -56.40944444444642,
+                  &quot;s&quot;: 398.14,
+                  &quot;h&quot;: 2.39
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-32&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -8.91,
+                  &quot;z&quot;: -59.20944444444643,
+                  &quot;s&quot;: 400.94,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-33&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -6.9,
+                  &quot;z&quot;: -62.009444444446444,
+                  &quot;s&quot;: 403.74,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-34&quot;,
+                  &quot;type&quot;: &quot;gate&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -85.29944444444641,
+                  &quot;s&quot;: 427.03
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-35&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -98.29944444444641,
+                  &quot;s&quot;: 440.03,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-36&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -101.09944444444642,
+                  &quot;s&quot;: 442.83,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-37&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -103.89944444444643,
+                  &quot;s&quot;: 445.63,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-38&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -106.69944444444644,
+                  &quot;s&quot;: 448.43,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-39&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -109.49944444444645,
+                  &quot;s&quot;: 451.23,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-40&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 0.74,
+                  &quot;z&quot;: -123.93944444444645,
+                  &quot;s&quot;: 465.67,
+                  &quot;radius&quot;: 0.89
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-41&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 6.9,
+                  &quot;z&quot;: -137.97944444444641,
+                  &quot;s&quot;: 479.71,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-42&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 8.91,
+                  &quot;z&quot;: -140.77944444444643,
+                  &quot;s&quot;: 482.51,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-43&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 9.75,
+                  &quot;z&quot;: -143.57944444444644,
+                  &quot;s&quot;: 485.31,
+                  &quot;h&quot;: 2.39
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-44&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 8.91,
+                  &quot;z&quot;: -146.37944444444645,
+                  &quot;s&quot;: 488.11,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-45&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 6.9,
+                  &quot;z&quot;: -149.17944444444646,
+                  &quot;s&quot;: 490.91,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-46&quot;,
+                  &quot;type&quot;: &quot;boost&quot;,
+                  &quot;x&quot;: 0.61,
+                  &quot;z&quot;: -164.59944444444642,
+                  &quot;s&quot;: 506.33
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-47&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: -4.61,
+                  &quot;z&quot;: -175.5494444444464,
+                  &quot;s&quot;: 517.28,
+                  &quot;radius&quot;: 0.9
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-48&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 0.71,
+                  &quot;z&quot;: -207.34944444444648,
+                  &quot;s&quot;: 549.08,
+                  &quot;radius&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-49&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 4.14,
+                  &quot;z&quot;: -208.02944444444643,
+                  &quot;s&quot;: 549.76,
+                  &quot;radius&quot;: 0.86
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-50&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -220.88944444444644,
+                  &quot;s&quot;: 562.62,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-51&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -223.6894444444464,
+                  &quot;s&quot;: 565.42,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-52&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -226.48944444444646,
+                  &quot;s&quot;: 568.22,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-53&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -229.28944444444642,
+                  &quot;s&quot;: 571.02,
+                  &quot;h&quot;: 0.85
+                }
+              ],
+              &quot;countdown&quot;: 0,
+              &quot;boostFraction&quot;: 1,
+              &quot;boostReady&quot;: true,
+              &quot;trickReady&quot;: false,
+              &quot;score&quot;: 0,
+              &quot;coins&quot;: 7,
+              &quot;coinTotal&quot;: 125,
+              &quot;trackLength&quot;: 1600
+            },
+            &quot;accepted&quot;: true,
+            &quot;groundedTricks&quot;: 0,
+            &quot;events&quot;: [
+              {
+                &quot;id&quot;: &quot;e65&quot;,
+                &quot;type&quot;: &quot;takeoff&quot;,
+                &quot;riderId&quot;: &quot;player&quot;,
+                &quot;objectId&quot;: &quot;ice-peak-22&quot;
+              },
+              {
+                &quot;id&quot;: &quot;e66&quot;,
+                &quot;type&quot;: &quot;trick-start&quot;,
+                &quot;riderId&quot;: &quot;player&quot;,
+                &quot;objectId&quot;: &quot;spin&quot;
+              }
+            ],
+            &quot;screenshot&quot;: &quot;touch-spin-844x390.png&quot;,
+            &quot;render&quot;: {
+              &quot;calls&quot;: 69,
+              &quot;triangles&quot;: 119467,
+              &quot;geometries&quot;: 78,
+              &quot;textures&quot;: 15,
+              &quot;props&quot;: 8,
+              &quot;chunks&quot;: 51,
+              &quot;visibleChunks&quot;: 12,
+              &quot;coins&quot;: 22,
+              &quot;trees&quot;: 240,
+              &quot;nearTrees&quot;: 72,
+              &quot;farTrees&quot;: 45,
+              &quot;distantTrees&quot;: 123,
+              &quot;shadowTrees&quot;: 22,
+              &quot;treeVariants&quot;: 3,
+              &quot;treeDeckClearance&quot;: 0.7,
+              &quot;rocks&quot;: 13,
+              &quot;fences&quot;: 54,
+              &quot;designWorld&quot;: true,
+              &quot;designModels&quot;: 7,
+              &quot;designSurface&quot;: &quot;ski-slope&quot;,
+              &quot;background&quot;: &quot;landscape&quot;,
+              &quot;quality&quot;: &quot;high&quot;,
+              &quot;disposed&quot;: false,
+              &quot;mode&quot;: &quot;model&quot;,
+              &quot;grooves&quot;: &quot;paired-skis&quot;,
+              &quot;grooveCapacity&quot;: 4200,
+              &quot;feel&quot;: {
+                &quot;source&quot;: &quot;design/feel/alpine.json&quot;,
+                &quot;speedFraction&quot;: 0.6451612903225806,
+                &quot;fovAdd&quot;: 1.9731048973647285,
+                &quot;lineOpacity&quot;: 0,
+                &quot;lineVisible&quot;: false,
+                &quot;lineTrigger&quot;: false,
+                &quot;lineDuration&quot;: 0.6,
+                &quot;lineFraction&quot;: 0.12,
+                &quot;carve&quot;: 0,
+                &quot;lookAhead&quot;: 17.741935483870968,
+                &quot;bank&quot;: 0,
+                &quot;landingPulse&quot;: 0,
+                &quot;landingShakeFraction&quot;: 0,
+                &quot;landings&quot;: 0
+              },
+              &quot;vfx&quot;: {
+                &quot;active&quot;: 0,
+                &quot;capacity&quot;: 3,
+                &quot;textures&quot;: 3,
+                &quot;textureBytes&quot;: 3145728,
+                &quot;spawned&quot;: 0,
+                &quot;cameraActive&quot;: false,
+                &quot;cameraRuns&quot;: 0,
+                &quot;cameraDuration&quot;: 1.4,
+                &quot;sourceCameraDuration&quot;: 5.6,
+                &quot;warmed&quot;: true,
+                &quot;disposed&quot;: false
+              },
+              &quot;character&quot;: {
+                &quot;mode&quot;: &quot;design-skier&quot;,
+                &quot;clips&quot;: 12,
+                &quot;bones&quot;: 20,
+                &quot;trianglesPerRider&quot;: 1920,
+                &quot;motionScale&quot;: 0.6184251931233287,
+                &quot;bakeMs&quot;: 675.3000000044703,
+                &quot;loadMs&quot;: 754.6000000014901,
+                &quot;actors&quot;: 6
+              },
+              &quot;motion&quot;: {
+                &quot;state&quot;: &quot;air&quot;,
+                &quot;clipTime&quot;: 0.1,
+                &quot;sampledFrames&quot;: 25,
+                &quot;bakedClips&quot;: 12,
+                &quot;carveHeld&quot;: false,
+                &quot;carveStrength&quot;: 0
+              },
+              &quot;rockTexture&quot;: &quot;loaded&quot;,
+              &quot;mobileProfile&quot;: true,
+              &quot;pixelRatio&quot;: 1,
+              &quot;fov&quot;: 61.973,
+              &quot;interpolation&quot;: true,
+              &quot;lastSwitch&quot;: {
+                &quot;quality&quot;: &quot;high&quot;,
+                &quot;pixelRatioMs&quot;: 0,
+                &quot;shadowMs&quot;: 0,
+                &quot;resizeMs&quot;: 0,
+                &quot;totalMs&quot;: 0
+              }
+            },
+            &quot;hud&quot;: {
+              &quot;viewport&quot;: 844,
+              &quot;outer&quot;: {
+                &quot;left&quot;: 33.75,
+                &quot;right&quot;: 163.75
+              },
+              &quot;panels&quot;: [
+                {
+                  &quot;left&quot;: 33.75,
+                  &quot;right&quot;: 163.75,
+                  &quot;width&quot;: 130,
+                  &quot;height&quot;: 57.1875
+                },
+                {
+                  &quot;left&quot;: 33.75,
+                  &quot;right&quot;: 163.75,
+                  &quot;width&quot;: 130,
+                  &quot;height&quot;: 38.890625
+                }
+              ],
+              &quot;speed&quot;: &quot;72&quot;,
+              &quot;expectedSpeed&quot;: &quot;72&quot;,
+              &quot;tank&quot;: &quot;100&quot;,
+              &quot;expectedTank&quot;: &quot;100&quot;
+            }
+          },
+          {
+            &quot;leadTicks&quot;: 12,
+            &quot;leadMs&quot;: 200,
+            &quot;launchTick&quot;: 1124,
+            &quot;pressTick&quot;: 1112,
+            &quot;before&quot;: {
+              &quot;id&quot;: &quot;player&quot;,
+              &quot;s&quot;: 332.64166666666483,
+              &quot;x&quot;: -4.065487430091802,
+              &quot;vx&quot;: 0.3244997553811998,
+              &quot;speed&quot;: 20,
+              &quot;tank&quot;: 1,
+              &quot;boostTime&quot;: 0,
+              &quot;padTime&quot;: 0,
+              &quot;hitTime&quot;: 0,
+              &quot;height&quot;: 0.4203333333329624,
+              &quot;alt&quot;: 0.4203333333329624,
+              &quot;vy&quot;: 0,
+              &quot;airborne&quot;: false,
+              &quot;airKind&quot;: null,
+              &quot;trick&quot;: null,
+              &quot;trickScore&quot;: 0,
+              &quot;crashes&quot;: 0,
+              &quot;coins&quot;: 2,
+              &quot;finished&quot;: false,
+              &quot;collisions&quot;: 2,
+              &quot;hits&quot;: [
+                &quot;ice-peak-7&quot;,
+                &quot;ice-peak-8&quot;
+              ],
+              &quot;pads&quot;: [],
+              &quot;gates&quot;: []
+            },
+            &quot;control&quot;: {
+              &quot;steer&quot;: 0,
+              &quot;boost&quot;: false,
+              &quot;trick&quot;: &quot;spin&quot;
+            },
+            &quot;secondSample&quot;: {
+              &quot;steer&quot;: 0,
+              &quot;boost&quot;: false,
+              &quot;trick&quot;: null
+            },
+            &quot;touches&quot;: [
+              {
+                &quot;id&quot;: &quot;spin&quot;,
+                &quot;trusted&quot;: true,
+                &quot;pointerType&quot;: &quot;touch&quot;,
+                &quot;timeMs&quot;: 18533,
+                &quot;disabled&quot;: false
+              }
+            ],
+            &quot;atTakeoff&quot;: {
+              &quot;id&quot;: &quot;player&quot;,
+              &quot;s&quot;: 336.6416666666646,
+              &quot;x&quot;: -3.9394143997864064,
+              &quot;vx&quot;: 0.7654774321126117,
+              &quot;speed&quot;: 20,
+              &quot;tank&quot;: 1,
+              &quot;boostTime&quot;: 0,
+              &quot;padTime&quot;: 0,
+              &quot;hitTime&quot;: 0,
+              &quot;height&quot;: 1.2,
+              &quot;alt&quot;: 1.2,
+              &quot;vy&quot;: 6.6,
+              &quot;airborne&quot;: true,
+              &quot;airKind&quot;: &quot;ramp&quot;,
+              &quot;trick&quot;: null,
+              &quot;trickScore&quot;: 0,
+              &quot;crashes&quot;: 0,
+              &quot;coins&quot;: 2,
+              &quot;finished&quot;: false,
+              &quot;collisions&quot;: 2,
+              &quot;hits&quot;: [
+                &quot;ice-peak-7&quot;,
+                &quot;ice-peak-8&quot;
+              ],
+              &quot;pads&quot;: [],
+              &quot;gates&quot;: []
+            },
+            &quot;currentFrame&quot;: {
+              &quot;schemaVersion&quot;: 1,
+              &quot;phase&quot;: &quot;racing&quot;,
+              &quot;timeMs&quot;: 18733,
+              &quot;distanceM&quot;: 336.6416666666646,
+              &quot;remainingM&quot;: 1263.3583333333354,
+              &quot;rank&quot;: 6,
+              &quot;totalRiders&quot;: 6,
+              &quot;speedKmh&quot;: 72,
+              &quot;player&quot;: {
+                &quot;id&quot;: &quot;player&quot;,
+                &quot;x&quot;: -3.9394143997864064,
+                &quot;z&quot;: 0,
+                &quot;s&quot;: 336.6416666666646,
+                &quot;height&quot;: 1.2,
+                &quot;lean&quot;: 0.09005616848383667,
+                &quot;boosting&quot;: false,
+                &quot;hit&quot;: false,
+                &quot;crashed&quot;: false,
+                &quot;landing&quot;: false,
+                &quot;airborne&quot;: true,
+                &quot;airKind&quot;: &quot;ramp&quot;,
+                &quot;trick&quot;: null
+              },
+              &quot;rivals&quot;: [
+                {
+                  &quot;id&quot;: &quot;rival-1&quot;,
+                  &quot;x&quot;: -6.358953130091773,
+                  &quot;z&quot;: -69.2745000000026,
+                  &quot;s&quot;: 405.9161666666672,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.16666785291861963,
+                  &quot;boosting&quot;: true,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-2&quot;,
+                  &quot;x&quot;: 0.7737112057862066,
+                  &quot;z&quot;: -55.85241666666661,
+                  &quot;s&quot;: 392.4940833333312,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.16039812714942348,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-3&quot;,
+                  &quot;x&quot;: -4.718694718236774,
+                  &quot;z&quot;: -21.16151388888892,
+                  &quot;s&quot;: 357.8031805555535,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.08231346467890749,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: true,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-4&quot;,
+                  &quot;x&quot;: 1.671738977215226,
+                  &quot;z&quot;: -21.986161111113347,
+                  &quot;s&quot;: 358.62782777777795,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.039282912071580585,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-5&quot;,
+                  &quot;x&quot;: -1.2996468615365313,
+                  &quot;z&quot;: -17.297500000004163,
+                  &quot;s&quot;: 353.93916666666877,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: 0.36485716605658175,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                }
+              ],
+              &quot;obstacles&quot;: [
+                {
+                  &quot;id&quot;: &quot;ice-peak-22&quot;,
+                  &quot;type&quot;: &quot;ramp&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: 3.1016666666645847,
+                  &quot;s&quot;: 333.54
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-23&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -2.8983333333354153,
+                  &quot;s&quot;: 339.54,
+                  &quot;h&quot;: 2.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-24&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -5.898333333335415,
+                  &quot;s&quot;: 342.54,
+                  &quot;h&quot;: 3.36
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-25&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -8.898333333335415,
+                  &quot;s&quot;: 345.54,
+                  &quot;h&quot;: 3.5
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-26&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -11.898333333335415,
+                  &quot;s&quot;: 348.54,
+                  &quot;h&quot;: 3.31
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-27&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -14.898333333335415,
+                  &quot;s&quot;: 351.54,
+                  &quot;h&quot;: 2.78
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-28&quot;,
+                  &quot;type&quot;: &quot;gate&quot;,
+                  &quot;x&quot;: -0.12,
+                  &quot;z&quot;: -42.898333333335415,
+                  &quot;s&quot;: 379.54
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-29&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -6.9,
+                  &quot;z&quot;: -55.898333333335415,
+                  &quot;s&quot;: 392.54,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-30&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -8.91,
+                  &quot;z&quot;: -58.69833333333537,
+                  &quot;s&quot;: 395.34,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-31&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -9.75,
+                  &quot;z&quot;: -61.49833333333538,
+                  &quot;s&quot;: 398.14,
+                  &quot;h&quot;: 2.39
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-32&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -8.91,
+                  &quot;z&quot;: -64.29833333333539,
+                  &quot;s&quot;: 400.94,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-33&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -6.9,
+                  &quot;z&quot;: -67.0983333333354,
+                  &quot;s&quot;: 403.74,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-34&quot;,
+                  &quot;type&quot;: &quot;gate&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -90.38833333333537,
+                  &quot;s&quot;: 427.03
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-35&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -103.38833333333537,
+                  &quot;s&quot;: 440.03,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-36&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -106.18833333333538,
+                  &quot;s&quot;: 442.83,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-37&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -108.98833333333539,
+                  &quot;s&quot;: 445.63,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-38&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -111.7883333333354,
+                  &quot;s&quot;: 448.43,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-39&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -114.58833333333541,
+                  &quot;s&quot;: 451.23,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-40&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 0.74,
+                  &quot;z&quot;: -129.0283333333354,
+                  &quot;s&quot;: 465.67,
+                  &quot;radius&quot;: 0.89
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-41&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 6.9,
+                  &quot;z&quot;: -143.06833333333537,
+                  &quot;s&quot;: 479.71,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-42&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 8.91,
+                  &quot;z&quot;: -145.86833333333539,
+                  &quot;s&quot;: 482.51,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-43&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 9.75,
+                  &quot;z&quot;: -148.6683333333354,
+                  &quot;s&quot;: 485.31,
+                  &quot;h&quot;: 2.39
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-44&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 8.91,
+                  &quot;z&quot;: -151.4683333333354,
+                  &quot;s&quot;: 488.11,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-45&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 6.9,
+                  &quot;z&quot;: -154.26833333333542,
+                  &quot;s&quot;: 490.91,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-46&quot;,
+                  &quot;type&quot;: &quot;boost&quot;,
+                  &quot;x&quot;: 0.61,
+                  &quot;z&quot;: -169.68833333333538,
+                  &quot;s&quot;: 506.33
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-47&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: -4.61,
+                  &quot;z&quot;: -180.63833333333537,
+                  &quot;s&quot;: 517.28,
+                  &quot;radius&quot;: 0.9
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-48&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 0.71,
+                  &quot;z&quot;: -212.43833333333544,
+                  &quot;s&quot;: 549.08,
+                  &quot;radius&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-49&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 4.14,
+                  &quot;z&quot;: -213.11833333333539,
+                  &quot;s&quot;: 549.76,
+                  &quot;radius&quot;: 0.86
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-50&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -225.9783333333354,
+                  &quot;s&quot;: 562.62,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-51&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -228.77833333333535,
+                  &quot;s&quot;: 565.42,
+                  &quot;h&quot;: 0.85
+                }
+              ],
+              &quot;countdown&quot;: 0,
+              &quot;boostFraction&quot;: 1,
+              &quot;boostReady&quot;: true,
+              &quot;trickReady&quot;: true,
+              &quot;score&quot;: 0,
+              &quot;coins&quot;: 2,
+              &quot;coinTotal&quot;: 125,
+              &quot;trackLength&quot;: 1600
+            },
+            &quot;accepted&quot;: false,
+            &quot;groundedTricks&quot;: 0,
+            &quot;events&quot;: [
+              {
+                &quot;id&quot;: &quot;e131&quot;,
+                &quot;type&quot;: &quot;takeoff&quot;,
+                &quot;riderId&quot;: &quot;player&quot;,
+                &quot;objectId&quot;: &quot;ice-peak-22&quot;
+              }
+            ]
+          }
+        ],
+        &quot;csp&quot;: {
+          &quot;expectedPolicy&quot;: &quot;default-src &#39;self&#39; blob:; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; img-src &#39;self&#39; data: blob:; connect-src &#39;self&#39; blob:; font-src &#39;self&#39;; object-src &#39;none&#39;; base-uri &#39;self&#39;; form-action &#39;none&#39;&quot;,
+          &quot;htmlResponsesSeen&quot;: 1,
+          &quot;violations&quot;: [],
+          &quot;policyErrors&quot;: [],
+          &quot;workers&quot;: [
+            {
+              &quot;url&quot;: &quot;http://127.0.0.1:56318/Bakasun/workout/island/minigames/alpine-draco-worker.mjs&quot;,
+              &quot;hooked&quot;: true,
+              &quot;closed&quot;: true,
+              &quot;waitingForDebugger&quot;: true,
+              &quot;domains&quot;: {
+                &quot;Log.enable&quot;: true,
+                &quot;Audits.enable&quot;: true
+              }
+            },
+            {
+              &quot;url&quot;: &quot;http://127.0.0.1:56318/Bakasun/workout/island/minigames/alpine-draco-worker.mjs&quot;,
+              &quot;hooked&quot;: true,
+              &quot;closed&quot;: true,
+              &quot;waitingForDebugger&quot;: true,
+              &quot;domains&quot;: {
+                &quot;Log.enable&quot;: true,
+                &quot;Audits.enable&quot;: true
+              }
+            },
+            {
+              &quot;url&quot;: &quot;http://127.0.0.1:56318/Bakasun/workout/island/minigames/alpine-draco-worker.mjs&quot;,
+              &quot;hooked&quot;: true,
+              &quot;closed&quot;: true,
+              &quot;waitingForDebugger&quot;: true,
+              &quot;domains&quot;: {
+                &quot;Log.enable&quot;: true,
+                &quot;Audits.enable&quot;: true
+              }
+            }
+          ]
+        },
+        &quot;errors&quot;: [],
+        &quot;httpErrors&quot;: []
+      },
+      {
+        &quot;width&quot;: 390,
+        &quot;height&quot;: 844,
+        &quot;cases&quot;: [
+          {
+            &quot;leadTicks&quot;: 4,
+            &quot;leadMs&quot;: 66.66666666666667,
+            &quot;launchTick&quot;: 1102,
+            &quot;pressTick&quot;: 1098,
+            &quot;before&quot;: {
+              &quot;id&quot;: &quot;player&quot;,
+              &quot;s&quot;: 335.3972222222206,
+              &quot;x&quot;: -3.988970849611754,
+              &quot;vx&quot;: 0.6985189532760379,
+              &quot;speed&quot;: 20,
+              &quot;tank&quot;: 1,
+              &quot;boostTime&quot;: 0,
+              &quot;padTime&quot;: 0,
+              &quot;hitTime&quot;: 0,
+              &quot;height&quot;: 0.9714444444441143,
+              &quot;alt&quot;: 0.9714444444441143,
+              &quot;vy&quot;: 0,
+              &quot;airborne&quot;: false,
+              &quot;airKind&quot;: null,
+              &quot;trick&quot;: null,
+              &quot;trickScore&quot;: 0,
+              &quot;crashes&quot;: 0,
+              &quot;coins&quot;: 5,
+              &quot;finished&quot;: false,
+              &quot;collisions&quot;: 0,
+              &quot;hits&quot;: [],
+              &quot;pads&quot;: [],
+              &quot;gates&quot;: [
+                &quot;ice-peak-0&quot;
+              ]
+            },
+            &quot;control&quot;: {
+              &quot;steer&quot;: 0,
+              &quot;boost&quot;: false,
+              &quot;trick&quot;: &quot;spin&quot;
+            },
+            &quot;secondSample&quot;: {
+              &quot;steer&quot;: 0,
+              &quot;boost&quot;: false,
+              &quot;trick&quot;: null
+            },
+            &quot;touches&quot;: [
+              {
+                &quot;id&quot;: &quot;spin&quot;,
+                &quot;trusted&quot;: true,
+                &quot;pointerType&quot;: &quot;touch&quot;,
+                &quot;timeMs&quot;: 18300,
+                &quot;disabled&quot;: false
+              }
+            ],
+            &quot;atTakeoff&quot;: {
+              &quot;id&quot;: &quot;player&quot;,
+              &quot;s&quot;: 336.73055555555385,
+              &quot;x&quot;: -3.939387882070098,
+              &quot;vx&quot;: 0.7654790216468388,
+              &quot;speed&quot;: 20,
+              &quot;tank&quot;: 1,
+              &quot;boostTime&quot;: 0,
+              &quot;padTime&quot;: 0,
+              &quot;hitTime&quot;: 0,
+              &quot;height&quot;: 1.2,
+              &quot;alt&quot;: 1.2,
+              &quot;vy&quot;: 6.6,
+              &quot;airborne&quot;: true,
+              &quot;airKind&quot;: &quot;ramp&quot;,
+              &quot;trick&quot;: {
+                &quot;id&quot;: &quot;spin&quot;,
+                &quot;t&quot;: 0,
+                &quot;duration&quot;: 0.7
+              },
+              &quot;trickScore&quot;: 0,
+              &quot;crashes&quot;: 0,
+              &quot;coins&quot;: 5,
+              &quot;finished&quot;: false,
+              &quot;collisions&quot;: 0,
+              &quot;hits&quot;: [],
+              &quot;pads&quot;: [],
+              &quot;gates&quot;: [
+                &quot;ice-peak-0&quot;
+              ]
+            },
+            &quot;currentFrame&quot;: {
+              &quot;schemaVersion&quot;: 1,
+              &quot;phase&quot;: &quot;racing&quot;,
+              &quot;timeMs&quot;: 18617,
+              &quot;distanceM&quot;: 341.73055555555356,
+              &quot;remainingM&quot;: 1258.2694444444464,
+              &quot;rank&quot;: 6,
+              &quot;totalRiders&quot;: 6,
+              &quot;speedKmh&quot;: 72,
+              &quot;player&quot;: {
+                &quot;id&quot;: &quot;player&quot;,
+                &quot;x&quot;: -3.818521783255869,
+                &quot;z&quot;: 0,
+                &quot;s&quot;: 341.73055555555356,
+                &quot;height&quot;: 2.349999999999999,
+                &quot;lean&quot;: 0.03559853875053887,
+                &quot;boosting&quot;: false,
+                &quot;hit&quot;: false,
+                &quot;crashed&quot;: false,
+                &quot;landing&quot;: false,
+                &quot;airborne&quot;: true,
+                &quot;airKind&quot;: &quot;ramp&quot;,
+                &quot;trick&quot;: {
+                  &quot;id&quot;: &quot;spin&quot;,
+                  &quot;progress&quot;: 0.35714285714285715
+                }
+              },
+              &quot;rivals&quot;: [
+                {
+                  &quot;id&quot;: &quot;rival-1&quot;,
+                  &quot;x&quot;: -5.952515448142791,
+                  &quot;z&quot;: -59.913611111112345,
+                  &quot;s&quot;: 401.6441666666659,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.38733997302045287,
+                  &quot;boosting&quot;: true,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-2&quot;,
+                  &quot;x&quot;: -0.2188523910815297,
+                  &quot;z&quot;: -48.27036111111107,
+                  &quot;s&quot;: 390.00091666666464,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.06574464707200299,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-3&quot;,
+                  &quot;x&quot;: -3.5609723741282022,
+                  &quot;z&quot;: -21.17500000000058,
+                  &quot;s&quot;: 362.90555555555414,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: 0.02832796152059799,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-4&quot;,
+                  &quot;x&quot;: -1.4249227574735222,
+                  &quot;z&quot;: -14.728500000001816,
+                  &quot;s&quot;: 356.4590555555554,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: 0.276453666916624,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-5&quot;,
+                  &quot;x&quot;: -0.8678224593276547,
+                  &quot;z&quot;: -33.07561111111545,
+                  &quot;s&quot;: 374.806166666669,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.02661755613078026,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                }
+              ],
+              &quot;obstacles&quot;: [
+                {
+                  &quot;id&quot;: &quot;ice-peak-22&quot;,
+                  &quot;type&quot;: &quot;ramp&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: 8.190555555553544,
+                  &quot;s&quot;: 333.54
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-25&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -3.8094444444464557,
+                  &quot;s&quot;: 345.54,
+                  &quot;h&quot;: 3.5
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-26&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -6.809444444446456,
+                  &quot;s&quot;: 348.54,
+                  &quot;h&quot;: 3.31
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-27&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -9.809444444446456,
+                  &quot;s&quot;: 351.54,
+                  &quot;h&quot;: 2.78
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-28&quot;,
+                  &quot;type&quot;: &quot;gate&quot;,
+                  &quot;x&quot;: -0.12,
+                  &quot;z&quot;: -37.809444444446456,
+                  &quot;s&quot;: 379.54
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-29&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -6.9,
+                  &quot;z&quot;: -50.809444444446456,
+                  &quot;s&quot;: 392.54,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-30&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -8.91,
+                  &quot;z&quot;: -53.60944444444641,
+                  &quot;s&quot;: 395.34,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-31&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -9.75,
+                  &quot;z&quot;: -56.40944444444642,
+                  &quot;s&quot;: 398.14,
+                  &quot;h&quot;: 2.39
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-32&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -8.91,
+                  &quot;z&quot;: -59.20944444444643,
+                  &quot;s&quot;: 400.94,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-33&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -6.9,
+                  &quot;z&quot;: -62.009444444446444,
+                  &quot;s&quot;: 403.74,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-34&quot;,
+                  &quot;type&quot;: &quot;gate&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -85.29944444444641,
+                  &quot;s&quot;: 427.03
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-35&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -98.29944444444641,
+                  &quot;s&quot;: 440.03,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-36&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -101.09944444444642,
+                  &quot;s&quot;: 442.83,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-37&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -103.89944444444643,
+                  &quot;s&quot;: 445.63,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-38&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -106.69944444444644,
+                  &quot;s&quot;: 448.43,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-39&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -109.49944444444645,
+                  &quot;s&quot;: 451.23,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-40&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 0.74,
+                  &quot;z&quot;: -123.93944444444645,
+                  &quot;s&quot;: 465.67,
+                  &quot;radius&quot;: 0.89
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-41&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 6.9,
+                  &quot;z&quot;: -137.97944444444641,
+                  &quot;s&quot;: 479.71,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-42&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 8.91,
+                  &quot;z&quot;: -140.77944444444643,
+                  &quot;s&quot;: 482.51,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-43&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 9.75,
+                  &quot;z&quot;: -143.57944444444644,
+                  &quot;s&quot;: 485.31,
+                  &quot;h&quot;: 2.39
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-44&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 8.91,
+                  &quot;z&quot;: -146.37944444444645,
+                  &quot;s&quot;: 488.11,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-45&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 6.9,
+                  &quot;z&quot;: -149.17944444444646,
+                  &quot;s&quot;: 490.91,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-46&quot;,
+                  &quot;type&quot;: &quot;boost&quot;,
+                  &quot;x&quot;: 0.61,
+                  &quot;z&quot;: -164.59944444444642,
+                  &quot;s&quot;: 506.33
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-47&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: -4.61,
+                  &quot;z&quot;: -175.5494444444464,
+                  &quot;s&quot;: 517.28,
+                  &quot;radius&quot;: 0.9
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-48&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 0.71,
+                  &quot;z&quot;: -207.34944444444648,
+                  &quot;s&quot;: 549.08,
+                  &quot;radius&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-49&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 4.14,
+                  &quot;z&quot;: -208.02944444444643,
+                  &quot;s&quot;: 549.76,
+                  &quot;radius&quot;: 0.86
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-50&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -220.88944444444644,
+                  &quot;s&quot;: 562.62,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-51&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -223.6894444444464,
+                  &quot;s&quot;: 565.42,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-52&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -226.48944444444646,
+                  &quot;s&quot;: 568.22,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-53&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -229.28944444444642,
+                  &quot;s&quot;: 571.02,
+                  &quot;h&quot;: 0.85
+                }
+              ],
+              &quot;countdown&quot;: 0,
+              &quot;boostFraction&quot;: 1,
+              &quot;boostReady&quot;: true,
+              &quot;trickReady&quot;: false,
+              &quot;score&quot;: 0,
+              &quot;coins&quot;: 7,
+              &quot;coinTotal&quot;: 125,
+              &quot;trackLength&quot;: 1600
+            },
+            &quot;accepted&quot;: true,
+            &quot;groundedTricks&quot;: 0,
+            &quot;events&quot;: [
+              {
+                &quot;id&quot;: &quot;e65&quot;,
+                &quot;type&quot;: &quot;takeoff&quot;,
+                &quot;riderId&quot;: &quot;player&quot;,
+                &quot;objectId&quot;: &quot;ice-peak-22&quot;
+              },
+              {
+                &quot;id&quot;: &quot;e66&quot;,
+                &quot;type&quot;: &quot;trick-start&quot;,
+                &quot;riderId&quot;: &quot;player&quot;,
+                &quot;objectId&quot;: &quot;spin&quot;
+              }
+            ],
+            &quot;screenshot&quot;: &quot;touch-spin-390x844.png&quot;,
+            &quot;render&quot;: {
+              &quot;calls&quot;: 69,
+              &quot;triangles&quot;: 119467,
+              &quot;geometries&quot;: 78,
+              &quot;textures&quot;: 15,
+              &quot;props&quot;: 8,
+              &quot;chunks&quot;: 51,
+              &quot;visibleChunks&quot;: 12,
+              &quot;coins&quot;: 22,
+              &quot;trees&quot;: 240,
+              &quot;nearTrees&quot;: 72,
+              &quot;farTrees&quot;: 45,
+              &quot;distantTrees&quot;: 123,
+              &quot;shadowTrees&quot;: 22,
+              &quot;treeVariants&quot;: 3,
+              &quot;treeDeckClearance&quot;: 0.7,
+              &quot;rocks&quot;: 13,
+              &quot;fences&quot;: 54,
+              &quot;designWorld&quot;: true,
+              &quot;designModels&quot;: 7,
+              &quot;designSurface&quot;: &quot;ski-slope&quot;,
+              &quot;background&quot;: &quot;portrait&quot;,
+              &quot;quality&quot;: &quot;high&quot;,
+              &quot;disposed&quot;: false,
+              &quot;mode&quot;: &quot;model&quot;,
+              &quot;grooves&quot;: &quot;paired-skis&quot;,
+              &quot;grooveCapacity&quot;: 4200,
+              &quot;feel&quot;: {
+                &quot;source&quot;: &quot;design/feel/alpine.json&quot;,
+                &quot;speedFraction&quot;: 0.6451612903225806,
+                &quot;fovAdd&quot;: 1.9731048973078615,
+                &quot;lineOpacity&quot;: 0,
+                &quot;lineVisible&quot;: false,
+                &quot;lineTrigger&quot;: false,
+                &quot;lineDuration&quot;: 0.6,
+                &quot;lineFraction&quot;: 0.12,
+                &quot;carve&quot;: 0,
+                &quot;lookAhead&quot;: 17.741935483870968,
+                &quot;bank&quot;: 0,
+                &quot;landingPulse&quot;: 0,
+                &quot;landingShakeFraction&quot;: 0,
+                &quot;landings&quot;: 0
+              },
+              &quot;vfx&quot;: {
+                &quot;active&quot;: 0,
+                &quot;capacity&quot;: 3,
+                &quot;textures&quot;: 3,
+                &quot;textureBytes&quot;: 3145728,
+                &quot;spawned&quot;: 0,
+                &quot;cameraActive&quot;: false,
+                &quot;cameraRuns&quot;: 0,
+                &quot;cameraDuration&quot;: 1.4,
+                &quot;sourceCameraDuration&quot;: 5.6,
+                &quot;warmed&quot;: true,
+                &quot;disposed&quot;: false
+              },
+              &quot;character&quot;: {
+                &quot;mode&quot;: &quot;design-skier&quot;,
+                &quot;clips&quot;: 12,
+                &quot;bones&quot;: 20,
+                &quot;trianglesPerRider&quot;: 1920,
+                &quot;motionScale&quot;: 0.6184251931233287,
+                &quot;bakeMs&quot;: 472.69999999552965,
+                &quot;loadMs&quot;: 540.7999999970198,
+                &quot;actors&quot;: 6
+              },
+              &quot;motion&quot;: {
+                &quot;state&quot;: &quot;air&quot;,
+                &quot;clipTime&quot;: 0.1,
+                &quot;sampledFrames&quot;: 24,
+                &quot;bakedClips&quot;: 12,
+                &quot;carveHeld&quot;: false,
+                &quot;carveStrength&quot;: 0
+              },
+              &quot;rockTexture&quot;: &quot;loaded&quot;,
+              &quot;mobileProfile&quot;: true,
+              &quot;pixelRatio&quot;: 1,
+              &quot;fov&quot;: 68.908,
+              &quot;interpolation&quot;: true,
+              &quot;lastSwitch&quot;: {
+                &quot;quality&quot;: &quot;high&quot;,
+                &quot;pixelRatioMs&quot;: 0.1,
+                &quot;shadowMs&quot;: 0,
+                &quot;resizeMs&quot;: 0,
+                &quot;totalMs&quot;: 0.1
+              }
+            },
+            &quot;hud&quot;: {
+              &quot;viewport&quot;: 390,
+              &quot;outer&quot;: {
+                &quot;left&quot;: 26,
+                &quot;right&quot;: 156
+              },
+              &quot;panels&quot;: [
+                {
+                  &quot;left&quot;: 26,
+                  &quot;right&quot;: 156,
+                  &quot;width&quot;: 130,
+                  &quot;height&quot;: 68.1875
+                },
+                {
+                  &quot;left&quot;: 26,
+                  &quot;right&quot;: 156,
+                  &quot;width&quot;: 130,
+                  &quot;height&quot;: 38.890625
+                }
+              ],
+              &quot;speed&quot;: &quot;72&quot;,
+              &quot;expectedSpeed&quot;: &quot;72&quot;,
+              &quot;tank&quot;: &quot;100&quot;,
+              &quot;expectedTank&quot;: &quot;100&quot;
+            }
+          },
+          {
+            &quot;leadTicks&quot;: 12,
+            &quot;leadMs&quot;: 200,
+            &quot;launchTick&quot;: 1124,
+            &quot;pressTick&quot;: 1112,
+            &quot;before&quot;: {
+              &quot;id&quot;: &quot;player&quot;,
+              &quot;s&quot;: 332.64166666666483,
+              &quot;x&quot;: -4.065487430091802,
+              &quot;vx&quot;: 0.3244997553811998,
+              &quot;speed&quot;: 20,
+              &quot;tank&quot;: 1,
+              &quot;boostTime&quot;: 0,
+              &quot;padTime&quot;: 0,
+              &quot;hitTime&quot;: 0,
+              &quot;height&quot;: 0.4203333333329624,
+              &quot;alt&quot;: 0.4203333333329624,
+              &quot;vy&quot;: 0,
+              &quot;airborne&quot;: false,
+              &quot;airKind&quot;: null,
+              &quot;trick&quot;: null,
+              &quot;trickScore&quot;: 0,
+              &quot;crashes&quot;: 0,
+              &quot;coins&quot;: 2,
+              &quot;finished&quot;: false,
+              &quot;collisions&quot;: 2,
+              &quot;hits&quot;: [
+                &quot;ice-peak-7&quot;,
+                &quot;ice-peak-8&quot;
+              ],
+              &quot;pads&quot;: [],
+              &quot;gates&quot;: []
+            },
+            &quot;control&quot;: {
+              &quot;steer&quot;: 0,
+              &quot;boost&quot;: false,
+              &quot;trick&quot;: &quot;spin&quot;
+            },
+            &quot;secondSample&quot;: {
+              &quot;steer&quot;: 0,
+              &quot;boost&quot;: false,
+              &quot;trick&quot;: null
+            },
+            &quot;touches&quot;: [
+              {
+                &quot;id&quot;: &quot;spin&quot;,
+                &quot;trusted&quot;: true,
+                &quot;pointerType&quot;: &quot;touch&quot;,
+                &quot;timeMs&quot;: 18533,
+                &quot;disabled&quot;: false
+              }
+            ],
+            &quot;atTakeoff&quot;: {
+              &quot;id&quot;: &quot;player&quot;,
+              &quot;s&quot;: 336.6416666666646,
+              &quot;x&quot;: -3.9394143997864064,
+              &quot;vx&quot;: 0.7654774321126117,
+              &quot;speed&quot;: 20,
+              &quot;tank&quot;: 1,
+              &quot;boostTime&quot;: 0,
+              &quot;padTime&quot;: 0,
+              &quot;hitTime&quot;: 0,
+              &quot;height&quot;: 1.2,
+              &quot;alt&quot;: 1.2,
+              &quot;vy&quot;: 6.6,
+              &quot;airborne&quot;: true,
+              &quot;airKind&quot;: &quot;ramp&quot;,
+              &quot;trick&quot;: null,
+              &quot;trickScore&quot;: 0,
+              &quot;crashes&quot;: 0,
+              &quot;coins&quot;: 2,
+              &quot;finished&quot;: false,
+              &quot;collisions&quot;: 2,
+              &quot;hits&quot;: [
+                &quot;ice-peak-7&quot;,
+                &quot;ice-peak-8&quot;
+              ],
+              &quot;pads&quot;: [],
+              &quot;gates&quot;: []
+            },
+            &quot;currentFrame&quot;: {
+              &quot;schemaVersion&quot;: 1,
+              &quot;phase&quot;: &quot;racing&quot;,
+              &quot;timeMs&quot;: 18733,
+              &quot;distanceM&quot;: 336.6416666666646,
+              &quot;remainingM&quot;: 1263.3583333333354,
+              &quot;rank&quot;: 6,
+              &quot;totalRiders&quot;: 6,
+              &quot;speedKmh&quot;: 72,
+              &quot;player&quot;: {
+                &quot;id&quot;: &quot;player&quot;,
+                &quot;x&quot;: -3.9394143997864064,
+                &quot;z&quot;: 0,
+                &quot;s&quot;: 336.6416666666646,
+                &quot;height&quot;: 1.2,
+                &quot;lean&quot;: 0.09005616848383667,
+                &quot;boosting&quot;: false,
+                &quot;hit&quot;: false,
+                &quot;crashed&quot;: false,
+                &quot;landing&quot;: false,
+                &quot;airborne&quot;: true,
+                &quot;airKind&quot;: &quot;ramp&quot;,
+                &quot;trick&quot;: null
+              },
+              &quot;rivals&quot;: [
+                {
+                  &quot;id&quot;: &quot;rival-1&quot;,
+                  &quot;x&quot;: -6.358953130091773,
+                  &quot;z&quot;: -69.2745000000026,
+                  &quot;s&quot;: 405.9161666666672,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.16666785291861963,
+                  &quot;boosting&quot;: true,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-2&quot;,
+                  &quot;x&quot;: 0.7737112057862066,
+                  &quot;z&quot;: -55.85241666666661,
+                  &quot;s&quot;: 392.4940833333312,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.16039812714942348,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-3&quot;,
+                  &quot;x&quot;: -4.718694718236774,
+                  &quot;z&quot;: -21.16151388888892,
+                  &quot;s&quot;: 357.8031805555535,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.08231346467890749,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: true,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-4&quot;,
+                  &quot;x&quot;: 1.671738977215226,
+                  &quot;z&quot;: -21.986161111113347,
+                  &quot;s&quot;: 358.62782777777795,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: -0.039282912071580585,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                },
+                {
+                  &quot;id&quot;: &quot;rival-5&quot;,
+                  &quot;x&quot;: -1.2996468615365313,
+                  &quot;z&quot;: -17.297500000004163,
+                  &quot;s&quot;: 353.93916666666877,
+                  &quot;height&quot;: 0,
+                  &quot;lean&quot;: 0.36485716605658175,
+                  &quot;boosting&quot;: false,
+                  &quot;hit&quot;: false,
+                  &quot;crashed&quot;: false,
+                  &quot;landing&quot;: false,
+                  &quot;airborne&quot;: false,
+                  &quot;airKind&quot;: null,
+                  &quot;trick&quot;: null
+                }
+              ],
+              &quot;obstacles&quot;: [
+                {
+                  &quot;id&quot;: &quot;ice-peak-22&quot;,
+                  &quot;type&quot;: &quot;ramp&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: 3.1016666666645847,
+                  &quot;s&quot;: 333.54
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-23&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -2.8983333333354153,
+                  &quot;s&quot;: 339.54,
+                  &quot;h&quot;: 2.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-24&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -5.898333333335415,
+                  &quot;s&quot;: 342.54,
+                  &quot;h&quot;: 3.36
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-25&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -8.898333333335415,
+                  &quot;s&quot;: 345.54,
+                  &quot;h&quot;: 3.5
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-26&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -11.898333333335415,
+                  &quot;s&quot;: 348.54,
+                  &quot;h&quot;: 3.31
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-27&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -14.898333333335415,
+                  &quot;s&quot;: 351.54,
+                  &quot;h&quot;: 2.78
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-28&quot;,
+                  &quot;type&quot;: &quot;gate&quot;,
+                  &quot;x&quot;: -0.12,
+                  &quot;z&quot;: -42.898333333335415,
+                  &quot;s&quot;: 379.54
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-29&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -6.9,
+                  &quot;z&quot;: -55.898333333335415,
+                  &quot;s&quot;: 392.54,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-30&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -8.91,
+                  &quot;z&quot;: -58.69833333333537,
+                  &quot;s&quot;: 395.34,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-31&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -9.75,
+                  &quot;z&quot;: -61.49833333333538,
+                  &quot;s&quot;: 398.14,
+                  &quot;h&quot;: 2.39
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-32&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -8.91,
+                  &quot;z&quot;: -64.29833333333539,
+                  &quot;s&quot;: 400.94,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-33&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -6.9,
+                  &quot;z&quot;: -67.0983333333354,
+                  &quot;s&quot;: 403.74,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-34&quot;,
+                  &quot;type&quot;: &quot;gate&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -90.38833333333537,
+                  &quot;s&quot;: 427.03
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-35&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -103.38833333333537,
+                  &quot;s&quot;: 440.03,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-36&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -106.18833333333538,
+                  &quot;s&quot;: 442.83,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-37&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -108.98833333333539,
+                  &quot;s&quot;: 445.63,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-38&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -111.7883333333354,
+                  &quot;s&quot;: 448.43,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-39&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -2.21,
+                  &quot;z&quot;: -114.58833333333541,
+                  &quot;s&quot;: 451.23,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-40&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 0.74,
+                  &quot;z&quot;: -129.0283333333354,
+                  &quot;s&quot;: 465.67,
+                  &quot;radius&quot;: 0.89
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-41&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 6.9,
+                  &quot;z&quot;: -143.06833333333537,
+                  &quot;s&quot;: 479.71,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-42&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 8.91,
+                  &quot;z&quot;: -145.86833333333539,
+                  &quot;s&quot;: 482.51,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-43&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 9.75,
+                  &quot;z&quot;: -148.6683333333354,
+                  &quot;s&quot;: 485.31,
+                  &quot;h&quot;: 2.39
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-44&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 8.91,
+                  &quot;z&quot;: -151.4683333333354,
+                  &quot;s&quot;: 488.11,
+                  &quot;h&quot;: 1.61
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-45&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: 6.9,
+                  &quot;z&quot;: -154.26833333333542,
+                  &quot;s&quot;: 490.91,
+                  &quot;h&quot;: 0.87
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-46&quot;,
+                  &quot;type&quot;: &quot;boost&quot;,
+                  &quot;x&quot;: 0.61,
+                  &quot;z&quot;: -169.68833333333538,
+                  &quot;s&quot;: 506.33
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-47&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: -4.61,
+                  &quot;z&quot;: -180.63833333333537,
+                  &quot;s&quot;: 517.28,
+                  &quot;radius&quot;: 0.9
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-48&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 0.71,
+                  &quot;z&quot;: -212.43833333333544,
+                  &quot;s&quot;: 549.08,
+                  &quot;radius&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-49&quot;,
+                  &quot;type&quot;: &quot;rock&quot;,
+                  &quot;x&quot;: 4.14,
+                  &quot;z&quot;: -213.11833333333539,
+                  &quot;s&quot;: 549.76,
+                  &quot;radius&quot;: 0.86
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-50&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -225.9783333333354,
+                  &quot;s&quot;: 562.62,
+                  &quot;h&quot;: 0.85
+                },
+                {
+                  &quot;id&quot;: &quot;ice-peak-51&quot;,
+                  &quot;type&quot;: &quot;coin&quot;,
+                  &quot;x&quot;: -4.2,
+                  &quot;z&quot;: -228.77833333333535,
+                  &quot;s&quot;: 565.42,
+                  &quot;h&quot;: 0.85
+                }
+              ],
+              &quot;countdown&quot;: 0,
+              &quot;boostFraction&quot;: 1,
+              &quot;boostReady&quot;: true,
+              &quot;trickReady&quot;: true,
+              &quot;score&quot;: 0,
+              &quot;coins&quot;: 2,
+              &quot;coinTotal&quot;: 125,
+              &quot;trackLength&quot;: 1600
+            },
+            &quot;accepted&quot;: false,
+            &quot;groundedTricks&quot;: 0,
+            &quot;events&quot;: [
+              {
+                &quot;id&quot;: &quot;e131&quot;,
+                &quot;type&quot;: &quot;takeoff&quot;,
+                &quot;riderId&quot;: &quot;player&quot;,
+                &quot;objectId&quot;: &quot;ice-peak-22&quot;
+              }
+            ]
+          }
+        ],
+        &quot;csp&quot;: {
+          &quot;expectedPolicy&quot;: &quot;default-src &#39;self&#39; blob:; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; img-src &#39;self&#39; data: blob:; connect-src &#39;self&#39; blob:; font-src &#39;self&#39;; object-src &#39;none&#39;; base-uri &#39;self&#39;; form-action &#39;none&#39;&quot;,
+          &quot;htmlResponsesSeen&quot;: 1,
+          &quot;violations&quot;: [],
+          &quot;policyErrors&quot;: [],
+          &quot;workers&quot;: [
+            {
+              &quot;url&quot;: &quot;http://127.0.0.1:56318/Bakasun/workout/island/minigames/alpine-draco-worker.mjs&quot;,
+              &quot;hooked&quot;: true,
+              &quot;closed&quot;: true,
+              &quot;waitingForDebugger&quot;: true,
+              &quot;domains&quot;: {
+                &quot;Log.enable&quot;: true,
+                &quot;Audits.enable&quot;: true
+              }
+            },
+            {
+              &quot;url&quot;: &quot;http://127.0.0.1:56318/Bakasun/workout/island/minigames/alpine-draco-worker.mjs&quot;,
+              &quot;hooked&quot;: true,
+              &quot;closed&quot;: true,
+              &quot;waitingForDebugger&quot;: true,
+              &quot;domains&quot;: {
+                &quot;Log.enable&quot;: true,
+                &quot;Audits.enable&quot;: true
+              }
+            },
+            {
+              &quot;url&quot;: &quot;http://127.0.0.1:56318/Bakasun/workout/island/minigames/alpine-draco-worker.mjs&quot;,
+              &quot;hooked&quot;: true,
+              &quot;closed&quot;: true,
+              &quot;waitingForDebugger&quot;: true,
+              &quot;domains&quot;: {
+                &quot;Log.enable&quot;: true,
+                &quot;Audits.enable&quot;: true
+              }
+            }
+          ]
+        },
+        &quot;errors&quot;: [],
+        &quot;httpErrors&quot;: []
+      }
+    ]
+  },
+  &quot;scope&quot;: {
+    &quot;status&quot;: &quot;passed&quot;,
+    &quot;comparisonBase&quot;: &quot;23d79d50&quot;,
+    &quot;comparisonBasis&quot;: &quot;Own changes relative to local prerequisite PR212 head, not origin/main; the draft main-relative PR still inherits prerequisite release/tag changes until PR212 merges.&quot;,
+    &quot;independentReview&quot;: {
+      &quot;codeCommit&quot;: &quot;6e8cef14e39f3009ebca81d35df5e98900feb13f&quot;,
+      &quot;releaseConfigResultRecordsTrackPersistenceUnchanged&quot;: true,
+      &quot;allVersionTagMultisetsIdentical&quot;: true,
+      &quot;scoringMaxSpeedCourseCollisionClocksUntouched&quot;: true,
+      &quot;existingBrowserAssertionsRetained&quot;: true
+    },
+    &quot;allowed&quot;: &quot;Alpine runtime, test infrastructure and ski QA evidence&quot;,
+    &quot;resultContractChanged&quot;: false,
+    &quot;recordsChanged&quot;: false,
+    &quot;savesChanged&quot;: false,
+    &quot;maxSpeedChanged&quot;: false,
+    &quot;coursePhysicsChanged&quot;: false,
+    &quot;releaseFilesChanged&quot;: false,
+    &quot;versionTagsChanged&quot;: false,
+    &quot;existingTestsWeakened&quot;: false
+  }
+}</pre></details></section>
+ <section class="panel"><h2>צילומי הסקי בשני הכיוונים</h2><p class="meta">צילומים במידות המקור, לאורך ולרוחב, לבדיקת מגע, מסגור וקריאות.</p><div class="gallery"><figure class="landscape"><a href="ski-844x390.png"><img src="ski-844x390.png" alt="משחק הסקי ב־844 על 390 פיקסלים" width="844" height="390" loading="lazy"></a><figcaption><bdi dir="ltr">844×390</bdi> · צילום שמור</figcaption></figure><figure class="portrait"><a href="ski-390x844.png"><img src="ski-390x844.png" alt="משחק הסקי ב־390 על 844 פיקסלים" width="390" height="844" loading="lazy"></a><figcaption><bdi dir="ltr">390×844</bdi> · צילום שמור</figcaption></figure></div></section>
+ <section class="panel"><h2>בקשת המיזוג והגרסה הבאה</h2><p>בסיס העבודה המקומי <code>23d79d50</code> כולל את תלות <a href="https://github.com/roynaor-work/Bakasun/pull/212">PR #212</a>, שטרם מוזגה בעת פתיחת העבודה. המסירה היא בקשת מיזוג בטיוטה, עם רענון בסיס לפני מיזוג.</p><p><a href="https://github.com/roynaor-work/Bakasun/pull/220">פתיחת בקשת המיזוג</a></p><ol><li>להשלים את התלות ב־main ולרענן את בסיס הענף, ואז לבדוק שההפרש הסופי כולל רק את העבודה המאושרת.</li><li>לעיין בתוצאות CI, בנתוני CSP ובבדיקות שני כיווני הטלפון, כולל הממצאים שנשארו פתוחים.</li><li>בהוצאת גרסה נפרדת, לעדכן את הגרסה המרכזית ותגי הטעינה לפי נוהל השחרור, ולבדוק cache וטעינה נקייה. לא בוצעה העלאת גרסה כחלק מעבודה זו.</li></ol></section>
+ </main><footer>Alpine Rush · סיכום מבוסס קובצי ראיות · 31.10.2026 · חבילת ראיות ציבורית מצומצמת; לוגים מלאים נשמרים בדוח המקומי</footer></body></html>

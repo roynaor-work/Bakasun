@@ -1,0 +1,119 @@
+{
+  "baselineRef": "23d79d50",
+  "implementation": "fixed-tick input acceptance and authored presentation only; no speed/collision/score/result changes",
+  "before": {
+    "launchTick": 191,
+    "trickBuffer": [
+      {
+        "leadTicks": 1,
+        "leadMs": 16.666666666666668,
+        "accepted": false,
+        "airborne": true,
+        "landedScore": 0
+      },
+      {
+        "leadTicks": 4,
+        "leadMs": 66.66666666666667,
+        "accepted": false,
+        "airborne": true,
+        "landedScore": 0
+      },
+      {
+        "leadTicks": 7,
+        "leadMs": 116.66666666666667,
+        "accepted": false,
+        "airborne": true,
+        "landedScore": 0
+      },
+      {
+        "leadTicks": 8,
+        "leadMs": 133.33333333333334,
+        "accepted": false,
+        "airborne": true,
+        "landedScore": 0
+      },
+      {
+        "leadTicks": 30,
+        "leadMs": 500,
+        "accepted": false,
+        "airborne": true,
+        "landedScore": 0
+      }
+    ],
+    "controls": {
+      "oppositeKeysWhileStickHeld": 0.5,
+      "releasedStickSteer": 1,
+      "oldDragPointerRetained": true
+    },
+    "motion": {
+      "neutralPulsesDuring120HeldFrames": 5,
+      "sustainedQuaternion": [
+        0.03162098675966263,
+        0.04549352824687958,
+        -0.06339053064584732,
+        0.9964497685432434
+      ],
+      "sideChangeFrames": 15,
+      "sideChangeMs": 250,
+      "takeoffState": "air"
+    }
+  },
+  "after": {
+    "launchTick": 191,
+    "trickBuffer": [
+      {
+        "leadTicks": 1,
+        "leadMs": 16.666666666666668,
+        "accepted": true,
+        "airborne": true,
+        "landedScore": 150
+      },
+      {
+        "leadTicks": 4,
+        "leadMs": 66.66666666666667,
+        "accepted": true,
+        "airborne": true,
+        "landedScore": 150
+      },
+      {
+        "leadTicks": 7,
+        "leadMs": 116.66666666666667,
+        "accepted": true,
+        "airborne": true,
+        "landedScore": 150
+      },
+      {
+        "leadTicks": 8,
+        "leadMs": 133.33333333333334,
+        "accepted": false,
+        "airborne": true,
+        "landedScore": 0
+      },
+      {
+        "leadTicks": 30,
+        "leadMs": 500,
+        "accepted": false,
+        "airborne": true,
+        "landedScore": 0
+      }
+    ],
+    "controls": {
+      "oppositeKeysWhileStickHeld": 0,
+      "releasedStickSteer": 0,
+      "oldDragPointerRetained": false
+    },
+    "motion": {
+      "neutralPulsesDuring120HeldFrames": 0,
+      "sustainedQuaternion": [
+        0.02097679302096367,
+        0.098587267100811,
+        -0.13775435090065002,
+        0.9853244423866272
+      ],
+      "sideChangeFrames": 1,
+      "sideChangeMs": 16.666666666666668,
+      "takeoffState": "air"
+    }
+  },
+  "unbufferedRaceResultUnchanged": true
+}

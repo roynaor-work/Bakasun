@@ -1,0 +1,176 @@
+[
+  {
+    "name": "blank-unprotected-harness-is-failure",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 0,
+    "harnessRejected": true,
+    "violationCount": 0,
+    "policyErrorCount": 0,
+    "observations": []
+  },
+  {
+    "name": "blocked-inline",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "harnessRejected": false,
+    "violationCount": 4,
+    "policyErrorCount": 0,
+    "observations": [
+      {
+        "kind": "console"
+      },
+      {
+        "kind": "chromium-log",
+        "lineNumber": 0
+      },
+      {
+        "kind": "chromium-audit",
+        "directive": "script-src-elem",
+        "isReportOnly": false
+      },
+      {
+        "kind": "event",
+        "directive": "script-src-elem",
+        "blockedURI": "inline",
+        "lineNumber": 1,
+        "disposition": "enforce"
+      }
+    ]
+  },
+  {
+    "name": "blocked-blob-worker",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "harnessRejected": false,
+    "violationCount": 4,
+    "policyErrorCount": 0,
+    "observations": [
+      {
+        "kind": "console"
+      },
+      {
+        "kind": "chromium-log",
+        "lineNumber": 2
+      },
+      {
+        "kind": "chromium-audit",
+        "directive": "worker-src",
+        "isReportOnly": false
+      },
+      {
+        "kind": "event",
+        "directive": "worker-src",
+        "lineNumber": 3,
+        "disposition": "enforce"
+      }
+    ]
+  },
+  {
+    "name": "blocked-worker-startup-eval",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "harnessRejected": false,
+    "violationCount": 1,
+    "policyErrorCount": 0,
+    "observations": [
+      {
+        "kind": "worker-audit",
+        "directive": "script-src",
+        "isReportOnly": false
+      }
+    ]
+  },
+  {
+    "name": "blocked-child-frame-inline",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 2,
+    "harnessRejected": false,
+    "violationCount": 4,
+    "policyErrorCount": 0,
+    "observations": [
+      {
+        "kind": "console"
+      },
+      {
+        "kind": "chromium-log",
+        "lineNumber": 0
+      },
+      {
+        "kind": "chromium-audit",
+        "directive": "script-src-elem",
+        "isReportOnly": false
+      },
+      {
+        "kind": "event",
+        "directive": "script-src-elem",
+        "blockedURI": "inline",
+        "lineNumber": 1,
+        "disposition": "enforce"
+      }
+    ]
+  },
+  {
+    "name": "report-only-is-failure",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "harnessRejected": false,
+    "violationCount": 4,
+    "policyErrorCount": 0,
+    "observations": [
+      {
+        "kind": "console"
+      },
+      {
+        "kind": "chromium-log",
+        "lineNumber": 0
+      },
+      {
+        "kind": "chromium-audit",
+        "directive": "script-src-elem",
+        "isReportOnly": true
+      },
+      {
+        "kind": "event",
+        "directive": "script-src-elem",
+        "lineNumber": 1,
+        "disposition": "report"
+      }
+    ]
+  },
+  {
+    "name": "different-harness-policy-is-failure",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "harnessRejected": false,
+    "violationCount": 0,
+    "policyErrorCount": 1,
+    "observations": []
+  },
+  {
+    "name": "static-alpine-draco",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "harnessRejected": false,
+    "violationCount": 0,
+    "policyErrorCount": 0,
+    "observations": []
+  },
+  {
+    "name": "alpine-session-start-result",
+    "harnessRejected": false,
+    "violationCount": 0,
+    "policyErrorCount": 0,
+    "loaded": true,
+    "phase": "countdown",
+    "characterClips": 12
+  },
+  {
+    "name": "alpine-session-start",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 2,
+    "harnessRejected": false,
+    "violationCount": 0,
+    "policyErrorCount": 0,
+    "observations": []
+  }
+]
