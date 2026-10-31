@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "command": "npm test",
+  "exitCode": 1,
+  "counts": {
+    "tests": 2901,
+    "pass": 2862,
+    "fail": 1,
+    "skipped": 38,
+    "cancelled": 0,
+    "todo": 0
+  },
+  "failure": {
+    "file": "tests/island-g7.test.mjs",
+    "line": 44,
+    "name": "G7 each of the five playable games declares landscape in the shared shell config",
+    "actual": "any",
+    "expected": "landscape",
+    "cause": "Existing main sets soccer orientation to any; test still requires landscape.",
+    "reproducedOnUnmodifiedMain": true,
+    "baselineCommand": "node --test tests/island-g7.test.mjs",
+    "baselineCounts": {
+      "tests": 39,
+      "pass": 38,
+      "fail": 1
+    }
+  },
+  "retarget": {
+    "command": "node --test workout/island/design/viewer/test-retarget.mjs",
+    "exitCode": 0,
+    "pass": true
+  },
+  "runtime": {
+    "node": "v24.19.0",
+    "browser": {
+      "version": "151.0.7922.173",
+      "channel": "bundled-chromium",
+      "executable": "/usr/bin/chromium"
+    },
+    "networkPermission": "Enabled for localhost browser testing and Node child-process tests; no external requests permitted by viewer."
+  },
+  "scope": "New files only under workout/island/design/motion2/alpine; baseline tests, logic, configuration and acceptance thresholds unchanged."
+}

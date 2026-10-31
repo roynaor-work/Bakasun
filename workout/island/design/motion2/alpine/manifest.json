@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "kind": "alpine-motion-extension",
+  "asset": "alpine.json",
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "baseBranch": "main",
+  "license": "CC0-1.0",
+  "sources": [
+    {
+      "path": "workout/island/design/motion/alpine.json",
+      "sha256": "c6fc39a0b465d0dc74607e9af391c0736148042204e44942068914538d29dc87"
+    },
+    {
+      "path": "workout/island/design/characters/rig.json",
+      "sha256": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2"
+    },
+    {
+      "path": "workout/island/design/viewer/retarget-map.json",
+      "sha256": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78"
+    },
+    {
+      "path": "workout/island/design/viewer/test-viewer.mjs",
+      "sha256": "c3ec3499bcf042120511ff1d2cb05fa691f6002e2d0c3f87d4a1ff4ac6ccb8c0"
+    },
+    {
+      "path": "workout/island/design/viewer/checks.js",
+      "sha256": "b7b95579e46de1b2693d5cb52f8558ed232066a8b087b5c420f46b7e7cc745b8"
+    }
+  ],
+  "clipCount": 18,
+  "keyframeCount": 1649,
+  "clips": [
+    "tuck",
+    "sharp_turn_left",
+    "sharp_turn_right",
+    "brake",
+    "air_grab",
+    "air_spin_180",
+    "air_spin_360",
+    "air_easy_flip",
+    "land_perfect",
+    "land_bad_recover",
+    "fall_forward",
+    "recover_forward",
+    "fall_backward",
+    "recover_backward",
+    "fall_side",
+    "recover_side",
+    "finish_celebrate",
+    "start_gate"
+  ],
+  "composition": {
+    "mergeStates": "Reject duplicate names; add extension states to base states.",
+    "transitions": "Append explicit recommendations before base wildcard fall/result/reset rules; keep base priorities.",
+    "eventInputs": "Union of base and extension input names.",
+    "initialState": "Keep the existing game initial state; start_gate is an optional presentation entry.",
+    "runtimeIntegration": "Assets only; no runtime loader, gameplay code or version query strings changed."
+  },
+  "contactUnits": {
+    "time": "normalized [0,1]",
+    "atSeconds": "time * durationSeconds",
+    "supportContacts": "Foot effectors only, ski-slide, full-load windows; unchanged viewer acquires/releases over 0.06 seconds.",
+    "equipmentContacts": "Instant markers; optional startTime/endTime for held grab.",
+    "groundContacts": "Actual snow contact windows, including pole tips and body support. These do not become viewer foot IK constraints.",
+    "attachmentContacts": "Boot-to-ski and hand-to-pole attachments. During the grab the left pole is retained by its wrist strap.",
+    "events": "Presentation only; never modify score, physics, rewards or authoritative heading."
+  },
+  "spin180Exit": "Use the authoritative facing snapshot to rebase the displayed pose at completion before blending to land_perfect. Preserve the world pose; never add the rotation a second time or unwind the half-turn. See the transition headingHandoff record.",
+  "validation": {
+    "command": "node workout/island/design/motion2/alpine/verify.mjs",
+    "report": "verification/report.json",
+    "summary": "verification/summary.json",
+    "viewports": [
+      [
+        844,
+        390
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "character": "skier",
+    "unchangedThresholds": true
+  }
+}
