@@ -1,0 +1,331 @@
+[
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "done": true,
+    "result": {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "devicePixelRatio": 1,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "seed": 7,
+      "level": 1,
+      "pinnedQuality": 0,
+      "warmupSeconds": 3,
+      "seconds": 30.02,
+      "frames": 523,
+      "fps": 17.4,
+      "frameMs": {
+        "mean": 57.39,
+        "p50": 50,
+        "p95": 83.3,
+        "p99": 150,
+        "max": 483.4
+      },
+      "over33": 518,
+      "over50": 198,
+      "tickMs": {
+        "mean": 0.34,
+        "p50": 0.3,
+        "p95": 0.7,
+        "p99": 1.8,
+        "max": 5.9
+      },
+      "renderMs": {
+        "mean": 4.88,
+        "p50": 3,
+        "p95": 5.2,
+        "p99": 6.2,
+        "max": 475.3
+      },
+      "glMs": {
+        "mean": 2.13,
+        "p50": 1,
+        "p95": 1.8,
+        "p99": 3.5,
+        "max": 474.4
+      },
+      "animMs": {
+        "mean": 2.75,
+        "p50": 1.6,
+        "p95": 3.7,
+        "p99": 4.7,
+        "max": 342.7
+      },
+      "programsCompiled": 0,
+      "allocByPhaseMB": {
+        "tick": 62.5,
+        "render": 50.8,
+        "gl": 23.4,
+        "other": -3.1
+      },
+      "longTasks": 4,
+      "longTaskMs": 1700,
+      "heap": {
+        "startMB": 24.1,
+        "endMB": 24.7,
+        "allocatedMB": 133.6,
+        "allocatedMBPerSecond": 4.45,
+        "gcCount": 23
+      },
+      "assetReadyMs": 2544,
+      "warmup": {
+        "programs": 57,
+        "ms": 385
+      },
+      "quality": {
+        "final": 3,
+        "pixelRatio": 0.85,
+        "changes": [
+          {
+            "atSeconds": 0.8,
+            "quality": 1
+          },
+          {
+            "atSeconds": 1.8,
+            "quality": 2
+          },
+          {
+            "atSeconds": 3.5,
+            "quality": 3
+          }
+        ],
+        "crowdCount": 10,
+        "shadows": false,
+        "triangles": 50035,
+        "drawCalls": 34,
+        "assetStatus": "ready",
+        "turf": {
+          "turfStatus": "ready",
+          "turfMaps": 1,
+          "source": "design/environment"
+        },
+        "lod": 1
+      },
+      "match": {
+        "score": [
+          1,
+          0
+        ],
+        "elapsed": 29.2,
+        "phase": "playing",
+        "events": {
+          "goal": 1,
+          "shot": 4,
+          "pass": 8,
+          "loft": 0,
+          "header": 0,
+          "steal": 0,
+          "save": 0
+        }
+      }
+    },
+    "errors": [
+      {
+        "kind": "console",
+        "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:62403/favicon.ico",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "kind": "console",
+        "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:62403/favicon.ico",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    ],
+    "failedResponses": [],
+    "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "cspAudit": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [],
+      "policyErrors": [],
+      "workers": [
+        {
+          "url": "http://127.0.0.1:62403/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "done": true,
+    "result": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "devicePixelRatio": 1,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "seed": 7,
+      "level": 1,
+      "pinnedQuality": 0,
+      "warmupSeconds": 3,
+      "seconds": 30,
+      "frames": 580,
+      "fps": 19.3,
+      "frameMs": {
+        "mean": 51.72,
+        "p50": 50,
+        "p95": 66.7,
+        "p99": 150.1,
+        "max": 433.3
+      },
+      "over33": 568,
+      "over50": 145,
+      "tickMs": {
+        "mean": 0.36,
+        "p50": 0.3,
+        "p95": 0.8,
+        "p99": 2,
+        "max": 3.5
+      },
+      "renderMs": {
+        "mean": 4.65,
+        "p50": 2.6,
+        "p95": 5.2,
+        "p99": 6.9,
+        "max": 433.1
+      },
+      "glMs": {
+        "mean": 2.17,
+        "p50": 1.1,
+        "p95": 2.4,
+        "p99": 3.8,
+        "max": 245.5
+      },
+      "animMs": {
+        "mean": 2.47,
+        "p50": 1.4,
+        "p95": 3.9,
+        "p99": 4.6,
+        "max": 285.7
+      },
+      "programsCompiled": 0,
+      "allocByPhaseMB": {
+        "tick": 69.1,
+        "render": 56.4,
+        "gl": 29.2,
+        "other": -4.8
+      },
+      "longTasks": 6,
+      "longTaskMs": 1875,
+      "heap": {
+        "startMB": 26,
+        "endMB": 25.8,
+        "allocatedMB": 149.8,
+        "allocatedMBPerSecond": 4.99,
+        "gcCount": 24
+      },
+      "assetReadyMs": 2570,
+      "warmup": {
+        "programs": 57,
+        "ms": 410
+      },
+      "quality": {
+        "final": 3,
+        "pixelRatio": 0.85,
+        "changes": [
+          {
+            "atSeconds": 0.6,
+            "quality": 1
+          },
+          {
+            "atSeconds": 1.7,
+            "quality": 2
+          },
+          {
+            "atSeconds": 3,
+            "quality": 3
+          }
+        ],
+        "crowdCount": 10,
+        "shadows": false,
+        "triangles": 49843,
+        "drawCalls": 33,
+        "assetStatus": "ready",
+        "turf": {
+          "turfStatus": "ready",
+          "turfMaps": 1,
+          "source": "design/environment"
+        },
+        "lod": 1
+      },
+      "match": {
+        "score": [
+          2,
+          0
+        ],
+        "elapsed": 26.9,
+        "phase": "playing",
+        "events": {
+          "goal": 2,
+          "shot": 4,
+          "pass": 12,
+          "loft": 1,
+          "header": 0,
+          "steal": 0,
+          "save": 0
+        }
+      }
+    },
+    "errors": [
+      {
+        "kind": "console",
+        "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:62403/favicon.ico",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    ],
+    "failedResponses": [],
+    "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "cspAudit": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [],
+      "policyErrors": [],
+      "workers": [
+        {
+          "url": "http://127.0.0.1:62403/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        }
+      ]
+    }
+  }
+]
