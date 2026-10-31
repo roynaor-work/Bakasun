@@ -6,7 +6,10 @@ import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,
 import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-ski-20261031-1';
 import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-ski-20261031-1';
 import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-ski-20261031-1';
-import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall} from './soccer-loft.mjs';
+import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
+import {expandSoccerConfig,soccerMatchCards} from './soccer-squad.mjs';
+import {compileSoccerTactics} from './soccer-design-tactics.mjs';
+import {SOCCER_TACTICS_DATA} from './soccer-tactics-data.mjs';
 import {createRestartLayout,restartTarget,restartActionProfile,sampleRestartAction,restartBallPose,restartThrowTarget,createKeeperThrowFlight} from './soccer-restarts.mjs';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
@@ -38,7 +41,9 @@ export function soccerPassAim(state){return state.passAim?.manual?state.passAim:
 export function canHead(player,ball,config){return canContactBall(player,ball,config,{kind:'head'});}
 export function createSoccer({config,seed=1,stage=1,team=config.team,random,difficulty='normal',card,role='field',league=false}={}) {
   if (!config?.stages?.length || !Number.isFinite(config.match?.fixedStep) || config.match.fixedStep<=0) throw Error('Invalid soccer config');
+  config=expandSoccerConfig(config);
   seed=Number(seed)>>>0; stage=clamp(Math.round(finite(stage))||1,1,30);const leagueStage=stage,ladder=league?leagueMatch(config,stage):null;if(ladder?.leagues)stage=clamp(finite(ladder.tuning)||1,1,30);config=campaignConfig(config,stage);
+  if(config.squad&&!config.tactics.designController)config={...config,tactics:{...config.tactics,designController:compileSoccerTactics(SOCCER_TACTICS_DATA,config)}};
   const attack=config.ai.attack[difficulty];
   const rng=random || seededRandom(seed), opponent=opponentSettings(config,stage,difficulty), ph=config.physics,effects=cardEffects(card,config);
   // League keepers rise match by match, even when a new league restarts the field tuning lower.
@@ -46,11 +51,11 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   const hx=config.pitch.length/2,hz=config.pitch.width/2,step=config.match.fixedStep,aiConfig=config.ai,rules=config.rules;
   const keeperThrowLead=Math.ceil(restartActionProfile('keeperThrow').contact/step-1e-8)*step;
   // Preserve the original six IDs; the two wings extend the roster at IDs 6/7.
-  const cards=rosterCards(config,team,card,stage,difficulty);
+  const cards=soccerMatchCards(config,team,rosterCards,card,stage,difficulty);
   const players=config.players.roster.map((entry,i)=>{
     const template=entry.team===0?(team.players?.[entry.template]||config.team.players[entry.template]):config.opponentDefaults;
     const rank=key=>clamp(Math.round(finite(template[key]))||1,1,5);
-    return {card:cards[i],hands:false,diveTime:0,diveCooldown:0,throwTime:0,catchTime:0,id:i,templateId:entry.team===0?template.id:`opponent${entry.template}`,team:entry.team,role:entry.role,x:0,z:0,vx:0,vz:0,fx:entry.team===0?1:-1,fz:0,speed:rank('speed'),kick:rank('kick'),guard:rank('guard'),cooldown:0,kickTime:0,request:false,think:0,hold:0,slideTime:0,recover:0,slideCooldown:0,stealCooldown:0,stealTime:0,headerTime:0,autoHeadTime:0,turnLean:0,slideAttempted:false,slideWon:false,slideX:0,slideZ:0,sprinting:false,sprintTime:0,sprintRest:0};
+    return {card:cards[i],hands:false,diveTime:0,diveCooldown:0,throwTime:0,catchTime:0,id:i,templateId:entry.team===0?template.id:`opponent${entry.template}`,team:entry.team,role:entry.role,tacticalRole:entry.tacticalRole,soccerExtra:!!entry.soccerExtra,x:0,z:0,vx:0,vz:0,fx:entry.team===0?1:-1,fz:0,speed:rank('speed'),kick:rank('kick'),guard:rank('guard'),cooldown:0,kickTime:0,request:false,think:0,hold:0,slideTime:0,recover:0,slideCooldown:0,stealCooldown:0,stealTime:0,headerTime:0,autoHeadTime:0,turnLean:0,slideAttempted:false,slideWon:false,slideX:0,slideZ:0,sprinting:false,sprintTime:0,sprintRest:0};
   });
   const s={role,league:ladder?.leagues?ladder:null,campaign:config.campaign,campaignStats:createCampaignStats(),bufferedAction:null,selectionTime:0,switchCooldown:0,actionAim:null,phase:'playing',half:1,halfElapsed:0,elapsed:0,phaseTime:0,score:[0,0],stage:leagueStage,seed,difficulty,mode:'attack',aim:{x:1,z:0},sprint:{value:config.sprint.capacity*effects.capacity,capacity:config.sprint.capacity*effects.capacity,active:false,locked:false,regenDelay:0},attackDir:1,controlled:0,players,ball:{x:0,z:0,y:ph.ballRadius,vx:0,vz:0,vy:0,curve:0,owner:0,lastTeam:0,lastPlayer:0,grace:0},charge:0,charging:false,chargeKind:null,idle:0,defenseIdle:0,autoSwitchCandidate:null,passTarget:null,restart:null,event:null,eventId:0,result:null};
   let events=[],rivalPasses=0,nextRivalShot=0,nextHomeShot=0;
@@ -70,6 +75,8 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     for (const p of players) {
       const d=direction(p.team),role=config.players.roles.indexOf(p.role);
       p.x=d*aiConfig.kickoffX[role];p.z=role===1?(p.team===0?-1:1)*aiConfig.kickoffZ:role===3?(p.team===0?1:-1)*aiConfig.kickoffZ:0;p.vx=p.vz=0;p.fx=d;p.fz=0;p.hold=0;p.think=aiConfig.initialThink;p.cooldown=aiConfig.initialCooldown;p.sprinting=false;p.sprintTime=p.sprintRest=0;
+      if(p.soccerExtra){p.x=-d*hx*.55;p.z=(p.tacticalRole==='LCB'?-1:1)*hz*.32;}
+      if(p.role==='keeper')p.x=-d*(hx-aiConfig.keeperInset);
       p.restartMotion=p.distribution=null;
       p.hands=false;p.autoHeadTime=0;p.diveTime=p.diveCooldown=p.throwTime=p.catchTime=0;p.slideTime=p.recover=p.headerTime=p.kickTime=p.stealTime=p.turnLean=0;p.slideAttempted=p.slideWon=false;
     }
@@ -175,7 +182,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   }
   function cross(p,mate){
     const power=aiConfig.crossPower??.55,flight=config.passing.loftMinSeconds+power*config.passing.loftExtraSeconds;
-    const d=direction(p.team),x=d*clamp((mate.x+(mate.vx||0)*flight*.5)*d,hx-config.pitch.penaltyDepth,hx-1.2);
+    const d=direction(p.team),boxLanding=hx-config.pitch.penaltyDepth+Math.min(.75,config.pitch.penaltyDepth*.2),x=d*clamp((mate.x+(mate.vx||0)*flight*.5)*d,boxLanding,hx-1.2);
     const point=safeLoftPoint({x,z:clamp(mate.z+(mate.vz||0)*flight*.5,-config.pitch.penaltyWidth/2+.5,config.pitch.penaltyWidth/2-.5)},config),tx=point.x,z=point.z,dx=tx-s.ball.x,dz=z-s.ball.z,len=Math.hypot(dx,dz)||1;
     if(p.team===1)rivalPasses++;
     p.fx=dx/len;p.fz=dz/len;p.hold=0;p.cooldown=aiConfig.kickCooldown;p.kickTime=aiConfig.kickAnimationSeconds;s.actionAim={x:p.fx,z:p.fz};
@@ -268,7 +275,11 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       const target=fieldTarget(p,s,config);tx=target.x;tz=target.z;p.duty=target.duty;
       p.request=possession&&distance(p,owner)>aiConfig.requestDistance&&distance(nearest(1-p.team,p),p)>aiConfig.requestClearance;
     }
-    if(s.passTarget?.player===p.id&&s.passTarget.time>0&&b.owner===null){tx=s.passTarget.x;tz=s.passTarget.z;}
+    if(s.passTarget?.player===p.id&&s.passTarget.time>0&&b.owner===null){
+      const speed=p.team===0?(config.players.speed+(p.speed-1)*config.players.speedPerRank)*personal(p).pace:Math.max(opponent.speed*personal(p).pace,teamReference()*config.opponents.minSpeedRatio*attack.speed);
+      const reception=s.passTarget.kind==='loft'?loftReceptionTarget(p,b,config,{speed,direction:d}):null;
+      tx=reception?.x??s.passTarget.x;tz=reception?.z??s.passTarget.z;
+    }
     // A deterministic duty cycle uses elapsed simulation time, never extra RNG.
     // Sprint never consumes RNG, including below the stage gate.
     p.sprintRest=Math.max(0,p.sprintRest-dt);p.sprintTime=Math.max(0,p.sprintTime-dt);
@@ -666,6 +677,12 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     },
     drainEvents(){const pending=events;events=[];return pending;},
     getState:()=>s,
+    setDesignTactics(data){
+      const designController=compileSoccerTactics(data,config);
+      config={...config,tactics:{...config.tactics,designController}};
+      return designController.diagnostics(s);
+    },
+    tacticalMetrics:()=>config.tactics.designController?.diagnostics(s)||null,
     clearInput,
     snapshot:()=>JSON.parse(JSON.stringify(s)),
     get result(){return s.result;}

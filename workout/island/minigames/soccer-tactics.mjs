@@ -8,6 +8,7 @@ const byStriker=d=>(u,v)=>(v.role==='striker')-(u.role==='striker')||(v.x-u.x)*d
 const byAdvance=d=>(u,v)=>u.x*d-v.x*d||u.id-v.id;
 /** One ball press; everyone else returns to a zone or finds a passing lane. */
 export function fieldTarget(p,s,c){
+ if(c.tactics.designController)return c.tactics.designController.target(p,s);
  const a=c.tactics,b=s.ball,d=s.attackDir*(p.team===0?1:-1),hx=c.pitch.length/2,hz=c.pitch.width/2,formation=teamFormation(p.team,s,c);
  const owner=b.owner===null?null:s.players[b.owner],mates=[],opponents=[];
  for(const q of s.players){if(q.team!==p.team)opponents.push(q);else if(q.role!=='keeper')mates.push(q);}

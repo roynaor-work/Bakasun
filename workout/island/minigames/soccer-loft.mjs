@@ -106,3 +106,31 @@ export function stepLoftBall(ball,dt,c){
  }
  ball.flight=null;return true;
 }
+
+/** Meet the observed descending ball at head height instead of waiting at its
+ * ground landing marker. This only changes the running target; the normal body
+ * integrator and unchanged head-contact window still authorize the header. */
+export function loftReceptionTarget(player,ball,c,{speed,direction=1}={}){
+ if(ball.owner!=null||ball.flight?.kind!=='physical-loft'||player.role==='keeper'||player.recover>0||player.slideTime>0||player.cooldown>0)return null;
+ const dt=c.match.fixedStep,maximum=Math.max(0,finite(speed,c.players.speed+(finite(player.speed,1)-1)*c.players.speedPerRank));
+ if(!(maximum>0))return null;
+ const future={x:ball.x,y:ball.y,z:ball.z,vx:ball.vx,vy:ball.vy,vz:ball.vz,curve:finite(ball.curve)};
+ const horizon=Math.min(3,Math.max(dt,c.passing.runSeconds)),hx=c.pitch.length/2,hz=c.pitch.width/2,boundary=c.rules.playerBoundary;
+ const reach=Math.min(c.aerial.reach,finite(c.assistance?.contact?.headReach,1.2)),acceleration=Math.max(1,c.players.acceleration),turnRate=Math.max(1,c.players.turnRate);
+ let best=null,bestScore=Infinity;
+ for(let i=1;i*dt<=horizon+1e-8;i++){
+  const descending=future.vy<0;rollBall(future,dt,c);
+  if(descending&&future.y<=c.physics.ballRadius+1e-7)break;
+  if(future.vy>=0||future.y<c.aerial.minHeight||future.y>c.aerial.maxHeight)continue;
+  if(future.x*direction<=hx-c.pitch.penaltyDepth||Math.abs(future.z)>=c.pitch.penaltyWidth/2)continue;
+  const x=clamp(future.x,-hx+boundary,hx-boundary),z=clamp(future.z,-hz+boundary,hz-boundary),dx=x-player.x,dz=z-player.z,range=Math.hypot(dx,dz),seconds=i*dt;
+  const toward=range?{x:dx/range,z:dz/range}:{x:finite(player.fx,1),z:finite(player.fz)};
+  const turn=Math.acos(clamp(finite(player.fx,1)*toward.x+finite(player.fz)*toward.z,-1,1))/turnRate;
+  const available=Math.max(0,seconds-turn),momentum=clamp(finite(player.vx)*toward.x+finite(player.vz)*toward.z,-maximum,maximum);
+  const travel=maximum*available-(maximum-momentum)*(1-Math.exp(-acceleration*available))/acceleration;
+  if(range>Math.max(0,travel)+reach*.65)continue;
+  const score=Math.abs(future.y-c.aerial.headerHeight)+range/maximum*.12+seconds*.03;
+  if(score<bestScore){bestScore=score;best={x,z,seconds,height:future.y,kind:'head-intercept'};}
+ }
+ return best;
+}

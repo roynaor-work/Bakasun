@@ -8,7 +8,7 @@ import {bot} from '../workout/island/tests/g3c-bot.mjs';
 import * as T from '../workout/island/vendor/three.module.js';
 const c=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames.soccer,dt=c.match.fixedStep;
 const near=(a,b,e=1e-7)=>assert.ok(Math.abs(a-b)<e,`${a} != ${b}`);
-function setup(stage=3,random){const g=createSoccer({config:c,stage,seed:42,random}),s=g.getState();for(const p of s.players)Object.assign(p,{x:p.team?13:-13,z:p.id%2?7:-7,cooldown:0,think:100,vx:0,vz:0});Object.assign(s.players[0],{x:0,z:0,fx:1,fz:0});Object.assign(s.ball,{owner:0,x:c.physics.dribbleOffset,z:0,grace:100});return g;}
+function setup(stage=3,random){const g=createSoccer({config:c,stage,seed:42,random}),s=g.getState(),hx=c.pitch.length/2,hz=c.pitch.width/2;for(const p of s.players)Object.assign(p,{x:(p.team?1:-1)*(hx-(p.role==='keeper'?2:5)),z:p.role==='keeper'?0:(p.id%2?1:-1)*(hz-4),cooldown:0,think:100,vx:0,vz:0});Object.assign(s.players[0],{x:0,z:0,fx:1,fz:0});Object.assign(s.ball,{owner:0,x:c.physics.dribbleOffset,z:0,grace:100});return g;}
 const advance=(g,seconds,input={})=>{for(let i=0;i<Math.round(seconds/dt);i++)g.update(dt,input);};
 function defense(random){const g=setup(3,random),s=g.getState();Object.assign(s.players[0],{x:-10,z:0});Object.assign(s.players[1],{x:-5,z:0});Object.assign(s.players[3],{x:0,z:0});Object.assign(s.ball,{owner:3,x:-c.physics.dribbleOffset,z:0,grace:100,lastTeam:1,lastPlayer:3});return g;}
 for(const [label,change,expected]of [

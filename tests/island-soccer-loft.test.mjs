@@ -34,7 +34,7 @@ test('loft power determines an interior landing point and a plausible flight tim
 });
 
 test('loft launch agrees with the real rollBall integrator, not a separate scripted arc',()=>{
- for(const c of [base,{...base,physics:{...base.physics,ballRadius:.11}},{...base,pitch:{...base.pitch,length:48,width:30}}]){
+ for(const c of [base,{...base,physics:{...base.physics,ballRadius:.22}},{...base,pitch:{...base.pitch,length:60,width:40}}]){
   for(const fromY of [c.physics.ballRadius,1.1,2.1])for(const power of [.4,.7,1]){
    const ball={x:1,z:2,y:fromY,vx:0,vz:0,vy:0,curve:0},target=safeLoftPoint({x:12,z:-4},c),launch=createLoftFlight(ball,target,c,power);
    Object.assign(ball,launch);let peak=ball.y;
@@ -46,14 +46,16 @@ test('loft launch agrees with the real rollBall integrator, not a separate scrip
 });
 
 test('lofts from all lines and corners land inside the pitch at their actual target',()=>{
- for(const attackDir of [-1,1])for(const x of [-17.75,0,17.75])for(const z of [-10.75,0,10.75])for(let degrees=0;degrees<360;degrees+=15)for(const power of [.36,.5,.75,1]){
+ const hx=base.pitch.length/2-base.physics.ballRadius-.03,hz=base.pitch.width/2-base.physics.ballRadius-.03;
+ for(const attackDir of [-1,1])for(const x of [-hx,0,hx])for(const z of [-hz,0,hz])for(let degrees=0;degrees<360;degrees+=15)for(const power of [.36,.5,.75,1]){
   const a=degrees*Math.PI/180,s=state(x,z,{x:Math.cos(a),z:Math.sin(a),manual:true});s.attackDir=attackDir;
   const result=simulate(s,power);assert.ok(inPitch(result.ball));
  }
 });
 
 test('landing at a line loses enough carry to settle inside instead of instantly rolling out',()=>{
- for(const x of [-17.75,0,17.75])for(const z of [-10.75,0,10.75])for(let degrees=0;degrees<360;degrees+=30){
+ const hx=base.pitch.length/2-base.physics.ballRadius-.03,hz=base.pitch.width/2-base.physics.ballRadius-.03;
+ for(const x of [-hx,0,hx])for(const z of [-hz,0,hz])for(let degrees=0;degrees<360;degrees+=30){
   const a=degrees*Math.PI/180,{ball}=simulate(state(x,z,{x:Math.cos(a),z:Math.sin(a)}),1);
   for(let i=0;i<900;i++){
    const previous={...ball};rollBall(ball,base.match.fixedStep,base);
@@ -81,7 +83,7 @@ test('manual loft retains its legal direction and does not steer to a nearby tea
 test('remote, opposing, behind and out-of-pitch players cannot hijack the landing point',()=>{
  const power=.5,s=state(0,0,{x:1,z:0},[
   {id:1,team:0,x:2,z:0},{id:2,team:1,x:13,z:0},{id:3,team:0,x:-12,z:0},
-  {id:4,team:0,x:13,z:4},{id:5,team:0,x:18.1,z:0},{id:6,team:0,x:13,z:0,recover:.1}
+  {id:4,team:0,x:13,z:4},{id:5,team:0,x:base.pitch.length/2+.1,z:0},{id:6,team:0,x:13,z:0,recover:.1}
  ]),target=loftDestination(s,base,power);
  assert.equal(target.target,null);assert.equal(target.assisted,false);near(target.z,0);near(target.x,13.5);
 });

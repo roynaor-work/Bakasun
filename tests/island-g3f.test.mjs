@@ -155,7 +155,13 @@ test('G3f save probability is monotonic in keeper and shooter cards and shot qua
  const card=n=>({reactions:n,catching:n,shot:n}),shot={speed:17,aim:.5,distance:7};assert.ok(keeperSaveChance(card(90),card(60),shot,config)>keeperSaveChance(card(30),card(60),shot,config));assert.ok(keeperSaveChance(card(60),card(30),shot,config)>keeperSaveChance(card(60),card(90),shot,config));assert.ok(keeperSaveChance(card(25),card(90),{speed:28,aim:.95,distance:4},config)<=.05);assert.ok(keeperSaveChance(card(90),card(25),{speed:8,aim:0,distance:4},config)>=.95);
 });
 for(const difficulty of ['easy','normal','hard'])test(`G3f enemy running retains the current campaign pace floor on ${difficulty}`,()=>{
- const g=createSoccer({config,difficulty}),s=g.getState(),tuned=campaignConfig(config,1);Object.assign(s.ball,{owner:null,x:0,z:0,y:50});for(const p of s.players)Object.assign(p,{x:-15,z:p.team?0:-5,cooldown:100});s.ball.x=12;s.ball.z=9;for(let i=0;i<45;i++)g.update(dt,{moveX:1});
+ // Measure locomotion on a clear route. Real formation/spacing decisions are
+ // covered by the unchanged full-controller G3h/G3i match gates, not by making
+ // twelve coincident players push each other while this speed check runs.
+ const paceConfig={...config,tactics:{...config.tactics,designController:{target:p=>({x:p.x+5,z:p.z,duty:'pace-fixture'})}}};
+ const g=createSoccer({config:paceConfig,difficulty}),s=g.getState(),tuned=campaignConfig(config,1);Object.assign(s.ball,{owner:null,x:12,z:9,y:50});
+ for(const team of [0,1]){const members=s.players.filter(p=>p.team===team);for(let i=0;i<members.length;i++)Object.assign(members[i],{x:team?-15:-hx+3,z:(i-(members.length-1)/2)*3,cooldown:100});}
+ for(let i=0;i<45;i++)g.update(dt,{moveX:1});
  for(const p of s.players.filter(p=>p.team===1)){const floor=config.players.speed*tuned.opponents.minSpeedRatio*tuned.ai.attack[difficulty].speed*(p.role==='keeper'?config.ai.keeperSpeedScale:1)*.98;assert.ok(Math.hypot(p.vx,p.vz)>=floor,`${p.role} keeps an active stage-appropriate pace`);}
 });
 test('G3f keeper mode keeps selection, moves continuously within its area, dives and distributes',()=>{

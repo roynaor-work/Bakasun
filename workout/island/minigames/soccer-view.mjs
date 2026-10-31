@@ -6,6 +6,7 @@ import {soccerCrowd} from './soccer-crowd.mjs?v=island-ski-20261031-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {loadDesignCharacters} from './soccer-design-character.mjs';
+import {expandSoccerConfig} from './soccer-squad.mjs';
 import {createSoccerDesignLoader} from './soccer-design-loader.mjs';
 import {createSoccerDesignScene} from './soccer-design-scene.mjs';
 import {createSoccerDesignVfx} from './soccer-design-vfx.mjs';
@@ -27,6 +28,7 @@ const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin t
 const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   const restartAim={};let restartAttachment=null,restartStrike=null;
+  config=expandSoccerConfig(config);
   const selectedKit=selectedSoccerKit();
   if(selectedKit){
     const home=new T.Color(selectedKit.primary),away=new T.Color(config.opponent.colors[0]);
@@ -81,7 +83,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     const net=new T.LineSegments(geometry,track(new T.LineBasicMaterial({color:'#d5dfd6',transparent:true,opacity:.5})));scene.add(net);nets.push({mesh:net,geometry,base:new Float32Array(vertices),direction:d});
   }
   const count=config.view.crowd.count,crowd=soccerCrowd(T,scene,config,track);
-  const numberCanvas=document.createElement('canvas');numberCanvas.width=512;numberCanvas.height=64;const numberContext=numberCanvas.getContext('2d'),numberTexture=track(new T.CanvasTexture(numberCanvas));numberTexture.colorSpace=T.SRGBColorSpace;
+  const numberCanvas=document.createElement('canvas');numberCanvas.width=roster.length*64;numberCanvas.height=64;const numberContext=numberCanvas.getContext('2d'),numberTexture=track(new T.CanvasTexture(numberCanvas));numberTexture.colorSpace=T.SRGBColorSpace;
   let numberSignature='';const numbersShown=[],framingShown={ball:null,controlled:null,camera:{},elevationDegrees:0},edgeShown={x:0,y:0,angle:0};
   const practiceTarget=new T.Mesh(track(new T.RingGeometry(.55,.7,20)),mat('#ffdc70',{side:T.DoubleSide}));scene.add(practiceTarget);
   const practiceCones=new T.InstancedMesh(track(new T.ConeGeometry(.22,.6,6)),mat('#f0a947'),2);scene.add(practiceCones);
@@ -166,11 +168,11 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
       const material=track(new T.MeshStandardMaterial({vertexColors:true,transparent:true,alphaTest:.1,roughness:.83,metalness:0}));
       const shirt=new T.Color(kit.colors[0]),keeper=new T.Color(teamIndex===0?'#cf9d2e':'#167b72');
       material.onBeforeCompile=shader=>{
-        shader.uniforms.soccerShirt={value:shirt};shader.uniforms.soccerKeeperColor={value:keeper};shader.uniforms.soccerFaceMap={value:numberTexture};
+        shader.uniforms.soccerShirt={value:shirt};shader.uniforms.soccerKeeperColor={value:keeper};shader.uniforms.soccerFaceMap={value:numberTexture};shader.uniforms.soccerNumberCells={value:roster.length};
         shader.vertexShader='attribute float soccerKeeper; attribute float soccerFace; attribute float soccerNumber; attribute vec2 soccerUv; varying float vSoccerKeeper; varying float vSoccerFace; varying float vSoccerNumber; varying vec2 vSoccerUv;\n'+shader.vertexShader;
         shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvSoccerKeeper=soccerKeeper;vSoccerFace=soccerFace;vSoccerNumber=soccerNumber;vSoccerUv=soccerUv;');
-        shader.fragmentShader='uniform vec3 soccerShirt;uniform vec3 soccerKeeperColor;uniform sampler2D soccerFaceMap;varying float vSoccerKeeper;varying float vSoccerFace;varying float vSoccerNumber;varying vec2 vSoccerUv;\n'+shader.fragmentShader;
-        shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(diffuseColor.b>diffuseColor.r*1.4 && diffuseColor.b>diffuseColor.g*1.1) diffuseColor.rgb=mix(soccerShirt,soccerKeeperColor,vSoccerKeeper)*(.62+clamp(diffuseColor.b,0.,1.)*.38);\nif(vSoccerFace>.5) diffuseColor*=texture2D(soccerFaceMap,vec2((clamp(vSoccerUv.x,.015,.985)+vSoccerNumber)/8.,vSoccerUv.y));');
+        shader.fragmentShader='uniform float soccerNumberCells;uniform vec3 soccerShirt;uniform vec3 soccerKeeperColor;uniform sampler2D soccerFaceMap;varying float vSoccerKeeper;varying float vSoccerFace;varying float vSoccerNumber;varying vec2 vSoccerUv;\n'+shader.fragmentShader;
+        shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(diffuseColor.b>diffuseColor.r*1.4 && diffuseColor.b>diffuseColor.g*1.1) diffuseColor.rgb=mix(soccerShirt,soccerKeeperColor,vSoccerKeeper)*(.62+clamp(diffuseColor.b,0.,1.)*.38);\nif(vSoccerFace>.5) diffuseColor*=texture2D(soccerFaceMap,vec2((clamp(vSoccerUv.x,.015,.985)+vSoccerNumber)/soccerNumberCells,vSoccerUv.y));');
       };kitMaterials.push(material);
     }
     for(let id=0;id<roster.length;id++){
@@ -228,7 +230,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     if(disposed)return;time+=dt;qualitySample(frameMs,dt);
     effects.update(s,dt,quality);
     let changed=numbersShown.length!==s.players.length;for(let i=0;i<s.players.length&&!changed;i++)changed=numbersShown[i]!==s.players[i].card.number;
-    if(changed){numbersShown.length=s.players.length;for(let i=0;i<s.players.length;i++)numbersShown[i]=s.players[i].card.number;numberSignature=numbersShown.join(',');numberContext.clearRect(0,0,512,64);numberContext.font='bold 46px sans-serif';numberContext.textAlign='center';numberContext.textBaseline='middle';numberContext.fillStyle='#fff7da';numberContext.strokeStyle='#243d59';numberContext.lineWidth=3;for(const p of s.players){numberContext.strokeText(String(p.card.number),p.id*64+32,32);numberContext.fillText(String(p.card.number),p.id*64+32,32);}numberTexture.needsUpdate=true;}
+    if(changed){numbersShown.length=s.players.length;for(let i=0;i<s.players.length;i++)numbersShown[i]=s.players[i].card.number;numberSignature=numbersShown.join(',');numberContext.clearRect(0,0,numberCanvas.width,64);numberContext.font='bold 46px sans-serif';numberContext.textAlign='center';numberContext.textBaseline='middle';numberContext.fillStyle='#fff7da';numberContext.strokeStyle='#243d59';numberContext.lineWidth=3;for(const p of s.players){numberContext.strokeText(String(p.card.number),p.id*64+32,32);numberContext.fillText(String(p.card.number),p.id*64+32,32);}numberTexture.needsUpdate=true;}
     const c=config.view.camera,angle=c.elevationDegrees*Math.PI/180;
     cameraState=soccerCamera(s,camera.aspect,config,cameraState,dt);
     camera.position.set(cameraState.x,cameraState.distance*Math.sin(angle),cameraState.z+s.attackDir*cameraState.distance*Math.cos(angle));camera.lookAt(cameraState.x,0,cameraState.z);camera.updateMatrixWorld();if(poseFocus!==null){const p=s.players[poseFocus];camera.position.set(p.x,1.9,p.z+5.5);camera.lookAt(p.x,.8,p.z);camera.updateMatrixWorld();}
