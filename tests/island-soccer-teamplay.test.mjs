@@ -72,8 +72,9 @@ test('teamplay both ends, six formations and fast free balls always produce fini
   const s=fixture();Object.assign(s,{attackDir,campaign:{formation}});Object.assign(s.ball,{owner:null,x:side*18,z:side*11,vx:side*27,vz:side*15});
   for(const p of s.players.filter(p=>p.role!=='keeper')){
    const target=fieldTarget(p,s,config);assert.ok(Number.isFinite(target.x)&&Number.isFinite(target.z));
-   assert.ok(Math.abs(target.x)<=config.pitch.length/2-config.tactics.goalInset);
-   assert.ok(Math.abs(target.z)<=config.pitch.width/2-config.tactics.sideInset);
+   const goalInset=target.duty==='press'?config.rules.playerBoundary:config.tactics.goalInset,sideInset=target.duty==='press'?config.rules.playerBoundary:config.tactics.sideInset;
+   assert.ok(Math.abs(target.x)<=config.pitch.length/2-goalInset,'press stays within the legal body boundary; cover keeps formation depth');
+   assert.ok(Math.abs(target.z)<=config.pitch.width/2-sideInset,'press can reach a live ball beside the touchline; cover keeps formation width');
   }
  }
 });
