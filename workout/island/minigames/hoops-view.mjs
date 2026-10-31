@@ -27,8 +27,9 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const camera=new THREE.PerspectiveCamera(V.fov,1,0.1,200);
  const looks=teams.map(t=>t.look);
  const {root:arena,dyn}=buildArena(court,{home:looks[0],away:looks[1],quality,anisotropy:Math.min(8,renderer.capabilities.getMaxAnisotropy())});
+ scene.add(arena);
  const models=await replaceArenaAssets(arena,dyn,court,{assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())});
- loadingModels=models;scene.add(arena);
+ loadingModels=models;
  // environment reflections from a dim copy of the arena lights
  const pm=new THREE.PMREMGenerator(renderer);loadingPm=pm;
  const envScene=new THREE.Scene();envScene.background=new THREE.Color(0x0b0d14);
@@ -166,7 +167,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   if(b.state==='held'&&handler){
    const av=avatars.get(handler.id);av.root.updateMatrixWorld(true);
    const r=av.hands.r,l=av.hands.l;
-   if(handler.act==='shoot'||!s.phase||s.phase!=='live'||Math.hypot(handler.vx,handler.vz)<0.05&&!handler.act&&false){
+   if((handler.act==='shoot'||handler.act==='fake')||!s.phase||s.phase!=='live'||Math.hypot(handler.vx,handler.vz)<0.05&&!handler.act&&false){
     r.getWorldPosition(v);l.getWorldPosition(v2);v.add(v2).multiplyScalar(0.5);
     const fx=Math.sin(handler.face),fz=Math.cos(handler.face);bx=v.x+fx*0.1;by=v.y+0.02;bz=v.z+fz*0.1;
    } else if(handler.act==='pass'){
@@ -174,6 +175,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    } else {
     // dribble: the ball travels hand -> floor -> hand in rhythm with the dribbling hand
     r.getWorldPosition(v);
+    if(handler.act==='cross'){l.getWorldPosition(v2);v.lerp(v2,Math.sin(clamp(handler.actT/.55,0,1)*Math.PI));}
     const period=V.dribblePeriod/Math.max(0.6,Math.min(1.6,Math.hypot(handler.vx,handler.vz)/2.2+0.7));
     const u=((b.dribbleT/period)%1),h=Math.max(court.ballR,v.y-0.05);
     const fx=Math.sin(handler.face),fz=Math.cos(handler.face);
@@ -244,7 +246,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z){v.set(x,y,z).project(camera);return {x:(v.x+1)/2*state.w,y:(1-v.y)/2*state.h,visible:v.z<1};}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'adult-broadcast',vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;

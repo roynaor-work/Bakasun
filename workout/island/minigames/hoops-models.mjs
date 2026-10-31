@@ -3,6 +3,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {HoopsDRACOLoader as DRACOLoader} from './hoops-draco.mjs';
+import {ballTexture} from './hoops-textures.mjs';
 
 const MODEL='design/models/',ENV='design/environment/textures/';
 const materialsOf=o=>o.material?(Array.isArray(o.material)?o.material:[o.material]):[];
@@ -41,7 +42,7 @@ function openBroadcastCanopy(mesh){
 }
 
 /** Return spectator positions on the five authored octagonal seating rings.
- * The old spectator atlas remains instanced; crowd-dots supplies distant seats. */
+ * The spectator atlas remains instanced against quiet, dark seating. */
 function crowdSpots(court){
  const spots=[],sx=court.W/15,sz=court.L/28;
  for(let row=0;row<5;row++){
@@ -73,12 +74,12 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
  let disposed=false;
  const loadModel=async name=>{const g=await loader.loadAsync(new URL(MODEL+name+'.glb',base).href);mergeResources(owned,resources(g.scene));return g.scene;};
  const loadTexture=async name=>{const t=await textureLoader.loadAsync(new URL(ENV+name+'.webp',base).href);t.colorSpace=THREE.SRGBColorSpace;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=Math.min(4,anisotropy);owned.textures.add(t);return t;};
- let venue,hoopSource,ballModel,wood,concrete,dots;
+ let venue,hoopSource,concrete;
  try{
   // Wait for every load, including failures, before releasing partially loaded assets.
-  const all=await Promise.allSettled([loadModel('basketball-arena'),loadModel('basketball-hoop'),loadModel('basketball'),loadTexture('parquet'),loadTexture('stand-concrete'),loadTexture('crowd-dots')]);
+  const all=await Promise.allSettled([loadModel('basketball-arena'),loadModel('basketball-hoop'),loadTexture('stand-concrete')]);
   const failed=all.find(r=>r.status==='rejected');if(failed)throw failed.reason;
-  [venue,hoopSource,ballModel,wood,concrete,dots]=all.map(r=>r.value);
+  [venue,hoopSource,concrete]=all.map(r=>r.value);
  }catch(error){release(owned);throw error;}finally{draco.dispose();}
  try{
   venue.name='design-basketball-arena';
@@ -88,11 +89,12 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
    const mesh=venue.getObjectByName(name);if(mesh)mesh.visible=false;
   }
   const floor=venue.getObjectByName('court_surface');
-  wood.repeat.set(court.W/1.6,court.L/1.6);
-  owned.materials.add(mappedMaterial(floor,wood,{vertexColors:false,roughness:.62}));floor.receiveShadow=true;
-  concrete.repeat.set(4,4);dots.repeat.set(8,8);
+  
+  const originalFloor=arena.getObjectByName('court');
+  const parquet=new THREE.MeshStandardMaterial({map:originalFloor.material.map,color:originalFloor.material.color.clone(),roughness:.38,metalness:.03,envMapIntensity:.7});floor.material=parquet;originalFloor.material.dispose();originalFloor.material=parquet;floor.visible=false;owned.materials.add(parquet);floor.receiveShadow=true;
+  concrete.repeat.set(4,4);
   owned.materials.add(mappedMaterial(venue.getObjectByName('arena_shell'),concrete,{roughness:.95}));
-  owned.materials.add(mappedMaterial(venue.getObjectByName('seating'),dots,{vertexColors:false,roughness:1}));
+  const seating=venue.getObjectByName('seating');seating.material=seating.material.clone();seating.material.map=null;seating.material.vertexColors=false;seating.material.color.set('#1a2030');seating.material.roughness=.96;owned.materials.add(seating.material);
 
   // The supplied scoreboard includes static 00:00 geometry. Cover its face with
   // the existing live display, keeping the design frame and the score contract.
@@ -108,6 +110,7 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
    hoop.rotation.y=-side*Math.PI/2;
    const offset=rim.clone().applyAxisAngle(new THREE.Vector3(0,1,0),hoop.rotation.y);
    hoop.position.set(side*court.rimX-offset.x,court.rimY-offset.y,-offset.z);
+   for(const name of ['base','base_pad','post_pad']){const mesh=hoop.getObjectByName(name);if(mesh){mesh.material=mesh.material.clone();mesh.material.vertexColors=false;mesh.material.color.set(name==='base'?'#333b49':'#1d2840');mesh.material.roughness=.86;owned.materials.add(mesh.material);}}
    const net=hoop.getObjectByName('net');
    // The view's inexpensive net deformation uses rim-local vertices and y<=0.
    net.geometry=net.geometry.clone();owned.geometries.add(net.geometry);net.geometry.translate(-rim.x,-rim.y,-rim.z);net.position.add(rim);
@@ -125,18 +128,18 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
 
   // Centre the design ball inside a separate pivot so rotation never orbits its
   // ground-origin authoring root. Engine positions continue to mean ball centre.
-  const ball=new THREE.Group();ball.name='design-basketball';
-  const center=anchor(ballModel,'anchor_ball_center');ballModel.position.sub(center);ballModel.scale.setScalar(court.ballR/.12);ballModel.position.multiplyScalar(court.ballR/.12);ball.add(ballModel);
-  ball.traverse(o=>{if(o.isMesh)o.castShadow=quality>=1;});
+  const ballMap=ballTexture(512);ballMap.anisotropy=Math.min(4,anisotropy);
+  const ball=new THREE.Mesh(new THREE.SphereGeometry(court.ballR,24,16),new THREE.MeshStandardMaterial({map:ballMap,roughness:.72,metalness:0}));ball.name='broadcast-basketball';ball.castShadow=quality>=1;
+  owned.geometries.add(ball.geometry);owned.materials.add(ball.material);owned.textures.add(ballMap);
+  // The original leather surface is retained at the authoritative ball radius.
 
   const removed=new THREE.Group();
   for(const clock of clocks)arena.attach(clock);
-  for(const name of ['court','basket-1','basket--1','stands','arena-shell','arena-ceiling','arena-fixtures','arena-scoreboard']){
+  for(const name of ['basket-1','basket--1','stands','arena-shell','arena-ceiling','arena-fixtures','arena-scoreboard']){
    const o=arena.getObjectByName(name);if(o)removed.add(o);
   }
   // The apron remains under the authored surface and retains team tinting.
   const apron=arena.getObjectByName('court-apron');
-  if(apron?.material){mergeResources(owned,resources(apron));const map=wood.clone();map.repeat.set((court.L+8.4)/1.6,(court.W+6.8)/1.6);owned.textures.add(map);const mat=apron.material.clone();owned.materials.add(mat);mat.map=map;mat.roughness=.72;apron.material=mat;}
   arena.add(venue,...baskets);dyn.nets=nets;dyn.crowdSpots=crowdSpots(court);
   mergeResources(owned,resources(venue));for(const b of baskets)mergeResources(owned,resources(b));mergeResources(owned,resources(ball));
   if(apron)mergeResources(owned,resources(apron));

@@ -172,7 +172,8 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
  const lights=new THREE.Group();
  lights.add(new THREE.HemisphereLight(0xfff4e6,0x2a1a10,0.55));
  const key=new THREE.DirectionalLight(0xfff3e2,2.6);key.position.set(4,22,6);key.target.position.set(0,0,0);
- key.castShadow=true;key.shadow.mapSize.set(quality>=2?2048:1024,quality>=2?2048:1024);
+ key.castShadow=true;// A 1K filtered court shadow funds adult silhouettes without lowering screen resolution.
+ key.shadow.mapSize.set(1024,1024);
  Object.assign(key.shadow.camera,{left:-hx-2,right:hx+2,top:hz+2,bottom:-hz-2,near:5,far:40});key.shadow.bias=-0.0004;key.shadow.normalBias=0.02;
  lights.add(key,key.target);
  const fill=new THREE.DirectionalLight(0xdbe6ff,0.8);fill.position.set(-8,14,-10);lights.add(fill);
