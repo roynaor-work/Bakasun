@@ -14,7 +14,7 @@ import {fileURLToPath} from 'node:url';
 import {serveIsland,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
 
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
-const out=process.env.ISLAND_CSP_AUDIT_DIR?path.join(process.env.ISLAND_CSP_AUDIT_DIR,'hoops'):fileURLToPath(new URL('../verification/hoops/',import.meta.url));
+const out=process.env.HOOPS_TEST_OUT||(process.env.ISLAND_CSP_AUDIT_DIR?path.join(process.env.ISLAND_CSP_AUDIT_DIR,'hoops'):fileURLToPath(new URL('../verification/hoops/',import.meta.url)));
 await mkdir(out,{recursive:true});
 const server=await serveIsland('/workout/island/'),base=server.url;
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});
@@ -70,7 +70,10 @@ try{for(const viewport of only){
 
  // controls: touch targets and icons only
  const controls=await page.evaluate(()=>[...document.querySelectorAll('[data-hoops-control]')].filter(b=>!b.hidden&&b.offsetParent).map(b=>{const r=b.getBoundingClientRect();return {key:b.dataset.hoopsControl,w:r.width,h:r.height,text:b.textContent.trim(),svg:!!b.querySelector('svg'),label:b.getAttribute('aria-label')};}));
- assert.deepEqual(controls.map(c=>c.key).sort(),['alt','pass','shoot','timeout'],'three actions and a timeout: '+JSON.stringify(controls));
+ const controlMode=await page.locator('.hoops-controls').getAttribute('data-hoops-mode');
+ const expectedControls=controlMode==='ball'?['shoot','pass','move','fake','sprint','timeout']:controlMode==='defense'?['block','steal','switch','sprint','timeout']:['shoot','pass','switch','sprint','timeout'];
+ assert.ok(['ball','offense','defense'].includes(controlMode));
+ assert.deepEqual(controls.map(c=>c.key).sort(),expectedControls.sort(),'explicit contextual actions and hold sprint: '+JSON.stringify(controls));
  for(const c of controls){assert.ok(c.w>=48&&c.h>=48,`${c.key} ${c.w}x${c.h}`);assert.equal(c.text,'',`${c.key} has no words`);assert.ok(c.svg,`${c.key} has an icon`);assert.ok(c.label,`${c.key} is labelled for screen readers`);}
  const stick=await page.locator('.hoops-stick-zone').boundingBox();assert.ok(stick.width>=96&&stick.height>=96);
  check(`${controls.length} controls at least 48 px, icons only, labelled`);
@@ -98,12 +101,12 @@ try{for(const viewport of only){
  if(phone){
   const c={x:stick.x+stick.width/2,y:stick.y+stick.height/2};
   await page.touchscreen.tap(c.x,c.y);
-  const shootBox=await page.locator('[data-hoops-control=shoot]').boundingBox();await page.touchscreen.tap(shootBox.x+shootBox.width/2,shootBox.y+shootBox.height/2);
+  const shootBox=await page.locator('[data-hoops-control=shoot]:visible,[data-hoops-control=block]:visible').boundingBox();assert.ok(shootBox,'the current mode exposes a primary touch action');await page.touchscreen.tap(shootBox.x+shootBox.width/2,shootBox.y+shootBox.height/2);
   await page.evaluate(()=>window.__island.games.current.session.debug.step(30));check('touch on stick and action button accepted');
  }
 
  // floating stick, dead zone, soft curve and sprint at full tilt; tap = short pass, hold = long pass
- await page.evaluate(()=>{window.__island.games.current.session.debug.hold=true;});
+ await page.evaluate(()=>{const d=window.__island.games.current.session.debug;d.hold=true;d.controls.cancel();d.controls.setMode('ball');while(d.controls.held.queued)d.controls.consume();});
  const zoneBox=await page.locator('.hoops-stick-zone').boundingBox(),P={x:zoneBox.x+zoneBox.width*0.62,y:zoneBox.y+zoneBox.height*0.42};
  const readStick=()=>page.evaluate(()=>{const c=window.__island.games.current.session.debug.controls,r=c.elements.ring.getBoundingClientRect(),f=c.consume();return {ring:{x:r.x+r.width/2,y:r.y+r.height/2},held:c.held.stick,m:Math.hypot(f.move.x,f.move.z),sprint:f.sprint};});
  await page.mouse.move(P.x,P.y);await page.mouse.down();
@@ -124,11 +127,18 @@ try{for(const viewport of only){
 
  // shot meter: red, yellow and green zones above the shooter while the shot is held
  const meter=await page.evaluate(()=>{const d=window.__island.games.current.session.debug,e=d.engine,S=e.debug.state,a=e.debug.api;
-  for(let i=0;i<900&&e.snapshot().phase!=='live';i++)d.step(1);
-  const inp=o=>({move:{x:0,z:0},sprint:false,shootDown:false,shootUp:false,passPress:false,passLong:false,passDir:null,altPress:false,switchPress:false,timeoutPress:false,call:null,...o});
-  const me=a.onCourt(0)[0],side=a.side(0),rim=e.court.rim(side);e.debug.give(me.id);S.controlled=me.id;e.debug.place(me.id,rim.x-side*6.2,0.4);S.shotClock=24;
+  // The preceding gesture checks deliberately leave the controls in defence mode.
+  // Isolate this held-shot fixture from their cancellation edges and from RAF play.
+  d.hold=true;d.controls.setMode('ball');d.controls.cancel();while(d.controls.held.queued)d.controls.consume();
+  const inp=o=>({move:{x:0,z:0},sprint:false,shootDown:false,shootUp:false,shootCancel:false,passPress:false,passLong:false,passDir:null,altPress:false,movePress:false,spinPress:false,fakePress:false,switchPress:false,timeoutPress:false,call:null,...o});
+  for(let i=0;i<900&&e.snapshot().phase!=='live';i++)d.step(1,inp({}));
+  const me=a.onCourt(0)[0],side=a.side(0),rim=e.court.rim(side);
+  // Giving a player the ball does not clear an action from the earlier live play.
+  me.act=null;me.actT=0;me.act2=null;me.shot=null;me.air=-1;me.jumpH=0;me.stumble=0;
+  e.debug.give(me.id);S.controlled=me.id;e.debug.place(me.id,rim.x-side*6.2,0.4);S.shotClock=24;
+  d.controls.setMode('ball');d.controls.cancel();while(d.controls.held.queued)d.controls.consume();
   for(const p of a.onCourt(1))e.debug.place(p.id,-side*12,p.z);
-  d.step(1,inp({shootDown:true}));const dbg={phase:e.snapshot().phase,act:me.act,ctl:S.controlled===me.id,own:S.ball.owner===me.id,ball:S.ball.state,auto:S.autopilot,user:S.userTeam};d.step(30,inp({}));
+  d.step(1,inp({shootDown:true}));const dbg={phase:e.snapshot().phase,act:me.act,actT:me.actT,shotType:me.shot?.type,held:me.shot?.held,ctl:S.controlled===me.id,own:S.ball.owner===me.id,ball:S.ball.state,auto:S.autopilot,user:S.userTeam};d.step(30,inp({}));
   const m=document.querySelector('.hoops-meter'),y=m.querySelector('.hoops-meter-yellow').getBoundingClientRect(),g=m.querySelector('.hoops-meter-win').getBoundingClientRect();
   return {dbg,shown:!m.hidden,held:e.snapshot().players.find(p=>p.id===me.id).shotHeld,yH:y.height,gH:g.height,yTop:y.top,gTop:g.top,yBottom:y.bottom,gBottom:g.bottom};});
  assert.ok(meter.shown&&meter.held,'meter shows while the shot is held: '+JSON.stringify(meter));
@@ -145,6 +155,10 @@ try{for(const viewport of only){
  s=await snap();row.score=s.score;row.quarter=s.quarter;assert.ok(s.score[0]+s.score[1]>0,'points were scored');check(`play reached ${s.score.join('-')} in quarter ${s.quarter}`);
 
  // pause freezes the simulation
+ // A screenshot hold must never make this pause assertion pass by itself.
+ const beforePause=await page.evaluate(()=>{const session=window.__island.games.current.session;session.debug.hold=false;return session.snapshot.tick;});
+ await page.waitForFunction(tick=>window.__island.games.current.session.snapshot.tick>tick,beforePause,{timeout:30000});
+ check('RAF advances the engine before pause');
  await page.evaluate(()=>window.__island.games.current.session.setPaused(true));
  const p0=(await snap()).tick;await page.waitForTimeout(700);const p1=(await snap()).tick;assert.equal(p1,p0,'paused game does not step');
  await page.evaluate(()=>window.__island.games.current.session.setPaused(false));check('pause freezes the clock');

@@ -6,6 +6,8 @@ const PATHS={
  pass:'<path d="M4 20c5-8 14-10 22-6"/><path d="m21 9 5 5-6 3"/><circle cx="7" cy="24" r="3.5"/>',
  steal:'<path d="M5 18c4-1 8-1 11 2"/><path d="M5 12c5 0 9 1 12 4"/><circle cx="23" cy="17" r="5"/><path d="M26 6l-3 4m5 0-4 2"/>',
  cross:'<path d="M4 8l8 8-8 8"/><path d="M28 8l-8 8 8 8"/><circle cx="16" cy="16" r="3"/>',
+ spin:'<path d="M25 16a9 9 0 1 1-3-7"/><path d="M25 4v6h-6"/><circle cx="16" cy="17" r="3"/>',
+ fake:'<circle cx="16" cy="9" r="4"/><path d="M8 27v-7c0-5 3-7 8-7s8 2 8 7v7M12 23l4-6 4 6M10 6 7 3m15 3 3-3"/>',
  switch:'<circle cx="10" cy="10" r="4"/><circle cx="22" cy="22" r="4"/><path d="M17 7h7v7m0-7-6 6M15 25H8v-7m0 7 6-6"/>',
  sprint:'<path d="M18 3 9 17h7l-2 12 9-15h-7z"/>',
  timeout:'<path d="M6 7h20M16 7v20"/><path d="M10 27h12"/>',
