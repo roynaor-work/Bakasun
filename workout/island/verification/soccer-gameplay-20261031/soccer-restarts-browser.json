@@ -1,0 +1,516 @@
+[
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "role": "field",
+    "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "scenarios": [
+      {
+        "kind": "throwIn",
+        "fixture": true,
+        "taker": 0,
+        "clip": "restart-throwIn",
+        "windupElapsed": 0.21666666666666665,
+        "contact": 0.32,
+        "ownerBeforeContact": 0,
+        "physicalEvent": {
+          "id": 3,
+          "type": "throw",
+          "player": 0,
+          "target": 6
+        },
+        "nativeCamera": true,
+        "closeCamera": "existing poseCamera debug focus",
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "corner",
+        "fixture": true,
+        "taker": 0,
+        "clip": "restart-corner",
+        "windupElapsed": 0.11666666666666665,
+        "contact": 0.22,
+        "ownerBeforeContact": 0,
+        "physicalEvent": {
+          "id": 6,
+          "type": "loft",
+          "team": 0,
+          "player": 0,
+          "target": null,
+          "x": 14.662809989022703,
+          "z": -5.414875618979941,
+          "distance": 16.05,
+          "power": 0.65
+        },
+        "nativeCamera": true,
+        "closeCamera": "existing poseCamera debug focus",
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "goalKick",
+        "fixture": true,
+        "taker": 2,
+        "clip": "restart-goalKick",
+        "windupElapsed": 0.2333333333333333,
+        "contact": 0.35,
+        "ownerBeforeContact": 2,
+        "physicalEvent": {
+          "id": 9,
+          "type": "pass",
+          "team": 0,
+          "player": 2,
+          "target": null,
+          "x": -10.670370370370371,
+          "z": 2.9,
+          "distance": 5.62962962962963,
+          "power": 0.037037037037037035
+        },
+        "nativeCamera": true,
+        "closeCamera": "existing poseCamera debug focus",
+        "screenshotClockFrozen": true
+      }
+    ],
+    "natural": {
+      "phase": "playing",
+      "elapsed": 1.266666666666667,
+      "positions": [
+        {
+          "id": 0,
+          "x": -0.8,
+          "z": 0,
+          "recover": 0
+        },
+        {
+          "id": 1,
+          "x": -6.888896151710647,
+          "z": -1.4545128853795413,
+          "duty": "outlet",
+          "recover": 0
+        },
+        {
+          "id": 2,
+          "x": -16.79987661072212,
+          "z": 0,
+          "duty": "keeper-track",
+          "recover": 0
+        },
+        {
+          "id": 3,
+          "x": 0.039999999999999925,
+          "z": 0,
+          "duty": "press",
+          "recover": 0
+        },
+        {
+          "id": 4,
+          "x": 4.86983678292751,
+          "z": 5.171192146910568,
+          "duty": "cover",
+          "recover": 0
+        },
+        {
+          "id": 5,
+          "x": 16.764794790722675,
+          "z": 0,
+          "duty": "keeper-track",
+          "recover": 0
+        },
+        {
+          "id": 6,
+          "x": -0.5597251876727227,
+          "z": 9.345800880150101,
+          "duty": "support",
+          "recover": 0
+        },
+        {
+          "id": 7,
+          "x": 5.45788046814548,
+          "z": -5.959101521702074,
+          "duty": "cover",
+          "recover": 0
+        }
+      ],
+      "fixture": false
+    },
+    "inlineProbeBlocked": true,
+    "violations": [],
+    "errors": []
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "role": "keeper",
+    "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "scenarios": [
+      {
+        "kind": "keeperThrow",
+        "fixture": true,
+        "taker": 2,
+        "clip": "restart-keeperThrow",
+        "windupElapsed": 0.2333333333333333,
+        "contact": 0.32,
+        "ownerBeforeContact": 2,
+        "physicalEvent": {
+          "id": 2,
+          "type": "pass",
+          "team": 0,
+          "player": 2,
+          "target": null,
+          "x": -8.971290897311306,
+          "z": 0,
+          "distance": 5.62962962962963,
+          "power": 0.037037037037037035
+        },
+        "nativeCamera": true,
+        "closeCamera": "existing poseCamera debug focus",
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "keeperPunt",
+        "fixture": true,
+        "taker": 2,
+        "clip": "restart-keeperPunt",
+        "windupElapsed": 0.2333333333333333,
+        "contact": 0.35,
+        "ownerBeforeContact": 2,
+        "physicalEvent": {
+          "id": 4,
+          "type": "shot",
+          "team": 0,
+          "player": 2,
+          "power": 0.0303030303030303,
+          "assisted": false
+        },
+        "nativeCamera": true,
+        "closeCamera": "existing poseCamera debug focus",
+        "screenshotClockFrozen": true
+      }
+    ],
+    "keeperSessionFixture": true,
+    "natural": {
+      "phase": "playing",
+      "elapsed": 0.06666666666666667,
+      "positions": [
+        {
+          "id": 0,
+          "x": -0.6872553750309675,
+          "z": -0.0708680499805347,
+          "recover": 0
+        },
+        {
+          "id": 1,
+          "x": -6.887250723293008,
+          "z": -5.069677513609989,
+          "duty": "support",
+          "recover": 0
+        },
+        {
+          "id": 2,
+          "x": -16.40516823542216,
+          "z": 0,
+          "recover": 0
+        },
+        {
+          "id": 3,
+          "x": 1.9426085426498947,
+          "z": -0.005725493888215433,
+          "duty": "press",
+          "recover": 0
+        },
+        {
+          "id": 4,
+          "x": 6.9421008814585115,
+          "z": 4.996831792934773,
+          "duty": "cover",
+          "recover": 0
+        },
+        {
+          "id": 5,
+          "x": 16.329391648687125,
+          "z": -0.0011818023008974593,
+          "duty": "keeper-track",
+          "recover": 0
+        },
+        {
+          "id": 6,
+          "x": -4.9055488142798955,
+          "z": 5.091549972563489,
+          "duty": "support",
+          "recover": 0
+        },
+        {
+          "id": 7,
+          "x": 4.96565992156519,
+          "z": -5.045105959068783,
+          "duty": "cover",
+          "recover": 0
+        }
+      ],
+      "fixture": true
+    },
+    "inlineProbeBlocked": true,
+    "violations": [],
+    "errors": []
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "role": "field",
+    "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "scenarios": [
+      {
+        "kind": "throwIn",
+        "fixture": true,
+        "taker": 0,
+        "clip": "restart-throwIn",
+        "windupElapsed": 0.2333333333333333,
+        "contact": 0.32,
+        "ownerBeforeContact": 0,
+        "physicalEvent": {
+          "id": 3,
+          "type": "throw",
+          "player": 0,
+          "target": 6
+        },
+        "nativeCamera": true,
+        "closeCamera": "existing poseCamera debug focus",
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "corner",
+        "fixture": true,
+        "taker": 0,
+        "clip": "restart-corner",
+        "windupElapsed": 0.09999999999999999,
+        "contact": 0.22,
+        "ownerBeforeContact": 0,
+        "physicalEvent": {
+          "id": 6,
+          "type": "loft",
+          "team": 0,
+          "player": 0,
+          "target": null,
+          "x": 14.662809989022703,
+          "z": -5.414875618979941,
+          "distance": 16.05,
+          "power": 0.65
+        },
+        "nativeCamera": true,
+        "closeCamera": "existing poseCamera debug focus",
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "goalKick",
+        "fixture": true,
+        "taker": 2,
+        "clip": "restart-goalKick",
+        "windupElapsed": 0.2333333333333333,
+        "contact": 0.35,
+        "ownerBeforeContact": 2,
+        "physicalEvent": {
+          "id": 9,
+          "type": "pass",
+          "team": 0,
+          "player": 2,
+          "target": null,
+          "x": -10.670370370370371,
+          "z": 2.9,
+          "distance": 5.62962962962963,
+          "power": 0.037037037037037035
+        },
+        "nativeCamera": true,
+        "closeCamera": "existing poseCamera debug focus",
+        "screenshotClockFrozen": true
+      }
+    ],
+    "natural": {
+      "phase": "playing",
+      "elapsed": 1.4499999999999997,
+      "positions": [
+        {
+          "id": 0,
+          "x": -0.8,
+          "z": 0,
+          "recover": 0
+        },
+        {
+          "id": 1,
+          "x": -6.8781726066264675,
+          "z": -0.4829096080743212,
+          "duty": "outlet",
+          "recover": 0
+        },
+        {
+          "id": 2,
+          "x": -16.79996806845629,
+          "z": 0,
+          "duty": "keeper-track",
+          "recover": 0
+        },
+        {
+          "id": 3,
+          "x": 0.03999999999999991,
+          "z": 0,
+          "duty": "press",
+          "recover": 0
+        },
+        {
+          "id": 4,
+          "x": 4.806133342521405,
+          "z": 5.131567301861755,
+          "duty": "cover",
+          "recover": 0
+        },
+        {
+          "id": 5,
+          "x": 16.77654382105202,
+          "z": 0,
+          "duty": "keeper-track",
+          "recover": 0
+        },
+        {
+          "id": 6,
+          "x": -0.30090044280880024,
+          "z": 9.599118715548832,
+          "duty": "support",
+          "recover": 0
+        },
+        {
+          "id": 7,
+          "x": 5.467644270999785,
+          "z": -5.748450807455184,
+          "duty": "cover",
+          "recover": 0
+        }
+      ],
+      "fixture": false
+    },
+    "inlineProbeBlocked": true,
+    "violations": [],
+    "errors": []
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "role": "keeper",
+    "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "scenarios": [
+      {
+        "kind": "keeperThrow",
+        "fixture": true,
+        "taker": 2,
+        "clip": "restart-keeperThrow",
+        "windupElapsed": 0.2333333333333333,
+        "contact": 0.32,
+        "ownerBeforeContact": 2,
+        "physicalEvent": {
+          "id": 2,
+          "type": "pass",
+          "team": 0,
+          "player": 2,
+          "target": null,
+          "x": -8.971290897311306,
+          "z": 0,
+          "distance": 5.62962962962963,
+          "power": 0.037037037037037035
+        },
+        "nativeCamera": true,
+        "closeCamera": "existing poseCamera debug focus",
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "keeperPunt",
+        "fixture": true,
+        "taker": 2,
+        "clip": "restart-keeperPunt",
+        "windupElapsed": 0.2333333333333333,
+        "contact": 0.35,
+        "ownerBeforeContact": 2,
+        "physicalEvent": {
+          "id": 4,
+          "type": "shot",
+          "team": 0,
+          "player": 2,
+          "power": 0.0303030303030303,
+          "assisted": false
+        },
+        "nativeCamera": true,
+        "closeCamera": "existing poseCamera debug focus",
+        "screenshotClockFrozen": true
+      }
+    ],
+    "keeperSessionFixture": true,
+    "natural": {
+      "phase": "playing",
+      "elapsed": 0.05,
+      "positions": [
+        {
+          "id": 0,
+          "x": -0.7284422330824022,
+          "z": -0.04497916777677573,
+          "recover": 0
+        },
+        {
+          "id": 1,
+          "x": -6.9284993291833805,
+          "z": -5.04432445116607,
+          "duty": "support",
+          "recover": 0
+        },
+        {
+          "id": 2,
+          "x": -16.364347008353597,
+          "z": 0,
+          "recover": 0
+        },
+        {
+          "id": 3,
+          "x": 1.9633019602135533,
+          "z": -0.0023664478735280848,
+          "duty": "press",
+          "recover": 0
+        },
+        {
+          "id": 4,
+          "x": 6.96317245556213,
+          "z": 4.998062225137204,
+          "duty": "cover",
+          "recover": 0
+        },
+        {
+          "id": 5,
+          "x": 16.31770789728602,
+          "z": -0.0003995237627527425,
+          "duty": "keeper-track",
+          "recover": 0
+        },
+        {
+          "id": 6,
+          "x": -4.940242758306591,
+          "z": 5.058077350883145,
+          "duty": "support",
+          "recover": 0
+        },
+        {
+          "id": 7,
+          "x": 4.978162688322188,
+          "z": -5.028444154133671,
+          "duty": "cover",
+          "recover": 0
+        }
+      ],
+      "fixture": true
+    },
+    "inlineProbeBlocked": true,
+    "violations": [],
+    "errors": []
+  }
+]

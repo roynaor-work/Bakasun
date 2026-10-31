@@ -1,0 +1,265 @@
+[
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "done": true,
+    "result": {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "devicePixelRatio": 1,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "seed": 7,
+      "level": 1,
+      "pinnedQuality": 0,
+      "warmupSeconds": 3,
+      "seconds": 30.03,
+      "frames": 576,
+      "fps": 19.2,
+      "frameMs": {
+        "mean": 52.14,
+        "p50": 50,
+        "p95": 66.7,
+        "p99": 116.7,
+        "max": 400.1
+      },
+      "over33": 570,
+      "over50": 138,
+      "tickMs": {
+        "mean": 0.26,
+        "p50": 0.2,
+        "p95": 0.6,
+        "p99": 1,
+        "max": 3.8
+      },
+      "renderMs": {
+        "mean": 4.3,
+        "p50": 2.9,
+        "p95": 4.9,
+        "p99": 5.7,
+        "max": 400.7
+      },
+      "glMs": {
+        "mean": 1.79,
+        "p50": 1,
+        "p95": 1.6,
+        "p99": 3.5,
+        "max": 399.7
+      },
+      "animMs": {
+        "mean": 2.51,
+        "p50": 1.8,
+        "p95": 3.6,
+        "p99": 4.5,
+        "max": 296.1
+      },
+      "programsCompiled": 0,
+      "allocByPhaseMB": {
+        "tick": 55.3,
+        "render": 53.1,
+        "gl": 26.9,
+        "other": -0.7
+      },
+      "longTasks": 4,
+      "longTaskMs": 1398,
+      "heap": {
+        "startMB": 27,
+        "endMB": 25.8,
+        "allocatedMB": 134.6,
+        "allocatedMBPerSecond": 4.48,
+        "gcCount": 23
+      },
+      "assetReadyMs": 2240,
+      "warmup": {
+        "programs": 56,
+        "ms": 1472
+      },
+      "quality": {
+        "final": 3,
+        "pixelRatio": 0.85,
+        "changes": [
+          {
+            "atSeconds": 0.6,
+            "quality": 1
+          },
+          {
+            "atSeconds": 1.6,
+            "quality": 2
+          },
+          {
+            "atSeconds": 3.1,
+            "quality": 3
+          }
+        ],
+        "crowdCount": 10,
+        "shadows": false,
+        "triangles": 50035,
+        "drawCalls": 34,
+        "assetStatus": "ready",
+        "turf": {
+          "turfStatus": "ready",
+          "turfMaps": 1,
+          "source": "design/environment"
+        },
+        "lod": 1
+      },
+      "match": {
+        "score": [
+          4,
+          0
+        ],
+        "elapsed": 24.4,
+        "phase": "playing",
+        "events": {
+          "goal": 4,
+          "shot": 5,
+          "pass": 9,
+          "loft": 0,
+          "header": 0,
+          "steal": 0,
+          "save": 0
+        }
+      }
+    },
+    "errors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "violations": []
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "done": true,
+    "result": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "devicePixelRatio": 1,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "seed": 7,
+      "level": 1,
+      "pinnedQuality": 0,
+      "warmupSeconds": 3,
+      "seconds": 30.03,
+      "frames": 688,
+      "fps": 22.9,
+      "frameMs": {
+        "mean": 43.65,
+        "p50": 33.4,
+        "p95": 50.1,
+        "p99": 100.1,
+        "max": 416.7
+      },
+      "over33": 684,
+      "over50": 89,
+      "tickMs": {
+        "mean": 0.23,
+        "p50": 0.2,
+        "p95": 0.5,
+        "p99": 0.9,
+        "max": 2.7
+      },
+      "renderMs": {
+        "mean": 4.04,
+        "p50": 2.8,
+        "p95": 4.8,
+        "p99": 5.4,
+        "max": 403.5
+      },
+      "glMs": {
+        "mean": 1.94,
+        "p50": 1,
+        "p95": 3,
+        "p99": 3.6,
+        "max": 344.2
+      },
+      "animMs": {
+        "mean": 2.1,
+        "p50": 1.2,
+        "p95": 3.4,
+        "p99": 4.1,
+        "max": 281.9
+      },
+      "programsCompiled": 0,
+      "allocByPhaseMB": {
+        "tick": 55.9,
+        "render": 54.9,
+        "gl": 31.7,
+        "other": 1.5
+      },
+      "longTasks": 4,
+      "longTaskMs": 1657,
+      "heap": {
+        "startMB": 19.9,
+        "endMB": 26.8,
+        "allocatedMB": 143.9,
+        "allocatedMBPerSecond": 4.79,
+        "gcCount": 22
+      },
+      "assetReadyMs": 2003,
+      "warmup": {
+        "programs": 57,
+        "ms": 183
+      },
+      "quality": {
+        "final": 3,
+        "pixelRatio": 0.85,
+        "changes": [
+          {
+            "atSeconds": 0.5,
+            "quality": 1
+          },
+          {
+            "atSeconds": 1,
+            "quality": 2
+          },
+          {
+            "atSeconds": 3.1,
+            "quality": 3
+          }
+        ],
+        "crowdCount": 10,
+        "shadows": false,
+        "triangles": 49971,
+        "drawCalls": 35,
+        "assetStatus": "ready",
+        "turf": {
+          "turfStatus": "ready",
+          "turfMaps": 1,
+          "source": "design/environment"
+        },
+        "lod": 1
+      },
+      "match": {
+        "score": [
+          4,
+          0
+        ],
+        "elapsed": 24.4,
+        "phase": "playing",
+        "events": {
+          "goal": 4,
+          "shot": 3,
+          "pass": 10,
+          "loft": 0,
+          "header": 0,
+          "steal": 0,
+          "save": 0
+        }
+      }
+    },
+    "errors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "violations": []
+  }
+]
