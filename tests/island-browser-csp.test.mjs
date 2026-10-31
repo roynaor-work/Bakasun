@@ -55,6 +55,19 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       assert.ok(blob.csp.violations.some(v=>v.kind==='event'&&v.effectiveDirective==='worker-src'&&v.blockedURI.startsWith('blob')));
     }finally{await blob.close();}
 
+    const workerStartup=await fixture('blocked-worker-startup-eval');
+    try{
+      await workerStartup.page.route('**/tools/csp-startup-worker.js',route=>route.fulfill({headers:{'content-type':'text/javascript','content-security-policy':server.csp},
+        body:"let blocked=false;try{eval('self.__startupEvalRan=true')}catch(error){blocked=true}postMessage({blocked,executed:!!self.__startupEvalRan});"}));
+      const startup=await workerStartup.page.evaluate(url=>new Promise((resolve,reject)=>{
+        const worker=window.__cspStartupWorker=new Worker(url);worker.onmessage=event=>resolve(event.data);worker.onerror=event=>reject(Error(event.message));
+      }),server.url+'tools/csp-startup-worker.js');
+      assert.deepEqual(startup,{blocked:true,executed:false});
+      await assert.rejects(()=>workerStartup.csp.assertClean(),/Island CSP audit failed/);
+      assert.ok(workerStartup.csp.violations.length>0,'Worker startup policy violations cannot be silently lost before its hook');
+      await workerStartup.page.evaluate(()=>window.__cspStartupWorker.terminate());
+    }finally{await workerStartup.close();}
+
     const frame=await fixture('blocked-child-frame-inline');
     try{
       await frame.page.route('**/tools/csp-child.html',route=>route.fulfill({headers:{'content-type':'text/html','content-security-policy':server.csp},body:'<!doctype html><script>window.__childInlineRan=true</script>'}));

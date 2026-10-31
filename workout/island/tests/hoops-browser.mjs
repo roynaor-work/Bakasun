@@ -43,6 +43,7 @@ try{for(const viewport of only){
   await page.screenshot({path:path.join(out,`${tag}-${name}.jpg`),type:'jpeg',quality:84,timeout:120000});
   await page.evaluate(()=>{window.__island.games.current.session.debug.hold=false;});};
 
+ let suiteError=null;
  try{await page.goto(base+'?dev=1',{waitUntil:'networkidle'});await csp.assertClean();
  await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded);
  await page.locator('[data-action=avatar-start]').click();
@@ -157,8 +158,15 @@ try{for(const viewport of only){
  const real=errors.filter(e=>!/favicon|Failed to load resource: the server responded with a status of 404/.test(e));
  await csp.assertClean();assert.deepEqual(real,[],'no console errors');assert.deepEqual(outside,[],'no requests outside the app');check('no console errors, no outside requests');
  row.csp=csp.snapshot();report.viewports.push(row);
- }catch(error){row.failed=true;row.error=error.stack||error.message;row.errors=errors;row.outside=outside;row.csp=csp.snapshot();report.viewports.push(row);throw error;}
- finally{try{await csp.assertClean();}catch(error){Object.assign(row,{failed:true,error:error.stack||error.message,csp:csp.snapshot()});throw error;}finally{await writeFile(path.join(out,'verification.json'),JSON.stringify(report,null,1));await context.close();await csp.dispose();}}
+ }catch(error){suiteError=error;row.failed=true;row.error=error.stack||error.message;row.errors=errors;row.outside=outside;row.csp=csp.snapshot();report.viewports.push(row);throw error;}
+ finally{
+  let auditError=null;const failed=(error,field)=>{auditError??=error;row.failed=true;row[field]=error.stack||error.message;row.error??=error.stack||error.message;};
+  try{await csp.assertClean();}catch(error){failed(error,'cspFailure');}
+  try{await context.close();await csp.assertClean();}catch(error){failed(error,'cspAfterCloseFailure');}
+  row.csp=csp.snapshot();
+  try{await writeFile(path.join(out,'verification.json'),JSON.stringify(report,null,1));}finally{await csp.dispose();}
+  if(!suiteError&&auditError)throw auditError;
+ }
 }
 await writeFile(path.join(out,'verification.json'),JSON.stringify(report,null,1));
 console.log('hoops browser: all viewports passed');

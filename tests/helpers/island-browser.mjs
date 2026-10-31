@@ -30,7 +30,8 @@ export async function installIslandCspMonitor(context) {
   if (cspMonitors.has(context)) return cspMonitors.get(context);
   const installation = (async () => {
     const expectedPolicy = await readIslandCsp(), violations = [], policyErrors = [], workers = [];
-    const sessions = new Map(), attaching = new Map(), pending = new Set();
+    const sessions = new Map(), attaching = new Map(), pending = new Set(), resumeWorkers = new Set(), workerClosers = new Set();
+    context.on('close', () => {for(const close of workerClosers)close();});
     const binding = '__islandReportCspViolation';
     const record = value => violations.push({...value, observedAt: Date.now()});
     await context.exposeBinding(binding, ({page, frame}, value) => record({kind:'event', pageUrl:page?.url(), frameUrl:frame?.url(), ...value}));
@@ -70,20 +71,66 @@ export async function installIslandCspMonitor(context) {
               url:entry.url, lineNumber:entry.lineNumber, workerId:entry.workerId});
           });
           await Promise.all([cdp.send('Audits.enable'), cdp.send('Log.enable')]);
-          page.on('worker', worker => {
-            const entry = {url:worker.url(), hooked:false, closed:false}; workers.push(entry);
-            worker.on('close', () => {entry.closed = true;});
-            // The page CDP audit/log channels cover startup. Also listen inside
-            // workers once attached so later importScripts/eval policy errors
-            // are reported even if their console lacks Chrome's usual wording.
-            const hook = worker.evaluate(() => globalThis.addEventListener('securitypolicyviolation', event => {
-              console.error('ISLAND_CSP_VIOLATION ' + JSON.stringify({blockedURI:event.blockedURI, effectiveDirective:event.effectiveDirective,
-                disposition:event.disposition, originalPolicy:event.originalPolicy, sourceFile:event.sourceFile, lineNumber:event.lineNumber}));
-            }, true)).then(() => {entry.hooked = true;}).catch(error => {
-              if (!entry.closed) policyErrors.push({url:worker.url(), reason:`Worker CSP hook failed: ${error.message}`});
+          // Worker security diagnostics do not reliably reach a page session.
+          // Attach ONLY its related workers (never documents/other contexts),
+          // install a Runtime binding while startup is paused, and always
+          // resume, including when a worker domain or hook reports an error.
+          const children=new Map();let commandId=0;
+          function command(child,method,params={}){
+            if(child.entry.closed)return Promise.reject(Error('Worker target closed'));
+            const id=++commandId;
+            return new Promise((resolve,reject)=>{
+              const timer=setTimeout(()=>{child.commands.delete(id);reject(Error(`Worker CDP timeout: ${method}`));},10000);
+              child.commands.set(id,{resolve,reject,timer});
+              cdp.send('Target.sendMessageToTarget',{sessionId:child.sessionId,message:JSON.stringify({id,method,params})}).catch(error=>{
+                clearTimeout(timer);child.commands.delete(id);reject(error);
+              });
             });
-            pending.add(hook); hook.finally(() => pending.delete(hook));
+          }
+          function closeChild(child){
+            child.entry.closed=true;resumeWorkers.delete(child.resume);
+            for(const request of child.commands.values()){clearTimeout(request.timer);request.reject(Error('Worker target closed'));}
+            child.commands.clear();children.delete(child.sessionId);workerClosers.delete(child.close);
+          }
+          cdp.on('Target.receivedMessageFromTarget',({sessionId,message})=>{
+            const child=children.get(sessionId);if(!child)return;
+            const value=JSON.parse(message);
+            if(value.id){const request=child.commands.get(value.id);if(!request)return;clearTimeout(request.timer);child.commands.delete(value.id);
+              if(value.error)request.reject(Error(value.error.message));else request.resolve(value.result);return;}
+            if(value.method==='Runtime.bindingCalled'&&value.params.name==='__islandWorkerCsp'){
+              try{record({kind:'worker-event',workerUrl:child.entry.url,pageUrl:page.url(),...JSON.parse(value.params.payload)});}
+              catch(error){policyErrors.push({url:child.entry.url,reason:`Worker CSP event unreadable: ${error.message}`});}
+            }else if(value.method==='Audits.issueAdded'&&value.params.issue.code==='ContentSecurityPolicyIssue'){
+              record({kind:'worker-audit',workerUrl:child.entry.url,...value.params.issue.details.contentSecurityPolicyIssueDetails});
+            }else if(value.method==='Log.entryAdded'&&cspMessage.test(value.params.entry.text)){
+              record({kind:'worker-log',workerUrl:child.entry.url,...value.params.entry});
+            }
           });
+          cdp.on('Target.detachedFromTarget',({sessionId})=>{const child=children.get(sessionId);if(child)closeChild(child);});
+          cdp.on('Target.attachedToTarget',({sessionId,targetInfo,waitingForDebugger})=>{
+            const entry={url:targetInfo.url,hooked:false,closed:false,waitingForDebugger,domains:{}};workers.push(entry);
+            const child={sessionId,entry,commands:new Map()};children.set(sessionId,child);
+            child.resume=()=>command(child,'Runtime.runIfWaitingForDebugger');child.close=()=>closeChild(child);
+            resumeWorkers.add(child.resume);workerClosers.add(child.close);
+            const hook=(async()=>{
+              try{
+                // Not every worker target exposes Log/Audits. Runtime binding
+                // plus the pre-start listener is required; native logs are an
+                // additional independent channel when its domains are present.
+                await Promise.all(['Log.enable','Audits.enable'].map(async method=>{
+                  try{await command(child,method);entry.domains[method]=true;}catch{entry.domains[method]=false;}
+                }));
+                await command(child,'Runtime.enable');
+                await command(child,'Runtime.addBinding',{name:'__islandWorkerCsp'});
+                const result=await command(child,'Runtime.evaluate',{expression:`globalThis.addEventListener('securitypolicyviolation',event=>globalThis.__islandWorkerCsp(JSON.stringify({blockedURI:event.blockedURI,effectiveDirective:event.effectiveDirective,violatedDirective:event.violatedDirective,disposition:event.disposition,originalPolicy:event.originalPolicy,sourceFile:event.sourceFile,lineNumber:event.lineNumber,columnNumber:event.columnNumber})),true);typeof globalThis.__islandWorkerCsp`});
+                if(result.exceptionDetails||result.result?.value!=='function')throw Error('Worker CSP listener/binding was not installed');
+                entry.hooked=true;
+              }catch(error){if(!entry.closed)policyErrors.push({url:entry.url,reason:`Worker CSP hook failed: ${error.message}`});}
+              finally{if(!entry.closed)await child.resume().catch(error=>{if(!entry.closed)policyErrors.push({url:entry.url,reason:`Unable to resume worker: ${error.message}`});});}
+            })();
+            pending.add(hook);hook.finally(()=>pending.delete(hook));
+          });
+          await cdp.send('Target.setAutoAttach',{autoAttach:true,waitForDebuggerOnStart:true,flatten:false,filter:[{type:'worker',exclude:false},{exclude:true}]});
         } catch (error) {
           if (!page.isClosed()) policyErrors.push({url:page.url(), reason:`Chromium CSP audit unavailable: ${error.message}`});
         }
@@ -104,7 +151,11 @@ export async function installIslandCspMonitor(context) {
         await new Promise(resolve => setTimeout(resolve, 25));
         if (violations.length || policyErrors.length) throw Error(`Island CSP audit failed: ${JSON.stringify(snapshot())}`);
       },
-      async dispose() { await Promise.allSettled([...sessions.values()].map(session => session.detach())); sessions.clear(); },
+      async dispose() {
+        await Promise.allSettled([...resumeWorkers].map(resume=>resume()));
+        await Promise.allSettled([...sessions.values()].map(async session=>{try{await session.send('Target.setAutoAttach',{autoAttach:false,waitForDebuggerOnStart:false,flatten:false});}catch{}await session.detach();session.removeAllListeners();}));
+        for(const close of [...workerClosers])close();sessions.clear();
+      },
     };
   })();
   cspMonitors.set(context, installation); return installation;

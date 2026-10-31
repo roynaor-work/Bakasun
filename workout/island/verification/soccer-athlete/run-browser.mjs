@@ -42,6 +42,7 @@ try{
    const s=await snap();assert.equal(s.renderMetrics.assetStatus,'ready');assert.equal(s.renderMetrics.assetStats.kind,'athlete');
    assert.equal(s.renderMetrics.modelCount,8);assert.equal(s.renderMetrics.fallbackCount,0);assert.equal(s.renderMetrics.assetStats.clips.length,13);return s;
   }
+  let suiteError=null;
   try{
    await page.clock.install();await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await csp.assertClean();
    await page.waitForFunction(()=>Boolean(window.__island));
@@ -98,7 +99,14 @@ try{
    const family=downloads.filter(d=>new URL(d.url).pathname.includes('/assets/athlete/'));current.athleteUrls=[...new Set(family.map(d=>d.url))];
    assert.equal(current.athleteUrls.length,11,'GLB and every external texture loaded');
    await csp.assertClean();assert.deepEqual(errors,[]);current.csp=csp.snapshot();current.errors=errors;current.warnings=warnings;current.pass=true;console.log('soccer acceptance passed',viewport.width,current.gameAdditionalBytes);
-  }catch(error){current.pass=false;current.failure=error.message;current.errors=errors;current.warnings=warnings;current.downloads=downloads;current.csp=csp.snapshot();await screenshot('failure').catch(()=>{});throw error;}
-  finally{try{await csp.assertClean();}catch(error){Object.assign(current,{pass:false,failure:error.message,csp:csp.snapshot()});throw error;}finally{await writeFile(directory+reportFile,JSON.stringify(report,null,2)+'\n');await context.close();await csp.dispose();}}
+  }catch(error){suiteError=error;current.pass=false;current.failure=error.message;current.errors=errors;current.warnings=warnings;current.downloads=downloads;current.csp=csp.snapshot();await screenshot('failure').catch(()=>{});throw error;}
+  finally{
+   let auditError=null;const failed=(error,field)=>{auditError??=error;current.pass=false;current[field]=error.message;current.failure??=error.message;};
+   try{await csp.assertClean();}catch(error){failed(error,'cspFailure');}
+   try{await context.close();await csp.assertClean();}catch(error){failed(error,'cspAfterCloseFailure');}
+   current.csp=csp.snapshot();
+   try{await writeFile(directory+reportFile,JSON.stringify(report,null,2)+'\n');}finally{await csp.dispose();}
+   if(!suiteError&&auditError)throw auditError;
+  }
  }
 }finally{await browser.close();await server.close();}

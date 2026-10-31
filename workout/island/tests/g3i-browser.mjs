@@ -17,10 +17,19 @@ async function verify(part,viewports,scenario){
   const start=async(id,stage=1)=>{await page.evaluate(({id,stage})=>window.__island.games.start(id,undefined,stage),{id,stage});if(await page.locator('[data-action=game-understood]').count()){await page.clock.runFor(32);await tap('[data-action=game-understood]');}await ready();await tick(100);await nav();assert.ok(await snap(),id+' did not start');};
   const exit=async()=>{if(!await page.locator('.game-pause-sheet').count())await tap('[data-action=game-pause]');await tap('[data-action=game-exit]');await nav();};
   const shot=async(name,at=844)=>{if(viewport.width!==at)return;await page.screenshot({path:directory+name+'.png',type:'png'});shots.push(name+'.png');};
+  let suiteError=null;
   try{await page.clock.install();await page.goto(target.href,{waitUntil:'networkidle'});await csp.assertClean();await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));await tap('[data-action=avatar-start]');await tick(32);
    await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();e.tick=()=>({ok:true});data.featureFlags.events=false;e.state.money=100000;for(const type of ['soccer']){let done=false;for(let z=0;z<e.state.world.size&&!done;z++)for(let x=0;x<e.state.world.size&&!done;x++)if(e.place(type,x,z).ok)done=true;}data.config.minigames.soccer.view.slowFrameMs=10000;});
    const result=await scenario({page,context,viewport,tick,snap,tap,start,exit,shot,nav,ready,assert});await csp.assertClean();assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);reports.push({...viewport,...result,errors,outside,shots,csp:csp.snapshot()});console.log(part,'verified',viewport);
-  }catch(e){reports.push({...viewport,failed:true,error:e.stack||e.message,errors,outside,shots,csp:csp.snapshot()});console.error(part,'failed',viewport,errors,await snap().catch(()=>null));throw e;}finally{try{await csp.assertClean();}catch(error){Object.assign(reports.at(-1),{failed:true,error:error.stack||error.message,csp:csp.snapshot()});throw error;}finally{await writeFile(directory+(width?`${width}-verification.json`:'verification.json'),JSON.stringify({part,browser:'Chromium / SwiftShader',browserVersion:browser.version(),physicalPhone:false,iPhone:false,phoneFPS:false,reports})+'\n');await context.close();await csp.dispose();}}
+  }catch(e){suiteError=e;reports.push({...viewport,failed:true,error:e.stack||e.message,errors,outside,shots,csp:csp.snapshot()});console.error(part,'failed',viewport,errors,await snap().catch(()=>null));throw e;}finally{
+   const row=reports.at(-1);let auditError=null;
+   const failed=(error,field)=>{auditError??=error;row.failed=true;row[field]=error.stack||error.message;row.error??=error.stack||error.message;};
+   try{await csp.assertClean();}catch(error){failed(error,'cspFailure');}
+   try{await context.close();await csp.assertClean();}catch(error){failed(error,'cspAfterCloseFailure');}
+   row.csp=csp.snapshot();
+   try{await writeFile(directory+(width?`${width}-verification.json`:'verification.json'),JSON.stringify({part,browser:'Chromium / SwiftShader',browserVersion:browser.version(),physicalPhone:false,iPhone:false,phoneFPS:false,reports})+'\n');}finally{await csp.dispose();}
+   if(!suiteError&&auditError)throw auditError;
+  }
  }await writeFile(directory+(width?`${width}-verification.json`:'verification.json'),JSON.stringify({part,browser:'Chromium / SwiftShader',browserVersion:browser.version(),physicalPhone:false,iPhone:false,phoneFPS:false,reports})+'\n');}finally{await browser.close();await server.close();}
 }
 
