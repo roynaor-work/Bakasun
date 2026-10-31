@@ -8,17 +8,15 @@
 // Usage: CHROMIUM_PATH=... PLAYWRIGHT_MODULE=... node workout/island/tests/hoops-browser.mjs
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
-import {createServer} from 'node:http';
-import {mkdir,readFile,stat,writeFile} from 'node:fs/promises';
+import {mkdir,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {serveIsland,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
 
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
-const workout=path.resolve(fileURLToPath(new URL('../../',import.meta.url))),out=fileURLToPath(new URL('../verification/hoops/',import.meta.url));
+const out=process.env.ISLAND_CSP_AUDIT_DIR?path.join(process.env.ISLAND_CSP_AUDIT_DIR,'hoops'):fileURLToPath(new URL('../verification/hoops/',import.meta.url));
 await mkdir(out,{recursive:true});
-const types={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.json':'application/json','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.glb':'model/gltf-binary','.ogg':'audio/ogg','.jpg':'image/jpeg','.webmanifest':'application/manifest+json'};
-const server=createServer(async(req,res)=>{try{const p=decodeURIComponent(new URL(req.url,'http://x').pathname);if(!p.startsWith('/workout/')){res.writeHead(404).end();return;}let f=path.resolve(workout,p.slice('/workout/'.length)||'.');if(f!==workout&&!f.startsWith(workout+path.sep)){res.writeHead(403).end();return;}if((await stat(f)).isDirectory())f=path.join(f,'index.html');res.writeHead(200,{'content-type':types[path.extname(f)]||'application/octet-stream'});res.end(await readFile(f));}catch{res.writeHead(404).end();}});
-await new Promise(r=>server.listen(0,'127.0.0.1',r));const base=`http://127.0.0.1:${server.address().port}/workout/island/`;
+const server=await serveIsland('/workout/island/'),base=server.url;
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});
 const only=(process.env.HOOPS_VIEWPORTS||'1280x720,844x390,390x844').split(',').map(v=>{const [width,height]=v.split('x').map(Number);return {width,height};});
 const report={browser:browser.version(),renderer:'SwiftShader (software WebGL)',physicalPhone:false,viewports:[]};
@@ -32,9 +30,9 @@ const PROBE=()=>{
  HTMLElement.prototype.requestFullscreen=undefined;
 };
 
-for(const viewport of only){
+try{for(const viewport of only){
  const phone=viewport.width<900||viewport.height<500,context=await browser.newContext({viewport,hasTouch:phone,isMobile:phone,deviceScaleFactor:1});context.setDefaultTimeout(240000);
- const page=await context.newPage(),errors=[],outside=[],tag=`${viewport.width}x${viewport.height}`,row={...viewport,checks:[]};
+ const csp=await installIslandCspMonitor(context),page=await context.newPage(),errors=[],outside=[],tag=`${viewport.width}x${viewport.height}`,row={...viewport,checks:[]};await csp.attachPage(page);
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&!u.pathname.startsWith('/workout/'))outside.push(u.href);});
  await page.addInitScript(PROBE);
@@ -45,7 +43,7 @@ for(const viewport of only){
   await page.screenshot({path:path.join(out,`${tag}-${name}.jpg`),type:'jpeg',quality:84,timeout:120000});
   await page.evaluate(()=>{window.__island.games.current.session.debug.hold=false;});};
 
- await page.goto(base+'?dev=1',{waitUntil:'networkidle'});
+ try{await page.goto(base+'?dev=1',{waitUntil:'networkidle'});await csp.assertClean();
  await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded);
  await page.locator('[data-action=avatar-start]').click();
  const listenersBefore=await page.evaluate(()=>window.__probe.listeners());
@@ -157,9 +155,11 @@ for(const viewport of only){
  check('leaving the game releases the session, listeners and audio');
 
  const real=errors.filter(e=>!/favicon|Failed to load resource: the server responded with a status of 404/.test(e));
- assert.deepEqual(real,[],'no console errors');assert.deepEqual(outside,[],'no requests outside the app');check('no console errors, no outside requests');
- report.viewports.push(row);await context.close();
+ await csp.assertClean();assert.deepEqual(real,[],'no console errors');assert.deepEqual(outside,[],'no requests outside the app');check('no console errors, no outside requests');
+ row.csp=csp.snapshot();report.viewports.push(row);
+ }catch(error){row.failed=true;row.error=error.stack||error.message;row.errors=errors;row.outside=outside;row.csp=csp.snapshot();report.viewports.push(row);throw error;}
+ finally{try{await csp.assertClean();}catch(error){Object.assign(row,{failed:true,error:error.stack||error.message,csp:csp.snapshot()});throw error;}finally{await writeFile(path.join(out,'verification.json'),JSON.stringify(report,null,1));await context.close();await csp.dispose();}}
 }
 await writeFile(path.join(out,'verification.json'),JSON.stringify(report,null,1));
-await browser.close();server.close();
 console.log('hoops browser: all viewports passed');
+}finally{await browser.close();await server.close();}

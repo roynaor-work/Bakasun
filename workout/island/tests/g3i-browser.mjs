@@ -2,28 +2,29 @@ import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
+import {serveIsland,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
 import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 async function verify(part,viewports,scenario){
- const directory=fileURLToPath(new URL(`../verification/${part}/`,import.meta.url));await mkdir(directory,{recursive:true});
+ const directory=process.env.ISLAND_CSP_AUDIT_DIR?process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/,'')+'/'+part+'/':fileURLToPath(new URL(`../verification/${part}/`,import.meta.url));await mkdir(directory,{recursive:true});
  const prefix=part.toUpperCase(),width=Number(process.env[prefix+'_WIDTH']);if(width)viewports=[{width,height:Number(process.env[prefix+'_HEIGHT'])||390}];
- const target=new URL(process.env.ISLAND_URL||'http://127.0.0.1:8765/workout/island/');target.searchParams.set('dev','1');
+ const server=await serveIsland('/workout/island/'),target=new URL(server.url);target.searchParams.set('dev','1');
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});const reports=[];
- try{for(const viewport of viewports){const context=await browser.newContext({viewport,hasTouch:true,deviceScaleFactor:1});context.setDefaultTimeout(240000);const page=await context.newPage(),errors=[],outside=[],shots=[];
+ try{for(const viewport of viewports){const context=await browser.newContext({viewport,hasTouch:true,deviceScaleFactor:1});context.setDefaultTimeout(240000);const csp=await installIslandCspMonitor(context),page=await context.newPage(),errors=[],outside=[],shots=[];await csp.attachPage(page);
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&!u.pathname.startsWith('/workout/island/'))outside.push(u.href);});
   await page.addInitScript(()=>{HTMLElement.prototype.requestFullscreen=undefined;Object.defineProperty(screen.orientation,'lock',{configurable:true,value:async()=>{throw Error('unsupported');}});});
   const tick=ms=>page.clock.runFor(ms),snap=()=>page.evaluate(()=>window.__island.games.current?.session.snapshot),tap=s=>page.locator(s).tap(),nav=()=>waitForGameNavigation(page),ready=()=>waitForGameStart(page);
   const start=async(id,stage=1)=>{await page.evaluate(({id,stage})=>window.__island.games.start(id,undefined,stage),{id,stage});if(await page.locator('[data-action=game-understood]').count()){await page.clock.runFor(32);await tap('[data-action=game-understood]');}await ready();await tick(100);await nav();assert.ok(await snap(),id+' did not start');};
   const exit=async()=>{if(!await page.locator('.game-pause-sheet').count())await tap('[data-action=game-pause]');await tap('[data-action=game-exit]');await nav();};
   const shot=async(name,at=844)=>{if(viewport.width!==at)return;await page.screenshot({path:directory+name+'.png',type:'png'});shots.push(name+'.png');};
-  try{await page.clock.install();await page.goto(target.href,{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));await tap('[data-action=avatar-start]');await tick(32);
+  try{await page.clock.install();await page.goto(target.href,{waitUntil:'networkidle'});await csp.assertClean();await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));await tap('[data-action=avatar-start]');await tick(32);
    await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();e.tick=()=>({ok:true});data.featureFlags.events=false;e.state.money=100000;for(const type of ['soccer']){let done=false;for(let z=0;z<e.state.world.size&&!done;z++)for(let x=0;x<e.state.world.size&&!done;x++)if(e.place(type,x,z).ok)done=true;}data.config.minigames.soccer.view.slowFrameMs=10000;});
-   const result=await scenario({page,context,viewport,tick,snap,tap,start,exit,shot,nav,ready,assert});assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);reports.push({...viewport,...result,errors,outside,shots});console.log(part,'verified',viewport);
-  }catch(e){console.error(part,'failed',viewport,errors,await snap().catch(()=>null));throw e;}finally{await context.close();}
- }await writeFile(directory+(width?`${width}-verification.json`:'verification.json'),JSON.stringify({part,browser:'Chromium / SwiftShader',browserVersion:browser.version(),physicalPhone:false,iPhone:false,phoneFPS:false,reports})+'\n');}finally{await browser.close();}
+   const result=await scenario({page,context,viewport,tick,snap,tap,start,exit,shot,nav,ready,assert});await csp.assertClean();assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);reports.push({...viewport,...result,errors,outside,shots,csp:csp.snapshot()});console.log(part,'verified',viewport);
+  }catch(e){reports.push({...viewport,failed:true,error:e.stack||e.message,errors,outside,shots,csp:csp.snapshot()});console.error(part,'failed',viewport,errors,await snap().catch(()=>null));throw e;}finally{try{await csp.assertClean();}catch(error){Object.assign(reports.at(-1),{failed:true,error:error.stack||error.message,csp:csp.snapshot()});throw error;}finally{await writeFile(directory+(width?`${width}-verification.json`:'verification.json'),JSON.stringify({part,browser:'Chromium / SwiftShader',browserVersion:browser.version(),physicalPhone:false,iPhone:false,phoneFPS:false,reports})+'\n');await context.close();await csp.dispose();}}
+ }await writeFile(directory+(width?`${width}-verification.json`:'verification.json'),JSON.stringify({part,browser:'Chromium / SwiftShader',browserVersion:browser.version(),physicalPhone:false,iPhone:false,phoneFPS:false,reports})+'\n');}finally{await browser.close();await server.close();}
 }
 
-// Start Python on 127.0.0.1:8765 from the repository root before running.
+// The shared server enforces the same CSP as the published island.
 await verify('g3i',[{width:844,height:390},{width:740,height:360}],async({page,viewport,tick,snap,start,shot,assert})=>{
  await start('soccer');await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics.assetStatus==='ready');await tick(80);
  const scenario=async kind=>page.evaluate(kind=>{
