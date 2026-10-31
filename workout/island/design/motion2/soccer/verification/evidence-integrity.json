@@ -1,0 +1,681 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-31T01:15:43.285Z",
+  "method": "Post-run hash comparison of every original staged input, current authored packs, unchanged-runner source ledgers and contact-sheet pack ledgers. The staged soccer hash is compared with the merged fixture hash; all other runner evidence hashes must equal original repository input hashes.",
+  "checks": {
+    "originalInputs": [
+      {
+        "path": "design/viewer/README.md",
+        "expected": "5ac3cd3e2fad417ce71955e025e7c1e3d50ed8743fc7b13cd5fadc7483fd8936",
+        "actual": "5ac3cd3e2fad417ce71955e025e7c1e3d50ed8743fc7b13cd5fadc7483fd8936",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/VALIDATION.md",
+        "expected": "8c10367b76d7e749f88ebf00b5e5b5e9dcf0c7ad63f59d959001d4118cee9548",
+        "actual": "8c10367b76d7e749f88ebf00b5e5b5e9dcf0c7ad63f59d959001d4118cee9548",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/animation.js",
+        "expected": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe",
+        "actual": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/checks.js",
+        "expected": "b7b95579e46de1b2693d5cb52f8558ed232066a8b087b5c420f46b7e7cc745b8",
+        "actual": "b7b95579e46de1b2693d5cb52f8558ed232066a8b087b5c420f46b7e7cc745b8",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/draco/DRACOLoader.js",
+        "expected": "6b635ad5f27d2f9bc793fe187915a38d7aabd53b59919a15beee36d36d7d904e",
+        "actual": "6b635ad5f27d2f9bc793fe187915a38d7aabd53b59919a15beee36d36d7d904e",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/draco/LICENSE.draco",
+        "expected": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4",
+        "actual": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/draco/LICENSE.three",
+        "expected": "a70d6dc2d2a6464ee9ee503b1881d5aa884abdec63b4c7064f0c5ad827a7d2b4",
+        "actual": "a70d6dc2d2a6464ee9ee503b1881d5aa884abdec63b4c7064f0c5ad827a7d2b4",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/draco/README.md",
+        "expected": "b909a71146b41ec5c50425e34096ddcf01c6a6d717819a033fb0e3d131d0bbc8",
+        "actual": "b909a71146b41ec5c50425e34096ddcf01c6a6d717819a033fb0e3d131d0bbc8",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/draco/draco_decoder.wasm",
+        "expected": "39b78cec9398af525d76f7eecf336ccf829891cec9524905e55fe686499834bf",
+        "actual": "39b78cec9398af525d76f7eecf336ccf829891cec9524905e55fe686499834bf",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/draco/draco_wasm_wrapper.js",
+        "expected": "9927d2886d34906aec5258d091a162f3d9f59ab7e84fd6a81961987bca3c363f",
+        "actual": "9927d2886d34906aec5258d091a162f3d9f59ab7e84fd6a81961987bca3c363f",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/draco/provenance.json",
+        "expected": "b07e5580fa4ea22677b590db5d858533ab9bf92e2ef194d8e8ff18a1d8dfafad",
+        "actual": "b07e5580fa4ea22677b590db5d858533ab9bf92e2ef194d8e8ff18a1d8dfafad",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/retarget-map.json",
+        "expected": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+        "actual": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/retarget.js",
+        "expected": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a",
+        "actual": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/test-retarget.mjs",
+        "expected": "7dae54d59e509d97ce3a7a28bac83824143cc1c62f6e8d8a7bb31eeaa56a6c15",
+        "actual": "7dae54d59e509d97ce3a7a28bac83824143cc1c62f6e8d8a7bb31eeaa56a6c15",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/test-viewer.mjs",
+        "expected": "c3ec3499bcf042120511ff1d2cb05fa691f6002e2d0c3f87d4a1ff4ac6ccb8c0",
+        "actual": "c3ec3499bcf042120511ff1d2cb05fa691f6002e2d0c3f87d4a1ff4ac6ccb8c0",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/viewer.html",
+        "expected": "dca9e54d489000ffacadfd2308aeffece626a001351ca6263955be907b844de2",
+        "actual": "dca9e54d489000ffacadfd2308aeffece626a001351ca6263955be907b844de2",
+        "pass": true
+      },
+      {
+        "path": "design/viewer/viewer.js",
+        "expected": "d60967bfd3712dba7bf86b57b87517b274e89bffa23a03fc9678f2ee2f579060",
+        "actual": "d60967bfd3712dba7bf86b57b87517b274e89bffa23a03fc9678f2ee2f579060",
+        "pass": true
+      },
+      {
+        "path": "design/characters/LICENSES.md",
+        "expected": "21155b93cf5777c539888d67a52e7f3531444b68dcc76b341b2753573146f913",
+        "actual": "21155b93cf5777c539888d67a52e7f3531444b68dcc76b341b2753573146f913",
+        "pass": true
+      },
+      {
+        "path": "design/characters/README.md",
+        "expected": "32afad2f8b04e90c491cee0111a7c12738a2b0eebfbbc86e1743a6b1df456e03",
+        "actual": "32afad2f8b04e90c491cee0111a7c12738a2b0eebfbbc86e1743a6b1df456e03",
+        "pass": true
+      },
+      {
+        "path": "design/characters/VALIDATION.md",
+        "expected": "ac5571692b741fdff3b4916320aafd924ed0ea7ae4c518a06ceb407c674eb838",
+        "actual": "ac5571692b741fdff3b4916320aafd924ed0ea7ae4c518a06ceb407c674eb838",
+        "pass": true
+      },
+      {
+        "path": "design/characters/basketball-player-back.png",
+        "expected": "6a14df86c2c555ce72aa1e1e11e97cd2c5ec5541d7c34d8579776dc78df96d85",
+        "actual": "6a14df86c2c555ce72aa1e1e11e97cd2c5ec5541d7c34d8579776dc78df96d85",
+        "pass": true
+      },
+      {
+        "path": "design/characters/basketball-player-front.png",
+        "expected": "641d05de88c50ab914e4806db05599677bd3cef5604659d058eb8099e3bf239c",
+        "actual": "641d05de88c50ab914e4806db05599677bd3cef5604659d058eb8099e3bf239c",
+        "pass": true
+      },
+      {
+        "path": "design/characters/basketball-player-three-quarter.png",
+        "expected": "4a45a8356382e9ab00fb42e9f120404516d77c59e1bc334545a10629262d1b17",
+        "actual": "4a45a8356382e9ab00fb42e9f120404516d77c59e1bc334545a10629262d1b17",
+        "pass": true
+      },
+      {
+        "path": "design/characters/basketball-player.glb",
+        "expected": "a1b638f72c5e62d3a25d3fbd2f9e262907b87fd31992ce32c116cd3128568814",
+        "actual": "a1b638f72c5e62d3a25d3fbd2f9e262907b87fd31992ce32c116cd3128568814",
+        "pass": true
+      },
+      {
+        "path": "design/characters/goalkeeper-back.png",
+        "expected": "057acc93d53f817ab0327b8b72fb8458eaaccacaf15da8f2741027908310931b",
+        "actual": "057acc93d53f817ab0327b8b72fb8458eaaccacaf15da8f2741027908310931b",
+        "pass": true
+      },
+      {
+        "path": "design/characters/goalkeeper-front.png",
+        "expected": "c13c74a02b22b8ec89da202128348604620aa22a9b716f5ea1e2d2e67cfaf2b9",
+        "actual": "c13c74a02b22b8ec89da202128348604620aa22a9b716f5ea1e2d2e67cfaf2b9",
+        "pass": true
+      },
+      {
+        "path": "design/characters/goalkeeper-three-quarter.png",
+        "expected": "32ba36a5047f53a27f103a6874e94ffca402ae9d9dd54c15eef4f010d82c1579",
+        "actual": "32ba36a5047f53a27f103a6874e94ffca402ae9d9dd54c15eef4f010d82c1579",
+        "pass": true
+      },
+      {
+        "path": "design/characters/goalkeeper.glb",
+        "expected": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f",
+        "actual": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f",
+        "pass": true
+      },
+      {
+        "path": "design/characters/rig.json",
+        "expected": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+        "actual": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+        "pass": true
+      },
+      {
+        "path": "design/characters/skier-back.png",
+        "expected": "e630d7a9616314062f6cfc510d119e72e8e5f311155fa6376cc22068f836e78d",
+        "actual": "e630d7a9616314062f6cfc510d119e72e8e5f311155fa6376cc22068f836e78d",
+        "pass": true
+      },
+      {
+        "path": "design/characters/skier-front.png",
+        "expected": "6ac7db56bf6dc127e6cce99d86b327a475d91f0ce13e53d4a644d02cfd4bef1a",
+        "actual": "6ac7db56bf6dc127e6cce99d86b327a475d91f0ce13e53d4a644d02cfd4bef1a",
+        "pass": true
+      },
+      {
+        "path": "design/characters/skier-three-quarter.png",
+        "expected": "9d69d29fa5c83cff26a16771de0d78c16db5dcb8fa439b12508945d1f5e3849e",
+        "actual": "9d69d29fa5c83cff26a16771de0d78c16db5dcb8fa439b12508945d1f5e3849e",
+        "pass": true
+      },
+      {
+        "path": "design/characters/skier.glb",
+        "expected": "c6cc6ea9f01abbd25feb9660187de0fcdabec9b0156a3044254ef04651d895a3",
+        "actual": "c6cc6ea9f01abbd25feb9660187de0fcdabec9b0156a3044254ef04651d895a3",
+        "pass": true
+      },
+      {
+        "path": "design/characters/soccer-player-back.png",
+        "expected": "6a2103d99c40bbba677a13a62e8b6ccaa8be80d83996fa9815e040123d4c49d7",
+        "actual": "6a2103d99c40bbba677a13a62e8b6ccaa8be80d83996fa9815e040123d4c49d7",
+        "pass": true
+      },
+      {
+        "path": "design/characters/soccer-player-front.png",
+        "expected": "88f82fd87ab9bdbb56b65c16632a6fcac39e0dd5b00f0d4feeb33261c17dd1c4",
+        "actual": "88f82fd87ab9bdbb56b65c16632a6fcac39e0dd5b00f0d4feeb33261c17dd1c4",
+        "pass": true
+      },
+      {
+        "path": "design/characters/soccer-player-three-quarter.png",
+        "expected": "92019582444cc3cb79259c1d0882665b488dd537337f1e47dd47b14df0b542dd",
+        "actual": "92019582444cc3cb79259c1d0882665b488dd537337f1e47dd47b14df0b542dd",
+        "pass": true
+      },
+      {
+        "path": "design/characters/soccer-player.glb",
+        "expected": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+        "actual": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+        "pass": true
+      },
+      {
+        "path": "design/motion/README.md",
+        "expected": "1113d5308b0c17cd51a641fc7a7a861945655c22ad2412d78c8511942496c91f",
+        "actual": "1113d5308b0c17cd51a641fc7a7a861945655c22ad2412d78c8511942496c91f",
+        "pass": true
+      },
+      {
+        "path": "design/motion/alpine.json",
+        "expected": "c6fc39a0b465d0dc74607e9af391c0736148042204e44942068914538d29dc87",
+        "actual": "c6fc39a0b465d0dc74607e9af391c0736148042204e44942068914538d29dc87",
+        "pass": true
+      },
+      {
+        "path": "design/motion/hoops.json",
+        "expected": "194cb62adf3469d044d738d11c064c86c8c5737792b4c83055b3d97906ebe9c5",
+        "actual": "194cb62adf3469d044d738d11c064c86c8c5737792b4c83055b3d97906ebe9c5",
+        "pass": true
+      },
+      {
+        "path": "design/motion/soccer.json",
+        "expected": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+        "actual": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+        "pass": true
+      },
+      {
+        "path": "design/motion/validate-motion.mjs",
+        "expected": "ce6cb3ae7c204d8c19bee3d718d17df9a266ee68dfb540bb51288bce7afc5c78",
+        "actual": "ce6cb3ae7c204d8c19bee3d718d17df9a266ee68dfb540bb51288bce7afc5c78",
+        "pass": true
+      },
+      {
+        "path": "vendor/BufferGeometryUtils.js",
+        "expected": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+        "actual": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+        "pass": true
+      },
+      {
+        "path": "vendor/DRACOLoader.js",
+        "expected": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb",
+        "actual": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb",
+        "pass": true
+      },
+      {
+        "path": "vendor/GLTFLoader.js",
+        "expected": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+        "actual": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+        "pass": true
+      },
+      {
+        "path": "vendor/LICENSE.three",
+        "expected": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+        "actual": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+        "pass": true
+      },
+      {
+        "path": "vendor/SkeletonUtils.js",
+        "expected": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d",
+        "actual": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d",
+        "pass": true
+      },
+      {
+        "path": "vendor/draco/README.md",
+        "expected": "19c090806aff487faeeb303bd37d59a2c18a112470b5169f0dd24c074ac8f923",
+        "actual": "19c090806aff487faeeb303bd37d59a2c18a112470b5169f0dd24c074ac8f923",
+        "pass": true
+      },
+      {
+        "path": "vendor/draco/draco_decoder.wasm",
+        "expected": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac",
+        "actual": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac",
+        "pass": true
+      },
+      {
+        "path": "vendor/draco/draco_wasm_wrapper.js",
+        "expected": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6",
+        "actual": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6",
+        "pass": true
+      },
+      {
+        "path": "vendor/three.module.js",
+        "expected": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+        "actual": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+        "pass": true
+      }
+    ],
+    "authoredPacks": [
+      {
+        "path": "workout/island/design/motion2/soccer/kicks-locomotion.json",
+        "expected": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+        "actual": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+        "pass": true
+      },
+      {
+        "path": "workout/island/design/motion2/soccer/tackles-reactions.json",
+        "expected": "5a9b9143dbd38f438823e30c785c50511a161ced27d707c38cfec0bc5ce54e43",
+        "actual": "5a9b9143dbd38f438823e30c785c50511a161ced27d707c38cfec0bc5ce54e43",
+        "pass": true
+      },
+      {
+        "path": "workout/island/design/motion2/soccer/throws-receives.json",
+        "expected": "c8f055cfe23c059c89c5c8de647df41e1a961f0473a228e870e415bd0d3c4fa2",
+        "actual": "c8f055cfe23c059c89c5c8de647df41e1a961f0473a228e870e415bd0d3c4fa2",
+        "pass": true
+      }
+    ],
+    "runnerReports": [
+      {
+        "character": "soccer-player",
+        "pass": true,
+        "fixtureSourceIntegrity": {
+          "pass": true,
+          "comparisons": [
+            {
+              "path": "design/viewer/viewer.html",
+              "expected": "dca9e54d489000ffacadfd2308aeffece626a001351ca6263955be907b844de2",
+              "actual": "dca9e54d489000ffacadfd2308aeffece626a001351ca6263955be907b844de2",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/viewer.js",
+              "expected": "d60967bfd3712dba7bf86b57b87517b274e89bffa23a03fc9678f2ee2f579060",
+              "actual": "d60967bfd3712dba7bf86b57b87517b274e89bffa23a03fc9678f2ee2f579060",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/animation.js",
+              "expected": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe",
+              "actual": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/retarget.js",
+              "expected": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a",
+              "actual": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/retarget-map.json",
+              "expected": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+              "actual": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/checks.js",
+              "expected": "b7b95579e46de1b2693d5cb52f8558ed232066a8b087b5c420f46b7e7cc745b8",
+              "actual": "b7b95579e46de1b2693d5cb52f8558ed232066a8b087b5c420f46b7e7cc745b8",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/test-viewer.mjs",
+              "expected": "c3ec3499bcf042120511ff1d2cb05fa691f6002e2d0c3f87d4a1ff4ac6ccb8c0",
+              "actual": "c3ec3499bcf042120511ff1d2cb05fa691f6002e2d0c3f87d4a1ff4ac6ccb8c0",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/draco/DRACOLoader.js",
+              "expected": "6b635ad5f27d2f9bc793fe187915a38d7aabd53b59919a15beee36d36d7d904e",
+              "actual": "6b635ad5f27d2f9bc793fe187915a38d7aabd53b59919a15beee36d36d7d904e",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/draco/draco_wasm_wrapper.js",
+              "expected": "9927d2886d34906aec5258d091a162f3d9f59ab7e84fd6a81961987bca3c363f",
+              "actual": "9927d2886d34906aec5258d091a162f3d9f59ab7e84fd6a81961987bca3c363f",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/draco/draco_decoder.wasm",
+              "expected": "39b78cec9398af525d76f7eecf336ccf829891cec9524905e55fe686499834bf",
+              "actual": "39b78cec9398af525d76f7eecf336ccf829891cec9524905e55fe686499834bf",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/characters/rig.json",
+              "expected": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+              "actual": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/characters/soccer-player.glb",
+              "expected": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+              "actual": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/characters/goalkeeper.glb",
+              "expected": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f",
+              "actual": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/characters/basketball-player.glb",
+              "expected": "a1b638f72c5e62d3a25d3fbd2f9e262907b87fd31992ce32c116cd3128568814",
+              "actual": "a1b638f72c5e62d3a25d3fbd2f9e262907b87fd31992ce32c116cd3128568814",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/characters/skier.glb",
+              "expected": "c6cc6ea9f01abbd25feb9660187de0fcdabec9b0156a3044254ef04651d895a3",
+              "actual": "c6cc6ea9f01abbd25feb9660187de0fcdabec9b0156a3044254ef04651d895a3",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/motion/soccer.json",
+              "expected": "157855fee16407b922f83e7cb3f8d49783c2af9caa3e76479bf459609cc0c0f9",
+              "actual": "157855fee16407b922f83e7cb3f8d49783c2af9caa3e76479bf459609cc0c0f9",
+              "pass": true,
+              "source": "isolated merged fixture"
+            },
+            {
+              "path": "design/motion/hoops.json",
+              "expected": "194cb62adf3469d044d738d11c064c86c8c5737792b4c83055b3d97906ebe9c5",
+              "actual": "194cb62adf3469d044d738d11c064c86c8c5737792b4c83055b3d97906ebe9c5",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/motion/alpine.json",
+              "expected": "c6fc39a0b465d0dc74607e9af391c0736148042204e44942068914538d29dc87",
+              "actual": "c6fc39a0b465d0dc74607e9af391c0736148042204e44942068914538d29dc87",
+              "pass": true,
+              "source": "unchanged repository input"
+            }
+          ]
+        },
+        "casePasses": [
+          {
+            "viewport": {
+              "width": 844,
+              "height": 390
+            },
+            "pass": true,
+            "authoredCoverage": {
+              "expected": 33,
+              "tested": 33,
+              "missing": []
+            }
+          },
+          {
+            "viewport": {
+              "width": 390,
+              "height": 844
+            },
+            "pass": true,
+            "authoredCoverage": {
+              "expected": 33,
+              "tested": 33,
+              "missing": []
+            }
+          }
+        ]
+      },
+      {
+        "character": "goalkeeper",
+        "pass": true,
+        "fixtureSourceIntegrity": {
+          "pass": true,
+          "comparisons": [
+            {
+              "path": "design/viewer/viewer.html",
+              "expected": "dca9e54d489000ffacadfd2308aeffece626a001351ca6263955be907b844de2",
+              "actual": "dca9e54d489000ffacadfd2308aeffece626a001351ca6263955be907b844de2",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/viewer.js",
+              "expected": "d60967bfd3712dba7bf86b57b87517b274e89bffa23a03fc9678f2ee2f579060",
+              "actual": "d60967bfd3712dba7bf86b57b87517b274e89bffa23a03fc9678f2ee2f579060",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/animation.js",
+              "expected": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe",
+              "actual": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/retarget.js",
+              "expected": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a",
+              "actual": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/retarget-map.json",
+              "expected": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+              "actual": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/checks.js",
+              "expected": "b7b95579e46de1b2693d5cb52f8558ed232066a8b087b5c420f46b7e7cc745b8",
+              "actual": "b7b95579e46de1b2693d5cb52f8558ed232066a8b087b5c420f46b7e7cc745b8",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/test-viewer.mjs",
+              "expected": "c3ec3499bcf042120511ff1d2cb05fa691f6002e2d0c3f87d4a1ff4ac6ccb8c0",
+              "actual": "c3ec3499bcf042120511ff1d2cb05fa691f6002e2d0c3f87d4a1ff4ac6ccb8c0",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/draco/DRACOLoader.js",
+              "expected": "6b635ad5f27d2f9bc793fe187915a38d7aabd53b59919a15beee36d36d7d904e",
+              "actual": "6b635ad5f27d2f9bc793fe187915a38d7aabd53b59919a15beee36d36d7d904e",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/draco/draco_wasm_wrapper.js",
+              "expected": "9927d2886d34906aec5258d091a162f3d9f59ab7e84fd6a81961987bca3c363f",
+              "actual": "9927d2886d34906aec5258d091a162f3d9f59ab7e84fd6a81961987bca3c363f",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/viewer/draco/draco_decoder.wasm",
+              "expected": "39b78cec9398af525d76f7eecf336ccf829891cec9524905e55fe686499834bf",
+              "actual": "39b78cec9398af525d76f7eecf336ccf829891cec9524905e55fe686499834bf",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/characters/rig.json",
+              "expected": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+              "actual": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/characters/soccer-player.glb",
+              "expected": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+              "actual": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/characters/goalkeeper.glb",
+              "expected": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f",
+              "actual": "e93b60f638e77c18d075f525a4423679e8a245d49d04875504b100b3d063b05f",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/characters/basketball-player.glb",
+              "expected": "a1b638f72c5e62d3a25d3fbd2f9e262907b87fd31992ce32c116cd3128568814",
+              "actual": "a1b638f72c5e62d3a25d3fbd2f9e262907b87fd31992ce32c116cd3128568814",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/characters/skier.glb",
+              "expected": "c6cc6ea9f01abbd25feb9660187de0fcdabec9b0156a3044254ef04651d895a3",
+              "actual": "c6cc6ea9f01abbd25feb9660187de0fcdabec9b0156a3044254ef04651d895a3",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/motion/soccer.json",
+              "expected": "157855fee16407b922f83e7cb3f8d49783c2af9caa3e76479bf459609cc0c0f9",
+              "actual": "157855fee16407b922f83e7cb3f8d49783c2af9caa3e76479bf459609cc0c0f9",
+              "pass": true,
+              "source": "isolated merged fixture"
+            },
+            {
+              "path": "design/motion/hoops.json",
+              "expected": "194cb62adf3469d044d738d11c064c86c8c5737792b4c83055b3d97906ebe9c5",
+              "actual": "194cb62adf3469d044d738d11c064c86c8c5737792b4c83055b3d97906ebe9c5",
+              "pass": true,
+              "source": "unchanged repository input"
+            },
+            {
+              "path": "design/motion/alpine.json",
+              "expected": "c6fc39a0b465d0dc74607e9af391c0736148042204e44942068914538d29dc87",
+              "actual": "c6fc39a0b465d0dc74607e9af391c0736148042204e44942068914538d29dc87",
+              "pass": true,
+              "source": "unchanged repository input"
+            }
+          ]
+        },
+        "casePasses": [
+          {
+            "viewport": {
+              "width": 844,
+              "height": 390
+            },
+            "pass": true,
+            "authoredCoverage": {
+              "expected": 33,
+              "tested": 33,
+              "missing": []
+            }
+          },
+          {
+            "viewport": {
+              "width": 390,
+              "height": 844
+            },
+            "pass": true,
+            "authoredCoverage": {
+              "expected": 33,
+              "tested": 33,
+              "missing": []
+            }
+          }
+        ]
+      }
+    ],
+    "contactSheetInputs": [
+      {
+        "file": "kicks-locomotion.json",
+        "expected": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+        "actual": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+        "pass": true
+      },
+      {
+        "file": "tackles-reactions.json",
+        "expected": "5a9b9143dbd38f438823e30c785c50511a161ced27d707c38cfec0bc5ce54e43",
+        "actual": "5a9b9143dbd38f438823e30c785c50511a161ced27d707c38cfec0bc5ce54e43",
+        "pass": true
+      },
+      {
+        "file": "throws-receives.json",
+        "expected": "c8f055cfe23c059c89c5c8de647df41e1a961f0473a228e870e415bd0d3c4fa2",
+        "actual": "c8f055cfe23c059c89c5c8de647df41e1a961f0473a228e870e415bd0d3c4fa2",
+        "pass": true
+      }
+    ]
+  },
+  "acceptancePass": true,
+  "pass": true
+}
