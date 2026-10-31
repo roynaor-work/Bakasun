@@ -448,18 +448,20 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
  }
 
  function startSteal(p){
-  if(p.act||p.cd.steal>0||p.air>=0)return false;
-  p.act='steal';p.actT=0;p.cd.steal=C.steal.cooldown;
+  if(S.phase!=='live'||p.act||p.cd.steal>0||p.air>=0)return false;
+  // A previous pass stores a target in act2. It must not suppress this reach.
+  p.act='steal';p.actT=0;p.act2=null;p.cd.steal=C.steal.cooldown;
   emit({type:'stealTry',playerId:p.id});
   return true;
  }
 
  function resolveSteal(p){
   const h=holder();
-  if(!h||h.team===p.team)return;
+  if(!h||h.team===p.team){emit({type:'stealMiss',playerId:p.id,reason:'no-handler'});return;}
   const d=dist(p,h);
-  if(d>C.steal.range)return;
-  const toP={x:(p.x-h.x)/d,z:(p.z-h.z)/d},hf={x:Math.sin(h.face),z:Math.cos(h.face)};
+  if(d>C.steal.range){emit({type:'stealMiss',playerId:p.id,reason:'range',distance:+d.toFixed(2),range:C.steal.range});return;}
+  const length=Math.max(d,1e-4);
+  const toP={x:(p.x-h.x)/length,z:(p.z-h.z)/length},hf={x:Math.sin(h.face),z:Math.cos(h.face)};
   const frontal=toP.x*hf.x+toP.z*hf.z;            // defender in front of the handler
   let chance=C.steal.base*(0.5+eff(p,'steal'))*(1.25-eff(h,'handle'))*(h.act==='shoot'?1.4:1);
   chance*=frontal>-0.2?1:0.55;
@@ -473,6 +475,16 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   }
   const foulChance=C.steal.foulBase*(frontal<-0.2?1.6:1)*(1.3-eff(p,'steal'))*(d<0.75?1.3:1)*(p.team===S.userTeam?C.contact.userScale:1);
   if(rand()<foulChance)foul(p,h,'reach',null);
+  else emit({type:'stealMiss',playerId:p.id,reason:'protected',distance:+d.toFixed(2),range:C.steal.range});
+ }
+
+ /** Explicit switching follows the opponent's handler, or the airborne/loose ball.
+  * Excluding the selected player makes the button useful even when he is closest. */
+ function switchPlayer(p){
+  const h=holder(),target=h&&h.team!==p.team?h:S.ball;
+  const next=nearestTo(onCourt(p.team),target,p);
+  if(!next)return false;
+  setControlled(next);return true;
  }
 
  function startMove(p){
@@ -542,8 +554,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   if(!hasBall&&S.ball.state==='held'&&S.possession!==p.team&&C.player.defenseAssist)defendAssist(p,ml);
   if(p.act==='shoot'&&p.shot&&p.shot.held&&inp.shootUp)gradeRelease(p);
   if((inp.switchPress||inp.altPress)&&!hasBall){
-   const list=onCourt(p.team).filter(q=>q!==p).sort((a,b)=>dist(a,S.ball)-dist(b,S.ball));
-   if(list[0])setControlled(list[0]);
+   switchPlayer(p);
   }
   if(inp.timeoutPress)timeout(p.team);
   if(inp.call==='defense'){const t=team(p.team);t.tactics.defense=t.tactics.defense==='zone'?'man':'zone';emit({type:'tactics',team:p.team,defense:t.tactics.defense});}
