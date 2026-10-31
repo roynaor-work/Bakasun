@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "codeHead": "857dde47c35efed2f62bf624dc4c0fb2c9c2cd2a",
+  "base": "824cc9b5bc3a9f457de8fe304e7ea174385a84ad",
+  "startedAt": "2026-10-31T08:19:50.325Z",
+  "preset": {
+    "seed": 7,
+    "level": 1,
+    "pinnedQuality": 0,
+    "warmupSeconds": 3,
+    "seconds": 30,
+    "devicePixelRatio": 1
+  },
+  "platform": {
+    "system": "win32",
+    "release": "10.0.26200",
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12450H",
+    "logicalCpus": 12,
+    "browser": "Chrome headless, ANGLE SwiftShader"
+  },
+  "protocol": "Exactly three predefined serial baseline→after pairs; 844x390 then390x844 in each; all raw runs retained; report median of per-run p95 and every pair, never select a best run.",
+  "trials": [
+    {
+      "trial": 1,
+      "before": "performance-trials/01/paired-before/report.json",
+      "after": "performance-trials/01/paired-after/report.json"
+    },
+    {
+      "trial": 2,
+      "before": "performance-trials/02/paired-before/report.json",
+      "after": "performance-trials/02/paired-after/report.json"
+    },
+    {
+      "trial": 3,
+      "before": "performance-trials/03/paired-before/report.json",
+      "after": "performance-trials/03/paired-after/report.json"
+    }
+  ],
+  "completedAt": "2026-10-31T08:28:10.373Z"
+}

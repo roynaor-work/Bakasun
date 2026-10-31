@@ -7662,8 +7662,8 @@
     "fixedStep": 0.016666666666666666
    },
    "pitch": {
-    "length": 36,
-    "width": 22,
+    "length": 48,
+    "width": 30,
     "goalWidth": 5.4,
     "goalHeight": 2.3,
     "goalDepth": 1.6,
@@ -7674,8 +7674,12 @@
     "goalAreaDepth": 1.7,
     "goalAreaWidth": 5.8
    },
+   "squad": {
+    "extraPlayersPerTeam": 2,
+    "formation": "4-3-3"
+   },
    "physics": {
-    "ballRadius": 0.22,
+    "ballRadius": 0.11,
     "gravity": 12,
     "friction": 0.7,
     "bounce": 0.28,
@@ -8416,7 +8420,7 @@
     }
    },
    "controls": {
-    "deadzone": 0.12,
+    "deadzone": 0.1,
     "joystickRadius": 48,
     "rightHanded": true,
     "kickKey": "Space",

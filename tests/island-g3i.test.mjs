@@ -14,14 +14,14 @@ function isolated(options={}){
 }
 for(const difficulty of ['easy','normal','hard'])for(const attackDir of [-1,1])test(`G3i ${difficulty}, direction ${attackDir}: walk into the area with the keeper holding; release within 3s`,()=>{
  const g=isolated({difficulty}),s=g.getState(),k=s.players[5],p=s.players[0];s.attackDir=attackDir;
- Object.assign(k,{x:attackDir*16.5,z:0,hands:true,hold:0,recover:0,cooldown:0,fx:-attackDir,fz:0});
- Object.assign(p,{x:attackDir*12,z:2,fx:attackDir,fz:0});Object.assign(s.ball,{owner:5,x:k.x-attackDir*c.goalkeeping.holdForward,z:0,y:c.goalkeeping.holdHeight,lastTeam:1});
+ Object.assign(k,{x:attackDir*(c.pitch.length/2-1.5),z:0,hands:true,hold:0,recover:0,cooldown:0,fx:-attackDir,fz:0});
+ Object.assign(p,{x:attackDir*(c.pitch.length/2-6),z:2,fx:attackDir,fz:0});Object.assign(s.ball,{owner:5,x:k.x-attackDir*c.goalkeeping.holdForward,z:0,y:c.goalkeeping.holdHeight,lastTeam:1});
  advance(g,.6,{moveX:attackDir});assert.ok(inPenaltyArea(k,p,s,c));assert.ok(k.hands);assert.equal(s.ball.owner,k.id);
  advance(g,2.4);assert.equal(k.hands,false);assert.notEqual(s.ball.owner,k.id);assert.ok(g.drainEvents().some(e=>e.type==='pass'&&e.player===k.id));assert.ok(c.goalkeeping.maxHoldSeconds<=3);
 });
 for(const action of ['standing','slide','automatic'])for(const height of [c.goalkeeping.holdHeight,c.physics.ballRadius])test(`G3i ${action} cannot steal from keeper hands at height ${height}`,()=>{
- const g=isolated({random:()=>0}),s=g.getState(),k=s.players[5],p=s.players[0];Object.assign(k,{x:16,z:0,hands:true,recover:100,fx:-1,fz:0});
- Object.assign(p,{x:15.3,z:0});Object.assign(s.ball,{owner:k.id,x:15.66,z:0,y:height,grace:0,lastTeam:1});
+ const g=isolated({random:()=>0}),s=g.getState(),k=s.players[5],p=s.players[0],hx=c.pitch.length/2;Object.assign(k,{x:hx-2,z:0,hands:true,recover:100,fx:-1,fz:0});
+ Object.assign(p,{x:hx-2.7,z:0});Object.assign(s.ball,{owner:k.id,x:hx-2.34,z:0,y:height,grace:0,lastTeam:1});
  if(action==='automatic'){s.controlled=1;s.players[1].recover=0;}
  g.update(dt,action==='standing'?{passPressed:true}:action==='slide'?{kickHeld:true,moveX:1}:{});
  assert.equal(s.ball.owner,k.id);assert.ok(k.hands);assert.equal(g.drainEvents().some(e=>e.won),false);

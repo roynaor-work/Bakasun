@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createSoccer,canHead} from '../workout/island/minigames/soccer.mjs';
+import {restartActionProfile,restartBallPose} from '../workout/island/minigames/soccer-restarts.mjs';
 import {crossArc,soccerShotIcon,playerAnimation} from '../workout/island/minigames/soccer-presentation.mjs';
 import {createG3hAudio,soccerAudioCues} from '../workout/island/minigames/g3h-audio.mjs';
 const c=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames.soccer,dt=c.match.fixedStep;
@@ -9,12 +10,12 @@ const advance=(g,seconds,input={})=>{for(let i=0;i<Math.round(seconds/dt);i++)g.
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} != ${b}`);
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 function finishRestart(g,input={}){
- const s=g.getState(),r={...s.restart},taker=s.players[r.player],budget=(r.walkSeconds??c.restarts.walkSeconds)+c.match.restartSeconds+Math.max(c.restarts.idleReleaseSeconds,c.restarts.aiReleaseSeconds)+.5;
+ const s=g.getState(),r={...s.restart},taker=s.players[r.player],budget=Math.max(r.walkSeconds??c.restarts.walkSeconds,r.organizeSeconds||0)+c.match.restartSeconds+Math.max(c.restarts.idleReleaseSeconds,c.restarts.aiReleaseSeconds)+restartActionProfile(r.type).contact+2*dt;
  let elapsed=0,previous={x:taker.x,z:taker.z};
  while(s.phase.startsWith('restart')&&elapsed<budget){
   assert.equal(s.restart.player,r.player,'restart reserves one taker throughout the walk');g.update(dt,input);elapsed+=dt;
   assert.ok(distance(previous,taker)<=c.players.speed*1.15*dt+1e-6,'taker walks continuously at bounded speed');previous={x:taker.x,z:taker.z};
-  if(s.phase.startsWith('restart')){near(s.ball.x,r.x);near(s.ball.z,r.z);}
+  if(s.phase.startsWith('restart')){assert.equal(s.ball.owner,taker.id);if(r.type==='throwIn'&&taker.restartMotion){const pose=restartBallPose('throwIn',taker.restartMotion.elapsed);near(s.ball.x,taker.x+taker.fx*pose.forward-taker.fz*pose.side);near(s.ball.z,taker.z+taker.fz*pose.forward+taker.fx*pose.side);near(s.ball.y,pose.height);}else{near(s.ball.x,r.x);near(s.ball.z,r.z);}}
  }
  assert.equal(s.phase,'playing','a completed walk eventually releases without waiting forever');return elapsed;
 }
@@ -43,9 +44,9 @@ for(const aimed of [false,true])test(`G3j head button strikes immediately ${aime
  assert.equal(playerAnimation(p,s,c).mode,'header');
 });
 test('G3j unattended cross receiver in the box heads automatically',()=>{
- const g=setup(),s=g.getState(),p=s.players[1];Object.assign(p,{x:15,z:0});s.controlled=1;
- Object.assign(s.ball,{owner:null,x:14.5,z:0,y:2,vx:1,vz:0,vy:-1,lastTeam:0,lastPlayer:0,flight:{fromX:8,fromZ:0,x:15,z:0,age:.8,duration:1,height:3}});
- s.passTarget={player:1,x:15,z:0,time:1,kind:'loft'};
+ const g=setup(),s=g.getState(),p=s.players[1],x=c.pitch.length/2-3;Object.assign(p,{x,z:0});s.controlled=1;
+ Object.assign(s.ball,{owner:null,x:x-.5,z:0,y:2,vx:1,vz:0,vy:-1,lastTeam:0,lastPlayer:0,flight:{fromX:x-7,fromZ:0,x,z:0,age:.8,duration:1,height:3}});
+ s.passTarget={player:1,x,z:0,time:1,kind:'loft'};
  for(let i=0;i<20&&!g.drainEvents().some(e=>e.type==='header');i++)g.update(dt);
  assert.ok(p.headerTime>0);assert.equal(s.ball.lastPlayer,1);assert.equal(s.ball.flight,null);assert.ok(s.ball.vx>0);
 });
@@ -62,11 +63,11 @@ for(const kind of ['throwIn','corner','goalKick'])for(const team of [0,1])test(`
  // A home corner is at the right goal; a home goal kick is at the left goal.
  if(kind==='corner'){s.ball.x=-s.ball.x;s.ball.vx=-s.ball.vx;}
  g.update(dt);assert.equal(s.restart.type,kind);assert.equal(s.restart.team,team);
- const taker=s.restart.player,controlled=s.controlled,before=s.players.map(p=>({x:p.x,z:p.z})),spot={x:s.ball.x,z:s.ball.z};
+ const taker=s.restart.player,controlled=s.controlled,before=s.players.map(p=>({x:p.x,z:p.z})),spot={x:s.ball.x,z:s.ball.z},stance={...s.restart.stance};
  let previous={...s.players[taker]};for(let i=0;i<Math.round(.5/dt);i++){g.update(dt,{moveX:1});assert.ok(distance(previous,s.players[taker])<=c.players.speed*1.15*dt+1e-6);previous={...s.players[taker]};}assert.ok(s.players[controlled].x>before[controlled].x+.1);
  assert.ok(s.players.some(p=>p.id!==taker&&p.id!==controlled&&Math.hypot(p.x-before[p.id].x,p.z-before[p.id].z)>.1));
  near(s.ball.x,spot.x);near(s.ball.z,spot.z);finishRestart(g);
- near(s.players[taker].x,spot.x);near(s.players[taker].z,spot.z);assert.ok(g.drainEvents().some(e=>['throw','pass','loft'].includes(e.type)));
+ near(s.players[taker].x,stance.x);near(s.players[taker].z,stance.z);assert.ok(g.drainEvents().some(e=>['throw','pass','loft'].includes(e.type)));
 });
 test('G3j predictive defense chooses an eligible outfielder; directional manual switching holds through cooldown',()=>{
  const g=setup(),s=g.getState();Object.assign(s.players[0],{x:-8,z:0});Object.assign(s.players[1],{x:-3,z:0});Object.assign(s.players[6],{x:-5,z:0});Object.assign(s.players[2],{x:0,z:0});
@@ -92,7 +93,7 @@ test('G3j goal delivers whistle, net rustle and 2-second cheer through actual We
   async decodeAudioData(){return {duration:5};}async close(){}async resume(){}
  }
  const audio=createG3hAudio({AudioContext:Audio,storage:{getItem:()=>null},fetcher:async()=>({ok:true,arrayBuffer:async()=>new ArrayBuffer(1)})});await audio.unlock();await audio.ready;
- const g=setup(),s=g.getState();Object.assign(s.ball,{owner:null,x:17.95,z:0,y:.22,vx:30,vz:0,vy:0,lastTeam:0,lastPlayer:0});g.update(dt);
+ const g=setup(),s=g.getState();Object.assign(s.ball,{owner:null,x:c.pitch.length/2-.05,z:0,y:c.physics.ballRadius,vx:30,vz:0,vy:0,lastTeam:0,lastPlayer:0});g.update(dt);
  const goal=g.drainEvents().find(e=>e.type==='goal');assert.ok(goal);assert.deepEqual(soccerAudioCues(goal),['whistle','net','cheer']);audio.event(goal);
  assert.deepEqual(audio.snapshot.counts,{whistle:1,net:1,cheer:1});assert.equal(voices.length,4);near(voices.at(-1).source.stopAt-voices.at(-1).at,2.08);
  assert.equal(playerAnimation(s.players[goal.player],s,c).mode,'celebrate');
@@ -101,7 +102,7 @@ test('G3j goal delivers whistle, net rustle and 2-second cheer through actual We
 
 for(const kind of ['goalKick','corner'])test(`G3j ${kind} automatic aim belongs to the taker, independent of the controlled teammate`,()=>{
  const g=setup(),s=g.getState(),side=kind==='corner'?1:-1;
- Object.assign(s.ball,{owner:null,x:side*17.95,z:6,vx:side*30,vz:0,vy:0,lastTeam:1});g.update(dt);assert.equal(s.restart.type,kind);
+ Object.assign(s.ball,{owner:null,x:side*(c.pitch.length/2-.05),z:6,vx:side*30,vz:0,vy:0,lastTeam:1});g.update(dt);assert.equal(s.restart.type,kind);
  finishRestart(g,{passAim:{x:1,z:0,manual:false}});
  if(kind==='goalKick')assert.ok(s.ball.vx>0);else{assert.ok(s.ball.flight);assert.ok(s.ball.flight.x<c.pitch.length/2);assert.ok(Math.abs(s.ball.flight.z)<c.pitch.width/2);}
 });

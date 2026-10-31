@@ -1,0 +1,852 @@
+[
+  {
+    "kind": "isolated-inline-probe",
+    "blocked": true,
+    "csp": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [
+        {
+          "kind": "console",
+          "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-7SOnV22wFGoG54Vtc8y9/s0GG+r2ZR0MdKXk4JRE7Ag='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+          "location": {
+            "url": "",
+            "line": 0,
+            "column": 0,
+            "lineNumber": 0,
+            "columnNumber": 0
+          },
+          "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "observedAt": 1793434294814
+        },
+        {
+          "kind": "chromium-log",
+          "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-7SOnV22wFGoG54Vtc8y9/s0GG+r2ZR0MdKXk4JRE7Ag='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+          "source": "security",
+          "lineNumber": 0,
+          "observedAt": 1793434294814
+        },
+        {
+          "kind": "chromium-audit",
+          "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "violatedDirective": "script-src-elem",
+          "isReportOnly": false,
+          "contentSecurityPolicyViolationType": "kInlineViolation",
+          "sourceCodeLocation": {
+            "scriptId": "288",
+            "url": "",
+            "lineNumber": 0,
+            "columnNumber": 128
+          },
+          "violatingNodeId": 4,
+          "observedAt": 1793434294814
+        },
+        {
+          "kind": "console",
+          "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-7SOnV22wFGoG54Vtc8y9/s0GG+r2ZR0MdKXk4JRE7Ag='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+          "location": {
+            "url": "",
+            "line": 0,
+            "column": 0,
+            "lineNumber": 0,
+            "columnNumber": 0
+          },
+          "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "observedAt": 1793434294814
+        },
+        {
+          "kind": "chromium-log",
+          "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-7SOnV22wFGoG54Vtc8y9/s0GG+r2ZR0MdKXk4JRE7Ag='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+          "source": "security",
+          "lineNumber": 0,
+          "observedAt": 1793434294814
+        },
+        {
+          "kind": "chromium-audit",
+          "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "violatedDirective": "script-src-elem",
+          "isReportOnly": false,
+          "contentSecurityPolicyViolationType": "kInlineViolation",
+          "sourceCodeLocation": {
+            "scriptId": "288",
+            "url": "",
+            "lineNumber": 0,
+            "columnNumber": 128
+          },
+          "violatingNodeId": 4,
+          "observedAt": 1793434294814
+        },
+        {
+          "kind": "event",
+          "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "frameUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "blockedURI": "inline",
+          "effectiveDirective": "script-src-elem",
+          "violatedDirective": "script-src-elem",
+          "disposition": "enforce",
+          "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "documentURI": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "sourceFile": "",
+          "lineNumber": 1,
+          "columnNumber": 129,
+          "statusCode": 200,
+          "sample": "",
+          "observedAt": 1793434294826
+        },
+        {
+          "kind": "event",
+          "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "frameUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "blockedURI": "inline",
+          "effectiveDirective": "script-src-elem",
+          "violatedDirective": "script-src-elem",
+          "disposition": "enforce",
+          "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "documentURI": "http://127.0.0.1:62523/workout/island/?dev=1",
+          "sourceFile": "",
+          "lineNumber": 1,
+          "columnNumber": 129,
+          "statusCode": 200,
+          "sample": "",
+          "observedAt": 1793434294826
+        }
+      ],
+      "policyErrors": [],
+      "workers": []
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "role": "field",
+    "scenarios": [
+      {
+        "kind": "throwIn",
+        "fixture": true,
+        "sourceClips": [
+          "throw_in_prepare",
+          "throw_in_release",
+          "throw_in_follow"
+        ],
+        "taker": 1,
+        "clip": "throwIn",
+        "elapsedBefore": 1.1166666666666665,
+        "contact": 1.1176,
+        "ownerBefore": 1,
+        "binding": {
+          "kind": "throwIn",
+          "elapsed": 1.1166666666666665,
+          "radius": 0.11,
+          "leftDistance": 0.1099999960094587,
+          "rightDistance": 0.11000000375278361
+        },
+        "strike": null,
+        "visibleBallBefore": {
+          "x": 2.8798490591048798,
+          "y": 2.0154724532819297,
+          "z": 14.836939178927965
+        },
+        "visibleBallAfter": {
+          "x": 2.874813019788023,
+          "y": 2.015471079560354,
+          "z": 14.84074737405607
+        },
+        "releaseTravelMetres": 0.006313797907896852,
+        "event": {
+          "id": 3,
+          "type": "throw",
+          "player": 1,
+          "target": 10
+        },
+        "nativeCamera": true,
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "corner",
+        "fixture": true,
+        "sourceClips": [
+          "corner_runup",
+          "corner_kick"
+        ],
+        "taker": 6,
+        "clip": "corner",
+        "elapsedBefore": 1.583333333333332,
+        "contact": 1.5956,
+        "ownerBefore": 6,
+        "binding": null,
+        "strike": {
+          "kind": "corner",
+          "elapsed": 1.583333333333332,
+          "contact": 1.5956,
+          "radius": 0.11,
+          "contactDistance": 0.10558175799095273,
+          "footDistance": 0.10558175799095273,
+          "shiftMetres": 0.24628997748059292
+        },
+        "visibleBallBefore": {
+          "x": 23.4,
+          "y": 0.11,
+          "z": 14.4
+        },
+        "visibleBallAfter": {
+          "x": 23.4,
+          "y": 0.11,
+          "z": 14.4
+        },
+        "releaseTravelMetres": 0,
+        "event": {
+          "id": 6,
+          "type": "loft",
+          "team": 0,
+          "player": 6,
+          "target": null,
+          "x": 21.409242509843207,
+          "z": -1.526059921254367,
+          "distance": 16.05,
+          "power": 0.65
+        },
+        "nativeCamera": true,
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "goalKick",
+        "fixture": true,
+        "sourceClips": [
+          "goal_kick"
+        ],
+        "taker": 2,
+        "clip": "goalKick",
+        "elapsedBefore": 0.5166666666666666,
+        "contact": 0.528,
+        "ownerBefore": 2,
+        "binding": null,
+        "strike": {
+          "kind": "goalKick",
+          "elapsed": 0.5166666666666666,
+          "contact": 0.528,
+          "radius": 0.11,
+          "contactDistance": 0.11205428694627591,
+          "footDistance": 0.11205428694627591,
+          "shiftMetres": 0.1380094373424029
+        },
+        "visibleBallBefore": {
+          "x": -22.3,
+          "y": 0.11,
+          "z": 2.9
+        },
+        "visibleBallAfter": {
+          "x": -22.3,
+          "y": 0.11,
+          "z": 2.9
+        },
+        "releaseTravelMetres": 0,
+        "event": {
+          "id": 9,
+          "type": "pass",
+          "team": 0,
+          "player": 2,
+          "target": 8,
+          "x": -15.093903206797863,
+          "z": 5.241402781072159,
+          "distance": 7.576938562256564,
+          "power": 0.037037037037037035
+        },
+        "nativeCamera": true,
+        "screenshotClockFrozen": true
+      }
+    ],
+    "natural": {
+      "elapsed": 1.7666666666666653,
+      "players": 12,
+      "assetKind": "design-glb-v2"
+    },
+    "resources": {
+      "throws-receives.json": 200,
+      "kicks-locomotion.json": 200,
+      "tackles-reactions.json": 200
+    },
+    "errors": [],
+    "csp": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [],
+      "policyErrors": [],
+      "workers": [
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": false,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "role": "keeper",
+    "scenarios": [
+      {
+        "kind": "keeperThrow",
+        "fixture": true,
+        "sourceClips": [
+          "goalkeeper_throw"
+        ],
+        "taker": 2,
+        "clip": "keeperThrow",
+        "elapsedBefore": 0.6500000000000004,
+        "contact": 0.6608,
+        "ownerBefore": 2,
+        "binding": {
+          "kind": "keeperThrow",
+          "elapsed": 0.6500000000000004,
+          "radius": 0.11,
+          "leftDistance": null,
+          "rightDistance": 0.11000000000000061
+        },
+        "strike": null,
+        "visibleBallBefore": {
+          "x": -21.397386126672423,
+          "y": 1.6940873223562698,
+          "z": 0.11400568253886796
+        },
+        "visibleBallAfter": {
+          "x": -21.391829109123126,
+          "y": 1.6960026930415684,
+          "z": 0.11524131692652653
+        },
+        "releaseTravelMetres": 0.0060063201084571876,
+        "event": {
+          "id": 2,
+          "type": "pass",
+          "team": 0,
+          "player": 2,
+          "target": 10,
+          "x": -15.031988033580348,
+          "z": 1.730718013415989,
+          "distance": 6.5568345021461045,
+          "power": 0.037037037037037035
+        },
+        "nativeCamera": true,
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "keeperPunt",
+        "phase": "hand-hold-before-drop",
+        "binding": {
+          "kind": "keeperPunt",
+          "elapsed": 0.3,
+          "radius": 0.11,
+          "leftDistance": 0.10999999999343874,
+          "rightDistance": 0.11000001330623649
+        }
+      },
+      {
+        "kind": "keeperPunt",
+        "phase": "hand-drop",
+        "before": {
+          "x": -21.47507195420468,
+          "y": 1.2785217087887841,
+          "z": 0.02401617137525932
+        },
+        "after": {
+          "x": -21.475367303212522,
+          "y": 1.2766753554773036,
+          "z": 0.025915452464311546
+        },
+        "travelMetres": 0.002665242998767677,
+        "elapsedBefore": 0.39999999999999997,
+        "elapsedAfter": 0.41666666666666663
+      },
+      {
+        "kind": "keeperPunt",
+        "fixture": true,
+        "sourceClips": [
+          "goalkeeper_punt"
+        ],
+        "taker": 2,
+        "clip": "keeperPunt",
+        "elapsedBefore": 0.8000000000000008,
+        "contact": 0.8024,
+        "ownerBefore": 2,
+        "binding": null,
+        "strike": {
+          "kind": "keeperPunt",
+          "elapsed": 0.8000000000000008,
+          "contact": 0.8024,
+          "radius": 0.11,
+          "contactDistance": 0.11565383454000605,
+          "footDistance": 0.11565383454000605,
+          "shiftMetres": 0.003145489643733577
+        },
+        "visibleBallBefore": {
+          "x": -21.484840249716175,
+          "y": 0.45080086732725927,
+          "z": 0.14267810137040599
+        },
+        "visibleBallAfter": {
+          "x": -21.3159313494217,
+          "y": 0.4311173005760966,
+          "z": 0.14352910879399328
+        },
+        "releaseTravelMetres": 0.1700540608523405,
+        "event": {
+          "id": 4,
+          "type": "shot",
+          "team": 0,
+          "player": 2,
+          "power": 0.0303030303030303,
+          "assisted": false
+        },
+        "nativeCamera": true,
+        "screenshotClockFrozen": true
+      }
+    ],
+    "keeperSessionFixture": true,
+    "natural": {
+      "elapsed": 0.05,
+      "players": 12,
+      "assetKind": "design-glb-v2"
+    },
+    "resources": {
+      "throws-receives.json": 200,
+      "kicks-locomotion.json": 200,
+      "tackles-reactions.json": 200
+    },
+    "errors": [],
+    "csp": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [],
+      "policyErrors": [],
+      "workers": [
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": false,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "role": "field",
+    "scenarios": [
+      {
+        "kind": "throwIn",
+        "fixture": true,
+        "sourceClips": [
+          "throw_in_prepare",
+          "throw_in_release",
+          "throw_in_follow"
+        ],
+        "taker": 1,
+        "clip": "throwIn",
+        "elapsedBefore": 1.1166666666666665,
+        "contact": 1.1176,
+        "ownerBefore": 1,
+        "binding": {
+          "kind": "throwIn",
+          "elapsed": 1.1166666666666665,
+          "radius": 0.11,
+          "leftDistance": 0.1099999960106897,
+          "rightDistance": 0.1100000037585188
+        },
+        "strike": null,
+        "visibleBallBefore": {
+          "x": 2.8801023997116624,
+          "y": 2.0154724532819297,
+          "z": 14.83675280887021
+        },
+        "visibleBallAfter": {
+          "x": 2.8735636893068803,
+          "y": 2.015472168840742,
+          "z": 14.84176044857462
+        },
+        "releaseTravelMetres": 0.00823596923547493,
+        "event": {
+          "id": 3,
+          "type": "throw",
+          "player": 1,
+          "target": 10
+        },
+        "nativeCamera": true,
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "corner",
+        "fixture": true,
+        "sourceClips": [
+          "corner_runup",
+          "corner_kick"
+        ],
+        "taker": 6,
+        "clip": "corner",
+        "elapsedBefore": 1.583333333333332,
+        "contact": 1.5956,
+        "ownerBefore": 6,
+        "binding": null,
+        "strike": {
+          "kind": "corner",
+          "elapsed": 1.583333333333332,
+          "contact": 1.5956,
+          "radius": 0.11,
+          "contactDistance": 0.10558175799095273,
+          "footDistance": 0.10558175799095273,
+          "shiftMetres": 0.24628997748059292
+        },
+        "visibleBallBefore": {
+          "x": 23.4,
+          "y": 0.11,
+          "z": 14.4
+        },
+        "visibleBallAfter": {
+          "x": 23.4,
+          "y": 0.11,
+          "z": 14.4
+        },
+        "releaseTravelMetres": 0,
+        "event": {
+          "id": 6,
+          "type": "loft",
+          "team": 0,
+          "player": 6,
+          "target": null,
+          "x": 21.409242509843207,
+          "z": -1.526059921254367,
+          "distance": 16.05,
+          "power": 0.65
+        },
+        "nativeCamera": true,
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "goalKick",
+        "fixture": true,
+        "sourceClips": [
+          "goal_kick"
+        ],
+        "taker": 2,
+        "clip": "goalKick",
+        "elapsedBefore": 0.5166666666666666,
+        "contact": 0.528,
+        "ownerBefore": 2,
+        "binding": null,
+        "strike": {
+          "kind": "goalKick",
+          "elapsed": 0.5166666666666666,
+          "contact": 0.528,
+          "radius": 0.11,
+          "contactDistance": 0.11205428694627591,
+          "footDistance": 0.11205428694627591,
+          "shiftMetres": 0.1380094373424029
+        },
+        "visibleBallBefore": {
+          "x": -22.3,
+          "y": 0.11,
+          "z": 2.9
+        },
+        "visibleBallAfter": {
+          "x": -22.3,
+          "y": 0.11,
+          "z": 2.9
+        },
+        "releaseTravelMetres": 0,
+        "event": {
+          "id": 9,
+          "type": "pass",
+          "team": 0,
+          "player": 2,
+          "target": 8,
+          "x": -15.093903187780779,
+          "z": 5.241402787251184,
+          "distance": 7.576938582252311,
+          "power": 0.037037037037037035
+        },
+        "nativeCamera": true,
+        "screenshotClockFrozen": true
+      }
+    ],
+    "natural": {
+      "elapsed": 1.7499999999999987,
+      "players": 12,
+      "assetKind": "design-glb-v2"
+    },
+    "resources": {
+      "throws-receives.json": 200,
+      "kicks-locomotion.json": 200,
+      "tackles-reactions.json": 200
+    },
+    "errors": [],
+    "csp": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [],
+      "policyErrors": [],
+      "workers": [
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": false,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "role": "keeper",
+    "scenarios": [
+      {
+        "kind": "keeperThrow",
+        "fixture": true,
+        "sourceClips": [
+          "goalkeeper_throw"
+        ],
+        "taker": 2,
+        "clip": "keeperThrow",
+        "elapsedBefore": 0.6500000000000004,
+        "contact": 0.6608,
+        "ownerBefore": 2,
+        "binding": {
+          "kind": "keeperThrow",
+          "elapsed": 0.6500000000000004,
+          "radius": 0.11,
+          "leftDistance": null,
+          "rightDistance": 0.11000000000000061
+        },
+        "strike": null,
+        "visibleBallBefore": {
+          "x": -21.397386126672423,
+          "y": 1.6940873223562698,
+          "z": 0.11400568253886796
+        },
+        "visibleBallAfter": {
+          "x": -21.391829109123126,
+          "y": 1.6960026930415684,
+          "z": 0.11524131692652653
+        },
+        "releaseTravelMetres": 0.0060063201084571876,
+        "event": {
+          "id": 2,
+          "type": "pass",
+          "team": 0,
+          "player": 2,
+          "target": 10,
+          "x": -15.031988033580348,
+          "z": 1.730718013415989,
+          "distance": 6.5568345021461045,
+          "power": 0.037037037037037035
+        },
+        "nativeCamera": true,
+        "screenshotClockFrozen": true
+      },
+      {
+        "kind": "keeperPunt",
+        "phase": "hand-hold-before-drop",
+        "binding": {
+          "kind": "keeperPunt",
+          "elapsed": 0.3,
+          "radius": 0.11,
+          "leftDistance": 0.10999999999343874,
+          "rightDistance": 0.11000001330623649
+        }
+      },
+      {
+        "kind": "keeperPunt",
+        "phase": "hand-drop",
+        "before": {
+          "x": -21.47507195420468,
+          "y": 1.2785217087887841,
+          "z": 0.02401617137525932
+        },
+        "after": {
+          "x": -21.475367303212522,
+          "y": 1.2766753554773036,
+          "z": 0.025915452464311546
+        },
+        "travelMetres": 0.002665242998767677,
+        "elapsedBefore": 0.39999999999999997,
+        "elapsedAfter": 0.41666666666666663
+      },
+      {
+        "kind": "keeperPunt",
+        "fixture": true,
+        "sourceClips": [
+          "goalkeeper_punt"
+        ],
+        "taker": 2,
+        "clip": "keeperPunt",
+        "elapsedBefore": 0.8000000000000008,
+        "contact": 0.8024,
+        "ownerBefore": 2,
+        "binding": null,
+        "strike": {
+          "kind": "keeperPunt",
+          "elapsed": 0.8000000000000008,
+          "contact": 0.8024,
+          "radius": 0.11,
+          "contactDistance": 0.11565383454000605,
+          "footDistance": 0.11565383454000605,
+          "shiftMetres": 0.003145489643733577
+        },
+        "visibleBallBefore": {
+          "x": -21.484840249716175,
+          "y": 0.45080086732725927,
+          "z": 0.14267810137040599
+        },
+        "visibleBallAfter": {
+          "x": -21.3159313494217,
+          "y": 0.4311173005760966,
+          "z": 0.14352910879399328
+        },
+        "releaseTravelMetres": 0.1700540608523405,
+        "event": {
+          "id": 4,
+          "type": "shot",
+          "team": 0,
+          "player": 2,
+          "power": 0.0303030303030303,
+          "assisted": false
+        },
+        "nativeCamera": true,
+        "screenshotClockFrozen": true
+      }
+    ],
+    "keeperSessionFixture": true,
+    "natural": {
+      "elapsed": 0.05,
+      "players": 12,
+      "assetKind": "design-glb-v2"
+    },
+    "resources": {
+      "throws-receives.json": 200,
+      "kicks-locomotion.json": 200,
+      "tackles-reactions.json": 200
+    },
+    "errors": [],
+    "csp": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [],
+      "policyErrors": [],
+      "workers": [
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": false,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        }
+      ]
+    }
+  }
+]

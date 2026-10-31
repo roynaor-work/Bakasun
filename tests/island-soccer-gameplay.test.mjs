@@ -2,15 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createSoccer} from '../workout/island/minigames/soccer.mjs';
+import {restartActionProfile} from '../workout/island/minigames/soccer-restarts.mjs';
 
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames.soccer;
 const dt=config.match.fixedStep,distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 function fixture({role='field',seed=41,stage=4}={}){
  const game=createSoccer({config,role,seed,stage,difficulty:'normal'}),s=game.getState();
  for(const p of s.players){Object.assign(p,{x:p.team===0?-10:12,z:(p.id%3-1)*6,vx:0,vz:0,fx:p.team===0?1:-1,fz:0,cooldown:100,think:100,hold:0,recover:0,slideTime:0,hands:false});}
- const p=s.players[role==='keeper'?2:0];Object.assign(p,{x:role==='keeper'?-16:0,z:0,cooldown:0,fx:1,fz:0});
+ const p=s.players[role==='keeper'?2:0];Object.assign(p,{x:role==='keeper'?-config.pitch.length/2+2:0,z:0,cooldown:0,fx:1,fz:0});
  Object.assign(s.players[1],{x:6,z:0});Object.assign(s.players[6],{x:4,z:-7});
- Object.assign(s.players[2],{x:-16,z:role==='keeper'?0:5});Object.assign(s.players[5],{x:16,z:5});
+ Object.assign(s.players[2],{x:-config.pitch.length/2+2,z:role==='keeper'?0:5});Object.assign(s.players[5],{x:config.pitch.length/2-2,z:5});
  s.controlled=p.id;s.switchCooldown=10;s.mode=role==='keeper'?'defense':'attack';
  Object.assign(s.ball,{owner:null,x:3,z:0,y:config.physics.ballRadius,vx:0,vz:0,vy:0,grace:0,flight:null,shot:null,thrower:null,lastTeam:0,lastPlayer:1,curve:0});
  const events=[];const tick=(input={})=>{game.update(dt,input);events.push(...game.drainEvents());return s;};
@@ -43,8 +44,8 @@ test('gameplay keeper: dive cooldown prevents repeated jumps and then permits a 
 });
 
 test('gameplay keeper: restart walk stays continuous without a one-frame goal-line snap',()=>{
- const f=fixture({role:'keeper'});Object.assign(f.p,{x:-14,z:-2});
- Object.assign(f.s.ball,{x:-17.95,z:6,vx:-30,vy:0,lastTeam:1,lastPlayer:3});f.tick();
+ const f=fixture({role:'keeper'});Object.assign(f.p,{x:-config.pitch.length/2+4,z:-2});
+ Object.assign(f.s.ball,{x:-config.pitch.length/2+.05,z:6,vx:-30,vy:0,lastTeam:1,lastPlayer:3});f.tick();
  assert.equal(f.s.restart?.type,'goalKick');assert.equal(f.s.restart?.player,f.p.id);
  let previous={x:f.p.x,z:f.p.z},steps=0;
  for(let i=0;i<180&&f.s.phase.startsWith('restart');i++){
@@ -55,10 +56,10 @@ test('gameplay keeper: restart walk stays continuous without a one-frame goal-li
 });
 
 test('gameplay throw-in: a nearer human keeper is not the taker and never jumps back from the sideline',()=>{
- const f=fixture({role:'keeper'});Object.assign(f.p,{x:-15,z:4});
+ const f=fixture({role:'keeper'});Object.assign(f.p,{x:-config.pitch.length/2+3,z:4});
  Object.assign(f.s.players[0],{x:0,z:-7});Object.assign(f.s.players[1],{x:4,z:-2});Object.assign(f.s.players[6],{x:6,z:7});
- Object.assign(f.s.ball,{x:-15,z:10.95,vx:0,vz:30,vy:0,lastTeam:1,lastPlayer:3});
- const point={x:-15,z:11},keeperDistance=distance(f.p,point);
+ Object.assign(f.s.ball,{x:-config.pitch.length/2+3,z:config.pitch.width/2-.05,vx:0,vz:30,vy:0,lastTeam:1,lastPlayer:3});
+ const point={x:-config.pitch.length/2+3,z:config.pitch.width/2},keeperDistance=distance(f.p,point);
  assert.ok(f.s.players.filter(p=>p.team===0&&p.role!=='keeper').every(p=>distance(p,point)>keeperDistance),'fixture keeper is closer to the throw-in than all field players');
  let previous={x:f.p.x,z:f.p.z};f.tick();assert.equal(f.s.restart?.type,'throwIn');
  assert.notEqual(f.s.restart.player,f.p.id);assert.notEqual(f.s.players[f.s.restart.player].role,'keeper');
@@ -71,18 +72,19 @@ test('gameplay throw-in: a nearer human keeper is not the taker and never jumps 
 });
 
 test('gameplay restart spacing does not teleport the nearby human-controlled field player',()=>{
- const f=fixture();Object.assign(f.p,{x:0,z:8.6});Object.assign(f.s.players[1],{x:0,z:9.6});
- Object.assign(f.s.ball,{x:0,z:10.95,vx:0,vz:30,vy:0,lastTeam:1,lastPlayer:3});
+ const f=fixture();Object.assign(f.p,{x:0,z:config.pitch.width/2-2.4});Object.assign(f.s.players[1],{x:0,z:config.pitch.width/2-1.4});
+ Object.assign(f.s.ball,{x:0,z:config.pitch.width/2-.05,vx:0,vz:30,vy:0,lastTeam:1,lastPlayer:3});
  const before={x:f.p.x,z:f.p.z};f.tick();assert.equal(f.s.restart?.type,'throwIn');assert.equal(f.s.restart.player,1);
  assert.equal(f.s.controlled,f.p.id);assert.ok(distance(before,f.p)<=config.players.speed*dt+.05,'restart clearance cannot directly push the human player several metres');
 });
 
 test('gameplay keeper: releasing a carried ball leaves a smooth return to the goal line',()=>{
- const f=fixture({role:'keeper'});Object.assign(f.p,{x:-14,z:1,hands:true});
- Object.assign(f.s.ball,{owner:f.p.id,x:-13.7,z:1,y:config.goalkeeping.holdHeight,lastTeam:0,lastPlayer:f.p.id});
- f.tick({passHeld:true});f.tick({});assert.ok(has(f,'pass'));
+ const f=fixture({role:'keeper'});Object.assign(f.p,{x:-config.pitch.length/2+4,z:1,hands:true});
+ Object.assign(f.s.ball,{owner:f.p.id,x:f.p.x+config.goalkeeping.holdForward,z:1,y:config.goalkeeping.holdHeight,lastTeam:0,lastPlayer:f.p.id});
+ f.tick({passHeld:true});f.tick({});assert.equal(f.s.ball.owner,f.p.id);assert.equal(f.p.restartMotion.kind,'keeperThrow');
+ for(let i=0;i<Math.ceil(restartActionProfile('keeperThrow').contact/dt);i++){f.tick();if(!f.p.restartMotion.released)assert.equal(f.s.ball.owner,f.p.id);}assert.ok(has(f,'pass'));
  const before={x:f.p.x,z:f.p.z};f.tick();assert.ok(distance(before,f.p)<config.players.speed*dt+.02);
- assert.ok(f.p.x>-15,'releasing a throw does not snap the keeper straight to the line');assert.equal(f.s.controlled,f.p.id);
+ assert.ok(f.p.x>-config.pitch.length/2+3,'releasing a throw does not snap the keeper straight to the line');assert.equal(f.s.controlled,f.p.id);
 });
 
 for(const kind of ['pass','shot'])test(`gameplay buffered ${kind}: a released press resolves after actual local reception`,()=>{
@@ -148,8 +150,8 @@ test('gameplay field: an allowed back pass to the nearby keeper does not transfe
 });
 
 test('gameplay keeper possession in field mode does not steal selection from an outfield player',()=>{
- const f=fixture(),keeper=f.s.players[2];Object.assign(keeper,{cooldown:0,x:-16,z:0});
- Object.assign(f.s.ball,{x:-15.8,z:0,y:.3,vx:0,vy:0,lastTeam:1,lastPlayer:3});f.tick();
+ const f=fixture(),keeper=f.s.players[2];Object.assign(keeper,{cooldown:0,x:-config.pitch.length/2+2,z:0});
+ Object.assign(f.s.ball,{x:keeper.x+.2,z:0,y:.3,vx:0,vy:0,lastTeam:1,lastPlayer:3});f.tick();
  assert.equal(f.s.ball.owner,keeper.id);assert.equal(keeper.hands,true);assert.equal(f.s.controlled,f.p.id);
 });
 

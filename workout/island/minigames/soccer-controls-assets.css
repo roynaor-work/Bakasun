@@ -1,0 +1,18 @@
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls]{position:absolute;inset:0;direction:ltr;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions{position:absolute;inset:0!important;width:auto;height:auto;display:block;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] [data-design-slot]{position:absolute;box-sizing:border-box;transform:none;min-width:48px;min-height:48px;pointer-events:auto;touch-action:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions button{border-radius:17px;padding:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;direction:rtl}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions button[hidden]{display:none!important;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-zone{border:0;background:none;overflow:visible}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-joystick{position:absolute!important;inset:0!important;width:100%;height:100%;transform:none!important;display:block}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-knob{left:calc(50% - 16px);top:calc(50% - 16px);width:32px;height:32px}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-move-hint{display:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions [aria-disabled=true]{border-style:dashed;filter:saturate(.45)}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button:focus-visible,.game-screen[data-game=soccer] .soccer-joystick:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.game-screen[data-game=soccer] .game-header .game-pause[data-design-slot=pause]{position:absolute;min-width:48px;min-height:48px;transform:none}
+.game-screen[data-game=soccer] .game-header.game-header{inset:0;min-height:0;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-scoreboard{left:calc(76px + env(safe-area-inset-left,0px));max-width:calc(100vw - 100px)}
+.game-screen[data-game=soccer] .soccer-loading[data-error=true]{padding:28px;color:#fff;text-align:center;background:#102b43f0}
+.game-screen[data-game=soccer] .soccer-loading[data-error=true]::after{display:none}
+@media(orientation:portrait){.game-screen[data-game=soccer] .soccer-fixture{top:calc(66px + env(safe-area-inset-top,0px));max-width:78%;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button{transition:none;animation:none}}
