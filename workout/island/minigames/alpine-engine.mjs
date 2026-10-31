@@ -1,4 +1,4 @@
-import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-integration-20261030-1';
+import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-ski-20261031-1';
 
 /** Alpine Rush race engine (CONTRACT.ts SkiEngine, extended). Pure: no DOM, Three.js, audio or Date.
  * Physics advance only in fixed 1/60 s ticks through an accumulator, so the same seed and the
@@ -51,7 +51,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     const grid = physics.grid[index];
     const ai = index === 0 ? null : level.ai[index - 1];
     return {
-      id, index, ai, s: grid.s, x: grid.x, vx: 0, speed: 0, steer: 0, alt: 0, vy: 0, airborne: false, airKind: null,
+      id, index, ai, s: grid.s, x: grid.x, vx: 0, speed: 0, steer: 0, steerOut: 0, alt: 0, vy: 0, airborne: false, airKind: null,
       tank: physics.boostStartTank, boostTime: 0, padTime: 0, hitTime: 0, grace: 0, landTime: 0, crashTime: 0,
       ramp: null, seen: new Map(), hits: new Set(), pads: new Set(), gates: new Set(), coins: new Set(), cursor: 0,
       trick: null, airScore: 0, airTricks: 0, lastTrick: null, trickScore: 0, crashes: 0, trickDecideIn: 0,
@@ -189,9 +189,16 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
   function collide(r, object) {
     const speedBefore = r.speed;
     r.hits.add(object.id); r.collisions++;
-    r.speed *= 1 - physics.hitSpeedLoss; r.hitTime = physics.recoverySeconds; r.grace = physics.hitGraceSeconds;
-    const impactSide = object.type === 'rock' ? separateRock(r, object) : 0;
+    const rock = object.type === 'rock';
+    // Hitting a rock is a fall for the player and every rival: the rider tumbles, loses most of the
+    // speed and cannot steer or boost until up again. A gate post stays a bump.
+    if (rock) {
+      r.crashes++; r.speed *= 1 - physics.crashSpeedLoss; r.hitTime = physics.crashSeconds; r.crashTime = physics.crashSeconds; r.grace = physics.crashSeconds;
+      r.boostTime = 0; r.padTime = 0; r.trick = null; r.airScore = 0; r.airTricks = 0;
+    } else { r.speed *= 1 - physics.hitSpeedLoss; r.hitTime = physics.recoverySeconds; r.grace = physics.hitGraceSeconds; }
+    const impactSide = rock ? separateRock(r, object) : 0;
     emit('collision', { riderId: r.id, objectId: object.id, objectType: object.type, impactSide, impactStrength: clamp(speedBefore / physics.boostSpeed, 0, 1) });
+    if (rock) emit('crash', { riderId: r.id, objectId: object.id, objectType: 'rock' });
   }
 
   function takeoff(r, kind, vy, objectId) {
@@ -271,13 +278,21 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       // Feed-forward against the turn's outward push, then a proportional pull to the chosen line.
       const lean = curvatureAt(course.path, r.s) * r.speed * r.speed * physics.turnPush / (physics.lateralResponse * physics.lateralSpeed);
       r.steer = clamp((r.targetX - r.x) * 0.7 + lean, -1, 1);
-      if (r.wantsBoost) { r.wantsBoost = false; startBoost(r); }
+      if (r.wantsBoost) { r.wantsBoost = false; if (r.crashTime <= 0) startBoost(r); }
       if (r.airborne) aiTrick(r);
     } else {
-      r.steer = steerInput;
-      if (boostRequest) { boostRequest = false; startBoost(r); }
+      if (r.crashTime > 0) boostRequest = false;
+      else {
+        // Fine control near the centre (expo) and a rate limit so a thumb flick cannot snap the board sideways.
+        const shaped = Math.sign(steerInput) * Math.pow(Math.abs(steerInput), physics.steerExpo ?? 1);
+        const rate = (Math.sign(shaped) !== Math.sign(r.steerOut) || Math.abs(shaped) > Math.abs(r.steerOut) ? physics.steerAttack : physics.steerRelease) ?? 1e9;
+        r.steerOut += clamp(shaped - r.steerOut, -rate * dt, rate * dt);
+        r.steer = r.steerOut;
+        if (boostRequest) { boostRequest = false; startBoost(r); }
+      }
       consumePlayerTrick(r);
     }
+    if (r.crashTime > 0) { r.steer = 0; r.steerOut = 0; }
     const angle = r.airborne ? 0 : wallAngle(r.x, pipe), onWall = angle > 0;
     const boosted = r.boostTime > 0 || r.padTime > 0;
     const skill = r.ai ? r.ai.speed : wax;

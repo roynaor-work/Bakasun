@@ -1,5 +1,5 @@
-import {runRacingSession} from '../minigames/racing-session.mjs?v=island-integration-20261030-1';
-import {racingResult} from '../minigames/racing-result.mjs?v=island-integration-20261030-1';
+import {runRacingSession} from '../minigames/racing-session.mjs?v=island-ski-20261031-1';
+import {racingResult} from '../minigames/racing-result.mjs?v=island-ski-20261031-1';
 
 /** Uses the same lifecycle and reward contract as the other island games. */
 export function install(registry,data) {

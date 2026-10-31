@@ -1,4 +1,4 @@
-import {DATA_VERSION} from '../release.mjs?v=island-integration-20261030-1';
+import {DATA_VERSION} from '../release.mjs?v=island-ski-20261031-1';
 
 /** A local frame preserves the original game's CSS, Three.js and campaign.
  * The island still owns fullscreen, Back, visibility, pause, mute and exit. */

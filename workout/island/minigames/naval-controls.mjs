@@ -1,5 +1,5 @@
-import {navalWaterAt} from './naval-camera.mjs?v=island-integration-20261030-1';
-import {navalWeaponIcons} from './naval-icons.mjs?v=island-integration-20261030-1';
+import {navalWaterAt} from './naval-camera.mjs?v=island-ski-20261031-1';
+import {navalWeaponIcons} from './naval-icons.mjs?v=island-ski-20261031-1';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
 export function navalSteeringInput(moveX=0,moveZ=0,cameraHeading=0,deadzone=.12){

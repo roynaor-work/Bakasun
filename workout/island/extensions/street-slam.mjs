@@ -1,5 +1,5 @@
-import {startHoops} from '../minigames/hoops-session.mjs?v=island-integration-20261030-1';
-import {hoopsResult} from '../minigames/hoops-result.mjs?v=island-integration-20261030-1';
+import {startHoops} from '../minigames/hoops-session.mjs?v=island-ski-20261031-1';
+import {hoopsResult} from '../minigames/hoops-result.mjs?v=island-ski-20261031-1';
 
 /** Island Pro Basketball: 5 on 5 in the island arena (game id kept as streetSlam for saves). */
 export function install(registry,data) {
