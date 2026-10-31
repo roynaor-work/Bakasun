@@ -1,0 +1,307 @@
+{
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "assetChecksPass": true,
+  "repositoryTestsPass": false,
+  "repositoryTests": {
+    "tests": 2901,
+    "pass": 2862,
+    "fail": 1,
+    "skipped": 38,
+    "cancelled": 0
+  },
+  "budgetBytesPerCharacter": 300000,
+  "unchangedExistingFiles": true,
+  "totalPackageBytes": 6967751,
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 33,
+      "sha256": "235f1fb09aff391a0d326e977a7675cafd2aee644c75928fdb3e3aa125b7998e"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 3844,
+      "sha256": "a7edc21136766bc6f9edf8e7eea46931a3c4b38197a245a8b49f76f1e45c1edc"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7916,
+      "sha256": "94c48c6176744f4b77a2e7a9b1e014a6713727444682b18e1cd735e9db00fbae"
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 9133,
+      "sha256": "829f06b48f3a12698f35679e257392dd3129eb42f8e3d3a2514246872e8cda35"
+    },
+    {
+      "path": "basketball-player-back.png",
+      "bytes": 101631,
+      "sha256": "dd347780313f423f5aa756dade91986999567262f772af025c230970b8fe3e8a"
+    },
+    {
+      "path": "basketball-player-detail.png",
+      "bytes": 114547,
+      "sha256": "21560d4aaec7a3a13efadbfc7378811a11801cd46f44bf40c2ffd6ce3aa366dc"
+    },
+    {
+      "path": "basketball-player-front.png",
+      "bytes": 102677,
+      "sha256": "3d301f85834a8234dfe44b50e934d4ea268f968a584a0fee14a1bd9b3e4a6ccc"
+    },
+    {
+      "path": "basketball-player-three-quarter.png",
+      "bytes": 99624,
+      "sha256": "e9e13cc9858289e7a369761f79c78f8ef68396d88eb3a4c4442ebab2db298275"
+    },
+    {
+      "path": "basketball-player.glb",
+      "bytes": 100336,
+      "sha256": "24b031159f6b223cd1cd05fc95f14b099a3fd88378db54b1ff5217192551ad29"
+    },
+    {
+      "path": "goalkeeper-back.png",
+      "bytes": 103128,
+      "sha256": "44c4ecfd445fe07d93e15923df20fc2345b08f2cd10d0db7fff8341b0d0b3bb4"
+    },
+    {
+      "path": "goalkeeper-detail.png",
+      "bytes": 104941,
+      "sha256": "2688f4a678713b04cdad24bf70f901be16948146d82ec49a131d361b59f542d1"
+    },
+    {
+      "path": "goalkeeper-front.png",
+      "bytes": 103755,
+      "sha256": "c96622395228f1d3ad581a1a48ee1cd5d961436c6013e69b840ec068fa56101d"
+    },
+    {
+      "path": "goalkeeper-three-quarter.png",
+      "bytes": 98213,
+      "sha256": "6e2dcd4da48f25bf838cfa7cccd2cb0471437e293bdadf640f622aed58371be9"
+    },
+    {
+      "path": "goalkeeper.glb",
+      "bytes": 100252,
+      "sha256": "697f4947c4b0f044d5697a8a77efa18a3b535bf15945c8795624855a089e3de4"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 3492,
+      "sha256": "4c3a3ec55a9f3a91a0643eb41bbd3db0b702953667f6787f54045e9baff0552b"
+    },
+    {
+      "path": "overview.webp",
+      "bytes": 32458,
+      "sha256": "26cbaec8ec85f63023477ed7fb5f694fd83b2ba2dacad81b4816779d7509fffc"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 2508,
+      "sha256": "cbfaf62e7ad59596d7a415fc864974d6f32ab722dca26905a13ea4a946ccd5b8"
+    },
+    {
+      "path": "preview.js",
+      "bytes": 6734,
+      "sha256": "ee3394303f46cb6a44a7248bdc000dce9f20225e09f89f97e4efbf3ae6d79dc6"
+    },
+    {
+      "path": "regions.json",
+      "bytes": 24579,
+      "sha256": "fc9fad65fce70f58f510771b4c1a84bb9da1371edb7ea503253b1e36481a34c2"
+    },
+    {
+      "path": "skier-back.png",
+      "bytes": 105327,
+      "sha256": "52e33d5866db87549f8604ed96c10f29ca062642d0e40247ae156218fda1f62c"
+    },
+    {
+      "path": "skier-detail.png",
+      "bytes": 116587,
+      "sha256": "f5ba92a9d7e11061bb9e37d0a48272cba95deeb07715fdf30cb7fbce8443c2c7"
+    },
+    {
+      "path": "skier-front.png",
+      "bytes": 107654,
+      "sha256": "14bd6b0311f443aca0fff2ae215faa394bc334569194ff2e0cb11d17630ee96a"
+    },
+    {
+      "path": "skier-three-quarter.png",
+      "bytes": 106777,
+      "sha256": "2adbe9adfd98b4c397472ae27ebb3dd6b786f508086f72c8d6e59bd406cfb0ac"
+    },
+    {
+      "path": "skier.glb",
+      "bytes": 98116,
+      "sha256": "21681776d7130dac0db5254befb367904da89bf0f482ba54291d5db21cb55fdd"
+    },
+    {
+      "path": "soccer-player-back.png",
+      "bytes": 104116,
+      "sha256": "054674a58ad6f0543f4964e6f41be8855d94f3f0ec915cf9e60bfda70fe06b96"
+    },
+    {
+      "path": "soccer-player-detail.png",
+      "bytes": 120580,
+      "sha256": "d4c35e0626bb8ec1d977b91c8ec766b97f9a0abbe993f9100a4d5a1f5de0c6a5"
+    },
+    {
+      "path": "soccer-player-front.png",
+      "bytes": 105753,
+      "sha256": "9d15337cadaac604f07584f846f5427936482791e767eef3fc2841184ecf8622"
+    },
+    {
+      "path": "soccer-player-three-quarter.png",
+      "bytes": 101024,
+      "sha256": "24caebbd7e969b98a0d6e47a937fbb6403c1cd5e01c66e415f74d5a9eea5d8cc"
+    },
+    {
+      "path": "soccer-player.glb",
+      "bytes": 101256,
+      "sha256": "94277964ab6e83c64ff37820a4b00b7e13f060c45eab4245e5e4df3e5c731d3a"
+    },
+    {
+      "path": "source/audit.mjs",
+      "bytes": 4625,
+      "sha256": "9aebd6fc3c7c6aa87db7ba9617cb7d27d14162f3188710fbe0ea2269a16fce7b"
+    },
+    {
+      "path": "source/body.py",
+      "bytes": 18429,
+      "sha256": "694b2f409e511e8a2fa21530b20e626049828b8acc266ed93379602f42837e71"
+    },
+    {
+      "path": "source/build.py",
+      "bytes": 2054,
+      "sha256": "5efc2cf7f97b37e7092a70d6d6ffd46f51353ab27c08751b287a50280df0b254"
+    },
+    {
+      "path": "source/capture.py",
+      "bytes": 4678,
+      "sha256": "d6b517aa3bc992de78fb9c717f5a7a26cff9a410d9471402c2062d9c49cdfc1e"
+    },
+    {
+      "path": "source/check-viewer.py",
+      "bytes": 14279,
+      "sha256": "b4b5b3ec220bf20b08e243b08cbaf270519d063050affcf72e9d7ba794e4e08e"
+    },
+    {
+      "path": "source/export.mjs",
+      "bytes": 4324,
+      "sha256": "d780b487f304304c59caf3403dd7e1f36c33e5fc97d8393e937f2031607ba723"
+    },
+    {
+      "path": "source/gear.py",
+      "bytes": 11635,
+      "sha256": "64c637018e3d209ad2e0e81df4bf2e62164ca03926e5cebcb4a26fe5018f010f"
+    },
+    {
+      "path": "source/head_hands.py",
+      "bytes": 13087,
+      "sha256": "5820c055808bbe1b84fad72835ba4d02512e890146a5049af6e77e02deb07ea2"
+    },
+    {
+      "path": "source/mesh.py",
+      "bytes": 8522,
+      "sha256": "8c55edd1aafd81c23aafa53b2083ce9f1eb6aeee9860641fe225f6b83701d180"
+    },
+    {
+      "path": "source/package.json",
+      "bytes": 256,
+      "sha256": "91ee9d1ad29dac0724fffe20dbf7fc4518833c6d7f08e6fc51f225480ec91216"
+    },
+    {
+      "path": "source/validate.mjs",
+      "bytes": 6825,
+      "sha256": "0e46b48f6f05f3255d9100faa22a4dbc1a50f1a0545efe057730cc57adb9ca2a"
+    },
+    {
+      "path": "source/variants.mjs",
+      "bytes": 12002,
+      "sha256": "47d96e596e913cc3aad97df5fd12b955e079fcd07f68327de8e8d49e6d4572b2"
+    },
+    {
+      "path": "verification/basketball-player-alpine-clips.webp",
+      "bytes": 160852,
+      "sha256": "167d9be862c42fdd78b3d71fd5aec42b19ec5eddd43e3f36b9d37b1088b2e2d4"
+    },
+    {
+      "path": "verification/basketball-player-hoops-clips.webp",
+      "bytes": 126522,
+      "sha256": "c0d3711a46ff3dd34628f3e4608e23d2857ce5c62e88f927f999647a1284c988"
+    },
+    {
+      "path": "verification/basketball-player-soccer-clips.webp",
+      "bytes": 130048,
+      "sha256": "e4cede1012acf68f7d489934b2cd86cebfb66a18ad8c0f1b8bc54b9d361dec15"
+    },
+    {
+      "path": "verification/gltf-validation.json",
+      "bytes": 15179,
+      "sha256": "f54269e2ced4d6945ab381e085336f3d131454890fa04993d8e389d8874d9168"
+    },
+    {
+      "path": "verification/goalkeeper-alpine-clips.webp",
+      "bytes": 174994,
+      "sha256": "5b1ce4b3d27b08b0edfd84ac9867e191563b12c82ae05e460053d26efc951654"
+    },
+    {
+      "path": "verification/goalkeeper-hoops-clips.webp",
+      "bytes": 137610,
+      "sha256": "25057ba0c63081f3220a3d509939f8b3ebc0e7b6b0abc5256dd713ed8610cac0"
+    },
+    {
+      "path": "verification/goalkeeper-soccer-clips.webp",
+      "bytes": 142482,
+      "sha256": "3736e85e4e76e9410e0ea7c0f765a779fb64a4cc23a2358cf11a7127f32e89f6"
+    },
+    {
+      "path": "verification/preview.json",
+      "bytes": 7513,
+      "sha256": "a5f9c914438c8417252a8df7d0517b58940df162f2281b105fdbcc0faa570942"
+    },
+    {
+      "path": "verification/repository-tests.json",
+      "bytes": 1270,
+      "sha256": "88ab2553b7b6a6b8b1822928f01430a3e43a334e9130a8fb41637ebd2f3466ec"
+    },
+    {
+      "path": "verification/skier-alpine-clips.webp",
+      "bytes": 163028,
+      "sha256": "927d1391a67740934f1bd84b65f9cee0912e42f03a1eafb4f9e153be04cc89d3"
+    },
+    {
+      "path": "verification/skier-hoops-clips.webp",
+      "bytes": 126600,
+      "sha256": "862032456a9b3443f84326b6adee1057757baa24407eae558d551aaa3e84ac69"
+    },
+    {
+      "path": "verification/skier-soccer-clips.webp",
+      "bytes": 129214,
+      "sha256": "34e58c1df61b846b0cbd3f1ef800d96340fef35d94ccb1ec914876edf349d52b"
+    },
+    {
+      "path": "verification/soccer-player-alpine-clips.webp",
+      "bytes": 172334,
+      "sha256": "916efa62e641bb76b275ca6ba046a6c0f82bf7bcba07f3d72191796f4219b601"
+    },
+    {
+      "path": "verification/soccer-player-hoops-clips.webp",
+      "bytes": 135618,
+      "sha256": "64ff99481a0c8571eb10460930119a850ab8ee4a8b457c402c2175b055faf60f"
+    },
+    {
+      "path": "verification/soccer-player-soccer-clips.webp",
+      "bytes": 139442,
+      "sha256": "479cbf1da397b2851605a1d8c3ed666e8227ba938d50d819adfe90f5eae8fead"
+    },
+    {
+      "path": "verification/variants.json",
+      "bytes": 6356,
+      "sha256": "75318cf1d60091378581adec8bba725f034c0d39b4f90bd040843650706700dd"
+    },
+    {
+      "path": "verification/viewer-validation.json",
+      "bytes": 2910982,
+      "sha256": "ae2cdc81a51b0743435285897769f8d06754fd94487dd6a39b51d6be639df020"
+    }
+  ]
+}

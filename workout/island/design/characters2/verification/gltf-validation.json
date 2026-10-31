@@ -1,0 +1,552 @@
+{
+  "schemaVersion": 1,
+  "rigSha256": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+  "scope": "Actual final Draco GLB bytes, decoded independently with glTF Transform and checked against unchanged characters/rig.json",
+  "models": [
+    {
+      "model": "soccer-player",
+      "sha256": "94277964ab6e83c64ff37820a4b00b7e13f060c45eab4245e5e4df3e5c731d3a",
+      "pass": true,
+      "checks": {
+        "validator": {
+          "pass": true,
+          "errors": 0,
+          "warnings": 0,
+          "infos": 2
+        },
+        "budget": {
+          "pass": true,
+          "bytes": 101256,
+          "maxBytes": 300000
+        },
+        "rig": {
+          "pass": true,
+          "skinCount": 1,
+          "jointNames": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftShoulder",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightShoulder",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "parentMatch": true,
+          "maxTranslationError": 0,
+          "maxQuaternionComponentError": 0,
+          "maxScaleError": 0,
+          "maxInverseBindError": 0
+        },
+        "draco": {
+          "pass": true,
+          "primitives": 1,
+          "compressedPrimitives": 1
+        },
+        "geometry": {
+          "pass": true,
+          "vertices": 13722,
+          "triangles": 26180,
+          "badValues": 0,
+          "badIndices": 0,
+          "maxNormalLengthError": 1.449288722366049e-7,
+          "degenerateTriangles": 0
+        },
+        "weights": {
+          "pass": true,
+          "badVertices": 0,
+          "maxWeightSumError": 0,
+          "maxInfluences": 2
+        },
+        "texture": {
+          "pass": true,
+          "count": 0,
+          "sizes": []
+        },
+        "selfContained": {
+          "pass": true,
+          "externalResources": false,
+          "materialCount": 1
+        }
+      },
+      "validator": {
+        "uri": "soccer-player.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-10-31T01:25:14.035Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 2,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Island Characters2 original geometry / glTF Transform 4.5.1",
+          "extensionsUsed": [
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "KHR_draco_mesh_compression"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 95516
+            }
+          ],
+          "animationCount": 0,
+          "materialCount": 1,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": false,
+          "hasDefaultScene": false,
+          "drawCallCount": 1,
+          "totalVertexCount": 13722,
+          "totalTriangleCount": 26180,
+          "maxUVs": 0,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      }
+    },
+    {
+      "model": "goalkeeper",
+      "sha256": "697f4947c4b0f044d5697a8a77efa18a3b535bf15945c8795624855a089e3de4",
+      "pass": true,
+      "checks": {
+        "validator": {
+          "pass": true,
+          "errors": 0,
+          "warnings": 0,
+          "infos": 2
+        },
+        "budget": {
+          "pass": true,
+          "bytes": 100252,
+          "maxBytes": 300000
+        },
+        "rig": {
+          "pass": true,
+          "skinCount": 1,
+          "jointNames": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftShoulder",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightShoulder",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "parentMatch": true,
+          "maxTranslationError": 0,
+          "maxQuaternionComponentError": 0,
+          "maxScaleError": 0,
+          "maxInverseBindError": 0
+        },
+        "draco": {
+          "pass": true,
+          "primitives": 1,
+          "compressedPrimitives": 1
+        },
+        "geometry": {
+          "pass": true,
+          "vertices": 13500,
+          "triangles": 25756,
+          "badValues": 0,
+          "badIndices": 0,
+          "maxNormalLengthError": 1.449288722366049e-7,
+          "degenerateTriangles": 0
+        },
+        "weights": {
+          "pass": true,
+          "badVertices": 0,
+          "maxWeightSumError": 0,
+          "maxInfluences": 2
+        },
+        "texture": {
+          "pass": true,
+          "count": 0,
+          "sizes": []
+        },
+        "selfContained": {
+          "pass": true,
+          "externalResources": false,
+          "materialCount": 1
+        }
+      },
+      "validator": {
+        "uri": "goalkeeper.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-10-31T01:25:14.188Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 2,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Island Characters2 original geometry / glTF Transform 4.5.1",
+          "extensionsUsed": [
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "KHR_draco_mesh_compression"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 94516
+            }
+          ],
+          "animationCount": 0,
+          "materialCount": 1,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": false,
+          "hasDefaultScene": false,
+          "drawCallCount": 1,
+          "totalVertexCount": 13500,
+          "totalTriangleCount": 25756,
+          "maxUVs": 0,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      }
+    },
+    {
+      "model": "basketball-player",
+      "sha256": "24b031159f6b223cd1cd05fc95f14b099a3fd88378db54b1ff5217192551ad29",
+      "pass": true,
+      "checks": {
+        "validator": {
+          "pass": true,
+          "errors": 0,
+          "warnings": 0,
+          "infos": 2
+        },
+        "budget": {
+          "pass": true,
+          "bytes": 100336,
+          "maxBytes": 300000
+        },
+        "rig": {
+          "pass": true,
+          "skinCount": 1,
+          "jointNames": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftShoulder",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightShoulder",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "parentMatch": true,
+          "maxTranslationError": 0,
+          "maxQuaternionComponentError": 0,
+          "maxScaleError": 0,
+          "maxInverseBindError": 0
+        },
+        "draco": {
+          "pass": true,
+          "primitives": 1,
+          "compressedPrimitives": 1
+        },
+        "geometry": {
+          "pass": true,
+          "vertices": 13580,
+          "triangles": 25980,
+          "badValues": 0,
+          "badIndices": 0,
+          "maxNormalLengthError": 1.449288722366049e-7,
+          "degenerateTriangles": 0
+        },
+        "weights": {
+          "pass": true,
+          "badVertices": 0,
+          "maxWeightSumError": 0,
+          "maxInfluences": 2
+        },
+        "texture": {
+          "pass": true,
+          "count": 0,
+          "sizes": []
+        },
+        "selfContained": {
+          "pass": true,
+          "externalResources": false,
+          "materialCount": 1
+        }
+      },
+      "validator": {
+        "uri": "basketball-player.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-10-31T01:25:14.266Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 2,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Island Characters2 original geometry / glTF Transform 4.5.1",
+          "extensionsUsed": [
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "KHR_draco_mesh_compression"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 94588
+            }
+          ],
+          "animationCount": 0,
+          "materialCount": 1,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": false,
+          "hasDefaultScene": false,
+          "drawCallCount": 1,
+          "totalVertexCount": 13580,
+          "totalTriangleCount": 25980,
+          "maxUVs": 0,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      }
+    },
+    {
+      "model": "skier",
+      "sha256": "21681776d7130dac0db5254befb367904da89bf0f482ba54291d5db21cb55fdd",
+      "pass": true,
+      "checks": {
+        "validator": {
+          "pass": true,
+          "errors": 0,
+          "warnings": 0,
+          "infos": 2
+        },
+        "budget": {
+          "pass": true,
+          "bytes": 98116,
+          "maxBytes": 300000
+        },
+        "rig": {
+          "pass": true,
+          "skinCount": 1,
+          "jointNames": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftShoulder",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightShoulder",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "parentMatch": true,
+          "maxTranslationError": 0,
+          "maxQuaternionComponentError": 0,
+          "maxScaleError": 0,
+          "maxInverseBindError": 0
+        },
+        "draco": {
+          "pass": true,
+          "primitives": 1,
+          "compressedPrimitives": 1
+        },
+        "geometry": {
+          "pass": true,
+          "vertices": 12892,
+          "triangles": 24598,
+          "badValues": 0,
+          "badIndices": 0,
+          "maxNormalLengthError": 1.449288722366049e-7,
+          "degenerateTriangles": 0
+        },
+        "weights": {
+          "pass": true,
+          "badVertices": 0,
+          "maxWeightSumError": 0,
+          "maxInfluences": 2
+        },
+        "texture": {
+          "pass": true,
+          "count": 0,
+          "sizes": []
+        },
+        "selfContained": {
+          "pass": true,
+          "externalResources": false,
+          "materialCount": 1
+        }
+      },
+      "validator": {
+        "uri": "skier.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-10-31T01:25:14.340Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 2,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Island Characters2 original geometry / glTF Transform 4.5.1",
+          "extensionsUsed": [
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "KHR_draco_mesh_compression"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 92392
+            }
+          ],
+          "animationCount": 0,
+          "materialCount": 1,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": false,
+          "hasDefaultScene": false,
+          "drawCallCount": 1,
+          "totalVertexCount": 12892,
+          "totalTriangleCount": 24598,
+          "maxUVs": 0,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      }
+    }
+  ],
+  "pass": true
+}
