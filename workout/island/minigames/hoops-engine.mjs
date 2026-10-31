@@ -7,6 +7,7 @@ import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=is
 import {teamThink} from './hoops-ai.mjs?v=island-integration-20261030-1';
 
 export const HOOPS_DT=1/60;
+export const HOOPS_SPRINT_MIN_ENERGY=0.08;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const hyp=Math.hypot;
 export const NO_INPUT=Object.freeze({move:{x:0,z:0},sprint:false,shootDown:false,shootUp:false,passPress:false,passLong:false,passDir:null,altPress:false,switchPress:false,timeoutPress:false,call:null});
@@ -26,7 +27,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
 
  function makePlayer(card,team,slot){
   return {id:card.id,team,slot,pos:card.pos,name:card.name,number:card.number,look:card.look||{},r:{...card.ratings},
-   x:0,z:0,vx:0,vz:0,y:0,face:0,energy:card.energy??1,fouls:0,onCourt:true,
+   x:0,z:0,vx:0,vz:0,y:0,face:0,energy:card.energy??1,sprinting:false,fouls:0,onCourt:true,
    act:null,actT:0,act2:null,shot:null,air:-1,airDur:0,jumpH:0,stumble:0,cd:{steal:0,jump:0,move:0,pickup:0},
    intent:{x:0,z:0,speed:0,face:null,sprint:false},think:0,paintT:0,role:null,
    stats:{pts:0,fgm:0,fga:0,tpm:0,tpa:0,ftm:0,fta:0,reb:0,oreb:0,ast:0,stl:0,blk:0,tov:0,pf:0,sec:0}};
@@ -564,7 +565,10 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
  function movePlayers(dt){
   for(const p of all()){
    const it=p.intent;let tx=it.x*it.speed,tz=it.z*it.speed;
-   const maxS=C.player.speed*(0.72+0.38*eff(p,'speed'))*(it.sprint&&p.energy>0.08?C.player.sprintFactor:1)*(S.ball.owner===p.id?C.player.dribbleFactor:1);
+   // Charge the sprint multiplier only while it can actually accelerate a moving
+   // player. Holding sprint at rest or with an empty reserve is not extra drain.
+   p.sprinting=!!it.sprint&&it.speed>0.05&&p.energy>HOOPS_SPRINT_MIN_ENERGY;
+   const maxS=C.player.speed*(0.72+0.38*eff(p,'speed'))*(p.sprinting?C.player.sprintFactor:1)*(S.ball.owner===p.id?C.player.dribbleFactor:1);
    if(p.act==='shoot'){
     const sh=p.shot;
     if(sh.type==='layup'||sh.type==='dunk'){const near=court.distToRim(side(p.team),p.x,p.z);const k=(p.actT<sh.releaseAt?1:0.4)*clamp((near-0.9)/0.8,0,1);tx=sh.toRim.x*sh.drive*k/maxS;tz=sh.toRim.z*sh.drive*k/maxS;}
@@ -591,7 +595,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    else if(sp>0.6&&p.act!=='shoot')fx=Math.atan2(p.vx,p.vz);
    if(fx!=null){const tr=user?C.player.userTurn:C.player.turnRate;let d=((fx-p.face+Math.PI*3)%(Math.PI*2))-Math.PI;p.face+=clamp(d,-tr*dt,tr*dt);}
    // fatigue
-   const load=(sp/C.player.speed)**2*(it.sprint?C.fatigue.sprint:1);
+   const load=(sp/C.player.speed)**2*(p.sprinting?C.fatigue.sprint:1);
    p.energy=clamp(p.energy-(C.fatigue.drain*load-C.fatigue.recover*(1-Math.min(1,sp/2)))*dt,0,1);
    p.stats.sec+=dt;
    if(p.stumble>0)p.stumble=Math.max(0,p.stumble-dt);
@@ -939,7 +943,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
 
  function snapshotPlayers(){
   return all().map(p=>({id:p.id,team:p.team,pos:p.pos,number:p.number,x:+p.x.toFixed(3),z:+p.z.toFixed(3),y:+p.jumpH.toFixed(3),vx:+p.vx.toFixed(3),vz:+p.vz.toFixed(3),
-   face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,shotHeld:!!(p.shot&&p.shot.held&&!p.shot.released&&p.shot.quality==null),air:p.air>=0,energy:+p.energy.toFixed(3),fouls:p.fouls,
+   face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,shotHeld:!!(p.shot&&p.shot.held&&!p.shot.released&&p.shot.quality==null),air:p.air>=0,energy:+p.energy.toFixed(3),sprinting:p.sprinting,exhausted:p.energy<=HOOPS_SPRINT_MIN_ENERGY,fouls:p.fouls,
    hasBall:S.ball.owner===p.id&&S.ball.state==='held',controlled:p.id===S.controlled,stumble:p.stumble>0,look:p.look,role:p.role}));
  }
 
