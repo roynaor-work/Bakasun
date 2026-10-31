@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark"><title>האי שלי · כדורגל · פריסת שליטה</title>
+<link rel="stylesheet" href="controls.css"></head><body data-game="soccer">
+<header class="intro" id="top"><a class="back" href="index.html">כל המשחקים ←</a>
+<p class="eyebrow">האי שלי / חבילת שליטה / 31.10.2026</p>
+<h1>כדורגל<span>כל פעולה במקום שלה.</span></h1>
+<p>פריסה לאצבע אחת ולשתיים. כל מסגרת בהמשך היא מסך שלם, במידה ובכיוון של החלון הנוכחי.</p>
+<p class="muted">תצוגת עיצוב סטטית. הכפתורים מציגים יעד מגע ומשוב לחיצה; פעולות המשחק הן מפרט לחיבור עתידי.</p>
+<nav aria-label="מצבי שליטה">
+<a href="#attack">התקפה</a>
+<a href="#defense">הגנה</a>
+<a href="#throw_in">הוצאת אאוט</a>
+<a href="#corner">קרן</a>
+<a href="#goal_kick">בעיטת שער</a>
+<a href="#free_kick">בעיטה חופשית</a>
+<a href="#goalkeeper">שוער בלי כדור</a>
+<a href="#keeper_ball">שוער עם כדור</a>
+<a href="#opponent_restart">הוצאת יריב</a>
+<a href="#mapping">מיפוי לרכיבים</a><a href="soccer.json">JSON</a></nav></header><main>
+<section class="preview-sheet" id="attack" data-scene="attack" aria-labelledby="title-attack">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">כדורגל</span>
+<h2 id="title-attack">התקפה</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">בעיטה ומסירה נפרדות · החזקת ריצה אינה טוענת בעיטה</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי התקפה">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-attack"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="תנועה, מקשי החצים" aria-describedby="guide-attack"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">תנועה</span>
+</span></button>
+<button type="button" class="control primary" data-control-id="shot" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="בעיטה" aria-describedby="guide-attack"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20 20 4M8 4h12v12M3 10l7 7"></path></svg></span><span class="label">בעיטה</span>
+</span></button>
+<button type="button" class="control" data-control-id="pass" data-slot="secondary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="מסירה" aria-describedby="guide-attack"
+style="--wide-ox:100px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:84px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h17m-6-6 6 6-6 6"></path></svg></span><span class="label">מסירה</span>
+</span></button>
+<button type="button" class="control" data-control-id="sprint" data-slot="sprint"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="ריצה" aria-describedby="guide-attack"
+style="--wide-ox:12px;--wide-oy:100px;--wide-w:80px;--wide-h:64px;--tall-ox:12px;--tall-oy:12px;--tall-w:64px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m14 2-9 12h6l-1 8 9-12h-6z"></path></svg></span><span class="label">ריצה</span>
+</span></button>
+<button type="button" class="control" data-control-id="switch" data-slot="trick"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="החלפה" aria-describedby="guide-attack"
+style="--wide-ox:172px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:12px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m7 3 14 9-14 9z"></path></svg></span><span class="label">החלפה</span>
+</span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-attack" aria-label="איך משחקים במצב התקפה">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>גוררים סטיק, מרפים ועוברים לפעולה; כיוון אחרון נשמר לכיוון בלבד. הדמות אינה ממשיכה לנוע אחרי שחרור. לרצף תנועה ופעולה באותה אצבע: מחליקים מהסטיק אל אזור הפעולה לפי interaction.json.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>אצבע שמאל גוררת סטיק; אצבע ימין מפעילה פעולה. ספרינט בלי אצבע שלישית: החזקה בהטיית סטיק או נעילת ריצה מפורשת.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="preview-sheet" id="defense" data-scene="defense" aria-labelledby="title-defense">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">כדורגל</span>
+<h2 id="title-defense">הגנה</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">גלישה מסומנת בנפרד מחטיפה בעמידה ומהחלפת שחקן</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי הגנה">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-defense"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="תנועה, מקשי החצים" aria-describedby="guide-defense"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">תנועה</span>
+</span></button>
+<button type="button" class="control primary" data-control-id="slide" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="גלישה" aria-describedby="guide-defense"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5 3h14v9c0 5-7 9-7 9s-7-4-7-9z"></path></svg></span><span class="label">גלישה</span>
+</span></button>
+<button type="button" class="control" data-control-id="tackle" data-slot="secondary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="חטיפה" aria-describedby="guide-defense"
+style="--wide-ox:100px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:84px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 19 19 4M4 4h6M4 4v6M14 20h6v-6"></path></svg></span><span class="label">חטיפה</span>
+</span></button>
+<button type="button" class="control" data-control-id="sprint" data-slot="sprint"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="ריצה" aria-describedby="guide-defense"
+style="--wide-ox:12px;--wide-oy:100px;--wide-w:80px;--wide-h:64px;--tall-ox:12px;--tall-oy:12px;--tall-w:64px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m14 2-9 12h6l-1 8 9-12h-6z"></path></svg></span><span class="label">ריצה</span>
+</span></button>
+<button type="button" class="control" data-control-id="switch" data-slot="trick"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="החלפה" aria-describedby="guide-defense"
+style="--wide-ox:172px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:12px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m7 3 14 9-14 9z"></path></svg></span><span class="label">החלפה</span>
+</span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-defense" aria-label="איך משחקים במצב הגנה">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>גוררים סטיק, מרפים ועוברים לפעולה; כיוון אחרון נשמר לכיוון בלבד. הדמות אינה ממשיכה לנוע אחרי שחרור. לרצף תנועה ופעולה באותה אצבע: מחליקים מהסטיק אל אזור הפעולה לפי interaction.json.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>אצבע שמאל גוררת סטיק; אצבע ימין מפעילה פעולה. ספרינט בלי אצבע שלישית: החזקה בהטיית סטיק או נעילת ריצה מפורשת.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="preview-sheet" id="throw_in" data-scene="throw_in" aria-labelledby="title-throw_in">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">כדורגל</span>
+<h2 id="title-throw_in">הוצאת אאוט</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">כדור בידיים · כיוון ונמען גלויים · אין גלישה או בעיטה</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי הוצאת אאוט">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-throw_in"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="תנועה, מקשי החצים" aria-describedby="guide-throw_in"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">תנועה</span>
+</span></button>
+<button type="button" class="control primary" data-control-id="throw" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="אאוט" aria-describedby="guide-throw_in"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h17m-6-6 6 6-6 6"></path></svg></span><span class="label">אאוט</span>
+</span></button>
+<button type="button" class="control" data-control-id="short" data-slot="secondary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="קצרה" aria-describedby="guide-throw_in"
+style="--wide-ox:100px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:84px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h17m-6-6 6 6-6 6"></path></svg></span><span class="label">קצרה</span>
+</span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-throw_in" aria-label="איך משחקים במצב הוצאת אאוט">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>מכוונים בסטיק, מרפים ואז לוחצים אאוט. החזקה ארוכה מבקשת מרחק גדול יותר.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>שמאל מכוון לנמען; ימין מחזיק ומשחרר אאוט. המוציא אינו יכול לרוץ.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="preview-sheet" id="corner" data-scene="corner" aria-labelledby="title-corner">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">כדורגל</span>
+<h2 id="title-corner">קרן</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">הרמה לרחבה או מסירה קצרה, לפי חוקי המצב</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי קרן">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-corner"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="תנועה, מקשי החצים" aria-describedby="guide-corner"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">תנועה</span>
+</span></button>
+<button type="button" class="control primary" data-control-id="corner" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="קרן" aria-describedby="guide-corner"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h17m-6-6 6 6-6 6"></path></svg></span><span class="label">קרן</span>
+</span></button>
+<button type="button" class="control" data-control-id="short" data-slot="secondary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="קצרה" aria-describedby="guide-corner"
+style="--wide-ox:100px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:84px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h17m-6-6 6 6-6 6"></path></svg></span><span class="label">קצרה</span>
+</span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-corner" aria-label="איך משחקים במצב קרן">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>בחירת יעד בסטיק ואז קרן או קצרה.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>כיוון בשמאל וטעינת הקרן בימין.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="preview-sheet" id="goal_kick" data-scene="goal_kick" aria-labelledby="title-goal_kick">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">כדורגל</span>
+<h2 id="title-goal_kick">בעיטת שער</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">בעיטה סטטית מהשער; אינה הרחקה מהיד</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי בעיטת שער">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-goal_kick"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="תנועה, מקשי החצים" aria-describedby="guide-goal_kick"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">תנועה</span>
+</span></button>
+<button type="button" class="control primary" data-control-id="goal_kick" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="בעיטת שער" aria-describedby="guide-goal_kick"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20 20 4M8 4h12v12M3 10l7 7"></path></svg></span><span class="label">בעיטת שער</span>
+</span></button>
+<button type="button" class="control" data-control-id="short" data-slot="secondary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="קצרה" aria-describedby="guide-goal_kick"
+style="--wide-ox:100px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:84px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h17m-6-6 6 6-6 6"></path></svg></span><span class="label">קצרה</span>
+</span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-goal_kick" aria-label="איך משחקים במצב בעיטת שער">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>סטיק בוחר יעד; מרפים וטוענים בעיטת שער.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>כיוון בשמאל, טעינת בעיטת שער בימין.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="preview-sheet" id="free_kick" data-scene="free_kick" aria-labelledby="title-free_kick">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">כדורגל</span>
+<h2 id="title-free_kick">בעיטה חופשית</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">מסירה קצרה או בעיטה; זמינות נקבעת בידי השופט</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי בעיטה חופשית">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-free_kick"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="תנועה, מקשי החצים" aria-describedby="guide-free_kick"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">תנועה</span>
+</span></button>
+<button type="button" class="control primary" data-control-id="free_kick" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="חופשית" aria-describedby="guide-free_kick"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20 20 4M8 4h12v12M3 10l7 7"></path></svg></span><span class="label">חופשית</span>
+</span></button>
+<button type="button" class="control" data-control-id="short" data-slot="secondary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="קצרה" aria-describedby="guide-free_kick"
+style="--wide-ox:100px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:84px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h17m-6-6 6 6-6 6"></path></svg></span><span class="label">קצרה</span>
+</span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-free_kick" aria-label="איך משחקים במצב בעיטה חופשית">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>כיוון ואז לחיצה, ללא חלון חובה קצר.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>סטיק לכיוון ובעיטה לטעינה ושחרור.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="preview-sheet" id="goalkeeper" data-scene="goalkeeper" aria-labelledby="title-goalkeeper">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">כדורגל</span>
+<h2 id="title-goalkeeper">שוער בלי כדור</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">זינוק ויציאה · כיוון פיזי נשאר קבוע</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי שוער בלי כדור">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-goalkeeper"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="תנועה, מקשי החצים" aria-describedby="guide-goalkeeper"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">תנועה</span>
+</span></button>
+<button type="button" class="control primary" data-control-id="dive" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="זינוק" aria-describedby="guide-goalkeeper"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5 3h14v9c0 5-7 9-7 9s-7-4-7-9z"></path></svg></span><span class="label">זינוק</span>
+</span></button>
+<button type="button" class="control" data-control-id="rush" data-slot="sprint"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="יציאה" aria-describedby="guide-goalkeeper"
+style="--wide-ox:12px;--wide-oy:100px;--wide-w:80px;--wide-h:64px;--tall-ox:12px;--tall-oy:12px;--tall-w:64px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m14 2-9 12h6l-1 8 9-12h-6z"></path></svg></span><span class="label">יציאה</span>
+</span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-goalkeeper" aria-label="איך משחקים במצב שוער בלי כדור">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>החלקה על זינוק בוחרת צד ומבצעת; ליציאה לוחצים או מחזיקים יציאה.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>שמאל מציב את השוער או מכוון; ימין מבקש זינוק או יציאה.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="preview-sheet" id="keeper_ball" data-scene="keeper_ball" aria-labelledby="title-keeper_ball">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">כדורגל</span>
+<h2 id="title-keeper_ball">שוער עם כדור</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">גלגול ביד או הרחקה מהיד · זינוק מוסתר</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי שוער עם כדור">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-keeper_ball"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="תנועה, מקשי החצים" aria-describedby="guide-keeper_ball"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">תנועה</span>
+</span></button>
+<button type="button" class="control primary" data-control-id="punt" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="הרחקה" aria-describedby="guide-keeper_ball"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20 20 4M8 4h12v12M3 10l7 7"></path></svg></span><span class="label">הרחקה</span>
+</span></button>
+<button type="button" class="control" data-control-id="roll" data-slot="secondary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="גלגול" aria-describedby="guide-keeper_ball"
+style="--wide-ox:100px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:84px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h17m-6-6 6 6-6 6"></path></svg></span><span class="label">גלגול</span>
+</span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-keeper_ball" aria-label="איך משחקים במצב שוער עם כדור">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>מכוונים לנמען ואז בוחרים גלגול או הרחקה.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>אצבע שמאל מכוונת ואצבע ימין משחררת.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="preview-sheet" id="opponent_restart" data-scene="opponent_restart" aria-labelledby="title-opponent_restart">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">כדורגל</span>
+<h2 id="title-opponent_restart">הוצאת יריב</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">בחירת מגן ומיקום בלבד עד שהכדור במשחק</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי הוצאת יריב">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-opponent_restart"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="תנועה, מקשי החצים" aria-describedby="guide-opponent_restart"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">תנועה</span>
+</span></button>
+<button type="button" class="control" data-control-id="switch" data-slot="trick"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="החלפה" aria-describedby="guide-opponent_restart"
+style="--wide-ox:172px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:12px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m7 3 14 9-14 9z"></path></svg></span><span class="label">החלפה</span>
+</span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-opponent_restart" aria-label="איך משחקים במצב הוצאת יריב">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>מזיזים מגן ואז מחליפים; אין תור גלישה שממתין לחידוש.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>תנועה והחלפה יכולות לפעול יחד; חוקי מרחק נאכפים במנוע.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="mapping" id="mapping"><p class="eyebrow">מסירה למימוש</p>
+<h2>אותו רכיב. פעולה לפי מצב.</h2><p>כל יעד ממופה ל־create(host, options), ולאחריו update(state). שמות הפעולות הם כוונת עיצוב; המנוע מאשר את הביצוע.</p>
+<p>tap משתמש ב־onActivate; החזקה משתמשת ב־onPress/onRelease ובולעת click נוסף. swipe ולחיצה כפולה דורשים מתאם Pointer Events לפי interaction.json.</p>
+<div class="mapping-grid">
+<article><h3>השהיה</h3><p><code dir="ltr">pause</code></p><a href="../hud-kit/pause-button.mjs"><bdi>pause-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>השהיה וביטול כל קלט פעיל לפני פתיחת הלוח</dd>
+</dl></article>
+<article><h3>תנועה</h3><p><code dir="ltr">stick</code></p><a href="../hud-kit/joystick.mjs"><bdi>joystick.mjs · create</bdi></a><dl>
+<dt>גרירה</dt><dd>כיוון ומידת תנועה רציפים; האצבע נתפסת עד שחרור</dd>
+<dt>החזקה</dt><dd>במצב אצבע אחת או שתיים: הטיה של 0.9 ומעלה במשך 320ms מבקשת ספרינט; ירידה מתחת 0.75 מבטלת</dd>
+</dl></article>
+<article><h3>מסירה</h3><p><code dir="ltr">pass</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>מסירה קצרה לנמען המסומן</dd>
+<dt>החזקה</dt><dd>320ms בוחרים מסירה גבוהה; שחרור מבקש מסירה אחת</dd>
+<dt>החלקה</dt><dd>24px לכיוון פיזי בוחרים נמען, שחרור מוסר</dd>
+</dl></article>
+<article><h3>בעיטה</h3><p><code dir="ltr">shot</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>בעיטה מהירה לעבר יעד הכיוון האחרון</dd>
+<dt>החזקה</dt><dd>טעינה מיד בלחיצה; שחרור מבקש בעיטה אחת. אין בעיטה ב-pointercancel</dd>
+</dl></article>
+<article><h3>ריצה</h3><p><code dir="ltr">sprint</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>חלופת נגישות: הפעלה/כיבוי של ריצה כשהאפשרות נעילה נבחרה בהשהיה</dd>
+<dt>החזקה</dt><dd>ברירת מחדל: pointerdown מתחיל בקשת ספרינט; מ-320ms מסומן כהחזקה ארוכה. נשאר פעיל עד pointerup/cancel; שחרור קצר אינו נועל</dd>
+<dt>לחיצה כפולה</dt><dd>במצב נעילה בלבד: שתי לחיצות אינן מכפילות מהירות; כל click מחליף מצב בנפרד</dd>
+</dl></article>
+<article><h3>גלישה</h3><p><code dir="ltr">slide</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>ניסיון גלישה אחד בכיוון התנועה; ללא כיוון משתמשים בכיוון המבט</dd>
+<dt>החלקה</dt><dd>24px לכיוון: גלישה מכוונת בשחרור; החזקה ממושכת אינה מייצרת גלישות נוספות</dd>
+</dl></article>
+<article><h3>החלפה</h3><p><code dir="ltr">switch</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>מעבר לשחקן השדה הבא הקרוב לכדור; אינו מעביר לשוער בלי בחירה מפורשת</dd>
+</dl></article>
+<article><h3>חטיפה</h3><p><code dir="ltr">tackle</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>ניסיון חטיפה בעמידה אחד, נפרד מגלישה</dd>
+</dl></article>
+<article><h3>אאוט</h3><p><code dir="ltr">throw</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>הוצאת חוץ בידיים לנמען המסומן</dd>
+<dt>החזקה</dt><dd>320ms: אאוט ארוך; שחרור מבצע הוצאה אחת</dd>
+</dl></article>
+<article><h3>קרן</h3><p><code dir="ltr">corner</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>הרמת קרן לרחבה</dd>
+<dt>החזקה</dt><dd>טעינת הרמה; שחרור מאשר פעם אחת</dd>
+</dl></article>
+<article><h3>קצרה</h3><p><code dir="ltr">short</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>מסירה קצרה בהוצאה לנמען המסומן; זמינה רק אם המנוע מאפשר</dd>
+</dl></article>
+<article><h3>בעיטת שער</h3><p><code dir="ltr">goal_kick</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>בעיטת שער ליעד המסומן</dd>
+<dt>החזקה</dt><dd>טעינת מרחק, שחרור מבצע הוצאה חוקית אחת</dd>
+</dl></article>
+<article><h3>חופשית</h3><p><code dir="ltr">free_kick</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>בעיטה חופשית ישירה</dd>
+<dt>החזקה</dt><dd>טעינה ושחרור; הסטיק מכוון פיזית, ללא שיקוף RTL</dd>
+</dl></article>
+<article><h3>זינוק</h3><p><code dir="ltr">dive</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>זינוק לכיוון האחרון; ללא כיוון נשאר במרכז</dd>
+<dt>החלקה</dt><dd>24px שמאלה או ימינה: זינוק לאותו צד הפיזי</dd>
+</dl></article>
+<article><h3>יציאה</h3><p><code dir="ltr">rush</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>יציאת שוער אל הכדור לפי סמכות המנוע</dd>
+<dt>החזקה</dt><dd>החזקה מבקשת יציאה; שחרור או ביטול מפסיקים את הבקשה</dd>
+</dl></article>
+<article><h3>גלגול</h3><p><code dir="ltr">roll</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>שוער מגלגל ביד לנמען מסומן</dd>
+</dl></article>
+<article><h3>הרחקה</h3><p><code dir="ltr">punt</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>בעיטת שוער מהיד</dd>
+<dt>החזקה</dt><dd>טעינה ושחרור פעם אחת</dd>
+</dl></article>
+</div><p>טעינה: power-meter.mjs מקבל value בתחום 0–1. מהירות סקי: speed-meter.mjs מקבל kmh אמיתי. אירוע תוצאה מגיע מהמנוע ורק אז מפעיל את feel.</p>
+<p>חלופות נגישות במפרט: בחירת ספין או crossover, מסך או פייק, ונעילת ריצה בהשהיה. כל פעולה זמינה גם בלחיצה אחת. התצוגה הסטטית אינה מממשת את המתאם או תפריט ההגדרות.</p>
+<div class="feedback-samples" aria-label="דוגמאות משוב"><span>מוכן</span><span class="held">פעיל ═</span><span class="accepted">בוצע ✓</span><span class="unavailable">לא זמין ┄</span></div>
+<p>אין הבהוב. בהפחתת תנועה נשארים טקסט ומסגרת. ביטול מגע, החלפת מצב או סיבוב מסך מאפסים תנועה, טעינה וספרינט ודורשים מגע חדש.</p>
+<a class="back" href="index.html">כל המשחקים ←</a></section></main></body></html>

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark"><title>האי שלי · סקי · פריסת שליטה</title>
+<link rel="stylesheet" href="controls.css"></head><body data-game="alpine">
+<header class="intro" id="top"><a class="back" href="index.html">כל המשחקים ←</a>
+<p class="eyebrow">האי שלי / חבילת שליטה / 31.10.2026</p>
+<h1>סקי<span>כל פעולה במקום שלה.</span></h1>
+<p>פריסה לאצבע אחת ולשתיים. כל מסגרת בהמשך היא מסך שלם, במידה ובכיוון של החלון הנוכחי.</p>
+<p class="muted">תצוגת עיצוב סטטית. הכפתורים מציגים יעד מגע ומשוב לחיצה; פעולות המשחק הן מפרט לחיבור עתידי.</p>
+<nav aria-label="מצבי שליטה">
+<a href="#ground">על השלג</a>
+<a href="#air">באוויר</a>
+<a href="#recovery">התאוששות</a>
+<a href="#mapping">מיפוי לרכיבים</a><a href="alpine.json">JSON</a></nav></header><main>
+<section class="preview-sheet" id="ground" data-scene="ground" aria-labelledby="title-ground">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">סקי</span>
+<h2 id="title-ground">על השלג</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">ארבע פעולות האוויר נשארות גלויות ומסומנות באוויר</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי על השלג">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-ground"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="היגוי אופקי, מקשי החצים" aria-describedby="guide-ground"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">היגוי</span>
+</span></button>
+<button type="button" class="control primary" data-control-id="boost" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="האצה" aria-describedby="guide-ground"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m14 2-9 12h6l-1 8 9-12h-6z"></path></svg></span><span class="label">האצה</span>
+</span></button>
+<button type="button" class="control" data-control-id="grab" data-slot="secondary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="אחיזה · באוויר" aria-describedby="guide-ground"
+style="--wide-ox:100px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:84px;--tall-w:56px;--tall-h:64px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">אחיזה</span>
+<span class="reason">באוויר</span></span></button>
+<button type="button" class="control" data-control-id="spin" data-slot="trick"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="סיבוב · באוויר" aria-describedby="guide-ground"
+style="--wide-ox:172px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:12px;--tall-w:56px;--tall-h:64px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">סיבוב</span>
+<span class="reason">באוויר</span></span></button>
+<button type="button" class="control" data-control-id="flip" data-slot="support"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="היפוך · באוויר" aria-describedby="guide-ground"
+style="--wide-ox:100px;--wide-oy:84px;--wide-w:64px;--wide-h:64px;--tall-ox:148px;--tall-oy:12px;--tall-w:56px;--tall-h:64px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">היפוך</span>
+<span class="reason">באוויר</span></span></button>
+<button type="button" class="control" data-control-id="combo" data-slot="sprint"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="שילוב · באוויר" aria-describedby="guide-ground"
+style="--wide-ox:12px;--wide-oy:100px;--wide-w:80px;--wide-h:64px;--tall-ox:12px;--tall-oy:12px;--tall-w:64px;--tall-h:64px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">שילוב</span>
+<span class="reason">באוויר</span></span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-ground" aria-label="איך משחקים במצב על השלג">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>גרירה על המסלול מכוונת; מרפים ולוחצים האצה. אין בלימה חדשה.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>שמאל גורר סטיק אופקי; ימין מבקש האצה אחת.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="preview-sheet" id="air" data-scene="air" aria-labelledby="title-air">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">סקי</span>
+<h2 id="title-air">באוויר</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">ארבעה מזהי תרגיל קיימים · האצה מסומנת על השלג</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי באוויר">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-air"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="היגוי אופקי, מקשי החצים" aria-describedby="guide-air"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">היגוי</span>
+</span></button>
+<button type="button" class="control primary" data-control-id="boost" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="האצה · על השלג" aria-describedby="guide-air"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m14 2-9 12h6l-1 8 9-12h-6z"></path></svg></span><span class="label">האצה</span>
+<span class="reason">על השלג</span></span></button>
+<button type="button" class="control" data-control-id="grab" data-slot="secondary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="אחיזה" aria-describedby="guide-air"
+style="--wide-ox:100px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:84px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">אחיזה</span>
+</span></button>
+<button type="button" class="control" data-control-id="spin" data-slot="trick"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="סיבוב" aria-describedby="guide-air"
+style="--wide-ox:172px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:12px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">סיבוב</span>
+</span></button>
+<button type="button" class="control" data-control-id="flip" data-slot="support"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="היפוך" aria-describedby="guide-air"
+style="--wide-ox:100px;--wide-oy:84px;--wide-w:64px;--wide-h:64px;--tall-ox:148px;--tall-oy:12px;--tall-w:56px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">היפוך</span>
+</span></button>
+<button type="button" class="control" data-control-id="combo" data-slot="sprint"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="שילוב" aria-describedby="guide-air"
+style="--wide-ox:12px;--wide-oy:100px;--wide-w:80px;--wide-h:64px;--tall-ox:12px;--tall-oy:12px;--tall-w:64px;--tall-h:64px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">שילוב</span>
+</span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-air" aria-label="איך משחקים במצב באוויר">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>בחירה ישירה בכפתור תרגיל; אפשרות סטיק: החלקה ימינה spin, שמאלה grab, מעלה flip, מטה combo, בשחרור פעם אחת.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>סטיק משמאל להיגוי; ימין בוחר תרגיל אחד בכל לחיצה.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="preview-sheet" id="recovery" data-scene="recovery" aria-labelledby="title-recovery">
+<div class="arena" aria-hidden="true"><div class="field-mark"></div><div class="ball"></div></div>
+<header class="score-panel"><span class="eyebrow">סקי</span>
+<h2 id="title-recovery">התאוששות</h2><span class="numeric" dir="ltr">844×390 / 390×844</span></header>
+<p class="scene-note">כל בקשות התנועה והתרגיל מבוטלות עד אישור התאוששות</p>
+<div class="center-note" aria-hidden="true"><span class="crosshair">+</span><span>כיוון המשחק נשאר פיזי</span></div>
+<div class="controls" aria-label="מקשי התאוששות">
+<button type="button" class="control pause" data-control-id="pause" data-slot="pause"
+data-hud-module="../hud-kit/pause-button.mjs" data-hud-export="create"
+aria-label="השהיית המשחק" aria-describedby="guide-recovery"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:48px;--wide-h:48px;--tall-ox:12px;--tall-oy:12px;--tall-w:48px;--tall-h:48px" >
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 4v16M16 4v16"></path></svg></span><span class="label">השהיה</span>
+</span></button>
+<button type="button" class="control stick" data-control-id="stick" data-slot="stick"
+data-hud-module="../hud-kit/joystick.mjs" data-hud-export="create"
+aria-label="היגוי אופקי, מקשי החצים · המתנה" aria-describedby="guide-recovery"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:104px;--wide-h:104px;--tall-ox:12px;--tall-oy:12px;--tall-w:96px;--tall-h:96px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"></path></svg></span><span class="label">היגוי</span>
+<span class="reason">המתנה</span></span></button>
+<button type="button" class="control primary" data-control-id="boost" data-slot="primary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="האצה · המתנה" aria-describedby="guide-recovery"
+style="--wide-ox:12px;--wide-oy:12px;--wide-w:80px;--wide-h:80px;--tall-ox:12px;--tall-oy:84px;--tall-w:64px;--tall-h:72px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m14 2-9 12h6l-1 8 9-12h-6z"></path></svg></span><span class="label">האצה</span>
+<span class="reason">המתנה</span></span></button>
+<button type="button" class="control" data-control-id="grab" data-slot="secondary"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="אחיזה · המתנה" aria-describedby="guide-recovery"
+style="--wide-ox:100px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:84px;--tall-w:56px;--tall-h:64px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">אחיזה</span>
+<span class="reason">המתנה</span></span></button>
+<button type="button" class="control" data-control-id="spin" data-slot="trick"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="סיבוב · המתנה" aria-describedby="guide-recovery"
+style="--wide-ox:172px;--wide-oy:12px;--wide-w:64px;--wide-h:64px;--tall-ox:84px;--tall-oy:12px;--tall-w:56px;--tall-h:64px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">סיבוב</span>
+<span class="reason">המתנה</span></span></button>
+<button type="button" class="control" data-control-id="flip" data-slot="support"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="היפוך · המתנה" aria-describedby="guide-recovery"
+style="--wide-ox:100px;--wide-oy:84px;--wide-w:64px;--wide-h:64px;--tall-ox:148px;--tall-oy:12px;--tall-w:56px;--tall-h:64px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">היפוך</span>
+<span class="reason">המתנה</span></span></button>
+<button type="button" class="control" data-control-id="combo" data-slot="sprint"
+data-hud-module="../hud-kit/action-button.mjs" data-hud-export="create"
+aria-label="שילוב · המתנה" aria-describedby="guide-recovery"
+style="--wide-ox:12px;--wide-oy:100px;--wide-w:80px;--wide-h:64px;--tall-ox:12px;--tall-oy:12px;--tall-w:64px;--tall-h:64px" disabled>
+<span class="content"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 3 12l9 9 9-9zM8 12h8"></path></svg></span><span class="label">שילוב</span>
+<span class="reason">המתנה</span></span></button>
+</div><p class="sheet-caption">יעדי מגע קבועים · RTL · שוליים בטוחים + 12px</p></section>
+<section class="guide" id="guide-recovery" aria-label="איך משחקים במצב התאוששות">
+<article><span class="number">01</span><h3>אצבע אחת</h3><p>ממתינים לאישור המנוע; השהיה זמינה.</p></article>
+<article><span class="number">02</span><h3>שתי אצבעות</h3><p>ממתינים לאישור המנוע; אין תור פעולות שייצא בנחיתה.</p></article>
+<a href="#top">חזרה למצבים ↑</a></section>
+<section class="mapping" id="mapping"><p class="eyebrow">מסירה למימוש</p>
+<h2>אותו רכיב. פעולה לפי מצב.</h2><p>כל יעד ממופה ל־create(host, options), ולאחריו update(state). שמות הפעולות הם כוונת עיצוב; המנוע מאשר את הביצוע.</p>
+<p>tap משתמש ב־onActivate; החזקה משתמשת ב־onPress/onRelease ובולעת click נוסף. swipe ולחיצה כפולה דורשים מתאם Pointer Events לפי interaction.json.</p>
+<div class="mapping-grid">
+<article><h3>השהיה</h3><p><code dir="ltr">pause</code></p><a href="../hud-kit/pause-button.mjs"><bdi>pause-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>השהיה וביטול כל קלט פעיל לפני פתיחת הלוח</dd>
+</dl></article>
+<article><h3>היגוי</h3><p><code dir="ltr">stick</code></p><a href="../hud-kit/joystick.mjs"><bdi>joystick.mjs · create</bdi></a><dl>
+<dt>גרירה</dt><dd>ציר x בלבד להיגוי; y אינו מאיץ או בולם</dd>
+<dt>החלקה</dt><dd>באצבע אחת ובאוויר בלבד: 24px לכיוון בארבעת הצירים בוחרים תרגיל; ההיגוי מוקפא עד שחרור והבקשה נשלחת פעם אחת</dd>
+</dl></article>
+<article><h3>האצה</h3><p><code dir="ltr">boost</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>בקשת boost חד-פעמית, לפי החוזה הקיים; אינה ספרינט נעול</dd>
+<dt>החזקה</dt><dd>לחיצה ארוכה יוצרת בקשה אחת בלבד ב-pointerdown, ללא חזרה</dd>
+</dl></article>
+<article><h3>אחיזה</h3><p><code dir="ltr">grab</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>בקשת grab פעם אחת באוויר</dd>
+</dl></article>
+<article><h3>סיבוב</h3><p><code dir="ltr">spin</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>בקשת spin פעם אחת באוויר</dd>
+<dt>לחיצה כפולה</dt><dd>שתי נגיעות הן שתי בקשות נפרדות; אין תרגיל חדש או הכפלת ניקוד</dd>
+</dl></article>
+<article><h3>היפוך</h3><p><code dir="ltr">flip</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>בקשת flip פעם אחת באוויר</dd>
+</dl></article>
+<article><h3>שילוב</h3><p><code dir="ltr">combo</code></p><a href="../hud-kit/action-button.mjs"><bdi>action-button.mjs · create</bdi></a><dl>
+<dt>לחיצה</dt><dd>בקשת combo פעם אחת באוויר</dd>
+</dl></article>
+</div><p>טעינה: power-meter.mjs מקבל value בתחום 0–1. מהירות סקי: speed-meter.mjs מקבל kmh אמיתי. אירוע תוצאה מגיע מהמנוע ורק אז מפעיל את feel.</p>
+<p>חלופות נגישות במפרט: בחירת ספין או crossover, מסך או פייק, ונעילת ריצה בהשהיה. כל פעולה זמינה גם בלחיצה אחת. התצוגה הסטטית אינה מממשת את המתאם או תפריט ההגדרות.</p>
+<div class="feedback-samples" aria-label="דוגמאות משוב"><span>מוכן</span><span class="held">פעיל ═</span><span class="accepted">בוצע ✓</span><span class="unavailable">לא זמין ┄</span></div>
+<p>אין הבהוב. בהפחתת תנועה נשארים טקסט ומסגרת. ביטול מגע, החלפת מצב או סיבוב מסך מאפסים תנועה, טעינה וספרינט ודורשים מגע חדש.</p>
+<a class="back" href="index.html">כל המשחקים ←</a></section></main></body></html>

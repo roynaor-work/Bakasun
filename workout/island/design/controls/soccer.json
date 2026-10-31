@@ -1,0 +1,889 @@
+{
+  "schema_version": 1,
+  "kind": "design-contract-not-runtime",
+  "game": "soccer",
+  "label": "כדורגל",
+  "base_commit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "integration": "not-connected",
+  "direction": "rtl",
+  "interaction_contract": "interaction.json",
+  "sources": [
+    "../soccer/spec.md",
+    "../soccer/hud.html",
+    "../soccer/hud.css",
+    "../hud-kit/README.md",
+    "../feel/soccer.json",
+    "../feel/README.md"
+  ],
+  "controls": {
+    "pause": {
+      "label": "השהיה",
+      "aria_label": "השהיית המשחק",
+      "hud_kit": {
+        "module": "../hud-kit/pause-button.mjs",
+        "export": "create",
+        "options": {
+          "label": "השהיית המשחק"
+        },
+        "update": {
+          "label": "השהיית המשחק",
+          "disabled": false
+        },
+        "callbacks": "onPause; בהמשך pause-panel.mjs"
+      },
+      "gestures": {
+        "tap": "השהיה וביטול כל קלט פעיל לפני פתיחת הלוח"
+      },
+      "feedback": "פוקוס עובר ללוח, וחוזר לכפתור בסגירה"
+    },
+    "stick": {
+      "label": "תנועה",
+      "aria_label": "תנועה, מקשי החצים",
+      "hud_kit": {
+        "module": "../hud-kit/joystick.mjs",
+        "export": "create",
+        "options": {
+          "label": "תנועה, מקשי החצים",
+          "deadZone": 0.1
+        },
+        "update": {
+          "x": 0,
+          "y": 0,
+          "disabled": false
+        },
+        "callbacks": "onChange(x,y,active); x חיובי ימינה, y חיובי למטה; מיפוי לעולם במתאם"
+      },
+      "gestures": {
+        "drag": "כיוון ומידת תנועה רציפים; האצבע נתפסת עד שחרור",
+        "hold": "במצב אצבע אחת או שתיים: הטיה של 0.9 ומעלה במשך 320ms מבקשת ספרינט; ירידה מתחת 0.75 מבטלת"
+      },
+      "feedback": "כפתור סטיק קבוע; רק הפקק נע. ספרינט: טבעת כפולה ותווית ריצה"
+    },
+    "pass": {
+      "label": "מסירה",
+      "aria_label": "מסירה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "מסירה",
+          "icon": "pass"
+        },
+        "update": {
+          "label": "מסירה",
+          "icon": "pass",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "מסירה קצרה לנמען המסומן",
+        "hold": "320ms בוחרים מסירה גבוהה; שחרור מבקש מסירה אחת",
+        "swipe": "24px לכיוון פיזי בוחרים נמען, שחרור מוסר"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "shot": {
+      "label": "בעיטה",
+      "aria_label": "בעיטה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": true,
+          "label": "בעיטה",
+          "icon": "shot"
+        },
+        "update": {
+          "label": "בעיטה",
+          "icon": "shot",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "בעיטה מהירה לעבר יעד הכיוון האחרון",
+        "hold": "טעינה מיד בלחיצה; שחרור מבקש בעיטה אחת. אין בעיטה ב-pointercancel"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "sprint": {
+      "label": "ריצה",
+      "aria_label": "ריצה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "ריצה",
+          "icon": "boost"
+        },
+        "update": {
+          "label": "ריצה",
+          "icon": "boost",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "חלופת נגישות: הפעלה/כיבוי של ריצה כשהאפשרות נעילה נבחרה בהשהיה",
+        "hold": "ברירת מחדל: pointerdown מתחיל בקשת ספרינט; מ-320ms מסומן כהחזקה ארוכה. נשאר פעיל עד pointerup/cancel; שחרור קצר אינו נועל",
+        "double_tap": "במצב נעילה בלבד: שתי לחיצות אינן מכפילות מהירות; כל click מחליף מצב בנפרד"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "slide": {
+      "label": "גלישה",
+      "aria_label": "גלישה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": true,
+          "label": "גלישה",
+          "icon": "block"
+        },
+        "update": {
+          "label": "גלישה",
+          "icon": "block",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "ניסיון גלישה אחד בכיוון התנועה; ללא כיוון משתמשים בכיוון המבט",
+        "swipe": "24px לכיוון: גלישה מכוונת בשחרור; החזקה ממושכת אינה מייצרת גלישות נוספות"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "switch": {
+      "label": "החלפה",
+      "aria_label": "החלפה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "החלפה",
+          "icon": "play"
+        },
+        "update": {
+          "label": "החלפה",
+          "icon": "play",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "מעבר לשחקן השדה הבא הקרוב לכדור; אינו מעביר לשוער בלי בחירה מפורשת"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "tackle": {
+      "label": "חטיפה",
+      "aria_label": "חטיפה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "חטיפה",
+          "icon": "steal"
+        },
+        "update": {
+          "label": "חטיפה",
+          "icon": "steal",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "ניסיון חטיפה בעמידה אחד, נפרד מגלישה"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "throw": {
+      "label": "אאוט",
+      "aria_label": "אאוט",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": true,
+          "label": "אאוט",
+          "icon": "pass"
+        },
+        "update": {
+          "label": "אאוט",
+          "icon": "pass",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "הוצאת חוץ בידיים לנמען המסומן",
+        "hold": "320ms: אאוט ארוך; שחרור מבצע הוצאה אחת"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "corner": {
+      "label": "קרן",
+      "aria_label": "קרן",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": true,
+          "label": "קרן",
+          "icon": "pass"
+        },
+        "update": {
+          "label": "קרן",
+          "icon": "pass",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "הרמת קרן לרחבה",
+        "hold": "טעינת הרמה; שחרור מאשר פעם אחת"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "short": {
+      "label": "קצרה",
+      "aria_label": "קצרה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "קצרה",
+          "icon": "pass"
+        },
+        "update": {
+          "label": "קצרה",
+          "icon": "pass",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "מסירה קצרה בהוצאה לנמען המסומן; זמינה רק אם המנוע מאפשר"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "goal_kick": {
+      "label": "בעיטת שער",
+      "aria_label": "בעיטת שער",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": true,
+          "label": "בעיטת שער",
+          "icon": "shot"
+        },
+        "update": {
+          "label": "בעיטת שער",
+          "icon": "shot",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "בעיטת שער ליעד המסומן",
+        "hold": "טעינת מרחק, שחרור מבצע הוצאה חוקית אחת"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "free_kick": {
+      "label": "חופשית",
+      "aria_label": "חופשית",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": true,
+          "label": "חופשית",
+          "icon": "shot"
+        },
+        "update": {
+          "label": "חופשית",
+          "icon": "shot",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "בעיטה חופשית ישירה",
+        "hold": "טעינה ושחרור; הסטיק מכוון פיזית, ללא שיקוף RTL"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "dive": {
+      "label": "זינוק",
+      "aria_label": "זינוק",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": true,
+          "label": "זינוק",
+          "icon": "block"
+        },
+        "update": {
+          "label": "זינוק",
+          "icon": "block",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "זינוק לכיוון האחרון; ללא כיוון נשאר במרכז",
+        "swipe": "24px שמאלה או ימינה: זינוק לאותו צד הפיזי"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "rush": {
+      "label": "יציאה",
+      "aria_label": "יציאה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "יציאה",
+          "icon": "boost"
+        },
+        "update": {
+          "label": "יציאה",
+          "icon": "boost",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "יציאת שוער אל הכדור לפי סמכות המנוע",
+        "hold": "החזקה מבקשת יציאה; שחרור או ביטול מפסיקים את הבקשה"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "roll": {
+      "label": "גלגול",
+      "aria_label": "גלגול",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": false,
+          "label": "גלגול",
+          "icon": "pass"
+        },
+        "update": {
+          "label": "גלגול",
+          "icon": "pass",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "שוער מגלגל ביד לנמען מסומן"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    },
+    "punt": {
+      "label": "הרחקה",
+      "aria_label": "הרחקה",
+      "hud_kit": {
+        "module": "../hud-kit/action-button.mjs",
+        "export": "create",
+        "options": {
+          "primary": true,
+          "label": "הרחקה",
+          "icon": "shot"
+        },
+        "update": {
+          "label": "הרחקה",
+          "icon": "shot",
+          "disabled": false,
+          "loading": false,
+          "charge": 0
+        },
+        "callbacks": "tap: onActivate בלבד; hold: onPress/onRelease בלבד. מחוות מורכבות מחייבות מתאם לפי interaction.json."
+      },
+      "gestures": {
+        "tap": "בעיטת שוער מהיד",
+        "hold": "טעינה ושחרור פעם אחת"
+      },
+      "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+    }
+  },
+  "layouts": {
+    "844x390": {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "units": "CSS px",
+      "safe_area_at_reference": 0,
+      "slots": {
+        "stick": {
+          "x": 12,
+          "y": 274,
+          "width": 104,
+          "height": 104,
+          "anchor_x": "left",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "pause": {
+          "x": 12,
+          "y": 12,
+          "width": 48,
+          "height": 48,
+          "anchor_x": "left",
+          "anchor_y": "top",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "primary": {
+          "x": 752,
+          "y": 298,
+          "width": 80,
+          "height": 80,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "secondary": {
+          "x": 680,
+          "y": 314,
+          "width": 64,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 100,
+          "offset_y": 12
+        },
+        "sprint": {
+          "x": 752,
+          "y": 226,
+          "width": 80,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 100
+        },
+        "trick": {
+          "x": 608,
+          "y": 314,
+          "width": 64,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 172,
+          "offset_y": 12
+        },
+        "support": {
+          "x": 680,
+          "y": 242,
+          "width": 64,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 100,
+          "offset_y": 84
+        }
+      }
+    },
+    "390x844": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "units": "CSS px",
+      "safe_area_at_reference": 0,
+      "slots": {
+        "stick": {
+          "x": 12,
+          "y": 736,
+          "width": 96,
+          "height": 96,
+          "anchor_x": "left",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "pause": {
+          "x": 12,
+          "y": 12,
+          "width": 48,
+          "height": 48,
+          "anchor_x": "left",
+          "anchor_y": "top",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "primary": {
+          "x": 314,
+          "y": 688,
+          "width": 64,
+          "height": 72,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 84
+        },
+        "secondary": {
+          "x": 250,
+          "y": 696,
+          "width": 56,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 84,
+          "offset_y": 84
+        },
+        "sprint": {
+          "x": 314,
+          "y": 768,
+          "width": 64,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 12,
+          "offset_y": 12
+        },
+        "trick": {
+          "x": 250,
+          "y": 768,
+          "width": 56,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 84,
+          "offset_y": 12
+        },
+        "support": {
+          "x": 186,
+          "y": 768,
+          "width": 56,
+          "height": 64,
+          "anchor_x": "right",
+          "anchor_y": "bottom",
+          "offset_x": 148,
+          "offset_y": 12
+        }
+      }
+    }
+  },
+  "states": {
+    "attack": {
+      "label": "התקפה",
+      "note": "בעיטה ומסירה נפרדות · החזקת ריצה אינה טוענת בעיטה",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "shot",
+          "slot": "primary",
+          "disabled": false
+        },
+        {
+          "id": "pass",
+          "slot": "secondary",
+          "disabled": false
+        },
+        {
+          "id": "sprint",
+          "slot": "sprint",
+          "disabled": false
+        },
+        {
+          "id": "switch",
+          "slot": "trick",
+          "disabled": false
+        }
+      ],
+      "one_finger": "גוררים סטיק, מרפים ועוברים לפעולה; כיוון אחרון נשמר לכיוון בלבד. הדמות אינה ממשיכה לנוע אחרי שחרור. לרצף תנועה ופעולה באותה אצבע: מחליקים מהסטיק אל אזור הפעולה לפי interaction.json.",
+      "two_fingers": "אצבע שמאל גוררת סטיק; אצבע ימין מפעילה פעולה. ספרינט בלי אצבע שלישית: החזקה בהטיית סטיק או נעילת ריצה מפורשת."
+    },
+    "defense": {
+      "label": "הגנה",
+      "note": "גלישה מסומנת בנפרד מחטיפה בעמידה ומהחלפת שחקן",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "slide",
+          "slot": "primary",
+          "disabled": false
+        },
+        {
+          "id": "tackle",
+          "slot": "secondary",
+          "disabled": false
+        },
+        {
+          "id": "sprint",
+          "slot": "sprint",
+          "disabled": false
+        },
+        {
+          "id": "switch",
+          "slot": "trick",
+          "disabled": false
+        }
+      ],
+      "one_finger": "גוררים סטיק, מרפים ועוברים לפעולה; כיוון אחרון נשמר לכיוון בלבד. הדמות אינה ממשיכה לנוע אחרי שחרור. לרצף תנועה ופעולה באותה אצבע: מחליקים מהסטיק אל אזור הפעולה לפי interaction.json.",
+      "two_fingers": "אצבע שמאל גוררת סטיק; אצבע ימין מפעילה פעולה. ספרינט בלי אצבע שלישית: החזקה בהטיית סטיק או נעילת ריצה מפורשת."
+    },
+    "throw_in": {
+      "label": "הוצאת אאוט",
+      "note": "כדור בידיים · כיוון ונמען גלויים · אין גלישה או בעיטה",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "throw",
+          "slot": "primary",
+          "disabled": false
+        },
+        {
+          "id": "short",
+          "slot": "secondary",
+          "disabled": false
+        }
+      ],
+      "one_finger": "מכוונים בסטיק, מרפים ואז לוחצים אאוט. החזקה ארוכה מבקשת מרחק גדול יותר.",
+      "two_fingers": "שמאל מכוון לנמען; ימין מחזיק ומשחרר אאוט. המוציא אינו יכול לרוץ."
+    },
+    "corner": {
+      "label": "קרן",
+      "note": "הרמה לרחבה או מסירה קצרה, לפי חוקי המצב",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "corner",
+          "slot": "primary",
+          "disabled": false
+        },
+        {
+          "id": "short",
+          "slot": "secondary",
+          "disabled": false
+        }
+      ],
+      "one_finger": "בחירת יעד בסטיק ואז קרן או קצרה.",
+      "two_fingers": "כיוון בשמאל וטעינת הקרן בימין."
+    },
+    "goal_kick": {
+      "label": "בעיטת שער",
+      "note": "בעיטה סטטית מהשער; אינה הרחקה מהיד",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "goal_kick",
+          "slot": "primary",
+          "disabled": false
+        },
+        {
+          "id": "short",
+          "slot": "secondary",
+          "disabled": false
+        }
+      ],
+      "one_finger": "סטיק בוחר יעד; מרפים וטוענים בעיטת שער.",
+      "two_fingers": "כיוון בשמאל, טעינת בעיטת שער בימין."
+    },
+    "free_kick": {
+      "label": "בעיטה חופשית",
+      "note": "מסירה קצרה או בעיטה; זמינות נקבעת בידי השופט",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "free_kick",
+          "slot": "primary",
+          "disabled": false
+        },
+        {
+          "id": "short",
+          "slot": "secondary",
+          "disabled": false
+        }
+      ],
+      "one_finger": "כיוון ואז לחיצה, ללא חלון חובה קצר.",
+      "two_fingers": "סטיק לכיוון ובעיטה לטעינה ושחרור."
+    },
+    "goalkeeper": {
+      "label": "שוער בלי כדור",
+      "note": "זינוק ויציאה · כיוון פיזי נשאר קבוע",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "dive",
+          "slot": "primary",
+          "disabled": false
+        },
+        {
+          "id": "rush",
+          "slot": "sprint",
+          "disabled": false
+        }
+      ],
+      "one_finger": "החלקה על זינוק בוחרת צד ומבצעת; ליציאה לוחצים או מחזיקים יציאה.",
+      "two_fingers": "שמאל מציב את השוער או מכוון; ימין מבקש זינוק או יציאה."
+    },
+    "keeper_ball": {
+      "label": "שוער עם כדור",
+      "note": "גלגול ביד או הרחקה מהיד · זינוק מוסתר",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "punt",
+          "slot": "primary",
+          "disabled": false
+        },
+        {
+          "id": "roll",
+          "slot": "secondary",
+          "disabled": false
+        }
+      ],
+      "one_finger": "מכוונים לנמען ואז בוחרים גלגול או הרחקה.",
+      "two_fingers": "אצבע שמאל מכוונת ואצבע ימין משחררת."
+    },
+    "opponent_restart": {
+      "label": "הוצאת יריב",
+      "note": "בחירת מגן ומיקום בלבד עד שהכדור במשחק",
+      "controls": [
+        {
+          "id": "pause",
+          "slot": "pause",
+          "disabled": false
+        },
+        {
+          "id": "stick",
+          "slot": "stick",
+          "disabled": false
+        },
+        {
+          "id": "switch",
+          "slot": "trick",
+          "disabled": false
+        }
+      ],
+      "one_finger": "מזיזים מגן ואז מחליפים; אין תור גלישה שממתין לחידוש.",
+      "two_fingers": "תנועה והחלפה יכולות לפעול יחד; חוקי מרחק נאכפים במנוע."
+    }
+  },
+  "not_applicable": {},
+  "feedback_source": {
+    "file": "../feel/soccer.json",
+    "speed": "speed.knots / speed.lines לפי מהירות מאומתת בלבד",
+    "events": "events רק לאחר אישור מנוע; לחיצה אינה מפעילה goal / block / fall",
+    "reduced_motion": "ללא רעידה, שינוי FOV, קווי מהירות או משובי זמן; משאירים תווית, מסגרת ומד"
+  }
+}

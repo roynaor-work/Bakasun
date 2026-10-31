@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "base_commit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "kind": "design-contract-not-runtime",
+  "coordinates": {
+    "units": "CSS px; אין כפל ב-DPR",
+    "origin": "פינה שמאלית עליונה פיזית",
+    "direction": "RTL לטקסט בלבד. כיוון סטיק והחלקות לעולם אינם משתקפים.",
+    "safe_area": "כל offset מצטרף ל-env(safe-area-inset-<anchor>), בנוסף לשוליים שכבר כלולים. אין הקטנת יעדי מגע.",
+    "gap_min_px": 8,
+    "touch_min_px": 48,
+    "reference_viewports": [
+      [
+        844,
+        390
+      ],
+      [
+        390,
+        844
+      ]
+    ]
+  },
+  "gesture_thresholds": {
+    "tap_max_ms": 319,
+    "hold_from_ms": 320,
+    "double_tap_window_ms": 260,
+    "double_tap_max_distance_px": 16,
+    "swipe_min_distance_px": 24,
+    "swipe_axis_dominance": 1.25,
+    "cancel_outside_action_px": 24,
+    "stick_dead_zone": 0.1,
+    "one_finger_sprint_on": 0.9,
+    "one_finger_sprint_off": 0.75,
+    "one_finger_sprint_hold_ms": 320
+  },
+  "arbitration": [
+    "הכפתור והמצב ננעלים ב-pointerdown. pointerup לא יכול להפעיל פעולה של מצב חדש.",
+    "cancel קודם לכל דבר, אחריו swipe מוכר, אחריו hold, אחריו double tap אם הוגדרה, ולבסוף tap.",
+    "תנועה קטנה מ-24px אינה swipe. אלכסון ללא יתרון ציר 1.25 נשאר טעינה/כיוון עד שחרור או ביטול.",
+    "swipe צורך את מחוות המקור. אין גם tap/click סינתטי וגם פעולת swipe. בהחזקת טעינה, שחרור יוצר בקשה אחת.",
+    "double tap מיוחד קיים רק בתרגיל כדורסל: בודדת ממתינה 260ms, השנייה צורכת אותה. לא מעכבים זריקה, מסירה, חטיפה או החלפה.",
+    "יציאה מכפתור פעולה מעבר למרחק הביטול מסמנת ביטול גם אם יש pointer capture. שחרור מבטל בקשה שטרם נשלחה; אינו מבטל פעולה שכבר אושרה.",
+    "באצבע אחת בסטיק בלבד: מעבר אל מלבן פעולה גלוי והשהיה 120ms בתוכו בוחר פעולה. תנועה נעצרת וננעל הכיוון האחרון. שחרור מבקש tap; החזקה 320ms מהרגע שנבחרה פעולה מבקשת hold. יציאה 24px מהפעולה מבטלת. אין אירוע DOM לכפתור היעד בלי מתאם.",
+    "אין העברת capture בין רכיבי HUD. מתאם אצבע אחת הוא recognizer יחיד; הוא מבטל את onChange הקודם ומנתב בקשה לכפתור שנבחר.",
+    "לספרינט בשתי אצבעות: סטיק מלא 320ms או נעילה בהשהיה מאפשרים שימור ספרינט בזמן שהאצבע השנייה מוסרת/זורקת. כפתור הריצה תמיד נשאר גלוי.",
+    "בספרינט מוחזק click שמגיע אחרי pointerup נבלע. חלופת נעילה מופעלת רק בבחירה מפורשת בהשהיה; בה לחיצה אחת מחליפה מצב, בלי long press חובה."
+  ],
+  "lifecycle_cancel": [
+    "pointercancel",
+    "lostpointercapture",
+    "window blur",
+    "document hidden",
+    "pause",
+    "resize/orientation change",
+    "state change",
+    "disabled",
+    "destroy"
+  ],
+  "cancel_effect": "מאפסים תנועה, ספרינט מוחזק ונעול, טעינה, נמען זמני, חלון double tap ותורי מחוות; לא שולחים shootUp שמבצע זריקה. חזרה דורשת מגע חדש.",
+  "state_priority": [
+    "pause/recovery",
+    "authoritative restart",
+    "goalkeeper possession",
+    "goalkeeper without ball",
+    "defense",
+    "attack without ball",
+    "attack"
+  ],
+  "state_transition": "מחליפים טקסט, אייקון ו-aria-label יחד; אותה פעולה נשארת באותו slot; מוסתרים מסירים גם hit target ופוקוס. אי-זמינות זמנית משאירה מסגרת מקווקוות ותווית סיבה.",
+  "hud_kit_adapter": {
+    "tap": "onActivate בלבד; אין בקשה שנייה ב-onRelease.",
+    "hold": "onPress / onRelease(cancelled) בלבד; לבלוע click של אותה מחווה. loading/charge הם תצוגה בלבד.",
+    "complex_gesture": "action-button callbacks אינם כוללים coordinates/pointerId; המתאם חייב להאזין ל-Pointer Events ב-host של המופע, לזהות swipe/double tap ולא לחבר במקביל callbacks שמבצעים פעולה. אין שינוי ל-hud-kit במשימה זו.",
+    "dimensions": "ממקמים host לפי slot; דורסים ב-CSS מקומי width/height של .ih-action/.ih-stick, כולל @media של hud-kit, לאחר טעינת hud.css. יעד מגע נשאר קבוע.",
+    "power": "../hud-kit/power-meter.mjs: create; update({value: charge, label: כוח}); לא ליצור meter שני לאותה טעינה.",
+    "speed": "../hud-kit/speed-meter.mjs: update({kmh,unit: קמ״ש}); בסקי בלבד ועם נתון מאומת.",
+    "event": "../hud-kit/event-banner.mjs לאירוע מאומת; לא לכל לחיצה. הצלחת חטיפה/גלישה אינה נגזרת מהאנימציה."
+  },
+  "feedback": {
+    "idle": "תווית טקסט קצרה ואייקון; משטח אטום בגווני hud-kit",
+    "press": "תוכן פנימי scale 0.96 ל-80ms, מסגרת כפולה; המלבן החיצוני אינו זז ואינו קטן",
+    "held": "מסגרת כפולה קבועה, פס charge וטקסט פעיל/טעינה; בספרינט מוצג ריצה",
+    "accepted": "סימון וי קצר ותווית בוצע ל-180ms לאחר קבלת הבקשה בלבד; לא מסמן שער/סל",
+    "rejected": "מסגרת מקווקוות וסיבה כתובה, ללא הבהוב או רעידה",
+    "disabled": "מסגרת מקווקוות ותווית סיבה כגון באוויר/על השלג/המתנה; לא opacity בלבד",
+    "focus": "outline לבן 3px עם מרווח 3px",
+    "reduced_motion": "ללא transform או transition; מסגרת וטקסט נשארים. feel מנוטרל לפי העדפת המשתמש."
+  },
+  "accessibility": {
+    "keyboard": "Tab לפי סדר סמנטי: השהיה, סטיק, פעולה ראשית, משנית, ריצה, תרגיל, תמיכה. חצים לסטיק, Space/Enter לפעולות; Shift חלופת ספרינט במתאם.",
+    "alternatives": "כל swipe/double tap הם קיצורי דרך; בהשהיה ניתן לבחור תרגיל (crossover/spin), תמיכה (מסך/פייק) ונעילת ריצה; הכפתור מקבל את התווית שנבחרה. כל פעולה זמינה בנגיעה יחידה ללא מגבלת זמן.",
+    "screen_reader": "aria-label כולל פעולה וסיבה; מצב חדש מוכרז פעם אחת ב-status מנומס. מספרים dir=ltr; בלי הכרזה על כל frame.",
+    "contrast_text_min": 4.5,
+    "contrast_ui_min": 3,
+    "text_zoom": "זום דפדפן מותר ללא user-scalable=no. דף המפרט רשאי לגלול; התאמת טקסט מוגדל במשחק דורשת בדיקת מכשיר בעת החיבור.",
+    "static_preview": "כפתורים הם יעדי בדיקת עיצוב; אינם מריצים משחק או מזהי שחקנים אמיתיים."
+  }
+}
