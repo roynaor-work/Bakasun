@@ -60,11 +60,12 @@ export function loftDestination(state,c,power=0,{aim:requestedAim,point}={}){
 /** Solve the same fixed-step Euler flight used by rollBall, including its air
  * drag and the final ground-friction step. The Nth sample is the first landing
  * at the requested point; gravity, launch speed and time therefore agree. */
-export function createLoftFlight(ball,destination,c,power=0){
+export function createLoftFlight(ball,destination,c,power=0,options={}){
  const target=safeLoftPoint(destination,c),q=clamp(finite(power),0,1),r=c.physics.ballRadius,g=c.ball.gravity;
  const dt=c.match.fixedStep,range=distance(ball,target),nominal=c.passing.minDistance+(c.passing.maxDistance-c.passing.minDistance)*q;
  const configured=Math.max(.45,finite(c.passing.loftMinSeconds,1.05)+q*finite(c.passing.loftExtraSeconds,.45));
- const duration=Math.max(.35,configured*Math.sqrt(Math.min(1,range/Math.max(1,nominal))));
+ if(options.durationSeconds!==undefined&&(!Number.isFinite(options.durationSeconds)||options.durationSeconds<=0))throw Error('Invalid soccer flight duration');
+ const duration=options.durationSeconds===undefined?Math.max(.35,configured*Math.sqrt(Math.min(1,range/Math.max(1,nominal)))):clamp(options.durationSeconds,.18,3);
  const steps=Math.max(8,Math.ceil(duration/dt)),time=steps*dt,fromY=Math.max(r,finite(ball.y,r));
  const vy=(r-fromY)/time+g*dt*(steps-1)/2;
  let attenuation=1,travel=0,height=fromY-r;

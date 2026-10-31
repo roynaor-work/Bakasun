@@ -1,6 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {cloneSoccerRig} from './soccer-rig.mjs';
 import {createSoccerDesignLoader} from './soccer-design-loader.mjs';
+import {loadSoccerRestartMotion} from './soccer-athlete-motion.mjs';
 import {soccerMetreScale,createSoccerCharacterLod} from './soccer-scale.mjs';
 import {regionForTriangle} from '../design/variants/apply-variant.js';
 
@@ -121,6 +122,12 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
     const a=mixer.clipAction(clip);a.setLoop(data.states[clip.name].loop?T.LoopRepeat:T.LoopOnce,Infinity);a.clampWhenFinished=true;return [clip.name,a];
   }));
   let state=data.initialState,previousMode=null,previousSpeed=0,previousYaw=null,kickTimer=0,stealTimer=0,lastTransition=null;
+  const clean=[];let cleanSaved=false;
+  mixer.getRoot().traverse(bone=>{if(bone.isBone)clean.push({bone,q:bone.quaternion.clone(),p:bone.position.clone()});});
+  const updateMixer=dt=>{
+    if(cleanSaved)for(const pose of clean){pose.bone.quaternion.copy(pose.q);pose.bone.position.copy(pose.p);}
+    mixer.update(dt);for(const pose of clean){pose.q.copy(pose.bone.quaternion);pose.p.copy(pose.bone.position);}cleanSaved=true;
+  };
   actions[state].play();
   const change=(name,event,force=false,{at=0,rate=1,fadeSeconds}={})=>{
     if(!actions[name]||name===state&&!force)return;
@@ -135,6 +142,13 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   return {
     actions,get state(){return state;},get lastTransition(){return lastTransition;},
     update(p,s,animation,dt) {
+      const restart=p.restartMotion;
+      if(restart&&actions[restart.kind]){
+        if(state!==restart.kind){for(const action of Object.values(actions))action.stopFading().setEffectiveWeight(0);change(restart.kind,'restart-action',true,{rate:0,fadeSeconds:0});}
+        const action=actions[restart.kind];action.stopFading().setEffectiveWeight(1).setEffectiveTimeScale(0);action.time=clamp(restart.elapsed,0,data.states[restart.kind].durationSeconds);
+        kickTimer=p.kickTime||0;stealTimer=p.stealTime||0;previousMode=animation.mode;
+        updateMixer(0);return state;
+      }
       if(dt<=0)return state;
       const speed=Math.hypot(p.vx,p.vz),yaw=Math.atan2(p.fx,p.fz),mode=animation.mode,turn=previousYaw===null?0:wrap(yaw-previousYaw);
       const moving=speed>(config.view.animation.idleSpeed||.2),edge=mode!==previousMode;
@@ -146,24 +160,26 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         // The simulation has already released the ball. Enter immediately before
         // the authored contact, then fit only the follow-through to its existing
         // countdown. No physics release, countdown or result is delayed.
-        const clip=data.states.kick,contact=clip.ballContacts?.find(c=>c.event==='visual_contact');
+        const requested=s.event?.type==='shot'?'kick_power':s.ball.flight?'pass_long':'pass_short',name=actions[requested]?requested:'kick';
+        const clip=data.states[name],contact=clip.ballContacts?.find(c=>/strike|contact/.test(c.event));
         const contactTime=(contact?.time??.35)*clip.durationSeconds,m=config.view.athlete?.motion||{};
         const at=Math.max(0,contactTime-(m.contactLead??.03));
         const remaining=Math.max(.08,(mode==='steal'?p.stealTime:p.kickTime)||config.ai?.kickAnimationSeconds||.42);
-        change('kick','action',true,{at,rate:(clip.durationSeconds-at)/remaining,fadeSeconds:m.kickFadeIn??.025});
+        change(name,'action',true,{at,rate:(clip.durationSeconds-at)/remaining,fadeSeconds:m.kickFadeIn??.025});
       }
       else if(mode==='catch'&&edge)change('catch','receive');
-      else if(!['celebrate','fall','recover','kick','catch'].includes(state)||actions[state].time>=data.states[state].durationSeconds-1e-5) {
+      else if(!['celebrate','fall','recover','kick','kick_power','pass_short','pass_long','catch'].includes(state)||actions[state].time>=data.states[state].durationSeconds-1e-5) {
+        const running=['run','dribble_run','defensive_jockey'].includes(state),locomotion=s.ball.owner===p.id&&actions.dribble_run?'dribble_run':s.mode==='defense'&&actions.defensive_jockey&&speed<config.view.animation.runSpeed?'defensive_jockey':'run';
         if(mode==='celebrate'){/* Hold the authored celebration until the goal phase ends. */}
-        else if(!moving&&state==='run')change('decelerate','slowing');
+        else if(!moving&&running)change('decelerate','slowing');
         else if(!moving)change('idle','stopped');
-        else if(state==='run'&&Math.abs(turn)>.16)change(turn<0?'turn_left':'turn_right',turn<0?'turn_left':'turn_right');
-        else if(speed<previousSpeed-.15&&state==='run')change('decelerate','slowing');
-        else if(!['turn_left','turn_right','decelerate'].includes(state)||actions[state].time>=data.states[state].durationSeconds-1e-5)change('run','moving');
+        else if(running&&Math.abs(turn)>.16)change(turn<0?'turn_left':'turn_right',turn<0?'turn_left':'turn_right');
+        else if(speed<previousSpeed-.15&&running)change('decelerate','slowing');
+        else if(!['turn_left','turn_right','decelerate'].includes(state)||actions[state].time>=data.states[state].durationSeconds-1e-5)change(locomotion,'moving');
       }
-      if(state==='run')actions.run.setEffectiveTimeScale(clamp(speed/(config.view.animation.runSpeed||4.5),.55,1.7));
+      if(['run','dribble_run','defensive_jockey'].includes(state))actions[state].setEffectiveTimeScale(clamp(speed/(config.view.animation.runSpeed||4.5),.55,1.7));
       previousMode=mode;previousSpeed=speed;previousYaw=yaw;kickTimer=p.kickTime||0;stealTimer=p.stealTime||0;
-      mixer.update(dt);return state;
+      updateMixer(dt);return state;
     },
   };
 }
@@ -181,9 +197,12 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
   try {
     const [player,keeper,rig,map,data,regionMap]=await Promise.all([
       loader.loadAsync(asset('characters2/soccer-player.glb')),loader.loadAsync(asset('characters2/goalkeeper.glb')),
-      json('characters/rig.json'),json('viewer/retarget-map.json'),json('motion/soccer.json'),json('characters2/regions.json'),
+      json('characters/rig.json'),json('viewer/retarget-map.json'),loadSoccerRestartMotion(),json('characters2/regions.json'),
     ]);
-    const compiled=compileSoccerDesignClips(data,rig,map),sources=[player.scene,keeper.scene];
+    // Compile actions that have a live simulation mapping. Other extension
+    // states remain in the merged library without an expensive unused floor bake.
+    const active=new Set(['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power']);
+    const compiled=compileSoccerDesignClips({...data,states:Object.fromEntries(Object.entries(data.states).filter(([name])=>active.has(name)))},rig,map),sources=[player.scene,keeper.scene];
     for(const source of sources)validateBind(source,rig);
     const clipSets=sources.map(source=>bakeSoccerDesignFloor(source,compiled));
     const height=config.view.animation.characterHeight||1.8;

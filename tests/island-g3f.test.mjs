@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createSoccer} from '../workout/island/minigames/soccer.mjs';
+import {restartActionProfile,restartBallPose} from '../workout/island/minigames/soccer-restarts.mjs';
 import {pitchCrossing,goalFrameContact} from '../workout/island/minigames/soccer-boundary.mjs';
 import {inPenaltyArea,keeperSaveChance,rollBall} from '../workout/island/minigames/soccer-physics.mjs';
 import {rosterCards,cleanFirstName,awardSoccerPractice} from '../workout/island/activity/soccer-roster.mjs';
@@ -19,7 +20,7 @@ const dt=config.match.fixedStep,hx=config.pitch.length/2,hz=config.pitch.width/2
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} != ${b}`);
 const root=new URL('../workout/island/',import.meta.url),data=await loadData(root,async u=>({ok:true,json:async()=>JSON.parse(await readFile(u,'utf8'))}));
 function walkRestart(game,input={}){
- const s=game.getState(),r={...s.restart},p=s.players[r.player],budget=(r.walkSeconds??config.restarts.walkSeconds)+config.match.restartSeconds+Math.max(config.restarts.idleReleaseSeconds,config.restarts.aiReleaseSeconds)+.5;
+ const s=game.getState(),r={...s.restart},p=s.players[r.player],budget=Math.max(r.walkSeconds??config.restarts.walkSeconds,r.organizeSeconds||0)+config.match.restartSeconds+Math.max(config.restarts.idleReleaseSeconds,config.restarts.aiReleaseSeconds)+restartActionProfile(r.type).contact+2*dt;
  let previous={x:p.x,z:p.z},elapsed=0;
  while(s.phase.startsWith('restart')&&elapsed<budget){
   assert.equal(s.restart.player,r.player);game.update(dt,input);elapsed+=dt;
@@ -38,11 +39,11 @@ function setup(ball={}){
 test('G3f only a whole ball crosses the line, with height interpolated at the crossing',()=>{
   const from={x:hx-.1,y:2.5,z:0};
   assert.equal(pitchCrossing(from,{x:hx+.1,y:1,z:0},config),null);
-  const cross=pitchCrossing(from,{x:hx+.3,y:1,z:.4},config);
+  const cross=pitchCrossing(from,{x:hx-.1+(r+.1)/.8,y:1,z:.4},config);
   assert.equal(cross.axis,'x');near(cross.time,.8);near(cross.y,1.3);near(cross.z,.32);
 });
 test('G3f a diagonal ball leaving the touchline first cannot become a goal kick',()=>{
-  const cross=pitchCrossing({x:hx-.2,y:r,z:hz+.2},{x:hx+1,y:r,z:hz+1},config);
+  const cross=pitchCrossing({x:hx-.2,y:r,z:hz+r-.02},{x:hx+1,y:r,z:hz+1},config);
   assert.equal(cross.axis,'z');near(cross.z,hz+r);assert.ok(cross.x<hx);
 });
 for(const side of [-1,1])for(const frame of ['post','crossbar'])test(`G3f swept ${frame} at goal ${side} catches a ball that passes through between ticks`,()=>{
@@ -129,9 +130,12 @@ for(const lastTeam of [0,1])for(const side of [-1,1])test(`G3f goal-line restart
 test('G3f human throw waits for a pass release, raises both hands and throws inward independently of running',()=>{
  const g=setup({x:0,z:hz+.1,vz:30,lastTeam:1}),s=g.getState();Object.assign(s.players[1],{x:0,z:hz-1});g.update(dt);
  const taker=s.restart.player,spot={x:s.restart.x,z:s.restart.z};let previous={...s.players[taker]};
- for(let i=0;i<Math.ceil((config.match.restartSeconds+.1)/dt);i++){g.update(dt);assert.ok(Math.hypot(s.players[taker].x-previous.x,s.players[taker].z-previous.z)<=config.players.speed*1.15*dt+1e-6);previous={...s.players[taker]};}
- assert.equal(s.phase,'restartReady');near(s.players[taker].x,spot.x);near(s.players[taker].z,spot.z);assert.ok(s.players[taker].throwTime>0);assert.equal(s.ball.y,config.restarts.throwHeight);
- advance(g,.4,{passHeld:true,moveX:-1,moveZ:-1});assert.equal(s.phase,'restartReady','a held action within the ready window does not throw prematurely');g.update(dt,{moveX:-1,moveZ:-1});assert.equal(s.phase,'playing');assert.equal(s.ball.owner,null);assert.ok(s.ball.vx<0&&s.ball.vz<0);assert.equal(s.event.type,'throw');
+ const budget=Math.ceil((Math.max(s.restart.walkSeconds,s.restart.organizeSeconds)+config.match.restartSeconds+dt)/dt);
+ for(let i=0;i<budget&&s.phase!=='restartReady';i++){g.update(dt);assert.ok(Math.hypot(s.players[taker].x-previous.x,s.players[taker].z-previous.z)<=config.players.speed*1.15*dt+1e-6);previous={...s.players[taker]};}
+ assert.equal(s.phase,'restartReady');near(s.players[taker].x,spot.x);near(s.players[taker].z,spot.z);assert.equal(s.players[taker].restartMotion.kind,'throwIn');assert.equal(s.ball.y,restartBallPose('throwIn',s.players[taker].restartMotion.elapsed).height);
+ advance(g,.4,{passHeld:true,moveX:-1,moveZ:-1});assert.equal(s.phase,'restartReady','a held action within the ready window does not throw prematurely');g.update(dt,{moveX:-1,moveZ:-1});assert.equal(s.ball.owner,taker);
+ for(let i=0;i<Math.ceil(restartActionProfile('throwIn').contact/dt)&&s.phase!=='playing';i++){g.update(dt);if(!s.players[taker].restartMotion.released)assert.equal(s.ball.owner,taker);}
+ assert.equal(s.phase,'playing');assert.equal(s.ball.owner,null);assert.ok(s.ball.vx<0&&s.ball.vz<0);assert.equal(s.event.type,'throw');
 });
 test('G3f human corner creates a headable loft and landing marker, without a queued stoppage kick',()=>{
  const g=setup({x:hx+.1,z:hz-1,vx:30,lastTeam:1}),s=g.getState();g.update(dt,{kickHeld:true});walkRestart(g,{passAim:{x:-1,z:-1,manual:true}});

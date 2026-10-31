@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,stat} from 'node:fs/promises';
 import {createSoccer} from '../workout/island/minigames/soccer.mjs';
+import {restartActionProfile} from '../workout/island/minigames/soccer-restarts.mjs';
 import {soccerAudioCues,createG3hAudio,G3H_AUDIO_FILES} from '../workout/island/minigames/g3h-audio.mjs';
 const root=new URL('../workout/island/',import.meta.url),c=JSON.parse(await readFile(new URL('data/config.json',root))).minigames.soccer,dt=c.match.fixedStep;
 // Wall time includes every stoppage: no controller, forced turnovers or resets.
@@ -53,8 +54,8 @@ test('G3h a goal and every out-of-play restart emit a referee whistle; a goal al
 test('G3h event delivery preserves a shot even when the same update immediately reports possession',()=>{
  const game=createSoccer({config:c}),s=game.getState();s.players[0].cooldown=0;s.players[3].x=2;s.players[3].z=0;game.update(.2,{kickHeld:true});game.update(.2);assert.ok(game.drainEvents().some(e=>e.type==='shot'));assert.deepEqual(game.drainEvents(),[]);
 });
-test('G3h an unattended home restart resumes; an early human pass still releases immediately',()=>{
- for(const pressed of [false,true]){const game=createSoccer({config:c}),s=game.getState();Object.assign(s.ball,{owner:null,x:0,z:c.pitch.width/2-.05,vx:0,vz:30,lastTeam:1,grace:100});game.update(dt);for(let i=0;i<Math.ceil((c.match.restartSeconds+c.restarts.idleReleaseSeconds+.2)/dt)&&s.phase!=='playing';i++)game.update(dt,pressed?{passPressed:true}:{});assert.equal(s.phase,'playing');}
+test('G3h an unattended home restart resumes; an early human pass releases once after preparation and contact',()=>{
+ for(const pressed of [false,true]){const game=createSoccer({config:c}),s=game.getState();Object.assign(s.ball,{owner:null,x:0,z:c.pitch.width/2-.05,vx:0,vz:30,lastTeam:1,grace:100});game.update(dt);const r=s.restart,budget=Math.max(r.walkSeconds,r.organizeSeconds)+c.match.restartSeconds+c.restarts.idleReleaseSeconds+restartActionProfile(r.type).contact+2*dt;for(let i=0;i<Math.ceil(budget/dt)&&s.phase!=='playing';i++){game.update(dt,pressed?{passPressed:true}:{});if(s.phase.startsWith('restart'))assert.equal(s.ball.owner,r.player);}assert.equal(s.phase,'playing');assert.equal(game.drainEvents().filter(e=>e.type==='throw').length,1);}
 });
 test('G3h soccer delegates its single pause element and glyph to the shell',async()=>{
  const session=await readFile(new URL('minigames/soccer-session.mjs',root),'utf8'),css=await readFile(new URL('minigames/g3h-soccer.css',root),'utf8'),host=await readFile(new URL('ui/activity.mjs',root),'utf8');

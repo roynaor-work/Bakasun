@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createSoccer} from '../workout/island/minigames/soccer.mjs';
+import {restartActionProfile} from '../workout/island/minigames/soccer-restarts.mjs';
 import {shotLift} from '../workout/island/minigames/soccer-shot.mjs';
 import {inPenaltyArea} from '../workout/island/minigames/soccer-physics.mjs';
 import {slideWeight} from '../workout/island/minigames/soccer-presentation.mjs';
@@ -58,8 +59,10 @@ for(const attackDir of [-1,1])test(`G3g keeper carries within the penalty area i
  advance(g,.4);assert.equal(p.hands,false);assert.equal(s.ball.owner,null);
 });
 test('G3g keeper aimed throw leaves both hands and retains its height',()=>{
- const g=isolated('keeper'),s=g.getState(),p=s.players[2];Object.assign(p,{x:-16,z:0,hands:true});Object.assign(s.ball,{owner:2,x:-15.6,y:c.goalkeeping.holdHeight,z:0});
- g.update(dt,{passHeld:true,passAim:{x:1,z:0,manual:true}});g.update(dt,{passAim:{x:1,z:0,manual:true}});assert.equal(p.hands,false);assert.equal(s.ball.owner,null);assert.ok(s.ball.y>c.physics.ballRadius);assert.ok(p.throwTime>0);
+ const g=isolated('keeper'),s=g.getState(),p=s.players[2];Object.assign(p,{x:-c.pitch.length/2+2,z:0,hands:true});Object.assign(s.ball,{owner:2,x:p.x+c.goalkeeping.holdForward,y:c.goalkeeping.holdHeight,z:0});
+ g.update(dt,{passHeld:true,passAim:{x:1,z:0,manual:true}});g.update(dt,{passAim:{x:1,z:0,manual:true}});assert.equal(p.hands,true);assert.equal(s.ball.owner,p.id);assert.equal(p.restartMotion.kind,'keeperThrow');
+ for(let i=0;i<Math.ceil(restartActionProfile('keeperThrow').contact/dt);i++){g.update(dt);if(!p.restartMotion.released)assert.equal(s.ball.owner,p.id);}
+ assert.equal(p.hands,false);assert.equal(s.ball.owner,null);assert.ok(s.ball.y>c.physics.ballRadius);assert.ok(p.throwTime>0);
 });
 for(const seed of [1,9,41])test(`G3g every field player is active and teammates stay apart for 30 seconds, seed ${seed}`,t=>{
  const g=createSoccer({config:c,seed,difficulty:'normal'}),s=g.getState(),travel=s.players.map(()=>0),previous=s.players.map(p=>({...p})),overlaps=new Map();let playing=0,maxOverlap=0,width=0,samples=0;
