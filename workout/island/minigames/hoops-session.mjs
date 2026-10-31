@@ -53,8 +53,10 @@ export function startHoops(ctx){
  const toast=node('div','hoops-toast');toast.hidden=true;toast.setAttribute('aria-live','polite');let toastUntil=0;
  const replayBtn=node('button','hoops-replay');replayBtn.type='button';replayBtn.dataset.action='hoops-replay';replayBtn.setAttribute('aria-label',labels.replay);replayBtn.title=labels.replay;replayBtn.append(hoopsIcon('replay',doc));replayBtn.hidden=true;
  const benchPanel=node('div','hoops-bench');benchPanel.hidden=true;benchPanel.setAttribute('role','dialog');benchPanel.setAttribute('aria-label',labels.bench);
- const loading=node('div','hoops-loading');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));const ringEl=node('span','hoops-progress');loading.append(ringEl);
- stageEl.append(bug,meter,grade,toast,replayBtn,benchPanel,loading);
+ const loading=node('div','hoops-loading');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));const ringEl=node('span','hoops-progress');loading.append(ringEl,node('p','hoops-controls-hint','ספרינט בהחזקה · תרגיל: נגיעה להצלבה, החזקה לסיבוב · פייק: הטעיית זריקה'));
+ const stamina=node('div','hoops-stamina');stamina.setAttribute('role','progressbar');stamina.setAttribute('aria-label','סיבולת · החזקת ספרינט צורכת אנרגיה');stamina.setAttribute('aria-valuemin','0');stamina.setAttribute('aria-valuemax','100');
+ const staminaTrack=node('span','hoops-stamina-track'),staminaFill=node('i'),staminaValue=node('bdi','hoops-stamina-value','100');staminaValue.dir='ltr';staminaTrack.append(staminaFill);stamina.append(staminaTrack,staminaValue);
+ stageEl.append(bug,meter,grade,toast,replayBtn,benchPanel,loading,stamina);
  screens=createHoopsScreens({stageEl,loading,teams:setup.teams,
   onOpen(){kitPaused=paused;session.setPaused(true);},onClose(){if(!disposed)session.setPaused(kitPaused);},
   onKit(kit,team){selectedKit={kit,team};view?.setKit(team,kit);}});
@@ -128,6 +130,7 @@ export function startHoops(ctx){
   // the spoken board changes with the score, the clock and the quarter only
   const bk=`${s.score[0]}|${s.score[1]}|${c}|${s.quarter}`;if(bk!==boardKey){boardKey=bk;setAttr(bug,'aria-label',t('hoops.board',{home:s.score[0],away:s.score[1],clock:c,quarter:s.quarter}));}
   let me=null;for(const p of s.players)if(p.id===s.controlled){me=p;break;}
+  if(me){const value=Math.round(me.energy*100);setText(staminaValue,String(value));setAttr(stamina,'aria-valuenow',String(value));setData(stamina,'sprinting',String(!!me.sprinting));setData(stamina,'exhausted',String(!!me.exhausted));const width=value+'%';if(staminaFill.style.width!==width)staminaFill.style.width=width;}
   const mode=me?.hasBall?'ball':s.possession===0&&s.ball.state!=='loose'?'offense':'defense';
   controls.setMode(mode);
   // shot meter above the shooter while a timed shot is held: red, yellow, green, yellow, red

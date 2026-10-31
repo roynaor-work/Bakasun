@@ -32,26 +32,31 @@
 .game-screen[data-game=streetSlam] .hoops-shotclock[data-low=true]{color:#ff4b3a}
 .game-screen[data-game=streetSlam] .hoops-shotclock[hidden]{display:block;visibility:hidden}
 
-/* Controls: floating stick left, three actions right, timeout on top. */
-.game-screen[data-game=streetSlam] .game-controls.hoops-controls{position:absolute;z-index:5;inset:0;display:block;pointer-events:none;background:none;width:auto;max-height:none;padding:0;border-radius:0;overflow:visible}
-.game-screen[data-game=streetSlam] .hoops-stick-zone{position:absolute;left:0;bottom:0;pointer-events:auto;width:min(46vw,340px);height:min(62%,300px);touch-action:none}
-.game-screen[data-game=streetSlam] .hoops-stick{position:absolute;left:max(84px,calc(70px + env(safe-area-inset-left)));top:calc(100% - max(84px,calc(72px + env(safe-area-inset-bottom))));transform:translate(-50%,-50%);width:112px;height:112px;border-radius:50%;background:#ffffff10;border:1px solid #ffffff55;display:grid;place-items:center;box-shadow:inset 0 0 30px #0004}
-.game-screen[data-game=streetSlam] .hoops-knob{display:block;width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffffffcc,#ffffff40);border:2px solid #ffffff80;transition:transform .05s linear}
+/* Controls keep physical sides in RTL; safe areas add to the 12 px margin. */
+.game-screen[data-game=streetSlam] .game-controls.hoops-controls{--h-control-left:calc(12px + var(--ih-safe-left,env(safe-area-inset-left,0px)));--h-control-right:calc(12px + var(--ih-safe-right,env(safe-area-inset-right,0px)));--h-control-bottom:calc(12px + var(--ih-safe-bottom,env(safe-area-inset-bottom,0px)));position:absolute;z-index:5;inset:0;display:block;pointer-events:none;background:none;width:auto;max-height:none;padding:0;border-radius:0;overflow:visible;direction:ltr}
+.game-screen[data-game=streetSlam] .hoops-stick-zone{position:absolute;left:var(--h-control-left);bottom:var(--h-control-bottom);pointer-events:auto;width:min(42vw,340px,calc(100% - var(--h-control-left) - var(--h-control-right) - 188px));height:176px;min-width:104px;touch-action:none}
+.game-screen[data-game=streetSlam] .hoops-stick{position:absolute;left:50%;top:calc(100% - 60px);transform:translate(-50%,-50%);width:104px;height:104px;box-sizing:border-box;border-radius:50%;background:#ffffff10;border:1px solid #ffffff55;display:grid;place-items:center;box-shadow:inset 0 0 30px #0004;pointer-events:none}
+.game-screen[data-game=streetSlam] .hoops-knob{display:block;width:48px;height:48px;box-sizing:border-box;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffffffcc,#ffffff40);border:2px solid #ffffff80;transition:transform .05s linear}
 .game-screen[data-game=streetSlam] .hoops-stick-zone.active .hoops-stick{border-color:#fffc}
-.game-screen[data-game=streetSlam] .hoops-actions{position:absolute;right:max(16px,env(safe-area-inset-right));bottom:max(18px,calc(10px + env(safe-area-inset-bottom)));width:206px;height:196px;pointer-events:none}
-.game-screen[data-game=streetSlam] .hoops-action{position:absolute;display:grid;place-items:center;border-radius:50%;border:2px solid #ffffff70;color:#fff;padding:0;min-width:48px;min-height:48px;touch-action:none;font-size:0;pointer-events:auto;box-shadow:0 6px 18px #0007}
-.game-screen[data-game=streetSlam] .hoops-action svg{width:30px;height:30px}
-.game-screen[data-game=streetSlam] .hoops-shoot{right:0;bottom:0;width:88px;height:88px;background:var(--h-action)}
-.game-screen[data-game=streetSlam] .hoops-shoot svg{width:42px;height:42px}
-.game-screen[data-game=streetSlam] .hoops-pass{right:96px;bottom:4px;width:66px;height:66px;background:#1d5ad6}
-.game-screen[data-game=streetSlam] .hoops-alt{right:18px;bottom:100px;width:62px;height:62px;background:#3c4558}
-.game-screen[data-game=streetSlam] .hoops-action.held{filter:brightness(1.25);transform:scale(.95)}
-.game-screen[data-game=streetSlam] .hoops-action[data-action=block]{background:#2d7fa0}
-.game-screen[data-game=streetSlam] .hoops-action[data-action=steal]{background:#9a3e22}
+.game-screen[data-game=streetSlam] .hoops-actions{position:absolute;right:var(--h-control-right);bottom:var(--h-control-bottom);width:176px;height:176px;pointer-events:none;direction:ltr}
+.game-screen[data-game=streetSlam] .hoops-action{position:absolute;box-sizing:border-box;display:grid;place-items:center;border-radius:50%;border:2px solid #ffffff70;color:#fff;padding:0;min-width:48px;min-height:48px;touch-action:none;font-size:0;pointer-events:auto;box-shadow:0 6px 18px #0007}
+.game-screen[data-game=streetSlam] .hoops-action[hidden]{display:none}
+.game-screen[data-game=streetSlam] .hoops-action svg{width:28px;height:28px;pointer-events:none}
+.game-screen[data-game=streetSlam] .hoops-shoot,.game-screen[data-game=streetSlam] .hoops-block{right:0;bottom:0;width:64px;height:64px;background:var(--h-action)}
+.game-screen[data-game=streetSlam] .hoops-shoot svg,.game-screen[data-game=streetSlam] .hoops-block svg{width:36px;height:36px}
+.game-screen[data-game=streetSlam] .hoops-pass,.game-screen[data-game=streetSlam] .hoops-steal{right:72px;bottom:0;width:56px;height:56px;background:#1d5ad6}
+.game-screen[data-game=streetSlam] .hoops-move{right:128px;bottom:64px;width:48px;height:48px;background:#3c4558}
+.game-screen[data-game=streetSlam] .hoops-fake,.game-screen[data-game=streetSlam] .hoops-switch{right:64px;bottom:88px;width:48px;height:48px;background:#6d3e82}
+.game-screen[data-game=streetSlam] .hoops-sprint{right:0;bottom:88px;width:48px;height:48px;background:#765a13}
+.game-screen[data-game=streetSlam] .hoops-action.held{filter:brightness(1.25)}
+.game-screen[data-game=streetSlam] .hoops-action:focus-visible,.game-screen[data-game=streetSlam] .hoops-stick-zone:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.game-screen[data-game=streetSlam] .hoops-block{background:#2d7fa0}
+.game-screen[data-game=streetSlam] .hoops-steal{background:#9a3e22}
 .game-screen[data-game=streetSlam] .hoops-action[data-action=jump]{background:#2d7fa0}
-.game-screen[data-game=streetSlam] .hoops-topbar{position:absolute;top:max(10px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));display:flex;gap:8px;pointer-events:none}
+.game-screen[data-game=streetSlam] .hoops-topbar{position:absolute;top:calc(12px + var(--ih-safe-top,env(safe-area-inset-top,0px)));left:var(--h-control-left);display:flex;gap:8px;pointer-events:none}
 .game-screen[data-game=streetSlam] .hoops-small{position:relative;width:48px;height:48px;background:var(--h-glass);border-color:var(--h-line)}
 .game-screen[data-game=streetSlam] .hoops-small svg{width:26px;height:26px}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=streetSlam] .hoops-knob{transition:none}.game-screen[data-game=streetSlam] .hoops-action.held{transform:none}}
 
 /* Shot meter above the shooter, timing grade, toasts, replay. */
 .game-screen[data-game=streetSlam] .hoops-meter{position:absolute;z-index:4;left:18px;top:-96px;width:16px;height:86px;border-radius:9px;background:#000a;border:1px solid #fff6;overflow:hidden;pointer-events:none}
@@ -100,8 +105,6 @@
  .game-screen[data-game=streetSlam] .hoops-bug{top:max(64px,calc(56px + env(safe-area-inset-top)));height:40px}
  .game-screen[data-game=streetSlam] .hoops-score{font-size:22px;line-height:40px;min-width:34px}
  .game-screen[data-game=streetSlam] .hoops-team{min-width:70px}
- .game-screen[data-game=streetSlam] .hoops-actions{bottom:max(40px,calc(24px + env(safe-area-inset-bottom)))}
- .game-screen[data-game=streetSlam] .hoops-stick-zone{bottom:max(40px,calc(24px + env(safe-area-inset-bottom)))}
  /* the score bug spans the width in portrait: replay and toasts go below it, never over it */
  .game-screen[data-game=streetSlam] .hoops-replay{top:max(116px,calc(110px + env(safe-area-inset-top)))}
  .game-screen[data-game=streetSlam] .hoops-toast{top:max(118px,calc(112px + env(safe-area-inset-top)))}
@@ -141,3 +144,28 @@
 }
 
 .game-screen[data-game=streetSlam] .hoops-loading{flex-direction:column;gap:12px}
+
+/* Stamina is separated from both thumb zones; high contrast survives the bright court. */
+.game-screen[data-game=streetSlam] .hoops-stamina{position:absolute;left:calc(12px + var(--ih-safe-left,env(safe-area-inset-left,0px)));bottom:calc(196px + var(--ih-safe-bottom,env(safe-area-inset-bottom,0px)));z-index:4;width:104px;height:22px;padding:3px 7px;box-sizing:border-box;background:#101828ef;border:1px solid #ffffff50;border-radius:8px;display:flex;align-items:center;gap:6px;direction:ltr;pointer-events:none}
+.game-screen[data-game=streetSlam] .hoops-stamina-track{height:6px;flex:1;border-radius:3px;background:#ffffff30;overflow:hidden}
+.game-screen[data-game=streetSlam] .hoops-stamina-track i{height:100%;display:block;background:#ffd16a;width:100%}
+.game-screen[data-game=streetSlam] .hoops-stamina-value{font:700 12px/1 system-ui;color:#fff;min-width:22px;text-align:right;font-variant-numeric:tabular-nums}
+.game-screen[data-game=streetSlam] .hoops-stamina[data-sprinting=true]{border-color:#ffd16a}
+.game-screen[data-game=streetSlam] .hoops-stamina[data-exhausted=true] .hoops-stamina-track i{background:#ff806c}
+.game-screen[data-game=streetSlam] .hoops-topbar{left:calc(72px + var(--ih-safe-left,env(safe-area-inset-left,0px)))}
+
+/* One safe-area contract for shell, score, cosmetic picker and physical controls. */
+.game-screen[data-game=streetSlam] .game-header{inset:calc(12px + var(--ih-safe-top,env(safe-area-inset-top,0px))) calc(12px + var(--ih-safe-right,env(safe-area-inset-right,0px))) auto calc(12px + var(--ih-safe-left,env(safe-area-inset-left,0px)))}
+.game-screen[data-game=streetSlam] .hoops-bug{top:calc(12px + var(--ih-safe-top,env(safe-area-inset-top,0px)))}
+.game-screen[data-game=streetSlam] .hoops-kit-trigger{right:calc(12px + var(--ih-safe-right,env(safe-area-inset-right,0px)));top:calc(72px + var(--ih-safe-top,env(safe-area-inset-top,0px)))}
+.game-screen[data-game=streetSlam] .hoops-replay{left:calc(12px + var(--ih-safe-left,env(safe-area-inset-left,0px)));top:calc(72px + var(--ih-safe-top,env(safe-area-inset-top,0px)))}
+@media(orientation:portrait){
+ .game-screen[data-game=streetSlam] .hoops-bug{top:calc(64px + var(--ih-safe-top,env(safe-area-inset-top,0px)))}
+ .game-screen[data-game=streetSlam] .hoops-kit-trigger,.game-screen[data-game=streetSlam] .hoops-replay{top:calc(116px + var(--ih-safe-top,env(safe-area-inset-top,0px)))}
+}
+
+.game-screen[data-game=streetSlam] .game-header .game-pause{position:fixed;left:calc(12px + var(--ih-safe-left,env(safe-area-inset-left,0px)));right:auto;top:calc(12px + var(--ih-safe-top,env(safe-area-inset-top,0px)));width:48px;height:48px;min-width:48px;min-height:48px;box-sizing:border-box}
+.game-screen[data-game=streetSlam] .hoops-toast{top:calc(70px + var(--ih-safe-top,env(safe-area-inset-top,0px)))}
+@media(orientation:portrait){.game-screen[data-game=streetSlam] .hoops-toast{top:calc(134px + var(--ih-safe-top,env(safe-area-inset-top,0px)))}}
+
+.game-screen[data-game=streetSlam] .hoops-controls-hint{font:500 14px/1.5 system-ui;direction:rtl;text-align:center;color:#e8eef7;max-width:min(90%,420px);margin:0;padding:0 10px}
