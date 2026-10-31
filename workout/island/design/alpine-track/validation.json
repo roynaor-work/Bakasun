@@ -1,0 +1,287 @@
+{
+  "allPassed": true,
+  "baseCommit": "e67c65668696821299cf260072716c8107a348ed",
+  "scope": "New files only in workout/island/design/alpine-track/",
+  "budgetBytes": 2000000,
+  "folderBytes": 1468888,
+  "fileCount": 47,
+  "models": [
+    {
+      "file": "models/direction-sign.glb",
+      "bytes": 6324,
+      "sha256": "16f0b58ae99421c45fe5fc9c9058624df0451264669e29eb2d8adf47edb2c92e",
+      "triangles": 276,
+      "primitives": 1,
+      "requiredDracoEveryPrimitive": true,
+      "attributes": [
+        "POSITION",
+        "NORMAL",
+        "TEXCOORD_0",
+        "COLOR_0"
+      ]
+    },
+    {
+      "file": "models/flag-rope.glb",
+      "bytes": 9908,
+      "sha256": "151d2d42fc4d56d6b658315f02a933568269276348b884efae29046431588d6a",
+      "triangles": 584,
+      "primitives": 1,
+      "requiredDracoEveryPrimitive": true,
+      "attributes": [
+        "POSITION",
+        "NORMAL",
+        "TEXCOORD_0",
+        "COLOR_0"
+      ]
+    },
+    {
+      "file": "models/halfpipe-segment.glb",
+      "bytes": 11468,
+      "sha256": "4c551d0a1decf7eeb812332c50095bcd65822b652a0abfe30f8f9aa218a6423f",
+      "triangles": 1656,
+      "primitives": 1,
+      "requiredDracoEveryPrimitive": true,
+      "attributes": [
+        "POSITION",
+        "NORMAL",
+        "TEXCOORD_0",
+        "COLOR_0"
+      ]
+    },
+    {
+      "file": "models/jump-ramp.glb",
+      "bytes": 7504,
+      "sha256": "1ca478b1534b080c9b561fb710f515aed9e5c95f97824e048543b3dee653b9bb",
+      "triangles": 1048,
+      "primitives": 1,
+      "requiredDracoEveryPrimitive": true,
+      "attributes": [
+        "POSITION",
+        "NORMAL",
+        "TEXCOORD_0",
+        "COLOR_0"
+      ]
+    },
+    {
+      "file": "models/kicker.glb",
+      "bytes": 7568,
+      "sha256": "341dba21a2b51f6aab49c11255e4d458a7004cba92e62475fb0d2eede9e482e0",
+      "triangles": 920,
+      "primitives": 1,
+      "requiredDracoEveryPrimitive": true,
+      "attributes": [
+        "POSITION",
+        "NORMAL",
+        "TEXCOORD_0",
+        "COLOR_0"
+      ]
+    },
+    {
+      "file": "models/mogul.glb",
+      "bytes": 5152,
+      "sha256": "4af5508039d428938395f698312282eab25b721c5463f8a639c949a585023baa",
+      "triangles": 384,
+      "primitives": 1,
+      "requiredDracoEveryPrimitive": true,
+      "attributes": [
+        "POSITION",
+        "NORMAL",
+        "TEXCOORD_0",
+        "COLOR_0"
+      ]
+    },
+    {
+      "file": "models/rope-post.glb",
+      "bytes": 3620,
+      "sha256": "7ae969a404814630e03469b51687517d0b46ccc592e825296f4bfaa43de23a0c",
+      "triangles": 144,
+      "primitives": 1,
+      "requiredDracoEveryPrimitive": true,
+      "attributes": [
+        "POSITION",
+        "NORMAL",
+        "TEXCOORD_0",
+        "COLOR_0"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "file": "decals/footprint-treads.png",
+      "width": 128,
+      "height": 128,
+      "bytes": 2933,
+      "sha256": "784f1c61b507275cf451aae81b8f744fec9407efd7fb4c17a615c620cbfbe227",
+      "hasAlpha": true
+    },
+    {
+      "file": "decals/snow-groove.png",
+      "width": 128,
+      "height": 128,
+      "bytes": 1368,
+      "sha256": "d67a4200cfd73679ad2f88adcc13e4d833af9f30410eacd3ea229016a1add232",
+      "hasAlpha": true
+    },
+    {
+      "file": "textures/deep-snow.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 68986,
+      "sha256": "34950dc6354486295a0e01bdc6531a62098558519ae41626fabb2d58d2dc0c2f",
+      "hasAlpha": false,
+      "oppositeDecodedEdgesIdentical": true
+    },
+    {
+      "file": "textures/groomed-normal.webp",
+      "width": 128,
+      "height": 128,
+      "bytes": 28636,
+      "sha256": "7d4e9e5c6e4ee85044ea00cbd77eadf01c6c4b1276c262222db60435b6dc7435",
+      "hasAlpha": false,
+      "oppositeDecodedEdgesIdentical": true
+    },
+    {
+      "file": "textures/groomed-snow.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 79646,
+      "sha256": "508d1becaf813039b83887bdfd654af6054fc5c65ebb20e9098e79feb8d55a8e",
+      "hasAlpha": false,
+      "oppositeDecodedEdgesIdentical": true
+    },
+    {
+      "file": "textures/halfpipe-ice.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 78512,
+      "sha256": "d75fce3931d45fc964ce8e1c94eadc5d79f8c350cefc92755f0bef0de92ea35f",
+      "hasAlpha": false,
+      "oppositeDecodedEdgesIdentical": true
+    },
+    {
+      "file": "textures/ice-normal.webp",
+      "width": 128,
+      "height": 128,
+      "bytes": 9246,
+      "sha256": "0a75e0d78299210dae5575289b075ef54822763ed43c0054d26233a0a2820236",
+      "hasAlpha": false,
+      "oppositeDecodedEdgesIdentical": true
+    },
+    {
+      "file": "textures/snow-ripples.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 61444,
+      "sha256": "8b768c7bd9d0f7ba0fc659dbf20a021b6734ea474aef1a38111a66c378014bcf",
+      "hasAlpha": false,
+      "oppositeDecodedEdgesIdentical": true
+    },
+    {
+      "file": "vfx/cloud-atlas.png",
+      "width": 384,
+      "height": 384,
+      "bytes": 27644,
+      "sha256": "6cd970ffcc9c7432d08a73c4cd3d6562bd1af12318ba06e13003b8e7297c1a50",
+      "hasAlpha": true
+    },
+    {
+      "file": "vfx/ski-powder-atlas.png",
+      "width": 384,
+      "height": 384,
+      "bytes": 15811,
+      "sha256": "1c80a996963ba68b6efd7fd3abcf3012a3f9186a09af7088508c657f47a181b4",
+      "hasAlpha": true
+    }
+  ],
+  "alphaChecks": [
+    {
+      "file": "vfx/cloud-atlas.png",
+      "visiblePixels": 82050,
+      "transparentPixels": 65406,
+      "transparentColorBleedPixels": 65406,
+      "fractionalAlphaPixels": 82050,
+      "transparentFramePadding": true,
+      "transparentRgbPolicy": "Straight-alpha RGB bleed is allowed; transparent alpha is required at cell gutters.",
+      "loopEndpointsIdentical": true,
+      "longitudinalRepeatIdentical": null
+    },
+    {
+      "file": "vfx/ski-powder-atlas.png",
+      "visiblePixels": 37030,
+      "transparentPixels": 110426,
+      "transparentColorBleedPixels": 110426,
+      "fractionalAlphaPixels": 37030,
+      "transparentFramePadding": true,
+      "transparentRgbPolicy": "Straight-alpha RGB bleed is allowed; transparent alpha is required at cell gutters.",
+      "loopEndpointsIdentical": null,
+      "longitudinalRepeatIdentical": null
+    },
+    {
+      "file": "decals/footprint-treads.png",
+      "visiblePixels": 2248,
+      "transparentPixels": 14136,
+      "transparentColorBleedPixels": 14136,
+      "fractionalAlphaPixels": 2248,
+      "transparentFramePadding": true,
+      "transparentRgbPolicy": "Straight-alpha RGB bleed is allowed; transparent alpha is required at cell gutters.",
+      "loopEndpointsIdentical": null,
+      "longitudinalRepeatIdentical": null
+    },
+    {
+      "file": "decals/snow-groove.png",
+      "visiblePixels": 8448,
+      "transparentPixels": 7936,
+      "transparentColorBleedPixels": 7936,
+      "fractionalAlphaPixels": 8448,
+      "transparentFramePadding": true,
+      "transparentRgbPolicy": "Straight-alpha RGB bleed is allowed; transparent alpha is required at cell gutters.",
+      "loopEndpointsIdentical": null,
+      "longitudinalRepeatIdentical": true
+    }
+  ],
+  "independentDecoder": "Blender glTF importer (final compressed files)",
+  "independentDecoderVersion": "5.2.2 LTS",
+  "offlinePreviewStaticChecks": {
+    "inlineClassicRenderer": true,
+    "noRuntimeFetchModulesWorkers": true
+  },
+  "previewSha256": "13d8bd56a1e617f301933285580c13de9b22b3f6f791321248baa383bb26d858",
+  "embeddedColorChecks": [
+    {
+      "asset": "direction-sign",
+      "minimum": 3,
+      "maximum": 152
+    },
+    {
+      "asset": "flag-rope",
+      "minimum": 3,
+      "maximum": 244
+    },
+    {
+      "asset": "halfpipe-segment",
+      "minimum": 151,
+      "maximum": 235
+    },
+    {
+      "asset": "jump-ramp",
+      "minimum": 13,
+      "maximum": 244
+    },
+    {
+      "asset": "kicker",
+      "minimum": 23,
+      "maximum": 244
+    },
+    {
+      "asset": "mogul",
+      "minimum": 171,
+      "maximum": 244
+    },
+    {
+      "asset": "rope-post",
+      "minimum": 3,
+      "maximum": 244
+    }
+  ],
+  "limitations": "Geometry, pixels and package checks only; see browser-validation.json for actual file:// phone viewport evidence. No game or physical-device performance claim."
+}
