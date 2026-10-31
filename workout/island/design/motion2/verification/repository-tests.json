@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "kind": "repository-tests",
+  "baseCommit": "e67c65668696821299cf260072716c8107a348ed",
+  "fixture": "Read-only git archive of the named commit into fresh workspace directories; final motion2 overlaid in one copy. Independent pristine archive has no proposed files. Git archive uses Windows text line endings in this environment.",
+  "runtime": "Node.js v24.19.0, Windows",
+  "packageTestScript": "node --test tests/*.mjs",
+  "executionNote": "npm is not installed in PATH. Ran the exact package.json test script directly through Node.",
+  "overlay": {
+    "command": "node --test tests/*.mjs",
+    "exitCode": 1,
+    "tests": 2919,
+    "pass": 2873,
+    "fail": 7,
+    "cancelled": 0,
+    "skipped": 39,
+    "duration_ms": 131652.1848,
+    "logSha256": "f6be40703d027f72b29f24a367ca0c14784d3a3b014e15a0e26415781b691932"
+  },
+  "pristineBaseline": {
+    "focusedFiles": [
+      "tests/cam-lab-calibration.test.mjs",
+      "tests/cam-lab-guidance.test.mjs",
+      "tests/island-boar-integration.test.mjs",
+      "tests/island-g4b.test.mjs",
+      "tests/island-g7.test.mjs",
+      "tests/island-soccer-island.test.mjs",
+      "tests/workout-voice.test.mjs"
+    ],
+    "focused": {
+      "exitCode": 1,
+      "tests": 140,
+      "pass": 134,
+      "fail": 6,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 4083.0567,
+      "logSha256": "10fe6e30a87eb1912be70fa4aea488913d9fc3d04542a2f85a0de99b785506d3"
+    },
+    "additionalCsp": {
+      "file": "tests/island-browser-csp.test.mjs",
+      "exitCode": 1,
+      "tests": 2,
+      "pass": 0,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 1,
+      "duration_ms": 166.2344,
+      "logSha256": "b24a667b0db5388c02030ef530f6f93adfde84f5720cc6fcc718b8a3e0b4d87c"
+    }
+  },
+  "sameFailureLocations": true,
+  "failureLocations": [
+    "tests\\cam-lab-calibration.test.mjs:24:1",
+    "tests\\cam-lab-guidance.test.mjs:111:1",
+    "tests\\island-boar-integration.test.mjs:47:1",
+    "tests\\island-browser-csp.test.mjs:7:1",
+    "tests\\island-g4b.test.mjs:8:1",
+    "tests\\island-soccer-island.test.mjs:27:1",
+    "tests\\workout-voice.test.mjs:13:1"
+  ],
+  "permittedLoopbackRerun": {
+    "command": "node --test tests/island-browser-csp.test.mjs",
+    "reason": "The initial CSP test could not connect to its own local server: EACCES 127.0.0.1. Repeat the identical unmodified test with local networking permitted.",
+    "overlay": {
+      "exitCode": 0,
+      "tests": 2,
+      "pass": 1,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "duration_ms": 159.713,
+      "logSha256": "409acabc800962122bcf63f076e9cbe96f05ca3447e3789f804c06460e5b0cc2"
+    },
+    "pristine": {
+      "exitCode": 0,
+      "tests": 2,
+      "pass": 1,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "duration_ms": 180.8842,
+      "logSha256": "31a408b19409cd4520da25c4d81a94a539d696660ae8b7826a74716fa64a3e40"
+    }
+  },
+  "confirmedEnvironmentEffects": [
+    "cam-lab-calibration constructs a C:\\C:\\ path from a file URL on Windows.",
+    "Voice documentation comparisons see CRLF against LF expectations.",
+    "boar-island/world.js has raw Windows SHA256 d5aef3a69b3ebf66e45feed93e64d80c5689dd0443fb55ca2b164c8209a67882; LF normalization gives the exact expected pinned SHA256 36a87cfeaf9275708f680118afdfab81289d20985ad056837b386d9654c9c968. No file was changed to normalize it."
+  ],
+  "result": "The full generic repository suite is not green in this Windows environment. All seven failing locations reproduce on pristine latest main; the CSP case additionally passes on both copies when local networking is permitted. No source code, tests, pinned hashes, or acceptance thresholds were changed. No new motion2 regression was found."
+}

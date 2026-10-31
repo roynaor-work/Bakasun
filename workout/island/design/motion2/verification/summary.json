@@ -1,0 +1,851 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "newClipCount": 32,
+  "viewerCaseCount": 8,
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "thresholds": {
+    "supportMeters": 0.02,
+    "loopMeters": 0.001,
+    "transitionMeters": 0.001,
+    "rotationRadians": 0.01,
+    "floorMeters": 0.001,
+    "cpuMeanMs": 16.666666666666668
+  },
+  "sourceManifests": {
+    "soccer-player-soccer": {
+      "soccer.json": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+      "hoops.json": "b23f115a4716c212d4abb802c9e1cab8727389c1a0ac064a206b525cfb8920b6",
+      "alpine.json": "71e2406de12ba8dfdef8ea98be5650208676b491addbe39ebbc3afda874f7dab"
+    },
+    "goalkeeper-soccer": {
+      "soccer.json": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+      "hoops.json": "b23f115a4716c212d4abb802c9e1cab8727389c1a0ac064a206b525cfb8920b6",
+      "alpine.json": "71e2406de12ba8dfdef8ea98be5650208676b491addbe39ebbc3afda874f7dab"
+    },
+    "basketball-player-hoops": {
+      "soccer.json": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+      "hoops.json": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d",
+      "alpine.json": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    "skier-alpine": {
+      "soccer.json": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+      "hoops.json": "b23f115a4716c212d4abb802c9e1cab8727389c1a0ac064a206b525cfb8920b6",
+      "alpine.json": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    }
+  },
+  "measurements": {
+    "maxSupportAnchorErrorMeters": 0.0000712070915124921,
+    "maxPlantedSlipMeters": 7.814645904155409e-11,
+    "maxLoopEndpointMeters": 4.40814227562401e-14,
+    "maxLoopWrapMeters": 1.758179505217243e-7,
+    "minRenderedVertexY": -2.220446049250313e-16,
+    "maxCpuMeanMs": 11.06400000050664
+  },
+  "cases": [
+    {
+      "character": "soccer-player",
+      "game": "soccer",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "pass": true,
+      "report": "verification/soccer-player-soccer/report.json",
+      "edgeCount": 118,
+      "negativeControls": true
+    },
+    {
+      "character": "soccer-player",
+      "game": "soccer",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "pass": true,
+      "report": "verification/soccer-player-soccer/report.json",
+      "edgeCount": 118,
+      "negativeControls": true
+    },
+    {
+      "character": "goalkeeper",
+      "game": "soccer",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "pass": true,
+      "report": "verification/goalkeeper-soccer/report.json",
+      "edgeCount": 118,
+      "negativeControls": true
+    },
+    {
+      "character": "goalkeeper",
+      "game": "soccer",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "pass": true,
+      "report": "verification/goalkeeper-soccer/report.json",
+      "edgeCount": 118,
+      "negativeControls": true
+    },
+    {
+      "character": "basketball-player",
+      "game": "hoops",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "pass": true,
+      "report": "verification/basketball-player-hoops/report.json",
+      "edgeCount": 126,
+      "negativeControls": true
+    },
+    {
+      "character": "basketball-player",
+      "game": "hoops",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "pass": true,
+      "report": "verification/basketball-player-hoops/report.json",
+      "edgeCount": 126,
+      "negativeControls": true
+    },
+    {
+      "character": "skier",
+      "game": "alpine",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "pass": true,
+      "report": "verification/skier-alpine/report.json",
+      "edgeCount": 127,
+      "negativeControls": true
+    },
+    {
+      "character": "skier",
+      "game": "alpine",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "pass": true,
+      "report": "verification/skier-alpine/report.json",
+      "edgeCount": 127,
+      "negativeControls": true
+    }
+  ],
+  "clips": [
+    {
+      "game": "soccer",
+      "clip": "short_pass",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.08907618978556e-8,
+        "maxSlipMeters": 2.9155267007468612e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00003421777591805508
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "long_pass",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.089076133705136e-8,
+        "maxSlipMeters": 3.1044299498082822e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00005376121537782608
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "kick_charge",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.089073249504277e-8,
+        "maxSlipMeters": 4.363503393062363e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.000010989056452637147
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "slide_tackle",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 0.00004777707336977245,
+        "maxSlipMeters": 9.100159548920799e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00026053559157004913
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "header",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.089054962181455e-8,
+        "maxSlipMeters": 7.390466254012633e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00009214200769118441
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "dribble",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.08904960592871e-8,
+        "maxSlipMeters": 6.4829681753198264e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": true,
+        "maxEndpointMeters": 3.4506610788621483e-16,
+        "maxWrapMeters": 1.239632365809776e-7
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00015871829420779915
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "chest_trap",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.08905923135334e-8,
+        "maxSlipMeters": 4.758769485898331e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00001427830950043174
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "keeper_dive_side_left",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 0.00004895079462823258,
+        "maxSlipMeters": 2.3017285973939292e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.000030874505463809876
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "keeper_dive_corner_left",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.089043298802953e-8,
+        "maxSlipMeters": 2.3017285973939292e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.000023679423755612605
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "keeper_dive_side_right",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 0.00004881633575723636,
+        "maxSlipMeters": 2.9917956755569112e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.000030874505463809876
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "keeper_dive_corner_right",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.089043298802953e-8,
+        "maxSlipMeters": 2.9917956755569112e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.000023679423755612605
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "soccer",
+      "clip": "keeper_punt",
+      "viewerCases": 4,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.089065654705898e-8,
+        "maxSlipMeters": 2.1963537456170468e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00008601861877664818
+      },
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "hoops",
+      "clip": "dribble",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.088075438844199e-8,
+        "maxSlipMeters": 6.777101037656112e-13
+      },
+      "loop": {
+        "pass": true,
+        "applicable": true,
+        "maxEndpointMeters": 0,
+        "maxWrapMeters": 4.414742571512442e-9
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -1.914711799666513e-7
+      },
+      "assetSha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+    },
+    {
+      "game": "hoops",
+      "clip": "dribble_fast",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.088003994097743e-8,
+        "maxSlipMeters": 5.108832709792092e-13
+      },
+      "loop": {
+        "pass": true,
+        "applicable": true,
+        "maxEndpointMeters": 0,
+        "maxWrapMeters": 1.4295622879911818e-8
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -2.0070089075396869e-7
+      },
+      "assetSha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+    },
+    {
+      "game": "hoops",
+      "clip": "run_with_ball",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 0.000017697729605199756,
+        "maxSlipMeters": 6.4848299283334905e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": true,
+        "maxEndpointMeters": 3.4506610788621483e-16,
+        "maxWrapMeters": 1.758179505217243e-7
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00017147239556103422
+      },
+      "assetSha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+    },
+    {
+      "game": "hoops",
+      "clip": "layup",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 0.000012270836877972936,
+        "maxSlipMeters": 6.54921557987849e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.0001510881884864007
+      },
+      "assetSha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+    },
+    {
+      "game": "hoops",
+      "clip": "dunk",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.088060043008834e-8,
+        "maxSlipMeters": 7.359596397202817e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00015368126815129557
+      },
+      "assetSha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+    },
+    {
+      "game": "hoops",
+      "clip": "block",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 0.000005338328816421351,
+        "maxSlipMeters": 6.8102436696974536e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00015747141310673562
+      },
+      "assetSha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+    },
+    {
+      "game": "hoops",
+      "clip": "rebound",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.088060026255973e-8,
+        "maxSlipMeters": 6.8102436696974536e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.0001451184860305349
+      },
+      "assetSha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+    },
+    {
+      "game": "hoops",
+      "clip": "jump_shot",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.088060019316304e-8,
+        "maxSlipMeters": 6.8102436696974536e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00015905262701854106
+      },
+      "assetSha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+    },
+    {
+      "game": "hoops",
+      "clip": "chest_pass",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 8.088061192326943e-8,
+        "maxSlipMeters": 2.727542931245781e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.000004984550008829691
+      },
+      "assetSha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+    },
+    {
+      "game": "alpine",
+      "clip": "tuck",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.7388413920137467e-7,
+        "maxSlipMeters": 1.2241180291638898e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": true,
+        "maxEndpointMeters": 0,
+        "maxWrapMeters": 5.585701844806364e-16
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -4.2221689630639325e-8
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    {
+      "game": "alpine",
+      "clip": "turn_left_light",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.738896508203137e-7,
+        "maxSlipMeters": 4.920647223016772e-13
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -5.330446715551274e-7
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    {
+      "game": "alpine",
+      "clip": "turn_left_medium",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.738896507092914e-7,
+        "maxSlipMeters": 3.0686703178517405e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.000002963020112475845
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    {
+      "game": "alpine",
+      "clip": "turn_left_hard",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.738896507092914e-7,
+        "maxSlipMeters": 8.619729929826292e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.000007386210827242667
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    {
+      "game": "alpine",
+      "clip": "turn_right_light",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.738896512921585e-7,
+        "maxSlipMeters": 2.3010621186259073e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -5.151579743484236e-7
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    {
+      "game": "alpine",
+      "clip": "turn_right_medium",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.738898012694113e-7,
+        "maxSlipMeters": 6.363728988212358e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.000002964920224696188
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    {
+      "game": "alpine",
+      "clip": "turn_right_hard",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.7388977447140306e-7,
+        "maxSlipMeters": 1.3372331020278239e-11
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.0000073615539592231105
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    {
+      "game": "alpine",
+      "clip": "small_hop",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.738896507092914e-7,
+        "maxSlipMeters": 4.406669473766556e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.0002447365668900858
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    {
+      "game": "alpine",
+      "clip": "trick_jump",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.73889367741198e-7,
+        "maxSlipMeters": 7.613409902518242e-12
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00041462265268905896
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    {
+      "game": "alpine",
+      "clip": "bad_landing",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.738898001591883e-7,
+        "maxSlipMeters": 1.980308972360234e-11
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -0.00007350728861360567
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    },
+    {
+      "game": "alpine",
+      "clip": "fall_side",
+      "viewerCases": 2,
+      "support": {
+        "pass": true,
+        "maxAnchorErrorMeters": 2.7387360231057034e-7,
+        "maxSlipMeters": 2.498001805406602e-16
+      },
+      "loop": {
+        "pass": true,
+        "applicable": false,
+        "maxEndpointMeters": null,
+        "maxWrapMeters": null
+      },
+      "floor": {
+        "pass": true,
+        "measurementScope": "The original viewer samples this clip and transitions at 120Hz plus all exact keys/contact boundaries; its minY is aggregate per run, not returned separately per clip.",
+        "canonicalMinJointOrSoleY": -6.350850401126706e-12
+      },
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    }
+  ],
+  "deliveryBaseCommit": "e67c65668696821299cf260072716c8107a348ed",
+  "sourceBaselineInputCount": 21
+}

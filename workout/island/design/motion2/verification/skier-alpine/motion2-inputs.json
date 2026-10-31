@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "fixture": "C:\\Users\\roe\\AppData\\Local\\Temp\\island-motion2-3VHLRt",
+  "sourceGitBlobSha1": {
+    "design/characters/basketball-player.glb": "86ad0b1c8ba9556eb2b1a78d3cfbed293010b9a4",
+    "design/characters/goalkeeper.glb": "80269e94b77e6a4d0753878eb632d6296ef16aeb",
+    "design/characters/rig.json": "dba266ca129de310b638494a28aee0e58ea0efd0",
+    "design/characters/skier.glb": "736f35cfbc5f1d48518d14ac301ce3bcf2c20c80",
+    "design/characters/soccer-player.glb": "a4be64014aeec49b0d4ab55a61c0f95d2d62c3a5",
+    "design/motion/alpine.json": "8a5e3ba40b602da353095571c41fc000a9224296",
+    "design/motion/hoops.json": "a386d18dddd0247f86d1cee26df9da583dfc13c6",
+    "design/motion/soccer.json": "d7e7e0a6ba45da261feb3fead887b96b01cfc641",
+    "design/viewer/animation.js": "d6677bd9c34e1d50aac78d48812d4e37a859deae",
+    "design/viewer/checks.js": "5146cfc67f0a4057301325e6991d685e6edcef7c",
+    "design/viewer/draco/DRACOLoader.js": "9ab86b02166b47297b4aaf8b06ed24fb57b34602",
+    "design/viewer/draco/draco_decoder.wasm": "285f436c37ea9bab771950f7e240f055c382594f",
+    "design/viewer/draco/draco_wasm_wrapper.js": "07c16fb3217b1ea5cbe62df38468bca6e05108cb",
+    "design/viewer/retarget-map.json": "15c4394d8937214ab5d2e3be04f39bc92b899a55",
+    "design/viewer/retarget.js": "5713158de72447f19bed913f6841d885b3a570ad",
+    "design/viewer/test-viewer.mjs": "3c0e11f63c8a6b41ea1b50941fcdc0c9999d946e",
+    "design/viewer/viewer.html": "4ce4abea0cb7bb8ae90a19ac961bb780954abf41",
+    "design/viewer/viewer.js": "606c9572b8f53aa052fed7efecc86cee979d0bbb",
+    "vendor/BufferGeometryUtils.js": "1677adc3b9cae8cb2fda480fb571a4dd73239ad2",
+    "vendor/GLTFLoader.js": "2f5c1406b1c32bc2042ad38b2624fdfefecd4ec9",
+    "vendor/three.module.js": "9807b610d02fd0a1833fa7ceae44239652c78f3c"
+  },
+  "sourceSha256": {
+    "design/motion/soccer.json": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+    "design/motion/hoops.json": "194cb62adf3469d044d738d11c064c86c8c5737792b4c83055b3d97906ebe9c5",
+    "design/motion/alpine.json": "c6fc39a0b465d0dc74607e9af391c0736148042204e44942068914538d29dc87",
+    "design/viewer/viewer.html": "dca9e54d489000ffacadfd2308aeffece626a001351ca6263955be907b844de2",
+    "design/viewer/viewer.js": "d60967bfd3712dba7bf86b57b87517b274e89bffa23a03fc9678f2ee2f579060",
+    "design/viewer/animation.js": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe",
+    "design/viewer/retarget.js": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a",
+    "design/viewer/retarget-map.json": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+    "design/viewer/checks.js": "b7b95579e46de1b2693d5cb52f8558ed232066a8b087b5c420f46b7e7cc745b8",
+    "design/viewer/test-viewer.mjs": "c3ec3499bcf042120511ff1d2cb05fa691f6002e2d0c3f87d4a1ff4ac6ccb8c0"
+  },
+  "motion2Sha256": {
+    "soccer.json": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+    "hoops.json": "b23f115a4716c212d4abb802c9e1cab8727389c1a0ac064a206b525cfb8920b6",
+    "alpine.json": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+  },
+  "combinedSha256": {
+    "soccer.json": "1d07956cbd6c932fbb3a7c6c608d3d39b80e92b3a9550ddde4c9322586474f04",
+    "hoops.json": "fa318019a975775742e4490efcf985cd80f9b057a4dc9babbbd2d58b5c2c071f",
+    "alpine.json": "45e77dfae5882e303c51cc8e6eb4384d41d166f99053cca5190aadb3f455da28"
+  },
+  "newClips": {
+    "soccer": [
+      "short_pass",
+      "long_pass",
+      "kick_charge",
+      "slide_tackle",
+      "header",
+      "dribble",
+      "chest_trap",
+      "keeper_dive_side_left",
+      "keeper_dive_corner_left",
+      "keeper_dive_side_right",
+      "keeper_dive_corner_right",
+      "keeper_punt"
+    ],
+    "hoops": [
+      "dribble",
+      "dribble_fast",
+      "run_with_ball",
+      "layup",
+      "dunk",
+      "block",
+      "rebound",
+      "jump_shot",
+      "chest_pass"
+    ],
+    "alpine": [
+      "tuck",
+      "turn_left_light",
+      "turn_left_medium",
+      "turn_left_hard",
+      "turn_right_light",
+      "turn_right_medium",
+      "turn_right_hard",
+      "small_hop",
+      "trick_jump",
+      "bad_landing",
+      "fall_side"
+    ]
+  }
+}

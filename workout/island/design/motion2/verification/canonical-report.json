@@ -1,0 +1,613 @@
+{
+  "schemaVersion": 1,
+  "kind": "motion2-canonical-contract-report",
+  "limits": {
+    "supportMeters": 0.02,
+    "loopTranslationMeters": 0.001,
+    "loopRotationRadians": 0.01,
+    "floorMeters": 0.001,
+    "ballPointMeters": 0.0001
+  },
+  "games": [
+    {
+      "game": "soccer",
+      "clips": [
+        {
+          "clip": "short_pass",
+          "keyframes": 101,
+          "samples": 197,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.000042553771120638945
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00003421777591805508
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "long_pass",
+          "keyframes": 101,
+          "samples": 253,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00009416850911361773
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00005376121537782608
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "kick_charge",
+          "keyframes": 98,
+          "samples": 209,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.000015348424121861535
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.000010989056452637147
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "slide_tackle",
+          "keyframes": 101,
+          "samples": 273,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00026257404370852536
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00026053559157004913
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "header",
+          "keyframes": 101,
+          "samples": 246,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00009219121808168715
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00009214200769118441
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "dribble",
+          "keyframes": 101,
+          "samples": 211,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00015890525510836668
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00015871829420779915
+          },
+          "loop": {
+            "pass": true,
+            "meters": 0,
+            "radians": 5.960464477539063e-8
+          },
+          "ballContacts": 2
+        },
+        {
+          "clip": "chest_trap",
+          "keyframes": 99,
+          "samples": 223,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.000015170575251408102
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00001427830950043174
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "keeper_dive_side_left",
+          "keyframes": 100,
+          "samples": 272,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00003426865813151742
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.000030874505463809876
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "keeper_dive_corner_left",
+          "keyframes": 100,
+          "samples": 296,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.000026352326433368113
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.000023679423755612605
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "keeper_dive_side_right",
+          "keyframes": 100,
+          "samples": 272,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00003426865813151742
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.000030874505463809876
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "keeper_dive_corner_right",
+          "keyframes": 100,
+          "samples": 296,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.000026352326433368113
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.000023679423755612605
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "keeper_punt",
+          "keyframes": 101,
+          "samples": 297,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.0000861931782186957
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00008601861877664818
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 3
+        }
+      ],
+      "assetSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "game": "hoops",
+      "clips": [
+        {
+          "clip": "dribble",
+          "keyframes": 99,
+          "samples": 203,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 1.9841156722462748e-7
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -1.914711799666513e-7
+          },
+          "loop": {
+            "pass": true,
+            "meters": 0,
+            "radians": 5.16191365590357e-8
+          },
+          "ballContacts": 2
+        },
+        {
+          "clip": "dribble_fast",
+          "keyframes": 99,
+          "samples": 153,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 2.0901952087709e-7
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -2.0070089075396869e-7
+          },
+          "loop": {
+            "pass": true,
+            "meters": 0,
+            "radians": 5.960464477539063e-8
+          },
+          "ballContacts": 2
+        },
+        {
+          "clip": "run_with_ball",
+          "keyframes": 99,
+          "samples": 185,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00017157381352363204
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00017147239556103422
+          },
+          "loop": {
+            "pass": true,
+            "meters": 0,
+            "radians": 4.2146848510894035e-8
+          },
+          "ballContacts": 4
+        },
+        {
+          "clip": "layup",
+          "keyframes": 106,
+          "samples": 246,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00015144373983533684
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.0001510881884864007
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 5
+        },
+        {
+          "clip": "dunk",
+          "keyframes": 101,
+          "samples": 261,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.000154165267611261
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00015368126815129557
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "block",
+          "keyframes": 99,
+          "samples": 221,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00015782078776239658
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00015747141310673562
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "rebound",
+          "keyframes": 99,
+          "samples": 235,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00014529345589158927
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.0001451184860305349
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 4
+        },
+        {
+          "clip": "jump_shot",
+          "keyframes": 99,
+          "samples": 234,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00015940367339954657
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00015905262701854106
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 1
+        },
+        {
+          "clip": "chest_pass",
+          "keyframes": 98,
+          "samples": 190,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.000005002548783448296
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.000004984550008829691
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 2
+        }
+      ],
+      "assetSha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+    },
+    {
+      "game": "alpine",
+      "clips": [
+        {
+          "clip": "tuck",
+          "keyframes": 97,
+          "samples": 257,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 4.2221689630639325e-8
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -4.2221689630639325e-8
+          },
+          "loop": {
+            "pass": true,
+            "meters": 0,
+            "radians": 4.2146848510894035e-8
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "turn_left_light",
+          "keyframes": 99,
+          "samples": 227,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 5.330446715551274e-7
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -5.330446715551274e-7
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "turn_left_medium",
+          "keyframes": 99,
+          "samples": 259,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.000002963020112475845
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.000002963020112475845
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "turn_left_hard",
+          "keyframes": 99,
+          "samples": 295,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.000007386210827242667
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.000007386210827242667
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "turn_right_light",
+          "keyframes": 99,
+          "samples": 227,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 5.151579743484236e-7
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -5.151579743484236e-7
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "turn_right_medium",
+          "keyframes": 99,
+          "samples": 259,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.000002964920224696188
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.000002964920224696188
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "turn_right_hard",
+          "keyframes": 99,
+          "samples": 295,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.0000073615539592231105
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.0000073615539592231105
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "small_hop",
+          "keyframes": 100,
+          "samples": 247,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.0002447365668900858
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.0002447365668900858
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "trick_jump",
+          "keyframes": 100,
+          "samples": 348,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00041462265268905896
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00041462265268905896
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "bad_landing",
+          "keyframes": 101,
+          "samples": 297,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 0.00007350728861360567
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -0.00007350728861360567
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        },
+        {
+          "clip": "fall_side",
+          "keyframes": 100,
+          "samples": 260,
+          "support": {
+            "pass": true,
+            "maxAnchorErrorMeters": 6.350850401126706e-12
+          },
+          "floor": {
+            "pass": true,
+            "minJointOrSoleY": -6.350850401126706e-12
+          },
+          "loop": {
+            "pass": true,
+            "applicable": false
+          },
+          "ballContacts": 0
+        }
+      ],
+      "assetSha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+    }
+  ],
+  "pass": true
+}
