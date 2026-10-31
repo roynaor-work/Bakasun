@@ -1,8 +1,8 @@
 import {enhanceAlpineOpening} from './alpine-screen.mjs';
-import {createAlpineEngine} from './alpine-engine.mjs?v=island-perf-20261030-1';
-import {createAlpineControls} from './alpine-controls.mjs?v=island-perf-20261030-1';
-import {createAlpineAudio} from './alpine-audio.mjs?v=island-perf-20261030-1';
-import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-perf-20261030-1';
+import {createAlpineEngine} from './alpine-engine.mjs?v=island-integration-20261030-1';
+import {createAlpineControls} from './alpine-controls.mjs?v=island-integration-20261030-1';
+import {createAlpineAudio} from './alpine-audio.mjs?v=island-integration-20261030-1';
+import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-integration-20261030-1';
 import {createQualityGovernor} from './alpine-quality.mjs';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -59,8 +59,8 @@ export function runAlpineSession(ctx) {
   const el = (tag, cls = '', text = '') => { const n = doc.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
   const svg = (paths, viewBox = '0 0 24 24') => { const s = doc.createElementNS(SVG_NS, 'svg'); s.setAttribute('viewBox', viewBox); s.setAttribute('aria-hidden', 'true'); s.innerHTML = paths; return s; };
   const ltr = text => { const b = el('bdi', 'alpine-ltr', text); b.dir = 'ltr'; return b; };
-  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-perf-20261030-1', import.meta.url).href;
-  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-perf-20261030-1', import.meta.url).href;
+  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-integration-20261030-1', import.meta.url).href;
+  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-integration-20261030-1', import.meta.url).href;
   const screenCss=el('link');screenCss.rel='stylesheet';screenCss.href=new URL('./alpine-screen.css',import.meta.url).href;
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
@@ -147,7 +147,7 @@ export function runAlpineSession(ctx) {
   governor = createQualityGovernor(balance.render, quality);
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; fail(t('alpine.loadSlow')); } }, 25000);
-  import('./alpine-view.mjs?v=island-perf-20261030-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(async loaded => {
+  import('./alpine-view.mjs?v=island-integration-20261030-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(async loaded => {
     await audio.ready;
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
