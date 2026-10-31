@@ -36,6 +36,14 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
     return {context,page,csp,async close(){await context.close();reports.push({name,...csp.snapshot()});await csp.dispose();}};
   }
   try {
+    const blankContext=await browser.newContext(),blankCsp=await installIslandCspMonitor(blankContext),blankPage=await blankContext.newPage();
+    await blankCsp.attachPage(blankPage);
+    try{
+      await blankPage.setContent('<!doctype html><p>No production response loaded</p>');
+      await assert.rejects(()=>blankCsp.assertClean(),/No HTML response audited/);
+      assert.equal(blankCsp.snapshot().htmlResponsesSeen,0);
+    }finally{await blankContext.close();reports.push({name:'blank-unprotected-harness-is-failure',...blankCsp.snapshot()});await blankCsp.dispose();}
+
     const inline=await fixture('blocked-inline');
     try{
       assert.equal(await inline.page.evaluate(()=>{const script=document.createElement('script');script.textContent='window.__islandInlineRan=true';document.head.append(script);return !!window.__islandInlineRan;}),false);

@@ -30,6 +30,7 @@ export async function installIslandCspMonitor(context) {
   if (cspMonitors.has(context)) return cspMonitors.get(context);
   const installation = (async () => {
     const expectedPolicy = await readIslandCsp(), violations = [], policyErrors = [], workers = [];
+    let htmlResponsesSeen=0;
     const sessions = new Map(), attaching = new Map(), pending = new Set(), resumeWorkers = new Set(), workerClosers = new Set();
     context.on('close', () => {for(const close of workerClosers)close();});
     const binding = '__islandReportCspViolation';
@@ -50,6 +51,7 @@ export async function installIslandCspMonitor(context) {
     });
     context.on('response', response => {
       if (!/\btext\/html\b/i.test(response.headers()['content-type'] || '')) return;
+      htmlResponsesSeen++;
       const task = (async () => {
         const actualPolicy = await response.headerValue('content-security-policy');
         if (actualPolicy !== expectedPolicy) policyErrors.push({url:response.url(), expectedPolicy, actualPolicy,
@@ -139,7 +141,7 @@ export async function installIslandCspMonitor(context) {
     }
     context.on('page', page => {void attachPage(page);});
     await Promise.all(context.pages().map(attachPage));
-    const snapshot = () => ({expectedPolicy, violations:violations.map(v => ({...v})), policyErrors:policyErrors.map(v => ({...v})), workers:workers.map(v => ({...v}))});
+    const snapshot = () => ({expectedPolicy, htmlResponsesSeen, violations:violations.map(v => ({...v})), policyErrors:policyErrors.map(v => ({...v})), workers:workers.map(v => ({...v}))});
     return {violations, policyErrors, attachPage, snapshot,
       async assertClean() {
         await Promise.all([...attaching.values()]);
@@ -149,6 +151,7 @@ export async function installIslandCspMonitor(context) {
         await Promise.all([...pending]);
         // Drain bindings/audit messages already emitted during exit or teardown.
         await new Promise(resolve => setTimeout(resolve, 25));
+        if(!htmlResponsesSeen)throw Error(`Island CSP audit failed: No HTML response audited: ${JSON.stringify(snapshot())}`);
         if (violations.length || policyErrors.length) throw Error(`Island CSP audit failed: ${JSON.stringify(snapshot())}`);
       },
       async dispose() {

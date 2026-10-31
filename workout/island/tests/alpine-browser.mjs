@@ -7,7 +7,7 @@ import {serveIsland,islandChromium,installIslandCspMonitor} from '../../../tests
 /** Alpine Rush in the real island page: entry, race, joystick, hit, jump, trick, pipe air, boost, pause, result,
  * ten entry/exit cycles, exit while loading, low quality, missing model and no WebGL.
  * Screenshots: verification/alpine/. Sizes: ALPINE_WIDTH/ALPINE_HEIGHT or the three defaults. */
-const directory=fileURLToPath(new URL('../verification/alpine/',import.meta.url));await mkdir(directory,{recursive:true});
+const directory=process.env.ALPINE_OUTPUT_DIR?path.resolve(process.env.ALPINE_OUTPUT_DIR)+path.sep:fileURLToPath(new URL('../verification/alpine/',import.meta.url));await mkdir(directory,{recursive:true});
 const viewports=process.env.ALPINE_WIDTH?[{width:Number(process.env.ALPINE_WIDTH),height:Number(process.env.ALPINE_HEIGHT)}]:[{width:390,height:844},{width:844,height:390},{width:1440,height:900}];
 const executablePath=process.env.CHROMIUM_PATH||'/usr/bin/chromium';
 const server=await serveIsland(),chromium=await islandChromium(),reports=[];
@@ -48,6 +48,26 @@ async function open(width,height,{query='',init}={}){
 const session=page=>page.evaluate(()=>window.__island.ui.activityInterface.current?.session?.snapshot);
 const launch=page=>page.evaluate(()=>{const e=window.__island.engine;if(!e.state.instructionsSeen.includes('alpineRush'))e.state.instructionsSeen.push('alpineRush');window.__island.ui.activityInterface.launch('alpineRush',undefined,1);});
 const ready=page=>page.waitForFunction(()=>document.querySelector('[data-action=alpine-start]')&&!document.querySelector('[data-action=alpine-start]').disabled&&document.querySelector('.game-screen')?.dataset.starting!=='true');
+const assertHud=async page=>{
+  const hud=await page.evaluate(()=>{
+    const root=document.querySelector('.alpine-kit-speed'),bounds=root.getBoundingClientRect(),frame=window.__island.ui.activityInterface.current.session.snapshot.frame;
+    const meter=selector=>{const node=root.querySelector(selector);return {role:node?.getAttribute('role'),now:node?.getAttribute('aria-valuenow'),min:node?.getAttribute('aria-valuemin'),max:node?.getAttribute('aria-valuemax'),label:node?.getAttribute('aria-label')};};
+    return {width:innerWidth,speedKmh:frame.speedKmh,tankPercent:Math.round(Math.max(0,Math.min(1,frame.boostFraction))*100),outer:{left:bounds.left,right:bounds.right,width:bounds.width},
+      panels:[...root.querySelectorAll(':scope>.ih-panel')].map(node=>{const r=node.getBoundingClientRect(),style=getComputedStyle(node);return {className:node.className,left:r.left,right:r.right,width:r.width,height:r.height,display:style.display,visibility:style.visibility};}),
+      speed:meter('.ih-speed [role=meter]'),tank:meter('.ih-power [role=meter]'),speedText:root.querySelector('.ih-speed-value')?.textContent,tankText:root.querySelector('.ih-power b')?.textContent};
+  });
+  assert.equal(hud.panels.length,2,'speed and power HUD panels exist');
+  for(const panel of hud.panels){
+    assert.ok(panel.width>0&&panel.height>0&&panel.display!=='none'&&panel.visibility!=='hidden',`HUD panel visible: ${JSON.stringify(panel)}`);
+    assert.ok(panel.left>=0&&panel.right<=hud.width,`HUD panel inside phone viewport: ${JSON.stringify(panel)}`);
+    assert.ok(panel.left>=hud.outer.left-.5&&panel.right<=hud.outer.right+.5,`HUD panel contained by its column: ${JSON.stringify(panel)}`);
+  }
+  assert.equal(hud.speed.role,'meter');assert.equal(hud.speed.now,String(hud.speedKmh));assert.equal(hud.speedText,String(hud.speedKmh));
+  assert.ok(hud.speed.label);assert.equal(hud.speed.min,'0');assert.ok(Number(hud.speed.max)>=hud.speedKmh);
+  assert.equal(hud.tank.role,'meter');assert.equal(hud.tank.now,String(hud.tankPercent));assert.equal(hud.tankText,hud.tankPercent+'%');
+  assert.ok(hud.tank.label);assert.equal(hud.tank.min,'0');assert.equal(hud.tank.max,'100');
+  return hud;
+};
 /** Drives the engine in simulation time (same commands the controller sends) until a condition. */
 const drive=(page,goal,maxSeconds=40)=>page.evaluate(([goal,maxSeconds])=>{
   const s=window.__island.ui.activityInterface.current.session,e=s.debug.engine;
@@ -88,6 +108,7 @@ for(const {width,height} of viewports){
     await page.waitForFunction(()=>window.__island.ui.activityInterface.current.session.snapshot.phase==='countdown');
     await page.waitForTimeout(300);await shot('countdown');
     await page.waitForFunction(()=>window.__island.ui.activityInterface.current.session.snapshot.phase==='racing');
+    report.hud={racing:await assertHud(page)};
     // Drag right on the slope steers right; release leaves no steering behind.
     const box=await page.locator('.minigame-canvas').boundingBox(),x0=(await session(page)).frame.player.x;
     await page.mouse.move(box.x+box.width*.5,box.y+box.height*.55);await page.mouse.down();await page.mouse.move(box.x+box.width*.8,box.y+box.height*.55,{steps:6});
@@ -106,6 +127,7 @@ for(const {width,height} of viewports){
     // Slow software rendering advances game time slower than the wall clock, so wait on the game itself.
     await page.waitForFunction(()=>{const f=window.__island.ui.activityInterface.current.session.snapshot.frame;return f.player.boosting&&f.speedKmh>80;},null,{timeout:20000});
     const boosted=await session(page);assert.equal(boosted.frame.player.boosting,true);assert.ok(boosted.frame.speedKmh>80,`boost ${boosted.frame.speedKmh}`);
+    report.hud.boosting=await assertHud(page);
     await shot('boost');
     // Jump and trick: at the next takeoff tap the grab button; freeze in the air for the picture, then it scores on landing.
     assert.ok(await drive(page,'takeoff'),'took off');await page.locator('.alpine-trick[data-trick=grab]').dispatchEvent('pointerdown',{pointerId:21,pointerType:'touch',isPrimary:true});
