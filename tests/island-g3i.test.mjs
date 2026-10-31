@@ -16,8 +16,20 @@ for(const difficulty of ['easy','normal','hard'])for(const attackDir of [-1,1])t
  const g=isolated({difficulty}),s=g.getState(),k=s.players[5],p=s.players[0];s.attackDir=attackDir;
  Object.assign(k,{x:attackDir*16.5,z:0,hands:true,hold:0,recover:0,cooldown:0,fx:-attackDir,fz:0});
  Object.assign(p,{x:attackDir*12,z:2,fx:attackDir,fz:0});Object.assign(s.ball,{owner:5,x:k.x-attackDir*c.goalkeeping.holdForward,z:0,y:c.goalkeeping.holdHeight,lastTeam:1});
- advance(g,.6,{moveX:attackDir});assert.ok(inPenaltyArea(k,p,s,c));assert.ok(k.hands);assert.equal(s.ball.owner,k.id);
- advance(g,2.4);assert.equal(k.hands,false);assert.notEqual(s.ball.owner,k.id);assert.ok(g.drainEvents().some(e=>e.type==='pass'&&e.player===k.id));assert.ok(c.goalkeeping.maxHoldSeconds<=3);
+ const started=s.elapsed,events=[];let windup=false,releaseSeconds=null;
+ const tick=input=>{
+  const before=k.restartMotion?.elapsed,contact=k.restartMotion?.contact;
+  g.update(dt,input);const emitted=g.drainEvents();events.push(...emitted);
+  if(k.distribution){windup=true;assert.ok(k.hands);assert.equal(s.ball.owner,k.id);assert.equal(events.some(e=>e.type==='pass'&&e.player===k.id),false,'the preparation must not emit an early physical pass');}
+  if(before!==undefined&&before+dt<contact-1e-8){assert.ok(k.hands);assert.equal(s.ball.owner,k.id);}
+  if(emitted.some(e=>e.type==='pass'&&e.player===k.id))releaseSeconds=s.elapsed-started;
+ };
+ for(let i=0;i<Math.round(.6/dt);i++)tick({moveX:attackDir});assert.ok(inPenaltyArea(k,p,s,c));assert.ok(k.hands);assert.equal(s.ball.owner,k.id);
+ for(let i=0;i<Math.round(2.4/dt);i++)tick();
+ assert.ok(windup,'the keeper visibly prepares the release');assert.equal(k.hands,false);assert.notEqual(s.ball.owner,k.id);
+ assert.equal(events.filter(e=>e.type==='distribution-windup'&&e.player===k.id).length,1);assert.equal(events.filter(e=>e.type==='pass'&&e.player===k.id).length,1);
+ assert.ok(releaseSeconds!==null&&releaseSeconds<=c.goalkeeping.maxHoldSeconds+1e-8,`physical release at ${releaseSeconds}s must respect ${c.goalkeeping.maxHoldSeconds}s`);assert.ok(c.goalkeeping.maxHoldSeconds<=3);
+ for(let i=0;i<4;i++)tick();assert.equal(events.filter(e=>e.type==='pass'&&e.player===k.id).length,1,'follow-through cannot duplicate the release');
 });
 for(const action of ['standing','slide','automatic'])for(const height of [c.goalkeeping.holdHeight,c.physics.ballRadius])test(`G3i ${action} cannot steal from keeper hands at height ${height}`,()=>{
  const g=isolated({random:()=>0}),s=g.getState(),k=s.players[5],p=s.players[0];Object.assign(k,{x:16,z:0,hands:true,recover:100,fx:-1,fz:0});

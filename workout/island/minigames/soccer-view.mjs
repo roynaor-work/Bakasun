@@ -17,13 +17,15 @@ import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight
 import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-integration-20261030-1';
 import {holdSoccerBall} from './soccer-poses.mjs?v=island-integration-20261030-1';
 import {passDestination} from './soccer.mjs?v=island-integration-20261030-1';
+import {restartAimPreview} from './soccer-restarts.mjs';
 import {setupAthletes} from './soccer-athlete.mjs?v=island-integration-20261030-1';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES} from './soccer-athlete-motion.mjs?v=island-integration-20261030-1';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-integration-20261030-1';
 import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-integration-20261030-1';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
 const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
+  const restartAim={},restartCameraState={},restartCameraBall={};
   const selectedKit=selectedSoccerKit();
   if(selectedKit){
     const home=new T.Color(selectedKit.primary),away=new T.Color(config.opponent.colors[0]);
@@ -34,7 +36,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,config.view.maxPixelRatio));adventureRenderer(renderer,.98);
   const scene=new T.Scene();scene.background=new T.Color('#a8c2c8');scene.fog=new T.Fog('#a8c2c8',48,125);
-  const camera=new T.PerspectiveCamera(config.view.camera.fovDegrees,1,config.view.camera.nearPlane,config.view.camera.farPlane),target=new T.Vector3(),dummy=new T.Object3D(),color=new T.Color();
+  const camera=new T.PerspectiveCamera(config.view.camera.fovDegrees,1,config.view.camera.nearPlane,config.view.camera.farPlane),target=new T.Vector3(),dummy=new T.Object3D(),color=new T.Color(),restartPalm=new T.Vector3(),restartOtherPalm=new T.Vector3();
   const resources=new Set(),track=o=>(resources.add(o),o);
   const mat=(c,extra={})=>track(new T.MeshLambertMaterial({color:c,...extra}));
   const lighting=createSoccerLighting(scene,renderer,config);
@@ -116,7 +118,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   const design=()=>loadDesignCharacters({config,roster,scene,track}).then(result=>({design:result}));
   const fallback=()=>{athleteMode=false;return design().catch(()=>new GLTFLoader().loadAsync(kidUrl));};
   const model=config.view.designCharacters?design():athleteUrl?new GLTFLoader().loadAsync(athleteUrl).then(data=>(athleteMode=true,data)).catch(fallback):fallback();
-  const ready=Promise.all([model,stadium.ready.catch(()=>null),designScene?.ready,designVfx.ready,replay.ready]).then(([data])=>{
+  const ready=Promise.all([model,stadium.ready.catch(()=>null),designScene?.ready,designVfx.ready,replay.ready,loadSoccerRestartMotion().catch(()=>null)]).then(([data,,,,,restartData])=>{
     if(data.design){
       designCharacters=data.design;
       if(disposed){designCharacters.dispose();return;}
@@ -132,7 +134,8 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     bounds.setFromObject(source);bounds.getSize(size);const scale=config.view.animation.characterHeight/size.y;source.scale.setScalar(scale);source.position.y=-bounds.min.y*scale;
     if(athleteMode){
       let triangles=0,lowTriangles=0,meshes=0;source.traverse(o=>{if(!o.isMesh)return;track(o.geometry);const n=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;if(/LOD1/.test(o.parent?.name||''))lowTriangles+=n;else{triangles+=n;meshes++;}});
-      for(const c of setupAthletes(T,{source,animations:data.animations,config,roster,numbers:numberTexture,track,cloneRig:cloneSoccerRig,scene,createMotion:createAthleteMotion})){
+      const animations=[...data.animations,...compileAthleteRestartClips(T,source,restartData)];
+      for(const c of setupAthletes(T,{source,animations,config,roster,numbers:numberTexture,track,cloneRig:cloneSoccerRig,scene,createMotion:createAthleteMotion})){
         if(selectedKit&&c.team===0&&!c.keeper){
           const uniforms=c.materials.kit.userData.athlete;
           for(const key of ['primary','secondary','shorts','shortsTrim','socks','socksTrim']){
@@ -144,7 +147,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
         characters.push(Object.assign(c,{lookWeight:1,roll:0,lift:0,headPoint:new T.Vector3(),chestPoint:new T.Vector3(),feetPoints:[new T.Vector3(),new T.Vector3()],active:'idle',mode:'idle',kickTime:0,stealTime:0,yaw:null}));
       }
       const ballTriangles=embeddedBall?(embeddedBall.geometry.index?.count||embeddedBall.geometry.attributes.position.count)/3:0;
-      assetStats={kind:'athlete',triangles,sourceTriangles:triangles+ballTriangles,meshes,sixCharacterTriangles:triangles*6,sharedTeamMaterials:2,perPlayerMaterials:roster.length*2,independentSkeletons:true,eightCharacterTriangles:triangles*roster.length,economyCharacterTriangles:lowTriangles,lod:0,clips:data.animations.map(a=>a.name)};
+      assetStats={kind:'athlete',triangles,sourceTriangles:triangles+ballTriangles,meshes,sixCharacterTriangles:triangles*6,sharedTeamMaterials:2,perPlayerMaterials:roster.length*2,independentSkeletons:true,eightCharacterTriangles:triangles*roster.length,economyCharacterTriangles:lowTriangles,lod:0,clips:animations.map(a=>a.name)};
       if(quality>=config.view.athlete.lodFromQuality)assetStats.lod=1;warm();assetStatus='ready';onAsset('ready');return;
     }
     let faceMap=null,triangles=0,meshes=0;
@@ -224,7 +227,14 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     let changed=numbersShown.length!==s.players.length;for(let i=0;i<s.players.length&&!changed;i++)changed=numbersShown[i]!==s.players[i].card.number;
     if(changed){numbersShown.length=s.players.length;for(let i=0;i<s.players.length;i++)numbersShown[i]=s.players[i].card.number;numberSignature=numbersShown.join(',');numberContext.clearRect(0,0,512,64);numberContext.font='bold 46px sans-serif';numberContext.textAlign='center';numberContext.textBaseline='middle';numberContext.fillStyle='#fff7da';numberContext.strokeStyle='#243d59';numberContext.lineWidth=3;for(const p of s.players){numberContext.strokeText(String(p.card.number),p.id*64+32,32);numberContext.fillText(String(p.card.number),p.id*64+32,32);}numberTexture.needsUpdate=true;}
     const c=config.view.camera,angle=c.elevationDegrees*Math.PI/180;
-    cameraState=soccerCamera(s,camera.aspect,config,cameraState,dt);
+    const restartCue=s.restart&&s.charging?restartAimPreview(s,config,restartAim):null;
+    let cameraInput=s;
+    if(restartCue){
+      Object.assign(restartCameraState,s);Object.assign(restartCameraBall,s.ball);
+      restartCameraBall.flight=restartCue.loft?restartCue:null;
+      restartCameraState.ball=restartCameraBall;restartCameraState.charging=false;cameraInput=restartCameraState;
+    }
+    cameraState=soccerCamera(cameraInput,camera.aspect,config,cameraState,dt);
     camera.position.set(cameraState.x,cameraState.distance*Math.sin(angle),cameraState.z+s.attackDir*cameraState.distance*Math.cos(angle));camera.lookAt(cameraState.x,0,cameraState.z);camera.updateMatrixWorld();if(poseFocus!==null){const p=s.players[poseFocus];camera.position.set(p.x,1.9,p.z+5.5);camera.lookAt(p.x,.8,p.z);camera.updateMatrixWorld();}
     const ballProjection=projectSoccerPoint(s.ball,cameraState,camera.aspect,config),playerProjection=projectSoccerPoint(s.players[s.controlled],cameraState,camera.aspect,config);
     framing=framingShown;framing.ball=ballProjection;framing.controlled=playerProjection;Object.assign(framing.camera,cameraState);framing.elevationDegrees=c.elevationDegrees;
@@ -261,7 +271,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
         const pose=poses[p.id]||(poses[p.id]={id:p.id});pose.mode=character.mode;pose.clip=character.active;pose.yaw=character.yaw;
       }else if(character.athlete){
         const {pivot,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz),ad=config.view.athlete.motion;
-        const body=character.body||=createAthleteBody(T,character,ad),bodyState=body.orient(p,wanted,dt,['slide','kick','throw','dive'].includes(animation.mode));character.yaw=bodyState.yaw;
+        const body=character.body||=createAthleteBody(T,character,ad),bodyState=body.orient(p,wanted,dt,Boolean(p.restartMotion)||['slide','kick','throw','dive'].includes(animation.mode));character.yaw=bodyState.yaw;
         const sliding=animation.mode==='slide'||animation.mode==='recover',roll=animation.mode==='dive'?animation.roll:sliding?animation.roll*ad.slideRollScale:bodyState.roll;
         const lift=animation.mode==='dive'?Math.sin(Math.PI*Math.min(1,Math.max(0,1-p.diveTime/config.goalkeeping.diveSeconds)))*ad.diveLift:0;
         const ease=1-Math.exp(-dt/ad.rollEase);character.roll+=(roll-character.roll)*ease;character.lift+=(lift-character.lift)*ease;
@@ -271,7 +281,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
         const motion=character.motion.update(p,s,animation.mode,dt*(s.phase==='goal'&&animation.mode!=='celebrate'?config.rules.goalSlowMotion:1),{charge,chargeKind:s.chargeKind,slide:sliding?slideWeight(p,config):0,marking,turnRate:bodyState.rate});
         character.mode=animation.mode;character.active=motion.oneShot||'locomotion';
         character.lookWeight+=((['celebrate','slide','recover','dive','throw'].includes(animation.mode)||p.hands?0:1)-character.lookWeight)*(1-Math.exp(-dt/ad.lookEase));athleteLook(T,character,s.ball,dt,ad);
-        if(p.hands)holdSoccerBall(T,character,p,config);
+        if(p.hands&&!p.restartMotion)holdSoccerBall(T,character,p,config);
         if(animation.head&&bones.Head.bone)bones.Head.bone.rotation.x+=animation.head*ad.headNod;
         body.plant(pivot,dt,motion.oneShot||sliding||charge>0||p.hands||!['idle','run','sprint','steal'].includes(animation.mode)?0:1,motion.warp);
         pivot.updateMatrixWorld(true);const headWorld=bones.Head.bone.getWorldPosition(character.headPoint),feet=character.feetPoints;bones.Foot_L.bone.getWorldPosition(feet[0]);bones.Foot_R.bone.getWorldPosition(feet[1]);
@@ -315,20 +325,31 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
       dummy.position.set(p.x,2.15,p.z);dummy.rotation.set(Math.PI/2-.6,0,0);dummy.scale.setScalar(p.request||receiver===p.id?1:0);dummy.updateMatrix();requests.setMatrixAt(p.id,dummy.matrix);
     }
     practiceTarget.visible=!!s.practiceTarget;practiceCones.count=s.practiceTarget?.cones?2:0;if(s.practiceTarget){const p=s.practiceTarget;practiceTarget.position.set(p.x,p.cones ? .05 : 1,p.z);practiceTarget.rotation.set(p.cones?-Math.PI/2:0,p.cones?0:Math.PI/2,0);for(let i=0;i<practiceCones.count;i++){dummy.position.set(p.x,.3,p.z+(i?1:-1)*config.training.coneWidth/2);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();practiceCones.setMatrixAt(i,dummy.matrix);}practiceCones.instanceMatrix.needsUpdate=true;}
-    const arc=crossArc(s,config);arcDots.count=arc?config.passing.arcDots:0;
+    const arc=restartCue?(restartCue.loft?restartCue:null):crossArc(s,config);arcDots.count=arc?config.passing.arcDots:0;
     for(let i=0;i<arcDots.count;i++){const u=i/(arcDots.count-1);dummy.position.set(arc.fromX+(arc.x-arc.fromX)*u,config.physics.ballRadius+4*arc.height*u*(1-u),arc.fromZ+(arc.z-arc.fromZ)*u);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();arcDots.setMatrixAt(i,dummy.matrix);}arcDots.instanceMatrix.needsUpdate=true;
     turfG.attributes.position.needsUpdate=true;turf.visible=s.players.some(p=>p.slideTime>0);requests.count=s.players.some(p=>p.request||receiver===p.id)?roster.length:0;landing.visible=Boolean(arc);if(arc)landing.position.set(arc.x,.04,arc.z);
     boxes.count=boxIndex;spheres.count=sphereIndex;boxes.instanceMatrix.needsUpdate=true;spheres.instanceMatrix.needsUpdate=true;if(boxes.instanceColor)boxes.instanceColor.needsUpdate=true;if(spheres.instanceColor)spheres.instanceColor.needsUpdate=true;requests.instanceMatrix.needsUpdate=true;
     const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);
-    const destination=s.chargeKind==='pass'&&s.charging?passDestination(s,config,s.charge/config.passing.chargeSeconds):null;
-    const aim=destination?{x:destination.x-controlled.x,z:destination.z-controlled.z}:safeShotAim(s.actionAim||s.kickAim||s.aim,s.kickAim,s.attackDir,s.charge/config.physics.chargeSeconds,config);
-    aimArrow.visible=s.charging;aimArrow.position.set(controlled.x,.065,controlled.z);aimArrow.rotation.y=Math.atan2(aim.x,aim.z);
-    const chargeLimit=s.chargeKind==='pass'?config.passing.chargeSeconds:config.physics.chargeSeconds;aimArrow.scale.z=(config.view.aimArrowMinLength+(config.view.aimArrowMaxLength-config.view.aimArrowMinLength)*s.charge/chargeLimit)/config.view.aimArrowLength;
-    const height=shotHeight(s.charge/config.physics.chargeSeconds,s.kickAim?.height,config);aimMaterial.color.set(s.chargeKind==='pass'?config.passing.landingColor:height>config.pitch.goalHeight?config.shooting.arrowHighColor:height>config.aerial.minHeight?config.shooting.arrowMidColor:config.shooting.arrowLowColor);
+    const destination=!restartCue&&s.chargeKind==='pass'&&s.charging?passDestination(s,config,s.charge/config.passing.chargeSeconds):null;
+    const aim=restartCue?null:destination?{x:destination.x-controlled.x,z:destination.z-controlled.z}:safeShotAim(s.actionAim||s.kickAim||s.aim,s.kickAim,s.attackDir,s.charge/config.physics.chargeSeconds,config);
+    aimArrow.visible=s.charging;aimArrow.position.set(restartCue?.originX??controlled.x,.065,restartCue?.originZ??controlled.z);aimArrow.rotation.y=restartCue?Math.atan2(restartCue.aimX,restartCue.aimZ):Math.atan2(aim.x,aim.z);
+    const chargeLimit=s.chargeKind==='pass'?config.passing.chargeSeconds:config.physics.chargeSeconds,aimPower=restartCue?.power??s.charge/chargeLimit;aimArrow.scale.z=(config.view.aimArrowMinLength+(config.view.aimArrowMaxLength-config.view.aimArrowMinLength)*aimPower)/config.view.aimArrowLength;
+    const height=shotHeight(s.charge/config.physics.chargeSeconds,s.kickAim?.height,config);aimMaterial.color.set(restartCue||s.chargeKind==='pass'?config.passing.landingColor:height>config.pitch.goalHeight?config.shooting.arrowHighColor:height>config.aerial.minHeight?config.shooting.arrowMidColor:config.shooting.arrowLowColor);
     {// Dribble touches: a visual offset along the carrier's facing, eased out when the ball leaves the foot.
       const holder=s.ball.owner===null||s.ball.owner===undefined?null:s.players[s.ball.owner],hc=holder&&characters[holder.id],off=hc?.athlete&&s.ball.y<.6?hc.dribbleOffset||0:0,dx=holder?holder.fx*off:0,dz=holder?holder.fz*off:0;
       const drift=ballDrift,k=off?1:1-Math.exp(-dt/.07),px=drift.x,pz=drift.z;drift.x+=(dx-drift.x)*k;drift.z+=(dz-drift.z)*k;drift.vx=dt>0?(drift.x-px)/dt:0;drift.vz=dt>0?(drift.z-pz)/dt:0;}
     ballRoot.position.set(s.ball.x+ballDrift.x,s.ball.y,s.ball.z+ballDrift.z);{ballRoot.rotation.z-=(s.ball.vx+ballDrift.vx)*dt/config.ball.spinRadius;ballRoot.rotation.x+=(s.ball.vz+ballDrift.vz)*dt/config.ball.spinRadius;}
+    // The held ball follows the displayed palms, including retargeted height.
+    // Only its mesh moves here; the simulation still owns contact and release.
+    const restartHolder=s.ball.owner==null?null:s.players[s.ball.owner],restartMotion=restartHolder?.restartMotion,restartCharacter=restartHolder&&characters[restartHolder.id];
+    if(restartCharacter&&restartMotion&&restartMotion.elapsed+1e-8<restartMotion.contact&&['throwIn','keeperThrow','keeperPunt'].includes(restartMotion.kind)){
+      const hands=restartCharacter.restartHands??=(['LeftHand','RightHand'].map(name=>restartCharacter.root.getObjectByName(name)));
+      if(hands.every(Boolean)){
+        restartCharacter.pivot.updateWorldMatrix(true,true);hands[0].getWorldPosition(restartPalm);hands[1].getWorldPosition(restartOtherPalm);
+        if(restartMotion.kind==='keeperThrow')ballRoot.position.copy(restartOtherPalm).addScaledVector(target.set(restartHolder.fx,0,restartHolder.fz),config.physics.ballRadius);
+        else{ballRoot.position.copy(restartPalm).add(restartOtherPalm).multiplyScalar(.5);if(restartMotion.kind==='keeperPunt'&&restartMotion.elapsed>.16){const drop=Math.min(1,(restartMotion.elapsed-.16)/(restartMotion.contact-.16));target.set(s.ball.x,s.ball.y,s.ball.z);ballRoot.position.lerp(target,drop);}}
+      }
+    }
     trail.count=0; // The height-correct tapered ribbon owns the flight cue.
     for(let i=0;i<trail.count;i++){dummy.position.set(s.ball.x-s.ball.vx*trailConfig.spacingSeconds*(i+1),s.ball.y,s.ball.z-s.ball.vz*trailConfig.spacingSeconds*(i+1));dummy.rotation.set(0,0,0);dummy.scale.setScalar(1-i/trailConfig.count);dummy.updateMatrix();trail.setMatrixAt(i,dummy.matrix);}trail.instanceMatrix.needsUpdate=true;
     dummy.position.set(s.ball.x,.032,s.ball.z);dummy.rotation.set(-Math.PI/2,0,0);dummy.scale.setScalar(config.view.ballShadowScale+Math.min(s.ball.y,config.pitch.goalHeight)*config.view.ballShadowHeightScale);dummy.updateMatrix();shadows.setMatrixAt(roster.length,dummy.matrix);shadows.instanceMatrix.needsUpdate=true;
@@ -344,7 +365,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   }
   return {ready,render,qualitySample,loading:()=>assetStatus==='loading',get renderer(){return renderer;},get replaying(){return replay.active;},
     poseCamera(id,mode){poseFocus=id;poseMode=mode;},
-    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),stadium:designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),assetStatus,assetStats,kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
+    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),stadium:designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),assetStatus,assetStats,kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimOrigin:{x:aimArrow.position.x,z:aimArrow.position.z},selectionOrigin:{x:selector.position.x,z:selector.position.z},aimDirection:{x:Math.sin(aimArrow.rotation.y),z:Math.cos(aimArrow.rotation.y)},aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
     dispose(){if(disposed)return;disposed=true;replay.dispose();designVfx.dispose();designScene?.dispose();designSceneLoader?.dispose();stadium.dispose();lighting.dispose();observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);canvas.removeEventListener('pointerdown',skipReplay);for(const c of characters){if(c.design)c.dispose();else{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);c.root.traverse(o=>o.skeleton?.dispose());}}characters.length=0;for(const resource of resources)resource.dispose();resources.clear();scene.clear();renderer.dispose();renderer.forceContextLoss();}
   };
 }

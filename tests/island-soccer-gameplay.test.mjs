@@ -80,7 +80,13 @@ test('gameplay restart spacing does not teleport the nearby human-controlled fie
 test('gameplay keeper: releasing a carried ball leaves a smooth return to the goal line',()=>{
  const f=fixture({role:'keeper'});Object.assign(f.p,{x:-14,z:1,hands:true});
  Object.assign(f.s.ball,{owner:f.p.id,x:-13.7,z:1,y:config.goalkeeping.holdHeight,lastTeam:0,lastPlayer:f.p.id});
- f.tick({passHeld:true});f.tick({});assert.ok(has(f,'pass'));
+ f.tick({passHeld:true});f.tick({});
+ assert.equal(f.p.restartMotion?.kind,'keeperThrow');
+ assert.equal(f.s.ball.owner,f.p.id,'the keeper retains the ball during the underarm preparation');
+ assert.equal(has(f,'pass'),false,'the release waits for the authored contact');
+ for(let i=0;i<60&&!has(f,'pass');i++)f.tick();
+ assert.ok(has(f,'pass'),'one real pass is released after the preparation');
+ assert.equal(f.events.filter(e=>e.type==='pass'&&e.player===f.p.id).length,1);
  const before={x:f.p.x,z:f.p.z};f.tick();assert.ok(distance(before,f.p)<config.players.speed*dt+.02);
  assert.ok(f.p.x>-15,'releasing a throw does not snap the keeper straight to the line');assert.equal(f.s.controlled,f.p.id);
 });

@@ -10,6 +10,44 @@ export const ATHLETE_BONES = {
 export const ATHLETE_CLIPS = ['idle', 'ready', 'jog', 'run', 'sprint', 'shot', 'shot-b', 'pass', 'header', 'throw', 'reach', 'celebrate', 'sit'];
 const LOCO = ['jog', 'run', 'sprint'];
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x)), smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+let restartData;
+/** One local request shared by every athlete. No script, worker or eval is used. */
+export function loadSoccerRestartMotion(){
+  return restartData??=fetch(new URL('../design/motion2/soccer.json',import.meta.url)).then(r=>{if(!r.ok)throw Error(`Soccer restart motion: ${r.status}`);return r.json();});
+}
+/** Retarget the canonical authored restart pack once to the adult rig. The
+ * target's diagonal bind limbs need their own basis; copying rotations would
+ * leave the wrists beside the head instead of above it. */
+export function compileAthleteRestartClips(T,root,data){
+  if(!data)return [];
+  const map={Root:null,Hips:'Hips',Spine:'Spine',Chest:'Spine1',Neck:'Neck',Head:'Head',LeftArm:'LeftArm',LeftForeArm:'LeftForeArm',LeftHand:'LeftHand',RightArm:'RightArm',RightForeArm:'RightForeArm',RightHand:'RightHand',LeftUpLeg:'LeftUpLeg',LeftLeg:'LeftLeg',LeftFoot:'LeftFoot',RightUpLeg:'RightUpLeg',RightLeg:'RightLeg',RightFoot:'RightFoot'};
+  const reverse=Object.fromEntries(Object.entries(map).filter(([,v])=>v).map(([a,b])=>[b,a])),bones=[],saved=[],basis={},sourceBones=data.skeleton.bones,sourceByName=Object.fromEntries(sourceBones.map(b=>[b.name,b]));
+  root.traverse(b=>{if(b.isBone){bones.push(b);saved.push({b,q:b.quaternion.clone(),p:b.position.clone()});}});
+  const V=a=>new T.Vector3().fromArray(a),Q=a=>new T.Quaternion().fromArray(a).normalize();
+  for(const b of bones){const name=reverse[b.name],child=name&&sourceBones.find(q=>q.parent===name),targetChild=child&&root.getObjectByName(map[child.name]);basis[b.name]=child&&targetChild?new T.Quaternion().setFromUnitVectors(targetChild.position.clone().normalize(),V(child.restTranslationMeters).normalize()):b.quaternion.clone();}
+  const hips=root.getObjectByName('Hips'),left=root.getObjectByName('LeftFoot'),right=root.getObjectByName('RightFoot'),point=new T.Vector3();
+  root.updateMatrixWorld(true);const floor=Math.min(left?.getWorldPosition(point).y??0,right?.getWorldPosition(point).y??0),verticalScale=root.getWorldScale(point).y||1,hipScale=(hips?.position.y||.86)/sourceByName.Hips.restTranslationMeters[1],clips=[];
+  for(const [kind,state]of Object.entries(data.states)){
+    const times=state.keyframes.map(f=>f.time*state.durationSeconds),values=Object.fromEntries(bones.map(b=>[b.name,[]])),positions=[];
+    for(const frame of state.keyframes){
+      const source={},world={};
+      for(const b of sourceBones)source[b.name]=(b.parent?source[b.parent].clone():new T.Quaternion()).multiply(Q(frame.rotations[b.name]));
+      for(const b of bones){
+        const name=reverse[b.name],parent=b.parent?.isBone?world[b.parent.name]:new T.Quaternion();
+        world[b.name]=name?source[name].clone().multiply(basis[b.name]):parent.clone().multiply(saved.find(x=>x.b===b).q);
+        b.quaternion.copy(parent).invert().multiply(world[b.name]);
+        const a=values[b.name],last=a.length;if(last&&b.quaternion.x*a[last-4]+b.quaternion.y*a[last-3]+b.quaternion.z*a[last-2]+b.quaternion.w*a[last-1]<0)b.quaternion.set(-b.quaternion.x,-b.quaternion.y,-b.quaternion.z,-b.quaternion.w);
+        a.push(...b.quaternion.toArray());
+      }
+      const bind=saved.find(x=>x.b===hips).p,off=frame.hipsOffsetMeters||[0,0,0];hips.position.copy(bind).addScaledVector(V(off),hipScale);root.updateMatrixWorld(true);
+      const low=Math.min(left?.getWorldPosition(point).y??floor,right?.getWorldPosition(point).y??floor);hips.position.y+=Math.max(0,floor-low)/verticalScale;
+      positions.push(...hips.position.toArray());
+    }
+    const tracks=bones.map(b=>new T.QuaternionKeyframeTrack(`${b.name}.quaternion`,times,values[b.name]));tracks.push(new T.VectorKeyframeTrack('Hips.position',times,positions));
+    const clip=new T.AnimationClip('restart-'+kind,state.durationSeconds,tracks);clip.userData={restart:kind,contact:state.events.find(e=>(e.name||e.event)==='visual_release').atSeconds};clips.push(clip);
+  }
+  for(const {b,q,p}of saved){b.quaternion.copy(q);b.position.copy(p);}root.updateMatrixWorld(true);return clips;
+}
 /** Pure weight solver (unit-tested): speed in m/s -> locomotion and idle weights. */
 export function locomotionWeights(speed, sprinting, m, out = {}) {
   const moving = smooth(m.idleSpeed, m.moveSpeed, speed);
@@ -33,7 +71,7 @@ export function strideWarp(speed, weights, clips, m, out = {rate: 0, warp: 1}) {
 }
 export function createAthleteMotion(T, mixer, clips, m) {
   const actions = {}, weights = {}, info = {};
-  for (const name of ATHLETE_CLIPS) {
+  for (const name of [...ATHLETE_CLIPS,...clips.filter(c=>c.userData?.restart).map(c=>c.name)]) {
     const clip = clips.find(c => c.name === name); if (!clip) continue;
     const action = mixer.clipAction(clip); action.enabled = true; action.setEffectiveWeight(0); action.play();
     const loop = LOCO.includes(name) || ['idle', 'ready', 'celebrate'].includes(name);
@@ -61,7 +99,12 @@ export function createAthleteMotion(T, mixer, clips, m) {
       const speed = hypot2(p.vx, p.vz), sprinting = p.id === s.controlled ? s.sprint?.active : p.sprinting;
       // --- one-shot triggers (edge detected on the simulation timers) ---
       // Throws and keeper releases also start a kick timer, so they are matched first.
-      if (p.throwTime > lastThrow + 1e-6) start('throw', m.throwStart, m.throwRate);
+      const restart=p.restartMotion,restartName=restart&&'restart-'+restart.kind,restartAction=actions[restartName];
+      if(restartAction){
+        if(shot?.name!==restartName)start(restartName,0,0,1,.045);
+        restartAction.timeScale=0;restartAction.time=clamp(restart.elapsed,0,info[restartName].duration);
+      }else if(shot?.name?.startsWith('restart-'))shot=null;
+      else if (p.throwTime > lastThrow + 1e-6) start('throw', m.throwStart, m.throwRate);
       else if (p.headerTime > lastHeader + 1e-6) start('header', m.headerTakeoff, info.header.duration / Math.max(0.3, p.headerTime + 0.55));
       else if (p.diveTime > lastDive + 1e-6) start('reach', m.reachStart, 1.25);
       else if (p.kickTime > lastKick + 1e-6 && p.throwTime <= 0) {
@@ -70,7 +113,7 @@ export function createAthleteMotion(T, mixer, clips, m) {
         start(name, info[name].contact - m.contactLead, power ? 1.1 : 1.2, 1, m.kickFadeIn);
       } else if (p.stealTime > lastSteal + 1e-6) start('pass', info.pass.contact - 0.14, 1.5, 0.85);
       lastKick = p.kickTime; lastSteal = p.stealTime; lastHeader = p.headerTime; lastThrow = p.throwTime; lastDive = p.diveTime;
-      if (shot && !actions[shot.name].isRunning() && actions[shot.name].time >= info[shot.name].duration - 1e-3) shot = null;
+      if (shot && !restartAction && !actions[shot.name].isRunning() && actions[shot.name].time >= info[shot.name].duration - 1e-3) shot = null;
       if (shot && (shot.name === 'shot' || shot.name === 'shot-b' || shot.name === 'pass') && p.kickTime <= 0 && p.stealTime <= 0 && actions[shot.name].time > info[shot.name].contact + 0.45) shot = null;
       if (shot && shot.name === 'header' && p.headerTime <= 0 && actions.header.time > info.header.duration - 0.25) shot = null;
       if (shot && shot.name === 'throw' && p.throwTime <= 0 && actions.throw.time > m.throwStart + 0.75) shot = null;

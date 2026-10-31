@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,stat} from 'node:fs/promises';
 import {createSoccer} from '../workout/island/minigames/soccer.mjs';
+import {restartActionProfile} from '../workout/island/minigames/soccer-restarts.mjs';
 import {soccerAudioCues,createG3hAudio,G3H_AUDIO_FILES} from '../workout/island/minigames/g3h-audio.mjs';
 const root=new URL('../workout/island/',import.meta.url),c=JSON.parse(await readFile(new URL('data/config.json',root))).minigames.soccer,dt=c.match.fixedStep;
 // Wall time includes every stoppage: no controller, forced turnovers or resets.
@@ -53,8 +54,35 @@ test('G3h a goal and every out-of-play restart emit a referee whistle; a goal al
 test('G3h event delivery preserves a shot even when the same update immediately reports possession',()=>{
  const game=createSoccer({config:c}),s=game.getState();s.players[0].cooldown=0;s.players[3].x=2;s.players[3].z=0;game.update(.2,{kickHeld:true});game.update(.2);assert.ok(game.drainEvents().some(e=>e.type==='shot'));assert.deepEqual(game.drainEvents(),[]);
 });
-test('G3h an unattended home restart resumes; an early human pass still releases immediately',()=>{
- for(const pressed of [false,true]){const game=createSoccer({config:c}),s=game.getState();Object.assign(s.ball,{owner:null,x:0,z:c.pitch.width/2-.05,vx:0,vz:30,lastTeam:1,grace:100});game.update(dt);for(let i=0;i<Math.ceil((c.match.restartSeconds+c.restarts.idleReleaseSeconds+.2)/dt)&&s.phase!=='playing';i++)game.update(dt,pressed?{passPressed:true}:{});assert.equal(s.phase,'playing');}
+test('G3h unattended and early human restarts resume once, after the walk, windup and physical release contact',()=>{
+ for(const pressed of [false,true]){
+  const game=createSoccer({config:c}),s=game.getState(),events=[];
+  Object.assign(s.ball,{owner:null,x:0,z:c.pitch.width/2-.05,vx:0,vz:30,lastTeam:1,grace:100});game.update(dt);
+  const r=s.restart,profile=restartActionProfile('throwIn'),clock=s.elapsed;
+  assert.equal(r.type,'throwIn');assert.equal(r.team,0);
+  const prepare=Math.max(c.match.restartSeconds,r.walkSeconds,r.organizeSeconds);
+  const wait=pressed?c.restarts.readySeconds:Math.max(c.restarts.readySeconds,c.restarts.idleReleaseSeconds);
+  const bound=prepare+wait+profile.contact+dt*4;
+  let seconds=0;
+  while(!r.action&&seconds<bound){game.update(dt,pressed?{passPressed:true}:{});seconds+=dt;events.push(...game.drainEvents());}
+  assert.ok(r.action,'the unattended timeout or the buffered early pass must begin the restart within its bounded setup time');
+  assert.equal(s.phase,'restartReady');assert.equal(s.elapsed,clock,'the live match clock stays frozen while players organize');
+  assert.equal(events.filter(e=>e.type==='restart-windup').length,1);assert.equal(events.some(e=>e.type==='throw'),false);
+  assert.equal(s.ball.owner,r.player,'the taker keeps the ball during the windup');
+  assert.ok(r.elapsed+1e-8>=r.walkSeconds,'the taker first walks to the touchline');
+  const motion=s.players[r.player].restartMotion;
+  while(motion.elapsed+dt<profile.contact-1e-8){
+   game.update(dt,pressed?{passPressed:true}:{});seconds+=dt;events.push(...game.drainEvents());
+   assert.equal(s.phase,'restartReady');assert.equal(s.ball.owner,r.player);assert.equal(s.elapsed,clock);
+   assert.equal(events.some(e=>e.type==='throw'),false,'a button edge cannot throw before the authored contact');
+  }
+  while(s.phase!=='playing'&&seconds<bound){game.update(dt,pressed?{passPressed:true}:{});seconds+=dt;events.push(...game.drainEvents());}
+  assert.equal(s.phase,'playing');assert.equal(s.restart,null);assert.ok(seconds<=bound,'an unattended restart must still finish within a finite, distance-derived bound');
+  assert.equal(events.filter(e=>e.type==='throw').length,1);assert.equal(s.ball.owner,null);assert.equal(s.ball.thrower,r.player);
+  assert.ok(motion.elapsed+1e-8>=profile.contact);assert.ok(motion.elapsed<=profile.contact+dt+1e-8,'release occurs at the first fixed tick containing contact');
+  for(let i=0;i<3;i++){game.update(dt,pressed?{passPressed:true}:{});events.push(...game.drainEvents());}
+  assert.equal(events.filter(e=>e.type==='throw').length,1,'holding the early pass cannot produce a second throw');
+ }
 });
 test('G3h soccer delegates its single pause element and glyph to the shell',async()=>{
  const session=await readFile(new URL('minigames/soccer-session.mjs',root),'utf8'),css=await readFile(new URL('minigames/g3h-soccer.css',root),'utf8'),host=await readFile(new URL('ui/activity.mjs',root),'utf8');
