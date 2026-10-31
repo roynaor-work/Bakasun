@@ -70,8 +70,9 @@ export function createAlpineMotionPlayer(baked, bones) {
   let resultSeen = false, clipFinished = false, sampledFrames = 0;
   let carveHeld = false, carveStrength = 0;
 
+  const clipOf = name => baked.clips[name === 'recover' && baked.clips.getup ? 'getup' : name];
   function sample(name, seconds, out) {
-    const clip = baked.clips[name];
+    const clip = clipOf(name);
     const at = clip.loop ? ((seconds % clip.duration) + clip.duration) % clip.duration : clamp(seconds, 0, clip.duration);
     let lo = 0, hi = clip.times.length - 1;
     while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (clip.times[mid] <= at) lo = mid; else hi = mid; }
@@ -90,7 +91,7 @@ export function createAlpineMotionPlayer(baked, bones) {
   // applied as model-space rotations on the already posed bones, and fades out in falls, menus and results.
   const boneByName = Object.fromEntries(baked.names.map((n, i) => [n, bones[i]]));
   const order = ['Hips', 'Spine', 'Chest', 'Neck', 'Head', 'LeftArm', 'RightArm', 'LeftForeArm', 'RightForeArm', 'LeftUpLeg', 'RightUpLeg', 'LeftLeg', 'RightLeg', 'LeftFoot', 'RightFoot'].filter(n => boneByName[n]);
-  const ride = {w: 0, speed: 0, lean: 0, phase: 0, bob: 0, boost: 0};
+  const ride = {w: 0, speed: 0, lean: 0, phase: 0, bob: 0, boost: 0, arms: 0};
   const frameBone = bones[0], qFrame = new T.Quaternion(), qParent = new T.Quaternion(), qWork = new T.Quaternion(), qDelta = new T.Quaternion(), euler = new T.Euler();
   const AX = new T.Vector3(1, 0, 0), AY = new T.Vector3(0, 1, 0), AZ = new T.Vector3(0, 0, 1);
   function rideTargets() {
@@ -104,8 +105,8 @@ export function createAlpineMotionPlayer(baked, bones) {
     return {crouch, knee, bump, swing, lean, a, b, hipsPitch, torso};
   }
   function applyRide() {
-    if (ride.w < .01 || !frameBone?.parent) return;
-    const k = rideTargets(), w = ride.w;
+    if ((ride.w < .01 && ride.arms < .01) || !frameBone?.parent) return;
+    const k = rideTargets(), w = ride.w, armW = ride.arms;
     frameBone.parent.updateWorldMatrix(true, false); frameBone.parent.getWorldQuaternion(qFrame);
     const delta = {
       Hips: [k.crouch * .35 + k.bump * .5, -k.lean * .2, k.lean * .14],
@@ -113,8 +114,8 @@ export function createAlpineMotionPlayer(baked, bones) {
       Chest: [k.crouch * .3, k.lean * .18, k.lean * .22],
       Neck: [-k.crouch * (.3 + .35 * k.b), -k.lean * .22, -k.lean * .12],
       Head: [-k.crouch * .15, 0, -k.lean * .1],
-      LeftArm: [k.swing + k.b * (1.4 - k.torso), 0, k.a * .1], RightArm: [-k.swing + k.b * (1.4 - k.torso), 0, -k.a * .1],
-      LeftForeArm: [-.25 - k.swing * .5 - .55 * k.b, 0, 0], RightForeArm: [-.25 + k.swing * .5 - .55 * k.b, 0, 0],
+      LeftArm: [k.swing + k.b * (1.4 - k.torso), 0, -.52 + k.a * .1], RightArm: [-k.swing + k.b * (1.4 - k.torso), 0, .52 - k.a * .1],
+      LeftForeArm: [-.6 - k.swing * .5 - .55 * k.b, 0, 0], RightForeArm: [-.6 + k.swing * .5 - .55 * k.b, 0, 0],
       LeftUpLeg: [-(k.knee + k.bump) - k.hipsPitch - (k.lean > 0 ? k.a * .1 : -k.a * .08), 0, 0], RightUpLeg: [-(k.knee + k.bump) - k.hipsPitch - (k.lean < 0 ? k.a * .1 : -k.a * .08), 0, 0],
       LeftLeg: [(k.knee + k.bump) * 2, 0, 0], RightLeg: [(k.knee + k.bump) * 2, 0, 0],
       LeftFoot: [-(k.knee + k.bump), 0, 0], RightFoot: [-(k.knee + k.bump), 0, 0]
@@ -123,7 +124,8 @@ export function createAlpineMotionPlayer(baked, bones) {
       const bone = boneByName[name], d = delta[name]; if (!d) continue;
       bone.parent.updateWorldMatrix(true, false); bone.parent.getWorldQuaternion(qParent);
       qParent.premultiply(qWork.copy(qFrame).invert());            // parent orientation in model space
-      euler.set(d[0] * w, d[1] * w, d[2] * w, 'YXZ'); qDelta.setFromEuler(euler);
+      const bw = name.endsWith('Arm') ? armW : w;
+      euler.set(d[0] * bw, d[1] * bw, d[2] * bw, 'YXZ'); qDelta.setFromEuler(euler);
       // local' = inverse(parent) * delta * parent * local: the delta is a model-space rotation
       qWork.copy(qParent).invert().multiply(qDelta).multiply(qParent);
       bone.quaternion.premultiply(qWork);
@@ -132,7 +134,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     if (boneByName.Hips) boneByName.Hips.position.y -= 2 * .24 * (1 - Math.cos(Math.max(0, k.knee + k.bump))) * w;
   }
   function display(dt) {
-    const sampleTime = isCarve(state) && carveHeld ? Math.min(time, baked.clips[state].duration * .5 * carveStrength) : time;
+    const sampleTime = isCarve(state) && carveHeld ? Math.min(time, clipOf(state).duration * .5 * carveStrength) : time;
     sample(state, sampleTime, target);
     fadeTime += dt;
     const w = fadeDuration > 0 ? smooth(fadeTime / fadeDuration) : 1;
@@ -164,7 +166,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     state = baked.initialState || 'idle'; time = 0; fadeTime = 1; fadeDuration = 0;
     sample(state, 0, outgoing); shown.set(outgoing); target.set(outgoing);
     lastTime = null; lastPhase = null; lastS = null; lastSpeed = 0;
-    ride.w = ride.speed = ride.lean = ride.phase = ride.boost = 0;
+    ride.w = ride.speed = ride.lean = ride.phase = ride.boost = ride.arms = 0;
     lastCrash = lastAir = lastBoost = resultSeen = clipFinished = false;
     carveHeld = false; carveStrength = 0;
     display(0);
@@ -181,19 +183,20 @@ export function createAlpineMotionPlayer(baked, bones) {
     const lean = clamp(Number(frame.lean) || 0, -1, 1);
     carveHeld = moving && !frame.airborne && !frame.crashed && Math.abs(lean) > .2;
     carveStrength += ((carveHeld ? Math.abs(lean) : 0) - carveStrength) * (1 - Math.exp(-12 * dt));
-    time += dt * (state === 'recover' ? 2.4 : state === 'fall' ? 1.15 : 1);
+    time += dt * (state === 'recover' ? 1.9 : state === 'fall' ? 1.15 : 1);
     // Riding layer targets: full on the ground in glide/carve, partial in the air and pole push, off elsewhere.
     const rideWeight = (!moving || frame.crashed) ? 0 : (state === 'glide' || isCarve(state)) ? 1 : (state === 'air' || state === 'pole_push') ? .55 : 0;
     const speed01 = clamp((Number(speed) || 0) / 60);
     const follow = 1 - Math.exp(-8 * dt);
     ride.w += (rideWeight - ride.w) * follow; ride.speed += (speed01 - ride.speed) * follow; ride.lean += (lean - ride.lean) * (1 - Math.exp(-7 * dt));
+    ride.arms += (((state === 'fall' || state === 'recover' || state === 'celebrate') ? 0 : 1) - ride.arms) * (1 - Math.exp(-7 * dt));
     ride.boost += ((frame.boosting && rideWeight > 0 && !frame.airborne ? 1 : 0) - ride.boost) * (1 - Math.exp(-9 * dt));
     ride.phase += dt;
-    const clip = baked.clips[state];
+    const clip = clipOf(state);
     const events = [];
     if (frame.crashed && !lastCrash) events.push('fall_confirmed');
     // After the tumble the rider gets straight back on the board: the get-up starts early and plays fast.
-    if ((!frame.crashed || time >= .5) && state === 'fall') events.push('recovery_allowed');
+    if ((!frame.crashed || time >= .55) && state === 'fall') events.push('recovery_allowed');
     if (phase === 'finished' && context.result?.won && !resultSeen) events.push('result_success');
     if (frame.airborne && !lastAir) {
       // An authoritative jump can interrupt a short ground action before its
@@ -242,13 +245,16 @@ export async function loadAlpineCharacters({modelUrl = asset('../design/characte
   try {
     const loader = new GLTFLoader(); loader.setDRACOLoader(draco);
     const results = await Promise.allSettled([
-      loader.loadAsync(modelUrl), json('../design/characters/rig.json'), json('../design/motion/alpine.json'), json('../design/viewer/retarget-map.json')
+      loader.loadAsync(modelUrl), json('../design/characters/rig.json'), json('../design/motion/alpine.json'), json('../design/viewer/retarget-map.json'),
+      json('../design/motion2/alpine/alpine.json').catch(() => null) // optional: the richer get-up clip
     ]);
     gltf = results[0].status === 'fulfilled' ? results[0].value : null;
     gltf?.scene.traverse(o => { if (o.geometry) ownedGeometries.add(o.geometry); if (o.material) for (const m of [].concat(o.material)) ownedMaterials.add(m); });
     const failed = results.find(result => result.status === 'rejected');
     if (failed) throw failed.reason;
-    const [, rig, motion, map] = results.map(result => result.value);
+    const [, rig, motion, map, motion2] = results.map(result => result.value);
+    // 'getup' plays in place of the short authored 'recover': the rider climbs back onto the skis from lying on the side.
+    if (motion2?.states?.recover_side) motion.states = {...motion.states, getup: motion2.states.recover_side};
     if (isDisposed()) throw Object.assign(Error('alpine.disposed'), {disposed: true});
     const bakeStarted = performance.now();
     const baked = bakeAlpineMotion(gltf.scene, rig, motion, map, isDisposed);

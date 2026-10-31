@@ -84,3 +84,6 @@
 /* the arrow sits on top of the trick buttons; the caption rides above the whole cluster */
 .game-screen[data-game=alpineRush] .alpine-boost-arrow{z-index:6}
 .game-screen[data-game=alpineRush] .alpine-boost-caption{z-index:6;right:0!important;bottom:auto!important;top:-34px!important}
+
+/* the game's name is not shown on the opening card either: the track name below is the heading */
+.game-screen[data-game=alpineRush] .alpine-title{display:none!important}
