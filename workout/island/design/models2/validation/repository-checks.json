@@ -1,0 +1,53 @@
+{
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "fullSuite": {
+    "command": "npm test",
+    "node": "24.19.0",
+    "exitCode": 1,
+    "tests": 2901,
+    "pass": 2862,
+    "fail": 1,
+    "skipped": 38,
+    "cancelled": 0
+  },
+  "baselineMethod": "Three focused files run with identical process/network sandbox permissions in this branch and a clean detached worktree at origin/main. Only G7 fails in either tree.",
+  "baselineComparisons": [
+    {
+      "file": "tests/cam-lab-keyframes.test.mjs",
+      "branch": {
+        "exitCode": 0,
+        "failure": null
+      },
+      "main": {
+        "exitCode": 0,
+        "failure": null
+      },
+      "summary": "עבר גם בענף וגם ב־main."
+    },
+    {
+      "file": "tests/island-g7.test.mjs",
+      "branch": {
+        "exitCode": 1,
+        "failure": "orientation: any != landscape"
+      },
+      "main": {
+        "exitCode": 1,
+        "failure": "orientation: any != landscape"
+      },
+      "summary": "אותה בדיקה נכשלת בשני העצים: config.orientation הוא any והבדיקה מצפה ל־landscape (שורה 44)."
+    },
+    {
+      "file": "tests/workout-dad-test.test.mjs",
+      "branch": {
+        "exitCode": 0,
+        "failure": null
+      },
+      "main": {
+        "exitCode": 0,
+        "failure": null
+      },
+      "summary": "עבר גם בענף וגם ב־main."
+    }
+  ],
+  "scope": "Only additions under workout/island/design/models2/; existing tracked files unchanged."
+}

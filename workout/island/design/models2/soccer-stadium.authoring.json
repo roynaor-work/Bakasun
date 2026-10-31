@@ -1,0 +1,97 @@
+{
+  "id": "soccer-stadium",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "objects": [
+    "advertising_boards",
+    "aisles",
+    "beams",
+    "corner_flags",
+    "crossbar",
+    "field_markings",
+    "floodlights",
+    "goal_post",
+    "net",
+    "pitch_surface",
+    "roof",
+    "seating",
+    "stand_shell",
+    "substitute_benches",
+    "upper_aisles",
+    "upper_seats",
+    "upper_stands"
+  ],
+  "anchors": {
+    "anchor_goal_south": [
+      0.0,
+      0.04,
+      52.5
+    ],
+    "anchor_ball_spot_south": [
+      0.0,
+      0.04,
+      41.5
+    ],
+    "anchor_goal_north": [
+      0.0,
+      0.04,
+      -52.5
+    ],
+    "anchor_ball_spot_north": [
+      0.0,
+      0.04,
+      -41.5
+    ],
+    "anchor_ball_spot": [
+      0.0,
+      0.04,
+      -0.0
+    ],
+    "anchor_field_center": [
+      0.0,
+      0.04,
+      -0.0
+    ],
+    "anchor_corner_-1_-34": [
+      -34.0,
+      0.04,
+      52.5
+    ],
+    "anchor_corner_-1_34": [
+      34.0,
+      0.04,
+      52.5
+    ],
+    "anchor_substitutes_home": [
+      -36.099998,
+      0.04,
+      -0.0
+    ],
+    "anchor_corner_1_-34": [
+      -34.0,
+      0.04,
+      -52.5
+    ],
+    "anchor_corner_1_34": [
+      34.0,
+      0.04,
+      -52.5
+    ],
+    "anchor_substitutes_away": [
+      36.099998,
+      0.04,
+      -0.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "triangles": 38268,
+  "drawCallsEstimate": 17,
+  "textures": 0,
+  "ao": "8-ray face AO in COLOR_0; bounded 0.68\u20131.0"
+}

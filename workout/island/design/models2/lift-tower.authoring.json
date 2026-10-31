@@ -1,0 +1,36 @@
+{
+  "id": "lift-tower",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "baseCommit": "3853d282b6dd7719db49a864fec4286dc7b63cb0",
+  "objects": [
+    "lift_tower"
+  ],
+  "anchors": {
+    "anchor_mount": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "anchor_cable_left": [
+      -2.15,
+      6.75,
+      -0.0
+    ],
+    "anchor_cable_right": [
+      2.15,
+      6.75,
+      -0.0
+    ],
+    "anchor_origin": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "triangles": 948,
+  "drawCallsEstimate": 1,
+  "textures": 0,
+  "ao": "8-ray face AO in COLOR_0; bounded 0.68\u20131.0"
+}
