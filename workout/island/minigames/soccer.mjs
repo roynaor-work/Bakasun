@@ -6,6 +6,7 @@ import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,
 import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-ski-20261031-1';
 import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-ski-20261031-1';
 import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-ski-20261031-1';
+import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall} from './soccer-loft.mjs';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);
@@ -30,7 +31,7 @@ export function opponentSettings(config,stage,difficulty) {
 }
 /** A quick pass leads a teammate; a held pass is a manually aimed cross. */
 export function passDestination(state,config,power=0){
- return assistedPassDestination(state,config,power);
+ return power*config.passing.chargeSeconds>=config.passing.loftThresholdSeconds?loftDestination(state,config,power):assistedPassDestination(state,config,power);
 }
 export function soccerPassAim(state){return state.passAim?.manual?state.passAim:state.moving?state.aim:state.passAim||state.aim;}
 export function canHead(player,ball,config){return canContactBall(player,ball,config,{kind:'head'});}
@@ -90,7 +91,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if(pass) {
       if(p.team===1)rivalPasses++;
 
-      if(manual||forceLoft){destination=passDestination({...s,controlled:p.id,aim},config,power);target=players[destination.target];tx=destination.x;tz=destination.z;}
+      if(manual||forceLoft){const context={...s,controlled:p.id,aim};destination=forceLoft?loftDestination(context,config,power,{aim}):passDestination(context,config,power);target=players[destination.target];tx=destination.x;tz=destination.z;}
       else{
         target=passTarget(p);const point=target?teamPassPoint(target,config):{x:s.ball.x+aim.x,z:s.ball.z+aim.z};tx=point.x;tz=point.z;
         destination={distance:Math.hypot(tx-s.ball.x,tz-s.ball.z),kind:'ground'};
@@ -122,10 +123,11 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if(handRelease){s.ball.y=config.goalkeeping.holdHeight;p.throwTime=config.restarts.throwSeconds;if(pass)s.ball.vy=config.restarts.throwLift;}
     s.ball.shot={speed,aim:Math.min(1,Math.abs(s.ball.z+(d*hx-s.ball.x)*dz/(Math.abs(dx)>1e-6?dx:1e-6))/(config.pitch.goalWidth/2)),distance:Math.abs(d*hx-p.x),shooter:p.id};
     if((manual||forceLoft)&&pass&&destination.kind==='loft'&&!handRelease){
-      const flight=config.passing.loftMinSeconds+power*config.passing.loftExtraSeconds,height=config.passing.loftMinHeight+power*config.passing.loftExtraHeight;
-      s.ball.flight={age:0,duration:flight,height,fromX:s.ball.x,fromZ:s.ball.z,x:tx,z:tz};s.ball.vx=dx/flight;s.ball.vz=dz/flight;s.ball.vy=4*height/flight;
+      Object.assign(s.ball,createLoftFlight(s.ball,destination,config,power));
     }else if(pass&&!handRelease){s.ball.vy=0;s.ball.y=ph.ballRadius;}
-    if(pass&&p.card.pass<config.card.initial){const error=(rng()-.5)*(config.card.initial-p.card.pass)*config.roster.passSpread;s.ball.vz+=error;}
+    // Ground passes retain their card spread. The old scripted loft ignored
+    // this velocity error; its replacement must likewise hit the shown target.
+    if(pass&&p.card.pass<config.card.initial){const error=(rng()-.5)*(config.card.initial-p.card.pass)*config.roster.passSpread;if(!s.ball.flight)s.ball.vz+=error;}
     if(pass&&target&&target.role!=='keeper'&&p.team===0&&role!=='keeper')selectPlayer(target.id);
     p.cooldown=aiConfig.kickCooldown;p.kickTime=aiConfig.kickAnimationSeconds;p.hold=0;
   }
@@ -138,12 +140,12 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     return players.filter(q=>q.team===p.team&&q.id!==p.id&&q.role!=='keeper'&&q.x*d>hx-config.pitch.penaltyDepth-1.5&&Math.abs(q.z)<config.pitch.penaltyWidth/2+.5).sort((u,v)=>distance(u,p)-distance(v,p)||u.id-v.id)[0]||null;
   }
   function cross(p,mate){
-    const power=aiConfig.crossPower??.55,flight=config.passing.loftMinSeconds+power*config.passing.loftExtraSeconds,height=config.passing.loftMinHeight+power*config.passing.loftExtraHeight;
-    const d=direction(p.team),x=clamp(mate.x+(mate.vx||0)*flight*.5,d*(hx-config.pitch.penaltyDepth),d*(hx-1.2)),z=clamp(mate.z+(mate.vz||0)*flight*.5,-config.pitch.penaltyWidth/2+.5,config.pitch.penaltyWidth/2-.5);
-    const tx=d>0?Math.max(x,Math.min(x,hx)):x,dx=tx-s.ball.x,dz=z-s.ball.z,len=Math.hypot(dx,dz)||1;
+    const power=aiConfig.crossPower??.55,flight=config.passing.loftMinSeconds+power*config.passing.loftExtraSeconds;
+    const d=direction(p.team),x=d*clamp((mate.x+(mate.vx||0)*flight*.5)*d,hx-config.pitch.penaltyDepth,hx-1.2);
+    const point=safeLoftPoint({x,z:clamp(mate.z+(mate.vz||0)*flight*.5,-config.pitch.penaltyWidth/2+.5,config.pitch.penaltyWidth/2-.5)},config),tx=point.x,z=point.z,dx=tx-s.ball.x,dz=z-s.ball.z,len=Math.hypot(dx,dz)||1;
     if(p.team===1)rivalPasses++;
     p.fx=dx/len;p.fz=dz/len;p.hold=0;p.cooldown=aiConfig.kickCooldown;p.kickTime=aiConfig.kickAnimationSeconds;s.actionAim={x:p.fx,z:p.fz};
-    Object.assign(s.ball,{owner:null,thrower:null,shot:null,curve:0,lastTeam:p.team,lastPlayer:p.id,grace:ph.possessionGrace,flight:{age:0,duration:flight,height,fromX:s.ball.x,fromZ:s.ball.z,x:tx,z},vx:dx/flight,vz:dz/flight,vy:4*height/flight});
+    Object.assign(s.ball,{owner:null,thrower:null,shot:null,curve:0,lastTeam:p.team,lastPlayer:p.id,grace:ph.possessionGrace},createLoftFlight(s.ball,point,config,power));
     s.passTarget={player:mate.id,x:tx,z,startX:s.ball.x,startZ:s.ball.z,distance:len,time:config.passing.runSeconds,kind:'loft'};
     event('loft',{team:p.team,player:p.id,target:mate.id,x:tx,z,distance:len,power});
   }
@@ -388,6 +390,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if(b.owner!==null){const p=players[b.owner];if(p.hands){b.x=p.x+p.fx*config.goalkeeping.holdForward;b.z=p.z+p.fz*config.goalkeeping.holdForward;b.y=config.goalkeeping.holdHeight;b.vx=p.vx;b.vz=p.vz;b.vy=0;if(!inPenaltyArea(p,p,s,config)||!inPenaltyArea(p,b,s,config)){p.hands=false;b.y=ph.ballRadius;}}
       else {Object.assign(b,followDribbleBall(p,b,dt,config));if(b.owner===null){b.lastTeam=p.team;b.lastPlayer=p.id;b.grace=.12;event('heavy-touch',{player:p.id,team:p.team});}}
     }
+    else if(b.flight?.kind==='physical-loft')stepLoftBall(b,dt,config);
     else if(b.flight){const f=b.flight;f.age=Math.min(f.duration,f.age+dt);const u=f.age/f.duration;b.x=f.fromX+(f.x-f.fromX)*u;b.z=f.fromZ+(f.z-f.fromZ)*u;b.y=ph.ballRadius+4*f.height*u*(1-u);b.vy=4*f.height/f.duration*(1-2*u);if(u>=1){b.flight=null;b.vx*=config.ball.landingCarry;b.vz*=config.ball.landingCarry;b.vy=Math.abs(b.vy)*config.ball.bounce;}}
     else {
       rollBall(b,dt,config);

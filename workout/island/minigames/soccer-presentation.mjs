@@ -1,4 +1,5 @@
 import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-ski-20261031-1';
+import {createLoftFlight} from './soccer-loft.mjs';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Pure presentation decisions; the simulation never imports this module. */
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
@@ -24,12 +25,12 @@ export function soccerShotIcon(state,config){
  if(state.role==='keeper'&&state.ball.owner!==state.controlled)return 'slide';
  return canHead(state.players[state.controlled],state.ball,config)?'header':state.mode==='defense'?'slide':'shoot';
 }
-/** Preview and flight share the exact same endpoint, height and parabola. */
+/** Preview and flight share the same physical launch, endpoint and peak. */
 export function crossArc(state,config){
  if(state.ball.flight)return state.ball.flight;
  if(!state.charging||state.chargeKind!=='pass'||state.charge<config.passing.loftThresholdSeconds)return null;
  const power=state.charge/config.passing.chargeSeconds,destination=passDestination({...state,aim:soccerPassAim(state)},config,power);
- return {fromX:state.ball.x,fromZ:state.ball.z,x:destination.x,z:destination.z,height:config.passing.loftMinHeight+power*config.passing.loftExtraHeight};
+ return createLoftFlight(state.ball,destination,config,power).flight;
 }
 /** Analytic perspective projection matching the side camera, useful without WebGL. */
 export function projectSoccerPoint(point,camera,aspect,config){
