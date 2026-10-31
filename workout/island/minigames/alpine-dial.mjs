@@ -9,9 +9,9 @@ const arc = (from, to, r) => { const [x1, y1] = point(from, r), [x2, y2] = point
 export function create(host, {maxKmh = 120, unit = 'קמ״ש', label = 'מהירות'} = {}) {
   const doc = host.ownerDocument, max = Math.max(20, Math.ceil(maxKmh / 20) * 20);
   const el = (tag, attrs = {}) => { const n = doc.createElementNS(NS, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); return n; };
-  const root = doc.createElement('section'); root.className = 'alpine-dial ih-panel'; root.setAttribute('role', 'meter');
-  root.setAttribute('aria-label', label); root.setAttribute('aria-valuemin', '0'); root.setAttribute('aria-valuemax', String(max)); root.setAttribute('aria-valuenow', '0');
-  const svg = el('svg', {viewBox: '0 0 160 118', 'aria-hidden': 'true'});
+  // Same hooks as the HUD kit's speed meter (.ih-speed, [role=meter], .ih-speed-value) so tests and assistive tech see one meter.
+  const root = doc.createElement('section'); root.className = 'alpine-dial ih-speed ih-panel';
+  const svg = el('svg', {viewBox: '0 0 160 118', role: 'meter', 'aria-label': label, 'aria-valuemin': '0', 'aria-valuemax': String(max), 'aria-valuenow': '0'});
   svg.append(el('path', {d: arc(START, START + SWEEP, R), class: 'alpine-dial-track', fill: 'none'}));
   svg.append(el('path', {d: arc(START + SWEEP * .82, START + SWEEP, R), class: 'alpine-dial-red', fill: 'none'}));
   const fill = el('path', {d: arc(START, START + SWEEP, R), class: 'alpine-dial-fill', fill: 'none', pathLength: '100'});
@@ -24,7 +24,7 @@ export function create(host, {maxKmh = 120, unit = 'קמ״ש', label = 'מהיר
   const needle = el('g', {class: 'alpine-dial-needle'});
   needle.append(el('path', {d: `M${CX - 8} ${CY - 2}L${CX + R - 8} ${CY}L${CX - 8} ${CY + 2}Z`, class: 'alpine-dial-hand'}), el('circle', {cx: CX, cy: CY, r: 5, class: 'alpine-dial-hub'}));
   needle.style.transformOrigin = `${CX}px ${CY}px`; needle.style.transform = `rotate(${START}deg)`; svg.append(needle);
-  const value = el('text', {x: CX, y: CY + 28, class: 'alpine-dial-value', 'text-anchor': 'middle'}); value.textContent = '0';
+  const value = el('text', {x: CX, y: CY + 28, class: 'alpine-dial-value ih-speed-value', 'text-anchor': 'middle'}); value.textContent = '0';
   const unitText = el('text', {x: CX, y: CY + 41, class: 'alpine-dial-unit', 'text-anchor': 'middle'}); unitText.textContent = unit;
   svg.append(value, unitText); root.append(svg); host.append(root);
   let previous = -1, dead = false;
@@ -36,7 +36,7 @@ export function create(host, {maxKmh = 120, unit = 'קמ״ש', label = 'מהיר
       const fraction = speed / max;
       needle.style.transform = `rotate(${START + SWEEP * fraction}deg)`;
       fill.style.strokeDashoffset = String(100 - fraction * 100);
-      value.textContent = String(speed); root.setAttribute('aria-valuenow', String(speed));
+      value.textContent = String(speed); svg.setAttribute('aria-valuenow', String(speed));
     },
     destroy() { if (dead) return; dead = true; root.remove(); }
   };

@@ -100,7 +100,8 @@ export function createAlpineMotionPlayer(baked, bones) {
     const knee = .16 + .3 * sp + .12 * a + .42 * b;       // thigh forward / shin back, rad
     const bump = (Math.sin(t * 5.2) * .035 * sp + Math.sin(t * 8.7 + 1.3) * .02 * sp) * (1 - .6 * b); // terrain absorption
     const swing = Math.sin(t * (2.2 + 1.8 * sp)) * (.16 + .1 * sp) * (1 - b);        // pole swing stops in the tuck
-    return {crouch, knee, bump, swing, lean, a, b};
+    const hipsPitch = crouch * .35 + bump * .5, torso = hipsPitch + crouch * (.4 + .3); // forward pitch of the pelvis and of the chest, rad
+    return {crouch, knee, bump, swing, lean, a, b, hipsPitch, torso};
   }
   function applyRide() {
     if (ride.w < .01 || !frameBone?.parent) return;
@@ -112,9 +113,9 @@ export function createAlpineMotionPlayer(baked, bones) {
       Chest: [k.crouch * .3, k.lean * .18, k.lean * .22],
       Neck: [-k.crouch * (.3 + .35 * k.b), -k.lean * .22, -k.lean * .12],
       Head: [-k.crouch * .15, 0, -k.lean * .1],
-      LeftArm: [k.swing + .75 * k.b, 0, k.a * .1], RightArm: [-k.swing + .75 * k.b, 0, -k.a * .1],
+      LeftArm: [k.swing + k.b * (1.4 - k.torso), 0, k.a * .1], RightArm: [-k.swing + k.b * (1.4 - k.torso), 0, -k.a * .1],
       LeftForeArm: [-.25 - k.swing * .5 - .55 * k.b, 0, 0], RightForeArm: [-.25 + k.swing * .5 - .55 * k.b, 0, 0],
-      LeftUpLeg: [-(k.knee + k.bump) - (k.lean > 0 ? k.a * .1 : -k.a * .08), 0, 0], RightUpLeg: [-(k.knee + k.bump) - (k.lean < 0 ? k.a * .1 : -k.a * .08), 0, 0],
+      LeftUpLeg: [-(k.knee + k.bump) - k.hipsPitch - (k.lean > 0 ? k.a * .1 : -k.a * .08), 0, 0], RightUpLeg: [-(k.knee + k.bump) - k.hipsPitch - (k.lean < 0 ? k.a * .1 : -k.a * .08), 0, 0],
       LeftLeg: [(k.knee + k.bump) * 2, 0, 0], RightLeg: [(k.knee + k.bump) * 2, 0, 0],
       LeftFoot: [-(k.knee + k.bump), 0, 0], RightFoot: [-(k.knee + k.bump), 0, 0]
     };
