@@ -129,7 +129,8 @@ export function runAlpineSession(ctx) {
   // Blinking arrow beside the boost button while the tank is full and the boost is ready to press.
   const boostArrow = el('span', 'alpine-boost-arrow'); boostArrow.setAttribute('aria-hidden', 'true'); boostArrow.hidden = true;
   boostArrow.append(svg('<path d="M4 6l8 6-8 6M12 6l8 6-8 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'));
-  actions.append(boostArrow);
+  const boostCaption = el('span', 'alpine-boost-caption', t('alpine.boostReady')); boostCaption.setAttribute('aria-hidden', 'true'); boostCaption.hidden = true;
+  actions.append(boostArrow, boostCaption);
   const trickCaption = el('span', 'alpine-trick-caption', t('alpine.tricks')); trickCaption.setAttribute('aria-hidden', 'true'); actions.append(trickCaption);
   const center = el('div', 'alpine-center'); center.append(speed, hint);
   footer.append(joystick, center, actions);
@@ -197,7 +198,8 @@ export function runAlpineSession(ctx) {
     const progressText = `${Math.min(100, snap.distanceM / snap.trackLength * 100).toFixed(1)}%`; if (progressText !== shownProgress) { shownProgress = progressText; progressFill.style.width = progressText; }
     const clock = formatRaceTime(snap.timeMs); if (clock !== shownTime) { shownTime = clock; timer.textContent = clock; }
     kitHud.update(snap);
-    boostArrow.hidden = !(snap.boostReady && snap.boostFraction >= .98 && !snap.player?.boosting);
+    const boostFull = !!(snap.boostReady && snap.boostFraction >= .98 && !snap.player?.boosting);
+    boostArrow.hidden = boostCaption.hidden = !boostFull; boostButton.dataset.full = String(boostFull);
     trickCaption.dataset.ready = String(!!snap.trickReady);
     boostButton.classList.toggle('active', !!snap.player.boosting); const boostReady = String(!!snap.boostReady); if (boostButton.dataset.ready !== boostReady) boostButton.dataset.ready = boostReady;
     const tank = (snap.boostFraction ?? 0).toFixed(3); if (tank !== shownTank) { shownTank = tank; boostButton.style.setProperty('--tank', tank); }

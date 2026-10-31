@@ -351,3 +351,16 @@ test('coins: collected once within reach and height, counted in the result and p
   const r=race(1,42);assert.equal(r.result.coins,r.engine.snapshot().coins);assert.equal(r.result.coins,new Set(r.events.filter(x=>x.type==='coin'&&x.riderId==='player').map(x=>x.objectId)).size);
   assert.equal(alpineReward(balance,1,6,true,7).money,7*C.value,'a loss still pays its coins');
 });
+
+test('rider contact is a small bump sideways with a slight slowdown, never a fall; one bump per pair per cooldown',()=>{
+  // The player starts on the line with rival-1 almost level with them and 0.6 m to the side.
+  const e=ruleEngine([],{grid:[{s:0,x:0},{s:0,x:.6},{s:-200,x:-4},{s:-205,x:-2},{s:-210,x:2},{s:-215,x:4}]});
+  const before=e.debug().map(d=>({x:d.x,speed:d.speed}));
+  const evs=run(e,.4);
+  const bumps=evs.filter(x=>x.type==='collision'&&x.objectType==='rider');
+  assert.equal(bumps.length,1,'one bump event for one contact');assert.equal(bumps[0].riderId,'player');
+  assert.equal(evs.filter(x=>x.type==='crash').length,0,'a bump is not a fall');
+  const after=e.debug();assert.ok(after[0].crashTime===undefined||after[0].hitTime<P.crashSeconds,'no crash timer');
+  assert.ok(Math.sign(after[0].x-after[1].x)!==0&&Math.abs(after[0].x-after[1].x)>Math.abs(before[0].x-before[1].x)+.2,'riders move apart');
+  const b2=run(e,P.bumpCooldown*.5).filter(x=>x.type==='collision'&&x.objectType==='rider');assert.equal(b2.length,0,'no second bump inside the cooldown');
+});

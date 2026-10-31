@@ -42,6 +42,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
   const course = courseOverride || generateCourse(track, physics);
   const objects = course.objects;
   let phase = 'menu', countdownShown = 0, resumePhase = null, accumulator = 0, ticks = 0, countdownTicks = 0, run = 0, disposed = false;
+  const bumpUntil = new Map();
   let riders = [], events = [], eventSeq = 0, result = null, steerInput = 0, boostRequest = false, trickRequest = null, order = [], previousPresentation = null;
   const aiRandom = { value: null };
 
@@ -64,7 +65,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     run++;
     aiRandom.value = courseRandom((Number(seed) >>> 0) ^ Math.imul(run, 0x9e3779b1));
     riders = RIDER_IDS.map(makeRider);
-    accumulator = 0; ticks = 0; countdownTicks = Math.round(physics.countdownSeconds / step);
+    bumpUntil.clear(); accumulator = 0; ticks = 0; countdownTicks = Math.round(physics.countdownSeconds / step);
     result = null; steerInput = 0; boostRequest = false; trickRequest = null; resumePhase = null;
     order = riders.map(r => r.id);
     previousPresentation = null;
@@ -361,6 +362,16 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
         const push = (sep - Math.abs(dx)) * 0.12, dir = dx === 0 ? (a.index < b.index ? -1 : 1) : Math.sign(dx);
         a.x = clamp(a.x + dir * push, -pipe.lip, pipe.lip);
         b.x = clamp(b.x - dir * push, -pipe.lip, pipe.lip);
+        // Two riders touching bump each other: a small jolt sideways and a slight slowdown (like clipping a gate post),
+        // never a fall. One bump per pair every bumpCooldown seconds; riders already down are not bumped.
+        const key = a.index * 16 + b.index;
+        if (a.crashTime <= 0 && b.crashTime <= 0 && (bumpUntil.get(key) ?? 0) <= ticks) {
+          bumpUntil.set(key, ticks + Math.round((physics.bumpCooldown ?? .6) / step));
+          const kick = physics.bumpImpulse ?? 2.4, loss = 1 - (physics.bumpSpeedLoss ?? .04);
+          a.vx += dir * kick; b.vx -= dir * kick; a.speed *= loss; b.speed *= loss;
+          a.hitTime = b.hitTime = Math.max(a.hitTime, physics.recoverySeconds * .7);
+          if (!a.ai || !b.ai) emit('collision', { riderId: a.ai ? b.id : a.id, objectId: a.ai ? a.id : b.id, objectType: 'rider', impactSide: a.ai ? -dir : dir, impactStrength: .35 });
+        }
       }
     }
   }

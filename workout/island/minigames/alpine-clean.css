@@ -72,3 +72,15 @@
 /* the dial's read-out must beat the kit's generic .ih-speed-value rules (these are SVG user units) */
 .game-screen[data-game=alpineRush] .alpine-kit-speed .alpine-dial .alpine-dial-value.ih-speed-value{font:800 27px system-ui,sans-serif;letter-spacing:0;color:inherit;display:inline;line-height:1}
 .game-screen[data-game=alpineRush] .alpine-kit-speed .ih-speed.alpine-dial{display:block;padding:4px 6px 2px}
+
+/* Boost ready: a bigger, brighter arrow with a caption and a glowing ring on the button, so nobody misses it */
+.game-screen[data-game=alpineRush] .alpine-boost-arrow{width:52px!important;height:48px!important;right:calc(var(--boost-size,86px) + 10px)!important;bottom:calc(var(--boost-size,86px) / 2 - 24px)!important;color:#ffc43a!important;filter:drop-shadow(0 0 6px #ff8a3d) drop-shadow(0 2px 3px #0b2f4b99)!important;animation-duration:.55s!important}
+.game-screen[data-game=alpineRush] .alpine-boost-arrow svg path{stroke-width:3.6}
+.game-screen[data-game=alpineRush] .alpine-boost-caption{position:absolute;right:calc(var(--boost-size,86px) - 4px);bottom:calc(var(--boost-size,86px) + 6px);font-size:12px;font-weight:800;color:#fff;background:#ff7a1a;border-radius:999px;padding:3px 11px;white-space:nowrap;pointer-events:none;box-shadow:0 2px 8px #0b2f4b55;animation:alpine-caption-pop .9s ease-in-out infinite}
+.game-screen[data-game=alpineRush] .alpine-boost[data-full=true]{animation:alpine-boost-ring .9s ease-in-out infinite}
+@keyframes alpine-caption-pop{50%{transform:scale(1.07)}}
+@keyframes alpine-boost-ring{0%,100%{box-shadow:0 0 0 0 #ffb02e99}50%{box-shadow:0 0 0 12px #ffb02e00,0 0 22px 4px #ffb02e}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=alpineRush] .alpine-boost-caption,.game-screen[data-game=alpineRush] .alpine-boost[data-full=true]{animation:none}}
+/* the arrow sits on top of the trick buttons; the caption rides above the whole cluster */
+.game-screen[data-game=alpineRush] .alpine-boost-arrow{z-index:6}
+.game-screen[data-game=alpineRush] .alpine-boost-caption{z-index:6;right:0!important;bottom:auto!important;top:-34px!important}
