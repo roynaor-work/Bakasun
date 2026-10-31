@@ -113,14 +113,16 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   const kidUrl=new URL('../assets/kid-full.glb',import.meta.url).href,athleteUrl=config.view.athlete&&config.view.athlete.enabled!==false?new URL(config.view.athlete.url,import.meta.url).href:null;let athleteMode=false;
   // Kickoff waits for the turf maps too: a texture arriving mid-match recompiled the pitch shader.
   let designCharacters=null;
-  const design=()=>loadDesignCharacters({config,roster,scene,track}).then(result=>({design:result}));
+  const design=()=>loadDesignCharacters({config,roster,scene,track,selectedKit}).then(result=>({design:result}));
   const fallback=()=>{athleteMode=false;return design().catch(()=>new GLTFLoader().loadAsync(kidUrl));};
-  const model=config.view.designCharacters?design():athleteUrl?new GLTFLoader().loadAsync(athleteUrl).then(data=>(athleteMode=true,data)).catch(fallback):fallback();
+  const athlete=()=>athleteUrl?new GLTFLoader().loadAsync(athleteUrl).then(data=>(athleteMode=true,data)):new GLTFLoader().loadAsync(kidUrl);
+  const model=config.view.designCharacters===false?athlete().catch(fallback):design().catch(()=>athlete().catch(()=>new GLTFLoader().loadAsync(kidUrl)));
   const ready=Promise.all([model,stadium.ready.catch(()=>null),designScene?.ready,designVfx.ready,replay.ready]).then(([data])=>{
     if(data.design){
       designCharacters=data.design;
       if(disposed){designCharacters.dispose();return;}
       characters.push(...designCharacters.characters);assetStats=designCharacters.metrics;
+      if(quality>=config.view.athlete.lodFromQuality)for(const c of characters)assetStats.lod=c.setLod(1);
       warm();assetStatus='ready';onAsset('ready');return;
     }
     if(disposed){disposeObject(data.scene);return;}
@@ -215,7 +217,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   function qualitySample(frameMs) {if(qualityMonitor.sample(frameMs)&&quality<3)lowerQuality();}
   function lowerQuality(){
     // Realistic athletes switch to their economy mesh from tier 2; the illustrated fallback keeps one mesh.
-    if(quality+1>=config.view.athlete.lodFromQuality)for(const c of characters)if(c.athlete&&assetStats)assetStats.lod=c.setLod(1);
+    if(quality+1>=config.view.athlete.lodFromQuality)for(const c of characters)if(c.setLod&&assetStats)assetStats.lod=c.setLod(1);
     if(quality>=3)return;quality++;qualityMonitor.reset();lighting.setQuality(quality);stadium.setQuality(quality);renderer.setPixelRatio(quality===1?1:config.view.lowPixelRatio);crowd.count=Math.floor(count/config.view.crowd.lowDivisor**Math.min(quality,2));resize();
   }
   function render(s,dt=0,frameMs=0) {

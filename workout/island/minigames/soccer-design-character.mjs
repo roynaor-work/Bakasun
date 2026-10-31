@@ -1,12 +1,40 @@
 import * as T from '../vendor/three.module.js';
 import {cloneSoccerRig} from './soccer-rig.mjs';
 import {createSoccerDesignLoader} from './soccer-design-loader.mjs';
+import {soccerMetreScale,createSoccerCharacterLod} from './soccer-scale.mjs';
+import {regionForTriangle} from '../design/variants/apply-variant.js';
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrap=v=>Math.atan2(Math.sin(v),Math.cos(v));
 const Q=a=>new T.Quaternion().fromArray(a).normalize();
 const asset=path=>new URL(`../design/${path}`,import.meta.url).href;
 const json=async path=>{const response=await fetch(asset(path));if(!response.ok)throw Error(`Soccer asset ${path}: ${response.status}`);return response.json();};
+const regions=['preserve','skin','hair','shirt','shorts','socks','shoes','soles','gloves','accent','equipment','helmet'];
+
+function assignRegions(geometry,spec,map){
+  const p=geometry.attributes.position,c=geometry.attributes.color,index=geometry.index,labels=new Uint8Array(p.count);
+  for(let first=0;first<(index?.count||p.count);first+=3){
+    const face=[0,1,2].map(k=>index?index.getX(first+k):first+k),centroid=[0,0,0];
+    for(const vertex of face){centroid[0]+=p.getX(vertex)/3;centroid[1]+=p.getY(vertex)/3;centroid[2]+=p.getZ(vertex)/3;}
+    const vertex=face[0],region=regionForTriangle([c.getX(vertex),c.getY(vertex),c.getZ(vertex)],centroid,spec,map.maxColorError),label=regions.indexOf(region);
+    if(label<0)throw Error(`Unknown soccer character region ${region}`);
+    for(const vertex of face)labels[vertex]=label;
+  }
+  geometry.setAttribute('soccerRegion',new T.BufferAttribute(labels,1));
+}
+
+function characterGeometry(source,palette){
+  // Share positions, indices, normals and skin buffers between actors. Only
+  // vertex colours vary; all actors still own independent skeleton matrices.
+  const geometry=new T.BufferGeometry();geometry.setIndex(source.index);
+  for(const [name,attribute]of Object.entries(source.attributes))geometry.setAttribute(name,name==='color'?attribute.clone():attribute);
+  const colors=geometry.attributes.color,labels=geometry.attributes.soccerRegion;
+  for(let vertex=0;vertex<colors.count;vertex++){
+    const tint=palette[regions[labels.getX(vertex)]];if(tint)colors.setXYZ(vertex,tint.r,tint.g,tint.b);
+  }
+  geometry.boundingBox=source.boundingBox?.clone()||null;geometry.boundingSphere=source.boundingSphere?.clone()||null;
+  return geometry;
+}
 
 function validateBind(source,rig) {
   const meshes=[];source.traverse(o=>{if(o.isSkinnedMesh)meshes.push(o);});
@@ -142,7 +170,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
 
 /** Optional authored GLB path for comparison/fallback. The realistic athlete
  * remains the game's default; no textures or decoding are added to that path. */
-export async function loadDesignCharacters({config,roster,scene,track=x=>x}) {
+export async function loadDesignCharacters({config,roster,scene,track=x=>x,selectedKit=null}) {
   const loader=createSoccerDesignLoader(),resources=new Set(),characters=[];
   const own=value=>(resources.add(value),track(value),value);
   let disposed=false;
@@ -151,38 +179,50 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x}) {
     for(const r of resources)r.dispose?.();resources.clear();loader.dispose();
   };
   try {
-    const [player,keeper,rig,map,data]=await Promise.all([
-      loader.loadAsync(asset('characters/soccer-player.glb')),loader.loadAsync(asset('characters/goalkeeper.glb')),
-      json('characters/rig.json'),json('viewer/retarget-map.json'),json('motion/soccer.json'),
+    const [player,keeper,rig,map,data,regionMap]=await Promise.all([
+      loader.loadAsync(asset('characters2/soccer-player.glb')),loader.loadAsync(asset('characters2/goalkeeper.glb')),
+      json('characters/rig.json'),json('viewer/retarget-map.json'),json('motion/soccer.json'),json('characters2/regions.json'),
     ]);
     const compiled=compileSoccerDesignClips(data,rig,map),sources=[player.scene,keeper.scene];
     for(const source of sources)validateBind(source,rig);
     const clipSets=sources.map(source=>bakeSoccerDesignFloor(source,compiled));
     const height=config.view.animation.characterHeight||1.8;
-    const sourceHeights=sources.map(source=>{const bounds=new T.Box3().setFromObject(source);return bounds.max.y-bounds.min.y;});
+    const sourceHeights=sources.map(source=>{
+      source.updateMatrixWorld(true);source.traverse(o=>{if(o.isSkinnedMesh){o.skeleton.update();o.computeBoundingBox();}});
+      const bounds=new T.Box3().setFromObject(source);return bounds.max.y-bounds.min.y;
+    });
+    const lodGeometry=new Map();
+    sources.forEach((source,sourceIndex)=>source.traverse(o=>{
+      if(!o.isMesh)return;
+      const spec=regionMap.models[sourceIndex?'goalkeeper':'soccer-player'];assignRegions(o.geometry,spec,regionMap);
+      // 40 cells along the source body retain silhouette and source colour/skin
+      // boundaries. Full v2 remains available for close/high-quality comparison.
+      lodGeometry.set(o.geometry,own(createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/40)));
+    }));
     for(const source of sources)source.traverse(o=>{if(o.isMesh){own(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material])own(m);}});
-    let triangles=0;
+    let triangles=0,lowTriangles=0;
     for(let id=0;id<roster.length;id++) {
       const slot=roster[id],isKeeper=slot.role==='keeper',index=isKeeper?1:0,source=sources[index],root=cloneSoccerRig(source),pivot=new T.Group();
-      root.scale.setScalar(height/sourceHeights[index]);pivot.add(root);scene.add(pivot);
+      root.scale.setScalar(soccerMetreScale(sourceHeights[index],height));pivot.add(root);scene.add(pivot);
       const team=slot.team===0?config.team:config.opponent;
-      const tint=new T.Color(isKeeper?(config.view.athlete?.keeperColors?.[slot.team]||(slot.team===0?'#dfbb48':'#339d91')):team.colors[0]);
-      root.traverse(o=>{
-        if(!o.isMesh)return;
-        const geometry=own(o.geometry.clone()),colors=geometry.attributes.color;
-        if(colors)for(let i=0;i<colors.count;i++) {
-          const r=colors.getX(i),g=colors.getY(i),b=colors.getZ(i);
-          const jersey=isKeeper?r>.25&&g>r*.65&&b<g*.55:g>r*1.3&&g>b*1.08;
-          if(jersey){const shade=.65+.35*Math.max(r,g,b);colors.setXYZ(i,tint.r*shade,tint.g*shade,tint.b*shade);}
-        }
+      const appearance=config.view.appearance||{},pick=(name,fallback)=>appearance[name]?.[id%(appearance[name]?.length||1)]||fallback;
+      const kit=slot.team===0&&!isKeeper?selectedKit:null;
+      const palette=Object.fromEntries(Object.entries({skin:pick('skin','#bf8054'),hair:pick('hair','#263443'),shirt:isKeeper?(config.view.athlete?.keeperColors?.[slot.team]||(slot.team===0?'#dfbb48':'#339d91')):(kit?.primary||team.colors[0]),shorts:kit?.shorts||team.colors[1],socks:kit?.socks||pick('socks','#f2f4ee')}).map(([name,hex])=>[name,new T.Color(hex)]));
+      const fullMeshes=[],lowMeshes=[];root.traverse(o=>{if(o.isMesh)fullMeshes.push(o);});
+      for(const o of fullMeshes){
+        const originalGeometry=o.geometry,geometry=own(characterGeometry(originalGeometry,palette));
         const original=Array.isArray(o.material)?o.material[0]:o.material;
         o.geometry=geometry;o.material=own(original.clone());o.material.vertexColors=true;o.material.roughness=.88;o.material.metalness=0;
         o.frustumCulled=false;o.castShadow=o.receiveShadow=true;
         triangles+=(geometry.index?.count||geometry.attributes.position.count)/3;
-      });
+        const low=o.clone(false);low.name=o.name+'LOD1';low.geometry=own(characterGeometry(lodGeometry.get(originalGeometry),palette));low.visible=false;o.parent.add(low);lowMeshes.push(low);
+        lowTriangles+=(low.geometry.index?.count||low.geometry.attributes.position.count)/3;
+      }
       const mixer=new T.AnimationMixer(root),motion=createSoccerDesignMotion(mixer,clipSets[index],data,config);
       let characterDisposed=false;
-      const character={design:true,root,pivot,mixer,motion,team:slot.team,keeper:isKeeper,active:data.initialState,mode:'idle',yaw:null,
+      let lod=0;
+      const character={design:true,root,pivot,mixer,motion,team:slot.team,keeper:isKeeper,active:data.initialState,mode:'idle',yaw:null,restartContactMap:map,
+        setLod(level){lod=level>0?1:0;fullMeshes.forEach(o=>o.visible=lod===0);lowMeshes.forEach(o=>o.visible=lod===1);return lod;},
         update(p,s,animation,dt){
           if(characterDisposed)return;
           const wanted=Math.atan2(p.fx,p.fz);
@@ -190,12 +230,12 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x}) {
           pivot.position.set(p.x,Math.max(0,animation.height||0),p.z);pivot.rotation.set(0,this.yaw,0);
           this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
         },
-        metrics:()=>({kind:'design-glb',state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper}),
+        metrics:()=>({kind:'design-glb-v2',state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod,heightMetres:height}),
         dispose(){if(characterDisposed)return;characterDisposed=true;mixer.stopAllAction();mixer.uncacheRoot(root);root.traverse(o=>o.skeleton?.dispose());pivot.removeFromParent();},
       };
       mixer.update(0);characters.push(character);
     }
     loader.dispose();
-    return {characters,metrics:{kind:'design-glb',triangles:triangles/roster.length,eightCharacterTriangles:triangles,meshes:1,independentSkeletons:true,clips:compiled.map(c=>c.name),retarget:'calibrated-world-basis',floor:'baked-at-load',referenceRootMotion:false},dispose};
+    return {characters,metrics:{kind:'design-glb-v2',source:'design/characters2',triangles:triangles/roster.length,eightCharacterTriangles:triangles,economyCharacterTriangles:lowTriangles/roster.length,meshes:1,lod:0,lodCount:2,independentSkeletons:true,clips:compiled.map(c=>c.name),retarget:'calibrated-world-basis',floor:'baked-at-load',referenceRootMotion:false,heightMetres:height},dispose};
   }catch(error){dispose();throw error;}
 }

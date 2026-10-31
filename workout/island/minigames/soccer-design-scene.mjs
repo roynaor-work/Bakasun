@@ -1,7 +1,8 @@
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
+import {normalizeSoccerBallGeometry,soccerPitchUv} from './soccer-scale.mjs';
 
-const modelUrl=name=>new URL('../design/models/'+name+'.glb',import.meta.url).href;
+const modelUrl=name=>new URL('../design/'+(name==='soccer-stadium'?'models2/':'models/')+name+'.glb',import.meta.url).href;
 const environmentUrl=name=>new URL('../design/environment/'+name,import.meta.url).href;
 
 /** Presentation-only asset transaction. The caller keeps its fallback scenery
@@ -108,9 +109,9 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     const sx=config.pitch.length/105,sz=config.pitch.width/68,sy=Math.min(sx,sz);
     const stadiumTransform=new T.Matrix4().makeScale(sx,sy,sz).multiply(new T.Matrix4().makeRotationY(Math.PI/2));
     const get=name=>stadiumSource.getObjectByName(name);
-    sightlineMesh(merged(['aisles','beams','floodlights'].map(get),stadiumTransform),palette);
-    sightlineMesh(projectedUv(merged([get('stand_shell')],stadiumTransform),3),concreteMaterial);
-    sightlineMesh(projectedUv(merged([get('seating')],stadiumTransform),10),crowdMaterial);
+    sightlineMesh(merged(['aisles','beams','floodlights','upper_aisles','substitute_benches','advertising_boards','corner_flags'].map(get),stadiumTransform),palette);
+    sightlineMesh(projectedUv(merged(['stand_shell','upper_stands'].map(get),stadiumTransform),3),concreteMaterial);
+    sightlineMesh(projectedUv(merged(['seating','upper_seats'].map(get),stadiumTransform),10),crowdMaterial);
     sightlineMesh(merged([get('roof')],stadiumTransform),palette);
     const pitchMaterial=track(new T.MeshStandardMaterial({color:'#a0b3a0',map:grass,roughness:.96,metalness:0}));
     // The 512px full-field tile has coarse high-contrast grass flecks. Bias
@@ -124,6 +125,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     // Use the imported texture-ready pitch, lowering its surface to y=0 so the
     // existing .018m lines and every contact shadow retain their depth order.
     const pitchGeometry=merged([get('pitch_surface')],stadiumTransform);pitchGeometry.translate(0,-.04*sy,0);
+    soccerPitchUv(pitchGeometry,config.pitch.length,config.pitch.width);
     mesh(pitchGeometry,pitchMaterial);
     skyMaterial=track(new T.MeshBasicMaterial({map:skyLandscape,depthTest:false,depthWrite:false,fog:false,toneMapped:false}));
     skyMaterial.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <project_vertex>','gl_Position=vec4(transformed.xy,.9999,1.);');};
@@ -142,7 +144,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     // Asset diameter .22m, anchor_ball_center (0,.11,0). BallRoot already
     // supplies simulation position and spin; imported ground offset is removed.
     const ballGeometry=merged([ballSource.getObjectByName('soccer_ball')],new T.Matrix4());
-    ballGeometry.translate(0,-.11,0);ballGeometry.scale(config.physics.ballRadius/.11,config.physics.ballRadius/.11,config.physics.ballRadius/.11);
+    normalizeSoccerBallGeometry(ballGeometry,config.physics.ballRadius);
     const ballMaterial=track(new T.MeshStandardMaterial({vertexColors:true,roughness:.72,metalness:0}));
     mesh(ballGeometry,ballMaterial,ball).castShadow=true;
     loadedModels.forEach(releaseSource);loadedModels.length=0;loadedTextures.length=0;
@@ -162,7 +164,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   });
   return {
     ready,root,ball,
-    metrics:()=>({status,models:status==='ready'?3:0,textures:textureCount,
+    metrics:()=>({status,source:'design/models2/soccer-stadium',ballDiameterMetres:config.physics.ballRadius*2,models:status==='ready'?3:0,textures:textureCount,
       triangles:status==='ready'?meshes.reduce((sum,mesh)=>sum+(mesh.visible?(mesh.geometry.index?.count||mesh.geometry.attributes.position.count)/3:0),0):0,
       drawCalls:status==='ready'?meshes.filter(mesh=>mesh.visible).length:0,residentTriangles}),
     update(direction,width=lastWidth,height=lastHeight){
