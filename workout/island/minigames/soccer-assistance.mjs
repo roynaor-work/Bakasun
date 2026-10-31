@@ -50,7 +50,20 @@ export function assistedPassDestination(state,c,power=0){
       // the raw pass, without assigning an unrelated teammate to run after it.
       const miss=d*Math.abs(Math.sin(angle-turn));
       if(miss>receiverZone)continue;
-      const score=Math.abs(angle)*4+Math.abs(d-requestedRange)*0.06+d*0.005;
+      // Prefer an open nearby corridor over a similarly aimed marked receiver.
+      // Prediction reads the defender's observed motion, never their controls;
+      // the correction cone and the manual ray remain exactly the same.
+      let blocked=0;
+      const travel=Math.max(.1,finite(passing.groundTravelSeconds,.55));
+      for(const defender of state.players){
+        if(defender.team===p.team||defender.recover>0)continue;
+        const rx=defender.x-b.x,rz=defender.z-b.z;
+        const vx=finite(defender.vx)-(x-b.x)/travel,vz=finite(defender.vz)-(z-b.z)/travel,v2=vx*vx+vz*vz;
+        const at=v2>1e-10?clamp(-(rx*vx+rz*vz)/v2,0,travel):0;
+        const clearance=Math.hypot(rx+vx*at,rz+vz*at);
+        blocked=Math.max(blocked,Math.max(0,1-clearance/(c.players.radius+c.physics.ballRadius+.2)));
+      }
+      const score=Math.abs(angle)*4+Math.abs(d-requestedRange)*0.06+d*0.005+blocked*2.6;
       if(score<best-1e-10||Math.abs(score-best)<=1e-10&&(target===null||member.id<target)){
         best=score;direction=corrected;range=d;target=member.id;correction=turn;
       }
@@ -83,29 +96,55 @@ export function assistedPassDestination(state,c,power=0){
  * never acquires possession here; normal local contact must still occur. */
 export function selectControlledPlayer(state,c,{moveX=0,moveZ=0,manual=false}={}){
   const players=state.players,b=state.ball,current=players.find(p=>p.id===state.controlled),team=current?.team??0;
-  const candidates=players.filter(p=>p.team===team&&p.role!=='keeper'&&finite(p.recover)<=0&&finite(p.slideTime)<=0&&(!manual||p.id!==state.controlled));
-  if(!candidates.length)return current?.id??null;
+  const eligible=p=>p.team===team&&p.role!=='keeper'&&finite(p.recover)<=0&&finite(p.slideTime)<=0&&(!manual||p.id!==state.controlled);
   const owner=b.owner==null?null:players.find(p=>p.id===b.owner);
-  if(!manual&&(owner?.team===team||state.passTarget?.player===current?.id||state.switchCooldown>0))return current?.id??candidates[0].id;
+  if(!manual&&current&&(owner?.team===team||state.passTarget?.player===current.id||state.switchCooldown>0))return current.id;
   const horizon=clamp(setting(c,'selection','predictionSeconds',0.38),0,0.8);
-  const projected={x:clamp(b.x+finite(b.vx)*horizon,-c.pitch.length/2,c.pitch.length/2),z:clamp(b.z+finite(b.vz)*horizon,-c.pitch.width/2,c.pitch.width/2)};
+  const lookahead=Math.min(.8,horizon*2),hx=c.pitch.length/2,hz=c.pitch.width/2;
   const intentLength=Math.hypot(finite(moveX),finite(moveZ)),intent=unit(finite(moveX),finite(moveZ));
   const intentWeight=Math.max(0,setting(c,'selection','intentWeight',0.42));
   const minimumGain=Math.max(0,setting(c,'selection','minimumGainSeconds',0.16));
   const score=p=>{
     const speed=Math.max(1,finite(c.players.speed,5.3)+(finite(p.speed,1)-1)*finite(c.players.speedPerRank));
-    const intercept=distance(p,projected)/speed;
-    const toward=unit(projected.x-p.x,projected.z-p.z);
+    let intercept=Infinity,meetingX=b.x,meetingZ=b.z;
+    // Compare reachable meetings along the path, rather than only distance to
+    // one future point. This keeps a nearby player on an incoming ball and
+    // selects the runner ahead of an outgoing pass before it goes past them.
+    for(let sample=0;sample<=6;sample++){
+      const at=lookahead*sample/6,flight=b.flight;
+      let x,z,y;
+      if(flight&&flight.duration>0){
+        const u=clamp((finite(flight.age)+at)/flight.duration,0,1);
+        x=flight.fromX+(flight.x-flight.fromX)*u;z=flight.fromZ+(flight.z-flight.fromZ)*u;
+        y=c.physics.ballRadius+4*flight.height*u*(1-u);
+      }else{
+        const drag=b.y<=c.rules.pickupHeight?finite(c.ball?.grassFriction):finite(c.ball?.airDrag);
+        const travel=drag>1e-8?(1-Math.exp(-drag*at))/drag:at;
+        x=b.x+finite(b.vx)*travel;z=b.z+finite(b.vz)*travel;
+        y=Math.max(c.physics.ballRadius,finite(b.y)+finite(b.vy)*at-.5*finite(c.ball?.gravity,c.physics.gravity)*at*at);
+      }
+      x=clamp(x,-hx,hx);z=clamp(z,-hz,hz);
+      const range=Math.hypot(x-p.x,z-p.z),arrival=Math.max(0,range-c.physics.pickupRadius)/speed;
+      // High flight cannot be received by a foot, but the future landing can.
+      const heightDelay=y>c.aerial.maxHeight ? .35 : 0;
+      // A player cannot arrive late at an earlier point after the ball has
+      // already left it. Penalise that miss before comparing valid meetings.
+      const meeting=at+Math.max(0,arrival-at)*3+heightDelay;
+      if(meeting<intercept){intercept=meeting;meetingX=x;meetingZ=z;}
+    }
+    const toward=unit(meetingX-p.x,meetingZ-p.z);
     const momentum=(finite(p.vx)*toward.x+finite(p.vz)*toward.z)/speed;
     const direction=unit(p.x-(current?.x??b.x),p.z-(current?.z??b.z));
     const intentBias=intentLength>0.2?Math.max(0,intent.x*direction.x+intent.z*direction.z)*intentWeight:0;
     return intercept-Math.max(-0.2,Math.min(0.2,momentum*0.12))-intentBias;
   };
   let best=null,bestScore=Infinity;
-  for(const p of candidates){const s=score(p);if(s<bestScore-1e-10||Math.abs(s-bestScore)<=1e-10&&(best===null||p.id<best.id)){best=p;bestScore=s;}}
+  let currentScore=Infinity;
+  for(const p of players){if(!eligible(p))continue;const s=score(p);if(p===current)currentScore=s;if(s<bestScore-1e-10||Math.abs(s-bestScore)<=1e-10&&(best===null||p.id<best.id)){best=p;bestScore=s;}}
+  if(!best)return current?.id??null;
   // Retain control through small changes in relative distance. The caller may
   // additionally require a stable candidate for autoSwitchSeconds.
-  return !manual&&current&&candidates.some(p=>p.id===current.id)&&score(current)-bestScore<minimumGain?current.id:best.id;
+  return !manual&&current&&currentScore-bestScore<minimumGain?current.id:best.id;
 }
 
 /** Buffers wait for this real local window; prediction never expands reach. */
@@ -143,7 +182,12 @@ export function followDribbleBall(p,b,dt,c){
   const releaseDistance=clamp(setting(c,'dribble','releaseDistance',1.3),c.physics.pickupRadius,1.6);
   if(distance(p,b)>releaseDistance)return {...patch,owner:null};
   const step=Math.min(dt,0.05),facing=unit(finite(p.fx),finite(p.fz));
-  const target={x:p.x+facing.x*c.physics.dribbleOffset,z:p.z+facing.z*c.physics.dribbleOffset};
+  const running=Math.hypot(finite(p.vx),finite(p.vz))/Math.max(1,finite(c.players.speed,5.3));
+  // Walking keeps the close touch. At sprint speed the foot puts the ball a
+  // little farther ahead, inside the same heavy-touch release distance.
+  const alignment=running>.01?(finite(p.vx)*facing.x+finite(p.vz)*facing.z)/(running*Math.max(1,finite(c.players.speed,5.3))):1;
+  const lead=c.physics.dribbleOffset*(1+.32*clamp(running,0,1.45))*clamp(.78+.22*alignment,.58,1);
+  const target={x:p.x+facing.x*lead,z:p.z+facing.z*lead};
   const ex=target.x-b.x,ez=target.z-b.z,rate=Math.max(0,setting(c,'dribble','settleRate',17));
   const speedLimit=Math.max(0,setting(c,'dribble','maxCorrectionSpeed',7));
   let rx=ex*rate,rz=ez*rate,relative=Math.hypot(rx,rz);
