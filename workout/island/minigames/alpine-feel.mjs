@@ -14,27 +14,32 @@ export function createAlpineFeel(data,{maxSpeedKmh=120,reducedMotion=false}={}){
   const burst=value(lines.burst_ms,600)/1000,cooldown=value(lines.cooldown_ms,1200)/1000;
   const fovIn=value(data.speed.fov_in_ms,160)/1000,fovOut=value(data.speed.fov_out_ms,260)/1000;
   const cameraIn=value(data.easing.camera.ease_in.duration_ms,280)/1000,cameraOut=value(data.easing.camera.ease_out.duration_ms,420)/1000;
+  const cameraInPower=value(data.easing.camera.ease_in.power,1.6),cameraOutPower=value(data.easing.camera.ease_out.power,2);
   const landingDuration=value(data.events.perfect_landing.shake.decay_ms,120)/1000;
   const out={speedFraction:0,fovAdd:0,lineOpacity:0,lineVisible:false,lineTrigger:false,lineDuration:burst,lineFraction:value(lines.screen_fraction,.12),carve:0,lookAhead:10,bank:0,landingPulse:0,landings:0};
-  let time=0,gate=false,nextLine=0,lineUntil=-1,wasAir=false,wasLanding=false,lastS=null;
-  function reset(){time=0;gate=false;nextLine=0;lineUntil=-1;wasAir=wasLanding=false;lastS=null;out.fovAdd=out.carve=out.landingPulse=out.bank=out.landings=0;out.lineOpacity=0;out.lineVisible=out.lineTrigger=false;out.lookAhead=10;}
+  let time=0,gate=false,nextLine=0,lineUntil=-1,wasAir=false,wasLanding=false,lastS=null,carveFrom=0,carveSign=0,carveElapsed=0;
+  function reset(){time=0;gate=false;nextLine=0;lineUntil=-1;wasAir=wasLanding=false;lastS=null;carveFrom=carveSign=carveElapsed=0;out.fovAdd=out.carve=out.landingPulse=out.bank=out.landings=0;out.lineOpacity=0;out.lineVisible=out.lineTrigger=false;out.lookAhead=10;}
   function update(state,seconds){
     if(state.phase==='paused')return out;
     const p=state.player||{},dt=clamp(seconds,0,.1),racing=state.phase==='racing';
     if(lastS!==null&&(p.s??lastS)<lastS-2)reset();lastS=p.s??lastS;
-    time+=dt;const speed=out.speedFraction=clamp((state.speedKmh||0)/Math.max(1,maxSpeedKmh));
+    time+=dt;const speed=out.speedFraction=maxSpeedKmh>0?clamp((state.speedKmh||0)/maxSpeedKmh):0;
     let targetFov=0,opacity=0;
-    for(let i=1;i<knots.length;i++)if(speed<=knots[i].speed||i===knots.length-1){const a=knots[i-1],b=knots[i],w=clamp((speed-a.speed)/Math.max(.00001,b.speed-a.speed));targetFov=a.fov+(b.fov-a.fov)*w;opacity=a.opacity+(b.opacity-a.opacity)*w;break;}
+    for(let i=1;i<knots.length;i++)if(speed<=knots[i].speed||i===knots.length-1){const a=knots[i-1],b=knots[i];let w=clamp((speed-a.speed)/Math.max(.00001,b.speed-a.speed));w=w*w*(3-2*w);targetFov=a.fov+(b.fov-a.fov)*w;opacity=a.opacity+(b.opacity-a.opacity)*w;break;}
     if(!racing||reducedMotion)targetFov=0;
     const tau=targetFov>out.fovAdd?fovIn:fovOut;
-    out.fovAdd+=(targetFov-out.fovAdd)*(1-Math.exp(-dt/tau));
+    out.fovAdd+=(targetFov-out.fovAdd)*(1-Math.exp(-3*dt/tau));
     out.lineTrigger=false;
     if(speed>=on)gate=true;else if(speed<=off)gate=false;
     if(racing&&gate&&!reducedMotion&&time>=nextLine){out.lineTrigger=true;lineUntil=time+burst;nextLine=time+cooldown;}
     out.lineVisible=racing&&gate&&!reducedMotion&&time<lineUntil;
     out.lineOpacity=out.lineVisible?opacity:0;
     const carve=racing&&!p.airborne&&!p.crashed?clamp(p.lean,-1,1):0;
-    out.carve+=(carve-out.carve)*(1-Math.exp(-dt/(Math.abs(carve)>Math.abs(out.carve)?cameraIn:cameraOut)));
+    const sign=Math.abs(carve)<.02?0:Math.sign(carve);
+    if(sign!==carveSign){carveFrom=out.carve;carveSign=sign;carveElapsed=0;}
+    carveElapsed+=dt;const u=clamp(carveElapsed/(sign?cameraIn:cameraOut));
+    const weight=sign?Math.pow(u,cameraInPower):1-Math.pow(1-u,cameraOutPower);
+    out.carve=carveFrom+(carve-carveFrom)*weight;
     out.bank=reducedMotion?0:-out.carve*.04;
     out.lookAhead=10+12*speed;
     out.landingPulse=Math.max(0,out.landingPulse-dt/landingDuration);
