@@ -50,16 +50,39 @@ test('G3g sprint drains, refuses empty use, recovers slowly, and switching does 
  const value=s.sprint.value;g.update(dt,{switchPlayer:true,sprintHeld:true,moveX:1});assert.ok(s.sprint.value<=value+1e-6);assert.equal(s.sprint.active,false);
  advance(g,c.sprint.regenDelaySeconds/2);assert.equal(s.sprint.value,0);advance(g,2);assert.ok(s.sprint.value>0&&s.sprint.value<s.sprint.capacity);
 });
-for(const attackDir of [-1,1])test(`G3g keeper carries within the penalty area in both axes and releases after the hold limit, direction ${attackDir}`,()=>{
+for(const attackDir of [-1,1])test(`G3g keeper carries within the penalty area in both axes and releases by the hold limit, direction ${attackDir}`,()=>{
  const g=isolated('keeper',attackDir),s=g.getState(),p=s.players[2];Object.assign(p,{x:-attackDir*(c.pitch.length/2-2),z:0,hands:true});s.ball.owner=p.id;
+ const started=s.elapsed,events=[];const drain=()=>events.push(...g.drainEvents());
  const x=p.x;advance(g,1,{moveX:attackDir,moveZ:1});assert.ok(Math.abs(p.x-x)>.5&&p.z>.5);assert.equal(p.hands,true);
  assert.ok(inPenaltyArea(p,p,s,c)&&inPenaltyArea(p,s.ball,s,c));
  advance(g,c.goalkeeping.maxHoldSeconds-1.2,{moveX:attackDir,moveZ:1});assert.ok(inPenaltyArea(p,p,s,c)&&inPenaltyArea(p,s.ball,s,c));assert.ok(p.hands);
+ drain();assert.equal(events.some(e=>e.type==='pass'&&e.player===p.id),false,'the automatic preparation keeps the ball in the hands until contact');
+ assert.equal(p.restartMotion?.kind,'keeperThrow');assert.equal(s.ball.owner,p.id);
+ while(s.elapsed-started<c.goalkeeping.maxHoldSeconds-1e-8){
+  const before=p.restartMotion?.elapsed??0,contact=p.restartMotion?.contact??Infinity;
+  g.update(dt);drain();
+  if(before+dt<contact-1e-8){assert.ok(p.hands);assert.equal(s.ball.owner,p.id);assert.equal(events.some(e=>e.type==='pass'&&e.player===p.id),false);}
+ }
+ assert.equal(p.hands,false,'the authored contact must fit inside the original hold limit');assert.notEqual(s.ball.owner,p.id);
+ assert.equal(events.filter(e=>e.type==='pass'&&e.player===p.id).length,1);assert.ok(s.elapsed-started<=c.goalkeeping.maxHoldSeconds+1e-8);
  advance(g,.4);assert.equal(p.hands,false);assert.equal(s.ball.owner,null);
+ drain();assert.equal(events.filter(e=>e.type==='pass'&&e.player===p.id).length,1,'follow-through cannot release a second ball');
 });
 test('G3g keeper aimed throw leaves both hands and retains its height',()=>{
  const g=isolated('keeper'),s=g.getState(),p=s.players[2];Object.assign(p,{x:-16,z:0,hands:true});Object.assign(s.ball,{owner:2,x:-15.6,y:c.goalkeeping.holdHeight,z:0});
- g.update(dt,{passHeld:true,passAim:{x:1,z:0,manual:true}});g.update(dt,{passAim:{x:1,z:0,manual:true}});assert.equal(p.hands,false);assert.equal(s.ball.owner,null);assert.ok(s.ball.y>c.physics.ballRadius);assert.ok(p.throwTime>0);
+ const started=s.elapsed,events=[];const tick=input=>{g.update(dt,input);events.push(...g.drainEvents());};
+ tick({passHeld:true,passAim:{x:1,z:0,manual:true}});tick({passAim:{x:1,z:0,manual:true}});
+ assert.equal(p.restartMotion?.kind,'keeperThrow');assert.ok(p.hands);assert.equal(s.ball.owner,p.id);
+ assert.equal(events.filter(e=>e.type==='distribution-windup'&&e.player===p.id).length,1);assert.equal(events.some(e=>e.type==='pass'&&e.player===p.id),false);
+ while(p.hands&&s.elapsed-started<c.goalkeeping.maxHoldSeconds-1e-8){
+  const before=p.restartMotion.elapsed,contact=p.restartMotion.contact;
+  tick({passAim:{x:-1,z:0,manual:true}});
+  if(before+dt<contact-1e-8){assert.ok(p.hands);assert.equal(s.ball.owner,p.id);assert.equal(events.some(e=>e.type==='pass'&&e.player===p.id),false);}
+ }
+ assert.equal(p.hands,false);assert.equal(s.ball.owner,null);assert.ok(s.ball.y>c.physics.ballRadius);assert.ok(p.throwTime>0);
+ assert.ok(s.ball.vx>0,'the accepted manual aim stays locked during the windup');
+ assert.equal(events.filter(e=>e.type==='pass'&&e.player===p.id).length,1);assert.ok(s.elapsed-started<=c.goalkeeping.maxHoldSeconds+1e-8);
+ for(let i=0;i<4;i++)tick();assert.equal(events.filter(e=>e.type==='pass'&&e.player===p.id).length,1);
 });
 for(const seed of [1,9,41])test(`G3g every field player is active and teammates stay apart for 30 seconds, seed ${seed}`,t=>{
  const g=createSoccer({config:c,seed,difficulty:'normal'}),s=g.getState(),travel=s.players.map(()=>0),previous=s.players.map(p=>({...p})),overlaps=new Map();let playing=0,maxOverlap=0,width=0,samples=0;

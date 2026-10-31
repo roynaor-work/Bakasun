@@ -1,4 +1,4 @@
-import {DATA_VERSION} from '../release.mjs?v=island-perf-20261030-1';
+import {DATA_VERSION} from '../release.mjs?v=island-integration-20261030-1';
 /** Frames captured from the real game scenes. Replace the WebP files to
  * update the library after a game-art delivery; no UI changes are needed. */
 const ARTWORK=Object.freeze({

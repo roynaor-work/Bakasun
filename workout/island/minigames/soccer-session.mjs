@@ -1,14 +1,14 @@
 import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
-import {actionIcon} from './soccer-icons.mjs?v=island-perf-20261030-1';
-import {createSoccer} from './soccer.mjs?v=island-perf-20261030-1';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-perf-20261030-1';
-import {stageObjective} from './soccer-campaign.mjs?v=island-perf-20261030-1';
-import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-perf-20261030-1';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-perf-20261030-1';
-import {createSoccerView} from './soccer-view.mjs?v=island-perf-20261030-1';
-import {createControls} from './controls.mjs?v=island-perf-20261030-1';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-perf-20261030-1';
-import {gameContext} from './context.mjs?v=island-perf-20261030-1';
+import {actionIcon} from './soccer-icons.mjs?v=island-integration-20261030-1';
+import {createSoccer} from './soccer.mjs?v=island-integration-20261030-1';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-integration-20261030-1';
+import {stageObjective} from './soccer-campaign.mjs?v=island-integration-20261030-1';
+import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-integration-20261030-1';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-integration-20261030-1';
+import {createSoccerView} from './soccer-view.mjs?v=island-integration-20261030-1';
+import {createControls} from './controls.mjs?v=island-integration-20261030-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-integration-20261030-1';
+import {gameContext} from './context.mjs?v=island-integration-20261030-1';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -44,7 +44,17 @@ export function createSoccerButtonInput({buttons,enabled=()=>true,onGesture=()=>
 /** Visible names must follow actual model actions, including a keeper in possession. */
 export function soccerActionLabels(state,config){
   const icon=soccerShotIcon(state,config),diving=state.role==='keeper'&&state.ball.owner!==state.controlled;
-  return {icon,shot:diving?'soccer.keeperDive':icon==='header'?'soccer.header':state.mode==='defense'?'soccer.slide':'minigame.soccer.shoot',pass:state.mode==='defense'?'soccer.steal':'soccer.pass',switchable:state.role!=='keeper'};
+  const labels={icon,shot:diving?'soccer.keeperDive':icon==='header'?'soccer.header':state.mode==='defense'?'soccer.slide':'minigame.soccer.shoot',pass:state.mode==='defense'?'soccer.steal':'soccer.pass',switchable:state.role!=='keeper'};
+  if(state.restart&&state.phase.startsWith('restart')){
+    labels.passText=state.restart.type==='throwIn'?'חוץ קצר':'מסירה קצרה';
+    labels.shotText=state.restart.type==='throwIn'?'חוץ ארוך':state.restart.type==='corner'?'הרמה':'בעיטה ארוכה';labels.icon='pass';
+  }else if(state.players[state.controlled]?.hands){labels.passText='זריקה ביד';labels.shotText='בעיטה מהיד';}
+  return labels;
+}
+export function soccerRestartHint(state){
+  if(!state.restart||!state.phase.startsWith('restart'))return '';
+  const title={throwIn:'חוץ',corner:'קרן',goalKick:'בעיטת שער'}[state.restart.type];
+  return `${title} · ${state.phase==='restart'?'מתארגנים בעמדות':state.restart.action?'הכנה להוצאה':'מסירה לקצרה · בעיטה לארוכה'}`;
 }
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
@@ -65,9 +75,9 @@ export function startSoccer(ctx) {
   if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-perf-20261030-1',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-integration-20261030-1',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-perf-20261030-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-integration-20261030-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
     document.addEventListener('pointerdown',()=>void audio.unlock(),options);
@@ -119,10 +129,10 @@ export function startSoccer(ctx) {
       const percent=Math.round(s.sprint.value/s.sprint.capacity*100);meter.setAttribute('aria-valuenow',String(percent));ring.style.setProperty('--stamina',`${percent}%`);sprint.dataset.exhausted=String(s.sprint.locked);
       shoot.style.setProperty('--charge',`${s.charging&&s.chargeKind==='shot'?Math.round(s.charge/balance.physics.chargeSeconds*100):0}%`);
       pass.style.setProperty('--charge',`${s.charging&&s.chargeKind==='pass'?Math.round(s.charge/balance.passing.chargeSeconds*100):0}%`);
-      const labels=soccerActionLabels(s,balance),{icon}=labels,signatureMode=s.mode+icon+labels.shot;
+      const labels=soccerActionLabels(s,balance),{icon}=labels,signatureMode=s.mode+icon+labels.shot+(labels.shotText||'')+(labels.passText||'');
       if(mode!==signatureMode){
         mode=signatureMode;controls.dataset.mode=s.mode;
-        const shotLabel=t(labels.shot),passLabel=t(labels.pass);
+        const shotLabel=labels.shotText||t(labels.shot),passLabel=labels.passText||t(labels.pass);
         shoot.replaceChildren(actionIcon(icon));pass.replaceChildren(actionIcon(s.mode==='defense'?'steal':'pass'));
         labelNode(shoot,shotLabel,balance.controls.kickKey);labelNode(pass,passLabel,balance.controls.passKey);
         shoot.setAttribute('aria-label',shotLabel);pass.setAttribute('aria-label',passLabel);
@@ -138,7 +148,7 @@ export function startSoccer(ctx) {
       if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.play('whistle');}if(dt>0){const sample=buttonInput.sample(input.sample(model.getState().attackDir));if(pendingSwap)sample.switchPlayer=true;pendingSwap=false;model.update(dt,sample);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else view.render(model.renderState?.()??model.getState(),0);
       banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
-      const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅'}[s.restart.type]:s.phase==='halftime'?'↔':s.phase==='goal'&&view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':'';
+      const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?soccerRestartHint(s):s.phase==='halftime'?'↔':s.phase==='goal'&&view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':'';
       phaseBanner.hidden=!phaseText;if(phaseBanner.textContent!==phaseText)phaseBanner.textContent=phaseText;
       audio.update(s);
       for(const event of model.drainEvents?.()||[]){audio.event(event);actionFeedback(event);}

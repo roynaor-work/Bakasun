@@ -1,5 +1,5 @@
-import {DATA_VERSION,dataURL} from '../release.mjs?v=island-perf-20261030-1';
-import { configureBuilding } from './registry.mjs?v=island-perf-20261030-1';
+import {DATA_VERSION,dataURL} from '../release.mjs?v=island-integration-20261030-1';
+import { configureBuilding } from './registry.mjs?v=island-integration-20261030-1';
 
 const FILES = ['config', 'city', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 

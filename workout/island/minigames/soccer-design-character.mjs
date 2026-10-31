@@ -111,7 +111,13 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       const speed=Math.hypot(p.vx,p.vz),yaw=Math.atan2(p.fx,p.fz),mode=animation.mode,turn=previousYaw===null?0:wrap(yaw-previousYaw);
       const moving=speed>(config.view.animation.idleSpeed||.2),edge=mode!==previousMode;
       const kick=(p.kickTime||0)>kickTimer+1e-6||(p.stealTime||0)>stealTimer+1e-6;
-      if(mode==='celebrate'&&edge)change('celebrate','result_success');
+      const restart=p.restartMotion;
+      if(restart&&actions[restart.kind]){
+        change(restart.kind,restart.kind,false,{rate:0,fadeSeconds:.045});
+        actions[restart.kind].time=clamp(restart.elapsed,0,data.states[restart.kind].durationSeconds);
+        actions[restart.kind].setEffectiveTimeScale(0);
+      }
+      else if(mode==='celebrate'&&edge)change('celebrate','result_success');
       else if((mode==='slide'||mode==='dive')&&edge)change('fall','fall_confirmed');
       else if(mode==='recover'&&edge)change('recover','recovery_allowed');
       else if((mode==='kick'||mode==='steal')&&kick) {
@@ -151,10 +157,11 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x}) {
     for(const r of resources)r.dispose?.();resources.clear();loader.dispose();
   };
   try {
-    const [player,keeper,rig,map,data]=await Promise.all([
+    const [player,keeper,rig,map,baseData,restartData]=await Promise.all([
       loader.loadAsync(asset('characters/soccer-player.glb')),loader.loadAsync(asset('characters/goalkeeper.glb')),
-      json('characters/rig.json'),json('viewer/retarget-map.json'),json('motion/soccer.json'),
+      json('characters/rig.json'),json('viewer/retarget-map.json'),json('motion/soccer.json'),json('motion2/soccer.json'),
     ]);
+    const data={...baseData,states:{...baseData.states,...restartData.states},transitions:[...baseData.transitions,...restartData.transitions]};
     const compiled=compileSoccerDesignClips(data,rig,map),sources=[player.scene,keeper.scene];
     for(const source of sources)validateBind(source,rig);
     const clipSets=sources.map(source=>bakeSoccerDesignFloor(source,compiled));

@@ -7,5 +7,6 @@
 .soccer-loading{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:#102b43cc;pointer-events:none}
 .soccer-loading[hidden]{display:none}
 .soccer-loading::after{content:'';width:44px;height:44px;border:5px solid #fff4dc55;border-top-color:#fff4dc;border-radius:50%;animation:soccer-loading-spin .8s linear infinite}
+.game-screen[data-game=soccer] .soccer-phase-banner{max-width:min(420px,calc(100% - 70px));font-size:13px;line-height:1.4;min-height:30px;direction:rtl;white-space:normal;pointer-events:none}
 @keyframes soccer-loading-spin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.soccer-loading::after{animation-duration:2.4s}}

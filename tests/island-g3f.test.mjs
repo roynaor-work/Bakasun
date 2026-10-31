@@ -11,6 +11,7 @@ import {createEngine} from '../workout/island/engine/engine.mjs';
 import {loadData} from '../workout/island/engine/load-data.mjs';
 import {migrations,migrateSave,validateSave,CURRENT_VERSION} from '../workout/island/engine/persistence.mjs';
 import {soccerResult} from '../workout/island/minigames/soccer-result.mjs';
+import {restartActionProfile} from '../workout/island/minigames/soccer-restarts.mjs';
 import {bot} from '../workout/island/tests/g3c-bot.mjs';
 import {campaignConfig} from '../workout/island/minigames/soccer-campaign.mjs';
 
@@ -19,7 +20,7 @@ const dt=config.match.fixedStep,hx=config.pitch.length/2,hz=config.pitch.width/2
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} != ${b}`);
 const root=new URL('../workout/island/',import.meta.url),data=await loadData(root,async u=>({ok:true,json:async()=>JSON.parse(await readFile(u,'utf8'))}));
 function walkRestart(game,input={}){
- const s=game.getState(),r={...s.restart},p=s.players[r.player],budget=(r.walkSeconds??config.restarts.walkSeconds)+config.match.restartSeconds+Math.max(config.restarts.idleReleaseSeconds,config.restarts.aiReleaseSeconds)+.5;
+ const s=game.getState(),r={...s.restart},p=s.players[r.player],budget=Math.max(r.walkSeconds??config.restarts.walkSeconds,r.organizeSeconds??0)+config.match.restartSeconds+Math.max(config.restarts.idleReleaseSeconds,config.restarts.aiReleaseSeconds)+restartActionProfile(r.type).duration+.1;
  let previous={x:p.x,z:p.z},elapsed=0;
  while(s.phase.startsWith('restart')&&elapsed<budget){
   assert.equal(s.restart.player,r.player);game.update(dt,input);elapsed+=dt;
@@ -129,9 +130,14 @@ for(const lastTeam of [0,1])for(const side of [-1,1])test(`G3f goal-line restart
 test('G3f human throw waits for a pass release, raises both hands and throws inward independently of running',()=>{
  const g=setup({x:0,z:hz+.1,vz:30,lastTeam:1}),s=g.getState();Object.assign(s.players[1],{x:0,z:hz-1});g.update(dt);
  const taker=s.restart.player,spot={x:s.restart.x,z:s.restart.z};let previous={...s.players[taker]};
- for(let i=0;i<Math.ceil((config.match.restartSeconds+.1)/dt);i++){g.update(dt);assert.ok(Math.hypot(s.players[taker].x-previous.x,s.players[taker].z-previous.z)<=config.players.speed*1.15*dt+1e-6);previous={...s.players[taker]};}
- assert.equal(s.phase,'restartReady');near(s.players[taker].x,spot.x);near(s.players[taker].z,spot.z);assert.ok(s.players[taker].throwTime>0);assert.equal(s.ball.y,config.restarts.throwHeight);
- advance(g,.4,{passHeld:true,moveX:-1,moveZ:-1});assert.equal(s.phase,'restartReady','a held action within the ready window does not throw prematurely');g.update(dt,{moveX:-1,moveZ:-1});assert.equal(s.phase,'playing');assert.equal(s.ball.owner,null);assert.ok(s.ball.vx<0&&s.ball.vz<0);assert.equal(s.event.type,'throw');
+ const budget=Math.max(s.restart.walkSeconds,s.restart.organizeSeconds)+config.match.restartSeconds+1;
+ for(let i=0;i<Math.ceil(budget/dt)&&s.phase==='restart';i++){g.update(dt);assert.ok(Math.hypot(s.players[taker].x-previous.x,s.players[taker].z-previous.z)<=config.players.speed*1.15*dt+1e-6);previous={...s.players[taker]};}
+ assert.equal(s.phase,'restartReady');near(s.players[taker].x,spot.x);near(s.players[taker].z,spot.z);assert.equal(s.players[taker].throwTime,0,'arms do not cycle while waiting for input');assert.equal(s.ball.owner,taker);
+ advance(g,.4,{passHeld:true,moveX:-1,moveZ:-1});assert.equal(s.phase,'restartReady','a held action within the ready window does not throw prematurely');g.update(dt,{moveX:-1,moveZ:-1});
+ assert.equal(s.players[taker].restartMotion.kind,'throwIn');assert.equal(s.ball.owner,taker);g.drainEvents();
+ const profile=restartActionProfile('throwIn');
+ while(s.players[taker].restartMotion.elapsed+dt<profile.contact-1e-8){g.update(dt,{moveX:-1,moveZ:-1});assert.equal(s.phase,'restartReady');assert.equal(s.ball.owner,taker);assert.equal(g.drainEvents().some(e=>e.type==='throw'),false);}
+ g.update(dt,{moveX:-1,moveZ:-1});assert.equal(s.phase,'playing');assert.equal(s.ball.owner,null);assert.ok(s.ball.vx<0&&s.ball.vz<0);assert.equal(s.event.type,'throw');assert.equal(g.drainEvents().filter(e=>e.type==='throw').length,1);
 });
 test('G3f human corner creates a headable loft and landing marker, without a queued stoppage kick',()=>{
  const g=setup({x:hx+.1,z:hz-1,vx:30,lastTeam:1}),s=g.getState();g.update(dt,{kickHeld:true});walkRestart(g,{passAim:{x:-1,z:-1,manual:true}});

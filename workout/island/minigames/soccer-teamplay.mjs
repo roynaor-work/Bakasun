@@ -8,12 +8,13 @@ const formations={
  press:{width:.92,advance:1.06,depth:.8,press:1.18},
  diamond:{width:.88,advance:1.12,depth:1.08,press:1}
 };
+for(const [name,value] of Object.entries(formations))Object.freeze(Object.assign(value,{name}));
 
 /** Campaign formations belong to the rival; the child's team retains its shape. */
 export function teamFormation(team,s,c){
  const value=team===1?s.campaign?.formation??c.tactics.stageFormation:s.campaign?.homeFormation;
  const name=typeof value==='string'&&Object.hasOwn(formations,value)?value:'balanced';
- return {name,...formations[name]};
+ return formations[name];
 }
 
 /** Distance to a pass segment, ignoring defenders standing behind either end. */
@@ -71,17 +72,55 @@ export function selectTeamPass(p,s,c){
 
 /** A small incumbent advantage prevents two equally close teammates swapping duties every tick. */
 export function teamPresser(team,s,c){
- const b=s.ball,mates=[],active=[];
- for(const q of s.players)if(q.team===team&&q.role!=='keeper'){mates.push(q);if(!(q.recover>0)&&!(q.slideTime>0))active.push(q);}
- const pool=active.length?active:mates;
- const lead=c.tactics.interceptSeconds,point={x:b.x+(b.vx||0)*lead,z:b.z+(b.vz||0)*lead};
+ const b=s.ball;
+ // A released team pass already has one receiving run. Reserve that same
+ // player rather than sending a second teammate after the moving ball.
+ // A turnover, expired pass or unavailable receiver immediately releases it.
+ if(b.owner===null&&s.passTarget?.time>0&&b.lastTeam===team){
+  for(const q of s.players)if(q.id===s.passTarget.player&&q.team===team&&q.role!=='keeper'&&!(q.recover>0)&&!(q.slideTime>0))return q;
+ }
+ let hasActive=false;
+ for(const q of s.players)if(q.team===team&&q.role!=='keeper'&&!(q.recover>0)&&!(q.slideTime>0)){hasActive=true;break;}
+ const lead=c.tactics.interceptSeconds,px=b.x+(b.vx||0)*lead,pz=b.z+(b.vz||0)*lead;
  let chaser=null,best=Infinity;
- for(const q of pool){
-  const range=distance(q,point),closing=range?((point.x-q.x)*(q.vx||0)+(point.z-q.z)*(q.vz||0))/range:0;
+ for(const q of s.players){
+  if(q.team!==team||q.role==='keeper'||hasActive&&(q.recover>0||q.slideTime>0))continue;
+  const range=Math.hypot(q.x-px,q.z-pz),closing=range?((px-q.x)*(q.vx||0)+(pz-q.z)*(q.vz||0))/range:0;
   const cost=range-clamp(closing,-4,4)*.08-(q.duty==='press'?.65:0);
   if(cost<best||cost===best&&q.id<chaser.id){chaser=q;best=cost;}
  }
  return chaser;
+}
+
+/** Assign each visible off-ball runner once, in order of danger to our goal.
+ * A marker owns a zone goal-side of a runner rather than chasing his feet.
+ * The incumbent bonus is only for near ties: a clearly closer defender can take over.
+ * Keepers and the single ball presser keep their own duties. */
+export function defensiveMark(p,s,c,presser=teamPresser(p.team,s,c)){
+ const owner=s.ball.owner==null?null:s.players[s.ball.owner];
+ if(!owner||owner.team===p.team||p.id===presser?.id||p.role==='keeper')return null;
+ const d=s.attackDir*(p.team===0?1:-1),usedDefenders=[],usedRunners=[];
+ for(let round=0;round<s.players.length;round++){
+  let runner=null;
+  for(const q of s.players){
+   if(q.team===p.team||q.role==='keeper'||q.id===owner.id||usedRunners.includes(q.id))continue;
+   if(!runner||q.x*d<runner.x*d||q.x===runner.x&&q.id<runner.id)runner=q;
+  }
+  if(!runner)return null;
+  usedRunners.push(runner.id);
+  const markX=runner.x-d*(c.players.radius*2+.55),markZ=runner.z;
+  let defender=null,cost=Infinity;
+  for(const q of s.players){
+   if(q.team!==p.team||q.role==='keeper'||q.id===presser?.id||q.recover>0||q.slideTime>0||usedDefenders.includes(q.id))continue;
+   const role=Math.max(0,c.players.roles.indexOf(q.role)),lane=c.tactics.lanes[role]*d;
+   const value=Math.hypot(q.x-markX,q.z-markZ)+Math.abs(lane-markZ)*.18-(q.markedPlayer===runner.id ? .8:0);
+   if(value<cost||value===cost&&q.id<defender.id){defender=q;cost=value;}
+  }
+  if(!defender)return null;
+  if(defender.id===p.id)return runner;
+  usedDefenders.push(defender.id);
+ }
+ return null;
 }
 
 /** Keeper anticipation starts after ball release; it never reads the shooter's aim or input. */

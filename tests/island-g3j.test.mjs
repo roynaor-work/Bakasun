@@ -4,17 +4,18 @@ import {readFile} from 'node:fs/promises';
 import {createSoccer,canHead} from '../workout/island/minigames/soccer.mjs';
 import {crossArc,soccerShotIcon,playerAnimation} from '../workout/island/minigames/soccer-presentation.mjs';
 import {createG3hAudio,soccerAudioCues} from '../workout/island/minigames/g3h-audio.mjs';
+import {restartActionProfile,restartBallPose} from '../workout/island/minigames/soccer-restarts.mjs';
 const c=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames.soccer,dt=c.match.fixedStep;
 const advance=(g,seconds,input={})=>{for(let i=0;i<Math.round(seconds/dt);i++)g.update(dt,input);};
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} != ${b}`);
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 function finishRestart(g,input={}){
- const s=g.getState(),r={...s.restart},taker=s.players[r.player],budget=(r.walkSeconds??c.restarts.walkSeconds)+c.match.restartSeconds+Math.max(c.restarts.idleReleaseSeconds,c.restarts.aiReleaseSeconds)+.5;
+ const s=g.getState(),r={...s.restart},taker=s.players[r.player],budget=Math.max(r.walkSeconds??c.restarts.walkSeconds,r.organizeSeconds??0)+c.match.restartSeconds+Math.max(c.restarts.idleReleaseSeconds,c.restarts.aiReleaseSeconds)+restartActionProfile(r.type).duration+.1;
  let elapsed=0,previous={x:taker.x,z:taker.z};
  while(s.phase.startsWith('restart')&&elapsed<budget){
   assert.equal(s.restart.player,r.player,'restart reserves one taker throughout the walk');g.update(dt,input);elapsed+=dt;
   assert.ok(distance(previous,taker)<=c.players.speed*1.15*dt+1e-6,'taker walks continuously at bounded speed');previous={x:taker.x,z:taker.z};
-  if(s.phase.startsWith('restart')){near(s.ball.x,r.x);near(s.ball.z,r.z);}
+  if(s.phase.startsWith('restart')){const m=taker.restartMotion,pose=r.type==='throwIn'&&m?restartBallPose(m.kind,m.elapsed):null;near(s.ball.x,pose?taker.x+taker.fx*pose.forward-taker.fz*pose.side:r.x);near(s.ball.z,pose?taker.z+taker.fz*pose.forward+taker.fx*pose.side:r.z);}
  }
  assert.equal(s.phase,'playing','a completed walk eventually releases without waiting forever');return elapsed;
 }
@@ -62,11 +63,11 @@ for(const kind of ['throwIn','corner','goalKick'])for(const team of [0,1])test(`
  // A home corner is at the right goal; a home goal kick is at the left goal.
  if(kind==='corner'){s.ball.x=-s.ball.x;s.ball.vx=-s.ball.vx;}
  g.update(dt);assert.equal(s.restart.type,kind);assert.equal(s.restart.team,team);
- const taker=s.restart.player,controlled=s.controlled,before=s.players.map(p=>({x:p.x,z:p.z})),spot={x:s.ball.x,z:s.ball.z};
+ const taker=s.restart.player,controlled=s.controlled,before=s.players.map(p=>({x:p.x,z:p.z})),spot={x:s.ball.x,z:s.ball.z},stance={...s.restart.stance};
  let previous={...s.players[taker]};for(let i=0;i<Math.round(.5/dt);i++){g.update(dt,{moveX:1});assert.ok(distance(previous,s.players[taker])<=c.players.speed*1.15*dt+1e-6);previous={...s.players[taker]};}assert.ok(s.players[controlled].x>before[controlled].x+.1);
  assert.ok(s.players.some(p=>p.id!==taker&&p.id!==controlled&&Math.hypot(p.x-before[p.id].x,p.z-before[p.id].z)>.1));
  near(s.ball.x,spot.x);near(s.ball.z,spot.z);finishRestart(g);
- near(s.players[taker].x,spot.x);near(s.players[taker].z,spot.z);assert.ok(g.drainEvents().some(e=>['throw','pass','loft'].includes(e.type)));
+ near(s.players[taker].x,stance.x);near(s.players[taker].z,stance.z);assert.ok(distance(s.players[taker],spot)<=.56,'ground taker stands within striking distance of the fixed ball');assert.ok(g.drainEvents().some(e=>['throw','pass','loft'].includes(e.type)));
 });
 test('G3j predictive defense chooses an eligible outfielder; directional manual switching holds through cooldown',()=>{
  const g=setup(),s=g.getState();Object.assign(s.players[0],{x:-8,z:0});Object.assign(s.players[1],{x:-3,z:0});Object.assign(s.players[6],{x:-5,z:0});Object.assign(s.players[2],{x:0,z:0});
