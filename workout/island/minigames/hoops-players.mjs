@@ -6,6 +6,7 @@ import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
 import {HoopsDRACOLoader} from './hoops-draco.mjs';
 import {bakeV2Motion,createV2MotionPlayer} from './hoops-motion-v2.mjs';
 import {applySparseSkinning,createSparseDepthMaterial} from './hoops-skin-shader.mjs';
+import {loadHoopsGLTF} from './hoops-gltf.mjs';
 const SKINS=['#81513b','#b47c56','#d9a478','#68402c','#9d6548','#edc09b'];
 const HAIRS=['#222b38','#17191e','#422c22','#68462e','#28201b','#241c18'];
 async function json(path,base){const response=await fetch(new URL(path,base));if(!response.ok)throw Error('Basketball asset unavailable: '+path+' ('+response.status+')');return response.json();}
@@ -15,7 +16,7 @@ export async function loadPlayerAssets(cfg,base,onProgress){
  try{
   const manifestPath=cfg.motionManifest||'design/motion2/hoops/manifest.json',manifestURL=new URL(manifestPath,base);
   const pending=await Promise.allSettled([
-   loader.loadAsync(new URL(cfg.characterModel||'design/hoops/lod/hoops-player-v2-lod.glb',base).href).then(g=>(character=g)),
+   loadHoopsGLTF(loader,new URL(cfg.characterModel||'design/hoops/lod/hoops-player-v2-lod.glb',base).href).then(g=>(character=g)),
    json('design/characters/rig.json',base),json('design/viewer/retarget-map.json',base),json('design/characters2/regions.json',base),json('design/motion/hoops.json',base),json(manifestPath,base)
   ]);
   const failure=pending.find(r=>r.status==='rejected');if(failure)throw failure.reason;

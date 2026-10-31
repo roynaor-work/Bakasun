@@ -4,6 +4,7 @@ import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {HoopsDRACOLoader as DRACOLoader} from './hoops-draco.mjs';
 import {ballTexture} from './hoops-textures.mjs';
+import {loadHoopsGLTF} from './hoops-gltf.mjs';
 import {imagePixels,transferBasketballBake,planarCourtUV,frontLoadCourtSurface,lightStaticGeometry} from './hoops-baked.mjs';
 
 const MODEL='design/models/',ENV='design/environment/textures/';
@@ -73,7 +74,7 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
  const textureLoader=new THREE.TextureLoader();
  const owned={geometries:new Set(),materials:new Set(),textures:new Set()};
  let disposed=false;
- const loadModel=async (name,folder=MODEL)=>{const g=await loader.loadAsync(new URL(folder+name+'.glb',base).href);mergeResources(owned,resources(g.scene));return g.scene;};
+ const loadModel=async (name,folder=MODEL)=>{const g=await loadHoopsGLTF(loader,new URL(folder+name+'.glb',base).href);mergeResources(owned,resources(g.scene));return g.scene;};
  const loadTexture=async name=>{const t=await textureLoader.loadAsync(new URL(ENV+name+'.webp',base).href);t.colorSpace=THREE.SRGBColorSpace;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=Math.min(4,anisotropy);owned.textures.add(t);return t;};
  let venue,hoopSource,concrete,parquetMap,reference,ao,light;
  try{
