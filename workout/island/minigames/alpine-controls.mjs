@@ -40,7 +40,7 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
   for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) canvas.addEventListener(type, event => { if (drag && event.pointerId === drag.id) releaseDrag(); }, options);
   if (joystick) {
     // The stick deflects sideways only; its value is the steering command itself.
-    const read = event => { const box = joystick.getBoundingClientRect(), radius = Math.max(1, box.width / 2 - 8); joy.value = Math.max(-1, Math.min(1, (event.clientX - (box.left + box.width / 2)) / radius)); setKnob(joy.value); };
+    const read = event => { const box = joystick.getBoundingClientRect(), radius = Math.max(1, (box.width / 2 - 8) * (config.joystickReach ?? .62)); joy.value = Math.max(-1, Math.min(1, (event.clientX - (box.left + box.width / 2)) / radius)); setKnob(joy.value); };
     joystick.style.touchAction = 'none';
     joystick.addEventListener('pointerdown', event => {
       event.preventDefault(); event.stopPropagation();

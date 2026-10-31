@@ -1,4 +1,4 @@
-import {create as speedMeter} from '../design/hud-kit/speed-meter.mjs';
+import {create as speedMeter} from './alpine-dial.mjs';
 import {create as powerMeter} from '../design/hud-kit/power-meter.mjs';
 import {create as eventBanner} from '../design/hud-kit/event-banner.mjs';
 

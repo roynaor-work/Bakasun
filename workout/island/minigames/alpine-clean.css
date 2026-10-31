@@ -1,0 +1,71 @@
+/* Alpine Rush race HUD, decluttered. During a race the centre of the screen stays free: the left edge keeps
+ * position, speed and boost; the right edge, under the island's sound and pause buttons, holds time, distance
+ * and the score/coin tally as small chips; progress is a hairline along the top; call-outs are small pills. */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-brand{display:none}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-hud{
+  display:grid!important;grid-template-columns:auto 1fr auto;grid-auto-rows:min-content;gap:6px 8px!important;align-items:start!important;
+  top:calc(max(10px,env(safe-area-inset-top)) + 4px)!important;left:var(--a-edge,20px)!important;right:var(--a-edge,20px)!important;direction:ltr}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-position{grid-column:1;grid-row:1;width:auto!important;min-height:0!important;padding:4px 10px!important;gap:6px;border-radius:12px;background:#f0f8f9d9}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-rank{font-size:26px!important;letter-spacing:-1px}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-of small{display:none}
+/* right column: starts below the shell's sound and pause buttons */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-race-info{display:contents}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-track-line{display:none}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) :is(.alpine-time,.alpine-distance,.alpine-tally){
+  grid-column:3;justify-self:end;margin:0!important;box-sizing:border-box;position:static!important;border:0!important;
+  background:#f0f8f9d1;border-radius:12px;padding:4px 10px!important;color:#123148;direction:rtl;pointer-events:none}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-time{grid-row:2;margin-top:56px!important;display:flex;align-items:baseline;gap:6px}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-time small{display:none}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-time .alpine-ltr{font-size:17px!important;margin:0!important}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-distance{grid-row:3;font-size:15px!important}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-distance small{font-size:10px!important;opacity:.75}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally{grid-row:4;flex-direction:row!important;gap:10px!important;background:none;padding:0!important}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally>span{font-size:14px!important;background:#f0f8f9d1;padding:3px 9px 3px 5px!important;min-width:0}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally svg{width:17px!important;height:17px!important}
+/* progress: a hairline along the very top */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-progress{position:fixed!important;top:0;left:0;right:0;height:3px!important;border-radius:0!important;background:#ffffff30!important;z-index:6;pointer-events:none}
+/* call-outs: a small pill under the top edge instead of a large card in the middle of the view */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-callout{top:calc(max(10px,env(safe-area-inset-top)) + 22px)!important;width:max-content;max-width:calc(100% - 200px);padding:5px 14px!important;border-radius:999px!important;transform:translate(-50%,-50%)!important}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-callout span{font-size:10px!important;letter-spacing:1.5px!important;display:inline!important;margin-inline-end:8px}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-callout b{font-size:17px!important;display:inline!important;margin:0!important}
+/* the steering hint is only for the countdown */
+.game-screen[data-game=alpineRush][data-alpine-phase=racing] .alpine-steer-hint{display:none}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) :is(.alpine-time,.alpine-distance,.alpine-tally){min-height:0!important;height:auto!important;width:auto!important}
+
+/* The game's name is never shown on screen */
+.game-screen[data-game=alpineRush] .alpine-brand{display:none!important}
+
+/* Speedometer: a dial like a car's, with the boost tank under it */
+.game-screen[data-game=alpineRush] .alpine-kit-speed .alpine-dial{width:150px;max-width:100%;padding:4px 6px 2px;box-sizing:border-box;margin:0}
+.game-screen[data-game=alpineRush] .alpine-dial svg{display:block;width:100%;height:auto;overflow:visible;direction:ltr}
+.game-screen[data-game=alpineRush] .alpine-dial-track{stroke:#ffffff2e;stroke-width:7;stroke-linecap:round}
+.game-screen[data-game=alpineRush] .alpine-dial-red{stroke:#ff6a4acc;stroke-width:3}
+.game-screen[data-game=alpineRush] .alpine-dial-fill{stroke:#ff8a3d;stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .16s linear}
+.game-screen[data-game=alpineRush] .alpine-dial-tick{stroke:#d1e3ed99;stroke-width:1}
+.game-screen[data-game=alpineRush] .alpine-dial-tick.major{stroke:#f5f8fa;stroke-width:1.6}
+.game-screen[data-game=alpineRush] .alpine-dial-num{fill:#d1e3ed;font:600 8px system-ui,sans-serif}
+.game-screen[data-game=alpineRush] .alpine-dial-needle{transition:transform .16s linear}
+.game-screen[data-game=alpineRush] .alpine-dial-hand{fill:#ff6a4a}
+.game-screen[data-game=alpineRush] .alpine-dial-hub{fill:#f5f8fa;stroke:#102b41;stroke-width:2}
+.game-screen[data-game=alpineRush] .alpine-dial-value{fill:#f5f8fa;font:800 27px system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.game-screen[data-game=alpineRush] .alpine-dial-unit{fill:#d1e3ed;font:600 10px system-ui,sans-serif}
+
+/* Trick buttons: icon plus a short name, and a caption that wakes up in the air */
+.game-screen[data-game=alpineRush] .alpine-trick{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:0}
+.game-screen[data-game=alpineRush] .alpine-trick svg{flex:none}
+.game-screen[data-game=alpineRush] .alpine-trick-label{font-size:9px;font-weight:800;line-height:1;color:#24465c;letter-spacing:0}
+.game-screen[data-game=alpineRush] .alpine-trick[data-ready=true]{animation:alpine-trick-ready .9s ease-in-out infinite;box-shadow:0 0 0 3px #ff8a3d99}
+.game-screen[data-game=alpineRush] .alpine-trick-caption{position:absolute;left:0;top:-4px;font-size:11px;font-weight:800;color:#24465c;background:#f0f8f9d9;border-radius:999px;padding:2px 9px;opacity:.55;pointer-events:none;white-space:nowrap}
+.game-screen[data-game=alpineRush] .alpine-trick-caption[data-ready=true]{opacity:1;background:#ff8a3d;color:#fff}
+@keyframes alpine-trick-ready{50%{transform:scale(1.08)}}
+
+/* Boost ready: blinking arrow beside the boost button */
+.game-screen[data-game=alpineRush] .alpine-boost-arrow{position:absolute;right:calc(var(--boost-size,86px) + 8px);bottom:calc(var(--boost-size,86px) / 2 - 14px);width:30px;height:28px;color:#ff8a3d;pointer-events:none;animation:alpine-arrow-blink .7s steps(2,jump-none) infinite;filter:drop-shadow(0 1px 3px #0b2f4b66)}
+.game-screen[data-game=alpineRush] .alpine-boost-arrow svg{width:100%;height:100%}
+@keyframes alpine-arrow-blink{0%{opacity:1;transform:translateX(0)}50%{opacity:.25;transform:translateX(6px)}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=alpineRush] .alpine-boost-arrow,.game-screen[data-game=alpineRush] .alpine-trick[data-ready=true]{animation:none}}
+
+/* Stars and coins: tiny, in the corner, quiet */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally{gap:5px!important;opacity:.8}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally>span{font-size:11px!important;padding:2px 7px 2px 4px!important}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally svg{width:12px!important;height:12px!important}

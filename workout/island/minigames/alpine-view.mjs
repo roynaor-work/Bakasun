@@ -323,16 +323,18 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       r.roll += (rollTarget - r.roll) * dampWeight(11,wdt);
       place(r.root, s.s ?? ps - z, s.x, surf + height + .03, r.roll, lean * .24, s.airKind === 'ramp' ? r.air * .12 : 0);
       // Tricks spin, flip or both around the centre of mass; a crash tumbles onto the side.
-      let yaw = 0, flip = 0, roll = 0, drop = 0;
+      let yaw = 0, flip = 0, roll = 0, drop = 0, lift = 0;
       if (trick) { const e = ease(Math.min(1, trick.progress)); if (trick.id === 'spin' || trick.id === 'combo') yaw = e * Math.PI * 2; if (trick.id === 'flip' || trick.id === 'combo') flip = e * Math.PI * 2; if (trick.id === 'grab') roll = Math.sin(trick.progress * Math.PI) * .35 * side; }
-      if (s.crashed) { if (r.crashAt < 0) { r.crashAt = t; if (id === 'player') { worldPoint(s.s ?? ps, s.x, surf + .6, P); burst(P, puffColor, 26, 3.2); } } const c = Math.min(1, (t - r.crashAt) / crashSeconds), fall = c < .35 ? c / .35 : c > .75 ? (1 - c) / .25 : 1; roll = side * -1.25 * fall; drop = .45 * fall; yaw = Math.sin(c * 9) * .3 * (1 - c); }
+      if (s.crashed) { if (r.crashAt < 0) { r.crashAt = t; if (id === 'player') { worldPoint(s.s ?? ps, s.x, surf + .6, P); burst(P, puffColor, 26, 3.2); } } const c = Math.min(1, (t - r.crashAt) / crashSeconds), fall = c < .35 ? c / .35 : c > .75 ? (1 - c) / .25 : 1; roll = side * -1.25 * fall; drop = .45 * fall; yaw = Math.sin(c * 9) * .3 * (1 - c);
+        // A real wipe-out: the rider tumbles two full somersaults in the first half, thrown up off the snow, then slides and lies flat before getting up.
+        const tc = Math.min(1, c / .5); if (!reduced) { flip = -Math.PI * 4 * (1 - (1 - tc) ** 3); lift = Math.sin(tc * Math.PI) * .55; } }
       else r.crashAt = -1;
       if(s.hit&&!r.wasHit&&!s.crashed){r.hitAt=t;if(id==='player'){worldPoint(s.s??ps,s.x,surf+.35,P);burst(P,puffColor,reduced?8:22,2.5);}}
       r.wasHit=!!s.hit;
       const impact=s.crashed?0:Math.max(0,1-(t-r.hitAt)/.65)**2;
       // A readable recoil and knee compression, including reduced-motion mode.
       flip-=impact*.28;roll+=side*impact*.16;drop+=impact*.1;
-      r.pivot.rotation.set(flip, r.actor?.update&&s.crashed?0:yaw, r.actor?.update&&s.crashed?0:roll, 'YXZ'); r.pivot.position.y = PIVOT - (r.actor?.update&&s.crashed?0:drop);
+      r.pivot.rotation.set(flip, r.actor?.update&&s.crashed?0:yaw, r.actor?.update&&s.crashed?0:roll, 'YXZ'); r.pivot.position.y = PIVOT - (r.actor?.update&&s.crashed?0:drop) + lift;
       if(r.actor?.update)r.actor.update(s,{phase:state.phase,time:t,dt:state.phase==='finished'?wdt:dt,speedKmh:state.speedKmh,result:state.result});else if(r.actor)r.actor.pose(t,lean,r.air,Math.max(r.squash,impact*.8),r.grab);else r.body.position.y = .14 + Math.sin(t * 5 + (id === 'player' ? 0 : 3)) * .018;
       place(r.shadow, s.s ?? ps - z, s.x, surf + .05, s.airborne ? 0 : side * wallAngle(s.x, pipe)); r.shadow.rotateX(-Math.PI / 2);
       r.shadow.material.opacity = .2 / (1 + height * .7); r.shadow.scale.set(.75 / (1 + height * .15), 1.4 / (1 + height * .15), 1);

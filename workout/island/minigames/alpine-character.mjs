@@ -90,29 +90,30 @@ export function createAlpineMotionPlayer(baked, bones) {
   // applied as model-space rotations on the already posed bones, and fades out in falls, menus and results.
   const boneByName = Object.fromEntries(baked.names.map((n, i) => [n, bones[i]]));
   const order = ['Hips', 'Spine', 'Chest', 'Neck', 'Head', 'LeftArm', 'RightArm', 'LeftForeArm', 'RightForeArm', 'LeftUpLeg', 'RightUpLeg', 'LeftLeg', 'RightLeg', 'LeftFoot', 'RightFoot'].filter(n => boneByName[n]);
-  const ride = {w: 0, speed: 0, lean: 0, phase: 0, bob: 0};
+  const ride = {w: 0, speed: 0, lean: 0, phase: 0, bob: 0, boost: 0};
   const frameBone = bones[0], qFrame = new T.Quaternion(), qParent = new T.Quaternion(), qWork = new T.Quaternion(), qDelta = new T.Quaternion(), euler = new T.Euler();
   const AX = new T.Vector3(1, 0, 0), AY = new T.Vector3(0, 1, 0), AZ = new T.Vector3(0, 0, 1);
   function rideTargets() {
     const t = ride.phase, sp = ride.speed, lean = ride.lean, a = Math.abs(lean);
-    const crouch = .1 + .28 * sp;                         // forward bow of the torso, rad
-    const knee = .16 + .3 * sp + .12 * a;                 // thigh forward / shin back, rad
-    const bump = Math.sin(t * 5.2) * .035 * sp + Math.sin(t * 8.7 + 1.3) * .02 * sp; // terrain absorption
-    const swing = Math.sin(t * (2.2 + 1.8 * sp)) * (.16 + .1 * sp);                  // pole swing
-    return {crouch, knee, bump, swing, lean, a};
+    const b = ride.boost;                                 // 0..1: boost pressed, the rider drops into an aerodynamic tuck
+    const crouch = .1 + .28 * sp + .62 * b;               // forward bow of the torso, rad
+    const knee = .16 + .3 * sp + .12 * a + .42 * b;       // thigh forward / shin back, rad
+    const bump = (Math.sin(t * 5.2) * .035 * sp + Math.sin(t * 8.7 + 1.3) * .02 * sp) * (1 - .6 * b); // terrain absorption
+    const swing = Math.sin(t * (2.2 + 1.8 * sp)) * (.16 + .1 * sp) * (1 - b);        // pole swing stops in the tuck
+    return {crouch, knee, bump, swing, lean, a, b};
   }
   function applyRide() {
     if (ride.w < .01 || !frameBone?.parent) return;
     const k = rideTargets(), w = ride.w;
     frameBone.parent.updateWorldMatrix(true, false); frameBone.parent.getWorldQuaternion(qFrame);
     const delta = {
-      Hips: [k.crouch * .35 + k.bump * .5, -k.lean * .16, k.lean * .1],
-      Spine: [k.crouch * .4, k.lean * .1, k.lean * .22],
-      Chest: [k.crouch * .3, k.lean * .12, k.lean * .16],
-      Neck: [-k.crouch * .3, -k.lean * .22, -k.lean * .12],
+      Hips: [k.crouch * .35 + k.bump * .5, -k.lean * .2, k.lean * .14],
+      Spine: [k.crouch * .4, k.lean * .14, k.lean * .3],
+      Chest: [k.crouch * .3, k.lean * .18, k.lean * .22],
+      Neck: [-k.crouch * (.3 + .35 * k.b), -k.lean * .22, -k.lean * .12],
       Head: [-k.crouch * .15, 0, -k.lean * .1],
-      LeftArm: [k.swing, 0, k.a * .1], RightArm: [-k.swing, 0, -k.a * .1],
-      LeftForeArm: [-.25 - k.swing * .5, 0, 0], RightForeArm: [-.25 + k.swing * .5, 0, 0],
+      LeftArm: [k.swing + .75 * k.b, 0, k.a * .1], RightArm: [-k.swing + .75 * k.b, 0, -k.a * .1],
+      LeftForeArm: [-.25 - k.swing * .5 - .55 * k.b, 0, 0], RightForeArm: [-.25 + k.swing * .5 - .55 * k.b, 0, 0],
       LeftUpLeg: [-(k.knee + k.bump) - (k.lean > 0 ? k.a * .1 : -k.a * .08), 0, 0], RightUpLeg: [-(k.knee + k.bump) - (k.lean < 0 ? k.a * .1 : -k.a * .08), 0, 0],
       LeftLeg: [(k.knee + k.bump) * 2, 0, 0], RightLeg: [(k.knee + k.bump) * 2, 0, 0],
       LeftFoot: [-(k.knee + k.bump), 0, 0], RightFoot: [-(k.knee + k.bump), 0, 0]
@@ -162,7 +163,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     state = baked.initialState || 'idle'; time = 0; fadeTime = 1; fadeDuration = 0;
     sample(state, 0, outgoing); shown.set(outgoing); target.set(outgoing);
     lastTime = null; lastPhase = null; lastS = null; lastSpeed = 0;
-    ride.w = ride.speed = ride.lean = ride.phase = 0;
+    ride.w = ride.speed = ride.lean = ride.phase = ride.boost = 0;
     lastCrash = lastAir = lastBoost = resultSeen = clipFinished = false;
     carveHeld = false; carveStrength = 0;
     display(0);
@@ -184,7 +185,8 @@ export function createAlpineMotionPlayer(baked, bones) {
     const rideWeight = (!moving || frame.crashed) ? 0 : (state === 'glide' || isCarve(state)) ? 1 : (state === 'air' || state === 'pole_push') ? .55 : 0;
     const speed01 = clamp((Number(speed) || 0) / 60);
     const follow = 1 - Math.exp(-8 * dt);
-    ride.w += (rideWeight - ride.w) * follow; ride.speed += (speed01 - ride.speed) * follow; ride.lean += (lean - ride.lean) * (1 - Math.exp(-10 * dt));
+    ride.w += (rideWeight - ride.w) * follow; ride.speed += (speed01 - ride.speed) * follow; ride.lean += (lean - ride.lean) * (1 - Math.exp(-7 * dt));
+    ride.boost += ((frame.boosting && rideWeight > 0 && !frame.airborne ? 1 : 0) - ride.boost) * (1 - Math.exp(-9 * dt));
     ride.phase += dt;
     const clip = baked.clips[state];
     const events = [];
