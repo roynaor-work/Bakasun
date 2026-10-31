@@ -127,3 +127,12 @@ test('attack: new action inputs preserve deterministic replay for the same seed'
   one.e.step(inp);two.e.step(inp);assert.deepEqual(one.e.snapshot(),two.e.snapshot());assert.deepEqual(one.e.drainEvents(),two.e.drainEvents());
  }
 });
+
+test('sprint: releasing the hold stops the sprint multiplier while defensive assistance keeps moving',()=>{
+ const t=setup(),{e,s,a}=t,{p,h}=defend(t);a.C.player.autoSwitch=false;
+ e.debug.place(p.id,-5,0);e.debug.place(h.id,6,0);s.controlled=p.id;
+ e.step(input({move:{x:1,z:0},sprint:true}));assert.equal(e.snapshot().players.find(x=>x.id===p.id).sprinting,true);
+ e.step(input());const state=e.snapshot().players.find(x=>x.id===p.id);
+ assert.ok(p.intent.speed>0,'defensive assistance still returns the player to position');
+ assert.equal(state.sprinting,false,'assistance cannot silently spend held-sprint energy');
+});
