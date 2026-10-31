@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "scope": "Original effects and standalone decal helper only",
+  "checks": [
+    {
+      "name": "atlas RGBA, dimensions, gutters, UV ranges, lifecycle and hashes",
+      "passed": true
+    },
+    {
+      "name": "decal RGBA, size, transparency, groove seam and hashes",
+      "passed": true
+    },
+    {
+      "name": "curved per-corner height/normal projection, independent paths, ring overwrite, stable buffers/ranges, break/teleport and reset",
+      "passed": true
+    },
+    {
+      "name": "physical ski separation/width/spacing/normal offset, UV metres and optional fade",
+      "passed": true
+    }
+  ],
+  "atlases": [
+    {
+      "name": "cloud-atlas",
+      "width": 384,
+      "height": 384,
+      "frames": 16,
+      "gutterPixelsChecked": 45056,
+      "allGutterAlphaZero": true,
+      "maxAlpha": 167,
+      "nonzeroAlphaPixelsPerFrame": [
+        5133,
+        5132,
+        5131,
+        5131,
+        5113,
+        5120,
+        5126,
+        5124,
+        5126,
+        5126,
+        5129,
+        5120,
+        5132,
+        5139,
+        5135,
+        5133
+      ],
+      "loop": true,
+      "firstLastIdentical": true,
+      "hashMatches": true
+    },
+    {
+      "name": "ski-powder-atlas",
+      "width": 384,
+      "height": 384,
+      "frames": 16,
+      "gutterPixelsChecked": 45056,
+      "allGutterAlphaZero": true,
+      "maxAlpha": 211,
+      "nonzeroAlphaPixelsPerFrame": [
+        0,
+        694,
+        1058,
+        1370,
+        1720,
+        2108,
+        2458,
+        2780,
+        3102,
+        3388,
+        3638,
+        3800,
+        3876,
+        3794,
+        3244,
+        0
+      ],
+      "loop": false,
+      "firstLastTransparent": true,
+      "hashMatches": true
+    }
+  ],
+  "decals": [
+    {
+      "name": "footprint-treads",
+      "width": 128,
+      "height": 128,
+      "nonzeroAlphaPixels": 2248,
+      "hashMatches": true,
+      "periodicY": false
+    },
+    {
+      "name": "snow-groove",
+      "width": 128,
+      "height": 128,
+      "nonzeroAlphaPixels": 8448,
+      "hashMatches": true,
+      "periodicY": true
+    }
+  ],
+  "helper": {
+    "maxCurveHeightResidualMeters": 8.041392274282799e-8,
+    "maxCurveNormalError": 3.241600565750957e-8,
+    "capacityPairedSegments": 48,
+    "vertices": 384,
+    "triangles": 192,
+    "stableTypedArraysAndDescriptors": true,
+    "uploadRangesWithinBounds": true,
+    "breakAndTeleportDoNotBridge": true,
+    "resetReusesBuffers": true,
+    "perFrameAllocationContract": "Numeric add arguments; all helper-owned typed arrays, return state and range descriptors allocated only at construction. Stable identities validated."
+  },
+  "sourceAndAssetBytes": 84619,
+  "passed": true
+}
