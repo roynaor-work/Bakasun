@@ -4,7 +4,9 @@
 import {createHoopsScreens} from './hoops-screens.mjs';
 import {gameContext} from './context.mjs?v=island-ski-20261031-1';
 import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-ski-20261031-1';
-import {createHoopsControls} from './hoops-controls.mjs?v=island-ski-20261031-1';
+import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-ski-20261031-1';
+import {loadHoopsTactics} from './hoops-tactics.mjs';
+import {createHoopsRoleLabels} from './hoops-role-labels.mjs';
 import {createHoopsAudio} from './hoops-audio.mjs?v=island-ski-20261031-1';
 import {hoopsIcon} from './hoops-icons.mjs?v=island-ski-20261031-1';
 import {createFixedLoop} from './hoops-loop.mjs?v=island-ski-20261031-1';
@@ -16,6 +18,8 @@ const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor
 
 function controlMode(snapshot){
  let controlled=null;for(const p of snapshot.players)if(p.id===snapshot.controlled){controlled=p;break;}
+ if(controlled?.hasBall&&snapshot.phase==='freethrow')return 'free_throw';
+ if(controlled?.hasBall&&snapshot.phase==='inbound')return 'inbound';
  return controlled?.hasBall?'ball':snapshot.possession===snapshot.userTeam&&snapshot.ball.state!=='loose'?'offense':'defense';
 }
 /** Ownership may change between two simulation steps in the same render frame.
@@ -31,13 +35,13 @@ export function startHoops(ctx){
  const profile=params.get('hoopsProfile')||setup.profile||'standard';
  const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1'});
  engine.setAutoSub(setup.autoSub!==false);
- let screens=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
+ let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
  const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
  const abort=new AbortController(),on={signal:abort.signal};let audio;
  try{audio=createHoopsAudio({config:balance.audio,storage});}catch{audio=createHoopsAudio({config:balance.audio,storage:null});}
  const session={
-  setPaused(value){paused=!!value;last=0;loop.reset();const hidden=!!ctx.canvas?.ownerDocument?.hidden;controls?.setEnabled(!paused&&!hidden&&!view?.replaying);audio.setPaused(paused||hidden);},
-  dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();screens?.dispose();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
+  setPaused(value){paused=!!value;last=0;loop.reset();const hidden=!!ctx.canvas?.ownerDocument?.hidden;controls?.setEnabled(!paused&&!hidden&&!view?.replaying);audio.setPaused(paused||hidden);view?.setPaused?.(paused||hidden);},
+  dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();screens?.dispose();roleLabels?.dispose();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
    try{if(document.fullscreenElement)void screen.orientation?.lock?.('landscape')?.catch(()=>{});}catch{}},
   get snapshot(){return {...engine.snapshot(),paused,disposed,stepsRun,error,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),input:controls?.held,replaying:!!view?.replaying};},
  };
@@ -65,6 +69,7 @@ export function startHoops(ctx){
  const stamina=node('div','hoops-stamina');stamina.setAttribute('role','progressbar');stamina.setAttribute('aria-label','סיבולת · החזקת ספרינט צורכת אנרגיה');stamina.setAttribute('aria-valuemin','0');stamina.setAttribute('aria-valuemax','100');
  const staminaTrack=node('span','hoops-stamina-track'),staminaFill=node('i'),staminaValue=node('bdi','hoops-stamina-value','100');staminaValue.dir='ltr';staminaTrack.append(staminaFill);stamina.append(staminaTrack,staminaValue);
  stageEl.append(bug,meter,grade,toast,replayBtn,benchPanel,loading,stamina);
+ roleLabels=createHoopsRoleLabels(stageEl);
  screens=createHoopsScreens({stageEl,loading,teams:setup.teams,
   onOpen(){kitPaused=paused;session.setPaused(true);},onClose(){if(!disposed)session.setPaused(kitPaused);},
   onKit(kit,team){selectedKit={kit,team};view?.setKit(team,kit);}});
@@ -90,7 +95,8 @@ export function startHoops(ctx){
   const assetBase=new URL('../',import.meta.url);
   const quality=Number(params.get('hoopsQuality')||setup.quality||2);
   const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-ski-20261031-1');
-  viewModule.then(m=>m.createHoopsView(canvas,{...balance,view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onProgress:p=>ringEl.style.setProperty('--p',String(p))})).then(loaded=>{
+  Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;return m.createHoopsView(canvas,{...balance,view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
+   if(!loaded)return;
    if(disposed){loaded.dispose();return;}
    view=loaded;if(selectedKit)view.setKit(selectedKit.team,selectedKit.kit);const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();
    if(frame===undefined)frame=requestAnimationFrame(tick);
@@ -129,6 +135,7 @@ export function startHoops(ctx){
 
  const foulDots=[[...home.fouls.children],[...away.fouls.children]],pipDots=[...pips.children];let boardKey='';
  function hud(s,now){
+  roleLabels?.update(s,view);
   setText(home.sc,String(s.score[0]));setText(away.sc,String(s.score[1]));
   markFirst(foulDots[0],s.teamFouls[0]);markFirst(foulDots[1],s.teamFouls[1]);
   home.poss.classList.toggle('on',s.possession===0);away.poss.classList.toggle('on',s.possession===1);

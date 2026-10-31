@@ -6,6 +6,7 @@ import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-ski-20261031-1
 import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-ski-20261031-1';
 import {replaceArenaAssets} from './hoops-models.mjs';
 import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
+import {loadHoopsFeel,createHoopsFeel,sampleHoopsReplayScale} from './hoops-feel.mjs';
 import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-ski-20261031-1';
 
 function releaseScene(scene){
@@ -16,10 +17,10 @@ function releaseScene(scene){
 const lerp=(a,b,t)=>a+(b-a)*t;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 
-export async function createHoopsView(canvas,config,{court,teams,quality=2,assetBase,insets,onProgress}){
+export async function createHoopsView(canvas,config,{court,teams,quality=2,assetBase,insets,onProgress,onFeelAudio}){
  const V=config.view,mobile=/Android|iPhone|iPad|Mobile/i.test(globalThis.navigator?.userAgent||'');
  const renderer=new THREE.WebGLRenderer({canvas,antialias:quality>=2,powerPreference:'high-performance',preserveDrawingBuffer:!!V.preserve});
- let loadingScene,loadingModels,loadingAssets,loadingVfx,loadingPm,loadingEnv;
+ let loadingScene,loadingModels,loadingAssets,loadingVfx,loadingPm,loadingEnv,loadingFeel;
  try{
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=V.exposure;
  renderer.shadowMap.enabled=quality>=1;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
@@ -67,10 +68,13 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const state={camX:0,camZ:0,shake:0,replay:null,lastFrameMs:16,frames:0,slow:0,landscape:true,w:1,h:1,portraitT:1,ballVis:null};
  const v=new THREE.Vector3(),v2=new THREE.Vector3();
  const vfx=await createHoopsVfx(scene,assetBase,{quality,court});loadingVfx=vfx;
+ const feel=createHoopsFeel(await loadHoopsFeel(),{reducedMotion:vfx.reducedMotion,onCue(cue,event,snapshot){if(cue.kind==='audio')onFeelAudio?.(cue.asset,{volume:Math.pow(10,cue.gain_db/20)});else vfx.trigger?.(cue,event,snapshot);}});loadingFeel=feel;
  const replayCam=new THREE.PerspectiveCamera(),replayTarget=new THREE.Vector3();
 
  function resize(w,h,dpr){
   state.w=w;state.h=h;state.landscape=w>=h*1.05;
+  // Portrait's close camera is inside the hanging board: use a broadcast cutaway.
+  for(const name of ['hanging_scoreboard','live-hanging-scoreboard']){const board=arena.getObjectByName(name);if(board)board.visible=state.landscape;}
   const cap=mobile?V.mobileDprCap:V.dprCap;
   renderer.setPixelRatio(Math.min(dpr||1,cap));renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
  }
@@ -137,13 +141,13 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    camera.lookAt(state.pX+s0*2.4,V.lookY,state.camZ*0.5);
   }
   state.snap=false;
-  if(state.shake>0){camera.position.y+=Math.sin(performance.now()*0.05)*state.shake*0.06;state.shake=Math.max(0,state.shake-dt*2);}
   camera.updateProjectionMatrix();
  }
 
  const seen=new Set();
  function render(prev,cur,alpha,dt){
-  const s=state.replay?replayFrame(dt):cur,p0=state.replay?s:prev;state.lastSnapshot=cur;
+  const now=performance.now(),presentationDt=dt>0?Math.max(0,(now-(state.presentationNow??now-dt*1000))/1000):0;state.presentationNow=now;
+  const s=state.replay?replayFrame(presentationDt):cur,p0=state.replay?s:prev;state.lastSnapshot=cur;
   const t0=performance.now();
   interp.index(p0?.players);
   seen.clear();
@@ -158,7 +162,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    const defending=s.possession!==p.team&&s.ball.state==='held';
    const contest=handler&&handler.team!==p.team&&handler.act==='shoot'&&Math.hypot(handler.x-p.x,handler.z-p.z)<1.8?1:0;
    const catching=s.ball.state==='pass'&&s.ball.passTo===p.id;
-   av.pose(p,{defending,dribbling:s.phase==='live',airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching},Math.min(0.05,dt));
+   av.pose(p,{defending,dribbling:s.phase==='live',airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right'},Math.min(0.2,dt));
   }
   for(const [id,av] of avatars)if(!seen.has(id))av.root.visible=false;
   // ball: the engine position, but held/dribbled balls follow the hands of the clip
@@ -177,7 +181,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
     r.getWorldPosition(v);
     if(handler.act==='cross'){l.getWorldPosition(v2);v.lerp(v2,Math.sin(clamp(handler.actT/.55,0,1)*Math.PI));}
     const period=V.dribblePeriod/Math.max(0.6,Math.min(1.6,Math.hypot(handler.vx,handler.vz)/2.2+0.7));
-    const u=((b.dribbleT/period)%1),h=Math.max(court.ballR,v.y-0.05);
+    const u=(Number.isFinite(av.motionPhase)&&/dribble|sprint_ball/.test(av.motionState)?av.motionPhase:((b.dribbleT/period)%1)),h=Math.max(court.ballR,v.y-0.05);
     const fx=Math.sin(handler.face),fz=Math.cos(handler.face);
     bx=v.x+fx*0.18;bz=v.z+fz*0.18;by=court.ballR+(h-court.ballR)*Math.pow(Math.abs(1-2*u),0.85);
    }
@@ -199,6 +203,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   if(crowd)crowd.update(dt,state.cheer||0);state.cheer=Math.max(0,(state.cheer||0)-dt*0.5);
   if(state.override){camera.position.copy(state.override.pos);camera.fov=state.override.fov||camera.fov;camera.updateProjectionMatrix();camera.lookAt(state.override.look);}else cameraFor(s,dt);
   if(state.replay?.dunk&&!vfx.reducedMotion&&!state.override)replayCamera(state.replay,cur,dt);
+  const feedback=feel.update(presentationDt,s);
+  if(!state.override){if(!state.replay)camera.fov+=feedback.fov;camera.updateMatrixWorld();const e=camera.matrixWorld.elements,depth=Math.max(1,camera.position.distanceTo(ball.position)),span=2*depth*Math.tan(camera.fov*Math.PI/360);camera.position.x+=(e[0]*feedback.x+e[4]*feedback.y)*span;camera.position.y+=(e[1]*feedback.x+e[5]*feedback.y)*span;camera.position.z+=(e[2]*feedback.x+e[6]*feedback.y)*span;camera.updateProjectionMatrix();}
   vfx.update(dt,{ball,camera,snapshot:s,replaying:!!state.replay});
   renderer.render(scene,camera);
   if(state.replay?.complete){const done=state.replay.done;state.replay=null;done?.();}
@@ -206,7 +212,10 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  }
 
  function replayFrame(dt){
-  const r=state.replay;r.elapsed+=dt;
+  const r=state.replay;r.wallElapsed=(r.wallElapsed||0)+dt;
+  const contactTime=vfx.cameraTrack.entry.durationSeconds+vfx.cameraTrack.replayContactPathTime;
+  if(r.dunk&&r.elapsed>=contactTime&&r.contactWall==null)r.contactWall=r.wallElapsed;
+  r.elapsed+=dt*(r.contactWall==null?1:sampleHoopsReplayScale(feel.profile.events.dunk,(r.wallElapsed-r.contactWall)*1000));
   let i;
   if(r.dunk){
    const contact=vfx.cameraTrack.entry.durationSeconds+vfx.cameraTrack.replayContactPathTime;
@@ -230,7 +239,9 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
 
  function effects(events,snapshot){
   vfx.effects(events,snapshot||state.lastSnapshot);
+  feel.effects(events,snapshot||state.lastSnapshot);
   for(const e of events){
+   if(e.playerId&&(e.type!=='control'||(snapshot||state.lastSnapshot)?.players.find(p=>p.id===e.playerId)?.team!==(snapshot||state.lastSnapshot)?.possession))avatars.get(e.playerId)?.event(e);
    if(e.type==='final'&&snapshot){const winner=e.won?0:1;for(const p of snapshot.players)if(p.team===winner)avatars.get(p.id)?.event('result_success');}
    if(!vfx.reducedMotion&&e.type==='shotStart'&&(e.shotType==='dunk'||e.shotType==='layup'))state.punch=e.shotType==='dunk'?1:0.6;
    if(e.type==='score'){const n=dyn.nets.find(n=>Math.sign(n.side)===Math.sign((e.side)??1));for(const n2 of dyn.nets)n2.swing=1;state.cheer=1;if(e.shotType==='dunk'&&!vfx.reducedMotion)state.shake=1;}
@@ -245,8 +256,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   const rl=Math.hypot(rx,rz)||1,ul=Math.hypot(ux,uz)||1;
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
- function project(x,y,z){v.set(x,y,z).project(camera);return {x:(v.x+1)/2*state.w,y:(1-v.y)/2*state.h,visible:v.z<1};}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'adult-broadcast',vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v2?2:1,clipCount:assets.clips.size,arenaVersion:models.version,baked:models.baked,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;
@@ -254,13 +265,13 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   state.replay={frames,t:0,elapsed:0,speed,done,dunk:!!shooter&&!vfx.reducedMotion,contact,first:Math.max(start,contact-90),side,entry:{position:camera.position.clone(),quaternion:camera.quaternion.clone(),fov:camera.fov}};return true;
  }
  function dispose(){
-  for(const av of avatars.values())av.dispose();assets.dispose();models.dispose();vfx.dispose();
+  for(const av of avatars.values())av.dispose();assets.dispose();models.dispose();vfx.dispose();feel.dispose();
   releaseScene(scene);envTarget.dispose();renderer.dispose();pm.dispose();
  }
  function setCameraOverride(pos,look,fov){state.override=pos?{pos:new THREE.Vector3(pos.x,pos.y,pos.z),look:new THREE.Vector3(look.x,look.y,look.z),fov}:null;}
- return {setKit(team,kit){kits.set(team,kit);for(const p of teams[team].players)avatars.get(p.id)?.applyKit(kit);},snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,dispose,get replaying(){return !!state.replay;},renderer,scene,camera,avatars,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
+ return {setPaused(value){if(value)feel.pause();},setKit(team,kit){kits.set(team,kit);for(const p of teams[team].players)avatars.get(p.id)?.applyKit(kit);},snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,dispose,get replaying(){return !!state.replay;},renderer,scene,camera,avatars,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
  }catch(error){
-  loadingVfx?.dispose();loadingAssets?.dispose();loadingModels?.dispose();releaseScene(loadingScene);loadingEnv?.dispose();loadingPm?.dispose();renderer.dispose();throw error;
+  loadingFeel?.dispose();loadingVfx?.dispose();loadingAssets?.dispose();loadingModels?.dispose();releaseScene(loadingScene);loadingEnv?.dispose();loadingPm?.dispose();renderer.dispose();throw error;
  }
 }
 
@@ -269,7 +280,7 @@ async function buildCrowd(spots,url,grid,quality){
  const [cols,rows]=grid,people=cols*rows/2;
  const pick=quality>=2?spots:spots.filter((_,i)=>i%2===0);
  const geo=new THREE.PlaneGeometry(0.62,0.93);geo.translate(0,0.43,0);
- const mat=new THREE.MeshStandardMaterial({map:tex,transparent:false,alphaTest:0.5,roughness:0.9,side:THREE.DoubleSide});
+ const mat=new THREE.MeshBasicMaterial({map:tex,color:'#9eaabd',transparent:false,alphaTest:0.5,side:THREE.DoubleSide});
  const cell=new Float32Array(pick.length*2);
  geo.setAttribute('cell',new THREE.InstancedBufferAttribute(cell,2));
  mat.onBeforeCompile=sh=>{
