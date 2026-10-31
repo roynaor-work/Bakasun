@@ -181,7 +181,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     const lean = clamp(Number(frame.lean) || 0, -1, 1);
     carveHeld = moving && !frame.airborne && !frame.crashed && Math.abs(lean) > .2;
     carveStrength += ((carveHeld ? Math.abs(lean) : 0) - carveStrength) * (1 - Math.exp(-12 * dt));
-    time += dt;
+    time += dt * (state === 'recover' ? 2.4 : state === 'fall' ? 1.15 : 1);
     // Riding layer targets: full on the ground in glide/carve, partial in the air and pole push, off elsewhere.
     const rideWeight = (!moving || frame.crashed) ? 0 : (state === 'glide' || isCarve(state)) ? 1 : (state === 'air' || state === 'pole_push') ? .55 : 0;
     const speed01 = clamp((Number(speed) || 0) / 60);
@@ -192,7 +192,8 @@ export function createAlpineMotionPlayer(baked, bones) {
     const clip = baked.clips[state];
     const events = [];
     if (frame.crashed && !lastCrash) events.push('fall_confirmed');
-    if (!frame.crashed && state === 'fall') events.push('recovery_allowed');
+    // After the tumble the rider gets straight back on the board: the get-up starts early and plays fast.
+    if ((!frame.crashed || time >= .5) && state === 'fall') events.push('recovery_allowed');
     if (phase === 'finished' && context.result?.won && !resultSeen) events.push('result_success');
     if (frame.airborne && !lastAir) {
       // An authoritative jump can interrupt a short ground action before its
