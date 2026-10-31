@@ -1,0 +1,627 @@
+{
+  "schemaVersion": 1,
+  "kind": "new-design-assets-not-runtime",
+  "license": "CC0-1.0",
+  "generator": "Blender 5.2 / tools/build-models.py; original geometry",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z downhill",
+  "modelBudgetBytes": 220000,
+  "modelBytes": 51544,
+  "modelCount": 7,
+  "models": [
+    {
+      "id": "jump-ramp",
+      "file": "models/jump-ramp.glb",
+      "bytes": 7504,
+      "sha256": "1ca478b1534b080c9b561fb710f515aed9e5c95f97824e048543b3dee653b9bb",
+      "triangles": 1048,
+      "primitives": 1,
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "root": "asset_root",
+      "rootTransform": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mesh": "jump_ramp",
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_approach": [
+          0,
+          0,
+          0
+        ],
+        "anchor_takeoff": [
+          0,
+          2.4,
+          12
+        ],
+        "anchor_center": [
+          0,
+          0.6,
+          6.0
+        ]
+      },
+      "dimensions": {
+        "width": 6,
+        "length": 12,
+        "rise": 2.4,
+        "clearWidth": 5.4,
+        "takeoffSlopeDegrees": 21.8014,
+        "buriedBaseDepth": 0.18
+      },
+      "bounds": [
+        [
+          -3.0,
+          -0.18,
+          -0.0
+        ],
+        [
+          3.0,
+          2.412,
+          12.0
+        ]
+      ],
+      "uv": {
+        "attribute": "TEXCOORD_0",
+        "range": [
+          0,
+          1
+        ],
+        "topSnowU": "+X across full mesh width",
+        "topSnowV": "+Z across full mesh length",
+        "purpose": "base-color tiling; upward snow uses X/Z; vertical sides/end caps use dominant axes; different faces may overlap; not a lightmap atlas"
+      },
+      "colors": "COLOR_0, original palette with subtle normal-based shading",
+      "materials": 1,
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "notes": "Smooth curved snow ramp; +Z downhill. Join by the approach/takeoff surface anchors. The underside is intentionally 0.18m below the placement plane."
+    },
+    {
+      "id": "kicker",
+      "file": "models/kicker.glb",
+      "bytes": 7568,
+      "sha256": "341dba21a2b51f6aab49c11255e4d458a7004cba92e62475fb0d2eede9e482e0",
+      "triangles": 920,
+      "primitives": 1,
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "root": "asset_root",
+      "rootTransform": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mesh": "kicker",
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_approach": [
+          0,
+          0,
+          0
+        ],
+        "anchor_takeoff": [
+          0,
+          1.8,
+          6
+        ],
+        "anchor_center": [
+          0,
+          0.25875,
+          3.0
+        ]
+      },
+      "dimensions": {
+        "width": 4,
+        "length": 6,
+        "rise": 1.8,
+        "clearWidth": 3.4,
+        "takeoffSlopeDegrees": 40.5304,
+        "buriedBaseDepth": 0.18
+      },
+      "bounds": [
+        [
+          -2.0,
+          -0.18,
+          -0.0
+        ],
+        [
+          2.0,
+          1.812,
+          6.0
+        ]
+      ],
+      "uv": {
+        "attribute": "TEXCOORD_0",
+        "range": [
+          0,
+          1
+        ],
+        "topSnowU": "+X across full mesh width",
+        "topSnowV": "+Z across full mesh length",
+        "purpose": "base-color tiling; upward snow uses X/Z; vertical sides/end caps use dominant axes; different faces may overlap; not a lightmap atlas"
+      },
+      "colors": "COLOR_0, original palette with subtle normal-based shading",
+      "materials": 1,
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "notes": "Smooth curved snow ramp; +Z downhill. Join by the approach/takeoff surface anchors. The underside is intentionally 0.18m below the placement plane."
+    },
+    {
+      "id": "halfpipe-segment",
+      "file": "models/halfpipe-segment.glb",
+      "bytes": 11468,
+      "sha256": "4c551d0a1decf7eeb812332c50095bcd65822b652a0abfe30f8f9aa218a6423f",
+      "triangles": 1656,
+      "primitives": 1,
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "root": "asset_root",
+      "rootTransform": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mesh": "halfpipe_segment",
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_route_start": [
+          0,
+          0,
+          0
+        ],
+        "anchor_route_end": [
+          0,
+          0,
+          12
+        ],
+        "anchor_left_lip_start": [
+          -10.446709007300814,
+          2.7635153980321907,
+          0
+        ],
+        "anchor_right_lip_start": [
+          10.446709007300814,
+          2.7635153980321907,
+          0
+        ],
+        "anchor_left_deck_start": [
+          -10.68163216249729,
+          2.9280103622007734,
+          0
+        ],
+        "anchor_right_deck_start": [
+          10.68163216249729,
+          2.9280103622007734,
+          0
+        ]
+      },
+      "dimensions": {
+        "length": 12,
+        "flatHalfWidth": 6.5,
+        "wallRadius": 4.2,
+        "maxWallAngleDegrees": 70,
+        "roundedLipRadius": 0.25,
+        "wallLipHeight": 2.7635153980321907,
+        "deckHeight": 2.9280103622007734,
+        "deckWidthEachSide": 1,
+        "shellThicknessVertical": 0.3
+      },
+      "bounds": [
+        [
+          -11.681632,
+          -0.3,
+          -0.0
+        ],
+        [
+          11.681632,
+          2.92801,
+          12.0
+        ]
+      ],
+      "uv": {
+        "attribute": "TEXCOORD_0",
+        "range": [
+          0,
+          1
+        ],
+        "topSnowU": "+X across full mesh width",
+        "topSnowV": "+Z across full mesh length",
+        "purpose": "base-color tiling; upward snow uses X/Z; vertical sides/end caps use dominant axes; different faces may overlap; not a lightmap atlas"
+      },
+      "colors": "COLOR_0, original palette with subtle normal-based shading",
+      "materials": 1,
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "notes": "Straight local halfpipe module with rounded lips. Endpoints have identical cross-sections and can snap directly along +Z. Local centerline grade is zero; world descent is supplied by placement, not baked twice."
+    },
+    {
+      "id": "mogul",
+      "file": "models/mogul.glb",
+      "bytes": 5152,
+      "sha256": "4af5508039d428938395f698312282eab25b721c5463f8a639c949a585023baa",
+      "triangles": 384,
+      "primitives": 1,
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "root": "asset_root",
+      "rootTransform": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mesh": "mogul",
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_peak": [
+          0,
+          0.65,
+          0
+        ],
+        "anchor_front": [
+          0,
+          0,
+          -2.5
+        ],
+        "anchor_back": [
+          0,
+          0,
+          2.5
+        ]
+      },
+      "dimensions": {
+        "width": 3.6,
+        "length": 5.0,
+        "height": 0.65,
+        "instancingReady": true,
+        "singleMesh": true
+      },
+      "bounds": [
+        [
+          -1.8,
+          0.0,
+          -2.5
+        ],
+        [
+          1.8,
+          0.65,
+          2.5
+        ]
+      ],
+      "uv": {
+        "attribute": "TEXCOORD_0",
+        "range": [
+          0,
+          1
+        ],
+        "topSnowU": "+X across full mesh width",
+        "topSnowV": "+Z across full mesh length",
+        "purpose": "base-color tiling; upward snow uses X/Z; vertical sides/end caps use dominant axes; different faces may overlap; not a lightmap atlas"
+      },
+      "colors": "COLOR_0, original palette with subtle normal-based shading",
+      "materials": 1,
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "notes": "Original smooth elliptical snow bump. Surface meets the ground with zero slope at its perimeter. One mesh/material, centered origin, no attached markers; suitable for shared-geometry instances."
+    },
+    {
+      "id": "rope-post",
+      "file": "models/rope-post.glb",
+      "bytes": 3620,
+      "sha256": "7ae969a404814630e03469b51687517d0b46ccc592e825296f4bfaa43de23a0c",
+      "triangles": 144,
+      "primitives": 1,
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "root": "asset_root",
+      "rootTransform": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mesh": "rope_post",
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_rope": [
+          0,
+          1.1,
+          0
+        ]
+      },
+      "dimensions": {
+        "height": 1.26,
+        "footDiameter": 0.32,
+        "ropeHeight": 1.1
+      },
+      "bounds": [
+        [
+          -0.152169,
+          0.0,
+          -0.16
+        ],
+        [
+          0.152169,
+          1.26,
+          0.16
+        ]
+      ],
+      "uv": {
+        "attribute": "TEXCOORD_0",
+        "range": [
+          0,
+          1
+        ],
+        "topSnowU": "+X across full mesh width",
+        "topSnowV": "+Z across full mesh length",
+        "purpose": "base-color tiling; upward snow uses X/Z; vertical sides/end caps use dominant axes; different faces may overlap; not a lightmap atlas"
+      },
+      "colors": "COLOR_0, original palette with subtle normal-based shading",
+      "materials": 1,
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "notes": "Standalone original reflective rope post, base at y=0."
+    },
+    {
+      "id": "flag-rope",
+      "file": "models/flag-rope.glb",
+      "bytes": 9908,
+      "sha256": "151d2d42fc4d56d6b658315f02a933568269276348b884efae29046431588d6a",
+      "triangles": 584,
+      "primitives": 1,
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "root": "asset_root",
+      "rootTransform": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mesh": "flag_rope",
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_snap_left": [
+          -4,
+          0,
+          0
+        ],
+        "anchor_snap_right": [
+          4,
+          0,
+          0
+        ],
+        "anchor_rope_center": [
+          0,
+          0.94,
+          0
+        ]
+      },
+      "dimensions": {
+        "span": 8,
+        "postHeight": 1.26,
+        "ropeSag": 0.16,
+        "flags": 7
+      },
+      "bounds": [
+        [
+          -4.152169,
+          0.0,
+          -0.16
+        ],
+        [
+          4.152169,
+          1.26,
+          0.16
+        ]
+      ],
+      "uv": {
+        "attribute": "TEXCOORD_0",
+        "range": [
+          0,
+          1
+        ],
+        "topSnowU": "+X across full mesh width",
+        "topSnowV": "+Z across full mesh length",
+        "purpose": "base-color tiling; upward snow uses X/Z; vertical sides/end caps use dominant axes; different faces may overlap; not a lightmap atlas"
+      },
+      "colors": "COLOR_0, original palette with subtle normal-based shading",
+      "materials": 1,
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "notes": "Eight-metre route boundary. Snap its endpoint anchors; adjacent modules share endpoint locations. Posts are included; do not also instance a rope-post at those same endpoints."
+    },
+    {
+      "id": "direction-sign",
+      "file": "models/direction-sign.glb",
+      "bytes": 6324,
+      "sha256": "16f0b58ae99421c45fe5fc9c9058624df0451264669e29eb2d8adf47edb2c92e",
+      "triangles": 276,
+      "primitives": 1,
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "root": "asset_root",
+      "rootTransform": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mesh": "direction_sign",
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_board_center": [
+          0,
+          1.65,
+          0
+        ],
+        "anchor_arrow_tip": [
+          0.51,
+          1.65,
+          -0.05
+        ]
+      },
+      "dimensions": {
+        "boardWidth": 1.35,
+        "boardHeight": 0.5,
+        "boardCenterHeight": 1.65,
+        "frontNormal": [
+          0,
+          0,
+          -1
+        ],
+        "arrowDirection": [
+          1,
+          0,
+          0
+        ]
+      },
+      "bounds": [
+        [
+          -0.675,
+          0.0,
+          -0.17
+        ],
+        [
+          0.675,
+          1.9,
+          0.17
+        ]
+      ],
+      "uv": {
+        "attribute": "TEXCOORD_0",
+        "range": [
+          0,
+          1
+        ],
+        "topSnowU": "+X across full mesh width",
+        "topSnowV": "+Z across full mesh length",
+        "purpose": "base-color tiling; upward snow uses X/Z; vertical sides/end caps use dominant axes; different faces may overlap; not a lightmap atlas"
+      },
+      "colors": "COLOR_0, original palette with subtle normal-based shading",
+      "materials": 1,
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "notes": "Original pictogram sign without letters, numbers, logos or texture. Front faces uphill (-Z); arrow points locally right (+X). Rotate the whole instance around Y for another route direction."
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "allPassed": true,
+  "protocol": "file://",
+  "offline": true,
+  "externalRequestsAllowed": false,
+  "fileAccessBypassFlags": false,
+  "previewSha256": "13d8bd56a1e617f301933285580c13de9b22b3f6f791321248baa383bb26d858",
+  "embeddedScriptSha256": "40579b8575d0d1878fdde90f848ae011efed41fd6a26a3b8c37e0ab290b58962",
+  "sourceChangedDuringValidation": false,
+  "browser": "Chromium/SwiftShader, phone viewport and touch emulation",
+  "physicalPhone": false,
+  "limitations": "Offline asset preview only; no production game loading/CSP or FPS claim.",
+  "records": [
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "fileProtocol": true,
+      "offlineContext": true,
+      "httpRequests": [],
+      "pageErrors": [],
+      "consoleErrors": [],
+      "cspViolations": [],
+      "webglErrors": [],
+      "modes": [
+        {
+          "mode": "route",
+          "triangles": 29670,
+          "sourceHashesMatch": true,
+          "noHorizontalOverflow": true,
+          "webglErrors": []
+        },
+        {
+          "mode": "pipe",
+          "triangles": 17580,
+          "sourceHashesMatch": true,
+          "noHorizontalOverflow": true,
+          "webglErrors": []
+        },
+        {
+          "mode": "props",
+          "triangles": 5818,
+          "sourceHashesMatch": true,
+          "noHorizontalOverflow": true,
+          "webglErrors": []
+        },
+        {
+          "mode": "materials",
+          "triangles": 29670,
+          "sourceHashesMatch": true,
+          "noHorizontalOverflow": true,
+          "webglErrors": []
+        }
+      ],
+      "browserClosed": true,
+      "embeddedColors": {
+        "direction-sign": {
+          "minimum": 3,
+          "maximum": 152
+        },
+        "flag-rope": {
+          "minimum": 3,
+          "maximum": 244
+        },
+        "halfpipe-segment": {
+          "minimum": 151,
+          "maximum": 235
+        },
+        "jump-ramp": {
+          "minimum": 13,
+          "maximum": 244
+        },
+        "kicker": {
+          "minimum": 23,
+          "maximum": 244
+        },
+        "mogul": {
+          "minimum": 171,
+          "maximum": 244
+        },
+        "rope-post": {
+          "minimum": 3,
+          "maximum": 244
+        }
+      },
+      "pauseFreezesCanvas": true,
+      "trustedTouchDragChangesCanvas": true,
+      "trustedTouchPinchChangesCanvas": true,
+      "materialCards": {
+        "surfaceRepeats": 4,
+        "transparentDecalsAndAtlases": 4
+      },
+      "resumeChangesCanvas": true,
+      "screenshots": [
+        "previews/track-844x390.webp",
+        "previews/pipe-844x390.webp"
+      ],
+      "allPassed": true,
+      "contextClosed": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fileProtocol": true,
+      "offlineContext": true,
+      "httpRequests": [],
+      "pageErrors": [],
+      "consoleErrors": [],
+      "cspViolations": [],
+      "webglErrors": [],
+      "modes": [
+        {
+          "mode": "route",
+          "triangles": 29670,
+          "sourceHashesMatch": true,
+          "noHorizontalOverflow": true,
+          "webglErrors": []
+        },
+        {
+          "mode": "pipe",
+          "triangles": 17580,
+          "sourceHashesMatch": true,
+          "noHorizontalOverflow": true,
+          "webglErrors": []
+        },
+        {
+          "mode": "props",
+          "triangles": 5818,
+          "sourceHashesMatch": true,
+          "noHorizontalOverflow": true,
+          "webglErrors": []
+        },
+        {
+          "mode": "materials",
+          "triangles": 29670,
+          "sourceHashesMatch": true,
+          "noHorizontalOverflow": true,
+          "webglErrors": []
+        }
+      ],
+      "browserClosed": true,
+      "embeddedColors": {
+        "direction-sign": {
+          "minimum": 3,
+          "maximum": 152
+        },
+        "flag-rope": {
+          "minimum": 3,
+          "maximum": 244
+        },
+        "halfpipe-segment": {
+          "minimum": 151,
+          "maximum": 235
+        },
+        "jump-ramp": {
+          "minimum": 13,
+          "maximum": 244
+        },
+        "kicker": {
+          "minimum": 23,
+          "maximum": 244
+        },
+        "mogul": {
+          "minimum": 171,
+          "maximum": 244
+        },
+        "rope-post": {
+          "minimum": 3,
+          "maximum": 244
+        }
+      },
+      "pauseFreezesCanvas": true,
+      "trustedTouchDragChangesCanvas": true,
+      "trustedTouchPinchChangesCanvas": true,
+      "materialCards": {
+        "surfaceRepeats": 4,
+        "transparentDecalsAndAtlases": 4
+      },
+      "resumeChangesCanvas": true,
+      "screenshots": [
+        "previews/track-390x844.webp",
+        "previews/pipe-390x844.webp"
+      ],
+      "allPassed": true,
+      "contextClosed": true
+    }
+  ]
+}

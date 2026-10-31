@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "alpine-track-snow-groove",
+  "image": "snow-groove.png",
+  "imageSize": {
+    "width": 128,
+    "height": 128
+  },
+  "usage": "Optional texture across each runtime-generated groove strip",
+  "nominalWidthMeters": 0.055,
+  "repeatLengthMeters": 0.4,
+  "paddingPixels": {
+    "x": 8,
+    "y": 0
+  },
+  "alphaMode": "straight",
+  "colorSpace": "srgb",
+  "blendMode": "alpha",
+  "depthWrite": false,
+  "depthTest": true,
+  "sampling": {
+    "minFilter": "linear",
+    "magFilter": "linear",
+    "wrapS": "clamp-to-edge",
+    "wrapT": "repeat",
+    "mipmaps": false
+  },
+  "license": "CC0-1.0",
+  "provenance": "Original soft groove bed with two raised rims, vertically periodic",
+  "fileBytes": 1368,
+  "sha256": "d67a4200cfd73679ad2f88adcc13e4d833af9f30410eacd3ea229016a1add232"
+}

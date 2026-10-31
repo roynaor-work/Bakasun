@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "originalSourceSha256": "513bca7556a14f00bcc7e7b2a2b2d03d453b5063053a7035f49dedeb664b1580",
+  "uvConvention": "UV0: u across piste +X, v downhill +Z; one repeat covers tileMeters. Apply flipY=false for glTF.",
+  "surfaces": [
+    {
+      "id": "groomed-snow",
+      "file": "textures/groomed-snow.webp",
+      "width": 256,
+      "height": 256,
+      "colorSpace": "srgb",
+      "channels": "RGB",
+      "tileMeters": [
+        4,
+        4
+      ],
+      "roughness": 0.94,
+      "metalness": 0,
+      "wrap": "repeat",
+      "mipmaps": true,
+      "minFilter": "linear-mipmap-linear",
+      "magFilter": "linear",
+      "anisotropyMax": 4,
+      "flipYForGltf": false,
+      "edgeMaxError": 0,
+      "normal": {
+        "file": "textures/groomed-normal.webp",
+        "width": 128,
+        "height": 128,
+        "colorSpace": "linear-data",
+        "convention": "OpenGL +Y tangent space",
+        "scale": 0.18,
+        "optional": true,
+        "edgeMaxError": 0,
+        "bytes": 28636,
+        "sha256": "7d4e9e5c6e4ee85044ea00cbd77eadf01c6c4b1276c262222db60435b6dc7435"
+      },
+      "bytes": 79646,
+      "sha256": "508d1becaf813039b83887bdfd654af6054fc5c65ebb20e9098e79feb8d55a8e"
+    },
+    {
+      "id": "deep-snow",
+      "file": "textures/deep-snow.webp",
+      "width": 256,
+      "height": 256,
+      "colorSpace": "srgb",
+      "channels": "RGB",
+      "tileMeters": [
+        2.5,
+        2.5
+      ],
+      "roughness": 1,
+      "metalness": 0,
+      "wrap": "repeat",
+      "mipmaps": true,
+      "minFilter": "linear-mipmap-linear",
+      "magFilter": "linear",
+      "anisotropyMax": 4,
+      "flipYForGltf": false,
+      "edgeMaxError": 0,
+      "bytes": 68986,
+      "sha256": "34950dc6354486295a0e01bdc6531a62098558519ae41626fabb2d58d2dc0c2f"
+    },
+    {
+      "id": "halfpipe-ice",
+      "file": "textures/halfpipe-ice.webp",
+      "width": 256,
+      "height": 256,
+      "colorSpace": "srgb",
+      "channels": "RGB",
+      "tileMeters": [
+        5,
+        5
+      ],
+      "roughness": 0.28,
+      "metalness": 0,
+      "wrap": "repeat",
+      "mipmaps": true,
+      "minFilter": "linear-mipmap-linear",
+      "magFilter": "linear",
+      "anisotropyMax": 4,
+      "flipYForGltf": false,
+      "edgeMaxError": 0,
+      "normal": {
+        "file": "textures/ice-normal.webp",
+        "width": 128,
+        "height": 128,
+        "colorSpace": "linear-data",
+        "convention": "OpenGL +Y tangent space",
+        "scale": 0.18,
+        "optional": true,
+        "edgeMaxError": 0,
+        "bytes": 9246,
+        "sha256": "0a75e0d78299210dae5575289b075ef54822763ed43c0054d26233a0a2820236"
+      },
+      "bytes": 78512,
+      "sha256": "d75fce3931d45fc964ce8e1c94eadc5d79f8c350cefc92755f0bef0de92ea35f"
+    },
+    {
+      "id": "snow-ripples",
+      "file": "textures/snow-ripples.webp",
+      "width": 256,
+      "height": 256,
+      "colorSpace": "srgb",
+      "channels": "RGB",
+      "tileMeters": [
+        6,
+        6
+      ],
+      "roughness": 0.96,
+      "metalness": 0,
+      "wrap": "repeat",
+      "mipmaps": true,
+      "minFilter": "linear-mipmap-linear",
+      "magFilter": "linear",
+      "anisotropyMax": 4,
+      "flipYForGltf": false,
+      "edgeMaxError": 0,
+      "bytes": 61444,
+      "sha256": "8b768c7bd9d0f7ba0fc659dbf20a021b6734ea474aef1a38111a66c378014bcf"
+    }
+  ]
+}
