@@ -1,0 +1,349 @@
+{
+  "created": "2026-10-31",
+  "method": "Offline meshoptimizer quadric-error edge collapse; original vertex attributes and skeleton retained; original GLBs unchanged",
+  "tools": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "meshoptimizer": "1.3.0"
+  },
+  "docs": [
+    "https://gltf-transform.dev/modules/functions/functions/simplify",
+    "https://github.com/zeux/meshoptimizer/blob/master/js/README.md#simplifier"
+  ],
+  "assets": [
+    {
+      "kind": "guard",
+      "source": "assets/models/hoops-guard.glb",
+      "sourceSha256": "18aef27df33f6860e87e2b2b8c06f0beaed77b5134b8691ec8dca98e6ea01502",
+      "sourceBytes": 864676,
+      "output": "design/hoops/lod/hoops-guard-lod.glb",
+      "outputSha256": "f1de1e28c285b3d482688f0e83b7f85352b7f6c41a85d2b5257603e6d036907e",
+      "bytes": 288184,
+      "bones": 52,
+      "bindIdentical": true,
+      "originalNodeTransforms": true,
+      "triangles": 2964,
+      "sourceTriangles": 29024,
+      "meshes": [
+        {
+          "name": "Human.eyebrow001_x",
+          "before": 192,
+          "after": 66,
+          "vertices": 50,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.eyelashes01_x",
+          "before": 368,
+          "after": 128,
+          "vertices": 104,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.low-poly_x",
+          "before": 172,
+          "after": 120,
+          "vertices": 70,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.shoes06_x",
+          "before": 3064,
+          "after": 245,
+          "vertices": 178,
+          "ratio": 0.08,
+          "error": 0.025
+        },
+        {
+          "name": "Human.short04_x",
+          "before": 1050,
+          "after": 262,
+          "vertices": 281,
+          "ratio": 0.25,
+          "error": 0.025
+        },
+        {
+          "name": "Human_x",
+          "before": 18876,
+          "after": 1509,
+          "vertices": 979,
+          "ratio": 0.08,
+          "error": 0.005
+        },
+        {
+          "name": "Jersey",
+          "before": 2814,
+          "after": 337,
+          "vertices": 226,
+          "ratio": 0.12,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "before": 2488,
+          "after": 297,
+          "vertices": 193,
+          "ratio": 0.12,
+          "error": 0.03
+        }
+      ]
+    },
+    {
+      "kind": "wing",
+      "source": "assets/models/hoops-wing.glb",
+      "sourceSha256": "42bce07c8dee04a4094aee42ffe790c8330557509755c01cfeac39895c3041ac",
+      "sourceBytes": 907864,
+      "output": "design/hoops/lod/hoops-wing-lod.glb",
+      "outputSha256": "7a8eb1f8f3101d6199e4c54f7543399b18ef1528538aba2037ca5a8ad2f93511",
+      "bytes": 308704,
+      "bones": 52,
+      "bindIdentical": true,
+      "originalNodeTransforms": true,
+      "triangles": 3534,
+      "sourceTriangles": 31252,
+      "meshes": [
+        {
+          "name": "Human.eyebrow003_x",
+          "before": 192,
+          "after": 66,
+          "vertices": 51,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.eyelashes01_x",
+          "before": 368,
+          "after": 128,
+          "vertices": 105,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.low-poly_x",
+          "before": 172,
+          "after": 120,
+          "vertices": 70,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.shoes06_x",
+          "before": 3064,
+          "after": 245,
+          "vertices": 179,
+          "ratio": 0.08,
+          "error": 0.025
+        },
+        {
+          "name": "Human.short02_x",
+          "before": 3344,
+          "after": 835,
+          "vertices": 472,
+          "ratio": 0.25,
+          "error": 0.025
+        },
+        {
+          "name": "Human_x",
+          "before": 18802,
+          "after": 1504,
+          "vertices": 986,
+          "ratio": 0.08,
+          "error": 0.005
+        },
+        {
+          "name": "Jersey",
+          "before": 2810,
+          "after": 336,
+          "vertices": 224,
+          "ratio": 0.12,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "before": 2500,
+          "after": 300,
+          "vertices": 196,
+          "ratio": 0.12,
+          "error": 0.03
+        }
+      ]
+    },
+    {
+      "kind": "forward",
+      "source": "assets/models/hoops-forward.glb",
+      "sourceSha256": "0acfdc3d45a71efe8d29a2fbf9377ff9d14fd5f27f14b54c35c784c8af0c8eb6",
+      "sourceBytes": 947776,
+      "output": "design/hoops/lod/hoops-forward-lod.glb",
+      "outputSha256": "8ac88e277689b747d295c4bb717b2979365d58554221c8f7785252c02b4ce610",
+      "bytes": 327716,
+      "bones": 52,
+      "bindIdentical": true,
+      "originalNodeTransforms": true,
+      "triangles": 3611,
+      "sourceTriangles": 31520,
+      "meshes": [
+        {
+          "name": "Human.eyebrow006_x",
+          "before": 192,
+          "after": 67,
+          "vertices": 53,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.eyelashes01_x",
+          "before": 368,
+          "after": 128,
+          "vertices": 102,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.low-poly_x",
+          "before": 172,
+          "after": 124,
+          "vertices": 72,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.shoes06_x",
+          "before": 3064,
+          "after": 244,
+          "vertices": 179,
+          "ratio": 0.08,
+          "error": 0.025
+        },
+        {
+          "name": "Human.short01_x",
+          "before": 3678,
+          "after": 919,
+          "vertices": 969,
+          "ratio": 0.25,
+          "error": 0.025
+        },
+        {
+          "name": "Human_x",
+          "before": 18798,
+          "after": 1502,
+          "vertices": 975,
+          "ratio": 0.08,
+          "error": 0.005
+        },
+        {
+          "name": "Jersey",
+          "before": 2740,
+          "after": 328,
+          "vertices": 212,
+          "ratio": 0.12,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "before": 2508,
+          "after": 299,
+          "vertices": 193,
+          "ratio": 0.12,
+          "error": 0.03
+        }
+      ]
+    },
+    {
+      "kind": "big",
+      "source": "assets/models/hoops-big.glb",
+      "sourceSha256": "1bf6c29da21adcd81fbbfa6ecd460bf64b4a83dd2a91af7531988e8e477f817d",
+      "sourceBytes": 900632,
+      "output": "design/hoops/lod/hoops-big-lod.glb",
+      "outputSha256": "a6f0dc93ab8086eacfe09d12c58efa43276ff960f8dab637926057fa40319733",
+      "bytes": 329356,
+      "bones": 52,
+      "bindIdentical": true,
+      "originalNodeTransforms": true,
+      "triangles": 3595,
+      "sourceTriangles": 29980,
+      "meshes": [
+        {
+          "name": "Human.afro01_x",
+          "before": 2192,
+          "after": 910,
+          "vertices": 1496,
+          "ratio": 0.25,
+          "error": 0.025
+        },
+        {
+          "name": "Human.eyebrow002_x",
+          "before": 192,
+          "after": 67,
+          "vertices": 51,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.eyelashes01_x",
+          "before": 368,
+          "after": 128,
+          "vertices": 103,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.low-poly_x",
+          "before": 172,
+          "after": 124,
+          "vertices": 72,
+          "ratio": 0.35,
+          "error": 0.015
+        },
+        {
+          "name": "Human.shoes06_x",
+          "before": 3064,
+          "after": 244,
+          "vertices": 176,
+          "ratio": 0.08,
+          "error": 0.025
+        },
+        {
+          "name": "Human_x",
+          "before": 18796,
+          "after": 1502,
+          "vertices": 969,
+          "ratio": 0.08,
+          "error": 0.005
+        },
+        {
+          "name": "Jersey",
+          "before": 2680,
+          "after": 320,
+          "vertices": 207,
+          "ratio": 0.12,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "before": 2516,
+          "after": 300,
+          "vertices": 194,
+          "ratio": 0.12,
+          "error": 0.03
+        }
+      ]
+    }
+  ],
+  "generator": "tools/hoops-build-lod.mjs",
+  "flags": [
+    "RegularizeLight",
+    "Permissive",
+    "Prune for hair"
+  ],
+  "attributeWeights": {
+    "NORMAL": 0.2,
+    "TEXCOORD_0": 0.15,
+    "COLOR_0": 0.08,
+    "WEIGHTS_0": 0.02,
+    "JOINTS_0": 0.001
+  },
+  "runtime": "Atlas packing only; no simplification, worker or extra WASM runtime dependency"
+}
