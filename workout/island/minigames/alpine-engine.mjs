@@ -156,6 +156,14 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     emit('trick-start', { riderId: r.id, objectId: id });
     return true;
   }
+  /** Forgive an early input for at most 120ms of simulation time, including an
+   * input received on the same tick as takeoff. Grounded riders never perform
+   * tricks and a press during an active trick never queues an automatic combo. */
+  function consumePlayerTrick(r) {
+    if (!trickRequest) return;
+    if (ticks > trickRequest.expiresAt || r.trick || r.crashTime > 0) { trickRequest = null; return; }
+    if (startTrick(r, trickRequest.id)) trickRequest = null;
+  }
 
   /** A course rock remains solid after its one damage event. Move the board completely
    * clear on the nearest available side, choosing the inward side near a pipe boundary. */
@@ -268,7 +276,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     } else {
       r.steer = steerInput;
       if (boostRequest) { boostRequest = false; startBoost(r); }
-      if (trickRequest) { startTrick(r, trickRequest); trickRequest = null; }
+      consumePlayerTrick(r);
     }
     const angle = r.airborne ? 0 : wallAngle(r.x, pipe), onWall = angle > 0;
     const boosted = r.boostTime > 0 || r.padTime > 0;
@@ -316,6 +324,9 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       if (r.trick) { r.trick.t += dt; if (r.trick.t >= r.trick.duration) completeTrick(r); }
       if (r.vy <= 0 && r.alt <= surfaceHeight(r.x, pipe)) land(r);
     } else r.alt = surfaceHeight(r.x, pipe);
+    // A ramp/lip can launch after input was read at the top of this tick.
+    // Consume the surviving request only after that authoritative launch.
+    if (!r.ai) consumePlayerTrick(r);
     interact(r, prevS);
     if (!r.ai) r.peak = Math.max(r.peak, r.speed);
     if (r.s >= course.length) {
@@ -410,7 +421,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
         case 'start': if (phase === 'menu') reset(); break;
         case 'steer': steerInput = clamp(Number(cmd.value) || 0, -1, 1); break;
         case 'boost': if (phase === 'racing') boostRequest = true; break;
-        case 'trick': if (phase === 'racing' && TRICK_IDS.includes(cmd.id)) trickRequest = cmd.id; break;
+        case 'trick': if (phase === 'racing' && TRICK_IDS.includes(cmd.id)) trickRequest = {id: cmd.id, expiresAt: ticks + Math.max(1, Math.floor(.12 / step))}; break;
         case 'pause': if (phase === 'countdown' || phase === 'racing') { resumePhase = phase; phase = 'paused'; accumulator = 0; steerInput = 0; boostRequest = false; trickRequest = null; previousPresentation = null; } break;
         case 'resume': if (phase === 'paused') { phase = resumePhase; resumePhase = null; accumulator = 0; previousPresentation = null; } break;
         case 'retry': if (phase !== 'menu') reset(); break;
@@ -469,7 +480,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       return presentationFrames(player, riders.slice(1).map(frame));
     },
     drainEvents() { const out = events; events = []; return out; },
-    dispose() { disposed = true; events = []; riders = []; previousPresentation = null; },
+    dispose() { disposed = true; events = []; riders = []; steerInput = 0; boostRequest = false; trickRequest = null; previousPresentation = null; },
     /** Read-only diagnostics for tests; never used to render or score. */
     debug() { return riders.map(r => ({ id: r.id, s: r.s, x: r.x, vx: r.vx, speed: r.speed, tank: r.tank, boostTime: r.boostTime, padTime: r.padTime, hitTime: r.hitTime, height: heightOf(r), alt: r.alt, vy: r.vy, airborne: r.airborne, airKind: r.airKind, trick: r.trick ? {...r.trick} : null, trickScore: r.trickScore, crashes: r.crashes, coins: r.coins.size, finished: r.finished, collisions: r.collisions, hits: [...r.hits], pads: [...r.pads], gates: [...r.gates] })); },
     get phase() { return phase; },

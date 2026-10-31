@@ -53,9 +53,22 @@ export function createAlpineMotionPlayer(baked, bones) {
   const shown = new Float32Array(stride), outgoing = new Float32Array(stride);
   const target = new Float32Array(stride);
   const qa = new T.Quaternion(), qb = new T.Quaternion();
+  // The authored turn clips enter and leave a carve in 0.36s. During a held
+  // input retain their apex instead of replaying neutral endings; edge changes
+  // use the same authored 120ms visual blend from the displayed pose.
+  const transitions = [...baked.transitions];
+  const isCarve = name => name === 'turn_left' || name === 'turn_right';
+  for (const source of ['turn_left', 'turn_right']) {
+    const edge = baked.transitions.find(t => t.source === 'glide' && t.target === source);
+    if (!edge) continue;
+    const opposite = source === 'turn_left' ? 'turn_right' : 'turn_left';
+    transitions.push({...edge, source, target: opposite, on: opposite});
+    transitions.push({...edge, source, target: 'glide', on: 'carve_release'});
+  }
   let state = baked.initialState || 'idle', time = 0, fadeTime = 1, fadeDuration = 0;
   let lastTime = null, lastPhase = null, lastS = null, lastSpeed = 0, lastCrash = false, lastAir = false, lastBoost = false;
   let resultSeen = false, clipFinished = false, sampledFrames = 0;
+  let carveHeld = false, carveStrength = 0;
 
   function sample(name, seconds, out) {
     const clip = baked.clips[name];
@@ -72,7 +85,8 @@ export function createAlpineMotionPlayer(baked, bones) {
     }
   }
   function display(dt) {
-    sample(state, time, target);
+    const sampleTime = isCarve(state) && carveHeld ? Math.min(time, baked.clips[state].duration * .5 * carveStrength) : time;
+    sample(state, sampleTime, target);
     fadeTime += dt;
     const w = fadeDuration > 0 ? smooth(fadeTime / fadeDuration) : 1;
     for (let i = 0; i < count; i++) {
@@ -86,7 +100,7 @@ export function createAlpineMotionPlayer(baked, bones) {
   function event(events) {
     if (typeof events === 'string') events = [events];
     let selected = null;
-    for (const transition of baked.transitions) {
+    for (const transition of transitions) {
       if (!events.includes(transition.on) || !(transition.source === state || transition.source === '*' && transition.target !== state)) continue;
       if (transition.on === 'fall_confirmed' && (state === 'fall' || state === 'recover')) continue;
       if (transition.on === 'result_success' && (state === 'fall' || state === 'recover' || state === 'celebrate')) continue;
@@ -103,6 +117,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     sample(state, 0, outgoing); shown.set(outgoing); target.set(outgoing);
     lastTime = null; lastPhase = null; lastS = null; lastSpeed = 0;
     lastCrash = lastAir = lastBoost = resultSeen = clipFinished = false;
+    carveHeld = false; carveStrength = 0;
     display(0);
   }
   function update(frame = {}, context = {}) {
@@ -114,6 +129,9 @@ export function createAlpineMotionPlayer(baked, bones) {
     if (restarted) reset();
     const speed = context.speedKmh ?? (lastS !== null && dt > 0 ? Math.max(0, ((frame.s ?? lastS) - lastS) / dt * 3.6) : 0);
     const moving = phase === 'menu' && !!context.previewRun || (phase === 'racing' || phase === 'finished') && (speed > .5 || phase === 'racing');
+    const lean = clamp(Number(frame.lean) || 0, -1, 1);
+    carveHeld = moving && !frame.airborne && !frame.crashed && Math.abs(lean) > .2;
+    carveStrength += ((carveHeld ? Math.abs(lean) : 0) - carveStrength) * (1 - Math.exp(-12 * dt));
     time += dt;
     const clip = baked.clips[state];
     const events = [];
@@ -131,9 +149,10 @@ export function createAlpineMotionPlayer(baked, bones) {
     if (moving) { if (!(phase === 'menu' && context.previewRun)) events.push('moving'); }
     else events.push('stopped');
     if ((moving && speed < lastSpeed - .8 || !moving) && !frame.hit) events.push('slowing');
-    if (Math.abs(frame.lean || 0) > .2 && !frame.airborne) events.push(frame.lean < 0 ? 'turn_left' : 'turn_right');
+    if (carveHeld) events.push(lean < 0 ? 'turn_left' : 'turn_right');
+    else if (isCarve(state) && moving && !frame.airborne) events.push('carve_release');
     if (phase === 'menu' && context.previewRun) events.push('menu_run');
-    if (!clip.loop && time >= clip.duration && !clipFinished) {
+    if (!clip.loop && time >= clip.duration && !clipFinished && !(isCarve(state) && carveHeld)) {
       events.push('clip_finished', moving ? 'clip_finished_and_moving' : 'clip_finished_and_stopped'); clipFinished = true;
     }
     event(events);
@@ -145,7 +164,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     lastCrash = !!frame.crashed; lastAir = !!frame.airborne; lastBoost = !!frame.boosting;
   }
   reset();
-  return {update, event, reset, metrics: () => ({state, clipTime: time, sampledFrames, bakedClips: Object.keys(baked.clips).length})};
+  return {update, event, reset, metrics: () => ({state, clipTime: time, sampledFrames, bakedClips: Object.keys(baked.clips).length, carveHeld, carveStrength})};
 }
 
 export async function loadAlpineCharacters({modelUrl = asset('../design/characters/skier.glb'), isDisposed = () => false} = {}) {
