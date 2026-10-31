@@ -4,11 +4,11 @@
 // HOOPS_GAMEPLAY_OUT must be outside the repository (screenshots are deliverables).
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
-import {createServer} from 'node:http';
-import {mkdir,readFile,stat,writeFile} from 'node:fs/promises';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {serveIsland,readIslandCsp,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
 
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const repo=path.resolve(fileURLToPath(new URL('../../../',import.meta.url))),workout=path.join(repo,'workout');
@@ -18,26 +18,16 @@ const out=path.resolve(output);
 const outputRelative=path.relative(repo,out);assert.ok(outputRelative==='..'||outputRelative.startsWith('..'+path.sep)||path.isAbsolute(outputRelative),'Browser evidence must be saved outside the repository');
 await mkdir(out,{recursive:true});
 const index=path.join(workout,'island','index.html'),source=await readFile(index,'utf8');
-const originalCsp=source.match(/<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]+)"/i)?.[1];
-assert.ok(originalCsp?.includes("script-src 'self'"),'Expected the real index with script-src self');
+const originalCsp=await readIslandCsp();
+assert.ok(originalCsp.includes("script-src 'self'"),'Expected the shipped script-src self policy');
 const digest=s=>createHash('sha256').update(s).digest('hex'),sourceHash=digest(source);
-const types={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.json':'application/json','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.glb':'model/gltf-binary','.ogg':'audio/ogg','.jpg':'image/jpeg','.wasm':'application/wasm','.webmanifest':'application/manifest+json'};
-const server=createServer(async(req,res)=>{
- try{
-  const url=new URL(req.url,'http://local'),name=decodeURIComponent(url.pathname);
-  if(name==='/favicon.ico'){res.writeHead(204).end();return;}
-  if(!name.startsWith('/workout/')){res.writeHead(404).end();return;}
-  let file=path.resolve(workout,name.slice('/workout/'.length)||'.');
-  if(file!==workout&&!file.startsWith(workout+path.sep)){res.writeHead(403).end();return;}
-  if((await stat(file)).isDirectory())file=path.join(file,'index.html');
-  const bytes=await readFile(file);res.writeHead(200,{'content-type':types[path.extname(file)]||'application/octet-stream'});res.end(bytes);
- }catch{res.writeHead(404).end();}
-});
-await new Promise(r=>server.listen(0,'127.0.0.1',r));
-const origin=`http://127.0.0.1:${server.address().port}`,base=origin+'/workout/island/';
+const server=await serveIsland('/workout/island/'),base=server.url,origin=new URL(base).origin;
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});
 const viewports=(process.env.HOOPS_VIEWPORTS||'844x390,390x844').split(',').map(v=>{const [width,height]=v.split('x').map(Number);return {width,height};});
 const report={browser:browser.version(),renderer:'SwiftShader software WebGL',physicalPhone:false,csp:originalCsp,indexSha256:sourceHash,viewports:[],passed:false};
+const controlsDefinition=JSON.parse(await readFile(new URL('../design/controls/hoops.json',import.meta.url),'utf8'));
+const approvedLabels=new Set([...Object.values(controlsDefinition.controls).map(c=>c.label),'פייק','פסק זמן','מסירה קצרה','מסירה רחוקה']);
+const expectedModes={attack:['shoot','pass','move','fake','sprint','timeout'],offense:['pass','sprint','fake','move','timeout'],defense:['block','steal','switch','sprint','timeout'],inbound:['pass','move','timeout'],free_throw:['shoot','timeout']};
 
 // Reproducible local match fixtures isolate each action; no ratings, balance,
 // saves or action implementation is changed. The opponent AI is held at its
@@ -45,9 +35,10 @@ const report={browser:browser.version(),renderer:'SwiftShader software WebGL',ph
 function installFixture(){
  const get=()=>window.__island.games.current.session;
  const debug=get().debug,engine=debug.engine,drain=engine.drainEvents.bind(engine);
- window.__hoopsQA={events:[],keyEvents:[],fixture(kind='attack'){
+ window.__hoopsQA={initialTactics:engine.tacticsMetrics,events:[],frames:[],keyEvents:[],pointerEvents:[],fixture(kind='attack'){
   const d=get().debug,e=d.engine,S=e.debug.state,a=e.debug.api;
-  d.controls.cancel();while(d.controls.held.queued)d.controls.consume();
+  // Input fixtures freeze authored teammate plans as well as the legacy AI.
+  e.setTacticsData(null);d.controls.cancel();while(d.controls.held.queued)d.controls.consume();
   S.phase='live';S.phaseT=0;S.pending=null;S.inbound=null;S.ft=null;S.autopilot=false;S.clock=60;S.shotClock=24;S.shotClockOn=true;S.stoppage=null;
   const home=a.onCourt(0),away=a.onCourt(1),side=a.side(0);
   for(const p of [...home,...away]){
@@ -63,25 +54,32 @@ function installFixture(){
    for(let i=1;i<home.length;i++)e.debug.place(home[i].id,handler.x+side*(i===1?.85:4+i),i===1?0:i*.5);
   }
   e.debug.give(handler.id);S.controlled=selected.id;S.frontcourtSet=true;S.lastPossessionTick=S.tick;
-  d.step(1);this.events.length=0;
+  d.step(1);this.events.length=0;this.frames.length=0;this.pointerEvents.length=0;
   const snap=e.snapshot(),others=snap.players.filter(p=>p.team===0&&p.id!==selected.id);
   const nearest=others.sort((a,b)=>Math.hypot(a.x-handler.x,a.z-handler.z)-Math.hypot(b.x-handler.x,b.z-handler.z))[0];
   return {selected:selected.id,handler:handler.id,nearest:nearest.id,stealRange:a.C.steal.range,energy:selected.energy};
  },snapshot(){return get().snapshot;}};
+ const consume=debug.controls.consume.bind(debug.controls);debug.controls.consume=()=>{const frame=consume();window.__hoopsQA.frames.push(JSON.parse(JSON.stringify(frame)));return frame;};
  window.addEventListener('keydown',e=>window.__hoopsQA.keyEvents.push({type:'down',code:e.code,key:e.key}),true);window.addEventListener('keyup',e=>window.__hoopsQA.keyEvents.push({type:'up',code:e.code,key:e.key}),true);
+ for(const type of ['pointerdown','pointermove','pointerup','pointercancel'])window.addEventListener(type,e=>{if(e.target.closest?.('[data-hoops-control]'))window.__hoopsQA.pointerEvents.push({type,id:e.pointerId,at:performance.now(),timestamp:e.timeStamp,key:e.target.closest('[data-hoops-control]').dataset.hoopsControl});},true);
  engine.drainEvents=()=>{const events=drain();window.__hoopsQA.events.push(...events.map(e=>({...e})));return events;};
 }
 
 try{
 for(const viewport of viewports){
  const tag=`${viewport.width}x${viewport.height}`,row={...viewport,checks:[],layouts:[],screenshots:[]},context=await browser.newContext({viewport,hasTouch:true,isMobile:true,deviceScaleFactor:1});
- context.setDefaultTimeout(120000);const page=await context.newPage(),errors=[],outside=[],httpErrors=[];
+ context.setDefaultTimeout(120000);const csp=await installIslandCspMonitor(context),page=await context.newPage(),errors=[],outside=[],httpErrors=[];await csp.attachPage(page);let caseError=null;
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  page.on('requestfailed',r=>errors.push(`${r.url()}: ${r.failure()?.errorText}`));
  page.on('request',r=>{const u=new URL(r.url());if(/^https?:$/.test(u.protocol)&&u.origin!==origin)outside.push(u.href);});
  page.on('response',r=>{if(r.status()>=400)httpErrors.push({status:r.status(),url:r.url()});});
  await page.addInitScript(()=>{HTMLElement.prototype.requestFullscreen=undefined;});
- const check=name=>{row.checks.push(name);console.log(tag,'ok',name);};
+ row.stage='navigation';row.networkFailures=[];row.networkResponses=[];row.requestFailures=[];const networkRequests=new Map(),network=await context.newCDPSession(page);await network.send('Network.enable');
+ network.on('Network.requestWillBeSent',event=>{if(/basketball-(?:arena|hoop)\.glb|hoops-player-v2-lod\.glb|draco_decoder\.wasm/.test(event.request.url))networkRequests.set(event.requestId,{url:event.request.url,initiator:event.initiator,started:event.timestamp,stage:row.stage});});
+ network.on('Network.responseReceived',event=>{const request=networkRequests.get(event.requestId);if(request)row.networkResponses.push({...request,status:event.response.status,fromDiskCache:event.response.fromDiskCache,fromServiceWorker:event.response.fromServiceWorker});});
+ network.on('Network.loadingFailed',event=>{const request=networkRequests.get(event.requestId);if(request)row.networkFailures.push({...request,...event,stageFailed:row.stage});});
+ page.on('requestfailed',request=>row.requestFailures.push({url:request.url(),failure:request.failure(),type:request.resourceType(),timing:request.timing(),stage:row.stage}));
+ const check=name=>{row.stage=name;row.checks.push(name);console.log(tag,'ok',name);};
  const snap=()=>page.evaluate(()=>window.__hoopsQA.snapshot());
  const fixture=kind=>page.evaluate(k=>window.__hoopsQA.fixture(k),kind);
  const step=n=>page.evaluate(n=>window.__island.games.current.session.debug.step(n),n);
@@ -104,35 +102,71 @@ for(const viewport of viewports){
   await page.evaluate(()=>window.__island.games.stages('streetSlam'));
   await page.locator('[data-action=hoops-play-next]').click();
   if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
-  await page.waitForFunction(()=>{const s=window.__island.games.current?.session?.snapshot;return s?.error||s?.renderMetrics?.calls>0;},null,{timeout:240000});
+  await page.waitForFunction(()=>{const s=window.__island.games.current?.session?.snapshot;return s?.error||s?.renderMetrics?.calls>0&&s.renderMetrics.players===10;},null,{timeout:240000});
   const loaded=await page.evaluate(()=>window.__island.games.current.session.snapshot);assert.equal(loaded.error,null);assert.equal(loaded.renderMetrics.players,10);await page.locator('.hoops-kit-trigger').waitFor({state:'visible'});
-  await page.evaluate(()=>{window.__island.games.current.session.debug.hold=true;});await page.evaluate(installFixture);
+  await page.evaluate(()=>{window.__island.games.current.session.debug.hold=true;});await page.evaluate(installFixture);row.initialTactics=await page.evaluate(()=>window.__hoopsQA.initialTactics);assert.equal(row.initialTactics.loaded,true,'authored playbook loaded before the isolated input fixtures');
   const cdp=await context.newCDPSession(page),point=(id,p)=>({id,x:p.x,y:p.y,radiusX:1,radiusY:1,force:1});
   const touches=(type,points)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:points});
   check('real island UI, original CSP, 10 players and production controls loaded');
 
   // Bounding boxes for every visible action and both thumb regions in both UI
   // directions. A 24 px safe inset is injected through the production CSS vars.
-  for(const safe of [0,24])for(const dir of ['rtl','ltr'])for(const mode of ['attack','defense']){
-   await fixture(mode);
-   const layout=await page.evaluate(({safe,dir})=>{
+  for(const safe of [0,24])for(const dir of ['rtl','ltr'])for(const mode of Object.keys(expectedModes)){
+   await fixture(mode==='defense'?'defense':'attack');
+   const layout=await page.evaluate(({safe,dir,mode})=>{
     document.documentElement.dir=dir;const screen=document.querySelector('.game-screen[data-game=streetSlam]');screen.dir=dir;
-    for(const side of ['top','right','bottom','left'])screen.style.setProperty('--ih-safe-'+side,safe+'px');
+    for(const side of ['top','right','bottom','left'])screen.style.setProperty('--ih-safe-'+side,safe+'px');window.__island.games.current.session.debug.controls.setMode(mode==='attack'?'ball':mode);
     const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom};};
     const visible=e=>!e.hidden&&e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden';
-    const buttons=[...screen.querySelectorAll('button')].filter(visible).map(e=>({key:e.dataset.hoopsControl||e.dataset.action||e.className,rect:rect(e),label:e.getAttribute('aria-label'),text:e.textContent.trim()}));
-    return {buttons,stick:rect(screen.querySelector('.hoops-stick-zone')),actions:rect(screen.querySelector('.hoops-actions')),width:innerWidth,height:innerHeight};
-   },{safe,dir});
+    const buttons=[...screen.querySelectorAll('button')].filter(visible).map(e=>{const span=e.querySelector('.ih-action-label');let labelRect=null;if(span){const range=document.createRange();range.selectNodeContents(span);labelRect=rect(range);}const style=span&&getComputedStyle(span);return {key:e.dataset.hoopsControl||e.dataset.action||e.className,rect:rect(e),label:e.getAttribute('aria-label'),text:span?.textContent.trim()||'',labelRect,labelFont:style?parseFloat(style.fontSize):0,labelVisible:style?.visibility==='visible'&&Number(style.opacity)>0,control:!!e.dataset.hoopsControl};});
+    const actionRects=buttons.filter(b=>b.control&&b.key!=='timeout').map(b=>b.rect),x=Math.min(...actionRects.map(r=>r.x)),y=Math.min(...actionRects.map(r=>r.y)),right=Math.max(...actionRects.map(r=>r.right)),bottom=Math.max(...actionRects.map(r=>r.bottom));
+    return {buttons,stick:rect(screen.querySelector('.hoops-stick-zone')),stickDisabled:screen.querySelector('.hoops-stick-zone').getAttribute('aria-disabled'),actions:{x,y,right,bottom,w:right-x,h:bottom-y},width:innerWidth,height:innerHeight};
+   },{safe,dir,mode});
    const overlap=(a,b)=>Math.min(a.right,b.right)-Math.max(a.x,b.x)>.5&&Math.min(a.bottom,b.bottom)-Math.max(a.y,b.y)>.5;
-   for(const b of layout.buttons){const r=b.rect;assert.ok(r.w>=48&&r.h>=48,`${tag}/${safe}/${dir}/${mode} ${b.key} touch target ${r.w}x${r.h}`);assert.ok(b.label,`${b.key} has an accessible name`);assert.ok(r.x>=safe-.5&&r.y>=safe-.5&&r.right<=viewport.width-safe+.5&&r.bottom<=viewport.height-safe+.5,`${tag}/${safe}/${dir}/${mode} ${b.key} enters safe inset: ${JSON.stringify(r)}`);assert.ok(!overlap(r,layout.stick),`${b.key} overlaps left thumb region`);}
+   for(const b of layout.buttons){const r=b.rect;assert.ok(r.w>=48&&r.h>=48,`${tag}/${safe}/${dir}/${mode} ${b.key} touch target ${r.w}x${r.h}`);assert.ok(b.label,`${b.key} has an accessible name`);if(b.control){assert.ok(approvedLabels.has(b.text),`${b.key}: approved visible Hebrew label ${b.text}`);assert.match(b.text,/[א-ת]/u);const l=b.labelRect;assert.ok(b.labelVisible&&b.labelFont>=10&&l?.w>=8&&l?.h>=9,`${tag}/${safe}/${dir}/${mode} ${b.key} Hebrew label is actually painted: ${JSON.stringify(b)}`);assert.ok(l&&l.x>=r.x-1&&l.y>=r.y-1&&l.right<=r.right+1&&l.bottom<=r.bottom+1,`${tag}/${safe}/${dir}/${mode} ${b.key} label clips: ${JSON.stringify({button:r,label:l,text:b.text})}`);}assert.ok(r.x>=safe-.5&&r.y>=safe-.5&&r.right<=viewport.width-safe+.5&&r.bottom<=viewport.height-safe+.5,`${tag}/${safe}/${dir}/${mode} ${b.key} enters safe inset: ${JSON.stringify(r)}`);assert.ok(!overlap(r,layout.stick),`${b.key} overlaps left thumb region`);}
    for(let i=0;i<layout.buttons.length;i++)for(let j=i+1;j<layout.buttons.length;j++)assert.ok(!overlap(layout.buttons[i].rect,layout.buttons[j].rect),`${tag}/${safe}/${dir}/${mode}: ${layout.buttons[i].key} overlaps ${layout.buttons[j].key}`);
    for(const [name,r] of [['stick',layout.stick],['actions',layout.actions]])assert.ok(r.x>=safe-.5&&r.y>=safe-.5&&r.right<=viewport.width-safe+.5&&r.bottom<=viewport.height-safe+.5,`${name} outside safe region`);
    assert.ok(!overlap(layout.stick,layout.actions),'left and right thumb regions do not overlap');
-   const keys=layout.buttons.map(b=>b.key);assert.ok(keys.includes('game-pause'),'shell pause is covered');assert.ok(keys.includes('hoops-kit-trigger'),'kit picker is covered');for(const key of mode==='attack'?['shoot','pass','move','fake','sprint','timeout']:['block','steal','switch','sprint','timeout'])assert.ok(keys.includes(key),`${mode} exposes ${key}`);
+   const keys=layout.buttons.map(b=>b.key);assert.ok(keys.includes('game-pause'),'shell pause is covered');assert.ok(keys.includes('hoops-kit-trigger'),'kit picker is covered');assert.deepEqual(layout.buttons.filter(b=>b.control).map(b=>b.key).sort(),[...expectedModes[mode]].sort(),`${mode} exposes exactly its authored actions`);assert.equal(layout.stickDisabled,String(mode==='free_throw'),'free throw disables movement only');
    row.layouts.push({safe,dir,mode,...layout});
   }
-  check('all buttons >=48 px, no overlaps and both thumb areas inside safe insets: RTL/LTR × 0/24 px');
+  check('all buttons >=48 px, no overlaps and both thumb areas inside safe insets: RTL/LTR × 0/24 px × five modes with unclipped Hebrew labels');
   await page.evaluate(()=>{document.documentElement.dir='rtl';const s=document.querySelector('.game-screen');s.dir='rtl';for(const p of ['top','right','bottom','left'])s.style.setProperty('--ih-safe-'+p,'0px');});
+  // Native software-rendered touch delivery can take longer than 320 ms for
+  // three protocol messages. Control only the monotonic gesture clock while
+  // debug.hold isolates the match. Native timers, requests and RAF stay live.
+  await page.evaluate(()=>{const descriptor=Object.getOwnPropertyDescriptor(performance,'now');let time=performance.now();Object.defineProperty(performance,'now',{configurable:true,value:()=>time});window.__hoopsQA.clock={advance(ms){time+=ms;},restore(){if(descriptor)Object.defineProperty(performance,'now',descriptor);else delete performance.now;}};});row.gestureClock='Controlled monotonic gesture clock; native timers/RAF and trusted CDP events; explicit 60/319/320 ms durations';
+  const gestureTime=ms=>page.evaluate(ms=>window.__hoopsQA.clock.advance(ms),ms);
+
+  // Native tap/hold/swipe from the authored 320 ms pass control, through the
+  // real controls queue and engine. A single release must create a single pass.
+  const passFixture=async()=>{
+   const setup=await fixture('attack');
+   return page.evaluate(setup=>{const d=window.__island.games.current.session.debug,e=d.engine,a=e.debug.api,side=a.side(0),mates=a.onCourt(0).filter(p=>p.id!==setup.selected);e.debug.place(setup.selected,side*6,0);e.debug.place(mates[0].id,side*8,0);e.debug.place(mates[1].id,-side*6,0);e.debug.place(mates[2].id,side*2,4);e.debug.place(mates[3].id,side*2,-4);a.onCourt(1).forEach((p,i)=>e.debug.place(p.id,-side*11,5.6+i*.35));d.step(1);window.__hoopsQA.events.length=0;window.__hoopsQA.frames.length=0;return {...setup,near:mates[0].id,far:mates[1].id,positions:e.snapshot().players.map(p=>({id:p.id,team:p.team,x:p.x,z:p.z})),passConstants:a.C.pass};},setup);
+  };
+  for(const held of [false,true]){
+   const setup=await passFixture(),at=await center(button('pass'));row.passFixture=setup;const origin=setup.positions.find(p=>p.id===setup.selected),distance=id=>{const p=setup.positions.find(p=>p.id===id);return Math.hypot(p.x-origin.x,p.z-origin.z);};assert.ok(Math.abs(distance(setup.near)-2)<.01);assert.ok(distance(setup.far)>=11&&distance(setup.far)<=13);for(const p of setup.positions.filter(p=>p.team===0&&![setup.selected,setup.near,setup.far].includes(p.id)))assert.ok(distance(p.id)>=5&&distance(p.id)<=7);
+   await touches('touchStart',[point(5,at)]);
+   const initial=await page.evaluate(()=>{const d=window.__island.games.current.session.debug;d.controls.consume();const b=d.controls.elements.pass;return {hold:b.dataset.hold,text:b.querySelector('.ih-action-label').textContent,loading:b.dataset.loading,help:document.getElementById(b.getAttribute('aria-describedby'))?.textContent};});
+   assert.equal(initial.hold,'short');assert.equal(initial.loading,'true');assert.match(initial.help,/קצרה.*רחוקה/u);
+   if(held){await gestureTime(319);const beforeThreshold=await page.evaluate(()=>{const c=window.__island.games.current.session.debug.controls;c.consume();return c.elements.pass.dataset.hold;});assert.equal(beforeThreshold,'short','319 ms remains a short pass');await gestureTime(1);}else await gestureTime(60);
+   const charged=await page.evaluate(()=>{const c=window.__island.games.current.session.debug.controls;c.consume();const b=c.elements.pass,fill=b.querySelector('.ih-fill');return {hold:b.dataset.hold,text:b.querySelector('.ih-action-label').textContent,loading:b.dataset.loading,fill:fill.style.transform};});
+   assert.equal(charged.hold,held?'long':'short');if(held){assert.equal(charged.text,'מסירה רחוקה');assert.equal(charged.fill,'scaleX(1)');}
+   await touches('touchEnd',[]);await step(1);
+   const began=await page.evaluate(()=>({events:window.__hoopsQA.events,frames:window.__hoopsQA.frames,s:window.__hoopsQA.snapshot()}));(row.passChecks??=[]).push({held,setup,initial,charged,began});
+   assert.equal(began.events.filter(e=>e.type==='passStart'&&e.playerId===setup.selected).length,1);assert.equal(began.events.find(e=>e.type==='passStart').targetId,held?setup.far:setup.near);assert.equal(began.frames.filter(f=>f.passPress).length,1);assert.equal(began.frames.find(f=>f.passPress).passLong,held);
+   await step(10);const thrown=await page.evaluate(()=>window.__hoopsQA.events.filter(e=>e.type==='pass'));assert.equal(thrown.length,1);assert.equal(thrown[0].kind,held?'lob':'chest');
+   row[held?'heldPass':'shortPass']={initial,charged,target:thrown[0].targetId,kind:thrown[0].kind};
+  }
+  check('pass tap selects near/chest; 319 ms remains short and 320 ms shows long label/full charge then selects far/lob exactly once');
+  {
+   const setup=await passFixture(),at=await center(button('pass')),end={x:at.x+26,y:at.y};
+   const basis=await page.evaluate(()=>window.__island.games.current.session.debug.view.screenBasis());
+   await touches('touchStart',[point(6,at)]);await gestureTime(60);await touches('touchMove',[point(6,end)]);await touches('touchEnd',[]);await step(1);
+   const swipe=await page.evaluate(()=>({events:window.__hoopsQA.events,frames:window.__hoopsQA.frames,pointers:window.__hoopsQA.pointerEvents})),edge=swipe.frames.find(f=>f.passPress);row.passSwipeProof=swipe;
+   assert.equal(swipe.events.filter(e=>e.type==='passStart'&&e.playerId===setup.selected).length,1);assert.equal(swipe.frames.filter(f=>f.passPress).length,1);assert.equal(edge.passLong,false);assert.ok(edge.passDir);assert.ok(Math.abs(edge.passDir.x*basis.rx+edge.passDir.z*basis.rz-1)<1e-6,'swipe aim follows screen right in court coordinates');row.passSwipe=edge.passDir;
+  }
+  check('trusted pass swipe supplies a court-space direction without a duplicate tap');
 
   // Genuine touch actions and keyboard alternatives consume the same controls
   // queue. Each engine observation refers to the preselected player by id.
@@ -146,7 +180,7 @@ for(const viewport of viewports){
   f=await fixture('defense');await page.keyboard.press('Space');await step(1);s=await snap();assert.equal(s.players.find(p=>p.id===f.selected).air,true);check('keyboard Space also blocks');
 
   f=await fixture('attack');await shot('offense');await tap('move');await step(1);s=await snap();assert.equal(s.players.find(p=>p.id===f.selected).act,'cross');await step(8);await shot('cross');check('touch move tap crosses over');
-  f=await fixture('attack');const moveAt=await center(button('move'));await touches('touchStart',[point(4,moveAt)]);await page.waitForTimeout(360);await touches('touchEnd',[]);await step(1);s=await snap();assert.equal(s.players.find(p=>p.id===f.selected).act,'spin');check('holding the move control beyond 320 ms spins');
+  f=await fixture('attack');const moveAt=await center(button('move'));await touches('touchStart',[point(4,moveAt)]);await gestureTime(360);await touches('touchEnd',[]);await step(1);s=await snap();assert.equal(s.players.find(p=>p.id===f.selected).act,'spin');check('holding the move control beyond 320 ms spins');
   f=await fixture('attack');await page.keyboard.press('KeyR');await step(1);s=await snap();assert.equal(s.players.find(p=>p.id===f.selected).act,'spin');check('keyboard R spins immediately');
   f=await fixture('attack');await tap('fake');await step(1);s=await snap();assert.equal(s.players.find(p=>p.id===f.selected).act,'fake');assert.equal(s.ball.owner,f.selected);assert.equal(s.ball.state,'held');assert.equal(s.players.find(p=>p.id===f.selected).shotType,null);await step(12);s=await snap();assert.equal(s.ball.owner,f.selected);assert.equal(s.ball.state,'held');assert.equal(await page.evaluate(()=>window.__hoopsQA.events.some(e=>e.type==='release')),false);await shot('fake');check('touch fake keeps ownership and creates no shot or release');
   f=await fixture('attack');await page.keyboard.press('KeyF');await step(1);s=await snap();assert.equal(s.players.find(p=>p.id===f.selected).act,'fake');check('keyboard F fakes');
@@ -167,14 +201,15 @@ for(const viewport of viewports){
   await cdp.detach();
 
   // Pause button is part of the real shell, including focus and input lifecycle.
-  await fixture('attack');await page.locator('[data-action=game-pause]').click();assert.equal((await snap()).paused,true);await page.evaluate(()=>{window.__island.games.current.session.debug.hold=false;});const pausedTick=(await snap()).tick;await page.waitForTimeout(200);assert.equal((await snap()).tick,pausedTick);await page.evaluate(()=>{window.__island.games.current.session.debug.hold=true;});await page.locator('[data-action=game-resume]').click();assert.equal((await snap()).paused,false);check('real shell pause/resume reaches the session');
+  await fixture('attack');await page.evaluate(()=>window.__hoopsQA.clock.restore());const runningTick=await page.evaluate(()=>{const s=window.__island.games.current.session;s.debug.hold=false;return s.snapshot.tick;});await page.waitForFunction(t=>window.__island.games.current.session.snapshot.tick>t,runningTick,{timeout:30000});await page.locator('[data-action=game-pause]').click();assert.equal((await snap()).paused,true);const pausedTick=(await snap()).tick;await page.waitForTimeout(200);assert.equal((await snap()).tick,pausedTick);await page.evaluate(()=>{window.__island.games.current.session.debug.hold=true;});await page.locator('[data-action=game-resume]').click();assert.equal((await snap()).paused,false);check('native RAF advances before real shell pause, then pause freezes the session and resumes');
+  row.errorsBeforeCleanup=[...errors];assert.deepEqual(errors,[],'no console/page/request error before cleanup');
   await page.evaluate(()=>window.__island.games.cleanup());assert.equal(await page.evaluate(()=>!!window.__island.games.current),false);check('leaving the game disposes the active session');
   assert.deepEqual(errors,[],'every console/page/request error fails');assert.deepEqual(httpErrors,[],'every HTTP error fails');assert.deepEqual(outside,[],'no external network requests');
-  row.errors=errors;row.httpErrors=httpErrors;row.externalRequests=outside;row.passed=true;
- }catch(error){row.passed=false;row.error=error.stack;row.errors=errors;row.httpErrors=httpErrors;row.externalRequests=outside;try{await page.screenshot({path:path.join(out,`${tag}-failure.png`),timeout:30000});}catch{}throw error;}
- finally{report.viewports.push(row);await writeFile(path.join(out,'verification.json'),JSON.stringify(report,null,2));await context.close();}
+  await csp.assertClean();row.csp=csp.snapshot();row.errors=errors;row.httpErrors=httpErrors;row.externalRequests=outside;row.passed=true;
+ }catch(error){caseError=error;row.passed=false;row.error=error.stack;row.errors=errors;row.httpErrors=httpErrors;row.externalRequests=outside;try{await page.screenshot({path:path.join(out,`${tag}-failure.png`),timeout:30000});}catch{}throw error;}
+ finally{let auditError=null;const failed=(error,key)=>{auditError??=error;row.passed=false;row[key]=error.stack||error.message;};try{await csp.assertClean();}catch(error){failed(error,'cspFailure');}try{await context.close();await csp.assertClean();}catch(error){failed(error,'cspAfterCloseFailure');}row.csp=csp.snapshot();report.viewports.push(row);try{await writeFile(path.join(out,'verification.json'),JSON.stringify(report,null,2));}finally{await csp.dispose();}if(!caseError&&auditError)throw auditError;}
 }
 assert.equal(digest(await readFile(index,'utf8')),sourceHash,'real index source and CSP remained unchanged');report.passed=true;
 await writeFile(path.join(out,'verification.json'),JSON.stringify(report,null,2));
-}finally{await browser.close();server.close();}
+}finally{await browser.close();await server.close();}
 console.log('hoops gameplay browser: all requested viewports passed');

@@ -1,14 +1,14 @@
 // Island Pro Basketball acceptance run in Chromium (SwiftShader software WebGL).
 // Serves the workout/ subtree, builds a basketball court through the real island UI
 // engine, opens the game, and checks per viewport: assets load, 5 on 5 renders, touch and
-// keyboard reach the engine, controls are at least 48 px, the game screen carries no words,
+// keyboard reach the engine, controls are at least 48 px with authored Hebrew labels and LTR role badges,
 // pause freezes the clock, leaving releases WebGL, listeners and audio. Feel round (27/10):
 // one-button start card, floating stick with dead zone and auto sprint, tap/hold passes,
 // a shot meter with green and yellow zones.
 // Usage: CHROMIUM_PATH=... PLAYWRIGHT_MODULE=... node workout/island/tests/hoops-browser.mjs
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {serveIsland,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
@@ -20,6 +20,10 @@ const server=await serveIsland('/workout/island/'),base=server.url;
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});
 const only=(process.env.HOOPS_VIEWPORTS||'1280x720,844x390,390x844').split(',').map(v=>{const [width,height]=v.split('x').map(Number);return {width,height};});
 const report={browser:browser.version(),renderer:'SwiftShader (software WebGL)',physicalPhone:false,viewports:[]};
+const controlsProfile=JSON.parse(await readFile(new URL('../design/controls/hoops.json',import.meta.url),'utf8')),interaction=JSON.parse(await readFile(new URL('../design/controls/interaction.json',import.meta.url),'utf8'));
+const approvedLabels=new Set([...Object.values(controlsProfile.controls).map(c=>c.label),'פייק','פסק זמן','מסירה קצרה','מסירה רחוקה','קפיצה לריבאונד','בקשת כדור']);
+const approvedGameText=new Set([...approvedLabels,'PG','SG','SF','PF','C','מסירה: נגיעה לקרוב · החזקה לרחוק','מסירה: קצרה בנגיעה · רחוקה בהחזקה']);
+const expectedControlsByMode={ball:['shoot','pass','move','fake','sprint','timeout'],offense:['pass','sprint','fake','move','timeout'],defense:['block','steal','switch','sprint','timeout'],inbound:['pass','move','timeout'],free_throw:['shoot','timeout']};
 
 const PROBE=()=>{
  const live=new Set(),add=EventTarget.prototype.addEventListener,rem=EventTarget.prototype.removeEventListener;
@@ -68,18 +72,18 @@ try{for(const viewport of only){
  assert.equal(s.players.length,10);assert.equal(s.renderMetrics.players,10);check(`10 players rendered after ${row.loadMs} ms`);
  row.metrics=s.renderMetrics;
 
- // controls: touch targets and icons only
- const controls=await page.evaluate(()=>[...document.querySelectorAll('[data-hoops-control]')].filter(b=>!b.hidden&&b.offsetParent).map(b=>{const r=b.getBoundingClientRect();return {key:b.dataset.hoopsControl,w:r.width,h:r.height,text:b.textContent.trim(),svg:!!b.querySelector('svg'),label:b.getAttribute('aria-label')};}));
+ // Authored visible labels, contextual actions, icons and accessible hit targets.
+ const controls=await page.evaluate(()=>[...document.querySelectorAll('[data-hoops-control]')].filter(b=>!b.hidden&&b.offsetParent).map(b=>{const r=b.getBoundingClientRect(),span=b.querySelector('.ih-action-label'),range=document.createRange();if(span)range.selectNodeContents(span);const text=span&&range.getBoundingClientRect(),style=span&&getComputedStyle(span);return {key:b.dataset.hoopsControl,w:r.width,h:r.height,text:span?.textContent.trim()||'',textWidth:text?.width||0,textHeight:text?.height||0,textFont:style?parseFloat(style.fontSize):0,textVisible:style?.visibility==='visible'&&Number(style.opacity)>0,svg:!!b.querySelector('svg'),label:b.getAttribute('aria-label')};}));
  const controlMode=await page.locator('.hoops-controls').getAttribute('data-hoops-mode');
- const expectedControls=controlMode==='ball'?['shoot','pass','move','fake','sprint','timeout']:controlMode==='defense'?['block','steal','switch','sprint','timeout']:['shoot','pass','switch','sprint','timeout'];
- assert.ok(['ball','offense','defense'].includes(controlMode));
+ const expectedControls=expectedControlsByMode[controlMode];
+ assert.ok(expectedControls,'one of the five authored control states');
  assert.deepEqual(controls.map(c=>c.key).sort(),expectedControls.sort(),'explicit contextual actions and hold sprint: '+JSON.stringify(controls));
- for(const c of controls){assert.ok(c.w>=48&&c.h>=48,`${c.key} ${c.w}x${c.h}`);assert.equal(c.text,'',`${c.key} has no words`);assert.ok(c.svg,`${c.key} has an icon`);assert.ok(c.label,`${c.key} is labelled for screen readers`);}
+ for(const c of controls){assert.ok(c.w>=48&&c.h>=48,`${c.key} ${c.w}x${c.h}`);assert.ok(approvedLabels.has(c.text),`${c.key} has an approved visible Hebrew label: ${c.text}`);assert.match(c.text,/[א-ת]/u);assert.ok(c.textVisible&&c.textWidth>=8&&c.textHeight>=9&&c.textFont>=10,`${c.key} Hebrew label is actually painted: ${JSON.stringify(c)}`);assert.ok(c.svg,`${c.key} has an icon`);assert.ok(c.label,`${c.key} is labelled for screen readers`);}
  const stick=await page.locator('.hoops-stick-zone').boundingBox();assert.ok(stick.width>=96&&stick.height>=96);
- check(`${controls.length} controls at least 48 px, icons only, labelled`);
+ check(`${controls.length} controls at least 48 px, visible Hebrew labels and icons`);
  const words=await page.evaluate(()=>{const roots=[document.querySelector('.hoops-bug')?.parentElement,document.querySelector('.hoops-controls')].filter(Boolean),found=[];
   for(const r of roots){const w=document.createTreeWalker(r,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){const el=n.parentElement;if(!el||el.closest('[hidden]')||!el.offsetParent||el.closest('.visually-hidden,[class*=sr-only]'))continue;if(/\p{L}/u.test(n.textContent))found.push(n.textContent.trim());}}return found;});
- assert.deepEqual(words,[],'no words on the game screen');check('no words on the game screen (digits and icons only)');
+ assert.deepEqual(words.filter(text=>!approvedGameText.has(text)),[],'visible game text is restricted to authored Hebrew actions, role badges and digits');check('visible text is allowlisted Hebrew actions, LTR position codes and digits');
 
  // the ball is in play
  await page.evaluate(()=>window.__island.games.current.session.debug.step(240));await page.waitForTimeout(300);
@@ -101,20 +105,20 @@ try{for(const viewport of only){
  if(phone){
   const c={x:stick.x+stick.width/2,y:stick.y+stick.height/2};
   await page.touchscreen.tap(c.x,c.y);
-  const shootBox=await page.locator('[data-hoops-control=shoot]:visible,[data-hoops-control=block]:visible').boundingBox();assert.ok(shootBox,'the current mode exposes a primary touch action');await page.touchscreen.tap(shootBox.x+shootBox.width/2,shootBox.y+shootBox.height/2);
+  const primary=page.locator('[data-hoops-control=shoot]:visible,[data-hoops-control=block]:visible');const shootBox=await (await primary.count()?primary.first():page.locator('[data-hoops-control=pass]:visible')).boundingBox();assert.ok(shootBox,'the current mode exposes a primary touch action');await page.touchscreen.tap(shootBox.x+shootBox.width/2,shootBox.y+shootBox.height/2);
   await page.evaluate(()=>window.__island.games.current.session.debug.step(30));check('touch on stick and action button accepted');
  }
 
  // floating stick, dead zone, soft curve and sprint at full tilt; tap = short pass, hold = long pass
  await page.evaluate(()=>{const d=window.__island.games.current.session.debug;d.hold=true;d.controls.cancel();d.controls.setMode('ball');while(d.controls.held.queued)d.controls.consume();});
- const zoneBox=await page.locator('.hoops-stick-zone').boundingBox(),P={x:zoneBox.x+zoneBox.width*0.62,y:zoneBox.y+zoneBox.height*0.42};
+ const zoneBox=await page.locator('.hoops-stick-zone').boundingBox(),P={x:zoneBox.x+zoneBox.width/2,y:zoneBox.y+zoneBox.height/2};
  const readStick=()=>page.evaluate(()=>{const c=window.__island.games.current.session.debug.controls,r=c.elements.ring.getBoundingClientRect(),f=c.consume();return {ring:{x:r.x+r.width/2,y:r.y+r.height/2},held:c.held.stick,m:Math.hypot(f.move.x,f.move.z),sprint:f.sprint};});
  await page.mouse.move(P.x,P.y);await page.mouse.down();
  const s0=await readStick();assert.ok(s0.held&&Math.hypot(s0.ring.x-P.x,s0.ring.y-P.y)<3,'the stick appears under the thumb: '+JSON.stringify(s0));assert.equal(s0.m,0,'dead zone at the touch point');
  await page.mouse.move(P.x+14,P.y);const s1=await readStick();assert.ok(s1.m>0.05&&s1.m<0.45&&!s1.sprint,'a small push is a slow walk: '+JSON.stringify(s1));
- await page.mouse.move(P.x+70,P.y);const s2=await readStick();assert.ok(s2.m>0.97&&s2.sprint,'full tilt sprints: '+JSON.stringify(s2));
+ await page.mouse.move(P.x+70,P.y);const beforeHold=await readStick();assert.ok(beforeHold.m>.97&&!beforeHold.sprint,'full tilt waits for the authored hold threshold: '+JSON.stringify(beforeHold));await page.waitForTimeout(interaction.gesture_thresholds.one_finger_sprint_hold_ms+40);const s2=await readStick();assert.ok(s2.m>0.97&&s2.sprint,'held full tilt sprints: '+JSON.stringify(s2));
  await page.mouse.up();const s3=await readStick();assert.ok(!s3.held&&s3.m===0);
- check(`floating stick: under the thumb, dead zone, ${s1.m.toFixed(2)} at a small push, sprint at full tilt`);
+ check(`authored stick: centred under the thumb, dead zone, ${s1.m.toFixed(2)} at a small push, sprint at full tilt`);
  const passBox=await page.locator('[data-hoops-control=pass]').boundingBox(),PC={x:passBox.x+passBox.width/2,y:passBox.y+passBox.height/2};
  const passRead=async(mode,ms)=>{await page.evaluate(m=>{const c=window.__island.games.current.session.debug.controls;c.setMode(m);while(c.held.queued)c.consume();},mode);
   await page.mouse.move(PC.x,PC.y);await page.mouse.down();const during=await page.evaluate(()=>window.__island.games.current.session.debug.controls.held.queued);await page.waitForTimeout(ms);await page.mouse.up();
