@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
+import path from 'node:path';
+import {serveIsland,islandChromium,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
 
 /** Alpine Rush in the real island page: entry, race, joystick, hit, jump, trick, pipe air, boost, pause, result,
  * ten entry/exit cycles, exit while loading, low quality, missing model and no WebGL.
@@ -15,16 +16,34 @@ const balanceTricks=Object.fromEntries(Object.entries(JSON.parse(await (await im
 async function open(width,height,{query='',init}={}){
   const browser=await chromium.launch({executablePath,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
   const context=await browser.newContext({viewport:{width,height},hasTouch:true,deviceScaleFactor:1,timezoneId:'Asia/Jerusalem'});
+  const csp=await installIslandCspMonitor(context);
   await context.route('**/data/featureFlags.json*',async route=>{const response=await route.fetch();await route.fulfill({response,json:{...await response.json(),events:false}});});
   if(init)await context.addInitScript(init);
   const page=await context.newPage(),errors=[],outside=[];page.setDefaultTimeout(120000);
+  await csp.attachPage(page);
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&!/missing-alpine-rider/.test(m.text())&&!/404/.test(m.text()))errors.push(m.text());});
   page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&u.origin!==new URL(server.url).origin)outside.push(u.href);});
-  await page.goto(server.url+'?dev=1'+query,{waitUntil:'networkidle'});
-  await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
-  await page.locator('[data-action=avatar-start]').tap();
-  await page.evaluate(()=>{const {engine:e}=window.__island;e.skipTutorial();window.__realTick=e.tick;e.tick=()=>({ok:true});});
-  return {browser,page,errors,outside,async close(){await browser.close();}};
+  async function close(){
+    const failures=[];
+    try{await csp.assertClean();}catch(error){failures.push(error);}
+    try{await browser.close();}catch(error){failures.push(error);}
+    try{await csp.assertClean();}catch(error){failures.push(error);}
+    try{await csp.dispose();}catch(error){failures.push(error);}
+    const auditDir=process.env.ISLAND_CSP_AUDIT_DIR||directory,label=(query||'normal').replace(/[^\w-]+/g,'-')+(init?'-injected':'');
+    await mkdir(auditDir,{recursive:true});await writeFile(path.join(auditDir,`alpine-${width}x${height}-${label}-csp.json`),JSON.stringify(csp.snapshot(),null,2)+'\n');
+    if(failures.length)throw new AggregateError(failures,'Alpine CSP/teardown audit failed');
+  }
+  try{
+    await page.goto(server.url+'?dev=1'+query,{waitUntil:'networkidle'});
+    await csp.assertClean();
+    await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
+    await page.locator('[data-action=avatar-start]').tap();
+    await page.evaluate(()=>{const {engine:e}=window.__island;e.skipTutorial();window.__realTick=e.tick;e.tick=()=>({ok:true});});
+    return {browser,page,errors,outside,csp,close};
+  }catch(error){
+    try{await close();}catch(auditError){throw new AggregateError([error,auditError],'Alpine open and CSP audit failed');}
+    throw error;
+  }
 }
 const session=page=>page.evaluate(()=>window.__island.ui.activityInterface.current?.session?.snapshot);
 const launch=page=>page.evaluate(()=>{const e=window.__island.engine;if(!e.state.instructionsSeen.includes('alpineRush'))e.state.instructionsSeen.push('alpineRush');window.__island.ui.activityInterface.launch('alpineRush',undefined,1);});
@@ -125,9 +144,11 @@ for(const {width,height} of viewports){
       assert.deepEqual(left,{canvases:0,apps:0,css:0,active:false},`cycle ${i}`);}
     await launch(page);await page.evaluate(()=>window.__island.ui.closeModal());await page.waitForTimeout(4000);
     assert.equal(await page.evaluate(()=>document.querySelectorAll('canvas').length<=2&&!document.querySelector('.alpine-app')),true,'exit during loading');
-    assert.deepEqual(f.errors,[]);assert.deepEqual(f.outside,[]);
-    report.shots=shots;reports.push(report);console.log(`alpine ${width}x${height}: ok (${shots.length} shots)`);
-  } catch(error){await shot('failure').catch(()=>{});throw error;} finally {await f.close();}
+    assert.deepEqual(f.errors,[]);assert.deepEqual(f.outside,[]);await f.csp.assertClean();
+    report.csp=f.csp.snapshot();report.shots=shots;reports.push(report);console.log(`alpine ${width}x${height}: ok (${shots.length} shots)`);
+  } catch(error){await shot('failure').catch(()=>{});throw error;} finally {
+    try { await f.close(); } finally { report.csp=f.csp.snapshot(); }
+  }
 }
 
 // Degraded modes (one size): low quality, missing character model, and no WebGL.
