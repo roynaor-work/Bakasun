@@ -1,0 +1,188 @@
+{
+  "policy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "method": "Real runAlpineSession controls and trusted touch, generated course, matched ghost/run replay, fixed simulation ticks; no balance/course overrides",
+  "orientations": [
+    {
+      "width": 844,
+      "height": 390,
+      "cases": [
+        {
+          "leadTicks": 4,
+          "leadMs": 66.66666666666667,
+          "accepted": true,
+          "groundedTricks": 0,
+          "control": {
+            "steer": 0,
+            "boost": false,
+            "trick": "spin"
+          },
+          "secondSample": {
+            "steer": 0,
+            "boost": false,
+            "trick": null
+          },
+          "touches": [
+            {
+              "trusted": true,
+              "pointerType": "touch",
+              "disabled": false
+            }
+          ],
+          "atTakeoff": {
+            "airborne": true,
+            "airKind": "ramp",
+            "trick": "spin"
+          },
+          "motionState": "air",
+          "hud": {
+            "viewport": 844,
+            "outer": {
+              "left": 33.75,
+              "right": 163.75
+            },
+            "panels": [
+              {
+                "left": 33.75,
+                "right": 163.75,
+                "width": 130,
+                "height": 57.1875
+              },
+              {
+                "left": 33.75,
+                "right": 163.75,
+                "width": 130,
+                "height": 38.890625
+              }
+            ],
+            "speed": "72",
+            "expectedSpeed": "72",
+            "tank": "100",
+            "expectedTank": "100"
+          }
+        },
+        {
+          "leadTicks": 12,
+          "leadMs": 200,
+          "accepted": false,
+          "groundedTricks": 0,
+          "control": {
+            "steer": 0,
+            "boost": false,
+            "trick": "spin"
+          },
+          "secondSample": {
+            "steer": 0,
+            "boost": false,
+            "trick": null
+          },
+          "touches": [
+            {
+              "trusted": true,
+              "pointerType": "touch",
+              "disabled": false
+            }
+          ],
+          "atTakeoff": {
+            "airborne": true,
+            "airKind": "ramp"
+          }
+        }
+      ],
+      "cspViolations": 0,
+      "policyErrors": 0,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "cases": [
+        {
+          "leadTicks": 4,
+          "leadMs": 66.66666666666667,
+          "accepted": true,
+          "groundedTricks": 0,
+          "control": {
+            "steer": 0,
+            "boost": false,
+            "trick": "spin"
+          },
+          "secondSample": {
+            "steer": 0,
+            "boost": false,
+            "trick": null
+          },
+          "touches": [
+            {
+              "trusted": true,
+              "pointerType": "touch",
+              "disabled": false
+            }
+          ],
+          "atTakeoff": {
+            "airborne": true,
+            "airKind": "ramp",
+            "trick": "spin"
+          },
+          "motionState": "air",
+          "hud": {
+            "viewport": 390,
+            "outer": {
+              "left": 26,
+              "right": 156
+            },
+            "panels": [
+              {
+                "left": 26,
+                "right": 156,
+                "width": 130,
+                "height": 68.1875
+              },
+              {
+                "left": 26,
+                "right": 156,
+                "width": 130,
+                "height": 38.890625
+              }
+            ],
+            "speed": "72",
+            "expectedSpeed": "72",
+            "tank": "100",
+            "expectedTank": "100"
+          }
+        },
+        {
+          "leadTicks": 12,
+          "leadMs": 200,
+          "accepted": false,
+          "groundedTricks": 0,
+          "control": {
+            "steer": 0,
+            "boost": false,
+            "trick": "spin"
+          },
+          "secondSample": {
+            "steer": 0,
+            "boost": false,
+            "trick": null
+          },
+          "touches": [
+            {
+              "trusted": true,
+              "pointerType": "touch",
+              "disabled": false
+            }
+          ],
+          "atTakeoff": {
+            "airborne": true,
+            "airKind": "ramp"
+          }
+        }
+      ],
+      "cspViolations": 0,
+      "policyErrors": 0,
+      "errors": [],
+      "httpErrors": []
+    }
+  ]
+}

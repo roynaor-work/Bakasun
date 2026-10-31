@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-31",
+  "hoops": {
+    "status": "passed",
+    "exitCode": 0,
+    "viewports": [
+      {
+        "width": 1280,
+        "height": 720,
+        "checks": 13,
+        "cspViolations": 0,
+        "policyErrors": 0
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "checks": 14,
+        "cspViolations": 0,
+        "policyErrors": 0
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "checks": 14,
+        "cspViolations": 0,
+        "policyErrors": 0
+      }
+    ]
+  },
+  "soccer": {
+    "status": "failed existing readiness assertion on reopen",
+    "exitCode": 1,
+    "cases": [
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "pass": false,
+        "failure": "Expected values to be strictly equal:\n\n'loading' !== 'ready'\n",
+        "source": "workout/island/verification/soccer-athlete/run-browser.mjs:42",
+        "callFrom": "workout/island/verification/soccer-athlete/run-browser.mjs:91",
+        "movement": 4.481210561304792,
+        "pause": {
+          "posesStable": true,
+          "ballStable": true,
+          "elapsedStable": true,
+          "canvasPngIdentical": true,
+          "screenshot": "844-paused.png"
+        },
+        "resumed": true,
+        "initialModels": 8,
+        "cspViolations": 0,
+        "policyErrors": 0
+      }
+    ],
+    "remainingViewport": "390x844 not reached because original suite stops at first assertion failure"
+  },
+  "g3h": {
+    "status": "interrupted; not completed and not passed",
+    "reason": "Initial shared browser window ended before legacy suite completion. No assertions or timeout limits were weakened."
+  },
+  "benchmark": {
+    "path": "workout/island/tools/perf-hoops.html:32",
+    "status": "failed",
+    "policyDirective": "script-src 'self'",
+    "effectiveDirective": "script-src-elem",
+    "blockedURI": "inline",
+    "lineNumber": 32,
+    "logicalViolationCount": 1,
+    "scope": "Benchmark page only; actual basketball runtime acceptance passed"
+  },
+  "finalTeardownGuard": {
+    "addedAfterFullSuiteRuns": true,
+    "originalFailurePreserved": true,
+    "syntaxChecked": true,
+    "browserRerun": false,
+    "reason": "Teardown-only test infrastructure change; no runtime changes or assertion relaxation"
+  }
+}

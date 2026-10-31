@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {serveIsland} from '../../../../tests/helpers/island-browser.mjs';
+import {serveIsland,installIslandCspMonitor} from '../../../../tests/helpers/island-browser.mjs';
 import {waitForGameStart} from '../../tests/shell-ready.mjs';
 
 // Focused acceptance harness for the current game library. The older G3b
 // harness is run separately, unchanged, against both main and this branch.
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
-const directory=fileURLToPath(new URL('./',import.meta.url));await mkdir(directory,{recursive:true});
+const directory=process.env.ISLAND_CSP_AUDIT_DIR?process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/,'')+'/soccer-athlete/':fileURLToPath(new URL('./',import.meta.url));await mkdir(directory,{recursive:true});
 const config=JSON.parse(await readFile(new URL('../../data/config.json',import.meta.url),'utf8'));
 const server=await serveIsland('/workout/island/');
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
@@ -17,7 +17,7 @@ const viewports=[{width:844,height:390},{width:390,height:844}].filter(v=>!proce
 const reportFile=process.env.SOCCER_QA_WIDTH?`acceptance-${process.env.SOCCER_QA_WIDTH}.json`:'acceptance.json';
 try{
  for(const viewport of viewports){
-  const context=await browser.newContext({viewport,hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'}),page=await context.newPage();
+  const context=await browser.newContext({viewport,hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'}),csp=await installIslandCspMonitor(context),page=await context.newPage();await csp.attachPage(page);
   context.setDefaultTimeout(60000);
   const errors=[],warnings=[],downloads=[],pending=new Set();let phase='city',current={viewport};report.cases.push(current);
   const phases=new Map();
@@ -42,8 +42,9 @@ try{
    const s=await snap();assert.equal(s.renderMetrics.assetStatus,'ready');assert.equal(s.renderMetrics.assetStats.kind,'athlete');
    assert.equal(s.renderMetrics.modelCount,8);assert.equal(s.renderMetrics.fallbackCount,0);assert.equal(s.renderMetrics.assetStats.clips.length,13);return s;
   }
+  let suiteError=null;
   try{
-   await page.clock.install();await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});
+   await page.clock.install();await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await csp.assertClean();
    await page.waitForFunction(()=>Boolean(window.__island));
    console.log('island loaded',viewport.width);
    const setup=await page.evaluate(async()=>{
@@ -97,8 +98,15 @@ try{
    assert.ok(current.reopenBytes<=config.ui.downloadBudget.gameAdditional,`reopened soccer download ${current.reopenBytes}`);
    const family=downloads.filter(d=>new URL(d.url).pathname.includes('/assets/athlete/'));current.athleteUrls=[...new Set(family.map(d=>d.url))];
    assert.equal(current.athleteUrls.length,11,'GLB and every external texture loaded');
-   assert.deepEqual(errors,[]);current.errors=errors;current.warnings=warnings;current.pass=true;console.log('soccer acceptance passed',viewport.width,current.gameAdditionalBytes);
-  }catch(error){current.pass=false;current.failure=error.message;current.errors=errors;current.warnings=warnings;current.downloads=downloads;await screenshot('failure').catch(()=>{});throw error;}
-  finally{await writeFile(directory+reportFile,JSON.stringify(report,null,2)+'\n');await context.close();}
+   await csp.assertClean();assert.deepEqual(errors,[]);current.csp=csp.snapshot();current.errors=errors;current.warnings=warnings;current.pass=true;console.log('soccer acceptance passed',viewport.width,current.gameAdditionalBytes);
+  }catch(error){suiteError=error;current.pass=false;current.failure=error.message;current.errors=errors;current.warnings=warnings;current.downloads=downloads;current.csp=csp.snapshot();await screenshot('failure').catch(()=>{});throw error;}
+  finally{
+   let auditError=null;const failed=(error,field)=>{auditError??=error;current.pass=false;current[field]=error.message;current.failure??=error.message;};
+   try{await csp.assertClean();}catch(error){failed(error,'cspFailure');}
+   try{await context.close();await csp.assertClean();}catch(error){failed(error,'cspAfterCloseFailure');}
+   current.csp=csp.snapshot();
+   try{await writeFile(directory+reportFile,JSON.stringify(report,null,2)+'\n');}finally{await csp.dispose();}
+   if(!suiteError&&auditError)throw auditError;
+  }
  }
 }finally{await browser.close();await server.close();}

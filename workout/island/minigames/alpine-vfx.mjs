@@ -75,8 +75,11 @@ export async function createAlpineVfx({scene, worldPoint, surfaceHeight = () => 
     if (same >= specs[type].lowEnd.maxInstances) return;
     let chosen = null;
     for (const slot of slots) if (!slot.active) { chosen = slot; break; }
-    // A landing is the strongest contact cue and can replace a lingering scrape.
-    if (!chosen && type === 2) for (const slot of slots) if (slot.type === 1) { chosen = slot; break; }
+    // Landing takes priority over any lower-priority contact/speed puff.
+    if(!chosen&&type===2)for(const slot of slots)if(slot.type!==2&&(!chosen||slot.start<chosen.start))chosen=slot;
+    // A speed burst is a single trigger, so do not lose it to two contact
+    // puffs and a scrape. It can replace dust, never a landing cue.
+    if(!chosen&&type===3)for(const slot of slots)if(slot.type!==2&&slot.type!==3&&(!chosen||slot.start<chosen.start))chosen=slot;
     if (!chosen) return;
     chosen.type = type; chosen.start = now; chosen.size = size; chosen.rotation = rotation; chosen.frame = -1; chosen.active = true;
     chosen.mesh.material.map = layouts[type].texture;
@@ -89,11 +92,14 @@ export async function createAlpineVfx({scene, worldPoint, surfaceHeight = () => 
     for (const slot of slots) { slot.active = false; slot.mesh.visible = false; slot.frame = -1; }
     lastEmit.fill(-10); activeCount = 0; wasAirborne = wasLanding = wasBoosting = false;
   }
-  function update(state, camera) {
+  function update(state, camera, feedback = null) {
     if (disposed || state.phase === 'paused') return;
     const now = (state.timeMs || 0) / 1000, player = state.player;
     if (now < previousTime) { resetEffects(); resetCamera(); }
     previousTime = now;
+    // Expired slots must be reclaimed before processing transition events.
+    // Otherwise a one-frame landing/line trigger can be rejected permanently.
+    for(const slot of slots)if(slot.active&&now-slot.start>=(reducedMotion?Math.min(.3,specs[slot.type].durationSeconds):specs[slot.type].durationSeconds)){slot.active=false;slot.mesh.visible=false;}
     const racing = state.phase === 'racing';
     if (racing && player) {
       const landed = (wasAirborne && !player.airborne && !player.crashed) || (!!player.landing && !wasLanding);
@@ -102,11 +108,11 @@ export async function createAlpineVfx({scene, worldPoint, surfaceHeight = () => 
         if (!reducedMotion) emit(0, now, player, 1.65, 0, true);
       }
       const lean = player.lean || 0, speed = state.speedKmh || 0;
-      if (!player.airborne && !player.crashed && speed > 20 && Math.abs(lean) > .28) {
-        emit(0, now, player, reducedMotion ? .55 : 1.25, -lean * .45);
+      if (!player.airborne && !player.crashed && speed > 20) {
+        emit(0, now, player, reducedMotion ? .55 : .65+Math.min(1,Math.abs(lean))*.6, -lean * .45);
         if (!reducedMotion && Math.abs(lean) > .52) emit(1, now, player, .85, Math.sign(lean) * -.55);
       }
-      if (!reducedMotion && (player.boosting || speed > 95)) emit(3, now, player, 1, 0, !!player.boosting && !wasBoosting);
+      if(!reducedMotion&&(feedback?feedback.lineTrigger:(player.boosting||speed>95)))emit(3,now,player,1,0,feedback?true:!!player.boosting&&!wasBoosting);
       wasAirborne = !!player.airborne; wasLanding = !!player.landing; wasBoosting = !!player.boosting;
     }
     forward.set(0, 0, -1).applyQuaternion(camera.quaternion);
@@ -119,7 +125,8 @@ export async function createAlpineVfx({scene, worldPoint, surfaceHeight = () => 
       slot.mesh.visible = true; activeCount++;
       const sampleAge = reducedMotion ? age * spec.durationSeconds / .3 : age;
       uvFrame(slot, Math.min(spec.frameCount - 1, Math.floor(sampleAge * spec.fps)));
-      slot.mesh.material.opacity = opacityAt(spec, sampleAge) * (reducedMotion ? .28 : slot.type === 3 ? .45 : .68);
+      slot.mesh.material.opacity=opacityAt(spec,sampleAge)*(reducedMotion?.28:slot.type===3?(feedback?.lineOpacity??.45):slot.type===0?.38+Math.min(1,Math.abs(player?.lean||0))*.3:.68);
+      if(slot.type===3&&feedback&&!feedback.lineVisible){slot.active=false;slot.mesh.visible=false;activeCount--;continue;}
       slot.mesh.quaternion.copy(camera.quaternion); slot.mesh.rotateZ(slot.rotation);
       const viewHeightAtOne = 2 * Math.tan(camera.fov * Math.PI / 360);
       if (slot.type === 3) {
@@ -127,7 +134,7 @@ export async function createAlpineVfx({scene, worldPoint, surfaceHeight = () => 
         // the central rider. HTML HUD stays above the WebGL canvas.
         const viewHeight = viewHeightAtOne * 2, viewWidth = viewHeight * camera.aspect;
         slot.mesh.position.set(-viewWidth * .39, -viewHeight * .04, -2).applyQuaternion(camera.quaternion).add(camera.position);
-        slot.mesh.scale.setScalar(viewHeight * Math.sqrt(.12 * camera.aspect));
+        slot.mesh.scale.setScalar(viewHeight * Math.sqrt((feedback?.lineFraction??.12)*camera.aspect));
       } else {
         delta.subVectors(slot.mesh.position, camera.position);
         const depth = Math.max(.1, delta.dot(forward));

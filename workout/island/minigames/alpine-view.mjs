@@ -1,3 +1,4 @@
+import {loadAlpineFeel,createAlpineFeel} from './alpine-feel.mjs';
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-integration-20261030-1';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-integration-20261030-1';
@@ -16,10 +17,11 @@ import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island
  * profile, with procedural snow, 3D fir branches, granite/snow cliffs, a close chase
  * camera and grooves recording engine positions. The Mixamo rig has authored sport outerwear; attribution is in ASSETS.md.
  * This local candidate includes a separately reviewed engine feel proposal; it is not a released build. */
-export async function createSkiView(host, {canvas, modelUrl = new URL('../design/characters/skier.glb', import.meta.url).href, rockTextureUrl = new URL('../assets/alpine-rush/granite-v5.webp',import.meta.url).href, quality: initialQuality = 'high', mobileProfile: forcedMobile = null, maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}} = {}) {
+export async function createSkiView(host, {canvas, modelUrl = new URL('../design/characters/skier.glb', import.meta.url).href, rockTextureUrl = new URL('../assets/alpine-rush/granite-v5.webp',import.meta.url).href, maxPlayerSpeedKmh = null, quality: initialQuality = 'high', mobileProfile: forcedMobile = null, maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}} = {}) {
   if (!course?.path || !physics) throw new Error('alpine.view.course');
   const renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: false, powerPreference: 'high-performance'});
-  let vfx=null;
+  let vfx=null,feel=null;
+  const reduced=globalThis.matchMedia?.('(prefers-reduced-motion:reduce)').matches??false;
   let quality = initialQuality, disposed = false, ro = null;
   const mobile = forcedMobile ?? (globalThis.matchMedia?.('(pointer: coarse)').matches ?? false);
   const highDpr = mobile ? Math.min(1.25,maxDpr) : maxDpr;
@@ -47,7 +49,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const canvasTexture = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; return tex; };
 
   let designWorld;
-  try { designWorld=await loadAlpineWorld({isDisposed}); }
+  try { feel=createAlpineFeel(await loadAlpineFeel(),{maxSpeedKmh:maxPlayerSpeedKmh||physics.boostSpeed*3.6,reducedMotion:reduced}); designWorld=await loadAlpineWorld({isDisposed}); }
   catch(error) {
     // This await precedes course/actor construction. The complete scene
     // disposer below is not initialized yet, so release the boot resources.
@@ -228,14 +230,32 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     burstGeo.attributes.position.needsUpdate = true; burstGeo.attributes.color.needsUpdate = true;
   }
 
-  const target = new THREE.Vector3(), camAt = new THREE.Vector3(), P = new THREE.Vector3();
+  const target = new THREE.Vector3(), camAt = new THREE.Vector3(), P = new THREE.Vector3(),cameraUp=new THREE.Vector3();
   // Board grooves record actual engine positions, including the deterministic review replay.
   const trackCapacity=4200,trackVertices=new Float32Array(trackCapacity*18),trackGeo=new THREE.BufferGeometry();trackGeo.setAttribute('position',new THREE.BufferAttribute(trackVertices,3));trackGeo.setDrawRange(0,0);
   const trackMesh=new THREE.Mesh(trackGeo,new THREE.MeshBasicMaterial({color:'#6f8b99',transparent:true,opacity:.085,depthWrite:false,side:THREE.DoubleSide}));trackMesh.frustumCulled=false;trackMesh.userData.perf='effects';scene.add(trackMesh);let trackCount=0,trackNext=0,trackFull=false;const previousTracks=new Map(),trackAttr=trackGeo.attributes.position;
-  function rememberTracks(state,bulk=false){for(const r of [state.player,...(state.rivals||[])]){const id=r.id||'player',s=r.s??state.player.s-r.z,old=previousTracks.get(id);if(r.airborne){previousTracks.delete(id);continue;}if(old&&s>old.s+.18&&s-old.s<5){const p=[],out=new THREE.Vector3();for(const [ss,xx] of [[old.s,old.x-.055],[s,r.x-.055],[old.s,old.x+.055],[s,r.x-.055],[s,r.x+.055],[old.s,old.x+.055]]){worldPoint(ss,xx,surfaceHeight(xx,pipe)+.013,out);p.push(out.x,out.y,out.z);}trackVertices.set(p,trackNext*18);if(!bulk)trackAttr.addUpdateRange(trackNext*18,18);trackNext=(trackNext+1)%trackCapacity;trackCount=Math.min(trackCapacity,trackCount+1);trackGeo.setDrawRange(0,trackCount*6);trackAttr.needsUpdate=true;}if(!old||s>old.s+.18)previousTracks.set(id,{s,x:r.x});}}
+  const groovePoint=new THREE.Vector3();
+  function rememberTracks(state,bulk=false){
+    const rivals=state.rivals||[];
+    for(let riderIndex=-1;riderIndex<rivals.length;riderIndex++){
+      const r=riderIndex<0?state.player:rivals[riderIndex],id=r.id||'player',s=r.s??state.player.s-r.z,old=previousTracks.get(id);
+      if(r.airborne||r.crashed){previousTracks.delete(id);continue;}
+      if(old&&s>old.s+.18&&s-old.s<5)for(let ski=0;ski<2;ski++){
+        const offset=ski===0?-.14:.14,base=trackNext*18;
+        for(let vertex=0;vertex<6;vertex++){
+          const current=vertex===1||vertex===3||vertex===4,edge=vertex===2||vertex===4||vertex===5?.017:-.017;
+          const ss=current?s:old.s,xx=(current?r.x:old.x)+offset+edge;
+          worldPoint(ss,xx,surfaceHeight(xx,pipe)+.013,groovePoint);const n=base+vertex*3;
+          trackVertices[n]=groovePoint.x;trackVertices[n+1]=groovePoint.y;trackVertices[n+2]=groovePoint.z;
+        }
+        if(!bulk)trackAttr.addUpdateRange(base,18);trackNext=(trackNext+1)%trackCapacity;trackCount=Math.min(trackCapacity,trackCount+1);
+        trackGeo.setDrawRange(0,trackCount*6);trackAttr.needsUpdate=true;
+      }
+      if(!old||s>old.s+.18)previousTracks.set(id,{s,x:r.x});
+    }
+  }
   function seedTracks(frames){previousTracks.clear();trackCount=trackNext=0;for(const state of frames)rememberTracks(state,true);trackFull=true;}
   let lastTrackS=0;
-  const reduced = globalThis.matchMedia?.('(prefers-reduced-motion:reduce)').matches ?? false;
   try { vfx=await createAlpineVfx({scene,worldPoint,surfaceHeight:x=>surfaceHeight(x,pipe),frameAt,reducedMotion:reduced,crashSeconds:physics.crashSeconds}); }
   catch(error) { disposeAll(); throw error; }
   function resize(){if(disposed)return;const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
@@ -282,7 +302,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     const state=presentationFrame(canonicalState,physics.fixedStep,presentation);
     const t = state.timeMs / 1000, playing = state.phase !== 'menu', portrait = camera.aspect < .9, dt = Math.min(.1, Math.max(0, t - lastT)), wall = performance.now() / 1000, wdt = Math.min(.1, Math.max(0, wall - snowAt));
     lastT = t; snowAt = wall;
-    const player = state.player, ps = player.s ?? 0;
+    const player = state.player, ps = player.s ?? 0, feedback=feel.update(state,wdt);
     if(ps<lastTrackS-2){seedTracks([]);for(const r of riders.values()){r.air=r.squash=r.grab=r.roll=0;r.wasHit=false;r.hitAt=-10;r.crashAt=-1;}camLat=player.x*.98;camRise=0;}
     lastTrackS=ps;rememberTracks(canonicalState);
     if(trackFull){trackAttr.clearUpdateRanges();trackAttr.needsUpdate=true;trackFull=false;}
@@ -346,12 +366,12 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     const px = player.x, boost = !!player.boosting, absY = surfaceHeight(px, pipe) + Math.max(0, player.height ?? 0);
     // Narrow screens sit higher with a wider lens and follow the rider almost fully sideways.
     const wide=Math.min(1,Math.max(0,(camera.aspect-.45)/1.3)),baseFov=67-wide*7;
-    const wantFov = baseFov + (boost && !reduced ? 6 : 0); fov += (wantFov - fov) * dampWeight(5,wdt); camera.fov = fov; camera.updateProjectionMatrix();
+    fov=baseFov+feedback.fovAdd;if(camera.fov!==fov){camera.fov=fov;camera.updateProjectionMatrix();}
     const follow=.98;
     if (playing) {
       const k = dampWeight(9,wdt); camLat += (px * follow - camLat) * k; camRise += (absY * .75 - camRise) * dampWeight(6,wdt);
-      worldPoint(ps-(portrait?5.2:5.8)-(boost&&!reduced?.3:0),camLat+(portrait?.2:.65),2.45+camRise,camera.position);
-      worldPoint(ps+16,px*.8,2.0+camRise*.8,target);
+      worldPoint(ps-(portrait?5.2:5.8)-feedback.speedFraction*.4,camLat+(portrait?.2:.65),2.45+camRise,camera.position);
+      worldPoint(ps+feedback.lookAhead,px*.8+feedback.carve*.6,2.0+camRise*.8,target);
     } else {
       worldPoint(portrait ? -4.8 : -5.5, portrait ? 4 : 7, portrait ? 2.6 : 2.7, camera.position); worldPoint(portrait ? 8 : 8, portrait ? 0 : -4, .7, target);
       const pr = riders.get('player'); pr.actor?.update?.(player,{phase:'menu',time:wall,dt:wdt}); pr.root.visible = pr.shadow.visible = true; place(pr.root, portrait ? 2 : .4, portrait ? 1.8 : 3.8, .03, 0, -.38); pr.pivot.rotation.set(0, 0, 0); pr.pivot.position.y = PIVOT; place(pr.shadow, portrait ? 2 : .4, portrait ? 1.8 : 3.8, .05); pr.shadow.rotateX(-Math.PI / 2);
@@ -359,16 +379,21 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     }
     if (player.hit && !reduced) {const impact=Math.max(0,1-(t-riders.get('player').hitAt)/.45);camera.position.y+=Math.sin(Math.min(1,(t-riders.get('player').hitAt)/.45)*Math.PI)*.055*impact;}
     vfx.applyCamera(state,camera,target);
-    camera.lookAt(target); vfx.update(state,camera);
-    if (playing && !reduced) camera.rotateZ(-(player.lean ?? 0) * .025);
+    camera.lookAt(target);
+    if(playing&&feedback.landingShakeFraction){
+      worldPoint(ps,px,absY+.8,P);
+      const actionHeight=2*camera.position.distanceTo(P)*Math.tan(camera.fov*Math.PI/360);
+      cameraUp.set(0,1,0).applyQuaternion(camera.quaternion);camera.position.addScaledVector(cameraUp,actionHeight*feedback.landingShakeFraction);camera.lookAt(target);
+    }
+    vfx.update(state,camera,feedback);
+    if (playing && !reduced) camera.rotateZ(feedback.bank);
     camAt.copy(camera.position);
     mountains.position.set(camAt.x, camAt.y - 48, camAt.z); field.position.set(camAt.x, camAt.y - 78, camAt.z);
     worldPoint(ps, px, 0, P); sun.target.position.copy(P); sun.position.set(P.x-32,P.y+25,P.z-38);art.update(ps,look.fogFar,camera,quality);
     // Board spray and falling snow.
     frameAt(ps, FR); const dx = Math.sin(FR.theta), dz = -Math.cos(FR.theta), rx = Math.cos(FR.theta), rz = Math.sin(FR.theta);
     worldPoint(ps, px, absY, P);
-    for(let i=0;i<140;i++){const life=(t*1.7+i/140)%1,cut=Math.min(1,Math.abs(player.lean??0)+.12),r=Math.sin(i*37.7),side=r*life*(.25+cut*.9)+(player.lean??0)*life*.45,back=life*(2.1+(state.speedKmh??72)*.018);trailAge[i]=life;trailPositions[i*3]=P.x-dx*back+rx*side;trailPositions[i*3+1]=P.y+.07+Math.sin(life*Math.PI)*(.11+cut*.4)*(.35+Math.sin(i*9.1)**2*.65);trailPositions[i*3+2]=P.z-dz*back+rz*side;}
-    trailGeo.attributes.position.needsUpdate = true;trailGeo.attributes.powderAge.needsUpdate=true; spray.visible = false;
+    spray.visible=false;
     const count = quality === 'low' ? Math.round(SNOW_MAX * .35) : SNOW_MAX;
     for (let i = 0; i < count; i++) {
       let y = snowOffsets[i * 3 + 1] - snowSpeed * wdt, x = snowOffsets[i * 3] + wind * wdt;
@@ -413,6 +438,6 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     get modelError() { return modelError; },
     get rockTextureError(){return rockTextureError;},
     mode: 'alpine-feel-v9',
-    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, ...art.metrics(),quality, disposed, mode: gltf ? 'model' : 'primitive',vfx:vfx.metrics(),character:gltf?.metrics(),motion:riders.get('player')?.actor?.metrics?.(),rockTexture:granite.image?'loaded':'procedural',mobileProfile:mobile,pixelRatio:renderer.getPixelRatio(),fov:+fov.toFixed(3),interpolation:!!canonicalPresentation,lastSwitch}; },
+    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, ...art.metrics(),quality, disposed, mode: gltf ? 'model' : 'primitive',grooves:'paired-skis',grooveCapacity:trackCapacity,feel:feel.metrics(),vfx:vfx.metrics(),character:gltf?.metrics(),motion:riders.get('player')?.actor?.metrics?.(),rockTexture:granite.image?'loaded':'procedural',mobileProfile:mobile,pixelRatio:renderer.getPixelRatio(),fov:+fov.toFixed(3),interpolation:!!canonicalPresentation,lastSwitch}; },
   };
 }

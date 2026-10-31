@@ -12,15 +12,22 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
   const steerKeys = new Set(['ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD']);
   const knob = joystick?.querySelector('[data-joystick-knob]');
   function setKnob(value) { if (knob) knob.style.transform = `translate(calc(-50% + ${(value * 70).toFixed(1)}%), -50%)`; if (joystick) { joystick.dataset.active = String(value !== 0 || !!joy); joystick.setAttribute('aria-valuenow', value.toFixed(2)); } }
+  function releaseDrag() {
+    const pointer = drag; drag = null; canvas.dataset.steering = 'false';
+    if (pointer && canvas.hasPointerCapture?.(pointer.id)) { try { canvas.releasePointerCapture(pointer.id); } catch {} }
+  }
+  function releaseJoystick() {
+    const pointer = joy; joy = null; setKnob(0);
+    if (pointer && joystick?.hasPointerCapture?.(pointer.id)) { try { joystick.releasePointerCapture(pointer.id); } catch {} }
+  }
   function cancel() {
-    if (drag && canvas.hasPointerCapture?.(drag.id)) { try { canvas.releasePointerCapture(drag.id); } catch {} }
-    if (joy && joystick?.hasPointerCapture?.(joy.id)) { try { joystick.releasePointerCapture(joy.id); } catch {} }
-    drag = null; joy = null; keys.clear(); boostQueued = false; trickQueued = null; canvas.dataset.steering = 'false'; setKnob(0);
+    releaseDrag(); releaseJoystick(); keys.clear(); boostQueued = false; trickQueued = null;
   }
   canvas.style.touchAction = 'none';
   canvas.addEventListener('pointerdown', event => {
     if (!enabled || drag || (event.pointerType === 'mouse' && event.button !== 0)) return;
     event.preventDefault();
+    releaseJoystick();
     try { canvas.setPointerCapture(event.pointerId); } catch {}
     drag = {id: event.pointerId, startClientX: event.clientX, startX: lastX, targetX: lastX};
     canvas.dataset.steering = 'true';
@@ -30,7 +37,7 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
     const width = Math.max(1, canvas.getBoundingClientRect().width);
     drag.targetX = Math.max(-half, Math.min(half, drag.startX + (event.clientX - drag.startClientX) / width * metresPerWidth));
   }, options);
-  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) canvas.addEventListener(type, event => { if (drag && event.pointerId === drag.id) { drag = null; canvas.dataset.steering = 'false'; } }, options);
+  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) canvas.addEventListener(type, event => { if (drag && event.pointerId === drag.id) releaseDrag(); }, options);
   if (joystick) {
     // The stick deflects sideways only; its value is the steering command itself.
     const read = event => { const box = joystick.getBoundingClientRect(), radius = Math.max(1, box.width / 2 - 8); joy.value = Math.max(-1, Math.min(1, (event.clientX - (box.left + box.width / 2)) / radius)); setKnob(joy.value); };
@@ -38,11 +45,12 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
     joystick.addEventListener('pointerdown', event => {
       event.preventDefault(); event.stopPropagation();
       if (!enabled || joy || (event.pointerType === 'mouse' && event.button !== 0)) return;
+      releaseDrag();
       try { joystick.setPointerCapture(event.pointerId); } catch {}
       joy = {id: event.pointerId, value: 0}; read(event);
     }, options);
     joystick.addEventListener('pointermove', event => { if (joy && event.pointerId === joy.id) read(event); }, options);
-    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) joystick.addEventListener(type, event => { if (joy && event.pointerId === joy.id) { joy = null; setKnob(0); } }, options);
+    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) joystick.addEventListener(type, event => { if (joy && event.pointerId === joy.id) releaseJoystick(); }, options);
   }
   const press = (button, act) => {
     button.addEventListener('pointerdown', event => { event.preventDefault(); event.stopPropagation(); if (enabled) act(); }, options);
@@ -69,8 +77,10 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
       if (!enabled) return {steer: 0, boost: false, trick: null};
       const direction = (keys.has('ArrowRight') || keys.has('KeyD') ? 1 : 0) - (keys.has('ArrowLeft') || keys.has('KeyA') ? 1 : 0);
       let steer = direction;
-      if (!direction && joy) steer = joy.value;
-      else if (!direction && drag) steer = Math.max(-1, Math.min(1, (drag.targetX - lastX) * .8 - lastLean * .55));
+      // Opposite keys intentionally cancel; they do not hand control back to a
+      // held analog pointer. Releasing both keys restores that active source.
+      if (!keys.size && joy) steer = joy.value;
+      else if (!keys.size && drag) steer = Math.max(-1, Math.min(1, (drag.targetX - lastX) * .8 - lastLean * .55));
       const boost = boostQueued, trick = trickQueued; boostQueued = false; trickQueued = null;
       return {steer: Math.abs(steer) < .02 ? 0 : steer, boost, trick};
     },

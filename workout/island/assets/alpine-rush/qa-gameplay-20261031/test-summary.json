@@ -1,0 +1,113 @@
+{
+  "status": "validated_with_disclosed_crossgame_failures_and_benchmark_variability",
+  "date": "2026-10-31",
+  "base": "23d79d50",
+  "codeCommit": "6e8cef14e39f3009ebca81d35df5e98900feb13f",
+  "unit": {
+    "status": "passed",
+    "passed": 41,
+    "failed": 0,
+    "command": "node --test tests/island-alpine.test.mjs tests/island-alpine-perf.test.mjs tests/island-alpine-gameplay.test.mjs tests/island-alpine-feel.test.mjs"
+  },
+  "ci": {
+    "status": "success",
+    "jobs": [
+      "test",
+      "alpine-csp"
+    ],
+    "url": "https://github.com/roynaor-work/Bakasun/actions/runs/41156129522",
+    "codeCommit": "6e8cef14e39f3009ebca81d35df5e98900feb13f"
+  },
+  "csp": {
+    "status": "passed",
+    "evidenceRecords": 10,
+    "logicalFixtures": 9,
+    "policy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "headerFrom": "workout/island/index.html",
+    "negativeCoverage": [
+      "inline script",
+      "blob worker",
+      "child frame",
+      "worker startup eval",
+      "report-only",
+      "missing header",
+      "no policy-bearing HTML"
+    ],
+    "positiveCoverage": [
+      "static Draco decode",
+      "real Alpine session load and enabled start"
+    ],
+    "startupWorkerCaptured": true,
+    "zeroViolationsInActualAlpine": true,
+    "policyWasNotRelaxed": true
+  },
+  "browser": {
+    "status": "passed",
+    "originalSuites": [
+      "844x390",
+      "390x844"
+    ],
+    "existingAssertionsRetained": true,
+    "hudBoundsAndValues": "passed in portrait original suite and refreshed trusted-touch proof in both sizes",
+    "touch": "trusted tap accepted at 66.7ms before takeoff and expired at 200ms in both orientations",
+    "source": "alpine-browser-summary.json"
+  },
+  "performance": {
+    "status": "full-phone-p95-and-paired-medians-improved",
+    "method": "30-second SwiftShader runs, exact CSP, both phone orientations at DPR2, full and small canvas; no simultaneous browser tests",
+    "fullPhoneImproved": true,
+    "initialSmallPortraitRegression": "316.7 to 566.7ms frame p95; retained without edits in original table and raw JSON",
+    "paired": {
+      "method": "Three paired 30-second runs; AB/BA/AB order. Before serves exact 23d79d50 ski modules via route; assets and CSP unchanged. All individual trials retained.",
+      "before": {
+        "trials": 3,
+        "firstFrameMs": 4.4,
+        "frameP95Ms": 483.4,
+        "jsP95Ms": 80.9
+      },
+      "after": {
+        "trials": 3,
+        "firstFrameMs": 4.2,
+        "frameP95Ms": 416.6,
+        "jsP95Ms": 10.4
+      },
+      "mediansImproved": true
+    },
+    "physicalPhoneGpuMeasured": false,
+    "allTrialsRetained": true
+  },
+  "crossGames": {
+    "source": "crossgame-summary.json",
+    "hoops": "original full suite passed all three sizes; zero CSP",
+    "soccer": "original suite failed readiness assertion on reopen (loading vs ready) before portrait case; zero CSP observed, no assertion removed",
+    "hoopsBenchmark": "tools/perf-hoops.html:32 inline module blocked by script-src self",
+    "legacyG3h": "interrupted without verdict; not represented as passing"
+  },
+  "scope": {
+    "status": "passed",
+    "comparisonBase": "23d79d50",
+    "comparisonBasis": "Own changes relative to local prerequisite PR212 head, not origin/main; the draft main-relative PR still inherits prerequisite release/tag changes until PR212 merges.",
+    "independentReview": {
+      "codeCommit": "6e8cef14e39f3009ebca81d35df5e98900feb13f",
+      "releaseConfigResultRecordsTrackPersistenceUnchanged": true,
+      "allVersionTagMultisetsIdentical": true,
+      "scoringMaxSpeedCourseCollisionClocksUntouched": true,
+      "existingBrowserAssertionsRetained": true
+    },
+    "allowed": "Alpine runtime, test infrastructure and ski QA evidence",
+    "resultContractChanged": false,
+    "recordsChanged": false,
+    "savesChanged": false,
+    "maxSpeedChanged": false,
+    "coursePhysicsChanged": false,
+    "releaseFilesChanged": false,
+    "versionTagsChanged": false,
+    "existingTestsWeakened": false
+  },
+  "dependency": {
+    "pr": 212,
+    "state": "open",
+    "localBase": "23d79d50",
+    "instruction": "Draft to main; refresh after prerequisite merge. No remote merge performed."
+  }
+}

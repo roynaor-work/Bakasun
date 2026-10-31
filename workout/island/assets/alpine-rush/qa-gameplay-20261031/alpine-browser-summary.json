@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-31",
+  "originalSuiteRuns": [
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "status": "passed",
+      "exitCode": 0,
+      "originalAssertionsRetained": true,
+      "checks": [
+        "library entry and stage launch",
+        "opening and theme choice",
+        "keyboard start",
+        "slope drag and joystick input/release",
+        "boost",
+        "ramp takeoff and scored grab",
+        "pipe air",
+        "rock collision",
+        "pause/resume clock and rivals",
+        "result/reward/records once",
+        "ten entry/exit cycles",
+        "exit while loading",
+        "low quality with missing character model",
+        "no WebGL recovery"
+      ],
+      "csp": {
+        "scope": "Real island page and all Alpine scenarios, through browser close; exact production CSP header and direct worker audit/binding",
+        "violations": 0,
+        "policyErrors": 0,
+        "workers": 35,
+        "allWorkersClosed": true
+      },
+      "hud": {
+        "boundsAndMetersAssertedInOriginalRun": false,
+        "evidence": "touch-gameplay-proof.json",
+        "scope": "Original full run preceded final HUD CSS/bounds assertions. Final landscape trusted-touch refresh separately checked corrected panel bounds and meter values; its PNG is the final visual."
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "passed",
+      "exitCode": 0,
+      "originalAssertionsRetained": true,
+      "checks": [
+        "library entry and stage launch",
+        "opening and theme choice",
+        "keyboard start",
+        "slope drag and joystick input/release",
+        "boost",
+        "ramp takeoff and scored grab",
+        "pipe air",
+        "rock collision",
+        "pause/resume clock and rivals",
+        "result/reward/records once",
+        "ten entry/exit cycles",
+        "exit while loading",
+        "low quality with missing character model",
+        "no WebGL recovery"
+      ],
+      "csp": {
+        "scope": "Real island page and all Alpine scenarios, through browser close; exact production CSP header and direct worker audit/binding",
+        "violations": 0,
+        "policyErrors": 0,
+        "workers": 35,
+        "allWorkersClosed": true
+      },
+      "hud": {
+        "boundsAndMetersAssertedInOriginalRun": true,
+        "evidence": "touch-gameplay-proof.json",
+        "scope": "Final corrected HUD bounds, speed and tank values checked during racing and boost"
+      }
+    }
+  ]
+}
