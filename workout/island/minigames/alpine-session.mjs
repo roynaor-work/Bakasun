@@ -66,6 +66,7 @@ export function runAlpineSession(ctx) {
   const screenCss=el('link');screenCss.rel='stylesheet';screenCss.href=new URL('./alpine-screen.css',import.meta.url).href;
   const kitCss=el('link');kitCss.rel='stylesheet';kitCss.href=new URL('../design/hud-kit/hud.css',import.meta.url).href;
   const feelCss=el('link');feelCss.rel='stylesheet';feelCss.href=new URL('./alpine-feel.css',import.meta.url).href;
+  const cleanCss=el('link');cleanCss.rel='stylesheet';cleanCss.href=new URL('./alpine-clean.css?v=island-ski-20261031-1',import.meta.url).href;
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
   const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
@@ -128,8 +129,8 @@ export function runAlpineSession(ctx) {
   const center = el('div', 'alpine-center'); center.append(speed, hint);
   footer.append(joystick, center, actions);
   stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading);
-  controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish, screenCss, kitCss, feelCss); stage.append(app); setTheme(theme);
-  dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, screenCss, kitCss, feelCss, app]};
+  controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish, screenCss, kitCss, feelCss, cleanCss); stage.append(app); setTheme(theme);
+  dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, screenCss, kitCss, feelCss, cleanCss, app]};
   screen.dataset.alpineDusk = String(!!track.visual?.dusk);
   const setPhase = phase => { app.dataset.phase = phase; screen.dataset.alpinePhase = phase; };
   setPhase('menu');

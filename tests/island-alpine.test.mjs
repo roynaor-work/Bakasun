@@ -115,7 +115,7 @@ test('2. controls: joystick, drag, keys, boost and tricks are separate; every re
     const cv=new EventTarget(),joy=new EventTarget(),knob={style:{}},tb=[...['grab','spin','flip','combo']].map(id=>Object.assign(new EventTarget(),{dataset:{trick:id},disabled:false}));let cap=new Set();
     Object.assign(cv,{ownerDocument:doc2,dataset:{},style:{},getBoundingClientRect:()=>({width:400}),setPointerCapture:id=>cap.add(id),hasPointerCapture:id=>cap.has(id),releasePointerCapture:id=>cap.delete(id)});
     Object.assign(joy,{dataset:{},style:{},setAttribute(){},querySelector:()=>knob,getBoundingClientRect:()=>({left:0,width:120}),setPointerCapture:id=>cap.add(id),hasPointerCapture:id=>cap.has(id),releasePointerCapture:id=>cap.delete(id)});
-    const k=createAlpineControls({canvas:cv,boostButton:null,joystick:joy,trickButtons:tb,config:{trackHalfWidth:10}});
+    const k=createAlpineControls({canvas:cv,boostButton:null,joystick:joy,trickButtons:tb,config:{trackHalfWidth:10,joystickReach:1}});
     let canvasDown=0;cv.addEventListener('pointerdown',()=>canvasDown++);
     const jd=fire(joy,'pointerdown',{pointerId:4,clientX:60+26,button:0,pointerType:'touch'});assert.equal(jd.defaultPrevented,true);
     assert.ok(Math.abs(k.sample(player).steer-.5)<.01,'half deflection = half steer');assert.equal(k.dragging,true);assert.equal(canvasDown,0,'the joystick never starts a slope drag');

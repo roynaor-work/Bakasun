@@ -76,7 +76,7 @@ function controls() {
   const properties = {ownerDocument: doc, dataset: {}, style: {}, setPointerCapture: id => captures.add(id), hasPointerCapture: id => captures.has(id), releasePointerCapture: id => captures.delete(id)};
   Object.assign(canvas, {...properties, getBoundingClientRect: () => ({width: 400})});
   Object.assign(joystick, {...properties, dataset: {}, style: {}, querySelector: () => knob, setAttribute() {}, getBoundingClientRect: () => ({left: 0, width: 120})});
-  return {canvas, joystick, win, doc, captures, input: createAlpineControls({canvas, joystick, config: {trackHalfWidth: 10}})};
+  return {canvas, joystick, win, doc, captures, input: createAlpineControls({canvas, joystick, config: {trackHalfWidth: 10, joystickReach: 1}})};
 }
 function fire(target, type, properties = {}) { const event = new Event(type, {cancelable: true}); for (const [k, v] of Object.entries(properties)) Object.defineProperty(event, k, {value: v}); target.dispatchEvent(event); }
 test('Alpine opposing keyboard directions stay neutral while the analog stick is held', () => {
@@ -129,4 +129,16 @@ test('Alpine takeoff and fall interrupt a carve immediately; pause freezes the p
   m.step(0, {crashed: true}); assert.equal(m.player.metrics().state, 'fall');
   const pose = m.bone.quaternion.toArray(), metrics = m.player.metrics(); m.step(1, {crashed: false}, {phase: 'paused'});
   assert.deepEqual(m.bone.quaternion.toArray(), pose); assert.deepEqual(m.player.metrics(), metrics);
+});
+
+test('Alpine joystick reaches full lock at 62% of its travel by default', () => {
+  const c = controls(); c.input.dispose();
+  const doc = new EventTarget(), win = new EventTarget(); doc.defaultView = win; doc.hidden = false;
+  const canvas = Object.assign(new EventTarget(), {ownerDocument: doc, dataset: {}, style: {}, getBoundingClientRect: () => ({width: 400}), setPointerCapture() {}, hasPointerCapture: () => false, releasePointerCapture() {}});
+  const joystick = Object.assign(new EventTarget(), {dataset: {}, style: {}, setAttribute() {}, querySelector: () => ({style: {}}), getBoundingClientRect: () => ({left: 0, width: 120}), setPointerCapture() {}, hasPointerCapture: () => false, releasePointerCapture() {}});
+  const input = createAlpineControls({canvas, joystick, config: {trackHalfWidth: 10}});
+  fire(joystick, 'pointerdown', {pointerId: 1, clientX: 60 + 52 * .62, pointerType: 'touch'});
+  assert.ok(Math.abs(input.sample({x: 0, lean: 0}).steer - 1) < .01, 'full lock at 62% of the radius');
+  fire(joystick, 'pointermove', {pointerId: 1, clientX: 60 + 52 * .31, pointerType: 'touch'});
+  assert.ok(Math.abs(input.sample({x: 0, lean: 0}).steer - .5) < .01, 'half the reach is half steer'); input.dispose();
 });

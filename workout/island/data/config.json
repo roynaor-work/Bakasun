@@ -12192,9 +12192,9 @@
     "deceleration": 5,
     "lateralSpeed": 8.5,
     "lateralResponse": 9,
-    "steerExpo": 1.5,
-    "steerAttack": 7,
-    "steerRelease": 11,
+    "steerExpo": 1.25,
+    "steerAttack": 12,
+    "steerRelease": 16,
     "airControl": 0.4,
     "hitSpeedLoss": 0.35,
     "recoverySeconds": 1,
@@ -12808,6 +12808,7 @@
    "controls": {
     "dragMetresPerWidth": 22,
     "keyboardSteer": 1,
+    "joystickReach": 0.62,
     "steerResponse": 10
    },
    "records": {
