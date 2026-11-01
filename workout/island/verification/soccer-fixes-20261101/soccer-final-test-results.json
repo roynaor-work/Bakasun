@@ -1,0 +1,57 @@
+{
+  "codeHead": "857dde47c35efed2f62bf624dc4c0fb2c9c2cd2a",
+  "reportDate": "31.10.2026",
+  "unit": {
+    "tests": 3031,
+    "pass": 2989,
+    "fail": 0,
+    "skipped": 42,
+    "cancelled": 0,
+    "todo": 0,
+    "log": "tests-full-ci.txt",
+    "platform": "GitHub Actions ubuntu-latest / Node22",
+    "ciUrl": "https://github.com/roynaor-work/Bakasun/actions/runs/41183289218/job/124484939251"
+  },
+  "soccer": {
+    "tests": 582,
+    "pass": 579,
+    "fail": 0,
+    "skipped": 3,
+    "cancelled": 0,
+    "todo": 0,
+    "log": "tests-soccer-final.txt"
+  },
+  "browsers": {
+    "controls": {
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "log": "final-controls/tests-controls-browser.txt",
+      "report": "final-controls/soccer-design-controls-browser.json"
+    },
+    "reopen": {
+      "tests": 3,
+      "pass": 3,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "log": "final-reopen/tests-reopen-browser.txt",
+      "report": "final-reopen/soccer-reopen-browser.json"
+    },
+    "restarts": {
+      "tests": 6,
+      "pass": 6,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "log": "final-restarts-calibrated/tests-restarts-browser.txt",
+      "report": "final-restarts-calibrated/soccer-motion2-browser.json"
+    }
+  },
+  "physicalPhone": false
+}

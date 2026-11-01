@@ -146,13 +146,14 @@ for(const stage of [1,15,30])for(const seed of [4,71])test(`soccer campaign stag
 
 test('soccer campaign sidelines allow a partly overlapping ball and restart once the whole ball is outside',()=>{
   const hz=base.pitch.width/2,radius=base.physics.ballRadius,dt=base.match.fixedStep;
+  const fixtureConfig={...base,rules:{...base.rules,outMargin:radius/2}};
   for(const stage of [1,30])for(const side of [-1,1]){
-    const game=createSoccer({config:base,stage,seed:824}),s=game.getState();
+    const game=createSoccer({config:fixtureConfig,stage,seed:824}),s=game.getState();
     for(const player of s.players)player.cooldown=10;
     Object.assign(s.ball,{owner:null,x:0,z:side*(hz+radius-.001),y:radius,vx:0,vz:0,vy:0,grace:0,lastTeam:0,lastPlayer:0,flight:null,thrower:null});
     game.update(dt,{});
     assert.equal(s.phase,'playing',`stage ${stage}, side ${side}: some of the ball still overlaps the field`);
-    assert.ok(Math.abs(s.ball.z)>hz+base.rules.outMargin,'the old presentation margin is not the whole-ball boundary');
+    assert.ok(Math.abs(s.ball.z)>hz+fixtureConfig.rules.outMargin,'the presentation margin is not the whole-ball boundary');
     s.ball.z=side*(hz+radius+.001);
     game.update(dt,{});
     assert.equal(s.phase,'restart');assert.equal(s.restart.type,'throwIn');assert.equal(s.restart.team,1);

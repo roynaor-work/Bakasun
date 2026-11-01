@@ -1,0 +1,957 @@
+{
+  "codeHead": "857dde47c35efed2f62bf624dc4c0fb2c9c2cd2a",
+  "source": "workout/island/index.html",
+  "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "scriptSrcSelf": true,
+  "nativeContexts": {
+    "controls": [
+      {
+        "viewport": null,
+        "role": null,
+        "isolatedInlineProbe": true,
+        "audit": {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [
+            {
+              "kind": "console",
+              "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-GDRap8gaXzcFclMHW5xh+DOljkL1fjq035eA8/jPk3o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+              "location": {
+                "url": "",
+                "line": 0,
+                "column": 0,
+                "lineNumber": 0,
+                "columnNumber": 0
+              },
+              "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "observedAt": 1793434124804
+            },
+            {
+              "kind": "chromium-log",
+              "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-GDRap8gaXzcFclMHW5xh+DOljkL1fjq035eA8/jPk3o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+              "source": "security",
+              "lineNumber": 0,
+              "observedAt": 1793434124814
+            },
+            {
+              "kind": "chromium-audit",
+              "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "violatedDirective": "script-src-elem",
+              "isReportOnly": false,
+              "contentSecurityPolicyViolationType": "kInlineViolation",
+              "sourceCodeLocation": {
+                "scriptId": "288",
+                "url": "",
+                "lineNumber": 0,
+                "columnNumber": 117
+              },
+              "violatingNodeId": 5,
+              "observedAt": 1793434124814
+            },
+            {
+              "kind": "console",
+              "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-GDRap8gaXzcFclMHW5xh+DOljkL1fjq035eA8/jPk3o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+              "location": {
+                "url": "",
+                "line": 0,
+                "column": 0,
+                "lineNumber": 0,
+                "columnNumber": 0
+              },
+              "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "observedAt": 1793434124814
+            },
+            {
+              "kind": "chromium-log",
+              "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-GDRap8gaXzcFclMHW5xh+DOljkL1fjq035eA8/jPk3o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+              "source": "security",
+              "lineNumber": 0,
+              "observedAt": 1793434124814
+            },
+            {
+              "kind": "chromium-audit",
+              "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "violatedDirective": "script-src-elem",
+              "isReportOnly": false,
+              "contentSecurityPolicyViolationType": "kInlineViolation",
+              "sourceCodeLocation": {
+                "scriptId": "288",
+                "url": "",
+                "lineNumber": 0,
+                "columnNumber": 117
+              },
+              "violatingNodeId": 5,
+              "observedAt": 1793434124814
+            },
+            {
+              "kind": "event",
+              "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "frameUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "blockedURI": "inline",
+              "effectiveDirective": "script-src-elem",
+              "violatedDirective": "script-src-elem",
+              "disposition": "enforce",
+              "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+              "documentURI": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "sourceFile": "",
+              "lineNumber": 1,
+              "columnNumber": 118,
+              "statusCode": 200,
+              "sample": "",
+              "observedAt": 1793434124836
+            },
+            {
+              "kind": "event",
+              "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "frameUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "blockedURI": "inline",
+              "effectiveDirective": "script-src-elem",
+              "violatedDirective": "script-src-elem",
+              "disposition": "enforce",
+              "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+              "documentURI": "http://127.0.0.1:62819/workout/island/?dev=1",
+              "sourceFile": "",
+              "lineNumber": 1,
+              "columnNumber": 118,
+              "statusCode": 200,
+              "sample": "",
+              "observedAt": 1793434124859
+            }
+          ],
+          "policyErrors": [],
+          "workers": []
+        }
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "role": null,
+        "isolatedInlineProbe": false,
+        "audit": {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:62819/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": false,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:62819/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "role": null,
+        "isolatedInlineProbe": false,
+        "audit": {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:62819/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": false,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:62819/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "reopen": [
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "role": null,
+        "isolatedInlineProbe": false,
+        "audit": {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": false,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": false,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "role": null,
+        "isolatedInlineProbe": false,
+        "audit": {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": false,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": false,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:50925/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "restarts": [
+      {
+        "viewport": null,
+        "role": null,
+        "isolatedInlineProbe": true,
+        "audit": {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [
+            {
+              "kind": "console",
+              "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-7SOnV22wFGoG54Vtc8y9/s0GG+r2ZR0MdKXk4JRE7Ag='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+              "location": {
+                "url": "",
+                "line": 0,
+                "column": 0,
+                "lineNumber": 0,
+                "columnNumber": 0
+              },
+              "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "observedAt": 1793434294814
+            },
+            {
+              "kind": "chromium-log",
+              "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-7SOnV22wFGoG54Vtc8y9/s0GG+r2ZR0MdKXk4JRE7Ag='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+              "source": "security",
+              "lineNumber": 0,
+              "observedAt": 1793434294814
+            },
+            {
+              "kind": "chromium-audit",
+              "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "violatedDirective": "script-src-elem",
+              "isReportOnly": false,
+              "contentSecurityPolicyViolationType": "kInlineViolation",
+              "sourceCodeLocation": {
+                "scriptId": "288",
+                "url": "",
+                "lineNumber": 0,
+                "columnNumber": 128
+              },
+              "violatingNodeId": 4,
+              "observedAt": 1793434294814
+            },
+            {
+              "kind": "console",
+              "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-7SOnV22wFGoG54Vtc8y9/s0GG+r2ZR0MdKXk4JRE7Ag='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+              "location": {
+                "url": "",
+                "line": 0,
+                "column": 0,
+                "lineNumber": 0,
+                "columnNumber": 0
+              },
+              "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "observedAt": 1793434294814
+            },
+            {
+              "kind": "chromium-log",
+              "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-7SOnV22wFGoG54Vtc8y9/s0GG+r2ZR0MdKXk4JRE7Ag='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+              "source": "security",
+              "lineNumber": 0,
+              "observedAt": 1793434294814
+            },
+            {
+              "kind": "chromium-audit",
+              "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "violatedDirective": "script-src-elem",
+              "isReportOnly": false,
+              "contentSecurityPolicyViolationType": "kInlineViolation",
+              "sourceCodeLocation": {
+                "scriptId": "288",
+                "url": "",
+                "lineNumber": 0,
+                "columnNumber": 128
+              },
+              "violatingNodeId": 4,
+              "observedAt": 1793434294814
+            },
+            {
+              "kind": "event",
+              "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "frameUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "blockedURI": "inline",
+              "effectiveDirective": "script-src-elem",
+              "violatedDirective": "script-src-elem",
+              "disposition": "enforce",
+              "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+              "documentURI": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "sourceFile": "",
+              "lineNumber": 1,
+              "columnNumber": 129,
+              "statusCode": 200,
+              "sample": "",
+              "observedAt": 1793434294826
+            },
+            {
+              "kind": "event",
+              "pageUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "frameUrl": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "blockedURI": "inline",
+              "effectiveDirective": "script-src-elem",
+              "violatedDirective": "script-src-elem",
+              "disposition": "enforce",
+              "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+              "documentURI": "http://127.0.0.1:62523/workout/island/?dev=1",
+              "sourceFile": "",
+              "lineNumber": 1,
+              "columnNumber": 129,
+              "statusCode": 200,
+              "sample": "",
+              "observedAt": 1793434294826
+            }
+          ],
+          "policyErrors": [],
+          "workers": []
+        }
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "role": "field",
+        "isolatedInlineProbe": false,
+        "audit": {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": false,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "role": "keeper",
+        "isolatedInlineProbe": false,
+        "audit": {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": false,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "role": "field",
+        "isolatedInlineProbe": false,
+        "audit": {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": false,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "role": "keeper",
+        "isolatedInlineProbe": false,
+        "audit": {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": false,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:62523/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "pairedPerformanceContexts": {
+    "1": {
+      "before": [
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:62403/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        },
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:62403/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:64285/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:64285/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        },
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:64285/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:64285/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "before": [
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:56858/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        },
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:56858/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:65477/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:65477/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        },
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:65477/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:65477/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "before": [
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:57475/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        },
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:57475/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:61763/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:61763/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        },
+        {
+          "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "htmlResponsesSeen": 1,
+          "violations": [],
+          "policyErrors": [],
+          "workers": [
+            {
+              "url": "http://127.0.0.1:61763/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            },
+            {
+              "url": "http://127.0.0.1:61763/workout/island/minigames/soccer-draco-worker.mjs",
+              "hooked": true,
+              "closed": true,
+              "waitingForDebugger": true,
+              "domains": {
+                "Log.enable": true,
+                "Audits.enable": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "physicalPhone": false
+}

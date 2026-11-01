@@ -3,7 +3,7 @@ import {DRACOLoader} from '../vendor/DRACOLoader.js';
 
 // The island CSP permits same-origin scripts, without blob workers. Keep the
 // decoder in a static same-origin worker rather than relaxing the app's policy.
-class SoccerDracoLoader extends DRACOLoader {
+export class SoccerDracoLoader extends DRACOLoader {
   _initDecoder() {
     if(this.decoderPending)return this.decoderPending;
     this.decoderPending=this._loadLibrary('draco_decoder.wasm','arraybuffer').then(binary=>{
@@ -11,6 +11,36 @@ class SoccerDracoLoader extends DRACOLoader {
       this.workerSourceURL=new URL('./soccer-draco-worker.mjs',import.meta.url).href;
     });
     return this.decoderPending;
+  }
+
+  _getWorker(taskID,taskCost){
+    return super._getWorker(taskID,taskCost).then(worker=>{
+      if(!worker._soccerErrorsBound){
+        worker._soccerErrorsBound=true;
+        const fail=event=>{
+          const error=Error('Soccer Draco worker: '+(event.message||'message decoding failed'));
+          worker._soccerFailure=error;
+          // Worker load/CSP/decoding errors must settle every outstanding asset
+          // promise. Otherwise Promise.all keeps a reopened game loading forever.
+          for(const callback of Object.values(worker._callbacks))callback.reject(error);
+        };
+        worker.addEventListener('error',fail);worker.addEventListener('messageerror',fail);
+      }
+      if(worker._soccerFailure)throw worker._soccerFailure;
+      return worker;
+    });
+  }
+
+  async _loadLibrary(url,responseType){
+    url=this.manager.resolveURL(this.decoderPath+url);this.manager.itemStart(url);
+    try{
+      // Consume the original response completely. The vendor r160 FileLoader's
+      // wrapping stream can leave a decoder request aborted during rapid exit.
+      const response=await fetch(url,{headers:this.requestHeader,credentials:this.withCredentials?'include':'same-origin'});
+      if(!response.ok)throw Error(`Soccer Draco decoder: HTTP ${response.status}`);
+      return await(responseType==='arraybuffer'?response.arrayBuffer():response.text());
+    }catch(error){this.manager.itemError(url);throw error;}
+    finally{this.manager.itemEnd(url);}
   }
 }
 
