@@ -42,7 +42,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const sun = new THREE.DirectionalLight(dusk ? '#f0c5b1' : '#ffe2ba', 2.65 * look.light); sun.castShadow = true; sun.shadow.mapSize.set(SHADOW_SIZE, SHADOW_SIZE);
   Object.assign(sun.shadow.camera, {left: -26, right: 26, top: 26, bottom: -26, near: 1, far: 120}); sun.shadow.bias = -.0005; scene.add(sun, sun.target);
   const mat = (c, roughness = .8) => new THREE.MeshStandardMaterial({color: c, roughness,envMapIntensity:.2});
-  const snow=snowMaterial(),ice=mat('#90b5c4',.5),navy=mat('#263f4a'),orange=mat('#c97550'),white=mat('#e4e3d7'),stone=rockMaterial(),green=mat('#254e40'),red=mat('#b65e48',.8),gold=new THREE.MeshStandardMaterial({color:'#f3cb77',emissive:'#9c6f23',emissiveIntensity:.15,roughness:.28,metalness:.55});
+  const trackMats=[],snow=snowMaterial(),ice=mat('#90b5c4',.5),navy=mat('#263f4a'),orange=mat('#c97550'),white=mat('#e4e3d7'),stone=rockMaterial(),green=mat('#254e40'),red=mat('#b65e48',.8),gold=new THREE.MeshStandardMaterial({color:'#f3cb77',emissive:'#9c6f23',emissiveIntensity:.15,roughness:.28,metalness:.55});
   function mesh(geo, material, parent, x = 0, y = 0, z = 0) { const m = new THREE.Mesh(geo, material); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; parent.add(m); return m; }
   const box = (w, h, d, m, p, x, y, z) => mesh(new THREE.BoxGeometry(w, h, d), m, p, x, y, z);
   const placed = (geo, x = 0, y = 0, z = 0, rx = 0, ry = 0, s = 1) => geo.applyMatrix4(new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromEuler(new THREE.Euler(rx, ry, 0)), new THREE.Vector3(s, s, s)));
@@ -53,7 +53,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   catch(error) {
     // This await precedes course/actor construction. The complete scene
     // disposer below is not initialized yet, so release the boot resources.
-    for(const m of [snow,ice,navy,orange,white,stone,green,red,gold])m.dispose();
+    for(const m of [snow,ice,navy,orange,white,stone,green,red,gold,...trackMats])m.dispose();
     envTarget.dispose();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();
     if(!canvas)renderer.domElement.remove();
     throw error;
@@ -84,7 +84,17 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const profile = [...right.slice(1).reverse().map(p => ({x: -p.x, y: p.y, nx: -p.nx, ny: p.ny})), ...right];
   let arc = 0; profile.forEach((p, i) => { if (i) arc += Math.hypot(p.x - profile[i - 1].x, p.y - profile[i - 1].y); p.arc = arc; }); profile.forEach(p => { p.u = p.arc / arc; });
   const xAtU = u => { const a = u * arc; for (let i = 1; i < profile.length; i++) if (profile[i].arc >= a) { const p = profile[i - 1], q = profile[i], f = (a - p.arc) / Math.max(1e-6, q.arc - p.arc); return p.x + (q.x - p.x) * f; } return deckEdge; };
-  const pipeMat=snow,terrainMat=new THREE.MeshStandardMaterial({color:'#f2f6f7',map:designWorld.snowTexture,roughness:.96,envMapIntensity:.16});
+  // Track pack surfaces: groomed snow with a light normal map on the run (UV: u = x / 5 m, v = s / 6 m, tile 4 m),
+  // wind ripples on the banks. Without the pack the previous look is used unchanged.
+  const trk = designWorld.trackTextures || {};
+  let pipeMat = snow;
+  if (trk.groomed) {
+    trk.groomed.repeat.set(5 / 4, 6 / 4); if (trk.groomedN) trk.groomedN.repeat.set(5 / 4, 6 / 4);
+    pipeMat = new THREE.MeshStandardMaterial({map: trk.groomed, normalMap: trk.groomedN || null, roughness: .94, envMapIntensity: .16});
+    if (trk.groomedN) pipeMat.normalScale.set(.18, .18); trackMats.push(pipeMat);
+  }
+  const bankMap = trk.ripples || designWorld.snowTexture; if (trk.ripples) trk.ripples.repeat.set(1, 8 / 6);
+  const terrainMat = new THREE.MeshStandardMaterial({color: '#f2f6f7', map: bankMap, roughness: .96, envMapIntensity: .16}); trackMats.push(terrainMat);
   // Side terrain: deck level near the pipe, a bumpy bank, then a long fall away into fog.
   const TX=[0,2,5,10,18,30,50,90],TY=[0,.5,2,6,11,19,9,-35];
   function terrainY(s, ax, side) {
@@ -119,10 +129,22 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   for (let s0 = sFirst; s0 < sLast; s0 += CHUNK) {
     const s1 = Math.min(sLast, s0 + CHUNK), group = new THREE.Group();
     const surface = mesh(designWorld.slopeSurface(s0,s1,{pipe,worldPoint,deckEdge}), pipeMat, group); surface.castShadow = false;
-    const sides = [-1, 1].map(side => strip(s0, s1, TX.length, (s, k, o) => { const kk = side < 0 ? TX.length - 1 - k : k; o.x = side * (deckEdge + TX[kk]); o.y = terrainAt(s, kk, side); o.nx = 0; o.ny = 1; o.u = 0; }, 8, true));
+    const sides = [-1, 1].map(side => strip(s0, s1, TX.length, (s, k, o) => { const kk = side < 0 ? TX.length - 1 - k : k; o.x = side * (deckEdge + TX[kk]); o.y = terrainAt(s, kk, side); o.nx = 0; o.ny = 1; o.u = trk.ripples ? o.x / 6 : 0; }, 8, true));
     const land = mesh(mergeGeometries(sides), terrainMat, group); land.castShadow = false; sides.forEach(g => g.dispose());
 
     group.userData = {s0, s1, perf: 'track'}; scene.add(group); chunks.push(group);
+  }
+  // Flag rope along both lips, one 8 m module at a time. The module spans X and ends share anchors, so it is turned
+  // a quarter turn to run down the course; one InstancedMesh per chunk keeps it to one draw call each.
+  const flagModuleGeo = designWorld.trackGeometry?.('flag-rope');
+  if (flagModuleGeo) {
+    const flagMat = new THREE.MeshStandardMaterial({color: '#ffffff', vertexColors: !!flagModuleGeo.attributes.color, roughness: .8, envMapIntensity: .2, side: THREE.DoubleSide}); trackMats.push(flagMat);
+    const o = new THREE.Object3D();
+    for (const chunk of chunks) {
+      const {s0, s1} = chunk.userData, n = Math.max(0, Math.floor((s1 - s0) / 8)), inst = new THREE.InstancedMesh(flagModuleGeo, flagMat, n * 2); let k = 0;
+      for (const side of [-1, 1]) for (let i = 0; i < n; i++) { place(o, s0 + 4 + i * 8, side * (pipe.lip + .6), pipe.lipHeight, 0, Math.PI / 2); o.updateMatrix(); inst.setMatrixAt(k++, o.matrix); }
+      inst.instanceMatrix.needsUpdate = true; inst.castShadow = false; inst.frustumCulled = false; inst.userData.perf = 'flags'; chunk.add(inst);
+    }
   }
   const art=designWorld.createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,snow,stone,dusk,mobile,density:look.trees});
   const scenery={update(){},dispose(){}};
@@ -151,7 +173,15 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   // ---------- Obstacles: bounded pools per type ----------
   const boostMat = new THREE.MeshStandardMaterial({color:'#a9dbd5',emissive:'#477875',emissiveIntensity:.25,roughness:.55});
   function pad() { const g = new THREE.Group(); box(3.3, .08, 5.5, ice, g, 0, .07, 0); for (let i = 0; i < 3; i++) for (const side of [-1, 1]) { const a = box(1.22, .04, .25, boostMat, g, side * .39, .14, i * 1.25 - 1.5); a.rotation.y = side * .6; } return g; }
-  function ramp() { const g = new THREE.Group(), geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute([-2, 0, 3, 2, 0, 3, -2, 1.2, -3, 2, 0, 3, 2, 1.2, -3, -2, 1.2, -3], 3)); geo.computeVertexNormals(); mesh(geo, snow, g); for (const x of [-2, 2]) { const edge = box(.12, .08, 6.12, orange, g, x, .6, 0); edge.rotation.x = .197; } box(4.1, 1.2, .14, navy, g, 0, .6, -3); return g; }
+  const kickerGeo = designWorld.trackGeometry?.('kicker'), flagGeo = designWorld.trackGeometry?.('flag-rope');
+  let kickerMat = null; if (kickerGeo && trk.groomed) { const map = trk.groomed.clone(); map.needsUpdate = true; map.repeat.set(1, 6 / 4); kickerMat = new THREE.MeshStandardMaterial({map, vertexColors: !!kickerGeo.attributes.color, roughness: .94, envMapIntensity: .16}); trackMats.push(kickerMat); }
+  function kickerRamp() {
+    // The pack's kicker rises toward +Z; in this scene downhill is -Z, so it is turned half a revolution and centred.
+    const g = new THREE.Group(), m = new THREE.Mesh(kickerGeo, kickerMat); m.castShadow = true; m.receiveShadow = true;
+    m.position.set(0, 0, 3 * (physics.ramp.length / 6)); m.rotation.y = Math.PI; m.scale.set(physics.ramp.width / 4, physics.ramp.height / 1.8, physics.ramp.length / 6); g.add(m);
+    return g;
+  }
+  function woodRamp() { const g = new THREE.Group(), geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute([-2, 0, 3, 2, 0, 3, -2, 1.2, -3, 2, 0, 3, 2, 1.2, -3, -2, 1.2, -3], 3)); geo.computeVertexNormals(); mesh(geo, snow, g); for (const x of [-2, 2]) { const edge = box(.12, .08, 6.12, orange, g, x, .6, 0); edge.rotation.x = .197; } box(4.1, 1.2, .14, navy, g, 0, .6, -3); return g; }
   function gate() {
     // Slalom gate: striped poles, red flag panels and the banner bar riders pass under.
     const g = new THREE.Group(), gw = physics.gateHalfWidth, top = physics.gatePostHeight;
@@ -163,7 +193,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     return g;
   }
   function rock(){const g=new THREE.Group(),geo=new THREE.SphereGeometry(.7,24,16),p=geo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i),n=1+.10*Math.sin(x*13+z*3)*Math.cos(y*9);p.setXYZ(i,x*n,y*n,z*n);}geo.computeVertexNormals();const r=mesh(geo,stone,g,0,.39,0);r.scale.set(1,.67,1);return g;}
-  const makers = {rock:()=>designWorld.prop('rock',physics), gate:()=>designWorld.prop('gate',physics), boost: pad, ramp}, pools = {rock: [], gate: [], boost: [], ramp: []};
+  const makers = {rock:()=>designWorld.prop('rock',physics), gate:()=>designWorld.prop('gate',physics), boost: pad, ramp: kickerMat ? kickerRamp : woodRamp}, pools = {rock: [], gate: [], boost: [], ramp: []};
   function prop(type, used) { const list = pools[type], i = used[type]++; if (!list[i]) { const g = makers[type](); g.userData.perf = 'props'; scene.add(g); list.push(g); } list[i].visible = true; return list[i]; }
   function textTexture(label, bg = '#ff643b', fg = '#ffffff') {
     return canvasTexture(1024, 96, (ctx, w, h) => { ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h); ctx.fillStyle = fg; ctx.font = '900 64px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, w / 2, h / 2 + 3); ctx.fillStyle = '#ff643b'; ctx.fillRect(0, 0, w, 8); ctx.fillRect(0, h - 8, w, 8); });
