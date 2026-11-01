@@ -289,7 +289,7 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
       for(const o of fullMeshes){
         const originalGeometry=o.geometry,geometry=own(characterGeometry(originalGeometry,palette));
         const original=Array.isArray(o.material)?o.material[0]:o.material;
-        o.geometry=geometry;o.material=own(original.clone());o.material.vertexColors=true;o.material.roughness=.88;o.material.metalness=0;
+        o.geometry=geometry;o.material=own(original.clone());o.material.vertexColors=true;o.material.roughness=.78;o.material.metalness=0;
         o.frustumCulled=false;o.castShadow=o.receiveShadow=true;
         triangles+=(geometry.index?.count||geometry.attributes.position.count)/3;
         const low=o.clone(false);low.name=o.name+'LOD1';low.geometry=own(characterGeometry(lodGeometry.get(originalGeometry)[0],palette));low.visible=false;o.parent.add(low);lowMeshes.push(low);

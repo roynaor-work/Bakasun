@@ -253,7 +253,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     if(replay.active)onEdge(null);
     designVfx.update(live,dt,quality,camera);
     const stadiumDirection=-Math.sign(camera.getWorldDirection(target).z)||live.attackDir;
-    if(designSceneReady)designScene.update(stadiumDirection,lastWidth,lastHeight);else stadium.update(stadiumDirection);
+    if(designSceneReady){designScene.update(stadiumDirection,lastWidth,lastHeight);designScene.netRipple(goalPulse,(goalTeam===0?1:-1)*live.attackDir,time);}else stadium.update(stadiumDirection);
     crowd.update(time,live.phase==='goal',stadiumDirection);
     goalPulse=Math.max(0,goalPulse-dt*.7);
     let boxIndex=0,sphereIndex=0;

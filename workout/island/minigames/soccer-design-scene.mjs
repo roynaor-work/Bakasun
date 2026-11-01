@@ -14,7 +14,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   root.name='soccer-design-scenery';ball.name='soccer-design-ball';root.visible=ball.visible=false;
   scene.add(root);ballRoot.add(ball);
   let disposed=false,status='loading',textureCount=0,residentTriangles=0,lastWidth=0,lastHeight=0,viewDirection=1,renderQuality=0,seatLodStats=null;
-  let skyMaterial=null,skyLandscape=null,skyPortrait=null;
+  let skyMaterial=null,skyLandscape=null,skyPortrait=null,netRipple=()=>{};
   const loadedTextures=[],loadedModels=[];
   const hx=config.pitch.length/2;
   const reportError=error=>{try{onError(error);}catch{}};
@@ -129,9 +129,19 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     // authored mowing bands, UV scale and one texture sample per fragment.
     const sample='texture2D( map, vMapUv )',mapFragment=T.ShaderChunk.map_fragment;
     if(!mapFragment.includes(sample))throw new Error('Unsupported soccer turf map shader');
-    const turfMapFragment=mapFragment.replace(sample,'texture2D( map, vMapUv, 1.25 )');
-    pitchMaterial.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',turfMapFragment);};
-    pitchMaterial.customProgramCacheKey=()=> 'soccer-design-turf-mip-1.25';
+    // A second, finer sample of the same grass map breaks the visible tiling of
+    // the full-field tile, and world-space wear (goal mouths, kick-off spot,
+    // penalty spots) grounds the pitch like a used match surface. One extra
+    // texture fetch per fragment; no extra draw call or texture.
+    const turfMapFragment=mapFragment.replace(sample,'mix( texture2D( map, vMapUv, 1.25 ), texture2D( map, vMapUv * 7.0 + vec2( .13, .41 ), .5 ), .22 ) * vec4( vec3( 1. - soccerWear( vSoccerTurfWorld ) ), 1. )');
+    pitchMaterial.onBeforeCompile=shader=>{
+      shader.uniforms.soccerHalfLength={value:hx};shader.uniforms.soccerGoalHalf={value:config.pitch.goalWidth/2};shader.uniforms.soccerSpot={value:config.pitch.penaltySpot};
+      shader.vertexShader='varying vec2 vSoccerTurfWorld;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvSoccerTurfWorld=vec2(position.x,position.z);');
+      shader.fragmentShader='uniform float soccerHalfLength;uniform float soccerGoalHalf;uniform float soccerSpot;varying vec2 vSoccerTurfWorld;\n'+
+        'float soccerWear(vec2 w){float mouth=exp(-dot((vec2(abs(w.x)-soccerHalfLength,w.y))/vec2(2.8,soccerGoalHalf*1.25),(vec2(abs(w.x)-soccerHalfLength,w.y))/vec2(2.8,soccerGoalHalf*1.25)));float spot=exp(-dot((vec2(abs(w.x)-(soccerHalfLength-soccerSpot),w.y))/1.1,(vec2(abs(w.x)-(soccerHalfLength-soccerSpot),w.y))/1.1));float centre=exp(-dot(w/2.6,w/2.6));return mouth*.16+spot*.08+centre*.07;}\n'+
+        shader.fragmentShader.replace('#include <map_fragment>',turfMapFragment);
+    };
+    pitchMaterial.customProgramCacheKey=()=> 'soccer-design-turf-detail-wear-v3';
     // Use the imported texture-ready pitch, lowering its surface to y=0 so the
     // existing .018m lines and every contact shadow retain their depth order.
     const pitchGeometry=merged([get('pitch_surface')],stadiumTransform);pitchGeometry.translate(0,-.04*sy,0);
@@ -150,7 +160,17 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
         .multiply(new T.Matrix4().makeScale(config.pitch.goalWidth/7.32,config.pitch.goalHeight/2.44,depthScale));
       goalGeometries.push(merged(goalParts,transform));
     }
-    const goalGeometry=mergeGeometries(goalGeometries);goalGeometries.forEach(geometry=>geometry.dispose());mesh(goalGeometry,palette);
+    // The goal gets its own material so the net can billow after a goal: vertices
+    // behind the goal line (the net, never the posts) are pushed along the pitch
+    // axis by a uniform the view drives from the goal pulse.
+    const goalMaterial=track(palette.clone());goalMaterial.userData.ripple={value:0};goalMaterial.userData.rippleTime={value:0};goalMaterial.userData.rippleSide={value:1};
+    goalMaterial.onBeforeCompile=shader=>{
+      shader.uniforms.soccerNetRipple=goalMaterial.userData.ripple;shader.uniforms.soccerNetTime=goalMaterial.userData.rippleTime;shader.uniforms.soccerNetSide=goalMaterial.userData.rippleSide;shader.uniforms.soccerNetLine={value:hx+.25};
+      shader.vertexShader='uniform float soccerNetRipple;uniform float soccerNetTime;uniform float soccerNetSide;uniform float soccerNetLine;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nif(abs(position.x)>soccerNetLine&&sign(position.x)==soccerNetSide){float depth=clamp((abs(position.x)-soccerNetLine)/1.4,0.,1.);transformed.x+=sign(position.x)*sin(soccerNetTime*22.+position.z*2.3+position.y*2.)*soccerNetRipple*.3*depth;transformed.y-=soccerNetRipple*.05*depth;}');
+    };
+    goalMaterial.customProgramCacheKey=()=> 'soccer-design-goal-net-ripple-v3';
+    const goalGeometry=mergeGeometries(goalGeometries);goalGeometries.forEach(geometry=>geometry.dispose());mesh(goalGeometry,goalMaterial);
+    netRipple=(pulse,side,time)=>{goalMaterial.userData.ripple.value=pulse;goalMaterial.userData.rippleSide.value=side;goalMaterial.userData.rippleTime.value=time;};
     // Asset diameter .22m, anchor_ball_center (0,.11,0). BallRoot already
     // supplies simulation position and spin; imported ground offset is removed.
     const ballGeometry=merged([ballSource.getObjectByName('soccer_ball')],new T.Matrix4());
@@ -185,6 +205,8 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
       skyCrop(texture,width,height);skyMaterial.map=texture;
     },
     setQuality(level){renderQuality=level;refreshVisibility();},
+    /** Goal-net billow: pulse 0..1 decaying after a goal, side = sign of the scoring goal's x. */
+    netRipple(pulse,side,time){netRipple(pulse,side,time);},
     dispose(){disposed=true;root.removeFromParent();ball.removeFromParent();}
   };
 }
