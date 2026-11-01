@@ -121,10 +121,16 @@ export function createSoccerDesignReplay({config,fetcher=globalThis.fetch,reduce
       if(elapsed>=total){skip('complete');return state;}
       capture(camera);
       const entry=.2,exit=.2,pathTime=contactPathTime-pathDuration/2+pathDuration*smooth((elapsed-entry)/pathDuration),fov=samplePath(pathTime);
+      // The authored replay paths are framed for landscape; a portrait frame pulls the
+      // camera toward its target so the goal still fills the narrow frame.
+      if(startAspect<1){const scale=config?.view?.designReplay?.portraitDistanceScale??.55;for(let i=0;i<3;i++)pathPosition[i]=pathTarget[i]+(pathPosition[i]-pathTarget[i])*scale;}
       recordTime=contactClock+(pathTime-contactPathTime);let blend=1,cameraFov=fov;
       if(elapsed<entry){blend=smooth(elapsed/entry);for(let i=0;i<3;i++){pathPosition[i]=startPosition[i]+(pathPosition[i]-startPosition[i])*blend;pathTarget[i]=startTarget[i]+(pathTarget[i]-startTarget[i])*blend;}cameraFov=startFov+(fov-startFov)*blend;}
       else if(elapsed>total-exit){const out=smooth((elapsed-total+exit)/exit);blend=1-out;for(let i=0;i<3;i++){pathPosition[i]+=(livePosition[i]-pathPosition[i])*out;pathTarget[i]+=(liveTarget[i]-pathTarget[i])*out;}cameraFov=fov+(baseFov-fov)*out;}
-      if(startAspect<1){const wide=2*Math.atan(Math.tan(cameraFov*Math.PI/360)/Math.max(.45,startAspect))*180/Math.PI;cameraFov=cameraFov+(Math.min(94,wide)-cameraFov)*blend;}
+      // Portrait keeps the authored vertical field of view, widening only a little:
+      // matching the landscape horizontal view (up to 94 degrees) shrank the pitch
+      // into a foggy strip floating in the sky (01/11/2026 screenshots).
+      if(startAspect<1){const wide=2*Math.atan(Math.tan(cameraFov*Math.PI/360)/Math.max(.45,startAspect))*180/Math.PI;cameraFov=cameraFov+(Math.min(cameraFov+10,wide)-cameraFov)*blend;}
       apply(camera,pathPosition,pathTarget,cameraFov);return read(recordTime,state,blend);
     },
     metrics:()=>({active,recordedSamples:count,historySeconds:count>1?times[(write-1+capacity)%capacity]-times[(write-count+capacity)%capacity]:0,bufferBytes:values.byteLength+times.byteLength,starts,reason,elapsed,duration:total,sourcePath:path?.id||null,sourcePathSeconds:pathDuration,recordingOffset:recordTime-contactClock}),
