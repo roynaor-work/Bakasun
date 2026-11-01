@@ -2,7 +2,7 @@ import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261101-1'
 import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261101-1';
 import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261101-1';
 import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261101-1';
-import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance} from './soccer-tactics.mjs?v=island-v2-20261101-1';
+import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261101-1';
 import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261101-1';
 import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261101-1';
 import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261101-1';
@@ -277,15 +277,19 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     }
     if(s.passTarget?.player===p.id&&s.passTarget.time>0&&b.owner===null){
       const speed=p.team===0?(config.players.speed+(p.speed-1)*config.players.speedPerRank)*personal(p).pace:Math.max(opponent.speed*personal(p).pace,teamReference()*config.opponents.minSpeedRatio*attack.speed);
-      const reception=s.passTarget.kind==='loft'?loftReceptionTarget(p,b,config,{speed,direction:d}):null;
+      const reception=s.passTarget.kind==='loft'?loftReceptionTarget(p,b,config,{speed,direction:d}):b.flight||p.team!==0?null:meetPoint(p,b,config,speed,s.passTarget);
       tx=reception?.x??s.passTarget.x;tz=reception?.z??s.passTarget.z;
     }
+    // Off the ball in possession, a team-mate far from its tactical spot joins the
+    // attack at a visible sprint instead of arriving after the move has ended.
+    // Defensive closing speed is unchanged, so the rival's threat stays as tuned.
+    const gap=distance(p,{x:tx,z:tz}),joining=owner?owner.team===p.team:b.lastTeam===p.team,catchUp=joining&&owner!==p&&p.role!=='keeper'&&gap>aiConfig.catchUpDistance&&(p.team===0||stage>=aiConfig.sprintFromStage)?1+clamp((gap-aiConfig.catchUpDistance)/aiConfig.catchUpDistance,0,1)*aiConfig.catchUpBoost:1;
     // A deterministic duty cycle uses elapsed simulation time, never extra RNG.
     // Sprint never consumes RNG, including below the stage gate.
     p.sprintRest=Math.max(0,p.sprintRest-dt);p.sprintTime=Math.max(0,p.sprintTime-dt);
     if(owner===p&&p.team===1&&stage>=aiConfig.sprintFromStage&&p.role!=='keeper'&&p.sprintRest<=0&&distance(p,{x:tx,z:tz})>=aiConfig.sprintDistance){p.sprintTime=aiConfig.sprintSeconds;p.sprintRest=aiConfig.sprintRestSeconds;}
-    p.sprinting=p.sprintTime>0;
-    move(p,tx-p.x,tz-p.z,dt,p.role==='keeper'?aiConfig.keeperSpeedScale:p.sprinting?aiConfig.sprintMultiplier:1);
+    p.sprinting=p.sprintTime>0||catchUp>1+aiConfig.catchUpBoost*.4;
+    move(p,tx-p.x,tz-p.z,dt,p.role==='keeper'?aiConfig.keeperSpeedScale:p.sprintTime>0?Math.max(aiConfig.sprintMultiplier,catchUp):catchUp);
   }
   function mode(){return role==='keeper'&&s.ball.owner!==s.controlled||s.ball.owner!==null&&players[s.ball.owner].team===1?'defense':'attack';}
   function takeBall(p){
@@ -615,6 +619,8 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if(pendingRelease){if(s.bufferedAction?.kind==='shot')s.bufferedAction.released=true;if(s.charging&&s.chargeKind==='shot'){kick(p,s.charge/ph.chargeSeconds);s.charging=false;s.charge=0;s.chargeKind=null;}pendingRelease=false;}
     if(pendingPassRelease){if(s.bufferedAction?.kind==='pass')s.bufferedAction.released=true;if(s.charging&&s.chargeKind==='pass'){kick(p,s.charge/config.passing.chargeSeconds,true);s.charging=false;s.charge=0;s.chargeKind=null;}pendingPassRelease=false;}
     sprint(step,length>aiConfig.idleThreshold,!!input.sprintHeld,p.recover<=0&&p.slideTime<=0);
+    // Team-mates time their runs from how long the child has carried the ball.
+    if(s.ball.owner===p.id&&!p.hands)p.hold+=step;
     for(const member of players)if(member.distribution)updateDistribution(member);
     for(const member of players) {
       if(member.distribution){member.vx=member.vz=0;continue;}
@@ -683,6 +689,8 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       return designController.diagnostics(s);
     },
     tacticalMetrics:()=>config.tactics.designController?.diagnostics(s)||null,
+    /** Pure tactical target for one player, for tools and tests (same controller the AI uses). */
+    tacticalTarget:p=>p.role==='keeper'?keeperTarget(p,s,config):fieldTarget(p,s,config),
     clearInput,
     snapshot:()=>JSON.parse(JSON.stringify(s)),
     get result(){return s.result;}

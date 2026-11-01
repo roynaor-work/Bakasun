@@ -69,6 +69,20 @@ export function selectTeamPass(p,s,c){
  return target;
 }
 
+/** Earliest visible point on a rolling ball's path that this runner can reach:
+ * a receiver comes to meet a ground pass instead of waiting where it was aimed.
+ * Reads the ball's observed velocity only; the aimed point is the fallback. */
+export function meetPoint(p,b,c,speed,aimed){
+ const drag=Math.max(1e-6,Number.isFinite(c.ball?.grassFriction)?c.ball.grassFriction:c.physics.friction),reach=c.physics.pickupRadius*.6,hx=c.pitch.length/2-c.rules.playerBoundary,hz=c.pitch.width/2-c.rules.playerBoundary;
+ const vx=b.vx||0,vz=b.vz||0,pace=Math.max(1,speed)*.95;
+ if(Math.hypot(vx,vz)<c.ball?.restSpeed*4)return aimed;
+ for(let t=0;t<=1.3;t+=1/30){
+  const travel=(1-Math.exp(-drag*t))/drag,x=clamp(b.x+vx*travel,-hx,hx),z=clamp(b.z+vz*travel,-hz,hz);
+  if(Math.hypot(x-p.x,z-p.z)<=pace*t+reach)return {x,z,time:t};
+ }
+ return aimed;
+}
+
 /** A small incumbent advantage prevents two equally close teammates swapping duties every tick. */
 export function teamPresser(team,s,c){
  const b=s.ball,mates=[],active=[];
