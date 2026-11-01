@@ -25,7 +25,7 @@ export function createSoccerPenalties(options){
  }
  setup();
  function finishAttempt(){shoot.attempts++;shoot.hits+=Number(shoot.scored);s.drill.attempts=shoot.attempts;s.drill.hits=shoot.hits;if(shoot.attempts>=kicks)result={attempts:shoot.attempts,hits:shoot.hits};else setup();}
- return {drainEvents:()=>game.drainEvents(),getState:()=>s,snapshot:()=>JSON.parse(JSON.stringify(s)),clearInput:()=>game.clearInput(),renderState:()=>game.renderState?.()??s,get result(){return result;},
+ return {drainEvents:()=>game.drainEvents(),getState:()=>s,setDesignTactics:data=>game.setDesignTactics(data),tacticalMetrics:()=>game.tacticalMetrics(),snapshot:()=>JSON.parse(JSON.stringify(s)),clearInput:()=>game.clearInput(),renderState:()=>game.renderState?.()??s,get result(){return result;},
   update(dt,input={}){
    if(result||!Number.isFinite(dt)||dt<=0)return s;const step=Math.min(dt,c.rules.maxUpdateSeconds);shoot.elapsed+=step;shoot.attemptElapsed+=step;
    // A child who waits gets an automatic gentle shot, so the bonus never stalls.

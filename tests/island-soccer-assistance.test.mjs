@@ -72,7 +72,7 @@ test('moving teammate lead is bounded and cannot enter the cone from outside',()
 });
 
 test('destination clipping preserves manual direction and physical pitch bounds',()=>{
-  for(const x of [-17.7,0,17.7])for(const z of [-10.7,0,10.7])for(let angle=-180;angle<=180;angle+=15){
+  for(const x of [-base.pitch.length/2+.3,0,base.pitch.length/2-.3])for(const z of [-base.pitch.width/2+.3,0,base.pitch.width/2-.3])for(let angle=-180;angle<=180;angle+=15){
     const aim={x:Math.cos(degrees(angle)),z:Math.sin(degrees(angle)),manual:true};
     const s=state([player(0,x,z)],{ball:ball({x,z}),aim});
     const result=assistedPassDestination(s,base,1);
@@ -212,15 +212,15 @@ test('receiving ball settles vertically gradually rather than snapping to ground
 test('free-ball context never exposes keeper actions to a field player',()=>{
   const s=state();assert.equal(soccerActionContext(s,base),'loose');
   s.ball=ball({lastTeam:1,lastPlayer:4});assert.equal(soccerActionContext(s,base),'loose');
-  s.ball=ball({x:-16,vx:-12});assert.equal(soccerActionContext(s,base),'defense');
-  s.players.push(player(2,-16,0,{role:'keeper'}));s.controlled=2;assert.equal(soccerActionContext(s,base),'keeper');
+  s.ball=ball({x:-base.pitch.length/2+2,vx:-12});assert.equal(soccerActionContext(s,base),'defense');
+  s.players.push(player(2,-base.pitch.length/2+2,0,{role:'keeper'}));s.controlled=2;assert.equal(soccerActionContext(s,base),'keeper');
 });
 
 test('context handles either attacking direction, real owners and keeper possession',()=>{
   const s=state([player(0,0,0),player(1,1,0,{team:1})]);
   s.ball.owner=0;assert.equal(soccerActionContext(s,base),'attack');
   s.ball.owner=1;assert.equal(soccerActionContext(s,base),'defense');
-  s.attackDir=-1;s.ball=ball({x:16,vx:12});assert.equal(soccerActionContext(s,base),'defense');
+  s.attackDir=-1;s.ball=ball({x:base.pitch.length/2-2,vx:12});assert.equal(soccerActionContext(s,base),'defense');
   s.players[0].role='keeper';s.players[0].hands=true;assert.equal(soccerActionContext(s,base),'attack');
 });
 

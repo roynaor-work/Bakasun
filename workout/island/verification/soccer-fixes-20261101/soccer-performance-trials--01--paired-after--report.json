@@ -1,0 +1,335 @@
+[
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "done": true,
+    "result": {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "devicePixelRatio": 1,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "seed": 7,
+      "level": 1,
+      "pinnedQuality": 0,
+      "warmupSeconds": 3,
+      "seconds": 30.02,
+      "frames": 708,
+      "fps": 23.6,
+      "frameMs": {
+        "mean": 42.4,
+        "p50": 33.4,
+        "p95": 50.1,
+        "p99": 83.3,
+        "max": 200
+      },
+      "over33": 705,
+      "over50": 68,
+      "tickMs": {
+        "mean": 0.29,
+        "p50": 0.2,
+        "p95": 0.6,
+        "p99": 1.4,
+        "max": 4.3
+      },
+      "renderMs": {
+        "mean": 2.22,
+        "p50": 1.4,
+        "p95": 3.4,
+        "p99": 3.8,
+        "max": 126.7
+      },
+      "glMs": {
+        "mean": 1.65,
+        "p50": 0.9,
+        "p95": 2.9,
+        "p99": 3.3,
+        "max": 126.1
+      },
+      "animMs": {
+        "mean": 0.57,
+        "p50": 0.4,
+        "p95": 2.2,
+        "p99": 2.6,
+        "max": 3.1
+      },
+      "programsCompiled": 0,
+      "allocByPhaseMB": {
+        "tick": 73.7,
+        "render": 33.7,
+        "gl": 23,
+        "other": 0
+      },
+      "longTasks": 4,
+      "longTaskMs": 1103,
+      "heap": {
+        "startMB": 53.8,
+        "endMB": 38.2,
+        "allocatedMB": 130.3,
+        "allocatedMBPerSecond": 4.34,
+        "gcCount": 36
+      },
+      "assetReadyMs": 8332,
+      "warmup": {
+        "programs": 55,
+        "ms": 68
+      },
+      "quality": {
+        "final": 3,
+        "pixelRatio": 0.85,
+        "changes": [
+          {
+            "atSeconds": 0.2,
+            "quality": 3
+          }
+        ],
+        "crowdCount": 10,
+        "shadows": false,
+        "triangles": 48781,
+        "drawCalls": 30,
+        "assetStatus": "ready",
+        "turf": {
+          "turfStatus": "ready",
+          "turfMaps": 1,
+          "source": "design/environment"
+        },
+        "lod": 2
+      },
+      "match": {
+        "score": [
+          2,
+          0
+        ],
+        "elapsed": 24.4,
+        "phase": "playing",
+        "events": {
+          "goal": 2,
+          "shot": 4,
+          "pass": 8,
+          "loft": 0,
+          "header": 0,
+          "steal": 0,
+          "save": 0
+        }
+      }
+    },
+    "errors": [
+      {
+        "kind": "console",
+        "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:64285/favicon.ico",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "kind": "console",
+        "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:64285/favicon.ico",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    ],
+    "failedResponses": [],
+    "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "cspAudit": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [],
+      "policyErrors": [],
+      "workers": [
+        {
+          "url": "http://127.0.0.1:64285/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:64285/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "done": true,
+    "result": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "devicePixelRatio": 1,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "seed": 7,
+      "level": 1,
+      "pinnedQuality": 0,
+      "warmupSeconds": 3,
+      "seconds": 30,
+      "frames": 763,
+      "fps": 25.4,
+      "frameMs": {
+        "mean": 39.32,
+        "p50": 33.4,
+        "p95": 50.1,
+        "p99": 66.6,
+        "max": 116.7
+      },
+      "over33": 756,
+      "over50": 53,
+      "tickMs": {
+        "mean": 0.27,
+        "p50": 0.2,
+        "p95": 0.6,
+        "p99": 1.4,
+        "max": 3.6
+      },
+      "renderMs": {
+        "mean": 2.59,
+        "p50": 1.7,
+        "p95": 3.7,
+        "p99": 5,
+        "max": 115.7
+      },
+      "glMs": {
+        "mean": 1.94,
+        "p50": 1.1,
+        "p95": 3.2,
+        "p99": 4.3,
+        "max": 114.6
+      },
+      "animMs": {
+        "mean": 0.65,
+        "p50": 0.4,
+        "p95": 1.9,
+        "p99": 2.8,
+        "max": 24.2
+      },
+      "programsCompiled": 0,
+      "allocByPhaseMB": {
+        "tick": 68.5,
+        "render": 32.1,
+        "gl": 24.1,
+        "other": -4
+      },
+      "longTasks": 5,
+      "longTaskMs": 859,
+      "heap": {
+        "startMB": 46,
+        "endMB": 39,
+        "allocatedMB": 120.7,
+        "allocatedMBPerSecond": 4.02,
+        "gcCount": 9
+      },
+      "assetReadyMs": 8425,
+      "warmup": {
+        "programs": 55,
+        "ms": 37
+      },
+      "quality": {
+        "final": 3,
+        "pixelRatio": 0.85,
+        "changes": [
+          {
+            "atSeconds": 0.2,
+            "quality": 3
+          }
+        ],
+        "crowdCount": 10,
+        "shadows": false,
+        "triangles": 48781,
+        "drawCalls": 30,
+        "assetStatus": "ready",
+        "turf": {
+          "turfStatus": "ready",
+          "turfMaps": 1,
+          "source": "design/environment"
+        },
+        "lod": 2
+      },
+      "match": {
+        "score": [
+          4,
+          0
+        ],
+        "elapsed": 24.6,
+        "phase": "playing",
+        "events": {
+          "goal": 4,
+          "shot": 6,
+          "pass": 7,
+          "loft": 0,
+          "header": 0,
+          "steal": 0,
+          "save": 0
+        }
+      }
+    },
+    "errors": [
+      {
+        "kind": "console",
+        "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:64285/favicon.ico",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    ],
+    "failedResponses": [],
+    "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "cspAudit": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [],
+      "policyErrors": [],
+      "workers": [
+        {
+          "url": "http://127.0.0.1:64285/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:64285/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        }
+      ]
+    }
+  }
+]

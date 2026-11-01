@@ -1,0 +1,526 @@
+{
+  "createdAt": "2026-10-31T08:30:42.776Z",
+  "date": "31.10.2026",
+  "pr": "https://github.com/roynaor-work/Bakasun/pull/227",
+  "branch": "codex/island-soccer-fixes-20261101",
+  "base": "824cc9b5bc3a9f457de8fe304e7ea174385a84ad",
+  "codeHead": "857dde47c35efed2f62bf624dc4c0fb2c9c2cd2a",
+  "sourceFiles": 51,
+  "unit": {
+    "tests": 3031,
+    "pass": 2989,
+    "fail": 0,
+    "skipped": 42,
+    "cancelled": 0,
+    "todo": 0,
+    "platform": "GitHub Actions ubuntu-latest / Node22",
+    "ciUrl": "https://github.com/roynaor-work/Bakasun/actions/runs/41183289218/job/124484939251"
+  },
+  "soccer": {
+    "tests": 582,
+    "pass": 579,
+    "fail": 0,
+    "skipped": 3,
+    "cancelled": 0,
+    "todo": 0
+  },
+  "browsers": {
+    "controls": {
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "report": "final-controls/soccer-design-controls-browser.json",
+      "log": "final-controls/tests-controls-browser.txt",
+      "productionContexts": 2,
+      "isolatedInlineProbes": 1
+    },
+    "reopen": {
+      "tests": 3,
+      "pass": 3,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "report": "final-reopen/soccer-reopen-browser.json",
+      "log": "final-reopen/tests-reopen-browser.txt",
+      "productionContexts": 2,
+      "isolatedInlineProbes": 0
+    },
+    "restarts": {
+      "tests": 6,
+      "pass": 6,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "report": "final-restarts-calibrated/soccer-motion2-browser.json",
+      "log": "final-restarts-calibrated/tests-restarts-browser.txt",
+      "productionContexts": 4,
+      "isolatedInlineProbes": 1
+    }
+  },
+  "performance": {
+    "mode": "three-predefined-serial-pairs",
+    "statistic": "median of the three independent per-run p95 values; frames never pooled",
+    "series": "performance-series.json",
+    "preset": {
+      "seed": 7,
+      "level": 1,
+      "pinnedQuality": 0,
+      "warmupSeconds": 3,
+      "seconds": 30,
+      "devicePixelRatio": 1
+    },
+    "trialCount": 3,
+    "noRegression": true,
+    "frameP95NoRegression": true,
+    "finalCriterionMet": true,
+    "loadTime": {
+      "metric": "assetReadyMs",
+      "statistic": "median of three per-run assetReadyMs values",
+      "noRegression": false,
+      "rows": [
+        {
+          "viewport": "844x390",
+          "before": 2544,
+          "after": 12752,
+          "beforeValues": [
+            2544,
+            2174,
+            3742
+          ],
+          "afterValues": [
+            8332,
+            16888,
+            12752
+          ],
+          "worstBefore": 3742,
+          "worstAfter": 16888,
+          "noRegression": false
+        },
+        {
+          "viewport": "390x844",
+          "before": 2916,
+          "after": 8425,
+          "beforeValues": [
+            2570,
+            3315,
+            2916
+          ],
+          "afterValues": [
+            8425,
+            14033,
+            7571
+          ],
+          "worstBefore": 3315,
+          "worstAfter": 14033,
+          "noRegression": false
+        }
+      ]
+    },
+    "rows": [
+      {
+        "viewport": "844x390",
+        "before": 100,
+        "after": 50.1,
+        "delta": -49.9,
+        "aggregation": "median-of-three-per-run-p95",
+        "beforeValues": [
+          83.3,
+          100,
+          133.3
+        ],
+        "afterValues": [
+          50.1,
+          99.9,
+          50.1
+        ],
+        "bestBefore": 83.3,
+        "bestAfter": 50.1,
+        "worstBefore": 133.3,
+        "worstAfter": 99.9,
+        "assetReadyBefore": 2544,
+        "assetReadyAfter": 12752,
+        "assetReadyBeforeValues": [
+          2544,
+          2174,
+          3742
+        ],
+        "assetReadyAfterValues": [
+          8332,
+          16888,
+          12752
+        ],
+        "worstAssetReadyBefore": 3742,
+        "worstAssetReadyAfter": 16888,
+        "loadTimeNotWorse": false,
+        "qualityBefore": "3",
+        "qualityAfter": "3",
+        "pixelRatioBefore": "0.85",
+        "pixelRatioAfter": "0.85",
+        "qualityAfterValues": [
+          3
+        ],
+        "pixelRatioAfterValues": [
+          0.85
+        ],
+        "frameNotWorse": true,
+        "sameQuality": true,
+        "tierNotWorse": true,
+        "noRegression": true
+      },
+      {
+        "viewport": "390x844",
+        "before": 149.9,
+        "after": 50.1,
+        "delta": -99.80000000000001,
+        "aggregation": "median-of-three-per-run-p95",
+        "beforeValues": [
+          66.7,
+          199.9,
+          149.9
+        ],
+        "afterValues": [
+          50.1,
+          116.6,
+          50
+        ],
+        "bestBefore": 66.7,
+        "bestAfter": 50,
+        "worstBefore": 199.9,
+        "worstAfter": 116.6,
+        "assetReadyBefore": 2916,
+        "assetReadyAfter": 8425,
+        "assetReadyBeforeValues": [
+          2570,
+          3315,
+          2916
+        ],
+        "assetReadyAfterValues": [
+          8425,
+          14033,
+          7571
+        ],
+        "worstAssetReadyBefore": 3315,
+        "worstAssetReadyAfter": 14033,
+        "loadTimeNotWorse": false,
+        "qualityBefore": "3",
+        "qualityAfter": "3",
+        "pixelRatioBefore": "0.85",
+        "pixelRatioAfter": "0.85",
+        "qualityAfterValues": [
+          3
+        ],
+        "pixelRatioAfterValues": [
+          0.85
+        ],
+        "frameNotWorse": true,
+        "sameQuality": true,
+        "tierNotWorse": true,
+        "noRegression": true
+      }
+    ],
+    "trials": [
+      {
+        "trial": 1,
+        "before": "performance-trials/01/paired-before/report.json",
+        "after": "performance-trials/01/paired-after/report.json",
+        "rows": [
+          {
+            "viewport": "844x390",
+            "before": 83.3,
+            "after": 50.1,
+            "delta": -33.199999999999996,
+            "meanBefore": 57.39,
+            "meanAfter": 42.4,
+            "tickBefore": 0.7,
+            "tickAfter": 0.6,
+            "assetReadyBefore": 2544,
+            "assetReadyAfter": 8332,
+            "qualityBefore": 3,
+            "qualityAfter": 3,
+            "pixelRatioBefore": 0.85,
+            "pixelRatioAfter": 0.85,
+            "sameQuality": true,
+            "noRegression": true
+          },
+          {
+            "viewport": "390x844",
+            "before": 66.7,
+            "after": 50.1,
+            "delta": -16.6,
+            "meanBefore": 51.72,
+            "meanAfter": 39.32,
+            "tickBefore": 0.8,
+            "tickAfter": 0.6,
+            "assetReadyBefore": 2570,
+            "assetReadyAfter": 8425,
+            "qualityBefore": 3,
+            "qualityAfter": 3,
+            "pixelRatioBefore": 0.85,
+            "pixelRatioAfter": 0.85,
+            "sameQuality": true,
+            "noRegression": true
+          }
+        ]
+      },
+      {
+        "trial": 2,
+        "before": "performance-trials/02/paired-before/report.json",
+        "after": "performance-trials/02/paired-after/report.json",
+        "rows": [
+          {
+            "viewport": "844x390",
+            "before": 100,
+            "after": 99.9,
+            "delta": -0.09999999999999432,
+            "meanBefore": 62.6,
+            "meanAfter": 52.41,
+            "tickBefore": 0.8,
+            "tickAfter": 1,
+            "assetReadyBefore": 2174,
+            "assetReadyAfter": 16888,
+            "qualityBefore": 3,
+            "qualityAfter": 3,
+            "pixelRatioBefore": 0.85,
+            "pixelRatioAfter": 0.85,
+            "sameQuality": true,
+            "noRegression": true
+          },
+          {
+            "viewport": "390x844",
+            "before": 199.9,
+            "after": 116.6,
+            "delta": -83.30000000000001,
+            "meanBefore": 82.28,
+            "meanAfter": 50.06,
+            "tickBefore": 19.6,
+            "tickAfter": 1.1,
+            "assetReadyBefore": 3315,
+            "assetReadyAfter": 14033,
+            "qualityBefore": 3,
+            "qualityAfter": 3,
+            "pixelRatioBefore": 0.85,
+            "pixelRatioAfter": 0.85,
+            "sameQuality": true,
+            "noRegression": true
+          }
+        ]
+      },
+      {
+        "trial": 3,
+        "before": "performance-trials/03/paired-before/report.json",
+        "after": "performance-trials/03/paired-after/report.json",
+        "rows": [
+          {
+            "viewport": "844x390",
+            "before": 133.3,
+            "after": 50.1,
+            "delta": -83.20000000000002,
+            "meanBefore": 65.97,
+            "meanAfter": 44.04,
+            "tickBefore": 0.7,
+            "tickAfter": 0.6,
+            "assetReadyBefore": 3742,
+            "assetReadyAfter": 12752,
+            "qualityBefore": 3,
+            "qualityAfter": 3,
+            "pixelRatioBefore": 0.85,
+            "pixelRatioAfter": 0.85,
+            "sameQuality": true,
+            "noRegression": true
+          },
+          {
+            "viewport": "390x844",
+            "before": 149.9,
+            "after": 50,
+            "delta": -99.9,
+            "meanBefore": 64.97,
+            "meanAfter": 36.9,
+            "tickBefore": 0.9,
+            "tickAfter": 0.6,
+            "assetReadyBefore": 2916,
+            "assetReadyAfter": 7571,
+            "qualityBefore": 3,
+            "qualityAfter": 3,
+            "pixelRatioBefore": 0.85,
+            "pixelRatioAfter": 0.85,
+            "sameQuality": true,
+            "noRegression": true
+          }
+        ]
+      }
+    ],
+    "faviconErrors": 18
+  },
+  "physical": {
+    "beforeBallDiameter": 0.44,
+    "afterBallDiameter": 0.22,
+    "playerHeight": 1.8,
+    "beforePlayersPerTeam": 4,
+    "afterPlayersPerTeam": 6,
+    "beforePitch": {
+      "length": 36,
+      "width": 22,
+      "goalWidth": 5.4,
+      "goalHeight": 2.3,
+      "goalDepth": 1.6,
+      "postRadius": 0.075,
+      "penaltyDepth": 4.8,
+      "penaltyWidth": 9.6,
+      "penaltySpot": 3.3,
+      "goalAreaDepth": 1.7,
+      "goalAreaWidth": 5.8
+    },
+    "afterPitch": {
+      "length": 48,
+      "width": 30,
+      "goalWidth": 5.4,
+      "goalHeight": 2.3,
+      "goalDepth": 1.6,
+      "postRadius": 0.075,
+      "penaltyDepth": 4.8,
+      "penaltyWidth": 9.6,
+      "penaltySpot": 3.3,
+      "goalAreaDepth": 1.7,
+      "goalAreaWidth": 5.8
+    },
+    "skinnedIdle": {
+      "report": "diagnostics/skinned-height-measurement.json",
+      "min": 1.8068459458155903,
+      "max": 1.806912002325238,
+      "samples": 10
+    }
+  },
+  "mobileScreens": {
+    "report": "final-mobile-browser/report.json",
+    "qualityMatched": true
+  },
+  "assets": [
+    "design/characters2",
+    "design/models2",
+    "design/motion2/soccer",
+    "design/tactics",
+    "design/controls"
+  ],
+  "restartSourceClips": [
+    "throw_in_prepare",
+    "throw_in_release",
+    "throw_in_follow",
+    "corner_runup",
+    "corner_kick",
+    "goal_kick",
+    "goalkeeper_throw",
+    "goalkeeper_punt"
+  ],
+  "gallery": [
+    {
+      "file": "before-browser/844x390-playing.png",
+      "label": "844x390 · לפני · מצלמת המשחק הרגילה"
+    },
+    {
+      "file": "final-mobile-browser/844x390-playing.png",
+      "label": "844x390 · אחרי · משחק טבעי, ברמת האיכות וביחס הפיקסלים של המדידה"
+    },
+    {
+      "file": "final-controls/844x390-two-touch-loft.png",
+      "label": "844x390 · הגבהה בשתי אצבעות · תרחיש מגע במיקום משוחזר"
+    },
+    {
+      "file": "final-restarts-calibrated/844x390-throwIn-fixture-native.png",
+      "label": "844x390 · חוץ ביד מעל הראש · תרחיש הוצאה משוחזר במצלמה הרגילה"
+    },
+    {
+      "file": "final-restarts-calibrated/844x390-corner-fixture-native.png",
+      "label": "844x390 · קרן · תרחיש הוצאה משוחזר במצלמה הרגילה"
+    },
+    {
+      "file": "final-restarts-calibrated/844x390-goalKick-fixture-native.png",
+      "label": "844x390 · בעיטת שער · תרחיש הוצאה משוחזר במצלמה הרגילה"
+    },
+    {
+      "file": "final-restarts-calibrated/844x390-keeperThrow-fixture-native.png",
+      "label": "844x390 · מסירת שוער ביד · תרחיש הוצאה משוחזר במצלמה הרגילה"
+    },
+    {
+      "file": "final-restarts-calibrated/844x390-keeperPunt-fixture-native.png",
+      "label": "844x390 · בעיטת שוער מהיד · תרחיש הוצאה משוחזר במצלמה הרגילה"
+    },
+    {
+      "file": "final-restarts-calibrated/844x390-throwIn-fixture-close.png",
+      "label": "844x390 · חוץ · תקריב בדיקה במצלמת debug, אינו המבט הרגיל במשחק"
+    },
+    {
+      "file": "final-reopen/844x390-recovered.png",
+      "label": "844x390 · פתיחה חוזרת תקינה לאחר כשל מפענח יזום"
+    },
+    {
+      "file": "before-browser/390x844-playing.png",
+      "label": "390x844 · לפני · מצלמת המשחק הרגילה"
+    },
+    {
+      "file": "final-mobile-browser/390x844-playing.png",
+      "label": "390x844 · אחרי · משחק טבעי, ברמת האיכות וביחס הפיקסלים של המדידה"
+    },
+    {
+      "file": "final-controls/390x844-two-touch-loft.png",
+      "label": "390x844 · הגבהה בשתי אצבעות · תרחיש מגע במיקום משוחזר"
+    },
+    {
+      "file": "final-restarts-calibrated/390x844-throwIn-fixture-native.png",
+      "label": "390x844 · חוץ ביד מעל הראש · תרחיש הוצאה משוחזר במצלמה הרגילה"
+    },
+    {
+      "file": "final-restarts-calibrated/390x844-corner-fixture-native.png",
+      "label": "390x844 · קרן · תרחיש הוצאה משוחזר במצלמה הרגילה"
+    },
+    {
+      "file": "final-restarts-calibrated/390x844-goalKick-fixture-native.png",
+      "label": "390x844 · בעיטת שער · תרחיש הוצאה משוחזר במצלמה הרגילה"
+    },
+    {
+      "file": "final-restarts-calibrated/390x844-keeperThrow-fixture-native.png",
+      "label": "390x844 · מסירת שוער ביד · תרחיש הוצאה משוחזר במצלמה הרגילה"
+    },
+    {
+      "file": "final-restarts-calibrated/390x844-keeperPunt-fixture-native.png",
+      "label": "390x844 · בעיטת שוער מהיד · תרחיש הוצאה משוחזר במצלמה הרגילה"
+    },
+    {
+      "file": "final-restarts-calibrated/390x844-throwIn-fixture-close.png",
+      "label": "390x844 · חוץ · תקריב בדיקה במצלמת debug, אינו המבט הרגיל במשחק"
+    },
+    {
+      "file": "final-reopen/390x844-recovered.png",
+      "label": "390x844 · פתיחה חוזרת תקינה לאחר כשל מפענח יזום"
+    }
+  ],
+  "physicalPhone": false,
+  "resultAndSaveContractsUnchanged": true,
+  "releaseChangesMade": false,
+  "limitations": [
+    "Desktop Chrome/SwiftShader viewport emulation; no physical-phone benchmark or human FIFA-like feel approval.",
+    "The final performance criterion is the median of three independent per-run p95 values per orientation, not a pooled percentile; all trials and worst per-run p95 are disclosed.",
+    "Control/restart scenario screenshots use prepared game states; debug close-ups are explicitly labelled.",
+    "Intentional inline/CSP and worker-failure probes are separate from normal gameplay checks.",
+    "Median assetReadyMs regressed in at least one orientation; a frame-p95 pass does not imply unchanged load time."
+  ],
+  "tacticsDifferential": {
+    "report": "tactics-differential-proof.json",
+    "observations": 2400,
+    "targets": 28800,
+    "exactDeepEquality": true,
+    "attackDirections": 2,
+    "difficulties": 3,
+    "restarts": [
+      "throwIn",
+      "corner",
+      "goalKick",
+      "freeKick"
+    ],
+    "sameObservationReverseQueries": true
+  }
+}

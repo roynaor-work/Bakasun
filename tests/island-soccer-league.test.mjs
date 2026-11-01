@@ -29,7 +29,7 @@ test('league: a match keeps its saved number while the model uses the league tun
 
 test('keeper throw: bounded underarm release, never faster than a shot (was 22 m/s for 10 m)',()=>{
  for(const seed of [1,2,3,4]){const g=createSoccer({config:c,stage:5,seed}),s=g.getState(),k=s.players[2];
-  Object.assign(s,{phase:'playing',restart:null});Object.assign(k,{x:-16,z:0,hands:true,hold:0,think:0,cooldown:0});Object.assign(s.ball,{owner:2,x:-15.6,z:0,y:1.05,vx:0,vz:0,vy:0,grace:0,flight:null});
+  Object.assign(s,{phase:'playing',restart:null});Object.assign(k,{x:-c.pitch.length/2+2,z:0,hands:true,hold:0,think:0,cooldown:0});Object.assign(s.ball,{owner:2,x:k.x+c.goalkeeping.holdForward,z:0,y:c.goalkeeping.holdHeight,vx:0,vz:0,vy:0,grace:0,flight:null});
   let speed=null;for(let i=0;i<400&&speed===null;i++){g.update(dt);if(s.ball.owner===null)speed=Math.hypot(s.ball.vx,s.ball.vz);}
   assert.ok(speed!==null);assert.ok(speed<=c.goalkeeping.throwMaxSpeed+.3,`${speed}`);/* + the card pass-spread nudge */assert.ok(speed>=c.goalkeeping.throwMinSpeed-1e-9);assert.ok(speed<c.physics.shotSpeed);}
 });
@@ -38,7 +38,7 @@ test('throw-in: reaches a team-mate inside restarts.throwReach, opponents give t
  let kept=0,lost=0,longest=0;
  for(let seed=1;seed<=24;seed++){
   const g=createSoccer({config:c,stage:5,seed});for(let i=0;i<60*(5+seed%10);i++)g.update(dt);const s=g.getState();if(s.phase!=='playing')continue;
-  const x=((seed*7)%30)-15,side=seed%2?1:-1,team=seed%3?1:0;Object.assign(s.ball,{owner:null,x,z:side*10.95,y:.22,vx:0,vz:side*30,vy:0,lastTeam:1-team,flight:null});g.drainEvents();
+  const x=((seed*7)%30)-15,side=seed%2?1:-1,team=seed%3?1:0;Object.assign(s.ball,{owner:null,x,z:side*(c.pitch.width/2-.05),y:c.physics.ballRadius,vx:0,vz:side*30,vy:0,lastTeam:1-team,flight:null});g.drainEvents();
   let from=null;
   for(let i=0;i<60*8;i++){
    if(s.phase==='restartReady'&&s.restart?.type==='throwIn')for(const p of s.players)if(p.team!==s.restart.team&&p.role!=='keeper')assert.ok(Math.hypot(p.x-s.restart.x,p.z-s.restart.z)>=c.restarts.opponentSpace-1e-6,'opponent too close to the throw');
@@ -54,9 +54,10 @@ test('throw-in: reaches a team-mate inside restarts.throwReach, opponents give t
 test('wide play: a wide carrier in the final third sends one runner into the box and one team-mate square',()=>{
  const g=createSoccer({config:c,stage:8,seed:5}),s=g.getState();for(let i=0;i<30;i++)g.update(dt);
  const d=-s.attackDir,w=s.players.find(p=>p.team===1&&p.role==='wing');
- Object.assign(w,{x:d*9,z:6.5,vx:0,vz:0,cooldown:100,think:100,hold:0});Object.assign(s.ball,{owner:w.id,x:w.x+d*.5,z:6.5,y:.22,vx:0,vz:0,flight:null,grace:100,lastTeam:1});
+ const wideZ=c.pitch.width*.3+.5;Object.assign(w,{x:d*(c.pitch.length/2-9),z:wideZ,vx:0,vz:0,cooldown:100,think:100,hold:0});Object.assign(s.ball,{owner:w.id,x:w.x+d*.5,z:wideZ,y:c.physics.ballRadius,vx:0,vz:0,flight:null,grace:100,lastTeam:1});
  for(let i=0;i<5;i++)g.update(dt);const duties=s.players.filter(p=>p.team===1&&p.id!==w.id&&p.role!=='keeper').map(p=>p.duty).sort();
- assert.deepEqual(duties,['box-run','square']);
+ assert.deepEqual(duties,['box-run','square',...Array(s.players.filter(p=>p.team===1&&p.role!=='keeper').length-3).fill('support')]);
+ for(const back of s.players.filter(p=>p.team===1&&['LCB','RCB'].includes(p.tacticalRole)))assert.ok(back.x*d<s.ball.x*d,'the extra defenders keep balance behind the wide carrier');
 });
 
 test('wide play: rival wings cross and the receiver heads, from crossFromStage only',()=>{
@@ -90,5 +91,8 @@ test('result: bonus penalties pay per goal after a win or a loss and never chang
 test('camera and loading: closer camera, and the old block figures are only a failure fallback',async()=>{
  assert.equal(c.view.camera.nearDistance,15);
  const view=await readFile(new URL('../workout/island/minigames/soccer-view.mjs',import.meta.url),'utf8'),session=await readFile(new URL('../workout/island/minigames/soccer-session.mjs',import.meta.url),'utf8');
- assert.match(view,/else if\(assetStatus==='fallback'\)\{/);assert.match(session,/const loading=view\.loading\(\);/);assert.match(session,/!paused&&!document\.hidden&&!loading/);
+ assert.match(view,/else if\(assetStatus==='fallback'\)\{/);
+ assert.match(session,/const loading=!contractsReady\|\|view\.loading\(\);/,'both actual model assets and design contracts must finish before play');
+ assert.match(session,/!paused&&!document\.hidden&&!loading/);
+ assert.doesNotMatch(session,/\bassetStatus\s*=/,'the session cannot forge renderer readiness');
 });

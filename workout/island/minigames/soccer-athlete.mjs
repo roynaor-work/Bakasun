@@ -23,7 +23,7 @@ const SKIN_SCATTER = `
 #include <emissivemap_fragment>
 totalEmissiveRadiance += diffuseColor.rgb * vec3(0.95, 0.32, 0.2) * pow(1.0 - clamp(dot(normal, normalize(vViewPosition)), 0.0, 1.0), 3.0) * 0.22 * athleteSkinWeight;`;
 const KIT_HEAD = `
-uniform sampler2D athleteKitMask; uniform sampler2D athleteNumbers; uniform float athleteNumberCell;
+uniform sampler2D athleteKitMask; uniform sampler2D athleteNumbers; uniform float athleteNumberCell; uniform float athleteNumberCells;
 uniform vec3 kitPrimary; uniform vec3 kitSecondary; uniform vec3 kitShorts; uniform vec3 kitShortsTrim;
 uniform vec3 kitSocks; uniform vec3 kitSocksTrim; uniform vec3 kitBoots; uniform vec3 kitBootAccent;
 varying vec2 vAthleteNumber; varying vec2 vAthleteCrest;`;
@@ -50,7 +50,7 @@ const KIT_BODY = `
     c = mix(c, crest * (0.35 + 0.8 * d.r), outer * k.r);
   }
   if (vAthleteNumber.x >= 0.0 && vAthleteNumber.x <= 1.0 && vAthleteNumber.y >= 0.0 && vAthleteNumber.y <= 1.0) {
-    vec4 n = texture2D(athleteNumbers, vec2((clamp(vAthleteNumber.x, 0.02, 0.98) + athleteNumberCell) / 8.0, vAthleteNumber.y));
+    vec4 n = texture2D(athleteNumbers, vec2((clamp(vAthleteNumber.x, 0.02, 0.98) + athleteNumberCell) / athleteNumberCells, vAthleteNumber.y));
     c = mix(c, n.rgb * n.rgb * (0.25 + 0.95 * d.r), n.a * k.r);
   }
   diffuseColor.rgb = c;
@@ -71,7 +71,7 @@ export function createAthleteMaterials(T, source, {profile, kit, numbers, cell, 
   skin.customProgramCacheKey = () => 'athlete-skin-2';
   const col = hex => { const c = linear(T, hex); return new T.Vector3(c.r, c.g, c.b); };
   kitMat.userData.athlete = {
-    athleteKitMask: {value: source.kitMask}, athleteNumbers: {value: numbers}, athleteNumberCell: {value: cell},
+    athleteKitMask: {value: source.kitMask}, athleteNumbers: {value: numbers}, athleteNumberCell: {value: cell}, athleteNumberCells: {value: Math.max(1,numbers.image.width/64)},
     kitPrimary: {value: col(kit.primary)}, kitSecondary: {value: col(kit.secondary)}, kitShorts: {value: col(kit.shorts)}, kitShortsTrim: {value: col(kit.shortsTrim)},
     kitSocks: {value: col(kit.socks)}, kitSocksTrim: {value: col(kit.socksTrim)}, kitBoots: {value: col(profile.boots || '#1b1d22')}, kitBootAccent: {value: col(profile.bootAccent || '#e9eef2')},
   };

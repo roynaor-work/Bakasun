@@ -19,6 +19,18 @@ function setup(options={}){
  for(const p of s.players){p.x=p.team?12:-12;p.z=p.id%2?7:-7;p.cooldown=0;p.think=100;p.vx=p.vz=0;}
  Object.assign(s.players[0],{x:0,z:0,fx:1,fz:0});Object.assign(s.ball,{owner:0,x:c.physics.dribbleOffset,z:0,grace:1});return g;
 }
+/** These two locomotion contracts compare pace under identical world targets.
+ * Tactical responses to the faster human belong to the real 225-seed gates. */
+function locomotionSetup(options={}){
+ const config={...c,tactics:{...c.tactics,designController:{target:p=>({x:(p.team===0?1:-1)*(c.pitch.length/2-1),z:p.z,duty:'locomotion-fixture'})}}};
+ const game=setup({config,...options}),s=game.getState();
+ for(const team of [0,1]){
+  const field=s.players.filter(p=>p.team===team&&p.role!=='keeper');
+  for(let i=0;i<field.length;i++)Object.assign(field[i],{x:(team===0?-1:1)*c.pitch.length*.2,z:(i-(field.length-1)/2)*5,vx:0,vz:0});
+  Object.assign(s.players.find(p=>p.team===team&&p.role==='keeper'),{x:(team===0?-1:1)*(c.pitch.length/2-1.5),z:0,vx:0,vz:0});
+ }
+ Object.assign(s.players[0],{x:0,z:0});return game;
+}
 function shot({x=0,z=0,fx=1,fz=0,moveX=0,moveZ=0,...options}={}){
  const g=setup(options),s=g.getState();Object.assign(s.players[0],{x,z,fx,fz});Object.assign(s.ball,{x:x+fx*c.physics.dribbleOffset,z:z+fz*c.physics.dribbleOffset});
  g.update(dt,{kickHeld:true,moveX,moveZ});g.update(dt,{moveX,moveZ});return g;
@@ -68,8 +80,8 @@ test('G3c fixed-tick input retains short pass/switch/kick edges at 120Hz',()=>{
  assert.equal(s.event?.type,'shot');
 });
 test('G3c sprint increases only controlled speed by the configured multiplier',()=>{
- const normal=setup(),fast=setup();for(const g of [normal,fast])Object.assign(g.getState().ball,{owner:null,y:1000});advance(normal,.4,{moveX:1});advance(fast,.4,{moveX:1,sprintHeld:true});near(fast.getState().players[0].vx/normal.getState().players[0].vx,c.sprint.multiplier);near(fast.getState().sprint.value,c.sprint.capacity-.4*c.sprint.drainPerSecond);
- for(let i=1;i<6;i++)near(fast.getState().players[i].vx,normal.getState().players[i].vx);
+ const normal=locomotionSetup(),fast=locomotionSetup();for(const g of [normal,fast])Object.assign(g.getState().ball,{owner:null,y:1000});advance(normal,.4,{moveX:1});advance(fast,.4,{moveX:1,sprintHeld:true});near(fast.getState().players[0].vx/normal.getState().players[0].vx,c.sprint.multiplier);near(fast.getState().sprint.value,c.sprint.capacity-.4*c.sprint.drainPerSecond);
+ for(let i=1;i<normal.getState().players.length;i++)near(fast.getState().players[i].vx,normal.getState().players[i].vx);
 });
 test('G3c exhaustion stops sprint until minToStart; regeneration waits for delay',()=>{
  const g=setup(),s=g.getState();Object.assign(s.ball,{owner:null,y:1000});advance(g,c.sprint.capacity/c.sprint.drainPerSecond+.15,{moveZ:1,sprintHeld:true});assert.equal(s.sprint.locked,true);assert.equal(s.sprint.active,false);
@@ -120,7 +132,7 @@ test('G3f individual shot strength, controlled pace and enemy speed floor follow
  const shotFactor=p=>cardEffects({attributes:{power:p.card.shot}},c).power*(1+(p.card.shot-c.card.initial)/c.card.max*c.roster.attributeShotWeight);
  const low=shot({card:card(50)}).getState(),high=shot({card:card(99)}).getState();assert.ok(high.players[0].card.shot>low.players[0].card.shot);near(Math.hypot(high.ball.vx,high.ball.vz)/Math.hypot(low.ball.vx,low.ball.vz),shotFactor(high.players[0])/shotFactor(low.players[0]));
  for(const controlled of [0,1]){
-  const a=setup({card:card(50)}),b=setup({card:card(99)});for(const g of [a,b]){g.getState().controlled=controlled;Object.assign(g.getState().ball,{owner:null,y:1000});}a.update(dt,{moveX:1});b.update(dt,{moveX:1});
+  const a=locomotionSetup({card:card(50)}),b=locomotionSetup({card:card(99)});for(const g of [a,b]){g.getState().controlled=controlled;Object.assign(g.getState().ball,{owner:null,y:1000});}a.update(dt,{moveX:1});b.update(dt,{moveX:1});
   const aa=a.getState().players,bb=b.getState().players;
   near(bb[controlled].vx/aa[controlled].vx,pace(bb[controlled])/pace(aa[controlled]));
   for(let i=0;i<aa.length;i++)if(i!==controlled){

@@ -8,8 +8,8 @@ import {createSoccer} from '../workout/island/minigames/soccer.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames.soccer;
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 function fixture(){
- const positions=[[0,0],[-4,-6],[-16.8,0],[3,0],[6,6],[16.8,0],[-4,6],[6,-6]];
- return {difficulty:'normal',attackDir:1,controlled:0,players:config.players.roster.map((p,id)=>({...p,id,x:positions[id][0],z:positions[id][1],vx:0,vz:0,recover:0,slideTime:0})),ball:{owner:0,x:.49,z:0,y:.22,vx:0,vz:0,grace:0,lastTeam:0}};
+ const hx=config.pitch.length/2,positions=[[0,0],[-4,-6],[-hx+1.2,0],[3,0],[6,6],[hx-1.2,0],[-4,6],[6,-6]];
+ return {difficulty:'normal',attackDir:1,controlled:0,players:config.players.roster.map((p,id)=>({...p,id,x:positions[id][0],z:positions[id][1],vx:0,vz:0,recover:0,slideTime:0})),ball:{owner:0,x:.49,z:0,y:config.physics.ballRadius,vx:0,vz:0,grace:0,lastTeam:0}};
 }
 function freeze(value){if(value&&typeof value==='object'){Object.freeze(value);for(const child of Object.values(value))freeze(child);}return value;}
 
@@ -69,7 +69,7 @@ test('teamplay campaign formations alter the rival shape without changing home s
 
 test('teamplay both ends, six formations and fast free balls always produce finite in-pitch targets',()=>{
  for(const attackDir of [-1,1])for(const formation of ['balanced','wide','compact','counter','press','diamond'])for(const side of [-1,1]){
-  const s=fixture();Object.assign(s,{attackDir,campaign:{formation}});Object.assign(s.ball,{owner:null,x:side*18,z:side*11,vx:side*27,vz:side*15});
+  const s=fixture();Object.assign(s,{attackDir,campaign:{formation}});Object.assign(s.ball,{owner:null,x:side*config.pitch.length/2,z:side*config.pitch.width/2,vx:side*27,vz:side*15});
   for(const p of s.players.filter(p=>p.role!=='keeper')){
    const target=fieldTarget(p,s,config);assert.ok(Number.isFinite(target.x)&&Number.isFinite(target.z));
    assert.ok(Math.abs(target.x)<=config.pitch.length/2-config.tactics.goalInset);
@@ -108,7 +108,7 @@ test('teamplay shooting corridors use visible field defenders and leave the actu
  Object.assign(s.players[3],{x:6,z:0});Object.assign(s.players[4],{x:15,z:9});Object.assign(s.players[7],{x:15,z:-9});
  assert.equal(hasShootingLane(p,s,config),false,'do not fire straight into a nearby presser');
  s.players[3].z=3;assert.equal(hasShootingLane(p,s,config),true,'a real sidestep opens the shot');
- Object.assign(s.players[5],{x:17,z:0});assert.equal(hasShootingLane(p,s,config),true,'a keeper on the line is not treated as an impossible shot');
+ Object.assign(s.players[5],{x:config.pitch.length/2-1,z:0});assert.equal(hasShootingLane(p,s,config),true,'a keeper on the line is not treated as an impossible shot');
 });
 
 test('teamplay an unavailable receiver is skipped and a keeper can still release during recovery',()=>{
@@ -127,11 +127,11 @@ test('teamplay keeper reacts to a released ball after a short delay, independent
 });
 
 test('teamplay keeper sweeps a reachable loose ball but holds the line when an attacker arrives first',()=>{
- const s=fixture(),p=s.players[2];Object.assign(s.ball,{owner:null,x:-15.8,z:0,vx:0,vz:0,lastTeam:1});
+ const s=fixture(),p=s.players[2],hx=config.pitch.length/2;Object.assign(s.ball,{owner:null,x:-hx+2.2,z:0,vx:0,vz:0,lastTeam:1});
  assert.equal(keeperTarget(p,s,config).duty,'keeper-sweep');
- Object.assign(s.players[3],{x:-15.7,z:0});assert.equal(keeperTarget(p,s,config).duty,'keeper-track');
+ Object.assign(s.players[3],{x:-hx+2.3,z:0});assert.equal(keeperTarget(p,s,config).duty,'keeper-track');
  s.ball.y=3;assert.equal(keeperTarget(p,s,config).duty,'keeper-track','an unreachable high ball does not pull the keeper out');
- Object.assign(s.ball,{y:.22,z:3.3});Object.assign(p,{z:2.4});Object.assign(s.players[3],{x:3,z:0});
+ Object.assign(s.ball,{y:config.physics.ballRadius,z:3.3});Object.assign(p,{z:2.4});Object.assign(s.players[3],{x:3,z:0});
  assert.equal(keeperTarget(p,s,config).z,3.3,'a safe sweep may leave the goal mouth while staying in the area');
 });
 
@@ -163,12 +163,12 @@ test('teamplay planning is deterministic and leaves state, cards and configurati
 });
 
 function homeAttack(role='keeper'){
- const game=createSoccer({config,role,stage:15,seed:41}),s=game.getState();
- for(const p of s.players)Object.assign(p,{x:p.team===0?-16:16,z:p.id%2?9:-9,recover:100,cooldown:100,think:100,vx:0,vz:0});
+ const game=createSoccer({config,role,stage:15,seed:41}),s=game.getState(),hx=config.pitch.length/2,hz=config.pitch.width/2;
+ for(const p of s.players)Object.assign(p,{x:(p.team===0?-1:1)*(hx-2),z:p.id%2?hz-2:-hz+2,recover:100,cooldown:100,think:100,vx:0,vz:0});
  s.controlled=role==='keeper'?2:6;s.switchCooldown=100;
- Object.assign(s.players[0],{x:6,z:0,fx:1,fz:0,hold:.8,think:0,recover:0,cooldown:0});
- Object.assign(s.players[1],{x:9,z:5,recover:0});Object.assign(s.players[3],{x:8,z:1});
- Object.assign(s.ball,{owner:0,x:6.49,z:0,y:config.physics.ballRadius,vx:0,vz:0,grace:100,lastTeam:0});
+ Object.assign(s.players[0],{x:hx-12,z:0,fx:1,fz:0,hold:.8,think:0,recover:0,cooldown:0});
+ Object.assign(s.players[1],{x:hx-9,z:5,recover:0});Object.assign(s.players[3],{x:hx-10,z:1});
+ Object.assign(s.ball,{owner:0,x:hx-12+config.physics.dribbleOffset,z:0,y:config.physics.ballRadius,vx:0,vz:0,grace:100,lastTeam:0});
  return game;
 }
 test('teamplay when the child is keeper, a home attacker shoots from a good lane before recycling under pressure',()=>{
@@ -176,10 +176,10 @@ test('teamplay when the child is keeper, a home attacker shoots from a good lane
 });
 
 test('teamplay home keeper-role attackers use a shot interval and keep passing outside the shooting lane',()=>{
- const game=homeAttack(),s=game.getState(),p=s.players[0];game.update(config.match.fixedStep);game.drainEvents();
- Object.assign(p,{x:6,z:0,cooldown:0,think:0,hold:.8});Object.assign(s.ball,{owner:0,x:6.49,z:0,grace:100});
+ const game=homeAttack(),s=game.getState(),p=s.players[0],x=config.pitch.length/2-12;game.update(config.match.fixedStep);game.drainEvents();
+ Object.assign(p,{x,z:0,cooldown:0,think:0,hold:.8});Object.assign(s.ball,{owner:0,x:x+config.physics.dribbleOffset,z:0,grace:100});
  game.update(config.match.fixedStep);assert.ok(game.drainEvents().some(e=>e.type==='pass'&&e.team===0),'another pass remains available between shots');
- s.elapsed+=10;Object.assign(p,{x:6,z:0,cooldown:0,think:0,hold:.8});Object.assign(s.ball,{owner:0,x:6.49,z:0,grace:100});
+ s.elapsed+=10;Object.assign(p,{x,z:0,cooldown:0,think:0,hold:.8});Object.assign(s.ball,{owner:0,x:x+config.physics.dribbleOffset,z:0,grace:100});
  game.update(config.match.fixedStep);assert.ok(game.drainEvents().some(e=>e.type==='shot'&&e.team===0));
  const wide=homeAttack(),w=wide.getState();w.players[0].z=8;w.ball.z=8;wide.update(config.match.fixedStep);
  assert.equal(wide.drainEvents().some(e=>e.type==='shot'&&e.team===0),false,'wide angles do not produce indiscriminate automatic shots');
@@ -220,7 +220,7 @@ for(const team of [0,1])test(`teamplay team ${team}: a cooldown-blocked attempt 
  const game=homeAttack(),s=game.getState(),p=s.players[team===0?0:3];
  if(team===1){
   Object.assign(s.players[0],{x:6,z:9,recover:100});
-  Object.assign(p,{x:-12,z:0,fx:-1,fz:0,recover:0,hold:1,think:0});
+  Object.assign(p,{x:-config.pitch.length/2+6,z:0,fx:-1,fz:0,recover:0,hold:1,think:0});
   Object.assign(s.ball,{owner:p.id,x:p.x-.49,z:0,lastTeam:1,grace:100});
  }
  p.cooldown=.1;game.update(config.match.fixedStep);

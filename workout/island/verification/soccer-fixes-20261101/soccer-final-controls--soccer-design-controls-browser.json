@@ -1,0 +1,642 @@
+[
+  {
+    "kind": "isolated-inline-probe",
+    "blocked": true,
+    "csp": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [
+        {
+          "kind": "console",
+          "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-GDRap8gaXzcFclMHW5xh+DOljkL1fjq035eA8/jPk3o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+          "location": {
+            "url": "",
+            "line": 0,
+            "column": 0,
+            "lineNumber": 0,
+            "columnNumber": 0
+          },
+          "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "observedAt": 1793434124804
+        },
+        {
+          "kind": "chromium-log",
+          "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-GDRap8gaXzcFclMHW5xh+DOljkL1fjq035eA8/jPk3o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+          "source": "security",
+          "lineNumber": 0,
+          "observedAt": 1793434124814
+        },
+        {
+          "kind": "chromium-audit",
+          "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "violatedDirective": "script-src-elem",
+          "isReportOnly": false,
+          "contentSecurityPolicyViolationType": "kInlineViolation",
+          "sourceCodeLocation": {
+            "scriptId": "288",
+            "url": "",
+            "lineNumber": 0,
+            "columnNumber": 117
+          },
+          "violatingNodeId": 5,
+          "observedAt": 1793434124814
+        },
+        {
+          "kind": "console",
+          "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-GDRap8gaXzcFclMHW5xh+DOljkL1fjq035eA8/jPk3o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+          "location": {
+            "url": "",
+            "line": 0,
+            "column": 0,
+            "lineNumber": 0,
+            "columnNumber": 0
+          },
+          "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "observedAt": 1793434124814
+        },
+        {
+          "kind": "chromium-log",
+          "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-GDRap8gaXzcFclMHW5xh+DOljkL1fjq035eA8/jPk3o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+          "source": "security",
+          "lineNumber": 0,
+          "observedAt": 1793434124814
+        },
+        {
+          "kind": "chromium-audit",
+          "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "violatedDirective": "script-src-elem",
+          "isReportOnly": false,
+          "contentSecurityPolicyViolationType": "kInlineViolation",
+          "sourceCodeLocation": {
+            "scriptId": "288",
+            "url": "",
+            "lineNumber": 0,
+            "columnNumber": 117
+          },
+          "violatingNodeId": 5,
+          "observedAt": 1793434124814
+        },
+        {
+          "kind": "event",
+          "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "frameUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "blockedURI": "inline",
+          "effectiveDirective": "script-src-elem",
+          "violatedDirective": "script-src-elem",
+          "disposition": "enforce",
+          "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "documentURI": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "sourceFile": "",
+          "lineNumber": 1,
+          "columnNumber": 118,
+          "statusCode": 200,
+          "sample": "",
+          "observedAt": 1793434124836
+        },
+        {
+          "kind": "event",
+          "pageUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "frameUrl": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "blockedURI": "inline",
+          "effectiveDirective": "script-src-elem",
+          "violatedDirective": "script-src-elem",
+          "disposition": "enforce",
+          "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+          "documentURI": "http://127.0.0.1:62819/workout/island/?dev=1",
+          "sourceFile": "",
+          "lineNumber": 1,
+          "columnNumber": 118,
+          "statusCode": 200,
+          "sample": "",
+          "observedAt": 1793434124859
+        }
+      ],
+      "policyErrors": [],
+      "workers": []
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "contractsStatus": "ready",
+    "assets": "design-glb-v2",
+    "modelCount": 12,
+    "requestedContracts": true,
+    "twoTouchShot": true,
+    "twoTouchLoft": true,
+    "pointerCancel": true,
+    "focusedKeyboardPass": true,
+    "pauseStable": true,
+    "resizeCancels": true,
+    "allDesignStates": [
+      {
+        "state": "attack",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "shot",
+            "x": 752,
+            "y": 298,
+            "width": 80,
+            "height": 80
+          },
+          {
+            "slot": "secondary",
+            "id": "pass",
+            "x": 680,
+            "y": 314,
+            "width": 64,
+            "height": 64
+          },
+          {
+            "slot": "sprint",
+            "id": "sprint",
+            "x": 752,
+            "y": 226,
+            "width": 80,
+            "height": 64
+          },
+          {
+            "slot": "trick",
+            "id": "switch",
+            "x": 608,
+            "y": 314,
+            "width": 64,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "defense",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "slide",
+            "x": 752,
+            "y": 298,
+            "width": 80,
+            "height": 80
+          },
+          {
+            "slot": "secondary",
+            "id": "tackle",
+            "x": 680,
+            "y": 314,
+            "width": 64,
+            "height": 64
+          },
+          {
+            "slot": "sprint",
+            "id": "sprint",
+            "x": 752,
+            "y": 226,
+            "width": 80,
+            "height": 64
+          },
+          {
+            "slot": "trick",
+            "id": "switch",
+            "x": 608,
+            "y": 314,
+            "width": 64,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "throw_in",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "throw",
+            "x": 752,
+            "y": 298,
+            "width": 80,
+            "height": 80
+          },
+          {
+            "slot": "secondary",
+            "id": "short",
+            "x": 680,
+            "y": 314,
+            "width": 64,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "corner",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "corner",
+            "x": 752,
+            "y": 298,
+            "width": 80,
+            "height": 80
+          },
+          {
+            "slot": "secondary",
+            "id": "short",
+            "x": 680,
+            "y": 314,
+            "width": 64,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "goal_kick",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "goal_kick",
+            "x": 752,
+            "y": 298,
+            "width": 80,
+            "height": 80
+          },
+          {
+            "slot": "secondary",
+            "id": "short",
+            "x": 680,
+            "y": 314,
+            "width": 64,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "free_kick",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "free_kick",
+            "x": 752,
+            "y": 298,
+            "width": 80,
+            "height": 80
+          },
+          {
+            "slot": "secondary",
+            "id": "short",
+            "x": 680,
+            "y": 314,
+            "width": 64,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "goalkeeper",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "dive",
+            "x": 752,
+            "y": 298,
+            "width": 80,
+            "height": 80
+          },
+          {
+            "slot": "sprint",
+            "id": "rush",
+            "x": 752,
+            "y": 226,
+            "width": 80,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "keeper_ball",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "punt",
+            "x": 752,
+            "y": 298,
+            "width": 80,
+            "height": 80
+          },
+          {
+            "slot": "secondary",
+            "id": "roll",
+            "x": 680,
+            "y": 314,
+            "width": 64,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "opponent_restart",
+        "controls": [
+          {
+            "slot": "trick",
+            "id": "switch",
+            "x": 608,
+            "y": 314,
+            "width": 64,
+            "height": 64
+          }
+        ]
+      }
+    ],
+    "pauseScoreNoOverlap": true,
+    "csp": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [],
+      "policyErrors": [],
+      "workers": [
+        {
+          "url": "http://127.0.0.1:62819/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": false,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:62819/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        }
+      ]
+    },
+    "errors": []
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "contractsStatus": "ready",
+    "assets": "design-glb-v2",
+    "modelCount": 12,
+    "requestedContracts": true,
+    "twoTouchShot": true,
+    "twoTouchLoft": true,
+    "pointerCancel": true,
+    "focusedKeyboardPass": true,
+    "pauseStable": true,
+    "resizeCancels": true,
+    "allDesignStates": [
+      {
+        "state": "attack",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "shot",
+            "x": 314,
+            "y": 688,
+            "width": 64,
+            "height": 72
+          },
+          {
+            "slot": "secondary",
+            "id": "pass",
+            "x": 250,
+            "y": 696,
+            "width": 56,
+            "height": 64
+          },
+          {
+            "slot": "sprint",
+            "id": "sprint",
+            "x": 314,
+            "y": 768,
+            "width": 64,
+            "height": 64
+          },
+          {
+            "slot": "trick",
+            "id": "switch",
+            "x": 250,
+            "y": 768,
+            "width": 56,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "defense",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "slide",
+            "x": 314,
+            "y": 688,
+            "width": 64,
+            "height": 72
+          },
+          {
+            "slot": "secondary",
+            "id": "tackle",
+            "x": 250,
+            "y": 696,
+            "width": 56,
+            "height": 64
+          },
+          {
+            "slot": "sprint",
+            "id": "sprint",
+            "x": 314,
+            "y": 768,
+            "width": 64,
+            "height": 64
+          },
+          {
+            "slot": "trick",
+            "id": "switch",
+            "x": 250,
+            "y": 768,
+            "width": 56,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "throw_in",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "throw",
+            "x": 314,
+            "y": 688,
+            "width": 64,
+            "height": 72
+          },
+          {
+            "slot": "secondary",
+            "id": "short",
+            "x": 250,
+            "y": 696,
+            "width": 56,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "corner",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "corner",
+            "x": 314,
+            "y": 688,
+            "width": 64,
+            "height": 72
+          },
+          {
+            "slot": "secondary",
+            "id": "short",
+            "x": 250,
+            "y": 696,
+            "width": 56,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "goal_kick",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "goal_kick",
+            "x": 314,
+            "y": 688,
+            "width": 64,
+            "height": 72
+          },
+          {
+            "slot": "secondary",
+            "id": "short",
+            "x": 250,
+            "y": 696,
+            "width": 56,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "free_kick",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "free_kick",
+            "x": 314,
+            "y": 688,
+            "width": 64,
+            "height": 72
+          },
+          {
+            "slot": "secondary",
+            "id": "short",
+            "x": 250,
+            "y": 696,
+            "width": 56,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "goalkeeper",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "dive",
+            "x": 314,
+            "y": 688,
+            "width": 64,
+            "height": 72
+          },
+          {
+            "slot": "sprint",
+            "id": "rush",
+            "x": 314,
+            "y": 768,
+            "width": 64,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "keeper_ball",
+        "controls": [
+          {
+            "slot": "primary",
+            "id": "punt",
+            "x": 314,
+            "y": 688,
+            "width": 64,
+            "height": 72
+          },
+          {
+            "slot": "secondary",
+            "id": "roll",
+            "x": 250,
+            "y": 696,
+            "width": 56,
+            "height": 64
+          }
+        ]
+      },
+      {
+        "state": "opponent_restart",
+        "controls": [
+          {
+            "slot": "trick",
+            "id": "switch",
+            "x": 250,
+            "y": 768,
+            "width": 56,
+            "height": 64
+          }
+        ]
+      }
+    ],
+    "pauseScoreNoOverlap": true,
+    "csp": {
+      "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "htmlResponsesSeen": 1,
+      "violations": [],
+      "policyErrors": [],
+      "workers": [
+        {
+          "url": "http://127.0.0.1:62819/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": false,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        },
+        {
+          "url": "http://127.0.0.1:62819/workout/island/minigames/soccer-draco-worker.mjs",
+          "hooked": true,
+          "closed": true,
+          "waitingForDebugger": true,
+          "domains": {
+            "Log.enable": true,
+            "Audits.enable": true
+          }
+        }
+      ]
+    },
+    "errors": []
+  }
+]
