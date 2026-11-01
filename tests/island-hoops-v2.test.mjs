@@ -31,7 +31,8 @@ test('every authored action has a natural presentation selection without changin
  for(const shotType of ['dunk','ft','layup'])seen.add(pick({act:'shoot',shotType}));seen.add(pick({act:'shoot',shotType:'layup',z:-1}));
  seen.add(pick({act:'pass'}));seen.add(pick({act:'pass'},{passKind:'lob'}));
  for(const [vx,vz] of [[2,0],[-2,0],[0,2]])seen.add(pick({vx,vz},{defending:true}));
- for(const [vx,vz,sprinting] of [[0,0,false],[0,3,false],[0,6,true],[0,-1,false]])seen.add(pick({hasBall:true,vx,vz,sprinting}));seen.add(pick({vz:6,sprinting:true}));
+ for(const [vx,vz,sprinting] of [[0,0,false],[0,.6,false],[0,3,false],[0,6,true],[0,-1,false]])seen.add(pick({hasBall:true,vx,vz,sprinting}));
+ assert.equal(pick({hasBall:true,vz:3}),'sprint_ball','running with the ball uses the strided clip, never the in-place dribble');assert.equal(pick({hasBall:true,vz:.6}),'dribble_fast');assert.equal(pick({vz:4},{defending:true}),'sprint','a defender running back at speed uses a strided run, not the stance shuffle');assert.equal(pick({vz:2.5}),'run');seen.add(pick({vz:6,sprinting:true}));
  assert.deepEqual([...seen].filter(n=>V2_ACTION_CLIPS.includes(n)).sort(),[...V2_ACTION_CLIPS].sort());const frozen=Object.freeze({...p,act:'shoot',shotType:'dunk',hasBall:true});chooseV2Motion(frozen);assert.equal(frozen.hasBall,true);
 });
 test('engine release and pause control the new clips; interruption preserves the displayed pose and world transform',async()=>{

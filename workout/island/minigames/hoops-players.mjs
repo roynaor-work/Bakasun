@@ -92,7 +92,7 @@ export function createAvatar(assets,card,teamLook,opts={}){
   o.boundingSphere=new THREE.Sphere(new THREE.Vector3(0,assets.height/2,0),1.35);geometry.boundingSphere=o.boundingSphere.clone();o.frustumCulled=true;
  });
  const scale=(card.ratings?.height||200)/100/assets.height;root.scale.setScalar(scale);const motion=createV2MotionPlayer(root,assets),hands={r:bone(root,'RightHand'),l:bone(root,'LeftHand')};hands.rIdx=hands.r;hands.lIdx=hands.l;let disposed=false;
- return {root,hands,mixer:motion.mixer,actions:motion.actions,mats,card,kind:'characters2',scale,pose(p,ctx,dt){motion.step(p,ctx,dt);},event(e){motion.event(e);},applyKit(kit){atlas.draw(kit);},get motionState(){return motion.state;},get motionTime(){return motion.time;},get motionPhase(){return motion.phase;},dispose(){if(disposed)return;disposed=true;motion.dispose();for(const m of mats)m.dispose();for(const g of geometries)g.dispose();atlas.texture.dispose();root.traverse(o=>{if(o.isSkinnedMesh)o.skeleton.dispose();});}};
+ return {root,hands,mixer:motion.mixer,actions:motion.actions,mats,card,kind:'characters2',scale,pose(p,ctx,dt){motion.step(p,ctx,dt);},event(e){motion.event(e);},applyKit(kit){atlas.draw(kit);},get motionState(){return motion.state;},get motionTime(){return motion.time;},get motionPhase(){return motion.phase;},get motionContacts(){return motion.contacts;},get motionPivot(){return motion.pivot;},dispose(){if(disposed)return;disposed=true;motion.dispose();for(const m of mats)m.dispose();for(const g of geometries)g.dispose();atlas.texture.dispose();root.traverse(o=>{if(o.isSkinnedMesh)o.skeleton.dispose();});}};
 }
 function bone(root,name){let result=null;root.traverse(o=>{if(!result&&o.isBone&&o.name===name)result=o;});return result;}
 export {bone};
