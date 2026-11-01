@@ -9,7 +9,16 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrap=v=>Math.atan2(Math.sin(v),Math.cos(v));
 const Q=a=>new T.Quaternion().fromArray(a).normalize();
 const asset=path=>new URL(`../design/${path}`,import.meta.url).href;
-const json=async path=>{const response=await fetch(asset(path));if(!response.ok)throw Error(`Soccer asset ${path}: ${response.status}`);return response.json();};
+/** Mobile networks drop single requests; one failure must not demote a whole match
+ * to the fallback figures. Three attempts with a short backoff, then a named error. */
+export async function retrying(task,label,attempts=3){
+  let error;
+  for(let attempt=0;attempt<attempts;attempt++){
+    try{return await task(attempt);}catch(e){error=e;if(attempt<attempts-1)await new Promise(r=>setTimeout(r,250*(attempt+1)));}
+  }
+  throw Error(`${label}: ${error?.message||error}`);
+}
+const json=path=>retrying(async()=>{const response=await fetch(asset(path));if(!response.ok)throw Error(`HTTP ${response.status}`);return response.json();},`Soccer asset ${path}`);
 const regions=['preserve','skin','hair','shirt','shorts','socks','shoes','soles','gloves','accent','equipment','helmet'];
 
 function assignRegions(geometry,spec,map){
@@ -223,7 +232,9 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
 /** Compile actions that have a live simulation mapping. Other extension
  * states remain in the merged library without an expensive unused floor bake. */
 const ACTIVE_CLIPS=['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss'];
-let designSources=null;
+let designSources=null,lastDesignError=null;
+/** Why the authored characters last failed to prepare (for the load report). */
+export function soccerDesignCharacterError(){return lastDesignError;}
 /** Decode, retarget, floor-bake and LOD the two authored characters once per
  * page. Every match clones rigs from these shared sources, so a reopened game
  * (or one opened after the soccer menu warmed the cache) skips the whole CPU
@@ -236,8 +247,8 @@ export function prepareSoccerDesignSources(){
     try{
       globalThis.performance?.mark?.('soccer:prepare-fetch-start');
       const [player,keeper,rig,map,data,regionMap]=await Promise.all([
-        loader.loadAsync(asset('characters2/soccer-player.glb')),loader.loadAsync(asset('characters2/goalkeeper.glb')),
-        json('characters/rig.json'),json('viewer/retarget-map.json'),loadSoccerRestartMotion(),json('characters2/regions.json'),
+        retrying(()=>loader.loadAsync(asset('characters2/soccer-player.glb')),'characters2/soccer-player.glb'),retrying(()=>loader.loadAsync(asset('characters2/goalkeeper.glb')),'characters2/goalkeeper.glb'),
+        json('characters/rig.json'),json('viewer/retarget-map.json'),retrying(()=>loadSoccerRestartMotion(),'motion library'),json('characters2/regions.json'),
       ]);
       globalThis.performance?.mark?.('soccer:prepare-cpu-start');
       const active=new Set(ACTIVE_CLIPS);
@@ -258,7 +269,7 @@ export function prepareSoccerDesignSources(){
       }));
       globalThis.performance?.mark?.('soccer:prepare-cpu-end');
       return {sources,clipSets,sourceHeights,lodGeometry,data,map,clips:compiled.map(c=>c.name)};
-    }catch(error){designSources=null;throw error;}
+    }catch(error){designSources=null;lastDesignError=String(error?.message||error);throw error;}
     finally{loader.dispose();}
   })();
   return designSources;

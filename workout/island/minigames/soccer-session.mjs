@@ -60,7 +60,18 @@ export function startSoccer(ctx) {
   const audio=createSoccerDesignAudio({storage,pitchLength:balance.pitch.length});
   // Bonus penalties follow every league match; the match result is kept untouched.
   let shootout=null,shootoutWait=0;const penaltiesOn=!context.drill&&!!balance.league?.penalties&&!!balance.league?.leagues?.length;
-  let view,input,frame,last=0,hud=0,paused=false,disposed=false,handed=balance.controls.rightHanded,hudSignature='',mode='',started=false,contracts=null,contractsReady=!canvas,contractsError=null;
+  let view,input,frame,last=0,hud=0,paused=false,disposed=false,handed=balance.controls.rightHanded,hudSignature='',mode='',started=false,contracts=null,contractsReady=!canvas,contractsError=null,reported=false;
+  /** A short plain-text report of what the match loaded (saved for the soccer menu's
+   * "last load report", so a phone test can be pasted into the chat). */
+  function saveLoadReport(){
+    try{
+      const r=view?.report?.();if(!r)return;
+      const lines=[`island ${new URL(import.meta.url).searchParams.get('v')||'dev'} · ${new Date().toISOString()}`,`assets ${r.assetStatus} · characters ${r.characters} · scene ${r.scene} · ${r.ms} ms · quality ${r.quality}`,`screen ${innerWidth}x${innerHeight} @${devicePixelRatio} · webgl2 ${r.webgl2} · gpu ${r.gpu||'?'}`,`ua ${navigator.userAgent}`];
+      if(r.characterError)lines.push('characters fell back: '+r.characterError);if(r.athleteError)lines.push('athlete fell back: '+r.athleteError);if(r.sceneError||r.sceneFailure)lines.push('scene fell back: '+(r.sceneFailure||r.sceneError));
+      globalThis.localStorage?.setItem('island.soccer.lastLoadReport',lines.join('\n'));
+      if(r.assetStatus!=='ready'||r.characters!=='design-glb-v2'||r.scene!=='design'){const note=element('div','soccer-load-note','הגרפיקה המלאה לא נטענה; דוח הטעינה שמור בתפריט הכדורגל');note.setAttribute('role','status');canvas.after(note);setTimeout(()=>note.remove(),7000);}
+    }catch{}
+  }
   const events=new AbortController(),options={signal:events.signal};
   function dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);events.abort();audio.dispose({finish:Boolean(model.result&&!context.drill)});input?.dispose();model.clearInput();view?.dispose();if(canvas)canvas.width=canvas.height=0;}
   function setPaused(value){paused=Boolean(value);audio.setPaused(paused);last=0;input?.setEnabled(!paused&&contractsReady&&!view?.loading()&&(typeof document==='undefined'||!document.hidden));model.clearInput();if(!paused)canvas?.focus();}
@@ -152,6 +163,7 @@ export function startSoccer(ctx) {
       if(disposed)return;
       const dt=last?Math.min((at-last)/1000,balance.rules.maxUpdateSeconds):0,frameMs=last?at-last:0;last=at;
       const loading=!contractsReady||view.loading();loader.hidden=!loading; // Never forge asset readiness when contracts or GLB loading fail.
+      if(!loading&&!reported){reported=true;saveLoadReport();}
       input?.setEnabled(!paused&&!document.hidden&&!loading);syncControls(model.getState());
       // While the loading panel is up nothing is drawn: rendering the dimmed fallback
       // stadium every frame compiled its shaders for nothing and starved the main

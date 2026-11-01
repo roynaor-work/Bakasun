@@ -1,6 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {normalizeSoccerBallGeometry,soccerPitchUv,createSoccerStadiumSeatLod} from './soccer-scale.mjs';
+import {retrying} from './soccer-design-character.mjs';
 
 const modelUrl=name=>new URL('../design/'+(name==='soccer-stadium'?'models2/':'models/')+name+'.glb',import.meta.url).href;
 const environmentUrl=name=>new URL('../design/environment/'+name,import.meta.url).href;
@@ -13,7 +14,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   const root=new T.Group(),ball=new T.Group(),viewSides=[],meshes=[];
   root.name='soccer-design-scenery';ball.name='soccer-design-ball';root.visible=ball.visible=false;
   scene.add(root);ballRoot.add(ball);
-  let disposed=false,status='loading',textureCount=0,residentTriangles=0,lastWidth=0,lastHeight=0,viewDirection=1,renderQuality=0,seatLodStats=null;
+  let disposed=false,status='loading',failure=null,textureCount=0,residentTriangles=0,lastWidth=0,lastHeight=0,viewDirection=1,renderQuality=0,seatLodStats=null;
   let skyMaterial=null,skyLandscape=null,skyPortrait=null,netRipple=()=>{};
   const loadedTextures=[],loadedModels=[];
   const hx=config.pitch.length/2;
@@ -91,15 +92,15 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   const textureLoader=new T.TextureLoader();
   // Settle the entire transaction so a failed texture never strands successful
   // GLB decodes or late image loads after the player has left the game.
-  const requests=[...['soccer-stadium','soccer-goal','soccer-ball'].map(name=>loader.loadAsync(modelUrl(name)).then(data=>{loadedModels.push(data.scene);return data.scene;})),
-    ...['textures/grass-mown.webp','textures/stand-concrete.webp','textures/crowd-dots.webp','backgrounds/stadium-day-landscape.webp','backgrounds/stadium-day-portrait.webp'].map(name=>textureLoader.loadAsync(environmentUrl(name)).then(texture=>{loadedTextures.push(texture);return texture;}))];
+  const requests=[...['soccer-stadium','soccer-goal','soccer-ball'].map(name=>retrying(()=>loader.loadAsync(modelUrl(name)),name+'.glb').then(data=>{loadedModels.push(data.scene);return data.scene;})),
+    ...['textures/grass-mown.webp','textures/stand-concrete.webp','textures/crowd-dots.webp','backgrounds/stadium-day-landscape.webp','backgrounds/stadium-day-portrait.webp'].map(name=>retrying(()=>textureLoader.loadAsync(environmentUrl(name)),name).then(texture=>{loadedTextures.push(texture);return texture;}))];
   const ready=Promise.allSettled(requests).then(results=>{
     globalThis.performance?.mark?.('soccer:scene-build-start');
     const failure=results.find(result=>result.status==='rejected');
     if(disposed||failure){
       loadedModels.forEach(releaseSource);loadedTextures.forEach(texture=>texture.dispose());
       loadedModels.length=loadedTextures.length=0;
-      if(!disposed){status='fallback';reportError(failure.reason);}return false;
+      if(!disposed){status='fallback';failure=String(failure.reason?.message||failure.reason);reportError(failure.reason);}return false;
     }
     const [stadiumSource,goalSource,ballSource,grass,concrete,crowd,landscape,portrait]=results.map(result=>result.value);
     for(const source of loadedModels)source.updateMatrixWorld(true);
@@ -180,7 +181,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     loadedModels.forEach(releaseSource);loadedModels.length=0;loadedTextures.length=0;
     status='ready';root.visible=ball.visible=true;globalThis.performance?.mark?.('soccer:scene-build-end');
     try{onReady({stadium:true,goals:true,ball:true});}
-    catch(error){root.visible=ball.visible=false;status='fallback';reportError(error);return false;}
+    catch(error){root.visible=ball.visible=false;status='fallback';failure=String(error?.message||error);reportError(error);return false;}
     return true;
   }).catch(error=>{
     // Build errors also preserve the playable fallback. Registered resources
@@ -190,11 +191,11 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     // Only images not adopted into that registry need immediate disposal.
     if(!textureCount)loadedTextures.forEach(texture=>texture.dispose());
     loadedModels.length=loadedTextures.length=0;root.visible=ball.visible=false;
-    if(!disposed){status='fallback';reportError(error);}return false;
+    if(!disposed){status='fallback';failure=String(error?.message||error);reportError(error);}return false;
   });
   return {
     ready,root,ball,
-    metrics:()=>({status,source:'design/models2/soccer-stadium',ballDiameterMetres:config.physics.ballRadius*2,seatDetail:renderQuality>=3?'mobile':'full',seatLod:seatLodStats,models:status==='ready'?3:0,textures:textureCount,
+    metrics:()=>({status,failure,source:'design/models2/soccer-stadium',ballDiameterMetres:config.physics.ballRadius*2,seatDetail:renderQuality>=3?'mobile':'full',seatLod:seatLodStats,models:status==='ready'?3:0,textures:textureCount,
       triangles:status==='ready'?meshes.reduce((sum,mesh)=>sum+(mesh.visible?(mesh.geometry.index?.count||mesh.geometry.attributes.position.count)/3:0),0):0,
       drawCalls:status==='ready'?meshes.filter(mesh=>mesh.visible).length:0,residentTriangles}),
     update(direction,width=lastWidth,height=lastHeight){

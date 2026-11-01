@@ -5,7 +5,7 @@ import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261101-1
 import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261101-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {loadDesignCharacters} from './soccer-design-character.mjs';
+import {loadDesignCharacters,soccerDesignCharacterError} from './soccer-design-character.mjs';
 import {expandSoccerConfig} from './soccer-squad.mjs';
 import {createSoccerDesignLoader} from './soccer-design-loader.mjs';
 import {createSoccerDesignScene} from './soccer-design-scene.mjs';
@@ -103,9 +103,10 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   const ballRoot=new T.Group(),ballDrift={x:0,z:0,vx:0,vz:0};const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));fallbackBall.castShadow=true;ballRoot.add(fallbackBall);scene.add(ballRoot);
   const trailConfig=config.view.trail,trail=new T.InstancedMesh(track(new T.SphereGeometry(trailConfig.radius,trailConfig.radialSegments,trailConfig.heightSegments)),track(new T.MeshBasicMaterial({color:'#fff8d6',transparent:true,opacity:trailConfig.opacity,depthWrite:false})),trailConfig.count);trail.frustumCulled=false;scene.add(trail);
   let disposed=false,lastEvent=0,time=0,goalPulse=0,goalTeam=0,quality=0,lastWidth=0,lastHeight=0,assetStatus='loading',assetStats=null,cameraState=null,framing=null;
+  const loadStart=globalThis.performance?.now?.()??0,loadReport={characters:null,characterError:null,athleteError:null,sceneError:null,ms:null};
   let designSceneReady=false;
   const designSceneLoader=config.view.designScene===false?null:createSoccerDesignLoader();
-  const designScene=designSceneLoader?createSoccerDesignScene({scene,config,loader:designSceneLoader,track,ballRoot,onReady(){
+  const designScene=designSceneLoader?createSoccerDesignScene({scene,config,loader:designSceneLoader,track,ballRoot,onError(error){loadReport.sceneError=String(error?.message||error);},onReady(){
     if(disposed)return;designSceneReady=true;crowd.setDesignStadium(true);designScene?.setQuality(quality);
     // Detach successful replacements before shader warm-up. Hidden fallback
     // roofs would otherwise be re-enabled by their original visibility update.
@@ -122,12 +123,12 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   const design=()=>loadDesignCharacters({config,roster,scene,track,selectedKit}).then(result=>({design:result}));
   const fallback=()=>{athleteMode=false;return design().catch(()=>new GLTFLoader().loadAsync(kidUrl));};
   const athlete=()=>athleteUrl?new GLTFLoader().loadAsync(athleteUrl).then(data=>(athleteMode=true,data)):new GLTFLoader().loadAsync(kidUrl);
-  const model=config.view.designCharacters===false?athlete().catch(fallback):design().catch(()=>athlete().catch(()=>new GLTFLoader().loadAsync(kidUrl)));
+  const model=config.view.designCharacters===false?athlete().catch(fallback):design().catch(error=>{loadReport.characterError=String(error?.message||error)||soccerDesignCharacterError();return athlete().catch(e=>{loadReport.athleteError=String(e?.message||e);return new GLTFLoader().loadAsync(kidUrl);});});
   const ready=Promise.all([model,stadium.ready.catch(()=>null),designScene?.ready,designVfx.ready,replay.ready,loadSoccerRestartMotion().catch(()=>null)]).then(([data,,,,,restartData])=>{
     if(data.design){
       designCharacters=data.design;
       if(disposed){designCharacters.dispose();return;}
-      characters.push(...designCharacters.characters);assetStats=designCharacters.metrics;
+      characters.push(...designCharacters.characters);assetStats=designCharacters.metrics;loadReport.characters='design-glb-v2';
       if(quality>=config.view.athlete.lodFromQuality)for(const c of characters)assetStats.lod=c.setLod(quality>=3?2:1);
       warm();assetStatus='ready';onAsset('ready');return;
     }
@@ -154,8 +155,9 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
       }
       const ballTriangles=embeddedBall?(embeddedBall.geometry.index?.count||embeddedBall.geometry.attributes.position.count)/3:0;
       assetStats={kind:'athlete',triangles,sourceTriangles:triangles+ballTriangles,meshes,sixCharacterTriangles:triangles*6,sharedTeamMaterials:2,perPlayerMaterials:roster.length*2,independentSkeletons:true,eightCharacterTriangles:triangles*roster.length,economyCharacterTriangles:lowTriangles,lod:0,clips:data.animations.map(a=>a.name)};
-      if(quality>=config.view.athlete.lodFromQuality)assetStats.lod=1;warm();assetStatus='ready';onAsset('ready');return;
+      if(quality>=config.view.athlete.lodFromQuality)assetStats.lod=1;loadReport.characters='athlete';warm();assetStatus='ready';onAsset('ready');return;
     }
+    loadReport.characters='kid';
     let faceMap=null,triangles=0,meshes=0;
     source.traverse(o=>{if(!o.isMesh)return;track(o.geometry);triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;meshes++;
       const material=Array.isArray(o.material)?o.material[0]:o.material;track(material);if(material.map){faceMap=material.map;track(faceMap);}
@@ -199,7 +201,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     }
     const sourceTriangles=triangles+(embeddedBall?(embeddedBall.geometry.index?.count||embeddedBall.geometry.attributes.position.count)/3:0);
     assetStats={triangles,sourceTriangles,meshes,sixCharacterTriangles:triangles*6,sharedTeamMaterials:kitMaterials.length,independentSkeletons:true,eightCharacterTriangles:triangles*roster.length};warm();assetStatus='ready';onAsset('ready');
-  }).catch(()=>{if(!disposed){assetStatus='fallback';onAsset('fallback');}});
+  }).catch(error=>{if(!disposed){loadReport.characters='blocks';loadReport.characterError=loadReport.characterError||String(error?.message||error);assetStatus='fallback';onAsset('fallback');}});
   /** Compile every program variant the match can need (with and without shadows, both LOD meshes,
    * hidden cues such as confetti and the aim arrow) and upload every texture while the loading
    * panel is still up. A quality step or the first goal then switches programs without a compile stall. */
@@ -357,7 +359,9 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     const points=[];for(const x of [-hx,hx])for(const z of [-hz,hz]){target.set(x,0,z).project(camera);points.push({x:(target.x+1)*lastWidth/2,y:(1-target.y)*lastHeight/2});}
     return {width:Math.max(...points.map(p=>p.x))-Math.min(...points.map(p=>p.x)),height:Math.max(...points.map(p=>p.y))-Math.min(...points.map(p=>p.y))};
   }
-  return {ready,render,qualitySample,loading:()=>assetStatus==='loading',get renderer(){return renderer;},get replaying(){return replay.active;},
+  /** What this match actually loaded and why anything fell back; filled when assets settle. */
+  function report(){if(loadReport.ms===null&&assetStatus!=='loading')loadReport.ms=Math.round((globalThis.performance?.now?.()??0)-loadStart);let gpu=null;try{const gl=renderer.getContext(),info=gl.getExtension('WEBGL_debug_renderer_info');gpu=info?gl.getParameter(info.UNMASKED_RENDERER_WEBGL):null;}catch{}return {...loadReport,assetStatus,scene:designSceneReady?'design':designScene?.metrics().status||'disabled',sceneFailure:designScene?.metrics().failure||null,quality,gpu,warmup:warmed,webgl2:!!renderer.capabilities?.isWebGL2};}
+  return {ready,render,qualitySample,report,loading:()=>assetStatus==='loading',get renderer(){return renderer;},get replaying(){return replay.active;},
     poseCamera(id,mode){poseFocus=id;poseMode=mode;},
     metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),stadium:designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),assetStatus,assetStats,restartAttachment,restartStrike,ballPosition:{x:ballRoot.position.x,y:ballRoot.position.y,z:ballRoot.position.z},kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
     dispose(){if(disposed)return;disposed=true;replay.dispose();designVfx.dispose();designScene?.dispose();designSceneLoader?.dispose();stadium.dispose();lighting.dispose();observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);canvas.removeEventListener('pointerdown',skipReplay);for(const c of characters){if(c.design)c.dispose();else{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);c.root.traverse(o=>o.skeleton?.dispose());}}characters.length=0;for(const resource of resources)resource.dispose();resources.clear();scene.clear();renderer.dispose();renderer.forceContextLoss();}
