@@ -206,3 +206,14 @@
 .game-screen[data-game=streetSlam] .hoops-role-label[data-team="1"]{border-color:#ff9f9f}
 .game-screen[data-game=streetSlam] .hoops-role-label[data-controlled="true"]{background:#ffd16a;color:#172033;border-color:#ffe8a8}
 .game-screen[data-game=streetSlam] .hoops-role-label[hidden]{display:none}
+/* ability bars (shooting, dunk, rebound, defence, passing, speed) under the controlled player's badge */
+.game-screen[data-game=streetSlam] .hoops-role-bars{display:none;position:absolute;left:2px;right:2px;top:17px;height:5px;gap:1px;align-items:flex-end}
+.game-screen[data-game=streetSlam] .hoops-role-label[data-controlled="true"]{height:24px;border-bottom-left-radius:4px;border-bottom-right-radius:4px}
+.game-screen[data-game=streetSlam] .hoops-role-label[data-controlled="true"] .hoops-role-bars{display:flex}
+.game-screen[data-game=streetSlam] .hoops-role-bars i{flex:1;height:calc(2px + var(--v,0.5)*3px);border-radius:1px;background:#172033aa}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=shooting]{background:#2ed06e}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=dunk]{background:#e8641c}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=rebound]{background:#8a5a2b}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=defense]{background:#1d5ad6}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=passing]{background:#6d3e82}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=speed]{background:#c2a000}

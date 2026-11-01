@@ -584,6 +584,9 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   p.intent.sprint=!!inp.sprint;p.intent.face=null;
   const offense=S.possession===p.team&&S.ball.state!=='loose';
   const hasBall=S.ball.owner===p.id&&S.ball.state==='held';
+  // triple threat: with the ball and the stick released in the frontcourt the player squares up to
+  // the basket, so a shot or a drive starts facing it instead of snapping round on release
+  if(hasBall&&ml<0.05&&!p.act&&court.frontcourt(side(p.team),p.x)){const rim=court.rim(side(p.team));p.intent.face=Math.atan2(rim.x-p.x,rim.z-p.z);}
   if(inp.shootCancel&&p.act==='shoot'&&p.shot?.held&&!p.shot.released){p.act=null;p.shot=null;emit({type:'shotCancel',playerId:p.id});}
   if(hasBall){
    p.jumpQueue=null;
