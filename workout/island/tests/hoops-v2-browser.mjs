@@ -67,7 +67,7 @@ try{
   const photo=async name=>{await page.evaluate(()=>{const d=window.__island.games.current.session.debug;d.hold=true;d.render();});await page.waitForTimeout(150);const file=tag+'-'+name+'.png';await page.screenshot({path:path.join(out,file),timeout:120000,animations:'disabled'});row.screenshots.push(file);};
   let rowError=null;
   try{
-   await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded,null,{timeout:240000});await page.locator('[data-action=avatar-start]').click();
+   await page.goto(server.url+'?dev=1&hoopsCharacters=2',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded,null,{timeout:240000});await page.locator('[data-action=avatar-start]').click();
    const placed=await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();data.featureFlags.events=false;e.state.money=50000;e.learningStatus=()=>({locked:false});for(let z=0;z<e.state.world.size;z++)for(let x=0;x<e.state.world.size;x++)if(e.place('basketball',x,z).ok)return true;return false;});assert.ok(placed);
    await page.evaluate(()=>window.__island.games.stages('streetSlam'));
    const menu=await page.evaluate(()=>{const summary=window.__island.engine.hoops.summary();return {names:[...document.querySelectorAll('.hoops-start-team strong')].map(e=>e.textContent.trim()),teams:summary.teams.map(t=>({id:t.id,name:t.name})),cards:summary.cards.map(c=>({id:c.id,name:c.name,pos:c.pos,abilities:c.abilities})),visible:[...document.querySelectorAll('.hoops-start-team strong')].every(e=>!!e.getClientRects().length)};});

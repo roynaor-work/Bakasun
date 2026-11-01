@@ -5,6 +5,8 @@
 }
 .game-screen[data-game=streetSlam] .game-stage{position:absolute;inset:0;border-radius:0;background:#05060a}
 .game-screen[data-game=streetSlam] .minigame-canvas{position:absolute;inset:0;width:100%;height:100%}
+/* Broadcast vignette: the court stays bright, the stands fall off towards the edges (no render cost). */
+.game-screen[data-game=streetSlam] .game-stage::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 78% 70% at 50% 46%,transparent 55%,#02030699 100%)}
 .game-screen[data-game=streetSlam] .game-header{position:absolute;inset:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) auto max(12px,env(safe-area-inset-left));z-index:6;pointer-events:none;display:flex;justify-content:flex-end;gap:10px}
 .game-screen[data-game=streetSlam] .game-header h2{display:none}
 .game-screen[data-game=streetSlam] .game-header>button{pointer-events:auto;width:48px;min-width:48px;height:48px;min-height:48px;padding:10px;border:1px solid var(--h-line);border-radius:50%;background:var(--h-glass);color:#fff;box-shadow:none}
@@ -77,6 +79,8 @@
 .game-screen[data-game=streetSlam] .hoops-replay{position:absolute;z-index:5;top:max(64px,calc(54px + env(safe-area-inset-top)));left:max(12px,env(safe-area-inset-left));width:52px;height:52px;border-radius:50%;border:1px solid var(--h-line);background:#c2482ee0;color:#fff;display:grid;place-items:center;padding:0}
 .game-screen[data-game=streetSlam] .hoops-replay svg{width:28px;height:28px}
 .game-screen[data-game=streetSlam] .hoops-replay[hidden]{display:none}
+/* grid/flex display rules would otherwise override the hidden attribute: these never linger */
+.game-screen[data-game=streetSlam] .hoops-grade[hidden],.game-screen[data-game=streetSlam] .hoops-toast[hidden],.game-screen[data-game=streetSlam] .hoops-meter[hidden]{display:none}
 @keyframes hoops-pop{from{transform:translateX(-50%) scale(.6);opacity:0}}
 
 /* Bench (opens with a timeout): starters on top, bench below; numbers and energy only. */
@@ -202,3 +206,14 @@
 .game-screen[data-game=streetSlam] .hoops-role-label[data-team="1"]{border-color:#ff9f9f}
 .game-screen[data-game=streetSlam] .hoops-role-label[data-controlled="true"]{background:#ffd16a;color:#172033;border-color:#ffe8a8}
 .game-screen[data-game=streetSlam] .hoops-role-label[hidden]{display:none}
+/* ability bars (shooting, dunk, rebound, defence, passing, speed) under the controlled player's badge */
+.game-screen[data-game=streetSlam] .hoops-role-bars{display:none;position:absolute;left:2px;right:2px;top:17px;height:5px;gap:1px;align-items:flex-end}
+.game-screen[data-game=streetSlam] .hoops-role-label[data-controlled="true"]{height:24px;border-bottom-left-radius:4px;border-bottom-right-radius:4px}
+.game-screen[data-game=streetSlam] .hoops-role-label[data-controlled="true"] .hoops-role-bars{display:flex}
+.game-screen[data-game=streetSlam] .hoops-role-bars i{flex:1;height:calc(2px + var(--v,0.5)*3px);border-radius:1px;background:#172033aa}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=shooting]{background:#2ed06e}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=dunk]{background:#e8641c}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=rebound]{background:#8a5a2b}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=defense]{background:#1d5ad6}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=passing]{background:#6d3e82}
+.game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=speed]{background:#c2a000}
