@@ -94,13 +94,13 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   function passTarget(p) {
     return selectTeamPass(p,s,config)||nearest(p.team,p,p.id);
   }
-  function kick(p,power=0,pass=false,forceLoft=false,release=false) {
+  function kick(p,power=0,pass=false,forceLoft=false,release=false,toward=null) {
     if(s.ball.owner!==p.id || p.cooldown>0)return;
     if(p.distribution)return;
     if(p.hands&&!release){
       const kind=pass?'keeperThrow':'keeperPunt';
-      p.distribution={power,pass,forceLoft,aim:{...s.aim},passAim:s.passAim?{...s.passAim}:null,kickAim:s.kickAim?{...s.kickAim}:null,moving:s.moving};
-      const manual=p.id===s.controlled,active=manual?(pass?s.passAim:s.kickAim):null,mate=!manual&&pass?passTarget(p):null;
+      p.distribution={power,pass,forceLoft,toward,aim:{...s.aim},passAim:s.passAim?{...s.passAim}:null,kickAim:s.kickAim?{...s.kickAim}:null,moving:s.moving};
+      const manual=p.id===s.controlled,active=manual?(pass?s.passAim:s.kickAim):null,mate=!manual&&pass?toward||passTarget(p):null;
       const aim=active?.manual?active:mate?{x:mate.x-p.x,z:mate.z-p.z}:manual?s.aim:{x:p.fx,z:p.fz},length=Math.hypot(aim.x,aim.z)||1;
       p.fx=aim.x/length;p.fz=aim.z/length;p.restartMotion=sampleRestartAction(kind,0);p.vx=p.vz=0;
       if(p.id===s.controlled){consumeHeldActions();s.charging=false;s.charge=0;s.chargeKind=null;}
@@ -116,7 +116,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
 
       if(manual||forceLoft){const context={...s,controlled:p.id,aim,laneAware:!helping()};destination=forceLoft?loftDestination(context,config,power,{aim}):passDestination(context,config,power);target=players[destination.target];tx=destination.x;tz=destination.z;}
       else{
-        target=passTarget(p);const point=target?teamPassPoint(target,config):{x:s.ball.x+aim.x,z:s.ball.z+aim.z};tx=point.x;tz=point.z;
+        target=toward||passTarget(p);const point=target?teamPassPoint(target,config):{x:s.ball.x+aim.x,z:s.ball.z+aim.z};tx=point.x;tz=point.z;
         destination={distance:Math.hypot(tx-s.ball.x,tz-s.ball.z),kind:'ground'};
         s.passTarget=target?{player:target.id,x:tx,z:tz,startX:s.ball.x,startZ:s.ball.z,distance:destination.distance,time:config.passing.runSeconds,kind:'ground'}:null;
       }
@@ -170,7 +170,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if(p.id===s.controlled)consumeHeldActions();
     const previous={aim:s.aim,passAim:s.passAim,kickAim:s.kickAim,moving:s.moving};
     Object.assign(s,{aim:action.aim,passAim:action.passAim,kickAim:action.kickAim,moving:action.moving});
-    p.cooldown=0;kick(p,action.power,action.pass,action.forceLoft,true);
+    p.cooldown=0;kick(p,action.power,action.pass,action.forceLoft,true,action.toward||null);
     Object.assign(s,previous);
   }
   /** A wide AI carrier crosses to a team-mate attacking the box; the receiver's
@@ -229,7 +229,20 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     let tx=p.x,tz=p.z;p.request=false;
     if(owner===p&&p.hands){
       p.hold+=dt;
-      if(p.hold+1e-8>=config.goalkeeping.maxHoldSeconds-keeperThrowLead||p.hold>=config.goalkeeping.catchSeconds&&p.think<=0){p.cooldown=0;kick(p,0,true);}
+      const gk=config.goalkeeping,deadline=p.hold+1e-8>=gk.maxHoldSeconds-keeperThrowLead;
+      if(p.team===0&&role!=='keeper'&&s.idle<1){
+        // The child's keeper plays like a modern keeper: a few steps toward the
+        // edge of the area, an underarm throw to an open team-mate in reach, or a
+        // punt down the pitch when nobody near is free. The rival keeper, and the
+        // child's keeper while the child is idle, keep the tuned distribution.
+        if(p.hold<gk.catchSeconds+(gk.carryForwardSeconds??.5)){tx=p.x+d*(gk.carryForward??2.5);tz=p.z*.6;}
+        if(deadline||p.hold>=gk.catchSeconds&&p.think<=0){
+          const reach=(config.restarts.throwReach||7)*(gk.throwReachScale??1.5);let mate=null,best=-Infinity;
+          for(const q of players)if(q.team===p.team&&q.id!==p.id&&q.role!=='keeper'&&!(q.recover>0)){const range=distance(q,p),clear=distance(nearest(1-p.team,q),q),value=clear*1.2+(q.x-p.x)*d*.15-range*.05;if(range<=reach&&clear>aiConfig.requestClearance&&value>best){best=value;mate=q;}}
+          p.cooldown=0;if(mate)kick(p,0,true,false,false,mate);else kick(p,gk.puntPower??.6,false);
+        }
+      }
+      else if(deadline||p.hold>=gk.catchSeconds&&p.think<=0){p.cooldown=0;kick(p,0,true);}
     }else if(owner===p) {
       if(p.team===0&&role==='keeper'&&p.hold<=0)p.carryStartX=p.x;
       p.hold+=dt;tx=d*(hx-aiConfig.targetGoalInset);tz=p.z*aiConfig.dribbleCentering;
@@ -457,7 +470,9 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     else{s.ball.owner=taker.id;s.ball.x=r.x;s.ball.z=r.z;s.ball.y=ph.ballRadius;if(!r.action){taker.fx=r.facing?.x??direction(r.team);taker.fz=r.facing?.z??0;}}
     // Prepare while the receiver chooses a pass. The overhead pose is held at
     // the authored end of preparation; accepting a button resumes at release.
-    if(!r.action&&r.type==='throwIn'&&u===1)taker.restartMotion=sampleRestartAction('throwIn',Math.min(.9,Math.max(0,r.elapsed-walking)),taker.restartMotion||{});
+    // Waiting for the button, the thrower holds the ball at the chest (the authored
+    // gather), not loaded overhead: the full throw plays once a button is accepted.
+    if(!r.action&&r.type==='throwIn'&&u===1)taker.restartMotion=sampleRestartAction('throwIn',Math.min(config.restarts.throwHoldSeconds??.35,Math.max(0,r.elapsed-walking)),taker.restartMotion||{});
     if(!r.action&&r.type==='corner'&&r.elapsed>=Math.max(0,walking-1.2))taker.restartMotion=sampleRestartAction('corner',Math.min(1.2,Math.max(0,r.elapsed-Math.max(0,walking-1.2))),taker.restartMotion||{});
     if(taker.restartMotion&&r.type==='throwIn'){const pose=restartBallPose(taker.restartMotion.kind,taker.restartMotion.elapsed);s.ball.x=taker.x+taker.fx*pose.forward-taker.fz*pose.side;s.ball.z=taker.z+taker.fz*pose.forward+taker.fx*pose.side;s.ball.y=pose.height;}
   }

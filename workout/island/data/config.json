@@ -9569,6 +9569,10 @@
     "catchSeconds": 0.7,
     "holdHeight": 1.05,
     "maxHoldSeconds": 3,
+    "carryForward": 2.5,
+    "carryForwardSeconds": 0.5,
+    "throwReachScale": 1.7,
+    "puntPower": 0.6,
     "carrySpeedMultiplier": 0.65,
     "holdForward": 0.34,
     "areaInset": 0.6,
@@ -9592,7 +9596,8 @@
     "defaultCornerPower": 0.65,
     "inwardMinimum": 0.18,
     "goalKickDepth": 1.2,
-    "idleReleaseSeconds": 0.9
+    "idleReleaseSeconds": 0.9,
+    "throwHoldSeconds": 0.35
    },
    "tactics": {
     "lanes": [
