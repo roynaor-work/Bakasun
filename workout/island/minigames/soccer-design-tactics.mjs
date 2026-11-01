@@ -29,7 +29,8 @@ export function compileSoccerTactics(data,c){
   markDistance:number('goal_side_marking','markDistanceM',2),goalSideDepth:number('goal_side_marking','goalSideDepthM',1.5),
   candidateStep:number('open_pass_lane','candidateStepM',2.5),candidateCount:clamp(Math.floor(number('open_pass_lane','candidateCount',9)),1,9),laneClearance:number('open_pass_lane','laneClearanceM',1.6),prediction:number('open_pass_lane','predictionSeconds',.25),
   spacing:number('spacing_priority','teammateTargetSpacingM',5.5),bodyClearance:Math.max(data.minSeparationM,number('spacing_priority','bodyClearanceM',1.8)),
-  supportDistance:number('diagonal_support','supportDistanceM',10),maxForwardRunners:number('diagonal_support','maxForwardRunners',2),
+  supportDistance:number('diagonal_support','supportDistanceM',10),supportAngle:number('diagonal_support','supportAngleDeg',45),maxForwardRunners:number('diagonal_support','maxForwardRunners',2),
+  thirdManDelay:number('third_man_run','startDelaySeconds',.35),thirdManRun:number('third_man_run','runLengthM',8),overlapClearance:number('overlap_underlap','carrierClearanceM',5),overlapRun:number('overlap_underlap','runLengthM',9),
   restDefenders:number('rest_defense','minimumRestDefenders',3),behindBall:number('rest_defense','behindBallM',11),
   pressureDistance:number('pressure_outlet','pressureDistanceM',4.5),outletBack:number('pressure_outlet','dropDistanceM',6),outletSide:number('pressure_outlet','lateralDistanceM',5),
   finalThird:number('wide_box_run','finalThirdStart',.7),wideThreshold:number('wide_box_run','wideThreshold',.3),farPost:number('wide_box_run','farPostOffsetM',4.5),cutback:number('wide_box_run','cutbackDepthM',7),
@@ -59,6 +60,9 @@ export function compileSoccerTactics(data,c){
  }
  for(const id of phaseNames.slice(0,4))if(!profiles[id])throw Error('Missing soccer movement profile: '+id);
  const length=c.pitch.length,width=c.pitch.width,hx=length/2,hz=width/2,boundary=Math.max(0,c.rules.playerBoundary),scale=length/data.field.lengthM;
+ // Design run lengths are authored for a full-size pitch. Shorten them on the
+ // island's short pitch, but never below half so a run is still visible.
+ const run=metres=>metres*Math.max(.5,Math.min(1,length/70));
  const caches=new WeakMap();let plans=0;
 
  function createState(state){
@@ -178,6 +182,47 @@ export function compileSoccerTactics(data,c){
   }
   point.x=x;point.z=z;return point;
  }
+ /** Attacking movement off the ball (design rules diagonal_support, third_man_run,
+  * overlap_underlap, wide_box_run): the striker leads the line on the shoulder of
+  * the last defender and bursts after the carrier has held the ball, the far-side
+  * wing attacks the box, the near-side wing overlaps a wide carrier and the
+  * midfielder shows at the design angle away from pressure. Nobody crowds the
+  * carrier and at most maxForwardRunners run ahead. Reads observed bodies only. */
+ function attackRuns(team,state,owner,d){
+  const b=state.ball,hold=finite(owner.hold);
+  let lastLine=-hx;for(const o of team.observed)if(o.player.role!=='keeper')lastLine=Math.max(lastLine,o.x*d);
+  const shoulder=clamp(lastLine-c.players.radius,b.x*d+run(3),hx-c.pitch.penaltyDepth*.55),wideBall=Math.abs(b.z)>=parameters.wideThreshold*width,finalThird=.5+b.x*d/length>=parameters.finalThird;
+  let runners=0;
+  for(const node of team.nodes){
+   if(node.fixed||node.role==='GK'||node.duty==='box-run'||node.duty==='square'||node.duty==='outlet')continue;
+   if(node.role===striker){
+    const burst=clamp((hold-parameters.thirdManDelay)/.6,0,1)*run(parameters.thirdManRun);
+    node.x=d*Math.min(hx-c.pitch.penaltyDepth*.45,shoulder+burst);
+    const away=-(Math.sign(b.z)||(node.player.id%2?1:-1));
+    node.z=(node.z+away*Math.min(c.pitch.goalWidth,Math.abs(b.z)*.5+c.pitch.goalWidth*.5))/2;
+    node.duty=burst>0?'run':'lead';runners++;
+   }else if(node.role===wide){
+    const wingSide=Math.sign(node.z)||-1,ballSide=Math.sign(b.z);
+    if(finalThird&&wideBall&&ballSide!==wingSide){node.x=d*(hx-c.pitch.penaltyDepth+run(1.2));node.z=wingSide*(c.pitch.penaltyWidth/2-c.players.radius*2);node.duty='box-run';runners++;}
+    else if(wideBall&&ballSide===wingSide&&node.player.x*d<b.x*d+run(1.5)){node.x=d*Math.min(hx-c.pitch.penaltyDepth*.4,b.x*d+run(parameters.overlapRun));node.z=wingSide*(hz-c.tactics.sideInset-.6);node.duty='overlap';runners++;}
+    else if(finalThird&&!wideBall){node.x=d*(hx-c.pitch.penaltyDepth+run(1.2));node.z=wingSide*(c.pitch.goalWidth/2+1.2);node.duty='box-run';runners++;}
+    else if(!wideBall&&b.x*d>-hx*.2){node.x=d*Math.min(hx-c.pitch.penaltyDepth*.6,Math.max(node.x*d,b.x*d+run(6)));node.z=wingSide*Math.max(Math.abs(node.z)*.7,c.pitch.penaltyWidth/2+.8);node.duty='run';runners++;}
+   }else if(node.role==='RCM'){
+    let nearest=null,range=Infinity;for(const o of team.observed)if(o.player.role!=='keeper'){const at=Math.hypot(o.x-owner.x,o.z-owner.z);if(at<range){range=at;nearest=o;}}
+    const side=nearest?Math.sign(owner.z-nearest.z)||(owner.z>0?-1:1):(owner.z>0?-1:1),angle=parameters.supportAngle*Math.PI/180,reach=run(parameters.supportDistance);
+    let z=owner.z+side*Math.sin(angle)*reach;if(Math.abs(z)>hz-c.tactics.sideInset)z=owner.z-side*Math.sin(angle)*reach;
+    node.x=owner.x+d*Math.cos(angle)*reach;node.z=z;node.duty='support';
+   }
+  }
+  if(runners>parameters.maxForwardRunners)for(const node of team.nodes)if(node.duty==='overlap'&&runners>parameters.maxForwardRunners){const point=anchor(node,team,state);node.x=point.x;node.z=point.z;node.duty='support';runners--;}
+  const clearance=run(parameters.overlapClearance);
+  for(const node of team.nodes){
+   if(node.fixed||node.role==='GK')continue;
+   const dx=node.x-owner.x,dz=node.z-owner.z,at=Math.hypot(dx,dz);
+   if(at<clearance){node.x=owner.x+(at?dx/at:d)*clearance;node.z=owner.z+(at?dz/at:0)*clearance;}
+   const bounded=inBounds(node,node.x,node.z,d);node.x=bounded.x;node.z=bounded.z;
+  }
+ }
  function plan(team,state,now,owner){
   plans++;const d=direction(team.team,state),b=state.ball,ours=owner?.team===team.team,freePass=ownPass(team.team,state),restart=state.restart&&String(state.phase).startsWith('restart');
   // Every candidate in this synchronous plan sees the same observed rivals.
@@ -191,10 +236,19 @@ export function compileSoccerTactics(data,c){
   for(const node of team.nodes){
    node.fixed=false;node.maxDepth=Infinity;node.clearance=0;node.opponentClearance=node.role==='GK'?0:ours||freePass?parameters.bodyClearance:opponentClearance;node.markId=null;node.duty=ours||freePass?'support':'cover';
    const point=anchor(node,team,state);node.x=point.x;node.z=point.z;
-   if(ours&&!restart&&node.player.id!==owner.id&&(node.role==='LCB'||node.role==='RCB'))node.maxDepth=b.x*d-Math.min(c.pitch.penaltyDepth,parameters.behindBall*scale);
+   if(ours&&!restart&&node.player.id!==owner.id&&(node.role==='LCB'||node.role==='RCB')){
+    // Rest defence stays goal-side of every rival attacker, yet connected to the
+    // play: between the design depth and the full behindBall distance, so a
+    // lost ball meets a line rather than a defender thirty metres away.
+    node.maxDepth=b.x*d-Math.min(c.pitch.penaltyDepth,parameters.behindBall*scale);
+    if(team.team===0){let restLine=Infinity;for(const o of team.observed)if(o.player.role!=='keeper'&&o.player.id!==owner.id)restLine=Math.min(restLine,o.x*d-c.players.radius*2-.6);
+    node.x=d*Math.min(restLine,Math.max(node.x*d,b.x*d-parameters.behindBall));}
+   }
    if(ours&&!restart&&node.role==='RCM'){
     let nearest=null,range=Infinity;for(const rival of state.players)if(rival.team!==team.team&&rival.role!=='keeper'){const at=distance(rival,owner);if(at<range){range=at;nearest=rival;}}
-    if(nearest&&range<parameters.pressureDistance){const side=Math.sign(owner.z-nearest.z)||(node.player.id%2?1:-1);node.x=owner.x-d*parameters.outletBack;node.z=owner.z+side*parameters.outletSide;node.duty='outlet';}
+    // Only a tight press needs the outlet behind the ball; otherwise the midfielder
+    // shows ahead (attackRuns). Offsets follow the short pitch.
+    if(nearest&&range<Math.min(parameters.pressureDistance,c.ai.passPressure+.6)){const side=Math.sign(owner.z-nearest.z)||(node.player.id%2?1:-1);node.x=owner.x-d*run(parameters.outletBack);node.z=owner.z+side*run(parameters.outletSide);node.duty='outlet';}
    }
    if(ours&&!restart&&(crossCorridor||.5+b.x*d/length>=parameters.finalThird&&Math.abs(b.z/width)>=parameters.wideThreshold)){
     if(node.role===striker){node.x=d*(hx-c.pitch.penaltySpot);node.z=-Math.sign(b.z)*Math.min(parameters.farPost,c.pitch.goalWidth/2-c.players.radius);node.duty='box-run';}
@@ -207,6 +261,9 @@ export function compileSoccerTactics(data,c){
    if(restart&&state.restart.team===team.team&&node.player.id===state.restart.player){node.x=state.restart.x;node.z=state.restart.z;node.duty='restart-taker';node.fixed=true;}
    const bounded=inBounds(node,node.x,node.z,d);node.x=bounded.x;node.z=bounded.z;
   }
+  // The child's team gets the richer attacking movement; the rival keeps the
+  // tuned behaviour that its stage and difficulty contracts were measured on.
+  if(ours&&!restart&&owner.role!=='keeper'&&team.team===0)attackRuns(team,state,owner,d);
   if(!ours&&!freePass&&!restart){
    const defenders=team.nodes.filter(node=>node!==presser&&node.role!=='GK'&&!node.fixed&&!(node.player.recover>0)),threats=state.players.filter(p=>p.team!==team.team&&p.role!=='keeper'&&p.id!==owner?.id).sort((a,b)=>(a.x-b.x)*d||a.id-b.id);
    const marked=new Set(),limit=Math.max(0,fieldCount-1-coverCount);

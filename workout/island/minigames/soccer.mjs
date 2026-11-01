@@ -2,7 +2,7 @@ import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261101-1'
 import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261101-1';
 import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261101-1';
 import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261101-1';
-import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance} from './soccer-tactics.mjs?v=island-v2-20261101-1';
+import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261101-1';
 import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261101-1';
 import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261101-1';
 import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261101-1';
@@ -11,6 +11,7 @@ import {expandSoccerConfig,soccerMatchCards} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
 import {SOCCER_TACTICS_DATA} from './soccer-tactics-data.mjs';
 import {createRestartLayout,restartTarget,restartActionProfile,sampleRestartAction,restartBallPose,restartThrowTarget,createKeeperThrowFlight} from './soccer-restarts.mjs';
+import {chooseSlideKind,slideVariant,slideVelocityScale,sweptSlideContact,slideRecoverySeconds} from './soccer-control-depth.mjs';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);
@@ -55,14 +56,14 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   const players=config.players.roster.map((entry,i)=>{
     const template=entry.team===0?(team.players?.[entry.template]||config.team.players[entry.template]):config.opponentDefaults;
     const rank=key=>clamp(Math.round(finite(template[key]))||1,1,5);
-    return {card:cards[i],hands:false,diveTime:0,diveCooldown:0,throwTime:0,catchTime:0,id:i,templateId:entry.team===0?template.id:`opponent${entry.template}`,team:entry.team,role:entry.role,tacticalRole:entry.tacticalRole,soccerExtra:!!entry.soccerExtra,x:0,z:0,vx:0,vz:0,fx:entry.team===0?1:-1,fz:0,speed:rank('speed'),kick:rank('kick'),guard:rank('guard'),cooldown:0,kickTime:0,request:false,think:0,hold:0,slideTime:0,recover:0,slideCooldown:0,stealCooldown:0,stealTime:0,headerTime:0,autoHeadTime:0,turnLean:0,slideAttempted:false,slideWon:false,slideX:0,slideZ:0,sprinting:false,sprintTime:0,sprintRest:0};
+    return {card:cards[i],hands:false,diveTime:0,diveCooldown:0,throwTime:0,catchTime:0,id:i,templateId:entry.team===0?template.id:`opponent${entry.template}`,team:entry.team,role:entry.role,tacticalRole:entry.tacticalRole,soccerExtra:!!entry.soccerExtra,x:0,z:0,vx:0,vz:0,fx:entry.team===0?1:-1,fz:0,speed:rank('speed'),kick:rank('kick'),guard:rank('guard'),cooldown:0,kickTime:0,request:false,think:0,hold:0,slideTime:0,recover:0,slideCooldown:0,stealCooldown:0,stealTime:0,headerTime:0,autoHeadTime:0,turnLean:0,slideAttempted:false,slideWon:false,slideX:0,slideZ:0,slideKind:null,slideBehind:false,slideLate:false,slideFromX:0,slideFromZ:0,slideTick:-1,slideAge:0,sprinting:false,sprintTime:0,sprintRest:0};
   });
   const s={role,league:ladder?.leagues?ladder:null,campaign:config.campaign,campaignStats:createCampaignStats(),bufferedAction:null,selectionTime:0,switchCooldown:0,actionAim:null,phase:'playing',half:1,halfElapsed:0,elapsed:0,phaseTime:0,score:[0,0],stage:leagueStage,seed,difficulty,mode:'attack',aim:{x:1,z:0},sprint:{value:config.sprint.capacity*effects.capacity,capacity:config.sprint.capacity*effects.capacity,active:false,locked:false,regenDelay:0},attackDir:1,controlled:0,players,ball:{x:0,z:0,y:ph.ballRadius,vx:0,vz:0,vy:0,curve:0,owner:0,lastTeam:0,lastPlayer:0,grace:0},charge:0,charging:false,chargeKind:null,idle:0,defenseIdle:0,autoSwitchCandidate:null,passTarget:null,restart:null,event:null,eventId:0,result:null};
   let events=[],rivalPasses=0,nextRivalShot=0,nextHomeShot=0;
   const before={valid:false,players:[],ball:[0,0,0]};
   const shown={players:[],ball:{},state:{}};
   function remember(){const P=before.players;for(let i=0;i<s.players.length;i++){const p=s.players[i],b=P[i]||(P[i]=[0,0,0,0]);b[0]=p.x;b[1]=p.z;b[2]=p.fx;b[3]=p.fz;}P.length=s.players.length;before.ball[0]=s.ball.x;before.ball[1]=s.ball.y;before.ball[2]=s.ball.z;before.valid=true;}
-  let tickCount=0,accumulator=0,held=false,previousSwitch=false,pendingSwitch=false,previousKick=false,pendingRelease=false,previousPass=false,pendingPass=false,pendingSlide=false,pendingKick=false,previousPassHeld=false,pendingPassStart=false,pendingPassRelease=false;
+  let liveControl=false,tickCount=0,accumulator=0,held=false,previousSwitch=false,pendingSwitch=false,previousKick=false,pendingRelease=false,previousPass=false,pendingPass=false,pendingSlide=false,pendingKick=false,previousPassHeld=false,pendingPassStart=false,pendingPassRelease=false;
   let rawKickHeld=false,rawPassHeld=false,consumedKick=false,consumedPass=false;
   function consumeHeldActions(){consumedKick=consumedKick||rawKickHeld;consumedPass=consumedPass||rawPassHeld;}
   function event(type,extra={}) { s.event={id:++s.eventId,type,...extra};recordCampaignEvent(s.campaignStats,s.event,s);events.push(s.event);if(events.length>256)events.shift(); }
@@ -93,13 +94,13 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   function passTarget(p) {
     return selectTeamPass(p,s,config)||nearest(p.team,p,p.id);
   }
-  function kick(p,power=0,pass=false,forceLoft=false,release=false) {
+  function kick(p,power=0,pass=false,forceLoft=false,release=false,toward=null) {
     if(s.ball.owner!==p.id || p.cooldown>0)return;
     if(p.distribution)return;
     if(p.hands&&!release){
       const kind=pass?'keeperThrow':'keeperPunt';
-      p.distribution={power,pass,forceLoft,aim:{...s.aim},passAim:s.passAim?{...s.passAim}:null,kickAim:s.kickAim?{...s.kickAim}:null,moving:s.moving};
-      const manual=p.id===s.controlled,active=manual?(pass?s.passAim:s.kickAim):null,mate=!manual&&pass?passTarget(p):null;
+      p.distribution={power,pass,forceLoft,toward,aim:{...s.aim},passAim:s.passAim?{...s.passAim}:null,kickAim:s.kickAim?{...s.kickAim}:null,moving:s.moving};
+      const manual=p.id===s.controlled,active=manual?(pass?s.passAim:s.kickAim):null,mate=!manual&&pass?toward||passTarget(p):null;
       const aim=active?.manual?active:mate?{x:mate.x-p.x,z:mate.z-p.z}:manual?s.aim:{x:p.fx,z:p.fz},length=Math.hypot(aim.x,aim.z)||1;
       p.fx=aim.x/length;p.fz=aim.z/length;p.restartMotion=sampleRestartAction(kind,0);p.vx=p.vz=0;
       if(p.id===s.controlled){consumeHeldActions();s.charging=false;s.charge=0;s.chargeKind=null;}
@@ -113,9 +114,9 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if(pass) {
       if(p.team===1)rivalPasses++;
 
-      if(manual||forceLoft){const context={...s,controlled:p.id,aim};destination=forceLoft?loftDestination(context,config,power,{aim}):passDestination(context,config,power);target=players[destination.target];tx=destination.x;tz=destination.z;}
+      if(manual||forceLoft){const context={...s,controlled:p.id,aim,laneAware:!helping()};destination=forceLoft?loftDestination(context,config,power,{aim}):passDestination(context,config,power);target=players[destination.target];tx=destination.x;tz=destination.z;}
       else{
-        target=passTarget(p);const point=target?teamPassPoint(target,config):{x:s.ball.x+aim.x,z:s.ball.z+aim.z};tx=point.x;tz=point.z;
+        target=toward||passTarget(p);const point=target?teamPassPoint(target,config):{x:s.ball.x+aim.x,z:s.ball.z+aim.z};tx=point.x;tz=point.z;
         destination={distance:Math.hypot(tx-s.ball.x,tz-s.ball.z),kind:'ground'};
         s.passTarget=target?{player:target.id,x:tx,z:tz,startX:s.ball.x,startZ:s.ball.z,distance:destination.distance,time:config.passing.runSeconds,kind:'ground'}:null;
       }
@@ -169,7 +170,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if(p.id===s.controlled)consumeHeldActions();
     const previous={aim:s.aim,passAim:s.passAim,kickAim:s.kickAim,moving:s.moving};
     Object.assign(s,{aim:action.aim,passAim:action.passAim,kickAim:action.kickAim,moving:action.moving});
-    p.cooldown=0;kick(p,action.power,action.pass,action.forceLoft,true);
+    p.cooldown=0;kick(p,action.power,action.pass,action.forceLoft,true,action.toward||null);
     Object.assign(s,previous);
   }
   /** A wide AI carrier crosses to a team-mate attacking the box; the receiver's
@@ -228,7 +229,20 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     let tx=p.x,tz=p.z;p.request=false;
     if(owner===p&&p.hands){
       p.hold+=dt;
-      if(p.hold+1e-8>=config.goalkeeping.maxHoldSeconds-keeperThrowLead||p.hold>=config.goalkeeping.catchSeconds&&p.think<=0){p.cooldown=0;kick(p,0,true);}
+      const gk=config.goalkeeping,deadline=p.hold+1e-8>=gk.maxHoldSeconds-keeperThrowLead;
+      if(p.team===0&&role!=='keeper'&&s.idle<1){
+        // The child's keeper plays like a modern keeper: a few steps toward the
+        // edge of the area, an underarm throw to an open team-mate in reach, or a
+        // punt down the pitch when nobody near is free. The rival keeper, and the
+        // child's keeper while the child is idle, keep the tuned distribution.
+        if(p.hold<gk.catchSeconds+(gk.carryForwardSeconds??.5)){tx=p.x+d*(gk.carryForward??2.5);tz=p.z*.6;}
+        if(deadline||p.hold>=gk.catchSeconds&&p.think<=0){
+          const reach=(config.restarts.throwReach||7)*(gk.throwReachScale??1.5);let mate=null,best=-Infinity;
+          for(const q of players)if(q.team===p.team&&q.id!==p.id&&q.role!=='keeper'&&!(q.recover>0)){const range=distance(q,p),clear=distance(nearest(1-p.team,q),q),value=clear*1.2+(q.x-p.x)*d*.15-range*.05;if(range<=reach&&clear>aiConfig.requestClearance&&value>best){best=value;mate=q;}}
+          p.cooldown=0;if(mate)kick(p,0,true,false,false,mate);else kick(p,gk.puntPower??.6,false);
+        }
+      }
+      else if(deadline||p.hold>=gk.catchSeconds&&p.think<=0){p.cooldown=0;kick(p,0,true);}
     }else if(owner===p) {
       if(p.team===0&&role==='keeper'&&p.hold<=0)p.carryStartX=p.x;
       p.hold+=dt;tx=d*(hx-aiConfig.targetGoalInset);tz=p.z*aiConfig.dribbleCentering;
@@ -277,17 +291,24 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     }
     if(s.passTarget?.player===p.id&&s.passTarget.time>0&&b.owner===null){
       const speed=p.team===0?(config.players.speed+(p.speed-1)*config.players.speedPerRank)*personal(p).pace:Math.max(opponent.speed*personal(p).pace,teamReference()*config.opponents.minSpeedRatio*attack.speed);
-      const reception=s.passTarget.kind==='loft'?loftReceptionTarget(p,b,config,{speed,direction:d}):null;
+      const reception=s.passTarget.kind==='loft'?loftReceptionTarget(p,b,config,{speed,direction:d}):b.flight||p.team!==0?null:meetPoint(p,b,config,speed,s.passTarget);
       tx=reception?.x??s.passTarget.x;tz=reception?.z??s.passTarget.z;
     }
+    // Off the ball in possession, a team-mate far from its tactical spot joins the
+    // attack at a visible sprint instead of arriving after the move has ended.
+    // Defensive closing speed is unchanged, so the rival's threat stays as tuned.
+    const gap=distance(p,{x:tx,z:tz}),joining=owner?owner.team===p.team:b.lastTeam===p.team,catchUp=joining&&owner!==p&&p.role!=='keeper'&&gap>aiConfig.catchUpDistance&&(p.team===0||stage>=aiConfig.sprintFromStage)?1+clamp((gap-aiConfig.catchUpDistance)/aiConfig.catchUpDistance,0,1)*aiConfig.catchUpBoost:1;
     // A deterministic duty cycle uses elapsed simulation time, never extra RNG.
     // Sprint never consumes RNG, including below the stage gate.
     p.sprintRest=Math.max(0,p.sprintRest-dt);p.sprintTime=Math.max(0,p.sprintTime-dt);
     if(owner===p&&p.team===1&&stage>=aiConfig.sprintFromStage&&p.role!=='keeper'&&p.sprintRest<=0&&distance(p,{x:tx,z:tz})>=aiConfig.sprintDistance){p.sprintTime=aiConfig.sprintSeconds;p.sprintRest=aiConfig.sprintRestSeconds;}
-    p.sprinting=p.sprintTime>0;
-    move(p,tx-p.x,tz-p.z,dt,p.role==='keeper'?aiConfig.keeperSpeedScale:p.sprinting?aiConfig.sprintMultiplier:1);
+    p.sprinting=p.sprintTime>0||catchUp>1+aiConfig.catchUpBoost*.4;
+    move(p,tx-p.x,tz-p.z,dt,p.role==='keeper'?aiConfig.keeperSpeedScale:p.sprintTime>0?Math.max(aiConfig.sprintMultiplier,catchUp):catchUp);
   }
   function mode(){return role==='keeper'&&s.ball.owner!==s.controlled||s.ball.owner!==null&&players[s.ball.owner].team===1?'defense':'attack';}
+  /** The easy-level beginner helper drives the selected player after idleHelpSeconds; its
+   * passes and touches keep the original behaviour so unattended play stays as tuned. */
+  function helping(){return !!(opponent.help&&difficulty==='easy'&&s.idle>aiConfig.idleHelpSeconds&&!s.charging);}
   function takeBall(p){
     const b=s.ball;if(b.owner!==null&&players[b.owner].hands)return;
     if(p.team===1&&b.lastTeam===0)rivalPasses=0;if(b.owner!==null){players[b.owner].cooldown=rules.tackleCooldown;players[b.owner].hands=false;}
@@ -335,12 +356,40 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     else {kick(p,pass?0:.12,pass);s.charging=false;s.charge=0;s.chargeKind=null;}
   }
   function standingAttempt(p){p.stealTime=config.steal.animationSeconds;const dx=s.ball.x-p.x,dz=s.ball.z-p.z,len=Math.hypot(dx,dz)||1;p.fx=dx/len;p.fz=dz/len;return attempt(p,config.steal,'steal');}
-  function attempt(p,settings,type){
+  function attempt(p,settings,type,contact=null){
     const b=s.ball,owner=b.owner===null?null:players[b.owner];
-    if(owner?.hands||owner?.team===p.team||distance(p,b)>settings.reach||b.y>rules.pickupHeight)return false;
+    if(owner?.hands||owner?.team===p.team||!contact&&(distance(p,b)>settings.reach||b.y>rules.pickupHeight))return false;
     const base=typeof settings.baseChance==='number'?settings.baseChance:settings.baseChance[difficulty];
-    const chance=clamp((base*(1+(p.guard-1)*config.players.defensePerRank)+personal(p).defense+(p.card.defense-(owner?.card.defense??config.card.initial))*config.roster.duelWeight)*stealApproach(p,owner,config),0,1),won=rng()<chance;
-    if(won)takeBall(p);event(type,{player:p.id,won});return won;
+    // A late or rear slide is riskier: the same duel, slightly less likely to win.
+    const chance=clamp((base*(1+(p.guard-1)*config.players.defensePerRank)+personal(p).defense+(p.card.defense-(owner?.card.defense??config.card.initial))*config.roster.duelWeight)*stealApproach(p,owner,config)*(1-(contact?.risk??0)*.35),0,1),won=rng()<chance;
+    if(won){
+      if(contact){b.x=contact.ballX;b.z=contact.ballZ;b.y=contact.ballY;}
+      if(!contact||distance(p,b)<=settings.reach)takeBall(p);
+      else{
+        // The swept foot blocked a fast ball past the tackler's body: deflect it
+        // at the real contact instead of granting remote possession.
+        if(owner){owner.cooldown=rules.tackleCooldown;owner.hands=false;}
+        Object.assign(b,{owner:null,flight:null,thrower:null,shot:null,vx:p.slideX*4,vz:p.slideZ*4,vy:0,curve:0,lastTeam:p.team,lastPlayer:p.id,grace:ph.possessionGrace});s.passTarget=null;
+      }
+    }
+    event(type,{player:p.id,won,...(contact?{late:contact.late,behind:contact.behind,kind:p.slideKind}:null)});return won;
+  }
+  /** The sliding foot sweeps the ball's path inside this fixed tick: the first
+   * real contact is resolved before any later post or line crossing. */
+  function slidingContact(from,to){
+    if(!players.some(p=>p.slideTick===tickCount&&!p.slideAttempted))return;
+    let first=null,tackler=null;
+    const crossing=pitchCrossing(from,to,config),frame=goalFrameContact(from,to,config),owner=to.owner===null?null:players[to.owner];
+    for(const p of players){
+      if(p.slideTick!==tickCount||p.slideAttempted)continue;
+      const hit=sweptSlideContact({x:p.slideFromX,z:p.slideFromZ},p,from,to,config,slideVariant(config,p.slideKind),{elapsed:p.slideAge,dt:step,owner});
+      if(!hit||crossing&&hit.time>crossing.time||frame&&hit.time>frame.time||first&&hit.time>=first.time)continue;
+      first=hit;tackler=p;
+    }
+    if(!first)return;
+    tackler.slideAttempted=true;tackler.slideBehind=first.behind;tackler.slideLate=first.late;
+    first.ballX=from.x+(to.x-from.x)*first.time;first.ballZ=from.z+(to.z-from.z)*first.time;first.ballY=from.y+(to.y-from.y)*first.time;
+    tackler.slideWon=attempt(tackler,slideVariant(config,tackler.slideKind),'slide-contact',first);
   }
   function sprint(dt,moving,requested,available){
     const meter=s.sprint,c=config.sprint;
@@ -421,7 +470,9 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     else{s.ball.owner=taker.id;s.ball.x=r.x;s.ball.z=r.z;s.ball.y=ph.ballRadius;if(!r.action){taker.fx=r.facing?.x??direction(r.team);taker.fz=r.facing?.z??0;}}
     // Prepare while the receiver chooses a pass. The overhead pose is held at
     // the authored end of preparation; accepting a button resumes at release.
-    if(!r.action&&r.type==='throwIn'&&u===1)taker.restartMotion=sampleRestartAction('throwIn',Math.min(.9,Math.max(0,r.elapsed-walking)),taker.restartMotion||{});
+    // Waiting for the button, the thrower holds the ball at the chest (the authored
+    // gather), not loaded overhead: the full throw plays once a button is accepted.
+    if(!r.action&&r.type==='throwIn'&&u===1)taker.restartMotion=sampleRestartAction('throwIn',Math.min(config.restarts.throwHoldSeconds??.35,Math.max(0,r.elapsed-walking)),taker.restartMotion||{});
     if(!r.action&&r.type==='corner'&&r.elapsed>=Math.max(0,walking-1.2))taker.restartMotion=sampleRestartAction('corner',Math.min(1.2,Math.max(0,r.elapsed-Math.max(0,walking-1.2))),taker.restartMotion||{});
     if(taker.restartMotion&&r.type==='throwIn'){const pose=restartBallPose(taker.restartMotion.kind,taker.restartMotion.elapsed);s.ball.x=taker.x+taker.fx*pose.forward-taker.fz*pose.side;s.ball.z=taker.z+taker.fz*pose.forward+taker.fx*pose.side;s.ball.y=pose.height;}
   }
@@ -489,13 +540,14 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   function ball(dt) {
     const b=s.ball;let from={x:b.x,y:b.y,z:b.z};b.grace=Math.max(0,b.grace-dt);
     if(b.owner!==null){const p=players[b.owner];if(p.hands){const pose=p.restartMotion&&!p.restartMotion.released?restartBallPose(p.restartMotion.kind,p.restartMotion.elapsed):null;b.x=p.x+p.fx*(pose?.forward??config.goalkeeping.holdForward)-p.fz*(pose?.side??0);b.z=p.z+p.fz*(pose?.forward??config.goalkeeping.holdForward)+p.fx*(pose?.side??0);b.y=pose?.height??config.goalkeeping.holdHeight;b.vx=p.vx;b.vz=p.vz;b.vy=0;const puntDrop=p.distribution&&p.restartMotion.kind==='keeperPunt'&&p.restartMotion.elapsed>=restartActionProfile('keeperPunt').drop;if(!inPenaltyArea(p,p,s,config)||!puntDrop&&!inPenaltyArea(p,b,s,config)){p.hands=false;b.y=ph.ballRadius;}}
-      else {Object.assign(b,followDribbleBall(p,b,dt,config));if(b.owner===null){b.lastTeam=p.team;b.lastPlayer=p.id;b.grace=.12;event('heavy-touch',{player:p.id,team:p.team});}}
+      else {Object.assign(b,followDribbleBall(p,b,dt,config,{sprintLead:p.id===s.controlled&&liveControl}));if(b.owner===null){b.lastTeam=p.team;b.lastPlayer=p.id;b.grace=.12;event('heavy-touch',{player:p.id,team:p.team});}}
     }
     else if(b.flight?.kind==='physical-loft')stepLoftBall(b,dt,config);
     else if(b.flight){const f=b.flight;f.age=Math.min(f.duration,f.age+dt);const u=f.age/f.duration;b.x=f.fromX+(f.x-f.fromX)*u;b.z=f.fromZ+(f.z-f.fromZ)*u;b.y=ph.ballRadius+4*f.height*u*(1-u);b.vy=4*f.height/f.duration*(1-2*u);if(u>=1){b.flight=null;b.vx*=config.ball.landingCarry;b.vz*=config.ball.landingCarry;b.vy=Math.abs(b.vy)*config.ball.bounce;}}
     else {
       rollBall(b,dt,config);
     }
+    slidingContact(from,b);
     let crossing=pitchCrossing(from,b,config);
     const contact=goalFrameContact(from,b,config);
     if(contact&&(!crossing||contact.time<crossing.time)){
@@ -573,10 +625,15 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     }
     s.selectionTime=Math.max(0,s.selectionTime-step);
     if(s.passTarget){s.passTarget.time=Math.max(0,s.passTarget.time-step);if(!s.passTarget.time)s.passTarget=null;}
-    const candidate=players[selectControlledPlayer(s,config)],current=players[s.controlled];
+    // While the child is actively playing, automatic selection follows the ball's
+    // path and the stick's intent, in defence and on a loose ball, never while
+    // charging, sliding or waiting on a buffered action. An idle child keeps the
+    // original defence-only rule, so unattended matches play out exactly as tuned.
+    const active=Math.hypot(finite(input.moveX),finite(input.moveZ))>aiConfig.idleThreshold||held||!!input.passHeld||!!input.sprintHeld;liveControl=active&&!helping();
+    const candidate=players[selectControlledPlayer(s,config,active?{moveX:finite(input.moveX),moveZ:finite(input.moveZ),path:true}:{})],current=players[s.controlled];
     const advantage=distance(current,s.ball)-distance(candidate,s.ball);
     s.switchCooldown=Math.max(0,s.switchCooldown-step);
-    if(role!=='keeper'&&!s.switchCooldown&&mode()==='defense'&&candidate.id!==current.id&&advantage>=config.autoSwitchAdvantage){
+    if(role!=='keeper'&&!s.switchCooldown&&candidate.id!==current.id&&(active?!s.bufferedAction&&!s.charging&&current.slideTime<=0&&(mode()==='defense'&&advantage>=config.autoSwitchAdvantage||s.ball.owner===null&&advantage>=config.autoSwitchAdvantage*.5):mode()==='defense'&&advantage>=config.autoSwitchAdvantage)){
       s.defenseIdle=s.autoSwitchCandidate===candidate.id?s.defenseIdle+step:step;s.autoSwitchCandidate=candidate.id;
       if(s.defenseIdle+1e-8>=config.autoSwitchSeconds)selectPlayer(candidate.id);
     }else{s.defenseIdle=0;s.autoSwitchCandidate=null;}
@@ -593,8 +650,9 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     s.idle=length>aiConfig.idleThreshold||held||input.passHeld?0:s.idle+step;
     if(s.mode==='defense'){s.charging=false;s.charge=0;s.chargeKind=null;}
     if(pendingSlide&&s.mode==='defense'&&p.slideCooldown<=0&&p.recover<=0&&p.slideTime<=0){
-      p.slideTime=config.slide.seconds;p.slideCooldown=config.slide.cooldownSeconds;p.slideX=s.aim.x;p.slideZ=s.aim.z;p.slideAttempted=false;p.slideWon=false;
-      event('slide',{player:p.id});
+      const kind=chooseSlideKind(p,s.aim,config),variant=slideVariant(config,kind);
+      p.slideKind=variant.kind;p.slideTime=variant.seconds;p.slideCooldown=variant.cooldownSeconds;p.slideX=s.aim.x;p.slideZ=s.aim.z;p.slideAttempted=false;p.slideWon=false;p.slideBehind=p.slideLate=false;
+      event('slide',{player:p.id,kind:variant.kind});
     }
     pendingSlide=false;
     if(pendingPass){
@@ -615,21 +673,24 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if(pendingRelease){if(s.bufferedAction?.kind==='shot')s.bufferedAction.released=true;if(s.charging&&s.chargeKind==='shot'){kick(p,s.charge/ph.chargeSeconds);s.charging=false;s.charge=0;s.chargeKind=null;}pendingRelease=false;}
     if(pendingPassRelease){if(s.bufferedAction?.kind==='pass')s.bufferedAction.released=true;if(s.charging&&s.chargeKind==='pass'){kick(p,s.charge/config.passing.chargeSeconds,true);s.charging=false;s.charge=0;s.chargeKind=null;}pendingPassRelease=false;}
     sprint(step,length>aiConfig.idleThreshold,!!input.sprintHeld,p.recover<=0&&p.slideTime<=0);
+    // Team-mates time their runs from how long the child has carried the ball.
+    if(s.ball.owner===p.id&&!p.hands)p.hold+=step;
     for(const member of players)if(member.distribution)updateDistribution(member);
     for(const member of players) {
       if(member.distribution){member.vx=member.vz=0;continue;}
       if(member.recover>0){member.vx=member.vz=0;continue;}
       if(member.slideTime>0){
-        const speed=config.slide.distance/config.slide.seconds;member.vx=member.slideX*speed;member.vz=member.slideZ*speed;member.x=clamp(member.x+member.vx*step,-hx+rules.playerBoundary,hx-rules.playerBoundary);member.z=clamp(member.z+member.vz*step,-hz+rules.playerBoundary,hz-rules.playerBoundary);member.slideTime=Math.max(0,member.slideTime-step);
-        if(!member.slideAttempted&&distance(member,s.ball)<=config.slide.reach){member.slideAttempted=true;member.slideWon=attempt(member,config.slide,'slide-contact');}
-        if(member.slideTime<=0)member.recover=config.slide.recoverSeconds;
+        const variant=slideVariant(config,member.slideKind),duration=Math.min(step,member.slideTime),speed=variant.distance/variant.seconds*slideVelocityScale(member.slideTime-duration*.5,variant.seconds);
+        member.slideFromX=member.x;member.slideFromZ=member.z;member.slideTick=tickCount;member.slideAge=variant.seconds-member.slideTime;
+        member.vx=member.slideX*speed;member.vz=member.slideZ*speed;member.x=clamp(member.x+member.vx*duration,-hx+rules.playerBoundary,hx-rules.playerBoundary);member.z=clamp(member.z+member.vz*duration,-hz+rules.playerBoundary,hz-rules.playerBoundary);member.slideTime=Math.max(0,member.slideTime-step);
+        if(member.slideTime<=1e-8){member.slideTime=0;member.recover=slideRecoverySeconds(variant,{won:member.slideWon,behind:member.slideBehind,late:member.slideLate});}
       }else if(member.id===s.controlled&&member.hands){
         const k=config.goalkeeping,d=direction(member.team);member.hold+=step;
         moveControlledKeeper(member,mx,mz,step);
         if(member.hold+1e-8>=k.maxHoldSeconds-keeperThrowLead){member.cooldown=0;kick(member,0,true);}
       }else if(member.id===s.controlled&&role==='keeper')moveControlledKeeper(member,mx,mz,step);
       else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&length<=aiConfig.idleThreshold&&distance(member,s.passTarget)<(config.assistance?.contact?.receiveRunDistance??3.2))move(member,s.passTarget.x-member.x,s.passTarget.z-member.z,step,.82);
-      else if(member.id===s.controlled && !(opponent.help && difficulty==='easy' && s.idle>aiConfig.idleHelpSeconds && !s.charging))move(member,mx,mz,step,(s.sprint.active?config.sprint.multiplier:1)*(s.charging?config.chargeSpeedMultiplier:1));
+      else if(member.id===s.controlled && !helping())move(member,mx,mz,step,(s.sprint.active?config.sprint.multiplier:1)*(s.charging?config.chargeSpeedMultiplier:1));
       else ai(member,step);
     }
     separatePlayers(s,config);
@@ -683,6 +744,8 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       return designController.diagnostics(s);
     },
     tacticalMetrics:()=>config.tactics.designController?.diagnostics(s)||null,
+    /** Pure tactical target for one player, for tools and tests (same controller the AI uses). */
+    tacticalTarget:p=>p.role==='keeper'?keeperTarget(p,s,config):fieldTarget(p,s,config),
     clearInput,
     snapshot:()=>JSON.parse(JSON.stringify(s)),
     get result(){return s.result;}
