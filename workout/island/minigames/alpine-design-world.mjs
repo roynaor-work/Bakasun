@@ -38,6 +38,18 @@ export async function loadAlpineWorld({isDisposed = () => false} = {}) {
     if (!merged) throw Error('alpine.world.merge'); merged.computeBoundingBox(); merged.computeBoundingSphere(); return ownGeometry(merged);
   }
   let snowTexture, landscape, portrait;
+  // Optional track pack (design/alpine-track): grooming textures, a real kicker and a flag rope. Missing files only
+  // mean the older procedural look stays; they never fail the world.
+  const trackTextures = {}, trackGeometries = {};
+  async function trackGeometry(id) {
+    const gltf = await loader.loadAsync(asset(`../design/alpine-track/models/${id}.glb`));
+    try {
+      gltf.scene.updateMatrixWorld(true); const parts = [];
+      gltf.scene.traverse(n => { if (n.isMesh) parts.push(n.geometry.clone().applyMatrix4(n.matrixWorld)); });
+      if (!parts.length) throw Error(`alpine.track.geometry:${id}`);
+      const g = parts.length === 1 ? parts[0] : mergeGeometries(parts, false); if (!g.attributes.normal) g.computeVertexNormals(); g.computeBoundingSphere(); return ownGeometry(g);
+    } finally { gltf.scene.traverse(n => { n.geometry?.dispose(); for (const m of [].concat(n.material || [])) m.dispose(); }); }
+  }
   try {
     const loaded = await Promise.allSettled([
       ...MODELS.map(async id => {
@@ -46,6 +58,13 @@ export async function loadAlpineWorld({isDisposed = () => false} = {}) {
         try { models[id] = geometryOf(gltf.scene); if (id === 'ski-slope') models.surface = geometryOf(gltf.scene, 'slope_surface'); if (id === 'slalom-gate') { models.gatePoles = geometryOf(gltf.scene, ['gate_poles', 'gate_feet']); models.gateBanner = geometryOf(gltf.scene, ['gate_banner', 'banner_stripes']); } }
         finally { gltf.scene.traverse(n => { n.geometry?.dispose(); for (const m of [].concat(n.material || [])) m.dispose(); }); }
       }),
+      ...[['groomed', 'groomed-snow.webp', true], ['groomedN', 'groomed-normal.webp', false], ['ripples', 'snow-ripples.webp', true]].map(async ([id, file, color]) => {
+        try {
+          const t = await textureLoader.loadAsync(asset(`../design/alpine-track/textures/${file}`)); textures.add(t);
+          t.colorSpace = color ? T.SRGBColorSpace : T.NoColorSpace; t.wrapS = t.wrapT = T.RepeatWrapping; t.anisotropy = 4; trackTextures[id] = t;
+        } catch {}
+      }),
+      ...['kicker', 'flag-rope'].map(async id => { try { trackGeometries[id] = await trackGeometry(id); } catch {} }),
       ...[['snow', '../design/environment/textures/snow.webp'], ['landscape', '../design/environment/backgrounds/ski-mountains-landscape.webp'], ['portrait', '../design/environment/backgrounds/ski-mountains-portrait.webp']].map(async ([id, path]) => {
         const t = await textureLoader.loadAsync(asset(path)); textures.add(t); t.colorSpace = T.SRGBColorSpace;
         if (id === 'snow') { snowTexture = t; t.wrapS = t.wrapT = T.RepeatWrapping; t.anisotropy = 4; }
@@ -176,5 +195,5 @@ export async function loadAlpineWorld({isDisposed = () => false} = {}) {
     };
     worlds.add(world); return world;
   }
-  return {snowTexture, createArtWorld, prop, slopeSurface, dispose: free, metrics: () => ({loaded: !disposed, models: MODELS.length, textures: textures.size})};
+  return {snowTexture, trackTextures, trackGeometry: id => trackGeometries[id] || null, createArtWorld, prop, slopeSurface, dispose: free, metrics: () => ({loaded: !disposed, models: MODELS.length, textures: textures.size})};
 }
