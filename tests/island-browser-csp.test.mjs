@@ -131,7 +131,8 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       await alpine.page.waitForFunction(()=>['countdown','racing'].includes(window.__perfSession?.snapshot.phase),null,{timeout:20000});
       const phase=await alpine.page.evaluate(()=>window.__perfSession.snapshot.phase);
       assert.ok(['countdown','racing'].includes(phase));assert.equal(loaded.metrics.mode,'model');
-      assert.equal(loaded.metrics.character.clips,12);assert.equal(loaded.metrics.character.trianglesPerRider,1920);
+      // 12 authored clips + 'getup' (the get-up clip from design/motion2/alpine, baked with the rest and played in place of 'recover')
+      assert.equal(loaded.metrics.character.clips,13);assert.equal(loaded.metrics.character.trianglesPerRider,1920);
       await alpine.csp.assertClean();
       reports.push({name:'alpine-session-start-result',phase,...loaded});
       await alpine.page.evaluate(()=>window.__perfSession.dispose());

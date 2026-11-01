@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {SEA_LEVEL} from './ultra-island-terrain.mjs?v=island-ski-20261031-1';
+import {SEA_LEVEL} from './ultra-island-terrain.mjs?v=island-v2-20261101-1';
 
 function fallbackNormals(){
   const n=64,bytes=new Uint8Array(n*n*4);
