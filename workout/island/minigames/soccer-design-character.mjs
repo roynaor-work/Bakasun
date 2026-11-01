@@ -154,8 +154,17 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       const moving=speed>(config.view.animation.idleSpeed||.2),edge=mode!==previousMode;
       const kick=(p.kickTime||0)>kickTimer+1e-6||(p.stealTime||0)>stealTimer+1e-6;
       if(mode==='celebrate'&&edge)change('celebrate','result_success');
-      else if((mode==='slide'||mode==='dive')&&edge)change('fall','fall_confirmed');
-      else if(mode==='recover'&&edge)change('recover','recovery_allowed');
+      else if(mode==='slide'&&edge){
+        // The authored variant plays through the simulation's slide and the first
+        // part of its recovery; the getting-up clip fills the remaining recovery.
+        const kind=p.slideKind&&actions['slide_'+p.slideKind]?'slide_'+p.slideKind:'fall',clip=data.states[kind],total=Math.max(.2,(p.slideTime||0)+(config.slide?.variants?.[p.slideKind]?.recoverSeconds??config.slide?.recoverSeconds??.6)*.45);
+        change(kind,'fall_confirmed',true,{rate:Math.max(1,clip.durationSeconds/total)});
+      }
+      else if(mode==='dive'&&edge)change('fall','fall_confirmed');
+      else if(mode==='recover'&&edge){
+        const kind=p.slideKind&&actions['slide_'+p.slideKind+'_recover']?(p.slideWon===false&&actions.slide_miss?'slide_miss':'slide_'+p.slideKind+'_recover'):'recover',clip=data.states[kind],total=Math.max(.2,(p.recover||0)*(kind==='slide_miss'?.5:.75));
+        change(kind,'recovery_allowed',true,{rate:Math.max(1,clip.durationSeconds/total)});
+      }
       else if((mode==='kick'||mode==='steal')&&kick) {
         // The simulation has already released the ball. Enter immediately before
         // the authored contact, then fit only the follow-through to its existing
@@ -168,7 +177,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         change(name,'action',true,{at,rate:(clip.durationSeconds-at)/remaining,fadeSeconds:m.kickFadeIn??.025});
       }
       else if(mode==='catch'&&edge)change('catch','receive');
-      else if(!['celebrate','fall','recover','kick','kick_power','pass_short','pass_long','catch'].includes(state)||actions[state].time>=data.states[state].durationSeconds-1e-5) {
+      else if(!['celebrate','fall','recover','kick','kick_power','pass_short','pass_long','catch','slide_miss'].includes(state)&&!state.startsWith('slide_')||actions[state].time>=data.states[state].durationSeconds-1e-5) {
         const running=['run','dribble_run','defensive_jockey'].includes(state),locomotion=s.ball.owner===p.id&&actions.dribble_run?'dribble_run':s.mode==='defense'&&actions.defensive_jockey&&speed<config.view.animation.runSpeed?'defensive_jockey':'run';
         if(mode==='celebrate'){/* Hold the authored celebration until the goal phase ends. */}
         else if(!moving&&running)change('decelerate','slowing');
@@ -201,7 +210,7 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
     ]);
     // Compile actions that have a live simulation mapping. Other extension
     // states remain in the merged library without an expensive unused floor bake.
-    const active=new Set(['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power']);
+    const active=new Set(['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss']);
     const compiled=compileSoccerDesignClips({...data,states:Object.fromEntries(Object.entries(data.states).filter(([name])=>active.has(name)))},rig,map),sources=[player.scene,keeper.scene];
     for(const source of sources)validateBind(source,rig);
     const clipSets=sources.map(source=>bakeSoccerDesignFloor(source,compiled));
