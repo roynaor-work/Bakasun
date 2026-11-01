@@ -569,7 +569,9 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   * player keeps facing the ball handler so he slides instead of turning his back. */
  function defendAssist(p,ml,sprintRequested=false){
   const h=holder();if(!h)return;
-  if(ml>=0.05){if(dist(p,h)<7)p.intent.face=Math.atan2(h.x-p.x,h.z-p.z);return;}
+  // steering on defence: face the ball handler only when close to him (a real defensive stance);
+  // further away the player turns and runs where the stick points instead of side-shuffling
+  if(ml>=0.05){if(dist(p,h)<3.5)p.intent.face=Math.atan2(h.x-p.x,h.z-p.z);return;}
   const T=team(p.team),o=byId(T.ai?.assign?.[p.id])||h,rim=court.rim(side(o.team));
   const onBall=o.id===h.id,gap=onBall?C.player.assistGapBall??1.0:C.player.assistGapOff??1.8;
   const k=Math.min(gap/Math.max(0.6,dist(o,rim)),0.85),pt={x:o.x+(rim.x-o.x)*k,z:o.z+(rim.z-o.z)*k};

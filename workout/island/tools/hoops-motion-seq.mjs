@@ -50,6 +50,10 @@ function installFixture(){
     a.startShot(shooter,false);d.step(8,neutral());a.startJump(p,'block');
    } else if(kind==='pass'){
     const target=home.find(q=>q.id!==p.id);e.debug.place(p.id,side*2,0);e.debug.place(target.id,side*7,.5);p.face=Math.atan2(target.x-p.x,target.z-p.z);a.startPass(p,target,'chest');
+   } else if(kind==='cross'||kind==='spin'){
+    // the trick button with the ball: crossover on a tap, spin on a hold (one press at frame 1)
+    e.debug.place(p.id,side*4,0);p.face=Math.atan2(side,0);const key=kind==='spin'?'spinPress':'movePress';
+    window.__seq.script=i=>i===1?{move:{x:side,z:0},[key]:true}:{move:{x:side,z:0}};
    } else if(kind==='dribble'){
     // with the ball: walk, run, sprint, stop (dribble_slow / dribble_fast / sprint_ball phases and the ball bounce)
     // starts in the frontcourt (a backcourt start is a violation and a dead ball)
@@ -63,7 +67,7 @@ function installFixture(){
    window.__seq.focus=p.id;return {id:p.id,side,controlled:S.controlled,autopilot:S.autopilot,phase:S.phase};
   },
   step(n,i){const s=window.__seq.script?window.__seq.script(i):null;window.__seq.lastInput=s;for(let k=0;k<n;k++)d.step(1,{...neutral(),...(s||{})});},
-  frame(){const s=e.snapshot(),p=s.players.find(q=>q.id===window.__seq.focus),av=d.view.avatars.get(p.id);av.root.updateMatrixWorld(true);const feet={};av.root.traverse(o=>{if(o.isBone&&(o.name==='LeftFoot'||o.name==='RightFoot')){const w=o.getWorldPosition(new o.position.constructor());feet[o.name]=[+w.x.toFixed(3),+w.y.toFixed(3),+w.z.toFixed(3)];}});
+  frame(){const s=e.snapshot(),p=s.players.find(q=>q.id===window.__seq.focus),av=d.view.avatars.get(p.id);av.root.updateMatrixWorld(true);const feet={};av.root.traverse(o=>{if(o.isBone&&/(Left|Right)Foot$/.test(o.name)){const w=o.getWorldPosition(new o.position.constructor());feet[o.name.replace(/^mixamorig:?/,'')]=[+w.x.toFixed(3),+w.y.toFixed(3),+w.z.toFixed(3)];}});
    const phase=av.motionPhase||0,planted=(av.motionContacts||[]).filter(c=>phase>=c.startTime&&phase<=c.endTime).map(c=>c.bone);
    return {x:p.x,y:p.y,z:p.z,face:p.face,act:p.act,actT:+(p.actT||0).toFixed(2),speed:+Math.hypot(p.vx,p.vz).toFixed(2),motion:av.motionState,phase:+phase.toFixed(3),time:+(av.motionTime||0).toFixed(2),ball:s.ball.state,hasBall:p.hasBall,ballY:+s.ball.y.toFixed(2),feet,planted,pivot:av.motionPivot,input:window.__seq.lastInput};}
  };

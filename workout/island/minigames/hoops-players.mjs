@@ -11,7 +11,14 @@ const SKINS=['#81513b','#b47c56','#d9a478','#68402c','#9d6548','#edc09b'];
 const HAIRS=['#222b38','#17191e','#422c22','#68462e','#28201b','#241c18'];
 async function json(path,base){const response=await fetch(new URL(path,base));if(!response.ok)throw Error('Basketball asset unavailable: '+path+' ('+response.status+')');return response.json();}
 function releaseScene(scene){const materials=new Set(),geometries=new Set();scene?.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])materials.add(m);});for(const g of geometries)g.dispose();for(const m of materials){for(const value of Object.values(m))if(value?.isTexture)value.dispose();m.dispose();}}
+import {loadPlayerAssetsV1,createAvatarV1} from './hoops-players-v1.mjs';
+/** Default (v3, 01/11): the textured motion-capture athletes. `assets.characterVersion: 2`
+ * (or ?hoopsCharacters=2) selects the characters2 low-poly athlete with the motion2 clips. */
 export async function loadPlayerAssets(cfg,base,onProgress){
+ if((cfg.characterVersion??1)!==2)return loadPlayerAssetsV1(cfg,base,onProgress);
+ return loadPlayerAssetsV2(cfg,base,onProgress);
+}
+export async function loadPlayerAssetsV2(cfg,base,onProgress){
  const draco=new HoopsDRACOLoader().setDecoderPath(new URL('vendor/draco/',base).href).setWorkerLimit(1),loader=new GLTFLoader().setDRACOLoader(draco);let character;
  try{
   const manifestPath=cfg.motionManifest||'design/motion2/hoops/manifest.json',manifestURL=new URL(manifestPath,base);
@@ -75,6 +82,10 @@ function uniformAtlas(card,look){
  draw();return {texture,draw};
 }
 export function createAvatar(assets,card,teamLook,opts={}){
+ if(!assets.v2)return createAvatarV1(assets,card,teamLook,opts);
+ return createAvatarV2(assets,card,teamLook,opts);
+}
+export function createAvatarV2(assets,card,teamLook,opts={}){
  const root=cloneSkinned(assets.character.scene);root.name='player-'+card.id;root.userData.characterVersion=2;
  const mats=[],geometries=[],variant=Math.abs(card.look?.skin??card.number??0),skin=new THREE.Color(SKINS[variant%SKINS.length]),hair=new THREE.Color(card.look?.hairTint||HAIRS[variant%HAIRS.length]),atlas=uniformAtlas(card,teamLook);
  root.traverse(o=>{if(!o.isMesh)return;

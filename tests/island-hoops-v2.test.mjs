@@ -6,7 +6,7 @@ import {GLTFLoader} from '../workout/island/vendor/GLTFLoader.js';
 import * as THREE from '../workout/island/vendor/three.module.js';
 import {clone} from '../workout/island/vendor/SkeletonUtils.js';
 import {bakeV2Motion,createV2MotionPlayer,chooseV2Motion,actionClipTime,V2_ACTION_CLIPS} from '../workout/island/minigames/hoops-motion-v2.mjs';
-import {prepareV2Geometry,createAvatar} from '../workout/island/minigames/hoops-players.mjs';
+import {prepareV2Geometry,createAvatarV2 as createAvatar} from '../workout/island/minigames/hoops-players.mjs';
 const base=new URL('../workout/island/',import.meta.url),json=async p=>JSON.parse(await readFile(new URL(p,base),'utf8'));
 let shared;
 async function fixture(){

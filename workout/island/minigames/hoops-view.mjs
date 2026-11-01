@@ -20,6 +20,8 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 
 export async function createHoopsView(canvas,config,{court,teams,quality=2,assetBase,insets,onProgress,onFeelAudio}){
  const V=config.view,mobile=/Android|iPhone|iPad|Mobile/i.test(globalThis.navigator?.userAgent||'');
+ // load-time breakdown (ms) for the perf page and the phone: where a slow start actually goes
+ const loadTimes={},tStart=performance.now();let tMark=tStart;const mark=name=>{const now=performance.now();loadTimes[name]=Math.round(now-tMark);tMark=now;};
  const renderer=new THREE.WebGLRenderer({canvas,antialias:quality>=2,powerPreference:'high-performance',preserveDrawingBuffer:!!V.preserve});
  let loadingScene,loadingModels,loadingAssets,loadingVfx,loadingPm,loadingEnv,loadingFeel;
  try{
@@ -29,9 +31,9 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const camera=new THREE.PerspectiveCamera(V.fov,1,0.1,200);
  const looks=teams.map(t=>t.look);
  const {root:arena,dyn}=buildArena(court,{home:looks[0],away:looks[1],quality,anisotropy:Math.min(8,renderer.capabilities.getMaxAnisotropy())});
- scene.add(arena);
+ scene.add(arena);mark('arena');
  const models=await replaceArenaAssets(arena,dyn,court,{assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())});
- loadingModels=models;
+ loadingModels=models;mark('models');
  // lacquered floor: the players, the ball and the baskets mirrored into a small target that the
  // parquet mixes in (quality 2 only; one extra pass over the reflection layer, shadow map reused)
  const reflectable=o=>o.traverse(c=>c.layers.enable(REFLECTION_LAYER));
@@ -45,13 +47,13 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  // the overhead rig: a ring of bright fixtures that reads as specular pools on the lacquered floor
  for(let i=0;i<8;i++){const a=i/8*Math.PI*2,fx=new THREE.Mesh(new THREE.BoxGeometry(3,0.4,1.6),new THREE.MeshBasicMaterial({color:0xffffff}));fx.position.set(Math.cos(a)*14,10.5,Math.sin(a)*9);fx.rotation.y=-a;envScene.add(fx);}
  for(const s of [1,-1]){const strip=new THREE.Mesh(new THREE.BoxGeometry(40,3,0.5),new THREE.MeshBasicMaterial({color:new THREE.Color(looks[0].primary).multiplyScalar(0.6)}));strip.position.set(0,3,s*16);envScene.add(strip);}
- const envTarget=pm.fromScene(envScene,0.02);loadingEnv=envTarget;releaseScene(envScene);scene.environment=envTarget.texture;scene.environmentIntensity=V.envIntensity;
+ const envTarget=pm.fromScene(envScene,0.02);loadingEnv=envTarget;releaseScene(envScene);scene.environment=envTarget.texture;scene.environmentIntensity=V.envIntensity;mark('environment');
 
  // crowd: instanced sprites from the spectator atlas (or plain silhouettes if it fails)
  let crowd=null;
  try{crowd=await buildCrowd(dyn.crowdSpots,new URL(config.assets.crowd,assetBase).href,config.assets.crowdGrid,quality);scene.add(crowd.mesh);}catch(e){crowd=null;}
-
- const assets=await loadPlayerAssets(config.assets,assetBase,onProgress);assets.engineAnim=config.anim;loadingAssets=assets;
+ mark('crowd');
+ const assets=await loadPlayerAssets(config.assets,assetBase,onProgress);assets.engineAnim=config.anim;loadingAssets=assets;mark('playerAssets');
  // avatars: the ten on the floor are built before the first frame; the bench is built one per
  // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
  const avatars=new Map(),cards=new Map(),pending=[],kits=new Map();
@@ -62,7 +64,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   const i=pending.indexOf(id);if(i>=0)pending.splice(i,1);
   return av;
  }
- for(const t of teams)for(const id of (t.lineup||t.players.slice(0,5).map(c=>c.id)))ensureAvatar(id);
+ for(const t of teams)for(const id of (t.lineup||t.players.slice(0,5).map(c=>c.id)))ensureAvatar(id);mark('avatars');
  const interp=createInterpPool();
 
  // the ball
@@ -82,9 +84,9 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
 
  const state={camX:0,camZ:0,shake:0,replay:null,lastFrameMs:16,frames:0,slow:0,landscape:true,w:1,h:1,portraitT:1,ballVis:null};
  const v=new THREE.Vector3(),v2=new THREE.Vector3();
- const vfx=await createHoopsVfx(scene,assetBase,{quality,court});loadingVfx=vfx;
+ const vfx=await createHoopsVfx(scene,assetBase,{quality,court});loadingVfx=vfx;mark('vfx');
  const feel=createHoopsFeel(await loadHoopsFeel(),{reducedMotion:vfx.reducedMotion,onCue(cue,event,snapshot){if(cue.kind==='audio')onFeelAudio?.(cue.asset,{volume:Math.pow(10,cue.gain_db/20)});else vfx.trigger?.(cue,event,snapshot);}});loadingFeel=feel;
- const replayCam=new THREE.PerspectiveCamera(),replayTarget=new THREE.Vector3();
+ const replayCam=new THREE.PerspectiveCamera(),replayTarget=new THREE.Vector3();mark('feel');loadTimes.total=Math.round(performance.now()-tStart);
 
  function resize(w,h,dpr){
   state.w=w;state.h=h;state.landscape=w>=h*1.05;
@@ -233,7 +235,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   if(reflection){renderer.shadowMap.needsUpdate=true;if(state.frames%(V.reflEvery??2)===0){renderer.info.reset();reflection.update(camera);state.reflCalls=renderer.info.render.calls;state.reflTris=renderer.info.render.triangles;}}
   renderer.render(scene,camera);
   if(state.replay?.complete){const done=state.replay.done;state.replay=null;done?.();}
-  state.lastFrameMs=performance.now()-t0;state.frames++;
+  state.lastFrameMs=performance.now()-t0;if(!state.frames)loadTimes.firstFrame=Math.round(state.lastFrameMs);state.frames++;
  }
 
  function replayFrame(dt){
@@ -282,7 +284,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v2?2:1,clipCount:assets.clips.size,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v2?2:1,clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;
