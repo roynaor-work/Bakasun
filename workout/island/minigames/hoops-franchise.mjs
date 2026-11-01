@@ -3,6 +3,7 @@
  * island engine calls them and persists the result. Every grant or spend leaves a receipt, and
  * a finished game is credited once by its id. */
 import {TEAMS,generateRoster,overall,chemistry,seasonSchedule,standings,quickResult,teamRating,DRILLS,drillPreview,RATING_KEYS} from './hoops-league.mjs?v=island-ski-20261031-1';
+import {playerAbilities,positionName} from './hoops-roles.mjs';
 
 export const HOOPS_VERSION=1;
 const USER_TEAM='waves';
@@ -22,7 +23,7 @@ export function initialHoops(c){
 /** Full cards for the child's team: generated identity + the saved, trained ratings. */
 export function userCards(h){
  const base=generateRoster(h.team,68);
- return h.roster.map(r=>{const b=base.find(x=>x.id===r.id)||base[0];const card={...b,ratings:{...b.ratings,...r.ratings},potential:r.potential};card.ovr=overall(card);return card;});
+ return h.roster.map(r=>{const b=base.find(x=>x.id===r.id)||base[0];const card={...b,ratings:{...b.ratings,...r.ratings},potential:r.potential};card.ovr=overall(card);card.positionName=positionName(card.pos);card.abilities=playerAbilities(card);return card;});
 }
 
 /** Older club versions are upgraded here (none yet: v1 is the first). Unknown versions fail. */
@@ -81,7 +82,7 @@ export function matchTeams(c,h,{stage=1,equipment={},power=1,game=null}={}){
   for(const k of RATING_KEYS)r[k]=clamp(r[k]+boost,20,99);
   r.speed=clamp(r.speed*(1+gear.speed),20,99);r.vertical=clamp(r.vertical*(1+gear.vertical),20,99);
   for(const k of ['mid','three','ft','inside'])r[k]=clamp(r[k]+gear.touch*100*0.3,20,99);
-  return {...card,ratings:r};
+  return {...card,ratings:r,abilities:playerAbilities({pos:card.pos,ratings:r})};
  });
  const lineup=h.lineup.slice();
  const ordered=[...lineup.map(id=>cards.find(c=>c.id===id)),...cards.filter(c=>!lineup.includes(c.id))];

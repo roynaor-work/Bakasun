@@ -3,8 +3,13 @@
  * geometry decoding and the worker protocol remain the vendored implementation.
  * The worker has its own response policy, so the page needs no WASM/eval exception. */
 import {DRACOLoader} from '../vendor/DRACOLoader.js';
+import {fetchHoopsAsset} from './hoops-gltf.mjs';
 
 export class HoopsDRACOLoader extends DRACOLoader {
+ _loadLibrary(url,responseType){
+  return fetchHoopsAsset(this,this.decoderPath+url,responseType);
+ }
+
  _initDecoder(){
   if(this.decoderPending)return this.decoderPending;
   if(typeof WebAssembly!=='object')return Promise.reject(Error('Basketball Draco requires WebAssembly'));

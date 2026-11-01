@@ -2,6 +2,7 @@
  * five, training with its cost and result shown before buying, and match settings. Every
  * change goes through engine.hoops, which saves and refuses while a game is running. */
 import {DRILLS} from '../minigames/hoops-league.mjs?v=island-ski-20261031-1';
+import {positionName,abilitySummary} from '../minigames/hoops-roles.mjs';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;if(text!=='')n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -61,9 +62,11 @@ export function hoopsClubPanel({engine,t,refresh,result=()=>{}}){
  const sync=()=>{save.disabled=pick.size!==5||sum.cards.every(c=>pick.has(c.id)===h.lineup.includes(c.id));for(const b of grid.children)b.setAttribute('aria-pressed',String(pick.has(b.dataset.id)));};
  for(const c of [...sum.cards].sort((a,b)=>Number(pick.has(b.id))-Number(pick.has(a.id))||b.ovr-a.ovr)){
   const card=button('','hoops-lineup-card',()=>{if(pick.has(c.id))pick.delete(c.id);else if(pick.size<5)pick.add(c.id);sync();},'hoops-club-card');card.dataset.id=c.id;
-  card.append(el('bdi','hoops-club-num',String(c.number)),el('span','hoops-club-name',c.name),el('span','hoops-club-pos',t('hoops.pos.'+c.pos)),el('bdi','hoops-club-ovr',String(c.ovr)));
+  card.append(el('bdi','hoops-club-num',String(c.number)),el('span','hoops-club-name',c.name),el('span','hoops-club-pos',positionName(c.pos)),el('bdi','hoops-club-ovr',String(c.ovr)));
+  card.title=abilitySummary(c);
+  card.append(el('small','hoops-club-line hoops-club-abilities',abilitySummary(c)));
   const p=h.roster.find(r=>r.id===c.id);if(p?.gp)card.append(el('small','hoops-club-line',t('hoops.club.statLine',{gp:p.gp,pts:(p.pts/p.gp).toFixed(1),reb:(p.reb/p.gp).toFixed(1),ast:(p.ast/p.gp).toFixed(1)})));
-  card.setAttribute('aria-label',t('hoops.club.cardLabel',{number:c.number,name:c.name,pos:t('hoops.pos.'+c.pos),ovr:c.ovr}));grid.append(card);
+  card.setAttribute('aria-label',t('hoops.club.cardLabel',{number:c.number,name:c.name,pos:positionName(c.pos),ovr:c.ovr})+' · '+abilitySummary(c));grid.append(card);
  }
  sync();lineup.append(grid,save);root.append(lineup);
 

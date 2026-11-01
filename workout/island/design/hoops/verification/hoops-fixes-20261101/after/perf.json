@@ -1,0 +1,266 @@
+[
+  {
+    "width": 844,
+    "height": 390,
+    "errors": [],
+    "audio": {
+      "context": "running",
+      "buffers": 14,
+      "active": 1,
+      "events": 0,
+      "bed": "basketball/ambience-loop",
+      "played": {
+        "ambience": 1,
+        "opening": 1,
+        "whistle": 1,
+        "bounce": 17,
+        "shoes": 7,
+        "pass": 9,
+        "swish": 1,
+        "crowd": 1
+      },
+      "muted": false,
+      "paused": true,
+      "disposed": false,
+      "mix": true,
+      "duckGain": 1,
+      "scheduled": []
+    },
+    "perf": {
+      "seconds": 29.84,
+      "frames": 176,
+      "fps": 5.9,
+      "frameMs": {
+        "avg": 169.13,
+        "p50": 166.7,
+        "p95": 200,
+        "p99": 216.6,
+        "max": 450.1
+      },
+      "over33": 174,
+      "over50": 174,
+      "tickMs": {
+        "avg": 5.69,
+        "p50": 2.9,
+        "p95": 5.2,
+        "max": 455.9
+      },
+      "renderMs": {
+        "avg": 4.69,
+        "p95": 2.8
+      },
+      "allocMBps": 1.69,
+      "gcs": 15,
+      "longTasks": 2,
+      "longTaskMs": 542,
+      "replays": 1,
+      "viewport": {
+        "w": 844,
+        "h": 390,
+        "dpr": 1,
+        "landscape": true
+      },
+      "render": {
+        "calls": 42,
+        "triangles": 89407,
+        "frameMs": 1.6,
+        "players": 10,
+        "avatars": 10,
+        "pending": 14,
+        "crowd": 986,
+        "quality": 2,
+        "textures": 32,
+        "geometries": 65,
+        "landscape": true,
+        "dpr": 1,
+        "bufferWidth": 844,
+        "bufferHeight": 390,
+        "style": "v2-broadcast",
+        "characterVersion": 2,
+        "clipCount": 35,
+        "arenaVersion": 2,
+        "baked": [
+          {
+            "name": "beams",
+            "matched": 792,
+            "total": 792,
+            "applied": true
+          },
+          {
+            "name": "roof",
+            "matched": 384,
+            "total": 384,
+            "applied": true
+          },
+          {
+            "name": "scoreboard",
+            "matched": 720,
+            "total": 720,
+            "applied": true
+          }
+        ],
+        "feel": {
+          "authored": true,
+          "queued": 0,
+          "fov": 1.166,
+          "seen": 1
+        },
+        "vfx": {
+          "sprites": 0,
+          "residentAtlases": 0,
+          "loadedAtlases": 5,
+          "reducedMotion": false
+        },
+        "motion": [
+          "steal_fail",
+          "defensive_run",
+          "defensive_run",
+          "defensive_run",
+          "defensive_run",
+          "dribble_fast",
+          "turn_right",
+          "run",
+          "sprint",
+          "sprint"
+        ]
+      },
+      "steps": 954,
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "quality": 2,
+      "profile": "quick",
+      "loadMs": 4665
+    }
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "errors": [],
+    "audio": {
+      "context": "suspended",
+      "buffers": 14,
+      "active": 0,
+      "events": 0,
+      "bed": null,
+      "played": {
+        "ambience": 1,
+        "opening": 1,
+        "whistle": 1,
+        "bounce": 15,
+        "shoes": 6,
+        "pass": 9,
+        "swish": 1,
+        "crowd": 1
+      },
+      "muted": false,
+      "paused": true,
+      "disposed": false,
+      "mix": true,
+      "duckGain": 1,
+      "scheduled": []
+    },
+    "perf": {
+      "seconds": 29.92,
+      "frames": 174,
+      "fps": 5.82,
+      "frameMs": {
+        "avg": 171.55,
+        "p50": 166.7,
+        "p95": 200,
+        "p99": 266.6,
+        "max": 616.6
+      },
+      "over33": 171,
+      "over50": 171,
+      "tickMs": {
+        "avg": 9.8,
+        "p50": 2.9,
+        "p95": 5.7,
+        "max": 620.1
+      },
+      "renderMs": {
+        "avg": 8.8,
+        "p95": 3.3
+      },
+      "allocMBps": 1.74,
+      "gcs": 8,
+      "longTasks": 4,
+      "longTaskMs": 1299,
+      "replays": 1,
+      "viewport": {
+        "w": 390,
+        "h": 844,
+        "dpr": 1,
+        "landscape": false
+      },
+      "render": {
+        "calls": 39,
+        "triangles": 50109,
+        "frameMs": 2,
+        "players": 10,
+        "avatars": 11,
+        "pending": 13,
+        "crowd": 986,
+        "quality": 2,
+        "textures": 33,
+        "geometries": 67,
+        "landscape": false,
+        "dpr": 1,
+        "bufferWidth": 390,
+        "bufferHeight": 844,
+        "style": "v2-broadcast",
+        "characterVersion": 2,
+        "clipCount": 35,
+        "arenaVersion": 2,
+        "baked": [
+          {
+            "name": "beams",
+            "matched": 792,
+            "total": 792,
+            "applied": true
+          },
+          {
+            "name": "roof",
+            "matched": 384,
+            "total": 384,
+            "applied": true
+          },
+          {
+            "name": "scoreboard",
+            "matched": 720,
+            "total": 720,
+            "applied": true
+          }
+        ],
+        "feel": {
+          "authored": true,
+          "queued": 0,
+          "fov": 1.163,
+          "seen": 1
+        },
+        "vfx": {
+          "sprites": 0,
+          "residentAtlases": 0,
+          "loadedAtlases": 5,
+          "reducedMotion": false
+        },
+        "motion": [
+          "steal_fail",
+          "defensive_run",
+          "defensive_run",
+          "defensive_run",
+          "defensive_run",
+          "receive",
+          "sprint",
+          "sprint",
+          "sprint",
+          "sprint"
+        ]
+      },
+      "steps": 916,
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "quality": 2,
+      "profile": "quick",
+      "loadMs": 2982
+    }
+  }
+]

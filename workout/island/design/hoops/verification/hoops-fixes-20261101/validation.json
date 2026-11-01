@@ -1,0 +1,84 @@
+{
+  "base": "1b3df2a10435997684d540499cd6128ea1d77187",
+  "runtimeHead": "260dcae36ac53eb9025b7caf1d14a761b290aeb1",
+  "phoneHardwareTested": false,
+  "performance": {
+    "tool": "tools/perf-hoops.html",
+    "seconds": 30,
+    "renderer": "Chrome SwiftShader",
+    "quality": 2,
+    "dpr": 1,
+    "seed": 4242,
+    "profile": "quick",
+    "replay": true,
+    "rows": [
+      {
+        "viewport": "844x390",
+        "beforeMs": 300,
+        "afterMs": 200,
+        "changePercent": -33.3
+      },
+      {
+        "viewport": "390x844",
+        "beforeMs": 266.6,
+        "afterMs": 200,
+        "changePercent": -25.0
+      }
+    ]
+  },
+  "qualityTradeoffs": {
+    "shadowMapBefore": 2048,
+    "shadowMapAfter": 1024,
+    "characterMaterial": "Phong (whole athlete)",
+    "floorMaterial": "Standard PBR",
+    "characterTriangles": 6381,
+    "characterBones": 20
+  },
+  "hoopsUnitTests": {
+    "tests": 133,
+    "pass": 133,
+    "fail": 0,
+    "skipped": 0
+  },
+  "fullRepositoryTests": {
+    "tests": 3022,
+    "pass": 2976,
+    "fail": 7,
+    "skipped": 39
+  },
+  "knownBaselineFailures": {
+    "base": "1b3df2a10435997684d540499cd6128ea1d77187",
+    "count": 6,
+    "files": [
+      "cam-lab-calibration",
+      "cam-lab-guidance",
+      "island-boar-integration",
+      "island-g4b",
+      "island-soccer-island",
+      "workout-voice"
+    ]
+  },
+  "cspRecheck": {
+    "tests": 2,
+    "pass": 2,
+    "fail": 0,
+    "skipped": 0
+  },
+  "browserSuites": {
+    "acceptance": {
+      "viewports": 2,
+      "checks": 30,
+      "layouts": 0
+    },
+    "browser": {
+      "viewports": 2,
+      "checks": 38,
+      "layouts": 40
+    },
+    "v2-browser": {
+      "viewports": 2,
+      "checks": 22,
+      "layouts": 0
+    }
+  }
+}
