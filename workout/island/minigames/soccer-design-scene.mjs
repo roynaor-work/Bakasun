@@ -94,6 +94,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   const requests=[...['soccer-stadium','soccer-goal','soccer-ball'].map(name=>loader.loadAsync(modelUrl(name)).then(data=>{loadedModels.push(data.scene);return data.scene;})),
     ...['textures/grass-mown.webp','textures/stand-concrete.webp','textures/crowd-dots.webp','backgrounds/stadium-day-landscape.webp','backgrounds/stadium-day-portrait.webp'].map(name=>textureLoader.loadAsync(environmentUrl(name)).then(texture=>{loadedTextures.push(texture);return texture;}))];
   const ready=Promise.allSettled(requests).then(results=>{
+    globalThis.performance?.mark?.('soccer:scene-build-start');
     const failure=results.find(result=>result.status==='rejected');
     if(disposed||failure){
       loadedModels.forEach(releaseSource);loadedTextures.forEach(texture=>texture.dispose());
@@ -157,7 +158,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     const ballMaterial=track(new T.MeshStandardMaterial({vertexColors:true,roughness:.72,metalness:0}));
     mesh(ballGeometry,ballMaterial,ball).castShadow=true;
     loadedModels.forEach(releaseSource);loadedModels.length=0;loadedTextures.length=0;
-    status='ready';root.visible=ball.visible=true;
+    status='ready';root.visible=ball.visible=true;globalThis.performance?.mark?.('soccer:scene-build-end');
     try{onReady({stadium:true,goals:true,ball:true});}
     catch(error){root.visible=ball.visible=false;status='fallback';reportError(error);return false;}
     return true;

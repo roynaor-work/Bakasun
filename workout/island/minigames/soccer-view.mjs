@@ -27,6 +27,7 @@ const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin t
 
 const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
 export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
+  globalThis.performance?.mark?.('soccer:view-construct-start');
   const restartAim={};let restartAttachment=null,restartStrike=null;
   config=expandSoccerConfig(config);
   const selectedKit=selectedSoccerKit();
@@ -204,19 +205,19 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
    * panel is still up. A quality step or the first goal then switches programs without a compile stall. */
   let warmed=null;
   function warm(){
-    if(disposed||warmed)return;const hidden=[];scene.traverse(o=>{if((o.isMesh||o.isPoints||o.isLine||o.isSprite)&&!o.visible){o.visible=true;hidden.push(o);}});
+    if(disposed||warmed)return;globalThis.performance?.mark?.('soccer:warm-start');const hidden=[];scene.traverse(o=>{if((o.isMesh||o.isPoints||o.isLine||o.isSprite)&&!o.visible){o.visible=true;hidden.push(o);}});
     const level=quality,shadowless=Math.max(level,config.view.athlete.lodFromQuality),t0=performance.now();let programs=0;
     try{
       for(const tier of [shadowless,level]){lighting.setQuality(tier);renderer.compile(scene,camera);programs=renderer.info.programs?.length||0;}
       scene.traverse(o=>{for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])for(const key of ['map','normalMap','roughnessMap','emissiveMap','alphaMap'])if(m[key]?.isTexture)renderer.initTexture(m[key]);});
     }catch{/* warming is an optimisation only; the match still starts */}
     finally{for(const o of hidden)o.visible=false;lighting.setQuality(level);}
-    warmed={programs,ms:Math.round(performance.now()-t0)};
+    warmed={programs,ms:Math.round(performance.now()-t0)};globalThis.performance?.mark?.('soccer:warm-end');
   }
   function disposeObject(root){root.traverse(o=>{o.geometry?.dispose();o.skeleton?.dispose();for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[]){m.map?.dispose();m.dispose();}});}
   const observer=new ResizeObserver(resize);for(const node of [canvas,...layoutNodes])observer.observe(node);
   function resize(){if(disposed)return;replay.skip('resize');const rect=canvas.getBoundingClientRect(),area=playArea?.()||{x:0,y:0,width:rect.width,height:rect.height};lastWidth=area.width;lastHeight=area.height;renderer.setSize(rect.width,rect.height,false);renderer.setViewport(area.x,rect.height-area.y-area.height,area.width,area.height);camera.aspect=lastWidth/Math.max(1,lastHeight);camera.updateProjectionMatrix();}
-  resize();
+  resize();globalThis.performance?.mark?.('soccer:view-construct-end');
   // Adaptive quality measures wall-clock frame time (not the capped simulation dt): a long window
   // decides on the average; a short one steps down at once when frames stay far over budget.
   const qualityMonitor=createQualityMonitor(config.view);

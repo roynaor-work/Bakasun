@@ -7,8 +7,25 @@ if(typeof document!=='undefined'&&!document.querySelector('link[data-ultra-socce
   const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('../minigames/ultra-soccer-ui.css?v=island-v2-20261101-1',import.meta.url).href;link.dataset.ultraSoccerUi='';document.head.append(link);
 }
 const node=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls;n.textContent=text??'';return n;};
+/** The soccer menu warms the match assets while the child reads the card: the
+ * authored motion library, the control/tactics contracts, the decoded and
+ * floor-baked characters (shared by every match on this page) and the stadium
+ * files in the HTTP cache. Kickoff then waits only for the renderer. Failures
+ * are ignored here; the match itself reports them. Runs once per page. */
+let warmed=false;
+export function warmSoccerAssets(){
+  if(warmed||typeof document==='undefined')return;warmed=true;
+  const start=()=>{
+    import('../minigames/soccer-design-character.mjs').then(m=>m.prepareSoccerDesignSources()).catch(()=>{});
+    import('../minigames/soccer-design-contracts.mjs').then(m=>m.loadSoccerDesignContracts()).catch(()=>{});
+    const design=new URL('../design/',import.meta.url);
+    for(const path of ['models2/soccer-stadium.glb','models/soccer-goal.glb','models/soccer-ball.glb','environment/textures/grass-mown.webp','environment/textures/stand-concrete.webp','environment/textures/crowd-dots.webp','environment/backgrounds/stadium-day-landscape.webp','environment/backgrounds/stadium-day-portrait.webp','vfx/atlases/goal-burst.json','vfx/atlases/confetti.json','vfx/atlases/landing-dust.json'])fetch(new URL(path,design),{credentials:'same-origin'}).catch(()=>{});
+  };
+  (globalThis.requestIdleCallback||(fn=>setTimeout(fn,250)))(start);
+}
 /** Local SVG portrait uses only the validated avatar palette; names remain text. */
 export function playerCard(state,balance,t,{starsAdded}={}) {
+  warmSoccerAssets();
   const card=state.soccerCard,identity=state.soccerRoster?.players[0],rating=cardRating(card,balance),root=node('article',`soccer-player-card ${rating.tier}`);
   if(identity){rating.overall=Math.round(['pace','shot','pass','defense'].reduce((sum,key)=>sum+identity.attributes[key],0)/4);rating.tier=rating.overall>=balance.card.goldRating?'gold':rating.overall>=balance.card.silverRating?'silver':'bronze';root.className=`soccer-player-card ${rating.tier}`;}
   root.dataset.playerCard=rating.tier;root.setAttribute('aria-label',t('soccer.card'));

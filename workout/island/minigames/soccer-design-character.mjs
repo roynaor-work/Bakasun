@@ -82,19 +82,46 @@ export function compileSoccerDesignClips(data,rig,map) {
   return clips;
 }
 
+/** The lowest skinned vertex of a posed limb is always an extreme vertex of that
+ * limb's bind-space hull. Keep, per bone, the vertices extremal along 26
+ * directions (dominant weight), so the floor bake evaluates a few hundred
+ * vertices per pose instead of every vertex (13,700 per character; measured
+ * 01/11/2026: 4.3 s per character for 27 clips on desktop, 0.25 s with this). */
+const floorCandidates=new WeakMap();
+const hullDirections=[];
+for(const x of [-1,0,1])for(const y of [-1,0,1])for(const z of [-1,0,1])if(x||y||z){const l=Math.hypot(x,y,z);hullDirections.push([x/l,y/l,z/l]);}
+export function soccerFloorCandidates(mesh){
+  const cached=floorCandidates.get(mesh.geometry);if(cached)return cached;
+  const geometry=mesh.geometry,position=geometry.attributes.position,skinIndex=geometry.attributes.skinIndex,skinWeight=geometry.attributes.skinWeight,count=position.count;
+  const bones=mesh.skeleton.bones.length,best=new Int32Array(bones*hullDirections.length).fill(-1),bestDot=new Float64Array(bones*hullDirections.length).fill(-Infinity);
+  const local=new T.Vector3(),toBone=mesh.skeleton.boneInverses.map(inverse=>new T.Matrix4().multiplyMatrices(inverse,mesh.bindMatrix));
+  for(let i=0;i<count;i++){
+    let bone=0,weight=-1;
+    for(let k=0;k<4;k++){const w=skinWeight.getComponent(i,k);if(w>weight){weight=w;bone=skinIndex.getComponent(i,k);}}
+    if(bone>=bones)continue;
+    local.fromBufferAttribute(position,i).applyMatrix4(toBone[bone]);
+    for(let d=0;d<hullDirections.length;d++){const dir=hullDirections[d],dot=local.x*dir[0]+local.y*dir[1]+local.z*dir[2],slot=bone*hullDirections.length+d;if(dot>bestDot[slot]){bestDot[slot]=dot;best[slot]=i;}}
+  }
+  const unique=new Set();for(const i of best)if(i>=0)unique.add(i);
+  const candidates=Uint32Array.from(unique).sort((a,b)=>a-b);floorCandidates.set(geometry,candidates);return candidates;
+}
 /** Floor correction is baked at load time, never evaluated by CPU skinning in a
  * live frame. Each character asset can have its own sole/glove geometry. */
-export function bakeSoccerDesignFloor(source,clips) {
+export function bakeSoccerDesignFloor(source,clips,{exhaustive=false}={}) {
   const bones={},meshes=[],saved=[];
   source.traverse(o=>{if(o.isBone){bones[o.name]=o;saved.push({bone:o,q:o.quaternion.clone(),p:o.position.clone()});}if(o.isSkinnedMesh)meshes.push(o);});
   const point=new T.Vector3(),out=[];
   source.updateMatrixWorld(true);
   const inverse=new T.Matrix4().copy(source.matrixWorld).invert();
+  const samples=meshes.map(mesh=>exhaustive?null:soccerFloorCandidates(mesh));
   const minY=()=>{
     source.updateMatrixWorld(true);for(const mesh of meshes)mesh.skeleton.update();
     let low=Infinity;
-    for(const mesh of meshes)for(let i=0;i<mesh.geometry.attributes.position.count;i++){
-      mesh.getVertexPosition(i,point).applyMatrix4(mesh.matrixWorld).applyMatrix4(inverse);low=Math.min(low,point.y);
+    for(let m=0;m<meshes.length;m++){
+      const mesh=meshes[m],candidates=samples[m],total=candidates?candidates.length:mesh.geometry.attributes.position.count;
+      for(let k=0;k<total;k++){
+        mesh.getVertexPosition(candidates?candidates[k]:k,point).applyMatrix4(mesh.matrixWorld).applyMatrix4(inverse);low=Math.min(low,point.y);
+      }
     }
     return low;
   };
@@ -107,7 +134,7 @@ export function bakeSoccerDesignFloor(source,clips) {
         if(property==='quaternion')bones[name].quaternion.fromArray(track.values,key*4);
         else bones[name].position.fromArray(track.values,key*3);
       }
-      positions.values[key*3+1]=Math.max(bindLift,-minY())+.002;
+      positions.values[key*3+1]=Math.max(bindLift,-minY())+.002+(exhaustive?0:.0025);
     }
     clip.userData=input.userData;out.push(clip);
   }
@@ -193,42 +220,63 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   };
 }
 
+/** Compile actions that have a live simulation mapping. Other extension
+ * states remain in the merged library without an expensive unused floor bake. */
+const ACTIVE_CLIPS=['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss'];
+let designSources=null;
+/** Decode, retarget, floor-bake and LOD the two authored characters once per
+ * page. Every match clones rigs from these shared sources, so a reopened game
+ * (or one opened after the soccer menu warmed the cache) skips the whole CPU
+ * pipeline. The shared sources are never disposed; sessions own only their clones.
+ * A failed preparation is forgotten so the next opening retries it. */
+export function prepareSoccerDesignSources(){
+  if(designSources)return designSources;
+  const loader=createSoccerDesignLoader();
+  designSources=(async()=>{
+    try{
+      globalThis.performance?.mark?.('soccer:prepare-fetch-start');
+      const [player,keeper,rig,map,data,regionMap]=await Promise.all([
+        loader.loadAsync(asset('characters2/soccer-player.glb')),loader.loadAsync(asset('characters2/goalkeeper.glb')),
+        json('characters/rig.json'),json('viewer/retarget-map.json'),loadSoccerRestartMotion(),json('characters2/regions.json'),
+      ]);
+      globalThis.performance?.mark?.('soccer:prepare-cpu-start');
+      const active=new Set(ACTIVE_CLIPS);
+      const compiled=compileSoccerDesignClips({...data,states:Object.fromEntries(Object.entries(data.states).filter(([name])=>active.has(name)))},rig,map),sources=[player.scene,keeper.scene];
+      for(const source of sources)validateBind(source,rig);
+      const clipSets=sources.map(source=>bakeSoccerDesignFloor(source,compiled));
+      const sourceHeights=sources.map(source=>{
+        source.updateMatrixWorld(true);source.traverse(o=>{if(o.isSkinnedMesh){o.skeleton.update();o.computeBoundingBox();}});
+        const bounds=new T.Box3().setFromObject(source);return bounds.max.y-bounds.min.y;
+      });
+      const lodGeometry=new Map();
+      sources.forEach((source,sourceIndex)=>source.traverse(o=>{
+        if(!o.isMesh)return;
+        const spec=regionMap.models[sourceIndex?'goalkeeper':'soccer-player'];assignRegions(o.geometry,spec,regionMap);
+        // Keep the medium mesh; a separate 28-cell mobile mesh offsets the larger
+        // squad. Both retain source colour/skin boundaries and the same height.
+        lodGeometry.set(o.geometry,[createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/40),createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/28)]);
+      }));
+      globalThis.performance?.mark?.('soccer:prepare-cpu-end');
+      return {sources,clipSets,sourceHeights,lodGeometry,data,map,clips:compiled.map(c=>c.name)};
+    }catch(error){designSources=null;throw error;}
+    finally{loader.dispose();}
+  })();
+  return designSources;
+}
 /** Optional authored GLB path for comparison/fallback. The realistic athlete
  * remains the game's default; no textures or decoding are added to that path. */
 export async function loadDesignCharacters({config,roster,scene,track=x=>x,selectedKit=null}) {
-  const loader=createSoccerDesignLoader(),resources=new Set(),characters=[];
+  const resources=new Set(),characters=[];
   const own=value=>(resources.add(value),track(value),value);
   let disposed=false;
   const dispose=()=>{
     if(disposed)return;disposed=true;for(const c of characters)c.dispose();
-    for(const r of resources)r.dispose?.();resources.clear();loader.dispose();
+    for(const r of resources)r.dispose?.();resources.clear();
   };
   try {
-    const [player,keeper,rig,map,data,regionMap]=await Promise.all([
-      loader.loadAsync(asset('characters2/soccer-player.glb')),loader.loadAsync(asset('characters2/goalkeeper.glb')),
-      json('characters/rig.json'),json('viewer/retarget-map.json'),loadSoccerRestartMotion(),json('characters2/regions.json'),
-    ]);
-    // Compile actions that have a live simulation mapping. Other extension
-    // states remain in the merged library without an expensive unused floor bake.
-    const active=new Set(['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss']);
-    const compiled=compileSoccerDesignClips({...data,states:Object.fromEntries(Object.entries(data.states).filter(([name])=>active.has(name)))},rig,map),sources=[player.scene,keeper.scene];
-    for(const source of sources)validateBind(source,rig);
-    const clipSets=sources.map(source=>bakeSoccerDesignFloor(source,compiled));
+    const {sources,clipSets,sourceHeights,lodGeometry,data,map,clips}=await prepareSoccerDesignSources();
+    globalThis.performance?.mark?.('soccer:characters-instance-start');
     const height=config.view.animation.characterHeight||1.8;
-    const sourceHeights=sources.map(source=>{
-      source.updateMatrixWorld(true);source.traverse(o=>{if(o.isSkinnedMesh){o.skeleton.update();o.computeBoundingBox();}});
-      const bounds=new T.Box3().setFromObject(source);return bounds.max.y-bounds.min.y;
-    });
-    const lodGeometry=new Map();
-    sources.forEach((source,sourceIndex)=>source.traverse(o=>{
-      if(!o.isMesh)return;
-      const spec=regionMap.models[sourceIndex?'goalkeeper':'soccer-player'];assignRegions(o.geometry,spec,regionMap);
-      // Keep the medium mesh; a separate28-cell mobile mesh offsets the larger
-      // squad. Both retain source colour/skin boundaries and the same height.
-      // Full v2 remains available for close/high-quality comparison.
-      lodGeometry.set(o.geometry,[own(createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/40)),own(createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/28))]);
-    }));
-    for(const source of sources)source.traverse(o=>{if(o.isMesh){own(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material])own(m);}});
     let triangles=0,lowTriangles=0,mobileTriangles=0;
     for(let id=0;id<roster.length;id++) {
       const slot=roster[id],isKeeper=slot.role==='keeper',index=isKeeper?1:0,source=sources[index],root=cloneSoccerRig(source),pivot=new T.Group();
@@ -266,7 +314,7 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
       };
       mixer.update(0);characters.push(character);
     }
-    loader.dispose();
-    return {characters,metrics:{kind:'design-glb-v2',source:'design/characters2',triangles:triangles/roster.length,eightCharacterTriangles:triangles,economyCharacterTriangles:lowTriangles/roster.length,mobileCharacterTriangles:mobileTriangles/roster.length,meshes:1,lod:0,lodCount:3,independentSkeletons:true,clips:compiled.map(c=>c.name),retarget:'calibrated-world-basis',floor:'baked-at-load',referenceRootMotion:false,heightMetres:height},dispose};
+    globalThis.performance?.mark?.('soccer:characters-instance-end');
+    return {characters,metrics:{kind:'design-glb-v2',source:'design/characters2',triangles:triangles/roster.length,eightCharacterTriangles:triangles,economyCharacterTriangles:lowTriangles/roster.length,mobileCharacterTriangles:mobileTriangles/roster.length,meshes:1,lod:0,lodCount:3,independentSkeletons:true,clips:[...clips],retarget:'calibrated-world-basis',floor:'baked-at-load',referenceRootMotion:false,heightMetres:height},dispose};
   }catch(error){dispose();throw error;}
 }

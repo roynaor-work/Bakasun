@@ -153,7 +153,10 @@ export function startSoccer(ctx) {
       const dt=last?Math.min((at-last)/1000,balance.rules.maxUpdateSeconds):0,frameMs=last?at-last:0;last=at;
       const loading=!contractsReady||view.loading();loader.hidden=!loading; // Never forge asset readiness when contracts or GLB loading fail.
       input?.setEnabled(!paused&&!document.hidden&&!loading);syncControls(model.getState());
-      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.play('whistle');}if(dt>0)model.update(dt,input.sample(model.getState().attackDir));view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else view.render(model.renderState?.()??model.getState(),0);
+      // While the loading panel is up nothing is drawn: rendering the dimmed fallback
+      // stadium every frame compiled its shaders for nothing and starved the main
+      // thread that decodes the real assets (measured 01/11/2026: 6.7 s to 3.4 s).
+      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.play('whistle');}if(dt>0)model.update(dt,input.sample(model.getState().attackDir));view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
       banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
       const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅'}[s.restart.type]:s.phase==='halftime'?'↔':s.phase==='goal'&&view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':'';
