@@ -2,12 +2,12 @@
  * CSS as the game) with a scripted bot for a fixed number of seconds and reports
  * frame times, simulation/render split, heap growth and quality tier changes.
  * Opens on a phone (tap the button) and in Playwright (?auto=1). Soccer only. */
-import {startSoccer} from '../minigames/soccer-session.mjs?v=island-v2-20261102-1';
-import {gameContext} from '../minigames/context.mjs?v=island-v2-20261102-1';
-import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261102-1';
-import {initialSoccerCard} from '../activity/soccer-card.mjs?v=island-v2-20261102-1';
-import {initialSoccerRoster} from '../activity/soccer-roster.mjs?v=island-v2-20261102-1';
-import {createTranslator} from '../ui/translate.mjs?v=island-v2-20261102-1';
+import {startSoccer} from '../minigames/soccer-session.mjs?v=island-v2-20261102-2';
+import {gameContext} from '../minigames/context.mjs?v=island-v2-20261102-2';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261102-2';
+import {initialSoccerCard} from '../activity/soccer-card.mjs?v=island-v2-20261102-2';
+import {initialSoccerRoster} from '../activity/soccer-roster.mjs?v=island-v2-20261102-2';
+import {createTranslator} from '../ui/translate.mjs?v=island-v2-20261102-2';
 
 const query=new URLSearchParams(location.search);
 if(query.get('dev')!=='1'){query.set('dev','1');location.replace(`${location.pathname}?${query}`);} // the session exposes its model and view only in dev mode
