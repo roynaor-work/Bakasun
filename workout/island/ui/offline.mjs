@@ -48,7 +48,7 @@ export async function downloadSet({urls,cache,fetcher=globalThis.fetch,onProgres
       try{
         const response=await fetcher(href,{cache:'no-cache',signal:control.signal});
         if(!response.ok)throw Error('HTTP '+response.status);
-        if(/text\/html/i.test(response.headers.get('content-type')||'')&&!/\.html?$/.test(href))throw Error('not an asset (html)');
+        if(/text\/html/i.test(response.headers.get('content-type')||'')&&!/\.html?$/.test(href)&&!/\/(\?.*)?$/.test(href))throw Error('not an asset (html)');
         const body=await response.blob();
         await cache.put(href,new Response(body,{status:200,headers:response.headers}));
         bytes+=body.size;fresh++;return;
