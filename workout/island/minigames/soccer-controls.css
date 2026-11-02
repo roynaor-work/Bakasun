@@ -48,3 +48,9 @@
  .game-screen[data-game=soccer] .soccer-actions{right:max(20px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom))}
  .game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions{left:max(20px,env(safe-area-inset-left))}
 }
+
+/* Stamina bar under the sprint button: drains while held, refills after a pause (v4). */
+.game-screen[data-game=soccer] .soccer-stamina-bar{position:absolute;left:4px;right:4px;bottom:-11px;height:6px;border-radius:3px;background:#0f1a1dcc;border:1px solid #bfd9c580;overflow:hidden;pointer-events:none;direction:ltr}
+.game-screen[data-game=soccer] .soccer-stamina-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#8fd3a6,#d7f2c8);transition:width 80ms linear}
+.game-screen[data-game=soccer] #sprint[data-sprinting=true] .soccer-stamina-bar i{background:linear-gradient(90deg,#ffd16a,#fff1b8)}
+.game-screen[data-game=soccer] #sprint[data-exhausted=true] .soccer-stamina-bar i{background:#d9a16e}

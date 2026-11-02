@@ -86,7 +86,7 @@ test('G3c sprint increases only controlled speed by the configured multiplier',(
 test('G3c exhaustion stops sprint until minToStart; regeneration waits for delay',()=>{
  const g=setup(),s=g.getState();Object.assign(s.ball,{owner:null,y:1000});advance(g,c.sprint.capacity/c.sprint.drainPerSecond+.15,{moveZ:1,sprintHeld:true});assert.equal(s.sprint.locked,true);assert.equal(s.sprint.active,false);
  const empty=s.sprint.value;advance(g,.3,{});near(s.sprint.value,empty);advance(g,.8,{});assert.ok(s.sprint.value>empty&&s.sprint.value<c.sprint.minToStart);g.update(dt,{moveX:1,sprintHeld:true});assert.equal(s.sprint.active,false);
- advance(g,1.4,{});assert.ok(s.sprint.value>=c.sprint.minToStart);g.update(dt,{moveX:1,sprintHeld:true});assert.equal(s.sprint.active,true);
+ advance(g,c.sprint.minToStart/c.sprint.regenPerSecond,{});assert.ok(s.sprint.value>=c.sprint.minToStart);g.update(dt,{moveX:1,sprintHeld:true});assert.equal(s.sprint.active,true);
 });
 test('G3c defense is opposing possession; loose ball and home possession are attack',()=>{
  const g=setup(),s=g.getState();for(const owner of [3,null,1]){const p=owner===null?null:s.players[owner];Object.assign(s.ball,{owner,x:p?p.x+p.fx*c.physics.dribbleOffset:0,z:p?p.z+p.fz*c.physics.dribbleOffset:0,y:p?c.physics.ballRadius:2,grace:2,lastTeam:p?.team??0,lastPlayer:p?.id??0});g.update(dt,{});assert.equal(s.mode,owner===3?'defense':'attack');if(p)assert.equal(s.ball.owner,p.id,'the fixture starts with real local possession');}
