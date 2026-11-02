@@ -40,7 +40,17 @@ function opacityAt(data,time){
  const u=smooth((time-a.time)/(b.time-a.time));return a.opacity+(b.opacity-a.opacity)*u;
 }
 
+/** An atlas that failed to download is replaced by an inert, invisible stand-in: the game
+ * plays without that effect instead of failing to open. */
+function blankAtlas(scene,id,reason){
+ const texture=new THREE.Texture(),material=new THREE.SpriteMaterial({map:texture,transparent:true,visible:false}),sprite=new THREE.Sprite(material);
+ sprite.name='hoops-vfx-missing-'+id;sprite.visible=false;scene.add(sprite);
+ return {data:{durationSeconds:.01,loop:false,fps:1,frameCount:1,lowEnd:{maxScreenFractionPerInstance:0}},texture,material,sprite,age:0,fade:0,frame:-1,active:false,missing:true,reason};
+}
 async function atlas(scene,base,id){
+ try{return await loadAtlas(scene,base,id);}catch(error){return blankAtlas(scene,id,String(error?.message||error));}
+}
+async function loadAtlas(scene,base,id){
  const url=new URL('design/vfx/atlases/'+id+'.json',base),response=await fetch(url);
  if(!response.ok)throw Error('Basketball VFX metadata: '+response.status);
  const data=await response.json(),texture=await new THREE.TextureLoader().loadAsync(new URL(data.image,url).href);
@@ -75,11 +85,11 @@ export async function createHoopsVfx(scene,assetBase,{quality=2,court,reducedMot
   if(disposed)return;
   for(const e of events){
    if(e.type==='shotStart'&&e.shotType==='dunk'){
-    firePlayer=e.playerId;fireOn=true;fire.age=0;fire.active=true;
+    if(!fire.missing){firePlayer=e.playerId;fireOn=true;fire.age=0;fire.active=true;}
    }
    if(e.type==='score'||e.type==='miss'||e.type==='final'||e.type==='outOfBounds'||e.type==='inbound'||e.type==='foul')fireOn=false;
    if(e.type==='final'&&e.won===true){
-    confettiPending=true;confetti.age=0;confetti.active=true;
+    if(confetti.missing)continue;confettiPending=true;confetti.age=0;confetti.active=true;
     const p=winner(snapshot);
     if(p){confettiX=p.x;confettiY=p.y+1.8;confettiZ=p.z;confettiPending=false;}
    }
@@ -140,7 +150,7 @@ export async function createHoopsVfx(scene,assetBase,{quality=2,court,reducedMot
   for(const item of visible.slice(3))item.sprite.visible=false;
   for(const item of items){if(item.sprite.visible){if(!item.resident)item.texture.needsUpdate=true;item.resident=true;}else if(item.resident){item.texture.dispose();item.resident=false;}}
  }
- function trigger(cue,event,snapshot){const item=extras.get(cue.asset);if(!item||disposed||reduced)return false;item.active=true;item.age=0;item.frame=-1;item.opacity=cue.opacity??1;item.fraction=cue.screen_fraction??Infinity;item.burstMs=cue.burst_ms;
+ function trigger(cue,event,snapshot){const item=extras.get(cue.asset);if(!item||item.missing||disposed||reduced)return false;item.active=true;item.age=0;item.frame=-1;item.opacity=cue.opacity??1;item.fraction=cue.screen_fraction??Infinity;item.burstMs=cue.burst_ms;
   if(item===spark){const side=snapshot?.dir?.[event?.team??0]??1;item.sprite.position.set(side*court.rimX,court.rimY,0);}
   else if(item===dust){const p=snapshot?.players?.find(p=>p.id===event?.playerId);item.sprite.position.set(p?.x??0,.06,p?.z??0);}return true;}
  function dispose(){
@@ -151,5 +161,5 @@ export async function createHoopsVfx(scene,assetBase,{quality=2,court,reducedMot
   sampleDunkCamera(seconds,side,out=pathOutput){return sampleDunkCamera(cameraTrack,seconds,side,court.rimX,out);},
   get reducedMotion(){return reduced;},
   get celebrationSeconds(){return confetti.data.durationSeconds;},
-  metrics(){return {sprites:items.filter(i=>i.sprite.visible).length,residentAtlases:items.filter(i=>i.resident).length,loadedAtlases:items.length,reducedMotion:reduced};}};
+  metrics(){return {missingAtlases:items.filter(i=>i.missing).map(i=>i.sprite.name),sprites:items.filter(i=>i.sprite.visible).length,residentAtlases:items.filter(i=>i.resident).length,loadedAtlases:items.length,reducedMotion:reduced};}};
 }
