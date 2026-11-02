@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import * as T from '../workout/island/vendor/three.module.js';
-import {composeSoccerRestartMotion,installSoccerRestartMotion,SOCCER_RESTART_SEQUENCES,sampleSoccerRestartBall,soccerRestartBallAttachment,alignSoccerRestartStrike} from '../workout/island/minigames/soccer-restart-motion.mjs';
+import {composeSoccerRestartMotion,installSoccerRestartMotion,SOCCER_RESTART_SEQUENCES,SOCCER_SLIDE_SEQUENCES,sampleSoccerRestartBall,soccerRestartBallAttachment,alignSoccerRestartStrike} from '../workout/island/minigames/soccer-restart-motion.mjs';
 import {restartActionProfile,sampleRestartAction,restartBallPose} from '../workout/island/minigames/soccer-restarts.mjs';
 import {compileSoccerDesignClips,createSoccerDesignMotion} from '../workout/island/minigames/soccer-design-character.mjs';
 import {loadSoccerRestartMotion} from '../workout/island/minigames/soccer-athlete-motion.mjs';
@@ -17,7 +17,7 @@ const originalStates=Object.assign({},base.states,...packs.map(p=>p.states));
 test('motion2 composition keeps all baseline and extension states without mutation or collisions',()=>{
   for(const [id,state]of Object.entries(originalStates))assert.equal(library.states[id],state);
   assert.equal(library.initialState,base.initialState);
-  assert.equal(Object.keys(library.states).length,Object.keys(originalStates).length+5);
+  assert.equal(Object.keys(library.states).length,Object.keys(originalStates).length+5+Object.keys(SOCCER_SLIDE_SEQUENCES).length);
   assert.equal(library.transitions.length,base.transitions.length+packs.reduce((n,p)=>n+p.transitions.length,0));
   assert.throws(()=>composeSoccerRestartMotion(base,{...packs[0],states:{idle:packs[0].states.throw_in_prepare}}),/Duplicate/);
   assert.throws(()=>composeSoccerRestartMotion(base,{...packs[0],skeleton:{bones:[]}}),/skeleton mismatch/);

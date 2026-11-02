@@ -20,6 +20,14 @@ export const SOCCER_RESTART_SEQUENCES=Object.freeze({
   keeperThrow:Object.freeze({clips:['goalkeeper_throw'],event:'presentation_keeper_throw_release',duration:1.18,contact:.6608}),
   keeperPunt:Object.freeze({clips:['goalkeeper_punt'],event:'visual_punt_strike',duration:1.36,contact:.8024,drop:.408}),
 });
+/** Slide tackles as one continuous presentation timeline per authored variant:
+ * the slide itself, the side fall and the getting up (or, after a miss, the
+ * authored loss of balance). The simulation keeps its own slide/recover clocks;
+ * the view maps them onto this timeline, so there is no cut between the poses. */
+export const SOCCER_SLIDE_SEQUENCES=Object.freeze(Object.fromEntries(['straight','lateral','fast'].flatMap(kind=>[
+  [`slide-${kind}`,Object.freeze({clips:[`slide_${kind}`,`slide_${kind}_fall`,`slide_${kind}_recover`],slide:`slide_${kind}`})],
+  [`slide-${kind}-miss`,Object.freeze({clips:[`slide_${kind}`,'slide_miss'],slide:`slide_${kind}`})],
+])));
 const dot=(a,b)=>a.reduce((sum,v,i)=>sum+v*b[i],0);
 function slerp(a,b,u){
   let cosine=dot(a,b),end=b;if(cosine<0){cosine=-cosine;end=b.map(v=>-v);}
@@ -62,7 +70,24 @@ export function composeSoccerRestartMotion(base,...packs){
     if(Math.abs(offset-sequence.duration)>1e-8||releases.length!==1||Math.abs(releases[0].atSeconds-sequence.contact)>1e-8)throw Error(`Soccer restart timing drift: ${kind}`);
     states[kind]={durationSeconds:sequence.duration,loop:false,rootMotion:false,keyframes,events,ballContacts,supportContacts,restartKind:kind,releaseEvent:sequence.event};
   }
-  return {...base,states,transitions,restartSequences:SOCCER_RESTART_SEQUENCES};
+  for(const [kind,sequence]of Object.entries(SOCCER_SLIDE_SEQUENCES)){
+    const duration=sequence.clips.reduce((sum,id)=>{const state=states[id];if(!state)throw Error(`Missing authored soccer clip: ${id}`);return sum+state.durationSeconds;},0);
+    let offset=0,previous=null;const keyframes=[],events=[],parts=[];
+    for(const id of sequence.clips){
+      const state=states[id];parts.push({clip:id,start:offset,durationSeconds:state.durationSeconds});
+      for(const frame of state.keyframes){
+        const seconds=frame.time*state.durationSeconds,blend=previous?Math.min(.1,state.durationSeconds*.25):0;
+        const u=blend?clamp(seconds/blend,0,1):1,w=u*u*(3-2*u);
+        const f=previous&&u<1?blendFrame(previous,frame,w):frame;
+        const entry={...f,time:(offset+seconds)/duration};
+        if(keyframes.length&&Math.abs(keyframes.at(-1).time-entry.time)<1e-9)keyframes[keyframes.length-1]=entry;else keyframes.push(entry);
+      }
+      for(const event of state.events||[]){const at=offset+(event.atSeconds??event.time*state.durationSeconds);events.push({...event,time:at/duration,atSeconds:at,sourceClip:id});}
+      previous=state.keyframes.at(-1);offset+=state.durationSeconds;
+    }
+    states[kind]={durationSeconds:duration,loop:false,rootMotion:false,keyframes,events,ballContacts:[],supportContacts:[],slideKind:kind,parts,slideSeconds:states[sequence.slide].durationSeconds};
+  }
+  return {...base,states,transitions,restartSequences:SOCCER_RESTART_SEQUENCES,slideSequences:SOCCER_SLIDE_SEQUENCES};
 }
 
 const multiply=(a,b)=>[a[3]*b[0]+a[0]*b[3]+a[1]*b[2]-a[2]*b[1],a[3]*b[1]-a[0]*b[2]+a[1]*b[3]+a[2]*b[0],a[3]*b[2]+a[0]*b[1]-a[1]*b[0]+a[2]*b[3],a[3]*b[3]-a[0]*b[0]-a[1]*b[1]-a[2]*b[2]];
