@@ -39,15 +39,15 @@ export function armSwingPose(phase,speed01,sprint01,carrying=0,k=ARM_SWING_DEFAU
 /** Rotate bones by model-space deltas: local' = parent^-1 * delta * parent * local.
  * `frame` is the model root (its world quaternion defines model space). Allocation free after warm-up. */
 export function createArmSwingApplier(T,root,boneByName){
-  const qFrame=new T.Quaternion(),qParent=new T.Quaternion(),qWork=new T.Quaternion(),qDelta=new T.Quaternion(),euler=new T.Euler(0,0,0,'YXZ');
-  const bones=ARM_SWING_ORDER.map(name=>boneByName[name]).filter(Boolean);
+  const qParent=new T.Quaternion(),qWork=new T.Quaternion(),qDelta=new T.Quaternion(),euler=new T.Euler(0,0,0,'YXZ');
+  // Ancestor chains up to (excluding) the model root, parent-first, so the model-space
+  // orientation of each parent is a short quaternion product: no matrix updates per bone.
+  const bones=ARM_SWING_ORDER.map(name=>boneByName[name]).filter(b=>b&&b.parent).map(bone=>{const chain=[];for(let o=bone.parent;o&&o!==root;o=o.parent)chain.unshift(o);return {bone,chain};});
   return function apply(deltas,weight){
     if(weight<1e-3||!bones.length)return false;
-    root.updateWorldMatrix(true,false);root.getWorldQuaternion(qFrame);
-    for(const bone of bones){
-      const d=deltas[bone.name];if(!d||!bone.parent)continue;
-      bone.parent.updateWorldMatrix(true,false);bone.parent.getWorldQuaternion(qParent);
-      qParent.premultiply(qWork.copy(qFrame).invert());
+    for(const {bone,chain}of bones){
+      const d=deltas[bone.name];if(!d)continue;
+      qParent.identity();for(const o of chain)qParent.multiply(o.quaternion);
       euler.set(d[0]*weight,d[1]*weight,d[2]*weight,'YXZ');qDelta.setFromEuler(euler);
       qWork.copy(qParent).invert().multiply(qDelta).multiply(qParent);
       bone.quaternion.premultiply(qWork);
