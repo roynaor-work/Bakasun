@@ -91,7 +91,19 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   if (trk.groomed) {
     trk.groomed.repeat.set(5 / 4, 6 / 4); if (trk.groomedN) trk.groomedN.repeat.set(5 / 4, 6 / 4);
     pipeMat = new THREE.MeshStandardMaterial({map: trk.groomed, normalMap: trk.groomedN || null, roughness: .94, envMapIntensity: .16});
-    if (trk.groomedN) pipeMat.normalScale.set(.18, .18); trackMats.push(pipeMat);
+    if (trk.groomedN) pipeMat.normalScale.set(.08, .08); trackMats.push(pipeMat);
+    // The groomed tile is made of parallel grooves, so at speed a single tile reads as stripes running past. Sampling it
+    // at three unrelated scales and averaging breaks the periodicity and softens the grooves while keeping the grain.
+    pipeMat.onBeforeCompile = shader => {
+      shader.fragmentShader = shader.fragmentShader.replace('#include <map_fragment>', `
+        #ifdef USE_MAP
+          vec3 snowA = texture2D(map, vMapUv).rgb;
+          vec3 snowB = texture2D(map, vMapUv * 0.31 + vec2(0.17, 0.43)).rgb;
+          vec3 snowC = texture2D(map, vMapUv * 0.083 + vec2(0.61, 0.29)).rgb;
+          diffuseColor.rgb *= mix(snowA, (snowA + snowB + snowC) / 3.0, 0.72);
+        #endif`);
+    };
+    pipeMat.customProgramCacheKey = () => 'alpine-snow-break';
   }
   const bankMap = trk.ripples || designWorld.snowTexture; if (trk.ripples) trk.ripples.repeat.set(1, 8 / 6);
   const terrainMat = new THREE.MeshStandardMaterial({color: '#f2f6f7', map: bankMap, roughness: .96, envMapIntensity: .16}); trackMats.push(terrainMat);
