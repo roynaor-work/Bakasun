@@ -150,6 +150,28 @@ export function receiverBonus(q,open,threePoint){
  return clamp(bonus,0,0.2);
 }
 
+/** How much the man with the ball is bothered: 0 free, 1 a defender on him, 2 two defenders
+ * within reach (a trap). Read only from positions. */
+function passPressure(api,p,t){
+ let close=0,near=0;for(const o of api.onCourt(1-t)){const d=api.dist(o,p);if(d<1.1)close++;if(d<1.9)near++;}
+ return close>=1&&near>=2?2:close>=1?1:0;
+}
+/** Why the handler may pass (pure; null = keep the ball). `progress` is how much closer to the
+ * rim the receiver stands than the passer (metres). Sideways or backward passes (progress < 1,
+ * receiver not cutting or rolling) go only under pressure, with the clock dying, when the
+ * receiver's look is clearly better than mine and open, or after a long fruitless probe; and
+ * a pass never bounces straight back to the man who just delivered the ball unless I am pressured. */
+export function passReason({progress=0,role=null,receiverOpen=0,receiverShot=0,myShot=0,worth=1,pressure=0,hold=0,clock=24,backToPasser=false}){
+ const advancing=progress>=1||role==='cut'||role==='roll'||role==='giveGo';
+ if(backToPasser&&pressure<1&&clock>=5)return null;
+ if(advancing)return 'advance';
+ if(clock<5&&receiverOpen>1.4)return 'clock';
+ if(pressure>=2||pressure>=1&&hold>=0.6)return 'pressure';
+ if(receiverOpen>2.2&&receiverShot>myShot+0.25&&receiverShot>worth&&hold>=0.5)return 'look';
+ if(hold>=3.2&&receiverOpen>1.2)return 'stuck';
+ return null;
+}
+
 function openness(api,t,pt){let m=9;for(const o of api.onCourt(1-t))m=Math.min(m,hyp(o.x-pt.x,o.z-pt.z));return m;}
 
 function laneClear(api,t,from,to,r){
@@ -228,14 +250,23 @@ function handlerMove(api,p,t){
  if(d<2.4&&open>0.8)best={kind:'shoot',v:1.5};
  // drive when the lane is clear
  if(d>2.2&&laneClear(api,t,p,rim,1.1)&&api.eff(p,'handle')>0.55){const v=(0.9+api.eff(p,'inside')*0.6)*pref.drive;if(v>best.v)best={kind:'drive',v};}
- // passes: the receiver's own look, plus who he is (an open shooter, a big rolling to the rim)
+ // passes: the receiver's own look, plus who he is (an open shooter, a big rolling to the rim).
+ // v4: a pass needs a reason (passReason): a man advancing to the rim down an open line, a look
+ // clearly better than mine, pressure on me, a dying clock, or a stuck probe. Sideways and
+ // backward passes without one of those are not thrown, and never straight back to the man who
+ // just gave me the ball.
+ const hold=S.ball.dribbleT||0,pressure=passPressure(api,p,t);
  for(const q of api.onCourt(t)){
   if(q===p)continue;
   if(S.frontcourtSet&&!api.court.frontcourt(s,q.x))continue;
   if(!laneClear(api,t,p,q,0.7))continue;
   const qOpen=openness(api,t,q),three=api.court.points(s,q.x,q.z)===3;
-  const v=(shotValue(api,q,t,rolePreference(q))*0.92+(q.role==='cut'||q.role==='roll'?0.35:0)+receiverBonus(q,qOpen,three))*pref.pass;
-  if(v>best.v+0.08)best={kind:'pass',v,q};
+  const qShot=shotValue(api,q,t,rolePreference(q));
+  const v=(qShot*0.92+(q.role==='cut'||q.role==='roll'?0.35:0)+receiverBonus(q,qOpen,three))*pref.pass;
+  const reason=passReason({progress:d-api.court.distToRim(s,q.x,q.z),role:q.role,receiverOpen:qOpen,receiverShot:qShot,myShot,worth,pressure,hold,clock,backToPasser:!!(S.lastPasser&&S.lastPasser.id===q.id&&S.tick-S.lastPasser.tick<150)});
+  if(!reason)continue;
+  const margin=reason==='advance'||reason==='pressure'||reason==='clock'?0.08:0.2;
+  if(v>best.v+margin||reason==='pressure'&&v>best.v-0.1||reason==='stuck'&&v>best.v-0.05)best={kind:'pass',v,q,reason};
  }
  // play call: pick and roll if the defender is close
  if(best.kind==='hold'&&(T.tactics.offense==='pnr'||T.call==='pnr')&&!T.ai.plan){T.ai.plan='pnr';T.ai.planT=0;}
