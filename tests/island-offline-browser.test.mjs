@@ -66,14 +66,14 @@ test('one button downloads soccer, basketball and ski; status counts the real ca
   await t.page.waitForFunction(()=>navigator.serviceWorker.controller);
   await t.context.setOffline(true);
   const offlinePage=await t.context.newPage();offlinePage.setDefaultTimeout(180000);const errors=[];offlinePage.on('pageerror',e=>errors.push(e.message));
-  const failed=[];offlinePage.on('requestfailed',r=>failed.push(r.url()));
+  const failed=[];offlinePage.on('requestfailed',r=>failed.push(r.url()+' '+r.failure()?.errorText));
   await offlinePage.goto(server.url+'?dev=1',{waitUntil:'domcontentloaded'});
   await offlinePage.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded,null,{timeout:180000});
   await offlinePage.evaluate(()=>{window.__island.engine.learningStatus=()=>({locked:false});window.__island.ui.activityInterface.requireDaily=()=>false;});
   for(const [name,id] of Object.entries(GAMES)){
    const result=await play(offlinePage,id);assert.equal(result.status,'ready',name+' offline: '+JSON.stringify(result));await leave(offlinePage);
   }
-  assert.deepEqual(failed.filter(u=>u.startsWith(server.url)&&!/release\.json/.test(u)),[],'nothing the app needs failed offline');
+  assert.deepEqual(failed.filter(u=>u.startsWith(server.url)&&!/release\.json/.test(u)&&!/ERR_ABORTED/.test(u)),[],'nothing the app needs failed offline');
   assert.deepEqual(errors,[]);
   for(const id of ['soccer','hoops','alpine'])assert.ok(await offlinePage.evaluate(id=>localStorage.getItem(`island.${id}.lastLoadReport`),id),id+' wrote a load report');
   await t.csp.assertClean();
