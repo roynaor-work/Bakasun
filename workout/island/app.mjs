@@ -55,7 +55,7 @@ try {
   // Every open: look for a newer release at once, keep the asset worker registered and
   // fill the device cache in the background (skipped on a data saver, paused during a game).
   releaseWatch.poll();registerOfflineWorker();
-  const stopAutoDownload=startAutoDownload({canRun:()=>!engine.isMinigameActive()&&!ui.modalRoot.children.length,onState:state=>{window.__offlineState=state;}});
+  const stopAutoDownload=startAutoDownload({canRun:()=>!engine.isMinigameActive(),onState:state=>{window.__offlineState=state;}});
   let openedGames=false;
   const requestedGames=new URLSearchParams(location.search).get('games')==='1';
   const openRequestedGames=()=>{

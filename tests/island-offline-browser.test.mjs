@@ -58,8 +58,9 @@ test('one button downloads soccer, basketball and ski; status counts the real ca
   assert.equal(state.marker,'keep');assert.deepEqual(state.after,savedBefore,'no save key was removed');
   assert.deepEqual(state.status.failed,[]);
   // Online, the three games asked only for listed files.
+  const beforeGames=t.requests.length;
   for(const id of Object.values(GAMES)){await play(t.page,id);await leave(t.page);}
-  const unlisted=[...new Set(t.requests.map(u=>new URL(u)).filter(u=>u.origin===new URL(server.url).origin&&isManagedPath(u.pathname)&&!listed.has(u.pathname)).map(u=>u.pathname))];
+  const unlisted=[...new Set(t.requests.slice(beforeGames).map(u=>new URL(u)).filter(u=>u.origin===new URL(server.url).origin&&isManagedPath(u.pathname)&&!listed.has(u.pathname)).map(u=>u.pathname))];
   assert.deepEqual(unlisted,[],'a game requested files that are not in offline-manifest.json');
   // Offline start: reload with no network at all.
   await t.page.waitForFunction(()=>navigator.serviceWorker.controller);
