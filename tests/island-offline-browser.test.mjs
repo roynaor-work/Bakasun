@@ -34,7 +34,7 @@ async function play(page,id){
  if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
  await page.waitForFunction(()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');},null,{timeout:200000});
  await page.waitForTimeout(3000);
- return page.evaluate(()=>{const s=window.__island.games.current.session.snapshot;return {status:s.renderMetrics?.assetStatus||(s.loaded?'ready':'?'),error:s.error||null};});
+ return page.evaluate(()=>{const s=window.__island.games.current.session.snapshot;return {status:s.renderMetrics?.assetStatus||(s.loaded||s.renderMetrics?.calls>0?'ready':'?'),error:s.error||null};});
 }
 const leave=page=>page.evaluate(()=>{window.__island.games.cleanup?.();window.__island.ui.closeModal?.();});
 
