@@ -366,3 +366,14 @@ button[data-pressed=true]{scale:.95;filter:brightness(.82)}
 .game-screen.boar-game-screen .boar-game-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#102731}
 .game-screen.boar-game-screen .game-status,.game-screen.boar-game-screen .game-controls{display:none}
 .game-screen.boar-game-screen .game-stage>.game-warning{position:absolute;z-index:2;top:12px;inset-inline:12px;background:#102731;color:#fff;padding:12px;border-radius:8px}
+
+/* Island download panel (ui/offline-panel.mjs) and last load reports (ui/load-report.mjs) */
+.offline-panel{margin-top:16px;padding:14px;border-radius:16px;background:rgba(255,255,255,.7);display:grid;gap:10px}
+.offline-panel h3{margin:0;font-size:1.05rem}
+.offline-status{margin:0;font-weight:600}
+.offline-progress{width:100%;height:12px}
+.offline-games{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 16px}
+.offline-games li[data-complete="true"]::before{content:"✔ "}
+.offline-panel button{min-height:48px}
+.load-report summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
+.load-report pre{white-space:pre-wrap;word-break:break-all;font-size:.8rem;text-align:left}

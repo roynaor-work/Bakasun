@@ -9,6 +9,7 @@ import {loadHoopsTactics} from './hoops-tactics.mjs';
 import {createHoopsRoleLabels} from './hoops-role-labels.mjs';
 import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261102-1';
 import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261102-1';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261102-1';
 import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261102-1';
 import {createCourt} from './hoops-court.mjs?v=island-v2-20261102-1';
 import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261102-1';
@@ -79,8 +80,9 @@ export function startHoops(ctx){
  screenEl.addEventListener('pointerdown',()=>audio.unlock(),{...on,capture:true});doc.defaultView.addEventListener('keydown',()=>audio.unlock(),on);
  const statusEl=ctx.status;
 
+ let loadStart=0,loadTimer=null;
  function fail(reason){
-  if(disposed)return;error=reason;loading.hidden=false;loading.replaceChildren();loading.classList.add('failed');loading.setAttribute('role','alert');
+  if(disposed)return;clearTimeout(loadTimer);saveGameReport('hoops',{status:'failed',ms:loadStart?performance.now()-loadStart:undefined,lines:['failed: '+reason]});error=reason;loading.hidden=false;loading.replaceChildren();loading.classList.add('failed');loading.setAttribute('role','alert');
   // icons only on the game screen: the reason is read out by screen readers, not printed
   loading.setAttribute('aria-label',t('hoops.unavailable'));loading.append(hoopsIcon('warning',doc));
   const retry=node('button','hoops-retry');retry.type='button';retry.dataset.action='hoops-retry';retry.setAttribute('aria-label',t('hoops.retry'));retry.append(hoopsIcon('retry',doc));
@@ -90,6 +92,10 @@ export function startHoops(ctx){
  }
  const dev=params.get('dev')==='1';
  function load(){
+  loadStart=performance.now();clearTimeout(loadTimer);
+  // A stalled connection ends in the retry/back screen after 45 s instead of waiting forever;
+  // files already downloaded stay in the device cache, so retry continues where it stopped.
+  loadTimer=setTimeout(()=>{if(!view&&!disposed&&!error)fail('timeout 45 s');},45000);
   const forceFail=dev&&params.get('hoopsFail')==='1';
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
@@ -98,7 +104,7 @@ export function startHoops(ctx){
   Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
    if(!loaded)return;
    if(disposed){loaded.dispose();return;}
-   view=loaded;if(selectedKit)view.setKit(selectedKit.team,selectedKit.kit);const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();
+   clearTimeout(loadTimer);saveGameReport('hoops',{status:'ready',ms:performance.now()-loadStart,lines:['characters v'+(Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1))]});view=loaded;if(selectedKit)view.setKit(selectedKit.team,selectedKit.kit);const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();
    if(frame===undefined)frame=requestAnimationFrame(tick);
   }).catch(e=>fail(String(e?.message||e)));
  }

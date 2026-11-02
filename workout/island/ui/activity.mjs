@@ -11,6 +11,7 @@ import {gameContext} from '../minigames/context.mjs?v=island-v2-20261102-1';
 import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261102-1';
 import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-v2-20261102-1';
 import {playerCard,rosterCard} from './soccer-card.mjs?v=island-v2-20261102-1';
+import {offlinePanel} from './offline-panel.mjs?v=island-v2-20261102-1';
 import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261102-1';
 import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261102-1';
 import {soccerTeam} from '../activity/soccer-team.mjs?v=island-v2-20261102-1';
@@ -108,7 +109,7 @@ export class ActivityInterface {
       card.append(gameEmblem(game.id),el('p','adventure-game-category',gameArtwork(game.id).category),el('h3','',this.t(game.title)));
       const enter=button('כניסה','game-enter',()=>this.gameHome(game.id),'adventure-enter');enter.dataset.gameId=game.id;enter.setAttribute('aria-label','כניסה · '+this.t(game.title));card.append(enter);cards.append(card);
     }
-    dialog.append(cards);
+    dialog.append(cards,offlinePanel());
   }
   gameHome(id){
     if(this.data?.config?.minigames?.[id]?.embeddedCampaign)return this.launch(id,undefined,1);

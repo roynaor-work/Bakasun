@@ -13,6 +13,7 @@ import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261102-1';
 import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261102-1';
 import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261102-1';
 import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261102-1';
+import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261102-1';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -45,12 +46,16 @@ try {
   const stopShell=installGameShell({games,ui,t,countdownStepMs:data.config.ui.economyTickMs,orientationOf:id=>data.config.gameShell.games[id]?.orientation||'landscape'});
   const pressSamples=[];
   const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});
-  const releaseWatch=watchRelease({version:DATA_VERSION,
+  const releaseWatch=watchRelease({version:DATA_VERSION,onPending:version=>{prefetchRelease(version).catch(()=>{});},
     check:async()=>{const response=await fetch(new URL('./release.json?check='+Date.now(),import.meta.url),{cache:'no-store'});if(!response.ok)return null;return (await response.json()).version;},
     canRefresh:()=>!document.hidden&&!engine.isMinigameActive()&&!ui.modalRoot.children.length&&!ui.selected&&!navigationActive(view)&&ui.cityAccess?.mapPanel?.hidden!==false,
     save:()=>engine.save(),refresh:version=>{const url=new URL(location.href);url.searchParams.set('release',version);location.replace(url.href);},
     listen:check=>{const resume=()=>{if(!document.hidden)check();};document.addEventListener('visibilitychange',resume);return ()=>document.removeEventListener('visibilitychange',resume);}
   });
+  // Every open: look for a newer release at once, keep the asset worker registered and
+  // fill the device cache in the background (skipped on a data saver, paused during a game).
+  releaseWatch.poll();registerOfflineWorker();
+  const stopAutoDownload=startAutoDownload({canRun:()=>!engine.isMinigameActive()&&!ui.modalRoot.children.length,onState:state=>{window.__offlineState=state;}});
   let openedGames=false;
   const requestedGames=new URLSearchParams(location.search).get('games')==='1';
   const openRequestedGames=()=>{
@@ -70,7 +75,7 @@ try {
   const persist = () => engine.save();
   document.addEventListener('visibilitychange', persist);
   window.addEventListener('pagehide', persist);
-  window.addEventListener('beforeunload', () => { clearInterval(tick);releaseWatch.dispose();stopShell();stopPress();stopGameShortcut();cityAccess.dispose();ui.cityManagement.dispose();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
+  window.addEventListener('beforeunload', () => { clearInterval(tick);releaseWatch.dispose();stopAutoDownload();stopShell();stopPress();stopGameShortcut();cityAccess.dispose();ui.cityManagement.dispose();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
   if (new URLSearchParams(location.search).get('dev') === '1') {
     window.__island = { engine, view, ui, data, activity, games,learning,pressSamples };
   }
