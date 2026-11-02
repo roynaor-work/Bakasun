@@ -4,6 +4,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261101-1';
 import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261101-1';
+import {dribbleHeight} from './hoops-players-v1.mjs';
 import {replaceArenaAssets} from './hoops-models.mjs';
 import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
 import {loadHoopsFeel,createHoopsFeel,sampleHoopsReplayScale} from './hoops-feel.mjs';
@@ -180,7 +181,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    const defending=s.possession!==p.team&&s.ball.state==='held';
    const contest=handler&&handler.team!==p.team&&handler.act==='shoot'&&Math.hypot(handler.x-p.x,handler.z-p.z)<1.8?1:0;
    const catching=s.ball.state==='pass'&&s.ball.passTo===p.id;
-   av.pose(p,{defending,dribbling:s.phase==='live',airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal},Math.min(0.2,dt));
+   av.pose(p,{defending,dribbling:s.phase==='live',airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null},Math.min(0.2,dt));
   }
   for(const [id,av] of avatars)if(!seen.has(id))av.root.visible=false;
   // contact shadow blobs follow every visible player, shrinking and fading as he leaves the floor
@@ -199,13 +200,19 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    } else if(handler.act==='pass'){
     r.getWorldPosition(v);l.getWorldPosition(v2);v.add(v2).multiplyScalar(0.5);bx=v.x;by=v.y;bz=v.z;
    } else {
-    // dribble: the ball travels hand -> floor -> hand in rhythm with the dribbling hand
-    r.getWorldPosition(v);
-    if(handler.act==='cross'){l.getWorldPosition(v2);v.lerp(v2,Math.sin(clamp(handler.actT/.55,0,1)*Math.PI));}
-    const period=V.dribblePeriod/Math.max(0.6,Math.min(1.6,Math.hypot(handler.vx,handler.vz)/2.2+0.7));
-    const u=(Number.isFinite(av.motionPhase)&&/dribble|sprint_ball/.test(av.motionState)?av.motionPhase:((b.dribbleT/period)%1)),h=Math.max(court.ballR,v.y-0.05);
+    // dribble (v4): a real bounce from the hand to the floor and back (quick push down, slower
+    // rise), the hand pumping with it, a faster and lower dribble at speed, and a crossover
+    // that bounces the ball low across the body to the other hand and back
+    r.getWorldPosition(v);const speed=Math.hypot(handler.vx,handler.vz),fast=clamp((speed-0.6)/4.5,0,1);
+    const period=V.dribblePeriod/Math.max(0.6,Math.min(1.6,speed/2.2+0.7)),pump=av.dribblePump||0;
     const fx=Math.sin(handler.face),fz=Math.cos(handler.face);
-    bx=v.x+fx*0.18;bz=v.z+fz*0.18;by=court.ballR+(h-court.ballR)*Math.pow(Math.abs(1-2*u),0.85);
+    let u=(Number.isFinite(av.motionPhase)&&/dribble|sprint_ball/.test(av.motionState)?av.motionPhase:((b.dribbleT/period)%1)),top=Math.max(court.ballR+0.1,v.y+pump-0.05-0.14*fast);
+    if(handler.act==='cross'){
+     const c=clamp(handler.actT/.55,0,1),swing=c<.5?c/.5:1-(c-.5)/.5;l.getWorldPosition(v2);v.lerp(v2,swing*swing*(3-2*swing));
+     u=(c*2)%1;top=Math.max(court.ballR+0.1,v.y-0.05)*0.7;
+    }
+    const drop=top-court.ballR;av.dribbleCtx={u,drop:Math.min(0.28,drop*0.3)};
+    bx=v.x+fx*0.18;bz=v.z+fz*0.18;by=court.ballR+drop*dribbleHeight(u);
    }
   }
   // smooth the hand-off when the engine takes over (release, pass)

@@ -40,6 +40,12 @@ export function pickLocomotion(bands,speed,current){
  if(stay&&speed>=stay[1]&&speed<=stay[2])return stay;
  return bands.find(b=>speed>=b[1]&&speed<=b[2])||bands[bands.length-1];
 }
+/** Realistic dribble bounce: phase u in [0,1) from the hand (top) down to the floor at `down`
+ * and back up; the push down is quicker than the free rise. Returns 0 (floor) .. 1 (hand). */
+export function dribbleHeight(u,down=0.42){u=((u%1)+1)%1;return u<down?1-Math.pow(u/down,1.7):1-Math.pow((1-u)/(1-down),2);}
+/** How far the dribbling hand pumps down with the ball (0 = at rest, 1 = full pump): it rides
+ * the ball into the first part of the drop, waits low, and lifts to meet the ball at the top. */
+export function dribblePump(u){u=((u%1)+1)%1;return u<0.25?u/0.25:u<0.7?1:(1-u)/0.3;}
 /** The steal reach as a pure timeline over the engine act (duration 0.4 s, contact at reachAt),
  * following the motion2 steal clips: reach out to the ball (steal_fail: the hand comes back
  * empty), or touch, gather to the chest and stand ready (steal_success). `result` is the
@@ -197,6 +203,12 @@ export function createAvatarV1(assets,card,teamLook,opts={}){
    // both hands push the ball out in front of the chest (world space), like pass_chest
    const u=Math.min(1,p.actT/0.16),k=Math.sin(u*Math.PI)*0.9;hips.getWorldPosition(_t1);_t1.x+=fx*0.75;_t1.y+=0.55*scale;_t1.z+=fz*0.75;
    aimLimb(rArm,hands.r,_t1,k);aimLimb(lArm,hands.l,_t1,k);rFore&&aimLimb(rFore,hands.r,_t1,k*0.7);lFore&&aimLimb(lFore,hands.l,_t1,k*0.7);
+  }
+  av.dribblePump=0;
+  if(p.hasBall&&!p.act&&ctx.dribbling&&ctx.dribble&&rArm&&hands.r&&!p.air){
+   // the dribbling hand rides the ball down and lifts to meet it (phase from the view's bounce)
+   const pump=dribblePump(ctx.dribble.u)*ctx.dribble.drop;av.dribblePump=pump;
+   if(pump>0.005){hands.r.getWorldPosition(_t1);_t1.y-=pump;_t1.x+=fx*0.04;_t1.z+=fz*0.04;aimLimb(rArm,hands.r,_t1,1);}
   }
   if(p.act==='steal'&&rArm&&hands.r){
    // v4: a real reach, hands toward the ball (world space), a step and a crouch into it, then
