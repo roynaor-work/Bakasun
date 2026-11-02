@@ -11,7 +11,7 @@ import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptio
 import {expandSoccerConfig,soccerMatchCards} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
 import {SOCCER_TACTICS_DATA} from './soccer-tactics-data.mjs';
-import {createRestartLayout,restartTarget,restartActionProfile,sampleRestartAction,restartBallPose,restartThrowTarget,createKeeperThrowFlight} from './soccer-restarts.mjs';
+import {createRestartLayout,restartTarget,restartActionProfile,sampleRestartAction,restartBallPose,restartThrowTarget,createKeeperThrowFlight,puntDestination,createKeeperPuntFlight} from './soccer-restarts.mjs';
 import {chooseSlideKind,slideVariant,slideVelocityScale,sweptSlideContact,slideRecoverySeconds} from './soccer-control-depth.mjs';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
@@ -123,6 +123,11 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       }
       if(manual||forceLoft)s.passTarget=target?{player:target.id,x:tx,z:tz,startX:s.ball.x,startZ:s.ball.z,distance:destination.distance,time:config.passing.runSeconds,kind:destination.kind}:null;
       event(destination?.kind==='loft'?'loft':'pass',{team:p.team,player:p.id,target:target?.id??null,x:tx,z:tz,distance:destination?.distance??null,power});
+    } else if(p.hands){
+      // Punt: a long high ball toward a forward team-mate, never a flat shot from the hands.
+      destination=puntDestination(p,s,config,power);target=destination.target===null?null:players[destination.target];tx=destination.x;tz=destination.z;
+      s.passTarget=target?{player:target.id,x:tx,z:tz,startX:s.ball.x,startZ:s.ball.z,distance:destination.distance,time:config.passing.runSeconds,kind:'loft'}:null;
+      event('shot',{team:p.team,player:p.id,power,assisted:false,punt:true,target:target?.id??null,x:tx,z:tz});
     } else {
       const goalX=d*hx,gx=goalX-s.ball.x,gz=-s.ball.z;
       const angle=Math.acos(clamp((gx*aim.x+gz*aim.z)/(Math.hypot(gx,gz)||1),-1,1));
@@ -150,6 +155,10 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       const flight=createKeeperThrowFlight(s.ball,{x:tx,z:tz},config,power);Object.assign(s.ball,flight);
       if(target&&Math.hypot(target.x-flight.flight.x,target.z-flight.flight.z)>2.2){target=null;s.passTarget=null;s.event.target=null;}
       else if(s.passTarget){s.passTarget.x=flight.flight.x;s.passTarget.z=flight.flight.z;}
+    }
+    else if(handRelease&&!pass){
+      const flight=createKeeperPuntFlight(s.ball,{x:tx,z:tz},config,power);Object.assign(s.ball,flight);
+      if(s.passTarget){s.passTarget.x=flight.flight.x;s.passTarget.z=flight.flight.z;}
     }
     else if((manual||forceLoft)&&pass&&destination.kind==='loft'&&!handRelease){
       Object.assign(s.ball,createLoftFlight(s.ball,destination,config,power));
@@ -287,7 +296,10 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     } else if(p.role==='keeper') {
       const target=keeperTarget(p,s,config);tx=target.x;tz=target.z;p.duty=target.duty;
     } else {
-      const target=fieldTarget(p,s,config);tx=target.x;tz=target.z;p.duty=target.duty;
+      // While our keeper holds the ball the team takes goal-kick outlets (short on
+      // either side, one runner beyond the press) instead of its open-play shape.
+      const outlet=owner&&owner.team===p.team&&owner.role==='keeper'&&owner.hands?distributionOutlet(owner,p):null;
+      const target=outlet||fieldTarget(p,s,config);tx=target.x;tz=target.z;p.duty=target.duty;
       p.request=possession&&distance(p,owner)>aiConfig.requestDistance&&distance(nearest(1-p.team,p),p)>aiConfig.requestClearance;
     }
     if(s.passTarget?.player===p.id&&s.passTarget.time>0&&b.owner===null){
@@ -391,6 +403,12 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     tackler.slideAttempted=true;tackler.slideBehind=first.behind;tackler.slideLate=first.late;
     first.ballX=from.x+(to.x-from.x)*first.time;first.ballZ=from.z+(to.z-from.z)*first.time;first.ballY=from.y+(to.y-from.y)*first.time;
     tackler.slideWon=attempt(tackler,slideVariant(config,tackler.slideKind),'slide-contact',first);
+  }
+  let distributionLayout=null;
+  function distributionOutlet(keeper,p){
+    if(!distributionLayout||distributionLayout.owner!==keeper.id||distributionLayout.at+1.2<s.elapsed||Math.hypot(distributionLayout.x-keeper.x,distributionLayout.z-keeper.z)>2.5)
+      distributionLayout={owner:keeper.id,at:s.elapsed,x:keeper.x,z:keeper.z,targets:createRestartLayout({type:'goalKick',team:keeper.team,x:keeper.x,z:keeper.z,player:keeper.id},s,config)};
+    const slot=distributionLayout.targets[p.id];return slot&&slot.duty.startsWith('goal-kick')?slot:null;
   }
   function sprint(dt,moving,requested,available){sprintMeterStep(s.sprint,config.sprint,dt,{requested,moving,available,regen:effects.regen});}
   function restart(type,teamId,x,z) {

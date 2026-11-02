@@ -43,6 +43,34 @@ export function createKeeperThrowFlight(ball,destination,c,power=0){
   return flight;
 }
 
+/** A keeper's punt is a long, high kick downfield: it lands on the grass near a
+ * forward team-mate when one is in the power-chosen range band, otherwise
+ * straight ahead at that range. Reads visible positions only. */
+export function puntDestination(p,s,c,power=0){
+  const d=s.attackDir*(p.team===0?1:-1),k=c.goalkeeping,b=s.ball;
+  const min=k.puntMinDistance??14,max=Math.max(min,k.puntMaxDistance??30),range=min+(max-min)*clamp(Number.isFinite(power)?power:0,0,1);
+  let best=null,value=-Infinity;
+  for(const q of s.players){
+    if(q.team!==p.team||q.id===p.id||q.role==='keeper'||q.recover>0||q.slideTime>0)continue;
+    const point=teamPassPoint(q,c),ahead=(point.x-b.x)*d,reach=distance(point,b);
+    if(ahead<min*.6||reach>max+4)continue;
+    let open=8;for(const r of s.players)if(r.team!==p.team)open=Math.min(open,distance(r,point));
+    const score=open*1.2-Math.abs(reach-range)*.6+ahead*.15;
+    if(score>value){value=score;best={q,point};}
+  }
+  // A team-mate standing short of the range band receives the punt ahead of them
+  // and runs onto it (the landing stays on their line from the keeper).
+  let point=best?best.point:{x:b.x+d*range,z:b.z*.5};
+  if(best){const reach=distance(point,b);if(reach<range&&reach>1e-6){const u=range/reach;point={x:b.x+(point.x-b.x)*u,z:b.z+(point.z-b.z)*u};}}
+  const landing=safeLoftPoint(point,c);
+  return {...landing,target:best?best.q.id:null,distance:distance(landing,b),kind:'punt'};
+}
+/** Flight time grows with range so the punt is a visible high arc (about 1.1 to 2.1 seconds). */
+export function createKeeperPuntFlight(ball,destination,c,power=0){
+  const range=distance(ball,destination),speed=c.goalkeeping.puntSpeed??13;
+  return createLoftFlight(ball,destination,c,power,{durationSeconds:clamp(range/Math.max(1,speed),1.1,2.1)});
+}
+
 /** The throw's receiving choice is shared by simulation and its aiming cue. */
 export function restartThrowTarget(p,r,s,c,long=false){
   const reach=c.restarts.throwReach||9,mates=s.players.filter(q=>q.team===p.team&&q.id!==p.id&&q.role!=='keeper'),rivals=s.players.filter(q=>q.team!==p.team);
