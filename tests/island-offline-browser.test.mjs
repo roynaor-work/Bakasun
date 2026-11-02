@@ -9,7 +9,7 @@ import {isManagedPath} from '../workout/island/ui/offline.mjs';
  * ISLAND_CSP_BROWSER=1 (or ISLAND_OFFLINE_BROWSER=1), same as the other browser suites. */
 const enabled=process.env.ISLAND_CSP_BROWSER==='1'||process.env.ISLAND_OFFLINE_BROWSER==='1';
 const manifest=JSON.parse(await readFile(new URL('../workout/island/offline-manifest.json',import.meta.url),'utf8'));
-const listed=new Set([...manifest.core,...manifest.shell,...Object.values(manifest.games).flat()].map(p=>'/workout/island/'+p));
+const listed=new Set([...manifest.core,...manifest.island,...manifest.shell,...Object.values(manifest.games).flat()].map(p=>'/workout/island/'+p));
 const GAMES={soccer:'soccer',hoops:'streetSlam',alpine:'alpineRush'};
 const gpuArgs=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'];
 

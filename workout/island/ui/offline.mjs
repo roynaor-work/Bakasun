@@ -23,11 +23,11 @@ export async function loadManifest(version=DATA_VERSION,fetcher=globalThis.fetch
   return manifest;
 }
 /** Unique paths for the named games (all games when none are named). The app shell
- * (code, styles, data) and the core icons are added with {shell:true}: they are what
+ * (code, styles, data), the core icons and the island's own boot assets (`island`) are added with {shell:true}: they are what
  * lets the island open with no network at all. */
 export function pathsFor(manifest,games=Object.keys(manifest.games),{shell=false}={}){
   const seen=new Set();
-  if(shell)for(const path of [...(manifest.core||[]),...(manifest.shell||[])])seen.add(path);
+  if(shell)for(const path of [...(manifest.core||[]),...(manifest.island||[]),...(manifest.shell||[])])seen.add(path);
   for(const game of games)for(const path of manifest.games[game]||[])seen.add(path);return [...seen];
 }
 export const hrefOf=(path,root=islandRoot)=>new URL(path,root).href;

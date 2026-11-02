@@ -20,7 +20,8 @@ test('offline manifest: every listed file exists, is cacheable by the worker rul
   assert.equal(new Set(list).size,list.length,game+' has no duplicates');
   for(const p of list){await access(path.join(island,p));assert.ok(isManagedPath('/workout/island/'+p),p+' is served from the cache');}
  }
- for(const p of manifest.core){await access(path.join(island,p));}
+ for(const p of [...manifest.core,...manifest.island])await access(path.join(island,p));
+ for(const p of manifest.island)assert.ok(isManagedPath('/workout/island/'+p),p);
 });
 
 test('offline manifest: sizes per game and for the island (reported in the release notes)',async()=>{
