@@ -4,7 +4,7 @@
 // download. Paths are bare (no ?v=): the cache ignores the query, so the central
 // version bump never makes this list stale. Run `node tools/offline-shell.mjs` after
 // adding a module; tests/island-offline.test.mjs fails when the list is out of date.
-import {readFile,writeFile,access} from 'node:fs/promises';
+import {readFile,writeFile,access,readdir} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
@@ -36,6 +36,10 @@ export async function buildShell(base=root){
       }
     }
   }
+  // engine/load-data.mjs reads data/*.json by name from a list, not by path literal, so the
+  // scan cannot see them: every data file is part of the shell.
+  for(const name of await readdir(path.join(base,'data')).catch(()=>[]))if(/\.json$/.test(name))seen.add('data/'+name);
+  for(const name of await readdir(path.join(base,'episodes')).catch(()=>[]))if(/\.json$/.test(name))seen.add('episodes/'+name);
   return ['',...[...seen].sort()];
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)){

@@ -34,7 +34,7 @@ async function play(page,id){
  if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
  await page.waitForFunction(()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');},null,{timeout:200000});
  await page.waitForTimeout(3000);
- return page.evaluate(()=>{const s=window.__island.games.current.session.snapshot;return {status:s.renderMetrics?.assetStatus||(s.loaded?'ready':'?'),error:s.error||null};});
+ return page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:'alpine'})[id];return {status:s.renderMetrics?.assetStatus||(s.loaded?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?'),error:s.error||null};},id);
 }
 const leave=page=>page.evaluate(()=>{window.__island.games.cleanup?.();window.__island.ui.closeModal?.();});
 
@@ -65,7 +65,7 @@ test('one button downloads soccer, basketball and ski; status counts the real ca
   await t.page.waitForFunction(()=>navigator.serviceWorker.controller);
   await t.context.setOffline(true);
   const offlinePage=await t.context.newPage();offlinePage.setDefaultTimeout(180000);const errors=[];offlinePage.on('pageerror',e=>errors.push(e.message));
-  const failed=[];offlinePage.on('requestfailed',r=>failed.push(r.url()));
+  const failed=[];offlinePage.on('requestfailed',r=>{if(!/ERR_ABORTED/.test(r.failure()?.errorText||''))failed.push(r.url()+' '+r.failure()?.errorText);});/* a request cut short when the game closes is not a missing file */
   await offlinePage.goto(server.url+'?dev=1',{waitUntil:'domcontentloaded'});
   await offlinePage.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded,null,{timeout:180000});
   await offlinePage.evaluate(()=>{window.__island.engine.learningStatus=()=>({locked:false});window.__island.ui.activityInterface.requireDaily=()=>false;});

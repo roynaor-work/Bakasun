@@ -92,7 +92,7 @@ test('new release waits for an idle island and successful save; refresh is once 
  const offline=watchRelease({version:'old',check:async()=>{throw Error('offline');},canRefresh:()=>true,save:()=>assert.fail(),refresh:()=>assert.fail(),every:()=>0,cancel:()=>{}});await offline.poll();offline.dispose();
 });
 test('game library has one entry per game; details, play, help and upgrades open inside',()=>{
- const previous=globalThis.document;globalThis.document={createElement:tag=>({tag,dataset:{},children:[],setAttribute(){},append(...nodes){this.children.push(...nodes);}})};
+ const previous=globalThis.document;globalThis.document={createElement:tag=>({tag,dataset:{},children:[],setAttribute(){},addEventListener(){},querySelectorAll:()=>[],replaceChildren(){},remove(){},append(...nodes){this.children.push(...nodes);}})};
  try{const games=[...createEngine(data,{storage:null}).registry.minigames.values()],ui=Object.create(ActivityInterface.prototype),opened=[];let dialog;
  Object.assign(ui,{engine:{registry:{minigames:new Map(games.map(g=>[g.id,g]))}},t:s=>s,enabledGames:()=>games,modal:()=>dialog={dataset:{},children:[],append(...nodes){this.children.push(...nodes);}},playButton:(id,action,play)=>({dataset:{action},onclick:play}),stages:id=>opened.push('play:'+id),intro:id=>opened.push('help:'+id),gameUpgrades:id=>opened.push('upgrade:'+id)});
  ui.menu();assert.equal(dialog.dataset.gameLibrary,'true');const grid=dialog.children[0];assert.equal(grid.children.length,games.length);for(const card of grid.children){const buttons=card.children.filter(n=>n.tag==='button');assert.equal(buttons.length,1);assert.equal(buttons[0].dataset.action,'game-enter');}
