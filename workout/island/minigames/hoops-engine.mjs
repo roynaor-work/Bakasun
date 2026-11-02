@@ -10,6 +10,7 @@ import {createHoopsTacticsController} from './hoops-tactics.mjs';
 
 export const HOOPS_DT=1/60;
 export const HOOPS_SPRINT_MIN_ENERGY=0.08;
+export const SPRINT_RESERVE=Object.freeze({drain:3.5,delay:1,refill:6,unlock:0.3});
 export const HOOPS_ATTACK=Object.freeze({moveCost:0.012,spinCost:0.018,moveRange:2,moveResolve:0.18,spinResolve:0.27,moveStun:0.42,spinStun:0.5,moveRecovery:0.16,fakeCost:0.006,fakeDuration:0.52,fakeResolve:0.16,fakeCooldown:0.9,fakeRange:1.8});
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const hyp=Math.hypot;
@@ -31,7 +32,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
  function makePlayer(card,team,slot){
   const ratings=runtimeRatings(card);
   return {id:card.id,team,slot,pos:card.pos,positionName:positionName(card.pos),abilities:playerAbilities({pos:card.pos,r:ratings}),name:card.name,number:card.number,look:card.look||{},r:ratings,
-   x:0,z:0,vx:0,vz:0,y:0,face:0,energy:card.energy??1,sprinting:false,fouls:0,onCourt:true,
+   x:0,z:0,vx:0,vz:0,y:0,face:0,energy:card.energy??1,sprinting:false,boost:1,boostRest:0,boostLock:false,fouls:0,onCourt:true,
    act:null,actT:0,act2:null,shot:null,move:null,fake:null,air:-1,airDur:0,jumpH:0,stumble:0,cd:{steal:0,jump:0,move:0,fake:0,pickup:0},
    intent:{x:0,z:0,speed:0,face:null,sprint:false},think:0,paintT:0,role:null,
    stats:{pts:0,fgm:0,fga:0,tpm:0,tpa:0,ftm:0,fta:0,reb:0,oreb:0,ast:0,stl:0,blk:0,tov:0,pf:0,sec:0}};
@@ -621,7 +622,14 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    const it=p.intent;let tx=it.x*it.speed,tz=it.z*it.speed;
    // Charge the sprint multiplier only while it can actually accelerate a moving
    // player. Holding sprint at rest or with an empty reserve is not extra drain.
-   p.sprinting=!!it.sprint&&it.speed>0.05&&p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot';
+   // v4: a short sprint reserve on top of match energy. It only drains while the button is
+   // held and the player really moves (about 3.5 s full to empty), waits about a second after
+   // the sprint stops, then refills slowly (about 6 s); once emptied it stays locked until it
+   // is back to 30%, so a tap cannot give a burst from an empty tank.
+   const B=C.sprintReserve||SPRINT_RESERVE;
+   p.sprinting=!!it.sprint&&it.speed>0.05&&p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot'&&p.boost>0&&!p.boostLock;
+   if(p.sprinting){p.boost=Math.max(0,p.boost-dt/B.drain);p.boostRest=0;if(p.boost<=1e-6){p.boost=0;p.boostLock=true;}}
+   else{p.boostRest+=dt;if(p.boostRest>=B.delay)p.boost=Math.min(1,p.boost+dt/B.refill);if(p.boostLock&&p.boost>=B.unlock)p.boostLock=false;}
    const maxS=speedCap(p,p.sprinting);
    if(p.act==='shoot'){
     const sh=p.shot;
@@ -1003,7 +1011,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
 
  function snapshotPlayers(){
   return all().map(p=>({id:p.id,team:p.team,pos:p.pos,positionName:p.positionName,abilities:p.abilities,number:p.number,x:+p.x.toFixed(3),z:+p.z.toFixed(3),y:+p.jumpH.toFixed(3),vx:+p.vx.toFixed(3),vz:+p.vz.toFixed(3),
-   face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,shotHeld:!!(p.shot&&p.shot.held&&!p.shot.released&&p.shot.quality==null),air:p.air>=0,energy:+p.energy.toFixed(3),sprinting:p.sprinting,maxSpeed:+speedCap(p,p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot').toFixed(3),exhausted:p.energy<=HOOPS_SPRINT_MIN_ENERGY,fouls:p.fouls,
+   face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,shotHeld:!!(p.shot&&p.shot.held&&!p.shot.released&&p.shot.quality==null),air:p.air>=0,energy:+p.energy.toFixed(3),sprinting:p.sprinting,boost:+p.boost.toFixed(3),boostLocked:p.boostLock,maxSpeed:+speedCap(p,p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot').toFixed(3),exhausted:p.energy<=HOOPS_SPRINT_MIN_ENERGY,fouls:p.fouls,
    hasBall:S.ball.owner===p.id&&S.ball.state==='held',controlled:p.id===S.controlled,stumble:p.stumble>0,look:p.look,role:p.role,passKind:p.act==='pass'?p.act2?.kind??null:null}));
  }
 
