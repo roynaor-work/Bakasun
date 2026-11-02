@@ -86,7 +86,9 @@ test('automatic download fills the device cache after open, and a data saver ski
  try{
   await saver.page.goto(server.url,{waitUntil:'networkidle'});await saver.page.waitForFunction(()=>window.__offlineState?.state==='save-data',null,{timeout:60000});
   assert.deepEqual(await saver.page.evaluate(async()=>(await caches.keys()).length?await (await caches.open((await caches.keys())[0])).keys().then(k=>k.length):0),0,'a data saver downloads nothing in the background');
-  await auto.page.goto(server.url,{waitUntil:'networkidle'});
+  await auto.page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});
+  // A fresh profile opens the avatar dialog; the background download waits until it is closed (by design).
+  await auto.page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded,null,{timeout:120000});if(await auto.page.locator('[data-action=avatar-start]').count())await auto.page.locator('[data-action=avatar-start]').click();
   await auto.page.waitForFunction(()=>window.__offlineState?.state==='ready'||window.__offlineState?.state==='partial',null,{timeout:480000});
   const state=await auto.page.evaluate(()=>window.__offlineState);assert.equal(state.state,'ready',JSON.stringify(state.result?.failed));
   const key=(await auto.page.evaluate(()=>caches.keys()))[0];assert.match(key,/^island-assets-/);
