@@ -1,16 +1,17 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261101-1';
-import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261101-1';
-import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261101-1';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261101-1';
-import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261101-1';
-import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261101-1';
-import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261101-1';
-import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261101-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261102-1';
+import {sprintMeterStep} from './soccer-sprint.mjs';
+import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261102-1';
+import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261102-1';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261102-1';
+import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261102-1';
+import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261102-1';
+import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261102-1';
+import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261102-1';
 import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
 import {expandSoccerConfig,soccerMatchCards} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
 import {SOCCER_TACTICS_DATA} from './soccer-tactics-data.mjs';
-import {createRestartLayout,restartTarget,restartActionProfile,sampleRestartAction,restartBallPose,restartThrowTarget,createKeeperThrowFlight} from './soccer-restarts.mjs';
+import {createRestartLayout,restartTarget,restartActionProfile,sampleRestartAction,restartBallPose,restartThrowTarget,createKeeperThrowFlight,puntDestination,createKeeperPuntFlight} from './soccer-restarts.mjs';
 import {chooseSlideKind,slideVariant,slideVelocityScale,sweptSlideContact,slideRecoverySeconds} from './soccer-control-depth.mjs';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
@@ -122,6 +123,11 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       }
       if(manual||forceLoft)s.passTarget=target?{player:target.id,x:tx,z:tz,startX:s.ball.x,startZ:s.ball.z,distance:destination.distance,time:config.passing.runSeconds,kind:destination.kind}:null;
       event(destination?.kind==='loft'?'loft':'pass',{team:p.team,player:p.id,target:target?.id??null,x:tx,z:tz,distance:destination?.distance??null,power});
+    } else if(p.hands){
+      // Punt: a long high ball toward a forward team-mate, never a flat shot from the hands.
+      destination=puntDestination(p,s,config,power);target=destination.target===null?null:players[destination.target];tx=destination.x;tz=destination.z;
+      s.passTarget=target?{player:target.id,x:tx,z:tz,startX:s.ball.x,startZ:s.ball.z,distance:destination.distance,time:config.passing.runSeconds,kind:'loft'}:null;
+      event('shot',{team:p.team,player:p.id,power,assisted:false,punt:true,target:target?.id??null,x:tx,z:tz});
     } else {
       const goalX=d*hx,gx=goalX-s.ball.x,gz=-s.ball.z;
       const angle=Math.acos(clamp((gx*aim.x+gz*aim.z)/(Math.hypot(gx,gz)||1),-1,1));
@@ -149,6 +155,10 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       const flight=createKeeperThrowFlight(s.ball,{x:tx,z:tz},config,power);Object.assign(s.ball,flight);
       if(target&&Math.hypot(target.x-flight.flight.x,target.z-flight.flight.z)>2.2){target=null;s.passTarget=null;s.event.target=null;}
       else if(s.passTarget){s.passTarget.x=flight.flight.x;s.passTarget.z=flight.flight.z;}
+    }
+    else if(handRelease&&!pass){
+      const flight=createKeeperPuntFlight(s.ball,{x:tx,z:tz},config,power);Object.assign(s.ball,flight);
+      if(s.passTarget){s.passTarget.x=flight.flight.x;s.passTarget.z=flight.flight.z;}
     }
     else if((manual||forceLoft)&&pass&&destination.kind==='loft'&&!handRelease){
       Object.assign(s.ball,createLoftFlight(s.ball,destination,config,power));
@@ -286,7 +296,10 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     } else if(p.role==='keeper') {
       const target=keeperTarget(p,s,config);tx=target.x;tz=target.z;p.duty=target.duty;
     } else {
-      const target=fieldTarget(p,s,config);tx=target.x;tz=target.z;p.duty=target.duty;
+      // While our keeper holds the ball the team takes goal-kick outlets (short on
+      // either side, one runner beyond the press) instead of its open-play shape.
+      const outlet=owner&&owner.team===p.team&&owner.role==='keeper'&&owner.hands?distributionOutlet(owner,p):null;
+      const target=outlet||fieldTarget(p,s,config);tx=target.x;tz=target.z;p.duty=target.duty;
       p.request=possession&&distance(p,owner)>aiConfig.requestDistance&&distance(nearest(1-p.team,p),p)>aiConfig.requestClearance;
     }
     if(s.passTarget?.player===p.id&&s.passTarget.time>0&&b.owner===null){
@@ -391,14 +404,21 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     first.ballX=from.x+(to.x-from.x)*first.time;first.ballZ=from.z+(to.z-from.z)*first.time;first.ballY=from.y+(to.y-from.y)*first.time;
     tackler.slideWon=attempt(tackler,slideVariant(config,tackler.slideKind),'slide-contact',first);
   }
-  function sprint(dt,moving,requested,available){
-    const meter=s.sprint,c=config.sprint;
-    if(meter.locked&&meter.value>=c.minToStart)meter.locked=false;
-    meter.active=requested&&moving&&available&&!meter.locked&&meter.value>0;
-    if(meter.active){meter.value=Math.max(0,meter.value-c.drainPerSecond*dt);meter.regenDelay=c.regenDelaySeconds;if(!meter.value){meter.active=false;meter.locked=true;}}
-    else if(meter.regenDelay>0)meter.regenDelay=Math.max(0,meter.regenDelay-dt);
-    else meter.value=Math.min(meter.capacity,meter.value+c.regenPerSecond*effects.regen*dt);
+  let distributionLayout=null;
+  /** Outlets for a keeper holding the ball: two short options inside the throw reach
+   * on either side, one runner far enough for a punt. Slots stick to IDs for 1.2 s
+   * so crossing runners do not swap jobs; other team-mates keep the open-play shape. */
+  function distributionOutlet(keeper,p){
+    if(!distributionLayout||distributionLayout.owner!==keeper.id||distributionLayout.at+1.2<s.elapsed||Math.hypot(distributionLayout.x-keeper.x,distributionLayout.z-keeper.z)>2.5){
+      const d=direction(keeper.team),reach=(config.restarts.throwReach||9)*.8,inset=Math.max(rules.playerBoundary,.5),side=Math.min(hz-inset,Math.sqrt(Math.max(1,reach*reach-16))),far=Math.min(config.goalkeeping.puntMinDistance??14,hx*.7);
+      const mates=players.filter(q=>q.team===keeper.team&&q.id!==keeper.id&&q.role!=='keeper').sort((a,b)=>distance(a,keeper)-distance(b,keeper)||a.id-b.id),targets=[];
+      const slots=[[4,side,'goal-kick-outlet'],[4,-side,'goal-kick-outlet'],[far,keeper.z*.3,'goal-kick-run']];
+      mates.slice(0,slots.length).forEach((q,i)=>{const [ahead,z,duty]=slots[i];targets[q.id]={x:clamp(keeper.x+d*ahead,-hx+inset,hx-inset),z:clamp(i<2?keeper.z+z:z,-hz+inset,hz-inset),duty};});
+      distributionLayout={owner:keeper.id,at:s.elapsed,x:keeper.x,z:keeper.z,targets};
+    }
+    return distributionLayout.targets[p.id]||null;
   }
+  function sprint(dt,moving,requested,available){sprintMeterStep(s.sprint,config.sprint,dt,{requested,moving,available,regen:effects.regen});}
   function restart(type,teamId,x,z) {
     if(type==='goalKick'){x=Math.sign(x)*(hx-config.pitch.goalAreaDepth);z=Math.sign(z||s.ball.z||1)*config.pitch.goalAreaWidth/2;}
     s.phase='restart';s.phaseTime=config.match.restartSeconds;s.restart={type,team:teamId,x,z,age:0,elapsed:0};
@@ -539,7 +559,8 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   }
   function ball(dt) {
     const b=s.ball;let from={x:b.x,y:b.y,z:b.z};b.grace=Math.max(0,b.grace-dt);
-    if(b.owner!==null){const p=players[b.owner];if(p.hands){const pose=p.restartMotion&&!p.restartMotion.released?restartBallPose(p.restartMotion.kind,p.restartMotion.elapsed):null;b.x=p.x+p.fx*(pose?.forward??config.goalkeeping.holdForward)-p.fz*(pose?.side??0);b.z=p.z+p.fz*(pose?.forward??config.goalkeeping.holdForward)+p.fx*(pose?.side??0);b.y=pose?.height??config.goalkeeping.holdHeight;b.vx=p.vx;b.vz=p.vz;b.vy=0;const puntDrop=p.distribution&&p.restartMotion.kind==='keeperPunt'&&p.restartMotion.elapsed>=restartActionProfile('keeperPunt').drop;if(!inPenaltyArea(p,p,s,config)||!puntDrop&&!inPenaltyArea(p,b,s,config)){p.hands=false;b.y=ph.ballRadius;}}
+    // An authored wind-up may swing the held ball a little past the area line while the feet stay inside: that is not carrying.
+    if(b.owner!==null){const p=players[b.owner];if(p.hands){const pose=p.restartMotion&&!p.restartMotion.released?restartBallPose(p.restartMotion.kind,p.restartMotion.elapsed):null;b.x=p.x+p.fx*(pose?.forward??config.goalkeeping.holdForward)-p.fz*(pose?.side??0);b.z=p.z+p.fz*(pose?.forward??config.goalkeeping.holdForward)+p.fx*(pose?.side??0);b.y=pose?.height??config.goalkeeping.holdHeight;b.vx=p.vx;b.vz=p.vz;b.vy=0;const puntDrop=p.distribution&&p.restartMotion.kind==='keeperPunt'&&p.restartMotion.elapsed>=restartActionProfile('keeperPunt').drop;if(!inPenaltyArea(p,p,s,config)||!puntDrop&&!p.distribution&&!inPenaltyArea(p,b,s,config)){p.hands=false;b.y=ph.ballRadius;}}
       else {Object.assign(b,followDribbleBall(p,b,dt,config,{sprintLead:p.id===s.controlled&&liveControl}));if(b.owner===null){b.lastTeam=p.team;b.lastPlayer=p.id;b.grace=.12;event('heavy-touch',{player:p.id,team:p.team});}}
     }
     else if(b.flight?.kind==='physical-loft')stepLoftBall(b,dt,config);

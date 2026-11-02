@@ -22,7 +22,7 @@ test('v3 offline: application code, versioned data and other games never come fr
   '/workout/island/design/models2/hoops-court.glb','/workout/island/design/motion2/hoops/shots.json','/workout/island/design/characters2/skier.glb','/workout/island/vendor/three.module.js','/workout/island/design/environment/textures/../../../app.mjs'])
   assert.equal(isSoccerCachedPath(p),false,p);
  assert.equal(isSoccerCachedPath(null),false);
- assert.equal(soccerCacheName('island-v2-20261101-1'),'island-soccer-island-v2-20261101-1');
+ assert.equal(soccerCacheName('island-v2-20261102-1'),'island-soccer-island-v2-20261102-1');
  assert.equal(soccerCacheName('a/b c'),'island-soccer-a_b_c');
  assert.equal(soccerCacheName(''),'island-soccer-dev');
 });

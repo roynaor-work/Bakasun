@@ -9305,10 +9305,10 @@
    "sprint": {
     "capacity": 100,
     "multiplier": 1.45,
-    "drainPerSecond": 25,
-    "regenPerSecond": 12,
-    "regenDelaySeconds": 0.6,
-    "minToStart": 20
+    "drainPerSecond": 28.6,
+    "regenPerSecond": 16.7,
+    "regenDelaySeconds": 1,
+    "minToStart": 30
    },
    "slide": {
     "seconds": 0.35,
@@ -9581,7 +9581,7 @@
     "areaInset": 0.6,
     "throwMinSpeed": 6,
     "throwMaxSpeed": 9.5,
-    "throwTravelSeconds": 1.05
+    "throwTravelSeconds": 1.05, "puntMinDistance": 14, "puntMaxDistance": 30, "puntSpeed": 13
    },
    "restarts": {
     "walkSeconds": 0.4,
@@ -11681,6 +11681,7 @@
     "assistGapBall": 1.0,
     "assistGapOff": 1.8
    },
+   "sprintReserve": { "drain": 3.5, "delay": 1.0, "refill": 6.0, "unlock": 0.3 },
    "fatigue": {
     "drain": 0.0105,
     "sprint": 2.2,

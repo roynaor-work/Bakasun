@@ -4,6 +4,7 @@ import {createSoccerDesignLoader} from './soccer-design-loader.mjs';
 import {loadSoccerRestartMotion} from './soccer-athlete-motion.mjs';
 import {soccerMetreScale,createSoccerCharacterLod} from './soccer-scale.mjs';
 import {regionForTriangle} from '../design/variants/apply-variant.js';
+import {armSwingPose,armSwingState,createArmSwingApplier} from './soccer-arm-swing.mjs';
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrap=v=>Math.atan2(Math.sin(v),Math.cos(v));
@@ -157,9 +158,34 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   const actions=Object.fromEntries(clips.map(clip=>{
     const a=mixer.clipAction(clip);a.setLoop(data.states[clip.name].loop?T.LoopRepeat:T.LoopOnce,Infinity);a.clampWhenFinished=true;return [clip.name,a];
   }));
-  let state=data.initialState,previousMode=null,previousSpeed=0,previousYaw=null,kickTimer=0,stealTimer=0,lastTransition=null;
-  const clean=[];let cleanSaved=false;
-  mixer.getRoot().traverse(bone=>{if(bone.isBone)clean.push({bone,q:bone.quaternion.clone(),p:bone.position.clone()});});
+  let state=data.initialState,previousMode=null,previousSpeed=0,previousYaw=null,kickTimer=0,stealTimer=0,lastTransition=null,slide=null;
+  /** Map the simulation's slide and recovery clocks onto the composite slide clip.
+   * The slide part follows slideTime exactly; the fall and the getting up are
+   * given the recovery plus `slideGraceSeconds` so they are not rushed, and keep
+   * playing while the player stands still. Returns true when the timeline is over. */
+  const slideTimeline=(p,mode,moving,dt)=>{
+    const clip=data.states[slide.name],action=actions[slide.name],total=clip.durationSeconds,slideDur=clip.slideSeconds;
+    let t=slide.time;
+    if(mode==='slide'){t=Math.max(t,(1-clamp((p.slideTime||0)/slide.slideSeconds,0,1))*slideDur);}
+    else if(mode==='recover'){
+      if(slide.recoverSeconds===null){slide.recoverSeconds=Math.max(.05,p.recover||config.slide?.recoverSeconds||.6);slide.rate=Math.max(1,(total-slideDur)/(slide.recoverSeconds+(config.view.slideGraceSeconds??.35)));}
+      t=Math.max(t,slideDur+(slide.recoverSeconds-clamp(p.recover||0,0,slide.recoverSeconds))*slide.rate);
+    }
+    else{
+      // The simulation has released the player. Finish the getting up only while
+      // they stand; the first step blends straight into locomotion.
+      if(moving||t>=total-1e-5){slide=null;return true;}
+      slide.follow=true;t=Math.min(total,t+dt*Math.max(1,slide.rate));
+    }
+    slide.time=t;action.stopFading().setEffectiveWeight(1).setEffectiveTimeScale(0);action.time=clamp(t,0,total);
+    if(t>=total-1e-5&&mode!=='slide'&&mode!=='recover'){slide=null;return true;}
+    return false;
+  };
+  const clean=[],boneByName={};let cleanSaved=false;
+  mixer.getRoot().traverse(bone=>{if(bone.isBone){clean.push({bone,q:bone.quaternion.clone(),p:bone.position.clone()});boneByName[bone.name]=bone;}});
+  // Procedural arm swing over the locomotion clips (see soccer-arm-swing.mjs).
+  const arm={phase:0,weight:0,sprint:0,carry:0},armPose={},applyArms=createArmSwingApplier(T,mixer.getRoot(),boneByName);
+  const LOCOMOTION=new Set(['run','dribble_run','turn_left','turn_right','decelerate']),ARM_PHASE={run:0,dribble_run:0}; // both authored cycles start with the left foot in front
   const updateMixer=dt=>{
     if(cleanSaved)for(const pose of clean){pose.bone.quaternion.copy(pose.q);pose.bone.position.copy(pose.p);}
     mixer.update(dt);for(const pose of clean){pose.q.copy(pose.bone.quaternion);pose.p.copy(pose.bone.position);}cleanSaved=true;
@@ -176,7 +202,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
     state=name;lastTransition=event||name;
   };
   return {
-    actions,get state(){return state;},get lastTransition(){return lastTransition;},
+    actions,get state(){return state;},get lastTransition(){return lastTransition;},get armSwing(){return arm;},get slide(){return slide?{name:slide.name,time:slide.time,rate:slide.rate,follow:slide.follow}:null;},
     update(p,s,animation,dt) {
       const restart=p.restartMotion;
       if(restart&&actions[restart.kind]){
@@ -189,12 +215,23 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       const speed=Math.hypot(p.vx,p.vz),yaw=Math.atan2(p.fx,p.fz),mode=animation.mode,turn=previousYaw===null?0:wrap(yaw-previousYaw);
       const moving=speed>(config.view.animation.idleSpeed||.2),edge=mode!==previousMode;
       const kick=(p.kickTime||0)>kickTimer+1e-6||(p.stealTime||0)>stealTimer+1e-6;
+      if(slide&&state!==slide.name)slide=null;
       if(mode==='celebrate'&&edge)change('celebrate','result_success');
+      else if(mode==='slide'&&edge&&actions['slide-'+(p.slideKind||'straight')]){
+        // One continuous authored timeline (slide, fall, get up) driven by the
+        // simulation's own slide and recovery clocks; see slideTimeline().
+        const name='slide-'+(p.slideKind||'straight');slide={name,kind:p.slideKind||'straight',time:0,slideSeconds:Math.max(.05,p.slideTime||config.slide?.seconds||.35),recoverSeconds:null,rate:1,follow:false};
+        change(name,'fall_confirmed',true,{rate:0,fadeSeconds:.08});
+      }
       else if(mode==='slide'&&edge){
         // The authored variant plays through the simulation's slide and the first
         // part of its recovery; the getting-up clip fills the remaining recovery.
         const kind=p.slideKind&&actions['slide_'+p.slideKind]?'slide_'+p.slideKind:'fall',clip=data.states[kind],total=Math.max(.2,(p.slideTime||0)+(config.slide?.variants?.[p.slideKind]?.recoverSeconds??config.slide?.recoverSeconds??.6)*.45);
         change(kind,'fall_confirmed',true,{rate:Math.max(1,clip.durationSeconds/total)});
+      }
+      else if(mode==='recover'&&edge&&slide&&state===slide.name){
+        // A missed tackle continues on the miss timeline from the same instant.
+        if(p.slideWon===false&&actions[slide.name+'-miss']){const name=slide.name+'-miss';change(name,'recovery_allowed',true,{rate:0,fadeSeconds:0});actions[name].time=slide.time;slide.name=name;}
       }
       else if(mode==='dive'&&edge)change('fall','fall_confirmed');
       else if(mode==='recover'&&edge){
@@ -213,6 +250,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         change(name,'action',true,{at,rate:(clip.durationSeconds-at)/remaining,fadeSeconds:m.kickFadeIn??.025});
       }
       else if(mode==='catch'&&edge)change('catch','receive');
+      else if(slide&&state===slide.name&&!slideTimeline(p,mode,speed>(config.view.animation.idleSpeed||.2),dt)){/* the slide timeline is still playing */}
       else if(!['celebrate','fall','recover','kick','kick_power','pass_short','pass_long','catch','slide_miss'].includes(state)&&!state.startsWith('slide_')||actions[state].time>=data.states[state].durationSeconds-1e-5) {
         const running=['run','dribble_run','defensive_jockey'].includes(state),locomotion=s.ball.owner===p.id&&actions.dribble_run?'dribble_run':s.mode==='defense'&&actions.defensive_jockey&&speed<config.view.animation.runSpeed?'defensive_jockey':'run';
         if(mode==='celebrate'){/* Hold the authored celebration until the goal phase ends. */}
@@ -224,7 +262,12 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       }
       if(['run','dribble_run','defensive_jockey'].includes(state))actions[state].setEffectiveTimeScale(clamp(speed/(config.view.animation.runSpeed||4.5),.55,1.7));
       previousMode=mode;previousSpeed=speed;previousYaw=yaw;kickTimer=p.kickTime||0;stealTimer=p.stealTime||0;
-      updateMixer(dt);return state;
+      updateMixer(dt);
+      const runSpeed=config.view.animation.runSpeed||4.5,idle=config.view.animation.idleSpeed||.2,locomotion=LOCOMOTION.has(state)&&moving;
+      const clipPhase=state==='run'||state==='dribble_run'?(actions[state].time/data.states[state].durationSeconds+ARM_PHASE[state])%1:NaN;
+      armSwingState(arm,dt,{locomotion,clipPhase,speed01:(speed-idle)/(runSpeed-idle),sprint01:Math.max(mode==='sprint'?1:0,(speed-runSpeed)/2),carrying:s.ball.owner===p.id});
+      if(arm.weight>0)applyArms(armSwingPose(arm.phase,1,arm.sprint,arm.carry,undefined,armPose),arm.weight);
+      return state;
     },
   };
 }
@@ -251,7 +294,7 @@ export function prepareSoccerDesignSources(){
         json('characters/rig.json'),json('viewer/retarget-map.json'),retrying(()=>loadSoccerRestartMotion(),'motion library'),json('characters2/regions.json'),
       ]);
       globalThis.performance?.mark?.('soccer:prepare-cpu-start');
-      const active=new Set(ACTIVE_CLIPS);
+      const active=new Set([...ACTIVE_CLIPS,...Object.keys(data.slideSequences||{})]);
       const compiled=compileSoccerDesignClips({...data,states:Object.fromEntries(Object.entries(data.states).filter(([name])=>active.has(name)))},rig,map),sources=[player.scene,keeper.scene];
       for(const source of sources)validateBind(source,rig);
       const clipSets=sources.map(source=>bakeSoccerDesignFloor(source,compiled));
@@ -320,7 +363,7 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
           pivot.position.set(p.x,Math.max(0,animation.height||0),p.z);pivot.rotation.set(0,this.yaw,0);
           this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
         },
-        metrics:()=>({kind:'design-glb-v2',state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod,heightMetres:height}),
+        metrics:()=>({kind:'design-glb-v2',state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod,heightMetres:height,armSwing:motion.armSwing.weight,slide:motion.slide}),
         dispose(){if(characterDisposed)return;characterDisposed=true;mixer.stopAllAction();mixer.uncacheRoot(root);root.traverse(o=>o.skeleton?.dispose());pivot.removeFromParent();},
       };
       mixer.update(0);characters.push(character);

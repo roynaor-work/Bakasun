@@ -1,4 +1,4 @@
-import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261101-1';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261102-1';
 import {createLoftFlight} from './soccer-loft.mjs';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Pure presentation decisions; the simulation never imports this module. */
@@ -17,6 +17,14 @@ export function playerAnimation(player,state,config){
   return {mode,clip,speed:clip==='run'?clamp(speed/a.runSpeed,a.minRate,a.maxRate):mode==='steal'?a.stealRate:1,
     lean:mode==='slide'||mode==='recover'?a.slideLean*recovery:mode==='sprint'?a.sprintLean:mode==='steal'?a.stealLean*steal:mode==='header'?a.headerLean*header:0,
     roll:mode==='dive'?a.diveRoll*(player.diveZ||1):mode==='slide'||mode==='recover'?a.slideRoll*recovery:player.turnLean||0,height:mode==='slide'||mode==='recover'?a.slideHeight*recovery:header*config.aerial.jumpHeight,leg:mode==='slide'?a.slideLeg:mode==='steal'?steal*a.slideLeg:0,head:header*config.aerial.headLean,bonePose:mode};
+}
+/** Landing point of a charging ground pass (the loft shows its arc instead). */
+export function passLanding(state,config){
+  if(!state.charging||state.chargeKind!=='pass'||state.ball.owner!==state.controlled||state.ball.owner==null)return null;
+  const power=state.charge/config.passing.chargeSeconds;
+  if(state.charge>=config.passing.loftThresholdSeconds)return null;
+  const destination=passDestination({...state,aim:soccerPassAim(state)},config,power);
+  return {x:destination.x,z:destination.z,target:destination.target??null,distance:destination.distance};
 }
 export function passReceiver(state,config){
   return state.charging&&state.chargeKind==='pass'&&state.ball.owner===state.controlled?passDestination(state,config,state.charge/config.passing.chargeSeconds).target:null;

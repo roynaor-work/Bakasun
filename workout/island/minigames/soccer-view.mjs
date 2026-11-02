@@ -1,8 +1,8 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261101-1';
-import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261101-1';
-import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261101-1';
-import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261101-1';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261101-1';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261102-1';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261102-1';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261102-1';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261102-1';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261102-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {loadDesignCharacters,soccerDesignCharacterError} from './soccer-design-character.mjs';
@@ -13,16 +13,16 @@ import {createSoccerDesignVfx} from './soccer-design-vfx.mjs';
 import {createSoccerDesignReplay} from './soccer-design-replay.mjs';
 import {selectedSoccerKit} from './soccer-design-screens.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261101-1';
-import {playerAnimation,passReceiver,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261101-1';
-import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261101-1';
-import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261101-1';
-import {passDestination} from './soccer.mjs?v=island-v2-20261101-1';
-import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261101-1';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261101-1';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261102-1';
+import {playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261102-1';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261102-1';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261102-1';
+import {passDestination} from './soccer.mjs?v=island-v2-20261102-1';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261102-1';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261102-1';
 import {soccerRestartBallAttachment,alignSoccerRestartStrike} from './soccer-restart-motion.mjs';
 import {restartAimPreview} from './soccer-restarts.mjs';
-import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261101-1';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261102-1';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
 const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
@@ -332,7 +332,7 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
     practiceTarget.visible=!!s.practiceTarget;practiceCones.count=s.practiceTarget?.cones?2:0;if(s.practiceTarget){const p=s.practiceTarget;practiceTarget.position.set(p.x,p.cones ? .05 : 1,p.z);practiceTarget.rotation.set(p.cones?-Math.PI/2:0,p.cones?0:Math.PI/2,0);for(let i=0;i<practiceCones.count;i++){dummy.position.set(p.x,.3,p.z+(i?1:-1)*config.training.coneWidth/2);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();practiceCones.setMatrixAt(i,dummy.matrix);}practiceCones.instanceMatrix.needsUpdate=true;}
     const restartCue=restartAimPreview(s,config,restartAim,passDestination),arc=restartCue?(restartCue.loft?restartCue:null):crossArc(s,config);arcDots.count=arc?config.passing.arcDots:0;
     for(let i=0;i<arcDots.count;i++){const u=i/(arcDots.count-1);dummy.position.set(arc.fromX+(arc.x-arc.fromX)*u,config.physics.ballRadius+4*arc.height*u*(1-u),arc.fromZ+(arc.z-arc.fromZ)*u);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();arcDots.setMatrixAt(i,dummy.matrix);}arcDots.instanceMatrix.needsUpdate=true;
-    turfG.attributes.position.needsUpdate=true;turf.visible=s.players.some(p=>p.slideTime>0);requests.count=s.players.some(p=>p.request||receiver===p.id)?roster.length:0;landing.visible=Boolean(arc);if(arc)landing.position.set(arc.x,.04,arc.z);
+    turfG.attributes.position.needsUpdate=true;turf.visible=s.players.some(p=>p.slideTime>0);requests.count=s.players.some(p=>p.request||receiver===p.id)?roster.length:0;const groundLanding=arc?null:passLanding(s,config);landing.visible=Boolean(arc||groundLanding);if(arc)landing.position.set(arc.x,.04,arc.z);else if(groundLanding)landing.position.set(groundLanding.x,.04,groundLanding.z);
     boxes.count=boxIndex;spheres.count=sphereIndex;boxes.instanceMatrix.needsUpdate=true;spheres.instanceMatrix.needsUpdate=true;if(boxes.instanceColor)boxes.instanceColor.needsUpdate=true;if(spheres.instanceColor)spheres.instanceColor.needsUpdate=true;requests.instanceMatrix.needsUpdate=true;
     const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);
     const destination=!restartCue&&s.chargeKind==='pass'&&s.charging?passDestination(s,config,s.charge/config.passing.chargeSeconds):null;

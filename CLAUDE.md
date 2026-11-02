@@ -164,6 +164,6 @@ https://claude.ai/artifact/WTbeA5XjmBfLvsW18wxPvR
 - SQL (01/10): `north.sql` = קריאה/עדכון הזמנות רק לצוות (`north_staff`, `north_is_staff()`), anon מוסיף רק הזמנה חדשה; `family.sql` = גיבוב הקוד בטבלת `families` ופונקציות `family_register/push/list/remove` (אין גישה ישירה לטבלה), האפליקציה (`workout/js/cloud.js`) קוראת ל-RPC ורושמת קוד חדש; `vids.sql` = כתיבה רק לתיקייה של קוד רשום (`family_known`); `grow-notify` מסמן "שולם" רק אחרי `getPaymentProcessInfo` מול Grow ובדיקת עסקה וסכום (`parseInfo`, `matchesOrder`), אחרת `needs_verification`.
 
 ## Codex / GPT (30/10/2026, רועי)
-- רמות החשיבה ב-Codex של רועי, מהנמוכה לגבוהה: light, medium, high, extra high, ultra.
+- רמות החשיבה ב-Codex של רועי, מהנמוכה לגבוהה: light, medium, high, extra high, max, ultra (max = רמת ביניים חדשה, 02/11/2026).
 - משימות נכסים ל-Codex: דמויות GLB ונתוני תנועה (keyframes) ב-ultra; מרקמים, רקעים, מסכים ותלבושות ב-extra high לפחות. אין ל-Claude כלי לפתוח משימות ב-Codex: רועי מדביק את ההנחיות, ו-Claude שולף את התוצאה מ-GitHub (ענפי `codex/island-*` ו-PR) ובודק לפני שמחברים לקוד.
 - חלוקה: Codex = עיצוב ונכסים תחת `workout/island/design/` (קבצים חדשים בלבד); Claude = ביצועים וחיבור לקוד. סשנים מקבילים לפי משחק עובדים בענפים `claude/perf-soccer|hoops|alpine`, בלי לגעת ב-`release.json` ובתגי `?v=`; העלאת גרסה אחת בסוף.

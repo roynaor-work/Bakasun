@@ -59,6 +59,12 @@ function installFixture(){
     // starts in the frontcourt (a backcourt start is a violation and a dead ball)
     e.debug.place(p.id,side*1.5,-2);p.face=Math.atan2(side,0);
     window.__seq.script=i=>i<4?{move:{x:side*0.35,z:0},sprint:false}:i<8?{move:{x:side*0.8,z:0},sprint:false}:i<13?{move:{x:side,z:0},sprint:true}:{move:{x:0,z:0},sprint:false};
+   } else if(kind==='steal'||kind==='stealmiss'){
+    // the user's player guards the handler at arm's length and reaches; the verdict is forced
+    const handler=a.onCourt(1)[0];e.debug.place(handler.id,side*5.2,0.2);e.debug.give(handler.id);S.possession=1;handler.face=Math.atan2(-side,0);handler.r.handle=50;
+    e.debug.place(p.id,side*4.1,0);p.face=Math.atan2(handler.x-p.x,handler.z-p.z);S.controlled=p.id;
+    a.C.steal.base=kind==='steal'?9:0;a.C.steal.foulBase=0;a.C.player.defenseAssist=false;
+    window.__seq.script=i=>i===1?{passPress:true}:{};
    } else if(kind==='run'){
     // no ball: run across, break into a sprint, then let go of the stick
     const other=home.find(q=>q.id!==p.id);e.debug.give(other.id);S.controlled=p.id;e.debug.place(p.id,-side*2,-3);p.face=Math.atan2(side,0);

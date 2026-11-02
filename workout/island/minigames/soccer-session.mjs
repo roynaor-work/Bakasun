@@ -1,14 +1,14 @@
 import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
-import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261101-1';
-import {createSoccer} from './soccer.mjs?v=island-v2-20261101-1';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261101-1';
-import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261101-1';
-import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261101-1';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261101-1';
-import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261101-1';
-import {createControls} from './controls.mjs?v=island-v2-20261101-1';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261101-1';
-import {gameContext} from './context.mjs?v=island-v2-20261101-1';
+import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261102-1';
+import {createSoccer} from './soccer.mjs?v=island-v2-20261102-1';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261102-1';
+import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261102-1';
+import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261102-1';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261102-1';
+import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261102-1';
+import {createControls} from './controls.mjs?v=island-v2-20261102-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261102-1';
+import {gameContext} from './context.mjs?v=island-v2-20261102-1';
 import {expandSoccerConfig} from './soccer-squad.mjs';
 import {loadSoccerDesignContracts} from './soccer-design-contracts.mjs';
 import {createSoccerDesignInput,soccerDesignControlPlan,soccerDesignControlState,applySoccerDesignLayout} from './soccer-design-controls.mjs';
@@ -79,9 +79,9 @@ export function startSoccer(ctx) {
   if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261101-1',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261102-1',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261101-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261102-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   if(!document.querySelector('link[data-soccer-controls-assets]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-controls-assets.css',import.meta.url).href;link.dataset.soccerControlsAssets='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
@@ -93,6 +93,7 @@ export function startSoccer(ctx) {
     shoot.id='shoot';shoot.type='button';shoot.dataset.gameControl='shoot';
     const pass=element('button','secondary-button'),sprint=element('button','secondary-button soccer-sprint');
     const ring=element('span','soccer-stamina-ring');ring.setAttribute('aria-hidden','true');sprint.append(actionIcon('sprint'),ring);
+    const staminaBar=element('span','soccer-stamina-bar'),staminaFill=element('i');staminaBar.setAttribute('aria-hidden','true');staminaBar.append(staminaFill);sprint.append(staminaBar);
     pass.id='pass';sprint.id='sprint';pass.type=sprint.type='button';pass.dataset.gameControl='pass';sprint.dataset.gameControl='sprint';sprint.setAttribute('aria-label',t('soccer.sprint'));
     const meter=element('span','soccer-energy-fill');meter.setAttribute('role','meter');meter.setAttribute('aria-label',t('soccer.energy'));meter.setAttribute('aria-valuemin','0');meter.setAttribute('aria-valuemax','100');const energy=element('div','soccer-energy');energy.append(meter);controls.append(energy);
     const swap=element('button','secondary-button soccer-swap');swap.id='soccer-switch';swap.type='button';swap.append(actionIcon('switch'));swap.setAttribute('aria-label',t('minigame.soccer.switch'));
@@ -138,7 +139,7 @@ export function startSoccer(ctx) {
         const node=nodes[slot],entry=plan.slots[slot];node.hidden=!entry;node.disabled=!entry||Boolean(entry.disabled);node.setAttribute('aria-disabled',String(node.disabled));
         if(!entry){if(document.activeElement===node)canvas.focus();continue;}
         const isHeader=header&&slot==='primary',label=isHeader?t('soccer.header'):entry.label,icon=isHeader?'header':icons[entry.id];
-        node.dataset.designAction=entry.id;node.replaceChildren(actionIcon(icon));if(node===sprint)node.append(ring);
+        node.dataset.designAction=entry.id;node.replaceChildren(actionIcon(icon));if(node===sprint)node.append(ring,staminaBar);
         labelNode(node,label,slot==='primary'?balance.controls.kickKey:slot==='secondary'?balance.controls.passKey:slot==='sprint'?balance.controls.sprintKeys[0]:balance.controls.switchKey);
         node.setAttribute('aria-label',isHeader?label:entry.aria_label||label);
       }
@@ -152,7 +153,7 @@ export function startSoccer(ctx) {
       fixture.hidden=Boolean(context.drill||shootout);
       if(s.campaign&&!context.drill&&!shootout){const objective=stageObjective(s);stageLabel.textContent=s.league?.leagues?t('soccer.league.matchLabel',{league:t(s.league.nameId),match:s.league.match,count:s.league.per}):t('soccer.campaign.stageLabel',{stage:s.stage,name:t(s.campaign.nameId)});objectiveLabel.textContent=`${t(objective.nameId,{target:objective.target})} · ${Math.min(objective.current,objective.target)}/${objective.target}`;objectiveLabel.dataset.complete=String(objective.complete);}
       const seconds=Math.max(0,Math.floor(s.elapsed));clock.textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;
-      const percent=Math.round(s.sprint.value/s.sprint.capacity*100);meter.setAttribute('aria-valuenow',String(percent));ring.style.setProperty('--stamina',`${percent}%`);sprint.dataset.exhausted=String(s.sprint.locked);
+      const percent=Math.round(s.sprint.value/s.sprint.capacity*100);meter.setAttribute('aria-valuenow',String(percent));ring.style.setProperty('--stamina',`${percent}%`);sprint.dataset.exhausted=String(s.sprint.locked);sprint.dataset.sprinting=String(s.sprint.active);staminaFill.style.width=`${percent}%`;
       shoot.style.setProperty('--charge',`${s.charging&&s.chargeKind==='shot'?Math.round(s.charge/balance.physics.chargeSeconds*100):0}%`);
       pass.style.setProperty('--charge',`${s.charging&&s.chargeKind==='pass'?Math.round(s.charge/balance.passing.chargeSeconds*100):0}%`);
       syncControls(s);
