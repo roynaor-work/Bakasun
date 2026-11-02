@@ -28,8 +28,10 @@ export function offlinePanel({onChange=()=>{}}={}){
       games.replaceChildren(...Object.entries(OFFLINE_GAMES).map(([id,name])=>{const g=s.games[id],li=node('li','',`${name}: ${g?`${g.have} מתוך ${g.total}`:'לא זמין'}`);li.dataset.game=id;li.dataset.complete=String(Boolean(g?.complete));return li;}));
       download.textContent=s.complete?'הורדה מחדש (בדיקת קבצים)':'הורדת כל המשחקים למכשיר';
     }catch(error){status.textContent='לא ניתן לבדוק מה שמור: '+(error?.message||error);}
-    panel.querySelectorAll('[data-report]').forEach(n=>n.remove());
-    for(const id of Object.keys(OFFLINE_GAMES)){const r=reportPanel(id);if(r)panel.append(r);}
+    try{
+      panel.querySelectorAll('[data-report]').forEach(n=>n.remove());
+      for(const id of Object.keys(OFFLINE_GAMES)){const r=reportPanel(id);if(r)panel.append(r);}
+    }catch{}
     onChange();
   }
   const progress=p=>{status.textContent=describeProgress(p);bar.value=p.percent;};
@@ -46,8 +48,8 @@ export function offlinePanel({onChange=()=>{}}={}){
     }catch(error){status.textContent='ההורדה נכשלה ('+(error?.message||error)+'). המשחקים ייטענו מהרשת.';}
     busy(false);
   }
-  download.addEventListener('click',()=>run(()=>downloadGames({onProgress:progress})));
-  check.addEventListener('click',()=>run(()=>checkAndDownload({onProgress:progress})));
-  refresh();
+  download.onclick=()=>run(()=>downloadGames({onProgress:progress}));
+  check.onclick=()=>run(()=>checkAndDownload({onProgress:progress}));
+  refresh().catch(()=>{});
   return panel;
 }
