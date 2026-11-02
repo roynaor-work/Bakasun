@@ -120,6 +120,12 @@ test('download: a file that keeps failing or hangs is reported, never thrown, an
  assert.ok(await cache.match('https://x/good'));
 });
 
+test('download: the island page itself (a directory url that answers html) is cached, other html answers are not',async()=>{
+ const cache=fakeCache();
+ const result=await downloadSet({urls:['https://x/workout/island/','https://x/design/a.glb'],cache,attempts:1,wait:async()=>{},fetcher:async url=>ok('<html>','text/html')});
+ assert.deepEqual(result.failed.map(f=>f.href),['https://x/design/a.glb']);assert.ok(await cache.match('https://x/workout/island/'));
+});
+
 test('save data safety: the offline code never clears or deletes game saves',async()=>{
  for(const file of ['ui/offline.mjs','ui/offline-panel.mjs','ui/load-report.mjs','offline-sw.js']){
   const source=await read(file);

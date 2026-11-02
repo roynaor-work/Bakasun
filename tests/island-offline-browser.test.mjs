@@ -86,7 +86,9 @@ test('automatic download fills the device cache after open, and a data saver ski
  try{
   await saver.page.goto(server.url,{waitUntil:'networkidle'});await saver.page.waitForFunction(()=>window.__offlineState?.state==='save-data',null,{timeout:60000});
   assert.deepEqual(await saver.page.evaluate(async()=>(await caches.keys()).length?await (await caches.open((await caches.keys())[0])).keys().then(k=>k.length):0),0,'a data saver downloads nothing in the background');
-  await auto.page.goto(server.url,{waitUntil:'networkidle'});
+  await auto.page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});
+  // Software WebGL keeps the page thread busy; a phone GPU does not. Pause the island view so the test measures the download.
+  await auto.page.waitForFunction(()=>window.__island||true);await auto.page.evaluate(()=>{if(window.__island)window.__island.ui.view.paused=true;});
   await auto.page.waitForFunction(()=>window.__offlineState?.state==='ready'||window.__offlineState?.state==='partial',null,{timeout:480000});
   const state=await auto.page.evaluate(()=>window.__offlineState);assert.equal(state.state,'ready',JSON.stringify(state.result?.failed));
   const key=(await auto.page.evaluate(()=>caches.keys()))[0];assert.match(key,/^island-assets-/);
