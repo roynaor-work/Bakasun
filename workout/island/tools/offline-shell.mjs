@@ -4,7 +4,7 @@
 // download. Paths are bare (no ?v=): the cache ignores the query, so the central
 // version bump never makes this list stale. Run `node tools/offline-shell.mjs` after
 // adding a module; tests/island-offline.test.mjs fails when the list is out of date.
-import {readFile,writeFile,access} from 'node:fs/promises';
+import {readFile,writeFile,access,readdir} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
@@ -15,9 +15,12 @@ const LITERAL=/(['"`])((?:\.{1,2}\/|[\w-]+\/)[^'"`\s${}]*?\.(?:mjs|js|css|json|s
 const CSS_URL=/url\(\s*['"]?([^'")\s]+)['"]?\s*\)/g;
 const exists=async file=>{try{await access(file);return true;}catch{return false;}};
 const managed=p=>/(?:^|\/)(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|json|wasm)$/.test(p)||/^vendor\/draco\//.test(p);
-const wanted=p=>!SKIP.test(p)&&!managed(p)&&(CODE.test(p)||/^data\/[^/]+\.json$/.test(p));
+const DATA_DIRS=['data','episodes','minigames/boar-island'];
+const wanted=p=>!SKIP.test(p)&&!managed(p)&&(CODE.test(p)||DATA_DIRS.some(d=>p.startsWith(d+'/')&&p.endsWith('.json')));
 export async function buildShell(base=root){
-  const seen=new Set(),queue=['index.html','manifest.webmanifest'];
+  // JSON data is requested by computed names (load-data), so those folders are listed.
+  const dataFiles=[];for(const d of DATA_DIRS)for(const f of await readdir(path.join(base,d)).catch(()=>[]))if(f.endsWith('.json'))dataFiles.push(d+'/'+f);
+  const seen=new Set(),queue=['index.html','manifest.webmanifest',...dataFiles];
   const rel=file=>path.relative(base,file).split(path.sep).join('/');
   while(queue.length){
     const current=queue.shift();if(seen.has(current))continue;

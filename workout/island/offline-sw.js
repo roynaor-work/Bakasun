@@ -17,7 +17,7 @@ const MANAGED=/\/(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|json|wasm)$|
 const SCOPE_PATH=new URL('./',self.location.href).pathname;
 /** App shell: pages, modules, styles and data of the island, answered from the network
  * first (fresh code always wins) and from the device when the network is gone or slow. */
-const SHELL=/\.(?:mjs|js|css|html|webmanifest)$|\/data\/[^/]+\.json$|\/offline-manifest\.json$/;
+const SHELL=/\.(?:mjs|js|css|html|webmanifest|json)$/;
 const shell=url=>url.origin===self.location.origin&&url.pathname.startsWith(SCOPE_PATH)&&!url.pathname.includes('..')&&url.pathname!==SCOPE_PATH+'offline-sw.js'&&url.pathname!==SCOPE_PATH+'release.json'&&(url.pathname===SCOPE_PATH||url.pathname===SCOPE_PATH+'index.html'||SHELL.test(url.pathname));
 const bare=url=>url.origin+url.pathname;
 const managed=url=>url.origin===self.location.origin&&!url.pathname.includes('..')&&MANAGED.test(url.pathname);
