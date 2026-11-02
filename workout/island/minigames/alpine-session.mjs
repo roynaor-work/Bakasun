@@ -5,6 +5,7 @@ import {createAlpineControls} from './alpine-controls.mjs?v=island-v2-20261102-1
 import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261102-1';
 import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-v2-20261102-1';
 import {createQualityGovernor} from './alpine-quality.mjs';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261102-1';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
@@ -157,17 +158,18 @@ export function runAlpineSession(ctx) {
   if (params.get('quality') === 'low') quality = 'low';
   governor = createQualityGovernor(balance.render, quality);
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
-  loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; fail(t('alpine.loadSlow')); } }, 25000);
+  const loadStart = performance.now();
+  loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; saveGameReport('alpine', {status: 'failed', ms: performance.now() - loadStart, lines: ['failed: timeout 25 s']}); fail(t('alpine.loadSlow')); } }, 25000);
   import('./alpine-view.mjs?v=island-v2-20261102-1').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxPlayerSpeedKmh, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, ...(modelUrl ? {modelUrl} : {})})).then(async loaded => {
     await audio.ready;
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
-    clearTimeout(loadTimer); view = loaded; loading.hidden = true; startButton.disabled = false; app.dataset.render = loaded.mode;
+    clearTimeout(loadTimer); saveGameReport('alpine', {status: 'ready', ms: performance.now() - loadStart, lines: ['render mode ' + loaded.mode + ' · quality ' + quality]}); view = loaded; loading.hidden = true; startButton.disabled = false; app.dataset.render = loaded.mode;
     if (!paused) startButton.focus({preventScroll: true});
     last = 0; frame = requestAnimationFrame(tick);
   }).catch(error => {
     if (disposed || error?.disposed) return;
-    clearTimeout(loadTimer); renderError = String(error?.message || error); fail(t('alpine.unavailable')); ctx.onError?.('alpine.unavailable');
+    clearTimeout(loadTimer); renderError = String(error?.message || error); saveGameReport('alpine', {status: 'failed', ms: performance.now() - loadStart, lines: ['failed: ' + renderError]}); fail(t('alpine.unavailable')); ctx.onError?.('alpine.unavailable');
   });
 
   const CALLOUTS = {takeoff: 'air', collision: 'hit', boost: 'boost', pad: 'pad', overtake: 'overtake', gate: 'gate'};

@@ -2,7 +2,7 @@ import {loadAlpineFeel,createAlpineFeel} from './alpine-feel.mjs';
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261102-1';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261102-1';
-import {createAlpineVfx} from './alpine-vfx.mjs';
+import {createAlpineVfx,inertAlpineVfx} from './alpine-vfx.mjs';
 import {loadAlpineWorld} from './alpine-design-world.mjs';
 import {loadAlpineCharacters} from './alpine-character.mjs';
 import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
@@ -306,7 +306,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   function seedTracks(frames){previousTracks.clear();trackCount=trackNext=0;for(const state of frames)rememberTracks(state,true);trackFull=true;}
   let lastTrackS=0;
   try { vfx=await createAlpineVfx({scene,worldPoint,surfaceHeight:x=>surfaceHeight(x,pipe),frameAt,reducedMotion:reduced,crashSeconds:physics.crashSeconds}); }
-  catch(error) { disposeAll(); throw error; }
+  catch(error) { if (error?.disposed || isDisposed()) { disposeAll(); throw error; } vfx = inertAlpineVfx(error); }
   function resize(){if(disposed)return;const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
   ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
   // Warm the shader cache while the loading card is up: every material in the scene, including the
