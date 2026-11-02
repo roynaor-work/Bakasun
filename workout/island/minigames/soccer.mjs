@@ -1,4 +1,5 @@
 import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261101-1';
+import {sprintMeterStep} from './soccer-sprint.mjs';
 import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261101-1';
 import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261101-1';
 import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261101-1';
@@ -391,14 +392,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     first.ballX=from.x+(to.x-from.x)*first.time;first.ballZ=from.z+(to.z-from.z)*first.time;first.ballY=from.y+(to.y-from.y)*first.time;
     tackler.slideWon=attempt(tackler,slideVariant(config,tackler.slideKind),'slide-contact',first);
   }
-  function sprint(dt,moving,requested,available){
-    const meter=s.sprint,c=config.sprint;
-    if(meter.locked&&meter.value>=c.minToStart)meter.locked=false;
-    meter.active=requested&&moving&&available&&!meter.locked&&meter.value>0;
-    if(meter.active){meter.value=Math.max(0,meter.value-c.drainPerSecond*dt);meter.regenDelay=c.regenDelaySeconds;if(!meter.value){meter.active=false;meter.locked=true;}}
-    else if(meter.regenDelay>0)meter.regenDelay=Math.max(0,meter.regenDelay-dt);
-    else meter.value=Math.min(meter.capacity,meter.value+c.regenPerSecond*effects.regen*dt);
-  }
+  function sprint(dt,moving,requested,available){sprintMeterStep(s.sprint,config.sprint,dt,{requested,moving,available,regen:effects.regen});}
   function restart(type,teamId,x,z) {
     if(type==='goalKick'){x=Math.sign(x)*(hx-config.pitch.goalAreaDepth);z=Math.sign(z||s.ball.z||1)*config.pitch.goalAreaWidth/2;}
     s.phase='restart';s.phaseTime=config.match.restartSeconds;s.restart={type,team:teamId,x,z,age:0,elapsed:0};

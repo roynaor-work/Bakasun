@@ -93,6 +93,7 @@ export function startSoccer(ctx) {
     shoot.id='shoot';shoot.type='button';shoot.dataset.gameControl='shoot';
     const pass=element('button','secondary-button'),sprint=element('button','secondary-button soccer-sprint');
     const ring=element('span','soccer-stamina-ring');ring.setAttribute('aria-hidden','true');sprint.append(actionIcon('sprint'),ring);
+    const staminaBar=element('span','soccer-stamina-bar'),staminaFill=element('i');staminaBar.setAttribute('aria-hidden','true');staminaBar.append(staminaFill);sprint.append(staminaBar);
     pass.id='pass';sprint.id='sprint';pass.type=sprint.type='button';pass.dataset.gameControl='pass';sprint.dataset.gameControl='sprint';sprint.setAttribute('aria-label',t('soccer.sprint'));
     const meter=element('span','soccer-energy-fill');meter.setAttribute('role','meter');meter.setAttribute('aria-label',t('soccer.energy'));meter.setAttribute('aria-valuemin','0');meter.setAttribute('aria-valuemax','100');const energy=element('div','soccer-energy');energy.append(meter);controls.append(energy);
     const swap=element('button','secondary-button soccer-swap');swap.id='soccer-switch';swap.type='button';swap.append(actionIcon('switch'));swap.setAttribute('aria-label',t('minigame.soccer.switch'));
@@ -138,7 +139,7 @@ export function startSoccer(ctx) {
         const node=nodes[slot],entry=plan.slots[slot];node.hidden=!entry;node.disabled=!entry||Boolean(entry.disabled);node.setAttribute('aria-disabled',String(node.disabled));
         if(!entry){if(document.activeElement===node)canvas.focus();continue;}
         const isHeader=header&&slot==='primary',label=isHeader?t('soccer.header'):entry.label,icon=isHeader?'header':icons[entry.id];
-        node.dataset.designAction=entry.id;node.replaceChildren(actionIcon(icon));if(node===sprint)node.append(ring);
+        node.dataset.designAction=entry.id;node.replaceChildren(actionIcon(icon));if(node===sprint)node.append(ring,staminaBar);
         labelNode(node,label,slot==='primary'?balance.controls.kickKey:slot==='secondary'?balance.controls.passKey:slot==='sprint'?balance.controls.sprintKeys[0]:balance.controls.switchKey);
         node.setAttribute('aria-label',isHeader?label:entry.aria_label||label);
       }
@@ -152,7 +153,7 @@ export function startSoccer(ctx) {
       fixture.hidden=Boolean(context.drill||shootout);
       if(s.campaign&&!context.drill&&!shootout){const objective=stageObjective(s);stageLabel.textContent=s.league?.leagues?t('soccer.league.matchLabel',{league:t(s.league.nameId),match:s.league.match,count:s.league.per}):t('soccer.campaign.stageLabel',{stage:s.stage,name:t(s.campaign.nameId)});objectiveLabel.textContent=`${t(objective.nameId,{target:objective.target})} · ${Math.min(objective.current,objective.target)}/${objective.target}`;objectiveLabel.dataset.complete=String(objective.complete);}
       const seconds=Math.max(0,Math.floor(s.elapsed));clock.textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;
-      const percent=Math.round(s.sprint.value/s.sprint.capacity*100);meter.setAttribute('aria-valuenow',String(percent));ring.style.setProperty('--stamina',`${percent}%`);sprint.dataset.exhausted=String(s.sprint.locked);
+      const percent=Math.round(s.sprint.value/s.sprint.capacity*100);meter.setAttribute('aria-valuenow',String(percent));ring.style.setProperty('--stamina',`${percent}%`);sprint.dataset.exhausted=String(s.sprint.locked);sprint.dataset.sprinting=String(s.sprint.active);staminaFill.style.width=`${percent}%`;
       shoot.style.setProperty('--charge',`${s.charging&&s.chargeKind==='shot'?Math.round(s.charge/balance.physics.chargeSeconds*100):0}%`);
       pass.style.setProperty('--charge',`${s.charging&&s.chargeKind==='pass'?Math.round(s.charge/balance.passing.chargeSeconds*100):0}%`);
       syncControls(s);
