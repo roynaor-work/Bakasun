@@ -4,6 +4,7 @@ import {createSoccerDesignLoader} from './soccer-design-loader.mjs';
 import {loadSoccerRestartMotion} from './soccer-athlete-motion.mjs';
 import {soccerMetreScale,createSoccerCharacterLod} from './soccer-scale.mjs';
 import {regionForTriangle} from '../design/variants/apply-variant.js';
+import {armSwingPose,armSwingState,createArmSwingApplier} from './soccer-arm-swing.mjs';
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrap=v=>Math.atan2(Math.sin(v),Math.cos(v));
@@ -158,8 +159,11 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
     const a=mixer.clipAction(clip);a.setLoop(data.states[clip.name].loop?T.LoopRepeat:T.LoopOnce,Infinity);a.clampWhenFinished=true;return [clip.name,a];
   }));
   let state=data.initialState,previousMode=null,previousSpeed=0,previousYaw=null,kickTimer=0,stealTimer=0,lastTransition=null;
-  const clean=[];let cleanSaved=false;
-  mixer.getRoot().traverse(bone=>{if(bone.isBone)clean.push({bone,q:bone.quaternion.clone(),p:bone.position.clone()});});
+  const clean=[],boneByName={};let cleanSaved=false;
+  mixer.getRoot().traverse(bone=>{if(bone.isBone){clean.push({bone,q:bone.quaternion.clone(),p:bone.position.clone()});boneByName[bone.name]=bone;}});
+  // Procedural arm swing over the locomotion clips (see soccer-arm-swing.mjs).
+  const arm={phase:0,weight:0,sprint:0,carry:0},armPose={},applyArms=createArmSwingApplier(T,mixer.getRoot(),boneByName);
+  const LOCOMOTION=new Set(['run','dribble_run','turn_left','turn_right','decelerate']),ARM_PHASE={run:0,dribble_run:0}; // both authored cycles start with the left foot in front
   const updateMixer=dt=>{
     if(cleanSaved)for(const pose of clean){pose.bone.quaternion.copy(pose.q);pose.bone.position.copy(pose.p);}
     mixer.update(dt);for(const pose of clean){pose.q.copy(pose.bone.quaternion);pose.p.copy(pose.bone.position);}cleanSaved=true;
@@ -176,7 +180,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
     state=name;lastTransition=event||name;
   };
   return {
-    actions,get state(){return state;},get lastTransition(){return lastTransition;},
+    actions,get state(){return state;},get lastTransition(){return lastTransition;},get armSwing(){return arm;},
     update(p,s,animation,dt) {
       const restart=p.restartMotion;
       if(restart&&actions[restart.kind]){
@@ -224,7 +228,12 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       }
       if(['run','dribble_run','defensive_jockey'].includes(state))actions[state].setEffectiveTimeScale(clamp(speed/(config.view.animation.runSpeed||4.5),.55,1.7));
       previousMode=mode;previousSpeed=speed;previousYaw=yaw;kickTimer=p.kickTime||0;stealTimer=p.stealTime||0;
-      updateMixer(dt);return state;
+      updateMixer(dt);
+      const runSpeed=config.view.animation.runSpeed||4.5,idle=config.view.animation.idleSpeed||.2,locomotion=LOCOMOTION.has(state)&&moving;
+      const clipPhase=state==='run'||state==='dribble_run'?(actions[state].time/data.states[state].durationSeconds+ARM_PHASE[state])%1:NaN;
+      armSwingState(arm,dt,{locomotion,clipPhase,speed01:(speed-idle)/(runSpeed-idle),sprint01:Math.max(mode==='sprint'?1:0,(speed-runSpeed)/2),carrying:s.ball.owner===p.id});
+      if(arm.weight>0)applyArms(armSwingPose(arm.phase,1,arm.sprint,arm.carry,undefined,armPose),arm.weight);
+      return state;
     },
   };
 }
@@ -320,7 +329,7 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
           pivot.position.set(p.x,Math.max(0,animation.height||0),p.z);pivot.rotation.set(0,this.yaw,0);
           this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
         },
-        metrics:()=>({kind:'design-glb-v2',state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod,heightMetres:height}),
+        metrics:()=>({kind:'design-glb-v2',state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod,heightMetres:height,armSwing:motion.armSwing.weight}),
         dispose(){if(characterDisposed)return;characterDisposed=true;mixer.stopAllAction();mixer.uncacheRoot(root);root.traverse(o=>o.skeleton?.dispose());pivot.removeFromParent();},
       };
       mixer.update(0);characters.push(character);
